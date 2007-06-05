@@ -601,6 +601,7 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
 
 void
 generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
+				gboolean            clear_cache,
 				ThemeThumbnailFunc  func,
 				gpointer            user_data,
 				GDestroyNotify      destroy)
@@ -612,10 +613,15 @@ generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
   pixbuf = g_hash_table_lookup (theme_hash, meta_theme_info->name);
   if (pixbuf != NULL)
     {
-      (* func) (pixbuf, user_data);
-      if (destroy)
-	(* destroy) (user_data);
-      return;
+      if (clear_cache)
+	g_hash_table_remove (theme_hash, meta_theme_info->name);
+      else
+	{
+	  (* func) (pixbuf, user_data);
+	  if (destroy)
+	    (* destroy) (user_data);
+	  return;
+	}
     }
 
   if (!pipe_to_factory_fd[1] || !pipe_from_factory_fd[0])

@@ -12,6 +12,7 @@ typedef void (* ThemeThumbnailFunc) (GdkPixbuf          *pixbuf,
 GdkPixbuf *generate_theme_thumbnail         (GnomeThemeMetaInfo *meta_theme_info,
 					     gboolean            clear_cache);
 void       generate_theme_thumbnail_async   (GnomeThemeMetaInfo *meta_theme_info,
+					     gboolean            clear_cache,
 					     ThemeThumbnailFunc  func,
 					     gpointer            data,
 					     GDestroyNotify      destroy);
