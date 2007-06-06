@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if test "x$#" = "x0"
-then
-    @BINDIR@/gnomecc --run-capplet @CAPPLET_NAME@
-else
-    @BINDIR@/@CAPPLET_NAME@-control $@
-fi
-
