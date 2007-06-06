@@ -1,3 +1,4 @@
+#include <config.h>
 #include <unistd.h>
 #include <string.h>
 #include <metacity-private/util.h>
@@ -12,7 +13,6 @@
 #undef N_
 
 #include <libgnomeui/gnome-icon-theme.h>
-#include <config.h>
 
 #include "theme-thumbnail.h"
 #include "capplet-util.h"
@@ -34,9 +34,7 @@ typedef struct
 } ThemeThumbnailAsyncData;
 
 
-static GHashTable *theme_hash = NULL;
 static ThemeThumbnailAsyncData async_data;
-
 
 /* Protocol */
 
@@ -480,9 +478,9 @@ message_from_child (GIOChannel   *source,
 	    memcpy (pixels + rowstride * i, async_data.data->data + 4 * ICON_SIZE_WIDTH * i, ICON_SIZE_WIDTH * 4);
 
 	  scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
-	  g_hash_table_insert (theme_hash, g_strdup(async_data.meta_theme_name), scaled_pixbuf);
 	  g_object_unref (pixbuf);
 
+	  /* allbak function needs to unref the pixbuf */
  	  (* async_data.func) (scaled_pixbuf, async_data.user_data);
 	  if (async_data.destroy)
 	    (* async_data.destroy) (async_data.user_data);
@@ -515,37 +513,15 @@ message_from_child (GIOChannel   *source,
   return TRUE;
 }
 
-void  
-theme_thumbnail_invalidate_cache (GnomeThemeMetaInfo *meta_theme_info)
-{
-  gboolean success;
-
-  success = g_hash_table_remove (theme_hash, meta_theme_info->name);
-  printf ("Success is %d\n", success);
-}
-
 GdkPixbuf *
-generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
-			  gboolean            clear_cache)
+generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
 {
   GdkPixbuf *retval = NULL;
-  GdkPixbuf *pixbuf = NULL;
+  GdkPixbuf *pixbuf;
   gint i, rowstride;
   char *pixels;
 
-  if (async_data.set == TRUE)
-	  return NULL;
-
-  pixbuf = g_hash_table_lookup (theme_hash, meta_theme_info->name);
-  if (pixbuf != NULL)
-    {
-      if (clear_cache)
-	g_hash_table_remove (theme_hash, meta_theme_info->name);
-      else
-	return pixbuf;
-    }
-
-  if (!pipe_to_factory_fd[1] || !pipe_from_factory_fd[0])
+  if (async_data.set || !pipe_to_factory_fd[1] || !pipe_from_factory_fd[0])
     return NULL;
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
@@ -594,35 +570,16 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
 
   retval = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
   g_object_unref (pixbuf);
-  
-  g_hash_table_insert (theme_hash, g_strdup (meta_theme_info->name), retval);
   return retval;
 }
 
 void
 generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
-				gboolean            clear_cache,
 				ThemeThumbnailFunc  func,
 				gpointer            user_data,
 				GDestroyNotify      destroy)
 {
-  GdkPixbuf *pixbuf;
-
   g_return_if_fail (async_data.set == FALSE);
-
-  pixbuf = g_hash_table_lookup (theme_hash, meta_theme_info->name);
-  if (pixbuf != NULL)
-    {
-      if (clear_cache)
-	g_hash_table_remove (theme_hash, meta_theme_info->name);
-      else
-	{
-	  (* func) (pixbuf, user_data);
-	  if (destroy)
-	    (* destroy) (user_data);
-	  return;
-	}
-    }
 
   if (!pipe_to_factory_fd[1] || !pipe_from_factory_fd[0])
     {
@@ -640,7 +597,6 @@ generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
       g_io_channel_set_encoding (async_data.channel, NULL, NULL);
       async_data.watch_id = g_io_add_watch (async_data.channel, G_IO_IN | G_IO_HUP, message_from_child, NULL);
     }
-
 
   async_data.set = TRUE;
   async_data.meta_theme_name = g_strdup (meta_theme_info->name);
@@ -707,10 +663,7 @@ theme_thumbnail_factory_init (int argc, char *argv[])
   async_data.set = FALSE;
   async_data.meta_theme_name = NULL;
   async_data.data = g_byte_array_new ();
-
-  theme_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
 }
-
 
 
 /* Functions for specific types of themes */

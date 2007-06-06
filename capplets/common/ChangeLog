@@ -1,5 +1,14 @@
 2007-06-06  Jens Granseuer  <jensgr@gmx.net>
 
+	* theme-thumbnail.c: (message_from_child),
+	(generate_theme_thumbnail), (generate_theme_thumbnail_async),
+	(theme_thumbnail_factory_init):
+	* theme-thumbnail.h: remove caching from the thumbnailer since
+	all of the current users work around it anyway, and resources
+	aren't managed properly
+
+2007-06-06  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-theme-info.c: (safe_strcmp), (get_data_from_hash_by_name),
 	(read_icon_theme), (handle_change_signal), (update_theme_index),
 	(gnome_theme_meta_info_compare):
