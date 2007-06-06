@@ -121,7 +121,7 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
 static gboolean
 theme_thumbnail_generate (AppearanceData *data)
 {
-  generate_theme_thumbnail_async (data->theme_queue->data, TRUE,
+  generate_theme_thumbnail_async (data->theme_queue->data,
       (ThemeThumbnailFunc) theme_thumbnail_done_cb, data, NULL);
   return FALSE;
 }
@@ -129,10 +129,12 @@ theme_thumbnail_generate (AppearanceData *data)
 static void
 theme_queue_for_thumbnail (GnomeThemeMetaInfo *theme, AppearanceData *data)
 {
-  if (data->theme_queue == NULL)
-    g_idle_add ((GSourceFunc) theme_thumbnail_generate, data);
+  gboolean idle = (data->theme_queue == NULL);
 
   data->theme_queue = g_slist_append (data->theme_queue, theme);
+
+  if (idle)
+    theme_thumbnail_generate (data);
 }
 
 static const GnomeThemeMetaInfo *
@@ -262,6 +264,8 @@ theme_thumbnail_done_cb (GdkPixbuf *pixbuf, AppearanceData *data)
 
     if (find_in_model (model, info->name, COL_NAME, &iter))
       gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
+
+    g_object_unref (pixbuf);
   }
 
   data->theme_queue = g_slist_remove (data->theme_queue, info);
