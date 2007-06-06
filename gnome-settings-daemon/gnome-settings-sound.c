@@ -42,8 +42,70 @@
 #include <libgnome/gnome-exec.h>
 #include <libgnomeui/gnome-client.h>
 #include "libsounds/sound-properties.h"
-#include "gnome-settings-sound.h"
-#include "gnome-settings-daemon.h"
+#include "gnome-settings-module.h"
+#include "utils.h"
+
+typedef struct {
+	GnomeSettingsModule parent;
+} GnomeSettingsModuleSound;
+
+typedef struct {
+	GnomeSettingsModuleClass parent_class;
+} GnomeSettingsModuleSoundClass;
+
+static GnomeSettingsModuleRunlevel gnome_settings_module_sound_get_runlevel (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_sound_initialize (GnomeSettingsModule *module, GConfClient *config_client);
+static gboolean gnome_settings_module_sound_start (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_sound_stop (GnomeSettingsModule *module);
+
+static void
+gnome_settings_module_sound_class_init (GnomeSettingsModuleSoundClass *klass)
+{
+	GnomeSettingsModuleClass *module_class;
+
+	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->get_runlevel = gnome_settings_module_sound_get_runlevel;
+	module_class->initialize = gnome_settings_module_sound_initialize;
+	module_class->start = gnome_settings_module_sound_start;
+	module_class->stop = gnome_settings_module_sound_stop;
+}
+
+static void
+gnome_settings_module_sound_init (GnomeSettingsModuleSound *module)
+{
+}
+
+GType
+gnome_settings_module_sound_get_type (void)
+{
+	static GType module_type = 0;
+  
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleSoundClass),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_sound_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleSound),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_sound_init,
+		};
+      
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
+						      "GnomeSettingsModuleSound",
+						      &module_info, 0);
+	}
+  
+	return module_type;
+}
+
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_sound_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS;
+}
 
 /* start_gnome_sound
  *
@@ -179,14 +241,13 @@ apply_settings (void)
 #endif
 	} else {
 #ifdef HAVE_ESD
-	  if (!set_esd_standby)
+		if (!set_esd_standby)
 #endif
-		stop_gnome_sound ();
+			stop_gnome_sound ();
 	}
 
 	if (enable_sound &&
-	    (!inited || event_changed_old != event_changed_new))
-	{
+	    (!inited || event_changed_old != event_changed_new)) {
 		SoundProperties *props;
 		
 		inited = TRUE;
@@ -200,15 +261,27 @@ apply_settings (void)
 	}
 }
 
-void
-gnome_settings_sound_init (GConfClient *client)
+static gboolean
+gnome_settings_module_sound_initialize (GnomeSettingsModule *module, GConfClient *config_client)
 {
 	gnome_settings_register_config_callback ("/desktop/gnome/sound",
 						 (GnomeSettingsConfigCallback) apply_settings);
+
+	return TRUE;
 }
 
-void
-gnome_settings_sound_load (GConfClient *client)
+static gboolean
+gnome_settings_module_sound_start (GnomeSettingsModule *module)
 {
 	apply_settings ();
+
+	return TRUE;
+}
+
+static gboolean
+gnome_settings_module_sound_stop (GnomeSettingsModule *module)
+{
+	stop_gnome_sound ();
+
+	return TRUE;
 }

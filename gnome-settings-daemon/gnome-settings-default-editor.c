@@ -18,19 +18,82 @@
 
 #include <config.h>
 
-#include "gnome-settings-daemon.h"
-#include "gnome-settings-default-editor.h"
+#include "gnome-settings-module.h"
+#include "utils.h"
 
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-mime-monitor.h>
 
 #include <string.h>
 
+typedef struct {
+	GnomeSettingsModule parent;
+} GnomeSettingsModuleDefaultEditor;
+
+typedef struct {
+	GnomeSettingsModuleClass parent_class;
+} GnomeSettingsModuleDefaultEditorClass;
+
+static GnomeSettingsModuleRunlevel gnome_settings_module_default_editor_get_runlevel (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_default_editor_initialize (GnomeSettingsModule *module,
+								 GConfClient *config_client);
+static gboolean gnome_settings_module_default_editor_start (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_default_editor_stop (GnomeSettingsModule *module);
+
 /* #define DE_DEBUG */
 
 #define SYNC_CHANGES_KEY "/apps/gnome_settings_daemon/default_editor/sync_text_types"
 
 static gboolean sync_changes;
+
+static void
+gnome_settings_module_default_editor_class_init (GnomeSettingsModuleDefaultEditorClass *klass)
+{
+	GnomeSettingsModuleClass *module_class;
+
+	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->get_runlevel = gnome_settings_module_default_editor_get_runlevel;
+	module_class->initialize = gnome_settings_module_default_editor_initialize;
+	module_class->start = gnome_settings_module_default_editor_start;
+	module_class->stop = gnome_settings_module_default_editor_stop;
+}
+
+static void
+gnome_settings_module_default_editor_init (GnomeSettingsModuleDefaultEditor *module)
+{
+}
+
+GType
+gnome_settings_module_default_editor_get_type (void)
+{
+	static GType module_type = 0;
+  
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleDefaultEditorClass),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_default_editor_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleDefaultEditor),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_default_editor_init,
+		};
+      
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
+						      "GnomeSettingsModuleDefaultEditor",
+						      &module_info, 0);
+	}
+  
+	return module_type;
+}
+
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_default_editor_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS;
+}
 
 #ifdef DE_DEBUG
 static void
@@ -120,19 +183,29 @@ vfs_change_cb (GnomeVFSMIMEMonitor *monitor, GConfClient *client)
 	PRINT_STATE;
 }
 
-void
-gnome_settings_default_editor_init (GConfClient *client)
+static gboolean
+gnome_settings_module_default_editor_initialize (GnomeSettingsModule *module, GConfClient *config_client)
 {
-	sync_changes = gconf_client_get_bool (client, SYNC_CHANGES_KEY, NULL);
+	sync_changes = gconf_client_get_bool (config_client, SYNC_CHANGES_KEY, NULL);
 
 	gnome_settings_register_config_callback (SYNC_CHANGES_KEY, sync_changes_cb);
 
 	g_signal_connect (gnome_vfs_mime_monitor_get (), "data_changed",
-			  G_CALLBACK (vfs_change_cb), client);			  
+			  G_CALLBACK (vfs_change_cb), config_client);
+
+	return TRUE;
 }
 
-void
-gnome_settings_default_editor_load (GConfClient *client)
+static gboolean
+gnome_settings_module_default_editor_start (GnomeSettingsModule *module)
 {
-	vfs_change_cb (NULL, client);
+	vfs_change_cb (NULL, gnome_settings_module_get_config_client (module));
+
+	return TRUE;
+}
+
+static gboolean
+gnome_settings_module_default_editor_stop (GnomeSettingsModule *module)
+{
+	return TRUE;
 }

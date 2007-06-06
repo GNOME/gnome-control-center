@@ -36,16 +36,11 @@
 #include "gnome-settings-xmodmap.h"
 
 /*#include "gnome-settings-disk.h"*/
-#include "gnome-settings-xsettings.h"
-#include "gnome-settings-mouse.h"
 #include "gnome-settings-keyboard-xkb.h"
 #include "gnome-settings-keyboard.h"
-#include "gnome-settings-sound.h"
 #include "gnome-settings-accessibility-keyboard.h"
-#include "gnome-settings-default-editor.h"
 #include "gnome-settings-keybindings.h"
 #include "gnome-settings-multimedia-keys.h"
-#include "gnome-settings-gtk1theme.h"
 #include "gnome-settings-xrdb.h"
 #include "gnome-settings-typing-break.h"
 
@@ -55,8 +50,13 @@ struct _GnomeSettingsDaemonPrivate {
 
 GType gnome_settings_module_background_get_type (void);
 GType gnome_settings_module_clipboard_get_type (void);
+GType gnome_settings_module_default_editor_get_type (void);
 GType gnome_settings_module_font_get_type (void);
+GType gnome_settings_module_gtk1_get_type (void);
+GType gnome_settings_module_mouse_get_type (void);
 GType gnome_settings_module_screensaver_get_type (void);
+GType gnome_settings_module_sound_get_type (void);
+GType gnome_settings_module_xsettings_get_type (void);
 
 static GObjectClass *parent_class = NULL;
 XSettingsManager **managers = NULL;
@@ -186,8 +186,13 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 	/* register all internal modules types */
 	if (!gnome_settings_module_background_get_type ()
 	    || !gnome_settings_module_clipboard_get_type ()
+	    || !gnome_settings_module_default_editor_get_type ()
 	    || !gnome_settings_module_font_get_type ()
-	    || !gnome_settings_module_screensaver_get_type ())
+	    || !gnome_settings_module_gtk1_get_type ()
+	    || !gnome_settings_module_mouse_get_type ()
+	    || !gnome_settings_module_screensaver_get_type ()
+	    || !gnome_settings_module_sound_get_type ()
+	    || !gnome_settings_module_xsettings_get_type ())
 		return;
 
 	/* create hash table for loaded modules */
@@ -271,19 +276,14 @@ gnome_settings_daemon_new (void)
 	client = gnome_settings_get_config_client ();
 
         /*  gnome_settings_disk_init (client);*/
-	gnome_settings_xsettings_init (client);
-	gnome_settings_mouse_init (client);
 	/* Essential - xkb initialization should happen before */
 	gnome_settings_keyboard_xkb_set_post_activation_callback ((PostActivationCallback) gnome_settings_load_modmap_files, NULL);
 	gnome_settings_keyboard_xkb_init (client);
 	gnome_settings_keyboard_init (client);
 	gnome_settings_multimedia_keys_init (client);
         /* */
-	gnome_settings_sound_init (client);
 	gnome_settings_accessibility_keyboard_init (client);
-	gnome_settings_default_editor_init (client);
 	gnome_settings_keybindings_init (client);
-	gnome_settings_gtk1_theme_init (client);
 	gnome_settings_xrdb_init (client);
 	gnome_settings_typing_break_init (client);
 
@@ -303,18 +303,13 @@ gnome_settings_daemon_new (void)
 	}
 
 	/*  gnome_settings_disk_load (client);*/
-	gnome_settings_xsettings_load (client);
-	gnome_settings_mouse_load (client);
 	/* Essential - xkb initialization should happen before */
 	gnome_settings_keyboard_xkb_load (client);
 	gnome_settings_keyboard_load (client);
 	gnome_settings_multimedia_keys_load (client);
 	/* */
-	gnome_settings_sound_load (client);
 	gnome_settings_accessibility_keyboard_load (client);
-	gnome_settings_default_editor_load (client);
 	gnome_settings_keybindings_load (client);
-	gnome_settings_gtk1_theme_load (client);
 	gnome_settings_xrdb_load (client);
 	gnome_settings_typing_break_load (client);
 

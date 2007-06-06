@@ -27,10 +27,73 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "gnome-settings-daemon.h"
-#include "gnome-settings-gtk1theme.h"
+#include <gdk/gdkx.h>
+#include "gnome-settings-module.h"
+#include "utils.h"
 
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
+
+typedef struct {
+	GnomeSettingsModule parent;
+} GnomeSettingsModuleGtk1;
+
+typedef struct {
+	GnomeSettingsModuleClass parent_class;
+} GnomeSettingsModuleGtk1Class;
+
+static GnomeSettingsModuleRunlevel gnome_settings_module_gtk1_get_runlevel (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_gtk1_initialize (GnomeSettingsModule *module, GConfClient *config_client);
+static gboolean gnome_settings_module_gtk1_start (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_gtk1_stop (GnomeSettingsModule *module);
+
+static void
+gnome_settings_module_gtk1_class_init (GnomeSettingsModuleGtk1Class *klass)
+{
+	GnomeSettingsModuleClass *module_class;
+
+	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->get_runlevel = gnome_settings_module_gtk1_get_runlevel;
+	module_class->initialize = gnome_settings_module_gtk1_initialize;
+	module_class->start = gnome_settings_module_gtk1_start;
+	module_class->stop = gnome_settings_module_gtk1_stop;
+}
+
+static void
+gnome_settings_module_gtk1_init (GnomeSettingsModuleGtk1 *module)
+{
+}
+
+GType
+gnome_settings_module_gtk1_get_type (void)
+{
+	static GType module_type = 0;
+  
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleGtk1Class),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_gtk1_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleGtk1),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_gtk1_init,
+		};
+      
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
+						      "GnomeSettingsModuleGtk1",
+						      &module_info, 0);
+	}
+  
+	return module_type;
+}
+
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_gtk1_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS;
+}
 
 /* Given the theme filename, return the needed contents for the RC file
  * in the user's home directory
@@ -208,15 +271,25 @@ apply_settings (void)
 	g_free (rc_filename);
 }
 
-void
-gnome_settings_gtk1_theme_init (GConfClient *client)
+static gboolean
+gnome_settings_module_gtk1_initialize (GnomeSettingsModule *module, GConfClient *config_client)
 {
 	gnome_settings_register_config_callback (GTK_THEME_KEY,
 						 (GnomeSettingsConfigCallback) apply_settings);
+
+	return TRUE;
 }
 
-void
-gnome_settings_gtk1_theme_load (GConfClient *client)
+static gboolean
+gnome_settings_module_gtk1_start (GnomeSettingsModule *module)
 {
 	apply_settings ();
+
+	return TRUE;
+}
+
+static gboolean
+gnome_settings_module_gtk1_stop (GnomeSettingsModule *module)
+{
+	return TRUE;
 }

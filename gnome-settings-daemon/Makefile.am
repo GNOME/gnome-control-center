@@ -29,10 +29,8 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-dbus.c		\
 	gnome-settings-dbus.h		\
 	gnome-settings-default-editor.c	\
-	gnome-settings-default-editor.h	\
 	gnome-settings-font.c		\
 	gnome-settings-gtk1theme.c      \
-	gnome-settings-gtk1theme.h	\
 	gnome-settings-keybindings.c    \
 	gnome-settings-keybindings.h    \
 	gnome-settings-keyboard-xkb.h	\
@@ -43,14 +41,12 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-locate-pointer.h	\
 	gnome-settings-module.c		\
 	gnome-settings-module.h		\
-	gnome-settings-mouse.h		\
 	gnome-settings-mouse.c		\
 	gnome-settings-multimedia-keys.h \
 	gnome-settings-multimedia-keys.c \
 	gnome-settings-screensaver.c	\
 	gnome-settings-server.h		\
 	gnome-settings-sound.c		\
-	gnome-settings-sound.h		\
 	gnome-settings-typing-break.c	\
 	gnome-settings-typing-break.h	\
 	gnome-settings-xmodmap.c	\
