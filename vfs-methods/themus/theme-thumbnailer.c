@@ -141,8 +141,7 @@ main(int argc, char **argv)
 	gnome_vfs_uri_unref (uri);
 
 	if (theme) {
-	    pixbuf = generate_theme_thumbnail (theme, TRUE);
-	    
+	    pixbuf = generate_theme_thumbnail (theme);
 	    save_pixbuf(pixbuf, argv[2]);
 	    gdk_pixbuf_unref(pixbuf);
 	}
