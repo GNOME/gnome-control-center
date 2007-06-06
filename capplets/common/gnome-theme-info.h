@@ -19,9 +19,6 @@
    License along with the Gnome Library; see the file COPYING.LIB.  If not,
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
-/*
-  @NOTATION@
- */
 
 #ifndef GNOME_THEME_INFO_H
 #define GNOME_THEME_INFO_H
@@ -85,7 +82,6 @@ struct _GnomeThemeMetaInfo
   gchar *gtk_color_scheme;
   gchar *metacity_theme_name;
   gchar *icon_theme_name;
-  gchar *sawfish_theme_name;
   gchar *sound_theme_name;
 
   gchar *application_font;
@@ -122,12 +118,11 @@ GnomeThemeMetaInfo *gnome_theme_meta_info_find_by_uri      (const char         *
 GList              *gnome_theme_meta_info_find_all         (void);
 gint                gnome_theme_meta_info_compare          (GnomeThemeMetaInfo *a,
 							    GnomeThemeMetaInfo *b);
-GnomeThemeMetaInfo *gnome_theme_read_meta_theme                      (GnomeVFSURI *meta_theme_uri);
+GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GnomeVFSURI *meta_theme_uri);
 
 /* Other */
 void                gnome_theme_init                       (gboolean           *monitor_not_added);
 void                gnome_theme_info_register_theme_change (GFunc               func,
 							    gpointer            data);
-
 
 #endif /* GNOME_THEME_INFO_H */

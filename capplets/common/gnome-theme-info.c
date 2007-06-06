@@ -13,7 +13,6 @@
 #define GTK_THEME_KEY "X-GNOME-Metatheme/GtkTheme"
 #define GTK_COLOR_SCHEME_KEY "X-GNOME-Metatheme/GtkColorScheme"
 #define METACITY_THEME_KEY "X-GNOME-Metatheme/MetacityTheme"
-#define SAWFISH_THEME_KEY "X-GNOME-Metatheme/SawfishTheme"
 #define ICON_THEME_KEY "X-GNOME-Metatheme/IconTheme"
 #define SOUND_THEME_KEY "X-GNOME-Metatheme/SoundTheme"
 #define APPLICATION_FONT_KEY "X-GNOME-Metatheme/ApplicationFont"
@@ -84,13 +83,10 @@ static gint
 safe_strcmp (const gchar *a_str,
 	     const gchar *b_str)
 {
-  if (a_str == NULL && b_str != NULL)
-    return -1;
-  if (a_str != NULL && b_str == NULL)
-    return 1;
-  if (a_str == NULL && b_str == NULL)
-    return 0;
-  return strcmp (a_str, b_str);
+  if (a_str && b_str)
+    return strcmp (a_str, b_str);
+  else
+    return a_str - b_str;
 }
 
 static gint
@@ -193,7 +189,7 @@ get_data_from_hash_by_name (GHashTable  *hash_table,
     }
   while (list)
     {
-      gint theme_priority ;
+      gint theme_priority;
 
       theme_priority = get_priority_from_data_by_hash (hash_table, list->data);
 
@@ -345,8 +341,8 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
       g_free (icon_theme_file);
       return NULL;
     }
-  hidden_theme_icon = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Hidden");
 
+  hidden_theme_icon = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Hidden");
   if (hidden_theme_icon == NULL || 
       strcmp (hidden_theme_icon, "false") == 0) 
     {
@@ -360,9 +356,8 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
     }
   else 
     {
-      gnome_desktop_item_unref (icon_theme_ditem);
+      icon_theme_info = NULL;
       g_free (icon_theme_file);
-      return NULL;
     }
 
   gnome_desktop_item_unref (icon_theme_ditem);
@@ -387,19 +382,17 @@ handle_change_signal (GnomeThemeType       type,
     return;
 
   if (type == GNOME_THEME_TYPE_REGULAR)
-    uri = g_strdup (((GnomeThemeInfo *)theme)->path);
+    uri = ((GnomeThemeInfo *)theme)->path;
   else if (type == GNOME_THEME_TYPE_METATHEME)
-    uri = g_strdup (((GnomeThemeMetaInfo *)theme)->path);
+    uri = ((GnomeThemeMetaInfo *)theme)->path;
   else if (type == GNOME_THEME_TYPE_ICON)
-    uri = g_strdup (((GnomeThemeIconInfo *)theme)->path);
+    uri = ((GnomeThemeIconInfo *)theme)->path;
   
   for (list = callbacks; list; list = list->next)
   {
     ThemeCallbackData *callback_data = list->data;
     (* callback_data->func) (uri, callback_data->data);
   }
-
-  g_free (uri);
 
 #ifdef DEBUG
   if (change_type == GNOME_THEME_CHANGE_CREATED)
@@ -459,10 +452,7 @@ update_theme_index (GnomeVFSURI       *index_uri,
    * sophisticated a test than "files exists and is a file" */
   file_info = gnome_vfs_file_info_new ();
   result = gnome_vfs_get_file_info_uri (index_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_REGULAR)
-    theme_exists = TRUE;
-  else
-    theme_exists = FALSE;
+  theme_exists = (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_REGULAR);
   gnome_vfs_file_info_unref (file_info);
 
   /* Next, we see what currently exists */
@@ -525,7 +515,7 @@ update_theme_index (GnomeVFSURI       *index_uri,
 	{
 	  handle_change_signal (GNOME_THEME_TYPE_REGULAR, theme_info, GNOME_THEME_CHANGE_CREATED, key_element);
 	}
-      else if (! theme_exists && theme_used_to_exist)
+      else if (!theme_exists && theme_used_to_exist)
 	{
 	  handle_change_signal (GNOME_THEME_TYPE_REGULAR, theme_info, GNOME_THEME_CHANGE_DELETED, key_element);
 	}
@@ -1464,9 +1454,6 @@ gnome_theme_meta_info_compare (GnomeThemeMetaInfo *a,
   if (cmp != 0) return cmp;
 
   cmp = safe_strcmp (a->icon_theme_name, b->icon_theme_name);
-  if (cmp != 0) return cmp;
-
-  cmp = safe_strcmp (a->sawfish_theme_name, b->sawfish_theme_name);
   if (cmp != 0) return cmp;
 
   cmp = safe_strcmp (a->sound_theme_name, b->sound_theme_name);
