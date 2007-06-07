@@ -29,6 +29,7 @@
 #define METACITY_THEME_KEY "/apps/metacity/general/theme"
 #define ICON_THEME_KEY "/desktop/gnome/interface/icon_theme"
 #define COLOR_SCHEME_KEY "/desktop/gnome/interface/gtk_color_scheme"
+#define LOCKDOWN_KEY "/desktop/gnome/lockdown/disable_theme_settings"
 
 #define CUSTOM_THEME_NAME "__custom__"
 
@@ -56,6 +57,13 @@ get_default_string_from_key (GConfClient *client, const char *key)
   }
 
   return str;
+}
+
+/* Find out if the lockdown key has been set. Currently returns false on error... */
+static gboolean
+is_locked_down (GConfClient *client)
+{
+  return gconf_client_get_bool (client, LOCKDOWN_KEY, NULL);
 }
 
 static gboolean
@@ -245,9 +253,34 @@ theme_remove_custom (GtkIconView *icon_view, AppearanceData *data)
 /** Theme Callbacks **/
 
 static void
-theme_changed_func (gpointer uri, AppearanceData *data)
+theme_changed_on_disk_cb (GnomeThemeType       type,
+			  gpointer             theme,
+			  GnomeThemeChangeType change_type,
+			  GnomeThemeElement    element,
+			  AppearanceData       *data)
 {
   /* TODO: add/change/remove themes from the model as appropriate */
+
+  if (type == GNOME_THEME_TYPE_METATHEME) {
+    GnomeThemeMetaInfo *meta = theme;
+
+    if (change_type == GNOME_THEME_CHANGE_CREATED) {
+      gtk_list_store_insert_with_values (data->theme_store, NULL, 0,
+          COL_LABEL, meta->readable_name,
+          COL_NAME, meta->name,
+          -1);
+      theme_queue_for_thumbnail (meta, data);
+
+    } else if (change_type == GNOME_THEME_CHANGE_DELETED) {
+      GtkTreeIter iter;
+
+      if (find_in_model (GTK_TREE_MODEL (data->theme_store), meta->name, COL_NAME, &iter))
+        gtk_list_store_remove (data->theme_store, &iter);
+
+    } else if (change_type == GNOME_THEME_CHANGE_CHANGED) {
+      theme_queue_for_thumbnail (meta, data);
+    }
+  }
 }
 
 static void
@@ -282,13 +315,13 @@ static void
 theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
 {
   GList *selection;
+  GnomeThemeMetaInfo *theme = NULL;
 
   selection = gtk_icon_view_get_selected_items (GTK_ICON_VIEW (icon_view));
 
   if (selection) {
     GtkTreeModel *model;
     GtkTreeIter iter;
-    GnomeThemeMetaInfo *theme = NULL;
     gchar *name;
 
     model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
@@ -307,6 +340,9 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
     g_list_foreach (selection, (GFunc) gtk_tree_path_free, NULL);
     g_list_free (selection);
   }
+
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_delete"),
+			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_METATHEME));
 }
 
 static void
@@ -386,11 +422,11 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
 void
 themes_init (AppearanceData *data)
 {
-  GtkWidget *w;
+  GtkWidget *w, *del_button;
   GList *theme_list, *l;
   GtkListStore *theme_store;
   GtkTreeModel *sort_model;
-  gchar *meta_theme = NULL;
+  GnomeThemeMetaInfo *meta_theme = NULL;
   GdkPixbuf *temp;
 
   /* initialise some stuff */
@@ -402,9 +438,11 @@ themes_init (AppearanceData *data)
   data->theme_store = theme_store =
       gtk_list_store_new (NUM_COLS, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING);
 
+  del_button = glade_xml_get_widget (data->xml, "theme_delete");
+
   /* set up theme list */
   theme_list = gnome_theme_meta_info_find_all ();
-  gnome_theme_info_register_theme_change ((GFunc) theme_changed_func, data);
+  gnome_theme_info_register_theme_change ((ThemeChangedCallback) theme_changed_on_disk_cb, data);
 
   data->theme_custom->name = g_strdup (CUSTOM_THEME_NAME);
   data->theme_custom->readable_name = g_strdup ("Custom"); /* FIXME: translate */
@@ -424,17 +462,20 @@ themes_init (AppearanceData *data)
         -1);
 
     if (!meta_theme && theme_is_equal (data->theme_custom, info))
-      meta_theme = info->name;
+      meta_theme = info;
   }
 
-  if (!meta_theme) {
+  if (meta_theme) {
+    gtk_widget_set_sensitive (del_button,
+                              gnome_theme_is_writable (meta_theme, GNOME_THEME_TYPE_METATHEME));
+  } else {
     /* add custom theme */
-    meta_theme = data->theme_custom->name;
-    data->theme_queue = g_slist_prepend (data->theme_queue, data->theme_custom);
+    meta_theme = data->theme_custom;
+    data->theme_queue = g_slist_prepend (data->theme_queue, meta_theme);
 
     gtk_list_store_insert_with_values (theme_store, NULL, 0,
-        COL_LABEL, data->theme_custom->readable_name,
-        COL_NAME, meta_theme,
+        COL_LABEL, meta_theme->readable_name,
+        COL_NAME, meta_theme->name,
         COL_THUMBNAIL, temp,
         -1);
   }
@@ -449,7 +490,7 @@ themes_init (AppearanceData *data)
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), COL_LABEL, GTK_SORT_ASCENDING);
 
-  g_signal_connect_after (w, "realize", (GCallback) theme_select_after_realize, meta_theme);
+  g_signal_connect_after (w, "realize", (GCallback) theme_select_after_realize, meta_theme->name);
 
   w = glade_xml_get_widget (data->xml, "theme_install");
   gtk_button_set_image (GTK_BUTTON (w),
@@ -458,13 +499,17 @@ themes_init (AppearanceData *data)
   /* connect button signals */
   g_signal_connect (w, "clicked", (GCallback) theme_install_cb, data);
   g_signal_connect (glade_xml_get_widget (data->xml, "theme_custom"), "clicked", (GCallback) theme_custom_cb, data);
-  g_signal_connect (glade_xml_get_widget (data->xml, "theme_delete"), "clicked", (GCallback) theme_delete_cb, data);
+  g_signal_connect (del_button, "clicked", (GCallback) theme_delete_cb, data);
 
   /* connect list signals in the details window */
   g_signal_connect_after (glade_xml_get_widget (data->xml, "gtk_themes_list"), "cursor-changed", (GCallback) theme_details_changed_cb, data);
   g_signal_connect_after (glade_xml_get_widget (data->xml, "window_themes_list"), "cursor-changed", (GCallback) theme_details_changed_cb, data);
   g_signal_connect_after (glade_xml_get_widget (data->xml, "icon_themes_list"), "cursor-changed", (GCallback) theme_details_changed_cb, data);
   /* FIXME: need to connect to color scheme stuff, too... */
+
+  if (is_locked_down (data->client)) {
+    /* FIXME: determine what needs disabling */
+  }
 
   theme_thumbnail_generate (data);
 }
