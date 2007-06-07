@@ -56,7 +56,6 @@ struct _GnomeThemeInfo
   guint has_gtk : 1;
   guint has_keybinding : 1;
   guint has_metacity : 1;
-  guint user_writable : 1;
 };
 
 typedef struct _GnomeThemeIconInfo GnomeThemeIconInfo;
@@ -90,6 +89,12 @@ struct _GnomeThemeMetaInfo
   gchar *background_image;
 };
 
+typedef void (* ThemeChangedCallback) (GnomeThemeType       type,
+				       gpointer             theme,
+				       GnomeThemeChangeType change_type,
+				       GnomeThemeElement    element,
+				       gpointer             user_data);
+
 
 /* Generic Themes */
 GnomeThemeInfo     *gnome_theme_info_new                   (void);
@@ -121,8 +126,10 @@ gint                gnome_theme_meta_info_compare          (GnomeThemeMetaInfo *
 GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GnomeVFSURI *meta_theme_uri);
 
 /* Other */
-void                gnome_theme_init                       (gboolean           *monitor_not_added);
-void                gnome_theme_info_register_theme_change (GFunc               func,
-							    gpointer            data);
+void                gnome_theme_init                       (gboolean            *monitor_not_added);
+void                gnome_theme_info_register_theme_change (ThemeChangedCallback func,
+							    gpointer             data);
+gboolean            gnome_theme_is_writable                (gpointer             theme,
+							    GnomeThemeType       type);
 
 #endif /* GNOME_THEME_INFO_H */
