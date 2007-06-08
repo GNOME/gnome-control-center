@@ -61,6 +61,7 @@ main (int argc, char *argv[])
             N_("Enable debugging code"), NULL },
           { "no-check", 'n', 0, G_OPTION_ARG_NONE, &no_check,
             N_("Don't check whether the notification area exists"), NULL },
+	  { NULL }
         };
         GOptionContext *option_context;
         GError *error = NULL;
