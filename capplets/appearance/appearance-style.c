@@ -22,6 +22,7 @@
 #include <string.h>
 #include <pango/pango.h>
 
+#include "gtkrc-utils.h"
 #include "gnome-theme-info.h"
 #include "gconf-property-editor.h"
 #include "theme-thumbnail.h"
@@ -52,13 +53,16 @@ static const gchar *gconf_keys[] = {
 
 static void prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type);
 static void update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data);
+static void update_color_buttons_from_settings (GtkSettings *settings, AppearanceData *data);
+static void check_color_schemes_enabled (GtkSettings *settings, AppearanceData *data);
 
 static void color_scheme_changed (GObject *settings, GParamSpec *pspec, AppearanceData *data);
-
+static void theme_name_changed (GObject *settings, GParamSpec *pspec, AppearanceData *data);
 
 /* GUI Callbacks */
 
 static void color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data);
+static void color_scheme_defaults_button_clicked_cb (GtkWidget *button, AppearanceData *data);
 static GConfValue *conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value);
 static GConfValue *conv_from_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value);
 
@@ -76,7 +80,6 @@ void
 style_init (AppearanceData *data)
 {
   GObject *settings;
-  gchar *colour_scheme;
   GtkWidget *w;
 
   w = glade_xml_get_widget (data->xml, "theme_details");
@@ -87,17 +90,30 @@ style_init (AppearanceData *data)
   prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), METACITY_THEMES);
   prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), ICON_THEMES);
 
+  w = glade_xml_get_widget (data->xml, "color_scheme_message_hbox");
+  gtk_widget_set_no_show_all (w, TRUE);
+
+  w = glade_xml_get_widget (data->xml, "color_scheme_defaults_button");
+  gtk_button_set_image (GTK_BUTTON (w),
+                        gtk_image_new_from_stock (GTK_STOCK_REVERT_TO_SAVED,
+                                                  GTK_ICON_SIZE_BUTTON));
+
   settings = G_OBJECT (gtk_settings_get_default ());
-  g_object_get (settings, "gtk-color-scheme", &colour_scheme, NULL);
   g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
-  update_color_buttons_from_string (colour_scheme, data);
-  g_free (colour_scheme);
+  update_color_buttons_from_settings (GTK_SETTINGS (settings), data);
+  g_signal_connect (settings, "notify::gtk-theme-name", (GCallback) theme_name_changed, data);
+  check_color_schemes_enabled (GTK_SETTINGS (settings), data);
 
   /* connect signals */
   /* color buttons */
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "text_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "base_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+  /* "Reset To Defaults" button */
+   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "color_scheme_defaults_button")), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
 }
 
 static void
@@ -361,12 +377,35 @@ update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *dat
     gdk_colormap_alloc_color (gdk_colormap_get_system (), &color_scheme_colors[i], FALSE, TRUE);
 
   /* now set all the buttons to the correct settings */
+  widget = glade_xml_get_widget (data->xml, "fg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[0]);
   widget = glade_xml_get_widget (data->xml, "bg_colorbutton");
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[1]);
+  widget = glade_xml_get_widget (data->xml, "text_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[2]);
   widget = glade_xml_get_widget (data->xml, "base_colorbutton");
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[3]);
+  widget = glade_xml_get_widget (data->xml, "selected_fg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[4]);
   widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[5]);
+}
+
+static void
+update_color_buttons_from_settings (GtkSettings *settings,
+                                    AppearanceData *data)
+{
+  gchar *theme;
+  theme = gconf_client_get_string (data->client, gconf_keys[COLOR_SCHEME], NULL);
+  if (theme == NULL || strcmp (theme, "") == 0)
+  {
+    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
+    g_object_get (G_OBJECT (settings), "gtk-color-scheme", &theme, NULL);
+  }
+
+  update_color_buttons_from_string (theme, data);
+  g_free (theme);
+
 }
 
 static void
@@ -374,14 +413,48 @@ color_scheme_changed (GObject    *settings,
                       GParamSpec *pspec,
                       AppearanceData  *data)
 {
-  gchar *theme;
+  update_color_buttons_from_settings (GTK_SETTINGS (settings), data);
+}
 
-  theme = gconf_client_get_string (data->client, gconf_keys[COLOR_SCHEME], NULL);
-  if (theme == NULL || strcmp (theme, "") == 0)
-    g_object_get (settings, "gtk-color-scheme", &theme, NULL);
+static void
+check_color_schemes_enabled (GtkSettings *settings,
+                             AppearanceData *data)
+{
+  gchar *theme = NULL;
+  gchar *filename;
+  GSList *symbolic_colors = NULL, *engines = NULL;
+  gboolean fg, bg, base, text, fg_s, bg_s, enable_colors;
 
-  update_color_buttons_from_string (theme, data);
-  g_free (theme);
+  g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme, NULL);
+
+  filename = gtkrc_find_named (theme);
+
+  gtkrc_get_details (filename, &engines, &symbolic_colors);
+  fg = (g_slist_find_custom (symbolic_colors, "fg_color", g_str_equal) != NULL);
+  bg = (g_slist_find_custom (symbolic_colors, "bg_color", g_str_equal) != NULL);
+  base = (g_slist_find_custom (symbolic_colors, "base_color", g_str_equal) != NULL);
+  text = (g_slist_find_custom (symbolic_colors, "text_color", g_str_equal) != NULL);
+  fg_s = (g_slist_find_custom (symbolic_colors, "selected_fg_color", g_str_equal) != NULL);
+  bg_s = (g_slist_find_custom (symbolic_colors, "selected_bg_color", g_str_equal) != NULL);
+
+  enable_colors = (fg && bg && base && text && fg_s && bg_s);
+
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_table"), enable_colors);
+
+  if (enable_colors)
+    gtk_widget_hide (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
+  else
+    gtk_widget_show (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));  
+}
+
+static void
+theme_name_changed (GObject *settings,
+                    GParamSpec *pspec,
+                    AppearanceData *data)
+{
+  check_color_schemes_enabled (GTK_SETTINGS (settings), data);
+  /*gconf_client_set_string (data->client, gconf_keys[COLOR_SCHEME], "", NULL);*/
+  update_color_buttons_from_settings (GTK_SETTINGS (settings), data);
 }
 
 static void
@@ -392,17 +465,18 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   gchar *bg, *fg, *text, *base, *selected_fg, *selected_bg;
   GtkWidget *widget;
 
+  widget = glade_xml_get_widget (data->xml, "fg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[0]);
   widget = glade_xml_get_widget (data->xml, "bg_colorbutton");
   gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[1]);
+  widget = glade_xml_get_widget (data->xml, "text_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[2]);
   widget = glade_xml_get_widget (data->xml, "base_colorbutton");
   gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[3]);
+  widget = glade_xml_get_widget (data->xml, "selected_fg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[4]);
   widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
   gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
-
-  /* TODO: calculate proper colours here */
-  gdk_color_parse ("black", &colors[0]);
-  gdk_color_parse ("black", &colors[2]);
-  gdk_color_parse ("black", &colors[4]);
 
   fg = g_strdup_printf ("fg_color:#%04x%04x%04x\n", colors[0].red, colors[0].green, colors[0].blue);
   bg = g_strdup_printf ("bg_color:#%04x%04x%04x\n", colors[1].red, colors[1].green, colors[1].blue);
@@ -418,6 +492,8 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
    */
   gconf_client_set_string (data->client, gconf_keys[COLOR_SCHEME], new_scheme, NULL);
 
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), TRUE);
+
   g_free (fg);
   g_free (bg);
   g_free (text);
@@ -425,4 +501,11 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   g_free (selected_fg);
   g_free (selected_bg);
   g_free (new_scheme);
+}
+
+static void
+color_scheme_defaults_button_clicked_cb (GtkWidget *button, AppearanceData *data)
+{
+  gconf_client_set_string (data->client, gconf_keys[COLOR_SCHEME], "", NULL);
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
 }
