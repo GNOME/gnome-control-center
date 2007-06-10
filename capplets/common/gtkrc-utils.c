@@ -63,7 +63,8 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 	GScanner *scanner = g_scanner_new (NULL);
 
 	g_scanner_scope_add_symbol (scanner, 0, "include", INCLUDE_SYMBOL);
-	g_scanner_scope_add_symbol (scanner, 0, "engine", ENGINE_SYMBOL);
+	if (engines != NULL)
+	  g_scanner_scope_add_symbol (scanner, 0, "engine", ENGINE_SYMBOL);
 
 	files = g_slist_prepend (files, g_strdup (filename));
 	while (files != NULL)
@@ -131,6 +132,8 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 			}
 		}
 	}
+
+	g_scanner_destroy (scanner);
 }
 
 
@@ -172,7 +175,7 @@ gtkrc_get_color_scheme (gchar *filename)
 			g_scanner_input_file (scanner, file);
 			while ((token = g_scanner_get_next_token (scanner)) != G_TOKEN_EOF)
 			{
-				if (token == COLOR_SCHEME_SYMBOL)
+				if (GINT_TO_POINTER (token) == COLOR_SCHEME_SYMBOL)
 				{
 					if (g_scanner_get_next_token (scanner) != '=')
 						continue;
