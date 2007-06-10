@@ -399,13 +399,13 @@ update_color_buttons_from_settings (GtkSettings *settings,
   theme = gconf_client_get_string (data->client, gconf_keys[COLOR_SCHEME], NULL);
   if (theme == NULL || strcmp (theme, "") == 0)
   {
+    g_free (theme);
     gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
     g_object_get (G_OBJECT (settings), "gtk-color-scheme", &theme, NULL);
   }
 
   update_color_buttons_from_string (theme, data);
   g_free (theme);
-
 }
 
 static void
@@ -426,16 +426,22 @@ check_color_schemes_enabled (GtkSettings *settings,
   gboolean fg, bg, base, text, fg_s, bg_s, enable_colors;
 
   g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme, NULL);
-
   filename = gtkrc_find_named (theme);
+  g_free (theme);
 
   gtkrc_get_details (filename, &engines, &symbolic_colors);
+  g_free (filename);
+
   fg = (g_slist_find_custom (symbolic_colors, "fg_color", g_str_equal) != NULL);
   bg = (g_slist_find_custom (symbolic_colors, "bg_color", g_str_equal) != NULL);
   base = (g_slist_find_custom (symbolic_colors, "base_color", g_str_equal) != NULL);
   text = (g_slist_find_custom (symbolic_colors, "text_color", g_str_equal) != NULL);
   fg_s = (g_slist_find_custom (symbolic_colors, "selected_fg_color", g_str_equal) != NULL);
   bg_s = (g_slist_find_custom (symbolic_colors, "selected_bg_color", g_str_equal) != NULL);
+  g_slist_foreach (symbolic_colors, (GFunc) g_free, NULL);
+  g_slist_free (symbolic_colors);
+  g_slist_foreach (engines, (GFunc) g_free, NULL);
+  g_slist_free (engines);
 
   enable_colors = (fg && bg && base && text && fg_s && bg_s);
 

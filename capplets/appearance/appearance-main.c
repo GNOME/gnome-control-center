@@ -34,15 +34,15 @@
 /* ---------------------------------- */
 
 static AppearanceData *
-init_appearance_data (int argc, char **argv)
+init_appearance_data (int *argc, char ***argv)
 {
   AppearanceData *data = NULL;
   gchar *gladefile;
   GladeXML *ui;
 
   g_thread_init (NULL);
-  theme_thumbnail_factory_init (argc, argv);
-  gtk_init (&argc, &argv);
+  theme_thumbnail_factory_init (*argc, *argv);
+  gtk_init (argc, argv);
   gnome_vfs_init ();
   activate_settings_daemon ();
 
@@ -55,8 +55,6 @@ init_appearance_data (int argc, char **argv)
     data = g_new (AppearanceData, 1);
     data->client = gconf_client_get_default ();
     data->xml = ui;
-    data->argc = argc;
-    data->argv = argv;
   }
 
   return data;
@@ -89,7 +87,7 @@ main (int argc, char **argv)
   GnomeProgram *program;
 
   /* init */
-  data = init_appearance_data (argc, argv);
+  data = init_appearance_data (&argc, &argv);
   if (!data)
     return 1;
 

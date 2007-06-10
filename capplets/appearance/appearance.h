@@ -31,8 +31,6 @@
 
 typedef struct {
   GConfClient *client;
-  int argc;
-  char **argv;
   GladeXML *xml;
 
   /* desktop */
