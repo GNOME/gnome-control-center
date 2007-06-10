@@ -445,10 +445,12 @@ check_color_schemes_enabled (GtkSettings *settings,
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_table"), enable_colors);
 
-  if (enable_colors)
+  if (enable_colors) {
     gtk_widget_hide (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
-  else
-    gtk_widget_show (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));  
+  } else {
+    gtk_widget_show (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
+    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
+  }
 }
 
 static void
