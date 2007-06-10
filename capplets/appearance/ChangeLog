@@ -1,5 +1,12 @@
 2007-06-10  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-style.c: (style_init), (check_color_schemes_enabled):
+	fix "reset to defaults" sensitivity for real
+	* appearance-themes.c: (theme_color_scheme_changed_cb),
+	(themes_init): listen to colour scheme changes as well
+
+2007-06-10  Jens Granseuer  <jensgr@gmx.net>
+
 	* appearance-style.c: (check_color_schemes_enabled): disable the "reset
 	to defaults" button if the theme doesn't support custom colours
 

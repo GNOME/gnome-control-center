@@ -383,6 +383,14 @@ theme_details_changed_cb (GtkWidget *widget, AppearanceData *data)
 }
 
 static void
+theme_color_scheme_changed_cb (GObject *settings,
+                               GParamSpec *pspec,
+                               AppearanceData *data)
+{
+  theme_details_changed_cb (NULL, data);
+}
+
+static void
 theme_select_after_realize (GtkIconView *icon_view,
                             const gchar *theme)
 {
@@ -505,7 +513,8 @@ themes_init (AppearanceData *data)
   g_signal_connect_after (glade_xml_get_widget (data->xml, "gtk_themes_list"), "cursor-changed", (GCallback) theme_details_changed_cb, data);
   g_signal_connect_after (glade_xml_get_widget (data->xml, "window_themes_list"), "cursor-changed", (GCallback) theme_details_changed_cb, data);
   g_signal_connect_after (glade_xml_get_widget (data->xml, "icon_themes_list"), "cursor-changed", (GCallback) theme_details_changed_cb, data);
-  /* FIXME: need to connect to color scheme stuff, too... */
+
+  g_signal_connect (gtk_settings_get_default (), "notify::gtk-color-scheme", (GCallback) theme_color_scheme_changed_cb, data);
 
   if (is_locked_down (data->client)) {
     /* FIXME: determine what needs disabling */

@@ -99,10 +99,10 @@ style_init (AppearanceData *data)
                                                   GTK_ICON_SIZE_BUTTON));
 
   settings = G_OBJECT (gtk_settings_get_default ());
-  g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
-  update_color_buttons_from_settings (GTK_SETTINGS (settings), data);
   g_signal_connect (settings, "notify::gtk-theme-name", (GCallback) theme_name_changed, data);
   check_color_schemes_enabled (GTK_SETTINGS (settings), data);
+  g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
+  update_color_buttons_from_settings (GTK_SETTINGS (settings), data);
 
   /* connect signals */
   /* color buttons */
@@ -444,13 +444,12 @@ check_color_schemes_enabled (GtkSettings *settings,
   enable_colors = (fg && bg && base && text && fg_s && bg_s);
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_table"), enable_colors);
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), enable_colors);
 
-  if (enable_colors) {
+  if (enable_colors)
     gtk_widget_hide (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
-  } else {
+  else
     gtk_widget_show (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
-    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
-  }
 }
 
 static void
