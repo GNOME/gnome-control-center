@@ -45,13 +45,13 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
 
   /* Set the gtk+ key */
   old_key = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
-  if (old_key && strcmp (old_key, meta_theme_info->gtk_theme_name))
+  if (compare (old_key, meta_theme_info->gtk_theme_name))
     {
       gconf_client_set_string (client, GTK_THEME_KEY, meta_theme_info->gtk_theme_name, NULL);
     }
   g_free (old_key);
 
-  /* Set the gtk+ key */
+  /* Set the color scheme key */
   old_key = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
   if (compare (old_key, meta_theme_info->gtk_color_scheme))
     {
@@ -68,7 +68,7 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
 
   /* set the icon theme */
   old_key = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
-  if (old_key && strcmp (old_key, meta_theme_info->icon_theme_name))
+  if (compare (old_key, meta_theme_info->icon_theme_name))
     {
       gconf_client_set_string (client, ICON_THEME_KEY, meta_theme_info->icon_theme_name, NULL);
     }
