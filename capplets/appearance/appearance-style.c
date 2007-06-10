@@ -422,14 +422,14 @@ check_color_schemes_enabled (GtkSettings *settings,
 {
   gchar *theme = NULL;
   gchar *filename;
-  GSList *symbolic_colors = NULL, *engines = NULL;
+  GSList *symbolic_colors = NULL;
   gboolean fg, bg, base, text, fg_s, bg_s, enable_colors;
 
   g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme, NULL);
   filename = gtkrc_find_named (theme);
   g_free (theme);
 
-  gtkrc_get_details (filename, &engines, &symbolic_colors);
+  gtkrc_get_details (filename, NULL, &symbolic_colors);
   g_free (filename);
 
   fg = (g_slist_find_custom (symbolic_colors, "fg_color", g_str_equal) != NULL);
@@ -440,8 +440,6 @@ check_color_schemes_enabled (GtkSettings *settings,
   bg_s = (g_slist_find_custom (symbolic_colors, "selected_bg_color", g_str_equal) != NULL);
   g_slist_foreach (symbolic_colors, (GFunc) g_free, NULL);
   g_slist_free (symbolic_colors);
-  g_slist_foreach (engines, (GFunc) g_free, NULL);
-  g_slist_free (engines);
 
   enable_colors = (fg && bg && base && text && fg_s && bg_s);
 
