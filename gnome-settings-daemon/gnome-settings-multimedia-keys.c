@@ -631,6 +631,7 @@ static gboolean
 do_action (Acme *acme, int type)
 {
 	gchar *cmd;
+	gchar *path;
 
 	switch (type) {
 	case MUTE_KEY:
@@ -645,7 +646,11 @@ do_action (Acme *acme, int type)
 		do_eject_action (acme);
 		break;
 	case HOME_KEY:
-		execute (acme, "nautilus", FALSE, FALSE);
+		path = g_shell_quote (g_get_home_dir ());
+		cmd = g_strconcat ("nautilus ", path, NULL);
+		g_free (path);
+		execute (acme, cmd, FALSE, FALSE);
+		g_free (cmd);
 		break;
 	case SEARCH_KEY:
 		execute (acme, "gnome-search-tool", FALSE, FALSE);
