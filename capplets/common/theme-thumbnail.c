@@ -131,13 +131,13 @@ create_folder_icon (char *icon_theme_name)
     folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, GTK_ICON_LOOKUP_FORCE_SVG);
   if (folder_icon_info == NULL)
     folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "folder", 48, GTK_ICON_LOOKUP_FORCE_SVG);
- 
+
   g_object_unref (icon_theme);
 
-  if (folder_icon_info != NULL) 
+  if (folder_icon_info != NULL)
   {
     filename = gtk_icon_info_get_filename (folder_icon_info);
-    
+
     if (filename != NULL)
     {
       folder_icon = gdk_pixbuf_new_from_file (filename, NULL);
@@ -152,14 +152,14 @@ create_folder_icon (char *icon_theme_name)
     GtkWidget *dummy;
     dummy = gtk_label_new ("");
 
-    folder_icon = gtk_widget_render_icon (dummy, 
-                                          GTK_STOCK_MISSING_IMAGE, 
+    folder_icon = gtk_widget_render_icon (dummy,
+                                          GTK_STOCK_MISSING_IMAGE,
                                           GTK_ICON_SIZE_DIALOG,
                                           NULL);
 
     gtk_widget_destroy (dummy);
   }
-  
+
   /* Some icons don't come back at the requested dimensions, so we need to scale
    * them. The width is usually the largest dimension for icons that come at
    * irregular sizes, so use this to calculate the scale factor
@@ -273,7 +273,7 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   icon = create_folder_icon ((char *) theme_thumbnail_data->icon_theme_name->data);
   width = gdk_pixbuf_get_width (icon);
   height = gdk_pixbuf_get_height (icon);
-  
+
   gdk_pixbuf_composite (icon,
 			pixbuf,
 			align->allocation.x + align->allocation.width - width - 5,
@@ -480,7 +480,7 @@ message_from_child (GIOChannel   *source,
 	  scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
 	  g_object_unref (pixbuf);
 
-	  /* allbak function needs to unref the pixbuf */
+	  /* callback function needs to unref the pixbuf */
  	  (* async_data.func) (scaled_pixbuf, async_data.user_data);
 	  if (async_data.destroy)
 	    (* async_data.destroy) (async_data.user_data);
@@ -752,7 +752,7 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
   gtk_widget_destroy (window);
   g_object_set (settings, "gtk-theme-name", current_theme, NULL);
   g_free (current_theme);
-  
+
   return ret;
 }
 
@@ -767,7 +767,7 @@ generate_metacity_theme_thumbnail (GnomeThemeInfo *info)
   GdkVisual *visual;
   GdkPixmap *pixmap;
   GdkPixbuf *pixbuf, *ret;
- 
+
   theme = meta_theme_load (info->name, NULL);
 
   flags = META_FRAME_ALLOWS_DELETE |
@@ -788,10 +788,10 @@ generate_metacity_theme_thumbnail (GnomeThemeInfo *info)
   meta_preview_set_theme (META_PREVIEW (preview), theme);
   meta_preview_set_title (META_PREVIEW (preview), "");
   gtk_container_add (GTK_CONTAINER (window), preview);
-  
+
   dummy = gtk_label_new ("");
   gtk_container_add (GTK_CONTAINER (preview), dummy);
-  
+
   gtk_widget_realize (window);
   gtk_widget_realize (preview);
   gtk_widget_realize (dummy);
@@ -821,10 +821,10 @@ generate_metacity_theme_thumbnail (GnomeThemeInfo *info)
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
-  
+
   ret = gdk_pixbuf_scale_simple (pixbuf, 96, 48, GDK_INTERP_BILINEAR);
   g_object_unref (pixbuf);
-  
+
   gtk_widget_destroy (window);
   return ret;
 }

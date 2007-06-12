@@ -52,7 +52,7 @@ typedef struct {
   GHashTable *handle_hash;
   gint priority;
 } CallbackTuple;
-  
+
 
 /* Hash tables */
 
@@ -105,7 +105,7 @@ get_priority_from_data_by_hash (GHashTable *hash_table,
 
   return theme_priority;
 }
-     
+
 
 static void
 add_data_to_hash_by_name (GHashTable  *hash_table,
@@ -167,7 +167,7 @@ remove_data_from_hash_by_name (GHashTable  *hash_table,
     g_hash_table_remove (hash_table, name);
   else
     g_hash_table_insert (hash_table, g_strdup (name), list);
-    
+
 }
 
 static gpointer
@@ -199,8 +199,8 @@ get_data_from_hash_by_name (GHashTable  *hash_table,
       list = list->next;
     }
   return NULL;
-}  
-  
+}
+
 GnomeThemeMetaInfo *
 gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
 {
@@ -219,7 +219,7 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
       return NULL;
     }
   common_theme_dir_uri = gnome_vfs_uri_get_parent (meta_theme_uri);
-  
+
   meta_theme_info = gnome_theme_meta_info_new ();
   meta_theme_info->path = meta_theme_file;
   meta_theme_info->name = gnome_vfs_uri_extract_short_name (common_theme_dir_uri);
@@ -235,7 +235,7 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
          return NULL;
        }
      }
-     
+
   meta_theme_info->readable_name = g_strdup (str);
 
   str = gnome_desktop_item_get_localestring (meta_theme_ditem, THEME_COMMENT);
@@ -307,13 +307,13 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
   str = gnome_desktop_item_get_string (meta_theme_ditem, MONOSPACE_FONT_KEY);
   if (str != NULL)
     meta_theme_info->monospace_font = g_strdup (str);
-    
+
   str = gnome_desktop_item_get_string (meta_theme_ditem, BACKGROUND_IMAGE_KEY);
   if (str != NULL)
     meta_theme_info->background_image = g_strdup (str);
-  
+
   gnome_desktop_item_unref (meta_theme_ditem);
-  
+
   return meta_theme_info;
 }
 
@@ -343,8 +343,8 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
     }
 
   hidden_theme_icon = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Hidden");
-  if (hidden_theme_icon == NULL || 
-      strcmp (hidden_theme_icon, "false") == 0) 
+  if (hidden_theme_icon == NULL ||
+      strcmp (hidden_theme_icon, "false") == 0)
     {
       gchar *dir_name;
       icon_theme_info = gnome_theme_icon_info_new ();
@@ -354,7 +354,7 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
       icon_theme_info->name = g_path_get_basename (dir_name);
       g_free (dir_name);
     }
-  else 
+  else
     {
       icon_theme_info = NULL;
       g_free (icon_theme_file);
@@ -400,7 +400,7 @@ handle_change_signal (GnomeThemeType       type,
     element_str = "keybinding";
   if (element & GNOME_THEME_METACITY)
     element_str = "metacity";
-  
+
   if (type == GNOME_THEME_TYPE_REGULAR)
     {
       g_print ("theme \"%s\" has a theme of type %s (priority %d) has been %s\n",
@@ -476,7 +476,7 @@ update_theme_index (GnomeVFSURI       *index_uri,
   else
     {
       gboolean theme_used_to_exist = FALSE;
-      
+
       if (key_element & GNOME_THEME_GTK_2)
 	{
 	  theme_used_to_exist = theme_info->has_gtk;
@@ -763,7 +763,7 @@ metacity_dir_changed (GnomeVFSMonitorHandle *handle,
   CommonThemeDirMonitorData *monitor_data;
 
   monitor_data = user_data;
-  
+
   metacity_dir_uri = gnome_vfs_uri_new (info_uri);
   affected_file = gnome_vfs_uri_extract_short_name (metacity_dir_uri);
 
@@ -1286,6 +1286,7 @@ void
 gnome_theme_icon_info_free (GnomeThemeIconInfo *icon_theme_info)
 {
   g_free (icon_theme_info->name);
+  g_free (icon_theme_info->readable_name);
   g_free (icon_theme_info->path);
   g_free (icon_theme_info);
 }
@@ -1355,7 +1356,7 @@ gnome_theme_meta_info_free (GnomeThemeMetaInfo *meta_theme_info)
   g_free (meta_theme_info->gtk_color_scheme);
   g_free (meta_theme_info->icon_theme_name);
   g_free (meta_theme_info->metacity_theme_name);
-  
+
   g_free (meta_theme_info);
 }
 
@@ -1449,7 +1450,7 @@ gnome_theme_meta_info_compare (GnomeThemeMetaInfo *a,
 
   cmp = safe_strcmp (a->sound_theme_name, b->sound_theme_name);
   if (cmp != 0) return cmp;
-  
+
   cmp = safe_strcmp (a->application_font, b->application_font);
   if (cmp != 0) return cmp;
 
@@ -1489,15 +1490,15 @@ gnome_theme_is_writable (gpointer theme, GnomeThemeType type) {
 
   if (theme_path == NULL)
     return FALSE;
-		
+
   vfs_info = gnome_vfs_file_info_new ();
   vfs_result = gnome_vfs_get_file_info (theme_path,
 					vfs_info,
 					GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS);
-  
+
   writable = ((vfs_result == GNOME_VFS_OK) &&
               (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ACCESS) &&
-              (vfs_info->permissions & GNOME_VFS_PERM_ACCESS_WRITABLE)); 
+              (vfs_info->permissions & GNOME_VFS_PERM_ACCESS_WRITABLE));
 
   gnome_vfs_file_info_unref (vfs_info);
 
