@@ -457,8 +457,19 @@ theme_name_changed (GObject *settings,
                     GParamSpec *pspec,
                     AppearanceData *data)
 {
+  gchar *current_theme, *new_theme;
+
+  /* manually update GtkSettings to new gtk+ theme. */
+  g_object_get (settings, "gtk-theme-name", &current_theme, NULL);
+  new_theme = gconf_client_get_string (data->client, gconf_keys[GTK_THEMES], NULL);
+  
+  if (strcmp (current_theme, new_theme) != 0)
+    g_object_set (settings, "gtk-theme-name", new_theme, NULL);
+
+  g_free (current_theme);
+  g_free (new_theme);
+
   check_color_schemes_enabled (GTK_SETTINGS (settings), data);
-  /*gconf_client_set_string (data->client, gconf_keys[COLOR_SCHEME], "", NULL);*/
   update_color_buttons_from_settings (GTK_SETTINGS (settings), data);
 }
 
