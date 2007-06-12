@@ -671,10 +671,8 @@ theme_thumbnail_factory_init (int argc, char *argv[])
 GdkPixbuf *
 generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
 {
-  GdkDisplayManager *manager;
-  GdkDisplay *display, *default_display;
-  GdkScreen *screen;
   GObject *settings;
+  gchar *current_theme = NULL;
   GtkWidget *window, *vbox, *box, *stock_button, *checkbox, *radio;
   GtkRequisition requisition;
   GtkAllocation allocation;
@@ -683,15 +681,9 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
   GdkPixbuf *pixbuf, *ret;
   gint width, height;
 
-  display = gdk_display_open (gdk_get_display_arg_name ());
-  screen =  gdk_display_get_default_screen (display);
-
-  settings = G_OBJECT (gtk_settings_get_for_screen (screen));
+  settings = G_OBJECT (gtk_settings_get_default ());
+  g_object_get (settings, "gtk-theme-name", &current_theme, NULL);
   g_object_set (settings, "gtk-theme-name", info->name, NULL);
-
-  manager = gdk_display_manager_get ();
-  default_display = gdk_display_manager_get_default_display (manager);
-  gdk_display_manager_set_default_display (manager, display);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
@@ -747,8 +739,6 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
   fake_expose_widget (checkbox, pixmap, NULL);
   fake_expose_widget (radio, pixmap, NULL);
 
-  gdk_display_flush (display);
-  gtk_widget_destroy (window);
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, width, height);
@@ -759,8 +749,9 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
                                  GDK_INTERP_BILINEAR);
   g_object_unref (pixbuf);
 
-  gdk_display_manager_set_default_display (manager, default_display);
-  gdk_display_close (display);
+  gtk_widget_destroy (window);
+  g_object_set (settings, "gtk-theme-name", current_theme, NULL);
+  g_free (current_theme);
   
   return ret;
 }
