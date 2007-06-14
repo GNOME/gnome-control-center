@@ -24,6 +24,8 @@ gnome_appearance_properties_SOURCES = \
 	gnome-wp-utils.h \
 	gnome-wp-xml.c \
 	gnome-wp-xml.h \
+	theme-util.c \
+	theme-util.h \
 	wp-cellrenderer.c \
 	wp-cellrenderer.h
 

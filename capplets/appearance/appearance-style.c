@@ -22,36 +22,12 @@
 #include <string.h>
 #include <pango/pango.h>
 
+#include "theme-util.h"
 #include "gtkrc-utils.h"
-#include "gnome-theme-info.h"
 #include "gconf-property-editor.h"
 #include "theme-thumbnail.h"
 
-enum ThemeType {
-  GTK_THEMES,
-  METACITY_THEMES,
-  ICON_THEMES,
-  CURSOR_THEMES,
-  COLOR_SCHEME
-};
-
-enum {
-  COL_THUMBNAIL,
-  COL_LABEL,
-  COL_NAME,
-  NUM_COLS
-};
-
-static const gchar *gconf_keys[] = {
-  "/desktop/gnome/interface/gtk_theme",
-  "/apps/metacity/general/theme",
-  "/desktop/gnome/interface/icon_theme",
-  "/desktop/gnome/peripherals/mouse/cursor_theme",
-  "/desktop/gnome/interface/gtk_color_scheme"
-};
-
-
-static void prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type);
+static void prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type);
 static void update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data);
 static void update_color_buttons_from_settings (GtkSettings *settings, AppearanceData *data);
 static void check_color_schemes_enabled (GtkSettings *settings, AppearanceData *data);
@@ -86,9 +62,9 @@ style_init (AppearanceData *data)
   g_signal_connect (w, "response", (GCallback) style_response_cb, NULL);
   g_signal_connect (w, "delete_event", (GCallback) gtk_true, NULL);
 
-  prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), GTK_THEMES);
-  prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), METACITY_THEMES);
-  prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), ICON_THEMES);
+  prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), THEME_TYPE_GTK);
+  prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), THEME_TYPE_WINDOW);
+  prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), THEME_TYPE_ICON);
 
   w = glade_xml_get_widget (data->xml, "color_scheme_message_hbox");
   gtk_widget_set_no_show_all (w, TRUE);
@@ -113,34 +89,39 @@ style_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   /* "Reset To Defaults" button */
-   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "color_scheme_defaults_button")), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "color_scheme_defaults_button")), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
 }
 
 static void
-prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
+prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type)
 {
   GtkListStore *store;
   GList *l, *themes = NULL;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
   GtkTreeModel *sort_model;
+  const gchar *key;
 
   switch (type)
   {
-    case GTK_THEMES:
+    case THEME_TYPE_GTK:
       themes = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
+      key = GTK_THEME_KEY;
       break;
 
-    case METACITY_THEMES:
+    case THEME_TYPE_WINDOW:
       themes = gnome_theme_info_find_by_type (GNOME_THEME_METACITY);
+      key = METACITY_THEME_KEY;
       break;
 
-    case ICON_THEMES:
+    case THEME_TYPE_ICON:
       themes = gnome_theme_icon_info_find_all ();
+      key = ICON_THEME_KEY;
       break;
 
-    case CURSOR_THEMES:
+    case THEME_TYPE_CURSOR:
       themes = NULL; /* don't know what to do yet */
+      key = CURSOR_THEME_KEY;
 
     default:
       /* we don't deal with any other type of themes here */
@@ -158,9 +139,9 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
     GdkPixbuf *thumbnail;
     GtkTreeIter i;
 
-    if (type == GTK_THEMES || type == METACITY_THEMES) {
+    if (type == THEME_TYPE_GTK || type == THEME_TYPE_WINDOW) {
       name = ((GnomeThemeInfo *) l->data)->name;
-    } else if (type == ICON_THEMES) {
+    } else if (type == THEME_TYPE_ICON) {
       name = ((GnomeThemeIconInfo *) l->data)->name;
       label = ((GnomeThemeIconInfo *) l->data)->readable_name;
     }
@@ -170,21 +151,21 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
 
     switch (type)
     {
-      case GTK_THEMES:
+      case THEME_TYPE_GTK:
         thumbnail = generate_gtk_theme_thumbnail ((GnomeThemeInfo *) l->data);
         break;
 
-      case ICON_THEMES:
+      case THEME_TYPE_ICON:
         thumbnail = generate_icon_theme_thumbnail ((GnomeThemeIconInfo *) l->data);
         break;
-      
-      case METACITY_THEMES:
+
+      case THEME_TYPE_WINDOW:
         thumbnail = generate_metacity_theme_thumbnail ((GnomeThemeInfo *) l->data);
         break;
 
       default:
         thumbnail = NULL;
-    } 
+    }
 
     gtk_list_store_insert_with_values (store, &i, 0,
                                        COL_THUMBNAIL, thumbnail,
@@ -193,6 +174,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
     if (thumbnail)
       g_object_unref (thumbnail);
   }
+  g_list_free (themes);
 
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
@@ -207,7 +189,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
     NULL);
 
   column = gtk_tree_view_column_new ();
-  gtk_tree_view_column_pack_start (column, renderer, FALSE);  
+  gtk_tree_view_column_pack_start (column, renderer, FALSE);
   gtk_tree_view_column_add_attribute (column, renderer, "pixbuf", COL_THUMBNAIL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
 
@@ -218,11 +200,11 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
     NULL);
 
   column = gtk_tree_view_column_new ();
-  gtk_tree_view_column_pack_start (column, renderer, FALSE);  
+  gtk_tree_view_column_pack_start (column, renderer, FALSE);
   gtk_tree_view_column_add_attribute (column, renderer, "text", COL_LABEL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
 
-  gconf_peditor_new_tree_view (NULL, gconf_keys[type], list,
+  gconf_peditor_new_tree_view (NULL, key, list,
     "conv-to-widget-cb", conv_to_widget_cb,
     "conv-from-widget-cb", conv_from_widget_cb,
     NULL);
@@ -395,17 +377,17 @@ static void
 update_color_buttons_from_settings (GtkSettings *settings,
                                     AppearanceData *data)
 {
-  gchar *theme;
-  theme = gconf_client_get_string (data->client, gconf_keys[COLOR_SCHEME], NULL);
-  if (theme == NULL || strcmp (theme, "") == 0)
+  gchar *scheme;
+  scheme = gconf_client_get_string (data->client, COLOR_SCHEME_KEY, NULL);
+  if (scheme == NULL || strcmp (scheme, "") == 0)
   {
-    g_free (theme);
     gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
-    g_object_get (G_OBJECT (settings), "gtk-color-scheme", &theme, NULL);
+    g_free (scheme);
+    g_object_get (G_OBJECT (settings), "gtk-color-scheme", &scheme, NULL);
   }
 
-  update_color_buttons_from_string (theme, data);
-  g_free (theme);
+  update_color_buttons_from_string (scheme, data);
+  g_free (scheme);
 }
 
 static void
@@ -461,8 +443,8 @@ theme_name_changed (GObject *settings,
 
   /* manually update GtkSettings to new gtk+ theme. */
   g_object_get (settings, "gtk-theme-name", &current_theme, NULL);
-  new_theme = gconf_client_get_string (data->client, gconf_keys[GTK_THEMES], NULL);
-  
+  new_theme = gconf_client_get_string (data->client, GTK_THEME_KEY, NULL);
+
   if (strcmp (current_theme, new_theme) != 0)
     g_object_set (settings, "gtk-theme-name", new_theme, NULL);
 
@@ -504,9 +486,8 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   new_scheme = g_strconcat (fg, bg, text, base, selected_fg, selected_bg, NULL);
 
   /* Currently we assume this has only been called when one of the colours has
-   * actually changed, so we don't check the original key first
-   */
-  gconf_client_set_string (data->client, gconf_keys[COLOR_SCHEME], new_scheme, NULL);
+   * actually changed, so we don't check the original key first */
+  gconf_client_set_string (data->client, COLOR_SCHEME_KEY, new_scheme, NULL);
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), TRUE);
 
@@ -522,6 +503,6 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 static void
 color_scheme_defaults_button_clicked_cb (GtkWidget *button, AppearanceData *data)
 {
-  gconf_client_set_string (data->client, gconf_keys[COLOR_SCHEME], "", NULL);
+  gconf_client_set_string (data->client, COLOR_SCHEME_KEY, "", NULL);
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
 }

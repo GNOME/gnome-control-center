@@ -55,4 +55,5 @@ typedef struct {
   GtkListStore *theme_store;
   GSList *theme_queue;
   GnomeThemeMetaInfo *theme_custom;
+  GdkPixbuf *theme_icon;
 } AppearanceData;

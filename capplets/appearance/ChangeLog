@@ -1,3 +1,26 @@
+2007-06-14  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* theme-util.c: (theme_delete), (theme_model_iter_last):
+	* theme-util.h: new files
+
+	* appearance.glade: default delete buttons to insensitive,
+	change label for "Custom" key, adjust column ids for icon view
+
+	* appearance-style.c: (style_init), (prepare_list),
+	(update_color_buttons_from_settings), (theme_name_changed),
+	(color_button_clicked_cb),
+	(color_scheme_defaults_button_clicked_cb):
+	* appearance-themes.c: (theme_get_selected_name),
+	(theme_get_selected), (theme_select_iter), (theme_select_name),
+	(theme_is_equal), (theme_set_custom_from_theme),
+	(theme_changed_on_disk_cb), (theme_custom_cb), (theme_delete_cb),
+	(theme_details_changed_cb), (theme_color_scheme_changed_cb),
+	(theme_gconf_changed), (theme_postinit), (themes_init),
+	(themes_shutdown):
+	* appearance.h: improvements all around the block (metatheme
+	deletion now working, and custom theme working much better)
+
 2007-06-09  Denis Washington  <denisw@svn.gnome.org>
 
 	* appearance-style.c: (theme_name_changed):
