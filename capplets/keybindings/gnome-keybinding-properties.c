@@ -75,14 +75,14 @@ get_real_model (GtkTreeView *tree_view)
 {
   GtkTreeModel *model;
   GtkTreeModel *submodel;
-  
+
   model = gtk_tree_view_get_model (tree_view);
 
   if (model)
     submodel = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (model));
   else
     submodel = NULL;
-  
+
   return submodel;
 }
 
@@ -119,7 +119,7 @@ binding_from_string (const char             *str,
                      EggVirtualModifierType *accelerator_mods)
 {
   g_return_val_if_fail (accelerator_key != NULL, FALSE);
-  
+
   if (str == NULL || (str && strcmp (str, "disabled") == 0))
     {
       *accelerator_key = 0;
@@ -129,7 +129,7 @@ binding_from_string (const char             *str,
     }
 
   egg_accelerator_parse_virtual (str, accelerator_key, keycode, accelerator_mods);
-  
+
   if (*accelerator_key == 0)
     return FALSE;
   else
@@ -144,7 +144,7 @@ accel_set_func (GtkTreeViewColumn *tree_column,
                 gpointer           data)
 {
   KeyEntry *key_entry;
-  
+
   gtk_tree_model_get (model, iter,
                       KEYENTRY_COLUMN, &key_entry,
                       -1);
@@ -227,7 +227,7 @@ keyentry_sort_func (GtkTreeModel *model,
   key_entry_a = NULL;
   gtk_tree_model_get (model, a,
                       KEYENTRY_COLUMN, &key_entry_a,
-                      -1);  
+                      -1);
 
   key_entry_b = NULL;
   gtk_tree_model_get (model, b,
@@ -288,14 +288,14 @@ clear_old_model (GladeXML  *dialog)
       GtkTreeModel *sort_model;
 
       model = (GtkTreeModel *) gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
-  
+
       sort_model = gtk_tree_model_sort_new_with_model (model);
 
       gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model),
                                        KEYENTRY_COLUMN,
                                        keyentry_sort_func,
                                        NULL, NULL);
-  
+
       gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), sort_model);
 
       g_object_unref (model);
@@ -903,7 +903,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
       char *name;
 
       name = binding_name (keyval, keycode, mask, TRUE);
-      
+
       dialog =
         gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
                                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
@@ -1023,8 +1023,8 @@ real_start_editing_cb (IdleData *idle_data)
 }
 
 static gboolean
-start_editing_kb_cb (GtkTreeView *treeview, 
-			  GtkTreePath *path, 
+start_editing_kb_cb (GtkTreeView *treeview,
+			  GtkTreePath *path,
 			  GtkTreeViewColumn *column,
 			  gpointer user_data)
 {
@@ -1105,7 +1105,7 @@ setup_dialog (GladeXML *dialog)
   g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 		    "row-activated",
 		    G_CALLBACK (start_editing_kb_cb), dialog);
-		    
+
   column = gtk_tree_view_column_new_with_attributes (_("Action"),
 						     gtk_cell_renderer_text_new (),
 						     "text", DESCRIPTION_COLUMN,
@@ -1113,8 +1113,8 @@ setup_dialog (GladeXML *dialog)
   gtk_tree_view_column_set_resizable (column, FALSE);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
-  gtk_tree_view_column_set_sort_column_id (column, DESCRIPTION_COLUMN);  
-  
+  gtk_tree_view_column_set_sort_column_id (column, DESCRIPTION_COLUMN);
+
   renderer = (GtkCellRenderer *) g_object_new (EGG_TYPE_CELL_RENDERER_KEYS,
 					       "editable", TRUE,
 					       "accel_mode", EGG_CELL_RENDERER_KEYS_MODE_X,
@@ -1135,13 +1135,13 @@ setup_dialog (GladeXML *dialog)
   gtk_tree_view_column_set_resizable (column, FALSE);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
-  gtk_tree_view_column_set_sort_column_id (column, KEYENTRY_COLUMN); 
+  gtk_tree_view_column_set_sort_column_id (column, KEYENTRY_COLUMN);
 
   gconf_client_add_dir (client, "/apps/gnome_keybinding_properties", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_notify_add (client,
 			   "/apps/metacity/general/num_workspaces",
-			   (GConfClientNotifyFunc) &key_entry_controlling_key_changed,
+			   (GConfClientNotifyFunc) key_entry_controlling_key_changed,
 			   dialog, NULL, NULL);
   g_object_unref (client);
 
@@ -1154,7 +1154,7 @@ setup_dialog (GladeXML *dialog)
   capplet_set_icon (widget, "gnome-settings-keybindings");
   gtk_widget_show (widget);
 
-  g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK(cb_dialog_response), dialog);
+  g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK (cb_dialog_response), dialog);
 }
 
 int
@@ -1180,7 +1180,7 @@ main (int argc, char *argv[])
   dialog = create_dialog ();
   wm_common_register_window_manager_change ((GFunc) reload_key_entries, dialog);
   setup_dialog (dialog);
-  
+
   gtk_main ();
 
   g_object_unref (dialog);
