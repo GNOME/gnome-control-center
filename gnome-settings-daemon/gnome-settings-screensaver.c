@@ -73,7 +73,7 @@ GType
 gnome_settings_module_screensaver_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
 		static const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleScreensaverClass),
@@ -86,12 +86,12 @@ gnome_settings_module_screensaver_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_screensaver_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleScreensaver",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -133,7 +133,7 @@ gnome_settings_module_screensaver_initialize (GnomeSettingsModule *module, GConf
 		g_free (ss_cmd);
 	} else
 		module_ss->have_xscreensaver = FALSE;
-	
+
 	return TRUE;
 }
 
@@ -144,7 +144,7 @@ key_toggled_cb (GtkWidget *toggle, gpointer data)
 	GnomeSettingsModuleScreensaver *module_ss = data;
 
 	client = gnome_settings_module_get_config_client (module_ss);
-	gconf_client_set_bool (client, 
+	gconf_client_set_bool (client,
 			       SHOW_STARTUP_ERRORS_KEY,
 			       gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle))
 			       ? 0 : 1,
@@ -184,13 +184,14 @@ gnome_settings_module_screensaver_start (GnomeSettingsModule *module)
 	}
 
 	dialog = gtk_message_dialog_new (NULL,
-					 0, 
+					 0,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
 					 _("There was an error starting up the screensaver:\n\n"
 					 "%s\n\n"
 					 "Screensaver functionality will not work in this session."),
 					 gerr->message);
+	g_error_free (gerr);
 
 	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy),
@@ -206,12 +207,12 @@ gnome_settings_module_screensaver_start (GnomeSettingsModule *module)
 				  module_ss);
 	else
 		gtk_widget_set_sensitive (toggle, FALSE);
-					  
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), 
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
 			    toggle,
 			    FALSE, FALSE, 0);
 
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);		
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	gtk_widget_show (dialog);
 
