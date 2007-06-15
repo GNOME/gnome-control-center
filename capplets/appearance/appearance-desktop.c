@@ -130,22 +130,14 @@ wp_props_load_wallpaper (gchar *key,
   pixbuf = gnome_wp_item_get_thumbnail (item, data->wp_thumbs);
   gnome_wp_item_update_description (item);
 
+  gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
+                      0, pixbuf,
+                      1, item->description,
+                      2, item->filename,
+                      -1);
+
   if (pixbuf != NULL)
-  {
-    gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
-                        0, pixbuf,
-                        1, item->description,
-                        2, item->filename,
-                        -1);
     g_object_unref (pixbuf);
-  }
-  else
-  {
-    gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
-                        1, item->description,
-                        2, item->filename,
-                        -1);
-  }
 
   path = gtk_tree_model_get_path (data->wp_model, &iter);
   item->rowref = gtk_tree_row_reference_new (data->wp_model, path);
@@ -350,7 +342,8 @@ wp_scale_type_changed (GtkComboBox *combobox,
                       &iter,
                       0, pixbuf,
                       -1);
-  g_object_unref (pixbuf);
+  if (pixbuf != NULL)
+    g_object_unref (pixbuf);
 
   gconf_client_set_string (data->client, WP_OPTIONS_KEY, item->options, NULL);
 }
@@ -391,7 +384,9 @@ wp_shade_type_changed (GtkWidget *combobox,
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
                       0, pixbuf,
                       -1);
-  g_object_unref (pixbuf);
+  if (pixbuf != NULL)
+    g_object_unref (pixbuf);
+
   gconf_client_set_string (data->client, WP_SHADING_KEY,
                            item->shade_type, NULL);
 }
@@ -895,7 +890,7 @@ desktop_init (AppearanceData *data)
   GtkFileFilter *filter;
 
   data->wp_update_gconf = TRUE;
-  
+
   data->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
   data->wp_thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
@@ -944,7 +939,7 @@ desktop_init (AppearanceData *data)
                 "xpad", 5,
                 "ypad", 5,
                 NULL);
-  
+
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (data->wp_view),
                               data->wp_cell,
                               TRUE);

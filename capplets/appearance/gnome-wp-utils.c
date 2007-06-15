@@ -36,7 +36,7 @@ GdkPixbuf * gnome_wp_pixbuf_new_gradient (GtkOrientation orientation,
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
   d = gdk_pixbuf_get_pixels (pixbuf);
   rowstride = gdk_pixbuf_get_rowstride (pixbuf);
-  
+
   dr = c2->red - c1->red;
   dg = c2->green - c1->green;
   db = c2->blue - c1->blue;
@@ -112,7 +112,7 @@ GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
   gdouble cx, cy;
   gint dwidth, dheight;
   gint swidth, sheight;
-  guint alpha = 255;
+  const guint alpha = 255;
 
   if (dest_pixbuf == NULL) {
     return gdk_pixbuf_copy (src_pixbuf);
@@ -120,6 +120,8 @@ GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
 
   tmpbuf = gdk_pixbuf_scale_simple (src_pixbuf, scaled_width, scaled_height,
 				    GDK_INTERP_BILINEAR);
+  if (!tmpbuf)
+    return NULL;
 
   swidth = gdk_pixbuf_get_width (tmpbuf);
   sheight = gdk_pixbuf_get_height (tmpbuf);

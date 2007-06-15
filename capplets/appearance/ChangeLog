@@ -1,3 +1,11 @@
+2007-06-15  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_props_load_wallpaper),
+	(wp_scale_type_changed), (wp_shade_type_changed):
+	* gnome-wp-utils.c: (gnome_wp_pixbuf_tile): be extra careful when
+	generating pixbufs (should mean we just get no thumbs instead of
+	assertion failures, bug #403160)
+
 2007-06-14  Jens Granseuer  <jensgr@gmx.net>
 
 	* Makefile.am:
