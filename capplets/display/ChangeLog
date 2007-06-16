@@ -1,3 +1,9 @@
+2007-06-16  Jens Granseuer  <jensgr@gmx.net>
+
+	* main.c: (run_revert_dialog), (cb_dialog_response): don't make the
+	revert dialog transient since it's actually never on screen at the
+	same time as the main dialog. Closes bug #448160.
+
 2007-05-22  Jens Granseuer  <jensgr@gmx.net>
 
 	* main.c: (get_current_resolution): surivive XRandR returning weird

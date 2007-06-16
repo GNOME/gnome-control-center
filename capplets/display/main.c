@@ -721,8 +721,7 @@ save_timeout_callback (gpointer _data)
 }
 
 static int
-run_revert_dialog (struct DisplayInfo *info,
-		   GtkWidget *parent)
+run_revert_dialog (struct DisplayInfo *info)
 {
   GtkWidget *dialog;
   GtkWidget *hbox;
@@ -736,8 +735,6 @@ run_revert_dialog (struct DisplayInfo *info,
   char *str;
 
   dialog = gtk_dialog_new ();
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
   gtk_container_set_border_width (GTK_CONTAINER (dialog), 12);
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
@@ -877,7 +874,7 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
       if (apply_config (info))
 	{
 	  gtk_widget_hide(GTK_WIDGET(dialog));
-	  if (!run_revert_dialog (info, GTK_WIDGET (dialog)))
+	  if (!run_revert_dialog (info))
 	    {
 	      gtk_widget_show(GTK_WIDGET(dialog));
 	      revert_config (info);
