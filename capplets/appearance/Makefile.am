@@ -24,6 +24,8 @@ gnome_appearance_properties_SOURCES = \
 	gnome-wp-utils.h \
 	gnome-wp-xml.c \
 	gnome-wp-xml.h \
+	theme-installer.c \
+	theme-installer.h \
 	theme-util.c \
 	theme-util.h \
 	wp-cellrenderer.c \
@@ -42,11 +44,11 @@ dist_glade_DATA = appearance.glade
 
 pixmapdir = $(pkgdatadir)/pixmaps
 dist_pixmap_DATA = \
-        theme-thumbnailing.png \        
         subpixel-bgr.png \
         subpixel-rgb.png \
         subpixel-vbgr.png \
-        subpixel-vrgb.png
+        subpixel-vrgb.png \
+        theme-thumbnailing.png
 
 wallpaperdir = $(datadir)/gnome-background-properties
 

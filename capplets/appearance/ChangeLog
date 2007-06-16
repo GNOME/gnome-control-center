@@ -1,3 +1,18 @@
+2007-06-16  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* appearance-style.c: (prepare_list):
+	* appearance-themes.c: (theme_install_cb), (theme_delete_cb),
+	(theme_details_changed_cb):
+	* theme-installer.c: (cleanup_tmp_dir), (file_theme_type),
+	(missing_utility_message_dialog), (transfer_done_tgz_tbz),
+	(transfer_done_archive), (gnome_theme_install_real),
+	(transfer_done_cb), (gnome_theme_install_from_uri),
+	(gnome_theme_installer_run):
+	* theme-installer.h: add initial support for installing themes,
+	includes support for packages containing more than one theme
+	(bug #409624)
+
 2007-06-15  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-desktop.c: (wp_props_load_wallpaper),

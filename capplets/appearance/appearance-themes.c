@@ -21,6 +21,7 @@
 #include "appearance.h"
 #include "theme-thumbnail.h"
 #include "gnome-theme-apply.h"
+#include "theme-installer.h"
 #include "theme-util.h"
 
 #include <glib/gi18n.h>
@@ -398,7 +399,8 @@ theme_custom_cb (GtkWidget *button, AppearanceData *data)
 static void
 theme_install_cb (GtkWidget *button, AppearanceData *data)
 {
-  /* TODO: Install a new theme */
+  gnome_theme_installer_run (
+      GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")), NULL);
 }
 
 static void
@@ -436,9 +438,6 @@ theme_delete_cb (GtkWidget *button, AppearanceData *data)
     g_list_free (selected);
     g_free (name);
   }
-
-
-  /* TODO: Delete the selected theme */
 }
 
 static void
@@ -469,6 +468,7 @@ theme_details_changed_cb (AppearanceData *data)
       if (theme_is_equal (gconf_theme, info)) {
         theme_select_name (icon_view, info->name);
         done = TRUE;
+        break;
       }
     }
     g_list_free (theme_list);
