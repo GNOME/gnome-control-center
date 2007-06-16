@@ -55,7 +55,9 @@ wallpaperdir = $(datadir)/gnome-background-properties
 @INTLTOOL_DESKTOP_RULE@
 
 desktopdir = $(datadir)/applications
-desktop_in_files = gnome-appearance-properties.desktop.in
+desktop_in_files = \
+	gnome-appearance-properties.desktop.in \
+	gnome-theme-installer.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_XML_RULE@

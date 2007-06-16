@@ -24,6 +24,7 @@
 #include "appearance-themes.h"
 #include "appearance-style.h"
 #include "appearance-ui.h"
+#include "theme-installer.h"
 #include "theme-thumbnail.h"
 #include "activate-settings-daemon.h"
 #include "capplet-util.h"
@@ -39,6 +40,10 @@ init_appearance_data (int *argc, char ***argv)
   AppearanceData *data = NULL;
   gchar *gladefile;
   GladeXML *ui;
+
+  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
 
   g_thread_init (NULL);
   theme_thumbnail_factory_init (*argc, *argv);
@@ -85,11 +90,27 @@ main (int argc, char **argv)
   AppearanceData *data;
   GtkWidget *win;
   GnomeProgram *program;
+  gchar *install_filename = NULL;
+  GOptionContext *option_context;
+  GOptionEntry option_entries[] = {
+	  { "install-theme",
+	    'i',
+	    G_OPTION_FLAG_IN_MAIN,
+	    G_OPTION_ARG_FILENAME,
+	    &install_filename,
+	    N_("Specify the filename of a theme to install"),
+	    N_("filename")
+	  },
+	  { NULL }
+  };
 
   /* init */
   data = init_appearance_data (&argc, &argv);
   if (!data)
     return 1;
+
+  option_context = g_option_context_new (NULL);
+  g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
 
   /* this appears to be required for gnome_wm_manager_init (), which is called
    * inside gnome_meta_theme_set ();
@@ -98,7 +119,12 @@ main (int argc, char **argv)
   program = gnome_program_init ("appearance", VERSION,
         LIBGNOMEUI_MODULE, argc, argv,
         GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+        GNOME_PARAM_GOPTION_CONTEXT, option_context,
         NULL);
+
+  if (install_filename != NULL)
+     gnome_theme_install_from_uri (install_filename, NULL);
+  g_free (install_filename);
 
   /* init tabs */
   themes_init (data);
