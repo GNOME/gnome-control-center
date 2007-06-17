@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-15 03:20+0100\n"
-"PO-Revision-Date: 2007-06-15 11:29+0200\n"
+"POT-Creation-Date: 2007-06-17 03:44+0100\n"
+"PO-Revision-Date: 2007-06-17 13:13+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,11 +65,12 @@ msgid "No Image"
 msgstr "Sin imagen"
 
 #: ../capplets/about-me/gnome-about-me.c:666
-#: ../capplets/appearance/appearance-desktop.c:1024
+#: ../capplets/appearance/appearance-desktop.c:1019
 msgid "Images"
 msgstr "Imágenes"
 
 #: ../capplets/about-me/gnome-about-me.c:670
+#: ../capplets/appearance/theme-installer.c:600
 msgid "All Files"
 msgstr "Todos los archivos"
 
@@ -1052,11 +1053,11 @@ msgstr "puntos por pulgada"
 msgid "gtk-delete"
 msgstr "gtk-delete"
 
-#: ../capplets/appearance/appearance-desktop.c:1007
+#: ../capplets/appearance/appearance-desktop.c:1002
 msgid "Add Wallpaper"
 msgstr "Añadir tapiz"
 
-#: ../capplets/appearance/appearance-desktop.c:1028
+#: ../capplets/appearance/appearance-desktop.c:1023
 msgid "All files"
 msgstr "Todos los archivos"
 
@@ -1106,6 +1107,14 @@ msgstr "Usar la tipografía anterior"
 msgid "Use selected font"
 msgstr "Usar la tipografía seleccionada"
 
+#: ../capplets/appearance/appearance-main.c:101
+msgid "Specify the filename of a theme to install"
+msgstr "Especifique el nombre de archivo del tema a instalar"
+
+#: ../capplets/appearance/appearance-main.c:102
+msgid "filename"
+msgstr "nombre de archivo"
+
 #: ../capplets/appearance/appearance-themes.c:541
 #: ../capplets/default-applications/gnome-da-capplet.c:1098
 #: ../capplets/sound/sound-properties-capplet.c:327
@@ -1119,6 +1128,14 @@ msgstr "Apariencia"
 #: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:2
 msgid "Customize the look of the desktop"
 msgstr "Personalizar la apariencia del escritorio"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "Instala paquetes de temas para varias partes del escritorio"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "Instalador de temas"
 
 #: ../capplets/appearance/gnome-theme-package.xml.in.h:1
 msgid "Gnome Theme Package"
@@ -1149,6 +1166,107 @@ msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "píxel"
 msgstr[1] "píxeles"
+
+#: ../capplets/appearance/theme-installer.c:149
+#, c-format
+msgid ""
+"Cannot install theme.\n"
+"The %s utility is not installed."
+msgstr ""
+"No se puede instalar el tema.\n"
+"La utilidad %s no está instalada."
+
+#: ../capplets/appearance/theme-installer.c:197
+msgid ""
+"Cannot install theme.\n"
+"There was a problem while extracting the theme."
+msgstr ""
+"No se puede instalar el tema.\n"
+"Hubo un problema al extraer el tema."
+
+#: ../capplets/appearance/theme-installer.c:237
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr "El tema de GNOME %s se instaló correctamente"
+
+#: ../capplets/appearance/theme-installer.c:249
+msgid "The theme is an engine. You need to compile it."
+msgstr "El tema es un motor. Necesita compilarlo."
+
+#: ../capplets/appearance/theme-installer.c:258
+msgid "The file format is invalid"
+msgstr "El formato del archivo no es válido"
+
+#: ../capplets/appearance/theme-installer.c:303
+msgid "Installation Failed"
+msgstr "Falló la instalación"
+
+#: ../capplets/appearance/theme-installer.c:314
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr "Se ha instalado el tema «%s»."
+
+#: ../capplets/appearance/theme-installer.c:320
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "¿Desea aplicarlo ahora, o mantener su tema actual?"
+
+#: ../capplets/appearance/theme-installer.c:322
+msgid "Keep Current Theme"
+msgstr "Mantener el tema actual"
+
+#: ../capplets/appearance/theme-installer.c:324
+msgid "Apply New Theme"
+msgstr "Aplicar el nuevo tema"
+
+#: ../capplets/appearance/theme-installer.c:394
+msgid "This theme is not in a supported format."
+msgstr "Este tema no tiene un formato soportado."
+
+#: ../capplets/appearance/theme-installer.c:419
+msgid "Failed to create temporary directory"
+msgstr "Falló al crear la carpeta temporal"
+
+#: ../capplets/appearance/theme-installer.c:477
+msgid "No theme file location specified to install"
+msgstr "No se ha especificado ninguna ubicación del archivo del tema para instalar"
+
+#: ../capplets/appearance/theme-installer.c:497
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Permisos insuficientes para instalar el tema en:\n"
+"%s"
+
+#: ../capplets/appearance/theme-installer.c:516
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
+"%s es la ruta donde se van a instalar los archivos del tema. Esto no puede "
+"seleccionarse como ubicación de origen"
+
+#: ../capplets/appearance/theme-installer.c:537
+msgid "The file format is invalid."
+msgstr "El formato del archivo no es válido."
+
+#: ../capplets/appearance/theme-installer.c:590
+msgid "Select Theme"
+msgstr "Seleccione un tema"
+
+#: ../capplets/appearance/theme-installer.c:593
+msgid "Theme Packages"
+msgstr "Paquete de tema"
+
+#: ../capplets/appearance/theme-util.c:42
+msgid "Would you like to remove this theme?"
+msgstr "¿Quiere eliminar este tema?"
+
+#: ../capplets/appearance/theme-util.c:88
+msgid "Theme cannot be deleted"
+msgstr "No se puede borrar el tema"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1812,23 +1930,23 @@ msgstr[1] ""
 "Probando la configuración nueva. Si no responde en %d segundos se recuperará "
 "la configuración anterior."
 
-#: ../capplets/display/main.c:744
+#: ../capplets/display/main.c:741
 msgid "Keep Resolution"
 msgstr "Conservar resolución"
 
-#: ../capplets/display/main.c:748
+#: ../capplets/display/main.c:745
 msgid "Do you want to keep this resolution?"
 msgstr "¿Desea conservar esta resolución?"
 
-#: ../capplets/display/main.c:773
+#: ../capplets/display/main.c:770
 msgid "Use _previous resolution"
 msgstr "Usar la resolución _anterior"
 
-#: ../capplets/display/main.c:773
+#: ../capplets/display/main.c:770
 msgid "_Keep resolution"
 msgstr "C_onservar esta resolución"
 
-#: ../capplets/display/main.c:923
+#: ../capplets/display/main.c:920
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1836,7 +1954,7 @@ msgstr ""
 "El servidor X no soporta la extensión XRandR. Los cambios de resolución de "
 "la pantalla durante la sesión no están disponibles."
 
-#: ../capplets/display/main.c:931
+#: ../capplets/display/main.c:928
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -2907,7 +3025,7 @@ msgstr ""
 "\n"
 "El salvapantallas no funcionará en esta sesión."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:199
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr "_No mostrar este mensaje otra vez"
 
@@ -3621,7 +3739,8 @@ msgstr ""
 "Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002 (Revisor).\n"
 "Lucas Di Pentima <lucas@lunix.com.ar>, 2002.\n"
 "Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2002,2003.\n"
-"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, 2006.\n"
+"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, "
+"2006.\n"
 "Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2007.\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2007."
 
