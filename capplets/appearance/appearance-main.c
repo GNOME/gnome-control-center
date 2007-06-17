@@ -88,21 +88,29 @@ int
 main (int argc, char **argv)
 {
   AppearanceData *data;
-  GtkWidget *win;
   GnomeProgram *program;
+  GtkWidget *w;
+
   gchar *install_filename = NULL;
+  gchar *start_page = NULL;
   GOptionContext *option_context;
   GOptionEntry option_entries[] = {
-	  { "install-theme",
-	    'i',
-	    G_OPTION_FLAG_IN_MAIN,
-	    G_OPTION_ARG_FILENAME,
-	    &install_filename,
-	    N_("Specify the filename of a theme to install"),
-	    N_("filename")
-	  },
-	  { NULL }
-  };
+      { "install-theme",
+        'i',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_FILENAME,
+        &install_filename,
+        N_("Specify the filename of a theme to install"),
+        N_("filename") },
+      { "show-page",
+        'p',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_STRING,
+        &start_page,
+        N_("Specify the name of the page to show"),
+        N_("page") },
+      { NULL }
+    };
 
   /* init */
   data = init_appearance_data (&argc, &argv);
@@ -134,12 +142,31 @@ main (int argc, char **argv)
   ui_init (data);
 
   /* prepare the main window */
-  win = glade_xml_get_widget (data->xml, "appearance_window");
-  capplet_set_icon (win, "gnome-settings-theme");
-  gtk_widget_show_all (win);
+  w = glade_xml_get_widget (data->xml, "appearance_window");
+  capplet_set_icon (w, "gnome-settings-theme");
+  gtk_widget_show_all (w);
 
-  g_signal_connect_after (G_OBJECT (win), "response",
+  g_signal_connect_after (G_OBJECT (w), "response",
                           G_CALLBACK (main_window_response), data);
+
+  if (start_page != NULL) {
+    gchar *page_name;
+
+    page_name = g_strconcat (start_page, "_vbox", NULL);
+    g_free (start_page);
+
+    w = glade_xml_get_widget (data->xml, page_name);
+    if (w != NULL) {
+      GtkNotebook *nb;
+      gint pindex;
+
+      nb = GTK_NOTEBOOK (glade_xml_get_widget (data->xml, "main_notebook"));
+      pindex = gtk_notebook_page_num (nb, w);
+      if (pindex != -1)
+        gtk_notebook_set_current_page (nb, pindex);
+    }
+    g_free (page_name);
+  }
 
   /* start the mainloop */
   gtk_main ();
