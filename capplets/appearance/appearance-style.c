@@ -192,10 +192,6 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type)
   gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
 
   renderer = gtk_cell_renderer_text_new ();
-  g_object_set (G_OBJECT (renderer),
-    "weight", PANGO_WEIGHT_BOLD,
-    "weight-set", TRUE,
-    NULL);
 
   column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, renderer, FALSE);
