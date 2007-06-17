@@ -715,6 +715,38 @@ wp_dragged_image (GtkWidget *widget,
   }
 }
 
+#if GTK_CHECK_VERSION (2,11,0)
+static gboolean
+wp_view_tooltip_cb (GtkWidget  *widget,
+                    gint x,
+                    gint y,
+                    gboolean keyboard_mode,
+                    GtkTooltip *tooltip,
+                    AppearanceData *data)
+{
+  GtkTreePath *path;
+  GtkTreeIter iter;
+  gchar *wpfile;
+  GnomeWPItem *item;
+
+  path = gtk_icon_view_get_path_at_pos (data->wp_view, x, y);
+
+  if (path == NULL)
+    return FALSE;
+
+  gtk_tree_model_get_iter (data->wp_model, &iter, path);
+  gtk_tree_path_free (path);
+
+  gtk_tree_model_get (data->wp_model, &iter, 2, &wpfile, -1);
+  item = g_hash_table_lookup (data->wp_hash, wpfile);
+
+  gtk_tooltip_set_markup (tooltip,
+                          g_strdup_printf ("%s", item->description));
+
+  return TRUE;
+}
+#endif
+
 static gint
 wp_list_sort (GtkTreeModel *model,
               GtkTreeIter *a, GtkTreeIter *b,
@@ -889,6 +921,13 @@ desktop_init (AppearanceData *data)
   GtkWidget *add_button;
   GtkFileFilter *filter;
 
+#if GTK_CHECK_VERSION (2,11,0)
+  GtkSettings *settings;
+
+  settings = gtk_settings_get_default ();
+  g_object_set (G_OBJECT (settings), "gtk-tooltip-timeout", 500, NULL);
+#endif
+
   data->wp_update_gconf = TRUE;
 
   data->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
@@ -927,6 +966,10 @@ desktop_init (AppearanceData *data)
 
   data->wp_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "wp_view"));
   gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
+
+#if GTK_CHECK_VERSION (2,11,0)
+  g_object_set (G_OBJECT (data->wp_view), "has-tooltip", TRUE, NULL);
+#endif
 
   g_signal_connect_after (G_OBJECT (data->wp_view), "realize",
                           G_CALLBACK (wp_select_after_realize), data);
@@ -996,6 +1039,11 @@ desktop_init (AppearanceData *data)
 
   g_signal_connect (G_OBJECT (data->wp_view), "selection-changed",
                     G_CALLBACK (wp_props_wp_selected), data);
+
+#if GTK_CHECK_VERSION (2,11,0)
+  g_signal_connect (G_OBJECT (data->wp_view), "query-tooltip",
+                    G_CALLBACK (wp_view_tooltip_cb), data);
+#endif
 
   wp_set_sensitivities (data);
 

@@ -354,32 +354,20 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   g_free (item->description);
 
   if (!strcmp (item->filename, "(none)")) {
-    item->description = g_strdup_printf ("<b>%s</b>", item->name);
+    item->description = g_strdup (item->name);
   } else {
-    gchar * info;
-
-    /*
-       Translators: This message is used to render the type and size of the
-       background images in gnome-background-properites. The first "%s" will
-       be replaced by the image type, and the two "%d %s"s will be replaced
-       with the images' dimensions. For example, in US English, this may be
-       displayed as "JPEG Image, 1600 pixels x 1200 pixels".
-
-       Do not translate the "background size|" type. Remove it from the
-       translation.
-    */
-    info = g_strdup_printf (Q_("background size|%s, %d %s x %d %s"),
-			    gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-			    item->width,
-			    ngettext ("pixel", "pixels", item->width),
-			    item->height,
-			    ngettext ("pixel", "pixels", item->height));
-
-    item->description = g_markup_printf_escaped ("<b>%s</b>\n"
-						 "%s",
-						 item->name,
-						 info);
-
-    g_free (info);
+    item->description =
+        g_markup_printf_escaped (_("<big><b>%s</b></big>\n"
+                                   "<b>Width:</b> %d %s\n"
+                                   "<b>Height:</b> %d %s\n"
+                                   "<b>Type:</b> %s\n"
+                                   "<b>Location:</b> %s"),
+                                 item->name,
+                                 item->width,
+                                 ngettext ("pixel", "pixels", item->width),
+                                 item->height,
+                                 ngettext ("pixel", "pixels", item->height),
+                                 gnome_vfs_mime_get_description (item->fileinfo->mime_type),
+                                 g_path_get_dirname (item->filename));
   }
 }

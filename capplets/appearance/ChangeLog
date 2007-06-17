@@ -1,5 +1,13 @@
 2007-06-17  Denis Washington  <denisw@svn.gnome.org>
 
+	* appearance-desktop.c: (desktop_init): (wp_view_tooltip_cb):
+	* gnome-wp-item.c: (gnome_wp_item_update_description):
+	Added metadata tooltips to the thumbnails in the Background tab.
+	Needs GTK+ 2.11 to compile (but is surrounded with GTK_CHECK_VERSION()
+	for compilation with older gtk+ versions).
+
+2007-06-17  Denis Washington  <denisw@svn.gnome.org>
+
 	* appearance-style.c: (prepare_list):
 	Change the weight of the theme titles from bold to normal in the Theme
 	Details window's lists.
