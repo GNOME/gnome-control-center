@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-08 06:06+0300\n"
-"PO-Revision-Date: 2007-05-08 06:23+0300\n"
+"POT-Creation-Date: 2007-06-19 00:44+0300\n"
+"PO-Revision-Date: 2007-06-19 00:43+0300\n"
 "Last-Translator: Alexander Shopov <ash@contact.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,13 +58,12 @@ msgid "No Image"
 msgstr "Няма изображение"
 
 #: ../capplets/about-me/gnome-about-me.c:666
-#: ../capplets/background/gnome-wp-capplet.c:1022
+#: ../capplets/appearance/appearance-desktop.c:1067
 msgid "Images"
 msgstr "Изображения"
 
 #: ../capplets/about-me/gnome-about-me.c:670
-#: ../capplets/background/gnome-wp-capplet.c:1026
-#: ../capplets/theme-switcher/gnome-theme-installer.c:686
+#: ../capplets/appearance/theme-installer.c:603
 msgid "All Files"
 msgstr "Всички филтри"
 
@@ -108,9 +107,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/appearance/appearance.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
 
@@ -721,124 +720,565 @@ msgstr "пиксела/сек."
 msgid "seconds"
 msgstr "секунди"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "Смяна на настройките на фона на работния плот"
+#: ../capplets/appearance/appearance.glade.h:2
+msgid "<b>C_olors</b>"
+msgstr "<b>_Цветове</b>"
 
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "Фон на работния плот"
+#: ../capplets/appearance/appearance.glade.h:3
+#, fuzzy
+msgid "<b>Hinting</b>"
+msgstr "<b>Подсказване</b>:"
 
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
+#: ../capplets/appearance/appearance.glade.h:4
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>Менюта и ленти с инструменти</b>"
+
+#: ../capplets/appearance/appearance.glade.h:5
+msgid "<b>Preview</b>"
+msgstr "<b>Предварителен преглед</b>"
+
+#: ../capplets/appearance/appearance.glade.h:6
+#, fuzzy
+msgid "<b>Rendering</b>"
+msgstr "<b>Изписване на шрифтовете на екрана</b>"
+
+#: ../capplets/appearance/appearance.glade.h:7
+msgid "<b>Smoothing</b>"
+msgstr "<b>Заглаждане</b>"
+
+#: ../capplets/appearance/appearance.glade.h:8
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>Подпикселна подредба</b>"
+
+#: ../capplets/appearance/appearance.glade.h:9
+msgid "<b>_Wallpaper</b>"
 msgstr "<b>_Тапет на работния плот</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>_Цветове на работния плот</b>"
+#: ../capplets/appearance/appearance.glade.h:10
+#, fuzzy
+msgid "Appearance Preferences"
+msgstr "Настройки на темата"
 
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "Настройки на фона на работния плот"
+#: ../capplets/appearance/appearance.glade.h:11
+msgid "Background"
+msgstr "Фон"
 
-#: ../capplets/background/gnome-background-properties.glade.h:4
+#: ../capplets/appearance/appearance.glade.h:12
+msgid "Best _shapes"
+msgstr "Най-добри _форми"
+
+#: ../capplets/appearance/appearance.glade.h:13
+msgid "Best co_ntrast"
+msgstr "Най-добър _контраст"
+
+#: ../capplets/appearance/appearance.glade.h:14
+msgid "C_ustomize..."
+msgstr "_Потребителски настройки..."
+
+#: ../capplets/appearance/appearance.glade.h:15
+msgid "C_ut"
+msgstr "Из_рязване"
+
+#: ../capplets/appearance/appearance.glade.h:16
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+"в центъра на екрана\n"
+"разпъване по екрана\n"
+"увеличаване в екрана\n"
+"дисплеят да е вътре\n"
+"на плочки"
+
+#: ../capplets/appearance/appearance.glade.h:21
+msgid "Colors"
+msgstr "Цветове"
+
+#: ../capplets/appearance/appearance.glade.h:22
+msgid "Controls"
+msgstr "Бутони и декорации"
+
+#: ../capplets/appearance/appearance.glade.h:23
+msgid "D_etails..."
+msgstr "Под_робности..."
+
+#: ../capplets/appearance/appearance.glade.h:24
+msgid "Des_ktop font:"
+msgstr "Шрифт за _работния плот:"
+
+#: ../capplets/appearance/appearance.glade.h:25
+msgid "Font Rendering Details"
+msgstr "Информация за изписването на шрифтовете"
+
+#: ../capplets/appearance/appearance.glade.h:26
+#, fuzzy
+msgid "Fonts"
+msgstr "Шрифт"
+
+#: ../capplets/appearance/appearance.glade.h:27
+#, fuzzy
+msgid "Go _to Fonts Folder"
+msgstr "Папката с _шрифтовете"
+
+#: ../capplets/appearance/appearance.glade.h:28
+msgid "Gra_yscale"
+msgstr "С_тепени на сивото"
+
+#: ../capplets/appearance/appearance.glade.h:29
+msgid "Icons"
+msgstr "Икони"
+
+#: ../capplets/appearance/appearance.glade.h:30
+#, fuzzy
+msgid "Interface"
+msgstr "Интернет"
+
+#: ../capplets/appearance/appearance.glade.h:31
+msgid "N_one"
+msgstr "Б_ез"
+
+#: ../capplets/appearance/appearance.glade.h:32
+msgid "New File"
+msgstr "Нов файл"
+
+#: ../capplets/appearance/appearance.glade.h:33
+msgid "Open File"
+msgstr "Отваряне на файл"
+
+#: ../capplets/appearance/appearance.glade.h:34
 msgid "Open a dialog to specify the color"
 msgstr "Отваряне на прозорец да се определи цвета"
 
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "_Добавяне на тапет"
+#: ../capplets/appearance/appearance.glade.h:35
+#, fuzzy
+msgid "Pointer"
+msgstr "Показалци"
 
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Finish"
-msgstr "_Прилагане"
+#: ../capplets/appearance/appearance.glade.h:36
+msgid "R_esolution:"
+msgstr "_Разделителна способност:"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
-msgid "_Remove"
-msgstr "П_ремахване"
+#: ../capplets/appearance/appearance.glade.h:37
+#, fuzzy
+msgid "Reset to Defaults"
+msgstr "_Стандартни настройки"
 
-#: ../capplets/background/gnome-background-properties.glade.h:8
+#: ../capplets/appearance/appearance.glade.h:38
+msgid "Save File"
+msgstr "Запазване на файл"
+
+#: ../capplets/appearance/appearance.glade.h:39
+msgid "Show _icons in menus"
+msgstr "Показване на _икони в менютата"
+
+#: ../capplets/appearance/appearance.glade.h:40
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"Плътен цвят\n"
+"Хоризонтална преливка\n"
+"Вертикална преливка"
+
+#: ../capplets/appearance/appearance.glade.h:43
+msgid "Sub_pixel (LCDs)"
+msgstr "_Подпикселно (за LCD)"
+
+#: ../capplets/appearance/appearance.glade.h:44
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "Подпикселно за_глаждане (за LCD)"
+
+#: ../capplets/appearance/appearance.glade.h:45
+msgid "Text"
+msgstr "Тест"
+
+#: ../capplets/appearance/appearance.glade.h:46
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"текст под иконите\n"
+"текст до иконите\n"
+"само икони\n"
+"само текст"
+
+#: ../capplets/appearance/appearance.glade.h:50
+msgid "The current controls theme does not support color schemes."
+msgstr "Текущата тема за графични обекти не поддържа цветови схеми."
+
+#: ../capplets/appearance/appearance.glade.h:51
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "Тема"
+
+#: ../capplets/appearance/appearance.glade.h:52
+msgid "Theme Details"
+msgstr "Елементи на темата"
+
+#: ../capplets/appearance/appearance.glade.h:53
+msgid "Toolbar _button labels:"
+msgstr "Етикети на _бутоните в лентата с инструментите:"
+
+#: ../capplets/appearance/appearance.glade.h:54
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/appearance.glade.h:55
+msgid "Window Border"
+msgstr "Рамки на прозорците"
+
+#: ../capplets/appearance/appearance.glade.h:56
+msgid "_Add..."
+msgstr ""
+
+#: ../capplets/appearance/appearance.glade.h:57
+msgid "_Application font:"
+msgstr "_Шрифт за програмите:"
+
+#: ../capplets/appearance/appearance.glade.h:58
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/appearance.glade.h:59
+msgid "_Copy"
+msgstr "_Копиране"
+
+#: ../capplets/appearance/appearance.glade.h:60
+msgid "_Document font:"
+msgstr "Шрифт за _документите:"
+
+#: ../capplets/appearance/appearance.glade.h:61
+msgid "_Edit"
+msgstr "_Редактиране"
+
+#: ../capplets/appearance/appearance.glade.h:62
+msgid "_Editable menu shortcut keys"
+msgstr "_Редактируеми ускорители на менюто"
+
+#: ../capplets/appearance/appearance.glade.h:63
+msgid "_File"
+msgstr "_Файл"
+
+#: ../capplets/appearance/appearance.glade.h:64
+msgid "_Fixed width font:"
+msgstr "Р_авноширок шрифт:"
+
+#: ../capplets/appearance/appearance.glade.h:65
+msgid "_Full"
+msgstr "П_ълно"
+
+#: ../capplets/appearance/appearance.glade.h:66
+msgid "_Input boxes:"
+msgstr "_Кутии за въвеждане:"
+
+#: ../capplets/appearance/appearance.glade.h:67
+msgid "_Install..."
+msgstr "_Инсталиране..."
+
+#: ../capplets/appearance/appearance.glade.h:68
+msgid "_Medium"
+msgstr "_Средно"
+
+#: ../capplets/appearance/appearance.glade.h:69
+msgid "_Monochrome"
+msgstr "_Черно-бяло"
+
+#: ../capplets/appearance/appearance.glade.h:70
+msgid "_New"
+msgstr "_Нов"
+
+#: ../capplets/appearance/appearance.glade.h:71
+msgid "_None"
+msgstr "_Без"
+
+#: ../capplets/appearance/appearance.glade.h:72
+msgid "_Open"
+msgstr "_Отваряне"
+
+#: ../capplets/appearance/appearance.glade.h:73
+msgid "_Paste"
+msgstr "_Поставяне"
+
+#: ../capplets/appearance/appearance.glade.h:74
+msgid "_Print"
+msgstr "_Разпечатване"
+
+#: ../capplets/appearance/appearance.glade.h:75
+msgid "_Quit"
+msgstr "_Спиране на програмата"
+
+#: ../capplets/appearance/appearance.glade.h:76
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/appearance.glade.h:77
+msgid "_Save"
+msgstr "_Запазване"
+
+#: ../capplets/appearance/appearance.glade.h:78
+msgid "_Selected items:"
+msgstr "_Избрани записи:"
+
+#: ../capplets/appearance/appearance.glade.h:79
+msgid "_Slight"
+msgstr "_Леко"
+
+#: ../capplets/appearance/appearance.glade.h:80
 msgid "_Style:"
 msgstr "_Стил:"
 
-#: ../capplets/background/gnome-wp-capplet.c:41
-msgid "[FILE...]"
-msgstr "[ФАЙЛ...]"
+#: ../capplets/appearance/appearance.glade.h:81
+msgid "_VRGB"
+msgstr "_VRGB"
 
-#: ../capplets/background/gnome-wp-capplet.c:81
-#: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Има грешка показваща помощ за: %s"
+#: ../capplets/appearance/appearance.glade.h:82
+msgid "_Window title font:"
+msgstr "Шрифт за _заглавието на прозорците"
 
-#: ../capplets/background/gnome-wp-capplet.c:943
-msgid "Centered"
-msgstr "Центриран"
+#: ../capplets/appearance/appearance.glade.h:83
+msgid "_Windows:"
+msgstr "_Прозорци:"
 
-#: ../capplets/background/gnome-wp-capplet.c:944
-msgid "Fill Screen"
-msgstr "Запълване на екрана"
+#: ../capplets/appearance/appearance.glade.h:84
+msgid "dots per inch"
+msgstr "точки на инч"
 
-#: ../capplets/background/gnome-wp-capplet.c:945
-msgid "Scaled"
-msgstr "Мащабируем"
+#: ../capplets/appearance/appearance.glade.h:85
+#, fuzzy
+msgid "gtk-delete"
+msgstr "Изтриване"
 
-#: ../capplets/background/gnome-wp-capplet.c:946
-msgid "Zoom"
-msgstr "Увеличаване"
-
-#: ../capplets/background/gnome-wp-capplet.c:947
-msgid "Tiled"
-msgstr "На плочки"
-
-#: ../capplets/background/gnome-wp-capplet.c:962
-msgid "Solid Color"
-msgstr "Плътен цвят"
-
-#: ../capplets/background/gnome-wp-capplet.c:963
-msgid "Horizontal Gradient"
-msgstr "Хоризонтална преливка"
-
-#: ../capplets/background/gnome-wp-capplet.c:964
-msgid "Vertical Gradient"
-msgstr "Вертикална преливка"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1005
+#: ../capplets/appearance/appearance-desktop.c:1050
 msgid "Add Wallpaper"
 msgstr "Добавяне на тапет"
 
-#: ../capplets/background/gnome-wp-capplet.c:1089
-msgid "- Desktop Background Preferences"
-msgstr "- Настройки на фона на работния плот"
+#: ../capplets/appearance/appearance-desktop.c:1071
+#, fuzzy
+msgid "All files"
+msgstr "Всички филтри"
 
-#: ../capplets/background/gnome-wp-info.c:45
+#: ../capplets/appearance/appearance-font.c:493
+msgid "Font may be too large"
+msgstr "Шрифтът вероятно е прекалено голям"
+
+#: ../capplets/appearance/appearance-font.c:497
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"Избраният шрифт е голям %d точка, което може да затрудни ефективната работа "
+"на този компютър. Препоръчително е да изберете размер по-малък от %d."
+msgstr[1] ""
+"Избраният шрифт е голям %d точки, което може да затрудни ефективната работа "
+"на този компютър. Препоръчително е да изберете размер по-малък от %d."
+
+#: ../capplets/appearance/appearance-font.c:510
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"Избраният шрифт е голям %d точка, което може да затрудни ефективната работа "
+"на този компютър. Препоръчително е да изберете по-малък шрифт."
+msgstr[1] ""
+"Избраният шрифт е голям %d точки, което може да затрудни ефективната работа "
+"на този компютър.  Препоръчително е да изберете по-малък шрифт."
+
+#: ../capplets/appearance/appearance-font.c:532
+msgid "Use previous font"
+msgstr "Използване на предишния шрифт"
+
+#: ../capplets/appearance/appearance-font.c:534
+msgid "Use selected font"
+msgstr "Използване на избрания шрифт"
+
+#: ../capplets/appearance/appearance-main.c:103
+msgid "Specify the filename of a theme to install"
+msgstr "Посочете името на файл с тема, който да се инсталира"
+
+#: ../capplets/appearance/appearance-main.c:104
+msgid "filename"
+msgstr "име_на_файла"
+
+#: ../capplets/appearance/appearance-main.c:110
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr ""
+
+#: ../capplets/appearance/appearance-main.c:111
+#, fuzzy
+msgid "page"
+msgstr "Изображения"
+
+#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/default-applications/gnome-da-capplet.c:1098
+#: ../capplets/sound/sound-properties-capplet.c:327
+msgid "Custom"
+msgstr "Потребителски"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr ""
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:2
+#, fuzzy
+msgid "Customize the look of the desktop"
+msgstr "Избор на тема за работния плот"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "Инсталиране на пакети с теми за различни компоненти на работния плот"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "Инсталатор на теми"
+
+#: ../capplets/appearance/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "Пакет с тема за GNOME"
+
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Без тапет"
 
-#.
-#. Translators: This message is used to render the type and size of the
-#. background images in gnome-background-properites. The first "%s" will
-#. be replaced by the image type, and the two "%d %s"s will be replaced
-#. with the images' dimensions. For example, in US English, this may be
-#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
-#.
-#. Do not translate the "background size|" type. Remove it from the
-#. translation.
-#.
-#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:360
 #, c-format
-msgid "background size|%s, %d %s x %d %s"
-msgstr "%s, %d %s x %d %s"
+msgid ""
+"<big><b>%s</b></big>\n"
+"<b>Width:</b> %d %s\n"
+"<b>Height:</b> %d %s\n"
+"<b>Type:</b> %s\n"
+"<b>Location:</b> %s"
+msgstr ""
 
-#: ../capplets/background/gnome-wp-item.c:374
-#: ../capplets/background/gnome-wp-item.c:376
+#: ../capplets/appearance/gnome-wp-item.c:367
+#: ../capplets/appearance/gnome-wp-item.c:369
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "пиксел"
 msgstr[1] "пиксела"
+
+#: ../capplets/appearance/theme-installer.c:149
+#, fuzzy, c-format
+msgid ""
+"Cannot install theme.\n"
+"The %s utility is not installed."
+msgstr ""
+"Неуспех при инсталирането на темата. \n"
+"Инструментът %s не е инсталиран."
+
+#: ../capplets/appearance/theme-installer.c:197
+#, fuzzy
+msgid ""
+"Cannot install theme.\n"
+"There was a problem while extracting the theme."
+msgstr ""
+"Неуспех при инсталирането на темата. \n"
+"Темата не може да бъде разархивирана."
+
+#: ../capplets/appearance/theme-installer.c:237
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr "Темата за GNOME %s е инсталирана правилно"
+
+#: ../capplets/appearance/theme-installer.c:249
+#, fuzzy
+msgid "The theme is an engine. You need to compile it."
+msgstr "Темата е с графично ядро. Трябва да я компилирате."
+
+#: ../capplets/appearance/theme-installer.c:258
+msgid "The file format is invalid"
+msgstr "Файловият формат е невалиден"
+
+#: ../capplets/appearance/theme-installer.c:303
+msgid "Installation Failed"
+msgstr "Инсталацията е неуспешна"
+
+#: ../capplets/appearance/theme-installer.c:314
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr "Темата „%s“ беше инсталирана."
+
+#: ../capplets/appearance/theme-installer.c:320
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "Искате ли да я приложите сега, или ще задържите текущата тема?"
+
+#: ../capplets/appearance/theme-installer.c:322
+msgid "Keep Current Theme"
+msgstr "Запазване на текущата тема"
+
+#: ../capplets/appearance/theme-installer.c:324
+msgid "Apply New Theme"
+msgstr "Прилагане на нова тема"
+
+#: ../capplets/appearance/theme-installer.c:397
+msgid "This theme is not in a supported format."
+msgstr "Темата е в неподдържан формат."
+
+#: ../capplets/appearance/theme-installer.c:422
+msgid "Failed to create temporary directory"
+msgstr "Неуспех при създаването на временна папка"
+
+#: ../capplets/appearance/theme-installer.c:480
+msgid "No theme file location specified to install"
+msgstr "Не е избран файл с тема, който да се инсталира"
+
+#: ../capplets/appearance/theme-installer.c:500
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Няма права за достъп, за да се инсталира темата в:\n"
+"%s"
+
+#: ../capplets/appearance/theme-installer.c:519
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
+"%s е пътят до мястото, където ще бъдат инсталирани файловете на темите. Той "
+"не може да бъде избран като папка източник."
+
+#: ../capplets/appearance/theme-installer.c:540
+msgid "The file format is invalid."
+msgstr "Файловият формат е невалиден."
+
+#: ../capplets/appearance/theme-installer.c:593
+#, fuzzy
+msgid "Select Theme"
+msgstr "Избор на изображение"
+
+#: ../capplets/appearance/theme-installer.c:596
+#, fuzzy
+msgid "Theme Packages"
+msgstr "Пакет с тема за GNOME"
+
+#: ../capplets/appearance/theme-util.c:42
+msgid "Would you like to remove this theme?"
+msgstr "Искате ли да изтриете тази тема?"
+
+#: ../capplets/appearance/theme-util.c:88
+#, fuzzy
+msgid "Theme cannot be deleted"
+msgstr "Темата не може да бъде изтрита."
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -867,6 +1307,12 @@ msgstr "Прилагане на настройките и излизане"
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Получаване и запазване стари настройки"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Има грешка показваща помощ за: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
@@ -1012,7 +1458,7 @@ msgstr ""
 "Обратно повикване, което да се извиква при освобождаване на данни от "
 "редактора на свойства"
 
-#: ../capplets/common/gconf-property-editor.c:1595
+#: ../capplets/common/gconf-property-editor.c:1459
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1025,7 +1471,7 @@ msgstr ""
 "Убедете се, че той съществува и опитайте отново или изберете друго "
 "изображение за фон."
 
-#: ../capplets/common/gconf-property-editor.c:1603
+#: ../capplets/common/gconf-property-editor.c:1467
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1038,11 +1484,11 @@ msgstr ""
 "\n"
 "Изберете друго изображение вместо това."
 
-#: ../capplets/common/gconf-property-editor.c:1722
+#: ../capplets/common/gconf-property-editor.c:1586
 msgid "Please select an image."
 msgstr "Изберете изображение."
 
-#: ../capplets/common/gconf-property-editor.c:1727
+#: ../capplets/common/gconf-property-editor.c:1591
 msgid "_Select"
 msgstr "_Избиране"
 
@@ -1100,11 +1546,6 @@ msgstr ""
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Грешка при запазването на конфигурацията: %s"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:1098
-#: ../capplets/sound/sound-properties-capplet.c:327
-msgid "Custom"
-msgstr "Потребителски"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:1118
 msgid "Could not load the main interface"
@@ -1464,46 +1905,46 @@ msgstr "обърнато (180°)"
 msgid "Right"
 msgstr "надясно (90°)"
 
-#: ../capplets/display/main.c:385
+#: ../capplets/display/main.c:388
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:531
+#: ../capplets/display/main.c:534
 msgid "_Resolution:"
 msgstr "_Разделителна способност:"
 
-#: ../capplets/display/main.c:550
+#: ../capplets/display/main.c:553
 msgid "Re_fresh rate:"
 msgstr "_Опресняване:"
 
-#: ../capplets/display/main.c:570
+#: ../capplets/display/main.c:573
 msgid "R_otation:"
 msgstr "_Завъртане:"
 
-#: ../capplets/display/main.c:590
+#: ../capplets/display/main.c:593
 msgid "Default Settings"
 msgstr "Настройки по подразбиране"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:595
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Настройки за екрана %d\n"
 
-#: ../capplets/display/main.c:618
+#: ../capplets/display/main.c:621
 msgid "Screen Resolution Preferences"
 msgstr "Задаване на разделителната способност на екрана"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:658
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Това да е така само за _този компютър (%s)"
 
-#: ../capplets/display/main.c:674
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "Настройки"
 
-#: ../capplets/display/main.c:695
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1549,180 +1990,6 @@ msgid ""
 msgstr ""
 "Версията на XRandR е несъвместима с тази програма. Не могат да се правят "
 "промени по големината на екрана."
-
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "Шрифт"
-
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "Избор на шрифт за работния плот"
-
-#: ../capplets/font/font-properties.glade.h:1
-msgid "<b>Font Rendering</b>"
-msgstr "<b>Изписване на шрифтовете на екрана</b>"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Hinting</b>:"
-msgstr "<b>Подсказване</b>:"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Smoothing</b>:"
-msgstr "<b>Заглаждане</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>Подпикселна подредба</b>:"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "Best _shapes"
-msgstr "Най-добри _форми"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best co_ntrast"
-msgstr "Най-добър _контраст"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "D_etails..."
-msgstr "Под_робности..."
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "Des_ktop font:"
-msgstr "Шрифт за _работния плот:"
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "Настройки на шрифтовете"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "Информация за изписването на шрифтовете"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "Папката с _шрифтовете"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "С_тепени на сивото"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "Б_ез"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "_Разделителна способност:"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "_Подпикселно (за LCD)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "Подпикселно за_глаждане (за LCD)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "_Шрифт за програмите:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Document font:"
-msgstr "Шрифт за _документите:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Fixed width font:"
-msgstr "Р_авноширок шрифт:"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Full"
-msgstr "П_ълно"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Medium"
-msgstr "_Средно"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_Monochrome"
-msgstr "_Черно-бяло"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_None"
-msgstr "_Без"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Slight"
-msgstr "_Леко"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "Шрифт за _заглавието на прозорците"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "точки на инч"
-
-#: ../capplets/font/main.c:502
-msgid "Font may be too large"
-msgstr "Шрифтът вероятно е прекалено голям"
-
-#: ../capplets/font/main.c:506
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"Избраният шрифт е голям %d точка, което може да затрудни ефективната работа "
-"на този компютър. Препоръчително е да изберете размер по-малък от %d."
-msgstr[1] ""
-"Избраният шрифт е голям %d точки, което може да затрудни ефективната работа "
-"на този компютър. Препоръчително е да изберете размер по-малък от %d."
-
-#: ../capplets/font/main.c:519
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"Избраният шрифт е голям %d точка, което може да затрудни ефективната работа "
-"на този компютър. Препоръчително е да изберете по-малък шрифт."
-msgstr[1] ""
-"Избраният шрифт е голям %d точки, което може да затрудни ефективната работа "
-"на този компютър.  Препоръчително е да изберете по-малък шрифт."
-
-#: ../capplets/font/main.c:540
-msgid "Use previous font"
-msgstr "Използване на предишния шрифт"
-
-#: ../capplets/font/main.c:542
-msgid "Use selected font"
-msgstr "Използване на избрания шрифт"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -2009,10 +2276,15 @@ msgid "_Variants:"
 msgstr "_Варианти:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#, fuzzy
+msgid "_Vendors:"
+msgstr "_Прозорци:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "_Work interval lasts:"
 msgstr "Продължителност на _работата:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "minutes"
 msgstr "минути"
 
@@ -2030,7 +2302,11 @@ msgstr "По подразбиране"
 msgid "Layout"
 msgstr "Подредба"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:73
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
+msgid "Vendors"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
 msgid "Models"
 msgstr "Модели"
 
@@ -2455,407 +2731,6 @@ msgstr "Изп_ълнение на звук:"
 msgid "_Visual system beep"
 msgstr "_Визуализиране на системния звънец"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:450
-msgid "Would you like to remove this theme?"
-msgstr "Искате ли да изтриете тази тема?"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:515
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "Темата бе успешно изтрита. Изберете друга."
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:524
-msgid "Theme can not be deleted"
-msgstr "Темата не може да бъде изтрита."
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:696
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Няма открити теми на вашия компютър.  Това вероятно означава, че прозорецът "
-"за „Настройки на темите“ е инсталиран неправилно или нямате пакета „gnome-"
-"themes“."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:153
-#, c-format
-msgid ""
-"Can not install theme. \n"
-"The %s utility is not installed."
-msgstr ""
-"Неуспех при инсталирането на темата. \n"
-"Инструментът %s не е инсталиран."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:162
-msgid ""
-"Can not install theme. \n"
-"There was a problem while extracting the theme"
-msgstr ""
-"Неуспех при инсталирането на темата. \n"
-"Темата не може да бъде разархивирана."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "This theme is not in a supported format."
-msgstr "Темата е в неподдържан формат."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
-msgid "Failed to create temporary directory"
-msgstr "Неуспех при създаването на временна папка"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "Темата за GNOME %s е инсталирана правилно"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "Темата е с графично ядро. Трябва да я компилирате."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:410
-msgid "The file format is invalid"
-msgstr "Файловият формат е невалиден"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:449
-msgid "Installation Failed"
-msgstr "Инсталацията е неуспешна"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:462
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "Темата „%s“ беше инсталирана."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "Искате ли да я приложите сега, или ще задържите текущата тема?"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:470
-msgid "Keep Current Theme"
-msgstr "Запазване на текущата тема"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:472
-msgid "Apply New Theme"
-msgstr "Прилагане на нова тема"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
-msgid "No theme file location specified to install"
-msgstr "Не е избран файл с тема, който да се инсталира"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:543
-msgid "The theme file location specified to install is invalid"
-msgstr "Темата посочена за инсталиране е невалидна"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"Няма права за достъп, за да се инсталира темата в:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:589
-msgid "The file format is invalid."
-msgstr "Файловият формат е невалиден."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:616
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s е пътят до мястото, където ще бъдат инсталирани файловете на темите. Той "
-"не може да бъде избран като папка източник."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:675
-#, fuzzy
-msgid "Select Theme"
-msgstr "Избор на изображение"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:678
-#, fuzzy
-msgid "Theme Packages"
-msgstr "Пакет с тема за GNOME"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "Инсталиране на пакети с теми за различни компоненти на работния плот"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "Инсталатор на теми"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "Custom theme"
-msgstr "Лична тема"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Може да запазите тази тема като натиснете бутона „Запазване на тема“"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
-msgid "Specify the filename of a theme to install"
-msgstr "Посочете името на файл с тема, който да се инсталира"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
-msgid "filename"
-msgstr "име_на_файла"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"Схемите по подразбиране на тази тема не могат да бъдат открити в системата.  "
-"Това вероятно означава, че нямате инсталиран metacity, или че gconf е "
-"конфигуриран неправилно."
-
-#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "Пакет с тема за GNOME"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:73
-msgid "Theme name must be present"
-msgstr "Трябва да въведете име"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:144
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "Темата вече съществува. Желаете ли да я замените?"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "Избиране на тема за различни компоненти на работния плот"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "Тема"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<b>You do not have permission to change theme settings</b>"
-msgstr "<b>Нямате право да променяте настройките на текущата тема</b>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "Прилагане на _фон"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "Прилагане на _шрифт"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Background"
-msgstr "Фон"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "C_ustomize..."
-msgstr "_Потребителски настройки..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Colors"
-msgstr "Цветове"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Controls"
-msgstr "Бутони и декорации"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Icons"
-msgstr "Икони"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Save Theme As..."
-msgstr "Запазване на темата като..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save _Background Image"
-msgstr "Запазване на _фоновото изображение"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Select theme for the desktop"
-msgstr "Избор на тема за работния плот"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Text"
-msgstr "Тест"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "The current controls theme does not support color schemes"
-msgstr "Текущата тема не поддържа цветови схеми"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "Theme Details"
-msgstr "Елементи на темата"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "Theme Preferences"
-msgstr "Настройки на темата"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme does not suggest any particular font or background."
-msgstr "Тази тема не предлага свои шрифт и фон."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a background:"
-msgstr "Тази тема предлага свой фон:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "This theme suggests a font and a background:"
-msgstr "Тази тема предлага свои шрифт и фон:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "This theme suggests a font:"
-msgstr "Тази тема предлага свой шрифт:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "Window Border"
-msgstr "Рамки на прозорците"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Description:"
-msgstr "_Описание:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input boxes:"
-msgstr "_Кутии за въвеждане:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Install Theme..."
-msgstr "_Инсталиране на тема..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "_Install..."
-msgstr "_Инсталиране..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Name:"
-msgstr "_Име:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
-msgid "_Revert"
-msgstr "_Възстановяване"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
-msgid "_Save Theme..."
-msgstr "_Запазване на тема..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected items:"
-msgstr "_Избрани записи:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
-msgid "_Windows:"
-msgstr "_Прозорци:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
-msgid "theme selection tree"
-msgstr "дърво за подборка на теми"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr ""
-"Настройка на външния вид на лентите с инструменти и менютата на програмите"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "Менюта и ленти с инструменти"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>Външен вид и поведение</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>Предварителен преглед</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "Из_рязване"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "Само икони"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "Настройки на лентите с инструменти и менютата"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "Нов файл"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "Отваряне на файл"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "Запазване на файл"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "Показване на _икони в менютата"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "Текст под иконите"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "Текст до иконите"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "Само текст"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "Етикети на _бутоните в лентата с инструментите:"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "_Копиране"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "_Отделими ленти с инструменти"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "_Редактиране"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu shortcut keys"
-msgstr "_Редактируеми ускорители на менюто"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_Файл"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "_Нов"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "_Отваряне"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "_Поставяне"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "_Разпечатване"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "_Спиране на програмата"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "_Запазване"
-
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
 msgstr ""
@@ -3001,7 +2876,7 @@ msgstr "Искате ли да включите лепкавите клавиш�
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Искате ли да изключите лепкавите клавиши?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:75
+#: ../gnome-settings-daemon/gnome-settings-font.c:150
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -3010,7 +2885,7 @@ msgstr ""
 "Папката „%s“ не може да бъде създадена.\n"
 "Това е необходимо, за да се позволи промяната на темата на показалеца."
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:98
+#: ../gnome-settings-daemon/gnome-settings-font.c:171
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -3153,7 +3028,7 @@ msgstr ""
 "Компютърът не можеше да бъде приспан.\n"
 "Уверете се, че машината е настроена правилно."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -3168,11 +3043,11 @@ msgstr ""
 "\n"
 "Той няма да може да работи в тази сесия."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr "_Да не се показва това съобщение отново"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:137
+#: ../gnome-settings-daemon/gnome-settings-sound.c:199
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Не може да се зареди звуковия файл %s като %s"
@@ -3182,7 +3057,7 @@ msgstr "Не може да се зареди звуковия файл %s кат
 msgid "Cannot determine user's home directory"
 msgstr "Не може да се разбере коя е домашната папка на потребителя"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:226
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Клавишът на GConf %s е зададен за тип %s, но се очакваше тип %s\n"
@@ -3888,11 +3763,19 @@ msgstr ""
 "Научете повече за нас на http://gnome.cult.bg\n"
 "Докладвайте за грешки на http://gnome.cult.bg/bugs"
 
-#: ../typing-break/main.c:84
+#: ../typing-break/main.c:61
+msgid "Enable debugging code"
+msgstr ""
+
+#: ../typing-break/main.c:63
+msgid "Don't check whether the notification area exists"
+msgstr ""
+
+#: ../typing-break/main.c:89
 msgid "Typing Monitor"
 msgstr "Наблюдение на писането"
 
-#: ../typing-break/main.c:103
+#: ../typing-break/main.c:105
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -4149,3 +4032,170 @@ msgstr "Прилагане на тема"
 #: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Връщане към подразбиращите се настройки"
+
+#~ msgid "Change your Desktop Background settings"
+#~ msgstr "Смяна на настройките на фона на работния плот"
+
+#~ msgid "Desktop Background"
+#~ msgstr "Фон на работния плот"
+
+#~ msgid "Desktop Background Preferences"
+#~ msgstr "Настройки на фона на работния плот"
+
+#~ msgid "_Add Wallpaper"
+#~ msgstr "_Добавяне на тапет"
+
+#~ msgid "_Finish"
+#~ msgstr "_Прилагане"
+
+#~ msgid "_Remove"
+#~ msgstr "П_ремахване"
+
+#~ msgid "[FILE...]"
+#~ msgstr "[ФАЙЛ...]"
+
+#~ msgid "Centered"
+#~ msgstr "Центриран"
+
+#~ msgid "Fill Screen"
+#~ msgstr "Запълване на екрана"
+
+#~ msgid "Scaled"
+#~ msgstr "Мащабируем"
+
+#~ msgid "Zoom"
+#~ msgstr "Увеличаване"
+
+#~ msgid "Tiled"
+#~ msgstr "На плочки"
+
+#~ msgid "Solid Color"
+#~ msgstr "Плътен цвят"
+
+#~ msgid "Horizontal Gradient"
+#~ msgstr "Хоризонтална преливка"
+
+#~ msgid "Vertical Gradient"
+#~ msgstr "Вертикална преливка"
+
+#~ msgid "- Desktop Background Preferences"
+#~ msgstr "- Настройки на фона на работния плот"
+
+#~ msgid "background size|%s, %d %s x %d %s"
+#~ msgstr "%s, %d %s x %d %s"
+
+#~ msgid "Select fonts for the desktop"
+#~ msgstr "Избор на шрифт за работния плот"
+
+#~ msgid "Font Preferences"
+#~ msgstr "Настройки на шрифтовете"
+
+#~ msgid "Theme deleted succesfully. Please select another theme."
+#~ msgstr "Темата бе успешно изтрита. Изберете друга."
+
+#~ msgid ""
+#~ "No themes could be found on your system.  This probably means that your "
+#~ "\"Theme Preferences\" dialog was improperly installed, or you haven't "
+#~ "installed the \"gnome-themes\" package."
+#~ msgstr ""
+#~ "Няма открити теми на вашия компютър.  Това вероятно означава, че "
+#~ "прозорецът за „Настройки на темите“ е инсталиран неправилно или нямате "
+#~ "пакета „gnome-themes“."
+
+#~ msgid "The theme file location specified to install is invalid"
+#~ msgstr "Темата посочена за инсталиране е невалидна"
+
+#~ msgid "Custom theme"
+#~ msgstr "Лична тема"
+
+#~ msgid "You can save this theme by pressing the Save Theme button."
+#~ msgstr ""
+#~ "Може да запазите тази тема като натиснете бутона „Запазване на тема“"
+
+#~ msgid ""
+#~ "The default theme schemas could not be found on your system.  This means "
+#~ "that you probably don't have metacity installed, or that your gconf is "
+#~ "configured incorrectly."
+#~ msgstr ""
+#~ "Схемите по подразбиране на тази тема не могат да бъдат открити в "
+#~ "системата.  Това вероятно означава, че нямате инсталиран metacity, или че "
+#~ "gconf е конфигуриран неправилно."
+
+#~ msgid "Theme name must be present"
+#~ msgstr "Трябва да въведете име"
+
+#~ msgid "The theme already exists. Would you like to replace it?"
+#~ msgstr "Темата вече съществува. Желаете ли да я замените?"
+
+#~ msgid "Select themes for various parts of the desktop"
+#~ msgstr "Избиране на тема за различни компоненти на работния плот"
+
+#~ msgid "<b>You do not have permission to change theme settings</b>"
+#~ msgstr "<b>Нямате право да променяте настройките на текущата тема</b>"
+
+#~ msgid "Apply _Background"
+#~ msgstr "Прилагане на _фон"
+
+#~ msgid "Apply _Font"
+#~ msgstr "Прилагане на _шрифт"
+
+#~ msgid "Save Theme As..."
+#~ msgstr "Запазване на темата като..."
+
+#~ msgid "Save _Background Image"
+#~ msgstr "Запазване на _фоновото изображение"
+
+#~ msgid "This theme does not suggest any particular font or background."
+#~ msgstr "Тази тема не предлага свои шрифт и фон."
+
+#~ msgid "This theme suggests a background:"
+#~ msgstr "Тази тема предлага свой фон:"
+
+#~ msgid "This theme suggests a font and a background:"
+#~ msgstr "Тази тема предлага свои шрифт и фон:"
+
+#~ msgid "This theme suggests a font:"
+#~ msgstr "Тази тема предлага свой шрифт:"
+
+#~ msgid "_Description:"
+#~ msgstr "_Описание:"
+
+#~ msgid "_Install Theme..."
+#~ msgstr "_Инсталиране на тема..."
+
+#~ msgid "_Name:"
+#~ msgstr "_Име:"
+
+#~ msgid "_Revert"
+#~ msgstr "_Възстановяване"
+
+#~ msgid "_Save Theme..."
+#~ msgstr "_Запазване на тема..."
+
+#~ msgid "theme selection tree"
+#~ msgstr "дърво за подборка на теми"
+
+#~ msgid "Customize the appearance of toolbars and menubars in applications"
+#~ msgstr ""
+#~ "Настройка на външния вид на лентите с инструменти и менютата на програмите"
+
+#~ msgid "<b>Behavior and Appearance</b>"
+#~ msgstr "<b>Външен вид и поведение</b>"
+
+#~ msgid "Icons only"
+#~ msgstr "Само икони"
+
+#~ msgid "Menu and Toolbar Preferences"
+#~ msgstr "Настройки на лентите с инструменти и менютата"
+
+#~ msgid "Text below icons"
+#~ msgstr "Текст под иконите"
+
+#~ msgid "Text beside icons"
+#~ msgstr "Текст до иконите"
+
+#~ msgid "Text only"
+#~ msgstr "Само текст"
+
+#~ msgid "_Detachable toolbars"
+#~ msgstr "_Отделими ленти с инструменти"
