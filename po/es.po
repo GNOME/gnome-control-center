@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-17 03:44+0100\n"
-"PO-Revision-Date: 2007-06-17 13:13+0200\n"
+"POT-Creation-Date: 2007-06-18 03:21+0100\n"
+"PO-Revision-Date: 2007-06-18 20:14+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgid "No Image"
 msgstr "Sin imagen"
 
 #: ../capplets/about-me/gnome-about-me.c:666
-#: ../capplets/appearance/appearance-desktop.c:1019
+#: ../capplets/appearance/appearance-desktop.c:1067
 msgid "Images"
 msgstr "Imágenes"
 
@@ -1053,11 +1053,11 @@ msgstr "puntos por pulgada"
 msgid "gtk-delete"
 msgstr "gtk-delete"
 
-#: ../capplets/appearance/appearance-desktop.c:1002
+#: ../capplets/appearance/appearance-desktop.c:1050
 msgid "Add Wallpaper"
 msgstr "Añadir tapiz"
 
-#: ../capplets/appearance/appearance-desktop.c:1023
+#: ../capplets/appearance/appearance-desktop.c:1071
 msgid "All files"
 msgstr "Todos los archivos"
 
@@ -1107,13 +1107,21 @@ msgstr "Usar la tipografía anterior"
 msgid "Use selected font"
 msgstr "Usar la tipografía seleccionada"
 
-#: ../capplets/appearance/appearance-main.c:101
+#: ../capplets/appearance/appearance-main.c:103
 msgid "Specify the filename of a theme to install"
 msgstr "Especifique el nombre de archivo del tema a instalar"
 
-#: ../capplets/appearance/appearance-main.c:102
+#: ../capplets/appearance/appearance-main.c:104
 msgid "filename"
 msgstr "nombre de archivo"
+
+#: ../capplets/appearance/appearance-main.c:110
+msgid "Specify the name of the page to show"
+msgstr "Especifique el nombre de la página para mostrar"
+
+#: ../capplets/appearance/appearance-main.c:111
+msgid "page"
+msgstr "página"
 
 #: ../capplets/appearance/appearance-themes.c:541
 #: ../capplets/default-applications/gnome-da-capplet.c:1098
@@ -1145,23 +1153,23 @@ msgstr "Paquete de tema GNOME"
 msgid "No Wallpaper"
 msgstr "Sin tapiz"
 
-#.
-#. Translators: This message is used to render the type and size of the
-#. background images in gnome-background-properites. The first "%s" will
-#. be replaced by the image type, and the two "%d %s"s will be replaced
-#. with the images' dimensions. For example, in US English, this may be
-#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
-#.
-#. Do not translate the "background size|" type. Remove it from the
-#. translation.
-#.
-#: ../capplets/appearance/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:360
 #, c-format
-msgid "background size|%s, %d %s x %d %s"
-msgstr "%s, %d %s x %d %s"
+msgid ""
+"<big><b>%s</b></big>\n"
+"<b>Width:</b> %d %s\n"
+"<b>Height:</b> %d %s\n"
+"<b>Type:</b> %s\n"
+"<b>Location:</b> %s"
+msgstr ""
+"<big><b>%s</b></big>\n"
+"<b>Anchura:</b> %d %s\n"
+"<b>Altura:</b> %d %s\n"
+"<b>Tipo:</b> %s\n"
+"<b>Ubicación:</b> %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:374
-#: ../capplets/appearance/gnome-wp-item.c:376
+#: ../capplets/appearance/gnome-wp-item.c:367
+#: ../capplets/appearance/gnome-wp-item.c:369
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "píxel"
