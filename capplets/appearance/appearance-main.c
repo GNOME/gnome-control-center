@@ -107,7 +107,7 @@ main (int argc, char **argv)
         G_OPTION_FLAG_IN_MAIN,
         G_OPTION_ARG_STRING,
         &start_page,
-        N_("Specify the name of the page to show"),
+        N_("Specify the name of the page to show (theme|background|fonts|interface)"),
         N_("page") },
       { NULL }
     };
