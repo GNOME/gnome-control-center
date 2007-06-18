@@ -122,7 +122,7 @@ file_theme_type (const gchar *dir)
 	if (exists)
 		return THEME_METACITY;
 
-	filename = g_build_filename (dir, "configure.in", NULL);
+	filename = g_build_filename (dir, "configure", NULL);
 	src_uri = gnome_vfs_uri_new (filename);
 	g_free (filename);
 	exists = gnome_vfs_uri_exists (src_uri);
