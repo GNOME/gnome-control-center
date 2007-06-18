@@ -1,4 +1,4 @@
-EXTRA_DIST = ChangeLog wrapper-script.in Bonobo_Control_Capplet_generic.oaf.in
+EXTRA_DIST = ChangeLog
 
 INCLUDES = \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
