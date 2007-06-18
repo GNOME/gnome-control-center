@@ -42,7 +42,6 @@
 #include "gnome-settings-keybindings.h"
 #include "gnome-settings-multimedia-keys.h"
 #include "gnome-settings-xrdb.h"
-#include "gnome-settings-typing-break.h"
 
 struct _GnomeSettingsDaemonPrivate {
 	GHashTable *loaded_modules;
@@ -56,10 +55,28 @@ GType gnome_settings_module_gtk1_get_type (void);
 GType gnome_settings_module_mouse_get_type (void);
 GType gnome_settings_module_screensaver_get_type (void);
 GType gnome_settings_module_sound_get_type (void);
+GType gnome_settings_module_typing_break_get_type (void);
 GType gnome_settings_module_xsettings_get_type (void);
 
 static GObjectClass *parent_class = NULL;
 XSettingsManager **managers = NULL;
+
+static void
+debug_warning (const char *msg, ...)
+{
+	va_list args;
+	gchar *str;
+	GtkWidget *dialog;
+
+	va_start (args, msg);
+	str = g_strdup_vprintf (msg, args);
+	va_end (args);
+
+	dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE, str);
+	gnome_settings_delayed_show_dialog (dialog);
+
+	g_free (str);
+}
 
 static void
 terminate_cb (void *data)
@@ -109,6 +126,7 @@ initialize_modules (GnomeSettingsDaemon *daemon, GnomeSettingsModuleRunlevel run
 
 	module_list = g_hash_table_lookup (daemon->priv->loaded_modules, &runlevel);
 	for (l = module_list; l != NULL; l = l->next) {
+		
 		gnome_settings_module_initialize (GNOME_SETTINGS_MODULE (l->data), client);
 	}
 }
@@ -192,6 +210,7 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 	    || !gnome_settings_module_mouse_get_type ()
 	    || !gnome_settings_module_screensaver_get_type ()
 	    || !gnome_settings_module_sound_get_type ()
+	    || !gnome_settings_module_typing_break_get_type ()
 	    || !gnome_settings_module_xsettings_get_type ())
 		return;
 
@@ -285,7 +304,6 @@ gnome_settings_daemon_new (void)
 	gnome_settings_accessibility_keyboard_init (client);
 	gnome_settings_keybindings_init (client);
 	gnome_settings_xrdb_init (client);
-	gnome_settings_typing_break_init (client);
 
 	/* load all modules */
 	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS);
@@ -311,7 +329,6 @@ gnome_settings_daemon_new (void)
 	gnome_settings_accessibility_keyboard_load (client);
 	gnome_settings_keybindings_load (client);
 	gnome_settings_xrdb_load (client);
-	gnome_settings_typing_break_load (client);
 
 	/* start all modules */
 	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS);

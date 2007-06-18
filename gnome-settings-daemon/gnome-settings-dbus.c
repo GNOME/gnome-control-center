@@ -150,7 +150,7 @@ gnome_settings_server_media_player_key_pressed (GObject *server, const gchar *ke
 }
 
 static GObject*
-gnome_settins_server_constructor (GType                  type,
+gnome_settings_server_constructor (GType                  type,
 				  guint                  n_construct_params,
 				  GObjectConstructParam *construct_params)
 {
@@ -178,7 +178,7 @@ gnome_settings_server_class_init (GnomeSettingsServerClass * klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	object_class->constructor = gnome_settins_server_constructor;
+	object_class->constructor = gnome_settings_server_constructor;
 
 	signals[MEDIA_PLAYER_KEY_PRESSED] = g_signal_new ("media-player-key-pressed",
 			G_OBJECT_CLASS_TYPE (klass), G_SIGNAL_RUN_LAST, G_STRUCT_OFFSET (GnomeSettingsServerClass, media_player_key_pressed),
