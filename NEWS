@@ -1,3 +1,61 @@
+gnome-control-center 2.19.4
+
+appearance:
+- Fixed leaks (Jens Granseuer)
+- Added a parameter to circumvent the internal thumbnail cache to the async
+  generator (Jens Granseuer)
+- Remove caching from the thumbnailer (Jens Granseuer)
+- Fix appearance windows not reacting the GTK+ theme changes (Denis Washington)
+- Make it possible to skip engine information (Jens Granseuer)
+- Let gnome-appearance-properties handle GTK+ theme changes manually (Denis
+  Washington)
+- Move theme package MIME type over from the theme-manager (Jens Granseuer)
+  (#444336)
+- Hook up more of the customization functionality (Jens Granseuer)
+- Update for changes in thumbnailer API (Jens Granseuer)
+- Add initial lockdown bits from theme-manager (Jens Granseuer)
+- Preliminary support for reacting the metatheme changes (Jens Granseuer)
+- Add all missing color schemes options (Denis Washington)
+- Fix passing and parsing of command line args (Jens Granseuer)
+- Disable the 'reset to defaults' button if the theme doesn't support custom
+  colors (Jens Granseuer)
+- Listen to color scheme changes (Jens Granseuer)
+- Add initial support for installing themes (Jens Granseuer)
+- Add metadata tooltips in the Background tab (Jens Granseuer)
+- Add --show-page option to specify the page with which to start (Jens Granseuer)
+- Remove install buttons from individual details pages (Jens Granseuer)
+
+display:
+- Don't make the revert dialog transient since it's actually never on screen
+  at the same time as the main dialog (Jens Granseuer) (#448160)
+
+keybindings:
+- Fix GConf notification (Jens Granseuer)
+
+settings daemon:
+- Most modules converted to new loadable architecture (Rodrigo Moya)
+- Force launching Nautilus in the home directory (Bastien Nocera) (#356069)
+- Plugged memory leaks (Jens Granseuer)
+
+themus:
+- Update for changes in thumbnailer API (Jens Granseuer)
+
+typing break:
+- Dont use libgnome (Ross Burton) (#443554)
+- Use the 2nd-accurate timers instead of the millisecond timers, in an attempt
+  to use less processor time (Ross Burton) (#443547)
+- USe GOption to parse arguments (Christian Persch) (#444399)
+
+general:
+- Require glib >= 2.13 (Ross Burton)
+
+updated translations:
+- cs (Jakub Friedl)
+- dz (Pema Geyleg)
+- es (Jorge Gonzalez)
+- sv (Daniel Nylander)
+- zh_CN (Funda Wang)
+------------------------------------------------------------------------------
 gnome-control-center 2.19.3
 
 about-me:
