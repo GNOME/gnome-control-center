@@ -346,6 +346,9 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 					case THEME_ICON:
 						gconf_key = ICON_THEME_KEY;
 						break;
+					default: /* keep gcc happy */
+						gconf_key = NULL;
+						break;
 				}
 
 				gconf_client = gconf_client_get_default ();
