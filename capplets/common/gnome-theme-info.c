@@ -1291,7 +1291,7 @@ gnome_theme_icon_info_free (GnomeThemeIconInfo *icon_theme_info)
   g_free (icon_theme_info);
 }
 
-GnomeThemeInfo *
+GnomeThemeIconInfo *
 gnome_theme_icon_info_find (const gchar *icon_theme_name)
 {
   g_return_val_if_fail (icon_theme_name != NULL, NULL);
@@ -1464,7 +1464,7 @@ gnome_theme_meta_info_compare (GnomeThemeMetaInfo *a,
 }
 
 gboolean
-gnome_theme_is_writable (gpointer theme, GnomeThemeType type) {
+gnome_theme_is_writable (const gpointer theme, GnomeThemeType type) {
   GnomeVFSResult vfs_result;
   GnomeVFSFileInfo *vfs_info;
   const gchar *theme_path;
@@ -1475,13 +1475,13 @@ gnome_theme_is_writable (gpointer theme, GnomeThemeType type) {
 
   switch (type) {
     case GNOME_THEME_TYPE_REGULAR:
-      theme_path = ((GnomeThemeInfo *) theme)->path;
+      theme_path = ((const GnomeThemeInfo *) theme)->path;
       break;
     case GNOME_THEME_TYPE_ICON:
-      theme_path = ((GnomeThemeIconInfo *) theme)->path;
+      theme_path = ((const GnomeThemeIconInfo *) theme)->path;
       break;
     case GNOME_THEME_TYPE_METATHEME:
-      theme_path = ((GnomeThemeMetaInfo *) theme)->path;
+      theme_path = ((const GnomeThemeMetaInfo *) theme)->path;
       break;
     default:
       g_assert_not_reached ();

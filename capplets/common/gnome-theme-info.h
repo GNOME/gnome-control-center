@@ -108,7 +108,7 @@ GnomeThemeInfo     *gnome_theme_info_find_by_uri           (const gchar        *
 /* Icon Themes */
 GnomeThemeIconInfo *gnome_theme_icon_info_new              (void);
 void                gnome_theme_icon_info_free             (GnomeThemeIconInfo *icon_theme_info);
-GnomeThemeInfo     *gnome_theme_icon_info_find             (const gchar        *icon_theme_name);
+GnomeThemeIconInfo *gnome_theme_icon_info_find             (const gchar        *icon_theme_name);
 GList              *gnome_theme_icon_info_find_all         (void);
 gint                gnome_theme_icon_info_compare          (GnomeThemeIconInfo *a,
 							    GnomeThemeIconInfo *b);
@@ -129,7 +129,7 @@ GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GnomeVFSURI *meta_th
 void                gnome_theme_init                       (gboolean            *monitor_not_added);
 void                gnome_theme_info_register_theme_change (ThemeChangedCallback func,
 							    gpointer             data);
-gboolean            gnome_theme_is_writable                (gpointer             theme,
+gboolean            gnome_theme_is_writable                (const gpointer       theme,
 							    GnomeThemeType       type);
 
 #endif /* GNOME_THEME_INFO_H */
