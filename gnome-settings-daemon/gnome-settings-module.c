@@ -134,7 +134,9 @@ gnome_settings_module_start (GnomeSettingsModule *module)
 {
 	g_return_val_if_fail (GNOME_SETTINGS_IS_MODULE (module), FALSE);
 	g_return_val_if_fail (module->priv->status == GNOME_SETTINGS_MODULE_STATUS_INITIALIZED, FALSE);
-	g_return_val_if_fail (CLASS (module)->start != NULL, FALSE);
+
+	if (!CLASS (module)->start)
+		return TRUE;
 
 	if (CLASS (module)->start (module)) {
 		module->priv->status = GNOME_SETTINGS_MODULE_STATUS_STARTED;
@@ -149,7 +151,9 @@ gnome_settings_module_stop (GnomeSettingsModule *module)
 {
 	g_return_val_if_fail (GNOME_SETTINGS_IS_MODULE (module), FALSE);
 	g_return_val_if_fail (module->priv->status == GNOME_SETTINGS_MODULE_STATUS_STARTED, FALSE);
-	g_return_val_if_fail (CLASS (module)->stop != NULL, FALSE);
+	
+	if (!CLASS (module)->stop)
+		return TRUE;
 
 	if (CLASS (module)->stop (module)) {
 		module->priv->status = GNOME_SETTINGS_MODULE_STATUS_STOPPED;

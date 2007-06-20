@@ -1,3 +1,12 @@
+2007-06-19  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* gnome-settings-module.c (gnome_settings_module_start|_stop): return
+	TRUE if the module does not implement the method. It's not an error,
+	just the module does not need to implement it.
+
+	* gnome-settings-daemon.c (gnome_settings_daemon_init): allocate memory
+	for the index in the hash table.
+
 2007-06-18  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* gnome-settings-typing-break.c: converted to new arch.

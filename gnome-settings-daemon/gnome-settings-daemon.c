@@ -62,23 +62,6 @@ static GObjectClass *parent_class = NULL;
 XSettingsManager **managers = NULL;
 
 static void
-debug_warning (const char *msg, ...)
-{
-	va_list args;
-	gchar *str;
-	GtkWidget *dialog;
-
-	va_start (args, msg);
-	str = g_strdup_vprintf (msg, args);
-	va_end (args);
-
-	dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE, str);
-	gnome_settings_delayed_show_dialog (dialog);
-
-	g_free (str);
-}
-
-static void
 terminate_cb (void *data)
 {
 	gboolean *terminated = data;
@@ -125,9 +108,9 @@ initialize_modules (GnomeSettingsDaemon *daemon, GnomeSettingsModuleRunlevel run
 	client = gnome_settings_get_config_client ();
 
 	module_list = g_hash_table_lookup (daemon->priv->loaded_modules, &runlevel);
-	for (l = module_list; l != NULL; l = l->next) {
-		
-		gnome_settings_module_initialize (GNOME_SETTINGS_MODULE (l->data), client);
+	for (l = module_list; l != NULL; l = l->next) {		
+		if (!gnome_settings_module_initialize (GNOME_SETTINGS_MODULE (l->data), client))
+			g_warning ("Module %s could not be initialized", G_OBJECT_TYPE_NAME (G_OBJECT (l->data)));
 	}
 }
 
@@ -137,8 +120,10 @@ start_modules (GnomeSettingsDaemon *daemon, GnomeSettingsModuleRunlevel runlevel
 	GList *l, *module_list;
 
 	module_list = g_hash_table_lookup (daemon->priv->loaded_modules, &runlevel);
-	for (l = module_list; l != NULL; l = l->next)
-		gnome_settings_module_start (GNOME_SETTINGS_MODULE (l->data));
+	for (l = module_list; l != NULL; l = l->next) {
+		if (!gnome_settings_module_start (GNOME_SETTINGS_MODULE (l->data)))
+			g_warning ("Module %s could not be started", G_OBJECT_TYPE_NAME (G_OBJECT (l->data)));
+	}
 }
 
 static void
@@ -215,7 +200,7 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 		return;
 
 	/* create hash table for loaded modules */
-	settings->priv->loaded_modules = g_hash_table_new_full (g_int_hash, g_int_equal, NULL, free_modules_list);
+	settings->priv->loaded_modules = g_hash_table_new_full (g_int_hash, g_int_equal, g_free, free_modules_list);
 
 	module_types = g_type_children (GNOME_SETTINGS_TYPE_MODULE, &n_children);
 	if (module_types) {
@@ -223,7 +208,7 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 
 		for (i = 0; i < n_children; i++) {
 			GObject *module;
-			GnomeSettingsModuleRunlevel runlevel;
+			GnomeSettingsModuleRunlevel runlevel, *ptr_runlevel;
 			GList *module_list;
 
 			module = g_object_new (module_types[i], NULL);
@@ -236,7 +221,9 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 				module_list = g_list_append (module_list, module);
 			else {
 				module_list = g_list_append (NULL, module);
-				g_hash_table_insert (settings->priv->loaded_modules, &runlevel, module_list);
+				ptr_runlevel = g_new0 (GnomeSettingsModuleRunlevel, 1);
+				*ptr_runlevel = runlevel;
+				g_hash_table_insert (settings->priv->loaded_modules, ptr_runlevel, module_list);
 			}
 		}
 
