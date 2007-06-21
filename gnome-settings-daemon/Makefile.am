@@ -20,7 +20,6 @@ gnome_settings_daemon_SOURCES =	\
 	eggaccelerators.h		\
 	eggaccelerators.c		\
 	factory.c			\
-	gnome-settings-accessibility-keyboard.h	\
 	gnome-settings-accessibility-keyboard.c	\
 	gnome-settings-background.c	\
 	gnome-settings-clipboard.c	\
@@ -32,17 +31,14 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-font.c		\
 	gnome-settings-gtk1theme.c      \
 	gnome-settings-keybindings.c    \
-	gnome-settings-keybindings.h    \
 	gnome-settings-keyboard-xkb.h	\
 	gnome-settings-keyboard-xkb.c	\
-	gnome-settings-keyboard.h	\
 	gnome-settings-keyboard.c	\
 	gnome-settings-locate-pointer.c	\
 	gnome-settings-locate-pointer.h	\
 	gnome-settings-module.c		\
 	gnome-settings-module.h		\
 	gnome-settings-mouse.c		\
-	gnome-settings-multimedia-keys.h \
 	gnome-settings-multimedia-keys.c \
 	gnome-settings-screensaver.c	\
 	gnome-settings-server.h		\
@@ -51,7 +47,6 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-xmodmap.c	\
 	gnome-settings-xmodmap.h	\
 	gnome-settings-xrdb.c		\
-	gnome-settings-xrdb.h		\
 	gnome-settings-xsettings.c	\
 	gsd-media-keys-window.c		\
 	gsd-media-keys-window.h		\

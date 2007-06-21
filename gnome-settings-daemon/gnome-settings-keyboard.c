@@ -28,10 +28,11 @@
 
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
-#include <gconf/gconf-client.h>
 
-#include "gnome-settings-keyboard.h"
-#include "gnome-settings-daemon.h"
+#include "gnome-settings-keyboard-xkb.h"
+#include "gnome-settings-module.h"
+#include "gnome-settings-xmodmap.h"
+#include "utils.h"
 
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
 #  include <X11/extensions/xf86misc.h>
@@ -44,6 +45,68 @@
 #include <string.h>
 #include <unistd.h>
 
+typedef struct {
+	GnomeSettingsModule parent;
+} GnomeSettingsModuleKeyboard;
+
+typedef struct {
+	GnomeSettingsModuleClass parent_class;
+} GnomeSettingsModuleKeyboardClass;
+
+static GnomeSettingsModuleRunlevel gnome_settings_module_keyboard_get_runlevel (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_keyboard_initialize (GnomeSettingsModule *module, GConfClient *config_client);
+static gboolean gnome_settings_module_keyboard_start (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_keyboard_stop (GnomeSettingsModule *module);
+
+static void
+gnome_settings_module_keyboard_class_init (GnomeSettingsModuleKeyboardClass *klass)
+{
+	GnomeSettingsModuleClass *module_class;
+
+	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->get_runlevel = gnome_settings_module_keyboard_get_runlevel;
+	module_class->initialize = gnome_settings_module_keyboard_initialize;
+	module_class->start = gnome_settings_module_keyboard_start;
+	module_class->stop = gnome_settings_module_keyboard_stop;
+}
+
+static void
+gnome_settings_module_keyboard_init (GnomeSettingsModuleKeyboard *module)
+{
+}
+
+GType
+gnome_settings_module_keyboard_get_type (void)
+{
+	static GType module_type = 0;
+
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleKeyboardClass),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_keyboard_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleKeyboard),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_keyboard_init,
+		};
+
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
+						      "GnomeSettingsModuleKeyboard",
+						      &module_info, 0);
+	}
+
+	return module_type;
+}
+
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_keyboard_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS;
+}
+
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
 static gboolean
 xfree86_set_keyboard_autorepeat_rate (int delay, int rate)
@@ -53,8 +116,7 @@ xfree86_set_keyboard_autorepeat_rate (int delay, int rate)
 
 	if (XF86MiscQueryExtension (GDK_DISPLAY (),
 				    &event_base_return,
-				    &error_base_return) == True)
-	{
+				    &error_base_return) == True) {
 		/* load the current settings */
 		XF86MiscKbdSettings kbdsettings;
 		XF86MiscGetKbdSettings (GDK_DISPLAY (), &kbdsettings);
@@ -74,7 +136,8 @@ static gboolean
 xkb_set_keyboard_autorepeat_rate (int delay, int rate)
 {
 	int interval = (rate <= 0) ? 1000000 : 1000/rate;
-	if (delay <= 0) delay = 1;
+	if (delay <= 0)
+		delay = 1;
 	return XkbSetAutoRepeatRate (GDK_DISPLAY (), XkbUseCoreKbd,
 				     delay, interval);
 }
@@ -93,8 +156,7 @@ gsd_keyboard_get_hostname_key (const char *subkey)
   
 	if (gethostname (hostname, sizeof (hostname)) == 0 &&
 	    strcmp (hostname, "localhost") != 0 &&
-	    strcmp (hostname, "localhost.localdomain") != 0)
-	{
+	    strcmp (hostname, "localhost.localdomain") != 0) {
 		char *key = g_strconcat (GSD_KEYBOARD_KEY
 		                         "/host-",
 		                         hostname,
@@ -102,8 +164,7 @@ gsd_keyboard_get_hostname_key (const char *subkey)
 		                         subkey,
 		                         (char *)NULL);
 		return key;
-	}
-	else
+	} else
 		return NULL;
 }
 
@@ -152,8 +213,7 @@ static char *
 numlock_gconf_state_key (void)
 {
 	char *key = gsd_keyboard_get_hostname_key ("numlock_on");
-	if (!key)
-	{
+	if (!key) {
 		numlock_setup_error = TRUE;
 		g_warning ("numlock: Numlock remembering disabled because your hostname is set to \"localhost\".");
 	}
@@ -218,8 +278,7 @@ numlock_install_xkb_callback (void)
 	int have_xkb = XkbQueryExtension (dpy,
 	                                  &op_code, &xkb_event_code,
 	                                  &error_code, &major, &minor);
-	if (have_xkb != True)
-	{
+	if (have_xkb != True) {
 		numlock_setup_error = TRUE;
 		g_warning ("numlock: XkbQueryExtension returned an error");
 		return;
@@ -316,19 +375,34 @@ apply_settings (void)
 	gdk_error_trap_pop ();
 }
 
-
-void
-gnome_settings_keyboard_init (GConfClient *client)
+static gboolean
+gnome_settings_module_keyboard_initialize (GnomeSettingsModule *module, GConfClient *client)
 {
+	/* Essential - xkb initialization should happen before */
+	gnome_settings_keyboard_xkb_set_post_activation_callback ((PostActivationCallback) gnome_settings_load_modmap_files, NULL);
+	gnome_settings_keyboard_xkb_init (client);
+
 	gnome_settings_register_config_callback (GSD_KEYBOARD_KEY, (GnomeSettingsConfigCallback) apply_settings);
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 	numlock_install_xkb_callback ();
 #endif /* HAVE_X11_EXTENSIONS_XKB_H */
+
+	return TRUE;
 }
 
-void
-gnome_settings_keyboard_load (GConfClient *client)
+static gboolean
+gnome_settings_module_keyboard_start (GnomeSettingsModule *module)
 {
+	/* Essential - xkb initialization should happen before */
+	gnome_settings_keyboard_xkb_load (gnome_settings_module_get_config_client (module));
+
 	apply_settings ();
+
+	return TRUE;
 }
 
+static gboolean
+gnome_settings_module_keyboard_stop (GnomeSettingsModule *module)
+{
+	return TRUE;
+}

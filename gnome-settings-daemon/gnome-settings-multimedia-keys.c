@@ -32,14 +32,13 @@
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 
-#include <gconf/gconf-client.h>
-
 #include "eggaccelerators.h"
 
 #include "actions/acme.h"
 #include "actions/acme-volume.h"
 #include "gsd-media-keys-window.h"
 #include "gnome-settings-dbus.h"
+#include "gnome-settings-module.h"
 
 #define VOLUME_STEP 6           /* percents for one volume button press */
 
@@ -51,6 +50,14 @@
 /* these are the ones we actually use for global keys, we always only check
  * for these set */
 #define USED_MODS (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK)
+
+typedef struct {
+	GnomeSettingsModule parent;
+} GnomeSettingsModuleMultimediaKeys;
+
+typedef struct {
+	GnomeSettingsModuleClass parent_class;
+} GnomeSettingsModuleMultimediaKeysClass;
 
 typedef struct Acme Acme;
 
@@ -66,6 +73,61 @@ struct Acme {
 	/* GnomeSettingsServer */
 	GObject *server;
 };
+
+static GnomeSettingsModuleRunlevel gnome_settings_module_multimedia_keys_get_runlevel (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_multimedia_keys_initialize (GnomeSettingsModule *module,
+								  GConfClient *client);
+static gboolean gnome_settings_module_multimedia_keys_start (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_multimedia_keys_stop (GnomeSettingsModule *module);
+
+static void
+gnome_settings_module_multimedia_keys_class_init (GnomeSettingsModuleMultimediaKeysClass *klass)
+{
+	GnomeSettingsModuleClass *module_class;
+
+	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->get_runlevel = gnome_settings_module_multimedia_keys_get_runlevel;
+	module_class->initialize = gnome_settings_module_multimedia_keys_initialize;
+	module_class->start = gnome_settings_module_multimedia_keys_start;
+	module_class->stop = gnome_settings_module_multimedia_keys_stop;
+}
+
+static void
+gnome_settings_module_multimedia_keys_init (GnomeSettingsModuleMultimediaKeys *module)
+{
+}
+
+GType
+gnome_settings_module_multimedia_keys_get_type (void)
+{
+	static GType module_type = 0;
+
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleMultimediaKeysClass),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_multimedia_keys_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleMultimediaKeys),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_multimedia_keys_init,
+		};
+
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
+						      "GnomeSettingsModuleMultimediaKeys",
+						      &module_info, 0);
+	}
+
+	return module_type;
+}
+
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_multimedia_keys_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS;
+}
 
 static void
 acme_error (char * msg)
@@ -87,16 +149,17 @@ acme_error (char * msg)
 }
 
 static char *
-get_term_command (Acme *acme) {
+get_term_command (Acme *acme)
+{
 	gchar *cmd_term;
 	gchar *cmd = NULL;
 
 	cmd_term = gconf_client_get_string (acme->conf_client,
-				   "/desktop/gnome/applications/terminal/exec", NULL);
+					    "/desktop/gnome/applications/terminal/exec", NULL);
 	if ((cmd_term != NULL) && (strcmp (cmd_term, "") != 0)) {
 		gchar *cmd_args;
 		cmd_args = gconf_client_get_string (acme->conf_client,
-					   "/desktop/gnome/applications/terminal/exec_arg", NULL);
+						    "/desktop/gnome/applications/terminal/exec_arg", NULL);
 		if ((cmd_args != NULL) && (strcmp (cmd_term, "") != 0))
 			cmd = g_strdup_printf ("%s %s -e", cmd_term, cmd_args);
 		else
@@ -139,8 +202,7 @@ execute (Acme *acme, char *cmd, gboolean sync, gboolean need_term)
 			retval = g_spawn_sync (g_get_home_dir (),
 			                       argv, NULL, G_SPAWN_SEARCH_PATH,
 			                       NULL, NULL, NULL, NULL, NULL, NULL);
-		}
-		else {
+		} else {
 			retval = g_spawn_async (g_get_home_dir (),
 			                        argv, NULL, G_SPAWN_SEARCH_PATH,
 			                        NULL, NULL, NULL, NULL);
@@ -148,8 +210,7 @@ execute (Acme *acme, char *cmd, gboolean sync, gboolean need_term)
 		g_strfreev (argv);
 	}
 
-	if (retval == FALSE)
-	{
+	if (retval == FALSE) {
 		char *msg;
 		msg = g_strdup_printf
 			(_("Couldn't execute command: %s\n"
@@ -165,10 +226,8 @@ execute (Acme *acme, char *cmd, gboolean sync, gboolean need_term)
 static void
 do_sleep_action (char *cmd1, char *cmd2)
 {
-	if (g_spawn_command_line_async (cmd1, NULL) == FALSE)
-	{
-		if (g_spawn_command_line_async (cmd2, NULL) == FALSE)
-		{
+	if (g_spawn_command_line_async (cmd1, NULL) == FALSE) {
+		if (g_spawn_command_line_async (cmd2, NULL) == FALSE) {
 			acme_error (_("Couldn't put the machine to sleep.\n"
 					"Verify that the machine is correctly configured."));
 		}
@@ -179,8 +238,7 @@ static void
 dialog_init (Acme *acme)
 {
 	if (acme->dialog != NULL &&
-	    !gsd_media_keys_window_is_valid (GSD_MEDIA_KEYS_WINDOW (acme->dialog)))
-	{
+	    !gsd_media_keys_window_is_valid (GSD_MEDIA_KEYS_WINDOW (acme->dialog))) {
 		g_object_unref (acme->dialog);
 		acme->dialog = NULL;
 	}
@@ -264,10 +322,8 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 	g_return_if_fail (entry->key != NULL);
 
 	/* Find the key that was modified */
-	for (i = 0; i < HANDLED_KEYS; i++)
-	{
-		if (strcmp (entry->key, keys[i].gconf_key) == 0)
-		{
+	for (i = 0; i < HANDLED_KEYS; i++) {
+		if (strcmp (entry->key, keys[i].gconf_key) == 0) {
 			char *tmp;
 			Key *key;
 
@@ -282,16 +338,14 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 			tmp = gconf_client_get_string (acme->conf_client,
 					keys[i].gconf_key, NULL);
 
-			if (is_valid_shortcut (tmp) == FALSE)
-			{
+			if (is_valid_shortcut (tmp) == FALSE) {
 				g_free (tmp);
 				break;
 			}
 
 			key = g_new0 (Key, 1);
 			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
-			    || key->keycode == 0)
-			{
+			    || key->keycode == 0) {
 				g_free (tmp);
 				g_free (key);
 				break;
@@ -323,8 +377,7 @@ init_screens (Acme *acme)
 		return;
 	}
 
-	for (i = 0; i < gdk_display_get_n_screens (display); i++)
-	{
+	for (i = 0; i < gdk_display_get_n_screens (display); i++) {
 		GdkScreen *screen;
 
 		screen = gdk_display_get_screen (display, i);
@@ -341,8 +394,7 @@ init_kbd (Acme *acme)
 {
 	int i;
 
-	for (i = 0; i < HANDLED_KEYS; i++)
-	{
+	for (i = 0; i < HANDLED_KEYS; i++) {
 		char *tmp;
 		Key *key;
 
@@ -359,20 +411,18 @@ init_kbd (Acme *acme)
 
 		key = g_new0 (Key, 1);
 		if (!egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state)
-		    || key->keycode == 0)
-		{
+		    || key->keycode == 0) {
 		        g_free (tmp);
 			g_free (key);
 			continue;
 		}
 	/*avoid grabbing all the keyboard when KeyCode cannot be retrieved */
-		if (key->keycode == AnyKey)
-		  {
-		    g_warning ("The shortcut key \"%s\" cannot be found on the current system, ignoring the binding", tmp);
-		    g_free (tmp);
-		    g_free (key);
-		    continue;
-		  }
+		if (key->keycode == AnyKey)  {
+			g_warning ("The shortcut key \"%s\" cannot be found on the current system, ignoring the binding", tmp);
+			g_free (tmp);
+			g_free (key);
+			continue;
+		}
 
 		g_free (tmp);
 
@@ -447,8 +497,8 @@ do_unknown_action (Acme *acme, const char *url)
 	g_return_if_fail (url != NULL);
 
 	string = gconf_client_get_string (acme->conf_client,
-			"/desktop/gnome/url-handlers/unknown/command",
-			NULL);
+					  "/desktop/gnome/url-handlers/unknown/command",
+					  NULL);
 
 	if ((string != NULL) && (strcmp (string, "") != 0)) {
 		gchar *cmd;
@@ -465,8 +515,8 @@ do_help_action (Acme *acme)
 	char *string;
 
 	string = gconf_client_get_string (acme->conf_client,
-			"/desktop/gnome/url-handlers/ghelp/command",
-			NULL);
+					  "/desktop/gnome/url-handlers/ghelp/command",
+					  NULL);
 
 	if ((string != NULL) && (strcmp (string, "") != 0)) {
 		gchar *cmd;
@@ -485,14 +535,15 @@ do_mail_action (Acme *acme)
 	char *string;
 
 	string = gconf_client_get_string (acme->conf_client,
-			"/desktop/gnome/url-handlers/mailto/command",
-			NULL);
+					  "/desktop/gnome/url-handlers/mailto/command",
+					  NULL);
 
 	if ((string != NULL) && (strcmp (string, "") != 0)) {
 		gchar *cmd;
 		cmd = g_strdup_printf (string, "");
-		execute (acme, cmd, FALSE, gconf_client_get_bool (acme->conf_client,
-					   "/desktop/gnome/url-handlers/mailto/needs_terminal", NULL));
+		execute (acme, cmd, FALSE,
+			 gconf_client_get_bool (acme->conf_client,
+						"/desktop/gnome/url-handlers/mailto/needs_terminal", NULL));
 		g_free (cmd);
 	}
 	g_free (string);
@@ -518,8 +569,8 @@ do_www_action (Acme *acme, const char *url)
 	char *string;
 
 	string = gconf_client_get_string (acme->conf_client,
-		"/desktop/gnome/url-handlers/http/command",
-		 NULL);
+					  "/desktop/gnome/url-handlers/http/command",
+					  NULL);
 
 	if ((string != NULL) && (strcmp (string, "") != 0)) {
 		gchar *cmd;
@@ -589,16 +640,14 @@ do_sound_action (Acme *acme, int type)
 		acme_volume_mute_toggle (acme->volobj);
 		break;
 	case VOLUME_DOWN_KEY:
-		if (muted)
-		{
+		if (muted) {
 			acme_volume_mute_toggle(acme->volobj);
 		} else {
 			acme_volume_set_volume (acme->volobj, vol - vol_step);
 		}
 		break;
 	case VOLUME_UP_KEY:
-		if (muted)
-		{
+		if (muted) {
 			acme_volume_mute_toggle(acme->volobj);
 		} else {
 			acme_volume_set_volume (acme->volobj, vol + vol_step);
@@ -708,13 +757,11 @@ acme_get_screen_from_event (Acme *acme, XAnyEvent *xanyev)
 	GSList *l;
 
 	/* Look for which screen we're receiving events */
-	for (l = acme->screens; l != NULL; l = l->next)
-	{
+	for (l = acme->screens; l != NULL; l = l->next) {
 		screen = (GdkScreen *) l->data;
 		window = gdk_screen_get_root_window (screen);
 
-		if (GDK_WINDOW_XID (window) == xanyev->window)
-		{
+		if (GDK_WINDOW_XID (window) == xanyev->window) {
 			return screen;
 		}
 	}
@@ -739,14 +786,12 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	keycode = xev->xkey.keycode;
 	state = xev->xkey.state;
 
-	for (i = 0; i < HANDLED_KEYS; i++)
-	{
+	for (i = 0; i < HANDLED_KEYS; i++) {
 		if (keys[i].key == NULL)
 			continue;
 
 		if (keys[i].key->keycode == keycode &&
-				(state & USED_MODS) == keys[i].key->state)
-		{
+				(state & USED_MODS) == keys[i].key->state) {
 			switch (keys[i].key_type) {
 			case VOLUME_DOWN_KEY:
 			case VOLUME_UP_KEY:
@@ -772,20 +817,21 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	return GDK_FILTER_CONTINUE;
 }
 
-void
-gnome_settings_multimedia_keys_init (GConfClient *client)
+static gboolean
+gnome_settings_module_multimedia_keys_initialize (GnomeSettingsModule *module, GConfClient *client)
 {
+	return TRUE;
 }
 
-void
-gnome_settings_multimedia_keys_load (GConfClient *client)
+static gboolean
+gnome_settings_module_multimedia_keys_start (GnomeSettingsModule *module)
 {
 	GSList *l;
 	Acme   *acme;
 
 	acme = g_new0 (Acme, 1);
 
-	acme->conf_client = client;
+	acme->conf_client = gnome_settings_module_get_config_client (module);
 	gconf_client_add_dir (acme->conf_client,
 			      GCONF_BINDING_DIR,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL,
@@ -803,5 +849,13 @@ gnome_settings_multimedia_keys_load (GConfClient *client)
 	for (l = acme->screens; l != NULL; l = l->next)
 		gdk_window_add_filter (gdk_screen_get_root_window (l->data),
 			acme_filter_events, (gpointer) acme);
+
+	return TRUE;
+}
+
+static gboolean
+gnome_settings_module_multimedia_keys_stop (GnomeSettingsModule *module)
+{
+	return TRUE;
 }
 

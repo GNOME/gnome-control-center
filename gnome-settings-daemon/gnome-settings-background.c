@@ -31,7 +31,6 @@
 #include <gdk/gdkx.h>
 #include <gconf/gconf.h>
 
-#include "gnome-settings-keyboard.h"
 #include "gnome-settings-module.h"
 
 #include "preferences.h"
@@ -89,7 +88,7 @@ background_callback (GConfClient *client,
 		g_source_remove (module_bg->applier_idle_id);
 	}
 
-	module_bg->applier_idle_id = g_timeout_add (100, applier_idle, NULL);
+	module_bg->applier_idle_id = g_timeout_add (100, applier_idle, module_bg);
 }
 
 static void

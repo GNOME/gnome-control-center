@@ -31,8 +31,71 @@
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-help.h>
 
-#include "gnome-settings-accessibility-keyboard.h"
-#include "gnome-settings-daemon.h"
+#include "gnome-settings-module.h"
+#include "utils.h"
+
+typedef struct {
+	GnomeSettingsModule parent;
+} GnomeSettingsModuleAccessibilityKeyboard;
+
+typedef struct {
+	GnomeSettingsModuleClass parent_class;
+} GnomeSettingsModuleAccessibilityKeyboardClass;
+
+static GnomeSettingsModuleRunlevel gnome_settings_module_accessibility_keyboard_get_runlevel (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_accessibility_keyboard_initialize (GnomeSettingsModule *module,
+								  GConfClient *client);
+static gboolean gnome_settings_module_accessibility_keyboard_start (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_accessibility_keyboard_stop (GnomeSettingsModule *module);
+
+static void
+gnome_settings_module_accessibility_keyboard_class_init (GnomeSettingsModuleAccessibilityKeyboardClass *klass)
+{
+	GnomeSettingsModuleClass *module_class;
+
+	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->get_runlevel = gnome_settings_module_accessibility_keyboard_get_runlevel;
+	module_class->initialize = gnome_settings_module_accessibility_keyboard_initialize;
+	module_class->start = gnome_settings_module_accessibility_keyboard_start;
+	module_class->stop = gnome_settings_module_accessibility_keyboard_stop;
+}
+
+static void
+gnome_settings_module_accessibility_keyboard_init (GnomeSettingsModuleAccessibilityKeyboard *module)
+{
+}
+
+GType
+gnome_settings_module_accessibility_keyboard_get_type (void)
+{
+	static GType module_type = 0;
+
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleAccessibilityKeyboardClass),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_accessibility_keyboard_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleAccessibilityKeyboard),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_accessibility_keyboard_init,
+		};
+
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
+						      "GnomeSettingsModuleAccessibilityKeyboard",
+						      &module_info, 0);
+	}
+
+	return module_type;
+}
+
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_accessibility_keyboard_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS;
+}
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 #  include <X11/XKBlib.h>
@@ -142,19 +205,19 @@ set_bool (GConfClient *client, GConfChangeSet *cs,
 static unsigned long
 set_clear (gboolean flag, unsigned long value, unsigned long mask)
 {
-    if (flag)
-	    return value | mask;
-    return value & ~mask;
+	if (flag)
+		return value | mask;
+	return value & ~mask;
 }
 
 static gboolean
 set_ctrl_from_gconf (XkbDescRec *desc, GConfClient *client,
 		     char const *key, unsigned long mask, gboolean flag)
 {
-    gboolean result = flag && gconf_client_get_bool (client, key, NULL);
-    desc->ctrls->enabled_ctrls =
-	    set_clear (result, desc->ctrls->enabled_ctrls, mask);
-    return result;
+	gboolean result = flag && gconf_client_get_bool (client, key, NULL);
+	desc->ctrls->enabled_ctrls =
+		set_clear (result, desc->ctrls->enabled_ctrls, mask);
+	return result;
 }
 
 static void
@@ -293,55 +356,51 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 	GError *err = NULL;
 	gboolean success;
 
-	switch (response_id)
-	{
-	    case GTK_RESPONSE_DELETE_EVENT:
-	    case GTK_RESPONSE_REJECT:
-	    case GTK_RESPONSE_CANCEL:
-		{
-		    GConfClient *client = gnome_settings_get_config_client ();
+	switch (response_id) {
+	case GTK_RESPONSE_DELETE_EVENT:
+	case GTK_RESPONSE_REJECT:
+	case GTK_RESPONSE_CANCEL: {
+		GConfClient *client = gnome_settings_get_config_client ();
 
-		    /* we're reverting, so we invert sense of 'enabled' flag */
-		    d ("cancelling AccessX request");
-		    if (revert_controls_mask == XkbStickyKeysMask)
-		    {
-			    success = gconf_client_set_bool (client, CONFIG_ROOT "/stickykeys_enable", !enabled, &err);
-			    if (err != NULL) 
-				    g_error_free (err);
-		    }
-		    if (revert_controls_mask == XkbSlowKeysMask)
-		    {
-			    success = gconf_client_set_bool (client, CONFIG_ROOT "/slowkeys_enable", !enabled, &err);
-			    if (err != NULL)
-				    g_error_free (err);
-		    }
-		    gconf_client_suggest_sync (client, NULL);
-		    set_server_from_gconf (NULL);
-		    break;
+		/* we're reverting, so we invert sense of 'enabled' flag */
+		d ("cancelling AccessX request");
+		if (revert_controls_mask == XkbStickyKeysMask) {
+			success = gconf_client_set_bool (client, CONFIG_ROOT "/stickykeys_enable", !enabled, &err);
+			if (err != NULL) 
+				g_error_free (err);
 		}
-	    case GTK_RESPONSE_HELP:
-		    gnome_help_display_desktop (NULL,
-						"user-guide",
-						"user-guide.xml",
-						"goscustaccess-6",
-						&err);
-		    if (err != NULL) {
-			    GtkWidget *error_dialog = gtk_message_dialog_new (NULL,
-									      0,
-									      GTK_MESSAGE_ERROR,
-									      GTK_BUTTONS_CLOSE,
-									      _("There was an error displaying help: %s"), 
-									      err->message);
-			    g_signal_connect (G_OBJECT (error_dialog),
-					      "response",
-					      G_CALLBACK (gtk_widget_destroy), NULL);
-			    gtk_window_set_resizable (GTK_WINDOW (error_dialog), FALSE);
-			    gtk_widget_show (error_dialog);
-			    g_error_free (err);
-		    }
-		    return FALSE;
-	    default:
-		    break;
+		if (revert_controls_mask == XkbSlowKeysMask) {
+			success = gconf_client_set_bool (client, CONFIG_ROOT "/slowkeys_enable", !enabled, &err);
+			if (err != NULL)
+				g_error_free (err);
+		}
+		gconf_client_suggest_sync (client, NULL);
+		set_server_from_gconf (NULL);
+		break;
+	}
+	case GTK_RESPONSE_HELP:
+		gnome_help_display_desktop (NULL,
+					    "user-guide",
+					    "user-guide.xml",
+					    "goscustaccess-6",
+					    &err);
+		if (err != NULL) {
+			GtkWidget *error_dialog = gtk_message_dialog_new (NULL,
+									  0,
+									  GTK_MESSAGE_ERROR,
+									  GTK_BUTTONS_CLOSE,
+									  _("There was an error displaying help: %s"), 
+									  err->message);
+			g_signal_connect (G_OBJECT (error_dialog),
+					  "response",
+					  G_CALLBACK (gtk_widget_destroy), NULL);
+			gtk_window_set_resizable (GTK_WINDOW (error_dialog), FALSE);
+			gtk_widget_show (error_dialog);
+			g_error_free (err);
+		}
+		return FALSE;
+	default:
+		break;
 	}
 	return TRUE;
 }
@@ -503,8 +562,7 @@ set_gconf_from_server (GConfEntry *ignored)
 	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/togglekeys_enable",
 		desc->ctrls->ax_options & XkbAX_IndicatorFBMask);
 
-	if (!changed && stickykeys_changed^slowkeys_changed)
-	{
+	if (!changed && stickykeys_changed^slowkeys_changed) {
 		/* 
 		 * sticky or slowkeys has changed, singly, without our intervention.
 		 * 99% chance this is due to a keyboard shortcut being used.
@@ -515,8 +573,7 @@ set_gconf_from_server (GConfEntry *ignored)
 		 */
 
                 /* sanity check: are keyboard shortcuts available? */
-		if (desc->ctrls->enabled_ctrls & XkbAccessXKeysMask) 
-		{
+		if (desc->ctrls->enabled_ctrls & XkbAccessXKeysMask) {
 			if (slowkeys_changed)
 				ax_slowkeys_warning_dialog_post (desc->ctrls->enabled_ctrls & XkbSlowKeysMask);	
 			else
@@ -561,15 +618,24 @@ cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *ignored1, gpointer ignored2)
 	return GDK_FILTER_CONTINUE;
 }
 
-void
-gnome_settings_accessibility_keyboard_load (GConfClient *client)
+static gboolean
+gnome_settings_module_accessibility_keyboard_initialize (GnomeSettingsModule *module, GConfClient *client)
+{
+	gnome_settings_register_config_callback (CONFIG_ROOT, &set_server_from_gconf);
+
+	return TRUE;
+}
+
+static gboolean
+gnome_settings_module_accessibility_keyboard_start (GnomeSettingsModule *module)
 {
 	guint event_mask = XkbControlsNotifyMask;
 #ifdef DEBUG_ACCESSIBILITY	
-	event_mask = XkbControlsNotifyMask | XkbAccessXNotifyMask); /* make default when AXN_AXKWarning works */
+	event_mask = XkbControlsNotifyMask | XkbAccessXNotifyMask; /* make default when AXN_AXKWarning works */
 #endif
+
 	if (!xkb_enabled ())
-		return;
+		return FALSE;
 
 	/* be sure to init before starting to monitor the server */
 	set_server_from_gconf (NULL);
@@ -584,23 +650,30 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 	gdk_error_trap_pop ();
 
 	gdk_window_add_filter (NULL, cb_xkb_event_filter, NULL);
+
+	return TRUE;
 }
 
-
-void
-gnome_settings_accessibility_keyboard_init (GConfClient *client)
-{
-	gnome_settings_register_config_callback (CONFIG_ROOT, &set_server_from_gconf);
-}
 #else
 
-void
-gnome_settings_accessibility_keyboard_load (GConfClient *client)
+static gboolean
+gnome_settings_module_accessibility_keyboard_initialize (GnomeSettingsModule *module, GConfClient *client)
 {
 	g_warning ("Unsupported in this build");
+	return TRUE;
 }
-void
-gnome_settings_accessibility_keyboard_init (GConfClient *client)
+
+static gboolean
+gnome_settings_module_accessibility_keyboard_start (GnomeSettingsModule *module)
 {
+	g_warning ("Unsupported in this build");
+	return TRUE;
 }
+
 #endif
+
+static gboolean
+gnome_settings_module_accessibility_keyboard_stop (GnomeSettingsModule *module)
+{
+	return TRUE;
+}

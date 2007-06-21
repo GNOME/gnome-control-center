@@ -1,3 +1,20 @@
+2007-06-21  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* gnome-settings-accessibility-keyboard.c:
+	* gnome-settings-keybindings.c:
+	* gnome-settings-keyboard.c:
+	* gnome-settings-multimedia-keys.c:
+	* gnome-settings-xrdb.c:
+	* gnome-settings-daemon.c: all modules use now the new arch.
+
+	* gnome-settings-background.c (background_callback): pass the correct
+	argument to the idle callback.
+
+2007-06-21  Matthias Clasen <mclasen@redhat.com>
+
+	* gnome-settings-screensaver.c (gnome_settings_module_screensaver_start):
+	fix spawning of gnome-screensaver.
+
 2007-06-19  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* gnome-settings-module.c (gnome_settings_module_start|_stop): return

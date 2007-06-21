@@ -27,10 +27,16 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include <gtk/gtkwindow.h>
-#include <gconf/gconf-client.h>
 
-#include "gnome-settings-daemon.h"
-#include "gnome-settings-xrdb.h"
+#include "gnome-settings-module.h"
+
+typedef struct {
+	GnomeSettingsModule parent;
+} GnomeSettingsModuleXrdb;
+
+typedef struct {
+	GnomeSettingsModuleClass parent_class;
+} GnomeSettingsModuleXrdbClass;
 
 #define SYSTEM_AD_DIR GNOMECC_DATA_DIR "/xrdb"
 #define GENERAL_AD SYSTEM_AD_DIR "/General.ad"
@@ -40,7 +46,29 @@
 
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
 
+static GnomeSettingsModuleRunlevel gnome_settings_module_xrdb_get_runlevel (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_xrdb_initialize (GnomeSettingsModule *module, GConfClient *client);
+static gboolean gnome_settings_module_xrdb_start (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_xrdb_stop (GnomeSettingsModule *module);
+
 static GtkWidget *widget;
+
+static void
+gnome_settings_module_xrdb_class_init (GnomeSettingsModuleXrdbClass *klass)
+{
+	GnomeSettingsModuleClass *module_class;
+
+	module_class = GNOME_SETTINGS_MODULE_CLASS (klass);
+	module_class->get_runlevel = gnome_settings_module_xrdb_get_runlevel;
+	module_class->initialize = gnome_settings_module_xrdb_initialize;
+	module_class->start = gnome_settings_module_xrdb_start;
+	module_class->stop = gnome_settings_module_xrdb_stop;
+}
+
+static void
+gnome_settings_module_xrdb_init (GnomeSettingsModuleXrdb *module)
+{
+}
 
 /*
  * Theme colour functions
@@ -127,14 +155,16 @@ append_theme_colours (GtkStyle *style, GString *string)
 static gint
 compare_basenames (gconstpointer a, gconstpointer b)
 {
-  char *base_a, *base_b;
-  int res;
-  base_a = g_path_get_basename (a);
-  base_b = g_path_get_basename (b);
-  res = strcmp (base_a, base_b);
-  g_free (base_a);
-  g_free (base_b);
-  return res;
+	char *base_a, *base_b;
+	int res;
+
+	base_a = g_path_get_basename (a);
+	base_b = g_path_get_basename (b);
+	res = strcmp (base_a, base_b);
+	g_free (base_a);
+	g_free (base_b);
+
+	return res;
 }
 
 /**
@@ -326,28 +356,69 @@ static void theme_changed (GtkSettings  *settings,
 	apply_settings (gtk_widget_get_style (widget));
 }
 
-void
-gnome_settings_xrdb_init (GConfClient *client)
+GType
+gnome_settings_module_xrdb_get_type (void)
 {
+	static GType module_type = 0;
+  
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleXrdbClass),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_xrdb_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleXrdb),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_xrdb_init,
+		};
+      
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
+						      "GnomeSettingsModuleXrdb",
+						      &module_info, 0);
+	}
+  
+	return module_type;
 }
 
-void
-gnome_settings_xrdb_load (GConfClient *client)
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_xrdb_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS;
+}
+
+static gboolean
+gnome_settings_module_xrdb_initialize (GnomeSettingsModule *module, GConfClient *client)
+{
+	return TRUE;
+}
+
+static gboolean
+gnome_settings_module_xrdb_start (GnomeSettingsModule *module)
 {
 	static gboolean initialized = FALSE;
 
-	if (!initialized) 
-	  { /* the initialization is done here otherwise 
-	       gnome_settings_xsettings_load would generate 
-	       false hit as gtk-theme-name is set to Default in 
-	       gnome_settings_xsettings_init */
-	    GtkSettings *settings = gtk_settings_get_default ();
-	    widget = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	    g_signal_connect (settings,
-			      "notify::gtk-theme-name",
-			      G_CALLBACK (theme_changed),
-			      widget);
-	    gtk_widget_ensure_style (widget); 
-	    initialized = TRUE;
-	  }
+	if (!initialized) {
+		/* the initialization is done here otherwise 
+		   gnome_settings_xsettings_load would generate 
+		   false hit as gtk-theme-name is set to Default in 
+		   gnome_settings_xsettings_init */
+		GtkSettings *settings = gtk_settings_get_default ();
+		widget = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+		g_signal_connect (settings,
+				  "notify::gtk-theme-name",
+				  G_CALLBACK (theme_changed),
+				  widget);
+		gtk_widget_ensure_style (widget); 
+		initialized = TRUE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+gnome_settings_module_xrdb_stop (GnomeSettingsModule *module)
+{
+	return TRUE;
 }
