@@ -18,8 +18,8 @@
 #include "capplet-util.h"
 
 static gint child_pid;
-#define ICON_SIZE_WIDTH 150
-#define ICON_SIZE_HEIGHT 150
+#define ICON_SIZE_WIDTH 140
+#define ICON_SIZE_HEIGHT 140
 
 typedef struct
 {
@@ -180,8 +180,12 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
 {
   GtkWidget *window;
   GtkWidget *preview;
+  GtkWidget *vbox;
   GtkWidget *align;
+  GtkWidget *box;
   GtkWidget *stock_button;
+  GtkWidget *checkbox;
+  GtkWidget *radio;
 
   GtkRequisition requisition;
   GtkAllocation allocation;
@@ -217,18 +221,30 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   gtk_container_add (GTK_CONTAINER (window), preview);
   gtk_widget_realize (window);
   gtk_widget_realize (preview);
-  align = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
-  gtk_container_add (GTK_CONTAINER (preview), align);
-  gtk_container_set_border_width (GTK_CONTAINER (align), 5);
+  vbox = gtk_vbox_new (FALSE, 6);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+  gtk_container_add (GTK_CONTAINER (preview), vbox);
+  align = gtk_alignment_new (0, 0, 0.0, 0.0);
+  gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
   stock_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
-  gtk_container_add (GTK_CONTAINER (align), stock_button);
+  gtk_container_add (GTK_CONTAINER (align), stock_button);  
+  box = gtk_hbox_new (FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, FALSE, 0);
+  checkbox = gtk_check_button_new ();
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox), TRUE);
+  gtk_box_pack_start (GTK_BOX (box), checkbox, FALSE, FALSE, 0);
+  radio = gtk_radio_button_new (NULL);
+  gtk_box_pack_start (GTK_BOX (box), radio, FALSE, FALSE, 0);
 
   gtk_widget_show_all (preview);
-  gtk_widget_realize (align);
   gtk_widget_realize (stock_button);
   gtk_widget_realize (GTK_BIN (stock_button)->child);
+  gtk_widget_realize (checkbox);
+  gtk_widget_realize (radio);
   gtk_widget_map (stock_button);
   gtk_widget_map (GTK_BIN (stock_button)->child);
+  gtk_widget_map (checkbox);
+  gtk_widget_map (radio);
 
   meta_preview_set_frame_flags (META_PREVIEW (preview), flags);
   meta_preview_set_theme (META_PREVIEW (preview), theme);
@@ -259,12 +275,14 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   fake_expose_widget (preview, pixmap, NULL);
   /* we call this again here because the preview sometimes draws into the area
    * of the contents, see http://bugzilla.gnome.org/show_bug.cgi?id=351389 */
-  fake_expose_widget (window, pixmap, &align->allocation);
+  fake_expose_widget (window, pixmap, &vbox->allocation);
   fake_expose_widget (stock_button, pixmap, NULL);
   gtk_container_foreach (GTK_CONTAINER (GTK_BIN (GTK_BIN (stock_button)->child)->child),
 			 hbox_foreach,
 			 pixmap);
   fake_expose_widget (GTK_BIN (stock_button)->child, pixmap, NULL);
+  fake_expose_widget (checkbox, pixmap, NULL);
+  fake_expose_widget (radio, pixmap, NULL);
 
 
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
@@ -276,12 +294,12 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
 
   gdk_pixbuf_composite (icon,
 			pixbuf,
-			align->allocation.x + align->allocation.width - width - 5,
-			align->allocation.y + align->allocation.height - height - 5,
+			vbox->allocation.x + vbox->allocation.width - width - 5,
+			vbox->allocation.y + vbox->allocation.height - height - 5,
 			width,
 			height,
-			align->allocation.x + align->allocation.width - width - 5,
-			align->allocation.y + align->allocation.height - height - 5,
+			vbox->allocation.x + vbox->allocation.width - width - 5,
+			vbox->allocation.y + vbox->allocation.height - height - 5,
 			1.0,
 			1.0,
 			GDK_INTERP_BILINEAR, 255);
@@ -477,11 +495,8 @@ message_from_child (GIOChannel   *source,
 	  for (i = 0; i < ICON_SIZE_HEIGHT; i++)
 	    memcpy (pixels + rowstride * i, async_data.data->data + 4 * ICON_SIZE_WIDTH * i, ICON_SIZE_WIDTH * 4);
 
-	  scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
-	  g_object_unref (pixbuf);
-
 	  /* callback function needs to unref the pixbuf */
- 	  (* async_data.func) (scaled_pixbuf, async_data.user_data);
+ 	  (* async_data.func) (pixbuf, async_data.user_data);
 	  if (async_data.destroy)
 	    (* async_data.destroy) (async_data.user_data);
 
@@ -568,8 +583,6 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
       while (j < ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf));
     }
 
-  retval = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
-  g_object_unref (pixbuf);
   return retval;
 }
 
@@ -818,6 +831,7 @@ generate_metacity_theme_thumbnail (GnomeThemeInfo *info)
 
   fake_expose_widget (window, pixmap, NULL);
   fake_expose_widget (preview, pixmap, NULL);
+  fake_expose_widget (window, pixmap, &dummy->allocation);
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
