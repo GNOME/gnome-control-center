@@ -1,5 +1,5 @@
 /*
- * Copyright © 2001 Red Hat, Inc.
+ * Copyright © 2001, 2007 Red Hat, Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is hereby granted without fee, provided that
@@ -18,7 +18,7 @@
  * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
- * Authors:  Owen Taylor, Havoc Pennington
+ * Authors:  Owen Taylor, Havoc Pennington, Ray Strode, Rodrigo Moya
  */
 #include <config.h>
 
@@ -36,6 +36,7 @@
 
 struct _GnomeSettingsDaemonPrivate {
 	GHashTable *loaded_modules;
+	GObject *dbus_service;
 };
 
 GType gnome_settings_module_accessibility_keyboard_get_type (void);
@@ -54,7 +55,7 @@ GType gnome_settings_module_typing_break_get_type (void);
 GType gnome_settings_module_xrdb_get_type (void);
 GType gnome_settings_module_xsettings_get_type (void);
 
-static GObjectClass *parent_class = NULL;
+static GObject *parent_class = NULL;
 XSettingsManager **managers = NULL;
 
 static void
@@ -156,6 +157,7 @@ finalize (GObject *object)
 		daemon->priv->loaded_modules = NULL;
 	}
 
+	g_object_unref (daemon->priv->dbus_service);
 	g_free (daemon->priv);
 	daemon->priv = NULL;
 
@@ -230,18 +232,64 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 
 		g_free (module_types);
 	}
+
+	/* create DBus server */
+	settings->priv->dbus_service  = g_object_new (gnome_settings_server_get_type (), NULL);
 }
 
 G_DEFINE_TYPE (GnomeSettingsDaemon, gnome_settings_daemon, G_TYPE_OBJECT)
+
+static gboolean
+start_modules_idle_cb (gpointer user_data)
+{
+	GnomeSettingsDaemon *daemon = user_data;
+
+	/* start all modules */
+	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS);
+	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS);
+	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_CORE_SERVICES);
+	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_SERVICES);
+
+	return FALSE;
+}
+
+static gboolean
+init_modules_idle_cb (gpointer user_data)
+{
+	int i;
+	int n_screens;
+	GdkDisplay *display;
+	GnomeSettingsDaemon *daemon = user_data;
+
+	display = gdk_display_get_default ();
+	n_screens = gdk_display_get_n_screens (display);
+
+	/* load all modules */
+	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS);
+	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS);
+	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_CORE_SERVICES);
+	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_SERVICES);
+
+	for (i = 0; i < n_screens; i++) {
+		GdkScreen *screen;
+
+		screen = gdk_display_get_screen (display, i);
+		gdk_window_add_filter (
+			gdk_screen_get_root_window (screen),
+			manager_event_filter, GINT_TO_POINTER (i));
+	}
+
+	g_idle_add ((GSourceFunc) start_modules_idle_cb, daemon);
+
+	return FALSE;
+}
 
 GObject *
 gnome_settings_daemon_new (void)
 {
 	gboolean terminated = FALSE;
-	GConfClient *client;
 	GnomeSettingsDaemon *daemon;
 	GdkDisplay *display;
-	GObject *dbusServer;
 	int i;
 	int n_screens;
 
@@ -256,7 +304,6 @@ gnome_settings_daemon_new (void)
 		fprintf (stderr, "You can only run one xsettings manager at a time; exiting\n");
 		return NULL;
 	}
-
   
 	if (!terminated) {
 		managers = g_new (XSettingsManager *, n_screens + 1);
@@ -280,31 +327,7 @@ gnome_settings_daemon_new (void)
 		managers [i] = NULL;
 	}
 
-	client = gnome_settings_get_config_client ();
-
-	/* load all modules */
-	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS);
-	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS);
-	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_CORE_SERVICES);
-	initialize_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_SERVICES);
-
-	for (i = 0; i < n_screens; i++) {
-		GdkScreen *screen;
-
-		screen = gdk_display_get_screen (display, i);
-		gdk_window_add_filter (
-			gdk_screen_get_root_window (screen),
-			manager_event_filter, GINT_TO_POINTER (i));
-	}
-
-	/* start all modules */
-	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS);
-	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS);
-	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_CORE_SERVICES);
-	start_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_SERVICES);
-
-	/* create DBus server */
-	dbusServer = g_object_new (gnome_settings_server_get_type (), NULL);
+	g_idle_add ((GSourceFunc) init_modules_idle_cb, daemon);
 
 	return G_OBJECT (daemon);
 }

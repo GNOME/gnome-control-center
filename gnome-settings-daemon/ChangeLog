@@ -1,3 +1,15 @@
+2007-06-22  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* gnome-settings-daemon.c: incorporate fixes from Matthias Clasen in
+	bug #430889
+	(gnome_settings_daemon_init): create the DBus server here.
+	(gnome_settings_daemon_new): install an idle callback to initialize the
+	modules.
+	(init_modules_idle_cb): initialize modules and install an idle callback
+	to start the modules.
+	(start_modules_idle_cb): start modules here.
+	(finalize): unref the DBus service.
+
 2007-06-21  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* gnome-settings-accessibility-keyboard.c:
