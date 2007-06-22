@@ -27,13 +27,12 @@
 #include "gconf-property-editor.h"
 #include "theme-thumbnail.h"
 
-static void prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type);
+static void prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback callback);
 static void update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data);
 static void update_color_buttons_from_settings (GtkSettings *settings, AppearanceData *data);
 static void check_color_schemes_enabled (GtkSettings *settings, AppearanceData *data);
 
 static void color_scheme_changed (GObject *settings, GParamSpec *pspec, AppearanceData *data);
-static void theme_name_changed (GObject *settings, GParamSpec *pspec, AppearanceData *data);
 
 /* GUI Callbacks */
 
@@ -52,19 +51,136 @@ style_response_cb (GtkDialog *dialog, gint response_id)
   }
 }
 
+static void
+gtk_theme_changed (GConfPropertyEditor *peditor,
+		   const gchar *key,
+		   const GConfValue *value,
+		   AppearanceData *data)
+{
+  GnomeThemeInfo *theme = NULL;
+  const gchar *name;
+  gchar *current_theme;
+  GtkSettings *settings = gtk_settings_get_default ();
+
+  if (value && (name = gconf_value_get_string (value))) {
+    theme = gnome_theme_info_find (name);
+
+    /* manually update GtkSettings to new gtk+ theme. */
+    g_object_get (settings, "gtk-theme-name", &current_theme, NULL);
+
+    if (strcmp (current_theme, name) != 0)
+      g_object_set (settings, "gtk-theme-name", name, NULL);
+
+    g_free (current_theme);
+  }
+
+  check_color_schemes_enabled (settings, data);
+  update_color_buttons_from_settings (settings, data);
+
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "gtk_themes_delete"),
+			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_REGULAR));
+}
+
+static void
+window_theme_changed (GConfPropertyEditor *peditor,
+		      const gchar *key,
+		      const GConfValue *value,
+		      AppearanceData *data)
+{
+  GnomeThemeInfo *theme = NULL;
+  const gchar *name;
+
+  if (value && (name = gconf_value_get_string (value)))
+    theme = gnome_theme_info_find (name);
+
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "window_themes_delete"),
+			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_REGULAR));
+}
+
+static void
+icon_theme_changed (GConfPropertyEditor *peditor,
+		    const gchar *key,
+		    const GConfValue *value,
+		    AppearanceData *data)
+{
+  GnomeThemeIconInfo *theme = NULL;
+  const gchar *name;
+
+  if (value && (name = gconf_value_get_string (value)))
+    theme = gnome_theme_icon_info_find (name);
+
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "icon_themes_delete"),
+			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_ICON));
+}
+
+static void
+generic_theme_delete (const gchar *tv_name, ThemeType type, AppearanceData *data)
+{
+  GtkTreeView *treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  GtkTreeSelection *selection = gtk_tree_view_get_selection (treeview);
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+    gchar *name;
+
+    gtk_tree_model_get (model, &iter, COL_NAME, &name, -1);
+
+    if (name != NULL && theme_delete (name, type)) {
+      /* remove theme from the model, too */
+      GtkTreeIter child;
+      GtkTreePath *path;
+
+      path = gtk_tree_model_get_path (model, &iter);
+      gtk_tree_model_sort_convert_iter_to_child_iter (
+          GTK_TREE_MODEL_SORT (model), &child, &iter);
+      gtk_list_store_remove (GTK_LIST_STORE (
+          gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (model))), &child);
+
+      if (gtk_tree_model_get_iter (model, &iter, path) ||
+          theme_model_iter_last (model, &iter)) {
+        gtk_tree_path_free (path);
+        path = gtk_tree_model_get_path (model, &iter);
+	gtk_tree_selection_select_path (selection, path);
+	gtk_tree_view_scroll_to_cell (treeview, path, NULL, FALSE, 0, 0);
+      }
+      gtk_tree_path_free (path);
+    }
+    g_free (name);
+  }
+}
+
+static void
+gtk_theme_delete_cb (GtkWidget *button, AppearanceData *data)
+{
+  generic_theme_delete ("gtk_themes_list", THEME_TYPE_GTK, data);
+}
+
+static void
+window_theme_delete_cb (GtkWidget *button, AppearanceData *data)
+{
+  generic_theme_delete ("window_themes_list", THEME_TYPE_WINDOW, data);
+}
+
+static void
+icon_theme_delete_cb (GtkWidget *button, AppearanceData *data)
+{
+  generic_theme_delete ("icon_themes_list", THEME_TYPE_ICON, data);
+}
+
 void
 style_init (AppearanceData *data)
 {
-  GObject *settings;
+  GtkSettings *settings;
   GtkWidget *w;
 
   w = glade_xml_get_widget (data->xml, "theme_details");
   g_signal_connect (w, "response", (GCallback) style_response_cb, NULL);
   g_signal_connect (w, "delete_event", (GCallback) gtk_true, NULL);
 
-  prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), THEME_TYPE_GTK);
-  prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), THEME_TYPE_WINDOW);
-  prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), THEME_TYPE_ICON);
+  prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), THEME_TYPE_GTK, (GCallback) gtk_theme_changed);
+  prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), THEME_TYPE_WINDOW, (GCallback) window_theme_changed);
+  prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), THEME_TYPE_ICON, (GCallback) icon_theme_changed);
 
   w = glade_xml_get_widget (data->xml, "color_scheme_message_hbox");
   gtk_widget_set_no_show_all (w, TRUE);
@@ -74,11 +190,10 @@ style_init (AppearanceData *data)
                         gtk_image_new_from_stock (GTK_STOCK_REVERT_TO_SAVED,
                                                   GTK_ICON_SIZE_BUTTON));
 
-  settings = G_OBJECT (gtk_settings_get_default ());
-  g_signal_connect (settings, "notify::gtk-theme-name", (GCallback) theme_name_changed, data);
-  check_color_schemes_enabled (GTK_SETTINGS (settings), data);
+  settings = gtk_settings_get_default ();
+  check_color_schemes_enabled (settings, data);
   g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
-  update_color_buttons_from_settings (GTK_SETTINGS (settings), data);
+  update_color_buttons_from_settings (settings, data);
 
   /* connect signals */
   /* color buttons */
@@ -88,12 +203,16 @@ style_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "base_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-  /* "Reset To Defaults" button */
+  /* revert button */
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "color_scheme_defaults_button")), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
+  /* delete buttons */
+  g_signal_connect (glade_xml_get_widget (data->xml, "gtk_themes_delete"), "clicked", (GCallback) gtk_theme_delete_cb, data);
+  g_signal_connect (glade_xml_get_widget (data->xml, "window_themes_delete"), "clicked", (GCallback) window_theme_delete_cb, data);
+  g_signal_connect (glade_xml_get_widget (data->xml, "icon_themes_delete"), "clicked", (GCallback) icon_theme_delete_cb, data);
 }
 
 static void
-prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type)
+prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback callback)
 {
   GtkListStore *store;
   GList *l, *themes = NULL;
@@ -101,6 +220,8 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type)
   GtkTreeViewColumn *column;
   GtkTreeModel *sort_model;
   const gchar *key;
+  GObject *peditor;
+  GConfValue *value;
 
   switch (type)
   {
@@ -181,10 +302,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type)
   gtk_tree_view_set_model (GTK_TREE_VIEW (list), GTK_TREE_MODEL (sort_model));
 
   renderer = gtk_cell_renderer_pixbuf_new ();
-  g_object_set (G_OBJECT (renderer),
-    "xpad", 3,
-    "ypad", 3,
-    NULL);
+  g_object_set (G_OBJECT (renderer), "xpad", 3, "ypad", 3, NULL);
 
   column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, renderer, FALSE);
@@ -198,10 +316,18 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type)
   gtk_tree_view_column_add_attribute (column, renderer, "text", COL_LABEL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
 
-  gconf_peditor_new_tree_view (NULL, key, list,
-    "conv-to-widget-cb", conv_to_widget_cb,
-    "conv-from-widget-cb", conv_from_widget_cb,
-    NULL);
+  peditor = gconf_peditor_new_tree_view (NULL, key, list,
+      "conv-to-widget-cb", conv_to_widget_cb,
+      "conv-from-widget-cb", conv_from_widget_cb,
+      NULL);
+  g_signal_connect (peditor, "value-changed", callback, data);
+
+  /* init the delete buttons */
+  value = gconf_client_get (data->client, key, NULL);
+  (*((void (*) (GConfPropertyEditor *, const gchar *, const GConfValue *, gpointer)) callback))
+      (GCONF_PROPERTY_EDITOR (peditor), key, value, data);
+  if (value)
+    gconf_value_free (value);
 }
 
 /* Callbacks */
@@ -426,27 +552,6 @@ check_color_schemes_enabled (GtkSettings *settings,
     gtk_widget_hide (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
   else
     gtk_widget_show (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
-}
-
-static void
-theme_name_changed (GObject *settings,
-                    GParamSpec *pspec,
-                    AppearanceData *data)
-{
-  gchar *current_theme, *new_theme;
-
-  /* manually update GtkSettings to new gtk+ theme. */
-  g_object_get (settings, "gtk-theme-name", &current_theme, NULL);
-  new_theme = gconf_client_get_string (data->client, GTK_THEME_KEY, NULL);
-
-  if (strcmp (current_theme, new_theme) != 0)
-    g_object_set (settings, "gtk-theme-name", new_theme, NULL);
-
-  g_free (current_theme);
-  g_free (new_theme);
-
-  check_color_schemes_enabled (GTK_SETTINGS (settings), data);
-  update_color_buttons_from_settings (GTK_SETTINGS (settings), data);
 }
 
 static void
