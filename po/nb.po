@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-29 09:43+0200\n"
-"PO-Revision-Date: 2007-05-29 09:46+0200\n"
+"POT-Creation-Date: 2007-06-23 11:28+0200\n"
+"PO-Revision-Date: 2007-06-23 11:33+0200\n"
 "Last-Translator: Espen Stefansen <espenas@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -53,13 +53,12 @@ msgid "No Image"
 msgstr "Ingen bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:666
-#: ../capplets/background/gnome-wp-capplet.c:1022
+#: ../capplets/appearance/appearance-desktop.c:1067
 msgid "Images"
 msgstr "Bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:670
-#: ../capplets/background/gnome-wp-capplet.c:1026
-#: ../capplets/theme-switcher/gnome-theme-installer.c:686
+#: ../capplets/appearance/theme-installer.c:603
 msgid "All Files"
 msgstr "Alle filer"
 
@@ -101,9 +100,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/appearance/appearance.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
 
@@ -709,124 +708,553 @@ msgstr "piksler per sekund"
 msgid "seconds"
 msgstr "sekunder"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "Endre dine innstillinger for skrivebordsbakgrunn"
+#: ../capplets/appearance/appearance.glade.h:2
+msgid "<b>C_olors</b>"
+msgstr "<b>_Farger</b>"
 
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "Skrivebordsbakgrunn"
+#: ../capplets/appearance/appearance.glade.h:3
+msgid "<b>Hinting</b>"
+msgstr "<b>Hinting</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>Bakgrunn for skrivebordet</b>"
+#: ../capplets/appearance/appearance.glade.h:4
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>Menyer og verktøylinjer</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>_Farger på skrivebordet</b>"
+#: ../capplets/appearance/appearance.glade.h:5
+msgid "<b>Preview</b>"
+msgstr "<b>Forhåndsvis</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "Brukervalg for skrivebordsbakgrunn"
+#: ../capplets/appearance/appearance.glade.h:6
+msgid "<b>Rendering</b>"
+msgstr "<b>Rendring</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:4
+#: ../capplets/appearance/appearance.glade.h:7
+msgid "<b>Smoothing</b>"
+msgstr "<b>Utjevning</b>"
+
+#: ../capplets/appearance/appearance.glade.h:8
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>Subpikselrekkefølge</b>"
+
+#: ../capplets/appearance/appearance.glade.h:9
+msgid "<b>_Wallpaper</b>"
+msgstr "<b>_Bakgrunn</b>"
+
+#: ../capplets/appearance/appearance.glade.h:10
+msgid "Appearance Preferences"
+msgstr "Brukervalg for utseende"
+
+#: ../capplets/appearance/appearance.glade.h:11
+msgid "Background"
+msgstr "Bakgrunn"
+
+#: ../capplets/appearance/appearance.glade.h:12
+msgid "Best _shapes"
+msgstr "Beste _former"
+
+#: ../capplets/appearance/appearance.glade.h:13
+msgid "Best co_ntrast"
+msgstr "Best ko_ntrast"
+
+#: ../capplets/appearance/appearance.glade.h:14
+msgid "C_ustomize..."
+msgstr "Til_pass..."
+
+#: ../capplets/appearance/appearance.glade.h:15
+msgid "C_ut"
+msgstr "Klipp _ut"
+
+#: ../capplets/appearance/appearance.glade.h:16
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+"Sentrert\n"
+"Fyll skjermen\n"
+"Skalert\n"
+"Zoom\n"
+"Fliser"
+
+#: ../capplets/appearance/appearance.glade.h:21
+msgid "Colors"
+msgstr "Farger"
+
+#: ../capplets/appearance/appearance.glade.h:22
+msgid "Controls"
+msgstr "Kontroller"
+
+#: ../capplets/appearance/appearance.glade.h:23
+msgid "D_etails..."
+msgstr "D_etaljer..."
+
+#: ../capplets/appearance/appearance.glade.h:24
+msgid "Des_ktop font:"
+msgstr "S_krift for skrivebord:"
+
+#: ../capplets/appearance/appearance.glade.h:25
+msgid "Font Rendering Details"
+msgstr "Detaljer om rendring av skrift"
+
+#: ../capplets/appearance/appearance.glade.h:26
+msgid "Fonts"
+msgstr "Skrifter"
+
+#: ../capplets/appearance/appearance.glade.h:27
+msgid "Go _to Fonts Folder"
+msgstr "Gå _til skriftmappen"
+
+#: ../capplets/appearance/appearance.glade.h:28
+msgid "Gra_yscale"
+msgstr "Gr_åtone"
+
+#: ../capplets/appearance/appearance.glade.h:29
+msgid "Icons"
+msgstr "Ikoner"
+
+#: ../capplets/appearance/appearance.glade.h:30
+msgid "Interface"
+msgstr "Grensesnitt"
+
+#: ../capplets/appearance/appearance.glade.h:31
+msgid "N_one"
+msgstr "_Ingen"
+
+#: ../capplets/appearance/appearance.glade.h:32
+msgid "New File"
+msgstr "Ny fil"
+
+#: ../capplets/appearance/appearance.glade.h:33
+msgid "Open File"
+msgstr "Åpne fil"
+
+#: ../capplets/appearance/appearance.glade.h:34
 msgid "Open a dialog to specify the color"
 msgstr "Åpne et dialogvindu for å angi farge"
 
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "_Legg til bakgrunn"
+#: ../capplets/appearance/appearance.glade.h:35
+msgid "Pointer"
+msgstr "Peker"
 
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Finish"
-msgstr "_Fullfør"
+#: ../capplets/appearance/appearance.glade.h:36
+msgid "R_esolution:"
+msgstr "_Oppløsning:"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
-msgid "_Remove"
-msgstr "Fje_rn"
+#: ../capplets/appearance/appearance.glade.h:37
+msgid "Reset to Defaults"
+msgstr "Sett til forvalg"
 
-#: ../capplets/background/gnome-background-properties.glade.h:8
+#: ../capplets/appearance/appearance.glade.h:38
+msgid "Save File"
+msgstr "Lagre fil"
+
+#: ../capplets/appearance/appearance.glade.h:39
+msgid "Show _icons in menus"
+msgstr "Vis _ikoner i menyer"
+
+#: ../capplets/appearance/appearance.glade.h:40
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"Helfylt farge\n"
+"Horisontal gradient\n"
+"Vertikal gradient"
+
+#: ../capplets/appearance/appearance.glade.h:43
+msgid "Sub_pixel (LCDs)"
+msgstr "Under_piksel (LCDer)"
+
+#: ../capplets/appearance/appearance.glade.h:44
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "Utjevning under pikselnivå (LCDer)"
+
+#: ../capplets/appearance/appearance.glade.h:45
+msgid "Text"
+msgstr "Tekst"
+
+#: ../capplets/appearance/appearance.glade.h:46
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"Tekst under oppføringer\n"
+"Tekst ved siden av oppføringer\n"
+"Kun ikoner\n"
+"Kun tekst"
+
+#: ../capplets/appearance/appearance.glade.h:50
+msgid "The current controls theme does not support color schemes."
+msgstr "Aktivt tema for kontroller støtter ikke fargeskjema."
+
+#: ../capplets/appearance/appearance.glade.h:51
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "Tema"
+
+#: ../capplets/appearance/appearance.glade.h:52
+msgid "Theme Details"
+msgstr "Detaljer for tema"
+
+#: ../capplets/appearance/appearance.glade.h:53
+msgid "Toolbar _button labels:"
+msgstr "_Etiketter for knapper på verktøylinjen:"
+
+#: ../capplets/appearance/appearance.glade.h:54
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/appearance.glade.h:55
+msgid "Window Border"
+msgstr "Vinduskant"
+
+#: ../capplets/appearance/appearance.glade.h:56
+msgid "_Add..."
+msgstr "_Legg til..."
+
+#: ../capplets/appearance/appearance.glade.h:57
+msgid "_Application font:"
+msgstr "Skrift for _programmer:"
+
+#: ../capplets/appearance/appearance.glade.h:58
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/appearance.glade.h:59
+msgid "_Copy"
+msgstr "_Kopier"
+
+#: ../capplets/appearance/appearance.glade.h:60
+msgid "_Document font:"
+msgstr "Skrift for _dokumenter:"
+
+#: ../capplets/appearance/appearance.glade.h:61
+msgid "_Edit"
+msgstr "R_ediger"
+
+#: ../capplets/appearance/appearance.glade.h:62
+msgid "_Editable menu shortcut keys"
+msgstr "R_edigerbare snarveitaster for meny"
+
+#: ../capplets/appearance/appearance.glade.h:63
+msgid "_File"
+msgstr "_Fil"
+
+#: ../capplets/appearance/appearance.glade.h:64
+msgid "_Fixed width font:"
+msgstr "Skrift med _fast bredde:"
+
+#: ../capplets/appearance/appearance.glade.h:65
+msgid "_Full"
+msgstr "_Full"
+
+#: ../capplets/appearance/appearance.glade.h:66
+msgid "_Input boxes:"
+msgstr "_Inndatabokser:"
+
+#: ../capplets/appearance/appearance.glade.h:67
+msgid "_Install..."
+msgstr "_Installer..."
+
+#: ../capplets/appearance/appearance.glade.h:68
+msgid "_Medium"
+msgstr "_Middels"
+
+#: ../capplets/appearance/appearance.glade.h:69
+msgid "_Monochrome"
+msgstr "_Monokrom"
+
+#: ../capplets/appearance/appearance.glade.h:70
+msgid "_New"
+msgstr "_Ny"
+
+#: ../capplets/appearance/appearance.glade.h:71
+msgid "_None"
+msgstr "I_ngen"
+
+#: ../capplets/appearance/appearance.glade.h:72
+msgid "_Open"
+msgstr "_Åpne"
+
+#: ../capplets/appearance/appearance.glade.h:73
+msgid "_Paste"
+msgstr "_Lim inn"
+
+#: ../capplets/appearance/appearance.glade.h:74
+msgid "_Print"
+msgstr "S_kriv ut"
+
+#: ../capplets/appearance/appearance.glade.h:75
+msgid "_Quit"
+msgstr "A_vslutt"
+
+#: ../capplets/appearance/appearance.glade.h:76
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/appearance.glade.h:77
+msgid "_Save"
+msgstr "_Lagre"
+
+#: ../capplets/appearance/appearance.glade.h:78
+msgid "_Selected items:"
+msgstr "_Valgte oppføringer:"
+
+#: ../capplets/appearance/appearance.glade.h:79
+msgid "_Slight"
+msgstr "_Litt"
+
+#: ../capplets/appearance/appearance.glade.h:80
 msgid "_Style:"
 msgstr "_Stil:"
 
-#: ../capplets/background/gnome-wp-capplet.c:41
-msgid "[FILE...]"
-msgstr "[FIL...]"
+#: ../capplets/appearance/appearance.glade.h:81
+msgid "_VRGB"
+msgstr "_VRGB"
 
-#: ../capplets/background/gnome-wp-capplet.c:81
-#: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Det oppsto en feil under visning av hjelp: %s"
+#: ../capplets/appearance/appearance.glade.h:82
+msgid "_Window title font:"
+msgstr "Skrift for _vindutittel:"
 
-#: ../capplets/background/gnome-wp-capplet.c:943
-msgid "Centered"
-msgstr "Sentrert"
+#: ../capplets/appearance/appearance.glade.h:83
+msgid "_Windows:"
+msgstr "_Vinduer:"
 
-#: ../capplets/background/gnome-wp-capplet.c:944
-msgid "Fill Screen"
-msgstr "Fyll skjermen"
+#: ../capplets/appearance/appearance.glade.h:84
+msgid "dots per inch"
+msgstr "punkter per tomme"
 
-#: ../capplets/background/gnome-wp-capplet.c:945
-msgid "Scaled"
-msgstr "Skalert"
+#: ../capplets/appearance/appearance.glade.h:85
+msgid "gtk-delete"
+msgstr "gtk-delete"
 
-#: ../capplets/background/gnome-wp-capplet.c:946
-msgid "Zoom"
-msgstr "Zoom"
-
-#: ../capplets/background/gnome-wp-capplet.c:947
-msgid "Tiled"
-msgstr "Flislagt"
-
-#: ../capplets/background/gnome-wp-capplet.c:962
-msgid "Solid Color"
-msgstr "Helfylt farge"
-
-#: ../capplets/background/gnome-wp-capplet.c:963
-msgid "Horizontal Gradient"
-msgstr "Horisontal gradient"
-
-#: ../capplets/background/gnome-wp-capplet.c:964
-msgid "Vertical Gradient"
-msgstr "Vertikal gradient"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1005
+#: ../capplets/appearance/appearance-desktop.c:1050
 msgid "Add Wallpaper"
 msgstr "Legg til bakgrunn"
 
-#: ../capplets/background/gnome-wp-capplet.c:1089
-msgid "- Desktop Background Preferences"
-msgstr "- Brukervalg for skrivebordsbakgrunn"
+#: ../capplets/appearance/appearance-desktop.c:1071
+msgid "All files"
+msgstr "Alle filer"
 
-#: ../capplets/background/gnome-wp-info.c:45
+#: ../capplets/appearance/appearance-font.c:493
+msgid "Font may be too large"
+msgstr "Skriften kan være for stor"
+
+#: ../capplets/appearance/appearance-font.c:497
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"Valgt skrift har størrelse %d punkt, og det kan gjøre det vanskelig å bruke "
+"datamaskinen. Det anbefales at du bruker en størrelse mindre enn %d."
+msgstr[1] ""
+"Valgt skrift har størrelse %d punkter, og det kan gjøre det vanskelig å "
+"bruke datamaskinen. Det anbefales at du bruker en størrelse mindre enn %d."
+
+#: ../capplets/appearance/appearance-font.c:510
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"Valgt skrift har størrelse %d punkt, og dette kan gjøre det vanskelig å "
+"bruke datamaskinen. Det anbefales at du velger en mindre skrift."
+msgstr[1] ""
+"Valgt skrift har størrelse %d punkter, og dette kan gjøre det vanskelig å "
+"bruke datamaskinen. Det anbefales at du velger en mindre skrift."
+
+#: ../capplets/appearance/appearance-font.c:532
+msgid "Use previous font"
+msgstr "Bruk forrige skrift"
+
+#: ../capplets/appearance/appearance-font.c:534
+msgid "Use selected font"
+msgstr "Bruk valgt skrift"
+
+#: ../capplets/appearance/appearance-main.c:103
+msgid "Specify the filename of a theme to install"
+msgstr "Oppgi filnavn på et tema som skal installeres"
+
+#: ../capplets/appearance/appearance-main.c:104
+msgid "filename"
+msgstr "filnavn"
+
+#: ../capplets/appearance/appearance-main.c:110
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr ""
+
+#: ../capplets/appearance/appearance-main.c:111
+msgid "page"
+msgstr "side"
+
+#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/default-applications/gnome-da-capplet.c:1098
+#: ../capplets/sound/sound-properties-capplet.c:327
+msgid "Custom"
+msgstr "Egendefinert"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "Utseende"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:2
+msgid "Customize the look of the desktop"
+msgstr "Tilpass utseende for skrivebordet"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "Installerer temapakker for forskjellige deler av skrivebordet"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "Installering av tema"
+
+#: ../capplets/appearance/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "GNOME temapakke"
+
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Ingen bakgrunn"
 
-#.
-#. Translators: This message is used to render the type and size of the
-#. background images in gnome-background-properites. The first "%s" will
-#. be replaced by the image type, and the two "%d %s"s will be replaced
-#. with the images' dimensions. For example, in US English, this may be
-#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
-#.
-#. Do not translate the "background size|" type. Remove it from the
-#. translation.
-#.
-#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:360
 #, c-format
-msgid "background size|%s, %d %s x %d %s"
-msgstr "%s, %d %s x %d %s"
+msgid ""
+"<big><b>%s</b></big>\n"
+"<b>Width:</b> %d %s\n"
+"<b>Height:</b> %d %s\n"
+"<b>Type:</b> %s\n"
+"<b>Location:</b> %s"
+msgstr ""
+"<big><b>%s</b></big>\n"
+"<b>Bredde:</b> %d %s\n"
+"<b>Høyde:</b> %d %s\n"
+"<b>Type:</b> %s\n"
+"<b>Lokasjon:</b> %s"
 
-#: ../capplets/background/gnome-wp-item.c:374
-#: ../capplets/background/gnome-wp-item.c:376
+#: ../capplets/appearance/gnome-wp-item.c:367
+#: ../capplets/appearance/gnome-wp-item.c:369
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "piksel"
 msgstr[1] "piksler"
+
+#: ../capplets/appearance/theme-installer.c:149
+#, c-format
+msgid ""
+"Cannot install theme.\n"
+"The %s utility is not installed."
+msgstr ""
+"Kan ikke installere tema.\n"
+"Verktøyet %s er ikke installert."
+
+#: ../capplets/appearance/theme-installer.c:197
+msgid ""
+"Cannot install theme.\n"
+"There was a problem while extracting the theme."
+msgstr ""
+"Kan ikke installere tema.\n"
+"Det oppsto et problem under utpakking av filene."
+
+#: ../capplets/appearance/theme-installer.c:237
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr "GNOME tema %s ble korrekt installert"
+
+#: ../capplets/appearance/theme-installer.c:249
+msgid "The theme is an engine. You need to compile it."
+msgstr "Dette er en temamotor. Du må kompilere den."
+
+#: ../capplets/appearance/theme-installer.c:258
+msgid "The file format is invalid"
+msgstr "Filformatet er ugyldig"
+
+#: ../capplets/appearance/theme-installer.c:303
+msgid "Installation Failed"
+msgstr "Installasjonen feilet"
+
+#: ../capplets/appearance/theme-installer.c:314
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr "Tema «%s» er installert."
+
+#: ../capplets/appearance/theme-installer.c:320
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "Vil du bruke det nå, eller beholde aktivt tema?"
+
+#: ../capplets/appearance/theme-installer.c:322
+msgid "Keep Current Theme"
+msgstr "Behold nåværende tema"
+
+#: ../capplets/appearance/theme-installer.c:324
+msgid "Apply New Theme"
+msgstr "Bruk nytt tema"
+
+#: ../capplets/appearance/theme-installer.c:397
+msgid "This theme is not in a supported format."
+msgstr "Dette temaet er ikke i et støttet format."
+
+#: ../capplets/appearance/theme-installer.c:422
+msgid "Failed to create temporary directory"
+msgstr "Kunne ikke opprette midlertidig katalog"
+
+#: ../capplets/appearance/theme-installer.c:480
+msgid "No theme file location specified to install"
+msgstr "Ingen lokasjon oppgitt for installasjon av temafil"
+
+#: ../capplets/appearance/theme-installer.c:500
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Ikke nok rettigheter til å installere tema i:\n"
+"%s"
+
+#: ../capplets/appearance/theme-installer.c:519
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
+"%s er stien hvor temafilene vil bli installert. Denne kan ikke velges som "
+"kildelokasjon"
+
+#: ../capplets/appearance/theme-installer.c:540
+msgid "The file format is invalid."
+msgstr "Filformatet er ugyldig."
+
+#: ../capplets/appearance/theme-installer.c:593
+msgid "Select Theme"
+msgstr "Velg tema"
+
+#: ../capplets/appearance/theme-installer.c:596
+msgid "Theme Packages"
+msgstr "Temapakker"
+
+#: ../capplets/appearance/theme-util.c:42
+msgid "Would you like to remove this theme?"
+msgstr "Vil du fjerne dette temaet?"
+
+#: ../capplets/appearance/theme-util.c:88
+msgid "Theme cannot be deleted"
+msgstr "Tema kan ikke slettes"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -857,6 +1285,12 @@ msgstr "Bare aktiver innstillingene og avslutt"
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Det oppsto en feil under visning av hjelp: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
@@ -1087,11 +1521,6 @@ msgstr "Hjelpeteknologi for synshemmede"
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Feil ved lagring av konfigurasjonsdatabase: %s"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:1098
-#: ../capplets/sound/sound-properties-capplet.c:327
-msgid "Custom"
-msgstr "Egendefinert"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:1118
 msgid "Could not load the main interface"
@@ -1492,23 +1921,23 @@ msgstr[1] ""
 "Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekunder vil de "
 "tidligere innstillingene bli gjenopprettet."
 
-#: ../capplets/display/main.c:744
+#: ../capplets/display/main.c:741
 msgid "Keep Resolution"
 msgstr "Behold oppløsning"
 
-#: ../capplets/display/main.c:748
+#: ../capplets/display/main.c:745
 msgid "Do you want to keep this resolution?"
 msgstr "Vil du beholde denne oppløsningen?"
 
-#: ../capplets/display/main.c:773
+#: ../capplets/display/main.c:770
 msgid "Use _previous resolution"
 msgstr "Bruk _forrige oppløsning"
 
-#: ../capplets/display/main.c:773
+#: ../capplets/display/main.c:770
 msgid "_Keep resolution"
 msgstr "_Behold oppløsning"
 
-#: ../capplets/display/main.c:923
+#: ../capplets/display/main.c:920
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1516,187 +1945,13 @@ msgstr ""
 "X-tjeneren støtter ikke XRandR-utvidelsen. Endringer i oppløsning kan ikke "
 "utføres mens den kjører."
 
-#: ../capplets/display/main.c:931
+#: ../capplets/display/main.c:928
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
 msgstr ""
 "Versjonen av XRandR-utvidelsen er inkompatibel med dette programmet. Endring "
 "av oppløsning kan ikke utføres under kjøring."
-
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "Skrift"
-
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "Velg skrifter for skrivebordet"
-
-#: ../capplets/font/font-properties.glade.h:1
-msgid "<b>Font Rendering</b>"
-msgstr "<b>Rendring av skrift</b>"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Hinting</b>:"
-msgstr "<b>Hinting</b>:"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Smoothing</b>:"
-msgstr "<b>Utjevning</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>Subpikselrekkefølge</b>:"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "Best _shapes"
-msgstr "Beste _former"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best co_ntrast"
-msgstr "Best ko_ntrast"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "D_etails..."
-msgstr "D_etaljer..."
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "Des_ktop font:"
-msgstr "S_krift for skrivebord:"
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "Brukervalg for skrift"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "Detaljer om rendring av skrift"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "Gå _til skriftmappen"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "Gr_åtone"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "_Ingen"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "_Oppløsning:"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "Under_piksel (LCDer)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "Utjevning under pikselnivå (LCDer)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "Skrift for _programmer:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Document font:"
-msgstr "Skrift for _dokumenter:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Fixed width font:"
-msgstr "Skrift med _fast bredde:"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Full"
-msgstr "_Full"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Medium"
-msgstr "_Middels"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_Monochrome"
-msgstr "_Monokrom"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_None"
-msgstr "I_ngen"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Slight"
-msgstr "_Litt"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "Skrift for _vindutittel:"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "punkter per tomme"
-
-#: ../capplets/font/main.c:502
-msgid "Font may be too large"
-msgstr "Skriften kan være for stor"
-
-#: ../capplets/font/main.c:506
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"Valgt skrift har størrelse %d punkt, og det kan gjøre det vanskelig å bruke "
-"datamaskinen. Det anbefales at du bruker en størrelse mindre enn %d."
-msgstr[1] ""
-"Valgt skrift har størrelse %d punkter, og det kan gjøre det vanskelig å "
-"bruke datamaskinen. Det anbefales at du bruker en størrelse mindre enn %d."
-
-#: ../capplets/font/main.c:519
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"Valgt skrift har størrelse %d punkt, og dette kan gjøre det vanskelig å "
-"bruke datamaskinen. Det anbefales at du velger en mindre skrift."
-msgstr[1] ""
-"Valgt skrift har størrelse %d punkter, og dette kan gjøre det vanskelig å "
-"bruke datamaskinen. Det anbefales at du velger en mindre skrift."
-
-#: ../capplets/font/main.c:540
-msgid "Use previous font"
-msgstr "Bruk forrige skrift"
-
-#: ../capplets/font/main.c:542
-msgid "Use selected font"
-msgstr "Bruk valgt skrift"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -2440,403 +2695,6 @@ msgstr "Av_spilling av lyd:"
 msgid "_Visual system beep"
 msgstr "_Synlig systempip"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:450
-msgid "Would you like to remove this theme?"
-msgstr "Vil du fjerne dette temaet?"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:515
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "Sletting av tema fullført. Vennligst velg et annet tema."
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:524
-msgid "Theme can not be deleted"
-msgstr "Tema kan ikke slettes"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:696
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Ingen tema ble funnet på ditt system. Dette betyr sannsynligvis at dialogen "
-"«Brukervalg for tema» ikke er korrekt installert, eller at du ikke har "
-"installert pakken «gnome-themes»."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:153
-#, c-format
-msgid ""
-"Can not install theme. \n"
-"The %s utility is not installed."
-msgstr ""
-"Kan ikke installere tema.\n"
-"Verktøyet %s er ikke installert."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:162
-msgid ""
-"Can not install theme. \n"
-"There was a problem while extracting the theme"
-msgstr ""
-"Kan ikke installere tema.\n"
-"Det oppsto et problem under utpakking av filene."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "This theme is not in a supported format."
-msgstr "Dette temaet er ikke i et støttet format."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
-msgid "Failed to create temporary directory"
-msgstr "Kunne ikke opprette midlertidig katalog"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "GNOME tema %s ble korrekt installert"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "Dette er en temamotor. Du må kompilere temaet."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:410
-msgid "The file format is invalid"
-msgstr "Filformatet er ugyldig"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:449
-msgid "Installation Failed"
-msgstr "Installasjonen feilet"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:462
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "Tema «%s» er installert."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "Vil du bruke det nå, eller beholde aktivt tema?"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:470
-msgid "Keep Current Theme"
-msgstr "Behold nåværende tema"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:472
-msgid "Apply New Theme"
-msgstr "Bruk nytt tema"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
-msgid "No theme file location specified to install"
-msgstr "Ingen lokasjon oppgitt for installasjon av temafil"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:543
-msgid "The theme file location specified to install is invalid"
-msgstr "Ugyldig lokasjon for installasjon av temafil"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"Ikke nok rettigheter til å installere tema i:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:589
-msgid "The file format is invalid."
-msgstr "Filformatet er ugyldig."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:616
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s er stien hvor temafilene vil bli installert. Denne kan ikke velges som "
-"kildelokasjon"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:675
-msgid "Select Theme"
-msgstr "Velg tema"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:678
-msgid "Theme Packages"
-msgstr "Temapakker"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "Installerer temapakker for forskjellige deler av skrivebordet"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "Installering av tema"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "Custom theme"
-msgstr "Egendefinert tema"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Du kan lagre dette temaet ved å klikke på «Lagre tema»-knappen."
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
-msgid "Specify the filename of a theme to install"
-msgstr "Oppgi filnavn på et tema som skal installeres"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
-msgid "filename"
-msgstr "filnavn"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"Forvalgt schema for tema ble ikke funnet. Dette betyr sannsynligvis at du "
-"ikke har metacity installert eller at GConf er feilkonfigurert."
-
-#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "GNOME temapakke"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:73
-msgid "Theme name must be present"
-msgstr "Navn på tema må være oppgitt"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:144
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "Temaet eksisterer allerede. Vil du erstatte det?"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "Velg tema for forskjellige deler av skrivebordet"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "Tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<b>You do not have permission to change theme settings</b>"
-msgstr "<b>Du har ikke rettigheter til å endre innstillinger for temaet</b>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "Bruk _bakgrunn"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "Bruk _skrift"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Background"
-msgstr "Bakgrunn"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "C_ustomize..."
-msgstr "Til_pass..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Colors"
-msgstr "Farger"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Controls"
-msgstr "Kontroller"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Icons"
-msgstr "Ikoner"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Save Theme As..."
-msgstr "Lagre tema som..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save _Background Image"
-msgstr "Lagre _bakgrunnsbilde"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Select theme for the desktop"
-msgstr "Velg tema for skrivebordet"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Text"
-msgstr "Tekst"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "The current controls theme does not support color schemes"
-msgstr "Aktivt tema for kontroller støtter ikke styring av farger"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "Theme Details"
-msgstr "Detaljer for tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "Theme Preferences"
-msgstr "Brukervalg for tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme does not suggest any particular font or background."
-msgstr "Dette temaet foreslår ikke en skrift eller en bakgrunn."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a background:"
-msgstr "Dette temaet foreslår en bakgrunn:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "This theme suggests a font and a background:"
-msgstr "Dette temaet foreslår en skrift og en bakgrunn:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "This theme suggests a font:"
-msgstr "Dette temaet foreslår en skrift:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "Window Border"
-msgstr "Vinduskant"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Description:"
-msgstr "_Beskrivelse:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input boxes:"
-msgstr "_Inndatabokser:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Install Theme..."
-msgstr "_Installer tema..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "_Install..."
-msgstr "_Installer..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Name:"
-msgstr "_Navn:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
-msgid "_Revert"
-msgstr "Fje_rn"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
-msgid "_Save Theme..."
-msgstr "_Lagre tema..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected items:"
-msgstr "_Valgte oppføringer:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
-msgid "_Windows:"
-msgstr "_Vinduer:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
-msgid "theme selection tree"
-msgstr "tre for temavalg"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "Tilpass utseendet på verktøylinjer og menylinjer i programmer"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "Menyer og verktøylinjer"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>Oppførsel og utseende</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>Forhåndsvis</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "Klipp _ut"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "Kun ikoner"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "Brukervalg for meny og verktøylinje"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "Ny fil"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "Åpne fil"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "Lagre fil"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "Vis _ikoner i menyer"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "Tekst under ikoner"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "Tekst ved siden av ikoner"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "Kun tekst"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "_Etiketter for knapper på verktøylinjen:"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "_Kopier"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "_Avtagbare verktøylinjer"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "R_ediger"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu shortcut keys"
-msgstr "R_edigerbare snarveitaster for meny"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_Fil"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "_Ny"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "_Åpne"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "_Lim inn"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "S_kriv ut"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "A_vslutt"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "_Lagre"
-
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
 msgstr "Kan ikke starte brukervalg for din vindushåndterer"
@@ -2909,11 +2767,11 @@ msgstr "Vinduer"
 msgid "Volume"
 msgstr "Volum"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:465
 msgid "Slow Keys Alert"
 msgstr "Advarsel for trege taster"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2921,39 +2779,39 @@ msgstr ""
 "Du holdt nettopp nede Shift-tasten i 8 sekunder. Dette er snarveien for "
 "funksjonen trege taster som påvirker hvordan tastaturet ditt virker."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
 msgid "Do you want to activate Slow Keys?"
 msgstr "Vil du aktivere trege taster?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Vil du deaktivere trege taster?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
 msgid "_Activate"
 msgstr "_Aktiver"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
 msgid "_Deactivate"
 msgstr "_Deaktiver"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
 msgid "Do_n't activate"
 msgstr "I_kke aktiver"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
 msgid "Do_n't deactivate"
 msgstr "I_kke deaktiver"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:480
 msgid "Sticky Keys Alert"
 msgstr "Advarsel for trege taster"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2961,7 +2819,7 @@ msgstr ""
 "Du trykket nettopp ned Shift-tasten 5 ganger på rad. Dette er snarveien for "
 "funksjonen «klebrige taster» som påvirker måten tastaturet fungerer."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2971,15 +2829,15 @@ msgstr ""
 "rad. Dette skrur av funksjonen «klebrige taster» som påvirker tasteturets "
 "virkemåte."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Vil du aktivere klebrige taster?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Vil du deaktivere trege taster?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:75
+#: ../gnome-settings-daemon/gnome-settings-font.c:150
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2988,7 +2846,7 @@ msgstr ""
 "Kan ikke opprette katalog «%s».\n"
 "Denne er nødvendig for å kunne endre tema for muspeker."
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:98
+#: ../gnome-settings-daemon/gnome-settings-font.c:171
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2997,38 +2855,38 @@ msgstr ""
 "Kan ikke opprette katalog «%s».\n"
 "Denne kreves for å tillate endring av markører."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:215
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:274
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Handling for tastaturbinding (%s) er definert flere ganger\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:223
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:280
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tastaturbinding (%s) er definert flere ganger\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:232
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:288
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tastaturbinding (%s) er ikke komplett\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:263
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:315
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tastaturbinding (%s) er ugyldig\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:301
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:352
 #, c-format
 msgid "It seems that another application already has access to key '%u'."
 msgstr ""
 "Det ser ut som om et annet program allerede har tilgang til nøkkel «%u»."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:370
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:417
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tastaturbinding (%s) er allerede i bruk\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:445
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:488
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -3108,13 +2966,15 @@ msgstr "Bruk innstillinger fra X"
 msgid "Keep GNOME settings"
 msgstr "Behold innstillinger fra GNOME"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:125
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
-msgstr "Kunne ikke finne forvalgt terminal. Sjekk at kommando for forvalgt terminal er satt og peker til et gyldig program."
+msgstr ""
+"Kunne ikke finne forvalgt terminal. Sjekk at kommando for forvalgt terminal "
+"er satt og peker til et gyldig program."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3123,7 +2983,7 @@ msgstr ""
 "Kunne ikke kjøre kommandoen: %s\n"
 "Sjekk om dette er en gyldig kommando."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:172
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3131,7 +2991,7 @@ msgstr ""
 "Kunne ikke sette maskinen i hvilemodus.\n"
 "Sjekk at maskinen er korrekt konfigurert."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:193
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -3146,21 +3006,21 @@ msgstr ""
 "\n"
 "Skjermsparerfunksjonen vil ikke fungere i denne sesjonen."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:202
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr "_Ikke vis denne meldingen igjen"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:137
+#: ../gnome-settings-daemon/gnome-settings-sound.c:199
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kunne ikke laste lydfil %s som sample %s"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:242
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:290
 msgid "Cannot determine user's home directory"
 msgstr "Kan ikke bestemme brukeren sin hjemmemappe"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:226
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
@@ -3848,11 +3708,19 @@ msgstr "Påminnelse om pause fra datamaskinen."
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
-#: ../typing-break/main.c:84
+#: ../typing-break/main.c:61
+msgid "Enable debugging code"
+msgstr "Aktiver feilsøkingsmodus"
+
+#: ../typing-break/main.c:63
+msgid "Don't check whether the notification area exists"
+msgstr "Ikke sjekk om varslingsområde eksisterer"
+
+#: ../typing-break/main.c:89
 msgid "Typing Monitor"
 msgstr "Skrivemonitor"
 
-#: ../typing-break/main.c:103
+#: ../typing-break/main.c:105
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
