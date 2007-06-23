@@ -64,7 +64,7 @@ typedef struct {
 	GtkImage *dialog_image;
 	GtkLabel *status_label;
 	
-	/* Wether we have authenticated */
+	/* Whether we have authenticated */
 	gboolean authenticated;
 	
 	/* Communication with the passwd program */
