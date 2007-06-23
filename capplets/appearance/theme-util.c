@@ -28,20 +28,21 @@
 gboolean
 theme_delete (const gchar *name, ThemeType type)
 {
-  GtkWidget *confirm_dialog;
+  GtkDialog *dialog;
   gpointer theme;
   gchar *theme_dir;
   gint response;
   GList *uri_list;
   GnomeVFSResult result;
 
-  confirm_dialog = gtk_message_dialog_new (NULL,
-		          		   GTK_DIALOG_MODAL,
-					   GTK_MESSAGE_QUESTION,
-					   GTK_BUTTONS_OK_CANCEL,
-					   _("Would you like to remove this theme?"));
-  response = gtk_dialog_run (GTK_DIALOG (confirm_dialog));
-  gtk_widget_destroy (confirm_dialog);
+  dialog = (GtkDialog *) gtk_message_dialog_new (NULL,
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_QUESTION,
+						 GTK_BUTTONS_CANCEL,
+						 _("Would you like to delete this theme?"));
+  gtk_dialog_add_button (dialog, GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT);
+  response = gtk_dialog_run (dialog);
+  gtk_widget_destroy (GTK_WIDGET (dialog));
   if (response == GTK_RESPONSE_CANCEL)
     return FALSE;
 
