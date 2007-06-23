@@ -42,3 +42,4 @@ typedef enum {
 
 gboolean theme_delete (const gchar *name, ThemeType type);
 gboolean theme_model_iter_last (GtkTreeModel *model, GtkTreeIter *iter);
+gboolean theme_find_in_model (GtkTreeModel *model, const gchar *name, GtkTreeIter *iter);

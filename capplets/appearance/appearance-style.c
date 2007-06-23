@@ -168,6 +168,134 @@ icon_theme_delete_cb (GtkWidget *button, AppearanceData *data)
   generic_theme_delete ("icon_themes_list", THEME_TYPE_ICON, data);
 }
 
+static void
+add_to_treeview (const gchar *tv_name,
+		 const gchar *theme_name,
+		 const gchar *theme_label,
+		 GdkPixbuf *theme_thumbnail,
+		 AppearanceData *data)
+{
+  GtkTreeView *treeview;
+  GtkListStore *model;
+
+  treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  model = GTK_LIST_STORE (
+          gtk_tree_model_sort_get_model (
+          GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (treeview))));
+
+  gtk_list_store_insert_with_values (model, NULL, 0,
+          COL_LABEL, theme_label,
+          COL_NAME, theme_name,
+          COL_THUMBNAIL, theme_thumbnail,
+          -1);
+}
+
+static void
+remove_from_treeview (const gchar *tv_name,
+		      const gchar *theme_name,
+		      AppearanceData *data)
+{
+  GtkTreeView *treeview;
+  GtkListStore *model;
+  GtkTreeIter iter;
+
+  treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  model = GTK_LIST_STORE (
+          gtk_tree_model_sort_get_model (
+          GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (treeview))));
+
+  if (theme_find_in_model (GTK_TREE_MODEL (model), theme_name, &iter))
+    gtk_list_store_remove (model, &iter);
+}
+
+static void
+update_in_treeview (const gchar *tv_name,
+		    const gchar *theme_name,
+		    const gchar *theme_label,
+		    GdkPixbuf *theme_thumbnail,
+		    AppearanceData *data)
+{
+  GtkTreeView *treeview;
+  GtkListStore *model;
+  GtkTreeIter iter;
+
+  treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  model = GTK_LIST_STORE (
+          gtk_tree_model_sort_get_model (
+          GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (treeview))));
+
+  if (theme_find_in_model (GTK_TREE_MODEL (model), theme_name, &iter)) {
+    gtk_list_store_set (model, &iter,
+          COL_LABEL, theme_label,
+          COL_NAME, theme_name,
+          COL_THUMBNAIL, theme_thumbnail,
+          -1);
+  }
+}
+
+static void
+changed_on_disk_cb (GnomeThemeType       type,
+		    gpointer             theme,
+		    GnomeThemeChangeType change_type,
+		    GnomeThemeElement    element,
+		    AppearanceData      *data)
+{
+  if (type == GNOME_THEME_TYPE_REGULAR) {
+    GnomeThemeInfo *info = theme;
+
+    if (change_type == GNOME_THEME_CHANGE_DELETED) {
+      if (info->has_gtk)
+        remove_from_treeview ("gtk_themes_list", info->name, data);
+      if (info->has_metacity)
+        remove_from_treeview ("metacity_themes_list", info->name, data);
+
+    } else {
+      GdkPixbuf *thumbnail;
+
+      if (info->has_gtk) {
+      	thumbnail = generate_gtk_theme_thumbnail (info);
+
+        if (change_type == GNOME_THEME_CHANGE_CREATED)
+          add_to_treeview ("gtk_themes_list", info->name, info->name, thumbnail, data);
+        else if (change_type == GNOME_THEME_CHANGE_CHANGED)
+          update_in_treeview ("gtk_themes_list", info->name, info->name, thumbnail, data);
+
+        if (thumbnail)
+          g_object_unref (thumbnail);
+      }
+
+      if (info->has_metacity) {
+      	thumbnail = generate_metacity_theme_thumbnail (info);
+
+        if (change_type == GNOME_THEME_CHANGE_CREATED)
+          add_to_treeview ("metacity_themes_list", info->name, info->name, thumbnail, data);
+        else if (change_type == GNOME_THEME_CHANGE_CHANGED)
+          update_in_treeview ("metacity_themes_list", info->name, info->name, thumbnail, data);
+
+        if (thumbnail)
+          g_object_unref (thumbnail);
+      }
+    }
+
+  } else if (type == GNOME_THEME_TYPE_ICON) {
+    GnomeThemeIconInfo *info = theme;
+
+    if (change_type == GNOME_THEME_CHANGE_DELETED) {
+      remove_from_treeview ("icon_themes_list", info->name, data);
+    } else {
+      GdkPixbuf *thumbnail = generate_icon_theme_thumbnail (info);
+
+      if (change_type == GNOME_THEME_CHANGE_CREATED)
+        add_to_treeview ("icon_themes_list", info->name, info->readable_name, thumbnail, data);
+      else if (change_type == GNOME_THEME_CHANGE_CHANGED)
+        update_in_treeview ("icon_themes_list", info->name, info->readable_name, thumbnail, data);
+
+      if (thumbnail)
+        g_object_unref (thumbnail);
+    }
+  }
+}
+
 void
 style_init (AppearanceData *data)
 {
@@ -209,6 +337,8 @@ style_init (AppearanceData *data)
   g_signal_connect (glade_xml_get_widget (data->xml, "gtk_themes_delete"), "clicked", (GCallback) gtk_theme_delete_cb, data);
   g_signal_connect (glade_xml_get_widget (data->xml, "window_themes_delete"), "clicked", (GCallback) window_theme_delete_cb, data);
   g_signal_connect (glade_xml_get_widget (data->xml, "icon_themes_delete"), "clicked", (GCallback) icon_theme_delete_cb, data);
+
+  gnome_theme_info_register_theme_change ((ThemeChangedCallback) changed_on_disk_cb, data);
 }
 
 static void

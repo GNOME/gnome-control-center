@@ -56,36 +56,6 @@ is_locked_down (GConfClient *client)
   return gconf_client_get_bool (client, LOCKDOWN_KEY, NULL);
 }
 
-static gboolean
-find_in_model (GtkTreeModel *model, const gchar *value, gint column, GtkTreeIter *hit)
-{
-  GtkTreeIter iter;
-  gboolean valid;
-  gchar *test;
-
-  if (!value)
-    return FALSE;
-
-  for (valid = gtk_tree_model_get_iter_first (model, &iter); valid;
-       valid = gtk_tree_model_iter_next (model, &iter))
-  {
-    gtk_tree_model_get (model, &iter, column, &test, -1);
-
-    if (test) {
-      gint cmp = strcmp (test, value);
-      g_free (test);
-
-      if (!cmp) {
-      	if (hit)
-          *hit = iter;
-        return TRUE;
-      }
-    }
-  }
-
-  return FALSE;
-}
-
 static void
 theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
 {
@@ -192,7 +162,7 @@ theme_select_name (GtkIconView *icon_view, const gchar *theme)
   GtkTreeIter iter;
   GtkTreeModel *model = gtk_icon_view_get_model (icon_view);
 
-  if (find_in_model (model, theme, COL_NAME, &iter))
+  if (theme_find_in_model (model, theme, &iter))
     theme_select_iter (icon_view, &iter);
 }
 
@@ -264,7 +234,7 @@ theme_set_custom_from_theme (const GnomeThemeMetaInfo *info, AppearanceData *dat
 
   /* select the custom theme */
   model = gtk_icon_view_get_model (icon_view);
-  if (!find_in_model (model, custom->name, COL_NAME, &iter)) {
+  if (!theme_find_in_model (model, custom->name, &iter)) {
     GtkTreeIter child;
 
     gtk_list_store_insert_with_values (data->theme_store, &child, 0,
@@ -294,8 +264,6 @@ theme_changed_on_disk_cb (GnomeThemeType       type,
 			  GnomeThemeElement    element,
 			  AppearanceData       *data)
 {
-  /* TODO: add/change/remove themes from the model as appropriate */
-
   if (type == GNOME_THEME_TYPE_METATHEME) {
     GnomeThemeMetaInfo *meta = theme;
 
@@ -310,7 +278,7 @@ theme_changed_on_disk_cb (GnomeThemeType       type,
     } else if (change_type == GNOME_THEME_CHANGE_DELETED) {
       GtkTreeIter iter;
 
-      if (find_in_model (GTK_TREE_MODEL (data->theme_store), meta->name, COL_NAME, &iter))
+      if (theme_find_in_model (GTK_TREE_MODEL (data->theme_store), meta->name, &iter))
         gtk_list_store_remove (data->theme_store, &iter);
 
     } else if (change_type == GNOME_THEME_CHANGE_CHANGED) {
@@ -331,7 +299,7 @@ theme_thumbnail_done_cb (GdkPixbuf *pixbuf, AppearanceData *data)
     GtkTreeIter iter;
     GtkTreeModel *model = GTK_TREE_MODEL (data->theme_store);
 
-    if (find_in_model (model, info->name, COL_NAME, &iter))
+    if (theme_find_in_model (model, info->name, &iter))
       gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
 
     g_object_unref (pixbuf);

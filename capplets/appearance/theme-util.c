@@ -113,3 +113,33 @@ theme_model_iter_last (GtkTreeModel *model, GtkTreeIter *iter)
   }
   return FALSE;
 }
+
+gboolean
+theme_find_in_model (GtkTreeModel *model, const gchar *name, GtkTreeIter *iter)
+{
+  GtkTreeIter walk;
+  gboolean valid;
+  gchar *test;
+
+  if (!name)
+    return FALSE;
+
+  for (valid = gtk_tree_model_get_iter_first (model, &walk); valid;
+       valid = gtk_tree_model_iter_next (model, &walk))
+  {
+    gtk_tree_model_get (model, &walk, COL_NAME, &test, -1);
+
+    if (test) {
+      gint cmp = strcmp (test, name);
+      g_free (test);
+
+      if (!cmp) {
+      	if (iter)
+          *iter = walk;
+        return TRUE;
+      }
+    }
+  }
+
+  return FALSE;
+}

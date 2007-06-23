@@ -618,7 +618,10 @@ gnome_theme_installer_run (GtkWindow *parent, gchar *filename)
 	g_strlcpy (old_folder, folder, 255);
 	g_free (folder);
 
-	/* FIXME: refresh GUI from disk here */
+	/*
+	 * we're relying on the gnome theme info module to pick up changes
+	 * to the themes so we don't need to update the model here
+	 */
 
 	gtk_widget_destroy (dialog);
 
