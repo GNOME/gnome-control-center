@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-24 21:39+0000\n"
-"PO-Revision-Date: 2007-05-28 21:31+0200\n"
+"POT-Creation-Date: 2007-06-19 03:40+0100\n"
+"PO-Revision-Date: 2007-06-23 18:59+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,48 @@ msgstr "A figyelmeztető párbeszédablakon megjelenő gombok"
 msgid "Show more _details"
 msgstr "Több _részlet megjelenítése"
 
+#: ../capplets/about-me/gnome-about-me.c:634
+msgid "Select Image"
+msgstr "Kép kiválasztása"
+
+#: ../capplets/about-me/gnome-about-me.c:636
+msgid "No Image"
+msgstr "Nincs kép"
+
+#: ../capplets/about-me/gnome-about-me.c:666
+#: ../capplets/appearance/appearance-desktop.c:1067
+msgid "Images"
+msgstr "Képek"
+
+#: ../capplets/about-me/gnome-about-me.c:670
+#: ../capplets/appearance/theme-installer.c:603
+msgid "All Files"
+msgstr "Minden fájl"
+
+#: ../capplets/about-me/gnome-about-me.c:808
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Hiba történt a címjegyzék-információ lekérésére tett kísérlet közben\n"
+"Az Evolution adatkiszolgáló nem tudta kezelni a protokollt"
+
+#: ../capplets/about-me/gnome-about-me.c:829
+msgid "Unable to open address book"
+msgstr "A címjegyzék nem nyitható meg"
+
+#: ../capplets/about-me/gnome-about-me.c:841
+msgid "Unknown login ID, the user database might be corrupted"
+msgstr ""
+"Ismeretlen bejelentkezési azonosító, lehetséges, hogy a felhasználói "
+"adatbázis megsérült"
+
+#: ../capplets/about-me/gnome-about-me.c:871
+#: ../capplets/about-me/gnome-about-me.c:873
+#, c-format
+msgid "About %s"
+msgstr "%s névjegye"
+
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
 #: ../capplets/about-me/gnome-about-me.glade.h:14
 msgid "About Me"
@@ -63,142 +105,6 @@ msgstr "A névjegyem"
 msgid "Set your personal information"
 msgstr "Személyes információk beállítása"
 
-#: ../capplets/about-me/gnome-about-me.c:623
-msgid "Select Image"
-msgstr "Kép kiválasztása"
-
-#: ../capplets/about-me/gnome-about-me.c:625
-msgid "No Image"
-msgstr "Nincs kép"
-
-#: ../capplets/about-me/gnome-about-me.c:780
-msgid ""
-"There was an error while trying to get the addressbook information\n"
-"Evolution Data Server can't handle the protocol"
-msgstr ""
-"Hiba történt a címjegyzék-információ lekérésére tett kísérlet közben\n"
-"Az Evolution adatkiszolgáló nem tudta kezelni a protokollt"
-
-#: ../capplets/about-me/gnome-about-me.c:802
-msgid "Unable to open address book"
-msgstr "A címjegyzék nem nyitható meg"
-
-#: ../capplets/about-me/gnome-about-me.c:814
-msgid "Unknown login ID, the user database might be corrupted"
-msgstr ""
-"Ismeretlen bejelentkezési azonosító, lehetséges, hogy a felhasználói "
-"adatbázis megsérült"
-
-#: ../capplets/about-me/gnome-about-me.c:844
-#: ../capplets/about-me/gnome-about-me.c:846
-#, c-format
-msgid "About %s"
-msgstr "%s névjegye"
-
-#: ../capplets/about-me/gnome-about-me-password.c:172
-msgid "Child exited unexpectedly"
-msgstr "A gyermek váratlanul kilépett"
-
-#: ../capplets/about-me/gnome-about-me-password.c:295
-#, c-format
-msgid "Could not shutdown backend_stdin IO channel: %s"
-msgstr "A backend_stdin IO csatornája nem állítható le: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:308
-#, c-format
-msgid "Could not shutdown backend_stdout IO channel: %s"
-msgstr "A backend_stdout IO csatornája nem állítható le: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:449
-msgid "Authenticated!"
-msgstr "Hitelesítve!"
-
-#. This is a re-auth, and it failed.
-#. * The password must have been changed in the meantime!
-#. * Ask the user to re-authenticate
-#.
-#. Update status message and auth state
-#. Authentication failure
-#: ../capplets/about-me/gnome-about-me-password.c:466
-#: ../capplets/about-me/gnome-about-me-password.c:539
-msgid ""
-"Your password has been changed since you initially authenticated! Please re-"
-"authenticate."
-msgstr "A jelszava megváltozott a kezdeti bejelentkezés óta! Jelentkezzen be újra."
-
-#: ../capplets/about-me/gnome-about-me-password.c:468
-msgid "That password was incorrect."
-msgstr "A jelszó hibás."
-
-#: ../capplets/about-me/gnome-about-me-password.c:514
-msgid "Your password has been changed."
-msgstr "A jelszó módosítva."
-
-#. What does this indicate?
-#. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:524
-#, c-format
-msgid "System error: %s."
-msgstr "Rendszerhiba: %s."
-
-#: ../capplets/about-me/gnome-about-me-password.c:526
-msgid "The password is too short."
-msgstr "A jelszó túl rövid."
-
-#: ../capplets/about-me/gnome-about-me-password.c:528
-#: ../capplets/about-me/gnome-about-me-password.c:530
-msgid "The password is too simple."
-msgstr "A jelszó túl egyszerű."
-
-#: ../capplets/about-me/gnome-about-me-password.c:532
-msgid "The old and new passwords are too similar."
-msgstr "A régi és új jelszavak túlságosan hasonlítanak."
-
-#: ../capplets/about-me/gnome-about-me-password.c:534
-msgid "The new password must contain numeric or special character(s)."
-msgstr "Az új jelszónak numerikus vagy speciális karaktereket kell tartalmaznia."
-
-#: ../capplets/about-me/gnome-about-me-password.c:536
-msgid "The old and new passwords are the same."
-msgstr "A régi és új jelszavak megegyeznek."
-
-#: ../capplets/about-me/gnome-about-me-password.c:787
-#, c-format
-msgid "Unable to launch %s: %s"
-msgstr "A(z) %s nem futtatható: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:790
-msgid "Unable to launch backend"
-msgstr "A háttér nem indítható"
-
-#: ../capplets/about-me/gnome-about-me-password.c:791
-msgid "A system error has occurred"
-msgstr "Rendszerhiba történt"
-
-#. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:811
-msgid "Checking password..."
-msgstr "Jelszó ellenőrzése..."
-
-#: ../capplets/about-me/gnome-about-me-password.c:897
-msgid "Click <b>Change password</b> to change your password."
-msgstr ""
-"Kattintson a <b>Jelszó megváltoztatása</b> gombra a jelszó "
-"megváltoztatásához."
-
-#: ../capplets/about-me/gnome-about-me-password.c:900
-msgid "Please type your password in the <b>New password</b> field."
-msgstr "Írja be a jelszavát az <b>Új jelszó</b> mezőbe."
-
-#: ../capplets/about-me/gnome-about-me-password.c:903
-#: ../capplets/about-me/gnome-about-me.glade.h:34
-msgid "Please type your password again in the <b>Retype new password</b> field."
-msgstr "Írja be újra a jelszót a <b>Írja be újra a jelszót</b> mezőbe."
-
-#: ../capplets/about-me/gnome-about-me-password.c:906
-msgid "The two passwords are not equal."
-msgstr "A két jelszó nem egyezik."
-
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
 msgid " "
@@ -206,9 +112,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/appearance/appearance.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
 
@@ -332,6 +238,11 @@ msgstr "Post_afiók:"
 msgid "Personal Info"
 msgstr "Személyes információk"
 
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me-password.c:905
+msgid "Please type your password again in the <b>Retype new password</b> field."
+msgstr "Írja be újra a jelszót a <b>Írja be újra a jelszót</b> mezőbe."
+
 #: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "Állam/_Helytartóság:"
@@ -436,21 +347,116 @@ msgstr "_Yahoo:"
 msgid "_Zip/Postal code:"
 msgstr "_Irányítószám:"
 
+#: ../capplets/about-me/gnome-about-me-password.c:162
+msgid "Child exited unexpectedly"
+msgstr "A gyermek váratlanul kilépett"
+
+#: ../capplets/about-me/gnome-about-me-password.c:297
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "A backend_stdin IO csatornája nem állítható le: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:310
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "A backend_stdout IO csatornája nem állítható le: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:451
+msgid "Authenticated!"
+msgstr "Hitelesítve!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:468
+#: ../capplets/about-me/gnome-about-me-password.c:541
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr "A jelszava megváltozott a kezdeti bejelentkezés óta! Jelentkezzen be újra."
+
+#: ../capplets/about-me/gnome-about-me-password.c:470
+msgid "That password was incorrect."
+msgstr "A jelszó hibás."
+
+#: ../capplets/about-me/gnome-about-me-password.c:516
+msgid "Your password has been changed."
+msgstr "A jelszó módosítva."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:526
+#, c-format
+msgid "System error: %s."
+msgstr "Rendszerhiba: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:528
+msgid "The password is too short."
+msgstr "A jelszó túl rövid."
+
+#: ../capplets/about-me/gnome-about-me-password.c:530
+#: ../capplets/about-me/gnome-about-me-password.c:532
+msgid "The password is too simple."
+msgstr "A jelszó túl egyszerű."
+
+#: ../capplets/about-me/gnome-about-me-password.c:534
+msgid "The old and new passwords are too similar."
+msgstr "A régi és új jelszavak túlságosan hasonlítanak."
+
+#: ../capplets/about-me/gnome-about-me-password.c:536
+msgid "The new password must contain numeric or special character(s)."
+msgstr "Az új jelszónak numerikus vagy speciális karaktereket kell tartalmaznia."
+
+#: ../capplets/about-me/gnome-about-me-password.c:538
+msgid "The old and new passwords are the same."
+msgstr "A régi és új jelszavak megegyeznek."
+
+#: ../capplets/about-me/gnome-about-me-password.c:789
+#, c-format
+msgid "Unable to launch %s: %s"
+msgstr "A(z) %s nem futtatható: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:792
+msgid "Unable to launch backend"
+msgstr "A háttér nem indítható"
+
+#: ../capplets/about-me/gnome-about-me-password.c:793
+msgid "A system error has occurred"
+msgstr "Rendszerhiba történt"
+
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:813
+msgid "Checking password..."
+msgstr "Jelszó ellenőrzése..."
+
+#: ../capplets/about-me/gnome-about-me-password.c:899
+msgid "Click <b>Change password</b> to change your password."
+msgstr ""
+"Kattintson a <b>Jelszó megváltoztatása</b> gombra a jelszó "
+"megváltoztatásához."
+
+#: ../capplets/about-me/gnome-about-me-password.c:902
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "Írja be a jelszavát az <b>Új jelszó</b> mezőbe."
+
+#: ../capplets/about-me/gnome-about-me-password.c:908
+msgid "The two passwords are not equal."
+msgstr "A két jelszó nem egyezik."
+
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-msgid "<b>Applications</b>"
-msgstr "<b>Alkalmazások</b>"
+msgid "<b>Assistive Technologies</b>"
+msgstr "<b>Akadálymentesítési technológiák</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-msgid "<b>Support</b>"
-msgstr "<b>Támogatás</b>"
+msgid "<b>Preferences</b>"
+msgstr "<b>Beállítások</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
-msgid ""
-"<small><i><b>Note:</b> Changes to this setting will not take effect until "
-"you next log in.</i></small>"
-msgstr ""
-"<small><i><b>Megjegyzés:</b> A módosítások csak a legközelebbi belépéskor "
-"lépnek életbe.</i></small>"
+msgid "Accessible Lo_gin"
+msgstr "_Akadálymentes bejelentkezés"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
@@ -458,77 +464,60 @@ msgid "Assistive Technology Preferences"
 msgstr "Akadálymentesítés beállításai"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
+msgid ""
+"Changes to enable assistive technologies will not take effect ntil your next "
+"log in."
+msgstr "Az akadálymentesítési technológiák módosításai csak a legközelebbi belépéskor lépnek életbe."
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
 msgstr "Bezárás és _kilépés"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
-msgid "Start these assistive technologies every time you log in:"
-msgstr "Az alábbi funkciók induljanak el minden belépéskor:"
-
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
+msgid "Jump to Preferred Applications dialog"
+msgstr "Ugrás az Alapértelmezett alkalmazások párbeszédablakra"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
+msgid "Jump to the Accessible Login dialog"
+msgstr "Ugrás az Akadálymentes bejelentkezés párbeszédablakra"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
+msgid "Jump to the Keyboard Accessibility dialog"
+msgstr "Ugrás a Billentyűzet akadálymentesítése párbeszédablakra"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
 msgid "_Enable assistive technologies"
 msgstr "_Akadálymentesítés engedélyezése"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
-msgid "_Magnifier"
-msgstr "_Nagyító"
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+msgid "_Keyboard Accessibility"
+msgstr "_Billentyűzet akadálymentesítése"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
-msgid "_On-screen keyboard"
-msgstr "_Billentyűzet a képernyőn"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-msgid "_Screenreader"
-msgstr "Ké_pernyőfelolvasó"
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+msgid "_Preferred Applications"
+msgstr "_Alapértelmezett alkalmazások"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
+#: ../capplets/default-applications/default-applications-accessibility.desktop.in.in.h:1
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "A GNOME akadálymentesítési technológiáinak engedélyezése belépéskor"
 
-#: ../capplets/accessibility/at-properties/main.c:60
-msgid ""
-"No Assistive Technology is available on your system.  The 'gok' package must "
-"be installed in order to get on-screen keyboard support, and the 'orca' "
-"package must be installed for screenreading and magnifying capabilities."
-msgstr ""
-"Nincsenek akadálymentesítési funkciók telepítve. A \"gok\" csomag a képernyő-"
-"billentyűzetet támogatja, az \"orca\" csomag pedig a képernyőfelolvasó és "
-"nagyító funkciókat."
-
-#: ../capplets/accessibility/at-properties/main.c:62
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'gok' package must be installed in order to get on-screen keyboard support."
-msgstr ""
-"Nincs minden rendelkezésre álló akadálymentesítési technológia telepítve. A "
-"\"gok\" csomagnak telepítve kell lennie a képernyő-billentyűzet eléréséhez."
-
-#: ../capplets/accessibility/at-properties/main.c:64
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'orca' package must be installed for screenreading and magnifying "
-"capabilities."
-msgstr ""
-"Nincs minden rendelkezésre álló akadálymentesítési technológia telepítve. Az "
-"\"orca\" csomagnak telepítve kell lennie a képernyőfelolvasó és nagyító "
-"funkció eléréséhez."
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:250
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Hiba történt az egér beállításai párbeszédablak indításakor: %s"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:338
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:346
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:407
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nem sikerült betölteni az AccessX beállításokat a(z) \"%s\" fájlból"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:444
 msgid "Import Feature Settings File"
 msgstr "Szolgáltatások beállításainak betöltése fájlból"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:440
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:448
 msgid "_Import"
 msgstr "_Importálás"
 
@@ -549,87 +538,82 @@ msgstr ""
 "billentyűzet akadálymentesítési szolgáltatásai nem használhatók e nélkül."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "*"
-msgstr "*"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>Billentyűs_zűrés engedélyezése</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>_Lassú billentyűk engedélyezése</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>_Egérbillentyűk engedélyezése</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>Bille_ntyűismétlés engedélyezése</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>_Ragadós billentyűk engedélyezése</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Features</b>"
 msgstr "<b>Szolgáltatások</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Toggle Keys</b>"
 msgstr "<b>Váltóbillentyűk</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Basic"
 msgstr "Alap"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Beep if key is re_jected"
 msgstr "Hangjelzés a billentyű el_utasításakor"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "Beep when _features turned on or off from keyboard"
 msgstr "_Hangjelzés a szolgáltatások billentyűzetről történő ki- vagy bekapcsolásakor"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Beep when _modifier is pressed"
 msgstr "Hangjelzés egy _módosító billentyű lenyomásakor"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "Hangjelzés ha egy LED kigyullad, illetve két hangjelzés ha elalszik."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when key is:"
 msgstr "Hangjelzés a billentyű:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Del_ay:"
 msgstr "Késlel_tetés:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Delay between keypress and pointer mo_vement:"
 msgstr "Késleltetés a billentyű lenyomása és az egérmutató _mozdítása között:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "Disa_ble if two keys pressed together"
 msgstr "Letiltás _két billentyű egyidejű lenyomásakor"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
 msgid "E_nable Toggle Keys"
 msgstr "_Váltóbillentyűk figyelése"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Filters"
 msgstr "Szűrők"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 msgid "I_gnore duplicate keypresses within:"
 msgstr "Ismételt _leütések figyelmen kívül hagyása ezen belül:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -637,23 +621,23 @@ msgstr ""
 "Hagyja figyelmen kívül UGYANAZON billentyű többszöri lenyomását a "
 "felhasználó által meghatározható időszakon belül."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Billentyűzet akadálymentesítési beállításai (AccessX)"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Ma_ximum pointer speed:"
 msgstr "Egérmutató max_imális sebessége:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "Mouse Keys"
 msgstr "Egérbillentyűk"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "Mouse _Preferences..."
 msgstr "_Egér beállításai..."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -661,7 +645,7 @@ msgstr ""
 "Csak a lenyomott és a felhasználó által beállítható ideig nyomva tartott "
 "billentyűleütéseket fogadja el."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -669,196 +653,615 @@ msgstr ""
 "Szimultán billentyűlenyomások elvégzése a módosító billentyűk egymás utáni "
 "lenyomásával."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "S_peed:"
 msgstr "_Sebesség:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "Time to acce_lerate to maximum speed:"
 msgstr "Maximális sebességre _gyorsítás ideje:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "A numerikus billentyűzet egérvezérlővé alakítása."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "_Disable if unused for:"
 msgstr "_Letiltás, ha ennyi ideig használaton kívül van:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Enable keyboard accessibility features"
 msgstr "Billentyűzet akadálymentesítési szolgáltatásainak _engedélyezése"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Import Feature Settings..."
 msgstr "_Sajátosságok importálása..."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "_Only accept keys held for:"
 msgstr "_Csak a legalább ennyi ideig lenyomott billentyűk elfogadása:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Type to test settings:"
 msgstr "Beállítások ki_próbálása:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
 msgid "_accepted"
 msgstr "el_fogadásakor"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
 msgid "_pressed"
 msgstr "le_nyomásakor"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
 msgid "_rejected"
 msgstr "vissz_autasításakor"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
 msgid "characters/second"
 msgstr "karakter/másodperc"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "ezredmásodperc"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
 msgid "pixels/second"
 msgstr "képpont/másodperc"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "másodperc"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "Háttérbeállítások megváltoztatása"
+#: ../capplets/appearance/appearance.glade.h:2
+msgid "<b>C_olors</b>"
+msgstr "<b>S_zínek</b>"
 
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "Munkaasztal háttere"
+#: ../capplets/appearance/appearance.glade.h:3
+msgid "<b>Hinting</b>"
+msgstr "<b>Hinting</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
+#: ../capplets/appearance/appearance.glade.h:4
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>Menük és eszköztárak</b>"
+
+#: ../capplets/appearance/appearance.glade.h:5
+msgid "<b>Preview</b>"
+msgstr "<b>Előnézet</b>"
+
+#: ../capplets/appearance/appearance.glade.h:6
+msgid "<b>Rendering</b>"
+msgstr "<b>Megjelenítés</b>"
+
+#: ../capplets/appearance/appearance.glade.h:7
+msgid "<b>Smoothing</b>"
+msgstr "<b>Simítás</b>"
+
+#: ../capplets/appearance/appearance.glade.h:8
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>Sorrend a képponton belül</b>"
+
+#: ../capplets/appearance/appearance.glade.h:9
+msgid "<b>_Wallpaper</b>"
 msgstr "<b>_Háttérkép</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>Háttérs_zínek</b>"
+#: ../capplets/appearance/appearance.glade.h:10
+msgid "Appearance Preferences"
+msgstr "Megjelenés beállításai"
 
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "A munkaasztal hátterének beállításai"
+#: ../capplets/appearance/appearance.glade.h:11
+msgid "Background"
+msgstr "Háttér"
 
-#: ../capplets/background/gnome-background-properties.glade.h:4
+#: ../capplets/appearance/appearance.glade.h:12
+msgid "Best _shapes"
+msgstr "A le_gszebb betűforma"
+
+#: ../capplets/appearance/appearance.glade.h:13
+msgid "Best co_ntrast"
+msgstr "A legjobb _kontraszt"
+
+#: ../capplets/appearance/appearance.glade.h:14
+msgid "C_ustomize..."
+msgstr "_Testreszabás..."
+
+#: ../capplets/appearance/appearance.glade.h:15
+msgid "C_ut"
+msgstr "_Kivágás"
+
+#: ../capplets/appearance/appearance.glade.h:16
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+"Középre helyezett\n"
+"Képernyő kitöltése\n"
+"Kifeszített\n"
+"Nagyítás\n"
+"Mozaik"
+
+#: ../capplets/appearance/appearance.glade.h:21
+msgid "Colors"
+msgstr "Színek"
+
+#: ../capplets/appearance/appearance.glade.h:22
+msgid "Controls"
+msgstr "Felhasználói felület elemei"
+
+#: ../capplets/appearance/appearance.glade.h:23
+msgid "D_etails..."
+msgstr "_Részletek..."
+
+#: ../capplets/appearance/appearance.glade.h:24
+msgid "Des_ktop font:"
+msgstr "As_ztal betűkészlete:"
+
+#: ../capplets/appearance/appearance.glade.h:25
+msgid "Font Rendering Details"
+msgstr "Betűmegjelenítés részletei"
+
+#: ../capplets/appearance/appearance.glade.h:26
+msgid "Fonts"
+msgstr "Betűkészletek"
+
+#: ../capplets/appearance/appearance.glade.h:27
+msgid "Go _to Fonts Folder"
+msgstr "_Ugrás a betűkészletek mappájába"
+
+#: ../capplets/appearance/appearance.glade.h:28
+msgid "Gra_yscale"
+msgstr "_Szürkeárnyalatos"
+
+#: ../capplets/appearance/appearance.glade.h:29
+msgid "Icons"
+msgstr "Ikonok"
+
+#: ../capplets/appearance/appearance.glade.h:30
+msgid "Interface"
+msgstr "Felület"
+
+#: ../capplets/appearance/appearance.glade.h:31
+msgid "N_one"
+msgstr "_Nincs"
+
+#: ../capplets/appearance/appearance.glade.h:32
+msgid "New File"
+msgstr "Új fájl"
+
+#: ../capplets/appearance/appearance.glade.h:33
+msgid "Open File"
+msgstr "Fájl megnyitása"
+
+#: ../capplets/appearance/appearance.glade.h:34
 msgid "Open a dialog to specify the color"
 msgstr "Párbeszédablak megnyitása a szín megadásához"
 
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "Háttér hozzá_adása"
+#: ../capplets/appearance/appearance.glade.h:35
+msgid "Pointer"
+msgstr "Egérmutató"
 
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Finish"
-msgstr "_Befejezés"
+#: ../capplets/appearance/appearance.glade.h:36
+msgid "R_esolution:"
+msgstr "_Felbontás:"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
-msgid "_Remove"
-msgstr "_Eltávolítás"
+#: ../capplets/appearance/appearance.glade.h:37
+msgid "Reset to Defaults"
+msgstr "Alapértelmezések visszaállítása"
 
-#: ../capplets/background/gnome-background-properties.glade.h:8
+#: ../capplets/appearance/appearance.glade.h:38
+msgid "Save File"
+msgstr "Fájl mentése"
+
+#: ../capplets/appearance/appearance.glade.h:39
+msgid "Show _icons in menus"
+msgstr "_Ikonok megjelenítése a menükben"
+
+#: ../capplets/appearance/appearance.glade.h:40
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"Homogén szín\n"
+"Vízszintes átmenet\n"
+"Függőleges átmenet"
+
+#: ../capplets/appearance/appearance.glade.h:43
+msgid "Sub_pixel (LCDs)"
+msgstr "_Képponton belül (LCD)"
+
+#: ../capplets/appearance/appearance.glade.h:44
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "Simítás a _képponton belül (LCD)"
+
+#: ../capplets/appearance/appearance.glade.h:45
+msgid "Text"
+msgstr "Szöveg"
+
+#: ../capplets/appearance/appearance.glade.h:46
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"Szöveg az ikonok alatt\n"
+"Szöveg az ikonok mellett\n"
+"Csak ikonok\n"
+"Csak szöveg"
+
+#: ../capplets/appearance/appearance.glade.h:50
+msgid "The current controls theme does not support color schemes."
+msgstr "A felhasználói felület elemeinek jelenlegi témája nem támogatja a színsémákat."
+
+#: ../capplets/appearance/appearance.glade.h:51
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "Téma"
+
+#: ../capplets/appearance/appearance.glade.h:52
+msgid "Theme Details"
+msgstr "Téma részletei"
+
+#: ../capplets/appearance/appearance.glade.h:53
+msgid "Toolbar _button labels:"
+msgstr "Esz_köztárgombok címkéi:"
+
+#: ../capplets/appearance/appearance.glade.h:54
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/appearance.glade.h:55
+msgid "Window Border"
+msgstr "Ablakkeret"
+
+#: ../capplets/appearance/appearance.glade.h:56
+msgid "_Add..."
+msgstr "Hozzá_adás..."
+
+#: ../capplets/appearance/appearance.glade.h:57
+msgid "_Application font:"
+msgstr "_Alkalmazás betűkészlete:"
+
+#: ../capplets/appearance/appearance.glade.h:58
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/appearance.glade.h:59
+msgid "_Copy"
+msgstr "_Másolás"
+
+#: ../capplets/appearance/appearance.glade.h:60
+msgid "_Document font:"
+msgstr "_Dokumentum betűkészlete:"
+
+#: ../capplets/appearance/appearance.glade.h:61
+msgid "_Edit"
+msgstr "S_zerkesztés"
+
+#: ../capplets/appearance/appearance.glade.h:62
+msgid "_Editable menu shortcut keys"
+msgstr "S_zerkeszthető menügyorsítók"
+
+#: ../capplets/appearance/appearance.glade.h:63
+msgid "_File"
+msgstr "_Fájl"
+
+#: ../capplets/appearance/appearance.glade.h:64
+msgid "_Fixed width font:"
+msgstr "_Rögzített szélességű betűkészlet:"
+
+#: ../capplets/appearance/appearance.glade.h:65
+msgid "_Full"
+msgstr "_Teljes"
+
+#: ../capplets/appearance/appearance.glade.h:66
+msgid "_Input boxes:"
+msgstr "Be_meneti mezők:"
+
+#: ../capplets/appearance/appearance.glade.h:67
+msgid "_Install..."
+msgstr "_Telepítés..."
+
+#: ../capplets/appearance/appearance.glade.h:68
+msgid "_Medium"
+msgstr "Kö_zepes"
+
+#: ../capplets/appearance/appearance.glade.h:69
+msgid "_Monochrome"
+msgstr "_Fekete-fehér"
+
+#: ../capplets/appearance/appearance.glade.h:70
+msgid "_New"
+msgstr "Ú_j"
+
+#: ../capplets/appearance/appearance.glade.h:71
+msgid "_None"
+msgstr "_Nincs"
+
+#: ../capplets/appearance/appearance.glade.h:72
+msgid "_Open"
+msgstr "_Megnyitás"
+
+#: ../capplets/appearance/appearance.glade.h:73
+msgid "_Paste"
+msgstr "_Beillesztés"
+
+#: ../capplets/appearance/appearance.glade.h:74
+msgid "_Print"
+msgstr "_Nyomtatás"
+
+#: ../capplets/appearance/appearance.glade.h:75
+msgid "_Quit"
+msgstr "_Kilépés"
+
+#: ../capplets/appearance/appearance.glade.h:76
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/appearance.glade.h:77
+msgid "_Save"
+msgstr "M_entés"
+
+#: ../capplets/appearance/appearance.glade.h:78
+msgid "_Selected items:"
+msgstr "Ki_választott elemek:"
+
+#: ../capplets/appearance/appearance.glade.h:79
+msgid "_Slight"
+msgstr "_Enyhe"
+
+#: ../capplets/appearance/appearance.glade.h:80
 msgid "_Style:"
 msgstr "Stíl_us:"
 
-#: ../capplets/background/gnome-wp-capplet.c:41
-msgid "[FILE...]"
-msgstr "[FÁJL...]"
+#: ../capplets/appearance/appearance.glade.h:81
+msgid "_VRGB"
+msgstr "_VRGB"
 
-#: ../capplets/background/gnome-wp-capplet.c:81
-#: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Hiba történt a súgó megjelenítése közben: %s"
+#: ../capplets/appearance/appearance.glade.h:82
+msgid "_Window title font:"
+msgstr "Ablak _címsorának betűkészlete:"
 
-#: ../capplets/background/gnome-wp-capplet.c:956
-msgid "Centered"
-msgstr "Középre helyezett"
+#: ../capplets/appearance/appearance.glade.h:83
+msgid "_Windows:"
+msgstr "_Ablakok:"
 
-#: ../capplets/background/gnome-wp-capplet.c:960
-msgid "Fill Screen"
-msgstr "Képernyő kitöltése"
+#: ../capplets/appearance/appearance.glade.h:84
+msgid "dots per inch"
+msgstr "pont/hüvelyk"
 
-#: ../capplets/background/gnome-wp-capplet.c:964
-msgid "Scaled"
-msgstr "Kifeszített"
+#: ../capplets/appearance/appearance.glade.h:85
+msgid "gtk-delete"
+msgstr ""
 
-#: ../capplets/background/gnome-wp-capplet.c:968
-msgid "Zoom"
-msgstr "Nagyítás"
-
-#: ../capplets/background/gnome-wp-capplet.c:972
-msgid "Tiled"
-msgstr "Mozaik"
-
-#: ../capplets/background/gnome-wp-capplet.c:993
-msgid "Solid Color"
-msgstr "Homogén szín"
-
-#: ../capplets/background/gnome-wp-capplet.c:997
-msgid "Horizontal Gradient"
-msgstr "Vízszintes színátmenet"
-
-#: ../capplets/background/gnome-wp-capplet.c:1001
-msgid "Vertical Gradient"
-msgstr "Függőleges színátmenet"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1044
+#: ../capplets/appearance/appearance-desktop.c:1050
 msgid "Add Wallpaper"
 msgstr "Háttér hozzáadása"
 
-#: ../capplets/background/gnome-wp-capplet.c:1061
-msgid "Images"
-msgstr "Képek"
-
-#: ../capplets/background/gnome-wp-capplet.c:1065
-msgid "All Files"
+#: ../capplets/appearance/appearance-desktop.c:1071
+msgid "All files"
 msgstr "Minden fájl"
 
-#: ../capplets/background/gnome-wp-capplet.c:1128
-msgid "- Desktop Background Preferences"
-msgstr "- Munkaasztal hátterének tulajdonságai"
+#: ../capplets/appearance/appearance-font.c:493
+msgid "Font may be too large"
+msgstr "Lehet, hogy a betűkészlet túl nagy"
 
-#: ../capplets/background/gnome-wp-info.c:45
+#: ../capplets/appearance/appearance-font.c:497
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"A kiválasztott betűkészlet %d pont méretű, ami megnehezítheti a számítógép "
+"hatékony használatát. Ajánlott kisebb méretet választani, mint %d pont."
+msgstr[1] ""
+"A kiválasztott betűkészlet %d pont méretű, ami megnehezítheti a számítógép "
+"hatékony használatát. Ajánlott kisebb méretet választani, mint %d pont."
+
+#: ../capplets/appearance/appearance-font.c:510
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"A kiválasztott betűkészlet %d pont méretű, ami megnehezítheti a számítógép "
+"hatékony használatát. Ajánlott kisebb méretű betűkészletet választani."
+msgstr[1] ""
+"A kiválasztott betűkészlet %d pont méretű, ami megnehezítheti a számítógép "
+"hatékony használatát. Ajánlott kisebb méretű betűkészletet választani."
+
+#: ../capplets/appearance/appearance-font.c:532
+msgid "Use previous font"
+msgstr "Az előző betűkészlet használata"
+
+#: ../capplets/appearance/appearance-font.c:534
+msgid "Use selected font"
+msgstr "A kijelölt betűkészlet használata"
+
+#: ../capplets/appearance/appearance-main.c:103
+msgid "Specify the filename of a theme to install"
+msgstr "Adja meg a telepítendő téma fájlnevét"
+
+#: ../capplets/appearance/appearance-main.c:104
+msgid "filename"
+msgstr "fájlnév"
+
+#: ../capplets/appearance/appearance-main.c:110
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr "Adja meg a megjelenítendő oldal nevét (theme|background|fonts|interface)"
+
+#: ../capplets/appearance/appearance-main.c:111
+msgid "page"
+msgstr "oldal"
+
+#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/default-applications/gnome-da-capplet.c:1098
+#: ../capplets/sound/sound-properties-capplet.c:327
+msgid "Custom"
+msgstr "Egyéni"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:2
+msgid "Customize the look of the desktop"
+msgstr "Az asztal megjelenésének testreszabása"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "Témacsomagok telepítése az asztal különböző összetevőihez"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "Tématelepítő"
+
+#: ../capplets/appearance/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "Gnome témacsomag"
+
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Nincs háttérkép"
 
-#.
-#. Translators: This message is used to render the type and size of the
-#. background images in gnome-background-properites. The first "%s" will
-#. be replaced by the image type, and the two "%d %s"s will be replaced
-#. with the images' dimensions. For example, in US English, this may be
-#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
-#.
-#. Do not translate the "background size|" type. Remove it from the
-#. translation.
-#.
-#: ../capplets/background/gnome-wp-item.c:368
+#: ../capplets/appearance/gnome-wp-item.c:360
 #, c-format
-msgid "background size|%s, %d %s x %d %s"
-msgstr "%s, %d %s x %d %s"
+msgid ""
+"<big><b>%s</b></big>\n"
+"<b>Width:</b> %d %s\n"
+"<b>Height:</b> %d %s\n"
+"<b>Type:</b> %s\n"
+"<b>Location:</b> %s"
+msgstr ""
+"<big><b>%s</b></big>\n"
+"<b>Szlesség:</b> %d %s\n"
+"<b>Magasság:</b> %d %s\n"
+"<b>Típus:</b> %s\n"
+"<b>Hely:</b> %s"
 
-#: ../capplets/background/gnome-wp-item.c:371
-#: ../capplets/background/gnome-wp-item.c:373
+#: ../capplets/appearance/gnome-wp-item.c:367
+#: ../capplets/appearance/gnome-wp-item.c:369
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "képpont"
 msgstr[1] "képpont"
+
+#: ../capplets/appearance/theme-installer.c:149
+#, c-format
+msgid ""
+"Cannot install theme.\n"
+"The %s utility is not installed."
+msgstr ""
+"A téma nem telepíthető.\n"
+"A(z) %s segédprogram nincs telepítve."
+
+#: ../capplets/appearance/theme-installer.c:197
+msgid ""
+"Cannot install theme.\n"
+"There was a problem while extracting the theme."
+msgstr ""
+"A téma nem telepíthető.\n"
+"A probléma történt a téma kibontásakor."
+
+#: ../capplets/appearance/theme-installer.c:237
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr "A(z) %s GNOME téma telepítése sikeresen befejeződött"
+
+#: ../capplets/appearance/theme-installer.c:249
+msgid "The theme is an engine. You need to compile it."
+msgstr "A téma egy motor. Le kell fordítania a témát."
+
+#: ../capplets/appearance/theme-installer.c:258
+msgid "The file format is invalid"
+msgstr "A fájl formátuma érvénytelen"
+
+#: ../capplets/appearance/theme-installer.c:303
+msgid "Installation Failed"
+msgstr "A telepítés sikertelen"
+
+#: ../capplets/appearance/theme-installer.c:314
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr "A(z) \"%s\" téma telepítve."
+
+#: ../capplets/appearance/theme-installer.c:320
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "Szeretné alkalmazni most, vagy megtartja a jelenlegi témát?"
+
+#: ../capplets/appearance/theme-installer.c:322
+msgid "Keep Current Theme"
+msgstr "Jelenlegi téma megtartása"
+
+#: ../capplets/appearance/theme-installer.c:324
+msgid "Apply New Theme"
+msgstr "Új téma alkalmazása"
+
+#: ../capplets/appearance/theme-installer.c:397
+msgid "This theme is not in a supported format."
+msgstr "Ezen téma formátuma nem támogatott."
+
+#: ../capplets/appearance/theme-installer.c:422
+msgid "Failed to create temporary directory"
+msgstr "Nem sikerült átmeneti könyvtárat létrehozni"
+
+#: ../capplets/appearance/theme-installer.c:480
+msgid "No theme file location specified to install"
+msgstr "Nincs megadva a témafájl elérési útvonala a telepítéshez"
+
+#: ../capplets/appearance/theme-installer.c:500
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Nincs megfelelő jogosultsága téma telepítéséhez a következő helyre:\n"
+"%s"
+
+#: ../capplets/appearance/theme-installer.c:519
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr "%s a témafájlok telepítési útvonala. Ez nem választható ki a forrás helyéül."
+
+#: ../capplets/appearance/theme-installer.c:540
+msgid "The file format is invalid."
+msgstr "A fájl formátuma érvénytelen."
+
+#: ../capplets/appearance/theme-installer.c:593
+msgid "Select Theme"
+msgstr "Téma kiválasztása"
+
+#: ../capplets/appearance/theme-installer.c:596
+msgid "Theme Packages"
+msgstr "Témacsomagok"
+
+#: ../capplets/appearance/theme-util.c:42
+msgid "Would you like to remove this theme?"
+msgstr "Törölni szeretné ezt a témát?"
+
+#: ../capplets/appearance/theme-util.c:88
+msgid "Theme cannot be deleted"
+msgstr "A téma nem törölhető"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -883,10 +1286,16 @@ msgid "Just apply settings and quit"
 msgstr "Beállítások alkalmazása és kilépés"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:226
-#: ../capplets/sound/sound-properties-capplet.c:1014
+#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+#: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Az örökölt beállítások betöltése és tárolása"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Hiba történt a súgó megjelenítése közben: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
@@ -1021,7 +1430,7 @@ msgstr ""
 "Kiosztandó visszahívás, amikor a tulajdonságszerkesztő objektum adatai "
 "törlendők"
 
-#: ../capplets/common/gconf-property-editor.c:1466
+#: ../capplets/common/gconf-property-editor.c:1459
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1033,7 +1442,7 @@ msgstr ""
 "\n"
 "Tegye elérhetővé a fájlt, vagy válasszon másik háttérképet."
 
-#: ../capplets/common/gconf-property-editor.c:1474
+#: ../capplets/common/gconf-property-editor.c:1467
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1046,16 +1455,20 @@ msgstr ""
 "\n"
 "Válasszon egy másik képet helyette."
 
-#: ../capplets/common/gconf-property-editor.c:1593
+#: ../capplets/common/gconf-property-editor.c:1586
 msgid "Please select an image."
 msgstr "Válasszon egy képet."
 
-#: ../capplets/common/gconf-property-editor.c:1598
+#: ../capplets/common/gconf-property-editor.c:1591
 msgid "_Select"
 msgstr "_Kijelölés"
 
+#: ../capplets/default-applications/default-applications-accessibility.desktop.in.in.h:2
+msgid "Preferred Assistive Technology"
+msgstr "Alapértelmezett akadálymentesítési technológia"
+
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Preferred Applications"
 msgstr "Alapértelmezett alkalmazások"
 
@@ -1063,259 +1476,367 @@ msgstr "Alapértelmezett alkalmazások"
 msgid "Select your default applications"
 msgstr "Alapértelmezett alkalmazások kiválasztása"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:77
-#: ../capplets/default-applications/gnome-da-capplet.c:101
-#: ../capplets/default-applications/gnome-da-capplet.c:146
-#: ../capplets/default-applications/gnome-da-capplet.c:192
-#: ../capplets/default-applications/gnome-da-capplet.c:248
-#: ../capplets/default-applications/gnome-da-capplet.c:299
-#: ../capplets/default-applications/gnome-da-capplet.c:603
-#: ../capplets/default-applications/gnome-da-capplet.c:625
+#: ../capplets/default-applications/gnome-at-mobility.desktop.in.in.h:1
+msgid "Mobility AT"
+msgstr "Mobilitási akadálymentesítés"
+
+#: ../capplets/default-applications/gnome-at-mobility.desktop.in.in.h:2
+msgid "Run the the preferred GNOME Mobility Assitive Technology"
+msgstr "Az alapértelmezett GNOME mobilitási akadálymentesítési program futtatása"
+
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
+msgid "Autostart the preferred AT"
+msgstr "Az alapértelmezett akadálymentesítési technológia automatikus indítása"
+
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
+msgid "Visual"
+msgstr "Vizuális"
+
+#: ../capplets/default-applications/gnome-at-visual.desktop.in.in.h:1
+msgid "Run the the preferred GNOME Visual Assistive Technology"
+msgstr "Az alapértelmezett GNOME vizuális akadálymentesítési technológia elindítása"
+
+#: ../capplets/default-applications/gnome-at-visual.desktop.in.in.h:2
+msgid "Visual AT"
+msgstr "Vizuális AT"
+
+#: ../capplets/default-applications/gnome-da-capplet.c:80
+#: ../capplets/default-applications/gnome-da-capplet.c:113
+#: ../capplets/default-applications/gnome-da-capplet.c:132
+#: ../capplets/default-applications/gnome-da-capplet.c:151
+#: ../capplets/default-applications/gnome-da-capplet.c:197
+#: ../capplets/default-applications/gnome-da-capplet.c:243
+#: ../capplets/default-applications/gnome-da-capplet.c:300
+#: ../capplets/default-applications/gnome-da-capplet.c:351
+#: ../capplets/default-applications/gnome-da-capplet.c:402
+#: ../capplets/default-applications/gnome-da-capplet.c:453
+#: ../capplets/default-applications/gnome-da-capplet.c:502
+#: ../capplets/default-applications/gnome-da-capplet.c:895
+#: ../capplets/default-applications/gnome-da-capplet.c:917
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Hiba történt a beállítások mentése közben: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:744
-#: ../capplets/sound/sound-properties-capplet.c:312
-msgid "Custom"
-msgstr "Egyéni"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:764
+#: ../capplets/default-applications/gnome-da-capplet.c:1118
 msgid "Could not load the main interface"
 msgstr "A fő kezelőfelület nem tölthető be"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:766
+#: ../capplets/default-applications/gnome-da-capplet.c:1120
 msgid "Please make sure that the applet is properly installed"
 msgstr "Ellenőrizze, hogy ez a kisalkalmazás megfelelően van-e telepítve"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "<b>Image Viewer</b>"
+msgstr "<b>Képmegjelenítő</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>Azonnali üzenetküldő</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
+msgid "<b>Mail Reader</b>"
+msgstr "<b>Levelezőprogram</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
+msgid "<b>Mobility</b>"
+msgstr "<b>Mobilitás</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
+msgid "<b>Multimedia Player</b>"
+msgstr "<b>Zenelejátszó</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
+msgid "<b>Terminal Emulator</b>"
+msgstr "<b>Terminálemulátor</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "<b>Text Editor</b>"
+msgstr "<b>Szövegszerkesztő</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "<b>Video Player</b>"
+msgstr "<b>Videolejátszó</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "<b>Visual</b>"
+msgstr "<b>Vizuális</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+msgid "<b>Web Browser</b>"
+msgstr "<b>Webböngésző</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+msgid "Accessibility"
+msgstr "Akadálymentesítés"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#, no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr "Mind a(z) %s előfordulás tényleges linkkel lesz helyettesítve"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+msgid "Co_mmand:"
+msgstr "_Parancs:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "E_xecute flag:"
+msgstr "_Futtatási jelző:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+msgid "Internet"
+msgstr "Internet"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+msgid "Multimedia"
+msgstr "Multimédia"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+msgid "Open link in new _tab"
+msgstr "_Hivatkozás megnyitása új fülön"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+msgid "Open link in new _window"
+msgstr "Hivatkozás megnyitása új _ablakban"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+msgid "Open link with web browser _default"
+msgstr "Hivatkozás megnyitása új az alapértelmezett _webböngészővel"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "Run at st_art"
+msgstr "Futtatás in_dításkor"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
+msgid "Run in t_erminal"
+msgstr "Futtatás t_erminálban"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
+msgid "System"
+msgstr "Rendszer"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
 msgstr "Balsa"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+msgid "Banshee Music Player"
+msgstr "Banshee zenelejátszó"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Claws Mail"
 msgstr "Claws Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+msgid "Dasher"
+msgstr "Dasher"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Debian Sensible Browser"
 msgstr "Debian környezetérzékeny böngésző"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
 msgid "Debian Terminal Emulator"
 msgstr "Debian terminálemulátor"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Encompass"
 msgstr "Encompass"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Epiphany Web Browser"
 msgstr "Epiphany webböngésző"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
 msgid "Evolution Mail Reader"
 msgstr "Evolution"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Evolution Mail Reader 1.4"
 msgstr "Evolution levelező 1.4"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Evolution Mail Reader 1.5"
 msgstr "Evolution levelező 1.5"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
 msgid "Evolution Mail Reader 1.6"
 msgstr "Evolution levelező 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Evolution Mail Reader 2.0"
 msgstr "Evolution levelező 2.0"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Evolution Mail Reader 2.2"
 msgstr "Evolution levelező 2.2"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
 msgid "Evolution Mail Reader 2.4"
 msgstr "Evolution levelező 2.4"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Firebird"
 msgstr "Firebird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Firefox"
 msgstr "Firefox"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "GNOME Magnifier without Screen Reader"
+msgstr "GNOME nagyító képernyőfelolvasó nélkül"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "GNOME OnScreen Keyboard"
+msgstr "GNOME képernyőbillentyűzet"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
 msgid "GNOME Terminal"
 msgstr "GNOME Terminál"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Galeon"
 msgstr "Galeon"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "Gnopernicus"
+msgstr "Gnopernicus"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "Gnopernicus with Magnifier"
+msgstr "Gnopernicus nagyítóval"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
 msgid "Icedove"
 msgstr "Icedove"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
 msgid "Iceweasel"
 msgstr "Iceweasel"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+msgid "KDE Magnifier without Screen Reader"
+msgstr "KDE nagyító képernyőfelolvasó nélkül"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "Links Text Browser"
 msgstr "Links szöveges webböngésző"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Linux Screen Reader"
+msgstr "Linux Képernyőfelolvasó"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Linux Screen Reader with Magnifier"
+msgstr "Linux Képernyőfelolvasó nagyítóval"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Lynx Text Browser"
 msgstr "Lynx szöveges webböngésző"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+msgid "Muine Music Player"
+msgstr "Muine zenelejátszó"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+msgid "Orca"
+msgstr "Orca"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+msgid "Orca with Magnifier"
+msgstr "Orca nagyítóval"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+msgid "Rhythmbox Music Player"
+msgstr "Rhythmbox zenelejátszó"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
+msgid "SeaMonkey"
+msgstr "SeaMonkey"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+msgid "SeaMonkey Mail"
+msgstr "SeaMonkey levelező"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+msgid "Simple OnScreen Keyboard"
+msgstr "Egyszerű képernyőbillentyűzet"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
 msgid "Standard XTerminal"
 msgstr "Szabványos X-terminál"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
+msgid "Totem Movie Player"
+msgstr "Totem filmlejátszó"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
 msgid "W3M Text Browser"
 msgstr "W3M szöveges webböngésző"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
 msgid "aterm"
 msgstr "aterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
-msgid "<b>Audio Player</b>"
-msgstr "<b>Zenelejátszó</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "<b>Image Viewer</b>"
-msgstr "<b>Képmegjelenítő</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "<b>Instant Messenger</b>"
-msgstr "<b>Azonnali üzenetküldő</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "<b>Mail Reader</b>"
-msgstr "<b>Levelezőprogram</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "<b>Terminal Emulator</b>"
-msgstr "<b>Terminálemulátor</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "<b>Text Editor</b>"
-msgstr "<b>Szövegszerkesztő</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
-msgid "<b>Video Player</b>"
-msgstr "<b>Videolejátszó</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "<b>Web Browser</b>"
-msgstr "<b>Webböngésző</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-#, no-c-format
-msgid "All %s occurrences will be replaced with actual link"
-msgstr "Mind a(z) %s előfordulás tényleges linkkel lesz helyettesítve"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Co_mmand:"
-msgstr "_Parancs:"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "E_xecute flag:"
-msgstr "_Futtatási jelző:"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Internet"
-msgstr "Internet"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Multimedia"
-msgstr "Multimédia"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "Open link in new _tab"
-msgstr "_Hivatkozás megnyitása új fülön"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Open link in new _window"
-msgstr "Hivatkozás megnyitása új _ablakban"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Open link with web browser _default"
-msgstr "Hivatkozás megnyitása új az alapértelmezett _webböngészővel"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Run in t_erminal"
-msgstr "Futtatás t_erminálban"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "System"
-msgstr "Rendszer"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1326,52 +1847,52 @@ msgid "Screen Resolution"
 msgstr "Képernyő felbontása"
 
 #: ../capplets/display/main.c:25
-msgid "normal"
-msgstr "normál"
+msgid "Normal"
+msgstr "Normál"
 
 #: ../capplets/display/main.c:26
-msgid "left"
-msgstr "bal"
+msgid "Left"
+msgstr "Balra"
 
 #: ../capplets/display/main.c:27
-msgid "inverted"
-msgstr "fordított"
+msgid "Inverted"
+msgstr "Fordított"
 
 #: ../capplets/display/main.c:28
-msgid "right"
-msgstr "jobb"
+msgid "Right"
+msgstr "Jobbra"
 
-#: ../capplets/display/main.c:389
+#: ../capplets/display/main.c:388
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:535
+#: ../capplets/display/main.c:534
 msgid "_Resolution:"
 msgstr "_Felbontás:"
 
-#: ../capplets/display/main.c:554
+#: ../capplets/display/main.c:553
 msgid "Re_fresh rate:"
 msgstr "F_rissítési frekvencia:"
 
-#: ../capplets/display/main.c:574
+#: ../capplets/display/main.c:573
 msgid "R_otation:"
 msgstr "_Forgatás:"
 
-#: ../capplets/display/main.c:594
+#: ../capplets/display/main.c:593
 msgid "Default Settings"
 msgstr "Alapértelmezett beállítások"
 
-#: ../capplets/display/main.c:596
+#: ../capplets/display/main.c:595
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "%d. képernyő beállításai\n"
 
-#: ../capplets/display/main.c:622
+#: ../capplets/display/main.c:621
 msgid "Screen Resolution Preferences"
 msgstr "Képernyő felbontásának beállításai"
 
-#: ../capplets/display/main.c:659
+#: ../capplets/display/main.c:658
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "_Csak ezen a gépen (%s) legyen alapértelmezés"
@@ -1380,7 +1901,7 @@ msgstr "_Csak ezen a gépen (%s) legyen alapértelmezés"
 msgid "Options"
 msgstr "Beállítások"
 
-#: ../capplets/display/main.c:700
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1395,23 +1916,23 @@ msgstr[1] ""
 "Az új beállítások kipróbálása. Ha nem válaszol %d másodpercen belül, akkor "
 "az előző beállítás lesz helyreállítva."
 
-#: ../capplets/display/main.c:746
+#: ../capplets/display/main.c:741
 msgid "Keep Resolution"
 msgstr "Felbontás megtartása"
 
-#: ../capplets/display/main.c:750
+#: ../capplets/display/main.c:745
 msgid "Do you want to keep this resolution?"
 msgstr "Megtartja ezt a felbontást?"
 
-#: ../capplets/display/main.c:775
+#: ../capplets/display/main.c:770
 msgid "Use _previous resolution"
 msgstr "Az _előző felbontás használata"
 
-#: ../capplets/display/main.c:775
+#: ../capplets/display/main.c:770
 msgid "_Keep resolution"
 msgstr "_Felbontás megtartása"
 
-#: ../capplets/display/main.c:925
+#: ../capplets/display/main.c:920
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1419,7 +1940,7 @@ msgstr ""
 "Az X-kiszolgáló nem támogatja az XRandR kiterjesztést. A felbontás nem "
 "módosítható futásidőben."
 
-#: ../capplets/display/main.c:933
+#: ../capplets/display/main.c:928
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1427,179 +1948,14 @@ msgstr ""
 "Az XRandR kiterjesztés verziója nem kompatibilis ezzel a programmal. A "
 "felbontás nem módosítható futásidőben."
 
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "Betűkészlet"
+#: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Hang"
 
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "Az asztalon levő ikonok betűkészletének beállítása"
-
-#: ../capplets/font/font-properties.glade.h:1
-msgid "<b>Font Rendering</b>"
-msgstr "<b>Betűmegjelenítés</b>"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Hinting</b>:"
-msgstr "<b>Hinting</b>:"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Smoothing</b>:"
-msgstr "<b>Simítás</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>Sorrend a képponton belül</b>:"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "Best _shapes"
-msgstr "A le_gszebb betűforma"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best co_ntrast"
-msgstr "A legjobb _kontraszt"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "D_etails..."
-msgstr "_Részletek..."
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "Des_ktop font:"
-msgstr "As_ztal betűkészlete:"
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "Betűk tulajdonságai"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "Betűmegjelenítés részletei"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "_Ugrás a betűkészletek mappájába"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "_Szürkeárnyalatos"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "_Nincs"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "_Felbontás:"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "_Képponton belül (LCD)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "Simítás a _képponton belül (LCD)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "_Alkalmazás betűkészlete:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Document font:"
-msgstr "_Dokumentum betűkészlete:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Fixed width font:"
-msgstr "_Rögzített szélességű betűkészlet:"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Full"
-msgstr "_Teljes"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Medium"
-msgstr "Kö_zepes"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_Monochrome"
-msgstr "_Fekete-fehér"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_None"
-msgstr "_Nincs"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Slight"
-msgstr "_Enyhe"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "Ablak _címsorának betűkészlete:"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "pont/hüvelyk"
-
-#: ../capplets/font/main.c:489
-msgid "Font may be too large"
-msgstr "Lehet, hogy a betűkészlet túl nagy"
-
-#: ../capplets/font/main.c:493
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"A kiválasztott betűkészlet %d pont méretű, ami megnehezítheti a számítógép "
-"hatékony használatát. Ajánlott kisebb méretet választani, mint %d pont."
-msgstr[1] ""
-"A kiválasztott betűkészlet %d pont méretű, ami megnehezítheti a számítógép "
-"hatékony használatát. Ajánlott kisebb méretet választani, mint %d pont."
-
-#: ../capplets/font/main.c:506
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"A kiválasztott betűkészlet %d pont méretű, ami megnehezítheti a számítógép "
-"hatékony használatát. Ajánlott kisebb méretű betűkészletet választani."
-msgstr[1] ""
-"A kiválasztott betűkészlet %d pont méretű, ami megnehezítheti a számítógép "
-"hatékony használatát. Ajánlott kisebb méretű betűkészletet választani."
-
-#: ../capplets/font/main.c:527
-msgid "Use previous font"
-msgstr "Az előző betűkészlet használata"
-
-#: ../capplets/font/main.c:529
-msgid "Use selected font"
-msgstr "A kijelölt betűkészlet használata"
+#: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "Munkaasztal"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -1629,29 +1985,16 @@ msgid "The type of accelerator."
 msgstr "A gyorsbillentyű típusa."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:189
+#: ../capplets/keybindings/gnome-keybinding-properties.c:112
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:482
 msgid "Disabled"
 msgstr "Tiltva"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:551
+#: ../capplets/keybindings/gnome-keybinding-properties.c:523
 msgid "<Unknown Action>"
 msgstr "<Ismeretlen művelet>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:572
-msgid "Desktop"
-msgstr "Munkaasztal"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:573
-#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Hang"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:577
-msgid "Window Management"
-msgstr "Ablakkezelés"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:692
+#: ../capplets/keybindings/gnome-keybinding-properties.c:883
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1663,7 +2006,7 @@ msgstr ""
 "Próbálkozzon a Control, Alt vagy Shift billentyűk valamelyikének egyidejű "
 "lenyomásával.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:721
+#: ../capplets/keybindings/gnome-keybinding-properties.c:912
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1672,28 +2015,31 @@ msgstr ""
 "A(z) \"%s\" gyorsbillentyű már le van foglalva erre:\n"
 "\"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:753
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Hiba történt az új gyorsbillentyű beállításánál a konfigurációs "
 "adatbázisban: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:803
+#: ../capplets/keybindings/gnome-keybinding-properties.c:994
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Hiba történt a gyorsbillentyű visszaállításánál a konfigurációs "
 "adatbázisban: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:918
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1109
 msgid "Action"
 msgstr "Művelet"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:942
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1133
 msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
@@ -1711,143 +2057,122 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Gyorsbillentyűk parancsokhoz rendelése"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:85
-msgid "Unknown"
-msgstr "Ismeretlen"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:302
-msgid "Layout"
-msgstr "Kiosztás"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:308
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:249
-msgid "Default"
-msgstr "Alapértelmezett"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:77
-msgid "Models"
-msgstr "Modellek"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:109
+#: ../capplets/keyboard/gnome-keyboard-properties.c:119
 #, c-format
 msgid "There was an error launching the keyboard tool: %s"
 msgstr "Hiba történt a billentyűzetbeállító eszköz indításakor: %s"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:202
+#: ../capplets/keyboard/gnome-keyboard-properties.c:212
 msgid "_Accessibility"
 msgstr "_Akadálymentesítés"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:222
-#: ../capplets/keyboard/gnome-keyboard-properties.c:224
-#: ../capplets/sound/sound-properties-capplet.c:1010
-#: ../capplets/sound/sound-properties-capplet.c:1012
+#: ../capplets/keyboard/gnome-keyboard-properties.c:232
+#: ../capplets/keyboard/gnome-keyboard-properties.c:234
+#: ../capplets/sound/sound-properties-capplet.c:1026
+#: ../capplets/sound/sound-properties-capplet.c:1028
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Csak alkalmazza a beállításokat, és lépjen ki (csak kompatibilitás; most már "
 "egy démon kezeli)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties.c:238
 msgid "Start the page with the typing break settings showing"
 msgstr "Oldal indítása a gépelési szünet beállításaival"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+#: ../capplets/keyboard/gnome-keyboard-properties.c:246
 msgid "- GNOME Keyboard Preferences"
 msgstr "- GNOME billentyűzetbeállítások"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Villogó kurzor</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Billentyűk ismétlése</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>Képernyő záro_lása a gépelési szünet kikényszerítéséhez</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Gyors</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Hosszú</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Rövid</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lassú</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "A_vailable layouts:"
-msgstr "_Elérhető kiosztások:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "All_ow postponing of breaks"
 msgstr "Szünetek felfüggesztésének _engedélyezése"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Jelölje be, ha a szünetek felfüggesztése engedélyezett"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Choose a Keyboard Model"
 msgstr "Válasszon ki egy billentyűzetmodellt"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Choose a Layout"
 msgstr "Válasszon egy kiosztást"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose..."
 msgstr "Kiválasztás..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Villogjon a kurzor a szövegdobozokban és a beviteli mezőkben"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Cursor blinks speed"
 msgstr "Kurzor villogásának sebessége"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of the break when typing is disallowed"
 msgstr "Szünet időtartama, ha a gépelés le van tiltva"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of work before forcing a break"
 msgstr "Szünet kényszerítése előtti munkaidő hossza"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Key presses _repeat when key is held down"
 msgstr "Billentyű _ismétlése nyomva tartáskor"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Billentyűzet"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Keyboard Preferences"
 msgstr "Billentyűzet beállításai"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Keyboard _model:"
 msgstr "Billentyűzet_modell:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Layout Options"
 msgstr "Kiosztás beállításai"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Layouts"
 msgstr "Kiosztások"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1855,58 +2180,66 @@ msgstr ""
 "A képernyő zárolása bizonyos időtartam után, az ismétlődő billentyűzet-"
 "használat miatti sérülések megelőzéséért"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Microsoft Natural Keyboard"
 msgstr "Microsoft Natural Keyboard"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Preview:"
 msgstr "Előnézet:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Repeat keys speed"
 msgstr "Billentyűk ismétlésének sebessége"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "Reset To De_faults"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+msgid "Reset to De_faults"
 msgstr "Alapértelmezések _visszaállítása"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Separate _group for each window"
 msgstr "Külön _csoport minden ablaknak"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
 msgstr "Gépelési szünet"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Accessibility..."
 msgstr "_Akadálymentesítés..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
-msgid "_Add..."
-msgstr "Hozzá_adás..."
-
 # itt az időtartam kifejezőbb
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Break interval lasts:"
 msgstr "Szünet _időtartama:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Delay:"
 msgstr "_Késleltetés:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+msgid "_Layouts:"
+msgstr "_Kiosztások:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Models:"
 msgstr "_Modellek:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Selected layouts:"
 msgstr "Kiválasztott ki_osztás:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
 msgstr "_Sebesség:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+msgid "_Variants:"
+msgstr "_Változatok:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+msgid "_Vendors:"
+msgstr "S_zállítók:"
 
 # itt az időtartam kifejezőbb
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
@@ -1917,73 +2250,95 @@ msgstr "_Munka időtartama:"
 msgid "minutes"
 msgstr "perc"
 
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:84
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:236
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:243
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:230
+msgid "Layout"
+msgstr "Kiosztás"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
+msgid "Vendors"
+msgstr "Szállítók"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
+msgid "Models"
+msgstr "Modellek"
+
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Billentyűzet beállításai"
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:896
+#: ../capplets/mouse/gnome-mouse-properties.c:900
 #, c-format
 msgid "%d millisecond"
 msgid_plural "%d milliseconds"
 msgstr[0] "%d ezredmásodperc"
 msgstr[1] "%d ezredmásodperc"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:515
+#: ../capplets/mouse/gnome-mouse-properties.c:519
 msgid "Unknown Pointer"
 msgstr "Ismeretlen egérmutató"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:763
-#: ../capplets/mouse/gnome-mouse-properties.c:776
+#: ../capplets/mouse/gnome-mouse-properties.c:767
+#: ../capplets/mouse/gnome-mouse-properties.c:780
 msgid "Default Pointer"
 msgstr "Alapértelmezett egérmutató"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:777
+#: ../capplets/mouse/gnome-mouse-properties.c:781
 msgid "Default Pointer - Current"
 msgstr "Alapértelmezett egérmutató - Jelenlegi"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:778
+#: ../capplets/mouse/gnome-mouse-properties.c:782
 msgid "The default pointer that ships with X"
 msgstr "Az X-ben található alapértelmezett egérmutató"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:782
+#: ../capplets/mouse/gnome-mouse-properties.c:786
 msgid "White Pointer"
 msgstr "Fehér egérmutató"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:783
+#: ../capplets/mouse/gnome-mouse-properties.c:787
 msgid "White Pointer - Current"
 msgstr "Fehér egérmutató - Jelenlegi"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:784
+#: ../capplets/mouse/gnome-mouse-properties.c:788
 msgid "The default pointer inverted"
 msgstr "Az alapértelmezett egérmutató invertálva"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:788
+#: ../capplets/mouse/gnome-mouse-properties.c:792
 msgid "Large Pointer"
 msgstr "Nagy egérmutató"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:789
+#: ../capplets/mouse/gnome-mouse-properties.c:793
 msgid "Large Pointer - Current"
 msgstr "Nagy egérmutató - Jelenlegi"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:790
+#: ../capplets/mouse/gnome-mouse-properties.c:794
 msgid "Large version of normal pointer"
 msgstr "Az alapértelmezett egérmutató nagyobb verziója"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:794
+#: ../capplets/mouse/gnome-mouse-properties.c:798
 msgid "Large White Pointer - Current"
 msgstr "Nagy fehér egérmutató - Jelenlegi"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:795
+#: ../capplets/mouse/gnome-mouse-properties.c:799
 msgid "Large White Pointer"
 msgstr "Nagy fehér egérmutató"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:796
+#: ../capplets/mouse/gnome-mouse-properties.c:800
 msgid "Large version of white pointer"
 msgstr "A fehér egérmutató nagyobb verziója"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:982
+#: ../capplets/mouse/gnome-mouse-properties.c:987
 msgid "Pointer Theme"
 msgstr "Egérmutató-téma"
 
@@ -2040,32 +2395,30 @@ msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Az egérmutató _kiemelése a Ctrl billentyű lenyomására"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Large"
-msgstr "Nagy"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid "Medium"
-msgstr "Közepes"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "Mozgás"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Mouse Preferences"
 msgstr "Egér beállításai"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Pointer Size:"
 msgstr "Egérmutató mérete:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Pointers"
 msgstr "Egérmutatók"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "Small"
-msgstr "Kicsi"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid ""
+"Small\n"
+"Medium\n"
+"Large"
+msgstr ""
+"Kicsi\n"
+"Közepes\n"
+"Nagy"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
@@ -2192,48 +2545,53 @@ msgstr "Hangok engedélyezése és eseményekhez rendelése"
 msgid "Unknown Volume Control %d"
 msgstr "%d. ismeretlen hangvezérlő"
 
-#: ../capplets/sound/sound-properties-capplet.c:310
-#: ../capplets/sound/sound-properties-capplet.c:362
+#: ../capplets/sound/pipeline-tests.c:84
+#, c-format
+msgid "Failed to construct test pipeline for '%s'"
+msgstr "Nem sikerült létrehozni a teszt csővezetéket a(z) \"%s\" számára"
+
+#: ../capplets/sound/sound-properties-capplet.c:325
+#: ../capplets/sound/sound-properties-capplet.c:378
 msgid "Not connected"
 msgstr "Nincs kapcsolat"
 
-#: ../capplets/sound/sound-properties-capplet.c:646
+#: ../capplets/sound/sound-properties-capplet.c:661
 msgid "Autodetect"
 msgstr "Automatikus"
 
-#: ../capplets/sound/sound-properties-capplet.c:651
-#: ../capplets/sound/sound-properties-capplet.c:652
+#: ../capplets/sound/sound-properties-capplet.c:666
+#: ../capplets/sound/sound-properties-capplet.c:667
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:653
+#: ../capplets/sound/sound-properties-capplet.c:668
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART hangdémon"
 
-#: ../capplets/sound/sound-properties-capplet.c:654
-#: ../capplets/sound/sound-properties-capplet.c:655
+#: ../capplets/sound/sound-properties-capplet.c:669
+#: ../capplets/sound/sound-properties-capplet.c:670
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened hangdémon"
 
-#: ../capplets/sound/sound-properties-capplet.c:656
-#: ../capplets/sound/sound-properties-capplet.c:657
+#: ../capplets/sound/sound-properties-capplet.c:671
+#: ../capplets/sound/sound-properties-capplet.c:672
 msgid "OSS - Open Sound System"
 msgstr "OSS - Nyílt hangrendszer"
 
-#: ../capplets/sound/sound-properties-capplet.c:658
-#: ../capplets/sound/sound-properties-capplet.c:659
+#: ../capplets/sound/sound-properties-capplet.c:673
+#: ../capplets/sound/sound-properties-capplet.c:674
 msgid "PulseAudio Sound Server"
 msgstr "PulseAudio hangkiszolgáló"
 
-#: ../capplets/sound/sound-properties-capplet.c:660
+#: ../capplets/sound/sound-properties-capplet.c:675
 msgid "Test Sound"
 msgstr "Teszthang"
 
-#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:676
 msgid "Silence"
 msgstr "Csend"
 
-#: ../capplets/sound/sound-properties-capplet.c:1022
+#: ../capplets/sound/sound-properties-capplet.c:1043
 msgid "- GNOME Sound Preferences"
 msgstr "- GNOME hangbeállítások"
 
@@ -2337,420 +2695,27 @@ msgstr "_Hanglejátszás:"
 msgid "_Visual system beep"
 msgstr "_Látható rendszercsengő"
 
-#: ../capplets/sound/pipeline-tests.c:84
-#, c-format
-msgid "Failed to construct test pipeline for '%s'"
-msgstr "Nem sikerült létrehozni a teszt csővezetéket a(z) \"%s\" számára"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:442
-msgid "Would you like to remove this theme?"
-msgstr "Törölni szeretné ezt a témát?"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:507
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "A téma sikeresen törölve. Válasszon másik témát."
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:516
-msgid "Theme can not be deleted"
-msgstr "A téma nem törölhető"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:688
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"A rendszerén nem találhatóak témák. Ez valószínűleg azért van, mert a \"Téma "
-"beállításai\" párbeszédablak nem lett megfelelően telepítve, vagy nem "
-"telepítette a \"gnome-themes\" csomagot."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:153
-#, c-format
-msgid ""
-"Can not install theme. \n"
-"The %s utility is not installed."
-msgstr ""
-"A téma nem telepíthető.\n"
-"A(z) %s segédprogram nincs telepítve."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:162
-msgid ""
-"Can not install theme. \n"
-"There was a problem while extracting the theme"
-msgstr ""
-"A téma nem telepíthető.\n"
-"A probléma történt a téma kibontásakor"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "This theme is not in a supported format."
-msgstr "Ezen téma formátuma nem támogatott."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
-msgid "Failed to create temporary directory"
-msgstr "Nem sikerült átmeneti könyvtárat létrehozni"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "A(z) %s GNOME téma telepítése sikeresen befejeződött"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "A téma egy motor. Le kell fordítania a témát."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:410
-msgid "The file format is invalid"
-msgstr "A fájl formátuma érvénytelen"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:449
-msgid "Installation Failed"
-msgstr "A telepítés sikertelen"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:462
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "A(z) \"%s\" téma telepítve."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "Szeretné alkalmazni most, vagy megtartja a jelenlegi témát?"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:470
-msgid "Keep Current Theme"
-msgstr "Jelenlegi téma megtartása"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:472
-msgid "Apply New Theme"
-msgstr "Új téma alkalmazása"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
-msgid "No theme file location specified to install"
-msgstr "Nincs megadva a témafájl elérési útvonala a telepítéshez"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:543
-msgid "The theme file location specified to install is invalid"
-msgstr "A telepítendő témafájl megadott helye érvénytelen"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"Nincs megfelelő jogosultsága téma telepítéséhez a következő helyre:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:589
-msgid "The file format is invalid."
-msgstr "A fájl formátuma érvénytelen."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:616
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr "%s a témafájlok telepítési útvonala. Ez nem választható ki a forrás helyéül."
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "Custom theme"
-msgstr "Egyéni téma"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "A témát mentheti a Téma mentése gomb segítségével."
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
-msgid "Specify the filename of a theme to install"
-msgstr "Adja meg a telepítendő téma fájlnevét"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
-msgid "filename"
-msgstr "fájlnév"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"Az alapértelmezett témasémák nem találhatók meg a rendszeren.  Ez azt "
-"jelenti, hogy valószínűleg nincs telepítve a metacity, vagy a gconf tévesen "
-"van konfigurálva."
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:73
-msgid "Theme name must be present"
-msgstr "A témanévnek jelen kell lennie"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:144
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "A téma már létezik. Le szeretné cserélni?"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "Az asztal különböző részeihez témák kiválasztása"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "Téma"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "Témacsomagok telepítése az asztal különböző összetevőihez"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "Tématelepítő"
-
-#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "Gnome témacsomag"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<b>You do not have permission to change theme settings</b>"
-msgstr "<b>Nincs jogosultsága a témabeállításokat módosítani</b>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "_Háttér alkalmazása"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "_Betűkészlet alkalmazása"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Background"
-msgstr "Háttér"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "C_ustomize..."
-msgstr "_Testreszabás..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Colors"
-msgstr "Színek"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Controls"
-msgstr "Felhasználói felület elemei"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Icons"
-msgstr "Ikonok"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Save Theme As..."
-msgstr "Téma mentése másként..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save _Background Image"
-msgstr "_Háttérkép mentése"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Select theme for the desktop"
-msgstr "Téma kiválasztása az asztalhoz"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Text"
-msgstr "Szöveg"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "The current controls theme does not support color schemes"
-msgstr "A felhasználói felület elemeinek jelenlegi témája nem támogatja a színsémákat"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "Theme Details"
-msgstr "Téma részletei"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "Theme Preferences"
-msgstr "Téma beállításai"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme does not suggest any particular font or background."
-msgstr "Ez a téma nem javasol betűkészletet vagy hátteret."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a background:"
-msgstr "Ez a téma javasol hátteret:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "This theme suggests a font and a background:"
-msgstr "Ez a téma javasol betűkészletet és hátteret:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "This theme suggests a font:"
-msgstr "Ez a téma javasol betűkészletet:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "Window Border"
-msgstr "Ablakkeret"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Description:"
-msgstr "_Leírás:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input boxes:"
-msgstr "Be_meneti mezők:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Install Theme..."
-msgstr "Téma _telepítése..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "_Install..."
-msgstr "_Telepítés..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Name:"
-msgstr "_Név:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
-msgid "_Revert"
-msgstr "_Visszaállítás"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
-msgid "_Save Theme..."
-msgstr "Téma _mentése..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected items:"
-msgstr "Ki_választott elemek:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
-msgid "_Windows:"
-msgstr "_Ablakok:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
-msgid "theme selection tree"
-msgstr "témakiválasztó fa"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "Eszköztárak és menüsorok megjelenítésének beállítása"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "Menük és eszköztárak"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>Viselkedés és megjelenés</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>Előnézet</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "_Kivágás"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "Csak ikonok"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "Menük és eszköztárak beállításai"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "Új fájl"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "Fájl megnyitása"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "Fájl mentése"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "_Ikonok megjelenítése a menükben"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "Szöveg az ikonok alatt"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "Szöveg az ikonok mellett"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "Csak szöveg"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "Esz_köztárgombok címkéi:"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "_Másolás"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "_Lecsatolható eszköztárak"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "S_zerkesztés"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu shortcut keys"
-msgstr "S_zerkeszthető menügyorsítók"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_Fájl"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "Ú_j"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "_Megnyitás"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "_Beillesztés"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "_Nyomtatás"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "_Kilépés"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "M_entés"
-
-#: ../capplets/windows/gnome-window-properties.c:362
+#: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
 msgstr "Nem sikerült elindítani az ablakkezelőjéhez tartozó beállítóalkalmazást"
 
-#: ../capplets/windows/gnome-window-properties.c:619
+#: ../capplets/windows/gnome-window-properties.c:601
 msgid "C_ontrol"
 msgstr "C_ontrol"
 
-#: ../capplets/windows/gnome-window-properties.c:624
+#: ../capplets/windows/gnome-window-properties.c:606
 msgid "_Alt"
 msgstr "Al_t"
 
-#: ../capplets/windows/gnome-window-properties.c:630
+#: ../capplets/windows/gnome-window-properties.c:612
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:637
+#: ../capplets/windows/gnome-window-properties.c:619
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (vagy \"Windows logó\")"
 
-#: ../capplets/windows/gnome-window-properties.c:644
+#: ../capplets/windows/gnome-window-properties.c:626
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -2874,7 +2839,7 @@ msgstr "Szeretné bekapcsolni a Ragadós billentyűket?"
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Ki szeretné kapcsolni a Ragadós billentyűket?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:75
+#: ../gnome-settings-daemon/gnome-settings-font.c:150
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2883,7 +2848,7 @@ msgstr ""
 "A(z) \"%s\" könyvtár nem hozható létre.\n"
 "Ez szükséges az egérmutató megváltoztatásához."
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:98
+#: ../gnome-settings-daemon/gnome-settings-font.c:171
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -3005,16 +2970,22 @@ msgstr "X-beállítások használata"
 msgid "Keep GNOME settings"
 msgstr "GNOME-beállítások megtartása"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:117
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:125
+msgid ""
+"Could not get default terminal. Verify that your default terminal command is "
+"set and points to a valid application."
+msgstr "Nem kérhető le az alapértelmeztt terminál. Ellenőrizze, hogy az alapértelmeeztt terminál parancs be van állítva és érvényes alaklmazásra mutat."
+
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
-"Verify that this command exists."
+"Verify that this is a valid command."
 msgstr ""
 "A(z) %s parancs nem hajtható végre.\n"
-"Ellenőrizze, hogy ez a parancs létezik-e."
+"Ellenőrizze, hogy ez a parancs érvényes-e."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:133
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:172
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3022,7 +2993,7 @@ msgstr ""
 "A gép nem vihető alvás állapotba.\n"
 "Ellenőrizze, hogy gépe helyesen van-e konfigurálva."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -3037,11 +3008,11 @@ msgstr ""
 "\n"
 "A képernyővédő ebben a munkamenetben nem fog működni."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr "_Ne mutassa ezt többé"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:137
+#: ../gnome-settings-daemon/gnome-settings-sound.c:199
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nem sikerült betölteni a(z) %s fájlt a(z) %s hangmintához"
@@ -3051,7 +3022,7 @@ msgstr "Nem sikerült betölteni a(z) %s fájlt a(z) %s hangmintához"
 msgid "Cannot determine user's home directory"
 msgstr "A felhasználó saját könyvtára nem határozható meg"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:212
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "A GConf kulcs (%s) típusa %s, de a várt típusa %s volt\n"
@@ -3121,7 +3092,41 @@ msgstr "Képernyő"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Az a képernyő, amelyre a BGApplier rajzolhat"
 
-#: ../libslab/app-shell.c:746
+#. make start action
+#: ../libslab/application-tile.c:362
+#, c-format
+msgid "<b>Start %s</b>"
+msgstr "<b>%s indítása</b>"
+
+#: ../libslab/application-tile.c:381
+msgid "Help"
+msgstr "Súgó"
+
+#: ../libslab/application-tile.c:428
+msgid "Upgrade"
+msgstr "Frissítés"
+
+#: ../libslab/application-tile.c:443
+msgid "Uninstall"
+msgstr "Eltávolítás"
+
+#: ../libslab/application-tile.c:770 ../libslab/document-tile.c:526
+msgid "Remove from Favorites"
+msgstr "Eltávolítás a Kedvencek közül"
+
+#: ../libslab/application-tile.c:772 ../libslab/document-tile.c:528
+msgid "Add to Favorites"
+msgstr "Hozzáadás a Kedvencekhez"
+
+#: ../libslab/application-tile.c:857
+msgid "Remove from Startup Programs"
+msgstr "Eltávolítás az Indítópultból"
+
+#: ../libslab/application-tile.c:859
+msgid "Add to Startup Programs"
+msgstr "Hozzáadás az Indítópulthoz"
+
+#: ../libslab/app-shell.c:747
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3132,82 +3137,168 @@ msgstr ""
 "\n"
 " A megadott keresés: \"<b>%s</b>\", eredménytelen.</span>"
 
-#: ../libslab/app-shell.c:891
+#: ../libslab/app-shell.c:897
 msgid "Other"
 msgstr "Egyéb"
 
-#. make start action
-#: ../libslab/application-tile.c:356
-#, c-format
-msgid "<b>Start %s</b>"
-msgstr "<b>%s indítása</b>"
+#: ../libslab/bookmark-agent.c:1067
+msgid "New Spreadsheet"
+msgstr "Új táblázat"
 
-#: ../libslab/application-tile.c:375
-msgid "Help"
-msgstr "Súgó"
+#: ../libslab/bookmark-agent.c:1071
+msgid "New Document"
+msgstr "Új dokumentum"
 
-#: ../libslab/application-tile.c:439
-msgid "Upgrade"
-msgstr "Frissítés"
+#: ../libslab/bookmark-agent.c:1121
+msgid "Home"
+msgstr "Saját mappa"
 
-#: ../libslab/application-tile.c:454
-msgid "Uninstall"
-msgstr "Eltávolítás"
+#: ../libslab/bookmark-agent.c:1137
+msgid "File System"
+msgstr "Fájlrendszer"
 
-#: ../libslab/application-tile.c:851
-msgid "Remove from Favorites"
-msgstr "Eltávolítás a Kedvencek közül"
+#: ../libslab/bookmark-agent.c:1141
+msgid "Network Servers"
+msgstr "Hálózati kiszolgálók"
 
-#: ../libslab/application-tile.c:853
-msgid "Add to Favorites"
-msgstr "Hozzáadás a Kedvencekhez"
+#: ../libslab/bookmark-agent.c:1170
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Search"
+msgstr "Keresés"
 
-#: ../libslab/application-tile.c:929
-msgid "Remove from Startup Programs"
-msgstr "Eltávolítás az Indítópultból"
+#. make open with default action
+#: ../libslab/directory-tile.c:168
+msgid "<b>Open</b>"
+msgstr "<b>Megnyitás</b>"
 
-#: ../libslab/application-tile.c:931
-msgid "Add to Startup Programs"
-msgstr "Hozzáadás az Indítópulthoz"
+#. make rename action
+#: ../libslab/directory-tile.c:187 ../libslab/document-tile.c:232
+msgid "Rename..."
+msgstr "Átnevezés..."
 
-#: ../libslab/document-tile.c:145
+#: ../libslab/directory-tile.c:201 ../libslab/directory-tile.c:210
+#: ../libslab/document-tile.c:246 ../libslab/document-tile.c:255
+msgid "Send To..."
+msgstr "Küldés..."
+
+#. make move to trash action
+#: ../libslab/directory-tile.c:225 ../libslab/document-tile.c:281
+msgid "Move to Trash"
+msgstr "Áthelyezés a Kukába"
+
+#: ../libslab/directory-tile.c:235 ../libslab/directory-tile.c:448
+#: ../libslab/document-tile.c:291 ../libslab/document-tile.c:639
+msgid "Delete"
+msgstr "Törlés"
+
+#: ../libslab/document-tile.c:153
 msgid "Edited %m/%d/%Y"
 msgstr "Szerkesztve: %m/%d/%Y"
 
-#: ../libslab/document-tile.c:185
+#: ../libslab/document-tile.c:193
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Megnyitás a(z) \"%s\" alkalmazással</b>"
 
-#: ../libslab/document-tile.c:197
+#: ../libslab/document-tile.c:205
 msgid "Open with Default Application"
 msgstr "Megnyitás az alapértelmezett alkalmazással"
 
-#: ../libslab/document-tile.c:213
+#: ../libslab/document-tile.c:216
 msgid "Open in File Manager"
 msgstr "Megnyitás a Fájlkezelőben"
 
-#. make rename action
-#: ../libslab/document-tile.c:229
-msgid "Rename..."
-msgstr "Átnevezés..."
+#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
+#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
+#, c-format
+msgid "Unexpected attribute '%s' for element '%s'"
+msgstr "Váratlan attribútum (\"%s\") a(z) \"%s\" elemhez"
 
-#. make move to trash action
-#: ../libslab/document-tile.c:242
-msgid "Move to Trash"
-msgstr "Áthelyezés a Kukába"
+#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
+#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
+#, c-format
+msgid "Attribute '%s' of element '%s' not found"
+msgstr "A(z) \"$2%s\" elem \"$1%s\" attribútuma nem található"
 
-#: ../libslab/document-tile.c:252 ../libslab/document-tile.c:582
-msgid "Delete"
-msgstr "Törlés"
+#: ../libslab/libslab-bookmarkfile.c:1087
+#: ../libslab/libslab-bookmarkfile.c:1152
+#: ../libslab/libslab-bookmarkfile.c:1216
+#: ../libslab/libslab-bookmarkfile.c:1226
+#, c-format
+msgid "Unexpected tag '%s', tag '%s' expected"
+msgstr "Váratlan címke: \"%s\" a várt \"%s\" helyett"
 
-#: ../libslab/document-tile.c:272 ../libslab/document-tile.c:281
-msgid "Send To..."
-msgstr "Küldés..."
+#: ../libslab/libslab-bookmarkfile.c:1112
+#: ../libslab/libslab-bookmarkfile.c:1126
+#: ../libslab/libslab-bookmarkfile.c:1194
+#: ../libslab/libslab-bookmarkfile.c:1246
+#, c-format
+msgid "Unexpected tag '%s' inside '%s'"
+msgstr "Váratlan címke: \"%s\" a következőn belül: \"%s\""
+
+#: ../libslab/libslab-bookmarkfile.c:1929
+msgid "No valid bookmark file found in data dirs"
+msgstr "Az adatkönyvtárakban nem található érvényes könyvjelzőfájl"
+
+#: ../libslab/libslab-bookmarkfile.c:2130
+#, c-format
+msgid "A bookmark for URI '%s' already exists"
+msgstr "Már létezik könyvjelző a következő URI címhez: \"%s\""
+
+#: ../libslab/libslab-bookmarkfile.c:2176
+#: ../libslab/libslab-bookmarkfile.c:2333
+#: ../libslab/libslab-bookmarkfile.c:2418
+#: ../libslab/libslab-bookmarkfile.c:2499
+#: ../libslab/libslab-bookmarkfile.c:2584
+#: ../libslab/libslab-bookmarkfile.c:2667
+#: ../libslab/libslab-bookmarkfile.c:2745
+#: ../libslab/libslab-bookmarkfile.c:2824
+#: ../libslab/libslab-bookmarkfile.c:2866
+#: ../libslab/libslab-bookmarkfile.c:2963
+#: ../libslab/libslab-bookmarkfile.c:3089
+#: ../libslab/libslab-bookmarkfile.c:3279
+#: ../libslab/libslab-bookmarkfile.c:3355
+#: ../libslab/libslab-bookmarkfile.c:3508
+#: ../libslab/libslab-bookmarkfile.c:3573
+#: ../libslab/libslab-bookmarkfile.c:3663
+#: ../libslab/libslab-bookmarkfile.c:3790
+#, c-format
+msgid "No bookmark found for URI '%s'"
+msgstr "Nem található könyvjelző a következő URI címhez: \"%s\""
+
+#: ../libslab/libslab-bookmarkfile.c:2508
+#, c-format
+msgid "No MIME type defined in the bookmark for URI '%s'"
+msgstr "Nincs MIME típus meghatározva a következő URI könyvjelzőjéhez: \"%s\""
+
+#: ../libslab/libslab-bookmarkfile.c:2593
+#, c-format
+msgid "No private flag has been defined in bookmark for URI '%s'"
+msgstr "Nincs magán jelző meghatározva a következő URI könyvjelzőjéhez: \"%s\""
+
+#: ../libslab/libslab-bookmarkfile.c:2972
+#, c-format
+msgid "No groups set in bookmark for URI '%s'"
+msgstr "Nincsenek csoportok beállítva a következő URI könyvjelzőjéhez: \"%s\""
+
+#: ../libslab/libslab-bookmarkfile.c:3373
+#: ../libslab/libslab-bookmarkfile.c:3518
+#, c-format
+msgid "No application with name '%s' registered a bookmark for '%s'"
+msgstr "Nincs \"%s\" nevű alkalmazás regisztrálva a következő könyvjelzőjéhez: \"%s\""
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
 msgstr "Keresés most"
+
+#: ../libslab/system-tile.c:128
+#, c-format
+msgid "<b>Open %s</b>"
+msgstr "<b>%s megnyitása</b>"
+
+#: ../libslab/system-tile.c:141
+msgid "Remove from System Items"
+msgstr "Eltávolítás a Rendszerelemek közül"
 
 #: ../libsounds/sound-view.c:44
 msgid "Login"
@@ -3348,90 +3439,94 @@ msgid "Log out's shortcut."
 msgstr "Kijelentkezés gyorsbillentyűje."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Media player"
+msgstr "Médialejátszó"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+msgid "Media player key's shortcut."
+msgstr "Médialejátszó gyorsbillentyűje."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Next track key's shortcut."
 msgstr "Következő szám gyorsbillentyűje."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Pause"
 msgstr "Szünet"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Pause key's shortcut."
 msgstr "Lejátszás szüneteltetése gyorsbillentyű."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Play (or play/pause)"
 msgstr "Lejátszás (vagy lejátszás/szünet)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Play (or play/pause) key's shortcut."
 msgstr "Lejátszás (vagy lejátszás/szünet) gyorsbillentyűje"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Previous track key's shortcut."
 msgstr "Előző szám gyorsbillentyűje."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Search"
-msgstr "Keresés"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Search's shortcut."
 msgstr "Keresés gyorsbillentyűje."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Skip to next track"
 msgstr "Ugrás a következő számra"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Skip to previous track"
 msgstr "Ugrás az előző számra"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Sleep"
 msgstr "Elalvás"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Sleep's shortcut."
 msgstr "Elalvás gyorsbillentyűje."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Stop playback key"
 msgstr "Lejátszás leállítása gomb"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Stop playback key's shortcut."
 msgstr "Lejátszás leállítása gyorsbillentyű."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume down"
 msgstr "Halkítás"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume down's shortcut."
 msgstr "Halkítás gyorsbillentyűje."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume mute"
 msgstr "Némítás"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Volume mute's shortcut"
-msgstr "Némítás gyorsbillentyűje"
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume mute's shortcut."
+msgstr "Némítás gyorsbillentyűje."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume step"
 msgstr "Hangerő léptetése"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume step as percentage of volume."
 msgstr "Hangerő lépésköze a hangerő százalékában."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume up"
 msgstr "Hangosítás"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume up's shortcut."
 msgstr "Hangosítás gyorsbillentyűje."
 
@@ -3543,9 +3638,9 @@ msgid ""
 "selector.desktop,Set Preferred Applications;default-applications.desktop,Add "
 "Printer;gnome-cups-manager.desktop]"
 msgstr ""
-"[Háttér módosítása;background.desktop,Téma módosítása;gtk-"
-"theme-selector.desktop,Alapértelmezett alkalmazások beállítása;default-"
-"applications.desktop,Nyomtató felvétele;gnome-cups-manager.desktop]"
+"[Háttér módosítása;background.desktop,Téma módosítása;gtk-theme-selector."
+"desktop,Alapértelmezett alkalmazások beállítása;default-applications.desktop,"
+"Nyomtató felvétele;gnome-cups-manager.desktop]"
 
 #: ../shell/control-center.schemas.in.h:14
 msgid "if true, the control-center will close when a \"Common Task\" is activated"
@@ -3619,11 +3714,19 @@ msgstr ""
 "Kelemen Gábor <kelemeng@gnome.hu>\n"
 "Tímár András <timar@gnome.hu>"
 
-#: ../typing-break/main.c:84
+#: ../typing-break/main.c:61
+msgid "Enable debugging code"
+msgstr "Hibakeresési kód engedélyezése"
+
+#: ../typing-break/main.c:63
+msgid "Don't check whether the notification area exists"
+msgstr "Ne ellenőrizze az értesítési terület létezését"
+
+#: ../typing-break/main.c:89
 msgid "Typing Monitor"
 msgstr "Gépelésfigyelő"
 
-#: ../typing-break/main.c:103
+#: ../typing-break/main.c:105
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3634,45 +3737,6 @@ msgstr ""
 "megjelenítésére. Úgy tűnik, az Ön paneljén nincs értesítési terület. A panel "
 "helyi menüjében a \"Hozzáadás\" pont alatt az \"Értesítési terület\" elemet "
 "kiválasztva hozzáadhatja a panelhez."
-
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "Árvíztűrő tükörfúrógép. 0123456789"
-
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "Név:"
-
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "Stílus:"
-
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "Típus:"
-
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "Méret:"
-
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "Verzió:"
-
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "Copyright:"
-
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "Leírás:"
-
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "használat: %s betűkészletfájl\n"
 
 #: ../vfs-methods/fontilus/fontilus-context-menu.c:132
 msgid "Set as Application Font"
@@ -3754,6 +3818,45 @@ msgstr "Be legyen-e kapcsolva a TrueType betűkészletek előnézete"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Be legyen-e kapcsolva a Type1 betűkészletek előnézete"
 
+#: ../vfs-methods/fontilus/font-view.c:115
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr "Árvíztűrő tükörfúrógép. 0123456789"
+
+#: ../vfs-methods/fontilus/font-view.c:276
+msgid "Name:"
+msgstr "Név:"
+
+#: ../vfs-methods/fontilus/font-view.c:279
+msgid "Style:"
+msgstr "Stílus:"
+
+#: ../vfs-methods/fontilus/font-view.c:289
+msgid "Type:"
+msgstr "Típus:"
+
+#: ../vfs-methods/fontilus/font-view.c:295
+msgid "Size:"
+msgstr "Méret:"
+
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
+msgid "Version:"
+msgstr "Verzió:"
+
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
+msgid "Copyright:"
+msgstr "Copyright:"
+
+#: ../vfs-methods/fontilus/font-view.c:347
+msgid "Description:"
+msgstr "Leírás:"
+
+#: ../vfs-methods/fontilus/font-view.c:408
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "használat: %s betűkészletfájl\n"
+
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
 msgid "GNOME Font Viewer"
 msgstr "GNOME betűkészlet-megjelenítő"
@@ -3823,23 +3926,6 @@ msgstr "Ablakkerettéma"
 msgid "Icon theme"
 msgstr "Ikontéma"
 
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "ÁÉÍÓŐÚŰ"
-
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[FÁJL]"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "Téma alkalmazása"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "Beállítja az alapértelmezett témát"
-
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
 msgstr "Ha be van állítva, a telepített témák előnézete megjelenik."
@@ -3875,4 +3961,21 @@ msgstr "Be legyen-e kapcsolva a telepített témák előnézete"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Be legyen-e kapcsolva a témák előnézete"
+
+#. translators: you may want to include non-western chars here
+#: ../vfs-methods/themus/themus-theme-applier.c:58
+msgid "ABCDEFG"
+msgstr "ÁÉÍÓŐÚŰ"
+
+#: ../vfs-methods/themus/themus-theme-applier.c:84
+msgid "[FILE]"
+msgstr "[FÁJL]"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+msgid "Apply theme"
+msgstr "Téma alkalmazása"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+msgid "Sets the default theme"
+msgstr "Beállítja az alapértelmezett témát"
 
