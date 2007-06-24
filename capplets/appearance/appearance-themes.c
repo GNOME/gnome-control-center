@@ -320,6 +320,7 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
 {
   GList *selection;
   GnomeThemeMetaInfo *theme = NULL;
+  gboolean is_custom = FALSE;
 
   selection = gtk_icon_view_get_selected_items (GTK_ICON_VIEW (icon_view));
 
@@ -332,7 +333,9 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
     gtk_tree_model_get_iter (model, &iter, selection->data);
     gtk_tree_model_get (model, &iter, COL_NAME, &name, -1);
 
-    if (!strcmp (name, CUSTOM_THEME_NAME))
+    is_custom = !strcmp (name, CUSTOM_THEME_NAME);
+
+    if (is_custom)
       theme = data->theme_custom;
     else
       theme = gnome_theme_meta_info_find (name);
@@ -347,6 +350,7 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_delete"),
 			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_METATHEME));
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_save"), is_custom);
 }
 
 static void
@@ -362,6 +366,12 @@ theme_custom_cb (GtkWidget *button, AppearanceData *data)
   parent = glade_xml_get_widget (data->xml, "appearance_window");
   gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (parent));
   gtk_widget_show_all (w);
+}
+
+static void
+theme_save_cb (GtkWidget *button, AppearanceData *data)
+{
+  theme_save_dialog_run (data->theme_custom, data);
 }
 
 static void
@@ -494,6 +504,7 @@ themes_init (AppearanceData *data)
   gnome_wm_manager_init ();
 
   data->theme_queue = NULL;
+  data->theme_save_dialog = NULL;
   data->theme_custom = gnome_theme_meta_info_new ();
   data->theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/theme-thumbnailing.png", NULL);
   data->theme_store = theme_store =
@@ -553,6 +564,7 @@ themes_init (AppearanceData *data)
 
   /* connect button signals */
   g_signal_connect (w, "clicked", (GCallback) theme_install_cb, data);
+  g_signal_connect (glade_xml_get_widget (data->xml, "theme_save"), "clicked", (GCallback) theme_save_cb, data);
   g_signal_connect (glade_xml_get_widget (data->xml, "theme_custom"), "clicked", (GCallback) theme_custom_cb, data);
   g_signal_connect (del_button, "clicked", (GCallback) theme_delete_cb, data);
 
@@ -571,4 +583,6 @@ themes_shutdown (AppearanceData *data)
 
   if (data->theme_icon)
     g_object_unref (data->theme_icon);
+  if (data->theme_save_dialog)
+    gtk_widget_destroy (data->theme_save_dialog);
 }
