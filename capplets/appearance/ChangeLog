@@ -1,3 +1,17 @@
+2007-06-25  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-themes.c:
+	Adjusted for the API changes in theme-thumbnail.c. Thumbnail requestes are
+	now directly queued by generate_*_async(), so do not maintain an own queue
+	anymore.
+
+	* appearance-style.c:
+	Use the new asynchronous thumbnail generation functions, and replace all
+	occurrences of "metacity_themes_list" with the correct "window_themes_list".
+
+	* appearance.h:
+	Remove "theme_queue", it is not needed anymore.
+
 2007-06-24  Jens Granseuer  <jensgr@gmx.net>
 
 	* Makefile.am:

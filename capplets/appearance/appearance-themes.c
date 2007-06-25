@@ -30,7 +30,7 @@
 
 #define CUSTOM_THEME_NAME "__custom__"
 
-static void theme_thumbnail_done_cb (GdkPixbuf *pixbuf, AppearanceData *data);
+static void theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data);
 
 static gchar *
 get_default_string_from_key (GConfClient *client, const char *key)
@@ -86,23 +86,11 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
   }
 }
 
-static gboolean
-theme_thumbnail_generate (AppearanceData *data)
-{
-  generate_theme_thumbnail_async (data->theme_queue->data,
-      (ThemeThumbnailFunc) theme_thumbnail_done_cb, data, NULL);
-  return FALSE;
-}
-
 static void
-theme_queue_for_thumbnail (GnomeThemeMetaInfo *theme, AppearanceData *data)
+theme_thumbnail_generate (GnomeThemeMetaInfo *info, AppearanceData *data)
 {
-  gboolean idle = (data->theme_queue == NULL);
-
-  data->theme_queue = g_slist_append (data->theme_queue, theme);
-
-  if (idle)
-    theme_thumbnail_generate (data);
+  generate_meta_theme_thumbnail_async (info,
+      (ThemeThumbnailFunc) theme_thumbnail_done_cb, data, NULL);
 }
 
 static gchar *
@@ -252,7 +240,7 @@ theme_set_custom_from_theme (const GnomeThemeMetaInfo *info, AppearanceData *dat
   gtk_tree_path_free (path);
 
   /* update the theme thumbnail */
-  theme_queue_for_thumbnail (custom, data);
+  theme_thumbnail_generate (custom, data);
 }
 
 /** Theme Callbacks **/
@@ -273,7 +261,7 @@ theme_changed_on_disk_cb (GnomeThemeType       type,
           COL_NAME, meta->name,
           COL_THUMBNAIL, data->theme_icon,
           -1);
-      theme_queue_for_thumbnail (meta, data);
+      theme_thumbnail_generate (meta, data);
 
     } else if (change_type == GNOME_THEME_CHANGE_DELETED) {
       GtkTreeIter iter;
@@ -282,35 +270,24 @@ theme_changed_on_disk_cb (GnomeThemeType       type,
         gtk_list_store_remove (data->theme_store, &iter);
 
     } else if (change_type == GNOME_THEME_CHANGE_CHANGED) {
-      theme_queue_for_thumbnail (meta, data);
+      theme_thumbnail_generate (meta, data);
     }
   }
 }
 
 static void
-theme_thumbnail_done_cb (GdkPixbuf *pixbuf, AppearanceData *data)
+theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data)
 {
-  GnomeThemeMetaInfo *info = data->theme_queue->data;
-
-  g_return_if_fail (info != NULL);
-
   /* find item in model and update thumbnail */
   if (pixbuf) {
     GtkTreeIter iter;
     GtkTreeModel *model = GTK_TREE_MODEL (data->theme_store);
 
-    if (theme_find_in_model (model, info->name, &iter))
+    if (theme_find_in_model (model, theme_name, &iter))
       gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
 
     g_object_unref (pixbuf);
   }
-
-  data->theme_queue = g_slist_remove (data->theme_queue, info);
-
-  if (data->theme_queue)
-    /* we can't call theme_thumbnail_generate directly since the thumbnail
-     * factory hasn't yet cleaned up at this point */
-    g_idle_add ((GSourceFunc) theme_thumbnail_generate, data);
 }
 
 /** GUI Callbacks **/
@@ -503,7 +480,6 @@ themes_init (AppearanceData *data)
   gnome_theme_init (NULL);
   gnome_wm_manager_init ();
 
-  data->theme_queue = NULL;
   data->theme_save_dialog = NULL;
   data->theme_custom = gnome_theme_meta_info_new ();
   data->theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/theme-thumbnailing.png", NULL);
@@ -524,13 +500,13 @@ themes_init (AppearanceData *data)
   for (l = theme_list; l; l = l->next) {
     GnomeThemeMetaInfo *info = l->data;
 
-    data->theme_queue = g_slist_prepend (data->theme_queue, info);
-
     gtk_list_store_insert_with_values (theme_store, NULL, 0,
         COL_LABEL, info->readable_name,
         COL_NAME, info->name,
         COL_THUMBNAIL, data->theme_icon,
         -1);
+
+    theme_thumbnail_generate (info, data);
 
     if (!meta_theme && theme_is_equal (data->theme_custom, info))
       meta_theme = info;
@@ -540,13 +516,14 @@ themes_init (AppearanceData *data)
   if (!meta_theme) {
     /* add custom theme */
     meta_theme = data->theme_custom;
-    data->theme_queue = g_slist_prepend (data->theme_queue, meta_theme);
 
     gtk_list_store_insert_with_values (theme_store, NULL, 0,
         COL_LABEL, meta_theme->readable_name,
         COL_NAME, meta_theme->name,
         COL_THUMBNAIL, data->theme_icon,
         -1);
+    
+    theme_thumbnail_generate (meta_theme, data);    
   }
 
   w = glade_xml_get_widget (data->xml, "theme_list");
@@ -571,15 +548,12 @@ themes_init (AppearanceData *data)
   if (is_locked_down (data->client)) {
     /* FIXME: determine what needs disabling */
   }
-
-  theme_thumbnail_generate (data);
 }
 
 void
 themes_shutdown (AppearanceData *data)
 {
   gnome_theme_meta_info_free (data->theme_custom);
-  g_slist_free (data->theme_queue);
 
   if (data->theme_icon)
     g_object_unref (data->theme_icon);
