@@ -5,22 +5,33 @@
 #include <gtk/gtk.h>
 #include "gnome-theme-info.h"
 
-typedef void (* ThemeThumbnailFunc) (GdkPixbuf          *pixbuf,
-				     gpointer            data);
+typedef void (* ThemeThumbnailFunc)          (GdkPixbuf          *pixbuf,
+                                              gchar              *theme_name,
+                                              gpointer            data);
 
-
-GdkPixbuf *generate_theme_thumbnail         (GnomeThemeMetaInfo *meta_theme_info);
-void       generate_theme_thumbnail_async   (GnomeThemeMetaInfo *meta_theme_info,
-					     ThemeThumbnailFunc  func,
-					     gpointer            data,
-					     GDestroyNotify      destroy);
-void       theme_thumbnail_factory_init     (int                 argc,
-					     char               *argv[]);
-
-/* Functions for specific types of themes */
-GdkPixbuf *generate_gtk_theme_thumbnail      (GnomeThemeInfo *theme_info);
-GdkPixbuf *generate_metacity_theme_thumbnail (GnomeThemeInfo *theme_info);
+GdkPixbuf *generate_meta_theme_thumbnail     (GnomeThemeMetaInfo *theme_info);
+GdkPixbuf *generate_gtk_theme_thumbnail      (GnomeThemeInfo     *theme_info);
+GdkPixbuf *generate_metacity_theme_thumbnail (GnomeThemeInfo     *theme_info);
 GdkPixbuf *generate_icon_theme_thumbnail     (GnomeThemeIconInfo *theme_info);
 
+void generate_meta_theme_thumbnail_async     (GnomeThemeMetaInfo *theme_info,
+                                              ThemeThumbnailFunc  func,
+                                              gpointer            data,
+                                              GDestroyNotify      destroy);
+void generate_gtk_theme_thumbnail_async      (GnomeThemeInfo     *theme_info,
+                                              ThemeThumbnailFunc  func,
+                                              gpointer            data,
+                                              GDestroyNotify      destroy);
+void generate_metacity_theme_thumbnail_async (GnomeThemeInfo     *theme_info,
+                                              ThemeThumbnailFunc  func,
+                                              gpointer            data,
+                                              GDestroyNotify      destroy);
+void generate_icon_theme_thumbnail_async     (GnomeThemeIconInfo *theme_info,
+                                              ThemeThumbnailFunc  func,
+                                              gpointer            data,
+                                              GDestroyNotify      destroy);
+
+void theme_thumbnail_factory_init            (int                 argc,
+                                              char               *argv[]);
 
 #endif /* __THEME_THUMBNAIL_H__ */
