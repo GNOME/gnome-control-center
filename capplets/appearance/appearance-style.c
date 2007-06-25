@@ -647,7 +647,6 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   {
     const gchar *name = NULL;
     const gchar *label = NULL;
-    GdkPixbuf *thumbnail;
     GtkTreeIter i;
 
     if (type == THEME_TYPE_GTK || type == THEME_TYPE_WINDOW) {
@@ -682,17 +681,13 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
                                             data,
                                             NULL);
         break;
-
       default:
-        thumbnail = NULL;
+        break;
     }
 
     gtk_list_store_insert_with_values (store, &i, 0,
-                                       COL_THUMBNAIL, thumbnail,
                                        COL_LABEL, label ? label : name,
                                        COL_NAME, name, -1);
-    if (thumbnail)
-      g_object_unref (thumbnail);
   }
   g_list_free (themes);
 
