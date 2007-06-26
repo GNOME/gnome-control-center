@@ -611,6 +611,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
   GtkTreeModel *sort_model;
+  GdkPixbuf *thumbnail;
   const gchar *key;
   GObject *peditor;
   GConfValue *value;
@@ -619,21 +620,25 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   {
     case THEME_TYPE_GTK:
       themes = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
+      thumbnail = data->gtk_theme_icon;
       key = GTK_THEME_KEY;
       break;
 
     case THEME_TYPE_WINDOW:
       themes = gnome_theme_info_find_by_type (GNOME_THEME_METACITY);
+      thumbnail = data->window_theme_icon;
       key = METACITY_THEME_KEY;
       break;
 
     case THEME_TYPE_ICON:
       themes = gnome_theme_icon_info_find_all ();
+      thumbnail = data->icon_theme_icon;
       key = ICON_THEME_KEY;
       break;
 
     case THEME_TYPE_CURSOR:
       themes = NULL; /* don't know what to do yet */
+      thumbnail = NULL;
       key = CURSOR_THEME_KEY;
 
     default:
@@ -647,7 +652,6 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   {
     const gchar *name = NULL;
     const gchar *label = NULL;
-    GdkPixbuf *thumbnail = NULL;
     GtkTreeIter i;
 
     if (type == THEME_TYPE_GTK || type == THEME_TYPE_WINDOW) {
@@ -663,7 +667,6 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
     switch (type)
     {
       case THEME_TYPE_GTK:
-        thumbnail = data->gtk_theme_icon;
         generate_gtk_theme_thumbnail_async ((GnomeThemeInfo *) l->data,
                                             (ThemeThumbnailFunc) gtk_theme_thumbnail_cb,
                                             data,
@@ -671,7 +674,6 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
         break;
 
       case THEME_TYPE_ICON:
-        thumbnail = data->icon_theme_icon;
         generate_icon_theme_thumbnail_async ((GnomeThemeIconInfo *) l->data,
                                              (ThemeThumbnailFunc) icon_theme_thumbnail_cb,
                                             data,
@@ -679,7 +681,6 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
         break;
 
       case THEME_TYPE_WINDOW:
-        thumbnail = data->window_theme_icon;
         generate_metacity_theme_thumbnail_async ((GnomeThemeInfo *) l->data,
                                             (ThemeThumbnailFunc) metacity_theme_thumbnail_cb,
                                             data,

@@ -22,6 +22,7 @@
 #include "theme-thumbnail.h"
 #include "gnome-theme-apply.h"
 #include "theme-installer.h"
+#include "theme-save.h"
 #include "theme-util.h"
 
 #include <glib/gi18n.h>
@@ -30,7 +31,57 @@
 
 #define CUSTOM_THEME_NAME "__custom__"
 
-static void theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data);
+static void
+theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data)
+{
+  /* find item in model and update thumbnail */
+  if (pixbuf) {
+    GtkTreeIter iter;
+    GtkTreeModel *model = GTK_TREE_MODEL (data->theme_store);
+
+    if (theme_find_in_model (model, theme_name, &iter))
+      gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
+
+    g_object_unref (pixbuf);
+  }
+}
+
+static void
+theme_thumbnail_generate (GnomeThemeMetaInfo *info, AppearanceData *data)
+{
+  generate_meta_theme_thumbnail_async (info,
+      (ThemeThumbnailFunc) theme_thumbnail_done_cb, data, NULL);
+}
+
+static void
+theme_changed_on_disk_cb (GnomeThemeType       type,
+			  gpointer             theme,
+			  GnomeThemeChangeType change_type,
+			  GnomeThemeElement    element,
+			  AppearanceData       *data)
+{
+  if (type == GNOME_THEME_TYPE_METATHEME) {
+    GnomeThemeMetaInfo *meta = theme;
+
+    if (change_type == GNOME_THEME_CHANGE_CREATED) {
+      gtk_list_store_insert_with_values (data->theme_store, NULL, 0,
+          COL_LABEL, meta->readable_name,
+          COL_NAME, meta->name,
+          COL_THUMBNAIL, data->theme_icon,
+          -1);
+      theme_thumbnail_generate (meta, data);
+
+    } else if (change_type == GNOME_THEME_CHANGE_DELETED) {
+      GtkTreeIter iter;
+
+      if (theme_find_in_model (GTK_TREE_MODEL (data->theme_store), meta->name, &iter))
+        gtk_list_store_remove (data->theme_store, &iter);
+
+    } else if (change_type == GNOME_THEME_CHANGE_CHANGED) {
+      theme_thumbnail_generate (meta, data);
+    }
+  }
+}
 
 static gchar *
 get_default_string_from_key (GConfClient *client, const char *key)
@@ -59,38 +110,17 @@ is_locked_down (GConfClient *client)
 static void
 theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
 {
-  gchar *s;
+  g_free (theme->gtk_theme_name);
+  theme->gtk_theme_name = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
 
-  s = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
-  if (s != NULL) {
-    g_free (theme->gtk_theme_name);
-    theme->gtk_theme_name = s;
-  }
+  g_free (theme->gtk_color_scheme);
+  theme->gtk_color_scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
 
-  s = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
-  if (s != NULL) {
-    g_free (theme->gtk_color_scheme);
-    theme->gtk_color_scheme = s;
-  }
+  g_free (theme->metacity_theme_name);
+  theme->metacity_theme_name = gconf_client_get_string (client, METACITY_THEME_KEY, NULL);
 
-  s = gconf_client_get_string (client, METACITY_THEME_KEY, NULL);
-  if (s != NULL) {
-    g_free (theme->metacity_theme_name);
-    theme->metacity_theme_name = s;
-  }
-
-  s = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
-  if (s != NULL) {
-    g_free (theme->icon_theme_name);
-    theme->icon_theme_name = s;
-  }
-}
-
-static void
-theme_thumbnail_generate (GnomeThemeMetaInfo *info, AppearanceData *data)
-{
-  generate_meta_theme_thumbnail_async (info,
-      (ThemeThumbnailFunc) theme_thumbnail_done_cb, data, NULL);
+  g_free (theme->icon_theme_name);
+  theme->icon_theme_name = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
 }
 
 static gchar *
@@ -157,11 +187,15 @@ theme_select_name (GtkIconView *icon_view, const gchar *theme)
 static gboolean
 theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
 {
+  gboolean a_set, b_set;
+
   if (!(a->gtk_theme_name && b->gtk_theme_name) ||
       strcmp (a->gtk_theme_name, b->gtk_theme_name))
     return FALSE;
 
-  if (!(a->gtk_color_scheme && b->gtk_color_scheme) ||
+  a_set = a->gtk_color_scheme && strcmp (a->gtk_color_scheme, "");
+  b_set = b->gtk_color_scheme && strcmp (b->gtk_color_scheme, "");
+  if (!(a_set && b_set) ||
       strcmp (a->gtk_color_scheme, b->gtk_color_scheme))
     return FALSE;
 
@@ -241,53 +275,6 @@ theme_set_custom_from_theme (const GnomeThemeMetaInfo *info, AppearanceData *dat
 
   /* update the theme thumbnail */
   theme_thumbnail_generate (custom, data);
-}
-
-/** Theme Callbacks **/
-
-static void
-theme_changed_on_disk_cb (GnomeThemeType       type,
-			  gpointer             theme,
-			  GnomeThemeChangeType change_type,
-			  GnomeThemeElement    element,
-			  AppearanceData       *data)
-{
-  if (type == GNOME_THEME_TYPE_METATHEME) {
-    GnomeThemeMetaInfo *meta = theme;
-
-    if (change_type == GNOME_THEME_CHANGE_CREATED) {
-      gtk_list_store_insert_with_values (data->theme_store, NULL, 0,
-          COL_LABEL, meta->readable_name,
-          COL_NAME, meta->name,
-          COL_THUMBNAIL, data->theme_icon,
-          -1);
-      theme_thumbnail_generate (meta, data);
-
-    } else if (change_type == GNOME_THEME_CHANGE_DELETED) {
-      GtkTreeIter iter;
-
-      if (theme_find_in_model (GTK_TREE_MODEL (data->theme_store), meta->name, &iter))
-        gtk_list_store_remove (data->theme_store, &iter);
-
-    } else if (change_type == GNOME_THEME_CHANGE_CHANGED) {
-      theme_thumbnail_generate (meta, data);
-    }
-  }
-}
-
-static void
-theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data)
-{
-  /* find item in model and update thumbnail */
-  if (pixbuf) {
-    GtkTreeIter iter;
-    GtkTreeModel *model = GTK_TREE_MODEL (data->theme_store);
-
-    if (theme_find_in_model (model, theme_name, &iter))
-      gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
-
-    g_object_unref (pixbuf);
-  }
 }
 
 /** GUI Callbacks **/
@@ -522,8 +509,8 @@ themes_init (AppearanceData *data)
         COL_NAME, meta_theme->name,
         COL_THUMBNAIL, data->theme_icon,
         -1);
-    
-    theme_thumbnail_generate (meta_theme, data);    
+
+    theme_thumbnail_generate (meta_theme, data);
   }
 
   w = glade_xml_get_widget (data->xml, "theme_list");
