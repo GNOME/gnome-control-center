@@ -1,3 +1,19 @@
+2007-06-26  Denis Washington  <denisw@svn.gnome.org>
+
+	* gtk-theme-thumbnailing.png:
+	* icon-theme-thumbnailing.png:
+	* window-theme-thumbnailing.png:
+	Placeholder thumbnails for gtk+, metacity and icon themes.
+
+	* Makefile.am: Add new files.
+
+	* appearance.h:
+	* appearance-style.h:
+	* appearance-style.c: (style_init), (style_shutdown), (prepare_list):
+	Use the new placeholder thumbnails for the details window's theme lists.
+
+	* appearance-main.c: Call new style_shutdown ().
+
 2007-06-25  Denis Washington  <denisw@svn.gnome.org>
 
 	* appearance.glade: Fixed resize problems.

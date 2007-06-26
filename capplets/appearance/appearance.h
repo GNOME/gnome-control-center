@@ -56,4 +56,9 @@ typedef struct {
   GnomeThemeMetaInfo *theme_custom;
   GdkPixbuf *theme_icon;
   GtkWidget *theme_save_dialog;
+
+  /* style */
+  GdkPixbuf *gtk_theme_icon;
+  GdkPixbuf *window_theme_icon;
+  GdkPixbuf *icon_theme_icon;
 } AppearanceData;

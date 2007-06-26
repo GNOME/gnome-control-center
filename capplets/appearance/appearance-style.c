@@ -647,6 +647,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   {
     const gchar *name = NULL;
     const gchar *label = NULL;
+    GdkPixbuf *thumbnail = NULL;
     GtkTreeIter i;
 
     if (type == THEME_TYPE_GTK || type == THEME_TYPE_WINDOW) {
@@ -662,6 +663,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
     switch (type)
     {
       case THEME_TYPE_GTK:
+        thumbnail = data->gtk_theme_icon;
         generate_gtk_theme_thumbnail_async ((GnomeThemeInfo *) l->data,
                                             (ThemeThumbnailFunc) gtk_theme_thumbnail_cb,
                                             data,
@@ -669,6 +671,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
         break;
 
       case THEME_TYPE_ICON:
+        thumbnail = data->icon_theme_icon;
         generate_icon_theme_thumbnail_async ((GnomeThemeIconInfo *) l->data,
                                              (ThemeThumbnailFunc) icon_theme_thumbnail_cb,
                                             data,
@@ -676,6 +679,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
         break;
 
       case THEME_TYPE_WINDOW:
+        thumbnail = data->window_theme_icon;
         generate_metacity_theme_thumbnail_async ((GnomeThemeInfo *) l->data,
                                             (ThemeThumbnailFunc) metacity_theme_thumbnail_cb,
                                             data,
@@ -687,7 +691,9 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
 
     gtk_list_store_insert_with_values (store, &i, 0,
                                        COL_LABEL, label ? label : name,
-                                       COL_NAME, name, -1);
+                                       COL_NAME, name,
+                                       COL_THUMBNAIL, thumbnail,
+                                       -1);
   }
   g_list_free (themes);
 
@@ -732,6 +738,10 @@ style_init (AppearanceData *data)
   GtkSettings *settings;
   GtkWidget *w;
 
+  data->gtk_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/gtk-theme-thumbnailing.png", NULL);
+  data->window_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/window-theme-thumbnailing.png", NULL);
+  data->icon_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/icon-theme-thumbnailing.png", NULL);
+
   w = glade_xml_get_widget (data->xml, "theme_details");
   g_signal_connect (w, "response", (GCallback) style_response_cb, NULL);
   g_signal_connect (w, "delete_event", (GCallback) gtk_true, NULL);
@@ -769,4 +779,15 @@ style_init (AppearanceData *data)
   g_signal_connect (glade_xml_get_widget (data->xml, "icon_themes_delete"), "clicked", (GCallback) icon_theme_delete_cb, data);
 
   gnome_theme_info_register_theme_change ((ThemeChangedCallback) changed_on_disk_cb, data);
+}
+
+void
+style_shutdown (AppearanceData *data)
+{
+  if (data->gtk_theme_icon)
+    g_object_unref (data->gtk_theme_icon);
+  if (data->window_theme_icon)
+    g_object_unref (data->window_theme_icon);
+  if (data->icon_theme_icon)
+    g_object_unref (data->icon_theme_icon);
 }

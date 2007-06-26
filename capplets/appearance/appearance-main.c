@@ -76,6 +76,7 @@ main_window_response (GtkWidget *widget,
     gtk_main_quit ();
 
     themes_shutdown (data);
+    style_shutdown (data);
     desktop_shutdown (data);
     font_shutdown (data);
 

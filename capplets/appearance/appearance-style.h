@@ -19,3 +19,4 @@
  */
 
 void style_init (AppearanceData *data);
+void style_shutdown (AppearanceData *data);

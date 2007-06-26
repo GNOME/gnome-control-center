@@ -50,7 +50,10 @@ dist_pixmap_DATA = \
         subpixel-rgb.png \
         subpixel-vbgr.png \
         subpixel-vrgb.png \
-        theme-thumbnailing.png
+        theme-thumbnailing.png \
+        gtk-theme-thumbnailing.png \
+        window-theme-thumbnailing.png \
+        icon-theme-thumbnailing.png
 
 wallpaperdir = $(datadir)/gnome-background-properties
 
