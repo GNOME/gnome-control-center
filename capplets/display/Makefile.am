@@ -10,11 +10,8 @@ gnome_display_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
-iconsdir   = $(pkgdatadir)/icons
-icons_DATA = display-capplet.png
-
-desktop_iconsdir = $(datadir)/pixmaps
-desktop_icons_DATA = display-capplet.png
+icondir = $(datadir)/icons/hicolor/48x48/apps
+dist_icon_DATA = display-capplet.png
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = display-properties.desktop.in
@@ -27,4 +24,16 @@ INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS)     \
 	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(icons_DATA)
+
+gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+install-data-hook: update-icon-cache
+uninstall-hook: update-icon-cache
+update-icon-cache:
+	@-if test -z "$(DESTDIR)"; then \
+		echo "Updating Gtk icon cache."; \
+		$(gtk_update_icon_cache); \
+	else \
+		echo "*** Icon cache not updated.  After (un)install, run this:"; \
+		echo "***   $(gtk_update_icon_cache)"; \
+	fi
+

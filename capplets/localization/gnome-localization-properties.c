@@ -1101,7 +1101,7 @@ main (int argc, char **argv)
 	changeset = NULL;
 	dialog = create_dialog ();
 	setup_dialog (dialog, changeset);
-	capplet_set_icon (WID ("localization_dialog"), "localization-capplet.png");
+	capplet_set_icon (WID ("localization_dialog"), "localization-capplet");
 	gtk_widget_show (WID ("localization_dialog"));
 	gtk_main ();
 

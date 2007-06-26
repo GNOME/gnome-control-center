@@ -209,7 +209,7 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 NULL);
-	capplet_set_icon (dialog->p->dialog_win, "gnome-ccmime.png");
+	capplet_set_icon (dialog->p->dialog_win, "file-types-capplet");
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->p->dialog_win),
 		 GTK_RESPONSE_OK);
 

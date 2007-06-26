@@ -2,9 +2,7 @@ EXTRA_DIST = ChangeLog
 
 INCLUDES = \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
-	-DGNOMECC_ICONS_DIR="\"$(pkgdatadir)/icons\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-DINSTALL_PREFIX=\"$(prefix)\"					\
 	-I$(top_srcdir)							\

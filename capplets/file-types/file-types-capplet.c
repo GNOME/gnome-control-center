@@ -301,7 +301,7 @@ main (int argc, char **argv)
 		GtkWidget *mime_dialog = WID ("main_dialog");
 		gtk_dialog_set_default_response (GTK_DIALOG (mime_dialog),
 			GTK_RESPONSE_CLOSE);
-		capplet_set_icon (mime_dialog, "gnome-ccmime.png");
+		capplet_set_icon (mime_dialog, "file-types-capplet");
 		gtk_widget_show_all (mime_dialog);
 	} else {
 		MimeTypeInfo *info = NULL;

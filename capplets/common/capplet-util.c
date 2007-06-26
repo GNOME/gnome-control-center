@@ -356,53 +356,7 @@ capplet_help (GtkWindow *parent, char const *helpfile, char const *section)
 void
 capplet_set_icon (GtkWidget *window, char const *icon_file_name)
 {
-	char *path;
-	char *tmp;
-	char *p;
-	GdkPixbuf *icon_pixbuf = NULL;
-	GtkIconTheme *icon_theme;
-	GtkIconInfo  *icon_info;
-
-	/* First look up from the icon theme */
-	icon_theme = gtk_icon_theme_get_default ();
-
-	tmp = g_strdup (icon_file_name);
-	p = strrchr (tmp, '.');
-	if (p)
-		p[0] = '\0';
-
-	icon_info = gtk_icon_theme_lookup_icon (icon_theme, tmp, 48, 0);
-
-	if (icon_info != NULL) {
-		icon_pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-		gtk_icon_info_free (icon_info);
-	}
-
-	g_free (tmp);
-
-	if (icon_pixbuf == NULL) {
-		/* Then we fallback to the control center icon location */
-		path = g_build_filename (GNOMECC_ICONS_DIR, icon_file_name, NULL);
-
-		icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
-		g_free (path);
-	}
-
-	if (icon_pixbuf == NULL) {
-		/* Then we fallback to the gnome program discovery stuff */
-		path = gnome_pixmap_file (icon_file_name);
-		if (path != NULL) {
-			icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
-			g_free (path);
-		}
-	}
-
-	if (icon_pixbuf != NULL) {
-		/* Make sure that every window gets an icon */
-		gtk_window_set_default_icon (icon_pixbuf);
-
-		gtk_window_set_icon (GTK_WINDOW (window), icon_pixbuf);
-
-		g_object_unref (icon_pixbuf);
-	}
+	/* Make sure that every window gets an icon */
+	gtk_window_set_default_icon_name (icon_file_name);
+	gtk_window_set_icon_name (GTK_WINDOW (window), icon_file_name);
 }
