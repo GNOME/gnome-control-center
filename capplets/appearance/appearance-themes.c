@@ -195,8 +195,8 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
 
   a_set = a->gtk_color_scheme && strcmp (a->gtk_color_scheme, "");
   b_set = b->gtk_color_scheme && strcmp (b->gtk_color_scheme, "");
-  if (!(a_set && b_set) ||
-      strcmp (a->gtk_color_scheme, b->gtk_color_scheme))
+  if ((a_set != b_set) ||
+      (a_set && strcmp (a->gtk_color_scheme, b->gtk_color_scheme)))
     return FALSE;
 
   if (!(a->icon_theme_name && b->icon_theme_name) ||
