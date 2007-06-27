@@ -455,7 +455,14 @@ theme_postinit (GtkIconView *icon_view, AppearanceData *data)
 }
 
 static gint
-theme_list_sort_func (GtkTreeModel *model,
+theme_list_sort_func (GnomeThemeMetaInfo *a,
+                      GnomeThemeMetaInfo *b)
+{
+  return strcmp (a->readable_name, b->readable_name);
+}
+
+static gint
+theme_store_sort_func (GtkTreeModel *model,
                       GtkTreeIter *a,
                       GtkTreeIter *b,
                       gpointer user_data)
@@ -512,12 +519,9 @@ themes_init (AppearanceData *data)
         COL_THUMBNAIL, data->theme_icon,
         -1);
 
-    theme_thumbnail_generate (info, data);
-
     if (!meta_theme && theme_is_equal (data->theme_custom, info))
       meta_theme = info;
   }
-  g_list_free (theme_list);
 
   if (!meta_theme) {
     /* add custom theme */
@@ -532,11 +536,18 @@ themes_init (AppearanceData *data)
     theme_thumbnail_generate (meta_theme, data);
   }
 
+  theme_list = g_list_sort (theme_list, (GCompareFunc) theme_list_sort_func);
+
+  for (l = theme_list; l; l = l->next)
+    theme_thumbnail_generate ((GnomeThemeMetaInfo *) l->data, data);
+
+  g_list_free (theme_list);
+  
   w = glade_xml_get_widget (data->xml, "theme_list");
   gtk_icon_view_set_selection_mode (GTK_ICON_VIEW (w), GTK_SELECTION_BROWSE);
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model), COL_LABEL, theme_list_sort_func, NULL, NULL);
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model), COL_LABEL, theme_store_sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), COL_LABEL, GTK_SORT_ASCENDING);
   g_signal_connect (w, "selection-changed", (GCallback) theme_selection_changed_cb, data);
   g_signal_connect_after (w, "realize", (GCallback) theme_select_name, meta_theme->name);
