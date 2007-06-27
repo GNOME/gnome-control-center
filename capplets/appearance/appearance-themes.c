@@ -454,6 +454,26 @@ theme_postinit (GtkIconView *icon_view, AppearanceData *data)
   g_signal_connect (gtk_settings_get_default (), "notify::gtk-color-scheme", (GCallback) theme_color_scheme_changed_cb, data);
 }
 
+static gint
+theme_list_sort_func (GtkTreeModel *model,
+                      GtkTreeIter *a,
+                      GtkTreeIter *b,
+                      gpointer user_data)
+{
+  const gchar *a_name = NULL, *a_label = NULL;
+  const gchar *b_name = NULL, *b_label = NULL;
+
+  gtk_tree_model_get (model, a, COL_NAME, &a_name, COL_LABEL, &a_label, -1);
+  gtk_tree_model_get (model, b, COL_NAME, &b_name, COL_LABEL, &b_label, -1);
+
+  if (!strcmp (a_name, CUSTOM_THEME_NAME))
+    return -1;
+  if (!strcmp (b_name, CUSTOM_THEME_NAME))
+    return 1;
+
+  return strcmp (a_label, b_label);
+}
+
 void
 themes_init (AppearanceData *data)
 {
@@ -480,9 +500,8 @@ themes_init (AppearanceData *data)
   gnome_theme_info_register_theme_change ((ThemeChangedCallback) theme_changed_on_disk_cb, data);
 
   data->theme_custom->name = g_strdup (CUSTOM_THEME_NAME);
-  data->theme_custom->readable_name = g_strdup (_("Custom"));
+  data->theme_custom->readable_name = g_strdup_printf ("<b>%s</b>", _("Custom"));
   theme_load_from_gconf (data->client, data->theme_custom);
-
 
   for (l = theme_list; l; l = l->next) {
     GnomeThemeMetaInfo *info = l->data;
@@ -517,6 +536,7 @@ themes_init (AppearanceData *data)
   gtk_icon_view_set_selection_mode (GTK_ICON_VIEW (w), GTK_SELECTION_BROWSE);
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model), COL_LABEL, theme_list_sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), COL_LABEL, GTK_SORT_ASCENDING);
   g_signal_connect (w, "selection-changed", (GCallback) theme_selection_changed_cb, data);
   g_signal_connect_after (w, "realize", (GCallback) theme_select_name, meta_theme->name);
