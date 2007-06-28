@@ -520,7 +520,7 @@ themes_init (AppearanceData *data)
   gnome_theme_info_register_theme_change ((ThemeChangedCallback) theme_changed_on_disk_cb, data);
 
   data->theme_custom->name = g_strdup (CUSTOM_THEME_NAME);
-  data->theme_custom->readable_name = g_strdup_printf ("<b>%s</b>", _("Custom"));
+  data->theme_custom->readable_name = g_strdup_printf ("<i>%s</i>", _("Custom"));
   theme_load_from_gconf (data->client, data->theme_custom);
 
   for (l = theme_list; l; l = l->next) {
@@ -555,7 +555,6 @@ themes_init (AppearanceData *data)
   g_list_free (theme_list);
 
   w = glade_xml_get_widget (data->xml, "theme_list");
-  gtk_icon_view_set_selection_mode (GTK_ICON_VIEW (w), GTK_SELECTION_BROWSE);
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model), COL_LABEL, theme_store_sort_func, NULL, NULL);
