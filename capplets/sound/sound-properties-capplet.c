@@ -1071,7 +1071,7 @@ main (int argc, char **argv)
 			dialog_win = WID ("sound_prefs_dialog");
 			g_signal_connect (dialog_win, "response", G_CALLBACK (dialog_response_cb), changeset);
 			g_signal_connect (dialog_win, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-			capplet_set_icon (dialog_win, "gnome-settings-sound");
+			capplet_set_icon (dialog_win, "gnome-sound-properties");
 			gtk_widget_show (dialog_win);
 
 			gtk_main ();
