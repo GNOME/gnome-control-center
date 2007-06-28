@@ -1,5 +1,11 @@
 2007-06-28  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance.glade: add explicit width_request to our icon views so we
+	can use GTK_POLICY_NEVER for horizontal scrollbars and still properly
+	resize the window (part of bug #451585)
+
+2007-06-28  Jens Granseuer  <jensgr@gmx.net>
+
 	* appearance-themes.c: (themes_init):
 	* appearance.glade: move "selection_mode" to glade file and remove
 	hard-coded item width
