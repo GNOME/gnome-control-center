@@ -1,3 +1,8 @@
+2007-06-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (theme_store_sort_func), (themes_init): fix leaks,
+	use g_list_foreach instead of open-coded loop
+
 2007-06-27  Denis Washington  <denisw@svn.gnome.org>
 
 	* appearance-themes.c: (theme_list_sort_func, themes_init):

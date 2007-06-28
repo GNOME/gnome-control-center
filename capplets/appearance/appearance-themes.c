@@ -467,18 +467,31 @@ theme_store_sort_func (GtkTreeModel *model,
                       GtkTreeIter *b,
                       gpointer user_data)
 {
-  const gchar *a_name = NULL, *a_label = NULL;
-  const gchar *b_name = NULL, *b_label = NULL;
+  gchar *a_name, *a_label;
+  gint rc;
 
   gtk_tree_model_get (model, a, COL_NAME, &a_name, COL_LABEL, &a_label, -1);
-  gtk_tree_model_get (model, b, COL_NAME, &b_name, COL_LABEL, &b_label, -1);
 
-  if (!strcmp (a_name, CUSTOM_THEME_NAME))
-    return -1;
-  if (!strcmp (b_name, CUSTOM_THEME_NAME))
-    return 1;
+  if (!strcmp (a_name, CUSTOM_THEME_NAME)) {
+    rc = -1;
+  } else {
+    gchar *b_name, *b_label;
 
-  return strcmp (a_label, b_label);
+    gtk_tree_model_get (model, b, COL_NAME, &b_name, COL_LABEL, &b_label, -1);
+
+    if (!strcmp (b_name, CUSTOM_THEME_NAME))
+      rc = 1;
+    else
+      rc = strcmp (a_label, b_label);
+
+    g_free (b_name);
+    g_free (b_label);
+  }
+
+  g_free (a_name);
+  g_free (a_label);
+
+  return rc;
 }
 
 void
@@ -538,11 +551,9 @@ themes_init (AppearanceData *data)
 
   theme_list = g_list_sort (theme_list, (GCompareFunc) theme_list_sort_func);
 
-  for (l = theme_list; l; l = l->next)
-    theme_thumbnail_generate ((GnomeThemeMetaInfo *) l->data, data);
-
+  g_list_foreach (theme_list, (GFunc) theme_thumbnail_generate, data);
   g_list_free (theme_list);
-  
+
   w = glade_xml_get_widget (data->xml, "theme_list");
   gtk_icon_view_set_selection_mode (GTK_ICON_VIEW (w), GTK_SELECTION_BROWSE);
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
