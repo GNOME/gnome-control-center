@@ -50,18 +50,18 @@ struct ScreenInfo
   int current_height;
   SizeID current_size;
   short current_rate;
-  
+
   Rotation current_rotation;
   Rotation old_rotation;
   Rotation rotations;
 
   SizeID old_size;
   short old_rate;
-  
+
   XRRScreenConfiguration *config;
   XRRScreenSize *sizes;
   int n_sizes;
-  
+
   GtkWidget *resolution_widget;
   GtkWidget *rate_widget;
   GtkWidget *rotate_widget;
@@ -95,7 +95,7 @@ read_display_info (GdkDisplay *display)
   for (i = 0; i < info->n_screens; i++)
     {
       screen = gdk_display_get_screen (display, i);
-      
+
       screen_info = &info->screens[i];
       screen_info->current_width = gdk_screen_get_width (screen);
       screen_info->current_height = gdk_screen_get_height (screen);
@@ -103,7 +103,7 @@ read_display_info (GdkDisplay *display)
       root_window = gdk_screen_get_root_window (screen);
       screen_info->config = XRRGetScreenInfo (gdk_x11_display_get_xdisplay (display),
 					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)));
-      
+
       screen_info->current_rate = XRRConfigCurrentRate (screen_info->config);
       screen_info->current_size = XRRConfigCurrentConfiguration (screen_info->config, &screen_info->current_rotation);
       screen_info->sizes        = XRRConfigSizes (screen_info->config, &screen_info->n_sizes);
@@ -122,17 +122,17 @@ update_display_info (struct DisplayInfo *info, GdkDisplay *display)
   int i;
 
   g_assert (info->n_screens == gdk_display_get_n_screens (display));
-  
+
   for (i = 0; i < info->n_screens; i++)
     {
       screen = gdk_display_get_screen (display, i);
-      
+
       screen_info = &info->screens[i];
 
       screen_info->old_rate = screen_info->current_rate;
       screen_info->old_size = screen_info->current_size;
       screen_info->old_rotation = screen_info->current_rotation;
-      
+
       screen_info->current_width = gdk_screen_get_width (screen);
       screen_info->current_height = gdk_screen_get_height (screen);
 
@@ -221,13 +221,13 @@ apply_config (struct DisplayInfo *info)
       new_res  = get_current_resolution (screen_info);
       new_rate = get_current_rate (screen_info);
       new_rot  = get_current_rotation (screen_info);
-      
+
       if (new_res  != screen_info->current_size ||
 	  new_rate != screen_info->current_rate ||
 	  new_rot  != screen_info->current_rotation)
 	{
-	  changed = TRUE; 
-	  status = XRRSetScreenConfigAndRate (xdisplay, 
+	  changed = TRUE;
+	  status = XRRSetScreenConfigAndRate (xdisplay,
 					      screen_info->config,
 					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
 					      new_res,
@@ -238,7 +238,7 @@ apply_config (struct DisplayInfo *info)
     }
 
   update_display_info (info, display);
-  
+
   if (changed) {
     gchar *cmd;
 
@@ -265,7 +265,7 @@ revert_config (struct DisplayInfo *info)
 
   display = gdk_display_get_default ();
   xdisplay = gdk_x11_display_get_xdisplay (display);
-  
+
   for (i = 0; i < info->n_screens; i++)
     {
       struct ScreenInfo *screen_info = &info->screens[i];
@@ -275,14 +275,14 @@ revert_config (struct DisplayInfo *info)
       screen = gdk_display_get_screen (display, i);
       root_window = gdk_screen_get_root_window (screen);
 
-      status = XRRSetScreenConfigAndRate (xdisplay, 
+      status = XRRSetScreenConfigAndRate (xdisplay,
 					  screen_info->config,
 					  gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
 					  screen_info->old_size,
 					  screen_info->old_rotation,
 					  screen_info->old_rate > 0 ? screen_info->old_rate : 0,
 					  GDK_CURRENT_TIME);
-      
+
     }
 
   update_display_info (info, display);
@@ -291,7 +291,7 @@ revert_config (struct DisplayInfo *info)
   for (i = 0; i < info->n_screens; i++)
     {
       struct ScreenInfo *screen_info = &info->screens[i];
-      
+
       generate_resolution_menu (screen_info);
       generate_rate_menu (screen_info);
     }
@@ -341,7 +341,7 @@ wrap_in_label (GtkWidget *child, char *text)
 		      TRUE, TRUE, 0);
 
   gtk_widget_show (hbox);
-  
+
   gtk_box_pack_start (GTK_BOX (vbox),
 		      hbox,
 		      FALSE, FALSE, 0);
@@ -375,12 +375,12 @@ generate_rate_menu (struct ScreenInfo *screen_info)
   int size_nr;
   char *str;
   int closest_rate_nr;
-  
+
   store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
   gtk_combo_box_set_model (GTK_COMBO_BOX (screen_info->rate_widget), GTK_TREE_MODEL (store));
 
   size_nr = get_current_resolution (screen_info);
-  
+
   closest_rate_nr = -1;
   rates = XRRConfigRates (screen_info->config, size_nr, &nrates);
   for (i = 0; i < nrates; i++)
@@ -448,11 +448,11 @@ generate_resolution_menu(struct ScreenInfo* screen_info)
 	  item++;
 	}
     }
-  
+
   gtk_combo_box_set_active (combo, current_item);
 
 	g_signal_connect (screen_info->resolution_widget, "changed", G_CALLBACK (resolution_changed_callback), screen_info);
-  
+
 	gtk_widget_show (screen_info->resolution_widget);
   g_object_unref (store);
 }
@@ -530,7 +530,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 
   gtk_table_set_row_spacings ( GTK_TABLE (table), 6);
   gtk_table_set_col_spacings ( GTK_TABLE (table), 12);
-  
+
   label = gtk_label_new_with_mnemonic (_("_Resolution:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_widget_show (label);
@@ -549,7 +549,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 		    0, 1,
 		    GTK_FILL | GTK_EXPAND, 0,
 		    0, 0);
-  
+
   label = gtk_label_new_with_mnemonic (_("Re_fresh rate:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_widget_show (label);
@@ -560,7 +560,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 		    GTK_FILL, 0,
 		    0, 0);
   gtk_widget_show (table);
-  
+
   option_menu = create_rate_menu (screen_info);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), option_menu);
   gtk_table_attach (GTK_TABLE (table),
@@ -569,7 +569,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 		    1, 2,
 		    GTK_FILL | GTK_EXPAND, 0,
 		    0, 0);
-  
+
   label = gtk_label_new_with_mnemonic (_("R_otation:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_widget_show (label);
@@ -579,7 +579,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 		    2, 3,
 		    GTK_FILL, 0,
 		    0, 0);
-  
+
   option_menu = create_rotate_menu (screen_info);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), option_menu);
   gtk_table_attach (GTK_TABLE (table),
@@ -588,7 +588,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 		    2, 3,
 		    GTK_FILL | GTK_EXPAND, 0,
 		    0, 0);
-  
+
   if (nr == 0)
     str = g_strdup (_("Default Settings"));
   else
@@ -617,7 +617,7 @@ create_dialog (struct DisplayInfo *info)
 #else
   char hostname[256];
 #endif
-  
+
   dialog = gtk_dialog_new_with_buttons (_("Screen Resolution Preferences"),
 					NULL,
 					GTK_DIALOG_NO_SEPARATOR,
@@ -628,18 +628,18 @@ create_dialog (struct DisplayInfo *info)
 					"gtk-help",
 					GTK_RESPONSE_HELP,
 					NULL);
-					
+
   gtk_window_set_resizable(GTK_WINDOW (dialog), FALSE);
-  gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);  
+  gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
-  capplet_set_icon (dialog, "display-capplet");
-  
+  capplet_set_icon (dialog, "gnome-display-properties");
+
   vbox = gtk_vbox_new (FALSE, 18);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
                       vbox, FALSE, FALSE, 0);
   gtk_widget_show (vbox);
-  
+
   for (i = 0; i < info->n_screens; i++)
     {
       screen_widget = create_screen_widgets (&info->screens[i], i, info->n_screens == 1);
@@ -654,7 +654,7 @@ create_dialog (struct DisplayInfo *info)
       strcmp (hostname, "localhost") != 0 &&
       strcmp (hostname, "localhost.localdomain") != 0)
     {
-      
+
       str = g_strdup_printf (_("_Make default for this computer (%s) only"), hostname);
       per_computer_check = gtk_check_button_new_with_mnemonic (str);
 
@@ -668,12 +668,12 @@ create_dialog (struct DisplayInfo *info)
 
       info->was_per_computer = resolution != NULL;
       g_free (resolution);
-      
+
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (per_computer_check),
 				    info->was_per_computer);
-      
+
       gtk_widget_show (per_computer_check);
-      
+
       wrapped = wrap_in_label (per_computer_check, _("Options"));
       gtk_box_pack_start (GTK_BOX (vbox),
 			  wrapped, FALSE, FALSE, 0);
@@ -681,7 +681,7 @@ create_dialog (struct DisplayInfo *info)
     }
 
   info->per_computer_check = per_computer_check;
-  
+
   return dialog;
 }
 
@@ -703,7 +703,7 @@ save_timeout_callback (gpointer _data)
 {
   struct TimeoutData *data = _data;
   char *str;
-  
+
   data->time--;
 
   if (data->time == 0)
@@ -716,7 +716,7 @@ save_timeout_callback (gpointer _data)
   str = timeout_string (data->time);
   gtk_label_set_text (data->label, str);
   g_free (str);
-  
+
   return TRUE;
 }
 
@@ -740,14 +740,14 @@ run_revert_dialog (struct DisplayInfo *info)
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   gtk_window_set_title (GTK_WINDOW (dialog), _("Keep Resolution"));
   gtk_window_set_position(GTK_WINDOW(dialog),GTK_WIN_POS_CENTER_ALWAYS);
-  
+
   label = gtk_label_new (NULL);
   str = g_strdup_printf ("<b>%s</b>", _("Do you want to keep this resolution?"));
   gtk_label_set_markup (GTK_LABEL (label), str);
   g_free (str);
   image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_QUESTION, GTK_ICON_SIZE_DIALOG);
   gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
-  
+
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
   gtk_label_set_selectable (GTK_LABEL (label), TRUE);
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
@@ -768,14 +768,14 @@ run_revert_dialog (struct DisplayInfo *info)
   gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
   gtk_dialog_add_buttons (GTK_DIALOG (dialog),_("Use _previous resolution"), GTK_RESPONSE_NO, _("_Keep resolution"), GTK_RESPONSE_YES, NULL);
-  
+
   gtk_widget_show_all (hbox);
 
   timeout_data.time = REVERT_COUNT;
   timeout_data.label = GTK_LABEL (label_sec);
   timeout_data.dialog = GTK_DIALOG (dialog);
   timeout_data.timed_out = FALSE;
-  
+
   timeout = g_timeout_add (1000, save_timeout_callback, &timeout_data);
   res = gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -783,7 +783,7 @@ run_revert_dialog (struct DisplayInfo *info)
     g_source_remove (timeout);
 
   gtk_widget_destroy (dialog);
-  
+
   return res == GTK_RESPONSE_YES;
 }
 
@@ -801,7 +801,7 @@ save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_
   int i;
 
   gethostname (hostname, sizeof(hostname));
-  
+
   client = gconf_client_get_default ();
 
   if (clear_computer)
@@ -818,7 +818,7 @@ save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_
 	  g_free (key);
 	}
     }
-  
+
   if (save_computer)
     {
       path = g_strconcat ("/desktop/gnome/screen/",
@@ -828,7 +828,7 @@ save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_
     }
   else
     path = g_strdup ("/desktop/gnome/screen/default/");
-	       
+
   for (i = 0; i < info->n_screens; i++)
     {
       struct ScreenInfo *screen_info = &info->screens[i];
@@ -841,11 +841,11 @@ save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_
       str = g_strdup_printf ("%dx%d",
 			     screen_info->sizes[new_res].width,
 			     screen_info->sizes[new_res].height);
-      
+
       res = gconf_client_set_string  (client, key, str, NULL);
       g_free (str);
       g_free (key);
-      
+
       key = g_strdup_printf ("%s%d/rate", path, i);
       res = gconf_client_set_int  (client, key, new_rate, NULL);
       g_free (key);
@@ -870,7 +870,7 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
     case GTK_RESPONSE_APPLY:
       save_computer = info->per_computer_check != NULL && gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (info->per_computer_check));
       clear_computer = !save_computer && info->was_per_computer;
-	  
+
       if (apply_config (info))
 	{
 	  gtk_widget_hide(GTK_WIDGET(dialog));
@@ -881,7 +881,7 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
 	      return;
 	    }
 	}
-      
+
       save_to_gconf (info, save_computer, clear_computer);
       gtk_main_quit ();
       break;
@@ -900,7 +900,7 @@ main (int argc, char *argv[])
   GtkWidget *dialog;
   struct DisplayInfo *info;
   Display *xdisplay;
- 
+
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
@@ -912,11 +912,11 @@ main (int argc, char *argv[])
 
   display = gdk_display_get_default ();
   xdisplay = gdk_x11_display_get_xdisplay (display);
-  
+
   if (!XRRQueryExtension (xdisplay, &event_base, &error_base) ||
       XRRQueryVersion (xdisplay, &major, &minor) == 0)
     {
-      GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+      GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
 						   _("The X Server does not support the XRandR extension.  Runtime resolution changes to the display size are not available."));
       gtk_dialog_run (GTK_DIALOG (msg_dialog));
       gtk_widget_destroy (msg_dialog);
@@ -924,13 +924,13 @@ main (int argc, char *argv[])
     }
   else if (major != 1 || minor < 1)
     {
-      GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+      GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
 						      _("The version of the XRandR extension is incompatible with this program. Runtime changes to the display size are not available."));
       gtk_dialog_run (GTK_DIALOG (msg_dialog));
       gtk_widget_destroy (msg_dialog);
       exit (0);
     }
-  
+
   info = read_display_info (display);
   dialog = create_dialog (info);
 
