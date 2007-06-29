@@ -1,3 +1,18 @@
+2007-06-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* gnome-network-preferences.c: (cb_http_details_button_clicked):
+	* gnome-network-preferences.desktop.in.in:
+	* icons/16x16/gnome-network-preferences.png:
+	* icons/16x16/gnome-network-preferences.svg:
+	* icons/22x22/gnome-network-preferences.png:
+	* icons/22x22/gnome-network-preferences.svg:
+	* icons/24x24/gnome-network-preferences.png:
+	* icons/32x32/gnome-network-preferences.png:
+	* icons/32x32/gnome-network-preferences.svg:
+	* icons/scalable/gnome-network-preferences.svg: add and use new
+	icon by Josef Vybíral <cornelius@vybiral.info> (closes bug #399051)
+
 2007-04-27  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* gnome-network-preferences.desktop.in.in: renamed Bugzilla product.
@@ -32,14 +47,14 @@
 
 2006-08-07  Sebastien Bacher  <seb128@debian.org>
 
-	* gnome-network-preferences.glade: 
+	* gnome-network-preferences.glade:
 	set "label for" and "labelled by" properties for the capplet,
 	patch by Willie Walker <william.walker@sun.com> (Closes: #342121)
 
 2006-07-23  Sebastien Bacher  <seb128@debian.org>
 
-	* gnome-network-preferences.desktop.in.in: don't list the Application 
-	category, patch by Vincent Fretin <vincent.fretin@gmail.com> 
+	* gnome-network-preferences.desktop.in.in: don't list the Application
+	category, patch by Vincent Fretin <vincent.fretin@gmail.com>
 	(Closes: #344321)
 
 2006-01-27  Crispin Flowerday  <gnome@flowerday.cx>
@@ -53,7 +68,7 @@
 
 2005-05-22  Sebastien Bacher  <seb128@debian.org>
 
-	* gnome-network-preferences.glade: Use HIG compliant spacing 
+	* gnome-network-preferences.glade: Use HIG compliant spacing
 	for the proxy dialog, patch by dennis_cranston@yahoo.com
 	(Closes: #167856).
 
@@ -84,12 +99,12 @@
 
 	* gnome-network-preferences.glade:
 	patch from Heikki Paajanen <hepaajan@iki.fi> (based on the patch
-	from Andrew Johnson <acjgenius@earthlink.net>) 
+	from Andrew Johnson <acjgenius@earthlink.net>)
 	to not set "close" as the default button (Closes: #98202).
 
 2004-12-15  Sebastien Bacher  <seb128@debian.org>
 
-	* gnome-network-preferences.desktop.in.in: changed the tooltip 
+	* gnome-network-preferences.desktop.in.in: changed the tooltip
 	to respect the HIG.
 
 2004-12-03  Sebastien Bacher  <seb128@debian.org>
@@ -106,7 +121,7 @@
 2004-11-09  Mark McLoughlin  <mark@skynet.ie>
 
 	* Makefile.am: install .desktop file in $(datadir)/applications
-	
+
 	* gnome-network-preferences.desktop.in: add OnlyShowIn=GNOME;
 
 2004-10-14  Jody Goldberg <jody@gnome.org>
@@ -115,7 +130,7 @@
 
 2004-06-26  Muktha <muktha.narayan@wipro.com>
 
-	* gnome-network-preferences.glade: Allow only numeric values in 
+	* gnome-network-preferences.glade: Allow only numeric values in
 	spin buttons. Fixes #138654.
 
 2004-06-21  David Sedeño <david@alderia.com>
@@ -125,7 +140,7 @@
 
 2004-05-18  Padraig O'Briain <padraig.obriain@sun.com>
 
-	* gnome-network-preferences.glade: Mark accessible names for 
+	* gnome-network-preferences.glade: Mark accessible names for
 	translation. Fixes bug #136291.
 
 2004-04-15  Jody Goldberg <jody@gnome.org>
@@ -195,7 +210,7 @@ Tue Aug 26 15:00:34 2003  Jonathan Blandford  <jrb@redhat.com>
 	#120111
 
 2003-07-18  Dennis Cranston <dennis_cranston at yahoo com>
-	
+
 	* gnome-network-capplet.png:  New file.
 
 	* Makefile.am, gnome-network-preferences.c:  Add the missing
@@ -219,7 +234,7 @@ Tue Aug 26 15:00:34 2003  Jonathan Blandford  <jrb@redhat.com>
 	* Release 2.3.3
 
 2003-05-15  Malcolm Tredinnick <malcolm@commsecure.com.au>
-	
+
 	* gnome-network-preferences.desktop.in: Use Header
 	capitalisation for menu items. Fixes bug #112939.
 
@@ -231,7 +246,7 @@ Tue Aug 26 15:00:34 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-network-preferences.c: Added "/system/proxy" and
 	"/system/http_proxy" to the list of directories GConfClient
-	will watch. Fixes #98596 
+	will watch. Fixes #98596
 
 Tue Feb  4 17:09:18 2003  Jonathan Blandford  <jrb@redhat.com>
 

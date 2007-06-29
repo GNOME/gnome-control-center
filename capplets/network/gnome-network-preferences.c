@@ -79,7 +79,7 @@ create_listmodel(void)
 	GtkListStore *store;
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
-	
+
 	return GTK_TREE_MODEL(store);
 }
 
@@ -130,7 +130,7 @@ cb_add_url (GtkButton *button, gpointer data)
 	ignore_hosts = g_slist_append(ignore_hosts, new_url);
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
 	gtk_entry_set_text(GTK_ENTRY(WID("entry_url")), "");
-		
+
 	client = gconf_client_get_default ();
 	gconf_client_set_list (client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
 	g_object_unref (client);
@@ -166,7 +166,7 @@ cb_remove_url (GtkButton *button, gpointer data)
 
 		g_free(url);
 		populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
-		
+
 		client = gconf_client_get_default ();
 		gconf_client_set_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
 		g_object_unref (client);
@@ -246,13 +246,13 @@ cb_http_details_button_clicked (GtkWidget *button,
 			NULL, HTTP_AUTH_USER_KEY, WID ("username_entry"),
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, HTTP_AUTH_PASSWD_KEY, WID ("password_entry"), 
+			NULL, HTTP_AUTH_PASSWD_KEY, WID ("password_entry"),
 			NULL));
 
 	g_signal_connect (widget, "response",
 			  G_CALLBACK (cb_details_dialog_response), NULL);
-	
-	capplet_set_icon (widget, "stock_proxy");
+
+	capplet_set_icon (widget, "gnome-network-preferences");
 
 	gtk_widget_show_all (widget);
 }
@@ -266,41 +266,41 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	gchar *http_proxy;
 	gint http_port;
 	gchar *host;
-	
+
 	client = gconf_client_get_default ();
 	same_proxy = gconf_client_get_bool (client, USE_SAME_PROXY_KEY, NULL);
-	
+
 	http_proxy = gconf_client_get_string (client, HTTP_PROXY_HOST_KEY, NULL);
 	http_port = gconf_client_get_int (client, HTTP_PROXY_PORT_KEY, NULL);
-	
-	if (same_proxy) 
+
+	if (same_proxy)
 	{
 		/* Save the old values */
 		host = gconf_client_get_string (client, SECURE_PROXY_HOST_KEY, NULL);
 		gconf_client_set_string (client, OLD_SECURE_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, OLD_SECURE_PROXY_PORT_KEY, 
+		gconf_client_set_int (client, OLD_SECURE_PROXY_PORT_KEY,
 			gconf_client_get_int (client, SECURE_PROXY_PORT_KEY, NULL), NULL);
 		g_free (host);
-			
+
 		host = gconf_client_get_string (client, FTP_PROXY_HOST_KEY, NULL);
 		gconf_client_set_string (client, OLD_FTP_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, OLD_FTP_PROXY_PORT_KEY, 
+		gconf_client_set_int (client, OLD_FTP_PROXY_PORT_KEY,
 			gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL), NULL);
 		g_free (host);
 
 		host = gconf_client_get_string (client, SOCKS_PROXY_HOST_KEY, NULL);
 		gconf_client_set_string (client, OLD_SOCKS_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, OLD_SOCKS_PROXY_PORT_KEY, 
+		gconf_client_set_int (client, OLD_SOCKS_PROXY_PORT_KEY,
 			gconf_client_get_int (client, SOCKS_PROXY_PORT_KEY, NULL), NULL);
 		g_free (host);
 
 		/* Set the new values */
 		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, http_proxy, NULL);
 		gconf_client_set_int (client, SECURE_PROXY_PORT_KEY, http_port, NULL);
-		
+
 		gconf_client_set_string (client, FTP_PROXY_HOST_KEY, http_proxy, NULL);
 		gconf_client_set_int (client, FTP_PROXY_PORT_KEY, http_port, NULL);
-		
+
 		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, http_proxy, NULL);
 		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY, http_port, NULL);
 	}
@@ -308,23 +308,23 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	{
 		host = gconf_client_get_string (client, OLD_SECURE_PROXY_HOST_KEY, NULL);
 		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, SECURE_PROXY_PORT_KEY, 
+		gconf_client_set_int (client, SECURE_PROXY_PORT_KEY,
 			gconf_client_get_int (client, OLD_SECURE_PROXY_PORT_KEY, NULL), NULL);
 		g_free (host);
-			
+
 		host = gconf_client_get_string (client, OLD_FTP_PROXY_HOST_KEY, NULL);
 		gconf_client_set_string (client, FTP_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, FTP_PROXY_PORT_KEY, 
+		gconf_client_set_int (client, FTP_PROXY_PORT_KEY,
 			gconf_client_get_int (client, OLD_FTP_PROXY_PORT_KEY, NULL), NULL);
 		g_free (host);
 
 		host = gconf_client_get_string (client, OLD_SOCKS_PROXY_HOST_KEY, NULL);
 		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY, 
+		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY,
 			gconf_client_get_int (client, OLD_SOCKS_PROXY_PORT_KEY, NULL), NULL);
 		g_free (host);
 	}
-	
+
 	/* Set the proxy entries insensitive if we are using the same proxy for all */
 	gtk_widget_set_sensitive (WID ("secure_host_entry"), !same_proxy);
 	gtk_widget_set_sensitive (WID ("secure_port_spinbutton"), !same_proxy);
@@ -366,19 +366,19 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 	GSList *mode_group;
 	int mode;
 	GConfClient *client;
-	
+
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(widget)))
 		return;
-		
-	mode_group = g_slist_copy (gtk_radio_button_get_group 
+
+	mode_group = g_slist_copy (gtk_radio_button_get_group
 		(GTK_RADIO_BUTTON (WID ("none_radiobutton"))));
 	mode_group = g_slist_reverse (mode_group);
 	mode = g_slist_index (mode_group, widget);
 	g_slist_free (mode_group);
-	
-	gtk_widget_set_sensitive (WID ("manual_box"), 
+
+	gtk_widget_set_sensitive (WID ("manual_box"),
 				  mode == PROXYMODE_MANUAL);
-	gtk_widget_set_sensitive (WID ("same_proxy_checkbutton"), 
+	gtk_widget_set_sensitive (WID ("same_proxy_checkbutton"),
 				  mode == PROXYMODE_MANUAL);
 	gtk_widget_set_sensitive (WID ("auto_box"),
 				  mode == PROXYMODE_AUTO);
@@ -407,7 +407,7 @@ setup_dialog (GladeXML *dialog)
 	GType mode_type = 0;
 	GConfClient *client;
 	gint port_value;
-	
+
 	mode_type = g_enum_register_static ("NetworkPreferencesProxyType",
 				            proxytype_values);
 
@@ -419,24 +419,24 @@ setup_dialog (GladeXML *dialog)
 	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("none_radiobutton"))->child), TRUE);
 	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("manual_radiobutton"))->child), TRUE);
 	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("auto_radiobutton"))->child), TRUE);
-	
+
 	/* Mode */
 	mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("none_radiobutton")));
 	connect_sensitivity_signals (dialog, mode_group);
 
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_select_radio_with_enum (NULL, 
-			PROXY_MODE_KEY, mode_group, mode_type, 
+	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_select_radio_with_enum (NULL,
+			PROXY_MODE_KEY, mode_group, mode_type,
 			TRUE, NULL));
-	
+
 	/* Use same proxy for all protocols */
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_boolean (NULL, 
+	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_boolean (NULL,
 			USE_SAME_PROXY_KEY, WID ("same_proxy_checkbutton"), NULL));
-			
+
 	g_signal_connect (G_OBJECT (WID ("same_proxy_checkbutton")),
 			"toggled",
 			G_CALLBACK (cb_use_same_proxy_checkbutton_clicked),
 			dialog);
-	
+
 	/* Http */
 	port_value = gconf_client_get_int (client, HTTP_PROXY_PORT_KEY, NULL);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("http_port_spinbutton")), (gdouble) port_value);
@@ -445,7 +445,7 @@ setup_dialog (GladeXML *dialog)
 			"conv-from-widget-cb", extract_proxy_host,
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, HTTP_PROXY_PORT_KEY, WID ("http_port_spinbutton"), 
+			NULL, HTTP_PROXY_PORT_KEY, WID ("http_port_spinbutton"),
 			NULL));
 	g_signal_connect (G_OBJECT (WID ("details_button")),
 			  "clicked",
@@ -460,7 +460,7 @@ setup_dialog (GladeXML *dialog)
 			"conv-from-widget-cb", extract_proxy_host,
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, SECURE_PROXY_PORT_KEY, WID ("secure_port_spinbutton"), 
+			NULL, SECURE_PROXY_PORT_KEY, WID ("secure_port_spinbutton"),
 			NULL));
 
 	/* Ftp */
@@ -471,7 +471,7 @@ setup_dialog (GladeXML *dialog)
 			"conv-from-widget-cb", extract_proxy_host,
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, FTP_PROXY_PORT_KEY, WID ("ftp_port_spinbutton"), 
+			NULL, FTP_PROXY_PORT_KEY, WID ("ftp_port_spinbutton"),
 			NULL));
 
 	/* Socks */
@@ -482,7 +482,7 @@ setup_dialog (GladeXML *dialog)
 			"conv-from-widget-cb", extract_proxy_host,
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, SOCKS_PROXY_PORT_KEY, WID ("socks_port_spinbutton"), 
+			NULL, SOCKS_PROXY_PORT_KEY, WID ("socks_port_spinbutton"),
 			NULL));
 
 	/* Set the proxy entries insensitive if we are using the same proxy for all */
@@ -513,16 +513,16 @@ setup_dialog (GladeXML *dialog)
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
 	config_treeview(GTK_TREE_VIEW(WID("treeview_ignore_host")), model);
 
-	g_signal_connect (WID ("button_add_url"), "clicked", 
+	g_signal_connect (WID ("button_add_url"), "clicked",
 						G_CALLBACK (cb_add_url), dialog);
-	g_signal_connect (WID ("entry_url"), "activate", 
+	g_signal_connect (WID ("entry_url"), "activate",
 						G_CALLBACK (cb_add_url), dialog);
-	g_signal_connect (WID ("button_remove_url"), "clicked", 
+	g_signal_connect (WID ("button_remove_url"), "clicked",
 						G_CALLBACK (cb_remove_url), dialog);
 }
 
 int
-main (int argc, char **argv) 
+main (int argc, char **argv)
 {
 	GnomeProgram *program;
 	GladeXML    *dialog;
