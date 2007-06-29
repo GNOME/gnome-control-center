@@ -852,14 +852,14 @@ gsd_media_keys_window_init (GsdMediaKeysWindow *window)
 		gtk_window_set_default_size (GTK_WINDOW (window), 300, 300);
 		g_signal_connect (window, "expose-event", G_CALLBACK (on_expose_event), window);
 	} else {
-		GtkWidget *vbox;
+		GtkWidget *frame;
 
-		window->priv->xml = glade_xml_new (GNOMECC_GLADE_DIR "/acme.glade", "acme_vbox", NULL);
+		window->priv->xml = glade_xml_new (GNOMECC_GLADE_DIR "/acme.glade", "acme_frame", NULL);
 
-		vbox = glade_xml_get_widget (window->priv->xml, "acme_vbox");
-		if (vbox != NULL) {
-			gtk_container_add (GTK_CONTAINER (window), vbox);
-			gtk_widget_show_all (vbox);
+		frame = glade_xml_get_widget (window->priv->xml, "acme_frame");
+		if (frame != NULL) {
+			gtk_container_add (GTK_CONTAINER (window), frame);
+			gtk_widget_show_all (frame);
 		}
 	}
 }

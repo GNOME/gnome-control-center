@@ -19,42 +19,48 @@
   <property name="urgency_hint">False</property>
 
   <child>
-    <widget class="GtkVBox" id="acme_vbox">
-      <property name="border_width">12</property>
+    <widget class="GtkFrame" id="acme_frame">
+      <property name="shadow_type">GTK_SHADOW_OUT</property>
       <property name="visible">True</property>
-      <property name="homogeneous">False</property>
-      <property name="spacing">6</property>
 
       <child>
-	<widget class="GtkImage" id="acme_image">
+	<widget class="GtkVBox" id="acme_vbox">
+	  <property name="border_width">12</property>
 	  <property name="visible">True</property>
-	  <property name="icon_size">6</property>
-	  <property name="icon_name">stock_volume-max</property>
-	  <property name="xalign">0.5</property>
-	  <property name="yalign">0.5</property>
-	  <property name="xpad">0</property>
-	  <property name="ypad">0</property>
-	</widget>
-	<packing>
-	  <property name="padding">0</property>
-	  <property name="expand">True</property>
-	  <property name="fill">True</property>
-	</packing>
-      </child>
+	  <property name="homogeneous">False</property>
+	  <property name="spacing">6</property>
 
-      <child>
-	<widget class="GtkProgressBar" id="acme_volume_progressbar">
-	  <property name="visible">True</property>
-	  <property name="orientation">GTK_PROGRESS_LEFT_TO_RIGHT</property>
-	  <property name="fraction">0</property>
-	  <property name="pulse_step">0.10000000149</property>
-	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
-	</widget>
-	<packing>
-	  <property name="padding">0</property>
-	  <property name="expand">False</property>
-	  <property name="fill">False</property>
-	</packing>
+	  <child>
+	    <widget class="GtkImage" id="acme_image">
+	      <property name="visible">True</property>
+	      <property name="icon_size">6</property>
+	      <property name="icon_name">stock_volume-max</property>
+	      <property name="xalign">0.5</property>
+	      <property name="yalign">0.5</property>
+	      <property name="xpad">0</property>
+	      <property name="ypad">0</property>
+	    </widget>
+	    <packing>
+	      <property name="padding">0</property>
+	      <property name="expand">True</property>
+	      <property name="fill">True</property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkProgressBar" id="acme_volume_progressbar">
+	      <property name="visible">True</property>
+	      <property name="orientation">GTK_PROGRESS_LEFT_TO_RIGHT</property>
+	      <property name="fraction">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	    </widget>
+	    <packing>
+	      <property name="padding">0</property>
+	      <property name="expand">False</property>
+	      <property name="fill">False</property>
+	    </packing>
+	  </child>
+        </widget>
       </child>
     </widget>
   </child>
