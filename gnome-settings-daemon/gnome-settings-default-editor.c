@@ -67,9 +67,9 @@ GType
 gnome_settings_module_default_editor_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleDefaultEditorClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -80,12 +80,12 @@ gnome_settings_module_default_editor_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_default_editor_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleDefaultEditor",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -109,8 +109,8 @@ print_mime_app (const char *mime_type)
 		   "\t   command: %s\n"
 		   "\tneeds term: %s\n",
 		   mime_type, mime_app,
-		   mime_app->id, 
-		   mime_app->name, 
+		   mime_app->id,
+		   mime_app->name,
 		   mime_app->command,
 		   mime_app->requires_terminal ? "Yes" : "No");
 }
@@ -150,7 +150,7 @@ vfs_change_cb (GnomeVFSMIMEMonitor *monitor, GConfClient *client)
 
 	if (!sync_changes)
 		return;
-	
+
 	star_app  = gnome_vfs_mime_get_default_application ("text/*");
 	plain_app = gnome_vfs_mime_get_default_application ("text/plain");
 

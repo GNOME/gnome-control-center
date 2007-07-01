@@ -79,9 +79,9 @@ GType
 gnome_settings_module_sound_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleSoundClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -92,12 +92,12 @@ gnome_settings_module_sound_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_sound_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleSound",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -109,10 +109,10 @@ gnome_settings_module_sound_get_runlevel (GnomeSettingsModule *module)
 
 /* start_gnome_sound
  *
- * Start GNOME sound. 
+ * Start GNOME sound.
  */
 static void
-start_gnome_sound (void) 
+start_gnome_sound (void)
 {
 	gnome_sound_init (NULL);
 	if (gnome_sound_connection_get () < 0)
@@ -125,10 +125,10 @@ static gboolean set_esd_standby = TRUE;
 
 /* stop_gnome_sound
  *
- * Stop GNOME sound. 
+ * Stop GNOME sound.
  */
 static void
-stop_gnome_sound (void) 
+stop_gnome_sound (void)
 {
 #ifdef HAVE_ESD
 	/* Can't think of a way to do this reliably, so we fake it for now */
@@ -145,7 +145,7 @@ struct reload_foreach_closure {
 
 /* reload_foreach_cb
  *
- * For a given SoundEvent, reload the sound file associate with the event. 
+ * For a given SoundEvent, reload the sound file associate with the event.
  */
 static void
 reload_foreach_cb (SoundEvent *event, gpointer data)
@@ -231,7 +231,7 @@ apply_settings (void)
 	closure.enable_system_sounds = event_sounds;
 
 	if (enable_sound) {
-		if (gnome_sound_connection_get () < 0) 
+		if (gnome_sound_connection_get () < 0)
 			start_gnome_sound ();
 #ifdef HAVE_ESD
 		else if (set_esd_standby) {
@@ -249,11 +249,11 @@ apply_settings (void)
 	if (enable_sound &&
 	    (!inited || event_changed_old != event_changed_new)) {
 		SoundProperties *props;
-		
+
 		inited = TRUE;
 		event_changed_old = event_changed_new;
 
-		
+
 		props = sound_properties_new ();
 		sound_properties_add_defaults (props, NULL);
 		sound_properties_foreach (props, reload_foreach_cb, &closure);

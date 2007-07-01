@@ -43,9 +43,9 @@ GType
 gnome_settings_module_typing_break_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleTypingBreakClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -56,12 +56,12 @@ gnome_settings_module_typing_break_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_typing_break_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleTypingBreak",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -123,7 +123,7 @@ child_exited_callback (VteReaper *reaper,
 	}
 }
 
-static void 
+static void
 typing_break_callback (GConfEntry *entry)
 {
 	if (! strcmp (entry->key, "/desktop/gnome/typing_break/enabled")) {

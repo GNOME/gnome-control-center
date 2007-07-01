@@ -71,7 +71,7 @@ gnome_settings_module_accessibility_keyboard_get_type (void)
 	static GType module_type = 0;
 
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleAccessibilityKeyboardClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -176,7 +176,7 @@ set_int (GConfClient *client, GConfChangeSet *cs,
 	 char const *key, int val)
 {
 	gconf_change_set_set_int (cs, key, val);
-#ifdef DEBUG_ACCESSIBILITY	
+#ifdef DEBUG_ACCESSIBILITY
 		if (val != gconf_client_get_int (client, key, NULL)) {
 			g_warning ("%s changed", key);
 		}
@@ -366,7 +366,7 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 		d ("cancelling AccessX request");
 		if (revert_controls_mask == XkbStickyKeysMask) {
 			success = gconf_client_set_bool (client, CONFIG_ROOT "/stickykeys_enable", !enabled, &err);
-			if (err != NULL) 
+			if (err != NULL)
 				g_error_free (err);
 		}
 		if (revert_controls_mask == XkbSlowKeysMask) {
@@ -389,7 +389,7 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 									  0,
 									  GTK_MESSAGE_ERROR,
 									  GTK_BUTTONS_CLOSE,
-									  _("There was an error displaying help: %s"), 
+									  _("There was an error displaying help: %s"),
 									  err->message);
 			g_signal_connect (G_OBJECT (error_dialog),
 					  "response",
@@ -465,7 +465,7 @@ ax_slowkeys_warning_dialog_post (gboolean enabled)
 			     _("Slow Keys Alert"),
 			     _("You just held down the Shift key for 8 seconds.  This is the shortcut "
 			       "for the Slow Keys feature, which affects the way your keyboard works."),
-			     enabled ? _("Do you want to activate Slow Keys?") : 
+			     enabled ? _("Do you want to activate Slow Keys?") :
 			     _("Do you want to deactivate Slow Keys?"),
 			     enabled ? _("_Activate") : _("_Deactivate"),
 			     enabled ? _("Do_n't activate") : _("Do_n't deactivate"));
@@ -479,10 +479,10 @@ ax_stickykeys_warning_dialog_post (gboolean enabled)
 			     &stickykeys_shortcut_val,
 			     _("Sticky Keys Alert"),
 			     enabled ? _("You just pressed the Shift key 5 times in a row.  This is the shortcut "
-					 "for the Sticky Keys feature, which affects the way your keyboard works.") : 
+					 "for the Sticky Keys feature, which affects the way your keyboard works.") :
 			     _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  "
 			       "This turns off the Sticky Keys feature, which affects the way your keyboard works."),
-			     enabled ? _("Do you want to activate Sticky Keys?") : 
+			     enabled ? _("Do you want to activate Sticky Keys?") :
 			     _("Do you want to deactivate Sticky Keys?"),
 			     enabled ? _("_Activate") : _("_Deactivate"),
 			     enabled ? _("Do_n't activate") : _("Do_n't deactivate"));
@@ -553,7 +553,7 @@ set_gconf_from_server (GConfEntry *ignored)
 		desc->ctrls->slow_keys_delay);
 
 	stickykeys_changed = set_bool (client, cs, in_gconf, CONFIG_ROOT "/stickykeys_enable",
-				       desc->ctrls->enabled_ctrls & XkbStickyKeysMask);  
+				       desc->ctrls->enabled_ctrls & XkbStickyKeysMask);
 	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/stickykeys_two_key_off",
 		desc->ctrls->ax_options & XkbAX_TwoKeysMask);
 	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/stickykeys_modifier_beep",
@@ -563,10 +563,10 @@ set_gconf_from_server (GConfEntry *ignored)
 		desc->ctrls->ax_options & XkbAX_IndicatorFBMask);
 
 	if (!changed && stickykeys_changed^slowkeys_changed) {
-		/* 
+		/*
 		 * sticky or slowkeys has changed, singly, without our intervention.
 		 * 99% chance this is due to a keyboard shortcut being used.
-		 * we need to detect via this hack until we get 
+		 * we need to detect via this hack until we get
 		 *  XkbAXN_AXKWarning notifications working (probable XKB bug),
 		 *  at which time we can directly intercept such shortcuts instead.
 		 * See cb_xkb_event_filter () below.
@@ -575,7 +575,7 @@ set_gconf_from_server (GConfEntry *ignored)
                 /* sanity check: are keyboard shortcuts available? */
 		if (desc->ctrls->enabled_ctrls & XkbAccessXKeysMask) {
 			if (slowkeys_changed)
-				ax_slowkeys_warning_dialog_post (desc->ctrls->enabled_ctrls & XkbSlowKeysMask);	
+				ax_slowkeys_warning_dialog_post (desc->ctrls->enabled_ctrls & XkbSlowKeysMask);
 			else
 				ax_stickykeys_warning_dialog_post (desc->ctrls->enabled_ctrls & XkbStickyKeysMask);
 		}
@@ -592,7 +592,7 @@ set_gconf_from_server (GConfEntry *ignored)
 	gconf_change_set_unref (cs);
 }
 
-static GdkFilterReturn 
+static GdkFilterReturn
 cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *ignored1, gpointer ignored2)
 {
 	XEvent   *xev   = (XEvent *) xevent;
@@ -607,8 +607,8 @@ cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *ignored1, gpointer ignored2)
 		 xkbEv->any.xkb_type == XkbAccessXNotify) {
 		if (xkbEv->accessx.detail == XkbAXN_AXKWarning) {
 			d ("About to turn on an AccessX feature from the keyboard!");
-			/* 
-			 * TODO: when XkbAXN_AXKWarnings start working, we need to 
+			/*
+			 * TODO: when XkbAXN_AXKWarnings start working, we need to
 			 * invoke ax_keys_warning_dialog_run here instead of in
 			 * set_gconf_from_server().
 			 */
@@ -630,7 +630,7 @@ static gboolean
 gnome_settings_module_accessibility_keyboard_start (GnomeSettingsModule *module)
 {
 	guint event_mask = XkbControlsNotifyMask;
-#ifdef DEBUG_ACCESSIBILITY	
+#ifdef DEBUG_ACCESSIBILITY
 	event_mask = XkbControlsNotifyMask | XkbAccessXNotifyMask; /* make default when AXN_AXKWarning works */
 #endif
 

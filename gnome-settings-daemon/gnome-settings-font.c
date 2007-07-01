@@ -65,9 +65,9 @@ GType
 gnome_settings_module_font_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleFontClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -78,12 +78,12 @@ gnome_settings_module_font_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_font_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleFont",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -181,7 +181,7 @@ load_cursor (GConfClient *client)
 	}
 
 	dir = opendir (dir_name);
-  
+
 	while ((file_dirent = readdir (dir)) != NULL) {
 		struct stat st;
 		gchar *link_name;
@@ -190,9 +190,9 @@ load_cursor (GConfClient *client)
 		if (lstat (link_name, &st)) {
 			g_free (link_name);
 			continue;
-		} 
+		}
 		g_free (link_name);
-      	  
+
 		if (S_ISLNK (st.st_mode))
 			unlink (link_name);
 	}
@@ -252,7 +252,7 @@ load_cursor (GConfClient *client)
 
 	/* if there was an error setting the new path, revert */
 	if (gdk_error_trap_pop ())
-		XSetFontPath (gdk_display, font_path, n_fonts); 
+		XSetFontPath (gdk_display, font_path, n_fonts);
 
 	XFreeFontPath (font_path);
 

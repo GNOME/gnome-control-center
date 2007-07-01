@@ -67,9 +67,9 @@ GType
 gnome_settings_module_gtk1_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleGtk1Class),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -80,12 +80,12 @@ gnome_settings_module_gtk1_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_gtk1_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleGtk1",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -111,7 +111,7 @@ make_contents (const char *filename)
 					"include \"%s\"\n"
 					"\n",
 					filename);
-	g_string_append_printf (result, 
+	g_string_append_printf (result,
                                 "include \"%s/.gtkrc.mine\"\n",
 				g_get_home_dir ());
 
@@ -153,11 +153,11 @@ write_contents (const char *rc_filename,
 	if (rename (tmp_filename, rc_filename) < 0) {
 		g_warning ("Cannot move %s to %s: %s", tmp_filename, rc_filename, g_strerror (errno));
 		goto bail1;
-		
+
 	}
 
 	g_free (tmp_filename);
-	
+
 	return TRUE;
 
  bail0:
@@ -178,13 +178,13 @@ send_change_message (void)
 {
 	GdkEventClient sev;
 	int i;
-  
+
 	for(i = 0; i < 5; i++)
 		sev.data.l[i] = 0;
-	
+
 	sev.data_format = 32;
 	sev.message_type = gdk_atom_intern("_GTK_READ_RCFILES", FALSE);
-	
+
 	gdk_event_send_clientmessage_toall ((GdkEvent *) &sev);
 }
 
@@ -195,7 +195,7 @@ check_filename (char       *base_dir,
 		const char *theme)
 {
 	char *theme_filename = g_build_filename (base_dir, theme, "gtk", "gtkrc", NULL);
-	
+
 	if (!g_file_test (theme_filename, G_FILE_TEST_EXISTS)) {
 		g_free (theme_filename);
 		theme_filename = NULL;
@@ -249,16 +249,16 @@ apply_settings (void)
 	}
 
 	rc_filename = g_build_filename (g_get_home_dir(), ".gtkrc-1.2-gnome2", NULL);
-	
+
 	if (!g_file_get_contents (rc_filename, &current_contents, &current_length, &err) &&
 	    !g_error_matches (err, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
 		g_warning ("Can't get contents of %s: %s", rc_filename, err->message);
 		g_clear_error (&err);
 	}
-	
+
 	new_contents = make_contents (theme_filename);
 	g_free (theme_filename);
-	
+
 	if (!current_contents ||
 	    current_length != strlen (new_contents) ||
 	    memcmp (current_contents, new_contents, current_length) != 0) {

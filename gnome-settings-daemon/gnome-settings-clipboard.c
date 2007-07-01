@@ -104,9 +104,9 @@ gnome_settings_module_clipboard_init (GnomeSettingsModuleClipboard *module)
 	module->display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 }
 
-/* We need to use reference counting for the target data, since we may 
+/* We need to use reference counting for the target data, since we may
  * need to keep the data around after loosing the CLIPBOARD ownership
- * to complete incremental transfers. 
+ * to complete incremental transfers.
  */
 static TargetData *
 target_data_ref (TargetData *data)
@@ -153,7 +153,7 @@ send_selection_notify (GnomeSettingsModuleClipboard *module_cp, Bool success)
 	XSendEvent (module_cp->display, module_cp->requestor,
 		    False, NoEventMask, (XEvent *)&notify);
 	XSync (module_cp->display, False);
-  
+
 	gdk_error_trap_pop ();
 }
 
@@ -174,7 +174,7 @@ finish_selection_request (GnomeSettingsModuleClipboard *module_cp, XEvent *xev, 
 
 	gdk_error_trap_push ();
 
-	XSendEvent (xev->xselectionrequest.display, 
+	XSendEvent (xev->xselectionrequest.display,
 		    xev->xselectionrequest.requestor,
 		    False, NoEventMask, (XEvent *) &notify);
 	XSync (module_cp->display, False);
@@ -182,7 +182,7 @@ finish_selection_request (GnomeSettingsModuleClipboard *module_cp, XEvent *xev, 
 	gdk_error_trap_pop ();
 }
 
-static int 
+static int
 clipboard_bytes_per_item (int format)
 {
 	switch (format) {
@@ -220,14 +220,14 @@ save_targets (GnomeSettingsModuleClipboard *module_cp, Atom *save_targets, int n
 			tdata->format = 0;
 			tdata->refcount = 1;
 			module_cp->contents = list_prepend (module_cp->contents, tdata);
-	  
+
 			multiple[nout++] = save_targets[i];
 			multiple[nout++] = save_targets[i];
 		}
 	}
 
 	XFree (save_targets);
-  
+
 	XChangeProperty (module_cp->display, module_cp->window,
 			 XA_MULTIPLE, XA_ATOM_PAIR,
 			 32, PropModeReplace, (const unsigned char *) multiple, nout);
@@ -268,12 +268,12 @@ get_property (TargetData *tdata, GnomeSettingsModuleClipboard *module_cp)
 	unsigned long length;
 	unsigned long remaining;
 	unsigned char *data;
-	
-	XGetWindowProperty (module_cp->display, 
+
+	XGetWindowProperty (module_cp->display,
 			    module_cp->window,
 			    tdata->target,
 			    0, 0x1FFFFFFF, True, AnyPropertyType,
-			    &type, &format, &length, &remaining, 
+			    &type, &format, &length, &remaining,
 			    &data);
 
 	if (type == None) {
@@ -306,10 +306,10 @@ receive_incrementally (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 
 	list = list_find (module_cp->contents,
 			  (ListFindFunc) find_content_target, (void *) xev->xproperty.atom);
-  
+
 	if (!list)
 		return False;
-  
+
 	tdata = (TargetData *) list->data;
 
 	if (tdata->type != XA_INCR)
@@ -325,8 +325,8 @@ receive_incrementally (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 	if (length == 0) {
 		tdata->type = type;
 		tdata->format = format;
-      
-		if (!list_find (module_cp->contents, 
+
+		if (!list_find (module_cp->contents,
 				(ListFindFunc) find_content_type, (void *)XA_INCR)) {
 			/* all incremental transfers done */
 			send_selection_notify (module_cp, True);
@@ -356,27 +356,27 @@ send_incrementally (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 	IncrConversion *rdata;
 	unsigned long length, items;
 	unsigned char *data;
-	
-	list = list_find (module_cp->conversions, 
+
+	list = list_find (module_cp->conversions,
 			  (ListFindFunc) find_conversion_requestor, xev);
-	if (list == NULL) 
+	if (list == NULL)
 		return False;
-  
+
 	rdata = (IncrConversion *) list->data;
-  
-	data = rdata->data->data + rdata->offset; 
+
+	data = rdata->data->data + rdata->offset;
 	length = rdata->data->length - rdata->offset;
 	if (length > SELECTION_MAX_SIZE)
 		length = SELECTION_MAX_SIZE;
-  
+
 	rdata->offset += length;
-  
+
 	items = length / clipboard_bytes_per_item (rdata->data->format);
 	XChangeProperty (module_cp->display, rdata->requestor,
 			 rdata->property, rdata->data->type,
 			 rdata->data->format, PropModeAppend,
 			 data, items);
-  
+
 	if (length == 0) {
 		module_cp->conversions = list_remove (module_cp->conversions, rdata);
 		conversion_free (rdata);
@@ -395,39 +395,39 @@ convert_clipboard_manager (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 
 	if (xev->xselectionrequest.target == XA_SAVE_TARGETS) {
 		if (module_cp->requestor != None || module_cp->contents != NULL) {
-			/* We're in the middle of a conversion request, or own 
-			 * the CLIPBOARD already 
+			/* We're in the middle of a conversion request, or own
+			 * the CLIPBOARD already
 			 */
 			finish_selection_request (module_cp, xev, False);
 		} else {
 			gdk_error_trap_push ();
-	  
+
 			clipboard_manager_watch_cb (xev->xselectionrequest.requestor, True,
 						    StructureNotifyMask, NULL);
 			XSelectInput (module_cp->display, xev->xselectionrequest.requestor,
 				      StructureNotifyMask);
 			XSync (module_cp->display, False);
-	  
+
 			if (gdk_error_trap_pop () != Success)
 				return;
 
 			gdk_error_trap_push ();
-	  
+
 			if (xev->xselectionrequest.property != None) {
 				XGetWindowProperty (module_cp->display, xev->xselectionrequest.requestor,
 						    xev->xselectionrequest.property,
 						    0, 0x1FFFFFFF, False, XA_ATOM,
 						    &type, &format, &nitems, &remaining,
 						    (unsigned char **) &targets);
-	      
+
 				if (gdk_error_trap_pop () != Success) {
 					if (targets)
 						XFree (targets);
-		  
+
 					return;
 				}
 			}
-	  
+
 			module_cp->requestor = xev->xselectionrequest.requestor;
 			module_cp->property = xev->xselectionrequest.property;
 			module_cp->time = xev->xselectionrequest.time;
@@ -445,22 +445,22 @@ convert_clipboard_manager (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 				 xev->xselectionrequest.property,
 				 XA_INTEGER, 32, PropModeReplace,
 				 (unsigned char *) &module_cp->timestamp, 1);
-      
+
 		finish_selection_request (module_cp, xev, True);
 	} else if (xev->xselectionrequest.target == XA_TARGETS) {
 		int n_targets = 0;
 		Atom targets[3];
-      
+
 		targets[n_targets++] = XA_TARGETS;
 		targets[n_targets++] = XA_TIMESTAMP;
 		targets[n_targets++] = XA_SAVE_TARGETS;
-      
+
 		XChangeProperty (module_cp->display,
 				 xev->xselectionrequest.requestor,
 				 xev->xselectionrequest.property,
 				 XA_ATOM, 32, PropModeReplace,
 				 (unsigned char *) targets, n_targets);
-      
+
 		finish_selection_request (module_cp, xev, True);
 	} else
 		finish_selection_request (module_cp, xev, False);
@@ -474,22 +474,22 @@ convert_clipboard_target (IncrConversion *rdata, GnomeSettingsModuleClipboard *m
 	int n_targets;
 	List *list;
 	unsigned long items;
-	XWindowAttributes atts;				
-	  
+	XWindowAttributes atts;
+
 	if (rdata->target == XA_TARGETS) {
 		n_targets = list_length (module_cp->contents) + 2;
 		targets = (Atom *) malloc (n_targets * sizeof (Atom));
-      
+
 		n_targets = 0;
-      
+
 		targets[n_targets++] = XA_TARGETS;
 		targets[n_targets++] = XA_MULTIPLE;
-      
+
 		for (list = module_cp->contents; list; list = list->next) {
 			tdata = (TargetData *) list->data;
 			targets[n_targets++] = tdata->target;
 		}
-      
+
 		XChangeProperty (module_cp->display, rdata->requestor,
 				 rdata->property,
 				 XA_ATOM, 32, PropModeReplace,
@@ -497,13 +497,13 @@ convert_clipboard_target (IncrConversion *rdata, GnomeSettingsModuleClipboard *m
 		free (targets);
 	} else  {
 		/* Convert from stored CLIPBOARD data */
-		list = list_find (module_cp->contents, 
+		list = list_find (module_cp->contents,
 				  (ListFindFunc) find_content_target, (void *) rdata->target);
 
 		/* We got a target that we don't support */
 		if (!list)
 			return;
-      
+
 		tdata = (TargetData *)list->data;
 		if (tdata->type == XA_INCR) {
 			/* we haven't completely received this target yet  */
@@ -523,18 +523,18 @@ convert_clipboard_target (IncrConversion *rdata, GnomeSettingsModuleClipboard *m
 			rdata->offset = 0;
 
 			gdk_error_trap_push ();
-	  
+
 			XGetWindowAttributes (module_cp->display, rdata->requestor, &atts);
-			XSelectInput (module_cp->display, rdata->requestor, 
+			XSelectInput (module_cp->display, rdata->requestor,
 				      atts.your_event_mask | PropertyChangeMask);
-	  
+
 			XChangeProperty (module_cp->display, rdata->requestor,
 					 rdata->property,
 					 XA_INCR, 32, PropModeReplace,
 					 (unsigned char *) &items, 1);
 
 			XSync (module_cp->display, False);
-  
+
 			gdk_error_trap_pop ();
 		}
 	}
@@ -563,10 +563,10 @@ convert_clipboard (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 	int i, format;
 	unsigned long nitems, remaining;
 	Atom *multiple;
-    
+
 	conversions = NULL;
 	type = None;
-    
+
 	if (xev->xselectionrequest.target == XA_MULTIPLE) {
 		XGetWindowProperty (xev->xselectionrequest.display,
 				    xev->xselectionrequest.requestor,
@@ -574,10 +574,10 @@ convert_clipboard (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 				    0, 0x1FFFFFFF, False, XA_ATOM_PAIR,
 				    &type, &format, &nitems, &remaining,
 				    (unsigned char **) &multiple);
-	
+
 		if (type != XA_ATOM_PAIR)
 			return;
-	
+
 		for (i = 0; i < nitems; i += 2) {
 			rdata = (IncrConversion *) malloc (sizeof (IncrConversion));
 			rdata->requestor = xev->xselectionrequest.requestor;
@@ -589,7 +589,7 @@ convert_clipboard (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 		}
 	} else {
 		multiple = NULL;
-	
+
 		rdata = (IncrConversion *) malloc (sizeof (IncrConversion));
 		rdata->requestor = xev->xselectionrequest.requestor;
 		rdata->target = xev->xselectionrequest.target;
@@ -600,7 +600,7 @@ convert_clipboard (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 	}
 
 	list_foreach (conversions, (Callback) convert_clipboard_target, module_cp);
-    
+
 	if (conversions->next == NULL &&
 	    ((IncrConversion *) conversions->data)->property == None) {
 		finish_selection_request (module_cp, xev, False);
@@ -620,10 +620,10 @@ convert_clipboard (GnomeSettingsModuleClipboard *module_cp, XEvent *xev)
 		}
 		finish_selection_request (module_cp, xev, True);
 	}
-    
+
 	list_foreach (conversions, (Callback) collect_incremental, module_cp);
 	list_free (conversions);
-    
+
 	if (multiple)
 		free (multiple);
 }
@@ -636,7 +636,7 @@ clipboard_manager_process_event (GnomeSettingsModuleClipboard *module_cp, XEvent
 	unsigned long nitems;
 	unsigned long remaining;
 	Atom *targets;
-  
+
 	targets = NULL;
 
 	switch (xev->xany.type) {
@@ -653,9 +653,9 @@ clipboard_manager_process_event (GnomeSettingsModuleClipboard *module_cp, XEvent
 	case PropertyNotify:
 		if (xev->xproperty.state == PropertyNewValue)
 			return receive_incrementally (module_cp, xev);
-		else 
+		else
 			return send_incrementally (module_cp, xev);
-      
+
 	case SelectionClear:
 		if (xev->xany.window != module_cp->window)
 			return False;
@@ -666,8 +666,8 @@ clipboard_manager_process_event (GnomeSettingsModuleClipboard *module_cp, XEvent
 				list_foreach (module_cp->contents, (Callback)target_data_unref, NULL);
 				list_free (module_cp->contents);
 				module_cp->contents = NULL;
-	      
-				XSetSelectionOwner (module_cp->display, 
+
+				XSetSelectionOwner (module_cp->display,
 						    XA_CLIPBOARD,
 						    None, module_cp->time);
 			}
@@ -681,7 +681,7 @@ clipboard_manager_process_event (GnomeSettingsModuleClipboard *module_cp, XEvent
 			module_cp->contents = NULL;
 			clipboard_manager_watch_cb (module_cp->requestor, False, 0, NULL);
 			module_cp->requestor = None;
-	  
+
 			return True;
 		}
 		break;
@@ -699,7 +699,7 @@ clipboard_manager_process_event (GnomeSettingsModuleClipboard *module_cp, XEvent
 						    0, 0x1FFFFFFF, True, XA_ATOM,
 						    &type, &format, &nitems, &remaining,
 						    (unsigned char **) &targets);
-	      
+
 				save_targets (module_cp, targets, nitems);
 			}
 			else if (xev->xselection.property == XA_MULTIPLE) {
@@ -708,7 +708,7 @@ clipboard_manager_process_event (GnomeSettingsModuleClipboard *module_cp, XEvent
 				tmp = list_copy (module_cp->contents);
 				list_foreach (tmp, (Callback) get_property, module_cp);
 				list_free (tmp);
-	      
+
 				module_cp->time = xev->xselection.time;
 				XSetSelectionOwner (module_cp->display, XA_CLIPBOARD,
 						    module_cp->window, module_cp->time);
@@ -719,7 +719,7 @@ clipboard_manager_process_event (GnomeSettingsModuleClipboard *module_cp, XEvent
 							 XA_ATOM, 32, PropModeReplace,
 							 (unsigned char *)&XA_NULL, 1);
 
-				if (!list_find (module_cp->contents, 
+				if (!list_find (module_cp->contents,
 						(ListFindFunc)find_content_type, (void *)XA_INCR)) {
 					/* all transfers done */
 					send_selection_notify (module_cp, True);
@@ -753,11 +753,11 @@ clipboard_manager_process_event (GnomeSettingsModuleClipboard *module_cp, XEvent
 
 	default: ;
 	}
-     
+
 	return False;
 }
 
-static GdkFilterReturn 
+static GdkFilterReturn
 clipboard_manager_event_filter (GdkXEvent *xevent,
 				GdkEvent  *event,
 				gpointer   data)
@@ -786,7 +786,7 @@ clipboard_manager_watch_cb (Window  window,
 			gdkwin = gdk_window_foreign_new_for_display (display, window);
 		else
 			g_object_ref (gdkwin);
-      
+
 		gdk_window_add_filter (gdkwin, clipboard_manager_event_filter, NULL);
 	} else {
 		if (!gdkwin)
@@ -800,9 +800,9 @@ GType
 gnome_settings_module_clipboard_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleClipboardClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -813,12 +813,12 @@ gnome_settings_module_clipboard_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_clipboard_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleClipboard",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -842,7 +842,7 @@ gnome_settings_module_clipboard_initialize (GnomeSettingsModule *module, GConfCl
 	module_cp->contents = NULL;
 	module_cp->conversions = NULL;
 	module_cp->requestor = None;
-	
+
 	return TRUE;
 }
 

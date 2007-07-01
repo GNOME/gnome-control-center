@@ -48,7 +48,7 @@ typedef void (* TranslationFunc) (TranslationEntry *trans,
 struct _TranslationEntry {
 	const char *gconf_key;
 	const char *xsetting_name;
-  
+
 	GConfValueType gconf_type;
 	TranslationFunc translate;
 };
@@ -66,7 +66,7 @@ static gboolean gnome_settings_module_xsettings_initialize (GnomeSettingsModule 
 static gboolean gnome_settings_module_xsettings_start (GnomeSettingsModule *module);
 static gboolean gnome_settings_module_xsettings_stop (GnomeSettingsModule *module);
 
-#ifdef HAVE_XFT2 
+#ifdef HAVE_XFT2
 /* X servers sometimes lie about the screen's physical dimensions, so we cannot
  * compute an accurate DPI value.  When this happens, the user gets fonts that
  * are too huge or too tiny.  So, we see what the server returns:  if it reports
@@ -106,9 +106,9 @@ GType
 gnome_settings_module_xsettings_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleXSettingsClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -119,12 +119,12 @@ gnome_settings_module_xsettings_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_xsettings_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleXSettings",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -141,8 +141,8 @@ translate_bool_int (TranslationEntry *trans,
 	int i;
 
 	g_assert (value->type == trans->gconf_type);
-  
-	for (i = 0; managers [i]; i++)  
+
+	for (i = 0; managers [i]; i++)
 		xsettings_manager_set_int (managers [i], trans->xsetting_name,
 					   gconf_value_get_bool (value));
 }
@@ -155,7 +155,7 @@ translate_int_int (TranslationEntry *trans,
 
 	g_assert (value->type == trans->gconf_type);
 
-	for (i = 0; managers [i]; i++)  
+	for (i = 0; managers [i]; i++)
 		xsettings_manager_set_int (managers [i], trans->xsetting_name,
 					   gconf_value_get_int (value));
 }
@@ -168,7 +168,7 @@ translate_string_string (TranslationEntry *trans,
 
 	g_assert (value->type == trans->gconf_type);
 
-	for (i = 0; managers [i]; i++)  
+	for (i = 0; managers [i]; i++)
 		xsettings_manager_set_string (managers [i],
 					      trans->xsetting_name,
 					      gconf_value_get_string (value));
@@ -180,7 +180,7 @@ translate_string_string_toolbar (TranslationEntry *trans,
 {
 	int i;
 	const char *tmp;
-  
+
 	g_assert (value->type == trans->gconf_type);
 
 	/* This is kind of a workaround since GNOME expects the key value to be
@@ -190,7 +190,7 @@ translate_string_string_toolbar (TranslationEntry *trans,
 	if (tmp && strcmp (tmp, "both_horiz") == 0)
 		tmp = "both-horiz";
 
-	for (i = 0; managers [i]; i++) 
+	for (i = 0; managers [i]; i++)
 		xsettings_manager_set_string (managers [i],
                                   trans->xsetting_name,
                                   tmp);
@@ -259,7 +259,7 @@ find_translation_entry (const char *gconf_key)
 	return NULL;
 }
 
-static const gchar* 
+static const gchar*
 type_to_string (GConfValueType type)
 {
 	switch (type) {
@@ -288,11 +288,11 @@ type_to_string (GConfValueType type)
 static void
 process_value (TranslationEntry *trans,
                GConfValue       *val)
-{  
+{
 	if (val == NULL) {
 		int i;
 
-		for (i = 0; managers [i]; i++)  
+		for (i = 0; managers [i]; i++)
 			xsettings_manager_delete_setting (managers [i], trans->xsetting_name);
 	} else {
 		if (val->type == trans->gconf_type)
@@ -317,12 +317,12 @@ xsettings_callback (GConfEntry *entry)
 		return;
 
 	process_value (trans, entry->value);
-  
+
 	for (i = 0; managers [i]; i++)
 		xsettings_manager_set_string (managers [i], "Net/FallbackIconTheme",
 					      "gnome");
 
-	for (i = 0; managers [i]; i++)  
+	for (i = 0; managers [i]; i++)
 		xsettings_manager_notify (managers [i]);
 }
 
@@ -335,9 +335,9 @@ gnome_settings_module_xsettings_initialize (GnomeSettingsModule *module, GConfCl
 
 	return TRUE;
 
-#ifdef HAVE_XFT2  
+#ifdef HAVE_XFT2
 	gnome_settings_register_config_callback (FONT_RENDER_DIR, xft_callback);
-#endif /* HAVE_XFT2 */  
+#endif /* HAVE_XFT2 */
 }
 
 #ifdef HAVE_XFT2
@@ -351,7 +351,7 @@ xft_callback (GConfEntry *entry)
 
 	gnome_settings_update_xft (client);
 
-	for (i = 0; managers [i]; i++)  
+	for (i = 0; managers [i]; i++)
 		xsettings_manager_notify (managers [i]);
 }
 
@@ -461,7 +461,7 @@ gnome_xft_settings_get (GConfClient      *client,
 			g_warning ("Invalid value for " FONT_RGBA_ORDER_KEY ": '%s'",
 				   rgba_order);
 	}
-  
+
 	if (hinting) {
 		if (strcmp (hinting, "none") == 0) {
 			settings->hinting = 0;
@@ -479,10 +479,10 @@ gnome_xft_settings_get (GConfClient      *client,
 			g_warning ("Invalid value for " FONT_HINTING_KEY ": '%s'",
 				   hinting);
 	}
-  
+
 	if (antialiasing) {
 		gboolean use_rgba = FALSE;
-      
+
 		if (strcmp (antialiasing, "none") == 0)
 			settings->antialias = 0;
 		else if (strcmp (antialiasing, "grayscale") == 0)
@@ -581,11 +581,11 @@ gnome_settings_module_xsettings_start (GnomeSettingsModule *module)
 			if (val != NULL)
 				gconf_value_free (val);
 		}
-      
+
 		++i;
 	}
 
-#ifdef HAVE_XFT2  
+#ifdef HAVE_XFT2
 	gnome_settings_update_xft (client);
 #endif /* HAVE_XFT */
 

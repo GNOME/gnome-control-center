@@ -77,9 +77,9 @@ GType
 gnome_settings_module_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -90,12 +90,12 @@ gnome_settings_module_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_init,
 		};
-      
+
 		module_type = g_type_register_static (G_TYPE_OBJECT,
 						      "GnomeSettingsModule",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -151,7 +151,7 @@ gnome_settings_module_stop (GnomeSettingsModule *module)
 {
 	g_return_val_if_fail (GNOME_SETTINGS_IS_MODULE (module), FALSE);
 	g_return_val_if_fail (module->priv->status == GNOME_SETTINGS_MODULE_STATUS_STARTED, FALSE);
-	
+
 	if (!CLASS (module)->stop)
 		return TRUE;
 

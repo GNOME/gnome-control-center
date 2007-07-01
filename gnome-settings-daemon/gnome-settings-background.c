@@ -63,9 +63,9 @@ applier_idle (gpointer data)
 {
 	GnomeSettingsModuleBackground *module;
 	int i;
-	
+
 	module = (GnomeSettingsModuleBackground *) data;
-	
+
 	for (i = 0; module->bg_appliers [i]; i++)
 		bg_applier_apply_prefs (module->bg_appliers [i], module->prefs);
 	module->applier_idle_id = 0;
@@ -76,12 +76,12 @@ static void
 background_callback (GConfClient *client,
                      guint cnxn_id,
                      GConfEntry *entry,
-                     gpointer user_data) 
+                     gpointer user_data)
 {
 	GnomeSettingsModuleBackground *module_bg;
-	
+
 	module_bg = (GnomeSettingsModuleBackground *) user_data;
-	
+
 	bg_preferences_merge_entry (module_bg->prefs, entry);
 
 	if (module_bg->applier_idle_id != 0) {
@@ -95,7 +95,7 @@ static void
 gnome_settings_module_background_class_init (GnomeSettingsModuleBackgroundClass *klass)
 {
 	GnomeSettingsModuleClass *module_class;
-	
+
 	module_class = (GnomeSettingsModuleClass *) klass;
 	module_class->get_runlevel = gnome_settings_module_background_get_runlevel;
 	module_class->initialize = gnome_settings_module_background_initialize;
@@ -112,9 +112,9 @@ GType
 gnome_settings_module_background_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleBackgroundClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -125,12 +125,12 @@ gnome_settings_module_background_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_background_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleBackground",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -168,12 +168,12 @@ gnome_settings_module_background_initialize (GnomeSettingsModule *module,
 	bg_preferences_load (module_bg->prefs);
 
 	gconf_client_notify_add (config_client,
-	                         "/desktop/gnome/background", 
+	                         "/desktop/gnome/background",
 	                         background_callback,
 	                         module,
 	                         NULL,
 	                         NULL);
-	
+
 	return TRUE;
 }
 
@@ -184,7 +184,7 @@ gnome_settings_module_background_start (GnomeSettingsModule *module)
 	int i;
 
 	module_bg = (GnomeSettingsModuleBackground *) module;
-	
+
 	/* If this is set, nautilus will draw the background and is
 	 * almost definitely in our session.  however, it may not be
 	 * running yet (so is_nautilus_running() will fail).  so, on
@@ -199,6 +199,6 @@ gnome_settings_module_background_start (GnomeSettingsModule *module)
 
 	for (i = 0; module_bg->bg_appliers [i]; i++)
 		bg_applier_apply_prefs (module_bg->bg_appliers [i], module_bg->prefs);
-	
+
 	return TRUE;
 }

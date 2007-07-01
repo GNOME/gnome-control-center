@@ -75,7 +75,7 @@ gnome_settings_module_screensaver_get_type (void)
 	static GType module_type = 0;
 
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleScreensaverClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */

@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
  * USA.
  */
 
@@ -103,7 +103,7 @@ gnome_settings_module_multimedia_keys_get_type (void)
 	static GType module_type = 0;
 
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleMultimediaKeysClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -164,9 +164,9 @@ get_term_command (Acme *acme)
 			cmd = g_strdup_printf ("%s %s -e", cmd_term, cmd_args);
 		else
 			cmd = g_strdup_printf ("%s -e", cmd_term);
-		
+
 		g_free (cmd_args);
-	} 
+	}
 	g_free (cmd_term);
 	return cmd;
 }
@@ -190,7 +190,7 @@ execute (Acme *acme, char *cmd, gboolean sync, gboolean need_term)
 			return;
 		}
 	}
-	
+
 	if (term) {
 		exec = g_strdup_printf ("%s %s", term, cmd);
 		g_free (term);
@@ -523,7 +523,7 @@ do_help_action (Acme *acme)
 		cmd = g_strdup_printf (string, "");
 		execute (acme, cmd, FALSE, FALSE);
 		g_free (cmd);
-	} else 
+	} else
 		do_unknown_action (acme, "ghelp:");
 
 	g_free (string);

@@ -81,7 +81,7 @@ gnome_settings_module_keyboard_get_type (void)
 	static GType module_type = 0;
 
 	if (!module_type) {
-		static const GTypeInfo module_info = {
+		const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleKeyboardClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
@@ -153,7 +153,7 @@ gsd_keyboard_get_hostname_key (const char *subkey)
 #else
 	char hostname[256];
 #endif
-  
+
 	if (gethostname (hostname, sizeof (hostname)) == 0 &&
 	    strcmp (hostname, "localhost") != 0 &&
 	    strcmp (hostname, "localhost.localdomain") != 0) {
@@ -360,11 +360,11 @@ apply_settings (void)
 	kbdcontrol.bell_percent = bell_volume;
 	kbdcontrol.bell_pitch = bell_pitch;
 	kbdcontrol.bell_duration = bell_duration;
-	XChangeKeyboardControl (GDK_DISPLAY (), 
-				KBKeyClickPercent | KBBellPercent | KBBellPitch | KBBellDuration,				
+	XChangeKeyboardControl (GDK_DISPLAY (),
+				KBKeyClickPercent | KBBellPercent | KBBellPitch | KBBellDuration,
 				&kbdcontrol);
 
-	
+
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 	if (!numlock_setup_error && rnumlock)
 		numlock_set_xkb_state (numlock_get_gconf_state ());
