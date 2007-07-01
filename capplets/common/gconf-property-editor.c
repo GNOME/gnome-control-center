@@ -597,15 +597,19 @@ peditor_string_value_changed (GConfClient         *client,
 			      GConfPropertyEditor *peditor)
 {
 	GConfValue *value, *value_wid;
-	const char *entry_current_text;
 
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
 	if (entry && (value = gconf_entry_get_value (entry))) {
+		const char *entry_current_text;
+		const char *gconf_text;
+
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
+		gconf_text = gconf_value_get_string (value_wid);
 		entry_current_text = gtk_entry_get_text (GTK_ENTRY (peditor->p->ui_control));
-		if (strcmp (entry_current_text, gconf_value_get_string (value_wid)) != 0) {
+
+		if (gconf_text && strcmp (entry_current_text, gconf_text) != 0) {
 		  gtk_entry_set_text (GTK_ENTRY (peditor->p->ui_control), gconf_value_get_string (value_wid));
 		}
 		gconf_value_free (value_wid);
@@ -713,16 +717,21 @@ peditor_color_value_changed (GConfClient         *client,
 			     GConfPropertyEditor *peditor)
 {
 	GConfValue *value, *value_wid;
-	GdkColor color;
 
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
 	if (entry && (value = gconf_entry_get_value (entry))) {
+		const gchar *spec;
+
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
-		gdk_color_parse (gconf_value_get_string (value_wid), &color);
-		gtk_color_button_set_color (
-		    GTK_COLOR_BUTTON (peditor->p->ui_control), &color);
+		spec = gconf_value_get_string (value_wid);
+		if (spec) {
+			GdkColor color;
+			gdk_color_parse (gconf_value_get_string (value_wid), &color);
+			gtk_color_button_set_color (
+			    GTK_COLOR_BUTTON (peditor->p->ui_control), &color);
+		}
 		gconf_value_free (value_wid);
 	}
 }
