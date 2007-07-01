@@ -195,7 +195,7 @@ gnome_settings_module_background_start (GnomeSettingsModule *module)
 
 	if (gconf_client_get_bool (gnome_settings_module_get_config_client (module),
 				   "/apps/nautilus/preferences/show_desktop", NULL))
-		return FALSE;
+		return TRUE;
 
 	for (i = 0; module_bg->bg_appliers [i]; i++)
 		bg_applier_apply_prefs (module_bg->bg_appliers [i], module_bg->prefs);
