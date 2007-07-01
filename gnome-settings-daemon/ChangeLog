@@ -1,5 +1,13 @@
 2007-07-01  Jens Granseuer  <jensgr@gmx.net>
 
+	Patch by: Grzegorz Dymarek <gregd@interia.pl>
+
+	* gnome-settings-multimedia-keys.c: (do_sound_action): don't
+	unmute when lowering the volume and switch to muted when the
+	volume reaches 0 (closes bug #337896)
+
+2007-07-01  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-settings-background.c:
 	(gnome_settings_module_background_start): if we don't take over
 	the background because nautilus is running, don't treat that as
