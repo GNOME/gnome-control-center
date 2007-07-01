@@ -29,6 +29,7 @@
 #include <gtk/gtkwindow.h>
 
 #include "gnome-settings-module.h"
+#include "utils.h"
 
 typedef struct {
 	GnomeSettingsModule parent;
@@ -82,15 +83,15 @@ static GdkColor*
 colour_shade (GdkColor *a, gdouble shade, GdkColor *b)
 {
 	guint16 red, green, blue;
-	
+
 	red = CLAMP ((a->red) * shade, 0, 0xFFFF);
 	green = CLAMP ((a->green) * shade, 0, 0xFFFF);
 	blue = CLAMP ((a->blue) * shade, 0, 0xFFFF);
-	
+
 	b->red = red;
 	b->green = green;
 	b->blue = blue;
-	
+
 	return b;
 }
 
@@ -125,12 +126,12 @@ append_theme_colours (GtkStyle *style, GString *string)
 			    &style->base[GTK_STATE_NORMAL]);
 	append_colour_define(string, "WINDOW_FOREGROUND",
 			    &style->text[GTK_STATE_NORMAL]);
-  
+
 	append_colour_define(string, "INACTIVE_BACKGROUND",
 			    &style->bg[GTK_STATE_INSENSITIVE]);
 	append_colour_define(string, "INACTIVE_FOREGROUND",
 			    &style->text[GTK_STATE_INSENSITIVE]);
-	
+
 	append_colour_define(string, "ACTIVE_BACKGROUND",
 			    &style->bg[GTK_STATE_SELECTED]);
 	append_colour_define(string, "ACTIVE_FOREGROUND",
@@ -218,13 +219,13 @@ static GSList*
 scan_for_files (GError **error)
 {
 	const char* home_dir;
-	
+
 	GSList *user_list = NULL, *system_list = NULL;
 	GSList *list = NULL, *p;
 
 	system_list = scan_ad_directory (SYSTEM_AD_DIR, error);
 	if (*error) return NULL;
-	
+
 	home_dir = g_get_home_dir ();
 	if (home_dir) {
 		char *user_ad = g_build_filename (home_dir, USER_AD_DIR, NULL);
@@ -244,7 +245,7 @@ scan_for_files (GError **error)
 
 	/* An alternative approach would be to strdup() the strings
 	   and free the entire contents of these lists, but that is a
-	   little inefficient for my liking - RB */	
+	   little inefficient for my liking - RB */
 	for (p = system_list; p != NULL; p = g_slist_next (p)) {
 		if (strcmp (p->data, GENERAL_AD) == 0) {
 			/* We ignore this, free the data now */
@@ -331,10 +332,10 @@ apply_settings (GtkStyle *style)
 			error = NULL;
 		}
 	}
-	
+
 	g_slist_foreach (list, (GFunc)g_free, NULL);
 	g_slist_free (list);
-	
+
 	append_xresource_file (USER_X_RESOURCES, string, &error);
 	append_xresource_file (USER_X_DEFAULTS, string, &error);
 
@@ -360,7 +361,7 @@ GType
 gnome_settings_module_xrdb_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
 		static const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleXrdbClass),
@@ -373,12 +374,12 @@ gnome_settings_module_xrdb_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_xrdb_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleXrdb",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -400,9 +401,9 @@ gnome_settings_module_xrdb_start (GnomeSettingsModule *module)
 	static gboolean initialized = FALSE;
 
 	if (!initialized) {
-		/* the initialization is done here otherwise 
-		   gnome_settings_xsettings_load would generate 
-		   false hit as gtk-theme-name is set to Default in 
+		/* the initialization is done here otherwise
+		   gnome_settings_xsettings_load would generate
+		   false hit as gtk-theme-name is set to Default in
 		   gnome_settings_xsettings_init */
 		GtkSettings *settings = gtk_settings_get_default ();
 		widget = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -410,7 +411,7 @@ gnome_settings_module_xrdb_start (GnomeSettingsModule *module)
 				  "notify::gtk-theme-name",
 				  G_CALLBACK (theme_changed),
 				  widget);
-		gtk_widget_ensure_style (widget); 
+		gtk_widget_ensure_style (widget);
 		initialized = TRUE;
 	}
 

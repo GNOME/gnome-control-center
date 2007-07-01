@@ -141,7 +141,7 @@ static void
 key_toggled_cb (GtkWidget *toggle, gpointer data)
 {
 	GConfClient *client;
-	GnomeSettingsModuleScreensaver *module_ss = data;
+	GnomeSettingsModule *module_ss = data;
 
 	client = gnome_settings_module_get_config_client (module_ss);
 	gconf_client_set_bool (client,

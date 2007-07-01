@@ -16,6 +16,7 @@
 
 #include "gnome-settings-locate-pointer.h"
 #include "gnome-settings-module.h"
+#include "utils.h"
 
 typedef struct {
 	GnomeSettingsModule parent;
@@ -51,7 +52,7 @@ GType
 gnome_settings_module_mouse_get_type (void)
 {
 	static GType module_type = 0;
-  
+
 	if (!module_type) {
 		static const GTypeInfo module_info = {
 			sizeof (GnomeSettingsModuleMouseClass),
@@ -64,12 +65,12 @@ gnome_settings_module_mouse_get_type (void)
 			0,		/* n_preallocs */
 			(GInstanceInitFunc) gnome_settings_module_mouse_init,
 		};
-      
+
 		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleMouse",
 						      &module_info, 0);
 	}
-  
+
 	return module_type;
 }
 
@@ -114,7 +115,7 @@ configure_button_layout (guchar   *buttons,
 	 */
 
 	/* check if the current mapping satisfies the above assumptions */
-	if (buttons[left_button - 1] != left_button && 
+	if (buttons[left_button - 1] != left_button &&
 	    buttons[left_button - 1] != right_button)
 		/* The current mapping is weird. Swapping buttons is probably not a
 		 * good idea.
@@ -164,7 +165,7 @@ xinput_device_has_buttons (XDeviceInfo *device_info)
 				return TRUE;
 		}
 
-		class_info = (XAnyClassInfo *) (((guchar *) class_info) + 
+		class_info = (XAnyClassInfo *) (((guchar *) class_info) +
 						class_info->length);
 	}
 	return FALSE;
@@ -186,7 +187,7 @@ set_xinput_devices_left_handed (gboolean left_handed)
 		buttons = g_new (guchar, buttons_capacity);
 	else
 		buttons = NULL;
-   
+
 	for (i = 0; i < n_devices; i++) {
 		XDevice *device = NULL;
 
@@ -203,21 +204,21 @@ set_xinput_devices_left_handed (gboolean left_handed)
 			continue;
 
 		n_buttons = XGetDeviceButtonMapping (GDK_DISPLAY (), device,
-						     buttons, 
+						     buttons,
 						     buttons_capacity);
 
 		while (n_buttons > buttons_capacity) {
 			buttons_capacity = n_buttons;
-			buttons = (guchar *) g_realloc (buttons, 
+			buttons = (guchar *) g_realloc (buttons,
 							buttons_capacity * sizeof (guchar));
 
 			n_buttons = XGetDeviceButtonMapping (GDK_DISPLAY (), device,
-							     buttons, 
+							     buttons,
 							     buttons_capacity);
 		}
 
 		configure_button_layout (buttons, n_buttons, left_handed);
-      
+
 		XSetDeviceButtonMapping (GDK_DISPLAY (), device, buttons, n_buttons);
 		XCloseDevice (GDK_DISPLAY (), device);
 	}
@@ -241,11 +242,11 @@ set_left_handed (gboolean left_handed)
 #endif
 
 	buttons = g_new (guchar, buttons_capacity);
-	n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, 
+	n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons,
 					(gint) buttons_capacity);
 	while (n_buttons > buttons_capacity) {
 		buttons_capacity = n_buttons;
-		buttons = (guchar *) g_realloc (buttons, 
+		buttons = (guchar *) g_realloc (buttons,
 						buttons_capacity * sizeof (guchar));
 
 		n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons,
@@ -323,7 +324,7 @@ filter (GdkXEvent *xevent,
 	gint group;
 
 	GdkScreen *screen = (GdkScreen *)data;
-	
+
 	if (xev->type == KeyPress ||
 	    xev->type == KeyRelease) {
 		/* get the keysym */
@@ -451,7 +452,7 @@ set_locate_pointer (gboolean locate_pointer)
 								  filter,
 								  screen);
 				}
-			}        
+			}
 		}
 	}
 }

@@ -17,7 +17,7 @@ int main (int argc, char *argv [])
 {
 	GnomeProgram *program;
 	GnomeClient *session;
-	GnomeSettingsDaemon *settings_daemon;
+	GObject *settings_daemon;
 	gchar *restart_argv[] = { "gnome-settings-daemon", NULL, NULL };
 
 	restart_argv[1] = *argv;
@@ -32,8 +32,8 @@ int main (int argc, char *argv [])
 				      argc, argv,
 				      GNOME_CLIENT_PARAM_SM_CONNECT, FALSE,
 				      NULL);
-  
-	gconf_init (argc, argv, NULL); /* exits w/ message on failure */ 
+
+	gconf_init (argc, argv, NULL); /* exits w/ message on failure */
 
 	if (!(settings_daemon = gnome_settings_daemon_new ()))
 		return 1;

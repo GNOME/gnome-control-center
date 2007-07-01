@@ -7,13 +7,14 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include "gnome-settings-module.h"
+#include "utils.h"
 #include "eggaccelerators.h"
 
-/* we exclude shift, GDK_CONTROL_MASK and GDK_MOD1_MASK since we know what 
-   these modifiers mean 
+/* we exclude shift, GDK_CONTROL_MASK and GDK_MOD1_MASK since we know what
+   these modifiers mean
    these are the mods whose combinations are bound by the keygrabbing code */
 #define IGNORED_MODS (0x2000 /*Xkb modifier*/ | GDK_LOCK_MASK  | \
-        GDK_MOD2_MASK | GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK) 
+        GDK_MOD2_MASK | GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK)
 /* these are the ones we actually use for global keys, we always only check
  * for these set */
 #define USED_MODS (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK)
@@ -200,7 +201,7 @@ get_exec_environment (XEvent *xevent)
 	return retval;
 }
 
-static gint 
+static gint
 compare_bindings (gconstpointer a, gconstpointer b)
 {
 	Binding *key_a = (Binding*) a;
@@ -239,7 +240,7 @@ entry_get_string (GConfEntry *entry)
 	return g_strdup (gconf_value_get_string (value));
 }
 
-static gboolean 
+static gboolean
 bindings_get_entry (const char *subdir)
 {
 	Binding *new_binding;
@@ -249,9 +250,9 @@ bindings_get_entry (const char *subdir)
 	char *key = NULL;
 	gboolean ret = FALSE;
 	GConfClient *client = gnome_settings_get_config_client ();
-  
+
 	g_return_val_if_fail (subdir != NULL, FALSE);
-  
+
 	/* value = gconf_entry_get_value (entry); */
 	gconf_key = g_path_get_basename (subdir);
 
@@ -284,11 +285,11 @@ bindings_get_entry (const char *subdir)
 		gconf_entry_free (entry);
 	}
 
-	if (!action || !key) { 
+	if (!action || !key) {
 		g_warning (_("Key Binding (%s) is incomplete\n"), gconf_key);
 		goto out;
 	}
-    
+
 	tmp_elem = g_slist_find_custom (binding_list, gconf_key,
 					compare_bindings);
 
@@ -299,7 +300,7 @@ bindings_get_entry (const char *subdir)
 		g_free (new_binding->binding_str);
 		g_free (new_binding->action);
 	}
-  
+
 	new_binding->binding_str = key;
 	new_binding->action = action;
 	new_binding->gconf_key = gconf_key;
@@ -322,11 +323,11 @@ bindings_get_entry (const char *subdir)
 	return ret;
 }
 
-static gboolean 
+static gboolean
 key_already_used (Binding *binding)
 {
 	GSList *li;
-  
+
 	for (li = binding_list; li != NULL; li = li->next) {
 		Binding *tmp_binding =  (Binding*) li->data;
 
@@ -364,7 +365,7 @@ do_grab (gboolean grab,
 	int i, bit, bits_set_cnt;
 	int uppervalue;
 	guint mask_to_traverse = IGNORED_MODS & ~ key->state;
-	  
+
 	bit = 0;
 	for (i = 0; i < N_BITS; i++) {
 		if (mask_to_traverse & (1<<i))
@@ -395,14 +396,14 @@ static void
 binding_register_keys (void)
 {
 	GSList *li;
-  
+
 	gdk_error_trap_push();
 
 	/* Now check for changes and grab new key if not already used */
 	for (li = binding_list ; li != NULL; li = li->next) {
 		Binding *binding = (Binding *) li->data;
-      
-		if (binding->previous_key.keycode != binding->key.keycode || 
+
+		if (binding->previous_key.keycode != binding->key.keycode ||
 		    binding->previous_key.state != binding->key.state) {
 			/* Ungrab key if it changed and not clashing with previously set binding */
 			if (!key_already_used (binding)) {
@@ -426,14 +427,14 @@ bindings_callback (GConfEntry *entry)
 {
 	/* ensure we get binding dir not a sub component */
 	gchar** key_elems = g_strsplit (gconf_entry_get_key (entry), "/", 15);
-	gchar* binding_entry  = g_strdup_printf ("/%s/%s/%s/%s", key_elems[1], 
-						 key_elems[2], key_elems[3], 
-						 key_elems[4]);					 
+	gchar* binding_entry  = g_strdup_printf ("/%s/%s/%s/%s", key_elems[1],
+						 key_elems[2], key_elems[3],
+						 key_elems[4]);
 	g_strfreev (key_elems);
-  
+
 	bindings_get_entry (binding_entry);
 	g_free (binding_entry);
-  
+
 	binding_register_keys ();
 }
 
@@ -451,10 +452,10 @@ keybindings_filter (GdkXEvent *gdk_xevent,
 
 	keycode = xevent->xkey.keycode;
 	state = xevent->xkey.state;
-  
+
 	for (li = binding_list; li != NULL; li = li->next) {
 		Binding *binding = (Binding*) li->data;
-      
+
 		if (keycode == binding->key.keycode &&
 		    (state & USED_MODS) == binding->key.state) {
 			GError* error = NULL;
@@ -509,7 +510,7 @@ gnome_settings_module_keybindings_initialize (GnomeSettingsModule *module, GConf
 	int i;
 
 	gnome_settings_register_config_callback (GCONF_BINDING_DIR, bindings_callback);
-  
+
 	for (i = 0; i < screen_num; i++) {
 		screen = gdk_display_get_screen (dpy, i);
 		gdk_window_add_filter (gdk_screen_get_root_window (screen),
