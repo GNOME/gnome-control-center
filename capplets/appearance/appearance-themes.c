@@ -566,10 +566,13 @@ themes_init (AppearanceData *data)
   w = glade_xml_get_widget (data->xml, "theme_install");
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON));
-
-  /* connect button signals */
   g_signal_connect (w, "clicked", (GCallback) theme_install_cb, data);
-  g_signal_connect (glade_xml_get_widget (data->xml, "theme_save"), "clicked", (GCallback) theme_save_cb, data);
+
+  w = glade_xml_get_widget (data->xml, "theme_save");
+  gtk_button_set_image (GTK_BUTTON (w),
+                        gtk_image_new_from_stock (GTK_STOCK_SAVE_AS, GTK_ICON_SIZE_BUTTON));
+  g_signal_connect (w, "clicked", (GCallback) theme_save_cb, data);
+
   g_signal_connect (glade_xml_get_widget (data->xml, "theme_custom"), "clicked", (GCallback) theme_custom_cb, data);
   g_signal_connect (del_button, "clicked", (GCallback) theme_delete_cb, data);
 
