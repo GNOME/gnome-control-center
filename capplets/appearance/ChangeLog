@@ -1,3 +1,10 @@
+2007-07-05  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_color_buttons_from_string): don't allocate
+	colors in the colormap
+	(update_cursor_size_scale), (cursor_size_scale_value_changed_cb): don't
+	crash if we have nothing but the default cursor theme
+
 2007-07-05  Denis Washington  <denisw@svn.gnome.org>
 
 	* appearance.glade: set an explicit item width for the metatheme icon

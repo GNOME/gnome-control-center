@@ -170,10 +170,6 @@ update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *dat
 
   g_strfreev (color_scheme_strings);
 
-  /* not sure whether we need to do this, but it can't hurt */
-  for (i = 0; i < 6; i++)
-    gdk_colormap_alloc_color (gdk_colormap_get_system (), &color_scheme_colors[i], FALSE, TRUE);
-
   /* now set all the buttons to the correct settings */
   widget = glade_xml_get_widget (data->xml, "fg_colorbutton");
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[0]);
@@ -382,7 +378,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
 
   cursor_size_scale = glade_xml_get_widget (data->xml, "cursor_size_scale");
 
-  if (theme->sizes->len == 1)
+  if (!theme || theme->sizes->len == 1)
   {
     gtk_widget_set_sensitive (cursor_size_scale, FALSE);
   }
@@ -424,19 +420,19 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
 
           diff = size - gconf_size;
           diff_to_last = gconf_size - g_array_index (theme->sizes, gint, i - 1);
-          
+
           gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) (diff < diff_to_last) ? diff : diff_to_last);
           size_found = TRUE;
           break;
         }
       }
     }
-    
-    /* set to the biggest size if the gconf value is bigger than 
+
+    /* set to the biggest size if the gconf value is bigger than
       all available sizes */
     if (!size_found)
       gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) g_array_index (theme->sizes, gint, theme->sizes->len - 1));
-  }  
+  }
 }
 
 static void
@@ -517,12 +513,14 @@ static void
 cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
 {
   GnomeThemeCursorInfo *theme;
-  gint size;
 
   theme = gnome_theme_cursor_info_find (gconf_client_get_string (data->client, CURSOR_THEME_KEY, NULL));
+  if (theme) {
+    gint size;
 
-  size = g_array_index (theme->sizes, gint, (int) gtk_range_get_value (range));
-  gconf_client_set_int (data->client, CURSOR_SIZE_KEY, size, NULL);
+    size = g_array_index (theme->sizes, gint, (int) gtk_range_get_value (range));
+    gconf_client_set_int (data->client, CURSOR_SIZE_KEY, size, NULL);
+  }
 }
 
 static void
@@ -786,7 +784,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
                                             data,
                                             NULL);
         break;
-      
+
       case THEME_TYPE_CURSOR:
         thumbnail = ((GnomeThemeCursorInfo *) l->data)->thumbnail;
         break;
