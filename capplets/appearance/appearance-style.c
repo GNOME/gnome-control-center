@@ -375,6 +375,90 @@ icon_theme_changed (GConfPropertyEditor *peditor,
 }
 
 static void
+update_cursor_size_scale (GnomeThemeCursorInfo *theme,
+                          AppearanceData *data)
+{
+  GtkWidget *cursor_size_scale;
+
+  cursor_size_scale = glade_xml_get_widget (data->xml, "cursor_size_scale");
+
+  if (theme->sizes->len == 1)
+  {
+    gtk_widget_set_sensitive (cursor_size_scale, FALSE);
+  }
+  else
+  {
+    GtkAdjustment *adjustment;
+    gint gconf_size, i;
+    gboolean size_found = FALSE;
+
+    adjustment = gtk_range_get_adjustment (GTK_RANGE (cursor_size_scale));
+    g_object_set (G_OBJECT (adjustment), "upper", (gdouble) theme->sizes->len - 1, NULL);
+    gtk_widget_set_sensitive (cursor_size_scale, TRUE);
+
+    gconf_size = gconf_client_get_int (data->client, CURSOR_SIZE_KEY, NULL);
+
+    /* set the slider to the cursor size which matches the gconf setting best  */
+    for (i = 0; i < theme->sizes->len; i++)
+    {
+      gint size;
+      size = g_array_index (theme->sizes, gint, i);
+
+      if (size == gconf_size)
+      {
+        gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) i);
+        size_found = TRUE;
+        break;
+      }
+      else if (size > gconf_size)
+      {
+        if (i == 0)
+        {
+          gtk_range_set_value (GTK_RANGE (cursor_size_scale), 0);
+          size_found = TRUE;
+          break;
+        }
+        else
+        {
+          gint diff, diff_to_last;
+
+          diff = size - gconf_size;
+          diff_to_last = gconf_size - g_array_index (theme->sizes, gint, i - 1);
+          
+          gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) (diff < diff_to_last) ? diff : diff_to_last);
+          size_found = TRUE;
+          break;
+        }
+      }
+    }
+    
+    /* set to the biggest size if the gconf value is bigger than 
+      all available sizes */
+    if (!size_found)
+      gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) g_array_index (theme->sizes, gint, theme->sizes->len - 1));
+  }  
+}
+
+static void
+cursor_theme_changed (GConfPropertyEditor *peditor,
+		    const gchar *key,
+		    const GConfValue *value,
+		    AppearanceData *data)
+{
+  GnomeThemeCursorInfo *theme = NULL;
+  const gchar *name;
+
+  if (value && (name = gconf_value_get_string (value)))
+    theme = gnome_theme_cursor_info_find (name);
+
+  update_cursor_size_scale (theme, data);
+
+  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "cursor_themes_delete"),
+			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_CURSOR));
+
+}
+
+static void
 generic_theme_delete (const gchar *tv_name, ThemeType type, AppearanceData *data)
 {
   GtkTreeView *treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
@@ -427,6 +511,18 @@ static void
 icon_theme_delete_cb (GtkWidget *button, AppearanceData *data)
 {
   generic_theme_delete ("icon_themes_list", THEME_TYPE_ICON, data);
+}
+
+static void
+cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
+{
+  GnomeThemeCursorInfo *theme;
+  gint size;
+
+  theme = gnome_theme_cursor_info_find (gconf_client_get_string (data->client, CURSOR_THEME_KEY, NULL));
+
+  size = g_array_index (theme->sizes, gint, (int) gtk_range_get_value (range));
+  gconf_client_set_int (data->client, CURSOR_SIZE_KEY, size, NULL);
 }
 
 static void
@@ -637,9 +733,10 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
       break;
 
     case THEME_TYPE_CURSOR:
-      themes = NULL; /* don't know what to do yet */
+      themes = gnome_theme_cursor_info_find_all ();
       thumbnail = NULL;
       key = CURSOR_THEME_KEY;
+      break;
 
     default:
       /* we don't deal with any other type of themes here */
@@ -659,6 +756,9 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
     } else if (type == THEME_TYPE_ICON) {
       name = ((GnomeThemeIconInfo *) l->data)->name;
       label = ((GnomeThemeIconInfo *) l->data)->readable_name;
+    }
+    else if (type == THEME_TYPE_CURSOR) {
+      name = ((GnomeThemeCursorInfo *) l->data)->name;
     }
 
     if (!name)
@@ -686,6 +786,11 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
                                             data,
                                             NULL);
         break;
+      
+      case THEME_TYPE_CURSOR:
+        thumbnail = ((GnomeThemeCursorInfo *) l->data)->thumbnail;
+        break;
+
       default:
         break;
     }
@@ -695,6 +800,9 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
                                        COL_NAME, name,
                                        COL_THUMBNAIL, thumbnail,
                                        -1);
+
+    if (type == THEME_TYPE_CURSOR)
+      g_object_unref (thumbnail);
   }
   g_list_free (themes);
 
@@ -738,6 +846,7 @@ style_init (AppearanceData *data)
 {
   GtkSettings *settings;
   GtkWidget *w;
+  GtkAdjustment *adjustment;
 
   data->gtk_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/gtk-theme-thumbnailing.png", NULL);
   data->window_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/window-theme-thumbnailing.png", NULL);
@@ -750,6 +859,7 @@ style_init (AppearanceData *data)
   prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), THEME_TYPE_WINDOW, (GCallback) window_theme_changed);
   prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), THEME_TYPE_GTK, (GCallback) gtk_theme_changed);
   prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), THEME_TYPE_ICON, (GCallback) icon_theme_changed);
+ prepare_list (data, glade_xml_get_widget (data->xml, "cursor_themes_list"), THEME_TYPE_CURSOR, (GCallback) cursor_theme_changed);
 
   w = glade_xml_get_widget (data->xml, "color_scheme_message_hbox");
   gtk_widget_set_no_show_all (w, TRUE);
@@ -763,6 +873,17 @@ style_init (AppearanceData *data)
   check_color_schemes_enabled (settings, data);
   g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
   update_color_buttons_from_settings (settings, data);
+
+  w = glade_xml_get_widget (data->xml, "cursor_size_scale");
+  GTK_RANGE (w)->round_digits = 0;
+  g_signal_connect (G_OBJECT (w), "value-changed", (GCallback) cursor_size_scale_value_changed_cb, data);
+  adjustment = gtk_range_get_adjustment (GTK_RANGE (w));
+  g_object_set (G_OBJECT (adjustment), "page-size", 0.0, NULL);
+
+  w = glade_xml_get_widget (data->xml, "cursor_size_small_label");
+  gtk_label_set_markup (GTK_LABEL (w), g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w))));
+  w = glade_xml_get_widget (data->xml, "cursor_size_large_label");
+  gtk_label_set_markup (GTK_LABEL (w), g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w))));
 
   /* connect signals */
   /* color buttons */

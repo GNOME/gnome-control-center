@@ -23,6 +23,7 @@
 #define ICON_THEME_KEY "/desktop/gnome/interface/icon_theme"
 #define COLOR_SCHEME_KEY "/desktop/gnome/interface/gtk_color_scheme"
 #define CURSOR_THEME_KEY "/desktop/gnome/peripherals/mouse/cursor_theme"
+#define CURSOR_SIZE_KEY "/desktop/gnome/peripherals/mouse/cursor_size"
 #define LOCKDOWN_KEY "/desktop/gnome/lockdown/disable_theme_settings"
 #define BACKGROUND_KEY "/desktop/gnome/background/picture_filename"
 
