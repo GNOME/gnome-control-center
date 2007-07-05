@@ -124,29 +124,30 @@ main(int argc, char **argv)
 	GnomeThemeMetaInfo *theme;
 	GnomeVFSURI *uri;
 
+	g_thread_init (NULL);
 	theme_thumbnail_factory_init (argc, argv);
 
 	if (argc != 3) {
-		g_printerr("usage: gnome-theme-thumbnailer theme output-image\n");
+		g_printerr ("usage: gnome-theme-thumbnailer theme output-image\n");
 		return 1;
 	}
 
-	if (!gnome_vfs_init()) {
-		g_printerr("could not initialise gnome-vfs\n");
+	if (!gnome_vfs_init ()) {
+		g_printerr ("could not initialise gnome-vfs\n");
 		return 1;
 	}
-	
+
 	uri = gnome_vfs_uri_new (argv[1]);
 	theme = gnome_theme_read_meta_theme (uri);
 	gnome_vfs_uri_unref (uri);
 
 	if (theme) {
 	    pixbuf = generate_meta_theme_thumbnail (theme);
-	    save_pixbuf(pixbuf, argv[2]);
-	    gdk_pixbuf_unref(pixbuf);
+	    save_pixbuf (pixbuf, argv[2]);
+	    gdk_pixbuf_unref (pixbuf);
 	}
 	else {
-	    g_printerr("usage: gnome-theme-thumbnailer theme output-image\n");
+	    g_printerr ("usage: gnome-theme-thumbnailer theme output-image\n");
 	    return 1;
 	}
 
