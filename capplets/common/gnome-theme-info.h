@@ -30,6 +30,7 @@
 typedef enum {
   GNOME_THEME_TYPE_METATHEME,
   GNOME_THEME_TYPE_ICON,
+  GNOME_THEME_TYPE_CURSOR,
   GNOME_THEME_TYPE_REGULAR
 } GnomeThemeType;
 
@@ -65,6 +66,15 @@ struct _GnomeThemeIconInfo
   gchar *name;
   gchar *readable_name;
   gint priority;
+};
+
+typedef struct _GnomeThemeCursorInfo GnomeThemeCursorInfo;
+struct _GnomeThemeCursorInfo {
+  gchar *path;
+  gchar *name;
+  gint priority;
+  GArray *sizes;
+  GdkPixbuf *thumbnail;
 };
 
 typedef struct _GnomeThemeMetaInfo GnomeThemeMetaInfo;
@@ -113,6 +123,13 @@ GList              *gnome_theme_icon_info_find_all         (void);
 gint                gnome_theme_icon_info_compare          (GnomeThemeIconInfo *a,
 							    GnomeThemeIconInfo *b);
 
+/* Cursor Themes */
+GnomeThemeCursorInfo *gnome_theme_cursor_info_new              (void);
+void                gnome_theme_cursor_info_free             (GnomeThemeCursorInfo *icon_theme_info);
+GnomeThemeCursorInfo *gnome_theme_cursor_info_find             (const gchar        *icon_theme_name);
+GList              *gnome_theme_cursor_info_find_all         (void);
+gint                gnome_theme_cursor_info_compare          (GnomeThemeCursorInfo *a,
+							    GnomeThemeCursorInfo *b);
 
 /* Meta themes*/
 GnomeThemeMetaInfo *gnome_theme_meta_info_new              (void);

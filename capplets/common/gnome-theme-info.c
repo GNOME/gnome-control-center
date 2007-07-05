@@ -1,4 +1,6 @@
 #include <gtk/gtk.h>
+#include <gdk/gdkx.h>
+#include <X11/Xcursor/Xcursor.h>
 #include <libgnomevfs/gnome-vfs-init.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
@@ -74,6 +76,8 @@ static GHashTable *meta_theme_hash_by_uri;
 static GHashTable *meta_theme_hash_by_name;
 static GHashTable *icon_theme_hash_by_uri;
 static GHashTable *icon_theme_hash_by_name;
+static GHashTable *cursor_theme_hash_by_uri;
+static GHashTable *cursor_theme_hash_by_name;
 static GHashTable *theme_hash_by_uri;
 static GHashTable *theme_hash_by_name;
 static gboolean initting = FALSE;
@@ -98,6 +102,8 @@ get_priority_from_data_by_hash (GHashTable *hash_table,
     theme_priority = ((GnomeThemeMetaInfo *)data)->priority;
   else if (hash_table == icon_theme_hash_by_name)
     theme_priority = ((GnomeThemeIconInfo *)data)->priority;
+  else if (hash_table == cursor_theme_hash_by_name)
+    theme_priority = ((GnomeThemeCursorInfo *)data)->priority;
   else if (hash_table == theme_hash_by_name)
     theme_priority = ((GnomeThemeInfo *)data)->priority;
   else
@@ -931,6 +937,112 @@ add_common_theme_dir_monitor (GnomeVFSURI                *theme_dir_uri,
   return GNOME_VFS_OK;
 }
 
+
+static GdkPixbuf*
+gdk_pixbuf_from_xcursor_image(XcursorImage* cursor) {
+	GdkPixbuf* pixbuf;
+#define BUF_SIZE sizeof(guint32) * cursor->width * cursor->height
+	guchar* buf = malloc(BUF_SIZE);
+	guchar* it;
+	memset(buf, '\0', BUF_SIZE);
+
+	for(it = buf; it < (buf + BUF_SIZE); it += 4) {
+		// can we get rid of this by using guint32 ?
+#if G_BYTE_ORDER == G_LITTLE_ENDIAN
+		// on little endianess it's BGRA to RGBA
+		it[0] = ((guchar*)(cursor->pixels))[it - buf + 2];
+		it[1] = ((guchar*)(cursor->pixels))[it - buf + 1];
+		it[2] = ((guchar*)(cursor->pixels))[it - buf + 0];
+		it[3] = ((guchar*)(cursor->pixels))[it - buf + 3];
+#else
+		// on big endianess it's ARGB to RGBA
+		it[0] = ((guchar*)cursor->pixels)[it - buf + 1];
+		it[1] = ((guchar*)cursor->pixels)[it - buf + 2];
+		it[2] = ((guchar*)cursor->pixels)[it - buf + 3];
+		it[3] = ((guchar*)cursor->pixels)[it - buf + 0];
+#endif
+	}
+
+	pixbuf = gdk_pixbuf_new_from_data((const guchar *)buf,
+			GDK_COLORSPACE_RGB, TRUE, 8,
+			cursor->width, cursor->height,
+			cursor->width * 4,
+			(GdkPixbufDestroyNotify)g_free,
+			NULL);
+
+	if(!pixbuf) {
+		g_free(buf);
+	}
+
+	return pixbuf;
+}
+
+
+static void
+look_for_cursor_theme (GnomeVFSURI *theme_dir_uri)
+{
+  GnomeVFSURI *cursors_dir_uri;
+  GnomeVFSFileInfo *file_info;
+  GnomeVFSResult result;
+
+  cursors_dir_uri = gnome_vfs_uri_append_file_name (theme_dir_uri, "cursors");
+  file_info = gnome_vfs_file_info_new ();
+  result = gnome_vfs_get_file_info_uri (cursors_dir_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+  if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
+  {
+    gchar *dir_name;
+    gchar *name;
+    gint i;
+    GArray *available_sizes;
+    XcursorImage *cursor;
+    GdkPixbuf *thumbnail = NULL;
+    GnomeThemeCursorInfo *cursor_theme_info;
+    gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64, 0 };   
+    
+    dir_name = gnome_vfs_uri_to_string (theme_dir_uri, GNOME_VFS_URI_HIDE_NONE);
+    name = g_path_get_basename (dir_name);
+
+    available_sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint), 8);
+
+    for (i = 0; sizes[i] != 0; i++)
+    {
+      cursor = XcursorLibraryLoadImage ("left_ptr", name, sizes[i]);
+
+      if (cursor)
+      {
+        if (cursor->size != sizes[i])
+        {
+          XcursorImageDestroy (cursor);
+          cursor = NULL;
+        }
+        else
+        {
+          g_array_append_val (available_sizes, sizes[i]);
+
+          if (thumbnail == NULL && i >= 1)
+            thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
+        }
+      }
+    }
+
+    if (!thumbnail)
+    {
+      cursor = XcursorLibraryLoadImage ("left_ptr", name, g_array_index (available_sizes, gint, 0));
+      thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
+    }
+
+    cursor_theme_info = gnome_theme_cursor_info_new ();
+    cursor_theme_info->path = dir_name;
+    cursor_theme_info->name = name;
+    cursor_theme_info->sizes = available_sizes;
+    cursor_theme_info->thumbnail = thumbnail;
+    cursor_theme_info->priority = 0;
+    
+    g_hash_table_insert (cursor_theme_hash_by_uri, dir_name, cursor_theme_info);
+    add_data_to_hash_by_name (cursor_theme_hash_by_name, name, cursor_theme_info);
+  }
+}
+
 static GnomeVFSResult
 add_common_icon_theme_dir_monitor (GnomeVFSURI                    *theme_dir_uri,
 				   gboolean                       *monitor_not_added,
@@ -941,6 +1053,9 @@ add_common_icon_theme_dir_monitor (GnomeVFSURI                    *theme_dir_uri
   gchar *uri_string;
   gboolean real_monitor_not_added = FALSE;
   GnomeVFSURI *index_uri;
+
+  /* Look for cursor theme in the theme directory */
+  look_for_cursor_theme (theme_dir_uri);
 
   /* Add the handle for this directory */
   index_uri = gnome_vfs_uri_append_file_name (theme_dir_uri, "index.theme");
@@ -1333,6 +1448,67 @@ gnome_theme_icon_info_compare (GnomeThemeIconInfo *a,
   return safe_strcmp (a->name, b->name);
 }
 
+/* Cursor themes */
+GnomeThemeCursorInfo *
+gnome_theme_cursor_info_new (void)
+{
+  GnomeThemeCursorInfo *cursor_theme_info;
+
+  cursor_theme_info = g_new0 (GnomeThemeCursorInfo, 1);
+
+  return cursor_theme_info;
+}
+
+void
+gnome_theme_cursor_info_free (GnomeThemeCursorInfo *cursor_theme_info)
+{
+  g_free (cursor_theme_info->name);
+  g_free (cursor_theme_info->path);
+  g_array_free (cursor_theme_info->sizes, TRUE);
+  g_object_unref (cursor_theme_info->thumbnail);
+  g_free (cursor_theme_info);
+}
+
+GnomeThemeCursorInfo *
+gnome_theme_cursor_info_find (const gchar *cursor_theme_name)
+{
+  g_return_val_if_fail (cursor_theme_name != NULL, NULL);
+
+  return get_data_from_hash_by_name (cursor_theme_hash_by_name, cursor_theme_name, -1);
+}
+
+static void
+gnome_theme_cursor_info_find_all_helper (gchar *key,
+				       GList *list,
+				       GList **themes)
+{
+  *themes = g_list_prepend (*themes, list->data);
+}
+
+GList *
+gnome_theme_cursor_info_find_all (void)
+{
+  GList *list = NULL;
+
+  g_hash_table_foreach (cursor_theme_hash_by_name,
+			(GHFunc) gnome_theme_cursor_info_find_all_helper,
+			&list);
+
+  return list;
+}
+
+gint
+gnome_theme_cursor_info_compare (GnomeThemeCursorInfo *a,
+			       GnomeThemeCursorInfo *b)
+{
+  gint cmp;
+
+  cmp = safe_strcmp (a->path, b->path);
+  if (cmp != 0) return cmp;
+
+  return safe_strcmp (a->name, b->name);
+}
+
 
 /* Meta themes*/
 GnomeThemeMetaInfo *
@@ -1480,6 +1656,9 @@ gnome_theme_is_writable (const gpointer theme, GnomeThemeType type) {
     case GNOME_THEME_TYPE_ICON:
       theme_path = ((const GnomeThemeIconInfo *) theme)->path;
       break;
+    case GNOME_THEME_TYPE_CURSOR:
+      theme_path = ((const GnomeThemeIconInfo *) theme)->path;
+      break;      
     case GNOME_THEME_TYPE_METATHEME:
       theme_path = ((const GnomeThemeMetaInfo *) theme)->path;
       break;
@@ -1538,6 +1717,8 @@ gnome_theme_init (gboolean *monitor_not_added)
   meta_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   icon_theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   icon_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  cursor_theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  cursor_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
