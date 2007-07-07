@@ -1,3 +1,14 @@
+2007-07-07  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-da-capplet.c: (entry_focus_out_event_cb),
+	(terminal_checkbutton_toggled_cb), (a11y_checkbutton_toggled_cb),
+	(web_radiobutton_toggled_cb), (web_combo_changed_cb),
+	(mail_combo_changed_cb), (media_combo_changed_cb),
+	(terminal_combo_changed_cb), (visual_combo_changed_cb),
+	(mobility_combo_changed_cb), (show_dialog): fix error handling, plug
+	some memory leaks, and properly handle unset GConf keys in
+	xxx_combo_changed_cb (fixes bug #454103)
+
 2007-04-27  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* default-applications-accessibility.desktop.in.in: renamed Bugzilla

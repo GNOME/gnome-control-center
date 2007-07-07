@@ -72,88 +72,68 @@ entry_focus_out_event_cb (GtkWidget *widget, GdkEventFocus *event, GnomeDACapple
     else if (widget == capplet->terminal_exec_flag_entry) {
 	gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, text, &error);
     }
-	else if (widget == capplet->media_player_command_entry) {
+    else if (widget == capplet->media_player_command_entry) {
 	gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_EXEC, text, &error);
-	}
+    }
 
     if (error != NULL) {
 	g_warning (_("Error saving configuration: %s"), error->message);
 	g_error_free (error);
-	error = NULL;
     }
     else if (widget == capplet->visual_command_entry) {
-	gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_VISUAL_EXEC, text, &error);
+	gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_VISUAL_EXEC, text, NULL);
     }
     else if (widget == capplet->mobility_command_entry) {
-	gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_MOBILITY_EXEC, text, &error);
+	gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_MOBILITY_EXEC, text, NULL);
     }
 
     return FALSE;
 }
 
 static void
-terminal_checkbutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *capplet)
+terminal_checkbutton_toggled_cb (GtkWidget *togglebutton, GnomeDACapplet *capplet)
 {
     gboolean is_active;
     GError *error = NULL;
 
-    is_active = gtk_toggle_button_get_active (togglebutton);
+    is_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglebutton));
 
-    if (GTK_WIDGET (togglebutton) == capplet->web_browser_terminal_checkbutton) {
+    if (togglebutton == capplet->web_browser_terminal_checkbutton) {
 	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, is_active, &error);
     }
-    else if (GTK_WIDGET (togglebutton) == capplet->mail_reader_terminal_checkbutton) {
+    else if (togglebutton == capplet->mail_reader_terminal_checkbutton) {
 	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, is_active, &error);
     }
-	else if (GTK_WIDGET (togglebutton) == capplet->media_player_terminal_checkbutton) {
+    else if (togglebutton == capplet->media_player_terminal_checkbutton) {
 	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM, is_active, &error);
-	}
+    }
 
     if (error != NULL) {
 	g_warning (_("Error saving configuration: %s"), error->message);
 	g_error_free (error);
-	error = NULL;
     }
 }
 
 static void
-visual_checkbutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *capplet)
+a11y_checkbutton_toggled_cb (GtkWidget *togglebutton, GnomeDACapplet *capplet)
 {
     gboolean is_active;
     GError *error = NULL;
 
-    is_active = gtk_toggle_button_get_active (togglebutton);
+    is_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglebutton));
 
-    if (GTK_WIDGET (togglebutton) == capplet->visual_startup_checkbutton) {
+    if (togglebutton == capplet->visual_startup_checkbutton) {
 	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_VISUAL_STARTUP, is_active, &error);
     }
-
-    if (error != NULL) {
-	g_warning (_("Error saving configuration: %s"), error->message);
-	g_error_free (error);
-	error = NULL;
-    }
-}
-
-static void
-mobility_checkbutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *capplet)
-{
-    gboolean is_active;
-    GError *error = NULL;
-
-    is_active = gtk_toggle_button_get_active (togglebutton);
-
-    if (GTK_WIDGET (togglebutton) == capplet->mobility_startup_checkbutton) {
+    else if (togglebutton == capplet->mobility_startup_checkbutton) {
 	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_MOBILITY_STARTUP, is_active, &error);
     }
 
     if (error != NULL) {
 	g_warning (_("Error saving configuration: %s"), error->message);
 	g_error_free (error);
-	error = NULL;
     }
 }
-
 
 static void
 set_icon (GtkImage *image, GtkIconTheme *theme, const char *name)
@@ -167,7 +147,7 @@ set_icon (GtkImage *image, GtkIconTheme *theme, const char *name)
 }
 
 static void
-web_radiobutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *capplet)
+web_radiobutton_toggled_cb (GtkWidget *togglebutton, GnomeDACapplet *capplet)
 {
     gint index;
     GnomeDAWebItem *item;
@@ -179,12 +159,12 @@ web_radiobutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *cappl
     if (index == -1)
 	return;
 
-    item = (GnomeDAWebItem*) g_list_nth_data (capplet->web_browsers, index);
+    item = (GnomeDAWebItem *) g_list_nth_data (capplet->web_browsers, index);
 
-    if (GTK_WIDGET (togglebutton) == capplet->new_win_radiobutton) {
+    if (togglebutton == capplet->new_win_radiobutton) {
 	command = item->win_command;
     }
-    else if (GTK_WIDGET (togglebutton) == capplet->new_tab_radiobutton) {
+    else if (togglebutton == capplet->new_tab_radiobutton) {
 	command = item->tab_command;
     }
     else {
@@ -196,7 +176,6 @@ web_radiobutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *cappl
     if (error != NULL) {
 	g_warning (_("Error saving configuration: %s"), error->message);
 	g_error_free (error);
-	error = NULL;
     }
 }
 
@@ -212,7 +191,7 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GConfChangeSet *cs;
     GError *error = NULL;
     char *http_cmd;
-    
+
     gtk_combo_box_get_active_iter (combo, &iter);
     path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
     current_index = gtk_tree_path_get_indices (path)[0];
@@ -242,7 +221,6 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	if (error != NULL) {
 	    g_warning (_("Error saving configuration: %s"), error->message);
 	    g_error_free (error);
-	    error = NULL;
 	}
 
 	gconf_change_set_unref (cs);
@@ -253,7 +231,8 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     }
 
     http_cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL);
-    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), http_cmd);
+    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry),
+			http_cmd ? http_cmd : "");
     g_free (http_cmd);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
 				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, NULL));
@@ -266,7 +245,7 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
 }
-	
+
 /* FIXME: Refactor these two functions below into one... */
 static void
 mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
@@ -279,7 +258,7 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GConfChangeSet *cs;
     GError *error = NULL;
     char *mailer_cmd;
-    
+
     gtk_combo_box_get_active_iter (combo, &iter);
     path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
     current_index = gtk_tree_path_get_indices (path)[0];
@@ -299,7 +278,6 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	if (error != NULL) {
 	    g_warning (_("Error saving configuration: %s"), error->message);
 	    g_error_free (error);
-	    error = NULL;
 	}
 
 	gconf_change_set_unref (cs);
@@ -309,7 +287,8 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     }
 
     mailer_cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MAILER_EXEC, NULL);
-    gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry), mailer_cmd);
+    gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry),
+			mailer_cmd ? mailer_cmd : "");
     g_free (mailer_cmd);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
 				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, NULL));
@@ -330,14 +309,14 @@ media_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GConfChangeSet *cs;
     GError *error = NULL;
     char *media_cmd;
-    
+
     gtk_combo_box_get_active_iter (combo, &iter);
     path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
     current_index = gtk_tree_path_get_indices (path)[0];
     gtk_tree_path_free (path);
 
     if (current_index < g_list_length (capplet->media_players)) {
-	item = (GnomeDASimpleItem*) g_list_nth_data (capplet->media_players, current_index);
+	item = (GnomeDASimpleItem *) g_list_nth_data (capplet->media_players, current_index);
 	is_custom_active = FALSE;
 
 	cs = gconf_change_set_new ();
@@ -350,7 +329,6 @@ media_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	if (error != NULL) {
 	    g_warning (_("Error saving configuration: %s"), error->message);
 	    g_error_free (error);
-	    error = NULL;
 	}
 
 	gconf_change_set_unref (cs);
@@ -360,7 +338,8 @@ media_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     }
 
     media_cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_EXEC, NULL);
-    gtk_entry_set_text (GTK_ENTRY (capplet->media_player_command_entry), media_cmd);
+    gtk_entry_set_text (GTK_ENTRY (capplet->media_player_command_entry),
+    			media_cmd ? media_cmd : "");
     g_free (media_cmd);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->media_player_terminal_checkbutton),
 				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM, NULL));
@@ -401,7 +380,6 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	if (error != NULL) {
 	    g_warning (_("Error saving configuration: %s"), error->message);
 	    g_error_free (error);
-	    error = NULL;
 	}
 
 	gconf_change_set_unref (cs);
@@ -411,8 +389,10 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     }
     terminal_cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL);
     terminal_cmd_arg = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, NULL);
-    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry), terminal_cmd);
-    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry), terminal_cmd_arg);
+    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry),
+			terminal_cmd ? terminal_cmd : "");
+    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
+			terminal_cmd_arg ? terminal_cmd_arg : "");
     g_free (terminal_cmd);
     g_free (terminal_cmd_arg);
 
@@ -432,6 +412,7 @@ visual_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GnomeDAVisualItem *item;
     GConfChangeSet *cs;
     GError *error = NULL;
+    gchar *cmd;
 
     gtk_combo_box_get_active_iter (combo, &iter);
     path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
@@ -439,7 +420,7 @@ visual_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_tree_path_free (path);
 
     if (current_index < g_list_length (capplet->visual_ats)) {
-	item = (GnomeDAVisualItem*) g_list_nth_data (capplet->visual_ats, current_index);
+	item = (GnomeDAVisualItem *) g_list_nth_data (capplet->visual_ats, current_index);
 	is_custom_active = FALSE;
 
 	cs = gconf_change_set_new ();
@@ -452,7 +433,6 @@ visual_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	if (error != NULL) {
 	    g_warning (_("Error saving configuration: %s"), error->message);
 	    g_error_free (error);
-	    error = NULL;
 	}
 
 	gconf_change_set_unref (cs);
@@ -461,8 +441,9 @@ visual_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	is_custom_active = TRUE;
     }
 
-    gtk_entry_set_text (GTK_ENTRY (capplet->visual_command_entry),
-			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_VISUAL_EXEC, NULL));
+    cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_VISUAL_EXEC, NULL);
+    gtk_entry_set_text (GTK_ENTRY (capplet->visual_command_entry), cmd ? cmd : "");
+    g_free (cmd);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->visual_startup_checkbutton),
 				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_VISUAL_STARTUP, NULL));
 
@@ -481,6 +462,7 @@ mobility_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GnomeDAMobilityItem *item;
     GConfChangeSet *cs;
     GError *error = NULL;
+    gchar *cmd;
 
     gtk_combo_box_get_active_iter (combo, &iter);
     path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
@@ -488,7 +470,7 @@ mobility_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_tree_path_free (path);
 
     if (current_index < g_list_length (capplet->mobility_ats)) {
-	item = (GnomeDAMobilityItem*) g_list_nth_data (capplet->mobility_ats, current_index);
+	item = (GnomeDAMobilityItem *) g_list_nth_data (capplet->mobility_ats, current_index);
 	is_custom_active = FALSE;
 
 	cs = gconf_change_set_new ();
@@ -501,7 +483,6 @@ mobility_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	if (error != NULL) {
 	    g_warning (_("Error saving configuration: %s"), error->message);
 	    g_error_free (error);
-	    error = NULL;
 	}
 
 	gconf_change_set_unref (cs);
@@ -510,8 +491,9 @@ mobility_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	is_custom_active = TRUE;
     }
 
-    gtk_entry_set_text (GTK_ENTRY (capplet->mobility_command_entry),
-			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MOBILITY_EXEC, NULL));
+    cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MOBILITY_EXEC, NULL);
+    gtk_entry_set_text (GTK_ENTRY (capplet->mobility_command_entry), cmd ? cmd : "");
+    g_free (cmd);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mobility_startup_checkbutton),
 				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_MOBILITY_STARTUP, NULL));
 
@@ -1220,14 +1202,14 @@ show_dialog (GnomeDACapplet *capplet)
 	gconf_value_free (value);
     }
 
-	value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_EXEC, NULL);
+    value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_EXEC, NULL);
     if (value)
     {
 	media_player_update_combo_box (capplet, gconf_value_get_string (value));
 	gconf_value_free (value);
     }
 
-	value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM, NULL);
+    value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM, NULL);
     if (value)
     {
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->media_player_terminal_checkbutton),
@@ -1286,10 +1268,9 @@ show_dialog (GnomeDACapplet *capplet)
     g_signal_connect (capplet->media_player_terminal_checkbutton, "toggled",
 		      G_CALLBACK (terminal_checkbutton_toggled_cb), capplet);
     g_signal_connect (capplet->visual_startup_checkbutton, "toggled",
-                    G_CALLBACK (visual_checkbutton_toggled_cb), capplet);
+                    G_CALLBACK (a11y_checkbutton_toggled_cb), capplet);
     g_signal_connect (capplet->mobility_startup_checkbutton, "toggled",
-                    G_CALLBACK (mobility_checkbutton_toggled_cb), capplet);
-
+                    G_CALLBACK (a11y_checkbutton_toggled_cb), capplet);
 
     /* TODO: Remove when GConfPropertyEditor will be used */
     g_signal_connect (capplet->web_browser_command_entry, "focus-out-event", G_CALLBACK (entry_focus_out_event_cb), capplet);
@@ -1364,7 +1345,7 @@ main (int argc, char **argv)
     gtk_main ();
 
     g_object_unref (capplet->gconf);
-    
+
     gnome_da_xml_free (capplet);
     g_object_unref (program);
 
