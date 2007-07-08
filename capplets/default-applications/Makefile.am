@@ -13,8 +13,8 @@ gnome_default_applications_properties_SOURCES = \
 
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir   = $(pkgdatadir)/glade
-glade_DATA = gnome-default-applications-properties.glade
+gladedir = $(pkgdatadir)/glade
+dist_glade_DATA = gnome-default-applications-properties.glade
 
 gnome-at-visual: gnome-at-commandline.in
 	cp $< $@
@@ -23,9 +23,11 @@ gnome-at-mobility: gnome-at-commandline.in
 	cp $< $@
 
 desktopdir = $(datadir)/applications
-Desktop_in_files = default-applications.desktop.in \
+Desktop_in_files = \
+	default-applications.desktop.in \
 	default-applications-accessibility.desktop.in \
-	gnome-at-visual.desktop.in gnome-at-mobility.desktop.in
+	gnome-at-mobility.desktop.in \
+	gnome-at-visual.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 autostartdir = $(datadir)/gnome/autostart
@@ -44,7 +46,6 @@ INCLUDES   = 					\
 	-DGNOMECC_GLADE_DIR=\""$(gladedir)"\"	\
 	-DGNOMECC_DATA_DIR=\""$(pkgdatadir)"\"
 
-noinst_DATA = gnome-default-applications.xml.in
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xmldata_DATA) $(autostart_DATA)
-EXTRA_DIST = $(glade_DATA) gnome-default-applications.xml.in
+EXTRA_DIST = $(xmldata_in_files)
 
