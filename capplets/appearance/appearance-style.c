@@ -513,8 +513,15 @@ static void
 cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
 {
   GnomeThemeCursorInfo *theme;
+  gchar *name;
 
-  theme = gnome_theme_cursor_info_find (gconf_client_get_string (data->client, CURSOR_THEME_KEY, NULL));
+  name = gconf_client_get_string (data->client, CURSOR_THEME_KEY, NULL);
+  if (name == NULL)
+    return;
+
+  theme = gnome_theme_cursor_info_find (name);
+  g_free (name);
+
   if (theme) {
     gint size;
 
