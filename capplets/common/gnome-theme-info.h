@@ -25,7 +25,7 @@
 
 #include <glib.h>
 #include <libgnomevfs/gnome-vfs.h>
-
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 typedef enum {
   GNOME_THEME_TYPE_METATHEME,
