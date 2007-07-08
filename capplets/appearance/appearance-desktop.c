@@ -739,9 +739,9 @@ wp_view_tooltip_cb (GtkWidget  *widget,
 
   gtk_tree_model_get (data->wp_model, &iter, 2, &wpfile, -1);
   item = g_hash_table_lookup (data->wp_hash, wpfile);
+  g_free (wpfile);
 
-  gtk_tooltip_set_markup (tooltip,
-                          g_strdup_printf ("%s", item->description));
+  gtk_tooltip_set_markup (tooltip, item->description);
 
   return TRUE;
 }
