@@ -1,4 +1,4 @@
-AC_INIT([gnome-control-center], [2.19.4],
+AC_INIT([gnome-control-center], [2.19.5],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=control-center])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -179,6 +179,8 @@ PKG_CHECK_MODULES(XCURSOR, [
 	AC_DEFINE(HAVE_XCURSOR, 1, [Define if the Xcursor extension is available]),
 	have_xcursor=no)
 AM_CONDITIONAL(HAVE_XCURSOR, [test $have_xcursor=yes])
+AC_SUBST(XCURSOR_CFLAFS)
+AC_SUBST(XCURSOR_LIBS)
 
 CAPPLET_LIBS="$CAPPLET_LIBS $XCURSOR_LIBS"
 

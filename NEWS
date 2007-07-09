@@ -1,3 +1,109 @@
+gnome-control-center 2.19.5
+
+about-me:
+- Fix a small typo in the comments (Guilherme de S. Pastore)
+
+appearance:
+- Fix compiler warnings (Jens Granseuer)
+- Tweak the metatheme's icon view's margin and spacings to better
+  fit the new thumbnails (Denis Washington)
+- Modernized and brough the theme thumbnailer to the size of the
+  new metatheme thumbnails (Denis Washington)
+- Hook up the delete buttons (Jens Granseuer)
+- Listen to on-disk changes in the details tab too (Jens Granseuer)
+- Use STOCK_DELETE instead of STOCK_OK in delete confirmation dialog
+  (Jens Granseuer)
+- Implement theme saving (Jens Granseuer)
+- Use the new async thumbnail generation functions (Denis Washington)
+- Don't try to use uninitialized GdkPixbuf (Jens Granseuer)
+- Fixed resize problems (Denis Washington)
+- Use the new placeholder thumbnails for the details window's theme
+  lists (Denis Washington)
+- Consider NULL and "" equal for color schemes (Jens Granseuer)
+- Make the Custom theme always the first in the list and make its label
+  bold to differentiate it from other themes (Denis Washington)
+- Load the metatheme thumbnails in the order they are in the list
+  (Denis Washington)
+- Fix leaks (Jens Granseuer)
+- Remove hard-coded item width (Jens Granseuer)
+- Add explicit width_request to our icon views so we can use
+  GTK_POLICY_NEVER for horizontal scrollbars and still properly resize
+  the window (Jens Granseuer) (#451585)
+- Add cursor theme support (Denis Washington)
+- Don't allocate colors in the colormap (Jens Granseuer)
+- Don't crash if we have nothing but the default cursor theme (Jens Granseuer)
+- Ellipsise the 'Save As' button (Jens Granseuer)
+- Change the button order in themes tab (Denis Washington)
+- Add an icon to the 'Customize' button (Denis Washington)
+
+at-properties:
+- Fix typo in string (Gabor Kelemen)
+
+default applications:
+- Fix error handling, plug some memory leaks and properly handle
+  unset GConf keys (Jens Granseuer) (#454103)
+- Fix Bugzilla info (Jens Granseuer)
+
+display:
+- Use icon theme instead of global pixmaps dir for application icon
+  (Michael Terry) (#450777)
+- Add and use new icon by Jakub Steiner (Jens Granseuer) (#375230)
+
+network:
+- Add and use new icon by Josef Vybiral (Jens Granseuer) (#399051)
+
+settings daemon:
+- Call g_thread_init to avoid warnings and crashes (Rodrigo Moya)
+- Make modules not return errors when some methods are not implemented,
+  these are really not errors (Rodrigo Moya)
+- Fixed indexing of loadable modules (Rodrigo Moya)
+- Fixed spawning of gnome-screensaver (Matthias Clasen)
+- Fixed crash when changing the background (Rodrigo Moya)
+- Initialize/start the modules in idle callbacks (Matthias Clasen,
+  Rodrigo Moya) (#430889)
+- Start DBus server earlier (Matthias Clasen, Rodrigo Moya)
+- Add a frame to the media popup (Jens Granseuer) (#451674)
+- Fix compiler warnings (Jens Granseuer) (#438152)
+- Reduce static data in GObject-based classes registration
+  (Jens Granseuer)
+- If we don't take over the background because Nautilus is running,
+  don't treat that as an error (Jens Granseuer)
+- Don't unmute when lowering the volume and switch to muted when the
+  volume reaches 0 (Grzegorz Dymarek) (#337896)
+
+sound:
+- Add new icons by Josef Vybiral (Jens Granseuer) (#397305)
+- Fix target dir for icons (Jens Granseuer)
+
+themus:
+- Call g_thread_init to avoid warnings and crashes (Jens Granseuer)
+
+typing break:
+- Update icon cache on uninstall as well as install (Michael Terry) (#450777)
+
+general:
+- Make metatheme thumbnails original-sized and add check-box, radio
+  button (Denis Washington)
+- Generate all types of thumbnails in a separate process, not just
+  those for metathemes (Denis Washington)
+- Only look for icons in the icon theme (Michael Terry) (#450777)
+- Add safeguards for NULL values (Jens Granseuer) (#441036)
+- Add support for cursor themes in themes (Denis Washington)
+
+updated translations:
+- bg (Alexander Shopov)
+- dz (Pema geyleg)
+- es (Jorge Gonzalez)
+- et (Priit Laes)
+- fi (Ilkka Tuohela)
+- hu (Gabor Kelemen)
+- nb (Kjartan Maraas)
+- pl (Artur Flinta)
+- pt_BR (Wendell Silva, Leonardo Ferreira Fontenelle)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+- vi (Clytie Siddall, Nguyen Thai Ngoc Duy)
+------------------------------------------------------------------------------
 gnome-control-center 2.19.4
 
 appearance:
