@@ -19,21 +19,21 @@ nautilus_LTLIBRARIES = libnautilus-themus.la
 libtheme_method_la_LDFLAGS = -module -avoid-version \
   -export-symbols-regex 'vfs_module_.*'
 libtheme_method_la_LIBADD = $(THEME_METHOD_LIBS) \
-  $(top_builddir)/capplets/common/libcommon.la $(GNOMECC_CAPPLETS_LIBS)
+  $(top_builddir)/capplets/common/libcommon.la $(XCURSOR_LIBS)
 libtheme_method_la_SOURCES = theme-method.c
 
 gnome_theme_thumbnailer_LDADD = $(THEMUS_THUMBNAILER_LIBS) \
-  $(top_builddir)/capplets/common/libcommon.la $(GNOMECC_CAPPLETS_LIBS)
+  $(top_builddir)/capplets/common/libcommon.la $(XCURSOR_LIBS)
 gnome_theme_thumbnailer_SOURCES = \
 	theme-thumbnailer.c
 
 themus_theme_applier_LDADD = $(THEMUS_APPLIER_LIBS) \
-  $(top_builddir)/capplets/common/libcommon.la $(GNOMECC_CAPPLETS_LIBS)
+  $(top_builddir)/capplets/common/libcommon.la $(XCURSOR_LIBS)
 themus_theme_applier_SOURCES = \
 	themus-theme-applier.c
 
 libnautilus_themus_la_LIBADD = $(THEMUS_COMPONENT_LIBS) \
-  $(top_builddir)/capplets/common/libcommon.la $(GNOMECC_CAPPLETS_LIBS)
+  $(top_builddir)/capplets/common/libcommon.la $(XCURSOR_LIBS)
 libnautilus_themus_la_LDFLAGS = -module -avoid-version \
   -export-symbols-regex 'nautilus_module_.*'
 libnautilus_themus_la_SOURCES = \
