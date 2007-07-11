@@ -203,10 +203,14 @@ void
 xkb_layouts_enable_disable_default (GladeXML * dialog, gboolean enable)
 {
 	GValue val = { 0 };
+	GtkWidget *tree_view = WID ("xkb_layouts_selected");
+
 	g_value_init (&val, G_TYPE_BOOLEAN);
 	g_value_set_boolean (&val, enable);
 	g_object_set_property (G_OBJECT (toggle_renderer), "activatable",
 			       &val);
+
+	gtk_widget_draw (tree_view, NULL);
 }
 
 void
