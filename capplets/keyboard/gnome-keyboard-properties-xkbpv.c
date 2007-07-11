@@ -74,7 +74,7 @@ xkb_layout_preview_update (GladeXML * chooser_dialog)
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
 	GtkWidget *kbdraw =
 	    GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
-	const gchar *id =
+	gchar *id =
 	    xkb_layout_chooser_get_selected_id (chooser_dialog);
 
 	if (kbdraw != NULL && id != NULL) {
@@ -119,5 +119,7 @@ xkb_layout_preview_update (GladeXML * chooser_dialog)
 		}
 		g_object_unref (G_OBJECT (data));
 	}
+
+	g_free (id);
 #endif
 }
