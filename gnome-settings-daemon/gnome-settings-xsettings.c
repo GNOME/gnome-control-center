@@ -333,11 +333,11 @@ gnome_settings_module_xsettings_initialize (GnomeSettingsModule *module, GConfCl
 	gnome_settings_register_config_callback ("/desktop/gtk", xsettings_callback);
 	gnome_settings_register_config_callback ("/desktop/gnome/interface", xsettings_callback);
 
-	return TRUE;
-
 #ifdef HAVE_XFT2
 	gnome_settings_register_config_callback (FONT_RENDER_DIR, xft_callback);
 #endif /* HAVE_XFT2 */
+
+	return TRUE;
 }
 
 #ifdef HAVE_XFT2
