@@ -94,6 +94,7 @@ main (int argc, char **argv)
 
   gchar *install_filename = NULL;
   gchar *start_page = NULL;
+  gchar **wallpaper_files = NULL;
   GOptionContext *option_context;
   GOptionEntry option_entries[] = {
       { "install-theme",
@@ -110,6 +111,13 @@ main (int argc, char **argv)
         &start_page,
         N_("Specify the name of the page to show (theme|background|fonts|interface)"),
         N_("page") },
+      { G_OPTION_REMAINING,
+      	0,
+      	G_OPTION_FLAG_IN_MAIN,
+      	G_OPTION_ARG_FILENAME_ARRAY,
+      	&wallpaper_files,
+      	NULL,
+      	N_("[WALLPAPER...]") },
       { NULL }
     };
 
@@ -138,7 +146,8 @@ main (int argc, char **argv)
   /* init tabs */
   themes_init (data);
   style_init (data);
-  desktop_init (data);
+  desktop_init (data, (const gchar **) wallpaper_files);
+  g_strfreev (wallpaper_files);
   font_init (data);
   ui_init (data);
 

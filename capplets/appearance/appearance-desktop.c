@@ -900,10 +900,14 @@ wp_load_stuffs (void *user_data)
       select_item (data, item, FALSE);
       wp_option_menu_set (data, style, FALSE);
     }
-
   }
   g_free (imagepath);
   g_free (style);
+
+  if (data->wp_uris) {
+    wp_add_images (data, data->wp_uris);
+    data->wp_uris = NULL;
+  }
 
   return FALSE;
 }
@@ -916,7 +920,8 @@ wp_select_after_realize (GtkWidget *widget,
 }
 
 void
-desktop_init (AppearanceData *data)
+desktop_init (AppearanceData *data,
+	      const gchar **uris)
 {
   GtkWidget *add_button;
   GtkFileFilter *filter;
@@ -929,6 +934,14 @@ desktop_init (AppearanceData *data)
 #endif
 
   data->wp_update_gconf = TRUE;
+
+  data->wp_uris = NULL;
+  if (uris != NULL) {
+    while (*uris != NULL) {
+      data->wp_uris = g_slist_append (data->wp_uris, g_strdup (*uris));
+      uris++;
+    }
+  }
 
   data->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
@@ -1087,6 +1100,8 @@ void
 desktop_shutdown (AppearanceData *data)
 {
   gnome_wp_xml_save_list (data);
+  g_slist_foreach (data->wp_uris, (GFunc) g_free, NULL);
+  g_slist_free (data->wp_uris);
   g_object_unref (data->wp_thumbs);
   g_object_ref_sink (data->wp_filesel);
   g_object_unref (data->wp_filesel);

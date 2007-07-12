@@ -47,6 +47,7 @@ typedef struct {
   GtkWidget *wp_rem_button;
   GtkWidget *wp_filesel;
   GtkWidget *wp_image;
+  GSList *wp_uris;
 
   /* font */
   GtkWidget *font_details;
