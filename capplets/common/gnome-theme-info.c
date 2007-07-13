@@ -1028,7 +1028,8 @@ look_for_cursor_theme (GnomeVFSURI *theme_dir_uri)
     if (!thumbnail)
     {
       cursor = XcursorLibraryLoadImage ("left_ptr", name, g_array_index (available_sizes, gint, 0));
-      thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
+      if (cursor)
+        thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
     }
 
     cursor_theme_info = gnome_theme_cursor_info_new ();
