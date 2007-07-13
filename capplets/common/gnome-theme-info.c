@@ -937,111 +937,99 @@ add_common_theme_dir_monitor (GnomeVFSURI                *theme_dir_uri,
   return GNOME_VFS_OK;
 }
 
-
-static GdkPixbuf*
-gdk_pixbuf_from_xcursor_image(XcursorImage* cursor) {
-	GdkPixbuf* pixbuf;
+static GdkPixbuf *
+gdk_pixbuf_from_xcursor_image (XcursorImage *cursor) {
+  GdkPixbuf *pixbuf;
 #define BUF_SIZE sizeof(guint32) * cursor->width * cursor->height
-	guchar* buf = malloc(BUF_SIZE);
-	guchar* it;
-	memset(buf, '\0', BUF_SIZE);
+  guchar *buf = g_malloc0 (BUF_SIZE);
+  guchar *it;
 
-	for(it = buf; it < (buf + BUF_SIZE); it += 4) {
-		// can we get rid of this by using guint32 ?
+  for (it = buf; it < (buf + BUF_SIZE); it += 4) {
+    // can we get rid of this by using guint32 ?
 #if G_BYTE_ORDER == G_LITTLE_ENDIAN
-		// on little endianess it's BGRA to RGBA
-		it[0] = ((guchar*)(cursor->pixels))[it - buf + 2];
-		it[1] = ((guchar*)(cursor->pixels))[it - buf + 1];
-		it[2] = ((guchar*)(cursor->pixels))[it - buf + 0];
-		it[3] = ((guchar*)(cursor->pixels))[it - buf + 3];
+    // on little endianess it's BGRA to RGBA
+    it[0] = ((guchar *) (cursor->pixels))[it - buf + 2];
+    it[1] = ((guchar *) (cursor->pixels))[it - buf + 1];
+    it[2] = ((guchar *) (cursor->pixels))[it - buf + 0];
+    it[3] = ((guchar *) (cursor->pixels))[it - buf + 3];
 #else
-		// on big endianess it's ARGB to RGBA
-		it[0] = ((guchar*)cursor->pixels)[it - buf + 1];
-		it[1] = ((guchar*)cursor->pixels)[it - buf + 2];
-		it[2] = ((guchar*)cursor->pixels)[it - buf + 3];
-		it[3] = ((guchar*)cursor->pixels)[it - buf + 0];
+    // on big endianess it's ARGB to RGBA
+    it[0] = ((guchar *) cursor->pixels)[it - buf + 1];
+    it[1] = ((guchar *) cursor->pixels)[it - buf + 2];
+    it[2] = ((guchar *) cursor->pixels)[it - buf + 3];
+    it[3] = ((guchar *) cursor->pixels)[it - buf + 0];
 #endif
-	}
+  }
 
-	pixbuf = gdk_pixbuf_new_from_data((const guchar *)buf,
+  pixbuf = gdk_pixbuf_new_from_data ((const guchar *) buf,
 			GDK_COLORSPACE_RGB, TRUE, 8,
 			cursor->width, cursor->height,
 			cursor->width * 4,
-			(GdkPixbufDestroyNotify)g_free,
+			(GdkPixbufDestroyNotify) g_free,
 			NULL);
 
-	if(!pixbuf) {
-		g_free(buf);
-	}
+  if (!pixbuf)
+    g_free (buf);
 
-	return pixbuf;
+  return pixbuf;
 }
 
-
 static void
-look_for_cursor_theme (GnomeVFSURI *theme_dir_uri)
+look_for_cursor_theme (const gchar *theme_dir)
 {
-  GnomeVFSURI *cursors_dir_uri;
-  GnomeVFSFileInfo *file_info;
-  GnomeVFSResult result;
+  gchar *cursors_dir;
 
-  cursors_dir_uri = gnome_vfs_uri_append_file_name (theme_dir_uri, "cursors");
-  file_info = gnome_vfs_file_info_new ();
-  result = gnome_vfs_get_file_info_uri (cursors_dir_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
-  {
-    gchar *dir_name;
+  cursors_dir = g_build_filename (G_DIR_SEPARATOR_S, theme_dir, "cursors", NULL);
+
+  if (g_file_test (cursors_dir, G_FILE_TEST_IS_DIR)) {
     gchar *name;
     gint i;
     GArray *available_sizes;
     XcursorImage *cursor;
     GdkPixbuf *thumbnail = NULL;
     GnomeThemeCursorInfo *cursor_theme_info;
-    gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64, 0 };   
-    
-    dir_name = gnome_vfs_uri_to_string (theme_dir_uri, GNOME_VFS_URI_HIDE_NONE);
-    name = g_path_get_basename (dir_name);
+    const gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64, 0 };
 
-    available_sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint), 8);
+    name = g_path_get_basename (theme_dir);
 
-    for (i = 0; sizes[i] != 0; i++)
-    {
+    available_sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint),
+					 G_N_ELEMENTS (sizes) - 1);
+
+    for (i = 0; sizes[i] != 0; i++) {
       cursor = XcursorLibraryLoadImage ("left_ptr", name, sizes[i]);
 
-      if (cursor)
-      {
-        if (cursor->size != sizes[i])
-        {
-          XcursorImageDestroy (cursor);
-          cursor = NULL;
-        }
-        else
-        {
+      if (cursor) {
+        if (cursor->size == sizes[i]) {
           g_array_append_val (available_sizes, sizes[i]);
 
           if (thumbnail == NULL && i >= 1)
             thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
         }
+
+        XcursorImageDestroy (cursor);
       }
     }
 
-    if (!thumbnail)
-    {
+    if (!thumbnail) {
       cursor = XcursorLibraryLoadImage ("left_ptr", name, g_array_index (available_sizes, gint, 0));
-      if (cursor)
+      if (cursor) {
         thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
+        XcursorImageDestroy (cursor);
+      }
     }
 
     cursor_theme_info = gnome_theme_cursor_info_new ();
-    cursor_theme_info->path = dir_name;
+    cursor_theme_info->path = g_strdup (theme_dir);
     cursor_theme_info->name = name;
     cursor_theme_info->sizes = available_sizes;
     cursor_theme_info->thumbnail = thumbnail;
     cursor_theme_info->priority = 0;
-    
-    g_hash_table_insert (cursor_theme_hash_by_uri, dir_name, cursor_theme_info);
+
+    g_hash_table_insert (cursor_theme_hash_by_uri, cursor_theme_info->path, cursor_theme_info);
     add_data_to_hash_by_name (cursor_theme_hash_by_name, name, cursor_theme_info);
   }
+
+  g_free (cursors_dir);
 }
 
 static GnomeVFSResult
@@ -1055,15 +1043,16 @@ add_common_icon_theme_dir_monitor (GnomeVFSURI                    *theme_dir_uri
   gboolean real_monitor_not_added = FALSE;
   GnomeVFSURI *index_uri;
 
+  uri_string = gnome_vfs_uri_to_string (theme_dir_uri, GNOME_VFS_URI_HIDE_NONE);
+
   /* Look for cursor theme in the theme directory */
-  look_for_cursor_theme (theme_dir_uri);
+  look_for_cursor_theme (uri_string);
 
   /* Add the handle for this directory */
   index_uri = gnome_vfs_uri_append_file_name (theme_dir_uri, "index.theme");
   update_icon_theme_index (index_uri, monitor_data->priority);
   gnome_vfs_uri_unref (index_uri);
 
-  uri_string = gnome_vfs_uri_to_string (theme_dir_uri, GNOME_VFS_URI_HIDE_NONE);
   result = gnome_vfs_monitor_add (& (monitor_data->common_icon_theme_dir_handle),
 				  uri_string,
 				  GNOME_VFS_MONITOR_DIRECTORY,
@@ -1453,11 +1442,7 @@ gnome_theme_icon_info_compare (GnomeThemeIconInfo *a,
 GnomeThemeCursorInfo *
 gnome_theme_cursor_info_new (void)
 {
-  GnomeThemeCursorInfo *cursor_theme_info;
-
-  cursor_theme_info = g_new0 (GnomeThemeCursorInfo, 1);
-
-  return cursor_theme_info;
+  return g_new0 (GnomeThemeCursorInfo, 1);
 }
 
 void
@@ -1659,7 +1644,7 @@ gnome_theme_is_writable (const gpointer theme, GnomeThemeType type) {
       break;
     case GNOME_THEME_TYPE_CURSOR:
       theme_path = ((const GnomeThemeIconInfo *) theme)->path;
-      break;      
+      break;
     case GNOME_THEME_TYPE_METATHEME:
       theme_path = ((const GnomeThemeMetaInfo *) theme)->path;
       break;

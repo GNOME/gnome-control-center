@@ -17,7 +17,7 @@ main (int argc, char *argv[])
   gtk_init (&argc, &argv);
   gnome_vfs_init ();
   gnome_theme_init (&monitor_not_added);
-  
+
   themes = gnome_theme_meta_info_find_all ();
   if (themes == NULL)
     {
@@ -29,7 +29,7 @@ main (int argc, char *argv[])
       for (list = themes; list; list = list->next)
 	{
 	  GnomeThemeMetaInfo *meta_theme_info;
-	  
+
 	  meta_theme_info = list->data;
 	  g_print ("\t%s\n", meta_theme_info->readable_name);
 	}
@@ -47,7 +47,7 @@ main (int argc, char *argv[])
       for (list = themes; list; list = list->next)
 	{
 	  GnomeThemeIconInfo *icon_theme_info;
-	  
+
 	  icon_theme_info = list->data;
 	  g_print ("\t%s\n", icon_theme_info->name);
 	}
@@ -65,7 +65,7 @@ main (int argc, char *argv[])
       for (list = themes; list; list = list->next)
 	{
 	  GnomeThemeInfo *theme_info;
-	  
+
 	  theme_info = list->data;
 	  g_print ("\t%s\n", theme_info->name);
 	}
@@ -91,7 +91,7 @@ main (int argc, char *argv[])
       for (list = themes; list; list = list->next)
 	{
 	  GnomeThemeInfo *theme_info;
-	  
+
 	  theme_info = list->data;
 	  g_print ("\t%s\n", theme_info->name);
 	}
@@ -109,14 +109,30 @@ main (int argc, char *argv[])
       for (list = themes; list; list = list->next)
 	{
 	  GnomeThemeInfo *theme_info;
-	  
+
 	  theme_info = list->data;
 	  g_print ("\t%s\n", theme_info->name);
 	}
     }
   g_list_free (themes);
 
-  gtk_main ();
+  themes = gnome_theme_cursor_info_find_all ();
+  if (themes == NULL)
+    {
+      g_print ("No cursor themes were found.\n");
+    }
+  else
+    {
+      g_print ("%d cursor themes were found:\n", g_list_length (themes));
+      for (list = themes; list; list = list->next)
+	{
+	  GnomeThemeCursorInfo *cursor_theme_info;
+
+	  cursor_theme_info = list->data;
+	  g_print ("\t%s\n", cursor_theme_info->name);
+	}
+    }
+  g_list_free (themes);
 
   return 0;
 }
