@@ -1,12 +1,11 @@
-always_built_SUBDIRS =		\
+always_built_SUBDIRS = \
 	common			\
-	accessibility		\
+	accessibility	\
 	appearance		\
 	default-applications	\
+	keybindings		\
 	keyboard		\
 	mouse			\
-	sound			\
-	keybindings		\
 	network			\
 	windows
 
@@ -20,5 +19,9 @@ if BUILD_ABOUTME
 SUBDIRS += about-me
 endif
 
+if HAVE_GSTREAMER
+SUBDIRS += sound
+endif
+
 DIST_SUBDIRS = \
-	$(always_built_SUBDIRS) display about-me
+	$(always_built_SUBDIRS) display about-me sound
