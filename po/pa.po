@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-08 03:18+0100\n"
-"PO-Revision-Date: 2007-05-10 07:40+0530\n"
+"POT-Creation-Date: 2007-07-13 03:21+0100\n"
+"PO-Revision-Date: 2007-07-18 09:54+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -65,13 +65,12 @@ msgid "No Image"
 msgstr "ਕੋਈ ਚਿੱਤਰ ਨਹੀਂ"
 
 #: ../capplets/about-me/gnome-about-me.c:666
-#: ../capplets/background/gnome-wp-capplet.c:1022
+#: ../capplets/appearance/appearance-desktop.c:1080
 msgid "Images"
 msgstr "ਚਿੱਤਰ"
 
 #: ../capplets/about-me/gnome-about-me.c:670
-#: ../capplets/background/gnome-wp-capplet.c:1026
-#: ../capplets/theme-switcher/gnome-theme-installer.c:686
+#: ../capplets/appearance/theme-installer.c:603
 msgid "All Files"
 msgstr "ਸਭ ਫਾਇਲਾਂ"
 
@@ -113,9 +112,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/appearance/appearance.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
 
@@ -466,9 +465,11 @@ msgstr "ਸਹਾਇਕ ਤਕਨਾਲੋਜੀ ਪਸੰਦ"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
 msgid ""
-"Changes to enable assistive technologies will not take effect ntil your next "
-"log in."
-msgstr "ਤਬਦੀਲੀਆਂ ਅਗਲੀ ਵਾਰ ਦਾਖਲੇ (ਲਾਗਇਨ) ਕਰਨ ਤੱਕ ਲਾਗੂ ਨਹੀਂ ਹੋਣਗੀਆਂ"
+"Changes to enable assistive technologies will not take effect until your "
+"next log in."
+msgstr ""
+"ਸਹਾਇਕ ਤਕਨਾਲੋਜੀ ਯੋਗ ਕਰਨ ਲਈ ਬਦਲਾਅ ਤੁਹਾਡੇ ਅਗਲੀ ਵਾਰ ਲਾਗਇਨ "
+"ਕਰਨ ਤੱਕ ਲਾਗੂ ਨਹੀਂ ਹੋਣਗੇ।"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
@@ -501,7 +502,7 @@ msgstr "ਪਸੰਦੀਦਾ ਕਾਰਜ(_P)"
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 #: ../capplets/default-applications/default-applications-accessibility.desktop.in.in.h:1
 msgid "Enable support for GNOME assistive technologies at login"
-msgstr "ਗਨੋਮ ਸਹਾਇਕ ਤਕਨਾਲੋਜੀ ਲਈ ਸਹਾਇਤਾ ਦਾਖਲੇ ਸਮੇਂ ਯੋਗ"
+msgstr "ਗਨੋਮ ਸਹਾਇਕ ਤਕਨਾਲੋਜੀ ਲਈ ਮੱਦਦ ਲਾਗਇਨ ਸਮੇਂ ਚਾਲੂ"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:250
 #, c-format
@@ -669,7 +670,7 @@ msgstr "ਕੀ-ਬੋਰਡ ਸਹੂਲਤਾਂ ਫੀਚਰ ਯੋਗ(_E)"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Import Feature Settings..."
-msgstr "ਫੀਚਰ ਸੈਟਿੰਗ (ਸਥਾਪਨ) ਆਯਾਤ(_I)..."
+msgstr "ਫੀਚਰ ਸੈਟਿੰਗ ਆਯਾਤ(_I)..."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "_Only accept keys held for:"
@@ -710,124 +711,596 @@ msgstr "ਪਿਕਸਲ /ਸਕਿੰਟ"
 msgid "seconds"
 msgstr "ਸਕਿੰਟ"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "ਆਪਣੀ ਡਿਸਕਟਾਪ (ਵੇਹੜਾ) ਬੈਕਗਰਾਊਂਡ ਸੈਟਿੰਗ ਬਦਲੋ"
+#: ../capplets/appearance/appearance.glade.h:2
+msgid "<b>C_olors</b>"
+msgstr "<b>ਰੰਗ(_o)</b>"
 
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "ਡੈਸਕਟਾਪ (ਵੇਹੜਾ) ਬੈਕਗਰਾਊਂਡ"
+#: ../capplets/appearance/appearance.glade.h:3
+msgid "<b>Hinting</b>"
+msgstr "<b>ਹਿੰਟਿੰਗ</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>ਡੈਸਕਟਾਪ ਵਾਲਪੇਪਰ(_W)</b>"
+#: ../capplets/appearance/appearance.glade.h:4
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>ਮੇਨੂ ਅਤੇ ਟੂਲਬਾਰ</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>ਡੈਸਕਟਾਪ ਰੰਗ(_D)</b>"
+#: ../capplets/appearance/appearance.glade.h:5
+msgid "<b>Preview</b>"
+msgstr "<b>ਝਲਕ</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "ਡੈਸਕਟਾਪ ਬੈਕਗਰਾਊਂਡ ਪਸੰਦ"
+#: ../capplets/appearance/appearance.glade.h:6
+msgid "<b>Rendering</b>"
+msgstr "<b>ਰੈਡਰਿੰਗ</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:4
+#: ../capplets/appearance/appearance.glade.h:7
+msgid "<b>Smoothing</b>"
+msgstr "<b>ਮੁਲਾਇਮ</b>"
+
+#: ../capplets/appearance/appearance.glade.h:8
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>ਸਬ-ਪਿਕਸਲ ਕ੍ਰਮ</b>"
+
+#: ../capplets/appearance/appearance.glade.h:9
+msgid "<b>_Wallpaper</b>"
+msgstr "<b>ਵਾਲਪੇਪਰ(_W)</b>"
+
+#: ../capplets/appearance/appearance.glade.h:10
+msgid "Appearance Preferences"
+msgstr "ਦਿੱਖ ਪਸੰਦ"
+
+#: ../capplets/appearance/appearance.glade.h:11
+msgid "Background"
+msgstr "ਬੈਕਗਰਾਊਂਡ"
+
+#: ../capplets/appearance/appearance.glade.h:12
+msgid "Best _shapes"
+msgstr "ਉੱਤਮ ਸ਼ਕਲ(_s)"
+
+#: ../capplets/appearance/appearance.glade.h:13
+msgid "Best co_ntrast"
+msgstr "ਬਹੁਤ ਗੂੜਾ(_n)"
+
+#: ../capplets/appearance/appearance.glade.h:14
+msgid "C_ustomize..."
+msgstr "ਪਸੰਦ(_u)..."
+
+#: ../capplets/appearance/appearance.glade.h:15
+msgid "C_ut"
+msgstr "ਕੱਟੋ(_u)"
+
+#: ../capplets/appearance/appearance.glade.h:16
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+"ਕੇਂਦਰੀ\n"
+"ਪੂਰੀ ਸਕਰੀਨ\n"
+"ਸਕੇਲ ਕੀਤਾ\n"
+"ਜ਼ੂਮ\n"
+"ਟਾਇਲ"
+
+#: ../capplets/appearance/appearance.glade.h:21
+msgid "Colors"
+msgstr "ਰੰਗ"
+
+#: ../capplets/appearance/appearance.glade.h:22
+msgid "Controls"
+msgstr "ਕੰਟਰੋਲ"
+
+#: ../capplets/appearance/appearance.glade.h:23
+msgid "D_etails..."
+msgstr "ਵੇਰਵਾ(_e)..."
+
+#: ../capplets/appearance/appearance.glade.h:24
+msgid "Des_ktop font:"
+msgstr "ਡੈਸਕਟਾਪ ਫੋਂਟ(_k):"
+
+#: ../capplets/appearance/appearance.glade.h:25
+msgid "Font Rendering Details"
+msgstr "ਫੋਂਟ ਰੈਡਰਇੰਗ ਵੇਰਵਾ"
+
+#: ../capplets/appearance/appearance.glade.h:26
+msgid "Fonts"
+msgstr "ਫੋਂਟ"
+
+#: ../capplets/appearance/appearance.glade.h:27
+msgid "Go _to Fonts Folder"
+msgstr "ਫੋਂਟ ਫੋਲਡਰ ਉੱਤੇ ਜਾਓ(_t)"
+
+#: ../capplets/appearance/appearance.glade.h:28
+msgid "Gra_yscale"
+msgstr "ਸਲੇਟੀ(_y)"
+
+#: ../capplets/appearance/appearance.glade.h:29
+msgid "Icons"
+msgstr "ਆਈਕਾਨ"
+
+#: ../capplets/appearance/appearance.glade.h:30
+msgid "Interface"
+msgstr "ਇੰਟਰਫੇਸ"
+
+#: ../capplets/appearance/appearance.glade.h:31
+msgid "Large"
+msgstr "ਵੱਡਾ"
+
+#: ../capplets/appearance/appearance.glade.h:32
+msgid "N_one"
+msgstr "ਕੋਈ ਨਹੀਂ(_o)"
+
+#: ../capplets/appearance/appearance.glade.h:33
+msgid "New File"
+msgstr "ਨਵੀਂ ਫਾਇਲ"
+
+#: ../capplets/appearance/appearance.glade.h:34
+msgid "Open File"
+msgstr "ਫਾਇਲ ਖੋਲ੍ਹੋ"
+
+#: ../capplets/appearance/appearance.glade.h:35
 msgid "Open a dialog to specify the color"
 msgstr "ਰੰਗ ਦੱਸਣ ਲਈ ਇੱਕ ਵਾਰਾਤਾਲਾਪ ਖੋਲ੍ਹੋ"
 
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "ਵਾਲ-ਪੇਪਰ ਸ਼ਾਮਿਲ(_A)"
+#: ../capplets/appearance/appearance.glade.h:36
+msgid "Pointer"
+msgstr "ਸੰਕੇਤਕ"
 
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Finish"
-msgstr "ਮੁਕੰਮਲ(_F)"
+#: ../capplets/appearance/appearance.glade.h:37
+msgid "R_esolution:"
+msgstr "ਰੈਜ਼ੋਲੇਸ਼ਨ(_e):"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
-msgid "_Remove"
-msgstr "ਹਟਾਓ(_R)"
+#: ../capplets/appearance/appearance.glade.h:38
+msgid "Reset to Defaults"
+msgstr "ਮੂਲ ਲਈ ਮੁੜ-ਸੈੱਟ"
 
-#: ../capplets/background/gnome-background-properties.glade.h:8
+#: ../capplets/appearance/appearance.glade.h:39
+msgid "Save File"
+msgstr "ਫਾਇਲ ਸੰਭਾਲੋ"
+
+#: ../capplets/appearance/appearance.glade.h:40
+msgid "Save Theme As..."
+msgstr "ਸਰੂਪ ਇੰਝ ਸੰਭਾਲੋ..."
+
+#: ../capplets/appearance/appearance.glade.h:41
+msgid "Save _Background Image"
+msgstr "ਬੈਕਗਰਾਊਂਡ ਚਿੱਤਰ ਸੰਭਾਲੋ(_B)"
+
+#: ../capplets/appearance/appearance.glade.h:42
+msgid "Show _icons in menus"
+msgstr "ਮੇਨੂ 'ਚ ਆਈਕਾਨ ਵੇਖਾਓ(_i)"
+
+#: ../capplets/appearance/appearance.glade.h:43
+#: ../vfs-methods/fontilus/font-view.c:295
+msgid "Size:"
+msgstr "ਅਕਾਰ:"
+
+#: ../capplets/appearance/appearance.glade.h:44
+msgid "Small"
+msgstr "ਛੋਟਾ"
+
+#: ../capplets/appearance/appearance.glade.h:45
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"ਇੱਕ ਗੂੜਾ ਰੰਗ\n"
+"ਖਿਤਿਜੀ ਢਾਲਵਾਂ\n"
+"ਲੰਬਕਾਰੀ ਢਾਲਵਾਂ"
+
+#: ../capplets/appearance/appearance.glade.h:48
+msgid "Sub_pixel (LCDs)"
+msgstr "ਸਬ-ਪਿਕਸਲ (LCD)(_p)"
+
+#: ../capplets/appearance/appearance.glade.h:49
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "ਸਬ-ਪਿਕਸਲ ਮੁਲਾਇਮ(LCD)(_p)"
+
+#: ../capplets/appearance/appearance.glade.h:50
+msgid "Text"
+msgstr "ਪਾਠ"
+
+#: ../capplets/appearance/appearance.glade.h:51
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"ਆਈਟਮਾਂ ਹੇਠ ਪਾਠ\n"
+"ਆਈਟਮਾਂ ਨਾਲ ਪਾਠ\n"
+"ਆਈਕਾਨ ਹੀ\n"
+"ਪਾਠ ਹੀ"
+
+#: ../capplets/appearance/appearance.glade.h:55
+msgid "The current controls theme does not support color schemes."
+msgstr "ਮੌਜੂਦਾ ਕੰਟਰੋਲ ਸਰੂਪ ਰੰਗ ਸਕੀਮਾਂ ਲਈ ਸਹਾਇਕ ਨਹੀਂ ਹੈ।"
+
+#: ../capplets/appearance/appearance.glade.h:56
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "ਸਰੂਪ"
+
+#: ../capplets/appearance/appearance.glade.h:57
+msgid "Theme Details"
+msgstr "ਸਰੂਪ ਵੇਰਵਾ"
+
+#: ../capplets/appearance/appearance.glade.h:58
+msgid "Toolbar _button labels:"
+msgstr "ਸੰਦ-ਪੱਟੀ ਬਟਨ ਲੇਬਲ(_b):"
+
+#: ../capplets/appearance/appearance.glade.h:59
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/appearance.glade.h:60
+msgid "Window Border"
+msgstr "ਝਰੋਖਾ ਹਾਸ਼ੀਆ"
+
+#: ../capplets/appearance/appearance.glade.h:61
+msgid "_Add..."
+msgstr "ਸ਼ਾਮਲ(_A)..."
+
+#: ../capplets/appearance/appearance.glade.h:62
+msgid "_Application font:"
+msgstr "ਕਾਰਜ ਫੋਂਟ(_A):"
+
+#: ../capplets/appearance/appearance.glade.h:63
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/appearance.glade.h:64
+msgid "_Copy"
+msgstr "ਨਕਲ(_C)"
+
+#: ../capplets/appearance/appearance.glade.h:65
+msgid "_Description:"
+msgstr "ਵੇਰਵਾ(_D):"
+
+#: ../capplets/appearance/appearance.glade.h:66
+msgid "_Document font:"
+msgstr "ਦਸਤਾਵੇਜ਼ ਫੋਂਟ(_D):"
+
+#: ../capplets/appearance/appearance.glade.h:67
+msgid "_Edit"
+msgstr "ਸੋਧ(_E)"
+
+#: ../capplets/appearance/appearance.glade.h:68
+msgid "_Editable menu shortcut keys"
+msgstr "ਸੋਧਯੋਗ ਮੇਨੂ ਸ਼ਾਰਟਕੱਟ ਸਵਿੱਚਾਂ(_E)"
+
+#: ../capplets/appearance/appearance.glade.h:69
+msgid "_File"
+msgstr "ਫਾਇਲ(_F)"
+
+#: ../capplets/appearance/appearance.glade.h:70
+msgid "_Fixed width font:"
+msgstr "ਸਥਿਰ ਚੌੜਾਈ ਫੋਂਟ(_F):"
+
+#: ../capplets/appearance/appearance.glade.h:71
+msgid "_Full"
+msgstr "ਪੂਰਾ(_F)"
+
+#: ../capplets/appearance/appearance.glade.h:72
+msgid "_Input boxes:"
+msgstr "ਇੰਪੁੱਟ ਬਕਸੇ(_I):"
+
+#: ../capplets/appearance/appearance.glade.h:73
+msgid "_Install..."
+msgstr "ਇੰਸਟਾਲ(_I)..."
+
+#: ../capplets/appearance/appearance.glade.h:74
+msgid "_Medium"
+msgstr "ਮੱਧਮ(_M)"
+
+#: ../capplets/appearance/appearance.glade.h:75
+msgid "_Monochrome"
+msgstr "ਮੋਨੋਕਰੋਮਿਕ(_M)"
+
+#: ../capplets/appearance/appearance.glade.h:76
+msgid "_Name:"
+msgstr "ਨਵਾਂ(_N):"
+
+#: ../capplets/appearance/appearance.glade.h:77
+msgid "_New"
+msgstr "ਨਵਾਂ(_N)"
+
+#: ../capplets/appearance/appearance.glade.h:78
+msgid "_None"
+msgstr "ਕੋਈ ਨਹੀਂ(_N)"
+
+#: ../capplets/appearance/appearance.glade.h:79
+msgid "_Open"
+msgstr "ਖੋਲ੍ਹੋ(_O)"
+
+#: ../capplets/appearance/appearance.glade.h:80
+msgid "_Paste"
+msgstr "ਚੇਪੋ(_P)"
+
+#: ../capplets/appearance/appearance.glade.h:81
+msgid "_Print"
+msgstr "ਛਾਪੋ(_P)"
+
+#: ../capplets/appearance/appearance.glade.h:82
+msgid "_Quit"
+msgstr "ਬਾਹਰ(_Q)"
+
+#: ../capplets/appearance/appearance.glade.h:83
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/appearance.glade.h:84
+msgid "_Save"
+msgstr "ਸੰਭਾਲੋ(_S)"
+
+#: ../capplets/appearance/appearance.glade.h:85
+msgid "_Selected items:"
+msgstr "ਚੁਣੀਆਂ ਇਕਾਈਆਂ(_S):"
+
+#: ../capplets/appearance/appearance.glade.h:86
+msgid "_Slight"
+msgstr "ਹਲਕਾ(_S)"
+
+#: ../capplets/appearance/appearance.glade.h:87
 msgid "_Style:"
 msgstr "ਸ਼ੈਲੀ(_S):"
 
-#: ../capplets/background/gnome-wp-capplet.c:41
-msgid "[FILE...]"
-msgstr "[ਫਾਇਲ...]"
+#: ../capplets/appearance/appearance.glade.h:88
+msgid "_VRGB"
+msgstr "_VRGB"
 
-#: ../capplets/background/gnome-wp-capplet.c:81
-#: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "ਸਹਾਇਤਾ ਵੇਖਾਉਣ ਗਲਤੀ ਹੈ: %s"
+#: ../capplets/appearance/appearance.glade.h:89
+msgid "_Window title font:"
+msgstr "ਝਰੋਖਾ ਸਿਰਲੇਖ ਫੋਂਟ(_W):"
 
-#: ../capplets/background/gnome-wp-capplet.c:943
-msgid "Centered"
-msgstr "ਕੇਂਦਰੀ"
+#: ../capplets/appearance/appearance.glade.h:90
+msgid "_Windows:"
+msgstr "ਝਰੋਖੇ(_W):"
 
-#: ../capplets/background/gnome-wp-capplet.c:944
-msgid "Fill Screen"
-msgstr "ਸਕਰੀਨ ਭਰੋ"
+#: ../capplets/appearance/appearance.glade.h:91
+msgid "dots per inch"
+msgstr "ਬਿੰਦੂ ਪ੍ਰਤੀ ਇੰਚ"
 
-#: ../capplets/background/gnome-wp-capplet.c:945
-msgid "Scaled"
-msgstr "ਸਕੇਲ ਕੀਤਾ"
+#: ../capplets/appearance/appearance.glade.h:92
+msgid "gtk-delete"
+msgstr "gtk-delete"
 
-#: ../capplets/background/gnome-wp-capplet.c:946
-msgid "Zoom"
-msgstr "ਜ਼ੂਮ"
-
-#: ../capplets/background/gnome-wp-capplet.c:947
-msgid "Tiled"
-msgstr "ਤਣਿਆ"
-
-#: ../capplets/background/gnome-wp-capplet.c:962
-msgid "Solid Color"
-msgstr "ਇੱਕ ਰੰਗ"
-
-#: ../capplets/background/gnome-wp-capplet.c:963
-msgid "Horizontal Gradient"
-msgstr "ਖਿਤਿਜੀ ਢਲਵਾਂ"
-
-#: ../capplets/background/gnome-wp-capplet.c:964
-msgid "Vertical Gradient"
-msgstr "ਲੰਬਕਾਰੀ ਢਲਵਾਂ"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1005
+#: ../capplets/appearance/appearance-desktop.c:1063
 msgid "Add Wallpaper"
 msgstr "ਵਾਲਪੇਪਰ ਸ਼ਾਮਲ"
 
-#: ../capplets/background/gnome-wp-capplet.c:1089
-msgid "- Desktop Background Preferences"
-msgstr "- ਡੈਸਕਟਾਪ ਬੈਕਗਰਾਊਂਡ ਪਸੰਦ"
+#: ../capplets/appearance/appearance-desktop.c:1084
+msgid "All files"
+msgstr "ਸਭ ਫਾਇਲਾਂ"
 
-#: ../capplets/background/gnome-wp-info.c:45
+#: ../capplets/appearance/appearance-font.c:493
+msgid "Font may be too large"
+msgstr "ਫੋਂਟ ਬਹੁਤ ਵੱਡੇ ਹਨ"
+
+#: ../capplets/appearance/appearance-font.c:497
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
+"ਕੀਤੀ ਜਾਦੀ ਹੈ ਇਹ ਅਕਾਰ %d ਤੋਂ ਛੋਟਾ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।"
+msgstr[1] ""
+"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
+"ਕੀਤੀ ਜਾਦੀ ਹੈ ਇਹ ਅਕਾਰ %d ਤੋਂ ਛੋਟਾ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।"
+
+#: ../capplets/appearance/appearance-font.c:510
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
+"ਕੀਤੀ ਜਾਦੀ ਹੈ ਛੋਟੇ ਅਕਾਰ ਦੇ ਫੋਂਟ ਚੁਣੋ।"
+msgstr[1] ""
+"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
+"ਕੀਤੀ ਜਾਦੀ ਹੈ ਛੋਟੇ ਅਕਾਰ ਦੇ ਫੋਂਟ ਚੁਣੋ।"
+
+#: ../capplets/appearance/appearance-font.c:532
+msgid "Use previous font"
+msgstr "ਪੁਰਾਣੇ ਫੋਂਟ ਵਰਤੋਂ"
+
+#: ../capplets/appearance/appearance-font.c:534
+msgid "Use selected font"
+msgstr "ਚੁਣੇ ਫੋਂਟ ਵਰਤੋਂ"
+
+#: ../capplets/appearance/appearance-main.c:105
+msgid "Specify the filename of a theme to install"
+msgstr "ਇੱਕ ਸਰੂਪ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਫਾਇਲ ਨਾਂ ਦਿਓ"
+
+#: ../capplets/appearance/appearance-main.c:106
+msgid "filename"
+msgstr "ਫਾਇਲਨਾਂ"
+
+#: ../capplets/appearance/appearance-main.c:112
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr "ਵੇਖਣ ਲਈ ਸਫ਼ੇ ਦਾ ਨਾਂ ਦਿ(theme|background|fonts|interface)"
+
+#: ../capplets/appearance/appearance-main.c:113
+msgid "page"
+msgstr "ਸਫ਼ਾ"
+
+#: ../capplets/appearance/appearance-main.c:120
+msgid "[WALLPAPER...]"
+msgstr "[WALLPAPER...]"
+
+#: ../capplets/appearance/appearance-themes.c:523
+#: ../capplets/default-applications/gnome-da-capplet.c:1080
+#: ../capplets/sound/sound-properties-capplet.c:327
+msgid "Custom"
+msgstr "ਪਸੰਦ"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "ਦਿੱਖ"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:2
+msgid "Customize the look of the desktop"
+msgstr "ਡੈਸਕਟਾਪ ਲਈ ਪਸੰਦੀਦਾ ਦਿੱਖ"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "ਡੈਸਕਟਾਪ ਦੇ ਵੱਖ-ਵੱਖ ਹਿੱਸਿਆਂ ਲਈ ਸਰੂਪ ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਦਾ ਹੈ"
+
+#: ../capplets/appearance/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "ਸਰੂਪ ਇੰਸਟਾਲਰ"
+
+#: ../capplets/appearance/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "ਗਨੋਮ ਸਰੂਪ ਪੈਕੇਜ"
+
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "ਵਾਲਪੇਪਰ ਨਹੀਂ"
 
-#.
-#. Translators: This message is used to render the type and size of the
-#. background images in gnome-background-properites. The first "%s" will
-#. be replaced by the image type, and the two "%d %s"s will be replaced
-#. with the images' dimensions. For example, in US English, this may be
-#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
-#.
-#. Do not translate the "background size|" type. Remove it from the
-#. translation.
-#.
-#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:360
 #, c-format
-msgid "background size|%s, %d %s x %d %s"
-msgstr "%s, %d %s x %d %s"
+msgid ""
+"<big><b>%s</b></big>\n"
+"<b>Width:</b> %d %s\n"
+"<b>Height:</b> %d %s\n"
+"<b>Type:</b> %s\n"
+"<b>Location:</b> %s"
+msgstr ""
+"<big><b>%s</b></big>\n"
+"<b>ਚੌੜਾਈ:</b> %d %s\n"
+"<b>ਉਚਾਈ:</b> %d %s\n"
+"<b>ਕਿਸਮ:</b> %s\n"
+"<b>ਟਿਕਾਣਾ:</b> %s"
 
-#: ../capplets/background/gnome-wp-item.c:374
-#: ../capplets/background/gnome-wp-item.c:376
+#: ../capplets/appearance/gnome-wp-item.c:367
+#: ../capplets/appearance/gnome-wp-item.c:369
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "ਪਿਕਸਲ"
 msgstr[1] "ਪਿਕਸਲ"
+
+#: ../capplets/appearance/theme-installer.c:149
+#, c-format
+msgid ""
+"Cannot install theme.\n"
+"The %s utility is not installed."
+msgstr ""
+"ਸਰੂਪ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।\n"
+"%s ਸਹੂਲਤ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
+
+#: ../capplets/appearance/theme-installer.c:197
+msgid ""
+"Cannot install theme.\n"
+"There was a problem while extracting the theme."
+msgstr ""
+"ਸਰੂਪ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।\n"
+"ਸਰੂਪ ਖਿਲਾਰਨ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ"
+
+#: ../capplets/appearance/theme-installer.c:237
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr "ਗਨੋਮ ਸਰੂਪ %s ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੈ"
+
+#: ../capplets/appearance/theme-installer.c:249
+msgid "The theme is an engine. You need to compile it."
+msgstr "ਸਰੂਪ ਇੱਕ ਇੰਜਣ ਹੈ। ਤੁਹਾਨੂੰ ਸਰੂਪ ਕੰਪਾਇਲ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।"
+
+#: ../capplets/appearance/theme-installer.c:258
+msgid "The file format is invalid"
+msgstr "ਫਾਇਲ ਫਾਰਮੈਟ ਗਲਤ ਹੈ"
+
+#: ../capplets/appearance/theme-installer.c:303
+msgid "Installation Failed"
+msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਫੇਲ੍ਹ"
+
+#: ../capplets/appearance/theme-installer.c:314
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr "ਸਰੂਪ \"%s\" ਇੰਸਟਾਲ ਹੋ ਗਿਆ ਹੈ।"
+
+#: ../capplets/appearance/theme-installer.c:320
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "ਕੀ ਤੁਸੀਂ ਹੁਣੇ ਲਾਗੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਆਪਣਾ ਮੌਜੂਦ ਸਰੂਪ ਹੀ ਰੱਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../capplets/appearance/theme-installer.c:322
+msgid "Keep Current Theme"
+msgstr "ਮੌਜੂਦਾ ਸਰੂਪ ਰੱਖੋ"
+
+#: ../capplets/appearance/theme-installer.c:324
+msgid "Apply New Theme"
+msgstr "ਨਵਾਂ ਸਰੂਪ ਲਾਗੂ ਕਰੋ"
+
+#: ../capplets/appearance/theme-installer.c:397
+msgid "This theme is not in a supported format."
+msgstr "ਇਹ ਸਰੂਪ ਸਹਿਯੋਗ ਫਾਰਮੈਟ ਵਿੱਚ ਨਹੀਂ ਹੈ।"
+
+#: ../capplets/appearance/theme-installer.c:422
+msgid "Failed to create temporary directory"
+msgstr "ਆਰਜ਼ੀ ਡਾਇਰੈਕਟਰੀ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ"
+
+#: ../capplets/appearance/theme-installer.c:480
+msgid "No theme file location specified to install"
+msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਕੋਈ ਸਰੂਪ ਫਾਇਲ ਟਿਕਾਣਾ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ"
+
+#: ../capplets/appearance/theme-installer.c:500
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"ਸਰੂਪ ਨੂੰ ਇੱਥੇ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਲੋੜੀਦੇ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ:\n"
+"%s"
+
+#: ../capplets/appearance/theme-installer.c:519
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr "%s ਰਾਹ ਹੈ, ਜਿਥੇ ਕਿ ਸਰੂਪ ਫਾਇਲਾਂ ਇੰਸਟਾਲ ਹੋਣਗੀਆ। ਇਸ ਨੂੰ ਸਰੋਤ ਨਹੀਂ ਬਣਾਇਆ ਜਾ ਸਕਦਾ ਹੈ"
+
+#: ../capplets/appearance/theme-installer.c:540
+msgid "The file format is invalid."
+msgstr "ਫਾਇਲ ਫਾਰਮੈਟ ਠੀਕ ਨਹੀਂ ਹੈ।"
+
+#: ../capplets/appearance/theme-installer.c:593
+msgid "Select Theme"
+msgstr "ਸਰੂਪ ਚੁਣੋ"
+
+#: ../capplets/appearance/theme-installer.c:596
+msgid "Theme Packages"
+msgstr "ਸਰੂਪ ਪੈਕੇਜ"
+
+#: ../capplets/appearance/theme-save.c:91
+msgid "Theme name must be present"
+msgstr "ਸਰੂਪ ਨਾਂ ਹੋਣਾ ਜ਼ਰੂਰੀ ਹੈ"
+
+#: ../capplets/appearance/theme-save.c:161
+msgid "The theme already exists. Would you like to replace it?"
+msgstr "ਸਰੂਪ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਤਬਦੀਲ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../capplets/appearance/theme-save.c:162
+msgid "_Overwrite"
+msgstr "ਉੱਤੇ ਲਿਖੋ(_O)"
+
+#: ../capplets/appearance/theme-util.c:42
+msgid "Would you like to delete this theme?"
+msgstr "ਕੀ ਤੁਸੀਂ ਇਹ ਸਰੂਪ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../capplets/appearance/theme-util.c:89
+msgid "Theme cannot be deleted"
+msgstr "ਸਰੂਪ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ ਹੈ"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -856,6 +1329,12 @@ msgstr "ਸੈਟਿੰਗ ਲਾਗੂ ਕਰੋ ਅਤੇ ਬਾਹਰ"
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "ਮੁੜ ਪੁਰਾਣੀ ਸੈਟਿੰਗ ਪਰਤਾਓ ਅਤੇ ਸੰਭਾਲੋ"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "ਮੱਦਦ ਵੇਖਾਉਣ ਗਲਤੀ ਹੈ: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
@@ -988,7 +1467,7 @@ msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਇਕਾਈ ਡੈਟਾ �
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "ਕਾਲਬੈਕ ਦਿੱਤੀ ਜਾਵੇ, ਜਦੋਂ ਕਿ ਵਿਸ਼ੇਸ਼ਤਾ ਸੋਧਕ ਇਕਾਈ ਡੈਟਾ ਕਦੋਂ ਮੁਕਤ ਹੋਵੇ"
 
-#: ../capplets/common/gconf-property-editor.c:1595
+#: ../capplets/common/gconf-property-editor.c:1468
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1000,7 +1479,7 @@ msgstr ""
 "\n"
 "ਜਾਂਚ ਲਵੋ ਕਿ ਇਹ ਮੌਜੂਦ ਹੈ ਤੇ ਮੁੜ ਕੋਸ਼ਿਸ ਕਰੋ ਜੀ ਜਾਂ ਵੱਖਰੀ ਤਸਵੀਰ ਦੀ ਚੋਣ ਕਰੋ।"
 
-#: ../capplets/common/gconf-property-editor.c:1603
+#: ../capplets/common/gconf-property-editor.c:1476
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1009,15 +1488,15 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 "ਮੈ ਇਹ ਨਹੀਂ ਜਾਣਦਾ ਕਿ ਫਾਇਲ '%s' ਨੂੰ ਕਿਵੇਂ ਖੋਲਣਾ ਹੈ।\n"
-"ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਇਹ ਤਸਵੀਰ ਹੋਵੋ, ਜੋ ਕਿ ਅਜੇ ਸਹਾਇਤਾ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੈ।\n"
+"ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਇਹ ਤਸਵੀਰ ਹੋਵੋ, ਜੋ ਕਿ ਅਜੇ ਮੱਦਦ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੈ।\n"
 "\n"
 "ਹੋਰ ਤਸਵੀਰ ਚੁਣੋ ਜੀ।"
 
-#: ../capplets/common/gconf-property-editor.c:1722
+#: ../capplets/common/gconf-property-editor.c:1595
 msgid "Please select an image."
 msgstr "ਇੱਕ ਚਿੱਤਰ ਚੁਣੋ ਜੀ।"
 
-#: ../capplets/common/gconf-property-editor.c:1727
+#: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "ਚੁਣੋ(_S)"
 
@@ -1059,32 +1538,26 @@ msgid "Visual AT"
 msgstr "ਦਿੱਖ AT"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:113
-#: ../capplets/default-applications/gnome-da-capplet.c:132
-#: ../capplets/default-applications/gnome-da-capplet.c:151
-#: ../capplets/default-applications/gnome-da-capplet.c:197
-#: ../capplets/default-applications/gnome-da-capplet.c:243
-#: ../capplets/default-applications/gnome-da-capplet.c:300
-#: ../capplets/default-applications/gnome-da-capplet.c:351
-#: ../capplets/default-applications/gnome-da-capplet.c:402
-#: ../capplets/default-applications/gnome-da-capplet.c:453
-#: ../capplets/default-applications/gnome-da-capplet.c:502
-#: ../capplets/default-applications/gnome-da-capplet.c:895
-#: ../capplets/default-applications/gnome-da-capplet.c:917
+#: ../capplets/default-applications/gnome-da-capplet.c:112
+#: ../capplets/default-applications/gnome-da-capplet.c:133
+#: ../capplets/default-applications/gnome-da-capplet.c:177
+#: ../capplets/default-applications/gnome-da-capplet.c:222
+#: ../capplets/default-applications/gnome-da-capplet.c:279
+#: ../capplets/default-applications/gnome-da-capplet.c:330
+#: ../capplets/default-applications/gnome-da-capplet.c:381
+#: ../capplets/default-applications/gnome-da-capplet.c:434
+#: ../capplets/default-applications/gnome-da-capplet.c:484
+#: ../capplets/default-applications/gnome-da-capplet.c:877
+#: ../capplets/default-applications/gnome-da-capplet.c:899
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "ਸੰਰਚਨਾ ਸੰਭਾਲਣ ਲਈ ਗਲਤੀ: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1098
-#: ../capplets/sound/sound-properties-capplet.c:327
-msgid "Custom"
-msgstr "ਪਸੰਦ"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:1118
+#: ../capplets/default-applications/gnome-da-capplet.c:1100
 msgid "Could not load the main interface"
 msgstr "ਮੁੱਖ ਇੰਟਰਫੇਸ ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1120
+#: ../capplets/default-applications/gnome-da-capplet.c:1102
 msgid "Please make sure that the applet is properly installed"
 msgstr "ਇਹ ਵੇਖ ਲਵੋ ਕਿ ਐਪਲਿਟ ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੈ"
 
@@ -1375,7 +1848,7 @@ msgstr "ਸਧਾਰਨ ਆਨ-ਸਕਰੀਨ ਕੀਬੋਰਡ"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
 msgid "Standard XTerminal"
-msgstr "ਮਿਆਰੀ XTerminal"
+msgstr "ਸਟੈਂਡਰਡ XTerminal"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
 msgid "Sylpheed"
@@ -1425,46 +1898,46 @@ msgstr "ਉਲਟ"
 msgid "Right"
 msgstr "ਸੱਜੇ"
 
-#: ../capplets/display/main.c:385
+#: ../capplets/display/main.c:388
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:531
+#: ../capplets/display/main.c:534
 msgid "_Resolution:"
 msgstr "ਰੈਜ਼ੋਲੇਸ਼ਨ(_R):"
 
-#: ../capplets/display/main.c:550
+#: ../capplets/display/main.c:553
 msgid "Re_fresh rate:"
 msgstr "ਤਾਜ਼ਾ ਦਰ(_f):"
 
-#: ../capplets/display/main.c:570
+#: ../capplets/display/main.c:573
 msgid "R_otation:"
 msgstr "ਘੁੰਮਣ(_o):"
 
-#: ../capplets/display/main.c:590
+#: ../capplets/display/main.c:593
 msgid "Default Settings"
 msgstr "ਮੂਲ ਸੈਟਿੰਗ"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:595
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "ਸਕਰੀਨ %d ਸੈਟਿੰਗ\n"
 
-#: ../capplets/display/main.c:618
+#: ../capplets/display/main.c:621
 msgid "Screen Resolution Preferences"
 msgstr "ਸਕਰੀਨ ਰੈਜੋਲੇਸ਼ਨ ਪਸੰਦ"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:658
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "ਸਿਰਫ ਕੰਪਿਊਟਰ (%s) ਲਈ ਹੀ ਮੂਲ ਬਣਾਓ(_M)"
 
-#: ../capplets/display/main.c:674
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "ਚੋਣ"
 
-#: ../capplets/display/main.c:695
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1511,180 +1984,6 @@ msgstr ""
 "XRandR ਦਾ ਵਰਜਨ ਇਸ ਕਾਰਜ ਨਾਲ ਅਨੁਕੂਲ ਨਹੀਂ ਹੈ। ਵੇਖਣ ਆਕਾਰ ਵਿੱਚ ਰਨ-ਟਾਇਮ ਤਬਦੀਲੀ ਉਪਲੱਬਧ ਨਹੀਂ "
 "ਹੋਵੇਗੀ।"
 
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "ਫੋਂਟ"
-
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "ਡੈਸਕਟਾਪ (ਵੇਹੜੇ) ਲਈ ਫੋਂਟ ਚੁਣੋ"
-
-#: ../capplets/font/font-properties.glade.h:1
-msgid "<b>Font Rendering</b>"
-msgstr "<b>ਫੋਂਟ ਰੈਡਰਿੰਗ</b>"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Hinting</b>:"
-msgstr "<b>ਹਿੰਟਿੰਗ</b>:"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Smoothing</b>:"
-msgstr "<b>ਮੁਲਾਇਮ</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>ਸਬ-ਪਿਕਸਲ ਕ੍ਰਮ</b>:"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "Best _shapes"
-msgstr "ਉੱਤਮ ਸ਼ਕਲ(_s)"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best co_ntrast"
-msgstr "ਬਹੁਤ ਗੂੜਾ(_n)"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "D_etails..."
-msgstr "ਵੇਰਵਾ(_e)..."
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "Des_ktop font:"
-msgstr "ਡੈਸਕਟਾਪ ਫੋਂਟ(_k):"
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "ਫੋਂਟ ਪਸੰਦ"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "ਫੋਂਟ ਰੈਡਰਇੰਗ ਵੇਰਵਾ"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "ਫੋਂਟ ਫੋਲਡਰ 'ਤੇ ਜਾਓ(_t)"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "ਸਲੇਟੀ(_y)"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "ਕੋਈ ਨਹੀਂ(_o)"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "ਰੈਜ਼ੋਲੇਸ਼ਨ(_e):"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "ਸਬ-ਪਿਕਸਲ (LCD)(_p)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "ਸਬ-ਪਿਕਸਲ ਮੁਲਾਇਮ(LCD)(_p)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "ਕਾਰਜ ਫੋਂਟ(_A):"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Document font:"
-msgstr "ਦਸਤਾਵੇਜ਼ ਫੋਂਟ(_D):"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Fixed width font:"
-msgstr "ਸਥਿਰ ਚੌੜਾਈ ਫੋਂਟ(_F):"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Full"
-msgstr "ਪੂਰਾ(_F)"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Medium"
-msgstr "ਮੱਧਮ(_M)"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_Monochrome"
-msgstr "ਮੋਨੋਕਰੋਮਿਕ(_M)"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_None"
-msgstr "ਕੋਈ ਨਹੀਂ(_N)"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Slight"
-msgstr "ਹਲਕਾ(_S)"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "ਝਰੋਖਾ ਸਿਰਲੇਖ ਫੋਂਟ(_W):"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "ਬਿੰਦੂ ਪ੍ਰਤੀ ਇੰਚ"
-
-#: ../capplets/font/main.c:502
-msgid "Font may be too large"
-msgstr "ਫੋਂਟ ਬਹੁਤ ਵੱਡੇ ਹਨ"
-
-#: ../capplets/font/main.c:506
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
-"ਕੀਤੀ ਜਾਦੀ ਹੈ ਇਹ ਅਕਾਰ %d ਤੋਂ ਛੋਟਾ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।"
-msgstr[1] ""
-"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
-"ਕੀਤੀ ਜਾਦੀ ਹੈ ਇਹ ਅਕਾਰ %d ਤੋਂ ਛੋਟਾ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।"
-
-#: ../capplets/font/main.c:519
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
-"ਕੀਤੀ ਜਾਦੀ ਹੈ ਛੋਟੇ ਅਕਾਰ ਦੇ ਫੋਂਟ ਚੁਣੋ।"
-msgstr[1] ""
-"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
-"ਕੀਤੀ ਜਾਦੀ ਹੈ ਛੋਟੇ ਅਕਾਰ ਦੇ ਫੋਂਟ ਚੁਣੋ।"
-
-#: ../capplets/font/main.c:540
-msgid "Use previous font"
-msgstr "ਪੁਰਾਣੇ ਫੋਂਟ ਵਰਤੋਂ"
-
-#: ../capplets/font/main.c:542
-msgid "Use selected font"
-msgstr "ਚੁਣੇ ਫੋਂਟ ਵਰਤੋਂ"
-
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
@@ -1692,7 +1991,7 @@ msgstr "ਸਾਊਂਡ"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
 msgid "Desktop"
-msgstr "ਡੈਸਕਟਾਪ (ਵੇਹੜਾ)"
+msgstr "ਡੈਸਕਟਾਪ"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -1925,8 +2224,8 @@ msgid "Reset to De_faults"
 msgstr "ਮੂਲ ਮੁੜ-ਸੈੱਟ ਕਰੋ(_f)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "Separate _group for each window"
-msgstr "ਹਰ ਝਰੋਖੇ ਲਈ ਵੱਖਰਾ ਗਰੁੱਪ(_g)"
+msgid "Separate _layout for each window"
+msgstr "ਹਰ ਝਰੋਖੇ ਲਈ ਵੱਖਰਾ ਲੇਆਉਟ(_l)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
@@ -1965,10 +2264,14 @@ msgid "_Variants:"
 msgstr "ਦਿੱਖ(_V):"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+msgid "_Vendors:"
+msgstr "ਵਿਕਰੇਤਾ(_V):"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "_Work interval lasts:"
 msgstr "ਕੰਮ ਕਰਨ ਦਾ ਅੰਤਰਾਲ(_W):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "minutes"
 msgstr "ਮਿੰਟ"
 
@@ -1976,17 +2279,21 @@ msgstr "ਮਿੰਟ"
 msgid "Unknown"
 msgstr "ਅਣਜਾਣ"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:84
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:236
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:240
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:243
 msgid "Default"
 msgstr "ਮੂਲ"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:230
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:234
 msgid "Layout"
 msgstr "ਖਾਕਾ"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:73
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
+msgid "Vendors"
+msgstr "ਵਿਕਰੇਤਾ"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
 msgid "Models"
 msgstr "ਮਾਡਲ"
 
@@ -2184,7 +2491,7 @@ msgstr "<b>ਸਿੱਧਾ ਇੰਟਰਨੈੱਟ ਕੁਨੈਕਸ਼ਨ(_R)</b
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
-msgstr "<b>ਮੇਜ਼ਬਾਨ ਲਿਸਟ ਅਣਡਿੱਠੀ</b>"
+msgstr "<b>ਹੋਸਟ ਲਿਸਟ ਅਣਡਿੱਠੀ</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
@@ -2228,7 +2535,7 @@ msgstr "ਪਰਾਕਸੀ ਸੰਰਚਨਾ"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
-msgstr "ਸਾਕਟ ਮੇਜ਼ਬਾਨ(_o):"
+msgstr "ਸਾਕਟ ਹੋਸਟ(_o):"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
@@ -2413,400 +2720,6 @@ msgstr "ਸਾਊਂਡ ਸੁਣਾਓ(_S):"
 msgid "_Visual system beep"
 msgstr "ਦਿੱਖ ਸਿਸਟਮ ਘੰਟੀ(_V)"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:450
-msgid "Would you like to remove this theme?"
-msgstr "ਕੀ ਤੁਸੀਂ ਇਹ ਸਰੂਪ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:515
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "ਸਰੂਪ ਸਫ਼ਲਤਾਪੂਰਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ ਹੈ। ਹੋਰ ਸਰੂਪ ਚੁਣੋ ਜੀ।"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:524
-msgid "Theme can not be deleted"
-msgstr "ਸਰੂਪ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ ਹੈ"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:696
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"ਤੁਹਾਡੇ ਸਿਸਟਮ ਤੇ ਸਰੂਪ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ। ਇਸ ਦਾ ਮਤਲਬ ਇਹ ਹੈ ਕਿ ਤੁਹਾਡਾ \"ਸਰੂਪ ਪਸੰਦ\" ਵਾਰਤਾਲਾਪ "
-"ਠੀਕ ਤਰਾਂ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ, ਜਾਂ ਤੁਸੀ \"ਗਨੋਮ-ਸਰੂਪ\" ਪੈਕੇਜ ਇੰਸਟਾਲ ਹੀ ਨਹੀਂ ਕੀਤਾ ਹੈ।"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:153
-#, c-format
-msgid ""
-"Can not install theme. \n"
-"The %s utility is not installed."
-msgstr ""
-"ਸਰੂਪ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ। \n"
-"%s ਸਹੂਲਤ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:162
-msgid ""
-"Can not install theme. \n"
-"There was a problem while extracting the theme"
-msgstr ""
-"ਸਰੂਪ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ। \n"
-"ਸਰੂਪ ਖਿਲਾਰਨ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "This theme is not in a supported format."
-msgstr "ਇਹ ਸਰੂਪ ਸਹਿਯੋਗ ਫਾਰਮੈਟ ਵਿੱਚ ਨਹੀਂ ਹੈ।"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
-msgid "Failed to create temporary directory"
-msgstr "ਆਰਜ਼ੀ ਡਾਇਰੈਕਟਰੀ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "ਗਨੋਮ ਸਰੂਪ %s ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੈ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "ਸਰੂਪ ਇੱਕ ਇੰਜਣ ਹੈ। ਤੁਹਾਨੂੰ ਸਰੂਪ ਕੰਪਾਇਲ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:410
-msgid "The file format is invalid"
-msgstr "ਫਾਇਲ ਫਾਰਮੈਟ ਗਲਤ ਹੈ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:449
-msgid "Installation Failed"
-msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਫੇਲ੍ਹ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:462
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "ਸਰੂਪ \"%s\" ਇੰਸਟਾਲ ਹੋ ਗਿਆ ਹੈ।"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "ਕੀ ਤੁਸੀਂ ਹੁਣੇ ਲਾਗੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਆਪਣਾ ਮੌਜੂਦ ਸਰੂਪ ਹੀ ਰੱਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:470
-msgid "Keep Current Theme"
-msgstr "ਮੌਜੂਦਾ ਸਰੂਪ ਰੱਖੋ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:472
-msgid "Apply New Theme"
-msgstr "ਨਵਾਂ ਸਰੂਪ ਲਾਗੂ ਕਰੋ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
-msgid "No theme file location specified to install"
-msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਕੋਈ ਸਰੂਪ ਫਾਇਲ ਟਿਕਾਣਾ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:543
-msgid "The theme file location specified to install is invalid"
-msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਦਿੱਤੀ ਸਰੂਪ ਫਾਇਲ ਦਾ ਟਿਕਾਣਾ ਠੀਕ ਨਹੀਂ ਹੈ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"ਸਰੂਪ ਨੂੰ ਇੱਥੇ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਲੋੜੀਦੇ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:589
-msgid "The file format is invalid."
-msgstr "ਫਾਇਲ ਫਾਰਮੈਟ ਠੀਕ ਨਹੀਂ ਹੈ।"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:616
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr "%s ਰਾਹ ਹੈ, ਜਿਥੇ ਕਿ ਸਰੂਪ ਫਾਇਲਾਂ ਇੰਸਟਾਲ ਹੋਣਗੀਆ। ਇਸ ਨੂੰ ਸਰੋਤ ਨਹੀਂ ਬਣਾਇਆ ਜਾ ਸਕਦਾ ਹੈ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:675
-msgid "Select Theme"
-msgstr "ਸਰੂਪ ਚੁਣੋ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:678
-msgid "Theme Packages"
-msgstr "ਸਰੂਪ ਪੈਕੇਜ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "ਡੈਸਕਟਾਪ ਦੇ ਵੱਖ-ਵੱਖ ਹਿੱਸਿਆਂ ਲਈ ਸਰੂਪ ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਦਾ ਹੈ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "ਸਰੂਪ ਇੰਸਟਾਲਰ"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "Custom theme"
-msgstr "ਸਰੂਪ ਸੋਧ"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "ਸਰੂਪ ਸੰਭਾਲ ਬਟਨ ਦਬਾਕੇ ਤੁਸੀਂ ਇਸ ਸਰੂਪ ਨੂੰ ਸੰਭਾਲ ਸਕਦੇ ਹੋ।"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
-msgid "Specify the filename of a theme to install"
-msgstr "ਇੱਕ ਸਰੂਪ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਫਾਇਲ ਨਾਂ ਦਿਓ"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
-msgid "filename"
-msgstr "ਫਾਇਲਨਾਂ"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"ਤੁਹਾਡੇ ਸਿਸਟਮ ਤੇ ਮੂਲ ਸਰੂਪ ਸਕੀਮ ਨਹੀਂ ਲੱਭਿਆ ਹੈ। ਇਸ ਦਾ ਅਰਥ ਇਹ ਹੈ ਕਿ ਤੁਹਾਡਾ ਮੈਟਾਸਿਟੀ ਇੰਸਟਾਲ "
-"ਨਹੀਂ ਹੈ ਜਾਂ ਤੁਹਾਡਾ ਜੀ-ਕਾਨਫ ਠੀਕ ਤਰਾਂ ਸੰਰਚਿਤ ਨਹੀਂ ਹੈ।"
-
-#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "ਗਨੋਮ ਸਰੂਪ ਪੈਕੇਜ"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:73
-msgid "Theme name must be present"
-msgstr "ਸਰੂਪ ਨਾਂ ਹੋਣਾ ਜ਼ਰੂਰੀ ਹੈ"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:144
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "ਸਰੂਪ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਤਬਦੀਲ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "ਡੈਸਕਟਾਪ ਦੇ ਵੱਖ-ਵੱਖ ਹਿੱਸਿਆਂ ਲਈ ਸਰੂਪ ਚੁਣੋ"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "ਸਰੂਪ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<b>You do not have permission to change theme settings</b>"
-msgstr "<b>ਤੁਹਾਨੂੰ ਸਰੂਪ ਸੈਟਿੰਗ ਬਦਲਣ ਲਈ ਅਧਿਕਾਰ ਨਹੀਂ ਹੈ।</b>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "ਬੈਕਗਰਾਊਂਡ ਲਾਗੂ(_B)"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "ਫੋਂਟ ਲਾਗੂ(_F)"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Background"
-msgstr "ਬੈਕਗਰਾਊਂਡ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "C_ustomize..."
-msgstr "ਪਸੰਦ(_u)..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Colors"
-msgstr "ਰੰਗ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Controls"
-msgstr "ਕੰਟਰੋਲ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Icons"
-msgstr "ਆਈਕਾਨ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Save Theme As..."
-msgstr "ਸਰੂਪ ਇੰਝ ਸੰਭਾਲੋ..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save _Background Image"
-msgstr "ਬੈਕਗਰਾਊਂਡ ਚਿੱਤਰ ਸੰਭਾਲੋ(_B)"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Select theme for the desktop"
-msgstr "ਡੈਸਕਟਾਪ ਲਈ ਸਰੂਪ ਚੁਣੋ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Text"
-msgstr "ਪਾਠ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "The current controls theme does not support color schemes"
-msgstr "ਮੌਜੂਦਾ ਕੰਟਰੋਲ ਸਰੂਪ ਰੰਗ ਸਕੀਮਾਂ ਲਈ ਸਹਾਇਕ ਨਹੀਂ ਹੈ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "Theme Details"
-msgstr "ਸਰੂਪ ਵੇਰਵਾ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "Theme Preferences"
-msgstr "ਸਰੂਪ ਪਸੰਦ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme does not suggest any particular font or background."
-msgstr "ਇਹ ਸਰੂਪ ਕਿਸੇ ਖਾਸ ਫੋਂਟ ਜਾਂ ਬੈਕਗਰਾਊਂਡ ਲਈ ਸੁਝਾਅ ਨਹੀਂ ਦਿੰਦਾ ਹੈ।"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a background:"
-msgstr "ਇਹ ਸਰੂਪ ਵਲੋਂ ਬੈਕਗਰਾਊਂਡ ਲਈ ਸੁਝਾਅ:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "This theme suggests a font and a background:"
-msgstr "ਇਹ ਸਰੂਪ ਦੀ ਫੋਂਟ ਅਤੇ ਬੈਕਗਰਾਊਂਡ ਲਈ ਸੁਝਾਅ:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "This theme suggests a font:"
-msgstr "ਇਹ ਸਰੂਪ ਦੀ ਫੋਂਟ ਲਈ ਸੁਝਾਅ:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "Window Border"
-msgstr "ਝਰੋਖਾ ਹਾਸ਼ੀਆ"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Description:"
-msgstr "ਵੇਰਵਾ(_D):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input boxes:"
-msgstr "ਇੰਪੁੱਟ ਬਕਸੇ(_I):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Install Theme..."
-msgstr "ਸਰੂਪ ਇੰਸਟਾਲ(_I)..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "_Install..."
-msgstr "ਇੰਸਟਾਲ(_I)..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Name:"
-msgstr "ਨਵਾਂ(_N):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
-msgid "_Revert"
-msgstr "ਪਰਤਾਓ(_R)"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
-msgid "_Save Theme..."
-msgstr "ਸਰੂਪ ਸੰਭਾਲੋ(_S)..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected items:"
-msgstr "ਚੁਣੀਆਂ ਇਕਾਈਆਂ(_S):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
-msgid "_Windows:"
-msgstr "ਝਰੋਖੇ(_W):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
-msgid "theme selection tree"
-msgstr "ਸਰੂਪ ਚੋਣ ਲੜੀ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "ਕਾਰਜਾਂ ਵਿੱਚ ਸੰਦ-ਪੱਟੀ ਅਤੇ ਮੇਨੂ-ਪੱਟੀ ਦੀ ਸੋਧ ਕਰੋ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "ਮੇਨੂ ਅਤੇ ਸੰਦ-ਪੱਟੀ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>ਰਵੱਈਆ ਅਤੇ ਦਿੱਖ</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>ਝਲਕ</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "ਕੱਟੋ(_u)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "ਸਿਰਫ ਆਈਕਾਨ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "ਮੇਨੂ ਅਤੇ ਸੰਦ-ਪੱਟੀ ਪਸੰਦ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "ਨਵੀਂ ਫਾਇਲ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "ਫਾਇਲ ਖੋਲ੍ਹੋ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "ਫਾਇਲ ਸੰਭਾਲੋ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "ਮੇਨੂ 'ਚ ਆਈਕਾਨ ਵੇਖਾਓ(_i)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "ਆਈਕਾਨ ਹੇਠ ਸ਼ਬਦ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "ਆਈਕਾਨ ਨਾਲ ਸ਼ਬਦ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "ਕੇਵਲ ਸ਼ਬਦ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "ਸੰਦ-ਪੱਟੀ ਬਟਨ ਲੇਬਲ(_b):"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "ਨਕਲ(_C)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "ਵੱਖ-ਹੋਣਯੋਗ ਸੰਦ-ਪੱਟੀ(_D)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "ਸੋਧ(_E)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu shortcut keys"
-msgstr "ਸੋਧਯੋਗ ਮੇਨੂ ਸ਼ਾਰਟਕੱਟ ਸਵਿੱਚਾਂ(_E)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "ਫਾਇਲ(_F)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "ਨਵਾਂ(_N)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "ਖੋਲ੍ਹੋ(_O)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "ਚੇਪੋ(_P)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "ਛਾਪੋ(_P)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "ਬਾਹਰ(_Q)"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "ਸੰਭਾਲੋ(_S)"
-
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
 msgstr "ਤੁਹਾਡੇ ਝਰੋਖਾ ਮੈਨੇਜਰ ਲਈ ਮੇਰੀ-ਪਸੰਦ ਕਾਰਜ ਨੂੰ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"
@@ -2879,11 +2792,11 @@ msgstr "ਝਰੋਖਾ"
 msgid "Volume"
 msgstr "ਵਾਲੀਅਮ"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:465
 msgid "Slow Keys Alert"
 msgstr "ਹੌਲੀ-ਸਵਿੱਚ ਚੇਤਾਵਨੀ"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2891,39 +2804,39 @@ msgstr ""
 "ਤੁਸੀ ਸਿਫਟ (Shift) ਸਵਿੱਚ ਨੂੰ ਸਿਰਫ 8 ਵਾਰ ਦਬਾਉਣਾ ਹੈ। ਇਹ ਹੌਲੀ-ਸਵਿੱਚ ਫੀਚਰ ਦਾ ਸ਼ਾਰਟਕੱਟ ਹੈ, ਜੋ "
 "ਕਿ ਤੁਹਾਡੇ ਕੀ-ਬੋਰਡ ਦੇ ਕੰਮ ਕਰਨ ਦੇ ਢੰਗ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰੇਗਾ।"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
 msgid "Do you want to activate Slow Keys?"
 msgstr "ਕੀ ਤੁਸੀ ਹੌਲੀ-ਸਵਿੱਚ ਨੂੰ ਸਰਗਰਮ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "ਕੀ ਤੁਸੀ ਹੌਲੀ-ਸਵਿੱਚ ਨੂੰ ਬੇਅਸਰ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
 msgid "_Activate"
 msgstr "ਸਰਗਰਮ(_A)"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
 msgid "_Deactivate"
 msgstr "ਨਾ-ਸਰਗਰਮ(_D)"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
 msgid "Do_n't activate"
 msgstr "ਸਰਗਰਮ ਨਾ ਕਰੋ(_n)"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
 msgid "Do_n't deactivate"
 msgstr "ਨਾ-ਸਰਗਰਮ ਨਾ ਕਰੋ(_n)"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:480
 msgid "Sticky Keys Alert"
 msgstr "ਸਟਿੱਕੀ ਸਵਿੱਚ ਚੇਤਾਵਨੀ"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2931,7 +2844,7 @@ msgstr ""
 "ਤੁਸੀ ਸਿਫਟ (Shift) ਸਵਿੱਚ ਨੂੰ ਸਿਰਫ 5 ਵਾਰ ਦਬਾਉਣਾ ਹੈ। ਇਹ ਸਟਿੱਕੀ-ਸਵਿੱਚ ਫੀਚਰ ਦਾ ਸ਼ਾਰਟਕੱਟ ਹੈ, "
 "ਜੋ ਕਿ ਤੁਹਾਡੇ ਕੀ-ਬੋਰਡ ਦੇ ਕੰਮ ਕਰਨ ਦੇ ਢੰਗ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰੇਗਾ।"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2940,15 +2853,15 @@ msgstr ""
 "ਤੁਸੀ ਇੱਕ ਕਤਾਰ ਵਿੱਚੋ ਦੋ ਕੀ ਇੱਕ ਵਾਰ ਦਬਾ ਸਕਦੇ ਹੋ ਜਾਂ ਸਿਫਟ (Shift) ਸਵਿੱਚ ਨੂੰ 5 ਵਾਰ ਇਹ ਸਟਿੱਕੀ "
 "ਸਵਿੱਚ ਫੀਚਰ ਨੂੰ ਚਾਲੂ ਕਰ ਸਕਦੇ ਹੋ, ਜੋ ਕਿ ਤੁਹਾਡਾ ਕੀ-ਬੋਰਡ ਤੇ ਕੰਮ ਕਰਨ ਦੇ ਢੰਗ ਨੂੰ ਤਬਦੀਲ ਕਰਦਾ ਹੈ।"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "Do you want to activate Sticky Keys?"
 msgstr "ਕੀ ਤੁਸੀ ਸਟਿੱਕੀ-ਸਵਿੱਚ ਨੂੰ ਸਰਗਰਮ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "ਕੀ ਤੁਸੀ ਸਟਿੱਕੀ-ਸਵਿੱਚ ਨੂੰ ਬੇਅਸਰ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:75
+#: ../gnome-settings-daemon/gnome-settings-font.c:150
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2957,7 +2870,7 @@ msgstr ""
 "ਡਾਇਰੈਕਟਰੀ \"%s\" ਬਣਾਈ ਨਹੀਂ ਜਾ ਸਕਦੀ ਹੈ।\n"
 "ਇਹ ਮਾਊਸ ਸੰਕੇਤਕ ਸਰੂਪ ਤਬਦੀਲ ਕਰਨ ਲਈ ਲਾਜ਼ਮੀ ਹੈ।"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:98
+#: ../gnome-settings-daemon/gnome-settings-font.c:171
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2966,37 +2879,37 @@ msgstr ""
 "ਡਾਇਰੈਕਟਰੀ \"%s\" ਬਣਾਈ ਨਹੀਂ ਜਾ ਸਕਦੀ ਹੈ।\n"
 "ਇਹ ਕਰਸਰ ਤਬਦੀਲ ਕਰਨ ਲਈ ਲੋੜੀਦੀਂ ਹੈ।"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:215
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:275
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "ਕੀ-ਬਾਈਡਿੰਗ (%s) ਦੀ ਕਾਰਵਾਈ ਬਹੁਤ ਵਾਰ ਪ੍ਰਭਾਸ਼ਿਤ ਕੀਤੀ ਜਾ ਚੁੱਕੀ ਹੈ।\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:223
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "ਕੀ-ਬਾਈਡਿੰਗ (%s) ਦੀ ਬਾਈਡਿੰਗ ਬਹੁਤ ਵਾਰ ਪ੍ਰਭਾਸ਼ਿਤ ਕੀਤੀ ਜਾ ਚੁੱਕੀ ਹੈ।\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:232
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:289
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "ਕੀ-ਬਾਈਡਿੰਗ (%s) ਪੂਰੀ ਨਹੀਂ ਹੈ\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:263
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:316
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "ਕੀ-ਬਾਈਡਿੰਗ (%s) ਠੀਕ ਨਹੀਂ ਹੈ\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:301
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:353
 #, c-format
 msgid "It seems that another application already has access to key '%u'."
 msgstr "ਇਹ ਲੱਗ ਰਿਹਾ ਹੈ ਕਿ ਇੱਕ ਹੋਰ ਕਾਰਜ ਸਵਿੱਚ '%u' ਨੂੰ ਵਰਤ ਰਿਹਾ ਹੈ।"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:370
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:418
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "ਕੀ-ਬਾਈਡਿੰਗ (%s) ਪਹਿਲਾਂ ਹੀ ਵਰਤੀ ਜਾ ਰਹੀ ਹੈ\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:445
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:489
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -3075,13 +2988,15 @@ msgstr "X ਸੈਟਿੰਗ ਵਰਤੋਂ"
 msgid "Keep GNOME settings"
 msgstr "ਗਨੋਮ ਸੈਟਿੰਗ ਰੱਖੋ"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:125
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
 msgstr ""
+"ਮੂਲ ਟਰਮੀਨਲ ਕਾਰਜ ਨਹੀਂ ਮਿਲਿਆ। ਜਾਂਚ ਕਰੋ ਕੀ ਤੁਹਾਡੀ ਮੂਲ ਟਰਮੀਨਲ ਕਮਾਂਡ "
+"ਸੈੱਟ ਕੀਤੀ ਹੋਈ ਹੈ ਅਤੇ ਇੱਕ ਠੀਕ ਕਾਰਜ ਲਈ ਇਸ਼ਾਰਾ ਕਰਦੀ ਹੈ।"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3090,7 +3005,7 @@ msgstr ""
 "ਕਮਾਂਡ ਨੂੰ ਚਲਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ ਹੈ: %s\n"
 "ਜਾਂਚ ਲਵੋ ਕਿ ਇਹ ਕਮਾਂਡ ਠੀਕ ਹੈ"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:172
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3098,7 +3013,7 @@ msgstr ""
 "ਮਸ਼ੀਨ ਨੂੰ ਵਿਰਾਮ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।\n"
 "ਆਪਣੀ ਮਸ਼ੀਨ ਦੀ ਸੰਰਚਨਾ ਦੀ ਜਾਂਚ ਕਰੋ, ਕੀ ਇਹ ਸਹੀ ਹੈ।"
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -3113,21 +3028,21 @@ msgstr ""
 "\n"
 "ਸਕਰੀਨ-ਸੇਵਰ ਕਾਰਵਾਈ ਇਸ ਸ਼ੈਸ਼ਨ ਵਿੱਚ ਕੰਮ ਨਹੀਂ ਕਰੇਗੀ।"
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr "ਇਹ ਸੁਨੇਹਾ ਮੁੜ ਨਾ ਵੇਖਾਓ(_D)"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:137
+#: ../gnome-settings-daemon/gnome-settings-sound.c:199
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "ਸਾਊਂਡ ਫਾਇਲ %s ਨੂੰ ਸੈਂਪਲ %s ਦੇ ਤੌਰ ਉੱਤੇ ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ ਹੈ"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:243
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:291
 msgid "Cannot determine user's home directory"
 msgstr "ਉਪਭੋਗੀ ਦੀ ਘਰ ਡਾਇਰੈਕਟਰੀ ਨਹੀਂ ਜਾਣੀ ਜਾ ਸਕਦੀ ਹੈ"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:226
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "ਜੀ-ਕਾਨਫ ਕੁੰਜੀ %s ਦੀ ਦਿੱਤੀ ਕਿਸਮ %s ਹੈ, ਪਰ ਇਸ ਕਿਸਮ %s ਦੀ ਉਮੀਦ ਸੀ।\n"
@@ -3204,7 +3119,7 @@ msgstr "<b>%s ਸ਼ੁਰੂ</b>"
 
 #: ../libslab/application-tile.c:381
 msgid "Help"
-msgstr "ਸਹਾਇਤਾ"
+msgstr "ਮੱਦਦ"
 
 #: ../libslab/application-tile.c:428
 msgid "Upgrade"
@@ -3316,13 +3231,13 @@ msgstr "ਫਾਇਲ ਮੈਨੇਜਰ 'ਚ ਖੋਲ੍ਹੋ"
 #: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
 #, c-format
 msgid "Unexpected attribute '%s' for element '%s'"
-msgstr ""
+msgstr "'%2$s' ਐਲੀਮੈਂਟ ਦਾ '%1$s' ਗੁਣ ਗਲਤ ਹੈ"
 
 #: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
 #: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
 #, c-format
 msgid "Attribute '%s' of element '%s' not found"
-msgstr ""
+msgstr "'%2$s' ਐਲੀਮੈਂਟ ਦਾ '%1$s' ਗੁਣ ਨਹੀਂ ਲੱਭਿਆ"
 
 #: ../libslab/libslab-bookmarkfile.c:1087
 #: ../libslab/libslab-bookmarkfile.c:1152
@@ -3330,7 +3245,7 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:1226
 #, c-format
 msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr ""
+msgstr "ਗਲਤ ਟੈਗ '%s', ਟੈਗ '%s' ਦੀ ਲੋੜ ਸੀ"
 
 #: ../libslab/libslab-bookmarkfile.c:1112
 #: ../libslab/libslab-bookmarkfile.c:1126
@@ -3338,7 +3253,7 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:1246
 #, c-format
 msgid "Unexpected tag '%s' inside '%s'"
-msgstr ""
+msgstr "'%2$s' ਵਿੱਚ ਗਲਤ '%1$s' ਟੈਗ"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
 msgid "No valid bookmark file found in data dirs"
@@ -3373,12 +3288,12 @@ msgstr "URI '%s' ਲਈ ਕੋਈ ਬੁੱਕਮਾਰਕ ਨਹੀਂ ਲੱ�
 #: ../libslab/libslab-bookmarkfile.c:2508
 #, c-format
 msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr ""
+msgstr "URI '%s' ਲਈ ਬੁੱਕਮਾਰਕ ਵਿੱਚ ਕੋਈ MIME ਕਿਸਮ ਨਹੀਂ ਹੈ।"
 
 #: ../libslab/libslab-bookmarkfile.c:2593
 #, c-format
 msgid "No private flag has been defined in bookmark for URI '%s'"
-msgstr ""
+msgstr "URI '%s' ਲਈ ਬੁੱਕਮਾਰਕ ਵਿੱਚ ਕੋਈ ਪ੍ਰਾਈਵੇਟ ਫਲੈਸ ਨਹੀਂ ਹੈ।"
 
 #: ../libslab/libslab-bookmarkfile.c:2972
 #, c-format
@@ -3389,7 +3304,7 @@ msgstr "URI '%s' ਲਈ ਬੁੱਕਮਾਰਕ ਵਿੱਚ ਕੋਈ ਗਰ�
 #: ../libslab/libslab-bookmarkfile.c:3518
 #, c-format
 msgid "No application with name '%s' registered a bookmark for '%s'"
-msgstr ""
+msgstr "'%s' ਨਾਂ ਨਾਲ ਕੋਈ ਵੀ ਕਾਰਜ '%s' ਲਈ ਬੁੱਕਮਾਰਕ ਦੇ ਤੌਰ ਉੱਤੇ ਰਜਿਸਟਰ ਨਹੀਂ ਹੋਇਆ।"
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
@@ -3512,11 +3427,11 @@ msgstr "ਘਰ ਫੋਲਡਰ ਦਾ ਸ਼ਾਰਟਕੱਟ ਹੈ।"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Launch help browser"
-msgstr "ਸਹਾਇਤਾ-ਝਲਕਾਰਾ ਚਲਾਓ"
+msgstr "ਮੱਦਦ-ਝਲਕਾਰਾ ਚਲਾਓ"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Launch help browser's shortcut."
-msgstr "ਸਹਾਇਤਾ-ਝਲਕਾਰਾ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਦਾ ਸ਼ਾਰਟਕੱਟ ਹੈ।"
+msgstr "ਮੱਦਦ-ਝਲਕਾਰਾ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਦਾ ਸ਼ਾਰਟਕੱਟ ਹੈ।"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch web browser"
@@ -3682,7 +3597,7 @@ msgstr "ਜੋੜਨ ਜਾਂ ਹਟਾਉਣ ਕਾਰਵਾਈ ਦੌਰਾ�
 
 #: ../shell/control-center.schemas.in.h:3
 msgid "Exit shell on help action performed"
-msgstr "ਸਹਾਇਤਾ ਕਾਰਵਾਈ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
+msgstr "ਮੱਦਦ ਕਾਰਵਾਈ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
 
 #: ../shell/control-center.schemas.in.h:4
 msgid "Exit shell on start action performed"
@@ -3694,7 +3609,7 @@ msgstr "ਅੱਪਗਰੇਡ ਜਾਂ ਅਣ-ਇੰਸਟਾਲ ਕਰਨ ਦ�
 
 #: ../shell/control-center.schemas.in.h:6
 msgid "Indicates whether to close the shell when a help action is performed"
-msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਇੱਕ ਸਹਾਇਤਾ ਕਾਰਵਾਈ ਕਰਨ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਹੋ ਜਾਵੇ"
+msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਇੱਕ ਮੱਦਦ ਕਾਰਵਾਈ ਕਰਨ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਹੋ ਜਾਵੇ"
 
 #: ../shell/control-center.schemas.in.h:7
 msgid "Indicates whether to close the shell when a start action is performed"
@@ -3732,7 +3647,7 @@ msgid ""
 "selector.desktop,Set Preferred Applications;default-applications.desktop,Add "
 "Printer;gnome-cups-manager.desktop]"
 msgstr ""
-"[ਵੇਹੜਾ ਬੈਕਗਰਾਊਂਡ ਬਦਲੋ;background.desktop,ਸਰੂਪ ਬਦਲੋ;gtk-theme-selector.desktop,ਕਾਰਜ "
+"[ਡੈਸਕਟਾਪ ਬੈਕਗਰਾਊਂਡ ਬਦਲੋ;background.desktop,ਸਰੂਪ ਬਦਲੋ;gtk-theme-selector.desktop,ਕਾਰਜ "
 "ਪਸੰਦ ਦਿਓ;default-applications.desktop, ਪਰਿੰਟਰ ਜੋੜੋ;gnome-cups-manager.desktop]"
 
 #: ../shell/control-center.schemas.in.h:14
@@ -3802,11 +3717,19 @@ msgstr ""
 "ਪੰਜਾਬੀ ਓਪਨਸੋਰਸ ਟੀਮ (POST)\n"
 "http://punjabi.sf.net/"
 
-#: ../typing-break/main.c:84
+#: ../typing-break/main.c:61
+msgid "Enable debugging code"
+msgstr "ਡੀਬੱਗਿੰਗ ਕੋਡ ਚਾਲੂ ਕਰੋ"
+
+#: ../typing-break/main.c:63
+msgid "Don't check whether the notification area exists"
+msgstr "ਜਾਂਚ ਨਾ ਕਰੋ ਕਿ ਕੀ ਨੋਟੀਫਿਕੇਸ਼ਨ ਖੇਤਰ ਮੌਜੂਦ ਹੈ"
+
+#: ../typing-break/main.c:89
 msgid "Typing Monitor"
 msgstr "ਲਿਖਣ ਨਿਗਰਾਨ"
 
-#: ../typing-break/main.c:103
+#: ../typing-break/main.c:105
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3904,10 +3827,6 @@ msgstr "ਸ਼ੈਲੀ:"
 #: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "ਕਿਸਮ:"
-
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "ਅਕਾਰ:"
 
 #: ../vfs-methods/fontilus/font-view.c:339
 #: ../vfs-methods/fontilus/font-view.c:352
