@@ -715,7 +715,7 @@ wp_dragged_image (GtkWidget *widget,
   }
 }
 
-#if GTK_CHECK_VERSION (2,11,0)
+#if GTK_CHECK_VERSION (2,11,6)
 static gboolean
 wp_view_tooltip_cb (GtkWidget  *widget,
                     gint x,
@@ -724,26 +724,27 @@ wp_view_tooltip_cb (GtkWidget  *widget,
                     GtkTooltip *tooltip,
                     AppearanceData *data)
 {
-  GtkTreePath *path;
   GtkTreeIter iter;
   gchar *wpfile;
   GnomeWPItem *item;
 
-  path = gtk_icon_view_get_path_at_pos (data->wp_view, x, y);
+  if (gtk_icon_view_get_tooltip_context (data->wp_view, 
+                                         &x, &y, 
+                                         keyboard_mode,
+                                         NULL, 
+                                         NULL,
+                                         &iter))
+    {
+      gtk_tree_model_get (data->wp_model, &iter, 2, &wpfile, -1);
+      item = g_hash_table_lookup (data->wp_hash, wpfile);
+      g_free (wpfile);
 
-  if (path == NULL)
-    return FALSE;
-
-  gtk_tree_model_get_iter (data->wp_model, &iter, path);
-  gtk_tree_path_free (path);
-
-  gtk_tree_model_get (data->wp_model, &iter, 2, &wpfile, -1);
-  item = g_hash_table_lookup (data->wp_hash, wpfile);
-  g_free (wpfile);
-
-  gtk_tooltip_set_markup (tooltip, item->description);
-
-  return TRUE;
+      gtk_tooltip_set_markup (tooltip, item->description);
+  
+      return TRUE;
+    }
+ 
+  return FALSE;
 }
 #endif
 
@@ -1053,7 +1054,7 @@ desktop_init (AppearanceData *data,
   g_signal_connect (G_OBJECT (data->wp_view), "selection-changed",
                     G_CALLBACK (wp_props_wp_selected), data);
 
-#if GTK_CHECK_VERSION (2,11,0)
+#if GTK_CHECK_VERSION (2,11,6)
   g_signal_connect (G_OBJECT (data->wp_view), "query-tooltip",
                     G_CALLBACK (wp_view_tooltip_cb), data);
 #endif
