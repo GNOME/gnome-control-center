@@ -59,6 +59,32 @@ clear_xkb_elements_list (GSList * list)
 	}
 }
 
+static gint
+find_selected_layout_idx (GladeXML * dialog)
+{
+	GtkTreeSelection *selection =
+	    gtk_tree_view_get_selection (GTK_TREE_VIEW
+					 (WID ("xkb_layouts_selected")));
+	GtkTreeIter selected_iter;
+	GtkTreeModel *model;
+	GtkTreePath *path;
+	gint *indices;
+	gint rv;
+
+	if (!gtk_tree_selection_get_selected
+	    (selection, &model, &selected_iter))
+		return -1;
+
+	path = gtk_tree_model_get_path (model, &selected_iter);
+	if (path == NULL)
+		return -1;
+
+	indices = gtk_tree_path_get_indices (path);
+	rv = indices[0];
+	gtk_tree_path_free (path);
+	return rv;
+}
+
 GSList *
 xkb_layouts_get_selected_list (void)
 {
@@ -213,6 +239,62 @@ xkb_layouts_enable_disable_default (GladeXML * dialog, gboolean enable)
 	gtk_widget_draw (tree_view, NULL);
 }
 
+static void
+xkb_layouts_dnd_data_get (GtkWidget * widget, GdkDragContext * dc,
+			  GtkSelectionData * selection_data, guint info,
+			  guint t, GladeXML * dialog)
+{
+	/* Storing the value into selection - 
+	 * while it is actually not used
+	 */
+	gint idx = find_selected_layout_idx (dialog);
+	gtk_selection_data_set (selection_data,
+				GDK_SELECTION_TYPE_INTEGER, 32,
+				(guchar *) & idx, sizeof (idx));
+}
+
+static void
+xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
+			       gint x, gint y,
+			       GtkSelectionData * selection_data,
+			       guint info, guint t, GladeXML * dialog)
+{
+	gint sidx = find_selected_layout_idx (dialog);
+	GtkWidget *tree_view = WID ("xkb_layouts_selected");
+	GtkTreePath *path = NULL;
+	GtkTreeViewDropPosition pos;
+	gint didx;
+	gchar *id;
+	GSList *layouts_list = xkb_layouts_get_selected_list ();
+	GSList *node2Remove = g_slist_nth (layouts_list, sidx);
+
+	layouts_list = g_slist_remove_link (layouts_list, node2Remove);
+
+	id = (gchar *) node2Remove->data;
+	g_slist_free_1 (node2Remove);
+
+	if (!gtk_tree_view_get_dest_row_at_pos
+	    (GTK_TREE_VIEW (tree_view), x, y, &path, &pos)) {
+		/* Move to the very end */
+		layouts_list =
+		    g_slist_append (layouts_list, g_strdup (id));
+		xkb_layouts_set_selected_list (layouts_list);
+	} else if (path != NULL) {
+		gint *indices = gtk_tree_path_get_indices (path);
+		didx = indices[0];
+		gtk_tree_path_free (path);
+		/* Move to the new position */
+		if (sidx != didx) {
+			layouts_list =
+			    g_slist_insert (layouts_list, g_strdup (id),
+					    didx);
+			xkb_layouts_set_selected_list (layouts_list);
+		}
+	}
+	g_free (id);
+	clear_xkb_elements_list (layouts_list);
+}
+
 void
 xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 				   GConfChangeSet * changeset)
@@ -223,6 +305,8 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 	GtkWidget *tree_view = WID ("xkb_layouts_selected");
 	GtkTreeViewColumn *desc_column, *def_column;
 	GtkTreeSelection *selection;
+	GtkTargetEntry self_drag_target =
+	    { "xkb_layouts_selected", GTK_TARGET_SAME_WIDGET, 0 };
 
 	text_renderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
 	toggle_renderer =
@@ -273,6 +357,20 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 				 NULL);
 	g_signal_connect (G_OBJECT (toggle_renderer), "toggled",
 			  G_CALLBACK (def_group_in_ui_changed), dialog);
+
+	/* Setting up DnD */
+	gtk_drag_source_set (tree_view, GDK_BUTTON1_MASK,
+			     &self_drag_target, 1, GDK_ACTION_MOVE);
+	gtk_drag_source_set_icon_name (tree_view, "input-keyboard");
+	gtk_drag_dest_set (tree_view, GTK_DEST_DEFAULT_ALL,
+			   &self_drag_target, 1, GDK_ACTION_MOVE);
+
+	gtk_signal_connect (GTK_OBJECT (tree_view), "drag_data_get",
+			    GTK_SIGNAL_FUNC (xkb_layouts_dnd_data_get),
+			    dialog);
+	gtk_signal_connect (GTK_OBJECT (tree_view), "drag_data_received",
+			    GTK_SIGNAL_FUNC
+			    (xkb_layouts_dnd_data_received), dialog);
 }
 
 void
@@ -358,51 +456,37 @@ add_selected_layout (GtkWidget * button, GladeXML * dialog)
 static void
 move_selected_layout (GladeXML * dialog, int offset)
 {
-	GtkTreeSelection *selection =
-	    gtk_tree_view_get_selection (GTK_TREE_VIEW
-					 (WID ("xkb_layouts_selected")));
-	GtkTreeIter selected_iter;
-	GtkTreeModel *model;
-	if (gtk_tree_selection_get_selected
-	    (selection, &model, &selected_iter)) {
+	gint idx = find_selected_layout_idx (dialog);
+
+	if (idx != -1) {
 		GSList *layouts_list = xkb_layouts_get_selected_list ();
-		GtkTreePath *path = gtk_tree_model_get_path (model,
-							     &selected_iter);
-		if (path != NULL) {
-			int *indices = gtk_tree_path_get_indices (path);
-			int idx = indices[0];
-			char *id = NULL;
-			GSList *node2Remove =
-			    g_slist_nth (layouts_list, idx);
+		char *id = NULL;
+		GSList *node2Remove = g_slist_nth (layouts_list, idx);
 
+		layouts_list =
+		    g_slist_remove_link (layouts_list, node2Remove);
+
+		id = (char *) node2Remove->data;
+		g_slist_free_1 (node2Remove);
+
+		if (offset == 0) {
+			g_free (id);
+			if (default_group > idx)
+				save_default_group (default_group - 1);
+			else if (default_group == idx)
+				save_default_group (-1);
+		} else {
 			layouts_list =
-			    g_slist_remove_link (layouts_list,
-						 node2Remove);
-
-			id = (char *) node2Remove->data;
-			g_slist_free_1 (node2Remove);
-
-			if (offset == 0) {
-				g_free (id);
-				if (default_group > idx)
-					save_default_group (default_group -
-							    1);
-				else if (default_group == idx)
-					save_default_group (-1);
-			} else {
-				layouts_list =
-				    g_slist_insert (layouts_list, id,
-						    idx + offset);
-				idx2select = idx + offset;
-				if (idx == default_group)
-					save_default_group (idx2select);
-				else if (idx2select == default_group)
-					save_default_group (idx);
-			}
-
-			xkb_layouts_set_selected_list (layouts_list);
-			gtk_tree_path_free (path);
+			    g_slist_insert (layouts_list, id,
+					    idx + offset);
+			idx2select = idx + offset;
+			if (idx == default_group)
+				save_default_group (idx2select);
+			else if (idx2select == default_group)
+				save_default_group (idx);
 		}
+
+		xkb_layouts_set_selected_list (layouts_list);
 		clear_xkb_elements_list (layouts_list);
 	}
 }
