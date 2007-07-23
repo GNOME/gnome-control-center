@@ -728,10 +728,10 @@ wp_view_tooltip_cb (GtkWidget  *widget,
   gchar *wpfile;
   GnomeWPItem *item;
 
-  if (gtk_icon_view_get_tooltip_context (data->wp_view, 
-                                         &x, &y, 
+  if (gtk_icon_view_get_tooltip_context (data->wp_view,
+                                         &x, &y,
                                          keyboard_mode,
-                                         NULL, 
+                                         NULL,
                                          NULL,
                                          &iter))
     {
@@ -740,10 +740,10 @@ wp_view_tooltip_cb (GtkWidget  *widget,
       g_free (wpfile);
 
       gtk_tooltip_set_markup (tooltip, item->description);
-  
+
       return TRUE;
     }
- 
+
   return FALSE;
 }
 #endif
@@ -927,7 +927,7 @@ desktop_init (AppearanceData *data,
   GtkWidget *add_button;
   GtkFileFilter *filter;
 
-#if GTK_CHECK_VERSION (2,11,0)
+#if GTK_CHECK_VERSION (2,11,6)
   GtkSettings *settings;
 
   settings = gtk_settings_get_default ();
@@ -981,7 +981,7 @@ desktop_init (AppearanceData *data,
   data->wp_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "wp_view"));
   gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
 
-#if GTK_CHECK_VERSION (2,11,0)
+#if GTK_CHECK_VERSION (2,11,6)
   g_object_set (G_OBJECT (data->wp_view), "has-tooltip", TRUE, NULL);
 #endif
 
