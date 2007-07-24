@@ -24,6 +24,7 @@
 #include "theme-installer.h"
 #include "theme-save.h"
 #include "theme-util.h"
+#include "gtkrc-utils.h"
 
 #include <glib/gi18n.h>
 #include <libwindow-settings/gnome-wm-manager.h>
@@ -110,11 +111,26 @@ is_locked_down (GConfClient *client)
 static void
 theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
 {
+  gchar *scheme;
+
   g_free (theme->gtk_theme_name);
   theme->gtk_theme_name = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
 
   g_free (theme->gtk_color_scheme);
-  theme->gtk_color_scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
+  scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
+
+  if (scheme == NULL || !strcmp (scheme, "")) {
+    /* try to find the color scheme from the gtkrc */
+    gchar *gtkrc_file;
+
+    gtkrc_file = gtkrc_find_named (theme->gtk_theme_name);
+    if (gtkrc_file) {
+      g_free (scheme);
+      scheme = gtkrc_get_color_scheme (gtkrc_file);
+      g_free (gtkrc_file);
+    }
+  }
+  theme->gtk_color_scheme = scheme;
 
   g_free (theme->metacity_theme_name);
   theme->metacity_theme_name = gconf_client_get_string (client, METACITY_THEME_KEY, NULL);
