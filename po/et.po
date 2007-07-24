@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNOME control center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-06 03:22+0100\n"
-"PO-Revision-Date: 2007-06-22 16:17+0300\n"
+"POT-Creation-Date: 2007-07-13 11:21+0100\n"
+"PO-Revision-Date: 2007-07-22 17:15+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "Hoiatusdialoogis näidatavad nupud"
 
 #: ../capplets/about-me/eel-alert-dialog.c:198
 msgid "Show more _details"
-msgstr "Näita _rohkem üksikasju"
+msgstr "_Näita üksikasjalisemalt"
 
 #: ../capplets/about-me/gnome-about-me.c:634
 msgid "Select Image"
@@ -61,7 +61,7 @@ msgid "No Image"
 msgstr "Pilt puudub"
 
 #: ../capplets/about-me/gnome-about-me.c:666
-#: ../capplets/appearance/appearance-desktop.c:1067
+#: ../capplets/appearance/appearance-desktop.c:1080
 msgid "Images"
 msgstr "Pildid"
 
@@ -1062,11 +1062,11 @@ msgstr "punkti tollile"
 msgid "gtk-delete"
 msgstr ""
 
-#: ../capplets/appearance/appearance-desktop.c:1050
+#: ../capplets/appearance/appearance-desktop.c:1063
 msgid "Add Wallpaper"
 msgstr "Tapeedi lisamine"
 
-#: ../capplets/appearance/appearance-desktop.c:1071
+#: ../capplets/appearance/appearance-desktop.c:1084
 msgid "All files"
 msgstr "Kõik failid"
 
@@ -1108,24 +1108,28 @@ msgstr "Kasuta eelmist kirjatüüpi"
 msgid "Use selected font"
 msgstr "Kasuta valitud kirjatüüpi"
 
-#: ../capplets/appearance/appearance-main.c:104
+#: ../capplets/appearance/appearance-main.c:105
 msgid "Specify the filename of a theme to install"
 msgstr "Paigaldatava teemafaili nime määramine"
 
-#: ../capplets/appearance/appearance-main.c:105
+#: ../capplets/appearance/appearance-main.c:106
 msgid "filename"
 msgstr "failinimi"
 
-#: ../capplets/appearance/appearance-main.c:111
+#: ../capplets/appearance/appearance-main.c:112
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
 
-#: ../capplets/appearance/appearance-main.c:112
+#: ../capplets/appearance/appearance-main.c:113
 msgid "page"
 msgstr ""
 
+#: ../capplets/appearance/appearance-main.c:120
+msgid "[WALLPAPER...]"
+msgstr "[TAPEET...]"
+
 #: ../capplets/appearance/appearance-themes.c:523
-#: ../capplets/default-applications/gnome-da-capplet.c:1098
+#: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
 msgstr "Kohandatud"
@@ -1526,27 +1530,26 @@ msgid "Visual AT"
 msgstr ""
 
 #: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:113
-#: ../capplets/default-applications/gnome-da-capplet.c:132
-#: ../capplets/default-applications/gnome-da-capplet.c:151
-#: ../capplets/default-applications/gnome-da-capplet.c:197
-#: ../capplets/default-applications/gnome-da-capplet.c:243
-#: ../capplets/default-applications/gnome-da-capplet.c:300
-#: ../capplets/default-applications/gnome-da-capplet.c:351
-#: ../capplets/default-applications/gnome-da-capplet.c:402
-#: ../capplets/default-applications/gnome-da-capplet.c:453
-#: ../capplets/default-applications/gnome-da-capplet.c:502
-#: ../capplets/default-applications/gnome-da-capplet.c:895
-#: ../capplets/default-applications/gnome-da-capplet.c:917
+#: ../capplets/default-applications/gnome-da-capplet.c:112
+#: ../capplets/default-applications/gnome-da-capplet.c:133
+#: ../capplets/default-applications/gnome-da-capplet.c:177
+#: ../capplets/default-applications/gnome-da-capplet.c:222
+#: ../capplets/default-applications/gnome-da-capplet.c:279
+#: ../capplets/default-applications/gnome-da-capplet.c:330
+#: ../capplets/default-applications/gnome-da-capplet.c:381
+#: ../capplets/default-applications/gnome-da-capplet.c:434
+#: ../capplets/default-applications/gnome-da-capplet.c:484
+#: ../capplets/default-applications/gnome-da-capplet.c:877
+#: ../capplets/default-applications/gnome-da-capplet.c:899
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Viga sätete salvestamisel: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1118
+#: ../capplets/default-applications/gnome-da-capplet.c:1100
 msgid "Could not load the main interface"
 msgstr "Peamist liidest pole võimalik laadida"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1120
+#: ../capplets/default-applications/gnome-da-capplet.c:1102
 msgid "Please make sure that the applet is properly installed"
 msgstr "Veendu, et rakend on õigesti paigaldatud"
 
@@ -2215,8 +2218,8 @@ msgid "Reset to De_faults"
 msgstr "Taasta _vaikeväärtused"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "Separate _group for each window"
-msgstr "_Eraldi grupp iga akna jaoks"
+msgid "Separate _layout for each window"
+msgstr "_Eraldi paigutus iga akna jaoks"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
@@ -2270,13 +2273,13 @@ msgstr "minutit"
 msgid "Unknown"
 msgstr "Tundmatu"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:84
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:236
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:240
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:243
 msgid "Default"
 msgstr "Vaikimisi"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:230
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:234
 msgid "Layout"
 msgstr "Paigutus"
 
@@ -3114,7 +3117,7 @@ msgstr "Uuenda"
 
 #: ../libslab/application-tile.c:443
 msgid "Uninstall"
-msgstr ""
+msgstr "Eemalda"
 
 #: ../libslab/application-tile.c:770 ../libslab/document-tile.c:526
 msgid "Remove from Favorites"
@@ -3232,7 +3235,7 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:1226
 #, c-format
 msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr ""
+msgstr "Ootamatu silt '%s', oodati silti '%s'"
 
 #: ../libslab/libslab-bookmarkfile.c:1112
 #: ../libslab/libslab-bookmarkfile.c:1126
@@ -3240,7 +3243,7 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:1246
 #, c-format
 msgid "Unexpected tag '%s' inside '%s'"
-msgstr ""
+msgstr "Ootamatu silt '%s' sildi '%s' sees"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
 msgid "No valid bookmark file found in data dirs"
@@ -3715,11 +3718,11 @@ msgstr ""
 
 #: ../typing-break/main.c:61
 msgid "Enable debugging code"
-msgstr ""
+msgstr "Siluri koodi lubamine"
 
 #: ../typing-break/main.c:63
 msgid "Don't check whether the notification area exists"
-msgstr ""
+msgstr "Teavitusala olemasolu ei kontrollita"
 
 #: ../typing-break/main.c:89
 msgid "Typing Monitor"
@@ -4025,9 +4028,6 @@ msgstr "Vaikimisi teema seadmine"
 
 #~ msgid "_Remove"
 #~ msgstr "_Eemalda"
-
-#~ msgid "[FILE...]"
-#~ msgstr "[FAIL...]"
 
 #~ msgid "Centered"
 #~ msgstr "Keskel"
