@@ -5,6 +5,8 @@
   <widget class="GtkDialog" id="keyboard_dialog">
     <property name="border_width">6</property>
     <property name="title" translatable="yes">Keyboard Preferences</property>
+    <property name="default_width">450</property>
+    <property name="default_height">430</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
@@ -496,59 +498,6 @@
                                 </child>
                               </widget>
                             </child>
-                            <child>
-                              <widget class="GtkVButtonBox" id="vbuttonbox1">
-                                <property name="visible">True</property>
-                                <property name="spacing">6</property>
-                                <property name="layout_style">GTK_BUTTONBOX_START</property>
-                                <child>
-                                  <widget class="GtkButton" id="xkb_layouts_add">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label">_Add...</property>
-                                    <property name="use_underline">True</property>
-                                  </widget>
-                                </child>
-                                <child>
-                                  <widget class="GtkButton" id="xkb_layouts_remove">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label">gtk-remove</property>
-                                    <property name="use_stock">True</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkButton" id="xkb_layouts_up">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label">gtk-go-up</property>
-                                    <property name="use_stock">True</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkButton" id="xkb_layouts_down">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="label">gtk-go-down</property>
-                                    <property name="use_stock">True</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
                           </widget>
                           <packing>
                             <property name="position">1</property>
@@ -578,7 +527,29 @@
                         <property name="visible">True</property>
                         <property name="spacing">6</property>
                         <child>
-                          <placeholder/>
+                          <widget class="GtkButton" id="xkb_layouts_add">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label">_Add...</property>
+                            <property name="use_underline">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkButton" id="xkb_layouts_remove">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label">gtk-remove</property>
+                            <property name="use_stock">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
+                          </packing>
                         </child>
                         <child>
                           <widget class="GtkButton" id="xkb_reset_to_defaults">
@@ -1053,27 +1024,16 @@
                 <property name="column_spacing">12</property>
                 <property name="row_spacing">6</property>
                 <child>
-                  <widget class="GtkComboBox" id="xkb_variants_available">
+                  <widget class="GtkLabel" id="label3">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">_Layouts:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">xkb_layouts_available</property>
                   </widget>
                   <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
                     <property name="x_options">GTK_FILL</property>
-                    <property name="y_options">GTK_FILL</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkComboBox" id="xkb_layouts_available">
-                    <property name="visible">True</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options">GTK_FILL</property>
+                    <property name="y_options"></property>
                   </packing>
                 </child>
                 <child>
@@ -1092,16 +1052,27 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label3">
+                  <widget class="GtkComboBox" id="xkb_layouts_available">
                     <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">_Layouts:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">xkb_layouts_available</property>
                   </widget>
                   <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
                     <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"></property>
+                    <property name="y_options">GTK_FILL</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkComboBox" id="xkb_variants_available">
+                    <property name="visible">True</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options">GTK_FILL</property>
                   </packing>
                 </child>
               </widget>

@@ -180,8 +180,6 @@ xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 {
 	GtkWidget *add_layout_btn = WID ("xkb_layouts_add");
 	GtkWidget *del_layout_btn = WID ("xkb_layouts_remove");
-	GtkWidget *up_layout_btn = WID ("xkb_layouts_up");
-	GtkWidget *dn_layout_btn = WID ("xkb_layouts_down");
 	GtkWidget *selected_layouts_tree = WID ("xkb_layouts_selected");
 
 	GtkTreeSelection *s_selection =
@@ -189,9 +187,6 @@ xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 					 (selected_layouts_tree));
 	const int n_selected_selected_layouts =
 	    gtk_tree_selection_count_selected_rows (s_selection);
-	gboolean can_move_up = FALSE;
-	gboolean can_move_dn = FALSE;
-	GtkTreeIter iter;
 	GtkTreeModel *selected_layouts_model = gtk_tree_view_get_model
 	    (GTK_TREE_VIEW (selected_layouts_tree));
 	const int n_selected_layouts =
@@ -207,22 +202,6 @@ xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 				   || max_selected_layouts == 0));
 	gtk_widget_set_sensitive (del_layout_btn,
 				  n_selected_selected_layouts > 0);
-
-	if (gtk_tree_selection_get_selected (s_selection, NULL, &iter)) {
-		GtkTreePath *path =
-		    gtk_tree_model_get_path (selected_layouts_model,
-					     &iter);
-		if (path != NULL) {
-			int *indices = gtk_tree_path_get_indices (path);
-			int idx = indices[0];
-			can_move_up = idx > 0;
-			can_move_dn = idx < (n_selected_layouts - 1);
-			gtk_tree_path_free (path);
-		}
-	}
-
-	gtk_widget_set_sensitive (up_layout_btn, can_move_up);
-	gtk_widget_set_sensitive (dn_layout_btn, can_move_dn);
 }
 
 void
@@ -338,6 +317,8 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 					 GTK_TREE_VIEW_COLUMN_AUTOSIZE);
 	gtk_tree_view_column_set_resizable (desc_column, TRUE);
 	gtk_tree_view_column_set_resizable (def_column, TRUE);
+	gtk_tree_view_column_set_expand (desc_column, TRUE);
+	gtk_tree_view_column_set_expand (def_column, FALSE);
 
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
 				     desc_column);
@@ -454,7 +435,7 @@ add_selected_layout (GtkWidget * button, GladeXML * dialog)
 }
 
 static void
-move_selected_layout (GladeXML * dialog, int offset)
+remove_selected_layout (GtkWidget * button, GladeXML * dialog)
 {
 	gint idx = find_selected_layout_idx (dialog);
 
@@ -468,45 +449,16 @@ move_selected_layout (GladeXML * dialog, int offset)
 
 		id = (char *) node2Remove->data;
 		g_slist_free_1 (node2Remove);
+		g_free (id);
 
-		if (offset == 0) {
-			g_free (id);
-			if (default_group > idx)
-				save_default_group (default_group - 1);
-			else if (default_group == idx)
-				save_default_group (-1);
-		} else {
-			layouts_list =
-			    g_slist_insert (layouts_list, id,
-					    idx + offset);
-			idx2select = idx + offset;
-			if (idx == default_group)
-				save_default_group (idx2select);
-			else if (idx2select == default_group)
-				save_default_group (idx);
-		}
+		if (default_group > idx)
+			save_default_group (default_group - 1);
+		else if (default_group == idx)
+			save_default_group (-1);
 
 		xkb_layouts_set_selected_list (layouts_list);
 		clear_xkb_elements_list (layouts_list);
 	}
-}
-
-static void
-remove_selected_layout (GtkWidget * button, GladeXML * dialog)
-{
-	move_selected_layout (dialog, 0);
-}
-
-static void
-up_selected_layout (GtkWidget * button, GladeXML * dialog)
-{
-	move_selected_layout (dialog, -1);
-}
-
-static void
-down_selected_layout (GtkWidget * button, GladeXML * dialog)
-{
-	move_selected_layout (dialog, +1);
 }
 
 void
@@ -516,10 +468,6 @@ xkb_layouts_register_buttons_handlers (GladeXML * dialog)
 			  G_CALLBACK (add_selected_layout), dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_layouts_remove")), "clicked",
 			  G_CALLBACK (remove_selected_layout), dialog);
-	g_signal_connect (G_OBJECT (WID ("xkb_layouts_up")), "clicked",
-			  G_CALLBACK (up_selected_layout), dialog);
-	g_signal_connect (G_OBJECT (WID ("xkb_layouts_down")), "clicked",
-			  G_CALLBACK (down_selected_layout), dialog);
 }
 
 static void
