@@ -27,6 +27,10 @@
 #include "gconf-property-editor.h"
 #include "theme-thumbnail.h"
 
+typedef void (* ThumbnailGenFunc) (void               *type,
+				   ThemeThumbnailFunc  theme,
+				   AppearanceData     *data,
+				   GDestroyNotify     *destroy);
 
 static gchar *
 find_string_in_model (GtkTreeModel *model, const gchar *value, gint column)
@@ -189,17 +193,19 @@ static void
 update_color_buttons_from_settings (GtkSettings *settings,
                                     AppearanceData *data)
 {
-  gchar *scheme;
+  gchar *scheme, *setting;
+
   scheme = gconf_client_get_string (data->client, COLOR_SCHEME_KEY, NULL);
-  if (scheme == NULL || strcmp (scheme, "") == 0)
+  g_object_get (G_OBJECT (settings), "gtk-color-scheme", &setting, NULL);
+
+  if (scheme == NULL || strcmp (scheme, "") == 0 || strcmp (scheme, setting) == 0)
   {
     gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
-    g_free (scheme);
-    g_object_get (G_OBJECT (settings), "gtk-color-scheme", &scheme, NULL);
   }
 
-  update_color_buttons_from_string (scheme, data);
   g_free (scheme);
+  update_color_buttons_from_string (setting, data);
+  g_free (setting);
 }
 
 static void
@@ -716,6 +722,8 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   const gchar *key;
   GObject *peditor;
   GConfValue *value;
+  ThumbnailGenFunc generator;
+  ThemeThumbnailFunc thumb_cb;
 
   switch (type)
   {
@@ -723,24 +731,32 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
       themes = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
       thumbnail = data->gtk_theme_icon;
       key = GTK_THEME_KEY;
+      generator = (ThumbnailGenFunc) generate_gtk_theme_thumbnail_async;
+      thumb_cb = (ThemeThumbnailFunc) gtk_theme_thumbnail_cb;
       break;
 
     case THEME_TYPE_WINDOW:
       themes = gnome_theme_info_find_by_type (GNOME_THEME_METACITY);
       thumbnail = data->window_theme_icon;
       key = METACITY_THEME_KEY;
+      generator = (ThumbnailGenFunc) generate_metacity_theme_thumbnail_async;
+      thumb_cb = (ThemeThumbnailFunc) metacity_theme_thumbnail_cb;
       break;
 
     case THEME_TYPE_ICON:
       themes = gnome_theme_icon_info_find_all ();
       thumbnail = data->icon_theme_icon;
       key = ICON_THEME_KEY;
+      generator = (ThumbnailGenFunc) generate_icon_theme_thumbnail_async;
+      thumb_cb = (ThemeThumbnailFunc) icon_theme_thumbnail_cb;
       break;
 
     case THEME_TYPE_CURSOR:
       themes = gnome_theme_cursor_info_find_all ();
       thumbnail = NULL;
       key = CURSOR_THEME_KEY;
+      generator = NULL;
+      thumb_cb = NULL;
       break;
 
     default:
@@ -761,43 +777,17 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
     } else if (type == THEME_TYPE_ICON) {
       name = ((GnomeThemeIconInfo *) l->data)->name;
       label = ((GnomeThemeIconInfo *) l->data)->readable_name;
-    }
-    else if (type == THEME_TYPE_CURSOR) {
+    } else if (type == THEME_TYPE_CURSOR) {
       name = ((GnomeThemeCursorInfo *) l->data)->name;
     }
 
     if (!name)
       continue; /* just in case... */
 
-    switch (type)
-    {
-      case THEME_TYPE_GTK:
-        generate_gtk_theme_thumbnail_async ((GnomeThemeInfo *) l->data,
-                                            (ThemeThumbnailFunc) gtk_theme_thumbnail_cb,
-                                            data,
-                                            NULL);
-        break;
-
-      case THEME_TYPE_ICON:
-        generate_icon_theme_thumbnail_async ((GnomeThemeIconInfo *) l->data,
-                                             (ThemeThumbnailFunc) icon_theme_thumbnail_cb,
-                                            data,
-                                            NULL);
-        break;
-
-      case THEME_TYPE_WINDOW:
-        generate_metacity_theme_thumbnail_async ((GnomeThemeInfo *) l->data,
-                                            (ThemeThumbnailFunc) metacity_theme_thumbnail_cb,
-                                            data,
-                                            NULL);
-        break;
-
-      case THEME_TYPE_CURSOR:
-        thumbnail = ((GnomeThemeCursorInfo *) l->data)->thumbnail;
-        break;
-
-      default:
-        break;
+    if (type == THEME_TYPE_CURSOR) {
+      thumbnail = ((GnomeThemeCursorInfo *) l->data)->thumbnail;
+    } else {
+      generator (l->data, thumb_cb, data, NULL);
     }
 
     gtk_list_store_insert_with_values (store, &i, 0,
@@ -806,8 +796,10 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
                                        COL_THUMBNAIL, thumbnail,
                                        -1);
 
-    if (type == THEME_TYPE_CURSOR)
+    if (type == THEME_TYPE_CURSOR && thumbnail) {
       g_object_unref (thumbnail);
+      thumbnail = NULL;
+    }
   }
   g_list_free (themes);
 
@@ -864,7 +856,7 @@ style_init (AppearanceData *data)
   prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), THEME_TYPE_WINDOW, (GCallback) window_theme_changed);
   prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), THEME_TYPE_GTK, (GCallback) gtk_theme_changed);
   prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), THEME_TYPE_ICON, (GCallback) icon_theme_changed);
- prepare_list (data, glade_xml_get_widget (data->xml, "cursor_themes_list"), THEME_TYPE_CURSOR, (GCallback) cursor_theme_changed);
+  prepare_list (data, glade_xml_get_widget (data->xml, "cursor_themes_list"), THEME_TYPE_CURSOR, (GCallback) cursor_theme_changed);
 
   w = glade_xml_get_widget (data->xml, "color_scheme_message_hbox");
   gtk_widget_set_no_show_all (w, TRUE);
@@ -875,9 +867,7 @@ style_init (AppearanceData *data)
                                                   GTK_ICON_SIZE_BUTTON));
 
   settings = gtk_settings_get_default ();
-  check_color_schemes_enabled (settings, data);
   g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
-  update_color_buttons_from_settings (settings, data);
 
   w = glade_xml_get_widget (data->xml, "cursor_size_scale");
   GTK_RANGE (w)->round_digits = 0;
