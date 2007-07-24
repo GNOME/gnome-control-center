@@ -1,3 +1,5 @@
+SUBDIRS = data
+
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = appearance
 
@@ -42,35 +44,8 @@ gnome_appearance_properties_LDADD = \
 gnome_appearance_properties_LDFLAGS = -export-dynamic
 
 gladedir = $(pkgdatadir)/glade
-dist_glade_DATA = appearance.glade
-
 pixmapdir = $(pkgdatadir)/pixmaps
-dist_pixmap_DATA = \
-        subpixel-bgr.png \
-        subpixel-rgb.png \
-        subpixel-vbgr.png \
-        subpixel-vrgb.png \
-        theme-thumbnailing.png \
-        gtk-theme-thumbnailing.png \
-        window-theme-thumbnailing.png \
-        icon-theme-thumbnailing.png
-
 wallpaperdir = $(datadir)/gnome-background-properties
-
-@INTLTOOL_DESKTOP_RULE@
-
-desktopdir = $(datadir)/applications
-desktop_in_files = \
-	gnome-appearance-properties.desktop.in \
-	gnome-theme-installer.desktop.in
-desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-
-@INTLTOOL_XML_RULE@
-
-xml_in_files = gnome-theme-package.xml.in
-
-mimedir = $(datadir)/mime/packages
-mime_DATA = $(xml_in_files:.xml.in=.xml)
 
 INCLUDES = \
 	$(METACITY_CFLAGS) \
@@ -82,15 +57,4 @@ INCLUDES = \
 	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \
 	-DWALLPAPER_DATADIR="\"$(wallpaperdir)\""
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_in_files) $(desktop_DATA) $(mime_DATA)
-EXTRA_DIST = $(xml_in_files)
-
-install-data-hook:
-if ENABLE_UPDATE_MIMEDB
-	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
-endif
-
-uninstall-hook:
-if ENABLE_UPDATE_MIMEDB
-	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
-endif
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
