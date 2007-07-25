@@ -979,7 +979,7 @@ look_for_cursor_theme (const gchar *theme_dir)
 {
   gchar *cursors_dir;
 
-  cursors_dir = g_build_filename (G_DIR_SEPARATOR_S, theme_dir, "cursors", NULL);
+  cursors_dir = g_build_filename (theme_dir, "cursors", NULL);
 
   if (g_file_test (cursors_dir, G_FILE_TEST_IS_DIR)) {
     gchar *name;
@@ -1043,7 +1043,8 @@ add_common_icon_theme_dir_monitor (GnomeVFSURI                    *theme_dir_uri
   gboolean real_monitor_not_added = FALSE;
   GnomeVFSURI *index_uri;
 
-  uri_string = gnome_vfs_uri_to_string (theme_dir_uri, GNOME_VFS_URI_HIDE_NONE);
+  uri_string = gnome_vfs_uri_to_string (theme_dir_uri,
+                                        GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
 
   /* Look for cursor theme in the theme directory */
   look_for_cursor_theme (uri_string);
