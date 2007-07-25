@@ -92,6 +92,8 @@ struct _GnomeThemeMetaInfo
   gchar *metacity_theme_name;
   gchar *icon_theme_name;
   gchar *sound_theme_name;
+  gchar *cursor_theme_name;
+  gint cursor_size;
 
   gchar *application_font;
   gchar *desktop_font;

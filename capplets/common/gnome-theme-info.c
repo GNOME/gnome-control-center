@@ -16,6 +16,8 @@
 #define GTK_COLOR_SCHEME_KEY "X-GNOME-Metatheme/GtkColorScheme"
 #define METACITY_THEME_KEY "X-GNOME-Metatheme/MetacityTheme"
 #define ICON_THEME_KEY "X-GNOME-Metatheme/IconTheme"
+#define CURSOR_THEME_KEY "X-GNOME-Metatheme/CursorTheme"
+#define CURSOR_SIZE_KEY "X-GNOME-Metatheme/CursorSize"
 #define SOUND_THEME_KEY "X-GNOME-Metatheme/SoundTheme"
 #define APPLICATION_FONT_KEY "X-GNOME-Metatheme/ApplicationFont"
 #define DESKTOP_FONT_KEY "X-GNOME-Metatheme/DesktopFont"
@@ -301,6 +303,20 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
       return NULL;
     }
   meta_theme_info->icon_theme_name = g_strdup (str);
+
+  str = gnome_desktop_item_get_string (meta_theme_ditem, CURSOR_THEME_KEY);
+  if (str != NULL) {
+    meta_theme_info->cursor_theme_name = g_strdup (str);
+
+    str = gnome_desktop_item_get_string (meta_theme_ditem, CURSOR_SIZE_KEY);
+    if (str)
+      meta_theme_info->cursor_size = (int) g_ascii_strtoll (str, NULL, 10);
+    else
+      meta_theme_info->cursor_size = 18;
+  } else {
+    meta_theme_info->cursor_theme_name = g_strdup ("default");
+    meta_theme_info->cursor_size = 18;
+  }
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, APPLICATION_FONT_KEY);
   if (str != NULL)
