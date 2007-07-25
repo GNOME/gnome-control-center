@@ -357,17 +357,15 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
     item->description = g_strdup (item->name);
   } else {
     item->description =
-        g_markup_printf_escaped (_("<big><b>%s</b></big>\n"
-                                   "<b>Width:</b> %d %s\n"
-                                   "<b>Height:</b> %d %s\n"
-                                   "<b>Type:</b> %s\n"
-                                   "<b>Location:</b> %s"),
+        g_markup_printf_escaped (_("<b>%s</b>\n"
+                                   "%s, %d %s by %d %s\n"
+                                   "Folder: %s"),
                                  item->name,
+                                 gnome_vfs_mime_get_description (item->fileinfo->mime_type),
                                  item->width,
                                  ngettext ("pixel", "pixels", item->width),
                                  item->height,
                                  ngettext ("pixel", "pixels", item->height),
-                                 gnome_vfs_mime_get_description (item->fileinfo->mime_type),
                                  g_path_get_dirname (item->filename));
   }
 }
