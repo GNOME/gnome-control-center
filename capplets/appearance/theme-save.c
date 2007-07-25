@@ -230,6 +230,15 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
     g_free (tmp);
   }
 
+  if (theme_info->cursor_theme_name) {
+    str = g_strdup_printf ("CursorTheme=%s\n"
+                           "CursorSize=%i\n",
+                           theme_info->cursor_theme_name,
+                           theme_info->cursor_size);
+    gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+    g_free (str);
+  }
+
   if (save_background) {
     client = gconf_client_get_default ();
     current_background = gconf_client_get_string (client, BACKGROUND_KEY, NULL);

@@ -137,6 +137,11 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
 
   g_free (theme->icon_theme_name);
   theme->icon_theme_name = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
+
+  g_free (theme->cursor_theme_name);
+  theme->cursor_theme_name = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
+
+  theme->cursor_size = gconf_client_get_int (client, CURSOR_SIZE_KEY, NULL);
 }
 
 static gchar *
@@ -221,6 +226,10 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
 
   if (!(a->metacity_theme_name && b->metacity_theme_name) ||
       strcmp (a->metacity_theme_name, b->metacity_theme_name))
+    return FALSE;
+
+  if (!(a->cursor_theme_name && b->cursor_theme_name) ||
+      strcmp (a->cursor_theme_name, b->cursor_theme_name))
     return FALSE;
 
   return TRUE;

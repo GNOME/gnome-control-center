@@ -803,6 +803,15 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   }
   g_list_free (themes);
 
+  if (type == THEME_TYPE_CURSOR) {
+    GtkTreeIter i;
+    gtk_list_store_insert_with_values (store, &i, 0,
+                                       COL_LABEL, _("Default Pointer"),
+                                       COL_NAME, "default",
+                                       COL_THUMBNAIL, NULL,
+                                       -1);
+  }
+
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
                                         COL_LABEL, GTK_SORT_ASCENDING);
