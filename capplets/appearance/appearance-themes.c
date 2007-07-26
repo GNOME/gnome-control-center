@@ -218,12 +218,6 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
       strcmp (a->gtk_theme_name, b->gtk_theme_name))
     return FALSE;
 
-  a_set = a->gtk_color_scheme && strcmp (a->gtk_color_scheme, "");
-  b_set = b->gtk_color_scheme && strcmp (b->gtk_color_scheme, "");
-  if ((a_set != b_set) ||
-      (a_set && strcmp (a->gtk_color_scheme, b->gtk_color_scheme)))
-    return FALSE;
-
   if (!(a->icon_theme_name && b->icon_theme_name) ||
       strcmp (a->icon_theme_name, b->icon_theme_name))
     return FALSE;
@@ -234,6 +228,12 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
 
   if (!(a->cursor_theme_name && b->cursor_theme_name) ||
       strcmp (a->cursor_theme_name, b->cursor_theme_name))
+    return FALSE;
+
+  a_set = a->gtk_color_scheme && strcmp (a->gtk_color_scheme, "");
+  b_set = b->gtk_color_scheme && strcmp (b->gtk_color_scheme, "");
+  if ((a_set != b_set) ||
+      (a_set && !theme_color_scheme_equal (a->gtk_color_scheme, b->gtk_color_scheme)))
     return FALSE;
 
   return TRUE;

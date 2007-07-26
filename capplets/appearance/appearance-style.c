@@ -136,7 +136,7 @@ cursor_theme_sort_func (GtkTreeModel *model,
                         gpointer user_data)
 {
   const gchar *a_label = NULL;
-  const gchar *b_label = NULL;  
+  const gchar *b_label = NULL;
   const gchar *default_label;
 
   gtk_tree_model_get (model, a, COL_LABEL, &a_label, -1);
@@ -156,46 +156,10 @@ static void
 update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data)
 {
   GdkColor color_scheme_colors[6];
-  gchar **color_scheme_strings, **color_scheme_pair, *current_string;
-  gint i;
   GtkWidget *widget;
 
-  if (!color_scheme || !strcmp (color_scheme, "")) return;
-
-  /* The color scheme string consists of name:color pairs, seperated by
-   * newlines, so first we split the string up by new line */
-
-  color_scheme_strings = g_strsplit (color_scheme, "\n", 0);
-
-  /* loop through the name:color pairs, and save the colour if we recognise the name */
-  i = 0;
-  while ((current_string = color_scheme_strings[i++]))
-  {
-    color_scheme_pair = g_strsplit (current_string, ":", 0);
-
-    if (color_scheme_pair[0] != NULL && color_scheme_pair[1] != NULL)
-    {
-      g_strstrip (color_scheme_pair[0]);
-      g_strstrip (color_scheme_pair[1]);
-
-      if (!strcmp ("fg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[0]);
-      else if (!strcmp ("bg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[1]);
-      else if (!strcmp ("text_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[2]);
-      else if (!strcmp ("base_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[3]);
-      else if (!strcmp ("selected_fg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[4]);
-      else if (!strcmp ("selected_bg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[5]);
-    }
-
-    g_strfreev (color_scheme_pair);
-  }
-
-  g_strfreev (color_scheme_strings);
+  if (!theme_parse_color_scheme (color_scheme, color_scheme_colors))
+    return;
 
   /* now set all the buttons to the correct settings */
   widget = glade_xml_get_widget (data->xml, "fg_colorbutton");
@@ -221,7 +185,8 @@ update_color_buttons_from_settings (GtkSettings *settings,
   scheme = gconf_client_get_string (data->client, COLOR_SCHEME_KEY, NULL);
   g_object_get (G_OBJECT (settings), "gtk-color-scheme", &setting, NULL);
 
-  if (scheme == NULL || strcmp (scheme, "") == 0 || strcmp (scheme, setting) == 0)
+  if (scheme == NULL || strcmp (scheme, "") == 0 ||
+      theme_color_scheme_equal (scheme, setting))
   {
     gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
   }
