@@ -1,5 +1,12 @@
 2007-07-26  Jens Granseuer  <jensgr@gmx.net>
 
+	* gconf-property-editor.c: (peditor_tree_view_widget_changed),
+	(gconf_peditor_new_tree_view): connect to the GtkTreeViewSelection::changed
+	signal instead of GtkTreeView::cursor_changed, so we actually get notified
+	whenever the selection changes
+
+2007-07-26  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-theme-info.c: (gnome_theme_read_meta_theme),
 	(gnome_theme_color_scheme_parse), (gnome_theme_color_scheme_equal):
 	* gnome-theme-info.h:

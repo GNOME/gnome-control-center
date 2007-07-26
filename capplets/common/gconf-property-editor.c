@@ -1797,16 +1797,13 @@ peditor_tree_view_value_changed (GConfClient         *client,
 
 static void
 peditor_tree_view_widget_changed (GConfPropertyEditor *peditor,
-				  GtkTreeView         *tree_view)
+				  GtkTreeSelection    *selection)
 {
-	GtkTreeSelection *selection;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GConfValue *value, *value_wid;
 
 	if (!peditor->p->inited) return;
-
-	selection = gtk_tree_view_get_selection (tree_view);
 
 	/* we don't support GTK_SELECTION_MULTIPLE */
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -1855,7 +1852,8 @@ gconf_peditor_new_tree_view (GConfChangeSet *changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (tree_view), "cursor-changed",
+	g_signal_connect_swapped (G_OBJECT (gtk_tree_view_get_selection (tree_view)),
+				  "changed",
 				  (GCallback) peditor_tree_view_widget_changed, peditor);
 
 	return peditor;
