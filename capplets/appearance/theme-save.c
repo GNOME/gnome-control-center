@@ -231,10 +231,14 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
   }
 
   if (theme_info->cursor_theme_name) {
+#ifdef HAVE_XCURSOR
     str = g_strdup_printf ("CursorTheme=%s\n"
                            "CursorSize=%i\n",
                            theme_info->cursor_theme_name,
                            theme_info->cursor_size);
+#else
+    str = g_strdup_printf ("CursorFont=%s\n", theme_info->cursor_theme_name);
+#endif
     gnome_vfs_write (handle, str, strlen (str), &bytes_written);
     g_free (str);
   }

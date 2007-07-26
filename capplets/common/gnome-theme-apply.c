@@ -26,6 +26,7 @@
 #define COLOR_SCHEME_KEY   "/desktop/gnome/interface/gtk_color_scheme"
 #define ICON_THEME_KEY     "/desktop/gnome/interface/icon_theme"
 #define FONT_KEY	         "/desktop/gnome/interface/font_name"
+#define CURSOR_FONT_KEY   "/desktop/gnome/peripherals/mouse/cursor_font"
 #define CURSOR_THEME_KEY   "/desktop/gnome/peripherals/mouse/cursor_theme"
 #define CURSOR_SIZE_KEY    "/desktop/gnome/peripherals/mouse/cursor_size"
 
@@ -77,12 +78,21 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
   g_free (old_key);
 
   /* Set the cursor theme key */
+#ifdef HAVE_XCURSOR
   old_key = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
   if (compare (old_key, meta_theme_info->cursor_theme_name))
     {
       gconf_client_set_string (client, CURSOR_THEME_KEY, meta_theme_info->cursor_theme_name, NULL);
       gconf_client_set_int (client, CURSOR_SIZE_KEY, meta_theme_info->cursor_size, NULL);
     }
+#else
+  old_key = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);
+  if (compare (old_key, meta_theme_info->cursor_theme_name))
+    {
+      gconf_client_set_string (client, CURSOR_FONT_KEY, meta_theme_info->cursor_theme_name, NULL);
+    }
+#endif
+
   g_free (old_key);
   g_object_unref (client);
 }

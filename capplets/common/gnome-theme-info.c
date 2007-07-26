@@ -1,6 +1,9 @@
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
-#include <X11/Xcursor/Xcursor.h>
 #include <libgnomevfs/gnome-vfs-init.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
@@ -9,6 +12,10 @@
 #include <libgnome/gnome-desktop-item.h>
 #include "gnome-theme-info.h"
 #include "gtkrc-utils.h"
+
+#ifdef HAVE_XCURSOR
+#include <X11/Xcursor/Xcursor.h>
+#endif
 
 #define THEME_NAME "X-GNOME-Metatheme/Name"
 #define THEME_COMMENT "X-GNOME-Metatheme/Comment"
@@ -953,6 +960,7 @@ add_common_theme_dir_monitor (GnomeVFSURI                *theme_dir_uri,
   return GNOME_VFS_OK;
 }
 
+#ifdef HAVE_XCURSOR
 static GdkPixbuf *
 gdk_pixbuf_from_xcursor_image (XcursorImage *cursor) {
   GdkPixbuf *pixbuf;
@@ -989,6 +997,7 @@ gdk_pixbuf_from_xcursor_image (XcursorImage *cursor) {
 
   return pixbuf;
 }
+
 
 static void
 look_for_cursor_theme (const gchar *theme_dir)
@@ -1047,6 +1056,7 @@ look_for_cursor_theme (const gchar *theme_dir)
 
   g_free (cursors_dir);
 }
+#endif /* HAVE_XCURSOR */
 
 static GnomeVFSResult
 add_common_icon_theme_dir_monitor (GnomeVFSURI                    *theme_dir_uri,
@@ -1062,8 +1072,10 @@ add_common_icon_theme_dir_monitor (GnomeVFSURI                    *theme_dir_uri
   uri_string = gnome_vfs_uri_to_string (theme_dir_uri,
                                         GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
 
+#ifdef HAVE_XCURSOR
   /* Look for cursor theme in the theme directory */
   look_for_cursor_theme (uri_string);
+#endif
 
   /* Add the handle for this directory */
   index_uri = gnome_vfs_uri_append_file_name (theme_dir_uri, "index.theme");
@@ -1702,6 +1714,113 @@ gnome_theme_info_register_theme_change (ThemeChangedCallback func,
   callbacks = g_list_prepend (callbacks, callback_data);
 }
 
+#ifndef HAVE_XCURSOR
+static gchar *
+read_current_cursor_font (void)
+{
+  DIR *dir;
+  gchar *dir_name;
+  struct dirent *file_dirent;
+
+  dir_name = g_build_filename (g_get_home_dir (), ".gnome2/share/cursor-fonts", NULL);
+  if (! g_file_test (dir_name, G_FILE_TEST_EXISTS)) {
+    g_free (dir_name);
+    return NULL;
+  }
+
+  dir = opendir (dir_name);
+  
+  while ((file_dirent = readdir (dir)) != NULL) {
+    struct stat st;
+    gchar *link_name;
+
+    link_name = g_build_filename (dir_name, file_dirent->d_name, NULL);
+    if (lstat (link_name, &st)) {
+      g_free (link_name);
+      continue;
+    }
+    
+    if (S_ISLNK (st.st_mode)) {
+      gint length;
+      gchar target[256];
+
+      length = readlink (link_name, target, 255);
+      if (length > 0) {
+        gchar *retval;
+        target[length] = '\0';
+        retval = g_strdup (target);
+        g_free (link_name);
+        closedir (dir);
+        return retval;
+      }
+      
+    }
+    g_free (link_name);
+  }
+  g_free (dir_name);
+  closedir (dir);
+  return NULL;
+}
+
+static void
+read_cursor_fonts (void)
+{
+  gchar* cursor_font;
+  gint i;
+
+  static const gchar* builtins[][4] = {
+    {
+      "gnome/cursor-fonts/cursor-normal.pcf",
+      N_("Default Pointer"),
+      N_("Default Pointer - Current"),
+      "mouse-cursor-normal.png"
+    }, {
+      "gnome/cursor-fonts/cursor-white.pcf",
+      N_("White Pointer"),
+      N_("White Pointer - Current"),
+      "mouse-cursor-white.png"
+    }, {
+      "gnome/cursor-fonts/cursor-large.pcf",
+      N_("Large Pointer"),
+      N_("Large Pointer - Current"),
+      "mouse-cursor-normal-large.png"
+    }, {
+      "gnome/cursor-fonts/cursor-large-white.pcf",
+      N_("Large White Pointer - Current"),
+      N_("Large White Pointer"),
+      "mouse-cursor-white-large.png"
+    }
+  };
+
+  cursor_font = read_current_cursor_font();
+
+  if (!cursor_font)
+    cursor_font = g_strdup (builtins[0][0]);
+
+  for (i = 0; i < G_N_ELEMENTS (builtins); i++) {
+		GnomeThemeCursorInfo *theme_info;
+		gchar *filename;
+
+    theme_info = gnome_theme_cursor_info_new ();
+    theme_info->priority = 0;
+
+    filename = g_build_filename (GNOMECC_DATA_DIR "/pixmaps", builtins[i][3], NULL);
+    theme_info->thumbnail = gdk_pixbuf_new_from_file (filename, NULL);
+    g_free (filename);
+
+    theme_info->name = theme_info->path = g_build_filename (GNOMECC_DATA_DIR, builtins[i][0], NULL);
+
+    if (!strcmp (theme_info->path, cursor_font))
+      theme_info->label = g_strdup (builtins[i][2]);
+    else
+      theme_info->label = g_strdup (builtins[i][1]);
+
+    g_hash_table_insert (cursor_theme_hash_by_uri, theme_info->path, theme_info);
+    add_data_to_hash_by_name (cursor_theme_hash_by_name, theme_info->name, theme_info);
+  }
+}
+#endif /* !HAVE_XCURSOR */
+
 void
 gnome_theme_init (gboolean *monitor_not_added)
 {
@@ -1777,6 +1896,11 @@ gnome_theme_init (gboolean *monitor_not_added)
     gnome_vfs_make_directory_for_uri (top_theme_dir_uri, 0775);
   result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 0, NULL);
   gnome_vfs_uri_unref (top_theme_dir_uri);
+
+#ifndef HAVE_XCURSOR
+  /* If we don't have Xcursor, use the built-in cursor fonts instead */
+  read_cursor_fonts ();
+#endif
 
   /* done */
   initted = TRUE;

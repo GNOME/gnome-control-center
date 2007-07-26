@@ -23,6 +23,8 @@
 #ifndef GNOME_THEME_INFO_H
 #define GNOME_THEME_INFO_H
 
+#include <config.h>
+
 #include <glib.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -75,6 +77,9 @@ struct _GnomeThemeCursorInfo {
   gint priority;
   GArray *sizes;
   GdkPixbuf *thumbnail;
+#ifndef HAVE_XCURSOR
+  gchar *label;
+#endif
 };
 
 typedef struct _GnomeThemeMetaInfo GnomeThemeMetaInfo;

@@ -139,9 +139,13 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
   theme->icon_theme_name = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
 
   g_free (theme->cursor_theme_name);
-  theme->cursor_theme_name = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
 
+#ifdef HAVE_XCURSOR
+  theme->cursor_theme_name = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
   theme->cursor_size = gconf_client_get_int (client, CURSOR_SIZE_KEY, NULL);
+#else
+  theme->cursor_theme_name = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);
+#endif
 }
 
 static gchar *

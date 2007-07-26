@@ -376,6 +376,7 @@ icon_theme_changed (GConfPropertyEditor *peditor,
 			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_ICON));
 }
 
+#ifdef HAVE_XCURSOR
 static void
 update_cursor_size_scale (GnomeThemeCursorInfo *theme,
                           AppearanceData *data)
@@ -440,6 +441,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
       gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) g_array_index (theme->sizes, gint, theme->sizes->len - 1));
   }
 }
+#endif
 
 static void
 cursor_theme_changed (GConfPropertyEditor *peditor,
@@ -453,7 +455,9 @@ cursor_theme_changed (GConfPropertyEditor *peditor,
   if (value && (name = gconf_value_get_string (value)))
     theme = gnome_theme_cursor_info_find (name);
 
+#ifdef HAVE_XCURSOR
   update_cursor_size_scale (theme, data);
+#endif
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "cursor_themes_delete"),
 			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_CURSOR));
@@ -515,6 +519,7 @@ icon_theme_delete_cb (GtkWidget *button, AppearanceData *data)
   generic_theme_delete ("icon_themes_list", THEME_TYPE_ICON, data);
 }
 
+#ifdef HAVE_XCURSOR
 static void
 cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
 {
@@ -535,6 +540,7 @@ cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
     gconf_client_set_int (data->client, CURSOR_SIZE_KEY, size, NULL);
   }
 }
+#endif
 
 static void
 add_to_treeview (const gchar *tv_name,
@@ -754,7 +760,11 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
     case THEME_TYPE_CURSOR:
       themes = gnome_theme_cursor_info_find_all ();
       thumbnail = NULL;
+#ifdef HAVE_XCURSOR
       key = CURSOR_THEME_KEY;
+#else
+      key = CURSOR_FONT_KEY;
+#endif
       generator = NULL;
       thumb_cb = NULL;
       break;
@@ -779,6 +789,9 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
       label = ((GnomeThemeIconInfo *) l->data)->readable_name;
     } else if (type == THEME_TYPE_CURSOR) {
       name = ((GnomeThemeCursorInfo *) l->data)->name;
+#ifndef HAVE_XCURSOR
+      label = ((GnomeThemeCursorInfo *) l->data)->label;
+#endif
     }
 
     if (!name)
@@ -803,6 +816,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   }
   g_list_free (themes);
 
+#ifdef HAVE_XCURSOR
   if (type == THEME_TYPE_CURSOR) {
     GtkTreeIter i;
     gtk_list_store_insert_with_values (store, &i, 0,
@@ -811,6 +825,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
                                        COL_THUMBNAIL, NULL,
                                        -1);
   }
+#endif
 
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
@@ -878,6 +893,7 @@ style_init (AppearanceData *data)
   settings = gtk_settings_get_default ();
   g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
 
+#ifdef HAVE_XCURSOR
   w = glade_xml_get_widget (data->xml, "cursor_size_scale");
   GTK_RANGE (w)->round_digits = 0;
   g_signal_connect (G_OBJECT (w), "value-changed", (GCallback) cursor_size_scale_value_changed_cb, data);
@@ -888,6 +904,13 @@ style_init (AppearanceData *data)
   gtk_label_set_markup (GTK_LABEL (w), g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w))));
   w = glade_xml_get_widget (data->xml, "cursor_size_large_label");
   gtk_label_set_markup (GTK_LABEL (w), g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w))));
+#else
+  w = glade_xml_get_widget (data->xml, "cursor_size_hbox");
+  gtk_widget_set_no_show_all (w, TRUE);
+  gtk_widget_hide (w);
+  gtk_widget_show (glade_xml_get_widget (data->xml, "cursor_message_hbox"));
+  gtk_box_set_spacing (GTK_BOX (glade_xml_get_widget (data->xml, "cursor_vbox")), 12);
+#endif
 
   /* connect signals */
   /* color buttons */
