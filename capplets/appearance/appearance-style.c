@@ -185,11 +185,8 @@ update_color_buttons_from_settings (GtkSettings *settings,
   scheme = gconf_client_get_string (data->client, COLOR_SCHEME_KEY, NULL);
   g_object_get (G_OBJECT (settings), "gtk-color-scheme", &setting, NULL);
 
-  if (scheme == NULL || strcmp (scheme, "") == 0 ||
-      theme_color_scheme_equal (scheme, setting))
-  {
+  if (scheme == NULL || strcmp (scheme, "") == 0)
     gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
-  }
 
   g_free (scheme);
   update_color_buttons_from_string (setting, data);
@@ -288,7 +285,7 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 static void
 color_scheme_defaults_button_clicked_cb (GtkWidget *button, AppearanceData *data)
 {
-  gconf_client_set_string (data->client, COLOR_SCHEME_KEY, "", NULL);
+  gconf_client_unset (data->client, COLOR_SCHEME_KEY, NULL);
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
 }
 
