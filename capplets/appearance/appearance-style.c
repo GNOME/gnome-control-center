@@ -158,7 +158,7 @@ update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *dat
   GdkColor color_scheme_colors[6];
   GtkWidget *widget;
 
-  if (!theme_parse_color_scheme (color_scheme, color_scheme_colors))
+  if (!gnome_theme_color_scheme_parse (color_scheme, color_scheme_colors))
     return;
 
   /* now set all the buttons to the correct settings */

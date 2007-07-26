@@ -21,6 +21,7 @@
 #include <gconf/gconf-client.h>
 #include <gnome-wm-manager.h>
 #include "gnome-theme-apply.h"
+#include "gtkrc-utils.h"
 
 #define GTK_THEME_KEY      "/desktop/gnome/interface/gtk_theme"
 #define COLOR_SCHEME_KEY   "/desktop/gnome/interface/gtk_color_scheme"
@@ -58,8 +59,22 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
   old_key = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
   if (compare (old_key, meta_theme_info->gtk_color_scheme))
     {
-      gchar *new_value = (meta_theme_info->gtk_color_scheme) ? meta_theme_info->gtk_color_scheme : "";
-      gconf_client_set_string (client, COLOR_SCHEME_KEY, new_value, NULL);
+      /* only save the color scheme if it differs from the default
+         scheme for the selected gtk theme */
+      gchar *newval, *gtkcols;
+
+      newval = meta_theme_info->gtk_color_scheme;
+      gtkcols = gtkrc_get_color_scheme_for_theme (meta_theme_info->gtk_theme_name);
+
+      if (newval == NULL || !strcmp (newval, "") ||
+          gnome_theme_color_scheme_equal (newval, gtkcols))
+        {
+          gconf_client_unset (client, COLOR_SCHEME_KEY, NULL);
+        }
+      else
+        {
+          gconf_client_set_string (client, COLOR_SCHEME_KEY, newval, NULL);
+        }
     }
   g_free (old_key);
 

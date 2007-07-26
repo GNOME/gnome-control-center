@@ -273,17 +273,7 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, GTK_COLOR_SCHEME_KEY);
   if (str == NULL)
-  {
-    /* try to find the color scheme from the gtkrc */
-    gchar *gtkrc_file = gtkrc_find_named (meta_theme_info->gtk_theme_name);
-    if (gtkrc_file)
-    {
-      scheme = gtkrc_get_color_scheme (gtkrc_file);
-      g_free (gtkrc_file);
-    }
-    else
-      scheme = NULL;
-  }
+    scheme = gtkrc_get_color_scheme_for_theme (meta_theme_info->gtk_theme_name);
   else
     scheme = g_strdup (str);
 
@@ -1729,7 +1719,7 @@ read_current_cursor_font (void)
   }
 
   dir = opendir (dir_name);
-  
+
   while ((file_dirent = readdir (dir)) != NULL) {
     struct stat st;
     gchar *link_name;
@@ -1739,7 +1729,7 @@ read_current_cursor_font (void)
       g_free (link_name);
       continue;
     }
-    
+
     if (S_ISLNK (st.st_mode)) {
       gint length;
       gchar target[256];
@@ -1753,7 +1743,7 @@ read_current_cursor_font (void)
         closedir (dir);
         return retval;
       }
-      
+
     }
     g_free (link_name);
   }
@@ -1820,6 +1810,69 @@ read_cursor_fonts (void)
   }
 }
 #endif /* !HAVE_XCURSOR */
+
+gboolean
+gnome_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
+{
+  gchar **color_scheme_strings, **color_scheme_pair, *current_string;
+  gint i;
+
+  if (!scheme || !strcmp (scheme, ""))
+    return FALSE;
+
+  /* The color scheme string consists of name:color pairs, seperated by
+   * newlines, so first we split the string up by new line */
+
+  color_scheme_strings = g_strsplit (scheme, "\n", 0);
+
+  /* loop through the name:color pairs, and save the color if we recognise the name */
+  i = 0;
+  while ((current_string = color_scheme_strings[i++])) {
+    color_scheme_pair = g_strsplit (current_string, ":", 0);
+
+    if (color_scheme_pair[0] != NULL && color_scheme_pair[1] != NULL) {
+      g_strstrip (color_scheme_pair[0]);
+      g_strstrip (color_scheme_pair[1]);
+
+      if (!strcmp ("fg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &colors[0]);
+      else if (!strcmp ("bg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &colors[1]);
+      else if (!strcmp ("text_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &colors[2]);
+      else if (!strcmp ("base_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &colors[3]);
+      else if (!strcmp ("selected_fg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &colors[4]);
+      else if (!strcmp ("selected_bg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &colors[5]);
+    }
+
+    g_strfreev (color_scheme_pair);
+  }
+
+  g_strfreev (color_scheme_strings);
+
+  return TRUE;
+}
+
+gboolean
+gnome_theme_color_scheme_equal (const gchar *s1, const gchar *s2)
+{
+  GdkColor c1[6], c2[6];
+  int i;
+
+  if (!gnome_theme_color_scheme_parse (s1, c1) ||
+      !gnome_theme_color_scheme_parse (s2, c2))
+    return FALSE;
+
+  for (i = 0; i < 6; ++i) {
+    if (!gdk_color_equal (&c1[i], &c2[i]))
+      return FALSE;
+  }
+
+  return TRUE;
+}
 
 void
 gnome_theme_init (gboolean *monitor_not_added)

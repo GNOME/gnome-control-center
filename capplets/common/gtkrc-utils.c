@@ -1,3 +1,24 @@
+/*
+ * Copyright (C) 2007 The GNOME Foundation
+ * Written by Thomas Wood <thos@gnome.org>
+ *            Jens Granseuer <jensgr@gmx.net>
+ * All Rights Reserved
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <fcntl.h>
@@ -8,7 +29,7 @@
 #define COLOR_SCHEME_SYMBOL ((gpointer) 3)
 
 static gint
-str_nequal (gchar *a, gchar *b)
+str_nequal (const gchar *a, const gchar *b)
 {
 	return !g_str_equal (a, b);
 }
@@ -190,4 +211,20 @@ gtkrc_get_color_scheme (gchar *filename)
 	}
 	g_scanner_destroy (scanner);
 	return result;
+}
+
+gchar *
+gtkrc_get_color_scheme_for_theme (const gchar *theme_name)
+{
+	/* try to find the color scheme from the gtkrc */
+	gchar *gtkrc_file;
+	gchar *scheme = NULL;
+
+	gtkrc_file = gtkrc_find_named (theme_name);
+	if (gtkrc_file) {
+		scheme = gtkrc_get_color_scheme (gtkrc_file);
+		g_free (gtkrc_file);
+	}
+
+	return scheme;
 }

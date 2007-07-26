@@ -156,4 +156,9 @@ void                gnome_theme_info_register_theme_change (ThemeChangedCallback
 gboolean            gnome_theme_is_writable                (const gpointer       theme,
 							    GnomeThemeType       type);
 
+gboolean            gnome_theme_color_scheme_parse         (const gchar         *scheme,
+							    GdkColor            *colors);
+gboolean            gnome_theme_color_scheme_equal         (const gchar         *s1,
+							    const gchar         *s2);
+
 #endif /* GNOME_THEME_INFO_H */

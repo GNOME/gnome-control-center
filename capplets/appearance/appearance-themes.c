@@ -120,15 +120,8 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
   scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
 
   if (scheme == NULL || !strcmp (scheme, "")) {
-    /* try to find the color scheme from the gtkrc */
-    gchar *gtkrc_file;
-
-    gtkrc_file = gtkrc_find_named (theme->gtk_theme_name);
-    if (gtkrc_file) {
-      g_free (scheme);
-      scheme = gtkrc_get_color_scheme (gtkrc_file);
-      g_free (gtkrc_file);
-    }
+    g_free (scheme);
+    scheme = gtkrc_get_color_scheme_for_theme (theme->gtk_theme_name);
   }
   theme->gtk_color_scheme = scheme;
 
@@ -233,7 +226,7 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
   a_set = a->gtk_color_scheme && strcmp (a->gtk_color_scheme, "");
   b_set = b->gtk_color_scheme && strcmp (b->gtk_color_scheme, "");
   if ((a_set != b_set) ||
-      (a_set && !theme_color_scheme_equal (a->gtk_color_scheme, b->gtk_color_scheme)))
+      (a_set && !gnome_theme_color_scheme_equal (a->gtk_color_scheme, b->gtk_color_scheme)))
     return FALSE;
 
   return TRUE;

@@ -46,5 +46,3 @@ typedef enum {
 gboolean theme_delete (const gchar *name, ThemeType type);
 gboolean theme_model_iter_last (GtkTreeModel *model, GtkTreeIter *iter);
 gboolean theme_find_in_model (GtkTreeModel *model, const gchar *name, GtkTreeIter *iter);
-gboolean theme_parse_color_scheme (const gchar *scheme, GdkColor *colors);
-gboolean theme_color_scheme_equal (const gchar *s1, const gchar *s2);

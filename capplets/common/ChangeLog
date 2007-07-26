@@ -1,3 +1,16 @@
+2007-07-26  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-theme-info.c: (gnome_theme_read_meta_theme),
+	(gnome_theme_color_scheme_parse), (gnome_theme_color_scheme_equal):
+	* gnome-theme-info.h:
+	* gtkrc-utils.c: (str_nequal), (gtkrc_get_color_scheme),
+	(gtkrc_get_color_scheme_for_theme):
+	* gtkrc-utils.h: move some utility code here from appearance
+
+	* gnome-theme-apply.c: (gnome_meta_theme_set): when applying a metatheme,
+	check whether to set/unset the color scheme gconf key (should fix bug
+	#421866)
+
 2007-07-25  Denis Washington <denisw@svn.gnome.org>
 
 	* gnome-theme-apply.c: (gnome_meta_theme_set):
