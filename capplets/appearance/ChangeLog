@@ -1,6 +1,15 @@
 2007-07-26  Denis Washington <denisw@svn.gnome.org>
 
 	* data/appearance.glade:
+	Fixed a bug introduced in my last commit which caused to make the
+	button box appear above the cursors list in the theme details window.
+
+	* appearance-style.c: (cursor_theme_sort_func), (prepare_list):
+	Make "Default Pointer" always appear as first item in the list.
+
+2007-07-26  Denis Washington <denisw@svn.gnome.org>
+
+	* data/appearance.glade:
 	* appearance-style.c: 
 	* appearance-themes.c: (theme_load_from_gconf), (cursor_theme_changed),
 	(prepare_list), (style_init):

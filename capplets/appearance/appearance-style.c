@@ -129,6 +129,29 @@ conv_from_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
   return new_value;
 }
 
+static gint
+cursor_theme_sort_func (GtkTreeModel *model,
+                        GtkTreeIter *a,
+                        GtkTreeIter *b,
+                        gpointer user_data)
+{
+  const gchar *a_label = NULL;
+  const gchar *b_label = NULL;  
+  const gchar *default_label;
+
+  gtk_tree_model_get (model, a, COL_LABEL, &a_label, -1);
+  gtk_tree_model_get (model, b, COL_LABEL, &b_label, -1);
+
+  default_label = _("Default Pointer");
+
+  if (!strcmp (a_label, default_label))
+    return -1;
+  else if (!strcmp (b_label, default_label))
+    return 1;
+  else
+    return strcmp (a_label, b_label);
+}
+
 static void
 update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data)
 {
@@ -830,6 +853,11 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
                                         COL_LABEL, GTK_SORT_ASCENDING);
+
+  if (type == THEME_TYPE_CURSOR)
+    gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model), COL_LABEL,
+                                     (GtkTreeIterCompareFunc) cursor_theme_sort_func,
+                                     NULL, NULL);
 
   gtk_tree_view_set_model (GTK_TREE_VIEW (list), GTK_TREE_MODEL (sort_model));
 
