@@ -39,7 +39,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
   client = gconf_client_get_default ();
 
   item = g_new0 (GnomeWPItem, 1);
-  
+
   item->filename = gnome_vfs_unescape_string_for_display (filename);
 
   item->fileinfo = gnome_wp_info_new (item->filename, thumbnails);
@@ -50,7 +50,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 
   gdk_color_parse (item->pri_color, &color1);
   gdk_color_parse (item->sec_color, &color2);
-     
+
   item->pcolor = gdk_color_copy (&color1);
   item->scolor = gdk_color_copy (&color2);
 
@@ -69,7 +69,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
       item->options = g_strdup ("scaled");
     }
     gnome_wp_item_update_description (item);
-     
+
     g_hash_table_insert (wallpapers, item->filename, item);
   } else {
     gnome_wp_item_free (item);
@@ -163,13 +163,13 @@ static void collect_save_options (GdkPixbuf * pixbuf,
   if (options) {
     for (n = 0; options[2 * n]; n++) {
       ++count;
-      
+
       *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
       *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
 
       (*keys)[count - 1] = g_strdup (options[2 * n]);
       (*vals)[count - 1] = g_strdup (options[2 * n + 1]);
-      
+
       (*keys)[count] = NULL;
       (*vals)[count] = NULL;
     }
@@ -268,7 +268,7 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
     }
 
     if (thumbnail_filename != NULL) {
- 
+
       pixbuf = gdk_pixbuf_new_from_file (thumbnail_filename, NULL);
 
       if (pixbuf != NULL) {
@@ -296,8 +296,8 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 	gchar ** keys = NULL;
 	gchar ** vals = NULL;
 
-        gdk_pixbuf_get_file_info (item->filename, 
-                                  &item->width, &item->height); 
+        gdk_pixbuf_get_file_info (item->filename,
+                                  &item->width, &item->height);
 	collect_save_options (pixbuf, &keys, &vals, item->width, item->height);
 	gdk_pixbuf_savev (pixbuf, item->fileinfo->thumburi, "png",
 			  keys, vals, NULL);
@@ -333,7 +333,7 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
       scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, tw, th);
     } else if (!strcmp (item->options, "zoom")) {
       if ((gdouble) ph * (gdouble) bw < (gdouble) pw * (gdouble) bh) {
-	tw = 0.5 + (gdouble) pw * (gdouble) bh / (gdouble) ph; 
+	tw = 0.5 + (gdouble) pw * (gdouble) bh / (gdouble) ph;
 	th = bh;
       } else {
 	th = 0.5 + (gdouble) ph * (gdouble) bw / (gdouble) pw;
@@ -356,6 +356,10 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   if (!strcmp (item->filename, "(none)")) {
     item->description = g_strdup (item->name);
   } else {
+    /* translators: <b>wallpaper name</b>
+     * mime type, x pixel(s) by y pixel(s)
+     * Folder: /path/to/file
+     */
     item->description =
         g_markup_printf_escaped (_("<b>%s</b>\n"
                                    "%s, %d %s by %d %s\n"
