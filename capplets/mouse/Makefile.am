@@ -20,13 +20,6 @@ pixmap_DATA = \
 	mouse-cursor-normal-large.png	\
 	mouse-cursor-white-large.png
 
-
-cursorfontdir   = $(datadir)/gnome/cursor-fonts
-cursorfont_DATA = \
-	cursor-large.pcf		\
-	cursor-white.pcf		\
-	cursor-large-white.pcf
-
 Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = gnome-mouse-properties.glade
 
@@ -40,4 +33,4 @@ INCLUDES = \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA) $(cursorfont_DATA)
+EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA)
