@@ -11,7 +11,18 @@ dist_pixmap_DATA = \
         theme-thumbnailing.png \
         gtk-theme-thumbnailing.png \
         window-theme-thumbnailing.png \
-        icon-theme-thumbnailing.png
+        icon-theme-thumbnailing.png \
+        mouse-cursor-normal.png \
+        mouse-cursor-normal-large.png \
+        mouse-cursor-white.png \
+        mouse-cursor-white-large.png
+
+cursorfontdir   = $(datadir)/gnome/cursor-fonts
+dist_cursorfont_DATA = \
+	cursor-large.pcf		\
+	cursor-white.pcf		\
+	cursor-large-white.pcf
+
 @INTLTOOL_DESKTOP_RULE@
 
 desktopdir = $(datadir)/applications
