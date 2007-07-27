@@ -14,11 +14,7 @@ pixmap_DATA = \
 	double-click-off.png		\
 	double-click-maybe.png		\
 	mouse-left.png			\
-	mouse-right.png			\
-	mouse-cursor-normal.png		\
-	mouse-cursor-white.png		\
-	mouse-cursor-normal-large.png	\
-	mouse-cursor-white-large.png
+	mouse-right.png
 
 Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = gnome-mouse-properties.glade
