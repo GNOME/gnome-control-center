@@ -29,8 +29,23 @@
 #include <glib/gi18n.h>
 #include <libwindow-settings/gnome-wm-manager.h>
 #include <string.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #define CUSTOM_THEME_NAME "__custom__"
+
+enum
+{
+  TARGET_URI_LIST,
+  TARGET_NS_URL
+};
+
+GtkTargetEntry drop_types[] =
+{
+  {"text/uri-list", 0, TARGET_URI_LIST},
+  {"_NETSCAPE_URL", 0, TARGET_NS_URL}
+};
+
+gint n_drop_types = sizeof (drop_types) / sizeof (GtkTargetEntry);
 
 static void
 theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data)
@@ -516,6 +531,37 @@ theme_store_sort_func (GtkTreeModel *model,
   return rc;
 }
 
+static void
+appearance_window_drag_data_received_cb (GtkWidget *widget,
+                                         GdkDragContext *context,
+                                         gint x, gint y,
+                                         GtkSelectionData *selection_data,
+                                         guint info, guint time,
+                                         AppearanceData *data)
+{
+  GList *uris;
+  gchar *filename = NULL;
+
+  if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
+    return;
+
+	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+
+  if (uris != NULL && uris->data != NULL) {
+    GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
+
+    if (gnome_vfs_uri_is_local (uri))
+      filename = gnome_vfs_unescape_string (gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
+    else
+    	filename = gnome_vfs_unescape_string (gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE), G_DIR_SEPARATOR_S);
+
+    gnome_vfs_uri_list_unref (uris);
+  }
+
+  gnome_theme_install_from_uri (filename, GTK_WINDOW (widget));
+  g_free (filename);
+}
+
 void
 themes_init (AppearanceData *data)
 {
@@ -575,6 +621,12 @@ themes_init (AppearanceData *data)
 
   g_list_foreach (theme_list, (GFunc) theme_thumbnail_generate, data);
   g_list_free (theme_list);
+
+  w = glade_xml_get_widget (data->xml, "appearance_window");
+  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL,
+		                 drop_types, sizeof (drop_types) / sizeof (GtkTargetEntry),
+		                 GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
+  g_signal_connect (G_OBJECT (w), "drag-data-received", G_CALLBACK (appearance_window_drag_data_received_cb), NULL);
 
   w = glade_xml_get_widget (data->xml, "theme_list");
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
