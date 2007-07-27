@@ -39,13 +39,11 @@ enum
   TARGET_NS_URL
 };
 
-GtkTargetEntry drop_types[] =
+static const GtkTargetEntry drop_types[] =
 {
   {"text/uri-list", 0, TARGET_URI_LIST},
   {"_NETSCAPE_URL", 0, TARGET_NS_URL}
 };
-
-gint n_drop_types = sizeof (drop_types) / sizeof (GtkTargetEntry);
 
 static void
 theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data)
@@ -531,7 +529,7 @@ appearance_window_drag_data_received_cb (GtkWidget *widget,
   if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
     return;
 
-	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+  uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
 
   if (uris != NULL && uris->data != NULL) {
     GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
@@ -539,7 +537,7 @@ appearance_window_drag_data_received_cb (GtkWidget *widget,
     if (gnome_vfs_uri_is_local (uri))
       filename = gnome_vfs_unescape_string (gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
     else
-    	filename = gnome_vfs_unescape_string (gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE), G_DIR_SEPARATOR_S);
+      filename = gnome_vfs_unescape_string (gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE), G_DIR_SEPARATOR_S);
 
     gnome_vfs_uri_list_unref (uris);
   }
@@ -610,8 +608,8 @@ themes_init (AppearanceData *data)
 
   w = glade_xml_get_widget (data->xml, "appearance_window");
   gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL,
-		                 drop_types, sizeof (drop_types) / sizeof (GtkTargetEntry),
-		                 GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
+		     drop_types, G_N_ELEMENTS (drop_types),
+		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
   g_signal_connect (G_OBJECT (w), "drag-data-received", G_CALLBACK (appearance_window_drag_data_received_cb), NULL);
 
   w = glade_xml_get_widget (data->xml, "theme_list");
