@@ -477,20 +477,6 @@ theme_gconf_changed (GConfClient *client,
   theme_details_changed_cb (data);
 }
 
-static void
-theme_postinit (GtkIconView *icon_view, AppearanceData *data)
-{
-  /* connect to individual gconf changes; we only do that now to make sure
-   * we don't receive any signals before the widgets have been realized */
-  gconf_client_add_dir (data->client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_NONE, NULL);
-  gconf_client_add_dir (data->client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_NONE, NULL);
-  gconf_client_notify_add (data->client, GTK_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
-  gconf_client_notify_add (data->client, METACITY_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
-  gconf_client_notify_add (data->client, ICON_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
-
-  g_signal_connect (gtk_settings_get_default (), "notify::gtk-color-scheme", (GCallback) theme_color_scheme_changed_cb, data);
-}
-
 static gint
 theme_list_sort_func (GnomeThemeMetaInfo *a,
                       GnomeThemeMetaInfo *b)
@@ -634,8 +620,8 @@ themes_init (AppearanceData *data)
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model), COL_LABEL, theme_store_sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), COL_LABEL, GTK_SORT_ASCENDING);
   g_signal_connect (w, "selection-changed", (GCallback) theme_selection_changed_cb, data);
-  g_signal_connect_after (w, "realize", (GCallback) theme_select_name, meta_theme->name);
-  g_signal_connect_after (w, "realize", (GCallback) theme_postinit, data);
+
+  theme_select_name (GTK_ICON_VIEW (w), meta_theme->name);
 
   w = glade_xml_get_widget (data->xml, "theme_install");
   gtk_button_set_image (GTK_BUTTON (w),
@@ -653,6 +639,15 @@ themes_init (AppearanceData *data)
   g_signal_connect (w, "clicked", (GCallback) theme_custom_cb, data);
 
   g_signal_connect (del_button, "clicked", (GCallback) theme_delete_cb, data);
+
+  /* listen to gconf changes, too */
+  gconf_client_add_dir (data->client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_NONE, NULL);
+  gconf_client_add_dir (data->client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_NONE, NULL);
+  gconf_client_notify_add (data->client, GTK_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, METACITY_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, ICON_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
+
+  g_signal_connect (gtk_settings_get_default (), "notify::gtk-color-scheme", (GCallback) theme_color_scheme_changed_cb, data);
 
   if (is_locked_down (data->client)) {
     /* FIXME: determine what needs disabling */
