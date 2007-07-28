@@ -774,9 +774,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
       label = ((GnomeThemeIconInfo *) l->data)->readable_name;
     } else if (type == THEME_TYPE_CURSOR) {
       name = ((GnomeThemeCursorInfo *) l->data)->name;
-#ifndef HAVE_XCURSOR
-      label = ((GnomeThemeCursorInfo *) l->data)->label;
-#endif
+      label = ((GnomeThemeCursorInfo *) l->data)->readable_name;
     }
 
     if (!name)

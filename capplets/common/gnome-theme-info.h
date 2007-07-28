@@ -75,12 +75,10 @@ typedef struct _GnomeThemeCursorInfo GnomeThemeCursorInfo;
 struct _GnomeThemeCursorInfo {
   gchar *path;
   gchar *name;
+  gchar *readable_name;
   gint priority;
   GArray *sizes;
   GdkPixbuf *thumbnail;
-#ifndef HAVE_XCURSOR
-  gchar *label;
-#endif
 };
 
 typedef struct _GnomeThemeMetaInfo GnomeThemeMetaInfo;

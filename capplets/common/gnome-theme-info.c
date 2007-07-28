@@ -1003,6 +1003,8 @@ static void
 look_for_cursor_theme (const gchar *theme_dir)
 {
   gchar *cursors_dir;
+  gchar *cursor_theme_file;
+  GnomeDesktopItem *cursor_theme_ditem;
 
   cursors_dir = g_build_filename (theme_dir, "cursors", NULL);
 
@@ -1049,6 +1051,25 @@ look_for_cursor_theme (const gchar *theme_dir)
     cursor_theme_info->sizes = available_sizes;
     cursor_theme_info->thumbnail = thumbnail;
     cursor_theme_info->priority = 0;
+
+    cursor_theme_file = g_build_filename (theme_dir, "index.theme", NULL);
+    cursor_theme_ditem = gnome_desktop_item_new_from_file (cursor_theme_file, 0, NULL);
+    g_free (cursor_theme_file);
+
+    if (cursor_theme_ditem) {
+      const gchar *readable_name;
+
+      readable_name = (gchar *) gnome_desktop_item_get_string (cursor_theme_ditem, "Icon Theme/Name");
+
+      if (readable_name)
+        cursor_theme_info->readable_name = g_strdup (readable_name);
+      else
+        cursor_theme_info->readable_name = g_strdup (name);
+
+      gnome_desktop_item_unref (cursor_theme_ditem);
+    } else {
+      cursor_theme_info->readable_name = g_strdup (name);
+    }
 
     g_hash_table_insert (cursor_theme_hash_by_uri, cursor_theme_info->path, cursor_theme_info);
     add_data_to_hash_by_name (cursor_theme_hash_by_name, name, cursor_theme_info);
@@ -1478,6 +1499,7 @@ void
 gnome_theme_cursor_info_free (GnomeThemeCursorInfo *cursor_theme_info)
 {
   g_free (cursor_theme_info->name);
+  g_free (cursor_theme_info->readable_name);
   g_free (cursor_theme_info->path);
   g_array_free (cursor_theme_info->sizes, TRUE);
   g_object_unref (cursor_theme_info->thumbnail);
@@ -1811,9 +1833,9 @@ read_cursor_fonts (void)
     theme_info->name = theme_info->path = g_build_filename (GNOMECC_DATA_DIR, builtins[i][0], NULL);
 
     if (!strcmp (theme_info->path, cursor_font))
-      theme_info->label = g_strdup (builtins[i][2]);
+      theme_info->readable_name = g_strdup (builtins[i][2]);
     else
-      theme_info->label = g_strdup (builtins[i][1]);
+      theme_info->readable_name = g_strdup (builtins[i][1]);
 
     g_hash_table_insert (cursor_theme_hash_by_uri, theme_info->path, theme_info);
     add_data_to_hash_by_name (cursor_theme_hash_by_name, theme_info->name, theme_info);
