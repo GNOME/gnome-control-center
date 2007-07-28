@@ -19,6 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 #include "wp-cellrenderer.h"
+#include <math.h>
 
 static void cell_renderer_wallpaper_render (GtkCellRenderer *cell,
                                             GdkWindow *window,
@@ -65,8 +66,14 @@ cell_renderer_wallpaper_render (GtkCellRenderer *cell,
 
   if ((flags & (GTK_CELL_RENDERER_SELECTED|GTK_CELL_RENDERER_PRELIT)) != 0)
   {
+    cairo_t *cr;
+    int radius = 5;
+    int x, y, w, h;
+    x = background_area->x;
+    y = background_area->y;
+    w = background_area->width;
+    h = background_area->height;
     GtkStateType state;
-    GdkGC *gc;
 
     if ((flags & GTK_CELL_RENDERER_SELECTED) != 0)
     {
@@ -78,13 +85,21 @@ cell_renderer_wallpaper_render (GtkCellRenderer *cell,
     else
       state = GTK_STATE_PRELIGHT;
 
-    gc = gdk_gc_new (GDK_DRAWABLE (window));
-    gdk_gc_set_foreground (gc, &widget->style->bg[state]);
-    gdk_gc_set_line_attributes (gc, 3,
-                                GDK_LINE_SOLID, GDK_CAP_BUTT, GDK_JOIN_MITER);
+    /* draw the selection indicator */
+    cr = gdk_cairo_create (GDK_DRAWABLE (window));
+    gdk_cairo_set_source_color (cr, &widget->style->base[state]);
 
-    gdk_draw_rectangle (GDK_DRAWABLE (window), gc, FALSE,
-                        background_area->x, background_area->y,
-                        background_area->width, background_area->height);
+    cairo_arc (cr, x + radius, y + radius, radius, M_PI, M_PI * 1.5);
+    cairo_arc (cr, x + w - radius, y + radius, radius, M_PI * 1.5, 0);
+    cairo_arc (cr, x + w - radius, y + h - radius, radius, 0, M_PI * 0.5);
+    cairo_arc (cr, x + radius, y + h - radius, radius, M_PI * 0.5, M_PI);
+    cairo_close_path (cr);
+
+    /* FIXME: this should not be hardcoded to 5 */
+    cairo_rectangle (cr, x + 5, y + 5, w - 10, h - 10);
+
+    cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
+    cairo_fill (cr);
+    cairo_destroy (cr);
   }
 }
