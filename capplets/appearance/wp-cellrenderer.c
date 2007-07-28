@@ -69,11 +69,11 @@ cell_renderer_wallpaper_render (GtkCellRenderer *cell,
     cairo_t *cr;
     int radius = 5;
     int x, y, w, h;
+    GtkStateType state;
     x = background_area->x;
     y = background_area->y;
     w = background_area->width;
     h = background_area->height;
-    GtkStateType state;
 
     if ((flags & GTK_CELL_RENDERER_SELECTED) != 0)
     {
@@ -95,8 +95,8 @@ cell_renderer_wallpaper_render (GtkCellRenderer *cell,
     cairo_arc (cr, x + radius, y + h - radius, radius, M_PI * 0.5, M_PI);
     cairo_close_path (cr);
 
-    /* FIXME: this should not be hardcoded to 5 */
-    cairo_rectangle (cr, x + 5, y + 5, w - 10, h - 10);
+    /* FIXME: this should not be hardcoded to 4 */
+    cairo_rectangle (cr, x + 4, y + 4, w - 8, h - 8);
 
     cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
     cairo_fill (cr);
