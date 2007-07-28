@@ -20,10 +20,11 @@
  */
 
 #include "appearance.h"
+#include "theme-util.h"
 
 #include <glib/gi18n.h>
+#include <string.h>
 
-#include "theme-util.h"
 
 gboolean
 theme_delete (const gchar *name, ThemeType type)
