@@ -1,3 +1,10 @@
+2007-07-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-method.c: (do_close), (do_unlink), (invoke_monitors),
+	(theme_changed_callback), (vfs_module_init): update to match theme
+	callback signature; invoke_monitors looks icky, though (the uri arg
+	was ignored)
+
 2007-07-09  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* Makefile.am: link to $XCURSOR_LIBS, not GNOMECC_CAPPLETS_LIBS.

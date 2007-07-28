@@ -37,10 +37,9 @@ void gnome_vfs_monitor_callback (GnomeVFSMethodHandle *method_handle,
                                  GnomeVFSURI *info_uri,
                                  GnomeVFSMonitorEventType event_type);
 
-static void invoke_monitors(gchar *uri, gpointer data);
+static void invoke_monitors(void);
 
-
-/* cc cut-paste */ 
+/* cc cut-paste */
 static gboolean
 transfer_done_targz_idle_cb (gpointer data)
 {
@@ -138,7 +137,7 @@ theme_meta_info_find (GnomeVFSURI *uri)
 {
 	GList *theme;
 	gchar *path;
-	
+
 	path = get_path_from_uri (uri);
 	for (theme = gnome_theme_meta_info_find_all (); theme != NULL;
 								theme=theme->next)
@@ -149,7 +148,7 @@ theme_meta_info_find (GnomeVFSURI *uri)
 				g_free (path);
 				return ((GnomeThemeMetaInfo*)(theme->data));
 			}
-	
+
 	g_free (path);
 	return NULL;
 }
@@ -192,7 +191,7 @@ struct _ThemeHandle {
     GList *theme;
     GnomeVFSFileInfoOptions options;
     gboolean seen_dotdirectory;
-    
+
     /* if we're doing a file.... */
     gchar *uri; /* the real URI */
 };
@@ -245,7 +244,7 @@ do_read_directory(GnomeVFSMethod *method,
 {
 	ThemeHandle *handle = (ThemeHandle *) method_handle;
 	GList *theme = handle->theme;
-	
+
 	if (!handle->seen_dotdirectory)
 	{
 		g_free (file_info->name);
@@ -288,9 +287,9 @@ do_open(GnomeVFSMethod *method,
 	GnomeThemeMetaInfo *theme;
 	GnomeVFSURI *theme_uri;
 	ThemeHandle *handle;
-	
+
 	path = get_path_from_uri(uri);
-	
+
 	if (!path) {
 		return GNOME_VFS_ERROR_INVALID_URI;
 	}
@@ -300,7 +299,7 @@ do_open(GnomeVFSMethod *method,
 		g_free (path);
 		return GNOME_VFS_ERROR_IS_DIRECTORY;
 	}
-	
+
 	/* FIXME: ro check */
 
 	/* handle the .directory file */
@@ -312,27 +311,27 @@ do_open(GnomeVFSMethod *method,
 		handle = g_new0(ThemeHandle, 1);
 		handle->handle = *method_handle;
 		*method_handle = (GnomeVFSMethodHandle *) handle;
-		
+
 		g_free (path);
 		gnome_vfs_uri_unref(uri);
 		return result;
 	}
-	
+
 	g_free (path);
-	
+
 	theme = theme_meta_info_find (uri);
 	if (theme)
 	{
 		theme_uri = gnome_vfs_uri_new (theme->path);
 		result = gnome_vfs_open_uri_cancellable(
 			(GnomeVFSHandle **)method_handle, theme_uri, mode, context);
-		
+
 		handle = g_new0(ThemeHandle, 1);
 		handle->handle = *method_handle;
-		handle->uri = gnome_vfs_uri_to_string (theme_uri, 
+		handle->uri = gnome_vfs_uri_to_string (theme_uri,
 						GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
 		*method_handle = (GnomeVFSMethodHandle *) handle;
-		
+
 		gnome_vfs_uri_unref (theme_uri);
 		return result;
 	}
@@ -351,22 +350,22 @@ do_create(GnomeVFSMethod *method,
 {
     GnomeVFSResult result;
     GnomeVFSURI *new_uri;
-    ThemeHandle *handle;    
-    
+    ThemeHandle *handle;
+
     new_uri = create_local_uri(uri);
     if (!new_uri)
 	return gnome_vfs_result_from_errno();
-	
+
     result = gnome_vfs_create_uri_cancellable((GnomeVFSHandle **)method_handle,
 					      new_uri, mode, exclusive, perm,
 					      context);
-					      
+
     handle = g_new0 (ThemeHandle, 1);
-    handle->uri = gnome_vfs_uri_to_string (new_uri, 
+    handle->uri = gnome_vfs_uri_to_string (new_uri,
 					GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
     handle->handle = *method_handle;
     *method_handle = (GnomeVFSMethodHandle*) handle;
-    
+
     gnome_vfs_uri_unref(new_uri);
 
     return result;
@@ -381,26 +380,26 @@ do_close(GnomeVFSMethod *method,
 	GnomeVFSResult result;
 	gchar* path = NULL;
 	gint len;
-	
+
 	path = ((ThemeHandle*) method_handle)->uri;
 	result = gnome_vfs_close_cancellable ((GnomeVFSHandle*)(((ThemeHandle*)(method_handle))->handle), context);
 	g_free (method_handle);
-		       
+
 	if (result != GNOME_VFS_OK)
 		return result;
-	
-	if (path) {	
+
+	if (path) {
 		len = strlen (path);
 		if (path && len > 7 && !strcmp (path + len - 7, ".tar.gz"))
 			transfer_done_targz_idle_cb (path);
 		if (path && len > 8 && !strcmp (path + len - 8, ".tar.bz2"))
 			transfer_done_tarbz2_idle_cb (path);
-		
-		invoke_monitors ("themes:///", NULL);
+
+		invoke_monitors ();
 	}
-	
+
 	return result;
-	
+
 }
 
 static GnomeVFSResult
@@ -475,7 +474,7 @@ do_get_file_info(GnomeVFSMethod *method,
 {
 	gchar *path = NULL;
 	GnomeThemeMetaInfo *theme;
-	
+
 	path = get_path_from_uri(uri);
 	if (!path)
 		return GNOME_VFS_ERROR_INVALID_URI;
@@ -502,12 +501,12 @@ do_get_file_info(GnomeVFSMethod *method,
 	}
 	else {
 		g_free (path);
-		
+
 		theme = theme_meta_info_find (uri);
 		if (theme)
 			return fill_info_struct (file_info, options, theme);
 	}
-	
+
 	return GNOME_VFS_ERROR_INTERNAL;
 }
 
@@ -525,25 +524,25 @@ do_unlink(GnomeVFSMethod *method,
 {
 	/* we can only safely delete the metatheme; subthemes may be in use by other
 	metathemes */
-	
+
 	if (!strcmp (gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE),
 			"themes:///.vfs-write.tmp"))
 	{
-		return gnome_vfs_unlink (g_strconcat (g_get_home_dir(), 
+		return gnome_vfs_unlink (g_strconcat (g_get_home_dir(),
 				G_DIR_SEPARATOR_S, ".themes", G_DIR_SEPARATOR_S,
 				".vfs-write.tmp", NULL));
 		/* yuck */
 	}
-	
+
 	if (!strcmp (gnome_vfs_uri_get_scheme (uri), "themes"))
 	{
 		GnomeThemeMetaInfo *theme;
 		GnomeVFSResult result;
-		
+
 		theme = theme_meta_info_find (uri);
 		if (theme) {
 			result = gnome_vfs_unlink (theme->path);
-			invoke_monitors (theme->path, NULL);
+			invoke_monitors ();
 			return result;
 		}
 		else
@@ -560,7 +559,7 @@ G_LOCK_DEFINE_STATIC(monitor_list);
 static GList *monitor_list = NULL;
 
 static void
-invoke_monitors(gchar *uri, gpointer data)
+invoke_monitors()
 {
     GList *tmp;
 
@@ -572,6 +571,16 @@ invoke_monitors(gchar *uri, gpointer data)
 				   GNOME_VFS_MONITOR_EVENT_CHANGED);
     }
     G_UNLOCK(monitor_list);
+}
+
+static void
+theme_changed_callback(GnomeThemeType       type,
+                       gpointer             theme,
+                       GnomeThemeChangeType change_type,
+                       GnomeThemeElement    element,
+                       gpointer             data)
+{
+  invoke_monitors();
 }
 
 static GnomeVFSResult
@@ -671,7 +680,7 @@ vfs_module_init (const char *method_name, const char *args)
 	gnome_theme_init (NULL);
 	if (!strcmp (method_name, "themes"))
 	{
-		gnome_theme_info_register_theme_change ((GFunc)invoke_monitors, NULL);
+		gnome_theme_info_register_theme_change (theme_changed_callback, NULL);
 		return &method;
 	}
 	else
