@@ -343,6 +343,7 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
   GnomeDesktopItem *icon_theme_ditem;
   gchar *icon_theme_file;
   const gchar *name;
+  const gchar *directories;
   const gchar *hidden_theme_icon;
 
   icon_theme_file = gnome_vfs_uri_to_string (icon_theme_uri, GNOME_VFS_URI_HIDE_NONE);
@@ -355,6 +356,15 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
 
   name = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Name");
   if (name == NULL)
+    {
+      gnome_desktop_item_unref (icon_theme_ditem);
+      g_free (icon_theme_file);
+      return NULL;
+    }
+
+  /* If index.theme has no Directories entry, it is only a cursor theme */
+  directories = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Directories");
+  if (directories == NULL)
     {
       gnome_desktop_item_unref (icon_theme_ditem);
       g_free (icon_theme_file);
