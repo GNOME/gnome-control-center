@@ -715,7 +715,6 @@ wp_dragged_image (GtkWidget *widget,
   }
 }
 
-#if GTK_CHECK_VERSION (2,11,6)
 static gboolean
 wp_view_tooltip_cb (GtkWidget  *widget,
                     gint x,
@@ -746,7 +745,6 @@ wp_view_tooltip_cb (GtkWidget  *widget,
 
   return FALSE;
 }
-#endif
 
 static gint
 wp_list_sort (GtkTreeModel *model,
@@ -927,12 +925,7 @@ desktop_init (AppearanceData *data,
   GtkWidget *add_button;
   GtkFileFilter *filter;
 
-#if GTK_CHECK_VERSION (2,11,6)
-  GtkSettings *settings;
-
-  settings = gtk_settings_get_default ();
-  g_object_set (G_OBJECT (settings), "gtk-tooltip-timeout", 500, NULL);
-#endif
+  g_object_set (gtk_settings_get_default (), "gtk-tooltip-timeout", 500, NULL);
 
   data->wp_update_gconf = TRUE;
 
@@ -981,21 +974,14 @@ desktop_init (AppearanceData *data,
   data->wp_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "wp_view"));
   gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
 
-#if GTK_CHECK_VERSION (2,11,6)
-  g_object_set (G_OBJECT (data->wp_view), "has-tooltip", TRUE, NULL);
-#endif
-
-  g_signal_connect_after (G_OBJECT (data->wp_view), "realize",
+  g_signal_connect_after (data->wp_view, "realize",
                           G_CALLBACK (wp_select_after_realize), data);
 
   gtk_cell_layout_clear (GTK_CELL_LAYOUT (data->wp_view));
 
   data->wp_cell = cell_renderer_wallpaper_new ();
 
-  g_object_set (G_OBJECT (data->wp_cell),
-                "xpad", 5,
-                "ypad", 5,
-                NULL);
+  g_object_set (data->wp_cell, "xpad", 5, "ypad", 5, NULL);
 
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (data->wp_view),
                               data->wp_cell,
@@ -1012,52 +998,48 @@ desktop_init (AppearanceData *data,
                                         2, GTK_SORT_ASCENDING);
 
   gtk_drag_dest_set (GTK_WIDGET (data->wp_view), GTK_DEST_DEFAULT_ALL, drop_types,
-                     sizeof (drop_types) / sizeof (drop_types[0]),
-                      GDK_ACTION_COPY | GDK_ACTION_MOVE);
-  g_signal_connect (G_OBJECT (data->wp_view), "drag_data_received",
+                     G_N_ELEMENTS (drop_types), GDK_ACTION_COPY | GDK_ACTION_MOVE);
+  g_signal_connect (data->wp_view, "drag_data_received",
                     G_CALLBACK (wp_dragged_image), data);
 
   data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
 
-  g_signal_connect (G_OBJECT (data->wp_style_menu), "changed",
+  g_signal_connect (data->wp_style_menu, "changed",
                     G_CALLBACK (wp_scale_type_changed), data);
 
   data->wp_color_menu = glade_xml_get_widget (data->xml, "wp_color_menu");
 
-  g_signal_connect (G_OBJECT (data->wp_color_menu), "changed",
+  g_signal_connect (data->wp_color_menu, "changed",
                     G_CALLBACK (wp_shade_type_changed), data);
 
   data->wp_scpicker = glade_xml_get_widget (data->xml, "wp_scpicker");
 
-  g_signal_connect (G_OBJECT (data->wp_scpicker), "color-set",
+  g_signal_connect (data->wp_scpicker, "color-set",
                     G_CALLBACK (wp_scolor_changed), data);
 
   data->wp_pcpicker = glade_xml_get_widget (data->xml, "wp_pcpicker");
 
-  g_signal_connect (G_OBJECT (data->wp_pcpicker), "color-set",
+  g_signal_connect (data->wp_pcpicker, "color-set",
                     G_CALLBACK (wp_scolor_changed), data);
 
   add_button = glade_xml_get_widget (data->xml, "wp_add_button");
   gtk_button_set_image (GTK_BUTTON (add_button),
                         gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON));
 
-  g_signal_connect (G_OBJECT (add_button), "clicked",
+  g_signal_connect (add_button, "clicked",
                     G_CALLBACK (wp_file_open_dialog), data);
 
   data->wp_rem_button = glade_xml_get_widget (data->xml, "wp_rem_button");
 
-  g_signal_connect (G_OBJECT (data->wp_rem_button), "clicked",
+  g_signal_connect (data->wp_rem_button, "clicked",
                     G_CALLBACK (wp_remove_wallpaper), data);
 
   g_idle_add (wp_load_stuffs, data);
 
-  g_signal_connect (G_OBJECT (data->wp_view), "selection-changed",
+  g_signal_connect (data->wp_view, "selection-changed",
                     G_CALLBACK (wp_props_wp_selected), data);
-
-#if GTK_CHECK_VERSION (2,11,6)
-  g_signal_connect (G_OBJECT (data->wp_view), "query-tooltip",
+  g_signal_connect (data->wp_view, "query-tooltip",
                     G_CALLBACK (wp_view_tooltip_cb), data);
-#endif
 
   wp_set_sensitivities (data);
 
