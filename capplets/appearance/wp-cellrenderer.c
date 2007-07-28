@@ -75,6 +75,10 @@ cell_renderer_wallpaper_render (GtkCellRenderer *cell,
     w = background_area->width;
     h = background_area->height;
 
+    /* sometimes width is -1 - not sure what to do here */
+    if (w == -1)
+      return;
+
     if ((flags & GTK_CELL_RENDERER_SELECTED) != 0)
     {
       if (GTK_WIDGET_HAS_FOCUS (widget))
