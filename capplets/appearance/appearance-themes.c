@@ -52,7 +52,7 @@ static const GtkTargetEntry drop_types[] =
   {"_NETSCAPE_URL", 0, TARGET_NS_URL}
 };
 
-static void theme_message_area_update (gboolean show_apply_background, gboolean show_apply_font, AppearanceData *data);
+static void theme_message_area_update (AppearanceData *data);
 
 
 static void
@@ -329,19 +329,15 @@ theme_message_area_response_cb (GtkWidget *w,
                                 gint response_id,
                                 AppearanceData *data)
 {
-  gboolean show_apply_background = FALSE, show_apply_font = FALSE;
-  GtkIconView *view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
-  const GnomeThemeMetaInfo *theme = theme_get_selected (view, data);
+  const GnomeThemeMetaInfo *theme;
+
+  theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
 
   switch (response_id)
   {
     case RESPONSE_APPLY_BG:
       gconf_client_set_string (data->client, BACKGROUND_KEY,
                                theme->background_image, NULL);
-
-      show_apply_font = (theme->application_font ||
-                         theme->desktop_font ||
-                         theme->monospace_font);
       break;
 
     case RESPONSE_APPLY_FONT:
@@ -356,20 +352,54 @@ theme_message_area_response_cb (GtkWidget *w,
       if (theme->monospace_font)
         gconf_client_set_string (data->client, MONOSPACE_FONT_KEY,
                                  theme->monospace_font, NULL);
-
-      show_apply_background = (theme->background_image != NULL);
       break;
   }
 
-  theme_message_area_update (show_apply_background, show_apply_font, data);
+  theme_message_area_update (data);
 }
 
 static void
-theme_message_area_update (gboolean show_apply_background,
-                           gboolean show_apply_font,
-                           AppearanceData *data)
+theme_message_area_update (AppearanceData *data)
 {
+  const GnomeThemeMetaInfo *theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
+  gboolean show_apply_background = FALSE, show_apply_font = FALSE;
   const gchar *message;
+
+  if (theme->background_image != NULL) {
+    char *background;
+
+    background = gconf_client_get_string (data->client, BACKGROUND_KEY, NULL);
+    if (strcmp (theme->background_image, background) != 0)
+      show_apply_background = TRUE;
+    g_free (background);
+  }
+
+  if (theme->application_font) {
+    char *font;
+
+    font = gconf_client_get_string (data->client, APPLICATION_FONT_KEY, NULL);
+    if (strcmp (theme->application_font, font) != 0)
+      show_apply_font = TRUE;
+    g_free (font);
+  }
+
+  if (theme->desktop_font) {
+    char *font;
+
+    font = gconf_client_get_string (data->client, DESKTOP_FONT_KEY, NULL);
+    if (strcmp (theme->desktop_font, font) != 0)
+      show_apply_font = TRUE;
+    g_free (font);
+  }
+
+  if (theme->monospace_font) {
+    char *font;
+
+    font = gconf_client_get_string (data->client, MONOSPACE_FONT_KEY, NULL);
+    if (strcmp (theme->monospace_font, font) != 0)
+      show_apply_font = TRUE;
+    g_free (font);
+  }
 
   if (data->theme_message_area == NULL) {
     GtkWidget *hbox;
@@ -461,16 +491,8 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
       theme = gnome_theme_meta_info_find (name);
 
     if (theme) {
-      gboolean show_apply_background = FALSE, show_apply_font = FALSE;
       gnome_meta_theme_set (theme);
-
-      if (theme->background_image)
-        show_apply_background = TRUE;
-      
-      if (theme->application_font || theme->desktop_font || theme->monospace_font)
-        show_apply_font = TRUE;
-
-      theme_message_area_update (show_apply_background, show_apply_font, data); 
+      theme_message_area_update (data); 
     }
 
     g_free (name);
