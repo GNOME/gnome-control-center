@@ -159,6 +159,10 @@ main (int argc, char **argv)
   g_signal_connect_after (G_OBJECT (w), "response",
                           G_CALLBACK (main_window_response), data);
 
+  /* default to background page if files were given on the command line */
+  if (wallpaper_files && !install_filename && !start_page)
+    start_page = g_strdup ("background");
+
   if (start_page != NULL) {
     gchar *page_name;
 
