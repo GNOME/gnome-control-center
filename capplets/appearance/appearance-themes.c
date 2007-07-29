@@ -329,6 +329,8 @@ theme_message_area_response_cb (GtkWidget *w,
   const GnomeThemeMetaInfo *theme;
 
   theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
+  if (!theme)
+    return;
 
   switch (response_id)
   {
@@ -356,43 +358,43 @@ theme_message_area_response_cb (GtkWidget *w,
 static void
 theme_message_area_update (AppearanceData *data)
 {
-  const GnomeThemeMetaInfo *theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
+  const GnomeThemeMetaInfo *theme;
   gboolean show_apply_background = FALSE, show_apply_font = FALSE;
   const gchar *message;
+  gchar *font;
+
+  theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
+
+  if (!theme)
+    return;
 
   if (theme->background_image != NULL) {
-    char *background;
+    gchar *background;
 
     background = gconf_client_get_string (data->client, BACKGROUND_KEY, NULL);
-    if (strcmp (theme->background_image, background) != 0)
-      show_apply_background = TRUE;
+    show_apply_background =
+        (!background || strcmp (theme->background_image, background) != 0);
     g_free (background);
   }
 
   if (theme->application_font) {
-    char *font;
-
     font = gconf_client_get_string (data->client, APPLICATION_FONT_KEY, NULL);
-    if (strcmp (theme->application_font, font) != 0)
-      show_apply_font = TRUE;
+    show_apply_font =
+        (!font || strcmp (theme->application_font, font) != 0);
     g_free (font);
   }
 
-  if (theme->desktop_font) {
-    char *font;
-
+  if (!show_apply_font && theme->desktop_font) {
     font = gconf_client_get_string (data->client, DESKTOP_FONT_KEY, NULL);
-    if (strcmp (theme->desktop_font, font) != 0)
-      show_apply_font = TRUE;
+    show_apply_font =
+        (!font || strcmp (theme->application_font, font) != 0);
     g_free (font);
   }
 
-  if (theme->monospace_font) {
-    char *font;
-
+  if (!show_apply_font && theme->monospace_font) {
     font = gconf_client_get_string (data->client, MONOSPACE_FONT_KEY, NULL);
-    if (strcmp (theme->monospace_font, font) != 0)
-      show_apply_font = TRUE;
+    show_apply_font =
+        (!font || strcmp (theme->application_font, font) != 0);
     g_free (font);
   }
 
@@ -407,7 +409,8 @@ theme_message_area_update (AppearanceData *data)
     data->theme_message_area = gedit_message_area_new ();
     gtk_widget_set_no_show_all (data->theme_message_area, TRUE);
 
-    g_signal_connect (G_OBJECT (data->theme_message_area), "response", (GCallback) theme_message_area_response_cb, data);
+    g_signal_connect (data->theme_message_area, "response",
+                      (GCallback) theme_message_area_response_cb, data);
 
     data->apply_background_button = gedit_message_area_add_button (
         GEDIT_MESSAGE_AREA (data->theme_message_area),
@@ -445,12 +448,12 @@ theme_message_area_update (AppearanceData *data)
     gtk_widget_show (data->theme_message_area);
     gtk_widget_show (data->apply_background_button);
     gtk_widget_hide (data->apply_font_button);
-    message = _("The current theme suggests a background.");  
+    message = _("The current theme suggests a background.");
   } else if (show_apply_font) {
     gtk_widget_show (data->theme_message_area);
     gtk_widget_hide (data->apply_background_button);
     gtk_widget_show (data->apply_font_button);
-    message = _("The current theme suggests a font.");  
+    message = _("The current theme suggests a font.");
   } else {
     gtk_widget_hide (data->theme_message_area);
     message = NULL;
@@ -710,27 +713,11 @@ themes_init (AppearanceData *data)
   GtkListStore *theme_store;
   GtkTreeModel *sort_model;
   GnomeThemeMetaInfo *meta_theme = NULL;
+  GtkIconView *icon_view;
 
   /* initialise some stuff */
   gnome_theme_init (NULL);
   gnome_wm_manager_init ();
-
-  gconf_client_notify_add (data->client,
-                           BACKGROUND_KEY,
-                           (GConfClientNotifyFunc) background_or_font_changed,
-                           data, NULL, NULL);
-  gconf_client_notify_add (data->client,
-                           APPLICATION_FONT_KEY,
-                           (GConfClientNotifyFunc) background_or_font_changed,
-                           data, NULL, NULL);
-  gconf_client_notify_add (data->client,
-                           DESKTOP_FONT_KEY,
-                           (GConfClientNotifyFunc) background_or_font_changed,
-                           data, NULL, NULL);
-  gconf_client_notify_add (data->client,
-                           MONOSPACE_FONT_KEY,
-                           (GConfClientNotifyFunc) background_or_font_changed,
-                           data, NULL, NULL);
 
   data->theme_save_dialog = NULL;
   data->theme_message_area = NULL;
@@ -784,16 +771,18 @@ themes_init (AppearanceData *data)
   gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL,
 		     drop_types, G_N_ELEMENTS (drop_types),
 		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
-  g_signal_connect (G_OBJECT (w), "drag-data-received", G_CALLBACK (appearance_window_drag_data_received_cb), NULL);
+  g_signal_connect (w, "drag-data-received", (GCallback) appearance_window_drag_data_received_cb, NULL);
 
-  w = glade_xml_get_widget (data->xml, "theme_list");
+  icon_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
+
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
-  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
+  gtk_icon_view_set_model (icon_view, GTK_TREE_MODEL (sort_model));
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model), COL_LABEL, theme_store_sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), COL_LABEL, GTK_SORT_ASCENDING);
-  g_signal_connect (w, "selection-changed", (GCallback) theme_selection_changed_cb, data);
 
-  theme_select_name (GTK_ICON_VIEW (w), meta_theme->name);
+  g_signal_connect (icon_view, "selection-changed", (GCallback) theme_selection_changed_cb, data);
+
+  theme_select_name (icon_view, meta_theme->name);
 
   w = glade_xml_get_widget (data->xml, "theme_install");
   gtk_button_set_image (GTK_BUTTON (w),
@@ -818,6 +807,10 @@ themes_init (AppearanceData *data)
   gconf_client_notify_add (data->client, GTK_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, METACITY_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, ICON_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, BACKGROUND_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, APPLICATION_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, DESKTOP_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, MONOSPACE_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
 
   g_signal_connect (gtk_settings_get_default (), "notify::gtk-color-scheme", (GCallback) theme_color_scheme_changed_cb, data);
 
