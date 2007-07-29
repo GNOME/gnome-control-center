@@ -1,3 +1,11 @@
+2007-07-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* data/appearance.glade:
+	* appearance-themes.c: (theme_custom_cb):
+	* theme-save.c: (save_dialog_response): only create the custom theme
+	entry when changes are made, and delete it when the theme is saved.
+	These changes obsolete the requirement for a modal details window.
+
 2007-07-29  Denis Washington  <denisw@svn.gnome.org>
 
 	* appearance.h:

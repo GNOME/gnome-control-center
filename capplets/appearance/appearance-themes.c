@@ -507,10 +507,6 @@ theme_custom_cb (GtkWidget *button, AppearanceData *data)
 {
   GtkWidget *w, *parent;
 
-  /* select the "custom" metatheme */
-  w = glade_xml_get_widget (data->xml, "theme_list");
-  theme_set_custom_from_theme (theme_get_selected (GTK_ICON_VIEW (w), data), data);
-
   w = glade_xml_get_widget (data->xml, "theme_details");
   parent = glade_xml_get_widget (data->xml, "appearance_window");
   gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (parent));

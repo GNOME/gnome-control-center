@@ -318,7 +318,13 @@ save_dialog_response (GtkWidget      *save_dialog,
     save_background = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
 		      glade_xml_get_widget (data->xml, "save_background_checkbutton")));
 
-    save_theme_to_disk (theme_info, theme_name, theme_description, save_background, &error);
+    if (save_theme_to_disk (theme_info, theme_name, theme_description, save_background, &error)) {
+      /* remove the custom theme */
+      GtkTreeIter iter;
+
+      if (theme_find_in_model (GTK_TREE_MODEL (data->theme_store), "__custom__", &iter))
+        gtk_list_store_remove (data->theme_store, &iter);
+    }
 
     g_free (theme_name);
     g_free (theme_description);
