@@ -27,6 +27,9 @@
 #define CURSOR_SIZE_KEY "/desktop/gnome/peripherals/mouse/cursor_size"
 #define LOCKDOWN_KEY "/desktop/gnome/lockdown/disable_theme_settings"
 #define BACKGROUND_KEY "/desktop/gnome/background/picture_filename"
+#define APPLICATION_FONT_KEY "/desktop/gnome/interface/font_name"
+#define DESKTOP_FONT_KEY "/apps/nautilus/preferences/desktop_font"
+#define MONOSPACE_FONT_KEY "/desktop/gnome/interface/monospace_font_name"
 
 enum {
   COL_THUMBNAIL,

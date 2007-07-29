@@ -1,3 +1,18 @@
+2007-07-29  Denis Washington  <denisw@svn.gnome.org>
+
+	* data/appearance.glade:
+	* appearance-themes.c: (theme_message_area_response_cb),
+	(theme_message_area_update), (theme_selection_changed_cb),
+	(themes_init), (themes_shutdown):
+	* gedit-message-area.[ch]:
+	* theme-util.h:
+	Added controls for applying suggested backgrounds and/or fonts from
+	metathemes. Copied over some code from gedit for the message area
+	(GeditMessageArea).
+
+	* Makefile.am:
+	Added gedit-message-area.[ch].
+
 2007-07-29  Thomas Wood  <thos@gnome.org>
 
 	* appearance-style.c: (cursor_theme_sort_func), (prepare_list),

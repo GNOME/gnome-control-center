@@ -25,6 +25,7 @@
 #include "theme-save.h"
 #include "theme-util.h"
 #include "gtkrc-utils.h"
+#include "gedit-message-area.h"
 
 #include <glib/gi18n.h>
 #include <libwindow-settings/gnome-wm-manager.h>
@@ -32,6 +33,12 @@
 #include <libgnomevfs/gnome-vfs.h>
 
 #define CUSTOM_THEME_NAME "__custom__"
+
+enum
+{
+  RESPONSE_APPLY_BG,
+  RESPONSE_APPLY_FONT
+};
 
 enum
 {
@@ -44,6 +51,9 @@ static const GtkTargetEntry drop_types[] =
   {"text/uri-list", 0, TARGET_URI_LIST},
   {"_NETSCAPE_URL", 0, TARGET_NS_URL}
 };
+
+static void theme_message_area_update (gboolean show_apply_background, gboolean show_apply_font, AppearanceData *data);
+
 
 static void
 theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data)
@@ -315,6 +325,117 @@ theme_set_custom_from_theme (const GnomeThemeMetaInfo *info, AppearanceData *dat
 /** GUI Callbacks **/
 
 static void
+theme_message_area_response_cb (GtkWidget *w,
+                                gint response_id,
+                                AppearanceData *data)
+{
+  gboolean show_apply_background = FALSE, show_apply_font = FALSE;
+  GtkIconView *view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
+  const GnomeThemeMetaInfo *theme = theme_get_selected (view, data);
+
+  switch (response_id)
+  {
+    case RESPONSE_APPLY_BG:
+      gconf_client_set_string (data->client, BACKGROUND_KEY,
+                               theme->background_image, NULL);
+
+      show_apply_font = (theme->application_font ||
+                         theme->desktop_font ||
+                         theme->monospace_font);
+      break;
+
+    case RESPONSE_APPLY_FONT:
+      if (theme->application_font)
+        gconf_client_set_string (data->client, APPLICATION_FONT_KEY,
+                                 theme->application_font, NULL);
+
+      if (theme->desktop_font)
+        gconf_client_set_string (data->client, DESKTOP_FONT_KEY,
+                                 theme->desktop_font, NULL);
+
+      if (theme->monospace_font)
+        gconf_client_set_string (data->client, MONOSPACE_FONT_KEY,
+                                 theme->monospace_font, NULL);
+
+      show_apply_background = (theme->background_image != NULL);
+      break;
+  }
+
+  theme_message_area_update (show_apply_background, show_apply_font, data);
+}
+
+static void
+theme_message_area_update (gboolean show_apply_background,
+                           gboolean show_apply_font,
+                           AppearanceData *data)
+{
+  const gchar *message;
+
+  if (data->theme_message_area == NULL) {
+    GtkWidget *hbox;
+    GtkWidget *icon;
+    GtkWidget *parent;
+
+    if (!show_apply_background && !show_apply_font)
+      return;
+
+    data->theme_message_area = gedit_message_area_new ();
+    g_object_ref (data->theme_message_area);
+    gtk_widget_set_no_show_all (data->theme_message_area, TRUE);
+
+    g_signal_connect (G_OBJECT (data->theme_message_area), "response", (GCallback) theme_message_area_response_cb, data);
+
+    data->apply_background_button = gedit_message_area_add_button (
+        GEDIT_MESSAGE_AREA (data->theme_message_area),
+        _("Apply Background"),
+        RESPONSE_APPLY_BG);
+    data->apply_font_button = gedit_message_area_add_button (
+        GEDIT_MESSAGE_AREA (data->theme_message_area),
+        _("Apply Font"),
+        RESPONSE_APPLY_FONT);
+
+    data->theme_message_label = gtk_label_new (NULL);
+    gtk_widget_show (data->theme_message_label);
+    gtk_label_set_line_wrap (GTK_LABEL (data->theme_message_label), TRUE);
+    gtk_misc_set_alignment (GTK_MISC (data->theme_message_label), 0.0, 0.5);
+
+    hbox = gtk_hbox_new (FALSE, 9);
+    gtk_widget_show (hbox);
+    icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_DIALOG);
+    gtk_widget_show (icon);
+    gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), data->theme_message_label, TRUE, TRUE, 0);
+    gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (data->theme_message_area), hbox);
+
+    parent = glade_xml_get_widget (data->xml, "theme_list_vbox");
+    gtk_box_pack_start (GTK_BOX (parent), data->theme_message_area, FALSE, FALSE, 0);
+  }
+
+  if (show_apply_background && show_apply_font) {
+    gtk_widget_show (data->theme_message_area);
+    gtk_widget_show (data->apply_background_button);
+    gtk_widget_show (data->apply_font_button);
+    message = _("The current theme suggests a background and a font.");
+  } else if (show_apply_background) {
+    gtk_widget_show (data->theme_message_area);
+    gtk_widget_show (data->apply_background_button);
+    gtk_widget_hide (data->apply_font_button);
+    message = _("The current theme suggests a background.");  
+  } else if (show_apply_font) {
+    gtk_widget_show (data->theme_message_area);
+    gtk_widget_hide (data->apply_background_button);
+    gtk_widget_show (data->apply_font_button);
+    message = _("The current theme suggests a font.");  
+  } else {
+    gtk_widget_hide (data->theme_message_area);
+    message = NULL;
+  }
+
+  gtk_label_set_text (GTK_LABEL (data->theme_message_label), message);
+}
+
+static void
 theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
 {
   GList *selection;
@@ -339,8 +460,18 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
     else
       theme = gnome_theme_meta_info_find (name);
 
-    if (theme)
+    if (theme) {
+      gboolean show_apply_background = FALSE, show_apply_font = FALSE;
       gnome_meta_theme_set (theme);
+
+      if (theme->background_image)
+        show_apply_background = TRUE;
+      
+      if (theme->application_font || theme->desktop_font || theme->monospace_font)
+        show_apply_font = TRUE;
+
+      theme_message_area_update (show_apply_background, show_apply_font, data); 
+    }
 
     g_free (name);
     g_list_foreach (selection, (GFunc) gtk_tree_path_free, NULL);
@@ -560,6 +691,7 @@ themes_init (AppearanceData *data)
   gnome_wm_manager_init ();
 
   data->theme_save_dialog = NULL;
+  data->theme_message_area = NULL;
   data->theme_custom = gnome_theme_meta_info_new ();
   data->theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/theme-thumbnailing.png", NULL);
   data->theme_store = theme_store =
@@ -661,4 +793,6 @@ themes_shutdown (AppearanceData *data)
     g_object_unref (data->theme_icon);
   if (data->theme_save_dialog)
     gtk_widget_destroy (data->theme_save_dialog);
+  if (data->theme_message_area)
+    gtk_widget_destroy (data->theme_message_area);
 }
