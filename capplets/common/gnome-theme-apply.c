@@ -75,6 +75,7 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
         {
           gconf_client_set_string (client, COLOR_SCHEME_KEY, newval, NULL);
         }
+      g_free (gtkcols);
     }
   g_free (old_key);
 

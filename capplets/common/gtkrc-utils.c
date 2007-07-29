@@ -154,6 +154,9 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 		}
 	}
 
+	g_slist_foreach (read_files, (GFunc) g_free, NULL);
+	g_slist_free (read_files);
+
 	g_scanner_destroy (scanner);
 }
 
@@ -209,6 +212,10 @@ gtkrc_get_color_scheme (gchar *filename)
 			}
 		}
 	}
+
+	g_slist_foreach (read_files, (GFunc) g_free, NULL);
+	g_slist_free (read_files);
+
 	g_scanner_destroy (scanner);
 	return result;
 }

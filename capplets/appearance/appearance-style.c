@@ -135,9 +135,10 @@ cursor_theme_sort_func (GtkTreeModel *model,
                         GtkTreeIter *b,
                         gpointer user_data)
 {
-  const gchar *a_label = NULL;
-  const gchar *b_label = NULL;
+  gchar *a_label = NULL;
+  gchar *b_label = NULL;
   const gchar *default_label;
+  gint result;
 
   gtk_tree_model_get (model, a, COL_LABEL, &a_label, -1);
   gtk_tree_model_get (model, b, COL_LABEL, &b_label, -1);
@@ -145,11 +146,16 @@ cursor_theme_sort_func (GtkTreeModel *model,
   default_label = _("Default Pointer");
 
   if (!strcmp (a_label, default_label))
-    return -1;
+    result = -1;
   else if (!strcmp (b_label, default_label))
-    return 1;
+    result = 1;
   else
-    return strcmp (a_label, b_label);
+    result = strcmp (a_label, b_label);
+
+  g_free (a_label);
+  g_free (b_label);
+
+  return result;
 }
 
 static void
@@ -856,6 +862,7 @@ style_init (AppearanceData *data)
   GtkSettings *settings;
   GtkWidget *w;
   GtkAdjustment *adjustment;
+  gchar *label;
 
   data->gtk_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/gtk-theme-thumbnailing.png", NULL);
   data->window_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/window-theme-thumbnailing.png", NULL);
@@ -889,9 +896,14 @@ style_init (AppearanceData *data)
   g_object_set (G_OBJECT (adjustment), "page-size", 0.0, NULL);
 
   w = glade_xml_get_widget (data->xml, "cursor_size_small_label");
-  gtk_label_set_markup (GTK_LABEL (w), g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w))));
+  label = g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w)));
+  gtk_label_set_markup (GTK_LABEL (w), label);
+  g_free (label);
+
   w = glade_xml_get_widget (data->xml, "cursor_size_large_label");
-  gtk_label_set_markup (GTK_LABEL (w), g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w))));
+  label = g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w)));
+  gtk_label_set_markup (GTK_LABEL (w), label);
+  g_free (label);
 #else
   w = glade_xml_get_widget (data->xml, "cursor_size_hbox");
   gtk_widget_set_no_show_all (w, TRUE);
