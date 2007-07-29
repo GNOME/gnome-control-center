@@ -923,6 +923,7 @@ desktop_init (AppearanceData *data,
 	      const gchar **uris)
 {
   GtkWidget *add_button;
+  GtkCellRenderer *cr;
   GtkFileFilter *filter;
 
   g_object_set (gtk_settings_get_default (), "gtk-tooltip-timeout", 500, NULL);
@@ -979,14 +980,11 @@ desktop_init (AppearanceData *data,
 
   gtk_cell_layout_clear (GTK_CELL_LAYOUT (data->wp_view));
 
-  data->wp_cell = cell_renderer_wallpaper_new ();
+  cr = cell_renderer_wallpaper_new ();
+  g_object_set (cr, "xpad", 5, "ypad", 5, NULL);
 
-  g_object_set (data->wp_cell, "xpad", 5, "ypad", 5, NULL);
-
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (data->wp_view),
-                              data->wp_cell,
-                              TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (data->wp_view), data->wp_cell,
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (data->wp_view), cr, TRUE);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (data->wp_view), cr,
                                   "pixbuf", 0,
                                   NULL);
 
