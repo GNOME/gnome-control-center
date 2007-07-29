@@ -52,9 +52,6 @@ static const GtkTargetEntry drop_types[] =
   {"_NETSCAPE_URL", 0, TARGET_NS_URL}
 };
 
-static void theme_message_area_update (AppearanceData *data);
-
-
 static void
 theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data)
 {
@@ -354,8 +351,6 @@ theme_message_area_response_cb (GtkWidget *w,
                                  theme->monospace_font, NULL);
       break;
   }
-
-  theme_message_area_update (data);
 }
 
 static void
@@ -410,7 +405,6 @@ theme_message_area_update (AppearanceData *data)
       return;
 
     data->theme_message_area = gedit_message_area_new ();
-    g_object_ref (data->theme_message_area);
     gtk_widget_set_no_show_all (data->theme_message_area, TRUE);
 
     g_signal_connect (G_OBJECT (data->theme_message_area), "response", (GCallback) theme_message_area_response_cb, data);
@@ -492,7 +486,7 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
 
     if (theme) {
       gnome_meta_theme_set (theme);
-      theme_message_area_update (data); 
+      theme_message_area_update (data);
     }
 
     g_free (name);
@@ -699,6 +693,15 @@ appearance_window_drag_data_received_cb (GtkWidget *widget,
   g_free (filename);
 }
 
+static void
+background_or_font_changed (GConfEngine *conf,
+                            guint cnxn_id,
+                            GConfEntry *entry,
+                            AppearanceData *data)
+{
+  theme_message_area_update (data);
+}
+
 void
 themes_init (AppearanceData *data)
 {
@@ -711,6 +714,23 @@ themes_init (AppearanceData *data)
   /* initialise some stuff */
   gnome_theme_init (NULL);
   gnome_wm_manager_init ();
+
+  gconf_client_notify_add (data->client,
+                           BACKGROUND_KEY,
+                           (GConfClientNotifyFunc) background_or_font_changed,
+                           data, NULL, NULL);
+  gconf_client_notify_add (data->client,
+                           APPLICATION_FONT_KEY,
+                           (GConfClientNotifyFunc) background_or_font_changed,
+                           data, NULL, NULL);
+  gconf_client_notify_add (data->client,
+                           DESKTOP_FONT_KEY,
+                           (GConfClientNotifyFunc) background_or_font_changed,
+                           data, NULL, NULL);
+  gconf_client_notify_add (data->client,
+                           MONOSPACE_FONT_KEY,
+                           (GConfClientNotifyFunc) background_or_font_changed,
+                           data, NULL, NULL);
 
   data->theme_save_dialog = NULL;
   data->theme_message_area = NULL;
@@ -815,6 +835,4 @@ themes_shutdown (AppearanceData *data)
     g_object_unref (data->theme_icon);
   if (data->theme_save_dialog)
     gtk_widget_destroy (data->theme_save_dialog);
-  if (data->theme_message_area)
-    gtk_widget_destroy (data->theme_message_area);
 }

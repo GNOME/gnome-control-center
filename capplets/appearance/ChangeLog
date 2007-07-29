@@ -1,6 +1,14 @@
 2007-07-29  Denis Washington  <denisw@svn.gnome.org>
 
 	* appearance-themes.c: (theme_message_area_response_cb),
+	(theme_message_area_update), (theme_selection_changed_cb),
+	(background_or_font_changed), (themes_init):
+	_Really_ only show background/font suggestions if they haven't
+	already been applied.
+
+2007-07-29  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-themes.c: (theme_message_area_response_cb),
 	(theme_message_area_update), (theme_selection_changed_cb):
 	Only show background/font suggestions if they haven't already
 	been applied.
