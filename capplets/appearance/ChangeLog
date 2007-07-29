@@ -1,5 +1,11 @@
 2007-07-29  Thomas Wood  <thos@gnome.org>
 
+	* theme-installer.c: (file_theme_type), (gnome_theme_install_real):
+	- Fix theme installation (free called before last last use of a string)
+	- Update icon cache when installing icon themes (closes bug 355486)
+
+2007-07-29  Thomas Wood  <thos@gnome.org>
+
 	* data/appearance.glade: Fix mnemonics and Customize Theme window title.
 	Closes bug 461255.
 

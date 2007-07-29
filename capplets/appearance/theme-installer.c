@@ -74,7 +74,6 @@ file_theme_type (const gchar *dir)
 
 	filename = g_build_filename (dir, "index.theme", NULL);
 	src_uri = gnome_vfs_uri_new (filename);
-	g_free (filename);
 	exists = gnome_vfs_uri_exists (src_uri);
 	gnome_vfs_uri_unref (src_uri);
 
@@ -103,6 +102,7 @@ file_theme_type (const gchar *dir)
 		if (match)
 			return THEME_GNOME;
 	}
+	g_free (filename);
 
 	filename = g_build_filename (dir, "gtk-2.0", "gtkrc", NULL);
 	src_uri = gnome_vfs_uri_new (filename);
@@ -271,15 +271,21 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 		if (g_file_test (path, G_FILE_TEST_IS_DIR)
 		    && (file_theme_type (path) == THEME_ICON))
 		{
-			gchar *new_path;
+			gchar *new_path, *update_icon_cache;
 
 			new_path = g_build_path (G_DIR_SEPARATOR_S,
 						 g_get_home_dir (),
 						 ".icons",
 						 theme_name, NULL);
+			update_icon_cache = g_strdup_printf ("gtk-update-icon-cache %s", new_path);
 			/* XXX: make some noise if we couldn't install it? */
 			gnome_vfs_move (path, new_path, FALSE);
+
+			/* update icon cache - shouldn't really matter if this fails */
+			g_spawn_command_line_async (update_icon_cache, NULL);
+
 			g_free (new_path);
+			g_free (update_icon_cache);
 		}
 		g_free (path);
 	}
@@ -305,6 +311,16 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 		gtk_widget_destroy (dialog);
 		success = FALSE;
 	} else {
+		if (theme_type == THEME_ICON)
+		{
+			gchar *update_icon_cache;
+
+			/* update icon cache - shouldn't really matter if this fails */
+			update_icon_cache = g_strdup_printf ("gtk-update-icon-cache %s", target_dir);
+			g_spawn_command_line_async (update_icon_cache, NULL);
+
+			g_free (update_icon_cache);
+		}
 		/* Ask to apply theme (if we can) */
 		if (theme_type == THEME_GTK || theme_type == THEME_METACITY || theme_type == THEME_ICON)
 		{
