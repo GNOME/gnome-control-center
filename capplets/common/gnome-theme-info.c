@@ -272,7 +272,7 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
   meta_theme_info->gtk_theme_name = g_strdup (str);
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, GTK_COLOR_SCHEME_KEY);
-  if (str == NULL)
+  if (str == NULL || !strcmp (str, ""))
     scheme = gtkrc_get_color_scheme_for_theme (meta_theme_info->gtk_theme_name);
   else
     scheme = g_strdup (str);
