@@ -251,37 +251,31 @@ static void
 color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 {
   gchar *new_scheme;
-  GdkColor colors[7];
-  gchar *bg, *fg, *text, *base, *selected_fg, *selected_bg, *tooltip_fg, *tooltip_bg;
+  GdkColor colors[NUM_SYMBOLIC_COLORS];
+  gchar *str[NUM_SYMBOLIC_COLORS + 1];
+  const gchar *widgets[NUM_SYMBOLIC_COLORS] = {
+      "fg_colorbutton", "bg_colorbutton",
+      "text_colorbutton", "base_colorbutton",
+      "selected_fg_colorbutton", "selected_bg_colorbutton",
+      "tooltip_fg_colorbutton", "tooltip_bg_colorbutton" };
+  const gchar *labels[NUM_SYMBOLIC_COLORS] = {
+      "fg_color", "bg_color",
+      "text_color", "base_color",
+      "selected_fg_color", "selected_bg_color",
+      "tooltip_fg_color", "tooltip_bg_color" };
+  gint i;
   GtkWidget *widget;
 
-  widget = glade_xml_get_widget (data->xml, "fg_colorbutton");
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[0]);
-  widget = glade_xml_get_widget (data->xml, "bg_colorbutton");
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[1]);
-  widget = glade_xml_get_widget (data->xml, "text_colorbutton");
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[2]);
-  widget = glade_xml_get_widget (data->xml, "base_colorbutton");
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[3]);
-  widget = glade_xml_get_widget (data->xml, "selected_fg_colorbutton");
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[4]);
-  widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
-  widget = glade_xml_get_widget (data->xml, "tooltip_fg_colorbutton");
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
-  widget = glade_xml_get_widget (data->xml, "tooltip_fg_colorbutton");
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
+  for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
+    widget = glade_xml_get_widget (data->xml, widgets[i]);
+    gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[i]);
 
-  fg = g_strdup_printf ("fg_color:#%04x%04x%04x\n", colors[0].red, colors[0].green, colors[0].blue);
-  bg = g_strdup_printf ("bg_color:#%04x%04x%04x\n", colors[1].red, colors[1].green, colors[1].blue);
-  text = g_strdup_printf ("text_color:#%04x%04x%04x\n", colors[2].red, colors[2].green, colors[2].blue);
-  base = g_strdup_printf ("base_color:#%04x%04x%04x\n", colors[3].red, colors[3].green, colors[3].blue);
-  selected_fg = g_strdup_printf ("selected_fg_color:#%04x%04x%04x\n", colors[4].red, colors[4].green, colors[4].blue);
-  selected_bg = g_strdup_printf ("selected_bg_color:#%04x%04x%04x\n", colors[5].red, colors[5].green, colors[5].blue);
-  tooltip_fg = g_strdup_printf ("tooltip_fg_color:#%04x%04x%04x\n", colors[6].red, colors[6].green, colors[6].blue);
-  tooltip_bg = g_strdup_printf ("tooltip_bg_color:#%04x%04x%04x", colors[7].red, colors[7].green, colors[7].blue);
+    str[i] = g_strdup_printf ("%s:#%04x%04x%04x",
+             labels[i], colors[i].red, colors[i].green, colors[i].blue);
+  }
+  str[NUM_SYMBOLIC_COLORS] = NULL;
 
-  new_scheme = g_strconcat (fg, bg, text, base, selected_fg, selected_bg, tooltip_fg, tooltip_bg, NULL);
+  new_scheme = g_strjoinv ("\n", str);
 
   /* Currently we assume this has only been called when one of the colours has
    * actually changed, so we don't check the original key first */
@@ -289,14 +283,8 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), TRUE);
 
-  g_free (fg);
-  g_free (bg);
-  g_free (text);
-  g_free (base);
-  g_free (selected_fg);
-  g_free (selected_bg);
-  g_free (tooltip_fg);
-  g_free (tooltip_bg);
+  for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i)
+    g_free (str[i]);
   g_free (new_scheme);
 }
 

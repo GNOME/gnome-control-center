@@ -105,6 +105,18 @@ struct _GnomeThemeMetaInfo
   gchar *background_image;
 };
 
+enum {
+  COLOR_FG,
+  COLOR_BG,
+  COLOR_TEXT,
+  COLOR_BASE,
+  COLOR_SELECTED_FG,
+  COLOR_SELECTED_BG,
+  COLOR_TOOLTIP_FG,
+  COLOR_TOOLTIP_BG,
+  NUM_SYMBOLIC_COLORS
+};
+
 typedef void (* ThemeChangedCallback) (GnomeThemeType       type,
 				       gpointer             theme,
 				       GnomeThemeChangeType change_type,

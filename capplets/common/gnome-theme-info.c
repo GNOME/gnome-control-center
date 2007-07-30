@@ -1852,16 +1852,14 @@ gnome_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
   if (!scheme || !strcmp (scheme, ""))
     return FALSE;
 
+  /* initialise the array */
+  for (i = 0; i < NUM_SYMBOLIC_COLORS; i++)
+    gdk_color_parse ("#000", &colors[i]);
+
   /* The color scheme string consists of name:color pairs, seperated by
    * newlines, so first we split the string up by new line */
 
   color_scheme_strings = g_strsplit (scheme, "\n", 0);
-
-  /* initialise the array */
-  for (i = 0; i < 8; i++)
-  {
-    gdk_color_parse ("#000", &colors[i]);
-  }
 
   /* loop through the name:color pairs, and save the color if we recognise the name */
   i = 0;
@@ -1873,21 +1871,21 @@ gnome_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
       g_strstrip (color_scheme_pair[1]);
 
       if (!strcmp ("fg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &colors[0]);
+        gdk_color_parse (color_scheme_pair[1], &colors[COLOR_FG]);
       else if (!strcmp ("bg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &colors[1]);
+        gdk_color_parse (color_scheme_pair[1], &colors[COLOR_BG]);
       else if (!strcmp ("text_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &colors[2]);
+        gdk_color_parse (color_scheme_pair[1], &colors[COLOR_TEXT]);
       else if (!strcmp ("base_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &colors[3]);
+        gdk_color_parse (color_scheme_pair[1], &colors[COLOR_BASE]);
       else if (!strcmp ("selected_fg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &colors[4]);
+        gdk_color_parse (color_scheme_pair[1], &colors[COLOR_SELECTED_FG]);
       else if (!strcmp ("selected_bg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &colors[5]);
+        gdk_color_parse (color_scheme_pair[1], &colors[COLOR_SELECTED_BG]);
       else if (!strcmp ("tooltip_fg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &colors[6]);
+        gdk_color_parse (color_scheme_pair[1], &colors[COLOR_TOOLTIP_FG]);
       else if (!strcmp ("tooltip_bg_color", color_scheme_pair[0]))
-        gdk_color_parse (color_scheme_pair[1], &colors[7]);
+        gdk_color_parse (color_scheme_pair[1], &colors[COLOR_TOOLTIP_BG]);
     }
 
     g_strfreev (color_scheme_pair);
@@ -1901,14 +1899,14 @@ gnome_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
 gboolean
 gnome_theme_color_scheme_equal (const gchar *s1, const gchar *s2)
 {
-  GdkColor c1[8], c2[8];
+  GdkColor c1[NUM_SYMBOLIC_COLORS], c2[NUM_SYMBOLIC_COLORS];
   int i;
 
   if (!gnome_theme_color_scheme_parse (s1, c1) ||
       !gnome_theme_color_scheme_parse (s2, c2))
     return FALSE;
 
-  for (i = 0; i < 8; ++i) {
+  for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
     if (!gdk_color_equal (&c1[i], &c2[i]))
       return FALSE;
   }
