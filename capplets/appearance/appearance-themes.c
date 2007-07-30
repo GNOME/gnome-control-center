@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2007 The GNOME Foundation
  * Written by Thomas Wood <thos@gnome.org>
+ *            Jens Granseuer <jensgr@gmx.net>
  * All Rights Reserved
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,6 +27,7 @@
 #include "theme-util.h"
 #include "gtkrc-utils.h"
 #include "gedit-message-area.h"
+#include "wp-cellrenderer.h"
 
 #include <glib/gi18n.h>
 #include <libwindow-settings/gnome-wm-manager.h>
@@ -710,6 +712,7 @@ themes_init (AppearanceData *data)
   GtkTreeModel *sort_model;
   GnomeThemeMetaInfo *meta_theme = NULL;
   GtkIconView *icon_view;
+  GtkCellRenderer *renderer;
 
   /* initialise some stuff */
   gnome_theme_init (NULL);
@@ -771,13 +774,27 @@ themes_init (AppearanceData *data)
 
   icon_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
 
+  renderer = cell_renderer_wallpaper_new ();
+  g_object_set (renderer, "xpad", 5, "ypad", 5,
+                          "xalign", 0.5, "yalign", 1.0, NULL);
+  gtk_cell_layout_pack_end (GTK_CELL_LAYOUT (icon_view), renderer, FALSE);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (icon_view), renderer,
+                                  "pixbuf", COL_THUMBNAIL, NULL);
+
+  renderer = gtk_cell_renderer_text_new ();
+  g_object_set (renderer, "alignment", PANGO_ALIGN_CENTER,
+			  "wrap-mode", PANGO_WRAP_WORD_CHAR,
+			  "xalign", 0.5, "yalign", 0.0, NULL);
+  gtk_cell_layout_pack_end (GTK_CELL_LAYOUT (icon_view), renderer, FALSE);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (icon_view), renderer,
+                                  "markup", COL_LABEL, NULL);
+
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
-  gtk_icon_view_set_model (icon_view, GTK_TREE_MODEL (sort_model));
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model), COL_LABEL, theme_store_sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), COL_LABEL, GTK_SORT_ASCENDING);
+  gtk_icon_view_set_model (icon_view, GTK_TREE_MODEL (sort_model));
 
   g_signal_connect (icon_view, "selection-changed", (GCallback) theme_selection_changed_cb, data);
-
   theme_select_name (icon_view, meta_theme->name);
 
   w = glade_xml_get_widget (data->xml, "theme_install");
