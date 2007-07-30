@@ -1,0 +1,164 @@
+2007-06-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* display-capplet.png: remove
+
+	* Makefile.am:
+	* display-properties.desktop.in.in:
+	* icons/16x16/gnome-display-properties.png:
+	* icons/22x22/gnome-display-properties.png:
+	* icons/24x24/gnome-display-properties.png:
+	* icons/32x32/gnome-display-properties.png:
+	* icons/scalable/gnome-display-properties.svg:
+	* main.c: (create_dialog): add and use new icon by Jakub Steiner
+	<jimmac@ximian.com>. Closes bug #375230.
+
+2007-06-26  Michael Terry  <mike@mterry.name>
+
+	* Makefile.am, main.c, display-properties.desktop.in.in: Use
+	icon theme instead of global pixmaps dir for app icon. Closes
+	bug #450777.
+
+2007-06-16  Jens Granseuer  <jensgr@gmx.net>
+
+	* main.c: (run_revert_dialog), (cb_dialog_response): don't make the
+	revert dialog transient since it's actually never on screen at the
+	same time as the main dialog. Closes bug #448160.
+
+2007-05-22  Jens Granseuer  <jensgr@gmx.net>
+
+	* main.c: (get_current_resolution): surivive XRandR returning weird
+	results for some dual-screen setups. This fixes the crash in bug
+	#356520, but a proper fix for handling this situation is still
+	necessary, unless this is just a driver/X bug...
+
+2007-04-27  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* display-properties.desktop.in.in: renamed Bugzilla product.
+
+2007-03-23  Jens Granseuer  <jensgr@gmx.net>
+
+	* main.c: (show_resolution): add 720x576 (PAL) to the list of valid
+	resolutions. Closes bug #325548.
+
+2007-03-21  Jens Granseuer  <jensgr@gmx.net>
+
+	* main.c: uppercase the rotation options. Closes bug #410959.
+
+2007-03-01  Jens Granseuer  <jensgr@gmx.net>
+
+	* main.c: (create_dialog): fix double-free reported by Sandino
+	Flores-Moreno. Closes bug #413352.
+
+2007-01-29  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* main.c: Mark a struct static.
+
+2006-12-08  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* main.c: (wrap_in_label), (create_dialog):
+	Don't leak the resolution. Pass NULL to gtk_label_new
+	to do less work. Bug #376949.
+
+2006-09-15  Brian Cameron <brian.cameron@sun.com>
+
+	Fixes #356075
+
+	* main.c (apply_config, revert_config): make sure we never pass
+	negative values for the rates.
+
+2006-08-18  Rodrigo Moya <rodrigo@novell.com>
+
+	* main.c (create_dialog): free 'resolution' string after using it,
+	not before. Found by Kjartan Maraas  <kmaraas@gnome.org>.
+
+2006-08-07  Rodrigo Moya <rodrigo@novell.com>
+
+	Fixes #348838
+
+	* display-properties.desktop.in.in: Fixed GNOME Bugzilla fields.
+
+2006-08-07  Sebastien Bacher  <seb128@debian.org>
+
+	* main.c: (create_rotate_menu): fix build with gcc-2.95,
+	  patch by Jens Granseuer <jensgr@gmx.net> (Closes: #347611)
+
+2005-11-14  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* main.c: Mark some functions static.
+
+2005-07-20  Rodrigo Moya <rodrigo@novell.com>
+
+	* main.c (get_screensaver_command): new function to get the correct
+	screensaver command to run.
+	(apply_config, revert_config): use gnome-screensaver if available.
+
+2005-02-08  Sebastien Bacher  <seb128@debian.org>
+
+	* main.c: (wrap_in_label):
+        patch by Kjartan Maraas <kmaraas@gnome.org>, some code cleanups
+        (Closes: #166267).
+
+2004-11-09  Mark McLoughlin  <mark@skynet.ie>
+
+	* Makefile.am: install .desktop file in $(datadir)/applications.
+	
+	* display-properties.desktop.in: add OnlyShowIn=GNOME;
+
+2004-10-14  Jody Goldberg <jody@gnome.org>
+
+	* Release 2.8.1
+
+2004-06-10  David Sedeño <david@alderia.com>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=136483
+	* main.c (run_revert_dialog, cb_dialog_response) : Hide 
+	the configuration dialog and center the confirmation one.
+
+2004-06-09  David Sedeño <david@alderia.com>
+ 
+	http://bugzilla.gnome.org/show_bug.cgi?id=137579
+	* main.c (main) : Put title to the confirmation dialog box
+
+2004-05-11  Jody Goldberg <jody@gnome.org>
+
+	From ruben@lambda1.be
+	https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=140047
+	* main.c (main) : s/XServer/X Server/
+	and a patch to use g_signal_connect
+
+2004-04-15  Jody Goldberg <jody@gnome.org>
+
+	* Release 2.6.1
+
+2004-04-15  Jody Goldberg <jody@gnome.org>
+
+	For Alex Larsson :
+	https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=119494
+	* main.c : fix reverting size change
+
+2004-04-01  Jody Goldberg <jody@gnome.org>
+
+	* Release 2.6.0.3
+
+2004-03-30  Jody Goldberg <jody@gnome.org>
+
+	* Release 2.6.0.1
+
+2004-03-23  Jody Goldberg <jody@gnome.org>
+
+	* Release 2.6.0
+
+2004-03-11  Jody Goldberg <jody@gnome.org>
+
+	* Release 2.5.4
+
+2004-03-02  Fernando Herrera  <fherrera@onirica.com>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=125315
+	* main.c: (cb_dialog_response): Point help to the right section
+
+2004-03-02  Jody Goldberg <jody@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=135908
+	* main.c (apply_config) : restart the screensaver
+

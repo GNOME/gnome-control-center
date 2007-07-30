@@ -1,0 +1,1066 @@
+2007-07-30  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (color_button_clicked_cb): fix cut'n'paste errors
+	for the tooltip colors and use new color enum
+
+	* data/appearance.glade: repair the mess glade3 made of the file
+
+2007-07-30  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: (color_button_clicked_cb): Add missing '\n'.
+
+2007-07-30  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init):
+	* data/appearance.glade: use our custom cell renderer for metathemes,
+	too, so the previews don't get shaded (bug #461198)
+
+2007-07-30  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: (update_color_buttons_from_string),
+	(check_color_schemes_enabled), (color_button_clicked_cb),
+	(style_init):
+	* data/appearance.glade:
+
+	Add tooltip foreground and background colours to the list of recognised
+	symbolic colours.
+
+
+2007-07-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-main.c: (main): default to showing the background tab
+	if wallpapers were given on the command line
+
+2007-07-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* data/gnome-appearance-properties.desktop.in.in: add %F to the exec
+	line so external programs like epiphany can set the background (bug
+	#456337)
+
+2007-07-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* data/appearance.glade:
+	* appearance-themes.c: (theme_custom_cb):
+	* theme-save.c: (save_dialog_response): only create the custom theme
+	entry when changes are made, and delete it when the theme is saved.
+	These changes obsolete the requirement for a modal details window.
+
+2007-07-29  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.h:
+	* appearance-desktop.c: (desktop_init):
+	Don't store the cell renderer in AppearanceData, it is only needed by
+	desktop_init().
+
+2007-07-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (theme_message_area_update), (themes_init):
+	cope with unset GConf keys, and group GConf notifications
+
+2007-07-29  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-themes.c: (theme_message_area_response_cb),
+	(theme_message_area_update), (theme_selection_changed_cb),
+	(background_or_font_changed), (themes_init):
+	_Really_ only show background/font suggestions if they haven't
+	already been applied.
+
+2007-07-29  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-themes.c: (theme_message_area_response_cb),
+	(theme_message_area_update), (theme_selection_changed_cb):
+	Only show background/font suggestions if they haven't already
+	been applied.
+
+2007-07-29  Denis Washington  <denisw@svn.gnome.org>
+
+	* data/appearance.glade:
+	* appearance-themes.c: (theme_message_area_response_cb),
+	(theme_message_area_update), (theme_selection_changed_cb),
+	(themes_init), (themes_shutdown):
+	* gedit-message-area.[ch]:
+	* theme-util.h:
+	Added controls for applying suggested backgrounds and/or fonts from
+	metathemes. Copied over some code from gedit for the message area
+	(GeditMessageArea).
+
+	* Makefile.am:
+	Added gedit-message-area.[ch].
+
+2007-07-29  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: (cursor_theme_sort_func), (prepare_list),
+	(style_init): Prevent some memory leaks
+
+2007-07-29  Thomas Wood  <thos@gnome.org>
+
+	* theme-installer.c: (file_theme_type), (gnome_theme_install_real):
+	- Fix theme installation (free called before last last use of a string)
+	- Update icon cache when installing icon themes (closes bug 355486)
+
+2007-07-29  Thomas Wood  <thos@gnome.org>
+
+	* data/appearance.glade: Fix mnemonics and Customize Theme window title.
+	Closes bug 461255.
+
+2007-07-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_view_tooltip_cb), (desktop_init):
+	* data/appearance.glade: get rid of a number of unnecessary casts and the
+	gtk version checks since we now depend on 2.11.6 unconditionally
+
+2007-07-28  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-style.c: (prepare_list):
+	Show readable_name in cursor theme list instead of name.
+
+2007-07-28  Thomas Wood  <thos@gnome.org>
+
+	* wp-cellrenderer.c: (cell_renderer_wallpaper_render): Don't draw the
+	selection indicator if width is -1
+
+2007-07-28  Thomas Wood  <thos@gnome.org>
+
+	* wp-cellrenderer.c: (cell_renderer_wallpaper_render): c89 fix and add 1px
+	border between selection indicator and contents
+
+2007-07-28  Thomas Wood  <thos@gnome.org>
+
+	* wp-cellrenderer.c: (cell_renderer_wallpaper_render): Use cairo to draw the
+	cell renderer selection
+
+2007-07-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* wp-cellrenderer.c: (cell_renderer_wallpaper_render):
+	* wp-cellrenderer.h: fix cell renderer state logic to not be always on
+
+2007-07-28  Thomas Wood  <thos@gnome.org>
+
+	* theme-util.c: Add missing include
+
+2007-07-27  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init): constify drag'n'drop data, remove
+	unused variable, use G_N_ELEMENTS where applicable
+
+2007-07-27  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init, theme_postinit): remove workarounds
+	for initialization problems in early versions of the capplet
+
+2007-07-27  Denis Washington  <dwashington@gmx.net>
+
+	* appearanc-themes.c: (appearance_window_drag_data_received_cb),
+	(themes_init):
+	Implement drag-and drop theme installation.
+
+2007-07-27  Denis Washington  <dwashington@gmx.net>
+
+	* data/cursor-*.pcf:
+	* data/mouse-cursor-*.png:
+	Cursor fonts and thumbnails moved from gnome-mouse-properties.
+
+	* data/Makefile.am:
+	Install the new files.
+
+2007-07-26  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_color_buttons_from_string):
+	* appearance-themes.c: (theme_load_from_gconf), (theme_is_equal):
+	* theme-util.c: (theme_find_in_model):
+	* theme-util.h: move some utility code over to common
+
+2007-07-26  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_color_buttons_from_settings),
+	(color_scheme_defaults_button_clicked_cb): really unset the gconf key
+	when reverting colors
+
+2007-07-26  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_color_buttons_from_string),
+	(update_color_buttons_from_settings):
+	* appearance-themes.c: (theme_is_equal):
+	* theme-util.c: (theme_parse_color_scheme),
+	(theme_color_scheme_equal):
+	* theme-util.h: make color scheme comparisons work much more reliably
+
+2007-07-26  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-wp-item.c: (gnome_wp_item_update_description): add a comment
+	for translators (bug #460506)
+
+2007-07-26  Denis Washington <denisw@svn.gnome.org>
+
+	* data/appearance.glade:
+	Fixed a bug introduced in my last commit which caused to make the
+	button box appear above the cursors list in the theme details window.
+
+	* appearance-style.c: (cursor_theme_sort_func), (prepare_list):
+	Make "Default Pointer" always appear as first item in the list.
+
+2007-07-26  Denis Washington <denisw@svn.gnome.org>
+
+	* data/appearance.glade:
+	* appearance-style.c: 
+	* appearance-themes.c: (theme_load_from_gconf), (cursor_theme_changed),
+	(prepare_list), (style_init):
+	* theme-save.c: (write_theme_to_disk):
+	* theme-util.h:
+	Re-add basic support for cursor themes for X servers without the Xcursor
+	extension, like the one on Solaris.
+
+2007-07-25  Thomas Wood  <thos@gnome.org>
+
+	Patch by:  Dennis Cranston <dennis_cranston@yahoo.com>
+
+	* gnome-wp-item.c: (gnome_wp_item_update_description):Simplify tooltip
+	descriptions.  Change "Location" to "Folder".  Do not overuse bold text.
+	Closes bug 460111.
+
+
+2007-07-25  Denis Washington <denisw@svn.gnome.org>
+
+	* appearance-style.c: (prepare_list):
+	* appearance-themes.c: (theme_load_from_gconf):
+	* theme-save.c: (write_theme_to_disk):
+	Implement saving of the cursor theme name in metathemes, and add a
+	"Default Pointer" option to the cursor theme list in Theme Details.
+
+2007-07-24  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (theme_load_from_gconf): when reading current
+	settings from gconf, get the color scheme from the gtk theme if necessary
+	to allow matching against themes retrieved via gnome-theme-info
+
+2007-07-24  Thomas Wood  <thos@gnome.org>
+
+	* data/Makefile.am: Add makefile
+
+2007-07-24  Thomas Wood  <thos@gnome.org>
+
+	* data: Add a data sub-directory for non-code items
+
+2007-07-24  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_color_buttons_from_settings),
+	(prepare_list), (style_init): improve color scheme matching; simplify
+	code; don't possibly unref cursor thumbs twice; remove redundant color
+	scheme initialization
+	* appearance.glade: make theme details window modal to prevent the
+	user from editing non-custom themes
+
+2007-07-23  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (desktop_init): bump all tooltips code to gtk
+	2.11.6
+
+2007-07-23  Matthias Clasen  <mclasen@redhat.com>
+
+	* appearance-desktop.c: Use new GTK+ convenience API for
+	icon view tooltips.  (#455985)
+
+2007-07-12  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_load_stuffs), (desktop_init),
+	(desktop_shutdown):
+	* appearance-desktop.h:
+	* appearance-main.c: (main):
+	* appearance.h: add option to add wallpapers via the command line
+	(closes bug #456337)
+
+2007-07-08  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (cursor_size_scale_value_changed_cb): plug yet
+	another leak
+
+2007-07-08  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade: change the button order in themes tab.
+	* appearance-style.c: add an icon to Customize button.
+
+2007-07-08  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_view_tooltip_cb): fix leaks
+
+2007-07-05  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init):
+	* appearance.glade: ellipsize the "Save As" button
+
+2007-07-05  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_color_buttons_from_string): don't allocate
+	colors in the colormap
+	(update_cursor_size_scale), (cursor_size_scale_value_changed_cb): don't
+	crash if we have nothing but the default cursor theme
+
+2007-07-05  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade: set an explicit item width for the metatheme icon
+	view so overly long names don't needlessly widen all items' width. Such
+	names are wrapped now.
+
+2007-07-05  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade:
+	* appearance-style.c: (cursor_size_scale_value_changed_cb), 
+	(cursor_theme_changed), (prepare_list), (update_cursor_size_scale):
+	* theme-util.h:
+	Add cursor themes support.
+
+2007-06-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance.glade: add explicit width_request to our icon views so we
+	can use GTK_POLICY_NEVER for horizontal scrollbars and still properly
+	resize the window (part of bug #451585)
+
+2007-06-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init):
+	* appearance.glade: move "selection_mode" to glade file and remove
+	hard-coded item width
+
+2007-06-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (theme_store_sort_func), (themes_init): fix leaks,
+	use g_list_foreach instead of open-coded loop
+
+2007-06-27  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-themes.c: (theme_list_sort_func), (themes_init):
+	Load the metatheme thumbnails in the order they are in the list.
+
+2007-06-27  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.h:
+	* appearance-themes.c: (theme_list_sort_func, themes_init):
+	Make the Custom theme always the first in the list and make it's label bold
+	to diffentiate it from the other themes.
+
+2007-06-26  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (theme_is_equal): ... and actually accept an empty
+	color scheme setting as valid
+
+2007-06-26  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (prepare_list):
+	no need to reassign thumbnails inside the loop
+
+	* appearance-themes.c: (theme_load_from_gconf), (theme_is_equal):
+	consider NULL and "" equal for color schemes; also reshuffle
+	functions a bit and fix the include list
+
+2007-06-26  Denis Washington  <denisw@svn.gnome.org>
+
+	* gtk-theme-thumbnailing.png:
+	* icon-theme-thumbnailing.png:
+	* window-theme-thumbnailing.png:
+	Placeholder thumbnails for gtk+, metacity and icon themes.
+
+	* Makefile.am: Add new files.
+
+	* appearance.h:
+	* appearance-style.h:
+	* appearance-style.c: (style_init), (style_shutdown), (prepare_list):
+	Use the new placeholder thumbnails for the details window's theme lists.
+
+	* appearance-main.c: Call new style_shutdown ().
+
+2007-06-25  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade: Fixed resize problems.
+
+2007-06-25  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (prepare_list): don't try to use uninitialized
+	GdkPixbuf
+
+2007-06-25  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-themes.c:
+	Adjusted for the API changes in theme-thumbnail.c. Thumbnail requestes are
+	now directly queued by generate_*_async(), so do not maintain an own queue
+	anymore.
+
+	* appearance-style.c:
+	Use the new asynchronous thumbnail generation functions, and replace all
+	occurrences of "metacity_themes_list" with the correct "window_themes_list".
+
+	* appearance.h:
+	Remove "theme_queue", it is not needed anymore.
+
+2007-06-24  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* appearance-themes.c: (theme_selection_changed_cb),
+	(theme_save_cb), (themes_init), (themes_shutdown):
+	* appearance.glade:
+	* appearance.h:
+	* theme-save.c:
+	* theme-save.h:
+	* theme-util.h: implement theme saving
+
+2007-06-23  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: rearranged functions (no code changes)
+
+2007-06-23  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-util.c: (theme_delete): use STOCK_DELETE instead of STOCK_OK in
+	the confirmation dialog
+
+2007-06-23  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (add_to_treeview), (remove_from_treeview),
+	(update_in_treeview), (changed_on_disk_cb), (style_init):
+	* appearance-themes.c: (theme_select_name),
+	(theme_set_custom_from_theme), (theme_changed_on_disk_cb),
+	(theme_thumbnail_done_cb):
+	* theme-installer.c: (gnome_theme_installer_run):
+	* theme-util.c: (theme_find_in_model):
+	* theme-util.h: listen to on-disk theme changes in the details tabs, too
+
+2007-06-22  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (gtk_theme_changed), (window_theme_changed),
+	(icon_theme_changed), (generic_theme_delete),
+	(gtk_theme_delete_cb), (window_theme_delete_cb),
+	(icon_theme_delete_cb), (style_init), (prepare_list),
+	(check_color_schemes_enabled): hook up the delete buttons
+
+2007-06-22  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade:
+	Tweak the metatheme icon view's margin and spacings to better fit to the
+	new thumbnails.
+
+	* theme-thumbnailing.png:
+	Modernized and brought to the size of the new metatheme thumbnails.
+ 
+2007-06-18  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-installer.c: (gnome_theme_install_real): fix compiler warning
+
+2007-06-18  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance.glade: remove install buttons from individual detail pages
+	and HIG-ify the "revert to defaults" label
+
+2007-06-18  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-installer.c: (file_theme_type): just check for configure
+	instead of configure.in since configure.ac is valid as well; we still
+	need a better way to identify engines...
+
+2007-06-18  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* appearance-main.c: added the names of the pages to the help strings
+	for --show-page argument.
+
+2007-06-17  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-main.c: (main):
+	* appearance.glade: add --show-page option to specify the page with
+	which to start
+
+2007-06-17  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-desktop.c: (desktop_init): (wp_view_tooltip_cb):
+	* gnome-wp-item.c: (gnome_wp_item_update_description):
+	Added metadata tooltips to the thumbnails in the Background tab.
+	Needs GTK+ 2.11 to compile (but is surrounded with GTK_CHECK_VERSION()
+	for compilation with older gtk+ versions).
+
+2007-06-17  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-style.c: (prepare_list):
+	Change the weight of the theme titles from bold to normal in the Theme
+	Details window's lists.
+
+2007-06-16  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* appearance-main.c: (init_appearance_data), (main):
+	* gnome-theme-installer.desktop.in.in: make gnome-theme-installer
+	work
+
+2007-06-16  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* appearance-style.c: (prepare_list):
+	* appearance-themes.c: (theme_install_cb), (theme_delete_cb),
+	(theme_details_changed_cb):
+	* theme-installer.c: (cleanup_tmp_dir), (file_theme_type),
+	(missing_utility_message_dialog), (transfer_done_tgz_tbz),
+	(transfer_done_archive), (gnome_theme_install_real),
+	(transfer_done_cb), (gnome_theme_install_from_uri),
+	(gnome_theme_installer_run):
+	* theme-installer.h: add initial support for installing themes,
+	includes support for packages containing more than one theme
+	(bug #409624)
+
+2007-06-15  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_props_load_wallpaper),
+	(wp_scale_type_changed), (wp_shade_type_changed):
+	* gnome-wp-utils.c: (gnome_wp_pixbuf_tile): be extra careful when
+	generating pixbufs (should mean we just get no thumbs instead of
+	assertion failures, bug #403160)
+
+2007-06-14  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* theme-util.c: (theme_delete), (theme_model_iter_last):
+	* theme-util.h: new files
+
+	* appearance.glade: default delete buttons to insensitive,
+	change label for "Custom" key, adjust column ids for icon view
+
+	* appearance-style.c: (style_init), (prepare_list),
+	(update_color_buttons_from_settings), (theme_name_changed),
+	(color_button_clicked_cb),
+	(color_scheme_defaults_button_clicked_cb):
+	* appearance-themes.c: (theme_get_selected_name),
+	(theme_get_selected), (theme_select_iter), (theme_select_name),
+	(theme_is_equal), (theme_set_custom_from_theme),
+	(theme_changed_on_disk_cb), (theme_custom_cb), (theme_delete_cb),
+	(theme_details_changed_cb), (theme_color_scheme_changed_cb),
+	(theme_gconf_changed), (theme_postinit), (themes_init),
+	(themes_shutdown):
+	* appearance.h: improvements all around the block (metatheme
+	deletion now working, and custom theme working much better)
+
+2007-06-09  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-style.c: (theme_name_changed):
+	Manually deal with gtk+ theme changes now that the theme thumbnailing
+	code uses the default GtkSettings again.
+
+2007-06-10  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (style_init), (check_color_schemes_enabled):
+	fix "reset to defaults" sensitivity for real
+	* appearance-themes.c: (theme_color_scheme_changed_cb),
+	(themes_init): listen to colour scheme changes as well
+
+2007-06-10  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (check_color_schemes_enabled): disable the "reset
+	to defaults" button if the theme doesn't support custom colours
+
+2007-06-10  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (check_color_schemes_enabled): we don't need the
+	engine stuff, so don't retrieve it in the first place
+
+2007-06-10  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-main.c: (init_appearance_data), (main):
+	* appearance.h: fix passing and parsing of command line args
+
+	* appearance-style.c: (update_color_buttons_from_settings),
+	(check_color_schemes_enabled): fix leaks
+
+	* appearance.glade: revert response_id sillyness from last commit
+
+2007-06-09  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade:
+	* appearance-style.c:
+	Add all missing color schemes options from gnome-theme-manager, including
+	a Reset To Defaults button.
+
+2007-06-07  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (is_locked_down),
+	(theme_changed_on_disk_cb), (theme_selection_changed_cb),
+	(themes_init): add initial lockdown bits from theme-manager,
+	delete button sensitivity updates, and preliminary support
+	for reacting to metatheme changes
+
+2007-06-06  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (theme_thumbnail_generate),
+	(theme_queue_for_thumbnail), (theme_thumbnail_done_cb): update
+	for changes in thumbnailer API
+
+2007-06-06  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (style_response_cb), (style_init): don't
+	destroy the window on "delete-event"
+
+	* appearance-themes.c: (theme_load_from_gconf),
+	(theme_thumbnail_generate), (theme_queue_for_thumbnail),
+	(theme_get_selected), (theme_set_custom_from_selected),
+	(theme_remove_custom), (theme_thumbnail_done_cb),
+	(theme_selection_changed_cb), (theme_custom_cb),
+	(theme_details_changed_cb), (themes_init): hook up more of the
+	customization functionality; don't unref generated thumbnails
+	because they are still held in a cache by the thumbnailer
+
+2007-06-05  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* gnome-theme-package.xml.in: move theme package mime type over
+	from the theme-manager (closes bug #444336)
+
+2007-06-04  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (desktop_init), (desktop_shutdown):
+	* appearance-desktop.h:
+	* appearance-font.c: (font_init), (font_shutdown):
+	* appearance-font.h:
+	* appearance-main.c: (main_window_response), (main):
+	* appearance-style.c: (style_init), (conv_to_widget_cb),
+	(conv_from_widget_cb):
+	* appearance-style.h:
+	* appearance-themes.c:
+	* appearance-themes.h:
+	* appearance.h: major resource handling fixup and initial bits
+	for handling custom metathemes
+
+2007-05-30  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance.glade: fix duplicate mnemonic
+
+2007-05-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (style_init), (find_string_in_model),
+	(conv_to_widget_cb), (update_color_buttons_from_string): minor
+	code simplification/cleanup
+
+2007-05-25  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (prepare_list): don't leak thumbnails
+
+2007-05-25  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (prepare_list), (conv_to_widget_cb),
+	(conv_from_widget_cb): properly distinguish between theme name and
+	theme label (currently only relevant for icon themes)
+
+2007-05-25  Denis Washington  <denisw@svn.gnome.org>
+
+	* theme-thumbnailing.png:
+	Add theme-thumbnailing.png to Makefile.am.
+
+2007-05-25  Denis Washington  <denisw@svn.gnome.org>
+
+	* theme-thumbnailing.png:
+	Added as it is used by appearance-themes.c
+
+2007-05-25  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade: Fix button order in theme details dialog again.
+
+2007-05-25  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade:
+	* appearance-style.c:
+	Revert the organization of the theme details dialog to the old (2.18)
+	style again, but now with thumbnails for gtk+, metacity and icon themes.
+
+2007-05-16  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (prepare_combo), (find_string_in_model),
+	(conv_to_widget_cb), (conv_from_widget_cb),
+	(update_color_buttons_from_string), (color_button_clicked_cb):
+	minor cleanup and getting rid of unnecessary casts
+
+2007-05-16  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance-desktop.c: (desktop_init): Minor code cleanup.
+
+2007-05-16  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance-desktop.c: (desktop_init): re-enable drag-and-drop for the
+	wallpaper list.
+
+2007-05-14  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance.glade: fix button order, remove redundant receives_default,
+	don't mark stock labels translatable, and other minor cleanups
+
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: (prepare_combo): Connect up colour scheme monitor. Hide
+	window on delete, rather than destroy. Add an item to the theme lists if the
+	current theme is not present already.
+	* appearance-themes.c: (theme_custom_cb): Add missing #include. Moved some
+	code to appearance-style.c
+
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: (prepare_combo): Sort the items in the theme lists
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (theme_thumbnail_func): unref the thumbnail when
+	we're done with it
+
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance-themes.c: (theme_thumbnail_func): Don't free data we don't own.
+	Prevents crash when changing themes.
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init), (theme_thumbnail_generate),
+	(theme_thumbnail_func): fix asynchronous thumbnail generation
+
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: Add colour scheme functions
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance.glade: fix duplicate mnemonic
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init): refix button name, too
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init): fix gcc 2 build again (bad thos)
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (appearance_window_response):
+	* appearance.glade: use predefined GTK constants for reponse ids
+
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance-themes.c: (themes_init), (theme_changed_func): Use asynchronous
+	methods to generate thumbnails.
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-font.c: (cb_details_response), (cb_show_details):
+	now we parse the entire glade file at startup, there's no need to
+	reparse it for the font details dialog
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init): update button name, declare
+	variables at beginning of block
+	* appearance.glade: fix button group assignment (again)
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-wp-item.c: (gnome_wp_item_free): don't leak the WPItems
+
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance-themes.c: (themes_init), (theme_changed_func),
+	(theme_selection_changed_cb), (theme_custom_cb):
+	- Sort metathemes icon view
+	- Apply theme on selection change
+	- Use theme name rather than display name to apply theme
+
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance-main.c: (init_appearance_data):
+	* appearance-themes.c: (themes_init), (theme_activated_cb):
+	* appearance.glade:
+
+	Move style tab into new window
+
+2007-05-13  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance.glade: fixed a small mistake in Jens' last commit.
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance.glade: fix font rendering button group assignment,
+	rename Preferences tab to Interface
+
+2007-05-13  Denis Washington  <denisw@svn.nome.org>
+
+	* gnome-wp-item.c: Made thumbnails in Desktop tab a bit smaller.
+
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance.glade: Change "Desktop" tab label to "Background"
+
+2007-05-12  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance-desktop.c: Changed the icon view's selection mode to
+	GTK_SELECTION_BROWSE, fixed scrolling to the currently active
+	background after the icon view is realized, and two other minor
+	fixes.
+
+2007-05-12  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance-desktop.c: (wp_remove_wallpaper):
+	gtk_icon_view_set_cursor() => gtk_icon_view_select_path()
+
+2007-05-12  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance.glade:
+	* appearance-desktop.c: (wp_tree_delete_event):
+	Fix for my last commit so there is no double free when the Help button has
+	been clicked.
+
+2007-05-12  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_scale_type_changed),
+	(wp_color_changed), (wp_props_wp_set), (wp_props_wp_selected),
+	(wp_load_stuffs): fix secondary color picker being ignored and initial
+	dialog state when no wallpaper is selected
+
+2007-05-12  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (get_selected_item),
+	(wp_tree_delete_event), (wp_update_preview), (desktop_init):
+	* appearance.glade: move some strings to glade file, don't leak the
+	file selector, plus a few minor beautifications
+
+2007-05-11  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance-desktop.c: (desktop_init):
+	Fix the background list not being saved when closing the capplet window.
+
+2007-05-10  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance.h:
+	* appearance-desktop.c:
+	* appearance.glade:
+	* gnome-wp-item.c:
+	* Makefile.am:
+	* wp-cellrenderer.[ch]:
+	Replace the background treeview with an icon view that only shows the
+	thumbnails. Tooltips are to be done.
+
+2007-05-09  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (themes_init):
+	* appearance.glade: change Open button label to Install...
+
+2007-05-09  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: make sure that appearance.h (and thereby config.h)
+	is included first; constify strings
+
+	* gnome-wp-xml.c: (gnome_wp_xml_load_xml): fix leak
+
+2007-05-08  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance.glade:
+	Set mnemonic widgets for the labels in the Desktop tab.
+
+2007-05-07  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: (conv_to_widget_cb), (prepare_combo): Remove some
+	unnecessary code.
+
+2007-05-07  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: (prepare_combo): Fix icon theme combo box
+
+2007-05-07  Thomas Wood  <thos@gnome.org>
+
+	* appearance-style.c: (prepare_combo): Use GConfPropertyEditor for theme
+	combo boxes
+
+2007-05-07  Thomas Wood  <thos@gnome.org>
+
+	* Makefile.am:
+	* appearance-main.c: (main):
+	* appearance-style.c:
+	* appearance-style.h:
+	- Add files for Style tab
+	- Implement changing gtk and metacity themes
+
+	* appearance.glade: Change "Themes" to "Theme" and name some widgets
+
+2007-05-07  Denis Washington  <denisw@svn.nome.org>
+
+	* appearance.glade:
+	* appearance-desktop.c: (desktop_init):
+	Changed "Add" button in Desktop tab to "Add...".
+
+2007-05-07  Thomas Wood  <thos@gnome.org>
+
+	* appearance-main.c: (main):
+	* appearance.glade:
+
+	- Change GtkWindow to GtkDialog
+	- Add Help and Close buttons
+	- Set theme list scrolling policy to automatic
+
+2007-05-07  Thomas Wood  <thos@gnome.org>
+
+	* appearance.glade: Add a "Style" tab for the theme detail options
+
+2007-05-07  Thomas Wood  <thos@gnome.org>
+
+	* Makefile.am: Add FONT_CAPPLET_CFLAGS to INCLUDES
+
+2007-05-06  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-main.c: (main): set application icon
+
+2007-05-06  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* gnome-appearance-properties.desktop.in.in: add a desktop file
+
+2007-05-06  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade: make the Add Wallpaper and Remove buttons in the
+	Desktop tab stock buttons.
+
+2007-05-04  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (desktop_init):
+	* appearance.glade: more HIG and consistency fixing
+
+2007-05-04  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (desktop_init):
+	* appearance.glade: fix string capitalization according to HIG
+
+2007-05-04  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade: Change tab order; Desktop now comes before Fonts.
+
+2007-05-04  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am:
+	* appearance-font.c:
+	* appearance-font.h:
+	* appearance-main.c: (init_appearance_data), (main):
+	* appearance.glade:
+	* appearance.h:
+	* subpixel-bgr.png:
+	* subpixel-rgb.png:
+	* subpixel-vbgr.png:
+	* subpixel-vrgb.png:
+
+	add implementation for fonts tab
+
+2007-05-04  Thomas Wood  <thos@gnome.org>
+
+	* appearance-desktop.c: (wp_add_images), (wp_dragged_image),
+	(desktop_init):
+	* appearance-main.c: (main):
+	* appearance-themes.c: (themes_init):
+	* appearance-ui.c: (set_toolbar_style), (set_have_icons),
+	(ui_init):
+	* appearance.h:
+	Remove WID() macro, which has an incompatible definition in capplet-utils.h
+
+2007-05-04  Thomas Wood  <thos@gnome.org>
+
+	* appearance-themes.c: (themes_init): Use readable name rather than file name
+	in themes list
+
+2007-05-03  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-desktop.c: (wp_tree_delete_event): Fixed a leak.
+
+2007-05-03  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.h:
+	* appearance-desktop.c:
+	Ported Jens Granseuer's patch for bug #332810 to the appearance capplet
+	and applied it.
+
+
+2007-05-02  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-ui.c: (toolbar_detachable_cb), (ui_init): use proper
+	GConf notification instead of hand-picking the correct signal for
+	detachable toolbar
+
+2007-05-02  Denis Washington  <denisw@svn.gnome.org>
+
+	* Makefile.am: fizz says: don't indent with spaces in Makefile.am.
+	* ChangeLog: I say: don't do so in ChangeLog either.
+
+2007-05-02  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-desktop.c: Added drag and drop, re-enabled the watch cursor
+	when adding images, and removed some commented out code.
+
+2007-05-02  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance-desktop.[ch]: Corrected copyright notice authors.
+
+2007-05-01  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade:
+	* appearance-desktop.c:
+	* appearance-desktop.h:
+	* appearance-main.h:
+	* Makefile.am:
+	* gnome-wp-*.[ch]:
+
+	Implement the the Desktop tab. Drag and drop still has to be done.
+
+2007-05-01  Thomas Wood  <thos@gnome.org>
+
+	* appearance.glade: Combine Themes and Appearance tabs
+
+2007-05-01  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-ui.c: (ui_init):
+	* appearance.glade: convert all instances of GtkOptionMenu to
+	GtkComboBox
+
+2007-05-01  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-main.c: (main):
+	* appearance-ui.c: (ui_init):
+	* appearance-ui.h:
+	* appearance.h: we don't need to unref the GConfPropertyEditors
+
+2007-05-01  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-main.c: (main):
+	* appearance-ui.c:
+	* appearance-ui.h:
+	* appearance.h:
+	* appearance.glade:
+
+	fill the Preferences tab with life
+
+2007-05-01  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-main.c: (init_appearance_data), (main):
+	* appearance.h:
+
+	include config.h before anything else and add a GConfClient
+	reference to the AppearanceData struct
+
+2007-04-30  Thomas Wood  <thos@gnome.org>
+
+	* appearance-main.c: (main):
+	* appearance.h:
+
+	Include config.h and add some comments.
+
+2007-04-30  Denis Washington  <denisw@svn.gnome.org>
+
+	* appearance.glade: replace occurrences of "colour" with "color".
+
+2007-04-30  Jens Granseuer  <jensgr@gmx.net>
+
+	* Makefile.am: use GNOMECC_GLADE_DIR like the other capplets
+	do
+	* appearance-main.c: (init), (main): move initialization to
+	a separate function, fix glade file location, leak less
+	memory, and init g_threads
+
+2007-04-30  Thomas Wood  <thos@gnome.org>
+
+	* appearance-main.c:
+	* appearance-themes.c:
+	* appearance-themes.h:
+	* appearance.h:
+
+	Add license headers
+

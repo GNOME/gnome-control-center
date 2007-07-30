@@ -1,0 +1,46 @@
+EXTRA_DIST = ChangeLog
+
+INCLUDES = \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
+	-DG_LOG_DOMAIN=\"capplet-common\"				\
+	-DINSTALL_PREFIX=\"$(prefix)\"					\
+	-I$(top_srcdir)							\
+	-I$(top_srcdir)/libbackground					\
+	-I$(top_srcdir)/libwindow-settings				\
+	@DBUS_CFLAGS@							\
+	@VFS_CAPPLET_CFLAGS@						\
+	@GNOME_DESKTOP_CFLAGS@						\
+	@METACITY_CFLAGS@
+
+
+noinst_LTLIBRARIES = libcommon.la
+
+libcommon_la_SOURCES = \
+	activate-settings-daemon.c	activate-settings-daemon.h	\
+	capplet-util.c			capplet-util.h			\
+	gconf-property-editor.c		gconf-property-editor.h		\
+	gconf-property-editor-marshal.c	gconf-property-editor-marshal.h \
+	file-transfer-dialog.c		file-transfer-dialog.h		\
+	gnome-theme-info.c		gnome-theme-info.h		\
+	wm-common.c			wm-common.h			\
+	capplet-stock-icons.c		capplet-stock-icons.h		\
+	theme-thumbnail.c		theme-thumbnail.h		\
+	gnome-theme-apply.c		gnome-theme-apply.h \
+	gtkrc-utils.c		gtkrc-utils.h
+
+libcommon_la_LIBADD = $(top_builddir)/libbackground/libbackground.la	\
+	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \
+	@METACITY_LIBS@							\
+	@DBUS_LIBS@							\
+	@GNOME_DESKTOP_LIBS@
+
+gnome_theme_test_SOURCES = \
+	gnome-theme-test.c
+
+gnome_theme_test_LDADD = 						\
+	libcommon.la							\
+	$(GNOMECC_CAPPLETS_LIBS)
+
+noinst_PROGRAMS = \
+	gnome-theme-test
