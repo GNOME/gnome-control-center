@@ -277,7 +277,7 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   text = g_strdup_printf ("text_color:#%04x%04x%04x\n", colors[2].red, colors[2].green, colors[2].blue);
   base = g_strdup_printf ("base_color:#%04x%04x%04x\n", colors[3].red, colors[3].green, colors[3].blue);
   selected_fg = g_strdup_printf ("selected_fg_color:#%04x%04x%04x\n", colors[4].red, colors[4].green, colors[4].blue);
-  selected_bg = g_strdup_printf ("selected_bg_color:#%04x%04x%04x", colors[5].red, colors[5].green, colors[5].blue);
+  selected_bg = g_strdup_printf ("selected_bg_color:#%04x%04x%04x\n", colors[5].red, colors[5].green, colors[5].blue);
   tooltip_fg = g_strdup_printf ("tooltip_fg_color:#%04x%04x%04x\n", colors[6].red, colors[6].green, colors[6].blue);
   tooltip_bg = g_strdup_printf ("tooltip_bg_color:#%04x%04x%04x", colors[7].red, colors[7].green, colors[7].blue);
 
