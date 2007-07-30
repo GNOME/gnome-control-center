@@ -1,3 +1,100 @@
+gnome-control-center 2.19.6
+
+about-me:
+- Add a tooltip to the image button to make it accessible (Jens Granseuer)
+
+appearance:
+- Add option to add wallpapers via the command line (Jens Granseuer) (#456337)
+- Use new GTK+ convenience API for icon view tooltips (Matthias Clasen)
+  (#455985)
+- Bump all tooltips code to GTK 2.11.6 (Jens Granseuer)
+- Improve color scheme matching (Jens Granseuer)
+- When reading current settings from gconf, get the color scheme from the
+  GTK theme if necessary to allow matching against themes retrieved via
+  gnome-theme-info (Jens Granseuer)
+- Implement saving of the cursor theme name in metathemes and add a
+  'Default pointer' option to the cursor theme list (Denis Washington)
+- Simplify tooltip descriptions (Dennis Cranston) (#460111)
+- Really unset the gconf key when reverting colors (Jens Granseuer)
+- Implement drag-and-drop theme installation (Denis Washington)
+- Remove workarounds for initialization problems in early versions of the
+  capplet (Jens Granseuer)
+- Fix cell renderer state logic to not always be on (Jens Granseuer)
+- Use cairo to draw the cell renderer selection (Thomas Wood)
+- Show readable_name in cursor theme list instead of name (Denis Washington)
+- Fix mnemonics and customize theme window title (Thomas Wood) (#461255)
+- Fix theme installation (Thomas Wood)
+- Update icon cache when installing icon themes (Thomas Wood) (#355486)
+- Prevent some memory leaks (Thomas Wood)
+- Add controls for applying suggested backgrounds and/or fonts from
+  metathemes (Denis Washington)
+- Only show background/font suggestions if they haven't already been
+  applied (Denis Washington)
+- Cope with unset gconf keys and group gconf notifications (Jens Granseuer)
+- Only create the custom theme entry when changes are made, and delete it
+  when the theme is saved (Jens Granseuer)
+- Add %F to the exec line so external programs like epiphany can set the
+  background (Jens Granseuer) (#456337)
+- Default to showing the background tab if wallpapers were given on the
+  command line (Jens Granseuer)
+- Use our custom cell renderer for metathemes too, so the previews don't
+  get shaded (Jens Granseuer) (#461198)
+
+default applications:
+- Change custom command entries to be insensitive instead of
+  noneditable (Matthias Clasen) (#456308)
+- Remove spurious desktop entries (Jens Granseuer) (#444787)
+
+keyboard:
+- Improved layout and sorting (Sergey Udaltsov) (#455353)
+- Implement DND in the selected layouts list (Sergey Udaltsov) (#351936)
+- Eliminate up/down buttons in the layout list (Sergey Udaltsov)
+
+network:
+- Also use new icon in the window title bar (Denis Washington)
+
+settings daemon:
+- Don't forget the Xft callback (Jens Granseuer) (#455992)
+
+themus:
+- Update to match theme callback signature (Jens Granseuer)
+
+general:
+- Fix crash when no cursor is specified in theme (Frederic Crozat) (#455952)
+- General cleanup and leak-plugging (Jens Granseuer, Thomas Wood)
+- Don't fail configuring if gstreamer is not available, simply skip the sound
+  capplet (Jens Granseuer) (#456957)
+- Remove spurous AT desktop entries (Jens Granseuer) (#444787)
+- Add support for custom theme names saved in metathemes (Denis Washington)
+- Re-add basic support for cursor themes for X servers without the Xcursor
+  extension, like the one in Solaris (Denis Washington)
+- When applying a metatheme, check wether to set/unser color scheme gconf
+  key (Jens Granseuer) (#421866)
+- Fix notification of selection changed for GtkTreeView config support (Jens
+  Granseuer)
+- Prevent cursor themes from being recognized as icon themes (Denis Washington)
+- Read a cursor themes's name from its index.theme file if it has one (Denis
+  Washington)
+- Expand check for empty metatheme color scheme to include blank color scheme
+  strings (Thomas Wood)
+- Add tooltip foreground and background colors to the list of recognized
+  symbolic colors (Thomas Wood)
+
+updated translations:
+- es (Jorge Gonzalez)
+- et (Priit Laes)
+- fi (Ilkka Tuohela)
+- gl (Ignacio Casal Quinteiro)
+- gu (Ankit Patel)
+- hu (Gabor Kelemen)
+- ja (Takeshi AIHANA)
+- lt (Zygimantas Berucka)
+- nb (Kjartan Maraas)
+- nl (Vincent van Adrighem)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+- zh_CN (Funda Wang)
+------------------------------------------------------------------------------
 gnome-control-center 2.19.5
 
 about-me:
