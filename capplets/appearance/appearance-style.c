@@ -161,7 +161,7 @@ cursor_theme_sort_func (GtkTreeModel *model,
 static void
 update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data)
 {
-  GdkColor color_scheme_colors[6];
+  GdkColor color_scheme_colors[8];
   GtkWidget *widget;
 
   if (!gnome_theme_color_scheme_parse (color_scheme, color_scheme_colors))
@@ -180,6 +180,10 @@ update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *dat
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[4]);
   widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[5]);
+  widget = glade_xml_get_widget (data->xml, "tooltip_fg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[6]);
+  widget = glade_xml_get_widget (data->xml, "tooltip_bg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[7]);
 }
 
 static void
@@ -247,8 +251,8 @@ static void
 color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 {
   gchar *new_scheme;
-  GdkColor colors[6];
-  gchar *bg, *fg, *text, *base, *selected_fg, *selected_bg;
+  GdkColor colors[7];
+  gchar *bg, *fg, *text, *base, *selected_fg, *selected_bg, *tooltip_fg, *tooltip_bg;
   GtkWidget *widget;
 
   widget = glade_xml_get_widget (data->xml, "fg_colorbutton");
@@ -263,6 +267,10 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[4]);
   widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
   gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
+  widget = glade_xml_get_widget (data->xml, "tooltip_fg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
+  widget = glade_xml_get_widget (data->xml, "tooltip_fg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
 
   fg = g_strdup_printf ("fg_color:#%04x%04x%04x\n", colors[0].red, colors[0].green, colors[0].blue);
   bg = g_strdup_printf ("bg_color:#%04x%04x%04x\n", colors[1].red, colors[1].green, colors[1].blue);
@@ -270,8 +278,10 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   base = g_strdup_printf ("base_color:#%04x%04x%04x\n", colors[3].red, colors[3].green, colors[3].blue);
   selected_fg = g_strdup_printf ("selected_fg_color:#%04x%04x%04x\n", colors[4].red, colors[4].green, colors[4].blue);
   selected_bg = g_strdup_printf ("selected_bg_color:#%04x%04x%04x", colors[5].red, colors[5].green, colors[5].blue);
+  tooltip_fg = g_strdup_printf ("tooltip_fg_color:#%04x%04x%04x\n", colors[6].red, colors[6].green, colors[6].blue);
+  tooltip_bg = g_strdup_printf ("tooltip_bg_color:#%04x%04x%04x", colors[7].red, colors[7].green, colors[7].blue);
 
-  new_scheme = g_strconcat (fg, bg, text, base, selected_fg, selected_bg, NULL);
+  new_scheme = g_strconcat (fg, bg, text, base, selected_fg, selected_bg, tooltip_fg, tooltip_bg, NULL);
 
   /* Currently we assume this has only been called when one of the colours has
    * actually changed, so we don't check the original key first */
@@ -285,6 +295,8 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   g_free (base);
   g_free (selected_fg);
   g_free (selected_bg);
+  g_free (tooltip_fg);
+  g_free (tooltip_bg);
   g_free (new_scheme);
 }
 
@@ -920,6 +932,8 @@ style_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "base_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "tooltip_fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "tooltip_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   /* revert button */
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "color_scheme_defaults_button")), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
   /* delete buttons */
