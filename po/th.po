@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-27 08:24+0700\n"
-"PO-Revision-Date: 2007-07-27 08:33+0700\n"
+"POT-Creation-Date: 2007-07-30 14:50+0700\n"
+"PO-Revision-Date: 2007-07-30 14:56+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -58,12 +58,12 @@ msgid "No Image"
 msgstr "ไม่มีรูป"
 
 #: capplets/about-me/gnome-about-me.c:666
-#: capplets/appearance/appearance-desktop.c:1081
+#: capplets/appearance/appearance-desktop.c:1061
 msgid "Images"
 msgstr "รูปภาพ"
 
 #: capplets/about-me/gnome-about-me.c:670
-#: capplets/appearance/theme-installer.c:603
+#: capplets/appearance/theme-installer.c:619
 msgid "All Files"
 msgstr "ทุกแฟ้ม"
 
@@ -494,7 +494,6 @@ msgid "_Preferred Applications"
 msgstr "เลือกโ_ปรแกรมหลักๆ"
 
 #: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-#: capplets/default-applications/default-applications-accessibility.desktop.in.in.h:1
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "ใช้เทคโนโลยีสิ่งอำนวยความสะดวกเมื่อเข้าระบบ"
 
@@ -707,11 +706,11 @@ msgstr "พิกเซล/วินาที"
 msgid "seconds"
 msgstr "วินาที"
 
-#: capplets/appearance/appearance-desktop.c:1064
+#: capplets/appearance/appearance-desktop.c:1044
 msgid "Add Wallpaper"
 msgstr "เพิ่มวอลล์เปเปอร์"
 
-#: capplets/appearance/appearance-desktop.c:1085
+#: capplets/appearance/appearance-desktop.c:1065
 msgid "All files"
 msgstr "ทุกแฟ้ม"
 
@@ -775,7 +774,27 @@ msgstr "หน้า"
 msgid "[WALLPAPER...]"
 msgstr "[WALLPAPER...]"
 
-#: capplets/appearance/appearance-themes.c:545
+#: capplets/appearance/appearance-themes.c:417
+msgid "Apply Background"
+msgstr "ตกลงใช้พื้นหลัง"
+
+#: capplets/appearance/appearance-themes.c:421
+msgid "Apply Font"
+msgstr "ตกลงใช้แบบอักษร"
+
+#: capplets/appearance/appearance-themes.c:446
+msgid "The current theme suggests a background and a font."
+msgstr "ชุดตกแต่งนี้แนะนำพื้นหลังและแบบอักษร"
+
+#: capplets/appearance/appearance-themes.c:451
+msgid "The current theme suggests a background."
+msgstr "ชุดตกแต่งนี้แนะนำพื้นหลัง"
+
+#: capplets/appearance/appearance-themes.c:456
+msgid "The current theme suggests a font."
+msgstr "ชุดตกแต่งนี้แนะนำแบบอักษร"
+
+#: capplets/appearance/appearance-themes.c:732
 #: capplets/default-applications/gnome-da-capplet.c:1080
 #: capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -865,95 +884,103 @@ msgid "Controls"
 msgstr "ปุ่มควบคุมต่างๆ"
 
 #: capplets/appearance/data/appearance.glade.h:24
+msgid "Customize Theme"
+msgstr "ปรับแต่งชุดตกแต่งเอง"
+
+#: capplets/appearance/data/appearance.glade.h:25
 msgid "D_etails..."
 msgstr "_รายละเอียด..."
 
-#: capplets/appearance/data/appearance.glade.h:25
+#: capplets/appearance/data/appearance.glade.h:26
 msgid "Des_ktop font:"
 msgstr "แบบอักษรของ_พื้นโต๊ะ:"
 
-#: capplets/appearance/data/appearance.glade.h:26
+#: capplets/appearance/data/appearance.glade.h:27
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: capplets/appearance/data/appearance.glade.h:28
 msgid "Font Rendering Details"
 msgstr "รายละเอียดการวาดตัวอักษร"
 
-#: capplets/appearance/data/appearance.glade.h:27
+#: capplets/appearance/data/appearance.glade.h:29
 msgid "Fonts"
 msgstr "แบบอักษร"
 
-#: capplets/appearance/data/appearance.glade.h:28
+#: capplets/appearance/data/appearance.glade.h:30
 msgid "Go _to Fonts Folder"
 msgstr "ไ_ปโฟลเดอร์แบบอักษร"
 
-#: capplets/appearance/data/appearance.glade.h:29
+#: capplets/appearance/data/appearance.glade.h:31
 msgid "Gra_yscale"
 msgstr "ไล่สีเ_ทา"
 
-#: capplets/appearance/data/appearance.glade.h:30
+#: capplets/appearance/data/appearance.glade.h:32
 msgid "Icons"
 msgstr "ไอคอน"
 
-#: capplets/appearance/data/appearance.glade.h:31
+#: capplets/appearance/data/appearance.glade.h:33
 msgid "Interface"
 msgstr "ติดต่อผู้ใช้"
 
-#: capplets/appearance/data/appearance.glade.h:32
+#: capplets/appearance/data/appearance.glade.h:34
 msgid "Large"
 msgstr "ใหญ่"
 
-#: capplets/appearance/data/appearance.glade.h:33
+#: capplets/appearance/data/appearance.glade.h:35
 msgid "N_one"
 msgstr "ไ_ม่ใช้"
 
-#: capplets/appearance/data/appearance.glade.h:34
+#: capplets/appearance/data/appearance.glade.h:36
 msgid "New File"
 msgstr "แฟ้มใหม่"
 
-#: capplets/appearance/data/appearance.glade.h:35
+#: capplets/appearance/data/appearance.glade.h:37
 msgid "Open File"
 msgstr "เปิดแฟ้ม"
 
-#: capplets/appearance/data/appearance.glade.h:36
+#: capplets/appearance/data/appearance.glade.h:38
 msgid "Open a dialog to specify the color"
 msgstr "เปิดกล่องโต้ตอบเพื่อเลือกสี"
 
-#: capplets/appearance/data/appearance.glade.h:37
+#: capplets/appearance/data/appearance.glade.h:39
 msgid "Pointer"
 msgstr "ตัวชี้"
 
-#: capplets/appearance/data/appearance.glade.h:38
+#: capplets/appearance/data/appearance.glade.h:40
 msgid "R_esolution:"
 msgstr "ความ_ละเอียด:"
 
-#: capplets/appearance/data/appearance.glade.h:39
+#: capplets/appearance/data/appearance.glade.h:41
 msgid "Reset to Defaults"
 msgstr "กลับไปใช้ค่าปริยาย"
 
-#: capplets/appearance/data/appearance.glade.h:40
+#: capplets/appearance/data/appearance.glade.h:42
 msgid "Save File"
 msgstr "บันทึกแฟ้ม"
 
-#: capplets/appearance/data/appearance.glade.h:41
+#: capplets/appearance/data/appearance.glade.h:43
 msgid "Save Theme As..."
 msgstr "บันทึกชุดตกแต่งเป็น..."
 
-#: capplets/appearance/data/appearance.glade.h:42
+#: capplets/appearance/data/appearance.glade.h:44
 msgid "Save _Background Image"
 msgstr "บันทึกภาพ_พื้นหลัง"
 
-#: capplets/appearance/data/appearance.glade.h:43
+#: capplets/appearance/data/appearance.glade.h:45
 msgid "Show _icons in menus"
 msgstr "แสดงไ_อคอนในเมนู"
 
-#: capplets/appearance/data/appearance.glade.h:44
+#: capplets/appearance/data/appearance.glade.h:46
 #: vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "ขนาด:"
 
-#: capplets/appearance/data/appearance.glade.h:45
+#: capplets/appearance/data/appearance.glade.h:47
 msgid "Small"
 msgstr "เล็ก"
 
-#: capplets/appearance/data/appearance.glade.h:46
+#: capplets/appearance/data/appearance.glade.h:48
 msgid ""
 "Solid color\n"
 "Horizontal gradient\n"
@@ -963,19 +990,19 @@ msgstr ""
 "ไล่สีตามแนวนอน\n"
 "ไล่สีตามแนวตั้ง"
 
-#: capplets/appearance/data/appearance.glade.h:49
+#: capplets/appearance/data/appearance.glade.h:51
 msgid "Sub_pixel (LCDs)"
 msgstr "_พิกเซลย่อย (สำหรับจอ LCD)"
 
-#: capplets/appearance/data/appearance.glade.h:50
+#: capplets/appearance/data/appearance.glade.h:52
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "_จัดการพิกเซลย่อย (LCDs)"
 
-#: capplets/appearance/data/appearance.glade.h:51
+#: capplets/appearance/data/appearance.glade.h:53
 msgid "Text"
 msgstr "ข้อความ"
 
-#: capplets/appearance/data/appearance.glade.h:52
+#: capplets/appearance/data/appearance.glade.h:54
 msgid ""
 "Text below items\n"
 "Text beside items\n"
@@ -987,58 +1014,50 @@ msgstr ""
 "ไอคอนเท่านั้น\n"
 "ข้อความเท่านั้น"
 
-#: capplets/appearance/data/appearance.glade.h:56
+#: capplets/appearance/data/appearance.glade.h:58
 msgid "The current controls theme does not support color schemes."
 msgstr "ชุดตกแต่งปุ่มควบคุมที่ใช้อยู่ ไม่สนับสนุนแนวการใช้สี"
 
-#: capplets/appearance/data/appearance.glade.h:57
+#: capplets/appearance/data/appearance.glade.h:59
 #: vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "ชุดตกแต่ง"
 
-#: capplets/appearance/data/appearance.glade.h:58
-msgid "Theme Details"
-msgstr "รายละเอียดของชุดตกแต่ง"
-
-#: capplets/appearance/data/appearance.glade.h:59
+#: capplets/appearance/data/appearance.glade.h:60
 msgid "Toolbar _button labels:"
 msgstr "รูปแบบของปุ่_มในแถบเครื่องมือ:"
 
-#: capplets/appearance/data/appearance.glade.h:60
+#: capplets/appearance/data/appearance.glade.h:61
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/appearance/data/appearance.glade.h:61
+#: capplets/appearance/data/appearance.glade.h:62
 msgid "Window Border"
 msgstr "กรอบหน้าต่าง"
 
-#: capplets/appearance/data/appearance.glade.h:62
+#: capplets/appearance/data/appearance.glade.h:63
 msgid "_Add..."
 msgstr "เ_พิ่ม..."
 
-#: capplets/appearance/data/appearance.glade.h:63
+#: capplets/appearance/data/appearance.glade.h:64
 msgid "_Application font:"
 msgstr "แบบอักษรของโ_ปรแกรม:"
 
-#: capplets/appearance/data/appearance.glade.h:64
+#: capplets/appearance/data/appearance.glade.h:65
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/appearance/data/appearance.glade.h:65
+#: capplets/appearance/data/appearance.glade.h:66
 msgid "_Copy"
 msgstr "_คัดลอก"
 
-#: capplets/appearance/data/appearance.glade.h:66
+#: capplets/appearance/data/appearance.glade.h:67
 msgid "_Description:"
 msgstr "_คำบรรยาย:"
 
-#: capplets/appearance/data/appearance.glade.h:67
+#: capplets/appearance/data/appearance.glade.h:68
 msgid "_Document font:"
 msgstr "แบบอักษรของเ_อกสาร:"
-
-#: capplets/appearance/data/appearance.glade.h:68
-msgid "_Edit"
-msgstr "แ_ก้ไข"
 
 #: capplets/appearance/data/appearance.glade.h:69
 msgid "_Editable menu shortcut keys"
@@ -1211,40 +1230,40 @@ msgstr "ชุดตกแต่งนี้เป็นโปรแกรม �
 msgid "The file format is invalid"
 msgstr "รูปแบบข้อมูลไม่ถูกต้อง"
 
-#: capplets/appearance/theme-installer.c:303
+#: capplets/appearance/theme-installer.c:309
 msgid "Installation Failed"
 msgstr "ติดตั้งชุดตกแต่งไม่สำเร็จ"
 
-#: capplets/appearance/theme-installer.c:314
+#: capplets/appearance/theme-installer.c:330
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "ชุดตกแต่ง \"%s\" ติดตั้งเรียบร้อยแล้ว"
 
-#: capplets/appearance/theme-installer.c:320
+#: capplets/appearance/theme-installer.c:336
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "คุณต้องการใช้ชุดตกแต่งนี้เลยหรือไม่ หรือจะใช้ชุดตกแต่งเดิมต่อไป?"
 
-#: capplets/appearance/theme-installer.c:322
+#: capplets/appearance/theme-installer.c:338
 msgid "Keep Current Theme"
 msgstr "ใช้ชุดตกแต่งเดิม"
 
-#: capplets/appearance/theme-installer.c:324
+#: capplets/appearance/theme-installer.c:340
 msgid "Apply New Theme"
 msgstr "ใช้ชุดตกแต่งใหม่"
 
-#: capplets/appearance/theme-installer.c:397
+#: capplets/appearance/theme-installer.c:413
 msgid "This theme is not in a supported format."
 msgstr "ไม่สามารถอ่านชุดตกแต่งรูปแบบนี้ได้"
 
-#: capplets/appearance/theme-installer.c:422
+#: capplets/appearance/theme-installer.c:438
 msgid "Failed to create temporary directory"
 msgstr "สร้างโฟลเดอร์ชั่วคราวไม่สำเร็จ"
 
-#: capplets/appearance/theme-installer.c:480
+#: capplets/appearance/theme-installer.c:496
 msgid "No theme file location specified to install"
 msgstr "ไม่ได้กำหนดตำแหน่งของแฟ้มชุดตกแต่งที่จะติดตั้ง"
 
-#: capplets/appearance/theme-installer.c:500
+#: capplets/appearance/theme-installer.c:516
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1253,22 +1272,22 @@ msgstr ""
 "คุณไม่มีสิทธิเพียงพอที่จะติดตั้งชุดตกแต่งใน:\n"
 "%s"
 
-#: capplets/appearance/theme-installer.c:519
+#: capplets/appearance/theme-installer.c:535
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s เป็นตำแหน่งที่ จะติดตั้งชุดตกแต่ง จะเลือกตำแหน่งนี้ เป็นที่มาของชุดตกแต่งไม่ได้"
 
-#: capplets/appearance/theme-installer.c:540
+#: capplets/appearance/theme-installer.c:556
 msgid "The file format is invalid."
 msgstr "รูปแบบข้อมูลไม่ถูกต้อง"
 
-#: capplets/appearance/theme-installer.c:593
+#: capplets/appearance/theme-installer.c:609
 msgid "Select Theme"
 msgstr "เลือกชุดตกแต่ง"
 
-#: capplets/appearance/theme-installer.c:596
+#: capplets/appearance/theme-installer.c:612
 msgid "Theme Packages"
 msgstr "แพกเกจชุดตกแต่ง"
 
@@ -1285,11 +1304,11 @@ msgstr "มีชุดตกแต่งนี้อยู่แล้ว จ�
 msgid "_Overwrite"
 msgstr "เขียน_ทับ"
 
-#: capplets/appearance/theme-util.c:42
+#: capplets/appearance/theme-util.c:43
 msgid "Would you like to delete this theme?"
 msgstr "คุณต้องการลบชุดตกแต่งนี้หรือไม่?"
 
-#: capplets/appearance/theme-util.c:89
+#: capplets/appearance/theme-util.c:90
 msgid "Theme cannot be deleted"
 msgstr "ไม่สามารถลบชุดตกแต่งได้"
 
@@ -1495,10 +1514,6 @@ msgstr "กรุณาเลือกภาพที่จะใช้"
 msgid "_Select"
 msgstr "เ_ลือก"
 
-#: capplets/default-applications/default-applications-accessibility.desktop.in.in.h:2
-msgid "Preferred Assistive Technology"
-msgstr "เลือกเทคโนโลยีสิ่งอำนวยความสะดวก"
-
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Preferred Applications"
@@ -1508,14 +1523,6 @@ msgstr "เลือกโปรแกรมหลักๆ"
 msgid "Select your default applications"
 msgstr "เลือกโปรแกรมหลักๆ ที่จะถูกใช้โดยปรกติ"
 
-#: capplets/default-applications/gnome-at-mobility.desktop.in.in.h:1
-msgid "Mobility AT"
-msgstr "สิ่งอำนวยความสะดวกอุปกรณ์พกพา"
-
-#: capplets/default-applications/gnome-at-mobility.desktop.in.in.h:2
-msgid "Run the the preferred GNOME Mobility Assitive Technology"
-msgstr "เรียกโปรแกรมอำนวยความสะดวกอุปกรณ์พกพาของ GNOME ที่กำหนดไว้"
-
 #: capplets/default-applications/gnome-at-session.desktop.in.in.h:1
 msgid "Autostart the preferred AT"
 msgstr "เรียกโปรแกรมอำนวยความสะดวกโดยอัตโนมัติ"
@@ -1523,14 +1530,6 @@ msgstr "เรียกโปรแกรมอำนวยความสะด
 #: capplets/default-applications/gnome-at-session.desktop.in.in.h:2
 msgid "Visual"
 msgstr "สายตา"
-
-#: capplets/default-applications/gnome-at-visual.desktop.in.in.h:1
-msgid "Run the the preferred GNOME Visual Assistive Technology"
-msgstr "เรียกโปรแกรมอำนวยความสะดวกสำหรับสายตาของ GNOME ที่กำหนดไว้"
-
-#: capplets/default-applications/gnome-at-visual.desktop.in.in.h:2
-msgid "Visual AT"
-msgstr "สิ่งอำนวยความสะดวกสำหรับสายตา"
 
 #: capplets/default-applications/gnome-da-capplet.c:80
 #: capplets/default-applications/gnome-da-capplet.c:112
@@ -3798,7 +3797,7 @@ msgstr "ชุดตกแต่งที่คุณเลือก แนะ�
 msgid "_Apply font"
 msgstr "_ตกลงใช้แบบอักษรใหม่"
 
-#: vfs-methods/themus/theme-method.c:486
+#: vfs-methods/themus/theme-method.c:485
 msgid "Themes"
 msgstr "ชุดตกแต่ง"
 
@@ -3867,6 +3866,24 @@ msgstr "เลือกชุดตกแต่ง"
 #: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "กำหนดชุดตกแต่งปริยาย"
+
+#~ msgid "Theme Details"
+#~ msgstr "รายละเอียดของชุดตกแต่ง"
+
+#~ msgid "Preferred Assistive Technology"
+#~ msgstr "เลือกเทคโนโลยีสิ่งอำนวยความสะดวก"
+
+#~ msgid "Mobility AT"
+#~ msgstr "สิ่งอำนวยความสะดวกอุปกรณ์พกพา"
+
+#~ msgid "Run the the preferred GNOME Mobility Assitive Technology"
+#~ msgstr "เรียกโปรแกรมอำนวยความสะดวกอุปกรณ์พกพาของ GNOME ที่กำหนดไว้"
+
+#~ msgid "Run the the preferred GNOME Visual Assistive Technology"
+#~ msgstr "เรียกโปรแกรมอำนวยความสะดวกสำหรับสายตาของ GNOME ที่กำหนดไว้"
+
+#~ msgid "Visual AT"
+#~ msgstr "สิ่งอำนวยความสะดวกสำหรับสายตา"
 
 #~ msgid "Unknown Pointer"
 #~ msgstr "ตัวชี้ไม่รู้จัก"
@@ -4018,9 +4035,6 @@ msgstr "กำหนดชุดตกแต่งปริยาย"
 #~ msgid "The theme file location specified to install is invalid"
 #~ msgstr "ตำแหน่งแฟ้มชุดตกแต่งที่ให้ใช้ไม่ได้"
 
-#~ msgid "Custom theme"
-#~ msgstr "ชุดตกแต่งกำหนดเอง"
-
 #~ msgid "You can save this theme by pressing the Save Theme button."
 #~ msgstr "คุณสามารถบันทึกชุดตกแต่งนี้ได้ด้วยปุ่ม \"บันทึกชุดตกแต่ง\""
 
@@ -4038,23 +4052,11 @@ msgstr "กำหนดชุดตกแต่งปริยาย"
 #~ msgid "<b>You do not have permission to change theme settings</b>"
 #~ msgstr "<b>คุณไม่ได้รับอนุญาตให้เปลี่ยนชุดตกแต่ง</b>"
 
-#~ msgid "Apply _Background"
-#~ msgstr "ตกลงใช้_พื้นหลัง"
-
-#~ msgid "Apply _Font"
-#~ msgstr "ตกลงใช้แ_บบอักษร"
-
 #~ msgid "This theme does not suggest any particular font or background."
 #~ msgstr "ชุดตกแต่งนี้ไม่ได้แนะนำแบบอักษรหรือพื้นหลัง"
 
-#~ msgid "This theme suggests a background:"
-#~ msgstr "ชุดตกแต่งนี้แนะนำ พื้นหลัง:"
-
 #~ msgid "This theme suggests a font and a background:"
 #~ msgstr "ชุดตกแต่งนี้แนะนำ แบบอักษร และ พื้นหลัง:"
-
-#~ msgid "This theme suggests a font:"
-#~ msgstr "ชุดตกแต่งนี้แนะนำ แบบอักษร:"
 
 #~ msgid "_Install Theme..."
 #~ msgstr "_ติดตั้งชุดตกแต่ง..."
