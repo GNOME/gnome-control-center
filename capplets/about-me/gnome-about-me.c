@@ -1,5 +1,5 @@
 /* gnome-about-me.c
- * Copyright (C) 2002 Diego Gonzalez 
+ * Copyright (C) 2002 Diego Gonzalez
  *
  * Written by: Diego Gonzalez <diego@pemas.net>
  *
@@ -47,7 +47,7 @@
 typedef struct {
 	EContact 	*contact;
 	EBook    	*book;
-	
+
 	GladeXML 	*dialog;
 
 	GdkScreen    	*screen;
@@ -141,8 +141,8 @@ static void
 about_me_error (GtkWindow *parent, gchar *str)
 {
 	GtkWidget *dialog;
-	
-	dialog = gtk_message_dialog_new (parent, 
+
+	dialog = gtk_message_dialog_new (parent,
 				         GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
 				         GTK_BUTTONS_OK, str);
 
@@ -217,7 +217,7 @@ about_me_commit (GnomeAboutMe *me)
 	me->create_self = FALSE;
 }
 
-static gboolean 
+static gboolean
 about_me_commit_from_timeout (GnomeAboutMe *me)
 {
 	about_me_commit (me);
@@ -231,12 +231,12 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 	gchar *str = NULL;
 	const gchar *wid;
 	gint i;
-	
+
 	wid = glade_get_widget_name (widget);
 
 	if (wid == NULL)
 		return FALSE;
-	
+
 	for (i = 0; ids[i].wid != NULL; i++)
 		if (g_ascii_strcasecmp (ids[i].wid, wid) == 0)
 			break;
@@ -307,7 +307,7 @@ static gchar *
 about_me_get_address_field (EContactAddress *addr, guint cid)
 {
 	gchar *str;
-	
+
 	if (addr == NULL) {
 		return NULL;
 	}
@@ -409,7 +409,7 @@ about_me_load_string_field (GnomeAboutMe *me, const gchar *wid, guint cid, guint
 	}
 
 	str = str ? str : "";
-	
+
 	if (GTK_IS_ENTRY (widget)) {
 		gtk_entry_set_text (GTK_ENTRY (widget), str);
 	} else if (GTK_IS_TEXT_VIEW (widget)) {
@@ -450,7 +450,7 @@ static void
 about_me_update_photo (GnomeAboutMe *me)
 {
 	GtkWidget     *widget;
-	GladeXML      *dialog;	
+	GladeXML      *dialog;
 	EContactPhoto *photo;
 	gchar         *file;
 	GError        *error;
@@ -467,7 +467,7 @@ about_me_update_photo (GnomeAboutMe *me)
 		int height, width;
 		gboolean do_scale = FALSE;
 		float scale;
-		
+
 		widget = WID ("image-chooser");
 		e_image_chooser_get_image_data (E_IMAGE_CHOOSER (widget), (char **) &data, &length);
 
@@ -476,17 +476,17 @@ about_me_update_photo (GnomeAboutMe *me)
 		   or that takes 100% CPU */
 		gdk_pixbuf_loader_write (loader, data, length, NULL);
 		gdk_pixbuf_loader_close (loader, NULL);
-		
+
 		pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
-		
+
 		if (pixbuf)
 			g_object_ref (pixbuf);
-			
+
 		g_object_unref (loader);
-		
+
 		height = gdk_pixbuf_get_height (pixbuf);
 		width = gdk_pixbuf_get_width (pixbuf);
-		
+
 		if (height >= width && height > MAX_HEIGHT) {
 			scale = (float)MAX_HEIGHT/height;
 			do_scale = TRUE;
@@ -498,11 +498,11 @@ about_me_update_photo (GnomeAboutMe *me)
 		if (do_scale) {
 			char *scaled_data = NULL;
 			gsize scaled_length;
-			
+
 			scaled = gdk_pixbuf_scale_simple (pixbuf, width*scale, height*scale, GDK_INTERP_BILINEAR);
-			gdk_pixbuf_save_to_buffer (scaled, &scaled_data, &scaled_length, "png", NULL, 
+			gdk_pixbuf_save_to_buffer (scaled, &scaled_data, &scaled_length, "png", NULL,
 						   "compression", "9", NULL);
-			
+
 			g_free (data);
 			data = scaled_data;
 			length = scaled_length;
@@ -542,14 +542,14 @@ about_me_update_photo (GnomeAboutMe *me)
 		gnome_config_sync ();
 	}
 
-	about_me_commit (me);	
+	about_me_commit (me);
 }
 
 static void
 about_me_load_info (GnomeAboutMe *me)
 {
 	gint i;
-	
+
 	if (me->create_self == FALSE) {
 		me->addr1 = e_contact_get (me->contact, E_CONTACT_ADDRESS_HOME);
 		if (me->addr1 == NULL)
@@ -580,14 +580,14 @@ eab_create_image_chooser_widget (gchar *name,
 	return w;
 }
 
-static void 
+static void
 about_me_update_preview (GtkFileChooser *chooser,
-			 GnomeAboutMe   *me) 
+			 GnomeAboutMe   *me)
 {
 	gchar *uri;
 
 	uri = gtk_file_chooser_get_preview_uri (chooser);
-	
+
 	if (uri) {
 		GtkWidget *image;
 		GdkPixbuf *pixbuf;
@@ -596,13 +596,13 @@ about_me_update_preview (GtkFileChooser *chooser,
 		if (!me->thumbs)
 			me->thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
 
-		
+
 		mime_type = gnome_vfs_get_mime_type (uri);
 		pixbuf = gnome_thumbnail_factory_generate_thumbnail (me->thumbs,
 								     uri,
 								     mime_type);
 		image = gtk_file_chooser_get_preview_widget (chooser);
-		
+
 		if(pixbuf != NULL) {
 			gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
 			g_object_unref (pixbuf);
@@ -619,44 +619,43 @@ about_me_update_preview (GtkFileChooser *chooser,
 static void
 about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 {
-	GtkWidget *chooser_dialog;
+	GtkFileChooser *chooser_dialog;
 	gint response;
 	GtkWidget *image_chooser;
-	GladeXML  *dialog;
+	GladeXML *dialog;
 	GtkWidget *image;
 	const gchar *chooser_dir = DATADIR"/pixmaps/faces";
-	gchar *pics_dir;
+	const gchar *pics_dir;
 	GtkFileFilter *filter;
 
 	dialog = me->dialog;
 	image_chooser = WID ("image-chooser");
 
-	chooser_dialog = gtk_file_chooser_dialog_new (_("Select Image"), GTK_WINDOW (WID ("about-me-dialog")),
+	chooser_dialog = GTK_FILE_CHOOSER (
+			 gtk_file_chooser_dialog_new (_("Select Image"), GTK_WINDOW (WID ("about-me-dialog")),
 							GTK_FILE_CHOOSER_ACTION_OPEN,
 							_("No Image"), GTK_RESPONSE_NO,
 							GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 							GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-							NULL);
+							NULL));
 	gtk_window_set_modal (GTK_WINDOW (chooser_dialog), TRUE);
 	gtk_dialog_set_default_response (GTK_DIALOG (chooser_dialog), GTK_RESPONSE_ACCEPT);
 
-	gtk_file_chooser_add_shortcut_folder (GTK_FILE_CHOOSER (chooser_dialog), chooser_dir, NULL);
-	pics_dir = g_build_filename (g_get_home_dir (), "Pictures");
-	gtk_file_chooser_add_shortcut_folder (GTK_FILE_CHOOSER (chooser_dialog), pics_dir, NULL);
-	g_free (pics_dir);
+	gtk_file_chooser_add_shortcut_folder (chooser_dialog, chooser_dir, NULL);
+	pics_dir = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+	if (pics_dir != NULL)
+		gtk_file_chooser_add_shortcut_folder (chooser_dialog, pics_dir, NULL);
 
 	if (!g_file_test (chooser_dir, G_FILE_TEST_IS_DIR))
 		chooser_dir = g_get_home_dir ();
 
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser_dialog), chooser_dir);
-	gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (chooser_dialog),
-						FALSE);
-	
+	gtk_file_chooser_set_current_folder (chooser_dialog, chooser_dir);
+	gtk_file_chooser_set_use_preview_label (chooser_dialog,	FALSE);
+
 	image = gtk_image_new ();
-	gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (chooser_dialog),
-					     image);
+	gtk_file_chooser_set_preview_widget (chooser_dialog, image);
 	gtk_widget_set_size_request (image, 128, -1);
-	
+
 	gtk_widget_show (image);
 
 	g_signal_connect (chooser_dialog, "update-preview",
@@ -665,25 +664,24 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_set_name (filter, _("Images"));
 	gtk_file_filter_add_pixbuf_formats (filter);
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser_dialog), filter);
+	gtk_file_chooser_add_filter (chooser_dialog, filter);
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_set_name (filter, _("All Files"));
 	gtk_file_filter_add_pattern(filter, "*");
-
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser_dialog), filter);
+	gtk_file_chooser_add_filter (chooser_dialog, filter);
 
 	response = gtk_dialog_run (GTK_DIALOG (chooser_dialog));
 
 	if (response == GTK_RESPONSE_ACCEPT) {
 		gchar* filename;
 
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser_dialog));
+		filename = gtk_file_chooser_get_filename (chooser_dialog);
 		me->have_image = TRUE;
 		me->image_changed = TRUE;
 
 		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (image_chooser), filename);
 		g_free (filename);
-		about_me_update_photo (me);	
+		about_me_update_photo (me);
 	} else if (response == GTK_RESPONSE_NO) {
 		me->have_image = FALSE;
 		me->image_changed = TRUE;
@@ -691,7 +689,7 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 		about_me_update_photo (me);
 	}
 
-	gtk_widget_destroy (chooser_dialog);
+	gtk_widget_destroy (GTK_WIDGET (chooser_dialog));
 }
 
 static void
@@ -730,7 +728,7 @@ about_me_icon_theme_changed (GtkWindow    *window,
 }
 
 static void
-about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, GnomeAboutMe *me) 
+about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, GnomeAboutMe *me)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		g_print ("Help goes here");
@@ -749,7 +747,7 @@ static void
 about_me_passwd_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 {
 	GladeXML *dialog;
-	
+
 	dialog = me->dialog;
 	gnome_about_me_password (GTK_WINDOW (WID ("about-me-dialog")));
 }
@@ -810,7 +808,7 @@ about_me_setup_dialog (void)
 			g_clear_error (&error);
 			about_me_destroy (me);
 			return -1;
-		}	
+		}
 
 		g_clear_error (&error);
 
@@ -825,11 +823,11 @@ about_me_setup_dialog (void)
 			}
 
 			if (e_book_open (me->book, FALSE, NULL) == FALSE) {
-				about_me_error (GTK_WINDOW (main_dialog), 
+				about_me_error (GTK_WINDOW (main_dialog),
 						_("Unable to open address book"));
 				g_clear_error (&error);
 			}
-		} 
+		}
 	}
 
 	/************************************************/
@@ -837,7 +835,7 @@ about_me_setup_dialog (void)
 	setpwent ();
 	pwent = getpwnam (me->login);
 	if (pwent == NULL) {
-		about_me_error (GTK_WINDOW (WID ("about-me-dialog")), 
+		about_me_error (GTK_WINDOW (WID ("about-me-dialog")),
 				_("Unknown login ID, the user database might be corrupted"));
 		about_me_destroy (me);
 		return -1;
@@ -854,7 +852,7 @@ about_me_setup_dialog (void)
 	/* Contact Tab */
 	about_me_load_photo (me, me->contact);
 
-	widget = WID ("fullname"); 
+	widget = WID ("fullname");
 	if (tok[0] == NULL || strlen (tok[0]) == 0) {
 		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", me->login);
 	} else {
@@ -911,7 +909,7 @@ main (int argc, char **argv)
 			NULL);
 
 	rc = about_me_setup_dialog ();
-	
+
 	if (rc != -1) {
 		gtk_main ();
 	}
