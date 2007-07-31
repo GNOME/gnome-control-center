@@ -665,11 +665,11 @@ wp_file_open_dialog (GtkWidget *widget,
   switch (gtk_dialog_run (GTK_DIALOG (data->wp_filesel)))
   {
   case GTK_RESPONSE_OK:
-    files = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (data->wp_filesel));
+    files = gtk_file_chooser_get_filenames (data->wp_filesel);
     wp_add_images (data, files);
   case GTK_RESPONSE_CANCEL:
   default:
-    gtk_widget_hide (data->wp_filesel);
+    gtk_widget_hide (GTK_WIDGET (data->wp_filesel));
     break;
   }
 }
@@ -925,6 +925,7 @@ desktop_init (AppearanceData *data,
   GtkWidget *add_button;
   GtkCellRenderer *cr;
   GtkFileFilter *filter;
+  const gchar *pictures;
 
   g_object_set (gtk_settings_get_default (), "gtk-tooltip-timeout", 500, NULL);
 
@@ -1041,7 +1042,8 @@ desktop_init (AppearanceData *data,
 
   wp_set_sensitivities (data);
 
-  data->wp_filesel = gtk_file_chooser_dialog_new_with_backend (_("Add Wallpaper"),
+  data->wp_filesel = GTK_FILE_CHOOSER (
+  		     gtk_file_chooser_dialog_new_with_backend (_("Add Wallpaper"),
                      GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")),
                      GTK_FILE_CHOOSER_ACTION_OPEN,
                      "gtk+",
@@ -1049,26 +1051,29 @@ desktop_init (AppearanceData *data,
                      GTK_RESPONSE_CANCEL,
                      GTK_STOCK_OPEN,
                      GTK_RESPONSE_OK,
-                     NULL);
+                     NULL));
 
-  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (data->wp_filesel),
-                                        TRUE);
-  gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (data->wp_filesel),
-                                          FALSE);
+  gtk_file_chooser_set_select_multiple (data->wp_filesel, TRUE);
+  gtk_file_chooser_set_use_preview_label (data->wp_filesel, FALSE);
+
+  pictures = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+  if (pictures != NULL && g_file_test (pictures, G_FILE_TEST_IS_DIR)) {
+    gtk_file_chooser_add_shortcut_folder (data->wp_filesel, pictures, NULL);
+    gtk_file_chooser_set_current_folder (data->wp_filesel, pictures);
+  }
 
   filter = gtk_file_filter_new ();
   gtk_file_filter_add_pixbuf_formats (filter);
   gtk_file_filter_set_name (filter, _("Images"));
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (data->wp_filesel), filter);
+  gtk_file_chooser_add_filter (data->wp_filesel, filter);
 
   filter = gtk_file_filter_new ();
   gtk_file_filter_set_name (filter, _("All files"));
   gtk_file_filter_add_pattern (filter, "*");
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (data->wp_filesel), filter);
+  gtk_file_chooser_add_filter (data->wp_filesel, filter);
 
   data->wp_image = gtk_image_new ();
-  gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (data->wp_filesel),
-                                       data->wp_image);
+  gtk_file_chooser_set_preview_widget (data->wp_filesel, data->wp_image);
   gtk_widget_set_size_request (data->wp_image, 128, -1);
 
   gtk_widget_show (data->wp_image);

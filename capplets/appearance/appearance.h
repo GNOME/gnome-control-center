@@ -44,7 +44,7 @@ typedef struct {
   GtkWidget *wp_style_menu;
   GtkWidget *wp_color_menu;
   GtkWidget *wp_rem_button;
-  GtkWidget *wp_filesel;
+  GtkFileChooser *wp_filesel;
   GtkWidget *wp_image;
   GSList *wp_uris;
 
