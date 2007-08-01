@@ -17,7 +17,7 @@
 #
 ###############################################################################
 #
-#  NOTE: This script is intended to be run from the command line, 
+#  NOTE: This script is intended to be run from the command line,
 #  GNOME menu, or from the desktop autostart.
 #
 #  /usr/bin/gnome-at-visual
@@ -39,19 +39,19 @@ run_at() {
 	if [ $? -ne 0 ]; then
 		exit $?
 	fi
-	
+
 	if [ -z "$CMDLINE" ]; then
 		exit 2
 	fi
-	
+
 	STARTUP=$(gconftool-2 --get $GCONF_PATH/$1/startup)
 	if [ $? -ne 0 ]; then
 		exit $?
 	fi
-	
+
 	if [ ! -z "$AUTOSTART" ]; then
 		# assuming ran from /usr/share/gnome/autostart
-		if [ "$STARTUP" == "true" ]; then
+		if [ "x$STARTUP" = "xtrue" ]; then
 			# gconf indicated requested autostart
 			($CMDLINE &)
 		fi
@@ -99,4 +99,3 @@ for I in $AT ; do
 done
 
 #EOF
-
