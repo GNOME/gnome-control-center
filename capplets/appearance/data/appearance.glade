@@ -1991,7 +1991,8 @@ Text only</property>
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Tooltips:</property>
+                        <property name="label" translatable="yes">_Tooltips:</property>
+                        <property name="use_underline">True</property>
                         <property name="mnemonic_widget">tooltip_bg_colorbutton</property>
                       </widget>
                       <packing>
@@ -2168,7 +2169,7 @@ Text only</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="label" translatable="yes">Reset to Defaults</property>
+                        <property name="label" translatable="yes">_Reset to Defaults</property>
                       </widget>
                     </child>
                   </widget>
@@ -2399,7 +2400,9 @@ Text only</property>
                     <property name="spacing">12</property>
                      <child>
                       <widget class="GtkLabel" id="cursor_size_label">
-                        <property name="label" translatable="yes">Size:</property>
+                        <property name="label" translatable="yes">_Size:</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">cursor_size_scale</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -2733,7 +2736,7 @@ Text only</property>
 	      <widget class="GtkCheckButton" id="save_background_checkbutton">
 	        <property name="visible">True</property>
 	        <property name="can_focus">True</property>
-	        <property name="label" translatable="yes">Save _Background Image</property>
+	        <property name="label" translatable="yes">Save _background image</property>
 	        <property name="use_underline">True</property>
 	        <property name="relief">GTK_RELIEF_NORMAL</property>
 	        <property name="focus_on_click">True</property>
