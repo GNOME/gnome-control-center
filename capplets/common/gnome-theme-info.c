@@ -1854,7 +1854,7 @@ gnome_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
 
   /* initialise the array */
   for (i = 0; i < NUM_SYMBOLIC_COLORS; i++)
-    gdk_color_parse ("#000", &colors[i]);
+    colors[i].red = colors[i].green = colors[i].blue = 0;
 
   /* The color scheme string consists of name:color pairs, seperated by
    * newlines, so first we split the string up by new line */

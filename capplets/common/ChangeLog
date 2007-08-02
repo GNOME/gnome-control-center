@@ -1,5 +1,10 @@
 2007-08-02  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-theme-info.c: (gnome_theme_color_scheme_parse): no need for an
+	expensive parse to initialize the colors
+
+2007-08-02  Jens Granseuer  <jensgr@gmx.net>
+
 	* theme-thumbnail.c: (generate_metacity_theme_thumbnail),
 	(generate_icon_theme_thumbnail): don't generate GTK thumbnails when we
 	want metacity or icon (bug #462724)
