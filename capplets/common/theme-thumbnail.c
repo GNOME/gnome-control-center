@@ -947,7 +947,7 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *theme_info)
 GdkPixbuf *
 generate_metacity_theme_thumbnail (GnomeThemeInfo *theme_info)
 {
-  return generate_theme_thumbnail (THUMBNAIL_TYPE_GTK,
+  return generate_theme_thumbnail (THUMBNAIL_TYPE_METACITY,
                                    NULL,
                                    NULL,
                                    theme_info->name,
@@ -958,7 +958,7 @@ generate_metacity_theme_thumbnail (GnomeThemeInfo *theme_info)
 GdkPixbuf *
 generate_icon_theme_thumbnail (GnomeThemeIconInfo *theme_info)
 {
-  return generate_theme_thumbnail (THUMBNAIL_TYPE_GTK,
+  return generate_theme_thumbnail (THUMBNAIL_TYPE_ICON,
                                    NULL,
                                    NULL,
                                    NULL,
