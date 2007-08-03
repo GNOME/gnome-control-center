@@ -1,5 +1,21 @@
 2007-08-03  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-desktop.c: (wp_props_load_wallpaper), (wp_add_image),
+	(wp_scale_type_changed), (wp_shade_type_changed),
+	(wp_update_preview), (wp_load_stuffs), (desktop_init),
+	(desktop_shutdown):
+	* appearance-main.c: (init_appearance_data),
+	(main_window_response):
+	* appearance-themes.c: (theme_get_mtime), (theme_thumbnail_update),
+	(theme_get_thumbnail_from_cache), (theme_thumbnail_done_cb),
+	(theme_thumbnail_generate):
+	* appearance.h:
+	* gnome-wp-xml.c: (gnome_wp_load_legacy), (gnome_wp_xml_load_xml):
+	use thumbnail factory to store and retrieve metatheme thumbs
+	(bug #448968)
+
+2007-08-03  Jens Granseuer  <jensgr@gmx.net>
+
 	* data/appearance.glade:
 	* data/theme-thumbnailing.png: reduce metatheme thumbnail size to
 	128x128 in preparation of using gnome-thumbnail-factory

@@ -32,10 +32,10 @@
 typedef struct {
   GConfClient *client;
   GladeXML *xml;
+  GnomeThumbnailFactory *thumb_factory;
 
   /* desktop */
   GHashTable *wp_hash;
-  GnomeThumbnailFactory *wp_thumbs;
   gboolean wp_update_gconf;
   GtkIconView *wp_view;
   GtkTreeModel *wp_model;

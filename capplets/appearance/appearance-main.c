@@ -33,6 +33,7 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/gnome-ui-init.h>
 /* ---------------------------------- */
+#include <libgnomeui/gnome-thumbnail.h>
 
 static AppearanceData *
 init_appearance_data (int *argc, char ***argv)
@@ -60,6 +61,7 @@ init_appearance_data (int *argc, char ***argv)
     data = g_new (AppearanceData, 1);
     data->client = gconf_client_get_default ();
     data->xml = ui;
+    data->thumb_factory = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
   }
 
   return data;
@@ -80,6 +82,7 @@ main_window_response (GtkWidget *widget,
     desktop_shutdown (data);
     font_shutdown (data);
 
+    g_object_unref (data->thumb_factory);
     g_object_unref (data->client);
     g_object_unref (data->xml);
   }

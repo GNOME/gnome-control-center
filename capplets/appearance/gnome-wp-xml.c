@@ -73,7 +73,7 @@ static void gnome_wp_load_legacy (AppearanceData *data) {
 	if (foo[strlen (foo) - 1] == '\n') {
 	  foo[strlen (foo) - 1] = '\0';
 	}
-	
+
 	item = g_hash_table_lookup (data->wp_hash, foo);
 	if (item != NULL) {
 	  continue;
@@ -83,7 +83,7 @@ static void gnome_wp_load_legacy (AppearanceData *data) {
 	  continue;
 	}
 
-	item = gnome_wp_item_new (foo, data->wp_hash, data->wp_thumbs);
+	item = gnome_wp_item_new (foo, data->wp_hash, data->thumb_factory);
 	if (item != NULL && item->fileinfo == NULL) {
 	  gnome_wp_item_free (item);
 	}
@@ -92,7 +92,7 @@ static void gnome_wp_load_legacy (AppearanceData *data) {
       g_free (foo);
     }
   }
-  
+
   g_free (filename);
 }
 
@@ -226,7 +226,7 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
       if ((wp->filename != NULL &&
 	   g_file_test (wp->filename, G_FILE_TEST_EXISTS)) ||
 	  !strcmp (wp->filename, "(none)")) {
-	wp->fileinfo = gnome_wp_info_new (wp->filename, data->wp_thumbs);
+	wp->fileinfo = gnome_wp_info_new (wp->filename, data->thumb_factory);
 
 	if (wp->name == NULL || !strcmp (wp->filename, "(none)")) {
 	  g_free (wp->name);

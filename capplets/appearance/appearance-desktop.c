@@ -127,7 +127,7 @@ wp_props_load_wallpaper (gchar *key,
 
   gtk_list_store_append (GTK_LIST_STORE (data->wp_model), &iter);
 
-  pixbuf = gnome_wp_item_get_thumbnail (item, data->wp_thumbs);
+  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
   gnome_wp_item_update_description (item);
 
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
@@ -162,7 +162,7 @@ wp_add_image (AppearanceData *data,
   }
   else
   {
-    item = gnome_wp_item_new (filename, data->wp_hash, data->wp_thumbs);
+    item = gnome_wp_item_new (filename, data->wp_hash, data->thumb_factory);
 
     if (item != NULL)
     {
@@ -337,7 +337,7 @@ wp_scale_type_changed (GtkComboBox *combobox,
     break;
   }
 
-  pixbuf = gnome_wp_item_get_thumbnail (item, data->wp_thumbs);
+  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model),
                       &iter,
                       0, pixbuf,
@@ -380,7 +380,7 @@ wp_shade_type_changed (GtkWidget *combobox,
     break;
   }
 
-  pixbuf = gnome_wp_item_get_thumbnail (item, data->wp_thumbs);
+  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
                       0, pixbuf,
                       -1);
@@ -796,7 +796,7 @@ wp_update_preview (GtkFileChooser *chooser,
 
     if (mime_type)
     {
-      pixbuf = gnome_thumbnail_factory_generate_thumbnail (data->wp_thumbs,
+      pixbuf = gnome_thumbnail_factory_generate_thumbnail (data->thumb_factory,
                                                            uri,
                                                            mime_type);
       g_free (mime_type);
@@ -880,7 +880,7 @@ wp_load_stuffs (void *user_data)
   item = g_hash_table_lookup (data->wp_hash, "(none)");
   if (item == NULL)
   {
-    item = gnome_wp_item_new ("(none)", data->wp_hash, data->wp_thumbs);
+    item = gnome_wp_item_new ("(none)", data->wp_hash, data->thumb_factory);
     if (item != NULL)
     {
       wp_props_load_wallpaper (item->filename, item, data);
@@ -940,8 +940,6 @@ desktop_init (AppearanceData *data,
   }
 
   data->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
-
-  data->wp_thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
 
   gconf_client_add_dir (data->client, WP_KEYBOARD_PATH,
       GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -1088,7 +1086,6 @@ desktop_shutdown (AppearanceData *data)
   gnome_wp_xml_save_list (data);
   g_slist_foreach (data->wp_uris, (GFunc) g_free, NULL);
   g_slist_free (data->wp_uris);
-  g_object_unref (data->wp_thumbs);
   g_object_ref_sink (data->wp_filesel);
   g_object_unref (data->wp_filesel);
 }

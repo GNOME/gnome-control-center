@@ -33,6 +33,7 @@
 #include <libwindow-settings/gnome-wm-manager.h>
 #include <string.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <libgnomeui/gnome-thumbnail.h>
 
 #define CUSTOM_THEME_NAME "__custom__"
 
@@ -54,26 +55,113 @@ static const GtkTargetEntry drop_types[] =
   {"_NETSCAPE_URL", 0, TARGET_NS_URL}
 };
 
+static time_t
+theme_get_mtime (const char *name)
+{
+  GnomeThemeMetaInfo *theme;
+  time_t mtime = -1;
+
+  theme = gnome_theme_meta_info_find (name);
+  if (theme != NULL) {
+    GnomeVFSFileInfo *file_info;
+    GnomeVFSResult result;
+
+    file_info = gnome_vfs_file_info_new ();
+
+    result = gnome_vfs_get_file_info (theme->path, file_info,
+				      GNOME_VFS_FILE_INFO_DEFAULT |
+				      GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+
+    if (result == GNOME_VFS_OK)
+      mtime = file_info->mtime;
+
+    gnome_vfs_file_info_unref (file_info);
+  }
+
+  return mtime;
+}
+
+static void
+theme_thumbnail_update (GdkPixbuf *pixbuf,
+			gchar *theme_name,
+			AppearanceData *data,
+			gboolean cache)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model = GTK_TREE_MODEL (data->theme_store);
+
+  /* find item in model and update thumbnail */
+  if (!pixbuf)
+    return;
+
+  if (theme_find_in_model (model, theme_name, &iter)) {
+    time_t mtime;
+
+    gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
+
+#if 1
+    /* cache thumbnail */
+    if (cache && (mtime = theme_get_mtime (theme_name)) != -1) {
+      gchar *path;
+
+      /* try to share thumbs with nautilus, use themes:/// */
+      path = g_strconcat ("themes:///", theme_name, NULL);
+
+      gnome_thumbnail_factory_save_thumbnail (data->thumb_factory,
+					      pixbuf, path, mtime);
+
+      g_free (path);
+    }
+#endif
+  }
+
+  g_object_unref (pixbuf);
+}
+
+static GdkPixbuf *
+theme_get_thumbnail_from_cache (GnomeThemeMetaInfo *info, AppearanceData *data)
+{
+  GdkPixbuf *thumb = NULL;
+  gchar *path, *thumb_filename;
+  time_t mtime;
+
+  if (info == data->theme_custom)
+    return NULL;
+
+  mtime = theme_get_mtime (info->name);
+  if (mtime == -1)
+    return NULL;
+
+  /* try to share thumbs with nautilus, use themes:/// */
+  path = g_strconcat ("themes:///", info->name, NULL);
+  thumb_filename = gnome_thumbnail_factory_lookup (data->thumb_factory,
+                                                   path, mtime);
+  g_free (path);
+
+  if (thumb_filename != NULL)
+    thumb = gdk_pixbuf_new_from_file (thumb_filename, NULL);
+
+  return thumb;
+}
+
 static void
 theme_thumbnail_done_cb (GdkPixbuf *pixbuf, gchar *theme_name, AppearanceData *data)
 {
-  /* find item in model and update thumbnail */
-  if (pixbuf) {
-    GtkTreeIter iter;
-    GtkTreeModel *model = GTK_TREE_MODEL (data->theme_store);
-
-    if (theme_find_in_model (model, theme_name, &iter))
-      gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
-
-    g_object_unref (pixbuf);
-  }
+  theme_thumbnail_update (pixbuf, theme_name, data, TRUE);
 }
 
 static void
 theme_thumbnail_generate (GnomeThemeMetaInfo *info, AppearanceData *data)
 {
-  generate_meta_theme_thumbnail_async (info,
-      (ThemeThumbnailFunc) theme_thumbnail_done_cb, data, NULL);
+  GdkPixbuf *thumb;
+
+  thumb = theme_get_thumbnail_from_cache (info, data);
+
+  if (thumb != NULL)
+    theme_thumbnail_update (thumb, info->name, data, FALSE);
+  else
+    generate_meta_theme_thumbnail_async (info,
+        (ThemeThumbnailFunc) theme_thumbnail_done_cb, data, NULL);
 }
 
 static void
