@@ -99,7 +99,6 @@ theme_thumbnail_update (GdkPixbuf *pixbuf,
 
     gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
 
-#if 1
     /* cache thumbnail */
     if (cache && (mtime = theme_get_mtime (theme_name)) != -1) {
       gchar *path;
@@ -112,7 +111,6 @@ theme_thumbnail_update (GdkPixbuf *pixbuf,
 
       g_free (path);
     }
-#endif
   }
 
   g_object_unref (pixbuf);
