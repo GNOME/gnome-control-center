@@ -106,14 +106,12 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
   GnomeWPItem * item;
   gint i;
 
-#if GLIB_CHECK_VERSION (2, 6, 0)
-  syslangs = g_get_language_names ();
-#endif
-
   wplist = xmlParseFile (filename);
 
   if (!wplist)
     return;
+
+  syslangs = g_get_language_names ();
 
   root = xmlDocGetRootElement (wplist);
 
@@ -264,7 +262,8 @@ static void gnome_wp_file_changed (GnomeVFSMonitorHandle * handle,
 void gnome_wp_xml_load_list (AppearanceData *data) {
   GnomeVFSMonitorHandle * handle;
   GList * list, * l;
-  gchar * wpdbfile, * xdgdirslist;
+  const gchar * xdgdirslist;
+  gchar * wpdbfile;
   gchar ** xdgdirs;
   gint i;
 
@@ -287,9 +286,9 @@ void gnome_wp_xml_load_list (AppearanceData *data) {
   }
   g_free (wpdbfile);
 
-  xdgdirslist = g_strdup (g_getenv ("XDG_DATA_DIRS"));
+  xdgdirslist = g_getenv ("XDG_DATA_DIRS");
   if (xdgdirslist == NULL || strlen (xdgdirslist) == 0)
-    xdgdirslist = g_strdup ("/usr/local/share:/usr/share");
+    xdgdirslist = "/usr/local/share:/usr/share";
 
   xdgdirs = g_strsplit (xdgdirslist, ":", -1);
   for (i = 0; xdgdirs && xdgdirs[i]; i++) {
@@ -322,7 +321,6 @@ void gnome_wp_xml_load_list (AppearanceData *data) {
     g_free (datadir);
   }
   g_strfreev (xdgdirs);
-  g_free (xdgdirslist);
 
   if (g_file_test (WALLPAPER_DATADIR, G_FILE_TEST_IS_DIR)) {
     gnome_vfs_directory_list_load (&list, WALLPAPER_DATADIR,

@@ -406,19 +406,13 @@ wp_color_changed (AppearanceData *data,
 
   gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_pcpicker), item->pcolor);
 
-  item->pri_color = g_strdup_printf ("#%02X%02X%02X",
-                                     item->pcolor->red >> 8,
-                                     item->pcolor->green >> 8,
-                                     item->pcolor->blue >> 8);
+  item->pri_color = gdk_color_to_string (item->pcolor);
 
   g_free (item->sec_color);
 
   gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_scpicker), item->scolor);
 
-  item->sec_color = g_strdup_printf ("#%02X%02X%02X",
-                                     item->scolor->red >> 8,
-                                     item->scolor->green >> 8,
-                                     item->scolor->blue >> 8);
+  item->sec_color = gdk_color_to_string (item->scolor);
 
   if (update)
   {

@@ -1,5 +1,13 @@
 2007-08-03  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-desktop.c: (wp_color_changed): use gdk_color_to_string
+	instead of g_strdup_printf
+	* gnome-wp-xml.c: (gnome_wp_xml_load_xml),
+	(gnome_wp_xml_load_list): remove check for old glib version that
+	would result in bogus code, and save an unnecessary alloc
+
+2007-08-03  Jens Granseuer  <jensgr@gmx.net>
+
 	* appearance-desktop.c: (wp_props_load_wallpaper), (wp_add_image),
 	(wp_scale_type_changed), (wp_shade_type_changed),
 	(wp_update_preview), (wp_load_stuffs), (desktop_init),
