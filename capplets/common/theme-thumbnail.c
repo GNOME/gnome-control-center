@@ -88,7 +88,7 @@ static int pipe_from_factory_fd[2];
 #define THUMBNAIL_TYPE_METACITY "metacity"
 #define THUMBNAIL_TYPE_ICON     "icon"
 
-#define META_THUMBNAIL_SIZE       140
+#define META_THUMBNAIL_SIZE       128
 #define GTK_THUMBNAIL_SIZE         96
 #define METACITY_THUMBNAIL_WIDTH  120
 #define METACITY_THUMBNAIL_HEIGHT  60
