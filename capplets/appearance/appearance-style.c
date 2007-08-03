@@ -250,9 +250,6 @@ check_color_schemes_enabled (GtkSettings *settings,
 static void
 color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 {
-  gchar *new_scheme;
-  GdkColor colors[NUM_SYMBOLIC_COLORS];
-  gchar *str[NUM_SYMBOLIC_COLORS + 1];
   const gchar *widgets[NUM_SYMBOLIC_COLORS] = {
       "fg_colorbutton", "bg_colorbutton",
       "text_colorbutton", "base_colorbutton",
@@ -265,27 +262,27 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
       "tooltip_fg_color", "tooltip_bg_color" };
   gint i;
   GtkWidget *widget;
+  GdkColor color;
+  GString *scheme = g_string_new (NULL);
+  gchar *colstr;
 
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
     widget = glade_xml_get_widget (data->xml, widgets[i]);
-    gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[i]);
+    gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &color);
 
-    str[i] = g_strdup_printf ("%s:#%04x%04x%04x",
-             labels[i], colors[i].red, colors[i].green, colors[i].blue);
+    colstr = gdk_color_to_string (&color);
+    g_string_append_printf (scheme, "%s:%s\n", labels[i], colstr);
+    g_free (colstr);
   }
-  str[NUM_SYMBOLIC_COLORS] = NULL;
+  /* remove the last newline */
+  g_string_truncate (scheme, scheme->len - 1);
 
-  new_scheme = g_strjoinv ("\n", str);
-
-  /* Currently we assume this has only been called when one of the colours has
+  /* Currently we assume this has only been called when one of the colors has
    * actually changed, so we don't check the original key first */
-  gconf_client_set_string (data->client, COLOR_SCHEME_KEY, new_scheme, NULL);
+  gconf_client_set_string (data->client, COLOR_SCHEME_KEY, scheme->str, NULL);
+  g_string_free (scheme, TRUE);
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), TRUE);
-
-  for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i)
-    g_free (str[i]);
-  g_free (new_scheme);
 }
 
 static void
