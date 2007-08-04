@@ -370,22 +370,31 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
                           AppearanceData *data)
 {
   GtkWidget *cursor_size_scale;
+  GtkWidget *cursor_size_label;
+  GtkWidget *cursor_size_small_label;
+  GtkWidget *cursor_size_large_label;
+  gboolean sensitive;
 
   cursor_size_scale = glade_xml_get_widget (data->xml, "cursor_size_scale");
+  cursor_size_label = glade_xml_get_widget (data->xml, "cursor_size_label");
+  cursor_size_small_label = glade_xml_get_widget (data->xml, "cursor_size_small_label");
+  cursor_size_large_label = glade_xml_get_widget (data->xml, "cursor_size_large_label");
 
-  if (!theme || theme->sizes->len == 1)
-  {
-    gtk_widget_set_sensitive (cursor_size_scale, FALSE);
-  }
-  else
+  sensitive = theme && theme->sizes->len > 1;
+  gtk_widget_set_sensitive (cursor_size_scale, sensitive);
+  gtk_widget_set_sensitive (cursor_size_label, sensitive);
+  gtk_widget_set_sensitive (cursor_size_small_label, sensitive);
+  gtk_widget_set_sensitive (cursor_size_large_label, sensitive);
+
+  if (sensitive)
   {
     GtkAdjustment *adjustment;
     gint gconf_size, i;
     gboolean size_found = FALSE;
+    GtkRange *range = GTK_RANGE (cursor_size_scale);
 
-    adjustment = gtk_range_get_adjustment (GTK_RANGE (cursor_size_scale));
+    adjustment = gtk_range_get_adjustment (range);
     g_object_set (G_OBJECT (adjustment), "upper", (gdouble) theme->sizes->len - 1, NULL);
-    gtk_widget_set_sensitive (cursor_size_scale, TRUE);
 
     gconf_size = gconf_client_get_int (data->client, CURSOR_SIZE_KEY, NULL);
 
@@ -397,7 +406,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
 
       if (size == gconf_size)
       {
-        gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) i);
+        gtk_range_set_value (range, (gdouble) i);
         size_found = TRUE;
         break;
       }
@@ -405,7 +414,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
       {
         if (i == 0)
         {
-          gtk_range_set_value (GTK_RANGE (cursor_size_scale), 0);
+          gtk_range_set_value (range, 0);
           size_found = TRUE;
           break;
         }
@@ -416,7 +425,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
           diff = size - gconf_size;
           diff_to_last = gconf_size - g_array_index (theme->sizes, gint, i - 1);
 
-          gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) (diff < diff_to_last) ? diff : diff_to_last);
+          gtk_range_set_value (range, (gdouble) (diff < diff_to_last) ? diff : diff_to_last);
           size_found = TRUE;
           break;
         }
@@ -426,7 +435,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
     /* set to the biggest size if the gconf value is bigger than
       all available sizes */
     if (!size_found)
-      gtk_range_set_value (GTK_RANGE (cursor_size_scale), (gdouble) g_array_index (theme->sizes, gint, theme->sizes->len - 1));
+      gtk_range_set_value (range, (gdouble) g_array_index (theme->sizes, gint, theme->sizes->len - 1));
   }
 }
 #endif
