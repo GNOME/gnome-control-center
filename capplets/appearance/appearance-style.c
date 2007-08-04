@@ -803,7 +803,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   g_list_free (themes);
 
 #ifdef HAVE_XCURSOR
-  if (type == THEME_TYPE_CURSOR) {
+  if (type == THEME_TYPE_CURSOR && !gnome_theme_cursor_info_find ("default")) {
     GtkTreeIter i;
     gtk_list_store_insert_with_values (store, &i, 0,
                                        COL_LABEL, _("Default Pointer"),

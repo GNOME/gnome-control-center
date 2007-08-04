@@ -998,59 +998,57 @@ gdk_pixbuf_from_xcursor_image (XcursorImage *cursor) {
   return pixbuf;
 }
 
-
 static void
-look_for_cursor_theme (const gchar *theme_dir)
+read_cursor_theme (const gchar *theme_dir)
 {
-  gchar *cursors_dir;
-  gchar *cursor_theme_file;
-  GnomeDesktopItem *cursor_theme_ditem;
+  gchar *name;
+  gint i;
+  GArray *available_sizes;
+  XcursorImage *cursor;
+  GdkPixbuf *thumbnail = NULL;
+  GnomeThemeCursorInfo *cursor_theme_info;
+  const gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64, 0 };
 
-  cursors_dir = g_build_filename (theme_dir, "cursors", NULL);
+  name = g_path_get_basename (theme_dir);
 
-  if (g_file_test (cursors_dir, G_FILE_TEST_IS_DIR)) {
-    gchar *name;
-    gint i;
-    GArray *available_sizes;
-    XcursorImage *cursor;
-    GdkPixbuf *thumbnail = NULL;
-    GnomeThemeCursorInfo *cursor_theme_info;
-    const gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64, 0 };
+  available_sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint),
+				 G_N_ELEMENTS (sizes) - 1);
 
-    name = g_path_get_basename (theme_dir);
+  for (i = 0; sizes[i] != 0; i++) {
+    cursor = XcursorLibraryLoadImage ("left_ptr", name, sizes[i]);
 
-    available_sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint),
-					 G_N_ELEMENTS (sizes) - 1);
+    if (cursor) {
+      if (cursor->size == sizes[i]) {
+        g_array_append_val (available_sizes, sizes[i]);
 
-    for (i = 0; sizes[i] != 0; i++) {
-      cursor = XcursorLibraryLoadImage ("left_ptr", name, sizes[i]);
-
-      if (cursor) {
-        if (cursor->size == sizes[i]) {
-          g_array_append_val (available_sizes, sizes[i]);
-
-          if (thumbnail == NULL && i >= 1)
-            thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
-        }
-
-        XcursorImageDestroy (cursor);
+        if (thumbnail == NULL && i >= 1)
+          thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
       }
-    }
 
-    if (!thumbnail) {
-      cursor = XcursorLibraryLoadImage ("left_ptr", name, g_array_index (available_sizes, gint, 0));
-      if (cursor) {
-        thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
-        XcursorImageDestroy (cursor);
-      }
+      XcursorImageDestroy (cursor);
     }
+  }
 
-    cursor_theme_info = gnome_theme_cursor_info_new ();
-    cursor_theme_info->path = g_strdup (theme_dir);
-    cursor_theme_info->name = name;
-    cursor_theme_info->sizes = available_sizes;
-    cursor_theme_info->thumbnail = thumbnail;
-    cursor_theme_info->priority = 0;
+  if (!thumbnail) {
+    cursor = XcursorLibraryLoadImage ("left_ptr", name, g_array_index (available_sizes, gint, 0));
+    if (cursor) {
+      thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
+      XcursorImageDestroy (cursor);
+    }
+  }
+
+  cursor_theme_info = gnome_theme_cursor_info_new ();
+  cursor_theme_info->path = g_strdup (theme_dir);
+  cursor_theme_info->name = name;
+  cursor_theme_info->sizes = available_sizes;
+  cursor_theme_info->thumbnail = thumbnail;
+  cursor_theme_info->priority = 0;
+
+  if (!strcmp (name, "default")) {
+    cursor_theme_info->readable_name = _("Default Pointer");
+  } else {
+    gchar *cursor_theme_file;
+    GnomeDesktopItem *cursor_theme_ditem;
 
     cursor_theme_file = g_build_filename (theme_dir, "index.theme", NULL);
     cursor_theme_ditem = gnome_desktop_item_new_from_file (cursor_theme_file, 0, NULL);
@@ -1070,10 +1068,18 @@ look_for_cursor_theme (const gchar *theme_dir)
     } else {
       cursor_theme_info->readable_name = g_strdup (name);
     }
-
-    g_hash_table_insert (cursor_theme_hash_by_uri, cursor_theme_info->path, cursor_theme_info);
-    add_data_to_hash_by_name (cursor_theme_hash_by_name, name, cursor_theme_info);
   }
+  g_hash_table_insert (cursor_theme_hash_by_uri, cursor_theme_info->path, cursor_theme_info);
+  add_data_to_hash_by_name (cursor_theme_hash_by_name, name, cursor_theme_info);
+}
+
+static void
+look_for_cursor_theme (const gchar *theme_dir)
+{
+  gchar *cursors_dir = g_build_filename (theme_dir, "cursors", NULL);
+
+  if (g_file_test (cursors_dir, G_FILE_TEST_IS_DIR) || g_str_has_suffix (theme_dir, "default"))
+    read_cursor_theme (theme_dir);
 
   g_free (cursors_dir);
 }
