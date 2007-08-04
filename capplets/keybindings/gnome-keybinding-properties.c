@@ -809,6 +809,39 @@ cb_check_for_uniqueness (GtkTreeModel *model,
   return TRUE;
 }
 
+static const guint forbidden_keyvals[] = {
+  /* Navigation keys */
+  GDK_Home,
+  GDK_Left,
+  GDK_Up,
+  GDK_Right,
+  GDK_Down,
+  GDK_Page_Up,
+  GDK_Page_Down,
+  GDK_End,
+  GDK_Tab,
+
+  /* Return */
+  GDK_KP_Enter,
+  GDK_Return,
+
+  GDK_space,
+  GDK_Mode_switch
+};
+
+static gboolean
+keyval_is_forbidden (guint keyval)
+{
+  guint i;
+
+  for (i = 0; i < G_N_ELEMENTS(forbidden_keyvals); i++) {
+    if (keyval == forbidden_keyvals[i])
+      return TRUE;
+  }
+
+  return FALSE;
+}
+
 static void
 accel_edited_callback (GtkCellRendererText   *cell,
                        const char            *path_string,
@@ -868,8 +901,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 	   || (tmp_key.keyval >= GDK_Thai_kokai && tmp_key.keyval <= GDK_Thai_lekkao)
 	   || (tmp_key.keyval >= GDK_Hangul && tmp_key.keyval <= GDK_Hangul_Special)
 	   || (tmp_key.keyval >= GDK_Hangul_Kiyeog && tmp_key.keyval <= GDK_Hangul_J_YeorinHieuh)
-	   || tmp_key.keyval == GDK_space || tmp_key.keyval == GDK_Return
-	   || tmp_key.keyval == GDK_Mode_switch) {
+	   || keyval_is_forbidden (tmp_key.keyval)) {
         GtkWidget *dialog;
 	char *name;
 
