@@ -881,7 +881,7 @@ themes_init (AppearanceData *data)
   gtk_icon_view_set_model (icon_view, GTK_TREE_MODEL (sort_model));
 
   g_signal_connect (icon_view, "selection-changed", (GCallback) theme_selection_changed_cb, data);
-  theme_select_name (icon_view, meta_theme->name);
+  g_signal_connect_after (icon_view, "realize", (GCallback) theme_select_name, meta_theme->name);
 
   w = glade_xml_get_widget (data->xml, "theme_install");
   gtk_button_set_image (GTK_BUTTON (w),
