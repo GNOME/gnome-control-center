@@ -303,20 +303,10 @@ gtk_theme_changed (GConfPropertyEditor *peditor,
 {
   GnomeThemeInfo *theme = NULL;
   const gchar *name;
-  gchar *current_theme;
   GtkSettings *settings = gtk_settings_get_default ();
 
-  if (value && (name = gconf_value_get_string (value))) {
+  if (value && (name = gconf_value_get_string (value)))
     theme = gnome_theme_info_find (name);
-
-    /* manually update GtkSettings to new gtk+ theme. */
-    g_object_get (settings, "gtk-theme-name", &current_theme, NULL);
-
-    if (strcmp (current_theme, name) != 0)
-      g_object_set (settings, "gtk-theme-name", name, NULL);
-
-    g_free (current_theme);
-  }
 
   check_color_schemes_enabled (settings, data);
   update_color_buttons_from_settings (settings, data);
