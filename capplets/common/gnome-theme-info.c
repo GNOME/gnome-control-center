@@ -1007,14 +1007,15 @@ read_cursor_theme (const gchar *theme_dir)
   XcursorImage *cursor;
   GdkPixbuf *thumbnail = NULL;
   GnomeThemeCursorInfo *cursor_theme_info;
-  const gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64, 0 };
+  const gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64 };
+  const gint num_sizes = G_N_ELEMENTS (sizes);
 
   name = g_path_get_basename (theme_dir);
 
   available_sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint),
-				 G_N_ELEMENTS (sizes) - 1);
+				       num_sizes);
 
-  for (i = 0; sizes[i] != 0; i++) {
+  for (i = 0; i < num_sizes; i++) {
     cursor = XcursorLibraryLoadImage ("left_ptr", name, sizes[i]);
 
     if (cursor) {
@@ -1045,7 +1046,7 @@ read_cursor_theme (const gchar *theme_dir)
   cursor_theme_info->priority = 0;
 
   if (!strcmp (name, "default")) {
-    cursor_theme_info->readable_name = _("Default Pointer");
+    cursor_theme_info->readable_name = g_strdup (_("Default Pointer"));
   } else {
     gchar *cursor_theme_file;
     GnomeDesktopItem *cursor_theme_ditem;
@@ -1057,7 +1058,7 @@ read_cursor_theme (const gchar *theme_dir)
     if (cursor_theme_ditem) {
       const gchar *readable_name;
 
-      readable_name = (gchar *) gnome_desktop_item_get_string (cursor_theme_ditem, "Icon Theme/Name");
+      readable_name = gnome_desktop_item_get_string (cursor_theme_ditem, "Icon Theme/Name");
 
       if (readable_name)
         cursor_theme_info->readable_name = g_strdup (readable_name);
@@ -1508,7 +1509,8 @@ gnome_theme_cursor_info_free (GnomeThemeCursorInfo *cursor_theme_info)
   g_free (cursor_theme_info->readable_name);
   g_free (cursor_theme_info->path);
   g_array_free (cursor_theme_info->sizes, TRUE);
-  g_object_unref (cursor_theme_info->thumbnail);
+  if (cursor_theme_info->thumbnail != NULL)
+    g_object_unref (cursor_theme_info->thumbnail);
   g_free (cursor_theme_info);
 }
 
