@@ -62,7 +62,7 @@ show_handlebar (AppearanceData *data, gboolean show)
 static void
 set_toolbar_style (AppearanceData *data, const char *value)
 {
-  static const GtkToolbarStyle gtk_toolbar_styles[] = 
+  static const GtkToolbarStyle gtk_toolbar_styles[] =
     { GTK_TOOLBAR_BOTH, GTK_TOOLBAR_BOTH_HORIZ, GTK_TOOLBAR_ICONS, GTK_TOOLBAR_TEXT };
 
   int enum_val;
@@ -88,9 +88,9 @@ set_have_icons (AppearanceData *data, gboolean value)
     "paste",
     NULL
   };
-  
+
   const char **name;
-  
+
   for (name = menu_item_names; *name != NULL; name++) {
     GtkImageMenuItem *item = GTK_IMAGE_MENU_ITEM (glade_xml_get_widget (data->xml, *name));
     GtkWidget *image;
@@ -113,7 +113,7 @@ set_have_icons (AppearanceData *data, gboolean value)
 /** GConf Callbacks and Conversions **/
 
 static GConfValue *
-toolbar_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+toolbar_from_widget (GConfPropertyEditor *peditor, GConfValue *value)
 {
   GConfValue *new_value;
 
@@ -126,7 +126,7 @@ toolbar_from_widget (GConfPropertyEditor *peditor, GConfValue *value)
 }
 
 static GConfValue *
-toolbar_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+toolbar_to_widget (GConfPropertyEditor *peditor, GConfValue *value)
 {
   GConfValue *new_value;
   const gchar *str;
@@ -199,8 +199,8 @@ ui_init (AppearanceData *data)
     (NULL, "/desktop/gnome/interface/menus_have_icons",
      glade_xml_get_widget (data->xml, "menu_icons_toggle"), NULL);
   g_signal_connect (peditor, "value_changed",
-		    G_CALLBACK (menus_have_icons_cb), data);
-  
+		    (GCallback) menus_have_icons_cb, data);
+
   set_have_icons (data,
     gconf_client_get_bool (data->client,
 			   "/desktop/gnome/interface/menus_have_icons",
@@ -212,12 +212,12 @@ ui_init (AppearanceData *data)
      "conv-to-widget-cb", toolbar_to_widget,
      "conv-from-widget-cb", toolbar_from_widget,
      NULL);
-  g_signal_connect (peditor, "value_changed", 
-		    G_CALLBACK (toolbar_style_cb), data);
+  g_signal_connect (peditor, "value_changed",
+		    (GCallback) toolbar_style_cb, data);
 
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "toolbar_handlebox")),
+  g_signal_connect (glade_xml_get_widget (data->xml, "toolbar_handlebox"),
 		    "button_press_event",
-		    G_CALLBACK (button_press_block_cb), NULL);
+		    (GCallback) button_press_block_cb, NULL);
 
   show_handlebar (data,
     gconf_client_get_bool (data->client,
@@ -226,7 +226,7 @@ ui_init (AppearanceData *data)
 
   toolbar_style = gconf_client_get_string
     (data->client,
-     "/desktop/gnome/interface/toolbar_style", 
+     "/desktop/gnome/interface/toolbar_style",
      NULL);
   set_toolbar_style (data, toolbar_style);
   g_free (toolbar_style);

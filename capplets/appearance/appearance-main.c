@@ -159,8 +159,8 @@ main (int argc, char **argv)
   capplet_set_icon (w, "gnome-settings-theme");
   gtk_widget_show_all (w);
 
-  g_signal_connect_after (G_OBJECT (w), "response",
-                          G_CALLBACK (main_window_response), data);
+  g_signal_connect_after (w, "response",
+                          (GCallback) main_window_response, data);
 
   /* default to background page if files were given on the command line */
   if (wallpaper_files && !install_filename && !start_page)

@@ -189,7 +189,7 @@ update_color_buttons_from_settings (GtkSettings *settings,
   gchar *scheme, *setting;
 
   scheme = gconf_client_get_string (data->client, COLOR_SCHEME_KEY, NULL);
-  g_object_get (G_OBJECT (settings), "gtk-color-scheme", &setting, NULL);
+  g_object_get (settings, "gtk-color-scheme", &setting, NULL);
 
   if (scheme == NULL || strcmp (scheme, "") == 0)
     gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
@@ -217,7 +217,7 @@ check_color_schemes_enabled (GtkSettings *settings,
   gboolean enable_colors = FALSE;
   gint i;
 
-  g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme, NULL);
+  g_object_get (settings, "gtk-theme-name", &theme, NULL);
   filename = gtkrc_find_named (theme);
   g_free (theme);
 
@@ -377,7 +377,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
     GtkRange *range = GTK_RANGE (cursor_size_scale);
 
     adjustment = gtk_range_get_adjustment (range);
-    g_object_set (G_OBJECT (adjustment), "upper", (gdouble) theme->sizes->len - 1, NULL);
+    g_object_set (adjustment, "upper", (gdouble) theme->sizes->len - 1, NULL);
 
     gconf_size = gconf_client_get_int (data->client, CURSOR_SIZE_KEY, NULL);
 
@@ -817,7 +817,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   gtk_tree_view_set_model (GTK_TREE_VIEW (list), GTK_TREE_MODEL (sort_model));
 
   renderer = gtk_cell_renderer_pixbuf_new ();
-  g_object_set (G_OBJECT (renderer), "xpad", 3, "ypad", 3, NULL);
+  g_object_set (renderer, "xpad", 3, "ypad", 3, NULL);
 
   column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, renderer, FALSE);
@@ -881,9 +881,9 @@ style_init (AppearanceData *data)
 #ifdef HAVE_XCURSOR
   w = glade_xml_get_widget (data->xml, "cursor_size_scale");
   GTK_RANGE (w)->round_digits = 0;
-  g_signal_connect (G_OBJECT (w), "value-changed", (GCallback) cursor_size_scale_value_changed_cb, data);
+  g_signal_connect (w, "value-changed", (GCallback) cursor_size_scale_value_changed_cb, data);
   adjustment = gtk_range_get_adjustment (GTK_RANGE (w));
-  g_object_set (G_OBJECT (adjustment), "page-size", 0.0, NULL);
+  g_object_set (adjustment, "page-size", 0.0, NULL);
 
   w = glade_xml_get_widget (data->xml, "cursor_size_small_label");
   label = g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w)));
@@ -905,10 +905,10 @@ style_init (AppearanceData *data)
   /* connect signals */
   /* color buttons */
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i)
-    g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, symbolic_names[i])), "color-set", (GCallback) color_button_clicked_cb, data);
+    g_signal_connect (glade_xml_get_widget (data->xml, symbolic_names[i]), "color-set", (GCallback) color_button_clicked_cb, data);
 
   /* revert button */
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "color_scheme_defaults_button")), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
+  g_signal_connect (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
   /* delete buttons */
   g_signal_connect (glade_xml_get_widget (data->xml, "gtk_themes_delete"), "clicked", (GCallback) gtk_theme_delete_cb, data);
   g_signal_connect (glade_xml_get_widget (data->xml, "window_themes_delete"), "clicked", (GCallback) window_theme_delete_cb, data);

@@ -181,7 +181,7 @@ wp_add_images (AppearanceData *data,
   GdkCursor *cursor;
   GnomeWPItem *item;
 
-  window = (glade_xml_get_widget (data->xml, "appearance_window"))->window;
+  window = glade_xml_get_widget (data->xml, "appearance_window")->window;
 
   item = NULL;
   cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
@@ -689,7 +689,7 @@ wp_dragged_image (GtkWidget *widget,
       GdkWindow *window;
       GdkCursor *cursor;
 
-      window = (glade_xml_get_widget (data->xml, "appearance_window"))->window;
+      window = glade_xml_get_widget (data->xml, "appearance_window")->window;
 
       cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
              GDK_WATCH);
@@ -969,7 +969,7 @@ desktop_init (AppearanceData *data,
   gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
 
   g_signal_connect_after (data->wp_view, "realize",
-                          G_CALLBACK (wp_select_after_realize), data);
+                          (GCallback) wp_select_after_realize, data);
 
   gtk_cell_layout_clear (GTK_CELL_LAYOUT (data->wp_view));
 
@@ -991,46 +991,46 @@ desktop_init (AppearanceData *data,
   gtk_drag_dest_set (GTK_WIDGET (data->wp_view), GTK_DEST_DEFAULT_ALL, drop_types,
                      G_N_ELEMENTS (drop_types), GDK_ACTION_COPY | GDK_ACTION_MOVE);
   g_signal_connect (data->wp_view, "drag_data_received",
-                    G_CALLBACK (wp_dragged_image), data);
+                    (GCallback) wp_dragged_image, data);
 
   data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
 
   g_signal_connect (data->wp_style_menu, "changed",
-                    G_CALLBACK (wp_scale_type_changed), data);
+                    (GCallback) wp_scale_type_changed, data);
 
   data->wp_color_menu = glade_xml_get_widget (data->xml, "wp_color_menu");
 
   g_signal_connect (data->wp_color_menu, "changed",
-                    G_CALLBACK (wp_shade_type_changed), data);
+                    (GCallback) wp_shade_type_changed, data);
 
   data->wp_scpicker = glade_xml_get_widget (data->xml, "wp_scpicker");
 
   g_signal_connect (data->wp_scpicker, "color-set",
-                    G_CALLBACK (wp_scolor_changed), data);
+                    (GCallback) wp_scolor_changed, data);
 
   data->wp_pcpicker = glade_xml_get_widget (data->xml, "wp_pcpicker");
 
   g_signal_connect (data->wp_pcpicker, "color-set",
-                    G_CALLBACK (wp_scolor_changed), data);
+                    (GCallback) wp_scolor_changed, data);
 
   add_button = glade_xml_get_widget (data->xml, "wp_add_button");
   gtk_button_set_image (GTK_BUTTON (add_button),
                         gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON));
 
   g_signal_connect (add_button, "clicked",
-                    G_CALLBACK (wp_file_open_dialog), data);
+                    (GCallback) wp_file_open_dialog, data);
 
   data->wp_rem_button = glade_xml_get_widget (data->xml, "wp_rem_button");
 
   g_signal_connect (data->wp_rem_button, "clicked",
-                    G_CALLBACK (wp_remove_wallpaper), data);
+                    (GCallback) wp_remove_wallpaper, data);
 
   g_idle_add (wp_load_stuffs, data);
 
   g_signal_connect (data->wp_view, "selection-changed",
-                    G_CALLBACK (wp_props_wp_selected), data);
+                    (GCallback) wp_props_wp_selected, data);
   g_signal_connect (data->wp_view, "query-tooltip",
-                    G_CALLBACK (wp_view_tooltip_cb), data);
+                    (GCallback) wp_view_tooltip_cb, data);
 
   wp_set_sensitivities (data);
 
@@ -1071,7 +1071,7 @@ desktop_init (AppearanceData *data,
   gtk_widget_show (data->wp_image);
 
   g_signal_connect (data->wp_filesel, "update-preview",
-                    G_CALLBACK (wp_update_preview), data);
+                    (GCallback) wp_update_preview, data);
 }
 
 void
