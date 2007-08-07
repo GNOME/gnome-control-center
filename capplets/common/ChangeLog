@@ -1,11 +1,16 @@
 2007-08-07  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-theme-info.c: (read_cursor_theme): make sure we don't run off
+	the end of the array
+
+2007-08-07  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-theme-info.c: (read_cursor_theme),
 	(gnome_theme_cursor_info_free): copy the name for the default cursor,
 	too, lest we crash on free, and only unref the thumbnail if we have
 	one
 
-2007-07-28  Denis Washington  <denisw@svn.gnome.org>
+2007-08-04  Denis Washington  <denisw@svn.gnome.org>
 
 	* gnome-theme-info.c: (read_cursor_theme), (look_for_cursor_theme):
 	Also load the "default" cursor theme as GnomeThemeCursorInfo so

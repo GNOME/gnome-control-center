@@ -1030,8 +1030,9 @@ read_cursor_theme (const gchar *theme_dir)
     }
   }
 
-  if (!thumbnail) {
-    cursor = XcursorLibraryLoadImage ("left_ptr", name, g_array_index (available_sizes, gint, 0));
+  if (!thumbnail && available_sizes->len != 0) {
+    cursor = XcursorLibraryLoadImage ("left_ptr", name,
+				      g_array_index (available_sizes, gint, 0));
     if (cursor) {
       thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
       XcursorImageDestroy (cursor);
