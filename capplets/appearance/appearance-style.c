@@ -32,6 +32,13 @@ typedef void (* ThumbnailGenFunc) (void               *type,
 				   AppearanceData     *data,
 				   GDestroyNotify     *destroy);
 
+static const gchar *symbolic_names[NUM_SYMBOLIC_COLORS] = {
+  "fg_color", "bg_color",
+  "text_color", "base_color",
+  "selected_fg_color", "selected_bg_color",
+  "tooltip_fg_color", "tooltip_bg_color"
+};
+
 static gchar *
 find_string_in_model (GtkTreeModel *model, const gchar *value, gint column)
 {
@@ -161,29 +168,18 @@ cursor_theme_sort_func (GtkTreeModel *model,
 static void
 update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data)
 {
-  GdkColor color_scheme_colors[8];
+  GdkColor colors[NUM_SYMBOLIC_COLORS];
   GtkWidget *widget;
+  gint i;
 
-  if (!gnome_theme_color_scheme_parse (color_scheme, color_scheme_colors))
+  if (!gnome_theme_color_scheme_parse (color_scheme, colors))
     return;
 
   /* now set all the buttons to the correct settings */
-  widget = glade_xml_get_widget (data->xml, "fg_colorbutton");
-  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[0]);
-  widget = glade_xml_get_widget (data->xml, "bg_colorbutton");
-  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[1]);
-  widget = glade_xml_get_widget (data->xml, "text_colorbutton");
-  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[2]);
-  widget = glade_xml_get_widget (data->xml, "base_colorbutton");
-  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[3]);
-  widget = glade_xml_get_widget (data->xml, "selected_fg_colorbutton");
-  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[4]);
-  widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
-  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[5]);
-  widget = glade_xml_get_widget (data->xml, "tooltip_fg_colorbutton");
-  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[6]);
-  widget = glade_xml_get_widget (data->xml, "tooltip_bg_colorbutton");
-  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[7]);
+  for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
+    widget = glade_xml_get_widget (data->xml, symbolic_names[i]);
+    gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &colors[i]);
+  }
 }
 
 static void
@@ -218,7 +214,8 @@ check_color_schemes_enabled (GtkSettings *settings,
   gchar *theme = NULL;
   gchar *filename;
   GSList *symbolic_colors = NULL;
-  gboolean fg, bg, base, text, fg_s, bg_s, enable_colors;
+  gboolean enable_colors = FALSE;
+  gint i;
 
   g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme, NULL);
   filename = gtkrc_find_named (theme);
@@ -227,16 +224,17 @@ check_color_schemes_enabled (GtkSettings *settings,
   gtkrc_get_details (filename, NULL, &symbolic_colors);
   g_free (filename);
 
-  fg = (g_slist_find_custom (symbolic_colors, "fg_color", g_str_equal) != NULL);
-  bg = (g_slist_find_custom (symbolic_colors, "bg_color", g_str_equal) != NULL);
-  base = (g_slist_find_custom (symbolic_colors, "base_color", g_str_equal) != NULL);
-  text = (g_slist_find_custom (symbolic_colors, "text_color", g_str_equal) != NULL);
-  fg_s = (g_slist_find_custom (symbolic_colors, "selected_fg_color", g_str_equal) != NULL);
-  bg_s = (g_slist_find_custom (symbolic_colors, "selected_bg_color", g_str_equal) != NULL);
+  for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
+    gboolean found;
+
+    found = (g_slist_find_custom (symbolic_colors, symbolic_names[i], (GCompareFunc) strcmp) != NULL);
+    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, symbolic_names[i]), found);
+
+    enable_colors |= found;
+  }
+
   g_slist_foreach (symbolic_colors, (GFunc) g_free, NULL);
   g_slist_free (symbolic_colors);
-
-  enable_colors = (fg && bg && base && text && fg_s && bg_s);
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_table"), enable_colors);
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), enable_colors);
@@ -250,28 +248,18 @@ check_color_schemes_enabled (GtkSettings *settings,
 static void
 color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 {
-  const gchar *widgets[NUM_SYMBOLIC_COLORS] = {
-      "fg_colorbutton", "bg_colorbutton",
-      "text_colorbutton", "base_colorbutton",
-      "selected_fg_colorbutton", "selected_bg_colorbutton",
-      "tooltip_fg_colorbutton", "tooltip_bg_colorbutton" };
-  const gchar *labels[NUM_SYMBOLIC_COLORS] = {
-      "fg_color", "bg_color",
-      "text_color", "base_color",
-      "selected_fg_color", "selected_bg_color",
-      "tooltip_fg_color", "tooltip_bg_color" };
-  gint i;
   GtkWidget *widget;
   GdkColor color;
   GString *scheme = g_string_new (NULL);
   gchar *colstr;
+  gint i;
 
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
-    widget = glade_xml_get_widget (data->xml, widgets[i]);
+    widget = glade_xml_get_widget (data->xml, symbolic_names[i]);
     gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &color);
 
     colstr = gdk_color_to_string (&color);
-    g_string_append_printf (scheme, "%s:%s\n", labels[i], colstr);
+    g_string_append_printf (scheme, "%s:%s\n", symbolic_names[i], colstr);
     g_free (colstr);
   }
   /* remove the last newline */
@@ -869,6 +857,7 @@ style_init (AppearanceData *data)
   GtkWidget *w;
   GtkAdjustment *adjustment;
   gchar *label;
+  gint i;
 
   data->gtk_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/gtk-theme-thumbnailing.png", NULL);
   data->window_theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/window-theme-thumbnailing.png", NULL);
@@ -920,14 +909,9 @@ style_init (AppearanceData *data)
 
   /* connect signals */
   /* color buttons */
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "text_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "base_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "tooltip_fg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "tooltip_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+  for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i)
+    g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, symbolic_names[i])), "color-set", (GCallback) color_button_clicked_cb, data);
+
   /* revert button */
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "color_scheme_defaults_button")), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
   /* delete buttons */

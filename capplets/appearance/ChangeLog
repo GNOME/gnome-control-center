@@ -1,3 +1,13 @@
+2007-08-07  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_color_buttons_from_string): simplify
+	(check_color_schemes_enabled): fix check for available symbolic colors
+	and make buttons for unsupported colors insensitive (bug #464081)
+	(color_button_clicked_cb), (style_init): simplify
+
+	* data/appearance.glade: name the color buttons exactly like their
+	respective color so we don't need to keep two arrays around
+
 2007-08-05  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-themes.c: (themes_init): reinstate select-after-realize;
