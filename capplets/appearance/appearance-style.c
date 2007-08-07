@@ -252,6 +252,7 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   GdkColor color;
   GString *scheme = g_string_new (NULL);
   gchar *colstr;
+  gchar *old_scheme = NULL;
   gint i;
 
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
@@ -265,12 +266,26 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   /* remove the last newline */
   g_string_truncate (scheme, scheme->len - 1);
 
+  /* verify that the scheme really has changed */
+  g_object_get (gtk_settings_get_default (), "gtk-color-scheme", &old_scheme, NULL);
+
+  if (old_scheme == NULL ||
+      !gnome_theme_color_scheme_equal (old_scheme, scheme->str)) {
+    gconf_client_set_string (data->client, COLOR_SCHEME_KEY, scheme->str, NULL);
+
+    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), TRUE);
+  }
+  g_free (old_scheme);
+  g_string_free (scheme, TRUE);
+
+#if 0
   /* Currently we assume this has only been called when one of the colors has
    * actually changed, so we don't check the original key first */
   gconf_client_set_string (data->client, COLOR_SCHEME_KEY, scheme->str, NULL);
   g_string_free (scheme, TRUE);
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), TRUE);
+#endif
 }
 
 static void
