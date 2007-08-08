@@ -215,13 +215,11 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   GdkPixmap *pixmap;
   GdkVisual *visual;
   MetaFrameFlags flags;
-  MetaTheme *theme = NULL;
-  GtkSettings *settings;
+  MetaTheme *theme;
   GdkPixbuf *pixbuf, *icon;
-  int width, height;
+  int icon_width, icon_height;
 
-  settings = gtk_settings_get_default ();
-  g_object_set (G_OBJECT (settings),
+  g_object_set (gtk_settings_get_default (),
     "gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data,
     "gtk-font-name", (char *) theme_thumbnail_data->application_font->data,
     "gtk-icon-theme-name", (char *) theme_thumbnail_data->icon_theme_name->data,
@@ -229,6 +227,12 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
     NULL);
   theme = meta_theme_load ((char *) theme_thumbnail_data->wm_theme_name->data, NULL);
 
+  /* Represent the icon theme */
+  icon = create_folder_icon ((char *) theme_thumbnail_data->icon_theme_name->data);
+  icon_width = gdk_pixbuf_get_width (icon);
+  icon_height = gdk_pixbuf_get_height (icon);
+
+  /* Create a fake window */
   flags = META_FRAME_ALLOWS_DELETE |
           META_FRAME_ALLOWS_MENU |
           META_FRAME_ALLOWS_MINIMIZE |
@@ -309,22 +313,14 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
 
-  /* Handle the icon theme */
-  icon = create_folder_icon ((char *) theme_thumbnail_data->icon_theme_name->data);
-  width = gdk_pixbuf_get_width (icon);
-  height = gdk_pixbuf_get_height (icon);
-
-  gdk_pixbuf_composite (icon,
-                        pixbuf,
-                        vbox->allocation.x + vbox->allocation.width - width - 5,
-                        vbox->allocation.y + vbox->allocation.height - height - 5,
-                        width,
-                        height,
-                        vbox->allocation.x + vbox->allocation.width - width - 5,
-                        vbox->allocation.y + vbox->allocation.height - height - 5,
-                        1.0,
-                        1.0,
-                        GDK_INTERP_BILINEAR, 255);
+  /* Add the icon theme to the pixbuf */
+  gdk_pixbuf_composite (icon, pixbuf,
+                        vbox->allocation.x + vbox->allocation.width - icon_width - 5,
+                        vbox->allocation.y + vbox->allocation.height - icon_height - 5,
+                        icon_width, icon_height,
+                        vbox->allocation.x + vbox->allocation.width - icon_width - 5,
+                        vbox->allocation.y + vbox->allocation.height - icon_height - 5,
+                        1.0, 1.0, GDK_INTERP_BILINEAR, 255);
   g_object_unref (icon);
   gtk_widget_destroy (window);
 

@@ -1,3 +1,12 @@
+2007-08-08  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-thumbnail.c: (create_meta_theme_pixbuf):
+	Create the icon theme representative before the GTK stock button. Since
+	we explicitly set the icon theme for the first, this ensures both are
+	drawn with the same icon theme. Before it was possible when changing
+	icon themes (especially on slower machines) that the GtkSettings were
+	not yet updated and the stock button still used the old theme.
+
 2007-08-07  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-theme-info.c: (read_cursor_theme): make sure we don't run off
