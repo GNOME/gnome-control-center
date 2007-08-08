@@ -1,3 +1,10 @@
+2007-08-08  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (gtk_theme_changed): revert r7973 because it
+	broke color scheme notifications, and add a comment
+	* appearance-themes.c: (theme_setting_changed_cb), (themes_init):
+	connect to some signals from GtkSettings instead of GConf
+
 2007-08-07  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-desktop.c: (wp_add_images), (wp_dragged_image),

@@ -693,9 +693,9 @@ theme_details_changed_cb (AppearanceData *data)
 }
 
 static void
-theme_color_scheme_changed_cb (GObject *settings,
-                               GParamSpec *pspec,
-                               AppearanceData *data)
+theme_setting_changed_cb (GObject *settings,
+                          GParamSpec *pspec,
+                          AppearanceData *data)
 {
   theme_details_changed_cb (data);
 }
@@ -799,6 +799,7 @@ themes_init (AppearanceData *data)
   GnomeThemeMetaInfo *meta_theme = NULL;
   GtkIconView *icon_view;
   GtkCellRenderer *renderer;
+  GtkSettings *settings;
 
   /* initialise some stuff */
   gnome_theme_init (NULL);
@@ -903,15 +904,16 @@ themes_init (AppearanceData *data)
   /* listen to gconf changes, too */
   gconf_client_add_dir (data->client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_NONE, NULL);
   gconf_client_add_dir (data->client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_NONE, NULL);
-  gconf_client_notify_add (data->client, GTK_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, METACITY_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
-  gconf_client_notify_add (data->client, ICON_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, BACKGROUND_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, APPLICATION_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, DESKTOP_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, MONOSPACE_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
 
-  g_signal_connect (gtk_settings_get_default (), "notify::gtk-color-scheme", (GCallback) theme_color_scheme_changed_cb, data);
+  settings = gtk_settings_get_default ();
+  g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) theme_setting_changed_cb, data);
+  g_signal_connect (settings, "notify::gtk-theme-name", (GCallback) theme_setting_changed_cb, data);
+  g_signal_connect (settings, "notify::gtk-icon-theme-name", (GCallback) theme_setting_changed_cb, data);
 
   if (is_locked_down (data->client)) {
     /* FIXME: determine what needs disabling */

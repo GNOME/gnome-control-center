@@ -305,11 +305,24 @@ gtk_theme_changed (GConfPropertyEditor *peditor,
   const gchar *name;
   GtkSettings *settings = gtk_settings_get_default ();
 
-  if (value && (name = gconf_value_get_string (value)))
+  if (value && (name = gconf_value_get_string (value))) {
+    gchar *current;
+
     theme = gnome_theme_info_find (name);
 
-  check_color_schemes_enabled (settings, data);
-  update_color_buttons_from_settings (settings, data);
+    /* Manually update GtkSettings to new gtk+ theme.
+     * This will eventually happen anyway, but we need the
+     * info for the color scheme updates already. */
+    g_object_get (settings, "gtk-theme-name", &current, NULL);
+
+    if (strcmp (current, name) != 0)
+      g_object_set (settings, "gtk-theme-name", name, NULL);
+
+    g_free (current);
+
+    check_color_schemes_enabled (settings, data);
+    update_color_buttons_from_settings (settings, data);
+  }
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "gtk_themes_delete"),
 			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_REGULAR));
