@@ -287,7 +287,7 @@ void gnome_wp_xml_load_list (AppearanceData *data) {
   g_free (wpdbfile);
 
   xdgdirslist = g_getenv ("XDG_DATA_DIRS");
-  if (xdgdirslist == NULL || strlen (xdgdirslist) == 0)
+  if (xdgdirslist == NULL || strcmp (xdgdirslist, "") == 0)
     xdgdirslist = "/usr/local/share:/usr/share";
 
   xdgdirs = g_strsplit (xdgdirslist, ":", -1);
@@ -363,7 +363,7 @@ void gnome_wp_xml_save_list (AppearanceData *data) {
   gchar * wpfile;
 
   g_hash_table_foreach (data->wp_hash,
-			       (GHFunc) gnome_wp_list_flatten, &list);
+			(GHFunc) gnome_wp_list_flatten, &list);
   g_hash_table_destroy (data->wp_hash);
   list = g_slist_reverse (list);
 
@@ -384,7 +384,7 @@ void gnome_wp_xml_save_list (AppearanceData *data) {
     const char * none = "(none)";
     gchar * filename;
 
-    if (!strncmp (wpitem->filename, none, strlen (none)) ||
+    if (!strcmp (wpitem->filename, none) ||
 	(g_utf8_validate (wpitem->filename, -1, NULL) &&
 	 g_file_test (wpitem->filename, G_FILE_TEST_EXISTS)))
       filename = g_strdup (wpitem->filename);
@@ -401,7 +401,7 @@ void gnome_wp_xml_save_list (AppearanceData *data) {
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)wpitem->sec_color);
     g_free (filename);
 
-    list = g_slist_remove (list, wpitem);
+    list = g_slist_delete_link (list, list);
     gnome_wp_item_free (wpitem);
   }
   xmlSaveFormatFile (wpfile, wplist, 1);

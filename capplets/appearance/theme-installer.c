@@ -488,7 +488,7 @@ gnome_theme_install_from_uri (gchar *filename, GtkWindow *parent)
 	gchar *temppath;
 	const gchar *template;
 
-	if (filename == NULL || strlen (filename) <= 0)	{
+	if (filename == NULL || strcmp (filename, "") == 0) {
 		dialog = gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL,
 						 GTK_MESSAGE_ERROR,
