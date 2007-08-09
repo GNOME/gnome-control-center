@@ -812,8 +812,6 @@ themes_init (AppearanceData *data)
   data->theme_store = theme_store =
       gtk_list_store_new (NUM_COLS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING);
 
-  del_button = glade_xml_get_widget (data->xml, "theme_delete");
-
   /* set up theme list */
   theme_list = gnome_theme_meta_info_find_all ();
   gnome_theme_info_register_theme_change ((ThemeChangedCallback) theme_changed_on_disk_cb, data);
@@ -899,6 +897,7 @@ themes_init (AppearanceData *data)
                         gtk_image_new_from_stock (GTK_STOCK_EDIT, GTK_ICON_SIZE_BUTTON));
   g_signal_connect (w, "clicked", (GCallback) theme_custom_cb, data);
 
+  del_button = glade_xml_get_widget (data->xml, "theme_delete");
   g_signal_connect (del_button, "clicked", (GCallback) theme_delete_cb, data);
 
   /* listen to gconf changes, too */
@@ -915,9 +914,8 @@ themes_init (AppearanceData *data)
   g_signal_connect (settings, "notify::gtk-theme-name", (GCallback) theme_setting_changed_cb, data);
   g_signal_connect (settings, "notify::gtk-icon-theme-name", (GCallback) theme_setting_changed_cb, data);
 
-  if (is_locked_down (data->client)) {
-    /* FIXME: determine what needs disabling */
-  }
+  if (is_locked_down (data->client))
+    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_vbox"), FALSE);
 }
 
 void
