@@ -750,15 +750,14 @@ theme_store_sort_func (GtkTreeModel *model,
 }
 
 static void
-appearance_window_drag_data_received_cb (GtkWidget *widget,
-                                         GdkDragContext *context,
-                                         gint x, gint y,
-                                         GtkSelectionData *selection_data,
-                                         guint info, guint time,
-                                         AppearanceData *data)
+theme_drag_data_received_cb (GtkWidget *widget,
+                             GdkDragContext *context,
+                             gint x, gint y,
+                             GtkSelectionData *selection_data,
+                             guint info, guint time,
+                             AppearanceData *data)
 {
   GList *uris;
-  gchar *filename = NULL;
 
   if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
     return;
@@ -767,6 +766,7 @@ appearance_window_drag_data_received_cb (GtkWidget *widget,
 
   if (uris != NULL && uris->data != NULL) {
     GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
+    gchar *filename;
 
     if (gnome_vfs_uri_is_local (uri))
       filename = gnome_vfs_unescape_string (gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
@@ -774,10 +774,11 @@ appearance_window_drag_data_received_cb (GtkWidget *widget,
       filename = gnome_vfs_unescape_string (gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE), G_DIR_SEPARATOR_S);
 
     gnome_vfs_uri_list_unref (uris);
-  }
 
-  gnome_theme_install_from_uri (filename, GTK_WINDOW (widget));
-  g_free (filename);
+    gnome_theme_install_from_uri (filename,
+        GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")));
+    g_free (filename);
+  }
 }
 
 static void
@@ -851,12 +852,6 @@ themes_init (AppearanceData *data)
   g_list_foreach (theme_list, (GFunc) theme_thumbnail_generate, data);
   g_list_free (theme_list);
 
-  w = glade_xml_get_widget (data->xml, "appearance_window");
-  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL,
-		     drop_types, G_N_ELEMENTS (drop_types),
-		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
-  g_signal_connect (w, "drag-data-received", (GCallback) appearance_window_drag_data_received_cb, NULL);
-
   icon_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
 
   renderer = cell_renderer_wallpaper_new ();
@@ -900,6 +895,14 @@ themes_init (AppearanceData *data)
   del_button = glade_xml_get_widget (data->xml, "theme_delete");
   g_signal_connect (del_button, "clicked", (GCallback) theme_delete_cb, data);
 
+  w = glade_xml_get_widget (data->xml, "theme_vbox");
+  gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL,
+		     drop_types, G_N_ELEMENTS (drop_types),
+		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
+  g_signal_connect (w, "drag-data-received", (GCallback) theme_drag_data_received_cb, data);
+  if (is_locked_down (data->client))
+    gtk_widget_set_sensitive (w, FALSE);
+
   /* listen to gconf changes, too */
   gconf_client_add_dir (data->client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_NONE, NULL);
   gconf_client_add_dir (data->client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_NONE, NULL);
@@ -913,9 +916,6 @@ themes_init (AppearanceData *data)
   g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) theme_setting_changed_cb, data);
   g_signal_connect (settings, "notify::gtk-theme-name", (GCallback) theme_setting_changed_cb, data);
   g_signal_connect (settings, "notify::gtk-icon-theme-name", (GCallback) theme_setting_changed_cb, data);
-
-  if (is_locked_down (data->client))
-    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_vbox"), FALSE);
 }
 
 void

@@ -479,7 +479,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 }
 
 void
-gnome_theme_install_from_uri (gchar *filename, GtkWindow *parent)
+gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 {
 	GtkWidget *dialog;
 	gchar *path, *base;
@@ -487,6 +487,7 @@ gnome_theme_install_from_uri (gchar *filename, GtkWindow *parent)
 	GnomeVFSURI *uri;
 	gchar *temppath;
 	const gchar *template;
+	int cmp;
 
 	if (filename == NULL || strcmp (filename, "") == 0) {
 		dialog = gtk_message_dialog_new (NULL,
@@ -501,7 +502,7 @@ gnome_theme_install_from_uri (gchar *filename, GtkWindow *parent)
 
 	/* see if someone dropped a directory */
 	if (g_file_test (filename, G_FILE_TEST_IS_DIR))	{
-		transfer_done_cb (NULL, filename);
+		transfer_done_cb (NULL, g_strdup (filename));
 		return;
 	}
 
@@ -519,7 +520,6 @@ gnome_theme_install_from_uri (gchar *filename, GtkWindow *parent)
 		g_free (path);
 		return;
 	}
-	g_free (path);
 
 	/* To avoid the copy of /root/.themes to /root/.themes/.themes
 	 * which causes an infinite loop. The user asks to transfer the all
@@ -527,7 +527,11 @@ gnome_theme_install_from_uri (gchar *filename, GtkWindow *parent)
 	 * situation.
 	 */
 	temppath = g_build_filename (filename, ".themes", NULL);
-	if (!strcmp (temppath, path)) {
+	cmp = strcmp (temppath, path);
+	g_free (path);
+	g_free (temppath);
+
+	if (cmp == 0) {
 		dialog = gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL,
 						 GTK_MESSAGE_ERROR,
@@ -535,10 +539,8 @@ gnome_theme_install_from_uri (gchar *filename, GtkWindow *parent)
 						 _("%s is the path where the theme files will be installed. This can not be selected as the source location"), filename);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
-		g_free (temppath);
 		return;
 	}
-	g_free (temppath);
 
 	uri = gnome_vfs_uri_new (filename);
 	base = gnome_vfs_uri_extract_short_name (uri);
@@ -590,7 +592,7 @@ gnome_theme_install_from_uri (gchar *filename, GtkWindow *parent)
 }
 
 void
-gnome_theme_installer_run (GtkWindow *parent, gchar *filename)
+gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 {
 	static gboolean running_theme_install = FALSE;
 	static gchar old_folder[512] = "";

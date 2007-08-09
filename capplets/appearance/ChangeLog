@@ -1,5 +1,15 @@
 2007-08-09  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-themes.c: (theme_drag_data_received_cb),
+	(themes_init): restrict drag'n'drop installation to the theme tab
+	instead of the entire window so lockdown works properly
+
+	* theme-installer.c: (gnome_theme_install_from_uri),
+	(gnome_theme_installer_run):
+	* theme-installer.h: fix double-free and use-after-free
+
+2007-08-09  Jens Granseuer  <jensgr@gmx.net>
+
 	* appearance-themes.c: (themes_init): reenable theme lockdown
 
 2007-08-09  Jens Granseuer  <jensgr@gmx.net>
