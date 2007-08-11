@@ -564,9 +564,11 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 	}
 	g_free (base);
 
+	path = NULL;
 	do {
 	  	gchar *file_tmp;
 
+		g_free (path);
     		file_tmp = g_strdup_printf (template, rand ());
 	    	path = g_build_filename (g_get_home_dir (), ".themes", file_tmp, NULL);
 	  	g_free (file_tmp);
