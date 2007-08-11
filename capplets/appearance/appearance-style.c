@@ -115,23 +115,26 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
 static GConfValue *
 conv_from_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
 {
-  GConfValue *new_value;
-  gchar *list_value = NULL;
+  GConfValue *new_value = NULL;
   GtkTreeIter iter;
   GtkTreeSelection *selection;
   GtkTreeModel *model;
   GtkTreeView *list;
 
   list = GTK_TREE_VIEW (gconf_property_editor_get_ui_control (peditor));
-  model = gtk_tree_view_get_model (list);
-
   selection = gtk_tree_view_get_selection (list);
-  gtk_tree_selection_get_selected (selection, NULL, &iter);
-  gtk_tree_model_get (model, &iter, COL_NAME, &list_value, -1);
 
-  new_value = gconf_value_new (GCONF_VALUE_STRING);
-  gconf_value_set_string (new_value, list_value);
-  g_free (list_value);
+  if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+    gchar *list_value;
+
+    gtk_tree_model_get (model, &iter, COL_NAME, &list_value, -1);
+
+    if (list_value) {
+      new_value = gconf_value_new (GCONF_VALUE_STRING);
+      gconf_value_set_string (new_value, list_value);
+      g_free (list_value);
+    }
+  }
 
   return new_value;
 }
