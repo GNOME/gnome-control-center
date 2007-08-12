@@ -44,7 +44,9 @@
 enum
 {
         DOUBLE_CLICK_MAXIMIZE,
-        DOUBLE_CLICK_SHADE
+        DOUBLE_CLICK_MINIMIZE,
+        DOUBLE_CLICK_SHADE,
+        DOUBLE_CLICK_NONE
 };
 
 static GnomeWindowManagerClass *parent_class;
@@ -209,6 +211,12 @@ metacity_change_settings (GnomeWindowManager    *wm,
                 case DOUBLE_CLICK_MAXIMIZE:
                         action = "toggle_maximize";
                         break;
+                case DOUBLE_CLICK_MINIMIZE:
+                        action = "minimize";
+                        break;
+                case DOUBLE_CLICK_NONE:
+                        action = "none";
+                        break;
                 }
 
                 if (action != NULL) {
@@ -354,6 +362,10 @@ metacity_get_settings (GnomeWindowManager *wm,
                         settings->double_click_action = DOUBLE_CLICK_SHADE;
                 else if (strcmp (str, "toggle_maximize") == 0)
                         settings->double_click_action = DOUBLE_CLICK_MAXIMIZE;
+                else if (strcmp (str, "minimize") == 0)
+                        settings->double_click_action = DOUBLE_CLICK_MINIMIZE;
+                else if (strcmp (str, "none") == 0)
+                        settings->double_click_action = DOUBLE_CLICK_NONE;
                 else
                         settings->double_click_action = DOUBLE_CLICK_SHADE;
                 
@@ -376,7 +388,9 @@ metacity_get_double_click_actions (GnomeWindowManager              *wm,
 {
         static GnomeWMDoubleClickAction actions[] = {
                 { DOUBLE_CLICK_MAXIMIZE, N_("Maximize") },
-                { DOUBLE_CLICK_SHADE, N_("Roll up") }
+                { DOUBLE_CLICK_MINIMIZE, N_("Minimize") },
+                { DOUBLE_CLICK_SHADE, N_("Roll up") },
+                { DOUBLE_CLICK_NONE, N_("None") }
         };
         static gboolean initialized = FALSE;        
 
