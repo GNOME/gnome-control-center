@@ -134,8 +134,6 @@ create_folder_icon (char *icon_theme_name)
   GtkIconInfo *folder_icon_info;
   const gchar *filename;
   gchar *example_icon_name;
-  int width, height;
-  gdouble scale;
 
   icon_theme = gtk_icon_theme_new ();
   gtk_icon_theme_set_custom_theme (icon_theme, icon_theme_name);
@@ -188,12 +186,19 @@ create_folder_icon (char *icon_theme_name)
    * them. The width is usually the largest dimension for icons that come at
    * irregular sizes, so use this to calculate the scale factor
    */
-  scale = ((double) ICON_THUMBNAIL_SIZE) / gdk_pixbuf_get_width (folder_icon);
-  width = 48;
-  height = scale * gdk_pixbuf_get_height (folder_icon);
+  if (gdk_pixbuf_get_width (folder_icon) != ICON_THUMBNAIL_SIZE) {
+    int width, height;
+    gdouble scale;
 
-  retval = gdk_pixbuf_scale_simple (folder_icon, width, height, GDK_INTERP_BILINEAR);
-  g_object_unref (folder_icon);
+    scale = ((double) ICON_THUMBNAIL_SIZE) / gdk_pixbuf_get_width (folder_icon);
+    width = ICON_THUMBNAIL_SIZE;
+    height = scale * gdk_pixbuf_get_height (folder_icon);
+
+    retval = gdk_pixbuf_scale_simple (folder_icon, width, height, GDK_INTERP_BILINEAR);
+    g_object_unref (folder_icon);
+  } else {
+    retval = folder_icon;
+  }
 
   return retval;
 }
@@ -330,7 +335,7 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 static GdkPixbuf *
 create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 {
-  GObject *settings;
+  GtkSettings *settings;
   GtkWidget *window, *vbox, *box, *stock_button, *checkbox, *radio;
   GtkRequisition requisition;
   GtkAllocation allocation;
@@ -339,7 +344,7 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   GdkPixbuf *pixbuf, *retval;
   gint width, height;
 
-  settings = G_OBJECT (gtk_settings_get_default ());
+  settings = gtk_settings_get_default ();
   g_object_set (settings, "gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data, NULL);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -507,8 +512,9 @@ handle_bytes (const gchar        *buffer,
     switch (theme_thumbnail_data->status)
     {
       case READY_FOR_THEME:
-      case READING_TYPE:
         theme_thumbnail_data->status = READING_TYPE;
+        /* fall through */
+      case READING_TYPE:
         nil = memchr (ptr, '\000', bytes_read);
         if (nil == NULL)
         {
@@ -620,7 +626,7 @@ message_from_capplet (GIOChannel   *source,
   gsize bytes_read;
   GdkPixbuf *pixbuf;
   gint i, rowstride;
-  char *pixels;
+  guchar *pixels;
   ThemeThumbnailData *theme_thumbnail_data;
 
   theme_thumbnail_data = (ThemeThumbnailData *) data;
@@ -650,12 +656,12 @@ message_from_capplet (GIOChannel   *source,
         else if (!strcmp (type, THUMBNAIL_TYPE_ICON))
           pixbuf = create_icon_theme_pixbuf (theme_thumbnail_data);
         else
-          pixbuf = NULL; /* should never happen */
+          g_assert_not_reached ();
 
         width = gdk_pixbuf_get_width (pixbuf);
         height = gdk_pixbuf_get_height (pixbuf);
         rowstride = gdk_pixbuf_get_rowstride (pixbuf);
-        pixels = (char *) gdk_pixbuf_get_pixels (pixbuf);
+        pixels = gdk_pixbuf_get_pixels (pixbuf);
 
         /* Write the pixbuf's size */
         write (pipe_from_factory_fd[1], &width, sizeof (width));
@@ -666,7 +672,7 @@ message_from_capplet (GIOChannel   *source,
           write (pipe_from_factory_fd[1], pixels + (rowstride)*i, width * gdk_pixbuf_get_n_channels (pixbuf));
         }
         g_object_unref (pixbuf);
-        theme_thumbnail_data->status = READY_FOR_THEME;;
+        theme_thumbnail_data->status = READY_FOR_THEME;
         g_byte_array_set_size (theme_thumbnail_data->type, 0);
         g_byte_array_set_size (theme_thumbnail_data->control_theme_name, 0);
         g_byte_array_set_size (theme_thumbnail_data->gtk_color_scheme, 0);
@@ -749,13 +755,9 @@ message_from_child (GIOChannel   *source,
 
       if (async_data.thumbnail_width == 0 && async_data.data->len >= 2 * sizeof (gint))
       {
-        int i;
-
         async_data.thumbnail_width = *((gint *) async_data.data->data);
         async_data.thumbnail_height = *(((gint *) async_data.data->data) + 1);
-
-        for (i = 0; i < 2 * sizeof (gint); i++)
-          g_byte_array_remove_index (async_data.data, 0);
+        g_byte_array_remove_range (async_data.data, 0, 2 * sizeof (gint));
       }
       else if (async_data.thumbnail_width > 0 && async_data.data->len == async_data.thumbnail_width * async_data.thumbnail_height * 4)
       {
@@ -854,7 +856,7 @@ read_pixbuf (void)
   gint size[2];
   GdkPixbuf *pixbuf;
   gint rowstride;
-  char *pixels;
+  guchar *pixels;
 
   do
   {
@@ -865,7 +867,7 @@ read_pixbuf (void)
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, size[0], size[1]);
   rowstride = gdk_pixbuf_get_rowstride (pixbuf);
-  pixels = (char *) gdk_pixbuf_get_pixels (pixbuf);
+  pixels = gdk_pixbuf_get_pixels (pixbuf);
 
   for (i = 0; i < size[1]; i++)
   {
@@ -902,8 +904,6 @@ generate_theme_thumbnail (gchar *thumbnail_type,
                           gchar *icon_theme_name,
                           gchar *application_font)
 {
-  GdkPixbuf *pixbuf;
-
   if (async_data.set || !pipe_to_factory_fd[1] || !pipe_from_factory_fd[0])
     return NULL;
 
@@ -914,8 +914,7 @@ generate_theme_thumbnail (gchar *thumbnail_type,
                           icon_theme_name,
                           application_font);
 
-  pixbuf = read_pixbuf ();
-  return pixbuf;
+  return read_pixbuf ();
 }
 
 GdkPixbuf *
