@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-01 19:07+0100\n"
-"PO-Revision-Date: 2007-08-02 11:52+0200\n"
+"POT-Creation-Date: 2007-08-13 03:22+0100\n"
+"PO-Revision-Date: 2007-08-13 15:02+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,12 +64,12 @@ msgid "No Image"
 msgstr "Sin imagen"
 
 #: ../capplets/about-me/gnome-about-me.c:665
-#: ../capplets/appearance/appearance-desktop.c:1067
+#: ../capplets/appearance/appearance-desktop.c:1059
 msgid "Images"
 msgstr "Imágenes"
 
 #: ../capplets/about-me/gnome-about-me.c:669
-#: ../capplets/appearance/theme-installer.c:619
+#: ../capplets/appearance/theme-installer.c:623
 msgid "All Files"
 msgstr "Todos los archivos"
 
@@ -726,11 +726,11 @@ msgstr "píxeles/segundo"
 msgid "seconds"
 msgstr "segundos"
 
-#: ../capplets/appearance/appearance-desktop.c:1046
+#: ../capplets/appearance/appearance-desktop.c:1038
 msgid "Add Wallpaper"
 msgstr "Añadir tapiz"
 
-#: ../capplets/appearance/appearance-desktop.c:1071
+#: ../capplets/appearance/appearance-desktop.c:1063
 msgid "All files"
 msgstr "Todos los archivos"
 
@@ -780,49 +780,56 @@ msgstr "Usar la tipografía anterior"
 msgid "Use selected font"
 msgstr "Usar la tipografía seleccionada"
 
-#: ../capplets/appearance/appearance-main.c:105
+#: ../capplets/appearance/appearance-main.c:108
 msgid "Specify the filename of a theme to install"
 msgstr "Especifique el nombre de archivo del tema a instalar"
 
-#: ../capplets/appearance/appearance-main.c:106
+#: ../capplets/appearance/appearance-main.c:109
 msgid "filename"
 msgstr "nombre de archivo"
 
-#: ../capplets/appearance/appearance-main.c:112
+#: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
 "Especifique el nombre de la página para mostrar (tema|fondo|tipografías|"
 "interfaz)"
 
-#: ../capplets/appearance/appearance-main.c:113
+#: ../capplets/appearance/appearance-main.c:116
 msgid "page"
 msgstr "página"
 
-#: ../capplets/appearance/appearance-main.c:120
+#: ../capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[Tapiz...]"
 
-#: ../capplets/appearance/appearance-themes.c:419
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:817
+#: ../capplets/common/gnome-theme-info.c:1050
+#: ../capplets/common/gnome-theme-info.c:1805
+msgid "Default Pointer"
+msgstr "Puntero predeterminado"
+
+#: ../capplets/appearance/appearance-themes.c:505
 msgid "Apply Background"
 msgstr "Aplicar tapiz"
 
-#: ../capplets/appearance/appearance-themes.c:423
+#: ../capplets/appearance/appearance-themes.c:509
 msgid "Apply Font"
 msgstr "Aplicar tipografía"
 
-#: ../capplets/appearance/appearance-themes.c:448
+#: ../capplets/appearance/appearance-themes.c:534
 msgid "The current theme suggests a background and a font."
 msgstr "El tema actual sugiere un tapiz y una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:453
+#: ../capplets/appearance/appearance-themes.c:539
 msgid "The current theme suggests a background."
 msgstr "El tema actual sugiere un tapiz."
 
-#: ../capplets/appearance/appearance-themes.c:458
+#: ../capplets/appearance/appearance-themes.c:544
 msgid "The current theme suggests a font."
 msgstr "El tema actual sugiere una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:735
+#: ../capplets/appearance/appearance-themes.c:821
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1292,11 +1299,11 @@ msgstr "Este tema no tiene un formato soportado."
 msgid "Failed to create temporary directory"
 msgstr "Falló al crear la carpeta temporal"
 
-#: ../capplets/appearance/theme-installer.c:496
+#: ../capplets/appearance/theme-installer.c:497
 msgid "No theme file location specified to install"
 msgstr "No se ha especificado ninguna ubicación del archivo del tema para instalar"
 
-#: ../capplets/appearance/theme-installer.c:516
+#: ../capplets/appearance/theme-installer.c:517
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1305,7 +1312,7 @@ msgstr ""
 "Permisos insuficientes para instalar el tema en:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:535
+#: ../capplets/appearance/theme-installer.c:539
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1314,15 +1321,15 @@ msgstr ""
 "%s es la ruta donde se van a instalar los archivos del tema. Esto no puede "
 "seleccionarse como ubicación de origen"
 
-#: ../capplets/appearance/theme-installer.c:556
+#: ../capplets/appearance/theme-installer.c:558
 msgid "The file format is invalid."
 msgstr "El formato del archivo no es válido."
 
-#: ../capplets/appearance/theme-installer.c:609
+#: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
 msgstr "Seleccione un tema"
 
-#: ../capplets/appearance/theme-installer.c:612
+#: ../capplets/appearance/theme-installer.c:616
 msgid "Theme Packages"
 msgstr "Paquete de tema"
 
@@ -1554,6 +1561,34 @@ msgstr "Por favor seleccione una imagen."
 #: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "_Seleccionar"
+
+#: ../capplets/common/gnome-theme-info.c:1806
+msgid "Default Pointer - Current"
+msgstr "Puntero predeterminado - Actual"
+
+#: ../capplets/common/gnome-theme-info.c:1810
+msgid "White Pointer"
+msgstr "Puntero blanco"
+
+#: ../capplets/common/gnome-theme-info.c:1811
+msgid "White Pointer - Current"
+msgstr "Puntero blanco - Actual"
+
+#: ../capplets/common/gnome-theme-info.c:1815
+msgid "Large Pointer"
+msgstr "Puntero grande"
+
+#: ../capplets/common/gnome-theme-info.c:1816
+msgid "Large Pointer - Current"
+msgstr "Puntero grande - Actual"
+
+#: ../capplets/common/gnome-theme-info.c:1820
+msgid "Large White Pointer - Current"
+msgstr "Puntero blanco grande - Actual"
+
+#: ../capplets/common/gnome-theme-info.c:1821
+msgid "Large White Pointer"
+msgstr "Puntero blanco grande"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
@@ -2065,7 +2100,7 @@ msgstr "Desactivado"
 msgid "<Unknown Action>"
 msgstr "<Acción desconocida>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:883
+#: ../capplets/keybindings/gnome-keybinding-properties.c:915
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2077,7 +2112,7 @@ msgstr ""
 "Por favor, inténtelo con una tecla como Control, Alt o Mayúsculas al mismo "
 "tiempo.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:912
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -2086,25 +2121,25 @@ msgstr ""
 "La combinación «%s» ya se usa para:\n"
 "«%s»\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Error al definir una combinación nueva en la base de datos de configuración: "
 "%s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:994
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Error al borrar una combinación de teclas en la base de datos de "
 "configuración: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1109
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
 msgstr "Acción"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1133
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
 msgstr "Combinación"
 
@@ -3361,13 +3396,21 @@ msgstr ""
 "El gestor de ventanas «%s» no ha registrado una herramienta de "
 "configuración\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "Maximizar"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "Minimizar"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "Enrollar"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "Ninguno"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
@@ -3709,8 +3752,7 @@ msgid "translator-credits"
 msgstr ""
 "Jorge González <jorgegonz@svn.gnome.org>, 2007. \n"
 "Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2007.\n"
-"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, "
-"2006.\n"
+"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, 2006.\n"
 "Traductores anteriores:\n"
 "Pablo Saratxaga <srtxg@chanae.alphanet.ch>, 1998-2001.\n"
 "Carlos Perelló Marín <carlos@gnome-db.org>, 2001.\n"
