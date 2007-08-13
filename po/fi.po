@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-09 07:58+0300\n"
+"POT-Creation-Date: 2007-08-13 19:19+0300\n"
 "PO-Revision-Date: 2007-02-21 17:11+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -66,7 +66,7 @@ msgid "Images"
 msgstr "Kuvat"
 
 #: ../capplets/about-me/gnome-about-me.c:669
-#: ../capplets/appearance/theme-installer.c:619
+#: ../capplets/appearance/theme-installer.c:623
 msgid "All Files"
 msgstr "Kaikki tiedostot"
 
@@ -795,6 +795,13 @@ msgstr "sivu"
 msgid "[WALLPAPER...]"
 msgstr "[TAUSTAKUVA...]"
 
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:817
+#: ../capplets/common/gnome-theme-info.c:1050
+#: ../capplets/common/gnome-theme-info.c:1805
+msgid "Default Pointer"
+msgstr "Oletusosoitin"
+
 #: ../capplets/appearance/appearance-themes.c:505
 msgid "Apply Background"
 msgstr "Käytä taustakuvana"
@@ -815,7 +822,7 @@ msgstr "Tämä teema ehdottaa taustakuvaa."
 msgid "The current theme suggests a font."
 msgstr "Tämä teema ehdottaa kirjasinta."
 
-#: ../capplets/appearance/appearance-themes.c:822
+#: ../capplets/appearance/appearance-themes.c:821
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1283,11 +1290,11 @@ msgstr "Tämä teema ei ole tuetun muotoinen."
 msgid "Failed to create temporary directory"
 msgstr "Väliaikaisen hakemiston luominen epäonnistui"
 
-#: ../capplets/appearance/theme-installer.c:496
+#: ../capplets/appearance/theme-installer.c:497
 msgid "No theme file location specified to install"
 msgstr "Asennettavan teematiedoston sijaintia ei annettu"
 
-#: ../capplets/appearance/theme-installer.c:516
+#: ../capplets/appearance/theme-installer.c:517
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1296,7 +1303,7 @@ msgstr ""
 "Oikeudet eivät riitä teeman asentamiseen sijaintiin:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:535
+#: ../capplets/appearance/theme-installer.c:539
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1305,19 +1312,20 @@ msgstr ""
 "%s on polku, jonne teematiedostot asentuvat. Tätä ei voi valita "
 "lähdesijainniksi"
 
-#: ../capplets/appearance/theme-installer.c:556
+#: ../capplets/appearance/theme-installer.c:558
 msgid "The file format is invalid."
 msgstr "Tiedostomuoto on virheellinen."
 
-#: ../capplets/appearance/theme-installer.c:609
+#: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
 msgstr "Valitse teema"
 
-#: ../capplets/appearance/theme-installer.c:612
+#: ../capplets/appearance/theme-installer.c:616
 msgid "Theme Packages"
 msgstr "Teemapaketit"
 
 #: ../capplets/appearance/theme-save.c:91
+#, c-format
 msgid "Theme name must be present"
 msgstr "Teeman nimi täytyy olla olemassa"
 
@@ -1542,6 +1550,34 @@ msgstr "Valitse kuva"
 #: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "_Valittu"
+
+#: ../capplets/common/gnome-theme-info.c:1806
+msgid "Default Pointer - Current"
+msgstr "Oletusosoitin - nykyinen"
+
+#: ../capplets/common/gnome-theme-info.c:1810
+msgid "White Pointer"
+msgstr "Valkoinen osoitin"
+
+#: ../capplets/common/gnome-theme-info.c:1811
+msgid "White Pointer - Current"
+msgstr "Valkoinen osoitin - nykyinen"
+
+#: ../capplets/common/gnome-theme-info.c:1815
+msgid "Large Pointer"
+msgstr "Suuri osoitin"
+
+#: ../capplets/common/gnome-theme-info.c:1816
+msgid "Large Pointer - Current"
+msgstr "Suuri osoitin - nykyinen"
+
+#: ../capplets/common/gnome-theme-info.c:1820
+msgid "Large White Pointer - Current"
+msgstr "Suuri valkoinen osoitin - nykyinen"
+
+#: ../capplets/common/gnome-theme-info.c:1821
+msgid "Large White Pointer"
+msgstr "Suuri valkoinen osoitin"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
@@ -3137,6 +3173,7 @@ msgstr "Etsi"
 
 #. make open with default action
 #: ../libslab/directory-tile.c:168
+#, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Avaa</b>"
 
@@ -3206,6 +3243,7 @@ msgid "Unexpected tag '%s' inside '%s'"
 msgstr "Odottamaton merkintä \"%s\" merkinnän \"%s\" sisällä"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
+#, c-format
 msgid "No valid bookmark file found in data dirs"
 msgstr "Tietohakemistoista ei löytynyt kelvollista kirjanmerkkitiedostoa"
 
@@ -3266,6 +3304,7 @@ msgid "<b>Open %s</b>"
 msgstr "<b>Avaa %s</b>"
 
 #: ../libslab/system-tile.c:141
+#, c-format
 msgid "Remove from System Items"
 msgstr "Poista järjestelmän kohdista"
 
@@ -3335,13 +3374,21 @@ msgstr "Järjestelmän äänet"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Ikkunointiohjelma \"%s\" ei ole ilmoittanut hallintatyökalua\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "Suurenna"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "Pienennä"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "Rullaa"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "Ei mikään"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -3645,6 +3692,7 @@ msgstr[0] "%d minuutti seuraavaan taukoon"
 msgstr[1] "%d minuuttia seuraavaan taukoon"
 
 #: ../typing-break/drwright.c:504
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "Alle yksi minuutti seuraavaan taukoon"
 
@@ -3972,38 +4020,14 @@ msgstr "Aseta teema oletusarvoiseksi"
 #~ msgid "Unknown Pointer"
 #~ msgstr "Tuntematon osoitin"
 
-#~ msgid "Default Pointer"
-#~ msgstr "Oletusosoitin"
-
-#~ msgid "Default Pointer - Current"
-#~ msgstr "Oletusosoitin - nykyinen"
-
 #~ msgid "The default pointer that ships with X"
 #~ msgstr "X:n mukana tuleva oletusosoitin"
-
-#~ msgid "White Pointer"
-#~ msgstr "Valkoinen osoitin"
-
-#~ msgid "White Pointer - Current"
-#~ msgstr "Valkoinen osoitin - nykyinen"
 
 #~ msgid "The default pointer inverted"
 #~ msgstr "Oletusosoitin käänteisin värein"
 
-#~ msgid "Large Pointer"
-#~ msgstr "Suuri osoitin"
-
-#~ msgid "Large Pointer - Current"
-#~ msgstr "Suuri osoitin - nykyinen"
-
 #~ msgid "Large version of normal pointer"
 #~ msgstr "Suuri versio tavallisesta osoittimesta"
-
-#~ msgid "Large White Pointer - Current"
-#~ msgstr "Suuri valkoinen osoitin - nykyinen"
-
-#~ msgid "Large White Pointer"
-#~ msgstr "Suuri valkoinen osoitin"
 
 #~ msgid "Large version of white pointer"
 #~ msgstr "Suuri versio valkoisesta osoittimesta"
