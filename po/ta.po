@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-01 19:07+0100\n"
-"PO-Revision-Date: 2007-08-03 14:42+0530\n"
+"POT-Creation-Date: 2007-08-13 03:22+0100\n"
+"PO-Revision-Date: 2007-08-14 12:44+0530\n"
 "Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
 "Language-Team: TAMIL <ubuntu-l10n-tam@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
@@ -64,12 +64,12 @@ msgid "No Image"
 msgstr "படம் இல்லை"
 
 #: ../capplets/about-me/gnome-about-me.c:665
-#: ../capplets/appearance/appearance-desktop.c:1067
+#: ../capplets/appearance/appearance-desktop.c:1059
 msgid "Images"
 msgstr "படங்கள்"
 
 #: ../capplets/about-me/gnome-about-me.c:669
-#: ../capplets/appearance/theme-installer.c:619
+#: ../capplets/appearance/theme-installer.c:623
 msgid "All Files"
 msgstr "அனைத்து கோப்புகள்"
 
@@ -259,8 +259,10 @@ msgid ""
 "After you have authenticated, enter your new password, retype it for "
 "verification and click <b>Change password</b>."
 msgstr ""
-"உங்கள் கடவுச்சொல்லை மாற்ற கீழுள்ள புலத்தில் உங்கள் தற்போதைய கடவுச்சொல்லை உள்ளிட்டு  <b>உறுதிப்படுத்து</b> ஐ சொடுக்கவும்.\n"
-"உறுதிபடுத்தியதும் உங்கள் புதிய கடவுச்சொல்லை உள்ளிட்டு அதை சரி பார்க்க மீண்டும் உள்ளிடுக. பின் <b>கடவுச்சொல் மாற்று</b> ஐ சொடுக்கவும்."
+"உங்கள் கடவுச்சொல்லை மாற்ற கீழுள்ள புலத்தில் உங்கள் தற்போதைய கடவுச்சொல்லை உள்ளிட்டு  "
+"<b>உறுதிப்படுத்து</b> ஐ சொடுக்கவும்.\n"
+"உறுதிபடுத்தியதும் உங்கள் புதிய கடவுச்சொல்லை உள்ளிட்டு அதை சரி பார்க்க மீண்டும் உள்ளிடுக. "
+"பின் <b>கடவுச்சொல் மாற்று</b> ஐ சொடுக்கவும்."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "User name:"
@@ -468,9 +470,7 @@ msgstr "உதவி தொழில்நுட்ப விருப்பங�
 msgid ""
 "Changes to enable assistive technologies will not take effect until your "
 "next log in."
-msgstr ""
-"நீங்கள் அடுத்த முறை நுழையும் வரை உதவி தொழில்நுட்ப அமைப்பில் "
-"ஏற்படுத்தும் மாற்றங்கள் செயல்படா."
+msgstr "நீங்கள் அடுத்த முறை நுழையும் வரை உதவி தொழில்நுட்ப அமைப்பில் ஏற்படுத்தும் மாற்றங்கள் செயல்படா."
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
@@ -713,11 +713,11 @@ msgstr "பிக்சல்/நொடி"
 msgid "seconds"
 msgstr "நொடிகள்"
 
-#: ../capplets/appearance/appearance-desktop.c:1046
+#: ../capplets/appearance/appearance-desktop.c:1038
 msgid "Add Wallpaper"
 msgstr "சுவர்-காகிதங்கள் சேர்."
 
-#: ../capplets/appearance/appearance-desktop.c:1071
+#: ../capplets/appearance/appearance-desktop.c:1063
 msgid "All files"
 msgstr "எல்லா கோப்புகள்"
 
@@ -767,47 +767,54 @@ msgstr "முந்தைய எழுத்துருவை பயன்ப�
 msgid "Use selected font"
 msgstr "தேர்ந்தெடுத்த எழுத்துருவை பயன்படுத்துக"
 
-#: ../capplets/appearance/appearance-main.c:105
+#: ../capplets/appearance/appearance-main.c:108
 msgid "Specify the filename of a theme to install"
 msgstr "நிறுவ வேண்டிய கருத்துக் கோப்பின் பெயரை குறிப்பிடவும்"
 
-#: ../capplets/appearance/appearance-main.c:106
+#: ../capplets/appearance/appearance-main.c:109
 msgid "filename"
 msgstr "கோப்புப் பெயர்"
 
-#: ../capplets/appearance/appearance-main.c:112
+#: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "காட்ட வேண்டிய பக்கத்தின் பெயரை குறிப்பிடுக(கருத்து|பின்னணி|எழுத்துரு|இடைமுகம்)"
 
-#: ../capplets/appearance/appearance-main.c:113
+#: ../capplets/appearance/appearance-main.c:116
 msgid "page"
 msgstr "பக்கம்"
 
-#: ../capplets/appearance/appearance-main.c:120
+#: ../capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[WALLPAPER...]"
 
-#: ../capplets/appearance/appearance-themes.c:419
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:817
+#: ../capplets/common/gnome-theme-info.c:1050
+#: ../capplets/common/gnome-theme-info.c:1805
+msgid "Default Pointer"
+msgstr "முன்னிருப்பு சுட்டி"
+
+#: ../capplets/appearance/appearance-themes.c:505
 msgid "Apply Background"
 msgstr "பின்னணி வண்ணங்களை அமை."
 
-#: ../capplets/appearance/appearance-themes.c:423
+#: ../capplets/appearance/appearance-themes.c:509
 msgid "Apply Font"
 msgstr "எழுத்துருவை பயன்படுத்து."
 
-#: ../capplets/appearance/appearance-themes.c:448
+#: ../capplets/appearance/appearance-themes.c:534
 msgid "The current theme suggests a background and a font."
 msgstr "இப்போதைய கருத்து ஒரு கணினிமேசை பின்னணி மற்றும் ஒரு எழுத்துருவை குறிப்பிடுகிறது."
 
-#: ../capplets/appearance/appearance-themes.c:453
+#: ../capplets/appearance/appearance-themes.c:539
 msgid "The current theme suggests a background."
 msgstr "இப்போதைய கருத்து ஒரு கணினிமேசை பின்னணியை குறிப்பிடுகிறது."
 
-#: ../capplets/appearance/appearance-themes.c:458
+#: ../capplets/appearance/appearance-themes.c:544
 msgid "The current theme suggests a font."
 msgstr "இப்போதைய கருத்து ஒரு எழுத்துருவை குறிப்பிடுகிறது."
 
-#: ../capplets/appearance/appearance-themes.c:735
+#: ../capplets/appearance/appearance-themes.c:821
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1275,11 +1282,11 @@ msgstr "இந்த சூழல் துணைபுரியும் மு
 msgid "Failed to create temporary directory"
 msgstr "தற்காலிக அடைவினை உருவாக்க முடியவில்லை"
 
-#: ../capplets/appearance/theme-installer.c:496
+#: ../capplets/appearance/theme-installer.c:497
 msgid "No theme file location specified to install"
 msgstr "நிறுவும் போது பொருள் குறிப்பிடபடாத கோப்பின் இடத்தை குறிப்பிடவும்"
 
-#: ../capplets/appearance/theme-installer.c:516
+#: ../capplets/appearance/theme-installer.c:517
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1288,22 +1295,22 @@ msgstr ""
 "சூழலை நிறுவுவதில் போதிய அனுமதிகள் இல்லை :\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:535
+#: ../capplets/appearance/theme-installer.c:539
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s பாதையில் கருப்பொருள் நிறுவப்பட்டிருக்கும். இதை மூல இடத்தில் தேர்வு செய்ய முடியும்."
 
-#: ../capplets/appearance/theme-installer.c:556
+#: ../capplets/appearance/theme-installer.c:558
 msgid "The file format is invalid."
 msgstr "கோப்பு முறைமை தவறானது."
 
-#: ../capplets/appearance/theme-installer.c:609
+#: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
 msgstr "கருத்தைத் தேர்ந்தெடு"
 
-#: ../capplets/appearance/theme-installer.c:612
+#: ../capplets/appearance/theme-installer.c:616
 msgid "Theme Packages"
 msgstr "கருத்துப் பொதிகள்"
 
@@ -1528,6 +1535,34 @@ msgstr "ஓர் படத்தை தெரிவு செய்யவும
 #: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "தேர்ந்தெடு"
+
+#: ../capplets/common/gnome-theme-info.c:1806
+msgid "Default Pointer - Current"
+msgstr "முன்னிருப்பு சுட்டி - இப்போதைய"
+
+#: ../capplets/common/gnome-theme-info.c:1810
+msgid "White Pointer"
+msgstr "வெள்ளை சுட்டி"
+
+#: ../capplets/common/gnome-theme-info.c:1811
+msgid "White Pointer - Current"
+msgstr "வெள்ளை சுட்டி - இப்போதைய"
+
+#: ../capplets/common/gnome-theme-info.c:1815
+msgid "Large Pointer"
+msgstr "பெரிய சுட்டி"
+
+#: ../capplets/common/gnome-theme-info.c:1816
+msgid "Large Pointer - Current"
+msgstr "பெரிய சுட்டி - இப்போதைய"
+
+#: ../capplets/common/gnome-theme-info.c:1820
+msgid "Large White Pointer - Current"
+msgstr "பெரிய வெள்ளை சுட்டி - இப்போதைய"
+
+#: ../capplets/common/gnome-theme-info.c:1821
+msgid "Large White Pointer"
+msgstr "பெரிய வெள்ளை சுட்டி"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
@@ -2039,17 +2074,19 @@ msgstr "முடக்கப்பட்டது"
 msgid "<Unknown Action>"
 msgstr "<தெரியாத செயல்>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:883
+#: ../capplets/keybindings/gnome-keybinding-properties.c:915
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
 "using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time.\n"
 msgstr ""
-"இந்த விசையை பயன்படுத்த முடியாமல் போகுமாதலால் இந்த \"%s\" குறுக்கு விசையை பயன்படுத்த முடியாது.\n"
-"தயை செய்து கன்ட்ரோல், ஆல்ட் அல்லது ஷிப்ட் போன்ற ஏதேனும் ஒரு விசையை கூடுதலாக பயன்படுத்துக.\n"
+"இந்த விசையை பயன்படுத்த முடியாமல் போகுமாதலால் இந்த \"%s\" குறுக்கு விசையை பயன்படுத்த "
+"முடியாது.\n"
+"தயை செய்து கன்ட்ரோல், ஆல்ட் அல்லது ஷிப்ட் போன்ற ஏதேனும் ஒரு விசையை கூடுதலாக "
+"பயன்படுத்துக.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:912
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -2058,21 +2095,21 @@ msgstr ""
 "\"%s\" என்ற குறுக்குவழி இதற்காக ஏற்கனவே பயன்படுகிறது:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "தகவல்தளத்தை உள்ளமைப்பதில் புதிய முடக்கியை அமைப்பதில் பிழை: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:994
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "தகவல்தளத்தை உள்ளமைப்பதில் புதிய முடக்கியை அமைக்காமல் இருப்பதில் பிழை: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1109
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
 msgstr "செயல்"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1133
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
 msgstr "குறுக்கு வழி"
 
@@ -2593,7 +2630,9 @@ msgstr "ஒலி _எழுப்பல்:"
 msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
-msgstr "விசைப்பலகையால் கட்டுப்படுத்த வேண்டிய சாதனங்களையும் தடங்களையும் தேர்ந்தெடுக்கவும். தேவையானால் ஷிப்ட் மற்றும் கண்ட்ரோல் விசைகளை பல தடங்களை தேர்ந்தெடுக்க பயன்படுத்தவும்."
+msgstr ""
+"விசைப்பலகையால் கட்டுப்படுத்த வேண்டிய சாதனங்களையும் தடங்களையும் தேர்ந்தெடுக்கவும். "
+"தேவையானால் ஷிப்ட் மற்றும் கண்ட்ரோல் விசைகளை பல தடங்களை தேர்ந்தெடுக்க பயன்படுத்தவும்."
 
 #: ../capplets/sound/sound-properties.glade.h:13
 msgid "So_und playback:"
@@ -2898,10 +2937,12 @@ msgid ""
 "\n"
 "Which set would you like to use?"
 msgstr ""
-"<b>X விசைப்பலகை அமைப்பு உங்கள் தற்போதைய க்னோம் விசைப்பலகை அமைப்பிலிருந்து மாறுபட்டது..</b>\n"
+"<b>X விசைப்பலகை அமைப்பு உங்கள் தற்போதைய க்னோம் விசைப்பலகை அமைப்பிலிருந்து மாறுபட்டது..</"
+"b>\n"
 "\n"
 "எதிர்பார்த்தது %s ஆனால் பின்வரும் அமைப்பு உள்ளது: %s.\n"
-"\n எந்த அமைப்பை பயன்படுத்த விரும்புகிறீர்கள்?"
+"\n"
+" எந்த அமைப்பை பயன்படுத்த விரும்புகிறீர்கள்?"
 
 #: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:287
 msgid "Use X settings"
@@ -2915,7 +2956,9 @@ msgstr " GNOME அமைவுகளை வைக்கவும்"
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
-msgstr "முன்னிருப்பு முனையத்தை பெற முடியவில்லை. உங்கள் முன்னிருப்பு முனைய கட்டளை அமைக்கப்பட்டுள்ளதையும் அது ஒரு செல்லுபடியாகும் நிரலை சுட்டுவதையும் உறுதி செய்து கொள்க."
+msgstr ""
+"முன்னிருப்பு முனையத்தை பெற முடியவில்லை. உங்கள் முன்னிருப்பு முனைய கட்டளை "
+"அமைக்கப்பட்டுள்ளதையும் அது ஒரு செல்லுபடியாகும் நிரலை சுட்டுவதையும் உறுதி செய்து கொள்க."
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
 #, c-format
@@ -3073,7 +3116,6 @@ msgid ""
 "\n"
 " Your filter \"<b>%s</b>\" does not match any items.</span>"
 msgstr ""
-""
 "<span size=\"large\"><b>பொருத்தங்கள் காணப்படவில்லை.</b> </span><span>\n"
 "\n"
 "உங்கள் வடிப்பி \"<b>%s</b>\" க்கு பொருத்தங்கள் காணப்படவில்லை .</span>"
@@ -3307,13 +3349,21 @@ msgstr "கணினி ஒலிகள்"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "சாளர மேலாளர்\"%s\" உள்ளமைப்பு  கருவியை பதிவாக்கவில்லை\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "அதிகபடுத்து"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "சிறிதாக்கு"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "மேல் தள்ளல்"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "ஏதுமில்லை"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
@@ -3547,7 +3597,9 @@ msgstr "ஒரு சேர் நீக்கு செயல் முடி�
 msgid ""
 "Indicates whether to close the shell when an upgrade or uninstall action is "
 "performed"
-msgstr "ஒரு மேம்படுத்து அல்லது நிறுவல் நீக்கு செயல் முடிந்தவுடன் ஷெல் இலிருந்து வெளியேற வேண்டுமா என காட்டுகிறது"
+msgstr ""
+"ஒரு மேம்படுத்து அல்லது நிறுவல் நீக்கு செயல் முடிந்தவுடன் ஷெல் இலிருந்து வெளியேற வேண்டுமா "
+"என காட்டுகிறது"
 
 #: ../shell/control-center.schemas.in.h:10
 msgid "Task names and associated .desktop files"
@@ -3558,7 +3610,10 @@ msgid ""
 "The task name to be displayed in the control-center (thus needing to be "
 "translated) followed by a \";\" separator then the filename of an "
 "associated .desktop file to launch for that task."
-msgstr "கட்டுப்பாட்டு மையத்தில் காட்டப்படும் வேலையின் பெயர் (ஆகவே மொழி பெயர்ப்பு செய்யப்பட வேண்டியது) \";\"  பிரிப்பி பின்னொட்டுடன் மேலும் அந்த வேலைக்கு தொடர்புள்ள .desktop கோப்பின் பெயர்."
+msgstr ""
+"கட்டுப்பாட்டு மையத்தில் காட்டப்படும் வேலையின் பெயர் (ஆகவே மொழி பெயர்ப்பு செய்யப்பட "
+"வேண்டியது) \";\"  பிரிப்பி பின்னொட்டுடன் மேலும் அந்த வேலைக்கு தொடர்புள்ள .desktop "
+"கோப்பின் பெயர்."
 
 #. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
 #: ../shell/control-center.schemas.in.h:13
@@ -3567,8 +3622,9 @@ msgid ""
 "selector.desktop,Set Preferred Applications;default-applications.desktop,Add "
 "Printer;gnome-cups-manager.desktop]"
 msgstr ""
-"[மேல்மேசை பின்னணியை மாற்று;background.desktop,கருத்தை மாற்று;gtk-theme-"
-"selector.desktop,விருப்பமான பயன்பாட்டை அமை;default-applications.desktop,அச்சு இயந்திரத்தை சேர்;gnome-cups-manager.desktop]"
+"[மேல்மேசை பின்னணியை மாற்று;background.desktop,கருத்தை மாற்று;gtk-theme-selector."
+"desktop,விருப்பமான பயன்பாட்டை அமை;default-applications.desktop,அச்சு இயந்திரத்தை "
+"சேர்;gnome-cups-manager.desktop]"
 
 #: ../shell/control-center.schemas.in.h:14
 msgid "if true, the control-center will close when a \"Common Task\" is activated"
