@@ -200,8 +200,8 @@ xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 				  (n_selected_layouts <
 				   max_selected_layouts
 				   || max_selected_layouts == 0));
-	gtk_widget_set_sensitive (del_layout_btn,
-				  n_selected_selected_layouts > 0);
+	gtk_widget_set_sensitive (del_layout_btn, (n_selected_layouts > 1)
+				  && (n_selected_selected_layouts > 0));
 }
 
 void
