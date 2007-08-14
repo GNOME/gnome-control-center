@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-03 10:06+0700\n"
-"PO-Revision-Date: 2007-08-03 10:08+0700\n"
+"POT-Creation-Date: 2007-08-14 13:27+0700\n"
+"PO-Revision-Date: 2007-08-14 13:29+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -58,12 +58,12 @@ msgid "No Image"
 msgstr "ไม่มีรูป"
 
 #: capplets/about-me/gnome-about-me.c:665
-#: capplets/appearance/appearance-desktop.c:1067
+#: capplets/appearance/appearance-desktop.c:1059
 msgid "Images"
 msgstr "รูปภาพ"
 
 #: capplets/about-me/gnome-about-me.c:669
-#: capplets/appearance/theme-installer.c:619
+#: capplets/appearance/theme-installer.c:623
 msgid "All Files"
 msgstr "ทุกแฟ้ม"
 
@@ -706,11 +706,11 @@ msgstr "พิกเซล/วินาที"
 msgid "seconds"
 msgstr "วินาที"
 
-#: capplets/appearance/appearance-desktop.c:1046
+#: capplets/appearance/appearance-desktop.c:1038
 msgid "Add Wallpaper"
 msgstr "เพิ่มวอลล์เปเปอร์"
 
-#: capplets/appearance/appearance-desktop.c:1071
+#: capplets/appearance/appearance-desktop.c:1063
 msgid "All files"
 msgstr "ทุกแฟ้ม"
 
@@ -754,47 +754,54 @@ msgstr "ใช้แบบอักษรเดิม"
 msgid "Use selected font"
 msgstr "ใช้แบบอักษรที่เลือก"
 
-#: capplets/appearance/appearance-main.c:105
+#: capplets/appearance/appearance-main.c:108
 msgid "Specify the filename of a theme to install"
 msgstr "ระบุชื่อแฟ้มของชุดตกแต่งที่จะติดตั้ง"
 
-#: capplets/appearance/appearance-main.c:106
+#: capplets/appearance/appearance-main.c:109
 msgid "filename"
 msgstr "ชื่อแฟ้ม"
 
-#: capplets/appearance/appearance-main.c:112
+#: capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "ระบุหน้าที่ต้องการแสดง (theme|background|fonts|interface)"
 
-#: capplets/appearance/appearance-main.c:113
+#: capplets/appearance/appearance-main.c:116
 msgid "page"
 msgstr "หน้า"
 
-#: capplets/appearance/appearance-main.c:120
+#: capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[WALLPAPER...]"
 
-#: capplets/appearance/appearance-themes.c:419
+#: capplets/appearance/appearance-style.c:156
+#: capplets/appearance/appearance-style.c:817
+#: capplets/common/gnome-theme-info.c:1050
+#: capplets/common/gnome-theme-info.c:1805
+msgid "Default Pointer"
+msgstr "ตัวชี้ปริยาย"
+
+#: capplets/appearance/appearance-themes.c:505
 msgid "Apply Background"
 msgstr "ตกลงใช้พื้นหลัง"
 
-#: capplets/appearance/appearance-themes.c:423
+#: capplets/appearance/appearance-themes.c:509
 msgid "Apply Font"
 msgstr "ตกลงใช้แบบอักษร"
 
-#: capplets/appearance/appearance-themes.c:448
+#: capplets/appearance/appearance-themes.c:534
 msgid "The current theme suggests a background and a font."
 msgstr "ชุดตกแต่งนี้แนะนำพื้นหลังและแบบอักษร"
 
-#: capplets/appearance/appearance-themes.c:453
+#: capplets/appearance/appearance-themes.c:539
 msgid "The current theme suggests a background."
 msgstr "ชุดตกแต่งนี้แนะนำพื้นหลัง"
 
-#: capplets/appearance/appearance-themes.c:458
+#: capplets/appearance/appearance-themes.c:544
 msgid "The current theme suggests a font."
 msgstr "ชุดตกแต่งนี้แนะนำแบบอักษร"
 
-#: capplets/appearance/appearance-themes.c:735
+#: capplets/appearance/appearance-themes.c:821
 #: capplets/default-applications/gnome-da-capplet.c:1080
 #: capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1262,11 +1269,11 @@ msgstr "ไม่สามารถอ่านชุดตกแต่งรู
 msgid "Failed to create temporary directory"
 msgstr "สร้างโฟลเดอร์ชั่วคราวไม่สำเร็จ"
 
-#: capplets/appearance/theme-installer.c:496
+#: capplets/appearance/theme-installer.c:497
 msgid "No theme file location specified to install"
 msgstr "ไม่ได้กำหนดตำแหน่งของแฟ้มชุดตกแต่งที่จะติดตั้ง"
 
-#: capplets/appearance/theme-installer.c:516
+#: capplets/appearance/theme-installer.c:517
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1275,26 +1282,27 @@ msgstr ""
 "คุณไม่มีสิทธิเพียงพอที่จะติดตั้งชุดตกแต่งใน:\n"
 "%s"
 
-#: capplets/appearance/theme-installer.c:535
+#: capplets/appearance/theme-installer.c:539
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s เป็นตำแหน่งที่ จะติดตั้งชุดตกแต่ง จะเลือกตำแหน่งนี้ เป็นที่มาของชุดตกแต่งไม่ได้"
 
-#: capplets/appearance/theme-installer.c:556
+#: capplets/appearance/theme-installer.c:558
 msgid "The file format is invalid."
 msgstr "รูปแบบข้อมูลไม่ถูกต้อง"
 
-#: capplets/appearance/theme-installer.c:609
+#: capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
 msgstr "เลือกชุดตกแต่ง"
 
-#: capplets/appearance/theme-installer.c:612
+#: capplets/appearance/theme-installer.c:616
 msgid "Theme Packages"
 msgstr "แพกเกจชุดตกแต่ง"
 
 #: capplets/appearance/theme-save.c:91
+#, c-format
 msgid "Theme name must be present"
 msgstr "ชุดตกแต่งต้องมีชื่อ"
 
@@ -1515,6 +1523,34 @@ msgstr "กรุณาเลือกภาพที่จะใช้"
 #: capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "เ_ลือก"
+
+#: capplets/common/gnome-theme-info.c:1806
+msgid "Default Pointer - Current"
+msgstr "ตัวชี้ปริยาย - ใช้อยู่"
+
+#: capplets/common/gnome-theme-info.c:1810
+msgid "White Pointer"
+msgstr "ตัวชี้ขาว"
+
+#: capplets/common/gnome-theme-info.c:1811
+msgid "White Pointer - Current"
+msgstr "ตัวชี้ขาว - ใช้อยู่"
+
+#: capplets/common/gnome-theme-info.c:1815
+msgid "Large Pointer"
+msgstr "ตัวชี้ใหญ่"
+
+#: capplets/common/gnome-theme-info.c:1816
+msgid "Large Pointer - Current"
+msgstr "ตัวชี้ใหญ่ - ใช้อยู่"
+
+#: capplets/common/gnome-theme-info.c:1820
+msgid "Large White Pointer - Current"
+msgstr "ตัวชี้ขาวใหญ่ - ใช้อยู่"
+
+#: capplets/common/gnome-theme-info.c:1821
+msgid "Large White Pointer"
+msgstr "ตัวชี้ขาวใหญ่"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:21
@@ -2021,7 +2057,7 @@ msgstr "ไม่ใช้"
 msgid "<Unknown Action>"
 msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:883
+#: capplets/keybindings/gnome-keybinding-properties.c:915
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2031,7 +2067,7 @@ msgstr ""
 "ไม่สามารถใช้ปุ่มลัด \"%s\" ได้ เพราะจะทำให้ใช้ปุ่มนี้ป้อนข้อความไม่ได้\n"
 "กรุณาใช้ปุ่มอย่าง Control, Alt หรือ Shift ประกอบด้วย\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:912
+#: capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -2040,21 +2076,21 @@ msgstr ""
 "ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:944
+#: capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "เกิดข้อผิดพลาดขณะจัดเก็บปุ่มลัดใหม่ลงในฐานข้อมูลค่าปรับแต่ง: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:994
+#: capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "เกิดข้อผิดพลาด ขณะลบปุ่มลัดออกจาก ฐานข้อมูลค่าปรับแต่ง: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1109
+#: capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
 msgstr "ปฏิบัติการ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1133
+#: capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
 msgstr "ปุ่มลัด"
 
@@ -3095,6 +3131,7 @@ msgstr "ค้นหา"
 
 #. make open with default action
 #: libslab/directory-tile.c:168
+#, c-format
 msgid "<b>Open</b>"
 msgstr "<b>เปิด</b>"
 
@@ -3164,6 +3201,7 @@ msgid "Unexpected tag '%s' inside '%s'"
 msgstr "พบแท็ก '%s' ที่ไม่ต้องการภายใน '%s'"
 
 #: libslab/libslab-bookmarkfile.c:1929
+#, c-format
 msgid "No valid bookmark file found in data dirs"
 msgstr "ไม่พบแฟ้มที่คั่นหน้าที่ใช้การได้ในไดเรกทอรีข้อมูล"
 
@@ -3224,6 +3262,7 @@ msgid "<b>Open %s</b>"
 msgstr "<b>เปิด %s</b>"
 
 #: libslab/system-tile.c:141
+#, c-format
 msgid "Remove from System Items"
 msgstr "ลบออกจากรายการระบบ"
 
@@ -3293,13 +3332,21 @@ msgstr "เสียงของระบบ"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "โปรแกรมจัดการหน้าต่าง \"%s\" ยังไม่ได้ลงทะเบียนเครื่องมือปรับแต่ง\n"
 
-#: libwindow-settings/metacity-window-manager.c:378
+#: libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "ขยายเต็มจอ"
 
-#: libwindow-settings/metacity-window-manager.c:379
+#: libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "ย่อเก็บ"
+
+#: libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "ม้วนขึ้น"
+
+#: libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "ไม่ทำอะไร"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -3599,6 +3646,7 @@ msgid_plural "%d minutes until the next break"
 msgstr[0] "อีก %d นาทีถึงช่วงพักต่อไป"
 
 #: typing-break/drwright.c:504
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "อีกไม่ถึง 1 นาทีถึงช่วงพักต่อไป"
 
@@ -3905,38 +3953,14 @@ msgstr "กำหนดชุดตกแต่งปริยาย"
 #~ msgid "Unknown Pointer"
 #~ msgstr "ตัวชี้ไม่รู้จัก"
 
-#~ msgid "Default Pointer"
-#~ msgstr "ตัวชี้ปริยาย"
-
-#~ msgid "Default Pointer - Current"
-#~ msgstr "ตัวชี้ปริยาย - ใช้อยู่"
-
 #~ msgid "The default pointer that ships with X"
 #~ msgstr "ตัวชี้ปริยายซึ่งมากับ X"
-
-#~ msgid "White Pointer"
-#~ msgstr "ตัวชี้ขาว"
-
-#~ msgid "White Pointer - Current"
-#~ msgstr "ตัวชี้ขาว - ใช้อยู่"
 
 #~ msgid "The default pointer inverted"
 #~ msgstr "ตัวชี้ปริยายแต่กลับสี"
 
-#~ msgid "Large Pointer"
-#~ msgstr "ตัวชี้ใหญ่"
-
-#~ msgid "Large Pointer - Current"
-#~ msgstr "ตัวชี้ใหญ่ - ใช้อยู่"
-
 #~ msgid "Large version of normal pointer"
 #~ msgstr "ตัวชี้ปริยายขยายใหญ่"
-
-#~ msgid "Large White Pointer - Current"
-#~ msgstr "ตัวชี้ขาวใหญ่ - ใช้อยู่"
-
-#~ msgid "Large White Pointer"
-#~ msgstr "ตัวชี้ขาวใหญ่"
 
 #~ msgid "Large version of white pointer"
 #~ msgstr "ตัวชี้ขาวขยายใหญ่"
