@@ -864,7 +864,9 @@ themes_init (AppearanceData *data)
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (renderer, "alignment", PANGO_ALIGN_CENTER,
 			  "wrap-mode", PANGO_WRAP_WORD_CHAR,
-			  "xalign", 0.5, "yalign", 0.0, NULL);
+			  "wrap-width", gtk_icon_view_get_item_width (icon_view),
+			  "width", gtk_icon_view_get_item_width (icon_view),
+			  "xalign", 0.0, "yalign", 0.0, NULL);
   gtk_cell_layout_pack_end (GTK_CELL_LAYOUT (icon_view), renderer, FALSE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (icon_view), renderer,
                                   "markup", COL_LABEL, NULL);
