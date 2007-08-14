@@ -1,3 +1,70 @@
+gnome-control-center 2.19.90
+
+about-me:
+- Use g_get_user_special_dir() instead of hard-coding ~/Pictures (Jens
+  Granseuer)
+
+appearance:
+- Don't generate GTK thumbnails when we want metacity or icon (Jens Granseuer)
+  (#462724)
+- No need for an expensive parse to initialize the colors (Jens Granseuer)
+- Reduce metacity thumbnail size to 128x128 (Jens Granseuer)
+- Also load the "default" cursor theme so we know the available sizes (Denis
+  Washington) (#462409)
+- Create the icon theme representative before the GTK stock button (Jens
+  Granseuer)
+- Various small tweaks and optimizations (Jens Granseuer)
+- Add a shortcut to the user's special Pictures folder to the file chooser
+  and default to it (Jens Granseuer) (#461093)
+- HIG capitalization fix for a checkbutton label (Dennis Cranston)
+- Use thumbnail factory to store and retrieve metatheme thumbs (Jens Granseuer)
+  (#448968)
+- Remove check for old glib version that would result in bogus code (Jens
+  Granseuer)
+- Only add a "Default Pointer" list item if there is no such GnomeThemeCursorInfo
+  (Denis Washington)
+- Toggle sensitivity of the cursor scale labels (Dennis Cranston) (#463442)
+- Indent category contents, and other HIG spacing fixes (Dennis Cranston)
+- Fix check for available symbolic colors and make buttons for unsupported
+  colors insensitive (Jens Granseuer) (#464081)
+- Make sure the color scheme has changed before writing to GConf and
+  enabling the reset button (Jens Granseuer)
+- Reenable theme lockdown (Jens Granseuer)
+- Restrict drag'n'drop installation to the theme tab (Jens Granseuer)
+- Fix double-free and use-after-free (Jens Granseuer)
+- Make sure we have a selection before trying to get the data (Jens Granseuer)
+  (#465431)
+
+default applications:
+- Don't use '==' and improve portability with empty strings (Jens Granseuer)
+
+keybindings:
+- Make the arrows and tabs unbindable without a modifier (Bastien Nocera)
+  (#463433)
+
+settings daemon:
+- Use CTRL-ALT-DEL as default keybinding for 'Log out' (Rodrigo Moya)
+
+window:
+- Expose missing metacity double-click actions (Jens Granseuer) (#416541)
+
+updated translations:
+- ca (Joan Duran)
+- el (Kostas Papadimas)
+- es (Jorge Gonzalez)
+- eu (Inaki Larranaga Murgoitio)
+- fi (Ilkka Tuohela)
+- gu (Ankit Patel)
+- ja (Satoru SATOH, Takeshi AIHANA)
+- lt (Zygimantas Berucka)
+- nb (Kjartan Maraas)
+- nl (Vincent van Adrighem)
+- pl (Artur Flinta)
+- si (Danishka Navin)
+- sv (Daniel Nylander)
+- ta (I. Felix)
+- th (Theppitak Karoonboonyanan)
+------------------------------------------------------------------------------
 gnome-control-center 2.19.6
 
 about-me:
