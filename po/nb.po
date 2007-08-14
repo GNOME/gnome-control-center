@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-02 13:55+0200\n"
-"PO-Revision-Date: 2007-08-02 13:58+0200\n"
+"POT-Creation-Date: 2007-08-14 15:57+0200\n"
+"PO-Revision-Date: 2007-08-14 15:58+0200\n"
 "Last-Translator: Espen Stefansen <espenas@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -53,12 +53,12 @@ msgid "No Image"
 msgstr "Ingen bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:665
-#: ../capplets/appearance/appearance-desktop.c:1067
+#: ../capplets/appearance/appearance-desktop.c:1059
 msgid "Images"
 msgstr "Bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:669
-#: ../capplets/appearance/theme-installer.c:619
+#: ../capplets/appearance/theme-installer.c:623
 msgid "All Files"
 msgstr "Alle filer"
 
@@ -711,11 +711,11 @@ msgstr "piksler per sekund"
 msgid "seconds"
 msgstr "sekunder"
 
-#: ../capplets/appearance/appearance-desktop.c:1046
+#: ../capplets/appearance/appearance-desktop.c:1038
 msgid "Add Wallpaper"
 msgstr "Legg til bakgrunn"
 
-#: ../capplets/appearance/appearance-desktop.c:1071
+#: ../capplets/appearance/appearance-desktop.c:1063
 msgid "All files"
 msgstr "Alle filer"
 
@@ -765,47 +765,54 @@ msgstr "Bruk forrige skrift"
 msgid "Use selected font"
 msgstr "Bruk valgt skrift"
 
-#: ../capplets/appearance/appearance-main.c:105
+#: ../capplets/appearance/appearance-main.c:108
 msgid "Specify the filename of a theme to install"
 msgstr "Oppgi filnavn på et tema som skal installeres"
 
-#: ../capplets/appearance/appearance-main.c:106
+#: ../capplets/appearance/appearance-main.c:109
 msgid "filename"
 msgstr "filnavn"
 
-#: ../capplets/appearance/appearance-main.c:112
+#: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "Oppgi navn på fanen som skal vises (theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:113
+#: ../capplets/appearance/appearance-main.c:116
 msgid "page"
 msgstr "side"
 
-#: ../capplets/appearance/appearance-main.c:120
+#: ../capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[BAKGRUNN...]"
 
-#: ../capplets/appearance/appearance-themes.c:419
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:817
+#: ../capplets/common/gnome-theme-info.c:1050
+#: ../capplets/common/gnome-theme-info.c:1805
+msgid "Default Pointer"
+msgstr "Forvalgt peker"
+
+#: ../capplets/appearance/appearance-themes.c:505
 msgid "Apply Background"
 msgstr "Bruk bakgrunn"
 
-#: ../capplets/appearance/appearance-themes.c:423
+#: ../capplets/appearance/appearance-themes.c:509
 msgid "Apply Font"
 msgstr "Bruk skrift"
 
-#: ../capplets/appearance/appearance-themes.c:448
+#: ../capplets/appearance/appearance-themes.c:534
 msgid "The current theme suggests a background and a font."
 msgstr "Aktivt tema foreslår en bakgrunn og en skrift."
 
-#: ../capplets/appearance/appearance-themes.c:453
+#: ../capplets/appearance/appearance-themes.c:539
 msgid "The current theme suggests a background."
 msgstr "Aktivt tema foreslår en bakgrunn."
 
-#: ../capplets/appearance/appearance-themes.c:458
+#: ../capplets/appearance/appearance-themes.c:544
 msgid "The current theme suggests a font."
 msgstr "Aktivt tema foreslår en skrift."
 
-#: ../capplets/appearance/appearance-themes.c:735
+#: ../capplets/appearance/appearance-themes.c:821
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1273,11 +1280,11 @@ msgstr "Dette temaet er ikke i et støttet format."
 msgid "Failed to create temporary directory"
 msgstr "Kunne ikke opprette midlertidig katalog"
 
-#: ../capplets/appearance/theme-installer.c:496
+#: ../capplets/appearance/theme-installer.c:497
 msgid "No theme file location specified to install"
 msgstr "Ingen lokasjon oppgitt for installasjon av temafil"
 
-#: ../capplets/appearance/theme-installer.c:516
+#: ../capplets/appearance/theme-installer.c:517
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1286,7 +1293,7 @@ msgstr ""
 "Ikke nok rettigheter til å installere tema i:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:535
+#: ../capplets/appearance/theme-installer.c:539
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1295,19 +1302,20 @@ msgstr ""
 "%s er stien hvor temafilene vil bli installert. Denne kan ikke velges som "
 "kildelokasjon"
 
-#: ../capplets/appearance/theme-installer.c:556
+#: ../capplets/appearance/theme-installer.c:558
 msgid "The file format is invalid."
 msgstr "Filformatet er ugyldig."
 
-#: ../capplets/appearance/theme-installer.c:609
+#: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
 msgstr "Velg tema"
 
-#: ../capplets/appearance/theme-installer.c:612
+#: ../capplets/appearance/theme-installer.c:616
 msgid "Theme Packages"
 msgstr "Temapakker"
 
 #: ../capplets/appearance/theme-save.c:91
+#, c-format
 msgid "Theme name must be present"
 msgstr "Navn på tema må oppgis"
 
@@ -1538,6 +1546,34 @@ msgstr "Vennligst velg et bilde."
 #: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "_Velg"
+
+#: ../capplets/common/gnome-theme-info.c:1806
+msgid "Default Pointer - Current"
+msgstr "Forvalgt peker - nåværende"
+
+#: ../capplets/common/gnome-theme-info.c:1810
+msgid "White Pointer"
+msgstr "Hvit peker"
+
+#: ../capplets/common/gnome-theme-info.c:1811
+msgid "White Pointer - Current"
+msgstr "Hvit peker - nåværende"
+
+#: ../capplets/common/gnome-theme-info.c:1815
+msgid "Large Pointer"
+msgstr "Stor peker"
+
+#: ../capplets/common/gnome-theme-info.c:1816
+msgid "Large Pointer - Current"
+msgstr "Stor peker - nåværende"
+
+#: ../capplets/common/gnome-theme-info.c:1820
+msgid "Large White Pointer - Current"
+msgstr "Stor hvit peker - nåværende"
+
+#: ../capplets/common/gnome-theme-info.c:1821
+msgid "Large White Pointer"
+msgstr "Stor hvit peker"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
@@ -2049,7 +2085,7 @@ msgstr "Slått av"
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:883
+#: ../capplets/keybindings/gnome-keybinding-properties.c:915
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2061,7 +2097,7 @@ msgstr ""
 "Vennligst prøv igjen med en tastekombinasjon som inneholder Control, Alt "
 "eller Shift.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:912
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -2070,21 +2106,21 @@ msgstr ""
 "Snarveien «%s» er allerede brukt for:\n"
 " «%s»\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Feil under setting av ny snarvei i konfigurasjonsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:994
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Feil under fjerning av snarveitast i konfigurasjonsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1109
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
 msgstr "Handling"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1133
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
 msgstr "Snarvei"
 
@@ -3132,6 +3168,7 @@ msgstr "Søk"
 
 #. make open with default action
 #: ../libslab/directory-tile.c:168
+#, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Åpne</b>"
 
@@ -3201,6 +3238,7 @@ msgid "Unexpected tag '%s' inside '%s'"
 msgstr "Uventet tag «%s» inne i «%s»"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
+#, c-format
 msgid "No valid bookmark file found in data dirs"
 msgstr "Ingen gyldig bokmerkefil funnet i datakatalogene"
 
@@ -3261,6 +3299,7 @@ msgid "<b>Open %s</b>"
 msgstr "<b>Åpne %s</b>"
 
 #: ../libslab/system-tile.c:141
+#, c-format
 msgid "Remove from System Items"
 msgstr "Fjern fra systemoppføringer"
 
@@ -3331,13 +3370,21 @@ msgstr "Systemlyder"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Vindushåndterer «%s» har ikke registrert et konfigurasjonsverktøy\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "Maksimer"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "Minimer"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "Rull opp"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "Ingen"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -3649,6 +3696,7 @@ msgstr[0] "%d minutt til neste pause"
 msgstr[1] "%d minutter til neste pause"
 
 #: ../typing-break/drwright.c:504
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "Mindre enn ett minutt til neste pause"
 
