@@ -1799,7 +1799,7 @@ read_cursor_fonts (void)
   gchar *cursor_font;
   gint i;
 
-  static const gchar* builtins[][4] = {
+  const gchar *builtins[][4] = {
     {
       "gnome/cursor-fonts/cursor-normal.pcf",
       N_("Default Pointer"),
@@ -1829,17 +1829,17 @@ read_cursor_fonts (void)
     cursor_font = g_strdup (builtins[0][0]);
 
   for (i = 0; i < G_N_ELEMENTS (builtins); i++) {
-		GnomeThemeCursorInfo *theme_info;
-		gchar *filename;
+    GnomeThemeCursorInfo *theme_info;
+    gchar *filename;
 
     theme_info = gnome_theme_cursor_info_new ();
-    theme_info->priority = 0;
 
     filename = g_build_filename (GNOMECC_DATA_DIR "/pixmaps", builtins[i][3], NULL);
     theme_info->thumbnail = gdk_pixbuf_new_from_file (filename, NULL);
     g_free (filename);
 
-    theme_info->name = theme_info->path = g_build_filename (GNOMECC_DATA_DIR, builtins[i][0], NULL);
+    theme_info->name = g_build_filename (GNOMECC_DATA_DIR, builtins[i][0], NULL);
+    theme_info->path = g_strdup (theme_info->name);
 
     if (!strcmp (theme_info->path, cursor_font))
       theme_info->readable_name = g_strdup (builtins[i][2]);
