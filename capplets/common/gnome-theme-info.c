@@ -1796,7 +1796,7 @@ read_current_cursor_font (void)
 static void
 read_cursor_fonts (void)
 {
-  gchar* cursor_font;
+  gchar *cursor_font;
   gint i;
 
   static const gchar* builtins[][4] = {
@@ -1849,6 +1849,8 @@ read_cursor_fonts (void)
     g_hash_table_insert (cursor_theme_hash_by_uri, theme_info->path, theme_info);
     add_data_to_hash_by_name (cursor_theme_hash_by_name, theme_info->name, theme_info);
   }
+
+  g_free (cursor_font);
 }
 #endif /* !HAVE_XCURSOR */
 
