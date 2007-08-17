@@ -15,7 +15,7 @@
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL RED HAT
  * BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
  * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
- * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
+ * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  * Authors:  Owen Taylor, Havoc Pennington, Ray Strode, Rodrigo Moya
@@ -24,7 +24,6 @@
 
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
-
 
 #include <gconf/gconf.h>
 #include <libgnome/gnome-init.h>
@@ -35,7 +34,7 @@
 #include "gnome-settings-module.h"
 
 struct _GnomeSettingsDaemonPrivate {
-	GHashTable *loaded_modules;
+	GSList *loaded_modules;
 	GObject *dbus_service;
 };
 
@@ -65,12 +64,12 @@ terminate_cb (void *data)
 
 	if (*terminated)
 		return;
-  
+
 	*terminated = TRUE;
 	gtk_main_quit ();
 }
 
-static GdkFilterReturn 
+static GdkFilterReturn
 manager_event_filter (GdkXEvent *xevent,
 		      GdkEvent  *event,
 		      gpointer   data)
@@ -86,51 +85,47 @@ manager_event_filter (GdkXEvent *xevent,
 }
 
 static void
-free_modules_list (gpointer data)
-{
-	GList *l = (GList *) data;
-
-	while (l) {
-		g_object_unref (G_OBJECT (l->data));
-		l = g_list_remove (l, l);
-	}
-}
-
-static void
 initialize_modules (GnomeSettingsDaemon *daemon, GnomeSettingsModuleRunlevel runlevel)
 {
-	GList *l, *module_list;
 	GConfClient *client;
+	GSList *l;
 
 	client = gnome_settings_get_config_client ();
 
-	module_list = g_hash_table_lookup (daemon->priv->loaded_modules, &runlevel);
-	for (l = module_list; l != NULL; l = l->next) {		
-		if (!gnome_settings_module_initialize (GNOME_SETTINGS_MODULE (l->data), client))
-			g_warning ("Module %s could not be initialized", G_OBJECT_TYPE_NAME (G_OBJECT (l->data)));
+	for (l = daemon->priv->loaded_modules; l != NULL; l = l->next) {
+		GnomeSettingsModule *module = (GnomeSettingsModule *) l->data;
+
+		if (gnome_settings_module_get_runlevel (module) == runlevel &&
+		    !gnome_settings_module_initialize (module, client))
+			g_warning ("Module %s could not be initialized", G_OBJECT_TYPE_NAME (module));
 	}
 }
 
 static void
 start_modules (GnomeSettingsDaemon *daemon, GnomeSettingsModuleRunlevel runlevel)
 {
-	GList *l, *module_list;
+	GSList *l;
 
-	module_list = g_hash_table_lookup (daemon->priv->loaded_modules, &runlevel);
-	for (l = module_list; l != NULL; l = l->next) {
-		if (!gnome_settings_module_start (GNOME_SETTINGS_MODULE (l->data)))
-			g_warning ("Module %s could not be started", G_OBJECT_TYPE_NAME (G_OBJECT (l->data)));
+	for (l = daemon->priv->loaded_modules; l != NULL; l = l->next) {
+		GnomeSettingsModule *module = (GnomeSettingsModule *) l->data;
+
+		if (gnome_settings_module_get_runlevel (module) == runlevel &&
+		    !gnome_settings_module_start (module))
+			g_warning ("Module %s could not be started", G_OBJECT_TYPE_NAME (module));
 	}
 }
 
 static void
 stop_modules (GnomeSettingsDaemon *daemon, GnomeSettingsModuleRunlevel runlevel)
 {
-	GList *l, *module_list;
+	GSList *l;
 
-	module_list = g_hash_table_lookup (daemon->priv->loaded_modules, &runlevel);
-	for (l = module_list; l != NULL; l = l->next)
-		gnome_settings_module_stop (GNOME_SETTINGS_MODULE (l->data));
+	for (l = daemon->priv->loaded_modules; l != NULL; l = l->next) {
+		GnomeSettingsModule *module = (GnomeSettingsModule *) l->data;
+
+		if (gnome_settings_module_get_runlevel (module) == runlevel)
+			gnome_settings_module_stop (module);
+	}
 }
 
 static void
@@ -153,7 +148,8 @@ finalize (GObject *object)
 		stop_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS);
 		stop_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS);
 
-		g_hash_table_destroy (daemon->priv->loaded_modules);
+		g_slist_foreach (daemon->priv->loaded_modules, (GFunc) g_object_unref, NULL);
+		g_slist_free (daemon->priv->loaded_modules);
 		daemon->priv->loaded_modules = NULL;
 	}
 
@@ -182,7 +178,7 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 	GType *module_types;
 	guint n_children;
 
-	settings->priv = g_new (GnomeSettingsDaemonPrivate, 1);
+	settings->priv = g_new0 (GnomeSettingsDaemonPrivate, 1);
 
 	/* register all internal modules types */
 	if (!gnome_settings_module_accessibility_keyboard_get_type ()
@@ -202,39 +198,26 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 	    || !gnome_settings_module_xsettings_get_type ())
 		return;
 
-	/* create hash table for loaded modules */
-	settings->priv->loaded_modules = g_hash_table_new_full (g_int_hash, g_int_equal, g_free, free_modules_list);
-
 	module_types = g_type_children (GNOME_SETTINGS_TYPE_MODULE, &n_children);
 	if (module_types) {
 		guint i;
 
 		for (i = 0; i < n_children; i++) {
 			GObject *module;
-			GnomeSettingsModuleRunlevel runlevel, *ptr_runlevel;
-			GList *module_list;
 
 			module = g_object_new (module_types[i], NULL);
 			if (!module)
 				continue;
 
-			runlevel = gnome_settings_module_get_runlevel (GNOME_SETTINGS_MODULE (module));
-			module_list = g_hash_table_lookup (settings->priv->loaded_modules, &runlevel);
-			if (module_list)
-				module_list = g_list_append (module_list, module);
-			else {
-				module_list = g_list_append (NULL, module);
-				ptr_runlevel = g_new0 (GnomeSettingsModuleRunlevel, 1);
-				*ptr_runlevel = runlevel;
-				g_hash_table_insert (settings->priv->loaded_modules, ptr_runlevel, module_list);
-			}
+			settings->priv->loaded_modules =
+				g_slist_append (settings->priv->loaded_modules, module);
 		}
 
 		g_free (module_types);
 	}
 
 	/* create DBus server */
-	settings->priv->dbus_service  = g_object_new (gnome_settings_server_get_type (), NULL);
+	settings->priv->dbus_service = g_object_new (gnome_settings_server_get_type (), NULL);
 }
 
 G_DEFINE_TYPE (GnomeSettingsDaemon, gnome_settings_daemon, G_TYPE_OBJECT)
@@ -301,10 +284,10 @@ gnome_settings_daemon_new (void)
 	if (xsettings_manager_check_running (
 		    gdk_x11_display_get_xdisplay (display),
 		    gdk_screen_get_number (gdk_screen_get_default ()))) {
-		fprintf (stderr, "You can only run one xsettings manager at a time; exiting\n");
+		g_error ("You can only run one xsettings manager at a time; exiting\n");
 		return NULL;
 	}
-  
+
 	if (!terminated) {
 		managers = g_new (XSettingsManager *, n_screens + 1);
 
@@ -318,12 +301,11 @@ gnome_settings_daemon_new (void)
 				gdk_screen_get_number (screen),
 				terminate_cb, &terminated);
 			if (!managers [i]) {
-				fprintf (stderr, "Could not create xsettings manager for screen %d!\n", i);
+				g_error ("Could not create xsettings manager for screen %d!\n", i);
 				return NULL;
 			}
 		}
 
-		g_assert (i == n_screens);
 		managers [i] = NULL;
 	}
 
