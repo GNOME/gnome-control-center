@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-04 20:55+0900\n"
-"PO-Revision-Date: 2007-08-04 20:55+0900\n"
+"POT-Creation-Date: 2007-08-18 13:29+0900\n"
+"PO-Revision-Date: 2007-08-18 12:49+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgid "Images"
 msgstr "画像"
 
 #: ../capplets/about-me/gnome-about-me.c:669
-#: ../capplets/appearance/theme-installer.c:619
+#: ../capplets/appearance/theme-installer.c:623
 msgid "All Files"
 msgstr "全てのファイル"
 
@@ -787,6 +787,13 @@ msgstr "ページ名"
 msgid "[WALLPAPER...]"
 msgstr "[壁紙...]"
 
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:817
+#: ../capplets/common/gnome-theme-info.c:1050
+#: ../capplets/common/gnome-theme-info.c:1805
+msgid "Default Pointer"
+msgstr "デフォルトのポインタ"
+
 #: ../capplets/appearance/appearance-themes.c:505
 msgid "Apply Background"
 msgstr "背景の適用"
@@ -1276,11 +1283,11 @@ msgstr "このテーマのフォーマットはサポートしていません。
 msgid "Failed to create temporary directory"
 msgstr "作業フォルダの生成に失敗しました"
 
-#: ../capplets/appearance/theme-installer.c:496
+#: ../capplets/appearance/theme-installer.c:497
 msgid "No theme file location specified to install"
 msgstr "インストールするテーマ・ファイルのパス名が指定されていません"
 
-#: ../capplets/appearance/theme-installer.c:516
+#: ../capplets/appearance/theme-installer.c:517
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1289,7 +1296,7 @@ msgstr ""
 "テーマをインストールするために必要な権限が適当ではありません:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:535
+#: ../capplets/appearance/theme-installer.c:539
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1298,19 +1305,20 @@ msgstr ""
 "%s はテーマ・ファイルをインストールするパス名です。これはソースを格納するもの"
 "として選択することはできません。"
 
-#: ../capplets/appearance/theme-installer.c:556
+#: ../capplets/appearance/theme-installer.c:558
 msgid "The file format is invalid."
 msgstr "ファイルの書式が間違っています。"
 
-#: ../capplets/appearance/theme-installer.c:609
+#: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
 msgstr "テーマの選択"
 
-#: ../capplets/appearance/theme-installer.c:612
+#: ../capplets/appearance/theme-installer.c:616
 msgid "Theme Packages"
 msgstr "テーマのパッケージ"
 
 #: ../capplets/appearance/theme-save.c:91
+#, c-format
 msgid "Theme name must be present"
 msgstr "テーマの名前を指定して下さい"
 
@@ -1534,6 +1542,34 @@ msgstr "画像を一つ選択して下さい。"
 #: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "選択(_S)"
+
+#: ../capplets/common/gnome-theme-info.c:1806
+msgid "Default Pointer - Current"
+msgstr "デフォルトのポインタ - 使用中"
+
+#: ../capplets/common/gnome-theme-info.c:1810
+msgid "White Pointer"
+msgstr "白いポインタ"
+
+#: ../capplets/common/gnome-theme-info.c:1811
+msgid "White Pointer - Current"
+msgstr "白いポインタ - 使用中"
+
+#: ../capplets/common/gnome-theme-info.c:1815
+msgid "Large Pointer"
+msgstr "大きなポインタ"
+
+#: ../capplets/common/gnome-theme-info.c:1816
+msgid "Large Pointer - Current"
+msgstr "大きなポインタ - 使用中"
+
+#: ../capplets/common/gnome-theme-info.c:1820
+msgid "Large White Pointer - Current"
+msgstr "大きな白いポインタ - 使用中"
+
+#: ../capplets/common/gnome-theme-info.c:1821
+msgid "Large White Pointer"
+msgstr "大きな白いポインタ"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
@@ -1762,130 +1798,138 @@ msgid "Gnopernicus with Magnifier"
 msgstr "Gnopernicus (拡大鏡あり)"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Iceape"
+msgstr "Iceape"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Iceape Mail"
+msgstr "Iceape のメール"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
 msgid "Icedove"
 msgstr "Icedove"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Iceweasel"
 msgstr "Iceweasel"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
 msgid "KDE Magnifier without Screen Reader"
 msgstr "KDE の拡大鏡 (スクリーン・リーダーなし)"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
 msgid "Links Text Browser"
 msgstr "Links テキスト・ブラウザ"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Linux Screen Reader"
 msgstr "Linux スクリーン・リーダ"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Linux Screen Reader with Magnifier"
 msgstr "Linux スクリーン・リーダ (拡大鏡あり)"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Lynx Text Browser"
 msgstr "Lynx テキスト・ブラウザ"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
 msgid "Mozilla Mail"
 msgstr "Mozilla メール"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
 msgid "Muine Music Player"
 msgstr "Muine 楽曲プレイヤー"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
 msgid "Orca"
 msgstr "Orca"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
 msgid "Orca with Magnifier"
 msgstr "Orca (拡大鏡あり)"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
 msgid "Rhythmbox Music Player"
 msgstr "Rhythmbox 楽曲プレイヤー"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
 msgid "SeaMonkey"
 msgstr "SeaMonkey"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
 msgid "SeaMonkey Mail"
 msgstr "SeaMonkey メール"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
 msgid "Simple OnScreen Keyboard"
 msgstr "シンプルなオンスクリーン・キーボード"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
 msgid "Standard XTerminal"
 msgstr "標準のＸ端末"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
 msgid "Totem Movie Player"
 msgstr "Totem 動画プレイヤー"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:57
 msgid "W3M Text Browser"
 msgstr "W3M テキスト・ブラウザ"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:58
 msgid "aterm"
 msgstr "ATerm"
 
@@ -2045,7 +2089,7 @@ msgstr "無効"
 msgid "<Unknown Action>"
 msgstr "<不明な操作>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:883
+#: ../capplets/keybindings/gnome-keybinding-properties.c:915
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2055,7 +2099,7 @@ msgstr ""
 "このキーでは入力できないのでショートカット・キー \"%s\" は利用できません。\n"
 "[Control] や [Alt]、[Shift] といった修飾キーを併用するようにして下さい。\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:912
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -2064,21 +2108,21 @@ msgstr ""
 "このショートカット \"%s\" は既に登録されています:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "新しいアクセラレータを設定データベース書き込む際にエラー: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:994
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "設定データベースのアクセラレータの設定を解除する際にエラー: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1109
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
 msgstr "操作"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1133
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
 msgstr "ショートカット"
 
@@ -3123,6 +3167,7 @@ msgstr "検索する"
 
 #. make open with default action
 #: ../libslab/directory-tile.c:168
+#, c-format
 msgid "<b>Open</b>"
 msgstr "<b>開く</b>"
 
@@ -3192,6 +3237,7 @@ msgid "Unexpected tag '%s' inside '%s'"
 msgstr "'%2$s' の中に想定外のタグ '%1$s'"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
+#, c-format
 msgid "No valid bookmark file found in data dirs"
 msgstr "データ・フォルダに妥当なブックマーク・ファイルはありません"
 
@@ -3254,6 +3300,7 @@ msgid "<b>Open %s</b>"
 msgstr "<b>%s を開く</b>"
 
 #: ../libslab/system-tile.c:141
+#, c-format
 msgid "Remove from System Items"
 msgstr "システムのアイテムから削除する"
 
@@ -3325,13 +3372,21 @@ msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
 "お使いのウィンドウ・マネージャ \"%s\" には設定ツールが登録されていません。\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
-msgstr "最大化"
+msgstr "最大化する"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "最小化する"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
-msgstr "巻き上げ"
+msgstr "巻き上げる"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "何もしない"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -3635,6 +3690,7 @@ msgstr[0] "次の一休みまで %d分あります"
 msgstr[1] "次の一休みまで %d分あります"
 
 #: ../typing-break/drwright.c:504
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "次の一休みまで 1分を切りました"
 
