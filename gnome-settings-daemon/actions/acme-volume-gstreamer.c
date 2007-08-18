@@ -40,7 +40,7 @@
 
 #define DEFAULT_MIXER_DEVICE_KEY   "/desktop/gnome/sound/default_mixer_device"
 #define DEFAULT_MIXER_TRACKS_KEY   "/desktop/gnome/sound/default_mixer_tracks"
- 
+
 struct AcmeVolumeGStreamerPrivate
 {
   	GstMixer      *mixer;
@@ -72,7 +72,7 @@ acme_volume_gstreamer_finalize (GObject *object)
 	self = ACME_VOLUME_GSTREAMER (object);
 
 	g_return_if_fail (self->_priv != NULL);
-	
+
 	if (self->_priv->timer_id != 0)
 	{
 		g_source_remove (self->_priv->timer_id);
@@ -95,7 +95,7 @@ acme_volume_gstreamer_set_mute (AcmeVolume *vol, gboolean val)
 {
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
 	GList *t;
-	
+
 	if (acme_volume_gstreamer_open (self) == FALSE)
 		return;
 
@@ -134,7 +134,7 @@ update_state (AcmeVolumeGStreamer * self)
 {
 	gint *volumes, n;
 	gdouble vol = 0;
-	GstMixerTrack *track = GST_MIXER_TRACK(self->_priv->mixer_tracks->data);
+	GstMixerTrack *track = GST_MIXER_TRACK (self->_priv->mixer_tracks->data);
 
 	/* update mixer by getting volume */
 	volumes = g_new0 (gint, track->num_channels);
@@ -146,8 +146,7 @@ update_state (AcmeVolumeGStreamer * self)
 	vol = 100 * vol / (track->max_volume - track->min_volume);
 
 	/* update mute flag, and volume if not muted */
-	if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MUTE) ||
-	    (vol == 0 && self->_priv->volume != 0))
+	if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MUTE))
 		self->_priv->mute = TRUE;
 	else
 		self->_priv->volume = vol;
@@ -171,7 +170,7 @@ static int
 acme_volume_gstreamer_get_volume (AcmeVolume *vol)
 {
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
-	
+
 	if (acme_volume_gstreamer_open (self) == FALSE)
 		return 0;
 
@@ -206,19 +205,19 @@ acme_volume_gstreamer_set_volume (AcmeVolume *vol, int val)
 		gst_mixer_set_volume (self->_priv->mixer, track, volumes);
 		g_free (volumes);
 	}
- 	
+
 	/* update state */
 	self->_priv->volume = val;
 
  	acme_volume_gstreamer_close (self);
 }
- 
+
 static gboolean
 acme_volume_gstreamer_close_real (AcmeVolumeGStreamer *self)
 {
 	if (self->_priv == NULL)
 		return FALSE;
-	
+
 	if (self->_priv->mixer != NULL)
 	{
 		gst_element_set_state (GST_ELEMENT(self->_priv->mixer), GST_STATE_NULL);
@@ -228,7 +227,7 @@ acme_volume_gstreamer_close_real (AcmeVolumeGStreamer *self)
 		self->_priv->mixer=NULL;
 		self->_priv->mixer_tracks=NULL;
 	}
-	
+
 	self->_priv->timer_id = 0;
 	return FALSE;
 }
@@ -275,7 +274,7 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 
 	if (self->_priv == NULL)
 		return FALSE;
-	
+
 	if (self->_priv->timer_id != 0)
 	{
 		g_source_remove (self->_priv->timer_id);
@@ -296,7 +295,7 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 		element = gst_element_factory_make (factory_and_device[0], NULL);
 
 		if (element != NULL) {
-			if (factory_and_device[1] != NULL && 
+			if (factory_and_device[1] != NULL &&
 					g_object_class_find_property (G_OBJECT_GET_CLASS (element), "device"))
 			{
 				g_object_set (G_OBJECT (element), "device", factory_and_device[1], NULL);
@@ -335,7 +334,7 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 					self->_priv->mixer_tracks = g_list_append (self->_priv->mixer_tracks, g_object_ref (track));
 				}
 			}
-			
+
 		}
 
 		g_slist_foreach (tracks, (GFunc)g_free, NULL);
@@ -370,7 +369,7 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 	/* Go through all elements of a certain class and check whether
 	 * they implement a mixer. If so, walk through the tracks and look
 	 * for first one named "volume".
-	 * 
+	 *
 	 * We should probably do something intelligent if we don't find an
 	 * appropriate mixer/track.  But now we do something stupid...
 	 * everything just becomes a no-op.
@@ -398,7 +397,7 @@ acme_volume_gstreamer_close (AcmeVolumeGStreamer *self)
 static void
 acme_volume_gstreamer_init (AcmeVolumeGStreamer *self)
 {
-	
+
 	self->_priv = g_new0 (AcmeVolumeGStreamerPrivate, 1);
 
 	self->_priv->gconf_client = gconf_client_get_default ();
@@ -409,7 +408,7 @@ acme_volume_gstreamer_init (AcmeVolumeGStreamer *self)
 		self->_priv = NULL;
 		return;
 	}
-	
+
 	if (self->_priv->mixer != NULL) {
 		acme_volume_gstreamer_close_real (self);
 		return;

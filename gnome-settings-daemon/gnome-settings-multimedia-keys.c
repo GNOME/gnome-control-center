@@ -646,7 +646,9 @@ do_sound_action (Acme *acme, int type)
 		break;
 	case VOLUME_UP_KEY:
 		if (muted) {
-			acme_volume_mute_toggle(acme->volobj);
+			if (vol == 0)
+				acme_volume_set_volume (acme->volobj, vol + vol_step);
+			acme_volume_mute_toggle (acme->volobj);
 		} else {
 			acme_volume_set_volume (acme->volobj, vol + vol_step);
 		}

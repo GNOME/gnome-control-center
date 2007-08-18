@@ -1,3 +1,13 @@
+2007-08-18  Jens Granseuer  <jensgr@gmx.net>
+
+	* actions/acme-volume-gstreamer.c: (update_state): don't check the
+	internal volume since this makes it impossible to unmute a low volume
+	(that translates to an internal GStreamer volume of 0)
+
+	* gnome-settings-multimedia-keys.c: (do_sound_action): if we're
+	muted and silent, don't just unmute on VOL+ but also raise the
+	volume
+
 2007-08-17  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-settings-daemon.c: (initialize_modules), (start_modules),
