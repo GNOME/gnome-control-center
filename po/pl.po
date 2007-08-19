@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-07 23:58+0200\n"
-"PO-Revision-Date: 2007-07-25 13:40+0100\n"
+"POT-Creation-Date: 2007-08-19 15:30+0200\n"
+"PO-Revision-Date: 2007-08-11 23:19+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgid "Images"
 msgstr "Obrazy"
 
 #: ../capplets/about-me/gnome-about-me.c:669
-#: ../capplets/appearance/theme-installer.c:619
+#: ../capplets/appearance/theme-installer.c:623
 msgid "All Files"
 msgstr "Wszystkie pliki"
 
@@ -805,30 +805,32 @@ msgstr "strona"
 msgid "[WALLPAPER...]"
 msgstr "[TŁO_PULPITU...]"
 
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:817
+#: ../capplets/common/gnome-theme-info.c:1050
+#: ../capplets/common/gnome-theme-info.c:1805
+msgid "Default Pointer"
+msgstr "Domyślny wskaźnik"
+
 #: ../capplets/appearance/appearance-themes.c:505
-#, fuzzy
 msgid "Apply Background"
-msgstr "Zastosuj _tło"
+msgstr "Zastosuj tło"
 
 #: ../capplets/appearance/appearance-themes.c:509
-#, fuzzy
 msgid "Apply Font"
-msgstr "Zastosuj _czcionkę"
+msgstr "Zastosuj czcionkę"
 
 #: ../capplets/appearance/appearance-themes.c:534
-#, fuzzy
 msgid "The current theme suggests a background and a font."
-msgstr "Ten motyw sugeruje użycie tła:"
+msgstr "Ten motyw sugeruje użycie tła i czcionki."
 
 #: ../capplets/appearance/appearance-themes.c:539
-#, fuzzy
 msgid "The current theme suggests a background."
-msgstr "Ten motyw sugeruje użycie tła:"
+msgstr "Ten motyw sugeruje użycie tła."
 
 #: ../capplets/appearance/appearance-themes.c:544
-#, fuzzy
 msgid "The current theme suggests a font."
-msgstr "Ten motyw sugeruje użycie czcionki:"
+msgstr "Ten motyw sugeruje użycie czcionki."
 
 #: ../capplets/appearance/appearance-themes.c:821
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
@@ -912,7 +914,7 @@ msgstr ""
 
 #: ../capplets/appearance/data/appearance.glade.h:21
 msgid "Changing your cursor theme takes effect the next time you log in."
-msgstr ""
+msgstr "Zmiana motywu kursorów jest wprowadzana po ponownym zalogowaniu."
 
 #: ../capplets/appearance/data/appearance.glade.h:22
 msgid "Colors"
@@ -923,7 +925,6 @@ msgid "Controls"
 msgstr "Elementy sterujące"
 
 #: ../capplets/appearance/data/appearance.glade.h:24
-#, fuzzy
 msgid "Customize Theme"
 msgstr "Własny motyw"
 
@@ -936,9 +937,8 @@ msgid "Des_ktop font:"
 msgstr "Czcionka używana przez _biurko:"
 
 #: ../capplets/appearance/data/appearance.glade.h:27
-#, fuzzy
 msgid "Edit"
-msgstr "_Edycja"
+msgstr "Modyfikuj"
 
 #: ../capplets/appearance/data/appearance.glade.h:28
 msgid "Font Rendering Details"
@@ -1001,7 +1001,6 @@ msgid "Save Theme As..."
 msgstr "Za_pisz motyw jako..."
 
 #: ../capplets/appearance/data/appearance.glade.h:43
-#, fuzzy
 msgid "Save _background image"
 msgstr "Zapisz plik _tła"
 
@@ -1157,9 +1156,8 @@ msgid "_RGB"
 msgstr "_RGB"
 
 #: ../capplets/appearance/data/appearance.glade.h:83
-#, fuzzy
 msgid "_Reset to Defaults"
-msgstr "Przywróć domyślne"
+msgstr "Przywróć _domyślne"
 
 #: ../capplets/appearance/data/appearance.glade.h:84
 msgid "_Save"
@@ -1170,9 +1168,8 @@ msgid "_Selected items:"
 msgstr "_Wybrane elementy:"
 
 #: ../capplets/appearance/data/appearance.glade.h:86
-#, fuzzy
 msgid "_Size:"
-msgstr "Rozmiar:"
+msgstr "_Rozmiar:"
 
 #: ../capplets/appearance/data/appearance.glade.h:87
 msgid "_Slight"
@@ -1184,7 +1181,7 @@ msgstr "_Styl:"
 
 #: ../capplets/appearance/data/appearance.glade.h:89
 msgid "_Tooltips:"
-msgstr ""
+msgstr "_Podpowiedzi:"
 
 #: ../capplets/appearance/data/appearance.glade.h:90
 msgid "_VRGB"
@@ -1237,6 +1234,9 @@ msgid ""
 "%s, %d %s by %d %s\n"
 "Folder: %s"
 msgstr ""
+"<b>%s</b>\n"
+"%s, %d %s przez %d %s\n"
+"Folder: %s"
 
 #: ../capplets/appearance/gnome-wp-item.c:370
 #: ../capplets/appearance/gnome-wp-item.c:372
@@ -1305,11 +1305,11 @@ msgstr "Motyw nie jest w obsługiwanym formacie."
 msgid "Failed to create temporary directory"
 msgstr "Nie można utworzyć katalogu tymczasowego"
 
-#: ../capplets/appearance/theme-installer.c:496
+#: ../capplets/appearance/theme-installer.c:497
 msgid "No theme file location specified to install"
 msgstr "Nie podano położenia pliku motywu do instalacji"
 
-#: ../capplets/appearance/theme-installer.c:516
+#: ../capplets/appearance/theme-installer.c:517
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1318,7 +1318,7 @@ msgstr ""
 "Niewystarczające uprawnienia do instalacji motywu w:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:535
+#: ../capplets/appearance/theme-installer.c:539
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1327,19 +1327,20 @@ msgstr ""
 "%s jest ścieżką gdzie będą zainstalowane pliki motywu. Nie można jej podać "
 "jako położenia źródłowego"
 
-#: ../capplets/appearance/theme-installer.c:556
+#: ../capplets/appearance/theme-installer.c:558
 msgid "The file format is invalid."
 msgstr "Format pliku jest niepoprawny."
 
-#: ../capplets/appearance/theme-installer.c:609
+#: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
 msgstr "Zaznacz motyw"
 
-#: ../capplets/appearance/theme-installer.c:612
+#: ../capplets/appearance/theme-installer.c:616
 msgid "Theme Packages"
 msgstr "Pakiet motywu"
 
 #: ../capplets/appearance/theme-save.c:91
+#, c-format
 msgid "Theme name must be present"
 msgstr "Motyw musi mieć nazwę"
 
@@ -1561,6 +1562,34 @@ msgstr "Wybór obrazu tła"
 #: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "_Wybierz"
+
+#: ../capplets/common/gnome-theme-info.c:1806
+msgid "Default Pointer - Current"
+msgstr "Domyślny wskaźnik - bieżący"
+
+#: ../capplets/common/gnome-theme-info.c:1810
+msgid "White Pointer"
+msgstr "Biały wskaźnik"
+
+#: ../capplets/common/gnome-theme-info.c:1811
+msgid "White Pointer - Current"
+msgstr "Biały wskaźnik - bieżący"
+
+#: ../capplets/common/gnome-theme-info.c:1815
+msgid "Large Pointer"
+msgstr "Duży wskaźnik"
+
+#: ../capplets/common/gnome-theme-info.c:1816
+msgid "Large Pointer - Current"
+msgstr "Duży wskaźnik - bieżący"
+
+#: ../capplets/common/gnome-theme-info.c:1820
+msgid "Large White Pointer - Current"
+msgstr "Duży biały wskaźnik - bieżący"
+
+#: ../capplets/common/gnome-theme-info.c:1821
+msgid "Large White Pointer"
+msgstr "Duży biały wskaźnik"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
@@ -1789,130 +1818,138 @@ msgid "Gnopernicus with Magnifier"
 msgstr "Gnopernicus z lupą"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Iceape"
+msgstr "Iceape"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Iceape Mail"
+msgstr "Klient poczty Iceape"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
 msgid "Icedove"
 msgstr "Icedove"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Iceweasel"
 msgstr "Iceweasel"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
 msgid "KDE Magnifier without Screen Reader"
 msgstr "Lupa KDE bez czytnika ekranowego"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
 msgid "Links Text Browser"
 msgstr "Przeglądarka tekstowa Links"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Linux Screen Reader"
 msgstr "Czytnik ekranowy"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Linux Screen Reader with Magnifier"
 msgstr "Czytnik ekranowy z lupą"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Lynx Text Browser"
 msgstr "Przeglądarka tekstowa Lynx"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
 msgid "Mozilla Mail"
 msgstr "Poczta Mozilli"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
 msgid "Muine Music Player"
 msgstr "Odtwarzacz muzyki Muine"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
 msgid "NXterm"
 msgstr "NXTerm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
 msgid "Orca"
 msgstr "Orca"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
 msgid "Orca with Magnifier"
 msgstr "Orca z lupą"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
 msgid "Rhythmbox Music Player"
 msgstr "Odtwarzacz muzyki Rhythmbox"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
 msgid "SeaMonkey"
 msgstr "SeaMonkey"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
 msgid "SeaMonkey Mail"
 msgstr "Klient poczty SeaMonkey"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
 msgid "Simple OnScreen Keyboard"
 msgstr "Prosta klawiatura ekranowa"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
 msgid "Standard XTerminal"
 msgstr "Standardowy XTerminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
 msgid "Totem Movie Player"
 msgstr "Odtwarzacz filmów Totem"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:57
 msgid "W3M Text Browser"
 msgstr "Przeglądarka tekstowa W3M"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:58
 msgid "aterm"
 msgstr "aterm"
 
@@ -3169,6 +3206,7 @@ msgstr "Wyszukiwanie"
 
 #. make open with default action
 #: ../libslab/directory-tile.c:168
+#, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Otwórz</b>"
 
@@ -3238,6 +3276,7 @@ msgid "Unexpected tag '%s' inside '%s'"
 msgstr "Nieoczekiwany znacznik \"%s\" wewnątrz \"%s\""
 
 #: ../libslab/libslab-bookmarkfile.c:1929
+#, c-format
 msgid "No valid bookmark file found in data dirs"
 msgstr "Nie odnaleziono poprawnego pliku zakładek w katalogach danych"
 
@@ -3298,6 +3337,7 @@ msgid "<b>Open %s</b>"
 msgstr "<b>Otwórz %s</b>"
 
 #: ../libslab/system-tile.c:141
+#, c-format
 msgid "Remove from System Items"
 msgstr "Usuń z elementów systemowych"
 
@@ -3369,13 +3409,21 @@ msgstr ""
 "Menedżer okien \"%s\" nie posiada zarejestrowanego narzędzia "
 "konfiguracyjnego\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "Maksymalizacja"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "Minimalizacja"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "Rozwinięcie"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "Brak"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -3682,6 +3730,7 @@ msgstr[1] "%d minuty do przerwy"
 msgstr[2] "%d minut do przerwy"
 
 #: ../typing-break/drwright.c:504
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "Mniej niż minuta do przerwy"
 
@@ -4011,38 +4060,14 @@ msgstr "Przywraca motyw domyślny"
 #~ msgid "Unknown Pointer"
 #~ msgstr "Nieznany wskaźnik"
 
-#~ msgid "Default Pointer"
-#~ msgstr "Domyślny wskaźnik"
-
-#~ msgid "Default Pointer - Current"
-#~ msgstr "Domyślny wskaźnik - bieżący"
-
 #~ msgid "The default pointer that ships with X"
 #~ msgstr "Domyślny wskaźnik dostarczany z X"
-
-#~ msgid "White Pointer"
-#~ msgstr "Biały wskaźnik"
-
-#~ msgid "White Pointer - Current"
-#~ msgstr "Biały wskaźnik - bieżący"
 
 #~ msgid "The default pointer inverted"
 #~ msgstr "Domyślny wskaźnik poddany inwersji"
 
-#~ msgid "Large Pointer"
-#~ msgstr "Duży wskaźnik"
-
-#~ msgid "Large Pointer - Current"
-#~ msgstr "Duży wskaźnik - bieżący"
-
 #~ msgid "Large version of normal pointer"
 #~ msgstr "Duża odmiana zwykłego wskaźnika"
-
-#~ msgid "Large White Pointer - Current"
-#~ msgstr "Duży biały wskaźnik - bieżący"
-
-#~ msgid "Large White Pointer"
-#~ msgstr "Duży biały wskaźnik"
 
 #~ msgid "Large version of white pointer"
 #~ msgstr "Duża odmiana białego wskaźnika"
