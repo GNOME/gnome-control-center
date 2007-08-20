@@ -1,3 +1,10 @@
+2007-08-20  Matthias Clasen <mclasen@redhat.com>
+
+	Fixes #467552
+
+	* gnome-theme-info.c (gnome_theme_init): avoid double-freed for cursor
+	theme infos.
+
 2007-08-17  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-theme-info.c: (read_cursor_fonts): fix double-free, and make

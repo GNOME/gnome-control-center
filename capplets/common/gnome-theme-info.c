@@ -1943,8 +1943,8 @@ gnome_theme_init (gboolean *monitor_not_added)
   meta_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   icon_theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   icon_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  cursor_theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  cursor_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  cursor_theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
+  cursor_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
   theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
