@@ -70,7 +70,7 @@ typedef struct {
 
 static GnomeAboutMe *me = NULL;
 
-struct WidToCid{
+struct WidToCid {
 	gchar *wid;
 	guint  cid;
 };
@@ -84,6 +84,8 @@ enum {
 	ADDRESS_COUNTRY
 };
 
+#define EMAIL_HOME              0
+#define EMAIL_WORK              1
 #define ADDRESS_HOME		21
 #define ADDRESS_WORK		27
 
@@ -129,9 +131,11 @@ struct WidToCid ids[] = {
 	{ "addr-region-2",     ADDRESS_REGION                }, /* 31 */
 	{ "addr-country-2",    ADDRESS_COUNTRY               }, /* 32 */
 
-        {     NULL,            0                             }
+        { NULL,            0                             }
 };
 
+#define ATTRIBUTE_HOME "HOME"
+#define ATTRIBUTE_WORK "WORK"
 
 static void about_me_set_address_field (EContactAddress *, guint, gchar *);
 
@@ -199,7 +203,7 @@ about_me_commit (GnomeAboutMe *me)
 		}
 
 		e_contact_set (me->contact, E_CONTACT_FILE_AS, fileas);
-		e_contact_set (me->contact, E_CONTACT_NICKNAME, "nickname");
+		e_contact_set (me->contact, E_CONTACT_NICKNAME, me->login);
 		e_contact_set (me->contact, E_CONTACT_FULL_NAME, me->username);
 
 		e_contact_name_free (name);
@@ -376,6 +380,30 @@ about_me_set_address_field (EContactAddress *addr, guint cid, gchar *str)
 	}
 }
 
+static void
+about_me_setup_email (EContact *contact)
+{
+	GList *attrs, *a;
+	gboolean has_home = FALSE, has_work = FALSE;
+	guint cid;
+
+	attrs = e_contact_get_attributes (contact, E_CONTACT_EMAIL);
+
+	for (a = attrs, cid = E_CONTACT_EMAIL_1; a; a = a->next, ++cid) {
+		if (!has_home &&
+		    e_vcard_attribute_has_type ((EVCardAttribute *)a->data, ATTRIBUTE_HOME)) {
+			has_home = TRUE;
+			ids[EMAIL_HOME].cid = cid;
+		} else if (!has_work &&
+			   e_vcard_attribute_has_type ((EVCardAttribute *)a->data, ATTRIBUTE_WORK)) {
+			has_work = TRUE;
+			ids[EMAIL_WORK].cid = cid;
+		}
+		g_free (a->data);
+	}
+
+	g_list_free (attrs);
+}
 /**
  * about_me_load_string_field:
  *
@@ -828,6 +856,8 @@ about_me_setup_dialog (void)
 				g_clear_error (&error);
 			}
 		}
+	} else {
+		about_me_setup_email (me->contact);
 	}
 
 	/************************************************/
