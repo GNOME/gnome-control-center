@@ -1,3 +1,10 @@
+2007-08-21  Luca Cavalli <loopback@slackit.org>
+
+	* file-transfer-dialog.c: (format_uri_for_display),
+	(file_transfer_dialog_set_prop): add new function similar to
+	gnome_vfs_format_uri_for_display but that hides the password if
+	needed. Taken from gedit by Paolo Maggi. Closes bug #339551.
+
 2007-08-20  Matthias Clasen <mclasen@redhat.com>
 
 	Fixes #467552

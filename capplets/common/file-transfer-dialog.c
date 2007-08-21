@@ -104,6 +104,37 @@ file_transfer_dialog_response (GtkDialog *dlg, gint response_id)
 		       file_transfer_dialog_signals[CANCEL], 0, NULL); 
 }
 
+static gchar *
+format_uri_for_display (const gchar *uri)
+{
+	GnomeVFSURI *vfs_uri;
+
+	g_return_val_if_fail (uri != NULL, NULL);
+
+	/* Note: vfs_uri may be NULL for some valid but
+	 * unsupported uris */
+	vfs_uri = gnome_vfs_uri_new (uri);
+
+	if (vfs_uri == NULL) {
+		/* We may disclose the password here, but there is nothing we
+		 * can do since we cannot get a valid vfs_uri */
+		return gnome_vfs_unescape_uri_for_display (uri);
+	} else {
+		gchar *name;
+		gchar *uri_for_display;
+
+		name = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_PASSWORD);
+		g_return_val_if_fail (name != NULL, gnome_vfs_unescape_uri_for_display (uri));
+
+		uri_for_display = gnome_vfs_unescape_uri_for_display (name);
+		g_free (name);
+
+		gnome_vfs_uri_unref (vfs_uri);
+
+		return uri_for_display;
+	}
+}
+
 static void
 file_transfer_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
@@ -118,7 +149,7 @@ file_transfer_dialog_set_prop (GObject *object, guint prop_id, const GValue *val
 	{
 	case PROP_FROM_URI:
 		base = g_path_get_basename (g_value_get_string (value));
-		escaped = gnome_vfs_unescape_string_for_display (base);
+		escaped = format_uri_for_display (base);
 
 		str = g_strdup_printf (_("Copying '%s'"), escaped);
 		str2 = g_strdup_printf ("<big><b>%s</b></big>", str);
