@@ -1404,12 +1404,19 @@ gnome_theme_info_find_by_type_helper (gpointer key,
 				      struct GnomeThemeInfoHashData *hash_data)
 {
   guint elements = GPOINTER_TO_INT (hash_data->user_data);
-  GnomeThemeInfo *theme_info = list->data;
 
-  if ((elements & GNOME_THEME_METACITY && theme_info->has_metacity) ||
-      (elements & GNOME_THEME_GTK_2 && theme_info->has_gtk) ||
-      (elements & GNOME_THEME_GTK_2_KEYBINDING && theme_info->has_keybinding))
-    hash_data->list = g_list_prepend (hash_data->list, theme_info);
+  do {
+    GnomeThemeInfo *theme_info = list->data;
+
+    if ((elements & GNOME_THEME_METACITY && theme_info->has_metacity) ||
+        (elements & GNOME_THEME_GTK_2 && theme_info->has_gtk) ||
+        (elements & GNOME_THEME_GTK_2_KEYBINDING && theme_info->has_keybinding)) {
+      hash_data->list = g_list_prepend (hash_data->list, theme_info);
+      return;
+    }
+
+    list = list->next;
+  } while (list);
 }
 
 GList *

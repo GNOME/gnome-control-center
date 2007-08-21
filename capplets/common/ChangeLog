@@ -1,3 +1,10 @@
+2007-08-21  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-theme-info.c: (gnome_theme_info_find_by_type_helper):
+	Properly check all stored themes if necessary. This fixes cases where
+	e.g. a metacity theme in ~/.themes would hide a GTK theme with the
+	same name in the system theme dir
+
 2007-08-21  Luca Cavalli <loopback@slackit.org>
 
 	* file-transfer-dialog.c: (format_uri_for_display),
