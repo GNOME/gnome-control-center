@@ -118,15 +118,15 @@ format_uri_for_display (const gchar *uri)
 	if (vfs_uri == NULL) {
 		/* We may disclose the password here, but there is nothing we
 		 * can do since we cannot get a valid vfs_uri */
-		return gnome_vfs_unescape_uri_for_display (uri);
+		return gnome_vfs_format_uri_for_display (uri);
 	} else {
 		gchar *name;
 		gchar *uri_for_display;
 
 		name = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_PASSWORD);
-		g_return_val_if_fail (name != NULL, gnome_vfs_unescape_uri_for_display (uri));
+		g_return_val_if_fail (name != NULL, gnome_vfs_format_uri_for_display (uri));
 
-		uri_for_display = gnome_vfs_unescape_uri_for_display (name);
+		uri_for_display = gnome_vfs_format_uri_for_display (name);
 		g_free (name);
 
 		gnome_vfs_uri_unref (vfs_uri);
