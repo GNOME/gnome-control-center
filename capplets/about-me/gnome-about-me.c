@@ -390,16 +390,18 @@ about_me_setup_email (EContact *contact)
 	attrs = e_contact_get_attributes (contact, E_CONTACT_EMAIL);
 
 	for (a = attrs, cid = E_CONTACT_EMAIL_1; a; a = a->next, ++cid) {
+		EVCardAttribute *att = (EVCardAttribute *) a->data;
+
 		if (!has_home &&
-		    e_vcard_attribute_has_type ((EVCardAttribute *)a->data, ATTRIBUTE_HOME)) {
+		    e_vcard_attribute_has_type (att, ATTRIBUTE_HOME)) {
 			has_home = TRUE;
 			ids[EMAIL_HOME].cid = cid;
 		} else if (!has_work &&
-			   e_vcard_attribute_has_type ((EVCardAttribute *)a->data, ATTRIBUTE_WORK)) {
+			   e_vcard_attribute_has_type (att, ATTRIBUTE_WORK)) {
 			has_work = TRUE;
 			ids[EMAIL_WORK].cid = cid;
 		}
-		g_free (a->data);
+		e_vcard_attribute_free (att);
 	}
 
 	g_list_free (attrs);

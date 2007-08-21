@@ -1,5 +1,11 @@
 2007-08-21  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-about-me.c: (about_me_setup_email): fix the last commit to use
+	proper API to release the VCardAttributes so we don't crash with newer
+	e-d-s (bug #468848)
+
+2007-08-21  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-about-me.c: honour mail address attributes when setting
 	up Home and Work addresses
 
