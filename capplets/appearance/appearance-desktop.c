@@ -909,7 +909,12 @@ static void
 wp_select_after_realize (GtkWidget *widget,
                          AppearanceData *data)
 {
-  select_item (data, get_selected_item (data, NULL), TRUE);
+  GnomeWPItem *item = get_selected_item (data, NULL);
+
+  if (item == NULL)
+    item = g_hash_table_lookup (data->wp_hash, "(none)");
+
+  select_item (data, item, TRUE);
 }
 
 void
