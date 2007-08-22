@@ -156,7 +156,8 @@ apply_xkb_settings (void)
 	gkbd_keyboard_config_load_from_gconf (&current_kbd_config,
 					      &initial_sys_kbd_config);
 
-	gkbd_keyboard_config_load_from_x_current (&current_sys_kbd_config, NULL);
+	gkbd_keyboard_config_load_from_x_current (&current_sys_kbd_config,
+						  NULL);
 	/* Activate - only if different! */
 	if (!gkbd_keyboard_config_equals
 	    (&current_kbd_config, &current_sys_kbd_config)) {
@@ -232,7 +233,8 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 				   NULL);
 	gkbd_keyboard_config_load_from_gconf_backup
 	    (&backup_gconf_kbd_config);
-	gkbd_keyboard_config_load_from_x_initial (&initial_sys_kbd_config, NULL);
+	gkbd_keyboard_config_load_from_x_initial (&initial_sys_kbd_config,
+						  NULL);
 
 	is_config_changed =
 	    g_slist_length (backup_gconf_kbd_config.layouts_variants)
@@ -313,8 +315,7 @@ gnome_settings_chk_file_list (void)
 	GSList *tmp = NULL;
 	GSList *tmp_l = NULL;
 	gboolean new_file_exist = FALSE;
-	GConfClient *conf_client =
-	    gnome_settings_get_config_client ();
+	GConfClient *conf_client = gnome_settings_get_config_client ();
 
 	home_dir = g_dir_open (g_get_home_dir (), 0, NULL);
 	while ((fname = g_dir_read_name (home_dir)) != NULL) {
@@ -401,6 +402,10 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 	xkl_engine = xkl_engine_get_instance (GDK_DISPLAY ());
 	if (xkl_engine) {
 		inited_ok = TRUE;
+		gkbd_desktop_config_init (&current_config, client,
+					  xkl_engine);
+		gkbd_keyboard_config_init (&current_kbd_config, client,
+					   xkl_engine);
 		xkl_engine_backup_names_prop (xkl_engine);
 		gnome_settings_keyboard_xkb_analyze_sysconfig ();
 		gnome_settings_keyboard_xkb_chk_lcl_xmm ();
@@ -428,10 +433,7 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 void
 gnome_settings_keyboard_xkb_load (GConfClient * client)
 {
-	gkbd_desktop_config_init (&current_config, client, xkl_engine);
 	apply_settings ();
 
-	gkbd_keyboard_config_init (&current_kbd_config, client,
-				   xkl_engine);
 	apply_xkb_settings ();
 }
