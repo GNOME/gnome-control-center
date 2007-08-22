@@ -1,3 +1,11 @@
+2007-08-21  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* gnome-settings-keyboard-xkb.c
+	(gnome_settings_keyboard_xkb_analyze_sysconfig): use
+	gnome_settings_delayed_show_dialog() to display the error message,
+	so that it is shown when a window manager is running, thus being
+	centered and with a proper frame.
+
 2007-08-18  Jens Granseuer  <jensgr@gmx.net>
 
 	* actions/acme-volume-gstreamer.c: (update_state): don't check the

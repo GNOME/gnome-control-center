@@ -297,7 +297,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 					  G_CALLBACK
 					  (gnome_settings_keyboard_xkb_sysconfig_changed_response),
 					  NULL);
-			gtk_widget_show_all (msg);
+			gnome_settings_delayed_show_dialog (msg);
 		}
 	}
 	gkbd_keyboard_config_term (&backup_gconf_kbd_config);
