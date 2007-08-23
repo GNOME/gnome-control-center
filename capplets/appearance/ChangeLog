@@ -1,5 +1,11 @@
 2007-08-23  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-themes.c: (theme_get_thumbnail_from_cache):
+	* gnome-wp-item.c: (gnome_wp_item_update_description): fix leaks (bug
+	#469531)
+
+2007-08-23  Jens Granseuer  <jensgr@gmx.net>
+
 	* appearance-font.c: (cb_show_details): simply set the upper bound of
 	the DPI spin button to the maximum we consider reasonable. This is one
 	way to make sure we don't get SIGFPE if for some reason

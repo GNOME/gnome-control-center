@@ -356,6 +356,7 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   if (!strcmp (item->filename, "(none)")) {
     item->description = g_strdup (item->name);
   } else {
+    gchar *dirname = g_path_get_dirname (item->filename);
     /* translators: <b>wallpaper name</b>
      * mime type, x pixel(s) by y pixel(s)
      * Folder: /path/to/file
@@ -370,6 +371,7 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
                                  ngettext ("pixel", "pixels", item->width),
                                  item->height,
                                  ngettext ("pixel", "pixels", item->height),
-                                 g_path_get_dirname (item->filename));
+                                 dirname);
+    g_free (dirname);
   }
 }

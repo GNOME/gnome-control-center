@@ -136,8 +136,10 @@ theme_get_thumbnail_from_cache (GnomeThemeMetaInfo *info, AppearanceData *data)
                                                    path, mtime);
   g_free (path);
 
-  if (thumb_filename != NULL)
+  if (thumb_filename != NULL) {
     thumb = gdk_pixbuf_new_from_file (thumb_filename, NULL);
+    g_free (thumb_filename);
+  }
 
   return thumb;
 }

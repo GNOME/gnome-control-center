@@ -1710,7 +1710,7 @@ gnome_theme_is_writable (const gpointer theme, GnomeThemeType type) {
       theme_path = ((const GnomeThemeIconInfo *) theme)->path;
       break;
     case GNOME_THEME_TYPE_CURSOR:
-      theme_path = ((const GnomeThemeIconInfo *) theme)->path;
+      theme_path = ((const GnomeThemeCursorInfo *) theme)->path;
       break;
     case GNOME_THEME_TYPE_METATHEME:
       theme_path = ((const GnomeThemeMetaInfo *) theme)->path;

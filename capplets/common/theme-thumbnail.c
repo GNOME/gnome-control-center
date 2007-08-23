@@ -487,6 +487,7 @@ create_metacity_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   g_object_unref (pixbuf);
 
   gtk_widget_destroy (window);
+  meta_theme_free (theme);
   return retval;
 }
 
