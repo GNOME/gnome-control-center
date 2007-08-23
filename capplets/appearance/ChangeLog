@@ -1,3 +1,10 @@
+2007-08-23  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-font.c: (cb_show_details): simply set the upper bound of
+	the DPI spin button to the maximum we consider reasonable. This is one
+	way to make sure we don't get SIGFPE if for some reason
+	gdk_screen_get_{width,height}_mm returns 0 (bug #469580)
+
 2007-08-22  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-desktop.c: (wp_select_after_realize): if no background

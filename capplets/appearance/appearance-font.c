@@ -805,7 +805,6 @@ cb_show_details (GtkWidget *button,
 {
   if (!data->font_details) {
     GnomeVFSURI *uri;
-    gint dpi;
     GtkAdjustment *adjustment;
     GtkWidget *widget;
 
@@ -825,12 +824,8 @@ cb_show_details (GtkWidget *button,
     widget = glade_xml_get_widget (data->xml, "dpi_spinner");
 
     /* pick a sensible maximum dpi */
-    dpi = floor ((gdk_screen_width () / gdk_screen_width_mm () +
-		 gdk_screen_height () / gdk_screen_height_mm ()) * 25.4 / 2. + .5);
-    if (dpi < DPI_LOW_REASONABLE_VALUE)
-      dpi = DPI_LOW_REASONABLE_VALUE; /* be extra careful */
     adjustment = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (widget));
-    adjustment->upper = dpi * 3;
+    adjustment->upper = DPI_HIGH_REASONABLE_VALUE;
 
     dpi_load (data->client, GTK_SPIN_BUTTON (widget));
     g_signal_connect (widget, "value_changed",
