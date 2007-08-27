@@ -582,7 +582,6 @@ static void
 update_in_treeview (const gchar *tv_name,
 		    const gchar *theme_name,
 		    const gchar *theme_label,
-		    GdkPixbuf *theme_thumbnail,
 		    AppearanceData *data)
 {
   GtkTreeView *treeview;
@@ -598,7 +597,6 @@ update_in_treeview (const gchar *tv_name,
     gtk_list_store_set (model, &iter,
           COL_LABEL, theme_label,
           COL_NAME, theme_name,
-          COL_THUMBNAIL, theme_thumbnail,
           -1);
   }
 }
@@ -626,69 +624,6 @@ update_thumbnail_in_treeview (const gchar *tv_name,
 }
 
 static void
-changed_on_disk_cb (GnomeThemeType       type,
-		    gpointer             theme,
-		    GnomeThemeChangeType change_type,
-		    GnomeThemeElement    element,
-		    AppearanceData      *data)
-{
-  if (type == GNOME_THEME_TYPE_REGULAR) {
-    GnomeThemeInfo *info = theme;
-
-    if (change_type == GNOME_THEME_CHANGE_DELETED) {
-      if (info->has_gtk)
-        remove_from_treeview ("gtk_themes_list", info->name, data);
-      if (info->has_metacity)
-        remove_from_treeview ("window_themes_list", info->name, data);
-
-    } else {
-      GdkPixbuf *thumbnail;
-
-      if (info->has_gtk) {
-      	thumbnail = generate_gtk_theme_thumbnail (info);
-
-        if (change_type == GNOME_THEME_CHANGE_CREATED)
-          add_to_treeview ("gtk_themes_list", info->name, info->name, thumbnail, data);
-        else if (change_type == GNOME_THEME_CHANGE_CHANGED)
-          update_in_treeview ("gtk_themes_list", info->name, info->name, thumbnail, data);
-
-        if (thumbnail)
-          g_object_unref (thumbnail);
-      }
-
-      if (info->has_metacity) {
-      	thumbnail = generate_metacity_theme_thumbnail (info);
-
-        if (change_type == GNOME_THEME_CHANGE_CREATED)
-          add_to_treeview ("window_themes_list", info->name, info->name, thumbnail, data);
-        else if (change_type == GNOME_THEME_CHANGE_CHANGED)
-          update_in_treeview ("window_themes_list", info->name, info->name, thumbnail, data);
-
-        if (thumbnail)
-          g_object_unref (thumbnail);
-      }
-    }
-
-  } else if (type == GNOME_THEME_TYPE_ICON) {
-    GnomeThemeIconInfo *info = theme;
-
-    if (change_type == GNOME_THEME_CHANGE_DELETED) {
-      remove_from_treeview ("icon_themes_list", info->name, data);
-    } else {
-      GdkPixbuf *thumbnail = generate_icon_theme_thumbnail (info);
-
-      if (change_type == GNOME_THEME_CHANGE_CREATED)
-        add_to_treeview ("icon_themes_list", info->name, info->readable_name, thumbnail, data);
-      else if (change_type == GNOME_THEME_CHANGE_CHANGED)
-        update_in_treeview ("icon_themes_list", info->name, info->readable_name, thumbnail, data);
-
-      if (thumbnail)
-        g_object_unref (thumbnail);
-    }
-  }
-}
-
-static void
 gtk_theme_thumbnail_cb (GdkPixbuf *pixbuf,
                         gchar *theme_name,
                         AppearanceData *data)
@@ -710,6 +645,61 @@ icon_theme_thumbnail_cb (GdkPixbuf *pixbuf,
                          AppearanceData *data)
 {
   update_thumbnail_in_treeview ("icon_themes_list", theme_name, pixbuf, data);
+}
+
+static void
+changed_on_disk_cb (GnomeThemeType       type,
+		    gpointer             theme,
+		    GnomeThemeChangeType change_type,
+		    GnomeThemeElement    element,
+		    AppearanceData      *data)
+{
+  if (type == GNOME_THEME_TYPE_REGULAR) {
+    GnomeThemeInfo *info = theme;
+
+    if (change_type == GNOME_THEME_CHANGE_DELETED) {
+      if (info->has_gtk)
+        remove_from_treeview ("gtk_themes_list", info->name, data);
+      if (info->has_metacity)
+        remove_from_treeview ("window_themes_list", info->name, data);
+
+    } else {
+      if (info->has_gtk) {
+        if (change_type == GNOME_THEME_CHANGE_CREATED)
+          add_to_treeview ("gtk_themes_list", info->name, info->name, data->gtk_theme_icon, data);
+        else if (change_type == GNOME_THEME_CHANGE_CHANGED)
+          update_in_treeview ("gtk_themes_list", info->name, info->name, data);
+
+        generate_gtk_theme_thumbnail_async (info,
+            (ThemeThumbnailFunc) gtk_theme_thumbnail_cb, data, NULL);
+      }
+
+      if (info->has_metacity) {
+        if (change_type == GNOME_THEME_CHANGE_CREATED)
+          add_to_treeview ("window_themes_list", info->name, info->name, data->window_theme_icon, data);
+        else if (change_type == GNOME_THEME_CHANGE_CHANGED)
+          update_in_treeview ("window_themes_list", info->name, info->name, data);
+
+        generate_metacity_theme_thumbnail_async (info,
+            (ThemeThumbnailFunc) metacity_theme_thumbnail_cb, data, NULL);
+      }
+    }
+
+  } else if (type == GNOME_THEME_TYPE_ICON) {
+    GnomeThemeIconInfo *info = theme;
+
+    if (change_type == GNOME_THEME_CHANGE_DELETED) {
+      remove_from_treeview ("icon_themes_list", info->name, data);
+    } else {
+      if (change_type == GNOME_THEME_CHANGE_CREATED)
+        add_to_treeview ("icon_themes_list", info->name, info->readable_name, data->icon_theme_icon, data);
+      else if (change_type == GNOME_THEME_CHANGE_CHANGED)
+        update_in_treeview ("icon_themes_list", info->name, info->readable_name, data);
+
+      generate_icon_theme_thumbnail_async (info,
+          (ThemeThumbnailFunc) icon_theme_thumbnail_cb, data, NULL);
+    }
+  }
 }
 
 static void

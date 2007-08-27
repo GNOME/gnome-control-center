@@ -1,3 +1,11 @@
+2007-08-27  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_in_treeview),
+	(gtk_theme_thumbnail_cb), (metacity_theme_thumbnail_cb),
+	(icon_theme_thumbnail_cb), (changed_on_disk_cb): always generate
+	thumbnails asynchronously. Mixing synchronous and asynchronous
+	generation just doesn't work (bug #469849)
+
 2007-08-27  Thomas Wood  <thos@gnome.org>
 
 	Patch by: Gabor Kelemen <kelemeng@gnome.hu>
