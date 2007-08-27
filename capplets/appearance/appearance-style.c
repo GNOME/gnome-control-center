@@ -611,6 +611,9 @@ update_thumbnail_in_treeview (const gchar *tv_name,
   GtkListStore *model;
   GtkTreeIter iter;
 
+  if (theme_thumbnail == NULL)
+    return;
+
   treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
   model = GTK_LIST_STORE (
           gtk_tree_model_sort_get_model (
@@ -621,6 +624,8 @@ update_thumbnail_in_treeview (const gchar *tv_name,
           COL_THUMBNAIL, theme_thumbnail,
           -1);
   }
+
+  g_object_unref (theme_thumbnail);
 }
 
 static void
