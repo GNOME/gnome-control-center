@@ -1,3 +1,65 @@
+gnome-control-center 2.12.91
+
+about-me:
+- Honor mail address attributes when setting up Home and Work addresses
+  (Jens Granseuer)
+
+appearance:
+- Don't leak the cursor font (Jens Granseuer)
+- Fix double-free and make the builtins non-static to save relocations
+  (Jens Granseuer) (#467522)
+- Properly check all installed themes if necessary (Jens Granseuer)
+- Free the metacity theme after use (Jens Granseuer) (#469531)
+- Correct the item width and enable line wrapping for long theme names
+  (Jens Granseuer) (#466405)
+- If no background image set, select "no wallpaper" (Jens Granseuer)
+- Simply set the upper bound of the DPI spin button to the maximum we
+  consider acceptable (Jens Granseuer) (#469580)
+- Don't mark gtk-delete stock id for translation (Gabor Kelemen) (#470532)
+- Always generate thumbnails asynchronously (Jens Granseuer) (#469849)
+
+default applications:
+- Add browser and mail entries Iceape (Sven Arvidsson) (#467472)
+- Use the new -new-tab and -new-window arguments instead of -remote for
+  Firefox tab and window commands (Philip Withnall) (#393204)
+
+keyboard:
+- Disable "delete" button when no layout is selected (Sergey Udaltsov)
+  (#466749)
+- Make "Add label" string translatable (Sergey Udaltsov) (#470516)
+
+settings daemon:
+- Use a list instead of a hash table to store the settings modules (Jens
+  Granseuer) (#449118)
+- Raise the volume when unmuting (Jens Granseuer)
+- Show X keyboard settings warning dialog delayed, so that it runs properly
+  centered and with decorations (Rodrigo Moya)
+- Initialize XKB config early so that callback would not crash (Sergey
+  Udaltsov) (#469192)
+
+general:
+- Hide the password in displayed URIs when transfering files (Luca Cavalli)
+  (#339551)
+
+updated translations:
+- ca (Josep Puigdemont i Casamajo)
+- de (Hendrik Richter)
+- es (Jorge Gonzalez)
+- et (Priit Laes)
+- fi (Ilkka Tuohela)
+- gu (Ankit Patel)
+- hu (Gabor Kelemen)
+- ja (Satoru SATOH, Takeshi AIHANA)
+- mk (Jovan Naumovski)
+- ml (Ani Peter)
+- nb (Kjartan Maraas)
+- pl (Artur Flinta)
+- pt_BR (Raphael Higino)
+- sv (Daniel Nylander)
+- ta (I. Felix)
+- th (Theppitak Karoonboonyanan)
+- zh_CN (Funda Wang)
+------------------------------------------------------------------------------
 gnome-control-center 2.19.90
 
 about-me:
