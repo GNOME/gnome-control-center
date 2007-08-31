@@ -341,7 +341,7 @@ font_render_get_gconf (GConfClient  *client,
 typedef struct {
   Antialiasing antialiasing;
   Hinting hinting;
-  GtkWidget *radio;
+  GtkToggleButton *radio;
 } FontPair;
 
 static GSList *font_pairs = NULL;
@@ -362,7 +362,7 @@ font_render_load (GConfClient *client)
     FontPair *pair = tmp_list->data;
 
     if (antialiasing == pair->antialiasing && hinting == pair->hinting) {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pair->radio), TRUE);
+      gtk_toggle_button_set_active (pair->radio, TRUE);
       inconsistent = FALSE;
     }
   }
@@ -370,7 +370,7 @@ font_render_load (GConfClient *client)
   for (tmp_list = font_pairs; tmp_list; tmp_list = tmp_list->next) {
     FontPair *pair = tmp_list->data;
 
-    gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (pair->radio), inconsistent);
+    gtk_toggle_button_set_inconsistent (pair->radio, inconsistent);
   }
 
   in_change = FALSE;
@@ -415,7 +415,7 @@ setup_font_pair (GtkWidget    *radio,
 
   pair->antialiasing = antialiasing;
   pair->hinting = hinting;
-  pair->radio = radio;
+  pair->radio = GTK_TOGGLE_BUTTON (radio);
 
   setup_font_sample (darea, antialiasing, hinting);
   font_pairs = g_slist_prepend (font_pairs, pair);
@@ -580,7 +580,7 @@ typedef struct
 {
   GConfClient *client;
   GSList *items;
-  const gchar *gconf_key;
+  gchar *gconf_key;
   GConfEnumStringPair *enums;
   int default_value;
 } EnumGroup;
@@ -588,7 +588,7 @@ typedef struct
 typedef struct
 {
   EnumGroup *group;
-  GtkWidget *widget;
+  GtkToggleButton *widget;
   int value;
 } EnumItem;
 
@@ -610,7 +610,7 @@ enum_group_load (EnumGroup *group)
     EnumItem *item = tmp_list->data;
 
     if (val == item->value)
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (item->widget), TRUE);
+      gtk_toggle_button_set_active (item->widget, TRUE);
   }
 
   in_change = FALSE;
@@ -668,7 +668,7 @@ enum_group_create (const gchar         *gconf_key,
 
     item = g_new (EnumItem, 1);
     item->group = group;
-    item->widget = widget;
+    item->widget = GTK_TOGGLE_BUTTON (widget);
     item->value = va_arg (args, int);
 
     g_signal_connect (item->widget, "toggled",

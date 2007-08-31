@@ -1,5 +1,11 @@
 2007-08-31  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-font.c: (font_render_load), (setup_font_pair),
+	(enum_group_load), (enum_group_create): don't define gconf_key as
+	const and save a few casts
+
+2007-08-31  Jens Granseuer  <jensgr@gmx.net>
+
 	* appearance-font.c: (enum_group_destroy), (cb_show_details),
 	(font_init), (font_shutdown):
 	* appearance.h: don't leak the enum groups
