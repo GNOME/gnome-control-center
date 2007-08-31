@@ -50,6 +50,7 @@ typedef struct {
 
   /* font */
   GtkWidget *font_details;
+  GSList *font_groups;
 
   /* themes */
   GtkListStore *theme_store;

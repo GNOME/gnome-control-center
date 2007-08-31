@@ -690,6 +690,18 @@ enum_group_create (const gchar         *gconf_key,
   return group;
 }
 
+static void
+enum_group_destroy (EnumGroup *group)
+{
+  g_object_unref (group->client);
+  g_free (group->gconf_key);
+
+  g_slist_foreach (group->items, (GFunc) g_free, NULL);
+  g_slist_free (group->items);
+
+  g_free (group);
+}
+
 static double
 dpi_from_pixels_and_mm (int pixels, int mm)
 {
@@ -807,6 +819,7 @@ cb_show_details (GtkWidget *button,
     GnomeVFSURI *uri;
     GtkAdjustment *adjustment;
     GtkWidget *widget;
+    EnumGroup *group;
 
     data->font_details = glade_xml_get_widget (data->xml, "render_details");
     uri = gnome_vfs_uri_new ("fonts:///");
@@ -838,23 +851,27 @@ cb_show_details (GtkWidget *button,
     setup_font_sample (glade_xml_get_widget (data->xml, "antialias_grayscale_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
     setup_font_sample (glade_xml_get_widget (data->xml, "antialias_subpixel_sample"),  ANTIALIAS_RGBA,      HINT_FULL);
 
-    enum_group_create (FONT_ANTIALIASING_KEY, antialias_enums, ANTIALIAS_GRAYSCALE,
-		       glade_xml_get_widget (data->xml, "antialias_none_radio"),      ANTIALIAS_NONE,
-		       glade_xml_get_widget (data->xml, "antialias_grayscale_radio"), ANTIALIAS_GRAYSCALE,
-		       glade_xml_get_widget (data->xml, "antialias_subpixel_radio"),  ANTIALIAS_RGBA,
-		       NULL);
+    group = enum_group_create (
+    	FONT_ANTIALIASING_KEY, antialias_enums, ANTIALIAS_GRAYSCALE,
+	glade_xml_get_widget (data->xml, "antialias_none_radio"),      ANTIALIAS_NONE,
+	glade_xml_get_widget (data->xml, "antialias_grayscale_radio"), ANTIALIAS_GRAYSCALE,
+	glade_xml_get_widget (data->xml, "antialias_subpixel_radio"),  ANTIALIAS_RGBA,
+	NULL);
+    data->font_groups = g_slist_append (data->font_groups, group);
 
     setup_font_sample (glade_xml_get_widget (data->xml, "hint_none_sample"),   ANTIALIAS_GRAYSCALE, HINT_NONE);
     setup_font_sample (glade_xml_get_widget (data->xml, "hint_slight_sample"), ANTIALIAS_GRAYSCALE, HINT_SLIGHT);
     setup_font_sample (glade_xml_get_widget (data->xml, "hint_medium_sample"), ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
     setup_font_sample (glade_xml_get_widget (data->xml, "hint_full_sample"),   ANTIALIAS_GRAYSCALE, HINT_FULL);
 
-    enum_group_create (FONT_HINTING_KEY, hint_enums, HINT_FULL,
-		       glade_xml_get_widget (data->xml, "hint_none_radio"),   HINT_NONE,
-		       glade_xml_get_widget (data->xml, "hint_slight_radio"), HINT_SLIGHT,
-		       glade_xml_get_widget (data->xml, "hint_medium_radio"), HINT_MEDIUM,
-		       glade_xml_get_widget (data->xml, "hint_full_radio"),   HINT_FULL,
-		       NULL);
+    group = enum_group_create (
+    	FONT_HINTING_KEY, hint_enums, HINT_FULL,
+	glade_xml_get_widget (data->xml, "hint_none_radio"),   HINT_NONE,
+	glade_xml_get_widget (data->xml, "hint_slight_radio"), HINT_SLIGHT,
+	glade_xml_get_widget (data->xml, "hint_medium_radio"), HINT_MEDIUM,
+	glade_xml_get_widget (data->xml, "hint_full_radio"),   HINT_FULL,
+	NULL);
+    data->font_groups = g_slist_append (data->font_groups, group);
 
     gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_rgb_image")),
 			     GNOMECC_PIXMAP_DIR "/subpixel-rgb.png");
@@ -865,12 +882,14 @@ cb_show_details (GtkWidget *button,
     gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_vbgr_image")),
 			     GNOMECC_PIXMAP_DIR "/subpixel-vbgr.png");
 
-    enum_group_create (FONT_RGBA_ORDER_KEY, rgba_order_enums, RGBA_RGB,
-		       glade_xml_get_widget (data->xml, "subpixel_rgb_radio"),  RGBA_RGB,
-		       glade_xml_get_widget (data->xml, "subpixel_bgr_radio"),  RGBA_BGR,
-		       glade_xml_get_widget (data->xml, "subpixel_vrgb_radio"), RGBA_VRGB,
-		       glade_xml_get_widget (data->xml, "subpixel_vbgr_radio"), RGBA_VBGR,
-		       NULL);
+    group = enum_group_create (
+    	FONT_RGBA_ORDER_KEY, rgba_order_enums, RGBA_RGB,
+	glade_xml_get_widget (data->xml, "subpixel_rgb_radio"),  RGBA_RGB,
+	glade_xml_get_widget (data->xml, "subpixel_bgr_radio"),  RGBA_BGR,
+	glade_xml_get_widget (data->xml, "subpixel_vrgb_radio"), RGBA_VRGB,
+	glade_xml_get_widget (data->xml, "subpixel_vbgr_radio"), RGBA_VBGR,
+	NULL);
+    data->font_groups = g_slist_append (data->font_groups, group);
 
     g_signal_connect (G_OBJECT (data->font_details),
 		      "response",
@@ -891,6 +910,7 @@ font_init (AppearanceData *data)
   GtkWidget *widget;
 
   data->font_details = NULL;
+  data->font_groups = NULL;
 
   gconf_client_add_dir (data->client, "/desktop/gnome/interface",
 			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -965,6 +985,8 @@ font_init (AppearanceData *data)
 void
 font_shutdown (AppearanceData *data)
 {
+  g_slist_foreach (data->font_groups, (GFunc) enum_group_destroy, NULL);
+  g_slist_free (data->font_groups);
   g_slist_foreach (font_pairs, (GFunc) g_free, NULL);
   g_slist_free (font_pairs);
   g_free (old_font);
