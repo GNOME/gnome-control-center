@@ -364,6 +364,7 @@ font_render_load (GConfClient *client)
     if (antialiasing == pair->antialiasing && hinting == pair->hinting) {
       gtk_toggle_button_set_active (pair->radio, TRUE);
       inconsistent = FALSE;
+      break;
     }
   }
 
@@ -857,7 +858,7 @@ cb_show_details (GtkWidget *button,
 	glade_xml_get_widget (data->xml, "antialias_grayscale_radio"), ANTIALIAS_GRAYSCALE,
 	glade_xml_get_widget (data->xml, "antialias_subpixel_radio"),  ANTIALIAS_RGBA,
 	NULL);
-    data->font_groups = g_slist_append (data->font_groups, group);
+    data->font_groups = g_slist_prepend (data->font_groups, group);
 
     setup_font_sample (glade_xml_get_widget (data->xml, "hint_none_sample"),   ANTIALIAS_GRAYSCALE, HINT_NONE);
     setup_font_sample (glade_xml_get_widget (data->xml, "hint_slight_sample"), ANTIALIAS_GRAYSCALE, HINT_SLIGHT);
@@ -871,7 +872,7 @@ cb_show_details (GtkWidget *button,
 	glade_xml_get_widget (data->xml, "hint_medium_radio"), HINT_MEDIUM,
 	glade_xml_get_widget (data->xml, "hint_full_radio"),   HINT_FULL,
 	NULL);
-    data->font_groups = g_slist_append (data->font_groups, group);
+    data->font_groups = g_slist_prepend (data->font_groups, group);
 
     gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_rgb_image")),
 			     GNOMECC_PIXMAP_DIR "/subpixel-rgb.png");
@@ -889,7 +890,7 @@ cb_show_details (GtkWidget *button,
 	glade_xml_get_widget (data->xml, "subpixel_vrgb_radio"), RGBA_VRGB,
 	glade_xml_get_widget (data->xml, "subpixel_vbgr_radio"), RGBA_VBGR,
 	NULL);
-    data->font_groups = g_slist_append (data->font_groups, group);
+    data->font_groups = g_slist_prepend (data->font_groups, group);
 
     g_signal_connect (G_OBJECT (data->font_details),
 		      "response",
