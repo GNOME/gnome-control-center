@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-15 13:50+0200\n"
-"PO-Revision-Date: 2007-08-15 13:59+0200\n"
-"Last-Translator: Hendrik Richter <hendrikr@gnome.org>\n"
+"POT-Creation-Date: 2007-09-03 10:18+0200\n"
+"PO-Revision-Date: 2007-09-03 10:29+0200\n"
+"Last-Translator: Thomas Gier <info@thomasgier.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "Bild-/Textrand"
 
 #: ../capplets/about-me/eel-alert-dialog.c:115
 msgid "Width of border around the label and image in the alert dialog"
-msgstr "Randbreite um den Text und das Bild in einem Warndialog"
+msgstr "Breite des Rands um Text und Bild in einem Warndialog"
 
 #: ../capplets/about-me/eel-alert-dialog.c:124
 msgid "Alert Type"
@@ -43,53 +43,52 @@ msgstr "Der Typ des Alarms."
 
 #: ../capplets/about-me/eel-alert-dialog.c:133
 msgid "Alert Buttons"
-msgstr "Alarmtasten"
+msgstr "Alarmknöpfe"
 
 #: ../capplets/about-me/eel-alert-dialog.c:134
 msgid "The buttons shown in the alert dialog"
-msgstr "Die Schalter, die in einem Warndialog angezeigt werden"
+msgstr "Angezeigte Knöpfe in einem Warndialog"
 
 #: ../capplets/about-me/eel-alert-dialog.c:198
 msgid "Show more _details"
 msgstr "Weitere _Details anzeigen"
 
-#: ../capplets/about-me/gnome-about-me.c:635
+#: ../capplets/about-me/gnome-about-me.c:665
 msgid "Select Image"
 msgstr "Bild auswählen"
 
-#: ../capplets/about-me/gnome-about-me.c:637
+#: ../capplets/about-me/gnome-about-me.c:667
 msgid "No Image"
 msgstr "Kein Bild"
 
-#: ../capplets/about-me/gnome-about-me.c:665
-#: ../capplets/appearance/appearance-desktop.c:1059
+#: ../capplets/about-me/gnome-about-me.c:695
+#: ../capplets/appearance/appearance-desktop.c:1064
 msgid "Images"
 msgstr "Bilder"
 
-#: ../capplets/about-me/gnome-about-me.c:669
+#: ../capplets/about-me/gnome-about-me.c:699
 #: ../capplets/appearance/theme-installer.c:623
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: ../capplets/about-me/gnome-about-me.c:806
+#: ../capplets/about-me/gnome-about-me.c:836
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
 msgstr ""
-"Beim Auslesen der Informationen aus dem Adressbuch ist ein Fehler "
-"aufgetreten\n"
-"Evolution-Data-Server kann dieses Protokoll nicht verwenden"
+"Beim Auslesen der Adressbuch-Informationen ist ein Fehler aufgetreten\n"
+"Evolution-Data-Server kann dieses Protokoll nicht verarbeiten"
 
-#: ../capplets/about-me/gnome-about-me.c:827
+#: ../capplets/about-me/gnome-about-me.c:857
 msgid "Unable to open address book"
 msgstr "Adressbuch konnte nicht geöffnet werden"
 
-#: ../capplets/about-me/gnome-about-me.c:839
+#: ../capplets/about-me/gnome-about-me.c:871
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Unbekannte Anmelde-ID - die Benutzerdatenbank ist womöglich beschädigt"
 
-#: ../capplets/about-me/gnome-about-me.c:869
-#: ../capplets/about-me/gnome-about-me.c:871
+#: ../capplets/about-me/gnome-about-me.c:901
+#: ../capplets/about-me/gnome-about-me.c:903
 #, c-format
 msgid "About %s"
 msgstr "Persönliche Angaben von %s"
@@ -142,7 +141,7 @@ msgstr "<b>Netz</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
-msgstr "<b>Arbeitsstelle</b>"
+msgstr "<b>Arbeitsplatz</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:10
 msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
@@ -206,7 +205,7 @@ msgstr "La_nd:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:26
 msgid "Current _password:"
-msgstr "M_omentanes Passwort:"
+msgstr "A_ktuelles Passwort:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
@@ -214,7 +213,7 @@ msgstr "Vollständiger Name"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
-msgstr "_Zuhause:"
+msgstr "_Privat:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
@@ -245,9 +244,8 @@ msgstr ""
 "wiederholen</b> ein."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:35
-#, fuzzy
 msgid "Select your photo"
-msgstr "_Gewählte Belegungen:"
+msgstr "Wählen Sie ihr Foto aus"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:36
 msgid "State/Pro_vince:"
@@ -260,10 +258,12 @@ msgid ""
 "After you have authenticated, enter your new password, retype it for "
 "verification and click <b>Change password</b>."
 msgstr ""
-"Um Ihr Passwort zu ändern, geben Sie bitte Ihr momentanes Passwort in das "
-"nachfolgende Feld ein und klicken auf <b>Authentifizieren</b>.\n"
-"Nachdem Sie authentifiziert wurden geben Sie bitte ihr neues Passwort ein, "
-"wiederholen es zur Bestätigung und klicken dann auf <b>Passwort ändern</b>."
+"Um Ihr Passwort zu ändern, geben Sie bitte Ihr aktuelles Passwort in das "
+"Feld weiter unten ein und klicken Sie anschließend auf <b>Authentifizieren</"
+"b>.\n"
+"Nachdem Sie sich authentifiziert haben, geben Sie bitte ihr neues Passwort "
+"ein, wiederholen Sie es zur Bestätigung und klicken Sie dann auf <b>Passwort "
+"ändern</b>."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "User name:"
@@ -275,11 +275,11 @@ msgstr "Internet-Tage_buch:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Wor_k:"
-msgstr "A_rbeit:"
+msgstr "Be_ruflich:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Work _fax:"
-msgstr "_Fax auf Arbeit:"
+msgstr "_Fax beruflich:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "Zip/_Postal code:"
@@ -307,7 +307,7 @@ msgstr "Homepa_ge:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Home:"
-msgstr "_Zuhause:"
+msgstr "_Privat:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Jabber:"
@@ -329,6 +329,7 @@ msgstr "_Neues Passwort:"
 msgid "_Profession:"
 msgstr "Ber_uf:"
 
+# CHECK: area on dialog one char too short
 #: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_Retype new password:"
 msgstr "Neues Passwort _wiederholen:"
@@ -343,7 +344,7 @@ msgstr "_Titel:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Work:"
-msgstr "A_rbeit:"
+msgstr "_Beruflich:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Yahoo:"
@@ -453,19 +454,16 @@ msgid "The two passwords are not equal."
 msgstr "Die beiden Passwörter stimmen nicht überein."
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-#, fuzzy
 msgid "<b>Assistive Technologies</b>"
-msgstr "_Hilfstechnologien aktivieren"
+msgstr "<b>Hilfstechnologien</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-#, fuzzy
 msgid "<b>Preferences</b>"
-msgstr "/_Einstellungen"
+msgstr "<b>Einstellungen</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
-#, fuzzy
 msgid "Accessible Lo_gin"
-msgstr "_Barrierefreiheit"
+msgstr "Barrierefreies _Anmelden"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
@@ -473,45 +471,40 @@ msgid "Assistive Technology Preferences"
 msgstr "Einstellungen der Hilfstechnologien"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
-#, fuzzy
 msgid ""
 "Changes to enable assistive technologies will not take effect until your "
 "next log in."
 msgstr ""
-"<small><i><b>Hinweis:</b> Änderungen an dieser Einstellung werden erst bei "
-"der nächsten Anmeldung wirksam.</i></small>"
+"Änderungen zur Aktivierung der Hilfstechnologien werden erst bei der "
+"nächsten Anmeldung wirksam."
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
 msgstr "Schließen und _abmelden"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
-#, fuzzy
 msgid "Jump to Preferred Applications dialog"
-msgstr "Bevorzugte Anwendungen"
+msgstr "Zum Dialog »Bevorzugte Anwendungen« springen"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
 msgid "Jump to the Accessible Login dialog"
-msgstr ""
+msgstr "Zum Dialog »Barrierefreies Anmelden« springen"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
-#, fuzzy
 msgid "Jump to the Keyboard Accessibility dialog"
-msgstr "Tastatur-Barrierefreiheit"
+msgstr "Zum Dialog »Tastatur-Barrierefreiheit« springen"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
 msgid "_Enable assistive technologies"
-msgstr "_Hilfstechnologien aktivieren"
+msgstr "Hilfs_technologien aktivieren"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
-#, fuzzy
 msgid "_Keyboard Accessibility"
-msgstr "Tastatur-Barrierefreiheit"
+msgstr "_Tastatur-Barrierefreiheit"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
-#, fuzzy
 msgid "_Preferred Applications"
-msgstr "Bevorzugte Anwendungen"
+msgstr "_Bevorzugte Anwendungen"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
@@ -643,9 +636,10 @@ msgstr ""
 "Aufeinanderfolgende Tastenanschläge der selben Taste innerhalb einer "
 "benutzerdefinierten Zeit ignorieren."
 
+# CHECK
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Keyboard Accessibility Preferences (AccessX)"
-msgstr "Barrierefreiheitseinstellungen der Tastatur (AccessX)"
+msgstr "Einstellungen zur Barrierefreiheit der Tastatur (AccessX)"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Ma_ximum pointer speed:"
@@ -706,7 +700,7 @@ msgid "_Only accept keys held for:"
 msgstr "Tastenanschläge _erst akzeptieren nach:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Type to test settings:"
 msgstr "_Eingabefeld zur Überprüfung der Einstellungen:"
 
@@ -740,20 +734,19 @@ msgstr "Pixel/Sekunde"
 msgid "seconds"
 msgstr "Sekunden"
 
-#: ../capplets/appearance/appearance-desktop.c:1038
+#: ../capplets/appearance/appearance-desktop.c:1043
 msgid "Add Wallpaper"
 msgstr "Hintergrund hinzufügen"
 
-#: ../capplets/appearance/appearance-desktop.c:1063
-#, fuzzy
+#: ../capplets/appearance/appearance-desktop.c:1068
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: ../capplets/appearance/appearance-font.c:493
+#: ../capplets/appearance/appearance-font.c:494
 msgid "Font may be too large"
 msgstr "Schrift möglicherweise zu groß"
 
-#: ../capplets/appearance/appearance-font.c:497
+#: ../capplets/appearance/appearance-font.c:498
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -772,7 +765,7 @@ msgstr[1] ""
 "effiziente Bedienung des Rechners. Empfehlenswert wäre eine Schriftgröße von "
 "weniger als %d."
 
-#: ../capplets/appearance/appearance-font.c:510
+#: ../capplets/appearance/appearance-font.c:511
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -791,11 +784,11 @@ msgstr[1] ""
 "effiziente Bedienung des Rechners. Eine geringere Schriftgröße wäre "
 "empfehlenswert."
 
-#: ../capplets/appearance/appearance-font.c:532
+#: ../capplets/appearance/appearance-font.c:533
 msgid "Use previous font"
 msgstr "Vorherige Schrift verwenden"
 
-#: ../capplets/appearance/appearance-font.c:534
+#: ../capplets/appearance/appearance-font.c:535
 msgid "Use selected font"
 msgstr "Ausgewählte Schrift verwenden"
 
@@ -810,98 +803,85 @@ msgstr "Dateiname"
 #: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
+"Den Namen der anzuzeigenden Seite angeben (Thema|Hintergrund|Schriftarten|"
+"Schnittstelle)"
 
 #: ../capplets/appearance/appearance-main.c:116
-#, fuzzy
 msgid "page"
-msgstr "Groß"
+msgstr "Seite"
 
 #: ../capplets/appearance/appearance-main.c:123
-#, fuzzy
 msgid "[WALLPAPER...]"
-msgstr "[DATEI …]"
+msgstr "[Hintergrund …]"
 
 #: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/appearance/appearance-style.c:817
+#: ../capplets/appearance/appearance-style.c:812
 #: ../capplets/common/gnome-theme-info.c:1050
-#: ../capplets/common/gnome-theme-info.c:1805
+#: ../capplets/common/gnome-theme-info.c:1812
 msgid "Default Pointer"
 msgstr "Vorgabezeiger"
 
-#: ../capplets/appearance/appearance-themes.c:505
-#, fuzzy
+#: ../capplets/appearance/appearance-themes.c:507
 msgid "Apply Background"
-msgstr "_Hintergrund anwenden"
+msgstr "Hintergrund anwenden"
 
-#: ../capplets/appearance/appearance-themes.c:509
-#, fuzzy
+#: ../capplets/appearance/appearance-themes.c:511
 msgid "Apply Font"
-msgstr "_Schrift anwenden"
+msgstr "Schriftart anwenden"
 
-#: ../capplets/appearance/appearance-themes.c:534
-#, fuzzy
+#: ../capplets/appearance/appearance-themes.c:536
 msgid "The current theme suggests a background and a font."
-msgstr "Dieses Thema empfiehlt einen Hintergrund:"
+msgstr "Dieses Thema empfiehlt einen Hintergrund und eine Schriftart."
 
-#: ../capplets/appearance/appearance-themes.c:539
-#, fuzzy
+#: ../capplets/appearance/appearance-themes.c:541
 msgid "The current theme suggests a background."
-msgstr "Dieses Thema empfiehlt einen Hintergrund:"
+msgstr "Dieses Thema empfiehlt einen Hintergrund."
 
-#: ../capplets/appearance/appearance-themes.c:544
-#, fuzzy
+#: ../capplets/appearance/appearance-themes.c:546
 msgid "The current theme suggests a font."
-msgstr "Dieses Thema empfiehlt eine Schrift:"
+msgstr "Dieses Thema empfiehlt eine Schriftart."
 
-#: ../capplets/appearance/appearance-themes.c:821
+#: ../capplets/appearance/appearance-themes.c:823
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
 msgstr "Benutzerdefiniert"
 
 #: ../capplets/appearance/data/appearance.glade.h:2
-#, fuzzy
 msgid "<b>C_olors</b>"
-msgstr "<b>Desktop-_Farben</b>"
+msgstr "<b>_Farben</b>"
 
 #: ../capplets/appearance/data/appearance.glade.h:3
-#, fuzzy
 msgid "<b>Hinting</b>"
-msgstr "<b>Hinting</b>:"
+msgstr "<b>Hinting</b>"
 
 #: ../capplets/appearance/data/appearance.glade.h:4
-#, fuzzy
 msgid "<b>Menus and Toolbars</b>"
-msgstr "Menüs und Werkzeugleisten"
+msgstr "<b>Menüs und Werkzeugleisten</b>"
 
 #: ../capplets/appearance/data/appearance.glade.h:5
 msgid "<b>Preview</b>"
 msgstr "<b>Vorschau</b>"
 
 #: ../capplets/appearance/data/appearance.glade.h:6
-#, fuzzy
 msgid "<b>Rendering</b>"
 msgstr "<b>Schriftwiedergabe</b>"
 
 #: ../capplets/appearance/data/appearance.glade.h:7
-#, fuzzy
 msgid "<b>Smoothing</b>"
-msgstr "<b>Kantenglättung</b>:"
+msgstr "<b>Kantenglättung</b>"
 
 #: ../capplets/appearance/data/appearance.glade.h:8
-#, fuzzy
 msgid "<b>Subpixel Order</b>"
-msgstr "<b>Reihenfolge der Subpixel</b>:"
+msgstr "<b>Reihenfolge der Subpixel</b>"
 
 #: ../capplets/appearance/data/appearance.glade.h:9
-#, fuzzy
 msgid "<b>_Wallpaper</b>"
-msgstr "<b>_Desktop-Hintergrund</b>"
+msgstr "<b>_Hintergrund</b>"
 
 #: ../capplets/appearance/data/appearance.glade.h:10
-#, fuzzy
 msgid "Appearance Preferences"
-msgstr "Themeneinstellungen"
+msgstr "Erscheinungsbild-Einstellungen"
 
 #: ../capplets/appearance/data/appearance.glade.h:11
 msgid "Background"
@@ -931,10 +911,16 @@ msgid ""
 "Zoom\n"
 "Tiled"
 msgstr ""
+"Zentrieren\n"
+"Bildschirm füllen\n"
+"Skalieren\n"
+"Zoom\n"
+"Kacheln"
 
 #: ../capplets/appearance/data/appearance.glade.h:21
 msgid "Changing your cursor theme takes effect the next time you log in."
 msgstr ""
+"Änderungen am Mauszeigerthema wirken sich erst beim nächsten Anmelden aus"
 
 #: ../capplets/appearance/data/appearance.glade.h:22
 msgid "Colors"
@@ -945,9 +931,8 @@ msgid "Controls"
 msgstr "Fensterinhalt"
 
 #: ../capplets/appearance/data/appearance.glade.h:24
-#, fuzzy
 msgid "Customize Theme"
-msgstr "Benutzerdefiniertes Thema"
+msgstr "Thema anpassen"
 
 #: ../capplets/appearance/data/appearance.glade.h:25
 msgid "D_etails..."
@@ -955,26 +940,23 @@ msgstr "De_tails …"
 
 #: ../capplets/appearance/data/appearance.glade.h:26
 msgid "Des_ktop font:"
-msgstr "_Desktop-Schrift:"
+msgstr "_Desktop-Schriftart:"
 
 #: ../capplets/appearance/data/appearance.glade.h:27
-#, fuzzy
 msgid "Edit"
-msgstr "_Bearbeiten"
+msgstr "Bearbeiten"
 
 #: ../capplets/appearance/data/appearance.glade.h:28
 msgid "Font Rendering Details"
 msgstr "Details zur Schriftwiedergabe"
 
 #: ../capplets/appearance/data/appearance.glade.h:29
-#, fuzzy
 msgid "Fonts"
-msgstr "Schrift"
+msgstr "Schriftarten"
 
 #: ../capplets/appearance/data/appearance.glade.h:30
-#, fuzzy
 msgid "Go _to Fonts Folder"
-msgstr "Zum Sc_hriftordner gehen"
+msgstr "Zum Sc_hriftenordner gehen"
 
 #: ../capplets/appearance/data/appearance.glade.h:31
 msgid "Gra_yscale"
@@ -985,9 +967,8 @@ msgid "Icons"
 msgstr "Symbole"
 
 #: ../capplets/appearance/data/appearance.glade.h:33
-#, fuzzy
 msgid "Interface"
-msgstr "Internet"
+msgstr "Oberfläche"
 
 #: ../capplets/appearance/data/appearance.glade.h:34
 msgid "Large"
@@ -1010,7 +991,6 @@ msgid "Open a dialog to specify the color"
 msgstr "Einen Dialog zum Festlegen der Farbe öffnen"
 
 #: ../capplets/appearance/data/appearance.glade.h:39
-#, fuzzy
 msgid "Pointer"
 msgstr "Zeiger"
 
@@ -1027,7 +1007,6 @@ msgid "Save Theme As..."
 msgstr "Thema _speichern als …"
 
 #: ../capplets/appearance/data/appearance.glade.h:43
-#, fuzzy
 msgid "Save _background image"
 msgstr "_Hintergrundbild speichern"
 
@@ -1045,6 +1024,9 @@ msgid ""
 "Horizontal gradient\n"
 "Vertical gradient"
 msgstr ""
+"Einfarbig\n"
+"Horizontaler Verlauf\n"
+"Vertikaler Verlauf"
 
 #: ../capplets/appearance/data/appearance.glade.h:49
 msgid "Sub_pixel (LCDs)"
@@ -1065,12 +1047,14 @@ msgid ""
 "Icons only\n"
 "Text only"
 msgstr ""
+"Text unter Elementen\n"
+"Text neben Elementen\n"
+"Nur Symbole\n"
+"Nur Text"
 
-# CHECK
 #: ../capplets/appearance/data/appearance.glade.h:56
-#, fuzzy
 msgid "The current controls theme does not support color schemes."
-msgstr "Das derzeitige Thema unterstützt keine Farbschemata"
+msgstr "Das derzeitige Thema unterstützt keine Farbschemata."
 
 #: ../capplets/appearance/data/appearance.glade.h:57
 #: ../vfs-methods/themus/themus-properties-main.c:92
@@ -1090,12 +1074,13 @@ msgid "Window Border"
 msgstr "Fensterrahmen"
 
 #: ../capplets/appearance/data/appearance.glade.h:61
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Add..."
 msgstr "Hin_zufügen …"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
 msgid "_Application font:"
-msgstr "Schrift in _Anwendungen:"
+msgstr "Schriftart in _Anwendungen:"
 
 #: ../capplets/appearance/data/appearance.glade.h:63
 msgid "_BGR"
@@ -1113,10 +1098,9 @@ msgstr "_Beschreibung:"
 msgid "_Document font:"
 msgstr "D_okumenten-Schrift:"
 
-# CHECK
 #: ../capplets/appearance/data/appearance.glade.h:67
 msgid "_Editable menu shortcut keys"
-msgstr "_Bearbeitbare Menü-Tastenkombinationen"
+msgstr "Anpass_bare Menü-Tastenkombinationen"
 
 #: ../capplets/appearance/data/appearance.glade.h:68
 msgid "_File"
@@ -1179,9 +1163,8 @@ msgid "_RGB"
 msgstr "_RGB"
 
 #: ../capplets/appearance/data/appearance.glade.h:83
-#, fuzzy
 msgid "_Reset to Defaults"
-msgstr "Auf Vor_gaben zurücksetzen"
+msgstr "Auf Vor_gabewerte zurücksetzen"
 
 #: ../capplets/appearance/data/appearance.glade.h:84
 msgid "_Save"
@@ -1192,9 +1175,8 @@ msgid "_Selected items:"
 msgstr "_Gewählte Einträge:"
 
 #: ../capplets/appearance/data/appearance.glade.h:86
-#, fuzzy
 msgid "_Size:"
-msgstr "Größe:"
+msgstr "G_röße:"
 
 #: ../capplets/appearance/data/appearance.glade.h:87
 msgid "_Slight"
@@ -1206,7 +1188,7 @@ msgstr "_Stil:"
 
 #: ../capplets/appearance/data/appearance.glade.h:89
 msgid "_Tooltips:"
-msgstr ""
+msgstr "_Minihilfen:"
 
 #: ../capplets/appearance/data/appearance.glade.h:90
 msgid "_VRGB"
@@ -1224,23 +1206,17 @@ msgstr "_Fenster:"
 msgid "dots per inch"
 msgstr "Pixel pro Zoll"
 
-#: ../capplets/appearance/data/appearance.glade.h:94
-#, fuzzy
-msgid "gtk-delete"
-msgstr "Löschen"
-
 #: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:1
 msgid "Appearance"
-msgstr ""
+msgstr "Erscheinungsbild"
 
 #: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:2
-#, fuzzy
 msgid "Customize the look of the desktop"
-msgstr "Thema für den Desktop auswählen"
+msgstr "Aussehen des Desktops anpassen"
 
 #: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:1
 msgid "Installs themes packages for various parts of the desktop"
-msgstr "Themen-Pakete für verschiedenste Teile des Desktops installieren"
+msgstr "Themen-Pakete für verschiedene Teile des Desktops installieren"
 
 #: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:2
 msgid "Theme Installer"
@@ -1254,37 +1230,39 @@ msgstr "GNOME Themen-Paket"
 msgid "No Wallpaper"
 msgstr "Kein Hintergrund"
 
-#: ../capplets/appearance/gnome-wp-item.c:364
+#: ../capplets/appearance/gnome-wp-item.c:365
 #, c-format
 msgid ""
 "<b>%s</b>\n"
 "%s, %d %s by %d %s\n"
 "Folder: %s"
 msgstr ""
+"<b>%s</b>\n"
+"%s, %d %s durch %d %s\n"
+"Ordner: %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:370
-#: ../capplets/appearance/gnome-wp-item.c:372
+#: ../capplets/appearance/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:373
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "Pixel"
 msgstr[1] "Pixel"
 
 #: ../capplets/appearance/theme-installer.c:149
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot install theme.\n"
 "The %s utility is not installed."
 msgstr ""
-"Das Thema konnte nicht installiert werden.\n"
+"Das Thema kann nicht installiert werden.\n"
 "Das %s-Dienstprogramm ist nicht installiert."
 
 #: ../capplets/appearance/theme-installer.c:197
-#, fuzzy
 msgid ""
 "Cannot install theme.\n"
 "There was a problem while extracting the theme."
 msgstr ""
-"Das Thema konnte nicht installiert werden.\n"
+"Das Thema kann nicht installiert werden.\n"
 "Beim Entpacken des Themas ist ein Problem aufgetreten."
 
 #: ../capplets/appearance/theme-installer.c:237
@@ -1293,7 +1271,6 @@ msgid "GNOME Theme %s correctly installed"
 msgstr "Das GNOME-Thema %s wurde korrekt installiert"
 
 #: ../capplets/appearance/theme-installer.c:249
-#, fuzzy
 msgid "The theme is an engine. You need to compile it."
 msgstr "Das Thema ist eine Engine. Sie müssen das Thema kompilieren."
 
@@ -1316,7 +1293,7 @@ msgstr "Möchten Sie dieses jetzt anwenden oder ihr derzeitiges Thema behalten?"
 
 #: ../capplets/appearance/theme-installer.c:338
 msgid "Keep Current Theme"
-msgstr "Momentanes Thema beibehalten"
+msgstr "Aktuelles Thema beibehalten"
 
 #: ../capplets/appearance/theme-installer.c:340
 msgid "Apply New Theme"
@@ -1357,14 +1334,12 @@ msgid "The file format is invalid."
 msgstr "Das Dateiformat ist ungültig."
 
 #: ../capplets/appearance/theme-installer.c:613
-#, fuzzy
 msgid "Select Theme"
-msgstr "Bild auswählen"
+msgstr "Thema auswählen"
 
 #: ../capplets/appearance/theme-installer.c:616
-#, fuzzy
 msgid "Theme Packages"
-msgstr "GNOME Themen-Paket"
+msgstr "Themen-Pakete"
 
 #: ../capplets/appearance/theme-save.c:91
 msgid "Theme name must be present"
@@ -1376,17 +1351,15 @@ msgstr "Das Thema existiert bereits. Wollen Sie es ersetzen?"
 
 #: ../capplets/appearance/theme-save.c:162
 msgid "_Overwrite"
-msgstr ""
+msgstr "_Überschreiben"
 
 #: ../capplets/appearance/theme-util.c:43
-#, fuzzy
 msgid "Would you like to delete this theme?"
 msgstr "Möchten Sie dieses Thema entfernen?"
 
 #: ../capplets/appearance/theme-util.c:90
-#, fuzzy
 msgid "Theme cannot be deleted"
-msgstr "Thema konnte nicht gelöscht werden"
+msgstr "Thema kann nicht gelöscht werden"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1429,68 +1402,68 @@ msgstr "Fehler beim Anzeigen der Hilfe: %s"
 msgid "Copying file: %u of %u"
 msgstr "Dateien werden kopiert: %u von %u"
 
-#: ../capplets/common/file-transfer-dialog.c:123
+#: ../capplets/common/file-transfer-dialog.c:154
 #, c-format
 msgid "Copying '%s'"
 msgstr "»%s« wird kopiert"
 
-#: ../capplets/common/file-transfer-dialog.c:154
-#: ../capplets/common/file-transfer-dialog.c:278
+#: ../capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:309
 msgid "Copying files"
 msgstr "Dateien werden kopiert"
 
 # CHECK
-#: ../capplets/common/file-transfer-dialog.c:190
+#: ../capplets/common/file-transfer-dialog.c:221
 msgid "Parent Window"
 msgstr "Elternfenster"
 
 # CHECK
-#: ../capplets/common/file-transfer-dialog.c:191
+#: ../capplets/common/file-transfer-dialog.c:222
 msgid "Parent window of the dialog"
 msgstr "Elternfenster des Dialogs"
 
-#: ../capplets/common/file-transfer-dialog.c:197
+#: ../capplets/common/file-transfer-dialog.c:228
 msgid "From URI"
 msgstr "Aus URI"
 
-#: ../capplets/common/file-transfer-dialog.c:198
+#: ../capplets/common/file-transfer-dialog.c:229
 msgid "URI currently transferring from"
 msgstr "URI wird gerade übertragen von"
 
-#: ../capplets/common/file-transfer-dialog.c:205
+#: ../capplets/common/file-transfer-dialog.c:236
 msgid "To URI"
 msgstr "An URI"
 
-#: ../capplets/common/file-transfer-dialog.c:206
+#: ../capplets/common/file-transfer-dialog.c:237
 msgid "URI currently transferring to"
 msgstr "URI wird gerade übertragen nach"
 
 # CHECK
-#: ../capplets/common/file-transfer-dialog.c:213
+#: ../capplets/common/file-transfer-dialog.c:244
 msgid "Fraction completed"
 msgstr "Segment fertig"
 
-#: ../capplets/common/file-transfer-dialog.c:214
+#: ../capplets/common/file-transfer-dialog.c:245
 msgid "Fraction of transfer currently completed"
 msgstr "Segment des abgeschlossenen Transfers"
 
-#: ../capplets/common/file-transfer-dialog.c:221
+#: ../capplets/common/file-transfer-dialog.c:252
 msgid "Current URI index"
 msgstr "Aktueller URI-Index"
 
-#: ../capplets/common/file-transfer-dialog.c:222
+#: ../capplets/common/file-transfer-dialog.c:253
 msgid "Current URI index - starts from 1"
 msgstr "Aktueller URI-Index - beginnt mit 1"
 
-#: ../capplets/common/file-transfer-dialog.c:229
+#: ../capplets/common/file-transfer-dialog.c:260
 msgid "Total URIs"
 msgstr "URIs gesamt"
 
-#: ../capplets/common/file-transfer-dialog.c:230
+#: ../capplets/common/file-transfer-dialog.c:261
 msgid "Total number of URIs"
 msgstr "Gesamtanzahl der URIs"
 
-#: ../capplets/common/file-transfer-dialog.c:391
+#: ../capplets/common/file-transfer-dialog.c:422
 msgid "Connecting..."
 msgstr "Verbindung wird hergestellt …"
 
@@ -1606,31 +1579,31 @@ msgstr "Bitte wählen Sie ein Bild."
 msgid "_Select"
 msgstr "Aus_wählen"
 
-#: ../capplets/common/gnome-theme-info.c:1806
+#: ../capplets/common/gnome-theme-info.c:1813
 msgid "Default Pointer - Current"
-msgstr "Vorgabezeiger - momentan verwendet"
+msgstr "Vorgabezeiger – momentan verwendet"
 
-#: ../capplets/common/gnome-theme-info.c:1810
+#: ../capplets/common/gnome-theme-info.c:1817
 msgid "White Pointer"
 msgstr "Weißer Zeiger"
 
-#: ../capplets/common/gnome-theme-info.c:1811
+#: ../capplets/common/gnome-theme-info.c:1818
 msgid "White Pointer - Current"
-msgstr "Weißer Zeiger - momentan verwendet"
+msgstr "Weißer Zeiger – momentan verwendet"
 
-#: ../capplets/common/gnome-theme-info.c:1815
+#: ../capplets/common/gnome-theme-info.c:1822
 msgid "Large Pointer"
 msgstr "Großer Zeiger"
 
-#: ../capplets/common/gnome-theme-info.c:1816
+#: ../capplets/common/gnome-theme-info.c:1823
 msgid "Large Pointer - Current"
-msgstr "Großer Zeiger - momentan verwendet"
+msgstr "Großer Zeiger – momentan verwendet"
 
-#: ../capplets/common/gnome-theme-info.c:1820
+#: ../capplets/common/gnome-theme-info.c:1827
 msgid "Large White Pointer - Current"
-msgstr "Großer weißer Zeiger - Momentan verwendet"
+msgstr "Großer weißer Zeiger – momentan verwendet"
 
-#: ../capplets/common/gnome-theme-info.c:1821
+#: ../capplets/common/gnome-theme-info.c:1828
 msgid "Large White Pointer"
 msgstr "Großer weißer Zeiger"
 
@@ -1641,15 +1614,16 @@ msgstr "Bevorzugte Anwendungen"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
-msgstr "Ihre Vorgabeanwendungen auswählen"
+msgstr "Bevorzugte Anwendungen auswählen"
 
 #: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
 msgid "Autostart the preferred AT"
-msgstr ""
+msgstr "Bevorzugte Hilfstechnologien automatisch starten"
 
+# CHECK
 #: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
 msgid "Visual"
-msgstr ""
+msgstr "Visuell"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:80
 #: ../capplets/default-applications/gnome-da-capplet.c:112
@@ -1688,14 +1662,12 @@ msgid "<b>Mail Reader</b>"
 msgstr "<b>E-Mail-Betrachter</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-#, fuzzy
 msgid "<b>Mobility</b>"
-msgstr "<b>Beruf</b>"
+msgstr "<b>Mobilität</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-#, fuzzy
 msgid "<b>Multimedia Player</b>"
-msgstr "<b>Audio-Player</b>"
+msgstr "<b>Multimedia-Player</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "<b>Terminal Emulator</b>"
@@ -1709,24 +1681,23 @@ msgstr "<b>Texteditor</b>"
 msgid "<b>Video Player</b>"
 msgstr "<b>Video-Player</b>"
 
+# CHECK
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-#, fuzzy
 msgid "<b>Visual</b>"
-msgstr "<b>E-Mail</b>"
+msgstr "<b>Visuell</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "<b>Web Browser</b>"
 msgstr "<b>Webbrowser</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-#, fuzzy
 msgid "Accessibility"
-msgstr "_Barrierefreiheit"
+msgstr "Barrierefreiheit"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
 #, no-c-format
 msgid "All %s occurrences will be replaced with actual link"
-msgstr "%s wird durch den übergebenen Link ersetzt"
+msgstr "Alle Vorkommen von %s werden durch den übergebenen Link ersetzt"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Co_mmand:"
@@ -1754,11 +1725,11 @@ msgstr "Link in neuem _Fenster öffnen"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Open link with web browser _default"
-msgstr "Link in Vorgabe des Webbrowsers öffnen"
+msgstr "Link in der Vorgabe des Webbrowsers öffnen"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Run at st_art"
-msgstr ""
+msgstr "Beim Starten _ausführen"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Run in t_erminal"
@@ -1774,7 +1745,7 @@ msgstr "Balsa"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Banshee Music Player"
-msgstr ""
+msgstr "Banshee Musikplayer"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Claws Mail"
@@ -1782,7 +1753,7 @@ msgstr "Claws Mail"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
 msgid "Dasher"
-msgstr ""
+msgstr "Dasher"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Debian Sensible Browser"
@@ -1840,18 +1811,18 @@ msgstr "Firefox"
 msgid "Firefox"
 msgstr "Firefox"
 
+# CHECK
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
 msgid "GNOME Magnifier without Screen Reader"
-msgstr ""
+msgstr "GNOME-Bildschirmlupe ohne Bildschirmleseprogramm"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
-#, fuzzy
 msgid "GNOME OnScreen Keyboard"
-msgstr "Bil_dschirmtastatur"
+msgstr "GNOME-Bildschirmtastatur"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
 msgid "GNOME Terminal"
-msgstr "GNOME Terminal"
+msgstr "GNOME-Terminal"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Galeon"
@@ -1859,141 +1830,145 @@ msgstr "Galeon"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
 msgid "Gnopernicus"
-msgstr ""
+msgstr "Gnopernicus"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
 msgid "Gnopernicus with Magnifier"
-msgstr ""
+msgstr "Gnopernicus mit Bildschirmlupe"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Iceape"
+msgstr "Iceape"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Iceape Mail"
+msgstr "Iceape Mail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
 msgid "Icedove"
 msgstr "Icedove"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Iceweasel"
 msgstr "Iceweasel"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
 msgid "KDE Magnifier without Screen Reader"
-msgstr ""
+msgstr "KDE-Bildschirmlupe ohne Bildschirmleseprogramm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
 msgid "Links Text Browser"
 msgstr "Links Text-Browser"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
-#, fuzzy
-msgid "Linux Screen Reader"
-msgstr "_Bildschirmleser"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
-msgid "Linux Screen Reader with Magnifier"
-msgstr ""
-
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Linux Screen Reader"
+msgstr "Linux-Bildschirmleser"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "Linux Screen Reader with Magnifier"
+msgstr "Linux-Bildschirmleser mit Bildschirmlupe"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Lynx Text Browser"
 msgstr "Lynx Text-Browser"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
 msgid "Muine Music Player"
-msgstr ""
+msgstr "Muine Musik-Player"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
-#, fuzzy
-msgid "Orca"
-msgstr "Opera"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
-#, fuzzy
-msgid "Orca with Magnifier"
-msgstr "_Lupe"
-
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+msgid "Orca"
+msgstr "Orca"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+msgid "Orca with Magnifier"
+msgstr "Orca mit Bildschirmlupe"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
-msgid "Rhythmbox Music Player"
-msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
-msgid "SeaMonkey"
-msgstr ""
-
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
-msgid "SeaMonkey Mail"
-msgstr ""
+msgid "Rhythmbox Music Player"
+msgstr "Rhythmbox Musik-Player"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
-#, fuzzy
-msgid "Simple OnScreen Keyboard"
-msgstr "Bil_dschirmtastatur"
+msgid "SeaMonkey"
+msgstr "SeaMonkey"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
+msgid "SeaMonkey Mail"
+msgstr "SeaMonkey Mail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
+msgid "Simple OnScreen Keyboard"
+msgstr "Einfache Bildschirmtastatur"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
 msgid "Standard XTerminal"
 msgstr "Standard-XTerminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
 msgid "Totem Movie Player"
-msgstr ""
+msgstr "Totem Film-Player"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:57
 msgid "W3M Text Browser"
 msgstr "W3M Text-Browser"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:58
 msgid "aterm"
 msgstr "aterm"
 
@@ -2006,24 +1981,20 @@ msgid "Screen Resolution"
 msgstr "Bildschirmauflösung"
 
 #: ../capplets/display/main.c:25
-#, fuzzy
 msgid "Normal"
-msgstr "normal"
+msgstr "Normal"
 
 #: ../capplets/display/main.c:26
-#, fuzzy
 msgid "Left"
-msgstr "links"
+msgstr "Links"
 
 #: ../capplets/display/main.c:27
-#, fuzzy
 msgid "Inverted"
-msgstr "umgedreht"
+msgstr "Seitenverkehrt"
 
 #: ../capplets/display/main.c:28
-#, fuzzy
 msgid "Right"
-msgstr "rechts"
+msgstr "Rechts"
 
 #: ../capplets/display/main.c:388
 #, c-format
@@ -2360,14 +2331,12 @@ msgid "Repeat keys speed"
 msgstr "Geschwindigkeit der Tastenwiederholung"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
-#, fuzzy
 msgid "Reset to De_faults"
-msgstr "Auf Vor_gaben zurücksetzen"
+msgstr "Auf Vor_gabewerte zurücksetzen"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-#, fuzzy
 msgid "Separate _layout for each window"
-msgstr "Separate _Gruppe für jedes Fenster"
+msgstr "Separate _Belegung für jedes Fenster"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
@@ -2377,46 +2346,43 @@ msgstr "Tipppause"
 msgid "_Accessibility..."
 msgstr "_Barrierefreiheit …"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr "_Pausenintervall dauert:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "_Verzögerung:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
-#, fuzzy
-msgid "_Layouts:"
-msgstr "Belegungen"
-
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+msgid "_Layouts:"
+msgstr "Belegungen:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Models:"
 msgstr "_Modelle:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Selected layouts:"
 msgstr "_Gewählte Belegungen:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Speed:"
 msgstr "_Geschwindigkeit:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
-#, fuzzy
-msgid "_Variants:"
-msgstr "_Drucken"
-
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
-#, fuzzy
-msgid "_Vendors:"
-msgstr "_Fenster:"
+msgid "_Variants:"
+msgstr "_Varianten:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+msgid "_Vendors:"
+msgstr "_Anbieter:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "_Work interval lasts:"
 msgstr "_Arbeitsintervall dauert:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "minutes"
 msgstr "Minuten"
 
@@ -2436,7 +2402,7 @@ msgstr "Belegung"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
 msgid "Vendors"
-msgstr ""
+msgstr "Hersteller"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
 msgid "Models"
@@ -2522,7 +2488,7 @@ msgstr "_Empfindlichkeit:"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "_Threshold:"
-msgstr "_Schwellwert:"
+msgstr "_Schwellenwert:"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "_Timeout:"
@@ -2834,7 +2800,7 @@ msgstr "Fenstereinstellungen"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
-msgstr "_Doppelklick auf Titelleisten, um diese Aktion auszuführen:"
+msgstr "_Doppelklick auf Titelleiste führt folgende Aktion aus:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:7
 msgid "_Interval before raising:"
@@ -3035,11 +3001,11 @@ msgstr ""
 "Versuchen Sie, eine einfachere Konfiguration zu verwenden oder eine neuere "
 "Version der XFree-Software zu beziehen."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:250
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:252
 msgid "Do _not show this warning again"
 msgstr "_Diese Warnung nicht mehr anzeigen"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:264
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:266
 #, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard "
@@ -3056,28 +3022,31 @@ msgstr ""
 "\n"
 "Welchen Satz wollen Sie verwenden?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:287
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:289
 msgid "Use X settings"
 msgstr "X-Einstellungen verwenden"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:289
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:291
 msgid "Keep GNOME settings"
-msgstr "GNOME-Einstellungen verwenden"
+msgstr "GNOME-Einstellungen behalten"
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
 msgstr ""
+"Konnte den Vorgabeterminal nicht finden. Stellen Sie sicher, dass der Befehl "
+"für \n"
+"den Vorabeterminal gesetzt ist und auf eine installierte Anwendung verweist."
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't execute command: %s\n"
 "Verify that this is a valid command."
 msgstr ""
 "Befehl konnte nicht ausgeführt werden: %s\n"
-"Stellen Sie sicher, dass dieser Befehl existiert."
+"Stellen Sie sicher, dass es sich um einen gültigen Befehl handelt."
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
@@ -3085,7 +3054,7 @@ msgid ""
 "Verify that the machine is correctly configured."
 msgstr ""
 "Der Rechner konnte nicht in den Ruhezustand versetzt werden.\n"
-"Stellen Sie sicher, dass der Rechner korrekt konfiguriert ist."
+"Überprüfen Sie, ob der Rechner korrekt konfiguriert ist."
 
 #: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
@@ -3119,7 +3088,8 @@ msgstr "Heimverzeichnis des Benutzers konnte nicht ermittelt werden"
 #: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr "GConf-Schlüssel %s ist vom Typ %s, es wurde jedoch %s erwartet\n"
+msgstr ""
+"GConf-Schlüssel %s ist vom Typ %s, es wurde jedoch der Typ %s erwartet\n"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:1
 msgid "A_vailable files:"
@@ -3184,7 +3154,7 @@ msgstr "Bildschirm"
 
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
-msgstr "Bildschirm, auf dem der BGApplier gezeichnet werden soll"
+msgstr "Bildschirm, auf dem der BGApplier zeichnen soll"
 
 #. make start action
 #: ../libslab/application-tile.c:362
@@ -3198,7 +3168,7 @@ msgstr "Hilfe"
 
 #: ../libslab/application-tile.c:428
 msgid "Upgrade"
-msgstr "Aktualisieren"
+msgstr "Hochrüsten"
 
 #: ../libslab/application-tile.c:443
 msgid "Uninstall"
@@ -3239,26 +3209,23 @@ msgstr "Sonstige"
 
 #: ../libslab/bookmark-agent.c:1067
 msgid "New Spreadsheet"
-msgstr ""
+msgstr "Neue Tabelle"
 
 #: ../libslab/bookmark-agent.c:1071
 msgid "New Document"
-msgstr ""
+msgstr "Neues Dokument"
 
 #: ../libslab/bookmark-agent.c:1121
-#, fuzzy
 msgid "Home"
-msgstr "_Zuhause:"
+msgstr "Privat"
 
 #: ../libslab/bookmark-agent.c:1137
-#, fuzzy
 msgid "File System"
-msgstr "System"
+msgstr "Dateisystem"
 
 #: ../libslab/bookmark-agent.c:1141
-#, fuzzy
 msgid "Network Servers"
-msgstr "Netzwerk-Proxy"
+msgstr "Netzwerkserver"
 
 #: ../libslab/bookmark-agent.c:1170
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
@@ -3267,9 +3234,8 @@ msgstr "Suchen"
 
 #. make open with default action
 #: ../libslab/directory-tile.c:168
-#, fuzzy
 msgid "<b>Open</b>"
-msgstr "<b>Geschwindigkeit</b>"
+msgstr "<b>Öffnen</b>"
 
 #. make rename action
 #: ../libslab/directory-tile.c:187 ../libslab/document-tile.c:232
@@ -3312,13 +3278,13 @@ msgstr "In Dateiverwaltung öffnen"
 #: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
 #, c-format
 msgid "Unexpected attribute '%s' for element '%s'"
-msgstr ""
+msgstr "Unerwartetes Attribut »%s« für das Element »%s«"
 
 #: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
 #: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
 #, c-format
 msgid "Attribute '%s' of element '%s' not found"
-msgstr ""
+msgstr "Attribut »%s« des Elements »%s« nicht gefunden"
 
 #: ../libslab/libslab-bookmarkfile.c:1087
 #: ../libslab/libslab-bookmarkfile.c:1152
@@ -3326,7 +3292,7 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:1226
 #, c-format
 msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr ""
+msgstr "Unerwartetes Marke »%s«, Marke »%s« erwartet"
 
 #: ../libslab/libslab-bookmarkfile.c:1112
 #: ../libslab/libslab-bookmarkfile.c:1126
@@ -3334,16 +3300,17 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:1246
 #, c-format
 msgid "Unexpected tag '%s' inside '%s'"
-msgstr ""
+msgstr "Unerwartete Marke »%s« innerhalb von »%s«"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
 msgid "No valid bookmark file found in data dirs"
 msgstr ""
+"Es wurde keine gültige Lesezeichendatei in den Datenverzeichnissen gefunden."
 
 #: ../libslab/libslab-bookmarkfile.c:2130
 #, c-format
 msgid "A bookmark for URI '%s' already exists"
-msgstr ""
+msgstr "Es existiert bereits ein Lesezeichen für den URI »%s«"
 
 #: ../libslab/libslab-bookmarkfile.c:2176
 #: ../libslab/libslab-bookmarkfile.c:2333
@@ -3364,43 +3331,44 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:3790
 #, c-format
 msgid "No bookmark found for URI '%s'"
-msgstr ""
+msgstr "Es wurde kein Lesezeichen für den URI »%s« gefunden«"
 
 #: ../libslab/libslab-bookmarkfile.c:2508
 #, c-format
 msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr ""
+msgstr "Es wurde kein MIME-Typ im Lesezeichen für den URI »%s« definiert"
 
 #: ../libslab/libslab-bookmarkfile.c:2593
 #, c-format
 msgid "No private flag has been defined in bookmark for URI '%s'"
 msgstr ""
+"Es wurde kein Privat-Kennzeichnung für das Lesezeichen im URI »%s« definiert"
 
 #: ../libslab/libslab-bookmarkfile.c:2972
 #, c-format
 msgid "No groups set in bookmark for URI '%s'"
-msgstr ""
+msgstr "Es wurden keine Gruppen im Lesezeichen für den URI »%s« gesetzt"
 
 #: ../libslab/libslab-bookmarkfile.c:3373
 #: ../libslab/libslab-bookmarkfile.c:3518
 #, c-format
 msgid "No application with name '%s' registered a bookmark for '%s'"
 msgstr ""
+"Keine Anwendung mit dem Namen »%s« hat ein Lesezeichen für »%s« registriert"
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
 msgstr "Jetzt suchen"
 
 #: ../libslab/system-tile.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Open %s</b>"
-msgstr "<b>Mit »%s« öffnen</b>"
+msgstr "<b>»%s« öffnen</b>"
 
 # CHECK
 #: ../libslab/system-tile.c:141
-#, fuzzy
 msgid "Remove from System Items"
-msgstr "Aus den Favoriten entfernen"
+msgstr "Aus den Systemelementen entfernen"
 
 #: ../libsounds/sound-view.c:44
 msgid "Login"
@@ -3475,18 +3443,16 @@ msgid "Maximize"
 msgstr "Maximieren"
 
 #: ../libwindow-settings/metacity-window-manager.c:391
-#, fuzzy
 msgid "Minimize"
-msgstr "Maximieren"
+msgstr "Minimieren"
 
 #: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "Einrollen"
 
 #: ../libwindow-settings/metacity-window-manager.c:393
-#, fuzzy
 msgid "None"
-msgstr "D_eaktivieren"
+msgstr "Keine"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -3627,7 +3593,6 @@ msgid "Volume mute"
 msgstr "Stummschalten"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
-#, fuzzy
 msgid "Volume mute's shortcut."
 msgstr "Stummschalten-Tastenkombination."
 
@@ -3838,11 +3803,11 @@ msgstr ""
 
 #: ../typing-break/main.c:61
 msgid "Enable debugging code"
-msgstr ""
+msgstr "Debugging-Code aktivieren"
 
 #: ../typing-break/main.c:63
 msgid "Don't check whether the notification area exists"
-msgstr ""
+msgstr "Nicht prüfen, ob ein Benachrichtigungsfeld vorhanden ist"
 
 #: ../typing-break/main.c:89
 msgid "Typing Monitor"
@@ -4109,6 +4074,9 @@ msgstr "Thema an_wenden"
 #: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Legt das Standardthema fest"
+
+#~ msgid "gtk-delete"
+#~ msgstr "Löschen"
 
 #~ msgid "<b>Applications</b>"
 #~ msgstr "<b>Anwendungen</b>"
