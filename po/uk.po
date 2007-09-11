@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-28 11:59+0200\n"
-"PO-Revision-Date: 2007-02-22 23:09+0300\n"
+"POT-Creation-Date: 2007-09-11 14:29+0300\n"
+"PO-Revision-Date: 2007-09-11 23:09+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,6 +45,48 @@ msgstr "Кнопки, що показуються у вікні попередж
 msgid "Show more _details"
 msgstr "_Докладніше"
 
+#: ../capplets/about-me/gnome-about-me.c:665
+msgid "Select Image"
+msgstr "Виберіть зображення"
+
+#: ../capplets/about-me/gnome-about-me.c:667
+msgid "No Image"
+msgstr "Немає зображення"
+
+#: ../capplets/about-me/gnome-about-me.c:695
+#: ../capplets/appearance/appearance-desktop.c:1064
+msgid "Images"
+msgstr "Зображення"
+
+#: ../capplets/about-me/gnome-about-me.c:699
+#: ../capplets/appearance/theme-installer.c:623
+msgid "All Files"
+msgstr "Усі файли"
+
+#: ../capplets/about-me/gnome-about-me.c:836
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Помилка при спробі отримати інформацію про адресну книгу\n"
+"Evolution Data Server не може обробляти протокол"
+
+#: ../capplets/about-me/gnome-about-me.c:857
+msgid "Unable to open address book"
+msgstr "Не вдається відкрити адресну книгу"
+
+#: ../capplets/about-me/gnome-about-me.c:871
+msgid "Unknown login ID, the user database might be corrupted"
+msgstr ""
+"Невідомий ідентифікатор облікового запису, можливо, пошкоджена база даних "
+"користувача"
+
+#: ../capplets/about-me/gnome-about-me.c:901
+#: ../capplets/about-me/gnome-about-me.c:903
+#, c-format
+msgid "About %s"
+msgstr "Про програму %s"
+
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
 #: ../capplets/about-me/gnome-about-me.glade.h:14
 msgid "About Me"
@@ -54,143 +96,6 @@ msgstr "Про мене"
 msgid "Set your personal information"
 msgstr "Встановлення персональної інформації"
 
-#: ../capplets/about-me/gnome-about-me.c:623
-msgid "Select Image"
-msgstr "Виберіть зображення"
-
-#: ../capplets/about-me/gnome-about-me.c:625
-msgid "No Image"
-msgstr "Немає зображення"
-
-#: ../capplets/about-me/gnome-about-me.c:780
-msgid ""
-"There was an error while trying to get the addressbook information\n"
-"Evolution Data Server can't handle the protocol"
-msgstr ""
-"Помилка при спробі отримати інформацію про адресну книгу\n"
-"Evolution Data Server не може обробляти протокол"
-
-#: ../capplets/about-me/gnome-about-me.c:802
-msgid "Unable to open address book"
-msgstr "Не вдається відкрити адресну книгу"
-
-#: ../capplets/about-me/gnome-about-me.c:814
-msgid "Unknown login ID, the user database might be corrupted"
-msgstr ""
-"Невідомий ідентифікатор облікового запису, можливо, пошкоджена база даних "
-"користувача"
-
-#: ../capplets/about-me/gnome-about-me.c:844
-#: ../capplets/about-me/gnome-about-me.c:846
-#, c-format
-msgid "About %s"
-msgstr "Про програму %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:172
-msgid "Child exited unexpectedly"
-msgstr "Дочірній процес несподівано завершився"
-
-#: ../capplets/about-me/gnome-about-me-password.c:295
-#, c-format
-msgid "Could not shutdown backend_stdin IO channel: %s"
-msgstr "Не вдається закрити канал вводу-виводу backend_stdin: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:308
-#, c-format
-msgid "Could not shutdown backend_stdout IO channel: %s"
-msgstr "Не вдається закрити канал вводу-виводу backend_stdout: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:449
-msgid "Authenticated!"
-msgstr "Аутентифікацію пройдено!"
-
-#. This is a re-auth, and it failed.
-#. * The password must have been changed in the meantime!
-#. * Ask the user to re-authenticate
-#.
-#. Update status message and auth state
-#. Authentication failure
-#: ../capplets/about-me/gnome-about-me-password.c:466
-#: ../capplets/about-me/gnome-about-me-password.c:539
-msgid ""
-"Your password has been changed since you initially authenticated! Please re-"
-"authenticate."
-msgstr ""
-"Ваш пароль змінився з моменту початкової аутентифікації! Пройдіть "
-"аутентифікацію повторно."
-
-#: ../capplets/about-me/gnome-about-me-password.c:468
-msgid "That password was incorrect."
-msgstr "Пароль некоректний."
-
-#: ../capplets/about-me/gnome-about-me-password.c:514
-msgid "Your password has been changed."
-msgstr "Ваш пароль було змінено."
-
-#. What does this indicate?
-#. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:524
-#, c-format
-msgid "System error: %s."
-msgstr "Системна помилка: %s."
-
-#: ../capplets/about-me/gnome-about-me-password.c:526
-msgid "The password is too short."
-msgstr "Пароль надто короткий."
-
-#: ../capplets/about-me/gnome-about-me-password.c:528
-#: ../capplets/about-me/gnome-about-me-password.c:530
-msgid "The password is too simple."
-msgstr "Пароль надто простий."
-
-#: ../capplets/about-me/gnome-about-me-password.c:532
-msgid "The old and new passwords are too similar."
-msgstr "Старий та новий паролі схожі між собою."
-
-#: ../capplets/about-me/gnome-about-me-password.c:534
-msgid "The new password must contain numeric or special character(s)."
-msgstr "Має містити цифрові або спеціальні символ(и)."
-
-#: ../capplets/about-me/gnome-about-me-password.c:536
-msgid "The old and new passwords are the same."
-msgstr "Старий та новий паролі - однакові."
-
-#: ../capplets/about-me/gnome-about-me-password.c:787
-#, c-format
-msgid "Unable to launch %s: %s"
-msgstr "Не вдається запустити %s: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:790
-msgid "Unable to launch backend"
-msgstr "Не вдається запустити службову програму"
-
-#: ../capplets/about-me/gnome-about-me-password.c:791
-msgid "A system error has occurred"
-msgstr "Системна помилка"
-
-#. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:811
-msgid "Checking password..."
-msgstr "Перевірка паролю..."
-
-#: ../capplets/about-me/gnome-about-me-password.c:897
-msgid "Click <b>Change password</b> to change your password."
-msgstr "Щоб змінити пароль натисніть <b>Змінити пароль</b>."
-
-#: ../capplets/about-me/gnome-about-me-password.c:900
-msgid "Please type your password in the <b>New password</b> field."
-msgstr "Введіть пароль у полі <b>Новий пароль</b>."
-
-#: ../capplets/about-me/gnome-about-me-password.c:903
-#: ../capplets/about-me/gnome-about-me.glade.h:34
-msgid ""
-"Please type your password again in the <b>Retype new password</b> field."
-msgstr "Введіть пароль знову, у полі <b>Підтвердження паролю</b>."
-
-#: ../capplets/about-me/gnome-about-me-password.c:906
-msgid "The two passwords are not equal."
-msgstr "Паролі не збігаються."
-
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
 msgid " "
@@ -198,9 +103,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/appearance/data/appearance.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
 
@@ -324,11 +229,21 @@ msgstr "Або_нентська скринька:"
 msgid "Personal Info"
 msgstr "Персональна інформація"
 
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me-password.c:905
+msgid ""
+"Please type your password again in the <b>Retype new password</b> field."
+msgstr "Введіть пароль знову, у полі <b>Підтвердження паролю</b>."
+
 #: ../capplets/about-me/gnome-about-me.glade.h:35
+msgid "Select your photo"
+msgstr "Виберіть фотографію"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:36
 msgid "State/Pro_vince:"
 msgstr "Об_ласть/район:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:37
 msgid ""
 "To change your password, enter your current password in the field below and "
 "click <b>Authenticate</b>.\n"
@@ -340,109 +255,204 @@ msgstr ""
 "Після автентифікації, введіть новий пароль, повторіть його для перевірки та "
 "натисніть <b>Змінити пароль</b>."
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "User name:"
 msgstr "Користувач:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Web _log:"
 msgstr "Веб _журнал:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Wor_k:"
 msgstr "Ро_бочий:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Work _fax:"
 msgstr "Робочий _факс:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "Zip/_Postal code:"
 msgstr "_Індекс:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:44
 msgid "_Address:"
 msgstr "_Адреса:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Authenticate"
 msgstr "_Автентифікація"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Department:"
 msgstr "_Відділ:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home page:"
 msgstr "До_машня сторінка:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Home:"
 msgstr "_Домашня:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Manager:"
 msgstr "Ке_рівник:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_Mobile:"
 msgstr "Мо_більний:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_New password:"
 msgstr "_Новий пароль:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Profession:"
 msgstr "_Фах:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_Retype new password:"
 msgstr "Під_твердження паролю: "
 
-#: ../capplets/about-me/gnome-about-me.glade.h:55
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_State/Province:"
 msgstr "_Область/район:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:56
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Title:"
 msgstr "За_головок:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:57
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Work:"
 msgstr "_Робоча:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:58
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:59
+#: ../capplets/about-me/gnome-about-me.glade.h:60
 msgid "_Zip/Postal code:"
 msgstr "І_ндекс:"
 
+#: ../capplets/about-me/gnome-about-me-password.c:162
+msgid "Child exited unexpectedly"
+msgstr "Дочірній процес несподівано завершився"
+
+#: ../capplets/about-me/gnome-about-me-password.c:297
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "Не вдається закрити канал вводу-виводу backend_stdin: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:310
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "Не вдається закрити канал вводу-виводу backend_stdout: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:451
+msgid "Authenticated!"
+msgstr "Аутентифікацію пройдено!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:468
+#: ../capplets/about-me/gnome-about-me-password.c:541
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr ""
+"Ваш пароль змінився з моменту початкової аутентифікації! Пройдіть "
+"аутентифікацію повторно."
+
+#: ../capplets/about-me/gnome-about-me-password.c:470
+msgid "That password was incorrect."
+msgstr "Пароль некоректний."
+
+#: ../capplets/about-me/gnome-about-me-password.c:516
+msgid "Your password has been changed."
+msgstr "Ваш пароль було змінено."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:526
+#, c-format
+msgid "System error: %s."
+msgstr "Системна помилка: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:528
+msgid "The password is too short."
+msgstr "Пароль надто короткий."
+
+#: ../capplets/about-me/gnome-about-me-password.c:530
+#: ../capplets/about-me/gnome-about-me-password.c:532
+msgid "The password is too simple."
+msgstr "Пароль надто простий."
+
+#: ../capplets/about-me/gnome-about-me-password.c:534
+msgid "The old and new passwords are too similar."
+msgstr "Старий та новий паролі схожі між собою."
+
+#: ../capplets/about-me/gnome-about-me-password.c:536
+msgid "The new password must contain numeric or special character(s)."
+msgstr "Має містити цифрові або спеціальні символ(и)."
+
+#: ../capplets/about-me/gnome-about-me-password.c:538
+msgid "The old and new passwords are the same."
+msgstr "Старий та новий паролі - однакові."
+
+#: ../capplets/about-me/gnome-about-me-password.c:789
+#, c-format
+msgid "Unable to launch %s: %s"
+msgstr "Не вдається запустити %s: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:792
+msgid "Unable to launch backend"
+msgstr "Не вдається запустити службову програму"
+
+#: ../capplets/about-me/gnome-about-me-password.c:793
+msgid "A system error has occurred"
+msgstr "Системна помилка"
+
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:813
+msgid "Checking password..."
+msgstr "Перевірка паролю..."
+
+#: ../capplets/about-me/gnome-about-me-password.c:899
+msgid "Click <b>Change password</b> to change your password."
+msgstr "Щоб змінити пароль натисніть <b>Змінити пароль</b>."
+
+#: ../capplets/about-me/gnome-about-me-password.c:902
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "Введіть пароль у полі <b>Новий пароль</b>."
+
+#: ../capplets/about-me/gnome-about-me-password.c:908
+msgid "The two passwords are not equal."
+msgstr "Паролі не збігаються."
+
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-msgid "<b>Applications</b>"
-msgstr "<b>Програми</b>"
+msgid "<b>Assistive Technologies</b>"
+msgstr "<b>Допоміжні технології</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-msgid "<b>Support</b>"
-msgstr "<b>Підтримка</b>"
+msgid "<b>Preferences</b>"
+msgstr "<b>Параметри</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
-msgid ""
-"<small><i><b>Note:</b> Changes to this setting will not take effect until "
-"you next log in.</i></small>"
-msgstr ""
-"<small><i><b>Зауваження:</b> Зміна цього параметра матиме дію лише після "
-"наступного входу у сеанс.</i></small>"
+msgid "Accessible Lo_gin"
+msgstr "В_хід з використанням допоміжних можливостей"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
@@ -450,77 +460,60 @@ msgid "Assistive Technology Preferences"
 msgstr "Параметри допоміжних технологій"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
+msgid ""
+"Changes to enable assistive technologies will not take effect until your "
+"next log in."
+msgstr ""
+"Зміна цього параметра не матиме дії до наступного входу у сеанс."
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
 msgstr "Закрити та _вийти з системи"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
-msgid "Start these assistive technologies every time you log in:"
-msgstr "Запускати наступні допоміжні технології при кожному вході у систему:"
-
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
+msgid "Jump to Preferred Applications dialog"
+msgstr "Перейти до діалогу Стандартні програми"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
+msgid "Jump to the Accessible Login dialog"
+msgstr "Перейти до діалогу Вхід з використанням допоміжних технологій"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
+msgid "Jump to the Keyboard Accessibility dialog"
+msgstr "Перейти до діалогу Допоміжні можливості клавіатури"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
 msgid "_Enable assistive technologies"
 msgstr "_Увімкнути допоміжні технології"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
-msgid "_Magnifier"
-msgstr "З_більшувач"
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+msgid "_Keyboard Accessibility"
+msgstr "Допоміжні можливості _клавіатури"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
-msgid "_On-screen keyboard"
-msgstr "_Екранна клавіатура"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-msgid "_Screenreader"
-msgstr "_Читання з екрану"
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+msgid "_Preferred Applications"
+msgstr "_Стандартні програми"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "Ввімкнення допоміжних технологій GNOME при вході у систему"
 
-#: ../capplets/accessibility/at-properties/main.c:60
-msgid ""
-"No Assistive Technology is available on your system.  The 'gok' package must "
-"be installed in order to get on-screen keyboard support, and the 'orca' "
-"package must be installed for screenreading and magnifying capabilities."
-msgstr ""
-"У вашій системі не встановлено допоміжні технології.  Для підтримки екранної "
-"клавіатури необхідний пакет 'gok'. Для підтримки читання с екрану та "
-"збільшення необхідний пакет 'orca'."
-
-#: ../capplets/accessibility/at-properties/main.c:62
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'gok' package must be installed in order to get on-screen keyboard support."
-msgstr ""
-"У вашій системі встановлено підтримку не всіх наявних допоміжних технологій. "
-"Для підтримки екранної клавіатури необхідно встановити пакет 'gok'."
-
-#: ../capplets/accessibility/at-properties/main.c:64
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'orca' package must be installed for screenreading and magnifying "
-"capabilities."
-msgstr ""
-"У вашій системі встановлено підтримку не всіх наявних допоміжних технологій. "
-"Для підтримки збільшувача та читання з екрану необхідно встановити пакет "
-"'orca'."
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:250
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Помилка під час запуску діалогу параметрів миші: %s"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:338
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:346
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:407
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Не вдається імпортувати параметри AccessX з файлу \"%s\""
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:444
 msgid "Import Feature Settings File"
 msgstr "Імпортувати файлу параметрів"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:440
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:448
 msgid "_Import"
 msgstr "_Імпорт"
 
@@ -541,89 +534,84 @@ msgstr ""
 "не працюватимуть без нього."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "*"
-msgstr "*"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>Увімкнути пру_жні клавіші</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>Увімкнути \"_повільні\" клавіші</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>Увімкнути керування рухом ми_ші</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>Увімкнути _повторення клавіш</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>Увімкнути \"_липкі\" клавіші</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Features</b>"
 msgstr "<b>Особливості</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Toggle Keys</b>"
 msgstr "<b>Клавіші-перемикачі</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Basic"
 msgstr "Основні"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Beep if key is re_jected"
 msgstr "Подавати сигнал, коли клавішу від_кинуто"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "Beep when _features turned on or off from keyboard"
 msgstr "Подавати сигнал, коли _функція вмикається чи вимикається"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Beep when _modifier is pressed"
 msgstr "Подавати сигнал, коли _модифікатор натиснуто"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 "Подавати один сигнал, коли світловий індикатор засвічується і два сигнали, "
 "коли гасне"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when key is:"
 msgstr "Подавати сигнал, коли клавішу "
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Del_ay:"
 msgstr "За_тримка:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Delay between keypress and pointer mo_vement:"
 msgstr "Затримка між натисненням і ру_хом вказівника:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "Disa_ble if two keys pressed together"
 msgstr "В_имикати, якщо натиснуто дві клавіші одночасно"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
 msgid "E_nable Toggle Keys"
 msgstr "Увімкнути клавіші-перемика_чі"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Filters"
 msgstr "Фільтри"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 msgid "I_gnore duplicate keypresses within:"
 msgstr "_Ігнорувати натискання в період:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -631,23 +619,23 @@ msgstr ""
 "Ігнорувати всі послідовності натискання однієї клавіші, якщо вони стаються у "
 "вказаний користувачем проміжок часу."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Параметри спеціальних можливостей клавіатури (AccessX)"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Ma_ximum pointer speed:"
 msgstr "_Максимальна швидкість вказівника:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "Mouse Keys"
 msgstr "Кнопки миші"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "Mouse _Preferences..."
 msgstr "П_араметри миші..."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -655,7 +643,7 @@ msgstr ""
 "Приймати клавіші тільки якщо після натискання їх було утримано на визначений "
 "користувачем проміжок часу."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -663,197 +651,703 @@ msgstr ""
 "Імітувати одночасне натискання декількох клавіш шляхом послідовного "
 "натискання з клавішами-модифікаторами."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "S_peed:"
 msgstr "_Швидкість:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "Time to acce_lerate to maximum speed:"
 msgstr "Час при_скорення до максимальної швидкості:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Зробити цифрову клавіатуру панеллю керування вказівником миші."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "_Disable if unused for:"
 msgstr "_Вимкнути, якщо не використовується протягом:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Enable keyboard accessibility features"
 msgstr "_Увімкнути спеціальні можливості клавіатури"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Import Feature Settings..."
 msgstr "_Імпортувати параметри..."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "_Only accept keys held for:"
 msgstr "П_риймати натискання лише після:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Type to test settings:"
 msgstr "П_оле для перевірки параметрів:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
 msgid "_accepted"
 msgstr "при_йнято"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
 msgid "_pressed"
 msgstr "_натиснуто"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
 msgid "_rejected"
 msgstr "_відкинуто"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
 msgid "characters/second"
 msgstr "символів за секунду"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "milliseconds"
 msgstr "мс"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
 msgid "pixels/second"
 msgstr "точок за секунду"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "с"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "Змінює малюнок на тлі робочого столу"
-
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "Фоновий малюнок"
-
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>_Фоновий малюнок</b>"
-
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>_Кольори робочого столу</b> "
-
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "Параметри тла робочого столу"
-
-#: ../capplets/background/gnome-background-properties.glade.h:4
-msgid "Open a dialog to specify the color"
-msgstr "Відкрити діалог для вказування кольору"
-
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "_Додати малюнок"
-
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Finish"
-msgstr "_Виконано"
-
-#: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
-msgid "_Remove"
-msgstr "В_идалити"
-
-#: ../capplets/background/gnome-background-properties.glade.h:8
-msgid "_Style:"
-msgstr "_Стиль:"
-
-#: ../capplets/background/gnome-wp-capplet.c:41
-msgid "[FILE...]"
-msgstr "[ФАЙЛ...]"
-
-#: ../capplets/background/gnome-wp-capplet.c:81
-#: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Помилка відображення довідки: %s"
-
-#: ../capplets/background/gnome-wp-capplet.c:956
-msgid "Centered"
-msgstr "У центрі"
-
-#: ../capplets/background/gnome-wp-capplet.c:960
-msgid "Fill Screen"
-msgstr "На весь екран"
-
-#: ../capplets/background/gnome-wp-capplet.c:964
-msgid "Scaled"
-msgstr "Масштабувати"
-
-#: ../capplets/background/gnome-wp-capplet.c:968
-msgid "Zoom"
-msgstr "Масштаб"
-
-#: ../capplets/background/gnome-wp-capplet.c:972
-msgid "Tiled"
-msgstr "Черепицею"
-
-#: ../capplets/background/gnome-wp-capplet.c:993
-msgid "Solid Color"
-msgstr "Суцільний колір"
-
-#: ../capplets/background/gnome-wp-capplet.c:997
-msgid "Horizontal Gradient"
-msgstr "Горизонтальний градієнт"
-
-#: ../capplets/background/gnome-wp-capplet.c:1001
-msgid "Vertical Gradient"
-msgstr "Вертикальний градієнт"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1044
+#: ../capplets/appearance/appearance-desktop.c:1043
 msgid "Add Wallpaper"
 msgstr "Додавання фонового малюнка"
 
-#: ../capplets/background/gnome-wp-capplet.c:1061
-msgid "Images"
-msgstr "Зображення"
-
-#: ../capplets/background/gnome-wp-capplet.c:1065
-msgid "All Files"
+#: ../capplets/appearance/appearance-desktop.c:1068
+msgid "All files"
 msgstr "Усі файли"
 
-#: ../capplets/background/gnome-wp-capplet.c:1128
-msgid "- Desktop Background Preferences"
-msgstr "- параметри тла робочого столу"
+#: ../capplets/appearance/appearance-font.c:494
+msgid "Font may be too large"
+msgstr "Шрифт може бути надто великим"
 
-#: ../capplets/background/gnome-wp-info.c:45
+#: ../capplets/appearance/appearance-font.c:498
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"Розмір вибраного шрифту - %d точка, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
+msgstr[1] ""
+"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
+msgstr[2] ""
+"Розмір вибраного шрифту - %d точок, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
+
+#: ../capplets/appearance/appearance-font.c:511
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"Розмір вибраного шрифту - %d точка, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
+"розміру."
+msgstr[1] ""
+"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
+"розміру."
+msgstr[2] ""
+"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
+"розміру."
+
+#: ../capplets/appearance/appearance-font.c:533
+msgid "Use previous font"
+msgstr "Використовувати попередній шрифт"
+
+#: ../capplets/appearance/appearance-font.c:535
+msgid "Use selected font"
+msgstr "Використовувати обраний шрифт"
+
+#: ../capplets/appearance/appearance-main.c:108
+msgid "Specify the filename of a theme to install"
+msgstr "Вкажіть назву файлу теми для встановлення"
+
+#: ../capplets/appearance/appearance-main.c:109
+msgid "filename"
+msgstr "filename"
+
+#: ../capplets/appearance/appearance-main.c:115
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr "Вкажіть назву сторінки для показу (теми|тла|шрифтів|інтерфейс)"
+
+#: ../capplets/appearance/appearance-main.c:116
+msgid "page"
+msgstr "сторінка"
+
+#: ../capplets/appearance/appearance-main.c:123
+msgid "[WALLPAPER...]"
+msgstr "[ФОНОВИЙМАЛЮНОК...]"
+
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:812
+#: ../capplets/common/gnome-theme-info.c:1050
+#: ../capplets/common/gnome-theme-info.c:1812
+msgid "Default Pointer"
+msgstr "Типовий вказівник"
+
+#: ../capplets/appearance/appearance-themes.c:507
+msgid "Apply Background"
+msgstr "Застосувати тло"
+
+#: ../capplets/appearance/appearance-themes.c:511
+msgid "Apply Font"
+msgstr "Застосувати шрифт"
+
+#: ../capplets/appearance/appearance-themes.c:536
+msgid "The current theme suggests a background and a font."
+msgstr "У поточній темі пропонується тло та шрифт."
+
+#: ../capplets/appearance/appearance-themes.c:541
+msgid "The current theme suggests a background."
+msgstr "У поточній темі пропонується тло."
+
+#: ../capplets/appearance/appearance-themes.c:546
+msgid "The current theme suggests a font."
+msgstr "У поточній темі пропонується шрифт:"
+
+#: ../capplets/appearance/appearance-themes.c:823
+#: ../capplets/default-applications/gnome-da-capplet.c:1080
+#: ../capplets/sound/sound-properties-capplet.c:327
+msgid "Custom"
+msgstr "Інший"
+
+#: ../capplets/appearance/data/appearance.glade.h:2
+msgid "<b>C_olors</b>"
+msgstr "<b>_Кольори</b> "
+
+#: ../capplets/appearance/data/appearance.glade.h:3
+msgid "<b>Hinting</b>"
+msgstr "<b>Уточнення</b>:"
+
+#: ../capplets/appearance/data/appearance.glade.h:4
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>Меню та панелі</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:5
+msgid "<b>Preview</b>"
+msgstr "<b>Зразок</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:6
+msgid "<b>Rendering</b>"
+msgstr "<b>Режим малювання шрифтів</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:7
+msgid "<b>Smoothing</b>"
+msgstr "<b>Згладжування</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:8
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>Субпіксельне згладжування</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:9
+msgid "<b>_Wallpaper</b>"
+msgstr "<b>_Фоновий малюнок</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:10
+msgid "Appearance Preferences"
+msgstr "Параметри вигляду"
+
+#: ../capplets/appearance/data/appearance.glade.h:11
+msgid "Background"
+msgstr "Тло"
+
+#: ../capplets/appearance/data/appearance.glade.h:12
+msgid "Best _shapes"
+msgstr "Найкраща _форма"
+
+#: ../capplets/appearance/data/appearance.glade.h:13
+msgid "Best co_ntrast"
+msgstr "Найкраща _контрастність"
+
+#: ../capplets/appearance/data/appearance.glade.h:14
+msgid "C_ustomize..."
+msgstr "_Налаштувати..."
+
+#: ../capplets/appearance/data/appearance.glade.h:15
+msgid "C_ut"
+msgstr "_Вирізати"
+
+#: ../capplets/appearance/data/appearance.glade.h:16
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+"У центрі\n"
+"На весь екран\n"
+"Розтягнуте\n"
+"Масштабоване\n"
+"Плитка"
+
+#: ../capplets/appearance/data/appearance.glade.h:21
+msgid "Changing your cursor theme takes effect the next time you log in."
+msgstr "Зміна теми курсору набере сили при наступному вході у сеанс."
+
+#: ../capplets/appearance/data/appearance.glade.h:22
+msgid "Colors"
+msgstr "Кольори"
+
+#: ../capplets/appearance/data/appearance.glade.h:23
+msgid "Controls"
+msgstr "Елементи керування"
+
+#: ../capplets/appearance/data/appearance.glade.h:24
+msgid "Customize Theme"
+msgstr "Інша тема"
+
+#: ../capplets/appearance/data/appearance.glade.h:25
+msgid "D_etails..."
+msgstr "_Подробиці..."
+
+#: ../capplets/appearance/data/appearance.glade.h:26
+msgid "Des_ktop font:"
+msgstr "Шрифт _робочого столу:"
+
+#: ../capplets/appearance/data/appearance.glade.h:27
+msgid "Edit"
+msgstr "Правка"
+
+#: ../capplets/appearance/data/appearance.glade.h:28
+msgid "Font Rendering Details"
+msgstr "Подробиці відтворення шрифтів"
+
+#: ../capplets/appearance/data/appearance.glade.h:29
+msgid "Fonts"
+msgstr "Шрифти"
+
+#: ../capplets/appearance/data/appearance.glade.h:30
+msgid "Go _to Fonts Folder"
+msgstr "Пере_йти до теки шрифтів"
+
+#: ../capplets/appearance/data/appearance.glade.h:31
+msgid "Gra_yscale"
+msgstr "Від_тінки сірого"
+
+#: ../capplets/appearance/data/appearance.glade.h:32
+msgid "Icons"
+msgstr "Значки"
+
+#: ../capplets/appearance/data/appearance.glade.h:33
+msgid "Interface"
+msgstr "Інтерфейс"
+
+#: ../capplets/appearance/data/appearance.glade.h:34
+msgid "Large"
+msgstr "Великий"
+
+#: ../capplets/appearance/data/appearance.glade.h:35
+msgid "N_one"
+msgstr "Н_емає"
+
+#: ../capplets/appearance/data/appearance.glade.h:36
+msgid "New File"
+msgstr "Створити файл"
+
+#: ../capplets/appearance/data/appearance.glade.h:37
+msgid "Open File"
+msgstr "Відкрити файл"
+
+#: ../capplets/appearance/data/appearance.glade.h:38
+msgid "Open a dialog to specify the color"
+msgstr "Відкрити діалог для вказування кольору"
+
+#: ../capplets/appearance/data/appearance.glade.h:39
+msgid "Pointer"
+msgstr "Вказівник"
+
+#: ../capplets/appearance/data/appearance.glade.h:40
+msgid "R_esolution:"
+msgstr "_Роздільна здатність:"
+
+#: ../capplets/appearance/data/appearance.glade.h:41
+msgid "Save File"
+msgstr "Зберегти файл"
+
+#: ../capplets/appearance/data/appearance.glade.h:42
+msgid "Save Theme As..."
+msgstr "Зберегти тему як..."
+
+#: ../capplets/appearance/data/appearance.glade.h:43
+msgid "Save _As..."
+msgstr "Зберегти _як..."
+
+#: ../capplets/appearance/data/appearance.glade.h:44
+msgid "Save _background image"
+msgstr "Зберегти _фонове зображення"
+
+#: ../capplets/appearance/data/appearance.glade.h:45
+msgid "Show _icons in menus"
+msgstr "Показувати з_начки у меню"
+
+#: ../capplets/appearance/data/appearance.glade.h:46
+msgid "Small"
+msgstr "Малий"
+
+#: ../capplets/appearance/data/appearance.glade.h:47
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"Суцільний колір\n"
+"Горизонтальний градієнт\n"
+"Вертикальний градієнт"
+
+#: ../capplets/appearance/data/appearance.glade.h:50
+msgid "Sub_pixel (LCDs)"
+msgstr "С_убпіксельне (РК-монітори)"
+
+#: ../capplets/appearance/data/appearance.glade.h:51
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "С_убпіксельне згладжування (РК-монітори)"
+
+#: ../capplets/appearance/data/appearance.glade.h:52
+msgid "Text"
+msgstr "Текст"
+
+#: ../capplets/appearance/data/appearance.glade.h:53
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"Текст під значками\n"
+"Текст поруч зі значками\n"
+"Лише значки\n"
+"Лише текст"
+
+#: ../capplets/appearance/data/appearance.glade.h:57
+msgid "The current controls theme does not support color schemes."
+msgstr "Поточна тема елементів керування не підтримує схеми кольорів."
+
+#: ../capplets/appearance/data/appearance.glade.h:58
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "Тема"
+
+#: ../capplets/appearance/data/appearance.glade.h:59
+msgid "Toolbar _button labels:"
+msgstr "Позначки _кнопок панелі:"
+
+#: ../capplets/appearance/data/appearance.glade.h:60
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/data/appearance.glade.h:61
+msgid "Window Border"
+msgstr "Рамка вікна"
+
+#: ../capplets/appearance/data/appearance.glade.h:62
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+msgid "_Add..."
+msgstr "_Додати..."
+
+#: ../capplets/appearance/data/appearance.glade.h:63
+msgid "_Application font:"
+msgstr "Шрифт п_рограм:"
+
+#: ../capplets/appearance/data/appearance.glade.h:64
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/data/appearance.glade.h:65
+msgid "_Copy"
+msgstr "_Копіювати"
+
+#: ../capplets/appearance/data/appearance.glade.h:66
+msgid "_Description:"
+msgstr "_Опис:"
+
+#: ../capplets/appearance/data/appearance.glade.h:67
+msgid "_Document font:"
+msgstr "Шрифт _документу:"
+
+#: ../capplets/appearance/data/appearance.glade.h:68
+msgid "_Editable menu shortcut keys"
+msgstr "_Редаговані прискорювачі меню"
+
+#: ../capplets/appearance/data/appearance.glade.h:69
+msgid "_File"
+msgstr "_Файл"
+
+#: ../capplets/appearance/data/appearance.glade.h:70
+msgid "_Fixed width font:"
+msgstr "Моно_ширинний шрифт:"
+
+#: ../capplets/appearance/data/appearance.glade.h:71
+msgid "_Full"
+msgstr "_Повне"
+
+#: ../capplets/appearance/data/appearance.glade.h:72
+msgid "_Input boxes:"
+msgstr "_Поля вводу:"
+
+#: ../capplets/appearance/data/appearance.glade.h:73
+msgid "_Install..."
+msgstr "_Встановити..."
+
+#: ../capplets/appearance/data/appearance.glade.h:74
+msgid "_Medium"
+msgstr "_Середнє"
+
+#: ../capplets/appearance/data/appearance.glade.h:75
+msgid "_Monochrome"
+msgstr "_Монохромний"
+
+#: ../capplets/appearance/data/appearance.glade.h:76
+msgid "_Name:"
+msgstr "_Назва:"
+
+#: ../capplets/appearance/data/appearance.glade.h:77
+msgid "_New"
+msgstr "_Створити"
+
+#: ../capplets/appearance/data/appearance.glade.h:78
+msgid "_None"
+msgstr "_Немає"
+
+#: ../capplets/appearance/data/appearance.glade.h:79
+msgid "_Open"
+msgstr "_Відкрити"
+
+#: ../capplets/appearance/data/appearance.glade.h:80
+msgid "_Paste"
+msgstr "Вст_авити"
+
+#: ../capplets/appearance/data/appearance.glade.h:81
+msgid "_Print"
+msgstr "Д_рук"
+
+#: ../capplets/appearance/data/appearance.glade.h:82
+msgid "_Quit"
+msgstr "Ви_йти"
+
+#: ../capplets/appearance/data/appearance.glade.h:83
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/data/appearance.glade.h:84
+msgid "_Reset to Defaults"
+msgstr "Скинути на _типові значення"
+
+#: ../capplets/appearance/data/appearance.glade.h:85
+msgid "_Save"
+msgstr "З_берегти"
+
+#: ../capplets/appearance/data/appearance.glade.h:86
+msgid "_Selected items:"
+msgstr "_Виділені елементи:"
+
+#: ../capplets/appearance/data/appearance.glade.h:87
+msgid "_Size:"
+msgstr "_Розмір:"
+
+#: ../capplets/appearance/data/appearance.glade.h:88
+msgid "_Slight"
+msgstr "Сл_абке"
+
+#: ../capplets/appearance/data/appearance.glade.h:89
+msgid "_Style:"
+msgstr "_Стиль:"
+
+#: ../capplets/appearance/data/appearance.glade.h:90
+msgid "_Tooltips:"
+msgstr "_Підказки:"
+
+#: ../capplets/appearance/data/appearance.glade.h:91
+msgid "_VRGB"
+msgstr "_VRGB"
+
+#: ../capplets/appearance/data/appearance.glade.h:92
+msgid "_Window title font:"
+msgstr "Шрифт за_головку вікна:"
+
+#: ../capplets/appearance/data/appearance.glade.h:93
+msgid "_Windows:"
+msgstr "_Вікна:"
+
+#: ../capplets/appearance/data/appearance.glade.h:94
+msgid "dots per inch"
+msgstr "точок на дюйм"
+
+#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "Зовнішній вигляд"
+
+#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:2
+msgid "Customize the look of the desktop"
+msgstr "Налаштувати вигляд робочого столу"
+
+#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "Встановлює пакети тем для різних елементів робочого столу"
+
+#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "Встановлення теми"
+
+#: ../capplets/appearance/data/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "Пакет тем GNOME"
+
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Без малюнка"
 
-#.
-#. Translators: This message is used to render the type and size of the
-#. background images in gnome-background-properites. The first "%s" will
-#. be replaced by the image type, and the two "%d %s"s will be replaced
-#. with the images' dimensions. For example, in US English, this may be
-#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
-#.
-#. Do not translate the "background size|" type. Remove it from the
-#. translation.
-#.
-#: ../capplets/background/gnome-wp-item.c:368
+#: ../capplets/appearance/gnome-wp-item.c:365
 #, c-format
-msgid "background size|%s, %d %s x %d %s"
-msgstr "%s, %d %s x %d %s"
+msgid ""
+"<b>%s</b>\n"
+"%s, %d %s by %d %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s, %d %s на %d %s\n"
+"Тека: %s"
 
-#: ../capplets/background/gnome-wp-item.c:371
-#: ../capplets/background/gnome-wp-item.c:373
+#: ../capplets/appearance/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:373
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "точка"
 msgstr[1] "точки"
 msgstr[2] "точок"
+
+#: ../capplets/appearance/theme-installer.c:149
+#, c-format
+msgid ""
+"Cannot install theme.\n"
+"The %s utility is not installed."
+msgstr ""
+"Не вдається встановити тему.\n"
+"Не встановлена програма %s."
+
+#: ../capplets/appearance/theme-installer.c:197
+msgid ""
+"Cannot install theme.\n"
+"There was a problem while extracting the theme."
+msgstr ""
+"Не вдається встановити тему.\n"
+"Помилка при розпаковуванні теми."
+
+#: ../capplets/appearance/theme-installer.c:237
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr "Тема GNOME %s коректно встановлена"
+
+#: ../capplets/appearance/theme-installer.c:249
+msgid "The theme is an engine. You need to compile it."
+msgstr "Тема є движком. Її необхідно скомпілювати."
+
+#: ../capplets/appearance/theme-installer.c:258
+msgid "The file format is invalid"
+msgstr "Неправильний формат файлу"
+
+#: ../capplets/appearance/theme-installer.c:309
+msgid "Installation Failed"
+msgstr "Помилка встановлення"
+
+#: ../capplets/appearance/theme-installer.c:330
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr "Тема \"%s\" була встановлена."
+
+#: ../capplets/appearance/theme-installer.c:336
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "Застосувати її зараз, або зберегти вашу поточну тему?"
+
+#: ../capplets/appearance/theme-installer.c:338
+msgid "Keep Current Theme"
+msgstr "Зберегти поточну тему"
+
+#: ../capplets/appearance/theme-installer.c:340
+msgid "Apply New Theme"
+msgstr "Застосувати нову тему"
+
+#: ../capplets/appearance/theme-installer.c:413
+msgid "This theme is not in a supported format."
+msgstr "Формат цієї теми не підтримується."
+
+#: ../capplets/appearance/theme-installer.c:438
+msgid "Failed to create temporary directory"
+msgstr "Не вдається створити тимчасовий каталог"
+
+#: ../capplets/appearance/theme-installer.c:497
+msgid "No theme file location specified to install"
+msgstr "Не вказаний файл теми для встановлення"
+
+#: ../capplets/appearance/theme-installer.c:517
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Немає прав для встановлення теми у:\n"
+"%s"
+
+#: ../capplets/appearance/theme-installer.c:539
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
+"%s - це шлях, де будуть встановлюватись файли теми. Його не можна вказувати "
+"у якості розташування джерела"
+
+#: ../capplets/appearance/theme-installer.c:558
+msgid "The file format is invalid."
+msgstr "Неправильний формат файлу."
+
+#: ../capplets/appearance/theme-installer.c:613
+msgid "Select Theme"
+msgstr "Виберіть зображення"
+
+#: ../capplets/appearance/theme-installer.c:616
+msgid "Theme Packages"
+msgstr "Пакети тем"
+
+#: ../capplets/appearance/theme-save.c:91
+msgid "Theme name must be present"
+msgstr "Назва теми повинна бути вказана"
+
+#: ../capplets/appearance/theme-save.c:161
+msgid "The theme already exists. Would you like to replace it?"
+msgstr "Тема вже існує. Бажаєте її замінити?"
+
+#: ../capplets/appearance/theme-save.c:162
+msgid "_Overwrite"
+msgstr "_Перезаписати"
+
+#: ../capplets/appearance/theme-util.c:43
+msgid "Would you like to delete this theme?"
+msgstr "Бажаєте видалити цю тему?"
+
+#: ../capplets/appearance/theme-util.c:90
+msgid "Theme cannot be deleted"
+msgstr "Тему неможливо видалити"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -878,75 +1372,81 @@ msgid "Just apply settings and quit"
 msgstr "Лише застосувати параметри і вийти"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:226
-#: ../capplets/sound/sound-properties-capplet.c:1014
+#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+#: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Отримання і збереження старих параметрів"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Помилка відображення довідки: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "Копіюється файл: %u з %u"
 
-#: ../capplets/common/file-transfer-dialog.c:123
+#: ../capplets/common/file-transfer-dialog.c:154
 #, c-format
 msgid "Copying '%s'"
 msgstr "Копіювання '%s'"
 
-#: ../capplets/common/file-transfer-dialog.c:154
-#: ../capplets/common/file-transfer-dialog.c:278
+#: ../capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:309
 msgid "Copying files"
 msgstr "Копіювання файлів"
 
-#: ../capplets/common/file-transfer-dialog.c:190
+#: ../capplets/common/file-transfer-dialog.c:221
 msgid "Parent Window"
 msgstr "Батьківське вікно"
 
-#: ../capplets/common/file-transfer-dialog.c:191
+#: ../capplets/common/file-transfer-dialog.c:222
 msgid "Parent window of the dialog"
 msgstr "Батьківське вікно діалогу"
 
-#: ../capplets/common/file-transfer-dialog.c:197
+#: ../capplets/common/file-transfer-dialog.c:228
 msgid "From URI"
 msgstr "З URI"
 
-#: ../capplets/common/file-transfer-dialog.c:198
+#: ../capplets/common/file-transfer-dialog.c:229
 msgid "URI currently transferring from"
 msgstr "URI, з якого переносяться дані"
 
-#: ../capplets/common/file-transfer-dialog.c:205
+#: ../capplets/common/file-transfer-dialog.c:236
 msgid "To URI"
 msgstr "До URI"
 
-#: ../capplets/common/file-transfer-dialog.c:206
+#: ../capplets/common/file-transfer-dialog.c:237
 msgid "URI currently transferring to"
 msgstr "URI, на який переносяться дані"
 
-#: ../capplets/common/file-transfer-dialog.c:213
+#: ../capplets/common/file-transfer-dialog.c:244
 msgid "Fraction completed"
 msgstr "Частково завершено"
 
-#: ../capplets/common/file-transfer-dialog.c:214
+#: ../capplets/common/file-transfer-dialog.c:245
 msgid "Fraction of transfer currently completed"
 msgstr "Частину перенесення завершено"
 
-#: ../capplets/common/file-transfer-dialog.c:221
+#: ../capplets/common/file-transfer-dialog.c:252
 msgid "Current URI index"
 msgstr "Поточний індекс URI"
 
-#: ../capplets/common/file-transfer-dialog.c:222
+#: ../capplets/common/file-transfer-dialog.c:253
 msgid "Current URI index - starts from 1"
 msgstr "Поточний індекс URI (починається з 1)"
 
-#: ../capplets/common/file-transfer-dialog.c:229
+#: ../capplets/common/file-transfer-dialog.c:260
 msgid "Total URIs"
 msgstr "Загалом URI"
 
-#: ../capplets/common/file-transfer-dialog.c:230
+#: ../capplets/common/file-transfer-dialog.c:261
 msgid "Total number of URIs"
 msgstr "Загальна кількість URI"
 
-#: ../capplets/common/file-transfer-dialog.c:391
+#: ../capplets/common/file-transfer-dialog.c:422
 msgid "Connecting..."
 msgstr "З'єднання..."
 
@@ -1023,7 +1523,7 @@ msgstr ""
 "Робити цей зворотній виклик, коли дані об'єкту редактору властивостей "
 "звільнюються"
 
-#: ../capplets/common/gconf-property-editor.c:1466
+#: ../capplets/common/gconf-property-editor.c:1468
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1036,7 +1536,7 @@ msgstr ""
 "Перевірте чи він існує та спробуйте ще раз, або оберіть інше зображення для "
 "тла."
 
-#: ../capplets/common/gconf-property-editor.c:1474
+#: ../capplets/common/gconf-property-editor.c:1476
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1049,16 +1549,44 @@ msgstr ""
 "\n"
 "Виберіть замість нього інший файл."
 
-#: ../capplets/common/gconf-property-editor.c:1593
+#: ../capplets/common/gconf-property-editor.c:1595
 msgid "Please select an image."
 msgstr "Виберіть зображення."
 
-#: ../capplets/common/gconf-property-editor.c:1598
+#: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "_Вибрати"
 
+#: ../capplets/common/gnome-theme-info.c:1813
+msgid "Default Pointer - Current"
+msgstr "Типовий вказівник - Поточний"
+
+#: ../capplets/common/gnome-theme-info.c:1817
+msgid "White Pointer"
+msgstr "Білий вказівник"
+
+#: ../capplets/common/gnome-theme-info.c:1818
+msgid "White Pointer - Current"
+msgstr "Білий вказівник - Поточний"
+
+#: ../capplets/common/gnome-theme-info.c:1822
+msgid "Large Pointer"
+msgstr "Великий вказівник>"
+
+#: ../capplets/common/gnome-theme-info.c:1823
+msgid "Large Pointer - Current"
+msgstr "Великий вказівник - Поточний"
+
+#: ../capplets/common/gnome-theme-info.c:1827
+msgid "Large White Pointer - Current"
+msgstr "Збільшений білий вказівник - Типовий"
+
+#: ../capplets/common/gnome-theme-info.c:1828
+msgid "Large White Pointer"
+msgstr "Збільшений білий вказівник"
+
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Preferred Applications"
 msgstr "Стандартні програми"
 
@@ -1066,259 +1594,358 @@ msgstr "Стандартні програми"
 msgid "Select your default applications"
 msgstr "Обрання типових програм"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:77
-#: ../capplets/default-applications/gnome-da-capplet.c:101
-#: ../capplets/default-applications/gnome-da-capplet.c:146
-#: ../capplets/default-applications/gnome-da-capplet.c:192
-#: ../capplets/default-applications/gnome-da-capplet.c:248
-#: ../capplets/default-applications/gnome-da-capplet.c:299
-#: ../capplets/default-applications/gnome-da-capplet.c:603
-#: ../capplets/default-applications/gnome-da-capplet.c:625
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
+msgid "Autostart the preferred AT"
+msgstr "Автозапуск бажаної AT"
+
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
+msgid "Visual"
+msgstr "Візуально"
+
+#: ../capplets/default-applications/gnome-da-capplet.c:80
+#: ../capplets/default-applications/gnome-da-capplet.c:112
+#: ../capplets/default-applications/gnome-da-capplet.c:133
+#: ../capplets/default-applications/gnome-da-capplet.c:177
+#: ../capplets/default-applications/gnome-da-capplet.c:222
+#: ../capplets/default-applications/gnome-da-capplet.c:279
+#: ../capplets/default-applications/gnome-da-capplet.c:330
+#: ../capplets/default-applications/gnome-da-capplet.c:381
+#: ../capplets/default-applications/gnome-da-capplet.c:434
+#: ../capplets/default-applications/gnome-da-capplet.c:484
+#: ../capplets/default-applications/gnome-da-capplet.c:877
+#: ../capplets/default-applications/gnome-da-capplet.c:899
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Помилка збереження конфігурації: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:744
-#: ../capplets/sound/sound-properties-capplet.c:312
-msgid "Custom"
-msgstr "Інший"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:764
+#: ../capplets/default-applications/gnome-da-capplet.c:1100
 msgid "Could not load the main interface"
 msgstr "Не вдається завантажити головний інтерфейс"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:766
+#: ../capplets/default-applications/gnome-da-capplet.c:1102
 msgid "Please make sure that the applet is properly installed"
 msgstr "Переконайтесь, що аплет правильно встановлено."
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "<b>Image Viewer</b>"
+msgstr "<b>Переглядач зображень</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>Миттєві повідомлення</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
+msgid "<b>Mail Reader</b>"
+msgstr "<b>Поштова програма</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
+msgid "<b>Mobility</b>"
+msgstr "<b>Мобільність</b> "
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
+msgid "<b>Multimedia Player</b>"
+msgstr "<b>Мультимедійний програвач</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
+msgid "<b>Terminal Emulator</b>"
+msgstr "<b>Емулятор терміналу</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "<b>Text Editor</b>"
+msgstr "<b>Текстовий редактор</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "<b>Video Player</b>"
+msgstr "<b>Відеопрогравач</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "<b>Visual</b>"
+msgstr "<b>Візуальний</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+msgid "<b>Web Browser</b>"
+msgstr "<b>Веб-переглядач</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+msgid "Accessibility"
+msgstr "Можливості доступності"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#, no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr "Всі випадки %s будуть замінені реальним шляхом у файловій системі"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+msgid "Co_mmand:"
+msgstr "_Команда:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "E_xecute flag:"
+msgstr "Зап_ускати:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+msgid "Internet"
+msgstr "Інтернет"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+msgid "Multimedia"
+msgstr "Мультимедія"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+msgid "Open link in new _tab"
+msgstr "Відкрити посилання у новій вк_ладці"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+msgid "Open link in new _window"
+msgstr "Відкрити посилання у новій _вікні"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+msgid "Open link with web browser _default"
+msgstr "Відкрити посилання з параметрами ве_б-переглядача"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "Run at st_art"
+msgstr "Запускати на _старті"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
+msgid "Run in t_erminal"
+msgstr "Запускати у т_ерміналі"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
+msgid "System"
+msgstr "Система"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
 msgstr "Balsa"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+msgid "Banshee Music Player"
+msgstr "Музичний програвача Banshee"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Claws Mail"
 msgstr "Claws Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+msgid "Dasher"
+msgstr "Dasher"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Debian Sensible Browser"
 msgstr "Debian Sensible Browser"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
 msgid "Debian Terminal Emulator"
 msgstr "Емулятор терміналу Debian"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Encompass"
 msgstr "Encompass"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Epiphany Web Browser"
 msgstr "Веб-переглядач Epiphany"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
 msgid "Evolution Mail Reader"
 msgstr "Поштова програма Evolution"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Evolution Mail Reader 1.4"
 msgstr "Поштова програма Evolution 1.4"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Evolution Mail Reader 1.5"
 msgstr "Поштова програма Evolution 1.5"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
 msgid "Evolution Mail Reader 1.6"
 msgstr "Поштова програма Evolution 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Evolution Mail Reader 2.0"
 msgstr "Поштова програма Evolution 2.0"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Evolution Mail Reader 2.2"
 msgstr "Поштова програма Evolution 2.2"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
 msgid "Evolution Mail Reader 2.4"
 msgstr "Поштова програма Evolution 2.4"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Firebird"
 msgstr "Firebird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Firefox"
 msgstr "Firefox"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "GNOME Magnifier without Screen Reader"
+msgstr "Збільшувач GNOME без читання екрану"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "GNOME OnScreen Keyboard"
+msgstr "Екранна клавіатура GNOME"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
 msgid "GNOME Terminal"
 msgstr "Термінал GNOME"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Galeon"
 msgstr "Galeon"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "Gnopernicus"
+msgstr "Gnopernicus"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "Gnopernicus with Magnifier"
+msgstr "Gnopernicus зі збільшувачем"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Iceape"
+msgstr "Iceape"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Iceape Mail"
+msgstr "Iceape Mail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
 msgid "Icedove"
 msgstr "Icedove"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Iceweasel"
 msgstr "Iceweasel"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+msgid "KDE Magnifier without Screen Reader"
+msgstr "Збільшувач з KDE без програми читання екрану"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
 msgid "Links Text Browser"
 msgstr "Текстовий переглядач WWW Links"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Linux Screen Reader"
+msgstr "Читання з екрану для Linux"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "Linux Screen Reader with Magnifier"
+msgstr "Читання з екрану для Linux зі збільшувачем"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Lynx Text Browser"
 msgstr "Текстовий переглядач WWW Lynx"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+msgid "Muine Music Player"
+msgstr "Музичний програвач Muine"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+msgid "Orca"
+msgstr "Orca"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+msgid "Orca with Magnifier"
+msgstr "Orca зі збільшувачем"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+msgid "Rhythmbox Music Player"
+msgstr "Музичний програвач Rhythmbox"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+msgid "SeaMonkey"
+msgstr "SeaMonkey"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
+msgid "SeaMonkey Mail"
+msgstr "SeaMonkey Mail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
+msgid "Simple OnScreen Keyboard"
+msgstr "Проста екранна клавіатура"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
 msgid "Standard XTerminal"
 msgstr "Стандартний X-термінал"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
+msgid "Totem Movie Player"
+msgstr "Мультимедійний програвач Totem"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:57
 msgid "W3M Text Browser"
 msgstr "Текстовий переглядач WWW W3M"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:58
 msgid "aterm"
 msgstr "aterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
-msgid "<b>Audio Player</b>"
-msgstr "<b>Аудіопрогравач</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "<b>Image Viewer</b>"
-msgstr "<b>Переглядач зображень</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "<b>Instant Messenger</b>"
-msgstr "<b>Миттєві повідомлення</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "<b>Mail Reader</b>"
-msgstr "<b>Поштова програма</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "<b>Terminal Emulator</b>"
-msgstr "<b>Емулятор терміналу</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "<b>Text Editor</b>"
-msgstr "<b>Текстовий редактор</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
-msgid "<b>Video Player</b>"
-msgstr "<b>Відеопрогравач</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "<b>Web Browser</b>"
-msgstr "<b>Веб-переглядач</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-#, no-c-format
-msgid "All %s occurrences will be replaced with actual link"
-msgstr "Всі випадки %s будуть замінені реальним шляхом у файловій системі"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Co_mmand:"
-msgstr "_Команда:"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "E_xecute flag:"
-msgstr "Зап_ускати:"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Internet"
-msgstr "Інтернет"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Multimedia"
-msgstr "Мультимедія"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "Open link in new _tab"
-msgstr "Відкрити посилання у новій вк_ладці"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Open link in new _window"
-msgstr "Відкрити посилання у новій _вікні"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Open link with web browser _default"
-msgstr "Відкрити посилання з параметрами ве_б-переглядача"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Run in t_erminal"
-msgstr "Запускати у т_ерміналі"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "System"
-msgstr "Система"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1329,52 +1956,52 @@ msgid "Screen Resolution"
 msgstr "Параметри екрану"
 
 #: ../capplets/display/main.c:25
-msgid "normal"
-msgstr "звичайна"
+msgid "Normal"
+msgstr "Звичайний"
 
 #: ../capplets/display/main.c:26
-msgid "left"
-msgstr "обернений наліво"
+msgid "Left"
+msgstr "Обернений наліво"
 
 #: ../capplets/display/main.c:27
-msgid "inverted"
-msgstr "перегорнутий"
+msgid "Inverted"
+msgstr "Перегорнутий"
 
 #: ../capplets/display/main.c:28
-msgid "right"
-msgstr "обернений направо"
+msgid "Right"
+msgstr "Обернений направо"
 
-#: ../capplets/display/main.c:389
+#: ../capplets/display/main.c:388
 #, c-format
 msgid "%d Hz"
 msgstr "%d Гц"
 
-#: ../capplets/display/main.c:535
+#: ../capplets/display/main.c:534
 msgid "_Resolution:"
 msgstr "_Розмір:"
 
-#: ../capplets/display/main.c:554
+#: ../capplets/display/main.c:553
 msgid "Re_fresh rate:"
 msgstr "_Частота оновлення:"
 
-#: ../capplets/display/main.c:574
+#: ../capplets/display/main.c:573
 msgid "R_otation:"
 msgstr "Орі_єнтація:"
 
-#: ../capplets/display/main.c:594
+#: ../capplets/display/main.c:593
 msgid "Default Settings"
 msgstr "Типові параметри"
 
-#: ../capplets/display/main.c:596
+#: ../capplets/display/main.c:595
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Параметри екрану %d\n"
 
-#: ../capplets/display/main.c:622
+#: ../capplets/display/main.c:621
 msgid "Screen Resolution Preferences"
 msgstr "Параметри екрану"
 
-#: ../capplets/display/main.c:659
+#: ../capplets/display/main.c:658
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Зробити типовим лише для _цього (%s) комп'ютера"
@@ -1383,7 +2010,7 @@ msgstr "Зробити типовим лише для _цього (%s) комп'
 msgid "Options"
 msgstr "Параметри"
 
-#: ../capplets/display/main.c:700
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1401,30 +2028,30 @@ msgstr[2] ""
 "Перевірка нових параметрів.  Якщо ви не затвердите їх протягом %d секунд, "
 "тоді будуть відновлені попередні параметри."
 
-#: ../capplets/display/main.c:746
+#: ../capplets/display/main.c:741
 msgid "Keep Resolution"
 msgstr "Зберегти роздільну здатність"
 
-#: ../capplets/display/main.c:750
+#: ../capplets/display/main.c:745
 msgid "Do you want to keep this resolution?"
 msgstr "Бажаєте зберегти цю роздільну здатність?"
 
-#: ../capplets/display/main.c:775
+#: ../capplets/display/main.c:770
 msgid "Use _previous resolution"
 msgstr "Використовувати _попередню роздільну здатність"
 
-#: ../capplets/display/main.c:775
+#: ../capplets/display/main.c:770
 msgid "_Keep resolution"
 msgstr "З_берегти роздільну здатність"
 
-#: ../capplets/display/main.c:925
+#: ../capplets/display/main.c:920
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 "X-сервер не підтримує розширення XRandr. Негайна зміна параметрів недоступна."
 
-#: ../capplets/display/main.c:933
+#: ../capplets/display/main.c:928
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1432,188 +2059,14 @@ msgstr ""
 "Версія розширення XRandR несумісна з даною програмою. Негайна зміна "
 "параметрів недоступна."
 
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "Шрифт"
+#: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Звук"
 
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "Обрання шрифту для робочого столу"
-
-#: ../capplets/font/font-properties.glade.h:1
-msgid "<b>Font Rendering</b>"
-msgstr "<b>Режим малювання шрифтів</b>"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Hinting</b>:"
-msgstr "<b>Уточнення</b>:"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Smoothing</b>:"
-msgstr "<b>Згладжування</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>Субпіксельне згладжування</b>:"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "Best _shapes"
-msgstr "Найкраща _форма"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best co_ntrast"
-msgstr "Найкраща _контрастність"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "D_etails..."
-msgstr "_Подробиці..."
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "Des_ktop font:"
-msgstr "Шрифт _робочого столу:"
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "Параметри шрифту"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "Подробиці відтворення шрифтів"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "Пере_йти до теки шрифтів"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "Від_тінки сірого"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "Н_емає"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "_Роздільна здатність:"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "С_убпіксельне (РК-монітори)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "С_убпіксельне згладжування (РК-монітори)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "Шрифт п_рограм:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Document font:"
-msgstr "Шрифт _документу:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Fixed width font:"
-msgstr "Моно_ширинний шрифт:"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Full"
-msgstr "_Повне"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Medium"
-msgstr "_Середнє"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_Monochrome"
-msgstr "_Монохромний"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_None"
-msgstr "_Немає"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Slight"
-msgstr "Сл_абке"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "Шрифт за_головку вікна:"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "точок на дюйм"
-
-#: ../capplets/font/main.c:489
-msgid "Font may be too large"
-msgstr "Шрифт може бути надто великим"
-
-#: ../capplets/font/main.c:493
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"Розмір вибраного шрифту - %d точка, це може ускладнити ефективне "
-"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
-msgstr[1] ""
-"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
-"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
-msgstr[2] ""
-"Розмір вибраного шрифту - %d точок, це може ускладнити ефективне "
-"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
-
-#: ../capplets/font/main.c:506
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"Розмір вибраного шрифту - %d точка, це може ускладнити ефективне "
-"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
-"розміру."
-msgstr[1] ""
-"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
-"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
-"розміру."
-msgstr[2] ""
-"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
-"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
-"розміру."
-
-#: ../capplets/font/main.c:527
-msgid "Use previous font"
-msgstr "Використовувати попередній шрифт"
-
-#: ../capplets/font/main.c:529
-msgid "Use selected font"
-msgstr "Використовувати обраний шрифт"
+#: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "Робочий стіл"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -1643,29 +2096,16 @@ msgid "The type of accelerator."
 msgstr "Тип прискорювача."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:189
+#: ../capplets/keybindings/gnome-keybinding-properties.c:112
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:482
 msgid "Disabled"
 msgstr "Немає"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:551
+#: ../capplets/keybindings/gnome-keybinding-properties.c:523
 msgid "<Unknown Action>"
 msgstr "<Невідома дія>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:572
-msgid "Desktop"
-msgstr "Робочий стіл"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:573
-#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Звук"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:577
-msgid "Window Management"
-msgstr "Керування вікнами"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:692
+#: ../capplets/keybindings/gnome-keybinding-properties.c:915
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1676,7 +2116,7 @@ msgstr ""
 "клавіші для звичайного вводу стане неможливим.\n"
 "Спробуйте з такими клавішами, як Control, Alt чи Shift одночасно.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:721
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1685,24 +2125,27 @@ msgstr ""
 "Комбінація клавіш \"%s\" вже використовується для\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:753
+#: ../capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Помилка встановлення нового прискорювача у базі даних параметрів: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:803
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Помилка звільнення прискорювача у базі даних параметрів: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:918
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
 msgstr "Дія"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:942
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
 msgstr "Комбінація клавіш"
 
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
@@ -1720,144 +2163,123 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Пов'язати комбінації клавіш з командами"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:85
-msgid "Unknown"
-msgstr "Невідома"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:299
-msgid "Layout"
-msgstr "Розташування"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:305
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:249
-msgid "Default"
-msgstr "Типовий"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:77
-msgid "Models"
-msgstr "Моделі"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:109
+#: ../capplets/keyboard/gnome-keyboard-properties.c:119
 #, c-format
 msgid "There was an error launching the keyboard tool: %s"
 msgstr "Помилка при виконанні аплету клавіатури: %s"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:202
+#: ../capplets/keyboard/gnome-keyboard-properties.c:212
 msgid "_Accessibility"
 msgstr "_Спеціальні можливості"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:222
-#: ../capplets/keyboard/gnome-keyboard-properties.c:224
-#: ../capplets/sound/sound-properties-capplet.c:1010
-#: ../capplets/sound/sound-properties-capplet.c:1012
+#: ../capplets/keyboard/gnome-keyboard-properties.c:232
+#: ../capplets/keyboard/gnome-keyboard-properties.c:234
+#: ../capplets/sound/sound-properties-capplet.c:1026
+#: ../capplets/sound/sound-properties-capplet.c:1028
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Лише вжити параметри та вийти (тільки для сумісності; тепер обробляється "
 "службою)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties.c:238
 msgid "Start the page with the typing break settings showing"
 msgstr "Починати сторінку з відображення параметрів перерви в роботі"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+#: ../capplets/keyboard/gnome-keyboard-properties.c:246
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Параметри клавіатури GNOME"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Блимання курсора</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Автоповтор</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Блокувати екран для примусової перерви в роботі</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Вище</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Більше</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Менше</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Нижче</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "A_vailable layouts:"
-msgstr "_Наявні розкладки:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "All_ow postponing of breaks"
 msgstr "Дозволити _відкладання перерв"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Встановіть, якщо дозволено відкладати перерви"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Choose a Keyboard Model"
 msgstr "Виберіть модель клавіатури"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Choose a Layout"
 msgstr "Виберіть розкладку"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose..."
 msgstr "Вибрати..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "Курсор _блимає у полях вводу тексту"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Cursor blinks speed"
 msgstr "Швидкість блимання курсору"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of the break when typing is disallowed"
 msgstr "Тривалість перерви, коли робота за клавіатурою заборонена"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of work before forcing a break"
 msgstr "Тривалість роботи перед примусовою перервою"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Key presses _repeat when key is held down"
 msgstr "_Повторення клавіатури при утримуванні клавіші"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Клавіатура"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Keyboard Preferences"
 msgstr "Параметри клавіатури"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Keyboard _model:"
 msgstr "_Модель клавіатури:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Layout Options"
 msgstr "Параметри розкладки"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Layouts"
 msgstr "Розкладки"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1865,136 +2287,109 @@ msgstr ""
 "Блокувати екран через визначений проміжок часу для запобігання хворобам, "
 "пов'язаним з тривалим користуванням клавіатурою"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Microsoft Natural Keyboard"
 msgstr "Клавіатура Microsoft Natural"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Preview:"
 msgstr "Попередній перегляд"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Repeat keys speed"
 msgstr "Швидкість повтору клавіш"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "Reset To De_faults"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+msgid "Reset to De_faults"
 msgstr "Скинути на _типові значення"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "Separate _group for each window"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
+msgid "Separate _layout for each window"
 msgstr "Окрема _група для кожного вікна"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
 msgstr "Перерва у роботі"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Accessibility..."
 msgstr "_Спеціальні можливості..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
-msgid "_Add..."
-msgstr "_Додати..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr "Тривалість _перерви:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "_Затримка:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+msgid "_Layouts:"
+msgstr "_Розкладки:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Models:"
 msgstr "_Моделі:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Selected layouts:"
 msgstr "_Вибрані розкладки:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Speed:"
 msgstr "Ш_видкість:"
 
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+msgid "_Variants:"
+msgstr "Вар_іанти:"
+
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+msgid "_Vendors:"
+msgstr "Виро_бники:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "_Work interval lasts:"
 msgstr "Тривалість _роботи:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "minutes"
 msgstr "хвилин"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
+msgid "Unknown"
+msgstr "Невідома"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:303
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:243
+msgid "Default"
+msgstr "Типовий"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:297
+msgid "Layout"
+msgstr "Розташування"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
+msgid "Vendors"
+msgstr "Виробники"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
+msgid "Models"
+msgstr "Моделі"
 
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Встановити параметри клавіатури"
 
 #. set the timeout value  label with correct value of timeout
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:896
+#: ../capplets/mouse/gnome-mouse-properties.c:126
+#: ../capplets/mouse/gnome-mouse-properties.c:384
 #, c-format
 msgid "%d millisecond"
 msgid_plural "%d milliseconds"
 msgstr[0] "%d мілісекунда"
 msgstr[1] "%d мілісекунди"
 msgstr[2] "%d мілісекунд"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:515
-msgid "Unknown Pointer"
-msgstr "Невідомий вказівник"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:763
-#: ../capplets/mouse/gnome-mouse-properties.c:776
-msgid "Default Pointer"
-msgstr "Типовий вказівник"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:777
-msgid "Default Pointer - Current"
-msgstr "Типовий вказівник - Поточний"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:778
-msgid "The default pointer that ships with X"
-msgstr "Типовий вказівник, що постачається з X"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:782
-msgid "White Pointer"
-msgstr "Білий вказівник"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:783
-msgid "White Pointer - Current"
-msgstr "Білий вказівник - Поточний"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:784
-msgid "The default pointer inverted"
-msgstr "Інвертований типовий вказівник"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:788
-msgid "Large Pointer"
-msgstr "Великий вказівник>"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:789
-msgid "Large Pointer - Current"
-msgstr "Великий вказівник - Поточний"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:790
-msgid "Large version of normal pointer"
-msgstr "Збільшена версія звичайного вказівника"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:794
-msgid "Large White Pointer - Current"
-msgstr "Збільшений білий вказівник - Типовий"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:795
-msgid "Large White Pointer"
-msgstr "Збільшений білий вказівник"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:796
-msgid "Large version of white pointer"
-msgstr "Збільшена версія білого вказівника"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:982
-msgid "Pointer Theme"
-msgstr "Тема для вказівників"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
@@ -2005,94 +2400,66 @@ msgid "<b>Drag and Drop</b>"
 msgstr "<b>Перетягування</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Locate Pointer</b>"
-msgstr "<b>Пошук вказівника</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Орієнтація миші</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Speed</b>"
 msgstr "<b>Швидкість</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<i>Fast</i>"
 msgstr "<i>швидко</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<i>High</i>"
 msgstr "<i>висока</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Large</i>"
 msgstr "<i>великий</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Low</i>"
 msgstr "<i>низька</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Slow</i>"
 msgstr "<i>повільно</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Small</i>"
 msgstr "<i>малий</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "Buttons"
 msgstr "Кнопки"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Highlight the _pointer when you press Ctrl"
-msgstr "Під_свічувати вказівник при натисканні Ctrl"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Large"
-msgstr "Великий"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid "Medium"
-msgstr "Середній"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Motion"
 msgstr "Рух"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Mouse Preferences"
 msgstr "Параметри миші"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
-msgid "Pointer Size:"
-msgstr "Розмір вказівника:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "Pointers"
-msgstr "Вказівники"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "Small"
-msgstr "Малий"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "_Acceleration:"
 msgstr "П_рискорення:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "_Left-handed mouse"
 msgstr "Миша під _ліву руку"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "_Sensitivity:"
 msgstr "_Чутливість:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "_Threshold:"
 msgstr "_Поріг:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "_Timeout:"
 msgstr "За_тримка"
 
@@ -2201,48 +2568,53 @@ msgstr "Увімкнути озвучення подій менеджера ві
 msgid "Unknown Volume Control %d"
 msgstr "Невідомий регулятор гучності %d"
 
-#: ../capplets/sound/sound-properties-capplet.c:310
-#: ../capplets/sound/sound-properties-capplet.c:362
+#: ../capplets/sound/pipeline-tests.c:84
+#, c-format
+msgid "Failed to construct test pipeline for '%s'"
+msgstr "Помилка створення тестового каналу для \"%s\""
+
+#: ../capplets/sound/sound-properties-capplet.c:325
+#: ../capplets/sound/sound-properties-capplet.c:378
 msgid "Not connected"
 msgstr "Немає з'єднання"
 
-#: ../capplets/sound/sound-properties-capplet.c:646
+#: ../capplets/sound/sound-properties-capplet.c:661
 msgid "Autodetect"
 msgstr "Автовизначення"
 
-#: ../capplets/sound/sound-properties-capplet.c:651
-#: ../capplets/sound/sound-properties-capplet.c:652
+#: ../capplets/sound/sound-properties-capplet.c:666
+#: ../capplets/sound/sound-properties-capplet.c:667
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:653
+#: ../capplets/sound/sound-properties-capplet.c:668
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:654
-#: ../capplets/sound/sound-properties-capplet.c:655
+#: ../capplets/sound/sound-properties-capplet.c:669
+#: ../capplets/sound/sound-properties-capplet.c:670
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:656
-#: ../capplets/sound/sound-properties-capplet.c:657
+#: ../capplets/sound/sound-properties-capplet.c:671
+#: ../capplets/sound/sound-properties-capplet.c:672
 msgid "OSS - Open Sound System"
 msgstr "OSS - Open Sound System"
 
-#: ../capplets/sound/sound-properties-capplet.c:658
-#: ../capplets/sound/sound-properties-capplet.c:659
+#: ../capplets/sound/sound-properties-capplet.c:673
+#: ../capplets/sound/sound-properties-capplet.c:674
 msgid "PulseAudio Sound Server"
 msgstr "PulseAudio Sound Server"
 
-#: ../capplets/sound/sound-properties-capplet.c:660
+#: ../capplets/sound/sound-properties-capplet.c:675
 msgid "Test Sound"
 msgstr "Тестовий звук"
 
-#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:676
 msgid "Silence"
 msgstr "Тиша"
 
-#: ../capplets/sound/sound-properties-capplet.c:1022
+#: ../capplets/sound/sound-properties-capplet.c:1043
 msgid "- GNOME Sound Preferences"
 msgstr "- параметри звуку GNOME"
 
@@ -2346,420 +2718,27 @@ msgstr "_Відтворення звуку:"
 msgid "_Visual system beep"
 msgstr "_Візуальний системний сигнал"
 
-#: ../capplets/sound/pipeline-tests.c:84
-#, c-format
-msgid "Failed to construct test pipeline for '%s'"
-msgstr "Помилка створення тестового каналу для \"%s\""
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:442
-msgid "Would you like to remove this theme?"
-msgstr "Бажаєте видалити цю тему?"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:507
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "Тему успішно видалено. Виберіть іншу тему."
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:516
-msgid "Theme can not be deleted"
-msgstr "Тему неможливо видалити"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:689
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Жодної теми не знайдено у системі. Швидше за все, це означає, що діалог тем "
-"було неправильно встановлено чи не було встановлено пакет \"gnome-themes\"."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:153
-#, c-format
-msgid ""
-"Can not install theme. \n"
-"The %s utility is not installed."
-msgstr ""
-"Не вдається встановити тему. \n"
-"Не встановлена програма %s."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:162
-msgid ""
-"Can not install theme. \n"
-"There was a problem while extracting the theme"
-msgstr ""
-"Не вдається встановити тему. \n"
-"Програма gzip2 не встановлена."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "This theme is not in a supported format."
-msgstr "Формат цієї теми не підтримується."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
-msgid "Failed to create temporary directory"
-msgstr "Не вдається створити тимчасовий каталог"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "Тема GNOME %s коректно встановлена"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "Тема є движком. Її необхідно скомпілювати."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:410
-msgid "The file format is invalid"
-msgstr "Неправильний формат файлу"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:449
-msgid "Installation Failed"
-msgstr "Помилка встановлення"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:462
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "Тема \"%s\" була встановлена."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "Застосувати її зараз, або зберегти вашу поточну тему?"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:470
-msgid "Keep Current Theme"
-msgstr "Зберегти поточну тему"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:472
-msgid "Apply New Theme"
-msgstr "Застосувати нову тему"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
-msgid "No theme file location specified to install"
-msgstr "Не вказаний файл теми для встановлення"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:543
-msgid "The theme file location specified to install is invalid"
-msgstr "Вказаний шлях розташування файлу теми неправильний"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"Немає прав для встановлення теми у:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:589
-msgid "The file format is invalid."
-msgstr "Неправильний формат файлу."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:616
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s - це шлях, де будуть встановлюватись файли теми. Його не можна вказувати "
-"у якості розташування джерела"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "Custom theme"
-msgstr "Інша тема"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Ви можете зберегти цю тему, натиснувши кнопку \"Зберегти тему\""
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
-msgid "Specify the filename of a theme to install"
-msgstr "Вкажіть назву файлу теми для встановлення"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
-msgid "filename"
-msgstr "filename"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"У системі не знайдено типової теми.  Це може означати, що не встановлено "
-"віконний менеджер Metacity, або що gconf налаштований неправильно."
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:73
-msgid "Theme name must be present"
-msgstr "Назва теми повинна бути вказана"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:144
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "Тема вже існує. Бажаєте її замінити?"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "Обрання тем різних частин робочого столу"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "Тема"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "Встановлює пакети тем для різних елементів робочого столу"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "Встановлення теми"
-
-#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "Пакет тем GNOME"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<b>You do not have permission to change theme settings</b>"
-msgstr "<b>У вас немає прав для зміни параметрів теми</b>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "Застосувати _тло"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "Застосувати _шрифт"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Background"
-msgstr "Тло"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "C_ustomize..."
-msgstr "_Налаштувати..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Colors"
-msgstr "Кольори"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Controls"
-msgstr "Елементи керування"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Icons"
-msgstr "Значки"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Save Theme As..."
-msgstr "берегти тему як..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save _Background Image"
-msgstr "Зберегти _фонове зображення"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Select theme for the desktop"
-msgstr "Обрання теми для робочого столу"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Text"
-msgstr "Текст"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "The current controls theme does not support color schemes"
-msgstr "Поточна тема елементів керування не підтримує схеми кольорів"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "Theme Details"
-msgstr "Подробиці теми"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "Theme Preferences"
-msgstr "Параметри теми"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme does not suggest any particular font or background."
-msgstr "Ця тема не передбачає окремого шрифту або тла."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a background:"
-msgstr "Ця тема передбачає тло:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "This theme suggests a font and a background:"
-msgstr "Ця тема передбачає тло та шрифт:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "This theme suggests a font:"
-msgstr "Ця тема передбачає шрифт:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "Window Border"
-msgstr "Рамка вікна"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Description:"
-msgstr "_Опис:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input boxes:"
-msgstr "_Поля вводу:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Install Theme..."
-msgstr "В_становити тему..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "_Install..."
-msgstr "_Встановити..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Name:"
-msgstr "_Назва:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
-msgid "_Revert"
-msgstr "Пов_ернути"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
-msgid "_Save Theme..."
-msgstr "З_берегти тему..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected items:"
-msgstr "_Виділені елементи:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
-msgid "_Windows:"
-msgstr "_Вікна:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
-msgid "theme selection tree"
-msgstr "дерево вибору тем"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "Налаштовування вигляду пеналів та меню у додатках"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "Меню та пенали"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>Поведінка та зовнішній вигляд</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>Зразок</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "_Вирізати"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "Лише значки"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "Параметри пенала та меню"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "Створити файл"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "Відкрити файл"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "Зберегти файл"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "Показувати з_начки у меню"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "Текст під значками"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "Текст за значками"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "Лише текст"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "Позначки _кнопок панелі:"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "_Копіювати"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "В_ід'єднувані панелі"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "_Правка"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu shortcut keys"
-msgstr "_Редаговані прискорювачі меню"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_Файл"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "_Створити"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "_Відкрити"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "Вст_авити"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "Д_рук"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "Ви_йти"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "З_берегти"
-
-#: ../capplets/windows/gnome-window-properties.c:386
+#: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
 msgstr "Не вдається запустити програму налаштовування віконного менеджера"
 
-#: ../capplets/windows/gnome-window-properties.c:646
+#: ../capplets/windows/gnome-window-properties.c:601
 msgid "C_ontrol"
 msgstr "C_ontrol"
 
-#: ../capplets/windows/gnome-window-properties.c:651
+#: ../capplets/windows/gnome-window-properties.c:606
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:657
+#: ../capplets/windows/gnome-window-properties.c:612
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:664
+#: ../capplets/windows/gnome-window-properties.c:619
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (чи \"Емблема Windows\")"
 
-#: ../capplets/windows/gnome-window-properties.c:671
+#: ../capplets/windows/gnome-window-properties.c:626
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -2813,11 +2792,11 @@ msgstr "Вікна"
 msgid "Volume"
 msgstr "Гучність"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:465
 msgid "Slow Keys Alert"
 msgstr "Сповіщення про режим \"Повільні клавіші\""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2826,39 +2805,39 @@ msgstr ""
 "для ввімкнення режиму \"Повільні клавіші\", який впливає на роботу "
 "клавіатури."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
 msgid "Do you want to activate Slow Keys?"
 msgstr "Бажаєте ввімкнути режим \"Повільні клавіші\"?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Бажаєте вимкнути режим \"Повільні клавіші\"?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
 msgid "_Activate"
 msgstr "_Увімкнути"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
 msgid "_Deactivate"
 msgstr "_Вимкнути"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
 msgid "Do_n't activate"
 msgstr "Н_е запускати"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
 msgid "Do_n't deactivate"
 msgstr "_Не вимикати"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:480
 msgid "Sticky Keys Alert"
 msgstr "Сповіщення про режим \"Липкі клавіші\""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2866,7 +2845,7 @@ msgstr ""
 "Ви щойно утримували натиснутою клавішу Shift протягом 5 секунд. Це сигнал "
 "для ввімкнення режиму \"Липкі клавіші\", який впливає на роботу клавіатури."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2876,15 +2855,15 @@ msgstr ""
 "Shift протягом 5 секунд. Це сигнал для вимкнення режиму \"Липкі клавіші\", "
 "який впливає на роботу клавіатури."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Бажаєте ввімкнути режим \"Липкі клавіші\"?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Бажаєте вимкнути режим \"Повільні клавіші\"?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:75
+#: ../gnome-settings-daemon/gnome-settings-font.c:150
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2893,7 +2872,7 @@ msgstr ""
 "Не вдається створити каталог \"%s\".\n"
 "Це потрібно зробити для зміни теми вказівників."
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:98
+#: ../gnome-settings-daemon/gnome-settings-font.c:171
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2902,37 +2881,37 @@ msgstr ""
 "Не вдається створити каталог \"%s\".\n"
 "Це потрібно, щоб дозволити зміну курсорів."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:215
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:275
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Комбінації клавіш (%s) призначена більше ніж одна дія\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:223
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Комбінації клавіш (%s) визначено декілька разів\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:232
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:289
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Комбінації клавіш (%s) не завершена\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:263
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:316
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Комбінація клавіш (%s) неправильна\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:301
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:353
 #, c-format
 msgid "It seems that another application already has access to key '%u'."
 msgstr "Схоже, що інша програма вже має доступ до ключа '%u'."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:370
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:418
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Комбінації клавіш (%s) вже використовується\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:445
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:489
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2983,11 +2962,11 @@ msgstr ""
 "Вона має відому помилку з складними конфігураціями XKB.\n"
 "Спробуйте використовувати простішу конфігурацію або поновіть систему XFree."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:250
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:252
 msgid "Do _not show this warning again"
 msgstr "_Не показувати більше це повідомлення"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:264
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:266
 #, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard "
@@ -3004,24 +2983,32 @@ msgstr ""
 "\n"
 "Які з параметрів ви бажаєте використовувати?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:287
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:289
 msgid "Use X settings"
 msgstr "Використовувати параметри X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:289
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:291
 msgid "Keep GNOME settings"
 msgstr "Зберегти параметри GNOME"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:117
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
+msgid ""
+"Could not get default terminal. Verify that your default terminal command is "
+"set and points to a valid application."
+msgstr ""
+"Не вдається отримати типовий термінал. Перевірте, що обрана вами типова термінальна програма "
+"справді вказує типову програму."
+
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
-"Verify that this command exists."
+"Verify that this is a valid command."
 msgstr ""
 "Не вдається виконати команду: %s\n"
 "Перевірте чи команда існує."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:133
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3029,7 +3016,7 @@ msgstr ""
 "Не вдається перевести комп'ютер у стан призупинення.\n"
 "Перевірте чи правильно налаштований комп'ютер."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -3044,21 +3031,21 @@ msgstr ""
 "\n"
 "Функціональність зберігання екрана не працюватиме в цьому сеансі."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr "Більше _не показувати цього повідомлення"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:137
+#: ../gnome-settings-daemon/gnome-settings-sound.c:199
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Не вдається завантажити звуковий файл %s як фрагмент %s"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:243
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:291
 msgid "Cannot determine user's home directory"
 msgstr "Не вдається визначити домашній каталог користувача"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:212
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Ключ GConf %s встановлено в тип %s, а очікувався тип %s\n"
@@ -3127,7 +3114,41 @@ msgstr "Екран"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Екран, на якому BGApplier буде малювати"
 
-#: ../libslab/app-shell.c:741
+#. make start action
+#: ../libslab/application-tile.c:362
+#, c-format
+msgid "<b>Start %s</b>"
+msgstr "<b>Запуск %s</b>"
+
+#: ../libslab/application-tile.c:381
+msgid "Help"
+msgstr "Довідка"
+
+#: ../libslab/application-tile.c:428
+msgid "Upgrade"
+msgstr "Оновлення"
+
+#: ../libslab/application-tile.c:443
+msgid "Uninstall"
+msgstr "Видалити"
+
+#: ../libslab/application-tile.c:770 ../libslab/document-tile.c:526
+msgid "Remove from Favorites"
+msgstr "Видалити з улюбленого"
+
+#: ../libslab/application-tile.c:772 ../libslab/document-tile.c:528
+msgid "Add to Favorites"
+msgstr "Додати до улюбленого"
+
+#: ../libslab/application-tile.c:857
+msgid "Remove from Startup Programs"
+msgstr "Видалити з автозавантаження"
+
+#: ../libslab/application-tile.c:859
+msgid "Add to Startup Programs"
+msgstr "Додати до автозавантаження"
+
+#: ../libslab/app-shell.c:747
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3138,82 +3159,168 @@ msgstr ""
 "\n"
 " Жоден з елементів не відповідає вашому фільтру \"<b>%s</b>\".</span>"
 
-#: ../libslab/app-shell.c:880
+#: ../libslab/app-shell.c:897
 msgid "Other"
 msgstr "Інше"
 
-#. make start action
-#: ../libslab/application-tile.c:351
-#, c-format
-msgid "<b>Start %s</b>"
-msgstr "<b>Запуск %s</b>"
+#: ../libslab/bookmark-agent.c:1067
+msgid "New Spreadsheet"
+msgstr "Нова електронна таблиця"
 
-#: ../libslab/application-tile.c:370
-msgid "Help"
-msgstr "Довідка"
+#: ../libslab/bookmark-agent.c:1071
+msgid "New Document"
+msgstr "Новий документ"
 
-#: ../libslab/application-tile.c:429
-msgid "Upgrade"
-msgstr "Оновлення"
+#: ../libslab/bookmark-agent.c:1121
+msgid "Home"
+msgstr "Домашній каталог"
 
-#: ../libslab/application-tile.c:444
-msgid "Uninstall"
+#: ../libslab/bookmark-agent.c:1137
+msgid "File System"
+msgstr "Файлова система"
+
+#: ../libslab/bookmark-agent.c:1141
+msgid "Network Servers"
+msgstr "Мережні служби"
+
+#: ../libslab/bookmark-agent.c:1170
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Search"
+msgstr "Пошук"
+
+#. make open with default action
+#: ../libslab/directory-tile.c:168
+msgid "<b>Open</b>"
+msgstr "<b>Відкрити</b>"
+
+#. make rename action
+#: ../libslab/directory-tile.c:187 ../libslab/document-tile.c:232
+msgid "Rename..."
+msgstr "Перейменувати..."
+
+#: ../libslab/directory-tile.c:201 ../libslab/directory-tile.c:210
+#: ../libslab/document-tile.c:246 ../libslab/document-tile.c:255
+msgid "Send To..."
+msgstr "Надіслати.."
+
+#. make move to trash action
+#: ../libslab/directory-tile.c:225 ../libslab/document-tile.c:281
+msgid "Move to Trash"
+msgstr "Перемістити у смітник"
+
+#: ../libslab/directory-tile.c:235 ../libslab/directory-tile.c:448
+#: ../libslab/document-tile.c:291 ../libslab/document-tile.c:639
+msgid "Delete"
 msgstr "Видалити"
 
-#: ../libslab/application-tile.c:831
-msgid "Remove from Favorites"
-msgstr "Видалити з улюбленого"
-
-#: ../libslab/application-tile.c:833
-msgid "Add to Favorites"
-msgstr "Додати до улюбленого"
-
-#: ../libslab/application-tile.c:909
-msgid "Remove from Startup Programs"
-msgstr "Видалити з автозавантаження"
-
-#: ../libslab/application-tile.c:911
-msgid "Add to Startup Programs"
-msgstr "Додати до автозавантаження"
-
-#: ../libslab/document-tile.c:145
+#: ../libslab/document-tile.c:153
 msgid "Edited %m/%d/%Y"
 msgstr "Змінений %d/%m/%Y"
 
-#: ../libslab/document-tile.c:183
+#: ../libslab/document-tile.c:193
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Відкрити за допомогою \"%s\"</b>"
 
-#: ../libslab/document-tile.c:195
+#: ../libslab/document-tile.c:205
 msgid "Open with Default Application"
 msgstr "Відкрити у типовій програмі"
 
-#: ../libslab/document-tile.c:211
+#: ../libslab/document-tile.c:216
 msgid "Open in File Manager"
 msgstr "Відкрити у менеджері файлів"
 
-#. make rename action
-#: ../libslab/document-tile.c:227
-msgid "Rename..."
-msgstr "Перейменувати..."
+#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
+#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
+#, c-format
+msgid "Unexpected attribute '%s' for element '%s'"
+msgstr "Неочікуваний атрибут '%s' для елементу '%s'"
 
-#. make move to trash action
-#: ../libslab/document-tile.c:240
-msgid "Move to Trash"
-msgstr "Перемістити у смітник"
+#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
+#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
+#, c-format
+msgid "Attribute '%s' of element '%s' not found"
+msgstr "Атрибут '%s' елементу '%s' не існує"
 
-#: ../libslab/document-tile.c:250 ../libslab/document-tile.c:580
-msgid "Delete"
-msgstr "Видалити"
+#: ../libslab/libslab-bookmarkfile.c:1087
+#: ../libslab/libslab-bookmarkfile.c:1152
+#: ../libslab/libslab-bookmarkfile.c:1216
+#: ../libslab/libslab-bookmarkfile.c:1226
+#, c-format
+msgid "Unexpected tag '%s', tag '%s' expected"
+msgstr "Неочікуваний тег '%s', очікувався тег '%s'"
 
-#: ../libslab/document-tile.c:270 ../libslab/document-tile.c:279
-msgid "Send To..."
-msgstr "Надіслати.."
+#: ../libslab/libslab-bookmarkfile.c:1112
+#: ../libslab/libslab-bookmarkfile.c:1126
+#: ../libslab/libslab-bookmarkfile.c:1194
+#: ../libslab/libslab-bookmarkfile.c:1246
+#, c-format
+msgid "Unexpected tag '%s' inside '%s'"
+msgstr "Неочікуваний тег '%s' всередині '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:1929
+msgid "No valid bookmark file found in data dirs"
+msgstr "Не знайдено коректний файл закладок у каталозі даних"
+
+#: ../libslab/libslab-bookmarkfile.c:2130
+#, c-format
+msgid "A bookmark for URI '%s' already exists"
+msgstr "Закладка для URI '%s' вже існує"
+
+#: ../libslab/libslab-bookmarkfile.c:2176
+#: ../libslab/libslab-bookmarkfile.c:2333
+#: ../libslab/libslab-bookmarkfile.c:2418
+#: ../libslab/libslab-bookmarkfile.c:2499
+#: ../libslab/libslab-bookmarkfile.c:2584
+#: ../libslab/libslab-bookmarkfile.c:2667
+#: ../libslab/libslab-bookmarkfile.c:2745
+#: ../libslab/libslab-bookmarkfile.c:2824
+#: ../libslab/libslab-bookmarkfile.c:2866
+#: ../libslab/libslab-bookmarkfile.c:2963
+#: ../libslab/libslab-bookmarkfile.c:3089
+#: ../libslab/libslab-bookmarkfile.c:3279
+#: ../libslab/libslab-bookmarkfile.c:3355
+#: ../libslab/libslab-bookmarkfile.c:3508
+#: ../libslab/libslab-bookmarkfile.c:3573
+#: ../libslab/libslab-bookmarkfile.c:3663
+#: ../libslab/libslab-bookmarkfile.c:3790
+#, c-format
+msgid "No bookmark found for URI '%s'"
+msgstr "Не знайдено закладку для URI '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2508
+#, c-format
+msgid "No MIME type defined in the bookmark for URI '%s'"
+msgstr "Не визначено тип MIME у закладці для URI '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2593
+#, c-format
+msgid "No private flag has been defined in bookmark for URI '%s'"
+msgstr "Не визначено приватну ознаку у закладці для URI '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2972
+#, c-format
+msgid "No groups set in bookmark for URI '%s'"
+msgstr "Не встановлено групи у закладках для URI '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:3373
+#: ../libslab/libslab-bookmarkfile.c:3518
+#, c-format
+msgid "No application with name '%s' registered a bookmark for '%s'"
+msgstr "Не зареєстровано програму з назвою '%s' для закладки '%s'"
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
 msgstr "Знайти зараз"
+
+#: ../libslab/system-tile.c:128
+#, c-format
+msgid "<b>Open %s</b>"
+msgstr "<b>Відкрити за допомогою \"%s\"</b>"
+
+#: ../libslab/system-tile.c:141
+msgid "Remove from System Items"
+msgstr "Видалити з системних елементів"
 
 #: ../libsounds/sound-view.c:44
 msgid "Login"
@@ -3281,13 +3388,21 @@ msgstr "Системні звуки"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Віконний менеджер \"%s\" не зареєстрував засіб налаштовування\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "Максимізувати"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "Максимізувати"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "Згорнути"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "Немає"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -3357,90 +3472,94 @@ msgid "Log out's shortcut."
 msgstr "Комбінація клавіш для завершення роботи."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Media player"
+msgstr "Мультимедійний програвач"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+msgid "Media player key's shortcut."
+msgstr "Комбінація клавіш мультимедійного програвача."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Next track key's shortcut."
 msgstr "Комбінація клавіш переходу на наступну доріжку."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Pause"
 msgstr "Пауза"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Pause key's shortcut."
 msgstr "Комбінація клавіш для паузи."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Play (or play/pause)"
 msgstr "Програвання (або Програвання/Пауза)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Play (or play/pause) key's shortcut."
 msgstr "Комбінація для Програвання (або Програвання/Пауза)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Previous track key's shortcut."
 msgstr "Комбінація клавіш переходу на попередню доріжку."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Search"
-msgstr "Пошук"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Search's shortcut."
 msgstr "Комбінація клавіш пошуку."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Skip to next track"
 msgstr "Перехід на наступну доріжку"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Skip to previous track"
 msgstr "Перехід на попередню доріжку"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Sleep"
 msgstr "Призупинення"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Sleep's shortcut."
 msgstr "Комбінація клавіш для призупинення комп'ютера."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Stop playback key"
 msgstr "Клавіша зупинки програвання"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Stop playback key's shortcut."
 msgstr "Комбінація клавіш зупинки програвання."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume down"
 msgstr "Зменшення гучності."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume down's shortcut."
 msgstr "Комбінація клавіш зменшення гучності."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume mute"
 msgstr "Вимкнення звуку"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Volume mute's shortcut"
-msgstr "Комбінація клавіш вимкнення звуку"
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume mute's shortcut."
+msgstr "Комбінація клавіш вимикання звуку."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume step"
 msgstr "Крок гучності"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume step as percentage of volume."
 msgstr "Крок зміни гучності у відсотках."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume up"
 msgstr "Збільшення гучності"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume up's shortcut."
 msgstr "Комбінація клавіш для збільшення гучності."
 
@@ -3618,11 +3737,19 @@ msgstr "Програма нагадування про перерву."
 msgid "translator-credits"
 msgstr "Максим Дзюманенко <dziumanenko@gmail.com>"
 
-#: ../typing-break/main.c:84
+#: ../typing-break/main.c:61
+msgid "Enable debugging code"
+msgstr "Увімкнути режим налагодження"
+
+#: ../typing-break/main.c:63
+msgid "Don't check whether the notification area exists"
+msgstr "Не перевіряти чи область сповіщення існує"
+
+#: ../typing-break/main.c:89
 msgid "Typing Monitor"
 msgstr "Монітор набору"
 
-#: ../typing-break/main.c:103
+#: ../typing-break/main.c:105
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3633,47 +3760,6 @@ msgstr ""
 "Схоже, що у вашій панелі немає області сповіщення. Її можна додати, якщо "
 "натиснути правою кнопкою на панелі та вибрати \"Додати до панелі -> Утиліта -"
 "> Область сповіщення\"."
-
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr ""
-"Жебракують філософи при ґанку церкви в Гадячі; ще й шатро їхнє знаємо. "
-"0123456789"
-
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "Назва:"
-
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "Стиль:"
-
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "Тип:"
-
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "Розмір:"
-
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "Версія:"
-
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "Авторські права:"
-
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "Опис:"
-
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "використання: %s файл шрифту\n"
 
 #: ../vfs-methods/fontilus/fontilus-context-menu.c:132
 msgid "Set as Application Font"
@@ -3763,6 +3849,47 @@ msgstr "Чи створювати мініатюри шрифтам у форм�
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Чи створювати мініатюри шрифтам у форматі Type1"
 
+#: ../vfs-methods/fontilus/font-view.c:115
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr ""
+"Жебракують філософи при ґанку церкви в Гадячі; ще й шатро їхнє знаємо. "
+"0123456789"
+
+#: ../vfs-methods/fontilus/font-view.c:276
+msgid "Name:"
+msgstr "Назва:"
+
+#: ../vfs-methods/fontilus/font-view.c:279
+msgid "Style:"
+msgstr "Стиль:"
+
+#: ../vfs-methods/fontilus/font-view.c:289
+msgid "Type:"
+msgstr "Тип:"
+
+#: ../vfs-methods/fontilus/font-view.c:295
+msgid "Size:"
+msgstr "Розмір:"
+
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
+msgid "Version:"
+msgstr "Версія:"
+
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
+msgid "Copyright:"
+msgstr "Авторські права:"
+
+#: ../vfs-methods/fontilus/font-view.c:347
+msgid "Description:"
+msgstr "Опис:"
+
+#: ../vfs-methods/fontilus/font-view.c:408
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "використання: %s файл шрифту\n"
+
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
 msgid "GNOME Font Viewer"
 msgstr "Перегляд шрифтів"
@@ -3810,7 +3937,7 @@ msgstr "Вибрана тема передбачає новий шрифт. Зр
 msgid "_Apply font"
 msgstr "Застосувати _шрифт"
 
-#: ../vfs-methods/themus/theme-method.c:486
+#: ../vfs-methods/themus/theme-method.c:485
 msgid "Themes"
 msgstr "Теми"
 
@@ -3829,23 +3956,6 @@ msgstr "Тема рамки вікна"
 #: ../vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
 msgstr "Тема значків"
-
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "АБВГҐДЕЄ"
-
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[ФАЙЛ]"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "Застосувати тему"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "Встановлює типову тему"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3881,3 +3991,22 @@ msgstr "Чи створювати мініатюри для встановлен
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Чи створювати мініатюри тем"
+
+#. translators: you may want to include non-western chars here
+#: ../vfs-methods/themus/themus-theme-applier.c:58
+msgid "ABCDEFG"
+msgstr "АБВГҐДЕЄ"
+
+#: ../vfs-methods/themus/themus-theme-applier.c:84
+msgid "[FILE]"
+msgstr "[ФАЙЛ]"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+msgid "Apply theme"
+msgstr "Застосувати тему"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+msgid "Sets the default theme"
+msgstr "Встановлює типову тему"
+
+
