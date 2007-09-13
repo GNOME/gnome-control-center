@@ -9,14 +9,15 @@
 # Abdulaziz Al-Arfaj <alarfaj0@yahoo.com>, 2004.
 # Djihed Afifi <djihed@gmail.com>, 2006.
 # Khaled Hosny <khaledhosny@eglug.org>, 2006, 2007.
+# Anas Husseini <linux.anas@gmail.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-14 19:41+0100\n"
+"POT-Creation-Date: 2007-08-18 03:22+0100\n"
 "PO-Revision-Date: 2007-02-22 20:36+0200\n"
-"Last-Translator: \n"
-"Language-Team:  <en@li.org>\n"
+"Last-Translator: Anas Husseini <linux.anas@gmail.com>\n"
+"Language-Team:  Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,6 +53,46 @@ msgstr "الأزرار المعروضة في حوار التّنبيه"
 msgid "Show more _details"
 msgstr "اظهر _تفاصيل أكثر"
 
+#: ../capplets/about-me/gnome-about-me.c:635
+msgid "Select Image"
+msgstr "اختر صورة"
+
+#: ../capplets/about-me/gnome-about-me.c:637
+msgid "No Image"
+msgstr "لا صورة"
+
+#: ../capplets/about-me/gnome-about-me.c:665
+#: ../capplets/appearance/appearance-desktop.c:1059
+msgid "Images"
+msgstr "صور"
+
+#: ../capplets/about-me/gnome-about-me.c:669
+#: ../capplets/appearance/theme-installer.c:623
+msgid "All Files"
+msgstr "كل الملفّات"
+
+#: ../capplets/about-me/gnome-about-me.c:806
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"كان هناك خطأ أثناء محاولة جلب معلومات دفتر العناوين \n"
+"لا يستطيع خادم معلومات إيفوليوشن التعامل مع هذا البروتوكول"
+
+#: ../capplets/about-me/gnome-about-me.c:827
+msgid "Unable to open address book"
+msgstr "لايمكن فتح دفتر العناوين"
+
+#: ../capplets/about-me/gnome-about-me.c:839
+msgid "Unknown login ID, the user database might be corrupted"
+msgstr "هويّة ولوج غير معروفة، ربّما تلِفت قاعدة بيانات المستخمين"
+
+#: ../capplets/about-me/gnome-about-me.c:869
+#: ../capplets/about-me/gnome-about-me.c:871
+#, c-format
+msgid "About %s"
+msgstr "حوْل %s"
+
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
 #: ../capplets/about-me/gnome-about-me.glade.h:14
 msgid "About Me"
@@ -61,150 +102,6 @@ msgstr "عنّي"
 msgid "Set your personal information"
 msgstr "اضبط معلوماتك الشخصية"
 
-#: ../capplets/about-me/gnome-about-me.c:626
-msgid "Select Image"
-msgstr "اختر صورة"
-
-#: ../capplets/about-me/gnome-about-me.c:628
-msgid "No Image"
-msgstr "لا صورة"
-
-#: ../capplets/about-me/gnome-about-me.c:658
-#: ../capplets/background/gnome-wp-capplet.c:1061
-msgid "Images"
-msgstr "صور"
-
-#: ../capplets/about-me/gnome-about-me.c:662
-#: ../capplets/background/gnome-wp-capplet.c:1065
-#: ../capplets/theme-switcher/gnome-theme-installer.c:686
-msgid "All Files"
-msgstr "كل الملفّات"
-
-#: ../capplets/about-me/gnome-about-me.c:800
-msgid ""
-"There was an error while trying to get the addressbook information\n"
-"Evolution Data Server can't handle the protocol"
-msgstr ""
-"كان هناك خطأ أثناء محاولة جلب معلومات دفتر العناوين \n"
-"لا يستطيع خادم معلومات إيفوليوشن التعامل مع هذا البروتوكول"
-
-#: ../capplets/about-me/gnome-about-me.c:822
-msgid "Unable to open address book"
-msgstr "لايمكن فتح دفتر العناوين"
-
-#: ../capplets/about-me/gnome-about-me.c:834
-msgid "Unknown login ID, the user database might be corrupted"
-msgstr "هويّة ولوج غير معروفة، ربّما تلِفت قاعدة بيانات المستخمين"
-
-#: ../capplets/about-me/gnome-about-me.c:864
-#: ../capplets/about-me/gnome-about-me.c:866
-#, c-format
-msgid "About %s"
-msgstr "حوْل %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:172
-msgid "Child exited unexpectedly"
-msgstr "خرج التطبيق بشكلٍ غير متوقّع"
-
-#: ../capplets/about-me/gnome-about-me-password.c:307
-#, c-format
-msgid "Could not shutdown backend_stdin IO channel: %s"
-msgstr "لم يمكن إيقاف قناة الإدخال backend_stdin: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:320
-#, c-format
-msgid "Could not shutdown backend_stdout IO channel: %s"
-msgstr "لم يمكن إيقاف قناة الإدخال backend_stdout: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:461
-msgid "Authenticated!"
-msgstr "موثّق!"
-
-#. This is a re-auth, and it failed.
-#. * The password must have been changed in the meantime!
-#. * Ask the user to re-authenticate
-#.
-#. Update status message and auth state
-#. Authentication failure
-#: ../capplets/about-me/gnome-about-me-password.c:478
-#: ../capplets/about-me/gnome-about-me-password.c:551
-msgid ""
-"Your password has been changed since you initially authenticated! Please re-"
-"authenticate."
-msgstr "غُيِّرَت كلمة السر بعد التّوثيق الأخير! رجاء أعِد التّوثيق."
-
-#: ../capplets/about-me/gnome-about-me-password.c:480
-msgid "That password was incorrect."
-msgstr "كلمة السر هذه خطأ."
-
-#: ../capplets/about-me/gnome-about-me-password.c:526
-msgid "Your password has been changed."
-msgstr "غُيِّرَت كلمة السر."
-
-#. What does this indicate?
-#. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:536
-#, c-format
-msgid "System error: %s."
-msgstr "خطأ في النظام: %s."
-
-#: ../capplets/about-me/gnome-about-me-password.c:538
-msgid "The password is too short."
-msgstr "كلمة السر صغيرة جدا."
-
-#: ../capplets/about-me/gnome-about-me-password.c:540
-#: ../capplets/about-me/gnome-about-me-password.c:542
-msgid "The password is too simple."
-msgstr "كلمة السر بسيطة جدا."
-
-#: ../capplets/about-me/gnome-about-me-password.c:544
-msgid "The old and new passwords are too similar."
-msgstr "كلمتا السر القديمة و الجديدة متشابهتان جدا."
-
-#: ../capplets/about-me/gnome-about-me-password.c:546
-msgid "The new password must contain numeric or special character(s)."
-msgstr "يجب أن تحتوي كلمة السر الجديدة على محارف خاصة أو أرقام."
-
-#: ../capplets/about-me/gnome-about-me-password.c:548
-msgid "The old and new passwords are the same."
-msgstr "كلمتا السر القديمة و الجديدة متطابقتان."
-
-#: ../capplets/about-me/gnome-about-me-password.c:799
-#, c-format
-msgid "Unable to launch %s: %s"
-msgstr "لايمكن تشغيل %s: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:802
-msgid "Unable to launch backend"
-msgstr "لا يمكن تشغيل النهاية الخلفية"
-
-#: ../capplets/about-me/gnome-about-me-password.c:803
-msgid "A system error has occurred"
-msgstr "حصل خطأ في النظام"
-
-#. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:823
-msgid "Checking password..."
-msgstr "التحقق من كلمة السر..."
-
-#: ../capplets/about-me/gnome-about-me-password.c:909
-msgid "Click <b>Change password</b> to change your password."
-msgstr "انقر <b>غيّر كلمة السر</b> لتغيّر كلمة سرّك."
-
-#: ../capplets/about-me/gnome-about-me-password.c:912
-msgid "Please type your password in the <b>New password</b> field."
-msgstr "من فضلك اكتب كلمة سرِّك في حقل <b>كلمة سر جديدة</b>."
-
-#: ../capplets/about-me/gnome-about-me-password.c:915
-#: ../capplets/about-me/gnome-about-me.glade.h:34
-msgid ""
-"Please type your password again in the <b>Retype new password</b> field."
-msgstr "من فضلك اكتب كلمة سرِّك مرّة أخرى في حقل <b>أعِد كتابة كلمة السر</b>."
-
-#: ../capplets/about-me/gnome-about-me-password.c:918
-msgid "The two passwords are not equal."
-msgstr "كلمتا السر غير متطابقتين."
-
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
 msgid " "
@@ -212,9 +109,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/appearance/data/appearance.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
 
@@ -338,11 +235,21 @@ msgstr "_صندوق البريد:"
 msgid "Personal Info"
 msgstr "معلومات شخصية"
 
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me-password.c:905
+msgid ""
+"Please type your password again in the <b>Retype new password</b> field."
+msgstr "من فضلك اكتب كلمة سرِّك مرّة أخرى في حقل <b>أعِد كتابة كلمة السر</b>."
+
 #: ../capplets/about-me/gnome-about-me.glade.h:35
+msgid "Select your photo"
+msgstr "اختر صورتك"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:36
 msgid "State/Pro_vince:"
 msgstr "ال_ولاية/المحافظة:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:37
 msgid ""
 "To change your password, enter your current password in the field below and "
 "click <b>Authenticate</b>.\n"
@@ -353,109 +260,202 @@ msgstr ""
 "بعد التوثيق، ادخل كلمة السر الجديدة، اعد كتابتها للتّحقّق و انقر <b>غيِّر كلمة "
 "السر</b>."
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "User name:"
 msgstr "إسم المستخدم: "
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Web _log:"
 msgstr "الم_دوّنة:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Wor_k:"
 msgstr "ال_عمل:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Work _fax:"
 msgstr "_فاكس العمل:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "Zip/_Postal code:"
 msgstr "الرمز البريدي:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:44
 msgid "_Address:"
 msgstr "ال_عنوان:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Authenticate"
 msgstr "_وثِّق"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Department:"
 msgstr "_المَصْلَحَة:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home page:"
 msgstr "الصفحة الرئيسيّة:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Home:"
 msgstr "ال_منزل:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Manager:"
 msgstr "الم_دير:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_Mobile:"
 msgstr "ال_جوّال:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_New password:"
 msgstr "ك_لمة السر الجديدة:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Profession:"
 msgstr "المه_نة:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_Retype new password:"
 msgstr "أعِد كتابة كلمة السر الجديدة:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:55
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_State/Province:"
 msgstr "ال_ولاية/المحافظة:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:56
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Title:"
 msgstr "ال_عنوان:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:57
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Work:"
 msgstr "ال_عمل:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:58
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Yahoo:"
 msgstr "_ياهو:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:59
+#: ../capplets/about-me/gnome-about-me.glade.h:60
 msgid "_Zip/Postal code:"
 msgstr "الرمز البريدي:"
 
+#: ../capplets/about-me/gnome-about-me-password.c:162
+msgid "Child exited unexpectedly"
+msgstr "خرج التطبيق بشكلٍ غير متوقّع"
+
+#: ../capplets/about-me/gnome-about-me-password.c:297
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "لم يمكن إيقاف قناة الإدخال backend_stdin: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:310
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "لم يمكن إيقاف قناة الإدخال backend_stdout: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:451
+msgid "Authenticated!"
+msgstr "موثّق!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:468
+#: ../capplets/about-me/gnome-about-me-password.c:541
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr "غُيِّرَت كلمة السر بعد التّوثيق الأخير! رجاء أعِد التّوثيق."
+
+#: ../capplets/about-me/gnome-about-me-password.c:470
+msgid "That password was incorrect."
+msgstr "كلمة السر هذه خطأ."
+
+#: ../capplets/about-me/gnome-about-me-password.c:516
+msgid "Your password has been changed."
+msgstr "غُيِّرَت كلمة السر."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:526
+#, c-format
+msgid "System error: %s."
+msgstr "خطأ في النظام: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:528
+msgid "The password is too short."
+msgstr "كلمة السر صغيرة جدا."
+
+#: ../capplets/about-me/gnome-about-me-password.c:530
+#: ../capplets/about-me/gnome-about-me-password.c:532
+msgid "The password is too simple."
+msgstr "كلمة السر بسيطة جدا."
+
+#: ../capplets/about-me/gnome-about-me-password.c:534
+msgid "The old and new passwords are too similar."
+msgstr "كلمتا السر القديمة و الجديدة متشابهتان جدا."
+
+#: ../capplets/about-me/gnome-about-me-password.c:536
+msgid "The new password must contain numeric or special character(s)."
+msgstr "يجب أن تحتوي كلمة السر الجديدة على محارف خاصة أو أرقام."
+
+#: ../capplets/about-me/gnome-about-me-password.c:538
+msgid "The old and new passwords are the same."
+msgstr "كلمتا السر القديمة و الجديدة متطابقتان."
+
+#: ../capplets/about-me/gnome-about-me-password.c:789
+#, c-format
+msgid "Unable to launch %s: %s"
+msgstr "لايمكن تشغيل %s: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:792
+msgid "Unable to launch backend"
+msgstr "لا يمكن تشغيل النهاية الخلفية"
+
+#: ../capplets/about-me/gnome-about-me-password.c:793
+msgid "A system error has occurred"
+msgstr "حصل خطأ في النظام"
+
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:813
+msgid "Checking password..."
+msgstr "التحقق من كلمة السر..."
+
+#: ../capplets/about-me/gnome-about-me-password.c:899
+msgid "Click <b>Change password</b> to change your password."
+msgstr "انقر <b>غيّر كلمة السر</b> لتغيّر كلمة سرّك."
+
+#: ../capplets/about-me/gnome-about-me-password.c:902
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "من فضلك اكتب كلمة سرِّك في حقل <b>كلمة سر جديدة</b>."
+
+#: ../capplets/about-me/gnome-about-me-password.c:908
+msgid "The two passwords are not equal."
+msgstr "كلمتا السر غير متطابقتين."
+
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-msgid "<b>Applications</b>"
-msgstr "<b>تطبيقات</b>"
+msgid "<b>Assistive Technologies</b>"
+msgstr "<b>التقنيات المساعدة</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-msgid "<b>Support</b>"
-msgstr "<b>دعم</b>"
+msgid "<b>Preferences</b>"
+msgstr "<b>التفضيلات</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
-msgid ""
-"<small><i><b>Note:</b> Changes to this setting will not take effect until "
-"you next log in.</i></small>"
-msgstr ""
-"<small><i><b>ملاحظة:</b> لن يكون للتغييرات المقامة على هذا التعيين تأثير حتّى "
-"الولوج التالي.</i></small>"
+msgid "Accessible Lo_gin"
+msgstr "الولو_ج المتاح"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
@@ -463,75 +463,60 @@ msgid "Assistive Technology Preferences"
 msgstr "تفضيلات التكنولوجيا المعينة"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
+msgid ""
+"Changes to enable assistive technologies will not take effect until your "
+"next log in."
+msgstr ""
+"التغييرات لتفعيل التقنيات المساعدة لن تأخذ مجراها حتى تسجل دخولك في المرة القادمة."
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
 msgstr "اغلق و ا_خرج"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
-msgid "Start these assistive technologies every time you log in:"
-msgstr "ابدأ التكنولوجيات المعينة هذه كل مرة تلِجُ فيها:"
-
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
-msgid "_Enable assistive technologies"
-msgstr "_فعِّل التكنولوجيات المعينة"
+msgid "Jump to Preferred Applications dialog"
+msgstr "اقفز إلى مربع حوار التطبيقات المفضلة"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
-msgid "_Magnifier"
-msgstr "ال_مكبرة"
+msgid "Jump to the Accessible Login dialog"
+msgstr "اقفز إلى مربع حوار الولوج المتاح"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
-msgid "_On-screen keyboard"
-msgstr "_لوحة مفاتيح على الشاشة"
+msgid "Jump to the Keyboard Accessibility dialog"
+msgstr "اقفز إلى مربع حوار إتاحة لوحة المفاتيح"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-msgid "_Screenreader"
-msgstr "قاريء ال_شاشة"
+msgid "_Enable assistive technologies"
+msgstr "_فعِّل التكنولوجيات المساعدة"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+msgid "_Keyboard Accessibility"
+msgstr "إتاحة لوحة المفاتي_ح"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+msgid "_Preferred Applications"
+msgstr "التطبيقات المف_ضّلة"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "فعِّل دعم التكنولوجيات المعينة عند الولوج"
 
-#: ../capplets/accessibility/at-properties/main.c:60
-msgid ""
-"No Assistive Technology is available on your system.  The 'gok' package must "
-"be installed in order to get on-screen keyboard support, and the 'orca' "
-"package must be installed for screenreading and magnifying capabilities."
-msgstr ""
-"لا تكنولوجيا معينة متوفّرة على نظامك. يجب أن تكون حزمة 'gok' مثبّتة على حتّى "
-"تتحصّل على دعم لوحة مفاتيح الشاشة كما يجب أن تكون حزمة جنوبارنِكِسْ' مثبّتة كذلك "
-"لقدرات قراءة الشاشة و تكبيرها."
-
-#: ../capplets/accessibility/at-properties/main.c:62
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'gok' package must be installed in order to get on-screen keyboard support."
-msgstr ""
-"لم تثبّت على نظامك جميع التكنولوجيّات المعينة المتوفّرة. يجب تثبيت حزمة 'gok' "
-"للحصول على دعم لوحة مفاتيح الشاشة."
-
-#: ../capplets/accessibility/at-properties/main.c:64
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'orca' package must be installed for screenreading and magnifying "
-"capabilities."
-msgstr ""
-"لم تثبّت على نظامك جميع التكنولوجيّات المعينة المتوفّرة. يجب تثبيت حزمة 'orca'."
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:250
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "حصل خطأ اثناء تشغيل حوار تفضيلات الفأرة: %s"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:338
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:346
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:407
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "لا يمكن استيراد اعدادات AccessX من الملف '%s'"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:444
 msgid "Import Feature Settings File"
 msgstr "استورد ملف اعدادات الميزة"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:440
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:448
 msgid "_Import"
 msgstr "إ_ستورد"
 
@@ -695,7 +680,7 @@ msgid "_Only accept keys held for:"
 msgstr "_لا تقبل إلا المفاتيح المضغوطة لمدة:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Type to test settings:"
 msgstr "ا_كتب لاختبار الاعدادات:"
 
@@ -716,7 +701,7 @@ msgid "characters/second"
 msgstr "محارف/ثانية"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "milliseconds"
 msgstr "ملي ثانية"
 
@@ -729,126 +714,641 @@ msgstr "بكسل/ثانية"
 msgid "seconds"
 msgstr "ثوان"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "غيِّر اعدادات خلفيّة سطح مكتبك"
+#: ../capplets/appearance/appearance-desktop.c:1038
+msgid "Add Wallpaper"
+msgstr "أضِف خلفية للشاشة"
 
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "خلفية سطح المكتب"
+#: ../capplets/appearance/appearance-desktop.c:1063
+msgid "All files"
+msgstr "كل الملفّات"
 
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>_صورة سطح المكتب</b>"
+#: ../capplets/appearance/appearance-font.c:493
+msgid "Font may be too large"
+msgstr "قد يكون الخط كبيراً جدا"
 
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>ألوان _سطح المكتب</b>"
+#: ../capplets/appearance/appearance-font.c:497
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"الخط المنتقى حجمه نقطة واحدة و قد يعرقل فعاليّة استخدام الحاسوب. من المستحسن "
+"أن تختار حجماً أقلّ من %d."
+msgstr[1] ""
+"الخط المنتقى حجمه نقطتان و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
+"تختار حجماً أقلّ من %d."
+msgstr[2] ""
+"الخط المنتقى حجمه %d نقاط و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
+"تختار حجماً أقلّ من %d."
+msgstr[3] ""
+"الخط المنتقى حجمه %d نقطة و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
+"تختار حجماً أقلّ من %d."
 
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "تفضيلات خلفية سطح المكتب"
+#: ../capplets/appearance/appearance-font.c:510
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"الخط المنتقى حجمه نقطة واحدة و قد يعرقل فعالية استخدام الحاسوب. من المستحسن "
+"أن تختار خطّاً بحجمٍ أصغر."
+msgstr[1] ""
+"الخط المنتقى حجمه نقطتان و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
+"تختار خطّاً بحجمٍ أصغر."
+msgstr[2] ""
+"الخط المنتقى حجمه %d نقاط و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
+"تختار خطّاً بحجمٍ أصغر."
+msgstr[3] ""
+"الخط المنتقى حجمه %d نقطة و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
+"تختار خطّاً بحجمٍ أصغر."
 
-#: ../capplets/background/gnome-background-properties.glade.h:4
+#: ../capplets/appearance/appearance-font.c:532
+msgid "Use previous font"
+msgstr "استخدم الخط السابق"
+
+#: ../capplets/appearance/appearance-font.c:534
+msgid "Use selected font"
+msgstr "استخدم الخط المُنتقى"
+
+#: ../capplets/appearance/appearance-main.c:108
+msgid "Specify the filename of a theme to install"
+msgstr "حدد اسم ملف السِمة لتثبيتها"
+
+#: ../capplets/appearance/appearance-main.c:109
+msgid "filename"
+msgstr "اسم الملف"
+
+#: ../capplets/appearance/appearance-main.c:115
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr "حدّد اسم الصفحة التي تريد إظهارها (سمة|خلفية|خطوط|واجهة)"
+
+#: ../capplets/appearance/appearance-main.c:116
+msgid "page"
+msgstr "صفحة"
+
+#: ../capplets/appearance/appearance-main.c:123
+msgid "[WALLPAPER...]"
+msgstr "[خلفية...]"
+
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:817
+#: ../capplets/common/gnome-theme-info.c:1050
+#: ../capplets/common/gnome-theme-info.c:1805
+msgid "Default Pointer"
+msgstr "المؤشر الإفتراضي"
+
+#: ../capplets/appearance/appearance-themes.c:505
+msgid "Apply Background"
+msgstr "استخدم ال_خلفيّة"
+
+#: ../capplets/appearance/appearance-themes.c:509
+msgid "Apply Font"
+msgstr "استخدم الخ_ط"
+
+#: ../capplets/appearance/appearance-themes.c:534
+msgid "The current theme suggests a background and a font."
+msgstr "السمة الحالية تقترح خلفية وخطاً."
+
+#: ../capplets/appearance/appearance-themes.c:539
+msgid "The current theme suggests a background."
+msgstr "السمة الحالية تقترح خلفية."
+
+#: ../capplets/appearance/appearance-themes.c:544
+msgid "The current theme suggests a font."
+msgstr "السمة الحالية تقترح خطاً."
+
+#: ../capplets/appearance/appearance-themes.c:821
+#: ../capplets/default-applications/gnome-da-capplet.c:1080
+#: ../capplets/sound/sound-properties-capplet.c:327
+msgid "Custom"
+msgstr "مخصص"
+
+#: ../capplets/appearance/data/appearance.glade.h:2
+msgid "<b>C_olors</b>"
+msgstr "<b>الألوا_ن</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:3
+msgid "<b>Hinting</b>"
+msgstr "<b>التلميحات</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:4
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>القوائم و أشرطة الأدوات</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:5
+msgid "<b>Preview</b>"
+msgstr "<b>معاينة</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:6
+msgid "<b>Rendering</b>"
+msgstr "<b>تصيير</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:7
+msgid "<b>Smoothing</b>"
+msgstr "<b>تنعيم</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:8
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>ترتيب النقاط التحت بكسلية</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:9
+msgid "<b>_Wallpaper</b>"
+msgstr "<b>خلفي_ة الشاشة</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:10
+msgid "Appearance Preferences"
+msgstr "تفضيلات المظهر"
+
+#: ../capplets/appearance/data/appearance.glade.h:11
+msgid "Background"
+msgstr "خلفية"
+
+#: ../capplets/appearance/data/appearance.glade.h:12
+msgid "Best _shapes"
+msgstr "أفضل أ_شكال"
+
+#: ../capplets/appearance/data/appearance.glade.h:13
+msgid "Best co_ntrast"
+msgstr "أفضل ت_باين"
+
+#: ../capplets/appearance/data/appearance.glade.h:14
+msgid "C_ustomize..."
+msgstr "_خصِّص..."
+
+#: ../capplets/appearance/data/appearance.glade.h:15
+msgid "C_ut"
+msgstr "_قص"
+
+#: ../capplets/appearance/data/appearance.glade.h:16
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+"وسطي\n"
+"ملء الشاشة\n"
+"ممدود\n"
+"مُكبّر\n"
+"مُبلـّط"
+
+#: ../capplets/appearance/data/appearance.glade.h:21
+msgid "Changing your cursor theme takes effect the next time you log in."
+msgstr "تغيير سمة مؤشرك سيأخذ مجراه عند ولوجك القادم."
+
+#: ../capplets/appearance/data/appearance.glade.h:22
+msgid "Colors"
+msgstr "ألوان"
+
+#: ../capplets/appearance/data/appearance.glade.h:23
+msgid "Controls"
+msgstr "متحكّمات"
+
+#: ../capplets/appearance/data/appearance.glade.h:24
+msgid "Customize Theme"
+msgstr "خصّص سمة"
+
+#: ../capplets/appearance/data/appearance.glade.h:25
+msgid "D_etails..."
+msgstr "_تفاصيل..."
+
+#: ../capplets/appearance/data/appearance.glade.h:26
+msgid "Des_ktop font:"
+msgstr "خط ال_مكتب:"
+
+#: ../capplets/appearance/data/appearance.glade.h:27
+msgid "Edit"
+msgstr "حرّر"
+
+#: ../capplets/appearance/data/appearance.glade.h:28
+msgid "Font Rendering Details"
+msgstr "تفاصيل ترجمة الخط"
+
+#: ../capplets/appearance/data/appearance.glade.h:29
+msgid "Fonts"
+msgstr "الخطوط"
+
+#: ../capplets/appearance/data/appearance.glade.h:30
+msgid "Go _to Fonts Folder"
+msgstr "اذهب إلى _مجلد الخطوط"
+
+#: ../capplets/appearance/data/appearance.glade.h:31
+msgid "Gra_yscale"
+msgstr "تد_رج رمادي"
+
+#: ../capplets/appearance/data/appearance.glade.h:32
+msgid "Icons"
+msgstr "أيقونات"
+
+#: ../capplets/appearance/data/appearance.glade.h:33
+msgid "Interface"
+msgstr "واجهة"
+
+#: ../capplets/appearance/data/appearance.glade.h:34
+msgid "Large"
+msgstr "عريض"
+
+#: ../capplets/appearance/data/appearance.glade.h:35
+msgid "N_one"
+msgstr "_لا شيء"
+
+#: ../capplets/appearance/data/appearance.glade.h:36
+msgid "New File"
+msgstr "ملف جديد"
+
+#: ../capplets/appearance/data/appearance.glade.h:37
+msgid "Open File"
+msgstr "افتح ملف"
+
+#: ../capplets/appearance/data/appearance.glade.h:38
 msgid "Open a dialog to specify the color"
 msgstr "افتح حوار لتحديد اللون"
 
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "أضِف _صورة للمكتب"
+#: ../capplets/appearance/data/appearance.glade.h:39
+msgid "Pointer"
+msgstr "مؤشر"
 
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Finish"
-msgstr "ا_نهي"
+#: ../capplets/appearance/data/appearance.glade.h:40
+msgid "R_esolution:"
+msgstr "الا_ستبانة:"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
-msgid "_Remove"
-msgstr "ا_حذف"
+#: ../capplets/appearance/data/appearance.glade.h:41
+msgid "Save File"
+msgstr "احفظ ملف"
 
-#: ../capplets/background/gnome-background-properties.glade.h:8
+#: ../capplets/appearance/data/appearance.glade.h:42
+msgid "Save Theme As..."
+msgstr "ا_حفظ السِمة كـ..."
+
+#: ../capplets/appearance/data/appearance.glade.h:43
+msgid "Save _background image"
+msgstr "احفظ صورة ال_خلفية"
+
+#: ../capplets/appearance/data/appearance.glade.h:44
+msgid "Show _icons in menus"
+msgstr "اظهر ال_أيقونات في القوائم"
+
+#: ../capplets/appearance/data/appearance.glade.h:45
+msgid "Small"
+msgstr "صغير"
+
+#: ../capplets/appearance/data/appearance.glade.h:46
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"لون صلب\n"
+"تدرج أفقي\n"
+"تدرج عمودي"
+
+#: ../capplets/appearance/data/appearance.glade.h:49
+msgid "Sub_pixel (LCDs)"
+msgstr "تحت _بكسلي (LCD)"
+
+#: ../capplets/appearance/data/appearance.glade.h:50
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "تنعيم تحت _بكسلي (LCD)"
+
+#: ../capplets/appearance/data/appearance.glade.h:51
+msgid "Text"
+msgstr "نص"
+
+#: ../capplets/appearance/data/appearance.glade.h:52
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"النص أسفل العناصر\n"
+"النص بجانب العناصر\n"
+"أيقونات فقط\n"
+"نص فقط"
+
+#: ../capplets/appearance/data/appearance.glade.h:56
+msgid "The current controls theme does not support color schemes."
+msgstr "لا تدعم سِمة المتحكّمات الحالية مخططات الألوان"
+
+#: ../capplets/appearance/data/appearance.glade.h:57
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "سِمة"
+
+#: ../capplets/appearance/data/appearance.glade.h:58
+msgid "Toolbar _button labels:"
+msgstr "عناوين أ_زرار شريط الأدوات"
+
+#: ../capplets/appearance/data/appearance.glade.h:59
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/data/appearance.glade.h:60
+msgid "Window Border"
+msgstr "حدود النافذة"
+
+#: ../capplets/appearance/data/appearance.glade.h:61
+msgid "_Add..."
+msgstr "أ_ضف..."
+
+#: ../capplets/appearance/data/appearance.glade.h:62
+msgid "_Application font:"
+msgstr "خط الت_طبيق:"
+
+#: ../capplets/appearance/data/appearance.glade.h:63
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/data/appearance.glade.h:64
+msgid "_Copy"
+msgstr "ا_نسخ"
+
+#: ../capplets/appearance/data/appearance.glade.h:65
+msgid "_Description:"
+msgstr "ال_وصف:"
+
+#: ../capplets/appearance/data/appearance.glade.h:66
+msgid "_Document font:"
+msgstr "خط ال_مستند:"
+
+#: ../capplets/appearance/data/appearance.glade.h:67
+msgid "_Editable menu shortcut keys"
+msgstr "اختصارات قائمة _قابلة للتغيير"
+
+#: ../capplets/appearance/data/appearance.glade.h:68
+msgid "_File"
+msgstr "_ملف"
+
+#: ../capplets/appearance/data/appearance.glade.h:69
+msgid "_Fixed width font:"
+msgstr "خط _ثابت العرض:"
+
+#: ../capplets/appearance/data/appearance.glade.h:70
+msgid "_Full"
+msgstr "_كامل"
+
+#: ../capplets/appearance/data/appearance.glade.h:71
+msgid "_Input boxes:"
+msgstr "_صناديق الدخْل:"
+
+#: ../capplets/appearance/data/appearance.glade.h:72
+msgid "_Install..."
+msgstr "_ثبِّت..."
+
+#: ../capplets/appearance/data/appearance.glade.h:73
+msgid "_Medium"
+msgstr "_متوسط"
+
+#: ../capplets/appearance/data/appearance.glade.h:74
+msgid "_Monochrome"
+msgstr "أ_حادي اللون"
+
+#: ../capplets/appearance/data/appearance.glade.h:75
+msgid "_Name:"
+msgstr "الإ_سم:"
+
+#: ../capplets/appearance/data/appearance.glade.h:76
+msgid "_New"
+msgstr "_جديد"
+
+#: ../capplets/appearance/data/appearance.glade.h:77
+msgid "_None"
+msgstr "_لا شيء"
+
+#: ../capplets/appearance/data/appearance.glade.h:78
+msgid "_Open"
+msgstr "ا_فتح"
+
+#: ../capplets/appearance/data/appearance.glade.h:79
+msgid "_Paste"
+msgstr "ا_لصق"
+
+#: ../capplets/appearance/data/appearance.glade.h:80
+msgid "_Print"
+msgstr "ا_طبع"
+
+#: ../capplets/appearance/data/appearance.glade.h:81
+msgid "_Quit"
+msgstr "أ_نهِ"
+
+#: ../capplets/appearance/data/appearance.glade.h:82
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/data/appearance.glade.h:83
+msgid "_Reset to Defaults"
+msgstr "أعد التعيين للافترا_ضيات"
+
+#: ../capplets/appearance/data/appearance.glade.h:84
+msgid "_Save"
+msgstr "ا_حفظ"
+
+#: ../capplets/appearance/data/appearance.glade.h:85
+msgid "_Selected items:"
+msgstr "العناصر الم_نتقاة:"
+
+#: ../capplets/appearance/data/appearance.glade.h:86
+msgid "_Size:"
+msgstr "الم_قاس:"
+
+#: ../capplets/appearance/data/appearance.glade.h:87
+msgid "_Slight"
+msgstr "_خفيف"
+
+#: ../capplets/appearance/data/appearance.glade.h:88
 msgid "_Style:"
 msgstr "الأ_سلوب:"
 
-#: ../capplets/background/gnome-wp-capplet.c:41
-msgid "[FILE...]"
-msgstr "[FILE...]"
+#: ../capplets/appearance/data/appearance.glade.h:89
+msgid "_Tooltips:"
+msgstr "تلميحات الأ_دوات:"
 
-#: ../capplets/background/gnome-wp-capplet.c:81
-#: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "حدث خطأ عند عرض المساعدة: %s"
+#: ../capplets/appearance/data/appearance.glade.h:90
+msgid "_VRGB"
+msgstr "_VRGB"
 
-#: ../capplets/background/gnome-wp-capplet.c:955
-msgid "Centered"
-msgstr "موسّط"
+#: ../capplets/appearance/data/appearance.glade.h:91
+msgid "_Window title font:"
+msgstr "خط عنوان ال_نافذة:"
 
-#: ../capplets/background/gnome-wp-capplet.c:959
-msgid "Fill Screen"
-msgstr "املأ الشاشة"
+#: ../capplets/appearance/data/appearance.glade.h:92
+msgid "_Windows:"
+msgstr "ال_نوافذ:"
 
-#: ../capplets/background/gnome-wp-capplet.c:963
-msgid "Scaled"
-msgstr "محجّم"
+#: ../capplets/appearance/data/appearance.glade.h:93
+msgid "dots per inch"
+msgstr "نقاط بكل بوصة"
 
-#: ../capplets/background/gnome-wp-capplet.c:967
-msgid "Zoom"
-msgstr "تكبير"
+#: ../capplets/appearance/data/appearance.glade.h:94
+msgid "gtk-delete"
+msgstr "gtk-delete"
 
-#: ../capplets/background/gnome-wp-capplet.c:971
-msgid "Tiled"
-msgstr "مرصّف"
+#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "المظهر"
 
-#: ../capplets/background/gnome-wp-capplet.c:992
-msgid "Solid Color"
-msgstr "لون صلب"
+#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:2
+msgid "Customize the look of the desktop"
+msgstr "خصّص مظهر سطح المكتب"
 
-#: ../capplets/background/gnome-wp-capplet.c:996
-msgid "Horizontal Gradient"
-msgstr "تدرّج أفقي"
+#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "ثبِّت حزم السِمات لأجزاء سطح المكتب المختلفة"
 
-#: ../capplets/background/gnome-wp-capplet.c:1000
-msgid "Vertical Gradient"
-msgstr "تدرّج عمودي"
+#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "مُثبِّت السِمة"
 
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1044
-msgid "Add Wallpaper"
-msgstr "أضِف صورة للمكتب"
+#: ../capplets/appearance/data/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "حزمة سِمات جنوم"
 
-#: ../capplets/background/gnome-wp-capplet.c:1128
-msgid "- Desktop Background Preferences"
-msgstr "- تفضيلات خلفية سطح المكتب"
-
-#: ../capplets/background/gnome-wp-info.c:45
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "لا صور على المكتب"
 
-#.
-#. Translators: This message is used to render the type and size of the
-#. background images in gnome-background-properites. The first "%s" will
-#. be replaced by the image type, and the two "%d %s"s will be replaced
-#. with the images' dimensions. For example, in US English, this may be
-#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
-#.
-#. Do not translate the "background size|" type. Remove it from the
-#. translation.
-#.
-#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:364
 #, c-format
-msgid "background size|%s, %d %s x %d %s"
-msgstr "%s، %d %s x %d %s"
+msgid ""
+"<b>%s</b>\n"
+"%s, %d %s by %d %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s, %d %s by %d %s\n"
+"المجلد: %s"
 
-#: ../capplets/background/gnome-wp-item.c:374
-#: ../capplets/background/gnome-wp-item.c:376
+#: ../capplets/appearance/gnome-wp-item.c:370
+#: ../capplets/appearance/gnome-wp-item.c:372
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "بكسل"
 msgstr[1] "بكسل"
 msgstr[2] "بكسلات"
 msgstr[3] "بكسل"
+
+#: ../capplets/appearance/theme-installer.c:149
+#, c-format
+msgid ""
+"Cannot install theme.\n"
+"The %s utility is not installed."
+msgstr ""
+"عاجز عن تثبيت السِمة. \n"
+"أداة %s غير مثبتة."
+
+#: ../capplets/appearance/theme-installer.c:197
+msgid ""
+"Cannot install theme.\n"
+"There was a problem while extracting the theme."
+msgstr ""
+"عاجز عن تثبيت السِمة. \n"
+"حدثت مشكلة أثناء استخلاص السِمة"
+
+#: ../capplets/appearance/theme-installer.c:237
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr "سِمة جنوم %s مثبتة بشكل صحيح"
+
+#: ../capplets/appearance/theme-installer.c:249
+msgid "The theme is an engine. You need to compile it."
+msgstr "السِمة عبارة عن محرّك، تحتاج لتصريفها."
+
+#: ../capplets/appearance/theme-installer.c:258
+msgid "The file format is invalid"
+msgstr "تنسيق الملف غير صحيح."
+
+#: ../capplets/appearance/theme-installer.c:309
+msgid "Installation Failed"
+msgstr "فشل التثبيت"
+
+#: ../capplets/appearance/theme-installer.c:330
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr "ثُبِّتت السِّمة \"%s\"."
+
+#: ../capplets/appearance/theme-installer.c:336
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "أترغب بتفعيلها الآن أم الإبقاء على السِّمة الحالية؟"
+
+#: ../capplets/appearance/theme-installer.c:338
+msgid "Keep Current Theme"
+msgstr "ابقِ السِمة الحالية"
+
+#: ../capplets/appearance/theme-installer.c:340
+msgid "Apply New Theme"
+msgstr "فعِّل السِمة الجديدة"
+
+#: ../capplets/appearance/theme-installer.c:413
+msgid "This theme is not in a supported format."
+msgstr "هذا السِمة ليست بتنسيق مدعوم."
+
+#: ../capplets/appearance/theme-installer.c:438
+msgid "Failed to create temporary directory"
+msgstr "فشل إنشاء دليل مؤقت"
+
+#: ../capplets/appearance/theme-installer.c:497
+msgid "No theme file location specified to install"
+msgstr "لم يحدّد موقع ملف السِمة لتثبيتها"
+
+#: ../capplets/appearance/theme-installer.c:517
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"تّصريحات غير كافية لتثبيت السِمة في:\n"
+"%s"
+
+#: ../capplets/appearance/theme-installer.c:539
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
+"%s هو المسار الذي ستثبّت فيه ملفات السِمة، لذا لا يمكن إنتقاءه كموقع المصدر"
+
+#: ../capplets/appearance/theme-installer.c:558
+msgid "The file format is invalid."
+msgstr "تنسيق الملف غير صحيح."
+
+#: ../capplets/appearance/theme-installer.c:613
+msgid "Select Theme"
+msgstr "اختر سمة"
+
+#: ../capplets/appearance/theme-installer.c:616
+msgid "Theme Packages"
+msgstr "حزمات السمة"
+
+#: ../capplets/appearance/theme-save.c:91
+msgid "Theme name must be present"
+msgstr "يجب أن يكون اسم السِمة موجودا"
+
+#: ../capplets/appearance/theme-save.c:161
+msgid "The theme already exists. Would you like to replace it?"
+msgstr "هذه السِمة موجودة أصلاً. أتريد استبدالها؟"
+
+#: ../capplets/appearance/theme-save.c:162
+msgid "_Overwrite"
+msgstr "ك_تابة فوقية"
+
+#: ../capplets/appearance/theme-util.c:43
+msgid "Would you like to delete this theme?"
+msgstr "أتريد حذف هذه السِمة؟"
+
+#: ../capplets/appearance/theme-util.c:90
+msgid "Theme cannot be deleted"
+msgstr "لا يمكن حذف السِمة"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -873,10 +1373,16 @@ msgid "Just apply settings and quit"
 msgstr "فقط طبِّق الإعدادات ثم انهي"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:226
-#: ../capplets/sound/sound-properties-capplet.c:1015
+#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+#: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "إسترجع و خزن الإعدادات التقليديّة"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "حدث خطأ عند عرض المساعدة: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
@@ -1013,7 +1519,7 @@ msgstr "الاتصال المعاكس المفرغ لمحرر الخاصيات �
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "الاتصال المعاكس الذي يتم تفعيله عند تحرير بيانات جسم محرّر الخاصيات"
 
-#: ../capplets/common/gconf-property-editor.c:1466
+#: ../capplets/common/gconf-property-editor.c:1468
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1025,7 +1531,7 @@ msgstr ""
 "\n"
 "رجاء تأكد من وجوده وأعد المحاولة مرّة اخرى، أو اختر صورةَ خلفية مغايرة."
 
-#: ../capplets/common/gconf-property-editor.c:1474
+#: ../capplets/common/gconf-property-editor.c:1476
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1038,16 +1544,44 @@ msgstr ""
 "\n"
 "رجاء اختر صورة أخرى."
 
-#: ../capplets/common/gconf-property-editor.c:1593
+#: ../capplets/common/gconf-property-editor.c:1595
 msgid "Please select an image."
 msgstr "رجاء اختر صورة."
 
-#: ../capplets/common/gconf-property-editor.c:1598
+#: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "انت_قي"
 
+#: ../capplets/common/gnome-theme-info.c:1806
+msgid "Default Pointer - Current"
+msgstr "المؤشر الإفتراضي - الحالي"
+
+#: ../capplets/common/gnome-theme-info.c:1810
+msgid "White Pointer"
+msgstr "مؤشر أبيض"
+
+#: ../capplets/common/gnome-theme-info.c:1811
+msgid "White Pointer - Current"
+msgstr "مؤشر أبيض - الحالي"
+
+#: ../capplets/common/gnome-theme-info.c:1815
+msgid "Large Pointer"
+msgstr "مؤشر كبير"
+
+#: ../capplets/common/gnome-theme-info.c:1816
+msgid "Large Pointer - Current"
+msgstr "مؤشر كبير - الحالي"
+
+#: ../capplets/common/gnome-theme-info.c:1820
+msgid "Large White Pointer - Current"
+msgstr "مؤشر أبيض كبير - الحالي"
+
+#: ../capplets/common/gnome-theme-info.c:1821
+msgid "Large White Pointer"
+msgstr "مؤشر أبيض كبير"
+
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Preferred Applications"
 msgstr "التطبيقات المفضّلة"
 
@@ -1055,203 +1589,37 @@ msgstr "التطبيقات المفضّلة"
 msgid "Select your default applications"
 msgstr "اختر تطبيقاتك الإفتراضية"
 
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
+msgid "Autostart the preferred AT"
+msgstr "تشغيل تلقائي لـ AT المفضل"
+
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
+msgid "Visual"
+msgstr "المرئي"
+
 #: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:107
-#: ../capplets/default-applications/gnome-da-capplet.c:152
-#: ../capplets/default-applications/gnome-da-capplet.c:198
-#: ../capplets/default-applications/gnome-da-capplet.c:255
-#: ../capplets/default-applications/gnome-da-capplet.c:306
-#: ../capplets/default-applications/gnome-da-capplet.c:357
-#: ../capplets/default-applications/gnome-da-capplet.c:692
-#: ../capplets/default-applications/gnome-da-capplet.c:714
+#: ../capplets/default-applications/gnome-da-capplet.c:112
+#: ../capplets/default-applications/gnome-da-capplet.c:133
+#: ../capplets/default-applications/gnome-da-capplet.c:177
+#: ../capplets/default-applications/gnome-da-capplet.c:222
+#: ../capplets/default-applications/gnome-da-capplet.c:279
+#: ../capplets/default-applications/gnome-da-capplet.c:330
+#: ../capplets/default-applications/gnome-da-capplet.c:381
+#: ../capplets/default-applications/gnome-da-capplet.c:434
+#: ../capplets/default-applications/gnome-da-capplet.c:484
+#: ../capplets/default-applications/gnome-da-capplet.c:877
+#: ../capplets/default-applications/gnome-da-capplet.c:899
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "خطأ أثناء حفظ الإعدادات: %s."
 
-#: ../capplets/default-applications/gnome-da-capplet.c:854
-#: ../capplets/sound/sound-properties-capplet.c:312
-msgid "Custom"
-msgstr "مخصص"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:874
+#: ../capplets/default-applications/gnome-da-capplet.c:1100
 msgid "Could not load the main interface"
 msgstr "لم يمكن تحميل الواجهة الرئيسيّة"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:876
+#: ../capplets/default-applications/gnome-da-capplet.c:1102
 msgid "Please make sure that the applet is properly installed"
 msgstr "رجاء تأكّد من أن البريمج مثبت بدقة"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
-msgid "Balsa"
-msgstr "Balsa"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
-msgid "Banshee Music Player"
-msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
-msgid "Claws Mail"
-msgstr "Claws Mail"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
-msgid "Debian Sensible Browser"
-msgstr "متصفّح وِب ديبيان الحساس"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
-msgid "Debian Terminal Emulator"
-msgstr "محاكي طرفية ديبيان"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
-msgid "ETerm"
-msgstr "ETerm"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
-msgid "Encompass"
-msgstr "Encompass"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
-msgid "Epiphany Web Browser"
-msgstr "متصفّح الويب إيبِفَني"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
-msgid "Evolution Mail Reader"
-msgstr "قارئ البريد ايفوليوشن"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
-msgid "Evolution Mail Reader 1.4"
-msgstr "قارئ البريد ايفوليوشن 1.4"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
-msgid "Evolution Mail Reader 1.5"
-msgstr "قارئ البريد ايفوليوشن 1.5"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
-msgid "Evolution Mail Reader 1.6"
-msgstr "قارئ البريد ايفوليوشن 1.6"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
-msgid "Evolution Mail Reader 2.0"
-msgstr "قارئ البريد ايفوليوشن 2.0"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
-msgid "Evolution Mail Reader 2.2"
-msgstr "قارئ البريد ايفوليوشن 2.2"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
-msgid "Evolution Mail Reader 2.4"
-msgstr "قارئ البريد ايفوليوشن 2.4"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
-msgid "Firebird"
-msgstr "فايربرد"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
-msgid "Firefox"
-msgstr "فايرفوكس"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
-msgid "GNOME Terminal"
-msgstr "طرفية جنوم"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
-msgid "Galeon"
-msgstr "جاليون"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
-msgid "Icedove"
-msgstr "Icedove"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
-msgid "Iceweasel"
-msgstr "Iceweasel"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
-msgid "KMail"
-msgstr "KMail"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
-msgid "Konqueror"
-msgstr "كنكيورر"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
-msgid "Links Text Browser"
-msgstr "متصفح Links النصي"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
-msgid "Lynx Text Browser"
-msgstr "متصفح Lynx النصي"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
-msgid "Mozilla"
-msgstr "موزيلا "
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
-msgid "Mozilla 1.6"
-msgstr "موزيلا 1.6"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
-msgid "Mozilla Mail"
-msgstr "بريد موزيلا"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
-msgid "Mozilla Thunderbird"
-msgstr "موزيلا ثاندربيرد"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
-msgid "Muine Music Player"
-msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
-msgid "Opera"
-msgstr "أوبرا"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
-msgid "Rhythmbox Music Player"
-msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
-msgid "Standard XTerminal"
-msgstr "طرفيّة X القياسيّة"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
-msgid "Sylpheed"
-msgstr "Sylpheed"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
-msgid "Thunderbird"
-msgstr "ثاندربيرد"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
-msgid "Totem Movie Player"
-msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
-msgid "W3M Text Browser"
-msgstr "متصفح W3M النصي"
-
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
-msgid "aterm"
-msgstr "aterm"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "<b>Image Viewer</b>"
@@ -1266,66 +1634,313 @@ msgid "<b>Mail Reader</b>"
 msgstr "<b>قارئ البريد </b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-#, fuzzy
-msgid "<b>Multimedia Player</b>"
-msgstr "<b>عازف الصوت</b>"
+msgid "<b>Mobility</b>"
+msgstr "<b>الحركيّة</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
+msgid "<b>Multimedia Player</b>"
+msgstr "<b>مشغل الوسائط المتعددة</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "<b>Terminal Emulator</b>"
 msgstr "<b>محاكي الطرفية</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "<b>Text Editor</b>"
 msgstr "<b>محرّر نصوص</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "<b>Video Player</b>"
 msgstr "<b>مشغل الأفلام</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "<b>Visual</b>"
+msgstr "<b>المرئي</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "<b>Web Browser</b>"
 msgstr "<b>متصفّح وِب</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+msgid "Accessibility"
+msgstr "الإتاحة"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
 #, no-c-format
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "سيتم تبديل كل مصادفات %s بالرابط الحقيقي"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Co_mmand:"
 msgstr "أ_مر:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "E_xecute flag:"
 msgstr "شا_رة التنفيذ:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Internet"
 msgstr "إنترنت"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Multimedia"
 msgstr "وسائط متعدّدة"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Open link in new _tab"
 msgstr "افتح الرابط في _لسان جديد"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Open link in new _window"
 msgstr "افتح الرابط في نافذة _جديدة"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Open link with web browser _default"
 msgstr "افتح الرابط بمتصفح الوِب الإ_فتراضي"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "Run at st_art"
+msgstr "تشغي_ل عند البدء"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Run in t_erminal"
 msgstr "شغِّل في _طرفية"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "System"
 msgstr "نظام"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
+msgid "Balsa"
+msgstr "Balsa"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+msgid "Banshee Music Player"
+msgstr "مشغل موسيقى بانشي"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+msgid "Claws Mail"
+msgstr "بريد كلـُوْز"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+msgid "Dasher"
+msgstr "داشر"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+msgid "Debian Sensible Browser"
+msgstr "متصفّح وِب دبيان الحساس"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+msgid "Debian Terminal Emulator"
+msgstr "محاكي طرفية دبيان"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+msgid "ETerm"
+msgstr "ETerm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+msgid "Encompass"
+msgstr "Encompass"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+msgid "Epiphany Web Browser"
+msgstr "متصفّح الويب إيبِفَني"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+msgid "Evolution Mail Reader"
+msgstr "قارئ البريد ايفوليوشن"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+msgid "Evolution Mail Reader 1.4"
+msgstr "قارئ البريد ايفوليوشن 1.4"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+msgid "Evolution Mail Reader 1.5"
+msgstr "قارئ البريد ايفوليوشن 1.5"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+msgid "Evolution Mail Reader 1.6"
+msgstr "قارئ البريد ايفوليوشن 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+msgid "Evolution Mail Reader 2.0"
+msgstr "قارئ البريد ايفوليوشن 2.0"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+msgid "Evolution Mail Reader 2.2"
+msgstr "قارئ البريد ايفوليوشن 2.2"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+msgid "Evolution Mail Reader 2.4"
+msgstr "قارئ البريد ايفوليوشن 2.4"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+msgid "Firebird"
+msgstr "الطائر الناري"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+msgid "Firefox"
+msgstr "الثعلب الناري"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "GNOME Magnifier without Screen Reader"
+msgstr "مكبّر جنوم بدون قارئ الشاشة"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "GNOME OnScreen Keyboard"
+msgstr "_لوحة مفاتيح جنوم على الشاشة"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+msgid "GNOME Terminal"
+msgstr "طرفية جنوم"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+msgid "Galeon"
+msgstr "جاليون"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "Gnopernicus"
+msgstr "جنوبرنيكوس"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "Gnopernicus with Magnifier"
+msgstr "جنوبرنيكوس مع المكبّر"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Iceape"
+msgstr "قرد الثلج"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Iceape Mail"
+msgstr "بريد قرد الثلج"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+msgid "Icedove"
+msgstr "يمامة الثلج"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+msgid "Iceweasel"
+msgstr "Iceweasel"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+msgid "KDE Magnifier without Screen Reader"
+msgstr "مكبّر كدي بدون قارئ الشاشة"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+msgid "KMail"
+msgstr "بريد كي"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Konqueror"
+msgstr "كنكيورر"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Links Text Browser"
+msgstr "متصفح Links النصي"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Linux Screen Reader"
+msgstr "قارئ شاشة لينوكس"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "Linux Screen Reader with Magnifier"
+msgstr "قارئ شاشة لينوكس مع المكبّر"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+msgid "Lynx Text Browser"
+msgstr "متصفح Lynx النصي"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+msgid "Mozilla"
+msgstr "موزيلا "
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+msgid "Mozilla 1.6"
+msgstr "موزيلا 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+msgid "Mozilla Mail"
+msgstr "بريد موزيلا"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+msgid "Mozilla Thunderbird"
+msgstr "موزيلا ثاندربيرد"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+msgid "Muine Music Player"
+msgstr "مشغل موسيقى موين"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+msgid "Mutt"
+msgstr "Mutt"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+msgid "NXterm"
+msgstr "NXterm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+msgid "Netscape Communicator"
+msgstr "Netscape Communicator"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+msgid "Opera"
+msgstr "أوبرا"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+msgid "Orca"
+msgstr "أوركا"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+msgid "Orca with Magnifier"
+msgstr "أوركا مع المكبّر"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
+msgid "RXVT"
+msgstr "RXVT"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+msgid "Rhythmbox Music Player"
+msgstr "مشغل موسيقى صندوق الإيقاع"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+msgid "SeaMonkey"
+msgstr "قرد البحر"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
+msgid "SeaMonkey Mail"
+msgstr "بريد قرد البحر"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
+msgid "Simple OnScreen Keyboard"
+msgstr "لوحة المفاتيح البسيطة على الشاشة"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
+msgid "Standard XTerminal"
+msgstr "طرفيّة X القياسيّة"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
+msgid "Sylpheed"
+msgstr "Sylpheed"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
+msgid "Sylpheed-Claws"
+msgstr "Sylpheed-Claws"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
+msgid "Thunderbird"
+msgstr "طائر البرق"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
+msgid "Totem Movie Player"
+msgstr "مشغل أفلام توتيم"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:57
+msgid "W3M Text Browser"
+msgstr "متصفح W3M النصي"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:58
+msgid "aterm"
+msgstr "aterm"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1336,65 +1951,61 @@ msgid "Screen Resolution"
 msgstr "استبانة الشاشة"
 
 #: ../capplets/display/main.c:25
-#, fuzzy
 msgid "Normal"
-msgstr "طبيعي"
+msgstr "عادي"
 
 #: ../capplets/display/main.c:26
-#, fuzzy
 msgid "Left"
 msgstr "يسار"
 
 #: ../capplets/display/main.c:27
-#, fuzzy
 msgid "Inverted"
 msgstr "معكوس"
 
 #: ../capplets/display/main.c:28
-#, fuzzy
 msgid "Right"
 msgstr "يمين"
 
-#: ../capplets/display/main.c:385
+#: ../capplets/display/main.c:388
 #, c-format
 msgid "%d Hz"
 msgstr "%d هرتز"
 
-#: ../capplets/display/main.c:531
+#: ../capplets/display/main.c:534
 msgid "_Resolution:"
-msgstr "الإ_ستبانة:"
+msgstr "الا_ستبانة:"
 
-#: ../capplets/display/main.c:550
+#: ../capplets/display/main.c:553
 msgid "Re_fresh rate:"
 msgstr "تردد الت_حديث:"
 
-#: ../capplets/display/main.c:570
+#: ../capplets/display/main.c:573
 msgid "R_otation:"
 msgstr "ال_دوران:"
 
-#: ../capplets/display/main.c:590
+#: ../capplets/display/main.c:593
 msgid "Default Settings"
 msgstr "الإعدادات الافتراضية"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:595
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "اعدادات %d للشاشة\n"
 
-#: ../capplets/display/main.c:618
+#: ../capplets/display/main.c:621
 msgid "Screen Resolution Preferences"
 msgstr "تفضيلات إستبانة الشاشة"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:658
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "ا_جعله الإفتراضي لهذا الحاسوب (%s) فقط"
 
-#: ../capplets/display/main.c:674
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "الخيارات"
 
-#: ../capplets/display/main.c:695
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1447,191 +2058,14 @@ msgstr ""
 "إصدارة إمتداد XRandR غير متوافقة مع هذا البرنامج. إمكانيّة تغيير إستبانة حجم "
 "الشاشة  في وقت العمل غير متوفّرة."
 
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "الخط"
+#: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "صوت"
 
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "اختر خطوط لسطح المكتب"
-
-#: ../capplets/font/font-properties.glade.h:1
-msgid "<b>Font Rendering</b>"
-msgstr "<b>ترجمة الخط</b>"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Hinting</b>:"
-msgstr "<b>تركيز</b>:"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Smoothing</b>:"
-msgstr "<b>تنعيم</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>ترتيب النقاط التحت بكسلية</b>:"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "Best _shapes"
-msgstr "أفضل أ_شكال"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best co_ntrast"
-msgstr "أفضل ت_باين"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "D_etails..."
-msgstr "_تفاصيل..."
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "Des_ktop font:"
-msgstr "خط ال_مكتب:"
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "تفضيلات الخط"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "تفاصيل ترجمة الخط"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "اذهب ل_مجلد الخط"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "تد_رج رمادي"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "_لا شيء"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "الإستبانة:"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "تحت _بكسلي (LCD)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "تنعيم تحت _بكسلي (LCD)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "خط الت_طبيق:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Document font:"
-msgstr "خط ال_مستند:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Fixed width font:"
-msgstr "خط _ثابت العرض:"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Full"
-msgstr "_كامل"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Medium"
-msgstr "_متوسط"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_Monochrome"
-msgstr "أ_حادي اللون"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_None"
-msgstr "_لا شيء"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Slight"
-msgstr "_خفيف"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "خط عنوان ال_نافذة:"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "نقاط بكل بوصة"
-
-#: ../capplets/font/main.c:502
-msgid "Font may be too large"
-msgstr "قد يكون الخط كبيراً جدا"
-
-#: ../capplets/font/main.c:506
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"الخط المنتقى حجمه نقطة واحدة و قد يعرقل فعاليّة استخدام الحاسوب. من المستحسن "
-"أن تختار حجماً أقلّ من %d."
-msgstr[1] ""
-"الخط المنتقى حجمه نقطتان و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
-"تختار حجماً أقلّ من %d."
-msgstr[2] ""
-"الخط المنتقى حجمه %d نقاط و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
-"تختار حجماً أقلّ من %d."
-msgstr[3] ""
-"الخط المنتقى حجمه %d نقطة و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
-"تختار حجماً أقلّ من %d."
-
-#: ../capplets/font/main.c:519
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"الخط المنتقى حجمه نقطة واحدة و قد يعرقل فعالية استخدام الحاسوب. من المستحسن "
-"أن تختار خطّاً بحجمٍ أصغر."
-msgstr[1] ""
-"الخط المنتقى حجمه نقطتان و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
-"تختار خطّاً بحجمٍ أصغر."
-msgstr[2] ""
-"الخط المنتقى حجمه %d نقاط و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
-"تختار خطّاً بحجمٍ أصغر."
-msgstr[3] ""
-"الخط المنتقى حجمه %d نقطة و قد يعرقل فعالية استخدام الحاسوب. من المستحسن أن "
-"تختار خطّاً بحجمٍ أصغر."
-
-#: ../capplets/font/main.c:540
-msgid "Use previous font"
-msgstr "استخدم الخط السابق"
-
-#: ../capplets/font/main.c:542
-msgid "Use selected font"
-msgstr "استخدم الخط المُنتقى"
+#: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "سطح المكتب"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -1670,7 +2104,7 @@ msgstr "معطّل"
 msgid "<Unknown Action>"
 msgstr "<إجراء مجهول>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:883
+#: ../capplets/keybindings/gnome-keybinding-properties.c:915
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1680,7 +2114,7 @@ msgstr ""
 "الإختصار \"%s\" لا يمكن استعماله لإن الكتابة بهذا المفتاح ستصبح مستحيلة. \n"
 "الرجاء المحاولة مجدّدا بمفتاح Control، Alt أو Shift في نفس الوقت.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:912
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1689,21 +2123,21 @@ msgstr ""
 "الإختصار \"%s\" مستخدم لـ:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "حدث خطأ أثناء ضبط مفتاح تعجيل جديد في قاعدة بيانات الإعدادات: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:994
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "خطأ عند إلغاء ضبط مفتاح الإختصار في قاعدة بيانات الإعدادات: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1109
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
 msgstr "اجراء"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1133
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
 msgstr "اختصار"
 
@@ -1727,55 +2161,29 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "اربط مفاتيح اختصار بأوامر"
 
-#: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
-#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "صوت"
-
-#: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "سطح المكتب"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
-msgid "Unknown"
-msgstr "مجهول"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:230
-msgid "Layout"
-msgstr "التصميم"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:236
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:243
-msgid "Default"
-msgstr "الافتراضي"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:73
-msgid "Models"
-msgstr "الطّرُز"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:109
+#: ../capplets/keyboard/gnome-keyboard-properties.c:119
 #, c-format
 msgid "There was an error launching the keyboard tool: %s"
 msgstr "حصل خطأ اثناء تشغيل أداة لوحة المفاتيح: %s"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:202
+#: ../capplets/keyboard/gnome-keyboard-properties.c:212
 msgid "_Accessibility"
 msgstr "الإ_تاحة"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:222
-#: ../capplets/keyboard/gnome-keyboard-properties.c:224
-#: ../capplets/sound/sound-properties-capplet.c:1011
-#: ../capplets/sound/sound-properties-capplet.c:1013
+#: ../capplets/keyboard/gnome-keyboard-properties.c:232
+#: ../capplets/keyboard/gnome-keyboard-properties.c:234
+#: ../capplets/sound/sound-properties-capplet.c:1026
+#: ../capplets/sound/sound-properties-capplet.c:1028
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "فقط طبّق الاعدادات واخرج (للتوافق فقط؛ يتم التعامل معها عن طريق جنّي حاليا)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties.c:238
 msgid "Start the page with the typing break settings showing"
 msgstr "ابدأ الصفحة باعدادات إستراحة الكتابة مرئية"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+#: ../capplets/keyboard/gnome-keyboard-properties.c:246
 msgid "- GNOME Keyboard Preferences"
 msgstr "- تفضيلات لوحة مفاتيح جنوم"
 
@@ -1888,54 +2296,52 @@ msgid "Repeat keys speed"
 msgstr "سرعة المفاتيح المعادة"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "Reset To De_faults"
-msgstr "اعادة التعيين للافترا_ضيات"
+msgid "Reset to De_faults"
+msgstr "أعد التعيين للافترا_ضيات"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "Separate _group for each window"
-msgstr "_مجموعة مستقلة لكل نافذة"
+msgid "Separate _layout for each window"
+msgstr "_تخطيط مستقل لكل نافذة"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
-msgstr "إستراحة عن الكتابة"
+msgstr "استراحة عن الكتابة"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Accessibility..."
 msgstr "الإ_تاحة..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "_Add..."
-msgstr "أ_ضف..."
+msgid "_Break interval lasts:"
+msgstr "مدة الا_ستراحة:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
-msgid "_Break interval lasts:"
-msgstr "مدة الإ_ستراحة:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "ال_تأخير:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
-#, fuzzy
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Layouts:"
-msgstr "التصاميم"
+msgstr "الت_خطيطات"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Models:"
 msgstr "ال_طرُز:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Selected layouts:"
 msgstr "التصاميم الم_نتقاة:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
 msgstr "ال_سرعة:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
-#, fuzzy
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Variants:"
-msgstr "ا_طبع"
+msgstr "المت_غيرات:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+msgid "_Vendors:"
+msgstr "البا_عة:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "_Work interval lasts:"
@@ -1945,13 +2351,35 @@ msgstr "مدة ال_عمل:"
 msgid "minutes"
 msgstr "دقائق"
 
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
+msgid "Unknown"
+msgstr "مجهول"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:303
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:243
+msgid "Default"
+msgstr "الافتراضي"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:297
+msgid "Layout"
+msgstr "التصميم"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
+msgid "Vendors"
+msgstr "الباعة"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
+msgid "Models"
+msgstr "الطّرُز"
+
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "اضبط خصائص لوحة مفاتيحك"
 
 #. set the timeout value  label with correct value of timeout
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:896
+#: ../capplets/mouse/gnome-mouse-properties.c:126
+#: ../capplets/mouse/gnome-mouse-properties.c:384
 #, c-format
 msgid "%d millisecond"
 msgid_plural "%d milliseconds"
@@ -1959,63 +2387,6 @@ msgstr[0] "%d ملي ثانية"
 msgstr[1] "%d ملي ثانية"
 msgstr[2] "%d ملي ثانية"
 msgstr[3] "%d ملي ثانية"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:515
-msgid "Unknown Pointer"
-msgstr "مؤشر مجهول"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:763
-#: ../capplets/mouse/gnome-mouse-properties.c:776
-msgid "Default Pointer"
-msgstr "المؤشر الإفتراضي"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:777
-msgid "Default Pointer - Current"
-msgstr "المؤشر الإفتراضي - الحالي"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:778
-msgid "The default pointer that ships with X"
-msgstr "المؤشر الافتراضي المشحون مع إكس"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:782
-msgid "White Pointer"
-msgstr "مؤشر أبيض"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:783
-msgid "White Pointer - Current"
-msgstr "مؤشر أبيض - الحالي"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:784
-msgid "The default pointer inverted"
-msgstr "المؤشر الإفتراضي مقلوبا"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:788
-msgid "Large Pointer"
-msgstr "مؤشر كبير"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:789
-msgid "Large Pointer - Current"
-msgstr "مؤشر كبير - الحالي"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:790
-msgid "Large version of normal pointer"
-msgstr "نسخة كبيرة للمؤشر العادي"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:794
-msgid "Large White Pointer - Current"
-msgstr "مؤشر أبيض كبير - الحالي"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:795
-msgid "Large White Pointer"
-msgstr "مؤشر أبيض كبير"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:796
-msgid "Large version of white pointer"
-msgstr "نسخة كبيرة من المؤشر الأبيض"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:983
-msgid "Pointer Theme"
-msgstr "سِمة المؤشر"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
@@ -2026,94 +2397,66 @@ msgid "<b>Drag and Drop</b>"
 msgstr "<b>السحب والإسقاط</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Locate Pointer</b>"
-msgstr "<b>موقعة المؤشر</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>اتجاه الفأرة</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Speed</b>"
 msgstr "<b>السرعة</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<i>Fast</i>"
 msgstr "<i>سريع</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<i>High</i>"
 msgstr "<i>مرتفع</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Large</i>"
 msgstr "<i>عريض</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Low</i>"
 msgstr "<i>منخفض</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Slow</i>"
 msgstr "<i>بطيئ</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Small</i>"
 msgstr "<i>صغير</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "Buttons"
 msgstr "الأزرار"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Highlight the _pointer when you press Ctrl"
-msgstr "أبرز ال_مؤشر عند ضغطك لـ Ctrl"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Large"
-msgstr "عريض"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid "Medium"
-msgstr "متوسط"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Motion"
 msgstr "الحركة"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Mouse Preferences"
 msgstr "تفضيلات الفأرة"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
-msgid "Pointer Size:"
-msgstr "مقاس المؤشر:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "Pointers"
-msgstr "مؤشرات"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "Small"
-msgstr "صغير"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "_Acceleration:"
 msgstr "ال_تسارع:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "_Left-handed mouse"
 msgstr "فأرة لليد الي_سرى"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "_Sensitivity:"
 msgstr "الح_ساسية:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "_Threshold:"
 msgstr "ال_عتبة:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "_Timeout:"
 msgstr "ا_لمهلة:"
 
@@ -2222,48 +2565,53 @@ msgstr "فعِّل الصوت واربطه بالأحداث"
 msgid "Unknown Volume Control %d"
 msgstr "تحكم شدّة مجهول %d"
 
-#: ../capplets/sound/sound-properties-capplet.c:310
-#: ../capplets/sound/sound-properties-capplet.c:363
+#: ../capplets/sound/pipeline-tests.c:84
+#, c-format
+msgid "Failed to construct test pipeline for '%s'"
+msgstr "فشل تركيب خط أنابيب اختبار '%s'"
+
+#: ../capplets/sound/sound-properties-capplet.c:325
+#: ../capplets/sound/sound-properties-capplet.c:378
 msgid "Not connected"
 msgstr "غير متّصل"
 
-#: ../capplets/sound/sound-properties-capplet.c:646
+#: ../capplets/sound/sound-properties-capplet.c:661
 msgid "Autodetect"
 msgstr "تعرف آالي"
 
-#: ../capplets/sound/sound-properties-capplet.c:651
-#: ../capplets/sound/sound-properties-capplet.c:652
+#: ../capplets/sound/sound-properties-capplet.c:666
+#: ../capplets/sound/sound-properties-capplet.c:667
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - معماريّة لينكس المتقدّمة للصوت"
 
-#: ../capplets/sound/sound-properties-capplet.c:653
+#: ../capplets/sound/sound-properties-capplet.c:668
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - خادم صوت ART"
 
-#: ../capplets/sound/sound-properties-capplet.c:654
-#: ../capplets/sound/sound-properties-capplet.c:655
+#: ../capplets/sound/sound-properties-capplet.c:669
+#: ../capplets/sound/sound-properties-capplet.c:670
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - خادم صوت انلايتنمنت"
 
-#: ../capplets/sound/sound-properties-capplet.c:656
-#: ../capplets/sound/sound-properties-capplet.c:657
+#: ../capplets/sound/sound-properties-capplet.c:671
+#: ../capplets/sound/sound-properties-capplet.c:672
 msgid "OSS - Open Sound System"
 msgstr "OSS - نظام الصوت المفتوح"
 
-#: ../capplets/sound/sound-properties-capplet.c:658
-#: ../capplets/sound/sound-properties-capplet.c:659
+#: ../capplets/sound/sound-properties-capplet.c:673
+#: ../capplets/sound/sound-properties-capplet.c:674
 msgid "PulseAudio Sound Server"
 msgstr "خادم صوت PulseAudio"
 
-#: ../capplets/sound/sound-properties-capplet.c:660
+#: ../capplets/sound/sound-properties-capplet.c:675
 msgid "Test Sound"
 msgstr "اختبر الأصوات"
 
-#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:676
 msgid "Silence"
 msgstr "صمت"
 
-#: ../capplets/sound/sound-properties-capplet.c:1028
+#: ../capplets/sound/sound-properties-capplet.c:1043
 msgid "- GNOME Sound Preferences"
 msgstr "- تفضيلات صوت جنوم"
 
@@ -2367,408 +2715,6 @@ msgstr "_عزف الصوت:"
 msgid "_Visual system beep"
 msgstr "صافرة نظام _مرئيّة"
 
-#: ../capplets/sound/pipeline-tests.c:84
-#, c-format
-msgid "Failed to construct test pipeline for '%s'"
-msgstr "فشل تركيب خط أنابيب اختبار '%s'"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:450
-msgid "Would you like to remove this theme?"
-msgstr "أتريد حذف هذه السِمة؟"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:515
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "حُذِفت السِمة بنجاح. رجاء اختر سِمة أخرى."
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:524
-msgid "Theme can not be deleted"
-msgstr "لا يمكن حذف السِمة"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:696
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"لم يُعثر سِمات بِنظامك. قد يعني ذلك أن حوار \"تفضيلات السِمة\" ثُبِّت بشكل خاطيء، "
-"أو أنّك لم تُثبيت حزمة \"سِمات جنوم\" (gnome-themes)."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:153
-#, c-format
-msgid ""
-"Can not install theme. \n"
-"The %s utility is not installed."
-msgstr ""
-"عاجز عن تثبيت السِمة. \n"
-"أداة %s غير مثبتة."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:162
-msgid ""
-"Can not install theme. \n"
-"There was a problem while extracting the theme"
-msgstr ""
-"عاجز عن تثبيت السِمة. \n"
-"حدثت مشكلة اثناء استخلاص السِمة"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "This theme is not in a supported format."
-msgstr "هذا السِمة ليست بتنسيق مدعوم."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
-msgid "Failed to create temporary directory"
-msgstr "فشل إنشاء دليل مؤقت"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "سِمة جنوم %s مثبتة بشكل صحيح"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "السِمة محرِّك. تحتاج لتجميع السِمة."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:410
-msgid "The file format is invalid"
-msgstr "تنسيق الملف غير صحيح."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:449
-msgid "Installation Failed"
-msgstr "فشل التثبيت"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:462
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "ثُبِّتت السِّمة \"%s\"."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "أترغب بتفعيلها الآن أم الإبقاء على السِّمة الحالية؟"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:470
-msgid "Keep Current Theme"
-msgstr "ابقِ السِمة الحالية"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:472
-msgid "Apply New Theme"
-msgstr "فعِّل السِمة الجديدة"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
-msgid "No theme file location specified to install"
-msgstr "لم يحدّد موقع ملف السِمة لتثبيتها"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:543
-msgid "The theme file location specified to install is invalid"
-msgstr "موقع ملف السِمة المحدّد لتثبيتها غير صحيح."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"تّصريحات غير كافية لتثبيت السِمة في:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:589
-msgid "The file format is invalid."
-msgstr "تنسيق الملف غير صحيح."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:616
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s هو المسار الذي ستثبّت فيها ملفات السِمة. فلا يمكن إنتقاءه كموقع المصدر"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:675
-#, fuzzy
-msgid "Select Theme"
-msgstr "اختر صورة"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:678
-#, fuzzy
-msgid "Theme Packages"
-msgstr "حزمة سِمات جنوم"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "Custom theme"
-msgstr "سِمة خاصة"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "يمكنك حفظ السِمة بنقر زر احفظ السِمة."
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
-msgid "Specify the filename of a theme to install"
-msgstr "حدد اسم ملف السِمة لتثبيتها"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
-msgid "filename"
-msgstr "اسم الملف"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"لم يمكن إيجاد مخطّطات السِمة اﻹفتراضيّة غلى نظامك. يعني هذا أن ميتاسِتي قد لا "
-"يكون مثبّتا عندك، أو أن gconf غير معدّ بسلامة."
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:73
-msgid "Theme name must be present"
-msgstr "يجب أن يكون اسم السِمة موجودا"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:144
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "هذه السِمة موجودة أصلاً. أتريد استبدالها؟"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "اختر سِمات لأجزاء سطح المكتب المختلفة"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "سِمة"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "ثبِّت حزم السِمات لأجزاء سطح المكتب المختلفة"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "مُثبِّت السِمة"
-
-#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "حزمة سِمات جنوم"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<b>You do not have permission to change theme settings</b>"
-msgstr "<b>لا تملك التراخيص اللازمة لتغيير إعدادت السِمة</b>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "استخدم ال_خلفيّة"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "استخدم ال_خط"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Background"
-msgstr "خلفية"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "C_ustomize..."
-msgstr "_خصِّص..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Colors"
-msgstr "ألوان"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Controls"
-msgstr "متحكّمات"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Icons"
-msgstr "أيقونات"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Save Theme As..."
-msgstr "ا_حفظ السِمة كـ..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save _Background Image"
-msgstr "احفظ صورة ال_خلفية"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Select theme for the desktop"
-msgstr "انتقي سِمة لسطح المكتب"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Text"
-msgstr "نص"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "The current controls theme does not support color schemes"
-msgstr "لا تدعم سِمة المتحكّمات الحالية مخططات الألوان"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "Theme Details"
-msgstr "تفاصيل السِمة"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "Theme Preferences"
-msgstr "تفضيلات السِمة"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme does not suggest any particular font or background."
-msgstr "لا تقترح هذه السِمة خطا أو خلفية محددة."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a background:"
-msgstr "تقترح هذه السِمة خلفية:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "This theme suggests a font and a background:"
-msgstr "تقترح هذه السِمة خطا و خلفية:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "This theme suggests a font:"
-msgstr "تقترح هذه السِمة خطا:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "Window Border"
-msgstr "حدود النافذة"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Description:"
-msgstr "ال_وصف:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input boxes:"
-msgstr "_صناديق الدخْل:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Install Theme..."
-msgstr "_ثبِّت سِمة..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "_Install..."
-msgstr "_ثبِّت..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Name:"
-msgstr "الإ_سم:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
-msgid "_Revert"
-msgstr "ا_سترجِع"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
-msgid "_Save Theme..."
-msgstr "ا_حفظ السِمة..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected items:"
-msgstr "العناصر الم_نتقاة:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
-msgid "_Windows:"
-msgstr "ال_نوافذ:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
-msgid "theme selection tree"
-msgstr "شجرة إنتقاء السِمات"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "خصِّص مظهر أشرطة الأدوات و أشرطة القوائم في التطبيقات"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "أشرطة القوائم و أشرطة الأدوات"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>السلوك و المظهر</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>معاينة</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "_قص"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "أيقونات فقط"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "تفضيلات أشرطة الأدوات و أشرطة القوائم"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "ملف جديد"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "افتح ملف"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "احفظ ملف"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "اظهر ال_أيقونات في القوائم"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "نص تحت الأيقونة"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "نص بجانب الأيقونة"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "نص فقط"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "عناوين أ_زرار شريط الأدوات"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "ا_نسخ"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "أشرطة أدوات قابلة لل_فصل"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "_حرِّر"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu shortcut keys"
-msgstr "اختصارات قائمة _قابلة للتغيير"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_ملف"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "_جديد"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "ا_فتح"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "ا_لصق"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "ا_طبع"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "ا_نهي"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "ا_حفظ"
-
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
 msgstr "لا يمكن تشغيل تطبيق تفضيلات مدير نوافذك"
@@ -2841,11 +2787,11 @@ msgstr "النوافذ"
 msgid "Volume"
 msgstr "شدة الصوت"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:465
 msgid "Slow Keys Alert"
 msgstr "تنبيه المفاتيح البطيئة"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2853,39 +2799,39 @@ msgstr ""
 "لقد ضغطت مفتاح Shift لثمان ثوان. إنّ هذا إختصار ميزة المفاتيح البطيئة المؤثّر "
 "على طريقة عمل لوحة مفاتيحك."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
 msgid "Do you want to activate Slow Keys?"
 msgstr "أتريد تفعيل المفاتيح البطيئة؟"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "أتريد تعطيل المفاتيح البطيئة؟"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
 msgid "_Activate"
 msgstr "_نَشِّط"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
 msgid "_Deactivate"
 msgstr "_عَطِّل"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
 msgid "Do_n't activate"
 msgstr "_لا تنشط"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
 msgid "Do_n't deactivate"
 msgstr "_لا تعطل"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:480
 msgid "Sticky Keys Alert"
 msgstr "تنبيه المفاتيح اللاصقة"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2893,7 +2839,7 @@ msgstr ""
 "لقد نقرت مفتاح Shift خمس مرات متتالية. هذا اختصار ميزة المفاتيح اللاصقة "
 "المؤثّر على طريقة عمل لوحة مفاتيحك."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2902,15 +2848,15 @@ msgstr ""
 "لقد ضغطت على مفتاحان في آن واحد أو نقرت مفتاح Shift خمس مرّات متتالية. يعطّل "
 "هذا ميزة المفاتيح اللاصقة المؤثّر على طريقة عمل لوحة مفاتيحك."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "Do you want to activate Sticky Keys?"
 msgstr "أتريد تفعيل المفاتيح اللاصقة؟"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "أتريد تعطيل المفاتيح اللاصقة؟"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:75
+#: ../gnome-settings-daemon/gnome-settings-font.c:150
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2919,7 +2865,7 @@ msgstr ""
 "لم يمكن إنشاء الدليل \"%s\".\n"
 "هذا مطلوب حتى يمكن تغيير سِمة مؤشر الفأرة."
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:98
+#: ../gnome-settings-daemon/gnome-settings-font.c:171
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2928,37 +2874,37 @@ msgstr ""
 "لم يمكن إنشاء الدليل \"%s\".\n"
 "هذا مطلوب حتى يمكن تغيير المؤشرات."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:215
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:275
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "اجراء ارتباط المفتاح (%s) معرّف أكثر من مرّة\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:223
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "ارتباط المفتاح (%s) معرّف أكثر من\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:232
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:289
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "ارتباط المفتاح (%s) غير مكتمل\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:263
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:316
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "ارتباط المفتاح (%s) غير صالح\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:301
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:353
 #, c-format
 msgid "It seems that another application already has access to key '%u'."
 msgstr "يبدو أن تطبيقا آخر يستعمل المفتاح '%u'."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:370
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:418
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "ارتباط المفتاح (%s) مستعمَل بالفعل\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:445
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:489
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -3032,28 +2978,30 @@ msgstr ""
 
 #: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:287
 msgid "Use X settings"
-msgstr "استخدم اعدادات X"
+msgstr "استخدم إعدادات X"
 
 #: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:289
 msgid "Keep GNOME settings"
-msgstr "ابقِ إعدادات جنوم"
+msgstr "أبقِ إعدادات جنوم"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:125
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
 msgstr ""
+"تعذر إحضار الطرفية الافتراضية. تحقق من أن أمر الطرفية الافتراضية "
+"لديك مُعدّ ويشير إلى تطبيق صالح."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
-#, fuzzy, c-format
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
+#,  c-format
 msgid ""
 "Couldn't execute command: %s\n"
 "Verify that this is a valid command."
 msgstr ""
 "لم يمكن تنفيذ الأمر: %s\n"
-"تأكّد من وجود هذا الأمر."
+"تأكّد من أن هذا الأمر صالح."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:172
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3061,7 +3009,7 @@ msgstr ""
 "لم يمكن تنويم الحاسوب.\n"
 "تأكّد من أنّ الحاسوب معدّ بسلامة."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -3076,21 +3024,21 @@ msgstr ""
 "\n"
 "لن تعمل حافظة الشاشة في هذه الجلسة."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr "لا _تظهر هذه الرسالة مرة أخرى"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:137
+#: ../gnome-settings-daemon/gnome-settings-sound.c:199
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "لم يمكن تحميل ملف الصوت %s كعيِّنة %s"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:243
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:291
 msgid "Cannot determine user's home directory"
 msgstr "لا يمكن تحديد الدليل المنزلي للمستخدم"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:226
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "مفتاح GConf وهو %s مضبوط لنوع %s بينما النوع المتوقع كان %s\n"
@@ -3158,21 +3106,6 @@ msgstr "الشاشة"
 msgid "Screen on which BGApplier is to draw"
 msgstr "الشاشة التي سيُرسم عليها BGApplier"
 
-#: ../libslab/app-shell.c:747
-#, c-format
-msgid ""
-"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-"\n"
-" Your filter \"<b>%s</b>\" does not match any items.</span>"
-msgstr ""
-"<span size=\"large\"><b> لم يُعثر على تطابق.</b> </span><span>\n"
-"\n"
-"لا يُطابق مرشِّحك \"<b>%s</b>\" أيّة عناصر.</span>"
-
-#: ../libslab/app-shell.c:897
-msgid "Other"
-msgstr "أخرى"
-
 #. make start action
 #: ../libslab/application-tile.c:362
 #, c-format
@@ -3207,6 +3140,71 @@ msgstr "احذف من برامج بدأ التشغيل"
 msgid "Add to Startup Programs"
 msgstr "اضِف لبرامج بدأ التشغيل"
 
+#: ../libslab/app-shell.c:747
+#, c-format
+msgid ""
+"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
+"\n"
+" Your filter \"<b>%s</b>\" does not match any items.</span>"
+msgstr ""
+"<span size=\"large\"><b> لم يُعثر على تطابق.</b> </span><span>\n"
+"\n"
+"لا يُطابق مرشِّحك \"<b>%s</b>\" أيّة عناصر.</span>"
+
+#: ../libslab/app-shell.c:897
+msgid "Other"
+msgstr "أخرى"
+
+#: ../libslab/bookmark-agent.c:1067
+msgid "New Spreadsheet"
+msgstr "ورقة حساب جديدة"
+
+#: ../libslab/bookmark-agent.c:1071
+msgid "New Document"
+msgstr "مستند جديد"
+
+#: ../libslab/bookmark-agent.c:1121
+msgid "Home"
+msgstr "ال_موطن:"
+
+#: ../libslab/bookmark-agent.c:1137
+msgid "File System"
+msgstr "نظام الملفات"
+
+#: ../libslab/bookmark-agent.c:1141
+msgid "Network Servers"
+msgstr "خادمات الشبكة"
+
+#: ../libslab/bookmark-agent.c:1170
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Search"
+msgstr "ابحث"
+
+#. make open with default action
+#: ../libslab/directory-tile.c:168
+msgid "<b>Open</b>"
+msgstr "<b>افتح</b>"
+
+#. make rename action
+#: ../libslab/directory-tile.c:187 ../libslab/document-tile.c:232
+msgid "Rename..."
+msgstr "أعِد تسمية..."
+
+#: ../libslab/directory-tile.c:201 ../libslab/directory-tile.c:210
+#: ../libslab/document-tile.c:246 ../libslab/document-tile.c:255
+msgid "Send To..."
+msgstr "ارسل إلى..."
+
+#. make move to trash action
+#: ../libslab/directory-tile.c:225 ../libslab/document-tile.c:281
+msgid "Move to Trash"
+msgstr "انقل للمهملات"
+
+#: ../libslab/directory-tile.c:235 ../libslab/directory-tile.c:448
+#: ../libslab/document-tile.c:291 ../libslab/document-tile.c:639
+msgid "Delete"
+msgstr "احذف"
+
 #: ../libslab/document-tile.c:153
 msgid "Edited %m/%d/%Y"
 msgstr "حُرِّر في %d/%m/%Y"
@@ -3224,35 +3222,105 @@ msgstr "افتح بالتطبيق الإفتراضي"
 msgid "Open in File Manager"
 msgstr "افتح في مدير الملفّات"
 
-#. make rename action
-#: ../libslab/document-tile.c:232
-msgid "Rename..."
-msgstr "أعِد تسمية..."
+#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
+#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
+#, c-format
+msgid "Unexpected attribute '%s' for element '%s'"
+msgstr "الخاصية '%s' غير متوقعة للعنصر '%s'"
 
-#: ../libslab/document-tile.c:246 ../libslab/document-tile.c:255
-msgid "Send To..."
-msgstr "ارسل إلى..."
+#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
+#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
+#, c-format
+msgid "Attribute '%s' of element '%s' not found"
+msgstr "الخاصية '%s' للعنصر '%s' غير موجودة"
 
-#. make move to trash action
-#: ../libslab/document-tile.c:281
-msgid "Move to Trash"
-msgstr "انقل للمهملات"
+#: ../libslab/libslab-bookmarkfile.c:1087
+#: ../libslab/libslab-bookmarkfile.c:1152
+#: ../libslab/libslab-bookmarkfile.c:1216
+#: ../libslab/libslab-bookmarkfile.c:1226
+#, c-format
+msgid "Unexpected tag '%s', tag '%s' expected"
+msgstr "الوسم '%s' غير متوقع، المتوقع كان الوسم '%s'"
 
-#: ../libslab/document-tile.c:291 ../libslab/document-tile.c:639
-msgid "Delete"
-msgstr "احذف"
+#: ../libslab/libslab-bookmarkfile.c:1112
+#: ../libslab/libslab-bookmarkfile.c:1126
+#: ../libslab/libslab-bookmarkfile.c:1194
+#: ../libslab/libslab-bookmarkfile.c:1246
+#, c-format
+msgid "Unexpected tag '%s' inside '%s'"
+msgstr "الوسم '%s' غير متوقع داخل '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:1929
+msgid "No valid bookmark file found in data dirs"
+msgstr "لا يوجد ملف علامات مرجعية صالح في مجلدات البيانات"
+
+#: ../libslab/libslab-bookmarkfile.c:2130
+#, c-format
+msgid "A bookmark for URI '%s' already exists"
+msgstr "هناك علامة مرجعية للعنوان '%s' موجودة مسبقاً"
+
+#: ../libslab/libslab-bookmarkfile.c:2176
+#: ../libslab/libslab-bookmarkfile.c:2333
+#: ../libslab/libslab-bookmarkfile.c:2418
+#: ../libslab/libslab-bookmarkfile.c:2499
+#: ../libslab/libslab-bookmarkfile.c:2584
+#: ../libslab/libslab-bookmarkfile.c:2667
+#: ../libslab/libslab-bookmarkfile.c:2745
+#: ../libslab/libslab-bookmarkfile.c:2824
+#: ../libslab/libslab-bookmarkfile.c:2866
+#: ../libslab/libslab-bookmarkfile.c:2963
+#: ../libslab/libslab-bookmarkfile.c:3089
+#: ../libslab/libslab-bookmarkfile.c:3279
+#: ../libslab/libslab-bookmarkfile.c:3355
+#: ../libslab/libslab-bookmarkfile.c:3508
+#: ../libslab/libslab-bookmarkfile.c:3573
+#: ../libslab/libslab-bookmarkfile.c:3663
+#: ../libslab/libslab-bookmarkfile.c:3790
+#, c-format
+msgid "No bookmark found for URI '%s'"
+msgstr "لا علامات مرجعية موجودة للعنوان '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2508
+#, c-format
+msgid "No MIME type defined in the bookmark for URI '%s'"
+msgstr "لا نوع MIME معرّف في العلامة المرجعية للعنوان '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2593
+#, c-format
+msgid "No private flag has been defined in bookmark for URI '%s'"
+msgstr "لا أعلام خاصة قد عُرّفت لعلامة الموقع المرجعية '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2972
+#, c-format
+msgid "No groups set in bookmark for URI '%s'"
+msgstr "لا مجموعات معينة في علامة الموقع المرجعية '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:3373
+#: ../libslab/libslab-bookmarkfile.c:3518
+#, c-format
+msgid "No application with name '%s' registered a bookmark for '%s'"
+msgstr "لا تطبيق له الاسم '%s' مسجل كعلامة مرجعية لـ '%s'"
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
 msgstr "اعثر الآن"
 
+#: ../libslab/system-tile.c:128
+#, c-format
+msgid "<b>Open %s</b>"
+msgstr "<b>افتح %s</b>"
+
+#: ../libslab/system-tile.c:141
+msgid "Remove from System Items"
+msgstr "احذف من عناصر النظام"
+
 #: ../libsounds/sound-view.c:44
 msgid "Login"
-msgstr "لِج"
+msgstr "ادخل"
 
 #: ../libsounds/sound-view.c:45
 msgid "Logout"
-msgstr "اخروج"
+msgstr "اخرج"
 
 #: ../libsounds/sound-view.c:46
 msgid "Boing"
@@ -3292,7 +3360,7 @@ msgstr "ملف الصوت لهذا الحدث غير موجود."
 
 #: ../libsounds/sound-view.c:183
 msgid "Select Sound File"
-msgstr "انتقي ملف صوت"
+msgstr "انتق ملف صوت"
 
 #: ../libsounds/sound-view.c:203
 #, c-format
@@ -3301,7 +3369,7 @@ msgstr "الملف %s ليس ملف wav سليم"
 
 #: ../libsounds/sound-view.c:264
 msgid "Select sound file..."
-msgstr "انتقي ملف صوت..."
+msgstr "انتقِ ملف صوت..."
 
 #: ../libsounds/sound-view.c:366
 msgid "System Sounds"
@@ -3312,13 +3380,21 @@ msgstr "أصوات النظام"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "لم يسجل مدير النوافذ \"%s\" أيّة أداة إعداد\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
-msgstr "كبِّر"
+msgstr "كبِّر"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "صغـّر"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
-msgstr "لُف لأعلى"
+msgstr "لُف للأعلى"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "لا شيء"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -3331,7 +3407,7 @@ msgstr "زامِن معالجا text/plain و text/*"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
 msgid "E-mail"
-msgstr "البريد إلكتروني"
+msgstr "البريد الإلكتروني"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
@@ -3343,7 +3419,7 @@ msgstr "اطرد"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
-msgstr "اختصار الطّرد."
+msgstr "اختصار الطرد."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
@@ -3371,7 +3447,7 @@ msgstr "اختصار إطلاق متصفّح الوِب."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Lock screen"
-msgstr "اقفل الشاشة"
+msgstr "أقفل الشاشة"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Lock screen's shortcut."
@@ -3387,12 +3463,11 @@ msgstr "اختصار الخروج."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Media player"
-msgstr ""
+msgstr "مشغل الوسائط"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
-#, fuzzy
 msgid "Media player key's shortcut."
-msgstr "اختصار مفتاح إيقاف العزف."
+msgstr "اختصار مفتاح مشغل الوسائط."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Next track key's shortcut."
@@ -3412,15 +3487,11 @@ msgstr "عزف (أو عزف/تمهّل)"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Play (or play/pause) key's shortcut."
-msgstr "اختصار مفتاح العزف (أو العزف/التّمهّل)."
+msgstr "اختصار مفتاح العزف (أو العزف/التمهّل)."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Previous track key's shortcut."
 msgstr "اختصار مفتاح المقطوعة السابقة."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Search"
-msgstr "ابحث"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Search's shortcut."
@@ -3460,12 +3531,11 @@ msgstr "اختصار خفض شدّة الصوت."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume mute"
-msgstr "اصمت الصوت"
+msgstr "أسكِت الصوت"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
-#, fuzzy
 msgid "Volume mute's shortcut."
-msgstr "اختصار إصمات الصوت"
+msgstr "اختصار إسكات الصوت"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume step"
@@ -3657,13 +3727,22 @@ msgstr ""
 "عرفات المديني\t<lumina@silverpen.de>\n"
 "عبد العزيز العرفج\t<alarfaj0@yahoo.com>\n"
 "جهاد عفيفي\t<djihed@gmail.com>\n"
-"خالد حسني\t<khaledhosny@eglug.org>"
+"خالد حسني\t<khaledhosny@eglug.org>\n"
+"أنس الحسيني\t<linux.anas@gmail.com>"
 
-#: ../typing-break/main.c:84
+#: ../typing-break/main.c:61
+msgid "Enable debugging code"
+msgstr "فعلّ شيفرة التنقيح"
+
+#: ../typing-break/main.c:63
+msgid "Don't check whether the notification area exists"
+msgstr "لا تتحقق إن كانت مساحة الإشعار موجودة أم لا."
+
+#: ../typing-break/main.c:89
 msgid "Typing Monitor"
 msgstr "مراقب الكتابة"
 
-#: ../typing-break/main.c:103
+#: ../typing-break/main.c:105
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3673,45 +3752,6 @@ msgstr ""
 "يستخدم مراقب الكتابة مساحة التبليغ لعرض المعلومات. يبدو أنك لا تملك مساحة "
 "تبليغ على شريطك. يمكنك إضافتها بنقر يمينيّ على شريطك و اختيار 'أضِف للشريط' ثم "
 "انتقاء 'مساحة التبليغ' ثم النقر على أضِف."
-
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "أبجد هوز حطي كلمن سعفض قرشت ثخذ ضظغ.  0123456789 ١٢٣٤٥٦٧٨٩٠"
-
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "الإسم:"
-
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "الأسلوب:"
-
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "النوع:"
-
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "المقاس:"
-
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "الإصدارة:"
-
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "حقوق النسخ:"
-
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "ال_وصف:"
-
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "طريقة الاستخدام: %s ملف الخط\n"
 
 #: ../vfs-methods/fontilus/fontilus-context-menu.c:132
 msgid "Set as Application Font"
@@ -3787,6 +3827,45 @@ msgstr "فيما إذا ستنشأ مستعرضات لخطوط TrueType"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "فيما إذا ستنشأ مستعرضات لخطوط Type1"
 
+#: ../vfs-methods/fontilus/font-view.c:115
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr "أبجد هوز حطي كلمن سعفض قرشت ثخذ ضظغ.  0123456789 ١٢٣٤٥٦٧٨٩٠"
+
+#: ../vfs-methods/fontilus/font-view.c:276
+msgid "Name:"
+msgstr "الاسم:"
+
+#: ../vfs-methods/fontilus/font-view.c:279
+msgid "Style:"
+msgstr "الأسلوب:"
+
+#: ../vfs-methods/fontilus/font-view.c:289
+msgid "Type:"
+msgstr "النوع:"
+
+#: ../vfs-methods/fontilus/font-view.c:295
+msgid "Size:"
+msgstr "المقاس:"
+
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
+msgid "Version:"
+msgstr "الإصدارة:"
+
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
+msgid "Copyright:"
+msgstr "حقوق النسخ:"
+
+#: ../vfs-methods/fontilus/font-view.c:347
+msgid "Description:"
+msgstr "ال_وصف:"
+
+#: ../vfs-methods/fontilus/font-view.c:408
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "طريقة الاستخدام: %s ملف الخط\n"
+
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
 msgid "GNOME Font Viewer"
 msgstr "عارض خطوط جنوم"
@@ -3834,7 +3913,7 @@ msgstr "تقترح السِمة التي اخترتها خطا جديدا. مع�
 msgid "_Apply font"
 msgstr "اس_تخدم الخط"
 
-#: ../vfs-methods/themus/theme-method.c:486
+#: ../vfs-methods/themus/theme-method.c:485
 msgid "Themes"
 msgstr "السِمات"
 
@@ -3854,23 +3933,6 @@ msgstr "سِمة حدود النافذة"
 msgid "Icon theme"
 msgstr "سِمة الأيقونات"
 
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "أبجد هوز ABCDEFG"
-
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[FILE]"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "استخدم السِمة"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "يحدد السِمة الإفتراضية"
-
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
 msgstr "إذا ضبط لصحيح فستنشأ مستعرضات عن الخطوط المثبّتة."
@@ -3882,7 +3944,8 @@ msgstr "إذا ضبط لصحيح فستنشأ مستعرضات عن السِما
 #: ../vfs-methods/themus/themus.schemas.in.h:3
 msgid ""
 "Set this key to the command used to create thumbnails for installed themes."
-msgstr "اضبط هذ المفتاح للأمر المستخدم لإنشاء مستعرضات عن السِمات المثبّتة."
+msgstr ""
+"اضبط هذ المفتاح للأمر المستخدم لإنشاء مستعرضات عن السِمات المثبّتة."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:4
 msgid "Set this key to the command used to create thumbnails for themes."
@@ -3903,6 +3966,218 @@ msgstr "فيما إذا يقع إنشاء مستعرضات للسِمات الم
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "فيما إذا يقع إنشاء مستعرضات للسِمات"
+
+#. translators: you may want to include non-western chars here
+#: ../vfs-methods/themus/themus-theme-applier.c:58
+msgid "ABCDEFG"
+msgstr "أبجد هوز ABCDEFG"
+
+#: ../vfs-methods/themus/themus-theme-applier.c:84
+msgid "[FILE]"
+msgstr "[FILE]"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+msgid "Apply theme"
+msgstr "استخدم السِمة"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+msgid "Sets the default theme"
+msgstr "يحدد السِمة الإفتراضية"
+
+#~ msgid "<b>Applications</b>"
+#~ msgstr "<b>تطبيقات</b>"
+
+#~ msgid "<b>Support</b>"
+#~ msgstr "<b>دعم</b>"
+
+#~ msgid "Start these assistive technologies every time you log in:"
+#~ msgstr "ابدأ التكنولوجيات المعينة هذه كل مرة تلِجُ فيها:"
+
+#~ msgid ""
+#~ "No Assistive Technology is available on your system.  The 'gok' package "
+#~ "must be installed in order to get on-screen keyboard support, and the "
+#~ "'orca' package must be installed for screenreading and magnifying "
+#~ "capabilities."
+#~ msgstr ""
+#~ "لا تكنولوجيا معينة متوفّرة على نظامك. يجب أن تكون حزمة 'gok' مثبّتة على حتّى "
+#~ "تتحصّل على دعم لوحة مفاتيح الشاشة كما يجب أن تكون حزمة جنوبارنِكِسْ' مثبّتة "
+#~ "كذلك لقدرات قراءة الشاشة و تكبيرها."
+
+#~ msgid ""
+#~ "Not all available assistive technologies are installed on your system.  "
+#~ "The 'gok' package must be installed in order to get on-screen keyboard "
+#~ "support."
+#~ msgstr ""
+#~ "لم تثبّت على نظامك جميع التكنولوجيّات المعينة المتوفّرة. يجب تثبيت حزمة "
+#~ "'gok' للحصول على دعم لوحة مفاتيح الشاشة."
+
+#~ msgid ""
+#~ "Not all available assistive technologies are installed on your system.  "
+#~ "The 'orca' package must be installed for screenreading and magnifying "
+#~ "capabilities."
+#~ msgstr ""
+#~ "لم تثبّت على نظامك جميع التكنولوجيّات المعينة المتوفّرة. يجب تثبيت حزمة "
+#~ "'orca'."
+
+#~ msgid "Change your Desktop Background settings"
+#~ msgstr "غيِّر اعدادات خلفيّة سطح مكتبك"
+
+#~ msgid "Desktop Background"
+#~ msgstr "خلفية سطح المكتب"
+
+#~ msgid "Desktop Background Preferences"
+#~ msgstr "تفضيلات خلفية سطح المكتب"
+
+#~ msgid "_Add Wallpaper"
+#~ msgstr "أضِف _صورة للمكتب"
+
+#~ msgid "_Finish"
+#~ msgstr "ا_نهي"
+
+#~ msgid "_Remove"
+#~ msgstr "ا_حذف"
+
+#~ msgid "Centered"
+#~ msgstr "موسّط"
+
+#~ msgid "Fill Screen"
+#~ msgstr "املأ الشاشة"
+
+#~ msgid "Scaled"
+#~ msgstr "محجّم"
+
+#~ msgid "Zoom"
+#~ msgstr "تكبير"
+
+#~ msgid "Tiled"
+#~ msgstr "مرصّف"
+
+#~ msgid "Solid Color"
+#~ msgstr "لون صلب"
+
+#~ msgid "Horizontal Gradient"
+#~ msgstr "تدرّج أفقي"
+
+#~ msgid "Vertical Gradient"
+#~ msgstr "تدرّج عمودي"
+
+#~ msgid "- Desktop Background Preferences"
+#~ msgstr "- تفضيلات خلفية سطح المكتب"
+
+#~ msgid "background size|%s, %d %s x %d %s"
+#~ msgstr "%s، %d %s x %d %s"
+
+#~ msgid "Select fonts for the desktop"
+#~ msgstr "اختر خطوط لسطح المكتب"
+
+#~ msgid "Font Preferences"
+#~ msgstr "تفضيلات الخط"
+
+#~ msgid "Unknown Pointer"
+#~ msgstr "مؤشر مجهول"
+
+#~ msgid "The default pointer that ships with X"
+#~ msgstr "المؤشر الافتراضي المشحون مع إكس"
+
+#~ msgid "The default pointer inverted"
+#~ msgstr "المؤشر الإفتراضي مقلوبا"
+
+#~ msgid "Large version of normal pointer"
+#~ msgstr "نسخة كبيرة للمؤشر العادي"
+
+#~ msgid "Large version of white pointer"
+#~ msgstr "نسخة كبيرة من المؤشر الأبيض"
+
+#~ msgid "Pointer Theme"
+#~ msgstr "سِمة المؤشر"
+
+#~ msgid "<b>Locate Pointer</b>"
+#~ msgstr "<b>موقعة المؤشر</b>"
+
+#~ msgid "Highlight the _pointer when you press Ctrl"
+#~ msgstr "أبرز ال_مؤشر عند ضغطك لـ Ctrl"
+
+#~ msgid "Medium"
+#~ msgstr "متوسط"
+
+#~ msgid "Pointer Size:"
+#~ msgstr "مقاس المؤشر:"
+
+#~ msgid "Theme deleted succesfully. Please select another theme."
+#~ msgstr "حُذِفت السِمة بنجاح. رجاء اختر سِمة أخرى."
+
+#~ msgid ""
+#~ "No themes could be found on your system.  This probably means that your "
+#~ "\"Theme Preferences\" dialog was improperly installed, or you haven't "
+#~ "installed the \"gnome-themes\" package."
+#~ msgstr ""
+#~ "لم يُعثر سِمات بِنظامك. قد يعني ذلك أن حوار \"تفضيلات السِمة\" ثُبِّت بشكل "
+#~ "خاطيء، أو أنّك لم تُثبيت حزمة \"سِمات جنوم\" (gnome-themes)."
+
+#~ msgid "The theme file location specified to install is invalid"
+#~ msgstr "موقع ملف السِمة المحدّد لتثبيتها غير صحيح."
+
+#~ msgid "You can save this theme by pressing the Save Theme button."
+#~ msgstr "يمكنك حفظ السِمة بنقر زر احفظ السِمة."
+
+#~ msgid ""
+#~ "The default theme schemas could not be found on your system.  This means "
+#~ "that you probably don't have metacity installed, or that your gconf is "
+#~ "configured incorrectly."
+#~ msgstr ""
+#~ "لم يمكن إيجاد مخطّطات السِمة الإفتراضيّة غلى نظامك. يعني هذا أن ميتاسِتي قد لا "
+#~ "يكون مثبّتا عندك، أو أن gconf غير معدّ بسلامة."
+
+#~ msgid "Select themes for various parts of the desktop"
+#~ msgstr "اختر سِمات لأجزاء سطح المكتب المختلفة"
+
+#~ msgid "<b>You do not have permission to change theme settings</b>"
+#~ msgstr "<b>لا تملك التراخيص اللازمة لتغيير إعدادت السِمة</b>"
+
+#~ msgid "Theme Details"
+#~ msgstr "تفاصيل السِمة"
+
+#~ msgid "This theme does not suggest any particular font or background."
+#~ msgstr "لا تقترح هذه السِمة خطا أو خلفية محددة."
+
+#~ msgid "This theme suggests a font and a background:"
+#~ msgstr "تقترح هذه السِمة خطا و خلفية:"
+
+#~ msgid "_Install Theme..."
+#~ msgstr "_ثبِّت سِمة..."
+
+#~ msgid "_Revert"
+#~ msgstr "ا_سترجِع"
+
+#~ msgid "_Save Theme..."
+#~ msgstr "ا_حفظ السِمة..."
+
+#~ msgid "theme selection tree"
+#~ msgstr "شجرة إنتقاء السِمات"
+
+#~ msgid "Customize the appearance of toolbars and menubars in applications"
+#~ msgstr "خصِّص مظهر أشرطة الأدوات و أشرطة القوائم في التطبيقات"
+
+#~ msgid "<b>Behavior and Appearance</b>"
+#~ msgstr "<b>السلوك و المظهر</b>"
+
+#~ msgid "Icons only"
+#~ msgstr "أيقونات فقط"
+
+#~ msgid "Menu and Toolbar Preferences"
+#~ msgstr "تفضيلات أشرطة الأدوات و أشرطة القوائم"
+
+#~ msgid "Text below icons"
+#~ msgstr "نص تحت الأيقونة"
+
+#~ msgid "Text beside icons"
+#~ msgstr "نص بجانب الأيقونة"
+
+#~ msgid "Text only"
+#~ msgstr "نص فقط"
+
+#~ msgid "_Detachable toolbars"
+#~ msgstr "أشرطة أدوات قابلة لل_فصل"
 
 #~ msgid "*"
 #~ msgstr "*"
