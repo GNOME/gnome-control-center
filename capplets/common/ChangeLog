@@ -1,3 +1,13 @@
+2007-09-16  Jens Granseuer  <jensgr@gmx.net>
+
+	Patch by: Darren Kenny <darren.kenny@sun.com>
+
+	* theme-thumbnail.c: (generate_meta_theme_thumbnail_async),
+	(generate_gtk_theme_thumbnail_async),
+	(generate_metacity_theme_thumbnail_async),
+	(generate_icon_theme_thumbnail_async): don't return values from void
+	functions. Fixes building with Sun's Forte compiler (bug #473967)
+
 2007-08-23  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-theme-info.c: (gnome_theme_is_writable): cast to proper type

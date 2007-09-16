@@ -1031,7 +1031,7 @@ generate_meta_theme_thumbnail_async (GnomeThemeMetaInfo *theme_info,
                                      gpointer            user_data,
                                      GDestroyNotify      destroy)
 {
-  return generate_theme_thumbnail_async (theme_info,
+  generate_theme_thumbnail_async (theme_info,
                                          theme_info->name,
                                          THUMBNAIL_TYPE_META,
                                          theme_info->gtk_theme_name,
@@ -1048,7 +1048,7 @@ generate_gtk_theme_thumbnail_async (GnomeThemeInfo *theme_info,
                                     gpointer            user_data,
                                     GDestroyNotify      destroy)
 {
-  return generate_theme_thumbnail_async (theme_info,
+  generate_theme_thumbnail_async (theme_info,
                                          theme_info->name,
                                          THUMBNAIL_TYPE_GTK,
                                          theme_info->name,
@@ -1065,7 +1065,7 @@ generate_metacity_theme_thumbnail_async (GnomeThemeInfo *theme_info,
                                          gpointer            user_data,
                                          GDestroyNotify      destroy)
 {
-  return generate_theme_thumbnail_async (theme_info,
+  generate_theme_thumbnail_async (theme_info,
                                          theme_info->name,
                                          THUMBNAIL_TYPE_METACITY,
                                          NULL,
@@ -1082,7 +1082,7 @@ generate_icon_theme_thumbnail_async (GnomeThemeIconInfo *theme_info,
                                      gpointer            user_data,
                                      GDestroyNotify      destroy)
 {
-  return generate_theme_thumbnail_async (theme_info,
+  generate_theme_thumbnail_async (theme_info,
                                          theme_info->name,
                                          THUMBNAIL_TYPE_ICON,
                                          NULL,
