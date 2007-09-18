@@ -10,6 +10,8 @@
 #define ACCESSIBILITY_KEY       "/desktop/gnome/interface/accessibility"
 #define ACCESSIBILITY_KEY_DIR   "/desktop/gnome/interface"
 
+static gboolean initial_state;
+
 static GladeXML *
 create_dialog (void)
 {
@@ -85,9 +87,9 @@ static void
 close_logout_update (GladeXML *dialog)
 {
 	GConfClient *client = gconf_client_get_default ();
-	gboolean has_changed = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
+	gboolean curr_state = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
 
-	gtk_widget_set_sensitive (WID ("at_close_logout_button"), has_changed);
+	gtk_widget_set_sensitive (WID ("at_close_logout_button"), initial_state != curr_state);
 	g_object_unref (client);
 }
 
@@ -146,6 +148,8 @@ setup_dialog (GladeXML *dialog)
 	peditor = gconf_peditor_new_boolean (NULL, ACCESSIBILITY_KEY,
 					     widget,
 					     NULL);
+
+	initial_state = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
 
 	at_enable_update (client, dialog);
 
