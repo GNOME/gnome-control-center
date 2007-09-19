@@ -533,8 +533,8 @@ static struct {
     const gchar *icon;
 } icons[] = {
     { "web_browser_image", "web-browser"      },
-    { "mail_reader_image", "stock_mail-open"  },
-    { "media_player_image", "gnome-audio"     },
+    { "mail_reader_image", "emblem-mail"  },
+    { "media_player_image", "applications-multimedia"     },
     { "visual_image",      "zoom-best-fit" },
     { "mobility_image",    "preferences-desktop-accessibility" },
 /*    { "messenger_image",   "im"               },
