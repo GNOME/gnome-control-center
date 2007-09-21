@@ -246,7 +246,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 			       GTK_DIALOG_MODAL,
 			       GTK_MESSAGE_ERROR,
 			       GTK_BUTTONS_OK,
-			       _("The theme is an engine. You need to compile it."));
+			       _("The selected file is not a valid theme. It might be a theme engine that you need to compile."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		return FALSE;
