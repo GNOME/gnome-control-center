@@ -224,7 +224,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 	gchar *user_message = NULL;
 	gchar *target_dir = NULL;
 
-	/* What type of theme it is ? */
+	/* What type of theme is it? */
 	theme_type = file_theme_type (tmp_dir);
 	if (theme_type == THEME_ICON) {
 		target_dir = g_build_path (G_DIR_SEPARATOR_S,
@@ -255,7 +255,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 			       GTK_DIALOG_MODAL,
 			       GTK_MESSAGE_ERROR,
 			       GTK_BUTTONS_OK,
-			       _("The file format is invalid"));
+			       _("The selected file does not appear to be a valid theme."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		return FALSE;
@@ -277,15 +277,15 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 						 g_get_home_dir (),
 						 ".icons",
 						 theme_name, NULL);
-			update_icon_cache = g_strdup_printf ("gtk-update-icon-cache %s", new_path);
 			/* XXX: make some noise if we couldn't install it? */
 			gnome_vfs_move (path, new_path, FALSE);
 
 			/* update icon cache - shouldn't really matter if this fails */
+			update_icon_cache = g_strdup_printf ("gtk-update-icon-cache %s", new_path);
 			g_spawn_command_line_async (update_icon_cache, NULL);
+			g_free (update_icon_cache);
 
 			g_free (new_path);
-			g_free (update_icon_cache);
 		}
 		g_free (path);
 	}
@@ -306,7 +306,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 					GTK_DIALOG_MODAL,
 					GTK_MESSAGE_ERROR,
 					GTK_BUTTONS_OK,
-					_("Installation Failed"));
+					_("Installation failed."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		success = FALSE;
@@ -410,7 +410,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
 						GTK_BUTTONS_OK,
-						_("This theme is not in a supported format."));
+						_("The selected file does not appear to be a valid theme."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		g_free (path);
@@ -555,7 +555,7 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 					GTK_DIALOG_MODAL,
 					GTK_MESSAGE_ERROR,
 					GTK_BUTTONS_OK,
-					_("The file format is invalid."));
+					_("The selected file does not appear to be a valid theme."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		g_free (base);
