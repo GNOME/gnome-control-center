@@ -159,10 +159,6 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	  } else {
 	    break;
 	  }
-	} else if (!strcmp ((gchar *)wpa->name, "imguri")) {
-	  if (wpa->last != NULL) {
-	    wp->imguri = g_strdup (g_strstrip ((gchar *)wpa->last->content));
-	  }
 	} else if (!strcmp ((gchar *)wpa->name, "options")) {
 	  if (wpa->last != NULL) {
 	    wp->options = g_strdup (g_strstrip ((gchar *)wpa->last->content));

@@ -89,7 +89,6 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   g_free (item->name);
   g_free (item->filename);
   g_free (item->description);
-  g_free (item->imguri);
   g_free (item->options);
   g_free (item->shade_type);
 
@@ -123,7 +122,6 @@ GnomeWPItem * gnome_wp_item_dup (GnomeWPItem * item) {
   new_item->name = g_strdup (item->name);
   new_item->filename = g_strdup (item->filename);
   new_item->description = g_strdup (item->description);
-  new_item->imguri = g_strdup (item->imguri);
   new_item->options = g_strdup (item->options);
   new_item->shade_type = g_strdup (item->shade_type);
 

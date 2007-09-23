@@ -34,7 +34,6 @@ struct _GnomeWPItem {
   gchar * name;
   gchar * filename;
   gchar * description;
-  gchar * imguri;
   gchar * options;
   gchar * shade_type;
   gchar * pri_color;
