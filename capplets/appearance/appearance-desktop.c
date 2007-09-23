@@ -46,17 +46,16 @@ typedef enum {
 
 enum {
   TARGET_URI_LIST,
-  TARGET_URL,
-  TARGET_COLOR,
-  TARGET_BGIMAGE,
-  TARGET_BACKGROUND_RESET
+  TARGET_BGIMAGE
 };
 
-static GtkTargetEntry drop_types[] = {
+static const GtkTargetEntry drop_types[] = {
   {"text/uri-list", 0, TARGET_URI_LIST},
-  /*  { "application/x-color", 0, TARGET_COLOR }, */
-  { "property/bgimage", 0, TARGET_BGIMAGE },
-  /*  { "x-special/gnome-reset-background", 0, TARGET_BACKGROUND_RESET }*/
+  { "property/bgimage", 0, TARGET_BGIMAGE }
+};
+
+static const GtkTargetEntry drag_types[] = {
+  {"text/uri-list", GTK_TARGET_OTHER_WIDGET, TARGET_URI_LIST}
 };
 
 static void
@@ -669,14 +668,13 @@ wp_file_open_dialog (GtkWidget *widget,
 }
 
 static void
-wp_dragged_image (GtkWidget *widget,
+wp_drag_received (GtkWidget *widget,
                   GdkDragContext *context,
                   gint x, gint y,
                   GtkSelectionData *selection_data,
                   guint info, guint time,
                   AppearanceData *data)
 {
-
   if (info == TARGET_URI_LIST || info == TARGET_BGIMAGE)
   {
     GList * uris;
@@ -706,6 +704,23 @@ wp_dragged_image (GtkWidget *widget,
       gdk_window_set_cursor (window, NULL);
     }
     gnome_vfs_uri_list_free (uris);
+  }
+}
+
+static void
+wp_drag_get_data (GtkWidget *widget,
+		  GdkDragContext *context,
+		  GtkSelectionData *selection_data,
+		  guint type, guint time,
+		  AppearanceData *data)
+{
+  if (type == TARGET_URI_LIST) {
+    GnomeWPItem *item = get_selected_item (data, NULL);
+
+    if (item != NULL) {
+      gchar *uris[] = { item->filename, NULL };
+      gtk_selection_data_set_uris (selection_data, uris);
+    }
   }
 }
 
@@ -996,7 +1011,12 @@ desktop_init (AppearanceData *data,
   gtk_drag_dest_set (GTK_WIDGET (data->wp_view), GTK_DEST_DEFAULT_ALL, drop_types,
                      G_N_ELEMENTS (drop_types), GDK_ACTION_COPY | GDK_ACTION_MOVE);
   g_signal_connect (data->wp_view, "drag_data_received",
-                    (GCallback) wp_dragged_image, data);
+                    (GCallback) wp_drag_received, data);
+
+  gtk_drag_source_set (GTK_WIDGET (data->wp_view), GDK_BUTTON1_MASK,
+                       drag_types, G_N_ELEMENTS (drag_types), GDK_ACTION_COPY);
+  g_signal_connect (data->wp_view, "drag-data-get",
+		    (GCallback) wp_drag_get_data, data);
 
   data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
 
