@@ -1,3 +1,13 @@
+2007-09-25  Jens Granseuer  <jensgr@gmx.net>
+
+ 	Prevent lots of thumbs from being created with the color scheme of the
+	currently active theme (see comment #15 in bug 460023). Maybe it also
+	helps with some of the other color-related issues.
+
+	* theme-thumbnail.c: (create_gtk_theme_pixbuf),
+	(generate_theme_thumbnail_async): when creating GTK theme thumbnails,
+	explicitly pass the theme's color scheme to override the xsetting
+
 2007-09-16  Jens Granseuer  <jensgr@gmx.net>
 
 	Patch by: Darren Kenny <darren.kenny@sun.com>

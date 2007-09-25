@@ -16,6 +16,7 @@
 #include <libgnomeui/gnome-icon-theme.h>
 
 #include "theme-thumbnail.h"
+#include "gtkrc-utils.h"
 #include "capplet-util.h"
 
 static gint child_pid;
@@ -345,7 +346,9 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gint width, height;
 
   settings = gtk_settings_get_default ();
-  g_object_set (settings, "gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data, NULL);
+  g_object_set (settings, "gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data,
+			  "gtk-color-scheme", (char *) theme_thumbnail_data->gtk_color_scheme->data,
+ 			  NULL);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
@@ -975,6 +978,8 @@ generate_theme_thumbnail_async (gpointer            theme_info,
                                 gpointer            user_data,
                                 GDestroyNotify      destroy)
 {
+  gchar *scheme;
+
   if (async_data.set)
   {
     ThemeQueueItem *item;
@@ -1000,7 +1005,6 @@ generate_theme_thumbnail_async (gpointer            theme_info,
     return;
   }
 
-
   if (async_data.channel == NULL)
   {
     async_data.channel = g_io_channel_unix_new (pipe_from_factory_fd[0]);
@@ -1017,12 +1021,18 @@ generate_theme_thumbnail_async (gpointer            theme_info,
   async_data.user_data = user_data;
   async_data.destroy = destroy;
 
+  if (!strcmp (thumbnail_type, THUMBNAIL_TYPE_GTK)) {
+    scheme = gtkrc_get_color_scheme_for_theme (theme_name);
+    gtk_color_scheme = scheme;
+  } else scheme = NULL;
+
   send_thumbnail_request (thumbnail_type,
                           gtk_theme_name,
                           gtk_color_scheme,
                           metacity_theme_name,
                           icon_theme_name,
                           application_font);
+  g_free (scheme);
 }
 
 void
