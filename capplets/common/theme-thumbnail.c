@@ -40,11 +40,11 @@ static ThemeThumbnailAsyncData async_data;
 
 /* Protocol */
 
-/* Our protocol is pretty simple.  The parent process will write four strings
- * (separated by a '\000') They are the widget theme, the wm theme, the icon
- * theme, and the font string.  Then, it will wait for the child to write back
- * the data.  The parent expects ICON_SIZE_WIDTH * ICON_SIZE_HEIGHT * 4 bytes of
- * information.  After that, the child is ready for the next theme to render.
+/* Our protocol is pretty simple.  The parent process will write several strings
+ * (separated by a '\000'). They are the widget theme, the wm theme, the icon
+ * theme, etc.  Then, it will wait for the child to write back the data.  The
+ * parent expects ICON_SIZE_WIDTH * ICON_SIZE_HEIGHT * 4 bytes of information.
+ * After that, the child is ready for the next theme to render.
  */
 
 enum
