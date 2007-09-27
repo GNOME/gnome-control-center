@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-15 03:23+0100\n"
-"PO-Revision-Date: 2007-09-15 12:11+0200\n"
+"POT-Creation-Date: 2007-09-21 20:33+0100\n"
+"PO-Revision-Date: 2007-09-27 12:04+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -788,17 +788,18 @@ msgstr "Especifique el nombre de archivo del tema a instalar"
 msgid "filename"
 msgstr "nombre de archivo"
 
-#: ../capplets/appearance/appearance-main.c:115
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/appearance/appearance-main.c:116
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
 "Especifique el nombre de la página para mostrar (tema|fondo|tipografías|"
 "interfaz)"
 
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:117
 msgid "page"
 msgstr "página"
 
-#: ../capplets/appearance/appearance-main.c:123
+#: ../capplets/appearance/appearance-main.c:124
 msgid "[WALLPAPER...]"
 msgstr "[Tapiz...]"
 
@@ -1264,16 +1265,22 @@ msgid "GNOME Theme %s correctly installed"
 msgstr "El tema de GNOME %s se instaló correctamente"
 
 #: ../capplets/appearance/theme-installer.c:249
-msgid "The theme is an engine. You need to compile it."
-msgstr "El tema es un motor. Necesita compilarlo."
+msgid ""
+"The selected file is not a valid theme. It might be a theme engine that you "
+"need to compile."
+msgstr ""
+"El archivo seleccionado no es un tema válido. Puede ser un motor de temas que "
+"debe compilar."
 
 #: ../capplets/appearance/theme-installer.c:258
-msgid "The file format is invalid"
-msgstr "El formato del archivo no es válido"
+#: ../capplets/appearance/theme-installer.c:413
+#: ../capplets/appearance/theme-installer.c:558
+msgid "The selected file does not appear to be a valid theme."
+msgstr "El archivo seleccionado no parece ser un tema válido."
 
 #: ../capplets/appearance/theme-installer.c:309
-msgid "Installation Failed"
-msgstr "Falló la instalación"
+msgid "Installation failed."
+msgstr "Falló la instalación."
 
 #: ../capplets/appearance/theme-installer.c:330
 #, c-format
@@ -1291,10 +1298,6 @@ msgstr "Mantener el tema actual"
 #: ../capplets/appearance/theme-installer.c:340
 msgid "Apply New Theme"
 msgstr "Aplicar el nuevo tema"
-
-#: ../capplets/appearance/theme-installer.c:413
-msgid "This theme is not in a supported format."
-msgstr "Este tema no tiene un formato soportado."
 
 #: ../capplets/appearance/theme-installer.c:438
 msgid "Failed to create temporary directory"
@@ -1321,10 +1324,6 @@ msgid ""
 msgstr ""
 "%s es la ruta donde se van a instalar los archivos del tema. Esto no puede "
 "seleccionarse como ubicación de origen"
-
-#: ../capplets/appearance/theme-installer.c:558
-msgid "The file format is invalid."
-msgstr "El formato del archivo no es válido."
 
 #: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
@@ -1592,7 +1591,7 @@ msgid "Large White Pointer"
 msgstr "Puntero blanco grande"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Preferred Applications"
 msgstr "Aplicaciones preferidas"
 
@@ -1682,44 +1681,52 @@ msgid "All %s occurrences will be replaced with actual link"
 msgstr "Todas las apariciones de %s se reemplazarán por el enlace actual"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+msgid "C_ommand:"
+msgstr "C_omando:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Co_mmand:"
 msgstr "Co_mando:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "E_xecute flag:"
 msgstr "Opción de e_jecución:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Internet"
 msgstr "Internet"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Multimedia"
 msgstr "Multimedia"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Open link in new _tab"
 msgstr "Abrir enlace en una _solapa nueva"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Open link in new _window"
 msgstr "Abrir enlace en una _ventana nueva"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Open link with web browser _default"
 msgstr "Abrir enlace con el navegador web _predeterminado"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Run at st_art"
 msgstr "Ejecutar al _inicio"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "Run in t_erminal"
 msgstr "Ejecutar en un t_erminal"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "System"
 msgstr "Sistema"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "_Run at start"
+msgstr "Ejecutar al _inicio"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
@@ -3134,7 +3141,7 @@ msgstr "Pantalla en la cual BGApplier va a dibujar"
 msgid "<b>Start %s</b>"
 msgstr "<b>Iniciar %s</b>"
 
-#: ../libslab/application-tile.c:381 ../libslab/system-tile.c:92
+#: ../libslab/application-tile.c:381
 msgid "Help"
 msgstr "Ayuda"
 
@@ -3327,30 +3334,22 @@ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s
 msgid "Find Now"
 msgstr "Buscar ahora"
 
-#: ../libslab/system-tile.c:94
-msgid "Lock Screen"
-msgstr "Bloquear la pantalla"
-
-#: ../libslab/system-tile.c:96 ../libsounds/sound-view.c:45
-msgid "Logout"
-msgstr "Salida"
-
-#: ../libslab/system-tile.c:98
-msgid "Shutdown"
-msgstr "Apagar"
-
-#: ../libslab/system-tile.c:136
+#: ../libslab/system-tile.c:128
 #, c-format
 msgid "<b>Open %s</b>"
 msgstr "<b>Abrir %s</b>"
 
-#: ../libslab/system-tile.c:149
+#: ../libslab/system-tile.c:141
 msgid "Remove from System Items"
 msgstr "Quitar de los elementos del sistema"
 
 #: ../libsounds/sound-view.c:44
 msgid "Login"
 msgstr "Entrada"
+
+#: ../libsounds/sound-view.c:45
+msgid "Logout"
+msgstr "Salida"
 
 #: ../libsounds/sound-view.c:46
 msgid "Boing"
@@ -3707,7 +3706,6 @@ msgstr ""
 "común»"
 
 #: ../shell/gnomecc.desktop.in.in.h:2
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "La herramienta de configuración de GNOME"
 
@@ -3926,8 +3924,12 @@ msgid "usage: %s fontfile\n"
 msgstr "uso: %s archivo de tipografías\n"
 
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "GNOME Font Viewer"
-msgstr "Visor de tipografías de GNOME"
+msgid "Font Viewer"
+msgstr "Visor de tipografías"
+
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "Preview fonts"
+msgstr "Vista previa de las tipografías"
 
 #: ../vfs-methods/fontilus/thumbnailer.c:242
 msgid "Text to thumbnail (default: Aa)"
