@@ -736,10 +736,17 @@ theme_store_sort_func (GtkTreeModel *model,
 
     gtk_tree_model_get (model, b, COL_NAME, &b_name, COL_LABEL, &b_label, -1);
 
-    if (!strcmp (b_name, CUSTOM_THEME_NAME))
+    if (!strcmp (b_name, CUSTOM_THEME_NAME)) {
       rc = 1;
-    else
-      rc = strcmp (a_label, b_label);
+    } else {
+      gchar *a_case, *b_case;
+
+      a_case = g_utf8_casefold (a_label, -1);
+      b_case = g_utf8_casefold (b_label, -1);
+      rc = g_utf8_collate (a_case, b_case);
+      g_free (a_case);
+      g_free (b_case);
+    }
 
     g_free (b_name);
     g_free (b_label);
