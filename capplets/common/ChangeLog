@@ -1,3 +1,13 @@
+2007-09-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-thumbnail.c: (generate_gtk_theme_thumbnail),
+	(generate_theme_thumbnail_async),
+	(generate_gtk_theme_thumbnail_async): move the code for setting the
+	color scheme for gtk thumbnails to the gtk-specific function. This
+	means we will probably extract it twice for most thumbnails, but it
+	makes for much cleaner code. Also add the scheme bit to the synchronous
+	version.
+
 2007-09-25  Jens Granseuer  <jensgr@gmx.net>
 
 	* theme-thumbnail.c: patch up an outdated comment about how the

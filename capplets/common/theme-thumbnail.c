@@ -935,12 +935,17 @@ generate_meta_theme_thumbnail (GnomeThemeMetaInfo *theme_info)
 GdkPixbuf *
 generate_gtk_theme_thumbnail (GnomeThemeInfo *theme_info)
 {
+  gchar *scheme;
+
+  scheme = gtkrc_get_color_scheme_for_theme (theme_info->name);
+
   return generate_theme_thumbnail (THUMBNAIL_TYPE_GTK,
                                    theme_info->name,
-                                   NULL,
+                                   scheme,
                                    NULL,
                                    NULL,
                                    NULL);
+  g_free (scheme);
 }
 
 GdkPixbuf *
@@ -978,8 +983,6 @@ generate_theme_thumbnail_async (gpointer            theme_info,
                                 gpointer            user_data,
                                 GDestroyNotify      destroy)
 {
-  gchar *scheme;
-
   if (async_data.set)
   {
     ThemeQueueItem *item;
@@ -1021,18 +1024,12 @@ generate_theme_thumbnail_async (gpointer            theme_info,
   async_data.user_data = user_data;
   async_data.destroy = destroy;
 
-  if (!strcmp (thumbnail_type, THUMBNAIL_TYPE_GTK)) {
-    scheme = gtkrc_get_color_scheme_for_theme (theme_name);
-    gtk_color_scheme = scheme;
-  } else scheme = NULL;
-
   send_thumbnail_request (thumbnail_type,
                           gtk_theme_name,
                           gtk_color_scheme,
                           metacity_theme_name,
                           icon_theme_name,
                           application_font);
-  g_free (scheme);
 }
 
 void
@@ -1058,15 +1055,20 @@ generate_gtk_theme_thumbnail_async (GnomeThemeInfo *theme_info,
                                     gpointer            user_data,
                                     GDestroyNotify      destroy)
 {
+  gchar *scheme;
+
+  scheme = gtkrc_get_color_scheme_for_theme (theme_info->name);
+
   generate_theme_thumbnail_async (theme_info,
-                                         theme_info->name,
-                                         THUMBNAIL_TYPE_GTK,
-                                         theme_info->name,
-                                         NULL,
-                                         NULL,
-                                         NULL,
-                                         NULL,
-                                         func, user_data, destroy);
+                                  theme_info->name,
+                                  THUMBNAIL_TYPE_GTK,
+                                  theme_info->name,
+                                  scheme,
+                                  NULL,
+                                  NULL,
+                                  NULL,
+                                  func, user_data, destroy);
+  g_free (scheme);
 }
 
 void
