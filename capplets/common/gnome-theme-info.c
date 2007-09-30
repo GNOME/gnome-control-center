@@ -1991,17 +1991,6 @@ gnome_theme_init (gboolean *monitor_not_added)
       top_theme_dir_string = g_build_filename (INSTALL_PREFIX, "share", "icons", NULL);
     }
   top_theme_dir_uri = gnome_vfs_uri_new (top_theme_dir_string);
-
-#ifdef XCURSOR_ICONDIR
-  /* if there's a separate xcursors dir, add that as well */
-  if (strcmp (XCURSOR_ICONDIR, top_theme_dir_string) &&
-      strcmp (XCURSOR_ICONDIR, "/usr/share/icons")) {
-    top_theme_dir_uri = gnome_vfs_uri_new (XCURSOR_ICONDIR);
-    if (gnome_vfs_uri_exists (top_theme_dir_uri))
-      result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 1, NULL);
-    gnome_vfs_uri_unref (top_theme_dir_uri);
-  }
-#endif
   g_free (top_theme_dir_string);
 
   if (!gnome_vfs_uri_exists (top_theme_dir_uri))
