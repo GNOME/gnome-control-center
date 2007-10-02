@@ -191,7 +191,6 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
       "Name=%s\n"
       "Type=X-GNOME-Metatheme\n"
       "Comment=%s\n"
-      "Encoding=UTF-8\n"
       "\n"
       "[X-GNOME-Metatheme]\n"
       "GtkTheme=%s\n"
