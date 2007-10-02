@@ -26,7 +26,7 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = default-applications.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-autostartdir = $(datadir)/gnome/autostart
+autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files = gnome-at-session.desktop.in
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
