@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-15 18:01+0300\n"
+"POT-Creation-Date: 2007-10-08 12:02+0300\n"
 "PO-Revision-Date: 2007-02-21 17:11+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -61,7 +61,7 @@ msgid "No Image"
 msgstr "Ei kuvaa"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1064
+#: ../capplets/appearance/appearance-desktop.c:1084
 msgid "Images"
 msgstr "Kuvat"
 
@@ -460,7 +460,6 @@ msgid "Accessible Lo_gin"
 msgstr "_Esteetön kirjautuminen"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Preferences"
 msgstr "Esteettömyysohjelma-asetukset"
 
@@ -499,6 +498,10 @@ msgstr "Näppäimistön _esteettömyys"
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
 msgid "_Preferred Applications"
 msgstr "_Oletussovellukset"
+
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
+msgid "Assistive Technology"
+msgstr "Esteettömyystekniikat"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
@@ -721,11 +724,11 @@ msgstr "kuvapistettä/s"
 msgid "seconds"
 msgstr "sekuntia"
 
-#: ../capplets/appearance/appearance-desktop.c:1043
+#: ../capplets/appearance/appearance-desktop.c:1063
 msgid "Add Wallpaper"
 msgstr "Lisää tausta"
 
-#: ../capplets/appearance/appearance-desktop.c:1068
+#: ../capplets/appearance/appearance-desktop.c:1088
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
@@ -783,15 +786,16 @@ msgstr "Anna asennettavan teeman sisältävän tiedoston nimi"
 msgid "filename"
 msgstr "tiedostonimi"
 
-#: ../capplets/appearance/appearance-main.c:115
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/appearance/appearance-main.c:116
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "Annan näytettävän sivun nimi (teema|tausta|kirjasimet|käyttöliittymä)"
 
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:117
 msgid "page"
 msgstr "sivu"
 
-#: ../capplets/appearance/appearance-main.c:123
+#: ../capplets/appearance/appearance-main.c:124
 msgid "[WALLPAPER...]"
 msgstr "[TAUSTAKUVA...]"
 
@@ -822,7 +826,7 @@ msgstr "Tämä teema ehdottaa taustakuvaa."
 msgid "The current theme suggests a font."
 msgstr "Tämä teema ehdottaa kirjasinta."
 
-#: ../capplets/appearance/appearance-themes.c:823
+#: ../capplets/appearance/appearance-themes.c:830
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -948,7 +952,7 @@ msgstr "Kuvakkeet"
 
 #: ../capplets/appearance/data/appearance.glade.h:33
 msgid "Interface"
-msgstr "Käyttöliitymä"
+msgstr "Käyttöliittymä"
 
 #: ../capplets/appearance/data/appearance.glade.h:34
 msgid "Large"
@@ -1214,7 +1218,7 @@ msgstr "Gnomen teemapaketti"
 msgid "No Wallpaper"
 msgstr "Ei taustaa"
 
-#: ../capplets/appearance/gnome-wp-item.c:365
+#: ../capplets/appearance/gnome-wp-item.c:363
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1225,8 +1229,8 @@ msgstr ""
 "%s, %d %s x %d %s\n"
 "Kansio: %s"
 
+#: ../capplets/appearance/gnome-wp-item.c:369
 #: ../capplets/appearance/gnome-wp-item.c:371
-#: ../capplets/appearance/gnome-wp-item.c:373
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "kuvapiste"
@@ -1255,16 +1259,22 @@ msgid "GNOME Theme %s correctly installed"
 msgstr "Gnomen teema %s asennettu onnistuneesti"
 
 #: ../capplets/appearance/theme-installer.c:249
-msgid "The theme is an engine. You need to compile it."
-msgstr "Teema on käyttöliittymämoottori. Se täytyy kääntää ensin."
+msgid ""
+"The selected file is not a valid theme. It might be a theme engine that you "
+"need to compile."
+msgstr ""
+"Valittu tiedosto ei ole kelvollinen teematiedosto. Se saattaa olla "
+"teemamoottori, joka täytyy kääntää ensin."
 
 #: ../capplets/appearance/theme-installer.c:258
-msgid "The file format is invalid"
-msgstr "Tiedostomuoto on virheellinen"
+#: ../capplets/appearance/theme-installer.c:413
+#: ../capplets/appearance/theme-installer.c:558
+msgid "The selected file does not appear to be a valid theme."
+msgstr "Valittu tiedosto ei näytä olevan kelvollinen teematiedosto."
 
 #: ../capplets/appearance/theme-installer.c:309
-msgid "Installation Failed"
-msgstr "Asennus epäonnistui"
+msgid "Installation failed."
+msgstr "Asennus epäonnistui."
 
 #: ../capplets/appearance/theme-installer.c:330
 #, c-format
@@ -1282,10 +1292,6 @@ msgstr "Käytä nykyistä teemaa"
 #: ../capplets/appearance/theme-installer.c:340
 msgid "Apply New Theme"
 msgstr "Käytä uutta teemaa"
-
-#: ../capplets/appearance/theme-installer.c:413
-msgid "This theme is not in a supported format."
-msgstr "Tämä teema ei ole tuetun muotoinen."
 
 #: ../capplets/appearance/theme-installer.c:438
 msgid "Failed to create temporary directory"
@@ -1312,10 +1318,6 @@ msgid ""
 msgstr ""
 "%s on polku, jonne teematiedostot asentuvat. Tätä ei voi valita "
 "lähdesijainniksi"
-
-#: ../capplets/appearance/theme-installer.c:558
-msgid "The file format is invalid."
-msgstr "Tiedostomuoto on virheellinen."
 
 #: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
@@ -1581,7 +1583,7 @@ msgid "Large White Pointer"
 msgstr "Suuri valkoinen osoitin"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Preferred Applications"
 msgstr "Oletussovellukset"
 
@@ -1671,44 +1673,52 @@ msgid "All %s occurrences will be replaced with actual link"
 msgstr "Kaikki %s esiintyää korvataan oikealla linkillä"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Co_mmand:"
+msgid "C_ommand:"
 msgstr "Ko_mento:"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "Co_mmand:"
+msgstr "Ko_mento:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "E_xecute flag:"
 msgstr "S_uorituksen valitsin:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Internet"
 msgstr "Internet"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Multimedia"
 msgstr "Multimedia"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Open link in new _tab"
 msgstr "Avaa linkki uudessa _välilehdessä"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Open link in new _window"
 msgstr "Avaa linkki uudessa _ikkunassa"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Open link with web browser _default"
 msgstr "Avaa linkki selaimen _asetuksien mukaisesti"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Run at st_art"
 msgstr "Suorita _sisäänkirjauduttaessa"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "Run in t_erminal"
 msgstr "Käynnistä _päätteessä"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "System"
 msgstr "Järjestelmä"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "_Run at start"
+msgstr "Suo_rita käynnistettäessä"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
@@ -3112,7 +3122,7 @@ msgstr "Näyttö, jolle BGApplier piirtää"
 msgid "<b>Start %s</b>"
 msgstr "<b>Käynnistä %s</b>"
 
-#: ../libslab/application-tile.c:381 ../libslab/system-tile.c:92
+#: ../libslab/application-tile.c:381
 msgid "Help"
 msgstr "Ohje"
 
@@ -3307,24 +3317,12 @@ msgstr "Mikään \"%s\"-sovellus ei rekisteröinyt kirjanmerkkiä \"%s\""
 msgid "Find Now"
 msgstr "Etsi nyt"
 
-#: ../libslab/system-tile.c:94
-msgid "Lock Screen"
-msgstr "Lukitse näyttö"
-
-#: ../libslab/system-tile.c:96 ../libsounds/sound-view.c:45
-msgid "Logout"
-msgstr "Kirjaudu ulos"
-
-#: ../libslab/system-tile.c:98
-msgid "Shutdown"
-msgstr "Sammuta"
-
-#: ../libslab/system-tile.c:136
+#: ../libslab/system-tile.c:128
 #, c-format
 msgid "<b>Open %s</b>"
 msgstr "<b>Avaa %s</b>"
 
-#: ../libslab/system-tile.c:149
+#: ../libslab/system-tile.c:141
 #, c-format
 msgid "Remove from System Items"
 msgstr "Poista järjestelmän kohdista"
@@ -3332,6 +3330,10 @@ msgstr "Poista järjestelmän kohdista"
 #: ../libsounds/sound-view.c:44
 msgid "Login"
 msgstr "Kirjaudu sisään"
+
+#: ../libsounds/sound-view.c:45
+msgid "Logout"
+msgstr "Kirjaudu ulos"
 
 #: ../libsounds/sound-view.c:46
 msgid "Boing"
@@ -3676,7 +3678,6 @@ msgstr ""
 "käynnistetään"
 
 #: ../shell/gnomecc.desktop.in.in.h:2
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Gnomen hallintatyökalu"
 
@@ -3884,8 +3885,12 @@ msgid "usage: %s fontfile\n"
 msgstr "käyttö: %s kirjasinlajitiedosto\n"
 
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "GNOME Font Viewer"
-msgstr "Gnomen kirjasinlajien katseluohjelma"
+msgid "Font Viewer"
+msgstr "Kirjasinlajien katselin"
+
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "Preview fonts"
+msgstr "Kirjasinten esikatselu"
 
 #: ../vfs-methods/fontilus/thumbnailer.c:242
 msgid "Text to thumbnail (default: Aa)"
@@ -4003,6 +4008,24 @@ msgstr "Käytä teemaa"
 msgid "Sets the default theme"
 msgstr "Aseta teema oletusarvoiseksi"
 
+#~ msgid "The theme is an engine. You need to compile it."
+#~ msgstr "Teema on käyttöliittymämoottori. Se täytyy kääntää ensin."
+
+#~ msgid "The file format is invalid"
+#~ msgstr "Tiedostomuoto on virheellinen"
+
+#~ msgid "This theme is not in a supported format."
+#~ msgstr "Tämä teema ei ole tuetun muotoinen."
+
+#~ msgid "The file format is invalid."
+#~ msgstr "Tiedostomuoto on virheellinen."
+
+#~ msgid "Lock Screen"
+#~ msgstr "Lukitse näyttö"
+
+#~ msgid "Shutdown"
+#~ msgstr "Sammuta"
+
 #~ msgid "gtk-delete"
 #~ msgstr "gtk-delete"
 
@@ -4021,9 +4044,6 @@ msgstr "Aseta teema oletusarvoiseksi"
 #~ "<b>Korkeus:</b> %d %s\n"
 #~ "<b>Tyyppi:</b> %s\n"
 #~ "<b>Sijainti:</b> %s"
-
-#~ msgid "Preferred Assistive Technology"
-#~ msgstr "Haluttu esteettömyystekniikka"
 
 #~ msgid "Mobility AT"
 #~ msgstr "Liikuntavammaisten esteettömyysohjelmat"
