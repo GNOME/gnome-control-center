@@ -35,7 +35,6 @@
 #include <string.h>
 #include <time.h>
 
-#include <libgnomekbd/gkbd-config-registry.h>
 #include <libgnomekbd/gkbd-desktop-config.h>
 #include <libgnomekbd/gkbd-keyboard-config.h>
 
@@ -392,7 +391,6 @@ gnome_settings_keyboard_xkb_evt_filter (GdkXEvent * xev, GdkEvent * event)
 void
 gnome_settings_keyboard_xkb_init (GConfClient * client)
 {
-	GObject *reg = NULL;
 #ifdef GSDKX
 	xkl_set_debug_level (200);
 	logfile = fopen ("/tmp/gsdkx.log", "a");
@@ -424,9 +422,6 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 		xkl_engine_start_listen (xkl_engine,
 					 XKLL_MANAGE_LAYOUTS |
 					 XKLL_MANAGE_WINDOW_STATES);
-
-		reg =
-		    g_object_new (gkbd_config_registry_get_type (), NULL);
 	}
 }
 

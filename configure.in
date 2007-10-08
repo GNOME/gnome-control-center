@@ -109,7 +109,7 @@ PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(METACITY, libmetacity-private)
-PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.13 gconf-2.0 gtk+-2.0)
+PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-2.0)
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
@@ -182,11 +182,11 @@ CAPPLET_LIBS="$CAPPLET_LIBS $XCURSOR_LIBS"
 dnl ==============
 dnl gswitchit
 dnl ==============
-PKG_CHECK_MODULES(LIBGNOMEKBD, [libgnomekbd >= 0.1 libxklavier >= 3.2])
+PKG_CHECK_MODULES(LIBGNOMEKBD, [libgnomekbd >= 2.21 libxklavier >= 3.2])
 AC_SUBST(LIBGNOMEKBD_CFLAGS)
 AC_SUBST(LIBGNOMEKBD_LIBS)
 
-PKG_CHECK_MODULES(LIBGNOMEKBDUI, [libgnomekbdui >= 0.1])
+PKG_CHECK_MODULES(LIBGNOMEKBDUI, [libgnomekbdui >= 2.21])
 AC_SUBST(LIBGNOMEKBDUI_CFLAGS)
 AC_SUBST(LIBGNOMEKBDUI_LIBS)
 
