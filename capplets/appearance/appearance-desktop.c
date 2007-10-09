@@ -600,8 +600,12 @@ wp_props_wp_set (AppearanceData *data, GnomeWPItem *item)
     else
       uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
 
-    gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
-    g_free (uri);
+    if (uri == NULL) {
+      g_warning ("Failed to convert filename to UTF-8: %s\n", item->filename);
+    } else {
+      gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
+      g_free (uri);
+    }
 
     gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
   }
