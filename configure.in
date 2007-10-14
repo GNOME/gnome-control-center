@@ -177,6 +177,17 @@ AM_CONDITIONAL(HAVE_XCURSOR, [test $have_xcursor=yes])
 AC_SUBST(XCURSOR_CFLAGS)
 AC_SUBST(XCURSOR_LIBS)
 
+if test x$have_xcursor = xyes; then
+  AC_MSG_CHECKING([for XCURSOR cursor location])
+  XCURSOR_ICONDIR=$($PKG_CONFIG --variable=icondir xcursor)
+  if test "x$XCURSOR_ICONDIR" != x; then
+    AC_DEFINE_UNQUOTED(XCURSOR_ICONDIR, "${XCURSOR_ICONDIR}", [Define to the xcursor icon path])
+  else
+    XCURSOR_ICONDIR=none
+  fi
+  AC_MSG_RESULT([${XCURSOR_ICONDIR}])
+fi
+
 CAPPLET_LIBS="$CAPPLET_LIBS $XCURSOR_LIBS"
 
 dnl ==============
