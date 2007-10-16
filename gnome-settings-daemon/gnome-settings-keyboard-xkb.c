@@ -56,13 +56,6 @@ static void *pa_callback_user_data = NULL;
 
 static const char KNOWN_FILES_KEY[] =
     "/desktop/gnome/peripherals/keyboard/general/known_file_list";
-static const char DISABLE_SYSCONF_CHANGED_WARNING_KEY[] =
-    "/desktop/gnome/peripherals/keyboard/general/disable_sysconfig_changed_warning";
-
-typedef enum {
-	RESPONSE_USE_X,
-	RESPONSE_USE_GNOME
-} SysConfigChangedMsgResponse;
 
 #define noGSDKX
 
@@ -179,129 +172,17 @@ apply_xkb_settings (void)
 }
 
 static void
-gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
-							SysConfigChangedMsgResponse
-							what2do)
-{
-	GConfClient *conf_client;
-	GkbdKeyboardConfig empty_kbd_config;
-	gboolean dont_show_again =
-	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-					  (g_object_get_data
-					   (G_OBJECT (dialog),
-					    "chkDontShowAgain")));
-
-	conf_client = gnome_settings_get_config_client ();
-
-	switch (what2do) {
-	case RESPONSE_USE_X:
-		gkbd_keyboard_config_init (&empty_kbd_config, conf_client,
-					   xkl_engine);
-		gkbd_keyboard_config_save_to_gconf (&empty_kbd_config);
-		break;
-	case RESPONSE_USE_GNOME:
-		/* Do absolutely nothing - just keep things the way they are */
-		break;
-	}
-
-	if (dont_show_again)
-		gconf_client_set_bool (conf_client,
-				       DISABLE_SYSCONF_CHANGED_WARNING_KEY,
-				       TRUE, NULL);
-
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-}
-
-static void
 gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 {
 	GConfClient *conf_client;
-	GkbdKeyboardConfig backup_gconf_kbd_config;
-	gboolean is_config_changed, dont_show;
 
 	if (!inited_ok)
 		return;
 	conf_client = gnome_settings_get_config_client ();
-	gkbd_keyboard_config_init (&backup_gconf_kbd_config, conf_client,
-				   xkl_engine);
 	gkbd_keyboard_config_init (&initial_sys_kbd_config, conf_client,
 				   xkl_engine);
-	dont_show =
-	    gconf_client_get_bool (conf_client,
-				   DISABLE_SYSCONF_CHANGED_WARNING_KEY,
-				   NULL);
-	gkbd_keyboard_config_load_from_gconf_backup
-	    (&backup_gconf_kbd_config);
 	gkbd_keyboard_config_load_from_x_initial (&initial_sys_kbd_config,
 						  NULL);
-
-	is_config_changed =
-	    g_slist_length (backup_gconf_kbd_config.layouts_variants)
-	    && !gkbd_keyboard_config_equals (&initial_sys_kbd_config,
-					     &backup_gconf_kbd_config);
-
-	/* config was changed!!! */
-	if (is_config_changed) {
-		if (dont_show) {
-			g_warning
-			    ("The system configuration changed - but we remain silent\n");
-		} else {
-			GtkWidget *chk_dont_show_again =
-			    gtk_check_button_new_with_mnemonic (_
-								("Do _not show this warning again"));
-			GtkWidget *align_dont_show_again =
-			    gtk_alignment_new (0.5, 0.5, 0, 0);
-			GtkWidget *msg;
-
-			char *gnome_settings =
-			    gkbd_keyboard_config_to_string
-			    (&backup_gconf_kbd_config);
-			char *system_settings =
-			    gkbd_keyboard_config_to_string
-			    (&initial_sys_kbd_config);
-
-			msg = gtk_message_dialog_new_with_markup (NULL, 0, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE,	/* !! temporary one */
-								  _
-								  ("<b>The X system keyboard settings differ from your current GNOME keyboard settings.</b>\n\n"
-								   "Expected was %s, but the the following settings were found: %s.\n\n"
-								   "Which set would you like to use?"),
-								  gnome_settings,
-								  system_settings);
-
-			g_free (gnome_settings);
-			g_free (system_settings);
-
-			gtk_window_set_icon_name (GTK_WINDOW (msg),
-						  "gnome-dev-keyboard");
-
-			gtk_container_set_border_width (GTK_CONTAINER
-							(align_dont_show_again),
-							12);
-			gtk_container_add (GTK_CONTAINER
-					   (align_dont_show_again),
-					   chk_dont_show_again);
-			gtk_container_add (GTK_CONTAINER
-					   ((GTK_DIALOG (msg))->vbox),
-					   align_dont_show_again);
-
-			gtk_dialog_add_buttons (GTK_DIALOG (msg),
-						_("Use X settings"),
-						RESPONSE_USE_X,
-						_("Keep GNOME settings"),
-						RESPONSE_USE_GNOME, NULL);
-			gtk_dialog_set_default_response (GTK_DIALOG (msg),
-							 RESPONSE_USE_GNOME);
-			g_object_set_data (G_OBJECT (msg),
-					   "chkDontShowAgain",
-					   chk_dont_show_again);
-			g_signal_connect (msg, "response",
-					  G_CALLBACK
-					  (gnome_settings_keyboard_xkb_sysconfig_changed_response),
-					  NULL);
-			gnome_settings_delayed_show_dialog (msg);
-		}
-	}
-	gkbd_keyboard_config_term (&backup_gconf_kbd_config);
 }
 
 static gboolean
