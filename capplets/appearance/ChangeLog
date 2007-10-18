@@ -1,3 +1,10 @@
+2007-10-18  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-themes.c: (theme_load_from_gconf),
+	(theme_set_custom_from_theme): really make sure gtk, metacity, icon, and
+	cursor themes are never NULL (should fix #487257 if the last commit didn't
+	already)
+
 2007-10-14  Jens Granseuer  <jensgr@gmx.net>
 
 	When updating theme info from GConf or copying it for customization, we
