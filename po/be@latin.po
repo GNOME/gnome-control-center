@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-16 18:03+0300\n"
-"PO-Revision-Date: 2007-09-16 18:36+0300\n"
+"POT-Creation-Date: 2007-10-19 00:09+0300\n"
+"PO-Revision-Date: 2007-10-19 00:09+0300\n"
 "Last-Translator: Alaksandar Navicki <zolak@lacinka.org>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgid "No Image"
 msgstr "Biez vyjavy"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1064
+#: ../capplets/appearance/appearance-desktop.c:1088
 msgid "Images"
 msgstr "Vyjavy"
 
@@ -453,7 +453,6 @@ msgid "Accessible Lo_gin"
 msgstr "_Dastupny ŭvachod"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Preferences"
 msgstr "Nałady technalohii dastupnaści"
 
@@ -462,7 +461,8 @@ msgid ""
 "Changes to enable assistive technologies will not take effect until your "
 "next log in."
 msgstr ""
-"Źmieny dla ŭklučeńnia technalohij dastupnaści nie paŭpłyvajuć na dziejnyja nałady da nastupnaj tvajoj aŭtaryzacyi ŭ systemie."
+"Źmieny dla ŭklučeńnia technalohij dastupnaści nie paŭpłyvajuć na dziejnyja "
+"nałady da nastupnaj tvajoj aŭtaryzacyi ŭ systemie."
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
@@ -491,6 +491,10 @@ msgstr "Dastupnaść _klavijatury"
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
 msgid "_Preferred Applications"
 msgstr "_Pažadanyja aplikacyi"
+
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
+msgid "Assistive Technology"
+msgstr "Technalohii dastupnaści"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
@@ -711,11 +715,11 @@ msgstr "pikselaŭ za sekundu"
 msgid "seconds"
 msgstr "sekundaŭ"
 
-#: ../capplets/appearance/appearance-desktop.c:1043
+#: ../capplets/appearance/appearance-desktop.c:1067
 msgid "Add Wallpaper"
 msgstr "Dadaj špaleru"
 
-#: ../capplets/appearance/appearance-desktop.c:1068
+#: ../capplets/appearance/appearance-desktop.c:1092
 msgid "All files"
 msgstr "Usie fajły"
 
@@ -779,15 +783,18 @@ msgstr "Akreśl nazvu fajłu matyvu, jaki treba zainstalavać"
 msgid "filename"
 msgstr "nazva fajłu"
 
-#: ../capplets/appearance/appearance-main.c:115
-msgid "Specify the name of the page to show (theme|background|fonts|interface)"
-msgstr "Akreśl nazvu staronki, jakuju treba pakazać (theme|background|fonts|interface)"
-
+#. TRANSLATORS: don't translate the terms in brackets
 #: ../capplets/appearance/appearance-main.c:116
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr ""
+"Akreśl nazvu staronki, jakuju treba pakazać (theme|background|fonts|"
+"interface)"
+
+#: ../capplets/appearance/appearance-main.c:117
 msgid "page"
 msgstr "staronka"
 
-#: ../capplets/appearance/appearance-main.c:123
+#: ../capplets/appearance/appearance-main.c:124
 msgid "[WALLPAPER...]"
 msgstr "[ŠPALERA...]"
 
@@ -798,27 +805,27 @@ msgstr "[ŠPALERA...]"
 msgid "Default Pointer"
 msgstr "Zmoŭčany kursor"
 
-#: ../capplets/appearance/appearance-themes.c:507
+#: ../capplets/appearance/appearance-themes.c:515
 msgid "Apply Background"
 msgstr "Užyj fon"
 
-#: ../capplets/appearance/appearance-themes.c:511
+#: ../capplets/appearance/appearance-themes.c:519
 msgid "Apply Font"
 msgstr "Užyj šryft"
 
-#: ../capplets/appearance/appearance-themes.c:536
+#: ../capplets/appearance/appearance-themes.c:544
 msgid "The current theme suggests a background and a font."
 msgstr "Dziejny matyŭ raić peŭny fon i šryft."
 
-#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/appearance/appearance-themes.c:549
 msgid "The current theme suggests a background."
 msgstr "Dziejny matyŭ raić peŭny fon."
 
-#: ../capplets/appearance/appearance-themes.c:546
+#: ../capplets/appearance/appearance-themes.c:554
 msgid "The current theme suggests a font."
 msgstr "Dziejny matyŭ raić peŭny šryft."
 
-#: ../capplets/appearance/appearance-themes.c:823
+#: ../capplets/appearance/appearance-themes.c:838
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1211,7 +1218,7 @@ msgstr "Pakunak matyvu GNOME"
 msgid "No Wallpaper"
 msgstr "Biez špalery"
 
-#: ../capplets/appearance/gnome-wp-item.c:365
+#: ../capplets/appearance/gnome-wp-item.c:363
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1222,8 +1229,8 @@ msgstr ""
 "%s, %d %s na %d %s\n"
 "Kataloh: %s"
 
+#: ../capplets/appearance/gnome-wp-item.c:369
 #: ../capplets/appearance/gnome-wp-item.c:371
-#: ../capplets/appearance/gnome-wp-item.c:373
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "piksel"
@@ -1253,16 +1260,22 @@ msgid "GNOME Theme %s correctly installed"
 msgstr "Matyŭ GNOME %s pravilna zainstalavany"
 
 #: ../capplets/appearance/theme-installer.c:249
-msgid "The theme is an engine. You need to compile it."
-msgstr "Hety matyŭ źjaŭlajecca ruchavikom. Jaho treba skampilavać."
+msgid ""
+"The selected file is not a valid theme. It might be a theme engine that you "
+"need to compile."
+msgstr ""
+"Abrany fajł nie źjaŭlajecca pravilnym matyvam. Heta moža być prahramnym "
+"matyvam, jaki treba skampilavać."
 
 #: ../capplets/appearance/theme-installer.c:258
-msgid "The file format is invalid"
-msgstr "Farmat fajłu niapravilny"
+#: ../capplets/appearance/theme-installer.c:413
+#: ../capplets/appearance/theme-installer.c:558
+msgid "The selected file does not appear to be a valid theme."
+msgstr "Abrany fajł nie źjaŭlajecca pravilnym matyvam."
 
 #: ../capplets/appearance/theme-installer.c:309
-msgid "Installation Failed"
-msgstr "Pamyłka instalacyi"
+msgid "Installation failed."
+msgstr "Pamyłka instalacyi."
 
 #: ../capplets/appearance/theme-installer.c:330
 #, c-format
@@ -1280,10 +1293,6 @@ msgstr "Pakiń dziejny matyŭ"
 #: ../capplets/appearance/theme-installer.c:340
 msgid "Apply New Theme"
 msgstr "Užyj novy matyŭ"
-
-#: ../capplets/appearance/theme-installer.c:413
-msgid "This theme is not in a supported format."
-msgstr "Matyŭ u farmacie, jaki nie absłuhoŭvajecca."
 
 #: ../capplets/appearance/theme-installer.c:438
 msgid "Failed to create temporary directory"
@@ -1310,10 +1319,6 @@ msgid ""
 msgstr ""
 "%s źjaŭlajecca ściežkaj, dzie buduć zainstalavanyja fajły matyvu. Niemahčyma "
 "vybrać jaje ŭ jakaści pałažeńnia krynicy"
-
-#: ../capplets/appearance/theme-installer.c:558
-msgid "The file format is invalid."
-msgstr "Farmat fajłu niapravilny."
 
 #: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
@@ -1581,7 +1586,7 @@ msgid "Large White Pointer"
 msgstr "Vialiki bieły kursor"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Preferred Applications"
 msgstr "Pažadanyja aplikacyi"
 
@@ -1671,44 +1676,52 @@ msgid "All %s occurrences will be replaced with actual link"
 msgstr "Va ŭsich miescach %s buduć zamienienyja na dziejnuju spasyłku"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Co_mmand:"
+msgid "C_ommand:"
 msgstr "_Zahad:"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "Co_mmand:"
+msgstr "_Zahad:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "E_xecute flag:"
 msgstr "Opcyja vy_kanańnia:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Internet"
 msgstr "Internet"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Multimedia"
 msgstr "Multymedyja"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Open link in new _tab"
 msgstr "Adčyniaj spasyłki ŭ novaj _kartcy"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Open link in new _window"
 msgstr "Adčyniaj spasyłki ŭ novym _аknie"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Open link with web browser _default"
 msgstr "Adčyniaj spasyłki sa _zmoŭčanymi naładami hartača"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Run at st_art"
 msgstr "Uruchom pry _ŭvachodzie"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "Run in t_erminal"
 msgstr "Uruchom u t_erminale"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "System"
 msgstr "Systemа"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "_Run at start"
+msgstr "_Vykanaj pry ŭruchamleńni"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
@@ -2921,7 +2934,7 @@ msgstr ""
 "Adbyłasia pamyłka pry sprobie ŭruchomić (%s),\n"
 "źviazanuju z klavišaj (%s)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:106
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:98
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2952,7 +2965,7 @@ msgstr ""
 "– vyjście <b>%s</b>\n"
 "– vyjście <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:120
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:112
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2963,35 +2976,6 @@ msgstr ""
 "Składanyja kanfihuracyi XKB nie ŭpieršyniu vyklikajuć prablemy.\n"
 "Pasprabuj vykarystać praściejšuju kanfihuracyju albo praściejšuju versiju "
 "XFree."
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:252
-msgid "Do _not show this warning again"
-msgstr "_Nie pakazvaj bolš hetaj aściarohi"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:266
-#, c-format
-msgid ""
-"<b>The X system keyboard settings differ from your current GNOME keyboard "
-"settings.</b>\n"
-"\n"
-"Expected was %s, but the the following settings were found: %s.\n"
-"\n"
-"Which set would you like to use?"
-msgstr ""
-"<b>Nałady klavijatury X adroźnivajucca ad dziejnych naładaŭ klavijatury "
-"GNOME.</b>\n"
-"\n"
-"Čakałasia %s, ale znojdzienyja nastupnyja nałady: %s.\n"
-"\n"
-"Jakimi naładami ty chočaš karystacca?"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:289
-msgid "Use X settings"
-msgstr "Užyj nałady X"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:291
-msgid "Keep GNOME settings"
-msgstr "Pakiń nałady GNOME"
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
@@ -3309,7 +3293,8 @@ msgstr "Hrupy nie akreślenyja ŭ zakładcy dla URI \"%s\""
 #: ../libslab/libslab-bookmarkfile.c:3518
 #, c-format
 msgid "No application with name '%s' registered a bookmark for '%s'"
-msgstr "Aplikacyja z nazvaj \"%s\" nie zaheristravanaja dla zakładki dla \"%s\""
+msgstr ""
+"Aplikacyja z nazvaj \"%s\" nie zaheristravanaja dla zakładki dla \"%s\""
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
@@ -3677,7 +3662,6 @@ msgstr ""
 "zadačy\"."
 
 #: ../shell/gnomecc.desktop.in.in.h:2
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Pryłada kanfihuracyi GNOME"
 
@@ -3883,8 +3867,12 @@ msgid "usage: %s fontfile\n"
 msgstr "užyćcio: %s fajł_šryftu\n"
 
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "GNOME Font Viewer"
-msgstr "Prahladalnik šryftoŭ GNOME"
+msgid "Font Viewer"
+msgstr "Prahladalnik šryftoŭ"
+
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "Preview fonts"
+msgstr "Pieradahlad šryftoŭ"
 
 #: ../vfs-methods/fontilus/thumbnailer.c:242
 msgid "Text to thumbnail (default: Aa)"
@@ -4001,6 +3989,42 @@ msgstr "Užyj matyŭ"
 #: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Viartaje zmoŭčany matyŭ"
+
+#~ msgid "The theme is an engine. You need to compile it."
+#~ msgstr "Hety matyŭ źjaŭlajecca ruchavikom. Jaho treba skampilavać."
+
+#~ msgid "The file format is invalid"
+#~ msgstr "Farmat fajłu niapravilny"
+
+#~ msgid "This theme is not in a supported format."
+#~ msgstr "Matyŭ u farmacie, jaki nie absłuhoŭvajecca."
+
+#~ msgid "The file format is invalid."
+#~ msgstr "Farmat fajłu niapravilny."
+
+#~ msgid "Do _not show this warning again"
+#~ msgstr "_Nie pakazvaj bolš hetaj aściarohi"
+
+#~ msgid ""
+#~ "<b>The X system keyboard settings differ from your current GNOME keyboard "
+#~ "settings.</b>\n"
+#~ "\n"
+#~ "Expected was %s, but the the following settings were found: %s.\n"
+#~ "\n"
+#~ "Which set would you like to use?"
+#~ msgstr ""
+#~ "<b>Nałady klavijatury X adroźnivajucca ad dziejnych naładaŭ klavijatury "
+#~ "GNOME.</b>\n"
+#~ "\n"
+#~ "Čakałasia %s, ale znojdzienyja nastupnyja nałady: %s.\n"
+#~ "\n"
+#~ "Jakimi naładami ty chočaš karystacca?"
+
+#~ msgid "Use X settings"
+#~ msgstr "Užyj nałady X"
+
+#~ msgid "Keep GNOME settings"
+#~ msgstr "Pakiń nałady GNOME"
 
 #~ msgid "<b>Applications</b>"
 #~ msgstr "<b>Aplikacyi</b>"
