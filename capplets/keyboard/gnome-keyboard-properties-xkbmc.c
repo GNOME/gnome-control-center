@@ -41,11 +41,6 @@ static void fill_models_list (GladeXML * chooser_dialog);
 
 static gboolean fill_vendors_list (GladeXML * chooser_dialog);
 
-/* hack, till libxklavier 3.3 is released */
-#ifndef XCI_PROP_VENDOR
-  #define XCI_PROP_VENDOR "vendor"
-#endif
-
 static GtkTreePath *
 gtk_list_store_find_entry (GtkListStore * list_store,
 			   GtkTreeIter * iter, gchar * name, int column_id)
