@@ -727,6 +727,9 @@ do_action (Acme *acme, int type)
 	case MEDIA_KEY:
 		do_media_action (acme);
 		break;
+	case CALCULATOR_KEY:
+		execute (acme, "gcalctool", FALSE, FALSE);
+		break;
 	case PLAY_KEY:
 		return do_multimedia_player_action (acme, "Play");
 		break;
