@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-07 15:21+0100\n"
-"PO-Revision-Date: 2007-10-16 14:19+0200\n"
+"POT-Creation-Date: 2007-10-22 20:01+0100\n"
+"PO-Revision-Date: 2007-10-23 15:11+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgid "No Image"
 msgstr "Sin imagen"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1084
+#: ../capplets/appearance/appearance-desktop.c:1088
 msgid "Images"
 msgstr "Imágenes"
 
@@ -729,11 +729,11 @@ msgstr "píxeles/segundo"
 msgid "seconds"
 msgstr "segundos"
 
-#: ../capplets/appearance/appearance-desktop.c:1063
+#: ../capplets/appearance/appearance-desktop.c:1067
 msgid "Add Wallpaper"
 msgstr "Añadir tapiz"
 
-#: ../capplets/appearance/appearance-desktop.c:1088
+#: ../capplets/appearance/appearance-desktop.c:1092
 msgid "All files"
 msgstr "Todos los archivos"
 
@@ -813,27 +813,27 @@ msgstr "[Tapiz...]"
 msgid "Default Pointer"
 msgstr "Puntero predeterminado"
 
-#: ../capplets/appearance/appearance-themes.c:507
+#: ../capplets/appearance/appearance-themes.c:515
 msgid "Apply Background"
 msgstr "Aplicar tapiz"
 
-#: ../capplets/appearance/appearance-themes.c:511
+#: ../capplets/appearance/appearance-themes.c:519
 msgid "Apply Font"
 msgstr "Aplicar tipografía"
 
-#: ../capplets/appearance/appearance-themes.c:536
+#: ../capplets/appearance/appearance-themes.c:544
 msgid "The current theme suggests a background and a font."
 msgstr "El tema actual sugiere un tapiz y una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/appearance/appearance-themes.c:549
 msgid "The current theme suggests a background."
 msgstr "El tema actual sugiere un tapiz."
 
-#: ../capplets/appearance/appearance-themes.c:546
+#: ../capplets/appearance/appearance-themes.c:554
 msgid "The current theme suggests a font."
 msgstr "El tema actual sugiere una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:830
+#: ../capplets/appearance/appearance-themes.c:838
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -2387,11 +2387,11 @@ msgstr "Predeterminado"
 msgid "Layout"
 msgstr "Distribución"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:169
 msgid "Vendors"
 msgstr "Fabricantes"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:235
 msgid "Models"
 msgstr "Modelos"
 
@@ -2940,7 +2940,7 @@ msgstr ""
 "Se ha producido un error al intentar ejecutar (%s)\n"
 "que está asociado a la tecla (%s)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:106
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:98
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2971,7 +2971,7 @@ msgstr ""
 "- El resultado de <b>%s</b>\n"
 "- El resultado de  <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:120
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:112
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2982,35 +2982,6 @@ msgstr ""
 "Hay problemas conocidos con configuraciones complejas de XKB.\n"
 "Intente usar una configuración más simple o usar una versión más reciente de "
 "XFree."
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:252
-msgid "Do _not show this warning again"
-msgstr "_No mostrar esta advertencia otra vez"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:266
-#, c-format
-msgid ""
-"<b>The X system keyboard settings differ from your current GNOME keyboard "
-"settings.</b>\n"
-"\n"
-"Expected was %s, but the the following settings were found: %s.\n"
-"\n"
-"Which set would you like to use?"
-msgstr ""
-"<b>La configuración del teclado de X difiere de su configuración actual de "
-"teclado en GNOME.</b>\n"
-"\n"
-"Se esperaba %s, pero se encontró la configuración siguiente: %s.\n"
-"\n"
-"¿Cuál quiere usar?"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:289
-msgid "Use X settings"
-msgstr "Usar la configuración de X"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:291
-msgid "Keep GNOME settings"
-msgstr "Conservar la configuración de GNOME"
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
@@ -3208,7 +3179,7 @@ msgid "Network Servers"
 msgstr "Servidores de red"
 
 #: ../libslab/bookmark-agent.c:1170
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Buscar"
 
@@ -3466,126 +3437,134 @@ msgid "Home folder's shortcut."
 msgstr "Combinación de teclas para la carpeta personal."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+msgid "Launch calculator"
+msgstr "Lanzar la calculadora"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+msgid "Launch calculator's shortcut"
+msgstr "Combinación de teclas de la calculadora."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch help browser"
 msgstr "Lanzar visor de ayuda"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch help browser's shortcut."
 msgstr "Combinación de teclas del visor de ayuda."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Launch web browser"
 msgstr "Lanzar navegador web"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Launch web browser's shortcut."
 msgstr "Combinación de teclas del navegador web."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Lock screen"
 msgstr "Bloquear la pantalla"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Lock screen's shortcut."
 msgstr "Combinación de teclas para bloquear la pantalla."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Log out"
 msgstr "Salir de la sesión"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Log out's shortcut."
 msgstr "Combinación de teclas para terminar sesión."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Media player"
 msgstr "Reproductor multimedia"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Media player key's shortcut."
 msgstr "Combinación de teclas para el reproductor multimedia."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Next track key's shortcut."
 msgstr "Combinación de teclas para la pista siguiente."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Pause"
 msgstr "Pausar"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Pause key's shortcut."
 msgstr "Combinación de teclas de la tecla pausa."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Play (or play/pause)"
 msgstr "Reproducir (o Reproducir/Pausar)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Play (or play/pause) key's shortcut."
 msgstr "Combinación de teclas de para reproducir (o pausar)."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Previous track key's shortcut."
 msgstr "Combinación de teclas para pista anterior."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Search's shortcut."
 msgstr "Combinación de teclas para la búsqueda."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Skip to next track"
 msgstr "Saltar a la pista siguiente"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Skip to previous track"
 msgstr "Saltar a la pista anterior"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Sleep"
 msgstr "Dormir"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Sleep's shortcut."
 msgstr "Combinación de teclas para dormir."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Stop playback key"
 msgstr "Tecla para detener la reproducción"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Stop playback key's shortcut."
 msgstr "Combinación de teclas para detener la reproducción."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume down"
 msgstr "Bajar volumen"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume down's shortcut."
 msgstr "Combinación de teclas para bajar el volumen."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume mute"
 msgstr "Silenciar"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume mute's shortcut."
 msgstr "Combinación de teclas para silenciar el volumen."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
 msgstr "Paso del volumen"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume step as percentage of volume."
 msgstr "Paso del volumen como porcentaje del volumen."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
 msgid "Volume up"
 msgstr "Subir volumen"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Combinación de teclas para subir el volumen."
 
