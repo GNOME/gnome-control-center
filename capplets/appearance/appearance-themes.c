@@ -218,36 +218,33 @@ is_locked_down (GConfClient *client)
   return gconf_client_get_bool (client, LOCKDOWN_KEY, NULL);
 }
 
-static void
-theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
+static GnomeThemeMetaInfo *
+theme_load_from_gconf (GConfClient *client)
 {
+  GnomeThemeMetaInfo *theme;
   gchar *scheme;
 
-  g_free (theme->gtk_theme_name);
+  theme = gnome_theme_meta_info_new ();
+
   theme->gtk_theme_name = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   if (theme->gtk_theme_name == NULL)
     theme->gtk_theme_name = g_strdup ("Clearlooks");
 
-  g_free (theme->gtk_color_scheme);
   scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
-
   if (scheme == NULL || !strcmp (scheme, "")) {
     g_free (scheme);
     scheme = gtkrc_get_color_scheme_for_theme (theme->gtk_theme_name);
   }
   theme->gtk_color_scheme = scheme;
 
-  g_free (theme->metacity_theme_name);
   theme->metacity_theme_name = gconf_client_get_string (client, METACITY_THEME_KEY, NULL);
   if (theme->metacity_theme_name == NULL)
     theme->metacity_theme_name = g_strdup ("Clearlooks");
 
-  g_free (theme->icon_theme_name);
   theme->icon_theme_name = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   if (theme->icon_theme_name == NULL)
     theme->icon_theme_name = g_strdup ("gnome");
 
-  g_free (theme->cursor_theme_name);
 #ifdef HAVE_XCURSOR
   theme->cursor_theme_name = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
   theme->cursor_size = gconf_client_get_int (client, CURSOR_SIZE_KEY, NULL);
@@ -257,8 +254,9 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
   if (theme->cursor_theme_name == NULL)
     theme->cursor_theme_name = g_strdup ("default");
 
-  g_free (theme->application_font);
   theme->application_font = gconf_client_get_string (client, APPLICATION_FONT_KEY, NULL);
+
+  return theme;
 }
 
 static gchar *
@@ -670,8 +668,7 @@ theme_details_changed_cb (AppearanceData *data)
   gboolean done = FALSE;
 
   /* load new state from gconf */
-  gconf_theme = gnome_theme_meta_info_new ();
-  theme_load_from_gconf (data->client, gconf_theme);
+  gconf_theme = theme_load_from_gconf (data->client);
 
   /* check if it's our currently selected theme */
   icon_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
@@ -834,9 +831,9 @@ themes_init (AppearanceData *data)
   theme_list = gnome_theme_meta_info_find_all ();
   gnome_theme_info_register_theme_change ((ThemeChangedCallback) theme_changed_on_disk_cb, data);
 
+  data->theme_custom = theme_load_from_gconf (data->client);
   data->theme_custom->name = g_strdup (CUSTOM_THEME_NAME);
   data->theme_custom->readable_name = g_strdup_printf ("<i>%s</i>", _("Custom"));
-  theme_load_from_gconf (data->client, data->theme_custom);
 
   for (l = theme_list; l; l = l->next) {
     GnomeThemeMetaInfo *info = l->data;
