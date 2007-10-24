@@ -1,3 +1,14 @@
+2007-10-24  Jens Granseuer  <jensgr@gmx.net>
+
+	The fix for bug #420154 not only made the entry for the theme installer
+	disappear from the menu, but also disabled mime-type handling for Gnome
+	Theme Packages (bug #486811). Revert that change and use NoDisplay=true
+	instead. This will remove the entry from the menu (not from the menu
+	editor, though), and not break mime handling.
+
+	* data/gnome-theme-installer.desktop.in.in: use NoDisplay=true instead
+	of OnlyShowIn=;
+
 2007-10-18  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-themes.c: (theme_load_from_gconf),
