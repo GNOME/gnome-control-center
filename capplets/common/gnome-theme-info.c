@@ -588,7 +588,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
   gchar *common_theme_dir;
   GHashTable *hash_by_uri;
   GHashTable *hash_by_name;
-  gchar *name = NULL;
+  const gchar *name = NULL;
 
   if (icon_theme)
     {
@@ -653,6 +653,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
       else
 	name = ((GnomeThemeMetaInfo *)theme_info)->name;
     }
+
   if (old_theme_info == NULL)
     {
       if (theme_exists)
@@ -665,6 +666,12 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
     }
   else
     {
+      const gchar *old_name;
+      if (icon_theme)
+	old_name = ((GnomeThemeIconInfo *)old_theme_info)->name;
+      else
+	old_name = ((GnomeThemeMetaInfo *)old_theme_info)->name;
+
       if (theme_exists)
         {
 	  gint cmp;
@@ -678,7 +685,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
 	    {
 	      /* Remove old theme */
 	      g_hash_table_remove (hash_by_uri, common_theme_dir);
-   	      remove_data_from_hash_by_name (hash_by_name, ((GnomeThemeIconInfo *)old_theme_info)->name, old_theme_info);
+   	      remove_data_from_hash_by_name (hash_by_name, old_name, old_theme_info);
 	      g_hash_table_insert (hash_by_uri, g_strdup (common_theme_dir), theme_info);
 	      add_data_to_hash_by_name (hash_by_name, name, theme_info);
 	      handle_change_signal (icon_theme?GNOME_THEME_TYPE_ICON:GNOME_THEME_TYPE_METATHEME,
@@ -698,10 +705,8 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
 	}
       else
 	{
-	  if (icon_theme)
-	    name = ((GnomeThemeIconInfo *)old_theme_info)->name;
-	  else
-	    name = ((GnomeThemeMetaInfo *)old_theme_info)->name;
+	  g_hash_table_remove (hash_by_uri, common_theme_dir);
+   	  remove_data_from_hash_by_name (hash_by_name, old_name, old_theme_info);
 
 	  handle_change_signal (icon_theme?GNOME_THEME_TYPE_ICON:GNOME_THEME_TYPE_METATHEME,
 				old_theme_info, GNOME_THEME_CHANGE_DELETED, 0);

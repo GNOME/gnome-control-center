@@ -1,3 +1,14 @@
+2007-10-24  Jens Granseuer  <jensgr@gmx.net>
+
+	This change hopefully fixes bug #484797 which I suspect is caused by
+	the capplet getting stale data from from the themes module which in
+	turn is caused by deleted themes being freed but not removed from the
+	hash cache.
+
+	* gnome-theme-info.c: (update_common_theme_dir_index): actually remove
+	theme data from the hash when the theme gets deleted; also don't
+	unconditionally cast to icon theme
+
 2007-10-14  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-theme-info.c: (gnome_theme_init): fix invalid use after free I
