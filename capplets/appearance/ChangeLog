@@ -1,5 +1,11 @@
 2007-10-25  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-themes.c: (theme_load_from_gconf),
+	(theme_set_custom_from_theme): try even harder to not let essential
+	keys become NULL. Might fix bug #487257.
+
+2007-10-25  Jens Granseuer  <jensgr@gmx.net>
+
 	* appearance-style.c: (style_init):
 	* data/appearance.glade: move some more of the cursor size widget
 	initialization to glade. This allows the slider to be updated properly

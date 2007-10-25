@@ -211,23 +211,6 @@ get_default_string_from_key (GConfClient *client, const char *key)
   return str;
 }
 
-static gint
-get_default_int_from_key (GConfClient *client, const char *key, gint def)
-{
-  GConfValue *value;
-  gint val = def;
-
-  value = gconf_client_get_default_from_schema (client, key, NULL);
-
-  if (value) {
-    if (value->type == GCONF_VALUE_INT)
-      val = gconf_value_get_int (value);
-    gconf_value_free (value);
-  }
-
-  return val;
-}
-
 /* Find out if the lockdown key has been set. Currently returns false on error... */
 static gboolean
 is_locked_down (GConfClient *client)
@@ -242,6 +225,8 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
 
   g_free (theme->gtk_theme_name);
   theme->gtk_theme_name = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
+  if (theme->gtk_theme_name == NULL)
+    theme->gtk_theme_name = g_strdup ("Clearlooks");
 
   g_free (theme->gtk_color_scheme);
   scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
@@ -254,9 +239,13 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
 
   g_free (theme->metacity_theme_name);
   theme->metacity_theme_name = gconf_client_get_string (client, METACITY_THEME_KEY, NULL);
+  if (theme->metacity_theme_name == NULL)
+    theme->metacity_theme_name = g_strdup ("Clearlooks");
 
   g_free (theme->icon_theme_name);
   theme->icon_theme_name = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
+  if (theme->icon_theme_name == NULL)
+    theme->icon_theme_name = g_strdup ("gnome");
 
   g_free (theme->cursor_theme_name);
 #ifdef HAVE_XCURSOR
@@ -265,6 +254,8 @@ theme_load_from_gconf (GConfClient *client, GnomeThemeMetaInfo *theme)
 #else
   theme->cursor_theme_name = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);
 #endif
+  if (theme->cursor_theme_name == NULL)
+    theme->cursor_theme_name = g_strdup ("default");
 
   g_free (theme->application_font);
   theme->application_font = gconf_client_get_string (client, APPLICATION_FONT_KEY, NULL);
@@ -381,46 +372,21 @@ theme_set_custom_from_theme (const GnomeThemeMetaInfo *info, AppearanceData *dat
     g_free (custom->gtk_color_scheme);
     g_free (custom->cursor_theme_name);
     g_free (custom->application_font);
-    custom->gtk_theme_name = NULL;
-    custom->icon_theme_name = NULL;
-    custom->metacity_theme_name = NULL;
     custom->gtk_color_scheme = NULL;
-    custom->cursor_theme_name = NULL;
     custom->application_font = NULL;
 
-    if (info->gtk_theme_name)
-      custom->gtk_theme_name = g_strdup (info->gtk_theme_name);
-    else
-      custom->gtk_theme_name = get_default_string_from_key (data->client, GTK_THEME_KEY);
+    /* these settings are guaranteed to be non-NULL */
+    custom->gtk_theme_name = g_strdup (info->gtk_theme_name);
+    custom->icon_theme_name = g_strdup (info->icon_theme_name);
+    custom->metacity_theme_name = g_strdup (info->metacity_theme_name);
+    custom->cursor_theme_name = g_strdup (info->cursor_theme_name);
+    custom->cursor_size = info->cursor_size;
 
-    if (info->icon_theme_name)
-      custom->icon_theme_name = g_strdup (info->icon_theme_name);
-    else
-      custom->icon_theme_name = get_default_string_from_key (data->client, ICON_THEME_KEY);
-
-    if (info->metacity_theme_name)
-      custom->metacity_theme_name = g_strdup (info->metacity_theme_name);
-    else
-      custom->metacity_theme_name = get_default_string_from_key (data->client, METACITY_THEME_KEY);
-
+    /* these can be NULL */
     if (info->gtk_color_scheme)
       custom->gtk_color_scheme = g_strdup (info->gtk_color_scheme);
     else
       custom->gtk_color_scheme = get_default_string_from_key (data->client, COLOR_SCHEME_KEY);
-
-    if (info->cursor_theme_name) {
-      custom->cursor_theme_name = g_strdup (info->cursor_theme_name);
-#ifdef HAVE_XCURSOR
-      custom->cursor_size = info->cursor_size;
-#endif
-    } else {
-#ifdef HAVE_XCURSOR
-      custom->cursor_theme_name = get_default_string_from_key (data->client, CURSOR_THEME_KEY);
-      custom->cursor_size = get_default_int_from_key (data->client, CURSOR_SIZE_KEY, 18);
-#else
-      custom->cursor_theme_name = get_default_string_from_key (data->client, CURSOR_FONT_KEY);
-#endif
-    }
 
     if (info->application_font)
       custom->application_font = g_strdup (info->application_font);
