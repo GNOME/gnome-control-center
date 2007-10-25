@@ -13,9 +13,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNOME control center HEAD\n"
+"Project-Id-Version: GNOME Control Center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-09 20:38+0100\n"
+"POT-Creation-Date: 2007-10-17 03:42+0100\n"
 "PO-Revision-Date: 2007-10-07 21:45+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -61,7 +61,7 @@ msgid "No Image"
 msgstr "Pilt puudub"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1064
+#: ../capplets/appearance/appearance-desktop.c:1088
 msgid "Images"
 msgstr "Pildid"
 
@@ -459,7 +459,6 @@ msgid "Accessible Lo_gin"
 msgstr "_Hõlbustustega sisselogimine"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Preferences"
 msgstr "Abistava tehnika eelistused"
 
@@ -496,6 +495,10 @@ msgstr "_Klaviatuurihõlbustused"
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
 msgid "_Preferred Applications"
 msgstr "_Eelistatud rakendused"
+
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
+msgid "Assistive Technology"
+msgstr "Abistav tehnika"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
@@ -716,11 +719,11 @@ msgstr "pikslit/sek"
 msgid "seconds"
 msgstr "sekundit"
 
-#: ../capplets/appearance/appearance-desktop.c:1043
+#: ../capplets/appearance/appearance-desktop.c:1067
 msgid "Add Wallpaper"
 msgstr "Tapeedi lisamine"
 
-#: ../capplets/appearance/appearance-desktop.c:1068
+#: ../capplets/appearance/appearance-desktop.c:1092
 msgid "All files"
 msgstr "Kõik failid"
 
@@ -770,15 +773,16 @@ msgstr "Paigaldatava teemafaili nime määramine"
 msgid "filename"
 msgstr "failinimi"
 
-#: ../capplets/appearance/appearance-main.c:115
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/appearance/appearance-main.c:116
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "Määra näidatava lehe nimi (theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:117
 msgid "page"
 msgstr "leht"
 
-#: ../capplets/appearance/appearance-main.c:123
+#: ../capplets/appearance/appearance-main.c:124
 msgid "[WALLPAPER...]"
 msgstr "[TAPEET...]"
 
@@ -789,27 +793,27 @@ msgstr "[TAPEET...]"
 msgid "Default Pointer"
 msgstr "Vaikimisi kursor"
 
-#: ../capplets/appearance/appearance-themes.c:507
+#: ../capplets/appearance/appearance-themes.c:549
 msgid "Apply Background"
 msgstr "Rakenda taust"
 
-#: ../capplets/appearance/appearance-themes.c:511
+#: ../capplets/appearance/appearance-themes.c:553
 msgid "Apply Font"
 msgstr "Rakenda kirjatüüp"
 
-#: ../capplets/appearance/appearance-themes.c:536
+#: ../capplets/appearance/appearance-themes.c:578
 msgid "The current theme suggests a background and a font."
 msgstr "Käesolev teema vihjab taustale ja kirjatüübile."
 
-#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/appearance/appearance-themes.c:583
 msgid "The current theme suggests a background."
 msgstr "Käesolev teema vihjab taustale."
 
-#: ../capplets/appearance/appearance-themes.c:546
+#: ../capplets/appearance/appearance-themes.c:588
 msgid "The current theme suggests a font."
 msgstr "Käesolev teema vihjab kirjatüübile."
 
-#: ../capplets/appearance/appearance-themes.c:823
+#: ../capplets/appearance/appearance-themes.c:872
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1201,7 +1205,7 @@ msgstr "Gnome Teemapakk"
 msgid "No Wallpaper"
 msgstr "Tapeet puudub"
 
-#: ../capplets/appearance/gnome-wp-item.c:365
+#: ../capplets/appearance/gnome-wp-item.c:363
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1212,8 +1216,8 @@ msgstr ""
 "%s, laius %d %s, kõrgus %d %s\n"
 "Kataloog: %s"
 
+#: ../capplets/appearance/gnome-wp-item.c:369
 #: ../capplets/appearance/gnome-wp-item.c:371
-#: ../capplets/appearance/gnome-wp-item.c:373
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "piksel"
@@ -1242,16 +1246,20 @@ msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME Teema %s on korralikult paigaldatud"
 
 #: ../capplets/appearance/theme-installer.c:249
-msgid "The theme is an engine. You need to compile it."
-msgstr "Teema on teemamootor. Sa pead teema kompileerima."
+msgid ""
+"The selected file is not a valid theme. It might be a theme engine that you "
+"need to compile."
+msgstr ""
 
 #: ../capplets/appearance/theme-installer.c:258
-msgid "The file format is invalid"
-msgstr "Failivorming on vigane"
+#: ../capplets/appearance/theme-installer.c:413
+#: ../capplets/appearance/theme-installer.c:558
+msgid "The selected file does not appear to be a valid theme."
+msgstr ""
 
 #: ../capplets/appearance/theme-installer.c:309
-msgid "Installation Failed"
-msgstr "Tõrge paigaldamisel"
+msgid "Installation failed."
+msgstr "Tõrge paigaldamisel."
 
 #: ../capplets/appearance/theme-installer.c:330
 #, c-format
@@ -1269,10 +1277,6 @@ msgstr "Praeguse teema säilitamine"
 #: ../capplets/appearance/theme-installer.c:340
 msgid "Apply New Theme"
 msgstr "Uue teema rakendamine"
-
-#: ../capplets/appearance/theme-installer.c:413
-msgid "This theme is not in a supported format."
-msgstr "See teema pole toetatud vormingus."
 
 #: ../capplets/appearance/theme-installer.c:438
 msgid "Failed to create temporary directory"
@@ -1299,10 +1303,6 @@ msgid ""
 msgstr ""
 "%s on teemafailide paigaldamise rada ja seda pole võimalik lähtekohaks "
 "määrata"
-
-#: ../capplets/appearance/theme-installer.c:558
-msgid "The file format is invalid."
-msgstr "Failivorming on vigane."
 
 #: ../capplets/appearance/theme-installer.c:613
 msgid "Select Theme"
@@ -1565,7 +1565,7 @@ msgid "Large White Pointer"
 msgstr "Suur valge kursor"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Preferred Applications"
 msgstr "Eelistatud rakendused"
 
@@ -1655,44 +1655,52 @@ msgid "All %s occurrences will be replaced with actual link"
 msgstr "Kõik %s stringid asendatakse tegeliku viidaga"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Co_mmand:"
+msgid "C_ommand:"
 msgstr "_Käsk:"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "Co_mmand:"
+msgstr "_Käsk:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "E_xecute flag:"
 msgstr "_Käivitamislipp:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Internet"
 msgstr "Internet"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Multimedia"
 msgstr "Multimeedia"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Open link in new _tab"
 msgstr "Viidad avatakse uues sa_kis"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Open link in new _window"
 msgstr "Viidad avatakse uues ak_nas"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Open link with web browser _default"
 msgstr "Avatakse vastavalt sirvija _vaikesätetele"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Run at st_art"
 msgstr "_Käivitatakse sisselogimisel"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "Run in t_erminal"
 msgstr "Käivitatakse t_erminalis"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "System"
 msgstr "Süsteem"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "_Run at start"
+msgstr "_Käivitatakse pärast sisselogimist"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
@@ -2893,7 +2901,7 @@ msgstr ""
 "Viga kävitamise proovimisel (%s),\n"
 "see on ühendatud klahviga (%s)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:106
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:98
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2924,7 +2932,7 @@ msgstr ""
 "- <b>%s</b> tulemus\n"
 "- <b>%s</b> tulemus"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:120
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:112
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2934,35 +2942,6 @@ msgstr ""
 "Sa kasutad XFree versiooni 4.3.0.\n"
 "Sellega on teadaolevaid probleeme XKB komplekssete seadistustega.\n"
 "Proovi kasutada lihtsamaid sätteid või hangi omale XFree värskem versioon."
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:252
-msgid "Do _not show this warning again"
-msgstr "Seda _hoiatust uuesti mitte näidata"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:266
-#, c-format
-msgid ""
-"<b>The X system keyboard settings differ from your current GNOME keyboard "
-"settings.</b>\n"
-"\n"
-"Expected was %s, but the the following settings were found: %s.\n"
-"\n"
-"Which set would you like to use?"
-msgstr ""
-"<b>X-süsteemi klaviatuuri sätted erinevad praegustest GNOME klaviatuuri "
-"sätetest.</b>\n"
-"\n"
-"Oodati sätteid %s, kuid leiti hoopis järgnevad sätted: %s\n"
-"\n"
-"Milliseid sätteid Sa soovid kasutada?"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:289
-msgid "Use X settings"
-msgstr "X'i seadistuste kasutamine"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:291
-msgid "Keep GNOME settings"
-msgstr "GNOME sätete säilitamine"
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
@@ -3280,7 +3259,7 @@ msgstr ""
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
-msgstr ""
+msgstr "Leia nüüd"
 
 #: ../libslab/system-tile.c:128
 #, c-format
@@ -3289,7 +3268,7 @@ msgstr "<b>Ava programmiga \"%s\"</b>"
 
 #: ../libslab/system-tile.c:141
 msgid "Remove from System Items"
-msgstr ""
+msgstr "Eemalda süsteemsete kirjete hulgast"
 
 #: ../libsounds/sound-view.c:44
 msgid "Login"
@@ -3642,7 +3621,6 @@ msgstr ""
 "aktiveerimisel"
 
 #: ../shell/gnomecc.desktop.in.in.h:2
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "GNOME seadistusprogramm"
 
@@ -3848,8 +3826,12 @@ msgid "usage: %s fontfile\n"
 msgstr "kasutamine: %s kirjatüübifail\n"
 
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "GNOME Font Viewer"
-msgstr "GNOME kirjatüübivaatur"
+msgid "Font Viewer"
+msgstr "Kirjatüüpide näitaja"
+
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "Preview fonts"
+msgstr "Kirjatüüpide eelvaade"
 
 #: ../vfs-methods/fontilus/thumbnailer.c:242
 msgid "Text to thumbnail (default: Aa)"
@@ -3967,14 +3949,47 @@ msgstr "Teema rakendamine"
 msgid "Sets the default theme"
 msgstr "Vaikimisi teema seadmine"
 
+#~ msgid "The theme is an engine. You need to compile it."
+#~ msgstr "Teema on teemamootor. Sa pead teema kompileerima."
+
+#~ msgid "The file format is invalid"
+#~ msgstr "Failivorming on vigane"
+
+#~ msgid "This theme is not in a supported format."
+#~ msgstr "See teema pole toetatud vormingus."
+
+#~ msgid "The file format is invalid."
+#~ msgstr "Failivorming on vigane."
+
+#~ msgid "Do _not show this warning again"
+#~ msgstr "Seda _hoiatust uuesti mitte näidata"
+
+#~ msgid ""
+#~ "<b>The X system keyboard settings differ from your current GNOME keyboard "
+#~ "settings.</b>\n"
+#~ "\n"
+#~ "Expected was %s, but the the following settings were found: %s.\n"
+#~ "\n"
+#~ "Which set would you like to use?"
+#~ msgstr ""
+#~ "<b>X-süsteemi klaviatuuri sätted erinevad praegustest GNOME klaviatuuri "
+#~ "sätetest.</b>\n"
+#~ "\n"
+#~ "Oodati sätteid %s, kuid leiti hoopis järgnevad sätted: %s\n"
+#~ "\n"
+#~ "Milliseid sätteid Sa soovid kasutada?"
+
+#~ msgid "Use X settings"
+#~ msgstr "X'i seadistuste kasutamine"
+
+#~ msgid "Keep GNOME settings"
+#~ msgstr "GNOME sätete säilitamine"
+
 #~ msgid "gtk-delete"
 #~ msgstr "gtk-delete"
 
 #~ msgid "Theme Details"
 #~ msgstr "Teema üksikasjad"
-
-#~ msgid "Preferred Assistive Technology"
-#~ msgstr "Eelistatud abistav tehnika"
 
 #~ msgid "Start these assistive technologies every time you log in:"
 #~ msgstr "Järgnevate abistavate vahendite käivitamine igal sisselogimisel:"
