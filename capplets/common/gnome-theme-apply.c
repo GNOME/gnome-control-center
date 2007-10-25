@@ -38,6 +38,7 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
 {
   GConfClient *client;
   gchar *old_key;
+  gint old_key_int;
   GnomeWindowManager *window_manager;
   GnomeWMSettings wm_settings;
 
@@ -99,7 +100,12 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
   if (compare (old_key, meta_theme_info->cursor_theme_name))
     {
       gconf_client_set_string (client, CURSOR_THEME_KEY, meta_theme_info->cursor_theme_name, NULL);
-      gconf_client_set_int (client, CURSOR_SIZE_KEY, meta_theme_info->cursor_size, NULL);
+    }
+
+  old_key_int = gconf_client_get_int (client, CURSOR_SIZE_KEY, NULL);
+  if (old_key_int != meta_theme_info->cursor_theme_name)
+    {
+      gconf_client_set_int (client, CURSOR_SIZE_KEY, meta_theme_info->cursor_size, NULL);    
     }
 #else
   old_key = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);

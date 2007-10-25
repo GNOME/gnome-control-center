@@ -341,6 +341,9 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
       strcmp (a->cursor_theme_name, b->cursor_theme_name))
     return FALSE;
 
+  if (a->cursor_size != b->cursor_size)
+    return FALSE;
+
   a_set = a->gtk_color_scheme && strcmp (a->gtk_color_scheme, "");
   b_set = b->gtk_color_scheme && strcmp (b->gtk_color_scheme, "");
   if ((a_set != b_set) ||
@@ -923,6 +926,8 @@ themes_init (AppearanceData *data)
   gconf_client_add_dir (data->client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_NONE, NULL);
   gconf_client_add_dir (data->client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_NONE, NULL);
   gconf_client_notify_add (data->client, METACITY_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, CURSOR_THEME_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, CURSOR_SIZE_KEY, (GConfClientNotifyFunc) theme_gconf_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, BACKGROUND_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, APPLICATION_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, DESKTOP_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);

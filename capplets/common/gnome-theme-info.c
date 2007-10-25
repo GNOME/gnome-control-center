@@ -2025,6 +2025,13 @@ gnome_theme_init (gboolean *monitor_not_added)
   result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 0, NULL);
   gnome_vfs_uri_unref (top_theme_dir_uri);
 
+  /* /usr/share/cursors/xorg-x11 (used on Gentoo Linux) */
+  top_theme_dir_uri = gnome_vfs_uri_new ("/usr/share/cursors/xorg-x11");
+  if (!gnome_vfs_uri_exists (top_theme_dir_uri))
+    gnome_vfs_make_directory_for_uri (top_theme_dir_uri, 0775);
+  result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 2, NULL);
+  gnome_vfs_uri_unref (top_theme_dir_uri);
+
 #ifndef HAVE_XCURSOR
   /* If we don't have Xcursor, use the built-in cursor fonts instead */
   read_cursor_fonts ();
