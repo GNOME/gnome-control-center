@@ -861,7 +861,6 @@ style_init (AppearanceData *data)
 {
   GtkSettings *settings;
   GtkWidget *w;
-  GtkAdjustment *adjustment;
   gchar *label;
   gint i;
 
@@ -891,10 +890,7 @@ style_init (AppearanceData *data)
 
 #ifdef HAVE_XCURSOR
   w = glade_xml_get_widget (data->xml, "cursor_size_scale");
-  GTK_RANGE (w)->round_digits = 0;
   g_signal_connect (w, "value-changed", (GCallback) cursor_size_scale_value_changed_cb, data);
-  adjustment = gtk_range_get_adjustment (GTK_RANGE (w));
-  g_object_set (adjustment, "page-size", 0.0, NULL);
 
   w = glade_xml_get_widget (data->xml, "cursor_size_small_label");
   label = g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w)));
