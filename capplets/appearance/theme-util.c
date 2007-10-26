@@ -68,6 +68,11 @@ theme_delete (const gchar *name, ThemeType type)
       theme_dir = g_strdup (((GnomeThemeMetaInfo *) theme)->path);
       break;
 
+    case THEME_TYPE_CURSOR:
+      theme = gnome_theme_cursor_info_find (name);
+      theme_dir = g_build_filename (((GnomeThemeCursorInfo *) theme)->path, "cursors", NULL);
+      break;
+
     default:
       return FALSE;
   }
