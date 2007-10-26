@@ -515,6 +515,12 @@ icon_theme_delete_cb (GtkWidget *button, AppearanceData *data)
   generic_theme_delete ("icon_themes_list", THEME_TYPE_ICON, data);
 }
 
+static void
+cursor_theme_delete_cb (GtkWidget *button, AppearanceData *data)
+{
+  generic_theme_delete ("cursor_themes_list", THEME_TYPE_CURSOR, data);
+}
+
 #ifdef HAVE_XCURSOR
 static void
 cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
@@ -920,6 +926,7 @@ style_init (AppearanceData *data)
   g_signal_connect (glade_xml_get_widget (data->xml, "gtk_themes_delete"), "clicked", (GCallback) gtk_theme_delete_cb, data);
   g_signal_connect (glade_xml_get_widget (data->xml, "window_themes_delete"), "clicked", (GCallback) window_theme_delete_cb, data);
   g_signal_connect (glade_xml_get_widget (data->xml, "icon_themes_delete"), "clicked", (GCallback) icon_theme_delete_cb, data);
+  g_signal_connect (glade_xml_get_widget (data->xml, "cursor_themes_delete"), "clicked", (GCallback) cursor_theme_delete_cb, data);
 
   gnome_theme_info_register_theme_change ((ThemeChangedCallback) changed_on_disk_cb, data);
 }
