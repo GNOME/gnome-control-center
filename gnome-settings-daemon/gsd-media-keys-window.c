@@ -32,6 +32,8 @@
 #include "gsd-media-keys-window.h"
 
 #define DIALOG_TIMEOUT 2000     /* dialog timeout in ms */
+#define DIALOG_FADE_TIMEOUT 1500 /* timeout before fade starts */
+#define FADE_TIMEOUT 10        /* timeout in ms between each frame of the fade */
 
 #define BG_ALPHA 0.50
 #define FG_ALPHA 1.00
@@ -46,6 +48,8 @@ struct GsdMediaKeysWindowPrivate
 {
 	guint                    is_composited : 1;
 	guint                    hide_timeout_id;
+	guint                    fade_timeout_id;
+	double                   fade_out_alpha;
 	GsdMediaKeysWindowAction action;
 
 	guint                    volume_muted : 1;
@@ -57,9 +61,44 @@ struct GsdMediaKeysWindowPrivate
 G_DEFINE_TYPE (GsdMediaKeysWindow, gsd_media_keys_window, GTK_TYPE_WINDOW)
 
 static gboolean
+fade_timeout (GsdMediaKeysWindow *window)
+{
+	if (window->priv->fade_out_alpha <= 0.0) {
+		gtk_widget_hide (GTK_WIDGET (window));
+
+		/* Reset it for the next time */
+		window->priv->fade_out_alpha = 1.0;
+		window->priv->fade_timeout_id = 0;
+
+		return FALSE;
+	} else {
+		GdkRectangle rect;
+		GtkWidget *win = GTK_WIDGET (window);
+
+		window->priv->fade_out_alpha -= 0.10;
+
+		rect.x = 0;
+		rect.y = 0;
+		rect.width = win->allocation.width;
+		rect.height = win->allocation.height;
+
+		gdk_window_invalidate_rect (win->window, &rect, FALSE);
+	}
+
+	return TRUE;
+}
+
+static gboolean
 hide_timeout (GsdMediaKeysWindow *window)
 {
-	gtk_widget_hide (GTK_WIDGET (window));
+	if (window->priv->is_composited) {
+		window->priv->hide_timeout_id = 0;
+		window->priv->fade_timeout_id = g_timeout_add (FADE_TIMEOUT,
+							       (GSourceFunc) fade_timeout,
+							       window);
+	} else {
+		gtk_widget_hide (GTK_WIDGET (window));
+	}
 
 	return FALSE;
 }
@@ -71,13 +110,25 @@ remove_hide_timeout (GsdMediaKeysWindow *window)
                 g_source_remove (window->priv->hide_timeout_id);
                 window->priv->hide_timeout_id = 0;
         }
+
+	if (window->priv->fade_timeout_id != 0) {
+		g_source_remove (window->priv->fade_timeout_id);
+		window->priv->fade_timeout_id = 0;
+	}
 }
 
 static void
 add_hide_timeout (GsdMediaKeysWindow *window)
 {
-        window->priv->hide_timeout_id = g_timeout_add (DIALOG_TIMEOUT,
-						       (GSourceFunc)hide_timeout,
+	int timeout;
+
+	if (window->priv->is_composited) {
+		timeout = DIALOG_FADE_TIMEOUT;
+	} else {
+		timeout = DIALOG_TIMEOUT;
+	}
+	window->priv->hide_timeout_id = g_timeout_add (timeout,
+						       (GSourceFunc) hide_timeout,
 						       window);
 }
 
@@ -757,8 +808,13 @@ on_expose_event (GtkWidget          *widget,
 
 	cairo_destroy (cr);
 
+	/* Make sure we have a transparent background */
+	cairo_rectangle (context, 0, 0, width, height);
+	cairo_set_source_rgba (context, 0.0, 0.0, 0.0, 0.0);
+	cairo_fill (context);
+
 	cairo_set_source_surface (context, surface, 0, 0);
-	cairo_paint (context);
+	cairo_paint_with_alpha (context, window->priv->fade_out_alpha);
 
  done:
 	if (surface != NULL) {
@@ -851,6 +907,8 @@ gsd_media_keys_window_init (GsdMediaKeysWindow *window)
 
 		gtk_window_set_default_size (GTK_WINDOW (window), 300, 300);
 		g_signal_connect (window, "expose-event", G_CALLBACK (on_expose_event), window);
+
+		window->priv->fade_out_alpha = 1.0;
 	} else {
 		GtkWidget *frame;
 
