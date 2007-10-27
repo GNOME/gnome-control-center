@@ -29,12 +29,14 @@
 gboolean
 theme_delete (const gchar *name, ThemeType type)
 {
+  gboolean rc;
   GtkDialog *dialog;
   gpointer theme;
   gchar *theme_dir;
   gint response;
   GList *uri_list;
   GnomeVFSResult result;
+  GnomeVFSURI *uri;
 
   dialog = (GtkDialog *) gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL,
@@ -77,15 +79,15 @@ theme_delete (const gchar *name, ThemeType type)
       return FALSE;
   }
 
-  uri_list = g_list_prepend (NULL, gnome_vfs_uri_new (theme_dir));
+  uri = gnome_vfs_uri_new (theme_dir);
   g_free (theme_dir);
+
+  uri_list = g_list_prepend (NULL, uri);
 
   result = gnome_vfs_xfer_delete_list (uri_list,
 				       GNOME_VFS_XFER_ERROR_MODE_ABORT,
 				       GNOME_VFS_XFER_RECURSIVE,
 				       NULL, NULL);
-
-  gnome_vfs_uri_list_free (uri_list);
 
   if (result != GNOME_VFS_OK) {
     GtkWidget *info_dialog = gtk_message_dialog_new (NULL,
@@ -95,10 +97,18 @@ theme_delete (const gchar *name, ThemeType type)
 						     _("Theme cannot be deleted"));
     gtk_dialog_run (GTK_DIALOG (info_dialog));
     gtk_widget_destroy (info_dialog);
-    return FALSE;
+    rc = FALSE;
+  } else {
+    /* also delete empty parent directories */
+    GnomeVFSURI *parent = gnome_vfs_uri_get_parent (uri);
+    gnome_vfs_remove_directory_from_uri (parent);
+    gnome_vfs_uri_unref (parent);
+    rc = TRUE;
   }
 
-  return TRUE;
+  gnome_vfs_uri_list_free (uri_list);
+
+  return rc;
 }
 
 gboolean
