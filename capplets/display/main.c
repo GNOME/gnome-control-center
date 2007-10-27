@@ -10,38 +10,42 @@
 
 #include "capplet-util.h"
 
+#ifndef HOST_NAME_MAX
+# define HOST_NAME_MAX 255
+#endif
+
 enum {
-	COL_NAME,
-	COL_ID,
-	N_COLUMNS
+  COL_NAME,
+  COL_ID,
+  N_COLUMNS
 };
 
 #define REVERT_COUNT 20
 
 static struct {
-	Rotation  rotation;
-	gchar const    * name;
+  Rotation rotation;
+  gchar const *name;
 } const rotations[] = {
-	{RR_Rotate_0,   N_("Normal")},
-	{RR_Rotate_90,  N_("Left")},
-	{RR_Rotate_180, N_("Inverted")},
-	{RR_Rotate_270, N_("Right")}
+  {RR_Rotate_0,   N_("Normal")},
+  {RR_Rotate_90,  N_("Left")},
+  {RR_Rotate_180, N_("Inverted")},
+  {RR_Rotate_270, N_("Right")}
 };
 
 static Rotation
-display_rotation_from_text(gchar const* text) {
-	int i = 0;
-	g_return_val_if_fail(text, RR_Rotate_0);
+display_rotation_from_text (gchar const *text)
+{
+  int i;
 
-	for(; i < G_N_ELEMENTS(rotations); i++) {
-		if(!strcmp(text, _(rotations[i].name))) {
-			break;
-		}
-	}
+  g_return_val_if_fail (text != NULL, RR_Rotate_0);
 
-	g_return_val_if_fail(i < G_N_ELEMENTS(rotations), RR_Rotate_0);
+  for (i = 0; i < G_N_ELEMENTS (rotations); i++) {
+    if (!strcmp (text, rotations[i].name)) {
+      return rotations[i].rotation;
+    }
+  }
 
-	return rotations[i].rotation;
+  return RR_Rotate_0;
 }
 
 struct ScreenInfo
@@ -151,12 +155,11 @@ read_display_info (GdkDisplay *display)
 static int
 get_current_resolution (struct ScreenInfo *screen_info)
 {
-  GtkComboBox* combo = GTK_COMBO_BOX (screen_info->resolution_widget);
+  GtkComboBox *combo = GTK_COMBO_BOX (screen_info->resolution_widget);
   GtkTreeIter iter;
   int i = 0;
 
-  if (gtk_combo_box_get_active_iter (combo, &iter))
-  {
+  if (gtk_combo_box_get_active_iter (combo, &iter)) {
     gtk_tree_model_get (gtk_combo_box_get_model (combo), &iter,
 			COL_ID, &i,
 			-1);
@@ -174,8 +177,7 @@ get_current_rate (struct ScreenInfo *screen_info)
 
   combo = GTK_COMBO_BOX (screen_info->rate_widget);
 
-  if (gtk_combo_box_get_active_iter (combo, &iter))
-  {
+  if (gtk_combo_box_get_active_iter (combo, &iter)) {
     gtk_tree_model_get (gtk_combo_box_get_model (combo), &iter,
   		        COL_ID, &i,
   		        -1);
@@ -185,13 +187,15 @@ get_current_rate (struct ScreenInfo *screen_info)
 }
 
 static Rotation
-get_current_rotation(struct ScreenInfo* screen_info) {
-	gchar* text;
-	Rotation rot;
-	text = gtk_combo_box_get_active_text (GTK_COMBO_BOX (screen_info->rotate_widget));
-	rot = display_rotation_from_text (text);
-	g_free (text);
-	return rot;
+get_current_rotation (struct ScreenInfo *screen_info)
+{
+  gchar *text;
+  Rotation rot;
+
+  text = gtk_combo_box_get_active_text (GTK_COMBO_BOX (screen_info->rotate_widget));
+  rot = display_rotation_from_text (text);
+  g_free (text);
+  return rot;
 }
 
 static void
@@ -310,7 +314,6 @@ wrap_in_label (GtkWidget *child, char *text)
   char *str;
 
   vbox = gtk_vbox_new (FALSE, 6);
-  label = NULL;
 
   label = gtk_label_new (NULL);
 
@@ -318,30 +321,16 @@ wrap_in_label (GtkWidget *child, char *text)
   gtk_label_set_markup (GTK_LABEL (label), str);
   g_free (str);
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (vbox),
-		      label,
-		      FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 
   hbox = gtk_hbox_new (FALSE, 0);
 
   label = gtk_label_new ("    ");
-  gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (hbox),
-		      label,
-		      FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-  gtk_box_pack_start (GTK_BOX (hbox),
-		      child,
-		      TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), child, TRUE, TRUE, 0);
 
-  gtk_widget_show (hbox);
-
-  gtk_box_pack_start (GTK_BOX (vbox),
-		      hbox,
-		      FALSE, FALSE, 0);
-
-  gtk_widget_show (vbox);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
   return vbox;
 }
@@ -357,14 +346,15 @@ show_resolution (int width, int height)
 static void
 resolution_changed_callback (GtkWidget *optionmenu, struct ScreenInfo *screen_info)
 {
-  generate_rate_menu(screen_info);
+  generate_rate_menu (screen_info);
 }
 
 static void
 generate_rate_menu (struct ScreenInfo *screen_info)
 {
+  GtkComboBox *combo;
   GtkListStore *store;
-  GtkTreeIter  iter;
+  GtkTreeIter iter;
   short *rates;
   int nrates, i;
   int size_nr;
@@ -372,7 +362,8 @@ generate_rate_menu (struct ScreenInfo *screen_info)
   int closest_rate_nr;
 
   store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
-  gtk_combo_box_set_model (GTK_COMBO_BOX (screen_info->rate_widget), GTK_TREE_MODEL (store));
+  combo = GTK_COMBO_BOX (screen_info->rate_widget);
+  gtk_combo_box_set_model (combo, GTK_TREE_MODEL (store));
 
   size_nr = get_current_resolution (screen_info);
 
@@ -382,17 +373,16 @@ generate_rate_menu (struct ScreenInfo *screen_info)
     {
       str = g_strdup_printf (_("%d Hz"), rates[i]);
 
-      gtk_list_store_append (store, &iter);
-      gtk_list_store_set (store, &iter,
-		          COL_NAME, str,
-			  COL_ID, (int)rates[i],
-			  -1);
+      gtk_list_store_insert_with_values (store, &iter, i,
+					 COL_NAME, str,
+					 COL_ID, (int) rates[i],
+					 -1);
 
       if ((closest_rate_nr < 0) ||
 	  (ABS (rates[i] - screen_info->current_rate) <
 	   ABS (rates[closest_rate_nr] - screen_info->current_rate)))
       {
-	gtk_combo_box_set_active_iter (GTK_COMBO_BOX (screen_info->rate_widget), &iter);
+	gtk_combo_box_set_active_iter (combo, &iter);
 	closest_rate_nr = i;
       }
 
@@ -403,10 +393,10 @@ generate_rate_menu (struct ScreenInfo *screen_info)
 }
 
 static void
-generate_resolution_menu(struct ScreenInfo* screen_info)
+generate_resolution_menu (struct ScreenInfo *screen_info)
 {
   GtkComboBox *combo;
-  GtkListStore* store;
+  GtkListStore *store;
   GtkTreeIter iter;
   int i, item, current_item;
   XRRScreenSize *sizes;
@@ -415,7 +405,7 @@ generate_resolution_menu(struct ScreenInfo* screen_info)
   Rotation rot;
 
   combo = GTK_COMBO_BOX (screen_info->resolution_widget);
-  store = gtk_list_store_new(N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
+  store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
 
   current_size = XRRConfigCurrentConfiguration (screen_info->config, &rot);
 
@@ -433,11 +423,10 @@ generate_resolution_menu(struct ScreenInfo* screen_info)
 	  if (i == current_size)
 	    current_item = item;
 
-	  gtk_list_store_append(store, &iter);
-	  gtk_list_store_set(store, &iter,
-			     COL_NAME, str,
-			     COL_ID, i,
-			     -1);
+	  gtk_list_store_insert_with_values (store, &iter, item,
+					     COL_NAME, str,
+					     COL_ID, i,
+					     -1);
 
 	  g_free (str);
 	  item++;
@@ -446,15 +435,15 @@ generate_resolution_menu(struct ScreenInfo* screen_info)
 
   gtk_combo_box_set_active (combo, current_item);
 
-	g_signal_connect (screen_info->resolution_widget, "changed", G_CALLBACK (resolution_changed_callback), screen_info);
+  g_signal_connect (screen_info->resolution_widget, "changed", G_CALLBACK (resolution_changed_callback), screen_info);
 
-	gtk_widget_show (screen_info->resolution_widget);
   g_object_unref (store);
 }
 
 static void
-initialize_combo_layout (GtkCellLayout *layout) {
-  GtkCellRenderer *cell = gtk_cell_renderer_text_new();
+initialize_combo_layout (GtkCellLayout *layout)
+{
+  GtkCellRenderer *cell = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (layout, cell, TRUE);
   gtk_cell_layout_add_attribute (layout, cell, "text", COL_NAME);
 }
@@ -473,28 +462,26 @@ static GtkWidget *
 create_rate_menu (struct ScreenInfo *screen_info)
 {
   screen_info->rate_widget = gtk_combo_box_new ();
-
   generate_rate_menu (screen_info);
 
   initialize_combo_layout (GTK_CELL_LAYOUT (screen_info->rate_widget));
-  gtk_widget_show (screen_info->rate_widget);
   return screen_info->rate_widget;
 }
 
 static GtkWidget *
 create_rotate_menu (struct ScreenInfo *screen_info)
 {
-  GtkComboBox* combo = NULL;
+  GtkComboBox *combo;
   int i, item = 0, current_item = -1;
 
   screen_info->rotate_widget = gtk_combo_box_new_text ();
-  combo = GTK_COMBO_BOX(screen_info->rotate_widget);
+  combo = GTK_COMBO_BOX (screen_info->rotate_widget);
 
   for (i = 0; i < G_N_ELEMENTS (rotations); i++)
   {
     if ((screen_info->rotations & rotations[i].rotation) != 0)
     {
-      gtk_combo_box_append_text (combo, _(rotations[i].name));
+      gtk_combo_box_append_text (combo, rotations[i].name);
       if (screen_info->current_rotation == rotations[i].rotation) {
 	current_item = item;
       }
@@ -507,13 +494,11 @@ create_rotate_menu (struct ScreenInfo *screen_info)
 		  gtk_tree_model_iter_n_children (gtk_combo_box_get_model (combo), NULL) > 1);
 
   gtk_combo_box_set_active (combo, current_item);
-
-  gtk_widget_show (screen_info->rotate_widget);
   return screen_info->rotate_widget;
 }
 
 static GtkWidget *
-create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_header)
+create_screen_widgets (struct ScreenInfo *screen_info, int nr)
 {
   GtkWidget *table;
   GtkWidget *label;
@@ -523,12 +508,11 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 
   table = gtk_table_new (2, 2, FALSE);
 
-  gtk_table_set_row_spacings ( GTK_TABLE (table), 6);
-  gtk_table_set_col_spacings ( GTK_TABLE (table), 12);
+  gtk_table_set_row_spacings (GTK_TABLE (table), 6);
+  gtk_table_set_col_spacings (GTK_TABLE (table), 12);
 
   label = gtk_label_new_with_mnemonic (_("_Resolution:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_widget_show (label);
   gtk_table_attach (GTK_TABLE (table),
 		    label,
 		    0, 1,
@@ -547,14 +531,12 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 
   label = gtk_label_new_with_mnemonic (_("Re_fresh rate:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_widget_show (label);
   gtk_table_attach (GTK_TABLE (table),
 		    label,
 		    0, 1,
 		    1, 2,
 		    GTK_FILL, 0,
 		    0, 0);
-  gtk_widget_show (table);
 
   option_menu = create_rate_menu (screen_info);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), option_menu);
@@ -567,7 +549,6 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 
   label = gtk_label_new_with_mnemonic (_("R_otation:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_widget_show (label);
   gtk_table_attach (GTK_TABLE (table),
 		    label,
 		    0, 1,
@@ -593,7 +574,6 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
   return ret;
 }
 
-
 static GtkWidget *
 create_dialog (struct DisplayInfo *info)
 {
@@ -607,11 +587,7 @@ create_dialog (struct DisplayInfo *info)
   char *key;
   char *resolution;
   char *str;
-#ifdef HOST_NAME_MAX
   char hostname[HOST_NAME_MAX + 1];
-#else
-  char hostname[256];
-#endif
 
   dialog = gtk_dialog_new_with_buttons (_("Screen Resolution Preferences"),
 					NULL,
@@ -624,7 +600,7 @@ create_dialog (struct DisplayInfo *info)
 					GTK_RESPONSE_HELP,
 					NULL);
 
-  gtk_window_set_resizable(GTK_WINDOW (dialog), FALSE);
+  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
   capplet_set_icon (dialog, "gnome-display-properties");
@@ -633,14 +609,12 @@ create_dialog (struct DisplayInfo *info)
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
                       vbox, FALSE, FALSE, 0);
-  gtk_widget_show (vbox);
 
   for (i = 0; i < info->n_screens; i++)
     {
-      screen_widget = create_screen_widgets (&info->screens[i], i, info->n_screens == 1);
+      screen_widget = create_screen_widgets (&info->screens[i], i);
       gtk_box_pack_start (GTK_BOX (vbox),
 			  screen_widget, FALSE, FALSE, 0);
-      gtk_widget_show (screen_widget);
     }
 
   per_computer_check = NULL;
@@ -667,12 +641,9 @@ create_dialog (struct DisplayInfo *info)
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (per_computer_check),
 				    info->was_per_computer);
 
-      gtk_widget_show (per_computer_check);
-
       wrapped = wrap_in_label (per_computer_check, _("Options"));
       gtk_box_pack_start (GTK_BOX (vbox),
 			  wrapped, FALSE, FALSE, 0);
-      gtk_widget_show (wrapped);
     }
 
   info->per_computer_check = per_computer_check;
@@ -694,14 +665,11 @@ timeout_string (int time)
 }
 
 static gboolean
-save_timeout_callback (gpointer _data)
+save_timeout_callback (struct TimeoutData *data)
 {
-  struct TimeoutData *data = _data;
   char *str;
 
-  data->time--;
-
-  if (data->time == 0)
+  if (--data->time == 0)
     {
       gtk_dialog_response (data->dialog, GTK_RESPONSE_NO);
       data->timed_out = TRUE;
@@ -773,7 +741,7 @@ run_revert_dialog (struct DisplayInfo *info)
   timeout_data.dialog = GTK_DIALOG (dialog);
   timeout_data.timed_out = FALSE;
 
-  timeout = g_timeout_add (1000, save_timeout_callback, &timeout_data);
+  timeout = g_timeout_add (1000, (GSourceFunc) save_timeout_callback, &timeout_data);
   res = gtk_dialog_run (GTK_DIALOG (dialog));
 
   if (!timeout_data.timed_out)
@@ -787,7 +755,7 @@ run_revert_dialog (struct DisplayInfo *info)
 static void
 save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_computer)
 {
-  GConfClient    *client;
+  GConfClient *client;
   gboolean res;
 #ifdef HOST_NAME_MAX
   char hostname[HOST_NAME_MAX + 1];
@@ -797,7 +765,7 @@ save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_
   char *path, *key, *str;
   int i;
 
-  gethostname (hostname, sizeof(hostname));
+  gethostname (hostname, sizeof (hostname));
 
   client = gconf_client_get_default ();
 
@@ -867,10 +835,10 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
 
       if (apply_config (info))
 	{
-	  gtk_widget_hide(GTK_WIDGET(dialog));
+	  gtk_widget_hide (GTK_WIDGET (dialog));
 	  if (!run_revert_dialog (info))
 	    {
-	      gtk_widget_show(GTK_WIDGET(dialog));
+	      gtk_widget_show (GTK_WIDGET (dialog));
 	      revert_config (info);
 	      return;
 	    }
@@ -928,8 +896,8 @@ main (int argc, char *argv[])
       info = read_display_info (display);
       dialog = create_dialog (info);
 
-      g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (cb_dialog_response), info);
-      gtk_widget_show (dialog);
+      g_signal_connect (dialog, "response", G_CALLBACK (cb_dialog_response), info);
+      gtk_widget_show_all (dialog);
 
       gtk_main ();
 
