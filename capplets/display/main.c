@@ -778,7 +778,9 @@ run_revert_dialog (struct DisplayInfo *info)
   gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog),_("Use _previous resolution"), GTK_RESPONSE_NO, _("_Keep resolution"), GTK_RESPONSE_YES, NULL);
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+      _("Use _Previous Resolution"), GTK_RESPONSE_NO,
+      _("_Keep Resolution"), GTK_RESPONSE_YES, NULL);
 
   gtk_widget_show_all (hbox);
 
@@ -926,7 +928,7 @@ main (int argc, char *argv[])
       XRRQueryVersion (xdisplay, &major, &minor) == 0)
     {
       GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-						   _("The X Server does not support the XRandR extension.  Runtime resolution changes to the display size are not available."));
+						   _("The X server does not support the XRandR extension.  Runtime resolution changes to the display size are not available."));
       gtk_dialog_run (GTK_DIALOG (msg_dialog));
       gtk_widget_destroy (msg_dialog);
     }
