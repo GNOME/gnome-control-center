@@ -424,7 +424,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
           diff = size - gconf_size;
           diff_to_last = gconf_size - g_array_index (theme->sizes, gint, i - 1);
 
-          gtk_range_set_value (range, (gdouble) (diff < diff_to_last) ? diff : diff_to_last);
+          gtk_range_set_value (range, (gdouble) (diff < diff_to_last) ? i : i - 1);
           size_found = TRUE;
           break;
         }
