@@ -1085,7 +1085,7 @@ look_for_cursor_theme (const gchar *theme_dir)
 {
   gchar *cursors_dir = g_build_filename (theme_dir, "cursors", NULL);
 
-  if (g_file_test (cursors_dir, G_FILE_TEST_IS_DIR) || g_str_has_suffix (theme_dir, "default"))
+  if (g_file_test (cursors_dir, G_FILE_TEST_IS_DIR))
     read_cursor_theme (theme_dir);
 
   g_free (cursors_dir);
@@ -1801,7 +1801,7 @@ read_cursor_fonts (void)
 
     theme_info = gnome_theme_cursor_info_new ();
 
-    filename = g_build_filename (GNOMECC_DATA_DIR "/pixmaps", builtins[i][3], NULL);
+    filename = g_build_filename (GNOMECC_DATA_DIR, "pixmaps", builtins[i][3], NULL);
     theme_info->thumbnail = gdk_pixbuf_new_from_file (filename, NULL);
     g_free (filename);
 
@@ -1980,7 +1980,11 @@ gnome_theme_init (gboolean *monitor_not_added)
   result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 0, NULL);
   gnome_vfs_uri_unref (top_theme_dir_uri);
 
-#ifndef HAVE_XCURSOR
+#ifdef HAVE_XCURSOR
+  /* make sure we have the default theme */
+  if (!gnome_theme_cursor_info_find ("default"))
+    read_cursor_theme ("default");
+#else
   /* If we don't have Xcursor, use the built-in cursor fonts instead */
   read_cursor_fonts ();
 #endif

@@ -371,9 +371,32 @@ cursor_size_changed_cb (int size, AppearanceData *data)
 }
 
 static void
+cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
+{
+  GnomeThemeCursorInfo *theme;
+  gchar *name;
+
+  name = gconf_client_get_string (data->client, CURSOR_THEME_KEY, NULL);
+  if (name == NULL)
+    return;
+
+  theme = gnome_theme_cursor_info_find (name);
+  g_free (name);
+
+  if (theme) {
+    gint size;
+
+    size = g_array_index (theme->sizes, gint, (int) gtk_range_get_value (range));
+    cursor_size_changed_cb (size, data);
+  }
+}
+#endif
+
+static void
 update_cursor_size_scale (GnomeThemeCursorInfo *theme,
                           AppearanceData *data)
 {
+#ifdef HAVE_XCURSOR
   GtkWidget *cursor_size_scale;
   GtkWidget *cursor_size_label;
   GtkWidget *cursor_size_small_label;
@@ -441,8 +464,8 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
 
   if (size != gconf_size)
     cursor_size_changed_cb (size, data);
-}
 #endif
+}
 
 static void
 cursor_theme_changed (GConfPropertyEditor *peditor,
@@ -456,9 +479,7 @@ cursor_theme_changed (GConfPropertyEditor *peditor,
   if (value && (name = gconf_value_get_string (value)))
     theme = gnome_theme_cursor_info_find (name);
 
-#ifdef HAVE_XCURSOR
   update_cursor_size_scale (theme, data);
-#endif
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "cursor_themes_delete"),
 			    theme_is_writable (theme, THEME_TYPE_CURSOR));
@@ -525,29 +546,6 @@ cursor_theme_delete_cb (GtkWidget *button, AppearanceData *data)
 {
   generic_theme_delete ("cursor_themes_list", THEME_TYPE_CURSOR, data);
 }
-
-#ifdef HAVE_XCURSOR
-static void
-cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
-{
-  GnomeThemeCursorInfo *theme;
-  gchar *name;
-
-  name = gconf_client_get_string (data->client, CURSOR_THEME_KEY, NULL);
-  if (name == NULL)
-    return;
-
-  theme = gnome_theme_cursor_info_find (name);
-  g_free (name);
-
-  if (theme) {
-    gint size;
-
-    size = g_array_index (theme->sizes, gint, (int) gtk_range_get_value (range));
-    cursor_size_changed_cb (size, data);
-  }
-}
-#endif
 
 static void
 add_to_treeview (const gchar *tv_name,
@@ -762,11 +760,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
     case THEME_TYPE_CURSOR:
       themes = gnome_theme_cursor_info_find_all ();
       thumbnail = NULL;
-#ifdef HAVE_XCURSOR
       key = CURSOR_THEME_KEY;
-#else
-      key = CURSOR_FONT_KEY;
-#endif
       generator = NULL;
       thumb_cb = NULL;
       break;
@@ -815,17 +809,6 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
     }
   }
   g_list_free (themes);
-
-#ifdef HAVE_XCURSOR
-  if (type == THEME_TYPE_CURSOR && !gnome_theme_cursor_info_find ("default")) {
-    GtkTreeIter i;
-    gtk_list_store_insert_with_values (store, &i, 0,
-                                       COL_LABEL, _("Default Pointer"),
-                                       COL_NAME, "default",
-                                       COL_THUMBNAIL, NULL,
-                                       -1);
-  }
-#endif
 
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),

@@ -245,11 +245,9 @@ theme_load_from_gconf (GConfClient *client)
   if (theme->icon_theme_name == NULL)
     theme->icon_theme_name = g_strdup ("gnome");
 
-#ifdef HAVE_XCURSOR
   theme->cursor_theme_name = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
+#ifdef HAVE_XCURSOR
   theme->cursor_size = gconf_client_get_int (client, CURSOR_SIZE_KEY, NULL);
-#else
-  theme->cursor_theme_name = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);
 #endif
   if (theme->cursor_theme_name == NULL)
     theme->cursor_theme_name = g_strdup ("default");

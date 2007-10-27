@@ -22,14 +22,18 @@
 #define METACITY_THEME_KEY "/apps/metacity/general/theme"
 #define ICON_THEME_KEY "/desktop/gnome/interface/icon_theme"
 #define COLOR_SCHEME_KEY "/desktop/gnome/interface/gtk_color_scheme"
-#define CURSOR_FONT_KEY "/desktop/gnome/peripherals/mouse/cursor_font"
-#define CURSOR_THEME_KEY "/desktop/gnome/peripherals/mouse/cursor_theme"
-#define CURSOR_SIZE_KEY "/desktop/gnome/peripherals/mouse/cursor_size"
 #define LOCKDOWN_KEY "/desktop/gnome/lockdown/disable_theme_settings"
 #define BACKGROUND_KEY "/desktop/gnome/background/picture_filename"
 #define APPLICATION_FONT_KEY "/desktop/gnome/interface/font_name"
 #define DESKTOP_FONT_KEY "/apps/nautilus/preferences/desktop_font"
 #define MONOSPACE_FONT_KEY "/desktop/gnome/interface/monospace_font_name"
+
+#ifdef HAVE_XCURSOR
+# define CURSOR_THEME_KEY "/desktop/gnome/peripherals/mouse/cursor_theme"
+# define CURSOR_SIZE_KEY "/desktop/gnome/peripherals/mouse/cursor_size"
+#else
+# define CURSOR_THEME_KEY "/desktop/gnome/peripherals/mouse/cursor_font"
+#endif
 
 enum {
   COL_THUMBNAIL,

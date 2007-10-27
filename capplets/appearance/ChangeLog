@@ -1,5 +1,13 @@
 2007-10-27  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-style.c: (cursor_size_scale_value_changed_cb),
+	(update_cursor_size_scale), (cursor_theme_changed), (prepare_list):
+	* appearance-themes.c: (theme_load_from_gconf):
+	* theme-util.h: reduce the number if XCURSOR ifdefs and get rid of the
+	special treatment for the default cursor theme
+
+2007-10-27  Jens Granseuer  <jensgr@gmx.net>
+
 	If the cursor theme changes, and the currently set size is not
 	available for the new theme, we were not updating the cursor size in
 	GConf, leading to bogus results when checking for metatheme equality.
