@@ -365,6 +365,12 @@ icon_theme_changed (GConfPropertyEditor *peditor,
 
 #ifdef HAVE_XCURSOR
 static void
+cursor_size_changed_cb (int size, AppearanceData *data)
+{
+  gconf_client_set_int (data->client, CURSOR_SIZE_KEY, size, NULL);
+}
+
+static void
 update_cursor_size_scale (GnomeThemeCursorInfo *theme,
                           AppearanceData *data)
 {
@@ -373,6 +379,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
   GtkWidget *cursor_size_small_label;
   GtkWidget *cursor_size_large_label;
   gboolean sensitive;
+  gint size, gconf_size;
 
   cursor_size_scale = glade_xml_get_widget (data->xml, "cursor_size_scale");
   cursor_size_label = glade_xml_get_widget (data->xml, "cursor_size_label");
@@ -385,57 +392,55 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
   gtk_widget_set_sensitive (cursor_size_small_label, sensitive);
   gtk_widget_set_sensitive (cursor_size_large_label, sensitive);
 
-  if (sensitive)
-  {
+  gconf_size = gconf_client_get_int (data->client, CURSOR_SIZE_KEY, NULL);
+
+  if (sensitive) {
     GtkAdjustment *adjustment;
-    gint gconf_size, i;
-    gboolean size_found = FALSE;
+    gint i, index;
     GtkRange *range = GTK_RANGE (cursor_size_scale);
 
     adjustment = gtk_range_get_adjustment (range);
     g_object_set (adjustment, "upper", (gdouble) theme->sizes->len - 1, NULL);
 
-    gconf_size = gconf_client_get_int (data->client, CURSOR_SIZE_KEY, NULL);
+
+    /* fallback if the gconf value is bigger than all available sizes;
+       use the largest we have */
+    index = theme->sizes->len - 1;
 
     /* set the slider to the cursor size which matches the gconf setting best  */
-    for (i = 0; i < theme->sizes->len; i++)
-    {
-      gint size;
+    for (i = 0; i < theme->sizes->len; i++) {
       size = g_array_index (theme->sizes, gint, i);
 
-      if (size == gconf_size)
-      {
-        gtk_range_set_value (range, (gdouble) i);
-        size_found = TRUE;
+      if (size == gconf_size) {
+      	index = i;
         break;
-      }
-      else if (size > gconf_size)
-      {
-        if (i == 0)
-        {
-          gtk_range_set_value (range, 0);
-          size_found = TRUE;
-          break;
-        }
-        else
-        {
+      } else if (size > gconf_size) {
+        if (i == 0) {
+          index = 0;
+        } else {
           gint diff, diff_to_last;
 
           diff = size - gconf_size;
           diff_to_last = gconf_size - g_array_index (theme->sizes, gint, i - 1);
 
-          gtk_range_set_value (range, (gdouble) (diff < diff_to_last) ? diff : diff_to_last);
-          size_found = TRUE;
-          break;
+          index = (diff < diff_to_last) ? i : i - 1;
         }
+        break;
       }
     }
 
-    /* set to the biggest size if the gconf value is bigger than
-      all available sizes */
-    if (!size_found)
-      gtk_range_set_value (range, (gdouble) g_array_index (theme->sizes, gint, theme->sizes->len - 1));
+    gtk_range_set_value (range, (gdouble) index);
+
+    size = g_array_index (theme->sizes, gint, index);
+  } else {
+    if (theme->sizes->len > 0)
+      size = g_array_index (theme->sizes, gint, 0);
+    else
+      size = 18;
   }
+
+  if (size != gconf_size)
+    cursor_size_changed_cb (size, data);
 }
 #endif
 
@@ -539,7 +544,7 @@ cursor_size_scale_value_changed_cb (GtkRange *range, AppearanceData *data)
     gint size;
 
     size = g_array_index (theme->sizes, gint, (int) gtk_range_get_value (range));
-    gconf_client_set_int (data->client, CURSOR_SIZE_KEY, size, NULL);
+    cursor_size_changed_cb (size, data);
   }
 }
 #endif

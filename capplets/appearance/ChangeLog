@@ -1,5 +1,16 @@
 2007-10-27  Jens Granseuer  <jensgr@gmx.net>
 
+	If the cursor theme changes, and the currently set size is not
+	available for the new theme, we were not updating the cursor size in
+	GConf, leading to bogus results when checking for metatheme equality.
+
+	* appearance-style.c: (cursor_size_changed_cb),
+	(update_cursor_size_scale), (cursor_size_scale_value_changed_cb):
+	update cursor size GConf value when the theme changes; also don't write
+	bogus values to GConf when we are only doing fuzzy matches
+
+2007-10-27  Jens Granseuer  <jensgr@gmx.net>
+
 	* theme-util.c: (theme_is_writable):
 	* theme-util.h: move function here from common/
 
