@@ -79,6 +79,21 @@ struct DisplayInfo {
 static void generate_rate_menu (struct ScreenInfo *screen_info);
 static void generate_resolution_menu(struct ScreenInfo* screen_info);
 
+static void
+free_display_info (struct DisplayInfo *info)
+{
+  struct ScreenInfo *screen_info;
+  int i;
+
+  for (i = 0; i < info->n_screens; i++)
+    {
+      screen_info = &info->screens[i];
+      XRRFreeScreenConfigInfo (screen_info->config);
+    }
+
+  g_free (info);
+}
+
 static struct DisplayInfo *
 read_display_info (GdkDisplay *display)
 {
@@ -194,29 +209,37 @@ get_current_rotation(struct ScreenInfo* screen_info) {
 	return rot;
 }
 
+static void
+restart_screensaver ()
+{
+  gchar *cmd;
+
+  if ((cmd = g_find_program_in_path ("gnome-screensaver-command"))) {
+    /* nothing to do - gnome-screensaver handles this itself */
+    g_free (cmd);
+  } else {
+    /* xscreensaver should handle this itself, but does not currently so we
+     * hack it. Ignore failures in case xscreensaver is not installed */
+    g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
+  }
+}
+
 static gboolean
 apply_config (struct DisplayInfo *info)
 {
   int i;
   GdkDisplay *display;
-  Display *xdisplay;
-  GdkScreen *screen;
   gboolean changed;
 
   display = gdk_display_get_default ();
-  xdisplay = gdk_x11_display_get_xdisplay (display);
 
   changed = FALSE;
   for (i = 0; i < info->n_screens; i++)
     {
       struct ScreenInfo *screen_info = &info->screens[i];
       Status status;
-      GdkWindow *root_window;
       int new_res, new_rate;
       Rotation new_rot;
-
-      screen = gdk_display_get_screen (display, i);
-      root_window = gdk_screen_get_root_window (screen);
 
       new_res  = get_current_resolution (screen_info);
       new_rate = get_current_rate (screen_info);
@@ -226,7 +249,14 @@ apply_config (struct DisplayInfo *info)
 	  new_rate != screen_info->current_rate ||
 	  new_rot  != screen_info->current_rotation)
 	{
+	  Display *xdisplay;
+	  GdkScreen *screen;
+	  GdkWindow *root_window;
+
 	  changed = TRUE;
+	  xdisplay = gdk_x11_display_get_xdisplay (display);
+	  screen = gdk_display_get_screen (display, i);
+	  root_window = gdk_screen_get_root_window (screen);
 	  status = XRRSetScreenConfigAndRate (xdisplay,
 					      screen_info->config,
 					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
@@ -239,17 +269,8 @@ apply_config (struct DisplayInfo *info)
 
   update_display_info (info, display);
 
-  if (changed) {
-    gchar *cmd;
-
-    if ((cmd = g_find_program_in_path ("gnome-screensaver-command")))
-      g_free (cmd);
-    else {
-      /* xscreensaver should handle this itself, but does not currently so we hack
-       * it.  Ignore failures in case xscreensaver is not installed */
-      g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
-    }
-  }
+  if (changed)
+    restart_screensaver ();
 
   return changed;
 }
@@ -259,30 +280,27 @@ revert_config (struct DisplayInfo *info)
 {
   int i;
   GdkDisplay *display;
-  Display *xdisplay;
   GdkScreen *screen;
-  char *cmd;
 
   display = gdk_display_get_default ();
-  xdisplay = gdk_x11_display_get_xdisplay (display);
 
   for (i = 0; i < info->n_screens; i++)
     {
       struct ScreenInfo *screen_info = &info->screens[i];
-      Status status;
+      Display *xdisplay;
       GdkWindow *root_window;
 
+      xdisplay = gdk_x11_display_get_xdisplay (display);
       screen = gdk_display_get_screen (display, i);
       root_window = gdk_screen_get_root_window (screen);
 
-      status = XRRSetScreenConfigAndRate (xdisplay,
-					  screen_info->config,
-					  gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
-					  screen_info->old_size,
-					  screen_info->old_rotation,
-					  screen_info->old_rate > 0 ? screen_info->old_rate : 0,
-					  GDK_CURRENT_TIME);
-
+      XRRSetScreenConfigAndRate (xdisplay,
+				 screen_info->config,
+				 gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
+				 screen_info->old_size,
+				 screen_info->old_rotation,
+				 screen_info->old_rate > 0 ? screen_info->old_rate : 0,
+				 GDK_CURRENT_TIME);
     }
 
   update_display_info (info, display);
@@ -296,14 +314,7 @@ revert_config (struct DisplayInfo *info)
       generate_rate_menu (screen_info);
     }
 
-  if ((cmd = g_find_program_in_path ("gnome-screensaver-command")))
-    g_free (cmd);
-  else {
-    /* xscreensaver should handle this itself, but does not currently so we hack
-     * it.  Ignore failures in case xscreensaver is not installed */
-    g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
-  }
-
+  restart_screensaver ();
   return 0;
 }
 
@@ -861,9 +872,6 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
   gboolean save_computer, clear_computer;
   switch (response_id)
     {
-    case GTK_RESPONSE_DELETE_EVENT:
-      gtk_main_quit ();
-      break;
     case GTK_RESPONSE_HELP:
       capplet_help (GTK_WINDOW (dialog), "user-guide.xml", "goscustdesk-70");
       break;
@@ -883,11 +891,11 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
 	}
 
       save_to_gconf (info, save_computer, clear_computer);
+      /* fall through... */
+    case GTK_RESPONSE_DELETE_EVENT:
+    case GTK_RESPONSE_CLOSE:
       gtk_main_quit ();
       break;
-	case GTK_RESPONSE_CLOSE:
-		gtk_main_quit ();
-		break;
     }
 }
 
@@ -900,15 +908,16 @@ main (int argc, char *argv[])
   GtkWidget *dialog;
   struct DisplayInfo *info;
   Display *xdisplay;
+  GnomeProgram *program;
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  gnome_program_init ("gnome-display-properties", VERSION,
-		      LIBGNOMEUI_MODULE, argc, argv,
-		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-		      NULL);
+  program = gnome_program_init ("gnome-display-properties", VERSION,
+				LIBGNOMEUI_MODULE, argc, argv,
+				GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+				NULL);
 
   display = gdk_display_get_default ();
   xdisplay = gdk_x11_display_get_xdisplay (display);
@@ -920,7 +929,6 @@ main (int argc, char *argv[])
 						   _("The X Server does not support the XRandR extension.  Runtime resolution changes to the display size are not available."));
       gtk_dialog_run (GTK_DIALOG (msg_dialog));
       gtk_widget_destroy (msg_dialog);
-      exit (0);
     }
   else if (major != 1 || minor < 1)
     {
@@ -928,15 +936,21 @@ main (int argc, char *argv[])
 						      _("The version of the XRandR extension is incompatible with this program. Runtime changes to the display size are not available."));
       gtk_dialog_run (GTK_DIALOG (msg_dialog));
       gtk_widget_destroy (msg_dialog);
-      exit (0);
+    }
+  else
+    {
+      info = read_display_info (display);
+      dialog = create_dialog (info);
+
+      g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (cb_dialog_response), info);
+      gtk_widget_show (dialog);
+
+      gtk_main ();
+
+      free_display_info (info);
     }
 
-  info = read_display_info (display);
-  dialog = create_dialog (info);
+  g_object_unref (program);
 
-  g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (cb_dialog_response), info);
-  gtk_widget_show (dialog);
-
-  gtk_main ();
   return 0;
 }
