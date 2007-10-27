@@ -91,41 +91,8 @@ free_display_info (struct DisplayInfo *info)
       XRRFreeScreenConfigInfo (screen_info->config);
     }
 
+  g_free (info->screens);
   g_free (info);
-}
-
-static struct DisplayInfo *
-read_display_info (GdkDisplay *display)
-{
-  struct DisplayInfo *info;
-  struct ScreenInfo *screen_info;
-  GdkScreen *screen;
-  GdkWindow *root_window;
-  int i;
-
-  info = g_new (struct DisplayInfo, 1);
-  info->n_screens = gdk_display_get_n_screens (display);
-  info->screens = g_new (struct ScreenInfo, info->n_screens);
-
-  for (i = 0; i < info->n_screens; i++)
-    {
-      screen = gdk_display_get_screen (display, i);
-
-      screen_info = &info->screens[i];
-      screen_info->current_width = gdk_screen_get_width (screen);
-      screen_info->current_height = gdk_screen_get_height (screen);
-
-      root_window = gdk_screen_get_root_window (screen);
-      screen_info->config = XRRGetScreenInfo (gdk_x11_display_get_xdisplay (display),
-					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)));
-
-      screen_info->current_rate = XRRConfigCurrentRate (screen_info->config);
-      screen_info->current_size = XRRConfigCurrentConfiguration (screen_info->config, &screen_info->current_rotation);
-      screen_info->sizes        = XRRConfigSizes (screen_info->config, &screen_info->n_sizes);
-      screen_info->rotations    = XRRConfigRotations (screen_info->config, &screen_info->current_rotation);
-    }
-
-  return info;
 }
 
 static void
@@ -134,15 +101,21 @@ update_display_info (struct DisplayInfo *info, GdkDisplay *display)
   struct ScreenInfo *screen_info;
   GdkScreen *screen;
   GdkWindow *root_window;
+  Display *xdisplay;
   int i;
 
   g_assert (info->n_screens == gdk_display_get_n_screens (display));
+
+  xdisplay = gdk_x11_display_get_xdisplay (display);
 
   for (i = 0; i < info->n_screens; i++)
     {
       screen = gdk_display_get_screen (display, i);
 
       screen_info = &info->screens[i];
+
+      if (screen_info->config != NULL)
+        XRRFreeScreenConfigInfo (screen_info->config);
 
       screen_info->old_rate = screen_info->current_rate;
       screen_info->old_size = screen_info->current_size;
@@ -152,8 +125,7 @@ update_display_info (struct DisplayInfo *info, GdkDisplay *display)
       screen_info->current_height = gdk_screen_get_height (screen);
 
       root_window = gdk_screen_get_root_window (screen);
-      XRRFreeScreenConfigInfo (screen_info->config);
-      screen_info->config = XRRGetScreenInfo (gdk_x11_display_get_xdisplay (display),
+      screen_info->config = XRRGetScreenInfo (xdisplay,
 					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)));
 
       screen_info->current_rate = XRRConfigCurrentRate (screen_info->config);
@@ -161,6 +133,19 @@ update_display_info (struct DisplayInfo *info, GdkDisplay *display)
       screen_info->sizes        = XRRConfigSizes (screen_info->config, &screen_info->n_sizes);
       screen_info->rotations    = XRRConfigRotations (screen_info->config, &screen_info->current_rotation);
     }
+}
+
+static struct DisplayInfo *
+read_display_info (GdkDisplay *display)
+{
+  struct DisplayInfo *info;
+
+  info = g_new0 (struct DisplayInfo, 1);
+  info->n_screens = gdk_display_get_n_screens (display);
+  info->screens = g_new0 (struct ScreenInfo, info->n_screens);
+
+  update_display_info (info, display);
+  return info;
 }
 
 static int
@@ -229,15 +214,16 @@ apply_config (struct DisplayInfo *info)
 {
   int i;
   GdkDisplay *display;
+  Display *xdisplay;
   gboolean changed;
 
   display = gdk_display_get_default ();
+  xdisplay = gdk_x11_display_get_xdisplay (display);
 
   changed = FALSE;
   for (i = 0; i < info->n_screens; i++)
     {
       struct ScreenInfo *screen_info = &info->screens[i];
-      Status status;
       int new_res, new_rate;
       Rotation new_rot;
 
@@ -249,21 +235,19 @@ apply_config (struct DisplayInfo *info)
 	  new_rate != screen_info->current_rate ||
 	  new_rot  != screen_info->current_rotation)
 	{
-	  Display *xdisplay;
 	  GdkScreen *screen;
 	  GdkWindow *root_window;
 
 	  changed = TRUE;
-	  xdisplay = gdk_x11_display_get_xdisplay (display);
 	  screen = gdk_display_get_screen (display, i);
 	  root_window = gdk_screen_get_root_window (screen);
-	  status = XRRSetScreenConfigAndRate (xdisplay,
-					      screen_info->config,
-					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
-					      new_res,
-					      new_rot,
-					      new_rate > 0 ? new_rate : 0,
-					      GDK_CURRENT_TIME);
+	  XRRSetScreenConfigAndRate (xdisplay,
+				     screen_info->config,
+				     gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
+				     new_res,
+				     new_rot,
+				     new_rate > 0 ? new_rate : 0,
+				     GDK_CURRENT_TIME);
 	}
     }
 
@@ -280,17 +264,17 @@ revert_config (struct DisplayInfo *info)
 {
   int i;
   GdkDisplay *display;
-  GdkScreen *screen;
+  Display *xdisplay;
 
   display = gdk_display_get_default ();
+  xdisplay = gdk_x11_display_get_xdisplay (display);
 
   for (i = 0; i < info->n_screens; i++)
     {
       struct ScreenInfo *screen_info = &info->screens[i];
-      Display *xdisplay;
+      GdkScreen *screen;
       GdkWindow *root_window;
 
-      xdisplay = gdk_x11_display_get_xdisplay (display);
       screen = gdk_display_get_screen (display, i);
       root_window = gdk_screen_get_root_window (screen);
 
