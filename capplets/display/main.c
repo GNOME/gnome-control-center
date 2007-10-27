@@ -40,7 +40,7 @@ display_rotation_from_text (gchar const *text)
   g_return_val_if_fail (text != NULL, RR_Rotate_0);
 
   for (i = 0; i < G_N_ELEMENTS (rotations); i++) {
-    if (!strcmp (text, rotations[i].name)) {
+    if (!strcmp (text, _(rotations[i].name))) {
       return rotations[i].rotation;
     }
   }
@@ -481,7 +481,7 @@ create_rotate_menu (struct ScreenInfo *screen_info)
   {
     if ((screen_info->rotations & rotations[i].rotation) != 0)
     {
-      gtk_combo_box_append_text (combo, rotations[i].name);
+      gtk_combo_box_append_text (combo, _(rotations[i].name));
       if (screen_info->current_rotation == rotations[i].rotation) {
 	current_item = item;
       }
