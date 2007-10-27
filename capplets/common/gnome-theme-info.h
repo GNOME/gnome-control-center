@@ -164,8 +164,6 @@ GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GnomeVFSURI *meta_th
 void                gnome_theme_init                       (gboolean            *monitor_not_added);
 void                gnome_theme_info_register_theme_change (ThemeChangedCallback func,
 							    gpointer             data);
-gboolean            gnome_theme_is_writable                (const gpointer       theme,
-							    GnomeThemeType       type);
 
 gboolean            gnome_theme_color_scheme_parse         (const gchar         *scheme,
 							    GdkColor            *colors);

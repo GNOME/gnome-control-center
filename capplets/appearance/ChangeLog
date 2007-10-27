@@ -1,5 +1,14 @@
 2007-10-27  Jens Granseuer  <jensgr@gmx.net>
 
+	* theme-util.c: (theme_is_writable):
+	* theme-util.h: move function here from common/
+
+	* appearance-style.c: (gtk_theme_changed), (window_theme_changed),
+	(icon_theme_changed), (cursor_theme_changed):
+	* appearance-themes.c: (theme_selection_changed_cb): adapt callers
+
+2007-10-27  Jens Granseuer  <jensgr@gmx.net>
+
 	* theme-util.c: (theme_delete): if the parent directory is empty after
 	deleting a theme, delete the parent directory, too
 

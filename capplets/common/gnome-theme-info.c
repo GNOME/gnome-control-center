@@ -1697,51 +1697,6 @@ gnome_theme_meta_info_compare (GnomeThemeMetaInfo *a,
   return safe_strcmp (a->background_image, b->background_image);
 }
 
-gboolean
-gnome_theme_is_writable (const gpointer theme, GnomeThemeType type) {
-  GnomeVFSResult vfs_result;
-  GnomeVFSFileInfo *vfs_info;
-  const gchar *theme_path;
-  gboolean writable;
-
-  if (theme == NULL)
-    return FALSE;
-
-  switch (type) {
-    case GNOME_THEME_TYPE_REGULAR:
-      theme_path = ((const GnomeThemeInfo *) theme)->path;
-      break;
-    case GNOME_THEME_TYPE_ICON:
-      theme_path = ((const GnomeThemeIconInfo *) theme)->path;
-      break;
-    case GNOME_THEME_TYPE_CURSOR:
-      theme_path = ((const GnomeThemeCursorInfo *) theme)->path;
-      break;
-    case GNOME_THEME_TYPE_METATHEME:
-      theme_path = ((const GnomeThemeMetaInfo *) theme)->path;
-      break;
-    default:
-      g_assert_not_reached ();
-      break;
-  }
-
-  if (theme_path == NULL)
-    return FALSE;
-
-  vfs_info = gnome_vfs_file_info_new ();
-  vfs_result = gnome_vfs_get_file_info (theme_path,
-					vfs_info,
-					GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS);
-
-  writable = ((vfs_result == GNOME_VFS_OK) &&
-              (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ACCESS) &&
-              (vfs_info->permissions & GNOME_VFS_PERM_ACCESS_WRITABLE));
-
-  gnome_vfs_file_info_unref (vfs_info);
-
-  return writable;
-}
-
 void
 gnome_theme_info_register_theme_change (ThemeChangedCallback func,
 					gpointer data)

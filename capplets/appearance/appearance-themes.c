@@ -597,7 +597,7 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
   }
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_delete"),
-			    gnome_theme_is_writable (theme, GNOME_THEME_TYPE_METATHEME));
+			    theme_is_writable (theme, THEME_TYPE_META));
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_save"), is_custom);
 }
 
