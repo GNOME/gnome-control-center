@@ -1,5 +1,14 @@
 2007-10-28  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-theme-info.c: (add_default_cursor_theme),
+	(read_cursor_theme), (update_common_theme_dir_index),
+	(update_meta_theme_index), (update_icon_theme_index),
+	(update_cursor_theme_index), (common_icon_theme_dir_changed),
+	(add_common_icon_theme_dir_monitor), (gnome_theme_info_find),
+	(gnome_theme_init): add live monitoring for cursor themes
+
+2007-10-28  Jens Granseuer  <jensgr@gmx.net>
+
 	* gconf-property-editor.c: (gconf_peditor_new_tree_view): add cast to
 	avoid "incompatible types" compiler warning
 

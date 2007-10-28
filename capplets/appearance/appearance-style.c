@@ -712,6 +712,18 @@ changed_on_disk_cb (GnomeThemeCommonInfo *theme,
       generate_icon_theme_thumbnail_async (info,
           (ThemeThumbnailFunc) icon_theme_thumbnail_cb, data, NULL);
     }
+
+  } else if (theme->type == GNOME_THEME_TYPE_CURSOR) {
+    GnomeThemeCursorInfo *info = (GnomeThemeCursorInfo *) theme;
+
+    if (change_type == GNOME_THEME_CHANGE_DELETED) {
+      remove_from_treeview ("cursor_themes_list", info->name, data);
+    } else {
+      if (change_type == GNOME_THEME_CHANGE_CREATED)
+        add_to_treeview ("cursor_themes_list", info->name, info->readable_name, info->thumbnail, data);
+      else if (change_type == GNOME_THEME_CHANGE_CHANGED)
+        update_in_treeview ("cursor_themes_list", info->name, info->readable_name, data);
+    }
   }
 }
 

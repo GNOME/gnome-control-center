@@ -423,6 +423,7 @@ add_default_cursor_theme ()
   theme_info->path = g_strdup ("builtin");
   theme_info->name = g_strdup ("default");
   theme_info->readable_name = g_strdup (_("Default Pointer"));
+  theme_info->sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint), 0);
 
   g_hash_table_insert (cursor_theme_hash_by_uri, theme_info->path, theme_info);
   add_theme_to_hash_by_name (cursor_theme_hash_by_name, theme_info);
@@ -466,89 +467,100 @@ gdk_pixbuf_from_xcursor_image (XcursorImage *cursor)
   return pixbuf;
 }
 
-static void
-read_cursor_theme (const gchar *theme_dir)
+static GnomeThemeCursorInfo *
+read_cursor_theme (GnomeVFSURI *cursor_theme_uri)
 {
-  gchar *name;
-  gint i;
-  GArray *available_sizes;
-  XcursorImage *cursor;
-  GdkPixbuf *thumbnail = NULL;
-  GnomeThemeCursorInfo *cursor_theme_info;
-  GnomeDesktopItem *cursor_theme_ditem;
-  gchar *cursor_theme_file;
+  GnomeThemeCursorInfo *cursor_theme_info = NULL;
+  GnomeVFSURI *parent_uri, *cursors_uri;
+  GnomeVFSFileInfo *file_info;
+  GnomeVFSResult result;
 
-  const gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64 };
-  const gint num_sizes = G_N_ELEMENTS (sizes);
+  const gint filter_sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64 };
+  const gint num_sizes = G_N_ELEMENTS (filter_sizes);
 
-  name = g_path_get_basename (theme_dir);
+  parent_uri = gnome_vfs_uri_get_parent (cursor_theme_uri);
+  cursors_uri = gnome_vfs_uri_append_path (parent_uri, "cursors");
 
-  available_sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint),
-				       num_sizes);
+  file_info = gnome_vfs_file_info_new ();
+  result = gnome_vfs_get_file_info_uri (cursors_uri, file_info,
+					GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+  if (result == GNOME_VFS_OK &&
+      file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY) {
+    GArray *sizes;
+    XcursorImage *cursor;
+    GdkPixbuf *thumbnail = NULL;
+    gchar *name;
+    gint i;
 
-  for (i = 0; i < num_sizes; i++) {
-    cursor = XcursorLibraryLoadImage ("left_ptr", name, sizes[i]);
+    name = gnome_vfs_uri_extract_short_name (parent_uri);
 
-    if (cursor) {
-      if (cursor->size == sizes[i]) {
-        g_array_append_val (available_sizes, sizes[i]);
+    sizes = g_array_sized_new (FALSE, FALSE, sizeof (gint), num_sizes);
 
-        if (thumbnail == NULL && i >= 1)
+    for (i = 0; i < num_sizes; ++i) {
+      cursor = XcursorLibraryLoadImage ("left_ptr", name, filter_sizes[i]);
+
+      if (cursor) {
+        if (cursor->size == filter_sizes[i]) {
+          g_array_append_val (sizes, filter_sizes[i]);
+
+          if (thumbnail == NULL && i >= 1)
+            thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
+        }
+
+        XcursorImageDestroy (cursor);
+      }
+    }
+
+    if (sizes->len == 0) {
+      g_array_free (sizes, TRUE);
+      g_free (name);
+    } else {
+      GnomeDesktopItem *cursor_theme_ditem;
+      gchar *cursor_theme_file;
+
+      if (!thumbnail) {
+        cursor = XcursorLibraryLoadImage ("left_ptr", name,
+					  g_array_index (sizes, gint, 0));
+        if (cursor) {
           thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
+          XcursorImageDestroy (cursor);
+        }
       }
 
-      XcursorImageDestroy (cursor);
+      cursor_theme_info = gnome_theme_cursor_info_new ();
+      cursor_theme_info->path = gnome_vfs_uri_to_string (parent_uri,
+							 GNOME_VFS_URI_HIDE_NONE);
+      cursor_theme_info->name = name;
+      cursor_theme_info->sizes = sizes;
+      cursor_theme_info->thumbnail = thumbnail;
+
+      cursor_theme_file = gnome_vfs_uri_to_string (cursor_theme_uri,
+						   GNOME_VFS_URI_HIDE_NONE);
+      cursor_theme_ditem = gnome_desktop_item_new_from_file (cursor_theme_file, 0, NULL);
+      g_free (cursor_theme_file);
+
+      if (cursor_theme_ditem != NULL) {
+        const gchar *readable_name;
+
+        readable_name = gnome_desktop_item_get_string (cursor_theme_ditem,
+						       "Icon Theme/Name");
+        if (readable_name)
+          cursor_theme_info->readable_name = g_strdup (readable_name);
+        else
+          cursor_theme_info->readable_name = g_strdup (name);
+
+        gnome_desktop_item_unref (cursor_theme_ditem);
+      } else {
+        cursor_theme_info->readable_name = g_strdup (name);
+      }
     }
   }
 
-  if (!thumbnail && available_sizes->len > 0) {
-    cursor = XcursorLibraryLoadImage ("left_ptr", name,
-				      g_array_index (available_sizes, gint, 0));
-    if (cursor) {
-      thumbnail = gdk_pixbuf_from_xcursor_image (cursor);
-      XcursorImageDestroy (cursor);
-    }
-  }
+  gnome_vfs_file_info_unref (file_info);
+  gnome_vfs_uri_unref (cursors_uri);
+  gnome_vfs_uri_unref (parent_uri);
 
-  cursor_theme_info = gnome_theme_cursor_info_new ();
-  cursor_theme_info->path = g_strdup (theme_dir);
-  cursor_theme_info->name = name;
-  cursor_theme_info->sizes = available_sizes;
-  cursor_theme_info->thumbnail = thumbnail;
-  cursor_theme_info->priority = 0;
-
-  cursor_theme_file = g_build_filename (theme_dir, "index.theme", NULL);
-  cursor_theme_ditem = gnome_desktop_item_new_from_file (cursor_theme_file, 0, NULL);
-  g_free (cursor_theme_file);
-
-  if (cursor_theme_ditem != NULL) {
-    const gchar *readable_name;
-
-    readable_name = gnome_desktop_item_get_string (cursor_theme_ditem, "Icon Theme/Name");
-
-    if (readable_name)
-      cursor_theme_info->readable_name = g_strdup (readable_name);
-    else
-      cursor_theme_info->readable_name = g_strdup (name);
-
-    gnome_desktop_item_unref (cursor_theme_ditem);
-  } else {
-    cursor_theme_info->readable_name = g_strdup (name);
-  }
-
-  g_hash_table_insert (cursor_theme_hash_by_uri, cursor_theme_info->path, cursor_theme_info);
-  add_theme_to_hash_by_name (cursor_theme_hash_by_name, cursor_theme_info);
-}
-
-static void
-look_for_cursor_theme (const gchar *theme_dir)
-{
-  gchar *cursors_dir = g_build_filename (theme_dir, "cursors", NULL);
-
-  if (g_file_test (cursors_dir, G_FILE_TEST_IS_DIR))
-    read_cursor_theme (theme_dir);
-
-  g_free (cursors_dir);
+  return cursor_theme_info;
 }
 
 #else /* !HAVE_XCURSOR */
@@ -844,12 +856,10 @@ update_metacity_index (GnomeVFSURI *metacity_index_uri,
 }
 
 static void
-update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
-			       gboolean     icon_theme,
-			       gint         priority)
+update_common_theme_dir_index (GnomeVFSURI   *theme_index_uri,
+			       GnomeThemeType type,
+			       gint           priority)
 {
-  GnomeVFSFileInfo *file_info;
-  GnomeVFSResult result;
   gboolean theme_exists;
   GnomeThemeCommonInfo *theme_info;
   GnomeThemeCommonInfo *old_theme_info;
@@ -858,48 +868,50 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
   GHashTable *hash_by_uri;
   GHashTable *hash_by_name;
 
-  if (icon_theme)
-    {
-      hash_by_uri = icon_theme_hash_by_uri;
-      hash_by_name = icon_theme_hash_by_name;
-    }
-  else
-    {
-      hash_by_uri = meta_theme_hash_by_uri;
-      hash_by_name = meta_theme_hash_by_name;
-    }
+  if (type == GNOME_THEME_TYPE_ICON) {
+    hash_by_uri = icon_theme_hash_by_uri;
+    hash_by_name = icon_theme_hash_by_name;
+  } else if (type == GNOME_THEME_TYPE_CURSOR) {
+    hash_by_uri = cursor_theme_hash_by_uri;
+    hash_by_name = cursor_theme_hash_by_name;
+  } else {
+    hash_by_uri = meta_theme_hash_by_uri;
+    hash_by_name = meta_theme_hash_by_name;
+  }
 
-  /* First, we determine the new state of the file. */
-  file_info = gnome_vfs_file_info_new ();
-  result = gnome_vfs_get_file_info_uri (theme_index_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_REGULAR)
-    {
+  if (type != GNOME_THEME_TYPE_CURSOR) {
+    GnomeVFSFileInfo *file_info;
+    GnomeVFSResult result;
+
+    /* First, we determine the new state of the file. */
+    file_info = gnome_vfs_file_info_new ();
+    result = gnome_vfs_get_file_info_uri (theme_index_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+    if (result == GNOME_VFS_OK &&
+	file_info->type == GNOME_VFS_FILE_TYPE_REGULAR) {
       /* It's an interesting file. Let's try to load it. */
-      if (icon_theme)
-	{
-	  theme_info = (GnomeThemeCommonInfo *) read_icon_theme (theme_index_uri);
-	}
+      if (type == GNOME_THEME_TYPE_ICON)
+	theme_info = (GnomeThemeCommonInfo *) read_icon_theme (theme_index_uri);
       else
-	{
-	  theme_info = (GnomeThemeCommonInfo *) gnome_theme_read_meta_theme (theme_index_uri);
-	}
-
-      if (theme_info)
-	{
-	  theme_info->priority = priority;
-	  theme_exists = TRUE;
-	}
-      else
-	{
-	  theme_exists = FALSE;
-	}
-    }
-  else
-    {
+	theme_info = (GnomeThemeCommonInfo *) gnome_theme_read_meta_theme (theme_index_uri);
+    } else {
       theme_info = NULL;
-      theme_exists = FALSE;
     }
-  gnome_vfs_file_info_unref (file_info);
+
+    gnome_vfs_file_info_unref (file_info);
+  }
+#ifdef HAVE_XCURSOR
+  /* cursor themes don't necessarily have an index file, so try those in any case */
+  else {
+    theme_info = (GnomeThemeCommonInfo *) read_cursor_theme (theme_index_uri);
+  }
+#endif
+
+  if (theme_info) {
+    theme_info->priority = priority;
+    theme_exists = TRUE;
+  } else {
+    theme_exists = FALSE;
+  }
 
   /* Next, we see what currently exists */
   common_theme_dir_uri = gnome_vfs_uri_get_parent (theme_index_uri);
@@ -953,14 +965,23 @@ static void
 update_meta_theme_index (GnomeVFSURI *meta_theme_index_uri,
 			 gint         priority)
 {
-  update_common_theme_dir_index (meta_theme_index_uri, FALSE, priority);
+  update_common_theme_dir_index (meta_theme_index_uri, GNOME_THEME_TYPE_METATHEME, priority);
 }
 
 static void
 update_icon_theme_index (GnomeVFSURI *icon_theme_index_uri,
 			 gint         priority)
 {
-  update_common_theme_dir_index (icon_theme_index_uri, TRUE, priority);
+  update_common_theme_dir_index (icon_theme_index_uri, GNOME_THEME_TYPE_ICON, priority);
+}
+
+static void
+update_cursor_theme_index (GnomeVFSURI *cursor_theme_index_uri,
+			   gint         priority)
+{
+#ifdef HAVE_XCURSOR
+  update_common_theme_dir_index (cursor_theme_index_uri, GNOME_THEME_TYPE_CURSOR, priority);
+#endif
 }
 
 static void
@@ -1070,6 +1091,11 @@ common_icon_theme_dir_changed (GnomeVFSMonitorHandle *handle,
   if (!strcmp (affected_file, "index.theme"))
     {
       update_icon_theme_index (icon_theme_dir_uri, monitor_data->priority);
+      update_cursor_theme_index (icon_theme_dir_uri, monitor_data->priority);
+    }
+  else if (!strcmp (affected_file, "cursors"))
+    {
+      update_cursor_theme_index (icon_theme_dir_uri, monitor_data->priority);
     }
 
   g_free (affected_file);
@@ -1192,14 +1218,10 @@ add_common_icon_theme_dir_monitor (GnomeVFSURI                    *theme_dir_uri
   uri_string = gnome_vfs_uri_to_string (theme_dir_uri,
                                         GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
 
-#ifdef HAVE_XCURSOR
-  /* Look for cursor theme in the theme directory */
-  look_for_cursor_theme (uri_string);
-#endif
-
   /* Add the handle for this directory */
   index_uri = gnome_vfs_uri_append_file_name (theme_dir_uri, "index.theme");
   update_icon_theme_index (index_uri, monitor_data->priority);
+  update_cursor_theme_index (index_uri, monitor_data->priority);
   gnome_vfs_uri_unref (index_uri);
 
   result = gnome_vfs_monitor_add (& (monitor_data->common_icon_theme_dir_handle),
@@ -1478,7 +1500,8 @@ gnome_theme_info_free (GnomeThemeInfo *theme_info)
 GnomeThemeInfo *
 gnome_theme_info_find (const gchar *theme_name)
 {
-  return (GnomeThemeInfo *) get_theme_from_hash_by_name (theme_hash_by_name, theme_name, -1);
+  return (GnomeThemeInfo *)
+	 get_theme_from_hash_by_name (theme_hash_by_name, theme_name, -1);
 }
 
 struct GnomeThemeInfoHashData
@@ -1840,7 +1863,6 @@ gnome_theme_init (gboolean *monitor_not_added)
   gchar *top_theme_dir_string;
   gboolean real_monitor_not_added = FALSE;
   static gboolean initted = FALSE;
-  GnomeVFSResult result;
   const gchar *gtk_data_dir;
   if (initted)
     return;
@@ -1851,7 +1873,7 @@ gnome_theme_init (gboolean *monitor_not_added)
   meta_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   icon_theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   icon_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  cursor_theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
+  cursor_theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   cursor_theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   theme_hash_by_uri = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   theme_hash_by_name = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
@@ -1860,7 +1882,7 @@ gnome_theme_init (gboolean *monitor_not_added)
   /* $datadir/themes */
   top_theme_dir_string = gtk_rc_get_theme_dir ();
   top_theme_dir_uri = gnome_vfs_uri_new (top_theme_dir_string);
-  result = add_top_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 1, NULL);
+  add_top_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 1, NULL);
   g_free (top_theme_dir_string);
   gnome_vfs_uri_unref (top_theme_dir_uri);
 
@@ -1870,26 +1892,22 @@ gnome_theme_init (gboolean *monitor_not_added)
   g_free (top_theme_dir_string);
   if (!gnome_vfs_uri_exists (top_theme_dir_uri))
     gnome_vfs_make_directory_for_uri (top_theme_dir_uri, 0775);
-  result = add_top_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 0, NULL);
+  add_top_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 0, NULL);
   gnome_vfs_uri_unref (top_theme_dir_uri);
 
   /* The weird /usr/share/icons */
   top_theme_dir_uri = gnome_vfs_uri_new ("/usr/share/icons");
   if (!gnome_vfs_uri_exists (top_theme_dir_uri))
     gnome_vfs_make_directory_for_uri (top_theme_dir_uri, 0775);
-  result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 2, NULL);
+  add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 2, NULL);
   gnome_vfs_uri_unref (top_theme_dir_uri);
 
   /* $datadir/icons */
   gtk_data_dir = g_getenv ("GTK_DATA_PREFIX");
   if (gtk_data_dir)
-    {
-      top_theme_dir_string = g_build_filename (gtk_data_dir, "share", "icons", NULL);
-    }
+    top_theme_dir_string = g_build_filename (gtk_data_dir, "share", "icons", NULL);
   else
-    {
-      top_theme_dir_string = g_build_filename (INSTALL_PREFIX, "share", "icons", NULL);
-    }
+    top_theme_dir_string = g_build_filename (INSTALL_PREFIX, "share", "icons", NULL);
 
 #ifdef XCURSOR_ICONDIR
   /* if there's a separate xcursors dir, add that as well */
@@ -1897,7 +1915,7 @@ gnome_theme_init (gboolean *monitor_not_added)
       strcmp (XCURSOR_ICONDIR, "/usr/share/icons")) {
     top_theme_dir_uri = gnome_vfs_uri_new (XCURSOR_ICONDIR);
     if (gnome_vfs_uri_exists (top_theme_dir_uri))
-      result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 1, NULL);
+      add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 1, NULL);
     gnome_vfs_uri_unref (top_theme_dir_uri);
   }
 #endif
@@ -1907,17 +1925,17 @@ gnome_theme_init (gboolean *monitor_not_added)
 
   if (!gnome_vfs_uri_exists (top_theme_dir_uri))
     gnome_vfs_make_directory_for_uri (top_theme_dir_uri, 0775);
-  result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 1, NULL);
+  add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 1, NULL);
   gnome_vfs_uri_unref (top_theme_dir_uri);
 
   /* ~/.icons */
-  top_theme_dir_string  = g_build_filename (g_get_home_dir (), ".icons", NULL);
+  top_theme_dir_string = g_build_filename (g_get_home_dir (), ".icons", NULL);
   top_theme_dir_uri = gnome_vfs_uri_new (top_theme_dir_string);
   g_free (top_theme_dir_string);
 
   if (!gnome_vfs_uri_exists (top_theme_dir_uri))
     gnome_vfs_make_directory_for_uri (top_theme_dir_uri, 0775);
-  result = add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 0, NULL);
+  add_top_icon_theme_dir_monitor (top_theme_dir_uri, &real_monitor_not_added, 0, NULL);
   gnome_vfs_uri_unref (top_theme_dir_uri);
 
 #ifdef HAVE_XCURSOR
