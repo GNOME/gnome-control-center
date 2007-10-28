@@ -28,38 +28,17 @@
 gboolean
 theme_is_writable (const gpointer theme, ThemeType type)
 {
+  GnomeThemeCommonInfo *info = theme;
   GnomeVFSResult vfs_result;
   GnomeVFSFileInfo *vfs_info;
   const gchar *theme_path;
   gboolean writable;
 
-  if (theme == NULL)
-    return FALSE;
-
-  switch (type) {
-    case THEME_TYPE_GTK:
-    case THEME_TYPE_WINDOW:
-      theme_path = ((const GnomeThemeInfo *) theme)->path;
-      break;
-    case THEME_TYPE_ICON:
-      theme_path = ((const GnomeThemeIconInfo *) theme)->path;
-      break;
-    case THEME_TYPE_CURSOR:
-      theme_path = ((const GnomeThemeCursorInfo *) theme)->path;
-      break;
-    case THEME_TYPE_META:
-      theme_path = ((const GnomeThemeMetaInfo *) theme)->path;
-      break;
-    default:
-      g_assert_not_reached ();
-      break;
-  }
-
-  if (theme_path == NULL)
+  if (info == NULL || info->path == NULL)
     return FALSE;
 
   vfs_info = gnome_vfs_file_info_new ();
-  vfs_result = gnome_vfs_get_file_info (theme_path,
+  vfs_result = gnome_vfs_get_file_info (info->path,
 					vfs_info,
 					GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS);
 
@@ -77,12 +56,12 @@ theme_delete (const gchar *name, ThemeType type)
 {
   gboolean rc;
   GtkDialog *dialog;
-  gpointer theme;
   gchar *theme_dir;
   gint response;
   GList *uri_list;
   GnomeVFSResult result;
   GnomeVFSURI *uri;
+  GnomeThemeCommonInfo *theme;
 
   dialog = (GtkDialog *) gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL,
@@ -97,28 +76,28 @@ theme_delete (const gchar *name, ThemeType type)
 
   switch (type) {
     case THEME_TYPE_GTK:
-      theme = gnome_theme_info_find (name);
-      theme_dir = g_build_filename (((GnomeThemeInfo *) theme)->path, "gtk-2.0", NULL);
+      theme = (GnomeThemeCommonInfo *) gnome_theme_info_find (name);
+      theme_dir = g_build_filename (theme->path, "gtk-2.0", NULL);
       break;
 
     case THEME_TYPE_ICON:
-      theme = gnome_theme_icon_info_find (name);
-      theme_dir = g_path_get_dirname (((GnomeThemeIconInfo *) theme)->path);
+      theme = (GnomeThemeCommonInfo *) gnome_theme_icon_info_find (name);
+      theme_dir = g_path_get_dirname (theme->path);
       break;
 
     case THEME_TYPE_WINDOW:
-      theme = gnome_theme_info_find (name);
-      theme_dir = g_build_filename (((GnomeThemeInfo *) theme)->path, "metacity-1", NULL);
+      theme = (GnomeThemeCommonInfo *) gnome_theme_info_find (name);
+      theme_dir = g_build_filename (theme->path, "metacity-1", NULL);
       break;
 
     case THEME_TYPE_META:
-      theme = gnome_theme_meta_info_find (name);
-      theme_dir = g_strdup (((GnomeThemeMetaInfo *) theme)->path);
+      theme = (GnomeThemeCommonInfo *) gnome_theme_meta_info_find (name);
+      theme_dir = g_strdup (theme->path);
       break;
 
     case THEME_TYPE_CURSOR:
-      theme = gnome_theme_cursor_info_find (name);
-      theme_dir = g_build_filename (((GnomeThemeCursorInfo *) theme)->path, "cursors", NULL);
+      theme = (GnomeThemeCommonInfo *) gnome_theme_cursor_info_find (name);
+      theme_dir = g_build_filename (theme->path, "cursors", NULL);
       break;
 
     default:

@@ -785,32 +785,18 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
 
   for (l = themes; l; l = g_list_next (l))
   {
-    const gchar *name = NULL;
-    const gchar *label = NULL;
+    GnomeThemeCommonInfo *theme = (GnomeThemeCommonInfo *) l->data;
     GtkTreeIter i;
 
-    if (type == THEME_TYPE_GTK || type == THEME_TYPE_WINDOW) {
-      name = ((GnomeThemeInfo *) l->data)->name;
-    } else if (type == THEME_TYPE_ICON) {
-      name = ((GnomeThemeIconInfo *) l->data)->name;
-      label = ((GnomeThemeIconInfo *) l->data)->readable_name;
-    } else if (type == THEME_TYPE_CURSOR) {
-      name = ((GnomeThemeCursorInfo *) l->data)->name;
-      label = ((GnomeThemeCursorInfo *) l->data)->readable_name;
-    }
-
-    if (!name)
-      continue; /* just in case... */
-
     if (type == THEME_TYPE_CURSOR) {
-      thumbnail = ((GnomeThemeCursorInfo *) l->data)->thumbnail;
+      thumbnail = ((GnomeThemeCursorInfo *) theme)->thumbnail;
     } else {
-      generator (l->data, thumb_cb, data, NULL);
+      generator (theme, thumb_cb, data, NULL);
     }
 
     gtk_list_store_insert_with_values (store, &i, 0,
-                                       COL_LABEL, label ? label : name,
-                                       COL_NAME, name,
+                                       COL_LABEL, theme->readable_name,
+                                       COL_NAME, theme->name,
                                        COL_THUMBNAIL, thumbnail,
                                        -1);
 
