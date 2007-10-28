@@ -165,14 +165,13 @@ theme_thumbnail_generate (GnomeThemeMetaInfo *info, AppearanceData *data)
 }
 
 static void
-theme_changed_on_disk_cb (GnomeThemeType       type,
-			  gpointer             theme,
-			  GnomeThemeChangeType change_type,
-			  GnomeThemeElement    element,
+theme_changed_on_disk_cb (GnomeThemeCommonInfo *theme,
+			  GnomeThemeChangeType  change_type,
+			  GnomeThemeElement     element,
 			  AppearanceData       *data)
 {
-  if (type == GNOME_THEME_TYPE_METATHEME) {
-    GnomeThemeMetaInfo *meta = theme;
+  if (theme->type == GNOME_THEME_TYPE_METATHEME) {
+    GnomeThemeMetaInfo *meta = (GnomeThemeMetaInfo *) theme;
 
     if (change_type == GNOME_THEME_CHANGE_CREATED) {
       gtk_list_store_insert_with_values (data->theme_store, NULL, 0,

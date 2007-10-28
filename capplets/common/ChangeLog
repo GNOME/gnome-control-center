@@ -1,3 +1,34 @@
+2007-10-28  Jens Granseuer  <jensgr@gmx.net>
+
+	Switch to using a common theme struct that includes a type descriptor
+	so we can avoid many of the theme type casts. This should also make
+	adding support for live cursor theme changes a little easier.
+
+	* gnome-theme-info.c: (add_theme_to_hash_by_name),
+	(remove_theme_from_hash_by_name), (get_theme_from_hash_by_name),
+	(gnome_theme_compare), (gnome_theme_free),
+	(add_default_cursor_theme), (gdk_pixbuf_from_xcursor_image),
+	(read_cursor_theme), (look_for_cursor_theme),
+	(read_current_cursor_font), (read_cursor_fonts),
+	(handle_change_signal), (update_theme_index),
+	(update_common_theme_dir_index), (gtk2_dir_changed),
+	(keybinding_dir_changed), (metacity_dir_changed),
+	(common_theme_dir_changed), (common_icon_theme_dir_changed),
+	(add_common_theme_dir_monitor),
+	(add_common_icon_theme_dir_monitor),
+	(remove_common_theme_dir_monitor), (top_theme_dir_changed),
+	(top_icon_theme_dir_changed), (real_add_top_theme_dir_monitor),
+	(gnome_theme_info_new), (gnome_theme_info_free),
+	(gnome_theme_info_find), (gnome_theme_info_find_all_helper),
+	(gnome_theme_icon_info_new), (gnome_theme_icon_info_find),
+	(gnome_theme_icon_info_find_all), (gnome_theme_cursor_info_new),
+	(gnome_theme_cursor_info_find), (gnome_theme_cursor_info_find_all),
+	(gnome_theme_meta_info_new), (gnome_theme_meta_info_free),
+	(gnome_theme_meta_info_find), (gnome_theme_meta_info_find_all),
+	(gnome_theme_color_scheme_parse), (gnome_theme_init):
+	* gnome-theme-info.h: Use CursorThemeCommonInfo wherever possible,
+	remove some unused code.
+
 2007-10-27  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-theme-info.c: (look_for_cursor_theme), (read_cursor_fonts),

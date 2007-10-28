@@ -662,14 +662,13 @@ icon_theme_thumbnail_cb (GdkPixbuf *pixbuf,
 }
 
 static void
-changed_on_disk_cb (GnomeThemeType       type,
-		    gpointer             theme,
-		    GnomeThemeChangeType change_type,
-		    GnomeThemeElement    element,
-		    AppearanceData      *data)
+changed_on_disk_cb (GnomeThemeCommonInfo *theme,
+		    GnomeThemeChangeType  change_type,
+		    GnomeThemeElement     element,
+		    AppearanceData       *data)
 {
-  if (type == GNOME_THEME_TYPE_REGULAR) {
-    GnomeThemeInfo *info = theme;
+  if (theme->type == GNOME_THEME_TYPE_REGULAR) {
+    GnomeThemeInfo *info = (GnomeThemeInfo *) theme;
 
     if (change_type == GNOME_THEME_CHANGE_DELETED) {
       if (info->has_gtk)
@@ -699,8 +698,8 @@ changed_on_disk_cb (GnomeThemeType       type,
       }
     }
 
-  } else if (type == GNOME_THEME_TYPE_ICON) {
-    GnomeThemeIconInfo *info = theme;
+  } else if (theme->type == GNOME_THEME_TYPE_ICON) {
+    GnomeThemeIconInfo *info = (GnomeThemeIconInfo *) theme;
 
     if (change_type == GNOME_THEME_CHANGE_DELETED) {
       remove_from_treeview ("icon_themes_list", info->name, data);

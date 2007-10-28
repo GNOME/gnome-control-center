@@ -50,33 +50,39 @@ typedef enum {
   GNOME_THEME_GTK_2_KEYBINDING = 1 << 2
 } GnomeThemeElement;
 
+typedef struct _GnomeThemeCommonInfo GnomeThemeCommonInfo;
+typedef struct _GnomeThemeCommonInfo GnomeThemeIconInfo;
+struct _GnomeThemeCommonInfo
+{
+  GnomeThemeType type;
+  gchar *path;
+  gchar *name;
+  gchar *readable_name;
+  gint priority;
+};
 
 typedef struct _GnomeThemeInfo GnomeThemeInfo;
 struct _GnomeThemeInfo
 {
+  GnomeThemeType type;
   gchar *path;
   gchar *name;
+  gchar *readable_name;
   gint priority;
+
   guint has_gtk : 1;
   guint has_keybinding : 1;
   guint has_metacity : 1;
 };
 
-typedef struct _GnomeThemeIconInfo GnomeThemeIconInfo;
-struct _GnomeThemeIconInfo
-{
-  gchar *path;
-  gchar *name;
-  gchar *readable_name;
-  gint priority;
-};
-
 typedef struct _GnomeThemeCursorInfo GnomeThemeCursorInfo;
 struct _GnomeThemeCursorInfo {
+  GnomeThemeType type;
   gchar *path;
   gchar *name;
   gchar *readable_name;
   gint priority;
+
   GArray *sizes;
   GdkPixbuf *thumbnail;
 };
@@ -84,10 +90,12 @@ struct _GnomeThemeCursorInfo {
 typedef struct _GnomeThemeMetaInfo GnomeThemeMetaInfo;
 struct _GnomeThemeMetaInfo
 {
+  GnomeThemeType type;
   gchar *path;
   gchar *name;
-  gint priority;
   gchar *readable_name;
+  gint priority;
+
   gchar *comment;
   gchar *icon_file;
 
@@ -97,7 +105,7 @@ struct _GnomeThemeMetaInfo
   gchar *icon_theme_name;
   gchar *sound_theme_name;
   gchar *cursor_theme_name;
-  gint cursor_size;
+  guint cursor_size;
 
   gchar *application_font;
   gchar *desktop_font;
@@ -117,20 +125,17 @@ enum {
   NUM_SYMBOLIC_COLORS
 };
 
-typedef void (* ThemeChangedCallback) (GnomeThemeType       type,
-				       gpointer             theme,
-				       GnomeThemeChangeType change_type,
-				       GnomeThemeElement    element,
-				       gpointer             user_data);
+typedef void (* ThemeChangedCallback) (GnomeThemeCommonInfo *theme,
+				       GnomeThemeChangeType  change_type,
+				       GnomeThemeElement     element,
+				       gpointer              user_data);
 
 
-/* Generic Themes */
+/* GTK/Metacity/keybinding Themes */
 GnomeThemeInfo     *gnome_theme_info_new                   (void);
 void                gnome_theme_info_free                  (GnomeThemeInfo     *theme_info);
 GnomeThemeInfo     *gnome_theme_info_find                  (const gchar        *theme_name);
 GList              *gnome_theme_info_find_by_type          (guint               elements);
-/* Expected to be in the form "file:///usr/share/..." */
-GnomeThemeInfo     *gnome_theme_info_find_by_uri           (const gchar        *theme_uri);
 
 
 /* Icon Themes */
@@ -142,23 +147,20 @@ gint                gnome_theme_icon_info_compare          (GnomeThemeIconInfo *
 							    GnomeThemeIconInfo *b);
 
 /* Cursor Themes */
-GnomeThemeCursorInfo *gnome_theme_cursor_info_new              (void);
-void                gnome_theme_cursor_info_free             (GnomeThemeCursorInfo *icon_theme_info);
-GnomeThemeCursorInfo *gnome_theme_cursor_info_find             (const gchar        *icon_theme_name);
-GList              *gnome_theme_cursor_info_find_all         (void);
-gint                gnome_theme_cursor_info_compare          (GnomeThemeCursorInfo *a,
-							    GnomeThemeCursorInfo *b);
+GnomeThemeCursorInfo *gnome_theme_cursor_info_new	   (void);
+void                  gnome_theme_cursor_info_free	   (GnomeThemeCursorInfo *info);
+GnomeThemeCursorInfo *gnome_theme_cursor_info_find	   (const gchar          *name);
+GList                *gnome_theme_cursor_info_find_all	   (void);
 
 /* Meta themes*/
 GnomeThemeMetaInfo *gnome_theme_meta_info_new              (void);
 void                gnome_theme_meta_info_free             (GnomeThemeMetaInfo *meta_theme_info);
 void                gnome_theme_meta_info_print            (GnomeThemeMetaInfo *meta_theme_info);
-GnomeThemeMetaInfo *gnome_theme_meta_info_find             (const char         *meta_theme_name);
-GnomeThemeMetaInfo *gnome_theme_meta_info_find_by_uri      (const char         *uri);
+GnomeThemeMetaInfo *gnome_theme_meta_info_find             (const gchar        *meta_theme_name);
 GList              *gnome_theme_meta_info_find_all         (void);
 gint                gnome_theme_meta_info_compare          (GnomeThemeMetaInfo *a,
 							    GnomeThemeMetaInfo *b);
-GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GnomeVFSURI *meta_theme_uri);
+GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GnomeVFSURI        *meta_theme_uri);
 
 /* Other */
 void                gnome_theme_init                       (gboolean            *monitor_not_added);
