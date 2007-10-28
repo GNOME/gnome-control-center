@@ -1852,7 +1852,7 @@ gconf_peditor_new_tree_view (GConfChangeSet *changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (gtk_tree_view_get_selection (tree_view)),
+	g_signal_connect_swapped (gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view)),
 				  "changed",
 				  (GCallback) peditor_tree_view_widget_changed, peditor);
 

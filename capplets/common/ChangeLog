@@ -1,5 +1,10 @@
 2007-10-28  Jens Granseuer  <jensgr@gmx.net>
 
+	* gconf-property-editor.c: (gconf_peditor_new_tree_view): add cast to
+	avoid "incompatible types" compiler warning
+
+2007-10-28  Jens Granseuer  <jensgr@gmx.net>
+
 	Switch to using a common theme struct that includes a type descriptor
 	so we can avoid many of the theme type casts. This should also make
 	adding support for live cursor theme changes a little easier.
