@@ -1,3 +1,13 @@
+2007-10-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (gtk_theme_changed), (window_theme_changed),
+	(icon_theme_changed), (update_cursor_size_scale),
+	(cursor_theme_changed):
+	* appearance-themes.c: (theme_selection_changed_cb):
+	* theme-util.c: (theme_is_writable):
+	* theme-util.h: simplify some more code, and fix a crash when the
+	cursor theme in GConf is unset that I introduced in r8212
+
 2007-10-28  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-style.c: (prepare_list):

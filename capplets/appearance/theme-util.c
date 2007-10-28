@@ -26,12 +26,11 @@
 #include <string.h>
 
 gboolean
-theme_is_writable (const gpointer theme, ThemeType type)
+theme_is_writable (const gpointer theme)
 {
   GnomeThemeCommonInfo *info = theme;
   GnomeVFSResult vfs_result;
   GnomeVFSFileInfo *vfs_info;
-  const gchar *theme_path;
   gboolean writable;
 
   if (info == NULL || info->path == NULL)

@@ -50,7 +50,7 @@ typedef enum {
   THEME_TYPE_CURSOR
 } ThemeType;
 
-gboolean theme_is_writable (const gpointer theme, ThemeType type);
+gboolean theme_is_writable (const gpointer theme);
 gboolean theme_delete (const gchar *name, ThemeType type);
 
 gboolean theme_model_iter_last (GtkTreeModel *model, GtkTreeIter *iter);

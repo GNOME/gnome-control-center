@@ -328,7 +328,7 @@ gtk_theme_changed (GConfPropertyEditor *peditor,
   }
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "gtk_themes_delete"),
-			    theme_is_writable (theme, THEME_TYPE_GTK));
+			    theme_is_writable (theme));
 }
 
 static void
@@ -344,7 +344,7 @@ window_theme_changed (GConfPropertyEditor *peditor,
     theme = gnome_theme_info_find (name);
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "window_themes_delete"),
-			    theme_is_writable (theme, THEME_TYPE_WINDOW));
+			    theme_is_writable (theme));
 }
 
 static void
@@ -360,7 +360,7 @@ icon_theme_changed (GConfPropertyEditor *peditor,
     theme = gnome_theme_icon_info_find (name);
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "icon_themes_delete"),
-			    theme_is_writable (theme, THEME_TYPE_ICON));
+			    theme_is_writable (theme));
 }
 
 #ifdef HAVE_XCURSOR
@@ -456,7 +456,7 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
 
     size = g_array_index (theme->sizes, gint, index);
   } else {
-    if (theme->sizes->len > 0)
+    if (theme && theme->sizes->len > 0)
       size = g_array_index (theme->sizes, gint, 0);
     else
       size = 18;
@@ -482,7 +482,7 @@ cursor_theme_changed (GConfPropertyEditor *peditor,
   update_cursor_size_scale (theme, data);
 
   gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "cursor_themes_delete"),
-			    theme_is_writable (theme, THEME_TYPE_CURSOR));
+			    theme_is_writable (theme));
 
 }
 
