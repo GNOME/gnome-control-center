@@ -1,3 +1,13 @@
+2007-10-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-theme-info.c: (theme_compare), (theme_free),
+	(update_common_theme_dir_index), (common_icon_theme_dir_changed),
+	(gnome_theme_cursor_info_find_all),
+	(gnome_theme_cursor_info_compare):
+	* gnome-theme-info.h: make sure we always call update_cursor_theme_index
+	with the index.theme URI. Implement some missing functionality for
+	cursor theme monitoring.
+
 2007-10-28  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-theme-info.c: (add_default_cursor_theme),

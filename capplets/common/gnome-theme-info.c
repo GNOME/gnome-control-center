@@ -190,8 +190,8 @@ get_theme_from_hash_by_name (GHashTable  *hash_table,
 }
 
 static gint
-gnome_theme_compare (GnomeThemeCommonInfo *a,
-		     GnomeThemeCommonInfo *b)
+theme_compare (GnomeThemeCommonInfo *a,
+	       GnomeThemeCommonInfo *b)
 {
   gint cmp;
 
@@ -206,6 +206,10 @@ gnome_theme_compare (GnomeThemeCommonInfo *a,
     cmp = gnome_theme_icon_info_compare (
     		(GnomeThemeIconInfo *) a, (GnomeThemeIconInfo *) b);
     break;
+  case GNOME_THEME_TYPE_CURSOR:
+    cmp = gnome_theme_cursor_info_compare (
+    		(GnomeThemeCursorInfo *) a, (GnomeThemeCursorInfo *) b);
+    break;
   default:
     /* not supported at this time */
     g_assert_not_reached ();
@@ -215,7 +219,7 @@ gnome_theme_compare (GnomeThemeCommonInfo *a,
 }
 
 static void
-gnome_theme_free (GnomeThemeCommonInfo *info)
+theme_free (GnomeThemeCommonInfo *info)
 {
   switch (info->type) {
   case GNOME_THEME_TYPE_METATHEME:
@@ -932,7 +936,7 @@ update_common_theme_dir_index (GnomeVFSURI   *theme_index_uri,
     {
       if (theme_exists)
         {
-	  if (gnome_theme_compare (theme_info, old_theme_info) != 0)
+	  if (theme_compare (theme_info, old_theme_info) != 0)
 	    {
 	      /* Remove old theme */
 	      g_hash_table_remove (hash_by_uri, common_theme_dir);
@@ -940,11 +944,11 @@ update_common_theme_dir_index (GnomeVFSURI   *theme_index_uri,
 	      g_hash_table_insert (hash_by_uri, g_strdup (common_theme_dir), theme_info);
 	      add_theme_to_hash_by_name (hash_by_name, theme_info);
 	      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CHANGED, 0);
-	      gnome_theme_free (old_theme_info);
+	      theme_free (old_theme_info);
 	    }
 	  else
 	    {
-	      gnome_theme_free (theme_info);
+	      theme_free (theme_info);
 	    }
 	}
       else
@@ -953,7 +957,7 @@ update_common_theme_dir_index (GnomeVFSURI   *theme_index_uri,
    	  remove_theme_from_hash_by_name (hash_by_name, old_theme_info);
 
 	  handle_change_signal (old_theme_info, GNOME_THEME_CHANGE_DELETED, 0);
-	  gnome_theme_free (old_theme_info);
+	  theme_free (old_theme_info);
 	}
     }
 
@@ -1087,15 +1091,25 @@ common_icon_theme_dir_changed (GnomeVFSMonitorHandle *handle,
   icon_theme_dir_uri = gnome_vfs_uri_new (info_uri);
   affected_file = gnome_vfs_uri_extract_short_name (icon_theme_dir_uri);
 
-  /* The only file we care about is index.theme*/
+  /* The only file we care about is index.theme */
   if (!strcmp (affected_file, "index.theme"))
     {
       update_icon_theme_index (icon_theme_dir_uri, monitor_data->priority);
       update_cursor_theme_index (icon_theme_dir_uri, monitor_data->priority);
     }
+  /* and the cursors subdir for cursor themes */
   else if (!strcmp (affected_file, "cursors"))
     {
-      update_cursor_theme_index (icon_theme_dir_uri, monitor_data->priority);
+      /* always call update_cursor_theme_index with the index.theme URI */
+      GnomeVFSURI *parent_uri, *index_uri;
+
+      parent_uri = gnome_vfs_uri_get_parent (icon_theme_dir_uri);
+      index_uri = gnome_vfs_uri_append_path (parent_uri, "index.theme");
+      gnome_vfs_uri_unref (parent_uri);
+
+      update_cursor_theme_index (index_uri, monitor_data->priority);
+
+      gnome_vfs_uri_unref (index_uri);
     }
 
   g_free (affected_file);
@@ -1650,6 +1664,18 @@ gnome_theme_cursor_info_find_all (void)
 			&list);
 
   return list;
+}
+
+gint
+gnome_theme_cursor_info_compare (GnomeThemeCursorInfo *a,
+				 GnomeThemeCursorInfo *b)
+{
+  gint cmp;
+
+  cmp = safe_strcmp (a->path, b->path);
+  if (cmp != 0) return cmp;
+
+  return safe_strcmp (a->name, b->name);
 }
 
 /* Meta themes */

@@ -151,6 +151,8 @@ GnomeThemeCursorInfo *gnome_theme_cursor_info_new	   (void);
 void                  gnome_theme_cursor_info_free	   (GnomeThemeCursorInfo *info);
 GnomeThemeCursorInfo *gnome_theme_cursor_info_find	   (const gchar          *name);
 GList                *gnome_theme_cursor_info_find_all	   (void);
+gint                  gnome_theme_cursor_info_compare      (GnomeThemeCursorInfo *a,
+							    GnomeThemeCursorInfo *b);
 
 /* Meta themes*/
 GnomeThemeMetaInfo *gnome_theme_meta_info_new              (void);
