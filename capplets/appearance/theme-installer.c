@@ -41,7 +41,9 @@ enum {
 	THEME_GNOME,
 	THEME_GTK,
 	THEME_ENGINE,
-	THEME_METACITY
+	THEME_METACITY,
+	THEME_CURSOR,
+	THEME_ICON_CURSOR
 };
 
 enum {
@@ -67,15 +69,13 @@ static int
 file_theme_type (const gchar *dir)
 {
 	gchar *filename = NULL;
-	GnomeVFSURI *src_uri = NULL;
 	gboolean exists;
 
-	if (!dir) return THEME_INVALID;
+	if (!dir)
+		return THEME_INVALID;
 
 	filename = g_build_filename (dir, "index.theme", NULL);
-	src_uri = gnome_vfs_uri_new (filename);
-	exists = gnome_vfs_uri_exists (src_uri);
-	gnome_vfs_uri_unref (src_uri);
+	exists = g_file_test (filename, G_FILE_TEST_IS_REGULAR);
 
 	if (exists) {
 		GPatternSpec *pattern = NULL;
@@ -85,6 +85,7 @@ file_theme_type (const gchar *dir)
 		gboolean match;
 
 		uri = gnome_vfs_get_uri_from_local_path (filename);
+		g_free (filename);
 		gnome_vfs_read_entire_file (uri, &file_size, &file_contents);
 		g_free (uri);
 
@@ -92,8 +93,24 @@ file_theme_type (const gchar *dir)
 		match = g_pattern_match_string (pattern, file_contents);
 		g_pattern_spec_free (pattern);
 
-		if (match)
-			return THEME_ICON;
+		if (match) {
+			pattern = g_pattern_spec_new ("*Directories=*");
+			match = g_pattern_match_string (pattern, file_contents);
+			g_pattern_spec_free (pattern);
+
+			if (match) {
+				/* check if we have a cursor, too */
+				filename = g_build_filename (dir, "cursors", NULL);
+				exists = g_file_test (filename, G_FILE_TEST_IS_DIR);
+				g_free (filename);
+
+				if (exists)
+					return THEME_ICON_CURSOR;
+				else
+					return THEME_ICON;
+			}
+			return THEME_CURSOR;
+		}
 
 		pattern = g_pattern_spec_new ("*[X-GNOME-Metatheme]*");
 		match = g_pattern_match_string (pattern, file_contents);
@@ -101,32 +118,35 @@ file_theme_type (const gchar *dir)
 
 		if (match)
 			return THEME_GNOME;
+	} else {
+		g_free (filename);
 	}
-	g_free (filename);
 
 	filename = g_build_filename (dir, "gtk-2.0", "gtkrc", NULL);
-	src_uri = gnome_vfs_uri_new (filename);
+	exists = g_file_test (filename, G_FILE_TEST_IS_REGULAR);
 	g_free (filename);
-	exists = gnome_vfs_uri_exists (src_uri);
-	gnome_vfs_uri_unref (src_uri);
 
 	if (exists)
 		return THEME_GTK;
 
 	filename = g_build_filename (dir, "metacity-1", "metacity-theme-1.xml", NULL);
-	src_uri = gnome_vfs_uri_new (filename);
+	exists = g_file_test (filename, G_FILE_TEST_IS_REGULAR);
 	g_free (filename);
-	exists = gnome_vfs_uri_exists (src_uri);
-	gnome_vfs_uri_unref (src_uri);
 
 	if (exists)
 		return THEME_METACITY;
 
-	filename = g_build_filename (dir, "configure", NULL);
-	src_uri = gnome_vfs_uri_new (filename);
+	/* cursor themes don't necessarily have an index.theme */
+	filename = g_build_filename (dir, "cursors", NULL);
+	exists = g_file_test (filename, G_FILE_TEST_IS_DIR);
 	g_free (filename);
-	exists = gnome_vfs_uri_exists (src_uri);
-	gnome_vfs_uri_unref (src_uri);
+
+	if (exists)
+		return THEME_CURSOR;
+
+	filename = g_build_filename (dir, "configure", NULL);
+	exists = g_file_test (filename, G_FILE_TEST_IS_EXECUTABLE);
+	g_free (filename);
 
 	if (exists)
 		return THEME_ENGINE;
@@ -226,22 +246,28 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 
 	/* What type of theme is it? */
 	theme_type = file_theme_type (tmp_dir);
-	if (theme_type == THEME_ICON) {
+	switch (theme_type) {
+	case THEME_ICON:
+	case THEME_CURSOR:
+	case THEME_ICON_CURSOR:
 		target_dir = g_build_path (G_DIR_SEPARATOR_S,
 					   g_get_home_dir (), ".icons",
 					   theme_name, NULL);
-	} else if (theme_type == THEME_GNOME) {
+		break;
+	case THEME_GNOME:
 		target_dir = g_build_path (G_DIR_SEPARATOR_S,
 					   g_get_home_dir (), ".themes",
 			 		   theme_name, NULL);
 		user_message = g_strdup_printf (_("GNOME Theme %s correctly installed"),
 						theme_name);
-	} else if (theme_type == THEME_METACITY ||
-		   theme_type == THEME_GTK) {
+		break;
+	case THEME_METACITY:
+	case THEME_GTK:
 		target_dir = g_build_path (G_DIR_SEPARATOR_S,
 					   g_get_home_dir (), ".themes",
 					   theme_name, NULL);
-	} else if (theme_type == THEME_ENGINE) {
+		break;
+	case THEME_ENGINE:
 		dialog = gtk_message_dialog_new (NULL,
 			       GTK_DIALOG_MODAL,
 			       GTK_MESSAGE_ERROR,
@@ -250,7 +276,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		return FALSE;
-	} else {
+	default:
 		dialog = gtk_message_dialog_new (NULL,
 			       GTK_DIALOG_MODAL,
 			       GTK_MESSAGE_ERROR,
@@ -322,7 +348,9 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 			g_free (update_icon_cache);
 		}
 		/* Ask to apply theme (if we can) */
-		if (theme_type == THEME_GTK || theme_type == THEME_METACITY || theme_type == THEME_ICON)
+		if (theme_type == THEME_GTK || theme_type == THEME_METACITY ||
+		    theme_type == THEME_ICON || theme_type == THEME_CURSOR ||
+		    theme_type == THEME_ICON_CURSOR)
 		{
 			/* TODO: currently cannot apply "gnome themes" */
 			gchar *str;
@@ -349,26 +377,31 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 			{
 				/* apply theme here! */
 				GConfClient *gconf_client;
-				const gchar *gconf_key;
+
+				gconf_client = gconf_client_get_default ();
 
 				switch (theme_type)
 				{
 					case THEME_GTK:
-						gconf_key = GTK_THEME_KEY;
+						gconf_client_set_string (gconf_client, GTK_THEME_KEY, theme_name, NULL);
 						break;
 					case THEME_METACITY:
-						gconf_key = METACITY_THEME_KEY;
+						gconf_client_set_string (gconf_client, METACITY_THEME_KEY, theme_name, NULL);
 						break;
 					case THEME_ICON:
-						gconf_key = ICON_THEME_KEY;
+						gconf_client_set_string (gconf_client, ICON_THEME_KEY, theme_name, NULL);
 						break;
-					default: /* keep gcc happy */
-						gconf_key = NULL;
+					case THEME_CURSOR:
+						gconf_client_set_string (gconf_client, CURSOR_THEME_KEY, theme_name, NULL);
+						break;
+					case THEME_ICON_CURSOR:
+						gconf_client_set_string (gconf_client, ICON_THEME_KEY, theme_name, NULL);
+						gconf_client_set_string (gconf_client, CURSOR_THEME_KEY, theme_name, NULL);
+						break;
+					default:
 						break;
 				}
 
-				gconf_client = gconf_client_get_default ();
-				gconf_client_set_string (gconf_client, gconf_key, theme_name, NULL);
 				g_object_unref (gconf_client);
 			}
 		} else {
