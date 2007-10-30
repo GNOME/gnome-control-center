@@ -337,7 +337,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 		gtk_widget_destroy (dialog);
 		success = FALSE;
 	} else {
-		if (theme_type == THEME_ICON)
+		if (theme_type == THEME_ICON || theme_type == THEME_ICON_CURSOR)
 		{
 			gchar *update_icon_cache;
 
