@@ -1,5 +1,13 @@
 2007-10-30  Jens Granseuer  <jensgr@gmx.net>
 
+	Patch by: Benjamin Gramlich <benjamin.gramlich@gmail.com>
+
+	* theme-installer.c: (gnome_theme_installer_run): allow the user to
+	select multiple themes to install at once (first part of the fix for
+	bug #124554)
+
+2007-10-30  Jens Granseuer  <jensgr@gmx.net>
+
 	When installing multiple themes at once, don't ask the user whether to
 	apply after each theme. Instead, simply show a success message after
 	installation has finished, and ask only if a single theme has been
