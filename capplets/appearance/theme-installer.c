@@ -671,7 +671,6 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 	static gchar old_folder[512] = "";
 	GtkWidget *dialog;
 	gchar *filename_selected, *folder;
-	GSList *filename_list, *tmp_list;
 	GtkFileFilter *filter;
 
 	if (running_theme_install)
@@ -683,7 +682,6 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 		filename = old_folder;
 
 	dialog = gtk_file_chooser_dialog_new (_("Select Theme"), parent, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
-	gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), TRUE);
 
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_set_name (filter, _("Theme Packages"));
@@ -702,14 +700,9 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
 	{
-	        filename_list = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (dialog));
-		for (tmp_list = filename_list; tmp_list != NULL; tmp_list = tmp_list->next)
-		{
-		        filename_selected = (gchar *) tmp_list->data;
-			gnome_theme_install_from_uri (filename_selected, parent);
-			g_free (filename_selected);
-		}
-		g_slist_free (filename_list);
+		filename_selected = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		gnome_theme_install_from_uri (filename_selected, parent);
+		g_free (filename_selected);
 	}
 
 	folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
