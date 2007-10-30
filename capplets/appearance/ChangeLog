@@ -1,5 +1,16 @@
 2007-10-30  Jens Granseuer  <jensgr@gmx.net>
 
+	When installing multiple themes at once, don't ask the user whether to
+	apply after each theme. Instead, simply show a success message after
+	installation has finished, and ask only if a single theme has been
+	installed.
+
+	* theme-installer.c: (gnome_theme_install_real),
+	(transfer_done_cb): check whether there are multiple themes to install
+	up front, and skip the apply dialog if so
+
+2007-10-30  Jens Granseuer  <jensgr@gmx.net>
+
 	* theme-installer.c: (gnome_theme_install_real): also update the icon
 	cache for icon themes with cursors
 
