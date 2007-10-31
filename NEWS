@@ -1,3 +1,87 @@
+gnome-control-center 2.21.1
+
+appearance:
+- Unify "invalid theme" error messages and be a bit more verbose
+  (Jens Granseuer)
+- Reword the "theme engine" error message (Jens Granseuer) (#435680)
+- Add support for dragging images from the background list (Jens Granseuer)
+  (#150544)
+- Make theme sorting case insensitive (Jens Granseuer) (#481224)
+- Fix crash if we fail to convert a filename to UTF-8 (Jens Granseuer)
+- Use NoDisplay=true instead of OnlyShowIn=; (Jens Granseuer) (#420154)
+- Return a new theme instead of munging whatever got passed in (Jens Granseuer)
+- Take cursor size into account when comparing themes (Denis Washington)
+- Watch cursor theme/size GConf keys for changes (Denis Washington)
+- Move cursor size widget initialization to Glade, to allow the slider to
+  be updated properly on startup (Jens Granseuer) (#490103)
+- Make the cursor themes delete button works (Jens Granseuer)
+- If the parent directory is empty after deleting a theme, delete the
+  parent directory too (Jens Granseuer)
+- Update cursor size GConf value when the theme changes (Jens Granseuer)
+- Reduce number of XCURSOR ifdefs and get rid of the special treatment for
+  the default cursor theme (Jens Granseuer)
+- Add support for live cursor theme updates (Jens Granseuer)
+- Read gettext macro that accidentally got stripped (Jens Granseuer)
+- Prevent lots of thumbs from being created with the color scheme of the
+  currently active theme (Jens Granseuer) (#460023)
+- Actually remove theme data from the hash when the theme gets deleted
+  (Jens Granseuer)
+- Fix the cursor size only being updated if the cursor theme changed too
+  (Denis Washington)
+- Watch /usr/share/cursors/xorg-x11 for cursor themes (Denis Washington)
+- Teach the installer to recognize cursor themes and icon themes with
+  cursors (Jens Granseuer)
+- Check whether there are multiple themes to install up front (Jens Granseuer)
+
+at-properties:
+- Don't use 'Preferences' word for application name (Luca Ferretti) (#484351)
+
+default applications:
+- Make the accelerators for the A11Y tools page unique (Patrick Wade)
+  (#474308)
+- Replace mail and multimedia icon names with Tangoified versions (Michael
+  Monreal) (#470386)
+- Use standard xdg autostart directory instead of GNOME one (Stephane
+  Loeuillet) (#481740)
+- Replace obsolete 'orca -m' command with new 'orca -e magnifier' (Jens
+  Granseuer) (#489973)
+
+display:
+- Code cleanup and fix a few leaks (Jens Granseuer)
+- fix string capitalization (Jens Granseuer)
+
+fontilus:
+- Drop "GNOME" from the menu item name as recommended by the HIG (Jens
+  Granseuer) (#474742)
+
+settings daemon:
+- Dropped unneeded DBus server (Sergey Udaltsov)
+- No more "configuration changed" warning (Sergey Udaltsov) (#358048)
+- Gradually fade out the OSD when composited (Iain Holmes) (#490593)
+
+shell:
+- Remove part of the long description for cc_actions_list (Jens Granseuer)
+  (#426229)
+
+general:
+- Desktop file fixes (Stephane Loeuillet) (#481740)
+- Add more default keybindings for otherwise unbound keys (Bastien Nocera)
+  (#487935)
+- Remove compatibility hack for libxklavier <= 3.2 (Jens Granseuer)
+- Fix Bugzilla component (Jens Granseuer)
+- Add support for calculator key (Sebastien Bacher)
+
+updated translations:
+- ar (Djihed Afifi)
+- be@latin (Ihar Hrachyshka)
+- bg (Alexander Shopov)
+- es (Jorge Gonzalez)
+- et (Priit Laes)
+- fi (Ilkka Tuohela)
+- gl (Ignacio Casal Quinteiro)
+- nb (Kjartan Maraas)
+- sl (Matej Urbancic)
+------------------------------------------------------------------------------
 gnome-control-center 2.20.1
 
 appearance:
