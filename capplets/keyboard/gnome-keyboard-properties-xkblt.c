@@ -346,12 +346,10 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 	gtk_drag_dest_set (tree_view, GTK_DEST_DEFAULT_ALL,
 			   &self_drag_target, 1, GDK_ACTION_MOVE);
 
-	gtk_signal_connect (GTK_OBJECT (tree_view), "drag_data_get",
-			    GTK_SIGNAL_FUNC (xkb_layouts_dnd_data_get),
-			    dialog);
-	gtk_signal_connect (GTK_OBJECT (tree_view), "drag_data_received",
-			    GTK_SIGNAL_FUNC
-			    (xkb_layouts_dnd_data_received), dialog);
+	g_signal_connect (G_OBJECT (tree_view), "drag_data_get",
+			    G_CALLBACK (xkb_layouts_dnd_data_get), dialog);
+	g_signal_connect (G_OBJECT (tree_view), "drag_data_received",
+			    G_CALLBACK (xkb_layouts_dnd_data_received), dialog);
 }
 
 void
