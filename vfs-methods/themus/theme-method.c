@@ -559,7 +559,7 @@ G_LOCK_DEFINE_STATIC(monitor_list);
 static GList *monitor_list = NULL;
 
 static void
-invoke_monitors()
+invoke_monitors(void)
 {
     GList *tmp;
 
