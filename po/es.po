@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-22 20:01+0100\n"
-"PO-Revision-Date: 2007-10-23 15:11+0200\n"
+"POT-Creation-Date: 2007-10-30 20:27+0000\n"
+"PO-Revision-Date: 2007-11-01 14:07+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgid "Images"
 msgstr "Imágenes"
 
 #: ../capplets/about-me/gnome-about-me.c:699
-#: ../capplets/appearance/theme-installer.c:623
+#: ../capplets/appearance/theme-installer.c:694
 msgid "All Files"
 msgstr "Todos los archivos"
 
@@ -807,33 +807,32 @@ msgid "[WALLPAPER...]"
 msgstr "[Tapiz...]"
 
 #: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/appearance/appearance-style.c:812
-#: ../capplets/common/gnome-theme-info.c:1050
-#: ../capplets/common/gnome-theme-info.c:1812
+#: ../capplets/common/gnome-theme-info.c:429
+#: ../capplets/common/gnome-theme-info.c:628
 msgid "Default Pointer"
 msgstr "Puntero predeterminado"
 
-#: ../capplets/appearance/appearance-themes.c:515
+#: ../capplets/appearance/appearance-themes.c:513
 msgid "Apply Background"
 msgstr "Aplicar tapiz"
 
-#: ../capplets/appearance/appearance-themes.c:519
+#: ../capplets/appearance/appearance-themes.c:517
 msgid "Apply Font"
 msgstr "Aplicar tipografía"
 
-#: ../capplets/appearance/appearance-themes.c:544
+#: ../capplets/appearance/appearance-themes.c:542
 msgid "The current theme suggests a background and a font."
 msgstr "El tema actual sugiere un tapiz y una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:549
+#: ../capplets/appearance/appearance-themes.c:547
 msgid "The current theme suggests a background."
 msgstr "El tema actual sugiere un tapiz."
 
-#: ../capplets/appearance/appearance-themes.c:554
+#: ../capplets/appearance/appearance-themes.c:552
 msgid "The current theme suggests a font."
 msgstr "El tema actual sugiere una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:838
+#: ../capplets/appearance/appearance-themes.c:836
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1245,7 +1244,7 @@ msgid_plural "pixels"
 msgstr[0] "píxel"
 msgstr[1] "píxeles"
 
-#: ../capplets/appearance/theme-installer.c:149
+#: ../capplets/appearance/theme-installer.c:169
 #, c-format
 msgid ""
 "Cannot install theme.\n"
@@ -1254,7 +1253,7 @@ msgstr ""
 "No se puede instalar el tema.\n"
 "La utilidad %s no está instalada."
 
-#: ../capplets/appearance/theme-installer.c:197
+#: ../capplets/appearance/theme-installer.c:217
 msgid ""
 "Cannot install theme.\n"
 "There was a problem while extracting the theme."
@@ -1262,12 +1261,12 @@ msgstr ""
 "No se puede instalar el tema.\n"
 "Hubo un problema al extraer el tema."
 
-#: ../capplets/appearance/theme-installer.c:237
+#: ../capplets/appearance/theme-installer.c:261
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "El tema de GNOME %s se instaló correctamente"
 
-#: ../capplets/appearance/theme-installer.c:249
+#: ../capplets/appearance/theme-installer.c:275
 msgid ""
 "The selected file is not a valid theme. It might be a theme engine that you "
 "need to compile."
@@ -1275,42 +1274,47 @@ msgstr ""
 "El archivo seleccionado no es un tema válido. Puede ser un motor de temas "
 "que debe compilar."
 
-#: ../capplets/appearance/theme-installer.c:258
-#: ../capplets/appearance/theme-installer.c:413
-#: ../capplets/appearance/theme-installer.c:558
+#: ../capplets/appearance/theme-installer.c:284
+#: ../capplets/appearance/theme-installer.c:454
+#: ../capplets/appearance/theme-installer.c:629
 msgid "The selected file does not appear to be a valid theme."
 msgstr "El archivo seleccionado no parece ser un tema válido."
 
-#: ../capplets/appearance/theme-installer.c:309
-msgid "Installation failed."
-msgstr "Falló la instalación."
+#: ../capplets/appearance/theme-installer.c:333
+#, c-format
+msgid "Installation for theme \"%s\" failed."
+msgstr "La instalación del tema «%s» falló."
 
-#: ../capplets/appearance/theme-installer.c:330
+#: ../capplets/appearance/theme-installer.c:365
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Se ha instalado el tema «%s»."
 
-#: ../capplets/appearance/theme-installer.c:336
+#: ../capplets/appearance/theme-installer.c:371
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "¿Desea aplicarlo ahora, o mantener su tema actual?"
 
-#: ../capplets/appearance/theme-installer.c:338
+#: ../capplets/appearance/theme-installer.c:373
 msgid "Keep Current Theme"
 msgstr "Mantener el tema actual"
 
-#: ../capplets/appearance/theme-installer.c:340
+#: ../capplets/appearance/theme-installer.c:375
 msgid "Apply New Theme"
 msgstr "Aplicar el nuevo tema"
 
-#: ../capplets/appearance/theme-installer.c:438
+#: ../capplets/appearance/theme-installer.c:480
 msgid "Failed to create temporary directory"
 msgstr "Falló al crear la carpeta temporal"
 
-#: ../capplets/appearance/theme-installer.c:497
+#: ../capplets/appearance/theme-installer.c:540
+msgid "New themes have been successfully installed."
+msgstr "Los nuevos temas se han instalado con éxito."
+
+#: ../capplets/appearance/theme-installer.c:568
 msgid "No theme file location specified to install"
 msgstr "No se ha especificado ninguna ubicación del archivo del tema para instalar"
 
-#: ../capplets/appearance/theme-installer.c:517
+#: ../capplets/appearance/theme-installer.c:588
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1319,7 +1323,7 @@ msgstr ""
 "Permisos insuficientes para instalar el tema en:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:539
+#: ../capplets/appearance/theme-installer.c:610
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1328,11 +1332,11 @@ msgstr ""
 "%s es la ruta donde se van a instalar los archivos del tema. Esto no puede "
 "seleccionarse como ubicación de origen"
 
-#: ../capplets/appearance/theme-installer.c:613
+#: ../capplets/appearance/theme-installer.c:684
 msgid "Select Theme"
 msgstr "Seleccione un tema"
 
-#: ../capplets/appearance/theme-installer.c:616
+#: ../capplets/appearance/theme-installer.c:687
 msgid "Theme Packages"
 msgstr "Paquete de tema"
 
@@ -1348,11 +1352,11 @@ msgstr "El tema ya existe. ¿Quiere reemplazarlo?"
 msgid "_Overwrite"
 msgstr "_Sobreescribir"
 
-#: ../capplets/appearance/theme-util.c:43
+#: ../capplets/appearance/theme-util.c:69
 msgid "Would you like to delete this theme?"
 msgstr "¿Quiere eliminar este tema?"
 
-#: ../capplets/appearance/theme-util.c:90
+#: ../capplets/appearance/theme-util.c:121
 msgid "Theme cannot be deleted"
 msgstr "No se puede borrar el tema"
 
@@ -1565,31 +1569,31 @@ msgstr "Por favor seleccione una imagen."
 msgid "_Select"
 msgstr "_Seleccionar"
 
-#: ../capplets/common/gnome-theme-info.c:1813
+#: ../capplets/common/gnome-theme-info.c:629
 msgid "Default Pointer - Current"
 msgstr "Puntero predeterminado - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:1817
+#: ../capplets/common/gnome-theme-info.c:633
 msgid "White Pointer"
 msgstr "Puntero blanco"
 
-#: ../capplets/common/gnome-theme-info.c:1818
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "White Pointer - Current"
 msgstr "Puntero blanco - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:1822
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Large Pointer"
 msgstr "Puntero grande"
 
-#: ../capplets/common/gnome-theme-info.c:1823
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Large Pointer - Current"
 msgstr "Puntero grande - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:1827
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "Large White Pointer - Current"
 msgstr "Puntero blanco grande - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:1828
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large White Pointer"
 msgstr "Puntero blanco grande"
 
@@ -1971,62 +1975,62 @@ msgstr "Cambiar la resolución de la pantalla"
 msgid "Screen Resolution"
 msgstr "Resolución de la pantalla"
 
-#: ../capplets/display/main.c:25
+#: ../capplets/display/main.c:29
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/main.c:26
+#: ../capplets/display/main.c:30
 msgid "Left"
 msgstr "Izquierdo"
 
-#: ../capplets/display/main.c:27
+#: ../capplets/display/main.c:31
 msgid "Inverted"
 msgstr "Invertido"
 
-#: ../capplets/display/main.c:28
+#: ../capplets/display/main.c:32
 msgid "Right"
 msgstr "Derecho"
 
-#: ../capplets/display/main.c:388
+#: ../capplets/display/main.c:374
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:534
+#: ../capplets/display/main.c:514
 msgid "_Resolution:"
 msgstr "_Resolución:"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:532
 msgid "Re_fresh rate:"
 msgstr "Tasa de re_fresco:"
 
-#: ../capplets/display/main.c:573
+#: ../capplets/display/main.c:550
 msgid "R_otation:"
 msgstr "R_otación:"
 
-#: ../capplets/display/main.c:593
+#: ../capplets/display/main.c:569
 msgid "Default Settings"
 msgstr "Configuración predeterminada"
 
-#: ../capplets/display/main.c:595
+#: ../capplets/display/main.c:571
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Configuración de la pantalla %d\n"
 
-#: ../capplets/display/main.c:621
+#: ../capplets/display/main.c:592
 msgid "Screen Resolution Preferences"
 msgstr "Preferencias de la resolución de la pantalla"
 
-#: ../capplets/display/main.c:658
+#: ../capplets/display/main.c:627
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Utilizar como predeterminado sólo para este _equipo (%s)"
 
-#: ../capplets/display/main.c:677
+#: ../capplets/display/main.c:644
 msgid "Options"
 msgstr "Opciones"
 
-#: ../capplets/display/main.c:698
+#: ../capplets/display/main.c:664
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -2041,31 +2045,31 @@ msgstr[1] ""
 "Probando la configuración nueva. Si no responde en %d segundos se recuperará "
 "la configuración anterior."
 
-#: ../capplets/display/main.c:741
+#: ../capplets/display/main.c:704
 msgid "Keep Resolution"
 msgstr "Conservar resolución"
 
-#: ../capplets/display/main.c:745
+#: ../capplets/display/main.c:708
 msgid "Do you want to keep this resolution?"
 msgstr "¿Desea conservar esta resolución?"
 
-#: ../capplets/display/main.c:770
-msgid "Use _previous resolution"
+#: ../capplets/display/main.c:734
+msgid "Use _Previous Resolution"
 msgstr "Usar la resolución _anterior"
 
-#: ../capplets/display/main.c:770
-msgid "_Keep resolution"
-msgstr "C_onservar esta resolución"
+#: ../capplets/display/main.c:735
+msgid "_Keep Resolution"
+msgstr "_Conservar la resolución"
 
-#: ../capplets/display/main.c:920
+#: ../capplets/display/main.c:883
 msgid ""
-"The X Server does not support the XRandR extension.  Runtime resolution "
+"The X server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 "El servidor X no soporta la extensión XRandR. Los cambios de resolución de "
 "la pantalla durante la sesión no están disponibles."
 
-#: ../capplets/display/main.c:928
+#: ../capplets/display/main.c:890
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -3662,13 +3666,13 @@ msgstr "Nombres de tareas y archivos .desktop asociados"
 
 #: ../shell/control-center.schemas.in.h:11
 msgid ""
-"The task name to be displayed in the control-center (thus needing to be "
-"translated) followed by a \";\" separator then the filename of an "
-"associated .desktop file to launch for that task."
+"The task name to be displayed in the control-center followed by a \";\" "
+"separator then the filename of an associated .desktop file to launch for "
+"that task."
 msgstr ""
-"El nombre de la tarea a ser desplegado en el centro de control (y que por lo "
-"tanto necesitará ser traducido) seguido de un separador «;» y luego el "
-"nombre de un archivo .desktop asociado a lanzar para esa tarea."
+"El nombre de la tarea que desplegar en el centro de control seguido por un separador «;» "
+"y luego el nombre de un archivo .desktop asociado que lanzar para "
+"esa tarea."
 
 #. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
 #: ../shell/control-center.schemas.in.h:13
