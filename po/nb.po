@@ -1,16 +1,16 @@
 # Norwegian translation of control-center (bokmål dialect).
 # Copyright (C) 1999-2005 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 1999-2006.
+# Kjartan Maraas <kmaraas@gnome.org>, 1999-2007.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.15.x\n"
+"Project-Id-Version: gnome-control-center 2.21.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-27 21:19+0200\n"
-"PO-Revision-Date: 2007-10-27 21:21+0200\n"
-"Last-Translator: Espen A. Stefansen <espens@svn.gnome.org>\n"
-"Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
+"POT-Creation-Date: 2007-11-02 14:53+0100\n"
+"PO-Revision-Date: 2007-11-02 14:54+0100\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,7 +58,7 @@ msgid "Images"
 msgstr "Bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:699
-#: ../capplets/appearance/theme-installer.c:623
+#: ../capplets/appearance/theme-installer.c:694
 msgid "All Files"
 msgstr "Alle filer"
 
@@ -790,32 +790,32 @@ msgid "[WALLPAPER...]"
 msgstr "[BAKGRUNN...]"
 
 #: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/common/gnome-theme-info.c:1055
-#: ../capplets/common/gnome-theme-info.c:1772
+#: ../capplets/common/gnome-theme-info.c:429
+#: ../capplets/common/gnome-theme-info.c:628
 msgid "Default Pointer"
 msgstr "Forvalgt peker"
 
-#: ../capplets/appearance/appearance-themes.c:514
+#: ../capplets/appearance/appearance-themes.c:513
 msgid "Apply Background"
 msgstr "Bruk bakgrunn"
 
-#: ../capplets/appearance/appearance-themes.c:518
+#: ../capplets/appearance/appearance-themes.c:517
 msgid "Apply Font"
 msgstr "Bruk skrift"
 
-#: ../capplets/appearance/appearance-themes.c:543
+#: ../capplets/appearance/appearance-themes.c:542
 msgid "The current theme suggests a background and a font."
 msgstr "Aktivt tema foreslår en bakgrunn og en skrift."
 
-#: ../capplets/appearance/appearance-themes.c:548
+#: ../capplets/appearance/appearance-themes.c:547
 msgid "The current theme suggests a background."
 msgstr "Aktivt tema foreslår en bakgrunn."
 
-#: ../capplets/appearance/appearance-themes.c:553
+#: ../capplets/appearance/appearance-themes.c:552
 msgid "The current theme suggests a font."
 msgstr "Aktivt tema foreslår en skrift."
 
-#: ../capplets/appearance/appearance-themes.c:837
+#: ../capplets/appearance/appearance-themes.c:836
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1225,7 +1225,7 @@ msgid_plural "pixels"
 msgstr[0] "piksel"
 msgstr[1] "piksler"
 
-#: ../capplets/appearance/theme-installer.c:149
+#: ../capplets/appearance/theme-installer.c:169
 #, c-format
 msgid ""
 "Cannot install theme.\n"
@@ -1234,7 +1234,7 @@ msgstr ""
 "Kan ikke installere tema.\n"
 "Verktøyet %s er ikke installert."
 
-#: ../capplets/appearance/theme-installer.c:197
+#: ../capplets/appearance/theme-installer.c:217
 msgid ""
 "Cannot install theme.\n"
 "There was a problem while extracting the theme."
@@ -1242,53 +1242,60 @@ msgstr ""
 "Kan ikke installere tema.\n"
 "Det oppsto et problem under utpakking av filene."
 
-#: ../capplets/appearance/theme-installer.c:237
+#: ../capplets/appearance/theme-installer.c:261
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME tema %s ble korrekt installert"
 
-#: ../capplets/appearance/theme-installer.c:249
+#: ../capplets/appearance/theme-installer.c:275
 msgid ""
 "The selected file is not a valid theme. It might be a theme engine that you "
 "need to compile."
-msgstr "Valgt fil er ikke et gyldig tema. Det kan være en temamotor som du må kompilere."
+msgstr ""
+"Valgt fil er ikke et gyldig tema. Det kan være en temamotor som du må "
+"kompilere."
 
-#: ../capplets/appearance/theme-installer.c:258
-#: ../capplets/appearance/theme-installer.c:413
-#: ../capplets/appearance/theme-installer.c:558
+#: ../capplets/appearance/theme-installer.c:284
+#: ../capplets/appearance/theme-installer.c:454
+#: ../capplets/appearance/theme-installer.c:629
 msgid "The selected file does not appear to be a valid theme."
 msgstr "Valgt fil ser ikke ut til å være et gyldig tema."
 
-#: ../capplets/appearance/theme-installer.c:309
-msgid "Installation failed."
-msgstr "Installasjonen feilet."
+#: ../capplets/appearance/theme-installer.c:333
+#, c-format
+msgid "Installation for theme \"%s\" failed."
+msgstr "Installasjon av tema «%s» feilet."
 
-#: ../capplets/appearance/theme-installer.c:330
+#: ../capplets/appearance/theme-installer.c:365
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Tema «%s» er installert."
 
-#: ../capplets/appearance/theme-installer.c:336
+#: ../capplets/appearance/theme-installer.c:371
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Vil du bruke det nå, eller beholde aktivt tema?"
 
-#: ../capplets/appearance/theme-installer.c:338
+#: ../capplets/appearance/theme-installer.c:373
 msgid "Keep Current Theme"
 msgstr "Behold nåværende tema"
 
-#: ../capplets/appearance/theme-installer.c:340
+#: ../capplets/appearance/theme-installer.c:375
 msgid "Apply New Theme"
 msgstr "Bruk nytt tema"
 
-#: ../capplets/appearance/theme-installer.c:438
+#: ../capplets/appearance/theme-installer.c:480
 msgid "Failed to create temporary directory"
 msgstr "Kunne ikke opprette midlertidig katalog"
 
-#: ../capplets/appearance/theme-installer.c:497
+#: ../capplets/appearance/theme-installer.c:540
+msgid "New themes have been successfully installed."
+msgstr "Nye tema ble installert."
+
+#: ../capplets/appearance/theme-installer.c:568
 msgid "No theme file location specified to install"
 msgstr "Ingen lokasjon oppgitt for installasjon av temafil"
 
-#: ../capplets/appearance/theme-installer.c:517
+#: ../capplets/appearance/theme-installer.c:588
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1297,7 +1304,7 @@ msgstr ""
 "Ikke nok rettigheter til å installere tema i:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:539
+#: ../capplets/appearance/theme-installer.c:610
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1306,11 +1313,11 @@ msgstr ""
 "%s er stien hvor temafilene vil bli installert. Denne kan ikke velges som "
 "kildelokasjon"
 
-#: ../capplets/appearance/theme-installer.c:613
+#: ../capplets/appearance/theme-installer.c:684
 msgid "Select Theme"
 msgstr "Velg tema"
 
-#: ../capplets/appearance/theme-installer.c:616
+#: ../capplets/appearance/theme-installer.c:687
 msgid "Theme Packages"
 msgstr "Temapakker"
 
@@ -1327,11 +1334,11 @@ msgstr "Tema eksisterer allerede. Vil du erstatte det?"
 msgid "_Overwrite"
 msgstr "_Overskriv"
 
-#: ../capplets/appearance/theme-util.c:91
+#: ../capplets/appearance/theme-util.c:69
 msgid "Would you like to delete this theme?"
 msgstr "Vil du slette dette temaet?"
 
-#: ../capplets/appearance/theme-util.c:143
+#: ../capplets/appearance/theme-util.c:121
 msgid "Theme cannot be deleted"
 msgstr "Tema kan ikke slettes"
 
@@ -1547,31 +1554,31 @@ msgstr "Vennligst velg et bilde."
 msgid "_Select"
 msgstr "_Velg"
 
-#: ../capplets/common/gnome-theme-info.c:1773
+#: ../capplets/common/gnome-theme-info.c:629
 msgid "Default Pointer - Current"
 msgstr "Forvalgt peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:1777
+#: ../capplets/common/gnome-theme-info.c:633
 msgid "White Pointer"
 msgstr "Hvit peker"
 
-#: ../capplets/common/gnome-theme-info.c:1778
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "White Pointer - Current"
 msgstr "Hvit peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:1782
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Large Pointer"
 msgstr "Stor peker"
 
-#: ../capplets/common/gnome-theme-info.c:1783
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Large Pointer - Current"
 msgstr "Stor peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:1787
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "Large White Pointer - Current"
 msgstr "Stor hvit peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:1788
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large White Pointer"
 msgstr "Stor hvit peker"
 
@@ -1953,62 +1960,62 @@ msgstr "Endre oppløsning for skjermen"
 msgid "Screen Resolution"
 msgstr "Skjermoppløsning"
 
-#: ../capplets/display/main.c:25
+#: ../capplets/display/main.c:29
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/main.c:26
+#: ../capplets/display/main.c:30
 msgid "Left"
 msgstr "Venstre"
 
-#: ../capplets/display/main.c:27
+#: ../capplets/display/main.c:31
 msgid "Inverted"
 msgstr "Omvendt"
 
-#: ../capplets/display/main.c:28
+#: ../capplets/display/main.c:32
 msgid "Right"
 msgstr "Høyre:"
 
-#: ../capplets/display/main.c:399
+#: ../capplets/display/main.c:374
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:545
+#: ../capplets/display/main.c:514
 msgid "_Resolution:"
 msgstr "_Oppløsning:"
 
-#: ../capplets/display/main.c:564
+#: ../capplets/display/main.c:532
 msgid "Re_fresh rate:"
 msgstr "Opp_friskingsrate:"
 
-#: ../capplets/display/main.c:584
+#: ../capplets/display/main.c:550
 msgid "R_otation:"
 msgstr "R_otasjon:"
 
-#: ../capplets/display/main.c:604
+#: ../capplets/display/main.c:569
 msgid "Default Settings"
 msgstr "Forvalgte innstillinger"
 
-#: ../capplets/display/main.c:606
+#: ../capplets/display/main.c:571
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Innstillinger for skjerm %d\n"
 
-#: ../capplets/display/main.c:632
+#: ../capplets/display/main.c:592
 msgid "Screen Resolution Preferences"
 msgstr "Brukervalg skjermoppløsing"
 
-#: ../capplets/display/main.c:669
+#: ../capplets/display/main.c:627
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Gjør forvalgt _kun for denne datamaskinen (%s)"
 
-#: ../capplets/display/main.c:688
+#: ../capplets/display/main.c:644
 msgid "Options"
 msgstr "Alternativer"
 
-#: ../capplets/display/main.c:709
+#: ../capplets/display/main.c:664
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -2023,23 +2030,23 @@ msgstr[1] ""
 "Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekunder vil de "
 "tidligere innstillingene bli gjenopprettet."
 
-#: ../capplets/display/main.c:752
+#: ../capplets/display/main.c:704
 msgid "Keep Resolution"
 msgstr "Behold oppløsning"
 
-#: ../capplets/display/main.c:756
+#: ../capplets/display/main.c:708
 msgid "Do you want to keep this resolution?"
 msgstr "Vil du beholde denne oppløsningen?"
 
-#: ../capplets/display/main.c:782
+#: ../capplets/display/main.c:734
 msgid "Use _Previous Resolution"
 msgstr "Bruk _forrige oppløsning"
 
-#: ../capplets/display/main.c:783
+#: ../capplets/display/main.c:735
 msgid "_Keep Resolution"
 msgstr "_Behold oppløsning"
 
-#: ../capplets/display/main.c:931
+#: ../capplets/display/main.c:883
 msgid ""
 "The X server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -2047,7 +2054,7 @@ msgstr ""
 "X-tjeneren støtter ikke XRandR-utvidelsen. Endringer i oppløsning kan ikke "
 "utføres mens den kjører."
 
-#: ../capplets/display/main.c:938
+#: ../capplets/display/main.c:890
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
