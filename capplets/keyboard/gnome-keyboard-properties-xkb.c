@@ -79,7 +79,7 @@ set_model_text (GtkWidget * picker, GConfValue * value)
 		gtk_button_set_label (GTK_BUTTON (picker), d);
 		g_free (d);
 	} else {
-		gtk_entry_set_text (GTK_BUTTON (picker), _("Unknown"));
+		gtk_button_set_label (GTK_BUTTON (picker), _("Unknown"));
 	}
 	g_object_unref (G_OBJECT (ci));
 }
