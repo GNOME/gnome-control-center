@@ -36,8 +36,6 @@ struct _GnomeWPItem {
   gchar * description;
   gchar * options;
   gchar * shade_type;
-  gchar * pri_color;
-  gchar * sec_color;
 
   /* Where the Item is in the List */
   GtkTreeRowReference * rowref;

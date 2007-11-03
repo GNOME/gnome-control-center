@@ -1,3 +1,13 @@
+2007-11-03  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_color_changed), (wp_props_wp_set):
+	* gnome-wp-item.c: (gnome_wp_item_new), (gnome_wp_item_free),
+	(gnome_wp_item_dup):
+	* gnome-wp-item.h:
+	* gnome-wp-xml.c: (gnome_wp_xml_load_xml), (gnome_wp_xml_save_list):
+	be more careful when reading background information from GConf and make
+	sure we don't choke on NULL values later on (bug #492903)
+
 2007-11-01  Jens Granseuer  <jensgr@gmx.net>
 
 	Patch by: Joel Pfaff <joel.pfaff@gmail.com>

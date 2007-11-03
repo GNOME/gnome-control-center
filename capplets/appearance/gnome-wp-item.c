@@ -33,7 +33,8 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 				 GHashTable * wallpapers,
 				 GnomeThumbnailFactory * thumbnails) {
   GnomeWPItem * item = NULL;
-  GdkColor color1, color2;
+  GdkColor color1 = { 0, 0, 0, 0 }, color2 = { 0, 0, 0, 0 };
+  gchar * col_str;
   GConfClient * client;
 
   client = gconf_client_get_default ();
@@ -44,18 +45,8 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 
   item->fileinfo = gnome_wp_info_new (item->filename, thumbnails);
 
-  item->shade_type = gconf_client_get_string (client, WP_SHADING_KEY, NULL);
-  item->pri_color = gconf_client_get_string (client, WP_PCOLOR_KEY, NULL);
-  item->sec_color = gconf_client_get_string (client, WP_SCOLOR_KEY, NULL);
-
-  gdk_color_parse (item->pri_color, &color1);
-  gdk_color_parse (item->sec_color, &color2);
-
-  item->pcolor = gdk_color_copy (&color1);
-  item->scolor = gdk_color_copy (&color2);
-
   if (item->fileinfo != NULL &&
-      !strncmp (item->fileinfo->mime_type, "image/", strlen ("image/"))) {
+      !strcmp (item->fileinfo->mime_type, "image/")) {
     if (item->name == NULL) {
       if (g_utf8_validate (item->fileinfo->name, -1, NULL))
 	item->name = g_strdup (item->fileinfo->name);
@@ -63,11 +54,32 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 	item->name = g_filename_to_utf8 (item->fileinfo->name, -1, NULL,
 					 NULL, NULL);
     }
-    item->options = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
 
-    if (!strcmp (item->options, "none")) {
+    item->options = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
+    if (item->options == NULL || !strcmp (item->options, "none")) {
+      g_free (item->options);
       item->options = g_strdup ("scaled");
     }
+
+    item->shade_type = gconf_client_get_string (client, WP_SHADING_KEY, NULL);
+    if (item->shade_type == NULL)
+      item->shade_type = g_strdup ("solid");
+
+    col_str = gconf_client_get_string (client, WP_PCOLOR_KEY, NULL);
+    if (col_str != NULL) {
+      gdk_color_parse (col_str, &color1);
+      g_free (col_str);
+    }
+
+    col_str = gconf_client_get_string (client, WP_SCOLOR_KEY, NULL);
+    if (col_str != NULL) {
+      gdk_color_parse (col_str, &color2);
+      g_free (col_str);
+    }
+
+    item->pcolor = gdk_color_copy (&color1);
+    item->scolor = gdk_color_copy (&color2);
+
     gnome_wp_item_update_description (item);
 
     g_hash_table_insert (wallpapers, item->filename, item);
@@ -92,9 +104,6 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   g_free (item->options);
   g_free (item->shade_type);
 
-  g_free (item->pri_color);
-  g_free (item->sec_color);
-
   if (item->pcolor != NULL)
     gdk_color_free (item->pcolor);
 
@@ -111,7 +120,6 @@ void gnome_wp_item_free (GnomeWPItem * item) {
 
 GnomeWPItem * gnome_wp_item_dup (GnomeWPItem * item) {
   GnomeWPItem * new_item;
-  GdkColor color1, color2;
 
   if (item == NULL) {
     return NULL;
@@ -125,14 +133,8 @@ GnomeWPItem * gnome_wp_item_dup (GnomeWPItem * item) {
   new_item->options = g_strdup (item->options);
   new_item->shade_type = g_strdup (item->shade_type);
 
-  new_item->pri_color = g_strdup (item->pri_color);
-  new_item->sec_color = g_strdup (item->sec_color);
-
-  gdk_color_parse (item->pri_color, &color1);
-  gdk_color_parse (item->sec_color, &color2);
-
-  item->pcolor = gdk_color_copy (&color1);
-  item->scolor = gdk_color_copy (&color2);
+  new_item->pcolor = gdk_color_copy (item->pcolor);
+  new_item->scolor = gdk_color_copy (item->scolor);
 
   new_item->fileinfo = gnome_wp_info_dup (item->fileinfo);
   new_item->uriinfo = gnome_wp_info_dup (item->uriinfo);

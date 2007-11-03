@@ -401,24 +401,19 @@ wp_color_changed (AppearanceData *data,
   if (item == NULL)
     return;
 
-  g_free (item->pri_color);
-
   gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_pcpicker), item->pcolor);
-
-  item->pri_color = gdk_color_to_string (item->pcolor);
-
-  g_free (item->sec_color);
-
   gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_scpicker), item->scolor);
-
-  item->sec_color = gdk_color_to_string (item->scolor);
 
   if (update)
   {
-    gconf_client_set_string (data->client, WP_PCOLOR_KEY,
-                             item->pri_color, NULL);
-    gconf_client_set_string (data->client, WP_SCOLOR_KEY,
-                             item->sec_color, NULL);
+    gchar *pcolor, *scolor;
+
+    pcolor = gdk_color_to_string (item->pcolor);
+    scolor = gdk_color_to_string (item->scolor);
+    gconf_client_set_string (data->client, WP_PCOLOR_KEY, pcolor, NULL);
+    gconf_client_set_string (data->client, WP_SCOLOR_KEY, scolor, NULL);
+    g_free (pcolor);
+    g_free (scolor);
   }
 
   wp_shade_type_changed (NULL, data);
@@ -583,6 +578,7 @@ static gboolean
 wp_props_wp_set (AppearanceData *data, GnomeWPItem *item)
 {
   GConfChangeSet *cs;
+  gchar *pcolor, *scolor;
 
   cs = gconf_change_set_new ();
 
@@ -612,8 +608,12 @@ wp_props_wp_set (AppearanceData *data, GnomeWPItem *item)
 
   gconf_change_set_set_string (cs, WP_SHADING_KEY, item->shade_type);
 
-  gconf_change_set_set_string (cs, WP_PCOLOR_KEY, item->pri_color);
-  gconf_change_set_set_string (cs, WP_SCOLOR_KEY, item->sec_color);
+  pcolor = gdk_color_to_string (item->pcolor);
+  scolor = gdk_color_to_string (item->scolor);
+  gconf_change_set_set_string (cs, WP_PCOLOR_KEY, pcolor);
+  gconf_change_set_set_string (cs, WP_SCOLOR_KEY, scolor);
+  g_free (pcolor);
+  g_free (scolor);
 
   gconf_client_commit_change_set (data->client, cs, TRUE, NULL);
 

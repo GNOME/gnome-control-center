@@ -118,6 +118,7 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
   for (list = root->children; list != NULL; list = list->next) {
     if (!strcmp ((gchar *)list->name, "wallpaper")) {
       GnomeWPItem * wp;
+      gchar *pcolor = NULL, *scolor = NULL;
 
       wp = g_new0 (GnomeWPItem, 1);
 
@@ -172,11 +173,11 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "pcolor")) {
 	  if (wpa->last != NULL) {
-	    wp->pri_color = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	    pcolor = g_strdup (g_strstrip ((gchar *)wpa->last->content));
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "scolor")) {
 	  if (wpa->last != NULL) {
-	    wp->sec_color = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	    scolor = g_strdup (g_strstrip ((gchar *)wpa->last->content));
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "text")) {
 	  /* Do nothing here, libxml2 is being weird */
@@ -186,15 +187,12 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
       }
 
       /* Make sure we don't already have this one and that filename exists */
-      if (wp->filename != NULL) {
-	item = g_hash_table_lookup (data->wp_hash, wp->filename);
+      if (wp->filename == NULL ||
+	  g_hash_table_lookup (data->wp_hash, wp->filename) != NULL) {
 
-	if (item != NULL) {
-	  gnome_wp_item_free (wp);
-	  continue;
-	}
-      } else {
 	gnome_wp_item_free (wp);
+	g_free (pcolor);
+	g_free (scolor);
 	continue;
       }
 
@@ -203,16 +201,18 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	wp->shade_type = gconf_client_get_string (data->client,
 						  WP_SHADING_KEY, NULL);
       }
-      if (wp->pri_color == NULL) {
-	wp->pri_color = gconf_client_get_string (data->client,
-						 WP_PCOLOR_KEY, NULL);
+      if (pcolor == NULL) {
+	pcolor = gconf_client_get_string (data->client,
+					  WP_PCOLOR_KEY, NULL);
       }
-      if (wp->sec_color == NULL) {
-	wp->sec_color = gconf_client_get_string (data->client,
-						 WP_SCOLOR_KEY, NULL);
+      if (scolor == NULL) {
+	scolor = gconf_client_get_string (data->client,
+					  WP_SCOLOR_KEY, NULL);
       }
-      gdk_color_parse (wp->pri_color, &color1);
-      gdk_color_parse (wp->sec_color, &color2);
+      gdk_color_parse (pcolor, &color1);
+      gdk_color_parse (scolor, &color2);
+      g_free (pcolor);
+      g_free (scolor);
 
       wp->pcolor = gdk_color_copy (&color1);
       wp->scolor = gdk_color_copy (&color2);
@@ -379,6 +379,7 @@ void gnome_wp_xml_save_list (AppearanceData *data) {
     GnomeWPItem * wpitem = list->data;
     const char * none = "(none)";
     gchar * filename;
+    gchar * pcolor, * scolor;
 
     if (!strcmp (wpitem->filename, none) ||
 	(g_utf8_validate (wpitem->filename, -1, NULL) &&
@@ -387,14 +388,19 @@ void gnome_wp_xml_save_list (AppearanceData *data) {
     else
       filename = g_filename_to_utf8 (wpitem->filename, -1, NULL, NULL, NULL);
 
+    pcolor = gdk_color_to_string (wpitem->pcolor);
+    scolor = gdk_color_to_string (wpitem->scolor);
+
     wallpaper = xmlNewChild (root, NULL, (xmlChar *)"wallpaper", NULL);
     gnome_wp_xml_set_bool (wallpaper, (xmlChar *)"deleted", wpitem->deleted);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"name", (xmlChar *)wpitem->name);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"filename", (xmlChar *)filename);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"options", (xmlChar *)wpitem->options);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"shade_type", (xmlChar *)wpitem->shade_type);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"pcolor", (xmlChar *)wpitem->pri_color);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)wpitem->sec_color);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"pcolor", (xmlChar *)pcolor);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)scolor);
+    g_free (pcolor);
+    g_free (scolor);
     g_free (filename);
 
     list = g_slist_delete_link (list, list);
