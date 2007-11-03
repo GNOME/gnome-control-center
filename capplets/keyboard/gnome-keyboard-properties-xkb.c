@@ -53,7 +53,7 @@ xci_desc_to_utf8 (XklConfigItem * ci)
 }
 
 static void
-set_model_text (GtkWidget * entry, GConfValue * value)
+set_model_text (GtkWidget * picker, GConfValue * value)
 {
 	XklConfigItem *ci = xkl_config_item_new ();
 	const char *model = NULL;
@@ -76,10 +76,10 @@ set_model_text (GtkWidget * entry, GConfValue * value)
 		char *d;
 
 		d = xci_desc_to_utf8 (ci);
-		gtk_entry_set_text (GTK_ENTRY (entry), d);
+		gtk_button_set_label (GTK_BUTTON (picker), d);
 		g_free (d);
 	} else {
-		gtk_entry_set_text (GTK_ENTRY (entry), _("Unknown"));
+		gtk_entry_set_text (GTK_BUTTON (picker), _("Unknown"));
 	}
 	g_object_unref (G_OBJECT (ci));
 }
@@ -88,7 +88,7 @@ static void
 model_key_changed (GConfClient * client,
 		   guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
 {
-	set_model_text (WID ("xkb_model"), gconf_entry_get_value (entry));
+	set_model_text (WID ("xkb_model_pick"), gconf_entry_get_value (entry));
 
 	enable_disable_restoring (dialog);
 }
@@ -100,7 +100,7 @@ setup_model_entry (GladeXML * dialog)
 
 	value = gconf_client_get (xkb_gconf_client,
 				  GKBD_KEYBOARD_CONFIG_KEY_MODEL, NULL);
-	set_model_text (WID ("xkb_model"), value);
+	set_model_text (WID ("xkb_model_pick"), value);
 	if (value != NULL)
 		gconf_value_free (value);
 
