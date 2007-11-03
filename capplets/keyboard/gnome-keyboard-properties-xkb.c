@@ -170,18 +170,18 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 	g_signal_connect (peditor, "value-changed", (GCallback)
 			  chk_separate_group_per_window_toggled, dialog);
 
-/* tab 2 */
-	/*fill_available_layouts_tree (dialog); */
 	xkb_layouts_prepare_selected_tree (dialog, changeset);
 	xkb_layouts_fill_selected_tree (dialog);
-
-/* tab 3 */
-	xkb_options_load_options (dialog);
 
 	xkb_layouts_register_buttons_handlers (dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_reset_to_defaults")),
 			  "clicked", G_CALLBACK (reset_to_defaults),
 			  dialog);
+
+	g_signal_connect_swapped (G_OBJECT (WID ("xkb_layout_options")),
+				  "clicked",
+				  G_CALLBACK (xkb_options_popup_dialog),
+				  dialog);
 
 	g_signal_connect_swapped (G_OBJECT (WID ("xkb_model_pick")),
 				  "clicked", G_CALLBACK (choose_model),

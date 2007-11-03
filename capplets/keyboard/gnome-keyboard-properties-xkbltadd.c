@@ -41,9 +41,9 @@
 #define DEFAULT_VARIANT_ID "__default__"
 
 enum {
-  COMBO_BOX_MODEL_COL_DESCRIPTION,
-  COMBO_BOX_MODEL_COL_ID,
-  COMBO_BOX_MODEL_COL_IS_DEFAULT
+	COMBO_BOX_MODEL_COL_DESCRIPTION,
+	COMBO_BOX_MODEL_COL_ID,
+	COMBO_BOX_MODEL_COL_IS_DEFAULT
 };
 
 typedef struct {
@@ -62,7 +62,7 @@ xkb_layout_chooser_add_variant_to_available_variants (XklConfigRegistry *
 						      config_registry,
 						      XklConfigItem *
 						      config_item,
-	    					      AddVariantData *
+						      AddVariantData *
 						      data)
 {
 	char *utf_variant_name = xci_desc_to_utf8 (config_item);
@@ -74,8 +74,7 @@ xkb_layout_chooser_add_variant_to_available_variants (XklConfigRegistry *
 					   COMBO_BOX_MODEL_COL_ID,
 					   config_item->name,
 					   COMBO_BOX_MODEL_COL_IS_DEFAULT,
-					   FALSE,
-					   -1);
+					   FALSE, -1);
 	g_free (utf_variant_name);
 
 	data->n_items++;
@@ -86,15 +85,17 @@ xkb_layout_chooser_add_layout_to_available_layouts (XklConfigRegistry *
 						    config_registry,
 						    XklConfigItem *
 						    config_item,
-						    GtkListStore *list_store)
+						    GtkListStore *
+						    list_store)
 {
 	char *utf_layout_name = xci_desc_to_utf8 (config_item);
 	GtkTreeIter iter;
 
 	gtk_list_store_insert_with_values (list_store, &iter, -1,
-					   COMBO_BOX_MODEL_COL_DESCRIPTION, utf_layout_name,
-       					   COMBO_BOX_MODEL_COL_ID, config_item->name,
-					   -1);
+					   COMBO_BOX_MODEL_COL_DESCRIPTION,
+					   utf_layout_name,
+					   COMBO_BOX_MODEL_COL_ID,
+					   config_item->name, -1);
 	g_free (utf_layout_name);
 }
 
@@ -106,7 +107,8 @@ xkb_layout_chooser_enable_disable_buttons (GladeXML * chooser_dialog)
 	GtkTreeIter liter, viter;
 	gboolean enable_ok =
 	    gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbel), &liter)
-	    && gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbev), &viter);
+	    && gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbev),
+					      &viter);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG
 					   (CWID ("xkb_layout_chooser")),
@@ -128,23 +130,23 @@ xkb_layout_chooser_available_layout_changed (GladeXML * chooser_dialog)
 }
 
 static gint
-xkb_layout_chooser_variant_compare_func (GtkTreeModel *model,
-					 GtkTreeIter *a,
-					 GtkTreeIter *b,
+xkb_layout_chooser_variant_compare_func (GtkTreeModel * model,
+					 GtkTreeIter * a,
+					 GtkTreeIter * b,
 					 gpointer user_data)
 {
 	gchar *desc_a = NULL, *desc_b = NULL;
 	gboolean a_is_default, b_is_default;
 	gint retval;
-  
+
 	gtk_tree_model_get (model, a,
 			    COMBO_BOX_MODEL_COL_DESCRIPTION, &desc_a,
-      			    COMBO_BOX_MODEL_COL_IS_DEFAULT, &a_is_default,
-	    		    -1);
+			    COMBO_BOX_MODEL_COL_IS_DEFAULT, &a_is_default,
+			    -1);
 	gtk_tree_model_get (model, b,
 			    COMBO_BOX_MODEL_COL_DESCRIPTION, &desc_b,
-      			    COMBO_BOX_MODEL_COL_IS_DEFAULT, &b_is_default,
-	    		    -1);
+			    COMBO_BOX_MODEL_COL_IS_DEFAULT, &b_is_default,
+			    -1);
 
 	if (a_is_default || b_is_default)
 		retval = b_is_default - a_is_default;
@@ -173,7 +175,8 @@ xkl_layout_chooser_separate_default_variant (GtkTreeModel * model,
 	gchar *id;
 
 	/* Rows with COMBO_BOX_MODEL_COL_DESCRIPTION value NULL are separators */
-	gtk_tree_model_get (model, iter, COMBO_BOX_MODEL_COL_DESCRIPTION, &id, -1);
+	gtk_tree_model_get (model, iter, COMBO_BOX_MODEL_COL_DESCRIPTION,
+			    &id, -1);
 	g_free (id);
 
 	return id == NULL;
@@ -189,9 +192,9 @@ xkb_layout_chooser_available_variants_fill (GladeXML * chooser_dialog)
 	GtkTreeIter liter, vdefault_iter;
 	gboolean set_default = FALSE;
 
-	model =	GTK_TREE_MODEL (gtk_list_store_new
+	model = GTK_TREE_MODEL (gtk_list_store_new
 				(3, G_TYPE_STRING, G_TYPE_STRING,
-				G_TYPE_BOOLEAN));
+				 G_TYPE_BOOLEAN));
 
 	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbel), &liter)) {
 		GtkTreeModel *lm =
@@ -201,54 +204,56 @@ xkb_layout_chooser_available_variants_fill (GladeXML * chooser_dialog)
 		AddVariantData data = { GTK_LIST_STORE (model), 0 };
 
 		/* The 'Default' row */
-		gtk_list_store_insert_with_values (GTK_LIST_STORE (model), &vdefault_iter, -1,
+		gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
+						   &vdefault_iter, -1,
 						   COMBO_BOX_MODEL_COL_DESCRIPTION,
 						   _("Default"),
 						   COMBO_BOX_MODEL_COL_ID,
 						   DEFAULT_VARIANT_ID,
-						   COMBO_BOX_MODEL_COL_IS_DEFAULT, TRUE,
-	 					   -1);
+						   COMBO_BOX_MODEL_COL_IS_DEFAULT,
+						   TRUE, -1);
 		set_default = TRUE;
 
 		/* Now the variants of the selected lang */
 		gtk_tree_model_get (lm, &liter,
-				    COMBO_BOX_MODEL_COL_ID, &value,
-				    -1);
+				    COMBO_BOX_MODEL_COL_ID, &value, -1);
 		g_assert (value != NULL);
 
 		xkl_config_registry_foreach_layout_variant
-		    (config_registry, value,
-		     (ConfigItemProcessFunc)
+		    (config_registry, value, (ConfigItemProcessFunc)
 		     xkb_layout_chooser_add_variant_to_available_variants,
 		     &data);
 		g_free (value);
-	
+
 		/* Add a separator row, but only if we have any non-default items */
 		if (data.n_items > 0)
-			gtk_list_store_insert_with_values (GTK_LIST_STORE (model), &viter, -1,
+			gtk_list_store_insert_with_values (GTK_LIST_STORE
+							   (model), &viter,
+							   -1,
 							   COMBO_BOX_MODEL_COL_DESCRIPTION,
 							   NULL,
-	 						   COMBO_BOX_MODEL_COL_ID,
+							   COMBO_BOX_MODEL_COL_ID,
 							   NULL,
-							   COMBO_BOX_MODEL_COL_IS_DEFAULT, FALSE,
-							   -1);
+							   COMBO_BOX_MODEL_COL_IS_DEFAULT,
+							   FALSE, -1);
 	}
 
 	/* Turn on sorting after filling the store, since that's faster */
 	gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
 					 COMBO_BOX_MODEL_COL_DESCRIPTION,
-      					 (GtkTreeIterCompareFunc)
+					 (GtkTreeIterCompareFunc)
 					 xkb_layout_chooser_variant_compare_func,
-      					 NULL, NULL);
+					 NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
 					      COMBO_BOX_MODEL_COL_DESCRIPTION,
-	   				      GTK_SORT_ASCENDING);
+					      GTK_SORT_ASCENDING);
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbev), model);
 
 	/* Select the default variant */
 	if (set_default) {
-		gtk_combo_box_set_active_iter (GTK_COMBO_BOX (cbev), &vdefault_iter);
+		gtk_combo_box_set_active_iter (GTK_COMBO_BOX (cbev),
+					       &vdefault_iter);
 	}
 }
 
@@ -259,15 +264,17 @@ xkb_layout_chooser_available_layouts_fill (GladeXML * chooser_dialog)
 	GtkWidget *cbev = CWID ("xkb_variants_available");
 	GtkCellRenderer *renderer;
 	GtkTreeModel *model =
-	    GTK_TREE_MODEL (gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING));
+	    GTK_TREE_MODEL (gtk_list_store_new
+			    (2, G_TYPE_STRING, G_TYPE_STRING));
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbe), model);
 
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (cbe), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (cbe), renderer,
-                                        "text", COMBO_BOX_MODEL_COL_DESCRIPTION,
-                                        NULL);
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (cbe), renderer, TRUE);
+	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (cbe), renderer,
+					"text",
+					COMBO_BOX_MODEL_COL_DESCRIPTION,
+					NULL);
 
 	xkl_config_registry_foreach_layout (config_registry,
 					    (ConfigItemProcessFunc)
@@ -277,7 +284,7 @@ xkb_layout_chooser_available_layouts_fill (GladeXML * chooser_dialog)
 	/* Turn on sorting after filling the model since that's faster */
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
 					      COMBO_BOX_MODEL_COL_DESCRIPTION,
-	   				      GTK_SORT_ASCENDING);
+					      GTK_SORT_ASCENDING);
 
 	g_signal_connect_swapped (G_OBJECT (cbe), "changed",
 				  G_CALLBACK
@@ -286,9 +293,11 @@ xkb_layout_chooser_available_layouts_fill (GladeXML * chooser_dialog)
 
 	/* Setup the variants combo */
 	renderer = gtk_cell_renderer_text_new ();
-	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (cbev), renderer, TRUE);
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (cbev), renderer,
+				    TRUE);
 	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (cbev), renderer,
-					"text", COMBO_BOX_MODEL_COL_DESCRIPTION,
+					"text",
+					COMBO_BOX_MODEL_COL_DESCRIPTION,
 					NULL);
 
 	g_signal_connect_swapped (G_OBJECT (cbev), "changed",
@@ -298,8 +307,7 @@ xkb_layout_chooser_available_layouts_fill (GladeXML * chooser_dialog)
 	gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX (cbev),
 					      (GtkTreeViewRowSeparatorFunc)
 					      xkl_layout_chooser_separate_default_variant,
-					      chooser_dialog,
-					      NULL);
+					      chooser_dialog, NULL);
 }
 
 void
@@ -443,20 +451,21 @@ xkb_layout_chooser_get_selected_id (GladeXML * chooser_dialog)
 	gchar *lname, *vname;
 	gchar *retval;
 
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbel), &liter) ||
-	    !gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbev), &viter))
+	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbel), &liter)
+	    || !gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbev),
+					       &viter))
 		return NULL;
 
 	gtk_tree_model_get (lm, &liter,
-			    COMBO_BOX_MODEL_COL_ID, &lname,
-			    -1);
+			    COMBO_BOX_MODEL_COL_ID, &lname, -1);
 
 	gtk_tree_model_get (vm, &viter,
-			    COMBO_BOX_MODEL_COL_ID, &vname,
-			    -1);
+			    COMBO_BOX_MODEL_COL_ID, &vname, -1);
 
 	if (strcmp (vname, DEFAULT_VARIANT_ID))
-		retval = g_strdup (gkbd_keyboard_config_merge_items (lname, vname));
+		retval =
+		    g_strdup (gkbd_keyboard_config_merge_items
+			      (lname, vname));
 	else
 		retval = g_strdup (lname);
 

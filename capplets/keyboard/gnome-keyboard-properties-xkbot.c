@@ -182,38 +182,6 @@ option_toggled_cb (GtkWidget * checkbutton, gpointer data)
 		xkb_options_deselect (optionID);
 }
 
-/* Update UI state from xkb backend */
-static void
-option_update_cb (GConfClient * client,
-		  guint cnxn_id, GConfEntry * entry, gpointer data)
-{
-	GtkToggleButton *toggle = GTK_TOGGLE_BUTTON (data);
-	GtkWidget *expander =
-	    xkb_options_get_expander (GTK_WIDGET (toggle));
-	gboolean old_state = gtk_toggle_button_get_active (toggle);
-	gboolean new_state =
-	    xkb_options_is_selected (g_object_get_data
-				     (G_OBJECT (toggle), OPTION_ID_PROP));
-	int old_gstate =
-	    GPOINTER_TO_INT (g_object_get_data
-			     (G_OBJECT (toggle), GCONFSTATE_PROP));
-	int state_diff = new_state - old_gstate;
-
-	if (GTK_WIDGET_TYPE (toggle) == GTK_TYPE_RADIO_BUTTON &&
-	    old_state == TRUE && new_state == FALSE)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (g_object_get_data
-					       (G_OBJECT (toggle),
-						"NoneRadio")), TRUE);
-	else
-		gtk_toggle_button_set_active (toggle, new_state);
-
-	g_object_set_data (G_OBJECT (toggle), GCONFSTATE_PROP,
-			   GINT_TO_POINTER (new_state));
-	xkb_options_expander_selcounter_add (expander, state_diff);
-	xkb_options_expander_highlight (expander);
-}
-
 /* Add a check_button or radio_button to control a particular option
    This function makes particular use of the current... variables at
    the top of this file. */
@@ -273,12 +241,6 @@ xkb_options_add_option (XklConfigRegistry * config_registry,
 
 	g_signal_connect (G_OBJECT (option_check), "toggled",
 			  G_CALLBACK (option_toggled_cb), NULL);
-
-	gconf_client_notify_add (xkb_gconf_client,
-				 GKBD_KEYBOARD_CONFIG_KEY_OPTIONS,
-				 (GConfClientNotifyFunc)
-				 option_update_cb, option_check, NULL,
-				 NULL);
 
 	gtk_box_pack_start_defaults (GTK_BOX (current_vbox), option_check);
 
@@ -356,6 +318,12 @@ xkb_options_load_options (GladeXML * dialog)
 	GSList *expanders_list;
 	GtkWidget *expander;
 
+	current1st_level_id = NULL;
+	current_vbox = NULL;
+	current_none_radio = NULL;
+	current_multi_select = FALSE;
+	current_radio_group = NULL;
+
 	/* fill the list */
 	xkl_config_registry_foreach_option_group (config_registry,
 						  (ConfigItemProcessFunc)
@@ -381,6 +349,27 @@ xkb_options_load_options (GladeXML * dialog)
 	g_slist_free (expanders_list);
 
 	gtk_widget_show_all (opts_vbox);
+}
+
+
+/* Create popup dialog*/
+void
+xkb_options_popup_dialog (GladeXML * dialog)
+{
+	GladeXML *chooser_dialog =
+	    glade_xml_new (GNOMECC_GLADE_DIR
+			   "/gnome-keyboard-properties.glade",
+			   "xkb_options_dialog", NULL);
+	GtkWidget *chooser = CWID ("xkb_options_dialog");
+
+	gtk_window_set_transient_for (GTK_WINDOW (chooser),
+				      GTK_WINDOW (WID
+						  ("keyboard_dialog")));
+	xkb_options_load_options (chooser_dialog);
+
+	gtk_dialog_run (GTK_DIALOG (chooser));
+
+	gtk_widget_destroy (chooser);
 }
 
 /* Respond to a change in the xkb gconf settings */

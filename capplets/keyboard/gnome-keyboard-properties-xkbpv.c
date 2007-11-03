@@ -74,8 +74,7 @@ xkb_layout_preview_update (GladeXML * chooser_dialog)
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
 	GtkWidget *kbdraw =
 	    GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
-	gchar *id =
-	    xkb_layout_chooser_get_selected_id (chooser_dialog);
+	gchar *id = xkb_layout_chooser_get_selected_id (chooser_dialog);
 
 	if (kbdraw != NULL && id != NULL) {
 		XklConfigRec *data;

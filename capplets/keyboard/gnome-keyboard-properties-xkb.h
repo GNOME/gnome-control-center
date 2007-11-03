@@ -50,6 +50,8 @@ extern void xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 
 extern void xkb_options_load_options (GladeXML * dialog);
 
+extern void xkb_options_popup_dialog(GladeXML * dialog);
+
 extern void clear_xkb_elements_list (GSList * list);
 
 extern char *xci_desc_to_utf8 (XklConfigItem * ci);
