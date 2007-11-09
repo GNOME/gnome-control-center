@@ -5,6 +5,7 @@ always_built_SUBDIRS = \
 	default-applications	\
 	keybindings		\
 	keyboard		\
+	localization		\
 	mouse			\
 	network			\
 	windows
