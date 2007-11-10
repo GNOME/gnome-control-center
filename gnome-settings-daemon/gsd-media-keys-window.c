@@ -876,12 +876,10 @@ gsd_media_keys_window_is_valid (GsdMediaKeysWindow *window)
 }
 
 static void
-initialize_alpha_mode (GsdMediaKeysWindow *window)
+initialize_alpha_mode (GsdMediaKeysWindow *window, GdkScreen *screen)
 {
-	GdkScreen   *screen;
 	GdkColormap *colormap = NULL;
 
-	screen = gtk_widget_get_screen (GTK_WIDGET (window));
 	if (gdk_screen_is_composited (screen)) {
 	 	colormap = gdk_screen_get_rgba_colormap (screen);
 	}
@@ -897,15 +895,28 @@ initialize_alpha_mode (GsdMediaKeysWindow *window)
 static void
 gsd_media_keys_window_init (GsdMediaKeysWindow *window)
 {
+	GdkScreen *screen;
+
 	window->priv = GSD_MEDIA_KEYS_WINDOW_GET_PRIVATE (window);
 
-	initialize_alpha_mode (window);
+	screen = gtk_widget_get_screen (GTK_WIDGET (window));
+
+	initialize_alpha_mode (window, screen);
 
 	if (window->priv->is_composited) {
+		gdouble scalew, scaleh, scale;
+		gint size;
+
 		gtk_window_set_decorated (GTK_WINDOW (window), FALSE);
 		gtk_widget_set_app_paintable (GTK_WIDGET (window), TRUE);
 
-		gtk_window_set_default_size (GTK_WINDOW (window), 300, 300);
+		/* assume 100x100 on a 800x600 display and scale from there */
+		scalew = gdk_screen_get_width (screen) / 800.0;
+		scaleh = gdk_screen_get_height (screen) / 600.0;
+		scale = MIN (scalew, scaleh);
+		size = 100 * MAX (1, scale);
+
+		gtk_window_set_default_size (GTK_WINDOW (window), size, size);
 		g_signal_connect (window, "expose-event", G_CALLBACK (on_expose_event), window);
 
 		window->priv->fade_out_alpha = 1.0;

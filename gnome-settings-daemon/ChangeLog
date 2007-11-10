@@ -1,3 +1,14 @@
+2007-11-10  Jens Granseuer  <jensgr@gmx.net>
+
+	The media window popup has a fixed size 300x300 when running in
+	composited mode. For smaller display sizes this is quite excessive.
+	Change the window size to be 100x100 on 800x600 and smaller screens,
+	and scale up from that for anthing bigger. (bug #495346)
+
+	* gsd-media-keys-window.c: (initialize_alpha_mode),
+	(gsd_media_keys_window_init): make composited media popup window sizes
+	scale with the screen size
+
 2007-10-26  Jens Granseuer  <jensgr@gmx.net>
 
 	Patch by: Iain Holmes <iain@gnome.org>
