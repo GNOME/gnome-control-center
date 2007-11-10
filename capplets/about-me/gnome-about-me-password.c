@@ -392,6 +392,28 @@ is_string_complete (gchar *str, ...)
 	return FALSE;
 }
 
+/* Authentication attempt succeeded. Update the GUI accordingly. */
+static void
+authenticated_user (PasswordDialog *pdialog)
+{
+	pdialog->backend_state = PASSWD_STATE_NEW;
+
+	if (pdialog->authenticated) {
+		/* This is a re-authentication
+		 * It succeeded, so pop our new password from the queue */
+		io_queue_pop (pdialog->backend_stdin_queue, pdialog->backend_stdin);
+	}
+
+	/* Update UI state */
+	passdlg_set_auth_state (pdialog, TRUE);
+	passdlg_set_status (pdialog, _("Authenticated!"));
+
+	/* Check to see if the passwords are valid
+	 * (They might be non-empty if the user had to re-authenticate,
+	 *  and thus we need to enable the change-password-button) */
+	passdlg_refresh_password_state (pdialog);
+}
+
 /*
  * IO watcher for stdout, called whenever there is data to read from the backend.
  * This is where most of the actual IO handling happens.
@@ -436,24 +458,9 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 				passdlg_set_busy (pdialog, FALSE);
 
 				if (g_strrstr (str->str, "assword: ") != NULL) {
-					/* Authentication successfull */
+					/* Authentication successful */
 
-					pdialog->backend_state = PASSWD_STATE_NEW;
-
-					if (pdialog->authenticated) {
-						/* This is a re-authentication
-						 * It succeeded, so pop our new password from the queue */
-						io_queue_pop (pdialog->backend_stdin_queue, pdialog->backend_stdin);
-					}
-
-					/* Update UI state */
-					passdlg_set_auth_state (pdialog, TRUE);
-					passdlg_set_status (pdialog, _("Authenticated!"));
-
-					/* Check to see if the passwords are valid
-					 * (They might be non-empty if the user had to re-authenticate,
-					 *  and thus we need to enable the change-password-button) */
-					passdlg_refresh_password_state (pdialog);
+					authenticated_user (pdialog);
 
 				} else {
 					/* Authentication failed */
@@ -569,10 +576,28 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 			/* Passwd is not asking for anything yet */
 			if (is_string_complete (str->str, "assword: ", NULL)) {
 
-				pdialog->backend_state = PASSWD_STATE_AUTH;
+				/* If the user does not have a password set,
+				 * passwd will immediately ask for the new password,
+				 * so skip the AUTH phase */
+				if (is_string_complete (str->str, "new", "New", NULL)) {
+					gchar *pw;
 
-				/* Pop the IO queue, i.e. send current password */
-				io_queue_pop (pdialog->backend_stdin_queue, pdialog->backend_stdin);
+					pdialog->backend_state = PASSWD_STATE_NEW;
+
+					passdlg_set_busy (pdialog, FALSE);
+					authenticated_user (pdialog);
+
+					/* since passwd didn't ask for our old password
+					 * in this case, simply remove it from the queue */
+					pw = g_queue_pop_head (pdialog->backend_stdin_queue);
+					g_free (pw);
+				} else {
+
+					pdialog->backend_state = PASSWD_STATE_AUTH;
+
+					/* Pop the IO queue, i.e. send current password */
+					io_queue_pop (pdialog->backend_stdin_queue, pdialog->backend_stdin);
+				}
 
 				reinit = TRUE;
 			}
