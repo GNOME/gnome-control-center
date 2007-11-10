@@ -31,6 +31,7 @@ create_dialog (void)
 
 	xml = glade_xml_new (GNOMECC_GLADEDIR "/localization.glade", "i18n_dialog", NULL);
 	dialog = glade_xml_get_widget (xml, "i18n_dialog");
+	g_object_unref (xml);
 
 	return dialog;
 }
@@ -52,7 +53,7 @@ main (int argc, char *argv[])
 
 	/* open main dialog */
 	dialog = create_dialog ();
-	g_signal_connect (G_OBJECT (dialog), "response", gtk_main_quit, NULL);
+	g_signal_connect (dialog, "response", gtk_main_quit, NULL);
 	gtk_widget_show (dialog);
 
 	gtk_main ();
