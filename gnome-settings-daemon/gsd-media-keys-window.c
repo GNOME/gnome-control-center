@@ -910,11 +910,11 @@ gsd_media_keys_window_init (GsdMediaKeysWindow *window)
 		gtk_window_set_decorated (GTK_WINDOW (window), FALSE);
 		gtk_widget_set_app_paintable (GTK_WIDGET (window), TRUE);
 
-		/* assume 100x100 on a 800x600 display and scale from there */
-		scalew = gdk_screen_get_width (screen) / 800.0;
-		scaleh = gdk_screen_get_height (screen) / 600.0;
+		/* assume 130x130 on a 640x480 display and scale from there */
+		scalew = gdk_screen_get_width (screen) / 640.0;
+		scaleh = gdk_screen_get_height (screen) / 480.0;
 		scale = MIN (scalew, scaleh);
-		size = 100 * MAX (1, scale);
+		size = 130 * MAX (1, scale);
 
 		gtk_window_set_default_size (GTK_WINDOW (window), size, size);
 		g_signal_connect (window, "expose-event", G_CALLBACK (on_expose_event), window);
