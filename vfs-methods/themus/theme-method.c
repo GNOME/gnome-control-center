@@ -576,7 +576,6 @@ invoke_monitors(void)
 static void
 theme_changed_callback(GnomeThemeCommonInfo *theme,
                        GnomeThemeChangeType  change_type,
-                       GnomeThemeElement     element,
                        gpointer              data)
 {
   invoke_monitors();

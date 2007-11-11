@@ -664,7 +664,6 @@ icon_theme_thumbnail_cb (GdkPixbuf *pixbuf,
 static void
 changed_on_disk_cb (GnomeThemeCommonInfo *theme,
 		    GnomeThemeChangeType  change_type,
-		    GnomeThemeElement     element,
 		    AppearanceData       *data)
 {
   if (theme->type == GNOME_THEME_TYPE_REGULAR) {

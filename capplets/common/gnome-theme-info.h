@@ -127,7 +127,6 @@ enum {
 
 typedef void (* ThemeChangedCallback) (GnomeThemeCommonInfo *theme,
 				       GnomeThemeChangeType  change_type,
-				       GnomeThemeElement     element,
 				       gpointer              user_data);
 
 
