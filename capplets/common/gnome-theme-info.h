@@ -43,6 +43,12 @@ typedef enum {
   GNOME_THEME_CHANGE_CHANGED
 } GnomeThemeChangeType;
 
+typedef enum {
+  GNOME_THEME_METACITY = 1 << 0,
+  GNOME_THEME_GTK_2 = 1 << 1,
+  GNOME_THEME_GTK_2_KEYBINDING = 1 << 2
+} GnomeThemeElement;
+
 typedef struct _GnomeThemeCommonInfo GnomeThemeCommonInfo;
 typedef struct _GnomeThemeCommonInfo GnomeThemeIconInfo;
 struct _GnomeThemeCommonInfo
