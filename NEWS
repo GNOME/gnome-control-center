@@ -1,3 +1,48 @@
+gnome-control-center 2.21.2
+
+about-me:
+- Add another string to the list of recognized error returns from passwd
+  (Jens Granseuer)
+- Don't get confused when the user does not have a password set and passwd
+  immediately asks for the new one (Jens Granseuer) (#336872)
+
+appearance:
+- Fix build without libXcursor (Joel Pfaff)
+- Be more careful when reading background information from GConf and
+  make sure we don't choke on NULL values later on (Jens Granseuer)
+  (#492903)
+
+keyboard:
+- Fix warnings and don't use deprecated signal API from GTK (Kjartan
+  Maraas)
+- Move layout options to separate popup (Sergey Udaltsov)
+- Rename first tab to "General" (Jens Granseuer)
+- Replace text entry and "Choose.." button for keyboard model with a
+  single chooser button (Denis Washington)
+- Don't include keyboard model description in Glade file (Jens Granseuer)
+
+localization:
+- Added (very basic skeleton of) localization capplet (Rodrigo Moya,
+  Denis Washington)
+
+shell:
+- Remove reference to non-existing background.desktop (Scott Reeves)
+
+settings daemon:
+- Make composited media popup window sizes scale with the screen size (Jens
+  Granseuer)
+
+common:
+- Remove more redundant info from the theme changed callback (Jens Granseuer)
+
+updated translations:
+- be@latin (Ihar Hrachyshka)
+- es (Jorge Gonzalez)
+- fi (Ilkka Tuohela)
+- nb (Kjartan Maraas)
+- sl (Matej Urbancic)
+- sv (Daniel Nylander)
+------------------------------------------------------------------------------
 gnome-control-center 2.21.1
 
 appearance:
