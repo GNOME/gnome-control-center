@@ -42,6 +42,7 @@ GType gnome_settings_module_accessibility_keyboard_get_type (void);
 GType gnome_settings_module_background_get_type (void);
 GType gnome_settings_module_clipboard_get_type (void);
 GType gnome_settings_module_default_editor_get_type (void);
+GType gnome_settings_module_xrandr_get_type (void);
 GType gnome_settings_module_font_get_type (void);
 GType gnome_settings_module_gtk1_get_type (void);
 GType gnome_settings_module_keybindings_get_type (void);
@@ -185,6 +186,7 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 	    || !gnome_settings_module_background_get_type ()
 	    || !gnome_settings_module_clipboard_get_type ()
 	    || !gnome_settings_module_default_editor_get_type ()
+	    || !gnome_settings_module_xrandr_get_type ()
 	    || !gnome_settings_module_font_get_type ()
 	    || !gnome_settings_module_gtk1_get_type ()
 	    || !gnome_settings_module_keybindings_get_type ()

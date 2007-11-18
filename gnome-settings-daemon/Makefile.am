@@ -46,6 +46,7 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-typing-break.c	\
 	gnome-settings-xmodmap.c	\
 	gnome-settings-xmodmap.h	\
+	gnome-settings-xrandr.c		\
 	gnome-settings-xrdb.c		\
 	gnome-settings-xsettings.c	\
 	gsd-media-keys-window.c		\
