@@ -944,6 +944,7 @@ desktop_init (AppearanceData *data,
   GtkCellRenderer *cr;
   GtkFileFilter *filter;
   const gchar *pictures;
+  const gchar *start_dir;
 
   g_object_set (gtk_settings_get_default (), "gtk-tooltip-timeout", 500, NULL);
 
@@ -1077,11 +1078,21 @@ desktop_init (AppearanceData *data,
   gtk_file_chooser_set_select_multiple (data->wp_filesel, TRUE);
   gtk_file_chooser_set_use_preview_label (data->wp_filesel, FALSE);
 
+  start_dir = g_get_home_dir ();
+
+  if (g_file_test ("/usr/share/backgrounds", G_FILE_TEST_IS_DIR)) {
+    gtk_file_chooser_add_shortcut_folder (data->wp_filesel,
+                                          "/usr/share/backgrounds", NULL);
+    start_dir = "/usr/share/backgrounds";
+  }
+
   pictures = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
   if (pictures != NULL && g_file_test (pictures, G_FILE_TEST_IS_DIR)) {
     gtk_file_chooser_add_shortcut_folder (data->wp_filesel, pictures, NULL);
-    gtk_file_chooser_set_current_folder (data->wp_filesel, pictures);
+    start_dir = pictures;
   }
+
+  gtk_file_chooser_set_current_folder (data->wp_filesel, start_dir);
 
   filter = gtk_file_filter_new ();
   gtk_file_filter_add_pixbuf_formats (filter);
