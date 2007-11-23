@@ -46,7 +46,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
   item->fileinfo = gnome_wp_info_new (item->filename, thumbnails);
 
   if (item->fileinfo != NULL &&
-      !strcmp (item->fileinfo->mime_type, "image/")) {
+      g_str_has_prefix (item->fileinfo->mime_type, "image/")) {
     if (item->name == NULL) {
       if (g_utf8_validate (item->fileinfo->name, -1, NULL))
 	item->name = g_strdup (item->fileinfo->name);
