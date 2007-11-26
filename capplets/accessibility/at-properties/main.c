@@ -114,8 +114,6 @@ at_enable_update  (GConfClient *client,
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_enable_toggle")),
 				      is_enabled);
-
-	gtk_widget_set_sensitive (WID ("at_pref_button"), is_enabled);
 }
 
 static void
