@@ -695,7 +695,7 @@ do_action (Acme *acme, int type)
 		break;
 	case HOME_KEY:
 		path = g_shell_quote (g_get_home_dir ());
-		cmd = g_strconcat ("nautilus ", path, NULL);
+		cmd = g_strconcat ("nautilus --no-desktop", path, NULL);
 		g_free (path);
 		execute (acme, cmd, FALSE, FALSE);
 		g_free (cmd);
