@@ -1075,6 +1075,7 @@ desktop_init (AppearanceData *data,
                      GTK_RESPONSE_OK,
                      NULL));
 
+  gtk_dialog_set_default_response (GTK_DIALOG (data->wp_filesel), GTK_RESPONSE_OK);
   gtk_file_chooser_set_select_multiple (data->wp_filesel, TRUE);
   gtk_file_chooser_set_use_preview_label (data->wp_filesel, FALSE);
 

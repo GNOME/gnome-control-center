@@ -682,6 +682,7 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 		filename = old_folder;
 
 	dialog = gtk_file_chooser_dialog_new (_("Select Theme"), parent, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
 
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_set_name (filter, _("Theme Packages"));
