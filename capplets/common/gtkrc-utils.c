@@ -104,7 +104,8 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 		file = g_open (filename, O_RDONLY);
 		if (file == -1)
 		{
-			g_warning ("Could not open file \"%s\"", filename);
+			g_warning ("Could not open file \"%s\"",
+				   filename ? filename : "(null)");
 		}
 		else
 		{
@@ -192,7 +193,8 @@ gtkrc_get_color_scheme (gchar *filename)
 		file = g_open (filename, O_RDONLY);
 		if (file == -1)
 		{
-			g_warning ("Could not open file \"%s\"", filename);
+			g_warning ("Could not open file \"%s\"",
+				   filename ? filename : "(null)");
 		}
 		else
 		{

@@ -1,3 +1,10 @@
+2007-12-04  Jens Granseuer  <jensgr@gmx.net>
+
+	Patch by: Brian Cameron <brian.cameron@sun.com>
+
+	* gtkrc-utils.c: (gtkrc_get_details), (gtkrc_get_color_scheme):
+	printing NULL strings crashes on Solaris so don't do that (bug #501391)
+
 20007-11-12  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* gnome-theme-info.c:
