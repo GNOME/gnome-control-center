@@ -814,12 +814,13 @@ passdlg_spawn_passwd (PasswordDialog *pdialog)
 
 	/* Spawn backend */
 	if (!spawn_passwd (pdialog, &error)) {
+		/* translators: Unable to launch <program>: <error message> */
 		details = g_strdup_printf (_("Unable to launch %s: %s"),
 					   "/usr/bin/passwd", error->message);
 
 		passdlg_error_dialog (_("Unable to launch backend"),
-						  _("A system error has occurred"),
-							  details);
+				      _("A system error has occurred"),
+				      details);
 
 		g_free (details);
 		g_error_free (error);
