@@ -701,7 +701,14 @@ do_action (Acme *acme, int type)
 		g_free (cmd);
 		break;
 	case SEARCH_KEY:
-		execute (acme, "gnome-search-tool", FALSE, FALSE);
+		cmd = NULL;
+		if ((cmd = g_find_program_in_path ("beagle-search")))
+			execute (acme, "beagle-search", FALSE, FALSE);
+		else if ((cmd = g_find_program_in_path ("tracker-search-tool")))
+			execute (acme, "tracker-search-tool", FALSE, FALSE);
+		else
+			execute (acme, "gnome-search-tool", FALSE, FALSE);
+		g_free (cmd);
 		break;
 	case EMAIL_KEY:
 		do_mail_action (acme);

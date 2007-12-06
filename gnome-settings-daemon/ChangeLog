@@ -1,5 +1,16 @@
 2007-12-06  Jens Granseuer  <jensgr@gmx.net>
 
+	Patch by: Matthias Clasen <mclasen@redhat.com>
+
+	As a stop-gap measure, until we've got a proper search interface,
+	simply check whether beagle or tracker are installed, and prefer them
+	to gnome-search-tool if they are (bug #497802)
+
+	* gnome-settings-multimedia-keys.c: (do_action): prefer beagle and
+	tracker to gnome-search-tool
+
+2007-12-06  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-settings-xsettings.c: use new setting from libgnome to make
 	toolbar icon size setting work (bug #401030)
 
