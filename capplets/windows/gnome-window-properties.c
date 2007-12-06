@@ -108,7 +108,7 @@ double_click_titlebar_changed_callback (GtkWidget *optionmenu,
                                         void      *data)
 {
         GnomeWMSettings new_settings;
-        
+
         new_settings.flags = GNOME_WM_SETTING_DOUBLE_CLICK_ACTION;
         new_settings.double_click_action =
                 gtk_combo_box_get_active (GTK_COMBO_BOX (optionmenu));
@@ -124,13 +124,13 @@ alt_click_radio_toggled_callback (GtkWidget *radio,
         GnomeWMSettings new_settings;
         gboolean active;
         MouseClickModifier *modifier = data;
-        
+
         new_settings.flags = GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER;
         active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio));
 
         if (active && current_wm != NULL) {
                  new_settings.mouse_move_modifier = modifier->value;
-          
+
                 if ((settings->mouse_move_modifier == NULL) ||
                     (strcmp (new_settings.mouse_move_modifier,
                              settings->mouse_move_modifier) != 0))
@@ -143,7 +143,7 @@ update_sensitivity (void)
 {
         gtk_widget_set_sensitive (autoraise_checkbutton,
                                   settings->focus_follows_mouse);
-        
+
         gtk_widget_set_sensitive (autoraise_delay_hbox,
                                   settings->focus_follows_mouse && settings->autoraise);
 
@@ -165,13 +165,13 @@ init_settings_struct (GnomeWMSettings *settings)
         /* Init fields that weren't initialized */
         if ((settings->flags & GNOME_WM_SETTING_MOUSE_FOCUS) == 0)
                 settings->focus_follows_mouse = FALSE;
-        
+
         if ((settings->flags & GNOME_WM_SETTING_AUTORAISE) == 0)
                 settings->autoraise = FALSE;
-        
+
         if ((settings->flags & GNOME_WM_SETTING_AUTORAISE_DELAY) == 0)
                 settings->autoraise_delay = 1000;
-        
+
         if ((settings->flags & GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER) == 0)
                 settings->mouse_move_modifier = "Super";
 
@@ -211,7 +211,7 @@ reload_settings (void)
         GnomeWMSettings new_settings;
 
         g_assert (n_mouse_modifiers > 0);
-        
+
         if (current_wm != NULL) {
                 new_settings.flags = GNOME_WM_SETTING_MOUSE_FOCUS |
                         GNOME_WM_SETTING_AUTORAISE |
@@ -226,7 +226,7 @@ reload_settings (void)
         }
 
         init_settings_struct (&new_settings);
-        
+
         if (new_settings.focus_follows_mouse != settings->focus_follows_mouse)
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_checkbutton),
                                               new_settings.focus_follows_mouse);
@@ -238,13 +238,13 @@ reload_settings (void)
         if (new_settings.autoraise_delay != settings->autoraise_delay)
                 gtk_range_set_value (GTK_RANGE (autoraise_delay_slider),
                                      new_settings.autoraise_delay / 1000.0);
-        
+
         if (n_double_click_actions > 0 &&
             new_settings.double_click_action != settings->double_click_action) {
                 gtk_combo_box_set_active (GTK_COMBO_BOX (double_click_titlebar_optionmenu),
                                              new_settings.double_click_action);
         }
-        
+
         if (settings->mouse_move_modifier == NULL ||
             new_settings.mouse_move_modifier == NULL ||
             strcmp (settings->mouse_move_modifier,
@@ -272,7 +272,7 @@ update_wm (GdkScreen *screen,
         int i;
 
         g_assert (n_mouse_modifiers > 0);
-        
+
         if (current_wm != NULL) {
                 g_signal_handlers_disconnect_by_func (G_OBJECT (current_wm),
                                                       G_CALLBACK (wm_settings_changed_callback),
@@ -291,7 +291,7 @@ update_wm (GdkScreen *screen,
                 gnome_window_manager_get_double_click_actions (current_wm,
                                                                &double_click_actions,
                                                                &n_double_click_actions);
-                
+
         }
 
         for (i = 0; i < n_double_click_actions; i++) {
@@ -339,12 +339,12 @@ try_spawn_config_tool (GdkScreen *screen)
                 char *escaped;
 
                 escaped = g_markup_escape_text (error->message, -1);
-                
+
                 str = g_strdup_printf ("<b>%s</b>\n\n%s",
                                        _("Cannot start the preferences application for your window manager"),
                                        escaped);
                 g_free (escaped);
-                                       
+
                 no_tool_dialog =
                         gtk_message_dialog_new (NULL,
                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -353,17 +353,17 @@ try_spawn_config_tool (GdkScreen *screen)
                                                 " ");
                 gtk_window_set_title (GTK_WINDOW (no_tool_dialog), "");
                 gtk_window_set_resizable (GTK_WINDOW (no_tool_dialog), FALSE);
-                
+
                 gtk_label_set_markup (GTK_LABEL (GTK_MESSAGE_DIALOG (no_tool_dialog)->label),
                                       str);
 
                 g_free (str);
-                
+
                 gtk_dialog_run (GTK_DIALOG (no_tool_dialog));
 
                 gtk_widget_destroy (no_tool_dialog);
                 g_error_free (error);
-                
+
                 exit (1);
         }
 
@@ -379,7 +379,7 @@ main (int argc, char **argv)
 	GnomeWMSettings new_settings;
 	int rc = 0;
         int i;
-        
+
         bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
@@ -391,14 +391,14 @@ main (int argc, char **argv)
         gnome_wm_manager_init ();
 
         screen = gdk_display_get_default_screen (gdk_display_get_default ());
-        
+
         current_wm = gnome_wm_manager_get_current (screen);
 
         if (current_wm == NULL) {
                 try_spawn_config_tool (screen);
                 goto out;
         }
-        
+
         dialog = glade_xml_new (GLADEDIR "/gnome-window-properties.glade",
                                 "main-dialog", GETTEXT_PACKAGE);
 
@@ -407,7 +407,7 @@ main (int argc, char **argv)
                 rc = 1;
                 goto out;
         }
-        
+
         dialog_win = WID ("main-dialog");
         focus_mode_checkbutton = WID ("focus-mode-checkbutton");
         autoraise_checkbutton = WID ("autoraise-checkbutton");
@@ -428,7 +428,7 @@ main (int argc, char **argv)
 
         reload_mouse_modifiers ();
         update_wm (screen, FALSE);
-        
+
         set_alt_click_value (&new_settings);
         gtk_range_set_value (GTK_RANGE (autoraise_delay_slider),
                              new_settings.autoraise_delay / 1000.0);
@@ -436,10 +436,10 @@ main (int argc, char **argv)
                                      new_settings.double_click_action);
 
         reload_settings (); /* must come before below signal connections */
-        
+
         g_signal_connect (G_OBJECT (dialog_win), "response",
                           G_CALLBACK (response_cb), NULL);
-        
+
         g_signal_connect (G_OBJECT (dialog_win), "destroy",
                           G_CALLBACK (gtk_main_quit), NULL);
 
@@ -455,7 +455,7 @@ main (int argc, char **argv)
 
         g_signal_connect (G_OBJECT (double_click_titlebar_optionmenu), "changed",
                           G_CALLBACK (double_click_titlebar_changed_callback), NULL);
-        
+
         g_signal_connect (G_OBJECT (screen), "window_manager_changed",
                           G_CALLBACK (wm_changed_callback), NULL);
 
@@ -466,10 +466,10 @@ main (int argc, char **argv)
                                   &mouse_modifiers[i]);
                 ++i;
         }
-        
+
         capplet_set_icon (dialog_win, "gnome-window-manager");
         gtk_widget_show (dialog_win);
-        
+
         gtk_main ();
 
 	g_object_unref (dialog);
@@ -492,7 +492,7 @@ fill_radio (GtkRadioButton     *group,
                                                              modifier->name);
         gtk_box_pack_start (GTK_BOX (alt_click_hbox),
                             modifier->radio, FALSE, FALSE, 0);
-        
+
         gtk_widget_show (modifier->radio);
 }
 
@@ -509,7 +509,7 @@ reload_mouse_modifiers (void)
         gboolean have_super;
         int min_keycode, max_keycode;
         int mod_meta, mod_super, mod_hyper;
-  
+
         XDisplayKeycodes (gdk_display,
                           &min_keycode,
                           &max_keycode);
@@ -518,13 +518,13 @@ reload_mouse_modifiers (void)
                                       min_keycode,
                                       max_keycode - min_keycode,
                                       &keysyms_per_keycode);
-  
+
         modmap = XGetModifierMapping (gdk_display);
 
         have_super = FALSE;
         have_meta = FALSE;
         have_hyper = FALSE;
-  
+
         /* there are 8 modifiers, and the first 3 are shift, shift lock,
          * and control
          */
@@ -536,13 +536,13 @@ reload_mouse_modifiers (void)
                  * see if its keysym is one we're interested in
                  */
                 int keycode = modmap->modifiermap[i];
-          
+
                 if (keycode >= min_keycode &&
                     keycode <= max_keycode) {
                         int j = 0;
                         KeySym *syms = keymap + (keycode - min_keycode) * keysyms_per_keycode;
-                  
-                        while (j < keysyms_per_keycode) {              
+
+                        while (j < keysyms_per_keycode) {
                                 if (syms[j] == XK_Super_L ||
                                     syms[j] == XK_Super_R)
                                         mod_super = i / modmap->max_keypermod;
@@ -555,17 +555,17 @@ reload_mouse_modifiers (void)
                                 ++j;
                         }
                 }
-          
+
                 ++i;
         }
-        
+
         if ((1 << mod_meta) != Mod1Mask)
                 have_meta = TRUE;
-        if (mod_super != 0 && 
+        if (mod_super != 0 &&
             mod_super != mod_meta)
                 have_super = TRUE;
-        if (mod_hyper != 0 && 
-            mod_hyper != mod_meta && 
+        if (mod_hyper != 0 &&
+            mod_hyper != mod_meta &&
             mod_hyper != mod_super)
                 have_hyper = TRUE;
 
@@ -581,8 +581,8 @@ reload_mouse_modifiers (void)
         }
         g_free (mouse_modifiers);
         mouse_modifiers = NULL;
-                  
-  
+
+
         n_mouse_modifiers = 2; /* control, alt */
         if (have_super)
                 ++n_mouse_modifiers;
@@ -598,6 +598,7 @@ reload_mouse_modifiers (void)
         i = 0;
 
         mouse_modifiers[i].number = i;
+        /* translators: this is the Control key */
         mouse_modifiers[i].name = g_strdup (_("C_ontrol"));
         mouse_modifiers[i].value = "Control";
         ++i;
