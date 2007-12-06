@@ -361,8 +361,7 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
      * mime type, x pixel(s) by y pixel(s)
      * Folder: /path/to/file
      */
-    item->description =
-        g_markup_printf_escaped (_("<b>%s</b>\n"
+    item->description = g_markup_printf_escaped (_("<b>%s</b>\n"
                                    "%s, %d %s by %d %s\n"
                                    "Folder: %s"),
                                  item->name,
