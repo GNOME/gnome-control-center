@@ -1,5 +1,11 @@
 2007-12-09  Jens Granseuer  <jensgr@gmx.net>
 
+	* theme-thumbnail.c: (hbox_foreach): don't try to map invisible
+	widgets, e.g. the button icon when running with gtk-button-images=0
+	(bug #461298)
+
+2007-12-09  Jens Granseuer  <jensgr@gmx.net>
+
 	* theme-thumbnail.c: (create_meta_theme_pixbuf): free metacity theme
 	after use
 

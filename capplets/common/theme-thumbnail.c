@@ -121,10 +121,12 @@ static void
 hbox_foreach (GtkWidget *widget,
               gpointer   data)
 {
-  gtk_widget_realize (widget);
-  gtk_widget_map (widget);
-  gtk_widget_ensure_style (widget);
-  fake_expose_widget (widget, (GdkPixmap *) data, NULL);
+  if (GTK_WIDGET_VISIBLE (widget)) {
+    gtk_widget_realize (widget);
+    gtk_widget_map (widget);
+    gtk_widget_ensure_style (widget);
+    fake_expose_widget (widget, (GdkPixmap *) data, NULL);
+  }
 }
 
 static GdkPixbuf *
