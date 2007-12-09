@@ -329,6 +329,7 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
                         1.0, 1.0, GDK_INTERP_BILINEAR, 255);
   g_object_unref (icon);
   gtk_widget_destroy (window);
+  meta_theme_free (theme);
 
   return pixbuf;
 }
