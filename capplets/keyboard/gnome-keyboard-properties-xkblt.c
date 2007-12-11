@@ -179,6 +179,7 @@ static void
 xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 {
 	GtkWidget *add_layout_btn = WID ("xkb_layouts_add");
+	GtkWidget *print_layout_btn = WID ("xkb_layouts_print");
 	GtkWidget *del_layout_btn = WID ("xkb_layouts_remove");
 	GtkWidget *selected_layouts_tree = WID ("xkb_layouts_selected");
 
@@ -202,6 +203,8 @@ xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 				   || max_selected_layouts == 0));
 	gtk_widget_set_sensitive (del_layout_btn, (n_selected_layouts > 1)
 				  && (n_selected_selected_layouts > 0));
+	gtk_widget_set_sensitive (print_layout_btn,
+				  (n_selected_selected_layouts > 0));
 }
 
 void
@@ -353,6 +356,19 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 			  dialog);
 }
 
+gchar *xkb_layout_description_utf8 (const gchar *visible)
+{
+	char *l, *sl, *v, *sv;
+	char *v1, *utf_visible;
+	if (gkbd_keyboard_config_get_descriptions (config_registry, visible,
+						   &sl, &l, &sv, &v))
+		visible = gkbd_keyboard_config_format_full_layout (l, v);
+	v1 = g_strdup (visible);
+	utf_visible = g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
+	g_free (v1);
+	return utf_visible;
+}
+
 void
 xkb_layouts_fill_selected_tree (GladeXML * dialog)
 {
@@ -373,18 +389,9 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
 	for (cur_layout = layouts; cur_layout != NULL;
 	     cur_layout = cur_layout->next) {
 		GtkTreeIter iter;
-		char *l, *sl, *v, *sv;
-		char *v1, *utf_visible;
 		const char *visible = (char *) cur_layout->data;
+		gchar *utf_visible = xkb_layout_description_utf8 (visible);
 		gtk_list_store_append (list_store, &iter);
-		if (gkbd_keyboard_config_get_descriptions
-		    (config_registry, visible, &sl, &l, &sv, &v))
-			visible =
-			    gkbd_keyboard_config_format_full_layout (l, v);
-		v1 = g_strdup (visible);
-		utf_visible =
-		    g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL,
-				      NULL);
 		gtk_list_store_set (list_store, &iter,
 				    SEL_LAYOUT_TREE_COL_DESCRIPTION,
 				    utf_visible,
@@ -392,7 +399,6 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
 				    SEL_LAYOUT_TREE_COL_ID,
 				    cur_layout->data, -1);
 		g_free (utf_visible);
-		g_free (v1);
 	}
 
 	clear_xkb_elements_list (layouts);
@@ -434,6 +440,27 @@ add_selected_layout (GtkWidget * button, GladeXML * dialog)
 }
 
 static void
+print_selected_layout (GtkWidget * button, GladeXML * dialog)
+{
+	gint idx = find_selected_layout_idx (dialog);
+
+	if (idx != -1) {
+		GSList *layouts_list = xkb_layouts_get_selected_list ();
+		const gchar *id = g_slist_nth_data (layouts_list, idx);
+
+		GtkWidget *window = WID ("keyboard_dialog");
+		GtkWidget *kbdraw = xkb_layout_preview_create_widget (NULL);
+		g_object_ref_sink (kbdraw);
+		gtk_widget_set_parent (kbdraw, window);
+		xkb_layout_preview_set_drawing_layout (kbdraw, id);
+		xkb_layout_preview_print (kbdraw, GTK_WINDOW (window), id);
+		g_object_unref (kbdraw);
+
+		clear_xkb_elements_list (layouts_list);
+	}
+}
+
+static void
 remove_selected_layout (GtkWidget * button, GladeXML * dialog)
 {
 	gint idx = find_selected_layout_idx (dialog);
@@ -465,6 +492,8 @@ xkb_layouts_register_buttons_handlers (GladeXML * dialog)
 {
 	g_signal_connect (G_OBJECT (WID ("xkb_layouts_add")), "clicked",
 			  G_CALLBACK (add_selected_layout), dialog);
+	g_signal_connect (G_OBJECT (WID ("xkb_layouts_print")), "clicked",
+			  G_CALLBACK (print_selected_layout), dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_layouts_remove")), "clicked",
 			  G_CALLBACK (remove_selected_layout), dialog);
 }

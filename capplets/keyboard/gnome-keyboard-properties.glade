@@ -506,37 +506,61 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkHButtonBox" id="hbuttonbox2">
+                      <widget class="GtkHBox" id="hbox2">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="spacing">6</property>
-                        <property name="layout_style">GTK_BUTTONBOX_END</property>
                         <child>
-                          <widget class="GtkButton" id="xkb_layouts_remove">
+                          <widget class="GtkHButtonBox" id="hbuttonbox2">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="label">gtk-remove</property>
-                            <property name="use_stock">True</property>
-                            <property name="response_id">0</property>
+                            <property name="spacing">6</property>
+                            <property name="layout_style">GTK_BUTTONBOX_START</property>
+                            <child>
+                              <widget class="GtkButton" id="xkb_layouts_remove">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="label">gtk-remove</property>
+                                <property name="use_stock">True</property>
+                                <property name="response_id">0</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkButton" id="xkb_layouts_print">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="label">gtk-print</property>
+                                <property name="use_stock">True</property>
+                                <property name="response_id">0</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkButton" id="xkb_layouts_add">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="label" translatable="yes">_Add...</property>
+                                <property name="use_underline">True</property>
+                                <property name="response_id">0</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkButton" id="xkb_layouts_add">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="label" translatable="yes">_Add...</property>
-                            <property name="use_underline">True</property>
-                            <property name="response_id">0</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">2</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
@@ -551,7 +575,7 @@
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="pack_type">GTK_PACK_END</property>
-                            <property name="position">2</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </widget>
@@ -1062,10 +1086,20 @@
                 <property name="visible">True</property>
                 <property name="spacing">6</property>
                 <child>
-                  <widget class="GtkLabel" id="label2">
+                  <widget class="GtkHBox" id="hbox1">
                     <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Preview:</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <widget class="GtkLabel" id="label2">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Preview:</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                      </packing>
+                    </child>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
@@ -1096,9 +1130,22 @@
           </packing>
         </child>
         <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area2">
+          <widget class="GtkHButtonBox" id="hbtnBox">
             <property name="visible">True</property>
             <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <child>
+              <widget class="GtkButton" id="btnPrint">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="label">gtk-print</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">1</property>
+              </widget>
+              <packing>
+                <property name="secondary">True</property>
+              </packing>
+            </child>
             <child>
               <widget class="GtkButton" id="cancelbutton2">
                 <property name="visible">True</property>
@@ -1108,6 +1155,9 @@
                 <property name="use_stock">True</property>
                 <property name="response_id">-6</property>
               </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
             </child>
             <child>
               <widget class="GtkButton" id="btnOk">
@@ -1119,7 +1169,7 @@
                 <property name="response_id">-5</property>
               </widget>
               <packing>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </widget>

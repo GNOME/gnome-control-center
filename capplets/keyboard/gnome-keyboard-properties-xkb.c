@@ -170,6 +170,11 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 	g_signal_connect (peditor, "value-changed", (GCallback)
 			  chk_separate_group_per_window_toggled, dialog);
 
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+	if (strcmp (xkl_engine_get_backend_name (engine), "XKB"))
+#endif
+		gtk_widget_hide (WID ("xkb_layouts_print"));
+
 	xkb_layouts_prepare_selected_tree (dialog, changeset);
 	xkb_layouts_fill_selected_tree (dialog);
 

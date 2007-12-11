@@ -113,6 +113,7 @@ xkb_layout_chooser_enable_disable_buttons (GladeXML * chooser_dialog)
 	gtk_dialog_set_response_sensitive (GTK_DIALOG
 					   (CWID ("xkb_layout_chooser")),
 					   GTK_RESPONSE_OK, enable_ok);
+	gtk_widget_set_sensitive (CWID ("btnPrint"), enable_ok);
 }
 
 static void
@@ -355,6 +356,17 @@ xkl_layout_chooser_add_default_switcher_if_necessary (GSList *
 }
 
 static void
+xkb_layout_chooser_print (GladeXML * chooser_dialog)
+{
+	GtkWidget *chooser = CWID ("xkb_layout_chooser");
+	GtkWidget *kbdraw =
+	    GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
+	const char *id = xkb_layout_chooser_get_selected_id (chooser_dialog);
+	xkb_layout_preview_print (kbdraw,
+				  GTK_WINDOW (CWID ("xkb_layout_chooser")), id);
+}
+
+static void
 xkb_layout_chooser_response (GtkDialog * dialog,
 			     gint response, GladeXML * chooser_dialog)
 {
@@ -379,6 +391,11 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 
 			clear_xkb_elements_list (layouts_list);
 		}
+	} else if (response == gtk_dialog_get_response_for_widget
+		   (dialog, CWID ("btnPrint"))) {
+		xkb_layout_chooser_print (chooser_dialog);
+		g_signal_stop_emission_by_name (dialog, "response");
+		return;
 	}
 
 	gtk_window_get_position (GTK_WINDOW (dialog), &rect.x, &rect.y);
@@ -386,7 +403,6 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 			     &rect.height);
 	gkbd_preview_save_position (&rect);
 }
-
 
 void
 xkb_layout_choose (GladeXML * dialog)
@@ -413,10 +429,14 @@ xkb_layout_choose (GladeXML * dialog)
 		gtk_container_add (GTK_CONTAINER (CWID ("previewFrame")),
 				   kbdraw);
 		gtk_widget_show_all (kbdraw);
+		gtk_button_box_set_child_secondary (GTK_BUTTON_BOX
+						    (CWID ("hbtnBox")),
+						    CWID ("btnPrint"), TRUE);
 	} else
 #endif
 	{
 		gtk_widget_hide_all (CWID ("vboxPreview"));
+		gtk_widget_hide (CWID ("btnPrint"));
 	}
 
 	g_signal_connect (G_OBJECT (chooser),

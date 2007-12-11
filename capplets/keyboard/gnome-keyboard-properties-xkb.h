@@ -56,6 +56,8 @@ extern void clear_xkb_elements_list (GSList * list);
 
 extern char *xci_desc_to_utf8 (XklConfigItem * ci);
 
+extern gchar *xkb_layout_description_utf8 (const gchar *visible);
+
 extern void enable_disable_restoring (GladeXML * dialog);
 
 extern void preview_toggled (GladeXML * dialog, GtkWidget * button);
@@ -85,6 +87,13 @@ extern GtkWidget *xkb_layout_preview_create_widget (GladeXML *
 						    chooser_dialog);
 
 extern void xkb_layout_preview_update (GladeXML * chooser_dialog);
+
+extern void xkb_layout_preview_set_drawing_layout (GtkWidget   *kbdraw,
+                                                   const gchar *id);
+
+extern void xkb_layout_preview_print (GtkWidget *kbdraw,
+                                      GtkWindow *parent_window,
+                                      const gchar *id);
 
 extern gchar *xkb_layout_chooser_get_selected_id (GladeXML *
 						  chooser_dialog);
