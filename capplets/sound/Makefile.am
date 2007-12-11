@@ -34,6 +34,8 @@ icons24dir = $(datadir)/icons/hicolor/24x24/apps
 dist_icons24_DATA = icons/24x24/gnome-sound-properties.png
 icons32dir = $(datadir)/icons/hicolor/32x32/apps
 dist_icons32_DATA = icons/32x32/gnome-sound-properties.png
+icons48dir = $(datadir)/icons/hicolor/48x48/apps
+dist_icons48_DATA = icons/48x48/gnome-sound-properties.png
 iconssvgdir = $(datadir)/icons/hicolor/scalable/apps
 dist_iconssvg_DATA = icons/scalable/gnome-sound-properties.svg
 
