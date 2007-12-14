@@ -163,7 +163,7 @@ xkb_layout_preview_draw_page (GtkPrintOperation         *operation,
 
 	description = xkb_layout_description_utf8 (data->id);
 	header = g_strdup_printf
-		(_("%s keyboard drawn by Gnome Control Center\n"
+		(_("Keyboard layout \"%s\"\n"
 		   "Copyright &#169; X.Org Foundation and "
 		   "XKeyboardConfig contributors\n"
 		   "For licensing see package metadata"), description);
@@ -195,7 +195,7 @@ xkb_layout_preview_print (GtkWidget *kbdraw, GtkWindow *parent_window,
 
 	print = gtk_print_operation_new ();
 
-	if (settings != NULL) 
+	if (settings != NULL)
 		gtk_print_operation_set_print_settings (print, settings);
 
 	g_signal_connect (print, "begin_print",
