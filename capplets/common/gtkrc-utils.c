@@ -93,9 +93,13 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 		filename = files->data;
 		files = g_slist_delete_link (files, files);
 
+		if (filename == NULL)
+			continue;
+
 		if (g_slist_find_custom (read_files, filename, (GCompareFunc) str_nequal))
 		{
 			g_warning ("Recursion in the gtkrc detected!");
+			g_free (filename);
 			continue; /* skip this file since we've done it before... */
 		}
 
@@ -104,8 +108,7 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 		file = g_open (filename, O_RDONLY);
 		if (file == -1)
 		{
-			g_warning ("Could not open file \"%s\"",
-				   filename ? filename : "(null)");
+			g_warning ("Could not open file \"%s\"", filename);
 		}
 		else
 		{
@@ -182,9 +185,13 @@ gtkrc_get_color_scheme (gchar *filename)
 		filename = files->data;
 		files = g_slist_delete_link (files, files);
 
+		if (filename == NULL)
+			continue;
+
 		if (g_slist_find_custom (read_files, filename, (GCompareFunc) str_nequal))
 		{
 			g_warning ("Recursion in the gtkrc detected!");
+			g_free (filename);
 			continue; /* skip this file since we've done it before... */
 		}
 
@@ -193,8 +200,7 @@ gtkrc_get_color_scheme (gchar *filename)
 		file = g_open (filename, O_RDONLY);
 		if (file == -1)
 		{
-			g_warning ("Could not open file \"%s\"",
-				   filename ? filename : "(null)");
+			g_warning ("Could not open file \"%s\"", filename);
 		}
 		else
 		{

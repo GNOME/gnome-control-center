@@ -1,3 +1,9 @@
+2007-12-14  Jens Granseuer  <jensgr@gmx.net>
+
+	* gtkrc-utils.c: (gtkrc_get_details), (gtkrc_get_color_scheme): don't
+	even try to open NULL filenames, and don't leak filenames when
+	detecting recursions
+
 2007-12-09  Jens Granseuer  <jensgr@gmx.net>
 
 	* theme-thumbnail.c: (hbox_foreach): don't try to map invisible
