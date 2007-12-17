@@ -450,6 +450,7 @@ print_selected_layout (GtkWidget * button, GladeXML * dialog)
 	if (idx != -1) {
 		GSList *layouts_list = xkb_layouts_get_selected_list ();
 		const gchar *id = g_slist_nth_data (layouts_list, idx);
+		char *descr = xkb_layout_description_utf8 (id);
 
 		GtkWidget *window = WID ("keyboard_dialog");
 		GtkWidget *kbdraw =
@@ -459,8 +460,9 @@ print_selected_layout (GtkWidget * button, GladeXML * dialog)
 		xkb_layout_preview_set_drawing_layout (kbdraw, id);
 		gkbd_keyboard_drawing_print (GKBD_KEYBOARD_DRAWING
 					     (kbdraw), GTK_WINDOW (window),
-					     id);
+					     descr);
 		g_object_unref (kbdraw);
+		g_free (descr);
 
 		clear_xkb_elements_list (layouts_list);
 	}
