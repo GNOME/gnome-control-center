@@ -30,10 +30,10 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "capplet-util.h"
-
+#include <libgnomekbd/gkbd-keyboard-drawing.h>
 #include <libgnomekbd/gkbd-util.h>
 
+#include "capplet-util.h"
 #include "gnome-keyboard-properties-xkb.h"
 
 #define GROUP_SWITCHERS_GROUP "grp"
@@ -361,9 +361,14 @@ xkb_layout_chooser_print (GladeXML * chooser_dialog)
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
 	GtkWidget *kbdraw =
 	    GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
-	const char *id = xkb_layout_chooser_get_selected_id (chooser_dialog);
-	xkb_layout_preview_print (kbdraw,
-				  GTK_WINDOW (CWID ("xkb_layout_chooser")), id);
+	const char *id =
+	    xkb_layout_chooser_get_selected_id (chooser_dialog);
+	char *descr = xkb_layout_description_utf8 (id);
+	gkbd_keyboard_drawing_print (GKBD_KEYBOARD_DRAWING (kbdraw),
+				     GTK_WINDOW (CWID
+						 ("xkb_layout_chooser")),
+				     descr);
+	g_free (descr);
 }
 
 static void
@@ -431,7 +436,8 @@ xkb_layout_choose (GladeXML * dialog)
 		gtk_widget_show_all (kbdraw);
 		gtk_button_box_set_child_secondary (GTK_BUTTON_BOX
 						    (CWID ("hbtnBox")),
-						    CWID ("btnPrint"), TRUE);
+						    CWID ("btnPrint"),
+						    TRUE);
 	} else
 #endif
 	{

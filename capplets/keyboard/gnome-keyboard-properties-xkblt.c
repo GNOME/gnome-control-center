@@ -29,11 +29,12 @@
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
-#include "capplet-util.h"
-
 #include <libgnomekbd/gkbd-desktop-config.h>
+#include <libgnomekbd/gkbd-keyboard-drawing.h>
 
+#include "capplet-util.h"
 #include "gnome-keyboard-properties-xkb.h"
+
 
 #define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
 #define SEL_LAYOUT_TREE_COL_DEFAULT 1
@@ -356,15 +357,17 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 			  dialog);
 }
 
-gchar *xkb_layout_description_utf8 (const gchar *visible)
+gchar *
+xkb_layout_description_utf8 (const gchar * visible)
 {
 	char *l, *sl, *v, *sv;
 	char *v1, *utf_visible;
-	if (gkbd_keyboard_config_get_descriptions (config_registry, visible,
-						   &sl, &l, &sv, &v))
+	if (gkbd_keyboard_config_get_descriptions
+	    (config_registry, visible, &sl, &l, &sv, &v))
 		visible = gkbd_keyboard_config_format_full_layout (l, v);
 	v1 = g_strdup (visible);
-	utf_visible = g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
+	utf_visible =
+	    g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
 	g_free (v1);
 	return utf_visible;
 }
@@ -449,11 +452,14 @@ print_selected_layout (GtkWidget * button, GladeXML * dialog)
 		const gchar *id = g_slist_nth_data (layouts_list, idx);
 
 		GtkWidget *window = WID ("keyboard_dialog");
-		GtkWidget *kbdraw = xkb_layout_preview_create_widget (NULL);
+		GtkWidget *kbdraw =
+		    xkb_layout_preview_create_widget (NULL);
 		g_object_ref_sink (kbdraw);
 		gtk_widget_set_parent (kbdraw, window);
 		xkb_layout_preview_set_drawing_layout (kbdraw, id);
-		xkb_layout_preview_print (kbdraw, GTK_WINDOW (window), id);
+		gkbd_keyboard_drawing_print (GKBD_KEYBOARD_DRAWING
+					     (kbdraw), GTK_WINDOW (window),
+					     id);
 		g_object_unref (kbdraw);
 
 		clear_xkb_elements_list (layouts_list);

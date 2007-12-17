@@ -91,10 +91,6 @@ extern void xkb_layout_preview_update (GladeXML * chooser_dialog);
 extern void xkb_layout_preview_set_drawing_layout (GtkWidget   *kbdraw,
                                                    const gchar *id);
 
-extern void xkb_layout_preview_print (GtkWidget *kbdraw,
-                                      GtkWindow *parent_window,
-                                      const gchar *id);
-
 extern gchar *xkb_layout_chooser_get_selected_id (GladeXML *
 						  chooser_dialog);
 

@@ -28,10 +28,10 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "capplet-util.h"
-
-#include "gnome-keyboard-properties-xkb.h"
 #include <libgnomekbd/gkbd-keyboard-drawing.h>
+
+#include "capplet-util.h"
+#include "gnome-keyboard-properties-xkb.h"
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 #include "X11/XKBlib.h"
@@ -127,93 +127,4 @@ xkb_layout_preview_set_drawing_layout (GtkWidget * kbdraw, const gchar * id)
 		g_object_unref (G_OBJECT (data));
 	}
 #endif
-}
-
-typedef struct {
-	GtkWidget *kbdraw;
-	const gchar *id;
-} XkbLayoutPreviewPrintData;
-
-
-static void
-xkb_layout_preview_begin_print (GtkPrintOperation         *operation,
-				GtkPrintContext           *context,
-				XkbLayoutPreviewPrintData *data)
-{
-	gtk_print_operation_set_n_pages (operation, 1);
-}
-
-static void
-xkb_layout_preview_draw_page (GtkPrintOperation         *operation,
-			      GtkPrintContext           *context,
-			      gint                       page_nr,
-			      XkbLayoutPreviewPrintData *data)
-{
-	cairo_t *cr = gtk_print_context_get_cairo_context (context);
-	PangoLayout *layout = gtk_print_context_create_pango_layout (context);
-	PangoFontDescription *desc =
-		pango_font_description_from_string ("sans 8");
-	gdouble width = gtk_print_context_get_width (context);
-	gdouble height = gtk_print_context_get_height (context);
-	gdouble dpi_x = gtk_print_context_get_dpi_x (context);
-	gdouble dpi_y = gtk_print_context_get_dpi_y (context);
-	gchar *header, *description;
-
-	gtk_print_operation_set_unit (operation, GTK_PIXELS);
-
-	description = xkb_layout_description_utf8 (data->id);
-	header = g_strdup_printf
-		(_("Keyboard layout \"%s\"\n"
-		   "Copyright &#169; X.Org Foundation and "
-		   "XKeyboardConfig contributors\n"
-		   "For licensing see package metadata"), description);
-	g_free (description);
-	pango_layout_set_markup (layout, header, -1);
-	pango_layout_set_font_description (layout, desc);
-	pango_font_description_free (desc);
-	pango_layout_set_width (layout, pango_units_from_double (width));
-	pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
-	cairo_set_source_rgb (cr, 0, 0, 0);
-	cairo_move_to (cr, 0, 0);
-	pango_cairo_show_layout (cr, layout);
-
-	gkbd_keyboard_drawing_render (GKBD_KEYBOARD_DRAWING (data->kbdraw),
-				      cr, layout,
-				      0.0, 0.0, width, height, dpi_x, dpi_y);
-
-	g_object_unref (layout);
-}
-
-void
-xkb_layout_preview_print (GtkWidget *kbdraw, GtkWindow *parent_window,
-			  const gchar *id)
-{
-	GtkPrintOperation *print;
-	GtkPrintOperationResult res;
-	static GtkPrintSettings *settings = NULL;
-	XkbLayoutPreviewPrintData data = { kbdraw, id };
-
-	print = gtk_print_operation_new ();
-
-	if (settings != NULL)
-		gtk_print_operation_set_print_settings (print, settings);
-
-	g_signal_connect (print, "begin_print",
-			  G_CALLBACK (xkb_layout_preview_begin_print), &data);
-	g_signal_connect (print, "draw_page",
-			  G_CALLBACK (xkb_layout_preview_draw_page), &data);
-
-	res = gtk_print_operation_run (print,
-				       GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
-				       parent_window,
-				       NULL);
-
-	if (res == GTK_PRINT_OPERATION_RESULT_APPLY) {
-		if (settings != NULL)
-			g_object_unref (settings);
-		settings = gtk_print_operation_get_print_settings (print);
-		g_object_ref (settings);
-	}
-
-	g_object_unref (print);
 }
