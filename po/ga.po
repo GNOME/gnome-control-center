@@ -1,19 +1,22 @@
-# Irish translation of glib strings
-# Copyright (C)  2002-2004 Free Software Foundation, Inc.
+# Irish translations for gnome-control-center package.
+# Copyright (C) 2002-2007 Free Software Foundation, Inc.
 # This file is distributed under the GPL.
 # Alastair McKinstry, <mckinstry@debian.org>, 2003.
+# Seán de Búrca, <leftmostcat@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glib HEAD \n"
+"Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-17 22:10+0200\n"
-"PO-Revision-Date: 2004-03-21 21:46+0000\n"
-"Last-Translator: Alastair McKinstry <mckinstry@debian.org>\n"
+"POT-Creation-Date: 2007-12-20 15:24-0700\n"
+"PO-Revision-Date: 2007-12-20 15:24-0700\n"
+"Last-Translator: Seán de Búrca <leftmostcat@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : (n%10==1 || n%10==2) ? 1 : (n%"
+"10>=3 && n%10<= 6) ? 2 : ((n%10>=7 && n%10<=9) || n==10) ? 3 : 4;\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -24,18 +27,16 @@ msgid "Width of border around the label and image in the alert dialog"
 msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:124
-#, fuzzy
 msgid "Alert Type"
-msgstr "Saghas Comhad nua"
+msgstr "Cineál Foláirimh"
 
 #: ../capplets/about-me/eel-alert-dialog.c:125
 msgid "The type of alert"
 msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:133
-#, fuzzy
 msgid "Alert Buttons"
-msgstr "Cnaipí"
+msgstr "Cnaipí Foláirimh"
 
 #: ../capplets/about-me/eel-alert-dialog.c:134
 msgid "The buttons shown in the alert dialog"
@@ -45,444 +46,460 @@ msgstr ""
 msgid "Show more _details"
 msgstr ""
 
-#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
-#: ../capplets/about-me/gnome-about-me.glade.h:14
-#, fuzzy
-msgid "About Me"
-msgstr "_Faoi"
-
-#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
-#, fuzzy
-msgid "Set your personal information"
-msgstr "Eolas faoi an saghas MIME"
-
-#: ../capplets/about-me/gnome-about-me.c:554
-#, fuzzy
+#: ../capplets/about-me/gnome-about-me.c:665
 msgid "Select Image"
-msgstr "Dealaigh"
+msgstr "Roghnaigh Íomhá"
 
-#: ../capplets/about-me/gnome-about-me.c:556
-#, fuzzy
+#: ../capplets/about-me/gnome-about-me.c:667
 msgid "No Image"
-msgstr "Íomhaí"
+msgstr "Gan Íomhá"
 
-#: ../capplets/about-me/gnome-about-me.c:706
+#: ../capplets/about-me/gnome-about-me.c:695
+#: ../capplets/appearance/appearance-desktop.c:1100
+msgid "Images"
+msgstr "Íomhánna"
+
+#: ../capplets/about-me/gnome-about-me.c:699
+#: ../capplets/appearance/theme-installer.c:695
+msgid "All Files"
+msgstr "Gach Comhad"
+
+#: ../capplets/about-me/gnome-about-me.c:836
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
 msgstr ""
 
-#: ../capplets/about-me/gnome-about-me.c:727
+#: ../capplets/about-me/gnome-about-me.c:857
 msgid "Unable to open address book"
 msgstr ""
 
-#: ../capplets/about-me/gnome-about-me.c:739
+#: ../capplets/about-me/gnome-about-me.c:871
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr ""
 
-#: ../capplets/about-me/gnome-about-me.c:770
-#: ../capplets/about-me/gnome-about-me.c:772
-#, fuzzy, c-format
+#: ../capplets/about-me/gnome-about-me.c:901
+#: ../capplets/about-me/gnome-about-me.c:903
+#, c-format
 msgid "About %s"
-msgstr "_Faoi"
+msgstr "Maidir le %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:479
-msgid "Old password is incorrect, please retype it"
-msgstr ""
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
+#: ../capplets/about-me/gnome-about-me.glade.h:12
+msgid "About Me"
+msgstr "Maidir Liom"
 
-#: ../capplets/about-me/gnome-about-me-password.c:112
-msgid "System error has occurred"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:113
-msgid "Could not run /usr/bin/passwd"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:114
-msgid "Unable to launch backend"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:117
-msgid "Unexpected error has occurred"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:315
-msgid "Password is too short"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:318
-#: ../capplets/about-me/gnome-about-me-password.c:321
-msgid "Password is too simple"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:324
-msgid "Old and new passwords are too similar"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:328
-msgid "Old and new password are the same"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:406
-#, fuzzy
-msgid "Please type the passwords."
-msgstr "_Passfhocal:"
-
-#: ../capplets/about-me/gnome-about-me-password.c:414
-msgid "Please type the password again, it is wrong."
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:417
-msgid "Click on Change Password to change the password."
-msgstr ""
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
+msgid "Set your personal information"
+msgstr "Socraigh d'eolas pearsanta"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid " "
-msgstr ""
+msgid "<b>Email</b>"
+msgstr "<b>Ríomhphost</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "     "
+msgid "<b>Home</b>"
+msgstr "<b>Baile</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:3
-#, fuzzy
-msgid "<b>Email</b>"
-msgstr "<b>Dátaí</b>"
+msgid "<b>Instant Messaging</b>"
+msgstr "<b>Cur Teachtaireachtaí Meandaracha</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:4
-#, fuzzy
-msgid "<b>Home</b>"
-msgstr "<b>Uimhireacha</b>"
+msgid "<b>Job</b>"
+msgstr "<b>Post</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:5
-#, fuzzy
-msgid "<b>Instant Messaging</b>"
-msgstr "<b>Leideanna</b>:"
+msgid "<b>Telephone</b>"
+msgstr "<b>Teileafón</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:6
-#, fuzzy
-msgid "<b>Job</b>"
-msgstr "<b>Uimhireacha</b>"
+msgid "<b>Web</b>"
+msgstr "<b>Gréasán</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr ""
+msgid "<b>Work</b>"
+msgstr "<b>Obair</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:8
-#, fuzzy
-msgid "<b>Telephone</b>"
-msgstr "<b>Luas</b>"
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Athraigh d'fhocal faire</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:9
-#, fuzzy
-msgid "<b>Web</b>"
-msgstr "<b>Luas</b>"
+msgid "A_IM/iChat:"
+msgstr "A_IM/iChat:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:10
-#, fuzzy
-msgid "<b>Work</b>"
-msgstr "<b>Tacaíocht</b>"
+msgid "A_ddress:"
+msgstr "_Seoladh:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
-msgid "A_IM/iChat:"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me.glade.h:12
-#, fuzzy
-msgid "A_ddress:"
-msgstr "_Suim:"
+msgid "A_ssistant:"
+msgstr "_Cúntóir:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:13
-msgid "A_ssistant:"
-msgstr ""
+msgid "Address"
+msgstr "Seoladh"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:14
+msgid "C_ity:"
+msgstr "C_athair:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:15
-#, fuzzy
-msgid "Address"
-msgstr "_Suim:"
+msgid "C_ompany:"
+msgstr "C_omhlacht:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:16
-#, fuzzy
-msgid "C_ity:"
-msgstr "_Stíl:"
+msgid "Cale_ndar:"
+msgstr "_Féilire:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:17
-#, fuzzy
-msgid "C_ompany:"
-msgstr "O_rdú:"
+msgid "Change Passwo_rd..."
+msgstr "Athraigh _Focal Faire..."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:18
-msgid "Cale_ndar:"
-msgstr ""
+msgid "Change pa_ssword"
+msgstr "Athraigh fo_cal faire"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:19
-#, fuzzy
-msgid "Change Passwo_rd..."
-msgstr "_Passfhocal:"
+msgid "Change password"
+msgstr "Athraigh focal faire"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-#, fuzzy
-msgid "Change Password"
-msgstr "_Passfhocal:"
+msgid "Ci_ty:"
+msgstr "Catha_ir:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
-#, fuzzy
-msgid "Ci_ty:"
-msgstr "_Stíl:"
+msgid "Co_untry:"
+msgstr "_Tír:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:22
-#, fuzzy
-msgid "Co_untry:"
-msgstr "Smacht"
+msgid "Contact"
+msgstr "Teagmháil"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:23
-msgid "Contact"
-msgstr ""
+msgid "Cou_ntry:"
+msgstr "Tí_r:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:24
-#, fuzzy
-msgid "Cou_ntry:"
-msgstr "Smacht"
+msgid "Current _password:"
+msgstr "_Focal faire reatha:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Full Name"
-msgstr ""
+msgstr "Ainm Iomlán"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:26
-#, fuzzy
 msgid "Hom_e:"
-msgstr "Ai_nm:"
+msgstr "Bail_e:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "IC_Q:"
-msgstr ""
+msgstr "IC_Q:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "M_SN:"
-msgstr ""
+msgstr "M_SN:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:29
-#, fuzzy
-msgid "Old pa_ssword:"
-msgstr "_Passfhocal:"
+msgid "P.O. _box:"
+msgstr "_Bosca O.P.:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:30
-msgid "P.O. _box:"
-msgstr ""
+msgid "P._O. box:"
+msgstr "Bosca _O.P.:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:31
-msgid "P._O. box:"
-msgstr ""
+msgid "Personal Info"
+msgstr "Eolas Pearsanta"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:32
-#, fuzzy
-msgid "Personal Info"
-msgstr "Clófhoireann an _Terminéal"
+#: ../capplets/about-me/gnome-about-me-password.c:934
+msgid ""
+"Please type your password again in the <b>Retype new password</b> field."
+msgstr ""
 
 #: ../capplets/about-me/gnome-about-me.glade.h:33
-msgid "State/Pro_vince:"
+msgid "Select your photo"
 msgstr ""
 
 #: ../capplets/about-me/gnome-about-me.glade.h:34
-#, fuzzy
-msgid "User name:"
-msgstr "_Úsáideoir"
+msgid "State/Pro_vince:"
+msgstr "Stát/Cúi_ge:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:35
-msgid "Web _log:"
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
 msgstr ""
-
-#: ../capplets/about-me/gnome-about-me.glade.h:36
-#, fuzzy
-msgid "Wor_k:"
-msgstr "Dá_th:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:37
-#, fuzzy
-msgid "Work _fax:"
-msgstr "Dá_th:"
+msgid "User name:"
+msgstr "Ainm úsáideora:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:38
-msgid "Zip/_Postal code:"
-msgstr ""
+msgid "Web _log:"
+msgstr "_Loga Gréasáin:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:39
-#, fuzzy
-msgid "_Address:"
-msgstr "_Suim:"
+msgid "Wor_k:"
+msgstr "_Obair:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:40
-msgid "_Department:"
-msgstr ""
+msgid "Work _fax:"
+msgstr "_Facs oibre:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:41
-msgid "_Groupwise:"
-msgstr ""
+msgid "Zip/_Postal code:"
+msgstr "Cód Zip/_poist:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:42
-#, fuzzy
-msgid "_Home page:"
-msgstr "Ai_nm:"
+msgid "_Address:"
+msgstr "_Seoladh:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:43
-#, fuzzy
-msgid "_Home:"
-msgstr "Ai_nm:"
+msgid "_Authenticate"
+msgstr "_Fíordheimhnigh"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:44
-msgid "_Jabber:"
-msgstr ""
+msgid "_Department:"
+msgstr "_Roinn:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:45
-#, fuzzy
-msgid "_Manager:"
-msgstr "Bainisteoir Fhuinneoga"
+msgid "_Groupwise:"
+msgstr "_Groupwise:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:46
-#, fuzzy
-msgid "_Mobile:"
-msgstr "_Comhad"
+msgid "_Home page:"
+msgstr "Leathanach _baile:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:47
-#, fuzzy
-msgid "_New password:"
-msgstr "_Passfhocal:"
+msgid "_Home:"
+msgstr "_Baile:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:48
-#, fuzzy
-msgid "_Profession:"
-msgstr "Leagan:"
+msgid "_Jabber:"
+msgstr "_Jabber:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:49
-#, fuzzy
-msgid "_Retype new password:"
-msgstr "_Passfhocal:"
+msgid "_Manager:"
+msgstr "_Bainisteoir:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:50
-msgid "_State/Province:"
-msgstr ""
+msgid "_Mobile:"
+msgstr "Fón _Póca:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:51
-#, fuzzy
-msgid "_Title:"
-msgstr "_Leac"
+msgid "_New password:"
+msgstr "Focal faire _nua:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:52
-#, fuzzy
-msgid "_Work:"
-msgstr "Dá_th:"
+msgid "_Profession:"
+msgstr "_Gairm:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:53
-msgid "_Yahoo:"
-msgstr ""
+msgid "_Retype new password:"
+msgstr "Iontráil focal faire nua _arís:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:54
+msgid "_State/Province:"
+msgstr "Stát/Cúige:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:55
+msgid "_Title:"
+msgstr "_Teideal:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:56
+msgid "_Work:"
+msgstr "_Obair:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:57
+msgid "_Yahoo:"
+msgstr "_Yahoo:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Zip/Postal code:"
+msgstr "Cód _Zip/poist:"
+
+#: ../capplets/about-me/gnome-about-me-password.c:162
+msgid "Child exited unexpectedly"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:297
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:310
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:409
+msgid "Authenticated!"
+msgstr "Fíordheimhnithe!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:475
+#: ../capplets/about-me/gnome-about-me-password.c:551
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:477
+msgid "That password was incorrect."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:524
+msgid "Your password has been changed."
+msgstr ""
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:534
+#, c-format
+msgid "System error: %s."
+msgstr "Earráid córais: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:537
+msgid "The password is too short."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:540
+msgid "The password is too simple."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:543
+msgid "The old and new passwords are too similar."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:545
+msgid "The new password must contain numeric or special character(s)."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:548
+msgid "The old and new passwords are the same."
+msgstr ""
+
+#. translators: Unable to launch <program>: <error message>
+#: ../capplets/about-me/gnome-about-me-password.c:818
+#, c-format
+msgid "Unable to launch %s: %s"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:821
+msgid "Unable to launch backend"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:822
+msgid "A system error has occurred"
+msgstr ""
+
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:842
+msgid "Checking password..."
+msgstr "Focal faire á sheiceáil..."
+
+#: ../capplets/about-me/gnome-about-me-password.c:928
+msgid "Click <b>Change password</b> to change your password."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:931
+msgid "Please type your password in the <b>New password</b> field."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:937
+msgid "The two passwords are not equal."
 msgstr ""
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-msgid "<b>Applications</b>"
-msgstr "<b>Feidhmchláranna</b>"
+msgid "<b>Assistive Technologies</b>"
+msgstr "<b>Theicneolaíochtaí Oiriúnaitheach</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-msgid "<b>Support</b>"
-msgstr "<b>Tacaíocht</b>"
+msgid "<b>Preferences</b>"
+msgstr "<b>Sainroghanna</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
-msgid ""
-"<small><i><b>Note:</b> Changes to this setting will not take effect until "
-"you next log in.</i></small>"
+msgid "Accessible Lo_gin"
 msgstr ""
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 msgid "Assistive Technology Preferences"
-msgstr ""
+msgstr "Sainroghanna Theicneolaíocht Oiriúnaitheach"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
+msgid ""
+"Changes to enable assistive technologies will not take effect until your "
+"next log in."
+msgstr ""
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
 msgstr "Dún agus _Logáil Amach"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
-msgid "Start these assistive technologies every time you log in:"
-msgstr ""
-
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
-msgid "_Enable assistive technologies"
+msgid "Jump to Preferred Applications dialog"
 msgstr ""
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
-msgid "_Magnifier"
+msgid "Jump to the Accessible Login dialog"
 msgstr ""
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
-msgid "_On-screen keyboard"
+msgid "Jump to the Keyboard Accessibility dialog"
 msgstr ""
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-msgid "_Screenreader"
-msgstr "Léitheoir-_Scáthlán"
+msgid "_Enable assistive technologies"
+msgstr ""
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+msgid "_Keyboard Accessibility"
+msgstr ""
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+msgid "_Preferred Applications"
+msgstr "Feidhmchláir de _Rogha"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
-msgid "Assistive Technology Support"
-msgstr ""
+msgid "Assistive Technology"
+msgstr "Teicneolaíocht Oiriúnaitheach"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr ""
 
-#: ../capplets/accessibility/at-properties/main.c:60
-msgid ""
-"No Assistive Technology is available on your system.  The 'gok' package must "
-"be installed in order to get on-screen keyboard support, and the "
-"'gnopernicus' package must be installed for screenreading and magnifying "
-"capabilities."
-msgstr ""
-
-#: ../capplets/accessibility/at-properties/main.c:62
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'gok' package must be installed in order to get on-screen keyboard support."
-msgstr ""
-
-#: ../capplets/accessibility/at-properties/main.c:64
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'gnopernicus' package must be installed for screenreading and magnifying "
-"capabilities."
-msgstr ""
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:241
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:250
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:398
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:346
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:407
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:435
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:444
 msgid "Import Feature Settings File"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:439
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:448
 msgid "_Import"
-msgstr ""
+msgstr "_Iompórtáil"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Miarchlar"
+msgid "Keyboard Accessibility"
+msgstr "Inrochtaineacht Mhéarchláir"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
@@ -494,283 +511,793 @@ msgid ""
 "accessibility features will not operate without it."
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Features</b>"
 msgstr "<b>Eannaghaithe</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Toggle Keys</b>"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Basic"
 msgstr "Bunúsach"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Beep if key is re_jected"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Beep when _features turned on or off from keyboard"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "Beep when _modifier is pressed"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Beep when key is:"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Del_ay:"
 msgstr "M_oill:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Delay between keypress and pointer mo_vement:"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Disa_ble if two keys pressed together"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "E_nable Toggle Keys"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
 msgid "Filters"
 msgstr "na Scagaire"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "I_gnore duplicate keypresses within:"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Ma_ximum pointer speed:"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Mouse Keys"
 msgstr "Cnaipe an Luchóg"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "Mouse _Preferences..."
-msgstr "na _Tosaíocht ag an Luchóg..."
+msgstr "_Sainroghanna an Luch..."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "S_peed:"
 msgstr "L_uas:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid "Time to acce_lerate to maximum speed:"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "_Disable if unused for:"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "_Enable keyboard accessibility features"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Import Feature Settings..."
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Only accept keys held for:"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Type to test settings:"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "_accepted"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
 msgid "_pressed"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
 msgid "_rejected"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
 msgid "characters/second"
-msgstr ""
+msgstr "carachtar/soicind"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "milliseconds"
 msgstr ""
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 msgid "pixels/second"
-msgstr "pixels/soicind"
+msgstr "picteilín/soicind"
 
-#. set the timeout value  label with correct value of timeout
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:885
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "soicind"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr ""
-
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "Cúlra na Deasc"
-
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>_Paipéir balla</>"
-
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>Dathanna na _Deasc</b>"
-
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "Tosaíocht le haighaidh an Cúlra"
-
-#: ../capplets/background/gnome-background-properties.glade.h:4
-msgid "Open a dialog to specify the color"
-msgstr ""
-
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "_Suimigh Paipéir balla"
-
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Style:"
-msgstr "_Stíl:"
-
-#: ../capplets/background/gnome-wp-capplet.c:74
-#: ../capplets/common/capplet-util.c:340
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Bhí earraid ag taispeáin cabhair: %s"
-
-#: ../capplets/background/gnome-wp-capplet.c:1042
-#: ../capplets/background/gnome-wp-capplet.c:1060
-msgid "Centered"
-msgstr "Sa Lár"
-
-#: ../capplets/background/gnome-wp-capplet.c:1068
-#: ../capplets/background/gnome-wp-capplet.c:1085
-msgid "Fill Screen"
-msgstr ""
-
-#: ../capplets/background/gnome-wp-capplet.c:1093
-#: ../capplets/background/gnome-wp-capplet.c:1110
-msgid "Scaled"
-msgstr ""
-
-#: ../capplets/background/gnome-wp-capplet.c:1118
-#: ../capplets/background/gnome-wp-capplet.c:1135
-msgid "Tiled"
-msgstr ""
-
-#: ../capplets/background/gnome-wp-capplet.c:1159
-#: ../capplets/background/gnome-wp-capplet.c:1168
-msgid "Solid Color"
-msgstr "Dáth cruanach"
-
-#: ../capplets/background/gnome-wp-capplet.c:1176
-#: ../capplets/background/gnome-wp-capplet.c:1185
-msgid "Horizontal Gradient"
-msgstr "Grádán Cothromanach"
-
-#: ../capplets/background/gnome-wp-capplet.c:1193
-#: ../capplets/background/gnome-wp-capplet.c:1202
-msgid "Vertical Gradient"
-msgstr "Grádán Ingearach"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1251
-#, fuzzy
+#: ../capplets/appearance/appearance-desktop.c:1068
 msgid "Add Wallpaper"
-msgstr "Suimigh Paipéir balla"
+msgstr "Cuir Cúlbhrat Deisce Leis"
 
-#: ../capplets/background/gnome-wp-info.c:57
-msgid "No Wallpaper"
-msgstr "Paipiar balla"
+#: ../capplets/appearance/appearance-desktop.c:1104
+msgid "All files"
+msgstr "Gach comhad"
 
-#: ../capplets/background/gnome-wp-item.c:292
-#: ../capplets/background/gnome-wp-item.c:294
-msgid "pixel"
-msgid_plural "pixels"
+#: ../capplets/appearance/appearance-font.c:494
+msgid "Font may be too large"
+msgstr ""
+
+#: ../capplets/appearance/appearance-font.c:498
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/appearance/appearance-font.c:511
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../capplets/appearance/appearance-font.c:533
+msgid "Use previous font"
+msgstr "Úsáid cló roimhe seo"
+
+#: ../capplets/appearance/appearance-font.c:535
+msgid "Use selected font"
+msgstr "Úsáid cló roghnaithe"
+
+#: ../capplets/appearance/appearance-main.c:108
+msgid "Specify the filename of a theme to install"
+msgstr ""
+
+#: ../capplets/appearance/appearance-main.c:109
+msgid "filename"
+msgstr "ainm comhaid"
+
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/appearance/appearance-main.c:116
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr ""
+
+#: ../capplets/appearance/appearance-main.c:117
+msgid "page"
+msgstr "leathanach"
+
+#: ../capplets/appearance/appearance-main.c:124
+msgid "[WALLPAPER...]"
+msgstr "[CÚLBHRAT...]"
+
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/common/gnome-theme-info.c:429
+#: ../capplets/common/gnome-theme-info.c:628
+msgid "Default Pointer"
+msgstr "Pointeoir Réamhshocraithe"
+
+#: ../capplets/appearance/appearance-themes.c:512
+msgid "Apply Background"
+msgstr "Cuir Cúlra i bhFeidhm"
+
+#: ../capplets/appearance/appearance-themes.c:516
+msgid "Apply Font"
+msgstr "Cuir Cló i bhFeidhm"
+
+#: ../capplets/appearance/appearance-themes.c:541
+msgid "The current theme suggests a background and a font."
+msgstr ""
+
+#: ../capplets/appearance/appearance-themes.c:546
+msgid "The current theme suggests a background."
+msgstr ""
+
+#: ../capplets/appearance/appearance-themes.c:551
+msgid "The current theme suggests a font."
+msgstr ""
+
+#: ../capplets/appearance/appearance-themes.c:835
+#: ../capplets/default-applications/gnome-da-capplet.c:1080
+#: ../capplets/sound/sound-properties-capplet.c:327
+msgid "Custom"
+msgstr "Saincheaptha"
+
+#: ../capplets/appearance/data/appearance.glade.h:1
+msgid "<b>C_olors</b>"
+msgstr "<b>_Dathanna</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:2
+msgid "<b>Hinting</b>"
+msgstr "<b>Leidiú</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:3
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>Roghchláir agus Barraí Uirlisí</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:4
+msgid "<b>Preview</b>"
+msgstr "<b>Reámhamharc</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:5
+msgid "<b>Rendering</b>"
+msgstr "<b>Rindreáil</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:6
+msgid "<b>Smoothing</b>"
+msgstr "<b>Slíomachán</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:7
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>Ord Fophicteilín</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:8
+msgid "<b>_Wallpaper</b>"
+msgstr "<b>Cúl_bhrat</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:9
+msgid "Appearance Preferences"
+msgstr "Sainroghanna Cuma"
+
+#: ../capplets/appearance/data/appearance.glade.h:10
+msgid "Background"
+msgstr "Cúlra"
+
+#: ../capplets/appearance/data/appearance.glade.h:11
+msgid "Best _shapes"
+msgstr "C_ruthanna is fearr"
+
+#: ../capplets/appearance/data/appearance.glade.h:12
+msgid "Best co_ntrast"
+msgstr "Codars_nacht is fearr"
+
+#: ../capplets/appearance/data/appearance.glade.h:13
+msgid "C_ustomize..."
+msgstr "_Saincheap..."
+
+#: ../capplets/appearance/data/appearance.glade.h:14
+msgid "C_ut"
+msgstr "_Gearr"
+
+#: ../capplets/appearance/data/appearance.glade.h:15
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+
+#: ../capplets/appearance/data/appearance.glade.h:20
+msgid "Changing your cursor theme takes effect the next time you log in."
+msgstr ""
+
+#: ../capplets/appearance/data/appearance.glade.h:21
+msgid "Colors"
+msgstr "Dathanna"
+
+#: ../capplets/appearance/data/appearance.glade.h:22
+msgid "Controls"
+msgstr "Rialtáin"
+
+#: ../capplets/appearance/data/appearance.glade.h:23
+msgid "Customize Theme"
+msgstr "Saincheap Téama"
+
+#: ../capplets/appearance/data/appearance.glade.h:24
+msgid "D_etails..."
+msgstr "_Sonraí..."
+
+#: ../capplets/appearance/data/appearance.glade.h:25
+msgid "Des_ktop font:"
+msgstr "Cló _deisce:"
+
+#: ../capplets/appearance/data/appearance.glade.h:26
+msgid "Edit"
+msgstr "Eagar"
+
+#: ../capplets/appearance/data/appearance.glade.h:27
+msgid "Font Rendering Details"
+msgstr ""
+
+#: ../capplets/appearance/data/appearance.glade.h:28
+msgid "Fonts"
+msgstr "Clónna"
+
+#: ../capplets/appearance/data/appearance.glade.h:29
+msgid "Go _to Fonts Folder"
+msgstr "Téigh go _Fillteán Clónna"
+
+#: ../capplets/appearance/data/appearance.glade.h:30
+msgid "Gra_yscale"
+msgstr "_Liathscála"
+
+#: ../capplets/appearance/data/appearance.glade.h:31
+msgid "Icons"
+msgstr "Deilbhíní"
+
+#: ../capplets/appearance/data/appearance.glade.h:32
+msgid "Interface"
+msgstr "Comhéadan"
+
+#: ../capplets/appearance/data/appearance.glade.h:33
+msgid "Large"
+msgstr "Mór"
+
+#: ../capplets/appearance/data/appearance.glade.h:34
+msgid "N_one"
+msgstr "N_eamhní"
+
+#: ../capplets/appearance/data/appearance.glade.h:35
+msgid "New File"
+msgstr "Comhad Nua"
+
+#: ../capplets/appearance/data/appearance.glade.h:36
+msgid "Open File"
+msgstr "Oscail Comhad"
+
+#: ../capplets/appearance/data/appearance.glade.h:37
+msgid "Open a dialog to specify the color"
+msgstr ""
+
+#: ../capplets/appearance/data/appearance.glade.h:38
+msgid "Pointer"
+msgstr "Pointeoir"
+
+#: ../capplets/appearance/data/appearance.glade.h:39
+msgid "R_esolution:"
+msgstr "_Taifeach:"
+
+#: ../capplets/appearance/data/appearance.glade.h:40
+msgid "Save File"
+msgstr "Sábháil Comhad"
+
+#: ../capplets/appearance/data/appearance.glade.h:41
+msgid "Save Theme As..."
+msgstr "Sábháil Téama Mar..."
+
+#: ../capplets/appearance/data/appearance.glade.h:42
+msgid "Save _As..."
+msgstr "Sábháil _Mar..."
+
+#: ../capplets/appearance/data/appearance.glade.h:43
+msgid "Save _background image"
+msgstr "Sábháil íomhá _cúlra"
+
+#: ../capplets/appearance/data/appearance.glade.h:44
+msgid "Show _icons in menus"
+msgstr "Taispeáin _deilbhíní sa roghchláir"
+
+#: ../capplets/appearance/data/appearance.glade.h:45
+msgid "Small"
+msgstr "Beag"
+
+#: ../capplets/appearance/data/appearance.glade.h:46
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"Dath soladach\n"
+"Grádán cothrománach\n"
+"Grádán ingearach"
+
+#: ../capplets/appearance/data/appearance.glade.h:49
+msgid "Sub_pixel (LCDs)"
+msgstr "Fo_phicteilín (LCDanna)"
+
+#: ../capplets/appearance/data/appearance.glade.h:50
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "Slíomachán Fo_phicteilín (LCDanna)"
+
+#: ../capplets/appearance/data/appearance.glade.h:51
+msgid "Text"
+msgstr "Téacs"
+
+#: ../capplets/appearance/data/appearance.glade.h:52
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"Téacs faoi mhíreanna\n"
+"Téacs cois míreanna\n"
+"Deilbhíní amháin\n"
+"Téacs amháin"
+
+#: ../capplets/appearance/data/appearance.glade.h:56
+msgid "The current controls theme does not support color schemes."
+msgstr ""
+
+#: ../capplets/appearance/data/appearance.glade.h:57
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "Téama"
+
+#: ../capplets/appearance/data/appearance.glade.h:58
+msgid "Toolbar _button labels:"
+msgstr ""
+
+#. vertical hinting, pixel order blue, green, red
+#: ../capplets/appearance/data/appearance.glade.h:60
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/data/appearance.glade.h:61
+msgid "Window Border"
+msgstr "Imlíne Fhuinneoige"
+
+#: ../capplets/appearance/data/appearance.glade.h:62
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+msgid "_Add..."
+msgstr "Cuir _Leis..."
+
+#: ../capplets/appearance/data/appearance.glade.h:63
+msgid "_Application font:"
+msgstr "Cló _feidhmchláir:"
+
+#. pixel order blue, green, red
+#: ../capplets/appearance/data/appearance.glade.h:65
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/data/appearance.glade.h:66
+msgid "_Copy"
+msgstr "_Cóipeáil"
+
+#: ../capplets/appearance/data/appearance.glade.h:67
+msgid "_Description:"
+msgstr "_Cur Síos:"
+
+#: ../capplets/appearance/data/appearance.glade.h:68
+msgid "_Document font:"
+msgstr "Cló _cáipéise:"
+
+#: ../capplets/appearance/data/appearance.glade.h:69
+msgid "_Editable menu shortcut keys"
+msgstr ""
+
+#: ../capplets/appearance/data/appearance.glade.h:70
+msgid "_File"
+msgstr "_Comhad"
+
+#: ../capplets/appearance/data/appearance.glade.h:71
+msgid "_Fixed width font:"
+msgstr "Cló _aonleithid:"
+
+#: ../capplets/appearance/data/appearance.glade.h:72
+msgid "_Full"
+msgstr "_Iomlán"
+
+#: ../capplets/appearance/data/appearance.glade.h:73
+msgid "_Input boxes:"
+msgstr ""
+
+#: ../capplets/appearance/data/appearance.glade.h:74
+msgid "_Install..."
+msgstr "_Suiteáil..."
+
+#: ../capplets/appearance/data/appearance.glade.h:75
+msgid "_Medium"
+msgstr "_Measartha"
+
+#: ../capplets/appearance/data/appearance.glade.h:76
+msgid "_Monochrome"
+msgstr "_Monacrómach"
+
+#: ../capplets/appearance/data/appearance.glade.h:77
+msgid "_Name:"
+msgstr "_Ainm:"
+
+#: ../capplets/appearance/data/appearance.glade.h:78
+msgid "_New"
+msgstr "_Nua"
+
+#: ../capplets/appearance/data/appearance.glade.h:79
+msgid "_None"
+msgstr "_Neamhní"
+
+#: ../capplets/appearance/data/appearance.glade.h:80
+msgid "_Open"
+msgstr "_Oscail"
+
+#: ../capplets/appearance/data/appearance.glade.h:81
+msgid "_Paste"
+msgstr "G_reamaigh"
+
+#: ../capplets/appearance/data/appearance.glade.h:82
+msgid "_Print"
+msgstr "_Priontáil"
+
+#: ../capplets/appearance/data/appearance.glade.h:83
+msgid "_Quit"
+msgstr "_Scoir"
+
+#. pixel order red, green, blue
+#: ../capplets/appearance/data/appearance.glade.h:85
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/data/appearance.glade.h:86
+msgid "_Reset to Defaults"
+msgstr ""
+
+#: ../capplets/appearance/data/appearance.glade.h:87
+msgid "_Save"
+msgstr "_Sábháil"
+
+#: ../capplets/appearance/data/appearance.glade.h:88
+msgid "_Selected items:"
+msgstr "_Míreanna roghnaithe:"
+
+#: ../capplets/appearance/data/appearance.glade.h:89
+msgid "_Size:"
+msgstr "_Méid:"
+
+#: ../capplets/appearance/data/appearance.glade.h:90
+msgid "_Slight"
+msgstr "_Caol"
+
+#: ../capplets/appearance/data/appearance.glade.h:91
+msgid "_Style:"
+msgstr "_Stíl:"
+
+#: ../capplets/appearance/data/appearance.glade.h:92
+msgid "_Tooltips:"
+msgstr ""
+
+#. vertical hinting, pixel order red, green, blue
+#: ../capplets/appearance/data/appearance.glade.h:94
+msgid "_VRGB"
+msgstr "_VRGB"
+
+#: ../capplets/appearance/data/appearance.glade.h:95
+msgid "_Window title font:"
+msgstr "Cló theideal _fuinneoige:"
+
+#: ../capplets/appearance/data/appearance.glade.h:96
+msgid "_Windows:"
+msgstr "_Fuinneoga:"
+
+#: ../capplets/appearance/data/appearance.glade.h:97
+msgid "dots per inch"
+msgstr "ponc san orlach"
+
+#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "Cuma"
+
+#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:2
+msgid "Customize the look of the desktop"
+msgstr "Saincheap cuma na deisce"
+
+#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr ""
+
+#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr ""
+
+#: ../capplets/appearance/data/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr ""
+
+#: ../capplets/appearance/gnome-wp-info.c:45
+msgid "No Wallpaper"
+msgstr "Paipiar balla"
+
+#. translators: <b>wallpaper name</b>
+#. * mime type, x pixel(s) by y pixel(s)
+#. * Folder: /path/to/file
+#.
+#: ../capplets/appearance/gnome-wp-item.c:364
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s, %d %s by %d %s\n"
+"Folder: %s"
+msgstr ""
+
+#: ../capplets/appearance/gnome-wp-item.c:370
+#: ../capplets/appearance/gnome-wp-item.c:372
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] "picteilín amháin"
+msgstr[1] "phicteilín"
+msgstr[2] "phicteilín"
+msgstr[3] "bpicteilín"
+msgstr[4] "picteilín"
+
+#: ../capplets/appearance/theme-installer.c:169
+#, c-format
+msgid ""
+"Cannot install theme.\n"
+"The %s utility is not installed."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:217
+msgid ""
+"Cannot install theme.\n"
+"There was a problem while extracting the theme."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:261
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:275
+msgid ""
+"The selected file is not a valid theme. It might be a theme engine that you "
+"need to compile."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:284
+#: ../capplets/appearance/theme-installer.c:454
+#: ../capplets/appearance/theme-installer.c:629
+msgid "The selected file does not appear to be a valid theme."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:333
+#, c-format
+msgid "Installation for theme \"%s\" failed."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:365
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:371
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:373
+msgid "Keep Current Theme"
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:375
+msgid "Apply New Theme"
+msgstr "Cuir Téama Nua i bhFeidhm"
+
+#: ../capplets/appearance/theme-installer.c:480
+msgid "Failed to create temporary directory"
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:540
+msgid "New themes have been successfully installed."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:568
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:588
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:610
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:684
+msgid "Select Theme"
+msgstr "Roghnaigh Téama"
+
+#: ../capplets/appearance/theme-installer.c:688
+msgid "Theme Packages"
+msgstr "Pacáistí Téamaí"
+
+#: ../capplets/appearance/theme-save.c:91
+msgid "Theme name must be present"
+msgstr ""
+
+#: ../capplets/appearance/theme-save.c:161
+msgid "The theme already exists. Would you like to replace it?"
+msgstr ""
+
+#: ../capplets/appearance/theme-save.c:162
+msgid "_Overwrite"
+msgstr "_Forscríobh"
+
+#: ../capplets/appearance/theme-util.c:69
+msgid "Would you like to delete this theme?"
+msgstr ""
+
+#: ../capplets/appearance/theme-util.c:121
+msgid "Theme cannot be deleted"
+msgstr ""
+
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -779,95 +1306,97 @@ msgid ""
 "settings manager."
 msgstr ""
 
-#: ../capplets/common/capplet-stock-icons.c:94
+#: ../capplets/common/capplet-stock-icons.c:92
 #, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
+msgid "Unable to load stock icon '%s'\n"
 msgstr ""
 
-#: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
+#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
 msgid "Just apply settings and quit"
 msgstr ""
 
-#: ../capplets/common/capplet-util.c:243
-#: ../capplets/default-applications/gnome-default-applications-properties.c:765
-#: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1021
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/common/capplet-util.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:283
+#: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Bhí earraid ag taispeáin cabhair: %s"
+
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
-msgid "Copying file: %i of %i"
-msgstr ""
+msgid "Copying file: %u of %u"
+msgstr "Comhad á chóipeáil: %u as %u"
 
-#: ../capplets/common/file-transfer-dialog.c:122
+#: ../capplets/common/file-transfer-dialog.c:154
 #, c-format
 msgid "Copying '%s'"
+msgstr "'%s' á chóipeáil"
+
+#: ../capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:309
+msgid "Copying files"
+msgstr "Comhaid á chóipeáil"
+
+#: ../capplets/common/file-transfer-dialog.c:221
+msgid "Parent Window"
+msgstr "Máthairfhuinneog"
+
+#: ../capplets/common/file-transfer-dialog.c:222
+msgid "Parent window of the dialog"
 msgstr ""
 
-#: ../capplets/common/file-transfer-dialog.c:193
+#: ../capplets/common/file-transfer-dialog.c:228
 msgid "From URI"
 msgstr "Ó URI"
 
-#: ../capplets/common/file-transfer-dialog.c:194
+#: ../capplets/common/file-transfer-dialog.c:229
 msgid "URI currently transferring from"
 msgstr "URI ag aistrigh anois ó"
 
-#: ../capplets/common/file-transfer-dialog.c:201
+#: ../capplets/common/file-transfer-dialog.c:236
 msgid "To URI"
 msgstr "Go dtí URI"
 
-#: ../capplets/common/file-transfer-dialog.c:202
+#: ../capplets/common/file-transfer-dialog.c:237
 msgid "URI currently transferring to"
 msgstr "URI ag aistrigh anois go dtí"
 
-#: ../capplets/common/file-transfer-dialog.c:209
+#: ../capplets/common/file-transfer-dialog.c:244
 msgid "Fraction completed"
 msgstr ""
 
-#: ../capplets/common/file-transfer-dialog.c:210
+#: ../capplets/common/file-transfer-dialog.c:245
 msgid "Fraction of transfer currently completed"
 msgstr ""
 
-#: ../capplets/common/file-transfer-dialog.c:217
+#: ../capplets/common/file-transfer-dialog.c:252
 msgid "Current URI index"
 msgstr ""
 
-#: ../capplets/common/file-transfer-dialog.c:218
+#: ../capplets/common/file-transfer-dialog.c:253
 msgid "Current URI index - starts from 1"
 msgstr ""
 
-#: ../capplets/common/file-transfer-dialog.c:225
+#: ../capplets/common/file-transfer-dialog.c:260
 msgid "Total URIs"
 msgstr "Meid URIs"
 
-#: ../capplets/common/file-transfer-dialog.c:226
+#: ../capplets/common/file-transfer-dialog.c:261
 msgid "Total number of URIs"
 msgstr ""
 
-#: ../capplets/common/file-transfer-dialog.c:327
-#: ../capplets/common/file-transfer-dialog.c:369
-msgid "Copying files"
-msgstr ""
-
-#: ../capplets/common/file-transfer-dialog.c:345
-#, fuzzy
-msgid "From:"
-msgstr "Ó: %s"
-
-#: ../capplets/common/file-transfer-dialog.c:349
-#, fuzzy
-msgid "To:"
-msgstr "Do"
-
-#: ../capplets/common/file-transfer-dialog.c:448
+#: ../capplets/common/file-transfer-dialog.c:422
 msgid "Connecting..."
 msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:170
 msgid "Key"
-msgstr "Cnaipe"
+msgstr "Eochair"
 
 #: ../capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
@@ -932,7 +1461,7 @@ msgstr ""
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: ../capplets/common/gconf-property-editor.c:1466
+#: ../capplets/common/gconf-property-editor.c:1468
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -941,7 +1470,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: ../capplets/common/gconf-property-editor.c:1474
+#: ../capplets/common/gconf-property-editor.c:1476
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -950,312 +1479,442 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: ../capplets/common/gconf-property-editor.c:1593
+#: ../capplets/common/gconf-property-editor.c:1595
 msgid "Please select an image."
 msgstr ""
 
-#: ../capplets/common/gconf-property-editor.c:1598
-#, fuzzy
+#: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
-msgstr "Dealaigh"
+msgstr "_Roghnaigh"
+
+#: ../capplets/common/gnome-theme-info.c:629
+msgid "Default Pointer - Current"
+msgstr "Pointeoir Réamhshocraithe - Reatha"
+
+#: ../capplets/common/gnome-theme-info.c:633
+msgid "White Pointer"
+msgstr "Pointeoir Bán"
+
+#: ../capplets/common/gnome-theme-info.c:634
+msgid "White Pointer - Current"
+msgstr "Pointeoir Bán - Reatha"
+
+#: ../capplets/common/gnome-theme-info.c:638
+msgid "Large Pointer"
+msgstr "Pointeoir Mór"
+
+#: ../capplets/common/gnome-theme-info.c:639
+msgid "Large Pointer - Current"
+msgstr "Pointeoir Mór - Reatha"
+
+#: ../capplets/common/gnome-theme-info.c:643
+msgid "Large White Pointer - Current"
+msgstr "Pointeoir Bán Mór - Reatha"
+
+#: ../capplets/common/gnome-theme-info.c:644
+msgid "Large White Pointer"
+msgstr "Pointeoir Bán Mór"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Preferred Applications"
-msgstr ""
+msgstr "Feidhmchláir de Rogha"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr ""
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:9
-msgid "Debian Sensible Browser"
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
+msgid "Autostart the preferred AT"
 msgstr ""
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Epiphany"
-msgstr "Epiphany"
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
+msgid "Visual"
+msgstr "Radharcach"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Galeon"
-msgstr "Galeon"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:12
-msgid "Encompass"
-msgstr "Encompass"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird"
+#: ../capplets/default-applications/gnome-da-capplet.c:80
+#: ../capplets/default-applications/gnome-da-capplet.c:112
+#: ../capplets/default-applications/gnome-da-capplet.c:133
+#: ../capplets/default-applications/gnome-da-capplet.c:177
+#: ../capplets/default-applications/gnome-da-capplet.c:222
+#: ../capplets/default-applications/gnome-da-capplet.c:279
+#: ../capplets/default-applications/gnome-da-capplet.c:330
+#: ../capplets/default-applications/gnome-da-capplet.c:381
+#: ../capplets/default-applications/gnome-da-capplet.c:434
+#: ../capplets/default-applications/gnome-da-capplet.c:484
+#: ../capplets/default-applications/gnome-da-capplet.c:877
+#: ../capplets/default-applications/gnome-da-capplet.c:899
+#, c-format
+msgid "Error saving configuration: %s"
 msgstr ""
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firefox"
+#: ../capplets/default-applications/gnome-da-capplet.c:1100
+msgid "Could not load the main interface"
 msgstr ""
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:16
-#, fuzzy
-msgid "Mozilla"
-msgstr "Post Mozilla"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "W3M Text Browser"
-msgstr "Amharcóir Teacs 'W3M'"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Lynx Text Browser"
-msgstr "Amharcóir Teacs 'Lynx'"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "Links Text Browser"
-msgstr "Amharcóir Teacs 'Links'"
-
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
-msgid "Evolution Mail Reader"
+#: ../capplets/default-applications/gnome-da-capplet.c:1102
+msgid "Please make sure that the applet is properly installed"
 msgstr ""
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
-msgid "Balsa"
-msgstr "Balsa"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
-msgid "KMail"
-msgstr "KMail"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
-msgid "Thunderbird"
-msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
-msgid "Mozilla Mail"
-msgstr "Post Mozilla"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
-#, fuzzy
-msgid "Debian Terminal Emulator"
-msgstr "An Terminéal atá Loiceadh"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
-#, fuzzy
-msgid "GNOME Terminal"
-msgstr "Terminéal"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
-msgid "Standard XTerminal"
-msgstr "XTerminéal Caighdeánach"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
-#, fuzzy
-msgid "aterm"
-msgstr "NXterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
-msgid "ETerm"
-msgstr "ETerm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.c:123
-msgid "Please specify a name and a command for this editor."
-msgstr ""
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "<b>Image Viewer</b>"
+msgstr "<b>Amharcán Íomhánna</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Add..."
-msgstr "Suim..."
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>Teachtaire Meandarach</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-#, fuzzy
-msgid "C_ustom"
-msgstr "_Saincheaptha:"
+msgid "<b>Mail Reader</b>"
+msgstr "<b>Léitheoir Poist</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom:"
-msgstr "_Saincheaptha:"
+msgid "<b>Mobility</b>"
+msgstr "<b>Soghluaisteacht</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "Can open _URIs"
-msgstr ""
+msgid "<b>Multimedia Player</b>"
+msgstr "<b>Seinnteoir Ilmheán</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-#, fuzzy
-msgid "Can open multiple _files"
-msgstr "Tá an feidhmchlár seo in an _cupla comhad a oscaile ag an am ceanna"
+msgid "<b>Terminal Emulator</b>"
+msgstr "<b>Aithriseoir Teirminéil</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "<b>Text Editor</b>"
+msgstr "<b>Eagarthóir Téacs</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "<b>Video Player</b>"
+msgstr "<b>Seinnteoir Físeán</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "<b>Visual</b>"
+msgstr "<b>Radharcach</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+msgid "<b>Web Browser</b>"
+msgstr "<b>Brabhsálaí Lín</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+msgid "Accessibility"
+msgstr "Inrochtaineacht"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#, no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+msgid "C_ommand:"
+msgstr "_Ordú:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Co_mmand:"
 msgstr "O_rdú:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Custom Editor Properties"
-msgstr "Albachtaí na Eagarthóir Féindheanamh"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "Default Mail Reader"
-msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "Default Terminal"
-msgstr "An Terminéal atá Loiceadh"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Text Editor"
-msgstr "An Eagartóir Téasc atá Loiceadh"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "Default Web Browser"
-msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Default Window Manager"
-msgstr "An Bainsteoir Fhuinneoga atá Loiceadh"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Delete"
-msgstr "Dealaigh"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "E_xec Flag:"
-msgstr ""
-
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Edit..."
-msgstr "Eagar..."
+msgid "E_xecute flag:"
+msgstr ""
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Mail Reader"
-msgstr ""
+msgid "Internet"
+msgstr "Idirlíon"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+msgid "Multimedia"
+msgstr "Ilmheáin"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-#, fuzzy
-msgid "Run in a _terminal"
-msgstr "Rith i _Terminéal"
+msgid "Open link in new _tab"
+msgstr ""
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-#, fuzzy
-msgid "Run in a t_erminal"
-msgstr "Rith i _Terminéal"
+msgid "Open link in new _window"
+msgstr ""
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid ""
-"Select the window manager you want.  You will need to hit apply, wave the "
-"magic wand, and do a magic dance for it to work."
+msgid "Open link with web browser _default"
 msgstr ""
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "Terminal"
-msgstr "Terminéal"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "Text Editor"
-msgstr "Eagathóir Téasc"
+msgid "Run at st_art"
+msgstr ""
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "Understands _Netscape Remote Control"
-msgstr ""
+msgid "Run in t_erminal"
+msgstr "Rith i d_teirminéal"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "Use this _editor to open text files in the file manager"
-msgstr ""
-"Bainit trial as an _eagartóir chun oscailte comhad téasc sa bainsteoir comhad"
+msgid "System"
+msgstr "Córas"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
-msgid "Web Browser"
+msgid "_Run at start"
 msgstr ""
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:27
-msgid "Window Manager"
-msgstr "Bainisteoir Fhuinneoga"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
+msgid "Balsa"
+msgstr "Balsa"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:28
-#, fuzzy
-msgid "_Command:"
-msgstr "O_rdú:"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+msgid "Banshee Music Player"
+msgstr "Seinnteoir Ceoil Banshee"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Name:"
-msgstr "Ai_nm:"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+msgid "Claws Mail"
+msgstr "Post Claws"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:30
-msgid "_Properties..."
-msgstr "_Ábaltachtaí..."
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+msgid "Dasher"
+msgstr "Dasher"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:31
-#, fuzzy
-msgid "_Select:"
-msgstr "Dealaigh"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+msgid "Debian Sensible Browser"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+msgid "Debian Terminal Emulator"
+msgstr "Aithriseoir Teirminéal Debian"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+msgid "ETerm"
+msgstr "ETerm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+msgid "Encompass"
+msgstr "Encompass"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+msgid "Epiphany Web Browser"
+msgstr "Brabhsálaí Lín Epiphany"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+msgid "Evolution Mail Reader"
+msgstr "Léitheoir Poist Evolution"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+msgid "Firebird"
+msgstr "Firebird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+msgid "Firefox"
+msgstr "Firefox"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+msgid "GNOME Magnifier without Screen Reader"
+msgstr "Formhéadaitheoir GNOME gan Léitheoir Scáileáin"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+msgid "GNOME OnScreen Keyboard"
+msgstr "Méarchlár Scáileáin GNOME"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+msgid "GNOME Terminal"
+msgstr "Teirminéal GNOME"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+msgid "Galeon"
+msgstr "Galeon"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+msgid "Gnopernicus"
+msgstr "Gnopernicus"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+msgid "Gnopernicus with Magnifier"
+msgstr "Gnopernicus le Formhéadaitheoir"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "Iceape"
+msgstr "Iceape"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "Iceape Mail"
+msgstr "Post Iceape"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+msgid "Icedove"
+msgstr "Icedove"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+msgid "Iceweasel"
+msgstr "Iceweasel"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "KDE Magnifier without Screen Reader"
+msgstr "Formhéadaitheoir KDE gan Léitheoir Scáileáin"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "KMail"
+msgstr "KMail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Konqueror"
+msgstr "Konqueror"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Linux Screen Reader"
+msgstr "Léitheoir Scáileáin Linux"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+msgid "Linux Screen Reader with Magnifier"
+msgstr "Léitheoir Scáileáin Linux le Formhéadaitheoir"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+msgid "Midori"
+msgstr "Midori"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+msgid "Mozilla"
+msgstr "Mozilla"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+msgid "Mozilla 1.6"
+msgstr "Mozilla 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Mozilla Mail"
+msgstr "Post Mozilla"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Mozilla Thunderbird"
+msgstr "Mozilla Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Muine Music Player"
+msgstr "Seinnteoir Ceoil Muine"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "Mutt"
+msgstr "Mutt"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+msgid "NXterm"
+msgstr "NXterm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+msgid "Netscape Communicator"
+msgstr "Netscape Communicator"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+msgid "Opera"
+msgstr "Opera"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+msgid "Orca"
+msgstr "Orca"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+msgid "Orca with Magnifier"
+msgstr "Orca le Formhéadaitheoir"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+msgid "RXVT"
+msgstr "RXVT"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+msgid "Rhythmbox Music Player"
+msgstr "Seinnteoir Ceoil Rhythmbox"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+msgid "SeaMonkey"
+msgstr "SeaMonkey"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+msgid "SeaMonkey Mail"
+msgstr "Post SeaMonkey"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+msgid "Standard XTerminal"
+msgstr "XTerminéal Caighdeánach"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+msgid "Sylpheed"
+msgstr "Sylpheed"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+msgid "Sylpheed-Claws"
+msgstr "Sylpheed-Claws"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+msgid "Totem Movie Player"
+msgstr "Seinnteoir Scannán Totem"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+msgid "aterm"
+msgstr "aterm"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
-msgstr ""
+msgstr "Athraigh taifeach scáileáin"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
-msgstr ""
+msgstr "Taifeach Scáileáin"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:29
+msgid "Normal"
+msgstr "Gnách"
+
+#: ../capplets/display/main.c:30
+msgid "Left"
+msgstr "Ar Chlé"
+
+#: ../capplets/display/main.c:31
+#, fuzzy
+msgid "Inverted"
+msgstr "Sa Lár"
+
+#: ../capplets/display/main.c:32
+msgid "Right"
+msgstr "Deis"
+
+#: ../capplets/display/main.c:374
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:514
 msgid "_Resolution:"
-msgstr ""
+msgstr "_Taifeach:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:532
 msgid "Re_fresh rate:"
 msgstr ""
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:550
+#, fuzzy
+msgid "R_otation:"
+msgstr "Á_it"
+
+#: ../capplets/display/main.c:569
 msgid "Default Settings"
 msgstr "Roghnachais Loicéad"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:571
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Roghnachais Scáileáin %d\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:592
 msgid "Screen Resolution Preferences"
-msgstr ""
+msgstr "Sainroghanna Thaifeach Scáileáin"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:627
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr ""
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:644
 msgid "Options"
 msgstr "Roghanna"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:664
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1266,188 +1925,42 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:704
 msgid "Keep Resolution"
 msgstr ""
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:708
 msgid "Do you want to keep this resolution?"
 msgstr ""
 
-#: ../capplets/display/main.c:667
-msgid "Use _previous resolution"
+#: ../capplets/display/main.c:734
+msgid "Use _Previous Resolution"
 msgstr ""
 
-#: ../capplets/display/main.c:667
-msgid "_Keep resolution"
+#: ../capplets/display/main.c:735
+msgid "_Keep Resolution"
 msgstr ""
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:883
 msgid ""
-"The X Server does not support the XRandR extension.  Runtime resolution "
+"The X server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:890
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
 msgstr ""
 
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "Clófhoireann"
+#: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Fuaim"
 
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "Roghnaigh na clófhoireann le haighaidh an deasc"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Font Rendering</b>"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Hinting</b>:"
-msgstr "<b>Leideanna</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Smoothing</b>:"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "<b>Subpixel order</b>:"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best _shapes"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "Best co_ntrast"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:8
-#, fuzzy
-msgid "D_etails..."
-msgstr "_Ábaltachtaí..."
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "Roghnachais Clófhoireann"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "T_ada"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "Clófhoireann an _Feidhmchlár:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Desktop font:"
-msgstr "Clófhoireann an Deasc:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Full"
-msgstr "go _Lán"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Medium"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Monochrome"
-msgstr ""
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_None"
-msgstr "_Tada"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_Slight"
-msgstr "_Slim"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Terminal font:"
-msgstr "Clófhoireann an _Terminéal"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "Clófhoireann ag teideal na Fh_uinneoga"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr ""
-
-#: ../capplets/font/main.c:488
-msgid "Font may be too large"
-msgstr ""
-
-#: ../capplets/font/main.c:492
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../capplets/font/main.c:505
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-msgstr[1] ""
+#: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "Deasc"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 #, fuzzy
@@ -1478,57 +1991,55 @@ msgid "The type of accelerator."
 msgstr ""
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:477
+#: ../capplets/keybindings/gnome-keybinding-properties.c:112
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:482
 msgid "Disabled"
-msgstr "Míchumasach"
+msgstr "Díchumasaithe"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:545
+#: ../capplets/keybindings/gnome-keybinding-properties.c:523
 msgid "<Unknown Action>"
+msgstr "<Gníomh Anaithnid>"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:915
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time.\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
-msgid "Desktop"
-msgstr "Deasc"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:567
-#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Glóir"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:571
-msgid "Window Management"
-msgstr ""
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:668
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
 " \"%s\"\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:700
+#: ../capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:750
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:857
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
-msgstr ""
+msgstr "Gníomh"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:881
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
-msgstr ""
+msgstr "Aicearra"
 
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Aicearraí Méarchláir"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
@@ -1540,371 +2051,336 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
-msgid "Unknown"
-msgstr ""
+#: ../capplets/keyboard/gnome-keyboard-properties.c:133
+#, fuzzy, c-format
+msgid "There was an error launching the keyboard tool: %s"
+msgstr "Bhí earraid ag taispeáin cabhair: %s"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
-msgid "Layout"
-msgstr "Scéim"
-
-#. The first radio in a group is to be "Default", meaning none of
-#. the below options are to be included in the selected list.
-#. This is a HIG-compliant alternative to allowing no
-#. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
-#, fuzzy
-msgid "Default"
-msgstr "Dealaigh"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
-#, fuzzy
-msgid "Models"
-msgstr "Samhail"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:106
-#, c-format
-msgid "There was an error launching the keyboard capplet : %s"
-msgstr ""
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:202
+#: ../capplets/keyboard/gnome-keyboard-properties.c:254
 msgid "_Accessibility"
-msgstr ""
+msgstr "_Inrochtaineacht"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:221
-#: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/keyboard/gnome-keyboard-properties.c:275
+#: ../capplets/keyboard/gnome-keyboard-properties.c:280
+#: ../capplets/sound/sound-properties-capplet.c:1026
+#: ../capplets/sound/sound-properties-capplet.c:1028
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:287
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-#, fuzzy
-msgid "..."
-msgstr "Suim..."
+#: ../capplets/keyboard/gnome-keyboard-properties.c:296
+msgid "- GNOME Keyboard Preferences"
+msgstr "- Sainroghanna Méarchláir GNOME"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 msgid "<b>Cursor Blinking</b>"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<b>Repeat Keys</b>"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<small><i>Fast</i></small>"
-msgstr ""
+msgstr "<small><i>Tapa</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<small><i>Long</i></small>"
-msgstr ""
+msgstr "<small><i>Fada</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Short</i></small>"
-msgstr ""
+msgstr "<small><i>Gearr</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Mall</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "A_vailable layouts:"
-msgstr ""
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "All_ow postponing of breaks"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Check if breaks are allowed to be postponed"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
-#, fuzzy
-msgid "Choose A Keyboard Model"
-msgstr "_Modéil  Miarchlar:"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Choose a Keyboard Model"
+msgstr "Roghnaigh Cineál Méarchláir:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
-#, fuzzy
-msgid "Choose A Layout"
-msgstr "Dún agus _Logáil Amach"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+msgid "Choose a Layout"
+msgstr "Roghnaigh Leagan Amach"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "Cursor _blinks in text boxes and fields"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "Cursor _blinks in text fields"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "Cursor blinks speed"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Duration of the break when typing is disallowed"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of work before forcing a break"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "General"
+msgstr "Ginearálta"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "Keyboard Layout Options"
+msgstr "Roghanna Leaganacha Amach"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
-msgstr "Roghnachais Miarchlar"
+msgstr "Sainroghanna Méarchláir"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "Keyboard _model:"
+msgstr "_Cinéal méarchláir:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "Layout _Options..."
+msgstr "_Roghanna Leaganacha Amach..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
-msgid "Keyboard _model:"
-msgstr "_Modéil  Miarchlar:"
+msgid "Layouts"
+msgstr "Leaganacha Amach"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "Layout Options"
-msgstr ""
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "Layouts"
-msgstr "Scéimeanna"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
-msgid "Microsoft Natural Keyboard"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+msgid "Preview:"
+msgstr "Réamhamharc:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+msgid "Repeat keys speed"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
-#, fuzzy
-msgid "Preview:"
-msgstr "Reámhtaispeántas"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "Reset to De_faults"
+msgstr ""
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "Reset To De_faults"
+msgid "Separate _layout for each window"
 msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "Typing Break"
+msgstr "Sos Clóscríofa"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "Separate _group for each window"
-msgstr ""
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
-msgid "Typing Break"
-msgstr ""
+msgid "_Accessibility..."
+msgstr "_Inrochtaineacht..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "_Accessibility..."
-msgstr ""
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
-#, fuzzy
-msgid "_Add..."
-msgstr "Suim..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Delay:"
-msgstr ""
+msgstr "_Moill:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+msgid "_Layouts:"
+msgstr "_Leaganacha Amach:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+msgid "_Models:"
+msgstr "_Cineáil:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
-#, fuzzy
-msgid "_Models:"
-msgstr "Samhail"
+msgid "_Selected layouts:"
+msgstr "Leaganacha amach _roghnaithe:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
-msgid "_Selected layouts:"
-msgstr ""
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
 msgstr "_Luas:"
 
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#, fuzzy
+msgid "_Variants:"
+msgstr "_Clóbhuail"
+
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
-msgid "_Work interval lasts:"
+msgid "_Vendors:"
 msgstr ""
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+msgid "_Work interval lasts:"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "minutes"
-msgstr "noimeáid"
+msgstr "nóimeád"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
+msgid "Unknown"
+msgstr "Anaithnid"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
+msgid "Default"
+msgstr "Réamhshocrú"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
+msgid "Layout"
+msgstr "Leagan Amach"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:169
+msgid "Vendors"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:235
+#, fuzzy
+msgid "Models"
+msgstr "Samhail"
+
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Méarchlár"
 
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Roghnaigh do álbachtaí miarchlár"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:559
-msgid "Unknown Cursor"
+#: ../capplets/localization/localization.desktop.in.in.h:1
+msgid "Language and Location"
+msgstr "Teanga agus Suíomh"
+
+#: ../capplets/localization/localization.desktop.in.in.h:2
+#, fuzzy
+msgid "Set your language and location preferences"
+msgstr "Socraigh do shainroghanna luiche"
+
+#: ../capplets/localization/localization.glade.h:1
+msgid ""
+"<i>Region and language changes take effect the next time you log in.</i>"
 msgstr ""
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
-msgid "Default Cursor"
-msgstr ""
+#: ../capplets/localization/localization.glade.h:2
+msgid "Localization Preferences"
+msgstr "Sainroghanna Logánaithe"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
-msgid "Default Cursor - Current"
-msgstr ""
+#: ../capplets/localization/localization.glade.h:3
+msgid "Region:"
+msgstr "Réigiún:"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:763
-msgid "The default cursor that ships with X"
-msgstr ""
+#: ../capplets/localization/localization.glade.h:4
+msgid "Selected languages:"
+msgstr "Teangacha roghnaithe:"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
-msgid "White Cursor"
-msgstr ""
+#. set the timeout value  label with correct value of timeout
+#: ../capplets/mouse/gnome-mouse-properties.c:126
+#: ../capplets/mouse/gnome-mouse-properties.c:384
+#, c-format
+msgid "%d millisecond"
+msgid_plural "%d milliseconds"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../capplets/mouse/gnome-mouse-properties.c:768
-msgid "White Cursor - Current"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.c:769
-msgid "The default cursor inverted"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.c:773
-msgid "Large Cursor"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.c:774
-msgid "Large Cursor - Current"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.c:775
-msgid "Large version of normal cursor"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.c:779
-msgid "Large White Cursor - Current"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.c:780
-msgid "Large White Cursor"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.c:781
-msgid "Large version of white cursor"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.c:975
-msgid "Cursor Theme"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:2
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid "<b>Double-Click Timeout </b>"
 msgstr ""
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Drag and Drop</b>"
 msgstr ""
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Locate Pointer</b>"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Treosuíomh Luchóg</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "<b>Speed</b>"
 msgstr "<b>Luas</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<i>Fast</i>"
-msgstr "<i>go Tapaigh</i>"
+msgstr "<i>Tapa</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<i>High</i>"
 msgstr "<i>Ard</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<i>Large</i>"
 msgstr "<i>Mór</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Low</i>"
-msgstr ""
+msgstr "<i>Íseal</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Slow</i>"
 msgstr "<i>Mall</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Small</i>"
 msgstr "<i>Beag</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "Buttons"
 msgstr "Cnaipí"
 
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+msgid "Motion"
+msgstr "Gluaisne"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+msgid "Mouse Preferences"
+msgstr "Sainroghanna Luiche"
+
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Cursor Size:"
-msgstr ""
+msgid "_Acceleration:"
+msgstr "_Luasghéarú:"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Cursors"
-msgstr ""
+msgid "_Left-handed mouse"
+msgstr "Luch _Ciotach"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid "Highlight the _pointer when you press Ctrl"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
-#, fuzzy
-msgid "Large"
-msgstr "_Mór"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
-msgid "Medium"
-msgstr ""
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
-msgid "Motion"
-msgstr "Gluaiseacht"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "Mouse Preferences"
-msgstr "Roghnachais Luchóg"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
-#, fuzzy
-msgid "Small"
-msgstr "_Beag"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
-msgid "_Acceleration:"
-msgstr "_Brostú:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
-msgid "_Left-handed mouse"
-msgstr "Luchóg _Ciotach"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr ""
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "_Threshold:"
 msgstr "_Tairseach:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "_Timeout:"
 msgstr ""
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
-msgstr "Luchóg"
+msgstr "Luch"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
-msgstr "Roghnaigh do álbachtaí luchóg"
+msgstr "Socraigh do shainroghanna luiche"
 
 #: ../capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
@@ -1921,7 +2397,7 @@ msgstr "      "
 
 #: ../capplets/network/gnome-network-preferences.glade.h:2
 #, fuzzy
-msgid "<b>D_irect internet connection</b>"
+msgid "<b>Di_rect internet connection</b>"
 msgstr "<b>Feidhmchláranna</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
@@ -1975,446 +2451,212 @@ msgid "S_ocks host:"
 msgstr "Óst S_ocks:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:15
-#, fuzzy
 msgid "U_sername:"
-msgstr "_Úsáideoir"
+msgstr "_Ainm Úsáideora:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
-msgstr ""
+msgstr "_Sonraí"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
-msgstr "Ionadaí _FTP"
+msgstr "Seachfhreastalaí _FTP:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Password:"
-msgstr "_Passfhocal:"
+msgstr "_Focal Faire:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Secure HTTP proxy:"
 msgstr "Ionadaí _HTTP Daingeanach"
 
+#: ../capplets/network/gnome-network-preferences.glade.h:20
+msgid "_Use the same proxy for all protocols"
+msgstr ""
+
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr ""
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:6
-msgid "Sound Preferences"
+#: ../capplets/sound/mixer-support.c:79
+#, c-format
+msgid "Unknown Volume Control %d"
 msgstr ""
+
+#: ../capplets/sound/pipeline-tests.c:84
+#, c-format
+msgid "Failed to construct test pipeline for '%s'"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:325
+#: ../capplets/sound/sound-properties-capplet.c:378
+msgid "Not connected"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:661
+msgid "Autodetect"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:666
+#: ../capplets/sound/sound-properties-capplet.c:667
+msgid "ALSA - Advanced Linux Sound Architecture"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:668
+msgid "Artsd - ART Sound Daemon"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:669
+#: ../capplets/sound/sound-properties-capplet.c:670
+msgid "ESD - Enlightened Sound Daemon"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:671
+#: ../capplets/sound/sound-properties-capplet.c:672
+msgid "OSS - Open Sound System"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:673
+#: ../capplets/sound/sound-properties-capplet.c:674
+msgid "PulseAudio Sound Server"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:675
+msgid "Test Sound"
+msgstr "Tástáil Fuaim"
+
+#: ../capplets/sound/sound-properties-capplet.c:676
+msgid "Silence"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:1043
+msgid "- GNOME Sound Preferences"
+msgstr "- Sainroghanna Fhuaim GNOME"
 
 #: ../capplets/sound/sound-properties.glade.h:1
-msgid "E_nable sound server startup"
-msgstr ""
+#, fuzzy
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>Leideanna</b>:"
 
 #: ../capplets/sound/sound-properties.glade.h:2
-msgid "Flash _entire screen"
+msgid "<b>Default Mixer Tracks</b>"
 msgstr ""
 
 #: ../capplets/sound/sound-properties.glade.h:3
-msgid "Flash _window titlebar"
-msgstr ""
+msgid "<b>Music and Movies</b>"
+msgstr "<b>Ceol agus Scannáin</b>"
 
 #: ../capplets/sound/sound-properties.glade.h:4
-msgid "General"
-msgstr "Ginearálta"
+#, fuzzy
+msgid "<b>Sound Events</b>"
+msgstr "<b>Treosuíomh Luchóg</b>"
 
 #: ../capplets/sound/sound-properties.glade.h:5
-msgid "Sound Events"
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr ""
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click OK to finish."
 msgstr ""
 
 #: ../capplets/sound/sound-properties.glade.h:7
-msgid "System Bell"
+msgid "Devices"
 msgstr ""
 
 #: ../capplets/sound/sound-properties.glade.h:8
-msgid "_Sound an audible bell"
+msgid "E_nable software sound mixing (ESD)"
 msgstr ""
 
 #: ../capplets/sound/sound-properties.glade.h:9
-msgid "_Sounds for events"
+msgid "Flash _entire screen"
 msgstr ""
 
 #: ../capplets/sound/sound-properties.glade.h:10
-msgid "_Visual feedback:"
+msgid "Flash _window titlebar"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:347
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "S_ound playback:"
+msgstr ""
+
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
+"Select the device and tracks to control with the keyboard. Use the Shift and "
+"Control keys to select multiple tracks if required."
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:227
-msgid "This theme is not in a supported format."
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "So_und playback:"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:244
-msgid "Failed to create temporary directory"
+#: ../capplets/sound/sound-properties.glade.h:14
+msgid "Sou_nd capture:"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:264
-msgid ""
-"Can not install theme. \n"
-"The bzip2 utility is not installed."
+#: ../capplets/sound/sound-properties.glade.h:15
+msgid "Sound Preferences"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:282
-#: ../capplets/theme-switcher/gnome-theme-installer.c:319
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "Installation Failed"
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Sounds"
+msgstr "Fuaimeanna"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "System Beep"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:302
-msgid ""
-"Can not install themes. \n"
-"The gzip utility is not installed."
+#: ../capplets/sound/sound-properties.glade.h:18
+msgid "Test"
+msgstr "Tástáil"
+
+#: ../capplets/sound/sound-properties.glade.h:19
+msgid "Testing Pipeline"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:340
-#, c-format
-msgid ""
-"Icon Theme %s correctly installed.\n"
-"You can select it in the theme details."
+#: ../capplets/sound/sound-properties.glade.h:20
+msgid "_Device:"
+msgstr "_Gléas:"
+
+#: ../capplets/sound/sound-properties.glade.h:21
+msgid "_Enable system beep"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:343
-#, c-format
-msgid "Gnome Theme %s correctly installed"
+#: ../capplets/sound/sound-properties.glade.h:22
+msgid "_Play system sounds"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:346
-#, c-format
-msgid ""
-"Windows Border Theme %s correctly installed.\n"
-"You can select it in the theme details."
+#: ../capplets/sound/sound-properties.glade.h:23
+msgid "_Sound playback:"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:349
-#, c-format
-msgid ""
-"Controls Theme %s correctly installed.\n"
-"You can select it in the theme details."
+#: ../capplets/sound/sound-properties.glade.h:24
+msgid "_Visual system beep"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:357
-msgid "The theme is an engine. You need to compile the theme."
+#: ../capplets/windows/gnome-window-properties.c:344
+msgid "Cannot start the preferences application for your window manager"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:374
-msgid "The file format is invalid"
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "No theme file location specified to install"
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:485
-msgid "The theme file location specified to install is invalid"
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:505
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:526
-msgid "The file format is invalid."
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:553
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:607
-msgid ""
-"Cannot install theme.\n"
-"The tar program is not installed on your system."
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:680
-msgid "Custom theme"
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:680
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
-msgid "The theme already exists. Would you like to replace it?"
-msgstr ""
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr ""
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "Téma"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "Á_it"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Background"
-msgstr "Cuir i bhfeidm _Cúlra"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Apply _Font"
-msgstr "Cuir i bhfeidhm _Clófhoireann"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "Controls"
-msgstr "Gnáth"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Icons"
-msgstr "Dealbhanna"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "New themes can also be installed by dragging them into the window."
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Save Theme"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-#, fuzzy
-msgid "Select theme for the desktop"
-msgstr "Roghnaigh na clófhoireann le haighaidh an deasc"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-#, fuzzy
-msgid "Short _description:"
-msgstr "Áit"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Theme Details"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Theme Preferences"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "Theme _Details"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "This theme does not suggest any particular font or background."
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "This theme suggests a background:"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme suggests a font and a background:"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a font:"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-#, fuzzy
-msgid "Window Border"
-msgstr "Ábaltachtaí Cúlra"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go To Theme Folder"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install Theme..."
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-#, fuzzy
-msgid "_Revert"
-msgstr "Sc_ríos"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Save Theme..."
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Theme name:"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "theme selection tree"
-msgstr ""
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr ""
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "Róghchlaranna & Uirlischláranna"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr ""
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>Reámthaispeántas</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "G_earr"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "Dealbhanna amhain"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "Ábaltachtaí Róghchlár agus Uirlischlár"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "Comhad Nua"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "Oscail Comhad"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "Sábháil an Comhad seo"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr ""
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-#, fuzzy
-msgid "Text below icons"
-msgstr "Téacs taobh thíos de Dealbhanna"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "Téacs in aice na Dealbhanna"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "Téacs le féin"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr ""
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "_Cóip"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr ""
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "_Eagar"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu accelerators"
-msgstr ""
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_Comhad"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "_Nua"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "_Oscail"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "_Smeadar"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "_Clóbhuail"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "_Ealu"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "_Sábháil"
-
-#: ../capplets/windows/gnome-window-properties.c:386
-#, c-format
-msgid ""
-"<b>Cannot start the preferences application for your window manager</b>\n"
-"\n"
-"%s"
-msgstr ""
-
-#: ../capplets/windows/gnome-window-properties.c:644
-msgid "Control"
-msgstr "Smacht"
-
-#: ../capplets/windows/gnome-window-properties.c:649
-msgid "Alt"
-msgstr "Alt"
-
-#: ../capplets/windows/gnome-window-properties.c:655
-msgid "Hyper"
-msgstr "Hyper"
-
-#: ../capplets/windows/gnome-window-properties.c:662
-msgid "Super (or \"Windows logo\")"
-msgstr "Super (nó \"Siombail Fhuinneoga\")"
-
-#: ../capplets/windows/gnome-window-properties.c:669
-msgid "Meta"
-msgstr "Meta"
+#. translators: this is the Control key
+#: ../capplets/windows/gnome-window-properties.c:602
+msgid "C_ontrol"
+msgstr "C_ontrol"
+
+#: ../capplets/windows/gnome-window-properties.c:607
+msgid "_Alt"
+msgstr "_Alt"
+
+#: ../capplets/windows/gnome-window-properties.c:613
+msgid "H_yper"
+msgstr "H_yper"
+
+#: ../capplets/windows/gnome-window-properties.c:620
+msgid "S_uper (or \"Windows logo\")"
+msgstr "S_uper (nó \"Lógo Windows\")"
+
+#: ../capplets/windows/gnome-window-properties.c:627
+msgid "_Meta"
+msgstr "_Meta"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:1
 #, fuzzy
@@ -2432,12 +2674,12 @@ msgid "<b>Window Selection</b>"
 msgstr "<b>Leideanna</b>:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:4
-msgid "To _move a window, press-and-hold this key then grab the window:"
+msgid "To move a window, press-and-hold this key then grab the window:"
 msgstr ""
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
-msgstr "Roghnachais Fhuinneoga"
+msgstr "Sainroghanna Fuinneoige"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
@@ -2464,121 +2706,125 @@ msgstr "Álbachtaí Fuinneog"
 msgid "Windows"
 msgstr "Fuinneoga"
 
-#: ../control-center/control-center-categories.c:257
-#, fuzzy
-msgid "Others"
-msgstr "na Scagaire"
-
-#: ../control-center/control-center.c:42
-#, fuzzy
-msgid "Desktop Preferences"
-msgstr "Roghnachais na Paipéir balla"
-
-#: ../control-center/gnomecc.desktop.in.in.h:1
-msgid "GNOME Control Center"
-msgstr ""
-
-#: ../control-center/gnomecc.desktop.in.in.h:2
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
-msgid "The GNOME configuration tool"
-msgstr ""
-
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
-msgstr "Lánu"
+msgstr "Airde"
 
-#: ../gnome-settings-daemon/factory.c:36
-msgid "Could not initialize Bonobo"
-msgstr ""
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:465
 msgid "Slow Keys Alert"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
 msgid "Do you want to activate Slow Keys?"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
 msgid "Do you want to deactivate Slow Keys?"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
+msgid "_Activate"
+msgstr "_Gníomhachtaigh"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
+msgid "_Deactivate"
+msgstr "_Díghníomhachtaigh"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
+msgid "Do_n't activate"
+msgstr "_Ná gníomhachtaigh"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
+msgid "Do_n't deactivate"
+msgstr "_Ná díghníomhachtaigh"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:480
 msgid "Sticky Keys Alert"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "Do you want to activate Sticky Keys?"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:107
+#: ../gnome-settings-daemon/gnome-settings-font.c:150
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing the mouse pointer theme."
+msgstr ""
+
+#: ../gnome-settings-daemon/gnome-settings-font.c:171
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing cursors."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:209
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:275
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:222
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:228
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:289
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:256
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:316
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:353
 #, c-format
-msgid "It seems that another application already has access to key '%d'."
+msgid "It seems that another application already has access to key '%u'."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:361
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:418
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:436
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:489
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
 "which is linked to the key (%s)"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:98
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2596,7 +2842,7 @@ msgid ""
 "- The result of <b>%s</b>"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:112
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2604,50 +2850,26 @@ msgid ""
 "software."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
-msgid "Do _not show this warning again"
-msgstr ""
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:187
 msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
+"Could not get default terminal. Verify that your default terminal command is "
+"set and points to a valid application."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
-#, fuzzy
-msgid "Use X settings"
-msgstr "Roghnachais Scáileáin %d\n"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
-msgid "Use GNOME settings"
-msgstr ""
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:215
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
-"Verify that this command exists."
+"Verify that this is a valid command."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:230
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr ""
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
-msgid ""
-"Couldn't load the Glade file.\n"
-"Make sure that this daemon is properly installed."
-msgstr ""
-
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2657,28 +2879,28 @@ msgid ""
 "Screensaver functionality will not work in this session."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:129
+#: ../gnome-settings-daemon/gnome-settings-sound.c:199
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:214
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:262
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:243
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:291
 msgid "Cannot determine user's home directory"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:1
 msgid "A_vailable files:"
-msgstr ""
+msgstr "Co_mhaid ar fáil:"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:2
 msgid "Do _not show this warning again."
@@ -2694,12 +2916,11 @@ msgstr ""
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:5
 msgid "_Load"
-msgstr ""
+msgstr "_Luchtaigh"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:6
-#, fuzzy
 msgid "_Loaded files:"
-msgstr "Samhail"
+msgstr "Comhaid _luchtaithe:"
 
 #: ../gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
@@ -2707,7 +2928,7 @@ msgstr ""
 
 #: ../libbackground/applier.c:255
 msgid "Type"
-msgstr "Saghas"
+msgstr "Cineál"
 
 #: ../libbackground/applier.c:256
 msgid ""
@@ -2733,73 +2954,297 @@ msgstr ""
 
 #: ../libbackground/applier.c:279
 msgid "Screen"
-msgstr "Scáthlán"
+msgstr "Scáileán"
 
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: ../libgswitchit/gswitchit_config.c:1035
-#, fuzzy, c-format
-msgid "There was an error loading an image: %s"
-msgstr "Bhí earraid ag taispeáin cabhair: %s"
+#. make start action
+#: ../libslab/application-tile.c:362
+#, c-format
+msgid "<b>Start %s</b>"
+msgstr "<b>Tosaigh %s</b>"
 
-#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
+#: ../libslab/application-tile.c:381
+msgid "Help"
+msgstr "Cabhair"
+
+#: ../libslab/application-tile.c:428
+msgid "Upgrade"
+msgstr "Uasghrádaigh"
+
+#: ../libslab/application-tile.c:443
+msgid "Uninstall"
+msgstr "Díshuiteáil"
+
+#: ../libslab/application-tile.c:770 ../libslab/document-tile.c:526
+msgid "Remove from Favorites"
+msgstr "Bain ó Cheanáin"
+
+#: ../libslab/application-tile.c:772 ../libslab/document-tile.c:528
+msgid "Add to Favorites"
+msgstr "Cuir le Ceanáin"
+
+#: ../libslab/application-tile.c:857
+msgid "Remove from Startup Programs"
+msgstr "Bain ó Ríomhchláir Tosaithe"
+
+#: ../libslab/application-tile.c:859
+msgid "Add to Startup Programs"
+msgstr "Cuir le Ríomhchláir Tosaithe"
+
+#: ../libslab/app-shell.c:750
+#, c-format
+msgid ""
+"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
+"\n"
+" Your filter \"<b>%s</b>\" does not match any items.</span>"
+msgstr ""
+
+#: ../libslab/app-shell.c:900
+msgid "Other"
+msgstr "Eile"
+
+#: ../libslab/bookmark-agent.c:1067
+msgid "New Spreadsheet"
+msgstr "Scarbhileog Nua"
+
+#: ../libslab/bookmark-agent.c:1071
+msgid "New Document"
+msgstr "Cáipéis Nua"
+
+#: ../libslab/bookmark-agent.c:1121
+msgid "Home"
+msgstr "Baile"
+
+#: ../libslab/bookmark-agent.c:1137
+msgid "File System"
+msgstr "Córas Comhad"
+
+#: ../libslab/bookmark-agent.c:1141
+#, fuzzy
+msgid "Network Servers"
+msgstr "Ionadóir Lín"
+
+#: ../libslab/bookmark-agent.c:1170
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr "Cuardaigh"
+
+#. make open with default action
+#: ../libslab/directory-tile.c:168
+msgid "<b>Open</b>"
+msgstr "<b>Oscail</b>"
+
+#. make rename action
+#: ../libslab/directory-tile.c:187 ../libslab/document-tile.c:232
+msgid "Rename..."
+msgstr "Athainmnigh..."
+
+#: ../libslab/directory-tile.c:201 ../libslab/directory-tile.c:210
+#: ../libslab/document-tile.c:246 ../libslab/document-tile.c:255
+msgid "Send To..."
+msgstr "Seol Chuig..."
+
+#. make move to trash action
+#: ../libslab/directory-tile.c:225 ../libslab/document-tile.c:281
+msgid "Move to Trash"
+msgstr "Bog go Bruscar"
+
+#: ../libslab/directory-tile.c:235 ../libslab/directory-tile.c:448
+#: ../libslab/document-tile.c:291 ../libslab/document-tile.c:639
+msgid "Delete"
+msgstr "Scrios"
+
+#: ../libslab/document-tile.c:153
+msgid "Edited %m/%d/%Y"
+msgstr "Curtha in eagar %d/%m/%Y"
+
+#: ../libslab/document-tile.c:193
+#, c-format
+msgid "<b>Open with \"%s\"</b>"
+msgstr "<b>Oscail le \"%s\"</b>"
+
+#: ../libslab/document-tile.c:205
+msgid "Open with Default Application"
+msgstr "Oscail le Feidhmchlár Réamhshocraithe"
+
+#: ../libslab/document-tile.c:216
+msgid "Open in File Manager"
+msgstr "Oscail i mBainisteoir Comhad"
+
+#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
+#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
+#, c-format
+msgid "Unexpected attribute '%s' for element '%s'"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
+#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
+#, c-format
+msgid "Attribute '%s' of element '%s' not found"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:1087
+#: ../libslab/libslab-bookmarkfile.c:1152
+#: ../libslab/libslab-bookmarkfile.c:1216
+#: ../libslab/libslab-bookmarkfile.c:1226
+#, c-format
+msgid "Unexpected tag '%s', tag '%s' expected"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:1112
+#: ../libslab/libslab-bookmarkfile.c:1126
+#: ../libslab/libslab-bookmarkfile.c:1194
+#: ../libslab/libslab-bookmarkfile.c:1246
+#, c-format
+msgid "Unexpected tag '%s' inside '%s'"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:1929
+msgid "No valid bookmark file found in data dirs"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:2130
+#, c-format
+msgid "A bookmark for URI '%s' already exists"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:2176
+#: ../libslab/libslab-bookmarkfile.c:2333
+#: ../libslab/libslab-bookmarkfile.c:2418
+#: ../libslab/libslab-bookmarkfile.c:2499
+#: ../libslab/libslab-bookmarkfile.c:2584
+#: ../libslab/libslab-bookmarkfile.c:2667
+#: ../libslab/libslab-bookmarkfile.c:2745
+#: ../libslab/libslab-bookmarkfile.c:2824
+#: ../libslab/libslab-bookmarkfile.c:2866
+#: ../libslab/libslab-bookmarkfile.c:2963
+#: ../libslab/libslab-bookmarkfile.c:3089
+#: ../libslab/libslab-bookmarkfile.c:3279
+#: ../libslab/libslab-bookmarkfile.c:3355
+#: ../libslab/libslab-bookmarkfile.c:3508
+#: ../libslab/libslab-bookmarkfile.c:3573
+#: ../libslab/libslab-bookmarkfile.c:3663
+#: ../libslab/libslab-bookmarkfile.c:3790
+#, c-format
+msgid "No bookmark found for URI '%s'"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:2508
+#, c-format
+msgid "No MIME type defined in the bookmark for URI '%s'"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:2593
+#, c-format
+msgid "No private flag has been defined in bookmark for URI '%s'"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:2972
+#, c-format
+msgid "No groups set in bookmark for URI '%s'"
+msgstr ""
+
+#: ../libslab/libslab-bookmarkfile.c:3373
+#: ../libslab/libslab-bookmarkfile.c:3518
+#, c-format
+msgid "No application with name '%s' registered a bookmark for '%s'"
+msgstr ""
+
+#: ../libslab/search-bar.c:255
+msgid "Find Now"
+msgstr "Aimsigh Anois"
+
+#: ../libslab/system-tile.c:128
+#, c-format
+msgid "<b>Open %s</b>"
+msgstr "<b>Oscail %s</b>"
+
+#: ../libslab/system-tile.c:141
+msgid "Remove from System Items"
+msgstr ""
+
+#: ../libsounds/sound-view.c:44
+msgid "Login"
+msgstr "Logáil isteach"
+
+#: ../libsounds/sound-view.c:45
+msgid "Logout"
+msgstr "Logáil amach"
+
+#: ../libsounds/sound-view.c:46
+msgid "Boing"
+msgstr ""
+
+#: ../libsounds/sound-view.c:47
+msgid "Siren"
+msgstr "Bonnán"
+
+#: ../libsounds/sound-view.c:48
+msgid "Clink"
+msgstr ""
+
+#: ../libsounds/sound-view.c:49
+msgid "Beep"
+msgstr ""
+
+#: ../libsounds/sound-view.c:50
+msgid "No sound"
+msgstr "Gan fuaim"
+
+#: ../libsounds/sound-view.c:132
+msgid "Sound not set for this event."
+msgstr ""
+
+#: ../libsounds/sound-view.c:141
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package for a set of default sounds."
+msgstr ""
+
+#: ../libsounds/sound-view.c:152
 msgid "The sound file for this event does not exist."
 msgstr ""
 
-#: ../libsounds/sound-view.c:149
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
+#: ../libsounds/sound-view.c:183
+msgid "Select Sound File"
+msgstr "Roghnaigh Comhad Fuaime"
 
-#: ../libsounds/sound-view.c:224
+#: ../libsounds/sound-view.c:203
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr ""
 
-#: ../libsounds/sound-view.c:289
-msgid "Event"
-msgstr "Tuairim"
-
-#: ../libsounds/sound-view.c:298
-msgid "Sound File"
-msgstr "Comhad Glóir"
-
-#: ../libsounds/sound-view.c:314
-msgid "_Sounds:"
-msgstr "_Glóireanna:"
-
-#: ../libsounds/sound-view.c:328
-msgid "Sound _file:"
-msgstr "_Comhad Glóir:"
-
-#: ../libsounds/sound-view.c:332
-msgid "Select Sound File"
-msgstr "Roghnaigh Comhad Glóir"
-
-#: ../libsounds/sound-view.c:356
-msgid "_Play"
-msgstr "_Cas"
+#: ../libsounds/sound-view.c:264
+msgid "Select sound file..."
+msgstr "Roghnaigh comhad fuaime..."
 
 #: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "Sc_ríos"
+msgid "System Sounds"
+msgstr "Fuaimeanna Córais"
 
-#: ../libwindow-settings/gnome-wm-manager.c:320
+#: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
-msgstr ""
+msgstr "Uasmhéadaigh"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "Íoslaghdaigh"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr ""
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "Neamhní"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -2811,82 +3256,78 @@ msgid "Sync text/plain and text/* handlers"
 msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr ""
+msgid "E-mail"
+msgstr "Ríomhphost"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr ""
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr ""
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr ""
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
-msgid "E-mail"
-msgstr "R-Phoist"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "E-mail's shortcut."
 msgstr ""
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
-msgstr "Tuairim"
+msgstr "Díchuir"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr ""
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
-#, fuzzy
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
-msgstr "Fillteán Baile"
+msgstr "Fillteán baile"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr ""
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+msgid "Launch calculator"
+msgstr ""
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 #, fuzzy
-msgid "Launch help browser"
+msgid "Launch calculator's shortcut"
 msgstr "Tosaigh Brabhslaí Cabhair"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+msgid "Launch help browser"
+msgstr "Tosaigh brabhsálaí cabhrach"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 #, fuzzy
 msgid "Launch help browser's shortcut."
 msgstr "Tosaigh Brabhslaí Cabhair"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
-#, fuzzy
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Launch web browser"
-msgstr "Tosaigh Brabhslaí Cabhair"
+msgstr "Tosaigh brabhsálaí lín"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 #, fuzzy
 msgid "Launch web browser's shortcut."
 msgstr "Tosaigh Brabhslaí Cabhair"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
-#, fuzzy
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Lock screen"
-msgstr "Glasal na Scáthlán"
+msgstr "Glasáil scáileán"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Lock screen's shortcut."
 msgstr ""
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
-#, fuzzy
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Log out"
-msgstr "Log as"
+msgstr "Logáil amach"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+msgid "Log out's shortcut."
+msgstr ""
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Media player"
+msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
-msgid "Log out's shortcut."
+msgid "Media player key's shortcut."
 msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
@@ -2895,7 +3336,7 @@ msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Pause"
-msgstr "Smeadar"
+msgstr "Sos"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Pause key's shortcut."
@@ -2911,10 +3352,6 @@ msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Previous track key's shortcut."
-msgstr ""
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
-msgid "Search"
 msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
@@ -2958,8 +3395,9 @@ msgid "Volume mute"
 msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
-msgid "Volume mute's shortcut"
-msgstr ""
+#, fuzzy
+msgid "Volume mute's shortcut."
+msgstr "Tosaigh Brabhslaí Cabhair"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
@@ -2990,201 +3428,176 @@ msgid "Show Startup Errors"
 msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-#, fuzzy
 msgid "Start screensaver"
-msgstr "Léitheoir-_Scáthlán"
+msgstr "Tosaigh spárálaí scáileáin"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#: ../shell/control-center.c:62
+#, c-format
+msgid "key not found [%s]\n"
+msgstr ""
+
+#: ../shell/control-center.c:159
+msgid "Filter"
+msgstr "Scagaire"
+
+#: ../shell/control-center.c:159
+msgid "Groups"
+msgstr "Grúpaí"
+
+#: ../shell/control-center.c:159
+msgid "Common Tasks"
+msgstr ""
+
+#: ../shell/control-center.c:163 ../shell/gnomecc.desktop.in.in.h:1
+#: ../shell/gnomecc.directory.in.h:1
+msgid "Control Center"
+msgstr "Lárionad Rialaithe"
+
+#: ../shell/control-center.schemas.in.h:1
+msgid "Close the control-center when a task is activated"
+msgstr ""
+
+#: ../shell/control-center.schemas.in.h:2
+msgid "Exit shell on add or remove action performed"
+msgstr ""
+
+#: ../shell/control-center.schemas.in.h:3
+msgid "Exit shell on help action performed"
+msgstr ""
+
+#: ../shell/control-center.schemas.in.h:4
+msgid "Exit shell on start action performed"
+msgstr ""
+
+#: ../shell/control-center.schemas.in.h:5
+msgid "Exit shell on upgrade or uninstall action performed"
+msgstr ""
+
+#: ../shell/control-center.schemas.in.h:6
+msgid "Indicates whether to close the shell when a help action is performed"
+msgstr ""
+
+#: ../shell/control-center.schemas.in.h:7
+msgid "Indicates whether to close the shell when a start action is performed"
+msgstr ""
+
+#: ../shell/control-center.schemas.in.h:8
 msgid ""
-"A collection of scripts to run whenever the keyboard state is reloaded. "
-"Useful for re-applying xmodmap based adjustments"
+"Indicates whether to close the shell when an add or remove action is "
+"performed"
 msgstr ""
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "A list of modmap files available in the $HOME directory."
-msgstr ""
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "Default group, assigned on window creation"
-msgstr ""
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "Keep and manage separate group per window"
-msgstr ""
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-#, fuzzy
-msgid "Keyboard Update Handlers"
-msgstr "_Modéil  Miarchlar:"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
-#, fuzzy
-msgid "Keyboard layout"
-msgstr "Miarchlar"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
-#, fuzzy
-msgid "Keyboard model"
-msgstr "_Modéil  Miarchlar:"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
-#, fuzzy
-msgid "Keyboard options"
-msgstr "Roghnachais XKB"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: ../shell/control-center.schemas.in.h:9
 msgid ""
-"Keyboard settings in gconf will be overridden from the system ASAP "
-"(deprecated)"
+"Indicates whether to close the shell when an upgrade or uninstall action is "
+"performed"
 msgstr ""
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
-msgid "Save/restore indicators together with layout groups"
+#: ../shell/control-center.schemas.in.h:10
+msgid "Task names and associated .desktop files"
 msgstr ""
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
-msgid "Show layout names instead of group names"
-msgstr ""
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: ../shell/control-center.schemas.in.h:11
 msgid ""
-"Show layout names instead of group names (only for versions of XFree "
-"supporting multiple layouts)"
+"The task name to be displayed in the control-center followed by a \";\" "
+"separator then the filename of an associated .desktop file to launch for "
+"that task."
 msgstr ""
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
-msgid "Suppress the \"X sysconfig changed\" warning message"
-msgstr ""
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
+#: ../shell/control-center.schemas.in.h:13
 msgid ""
-"Very soon, keyboard settings in gconf will be overridden (from the system "
-"configuration) This key has been deprecated since GNOME 2.12, please unset "
-"the model, layouts and options keys to get the default system configuration."
+"[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;default-"
+"applications.desktop,Add Printer;gnome-cups-manager.desktop]"
 msgstr ""
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
-#, fuzzy
-msgid "keyboard layout"
-msgstr "Miarchlar"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
-#, fuzzy
-msgid "keyboard model"
-msgstr "_Modéil  Miarchlar:"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
-msgid "modmap file list"
+#: ../shell/control-center.schemas.in.h:14
+msgid ""
+"if true, the control-center will close when a \"Common Task\" is activated"
 msgstr ""
 
-#: ../typing-break/drw-break-window.c:212
-msgid "_Postpone break"
+#: ../shell/gnomecc.desktop.in.in.h:2
+msgid "The GNOME configuration tool"
 msgstr ""
 
-#: ../typing-break/drw-break-window.c:259
+#: ../typing-break/drw-break-window.c:188
+msgid "_Postpone Break"
+msgstr ""
+
+#: ../typing-break/drw-break-window.c:244
 msgid "Take a break!"
-msgstr "Tóg Sos!"
+msgstr "Tóg sos!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: ../typing-break/drwright.c:141
+#: ../typing-break/drwright.c:128
 msgid "/_Preferences"
-msgstr "/_Roghnachais"
+msgstr "/_Sainroghanna"
 
-#: ../typing-break/drwright.c:142
+#: ../typing-break/drwright.c:129
 msgid "/_About"
-msgstr "/_Faoi"
+msgstr "/_Maidir Leis Seo"
 
-#: ../typing-break/drwright.c:144
+#: ../typing-break/drwright.c:131
 msgid "/_Take a Break"
 msgstr "/_Tóg Sos"
 
-#: ../typing-break/drwright.c:495
-#, fuzzy, c-format
+#: ../typing-break/drwright.c:500
+#, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
-msgstr[0] "%d nóiméad go dtí an sos eile"
-msgstr[1] "%d nóiméad go dtí an sos eile"
+msgstr[0] "nóiméad amháin go dtí an chéad sos eile"
+msgstr[1] "%d nóiméad go dtí an chéad sos eile"
+msgstr[2] "%d nóiméad go dtí an chéad sos eile"
+msgstr[3] "%d nóiméad go dtí an chéad sos eile"
+msgstr[4] "%d nóiméad go dtí an chéad sos eile"
 
-#: ../typing-break/drwright.c:499
+#: ../typing-break/drwright.c:504
 msgid "Less than one minute until the next break"
 msgstr "Níos lúide do nóiméad go dtí an sos"
 
-#: ../typing-break/drwright.c:587
+#: ../typing-break/drwright.c:591
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr ""
 
-#: ../typing-break/drwright.c:635
-msgid "About GNOME Typing Monitor"
+#: ../typing-break/drwright.c:610
+msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr ""
 
-#: ../typing-break/drwright.c:659
-msgid "A computer break reminder."
-msgstr ""
-
-#: ../typing-break/drwright.c:660
-msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
-msgstr ""
-
-#: ../typing-break/drwright.c:661
+#: ../typing-break/drwright.c:611
 msgid "Eye candy added by Anders Carlsson"
 msgstr ""
 
-#: ../typing-break/drwright.c:837
-msgid "Break reminder"
+#: ../typing-break/drwright.c:620
+msgid "A computer break reminder."
 msgstr ""
 
-#: ../typing-break/main.c:93
-msgid "The typing monitor is already running."
+#: ../typing-break/drwright.c:622
+msgid "translator-credits"
+msgstr ""
+"Alastair McKinstry <mckinstry@debian.org>\n"
+"Seán de Búrca <leftmostcat@gmail.com>"
+
+#: ../typing-break/main.c:61
+msgid "Enable debugging code"
 msgstr ""
 
-#: ../typing-break/main.c:106
+#: ../typing-break/main.c:63
+msgid "Don't check whether the notification area exists"
+msgstr ""
+
+#: ../typing-break/main.c:89
+msgid "Typing Monitor"
+msgstr ""
+
+#: ../typing-break/main.c:105
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
 "right-clicking on your panel and choosing 'Add to panel', selecting "
 "'Notification area' and clicking 'Add'."
-msgstr ""
-
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr ""
-
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "Ainm:"
-
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "Stíl:"
-
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "Saghas:"
-
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "Meid:"
-
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "Leagan:"
-
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "Cóipcheart"
-
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "Tuarascail:"
-
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
 msgstr ""
 
 #: ../vfs-methods/fontilus/fontilus-context-menu.c:132
@@ -3261,61 +3674,117 @@ msgstr ""
 msgid "Whether to thumbnail Type1 fonts"
 msgstr ""
 
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "GNOME Font Viewer"
+#: ../vfs-methods/fontilus/font-view.c:115
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr ""
+"Chuaigh bé mhórshách le dlúthspád fíorfhinn trí hata mo dhea-phorcáin bhig. "
+"0123456789"
+
+#: ../vfs-methods/fontilus/font-view.c:276
+msgid "Name:"
+msgstr "Ainm:"
+
+#: ../vfs-methods/fontilus/font-view.c:279
+msgid "Style:"
+msgstr "Stíl:"
+
+#: ../vfs-methods/fontilus/font-view.c:289
+msgid "Type:"
+msgstr "Cineál:"
+
+#: ../vfs-methods/fontilus/font-view.c:295
+msgid "Size:"
+msgstr "Méid:"
+
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
+msgid "Version:"
+msgstr "Leagan:"
+
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
+msgid "Copyright:"
+msgstr "Cóipcheart:"
+
+#: ../vfs-methods/fontilus/font-view.c:347
+msgid "Description:"
+msgstr "Cur Síos:"
+
+#: ../vfs-methods/fontilus/font-view.c:408
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "úsáid: %s comhadcló\n"
+
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
+msgid "Font Viewer"
+msgstr "Amharcán Clónna"
+
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "Preview fonts"
+msgstr "Réamhamharc clónna"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:242
+msgid "Text to thumbnail (default: Aa)"
+msgstr ""
+
+#: ../vfs-methods/fontilus/thumbnailer.c:242
+msgid "TEXT"
+msgstr "TÉACS"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:244
+msgid "Font size (default: 64)"
+msgstr "Méid cló (réamhshocrú: 64)"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:244
+msgid "SIZE"
+msgstr "MÉID"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:246
+msgid "FONT-FILE OUTPUT-FILE"
+msgstr "COMHAD-CLÓ COMHAD-ASCHUR"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:262
+#, c-format
+msgid "Error parsing arguments: %s\n"
+msgstr "Earráid agus argóintí á pharsáil: %s\n"
+
+#: ../vfs-methods/themus/apply-font.glade.h:1
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Cuir cló nua i bhfeidhm?</span>"
 
 #: ../vfs-methods/themus/apply-font.glade.h:2
-msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr ""
+msgid "Do _not apply font"
+msgstr "_Ná cuir cló i bhfeidhm"
 
 #: ../vfs-methods/themus/apply-font.glade.h:3
-msgid "Do _not apply font"
-msgstr ""
-
-#: ../vfs-methods/themus/apply-font.glade.h:4
 msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
 msgstr ""
 
-#: ../vfs-methods/themus/apply-font.glade.h:5
+#: ../vfs-methods/themus/apply-font.glade.h:4
 msgid "_Apply font"
-msgstr ""
+msgstr "Cuir cló i bh_feidhm"
 
-#: ../vfs-methods/themus/theme-method.c:520
+#: ../vfs-methods/themus/theme-method.c:485
 msgid "Themes"
 msgstr "Téamaí"
 
 #: ../vfs-methods/themus/themus-properties-view.c:126
 msgid "Description"
-msgstr "Tuarascail"
+msgstr "Cur Síos"
 
 #: ../vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
-msgstr "téama an smacht"
+msgstr "Téama rialtán"
 
 #: ../vfs-methods/themus/themus-properties-view.c:139
 msgid "Window border theme"
-msgstr "téama le haighaidh taobh an fuinneog"
+msgstr "Téama imlíne fhuinneoige"
 
 #: ../vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
-msgstr "téama le haighaidh dealbh"
-
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:78
-msgid "ABCDEFG"
-msgstr "AÁBCEÉFGHIÍ"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-#, fuzzy
-msgid "Apply theme"
-msgstr "Cuir i bhfeidhm _Clófhoireann"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr ""
+msgstr "Téama deilbhíní"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3355,3 +3824,20 @@ msgstr "Cé acu na Téamaí a bhfuil insealbhach a chuir mar<b>ionga do ordóg</
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Cé acu na Téamaí a chuir mar<b>ionga do ordóg</b>"
+
+#. translators: you may want to include non-western chars here
+#: ../vfs-methods/themus/themus-theme-applier.c:58
+msgid "ABCDEFG"
+msgstr "ABCDEFG"
+
+#: ../vfs-methods/themus/themus-theme-applier.c:84
+msgid "[FILE]"
+msgstr "[COMHAD]"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+msgid "Apply theme"
+msgstr "Cuir téama i bhfeidhm"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+msgid "Sets the default theme"
+msgstr "Socraíonn an téama réamhshocraithe"
