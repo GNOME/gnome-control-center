@@ -439,9 +439,17 @@ theme_message_area_response_cb (GtkWidget *w,
         gconf_client_set_string (data->client, APPLICATION_FONT_KEY,
                                  theme->application_font, NULL);
 
+      if (theme->documents_font)
+        gconf_client_set_string (data->client, DOCUMENTS_FONT_KEY,
+                                 theme->documents_font, NULL);
+
       if (theme->desktop_font)
         gconf_client_set_string (data->client, DESKTOP_FONT_KEY,
                                  theme->desktop_font, NULL);
+
+      if (theme->windowtitle_font)
+        gconf_client_set_string (data->client, WINDOWTITLE_FONT_KEY,
+                                 theme->windowtitle_font, NULL);
 
       if (theme->monospace_font)
         gconf_client_set_string (data->client, MONOSPACE_FONT_KEY,
@@ -479,8 +487,22 @@ theme_message_area_update (AppearanceData *data)
     g_free (font);
   }
 
+  if (!show_apply_font && theme->documents_font) {
+    font = gconf_client_get_string (data->client, DOCUMENTS_FONT_KEY, NULL);
+    show_apply_font =
+        (!font || strcmp (theme->application_font, font) != 0);
+    g_free (font);
+  }
+
   if (!show_apply_font && theme->desktop_font) {
     font = gconf_client_get_string (data->client, DESKTOP_FONT_KEY, NULL);
+    show_apply_font =
+        (!font || strcmp (theme->application_font, font) != 0);
+    g_free (font);
+  }
+
+ if (!show_apply_font && theme->windowtitle_font) {
+    font = gconf_client_get_string (data->client, WINDOWTITLE_FONT_KEY, NULL);
     show_apply_font =
         (!font || strcmp (theme->application_font, font) != 0);
     g_free (font);
@@ -928,7 +950,9 @@ themes_init (AppearanceData *data)
 #endif
   gconf_client_notify_add (data->client, BACKGROUND_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, APPLICATION_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, DOCUMENTS_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, DESKTOP_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
+  gconf_client_notify_add (data->client, WINDOWTITLE_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
   gconf_client_notify_add (data->client, MONOSPACE_FONT_KEY, (GConfClientNotifyFunc) background_or_font_changed, data, NULL, NULL);
 
   settings = gtk_settings_get_default ();

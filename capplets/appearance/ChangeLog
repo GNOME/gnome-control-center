@@ -1,3 +1,13 @@
+2007-12-21  Luca Ferretti  <elle.uca@libero.it>
+
+	* appearance-themes.c: (theme_message_area_response_cb),
+	(theme_message_area_update), (themes_init):
+	* theme-util.h:
+	Read WindowTitleFont and DocumentsFont from meta-theme
+	and use to set the value for /apps/metacity/general/titlebar_font
+	and /desktop/gnome/interface/document_font_name GConf keys.
+	This closes bug #504250
+
 2007-12-06  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-wp-item.c: (gnome_wp_item_update_description): slightly change
