@@ -27,7 +27,9 @@
 #define CURSOR_SIZE_KEY "X-GNOME-Metatheme/CursorSize"
 #define SOUND_THEME_KEY "X-GNOME-Metatheme/SoundTheme"
 #define APPLICATION_FONT_KEY "X-GNOME-Metatheme/ApplicationFont"
+#define DOCUMENTS_FONT_KEY "X-GNOME-Metatheme/DocumentsFont"
 #define DESKTOP_FONT_KEY "X-GNOME-Metatheme/DesktopFont"
+#define WINDOWTITLE_FONT_KEY "X-GNOME-Metatheme/WindowTitleFont"
 #define MONOSPACE_FONT_KEY "X-GNOME-Metatheme/MonospaceFont"
 #define BACKGROUND_IMAGE_KEY "X-GNOME-Metatheme/BackgroundImage"
 
@@ -342,9 +344,17 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
   if (str != NULL)
     meta_theme_info->application_font = g_strdup (str);
 
+  str = gnome_desktop_item_get_string (meta_theme_ditem, DOCUMENTS_FONT_KEY);
+  if (str != NULL)
+    meta_theme_info->documents_font = g_strdup (str);
+
   str = gnome_desktop_item_get_string (meta_theme_ditem, DESKTOP_FONT_KEY);
   if (str != NULL)
     meta_theme_info->desktop_font = g_strdup (str);
+
+  str = gnome_desktop_item_get_string (meta_theme_ditem, WINDOWTITLE_FONT_KEY);
+  if (str != NULL)
+    meta_theme_info->windowtitle_font = g_strdup (str);
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, MONOSPACE_FONT_KEY);
   if (str != NULL)
@@ -1699,7 +1709,9 @@ gnome_theme_meta_info_free (GnomeThemeMetaInfo *meta_theme_info)
   g_free (meta_theme_info->name);
   g_free (meta_theme_info->comment);
   g_free (meta_theme_info->application_font);
+  g_free (meta_theme_info->documents_font);
   g_free (meta_theme_info->desktop_font);
+  g_free (meta_theme_info->windowtitle_font);
   g_free (meta_theme_info->monospace_font);
   g_free (meta_theme_info->background_image);
   g_free (meta_theme_info->gtk_theme_name);
@@ -1723,7 +1735,9 @@ gnome_theme_meta_info_print (GnomeThemeMetaInfo *meta_theme_info)
   g_print ("icon_theme_name: %s\n", meta_theme_info->icon_theme_name);
   g_print ("sound_theme_name: %s\n", meta_theme_info->sound_theme_name);
   g_print ("application_font: %s\n", meta_theme_info->application_font);
+  g_print ("documents_font: %s\n", meta_theme_info->documents_font);
   g_print ("desktop_font: %s\n", meta_theme_info->desktop_font);
+  g_print ("windowtitle_font: %s\n", meta_theme_info->windowtitle_font);
   g_print ("monospace_font: %s\n", meta_theme_info->monospace_font);
   g_print ("background_image: %s\n", meta_theme_info->background_image);
 }
@@ -1788,7 +1802,13 @@ gnome_theme_meta_info_compare (GnomeThemeMetaInfo *a,
   cmp = safe_strcmp (a->application_font, b->application_font);
   if (cmp != 0) return cmp;
 
+  cmp = safe_strcmp (a->documents_font, b->documents_font);
+  if (cmp != 0) return cmp;
+
   cmp = safe_strcmp (a->desktop_font, b->desktop_font);
+  if (cmp != 0) return cmp;
+
+  cmp = safe_strcmp (a->windowtitle_font, b->windowtitle_font);
   if (cmp != 0) return cmp;
 
   cmp = safe_strcmp (a->monospace_font, b->monospace_font);

@@ -107,7 +107,9 @@ struct _GnomeThemeMetaInfo
   guint cursor_size;
 
   gchar *application_font;
+  gchar *documents_font;
   gchar *desktop_font;
+  gchar *windowtitle_font;
   gchar *monospace_font;
   gchar *background_image;
 };
