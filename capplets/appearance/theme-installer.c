@@ -1,3 +1,4 @@
+/* vim:set noexpandtab sts=8 sw=8: */
 /*
  * Copyright (C) 2007 The GNOME Foundation
  * Written by Thomas Wood <thos@gnome.org>
@@ -165,8 +166,11 @@ transfer_cancel_cb (GtkWidget *dlg, gchar *path)
 static void
 missing_utility_message_dialog (const gchar *utility)
 {
-	GtkWidget *dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-				_("Cannot install theme.\nThe %s utility is not installed."), utility);
+	GtkWidget *dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+			GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+			_("Cannot install theme"));
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+			_("The %s utility is not installed."), utility);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }
@@ -214,7 +218,9 @@ transfer_done_tgz_tbz (const gchar *util, const gchar *tmp_dir, const gchar *arc
 		GtkWidget *dialog;
 
 		dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-				_("Cannot install theme.\nThere was a problem while extracting the theme."));
+				_("Cannot install theme"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+				_("There was a problem while extracting the theme."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 	}
@@ -231,6 +237,26 @@ transfer_done_archive (gint filetype, const gchar *tmp_dir, const gchar *archive
 		return transfer_done_tgz_tbz ("bzip2", tmp_dir, archive);
 	else
 		return FALSE;
+}
+
+static void
+invalid_theme_dialog (const gchar *filename, gboolean maybe_theme_engine)
+{
+	GtkWidget *dialog;
+	const gchar *primary = _("There was an error installing the selected file");
+	const gchar *secondary = _("\"%s\" does not appear to be a valid theme.");
+	const gchar *engine = _("\"%s\" does not appear to be a valid theme. It may be a theme engine which you need to compile.");
+
+	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+			GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, primary);
+	if (maybe_theme_engine)
+		gtk_message_dialog_format_secondary_text (
+				GTK_MESSAGE_DIALOG (dialog), engine, filename);
+	else
+		gtk_message_dialog_format_secondary_text (
+				GTK_MESSAGE_DIALOG (dialog), secondary, filename);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
 }
 
 static gboolean
@@ -268,22 +294,10 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 					   theme_name, NULL);
 		break;
 	case THEME_ENGINE:
-		dialog = gtk_message_dialog_new (NULL,
-			       GTK_DIALOG_MODAL,
-			       GTK_MESSAGE_ERROR,
-			       GTK_BUTTONS_OK,
-			       _("The selected file is not a valid theme. It might be a theme engine that you need to compile."));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+		invalid_theme_dialog (theme_name, TRUE);
 		return FALSE;
 	default:
-		dialog = gtk_message_dialog_new (NULL,
-			       GTK_DIALOG_MODAL,
-			       GTK_MESSAGE_ERROR,
-			       GTK_BUTTONS_OK,
-			       _("The selected file does not appear to be a valid theme."));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+		invalid_theme_dialog (theme_name, FALSE);
 		return FALSE;
 	}
 
@@ -447,13 +461,10 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 	else if (g_file_test (path, G_FILE_TEST_IS_DIR))
 		filetype = DIRECTORY;
 	else {
-		dialog = gtk_message_dialog_new (NULL,
-						GTK_DIALOG_MODAL,
-						GTK_MESSAGE_ERROR,
-						GTK_BUTTONS_OK,
-						_("The selected file does not appear to be a valid theme."));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+		gchar *filename;
+		filename = g_path_get_basename (path);
+		invalid_theme_dialog (filename, FALSE);
+		g_free (filename);
 		g_free (path);
 		return;
 	}
@@ -622,13 +633,7 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 	else if (g_str_has_suffix (base, ".tar.bz2"))
 		template = "gnome-theme-%d.tar.bz2";
 	else {
-		dialog = gtk_message_dialog_new (NULL,
-					GTK_DIALOG_MODAL,
-					GTK_MESSAGE_ERROR,
-					GTK_BUTTONS_OK,
-					_("The selected file does not appear to be a valid theme."));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+		invalid_theme_dialog (base, FALSE);
 		g_free (base);
 		gnome_vfs_uri_list_unref (src);
 		return;
@@ -702,9 +707,12 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
 	{
 		filename_selected = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		gtk_widget_destroy (dialog);
 		gnome_theme_install_from_uri (filename_selected, parent);
 		g_free (filename_selected);
 	}
+	else
+		gtk_widget_destroy (dialog);
 
 	folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
 	g_strlcpy (old_folder, folder, 255);
@@ -714,8 +722,6 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 	 * we're relying on the gnome theme info module to pick up changes
 	 * to the themes so we don't need to update the model here
 	 */
-
-	gtk_widget_destroy (dialog);
 
 	running_theme_install = FALSE;
 }
