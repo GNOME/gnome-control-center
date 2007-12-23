@@ -1,4 +1,4 @@
-# translation of gnome-control-center.HEAD.es.po to Spanish
+# translation of gnome-control-center.HEAD.po to Español
 # Copyright © 1999-2002, 2006, 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 #
@@ -15,10 +15,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-14 14:28+0000\n"
-"PO-Revision-Date: 2007-12-14 21:40+0100\n"
+"POT-Creation-Date: 2007-12-22 16:32+0000\n"
+"PO-Revision-Date: 2007-12-23 14:07+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
-"Language-Team: Spanish <gnome-es-list@gnome.org>\n"
+"Language-Team: Español <<gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -69,7 +69,7 @@ msgid "Images"
 msgstr "Imágenes"
 
 #: ../capplets/about-me/gnome-about-me.c:699
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:700
 msgid "All Files"
 msgstr "Todos los archivos"
 
@@ -504,7 +504,7 @@ msgstr ""
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:250
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
-msgstr "Ha ocurrido un error al ejecutar el diálogo de preferencias del ratón: %s"
+msgstr "Hubo un error al ejecutar el diálogo de preferencias del ratón: %s"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:346
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:407
@@ -794,32 +794,32 @@ msgid "[WALLPAPER...]"
 msgstr "[Tapiz...]"
 
 #: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/common/gnome-theme-info.c:429
-#: ../capplets/common/gnome-theme-info.c:628
+#: ../capplets/common/gnome-theme-info.c:439
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Default Pointer"
 msgstr "Puntero predeterminado"
 
-#: ../capplets/appearance/appearance-themes.c:512
+#: ../capplets/appearance/appearance-themes.c:534
 msgid "Apply Background"
 msgstr "Aplicar tapiz"
 
-#: ../capplets/appearance/appearance-themes.c:516
+#: ../capplets/appearance/appearance-themes.c:538
 msgid "Apply Font"
 msgstr "Aplicar tipografía"
 
-#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/appearance/appearance-themes.c:563
 msgid "The current theme suggests a background and a font."
 msgstr "El tema actual sugiere un tapiz y una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:546
+#: ../capplets/appearance/appearance-themes.c:568
 msgid "The current theme suggests a background."
 msgstr "El tema actual sugiere un tapiz."
 
-#: ../capplets/appearance/appearance-themes.c:551
+#: ../capplets/appearance/appearance-themes.c:573
 msgid "The current theme suggests a font."
 msgstr "El tema actual sugiere una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:835
+#: ../capplets/appearance/appearance-themes.c:857
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1239,77 +1239,78 @@ msgid_plural "pixels"
 msgstr[0] "píxel"
 msgstr[1] "píxeles"
 
-#: ../capplets/appearance/theme-installer.c:169
+#: ../capplets/appearance/theme-installer.c:171
+#: ../capplets/appearance/theme-installer.c:221
+msgid "Cannot install theme"
+msgstr "No se puede instalar el tema"
+
+#: ../capplets/appearance/theme-installer.c:173
+#, c-format
+msgid "The %s utility is not installed."
+msgstr "La utilidad %s no está instalada."
+
+#: ../capplets/appearance/theme-installer.c:223
+msgid "There was a problem while extracting the theme."
+msgstr "Hubo un problema al extraer el tema."
+
+#: ../capplets/appearance/theme-installer.c:246
+msgid "There was an error installing the selected file"
+msgstr "Hubo un error al instalar el archivo seleccionado"
+
+#: ../capplets/appearance/theme-installer.c:247
+#, c-format
+msgid "\"%s\" does not appear to be a valid theme."
+msgstr "«%s» no parece ser un tema válido."
+
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid ""
-"Cannot install theme.\n"
-"The %s utility is not installed."
+"\"%s\" does not appear to be a valid theme. It may be a theme engine which "
+"you need to compile."
 msgstr ""
-"No se puede instalar el tema.\n"
-"La utilidad %s no está instalada."
+"«%s» no parece ser un tema válido. Puede ser un motor de temas "
+"que debe compilar."
 
-#: ../capplets/appearance/theme-installer.c:217
-msgid ""
-"Cannot install theme.\n"
-"There was a problem while extracting the theme."
-msgstr ""
-"No se puede instalar el tema.\n"
-"Hubo un problema al extraer el tema."
-
-#: ../capplets/appearance/theme-installer.c:261
+#: ../capplets/appearance/theme-installer.c:287
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "El tema de GNOME %s se instaló correctamente"
 
-#: ../capplets/appearance/theme-installer.c:275
-msgid ""
-"The selected file is not a valid theme. It might be a theme engine that you "
-"need to compile."
-msgstr ""
-"El archivo seleccionado no es un tema válido. Puede ser un motor de temas "
-"que debe compilar."
-
-#: ../capplets/appearance/theme-installer.c:284
-#: ../capplets/appearance/theme-installer.c:454
-#: ../capplets/appearance/theme-installer.c:629
-msgid "The selected file does not appear to be a valid theme."
-msgstr "El archivo seleccionado no parece ser un tema válido."
-
-#: ../capplets/appearance/theme-installer.c:333
+#: ../capplets/appearance/theme-installer.c:347
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "La instalación del tema «%s» falló."
 
-#: ../capplets/appearance/theme-installer.c:365
+#: ../capplets/appearance/theme-installer.c:379
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Se ha instalado el tema «%s»."
 
-#: ../capplets/appearance/theme-installer.c:371
+#: ../capplets/appearance/theme-installer.c:385
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "¿Desea aplicarlo ahora, o mantener su tema actual?"
 
-#: ../capplets/appearance/theme-installer.c:373
+#: ../capplets/appearance/theme-installer.c:387
 msgid "Keep Current Theme"
 msgstr "Mantener el tema actual"
 
-#: ../capplets/appearance/theme-installer.c:375
+#: ../capplets/appearance/theme-installer.c:389
 msgid "Apply New Theme"
 msgstr "Aplicar el nuevo tema"
 
-#: ../capplets/appearance/theme-installer.c:480
+#: ../capplets/appearance/theme-installer.c:491
 msgid "Failed to create temporary directory"
 msgstr "Falló al crear la carpeta temporal"
 
-#: ../capplets/appearance/theme-installer.c:540
+#: ../capplets/appearance/theme-installer.c:551
 msgid "New themes have been successfully installed."
 msgstr "Los nuevos temas se han instalado con éxito."
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:579
 msgid "No theme file location specified to install"
 msgstr "No se ha especificado ninguna ubicación del archivo del tema para instalar"
 
-#: ../capplets/appearance/theme-installer.c:588
+#: ../capplets/appearance/theme-installer.c:599
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1318,7 +1319,7 @@ msgstr ""
 "Permisos insuficientes para instalar el tema en:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:610
+#: ../capplets/appearance/theme-installer.c:621
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1327,11 +1328,11 @@ msgstr ""
 "%s es la ruta donde se van a instalar los archivos del tema. Esto no puede "
 "seleccionarse como ubicación de origen"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Select Theme"
 msgstr "Seleccione un tema"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:693
 msgid "Theme Packages"
 msgstr "Paquete de tema"
 
@@ -1389,7 +1390,7 @@ msgstr "Obtener y almacenar configuración heredada"
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
 #, c-format
 msgid "There was an error displaying help: %s"
-msgstr "Ha ocurrido un error al mostrar la ayuda: %s"
+msgstr "Hubo un error al mostrar la ayuda: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
@@ -1564,31 +1565,31 @@ msgstr "Por favor seleccione una imagen."
 msgid "_Select"
 msgstr "_Seleccionar"
 
-#: ../capplets/common/gnome-theme-info.c:629
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Default Pointer - Current"
 msgstr "Puntero predeterminado - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "White Pointer"
 msgstr "Puntero blanco"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "White Pointer - Current"
 msgstr "Puntero blanco - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:648
 msgid "Large Pointer"
 msgstr "Puntero grande"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large Pointer - Current"
 msgstr "Puntero grande - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:653
 msgid "Large White Pointer - Current"
 msgstr "Puntero blanco grande - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:654
 msgid "Large White Pointer"
 msgstr "Puntero blanco grande"
 
@@ -2336,12 +2337,12 @@ msgid "Unknown"
 msgstr "Desconocido"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:306
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
 msgid "Default"
 msgstr "Predeterminado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:300
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
 msgid "Layout"
 msgstr "Distribución"
 
@@ -2352,17 +2353,6 @@ msgstr "Fabricantes"
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:235
 msgid "Models"
 msgstr "Modelos"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbpv.c:166
-#, c-format
-msgid ""
-"Keyboard layout \"%s\"\n"
-"Copyright &#169; X.Org Foundation and XKeyboardConfig contributors\n"
-"For licensing see package metadata"
-msgstr ""
-"Distribución de teclado «%s»\n"
-"Copyright &#169; X.Org Foundation y los contribuidores de XKeyboardConfig\n"
-"Para la licencia ver el paquete metadata"
 
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
@@ -3018,7 +3008,7 @@ msgid ""
 "\n"
 "Screensaver functionality will not work in this session."
 msgstr ""
-"Ha ocurrido un error al iniciar el salvapantallas:\n"
+"Hubo un error al iniciar el salvapantallas:\n"
 "\n"
 "%s\n"
 "\n"
@@ -3110,36 +3100,36 @@ msgid "Screen on which BGApplier is to draw"
 msgstr "Pantalla en la cual BGApplier va a dibujar"
 
 #. make start action
-#: ../libslab/application-tile.c:362
+#: ../libslab/application-tile.c:369
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>Iniciar %s</b>"
 
-#: ../libslab/application-tile.c:381
+#: ../libslab/application-tile.c:388
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../libslab/application-tile.c:428
+#: ../libslab/application-tile.c:435
 msgid "Upgrade"
 msgstr "Actualizar"
 
-#: ../libslab/application-tile.c:443
+#: ../libslab/application-tile.c:450
 msgid "Uninstall"
 msgstr "_Desinstalar"
 
-#: ../libslab/application-tile.c:770 ../libslab/document-tile.c:526
+#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:528
 msgid "Remove from Favorites"
 msgstr "Quitar de favoritos"
 
-#: ../libslab/application-tile.c:772 ../libslab/document-tile.c:528
+#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:530
 msgid "Add to Favorites"
 msgstr "Añadir a favoritos"
 
-#: ../libslab/application-tile.c:857
+#: ../libslab/application-tile.c:864
 msgid "Remove from Startup Programs"
 msgstr "Quitar de los programas de inicio"
 
-#: ../libslab/application-tile.c:859
+#: ../libslab/application-tile.c:866
 msgid "Add to Startup Programs"
 msgstr "Añadir a los programas de inicio"
 
@@ -3158,70 +3148,79 @@ msgstr ""
 msgid "Other"
 msgstr "Otras"
 
-#: ../libslab/bookmark-agent.c:1067
+#: ../libslab/bookmark-agent.c:1034
 msgid "New Spreadsheet"
 msgstr "Hoja de cálculo nueva"
 
-#: ../libslab/bookmark-agent.c:1071
+#: ../libslab/bookmark-agent.c:1038
 msgid "New Document"
 msgstr "Documento nuevo"
 
-#: ../libslab/bookmark-agent.c:1121
+#: ../libslab/bookmark-agent.c:1088
 msgid "Home"
 msgstr "Domicilio"
 
-#: ../libslab/bookmark-agent.c:1137
+#: ../libslab/bookmark-agent.c:1104
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#: ../libslab/bookmark-agent.c:1141
+#: ../libslab/bookmark-agent.c:1108
 msgid "Network Servers"
 msgstr "Servidores de red"
 
-#: ../libslab/bookmark-agent.c:1170
+#: ../libslab/bookmark-agent.c:1137
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Buscar"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:168
+#: ../libslab/directory-tile.c:170
 msgid "<b>Open</b>"
 msgstr "<b>Abrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:187 ../libslab/document-tile.c:232
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:234
 msgid "Rename..."
 msgstr "Renombrar…"
 
-#: ../libslab/directory-tile.c:201 ../libslab/directory-tile.c:210
-#: ../libslab/document-tile.c:246 ../libslab/document-tile.c:255
+#: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
+#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
 msgid "Send To..."
 msgstr "Enviar a…"
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:225 ../libslab/document-tile.c:281
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:283
 msgid "Move to Trash"
 msgstr "Mover a la papelera"
 
-#: ../libslab/directory-tile.c:235 ../libslab/directory-tile.c:448
-#: ../libslab/document-tile.c:291 ../libslab/document-tile.c:639
+#: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
+#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:641
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../libslab/document-tile.c:153
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:813
+#, c-format
+msgid "Are you sure you want to permanently delete \"%s\"?"
+msgstr "¿Está seguro de que quiere borrar permanentemente «%s»?"
+
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:817
+msgid "If you delete an item, it is permanently lost."
+msgstr "Si borra un elemento se pierde para siempre."
+
+#: ../libslab/document-tile.c:155
 msgid "Edited %m/%d/%Y"
 msgstr "Editado el %d/%m/%Y"
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Abrir con «%s»</b>"
 
-#: ../libslab/document-tile.c:205
+#: ../libslab/document-tile.c:207
 msgid "Open with Default Application"
 msgstr "Abrir con la aplicación predeterminada"
 
-#: ../libslab/document-tile.c:216
+#: ../libslab/document-tile.c:218
 msgid "Open in File Manager"
 msgstr "Abrir en el gestor de archivos"
 
