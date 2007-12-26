@@ -5,4 +5,4 @@ DOC_MODULE = control-center
 DOC_ENTITIES = config-accessibility-keyboard.xml config-background.xml config-behavior.xml config-cds.xml config-default-apps.xml config-file-type.xml config-hints.xml config-html.xml config-kbd.xml config-keybindings.xml config-mouse.xml config-screensaver.xml config-sound.xml config-themes.xml
 DOC_INCLUDES = 
 
-DOC_LINGUAS = ca en_GB es fr ja oc pa pt_BR ru sv uk vi zh_CN
+DOC_LINGUAS = ca en_GB es fr ja oc pa pt pt_BR ru sv uk vi zh_CN
