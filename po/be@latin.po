@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-08 10:47+0200\n"
-"PO-Revision-Date: 2007-12-08 10:49+0200\n"
+"POT-Creation-Date: 2007-12-28 01:11+0200\n"
+"PO-Revision-Date: 2007-12-28 01:16+0200\n"
 "Last-Translator: Alaksandar Navicki <zolak@lacinka.org>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgid "Images"
 msgstr "Vyjavy"
 
 #: ../capplets/about-me/gnome-about-me.c:699
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:700
 msgid "All Files"
 msgstr "Usie fajły"
 
@@ -786,32 +786,32 @@ msgid "[WALLPAPER...]"
 msgstr "[ŠPALERA...]"
 
 #: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/common/gnome-theme-info.c:429
-#: ../capplets/common/gnome-theme-info.c:628
+#: ../capplets/common/gnome-theme-info.c:439
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Default Pointer"
 msgstr "Zmoŭčany kursor"
 
-#: ../capplets/appearance/appearance-themes.c:512
+#: ../capplets/appearance/appearance-themes.c:534
 msgid "Apply Background"
 msgstr "Užyj fon"
 
-#: ../capplets/appearance/appearance-themes.c:516
+#: ../capplets/appearance/appearance-themes.c:538
 msgid "Apply Font"
 msgstr "Užyj šryft"
 
-#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/appearance/appearance-themes.c:563
 msgid "The current theme suggests a background and a font."
 msgstr "Dziejny matyŭ raić peŭny fon i šryft."
 
-#: ../capplets/appearance/appearance-themes.c:546
+#: ../capplets/appearance/appearance-themes.c:568
 msgid "The current theme suggests a background."
 msgstr "Dziejny matyŭ raić peŭny fon."
 
-#: ../capplets/appearance/appearance-themes.c:551
+#: ../capplets/appearance/appearance-themes.c:573
 msgid "The current theme suggests a font."
 msgstr "Dziejny matyŭ raić peŭny šryft."
 
-#: ../capplets/appearance/appearance-themes.c:835
+#: ../capplets/appearance/appearance-themes.c:857
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1231,77 +1231,78 @@ msgstr[0] "piksel"
 msgstr[1] "pikseli"
 msgstr[2] "pikselaŭ"
 
-#: ../capplets/appearance/theme-installer.c:169
+#: ../capplets/appearance/theme-installer.c:171
+#: ../capplets/appearance/theme-installer.c:221
+msgid "Cannot install theme"
+msgstr "Niemahčyma zainstalavać matyŭ"
+
+#: ../capplets/appearance/theme-installer.c:173
+#, c-format
+msgid "The %s utility is not installed."
+msgstr "Pryłada %s nie zainstalavanaja."
+
+#: ../capplets/appearance/theme-installer.c:223
+msgid "There was a problem while extracting the theme."
+msgstr "Uźnikła prablema ŭ časie raspakoŭvańnia matyvu."
+
+#: ../capplets/appearance/theme-installer.c:246
+msgid "There was an error installing the selected file"
+msgstr "U časie instalavańnia zaznačanaha fajłu ŭźnikła pamyłka"
+
+#: ../capplets/appearance/theme-installer.c:247
+#, c-format
+msgid "\"%s\" does not appear to be a valid theme."
+msgstr "\"%s\" nie padobny na pravilny matyŭ."
+
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid ""
-"Cannot install theme.\n"
-"The %s utility is not installed."
+"\"%s\" does not appear to be a valid theme. It may be a theme engine which "
+"you need to compile."
 msgstr ""
-"Niemahčyma zainstalavać matyŭ.\n"
-"Prahrama %s nie zainstalavanaja."
+"\"%s\" nie padobny na pravilny matyŭ. Heta moža być prahramny matyŭ, jaki "
+"treba skampilavać."
 
-#: ../capplets/appearance/theme-installer.c:217
-msgid ""
-"Cannot install theme.\n"
-"There was a problem while extracting the theme."
-msgstr ""
-"Niemahčyma zainstalavać matyŭ.\n"
-"Adbyłasia pamyłka pry raspakoŭvańni matyvu."
-
-#: ../capplets/appearance/theme-installer.c:261
+#: ../capplets/appearance/theme-installer.c:287
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "Matyŭ GNOME %s pravilna zainstalavany"
 
-#: ../capplets/appearance/theme-installer.c:275
-msgid ""
-"The selected file is not a valid theme. It might be a theme engine that you "
-"need to compile."
-msgstr ""
-"Abrany fajł nie źjaŭlajecca pravilnym matyvam. Heta moža być prahramnym "
-"matyvam, jaki treba skampilavać."
-
-#: ../capplets/appearance/theme-installer.c:284
-#: ../capplets/appearance/theme-installer.c:454
-#: ../capplets/appearance/theme-installer.c:629
-msgid "The selected file does not appear to be a valid theme."
-msgstr "Abrany fajł nie źjaŭlajecca pravilnym matyvam."
-
-#: ../capplets/appearance/theme-installer.c:333
+#: ../capplets/appearance/theme-installer.c:347
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Pamyłka instalacyi matyvu \"%s\"."
 
-#: ../capplets/appearance/theme-installer.c:365
+#: ../capplets/appearance/theme-installer.c:379
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Matyŭ \"%s\" zainstalavany."
 
-#: ../capplets/appearance/theme-installer.c:371
+#: ../capplets/appearance/theme-installer.c:385
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Ty chočaš užyć matyŭ ciapier ci pakinuć dziejny matyŭ?"
 
-#: ../capplets/appearance/theme-installer.c:373
+#: ../capplets/appearance/theme-installer.c:387
 msgid "Keep Current Theme"
 msgstr "Pakiń dziejny matyŭ"
 
-#: ../capplets/appearance/theme-installer.c:375
+#: ../capplets/appearance/theme-installer.c:389
 msgid "Apply New Theme"
 msgstr "Užyj novy matyŭ"
 
-#: ../capplets/appearance/theme-installer.c:480
+#: ../capplets/appearance/theme-installer.c:491
 msgid "Failed to create temporary directory"
 msgstr "Niemahčyma stvaryć časovy kataloh"
 
-#: ../capplets/appearance/theme-installer.c:540
+#: ../capplets/appearance/theme-installer.c:551
 msgid "New themes have been successfully installed."
 msgstr "Novyja matyvy paśpiachova zainstalavanyja."
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:579
 msgid "No theme file location specified to install"
 msgstr "Nie padadziena pałažeńnia fajłu matyvu, jaki treba zainstalavać"
 
-#: ../capplets/appearance/theme-installer.c:588
+#: ../capplets/appearance/theme-installer.c:599
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1310,7 +1311,7 @@ msgstr ""
 "Niedastatkova dazvołu, kab zainstalavać matyŭ u:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:610
+#: ../capplets/appearance/theme-installer.c:621
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1319,11 +1320,11 @@ msgstr ""
 "%s źjaŭlajecca ściežkaj, dzie buduć zainstalavanyja fajły matyvu. Niemahčyma "
 "vybrać jaje ŭ jakaści pałažeńnia krynicy"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Select Theme"
 msgstr "Abiary matyŭ"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:693
 msgid "Theme Packages"
 msgstr "Pakunki matyvaŭ"
 
@@ -1557,31 +1558,31 @@ msgstr "Abiary vyjavu."
 msgid "_Select"
 msgstr "_Abiary"
 
-#: ../capplets/common/gnome-theme-info.c:629
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Default Pointer - Current"
 msgstr "Zmoŭčany kursor – dziejny"
 
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "White Pointer"
 msgstr "Bieły kursor"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "White Pointer - Current"
 msgstr "Bieły kursor – dziejny"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:648
 msgid "Large Pointer"
 msgstr "Vialiki kursor"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large Pointer - Current"
 msgstr "Vialiki kursor – dziejny"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:653
 msgid "Large White Pointer - Current"
 msgstr "Vialiki bieły kursor – dziejny"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:654
 msgid "Large White Pointer"
 msgstr "Vialiki bieły kursor"
 
@@ -2331,13 +2332,13 @@ msgstr "chvilin"
 msgid "Unknown"
 msgstr "Nieviadomy"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:210
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:303
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
 msgid "Default"
 msgstr "Zmoŭčanaja"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:297
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
 msgid "Layout"
 msgstr "Raskładka"
 
@@ -2653,7 +2654,7 @@ msgstr "Uklučy prahramnaje miksavańnie hukaŭ (_ESD)"
 
 #: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
-msgstr "Mirhaj ŭsim _ekranam"
+msgstr "Mirhaj usim _ekranam"
 
 #: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
@@ -3020,7 +3021,7 @@ msgstr "Niemahčyma zahruzić hukavy fajł %s u jakaści sempła %s"
 msgid "Cannot determine user's home directory"
 msgstr "Niemahčyma vyznačyć chatni kataloh karystalnika"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:303
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Kluč GConfa %s byŭ vyznačany jak typ %s, ale jaho čakany typ byŭ %s\n"
@@ -3090,36 +3091,36 @@ msgid "Screen on which BGApplier is to draw"
 msgstr "Ekran, na jakim maje być narysavany BGApplier"
 
 #. make start action
-#: ../libslab/application-tile.c:362
+#: ../libslab/application-tile.c:369
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>Uklučy %s</b>"
 
-#: ../libslab/application-tile.c:381
+#: ../libslab/application-tile.c:388
 msgid "Help"
 msgstr "Dapamoha"
 
-#: ../libslab/application-tile.c:428
+#: ../libslab/application-tile.c:435
 msgid "Upgrade"
 msgstr "Aktualizuj"
 
-#: ../libslab/application-tile.c:443
+#: ../libslab/application-tile.c:450
 msgid "Uninstall"
 msgstr "Adinstaluj"
 
-#: ../libslab/application-tile.c:770 ../libslab/document-tile.c:526
+#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:528
 msgid "Remove from Favorites"
 msgstr "Vydal z ulubionych"
 
-#: ../libslab/application-tile.c:772 ../libslab/document-tile.c:528
+#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:530
 msgid "Add to Favorites"
 msgstr "Dadaj da ŭlubionych"
 
-#: ../libslab/application-tile.c:857
+#: ../libslab/application-tile.c:864
 msgid "Remove from Startup Programs"
 msgstr "Vydal sa startavych prahramaŭ"
 
-#: ../libslab/application-tile.c:859
+#: ../libslab/application-tile.c:866
 msgid "Add to Startup Programs"
 msgstr "Dadaj da startavych prahramaŭ"
 
@@ -3138,71 +3139,80 @@ msgstr ""
 msgid "Other"
 msgstr "Inšaje"
 
-#: ../libslab/bookmark-agent.c:1067
+#: ../libslab/bookmark-agent.c:1034
 msgid "New Spreadsheet"
 msgstr "Novy raźlikovy arkuš"
 
-#: ../libslab/bookmark-agent.c:1071
+#: ../libslab/bookmark-agent.c:1038
 msgid "New Document"
 msgstr "Novy dakument"
 
-#: ../libslab/bookmark-agent.c:1121
+#: ../libslab/bookmark-agent.c:1088
 msgid "Home"
 msgstr "Dom"
 
-#: ../libslab/bookmark-agent.c:1137
+#: ../libslab/bookmark-agent.c:1104
 msgid "File System"
 msgstr "Fajłavaja systemа"
 
-#: ../libslab/bookmark-agent.c:1141
+#: ../libslab/bookmark-agent.c:1108
 msgid "Network Servers"
 msgstr "Sietkavyja servery"
 
-#: ../libslab/bookmark-agent.c:1170
+#: ../libslab/bookmark-agent.c:1137
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Šukaj"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:168
+#: ../libslab/directory-tile.c:170
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Adčyni</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:187 ../libslab/document-tile.c:232
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:234
 msgid "Rename..."
 msgstr "Źmiani nazvu..."
 
-#: ../libslab/directory-tile.c:201 ../libslab/directory-tile.c:210
-#: ../libslab/document-tile.c:246 ../libslab/document-tile.c:255
+#: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
+#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
 msgid "Send To..."
 msgstr "Vyšli da..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:225 ../libslab/document-tile.c:281
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:283
 msgid "Move to Trash"
 msgstr "Pieraniasi ŭ śmietnicu"
 
-#: ../libslab/directory-tile.c:235 ../libslab/directory-tile.c:448
-#: ../libslab/document-tile.c:291 ../libslab/document-tile.c:639
+#: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
+#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:641
 msgid "Delete"
 msgstr "Vydal"
 
-#: ../libslab/document-tile.c:153
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:813
+#, c-format
+msgid "Are you sure you want to permanently delete \"%s\"?"
+msgstr "Ty sapraŭdy chočaš nazaŭždy vydalić \"%s\"?"
+
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:817
+msgid "If you delete an item, it is permanently lost."
+msgstr "Vydaleny elementy budzie stračany nazaŭždy."
+
+#: ../libslab/document-tile.c:155
 msgid "Edited %m/%d/%Y"
 msgstr "Źmienieny %d.%m.%Y"
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Adčyni pry dapamozie \"%s\"</b>"
 
-#: ../libslab/document-tile.c:205
+#: ../libslab/document-tile.c:207
 msgid "Open with Default Application"
 msgstr "Adčyni pry dapamozie zmoŭčanaj aplikacyi"
 
-#: ../libslab/document-tile.c:216
+#: ../libslab/document-tile.c:218
 msgid "Open in File Manager"
 msgstr "Adčyni ŭ kiraŭniku fajłaŭ"
 
