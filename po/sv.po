@@ -12,14 +12,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-17 13:58+0100\n"
-"PO-Revision-Date: 2007-12-17 13:59+0100\n"
+"POT-Creation-Date: 2007-12-28 19:10+0100\n"
+"PO-Revision-Date: 2007-12-28 19:12+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../capplets/localization/localization.glade.h:1
+msgid "<i>Region and language changes take effect the next time you log in.</i>"
+msgstr "<i>Ändringar av region och språk blir aktiverade nästa gång du loggar in.</i>"
+
+#: ../capplets/localization/localization.glade.h:2
+msgid "Localization Preferences"
+msgstr "Lokalinställningar"
+
+#: ../capplets/localization/localization.glade.h:3
+msgid "Region:"
+msgstr "Region:"
+
+#: ../capplets/localization/localization.glade.h:4
+msgid "Selected languages:"
+msgstr "Valda språk:"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -63,7 +79,7 @@ msgid "Images"
 msgstr "Bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:699
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:700
 msgid "All Files"
 msgstr "Alla filer"
 
@@ -736,32 +752,32 @@ msgid "[WALLPAPER...]"
 msgstr "[BAKGRUNDSBILD...]"
 
 #: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/common/gnome-theme-info.c:429
-#: ../capplets/common/gnome-theme-info.c:628
+#: ../capplets/common/gnome-theme-info.c:439
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Default Pointer"
 msgstr "Standardmuspekare"
 
-#: ../capplets/appearance/appearance-themes.c:512
+#: ../capplets/appearance/appearance-themes.c:534
 msgid "Apply Background"
 msgstr "Tillämpa bakgrund"
 
-#: ../capplets/appearance/appearance-themes.c:516
+#: ../capplets/appearance/appearance-themes.c:538
 msgid "Apply Font"
 msgstr "Tillämpa typsnitt"
 
-#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/appearance/appearance-themes.c:563
 msgid "The current theme suggests a background and a font."
 msgstr "Det aktuella temat föreslår en bakgrund och ett typsnitt."
 
-#: ../capplets/appearance/appearance-themes.c:546
+#: ../capplets/appearance/appearance-themes.c:568
 msgid "The current theme suggests a background."
 msgstr "Det aktuella temat föreslår en bakgrund."
 
-#: ../capplets/appearance/appearance-themes.c:551
+#: ../capplets/appearance/appearance-themes.c:573
 msgid "The current theme suggests a font."
 msgstr "Det aktuella temat föreslår ett typsnitt."
 
-#: ../capplets/appearance/appearance-themes.c:835
+#: ../capplets/appearance/appearance-themes.c:857
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1180,73 +1196,74 @@ msgid_plural "pixels"
 msgstr[0] "bildpunkt"
 msgstr[1] "bildpunkter"
 
-#: ../capplets/appearance/theme-installer.c:169
+#: ../capplets/appearance/theme-installer.c:171
+#: ../capplets/appearance/theme-installer.c:221
+msgid "Cannot install theme"
+msgstr "Kan inte installera tema"
+
+#: ../capplets/appearance/theme-installer.c:173
 #, c-format
-msgid ""
-"Cannot install theme.\n"
-"The %s utility is not installed."
-msgstr ""
-"Kan inte installera temat.\n"
-"Verktyget %s är inte installerat."
+msgid "The %s utility is not installed."
+msgstr "Verktyget %s är inte installerat."
 
-#: ../capplets/appearance/theme-installer.c:217
-msgid ""
-"Cannot install theme.\n"
-"There was a problem while extracting the theme."
-msgstr ""
-"Kan inte installera temat.\n"
-"Det inträffade ett problem vid extrahering av temat"
+#: ../capplets/appearance/theme-installer.c:223
+msgid "There was a problem while extracting the theme."
+msgstr "Det inträffade ett problem vid extrahering av temat."
 
-#: ../capplets/appearance/theme-installer.c:261
+#: ../capplets/appearance/theme-installer.c:246
+msgid "There was an error installing the selected file"
+msgstr "Det inträffade ett fel vid installation av den valda filen"
+
+#: ../capplets/appearance/theme-installer.c:247
+#, c-format
+msgid "\"%s\" does not appear to be a valid theme."
+msgstr "\"%s\" verkar inte vara ett giltigt tema."
+
+#: ../capplets/appearance/theme-installer.c:248
+#, c-format
+msgid "\"%s\" does not appear to be a valid theme. It may be a theme engine which you need to compile."
+msgstr "\"%s\" verkar inte vara ett giltigt tema. Den kan vara en temamotor som du behöver kompilera."
+
+#: ../capplets/appearance/theme-installer.c:287
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME-temat %s korrekt installerat"
 
-#: ../capplets/appearance/theme-installer.c:275
-msgid "The selected file is not a valid theme. It might be a theme engine that you need to compile."
-msgstr "Den valda filen är inte ett giltigt tema. Den kan vara en temamotor som du behöver kompilera."
-
-#: ../capplets/appearance/theme-installer.c:284
-#: ../capplets/appearance/theme-installer.c:454
-#: ../capplets/appearance/theme-installer.c:629
-msgid "The selected file does not appear to be a valid theme."
-msgstr "Den valda filen verkar inte vara ett giltigt tema."
-
-#: ../capplets/appearance/theme-installer.c:333
+#: ../capplets/appearance/theme-installer.c:347
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Installation av temat \"%s\" misslyckades."
 
-#: ../capplets/appearance/theme-installer.c:365
+#: ../capplets/appearance/theme-installer.c:379
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Temat \"%s\" har installerats."
 
-#: ../capplets/appearance/theme-installer.c:371
+#: ../capplets/appearance/theme-installer.c:385
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Vill du använda det nu eller behålla ditt aktuella tema?"
 
-#: ../capplets/appearance/theme-installer.c:373
+#: ../capplets/appearance/theme-installer.c:387
 msgid "Keep Current Theme"
 msgstr "Behåll aktuellt tema"
 
-#: ../capplets/appearance/theme-installer.c:375
+#: ../capplets/appearance/theme-installer.c:389
 msgid "Apply New Theme"
 msgstr "Använd nytt tema"
 
-#: ../capplets/appearance/theme-installer.c:480
+#: ../capplets/appearance/theme-installer.c:491
 msgid "Failed to create temporary directory"
 msgstr "Misslyckades med att skapa temporär katalog"
 
-#: ../capplets/appearance/theme-installer.c:540
+#: ../capplets/appearance/theme-installer.c:551
 msgid "New themes have been successfully installed."
 msgstr "Nya teman har installerats."
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:579
 msgid "No theme file location specified to install"
 msgstr "Ingen temafilplats angiven för installation"
 
-#: ../capplets/appearance/theme-installer.c:588
+#: ../capplets/appearance/theme-installer.c:599
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1255,16 +1272,16 @@ msgstr ""
 "Otillräckliga rättigheter för att installera temat i:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:610
+#: ../capplets/appearance/theme-installer.c:621
 #, c-format
 msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
 msgstr "%s är sökvägen där temafilerna kommer att installeras. Detta kan inte väljas som källplatsen"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Select Theme"
 msgstr "Välj tema"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:693
 msgid "Theme Packages"
 msgstr "Temapaket"
 
@@ -1482,31 +1499,31 @@ msgstr "Välj en bild."
 msgid "_Select"
 msgstr "_Välj"
 
-#: ../capplets/common/gnome-theme-info.c:629
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Default Pointer - Current"
 msgstr "Standardmuspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "White Pointer"
 msgstr "Vit muspekare"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "White Pointer - Current"
 msgstr "Vit muspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:648
 msgid "Large Pointer"
 msgstr "Stor muspekare"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large Pointer - Current"
 msgstr "Stor muspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:653
 msgid "Large White Pointer - Current"
 msgstr "Stor vit muspekare - Aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:654
 msgid "Large White Pointer"
 msgstr "Stor vit muspekare"
 
@@ -2222,12 +2239,12 @@ msgid "Unknown"
 msgstr "Okänd"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:306
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
 msgid "Default"
 msgstr "Standard"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:300
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
 msgid "Layout"
 msgstr "Layout"
 
@@ -2238,17 +2255,6 @@ msgstr "Tillverkare"
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:235
 msgid "Models"
 msgstr "Modeller"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbpv.c:166
-#, c-format
-msgid ""
-"Keyboard layout \"%s\"\n"
-"Copyright &#169; X.Org Foundation and XKeyboardConfig contributors\n"
-"For licensing see package metadata"
-msgstr ""
-"Tangentbordslayouten \"%s\"\n"
-"Copyright &#169; X.Org Foundation och XKeyboardConfig-bidragsgivare\n"
-"Se paketets metadata för licensiering"
 
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
@@ -2265,22 +2271,6 @@ msgstr "Språk och plats"
 #: ../capplets/localization/localization.desktop.in.in.h:2
 msgid "Set your language and location preferences"
 msgstr "Inställningar för ditt språk och plats"
-
-#: ../capplets/localization/localization.glade.h:1
-msgid "<i>Region and language changes take effect the next time you log in.</i>"
-msgstr "<i>Ändringar av region och språk blir aktiverade nästa gång du loggar in.</i>"
-
-#: ../capplets/localization/localization.glade.h:2
-msgid "Localization Preferences"
-msgstr "Lokalinställningar"
-
-#: ../capplets/localization/localization.glade.h:3
-msgid "Region:"
-msgstr "Region:"
-
-#: ../capplets/localization/localization.glade.h:4
-msgid "Selected languages:"
-msgstr "Valda språk:"
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:126
@@ -2894,7 +2884,7 @@ msgstr "Kunde inte läsa in ljudfilen %s som prov %s"
 msgid "Cannot determine user's home directory"
 msgstr "Kan inte avgöra användarens hemkatalog"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:303
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-nyckeln %s är satt till typen %s men dess förväntade typ var %s\n"
@@ -2960,38 +2950,38 @@ msgid "Screen on which BGApplier is to draw"
 msgstr "Skärm som BGApplier ska rita på"
 
 #. make start action
-#: ../libslab/application-tile.c:362
+#: ../libslab/application-tile.c:369
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>Starta %s</b>"
 
-#: ../libslab/application-tile.c:381
+#: ../libslab/application-tile.c:388
 msgid "Help"
 msgstr "Hjälp"
 
-#: ../libslab/application-tile.c:428
+#: ../libslab/application-tile.c:435
 msgid "Upgrade"
 msgstr "Uppgradera"
 
-#: ../libslab/application-tile.c:443
+#: ../libslab/application-tile.c:450
 msgid "Uninstall"
 msgstr "Avinstallera"
 
-#: ../libslab/application-tile.c:770
-#: ../libslab/document-tile.c:526
+#: ../libslab/application-tile.c:777
+#: ../libslab/document-tile.c:528
 msgid "Remove from Favorites"
 msgstr "Ta bort från favoriter"
 
-#: ../libslab/application-tile.c:772
-#: ../libslab/document-tile.c:528
+#: ../libslab/application-tile.c:779
+#: ../libslab/document-tile.c:530
 msgid "Add to Favorites"
 msgstr "Lägg till i favoriter"
 
-#: ../libslab/application-tile.c:857
+#: ../libslab/application-tile.c:864
 msgid "Remove from Startup Programs"
 msgstr "Ta bort från uppstartsprogram"
 
-#: ../libslab/application-tile.c:859
+#: ../libslab/application-tile.c:866
 msgid "Add to Startup Programs"
 msgstr "Lägg till i uppstartsprogram"
 
@@ -3010,77 +3000,88 @@ msgstr ""
 msgid "Other"
 msgstr "Övrigt"
 
-#: ../libslab/bookmark-agent.c:1067
+#: ../libslab/bookmark-agent.c:1034
 msgid "New Spreadsheet"
 msgstr "Nytt kalkylblad"
 
-#: ../libslab/bookmark-agent.c:1071
+#: ../libslab/bookmark-agent.c:1038
 msgid "New Document"
 msgstr "Nytt dokument"
 
-#: ../libslab/bookmark-agent.c:1121
+#: ../libslab/bookmark-agent.c:1088
 msgid "Home"
 msgstr "Hem"
 
-#: ../libslab/bookmark-agent.c:1137
+#: ../libslab/bookmark-agent.c:1104
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../libslab/bookmark-agent.c:1141
+#: ../libslab/bookmark-agent.c:1108
 msgid "Network Servers"
 msgstr "Nätverksservrar"
 
-#: ../libslab/bookmark-agent.c:1170
+#: ../libslab/bookmark-agent.c:1137
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Sök"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:168
+#: ../libslab/directory-tile.c:170
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Öppna</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:187
-#: ../libslab/document-tile.c:232
+#: ../libslab/directory-tile.c:189
+#: ../libslab/document-tile.c:234
 msgid "Rename..."
 msgstr "Byt namn..."
 
-#: ../libslab/directory-tile.c:201
-#: ../libslab/directory-tile.c:210
-#: ../libslab/document-tile.c:246
-#: ../libslab/document-tile.c:255
+#: ../libslab/directory-tile.c:203
+#: ../libslab/directory-tile.c:212
+#: ../libslab/document-tile.c:248
+#: ../libslab/document-tile.c:257
 msgid "Send To..."
 msgstr "Skicka till..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:225
-#: ../libslab/document-tile.c:281
+#: ../libslab/directory-tile.c:227
+#: ../libslab/document-tile.c:283
 msgid "Move to Trash"
 msgstr "Flytta till papperskorg"
 
-#: ../libslab/directory-tile.c:235
-#: ../libslab/directory-tile.c:448
-#: ../libslab/document-tile.c:291
-#: ../libslab/document-tile.c:639
+#: ../libslab/directory-tile.c:237
+#: ../libslab/directory-tile.c:450
+#: ../libslab/document-tile.c:293
+#: ../libslab/document-tile.c:641
 msgid "Delete"
 msgstr "Ta bort"
 
-#: ../libslab/document-tile.c:153
+#: ../libslab/directory-tile.c:575
+#: ../libslab/document-tile.c:813
+#, c-format
+msgid "Are you sure you want to permanently delete \"%s\"?"
+msgstr "Är du säker på att du vill ta bort \"%s\" permanent?"
+
+#: ../libslab/directory-tile.c:580
+#: ../libslab/document-tile.c:817
+msgid "If you delete an item, it is permanently lost."
+msgstr "Om du tar bort ett objekt så går det inte att få tillbaka igen."
+
+#: ../libslab/document-tile.c:155
 msgid "Edited %m/%d/%Y"
 msgstr "Redigerad %Y-%m-%d"
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Öppna med \"%s\"</b>"
 
-#: ../libslab/document-tile.c:205
+#: ../libslab/document-tile.c:207
 msgid "Open with Default Application"
 msgstr "Öppna med standardprogram"
 
-#: ../libslab/document-tile.c:216
+#: ../libslab/document-tile.c:218
 msgid "Open in File Manager"
 msgstr "Öppna i filhanterare"
 
@@ -3832,6 +3833,14 @@ msgstr "Använd tema"
 msgid "Sets the default theme"
 msgstr "Ställer in standardtemat"
 
+#~ msgid ""
+#~ "Keyboard layout \"%s\"\n"
+#~ "Copyright &#169; X.Org Foundation and XKeyboardConfig contributors\n"
+#~ "For licensing see package metadata"
+#~ msgstr ""
+#~ "Tangentbordslayouten \"%s\"\n"
+#~ "Copyright &#169; X.Org Foundation och XKeyboardConfig-bidragsgivare\n"
+#~ "Se paketets metadata för licensiering"
 #~ msgid " "
 #~ msgstr " "
 #~ msgid "    "
