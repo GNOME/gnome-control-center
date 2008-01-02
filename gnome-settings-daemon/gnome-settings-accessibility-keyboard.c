@@ -186,20 +186,18 @@ set_int (GConfClient *client, GConfChangeSet *cs,
 
 static gboolean
 set_bool (GConfClient *client, GConfChangeSet *cs,
-	  gboolean in_gconf, char const *key, int val)
+	  char const *key, int val)
 {
 	gboolean bval = (val != 0);
-	if (in_gconf || bval) {
-		gconf_change_set_set_bool (cs, key, bval ? TRUE : FALSE);
+
+	gconf_change_set_set_bool (cs, key, bval ? TRUE : FALSE);
 #ifdef DEBUG_ACCESSIBILITY
-		if (bval != gconf_client_get_bool (client, key, NULL)) {
-			d ("%s changed", key);
-			return TRUE;
-		}
-#endif
-		return (bval != gconf_client_get_bool (client, key, NULL));
+	if (bval != gconf_client_get_bool (client, key, NULL)) {
+		d ("%s changed", key);
+		return TRUE;
 	}
-	return FALSE;
+#endif
+	return (bval != gconf_client_get_bool (client, key, NULL));
 }
 
 static unsigned long
@@ -212,9 +210,9 @@ set_clear (gboolean flag, unsigned long value, unsigned long mask)
 
 static gboolean
 set_ctrl_from_gconf (XkbDescRec *desc, GConfClient *client,
-		     char const *key, unsigned long mask, gboolean flag)
+		     char const *key, unsigned long mask)
 {
-	gboolean result = flag && gconf_client_get_bool (client, key, NULL);
+	gboolean result = gconf_client_get_bool (client, key, NULL);
 	desc->ctrls->enabled_ctrls =
 		set_clear (result, desc->ctrls->enabled_ctrls, mask);
 	return result;
@@ -241,7 +239,7 @@ set_server_from_gconf (GConfEntry *ignored)
 		XkbAccessXKeysMask | XkbAccessXFeedbackMask);
 
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/timeout_enable",
-		XkbAccessXTimeoutMask, enable_accessX)) {
+		XkbAccessXTimeoutMask)) {
 		desc->ctrls->ax_timeout = get_int (client,
 			CONFIG_ROOT "/timeout");
 		/* disable only the master flag via the server we will disable
@@ -261,7 +259,7 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	/* bounce keys */
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/bouncekeys_enable",
-		XkbBounceKeysMask, enable_accessX)) {
+		XkbBounceKeysMask)) {
 		desc->ctrls->debounce_delay  = get_int (client,
 			CONFIG_ROOT "/bouncekeys_delay");
 		desc->ctrls->ax_options = set_clear (
@@ -271,7 +269,7 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	/* mouse keys */
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/mousekeys_enable",
-		XkbMouseKeysMask | XkbMouseKeysAccelMask, enable_accessX)) {
+		XkbMouseKeysMask | XkbMouseKeysAccelMask)) {
 		desc->ctrls->mk_interval     = 100;	/* msec between mousekey events */
 		desc->ctrls->mk_curve	     = 50;
 
@@ -292,7 +290,7 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	/* slow keys */
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/slowkeys_enable",
-		XkbSlowKeysMask, enable_accessX)) {
+		XkbSlowKeysMask)) {
 		desc->ctrls->ax_options = set_clear (
 			gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_press", NULL),
 			desc->ctrls->ax_options, XkbAX_SKPressFBMask);
@@ -311,7 +309,7 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	/* sticky keys */
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/stickykeys_enable",
-		XkbStickyKeysMask, enable_accessX)) {
+		XkbStickyKeysMask)) {
 		desc->ctrls->ax_options |= XkbAX_LatchToLockMask;
 		desc->ctrls->ax_options = set_clear (
 			gconf_client_get_bool (client, CONFIG_ROOT "/stickykeys_two_key_off", NULL),
@@ -322,7 +320,7 @@ set_server_from_gconf (GConfEntry *ignored)
 	}
 
 	/* toggle keys */
-	desc->ctrls->ax_options = set_clear (enable_accessX &&
+	desc->ctrls->ax_options = set_clear (
 		gconf_client_get_bool (client, CONFIG_ROOT "/togglekeys_enable", NULL),
 		desc->ctrls->ax_options, XkbAX_IndicatorFBMask);
 
@@ -491,7 +489,6 @@ ax_stickykeys_warning_dialog_post (gboolean enabled)
 static void
 set_gconf_from_server (GConfEntry *ignored)
 {
-	gboolean	in_gconf;
 	GConfClient	*client = gnome_settings_get_config_client ();
 	GConfChangeSet *cs = gconf_change_set_new ();
 	XkbDescRec	*desc = get_xkb_desc_rec ();
@@ -508,30 +505,24 @@ set_gconf_from_server (GConfEntry *ignored)
 	*/
 
 	/* always toggle this irrespective of the state */
-	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/enable",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/enable",
 		desc->ctrls->enabled_ctrls & (XkbAccessXKeysMask | XkbAccessXFeedbackMask));
 
-	/* if master is disabled in gconf do not change gconf state of subordinates
-	 * to match the server.  However, we should enable the master if one of the subordinates
-	 * get enabled.
-	 */
-	in_gconf = gconf_client_get_bool (client, CONFIG_ROOT "/enable", NULL);
-
-	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/feature_state_change_beep",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/feature_state_change_beep",
 		desc->ctrls->ax_options & (XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask));
-	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/timeout_enable",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/timeout_enable",
 		desc->ctrls->enabled_ctrls & XkbAccessXTimeoutMask);
 	changed |= set_int (client, cs, CONFIG_ROOT "/timeout",
 		desc->ctrls->ax_timeout);
 
-	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/bouncekeys_enable",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/bouncekeys_enable",
 		desc->ctrls->enabled_ctrls & XkbBounceKeysMask);
 	changed |= set_int (client, cs, CONFIG_ROOT "/bouncekeys_delay",
 		desc->ctrls->debounce_delay);
-	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/bouncekeys_beep_reject",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/bouncekeys_beep_reject",
 		desc->ctrls->ax_options & XkbAX_BKRejectFBMask);
 
-	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/mousekeys_enable",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/mousekeys_enable",
 		desc->ctrls->enabled_ctrls & XkbMouseKeysMask);
 	changed |= set_int (client, cs, CONFIG_ROOT "/mousekeys_max_speed",
 		desc->ctrls->mk_max_speed * (1000 / desc->ctrls->mk_interval));
@@ -541,25 +532,25 @@ set_gconf_from_server (GConfEntry *ignored)
 	changed |= set_int (client, cs, CONFIG_ROOT "/mousekeys_init_delay",
 		desc->ctrls->mk_delay);
 
-	slowkeys_changed = set_bool (client, cs, in_gconf, CONFIG_ROOT "/slowkeys_enable",
+	slowkeys_changed = set_bool (client, cs, CONFIG_ROOT "/slowkeys_enable",
 				     desc->ctrls->enabled_ctrls & XkbSlowKeysMask);
-	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/slowkeys_beep_press",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/slowkeys_beep_press",
 		desc->ctrls->ax_options & XkbAX_SKPressFBMask);
-	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/slowkeys_beep_accept",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/slowkeys_beep_accept",
 		desc->ctrls->ax_options & XkbAX_SKAcceptFBMask);
-	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/slowkeys_beep_reject",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/slowkeys_beep_reject",
 		desc->ctrls->ax_options & XkbAX_SKRejectFBMask);
 	changed |= set_int (client, cs, CONFIG_ROOT "/slowkeys_delay",
 		desc->ctrls->slow_keys_delay);
 
-	stickykeys_changed = set_bool (client, cs, in_gconf, CONFIG_ROOT "/stickykeys_enable",
+	stickykeys_changed = set_bool (client, cs, CONFIG_ROOT "/stickykeys_enable",
 				       desc->ctrls->enabled_ctrls & XkbStickyKeysMask);
-	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/stickykeys_two_key_off",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/stickykeys_two_key_off",
 		desc->ctrls->ax_options & XkbAX_TwoKeysMask);
-	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/stickykeys_modifier_beep",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/stickykeys_modifier_beep",
 		desc->ctrls->ax_options & XkbAX_StickyKeysFBMask);
 
-	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/togglekeys_enable",
+	changed |= set_bool (client, cs, CONFIG_ROOT "/togglekeys_enable",
 		desc->ctrls->ax_options & XkbAX_IndicatorFBMask);
 
 	if (!changed && stickykeys_changed^slowkeys_changed) {

@@ -36,8 +36,8 @@
 #include "gconf-property-editor.h"
 #include "activate-settings-daemon.h"
 #include "capplet-stock-icons.h"
-#include <../accessibility/keyboard/accessibility-keyboard.h>
 
+#include "gnome-keyboard-properties-a11y.h"
 #include "gnome-keyboard-properties-xkb.h"
 
 enum {
@@ -75,12 +75,6 @@ create_dialog (void)
 	gtk_size_group_add_widget (size_group,
 				   WID ("cursor_blink_time_scale"));
 	g_object_unref (G_OBJECT (size_group));
-
-	image =
-	    gtk_image_new_from_stock (GTK_STOCK_JUMP_TO,
-				      GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image (GTK_BUTTON (WID ("accessibility_button")),
-			      image);
 
 	image =
 	    gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
@@ -122,27 +116,12 @@ blink_to_widget (GConfPropertyEditor * peditor, const GConfValue * value)
 }
 
 static void
-accessibility_button_clicked (GtkWidget * widget, gpointer data)
-{
-	GError *err = NULL;
-	if (!g_spawn_command_line_async
-	    ("gnome-accessibility-keyboard-properties", &err))
-		capplet_error_dialog (GTK_WINDOW
-				      (gtk_widget_get_toplevel (widget)),
-				      _
-				      ("There was an error launching the keyboard tool: %s"),
-				      err);
-}
-
-static void
 dialog_response (GtkWidget * widget,
 		 gint response_id, GConfChangeSet * changeset)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (widget),
 			      "user-guide.xml", "goscustperiph-2");
-	else if (response_id == 0)
-		accessibility_button_clicked (NULL, NULL);
 	else
 		gtk_main_quit ();
 }
@@ -207,6 +186,7 @@ setup_dialog (GladeXML * dialog, GConfChangeSet * changeset)
 				   child), TRUE);
 
 	setup_xkb_tabs (dialog, changeset);
+	setup_a11y_tabs (dialog, changeset);
 }
 
 static void
@@ -244,18 +224,6 @@ get_legacy_settings (void)
 			  "/Desktop/Bell/duration=100");
 	g_object_unref (G_OBJECT (client));
 }
-
-#if 0
-static void
-setup_accessibility (GladeXML * dialog, GConfChangeSet * changeset)
-{
-	GtkWidget *notebook = WID ("notebook1");
-	GtkWidget *label =
-	    gtk_label_new_with_mnemonic (_("_Accessibility"));
-	GtkWidget *page = setup_accessX_dialog (changeset, FALSE);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), page, label);
-}
-#endif
 
 int
 main (int argc, char **argv)
