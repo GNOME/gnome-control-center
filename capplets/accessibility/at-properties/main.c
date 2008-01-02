@@ -53,7 +53,7 @@ cb_at_preferences (GtkDialog *dialog, gint response_id)
 static void
 cb_keyboard_preferences (GtkDialog *dialog, gint response_id)
 {
-	g_spawn_command_line_async("gnome-accessibility-keyboard-properties", NULL);
+	g_spawn_command_line_async("gnome-keyboard-properties --a11y", NULL);
 }
 
 static void

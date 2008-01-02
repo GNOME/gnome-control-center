@@ -236,6 +236,7 @@ main (int argc, char **argv)
 	static gboolean apply_only = FALSE;
 	static gboolean get_legacy = FALSE;
 	static gboolean switch_to_typing_break_page = FALSE;
+	static gboolean switch_to_a11y_page = FALSE;
 
 	static GOptionEntry cap_options[] = {
 		{"apply", 0, 0, G_OPTION_ARG_NONE, &apply_only,
@@ -253,6 +254,11 @@ main (int argc, char **argv)
 		 &switch_to_typing_break_page,
 		 N_
 		 ("Start the page with the typing break settings showing"),
+		 NULL},
+		{"a11y", 0, 0, G_OPTION_ARG_NONE,
+		 &switch_to_a11y_page,
+		 N_
+		 ("Start the page with the accessibility settings showing"),
 		 NULL},
 		{NULL}
 	};
@@ -291,8 +297,16 @@ main (int argc, char **argv)
 			gtk_notebook_set_current_page (GTK_NOTEBOOK
 						       (WID
 							("keyboard_notebook")),
-						       3);
+						       4);
 		}
+		else if (switch_to_a11y_page) {
+			gtk_notebook_set_current_page (GTK_NOTEBOOK
+						       (WID
+							("keyboard_notebook")),
+						       2);
+
+		}
+
 		capplet_set_icon (WID ("keyboard_dialog"),
 				  "gnome-dev-keyboard");
 		gtk_widget_show (WID ("keyboard_dialog"));
