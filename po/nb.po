@@ -1,14 +1,14 @@
 # Norwegian translation of control-center (bokmål dialect).
 # Copyright (C) 1999-2005 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 1999-2007.
+# Kjartan Maraas <kmaraas@gnome.org>, 1999-2008.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.21.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-15 12:30+0100\n"
-"PO-Revision-Date: 2007-12-15 12:31+0100\n"
+"POT-Creation-Date: 2008-01-03 22:14+0100\n"
+"PO-Revision-Date: 2008-01-03 22:22+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgid "Images"
 msgstr "Bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:699
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:700
 msgid "All Files"
 msgstr "Alle filer"
 
@@ -615,6 +615,7 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Ma_ksimal pekerhastighet:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "Mouse Keys"
 msgstr "Mustaster"
 
@@ -638,7 +639,7 @@ msgstr ""
 "Utfør flere samtidige tastetrykk ved å holde nede endringstaster i sekvens."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
 msgid "S_peed:"
 msgstr "_Hastighet:"
 
@@ -667,7 +668,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Kun aksepter tastetrykk etter:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
 msgid "_Type to test settings:"
 msgstr "_Skriv for å prøve ut innstillinger:"
 
@@ -777,32 +778,32 @@ msgid "[WALLPAPER...]"
 msgstr "[BAKGRUNN...]"
 
 #: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/common/gnome-theme-info.c:429
-#: ../capplets/common/gnome-theme-info.c:628
+#: ../capplets/common/gnome-theme-info.c:439
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Default Pointer"
 msgstr "Forvalgt peker"
 
-#: ../capplets/appearance/appearance-themes.c:512
+#: ../capplets/appearance/appearance-themes.c:534
 msgid "Apply Background"
 msgstr "Bruk bakgrunn"
 
-#: ../capplets/appearance/appearance-themes.c:516
+#: ../capplets/appearance/appearance-themes.c:538
 msgid "Apply Font"
 msgstr "Bruk skrift"
 
-#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/appearance/appearance-themes.c:563
 msgid "The current theme suggests a background and a font."
 msgstr "Aktivt tema foreslår en bakgrunn og en skrift."
 
-#: ../capplets/appearance/appearance-themes.c:546
+#: ../capplets/appearance/appearance-themes.c:568
 msgid "The current theme suggests a background."
 msgstr "Aktivt tema foreslår en bakgrunn."
 
-#: ../capplets/appearance/appearance-themes.c:551
+#: ../capplets/appearance/appearance-themes.c:573
 msgid "The current theme suggests a font."
 msgstr "Aktivt tema foreslår en skrift."
 
-#: ../capplets/appearance/appearance-themes.c:835
+#: ../capplets/appearance/appearance-themes.c:857
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1039,7 +1040,7 @@ msgid "Window Border"
 msgstr "Vinduskant"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
 msgid "_Add..."
 msgstr "_Legg til..."
 
@@ -1220,77 +1221,76 @@ msgid_plural "pixels"
 msgstr[0] "piksel"
 msgstr[1] "piksler"
 
-#: ../capplets/appearance/theme-installer.c:169
+#: ../capplets/appearance/theme-installer.c:171
+#: ../capplets/appearance/theme-installer.c:221
+msgid "Cannot install theme"
+msgstr "Kan ikke installere tema"
+
+#: ../capplets/appearance/theme-installer.c:173
+#, c-format
+msgid "The %s utility is not installed."
+msgstr "Verktøyet %s er ikke installert."
+
+#: ../capplets/appearance/theme-installer.c:223
+msgid "There was a problem while extracting the theme."
+msgstr "Det oppsto et problem under utpakking av tema."
+
+#: ../capplets/appearance/theme-installer.c:246
+msgid "There was an error installing the selected file"
+msgstr "Det oppsto en feil under installering av valgt fil"
+
+#: ../capplets/appearance/theme-installer.c:247
+#, c-format
+msgid "\"%s\" does not appear to be a valid theme."
+msgstr "«%s» ser ikke ut til å være et gyldig tema."
+
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid ""
-"Cannot install theme.\n"
-"The %s utility is not installed."
-msgstr ""
-"Kan ikke installere tema.\n"
-"Verktøyet %s er ikke installert."
+"\"%s\" does not appear to be a valid theme. It may be a theme engine which "
+"you need to compile."
+msgstr "«%s» ser ikke ut til å være et gyldig tema. Det kan være en temamotor som du må kompilere."
 
-#: ../capplets/appearance/theme-installer.c:217
-msgid ""
-"Cannot install theme.\n"
-"There was a problem while extracting the theme."
-msgstr ""
-"Kan ikke installere tema.\n"
-"Det oppsto et problem under utpakking av filene."
-
-#: ../capplets/appearance/theme-installer.c:261
+#: ../capplets/appearance/theme-installer.c:287
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME tema %s ble korrekt installert"
 
-#: ../capplets/appearance/theme-installer.c:275
-msgid ""
-"The selected file is not a valid theme. It might be a theme engine that you "
-"need to compile."
-msgstr ""
-"Valgt fil er ikke et gyldig tema. Det kan være en temamotor som du må "
-"kompilere."
-
-#: ../capplets/appearance/theme-installer.c:284
-#: ../capplets/appearance/theme-installer.c:454
-#: ../capplets/appearance/theme-installer.c:629
-msgid "The selected file does not appear to be a valid theme."
-msgstr "Valgt fil ser ikke ut til å være et gyldig tema."
-
-#: ../capplets/appearance/theme-installer.c:333
+#: ../capplets/appearance/theme-installer.c:347
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Installasjon av tema «%s» feilet."
 
-#: ../capplets/appearance/theme-installer.c:365
+#: ../capplets/appearance/theme-installer.c:379
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Tema «%s» er installert."
 
-#: ../capplets/appearance/theme-installer.c:371
+#: ../capplets/appearance/theme-installer.c:385
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Vil du bruke det nå, eller beholde aktivt tema?"
 
-#: ../capplets/appearance/theme-installer.c:373
+#: ../capplets/appearance/theme-installer.c:387
 msgid "Keep Current Theme"
 msgstr "Behold nåværende tema"
 
-#: ../capplets/appearance/theme-installer.c:375
+#: ../capplets/appearance/theme-installer.c:389
 msgid "Apply New Theme"
 msgstr "Bruk nytt tema"
 
-#: ../capplets/appearance/theme-installer.c:480
+#: ../capplets/appearance/theme-installer.c:491
 msgid "Failed to create temporary directory"
 msgstr "Kunne ikke opprette midlertidig katalog"
 
-#: ../capplets/appearance/theme-installer.c:540
+#: ../capplets/appearance/theme-installer.c:551
 msgid "New themes have been successfully installed."
 msgstr "Nye tema ble installert."
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:579
 msgid "No theme file location specified to install"
 msgstr "Ingen lokasjon oppgitt for installasjon av temafil"
 
-#: ../capplets/appearance/theme-installer.c:588
+#: ../capplets/appearance/theme-installer.c:599
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1299,7 +1299,7 @@ msgstr ""
 "Ikke nok rettigheter til å installere tema i:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:610
+#: ../capplets/appearance/theme-installer.c:621
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1308,11 +1308,11 @@ msgstr ""
 "%s er stien hvor temafilene vil bli installert. Denne kan ikke velges som "
 "kildelokasjon"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Select Theme"
 msgstr "Velg tema"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:693
 msgid "Theme Packages"
 msgstr "Temapakker"
 
@@ -1362,13 +1362,13 @@ msgid "Just apply settings and quit"
 msgstr "Bare aktiver innstillingene og avslutt"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:283
+#: ../capplets/keyboard/gnome-keyboard-properties.c:252
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
 #: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:390
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Det oppsto en feil under visning av hjelp: %s"
@@ -1549,31 +1549,31 @@ msgstr "Vennligst velg et bilde."
 msgid "_Select"
 msgstr "_Velg"
 
-#: ../capplets/common/gnome-theme-info.c:629
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Default Pointer - Current"
 msgstr "Forvalgt peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "White Pointer"
 msgstr "Hvit peker"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "White Pointer - Current"
 msgstr "Hvit peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:648
 msgid "Large Pointer"
 msgstr "Stor peker"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large Pointer - Current"
 msgstr "Stor peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:653
 msgid "Large White Pointer - Current"
 msgstr "Stor hvit peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:654
 msgid "Large White Pointer"
 msgstr "Stor hvit peker"
 
@@ -1659,6 +1659,7 @@ msgid "<b>Web Browser</b>"
 msgstr "<b>Nettleser</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Accessibility"
 msgstr "Tilgjengelighet"
 
@@ -2126,17 +2127,8 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Tilegn snarveitaster til kommandoer"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:133
-#, c-format
-msgid "There was an error launching the keyboard tool: %s"
-msgstr "Det oppsto en feil under oppstart av tastaturverktøyet: %s"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:254
-msgid "_Accessibility"
-msgstr "_Tilgjengelighet"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:275
-#: ../capplets/keyboard/gnome-keyboard-properties.c:280
+#: ../capplets/keyboard/gnome-keyboard-properties.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:249
 #: ../capplets/sound/sound-properties-capplet.c:1026
 #: ../capplets/sound/sound-properties-capplet.c:1028
 msgid ""
@@ -2145,103 +2137,171 @@ msgstr ""
 "Bare aktiver innstillinger og avslutt (kun for kompatibilitet; håndteres av "
 "en daemon nå)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:287
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
 msgid "Start the page with the typing break settings showing"
 msgstr "Start siden med innstillingene for skrivepause fremme"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:296
+#: ../capplets/keyboard/gnome-keyboard-properties.c:261
+msgid "Start the page with the accessibility settings showing"
+msgstr "Vis siden med innstillingene for tilgjengelighet"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:270
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Brukervalg for tastatur"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<b>Bounce Keys</b>"
+msgstr "<b>Bounce Keys</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Markørblinking</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>Generelt</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repeter taster</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "<b>Slow Keys</b>"
+msgstr "<b>Trege taster</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+msgid "<b>Sticky Keys</b>"
+msgstr "<b>Klebrige taster</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lås skjemen for tvungen skrivepause</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Rask</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lang</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kort</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Treg</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "A_cceleration:"
+msgstr "A_ksellerasjon:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "All_ow postponing of breaks"
 msgstr "Till_at utsettelse av pauser"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "Beep when _accessibility features are turned on or off"
+msgstr "Pip når funksjoner for tilgjengelighet slås av eller på"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Beep when a _modifier key is pressed"
+msgstr "Pip når _endringstast trykkes ned"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+msgid "Beep when a _toggle key is pressed"
+msgstr "Pip når endrings_tast trykkes ned"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+msgid "Beep when a key is pr_essed"
+msgstr "Pip når tast trykkes n_ed"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "Beep when a key is reje_cted"
+msgstr "Pip når tast a_vvises"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "Beep when key is _accepted"
+msgstr "Pip når tast er godt_as"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "Beep when key is _rejected"
+msgstr "Pip nå_r tast avvises"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Sjekk om pauser kan utsettes"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Choose a Keyboard Model"
 msgstr "Velg en tastaturmodell"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Choose a Layout"
 msgstr "Velg en utforming"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Cursor _blinks in text fields"
 msgstr "Markøren _blinker i tekstfelt"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Cursor blinks speed"
 msgstr "Hastighet for blinkende markør"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+msgid "D_elay:"
+msgstr "Paus_e:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "Disa_ble sticky keys if two keys are pressed together"
+msgstr "Deakti_ver hvis to taster trykkes ned samtidig"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Duration of the break when typing is disallowed"
 msgstr "Varighet for skrivepause"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Duration of work before forcing a break"
 msgstr "Varighet på arbeidstid før tvungen pause"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "General"
 msgstr "Generelt"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "Key presses _repeat when key is held down"
 msgstr "Tastetrykk _repeteres når tasten holdes nede"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+msgid "Keyboard Accessibility Notifications"
+msgstr "Varsling om tilgjengelighet for tastatur"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "Keyboard Layout Options"
 msgstr "Alternativer for tastaturutforming"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard Preferences"
 msgstr "Brukervalg for tastatur"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "Keyboard _model:"
 msgstr "Tastatur_modell:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "Layout _Options..."
 msgstr "Alternativer for _utforming..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "Layouts"
 msgstr "Utforminger"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -2249,67 +2309,95 @@ msgstr ""
 "Lås skjermen etter en viss periode for å hindre slitasje og skader etter for "
 "lang tastaturbruk"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "Preview:"
 msgstr "Forhåndsvis:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "Repeat keys speed"
 msgstr "Hastighet for tasterepetering"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "Reset to De_faults"
 msgstr "Sett til _forvalg"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
 msgid "Separate _layout for each window"
 msgstr "Egen _utforming for hvert vindu"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
 msgid "Typing Break"
 msgstr "Skrivepause"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "_Accessibility..."
-msgstr "_Tilgjengelighet..."
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
+msgid "_Allow to control the pointer using the keyboard"
+msgstr "Till_at kontroll av pekeren med tastaturet"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+msgid "_Allow to turn accessibility features on and off from the keyboard"
+msgstr "Till_at å slå av og på funksjoner for tilgjengelighet fra tastaturet"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
 msgstr "_Pauseintervallet varer:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
 msgid "_Delay:"
 msgstr "_Pause:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
+msgid "_Ignore fast duplicate keypresses"
+msgstr "_Ignorer raskt dupliserte tastaturtrykk"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
 msgid "_Layouts:"
 msgstr "_Utforminger"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
 msgid "_Models:"
 msgstr "_Modeller:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+msgid "_Notifications..."
+msgstr "_Varsling..."
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
+msgid "_Only accept long keypresses"
+msgstr "_Godta kun lange tastetrykk"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
 msgid "_Selected layouts:"
 msgstr "_Valgte utforminger:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+msgid "_Simulate simultanous keypresses"
+msgstr "_Simuler samtidige tastetrykk"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
 msgid "_Speed:"
 msgstr "_Hastighet:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
 msgid "_Variants:"
 msgstr "_Varianter:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
 msgid "_Vendors:"
 msgstr "_Leverandører:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
 msgid "_Work interval lasts:"
 msgstr "_Arbeidsintervallet varer:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
+msgid "gtk-help"
+msgstr "gtk-help"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "minutter"
 
@@ -2318,12 +2406,12 @@ msgid "Unknown"
 msgstr "Ukjent"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:306
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
 msgid "Default"
 msgstr "Forvalg"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:300
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
 msgid "Layout"
 msgstr "Utseende"
 
@@ -2334,17 +2422,6 @@ msgstr "Leverandører"
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:235
 msgid "Models"
 msgstr "Modeller"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbpv.c:166
-#, c-format
-msgid ""
-"Keyboard layout \"%s\"\n"
-"Copyright &#169; X.Org Foundation and XKeyboardConfig contributors\n"
-"For licensing see package metadata"
-msgstr ""
-"Tastaturutforming «%s»\n"
-"Opphavsrett &#169; X.Org Foundation og bidragsytere til XKeyboardConfig\n"
-"Se i pakken for informasjon om lisensiering"
 
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
@@ -2789,11 +2866,11 @@ msgstr "Vinduer"
 msgid "Volume"
 msgstr "Volum"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:465
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:463
 msgid "Slow Keys Alert"
 msgstr "Advarsel for trege taster"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:464
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2801,39 +2878,39 @@ msgstr ""
 "Du holdt nettopp nede Shift-tasten i 8 sekunder. Dette er snarveien for "
 "funksjonen trege taster som påvirker hvordan tastaturet ditt virker."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid "Do you want to activate Slow Keys?"
 msgstr "Vil du aktivere trege taster?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:467
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Vil du deaktivere trege taster?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "_Activate"
 msgstr "_Aktiver"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "_Deactivate"
 msgstr "_Deaktiver"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do_n't activate"
 msgstr "I_kke aktiver"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do_n't deactivate"
 msgstr "I_kke deaktiver"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:480
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:478
 msgid "Sticky Keys Alert"
 msgstr "Advarsel for trege taster"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:479
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2841,7 +2918,7 @@ msgstr ""
 "Du trykket nettopp ned Shift-tasten 5 ganger på rad. Dette er snarveien for "
 "funksjonen «klebrige taster» som påvirker måten tastaturet fungerer."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2851,11 +2928,11 @@ msgstr ""
 "rad. Dette skrur av funksjonen «klebrige taster» som påvirker tasteturets "
 "virkemåte."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Vil du aktivere klebrige taster?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:484
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Vil du deaktivere trege taster?"
 
@@ -3014,7 +3091,7 @@ msgstr "Kunne ikke laste lydfil %s som sample %s"
 msgid "Cannot determine user's home directory"
 msgstr "Kan ikke bestemme brukeren sin hjemmemappe"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:303
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
@@ -3084,36 +3161,36 @@ msgid "Screen on which BGApplier is to draw"
 msgstr "Skjerm hvor BGApplier skal tegne"
 
 #. make start action
-#: ../libslab/application-tile.c:362
+#: ../libslab/application-tile.c:369
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>Start %s</b>"
 
-#: ../libslab/application-tile.c:381
+#: ../libslab/application-tile.c:388
 msgid "Help"
 msgstr "Hjelp"
 
-#: ../libslab/application-tile.c:428
+#: ../libslab/application-tile.c:435
 msgid "Upgrade"
 msgstr "Oppgrader"
 
-#: ../libslab/application-tile.c:443
+#: ../libslab/application-tile.c:450
 msgid "Uninstall"
 msgstr "Avinstaller"
 
-#: ../libslab/application-tile.c:770 ../libslab/document-tile.c:526
+#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:528
 msgid "Remove from Favorites"
 msgstr "Fjern fra favoritter"
 
-#: ../libslab/application-tile.c:772 ../libslab/document-tile.c:528
+#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:530
 msgid "Add to Favorites"
 msgstr "Legg til i favoritter"
 
-#: ../libslab/application-tile.c:857
+#: ../libslab/application-tile.c:864
 msgid "Remove from Startup Programs"
 msgstr "Fjern fra oppstartsprogrammer"
 
-#: ../libslab/application-tile.c:859
+#: ../libslab/application-tile.c:866
 msgid "Add to Startup Programs"
 msgstr "Legg til i oppstartsprogrammer"
 
@@ -3132,71 +3209,80 @@ msgstr ""
 msgid "Other"
 msgstr "Annet"
 
-#: ../libslab/bookmark-agent.c:1067
+#: ../libslab/bookmark-agent.c:1034
 msgid "New Spreadsheet"
 msgstr "Nytt regneark"
 
-#: ../libslab/bookmark-agent.c:1071
+#: ../libslab/bookmark-agent.c:1038
 msgid "New Document"
 msgstr "Nytt dokument"
 
-#: ../libslab/bookmark-agent.c:1121
+#: ../libslab/bookmark-agent.c:1088
 msgid "Home"
 msgstr "Hjem"
 
-#: ../libslab/bookmark-agent.c:1137
+#: ../libslab/bookmark-agent.c:1104
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../libslab/bookmark-agent.c:1141
+#: ../libslab/bookmark-agent.c:1108
 msgid "Network Servers"
 msgstr "Nettverkstjenere"
 
-#: ../libslab/bookmark-agent.c:1170
+#: ../libslab/bookmark-agent.c:1137
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Søk"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:168
+#: ../libslab/directory-tile.c:170
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Åpne</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:187 ../libslab/document-tile.c:232
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:234
 msgid "Rename..."
 msgstr "Endre navn..."
 
-#: ../libslab/directory-tile.c:201 ../libslab/directory-tile.c:210
-#: ../libslab/document-tile.c:246 ../libslab/document-tile.c:255
+#: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
+#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
 msgid "Send To..."
 msgstr "Send til..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:225 ../libslab/document-tile.c:281
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:283
 msgid "Move to Trash"
 msgstr "Flytt til papirkurv"
 
-#: ../libslab/directory-tile.c:235 ../libslab/directory-tile.c:448
-#: ../libslab/document-tile.c:291 ../libslab/document-tile.c:639
+#: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
+#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:641
 msgid "Delete"
 msgstr "Slett"
 
-#: ../libslab/document-tile.c:153
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:813
+#, c-format
+msgid "Are you sure you want to permanently delete \"%s\"?"
+msgstr "Er du sikker på at du vil slette «%s» permanent?"
+
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:817
+msgid "If you delete an item, it is permanently lost."
+msgstr "Hvis du sletter en oppføring blir den borte for godt."
+
+#: ../libslab/document-tile.c:155
 msgid "Edited %m/%d/%Y"
 msgstr "Redigert %d.%m.%Y"
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Åpne med «%s»</b>"
 
-#: ../libslab/document-tile.c:205
+#: ../libslab/document-tile.c:207
 msgid "Open with Default Application"
 msgstr "Åpne med forvalgt program"
 
-#: ../libslab/document-tile.c:216
+#: ../libslab/document-tile.c:218
 msgid "Open in File Manager"
 msgstr "Åpne i filhåndterer"
 
