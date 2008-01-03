@@ -1,5 +1,5 @@
 # translation of gnome-control-center.HEAD.po to Español
-# Copyright © 1999-2002, 2006, 2007 Free Software Foundation, Inc.
+# Copyright © 1999-2002, 2006, 2007, 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 #
 # Pablo Saratxaga <srtxg@chanae.alphanet.ch>, 1998-2001.
@@ -10,13 +10,13 @@
 # Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2002,2003.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, 2006.
 # Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2007.
-# Jorge González <jorgegonz@svn.gnome.org>, 2007.
+# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-22 16:32+0000\n"
-"PO-Revision-Date: 2007-12-23 14:07+0100\n"
+"POT-Creation-Date: 2008-01-03 03:33+0000\n"
+"PO-Revision-Date: 2008-01-03 07:01+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <<gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -629,6 +629,7 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Velocidad má_xima del puntero:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "Mouse Keys"
 msgstr "Teclas del ratón"
 
@@ -653,7 +654,7 @@ msgstr ""
 "pulsación secuencial de teclas modificadoras."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
 msgid "S_peed:"
 msgstr "Ve_locidad:"
 
@@ -682,7 +683,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Sólo aceptar teclas pulsadas durante:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
 msgid "_Type to test settings:"
 msgstr "_Teclee para probar la configuración:"
 
@@ -1058,7 +1059,7 @@ msgid "Window Border"
 msgstr "Borde de la ventana"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
 msgid "_Add..."
 msgstr "_Añadir..."
 
@@ -1268,8 +1269,8 @@ msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
 "you need to compile."
 msgstr ""
-"«%s» no parece ser un tema válido. Puede ser un motor de temas "
-"que debe compilar."
+"«%s» no parece ser un tema válido. Puede ser un motor de temas que debe "
+"compilar."
 
 #: ../capplets/appearance/theme-installer.c:287
 #, c-format
@@ -1381,13 +1382,13 @@ msgid "Just apply settings and quit"
 msgstr "Aplicar los cambios y salir"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:283
+#: ../capplets/keyboard/gnome-keyboard-properties.c:252
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Obtener y almacenar configuración heredada"
 
 #: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:390
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Hubo un error al mostrar la ayuda: %s"
@@ -1675,6 +1676,7 @@ msgid "<b>Web Browser</b>"
 msgstr "<b>Navegador web</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Accessibility"
 msgstr "Accesibilidad"
 
@@ -2146,17 +2148,8 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Asigna una combinación de teclas a comandos"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:133
-#, c-format
-msgid "There was an error launching the keyboard tool: %s"
-msgstr "Hubo un error al lanzar la herramienta del teclado: %s"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:254
-msgid "_Accessibility"
-msgstr "_Accesibilidad"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:275
-#: ../capplets/keyboard/gnome-keyboard-properties.c:280
+#: ../capplets/keyboard/gnome-keyboard-properties.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:249
 #: ../capplets/sound/sound-properties-capplet.c:1026
 #: ../capplets/sound/sound-properties-capplet.c:1028
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
@@ -2164,103 +2157,171 @@ msgstr ""
 "Tan sólo aplicar la configuración y salir (sólo por compatibilidad; "
 "manipulado ahora por un demonio)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:287
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
 msgid "Start the page with the typing break settings showing"
 msgstr "Iniciar la página mostrando la configuración del descanso de escritura"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:296
+#: ../capplets/keyboard/gnome-keyboard-properties.c:261
+msgid "Start the page with the accessibility settings showing"
+msgstr "Iniciar la página mostrando la configuración de accesibilidad"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:270
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Preferencias del teclado de GNOME"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<b>Bounce Keys</b>"
+msgstr "<b>Rechazo de teclas</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Parpadeo del cursor</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>General</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repetición de teclas</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "<b>Slow Keys</b>"
+msgstr "<b>Teclas lentas</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+msgid "<b>Sticky Keys</b>"
+msgstr "<b>Teclas persistentes</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>B_loquear la pantalla para forzar un descanso de escritura</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Rápida</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Largo</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Corto</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lenta</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "A_cceleration:"
+msgstr "A_celeración:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "All_ow postponing of breaks"
 msgstr "Permitir p_osponer los descansos"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "Beep when _accessibility features are turned on or off"
+msgstr "Pitar cuando se activen o desactiven las características de _accesibilidad"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Beep when a _modifier key is pressed"
+msgstr "Pitar al pulsar un _modificador"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+msgid "Beep when a _toggle key is pressed"
+msgstr "Pitar al pulsar una _tecla conmutable"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+msgid "Beep when a key is pr_essed"
+msgstr "Pitar al pul_sar una tecla"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "Beep when a key is reje_cted"
+msgstr "Pitar si se recha_za la tecla"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "Beep when key is _accepted"
+msgstr "Pitar cuando la tecla se _acepte"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "Beep when key is _rejected"
+msgstr "Pitar si se _rechaza la tecla"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Comprobar si se permite posponer los descansos"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Choose a Keyboard Model"
 msgstr "Elija un modelo de teclado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Choose a Layout"
 msgstr "Elija una distribución"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Cursor _blinks in text fields"
 msgstr "El cursor pa_rpadea en los campos de texto"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Cursor blinks speed"
 msgstr "Velocidad de parpadeo del cursor"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+msgid "D_elay:"
+msgstr "R_etardo:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "Disa_ble sticky keys if two keys are pressed together"
+msgstr "De_sactivar las teclas persistentes si se pulsan dos teclas a la vez"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Duration of the break when typing is disallowed"
 msgstr "Duración del descanso cuando la escritura no está permitida"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Duration of work before forcing a break"
 msgstr "Duración del trabajo antes de forzar un descanso"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "General"
 msgstr "General"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "Key presses _repeat when key is held down"
 msgstr "La pulsaciones de teclas se _repiten cuando la tecla se mantiene pulsada"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+msgid "Keyboard Accessibility Notifications"
+msgstr "Notificaciones de la accesibilidad del teclado"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "Keyboard Layout Options"
 msgstr "Opciones de distribución del teclado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard Preferences"
 msgstr "Preferencias del teclado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "Keyboard _model:"
 msgstr "_Modelo del teclado:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "Layout _Options..."
 msgstr "_Opciones de distribución…"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "Layouts"
 msgstr "Distribuciones"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -2268,67 +2329,95 @@ msgstr ""
 "Bloquea la pantalla después de un cierto intervalo para ayudar a prevenir "
 "las lesiones por el uso repetitivo del teclado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "Preview:"
 msgstr "Vista previa:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "Repeat keys speed"
 msgstr "Velocidad de repetición de teclas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "Reset to De_faults"
 msgstr "Restablecer valores _predeterminados"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
 msgid "Separate _layout for each window"
 msgstr "Separar la _distribución para cada ventana"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
 msgid "Typing Break"
 msgstr "Descanso de escritura"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "_Accessibility..."
-msgstr "_Accesibilidad…"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
+msgid "_Allow to control the pointer using the keyboard"
+msgstr "_Permitir controlar el puntero usando el teclado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+msgid "_Allow to turn accessibility features on and off from the keyboard"
+msgstr "_Permitir activar y desactivar las características de accesibilidad desde el teclado"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
 msgstr "D_uración del intervalo de descanso:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
 msgid "_Delay:"
 msgstr "_Retraso:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
+msgid "_Ignore fast duplicate keypresses"
+msgstr "I_gnorar pulsaciones duplicadas rápidas"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
 msgid "_Layouts:"
 msgstr "_Distribución:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
 msgid "_Models:"
 msgstr "_Modelos:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+msgid "_Notifications..."
+msgstr "_Notificaciones..."
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
+msgid "_Only accept long keypresses"
+msgstr "_Sólo aceptar teclas pulsadas durante cierto tiempo"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
 msgid "_Selected layouts:"
 msgstr "Distribuciones _seleccionadas:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+msgid "_Simulate simultanous keypresses"
+msgstr "_Simular pulsaciones de múltiples teclas"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
 msgid "_Speed:"
 msgstr "Ve_locidad:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
 msgid "_Variants:"
 msgstr "_Variantes:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
 msgid "_Vendors:"
 msgstr "_Fabricantes:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
 msgid "_Work interval lasts:"
 msgstr "D_uración del intervalo de trabajo:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
+msgid "gtk-help"
+msgstr "gtk-help"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "minutos"
 
@@ -2801,11 +2890,11 @@ msgstr "Ventanas"
 msgid "Volume"
 msgstr "Volumen"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:465
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:463
 msgid "Slow Keys Alert"
 msgstr "Alerta de teclas lentas"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:464
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2814,39 +2903,39 @@ msgstr ""
 "combinación de teclas para la característica «Teclas lentas», que afecta la "
 "forma en que funciona el teclado."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid "Do you want to activate Slow Keys?"
 msgstr "¿Desea activar las «Teclas lentas»?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:467
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "¿Desea desactivar las «Teclas lentas»?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "_Activate"
 msgstr "_Activar"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "_Deactivate"
 msgstr "_Desactivar"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do_n't activate"
 msgstr "_No activar"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do_n't deactivate"
 msgstr "_No desactivar"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:480
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:478
 msgid "Sticky Keys Alert"
 msgstr "Alerta de teclas persistentes"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:479
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2855,7 +2944,7 @@ msgstr ""
 "la característica «Teclas persistentes», que afecta la manera en que "
 "funciona el teclado."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2865,11 +2954,11 @@ msgstr ""
 "veces seguidas. Esto desactiva la característica de «Teclas persistentes», "
 "lo cual afecta a la forma en que funciona su teclado."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid "Do you want to activate Sticky Keys?"
 msgstr "¿Quiere activar las «Teclas persistentes»?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:484
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "¿Desea desactivar las «Teclas persistentes»?"
 
@@ -3028,7 +3117,7 @@ msgstr "No es posible cargar el archivo de sonido %s como muestra %s"
 msgid "Cannot determine user's home directory"
 msgstr "No se puede determinar el directorio personal del usuario"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:301
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:303
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -3745,7 +3834,7 @@ msgstr "Un recordatorio para los descansos frente a la computadora."
 #: ../typing-break/drwright.c:622
 msgid "translator-credits"
 msgstr ""
-"Jorge González <jorgegonz@svn.gnome.org>, 2007\n"
+"Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008\n"
 "Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2007\n"
 "Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, "
 "2006\n"
