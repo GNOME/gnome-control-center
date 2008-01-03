@@ -1,19 +1,19 @@
 # Swedish messages for gnome-control-center.
-# Copyright (C) 1998-2007 Free Software Foundation, Inc.
+# Copyright (C) 1998-2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 #
 # FIXME: "Cursor" and "Pointer" are used inconsistently throughout the
 # application! Needs to be bug reported.
 #
-# Daniel Nylander <po@danielnylander.se>, 2006, 2007.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008.
 # Martin Wahlen <mva@sbbs.se>, 1998, 1999.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003, 2004, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-28 19:10+0100\n"
-"PO-Revision-Date: 2007-12-28 19:12+0100\n"
+"POT-Creation-Date: 2008-01-03 22:33+0100\n"
+"PO-Revision-Date: 2008-01-03 22:39+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "<i>Ändringar av region och språk blir aktiverade nästa gång du logga
 
 #: ../capplets/localization/localization.glade.h:2
 msgid "Localization Preferences"
-msgstr "Lokalinställningar"
+msgstr "Inställningar för lokalanpassning"
 
 #: ../capplets/localization/localization.glade.h:3
 msgid "Region:"
@@ -615,6 +615,7 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Ma_ximal pekarhastighet:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "Mouse Keys"
 msgstr "Mustangenter"
 
@@ -632,7 +633,7 @@ msgid "Perform multiple simultaneous key press operations by pressing modifier k
 msgstr "Tryck ned flera modifierare i följd i stället för att trycka ned flera tangenter samtidigt."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
 msgid "S_peed:"
 msgstr "Hasti_ghet:"
 
@@ -662,7 +663,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Godtag endast tangenttryckningar som hålls under:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
 msgid "_Type to test settings:"
 msgstr "_Skriv för att testa inställningar:"
 
@@ -1014,7 +1015,7 @@ msgid "Window Border"
 msgstr "Fönsterram"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
 msgid "_Add..."
 msgstr "_Lägg till..."
 
@@ -1325,13 +1326,13 @@ msgid "Just apply settings and quit"
 msgstr "Verkställ ändringarna och avsluta"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:283
+#: ../capplets/keyboard/gnome-keyboard-properties.c:252
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
 #: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:392
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:390
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ett fel inträffade vid visning av hjälp: %s"
@@ -1609,6 +1610,7 @@ msgid "<b>Web Browser</b>"
 msgstr "<b>Webbläsare</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Accessibility"
 msgstr "Tillgänglighet"
 
@@ -2054,183 +2056,270 @@ msgstr "För att redigera en genväg klickar du på motsvarande rad och trycker 
 msgid "Assign shortcut keys to commands"
 msgstr "Associera snabbtangenter med kommandon"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:133
-#, c-format
-msgid "There was an error launching the keyboard tool: %s"
-msgstr "Ett fel inträffade vid start av tangentbordsverktyget: %s"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:254
-msgid "_Accessibility"
-msgstr "_Tillgänglighet"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:275
-#: ../capplets/keyboard/gnome-keyboard-properties.c:280
+#: ../capplets/keyboard/gnome-keyboard-properties.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:249
 #: ../capplets/sound/sound-properties-capplet.c:1026
 #: ../capplets/sound/sound-properties-capplet.c:1028
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Verkställ bara ändringar och avsluta (endast för kompatibilitet; hanteras nu av demon)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:287
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
 msgid "Start the page with the typing break settings showing"
 msgstr "Starta sidan utan att inställningarna för skrivandepaus visas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:296
+#: ../capplets/keyboard/gnome-keyboard-properties.c:261
+msgid "Start the page with the accessibility settings showing"
+msgstr "Starta sidan med visade tillgänglighetsinställningar"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:270
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Tangentbordsinställningar för GNOME"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<b>Bounce Keys</b>"
+msgstr "<b>Studsande tangenter</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Markörblinkning</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>Allmänt</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repeteringstangenter</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "<b>Slow Keys</b>"
+msgstr "<b>Långsamma tangenter</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+msgid "<b>Sticky Keys</b>"
+msgstr "<b>Klistriga tangenter</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lås skärmen för att tvinga fram paus i skrivandet</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Snabb</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lång</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kort</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Långsam</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "A_cceleration:"
+msgstr "A_cceleration:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "All_ow postponing of breaks"
 msgstr "Till_åt uppskjutning av pauser"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "Beep when _accessibility features are turned on or off"
+msgstr "Pip när _tillgänglighetsfunktioner slås på eller av"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Beep when a _modifier key is pressed"
+msgstr "Pip när en _modifierartangent trycks ned"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+msgid "Beep when a _toggle key is pressed"
+msgstr "Pip när en _växlingstangent trycks ned"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+msgid "Beep when a key is pr_essed"
+msgstr "Pip när en tangent tr_ycks ned"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "Beep when a key is reje_cted"
+msgstr "Pip när en tangent för_kastas"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "Beep when key is _accepted"
+msgstr "Pip när tangent a_ccepteras"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "Beep when key is _rejected"
+msgstr "Pip när tangent f_örkastas"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Kryssa i om pauser ska tillåtas att avbrytas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Choose a Keyboard Model"
 msgstr "Välj en tangentbordsmodell"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Choose a Layout"
 msgstr "Välj en layout"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Cursor _blinks in text fields"
 msgstr "Markören _blinkar i textfält"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Cursor blinks speed"
 msgstr "Hastighet för markörblinkning"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+msgid "D_elay:"
+msgstr "_Fördröjning:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "Disa_ble sticky keys if two keys are pressed together"
+msgstr "Inakti_vera klistriga tangenter om två tangenter trycks ned samtidigt"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Duration of the break when typing is disallowed"
 msgstr "Längd på paus när skrivande inte tillåts"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Duration of work before forcing a break"
 msgstr "Längd på arbete innan paus"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "General"
 msgstr "Allmänt"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "Key presses _repeat when key is held down"
 msgstr "Tangenttryckningar _upprepar då tangent hålls ned"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+msgid "Keyboard Accessibility Notifications"
+msgstr "Notifieringar för tangentbordstillgänglighet"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "Keyboard Layout Options"
 msgstr "Alternativ för tangentbordslayout"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard Preferences"
 msgstr "Tangentbordsinställningar"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "Keyboard _model:"
 msgstr "Tangentbords_modell:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "Layout _Options..."
 msgstr "Layouta_lternativ..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "Layouts"
 msgstr "Layouter"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "Lock screen after a certain duration to help prevent repetitive keyboard use injuries"
 msgstr "Lås skärmen efter en viss tid för att förhindra förslitningsskador från tangentbordsanvändning"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "Preview:"
 msgstr "Förhandsgranska:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "Repeat keys speed"
 msgstr "Tangentrepeterings_hastighet:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "Reset to De_faults"
 msgstr "Återställ till s_tandardvärden"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
 msgid "Separate _layout for each window"
 msgstr "Separat _layout för varje fönster"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
 msgid "Typing Break"
 msgstr "Paus i skrivande"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "_Accessibility..."
-msgstr "_Tillgänglighet..."
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
+msgid "_Allow to control the pointer using the keyboard"
+msgstr "_Tillåt styrning av pekaren med tangentbordet"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+msgid "_Allow to turn accessibility features on and off from the keyboard"
+msgstr "_Tillåt att tillgänglighetsfunktioner slås på och av från tangentbordet"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
 msgstr "_Pausen varar:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
 msgid "_Delay:"
 msgstr "_Fördröjning:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
+msgid "_Ignore fast duplicate keypresses"
+msgstr "I_gnorera snabba dublettangenttryckningar"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
 msgid "_Layouts:"
 msgstr "_Layouter:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
 msgid "_Models:"
 msgstr "_Modeller:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+msgid "_Notifications..."
+msgstr "_Notifieringar..."
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
+msgid "_Only accept long keypresses"
+msgstr "_Acceptera endast långa tangenttryckningar"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
 msgid "_Selected layouts:"
 msgstr "_Valda layouter:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+msgid "_Simulate simultanous keypresses"
+msgstr "_Simulera samtidiga tangenttryckningar"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
 msgid "_Speed:"
 msgstr "_Hastighet:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
 msgid "_Variants:"
 msgstr "_Varianter:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
 msgid "_Vendors:"
 msgstr "_Tillverkare:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
 msgid "_Work interval lasts:"
 msgstr "_Arbetsintervallet varar:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
+msgid "gtk-close"
+msgstr "Stäng"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
+msgid "gtk-help"
+msgstr "Hjälp"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "minuter"
 
@@ -2677,59 +2766,59 @@ msgstr "Fönster"
 msgid "Volume"
 msgstr "Volym"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:465
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:463
 msgid "Slow Keys Alert"
 msgstr "Varning för långsamma tangenter"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:464
 msgid "You just held down the Shift key for 8 seconds.  This is the shortcut for the Slow Keys feature, which affects the way your keyboard works."
 msgstr "Du höll precis ned skifttangenten under 8 sekunder. Detta är genvägen för funktionen långsamma tangenter, som påverkar hur ditt tangentbord fungerar."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid "Do you want to activate Slow Keys?"
 msgstr "Vill du aktivera långsamma tangenter?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:467
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Vill du inaktivera långsamma tangenter?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "_Activate"
 msgstr "_Aktivera"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:470
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:487
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
 msgid "_Deactivate"
 msgstr "_Inaktivera"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do_n't activate"
 msgstr "Aktivera _inte"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:471
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:488
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
 msgid "Do_n't deactivate"
 msgstr "Inaktivera i_nte"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:480
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:478
 msgid "Sticky Keys Alert"
 msgstr "Varning för klistriga tangenter"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:479
 msgid "You just pressed the Shift key 5 times in a row.  This is the shortcut for the Sticky Keys feature, which affects the way your keyboard works."
 msgstr "Du tryckte precis ned skifttangenten 5 gånger i följd. Detta är genvägen för funktionen klistriga tangenter, som påverkar hur ditt tangentbord fungerar."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid "You just pressed two keys at once, or pressed the Shift key 5 times in a row.  This turns off the Sticky Keys feature, which affects the way your keyboard works."
 msgstr "Du tryckte precis ned två tangenter samtidigt, eller tryckte ned skifttangenten 5 gånger i följd. Detta stänger av funktionen långsamma tangenter, som påverkar hur ditt tangentbord fungerar."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Vill du aktivera klistriga tangenter?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:484
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Vill du inaktivera klistriga tangenter?"
 
@@ -3833,6 +3922,12 @@ msgstr "Använd tema"
 msgid "Sets the default theme"
 msgstr "Ställer in standardtemat"
 
+#~ msgid "There was an error launching the keyboard tool: %s"
+#~ msgstr "Ett fel inträffade vid start av tangentbordsverktyget: %s"
+#~ msgid "_Accessibility"
+#~ msgstr "_Tillgänglighet"
+#~ msgid "_Accessibility..."
+#~ msgstr "_Tillgänglighet..."
 #~ msgid ""
 #~ "Keyboard layout \"%s\"\n"
 #~ "Copyright &#169; X.Org Foundation and XKeyboardConfig contributors\n"
@@ -3843,8 +3938,6 @@ msgstr "Ställer in standardtemat"
 #~ "Se paketets metadata för licensiering"
 #~ msgid " "
 #~ msgstr " "
-#~ msgid "    "
-#~ msgstr "    "
 #~ msgid "Evolution Mail Reader 1.4"
 #~ msgstr "E-postläsaren Evolution 1.4"
 #~ msgid "Evolution Mail Reader 1.5"
@@ -3865,10 +3958,6 @@ msgstr "Ställer in standardtemat"
 #~ msgstr "Enkelt skärmtangentbord"
 #~ msgid "W3M Text Browser"
 #~ msgstr "Textläsaren W3M"
-#~ msgid "gtk-close"
-#~ msgstr "Stäng"
-#~ msgid "gtk-help"
-#~ msgstr "Hjälp"
 #~ msgid "The theme is an engine. You need to compile it."
 #~ msgstr "Temat är en motor. Du måste kompilera temat."
 #~ msgid "The file format is invalid"
