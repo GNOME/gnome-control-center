@@ -236,7 +236,7 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	desc->ctrls->enabled_ctrls = set_clear (enable_accessX,
 		desc->ctrls->enabled_ctrls,
-		XkbAccessXKeysMask | XkbAccessXFeedbackMask);
+		XkbAccessXKeysMask);
 
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/timeout_enable",
 		XkbAccessXTimeoutMask)) {
@@ -255,7 +255,7 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	desc->ctrls->ax_options = set_clear (enable_accessX &&
 		gconf_client_get_bool (client, CONFIG_ROOT "/feature_state_change_beep", NULL),
-		desc->ctrls->ax_options, XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask);
+		desc->ctrls->ax_options, XkbAccessXFeedbackMask | XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask);
 
 	/* bounce keys */
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/bouncekeys_enable",
@@ -264,7 +264,7 @@ set_server_from_gconf (GConfEntry *ignored)
 			CONFIG_ROOT "/bouncekeys_delay");
 		desc->ctrls->ax_options = set_clear (
 			gconf_client_get_bool (client, CONFIG_ROOT "/bouncekeys_beep_reject", NULL),
-			desc->ctrls->ax_options, XkbAX_BKRejectFBMask);
+			desc->ctrls->ax_options, XkbAccessXFeedbackMask | XkbAX_BKRejectFBMask);
 	}
 
 	/* mouse keys */
@@ -293,13 +293,13 @@ set_server_from_gconf (GConfEntry *ignored)
 		XkbSlowKeysMask)) {
 		desc->ctrls->ax_options = set_clear (
 			gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_press", NULL),
-			desc->ctrls->ax_options, XkbAX_SKPressFBMask);
+			desc->ctrls->ax_options, XkbAccessXFeedbackMask | XkbAX_SKPressFBMask);
 		desc->ctrls->ax_options = set_clear (
 			gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_accept", NULL),
-			desc->ctrls->ax_options, XkbAX_SKAcceptFBMask);
+			desc->ctrls->ax_options, XkbAccessXFeedbackMask | XkbAX_SKAcceptFBMask);
 		desc->ctrls->ax_options = set_clear (
 			gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_reject", NULL),
-			desc->ctrls->ax_options, XkbAX_SKRejectFBMask);
+			desc->ctrls->ax_options, XkbAccessXFeedbackMask | XkbAX_SKRejectFBMask);
 		desc->ctrls->slow_keys_delay = get_int (client,
 			CONFIG_ROOT "/slowkeys_delay");
 		/* anything larger than 500 seems to loose all keyboard input */
@@ -316,13 +316,13 @@ set_server_from_gconf (GConfEntry *ignored)
 			desc->ctrls->ax_options, XkbAX_TwoKeysMask);
 		desc->ctrls->ax_options = set_clear (
 			gconf_client_get_bool (client, CONFIG_ROOT "/stickykeys_modifier_beep", NULL),
-			desc->ctrls->ax_options, XkbAX_StickyKeysFBMask);
+			desc->ctrls->ax_options, XkbAccessXFeedbackMask | XkbAX_StickyKeysFBMask);
 	}
 
 	/* toggle keys */
 	desc->ctrls->ax_options = set_clear (
 		gconf_client_get_bool (client, CONFIG_ROOT "/togglekeys_enable", NULL),
-		desc->ctrls->ax_options, XkbAX_IndicatorFBMask);
+		desc->ctrls->ax_options, XkbAccessXFeedbackMask | XkbAX_IndicatorFBMask);
 
 	/*
 	fprintf (stderr, "CHANGE to : 0x%x\n", desc->ctrls->enabled_ctrls);
@@ -506,7 +506,7 @@ set_gconf_from_server (GConfEntry *ignored)
 
 	/* always toggle this irrespective of the state */
 	changed |= set_bool (client, cs, CONFIG_ROOT "/enable",
-		desc->ctrls->enabled_ctrls & (XkbAccessXKeysMask | XkbAccessXFeedbackMask));
+		desc->ctrls->enabled_ctrls & XkbAccessXKeysMask);
 
 	changed |= set_bool (client, cs, CONFIG_ROOT "/feature_state_change_beep",
 		desc->ctrls->ax_options & (XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask));
