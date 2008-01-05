@@ -1,37 +1,32 @@
-# translation of gnome-control-center.HEAD.po to Slovak
-# translation of gnome-control-center.HEAD.sk.po to Slovak
-# translation of sk.po to Slovak
-# Slovak translation of sk.po
 # GNOME control-center Slovak translation
-# Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
-# Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000,2001,2002,2003, 2004.
-# Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>, 2002.
-# Stanislav Visnovsky <visnovsky@kde.org>, 2003.
-# Stanislav Visnovsky <visnov@suse.cz>, 2003.
+# Copyright (C) 2000-2007 Free Software Foundation, Inc.
+#
+# Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000-2004.
 # Marcel Telka <marcel@telka.sk>, 2005.
-#
-# $Id$
-#
+# Peter Tuharsky <tuharsky@misbb.sk>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center\n"
+"Project-Id-Version: sk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-26 21:32+0100\n"
-"PO-Revision-Date: 2005-11-26 21:33+0100\n"
-"Last-Translator: Marcel Telka <marcel@telka.sk>\n"
+"POT-Creation-Date: 2008-01-05 23:14+0100\n"
+"PO-Revision-Date: 2007-09-17 15:11+0100\n"
+"Last-Translator: Peter Tuhársky <tuharsky@misbb.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural= (n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Country: SLOVAKIA\n"
+"X-Poedit-Language: Slovak\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
-msgstr "Okraj obrázka/návestia"
+msgstr "Okraj obrázku/označenia"
 
 #: ../capplets/about-me/eel-alert-dialog.c:115
 msgid "Width of border around the label and image in the alert dialog"
-msgstr "Šírka okraja okolo návestia a obrázka v dialógovom okne výstrahy"
+msgstr "Šírka okraja okolo označenia a obrázku v okne výstrahy"
 
 #: ../capplets/about-me/eel-alert-dialog.c:124
 msgid "Alert Type"
@@ -47,30 +42,31 @@ msgstr "Tlačidlá výstrahy"
 
 #: ../capplets/about-me/eel-alert-dialog.c:134
 msgid "The buttons shown in the alert dialog"
-msgstr "Tlačidlá zobrazené v dialógovom okne výstrahy"
+msgstr "Tlačidlá zobrazené v okne výstrahy"
 
 #: ../capplets/about-me/eel-alert-dialog.c:198
 msgid "Show more _details"
 msgstr "Zobraziť viac _podrobností"
 
-#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
-#: ../capplets/about-me/gnome-about-me.glade.h:14
-msgid "About Me"
-msgstr "O mne"
-
-#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
-msgid "Set your personal information"
-msgstr "Nastaviť vaše osobné informácie"
-
-#: ../capplets/about-me/gnome-about-me.c:601
+#: ../capplets/about-me/gnome-about-me.c:665
 msgid "Select Image"
 msgstr "Vybrať obrázok"
 
-#: ../capplets/about-me/gnome-about-me.c:603
+#: ../capplets/about-me/gnome-about-me.c:667
 msgid "No Image"
 msgstr "Bez obrázka"
 
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:695
+#: ../capplets/appearance/appearance-desktop.c:1100
+msgid "Images"
+msgstr "Obrázky"
+
+#: ../capplets/about-me/gnome-about-me.c:699
+#: ../capplets/appearance/theme-installer.c:700
+msgid "All Files"
+msgstr "Všetky súbory"
+
+#: ../capplets/about-me/gnome-about-me.c:836
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -78,172 +74,120 @@ msgstr ""
 "Vyskytla sa chyba pri pokuse o získanie informácií adresára\n"
 "Evolution Data Server nemôže obslúžiť tento protokol"
 
-#: ../capplets/about-me/gnome-about-me.c:787
+#: ../capplets/about-me/gnome-about-me.c:857
 msgid "Unable to open address book"
 msgstr "Nepodarilo sa otvoriť adresár"
 
-#: ../capplets/about-me/gnome-about-me.c:799
+#: ../capplets/about-me/gnome-about-me.c:871
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Neznáme prihlasovacie ID, databáza používateľov je možno poškodená"
 
-#: ../capplets/about-me/gnome-about-me.c:830
-#: ../capplets/about-me/gnome-about-me.c:832
+#: ../capplets/about-me/gnome-about-me.c:901
+#: ../capplets/about-me/gnome-about-me.c:903
 #, c-format
 msgid "About %s"
-msgstr "O %s"
+msgstr "O programe %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:707
-msgid "Old password is incorrect, please retype it"
-msgstr "Staré heslo je nesprávne, prosím, zadajte ho znova"
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
+#: ../capplets/about-me/gnome-about-me.glade.h:12
+msgid "About Me"
+msgstr "O mne"
 
-#: ../capplets/about-me/gnome-about-me-password.c:127
-msgid "System error has occurred"
-msgstr "Vyskytla sa systémová chyba"
-
-#: ../capplets/about-me/gnome-about-me-password.c:128
-msgid "Could not run /usr/bin/passwd"
-msgstr "Nepodarilo sa spustiť /usr/bin/passwd"
-
-#: ../capplets/about-me/gnome-about-me-password.c:129
-msgid "Unable to launch backend"
-msgstr "Nepodarilo sa spustiť pozadie"
-
-#: ../capplets/about-me/gnome-about-me-password.c:131
-#: ../capplets/about-me/gnome-about-me-password.c:132
-msgid "Unexpected error has occurred"
-msgstr "Vyskytla sa neočakávaná chyba"
-
-#: ../capplets/about-me/gnome-about-me-password.c:331
-msgid "Password is too short"
-msgstr "Heslo je príliš krátke"
-
-#: ../capplets/about-me/gnome-about-me-password.c:334
-#: ../capplets/about-me/gnome-about-me-password.c:337
-msgid "Password is too simple"
-msgstr "Heslo je príliš jednoduché"
-
-#: ../capplets/about-me/gnome-about-me-password.c:340
-msgid "Old and new passwords are too similar"
-msgstr "Staré a nové heslo sú príliš podobné"
-
-#: ../capplets/about-me/gnome-about-me-password.c:343
-msgid "Must contain numeric or special character(s)"
-msgstr "Musí obsahovať číselný alebo špeciálny znak (znaky)"
-
-#: ../capplets/about-me/gnome-about-me-password.c:348
-msgid "Old and new password are the same"
-msgstr "Staré a nové heslo sú rovnaké"
-
-#: ../capplets/about-me/gnome-about-me-password.c:634
-msgid "Please type the passwords."
-msgstr "Prosím, zadajte heslá."
-
-#: ../capplets/about-me/gnome-about-me-password.c:642
-msgid "Please type the password again, it is wrong."
-msgstr "Prosím, zadajte heslo znova, je nesprávne."
-
-#: ../capplets/about-me/gnome-about-me-password.c:645
-msgid "Click on Change Password to change the password."
-msgstr "Pre zmenu hesla kliknite na Zmeniť heslo."
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
+msgid "Set your personal information"
+msgstr "Nastavte svoje osobné informácie"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid " "
-msgstr " "
-
-#: ../capplets/about-me/gnome-about-me.glade.h:2
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: ../capplets/about-me/gnome-about-me.glade.h:3
 msgid "<b>Email</b>"
 msgstr "<b>Elektronická pošta</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:4
+#: ../capplets/about-me/gnome-about-me.glade.h:2
 msgid "<b>Home</b>"
 msgstr "<b>Domov</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:5
+#: ../capplets/about-me/gnome-about-me.glade.h:3
 msgid "<b>Instant Messaging</b>"
-msgstr "<b>Priama komunikácia</b>"
+msgstr "<b>Rýchle správy</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:6
+#: ../capplets/about-me/gnome-about-me.glade.h:4
 msgid "<b>Job</b>"
 msgstr "<b>Zamestnanie</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr "<b>Prosím, zadajte heslá.</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
+#: ../capplets/about-me/gnome-about-me.glade.h:5
 msgid "<b>Telephone</b>"
 msgstr "<b>Telefón</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:6
 msgid "<b>Web</b>"
 msgstr "<b>WWW</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:7
 msgid "<b>Work</b>"
 msgstr "<b>Práca</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:11
+#: ../capplets/about-me/gnome-about-me.glade.h:8
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Zmeňte svoje heslo</span>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "A_IM/iChat:"
 msgstr "A_IM/iChat:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:12
+#: ../capplets/about-me/gnome-about-me.glade.h:10
 msgid "A_ddress:"
 msgstr "A_dresa:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:13
+#: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_ssistant:"
 msgstr "A_sistent:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:15
+#: ../capplets/about-me/gnome-about-me.glade.h:13
 msgid "Address"
 msgstr "A_dresa"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:16
+#: ../capplets/about-me/gnome-about-me.glade.h:14
 msgid "C_ity:"
 msgstr "M_esto:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:17
+#: ../capplets/about-me/gnome-about-me.glade.h:15
 msgid "C_ompany:"
 msgstr "Sp_oločnosť:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:18
+#: ../capplets/about-me/gnome-about-me.glade.h:16
 msgid "Cale_ndar:"
 msgstr "Kale_ndár:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:19
+#: ../capplets/about-me/gnome-about-me.glade.h:17
 msgid "Change Passwo_rd..."
 msgstr "Zmeniť hes_lo..."
 
-#: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
+#: ../capplets/about-me/gnome-about-me.glade.h:18
+msgid "Change pa_ssword"
+msgstr "Zmeniť _heslo"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:19
+msgid "Change password"
 msgstr "Zmeniť heslo"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:21
+#: ../capplets/about-me/gnome-about-me.glade.h:20
 msgid "Ci_ty:"
 msgstr "Mes_to:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:21
 msgid "Co_untry:"
 msgstr "Kr_ajina:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Contact"
 msgstr "Kontakt"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Cou_ntry:"
 msgstr "Kraji_na:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:24
+msgid "Current _password:"
+msgstr "_Súčasné heslo:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Full Name"
@@ -262,217 +206,314 @@ msgid "M_SN:"
 msgstr "M_SN:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "Staré he_slo:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "P.O. _box:"
 msgstr "P.O. _Box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "P._O. box:"
 msgstr "P._O. Box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "Personal Info"
 msgstr "Osobné informácie"
 
+#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me-password.c:934
+msgid ""
+"Please type your password again in the <b>Retype new password</b> field."
+msgstr "Prosím, zadajte heslo znova v poli <b>Zadajte heslo znovu</b>."
+
 #: ../capplets/about-me/gnome-about-me.glade.h:33
+msgid "Select your photo"
+msgstr "Vyberte svoju fotku"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:34
 msgid "State/Pro_vince:"
 msgstr "Štát/pro_vincia:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
-msgid "User name:"
-msgstr "Meno používateľa:"
-
 #: ../capplets/about-me/gnome-about-me.glade.h:35
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
+msgstr ""
+"Ak chcete zmeniť heslo, zadajte súčasné heslo do nižšieuvedeného poľa a "
+"stlačte <b>Overiť</b>.\n"
+"Keď sa overíte, zadajte svoje nové heslo, zadajte ho znovu pre kontrolu a "
+"stlačte <b>Zmeniť heslo</b>."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:37
+msgid "User name:"
+msgstr "Používateľské meno:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "Web _log:"
 msgstr "WWW _záznam:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Wor_k:"
 msgstr "_Práca:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Work _fax:"
 msgstr "_Fax do práce:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Zip/_Postal code:"
 msgstr "_PSČ:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "_Address:"
 msgstr "_Adresa:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:43
+msgid "_Authenticate"
+msgstr "_Overiť"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:44
 msgid "_Department:"
 msgstr "_Oddelenie:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Groupwise:"
 msgstr "_Skupina:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Home page:"
 msgstr "_Domovská stránka:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home:"
 msgstr "_Domov:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Manager:"
 msgstr "_Manažér:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Mobile:"
 msgstr "_Mobil:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_New password:"
 msgstr "_Nové heslo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_Profession:"
 msgstr "_Profesia:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Retype new password:"
-msgstr "_Znova zadať nové heslo:"
+msgstr "_Znovu zadať nové heslo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_State/Province:"
 msgstr "_Štát/provincia:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_Title:"
 msgstr "_Nadpis:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Work:"
 msgstr "_Práca:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Zip/Postal code:"
 msgstr "_PSČ:"
 
+#: ../capplets/about-me/gnome-about-me-password.c:162
+msgid "Child exited unexpectedly"
+msgstr "Potomok neočakávane skončil"
+
+#: ../capplets/about-me/gnome-about-me-password.c:297
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "Nepodarilo sa ukončiť backend_stdin IO kanál: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:310
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "Nepodarilo sa ukončiť backend_stdout IO kanál: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:409
+msgid "Authenticated!"
+msgstr "Overený!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:475
+#: ../capplets/about-me/gnome-about-me-password.c:551
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr ""
+"Vaše heslo sa zmenilo od Vášho pôvodného overenia! Prosím prihláste sa znovu."
+
+#: ../capplets/about-me/gnome-about-me-password.c:477
+msgid "That password was incorrect."
+msgstr "Heslo je nesprávne."
+
+#: ../capplets/about-me/gnome-about-me-password.c:524
+msgid "Your password has been changed."
+msgstr "Vaše heslo bolo zmenené."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:534
+#, c-format
+msgid "System error: %s."
+msgstr "Systémová chyba: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:537
+msgid "The password is too short."
+msgstr "Toto heslo je príliš krátke."
+
+#: ../capplets/about-me/gnome-about-me-password.c:540
+msgid "The password is too simple."
+msgstr "Toto heslo je príliš jednoduché."
+
+#: ../capplets/about-me/gnome-about-me-password.c:543
+msgid "The old and new passwords are too similar."
+msgstr "Staré a nové heslo sú príliš podobné."
+
+#: ../capplets/about-me/gnome-about-me-password.c:545
+msgid "The new password must contain numeric or special character(s)."
+msgstr "Nové heslo musí obsahovať číselný alebo špeciálny znak (znaky)."
+
+#: ../capplets/about-me/gnome-about-me-password.c:548
+msgid "The old and new passwords are the same."
+msgstr "Staré a nové heslo sú rovnaké."
+
+#. translators: Unable to launch <program>: <error message>
+#: ../capplets/about-me/gnome-about-me-password.c:818
+#, c-format
+msgid "Unable to launch %s: %s"
+msgstr "Nepodarilo sa spustiť %s: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:821
+msgid "Unable to launch backend"
+msgstr "Nepodarilo sa spustiť pozadie"
+
+#: ../capplets/about-me/gnome-about-me-password.c:822
+msgid "A system error has occurred"
+msgstr "Nastala systémová chyba"
+
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:842
+msgid "Checking password..."
+msgstr "Kontrolujem heslo..."
+
+#: ../capplets/about-me/gnome-about-me-password.c:928
+msgid "Click <b>Change password</b> to change your password."
+msgstr "Pre zmenu hesla kliknite na <b>Zmeniť heslo</b>."
+
+#: ../capplets/about-me/gnome-about-me-password.c:931
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "Prosím zadajte svoje heslo do poľa <b> Nové heslo</b>."
+
+#: ../capplets/about-me/gnome-about-me-password.c:937
+msgid "The two passwords are not equal."
+msgstr "Heslá nie sú totožné."
+
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-msgid "<b>Applications</b>"
-msgstr "<b>Aplikácie</b>"
+msgid "<b>Assistive Technologies</b>"
+msgstr "<b>Pomocné technológie</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-msgid "<b>Support</b>"
-msgstr "<b>Podpora</b>"
+msgid "<b>Preferences</b>"
+msgstr "<b>Predvoľby</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
-msgid ""
-"<small><i><b>Note:</b> Changes to this setting will not take effect until "
-"you next log in.</i></small>"
-msgstr ""
-"<small><i><b>Poznámka:</b> Zmeny tohto nastavenia sa prejavia až po budúcom "
-"prihlásení.</i></small>"
+msgid "Accessible Lo_gin"
+msgstr "_Prístupné prihlásenie"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 msgid "Assistive Technology Preferences"
-msgstr "Nastavenie prístupnosti"
+msgstr "Predvoľby pomocných technológií"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
+msgid ""
+"Changes to enable assistive technologies will not take effect until your "
+"next log in."
+msgstr "Zmeny tohto nastavenia sa prejavia až po budúcom prihlásení."
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
 msgstr "Zavrieť a od_hlásiť"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
-msgid "Start these assistive technologies every time you log in:"
-msgstr "Spustiť pri každom prihlásení tieto techniky sprístupnenia:"
-
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
+msgid "Jump to Preferred Applications dialog"
+msgstr "Preskočiť na okno Predvolených aplikácií"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
+msgid "Jump to the Accessible Login dialog"
+msgstr "Preskočiť do okna Prístupného prihlásenia"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
+msgid "Jump to the Keyboard Accessibility dialog"
+msgstr "Preskočiť na okno Prístupnosti klávesnice"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
 msgid "_Enable assistive technologies"
 msgstr "_Povoliť pomocné technológie"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
-msgid "_Magnifier"
-msgstr "_Lupa"
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+msgid "_Keyboard Accessibility"
+msgstr "Prístupnosť _Klávesnice"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
-msgid "_On-screen keyboard"
-msgstr "K_lávesnica na obrazovke"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-msgid "_Screenreader"
-msgstr "Čí_tanie obrazovky"
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+msgid "_Preferred Applications"
+msgstr "_Predvolené aplikácie"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
-msgid "Assistive Technology Support"
-msgstr "Podpora pomocných technológií"
+#, fuzzy
+msgid "Assistive Technology"
+msgstr "<b>Pomocné technológie</b>"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
-msgstr "Povoliť podporuje pre GNOME pomocných technológií pri prihlásení"
+msgstr "Povoliť podporu pre pomocné technológie GNOME pri prihlásení"
 
-#: ../capplets/accessibility/at-properties/main.c:60
-msgid ""
-"No Assistive Technology is available on your system.  The 'gok' package must "
-"be installed in order to get on-screen keyboard support, and the "
-"'gnopernicus' package must be installed for screenreading and magnifying "
-"capabilities."
-msgstr ""
-"Na vašom systéme nie sú k dispozícii žiadne pomocné technológie. Aby ste "
-"získali podporu klávesnice na obrazovke, potrebujete balík 'gok', pre "
-"čítanie obrazovky a lupu potrebujete 'gnopernicus'."
-
-#: ../capplets/accessibility/at-properties/main.c:62
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'gok' package must be installed in order to get on-screen keyboard support."
-msgstr ""
-"Na vašom systéme nie sú k dispozícii všetky pomocné technológie. Aby ste "
-"získali podporu klávesnice na obrazovke, potrebujete balík 'gok'."
-
-#: ../capplets/accessibility/at-properties/main.c:64
-msgid ""
-"Not all available assistive technologies are installed on your system.  The "
-"'gnopernicus' package must be installed for screenreading and magnifying "
-"capabilities."
-msgstr ""
-"Na vašom systéme nie sú k dispozícii všetky pomocné technológie. Aby ste "
-"získali podporu pre čítanie obrazovky a lupu potrebujete 'gnopernicus'."
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:250
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Pri pokuse o spustenie nastavenia myši nastala chyba: %s"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:338
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:346
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:407
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nepodarilo sa importovať nastavenie AccessX zo súboru '%s'"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:444
 msgid "Import Feature Settings File"
 msgstr "Importovať nastavenie funkcií zo súboru"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:440
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:448
 msgid "_Import"
 msgstr "_Importovať"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Klávesnica"
+msgid "Keyboard Accessibility"
+msgstr "Prístupnosť klávesnice"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
-msgstr "Nastavenie sprístupnenia klávesnice"
+msgstr "Predvoľby sprístupnenia klávesnice"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:59
 msgid ""
@@ -482,90 +523,83 @@ msgstr ""
 "Tento systém asi nemá rozšírenie XKB. Funkcie pre sprístupnenie klávesnice "
 "nebudú fungovať."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>Povoliť _odrazové klávesy</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>Povoliť _pomalé klávesy</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>Povoliť klávesy _myši</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>Povoliť _opakovanie kláves</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>Povoliť _lepkavé klávesy</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Features</b>"
 msgstr "<b>Funkcie</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Toggle Keys</b>"
 msgstr "<b>Prepínacie klávesy</b>"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Basic"
 msgstr "Základné"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Beep if key is re_jected"
-msgstr "Pípnuť, ak je kláves _odmietnutý"
+msgstr "Pípnuť, ak je klávesa _odmietnutá"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Beep when _features turned on or off from keyboard"
 msgstr "Pípnuť pri _prepnutí funkcie z klávesnice"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "Beep when _modifier is pressed"
 msgstr "Pípnuť pri stlačení _modifikátora"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr "Pípne pri zapnutí indikátoru LED a pípne dvakrát pri jeho vypnutí."
+msgstr "Pípnuť pri zapnutí indikátoru LED, pípnuť dvakrát pri jeho vypnutí."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Beep when key is:"
-msgstr "Pípnuť, ak je kláves:"
+msgstr "Pípnuť, ak je klávesa:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Del_ay:"
 msgstr "_Pauza:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Delay between keypress and pointer mo_vement:"
 msgstr "Pauza medzi stlačením klávesu a p_resunom kurzoru:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Disa_ble if two keys pressed together"
 msgstr "_Zakázať ak sú stlačené dva klávesy naraz"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "E_nable Toggle Keys"
 msgstr "Povoliť _prepínanie kláves"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
 msgid "Filters"
 msgstr "Filtre"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "I_gnore duplicate keypresses within:"
 msgstr "_Ignorovať duplikované stlačenie kláves po dobu:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -573,29 +607,30 @@ msgstr ""
 "Ignoruje všetky následné stlačenia ROVNAKÉHO klávesu ak sa opakuje v "
 "nastavenej dobe."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Keyboard Accessibility Preferences (AccessX)"
-msgstr "Nastavenie sprístupnenia klávesnice (AccessX)"
+msgstr "Predvoľby sprístupnenia klávesnice (AccessX)"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Ma_ximum pointer speed:"
 msgstr "Ma_ximálna rýchlosť kurzoru:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "Mouse Keys"
 msgstr "Myš klávesami"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "Mouse _Preferences..."
-msgstr "Nastavenie _myši..."
+msgstr "_Predvoľby myši..."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr "Akceptovať klávesy iba po stlačení a držaní danú dobu."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -603,173 +638,722 @@ msgstr ""
 "Vykonať operácie používajúce viac naraz stlačených kláves pri postupnom "
 "stlačení modifikátorov."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
 msgid "S_peed:"
 msgstr "_Rýchlosť:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid "Time to acce_lerate to maximum speed:"
 msgstr "Čas pre _zrýchlenie na maximum:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Simulovať myš pomocou číselnej časti klávesnice."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "_Disable if unused for:"
 msgstr "_Zakázať ak nepoužívané po:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "_Enable keyboard accessibility features"
 msgstr "_Povoliť sprístupnenie klávesnice"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Import Feature Settings..."
 msgstr "_Importovať nastavenie funkcií..."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Only accept keys held for:"
 msgstr "_Akceptovať stlačenie klávesu iba po:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
 msgid "_Type to test settings:"
 msgstr "_Test nastavenia:"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "_accepted"
 msgstr "_akceptovaný"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
 msgid "_pressed"
 msgstr "_stlačený"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
 msgid "_rejected"
 msgstr "_odmietnutý"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
 msgid "characters/second"
 msgstr "znakov/sekundu"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "milliseconds"
 msgstr "milisekúnd"
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 msgid "pixels/second"
 msgstr "bodov/sekundu"
 
-#. set the timeout value  label with correct value of timeout
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:879
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "sekúnd"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "Nastavenie pozadia plochy"
-
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "Pozadie plochy"
-
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>_Tapeta plochy</b>"
-
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>_Farby plochy</b>"
-
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "Nastavenie pozadia plochy"
-
-#: ../capplets/background/gnome-background-properties.glade.h:4
-msgid "Open a dialog to specify the color"
-msgstr "Otvoriť dialógové okno pre zadanie farby"
-
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "_Pridať tapetu"
-
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Style:"
-msgstr "Š_týl:"
-
-#: ../capplets/background/gnome-wp-capplet.c:74
-#: ../capplets/common/capplet-util.c:340
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:331
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Pri pokuse o zobrazenie Pomocníka nastala chyba: %s"
-
-#: ../capplets/background/gnome-wp-capplet.c:1060
-#: ../capplets/background/gnome-wp-capplet.c:1078
-msgid "Centered"
-msgstr "V strede"
-
-#: ../capplets/background/gnome-wp-capplet.c:1086
-#: ../capplets/background/gnome-wp-capplet.c:1103
-msgid "Fill Screen"
-msgstr "Na celú obrazovku"
-
-#: ../capplets/background/gnome-wp-capplet.c:1111
-#: ../capplets/background/gnome-wp-capplet.c:1128
-msgid "Scaled"
-msgstr "Škálované"
-
-#: ../capplets/background/gnome-wp-capplet.c:1136
-#: ../capplets/background/gnome-wp-capplet.c:1153
-msgid "Tiled"
-msgstr "Dlaždice"
-
-#: ../capplets/background/gnome-wp-capplet.c:1177
-#: ../capplets/background/gnome-wp-capplet.c:1186
-msgid "Solid Color"
-msgstr "Plná farba"
-
-#: ../capplets/background/gnome-wp-capplet.c:1194
-#: ../capplets/background/gnome-wp-capplet.c:1203
-msgid "Horizontal Gradient"
-msgstr "Horizontálny prechod"
-
-#: ../capplets/background/gnome-wp-capplet.c:1211
-#: ../capplets/background/gnome-wp-capplet.c:1220
-msgid "Vertical Gradient"
-msgstr "Vertikálny prechod"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1269
+#: ../capplets/appearance/appearance-desktop.c:1068
 msgid "Add Wallpaper"
 msgstr "Pridať tapetu"
 
-#: ../capplets/background/gnome-wp-capplet.c:1286
-msgid "Images"
-msgstr "Obrázky"
-
-#: ../capplets/background/gnome-wp-capplet.c:1290
-msgid "All Files"
+#: ../capplets/appearance/appearance-desktop.c:1104
+msgid "All files"
 msgstr "Všetky súbory"
 
-#: ../capplets/background/gnome-wp-info.c:57
+#: ../capplets/appearance/appearance-font.c:494
+msgid "Font may be too large"
+msgstr "Písmo môže byť príliš veľké"
+
+#: ../capplets/appearance/appearance-font.c:498
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"Vybrané písmo má veľkosť %d bodov a môže spôsobiť ťažkosti pri používaní "
+"počítača. Odporúčame vybrať veľkosť menšiu ako %d."
+msgstr[1] ""
+"Vybrané písmo má veľkosť %d bod a môže spôsobiť ťažkosti pri používaní "
+"počítača. Odporúčame vybrať veľkosť menšiu ako %d."
+msgstr[2] ""
+"Vybrané písmo má veľkosť %d body a môže spôsobiť ťažkosti pri používaní "
+"počítača. Doporučujeme vybrať veľkosť menšiu ako %d."
+
+#: ../capplets/appearance/appearance-font.c:511
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"Vybrané písmo má veľkosť %d bodov a môže spôsobiť ťažkosti pri používaní "
+"počítača. Odporúčame vybrať menšie písmo."
+msgstr[1] ""
+"Vybrané písmo má veľkosť %d bod a môže spôsobiť ťažkosti pri používaní "
+"počítača. Odporúčame vybrať menšie písmo."
+msgstr[2] ""
+"Vybrané písmo má veľkosť %d body a môže spôsobiť ťažkosti pri používaní "
+"počítača. Doporučujeme vybrať menšie písmo."
+
+#: ../capplets/appearance/appearance-font.c:533
+msgid "Use previous font"
+msgstr "Vrátiť pôvodné písmo"
+
+#: ../capplets/appearance/appearance-font.c:535
+msgid "Use selected font"
+msgstr "Použiť vybrané písmo"
+
+#: ../capplets/appearance/appearance-main.c:108
+msgid "Specify the filename of a theme to install"
+msgstr "Vyberte názov súboru témy, ktorú chcete nainštalovať"
+
+#: ../capplets/appearance/appearance-main.c:109
+msgid "filename"
+msgstr "názov súboru"
+
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/appearance/appearance-main.c:116
+msgid "Specify the name of the page to show (theme|background|fonts|interface)"
+msgstr "Vyberte názov stránky ktorú ukázať (téma|pozadie|písma|rozhranie)"
+
+#: ../capplets/appearance/appearance-main.c:117
+msgid "page"
+msgstr "stránka"
+
+#: ../capplets/appearance/appearance-main.c:124
+msgid "[WALLPAPER...]"
+msgstr "[TAPETA...]"
+
+#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/common/gnome-theme-info.c:439
+#: ../capplets/common/gnome-theme-info.c:638
+msgid "Default Pointer"
+msgstr "Predvolený kurzor"
+
+#: ../capplets/appearance/appearance-themes.c:534
+msgid "Apply Background"
+msgstr "Použiť pozadie"
+
+#: ../capplets/appearance/appearance-themes.c:538
+msgid "Apply Font"
+msgstr "Použiť písmo"
+
+#: ../capplets/appearance/appearance-themes.c:563
+msgid "The current theme suggests a background and a font."
+msgstr "Súčasná téma odporúča nejaké pozadie a písmo."
+
+#: ../capplets/appearance/appearance-themes.c:568
+msgid "The current theme suggests a background."
+msgstr "Súčasná téma odporúča nejaké pozadie."
+
+#: ../capplets/appearance/appearance-themes.c:573
+msgid "The current theme suggests a font."
+msgstr "Súčasná téma odporúča nejaké písmo."
+
+#: ../capplets/appearance/appearance-themes.c:857
+#: ../capplets/default-applications/gnome-da-capplet.c:1080
+#: ../capplets/sound/sound-properties-capplet.c:327
+msgid "Custom"
+msgstr "Vlastný"
+
+#: ../capplets/appearance/data/appearance.glade.h:1
+msgid "<b>C_olors</b>"
+msgstr "<b>_Farby</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:2
+msgid "<b>Hinting</b>"
+msgstr "<b>Rady</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:3
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>Ponuky a panely nástrojov</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:4
+msgid "<b>Preview</b>"
+msgstr "<b>Náhľad</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:5
+msgid "<b>Rendering</b>"
+msgstr "<b>Vykresľovanie</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:6
+msgid "<b>Smoothing</b>"
+msgstr "<b>Vyhladzovanie</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:7
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>Poradie subpixelov</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:8
+msgid "<b>_Wallpaper</b>"
+msgstr "<b>_Tapeta plochy</b>"
+
+#: ../capplets/appearance/data/appearance.glade.h:9
+msgid "Appearance Preferences"
+msgstr "Predvoľby vzhľadu"
+
+#: ../capplets/appearance/data/appearance.glade.h:10
+msgid "Background"
+msgstr "Pozadie"
+
+#: ../capplets/appearance/data/appearance.glade.h:11
+msgid "Best _shapes"
+msgstr "Najlepšie _tvary"
+
+#: ../capplets/appearance/data/appearance.glade.h:12
+msgid "Best co_ntrast"
+msgstr "Najlepší _kontrast"
+
+#: ../capplets/appearance/data/appearance.glade.h:13
+msgid "C_ustomize..."
+msgstr "Nastaviť _vlastné..."
+
+#: ../capplets/appearance/data/appearance.glade.h:14
+msgid "C_ut"
+msgstr "Vys_trihnúť"
+
+#: ../capplets/appearance/data/appearance.glade.h:15
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+"V strede\n"
+"Zaplniť obrazovku\n"
+"Roztiahnuť\n"
+"Zväčšiť\n"
+"Dlaždice"
+
+#: ../capplets/appearance/data/appearance.glade.h:20
+msgid "Changing your cursor theme takes effect the next time you log in."
+msgstr "Zmena témy kurzora sa uplatní až pri ďalšom prihlásení."
+
+#: ../capplets/appearance/data/appearance.glade.h:21
+msgid "Colors"
+msgstr "Farby"
+
+#: ../capplets/appearance/data/appearance.glade.h:22
+msgid "Controls"
+msgstr "Ovládacie prvky"
+
+#: ../capplets/appearance/data/appearance.glade.h:23
+msgid "Customize Theme"
+msgstr "Vlastné nastavenie témy"
+
+#: ../capplets/appearance/data/appearance.glade.h:24
+msgid "D_etails..."
+msgstr "P_odrobnosti..."
+
+#: ../capplets/appearance/data/appearance.glade.h:25
+msgid "Des_ktop font:"
+msgstr "Písmo _plochy:"
+
+#: ../capplets/appearance/data/appearance.glade.h:26
+msgid "Edit"
+msgstr "Upraviť"
+
+#: ../capplets/appearance/data/appearance.glade.h:27
+msgid "Font Rendering Details"
+msgstr "Podrobnosti zobrazenia písiem"
+
+#: ../capplets/appearance/data/appearance.glade.h:28
+msgid "Fonts"
+msgstr "Písma"
+
+#: ../capplets/appearance/data/appearance.glade.h:29
+msgid "Go _to Fonts Folder"
+msgstr "Prejsť _na priečinok písiem"
+
+#: ../capplets/appearance/data/appearance.glade.h:30
+msgid "Gra_yscale"
+msgstr "_Odtiene šedej"
+
+#: ../capplets/appearance/data/appearance.glade.h:31
+msgid "Icons"
+msgstr "Ikony"
+
+#: ../capplets/appearance/data/appearance.glade.h:32
+msgid "Interface"
+msgstr "Rozhranie"
+
+#: ../capplets/appearance/data/appearance.glade.h:33
+msgid "Large"
+msgstr "Veľké"
+
+#: ../capplets/appearance/data/appearance.glade.h:34
+msgid "N_one"
+msgstr "Žia_dne"
+
+#: ../capplets/appearance/data/appearance.glade.h:35
+msgid "New File"
+msgstr "Nový súbor"
+
+#: ../capplets/appearance/data/appearance.glade.h:36
+msgid "Open File"
+msgstr "Otvoriť súbor"
+
+#: ../capplets/appearance/data/appearance.glade.h:37
+msgid "Open a dialog to specify the color"
+msgstr "Otvoriť dialógové okno pre zadanie farby"
+
+#: ../capplets/appearance/data/appearance.glade.h:38
+msgid "Pointer"
+msgstr "Kurzor"
+
+#: ../capplets/appearance/data/appearance.glade.h:39
+msgid "R_esolution:"
+msgstr "_Rozlíšenie:"
+
+#: ../capplets/appearance/data/appearance.glade.h:40
+msgid "Save File"
+msgstr "Uložiť súbor"
+
+#: ../capplets/appearance/data/appearance.glade.h:41
+msgid "Save Theme As..."
+msgstr "Uložiť tému ako..."
+
+#: ../capplets/appearance/data/appearance.glade.h:42
+#, fuzzy
+msgid "Save _As..."
+msgstr "Uložiť tému ako..."
+
+#: ../capplets/appearance/data/appearance.glade.h:43
+msgid "Save _background image"
+msgstr "Uložiť obrázok _pozadia"
+
+#: ../capplets/appearance/data/appearance.glade.h:44
+msgid "Show _icons in menus"
+msgstr "Zobraziť _ikony v ponukách"
+
+#: ../capplets/appearance/data/appearance.glade.h:45
+msgid "Small"
+msgstr "Malé"
+
+#: ../capplets/appearance/data/appearance.glade.h:46
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"Jednoliata farba\n"
+"Vodorovný prechod\n"
+"Zvislý prechod"
+
+#: ../capplets/appearance/data/appearance.glade.h:49
+msgid "Sub_pixel (LCDs)"
+msgstr "Sub_pixely (LCD)"
+
+#: ../capplets/appearance/data/appearance.glade.h:50
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "Sub_pixelové vyhladzovanie (LCD)"
+
+#: ../capplets/appearance/data/appearance.glade.h:51
+msgid "Text"
+msgstr "Text"
+
+#: ../capplets/appearance/data/appearance.glade.h:52
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"Text pod položkami\n"
+"Text vedľa položiek\n"
+"Iba ikony\n"
+"Iba text"
+
+#: ../capplets/appearance/data/appearance.glade.h:56
+msgid "The current controls theme does not support color schemes."
+msgstr "Súčasná téma ovládacích prvkov nepodporuje farebné schémy."
+
+#: ../capplets/appearance/data/appearance.glade.h:57
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "Téma"
+
+#: ../capplets/appearance/data/appearance.glade.h:58
+msgid "Toolbar _button labels:"
+msgstr "_Popisy tlačidiel lišty nástrojov:"
+
+#. vertical hinting, pixel order blue, green, red
+#: ../capplets/appearance/data/appearance.glade.h:60
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/data/appearance.glade.h:61
+msgid "Window Border"
+msgstr "Okraj okien"
+
+#: ../capplets/appearance/data/appearance.glade.h:62
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
+msgid "_Add..."
+msgstr "_Pridať..."
+
+#: ../capplets/appearance/data/appearance.glade.h:63
+msgid "_Application font:"
+msgstr "Písmo _aplikácií:"
+
+#. pixel order blue, green, red
+#: ../capplets/appearance/data/appearance.glade.h:65
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/data/appearance.glade.h:66
+msgid "_Copy"
+msgstr "_Kopírovať"
+
+#: ../capplets/appearance/data/appearance.glade.h:67
+msgid "_Description:"
+msgstr "_Popis:"
+
+#: ../capplets/appearance/data/appearance.glade.h:68
+msgid "_Document font:"
+msgstr "Písmo _dokumentu:"
+
+#: ../capplets/appearance/data/appearance.glade.h:69
+msgid "_Editable menu shortcut keys"
+msgstr "_Upraviteľné klávesové skratky ponúk"
+
+#: ../capplets/appearance/data/appearance.glade.h:70
+msgid "_File"
+msgstr "_Súbor"
+
+#: ../capplets/appearance/data/appearance.glade.h:71
+msgid "_Fixed width font:"
+msgstr "Písmo s _pevnou šírkou:"
+
+#: ../capplets/appearance/data/appearance.glade.h:72
+msgid "_Full"
+msgstr "Ú_plný"
+
+#: ../capplets/appearance/data/appearance.glade.h:73
+msgid "_Input boxes:"
+msgstr "_Vstupné boxy:"
+
+#: ../capplets/appearance/data/appearance.glade.h:74
+msgid "_Install..."
+msgstr "_Inštalovať..."
+
+#: ../capplets/appearance/data/appearance.glade.h:75
+msgid "_Medium"
+msgstr "_Stredný"
+
+#: ../capplets/appearance/data/appearance.glade.h:76
+msgid "_Monochrome"
+msgstr "Čierno_biely"
+
+#: ../capplets/appearance/data/appearance.glade.h:77
+msgid "_Name:"
+msgstr "_Názov:"
+
+#: ../capplets/appearance/data/appearance.glade.h:78
+msgid "_New"
+msgstr "_Nový"
+
+#: ../capplets/appearance/data/appearance.glade.h:79
+msgid "_None"
+msgstr "Žia_dny"
+
+#: ../capplets/appearance/data/appearance.glade.h:80
+msgid "_Open"
+msgstr "_Otvoriť"
+
+#: ../capplets/appearance/data/appearance.glade.h:81
+msgid "_Paste"
+msgstr "V_ložiť"
+
+#: ../capplets/appearance/data/appearance.glade.h:82
+msgid "_Print"
+msgstr "_Tlačiť"
+
+#: ../capplets/appearance/data/appearance.glade.h:83
+msgid "_Quit"
+msgstr "_Koniec"
+
+#. pixel order red, green, blue
+#: ../capplets/appearance/data/appearance.glade.h:85
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/data/appearance.glade.h:86
+msgid "_Reset to Defaults"
+msgstr "_Obnoviť predvolené nastavenia"
+
+#: ../capplets/appearance/data/appearance.glade.h:87
+msgid "_Save"
+msgstr "_Uložiť"
+
+#: ../capplets/appearance/data/appearance.glade.h:88
+msgid "_Selected items:"
+msgstr "_Vybrané položky:"
+
+#: ../capplets/appearance/data/appearance.glade.h:89
+msgid "_Size:"
+msgstr "_Veľkosť:"
+
+#: ../capplets/appearance/data/appearance.glade.h:90
+msgid "_Slight"
+msgstr "_Jemne"
+
+#: ../capplets/appearance/data/appearance.glade.h:91
+msgid "_Style:"
+msgstr "Š_týl:"
+
+#: ../capplets/appearance/data/appearance.glade.h:92
+msgid "_Tooltips:"
+msgstr "_Bublinové popisy:"
+
+#. vertical hinting, pixel order red, green, blue
+#: ../capplets/appearance/data/appearance.glade.h:94
+msgid "_VRGB"
+msgstr "_VRGB"
+
+#: ../capplets/appearance/data/appearance.glade.h:95
+msgid "_Window title font:"
+msgstr "Písmo titulku _okna:"
+
+#: ../capplets/appearance/data/appearance.glade.h:96
+msgid "_Windows:"
+msgstr "_Okná:"
+
+#: ../capplets/appearance/data/appearance.glade.h:97
+msgid "dots per inch"
+msgstr "bodov na palec"
+
+#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "Vzhľad"
+
+#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:2
+msgid "Customize the look of the desktop"
+msgstr "Nastavte si vzhľad plochy ako chcete"
+
+#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "Nainštaluje balíky tém pre rôzne časti prostredia"
+
+#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "Inštalátor tém"
+
+#: ../capplets/appearance/data/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "Balík GNOME témy"
+
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Bez tapety"
 
-#: ../capplets/background/gnome-wp-item.c:296
-#: ../capplets/background/gnome-wp-item.c:298
+#. translators: <b>wallpaper name</b>
+#. * mime type, x pixel(s) by y pixel(s)
+#. * Folder: /path/to/file
+#.
+#: ../capplets/appearance/gnome-wp-item.c:364
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s, %d %s by %d %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s, %d %s by %d %s\n"
+"Priečinok: %s"
+
+#: ../capplets/appearance/gnome-wp-item.c:370
+#: ../capplets/appearance/gnome-wp-item.c:372
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "bodov"
 msgstr[1] "bod"
 msgstr[2] "body"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/appearance/theme-installer.c:171
+#: ../capplets/appearance/theme-installer.c:221
+#, fuzzy
+msgid "Cannot install theme"
+msgstr "Téma ovládania"
+
+#: ../capplets/appearance/theme-installer.c:173
+#, fuzzy, c-format
+msgid "The %s utility is not installed."
+msgstr ""
+"Nemôžem nainštalovať tému.\n"
+"Utilita %s nie je nainštalovaná."
+
+#: ../capplets/appearance/theme-installer.c:223
+#, fuzzy
+msgid "There was a problem while extracting the theme."
+msgstr ""
+"Nemôžem nainštalovať tému.\n"
+"Pri rozbaľovaní témy boli nejaké problémy."
+
+#: ../capplets/appearance/theme-installer.c:246
+#, fuzzy
+msgid "There was an error installing the selected file"
+msgstr "Pri pokuse o zobrazenie Pomocníka nastala chyba: %s"
+
+#: ../capplets/appearance/theme-installer.c:247
+#, c-format
+msgid "\"%s\" does not appear to be a valid theme."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:248
+#, c-format
+msgid ""
+"\"%s\" does not appear to be a valid theme. It may be a theme engine which "
+"you need to compile."
+msgstr ""
+
+#: ../capplets/appearance/theme-installer.c:287
+#, c-format
+msgid "GNOME Theme %s correctly installed"
+msgstr "GNOME Téma %s je správne nainštalovaná"
+
+#: ../capplets/appearance/theme-installer.c:347
+#, fuzzy, c-format
+msgid "Installation for theme \"%s\" failed."
+msgstr "Inštalácia zlyhala"
+
+#: ../capplets/appearance/theme-installer.c:379
+#, c-format
+msgid "The theme \"%s\" has been installed."
+msgstr "Téma \"%s\" nainštalovaná správne."
+
+#: ../capplets/appearance/theme-installer.c:385
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "Chceli by ste použiť zmeny, alebo ponechať súčasnú tému."
+
+#: ../capplets/appearance/theme-installer.c:387
+msgid "Keep Current Theme"
+msgstr "Ponechať súčasnú tému"
+
+#: ../capplets/appearance/theme-installer.c:389
+msgid "Apply New Theme"
+msgstr "Použiť novú tému"
+
+#: ../capplets/appearance/theme-installer.c:491
+msgid "Failed to create temporary directory"
+msgstr "Vytváranie dočasného priečinka zlyhalo"
+
+#: ../capplets/appearance/theme-installer.c:551
+#, fuzzy
+msgid "New themes have been successfully installed."
+msgstr "Téma \"%s\" nainštalovaná správne."
+
+#: ../capplets/appearance/theme-installer.c:579
+msgid "No theme file location specified to install"
+msgstr "Nebolo zadané umiestnenie súboru, ktorý sa má nainštalovať"
+
+#: ../capplets/appearance/theme-installer.c:599
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Nedostatočné práva na inštaláciu témy do:\n"
+"%s"
+
+#: ../capplets/appearance/theme-installer.c:621
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
+"%s je cesta, kam sa nainštalujú súbory témy. Nemôžete ju použiť ako "
+"umiestnenie zdroja"
+
+#: ../capplets/appearance/theme-installer.c:689
+msgid "Select Theme"
+msgstr "Vybrať tému"
+
+#: ../capplets/appearance/theme-installer.c:693
+msgid "Theme Packages"
+msgstr "Balíky tém"
+
+#: ../capplets/appearance/theme-save.c:91
+#, c-format
+msgid "Theme name must be present"
+msgstr "Musíte zadať meno témy"
+
+#: ../capplets/appearance/theme-save.c:161
+msgid "The theme already exists. Would you like to replace it?"
+msgstr "Téma už existuje. Chcete ju nahradiť?"
+
+#: ../capplets/appearance/theme-save.c:162
+msgid "_Overwrite"
+msgstr "_Prepísať"
+
+#: ../capplets/appearance/theme-util.c:69
+msgid "Would you like to delete this theme?"
+msgstr "Chceli by ste odstrániť túto tému?"
+
+#: ../capplets/appearance/theme-util.c:121
+msgid "Theme cannot be deleted"
+msgstr "Téma sa nedá odstrániť"
+
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -784,86 +1368,89 @@ msgstr ""
 
 #: ../capplets/common/capplet-stock-icons.c:92
 #, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr ""
-"Nepodarilo sa načítať štandardnú ikonu appletu ovládacieho centra '%s'\n"
+msgid "Unable to load stock icon '%s'\n"
+msgstr "Nepodarilo sa načítať štandardnú ikonu '%s'\n"
 
-#: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
+#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
 msgid "Just apply settings and quit"
-msgstr "Iba použiť nastavenie a skončiť"
+msgstr "Iba použiť nastavenia a skončiť"
 
-#: ../capplets/common/capplet-util.c:243
-#: ../capplets/default-applications/gnome-default-applications-properties.c:765
-#: ../capplets/keyboard/gnome-keyboard-properties.c:222
-#: ../capplets/mouse/gnome-mouse-properties.c:1015
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/common/capplet-util.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:252
+#: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
-msgstr "Získať a uložiť predchádzajúce nastavenie"
+msgstr "Získať a uložiť predchádzajúce nastavenia"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:390
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Pri pokuse o zobrazenie Pomocníka nastala chyba: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "Kopírovanie súboru: %u z %u"
 
-#: ../capplets/common/file-transfer-dialog.c:122
+#: ../capplets/common/file-transfer-dialog.c:154
 #, c-format
 msgid "Copying '%s'"
 msgstr "Kopírovanie '%s'"
 
-#: ../capplets/common/file-transfer-dialog.c:193
-msgid "From URI"
-msgstr "Z URI"
-
-#: ../capplets/common/file-transfer-dialog.c:194
-msgid "URI currently transferring from"
-msgstr "URI, z ktorého sa momentálne prenáša"
-
-#: ../capplets/common/file-transfer-dialog.c:201
-msgid "To URI"
-msgstr "URI do"
-
-#: ../capplets/common/file-transfer-dialog.c:202
-msgid "URI currently transferring to"
-msgstr "URI, kam sa momentálne prenáša"
-
-#: ../capplets/common/file-transfer-dialog.c:209
-msgid "Fraction completed"
-msgstr "Dokončená časť"
-
-#: ../capplets/common/file-transfer-dialog.c:210
-msgid "Fraction of transfer currently completed"
-msgstr "Momentálne dokončená časť prenosu"
-
-#: ../capplets/common/file-transfer-dialog.c:217
-msgid "Current URI index"
-msgstr "Index aktuálneho URI"
-
-#: ../capplets/common/file-transfer-dialog.c:218
-msgid "Current URI index - starts from 1"
-msgstr "Index aktuálneho URI - začína od 1"
-
-#: ../capplets/common/file-transfer-dialog.c:225
-msgid "Total URIs"
-msgstr "Celkom URI"
-
-#: ../capplets/common/file-transfer-dialog.c:226
-msgid "Total number of URIs"
-msgstr "Celkový počet URI"
-
-#: ../capplets/common/file-transfer-dialog.c:327
-#: ../capplets/common/file-transfer-dialog.c:369
+#: ../capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:309
 msgid "Copying files"
 msgstr "Kopírovanie súborov"
 
-#: ../capplets/common/file-transfer-dialog.c:345
-msgid "From:"
-msgstr "Z:"
+#: ../capplets/common/file-transfer-dialog.c:221
+msgid "Parent Window"
+msgstr "Rodičovské okno"
 
-#: ../capplets/common/file-transfer-dialog.c:349
-msgid "To:"
-msgstr "Do:"
+#: ../capplets/common/file-transfer-dialog.c:222
+msgid "Parent window of the dialog"
+msgstr "Rodičovské okno dialógu"
 
-#: ../capplets/common/file-transfer-dialog.c:448
+#: ../capplets/common/file-transfer-dialog.c:228
+msgid "From URI"
+msgstr "Z URI"
+
+#: ../capplets/common/file-transfer-dialog.c:229
+msgid "URI currently transferring from"
+msgstr "URI, z ktorého sa momentálne prenáša"
+
+#: ../capplets/common/file-transfer-dialog.c:236
+msgid "To URI"
+msgstr "URI do"
+
+#: ../capplets/common/file-transfer-dialog.c:237
+msgid "URI currently transferring to"
+msgstr "URI, kam sa momentálne prenáša"
+
+#: ../capplets/common/file-transfer-dialog.c:244
+msgid "Fraction completed"
+msgstr "Dokončená časť"
+
+#: ../capplets/common/file-transfer-dialog.c:245
+msgid "Fraction of transfer currently completed"
+msgstr "Momentálne dokončená časť prenosu"
+
+#: ../capplets/common/file-transfer-dialog.c:252
+msgid "Current URI index"
+msgstr "Index aktuálneho URI"
+
+#: ../capplets/common/file-transfer-dialog.c:253
+msgid "Current URI index - starts from 1"
+msgstr "Index aktuálneho URI - začína od 1"
+
+#: ../capplets/common/file-transfer-dialog.c:260
+msgid "Total URIs"
+msgstr "Celkom URI"
+
+#: ../capplets/common/file-transfer-dialog.c:261
+msgid "Total number of URIs"
+msgstr "Celkový počet URI"
+
+#: ../capplets/common/file-transfer-dialog.c:422
 msgid "Connecting..."
 msgstr "Pripájam sa..."
 
@@ -877,11 +1464,12 @@ msgstr "Kľúč GConf, ku ktorému je pripojený tento editor vlastnosti"
 
 #: ../capplets/common/gconf-property-editor.c:177
 msgid "Callback"
-msgstr "Callback"
+msgstr "Spätné volanie"
 
 #: ../capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
-msgstr "Callback pri zmene hodnoty asociovanej s týmto kľúčom"
+msgstr ""
+"Uskutočniť toto spätné volanie pri zmene hodnoty asociovanej s týmto kľúčom"
 
 #: ../capplets/common/gconf-property-editor.c:183
 msgid "Change set"
@@ -895,21 +1483,21 @@ msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
-msgstr "Callback pre prevod do prvku"
+msgstr "Spätné volanie pre prevod do widgetu"
 
 #: ../capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr "Callback volaný pre prevod dát z GConf do prvku"
+msgstr "Spätné volanie pre prevod dát z GConf do widgetu"
 
 #: ../capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
-msgstr "Callback pre prevod z prvku"
+msgstr "Spätné volanie pre prevod z widgetu"
 
 #: ../capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr "Callback volaný pre prevod dát do GConf z prvku"
+msgstr "Spätné volanie pre prevod dát do GConf z widgetu"
 
 #: ../capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
@@ -917,11 +1505,11 @@ msgstr "Ovládanie rozhrania"
 
 #: ../capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
-msgstr "Objekt, ktorý ovládava vlastnosť (normálne prvok)"
+msgstr "Objekt, ktorý ovláda vlastnosť (normálne widget)"
 
 #: ../capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
-msgstr "Dáta objektu editora vlastností"
+msgstr "Údaje objektu editora vlastností"
 
 #: ../capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
@@ -929,13 +1517,13 @@ msgstr "Dáta požadované daným editorom vlastností"
 
 #: ../capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
-msgstr "Callback pr uvoľnení dát objektu editora vlastností"
+msgstr "Spätné volanie pri uvoľnení údajov objektu editora vlastností"
 
 #: ../capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "Callback volaný pri uvoľnení dát objektu editora vlastností"
+msgstr "Spätné volanie pri uvoľnení údajov objektu editora vlastností"
 
-#: ../capplets/common/gconf-property-editor.c:1466
+#: ../capplets/common/gconf-property-editor.c:1468
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -948,7 +1536,7 @@ msgstr ""
 "Prosím, overte, že existuje a skúste to znovu. Alebo vyberte iný obrázok "
 "pozadia."
 
-#: ../capplets/common/gconf-property-editor.c:1474
+#: ../capplets/common/gconf-property-editor.c:1476
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -961,263 +1549,379 @@ msgstr ""
 "\n"
 "Prosím, vyberte iný obrázok."
 
-#: ../capplets/common/gconf-property-editor.c:1593
+#: ../capplets/common/gconf-property-editor.c:1595
 msgid "Please select an image."
 msgstr "Prosím, vyberte obrázok."
 
-#: ../capplets/common/gconf-property-editor.c:1598
+#: ../capplets/common/gconf-property-editor.c:1600
 msgid "_Select"
 msgstr "_Vybrať"
 
+#: ../capplets/common/gnome-theme-info.c:639
+msgid "Default Pointer - Current"
+msgstr "Predvolený kurzor -súčasný"
+
+#: ../capplets/common/gnome-theme-info.c:643
+msgid "White Pointer"
+msgstr "Biely kurzor"
+
+#: ../capplets/common/gnome-theme-info.c:644
+msgid "White Pointer - Current"
+msgstr "Biely kurzor - súčasný"
+
+#: ../capplets/common/gnome-theme-info.c:648
+msgid "Large Pointer"
+msgstr "Veľký kurzor"
+
+#: ../capplets/common/gnome-theme-info.c:649
+msgid "Large Pointer - Current"
+msgstr "Veľký kurzor - súčasný"
+
+#: ../capplets/common/gnome-theme-info.c:653
+msgid "Large White Pointer - Current"
+msgstr "Veľký Biely kurzor - súčasný"
+
+#: ../capplets/common/gnome-theme-info.c:654
+msgid "Large White Pointer"
+msgstr "Veľký biely kurzor"
+
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Preferred Applications"
-msgstr "Štandardné aplikácie"
+msgstr "Predvolené aplikácie"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
-msgstr "Nastavenie štandardných aplikácií"
+msgstr "Nastavte svoje predvolené aplikácie"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:9
-msgid "Debian Sensible Browser"
-msgstr "Inteligentný prehliadač Debian"
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
+msgid "Autostart the preferred AT"
+msgstr "Automaticky spúšťať uprednostňované AT"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Epiphany"
-msgstr "Zjavenie"
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
+msgid "Visual"
+msgstr "Vizuálne"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Galeon"
-msgstr "Galeon"
+#: ../capplets/default-applications/gnome-da-capplet.c:80
+#: ../capplets/default-applications/gnome-da-capplet.c:112
+#: ../capplets/default-applications/gnome-da-capplet.c:133
+#: ../capplets/default-applications/gnome-da-capplet.c:177
+#: ../capplets/default-applications/gnome-da-capplet.c:222
+#: ../capplets/default-applications/gnome-da-capplet.c:279
+#: ../capplets/default-applications/gnome-da-capplet.c:330
+#: ../capplets/default-applications/gnome-da-capplet.c:381
+#: ../capplets/default-applications/gnome-da-capplet.c:434
+#: ../capplets/default-applications/gnome-da-capplet.c:484
+#: ../capplets/default-applications/gnome-da-capplet.c:877
+#: ../capplets/default-applications/gnome-da-capplet.c:899
+#, c-format
+msgid "Error saving configuration: %s"
+msgstr "Chyba pri ukladaní nastavení: %s"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:12
-msgid "Encompass"
-msgstr "Encompass"
+#: ../capplets/default-applications/gnome-da-capplet.c:1100
+msgid "Could not load the main interface"
+msgstr "Nepodarilo sa načítať hlavné rozhranie"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird"
-msgstr "Firebird"
+#: ../capplets/default-applications/gnome-da-capplet.c:1102
+msgid "Please make sure that the applet is properly installed"
+msgstr "Prosím uistite sa, či je tento aplet správne nainštalovaný"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firefox"
-msgstr "Firefox"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla"
-msgstr "Mozilla"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "W3M Text Browser"
-msgstr "Textový prehliadač W3M"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Lynx Text Browser"
-msgstr "Lynx textový prehliadač"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "Links Text Browser"
-msgstr "Links textový prehliadač"
-
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
-msgid "Evolution Mail Reader"
-msgstr "Evolution Mail Reader"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
-msgid "Balsa"
-msgstr "Balsa"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
-msgid "KMail"
-msgstr "KMail"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
-msgid "Thunderbird"
-msgstr "Thunderbird"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
-msgid "Mozilla Mail"
-msgstr "Mozilla Mail"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:48
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:49
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
-msgid "Debian Terminal Emulator"
-msgstr "Emulátor terminálu Debian"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
-msgid "GNOME Terminal"
-msgstr "GNOME terminál"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
-msgid "Standard XTerminal"
-msgstr "Štandardný XTerminal"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
-msgid "aterm"
-msgstr "aterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:65
-msgid "ETerm"
-msgstr "ETerm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.c:123
-msgid "Please specify a name and a command for this editor."
-msgstr "Prosím, zadajte meno a príkaz pre tento editor."
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "<b>Image Viewer</b>"
+msgstr "<b>Prehliadač obrázkov</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Add..."
-msgstr "Pridať..."
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>Rýchle správy</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom"
-msgstr "Vl_astný"
+msgid "<b>Mail Reader</b>"
+msgstr "<b>Poštový klient</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom:"
-msgstr "Vl_astný:"
+#, fuzzy
+msgid "<b>Mobility</b>"
+msgstr "<b>Mobilita</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "Can open _URIs"
-msgstr "Môže otvoriť _URI"
+msgid "<b>Multimedia Player</b>"
+msgstr "<b>Prehrávač multimédií</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "Can open multiple _files"
-msgstr "Môže otvoriť viac _súborov"
+msgid "<b>Terminal Emulator</b>"
+msgstr "<b>Emulátor terminálu</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "<b>Text Editor</b>"
+msgstr "<b>Textový editor</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "<b>Video Player</b>"
+msgstr "<b>Prehrávač videa</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "<b>Visual</b>"
+msgstr "<b>Vizuálne</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+msgid "<b>Web Browser</b>"
+msgstr "<b>WWW Prehliadač</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Accessibility"
+msgstr "Prístupnosť"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#, no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr "Všetky %s výskyty sa nahradia aktuálnym odkazom"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#, fuzzy
+msgid "C_ommand:"
+msgstr "_Príkaz:"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Co_mmand:"
 msgstr "_Príkaz:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Custom Editor Properties"
-msgstr "Vlastné vlastnosti editora"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "Default Mail Reader"
-msgstr "Predvolený poštový klient"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "Default Terminal"
-msgstr "Predvolený terminál"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Text Editor"
-msgstr "Predvolený textový editor"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "Default Web Browser"
-msgstr "Predvolený prehliadač WWW"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Default Window Manager"
-msgstr "Predvolený správca okien"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Delete"
-msgstr "Odstrániť"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "E_xec Flag:"
-msgstr "P_repínač pre spustenie:"
-
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Edit..."
-msgstr "Upraviť..."
+msgid "E_xecute flag:"
+msgstr "_Spustiteľný príznak:"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Mail Reader"
-msgstr "Poštový klient"
+msgid "Internet"
+msgstr "Internet"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+msgid "Multimedia"
+msgstr "Multimédiá"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Run in a _terminal"
-msgstr "Spustiť v _termináli"
+msgid "Open link in new _tab"
+msgstr "Otvoriť odkaz na novej _karte"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Run in a t_erminal"
-msgstr "Spustiť v t_ermináli"
+msgid "Open link in new _window"
+msgstr "Otvoriť odkaz v novom _okne"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid ""
-"Select the window manager you want.  You will need to hit apply, wave the "
-"magic wand, and do a magic dance for it to work."
-msgstr ""
-"Vyberte správcu okien, ktorého chcete používať. Aby to fungovalo, musíte "
-"stlačiť Použiť, zamávať čarovnou paličkou a zatancovať čarovný tanec."
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "Terminal"
-msgstr "Terminál"
+msgid "Open link with web browser _default"
+msgstr "Otvoriť odkaz _predvoleným www prehliadačom"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "Text Editor"
-msgstr "Textový editor"
+msgid "Run at st_art"
+msgstr "Spustiť pri št_arte"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "Understands _Netscape Remote Control"
-msgstr "Podporuje _Netscape Remote Control"
+msgid "Run in t_erminal"
+msgstr "Spustiť v _termináli"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "Use this _editor to open text files in the file manager"
-msgstr ""
-"Použiť tento _editor pre otvorenie textových súborov v správcovi súborov"
+msgid "System"
+msgstr "Systém"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
-msgid "Web Browser"
-msgstr "WWW prehliadač"
+#, fuzzy
+msgid "_Run at start"
+msgstr "Spustiť pri št_arte"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:27
-msgid "Window Manager"
-msgstr "Správca okien"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
+msgid "Balsa"
+msgstr "Balsa"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Command:"
-msgstr "_Príkaz:"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+msgid "Banshee Music Player"
+msgstr "Hudobný prehrávač Banshee"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Name:"
-msgstr "_Názov:"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+msgid "Claws Mail"
+msgstr "Claws Mail"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:30
-msgid "_Properties..."
-msgstr "_Vlastnosti..."
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+msgid "Dasher"
+msgstr "Dasher"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:31
-msgid "_Select:"
-msgstr "_Vybrať:"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+msgid "Debian Sensible Browser"
+msgstr "Inteligentný prehliadač Debian"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+msgid "Debian Terminal Emulator"
+msgstr "Emulátor terminálu Debian"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+msgid "ETerm"
+msgstr "ETerm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+msgid "Encompass"
+msgstr "Encompass"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+msgid "Epiphany Web Browser"
+msgstr "WWW Prehliadač Zjavenie"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+msgid "Evolution Mail Reader"
+msgstr "Evolution poštový klient"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+msgid "Firebird"
+msgstr "Firebird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+msgid "Firefox"
+msgstr "Firefox"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+msgid "GNOME Magnifier without Screen Reader"
+msgstr "GNOME Lupa bez čítania z obrazovky"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+msgid "GNOME OnScreen Keyboard"
+msgstr "GNOME Klávesnica na obrazovke"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+msgid "GNOME Terminal"
+msgstr "GNOME terminál"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+msgid "Galeon"
+msgstr "Galeon"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+msgid "Gnopernicus"
+msgstr "Gnopernicus"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+msgid "Gnopernicus with Magnifier"
+msgstr "Gnopernicus s lupou"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "Iceape"
+msgstr "Iceape"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "Iceape Mail"
+msgstr "Iceape pošta"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+msgid "Icedove"
+msgstr "Icedove"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+msgid "Iceweasel"
+msgstr "Iceweasel"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "KDE Magnifier without Screen Reader"
+msgstr "KDE Lupa bez čítania z obrazovky"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "KMail"
+msgstr "KMail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Konqueror"
+msgstr "Konqueror"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Linux Screen Reader"
+msgstr "Linuxové čítanie z obrazovky"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+msgid "Linux Screen Reader with Magnifier"
+msgstr "Linuxové čítanie z obrazovky s lupou"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+msgid "Midori"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+msgid "Mozilla"
+msgstr "Mozilla"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+msgid "Mozilla 1.6"
+msgstr "Mozilla 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Mozilla Mail"
+msgstr "Mozilla Mail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Mozilla Thunderbird"
+msgstr "Mozilla Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Muine Music Player"
+msgstr "Hudobný prehrávač Muine"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "Mutt"
+msgstr "Mutt"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+msgid "NXterm"
+msgstr "NXterm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+msgid "Netscape Communicator"
+msgstr "Netscape Communicator"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+msgid "Opera"
+msgstr "Opera"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+msgid "Orca"
+msgstr "Orca"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+msgid "Orca with Magnifier"
+msgstr "Orca s lupou"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+msgid "RXVT"
+msgstr "RXVT"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+msgid "Rhythmbox Music Player"
+msgstr "Prehrávač hudby Rhythmbox"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+msgid "SeaMonkey"
+msgstr "SeaMonkey"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+msgid "SeaMonkey Mail"
+msgstr "SeaMonkey Pošta"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+msgid "Standard XTerminal"
+msgstr "Štandardný XTerminal"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+msgid "Sylpheed"
+msgstr "Sylpheed"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+msgid "Sylpheed-Claws"
+msgstr "Sylpheed-Claws"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+msgid "Totem Movie Player"
+msgstr "Prehrávač filmov Totem"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+msgid "aterm"
+msgstr "aterm"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1227,42 +1931,62 @@ msgstr "Zmeniť rozlíšenie obrazovky"
 msgid "Screen Resolution"
 msgstr "Rozlíšenie obrazovky"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:29
+msgid "Normal"
+msgstr "Normálne"
+
+#: ../capplets/display/main.c:30
+msgid "Left"
+msgstr "Vľavo"
+
+#: ../capplets/display/main.c:31
+msgid "Inverted"
+msgstr "Invertované"
+
+#: ../capplets/display/main.c:32
+msgid "Right"
+msgstr "Vpravo"
+
+#: ../capplets/display/main.c:374
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:514
 msgid "_Resolution:"
 msgstr "_Rozlíšenie:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:532
 msgid "Re_fresh rate:"
 msgstr "_Obnovovacia frekvencia:"
 
-#: ../capplets/display/main.c:488
-msgid "Default Settings"
-msgstr "Štandardné nastavenie"
+#: ../capplets/display/main.c:550
+msgid "R_otation:"
+msgstr "_Otočenie:"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:569
+msgid "Default Settings"
+msgstr "Predvolené nastavenia"
+
+#: ../capplets/display/main.c:571
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Nastavenie obrazovky %d\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:592
 msgid "Screen Resolution Preferences"
 msgstr "Nastavenie rozlíšenia obrazovky"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:627
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Štandardne iba pre _tento počítač (%s)"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:644
 msgid "Options"
 msgstr "Možnosti"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:664
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1280,31 +2004,34 @@ msgstr[2] ""
 "Testovanie nového nastavenia. Ak nezareagujete do %d sekúnd, obnoví sa "
 "pôvodné nastavenie."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:704
 msgid "Keep Resolution"
 msgstr "Zachovať rozlíšenie"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:708
 msgid "Do you want to keep this resolution?"
 msgstr "Chcete použiť toto rozlíšenie?"
 
-#: ../capplets/display/main.c:667
-msgid "Use _previous resolution"
+#: ../capplets/display/main.c:734
+#, fuzzy
+msgid "Use _Previous Resolution"
 msgstr "_Vrátiť pôvodné rozlíšenie"
 
-#: ../capplets/display/main.c:667
-msgid "_Keep resolution"
-msgstr "_Použiť rozlíšenie"
+#: ../capplets/display/main.c:735
+#, fuzzy
+msgid "_Keep Resolution"
+msgstr "Zachovať rozlíšenie"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:883
+#, fuzzy
 msgid ""
-"The X Server does not support the XRandR extension.  Runtime resolution "
+"The X server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 "X Server nepodporuje rozšírenie XRandR. Okamžité zmeny rozlíšenia obrazovky "
 "nie sú dostupné."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:890
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1312,173 +2039,14 @@ msgstr ""
 "Verzia rozšírenia XRandR nie je kompatibilná s týmto programom. Okamžité "
 "zmeny rozlíšenia obrazovky nie sú dostupné."
 
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "Písmo"
+#: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Zvuk"
 
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "Vyberte písma pre prostredie"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Font Rendering</b>"
-msgstr "<b>Zobrazenie písiem</b>"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Hinting</b>:"
-msgstr "<b>Rady</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Smoothing</b>:"
-msgstr "<b>Vyhladzovanie</b>:"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>Poradie sub-pixelov</b>:"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best _shapes"
-msgstr "Najlepšie _tvary"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "Best co_ntrast"
-msgstr "Najlepší _kontrast"
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "D_etails..."
-msgstr "P_odrobnosti..."
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "Nastavenie písma"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "Detaily zobrazenia písiem"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "Prejsť do _priečinku písiem"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "_Odtiene šedej"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "Žia_dne"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "_Rozlíšenie:"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "Sub-_pixely (LCD)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "Sub-pixelové vyhladzovanie (LCD)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "Písmo _aplikácií:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Desktop font:"
-msgstr "Písmo _plochy:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Full"
-msgstr "Ú_plný"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Medium"
-msgstr "_Stredný"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Monochrome"
-msgstr "Čierno_biely"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_None"
-msgstr "Žia_dny"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_Slight"
-msgstr "_Jemne"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Terminal font:"
-msgstr "Písmo _terminálu:"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "Písmo titulku _okna:"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "bodov na palec"
-
-#: ../capplets/font/main.c:488
-msgid "Font may be too large"
-msgstr "Písmo môže byť príliš veľké"
-
-#: ../capplets/font/main.c:492
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"Vybrané písmo má veľkosť %d bodov a môže spôsobiť ťažkosti pri používaní "
-"počítača. Doporučujeme vybrať veľkosť menšiu ako %d."
-msgstr[1] ""
-"Vybrané písmo má veľkosť %d bod a môže spôsobiť ťažkosti pri používaní "
-"počítača. Doporučujeme vybrať veľkosť menšiu ako %d."
-msgstr[2] ""
-"Vybrané písmo má veľkosť %d body a môže spôsobiť ťažkosti pri používaní "
-"počítača. Doporučujeme vybrať veľkosť menšiu ako %d."
-
-#: ../capplets/font/main.c:505
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"Vybrané písmo má veľkosť %d bodov a môže spôsobiť ťažkosti pri používaní "
-"počítača. Doporučujeme vybrať menšie písmo."
-msgstr[1] ""
-"Vybrané písmo má veľkosť %d bod a môže spôsobiť ťažkosti pri používaní "
-"počítača. Doporučujeme vybrať menšie písmo."
-msgstr[2] ""
-"Vybrané písmo má veľkosť %d body a môže spôsobiť ťažkosti pri používaní "
-"počítača. Doporučujeme vybrať menšie písmo."
+#: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "Prostredie"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -1487,7 +2055,7 @@ msgstr "Nový akcelerátor..."
 #: ../capplets/keybindings/eggcellrendererkeys.c:163
 #: ../capplets/keybindings/eggcellrendererkeys.c:164
 msgid "Accelerator key"
-msgstr "Kláves akcelerátora"
+msgstr "Kláveas akcelerátora"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:173
 #: ../capplets/keybindings/eggcellrendererkeys.c:174
@@ -1497,7 +2065,7 @@ msgstr "Modifikátory akcelerátorov"
 #: ../capplets/keybindings/eggcellrendererkeys.c:182
 #: ../capplets/keybindings/eggcellrendererkeys.c:183
 msgid "Accelerator keycode"
-msgstr "Kód klávesu akcelerátora"
+msgstr "Kód klávesy akcelerátora"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:193
 msgid "Accel Mode"
@@ -1505,32 +2073,30 @@ msgstr "Režim skratky"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:194
 msgid "The type of accelerator."
-msgstr "Stlačte nový akcelerátor."
+msgstr "Typ akcelerátora."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:477
+#: ../capplets/keybindings/gnome-keybinding-properties.c:112
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:482
 msgid "Disabled"
-msgstr "Zakázané"
+msgstr "Vypnuté"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:523
 msgid "<Unknown Action>"
 msgstr "<Neznáma akcia>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
-msgid "Desktop"
-msgstr "Prostredie"
+#: ../capplets/keybindings/gnome-keybinding-properties.c:915
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time.\n"
+msgstr ""
+"Táto skratka  \"%s\" sa nedá použiť, pretože by potom nebolo možné písať "
+"touto klávesou.\n"
+"Prosím skúste to súčasne s klávesami ako Ctrl, Alt alebo Shift.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
-#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Zvuk"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
-msgid "Window Management"
-msgstr "Správa okien"
-
-#: ../capplets/keybindings/gnome-keybinding-properties.c:667
+#: ../capplets/keybindings/gnome-keybinding-properties.c:944
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1539,26 +2105,29 @@ msgstr ""
 "Klávesová skratka \"%s\" sa už používa pre:\n"
 "\"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:699
+#: ../capplets/keybindings/gnome-keybinding-properties.c:976
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
-"Chyba pri nastavovaní nového akcelerátora v konfiguračnej databázi: %s\n"
+"Chyba pri nastavovaní nového akcelerátora v konfiguračnej databáze: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:749
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
-"Chyba pri rušení nastavenia akcelerátora v konfiguračnej databázi: %s\n"
+"Chyba pri rušení nastavenia akcelerátora v konfiguračnej databáze: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:856
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
 msgid "Action"
 msgstr "Akcie"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:880
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
 msgid "Shortcut"
 msgstr "Klávesová skratka"
 
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
@@ -1570,368 +2139,445 @@ msgid ""
 "accelerator, or press backspace to clear."
 msgstr ""
 "Klávesovú skratku môžete upraviť tak, že kliknete na príslušný riadok a "
-"zadáte nový akcelerátor alebo ho vyčistíte stlačením backspace"
+"zadáte nový akcelerátor, alebo ho vyčistíte stlačením backspace"
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
-msgstr "Priradiť klávesové skratky príkazom"
+msgstr "Priradiť klávesové skratky ku príkazom"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
-msgid "Unknown"
-msgstr "Neznámy"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
-msgid "Layout"
-msgstr "Rozloženie"
-
-#. The first radio in a group is to be "Default", meaning none of
-#. the below options are to be included in the selected list.
-#. This is a HIG-compliant alternative to allowing no
-#. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
-msgid "Default"
-msgstr "Predvolené"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
-msgid "Models"
-msgstr "Modely"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:106
-#, c-format
-msgid "There was an error launching the keyboard capplet : %s"
-msgstr "Pri pokuse o spustenie modulu pre klávesnicu nastala chyba: %s"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:199
-msgid "_Accessibility"
-msgstr "_Prístupnosť"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:218
-#: ../capplets/keyboard/gnome-keyboard-properties.c:220
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/keyboard/gnome-keyboard-properties.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:249
+#: ../capplets/sound/sound-properties-capplet.c:1026
+#: ../capplets/sound/sound-properties-capplet.c:1028
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
-"Použiť nastavenia a skončiť (iba pre kompatibilitu, teraz spracováva démon)"
+"Použiť nastavenia a skončiť (iba pre kompatibilitu, teraz zabezpečuje daemon)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:224
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
 msgid "Start the page with the typing break settings showing"
-msgstr "Spustiť nastavenie prestávky zobrazujúce"
+msgstr "Otvoriť stránku so zobrazením nastavenia prestávky v písaní"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:261
+#, fuzzy
+msgid "Start the page with the accessibility settings showing"
+msgstr "Otvoriť stránku so zobrazením nastavenia prestávky v písaní"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:270
+msgid "- GNOME Keyboard Preferences"
+msgstr "- Predvoľby GNOME Klávesnice"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#, fuzzy
+msgid "<b>Bounce Keys</b>"
+msgstr "<b>Povoliť _odrazové klávesy</b>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Blikanie kurzora</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#, fuzzy
+msgid "<b>General</b>"
+msgstr "<b>Vykresľovanie</b>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Opakovanie kláves</b>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
-msgid "<b>_Lock screen to enforce typing break</b>"
-msgstr "<b>_Zamknúť obrazovku pre zabránenie písania</b>"
+#, fuzzy
+msgid "<b>Slow Keys</b>"
+msgstr "<b>Povoliť _pomalé klávesy</b>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#, fuzzy
+msgid "<b>Sticky Keys</b>"
+msgstr "<b>Povoliť _lepkavé klávesy</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+msgid "<b>_Lock screen to enforce typing break</b>"
+msgstr "<b>_Zamknúť obrazovku a vynútiť tak prestávku v písaní</b>"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Rýchlo</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Dlho</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Krátko</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Pomaly</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "A_vailable layouts:"
-msgstr "Rozloženia _k dispozícii:"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#, fuzzy
+msgid "A_cceleration:"
+msgstr "_Zrýchlenie:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "All_ow postponing of breaks"
 msgstr "Povoliť _odloženie prestávky"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#, fuzzy
+msgid "Beep when _accessibility features are turned on or off"
+msgstr "Pípnuť pri _prepnutí funkcie z klávesnice"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#, fuzzy
+msgid "Beep when a _modifier key is pressed"
+msgstr "Pípnuť pri stlačení _modifikátora"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "Beep when a _toggle key is pressed"
+msgstr "Pípnuť pri stlačení _modifikátora"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#, fuzzy
+msgid "Beep when a key is pr_essed"
+msgstr "Pípnuť pri stlačení _modifikátora"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Beep when a key is reje_cted"
+msgstr "Pípnuť, ak je klávesa _odmietnutá"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "Beep when key is _accepted"
+msgstr "Pípnuť, ak je klávesa:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#, fuzzy
+msgid "Beep when key is _rejected"
+msgstr "Pípnuť, ak je klávesa _odmietnutá"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Určuje, či je možné odložiť prestávku"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
-msgid "Choose A Keyboard Model"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+msgid "Choose a Keyboard Model"
 msgstr "Vyberte model klávesnice"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Choose A Layout"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+msgid "Choose a Layout"
 msgstr "Vyberte rozloženie"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "Cursor _blinks in text boxes and fields"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#, fuzzy
+msgid "Cursor _blinks in text fields"
 msgstr "Kurzor v textových poliach _bliká"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Cursor blinks speed"
 msgstr "Rýchlosť blikania kurzora"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#, fuzzy
+msgid "D_elay:"
+msgstr "_Pauza:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#, fuzzy
+msgid "Disa_ble sticky keys if two keys are pressed together"
+msgstr "_Zakázať ak sú stlačené dva klávesy naraz"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Duration of the break when typing is disallowed"
-msgstr "Doba prestávky, kedy je zakázané písanie"
+msgstr "Dĺžka prestávky, kedy je zakázané písanie"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Duration of work before forcing a break"
-msgstr "Doba práce pred vynútením prestávky"
+msgstr "Dĺžka práce pred vynútením prestávky"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+msgid "General"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "Key presses _repeat when key is held down"
-msgstr "Kláves sa _opakuje pri držaní"
+msgstr "Klávesa sa _opakuje pri držaní"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#, fuzzy
+msgid "Keyboard Accessibility Notifications"
+msgstr "Prístupnosť klávesnice"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#, fuzzy
+msgid "Keyboard Layout Options"
+msgstr "Možnosti rozloženia"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard Preferences"
-msgstr "Nastavenie klávesnice"
+msgstr "Predvoľby klávesnice"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "Keyboard _model:"
 msgstr "_Model klávesnice:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "Layout Options"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#, fuzzy
+msgid "Layout _Options..."
 msgstr "Možnosti rozloženia"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "Layouts"
 msgstr "Rozloženia"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
-"Uzamknúť obrazovu po zadanej dobe pre zabránenie zdravotným problémom s "
-"používaním klávesnice"
+"Uzamknúť obrazovku po zadanej dobe a predchádzať tak zdravotným problémom "
+"(RSI) z používania klávesnice"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
-msgid "Microsoft Natural Keyboard"
-msgstr "Naturálna klávesnica Microsoft"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "Preview:"
-msgstr "Náhľad:"
+msgstr "Ukážka:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "Repeat keys speed"
 msgstr "Rýchlosť opakovania kláves"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid "Reset To De_faults"
-msgstr "Obnoviť š_tandardné nastavenie"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
+msgid "Reset to De_faults"
+msgstr "Návrat k _predvoleným nastaveniam"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "Separate _group for each window"
-msgstr "Oddeliť _skupinu pre každé okno"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
+msgid "Separate _layout for each window"
+msgstr "Samostatné _rozloženie pre každé okno"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
 msgid "Typing Break"
 msgstr "Prestávka v písaní"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
-msgid "_Accessibility..."
-msgstr "_Prístupnosť..."
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
+msgid "_Allow to control the pointer using the keyboard"
+msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
-msgid "_Add..."
-msgstr "_Pridať..."
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+msgid "_Allow to turn accessibility features on and off from the keyboard"
+msgstr ""
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
 msgstr "Interval pre_stávky trvá:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
 msgid "_Delay:"
 msgstr "_Pauza:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
+#, fuzzy
+msgid "_Ignore fast duplicate keypresses"
+msgstr "_Ignorovať duplikované stlačenie kláves po dobu:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
+msgid "_Layouts:"
+msgstr "_Rozloženia:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
 msgid "_Models:"
 msgstr "_Modely:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+msgid "_Notifications..."
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
+#, fuzzy
+msgid "_Only accept long keypresses"
+msgstr "_Akceptovať stlačenie klávesu iba po:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
 msgid "_Selected layouts:"
 msgstr "_Vybrané rozloženia:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+msgid "_Simulate simultanous keypresses"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
 msgid "_Speed:"
 msgstr "_Rýchlosť:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
+msgid "_Variants:"
+msgstr "_Varianty:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
+msgid "_Vendors:"
+msgstr "_Výrobcovia:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
 msgid "_Work interval lasts:"
 msgstr "_Pracovný interval trvá:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
+msgid "gtk-close"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
+msgid "gtk-help"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "minút"
 
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
+msgid "Unknown"
+msgstr "Neznámy"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
+msgid "Default"
+msgstr "Predvolené"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
+msgid "Layout"
+msgstr "Rozloženie"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:169
+msgid "Vendors"
+msgstr "Výrobcovia"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:235
+msgid "Models"
+msgstr "Modely"
+
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Klávesnica"
+
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
-msgstr "Nastavenie klávesnice"
+msgstr "Nastavte predvoľby svojej klávesnice"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:559
-msgid "Unknown Cursor"
-msgstr "Neznámy kurzor"
+#: ../capplets/localization/localization.desktop.in.in.h:1
+msgid "Language and Location"
+msgstr ""
 
-#: ../capplets/mouse/gnome-mouse-properties.c:760
-msgid "Default Cursor"
-msgstr "Štandardný kurzor"
+#: ../capplets/localization/localization.desktop.in.in.h:2
+#, fuzzy
+msgid "Set your language and location preferences"
+msgstr "Nastavte si predvoľby myši"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
-msgid "Default Cursor - Current"
-msgstr "Štandardný kurzor - aktuálny"
+#: ../capplets/localization/localization.glade.h:1
+#, fuzzy
+msgid ""
+"<i>Region and language changes take effect the next time you log in.</i>"
+msgstr "Zmena témy kurzora sa uplatní až pri ďalšom prihlásení."
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
-msgid "The default cursor that ships with X"
-msgstr "Štandardný kurzor dodávaný s X"
+#: ../capplets/localization/localization.glade.h:2
+#, fuzzy
+msgid "Localization Preferences"
+msgstr "Predvoľby zvuku"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:766
-msgid "White Cursor"
-msgstr "Biely kurzor"
+#: ../capplets/localization/localization.glade.h:3
+#, fuzzy
+msgid "Region:"
+msgstr "Verzia:"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
-msgid "White Cursor - Current"
-msgstr "Biely kurzor - aktuálny"
+#: ../capplets/localization/localization.glade.h:4
+#, fuzzy
+msgid "Selected languages:"
+msgstr "_Vybrané rozloženia:"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:768
-msgid "The default cursor inverted"
-msgstr "Invertovaný štandardný kurzor"
+#. set the timeout value  label with correct value of timeout
+#: ../capplets/mouse/gnome-mouse-properties.c:126
+#: ../capplets/mouse/gnome-mouse-properties.c:384
+#, c-format
+msgid "%d millisecond"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d milisekúnd"
+msgstr[1] "%d milisekundy"
+msgstr[2] "%d milisekunda"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:772
-msgid "Large Cursor"
-msgstr "Veľký kurzor"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:773
-msgid "Large Cursor - Current"
-msgstr "Veľký kurzor - aktuálny"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:774
-msgid "Large version of normal cursor"
-msgstr "Veľká verzia normálneho kurzoru"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:778
-msgid "Large White Cursor - Current"
-msgstr "Veľký biely kurzor - aktuálny"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:779
-msgid "Large White Cursor"
-msgstr "Veľký biely kurzor"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:780
-msgid "Large version of white cursor"
-msgstr "Veľká verzia bieleho kurzoru"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:969
-msgid "Cursor Theme"
-msgstr "Kurzorová téma"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:2
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid "<b>Double-Click Timeout </b>"
 msgstr "<b>Čakanie pre dvojité kliknutie</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Drag and Drop</b>"
 msgstr "<b>Ťahaj a pusť</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Locate Pointer</b>"
-msgstr "<b>Lokalizovať kurzor</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Orientácia myši</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "<b>Speed</b>"
 msgstr "<b>Rýchlosť</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<i>Fast</i>"
 msgstr "<i>Rýchlo</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<i>High</i>"
 msgstr "<i>Vysoké</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<i>Large</i>"
 msgstr "<i>Veľké</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Low</i>"
 msgstr "<i>Nízke</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Slow</i>"
 msgstr "<i>Pomalé</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Small</i>"
 msgstr "<i>Malé</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "Buttons"
 msgstr "Tlačidlá"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Cursor Size:"
-msgstr "Veľkosť kurzora:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Cursors"
-msgstr "Kurzory"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid "Highlight the _pointer when you press Ctrl"
-msgstr "Zvýrazniť _kurzor pri stlačení Ctrl"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
-msgid "Large"
-msgstr "Veľké"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
-msgid "Medium"
-msgstr "Stredné"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "Motion"
 msgstr "Pohyb"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Mouse Preferences"
 msgstr "Nastavenie myši"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "Small"
-msgstr "Malé"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "_Acceleration:"
 msgstr "_Zrýchlenie:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "_Left-handed mouse"
 msgstr "Pre ľa_vákov"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "_Sensitivity:"
 msgstr "_Citlivosť:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "_Threshold:"
 msgstr "_Hranica:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "_Timeout:"
 msgstr "Ča_kanie:"
 
@@ -1941,23 +2587,23 @@ msgstr "Myš"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
-msgstr "Nastavenie myši"
+msgstr "Nastavte si predvoľby myši"
 
 #: ../capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
-msgstr "Sieťové proxy"
+msgstr "Sieťový proxy"
 
 #: ../capplets/network/gnome-network-preferences.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
-msgstr "Nastaviť predvoľby vášho sieťového proxy"
+msgstr "Nastavte si predvoľby vášho sieťového proxy"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
 msgstr "      "
 
 #: ../capplets/network/gnome-network-preferences.glade.h:2
-msgid "<b>D_irect internet connection</b>"
-msgstr "<b>Pr_iame pripojenie na internet</b>"
+msgid "<b>Di_rect internet connection</b>"
+msgstr "<b>P_riame pripojenie na Internet</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
@@ -1973,7 +2619,7 @@ msgstr "<b>_Ručné nastavenie proxy</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
-msgstr "<b>_Použiť prihlásenie</b>"
+msgstr "<b>_Použiť overovanie</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "Advanced Configuration"
@@ -1985,7 +2631,7 @@ msgstr "_URL pre automatické nastavenie:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
-msgstr "Detaily proxy HTTP"
+msgstr "Podrobnosti proxy HTTP"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "H_TTP proxy:"
@@ -2009,11 +2655,11 @@ msgstr "Hostiteľ S_ocks:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
-msgstr "Meno po_užívateľa:"
+msgstr "Po_užívateľské meno:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
-msgstr "_Detaily"
+msgstr "Po_drobnosti"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
@@ -2027,462 +2673,198 @@ msgstr "_Heslo:"
 msgid "_Secure HTTP proxy:"
 msgstr "_Secure HTTP proxy:"
 
+#: ../capplets/network/gnome-network-preferences.glade.h:20
+msgid "_Use the same proxy for all protocols"
+msgstr "_Použiť tú istú proxy pre všetky protokoly"
+
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
-msgstr "Povoliť zvuky a asociovať ich s udalosťami"
+msgstr "Povoliť zvuky a priradiť ich k udalostiam"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:6
-msgid "Sound Preferences"
-msgstr "Nastavenie zvuku"
+#: ../capplets/sound/mixer-support.c:79
+#, c-format
+msgid "Unknown Volume Control %d"
+msgstr "Neznáme Ovládanie hlasitosti %d"
+
+#: ../capplets/sound/pipeline-tests.c:84
+#, c-format
+msgid "Failed to construct test pipeline for '%s'"
+msgstr "Nepodarilo sa vytvoriť testovaciu rúru pre '%s'"
+
+#: ../capplets/sound/sound-properties-capplet.c:325
+#: ../capplets/sound/sound-properties-capplet.c:378
+msgid "Not connected"
+msgstr "Nepripojený"
+
+#: ../capplets/sound/sound-properties-capplet.c:661
+msgid "Autodetect"
+msgstr "Zistiť automaticky"
+
+#: ../capplets/sound/sound-properties-capplet.c:666
+#: ../capplets/sound/sound-properties-capplet.c:667
+msgid "ALSA - Advanced Linux Sound Architecture"
+msgstr "ALSA - Advanced Linux Sound Architecture"
+
+#: ../capplets/sound/sound-properties-capplet.c:668
+msgid "Artsd - ART Sound Daemon"
+msgstr "Artsd - ART Sound Daemon"
+
+#: ../capplets/sound/sound-properties-capplet.c:669
+#: ../capplets/sound/sound-properties-capplet.c:670
+msgid "ESD - Enlightened Sound Daemon"
+msgstr "ESD - Enlightened Sound Daemon"
+
+#: ../capplets/sound/sound-properties-capplet.c:671
+#: ../capplets/sound/sound-properties-capplet.c:672
+msgid "OSS - Open Sound System"
+msgstr "OSS - Open Sound System"
+
+#: ../capplets/sound/sound-properties-capplet.c:673
+#: ../capplets/sound/sound-properties-capplet.c:674
+msgid "PulseAudio Sound Server"
+msgstr "PulseAudio Sound Server"
+
+#: ../capplets/sound/sound-properties-capplet.c:675
+msgid "Test Sound"
+msgstr "Testovací zvuk"
+
+#: ../capplets/sound/sound-properties-capplet.c:676
+msgid "Silence"
+msgstr "Ticho"
+
+#: ../capplets/sound/sound-properties-capplet.c:1043
+msgid "- GNOME Sound Preferences"
+msgstr "- Predvoľby zvuku pre GNOME"
 
 #: ../capplets/sound/sound-properties.glade.h:1
-msgid "E_nable sound server startup"
-msgstr "_Povoliť spustenie zvukového serveru"
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>Hlasové konferencie</b>"
 
 #: ../capplets/sound/sound-properties.glade.h:2
+msgid "<b>Default Mixer Tracks</b>"
+msgstr "<b>Predvolené stopy mixéra</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Music and Movies</b>"
+msgstr "<b>Hudba a filmy</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "<b>Sound Events</b>"
+msgstr "<b>Zvukové udalosti</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Testujem...</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click OK to finish."
+msgstr "Pre ukončenie stlačte OK."
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "Zariadenia"
+
+#: ../capplets/sound/sound-properties.glade.h:8
+msgid "E_nable software sound mixing (ESD)"
+msgstr "_Povoliť softvérové zmiešavanie zvuku (ESD)"
+
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "Bliknúť _celou obrazovkou"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "Bliknúť _titulok okna"
 
-#: ../capplets/sound/sound-properties.glade.h:4
-msgid "General"
-msgstr "Všeobecné"
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "S_ound playback:"
+msgstr "Prehrávanie _zvuku:"
 
-#: ../capplets/sound/sound-properties.glade.h:5
-msgid "Sound Events"
-msgstr "Zvukové udalosti"
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid ""
+"Select the device and tracks to control with the keyboard. Use the Shift and "
+"Control keys to select multiple tracks if required."
+msgstr ""
+"Vyberte zariadenie a stopy, ktoré chcete ovládať klávesnicou. Pomocou kláves "
+"Shift a Control môžete vybrať viacero stôp."
 
-#: ../capplets/sound/sound-properties.glade.h:7
-msgid "System Bell"
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "So_und playback:"
+msgstr "_Prehrávanie zvuku:"
+
+#: ../capplets/sound/sound-properties.glade.h:14
+msgid "Sou_nd capture:"
+msgstr "_Zachytávanie zvuku:"
+
+#: ../capplets/sound/sound-properties.glade.h:15
+msgid "Sound Preferences"
+msgstr "Predvoľby zvuku"
+
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Sounds"
+msgstr "Zvuky"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "System Beep"
 msgstr "Systémový zvonček"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "_Sound an audible bell"
-msgstr "_Zvuk počuteľného zvončeka"
+#: ../capplets/sound/sound-properties.glade.h:18
+msgid "Test"
+msgstr "Test"
 
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "_Sounds for events"
-msgstr "_Zvuky pre udalosti"
+#: ../capplets/sound/sound-properties.glade.h:19
+msgid "Testing Pipeline"
+msgstr "Testujem rúru"
 
-#: ../capplets/sound/sound-properties.glade.h:10
-msgid "_Visual feedback:"
-msgstr "_Viditeľná reakcia:"
+#: ../capplets/sound/sound-properties.glade.h:20
+msgid "_Device:"
+msgstr "_Zariadenie:"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:368
-msgid "Would you like to remove this theme?"
-msgstr "Chceli by ste odstrániť túto tému?"
+#: ../capplets/sound/sound-properties.glade.h:21
+msgid "_Enable system beep"
+msgstr "_Povoliť systémový zvonček"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:433
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "Téma bola odstránená úspešne. Prosím, vyberte inú tému."
+#: ../capplets/sound/sound-properties.glade.h:22
+msgid "_Play system sounds"
+msgstr "_Prehrávať systémové zvuky"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:442
-msgid "Theme can not be deleted"
-msgstr "Tému nie je možné odstrániť"
+#: ../capplets/sound/sound-properties.glade.h:23
+msgid "_Sound playback:"
+msgstr "_Prehrávanie zvuku:"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:529
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
+#: ../capplets/sound/sound-properties.glade.h:24
+msgid "_Visual system beep"
+msgstr "_Vizuálny systémový zvonček"
+
+#: ../capplets/windows/gnome-window-properties.c:344
+msgid "Cannot start the preferences application for your window manager"
 msgstr ""
-"Na vašom systéme neboli nájdené žiadne témy. To asi znamená, že nemáte "
-"správne nainštalované \"Nastavenie tém\" alebo nemáte nainštalovaný balík "
-"\"gnome-themes\"."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:227
-msgid "This theme is not in a supported format."
-msgstr "Táto téma nie je v podporovanom formáte."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:242
-msgid "Failed to create temporary directory"
-msgstr "Vytváranie dočasného priečinka zlyhalo"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:260
-msgid ""
-"Can not install theme. \n"
-"The bzip2 utility is not installed."
-msgstr ""
-"Nepodarilo sa nainštalovať tému. \n"
-"Nástroj bzip2 nie je nainštalovaný."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:276
-#: ../capplets/theme-switcher/gnome-theme-installer.c:309
-#: ../capplets/theme-switcher/gnome-theme-installer.c:383
-msgid "Installation Failed"
-msgstr "Inštalácia zlyhala"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:294
-msgid ""
-"Can not install themes. \n"
-"The gzip utility is not installed."
-msgstr ""
-"Nepodarilo sa nainštalovať tému. \n"
-"Nástroj gzip nie je nainštalovaný."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:330
-#, c-format
-msgid ""
-"Icon Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Téma ikon %s nainštalovaná správne.\n"
-"Môžete si ju zvoliť v podrobnostiach témy."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:333
-#, c-format
-msgid "Gnome Theme %s correctly installed"
-msgstr "Gnome téma %s nainštalovaná správne"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:336
-#, c-format
-msgid ""
-"Windows Border Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Téma okrajov okien %s nainštalovaná správne.\n"
-"Môžete si ju zvoliť v podrobnostiach témy."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:339
-#, c-format
-msgid ""
-"Controls Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Téma ovládacích prvkov %s nainštalovaná správne.\n"
-"Môžete si ju zvoliť v podrobnostiach témy."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:345
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "Téma je prostriedok. Potrebujete tému skompilovať."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:360
-msgid "The file format is invalid"
-msgstr "Formát súboru je neplatný"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:450
-msgid "No theme file location specified to install"
-msgstr "Nezadané umiestnenie súboru, ktorý sa má nainštalovať"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:469
-msgid "The theme file location specified to install is invalid"
-msgstr "Umiestnenie súboru s témou nie je platné"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:489
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"Nedostatočné práva na inštaláciu témy do:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:510
-msgid "The file format is invalid."
-msgstr "Formát súboru je neplatný."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:537
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s je cesta, kam sa nainštalujú súbory témy. Nemôžete ju použiť ako zdrojové "
-"umiestnenie"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:591
-msgid ""
-"Cannot install theme.\n"
-"The tar program is not installed on your system."
-msgstr ""
-"Nepodarilo sa nainštalovať tému.\n"
-"Program tar nie je nainštalovaný vo vašom systéme."
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:680
-msgid "Custom theme"
-msgstr "Vlastná téma"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:680
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Pomocou tlačidla Uložiť tému ju môžete uložiť."
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1479
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"Na vašom systéme sa nepodarilo nájsť štandardnú tému. To znamená, že asi "
-"nemáte nainštalovaný balík metacity alebo máte nesprávne nastavený gconf."
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "Musíte zadať meno témy"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "Téma už existuje. Chcete ju nahradiť?"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "Vyberte témy pre rôzne časti prostredia"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "Téma"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Inštalovať tému</span>"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr "Inštalácia témy"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr "_Inštalovať"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "U_miestnenie:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Uložiť tému na disk</span>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "Použiť _pozadie"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "Použiť pí_smo"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Controls"
-msgstr "Ovládacie prvky"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "Icons"
-msgstr "Ikony"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "Nové témy je možné nainštalovať aj ťahaním myšou do tohto okna."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Save Theme"
-msgstr "Uložiť tému"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Select theme for the desktop"
-msgstr "Vyberte tému pre prostredie"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Short _description:"
-msgstr "_Krátky popis:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Theme Details"
-msgstr "Detaily témy"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Theme Preferences"
-msgstr "Nastavenie témy"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Theme _Details"
-msgstr "_Detaily témy"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "This theme does not suggest any particular font or background."
-msgstr "Táto téma nenavrhuje žiadne písmo ani pozadie."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "This theme suggests a background:"
-msgstr "Táto téma navrhuje pozadie:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "This theme suggests a font and a background:"
-msgstr "Táto téma navrhuje písmo a pozadie:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme suggests a font:"
-msgstr "Táto téma navrhuje písmo:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "Window Border"
-msgstr "Okraj okien"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Install Theme..."
-msgstr "_Inštalovať tému..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-#: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "_Odstrániť"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Revert"
-msgstr "_Obnoviť"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save Theme..."
-msgstr "_Uložiť tému..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Theme name:"
-msgstr "Meno _témy:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "theme selection tree"
-msgstr "strom výberu témy"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "Prispôsobenie vzhľadu panelov nástrojov a menu v aplikáciách"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "Menu a panely nástrojov"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>Chovanie</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>Náhľad</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "Vys_trihnúť"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "Iba ikony"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "Nastavenie panelov nástrojov a menu"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "Nový súbor"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "Otvoriť súbor"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "Uložiť súbor"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "Zobraziť _ikony v menu"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "Text pod ikonami"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "Text vedľa ikon"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "Iba text"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "_Popisy tlačidiel lišty nástrojov:"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "_Kopírovať"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "_Oddeliteľné panely nástrojov"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "_Upraviť"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu accelerators"
-msgstr "_Upraviteľné akcelerátory menu"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_Súbor"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "_Nový"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "_Otvoriť"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "V_ložiť"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "_Tlačiť"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "_Koniec"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "_Uložiť"
-
-#: ../capplets/windows/gnome-window-properties.c:385
-#, c-format
-msgid ""
-"<b>Cannot start the preferences application for your window manager</b>\n"
-"\n"
-"%s"
-msgstr ""
-"<b>Nie je možné spustiť nastavenie pre vášho správcu okien</b>\n"
-"\n"
-"%s"
-
-#: ../capplets/windows/gnome-window-properties.c:642
-msgid "Control"
-msgstr "Control"
-
-#: ../capplets/windows/gnome-window-properties.c:647
-msgid "Alt"
-msgstr "Alt"
-
-#: ../capplets/windows/gnome-window-properties.c:653
-msgid "Hyper"
-msgstr "Hyper"
-
-#: ../capplets/windows/gnome-window-properties.c:660
-msgid "Super (or \"Windows logo\")"
-msgstr "Super (alebo \"Windows logo\")"
-
-#: ../capplets/windows/gnome-window-properties.c:667
-msgid "Meta"
-msgstr "Meta"
+"<b>Nie je možné spustiť aplikáciu predvolieb pre Vášho správcu okien</b>"
+
+#. translators: this is the Control key
+#: ../capplets/windows/gnome-window-properties.c:602
+msgid "C_ontrol"
+msgstr "C_ontrol"
+
+#: ../capplets/windows/gnome-window-properties.c:607
+msgid "_Alt"
+msgstr "_Alt"
+
+#: ../capplets/windows/gnome-window-properties.c:613
+msgid "H_yper"
+msgstr "H_yper"
+
+#: ../capplets/windows/gnome-window-properties.c:620
+msgid "S_uper (or \"Windows logo\")"
+msgstr "S_uper (alebo \"logo Okná\")"
+
+#: ../capplets/windows/gnome-window-properties.c:627
+msgid "_Meta"
+msgstr "_Meta"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:1
 msgid "<b>Movement Key</b>"
-msgstr "<b>Kláves pohybu</b>"
+msgstr "<b>Klávesa pohybu</b>"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:2
 msgid "<b>Titlebar Action</b>"
@@ -2493,16 +2875,18 @@ msgid "<b>Window Selection</b>"
 msgstr "<b>Výber okna</b>"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:4
-msgid "To _move a window, press-and-hold this key then grab the window:"
-msgstr "Pre _presun okna držte tento kláves a potom ťahajte:"
+msgid "To move a window, press-and-hold this key then grab the window:"
+msgstr ""
+"Okno sa dá posunúť tak, že stlačíte a podržíte túto klávesu a potom chyťte "
+"okno:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
-msgstr "Nastavenie okien"
+msgstr "Predvoľby okien"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
-msgstr "_Dvojité kliknutie na titulku spôsobí:"
+msgstr "_Dvojité kliknutie na titulok spôsobí:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:7
 msgid "_Interval before raising:"
@@ -2518,42 +2902,21 @@ msgstr "_Vybrať okno pod kurzorom myši"
 
 #: ../capplets/windows/window-properties.desktop.in.in.h:1
 msgid "Set your window properties"
-msgstr "Nastaviť vaše vlastnosti okna"
+msgstr "Nastaviť Vaše predvoľby okna"
 
 #: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Okná"
 
-#: ../control-center/control-center-categories.c:287
-msgid "Others"
-msgstr "Ostatné"
-
-#: ../control-center/control-center.c:42
-msgid "Desktop Preferences"
-msgstr "Predvoľby pracovnej plochy"
-
-#: ../control-center/gnomecc.desktop.in.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Ovládacie centrum"
-
-#: ../control-center/gnomecc.desktop.in.in.h:2
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Nástroj pre nastavenie GNOME"
-
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "Hlasitosť"
 
-#: ../gnome-settings-daemon/factory.c:37
-msgid "Could not initialize Bonobo"
-msgstr "Nepodarilo sa inicializovať Bonobo"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:395
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:463
 msgid "Slow Keys Alert"
 msgstr "Upozornenie na pomalé klávesy"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:396
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:464
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2561,19 +2924,39 @@ msgstr ""
 "Práve ste stlačili kláves Shift 8 sekúnd. To je skratka pre funkciu Pomalé "
 "klávesy, ktorá ovplyvňuje fungovanie vašej klávesnice."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
 msgid "Do you want to activate Slow Keys?"
 msgstr "Chcete použiť Pomalé klávesy?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:399
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:467
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Chcete zrušiť používanie Pomalých kláves?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:408
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
+msgid "_Activate"
+msgstr "_Aktivovať"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
+msgid "_Deactivate"
+msgstr "_Deaktivovať"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
+msgid "Do_n't activate"
+msgstr "_Neaktivovať"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
+msgid "Do_n't deactivate"
+msgstr "_Nedeaktivovať"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:478
 msgid "Sticky Keys Alert"
 msgstr "Upozornenie na Lepivé klávesy"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:479
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2581,63 +2964,72 @@ msgstr ""
 "Práve ste stlačili kláves Shift 5-krát za sebou. To je skratka pre funkciu "
 "Lepivé klávesy, ktorá ovplyvňuje fungovanie vašej klávesnice."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
 msgstr ""
 "Práve ste stlačili dve klávesy naraz, alebo kláves Shift 5-krát za sebou. To "
-"vypne funkciu Lepivé klávesy, ktorá ovplyvňuje fungovanie vašej klávesnice."
+"vypína funkciu Lepivé klávesy, ktorá ovplyvňuje fungovanie vašej klávesnice."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Chcete použiť Lepivé klávesy?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:484
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Chcete zrušiť používanie Lepivých kláves?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:107
+#: ../gnome-settings-daemon/gnome-settings-font.c:150
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing the mouse pointer theme."
+msgstr ""
+"Nemôžem vytvoriť adresár \"%s\".\n"
+"Je to potrebné pre zmenu témy kurzora myši."
+
+#: ../gnome-settings-daemon/gnome-settings-font.c:171
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing cursors."
 msgstr ""
 "Nepodarilo sa vytvoriť priečinok \"%s\".\n"
-"To je nutné pre zmenu kurzorov."
+"Je to nutné pre zmenu kurzorov."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:208
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:275
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Klávesová skratka (%s) má viackrát definovanú akciu.\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:221
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Klávesová skratka (%s) je viackrát definovaná.\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:227
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:289
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Klávesová skratka (%s) je neúplná\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:255
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:316
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Klávesová skratka (%s) je neplatná\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:291
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:353
 #, c-format
 msgid "It seems that another application already has access to key '%u'."
-msgstr "Vyzerá to, že kláves '%u' už používa iná aplikácia."
+msgstr "Vyzerá to, že klávesu '%u' už používa iná aplikácia."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:360
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:418
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Klávesová skratka (%s) sa už používa.\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:435
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:489
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2646,7 +3038,7 @@ msgstr ""
 "Chyba pri pokuse o spustenie (%s),\n"
 "ktorý je spojený s klávesom (%s)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:98
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2677,7 +3069,7 @@ msgstr ""
 "- Výsledok <b>%s</b>\n"
 "- Výsledok <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:112
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2689,57 +3081,32 @@ msgstr ""
 "Skúste použiť jednoduchšiu konfiguráciu alebo použite novšiu verziu XFree "
 "softvéru."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
-msgid "Do _not show this warning again"
-msgstr "Toto upozornenie už _nezobrazovať"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:234
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:187
 msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
+"Could not get default terminal. Verify that your default terminal command is "
+"set and points to a valid application."
 msgstr ""
-"Nastavenia klávesnice X systému sú iné ako nastavenia aktuálnej GNOME "
-"klávesnica. Ktoré nastavenie chcete použiť?"
+"Nepodarilo sa získať predvolený terminál. Overte si, či máte nastavený "
+"príkaz pre terminál, a či je to platná aplikácia."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
-msgid "Use X settings"
-msgstr "Použiť nastavenia X"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
-msgid "Use GNOME settings"
-msgstr "Použiť nastavenia GNOME"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:215
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
-"Verify that this command exists."
+"Verify that this is a valid command."
 msgstr ""
-"Nepodarilo sa vykonať príkaz: %s\n"
-"Overte, že tento príkaz existuje."
+"Nepodarilo sa spustiť príkaz: %s\n"
+"Skontrolujte, či je to platný príkaz."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:230
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
 msgstr ""
 "Nepodarilo sa uspať počítač.\n"
-"Overte, že máte počítač správne nastavený."
+"Overte si, či máte počítač správne nastavený."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "Práva pre súbor %s sú nesprávne.\n"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
-msgid ""
-"Couldn't load the Glade file.\n"
-"Make sure that this daemon is properly installed."
-msgstr ""
-"Nepodarilo sa načítať súbor Glade.\n"
-"Overte, že je tento démon správne nainštalovaný."
-
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2752,23 +3119,23 @@ msgstr ""
 "\n"
 "%s\n"
 "\n"
-"Počas tohto sedenia nebude šetrič obrazovky fungovať."
+"Počas tejto relácie nebude šetrič obrazovky fungovať."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
 msgid "_Do not show this message again"
 msgstr "_Túto správu už nezobrazovať"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:129
+#: ../gnome-settings-daemon/gnome-settings-sound.c:199
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nepodarilo sa načítať zvukový súbor %s ako zvuk %s"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:243
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:291
 msgid "Cannot determine user's home directory"
 msgstr "Nepodarilo sa určiť domovský priečinok používateľa"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:210
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:303
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Kľúč GConf %s nastavený na typ %s, ale očakáva sa typ %s\n"
@@ -2837,66 +3204,308 @@ msgstr "Obrazovka"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Obrazovka, na ktorú má BGApplier kresliť"
 
-#: ../libgswitchit/gswitchit_config.c:1035
+#. make start action
+#: ../libslab/application-tile.c:369
 #, c-format
-msgid "There was an error loading an image: %s"
-msgstr "Nastala chyba pri načítavaní obrázka: %s"
+msgid "<b>Start %s</b>"
+msgstr "<b>Spustiť %s</b>"
 
-#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
+#: ../libslab/application-tile.c:388
+msgid "Help"
+msgstr "Pomocník"
+
+#: ../libslab/application-tile.c:435
+msgid "Upgrade"
+msgstr "Aktualizovať"
+
+#: ../libslab/application-tile.c:450
+msgid "Uninstall"
+msgstr "Odinštalovať"
+
+#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:528
+msgid "Remove from Favorites"
+msgstr "Odstrániť z Obľúbených"
+
+#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:530
+msgid "Add to Favorites"
+msgstr "Pridať k Obľúbeným"
+
+#: ../libslab/application-tile.c:864
+msgid "Remove from Startup Programs"
+msgstr "Odstrániť z Progamov pri štarte"
+
+#: ../libslab/application-tile.c:866
+msgid "Add to Startup Programs"
+msgstr "Pridať k Programom pri štarte"
+
+#: ../libslab/app-shell.c:750
+#, c-format
+msgid ""
+"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
+"\n"
+" Your filter \"<b>%s</b>\" does not match any items.</span>"
+msgstr ""
+"<span size=\"large\"><b>Nenašla sa žiadna zhoda.</b> </span><span>\n"
+"\n"
+" Váš filter \"<b>%s</b>\" nesúhlasí so žiadnou položkou.</span>"
+
+#: ../libslab/app-shell.c:900
+msgid "Other"
+msgstr "Iné"
+
+#: ../libslab/bookmark-agent.c:1034
+msgid "New Spreadsheet"
+msgstr "Nová tabuľka"
+
+#: ../libslab/bookmark-agent.c:1038
+msgid "New Document"
+msgstr "Nový dokument"
+
+#: ../libslab/bookmark-agent.c:1088
+msgid "Home"
+msgstr "Domov"
+
+#: ../libslab/bookmark-agent.c:1104
+msgid "File System"
+msgstr "Súborový systém"
+
+#: ../libslab/bookmark-agent.c:1108
+msgid "Network Servers"
+msgstr "Sieťové servery"
+
+#: ../libslab/bookmark-agent.c:1137
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr "Nájsť"
+
+#. make open with default action
+#: ../libslab/directory-tile.c:170
+#, c-format
+msgid "<b>Open</b>"
+msgstr "<b>Otvoriť</b>"
+
+#. make rename action
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:234
+msgid "Rename..."
+msgstr "Premenovať..."
+
+#: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
+#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
+msgid "Send To..."
+msgstr "Odoslať do..."
+
+#. make move to trash action
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:283
+msgid "Move to Trash"
+msgstr "Presunúť do koša"
+
+#: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
+#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:641
+msgid "Delete"
+msgstr "Odstrániť"
+
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:813
+#, c-format
+msgid "Are you sure you want to permanently delete \"%s\"?"
+msgstr ""
+
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:817
+msgid "If you delete an item, it is permanently lost."
+msgstr ""
+
+#: ../libslab/document-tile.c:155
+msgid "Edited %m/%d/%Y"
+msgstr "Zmenené %m/%d/%Y"
+
+#: ../libslab/document-tile.c:195
+#, c-format
+msgid "<b>Open with \"%s\"</b>"
+msgstr "<b>Otvoriť pomocou \"%s\"</b>"
+
+#: ../libslab/document-tile.c:207
+msgid "Open with Default Application"
+msgstr "Otvoriť pomocou Predvolenej Aplikácie"
+
+#: ../libslab/document-tile.c:218
+msgid "Open in File Manager"
+msgstr "Otvoriť v Správcovi súborov"
+
+#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
+#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
+#, c-format
+msgid "Unexpected attribute '%s' for element '%s'"
+msgstr "Neočakávaný atribút '%s' pre prvok '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
+#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
+#, c-format
+msgid "Attribute '%s' of element '%s' not found"
+msgstr "Atribút '%s' prvku '%s' sa nenašiel"
+
+#: ../libslab/libslab-bookmarkfile.c:1087
+#: ../libslab/libslab-bookmarkfile.c:1152
+#: ../libslab/libslab-bookmarkfile.c:1216
+#: ../libslab/libslab-bookmarkfile.c:1226
+#, c-format
+msgid "Unexpected tag '%s', tag '%s' expected"
+msgstr "Neočakávaná značka '%s', očakávaná bola '%s' "
+
+#: ../libslab/libslab-bookmarkfile.c:1112
+#: ../libslab/libslab-bookmarkfile.c:1126
+#: ../libslab/libslab-bookmarkfile.c:1194
+#: ../libslab/libslab-bookmarkfile.c:1246
+#, c-format
+msgid "Unexpected tag '%s' inside '%s'"
+msgstr "Neočakávaná značka  '%s' vnútri '%s' "
+
+#: ../libslab/libslab-bookmarkfile.c:1929
+#, c-format
+msgid "No valid bookmark file found in data dirs"
+msgstr "Nenašiel sa žiadny platný súbor záložiek v adresároch data"
+
+#: ../libslab/libslab-bookmarkfile.c:2130
+#, c-format
+msgid "A bookmark for URI '%s' already exists"
+msgstr "Záložka pre URI '%s' už existuje"
+
+#: ../libslab/libslab-bookmarkfile.c:2176
+#: ../libslab/libslab-bookmarkfile.c:2333
+#: ../libslab/libslab-bookmarkfile.c:2418
+#: ../libslab/libslab-bookmarkfile.c:2499
+#: ../libslab/libslab-bookmarkfile.c:2584
+#: ../libslab/libslab-bookmarkfile.c:2667
+#: ../libslab/libslab-bookmarkfile.c:2745
+#: ../libslab/libslab-bookmarkfile.c:2824
+#: ../libslab/libslab-bookmarkfile.c:2866
+#: ../libslab/libslab-bookmarkfile.c:2963
+#: ../libslab/libslab-bookmarkfile.c:3089
+#: ../libslab/libslab-bookmarkfile.c:3279
+#: ../libslab/libslab-bookmarkfile.c:3355
+#: ../libslab/libslab-bookmarkfile.c:3508
+#: ../libslab/libslab-bookmarkfile.c:3573
+#: ../libslab/libslab-bookmarkfile.c:3663
+#: ../libslab/libslab-bookmarkfile.c:3790
+#, c-format
+msgid "No bookmark found for URI '%s'"
+msgstr "Nenašla sa žiadna záložka pre URI '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2508
+#, c-format
+msgid "No MIME type defined in the bookmark for URI '%s'"
+msgstr "Nebol definovaný žiadny MIME typ v záložke pre URI '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2593
+#, c-format
+msgid "No private flag has been defined in bookmark for URI '%s'"
+msgstr "Nebol definovaný žiadny súkromný príznak v záložke pre URI '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:2972
+#, c-format
+msgid "No groups set in bookmark for URI '%s'"
+msgstr "Neboli nastavené žiadne skupiny v záložke pre URI '%s'"
+
+#: ../libslab/libslab-bookmarkfile.c:3373
+#: ../libslab/libslab-bookmarkfile.c:3518
+#, c-format
+msgid "No application with name '%s' registered a bookmark for '%s'"
+msgstr "Žiadna aplikácia s názvom '%s' zaregistrovala záložku pre '%s'"
+
+#: ../libslab/search-bar.c:255
+msgid "Find Now"
+msgstr "Nájsť teraz"
+
+#: ../libslab/system-tile.c:128
+#, c-format
+msgid "<b>Open %s</b>"
+msgstr "<b>Otvoriť %s</b>"
+
+#: ../libslab/system-tile.c:141
+#, c-format
+msgid "Remove from System Items"
+msgstr "Odstrániť zo systémových položiek"
+
+#: ../libsounds/sound-view.c:44
+msgid "Login"
+msgstr "Prihlásenie"
+
+#: ../libsounds/sound-view.c:45
+msgid "Logout"
+msgstr "Odhlásiť"
+
+#: ../libsounds/sound-view.c:46
+msgid "Boing"
+msgstr "Beng"
+
+#: ../libsounds/sound-view.c:47
+msgid "Siren"
+msgstr "Siréna"
+
+#: ../libsounds/sound-view.c:48
+msgid "Clink"
+msgstr "Cink"
+
+#: ../libsounds/sound-view.c:49
+msgid "Beep"
+msgstr "Zvonček"
+
+#: ../libsounds/sound-view.c:50
+msgid "No sound"
+msgstr "Žiadny zvuk"
+
+#: ../libsounds/sound-view.c:132
+msgid "Sound not set for this event."
+msgstr "Pre túto udalosť nie je nastavený zvuk."
+
+#: ../libsounds/sound-view.c:141
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package for a set of default sounds."
+msgstr ""
+"Zvukový súbor pre túto udalosť neexistuje.\n"
+"Nechceli by ste si nainštalovať balík gnome-audio, ktorý obsahuje sadu "
+"predvolených zvukov?"
+
+#: ../libsounds/sound-view.c:152
 msgid "The sound file for this event does not exist."
 msgstr "Zvukový súbor pre túto udalosť neexistuje."
 
-#: ../libsounds/sound-view.c:149
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"Zvukový súbor pre túto udalosť neexistuje.\n"
-"Môžno budete chcieť nainštalovať balík gnome-audio,\n"
-"ktorý obsahuje štandardné zvuky."
+#: ../libsounds/sound-view.c:183
+msgid "Select Sound File"
+msgstr "Vybrať súbor so zvukom"
 
-#: ../libsounds/sound-view.c:224
+#: ../libsounds/sound-view.c:203
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Súbor %s nie je platný súbor wav"
 
-#: ../libsounds/sound-view.c:289
-msgid "Event"
-msgstr "Udalosť"
+#: ../libsounds/sound-view.c:264
+msgid "Select sound file..."
+msgstr "Vyberte zvukový súbor..."
 
-#: ../libsounds/sound-view.c:298
-msgid "Sound File"
-msgstr "Zvukový súbor"
+#: ../libsounds/sound-view.c:366
+msgid "System Sounds"
+msgstr "Systémové zvuky"
 
-#: ../libsounds/sound-view.c:314
-msgid "_Sounds:"
-msgstr "_Zvuky:"
-
-#: ../libsounds/sound-view.c:328
-msgid "Sound _file:"
-msgstr "Zvukový _súbor:"
-
-#: ../libsounds/sound-view.c:332
-msgid "Select Sound File"
-msgstr "Vybrať súbor so zvukom"
-
-#: ../libsounds/sound-view.c:356
-msgid "_Play"
-msgstr "_Zahrať"
-
-#: ../libwindow-settings/gnome-wm-manager.c:320
+#: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
-msgstr "Správca okien \"%s\" nemá zaregistrovaný nástroj pre nastavenie\n"
+msgstr "Správca okien \"%s\" nemá zaregistrovaný nástroj pre konfiguráciu\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "Maximalizovať"
 
-#: ../libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:391
+msgid "Minimize"
+msgstr "Minimalizovať"
+
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "Zabaliť"
+
+#: ../libwindow-settings/metacity-window-manager.c:393
+msgid "None"
+msgstr "Žiadny"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
@@ -2910,76 +3519,77 @@ msgid "Sync text/plain and text/* handlers"
 msgstr "Synchronizovať programy pre text/plain a text/*"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "Znížiť jas"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "Klávesová skratka pre zníženie jasu."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "Zvýšiť jas."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "Klávesová skratka pre zvýšenie jasu."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "E-mail"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
 msgstr "Klávesová skratka pre E-mail."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
 msgstr "Vysunúť"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr "Klávesová skratka pre vysunutie."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
 msgstr "Domovský priečinok"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr "Klávesová skratka pre domovský priečinok."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+msgid "Launch calculator"
+msgstr ""
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#, fuzzy
+msgid "Launch calculator's shortcut"
+msgstr "Spustiť skratku prehliadača pomocníka."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch help browser"
 msgstr "Spustiť prehliadač pomocníka"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch help browser's shortcut."
-msgstr "Spustit skratku prehliadača pomocníka."
+msgstr "Spustiť skratku prehliadača pomocníka."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Launch web browser"
 msgstr "Spustiť WWW prehliadač"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Launch web browser's shortcut."
 msgstr "Klávesová skratka pre spustenie WWW prehliadača."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Lock screen"
 msgstr "Uzamknúť obrazovku"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Lock screen's shortcut."
 msgstr "Klávesová skratka pre uzamknutie obrazovky."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Log out"
 msgstr "Odhlásiť"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Log out's shortcut."
 msgstr "Klávesová skratka pre odhlásenie."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Media player"
+msgstr "Prehrávač hudby/videa"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "Media player key's shortcut."
+msgstr "Klávesová skratka pre prehrávač hudby/videa."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Next track key's shortcut."
@@ -3005,10 +3615,6 @@ msgstr "Klávesová skratka pre prehrávanie (alebo hrať/pozastaviť)."
 msgid "Previous track key's shortcut."
 msgstr "Klávesová skratka pre Prejsť na predchádzajúcu stopu."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
-msgid "Search"
-msgstr "Nájsť"
-
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Search's shortcut."
 msgstr "Klávesová skratka pre Nájsť."
@@ -3027,7 +3633,7 @@ msgstr "Uspať"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Sleep's shortcut."
-msgstr "Klávesová skratka pre uspanie."
+msgstr "Klávesová skratka pre uspatie."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Stop playback key"
@@ -3047,11 +3653,11 @@ msgstr "Klávesová skratka pre zníženie hlasitosti."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume mute"
-msgstr "Potichu"
+msgstr "Umlčať"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
-msgid "Volume mute's shortcut"
-msgstr "Klávesová skratka pre Potichu"
+msgid "Volume mute's shortcut."
+msgstr "Klávesová skratka pre umlčanie zvuku."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
@@ -3086,115 +3692,129 @@ msgstr "Zobraziť chyby pri štarte"
 msgid "Start screensaver"
 msgstr "Spustiť šetrič obrazovky"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#: ../shell/control-center.c:62
+#, c-format
+msgid "key not found [%s]\n"
+msgstr "kľúč sa nenašiel [%s]\n"
+
+#: ../shell/control-center.c:159
+msgid "Filter"
+msgstr "Filter"
+
+#: ../shell/control-center.c:159
+msgid "Groups"
+msgstr "Skupiny"
+
+#: ../shell/control-center.c:159
+msgid "Common Tasks"
+msgstr "Bežné úlohy"
+
+#: ../shell/control-center.c:163 ../shell/gnomecc.desktop.in.in.h:1
+#: ../shell/gnomecc.directory.in.h:1
+msgid "Control Center"
+msgstr "Ovládacie centrum"
+
+#: ../shell/control-center.schemas.in.h:1
+msgid "Close the control-center when a task is activated"
+msgstr "Zatvoriť ovládacie centrum keď je aktivovaná úloha"
+
+#: ../shell/control-center.schemas.in.h:2
+msgid "Exit shell on add or remove action performed"
+msgstr "Ukončiť shell pri vykonaní akcie pridania alebo odstránenia"
+
+#: ../shell/control-center.schemas.in.h:3
+msgid "Exit shell on help action performed"
+msgstr "Ukončiť shell pri vykonaní akcie pomocníka"
+
+#: ../shell/control-center.schemas.in.h:4
+msgid "Exit shell on start action performed"
+msgstr "Ukončiť shell pri vykonaní akcie spustenia"
+
+#: ../shell/control-center.schemas.in.h:5
+msgid "Exit shell on upgrade or uninstall action performed"
+msgstr "končiť shell pri vykonaní akcie odinštalovania"
+
+#: ../shell/control-center.schemas.in.h:6
+msgid "Indicates whether to close the shell when a help action is performed"
+msgstr "Určuje, či sa má zatvoriť shell keď sa vykoná akcia pomoci"
+
+#: ../shell/control-center.schemas.in.h:7
+msgid "Indicates whether to close the shell when a start action is performed"
+msgstr "Určuje, či sa má shell zavrieť keď sa vykoná akcia spustenia"
+
+#: ../shell/control-center.schemas.in.h:8
 msgid ""
-"A collection of scripts to run whenever the keyboard state is reloaded. "
-"Useful for re-applying xmodmap based adjustments"
+"Indicates whether to close the shell when an add or remove action is "
+"performed"
 msgstr ""
-"Kolekcia skriptov, ktoré sa spustia vždy, keď sa opätovne načíta stav "
-"klávesnice. Použiteľné pre opätovné aplikovanie úprav založených na xmodmap"
+"Určuje, či sa má shell zavrieť keď sa vykoná akcia pridania alebo odstránenia"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "A list of modmap files available in the $HOME directory."
-msgstr "Zoznam modmap súborov dostupných v priečinku $HOME."
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "Default group, assigned on window creation"
-msgstr "Predvolená skupina, priradená pri vytváraní okna"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "Keep and manage separate group per window"
-msgstr "Podržať a spravovať oddelené skupiny pre každé okno"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "Keyboard Update Handlers"
-msgstr "Zariadenia aktualizácie klávesnice"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
-msgid "Keyboard layout"
-msgstr "Rozloženie klávesnice"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
-msgid "Keyboard model"
-msgstr "Model klávesnice"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
-msgid "Keyboard options"
-msgstr "Voľby klávesnice"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: ../shell/control-center.schemas.in.h:9
 msgid ""
-"Keyboard settings in gconf will be overridden from the system ASAP "
-"(deprecated)"
+"Indicates whether to close the shell when an upgrade or uninstall action is "
+"performed"
 msgstr ""
-"Nastavenia klávesnice v gconf budú prekryté okamžite podľa systému "
-"(zastaralé)"
+"Určuje, či sa má shell zavrieť keď sa vykoná akcia aktualizácie alebo "
+"odinštalovania"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
-msgid "Save/restore indicators together with layout groups"
-msgstr "Uložiť/obnoviť indikátory spolu so skupinami rozloženia"
+#: ../shell/control-center.schemas.in.h:10
+msgid "Task names and associated .desktop files"
+msgstr "Názvy úloh a súvisiacich súborov .desktop"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
-msgid "Show layout names instead of group names"
-msgstr "Zobraziť názvy roložení namiesto názvov skupín"
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: ../shell/control-center.schemas.in.h:11
+#, fuzzy
 msgid ""
-"Show layout names instead of group names (only for versions of XFree "
-"supporting multiple layouts)"
+"The task name to be displayed in the control-center followed by a \";\" "
+"separator then the filename of an associated .desktop file to launch for "
+"that task."
 msgstr ""
-"Zobraziť názvy rozložení namiesto názvov skupín (len pre verzie XFree, ktoré "
-"podporujú viacnásobné rozloženia)"
+"Názov úlohy, ktorá sa má zobraziť v ovládacom centre (čiže potrebuje "
+"preklad), nasledovaná oddeľovačom \";\" a názvom súvisiaceho .desktop "
+"súboru, ktorý sa má zavolať pre túto úlohu."
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
-msgid "Suppress the \"X sysconfig changed\" warning message"
-msgstr "Potlačiť upozorňovaciu správu \"systémová konfigurácia X zmenená\""
-
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
+#: ../shell/control-center.schemas.in.h:13
+#, fuzzy
 msgid ""
-"Very soon, keyboard settings in gconf will be overridden (from the system "
-"configuration) This key has been deprecated since GNOME 2.12, please unset "
-"the model, layouts and options keys to get the default system configuration."
+"[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;default-"
+"applications.desktop,Add Printer;gnome-cups-manager.desktop]"
 msgstr ""
-"Nastavenia klávesnice v gconf budú veľmi skoro prekryté (zo systémovej "
-"konfigurácie). Tento je zastaralý od GNOME 2.12. Prosím odnastavte model, "
-"rozloženia klávesnice a voliteľné klávesy, aby ste získali štandardnú "
-"systémovú konfiguráciu."
+"[Zmeniť pozadie plochy;background.desktop,Zmeniť tému;gtk-theme-selector."
+"desktop,Nastaviť predvolené aplikácie;default-applications.desktop,Pridať "
+"tlačiareň;gnome-cups-manager.desktop]"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
-msgid "keyboard layout"
-msgstr "rozloženie klávesnice"
+#: ../shell/control-center.schemas.in.h:14
+msgid ""
+"if true, the control-center will close when a \"Common Task\" is activated"
+msgstr ""
+"Ak je true, ovládacie centrum sa zavrie pri aktivácii \"Bežnej úlohy\"."
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
-msgid "keyboard model"
-msgstr "model klávesnice"
+#: ../shell/gnomecc.desktop.in.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Nástroj pre konfiguráciu GNOME"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
-msgid "modmap file list"
-msgstr "zoznam súborov modmap"
-
-#: ../typing-break/drw-break-window.c:212
-msgid "_Postpone break"
+#: ../typing-break/drw-break-window.c:188
+msgid "_Postpone Break"
 msgstr "_Odložiť prestávku"
 
-#: ../typing-break/drw-break-window.c:259
+#: ../typing-break/drw-break-window.c:244
 msgid "Take a break!"
 msgstr "Urobte si prestávku!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: ../typing-break/drwright.c:141
+#: ../typing-break/drwright.c:128
 msgid "/_Preferences"
-msgstr "/Nas_tavenie"
+msgstr "/_Predvoľby"
 
-#: ../typing-break/drwright.c:142
+#: ../typing-break/drwright.c:129
 msgid "/_About"
 msgstr "/_O programe"
 
-#: ../typing-break/drwright.c:144
+#: ../typing-break/drwright.c:131
 msgid "/_Take a Break"
 msgstr "/_Urobiť prestávku"
 
-#: ../typing-break/drwright.c:495
+#: ../typing-break/drwright.c:500
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
@@ -3202,101 +3822,61 @@ msgstr[0] "%d minút do ďalšej prestávky"
 msgstr[1] "%d minúta do ďalšej prestávky"
 msgstr[2] "%d minúty do ďalšej prestávky"
 
-#: ../typing-break/drwright.c:499
+#: ../typing-break/drwright.c:504
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "Menej ako jedna minúta do ďalšej prestávky"
 
-#: ../typing-break/drwright.c:587
+#: ../typing-break/drwright.c:591
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr ""
-"Nepodarilo sa zobraziť dialóg pre nastavenie monitoru písania kvôli tejto "
+"Nepodarilo sa zobraziť dialóg predvolieb prestávok písania kvôli tejto "
 "chybe: %s"
 
-#: ../typing-break/drwright.c:635
-msgid "About GNOME Typing Monitor"
-msgstr "O monitore písania pre GNOME"
+#: ../typing-break/drwright.c:610
+msgid "Written by Richard Hult <richard@imendio.com>"
+msgstr "Napísal Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:659
-msgid "A computer break reminder."
-msgstr "Upozornenie na to, že si máte urobiť prestávku."
-
-#: ../typing-break/drwright.c:660
-msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
-msgstr "Napísal Richard Hult &lt;richard@imendio.com&gt;"
-
-#: ../typing-break/drwright.c:661
+#: ../typing-break/drwright.c:611
 msgid "Eye candy added by Anders Carlsson"
-msgstr "Ozdoby Anders Carlsson"
+msgstr "Ozdoby pridal Anders Carlsson"
 
-#: ../typing-break/drwright.c:837
-msgid "Break reminder"
-msgstr "Upozornenie na prestávky"
+#: ../typing-break/drwright.c:620
+msgid "A computer break reminder."
+msgstr "Pripomenutie, že si máte urobiť prestávku."
 
-#: ../typing-break/eggtrayicon.c:127
-msgid "Orientation"
-msgstr "Orientácia"
+#: ../typing-break/drwright.c:622
+msgid "translator-credits"
+msgstr ""
+"Marcel Telka <marcel@telka.sk>\n"
+"Peter Tuhársky <tuharsky@misbb.sk>"
 
-#: ../typing-break/eggtrayicon.c:128
-msgid "The orientation of the tray."
-msgstr "Orientácia zásobníka."
+#: ../typing-break/main.c:61
+msgid "Enable debugging code"
+msgstr "Povoliť ladiaci kód"
 
-#: ../typing-break/main.c:93
-msgid "The typing monitor is already running."
-msgstr "Monitor písania už beží."
+#: ../typing-break/main.c:63
+msgid "Don't check whether the notification area exists"
+msgstr "Nekontrolovať existenciu oblasti upozornení"
 
-#: ../typing-break/main.c:106
+#: ../typing-break/main.c:89
+msgid "Typing Monitor"
+msgstr "Sledovanie písania"
+
+#: ../typing-break/main.c:105
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
 "right-clicking on your panel and choosing 'Add to panel', selecting "
 "'Notification area' and clicking 'Add'."
 msgstr ""
-"Monitor písania používa oblasť upozornení pre zobrazovanie informácií. Zdá "
+"Sledovač písania používa oblasť upozornení pre zobrazovanie informácií. Zdá "
 "sa, že váš panel túto oblasť neobsahuje. Môžete ju pridať kliknutím pravým "
 "tlačidlom na vašom paneli a vybratím 'Pridať do panelu', zvolením 'Oblasť "
 "upozornení' a kliknutím na 'Pridať'."
-
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "Rýchla hnedá líška skáče cez lenivého psa. 0123456789"
-
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "Meno:"
-
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "Štýl:"
-
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "Typ:"
-
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "Veľkosť:"
-
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "Verzia:"
-
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "Copyright:"
-
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "Popis:"
-
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "použitie: %s súborpísma\n"
 
 #: ../vfs-methods/fontilus/fontilus-context-menu.c:132
 msgid "Set as Application Font"
@@ -3304,7 +3884,7 @@ msgstr "Použiť ako písmo aplikácií"
 
 #: ../vfs-methods/fontilus/fontilus-context-menu.c:133
 msgid "Sets the default application font"
-msgstr "Nastaví štandardné písmo aplikácií"
+msgstr "Nastaví predvolené písmo aplikácií"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
@@ -3364,45 +3944,115 @@ msgstr "Príkaz pre náhľady písiem Type1"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:13
 msgid "Whether to thumbnail OpenType fonts"
-msgstr "Či vytvárať náhľady písiem OpenType"
+msgstr "Určuje, či vytvárať náhľady písiem OpenType"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:14
 msgid "Whether to thumbnail PCF fonts"
-msgstr "Či vytvárať náhľady písiem PCF"
+msgstr "Určuje, či vytvárať náhľady písiem PCF"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:15
 msgid "Whether to thumbnail TrueType fonts"
-msgstr "Či vytvárať náhľady písiem TrueType"
+msgstr "Určuje, či vytvárať náhľady písiem TrueType"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:16
 msgid "Whether to thumbnail Type1 fonts"
-msgstr "Či vytvárať náhľady písiem Type1"
+msgstr "Určuje, či vytvárať náhľady písiem Type1"
+
+#: ../vfs-methods/fontilus/font-view.c:115
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr "Rýchla hnedá líška skáče cez lenivého psa. 0123456789"
+
+#: ../vfs-methods/fontilus/font-view.c:276
+msgid "Name:"
+msgstr "Meno:"
+
+#: ../vfs-methods/fontilus/font-view.c:279
+msgid "Style:"
+msgstr "Štýl:"
+
+#: ../vfs-methods/fontilus/font-view.c:289
+msgid "Type:"
+msgstr "Typ:"
+
+#: ../vfs-methods/fontilus/font-view.c:295
+msgid "Size:"
+msgstr "Veľkosť:"
+
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
+msgid "Version:"
+msgstr "Verzia:"
+
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
+msgid "Copyright:"
+msgstr "Copyright:"
+
+#: ../vfs-methods/fontilus/font-view.c:347
+msgid "Description:"
+msgstr "Popis:"
+
+#: ../vfs-methods/fontilus/font-view.c:408
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "použitie: %s súbor_písma\n"
 
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "GNOME Font Viewer"
+#, fuzzy
+msgid "Font Viewer"
 msgstr "Zobrazovač písem pre GNOME"
 
-#: ../vfs-methods/themus/apply-font.glade.h:2
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+#, fuzzy
+msgid "Preview fonts"
+msgstr "Šírka náhľadu"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:242
+msgid "Text to thumbnail (default: Aa)"
+msgstr "Text do náhľadu (predvolené: Aa)"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:242
+msgid "TEXT"
+msgstr "TEXT"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:244
+msgid "Font size (default: 64)"
+msgstr "Veľkosť písma (predvolené: 64)"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:244
+msgid "SIZE"
+msgstr "VEĽKOSŤ"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:246
+msgid "FONT-FILE OUTPUT-FILE"
+msgstr "SÚBOR-PÍSMA VÝSTUPNÝ-SÚBOR"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:262
+#, c-format
+msgid "Error parsing arguments: %s\n"
+msgstr "Chyba pri spracovaní parametrov: %s\n"
+
+#: ../vfs-methods/themus/apply-font.glade.h:1
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Použiť nové písmo?</span>"
 
-#: ../vfs-methods/themus/apply-font.glade.h:3
+#: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "Do _not apply font"
 msgstr "_Nepoužiť písmo"
 
-#: ../vfs-methods/themus/apply-font.glade.h:4
+#: ../vfs-methods/themus/apply-font.glade.h:3
 msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
 msgstr ""
-"Téma, ktorú ste vybrali, doporučuje nové písmo. Dole je zobrazený náhľad "
-"tohto písma."
+"Téma, ktorú ste vybrali, odporúča nové písmo. Dole je zobrazený náhľad tohto "
+"písma."
 
-#: ../vfs-methods/themus/apply-font.glade.h:5
+#: ../vfs-methods/themus/apply-font.glade.h:4
 msgid "_Apply font"
 msgstr "Použiť pí_smo"
 
-#: ../vfs-methods/themus/theme-method.c:518
+#: ../vfs-methods/themus/theme-method.c:485
 msgid "Themes"
 msgstr "Témy"
 
@@ -3421,19 +4071,6 @@ msgstr "Téma okrajov okien"
 #: ../vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
 msgstr "Ikonová téma"
-
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:78
-msgid "ABCDEFG"
-msgstr "AÁÄBCČDĎEÉFG"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "Použiť tému"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "Nastaví štandardnú tému"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3463,8 +4100,123 @@ msgstr "Príkaz pre vytvorenie náhľadu tém"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:7
 msgid "Whether to thumbnail installed themes"
-msgstr "Či vytvárať náhľady nainštalovaných tém"
+msgstr "Určuje, či vytvárať náhľady nainštalovaných tém"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
-msgstr "Či vytvárať náhľady tém"
+msgstr "Určuje, či vytvárať náhľady tém"
+
+#. translators: you may want to include non-western chars here
+#: ../vfs-methods/themus/themus-theme-applier.c:58
+msgid "ABCDEFG"
+msgstr "AÁÄBCČDĎŽEÉFG"
+
+#: ../vfs-methods/themus/themus-theme-applier.c:84
+msgid "[FILE]"
+msgstr "[SÚBOR]"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+msgid "Apply theme"
+msgstr "Použiť tému"
+
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+msgid "Sets the default theme"
+msgstr "Nastaví predvolenú tému"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "The theme is an engine. You need to compile it."
+#~ msgstr "Táto téma je modul. Musíte ju skompilovať."
+
+#~ msgid "The file format is invalid"
+#~ msgstr "Formát súboru je neplatný"
+
+#~ msgid "This theme is not in a supported format."
+#~ msgstr "Táto téma nie je v podporovanom formáte."
+
+#~ msgid "The file format is invalid."
+#~ msgstr "Formát súboru je neplatný."
+
+#~ msgid "Evolution Mail Reader 1.4"
+#~ msgstr "Evolution poštový klient 1.4"
+
+#~ msgid "Evolution Mail Reader 1.5"
+#~ msgstr "Evolution poštový klient 1.5"
+
+#~ msgid "Evolution Mail Reader 1.6"
+#~ msgstr "Evolution poštový klient 1.6"
+
+#~ msgid "Evolution Mail Reader 2.0"
+#~ msgstr "Evolution poštový klient 2.0"
+
+#~ msgid "Evolution Mail Reader 2.2"
+#~ msgstr "Evolution poštový klient 2.2"
+
+#~ msgid "Evolution Mail Reader 2.4"
+#~ msgstr "Evolution poštový klient 2.4"
+
+#~ msgid "Links Text Browser"
+#~ msgstr "Links textový prehliadač"
+
+#~ msgid "Lynx Text Browser"
+#~ msgstr "Lynx textový prehliadač"
+
+#~ msgid "Simple OnScreen Keyboard"
+#~ msgstr "Jednoduchá klávesnica na obrazovke"
+
+#~ msgid "W3M Text Browser"
+#~ msgstr "Textový prehliadač W3M"
+
+#~ msgid "_Keep resolution"
+#~ msgstr "_Použiť rozlíšenie"
+
+#~ msgid "There was an error launching the keyboard tool: %s"
+#~ msgstr "Pri pokuse o spustenie nástroja pre klávesnicu nastala chyba: %s"
+
+#~ msgid "_Accessibility"
+#~ msgstr "_Prístupnosť"
+
+#~ msgid "Choose..."
+#~ msgstr "Vyberte..."
+
+#~ msgid "Microsoft Natural Keyboard"
+#~ msgstr "Naturálna klávesnica Microsoft"
+
+#~ msgid "_Accessibility..."
+#~ msgstr "_Prístupnosť..."
+
+#~ msgid "Do _not show this warning again"
+#~ msgstr "Toto upozornenie už _nezobrazovať"
+
+#~ msgid ""
+#~ "<b>The X system keyboard settings differ from your current GNOME keyboard "
+#~ "settings.</b>\n"
+#~ "\n"
+#~ "Expected was %s, but the the following settings were found: %s.\n"
+#~ "\n"
+#~ "Which set would you like to use?"
+#~ msgstr ""
+#~ "<b>Nastavenia klávesnice X system sa líšia od nastavení GNOME</b>\n"
+#~ "\n"
+#~ "Očakávalo sa %s, ale objavili sa tieto nastavenia: %s.\n"
+#~ "\n"
+#~ "Ktoré z nich chcete používať?"
+
+#~ msgid "Use X settings"
+#~ msgstr "Použiť nastavenia X"
+
+#~ msgid "Keep GNOME settings"
+#~ msgstr "Ponechať nastavenia GNOME"
+
+#~ msgid "Beep 2 (NAMEME)"
+#~ msgstr "Zvonček 2 (POMENUJ)"
+
+#~ msgid "Beep 3 (NAMEME)"
+#~ msgstr "Zvonček 3 (POMENUJ)"
+
+#~ msgid "Warning beep (NAMEME)"
+#~ msgstr "Varovný zvonček (POMENUJ)"
+
+#~ msgid "Ping (NAMEME)"
+#~ msgstr "Ping (POMENOVAŤ"
