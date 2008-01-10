@@ -18,7 +18,7 @@
 # Samuel Mutel <samuel.mutel@free.fr>, 2006.
 # Damien Durand <splinux@fedoraproject.org>, 2006.
 # Marc Lorber <linux-lorber@club-internet.fr>, 2006.
-# Stéphane Raimbault <stephane.raimbault@gmail.com>, 2007
+# Stéphane Raimbault <stephane.raimbault@gmail.com>, 2007-2008.
 # Christophe Benz <christophe.benz@gmail.com>, 2007.
 # Claude Paroz <claude@2xlibre.net>, 2007.
 #
@@ -26,9 +26,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-10 18:04+0200\n"
-"PO-Revision-Date: 2007-09-10 18:04+0200\n"
-"Last-Translator: Christophe Benz <christophe.benz@gmail.com>\n"
+"POT-Creation-Date: 2008-01-10 08:50+0100\n"
+"PO-Revision-Date: 2008-01-10 10:08+0100\n"
+"Last-Translator: Stéphane Raimbault <stephane.raimbault@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +74,7 @@ msgid "No Image"
 msgstr "Aucune image"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1064
+#: ../capplets/appearance/appearance-desktop.c:1068
 msgid "Images"
 msgstr "Images"
 
@@ -252,7 +252,7 @@ msgid "Personal Info"
 msgstr "Informations personnelles"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:34
-#: ../capplets/about-me/gnome-about-me-password.c:905
+#: ../capplets/about-me/gnome-about-me-password.c:930
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
 msgstr ""
@@ -382,7 +382,7 @@ msgstr "Impossible d'éteindre le canal d'ES backend_stdin : %s"
 msgid "Could not shutdown backend_stdout IO channel: %s"
 msgstr "Impossible d'éteindre le canal d'ES backend_stdout : %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:451
+#: ../capplets/about-me/gnome-about-me-password.c:409
 msgid "Authenticated!"
 msgstr "Authentifié !"
 
@@ -392,8 +392,8 @@ msgstr "Authentifié !"
 #.
 #. Update status message and auth state
 #. Authentication failure
-#: ../capplets/about-me/gnome-about-me-password.c:468
-#: ../capplets/about-me/gnome-about-me-password.c:541
+#: ../capplets/about-me/gnome-about-me-password.c:475
+#: ../capplets/about-me/gnome-about-me-password.c:548
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
@@ -401,73 +401,73 @@ msgstr ""
 "Votre mot de passe a été modifié depuis que vous vous êtes connecté ! "
 "Veuillez vous authentifier à nouveau."
 
-#: ../capplets/about-me/gnome-about-me-password.c:470
+#: ../capplets/about-me/gnome-about-me-password.c:477
 msgid "That password was incorrect."
 msgstr "Ce mot de passe est incorrect."
 
-#: ../capplets/about-me/gnome-about-me-password.c:516
+#: ../capplets/about-me/gnome-about-me-password.c:523
 msgid "Your password has been changed."
 msgstr "Votre mot de passe a été modifié."
 
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:526
+#: ../capplets/about-me/gnome-about-me-password.c:533
 #, c-format
 msgid "System error: %s."
 msgstr "Erreur système : %s."
 
-#: ../capplets/about-me/gnome-about-me-password.c:528
+#: ../capplets/about-me/gnome-about-me-password.c:535
 msgid "The password is too short."
 msgstr "Le mot de passe est trop court."
 
-#: ../capplets/about-me/gnome-about-me-password.c:530
-#: ../capplets/about-me/gnome-about-me-password.c:532
+#: ../capplets/about-me/gnome-about-me-password.c:537
+#: ../capplets/about-me/gnome-about-me-password.c:539
 msgid "The password is too simple."
 msgstr "Le mot de passe est trop simple."
 
-#: ../capplets/about-me/gnome-about-me-password.c:534
+#: ../capplets/about-me/gnome-about-me-password.c:541
 msgid "The old and new passwords are too similar."
 msgstr "L'ancien et le nouveau mot de passe sont trop similaires."
 
-#: ../capplets/about-me/gnome-about-me-password.c:536
+#: ../capplets/about-me/gnome-about-me-password.c:543
 msgid "The new password must contain numeric or special character(s)."
 msgstr ""
 "Le nouveau mot de passe doit contenir un ou plusieurs caractères spéciaux ou "
 "numériques."
 
-#: ../capplets/about-me/gnome-about-me-password.c:538
+#: ../capplets/about-me/gnome-about-me-password.c:545
 msgid "The old and new passwords are the same."
 msgstr "L'ancien et le nouveau mot de passe sont identiques."
 
-#: ../capplets/about-me/gnome-about-me-password.c:789
+#: ../capplets/about-me/gnome-about-me-password.c:814
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "Impossible de lancer %s : %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:792
+#: ../capplets/about-me/gnome-about-me-password.c:817
 msgid "Unable to launch backend"
 msgstr "Impossible de lancer le moteur"
 
-#: ../capplets/about-me/gnome-about-me-password.c:793
+#: ../capplets/about-me/gnome-about-me-password.c:818
 msgid "A system error has occurred"
 msgstr "Une erreur système est survenue"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:813
+#: ../capplets/about-me/gnome-about-me-password.c:838
 msgid "Checking password..."
 msgstr "Vérification du mot de passe..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:899
+#: ../capplets/about-me/gnome-about-me-password.c:924
 msgid "Click <b>Change password</b> to change your password."
 msgstr ""
 "Cliquez sur <b>Changer le mot de passe</b> pour modifier le mot de passe."
 
-#: ../capplets/about-me/gnome-about-me-password.c:902
+#: ../capplets/about-me/gnome-about-me-password.c:927
 msgid "Please type your password in the <b>New password</b> field."
 msgstr ""
 "Saisissez votre mot de passe dans le champ <b>Nouveau mot de passe</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:908
+#: ../capplets/about-me/gnome-about-me-password.c:933
 msgid "The two passwords are not equal."
 msgstr "Les deux mots de passe ne sont pas identiques."
 
@@ -746,11 +746,11 @@ msgstr "pixels/seconde"
 msgid "seconds"
 msgstr "secondes"
 
-#: ../capplets/appearance/appearance-desktop.c:1043
+#: ../capplets/appearance/appearance-desktop.c:1047
 msgid "Add Wallpaper"
 msgstr "Ajouter un papier peint"
 
-#: ../capplets/appearance/appearance-desktop.c:1068
+#: ../capplets/appearance/appearance-desktop.c:1072
 msgid "All files"
 msgstr "Tous les fichiers"
 
@@ -813,47 +813,48 @@ msgid "filename"
 msgstr "nom de fichier"
 
 # cf. http://bugzilla.gnome.org/show_bug.cgi?id=474648
-#: ../capplets/appearance/appearance-main.c:115
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/appearance/appearance-main.c:116
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
 "Indique le nom de la page à afficher (theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:117
 msgid "page"
 msgstr "page"
 
-#: ../capplets/appearance/appearance-main.c:123
+#: ../capplets/appearance/appearance-main.c:124
 msgid "[WALLPAPER...]"
 msgstr "[PAPIER PEINT...]"
 
 #: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/appearance/appearance-style.c:812
-#: ../capplets/common/gnome-theme-info.c:1050
-#: ../capplets/common/gnome-theme-info.c:1812
+#: ../capplets/appearance/appearance-style.c:818
+#: ../capplets/common/gnome-theme-info.c:1055
+#: ../capplets/common/gnome-theme-info.c:1817
 msgid "Default Pointer"
 msgstr "Pointeur par défaut"
 
-#: ../capplets/appearance/appearance-themes.c:507
+#: ../capplets/appearance/appearance-themes.c:515
 msgid "Apply Background"
 msgstr "Appliquer l'arrière-plan"
 
-#: ../capplets/appearance/appearance-themes.c:511
+#: ../capplets/appearance/appearance-themes.c:519
 msgid "Apply Font"
 msgstr "Appliquer la police"
 
-#: ../capplets/appearance/appearance-themes.c:536
+#: ../capplets/appearance/appearance-themes.c:544
 msgid "The current theme suggests a background and a font."
 msgstr "Ce thème propose un arrière-plan et une police."
 
-#: ../capplets/appearance/appearance-themes.c:541
+#: ../capplets/appearance/appearance-themes.c:549
 msgid "The current theme suggests a background."
 msgstr "Ce thème propose un arrière-plan."
 
-#: ../capplets/appearance/appearance-themes.c:546
+#: ../capplets/appearance/appearance-themes.c:554
 msgid "The current theme suggests a font."
 msgstr "Ce thème propose une police."
 
-#: ../capplets/appearance/appearance-themes.c:823
+#: ../capplets/appearance/appearance-themes.c:838
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1362,6 +1363,7 @@ msgid "Theme Packages"
 msgstr "Paquets de thèmes"
 
 #: ../capplets/appearance/theme-save.c:91
+#, c-format
 msgid "Theme name must be present"
 msgstr "Le nom du thème doit être indiqué"
 
@@ -1377,7 +1379,7 @@ msgstr "Éc_raser"
 msgid "Would you like to delete this theme?"
 msgstr "Voulez-vous supprimer ce thème ?"
 
-#: ../capplets/appearance/theme-util.c:90
+#: ../capplets/appearance/theme-util.c:95
 msgid "Theme cannot be deleted"
 msgstr "Le thème ne peut pas être supprimé"
 
@@ -1596,31 +1598,31 @@ msgstr "Sélectionnez une image."
 msgid "_Select"
 msgstr "_Sélectionner"
 
-#: ../capplets/common/gnome-theme-info.c:1813
+#: ../capplets/common/gnome-theme-info.c:1818
 msgid "Default Pointer - Current"
 msgstr "Pointeur par défaut - actuel"
 
-#: ../capplets/common/gnome-theme-info.c:1817
+#: ../capplets/common/gnome-theme-info.c:1822
 msgid "White Pointer"
 msgstr "Pointeur blanc"
 
-#: ../capplets/common/gnome-theme-info.c:1818
+#: ../capplets/common/gnome-theme-info.c:1823
 msgid "White Pointer - Current"
 msgstr "Pointeur blanc - actuel"
 
-#: ../capplets/common/gnome-theme-info.c:1822
+#: ../capplets/common/gnome-theme-info.c:1827
 msgid "Large Pointer"
 msgstr "Grand pointeur"
 
-#: ../capplets/common/gnome-theme-info.c:1823
+#: ../capplets/common/gnome-theme-info.c:1828
 msgid "Large Pointer - Current"
 msgstr "Grand pointeur - actuel"
 
-#: ../capplets/common/gnome-theme-info.c:1827
+#: ../capplets/common/gnome-theme-info.c:1832
 msgid "Large White Pointer - Current"
 msgstr "Grand pointeur blanc - actuel"
 
-#: ../capplets/common/gnome-theme-info.c:1828
+#: ../capplets/common/gnome-theme-info.c:1833
 msgid "Large White Pointer"
 msgstr "Grand pointeur blanc"
 
@@ -3198,7 +3200,7 @@ msgstr "Retirer des programmes au démarrage"
 msgid "Add to Startup Programs"
 msgstr "Ajouter aux programmes au démarrage"
 
-#: ../libslab/app-shell.c:747
+#: ../libslab/app-shell.c:750
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3209,7 +3211,7 @@ msgstr ""
 "\n"
 " Votre filtre « <b>%s</b> » n'a donné aucune réponse.</span>"
 
-#: ../libslab/app-shell.c:897
+#: ../libslab/app-shell.c:900
 msgid "Other"
 msgstr "Autre"
 
@@ -3240,6 +3242,7 @@ msgstr "Rechercher"
 
 #. make open with default action
 #: ../libslab/directory-tile.c:168
+#, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Ouvrir</b>"
 
@@ -3265,7 +3268,7 @@ msgstr "Effacer"
 
 #: ../libslab/document-tile.c:153
 msgid "Edited %m/%d/%Y"
-msgstr "Edité le %d/%m/%Y"
+msgstr "Modifié le %d/%m/%Y"
 
 #: ../libslab/document-tile.c:193
 #, c-format
@@ -3309,6 +3312,7 @@ msgid "Unexpected tag '%s' inside '%s'"
 msgstr "Balise « %s » inattendue à l'intérieur de « %s »"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
+#, c-format
 msgid "No valid bookmark file found in data dirs"
 msgstr ""
 "Aucun fichier de marque-pages valide n'a été trouvé dans les répertoires de "
@@ -3372,6 +3376,7 @@ msgid "<b>Open %s</b>"
 msgstr "<b>Ouvrir %s</b>"
 
 #: ../libslab/system-tile.c:141
+#, c-format
 msgid "Remove from System Items"
 msgstr "Enlever des éléments systèmes"
 
@@ -3769,6 +3774,7 @@ msgstr[0] "une%0d minute avant la prochaine pause"
 msgstr[1] "%d minutes avant la prochaine pause"
 
 #: ../typing-break/drwright.c:504
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "Moins d'une minute avant la prochaine pause"
 
