@@ -4,7 +4,10 @@ cappletname = mouse
 bin_PROGRAMS = gnome-mouse-properties
 
 gnome_mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_mouse_properties_SOURCES = gnome-mouse-properties.c
+gnome_mouse_properties_SOURCES =	\
+	gnome-mouse-properties.c	\
+	gnome-mouse-accessibility.c	\
+	gnome-mouse-accessibility.h
 
 @INTLTOOL_DESKTOP_RULE@
 

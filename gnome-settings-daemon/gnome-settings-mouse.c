@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 
+#include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
@@ -13,6 +14,7 @@
 #endif
 
 #include <gconf/gconf.h>
+#include <glib/gi18n.h>
 
 #include "gnome-settings-locate-pointer.h"
 #include "gnome-settings-module.h"
@@ -458,8 +460,40 @@ set_locate_pointer (gboolean locate_pointer)
 }
 
 static void
+set_mousetweaks_daemon (gboolean dwell_enabled, gboolean delay_enabled)
+{
+	GError *error = NULL;
+	gchar *comm;
+
+	comm = g_strdup_printf ("mousetweaks %s", 
+				(dwell_enabled || delay_enabled) ? "" : "-s");
+
+	if (!g_spawn_command_line_async (comm, &error)) {
+		if (error->code == G_SPAWN_ERROR_NOENT && (dwell_enabled || delay_enabled)) {
+			GtkWidget *dialog;
+
+			dialog = gtk_message_dialog_new (NULL, 0,
+							 GTK_MESSAGE_WARNING,
+							 GTK_BUTTONS_OK,
+							 _("Could not enable mouse accessibility features"));
+			gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+								  _("Mouse accessibility requires the mousetweaks "
+								    "daemon to be installed on your system."));
+			gtk_window_set_title (GTK_WINDOW (dialog), _("Mouse Preferences"));
+			gtk_window_set_icon_name (GTK_WINDOW (dialog), "gnome-dev-mouse-optical");
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+		}
+		g_error_free (error);
+	}
+	g_free (comm);
+}
+
+static void
 mouse_callback (GConfEntry *entry)
 {
+	GConfClient *client = gnome_settings_get_config_client ();
+
 	if (! strcmp (entry->key, "/desktop/gnome/peripherals/mouse/left_handed")) {
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			set_left_handed (gconf_value_get_bool (entry->value));
@@ -472,6 +506,16 @@ mouse_callback (GConfEntry *entry)
 	} else if (! strcmp (entry->key, "/desktop/gnome/peripherals/mouse/locate_pointer")) {
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			set_locate_pointer (gconf_value_get_bool (entry->value));
+	} else if (! strcmp (entry->key, "/desktop/gnome/accessibility/mouse/dwell_enable")) {
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			set_mousetweaks_daemon (gconf_value_get_bool (entry->value),
+						gconf_client_get_bool (client,
+						"/desktop/gnome/accessibility/mouse/delay_enable", NULL));
+	} else if (! strcmp (entry->key, "/desktop/gnome/accessibility/mouse/delay_enable")) {
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			set_mousetweaks_daemon (gconf_client_get_bool (client,
+						"/desktop/gnome/accessibility/mouse/dwell_enable", NULL),
+						gconf_value_get_bool (entry->value));
 	}
 }
 
@@ -479,6 +523,7 @@ static gboolean
 gnome_settings_module_mouse_initialize (GnomeSettingsModule *module, GConfClient *config_client)
 {
 	gnome_settings_register_config_callback ("/desktop/gnome/peripherals/mouse", mouse_callback);
+	gnome_settings_register_config_callback ("/desktop/gnome/accessibility/mouse", mouse_callback);
 
 	return TRUE;
 }
@@ -496,6 +541,10 @@ gnome_settings_module_mouse_start (GnomeSettingsModule *module)
 						    "/desktop/gnome/peripherals/mouse/motion_threshold", NULL));
 	set_locate_pointer (gconf_client_get_bool (client,
 						   "/desktop/gnome/peripherals/mouse/locate_pointer", NULL));
+	set_mousetweaks_daemon (gconf_client_get_bool (client,
+						       "/desktop/gnome/accessibility/mouse/dwell_enable", NULL),
+				gconf_client_get_bool (client,
+						       "/desktop/gnome/accessibility/mouse/delay_enable", NULL));
 
 	return TRUE;
 }

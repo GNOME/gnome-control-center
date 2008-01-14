@@ -1,3 +1,22 @@
+2008-01-14  Denis Washington  <denisw@svn.gnome.org>
+
+	Integrate mousetweaks settings into the mouse capplet. (Bug #503547)
+
+	* gnome-mouse-properties.glade:
+	Merge the previous "Buttons" and "Motion" tabs into one, and add a new
+	"Accessibility" tab with the mousetweaks preferences. Additionally, re-add
+	the "Locate Pointer" preference which disappeared in 2.20. (Bug #480457)
+
+	* gnome-mouse-properties.c:
+	Call setup function for the a11y tab, update for a small UI change regarding
+	handness preferences, and implement the locate-pointer checkbox.
+
+	* gnome-mouse-accessibility.[ch]:
+	Added.
+
+	* Makefile.am:
+	Add gnome-mouse-accessibility.c.
+
 2007-12-06  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-mouse-properties.glade: don't mark padding string as

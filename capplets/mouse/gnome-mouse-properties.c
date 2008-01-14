@@ -36,6 +36,7 @@
 #include "gconf-property-editor.h"
 #include "activate-settings-daemon.h"
 #include "capplet-stock-icons.h"
+#include "gnome-mouse-accessibility.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -332,41 +333,50 @@ event_box_button_press_event (GtkWidget   *widget,
 	return TRUE;
 }
 
-/* Callback issued when the user switches between left- and right-handed button
- * mappings. Updates the appropriate image on the dialog.
- */
-
-static void
-left_handed_toggle_cb (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, GtkWidget *image)
+static GConfValue *
+left_handed_from_gconf (GConfPropertyEditor *peditor,
+			const GConfValue *value)
 {
-	if (value && gconf_value_get_bool (value)) {
-		gtk_image_set_from_stock (GTK_IMAGE (image), MOUSE_LEFT_HANDED, mouse_capplet_icon_get_size ());
-	}
-	else {
-		gtk_image_set_from_stock (GTK_IMAGE (image), MOUSE_RIGHT_HANDED, mouse_capplet_icon_get_size ());
-	}
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+
+	gconf_value_set_int (new_value, gconf_value_get_bool (value));
+
+	return new_value;
+}
+
+static GConfValue *
+left_handed_to_gconf (GConfPropertyEditor *peditor,
+		      const GConfValue *value)
+{
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_BOOL);
+
+	gconf_value_set_bool (new_value, gconf_value_get_int (value) == 1);
+
+	return new_value;
 }
 
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
+	GtkRadioButton    *radio;
 	GObject           *peditor;
-	GConfValue        *value;
-	gchar             *message;
 
-	GConfClient       *client = gconf_client_get_default ();
+	/* Orientation radio buttons */
+	radio = GTK_RADIO_BUTTON (WID ("left_handed_radio"));
+	peditor = gconf_peditor_new_select_radio
+		(changeset, "/desktop/gnome/peripherals/mouse/left_handed", gtk_radio_button_get_group (radio),
+		 "conv-to-widget-cb", left_handed_from_gconf,
+		 "conv-from-widget-cb", left_handed_to_gconf,
+		 NULL);
 
-	/* Buttons page */
-	/* Left-handed toggle */
+	/* Locate pointer toggle */
 	peditor = gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/peripherals/mouse/left_handed", WID ("left_handed_toggle"), NULL);
-	g_signal_connect (peditor, "value-changed", (GCallback) left_handed_toggle_cb, WID ("orientation_image"));
-
-	/* Make sure the image gets initialized correctly */
-	value = gconf_client_get (client, "/desktop/gnome/peripherals/mouse/left_handed", NULL);
-	left_handed_toggle_cb (GCONF_PROPERTY_EDITOR (peditor), NULL, value, WID ("orientation_image"));
-	gconf_value_free (value);
+		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer", WID ("locate_pointer_toggle"), NULL);
 
 	/* Double-click time */
 	peditor = gconf_peditor_new_numeric_range
@@ -380,12 +390,6 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
 			  G_CALLBACK (event_box_button_press_event), changeset);
 
-	/* set the timeout value  label with correct value of timeout */
-	message = g_strdup_printf (ngettext ("%d millisecond", "%d milliseconds", (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale")))), (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale"))));
-	gtk_label_set_label ((GtkLabel*) WID ("delay_label"), message);
-	g_free (message);
-
-        /* Motion page */
 	/* speed */
       	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/motion_acceleration", WID ("accel_scale"),
@@ -474,12 +478,12 @@ main (int argc, char **argv)
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	g_object_unref (client);
 
 	dialog = create_dialog ();
 
 	if (dialog) {
 		setup_dialog (dialog, NULL);
+		setup_accessibility (dialog, client);
 
 		dialog_win = WID ("mouse_properties_dialog");
 		g_signal_connect (dialog_win, "response",
@@ -493,6 +497,7 @@ main (int argc, char **argv)
 		g_object_unref (dialog);
 	}
 
+	g_object_unref (client);
 	g_object_unref (program);
 
 	return 0;
