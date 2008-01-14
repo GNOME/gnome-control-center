@@ -194,65 +194,50 @@
                             <property name="column_spacing">12</property>
                             <property name="row_spacing">6</property>
                             <child>
-                              <widget class="GtkLabel" id="acceleration_label">
+                              <widget class="GtkLabel" id="low_label">
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Acceleration:</property>
-                                <property name="use_underline">True</property>
-                                <property name="justify">GTK_JUSTIFY_CENTER</property>
-                                <property name="mnemonic_widget">accel_scale</property>
-                              </widget>
-                              <packing>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="sensitivity_label">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Sensitivity:</property>
-                                <property name="use_underline">True</property>
-                                <property name="justify">GTK_JUSTIFY_CENTER</property>
-                                <property name="mnemonic_widget">sensitivity_scale</property>
-                              </widget>
-                              <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="fast_label">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Fast&lt;/i&gt;&lt;/small&gt;</property>
+                                <property name="xalign">1</property>
+                                <property name="label" translatable="yes" comments="low sensitivity">&lt;small&gt;&lt;i&gt;Low&lt;/i&gt;&lt;/small&gt;</property>
                                 <property name="use_markup">True</property>
                                 <property name="justify">GTK_JUSTIFY_CENTER</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">3</property>
-                                <property name="right_attach">4</property>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="slow_label">
+                                <property name="visible">True</property>
+                                <property name="xalign">1</property>
+                                <property name="label" translatable="yes" comments="slow acceleration">&lt;small&gt;&lt;i&gt;Slow&lt;/i&gt;&lt;/small&gt;</property>
+                                <property name="use_markup">True</property>
+                                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="high_label">
+                              <widget class="GtkHScale" id="accel_scale">
                                 <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;High&lt;/i&gt;&lt;/small&gt;</property>
-                                <property name="use_markup">True</property>
-                                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                <property name="can_focus">True</property>
+                                <property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
+                                <property name="adjustment">6 1 10 1 1 0</property>
+                                <property name="draw_value">False</property>
+                                <property name="value_pos">GTK_POS_RIGHT</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">3</property>
-                                <property name="right_attach">4</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -273,50 +258,65 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkHScale" id="accel_scale">
+                              <widget class="GtkLabel" id="high_label">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
-                                <property name="adjustment">6 1 10 1 1 0</property>
-                                <property name="draw_value">False</property>
-                                <property name="value_pos">GTK_POS_RIGHT</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="y_options">GTK_FILL</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="slow_label">
-                                <property name="visible">True</property>
-                                <property name="xalign">1</property>
-                                <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Slow&lt;/i&gt;&lt;/small&gt;</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes" comments="high sensitivity">&lt;small&gt;&lt;i&gt;High&lt;/i&gt;&lt;/small&gt;</property>
                                 <property name="use_markup">True</property>
                                 <property name="justify">GTK_JUSTIFY_CENTER</property>
                               </widget>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="low_label">
-                                <property name="visible">True</property>
-                                <property name="xalign">1</property>
-                                <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Low&lt;/i&gt;&lt;/small&gt;</property>
-                                <property name="use_markup">True</property>
-                                <property name="justify">GTK_JUSTIFY_CENTER</property>
-                              </widget>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
+                                <property name="left_attach">3</property>
+                                <property name="right_attach">4</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
                                 <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="fast_label">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes" comments="fast acceleration">&lt;small&gt;&lt;i&gt;Fast&lt;/i&gt;&lt;/small&gt;</property>
+                                <property name="use_markup">True</property>
+                                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="right_attach">4</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="sensitivity_label">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">_Sensitivity:</property>
+                                <property name="use_underline">True</property>
+                                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                <property name="mnemonic_widget">sensitivity_scale</property>
+                              </widget>
+                              <packing>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options">GTK_FILL</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="acceleration_label">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">_Acceleration:</property>
+                                <property name="use_underline">True</property>
+                                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                <property name="mnemonic_widget">accel_scale</property>
+                              </widget>
+                              <packing>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                           </widget>
@@ -395,7 +395,7 @@
                                         <property name="visible">True</property>
                                         <property name="xalign">1</property>
                                         <property name="xpad">10</property>
-                                        <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Small&lt;/i&gt;&lt;/small&gt;</property>
+                                        <property name="label" translatable="yes" comments="small threshold">&lt;small&gt;&lt;i&gt;Small&lt;/i&gt;&lt;/small&gt;</property>
                                         <property name="use_markup">True</property>
                                       </widget>
                                       <packing>
@@ -423,7 +423,7 @@
                                       <widget class="GtkLabel" id="large_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Large&lt;/i&gt;&lt;/small&gt;</property>
+                                        <property name="label" translatable="yes" comments="large threshold">&lt;small&gt;&lt;i&gt;Large&lt;/i&gt;&lt;/small&gt;</property>
                                         <property name="use_markup">True</property>
                                       </widget>
                                       <packing>
@@ -702,7 +702,7 @@
                                         <property name="visible">True</property>
                                         <property name="xalign">1</property>
                                         <property name="xpad">10</property>
-                                        <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Short&lt;/i&gt;&lt;/small&gt;</property>
+                                        <property name="label" translatable="yes" comments="short delay">&lt;small&gt;&lt;i&gt;Short&lt;/i&gt;&lt;/small&gt;</property>
                                         <property name="use_markup">True</property>
                                       </widget>
                                       <packing>
@@ -729,7 +729,7 @@
                                       <widget class="GtkLabel" id="blink_fast_label3">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Long&lt;/i&gt;&lt;/small&gt;</property>
+                                        <property name="label" translatable="yes" comments="long delay">&lt;small&gt;&lt;i&gt;Long&lt;/i&gt;&lt;/small&gt;</property>
                                         <property name="use_markup">True</property>
                                       </widget>
                                       <packing>
@@ -773,7 +773,7 @@
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Dwell Click&lt;/b&gt;</property>
+                        <property name="label" translatable="yes" comments="Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)">&lt;b&gt;Dwell Click&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
                     </child>
@@ -834,65 +834,50 @@
                                         <property name="column_spacing">12</property>
                                         <property name="row_spacing">6</property>
                                         <child>
-                                          <widget class="GtkLabel" id="acceleration_label2">
+                                          <widget class="GtkLabel" id="low_label2">
                                             <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">D_elay:</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="justify">GTK_JUSTIFY_CENTER</property>
-                                            <property name="mnemonic_widget">dwell_time</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="x_options">GTK_FILL</property>
-                                            <property name="y_options">GTK_FILL</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="threshold_label2">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">_Motion Threshold:</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="justify">GTK_JUSTIFY_CENTER</property>
-                                            <property name="mnemonic_widget">threshold</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
-                                            <property name="x_options">GTK_FILL</property>
-                                            <property name="y_options">GTK_FILL</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="fast_label2">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Long&lt;/i&gt;&lt;/small&gt;</property>
+                                            <property name="xalign">1</property>
+                                            <property name="label" translatable="yes" comments="small threshold">&lt;small&gt;&lt;i&gt;Small&lt;/i&gt;&lt;/small&gt;</property>
                                             <property name="use_markup">True</property>
                                             <property name="justify">GTK_JUSTIFY_CENTER</property>
                                           </widget>
                                           <packing>
-                                            <property name="left_attach">3</property>
-                                            <property name="right_attach">4</property>
+                                            <property name="left_attach">1</property>
+                                            <property name="right_attach">2</property>
+                                            <property name="top_attach">1</property>
+                                            <property name="bottom_attach">2</property>
+                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="y_options"></property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkLabel" id="slow_label2">
+                                            <property name="visible">True</property>
+                                            <property name="xalign">1</property>
+                                            <property name="label" translatable="yes" comments="short delay">&lt;small&gt;&lt;i&gt;Short&lt;/i&gt;&lt;/small&gt;</property>
+                                            <property name="use_markup">True</property>
+                                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="right_attach">2</property>
                                             <property name="x_options">GTK_FILL</property>
                                             <property name="y_options"></property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkLabel" id="high_label2">
+                                          <widget class="GtkHScale" id="dwell_time">
                                             <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;High&lt;/i&gt;&lt;/small&gt;</property>
-                                            <property name="use_markup">True</property>
-                                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
+                                            <property name="adjustment">1.2 0.5 3 0.10000000000000001 0.10000000000000001 0</property>
+                                            <property name="draw_value">False</property>
+                                            <property name="value_pos">GTK_POS_RIGHT</property>
                                           </widget>
                                           <packing>
-                                            <property name="left_attach">3</property>
-                                            <property name="right_attach">4</property>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
-                                            <property name="x_options">GTK_FILL</property>
-                                            <property name="y_options"></property>
+                                            <property name="left_attach">2</property>
+                                            <property name="right_attach">3</property>
+                                            <property name="y_options">GTK_FILL</property>
                                           </packing>
                                         </child>
                                         <child>
@@ -913,50 +898,65 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkHScale" id="dwell_time">
+                                          <widget class="GtkLabel" id="high_label2">
                                             <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
-                                            <property name="adjustment">1.2 0.5 3 0.10000000000000001 0.10000000000000001 0</property>
-                                            <property name="draw_value">False</property>
-                                            <property name="value_pos">GTK_POS_RIGHT</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="left_attach">2</property>
-                                            <property name="right_attach">3</property>
-                                            <property name="y_options">GTK_FILL</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="slow_label2">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">1</property>
-                                            <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Short&lt;/i&gt;&lt;/small&gt;</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes" comments="large threshold">&lt;small&gt;&lt;i&gt;Large&lt;/i&gt;&lt;/small&gt;</property>
                                             <property name="use_markup">True</property>
                                             <property name="justify">GTK_JUSTIFY_CENTER</property>
                                           </widget>
                                           <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="right_attach">2</property>
-                                            <property name="x_options">GTK_FILL</property>
-                                            <property name="y_options"></property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="low_label2">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">1</property>
-                                            <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Low&lt;/i&gt;&lt;/small&gt;</property>
-                                            <property name="use_markup">True</property>
-                                            <property name="justify">GTK_JUSTIFY_CENTER</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="right_attach">2</property>
+                                            <property name="left_attach">3</property>
+                                            <property name="right_attach">4</property>
                                             <property name="top_attach">1</property>
                                             <property name="bottom_attach">2</property>
                                             <property name="x_options">GTK_FILL</property>
                                             <property name="y_options"></property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkLabel" id="fast_label2">
+                                            <property name="visible">True</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes" comments="long delay">&lt;small&gt;&lt;i&gt;Long&lt;/i&gt;&lt;/small&gt;</property>
+                                            <property name="use_markup">True</property>
+                                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="left_attach">3</property>
+                                            <property name="right_attach">4</property>
+                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="y_options"></property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkLabel" id="threshold_label2">
+                                            <property name="visible">True</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">_Motion Threshold:</property>
+                                            <property name="use_underline">True</property>
+                                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                            <property name="mnemonic_widget">threshold</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="top_attach">1</property>
+                                            <property name="bottom_attach">2</property>
+                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="y_options">GTK_FILL</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkLabel" id="acceleration_label2">
+                                            <property name="visible">True</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">D_elay:</property>
+                                            <property name="use_underline">True</property>
+                                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                            <property name="mnemonic_widget">dwell_time</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="x_options">GTK_FILL</property>
+                                            <property name="y_options">GTK_FILL</property>
                                           </packing>
                                         </child>
                                       </widget>
@@ -1039,7 +1039,7 @@
                                                                 <property name="visible">True</property>
                                                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                                                 <property name="xalign">0</property>
-                                                                <property name="label" translatable="yes">&lt;i&gt;You can also use the Dwell Click panel applet to choose the click type.&lt;/i&gt;</property>
+                                                                <property name="label" translatable="yes" comments="Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)">&lt;i&gt;You can also use the Dwell Click panel applet to choose the click type.&lt;/i&gt;</property>
                                                                 <property name="use_markup">True</property>
                                                                 <property name="wrap">True</property>
                                                               </widget>
@@ -1115,79 +1115,15 @@
                                                         <property name="column_spacing">12</property>
                                                         <property name="row_spacing">6</property>
                                                         <child>
-                                                          <widget class="GtkComboBox" id="dwell_gest_secondary">
-                                                            <property name="visible">True</property>
-                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                                          </widget>
-                                                          <packing>
-                                                            <property name="left_attach">1</property>
-                                                            <property name="right_attach">2</property>
-                                                            <property name="top_attach">3</property>
-                                                            <property name="bottom_attach">4</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <widget class="GtkComboBox" id="dwell_gest_drag">
-                                                            <property name="visible">True</property>
-                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                                          </widget>
-                                                          <packing>
-                                                            <property name="left_attach">1</property>
-                                                            <property name="right_attach">2</property>
-                                                            <property name="top_attach">2</property>
-                                                            <property name="bottom_attach">3</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <widget class="GtkComboBox" id="dwell_gest_double">
-                                                            <property name="visible">True</property>
-                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                                          </widget>
-                                                          <packing>
-                                                            <property name="left_attach">1</property>
-                                                            <property name="right_attach">2</property>
-                                                            <property name="top_attach">1</property>
-                                                            <property name="bottom_attach">2</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <widget class="GtkComboBox" id="dwell_gest_single">
-                                                            <property name="visible">True</property>
-                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                                          </widget>
-                                                          <packing>
-                                                            <property name="left_attach">1</property>
-                                                            <property name="right_attach">2</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <widget class="GtkLabel" id="label15">
+                                                          <widget class="GtkLabel" id="label10">
                                                             <property name="visible">True</property>
                                                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                                             <property name="xalign">0</property>
-                                                            <property name="label" translatable="yes">Seco_ndary click:</property>
+                                                            <property name="label" translatable="yes">_Single click:</property>
                                                             <property name="use_underline">True</property>
-                                                            <property name="mnemonic_widget">dwell_gest_secondary</property>
+                                                            <property name="mnemonic_widget">dwell_gest_single</property>
                                                           </widget>
                                                           <packing>
-                                                            <property name="top_attach">3</property>
-                                                            <property name="bottom_attach">4</property>
-                                                            <property name="x_options">GTK_FILL</property>
-                                                            <property name="y_options">GTK_FILL</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <widget class="GtkLabel" id="label13">
-                                                            <property name="visible">True</property>
-                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                                            <property name="xalign">0</property>
-                                                            <property name="label" translatable="yes">D_rag click:</property>
-                                                            <property name="use_underline">True</property>
-                                                            <property name="mnemonic_widget">dwell_gest_drag</property>
-                                                          </widget>
-                                                          <packing>
-                                                            <property name="top_attach">2</property>
-                                                            <property name="bottom_attach">3</property>
                                                             <property name="x_options">GTK_FILL</property>
                                                             <property name="y_options">GTK_FILL</property>
                                                           </packing>
@@ -1209,17 +1145,81 @@
                                                           </packing>
                                                         </child>
                                                         <child>
-                                                          <widget class="GtkLabel" id="label10">
+                                                          <widget class="GtkLabel" id="label13">
                                                             <property name="visible">True</property>
                                                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                                             <property name="xalign">0</property>
-                                                            <property name="label" translatable="yes">_Single click:</property>
+                                                            <property name="label" translatable="yes" comments="click to initiate drag-and-drop (like normally click and hold)">D_rag click:</property>
                                                             <property name="use_underline">True</property>
-                                                            <property name="mnemonic_widget">dwell_gest_single</property>
+                                                            <property name="mnemonic_widget">dwell_gest_drag</property>
                                                           </widget>
                                                           <packing>
+                                                            <property name="top_attach">2</property>
+                                                            <property name="bottom_attach">3</property>
                                                             <property name="x_options">GTK_FILL</property>
                                                             <property name="y_options">GTK_FILL</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <widget class="GtkLabel" id="label15">
+                                                            <property name="visible">True</property>
+                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                                            <property name="xalign">0</property>
+                                                            <property name="label" translatable="yes">Seco_ndary click:</property>
+                                                            <property name="use_underline">True</property>
+                                                            <property name="mnemonic_widget">dwell_gest_secondary</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="top_attach">3</property>
+                                                            <property name="bottom_attach">4</property>
+                                                            <property name="x_options">GTK_FILL</property>
+                                                            <property name="y_options">GTK_FILL</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <widget class="GtkComboBox" id="dwell_gest_single">
+                                                            <property name="visible">True</property>
+                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="left_attach">1</property>
+                                                            <property name="right_attach">2</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <widget class="GtkComboBox" id="dwell_gest_double">
+                                                            <property name="visible">True</property>
+                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="left_attach">1</property>
+                                                            <property name="right_attach">2</property>
+                                                            <property name="top_attach">1</property>
+                                                            <property name="bottom_attach">2</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <widget class="GtkComboBox" id="dwell_gest_drag">
+                                                            <property name="visible">True</property>
+                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="left_attach">1</property>
+                                                            <property name="right_attach">2</property>
+                                                            <property name="top_attach">2</property>
+                                                            <property name="bottom_attach">3</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <widget class="GtkComboBox" id="dwell_gest_secondary">
+                                                            <property name="visible">True</property>
+                                                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                                          </widget>
+                                                          <packing>
+                                                            <property name="left_attach">1</property>
+                                                            <property name="right_attach">2</property>
+                                                            <property name="top_attach">3</property>
+                                                            <property name="bottom_attach">4</property>
                                                           </packing>
                                                         </child>
                                                       </widget>
