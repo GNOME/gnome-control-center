@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-03 03:33+0000\n"
-"PO-Revision-Date: 2008-01-03 07:01+0100\n"
+"POT-Creation-Date: 2008-01-14 16:35+0000\n"
+"PO-Revision-Date: 2008-01-14 18:04+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <<gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -704,7 +704,6 @@ msgid "characters/second"
 msgstr "caracteres/segundo"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "milliseconds"
 msgstr "milisegundos"
 
@@ -1677,6 +1676,7 @@ msgstr "<b>Navegador web</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Accessibility"
 msgstr "Accesibilidad"
 
@@ -2202,18 +2202,22 @@ msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>B_loquear la pantalla para forzar un descanso de escritura</b>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Rápida</i></small>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Largo</i></small>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Corto</i></small>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lenta</i></small>"
 
@@ -2270,10 +2274,12 @@ msgid "Cursor _blinks in text fields"
 msgstr "El cursor pa_rpadea en los campos de texto"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Cursor blinks speed"
 msgstr "Velocidad de parpadeo del cursor"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "D_elay:"
 msgstr "R_etardo:"
 
@@ -2290,6 +2296,7 @@ msgid "Duration of work before forcing a break"
 msgstr "Duración del trabajo antes de forzar un descanso"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "General"
 msgstr "General"
 
@@ -2355,13 +2362,16 @@ msgstr "_Permitir controlar el puntero usando el teclado"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
 msgid "_Allow to turn accessibility features on and off from the keyboard"
-msgstr "_Permitir activar y desactivar las características de accesibilidad desde el teclado"
+msgstr ""
+"_Permitir activar y desactivar las características de accesibilidad desde el "
+"teclado"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
 msgstr "D_uración del intervalo de descanso:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "_Delay:"
 msgstr "_Retraso:"
 
@@ -2477,9 +2487,7 @@ msgstr "Región:"
 msgid "Selected languages:"
 msgstr "Idiomas seleccionados:"
 
-#. set the timeout value  label with correct value of timeout
-#: ../capplets/mouse/gnome-mouse-properties.c:126
-#: ../capplets/mouse/gnome-mouse-properties.c:384
+#: ../capplets/mouse/gnome-mouse-properties.c:127
 #, c-format
 msgid "%d millisecond"
 msgid_plural "%d milliseconds"
@@ -2487,7 +2495,7 @@ msgstr[0] "%d milisegundo"
 msgstr[1] "%d milisegundos"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "<b>Double-Click Timeout </b>"
+msgid "<b>Double-Click Timeout</b>"
 msgstr "<b>Tiempo de espera de la pulsación doble</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
@@ -2495,68 +2503,124 @@ msgid "<b>Drag and Drop</b>"
 msgstr "<b>Arrastrar y soltar</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:3
+msgid "<b>Dwell Click</b>"
+msgstr ""
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
+msgid "<b>Locate Pointer</b>"
+msgstr "<b>Localizar el puntero</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Orientación del ratón</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Speed</b>"
-msgstr "<b>Velocidad</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Fast</i>"
-msgstr "<i>Rápida</i>"
-
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>High</i>"
-msgstr "<i>Alta</i>"
+msgid "<b>Pointer Speed</b>"
+msgstr "<b>Velocidad del puntero</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Large</i>"
-msgstr "<i>Grande</i>"
+msgid "<b>Simulated Secondary Click</b>"
+msgstr "<b>Pulsación secundaria simulada</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:8
-msgid "<i>Low</i>"
-msgstr "<i>Baja</i>"
+msgid ""
+"<i>To test your double-click settings, try to double-click on the light bulb."
+"</i>"
+msgstr "<i>Para probar sus ajustes de pulsación doble, pruebe a pulsar dos veces sobre la bombilla.</i>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:9
-msgid "<i>Slow</i>"
-msgstr "<i>Lenta</i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
-msgid "<i>Small</i>"
-msgstr "<i>Pequeño</i>"
+msgid ""
+"<i>You can also use the Dwell Click panel applet to choose the click type.</"
+"i>"
+msgstr ""
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:11
-msgid "Buttons"
-msgstr "Botones"
+msgid "<small><i>High</i></small>"
+msgstr "<small><i>Alta</i></small>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:12
-msgid "Motion"
-msgstr "Movimiento"
+msgid "<small><i>Large</i></small>"
+msgstr "<small><i>Larga</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+msgid "<small><i>Low</i></small>"
+msgstr "<small><i>Baja</i></small>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "<small><i>Small</i></small>"
+msgstr "<small><i>Pequeña</i></small>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Choose type of click _beforehand"
+msgstr "Elija el tipo de pulsación de an_temano"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "Choose type of click with mo_use gestures"
+msgstr "Elija el tipo de pulsación con _gestos del ratón"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+msgid "D_ouble click:"
+msgstr "Pulsación d_oble:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+msgid "D_rag click:"
+msgstr ""
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "Mouse Preferences"
 msgstr "Preferencias del ratón"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "Seco_ndary click:"
+msgstr "Pulsación secu_ndaria:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+msgid "Sh_ow position of pointer when the Control key is pressed"
+msgstr "M_ostrar la posición del puntero al pulsar la tecla Control"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:29
+msgid "Show click type _window"
+msgstr "Mostrar la _ventana del tipo de pulsación"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:30
+msgid "Thr_eshold:"
+msgstr "_Umbral:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "_Acceleration:"
 msgstr "_Aceleración:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "_Left-handed mouse"
-msgstr "Ratón para _zurdos"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:33
+msgid "_Initiate click when stopping pointer movement"
+msgstr "_Iniciar la pulsación cuando se pare el movimiento del puntero"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:34
+msgid "_Left-handed"
+msgstr "_Zurdo"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:35
+msgid "_Motion Threshold:"
+msgstr "Umbral de _movimiento:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:36
+msgid "_Right-handed"
+msgstr "_Diestro"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:37
 msgid "_Sensitivity:"
 msgstr "_Sensibilidad:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
-msgid "_Threshold:"
-msgstr "_Umbral:"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:38
+msgid "_Single click:"
+msgstr "Pulsación _simple:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:39
 msgid "_Timeout:"
 msgstr "_Tiempo de espera:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:40
+msgid "_Trigger secondary click by holding down the primary button"
+msgstr "D_isparar la pulsación secundaria al mantener pulsado el botón primario"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
@@ -3062,7 +3126,7 @@ msgstr ""
 "Intente usar una configuración más simple o usar una versión más reciente de "
 "XFree."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:187
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
@@ -3071,7 +3135,7 @@ msgstr ""
 "predeterminado del terminal está configurado y apunta a una aplicación "
 "válida."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:215
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3080,7 +3144,7 @@ msgstr ""
 "No se pudo ejecutar el comando: %s\n"
 "Compruebe que es un comando válido."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:230
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
