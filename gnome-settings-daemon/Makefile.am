@@ -67,12 +67,12 @@ gnome_settings_daemon_SOURCES =	\
 #	$(AccessX_files)		
 
 gnome_settings_daemon_LDADD = \
-	$(DBUS_LIBS)						\
-	$(LIBGNOMEKBD_LIBS)						\
 	$(top_builddir)/libbackground/libbackground.la			\
 	$(top_builddir)/libsounds/libsounds.a				\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la 	\
 	$(top_builddir)/gnome-settings-daemon/actions/libacme.la	\
+	$(DBUS_LIBS)						\
+	$(LIBGNOMEKBD_LIBS)						\
 	$(GNOME_SETTINGS_DAEMON_LIBS)					\
 	$(XF86MISC_LIBS) $(GST_LIBS)
 

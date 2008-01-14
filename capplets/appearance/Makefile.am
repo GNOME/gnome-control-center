@@ -38,11 +38,11 @@ gnome_appearance_properties_SOURCES = \
 	wp-cellrenderer.h
 
 gnome_appearance_properties_LDADD = \
+	$(top_builddir)/libwindow-settings/libgnome-window-settings.la \
+	$(top_builddir)/capplets/common/libcommon.la \
 	$(GNOMECC_CAPPLETS_LIBS) \
 	$(FONT_CAPPLET_LIBS) \
-	$(METACITY_LIBS) \
-	$(top_builddir)/libwindow-settings/libgnome-window-settings.la \
-	$(top_builddir)/capplets/common/libcommon.la
+	$(METACITY_LIBS)
 gnome_appearance_properties_LDFLAGS = -export-dynamic
 
 gladedir = $(pkgdatadir)/glade

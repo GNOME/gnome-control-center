@@ -8,7 +8,7 @@ vfsmodule_LTLIBRARIES = libfont-method.la
 
 bin_PROGRAMS = gnome-thumbnail-font gnome-font-viewer
 
-libfont_method_la_LDFLAGS = -module -avoid-version \
+libfont_method_la_LDFLAGS = -module -avoid-version -no-undefined \
   -export-symbols-regex 'vfs_module_.*'
 libfont_method_la_LIBADD = $(FONT_METHOD_LIBS)
 libfont_method_la_SOURCES = font-method.c
@@ -21,7 +21,7 @@ gnome_font_viewer_SOURCES = ftstream-vfs.c font-view.c
 
 nautilusdir = $(libdir)/nautilus/extensions-2.0
 nautilus_LTLIBRARIES = libnautilus-fontilus.la
-libnautilus_fontilus_la_LDFLAGS = -module -avoid-version \
+libnautilus_fontilus_la_LDFLAGS = -module -avoid-version -no-undefined \
   -export-symbols-regex 'nautilus_module_.*'
 libnautilus_fontilus_la_LIBADD = $(FONT_CONTEXT_MENU_LIBS)
 libnautilus_fontilus_la_SOURCES = fontilus-context-menu.c

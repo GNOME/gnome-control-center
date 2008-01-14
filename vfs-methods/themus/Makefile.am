@@ -16,7 +16,7 @@ vfsmodule_LTLIBRARIES = libtheme-method.la
 nautilusdir = $(libdir)/nautilus/extensions-2.0
 nautilus_LTLIBRARIES = libnautilus-themus.la
 
-libtheme_method_la_LDFLAGS = -module -avoid-version \
+libtheme_method_la_LDFLAGS = -module -avoid-version -no-undefined \
   -export-symbols-regex 'vfs_module_.*'
 libtheme_method_la_LIBADD = $(THEME_METHOD_LIBS) \
   $(top_builddir)/capplets/common/libcommon.la $(XCURSOR_LIBS)
@@ -34,7 +34,7 @@ themus_theme_applier_SOURCES = \
 
 libnautilus_themus_la_LIBADD = $(THEMUS_COMPONENT_LIBS) \
   $(top_builddir)/capplets/common/libcommon.la $(XCURSOR_LIBS)
-libnautilus_themus_la_LDFLAGS = -module -avoid-version \
+libnautilus_themus_la_LDFLAGS = -module -avoid-version -no-undefined \
   -export-symbols-regex 'nautilus_module_.*'
 libnautilus_themus_la_SOURCES = \
 	themus-properties-view.c \

@@ -13,6 +13,7 @@ lib_LTLIBRARIES = libgnome-window-settings.la
 
 libgnome_window_settings_la_LDFLAGS = 	\
 	-export_dynamic			\
+	-no-undefined			\
         -version-info 1:0:0
 
 libgnome_window_settings_la_LIBADD = $(GNOMECC_LIBS)
@@ -36,7 +37,7 @@ EXTRA_DIST = 					\
 	gnome-window-settings-2.0.pc.in		\
 	ChangeLog
 
-wms_flags = -export_dynamic -avoid-version
+wms_flags = -export_dynamic -avoid-version -module -no-undefined
 wmsdir = $(WM_MODULE_DIR)
 
 wms_LTLIBRARIES =			\
