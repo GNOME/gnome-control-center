@@ -37,7 +37,7 @@ EXTRA_DIST = 					\
 	gnome-window-settings-2.0.pc.in		\
 	ChangeLog
 
-wms_flags = -export_dynamic -avoid-version -module -no-undefined
+wms_flags = -export_dynamic -avoid-version -module
 wmsdir = $(WM_MODULE_DIR)
 
 wms_LTLIBRARIES =			\

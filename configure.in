@@ -110,6 +110,7 @@ PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(METACITY, libmetacity-private)
 PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-2.0)
+PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
@@ -508,8 +509,6 @@ capplets/keybindings/gnome-keybindings.pc
 capplets/keybindings/keybinding.desktop.in
 capplets/keyboard/Makefile
 capplets/keyboard/keyboard.desktop.in
-capplets/localization/Makefile
-capplets/localization/localization.desktop.in
 capplets/mouse/Makefile
 capplets/mouse/gnome-settings-mouse.desktop.in
 capplets/network/Makefile
@@ -518,10 +517,6 @@ capplets/sound/Makefile
 capplets/sound/gnome-settings-sound.desktop.in
 capplets/windows/Makefile
 capplets/windows/window-properties.desktop.in
-gnome-settings-daemon/Makefile
-gnome-settings-daemon/actions/Makefile
-gnome-settings-daemon/gnome-settings-daemon.pc
-gnome-settings-daemon/xrdb/Makefile
 help/Makefile
 libbackground/Makefile
 libslab/Makefile

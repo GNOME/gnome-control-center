@@ -3,15 +3,17 @@ cappletname = keyboard
 
 bin_PROGRAMS = gnome-keyboard-properties
 
-gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c \
-                                    gnome-keyboard-properties-a11y.c \
-                                    gnome-keyboard-properties-xkb.c \
-                                    gnome-keyboard-properties-xkbmc.c \
-                                    gnome-keyboard-properties-xkblt.c \
-                                    gnome-keyboard-properties-xkbltadd.c \
-                                    gnome-keyboard-properties-xkbot.c \
-                                    gnome-keyboard-properties-xkbpv.c \
-                                    gnome-keyboard-properties-xkb.h
+gnome_keyboard_properties_SOURCES = \
+	gnome-keyboard-properties.c \
+	gnome-keyboard-properties-a11y.c \
+	gnome-keyboard-properties-a11y.h \
+	gnome-keyboard-properties-xkb.c \
+	gnome-keyboard-properties-xkbmc.c \
+	gnome-keyboard-properties-xkblt.c \
+	gnome-keyboard-properties-xkbltadd.c \
+	gnome-keyboard-properties-xkbot.c \
+	gnome-keyboard-properties-xkbpv.c \
+	gnome-keyboard-properties-xkb.h
 
 gnome_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBGNOMEKBDUI_LIBS)
 
