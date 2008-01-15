@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-03 22:33+0100\n"
-"PO-Revision-Date: 2008-01-03 22:39+0100\n"
+"POT-Creation-Date: 2008-01-15 01:59+0100\n"
+"PO-Revision-Date: 2008-01-15 02:06+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -684,7 +684,6 @@ msgid "characters/second"
 msgstr "tecken/sekund"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "milliseconds"
 msgstr "millisekunder"
 
@@ -1611,6 +1610,7 @@ msgstr "<b>Webbläsare</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "Tillgänglighet"
 
@@ -2107,19 +2107,27 @@ msgstr "<b>Klistriga tangenter</b>"
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lås skärmen för att tvinga fram paus i skrivandet</b>"
 
+#. fast acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Snabb</i></small>"
 
+#. long delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lång</i></small>"
 
+#. short delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kort</i></small>"
 
+#. slow acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Långsam</i></small>"
 
@@ -2176,10 +2184,12 @@ msgid "Cursor _blinks in text fields"
 msgstr "Markören _blinkar i textfält"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "Cursor blinks speed"
 msgstr "Hastighet för markörblinkning"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "D_elay:"
 msgstr "_Fördröjning:"
 
@@ -2196,6 +2206,7 @@ msgid "Duration of work before forcing a break"
 msgstr "Längd på arbete innan paus"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:36
 msgid "General"
 msgstr "Allmänt"
 
@@ -2264,6 +2275,7 @@ msgid "_Break interval lasts:"
 msgstr "_Pausen varar:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "_Fördröjning:"
 
@@ -2361,9 +2373,7 @@ msgstr "Språk och plats"
 msgid "Set your language and location preferences"
 msgstr "Inställningar för ditt språk och plats"
 
-#. set the timeout value  label with correct value of timeout
-#: ../capplets/mouse/gnome-mouse-properties.c:126
-#: ../capplets/mouse/gnome-mouse-properties.c:384
+#: ../capplets/mouse/gnome-mouse-properties.c:127
 #, c-format
 msgid "%d millisecond"
 msgid_plural "%d milliseconds"
@@ -2371,76 +2381,135 @@ msgstr[0] "%d millisekund"
 msgstr[1] "%d millisekunder"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "<b>Double-Click Timeout </b>"
+msgid "<b>Double-Click Timeout</b>"
 msgstr "<b>Tidsgräns för dubbelklick</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Drag and Drop</b>"
 msgstr "<b>Dra och släpp</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
+msgid "<b>Dwell Click</b>"
+msgstr "<b>Uppehållsklick</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
+msgid "<b>Locate Pointer</b>"
+msgstr "<b>Hitta pekare</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Musorientering</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Speed</b>"
-msgstr "<b>Hastighet</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Fast</i>"
-msgstr "<i>Snabb</i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>High</i>"
-msgstr "<i>Hög</i>"
-
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Large</i>"
-msgstr "<i>Stor</i>"
+msgid "<b>Pointer Speed</b>"
+msgstr "<b>Pekarhastighet</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:8
-msgid "<i>Low</i>"
-msgstr "<i>Låg</i>"
+msgid "<b>Simulated Secondary Click</b>"
+msgstr "<b>Simulerat sekundärklick</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:9
-msgid "<i>Slow</i>"
-msgstr "<i>Långsam</i>"
+msgid "<i>To test your double-click settings, try to double-click on the light bulb.</i>"
+msgstr "<i>Prova att dubbelklicka på glödlampan för att testa dina inställningar.</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
-msgid "<i>Small</i>"
-msgstr "<i>Liten</i>"
-
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:11
-msgid "Buttons"
-msgstr "Knappar"
+msgid "<i>You can also use the Dwell Click panel applet to choose the click type.</i>"
+msgstr "<i>Du kan även använda panelprogrammet för Uppehållsklick för att välja klicktypen.</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
-msgid "Motion"
-msgstr "Rörelse"
+#. high sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+msgid "<small><i>High</i></small>"
+msgstr "<small><i>Hög</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#. large threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "<small><i>Large</i></small>"
+msgstr "<small><i>Stor</i></small>"
+
+#. low sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "<small><i>Low</i></small>"
+msgstr "<small><i>Låg</i></small>"
+
+#. small threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "<small><i>Small</i></small>"
+msgstr "<small><i>Liten</i></small>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:29
+msgid "Choose type of click _beforehand"
+msgstr "Välj typ av _förhandsklick"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:30
+msgid "Choose type of click with mo_use gestures"
+msgstr "Välj typ av klick med m_usgester"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:33
+msgid "D_ouble click:"
+msgstr "D_ubbelklick:"
+
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:35
+msgid "D_rag click:"
+msgstr "D_ragklick:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:37
 msgid "Mouse Preferences"
 msgstr "Musinställningar"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:38
+msgid "Seco_ndary click:"
+msgstr "Seku_ndärklick:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:39
+msgid "Sh_ow position of pointer when the Control key is pressed"
+msgstr "V_isa position för pekare när Control-tangenten trycks ned"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:40
+msgid "Show click type _window"
+msgstr "Visa klicktyps_fönster"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:41
+msgid "Thr_eshold:"
+msgstr "Trös_kelvärde:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:42
 msgid "_Acceleration:"
 msgstr "_Acceleration:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "_Left-handed mouse"
-msgstr "_Vänsterhänt mus"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:44
+msgid "_Initiate click when stopping pointer movement"
+msgstr "_Initiera klick när pekaren stannar"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:45
+msgid "_Left-handed"
+msgstr "_Vänsterhänt"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:46
+msgid "_Motion Threshold:"
+msgstr "Tröskelvärde för _rörelse:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:47
+msgid "_Right-handed"
+msgstr "_Högerhänt"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:48
 msgid "_Sensitivity:"
 msgstr "_Känslighet:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
-msgid "_Threshold:"
-msgstr "_Tröskel:"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:49
+msgid "_Single click:"
+msgstr "_Enkelklick:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:50
 msgid "_Timeout:"
 msgstr "_Tidsgräns:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:51
+msgid "_Trigger secondary click by holding down the primary button"
+msgstr "_Aktivera sekundärklick genom att hålla ned primärknappen"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
@@ -2923,11 +2992,11 @@ msgstr ""
 "Det finns kända problem med komplexa XKB-konfigurationer.\n"
 "Försök att använda en enklare konfiguration eller använd en färskare version av XFree-programvara."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:187
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid "Could not get default terminal. Verify that your default terminal command is set and points to a valid application."
 msgstr "Kunde inte hitta standardterminalen. Verifiera att kommandot för din standardterminal är inställt och pekar på ett giltigt program."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:215
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2936,7 +3005,7 @@ msgstr ""
 "Kunde inte köra kommandot: %s\n"
 "Verifiera att det här är ett giltigt kommando."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:230
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3922,6 +3991,22 @@ msgstr "Använd tema"
 msgid "Sets the default theme"
 msgstr "Ställer in standardtemat"
 
+#~ msgid "<i>Fast</i>"
+#~ msgstr "<i>Snabb</i>"
+#~ msgid "<i>High</i>"
+#~ msgstr "<i>Hög</i>"
+#~ msgid "<i>Large</i>"
+#~ msgstr "<i>Stor</i>"
+#~ msgid "<i>Low</i>"
+#~ msgstr "<i>Låg</i>"
+#~ msgid "<i>Slow</i>"
+#~ msgstr "<i>Långsam</i>"
+#~ msgid "<i>Small</i>"
+#~ msgstr "<i>Liten</i>"
+#~ msgid "Buttons"
+#~ msgstr "Knappar"
+#~ msgid "Motion"
+#~ msgstr "Rörelse"
 #~ msgid "There was an error launching the keyboard tool: %s"
 #~ msgstr "Ett fel inträffade vid start av tangentbordsverktyget: %s"
 #~ msgid "_Accessibility"
