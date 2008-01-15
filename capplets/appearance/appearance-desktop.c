@@ -29,6 +29,7 @@
 #include <string.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-thumbnail.h>
+#include <libgnomeui/gnome-bg.h>
 
 typedef enum {
   GNOME_WP_SHADE_TYPE_SOLID,
@@ -112,6 +113,43 @@ get_selected_item (AppearanceData *data,
   return item;
 }
 
+static gboolean predicate (gpointer key, gpointer value, gpointer data)
+{
+  GnomeBG *bg = data;
+  GnomeWPItem *item = value;
+
+  return item->bg == bg;
+}
+
+static void on_item_changed (GnomeBG *bg, AppearanceData *data) {
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GtkTreePath *path;
+  GnomeWPItem *item;
+
+  item = g_hash_table_find (data->wp_hash, predicate, bg);
+
+  if (!item)
+    return;
+  
+  model = gtk_tree_row_reference_get_model (item->rowref);
+  path = gtk_tree_row_reference_get_path (item->rowref);
+
+  if (gtk_tree_model_get_iter (model, &iter, path)) {
+    g_signal_handlers_block_by_func (bg, G_CALLBACK (on_item_changed), data);
+      
+    GdkPixbuf *pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
+    if (pixbuf) {
+      gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
+                          0, pixbuf,
+                         -1);
+      g_object_unref (pixbuf);
+    }
+
+    g_signal_handlers_unblock_by_func (bg, G_CALLBACK (on_item_changed), data);
+  }
+}
+
 static void
 wp_props_load_wallpaper (gchar *key,
                          GnomeWPItem *item,
@@ -140,6 +178,7 @@ wp_props_load_wallpaper (gchar *key,
 
   path = gtk_tree_model_get_path (data->wp_model, &iter);
   item->rowref = gtk_tree_row_reference_new (data->wp_model, path);
+  g_signal_connect (item->bg, "changed", G_CALLBACK (on_item_changed), data);
   gtk_tree_path_free (path);
 }
 

@@ -40,7 +40,6 @@ struct _GnomeWPInfo {
 
 GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
 				 GnomeThumbnailFactory * thumbs);
-GnomeWPInfo * gnome_wp_info_dup (const GnomeWPInfo * info);
 void gnome_wp_info_free (GnomeWPInfo * info);
 
 #endif

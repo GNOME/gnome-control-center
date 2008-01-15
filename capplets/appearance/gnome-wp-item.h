@@ -24,6 +24,7 @@
 #include <libgnomeui/gnome-thumbnail.h>
 #include <gnome-wp-info.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <libgnomeui/gnome-bg.h>
 
 #ifndef _GNOME_WP_ITEM_H_
 #define _GNOME_WP_ITEM_H_
@@ -31,6 +32,8 @@
 typedef struct _GnomeWPItem GnomeWPItem;
 
 struct _GnomeWPItem {
+  GnomeBG *bg;
+    
   gchar * name;
   gchar * filename;
   gchar * description;
@@ -45,7 +48,6 @@ struct _GnomeWPItem {
   GdkColor * scolor;
 
   GnomeWPInfo * fileinfo;
-  GnomeWPInfo * uriinfo;
 
   /* Did the user remove us? */
   gboolean deleted;
@@ -59,10 +61,10 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 				 GHashTable * wallpapers,
 				 GnomeThumbnailFactory * thumbnails);
 void gnome_wp_item_free (GnomeWPItem * item);
-GnomeWPItem * gnome_wp_item_dup (GnomeWPItem * item);
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs);
 void gnome_wp_item_update_description (GnomeWPItem * item);
+void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);
 
 #endif
 

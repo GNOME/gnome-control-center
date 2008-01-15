@@ -231,7 +231,11 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	g_hash_table_insert (data->wp_hash, wp->filename, wp);
       } else {
 	gnome_wp_item_free (wp);
+        wp = NULL;
       }
+
+      if (wp)
+        gnome_wp_item_ensure_gnome_bg (wp);
     }
   }
   xmlFreeDoc (wplist);

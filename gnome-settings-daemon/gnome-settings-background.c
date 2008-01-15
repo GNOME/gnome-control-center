@@ -30,11 +30,13 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf.h>
+#include <libgnomeui/gnome-bg.h>
+#include <X11/Xatom.h>
+#include <string.h>
 
 #include "gnome-settings-module.h"
 
 #include "preferences.h"
-#include "applier.h"
 
 typedef struct _GnomeSettingsModuleBackground      GnomeSettingsModuleBackground;
 typedef struct _GnomeSettingsModuleBackgroundClass GnomeSettingsModuleBackgroundClass;
@@ -42,10 +44,12 @@ typedef struct _GnomeSettingsModuleBackgroundClass GnomeSettingsModuleBackground
 struct _GnomeSettingsModuleBackground {
 	GnomeSettingsModule parent;
 
-	BGApplier **bg_appliers;
 	BGPreferences *prefs;
-	guint applier_idle_id;
+        GnomeBG *bg;
+        guint timeout_id;
 };
+
+static gboolean nautilus_is_running (void);
 
 struct _GnomeSettingsModuleBackgroundClass {
 	GnomeSettingsModuleClass parent_class;
@@ -59,17 +63,101 @@ static gboolean gnome_settings_module_background_initialize (GnomeSettingsModule
 static gboolean gnome_settings_module_background_start (GnomeSettingsModule *module);
 
 static gboolean
-applier_idle (gpointer data)
+apply_prefs (gpointer data)
 {
 	GnomeSettingsModuleBackground *module;
-	int i;
 
 	module = (GnomeSettingsModuleBackground *) data;
 
-	for (i = 0; module->bg_appliers [i]; i++)
-		bg_applier_apply_prefs (module->bg_appliers [i], module->prefs);
-	module->applier_idle_id = 0;
+        if (!nautilus_is_running()) {
+                GdkDisplay *display;
+                int n_screens, i;
+                GnomeBGPlacement placement;
+                GnomeBGColorType color;
+                const char *uri;
+ 
+                display = gdk_display_get_default ();
+                n_screens = gdk_display_get_n_screens (display);
+ 
+                uri = module->prefs->wallpaper_filename;
+ 
+                placement = GNOME_BG_PLACEMENT_TILED;
+ 
+                switch (module->prefs->wallpaper_type) {
+                case WPTYPE_TILED:
+                        placement = GNOME_BG_PLACEMENT_TILED;
+                        break;
+                case WPTYPE_CENTERED:
+                        placement = GNOME_BG_PLACEMENT_CENTERED;
+                        break;
+                case WPTYPE_SCALED:
+                        placement = GNOME_BG_PLACEMENT_SCALED;
+                        break;
+                case WPTYPE_STRETCHED:
+                        placement = GNOME_BG_PLACEMENT_FILL_SCREEN;
+                        break;
+                case WPTYPE_ZOOM:
+                        placement = GNOME_BG_PLACEMENT_ZOOMED;
+                        break;
+                case WPTYPE_NONE:
+                case WPTYPE_UNSET:
+                        uri = NULL;
+                        break;
+                }
+ 
+                switch (module->prefs->orientation) {
+                case ORIENTATION_SOLID:
+                        color = GNOME_BG_COLOR_SOLID;
+                        break;
+                case ORIENTATION_HORIZ:
+                        color = GNOME_BG_COLOR_H_GRADIENT;
+                        break;
+                case ORIENTATION_VERT:
+                        color = GNOME_BG_COLOR_V_GRADIENT;
+                        break;
+                default:
+                        color = GNOME_BG_COLOR_SOLID;
+                        break;
+                }
+ 
+                gnome_bg_set_uri (module->bg, uri);
+                gnome_bg_set_placement (module->bg, placement);
+                gnome_bg_set_color (module->bg, color, module->prefs->color1, module->prefs->color2);
+ 
+                for (i = 0; i < n_screens; ++i) {
+                        GdkScreen *screen;
+                        GdkWindow *root_window;
+                        GdkPixmap *pixmap;
+ 
+                        screen = gdk_display_get_screen (display, i);
+ 
+                        root_window = gdk_screen_get_root_window (screen);
+ 
+                        pixmap = gnome_bg_create_pixmap (module->bg, root_window,
+                                                         gdk_screen_get_width (screen),
+                                                         gdk_screen_get_height (screen),
+                                                         TRUE);
+
+                        gnome_bg_set_pixmap_as_root (screen, pixmap);
+
+                        g_object_unref (pixmap);
+                }
+        }
+
 	return FALSE;
+}
+
+static void
+queue_apply (gpointer data)
+{
+	GnomeSettingsModuleBackground *module;
+
+	module = (GnomeSettingsModuleBackground *) data;
+	if (module->timeout_id) {
+		g_source_remove (module->timeout_id);
+	}
+
+	module->timeout_id = g_timeout_add (100, apply_prefs, data);
 }
 
 static void
@@ -84,12 +172,16 @@ background_callback (GConfClient *client,
 
 	bg_preferences_merge_entry (module_bg->prefs, entry);
 
-	if (module_bg->applier_idle_id != 0) {
-		g_source_remove (module_bg->applier_idle_id);
-	}
-
-	module_bg->applier_idle_id = g_timeout_add (100, applier_idle, module_bg);
+	queue_apply (user_data);
 }
+
+static void
+on_bg_changed (GnomeBG *bg,
+               gpointer user_data)
+{
+	queue_apply (user_data);
+}
+
 
 static void
 gnome_settings_module_background_class_init (GnomeSettingsModuleBackgroundClass *klass)
@@ -105,7 +197,7 @@ gnome_settings_module_background_class_init (GnomeSettingsModuleBackgroundClass 
 static void
 gnome_settings_module_background_init (GnomeSettingsModuleBackground *module)
 {
-	module->applier_idle_id = 0;
+	module->timeout_id = 0;
 }
 
 GType
@@ -145,27 +237,16 @@ gnome_settings_module_background_initialize (GnomeSettingsModule *module,
 					     GConfClient *config_client)
 {
 	GnomeSettingsModuleBackground *module_bg;
-	GdkDisplay *display;
-	int         n_screens;
-	int         i;
 
 	module_bg = (GnomeSettingsModuleBackground *) module;
-	display = gdk_display_get_default ();
-	n_screens = gdk_display_get_n_screens (display);
-
-	module_bg->bg_appliers = g_new (BGApplier *, n_screens + 1);
-
-	for (i = 0; i < n_screens; i++) {
-		GdkScreen *screen;
-
-		screen = gdk_display_get_screen (display, i);
-
-		module_bg->bg_appliers [i] = BG_APPLIER (bg_applier_new_for_screen (BG_APPLIER_ROOT, screen));
-	}
-	module_bg->bg_appliers [i] = NULL;
 
 	module_bg->prefs = BG_PREFERENCES (bg_preferences_new ());
+	module_bg->bg = gnome_bg_new ();
+
+        g_signal_connect (module_bg->bg, "changed", G_CALLBACK (on_bg_changed), module_bg);
 	bg_preferences_load (module_bg->prefs);
+
+        apply_prefs (module_bg);
 
 	gconf_client_notify_add (config_client,
 	                         "/desktop/gnome/background",
@@ -181,7 +262,6 @@ static gboolean
 gnome_settings_module_background_start (GnomeSettingsModule *module)
 {
 	GnomeSettingsModuleBackground *module_bg;
-	int i;
 
 	module_bg = (GnomeSettingsModuleBackground *) module;
 
@@ -197,8 +277,72 @@ gnome_settings_module_background_start (GnomeSettingsModule *module)
 				   "/apps/nautilus/preferences/show_desktop", NULL))
 		return TRUE;
 
-	for (i = 0; module_bg->bg_appliers [i]; i++)
-		bg_applier_apply_prefs (module_bg->bg_appliers [i], module_bg->prefs);
+	apply_prefs (module_bg);
 
 	return TRUE;
 }
+
+static gboolean
+nautilus_is_running (void)
+{
+	Atom window_id_atom;
+	Window nautilus_xid;
+	Atom actual_type;
+	int actual_format;
+	unsigned long nitems, bytes_after;
+	unsigned char *data;
+	int retval;
+	Atom wmclass_atom;
+	gboolean running;
+	gint error;
+
+	window_id_atom = XInternAtom (GDK_DISPLAY (),
+				      "NAUTILUS_DESKTOP_WINDOW_ID", True);
+
+	if (window_id_atom == None) return FALSE;
+
+	retval = XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+				     window_id_atom, 0, 1, False, XA_WINDOW,
+				     &actual_type, &actual_format, &nitems,
+				     &bytes_after, &data);
+
+	if (data != NULL) {
+		nautilus_xid = *(Window *) data;
+		XFree (data);
+	} else {
+		return FALSE;
+	}
+
+	if (actual_type != XA_WINDOW) return FALSE;
+	if (actual_format != 32) return FALSE;
+
+	wmclass_atom = XInternAtom (GDK_DISPLAY (), "WM_CLASS", False);
+
+	gdk_error_trap_push ();
+
+	retval = XGetWindowProperty (GDK_DISPLAY (), nautilus_xid,
+				     wmclass_atom, 0, 24, False, XA_STRING,
+				     &actual_type, &actual_format, &nitems,
+				     &bytes_after, &data);
+
+	error = gdk_error_trap_pop ();
+
+	if (error == BadWindow) return FALSE;
+
+	if (actual_type == XA_STRING &&
+	    nitems == 24 &&
+	    bytes_after == 0 &&
+	    actual_format == 8 &&
+	    data != NULL &&
+	    !strcmp ((char *)data, "desktop_window") &&
+	    !strcmp ((char *)data + strlen ((char *)data) + 1, "Nautilus"))
+		running = TRUE;
+	else
+		running = FALSE;
+
+	if (data != NULL)
+		XFree (data);
+
+	return running;
+}
+

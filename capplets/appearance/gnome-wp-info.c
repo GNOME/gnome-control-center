@@ -67,27 +67,6 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
   return new;
 }
 
-GnomeWPInfo * gnome_wp_info_dup (const GnomeWPInfo * info) {
-  GnomeWPInfo * new;
-
-  if (info == NULL) {
-    return NULL;
-  }
-
-  new = g_new0 (GnomeWPInfo, 1);
-
-  new->uri = g_strdup (info->uri);
-  new->thumburi = g_strdup (info->uri);
-
-  new->name = g_strdup (info->name);
-  new->mime_type = g_strdup (info->mime_type);
-
-  new->size = info->size;
-  new->mtime = info->mtime;
-
-  return new;
-}
-
 void gnome_wp_info_free (GnomeWPInfo * info) {
   if (info == NULL) {
     return;
