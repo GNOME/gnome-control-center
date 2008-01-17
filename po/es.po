@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-14 16:35+0000\n"
-"PO-Revision-Date: 2008-01-14 18:04+0100\n"
+"POT-Creation-Date: 2008-01-17 10:03+0000\n"
+"PO-Revision-Date: 2008-01-17 15:12+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <<gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgid "No Image"
 msgstr "Sin imagen"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1100
+#: ../capplets/appearance/appearance-desktop.c:1139
 msgid "Images"
 msgstr "Imágenes"
 
@@ -716,11 +716,11 @@ msgstr "píxeles/segundo"
 msgid "seconds"
 msgstr "segundos"
 
-#: ../capplets/appearance/appearance-desktop.c:1068
+#: ../capplets/appearance/appearance-desktop.c:1107
 msgid "Add Wallpaper"
 msgstr "Añadir tapiz"
 
-#: ../capplets/appearance/appearance-desktop.c:1104
+#: ../capplets/appearance/appearance-desktop.c:1143
 msgid "All files"
 msgstr "Todos los archivos"
 
@@ -1217,11 +1217,15 @@ msgstr "Paquete de tema GNOME"
 msgid "No Wallpaper"
 msgstr "Sin tapiz"
 
+#: ../capplets/appearance/gnome-wp-item.c:249
+msgid "Slide Show"
+msgstr "Mostrar diapositivas"
+
 #. translators: <b>wallpaper name</b>
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:364
+#: ../capplets/appearance/gnome-wp-item.c:257
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1232,8 +1236,8 @@ msgstr ""
 "%s, %d %s por %d %s\n"
 "Carpeta: %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:370
-#: ../capplets/appearance/gnome-wp-item.c:372
+#: ../capplets/appearance/gnome-wp-item.c:263
+#: ../capplets/appearance/gnome-wp-item.c:265
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "píxel"
@@ -1676,7 +1680,7 @@ msgstr "<b>Navegador web</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "Accesibilidad"
 
@@ -2077,7 +2081,7 @@ msgstr "El tipo de combinación."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:112
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:482
+#: ../typing-break/drwright.c:482
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -2201,23 +2205,27 @@ msgstr "<b>Teclas persistentes</b>"
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>B_loquear la pantalla para forzar un descanso de escritura</b>"
 
+#. fast acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Rápida</i></small>"
 
+#. long delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Largo</i></small>"
 
+#. short delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Corto</i></small>"
 
+#. slow acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lenta</i></small>"
 
@@ -2274,12 +2282,12 @@ msgid "Cursor _blinks in text fields"
 msgstr "El cursor pa_rpadea en los campos de texto"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "Cursor blinks speed"
 msgstr "Velocidad de parpadeo del cursor"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "D_elay:"
 msgstr "R_etardo:"
 
@@ -2296,7 +2304,7 @@ msgid "Duration of work before forcing a break"
 msgstr "Duración del trabajo antes de forzar un descanso"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:36
 msgid "General"
 msgstr "General"
 
@@ -2371,7 +2379,7 @@ msgid "_Break interval lasts:"
 msgstr "D_uración del intervalo de descanso:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:32
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "_Retraso:"
 
@@ -2420,14 +2428,6 @@ msgid "_Work interval lasts:"
 msgstr "D_uración del intervalo de trabajo:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
-msgid "gtk-close"
-msgstr "gtk-close"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
-msgid "gtk-help"
-msgstr "gtk-help"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "minutos"
 
@@ -2487,6 +2487,26 @@ msgstr "Región:"
 msgid "Selected languages:"
 msgstr "Idiomas seleccionados:"
 
+#: ../capplets/mouse/gnome-mouse-accessibility.c:88
+msgid "Move Left"
+msgstr "Mover a la izquierda"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:93
+msgid "Move Right"
+msgstr "Mover a la derecha"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:98
+msgid "Move Up"
+msgstr "Mover arriba"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:103
+msgid "Move Down"
+msgstr "Mover abajo"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:108
+msgid "(None)"
+msgstr "(Ninguno)"
+
 #: ../capplets/mouse/gnome-mouse-properties.c:127
 #, c-format
 msgid "%d millisecond"
@@ -2502,123 +2522,133 @@ msgstr "<b>Tiempo de espera de la pulsación doble</b>"
 msgid "<b>Drag and Drop</b>"
 msgstr "<b>Arrastrar y soltar</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "<b>Dwell Click</b>"
-msgstr ""
-
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:4
+msgid "<b>Dwell Click</b>"
+msgstr "<b>Pulsación al posarse</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Locate Pointer</b>"
 msgstr "<b>Localizar el puntero</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Orientación del ratón</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<b>Pointer Speed</b>"
 msgstr "<b>Velocidad del puntero</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<b>Simulated Secondary Click</b>"
 msgstr "<b>Pulsación secundaria simulada</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid ""
 "<i>To test your double-click settings, try to double-click on the light bulb."
 "</i>"
-msgstr "<i>Para probar sus ajustes de pulsación doble, pruebe a pulsar dos veces sobre la bombilla.</i>"
+msgstr ""
+"<i>Para probar sus ajustes de pulsación doble, pruebe a pulsar dos veces "
+"sobre la bombilla.</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid ""
 "<i>You can also use the Dwell Click panel applet to choose the click type.</"
 "i>"
-msgstr ""
+msgstr "<i>También puede usar el panel de la miniaplicación Pulsación al posarse para elegir el tipo de pulsación.</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#. high sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "<small><i>High</i></small>"
 msgstr "<small><i>Alta</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#. large threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "<small><i>Large</i></small>"
 msgstr "<small><i>Larga</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#. low sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "<small><i>Low</i></small>"
 msgstr "<small><i>Baja</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#. small threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "<small><i>Small</i></small>"
 msgstr "<small><i>Pequeña</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:29
 msgid "Choose type of click _beforehand"
 msgstr "Elija el tipo de pulsación de an_temano"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:30
 msgid "Choose type of click with mo_use gestures"
 msgstr "Elija el tipo de pulsación con _gestos del ratón"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:33
 msgid "D_ouble click:"
 msgstr "Pulsación d_oble:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:35
 msgid "D_rag click:"
-msgstr ""
+msgstr "Pulsación de a_rrastre:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:37
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:482
 msgid "Mouse Preferences"
 msgstr "Preferencias del ratón"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:38
 msgid "Seco_ndary click:"
 msgstr "Pulsación secu_ndaria:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:39
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "M_ostrar la posición del puntero al pulsar la tecla Control"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:29
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:40
 msgid "Show click type _window"
 msgstr "Mostrar la _ventana del tipo de pulsación"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:30
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:41
 msgid "Thr_eshold:"
 msgstr "_Umbral:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:31
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:42
 msgid "_Acceleration:"
 msgstr "_Aceleración:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:33
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:44
 msgid "_Initiate click when stopping pointer movement"
 msgstr "_Iniciar la pulsación cuando se pare el movimiento del puntero"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:34
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:45
 msgid "_Left-handed"
 msgstr "_Zurdo"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:35
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:46
 msgid "_Motion Threshold:"
 msgstr "Umbral de _movimiento:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:36
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:47
 msgid "_Right-handed"
 msgstr "_Diestro"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:37
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:48
 msgid "_Sensitivity:"
 msgstr "_Sensibilidad:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:38
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:49
 msgid "_Single click:"
 msgstr "Pulsación _simple:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:39
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:50
 msgid "_Timeout:"
 msgstr "_Tiempo de espera:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:40
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:51
 msgid "_Trigger secondary click by holding down the primary button"
 msgstr "D_isparar la pulsación secundaria al mantener pulsado el botón primario"
 
@@ -3126,6 +3156,16 @@ msgstr ""
 "Intente usar una configuración más simple o usar una versión más reciente de "
 "XFree."
 
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:478
+msgid "Could not enable mouse accessibility features"
+msgstr "No se pudieron activar las características de accesibilidad del ratón"
+
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:480
+msgid ""
+"Mouse accessibility requires the mousetweaks daemon to be installed on your "
+"system."
+msgstr "La accesibilidad del ratón requiere que el demonio «mousetweaks» esté instalado en su sistema."
+
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
@@ -3215,42 +3255,6 @@ msgstr "Archivos _cargados:"
 #: ../gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
 msgstr "Ocurrió un error al crear el conducto de la señal."
-
-#: ../libbackground/applier.c:255
-msgid "Type"
-msgstr "Tipo"
-
-#: ../libbackground/applier.c:256
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-"Tipo de bg_applier: BG_APPLIER_ROOT para la ventana raíz o "
-"BG_APPLIER_PREVIEW para previsualización"
-
-#: ../libbackground/applier.c:263
-msgid "Preview Width"
-msgstr "Anchura de la vista previa"
-
-#: ../libbackground/applier.c:264
-msgid "Width if applier is a preview: Defaults to 64."
-msgstr "Ancho si el aplicador es una previsualización: predeterminado a 64."
-
-#: ../libbackground/applier.c:271
-msgid "Preview Height"
-msgstr "Altura de la vista previa"
-
-#: ../libbackground/applier.c:272
-msgid "Height if applier is a preview: Defaults to 48."
-msgstr "Altura si el aplicador es una previsualización: predeterminado a 48."
-
-#: ../libbackground/applier.c:279
-msgid "Screen"
-msgstr "Pantalla"
-
-#: ../libbackground/applier.c:280
-msgid "Screen on which BGApplier is to draw"
-msgstr "Pantalla en la cual BGApplier va a dibujar"
 
 #. make start action
 #: ../libslab/application-tile.c:369
