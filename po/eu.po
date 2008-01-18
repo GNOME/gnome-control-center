@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-09 13:13+0100\n"
-"PO-Revision-Date: 2008-01-09 13:11+0100\n"
+"POT-Creation-Date: 2008-01-18 18:47+0100\n"
+"PO-Revision-Date: 2008-01-18 18:49+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgid "No Image"
 msgstr "Irudirik gabe"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1100
+#: ../capplets/appearance/appearance-desktop.c:1139
 msgid "Images"
 msgstr "Irudiak"
 
@@ -696,7 +696,6 @@ msgid "characters/second"
 msgstr "karaktere/segundo"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "milliseconds"
 msgstr "milisegundo"
 
@@ -709,11 +708,11 @@ msgstr "pixel/segundo"
 msgid "seconds"
 msgstr "segundo"
 
-#: ../capplets/appearance/appearance-desktop.c:1068
+#: ../capplets/appearance/appearance-desktop.c:1107
 msgid "Add Wallpaper"
 msgstr "Gehitu horma-papera"
 
-#: ../capplets/appearance/appearance-desktop.c:1104
+#: ../capplets/appearance/appearance-desktop.c:1143
 msgid "All files"
 msgstr "Fitxategi guztiak"
 
@@ -1213,11 +1212,15 @@ msgstr "GNOMEko gai-paketea"
 msgid "No Wallpaper"
 msgstr "Irudirik ez"
 
+#: ../capplets/appearance/gnome-wp-item.c:249
+msgid "Slide Show"
+msgstr "Diapositiba-aurkezpena"
+
 #. translators: <b>wallpaper name</b>
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:364
+#: ../capplets/appearance/gnome-wp-item.c:257
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1228,8 +1231,8 @@ msgstr ""
 "%s, %d %s [%d %s(e)k]\n"
 "Karpeta: %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:370
-#: ../capplets/appearance/gnome-wp-item.c:372
+#: ../capplets/appearance/gnome-wp-item.c:263
+#: ../capplets/appearance/gnome-wp-item.c:265
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
@@ -1672,6 +1675,7 @@ msgstr "<b>Web arakatzailea</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "Erabilerraztasuna"
 
@@ -2072,7 +2076,7 @@ msgstr "Bizkortzaile-mota."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:112
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:482
+#: ../typing-break/drwright.c:482
 msgid "Disabled"
 msgstr "Desgaituta"
 
@@ -2196,19 +2200,27 @@ msgstr "<b>Tekla itsaskorrak</b>"
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Blokeatu pantaila idazketa-etena bultzatzeko</b>"
 
+#. fast acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Bizkorra</i></small>"
 
+#. long delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Luzea</i></small>"
 
+#. short delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Motza</i></small>"
 
+#. slow acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Mantsoa</i></small>"
 
@@ -2266,10 +2278,12 @@ msgid "Cursor _blinks in text fields"
 msgstr "Kurtsorea _keinuka testu-eremuetan"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "Cursor blinks speed"
 msgstr "Kurtsore-keinuaren abiadura"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "D_elay:"
 msgstr "_Atzerapena:"
 
@@ -2286,6 +2300,7 @@ msgid "Duration of work before forcing a break"
 msgstr "Lanaren iraupena etena egitera behartu baino lehen"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:36
 msgid "General"
 msgstr "Orokorra"
 
@@ -2361,6 +2376,7 @@ msgid "_Break interval lasts:"
 msgstr "_Etenak iraupen hau du:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "Atzera_pena:"
 
@@ -2409,14 +2425,6 @@ msgid "_Work interval lasts:"
 msgstr "_Lanaren etenak iraupen hau du:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
-msgid "gtk-close"
-msgstr ""
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
-msgid "gtk-help"
-msgstr ""
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "minutu"
 
@@ -2477,9 +2485,27 @@ msgstr "Eskualdea:"
 msgid "Selected languages:"
 msgstr "Hautatutako hizkuntzak:"
 
-#. set the timeout value  label with correct value of timeout
-#: ../capplets/mouse/gnome-mouse-properties.c:126
-#: ../capplets/mouse/gnome-mouse-properties.c:384
+#: ../capplets/mouse/gnome-mouse-accessibility.c:88
+msgid "Move Left"
+msgstr "Eraman ezkerrera"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:93
+msgid "Move Right"
+msgstr "Eraman eskuinera"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:98
+msgid "Move Up"
+msgstr "Eraman gora"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:103
+msgid "Move Down"
+msgstr "Eraman behera"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:108
+msgid "(None)"
+msgstr "(Bat ere ez)"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:127
 #, c-format
 msgid "%d millisecond"
 msgid_plural "%d milliseconds"
@@ -2487,76 +2513,144 @@ msgstr[0] "Milisegundo %d"
 msgstr[1] "%d milisegundo"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "<b>Double-Click Timeout </b>"
+msgid "<b>Double-Click Timeout</b>"
 msgstr "<b>Klik bikoitzaren denbora-muga</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Drag and Drop</b>"
 msgstr "<b>Arrastatu eta jaregin</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
+msgid "<b>Dwell Click</b>"
+msgstr "<b>Tenporizazio-klik</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
+msgid "<b>Locate Pointer</b>"
+msgstr "<b>Kokatu erakuslea</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Saguaren orientazioa</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Speed</b>"
-msgstr "<b>Abiadura</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Fast</i>"
-msgstr "<i>Bizkorra</i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>High</i>"
-msgstr "<i>Altua</i>"
-
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Large</i>"
-msgstr "<i>Handia</i>"
+msgid "<b>Pointer Speed</b>"
+msgstr "<b>Erakuslearen abiadura</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:8
-msgid "<i>Low</i>"
-msgstr "<i>Baxua</i>"
+msgid "<b>Simulated Secondary Click</b>"
+msgstr "<b>2. mailako klik simulatua</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:9
-msgid "<i>Slow</i>"
-msgstr "<i>Mantsoa</i>"
+msgid ""
+"<i>To test your double-click settings, try to double-click on the light bulb."
+"</i>"
+msgstr ""
+"<i>Klik bikoitzaren ezarpenak probatzeko, saiatu klik bikoitza egitea "
+"bonbillan.</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
-msgid "<i>Small</i>"
-msgstr "<i>Txikia</i>"
-
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:11
-msgid "Buttons"
-msgstr "Botoiak"
+msgid ""
+"<i>You can also use the Dwell Click panel applet to choose the click type.</"
+"i>"
+msgstr ""
+"<i>'Tenporizazio-klik' panelaren applet-a erabil dezakezu klik mota "
+"aukeratzeko.</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
-msgid "Motion"
-msgstr "Mugimendua"
+#. high sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+msgid "<small><i>High</i></small>"
+msgstr "<small><i>Altua</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#. large threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "<small><i>Large</i></small>"
+msgstr "<small><i>Handia</i></small>"
+
+#. low sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "<small><i>Low</i></small>"
+msgstr "<small><i>Baxua</i></small>"
+
+#. small threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "<small><i>Small</i></small>"
+msgstr "<small><i>Txikia</i></small>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:29
+msgid "Choose type of click _beforehand"
+msgstr "Aukeratu klik mota _aurrez aurretik"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:30
+msgid "Choose type of click with mo_use gestures"
+msgstr "Aukeratu klik mota _saguaren keinuarekin"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:33
+msgid "D_ouble click:"
+msgstr "Klik _bikoitza:"
+
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:35
+msgid "D_rag click:"
+msgstr "_Arrastatzeko klik-a:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:37
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:482
 msgid "Mouse Preferences"
 msgstr "Saguaren hobespenak"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:38
+msgid "Seco_ndary click:"
+msgstr "_2. mailako klik-a:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:39
+msgid "Sh_ow position of pointer when the Control key is pressed"
+msgstr "_Erakutsi erakuslearen posizioa Kontrol tekla sakatzean"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:40
+msgid "Show click type _window"
+msgstr "Erakutsi klik motaren _leihoa"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:41
+msgid "Thr_eshold:"
+msgstr "_Atalasea:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:42
 msgid "_Acceleration:"
 msgstr "_Azelerazioa:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "_Left-handed mouse"
-msgstr "_Ezkertientzako sagua"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:44
+msgid "_Initiate click when stopping pointer movement"
+msgstr "_Hasieratu klik-a erakuslearen mugimendua gelditzean"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:45
+msgid "_Left-handed"
+msgstr "E_zkerreko eskuaz"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:46
+msgid "_Motion Threshold:"
+msgstr "_Mugimenduaren atalasea:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:47
+msgid "_Right-handed"
+msgstr "E_skuineko eskuaz"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:48
 msgid "_Sensitivity:"
 msgstr "_Sentikortasuna:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
-msgid "_Threshold:"
-msgstr "_Muga:"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:49
+msgid "_Single click:"
+msgstr "Klik _bakuna:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:50
 msgid "_Timeout:"
 msgstr "_Denbora-muga:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:51
+msgid "_Trigger secondary click by holding down the primary button"
+msgstr "_Abiarazi 2. mailako klik egitea botoi nagusia sakatuta edukitzean"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
@@ -3059,7 +3153,19 @@ msgstr ""
 "Saiatu konfigurazio arruntagoa erabiltzen edo XFree softwarearen bertsio "
 "berriagoa eskuratzen."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:187
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:478
+msgid "Could not enable mouse accessibility features"
+msgstr "Ezin izan da saguaren erabilerraztasunaren eginbideak gaitu"
+
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:480
+msgid ""
+"Mouse accessibility requires the mousetweaks daemon to be installed on your "
+"system."
+msgstr ""
+"Saguaren erabilerraztasunak 'mousetweaks' daemona sisteman instalatuta "
+"edukitzea eskatzen du."
+
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
@@ -3067,7 +3173,7 @@ msgstr ""
 "Ezin izan da terminal lehenetsia eskuratu. Ziurtatu terminal lehenetsiaren "
 "komandoa ezarrita dagoela eta baliozko aplikaziora bideratzen duela."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:215
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3076,7 +3182,7 @@ msgstr ""
 "Ezin izan da komandoa exekutatu: %s\n"
 "Egiaztatu baliozko komandoa dela."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:230
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3145,42 +3251,6 @@ msgstr "_Kargatutako fitxategiak:"
 #: ../gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
 msgstr "Errorea gertatu da seinale-kanalizazioa sortzean."
-
-#: ../libbackground/applier.c:255
-msgid "Type"
-msgstr "Mota"
-
-#: ../libbackground/applier.c:256
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-"bg_applier-en mota: BG_APPLIER_ROOT erroko leihorako edo BG_APPLIER_PREVIEW "
-"aurrebistarako"
-
-#: ../libbackground/applier.c:263
-msgid "Preview Width"
-msgstr "Aurrebista-zabalera"
-
-#: ../libbackground/applier.c:264
-msgid "Width if applier is a preview: Defaults to 64."
-msgstr "Zabalera aplikatzailea aurrebista bada: lehenetsiak 64ean."
-
-#: ../libbackground/applier.c:271
-msgid "Preview Height"
-msgstr "Aurrebista-altuera"
-
-#: ../libbackground/applier.c:272
-msgid "Height if applier is a preview: Defaults to 48."
-msgstr "Altuera aplikatzailea aurrebista bada: lehenetsiak 48an."
-
-#: ../libbackground/applier.c:279
-msgid "Screen"
-msgstr "Pantaila"
-
-#: ../libbackground/applier.c:280
-msgid "Screen on which BGApplier is to draw"
-msgstr "BGApplier zein pantailatan marraztu behar den"
 
 #. make start action
 #: ../libslab/application-tile.c:369
