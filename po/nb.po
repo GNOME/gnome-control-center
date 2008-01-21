@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.21.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-03 22:14+0100\n"
-"PO-Revision-Date: 2008-01-03 22:22+0100\n"
+"POT-Creation-Date: 2008-01-21 20:53+0100\n"
+"PO-Revision-Date: 2008-01-21 21:15+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgid "No Image"
 msgstr "Ingen bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1100
+#: ../capplets/appearance/appearance-desktop.c:1139
 msgid "Images"
 msgstr "Bilder"
 
@@ -689,7 +689,6 @@ msgid "characters/second"
 msgstr "tegn per sekund"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "milliseconds"
 msgstr "millisekunder"
 
@@ -702,11 +701,11 @@ msgstr "piksler per sekund"
 msgid "seconds"
 msgstr "sekunder"
 
-#: ../capplets/appearance/appearance-desktop.c:1068
+#: ../capplets/appearance/appearance-desktop.c:1107
 msgid "Add Wallpaper"
 msgstr "Legg til bakgrunn"
 
-#: ../capplets/appearance/appearance-desktop.c:1104
+#: ../capplets/appearance/appearance-desktop.c:1143
 msgid "All files"
 msgstr "Alle filer"
 
@@ -1199,11 +1198,15 @@ msgstr "GNOME temapakke"
 msgid "No Wallpaper"
 msgstr "Ingen bakgrunn"
 
+#: ../capplets/appearance/gnome-wp-item.c:249
+msgid "Slide Show"
+msgstr "Lysbildevisning"
+
 #. translators: <b>wallpaper name</b>
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:364
+#: ../capplets/appearance/gnome-wp-item.c:257
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1214,8 +1217,8 @@ msgstr ""
 "%s, %d %s av %d %s\n"
 "Mappe: %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:370
-#: ../capplets/appearance/gnome-wp-item.c:372
+#: ../capplets/appearance/gnome-wp-item.c:263
+#: ../capplets/appearance/gnome-wp-item.c:265
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "piksel"
@@ -1249,7 +1252,9 @@ msgstr "«%s» ser ikke ut til å være et gyldig tema."
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
 "you need to compile."
-msgstr "«%s» ser ikke ut til å være et gyldig tema. Det kan være en temamotor som du må kompilere."
+msgstr ""
+"«%s» ser ikke ut til å være et gyldig tema. Det kan være en temamotor som du "
+"må kompilere."
 
 #: ../capplets/appearance/theme-installer.c:287
 #, c-format
@@ -1660,6 +1665,7 @@ msgstr "<b>Nettleser</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "Tilgjengelighet"
 
@@ -2060,7 +2066,7 @@ msgstr "Type hurtigtast."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:112
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:482
+#: ../typing-break/drwright.c:482
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -2181,19 +2187,27 @@ msgstr "<b>Klebrige taster</b>"
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lås skjemen for tvungen skrivepause</b>"
 
+#. fast acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Rask</i></small>"
 
+#. long delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lang</i></small>"
 
+#. short delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kort</i></small>"
 
+#. slow acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Treg</i></small>"
 
@@ -2250,10 +2264,12 @@ msgid "Cursor _blinks in text fields"
 msgstr "Markøren _blinker i tekstfelt"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "Cursor blinks speed"
 msgstr "Hastighet for blinkende markør"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "D_elay:"
 msgstr "Paus_e:"
 
@@ -2270,6 +2286,7 @@ msgid "Duration of work before forcing a break"
 msgstr "Varighet på arbeidstid før tvungen pause"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:36
 msgid "General"
 msgstr "Generelt"
 
@@ -2342,6 +2359,7 @@ msgid "_Break interval lasts:"
 msgstr "_Pauseintervallet varer:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "_Pause:"
 
@@ -2390,14 +2408,6 @@ msgid "_Work interval lasts:"
 msgstr "_Arbeidsintervallet varer:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
-msgid "gtk-close"
-msgstr "gtk-close"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
-msgid "gtk-help"
-msgstr "gtk-help"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "minutter"
 
@@ -2457,9 +2467,27 @@ msgstr "Region:"
 msgid "Selected languages:"
 msgstr "Valgte språk:"
 
-#. set the timeout value  label with correct value of timeout
-#: ../capplets/mouse/gnome-mouse-properties.c:126
-#: ../capplets/mouse/gnome-mouse-properties.c:384
+#: ../capplets/mouse/gnome-mouse-accessibility.c:88
+msgid "Move Left"
+msgstr "Flytt mot venstre"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:93
+msgid "Move Right"
+msgstr "Flytt mot høyre"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:98
+msgid "Move Up"
+msgstr "Flytt opp"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:103
+msgid "Move Down"
+msgstr "Flytt ned"
+
+#: ../capplets/mouse/gnome-mouse-accessibility.c:108
+msgid "(None)"
+msgstr "(Ingen)"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:127
 #, c-format
 msgid "%d millisecond"
 msgid_plural "%d milliseconds"
@@ -2467,76 +2495,140 @@ msgstr[0] "%d millisekund"
 msgstr[1] "%d millisekunder"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "<b>Double-Click Timeout </b>"
+msgid "<b>Double-Click Timeout</b>"
 msgstr "<b>Tidsavbrudd for dobbeltklikk</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Drag and Drop</b>"
 msgstr "<b>Dra-og-slipp</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
+msgid "<b>Dwell Click</b>"
+msgstr "<b>Dwell-klikk</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
+msgid "<b>Locate Pointer</b>"
+msgstr "<b>Lokaliser peker</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Orientering for mus</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Speed</b>"
-msgstr "<b>Hastighet</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Fast</i>"
-msgstr "<i>Rask</i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>High</i>"
-msgstr "<i>Høy</i>"
-
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Large</i>"
-msgstr "<i>Stor</i>"
+msgid "<b>Pointer Speed</b>"
+msgstr "<b>Pekerhastighet</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:8
-msgid "<i>Low</i>"
-msgstr "<i>Lav</i>"
+msgid "<b>Simulated Secondary Click</b>"
+msgstr "<b>Simulert andreklikk</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:9
-msgid "<i>Slow</i>"
-msgstr "<i>Treg</i>"
+msgid ""
+"<i>To test your double-click settings, try to double-click on the light bulb."
+"</i>"
+msgstr "<i>Klikk på lyspæren for å teste dine innstillinger for dobbeltklikk.</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
-msgid "<i>Small</i>"
-msgstr "<i>Liten</i>"
-
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:11
-msgid "Buttons"
-msgstr "Knapper"
+msgid ""
+"<i>You can also use the Dwell Click panel applet to choose the click type.</"
+"i>"
+msgstr "<i>Du kan også bruke panelprogrammet for Dwell-klikk for å velge type klikk.</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
-msgid "Motion"
-msgstr "Bevegelse"
+#. high sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+msgid "<small><i>High</i></small>"
+msgstr "<small><i>Høy</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#. large threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "<small><i>Large</i></small>"
+msgstr "<small><i>Stor</i></small>"
+
+#. low sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "<small><i>Low</i></small>"
+msgstr "<small><i>Lav</i></small>"
+
+#. small threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "<small><i>Small</i></small>"
+msgstr "<small><i>Liten</i></small>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:29
+msgid "Choose type of click _beforehand"
+msgstr "Velg type klikk på _forhånd"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:30
+msgid "Choose type of click with mo_use gestures"
+msgstr "Velg type klikk med m_usgestikulering"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:33
+msgid "D_ouble click:"
+msgstr "D_obbeltklikk"
+
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:35
+msgid "D_rag click:"
+msgstr "D_ra-og-klikk:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:37
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:482
 msgid "Mouse Preferences"
 msgstr "Brukervalg for mus"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:38
+msgid "Seco_ndary click:"
+msgstr "Seku_ndærklikk:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:39
+msgid "Sh_ow position of pointer when the Control key is pressed"
+msgstr "Vis pekerens p_osisjon når Ctrl trykkes ned"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:40
+msgid "Show click type _window"
+msgstr "Vis _vindu for type klikk"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:41
+msgid "Thr_eshold:"
+msgstr "T_erskel:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:42
 msgid "_Acceleration:"
 msgstr "_Aksellerasjon:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "_Left-handed mouse"
-msgstr "_Venstrehendt mus"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:44
+msgid "_Initiate click when stopping pointer movement"
+msgstr "_Initier klikk når pekeren slutter å bevege seg"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:45
+msgid "_Left-handed"
+msgstr "_Venstrehendt"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:46
+msgid "_Motion Threshold:"
+msgstr "_Terskel for bevegelse:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:47
+msgid "_Right-handed"
+msgstr "Høy_rehendt"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:48
 msgid "_Sensitivity:"
 msgstr "_Følsomhet:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
-msgid "_Threshold:"
-msgstr "_Terskel:"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:49
+msgid "_Single click:"
+msgstr "E_nkeltklikk:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:50
 msgid "_Timeout:"
 msgstr "_Tidsavbrudd:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:51
+msgid "_Trigger secondary click by holding down the primary button"
+msgstr "_Utløs sekundærklikk ved å holde nede primærknappen"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
@@ -3037,7 +3129,17 @@ msgstr ""
 "Prøv å bruke enklere konfigurasjoner eller en nyere versjon av XFree-"
 "programvaren."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:187
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:478
+msgid "Could not enable mouse accessibility features"
+msgstr "Kunne ikke aktivere tilgjengelighetsfunksjoner for mus"
+
+#: ../gnome-settings-daemon/gnome-settings-mouse.c:480
+msgid ""
+"Mouse accessibility requires the mousetweaks daemon to be installed on your "
+"system."
+msgstr "Tilgjengelighet for mus krever at mousetweaks-tjeneten er installert på systemet."
+
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:188
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
@@ -3045,7 +3147,7 @@ msgstr ""
 "Kunne ikke finne forvalgt terminal. Sjekk at kommando for forvalgt terminal "
 "er satt og peker til et gyldig program."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:215
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:216
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3054,7 +3156,7 @@ msgstr ""
 "Kunne ikke kjøre kommandoen: %s\n"
 "Sjekk om dette er en gyldig kommando."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:230
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:231
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3123,42 +3225,6 @@ msgstr "_Lastede filer:"
 #: ../gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
 msgstr "Feil under oppretting av signalrør."
-
-#: ../libbackground/applier.c:255
-msgid "Type"
-msgstr "Type"
-
-#: ../libbackground/applier.c:256
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-"Type bg_applier: BG_APPLIER_ROOT for rotvinduet eller BG_APPLIER_PREVIEW for "
-"forhåndsvisning"
-
-#: ../libbackground/applier.c:263
-msgid "Preview Width"
-msgstr "Forhåndsvisningsbredde"
-
-#: ../libbackground/applier.c:264
-msgid "Width if applier is a preview: Defaults to 64."
-msgstr "Bredde hvis påføringen er en forhåndsvisning. Forvalgt til 64."
-
-#: ../libbackground/applier.c:271
-msgid "Preview Height"
-msgstr "Forhåndsvisningshøyde"
-
-#: ../libbackground/applier.c:272
-msgid "Height if applier is a preview: Defaults to 48."
-msgstr "Høyde hvis påføringen er en forhåndsvisning. Forvalgt til 48."
-
-#: ../libbackground/applier.c:279
-msgid "Screen"
-msgstr "Skjerm"
-
-#: ../libbackground/applier.c:280
-msgid "Screen on which BGApplier is to draw"
-msgstr "Skjerm hvor BGApplier skal tegne"
 
 #. make start action
 #: ../libslab/application-tile.c:369
@@ -3465,10 +3531,8 @@ msgstr "Ingen"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
-msgstr ""
-"Hvis satt til sann vil MIME-håndtererene for text/plain og text/* holdes "
-"synkronisert"
+"If true, the mime handlers for text/plain and text/* will be kept in sync."
+msgstr "Hvis satt til sann vil MIME-håndtererene for text/plain og text/* holdes synkronisert."
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
@@ -3503,7 +3567,7 @@ msgid "Launch calculator"
 msgstr "Start kalkulator"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
-msgid "Launch calculator's shortcut"
+msgid "Launch calculator's shortcut."
 msgstr "Snarvei for å starte kalkulator."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
@@ -3631,13 +3695,12 @@ msgid "Volume up's shortcut."
 msgstr "Snarvei for volum opp."
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-msgid "Display a dialog when there are errors running the screensaver"
-msgstr ""
-"Vis et dialogvindu når det oppstår problemer med å kjøre skjermspareren"
+msgid "Display a dialog when there are errors running the screensaver."
+msgstr "Vis en dialog når det oppstår problemer med å kjøre skjermspareren."
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-msgid "Run screensaver at login"
-msgstr "Kjør skjermsparer ved pålogging"
+msgid "Run screensaver at login."
+msgstr "Kjør skjermsparer ved pålogging."
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
 msgid "Show Startup Errors"
@@ -3692,28 +3755,24 @@ msgstr ""
 "Avslutt skall når en oppgraderings- eller avinstalleringshandling utføres"
 
 #: ../shell/control-center.schemas.in.h:6
-msgid "Indicates whether to close the shell when a help action is performed"
-msgstr "Indikerer hvorvidt skallet skal lukkes når en hjelpe-handling utføres"
+msgid "Indicates whether to close the shell when a help action is performed."
+msgstr "Indikerer hvorvidt skallet skal lukkes når en hjelpe-handling utføres."
 
 #: ../shell/control-center.schemas.in.h:7
-msgid "Indicates whether to close the shell when a start action is performed"
-msgstr "Indikerer hvorvidt skallet skal lukkes når en start-handling utføres"
+msgid "Indicates whether to close the shell when a start action is performed."
+msgstr "Indikerer hvorvidt skallet skal lukkes når en start-handling utføres."
 
 #: ../shell/control-center.schemas.in.h:8
 msgid ""
 "Indicates whether to close the shell when an add or remove action is "
-"performed"
-msgstr ""
-"Indikerer hvorvidt skallet skal lukkes når en \"legg til\"- eller en \"ta "
-"bort\"-handling utføres"
+"performed."
+msgstr "Indikerer hvorvidt skallet skal lukkes når en \"legg til\"- eller en \"ta bort\"-handling utføres."
 
 #: ../shell/control-center.schemas.in.h:9
 msgid ""
 "Indicates whether to close the shell when an upgrade or uninstall action is "
-"performed"
-msgstr ""
-"Indikerer hvorvidt skallet skal lukkes når en oppgraderings- eller "
-"avinstalleringshandling utføres"
+"performed."
+msgstr "Indikerer hvorvidt skallet skal lukkes når en oppgraderings- eller avinstalleringshandling utføres."
 
 #: ../shell/control-center.schemas.in.h:10
 msgid "Task names and associated .desktop files"
@@ -3740,10 +3799,8 @@ msgstr ""
 
 #: ../shell/control-center.schemas.in.h:14
 msgid ""
-"if true, the control-center will close when a \"Common Task\" is activated"
-msgstr ""
-"hvis sann, vil kontrollsenteret avsluttes når en \"Vanlig oppgave\" er "
-"aktivert"
+"if true, the control-center will close when a \"Common Task\" is activated."
+msgstr "hvis sann, vil kontrollsenteret avsluttes når en \"Vanlig oppgave\" er aktivert."
 
 #: ../shell/gnomecc.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
