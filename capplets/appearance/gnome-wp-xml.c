@@ -103,7 +103,6 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
   xmlChar * nodelang;
   const gchar * const * syslangs;
   GdkColor color1, color2;
-  GnomeWPItem * item;
   gint i;
 
   wplist = xmlParseFile (filename);

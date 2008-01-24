@@ -36,7 +36,7 @@ static void set_bg_properties (GnomeWPItem *item)
   GnomeBGPlacement placement;
 
   color = GNOME_BG_COLOR_SOLID;
-  
+
   if (item->shade_type) {
     if (!strcmp (item->shade_type, "horizontal-gradient")) {
       color = GNOME_BG_COLOR_H_GRADIENT;
@@ -46,7 +46,7 @@ static void set_bg_properties (GnomeWPItem *item)
   }
 
   placement = GNOME_BG_PLACEMENT_TILED;
-  
+
   if (item->options) {
     if (!strcmp (item->options, "centered")) {
       placement = GNOME_BG_PLACEMENT_CENTERED;
@@ -138,7 +138,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
   if (item) {
     gnome_wp_item_ensure_gnome_bg (item);
   }
-  
+
   g_object_unref (client);
 
   return item;
@@ -225,15 +225,15 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs) {
   GdkPixbuf *pixbuf;
   double aspect =
-    (double)gdk_screen_get_height (gdk_screen_get_default()) / 
+    (double)gdk_screen_get_height (gdk_screen_get_default()) /
     gdk_screen_get_width (gdk_screen_get_default());
 
   set_bg_properties (item);
-  
+
   pixbuf = gnome_bg_create_thumbnail (item->bg, thumbs, gdk_screen_get_default(), LIST_IMAGE_WIDTH, LIST_IMAGE_WIDTH * aspect);
 
   gnome_bg_get_image_size (item->bg, thumbs, &item->width, &item->height);
-  
+
   return pixbuf;
 }
 
@@ -243,13 +243,14 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   if (!strcmp (item->filename, "(none)")) {
     item->description = g_strdup (item->name);
   } else {
-    gchar *description;
+    const gchar *description;
+    gchar *dirname = g_path_get_dirname (item->filename);
 
     if (strcmp (item->fileinfo->mime_type, "application/xml") == 0)
       description = _("Slide Show");
     else
       description = gnome_vfs_mime_get_description (item->fileinfo->mime_type);
-    gchar *dirname = g_path_get_dirname (item->filename);
+
     /* translators: <b>wallpaper name</b>
      * mime type, x pixel(s) by y pixel(s)
      * Folder: /path/to/file

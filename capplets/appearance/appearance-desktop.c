@@ -131,14 +131,16 @@ static void on_item_changed (GnomeBG *bg, AppearanceData *data) {
 
   if (!item)
     return;
-  
+
   model = gtk_tree_row_reference_get_model (item->rowref);
   path = gtk_tree_row_reference_get_path (item->rowref);
 
   if (gtk_tree_model_get_iter (model, &iter, path)) {
+    GdkPixbuf *pixbuf;
+
     g_signal_handlers_block_by_func (bg, G_CALLBACK (on_item_changed), data);
-      
-    GdkPixbuf *pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
+
+    pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
     if (pixbuf) {
       gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
                           0, pixbuf,
