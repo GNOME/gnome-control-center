@@ -24,6 +24,7 @@
 #include <libgnomeui/gnome-thumbnail.h>
 #include <gnome-wp-info.h>
 #include <libgnomevfs/gnome-vfs.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
 
 #ifndef _GNOME_WP_ITEM_H_

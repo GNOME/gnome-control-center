@@ -29,6 +29,7 @@
 #include <string.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-thumbnail.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
 
 typedef enum {
