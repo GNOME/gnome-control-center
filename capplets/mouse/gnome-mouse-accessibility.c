@@ -84,29 +84,29 @@ populate_gesture_combo (GtkWidget *combo)
 	model = gtk_list_store_new (1, G_TYPE_STRING);
 
 	gtk_list_store_append (model, &iter);
-	gtk_list_store_set (model, &iter,
-			    0, _("Move Left"),
-			    -1);
+	/* Translators: this is the gesture to trigger/choose the click type.
+	   Don't include the prefix "gesture|" in the translation. */
+	gtk_list_store_set (model, &iter, 0, Q_("gesture|Move left"), -1);
 
 	gtk_list_store_append (model, &iter);
-	gtk_list_store_set (model, &iter,
-			    0, _("Move Right"),
-			    -1);
+	/* Translators: this is the gesture to trigger/choose the click type.
+	   Don't include the prefix "gesture|" in the translation. */
+	gtk_list_store_set (model, &iter, 0, Q_("gesture|Move right"), -1);
 
 	gtk_list_store_append (model, &iter);
-	gtk_list_store_set (model, &iter,
-			    0, _("Move Up"),
-			    -1);
+	/* Translators: this is the gesture to trigger/choose the click type.
+	   Don't include the prefix "gesture|" in the translation. */
+	gtk_list_store_set (model, &iter, 0, Q_("gesture|Move up"), -1);
 
 	gtk_list_store_append (model, &iter);
-	gtk_list_store_set (model, &iter,
-			    0, _("Move Down"),
-			    -1);
+	/* Translators: this is the gesture to trigger/choose the click type.
+	   Don't include the prefix "gesture|" in the translation. */
+	gtk_list_store_set (model, &iter, 0, Q_("gesture|Move down"), -1);
 
 	gtk_list_store_append (model, &iter);
-	gtk_list_store_set (model, &iter,
-			    0, _("(None)"),
-			    -1);
+	/* Translators: this is the gesture to trigger/choose the click type.
+	   Don't include the prefix "gesture|" in the translation. */
+	gtk_list_store_set (model, &iter, 0, Q_("gesture|Disabled"), -1);
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (model));
 
