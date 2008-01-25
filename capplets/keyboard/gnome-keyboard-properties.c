@@ -131,9 +131,6 @@ setup_dialog (GladeXML * dialog, GConfChangeSet * changeset)
 {
 	GObject *peditor;
 
-	/* load all the images */
-	capplet_init_stock_icons ();
-
 	peditor = gconf_peditor_new_boolean
 	    (changeset, "/desktop/gnome/peripherals/keyboard/repeat",
 	     WID ("repeat_toggle"), NULL);

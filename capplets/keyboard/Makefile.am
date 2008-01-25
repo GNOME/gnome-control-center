@@ -22,13 +22,6 @@ gnome_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBGNOMEKBDUI_LIBS)
 Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = gnome-keyboard-properties.glade
 
-pixmapsdir   = $(pkgdatadir)/pixmaps
-pixmaps_DATA = \
-	keyboard-repeat.png		\
-	keyboard-cursor.png		\
-	keyboard-volume.png		\
-	keyboard-bell.png
-
 desktopdir = $(datadir)/applications
 Desktop_in_files = keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
@@ -40,4 +33,4 @@ INCLUDES = \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(Glade_DATA) $(pixmaps_DATA)
+EXTRA_DIST = $(Glade_DATA)

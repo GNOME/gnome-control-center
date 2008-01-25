@@ -19,7 +19,7 @@
  * Boston, MA 02111-1307, USA.
  *
  * Authors:
- *	Rajkumar Sivasamy <rajkumar.siva@wipro.com> 
+ *	Rajkumar Sivasamy <rajkumar.siva@wipro.com>
  *	Taken bits of code from panel-stock-icons.c, Thanks Mark <mark@skynet.ie>
  */
 
@@ -29,21 +29,7 @@
 
 #include "capplet-stock-icons.h"
 
-static GtkIconSize keyboard_capplet_icon_size = 0;
-static GtkIconSize mouse_capplet_icon_size = 0;
 static GtkIconSize mouse_capplet_dblclck_icon_size = 0;
-
-GtkIconSize
-keyboard_capplet_icon_get_size (void)
-{
-	return keyboard_capplet_icon_size;
-}
-
-GtkIconSize
-mouse_capplet_icon_get_size (void)
-{
-	return mouse_capplet_icon_size;
-}
 
 GtkIconSize
 mouse_capplet_dblclck_icon_get_size (void)
@@ -51,7 +37,7 @@ mouse_capplet_dblclck_icon_get_size (void)
 	return mouse_capplet_dblclck_icon_size;
 }
 
-typedef struct 
+typedef struct
 {
 	char *stock_id;
 	char *name;
@@ -59,20 +45,9 @@ typedef struct
 
 
 static CappletStockIcon items [] = {
-	{ KEYBOARD_REPEAT, "keyboard-repeat.png" },
-	{ KEYBOARD_CURSOR, "keyboard-cursor.png" },
-	{ KEYBOARD_VOLUME, "keyboard-volume.png" },
-	{ KEYBOARD_BELL, "keyboard-bell.png" },
-	{ ACCESSX_KEYBOARD_BOUNCE, "accessibility-keyboard-bouncekey.png"},
-	{ ACCESSX_KEYBOARD_SLOW, "accessibility-keyboard-slowkey.png"},
-	{ ACCESSX_KEYBOARD_MOUSE, "accessibility-keyboard-mousekey.png"},
-	{ ACCESSX_KEYBOARD_STICK, "accessibility-keyboard-stickykey.png"},
-	{ ACCESSX_KEYBOARD_TOGGLE, "accessibility-keyboard-togglekey.png"},
 	{ MOUSE_DBLCLCK_MAYBE, "double-click-maybe.png"},
 	{ MOUSE_DBLCLCK_ON, "double-click-on.png"},
-	{ MOUSE_DBLCLCK_OFF, "double-click-off.png"},
-	{ MOUSE_RIGHT_HANDED, "mouse-right.png"},
-	{ MOUSE_LEFT_HANDED, "mouse-left.png"}
+	{ MOUSE_DBLCLCK_OFF, "double-click-off.png"}
 };
 
 static void
@@ -84,7 +59,7 @@ capplet_register_stock_icons (GtkIconFactory *factory)
 	source =  gtk_icon_source_new ();
 
 	for (i = 0; i <  G_N_ELEMENTS (items); ++i) {
-		GtkIconSet *icon_set; 
+		GtkIconSet *icon_set;
 		char *filename;
 		filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP, items[i].name, TRUE, NULL);
 
@@ -112,21 +87,13 @@ capplet_init_stock_icons (void)
 	GtkIconFactory *factory;
 	static gboolean initialized = FALSE;
 
-	if (initialized) 
+	if (initialized)
 		return;
 	initialized = TRUE;
 
 	factory = gtk_icon_factory_new ();
 	gtk_icon_factory_add_default (factory);
 	capplet_register_stock_icons (factory);
-
-	keyboard_capplet_icon_size = gtk_icon_size_register ("keyboard-capplet",
-							      KEYBOARD_CAPPLET_DEFAULT_ICON_SIZE,
-							      KEYBOARD_CAPPLET_DEFAULT_ICON_SIZE);
-
-	mouse_capplet_icon_size = gtk_icon_size_register ("mouse-capplet",
-							   MOUSE_CAPPLET_DEFAULT_WIDTH,
-							   MOUSE_CAPPLET_DEFAULT_HEIGHT);
 
 	mouse_capplet_dblclck_icon_size = gtk_icon_size_register ("mouse-capplet-dblclck-icon",
 								   MOUSE_CAPPLET_DBLCLCK_ICON_SIZE,

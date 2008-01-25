@@ -15,9 +15,7 @@ pixmapdir  = $(pkgdatadir)/pixmaps
 pixmap_DATA = \
 	double-click-on.png		\
 	double-click-off.png		\
-	double-click-maybe.png		\
-	mouse-left.png			\
-	mouse-right.png
+	double-click-maybe.png
 
 Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = gnome-mouse-properties.glade
