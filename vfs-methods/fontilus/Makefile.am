@@ -19,7 +19,7 @@ gnome_thumbnail_font_SOURCES = ftstream-vfs.c thumbnailer.c
 gnome_font_viewer_LDADD = $(FONT_VIEW_LIBS)
 gnome_font_viewer_SOURCES = ftstream-vfs.c font-view.c
 
-nautilusdir = $(libdir)/nautilus/extensions-2.0
+nautilusdir = $(NAUTILUSDIR)
 nautilus_LTLIBRARIES = libnautilus-fontilus.la
 libnautilus_fontilus_la_LDFLAGS = -module -avoid-version -no-undefined \
   -export-symbols-regex 'nautilus_module_.*'

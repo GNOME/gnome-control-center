@@ -258,6 +258,10 @@ if test x$enable_vfs_methods = xyes; then
   FONTILUS=fontilus
   AC_SUBST(THEMUS)
   AC_SUBST(FONTILUS)
+  # Determine the install dir for the nautilus extensions.
+  NAUTILUSDIR=`pkg-config --variable=extensiondir libnautilus-extension`
+  AC_SUBST(NAUTILUSDIR)
+
 
   # update LIBS for $export_dynamic
   export_dynamic=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`

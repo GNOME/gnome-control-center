@@ -13,7 +13,7 @@ bin_PROGRAMS = gnome-theme-thumbnailer themus-theme-applier
 vfsmoduledir = $(libdir)/gnome-vfs-2.0/modules
 vfsmodule_LTLIBRARIES = libtheme-method.la
 
-nautilusdir = $(libdir)/nautilus/extensions-2.0
+nautilusdir = $(NAUTILUSDIR)
 nautilus_LTLIBRARIES = libnautilus-themus.la
 
 libtheme_method_la_LDFLAGS = -module -avoid-version -no-undefined \
