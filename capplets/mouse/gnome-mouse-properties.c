@@ -113,24 +113,6 @@ double_click_from_gconf (GConfPropertyEditor *peditor, const GConfValue *value)
 	return new_value;
 }
 
-static gboolean
-delay_value_changed_cb (GtkWidget *range, GtkScrollType scroll, gdouble value,
-			gpointer   dialog)
-{
-	gchar *message;
-
-	if (value < 100)
-		value = 100;
-	else if (value > 1000)
-		value = 1000;
-
-	message = g_strdup_printf (ngettext ("%d millisecond","%d milliseconds", CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000)), CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000));
-	gtk_label_set_label ((GtkLabel*) WID ("delay_label"), message);
-	g_free (message);
-
-	return FALSE;
-}
-
 static void
 get_default_mouse_info (int *default_numerator, int *default_denominator, int *default_threshold)
 {
@@ -157,17 +139,17 @@ get_default_mouse_info (int *default_numerator, int *default_denominator, int *d
 }
 
 static GConfValue *
-motion_acceleration_from_gconf (GConfPropertyEditor *peditor, 
+motion_acceleration_from_gconf (GConfPropertyEditor *peditor,
 				const GConfValue *value)
 {
 	GConfValue *new_value;
 	gfloat motion_acceleration;
 
 	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-	
+
 	if (gconf_value_get_float (value) == -1.0) {
 		int numerator, denominator;
-		
+
 		get_default_mouse_info (&numerator, &denominator, NULL);
 
 		motion_acceleration = CLAMP ((gfloat)(numerator / denominator), 0.2, 6.0);
@@ -185,7 +167,7 @@ motion_acceleration_from_gconf (GConfPropertyEditor *peditor,
 }
 
 static GConfValue *
-motion_acceleration_to_gconf (GConfPropertyEditor *peditor, 
+motion_acceleration_to_gconf (GConfPropertyEditor *peditor,
 			      const GConfValue *value)
 {
 	GConfValue *new_value;
@@ -203,7 +185,7 @@ motion_acceleration_to_gconf (GConfPropertyEditor *peditor,
 }
 
 static GConfValue *
-threshold_from_gconf (GConfPropertyEditor *peditor, 
+threshold_from_gconf (GConfPropertyEditor *peditor,
 		      const GConfValue *value)
 {
 	GConfValue *new_value;
@@ -224,7 +206,7 @@ threshold_from_gconf (GConfPropertyEditor *peditor,
 }
 
 static GConfValue *
-drag_threshold_from_gconf (GConfPropertyEditor *peditor, 
+drag_threshold_from_gconf (GConfPropertyEditor *peditor,
 			   const GConfValue *value)
 {
 	GConfValue *new_value;
@@ -238,7 +220,7 @@ drag_threshold_from_gconf (GConfPropertyEditor *peditor,
 
 /* Double Click handling */
 
-struct test_data_t 
+struct test_data_t
 {
 	gint *timeout_id;
 	GtkWidget *image;
@@ -251,7 +233,7 @@ test_maybe_timeout (struct test_data_t *data)
 {
 	double_click_state = DOUBLE_CLICK_TEST_OFF;
 
-	gtk_image_set_from_stock (GTK_IMAGE (data->image), 
+	gtk_image_set_from_stock (GTK_IMAGE (data->image),
 				  MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size());
 
 	*data->timeout_id = 0;
@@ -279,7 +261,7 @@ event_box_button_press_event (GtkWidget   *widget,
 		return FALSE;
 
 	image = g_object_get_data (G_OBJECT (widget), "image");
-	
+
 	if (!(changeset && gconf_change_set_check_value (changeset, DOUBLE_CLICK_KEY, &value))) {
 		client = gconf_client_get_default();
 		double_click_time = gconf_client_get_int (client, DOUBLE_CLICK_KEY, NULL);
@@ -317,15 +299,15 @@ event_box_button_press_event (GtkWidget   *widget,
 
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_ON:
-		gtk_image_set_from_stock (GTK_IMAGE (image), 
+		gtk_image_set_from_stock (GTK_IMAGE (image),
 					  MOUSE_DBLCLCK_ON, mouse_capplet_dblclck_icon_get_size());
 		break;
 	case DOUBLE_CLICK_TEST_MAYBE:
-		gtk_image_set_from_stock (GTK_IMAGE (image), 
+		gtk_image_set_from_stock (GTK_IMAGE (image),
 					  MOUSE_DBLCLCK_MAYBE, mouse_capplet_dblclck_icon_get_size());
 		break;
 	case DOUBLE_CLICK_TEST_OFF:
-		gtk_image_set_from_stock (GTK_IMAGE (image), 
+		gtk_image_set_from_stock (GTK_IMAGE (image),
 					  MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size());
 		break;
 	}
@@ -383,8 +365,6 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"),
 		 "conv-to-widget-cb", double_click_from_gconf,
 		 NULL);
-	g_signal_connect (G_OBJECT (WID ("delay_scale")), "change_value", (GCallback) delay_value_changed_cb, dialog);
-	gtk_widget_set_size_request (WID ("delay_scale"), 150, -1);
 	gtk_image_set_from_stock (GTK_IMAGE (WID ("double_click_image")), MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size ());
 	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", WID ("double_click_image"));
 	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
@@ -412,7 +392,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 /* Construct the dialog */
 
 static GladeXML *
-create_dialog (void) 
+create_dialog (void)
 {
 	GladeXML     *dialog;
 	GtkSizeGroup *size_group;
@@ -445,7 +425,7 @@ create_dialog (void)
 /* Callback issued when a button is clicked on the dialog */
 
 static void
-dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
