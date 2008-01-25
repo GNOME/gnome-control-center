@@ -22,7 +22,6 @@
 #include "appearance.h"
 #include "gnome-wp-info.h"
 #include "gnome-wp-item.h"
-#include "gnome-wp-utils.h"
 #include "gnome-wp-xml.h"
 #include "wp-cellrenderer.h"
 #include <glib/gi18n.h>

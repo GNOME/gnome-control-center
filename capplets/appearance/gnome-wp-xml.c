@@ -20,7 +20,6 @@
 
 #include "appearance.h"
 #include "gnome-wp-item.h"
-#include "gnome-wp-utils.h"
 #include <string.h>
 #include <libxml/parser.h>
 

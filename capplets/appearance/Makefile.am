@@ -24,8 +24,6 @@ gnome_appearance_properties_SOURCES = \
 	gnome-wp-info.h \
 	gnome-wp-item.c \
 	gnome-wp-item.h \
-	gnome-wp-utils.c \
-	gnome-wp-utils.h \
 	gnome-wp-xml.c \
 	gnome-wp-xml.h \
 	theme-installer.c \

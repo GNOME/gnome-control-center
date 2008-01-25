@@ -1,5 +1,18 @@
 2008-01-25  Soren Sandmann  <sandmann@redhat.com>
 
+	* gnome-wp-item.c (collect_save_options): Delete this function.
+
+	* gnome-wp-xml.c: Don't include gnome-wp-utils.h
+	* appearance-desktop.c: Don't include gnome-wp-utils.h
+	* gnome-wp-item.c: Don't include gnome-wp-utils.h
+	* gnome-wp-item.h: Move gconf key macros here from gnome-wp-utils.h
+
+	* Makefile.am: Delete gnome-wp-utils.[ch]
+	
+	* gnome-wp-utils.[ch]: Delete these files.
+	
+2008-01-25  Soren Sandmann  <sandmann@redhat.com>
+
 	* gnome-wp-item.h (GNOME_DESKTOP_USE_UNSTABLE_API): 
 	* appearance-desktop.c (GNOME_DESKTOP_USE_UNSTABLE_API): 
 	* gnome-wp-item.c (GNOME_DESKTOP_USE_UNSTABLE_API): 

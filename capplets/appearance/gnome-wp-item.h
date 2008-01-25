@@ -30,6 +30,15 @@
 #ifndef _GNOME_WP_ITEM_H_
 #define _GNOME_WP_ITEM_H_
 
+#define WP_PATH_KEY "/desktop/gnome/background"
+#define WP_FILE_KEY WP_PATH_KEY "/picture_filename"
+#define WP_OPTIONS_KEY WP_PATH_KEY "/picture_options"
+#define WP_SHADING_KEY WP_PATH_KEY "/color_shading_type"
+#define WP_PCOLOR_KEY WP_PATH_KEY "/primary_color"
+#define WP_SCOLOR_KEY WP_PATH_KEY "/secondary_color"
+#define WP_KEYBOARD_PATH "/desktop/gnome/peripherals/keyboard"
+#define WP_DELAY_KEY WP_KEYBOARD_PATH "/delay"
+
 typedef struct _GnomeWPItem GnomeWPItem;
 
 struct _GnomeWPItem {

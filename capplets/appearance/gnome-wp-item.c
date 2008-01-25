@@ -27,9 +27,7 @@
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
-
 #include "gnome-wp-item.h"
-#include "gnome-wp-utils.h"
 
 static void set_bg_properties (GnomeWPItem *item)
 {
@@ -169,55 +167,6 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   gtk_tree_row_reference_free (item->rowref);
 
   g_free (item);
-}
-
-static void collect_save_options (GdkPixbuf * pixbuf,
-				  gchar *** keys,
-				  gchar *** vals,
-				  gint width,
-				  gint height) {
-  gchar ** options;
-  gint n, count;
-
-  count = 0;
-
-  options = g_object_get_qdata (G_OBJECT (pixbuf),
-				g_quark_from_static_string ("gdk_pixbuf_options"));
-  if (options) {
-    for (n = 0; options[2 * n]; n++) {
-      ++count;
-
-      *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
-      *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
-
-      (*keys)[count - 1] = g_strdup (options[2 * n]);
-      (*vals)[count - 1] = g_strdup (options[2 * n + 1]);
-
-      (*keys)[count] = NULL;
-      (*vals)[count] = NULL;
-    }
-  }
-  ++count;
-
-  *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
-  *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
-
-  (*keys)[count - 1] = g_strdup ("tEXt::Thumb::Image::Width");
-  (*vals)[count - 1] = g_strdup_printf ("%d", width);
-
-  (*keys)[count] = NULL;
-  (*vals)[count] = NULL;
-
-  ++count;
-
-  *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
-  *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
-
-  (*keys)[count - 1] = g_strdup ("tEXt::Thumb::Image::Height");
-  (*vals)[count - 1] = g_strdup_printf ("%d", height);
-
-  (*keys)[count] = NULL;
-  (*vals)[count] = NULL;
 }
 
 #define LIST_IMAGE_WIDTH 108
