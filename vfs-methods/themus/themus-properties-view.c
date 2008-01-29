@@ -79,25 +79,26 @@ themus_properties_view_class_init (ThemusPropertiesViewClass *class)
 }
 
 static void
-add_atk_relation (GtkWidget 		*obj1, 
-		  GtkWidget 		*obj2, 
+add_atk_relation (GtkWidget 		*obj1,
+		  GtkWidget 		*obj2,
 		  AtkRelationType 	 rel_type)
 {
     AtkObject *atk_obj1, *atk_obj2;
     AtkRelationSet *relation_set;
     AtkRelation *relation;
-	
+
     g_return_if_fail (GTK_IS_WIDGET(obj1));
     g_return_if_fail (GTK_IS_WIDGET(obj2));
-	
-    atk_obj1 = gtk_widget_get_accessible(obj1);
-			
-    atk_obj2 = gtk_widget_get_accessible(obj2);
-	
+
+    atk_obj1 = gtk_widget_get_accessible (obj1);
+    atk_obj2 = gtk_widget_get_accessible (obj2);
+
     relation_set = atk_object_ref_relation_set (atk_obj1);
-    relation = atk_relation_new(&atk_obj2, 1, rel_type);
-    atk_relation_set_add(relation_set, relation);
-    g_object_unref(G_OBJECT (relation));
+    relation = atk_relation_new (&atk_obj2, 1, rel_type);
+    atk_relation_set_add (relation_set, relation);
+
+    g_object_unref (relation);
+    g_object_unref (relation_set);
 }
 
 static void
@@ -146,7 +147,7 @@ themus_properties_view_init (ThemusPropertiesView *self)
     gtk_label_set_markup (GTK_LABEL (self->details->icon_caption), str);
     g_free (str);
     self->details->icon_theme = gtk_label_new (NULL);
-	
+
     do_table_attach (GTK_TABLE (self), self->details->description_caption,
 		     0, 0, 1, 1, 1.0);
     do_table_attach (GTK_TABLE (self), self->details->description,
@@ -163,7 +164,7 @@ themus_properties_view_init (ThemusPropertiesView *self)
 		     0, 3, 1, 1, 1.0);
     do_table_attach (GTK_TABLE (self), self->details->icon_theme,
 		     1, 3, 1, 1, 0.0);
-	
+
     add_atk_relation (self->details->gtk_caption, self->details->gtk_theme,
 		      ATK_RELATION_LABEL_FOR);
     add_atk_relation (self->details->gtk_theme, self->details->gtk_caption,
@@ -216,7 +217,7 @@ themus_properties_view_set_location (ThemusPropertiesView *self,
 {
     GnomeVFSURI *uri;
     GnomeThemeMetaInfo *theme;
-	
+
     g_assert (THEMUS_IS_PROPERTIES_VIEW (self));
 
     if (location) {
@@ -224,7 +225,7 @@ themus_properties_view_set_location (ThemusPropertiesView *self,
 
 	theme = gnome_theme_read_meta_theme (uri);
 	gnome_vfs_uri_unref (uri);
-	
+
 	gtk_label_set_text (GTK_LABEL (self->details->description),
 			    theme->comment);
 	gtk_label_set_text (GTK_LABEL (self->details->gtk_theme),
