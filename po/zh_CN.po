@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-03 03:33+0000\n"
+"POT-Creation-Date: 2008-01-29 12:30+0000\n"
 "PO-Revision-Date: 2008-01-07 21:52+0800\n"
 "Last-Translator: Yang Zhang <zyangmath@gmail.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -56,7 +56,7 @@ msgid "No Image"
 msgstr "无图像"
 
 #: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1100
+#: ../capplets/appearance/appearance-desktop.c:1141
 msgid "Images"
 msgstr "图像"
 
@@ -484,220 +484,11 @@ msgstr "辅助技术"
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "登录时启用 GNOME 的辅助技术支持"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:250
-#, c-format
-msgid "There was an error launching the mouse preferences dialog: %s"
-msgstr "调用鼠标首选项对话框出错：%s"
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:346
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:407
-#, c-format
-msgid "Unable to import AccessX settings from file '%s'"
-msgstr "无法从文件“%s”中导入 AccessX 设置 "
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:444
-msgid "Import Feature Settings File"
-msgstr "导入特性设置文件"
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:448
-msgid "_Import"
-msgstr "导入(_I)"
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-msgid "Keyboard Accessibility"
-msgstr "键盘辅助功能"
-
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
-msgid "Set your keyboard accessibility preferences"
-msgstr "设置键盘的辅助功能"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:59
-msgid ""
-"This system does not seem to have the XKB extension.  The keyboard "
-"accessibility features will not operate without it."
-msgstr "此系统好像没有 XKB 扩展。键盘辅助功能必须依赖该扩展才能实现。"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "<b>Enable Bo_unce Keys</b>"
-msgstr "<b>启用回弹键(_U)</b>"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-msgid "<b>Enable Slo_w Keys</b>"
-msgstr "<b>启用筛选键(_W)</b>"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-msgid "<b>Enable _Mouse Keys</b>"
-msgstr "<b>启用鼠标键(_M)</b>"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
-msgid "<b>Enable _Repeat Keys</b>"
-msgstr "<b>启用重复键(_R)</b>"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "<b>Enable _Sticky Keys</b>"
-msgstr "<b>启用粘滞键(_S)</b>"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
-msgid "<b>Features</b>"
-msgstr "<b>特性</b>"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
-msgid "<b>Toggle Keys</b>"
-msgstr "<b>切换键</b>"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-msgid "Basic"
-msgstr "基本"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
-msgid "Beep if key is re_jected"
-msgstr "键被拒绝时鸣笛(_J)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
-msgid "Beep when _features turned on or off from keyboard"
-msgstr "从键盘开关特性时鸣笛(_F)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
-msgid "Beep when _modifier is pressed"
-msgstr "按下修饰键时鸣笛(_M)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
-msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr "当 LED 打开时鸣笛，当 LED 关闭时鸣笛两声。"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
-msgid "Beep when key is:"
-msgstr "符合下列按键条件时鸣笛："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
-msgid "Del_ay:"
-msgstr "延时(_A)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
-msgid "Delay between keypress and pointer mo_vement:"
-msgstr "按键和指针移动的延时(_V)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
-msgid "Disa_ble if two keys pressed together"
-msgstr "若同时按两个键则禁用(_B)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-msgid "E_nable Toggle Keys"
-msgstr "启用切换键(_N)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-msgid "Filters"
-msgstr "过滤器"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "I_gnore duplicate keypresses within:"
-msgstr "在此时间内忽略重复按键(_G)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-msgid ""
-"Ignore all subsequent presses of the SAME key if they happen within a user "
-"selectable period of time."
-msgstr ""
-"如果在一个用户可选择期间内多次按下同一键，则忽略所有后续按下该键的操作。"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
-msgid "Keyboard Accessibility Preferences (AccessX)"
-msgstr "键盘辅助功能设置 (AccessX)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "Ma_ximum pointer speed:"
-msgstr "最高指针速度(_X)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
-msgid "Mouse Keys"
-msgstr "鼠标键"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
-msgid "Mouse _Preferences..."
-msgstr "鼠标首选项(_P)..."
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid ""
-"Only accept keys after they have been pressed and held for a user adjustable "
-"amount of time."
-msgstr "只接受用户按下并在可调整时间段内按住的按键操作。"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
-msgid ""
-"Perform multiple simultaneous key press operations by pressing modifier keys "
-"in sequence."
-msgstr "顺序按下修饰键，可以产生同时按多个键的操作。"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
-msgid "S_peed:"
-msgstr "速度(_P)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-msgid "Time to acce_lerate to maximum speed:"
-msgstr "加速到最高速度的时间(_L)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-msgid "Turn the numeric keypad into a mouse control pad."
-msgstr "将数字小键盘转变为鼠标控制盘。"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
-msgid "_Disable if unused for:"
-msgstr "禁用若未使用超过(_D)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
-msgid "_Enable keyboard accessibility features"
-msgstr "启用键盘辅助功能(_E)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
-msgid "_Import Feature Settings..."
-msgstr "导入特性设置(_I)..."
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
-msgid "_Only accept keys held for:"
-msgstr "接受按键，仅当按键时间超过(_O)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
-msgid "_Type to test settings:"
-msgstr "输入字符来测试设置(_T)："
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
-msgid "_accepted"
-msgstr "接受(_A)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-msgid "_pressed"
-msgstr "按下(_P)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
-msgid "_rejected"
-msgstr "弹起(_R)"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
-msgid "characters/second"
-msgstr "字符/秒"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
-msgid "milliseconds"
-msgstr "毫秒"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
-msgid "pixels/second"
-msgstr "像素/秒"
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
-#: ../capplets/windows/gnome-window-properties.glade.h:10
-msgid "seconds"
-msgstr "秒"
-
-#: ../capplets/appearance/appearance-desktop.c:1068
+#: ../capplets/appearance/appearance-desktop.c:1109
 msgid "Add Wallpaper"
 msgstr "添加壁纸"
 
-#: ../capplets/appearance/appearance-desktop.c:1104
+#: ../capplets/appearance/appearance-desktop.c:1145
 msgid "All files"
 msgstr "全部文件"
 
@@ -1181,11 +972,15 @@ msgstr "Gnome 主题包"
 msgid "No Wallpaper"
 msgstr "无壁纸"
 
+#: ../capplets/appearance/gnome-wp-item.c:200
+msgid "Slide Show"
+msgstr "幻灯片演示"
+
 #. translators: <b>wallpaper name</b>
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:364
+#: ../capplets/appearance/gnome-wp-item.c:208
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1196,8 +991,8 @@ msgstr ""
 "%s, %d %s x %d %s\n"
 "文件夹：%s"
 
-#: ../capplets/appearance/gnome-wp-item.c:370
-#: ../capplets/appearance/gnome-wp-item.c:372
+#: ../capplets/appearance/gnome-wp-item.c:214
+#: ../capplets/appearance/gnome-wp-item.c:216
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "像素"
@@ -1210,13 +1005,11 @@ msgstr "无法安装主题"
 #: ../capplets/appearance/theme-installer.c:173
 #, c-format
 msgid "The %s utility is not installed."
-msgstr ""
-"%s 工具未安装。"
+msgstr "%s 工具未安装。"
 
 #: ../capplets/appearance/theme-installer.c:223
 msgid "There was a problem while extracting the theme."
-msgstr ""
-"提取主题时发生了错误。"
+msgstr "提取主题时发生了错误。"
 
 #: ../capplets/appearance/theme-installer.c:246
 msgid "There was an error installing the selected file"
@@ -1232,8 +1025,7 @@ msgstr "“%s”似乎不是有效的主题。"
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
 "you need to compile."
-msgstr ""
-"“%s”似乎不是有效的主题。它可能是需要编译才能使用的主题引擎。"
+msgstr "“%s”似乎不是有效的主题。它可能是需要编译才能使用的主题引擎。"
 
 #: ../capplets/appearance/theme-installer.c:287
 #, c-format
@@ -1331,7 +1123,7 @@ msgstr ""
 "或者非 GNOME（如 KDE）设置管理器可能已经处于活动状态，它与 GNOME 设置管理器发"
 "生冲突。"
 
-#: ../capplets/common/capplet-stock-icons.c:92
+#: ../capplets/common/capplet-stock-icons.c:67
 #, c-format
 msgid "Unable to load stock icon '%s'\n"
 msgstr "无法装入图标“%s”\n"
@@ -1341,13 +1133,12 @@ msgid "Just apply settings and quit"
 msgstr "应用设置并退出"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:252
+#: ../capplets/keyboard/gnome-keyboard-properties.c:249
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "取得并保存原有的设置"
 
 #: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:390
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "显示帮助时出错：%s"
@@ -1630,6 +1421,7 @@ msgstr "<b>Web 浏览器</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "辅助功能"
 
@@ -2021,7 +1813,7 @@ msgstr "加速键类型。"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:112
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:482
+#: ../typing-break/drwright.c:482
 msgid "Disabled"
 msgstr "禁用"
 
@@ -2084,23 +1876,23 @@ msgstr "要编辑快捷键，请单击相应的行，然后输入新加速键，
 msgid "Assign shortcut keys to commands"
 msgstr "为命令指定快捷键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:249
+#: ../capplets/keyboard/gnome-keyboard-properties.c:241
+#: ../capplets/keyboard/gnome-keyboard-properties.c:246
 #: ../capplets/sound/sound-properties-capplet.c:1026
 #: ../capplets/sound/sound-properties-capplet.c:1028
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "应用设置并退出(仅为兼容，现在已由守护进程处理)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/keyboard/gnome-keyboard-properties.c:253
 msgid "Start the page with the typing break settings showing"
 msgstr "以显示的打字间隔设置启动页面"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:261
+#: ../capplets/keyboard/gnome-keyboard-properties.c:258
 msgid "Start the page with the accessibility settings showing"
 msgstr "以显示的辅助功能设置启动页面"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:270
+#: ../capplets/keyboard/gnome-keyboard-properties.c:267
 msgid "- GNOME Keyboard Preferences"
 msgstr "- GNOME 键盘首选项"
 
@@ -2136,19 +1928,27 @@ msgstr "<b>粘滞键</b>"
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>锁定屏幕来强制打字间断(_L)</b>"
 
+#. fast acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>快</i></small>"
 
+#. long delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>长</i></small>"
 
+#. short delay
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>短</i></small>"
 
+#. slow acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>慢</i></small>"
 
@@ -2205,10 +2005,12 @@ msgid "Cursor _blinks in text fields"
 msgstr "文本域中的光标会闪烁(_B)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "Cursor blinks speed"
 msgstr "光标闪烁速度"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "D_elay:"
 msgstr "延时(_E)："
 
@@ -2225,6 +2027,7 @@ msgid "Duration of work before forcing a break"
 msgstr "强制间断前的工作持续时间"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:36
 msgid "General"
 msgstr "常规"
 
@@ -2262,6 +2065,10 @@ msgid ""
 "injuries"
 msgstr "每隔一段时间锁定屏幕，以便重复性的键盘工作使手臂过度劳累"
 
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+msgid "Mouse Keys"
+msgstr "鼠标键"
+
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "Preview:"
 msgstr "预览："
@@ -2273,6 +2080,10 @@ msgstr "重复键速度"
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "Reset to De_faults"
 msgstr "重置为默认值(_F)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
+msgid "S_peed:"
+msgstr "速度(_P)："
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
 msgid "Separate _layout for each window"
@@ -2295,6 +2106,7 @@ msgid "_Break interval lasts:"
 msgstr "间断间隔持续(_B)："
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "延时(_D)："
 
@@ -2330,6 +2142,10 @@ msgstr "模拟同时按键(_S)"
 msgid "_Speed:"
 msgstr "速度(_S)："
 
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
+msgid "_Type to test settings:"
+msgstr "输入字符来测试设置(_T)："
+
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
 msgid "_Variants:"
 msgstr "变体(_V)："
@@ -2343,14 +2159,6 @@ msgid "_Work interval lasts:"
 msgstr "工作间隔持续(_W)："
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
-msgid "gtk-close"
-msgstr "gtk-close"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
-msgid "gtk-help"
-msgstr "gtk-help"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "分钟"
 
@@ -2384,110 +2192,170 @@ msgstr "键盘"
 msgid "Set your keyboard preferences"
 msgstr "设置键盘首选项"
 
-#: ../capplets/localization/localization.desktop.in.in.h:1
-msgid "Language and Location"
-msgstr "语言和位置"
+#. Translators: this is the gesture to trigger/choose the click type.
+#. Don't include the prefix "gesture|" in the translation.
+#: ../capplets/mouse/gnome-mouse-accessibility.c:89
+msgid "gesture|Move left"
+msgstr "左移"
 
-#: ../capplets/localization/localization.desktop.in.in.h:2
-msgid "Set your language and location preferences"
-msgstr "设定您的语言和位置首选项"
+#. Translators: this is the gesture to trigger/choose the click type.
+#. Don't include the prefix "gesture|" in the translation.
+#: ../capplets/mouse/gnome-mouse-accessibility.c:94
+msgid "gesture|Move right"
+msgstr "右移"
 
-#: ../capplets/localization/localization.glade.h:1
-msgid ""
-"<i>Region and language changes take effect the next time you log in.</i>"
-msgstr "<i>对地区和语言的更改将会在您下次登录时生效。</i>"
+#. Translators: this is the gesture to trigger/choose the click type.
+#. Don't include the prefix "gesture|" in the translation.
+#: ../capplets/mouse/gnome-mouse-accessibility.c:99
+msgid "gesture|Move up"
+msgstr "上移"
 
-#: ../capplets/localization/localization.glade.h:2
-msgid "Localization Preferences"
-msgstr "本地化首选项"
+#. Translators: this is the gesture to trigger/choose the click type.
+#. Don't include the prefix "gesture|" in the translation.
+#: ../capplets/mouse/gnome-mouse-accessibility.c:104
+msgid "gesture|Move down"
+msgstr "下移"
 
-#: ../capplets/localization/localization.glade.h:3
-msgid "Region:"
-msgstr "地区："
-
-#: ../capplets/localization/localization.glade.h:4
-msgid "Selected languages:"
-msgstr "所选语言："
-
-#. set the timeout value  label with correct value of timeout
-#: ../capplets/mouse/gnome-mouse-properties.c:126
-#: ../capplets/mouse/gnome-mouse-properties.c:384
-#, c-format
-msgid "%d millisecond"
-msgid_plural "%d milliseconds"
-msgstr[0] "%d 毫秒"
+#. Translators: this is the gesture to trigger/choose the click type.
+#. Don't include the prefix "gesture|" in the translation.
+#: ../capplets/mouse/gnome-mouse-accessibility.c:109
+msgid "gesture|Disabled"
+msgstr "禁用"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "<b>Double-Click Timeout </b>"
+msgid "<b>Double-Click Timeout</b>"
 msgstr "<b>双击超时</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Drag and Drop</b>"
 msgstr "<b>拖放</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
+msgid "<b>Dwell Click</b>"
+msgstr "<b>假击</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
+msgid "<b>Locate Pointer</b>"
+msgstr "<b>定位指针</b>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>鼠标方向</b>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Speed</b>"
-msgstr "<b>速度</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Fast</i>"
-msgstr "<i>快</i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>High</i>"
-msgstr "<i>高</i>"
-
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Large</i>"
-msgstr "<i>大</i>"
+msgid "<b>Pointer Speed</b>"
+msgstr "<b>指针速度</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:8
-msgid "<i>Low</i>"
-msgstr "<i>低</i>"
+msgid "<b>Simulated Secondary Click</b>"
+msgstr "<b>模拟第二击</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:9
-msgid "<i>Slow</i>"
-msgstr "<i>慢</i>"
+msgid ""
+"<i>To test your double-click settings, try to double-click on the light bulb."
+"</i>"
+msgstr ""
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
-msgid "<i>Small</i>"
-msgstr "<i>小</i>"
-
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:11
-msgid "Buttons"
-msgstr "按钮"
+msgid ""
+"<i>You can also use the Dwell Click panel applet to choose the click type.</"
+"i>"
+msgstr ""
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
-msgid "Motion"
-msgstr "运动"
+#. high sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+msgid "<small><i>High</i></small>"
+msgstr "<small><i>高</i></small>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#. large threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "<small><i>Large</i></small>"
+msgstr "<small><i>大</i></small>"
+
+#. low sensitivity
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "<small><i>Low</i></small>"
+msgstr "<small><i>低</i></small>"
+
+#. small threshold
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "<small><i>Small</i></small>"
+msgstr "<small><i>小</i></small>"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:29
+msgid "Choose type of click _beforehand"
+msgstr ""
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:30
+msgid "Choose type of click with mo_use gestures"
+msgstr "鼠标手势选择单击类型(_U)"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:33
+msgid "D_ouble click:"
+msgstr "双击(_O)："
+
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:35
+msgid "D_rag click:"
+msgstr "拖曳击(_R)："
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:37
 msgid "Mouse Preferences"
 msgstr "鼠标首选项"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:38
+msgid "Seco_ndary click:"
+msgstr "第二击(_N)："
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:39
+msgid "Sh_ow position of pointer when the Control key is pressed"
+msgstr "按住 Ctrl 键时显示指针位置(_O)"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:40
+msgid "Show click type _window"
+msgstr "显示点击类型窗口(_W)"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:41
+msgid "Thr_eshold:"
+msgstr "阈值(_E)："
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:42
 msgid "_Acceleration:"
 msgstr "加速(_A)："
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "_Left-handed mouse"
-msgstr "惯用左手鼠标(_L)"
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:44
+msgid "_Initiate click when stopping pointer movement"
+msgstr ""
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:45
+msgid "_Left-handed"
+msgstr "惯用左手(_L)"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:46
+msgid "_Motion Threshold:"
+msgstr "移动阈值(_M)："
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:47
+msgid "_Right-handed"
+msgstr "惯用右手(_R)"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:48
 msgid "_Sensitivity:"
 msgstr "灵敏度(_S)："
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
-msgid "_Threshold:"
-msgstr "阈值(_T)："
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:49
+msgid "_Single click:"
+msgstr "单击(_S)："
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:50
 msgid "_Timeout:"
 msgstr "超时(_T)："
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:51
+msgid "_Trigger secondary click by holding down the primary button"
+msgstr "按住鼠标主键不放时触发次击(_T)"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
@@ -2805,6 +2673,10 @@ msgstr "一段间隔后提升选中窗口(_R)"
 msgid "_Select windows when the mouse moves over them"
 msgstr "鼠标移动到窗口之上时选中该窗口(_S)"
 
+#: ../capplets/windows/gnome-window-properties.glade.h:10
+msgid "seconds"
+msgstr "秒"
+
 #: ../capplets/windows/window-properties.desktop.in.in.h:1
 msgid "Set your window properties"
 msgstr "设定您的窗口属性"
@@ -2812,298 +2684,6 @@ msgstr "设定您的窗口属性"
 #: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "窗口"
-
-#: ../gnome-settings-daemon/actions/acme.glade.h:1
-msgid "Volume"
-msgstr "音量"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:463
-msgid "Slow Keys Alert"
-msgstr "筛选键提醒"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:464
-msgid ""
-"You just held down the Shift key for 8 seconds.  This is the shortcut for "
-"the Slow Keys feature, which affects the way your keyboard works."
-msgstr ""
-"您已经按下了 Shift 键 8 秒。这是筛选键特性的快捷键，这将影响您键盘工作的方"
-"式。"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:466
-msgid "Do you want to activate Slow Keys?"
-msgstr "您想要激活筛选键吗？"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:467
-msgid "Do you want to deactivate Slow Keys?"
-msgstr "您想要禁用筛选键吗？"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
-msgid "_Activate"
-msgstr "激活(_A)"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:468
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:485
-msgid "_Deactivate"
-msgstr "禁用(_D)"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
-msgid "Do_n't activate"
-msgstr "不激活(_N)"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:469
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:486
-msgid "Do_n't deactivate"
-msgstr "不禁用(_N)"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:478
-msgid "Sticky Keys Alert"
-msgstr "粘滞键提醒"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:479
-msgid ""
-"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
-"the Sticky Keys feature, which affects the way your keyboard works."
-msgstr ""
-"您刚刚连续按了五次 Shift 键。这是粘滞键特性的快捷键，这将影响您键盘的工作方"
-"式。"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:481
-msgid ""
-"You just pressed two keys at once, or pressed the Shift key 5 times in a "
-"row.  This turns off the Sticky Keys feature, which affects the way your "
-"keyboard works."
-msgstr ""
-"您刚刚同时按下了两个键，或连续按了五次 Shift 键。这是取消粘滞键特性的快捷键，"
-"这将影响您键盘的工作方式。"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:483
-msgid "Do you want to activate Sticky Keys?"
-msgstr "您想要激活粘滞键吗？"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:484
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "您想要禁用粘滞键吗？"
-
-#: ../gnome-settings-daemon/gnome-settings-font.c:150
-#, c-format
-msgid ""
-"Cannot create the directory \"%s\".\n"
-"This is needed to allow changing the mouse pointer theme."
-msgstr ""
-"无法创建目录“%s”。\n"
-"允许改变鼠标指针主题需要此操作。"
-
-#: ../gnome-settings-daemon/gnome-settings-font.c:171
-#, c-format
-msgid ""
-"Cannot create the directory \"%s\".\n"
-"This is needed to allow changing cursors."
-msgstr ""
-"无法创建目录“%s”。\n"
-"允许改变光标需要此操作。"
-
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:275
-#, c-format
-msgid "Key Binding (%s) has its action defined multiple times\n"
-msgstr "键盘关联(%s)的按键定义了多次\n"
-
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:281
-#, c-format
-msgid "Key Binding (%s) has its binding defined multiple times\n"
-msgstr "键盘关联(%s)的关联操作定义了多次\n"
-
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:289
-#, c-format
-msgid "Key Binding (%s) is incomplete\n"
-msgstr "键盘关联(%s)不完整\n"
-
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:316
-#, c-format
-msgid "Key Binding (%s) is invalid\n"
-msgstr "键盘关联(%s)无效\n"
-
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:353
-#, c-format
-msgid "It seems that another application already has access to key '%u'."
-msgstr "似乎其它应用程序已经被指定了访问键“%u”。"
-
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:418
-#, c-format
-msgid "Key Binding (%s) is already in use\n"
-msgstr "键盘关联(%s)已被使用\n"
-
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:489
-#, c-format
-msgid ""
-"Error while trying to run (%s)\n"
-"which is linked to the key (%s)"
-msgstr ""
-"试图运行(%s)时出错\n"
-"与按键(%s)相关联"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:98
-#, c-format
-msgid ""
-"Error activating XKB configuration.\n"
-"It can happen under various circumstances:\n"
-"- a bug in libxklavier library\n"
-"- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implementation\n"
-"\n"
-"X server version data:\n"
-"%s\n"
-"%d\n"
-"%s\n"
-"If you report this situation as a bug, please include:\n"
-"- The result of <b>%s</b>\n"
-"- The result of <b>%s</b>"
-msgstr ""
-"激活 XKB 配置出错。\n"
-"可能是以下情况：\n"
-"- libxklavier 库的 bug\n"
-"- X 服务器的 bug(xkbcomp、xmodmap 实用工具)\n"
-"- 带有不兼容 libxkbfile 实现的 X 服务器\n"
-"\n"
-"X 服务器版本数据：\n"
-"%s\n"
-"%d\n"
-"%s\n"
-"如果您将此问题报告为错误，请同时包含：\n"
-"- <b>%s</b> 的结果\n"
-"- <b>%s</b> 的结果"
-
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:112
-msgid ""
-"You are using XFree 4.3.0.\n"
-"There are known problems with complex XKB configurations.\n"
-"Try using a simpler configuration or taking a fresher version of XFree "
-"software."
-msgstr ""
-"您正在使用 XFree 4.3.0。\n"
-"复杂的 XKB 配置有一些已知的问题。\n"
-"请试着使用较简单的配置，或者获得更新版本的 XFree 软件。"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:187
-msgid ""
-"Could not get default terminal. Verify that your default terminal command is "
-"set and points to a valid application."
-msgstr "无法获得默认终端。请检查您的默认终端是否已设置，并指向有效的应用程序。"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:215
-#, c-format
-msgid ""
-"Couldn't execute command: %s\n"
-"Verify that this is a valid command."
-msgstr ""
-"无法执行命令：%s\n"
-"请检查此命令是否有效。"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:230
-msgid ""
-"Couldn't put the machine to sleep.\n"
-"Verify that the machine is correctly configured."
-msgstr ""
-"无法将机器转入休眠。\n"
-"请检查机器是否已正确配置。"
-
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:190
-#, c-format
-msgid ""
-"There was an error starting up the screensaver:\n"
-"\n"
-"%s\n"
-"\n"
-"Screensaver functionality will not work in this session."
-msgstr ""
-"启动屏幕保护时出错：\n"
-"\n"
-"%s\n"
-"\n"
-"此对话中将无法使用屏幕保护功能。"
-
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:200
-msgid "_Do not show this message again"
-msgstr "不再显示此信息(_D)"
-
-#: ../gnome-settings-daemon/gnome-settings-sound.c:199
-#, c-format
-msgid "Couldn't load sound file %s as sample %s"
-msgstr "无法载入声音文件 %s 作为示例 %s"
-
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:243
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:291
-msgid "Cannot determine user's home directory"
-msgstr "无法确定用户的主目录"
-
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:303
-#, c-format
-msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr "GConf 键 %s 被设为 %s 类型，但是期望的类型是 %s\n"
-
-#: ../gnome-settings-daemon/modmap-dialog.glade.h:1
-msgid "A_vailable files:"
-msgstr "可用文件(_V)："
-
-#: ../gnome-settings-daemon/modmap-dialog.glade.h:2
-msgid "Do _not show this warning again."
-msgstr "不再显示此警告(_N)。"
-
-#: ../gnome-settings-daemon/modmap-dialog.glade.h:3
-msgid "Load modmap files"
-msgstr "装入 modmap 文件"
-
-#: ../gnome-settings-daemon/modmap-dialog.glade.h:4
-msgid "Would you like to load the modmap file(s)?"
-msgstr "您是否想要装入 modmap 文件？"
-
-#: ../gnome-settings-daemon/modmap-dialog.glade.h:5
-msgid "_Load"
-msgstr "装入(_L)"
-
-#: ../gnome-settings-daemon/modmap-dialog.glade.h:6
-msgid "_Loaded files:"
-msgstr "装入的文件(_L)："
-
-#: ../gnome-settings-daemon/reaper.c:103
-msgid "Error creating signal pipe."
-msgstr "创建信号 pipe 出错。"
-
-#: ../libbackground/applier.c:255
-msgid "Type"
-msgstr "类型"
-
-#: ../libbackground/applier.c:256
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-"bg_applier 类型：用于根窗口的 BG_APPLIER_ROOT 或用于预览的 BG_APPLIER_PREVIEW"
-
-#: ../libbackground/applier.c:263
-msgid "Preview Width"
-msgstr "预览宽度"
-
-#: ../libbackground/applier.c:264
-msgid "Width if applier is a preview: Defaults to 64."
-msgstr "宽度(若应用于预览)：默认值为 64。"
-
-#: ../libbackground/applier.c:271
-msgid "Preview Height"
-msgstr "预览高度"
-
-#: ../libbackground/applier.c:272
-msgid "Height if applier is a preview: Defaults to 48."
-msgstr "高度(若应用于预览)：默认值为 48。"
-
-#: ../libbackground/applier.c:279
-msgid "Screen"
-msgstr "屏幕"
-
-#: ../libbackground/applier.c:280
-msgid "Screen on which BGApplier is to draw"
-msgstr "BGApplier 绘图的屏幕"
 
 #. make start action
 #: ../libslab/application-tile.c:369
@@ -3123,11 +2703,11 @@ msgstr "升级"
 msgid "Uninstall"
 msgstr "卸载"
 
-#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:528
+#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:737
 msgid "Remove from Favorites"
 msgstr "从收藏夹中删除"
 
-#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:530
+#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:739
 msgid "Add to Favorites"
 msgstr "添加到收藏夹"
 
@@ -3175,7 +2755,6 @@ msgid "Network Servers"
 msgstr "网络服务器"
 
 #: ../libslab/bookmark-agent.c:1137
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "搜索"
 
@@ -3185,50 +2764,74 @@ msgid "<b>Open</b>"
 msgstr "<b>打开</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:234
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:228
 msgid "Rename..."
 msgstr "重命名..."
 
 #: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
-#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
+#: ../libslab/document-tile.c:242 ../libslab/document-tile.c:251
 msgid "Send To..."
 msgstr "发送至..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:283
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:277
 msgid "Move to Trash"
 msgstr "移至回收站"
 
 #: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:641
+#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:850
 msgid "Delete"
 msgstr "删除"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:813
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1022
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "您确定想要永久删除“%s”吗？"
 
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:817
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1026
 msgid "If you delete an item, it is permanently lost."
 msgstr "如果您删除一项的话，它将永久丢失。"
 
-#: ../libslab/document-tile.c:155
-msgid "Edited %m/%d/%Y"
-msgstr "于 %Y-%m-%d 编辑"
-
-#: ../libslab/document-tile.c:195
+#: ../libslab/document-tile.c:189
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>用“%s”打开</b>"
 
-#: ../libslab/document-tile.c:207
+#: ../libslab/document-tile.c:201
 msgid "Open with Default Application"
 msgstr "用默认应用程序打开"
 
-#: ../libslab/document-tile.c:218
+#: ../libslab/document-tile.c:212
 msgid "Open in File Manager"
 msgstr "在文件管理器中打开"
+
+#: ../libslab/document-tile.c:633
+msgid "?"
+msgstr "?"
+
+#: ../libslab/document-tile.c:640
+msgid "%l:%M %p"
+msgstr "%H:%M"
+
+#: ../libslab/document-tile.c:648
+msgid "Today %l:%M %p"
+msgstr "今天 %H:%M"
+
+#: ../libslab/document-tile.c:658
+msgid "Yesterday %l:%M %p"
+msgstr "昨天 %H:%M"
+
+#: ../libslab/document-tile.c:670
+msgid "%a %l:%M %p"
+msgstr "%A%H:%M"
+
+#: ../libslab/document-tile.c:678
+msgid "%b %d %l:%M %p"
+msgstr "%m月%d日%H:%M"
+
+#: ../libslab/document-tile.c:680
+msgid "%b %d %Y"
+msgstr "%Y-%m-%d"
 
 #: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
 #: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
@@ -3404,187 +3007,6 @@ msgstr "卷起"
 msgid "None"
 msgstr "无"
 
-#: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
-msgstr "如果是的话，text/plain 和 text/* 的 MIME 处理程序将会保持同步"
-
-#: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
-msgid "Sync text/plain and text/* handlers"
-msgstr "同步 text/plain 和 text/* 的处理程序"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "E-mail"
-msgstr "电子邮件"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "E-mail's shortcut."
-msgstr "电子邮件快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Eject"
-msgstr "弹出"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Eject's shortcut."
-msgstr "弹出的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
-msgid "Home folder"
-msgstr "主文件夹"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
-msgid "Home folder's shortcut."
-msgstr "主文件夹的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
-msgid "Launch calculator"
-msgstr "调用计算器"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
-msgid "Launch calculator's shortcut"
-msgstr "调用计算器的快捷键"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
-msgid "Launch help browser"
-msgstr "调用帮助浏览器"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
-msgid "Launch help browser's shortcut."
-msgstr "调用帮助浏览器的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
-msgid "Launch web browser"
-msgstr "调用 Web 浏览器"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
-msgid "Launch web browser's shortcut."
-msgstr "调用 Web 浏览器的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
-msgid "Lock screen"
-msgstr "锁住屏幕"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
-msgid "Lock screen's shortcut."
-msgstr "锁住屏幕的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
-msgid "Log out"
-msgstr "注销"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
-msgid "Log out's shortcut."
-msgstr "注销的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
-msgid "Media player"
-msgstr "媒体播放机"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
-msgid "Media player key's shortcut."
-msgstr "媒体播放机的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
-msgid "Next track key's shortcut."
-msgstr "下一首歌的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
-msgid "Pause"
-msgstr "暂停"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Pause key's shortcut."
-msgstr "暂停的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or play/pause)"
-msgstr "播放(或播放/暂停)"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or play/pause) key's shortcut."
-msgstr "播放(或播放/暂停)的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
-msgid "Previous track key's shortcut."
-msgstr "上一首歌的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
-msgid "Search's shortcut."
-msgstr "搜索的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to next track"
-msgstr "跳到下一首歌"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to previous track"
-msgstr "跳到上一首歌"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
-msgid "Sleep"
-msgstr "休眠"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
-msgid "Sleep's shortcut."
-msgstr "休眠的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
-msgid "Stop playback key"
-msgstr "停止回放按键"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Stop playback key's shortcut."
-msgstr "停止回放的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
-msgid "Volume down"
-msgstr "音量降低"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
-msgid "Volume down's shortcut."
-msgstr "音量降低的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
-msgid "Volume mute"
-msgstr "静音"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
-msgid "Volume mute's shortcut."
-msgstr "静音的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
-msgid "Volume step"
-msgstr "音量步进"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
-msgid "Volume step as percentage of volume."
-msgstr "以音量百分比步进音量。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
-msgid "Volume up"
-msgstr "音量升高"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
-msgid "Volume up's shortcut."
-msgstr "音量升高的快捷键。"
-
-#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-msgid "Display a dialog when there are errors running the screensaver"
-msgstr "运行屏幕保护程序出错时显示对话框"
-
-#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-msgid "Run screensaver at login"
-msgstr "登录时运行屏幕保护程序"
-
-#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
-msgid "Show Startup Errors"
-msgstr "显示启动错误"
-
-#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-msgid "Start screensaver"
-msgstr "启动屏幕保护程序"
-
 #: ../shell/control-center.c:62
 #, c-format
 msgid "key not found [%s]\n"
@@ -3666,8 +3088,8 @@ msgid ""
 "[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;default-"
 "applications.desktop,Add Printer;gnome-cups-manager.desktop]"
 msgstr ""
-"[更改主题;gtk-theme-selector.desktop,设定首选应用程序;default-"
-"applications.desktop,添加打印机;gnome-cups-manager.desktop]"
+"[更改主题;gtk-theme-selector.desktop,设定首选应用程序;default-applications."
+"desktop,添加打印机;gnome-cups-manager.desktop]"
 
 #: ../shell/control-center.schemas.in.h:14
 msgid ""
