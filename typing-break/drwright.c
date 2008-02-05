@@ -59,19 +59,19 @@ struct _DrWright {
 	/* Widgets. */
 	GtkWidget      *break_window;
 	GList          *secondary_break_windows;
-	
+
 	DrwMonitor     *monitor;
 
 	GtkItemFactory *popup_factory;
-	
+
 	DrwState        state;
 	GTimer         *timer;
 	GTimer         *idle_timer;
 
 	gint            last_elapsed_time;
-	
+
 	gboolean        is_active;
-	
+
 	/* Time settings. */
 	gint            type_time;
 	gint            break_time;
@@ -125,6 +125,7 @@ static GList *  create_secondary_break_windows (void);
 
 static GtkItemFactoryEntry popup_items[] = {
 /*	{ N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },*/
+	/* translators: keep the initial "/" */
 	{ N_("/_Preferences"),  NULL, GIF_CB (popup_preferences_cb), 0,                  "<StockItem>",  GTK_STOCK_PREFERENCES },
 	{ N_("/_About"),        NULL, GIF_CB (popup_about_cb),       0,                  "<StockItem>",  GTK_STOCK_ABOUT },
 	{ "/sep1",              NULL, NULL,                          0,                  "<Separator>",  NULL },
@@ -156,7 +157,7 @@ update_icon (DrWright *dr)
 						 dr->disabled_bar);
 		return;
 	}
-	
+
 	tmp_pixbuf = gdk_pixbuf_copy (dr->neutral_bar);
 
 	width = gdk_pixbuf_get_width (tmp_pixbuf);
@@ -169,13 +170,13 @@ update_icon (DrWright *dr)
 	case STATE_BREAK_SETUP:
 		r = 1;
 		break;
-		
+
 	case STATE_BREAK_DONE:
 	case STATE_BREAK_DONE_SETUP:
 	case STATE_START:
 		r = 0;
 		break;
-		
+
 	case STATE_WARN_IDLE:
 	case STATE_WARN_TYPE:
 		r = ((float)(dr->type_time - dr->warn_time) / dr->type_time) +
@@ -188,7 +189,7 @@ update_icon (DrWright *dr)
 	}
 
 	offset = CLAMP ((height - 0) * (1.0 - r), 1, height - 0);
-	
+
 	switch (dr->state) {
 	case STATE_WARN_TYPE:
 	case STATE_WARN_IDLE:
@@ -203,8 +204,8 @@ update_icon (DrWright *dr)
 
 	default:
 		pixbuf = dr->green_bar;
-	}		
-	
+	}
+
 	gdk_pixbuf_composite (pixbuf,
 			      tmp_pixbuf,
 			      0,
@@ -217,12 +218,12 @@ update_icon (DrWright *dr)
 			      1.0,
 			      GDK_INTERP_BILINEAR,
 			      255);
-	
+
 	if (set_pixbuf) {
 		gtk_status_icon_set_from_pixbuf (dr->icon,
 						 tmp_pixbuf);
 	}
-	
+
 	if (dr->composite_bar) {
 		g_object_unref (dr->composite_bar);
 	}
@@ -235,14 +236,14 @@ blink_timeout_cb (DrWright *dr)
 {
 	gfloat r;
 	gint   timeout;
-	
+
 	r = (dr->warn_time - g_timer_elapsed (dr->timer, NULL)) / dr->warn_time;
 	timeout = BLINK_TIMEOUT + BLINK_TIMEOUT_FACTOR * r;
 
 	if (timeout < BLINK_TIMEOUT_MIN) {
 		timeout = BLINK_TIMEOUT_MIN;
 	}
-	
+
 	if (dr->blink_on || timeout == 0) {
 		gtk_status_icon_set_from_pixbuf (dr->icon,
 						 dr->composite_bar);
@@ -250,7 +251,7 @@ blink_timeout_cb (DrWright *dr)
 		gtk_status_icon_set_from_pixbuf (dr->icon,
 						 dr->neutral_bar);
 	}
-	
+
 	dr->blink_on = !dr->blink_on;
 
 	if (timeout) {
@@ -260,7 +261,7 @@ blink_timeout_cb (DrWright *dr)
 	} else {
 		dr->blink_timeout_id = 0;
 	}
-		
+
 	return FALSE;
 }
 
@@ -319,7 +320,7 @@ maybe_change_state (DrWright *dr)
 	if (debug) {
 		g_timer_reset (dr->idle_timer);
 	}
-	
+
 	elapsed_time = g_timer_elapsed (dr->timer, NULL);
 	elapsed_idle_time = g_timer_elapsed (dr->idle_timer, NULL);
 
@@ -347,7 +348,7 @@ maybe_change_state (DrWright *dr)
 		if (dr->enabled) {
 			dr->state = STATE_IDLE;
 		}
-		
+
 		update_tooltip (dr);
 		stop_blinking (dr);
 		break;
@@ -392,9 +393,9 @@ maybe_change_state (DrWright *dr)
 		else if (dr->is_active) {
 			dr->state = STATE_WARN_TYPE;
 		}
-		
+
 		break;
-		
+
 	case STATE_BREAK_SETUP:
 		/* Don't allow more than one break window to coexist, can happen
 		 * if a break is manually enforced.
@@ -437,7 +438,7 @@ maybe_change_state (DrWright *dr)
 
 		dr->state = STATE_BREAK;
 		break;
-	       
+
 	case STATE_BREAK:
 		if (elapsed_time >= dr->break_time) {
 			dr->state = STATE_BREAK_DONE_SETUP;
@@ -451,7 +452,7 @@ maybe_change_state (DrWright *dr)
 
 		dr->state = STATE_BREAK_DONE;
 		break;
-			
+
 	case STATE_BREAK_DONE:
 		if (dr->is_active) {
 			dr->state = STATE_START;
@@ -465,9 +466,9 @@ maybe_change_state (DrWright *dr)
 
 	dr->is_active = FALSE;
 	dr->last_elapsed_time = elapsed_time;
-	
+
 	update_icon (dr);
-		
+
 	return TRUE;
 }
 
@@ -482,7 +483,7 @@ update_tooltip (DrWright *dr)
 					     _("Disabled"));
 		return TRUE;
 	}
-	
+
 	elapsed_time = g_timer_elapsed (dr->timer, NULL);
 
 	switch (dr->state) {
@@ -490,7 +491,7 @@ update_tooltip (DrWright *dr)
 	case STATE_WARN_IDLE:
 		min = floor (0.5 + (dr->warn_time - elapsed_time) / 60.0);
 		break;
-		
+
 	default:
 		min = floor (0.5 + (dr->type_time - elapsed_time) / 60.0);
 		break;
@@ -498,12 +499,12 @@ update_tooltip (DrWright *dr)
 
 	if (min >= 1) {
 		str = g_strdup_printf (ngettext("%d minute until the next break",
-						"%d minutes until the next break", 
+						"%d minutes until the next break",
 						min), min);
 	} else {
 		str = g_strdup_printf (_("Less than one minute until the next break"));
 	}
-	
+
 	gtk_status_icon_set_tooltip (dr->icon,
 				     str);
 
@@ -528,12 +529,12 @@ gconf_notify_cb (GConfClient *client,
 {
 	DrWright  *dr = user_data;
 	GtkWidget *item;
-	
+
 	if (!strcmp (entry->key, GCONF_PATH "/type_time")) {
 		if (entry->value->type == GCONF_VALUE_INT) {
 			dr->type_time = 60 * gconf_value_get_int (entry->value);
 			dr->warn_time = MIN (dr->type_time / 10, 5*60);
-			
+
 			dr->state = STATE_START;
 		}
 	}
@@ -551,11 +552,11 @@ gconf_notify_cb (GConfClient *client,
 			item = gtk_item_factory_get_widget_by_action (dr->popup_factory,
 								      POPUP_ITEM_BREAK);
 			gtk_widget_set_sensitive (item, dr->enabled);
-			
+
 			update_tooltip (dr);
 		}
 	}
-		
+
 	maybe_change_state (dr);
 }
 
@@ -595,7 +596,7 @@ popup_preferences_cb (gpointer   callback_data,
 				  G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_window_set_resizable (GTK_WINDOW (error_dialog), FALSE);
 		gtk_widget_show (error_dialog);
-		
+
 		g_error_free (error);
 	}
 }
@@ -631,9 +632,9 @@ popup_menu_cb (GtkWidget *widget,
 	       DrWright  *dr)
 {
 	GtkWidget *menu;
-	
+
 	menu = gtk_item_factory_get_widget (dr->popup_factory, "");
-	
+
 	gtk_menu_popup (GTK_MENU (menu),
 			NULL,
 			NULL,
@@ -648,7 +649,7 @@ break_window_done_cb (GtkWidget *window,
 		      DrWright  *dr)
 {
 	gtk_widget_destroy (dr->break_window);
-	
+
 	dr->state = STATE_BREAK_DONE_SETUP;
 	dr->break_window = NULL;
 
@@ -680,7 +681,7 @@ break_window_destroy_cb (GtkWidget *window,
 	for (l = dr->secondary_break_windows; l; l = l->next) {
 		gtk_widget_destroy (l->data);
 	}
-	
+
 	g_list_free (dr->secondary_break_windows);
 	dr->secondary_break_windows = NULL;
 }
@@ -765,12 +766,12 @@ drwright_new (void)
 				 dr,
 				 NULL,
 				 NULL);
-	
+
 	dr->type_time = 60 * gconf_client_get_int (
 		client, GCONF_PATH "/type_time", NULL);
-	
+
 	dr->warn_time = MIN (dr->type_time / 12, 60*3);
-	
+
 	dr->break_time = 60 * gconf_client_get_int (
 		client, GCONF_PATH "/break_time", NULL);
 
@@ -784,7 +785,7 @@ drwright_new (void)
 	if (debug) {
 		setup_debug_values (dr);
 	}
-	
+
 	dr->popup_factory = gtk_item_factory_new (GTK_TYPE_MENU,
 						      "<main>",
 						      NULL);
@@ -792,7 +793,7 @@ drwright_new (void)
 					     item_factory_trans_cb,
 					     NULL,
 					     NULL);
-	
+
 	gtk_item_factory_create_items (dr->popup_factory,
 				       G_N_ELEMENTS (popup_items),
 				       popup_items,
@@ -803,10 +804,10 @@ drwright_new (void)
 
 	item = gtk_item_factory_get_widget_by_action (dr->popup_factory, POPUP_ITEM_BREAK);
 	gtk_widget_set_sensitive (item, dr->enabled);
-	
+
 	dr->timer = g_timer_new ();
 	dr->idle_timer = g_timer_new ();
-	
+
 	dr->state = STATE_START;
 
 	dr->monitor = drw_monitor_new ();
@@ -822,7 +823,7 @@ drwright_new (void)
 	dr->disabled_bar = gdk_pixbuf_new_from_file (IMAGEDIR "/bar-disabled.png", NULL);
 
 	init_tray_icon (dr);
-	
+
 	g_timeout_add_seconds (12,
 		       (GSourceFunc) update_tooltip,
 		       dr);
