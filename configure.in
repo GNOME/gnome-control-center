@@ -89,7 +89,7 @@ dnl ==============================================
 ENABLE_DYNAMIC_LIBSLAB=0
 AM_CONDITIONAL(ENABLE_DYNAMIC_LIBSLAB, test "x$ENABLE_DYNAMIC_LIBSLAB" = "x1")
 
-COMMON_MODULES="gtk+-2.0 >= 2.3.0 dnl
+COMMON_MODULES="gtk+-2.0 >= 2.11.6 dnl
  gconf-2.0 dnl
  libgnomeui-2.0 >= 2.2.0 dnl
  libglade-2.0 >= 2.0.0 dnl
@@ -99,18 +99,14 @@ COMMON_MODULES="gtk+-2.0 >= 2.3.0 dnl
 PKG_CHECK_MODULES(LIBSLAB, $COMMON_MODULES gnome-desktop-2.0 librsvg-2.0 libgnome-menu pango eel-2.0)
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1 libpanelapplet-2.0)
-PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON,
-  [gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0 libglade-2.0])
-PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
-PKG_CHECK_MODULES(GTK, gtk+-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(METACITY, libmetacity-private)
 PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-2.0)
-PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
+PKG_CHECK_MODULES(LIBBACKGROUND, glib-2.0 gobject-2.0 gdk-2.0 gconf-2.0)
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
