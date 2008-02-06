@@ -236,7 +236,6 @@ void
 bg_preferences_load (BGPreferences *prefs)
 {
 	GConfClient *client;
-	GError      *error = NULL;
 	char *tmp;
 
 	g_return_if_fail (prefs != NULL);
@@ -244,8 +243,8 @@ bg_preferences_load (BGPreferences *prefs)
 
 	client = gconf_client_get_default ();
 
-	prefs->enabled = gconf_client_get_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, &error);
-	tmp = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_FILENAME, &error);
+	prefs->enabled = gconf_client_get_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, NULL);
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_FILENAME, NULL);
 	if (tmp) {
 		if (g_utf8_validate (tmp, -1, NULL) &&
 		    g_file_test (tmp, G_FILE_TEST_EXISTS))
@@ -258,21 +257,21 @@ bg_preferences_load (BGPreferences *prefs)
 
 	if (prefs->color1 != NULL)
 		gdk_color_free (prefs->color1);
-	tmp = gconf_client_get_string (client, BG_PREFERENCES_PRIMARY_COLOR, &error);
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_PRIMARY_COLOR, NULL);
 	prefs->color1 = read_color_from_string (tmp);
 	g_free (tmp);
 
 	if (prefs->color2 != NULL)
 		gdk_color_free (prefs->color2);
-	tmp = gconf_client_get_string (client, BG_PREFERENCES_SECONDARY_COLOR, &error);
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_SECONDARY_COLOR, NULL);
 	prefs->color2 = read_color_from_string (tmp);
 	g_free (tmp);
 	
-	prefs->opacity = gconf_client_get_int (client, BG_PREFERENCES_PICTURE_OPACITY, &error);
+	prefs->opacity = gconf_client_get_int (client, BG_PREFERENCES_PICTURE_OPACITY, NULL);
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;
 
-	tmp = gconf_client_get_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, &error);
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, NULL);
 	prefs->orientation = read_orientation_from_string (tmp);
 	g_free (tmp);
 
@@ -281,7 +280,7 @@ bg_preferences_load (BGPreferences *prefs)
 	else
 		prefs->gradient_enabled = TRUE;
 
-	tmp = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, &error);
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, NULL);
 	prefs->wallpaper_type = read_wptype_from_string (tmp);
 	g_free (tmp);
 

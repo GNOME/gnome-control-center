@@ -1,3 +1,10 @@
+2008-02-07  Vincent Untz  <vuntz@gnome.org>
+
+	* preferences.c: (bg_preferences_load): don't pass a GError to the
+	gconf_client_*() calls since we don't use it anyway.
+	Fix bug #510421 since the crash happens because the GError wasn't
+	reset to NULL between two calls.
+
 2008-02-06  Jens Granseuer  <jensgr@gmx.net>
 
 	* Makefile.am: use LIBBACKGROUND_{CFLAGS,...} instead of CAPPLET_...
