@@ -107,6 +107,7 @@ PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(METACITY, libmetacity-private)
 PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-2.0)
 PKG_CHECK_MODULES(LIBBACKGROUND, glib-2.0 gobject-2.0 gdk-2.0 gconf-2.0)
+PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
@@ -117,21 +118,6 @@ if $PKG_CONFIG --exists xft ; then
   xft_modules="xft"
   AC_DEFINE(HAVE_XFT2,,[Define if Xft functionality is available])
 fi
-
-dnl
-dnl Check for XInput, needed for gnome-settings-daemon mouse settings
-dnl
-
-have_xinput=no
-AC_CHECK_LIB(Xi, XListInputDevices,
-  [AC_CHECK_HEADER(X11/extensions/XInput.h,
-     have_xinput=yes
-     XINPUT_LIBS="-lXi"
-     AC_DEFINE(HAVE_XINPUT, 1, [Define if XInput extension is available]),
-	  :, [#include <X11/Xlib.h>])], : ,
-       -lXi $x_libs)
-AM_CONDITIONAL(HAVE_XINPUT, [test $have_xinput = yes])
-GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $XINPUT_LIBS"
 
 PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
 
@@ -157,7 +143,6 @@ DISPLAY_CAPPLET_LIBS="$DISPLAY_CAPPLET_LIBS $RANDR_LIBS"
 
 CAPPLET_LIBS="$CAPPLET_LIBS $x_libs"
 GNOMECC_LIBS="$GNOMECC_LIBS $x_libs"
-GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $x_libs"
 
 dnl
 dnl Check for XCursor support.  If it exists, then we compile the
@@ -250,14 +235,9 @@ if test x$enable_vfs_methods = xyes; then
   FONT_THUMBNAILER_CFLAGS="$FONT_THUMBNAILER_CFLAGS `$FREETYPE_CONFIG --cflags`"
   FONT_THUMBNAILER_LIBS="$FONT_THUMBNAILER_LIBS `$FREETYPE_CONFIG --libs`"
 
-  THEMUS=themus
-  FONTILUS=fontilus
-  AC_SUBST(THEMUS)
-  AC_SUBST(FONTILUS)
   # Determine the install dir for the nautilus extensions.
-  NAUTILUSDIR=`pkg-config --variable=extensiondir libnautilus-extension`
+  NAUTILUSDIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`
   AC_SUBST(NAUTILUSDIR)
-
 
   # update LIBS for $export_dynamic
   export_dynamic=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
@@ -304,19 +284,6 @@ fi
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
 dnl ==============================================
-
-AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource, no)
-
-if test x"$GDK_PIXBUF_CSOURCE" = xno; then
-  AC_PATH_PROG(GDK_PIXBUF_CSOURCE_32, gdk-pixbuf-csource-32, no)
-  if test x"$GDK_PIXBUF_CSOURCE_32" = xno; then
-    AC_MSG_ERROR([gdk-pixbuf-csource executable not found in your path - should be installed with GTK])
-  else
-    GDK_PIXBUF_CSOURCE=$GDK_PIXBUF_CSOURCE_32
-  fi
-fi
-
-AC_SUBST(GDK_PIXBUF_CSOURCE)
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
 
