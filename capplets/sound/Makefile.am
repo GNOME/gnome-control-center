@@ -4,7 +4,7 @@ cappletname = sound
 bin_PROGRAMS = gnome-sound-properties
 
 gnome_sound_properties_LDADD = \
-	$(top_builddir)/libsounds/libsounds.a \
+	$(top_builddir)/libsounds/libsounds.la \
 	$(GNOMECC_CAPPLETS_LIBS) \
 	$(SOUND_CAPPLET_LIBS) \
 	$(HAL_LIBS)
