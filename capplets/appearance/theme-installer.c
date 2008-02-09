@@ -707,16 +707,18 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
 	{
 		filename_selected = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+
+		folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
+		g_strlcpy (old_folder, folder, 255);
+		g_free (folder);
+
 		gtk_widget_destroy (dialog);
+
 		gnome_theme_install_from_uri (filename_selected, parent);
 		g_free (filename_selected);
 	}
 	else
 		gtk_widget_destroy (dialog);
-
-	folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
-	g_strlcpy (old_folder, folder, 255);
-	g_free (folder);
 
 	/*
 	 * we're relying on the gnome theme info module to pick up changes
