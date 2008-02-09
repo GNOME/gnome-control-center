@@ -1,3 +1,10 @@
+2008-02-09  Jens Granseuer  <jensgr@gmx.net>
+
+	Patch by: Nicolas Valc√°rcel
+
+	* gnome-default-applications.xml.in: add support for Terminator
+	console (bug #515366)
+
 2008-02-08  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-at-session.desktop.in.in: improve name and description for the
@@ -196,7 +203,7 @@
 	* gnome-default-applications.xml.in: Fix Thunderbird command line
 	parameter (this time should *really* work). Closes bug #326808.
 
-2006-12-17  LoÔc Minier  <lool+gnome@via.ecp.fr>
+2006-12-17  Lo√Øc Minier  <lool+gnome@via.ecp.fr>
 
 	* gnome-default-applications.xml.in: add support for Iceweasel and
 	Icedove. Closes bug #379085.
@@ -206,7 +213,7 @@
 	* gnome-da-capplet.c: (web_combo_changed_cb),
 	(mail_combo_changed_cb), (terminal_combo_changed_cb):
 	Fix a bunch of leaks from gconf_client_get_string()
-	Bug #376949.	
+	Bug #376949.
 
 2006-10-09  Luca Cavalli  <lcavalli@cvs.gnome.org>
 
@@ -218,8 +225,8 @@
 
 2006-07-23  Sebastien Bacher  <seb128@debian.org>
 
-	* default-applications.desktop.in.in: don't list the Application 
-	category, patch by Vincent Fretin <vincent.fretin@gmail.com> 
+	* default-applications.desktop.in.in: don't list the Application
+	category, patch by Vincent Fretin <vincent.fretin@gmail.com>
 	(Closes: #344321)
 
 2006-05-09  Daniel Holbach  <dholbach@ubuntu.com>
@@ -378,8 +385,8 @@
 	* gnome-default-applications-properties.c:
 	* gnome-default-applications-properties.glade:
 	* gnome-default-applications.xml.in:
-	new gnome-default-applications capplet, 
-	patch by Luca Cavalli <loopback@slackit.org> updated for the 
+	new gnome-default-applications capplet,
+	patch by Luca Cavalli <loopback@slackit.org> updated for the
 	gnome-control-center build system
 
 2006-01-03  pholie <golierr@gmail.com>
@@ -401,20 +408,20 @@
 
 2005-09-25  Sebastien Bacher  <seb128@debian.org>
 
-	* gnome-default-applications-properties-structs.c: 
+	* gnome-default-applications-properties-structs.c:
 	list evolution-2.4 binary, patch by Jan de Groot <jan@jgc.homeip.net>
 	(Closes: #315871).
 
 2005-05-22  Sebastien Bacher  <seb128@debian.org>
 
-	* gnome-default-applications-properties-structs.c: 
-	list "thunderbird" as program name, 
+	* gnome-default-applications-properties-structs.c:
+	list "thunderbird" as program name,
 	patch from Pawel Worach <sajd@telia.com> (Closes: #167757).
 
 2005-05-22  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-default-applications-properties.glade:
-	fix a warning about the icon, 
+	fix a warning about the icon,
 	patch from Matthias Clasen <mclasen@redhat.com> (Closes: #168060).
 
 2005-01-08  Sebastien Bacher  <seb128@debian.org>
@@ -432,7 +439,7 @@
 2004-11-30  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-default-applications-properties-structs.c: use the right name
-	for each browser instead of listing different names for some entry 
+	for each browser instead of listing different names for some entry
 	(#155246).
 
 2004-11-26  Sebastien Bacher  <seb128@debian.org>
@@ -442,7 +449,7 @@
 
 2004-11-26  Sebastien Bacher  <seb128@debian.org>
 
-	* gnome-default-applications-properties.glade: Mask the "Text Editor" 
+	* gnome-default-applications-properties.glade: Mask the "Text Editor"
 	tab since it's not used by the new mime system.
 
 2004-11-26  Michael Terry <mike@mterry.name>
@@ -453,7 +460,7 @@
 2004-11-09  Mark McLoughlin  <mark@skynet.ie>
 
 	* Makefile.am: install .desktop file in $(datadir)/applications.
-	
+
 	* default-applications.desktop.in: add OnlyShowIn=GNOME;
 
 2004-10-21  J.H.M. Dassen (Ray) <jdassen@debian.org>
@@ -467,7 +474,7 @@
 	(read_mailer):
 	don't crash if the browser list or the mailer list is empty
 	(Closes: #151672).
-	
+
 2004-10-17  J.H.M. Dassen (Ray) <jdassen@debian.org>
 
 	* gnome-default-applications-properties-structs.c:
@@ -489,7 +496,7 @@
 	* gnome-default-applications-properties.c: (setup_peditors),
 	(read_browser), (value_changed_cb): Use the Web Browser for https too.
 	(Closes: #123487).
-	
+
 2004-10-14  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-default-applications-properties-structs.c: Revert string
@@ -513,7 +520,7 @@
 	* gnome-default-applications-properties.c: (create_dialog):
 	Use themed icon for WM hint.
 
-2004-07-13  David SedeÒo <david@alderia.com>
+2004-07-13  David Sede√±o <david@alderia.com>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=147244
 	* gnome-default-applications-properties.c: Only put the toggles
@@ -574,8 +581,8 @@
 
 2004-01-09  Padraig O'Briain <padraig.obriain@sun.com>
 
-	* gnome-default-applications-properties.glade: Add accessible 
-	relations so accessible names are correctly reported. 
+	* gnome-default-applications-properties.glade: Add accessible
+	relations so accessible names are correctly reported.
 	Fixes bug #127302.
 
 2003-12-30  Jody Goldberg <jody@gnome.org>
@@ -592,7 +599,7 @@
 
 2003-08-01  Dennis Cranston  <dennis_cranston at yahoo com>
 
-	* gnome-default-applications-properties.glade: Patch to fix spacing 
+	* gnome-default-applications-properties.glade: Patch to fix spacing
 	between action area and vbox of preferences dialog.
 
 Fri Aug  1 15:49:03 2003  Jonathan Blandford  <jrb@redhat.com>
@@ -613,12 +620,12 @@ Fri Aug  1 15:49:03 2003  Jonathan Blandford  <jrb@redhat.com>
 
 2003-07-17  Dennis Cranston <dennis_cranston at yahoo com>
 
-	* gnome-default-applications-properties.glade:  Very minor 
+	* gnome-default-applications-properties.glade:  Very minor
 	HIGification of widget padding.
-	
+
 2003-07-14  Christophe Fergeau  <teuf@gnome.org>
 
-	* gnome-default-applications-properties-structs.c: added a few more 
+	* gnome-default-applications-properties-structs.c: added a few more
 	  mailers
 	* gnome-default-applications-properties.c:
 	(initialize_default_applications): only display Evolution once when
@@ -635,7 +642,7 @@ Fri Aug  1 15:49:03 2003  Jonathan Blandford  <jrb@redhat.com>
 	* capplets/default-applications/gnome-default-applications-properties.glade
 	Added a tab to choose the preferred mailer, added epiphany to the list
 	known browsers, don't select any checkbox there is no default browser
-	or mailer	
+	or mailer
 
 2003-06-24  Jody Goldberg <jody@gnome.org>
 
@@ -649,12 +656,12 @@ Fri Aug  1 15:49:03 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-default-application-properties.c: Fix a double free poop
 	that I made while fixing leaks. Spotted by jrb.
-	
+
 Tue Feb  4 17:09:18 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* Release 2.2.0.1
 
-Tue Jan 21 Satyajit Kanungo <satyajit.kanungo@wipro.com> 
+Tue Jan 21 Satyajit Kanungo <satyajit.kanungo@wipro.com>
 	* Changed the App name passed to  gnome_program_init().
 	  There was a small type in the name. Fixes bug #104060
 
@@ -779,7 +786,7 @@ Wed Apr 10 18:05:13 2002  Jonathan Blandford  <jrb@gnome.org>
 2002-02-27  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-default-applications-properties.c: s/PACKAGE/GETTEXT_PACKAGE/g
-	
+
 2002-02-17  Seth Nickell  <snickell@stanford.edu>
 
 	* default-applications.desktop.in:
@@ -797,12 +804,12 @@ Wed Apr 10 18:05:13 2002  Jonathan Blandford  <jrb@gnome.org>
 
 	Convert to instant apply, change to using property editors
 	where convenient.
-	
+
 2002-02-10  Richard Hestilow  <hestilow@ximian.com>
 
 	* Convert to apply/close, and commit a UI string
 	fix from fflewddur@dropline.net.
-	
+
 Sun Feb 10 23:39:30 2002  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-default-applications-properties.glade: Patch from
