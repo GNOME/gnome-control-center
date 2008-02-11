@@ -1,3 +1,86 @@
+gnome-control-center 2.21.91
+
+appearance:
+- Add a comment for translators (Jens Granseuer) (#514598)
+- Make sure we're done with the dialog before we destroy it (Jens Granseuer)
+  (#515414)
+- Remove useless (with GIO-based Nautilus) 'Go to fonts folder' button
+  (Matthias Clasen) (#511306)
+
+at-properties:
+- Move capplet to main menu (Luca Ferretti) (#515075)
+
+default applications:
+- Support --new-tab/--new-window for Iceweasel (Sven Arvidsson) (#322795)
+- Improve name and description for the visual AT autostarter (Jens Granseuer)
+  (#515197)
+- Add support for Terminator console (Nicolas Valcarcel) (#515366)
+- Add support for Konsole (Jens Granseuer) (#515386)
+
+keybindings:
+- Move Launch Calculator to Desktop group and sort all launch_app keybing
+  together (Luca Ferretti) (#513867)
+
+keyboard:
+- Don't mark padding strings as translatable (Jens Granseuer) (#514598)
+
+libbackground:
+- Use LIBBACKGROUND_{CFLAGS,...} instead of CAPPLET_... so we can use libbackground
+  in gnome-settings-daemon too (Jens Granseuer)
+- Don't pass a GError to the gconf_client*() calls since we don't use it anyway
+  (Jens Granseuer) (#510421)
+
+libwindow-settings:
+- Expose missing metacity double-click actions (Jens Granseuer) (#416541)
+
+mouse:
+- Set up the proper scale widgets to GtkSizeGroup in both tabs (Luca Ferretti)
+- Fix HIG compliance for spacing, borders, padding, alignment and sentence label
+  (Luca Ferretti) (#510147)
+
+sound:
+- Use the libsounds.la now that libsounds uses libtool (Jens Granseuer)
+  (#515252)
+
+shell:
+- Add missing full stops in the long description (Kjartan Maraas)
+- Specify libtool versioning info (Federico Mena Quintero)
+
+network:
+- Don't mark padding strings as translatable (Jens Granseuer) (#514598)
+
+themus:
+- Don't leak the ATK relation set (Jens Granseuer) (#509240)
+
+typing break:
+- Add a comment for translators (Jens Granseuer) (#514598)
+
+general:
+- Remove some cruft from the configure script and give libbackground its own
+  settings (Jens Granseuer)
+
+updated translations:
+- ar (Djihed Afifi)
+- as (Amitakhya Phukan)
+- be@latin (Ihar Hrachyshka)
+- es (Jorge Gonzalez)
+- et (Priit Laes)
+- eu (Inaki Larranaga Murgoitio)
+- gl (Ignacio Casal Quinteiro)
+- he (Yair Hershkovitz)
+- it (Luca Ferretti)
+- mk (Arangel Angov)
+- nb (Kjartan Maraas)
+- oc (Yannig Marchegay)
+- pt (Duarte Loreto)
+- pt_BR (Leonardo Ferreira Fontenelle)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+- tr (Baris Cicek)
+- zh_CN (Funda Wang)
+- zh_HK (Chao-Hsiung Liao)
+- zh_TW (Chao-Hsiung Liao)
+------------------------------------------------------------------------------
 gnome-control-center 2.21.90
 
 appearance:
