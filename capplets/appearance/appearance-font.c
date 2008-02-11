@@ -805,9 +805,6 @@ cb_details_response (GtkDialog *dialog, gint response_id)
     capplet_help (GTK_WINDOW (dialog),
 		  "user-guide.xml",
 		  "goscustdesk-38");
-  } else if (response_id == 1) {
-    /* "Go to font folder" was clicked */
-    g_spawn_command_line_async ("nautilus --no-desktop fonts:///", NULL);
   } else
     gtk_widget_hide (GTK_WIDGET (dialog));
 }
@@ -817,20 +814,11 @@ cb_show_details (GtkWidget *button,
 		 AppearanceData *data)
 {
   if (!data->font_details) {
-    GnomeVFSURI *uri;
     GtkAdjustment *adjustment;
     GtkWidget *widget;
     EnumGroup *group;
 
     data->font_details = glade_xml_get_widget (data->xml, "render_details");
-    uri = gnome_vfs_uri_new ("fonts:///");
-    widget = glade_xml_get_widget (data->xml, "go_to_font_button");
-    if (uri == NULL) {
-      gtk_widget_hide (widget);
-    } else {
-      gnome_vfs_uri_unref (uri);
-      gtk_widget_show (widget);
-    }
 
     gtk_window_set_transient_for (GTK_WINDOW (data->font_details),
 				  GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")));
