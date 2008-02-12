@@ -26,9 +26,7 @@
 #include <glib/gstdio.h>
 #include <gnome.h>
 #include <pwd.h>
-#include <libgnomevfs/gnome-vfs.h>
-#include <libgnomevfs/gnome-vfs-mime-handlers.h>
-#include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include <gio/gio.h>
 #include <libgnomeui/gnome-thumbnail.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
@@ -620,20 +618,40 @@ about_me_update_preview (GtkFileChooser *chooser,
 
 	if (uri) {
 		GtkWidget *image;
-		GdkPixbuf *pixbuf;
-		gchar *mime_type;
+		GdkPixbuf *pixbuf = NULL;
+		GFile *file;
+		GFileInfo *file_info;
 
 		if (!me->thumbs)
 			me->thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
 
+		file = g_file_new_for_uri (uri);
+		file_info = g_file_query_info (file,
+					       G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+					       G_FILE_QUERY_INFO_NONE,
+					       NULL, NULL);
+		g_object_unref (file);
 
-		mime_type = gnome_vfs_get_mime_type (uri);
-		pixbuf = gnome_thumbnail_factory_generate_thumbnail (me->thumbs,
-								     uri,
-								     mime_type);
+		if (file_info != NULL) {
+			const gchar *content_type;
+
+			content_type = g_file_info_get_content_type (file_info);
+			if (content_type) {
+				gchar *mime_type;
+
+				mime_type = g_content_type_get_mime_type (content_type);
+
+				pixbuf = gnome_thumbnail_factory_generate_thumbnail (me->thumbs,
+										     uri,
+										     mime_type);
+				g_free (mime_type);
+			}
+			g_object_unref (file_info);
+		}
+
 		image = gtk_file_chooser_get_preview_widget (chooser);
 
-		if(pixbuf != NULL) {
+		if (pixbuf != NULL) {
 			gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
 			g_object_unref (pixbuf);
 		} else {
@@ -641,7 +659,6 @@ about_me_update_preview (GtkFileChooser *chooser,
 						  "gtk-dialog-question",
 						  GTK_ICON_SIZE_DIALOG);
 		}
-		g_free (mime_type);
 	}
 	gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
 }

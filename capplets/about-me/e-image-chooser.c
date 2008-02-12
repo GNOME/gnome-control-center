@@ -24,13 +24,12 @@
 
 #include <glib-object.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <gtk/gtkalignment.h>
 #include <gtk/gtkframe.h>
 #include <gtk/gtkimage.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
-
-#include <libgnomevfs/gnome-vfs-ops.h>
 
 #include "e-image-chooser.h"
 
@@ -58,10 +57,6 @@ static gint image_chooser_signals [LAST_SIGNAL] = { 0 };
 
 static void e_image_chooser_init	 (EImageChooser		 *chooser);
 static void e_image_chooser_class_init	 (EImageChooserClass	 *klass);
-#if 0
-static void e_image_chooser_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
-static void e_image_chooser_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
-#endif
 static void e_image_chooser_dispose      (GObject *object);
 
 static gboolean image_drag_motion_cb (GtkWidget *widget,
@@ -139,10 +134,6 @@ e_image_chooser_class_init (EImageChooserClass *klass)
 			      g_cclosure_marshal_VOID__VOID,
 			      GTK_TYPE_NONE, 0);
 
-	/*
-	object_class->set_property = e_image_chooser_set_property;
-	object_class->get_property = e_image_chooser_get_property;
-	*/
 	object_class->dispose = e_image_chooser_dispose;
 }
 
@@ -365,49 +356,61 @@ image_drag_data_received_cb (GtkWidget *widget,
 	target_type = gdk_atom_name (selection_data->target);
 
 	if (!strcmp (target_type, URI_LIST_TYPE)) {
-		GnomeVFSResult result;
-		GnomeVFSHandle *handle;
 		char *uri;
+		GFile *file;
+		GInputStream *istream;
 		char *nl = strstr (selection_data->data, "\r\n");
-		char *buf = NULL;
-		GnomeVFSFileInfo info;
 
 		if (nl)
-			uri = g_strndup (selection_data->data, nl - (char*)selection_data->data);
+			uri = g_strndup (selection_data->data, nl - (char *) selection_data->data);
 		else
 			uri = g_strdup (selection_data->data);
 
-		result = gnome_vfs_open (&handle, uri, GNOME_VFS_OPEN_READ);
-		if (result == GNOME_VFS_OK) {
+		file = g_file_new_for_uri (uri);
+		istream = G_INPUT_STREAM (g_file_read (file, NULL, NULL));
 
-			result = gnome_vfs_get_file_info_from_handle (handle, &info, GNOME_VFS_FILE_INFO_DEFAULT);
-			if (result == GNOME_VFS_OK) {
-				GnomeVFSFileSize num_read;
+		if (istream != NULL) {
+			GFileInfo *info;
 
-				buf = g_malloc (info.size);
+			info = g_file_query_info (file,
+						  G_FILE_ATTRIBUTE_STANDARD_SIZE,
+						  G_FILE_QUERY_INFO_NONE,
+						  NULL, NULL);
 
-				result = gnome_vfs_read (handle, buf, info.size, &num_read);
-				if (result == GNOME_VFS_OK) {
-					if (set_image_from_data (chooser, buf, num_read))
-						handled = TRUE;
-					else
-						g_free (buf);
-				} else {
+			if (info != NULL) {
+				gsize size;
+				gboolean success;
+				gchar *buf;
+
+				size = g_file_info_get_size (info);
+				g_object_unref (info);
+
+				buf = g_malloc (size);
+
+				success = g_input_stream_read_all (istream,
+								   buf,
+								   size,
+								   &size,
+								   NULL,
+								   NULL);
+				g_input_stream_close (istream, NULL, NULL);
+
+				if (success &&
+						set_image_from_data (chooser, buf, size))
+					handled = TRUE;
+				else
 					g_free (buf);
-				}
 			}
 
-			gnome_vfs_close (handle);
-
+			g_object_unref (istream);
 		}
 
+		g_object_unref (file);
 		g_free (uri);
 	}
 
 	gtk_drag_finish (context, handled, FALSE, time);
 }
-
-
 
 gboolean
 e_image_chooser_set_from_file (EImageChooser *chooser, const char *filename)
