@@ -385,7 +385,8 @@ wp_scale_type_changed (GtkComboBox *combobox,
   if (pixbuf != NULL)
     g_object_unref (pixbuf);
 
-  gconf_client_set_string (data->client, WP_OPTIONS_KEY, item->options, NULL);
+  if (gconf_client_key_is_writable (data->client, WP_OPTIONS_KEY, NULL)
+    gconf_client_set_string (data->client, WP_OPTIONS_KEY, item->options, NULL);
 }
 
 static void
@@ -427,8 +428,9 @@ wp_shade_type_changed (GtkWidget *combobox,
   if (pixbuf != NULL)
     g_object_unref (pixbuf);
 
-  gconf_client_set_string (data->client, WP_SHADING_KEY,
-                           item->shade_type, NULL);
+  if (gconf_client_key_is_writable (data->client, WP_SHADING_KEY, NULL)
+    gconf_client_set_string (data->client, WP_SHADING_KEY,
+                             item->shade_type, NULL);
 }
 
 static void
