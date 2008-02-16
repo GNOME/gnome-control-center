@@ -43,7 +43,7 @@ typedef struct _GnomeWPItem GnomeWPItem;
 
 struct _GnomeWPItem {
   GnomeBG *bg;
-    
+
   gchar * name;
   gchar * filename;
   gchar * description;
@@ -73,6 +73,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 void gnome_wp_item_free (GnomeWPItem * item);
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs);
+void gnome_wp_item_update (GnomeWPItem * item);
 void gnome_wp_item_update_description (GnomeWPItem * item);
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);
 

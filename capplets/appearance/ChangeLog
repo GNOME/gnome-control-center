@@ -1,3 +1,14 @@
+2008-02-16  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_option_menu_set), (wp_load_stuffs):
+	* gnome-wp-item.c: (gnome_wp_item_update), (gnome_wp_item_new):
+	* gnome-wp-item.h: always apply the current GConf settings to the
+	initially selected wallpaper so that we don't modify the settings if
+	GConf state and the definition in backgrounds.xml are not identical
+	(bug #516746)
+
+	* gnome-wp-xml.c: (gnome_wp_xml_load_xml): get rid of redundant if
+
 2008-02-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* appearance-desktop.c: (wp_scale_type_changed),

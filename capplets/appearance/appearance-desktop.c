@@ -274,31 +274,21 @@ wp_option_menu_set (AppearanceData *data,
   }
   else
   {
+    gint style;
+
     if (!strcmp (value, "centered"))
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_style_menu),
-                                GNOME_WP_SCALE_TYPE_CENTERED);
-    }
+      style = GNOME_WP_SCALE_TYPE_CENTERED;
     else if (!strcmp (value, "stretched"))
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_style_menu),
-                                GNOME_WP_SCALE_TYPE_STRETCHED);
-    }
+      style = GNOME_WP_SCALE_TYPE_STRETCHED;
     else if (!strcmp (value, "scaled"))
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_style_menu),
-                                GNOME_WP_SCALE_TYPE_SCALED);
-    }
+      style = GNOME_WP_SCALE_TYPE_SCALED;
     else if (!strcmp (value, "zoom"))
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_style_menu),
-                                GNOME_WP_SCALE_TYPE_ZOOM);
-    }
-    else if (!strcmp (value, "none"))
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_style_menu),
-                                GNOME_WP_SCALE_TYPE_TILED);
-    }
+      style = GNOME_WP_SCALE_TYPE_ZOOM;
+    else
+      style = GNOME_WP_SCALE_TYPE_TILED;
+
+    gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_style_menu),
+                              style);
   }
 }
 
@@ -878,16 +868,14 @@ static gboolean
 wp_load_stuffs (void *user_data)
 {
   AppearanceData *data;
-  gchar * imagepath, * style, * uri;
-  GnomeWPItem * item;
+  gchar *imagepath, *style, *uri;
+  GnomeWPItem *item;
 
   data = (AppearanceData *) user_data;
 
   gnome_wp_xml_load_list (data);
   g_hash_table_foreach (data->wp_hash, (GHFunc) wp_props_load_wallpaper,
                         data);
-
-  /*gdk_window_set_cursor (data->window->window, NULL);*/
 
   style = gconf_client_get_string (data->client,
                                    WP_OPTIONS_KEY,
@@ -910,22 +898,21 @@ wp_load_stuffs (void *user_data)
 
   item = g_hash_table_lookup (data->wp_hash, imagepath);
 
-  if (item != NULL && strcmp (style, "none") != 0)
+  if (item != NULL)
   {
-    if (item->deleted == TRUE)
+    /* update with the current gconf settings */
+    gnome_wp_item_update (item);
+
+    if (strcmp (style, "none") != 0)
     {
-      item->deleted = FALSE;
-      wp_props_load_wallpaper (item->filename, item, data);
+      if (item->deleted == TRUE)
+      {
+        item->deleted = FALSE;
+        wp_props_load_wallpaper (item->filename, item, data);
+      }
+
+      select_item (data, item, FALSE);
     }
-
-    select_item (data, item, FALSE);
-
-    wp_option_menu_set (data, item->options, FALSE);
-    wp_option_menu_set (data, item->shade_type, TRUE);
-
-    gtk_color_button_set_color (GTK_COLOR_BUTTON (data->wp_pcpicker), item->pcolor);
-    gtk_color_button_set_color (GTK_COLOR_BUTTON (data->wp_scpicker), item->scolor);
-
   }
   else if (strcmp (style, "none") != 0)
   {

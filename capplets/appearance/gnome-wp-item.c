@@ -74,17 +74,53 @@ void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item)
   }
 }
 
-GnomeWPItem * gnome_wp_item_new (const gchar * filename,
-				 GHashTable * wallpapers,
-				 GnomeThumbnailFactory * thumbnails) {
-  GnomeWPItem * item = NULL;
+void gnome_wp_item_update (GnomeWPItem *item) {
+  GConfClient *client;
   GdkColor color1 = { 0, 0, 0, 0 }, color2 = { 0, 0, 0, 0 };
-  gchar * col_str;
-  GConfClient * client;
+  gchar *col_str;
 
   client = gconf_client_get_default ();
 
-  item = g_new0 (GnomeWPItem, 1);
+  g_free (item->options);
+  item->options = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
+  if (item->options == NULL || !strcmp (item->options, "none")) {
+    g_free (item->options);
+    item->options = g_strdup ("scaled");
+  }
+
+  g_free (item->shade_type);
+  item->shade_type = gconf_client_get_string (client, WP_SHADING_KEY, NULL);
+  if (item->shade_type == NULL)
+    item->shade_type = g_strdup ("solid");
+
+  col_str = gconf_client_get_string (client, WP_PCOLOR_KEY, NULL);
+  if (col_str != NULL) {
+    gdk_color_parse (col_str, &color1);
+    g_free (col_str);
+  }
+
+  col_str = gconf_client_get_string (client, WP_SCOLOR_KEY, NULL);
+  if (col_str != NULL) {
+    gdk_color_parse (col_str, &color2);
+    g_free (col_str);
+  }
+
+  g_object_unref (client);
+
+  if (item->pcolor != NULL)
+    gdk_color_free (item->pcolor);
+
+  if (item->scolor != NULL)
+    gdk_color_free (item->scolor);
+
+  item->pcolor = gdk_color_copy (&color1);
+  item->scolor = gdk_color_copy (&color2);
+}
+
+GnomeWPItem * gnome_wp_item_new (const gchar * filename,
+				 GHashTable * wallpapers,
+				 GnomeThumbnailFactory * thumbnails) {
+  GnomeWPItem *item = g_new0 (GnomeWPItem, 1);
 
   item->filename = gnome_vfs_unescape_string_for_display (filename);
 
@@ -101,44 +137,15 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 					 NULL, NULL);
     }
 
-    item->options = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
-    if (item->options == NULL || !strcmp (item->options, "none")) {
-      g_free (item->options);
-      item->options = g_strdup ("scaled");
-    }
-
-    item->shade_type = gconf_client_get_string (client, WP_SHADING_KEY, NULL);
-    if (item->shade_type == NULL)
-      item->shade_type = g_strdup ("solid");
-
-    col_str = gconf_client_get_string (client, WP_PCOLOR_KEY, NULL);
-    if (col_str != NULL) {
-      gdk_color_parse (col_str, &color1);
-      g_free (col_str);
-    }
-
-    col_str = gconf_client_get_string (client, WP_SCOLOR_KEY, NULL);
-    if (col_str != NULL) {
-      gdk_color_parse (col_str, &color2);
-      g_free (col_str);
-    }
-
-    item->pcolor = gdk_color_copy (&color1);
-    item->scolor = gdk_color_copy (&color2);
-
+    gnome_wp_item_update (item);
     gnome_wp_item_update_description (item);
+    gnome_wp_item_ensure_gnome_bg (item);
 
     g_hash_table_insert (wallpapers, item->filename, item);
   } else {
     gnome_wp_item_free (item);
     item = NULL;
   }
-
-  if (item) {
-    gnome_wp_item_ensure_gnome_bg (item);
-  }
-
-  g_object_unref (client);
 
   return item;
 }
