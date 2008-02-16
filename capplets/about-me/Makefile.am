@@ -47,4 +47,4 @@ INCLUDES = \
 endif # BUILD_ABOUTME
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_DATA)
-EXTRA_DIST = $(glade_files) $(pixmap_files) $(Desktop_in_files)
+EXTRA_DIST = $(glade_files) $(pixmap_files)
