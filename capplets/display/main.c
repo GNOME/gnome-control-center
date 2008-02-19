@@ -588,6 +588,7 @@ create_dialog (struct DisplayInfo *info)
   char *resolution;
   char *str;
   char hostname[HOST_NAME_MAX + 1];
+  char *host_escaped;
 
   dialog = gtk_dialog_new_with_buttons (_("Screen Resolution Preferences"),
 					NULL,
@@ -630,7 +631,10 @@ create_dialog (struct DisplayInfo *info)
       /* If we previously set the resolution specifically for this hostname, default
 	 to it on */
       client = gconf_client_get_default ();
-      key = g_strconcat ("/desktop/gnome/screen/", hostname,  "/0/resolution",NULL);
+
+      host_escaped = gconf_escape_key (hostname, -1);
+      key = g_strconcat ("/desktop/gnome/screen/", host_escaped, "/0/resolution", NULL);
+      g_free (host_escaped);
       resolution = gconf_client_get_string (client, key, NULL);
       g_free (key);
       g_object_unref (client);
@@ -757,15 +761,14 @@ save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_
 {
   GConfClient *client;
   gboolean res;
-#ifdef HOST_NAME_MAX
   char hostname[HOST_NAME_MAX + 1];
-#else
-  char hostname[256];
-#endif
-  char *path, *key, *str;
+  char *path, *key, *str, *host_escaped;
   int i;
 
-  gethostname (hostname, sizeof (hostname));
+  if (gethostname (hostname, sizeof (hostname)) != 0)
+    return;
+
+  host_escaped = gconf_escape_key (hostname, -1);
 
   client = gconf_client_get_default ();
 
@@ -774,11 +777,11 @@ save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_
       for (i = 0; i < info->n_screens; i++)
 	{
 	  key = g_strdup_printf ("/desktop/gnome/screen/%s/%d/resolution",
-				 hostname, i);
+				 host_escaped, i);
 	  gconf_client_unset (client, key, NULL);
 	  g_free (key);
 	  key = g_strdup_printf ("/desktop/gnome/screen/%s/%d/rate",
-				 hostname, i);
+				 host_escaped, i);
 	  gconf_client_unset (client, key, NULL);
 	  g_free (key);
 	}
@@ -787,12 +790,14 @@ save_to_gconf (struct DisplayInfo *info, gboolean save_computer, gboolean clear_
   if (save_computer)
     {
       path = g_strconcat ("/desktop/gnome/screen/",
-			  hostname,
+			  host_escaped,
 			  "/",
 			  NULL);
     }
   else
     path = g_strdup ("/desktop/gnome/screen/default/");
+
+  g_free (host_escaped);
 
   for (i = 0; i < info->n_screens; i++)
     {

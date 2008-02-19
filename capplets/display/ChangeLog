@@ -1,3 +1,9 @@
+2008-02-19  Jens Granseuer  <jensgr@gmx.net>
+
+	* main.c: (create_dialog), (save_to_gconf): escape strange hostnames
+	that we want to use as GConf keys (see bug #517259 for a similar issue
+	in gnome-settings-daemon)
+
 2007-10-28  Jens Granseuer  <jensgr@gmx.net>
 
 	* main.c: (display_rotation_from_text), (create_rotate_menu): readd gettext
