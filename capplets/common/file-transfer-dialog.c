@@ -3,7 +3,7 @@
 /* file-transfer-dialog.c
  * Copyright (C) 2002 Ximian, Inc.
  *
- * Written by Rachel Hestilow <hestilow@ximian.com> 
+ * Written by Rachel Hestilow <hestilow@ximian.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ guint file_transfer_dialog_signals[LAST_SIGNAL] = {0, };
 
 struct _FileTransferDialogPrivate
 {
-	GtkWidget *progress; 
+	GtkWidget *progress;
 	GtkWidget *status;
 	guint nth;
 	guint total;
@@ -79,7 +79,7 @@ static void
 file_transfer_dialog_finalize (GObject *obj)
 {
 	FileTransferDialog *dlg = FILE_TRANSFER_DIALOG (obj);
-		
+
 	g_free (dlg->priv);
 
 	if (parent_class->finalize)
@@ -91,7 +91,7 @@ file_transfer_dialog_update_num_files (FileTransferDialog *dlg)
 {
 	gchar *str = NULL;
 	if (dlg->priv->total > 1)
-		g_strdup_printf (_("Copying file: %u of %u"),
+		str = g_strdup_printf (_("Copying file: %u of %u"),
 				      dlg->priv->nth, dlg->priv->total);
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (dlg->priv->progress), str);
 	g_free (str);
@@ -101,7 +101,7 @@ static void
 file_transfer_dialog_response (GtkDialog *dlg, gint response_id)
 {
 	g_signal_emit (G_OBJECT (dlg),
-		       file_transfer_dialog_signals[CANCEL], 0, NULL); 
+		       file_transfer_dialog_signals[CANCEL], 0, NULL);
 }
 
 static gchar *
@@ -191,7 +191,7 @@ static void
 file_transfer_dialog_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
 	FileTransferDialog *dlg = FILE_TRANSFER_DIALOG (object);
-	
+
 	switch (prop_id)
 	{
 	case PROP_NTH_URI:
@@ -207,7 +207,7 @@ static void
 file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	
+
 	klass->cancel = file_transfer_dialog_cancel;
 	object_class->finalize = file_transfer_dialog_finalize;
 	object_class->get_property = file_transfer_dialog_get_prop;
@@ -229,7 +229,7 @@ file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 				      _("URI currently transferring from"),
 				      NULL,
 				      G_PARAM_READWRITE));
-	
+
 	g_object_class_install_property
 		(object_class, PROP_TO_URI,
 		 g_param_spec_string ("to_uri",
@@ -280,7 +280,7 @@ file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
 
-	parent_class = 
+	parent_class =
 		G_OBJECT_CLASS (g_type_class_ref (GTK_TYPE_DIALOG));
 }
 
@@ -311,7 +311,7 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	g_free (markup);
 
 	gtk_misc_set_alignment (GTK_MISC (dlg->priv->status), 0.0, 0.0);
-	
+
 	gtk_box_pack_start (GTK_BOX (vbox), dlg->priv->status, FALSE, FALSE, 0);
 
 	hbox = gtk_hbox_new (FALSE, 0);
@@ -394,7 +394,7 @@ file_transfer_dialog_update_cb (GnomeVFSAsyncHandle *handle,
 
 	if (info->status == GNOME_VFS_XFER_PROGRESS_STATUS_VFSERROR)
 		return GNOME_VFS_XFER_ERROR_ACTION_ABORT;
-		
+
 	if (info->source_name)
 		g_object_set (G_OBJECT (dlg),
 			      "from_uri", info->source_name,
@@ -414,7 +414,7 @@ file_transfer_dialog_update_cb (GnomeVFSAsyncHandle *handle,
 			      "nth_uri", info->file_index,
 			      "total_uris", info->files_total,
 			      NULL);
-	
+
 	switch (info->phase)
 	{
 	case GNOME_VFS_XFER_PHASE_INITIAL:
