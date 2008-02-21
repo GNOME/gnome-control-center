@@ -35,7 +35,7 @@ GCONF_MOBILITY="mobility"
 GCONF_ALL="$GCONF_VISUAL $GCONF_MOBILITY"
 
 run_at() {
-	CMDLINE=$(gconftool-2 --get $GCONF_PATH/$1/exec)
+	CMDLINE=`gconftool-2 --get $GCONF_PATH/$1/exec`
 	if [ $? -ne 0 ]; then
 		exit $?
 	fi
@@ -44,7 +44,7 @@ run_at() {
 		exit 2
 	fi
 
-	STARTUP=$(gconftool-2 --get $GCONF_PATH/$1/startup)
+	STARTUP=`gconftool-2 --get $GCONF_PATH/$1/startup`
 	if [ $? -ne 0 ]; then
 		exit $?
 	fi
@@ -61,7 +61,7 @@ run_at() {
 	fi
 }
 
-case $(basename $0) in
+case `basename $0` in
 	gnome-at-visual )
 		AT=$GCONF_VISUAL
 		;;
