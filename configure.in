@@ -237,6 +237,11 @@ if test x$enable_vfs_methods = xyes; then
   FONT_THUMBNAILER_CFLAGS="$FONT_THUMBNAILER_CFLAGS `$FREETYPE_CONFIG --cflags`"
   FONT_THUMBNAILER_LIBS="$FONT_THUMBNAILER_LIBS `$FREETYPE_CONFIG --libs`"
 
+  THEMUS=themus
+  FONTILUS=fontilus
+  AC_SUBST(THEMUS)
+  AC_SUBST(FONTILUS)
+
   # Determine the install dir for the nautilus extensions.
   NAUTILUSDIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`
   AC_SUBST(NAUTILUSDIR)
