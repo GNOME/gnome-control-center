@@ -7,6 +7,7 @@
 #include <metacity-private/preview-widget.h>
 #include <signal.h>
 #include <errno.h>
+#include <math.h>
 
 /* We have to #undef this as metacity #defines these. */
 #undef _
@@ -129,6 +130,39 @@ hbox_foreach (GtkWidget *widget,
   }
 }
 
+static void
+pixbuf_apply_mask_region (GdkPixbuf *pixbuf, GdkRegion *region)
+{
+  gint nchannels, rowstride, w, h;
+  guchar *pixels, *p;
+
+  g_return_if_fail (pixbuf);
+  g_return_if_fail (region);
+
+  nchannels = gdk_pixbuf_get_n_channels (pixbuf);
+  rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+  pixels = gdk_pixbuf_get_pixels (pixbuf);
+
+
+  /* we need an alpha channel ... */
+  if (!gdk_pixbuf_get_has_alpha (pixbuf) || nchannels != 4)
+    return;
+
+  for (w = 0; w < gdk_pixbuf_get_width (pixbuf); ++w)
+    for (h = 0; h < gdk_pixbuf_get_height (pixbuf); ++h)
+    {
+      if (!gdk_region_point_in (region, w, h))
+      {
+        p = pixels + h * rowstride + w * nchannels;
+        if (G_BYTE_ORDER == G_BIG_ENDIAN)
+          p[0] = 0x0;
+        else
+          p[3] = 0x0;
+      }
+    }
+
+}
+
 static GdkPixbuf *
 create_folder_icon (char *icon_theme_name)
 {
@@ -226,6 +260,7 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   MetaTheme *theme;
   GdkPixbuf *pixbuf, *icon;
   int icon_width, icon_height;
+  GdkRegion *region;
 
   g_object_set (gtk_settings_get_default (),
     "gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data,
@@ -329,6 +364,11 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
                         vbox->allocation.x + vbox->allocation.width - icon_width - 5,
                         vbox->allocation.y + vbox->allocation.height - icon_height - 5,
                         1.0, 1.0, GDK_INTERP_BILINEAR, 255);
+  region = meta_preview_get_clip_region (META_PREVIEW (preview),
+      META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
+  pixbuf_apply_mask_region (pixbuf, region);
+  gdk_region_destroy (region);
+
   g_object_unref (icon);
   gtk_widget_destroy (window);
   meta_theme_free (theme);
@@ -430,6 +470,7 @@ create_metacity_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   GdkVisual *visual;
   GdkPixmap *pixmap;
   GdkPixbuf *pixbuf, *retval;
+  GdkRegion *region;
 
   theme = meta_theme_load ((char *) theme_thumbnail_data->wm_theme_name->data, NULL);
 
@@ -485,6 +526,12 @@ create_metacity_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, (int) METACITY_THUMBNAIL_WIDTH * 1.2, (int) METACITY_THUMBNAIL_HEIGHT * 1.2);
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, (int) METACITY_THUMBNAIL_WIDTH * 1.2, (int) METACITY_THUMBNAIL_HEIGHT * 1.2);
+
+  region = meta_preview_get_clip_region (META_PREVIEW (preview),
+      METACITY_THUMBNAIL_WIDTH * 1.2, METACITY_THUMBNAIL_HEIGHT * 1.2);
+  pixbuf_apply_mask_region (pixbuf, region);
+  gdk_region_destroy (region);
+
 
   retval = gdk_pixbuf_scale_simple (pixbuf,
                                     METACITY_THUMBNAIL_WIDTH,
@@ -749,6 +796,11 @@ message_from_child (GIOChannel   *source,
 
   if (async_data.set == FALSE)
     return TRUE;
+
+  if (condition == G_IO_HUP)
+  {
+    return FALSE;
+  }
 
   status = g_io_channel_read_chars (source,
                                     buffer,

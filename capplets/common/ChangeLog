@@ -1,3 +1,15 @@
+2008-02-25  Thomas Wood  <thos@gnome.org>
+
+	* theme-thumbnail.c:
+
+	(create_meta_theme_pixbuf), (create_metacity_theme_pixbuf):
+	Use the new meta_preview_get_clip_region() function in Metacity to fix
+	bug 460018 (Rounded window borders don't get rendered correctly).
+
+	(message_from_child): Do not attempt to read from the pipe when
+	the connection has been broken. Fixes bug 516413 (Theme thumbnailer
+	causes UI to stop drawing when encountering an error).
+
 2008-02-19  Jens Granseuer  <jensgr@gmx.net>
 
 	* file-transfer-dialog.c: (file_transfer_dialog_update_num_files): fix
