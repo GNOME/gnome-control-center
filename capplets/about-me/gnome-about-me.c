@@ -807,6 +807,7 @@ about_me_setup_dialog (void)
 	GtkIconInfo  *icon;
 	GladeXML     *dialog;
 	GError 	     *error = NULL;
+	GList        *chain;
 
 	struct passwd *pwent;
 	gchar *str;
@@ -934,6 +935,27 @@ about_me_setup_dialog (void)
 	widget = WID ("image-chooser");
 	g_signal_connect (G_OBJECT (widget), "changed",
 			  G_CALLBACK (about_me_image_changed_cb), me);
+
+	/* Address tab: set up the focus chains */
+	chain = g_list_prepend (NULL, WID ("addr-country-1"));
+	chain = g_list_prepend (chain, WID ("addr-po-1"));
+	chain = g_list_prepend (chain, WID ("addr-region-1"));
+	chain = g_list_prepend (chain, WID ("addr-code-1"));
+	chain = g_list_prepend (chain, WID ("addr-locality-1"));
+	chain = g_list_prepend (chain, WID ("addr-scrolledwindow-1"));
+	widget = WID ("addr-table-1");
+	gtk_container_set_focus_chain (GTK_CONTAINER (widget), chain);
+	g_list_free (chain);
+
+	chain = g_list_prepend (NULL, WID ("addr-country-2"));
+	chain = g_list_prepend (chain, WID ("addr-po-2"));
+	chain = g_list_prepend (chain, WID ("addr-region-2"));
+	chain = g_list_prepend (chain, WID ("addr-code-2"));
+	chain = g_list_prepend (chain, WID ("addr-locality-2"));
+	chain = g_list_prepend (chain, WID ("addr-scrolledwindow-2"));
+	widget = WID ("addr-table-2");
+	gtk_container_set_focus_chain (GTK_CONTAINER (widget), chain);
+	g_list_free (chain);
 
 	about_me_load_info (me);
 
