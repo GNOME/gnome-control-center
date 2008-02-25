@@ -1,5 +1,10 @@
 2008-02-25  Thomas Wood  <thos@gnome.org>
 
+	* theme-thumbnail.c: (message_from_child): Return FALSE on error or EOF,
+	which should also fix bug 516413, in addition to checking for G_IO_HUP.
+
+2008-02-25  Thomas Wood  <thos@gnome.org>
+
 	* theme-thumbnail.c:
 
 	(create_meta_theme_pixbuf), (create_metacity_theme_pixbuf):

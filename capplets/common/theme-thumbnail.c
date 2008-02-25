@@ -862,7 +862,7 @@ message_from_child (GIOChannel   *source,
 
     case G_IO_STATUS_EOF:
     case G_IO_STATUS_ERROR:
-      return TRUE;
+      return FALSE;
 
     default:
       g_assert_not_reached ();
