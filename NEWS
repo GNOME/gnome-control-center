@@ -1,3 +1,66 @@
+gnome-control-center 2.21.92
+
+about-me:
+
+- Fix widget tab order (Jens Granseuer) (bug #339936)
+- Don't distribute the .desktop.in file (Jens Granseuer)
+- Port to gio (Jens Granseuer)
+
+appearance:
+- always apply the current GConf settings to the initially selected wallpaper so
+  that we don't modify the settings if GConf state and the definition in
+  backgrounds.xml are not identical (Jens Granseuer) (#516746)
+- don't try to set shading and options in GConf when we're dealing with a
+  read-only source (Jens Granseuer) (#516328)
+
+common:
+- Handle broken pipe if thumbnailer crashes (Thomas Wood) (#516413)
+- Fix a small leak in the file transfer dialog (Jens Granseuer)
+- Use new Metacity function to render rounded metacity borders correctly
+  (Thomas Wood) (#460018)
+
+default-applications:
+- use '...' syntax instead of $(...) for better portability (Willie Walker)
+  (#517938)
+
+display:
+- Escape strange hostnames that we want to use as GConf keys (see bug #517259
+  for a similar issue in gnome-settings-daemon) (Jens Granseuer)
+
+general:
+- Increase required metacity version to 2.21.21 (Thomas Wood)
+- Revert removal of FONTILUS and THEMUS substitution that occurred in r8452.
+  Fixes distcheck. (Thomas Wood)
+- remove obsolete checks (Jens Granseuer)
+- add gio-2.0 to general capplet flags for now; this part needs cleaning up in
+  the next cycle (Jens Granseuer)
+- Add check for LIBSOUNDS. (Kjartan Maraas) (#515956)
+
+updated translations:
+- be@latin (Alaksandar Navicki)
+- ca (Joan Duran)
+- el (NikosCharonitakis)
+- eu (Iñaki Larrañaga Murgoitio)
+- fi (Ilkka Tuohela)
+- fr (Claude Paroz)
+- gl (Ignacio Casal Quinteiro)
+- it (Luca Ferretti)
+- ja (Takeshi AIHANA)
+- kn "Last-Translator: \n"
+- ko (Young-Ho Cha)
+- mk (Arangel Angov)
+- nb (Kjartan Maraas)
+- ne (Narayan Kumar Magar)
+- nl (Reinout van Schouwen)
+- nn (Åsmund Skjæveland)
+- oc (Yannig Marchegay (Kokoyaya))
+- pl (Tomasz Dominikowski)
+- pt_BR (Jonh Wendell)
+- pt (Duarte Loreto)
+- sk (Pavol ¿imo)
+- sv (Daniel Nylander)
+
+
 gnome-control-center 2.21.91
 
 appearance:
