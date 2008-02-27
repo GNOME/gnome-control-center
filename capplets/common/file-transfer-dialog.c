@@ -1,9 +1,8 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
 /* file-transfer-dialog.c
  * Copyright (C) 2002 Ximian, Inc.
  *
  * Written by Rachel Hestilow <hestilow@ximian.com>
+ *            Jens Granseuer <jensgr@gmx.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,8 +27,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libgnomevfs/gnome-vfs-async-ops.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
+#include <gio/gio.h>
 #include <limits.h>
 
 #include "file-transfer-dialog.h"
@@ -60,39 +58,31 @@ struct _FileTransferDialogPrivate
 	GtkWidget *status;
 	guint nth;
 	guint total;
-	GnomeVFSAsyncHandle *handle;
+	GCancellable *cancellable;
 };
+
+#define FILE_TRANSFER_DIALOG_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), file_transfer_dialog_get_type (), FileTransferDialogPrivate))
+
+typedef struct _FileTransferJob
+{
+	FileTransferDialog *dialog;
+	GSList *source_uris;
+	GSList *target_uris;
+} FileTransferJob;
+
 
 static GObjectClass *parent_class;
 
 static void
-file_transfer_dialog_cancel (FileTransferDialog *dlg)
-{
-	if (dlg->priv->handle)
-	{
-		gnome_vfs_async_cancel (dlg->priv->handle);
-		dlg->priv->handle = NULL;
-	}
-}
-
-static void
-file_transfer_dialog_finalize (GObject *obj)
-{
-	FileTransferDialog *dlg = FILE_TRANSFER_DIALOG (obj);
-
-	g_free (dlg->priv);
-
-	if (parent_class->finalize)
-		parent_class->finalize (G_OBJECT (dlg));
-}
-
-static void
 file_transfer_dialog_update_num_files (FileTransferDialog *dlg)
 {
-	gchar *str = NULL;
-	if (dlg->priv->total > 1)
-		str = g_strdup_printf (_("Copying file: %u of %u"),
-				      dlg->priv->nth, dlg->priv->total);
+	gchar *str;
+
+	if (dlg->priv->total <= 1)
+		return;
+
+	str = g_strdup_printf (_("Copying file: %u of %u"),
+			      dlg->priv->nth, dlg->priv->total);
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (dlg->priv->progress), str);
 	g_free (str);
 }
@@ -100,65 +90,54 @@ file_transfer_dialog_update_num_files (FileTransferDialog *dlg)
 static void
 file_transfer_dialog_response (GtkDialog *dlg, gint response_id)
 {
-	g_signal_emit (G_OBJECT (dlg),
-		       file_transfer_dialog_signals[CANCEL], 0, NULL);
+	FileTransferDialog *dialog = FILE_TRANSFER_DIALOG (dlg);
+
+	g_cancellable_cancel (dialog->priv->cancellable);
 }
 
-static gchar *
-format_uri_for_display (const gchar *uri)
+static void
+file_transfer_dialog_finalize (GObject *object)
 {
-	GnomeVFSURI *vfs_uri;
+	FileTransferDialog *dlg = FILE_TRANSFER_DIALOG (object);
 
-	g_return_val_if_fail (uri != NULL, NULL);
-
-	/* Note: vfs_uri may be NULL for some valid but
-	 * unsupported uris */
-	vfs_uri = gnome_vfs_uri_new (uri);
-
-	if (vfs_uri == NULL) {
-		/* We may disclose the password here, but there is nothing we
-		 * can do since we cannot get a valid vfs_uri */
-		return gnome_vfs_format_uri_for_display (uri);
-	} else {
-		gchar *name;
-		gchar *uri_for_display;
-
-		name = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_PASSWORD);
-		g_return_val_if_fail (name != NULL, gnome_vfs_format_uri_for_display (uri));
-
-		uri_for_display = gnome_vfs_format_uri_for_display (name);
-		g_free (name);
-
-		gnome_vfs_uri_unref (vfs_uri);
-
-		return uri_for_display;
+	if (dlg->priv->cancellable)
+	{
+		g_object_unref (dlg->priv->cancellable);
+		dlg->priv->cancellable = NULL;
 	}
+
+	if (parent_class->finalize)
+		parent_class->finalize (object);
 }
 
 static void
 file_transfer_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
 	FileTransferDialog *dlg = FILE_TRANSFER_DIALOG (object);
+	GFile *file;
 	gchar *str;
 	gchar *str2;
 	gchar *base;
 	gchar *escaped;
 	GtkWindow *parent;
+	guint n;
 
 	switch (prop_id)
 	{
 	case PROP_FROM_URI:
-		base = g_path_get_basename (g_value_get_string (value));
-		escaped = format_uri_for_display (base);
+		file = g_file_new_for_uri (g_value_get_string (value));
+		base = g_file_get_basename (file);
+		escaped = g_uri_escape_string (base, G_URI_RESERVED_CHARS_ALLOWED_IN_PATH, TRUE);
 
 		str = g_strdup_printf (_("Copying '%s'"), escaped);
 		str2 = g_strdup_printf ("<big><b>%s</b></big>", str);
-		gtk_label_set_markup (GTK_LABEL (dlg->priv->status),
-				      str2);
+		gtk_label_set_markup (GTK_LABEL (dlg->priv->status), str2);
+
 		g_free (base);
 		g_free (escaped);
 		g_free (str);
 		g_free (str2);
+		g_object_unref (file);
 		break;
 	case PROP_TO_URI:
 		break;
@@ -166,12 +145,20 @@ file_transfer_dialog_set_prop (GObject *object, guint prop_id, const GValue *val
 		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (dlg->priv->progress), g_value_get_double (value));
 		break;
 	case PROP_NTH_URI:
-		dlg->priv->nth = g_value_get_uint (value);
-		file_transfer_dialog_update_num_files (dlg);
+		n = g_value_get_uint (value);
+		if (n != dlg->priv->nth)
+		{
+			dlg->priv->nth = g_value_get_uint (value);
+			file_transfer_dialog_update_num_files (dlg);
+		}
 		break;
 	case PROP_TOTAL_URIS:
-		dlg->priv->total = g_value_get_uint (value);
-		file_transfer_dialog_update_num_files (dlg);
+		n = g_value_get_uint (value);
+		if (n != dlg->priv->nth)
+		{
+			dlg->priv->total = g_value_get_uint (value);
+			file_transfer_dialog_update_num_files (dlg);
+		}
 		break;
 	case PROP_PARENT:
 		parent = g_value_get_pointer (value);
@@ -208,7 +195,6 @@ file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	klass->cancel = file_transfer_dialog_cancel;
 	object_class->finalize = file_transfer_dialog_finalize;
 	object_class->get_property = file_transfer_dialog_get_prop;
 	object_class->set_property = file_transfer_dialog_set_prop;
@@ -266,7 +252,7 @@ file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 		g_signal_new ("cancel",
 			      G_TYPE_FROM_CLASS (object_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (FileTransferDialogClass, cancel),
+			      0,
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
@@ -275,10 +261,12 @@ file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 		g_signal_new ("done",
 			      G_TYPE_FROM_CLASS (object_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (FileTransferDialogClass, done),
+			      0,
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
+
+        g_type_class_add_private (klass, sizeof (FileTransferDialogPrivate));
 
 	parent_class =
 		G_OBJECT_CLASS (g_type_class_ref (GTK_TYPE_DIALOG));
@@ -293,7 +281,8 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	GtkWidget *table;
 	char      *markup;
 
-	dlg->priv = g_new0 (FileTransferDialogPrivate, 1);
+        dlg->priv = FILE_TRANSFER_DIALOG_GET_PRIVATE (dlg);
+	dlg->priv->cancellable = g_cancellable_new ();
 
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->vbox),
 					4);
@@ -346,7 +335,7 @@ file_transfer_dialog_get_type (void)
 
 	if (!file_transfer_dialog_type)
 	{
-		static GTypeInfo file_transfer_dialog_info =
+		const GTypeInfo file_transfer_dialog_info =
 		{
 			sizeof (FileTransferDialogClass),
 			NULL, /* GBaseInitFunc */
@@ -384,84 +373,154 @@ file_transfer_dialog_new_with_parent (GtkWindow *parent)
 					 "parent", parent, NULL));
 }
 
-
-static int
-file_transfer_dialog_update_cb (GnomeVFSAsyncHandle *handle,
-				GnomeVFSXferProgressInfo *info,
-				gpointer data)
+static void
+file_transfer_job_update_before (FileTransferJob *job)
 {
-	FileTransferDialog *dlg = FILE_TRANSFER_DIALOG (data);
+	gchar *from, *to;
 
-	if (info->status == GNOME_VFS_XFER_PROGRESS_STATUS_VFSERROR)
-		return GNOME_VFS_XFER_ERROR_ACTION_ABORT;
+	from = job->source_uris->data;
+	to = job->target_uris->data;
 
-	if (info->source_name)
-		g_object_set (G_OBJECT (dlg),
-			      "from_uri", info->source_name,
-			      NULL);
-	if (info->target_name)
-		g_object_set (G_OBJECT (dlg),
-			      "to_uri", info->target_name,
-			      NULL);
-
-	if (info->bytes_total)
-		g_object_set (G_OBJECT (dlg),
-			      "fraction_complete", (double) info->total_bytes_copied / (double) info->bytes_total,
-			      NULL);
-
-	if (info->file_index && info->files_total)
-		g_object_set (G_OBJECT (dlg),
-			      "nth_uri", info->file_index,
-			      "total_uris", info->files_total,
-			      NULL);
-
-	switch (info->phase)
-	{
-	case GNOME_VFS_XFER_PHASE_INITIAL:
-		{
-			char *str = g_strdup_printf ("<big><b>%s</b></big>", _("Connecting..."));
-			gtk_label_set_markup (GTK_LABEL (dlg->priv->status),
-					      str);
-			g_free (str);
-		}
-		break;
-	case GNOME_VFS_XFER_PHASE_READYTOGO:
-	case GNOME_VFS_XFER_PHASE_OPENSOURCE:
-		break;
-	case GNOME_VFS_XFER_PHASE_COMPLETED:
-		g_signal_emit (G_OBJECT (dlg),
-			       file_transfer_dialog_signals[DONE],
-			       0, NULL);
-		return 0;
-	default:
-		break;
-	}
-
-	return 1;
+	g_object_set (job->dialog,
+		      "from_uri", from,
+		      "to_uri", to,
+		      NULL);
 }
 
-GnomeVFSResult
-file_transfer_dialog_wrap_async_xfer (FileTransferDialog *dlg,
-				      GList *source_uri_list,
-				      GList *target_uri_list,
-				      GnomeVFSXferOptions xfer_options,
-				      GnomeVFSXferErrorMode error_mode,
-				      GnomeVFSXferOverwriteMode overwrite_mode,
-				      int priority)
+static void
+file_transfer_job_update_after (FileTransferJob *job)
 {
-	g_return_val_if_fail (IS_FILE_TRANSFER_DIALOG (dlg),
-			      GNOME_VFS_ERROR_BAD_PARAMETERS);
+	guint n, total;
 
-	return gnome_vfs_async_xfer (&dlg->priv->handle,
-				     source_uri_list,
-				     target_uri_list,
-				     xfer_options,
-				     error_mode,
-				     overwrite_mode,
-				     priority,
-				     file_transfer_dialog_update_cb,
-				     dlg,
-				     NULL,
-				     NULL
-				   );
+	n = job->dialog->priv->nth + 1;
+	total = job->dialog->priv->total;
+
+	g_object_set (job->dialog,
+		      "nth_uri", n,
+		      "fraction_complete", ((gdouble) n) / total,
+		      NULL);
+}
+
+static void
+file_transfer_job_destroy (FileTransferJob *job)
+{
+	g_object_unref (job->dialog);
+	g_slist_foreach (job->source_uris, (GFunc) g_free, NULL);
+	g_slist_foreach (job->target_uris, (GFunc) g_free, NULL);
+	g_slist_free (job->source_uris);
+	g_slist_free (job->target_uris);
+	g_free (job);
+}
+
+static gboolean
+file_transfer_dialog_done (FileTransferDialog *dialog)
+{
+	g_signal_emit (dialog,
+		       file_transfer_dialog_signals[DONE],
+		       0, NULL);
+	return FALSE;
+}
+
+static gboolean
+file_transfer_dialog_cancel (FileTransferDialog *dialog)
+{
+	g_signal_emit (dialog,
+		       file_transfer_dialog_signals[CANCEL],
+		       0, NULL);
+	return FALSE;
+}
+
+static gboolean
+file_transfer_job_schedule (GIOSchedulerJob *io_job,
+			    GCancellable *cancellable,
+			    FileTransferJob *job)
+{
+	GFile *source, *target;
+	gboolean success;
+
+	g_io_scheduler_job_send_to_mainloop (io_job,
+					     (GSourceFunc) file_transfer_job_update_before,
+					     job,
+					     NULL);
+
+	/* take the first file from the list and copy it */
+	source = g_file_new_for_path (job->source_uris->data);
+	g_free (job->source_uris->data);
+	job->source_uris = g_slist_delete_link (job->source_uris, job->source_uris);
+
+	target = g_file_new_for_path (job->target_uris->data);
+	g_free (job->target_uris->data);
+	job->target_uris = g_slist_delete_link (job->target_uris, job->target_uris);
+
+	success = g_file_copy (source, target,
+			       G_FILE_COPY_NONE,
+			       job->dialog->priv->cancellable,
+			       NULL, NULL, NULL);
+
+	g_object_unref (source);
+	g_object_unref (target);
+
+	if (success)
+	{
+		g_io_scheduler_job_send_to_mainloop (io_job,
+						     (GSourceFunc) file_transfer_job_update_after,
+						     job,
+						     NULL);
+
+		if (job->source_uris == NULL)
+		{
+			g_io_scheduler_job_send_to_mainloop_async (io_job,
+								   (GSourceFunc) file_transfer_dialog_done,
+								   g_object_ref (job->dialog),
+								   g_object_unref);
+			return FALSE;
+		}
+	}
+	else /* error on copy or cancelled */
+	{
+		g_io_scheduler_job_send_to_mainloop_async (io_job,
+							   (GSourceFunc) file_transfer_dialog_cancel,
+							   g_object_ref (job->dialog),
+							   g_object_unref);
+		return FALSE;
+	}
+
+	/* more work to do... */
+	return TRUE;
+}
+
+void
+file_transfer_dialog_copy_async (FileTransferDialog *dlg,
+				 GList *source_files,
+				 GList *target_files,
+				 int priority)
+{
+	FileTransferJob *job;
+	GList *l;
+	guint n;
+
+	job = g_new0 (FileTransferJob, 1);
+	job->dialog = g_object_ref (dlg);
+
+	/* we need to copy the list contents for private use */
+	n = 0;
+	for (l = g_list_last (source_files); l; l = l->prev, ++n)
+	{
+		job->source_uris = g_slist_prepend (job->source_uris,
+						    g_strdup (l->data));
+	}
+	for (l = g_list_last (target_files); l; l = l->prev)
+	{
+		job->target_uris = g_slist_prepend (job->target_uris,
+						    g_strdup (l->data));
+	}
+
+	g_object_set (dlg, "total_uris", n, NULL);
+
+	/* TODO: support transferring directories recursively? */
+	g_io_scheduler_push_job ((GIOSchedulerJobFunc) file_transfer_job_schedule,
+				 job,
+				 (GDestroyNotify) file_transfer_job_destroy,
+				 priority,
+				 dlg->priv->cancellable);
 }

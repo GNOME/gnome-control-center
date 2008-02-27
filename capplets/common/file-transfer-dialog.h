@@ -3,7 +3,7 @@
 /* file-transfer-dialog.h
  * Copyright (C) 2002 Ximian, Inc.
  *
- * Written by Rachel Hestilow <hestilow@ximian.com> 
+ * Written by Rachel Hestilow <hestilow@ximian.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@
 #define __FILE_TRANSFER_DIALOG_H__
 
 #include <gtk/gtkdialog.h>
-#include <libgnomevfs/gnome-vfs-xfer.h>
 
 G_BEGIN_DECLS
 
@@ -47,22 +46,16 @@ struct _FileTransferDialog
 struct _FileTransferDialogClass
 {
 	GtkDialogClass parent_class;
-
-	void (*cancel) (FileTransferDialog *dlg);
-	void (*done) (FileTransferDialog *dlg);
 };
 
 GType	       file_transfer_dialog_get_type (void);
 GtkWidget*     file_transfer_dialog_new (void);
 GtkWidget*     file_transfer_dialog_new_with_parent (GtkWindow *parent);
 
-GnomeVFSResult file_transfer_dialog_wrap_async_xfer (FileTransferDialog *dlg,
-						     GList *source_uri_list,
-						     GList *target_uri_list,
-						     GnomeVFSXferOptions xfer_options,
-						     GnomeVFSXferErrorMode error_mode,
-						     GnomeVFSXferOverwriteMode overwrite_mode,
-						     int priority);
+void	       file_transfer_dialog_copy_async (FileTransferDialog *dlg,
+						GList *source_files,
+						GList *target_files,
+						int priority);
 
 
 G_END_DECLS

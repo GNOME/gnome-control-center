@@ -23,15 +23,10 @@
 #include "appearance.h"
 
 #include <string.h>
-#include <libwindow-settings/gnome-wm-manager.h>
-#include <libgnomevfs/gnome-vfs-async-ops.h>
-#include <libgnomevfs/gnome-vfs-ops.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <gio/gio.h>
 
-#include "gnome-theme-info.h"
-#include "capplet-util.h"
-#include "activate-settings-daemon.h"
-#include "gconf-property-editor.h"
 #include "file-transfer-dialog.h"
 #include "theme-installer.h"
 #include "theme-util.h"
@@ -566,7 +561,6 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 	GtkWidget *dialog;
 	gchar *path, *base;
 	GList *src, *target;
-	GnomeVFSURI *uri;
 	gchar *temppath;
 	const gchar *template;
 	int cmp;
@@ -624,9 +618,7 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 		return;
 	}
 
-	uri = gnome_vfs_uri_new (filename);
-	base = gnome_vfs_uri_extract_short_name (uri);
-	src = g_list_append (NULL, uri);
+	base = g_path_get_basename (filename);
 
 	if (g_str_has_suffix (base, ".tar.gz") || g_str_has_suffix (base, ".tgz") || g_str_has_suffix (base, ".gtp"))
 		template = "gnome-theme-%d.gtp";
@@ -640,33 +632,36 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 	}
 	g_free (base);
 
+	src = g_list_append (NULL, g_strdup (filename));
+
 	path = NULL;
 	do {
 	  	gchar *file_tmp;
 
 		g_free (path);
-    		file_tmp = g_strdup_printf (template, rand ());
+    		file_tmp = g_strdup_printf (template, g_random_int ());
 	    	path = g_build_filename (g_get_home_dir (), ".themes", file_tmp, NULL);
 	  	g_free (file_tmp);
 	} while (g_file_test (path, G_FILE_TEST_EXISTS));
 
 
-	target = g_list_append (NULL, gnome_vfs_uri_new (path));
+	target = g_list_append (NULL, path);
 
 	dialog = file_transfer_dialog_new_with_parent (parent);
-	file_transfer_dialog_wrap_async_xfer (FILE_TRANSFER_DIALOG (dialog),
-					      src, target,
-					      GNOME_VFS_XFER_RECURSIVE,
-					      GNOME_VFS_XFER_ERROR_MODE_QUERY,
-					      GNOME_VFS_XFER_OVERWRITE_MODE_QUERY,
-					      GNOME_VFS_PRIORITY_DEFAULT);
-	gnome_vfs_uri_list_unref (src);
-	gnome_vfs_uri_list_unref (target);
-	g_signal_connect (G_OBJECT (dialog), "cancel",
-			  G_CALLBACK (transfer_cancel_cb), path);
-	g_signal_connect (G_OBJECT (dialog), "done",
-			  G_CALLBACK (transfer_done_cb), path);
+	g_signal_connect (dialog, "cancel",
+			  (GCallback) transfer_cancel_cb, path);
+	g_signal_connect (dialog, "done",
+			  (GCallback) transfer_done_cb, path);
+
+	file_transfer_dialog_copy_async (FILE_TRANSFER_DIALOG (dialog),
+					 src, target,
+					 G_PRIORITY_DEFAULT);
 	gtk_widget_show (dialog);
+
+	g_list_foreach (src, (GFunc) g_free, NULL);
+	/* don't free the target item since we're using that for the signals */
+	g_list_free (src);
+	g_list_free (target);
 }
 
 void
