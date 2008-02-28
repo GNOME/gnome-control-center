@@ -503,7 +503,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 			if (is_string_complete (str->str, "successfully",
 											  "short",
 											  "longer",
-											  "panlindrome",
+											  "palindrome",
 											  "simple",
 											  "similar",
 											  "wrapped",
@@ -535,7 +535,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 					} else if (g_strrstr (str->str, "short") != NULL ||
 						   g_strrstr (str->str, "longer") != NULL) {
 						msg = g_strdup (_("The password is too short."));
-					} else if (g_strrstr (str->str, "panlindrome") != NULL ||
+					} else if (g_strrstr (str->str, "palindrome") != NULL ||
 						   g_strrstr (str->str, "simple") != NULL) {
 						msg = g_strdup (_("The password is too simple."));
 					} else if (g_strrstr (str->str, "similar") != NULL ||
