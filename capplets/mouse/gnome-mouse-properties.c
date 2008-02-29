@@ -315,6 +315,13 @@ event_box_button_press_event (GtkWidget   *widget,
 	return TRUE;
 }
 
+static void
+orientation_radio_button_release_event (GtkWidget   *widget,
+				        GdkEventButton *event)
+{
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+}
+
 static GConfValue *
 left_handed_from_gconf (GConfPropertyEditor *peditor,
 			const GConfValue *value)
@@ -355,6 +362,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		 "conv-to-widget-cb", left_handed_from_gconf,
 		 "conv-from-widget-cb", left_handed_to_gconf,
 		 NULL);
+	g_signal_connect (WID ("right_handed_radio"), "button_release_event",
+		G_CALLBACK (orientation_radio_button_release_event), NULL);
+	g_signal_connect (WID ("left_handed_radio"), "button_release_event",
+		G_CALLBACK (orientation_radio_button_release_event), NULL);
 
 	/* Locate pointer toggle */
 	peditor = gconf_peditor_new_boolean
