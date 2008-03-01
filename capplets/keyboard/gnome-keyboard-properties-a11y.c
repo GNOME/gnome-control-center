@@ -68,7 +68,7 @@ static void
 a11y_notifications_dialog_response_cb (GtkWidget *w, gint response)
 {
 	if (response == GTK_RESPONSE_HELP) {
-	
+
 	}
 	else {
 		gtk_widget_destroy (w);
@@ -90,46 +90,47 @@ notifications_button_clicked_cb (GtkWidget *button, GladeXML *dialog)
 	w = NWID ("feature_state_change_beep");
 	gconf_peditor_new_boolean (NULL,
 	                          CONFIG_ROOT "/feature_state_change_beep",
-	                          GTK_WIDGET (w), NULL);
+	                          w, NULL);
 
 	w = NWID ("togglekeys_enable");
 	gconf_peditor_new_boolean (NULL,
 	                          CONFIG_ROOT "/togglekeys_enable",
-	                          GTK_WIDGET (w), NULL);
+	                          w, NULL);
 
 	w = NWID ("stickykeys_modifier_beep");
 	gconf_peditor_new_boolean (NULL,
 	                          CONFIG_ROOT "/stickykeys_modifier_beep",
-	                          GTK_WIDGET (w), NULL);
+	                          w, NULL);
 
 	w = NWID ("slowkeys_beep_press");
 	gconf_peditor_new_boolean (NULL,
 	                          CONFIG_ROOT "/slowkeys_beep_press",
-	                          GTK_WIDGET (w), NULL);
+	                          w, NULL);
 
 	w = NWID ("slowkeys_beep_accept");
 	gconf_peditor_new_boolean (NULL,
 	                          CONFIG_ROOT "/slowkeys_beep_accept",
-	                          GTK_WIDGET (w), NULL);
+	                          w, NULL);
 
 	w = NWID ("slowkeys_beep_reject");
 	gconf_peditor_new_boolean (NULL,
 	                          CONFIG_ROOT "/slowkeys_beep_reject",
-	                          GTK_WIDGET (w), NULL);
+	                          w, NULL);
 
 	w = NWID ("bouncekeys_beep_reject");
 	gconf_peditor_new_boolean (NULL,
 	                          CONFIG_ROOT "/bouncekeys_beep_reject",
-	                          GTK_WIDGET (w), NULL);
+	                          w, NULL);
 
 	w = NWID ("a11y_notifications_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (w),
 	                              GTK_WINDOW (WID ("keyboard_dialog")));
-	g_signal_connect (G_OBJECT (w), "response",
+	g_signal_connect (w, "response",
 			  G_CALLBACK (a11y_notifications_dialog_response_cb), NULL);
 
 	gtk_dialog_run (GTK_DIALOG (w));
 
+	g_object_unref (notifications_dialog);
 	notifications_dialog = NULL;
 }
 
@@ -148,7 +149,7 @@ mousekeys_accel_time_to_widget (GConfPropertyEditor *peditor, const GConfValue *
 	GConfValue *new_value;
 
 	adjustment = GTK_ADJUSTMENT (gconf_property_editor_get_ui_control (peditor));
-	g_object_get (G_OBJECT (adjustment),
+	g_object_get (adjustment,
 	              "upper", &range_upper,
 	              NULL);
 
@@ -166,7 +167,7 @@ mousekeys_accel_time_from_widget (GConfPropertyEditor *peditor, const GConfValue
 	GConfValue *new_value;
 
 	adjustment = GTK_ADJUSTMENT (gconf_property_editor_get_ui_control (peditor));
-	g_object_get (G_OBJECT (adjustment),
+	g_object_get (adjustment,
 	              "value", &range_value,
 	              "upper", &range_upper,
 	              NULL);
@@ -183,6 +184,7 @@ setup_a11y_tabs (GladeXML *dialog, GConfChangeSet *changeset)
 	GConfClient *client;
 	GtkWidget *w;
 	GtkLabel *mousekeys_label;
+	gchar *label;
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, CONFIG_ROOT, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -193,29 +195,29 @@ setup_a11y_tabs (GladeXML *dialog, GConfChangeSet *changeset)
 	w = WID ("master_enable");
 	gconf_peditor_new_boolean (changeset,
 				   CONFIG_ROOT "/enable",
-				   GTK_WIDGET (w), NULL);
+				   w, NULL);
 
 	w = WID ("stickykeys_enable");
 	gconf_peditor_new_boolean (changeset,
 				   CONFIG_ROOT "/stickykeys_enable",
-				   GTK_WIDGET (w), NULL);
-	g_signal_connect (G_OBJECT (w), "toggled",
+				   w, NULL);
+	g_signal_connect (w, "toggled",
 			  G_CALLBACK (stickykeys_enable_toggled_cb), dialog);
 	stickykeys_enable_toggled_cb (w, dialog);
 
 	w = WID ("slowkeys_enable");
 	gconf_peditor_new_boolean (changeset,
 				   CONFIG_ROOT "/slowkeys_enable",
-				   GTK_WIDGET (w), NULL);
-	g_signal_connect (G_OBJECT (w), "toggled",
+				   w, NULL);
+	g_signal_connect (w, "toggled",
 			  G_CALLBACK (slowkeys_enable_toggled_cb), dialog);
 	slowkeys_enable_toggled_cb (w, dialog);
 
 	w = WID ("bouncekeys_enable");
 	gconf_peditor_new_boolean (changeset,
 				   CONFIG_ROOT "/bouncekeys_enable",
-				   GTK_WIDGET (w), NULL);
-	g_signal_connect (G_OBJECT (w), "toggled",
+				   w, NULL);
+	g_signal_connect (w, "toggled",
 			  G_CALLBACK (bouncekeys_enable_toggled_cb), dialog);
 	bouncekeys_enable_toggled_cb (w, dialog);
 
@@ -227,7 +229,7 @@ setup_a11y_tabs (GladeXML *dialog, GConfChangeSet *changeset)
 					 WID ("bouncekeys_delay_slide"), NULL);
 
 	w = WID ("notifications_button");
-	g_signal_connect (G_OBJECT (w), "clicked",
+	g_signal_connect (w, "clicked",
 			  G_CALLBACK (notifications_button_clicked_cb), dialog);
 
 	/* Mouse Keys tab */
@@ -235,15 +237,16 @@ setup_a11y_tabs (GladeXML *dialog, GConfChangeSet *changeset)
 	w = WID ("mousekeys_enable");
 	gconf_peditor_new_boolean (changeset,
 				   CONFIG_ROOT "/mousekeys_enable",
-				   GTK_WIDGET (w), NULL);
-	g_signal_connect (G_OBJECT (w), "toggled",
+				   w, NULL);
+	g_signal_connect (w, "toggled",
 			  G_CALLBACK (mousekeys_enable_toggled_cb), dialog);
 	mousekeys_enable_toggled_cb (w, dialog);
 
 	mousekeys_label = GTK_LABEL (GTK_BIN (w)->child);
-	gtk_label_set_label (mousekeys_label,
-			     g_strdup_printf ("<b>%s</b>", gtk_label_get_label (mousekeys_label)));
+	label = g_strconcat ("<b>", gtk_label_get_label (mousekeys_label), "</b>", NULL);
+	gtk_label_set_label (mousekeys_label, label);
 	gtk_label_set_use_markup (mousekeys_label, TRUE);
+	g_free (label);
 
 	gconf_peditor_new_numeric_range (changeset,
 					 CONFIG_ROOT "/mousekeys_accel_time",
