@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.22.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-02 17:26+0100\n"
-"PO-Revision-Date: 2008-03-03 14:08+0100\n"
+"POT-Creation-Date: 2008-03-04 10:24+0100\n"
+"PO-Revision-Date: 2008-03-03 21:23+0100\n"
 "Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -573,7 +573,7 @@ msgstr "Usa carattere selezionato"
 
 #: ../capplets/appearance/appearance-main.c:108
 msgid "Specify the filename of a theme to install"
-msgstr "Specifica in nome di file di un tema da installare"
+msgstr "Specifica il nome di file di un tema da installare"
 
 #: ../capplets/appearance/appearance-main.c:109
 msgid "filename"
@@ -1105,9 +1105,10 @@ msgstr "Installatore dei temi"
 msgid "Gnome Theme Package"
 msgstr "Pacchetto «Tema di Gnome»"
 
+# GNOME-2-22
 #: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
-msgstr "Nessuno rivestimento"
+msgstr "Nessun rivestimento"
 
 # GNOME-2-22
 #: ../capplets/appearance/gnome-wp-item.c:207
@@ -1141,7 +1142,7 @@ msgstr[1] "pixel"
 #: ../capplets/appearance/theme-installer.c:166
 #: ../capplets/appearance/theme-installer.c:216
 msgid "Cannot install theme"
-msgstr "Impossibile installare il tema."
+msgstr "Impossibile installare il tema"
 
 # GNOME-2-22
 #: ../capplets/appearance/theme-installer.c:168
@@ -1355,9 +1356,10 @@ msgstr "Percentuale del trasferimento al momento completata"
 msgid "Current URI index"
 msgstr "Indice dell'URI corrente"
 
+# GNOME-2-22
 #: ../capplets/common/file-transfer-dialog.c:239
 msgid "Current URI index - starts from 1"
-msgstr "Indice URI corrente - inizia dal primo"
+msgstr "Indice URI corrente - inizia da 1"
 
 #: ../capplets/common/file-transfer-dialog.c:246
 msgid "Total URIs"
@@ -1994,16 +1996,17 @@ msgid ""
 "The X server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
-"Le estensioni XRandR non sono supportate il server X. Non è possibile "
+"Le estensioni XRandR non sono supportate dal server X. Non è possibile "
 "cambiare la risoluzione dello schermo in «tempo reale»."
 
+# GNOME-2-22
 #: ../capplets/display/main.c:895
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
 msgstr ""
 "La versione delle estensioni XRandR non è compatibile con questo programma. "
-"Non è possibile cambiare la risoluzione a «tempo di esecuzione»."
+"Non è possibile cambiare la risoluzione dello schermo in «tempo reale»."
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -2079,7 +2082,7 @@ msgstr ""
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
-"Errore nell'impostare in nuovo acceleratore nel database di configurazione: %"
+"Errore nell'impostare il nuovo acceleratore nel database di configurazione: %"
 "s\n"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:1026
@@ -2886,14 +2889,14 @@ msgstr "Illuminare la _barra del titolo della finestra"
 msgid "S_ound playback:"
 msgstr "Ripr_oduzione audio:"
 
+# GNOME-2-22
 #: ../capplets/sound/sound-properties.glade.h:12
 msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
 msgstr ""
-"Selezionare, utilizzando la tastiera, il dispositivo e le tracce che si "
-"voglino utilizzare. Usare i tasti «Maiusc» e «CTRL» se è necessario "
-"selezionare più tracce."
+"Selezionare il dispositivo e i canali da controllare con la tastiera. Usare "
+"i tasti «Maiusc» e «Control» se è necessario selezionare più tracce."
 
 #: ../capplets/sound/sound-properties.glade.h:13
 msgid "So_und playback:"
@@ -3127,7 +3130,7 @@ msgstr "Elimina"
 #: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1022
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
-msgstr "Eliminare permanentamente «%s»?"
+msgstr "Eliminare permanentemente «%s»?"
 
 # GNOME-2-22
 #: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1026
@@ -3458,7 +3461,10 @@ msgid ""
 "The task name to be displayed in the control-center followed by a \";\" "
 "separator then the filename of an associated .desktop file to launch for "
 "that task."
-msgstr "Nome dell'attività da visualizzare nel centro di controllo seguito da \";\" come separatore quindi dal nome del file .desktop associato per lanciare l'attività."
+msgstr ""
+"Nome dell'attività da visualizzare nel centro di controllo seguito da \";\" "
+"come separatore quindi dal nome del file .desktop associato per lanciare "
+"l'attività."
 
 # GNOME-2-22
 #. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
@@ -3474,7 +3480,9 @@ msgstr ""
 #: ../shell/control-center.schemas.in.h:14
 msgid ""
 "if true, the control-center will close when a \"Common Task\" is activated."
-msgstr "Se vero, il centro di controllo verrà chiuso all'attivazione di una «attività comune»"
+msgstr ""
+"Se vero, il centro di controllo verrà chiuso all'attivazione di una "
+"«attività comune»"
 
 #: ../shell/gnomecc.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
@@ -3819,638 +3827,3 @@ msgstr "Applica tema"
 #: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Imposta il tema predefinito"
-
-#~ msgid "Connecting..."
-#~ msgstr "Connessione in corso"
-
-# GNOME-2-20
-#~ msgid "Go _to Fonts Folder"
-#~ msgstr "_Vai a cartella caratteri"
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "    "
-#~ msgstr "    "
-
-# GNOME-2-20
-#~ msgid "There was an error launching the mouse preferences dialog: %s"
-#~ msgstr ""
-#~ "Si è verificato un errore nel lanciare la finestra di dialogo per le "
-#~ "preferenze del mouse: %s"
-
-#~ msgid "Unable to import AccessX settings from file '%s'"
-#~ msgstr "Impossibile importare le impostazioni AccessX dal file «%s»"
-
-#~ msgid "Import Feature Settings File"
-#~ msgstr "Importa file di impostazioni delle caratteristiche"
-
-#~ msgid "_Import"
-#~ msgstr "_Importa"
-
-#~ msgid "Set your keyboard accessibility preferences"
-#~ msgstr "Imposta le preferenze di accesso universale della tastiera"
-
-#~ msgid ""
-#~ "This system does not seem to have the XKB extension.  The keyboard "
-#~ "accessibility features will not operate without it."
-#~ msgstr ""
-#~ "Sembra che l'estensione XKB non sia presente sul sistema; senza tale "
-#~ "estensione le funzioni di accessibilità alla tastiera non possono operare."
-
-#~ msgid "<b>Enable _Mouse Keys</b>"
-#~ msgstr "<b>Abilitare il _mouse da tastiera</b>"
-
-#~ msgid "<b>Enable _Repeat Keys</b>"
-#~ msgstr "<b>Abilitare la _ripetizione dei tasti</b>"
-
-#~ msgid "<b>Features</b>"
-#~ msgstr "<b>Funzioni</b>"
-
-#~ msgid "<b>Toggle Keys</b>"
-#~ msgstr "<b>Tasti di commutazione</b>"
-
-#~ msgid "Basic"
-#~ msgstr "Base"
-
-#~ msgid "Beep when an LED is turned on and two beeps when one is turned off."
-#~ msgstr ""
-#~ "Un segnale acustico quando un LED viene acceso e due quando viene spento."
-
-#~ msgid "Delay between keypress and pointer mo_vement:"
-#~ msgstr "_Ritardo tra la pressione del tasto e il movimento del puntatore:"
-
-#~ msgid "E_nable Toggle Keys"
-#~ msgstr "A_bilitare i tasti di commutazione"
-
-#~ msgid "Filters"
-#~ msgstr "Filtri"
-
-#~ msgid ""
-#~ "Ignore all subsequent presses of the SAME key if they happen within a "
-#~ "user selectable period of time."
-#~ msgstr ""
-#~ "Ignora tutte le pressioni di uno STESSO tasto dopo la prima se avvengono "
-#~ "entro un intervallo di tempo selezionato dall'utente."
-
-#~ msgid "Keyboard Accessibility Preferences (AccessX)"
-#~ msgstr "Preferenze di accessibilità della tastiera (AccessX)"
-
-#~ msgid "Ma_ximum pointer speed:"
-#~ msgstr "Ve_locità massima del puntatore:"
-
-#~ msgid "Mouse _Preferences..."
-#~ msgstr "Pre_ferenze mouse..."
-
-#~ msgid ""
-#~ "Only accept keys after they have been pressed and held for a user "
-#~ "adjustable amount of time."
-#~ msgstr ""
-#~ "Accetta i tasti solo se sono premuti e mantenuti per un intervallo di "
-#~ "tempo regolabile dall'utente."
-
-#~ msgid ""
-#~ "Perform multiple simultaneous key press operations by pressing modifier "
-#~ "keys in sequence."
-#~ msgstr ""
-#~ "Esegue operazioni di pressione simultanea di diversi tasti attraverso la "
-#~ "pressione in sequenza dei tasti modificatori"
-
-#~ msgid "Time to acce_lerate to maximum speed:"
-#~ msgstr "Tempo per raggiungere la massima _velocità:"
-
-#~ msgid "Turn the numeric keypad into a mouse control pad."
-#~ msgstr ""
-#~ "Trasforma il tastierino numerico in un sistema di controllo del mouse."
-
-#~ msgid "_Disable if unused for:"
-#~ msgstr "_Disattivare se non utilizzate per:"
-
-#~ msgid "_Enable keyboard accessibility features"
-#~ msgstr "Abilitare le fun_zioni di accessibilità della tastiera"
-
-#~ msgid "_Import Feature Settings..."
-#~ msgstr "Importa im_postazioni..."
-
-#~ msgid "_accepted"
-#~ msgstr "_accettato"
-
-#~ msgid "_pressed"
-#~ msgstr "_premuto"
-
-#~ msgid "_rejected"
-#~ msgstr "_rifiutato"
-
-#~ msgid "characters/second"
-#~ msgstr "caratteri/secondo"
-
-#~ msgid "milliseconds"
-#~ msgstr "millisecondi"
-
-#~ msgid "pixels/second"
-#~ msgstr "pixel/secondo"
-
-# GNOME-2-20
-#~ msgid "The theme is an engine. You need to compile it."
-#~ msgstr "Il tema è in realtà un engine. È necessario compilarlo."
-
-#~ msgid "The file format is invalid"
-#~ msgstr "Il formato del file non è valido"
-
-#~ msgid "This theme is not in a supported format."
-#~ msgstr "Questo tema è in un formato non supportato."
-
-#~ msgid "The file format is invalid."
-#~ msgstr "Il formato del file non è valido."
-
-# GNOME-2-20
-#~ msgid "Autostart the preferred AT"
-#~ msgstr "Avvia automaticamente l'AT preferita"
-
-# GNOME-2-20
-#~ msgid "Visual"
-#~ msgstr "Vista"
-
-#~ msgid "Evolution Mail Reader 1.4"
-#~ msgstr "Client di posta Evolution 1.4"
-
-#~ msgid "Evolution Mail Reader 1.5"
-#~ msgstr "Client di posta Evolution 1.5"
-
-#~ msgid "Evolution Mail Reader 1.6"
-#~ msgstr "Client di posta Evolution 1.6"
-
-#~ msgid "Evolution Mail Reader 2.0"
-#~ msgstr "Client di posta Evolution 2.0"
-
-#~ msgid "Evolution Mail Reader 2.2"
-#~ msgstr "Client di posta Evolution 2.2"
-
-#~ msgid "Evolution Mail Reader 2.4"
-#~ msgstr "Client di posta Evolution 2.4"
-
-#~ msgid "Links Text Browser"
-#~ msgstr "Browser testuale Links"
-
-#~ msgid "Lynx Text Browser"
-#~ msgstr "Browser testuale Lynx"
-
-# GNOME-2-20
-#
-# dovrebbe essere nome proprio di applicatione --Luca
-#~ msgid "Simple OnScreen Keyboard"
-#~ msgstr "Simple OnScreen Keyboard"
-
-#~ msgid "W3M Text Browser"
-#~ msgstr "Browser testuale W3M"
-
-#~ msgid "_Keep resolution"
-#~ msgstr "_Mantieni risoluzione"
-
-# GNOME-2-20
-#~ msgid "There was an error launching the keyboard tool: %s"
-#~ msgstr ""
-#~ "Si è verificato un errore nel lanciare lo strumento per la tastiera: %s"
-
-#~ msgid "_Accessibility"
-#~ msgstr "_Accessibilità"
-
-# sarebbe un pulsante, ci andrebbe un tasto di accesso... -Luca
-#~ msgid "Choose..."
-#~ msgstr "Scegli..."
-
-#~ msgid "Microsoft Natural Keyboard"
-#~ msgstr "Microsoft Natural Keyboard"
-
-#~ msgid "_Accessibility..."
-#~ msgstr "_Accessibilità..."
-
-#~ msgid "%d millisecond"
-#~ msgid_plural "%d milliseconds"
-#~ msgstr[0] "%d millisecondo"
-#~ msgstr[1] "%d millisecondi"
-
-#~ msgid "<i>Fast</i>"
-#~ msgstr "<i>Veloce</i>"
-
-#~ msgid "<i>High</i>"
-#~ msgstr "<i>Alta</i>"
-
-#~ msgid "<i>Large</i>"
-#~ msgstr "<i>Larga</i>"
-
-#~ msgid "<i>Low</i>"
-#~ msgstr "<i>Bassa</i>"
-
-#~ msgid "<i>Slow</i>"
-#~ msgstr "<i>Lenta</i>"
-
-#~ msgid "<i>Small</i>"
-#~ msgstr "<i>Piccola</i>"
-
-#~ msgid "Buttons"
-#~ msgstr "Pulsanti"
-
-#~ msgid "Motion"
-#~ msgstr "Movimento"
-
-#~ msgid "      "
-#~ msgstr "      "
-
-#~ msgid "Volume"
-#~ msgstr "Volume"
-
-#~ msgid "Slow Keys Alert"
-#~ msgstr "Allerta rallentamento dei tasti"
-
-#~ msgid ""
-#~ "You just held down the Shift key for 8 seconds.  This is the shortcut for "
-#~ "the Slow Keys feature, which affects the way your keyboard works."
-#~ msgstr ""
-#~ "Si è tenuto premuto il tasto «Maiusc» per otto secondi. Questa è la "
-#~ "scorciatoia per la funzione di rallentamento dei tasti, che modifica il "
-#~ "funzionamento corrente della tastiera."
-
-#~ msgid "Do you want to activate Slow Keys?"
-#~ msgstr "Attivare il rallentamento dei tasti?"
-
-#~ msgid "Do you want to deactivate Slow Keys?"
-#~ msgstr "Disattivare il rallentamento dei tasti?"
-
-#~ msgid "_Activate"
-#~ msgstr "_Attiva"
-
-#~ msgid "_Deactivate"
-#~ msgstr "_Disattiva"
-
-#~ msgid "Do_n't activate"
-#~ msgstr "_Non attivare"
-
-#~ msgid "Do_n't deactivate"
-#~ msgstr "_Non disattivare"
-
-#~ msgid "Sticky Keys Alert"
-#~ msgstr "Allerta permanenza dei tasti"
-
-#~ msgid ""
-#~ "You just pressed the Shift key 5 times in a row.  This is the shortcut "
-#~ "for the Sticky Keys feature, which affects the way your keyboard works."
-#~ msgstr ""
-#~ "Si è premuto per cinque volte consecutive il tasto «Maiusc». Questa è la "
-#~ "scorciatoia per la funzione di permanenza dei tasti, che modifica il "
-#~ "funzionamento corrente della tastiera."
-
-#~ msgid ""
-#~ "You just pressed two keys at once, or pressed the Shift key 5 times in a "
-#~ "row.  This turns off the Sticky Keys feature, which affects the way your "
-#~ "keyboard works."
-#~ msgstr ""
-#~ "Si sono premuti due tasti contemporaneamente o cinque volte consecutive "
-#~ "il tasto «Maiusc». Questo disabilita la funzione di permanenza dei tasti, "
-#~ "che modifica il funzionamento corrente della tastiera."
-
-#~ msgid "Do you want to activate Sticky Keys?"
-#~ msgstr "Attivare la permanenza dei tasti?"
-
-#~ msgid "Do you want to deactivate Sticky Keys?"
-#~ msgstr "Disattivare la permanenza dei tasti?"
-
-#~ msgid ""
-#~ "Cannot create the directory \"%s\".\n"
-#~ "This is needed to allow changing the mouse pointer theme."
-#~ msgstr ""
-#~ "Impossibile creare la directory «%s».\n"
-#~ "È necessaria per consentire il cambiamento del cursore."
-
-#~ msgid ""
-#~ "Cannot create the directory \"%s\".\n"
-#~ "This is needed to allow changing cursors."
-#~ msgstr ""
-#~ "Impossibile creare la directory «%s».\n"
-#~ "È necessaria per consentire il cambiamento del cursore."
-
-#~ msgid "Key Binding (%s) has its action defined multiple times\n"
-#~ msgstr "L'azione della scorciatoia (%s) è già utilizzata\n"
-
-#~ msgid "Key Binding (%s) has its binding defined multiple times\n"
-#~ msgstr "La combinazione di tasti della scorciatoia (%s) è già utilizzata\n"
-
-#~ msgid "Key Binding (%s) is incomplete\n"
-#~ msgstr "La scorciatoia (%s) è incompleta\n"
-
-#~ msgid "Key Binding (%s) is invalid\n"
-#~ msgstr "La scorciatoia (%s) non è valida\n"
-
-#~ msgid "It seems that another application already has access to key '%u'."
-#~ msgstr "Sembra che un'altra applicazione utilizzi già il tasto «%u»."
-
-#~ msgid "Key Binding (%s) is already in use\n"
-#~ msgstr "La scorciatoia (%s) è già utilizzata\n"
-
-#~ msgid ""
-#~ "Error while trying to run (%s)\n"
-#~ "which is linked to the key (%s)"
-#~ msgstr ""
-#~ "Errore nel tentativo di eseguire (%s)\n"
-#~ "che è associata al tasto (%s)"
-
-#~ msgid ""
-#~ "Error activating XKB configuration.\n"
-#~ "It can happen under various circumstances:\n"
-#~ "- a bug in libxklavier library\n"
-#~ "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-#~ "- X server with incompatible libxkbfile implementation\n"
-#~ "\n"
-#~ "X server version data:\n"
-#~ "%s\n"
-#~ "%d\n"
-#~ "%s\n"
-#~ "If you report this situation as a bug, please include:\n"
-#~ "- The result of <b>%s</b>\n"
-#~ "- The result of <b>%s</b>"
-#~ msgstr ""
-#~ "Errore nell'attivare la configurazione di XKB.\n"
-#~ "Ciò si potrebbe verificare sotto diverse circostanze:\n"
-#~ "- un bug nella libreria libxklavier\n"
-#~ "- un bug nel server X (nei programmi di utilità xkbcomp o xmodmap)\n"
-#~ "- un server X con una implementazione di libxkbfile non compatibile\n"
-#~ "\n"
-#~ "Dati della versione del server X:\n"
-#~ "%s\n"
-#~ "%d\n"
-#~ "%s\n"
-#~ "Se si riporta questa situazione come bug, includere:\n"
-#~ "- Il risultato di <b>%s</b>\n"
-#~ "- Il risultato di <b>%s</b>"
-
-#~ msgid ""
-#~ "You are using XFree 4.3.0.\n"
-#~ "There are known problems with complex XKB configurations.\n"
-#~ "Try using a simpler configuration or taking a fresher version of XFree "
-#~ "software."
-#~ msgstr ""
-#~ "Si sta usando XFree 4.3.0.\n"
-#~ "Sono noti alcuni problemi con configurazioni complesse di XKB.\n"
-#~ "Provare a usare una configurazione più semplice o ad aggiornare a una "
-#~ "versione più recente del software XFree."
-
-#~ msgid "Do _not show this warning again"
-#~ msgstr "_Non mostrare questo messaggio in futuro"
-
-#~ msgid ""
-#~ "<b>The X system keyboard settings differ from your current GNOME keyboard "
-#~ "settings.</b>\n"
-#~ "\n"
-#~ "Expected was %s, but the the following settings were found: %s.\n"
-#~ "\n"
-#~ "Which set would you like to use?"
-#~ msgstr ""
-#~ "<b>Le impostazioni di tastiera di sistema di X differiscono dalle attuali "
-#~ "impostazioni di tastiera di GNOME.</b>\n"
-#~ "\n"
-#~ "Era atteso «%s», ma sono state trovate le seguenti impostazioni: %s\n"
-#~ "\n"
-#~ "Quali impostazioni usare?"
-
-#~ msgid "Use X settings"
-#~ msgstr "Usare impostazioni di X"
-
-#~ msgid "Keep GNOME settings"
-#~ msgstr "Mantieni impostazioni di GNOME"
-
-# GNOME-2-20
-#~ msgid ""
-#~ "Could not get default terminal. Verify that your default terminal command "
-#~ "is set and points to a valid application."
-#~ msgstr ""
-#~ "Impossibile ottenere il terminale predefinito. Verificare che il proprio "
-#~ "comando per il terminale sia impostato e punti a una applicazione valida."
-
-# GNOME-2-20
-#~ msgid ""
-#~ "Couldn't execute command: %s\n"
-#~ "Verify that this is a valid command."
-#~ msgstr ""
-#~ "Impossibile eseguire il comando: %s\n"
-#~ "Verificare che questo sia un comando valido."
-
-#~ msgid ""
-#~ "Couldn't put the machine to sleep.\n"
-#~ "Verify that the machine is correctly configured."
-#~ msgstr ""
-#~ "Impossibile mettere in modalità «sleep» la macchina.\n"
-#~ "Verificare che sia configurata correttamente."
-
-#~ msgid ""
-#~ "There was an error starting up the screensaver:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Screensaver functionality will not work in this session."
-#~ msgstr ""
-#~ "Errore nell'avviare il salvaschermo:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "La funzionalità di salvaschermo non sarà abilitata in questa sessione."
-
-#~ msgid "_Do not show this message again"
-#~ msgstr "_Non mostrare questo messaggio in futuro"
-
-#~ msgid "Couldn't load sound file %s as sample %s"
-#~ msgstr "Impossibile caricare il file audio «%s» come campione «%s»"
-
-#~ msgid "Cannot determine user's home directory"
-#~ msgstr "Impossibile determinare la directory home dell'utente"
-
-#~ msgid "GConf key %s set to type %s but its expected type was %s\n"
-#~ msgstr ""
-#~ "La chiave GConf «%s» è impostata al tipo %s, ma dovrebbe essere %s\n"
-
-#~ msgid "A_vailable files:"
-#~ msgstr "File _disponibili:"
-
-#~ msgid "Do _not show this warning again."
-#~ msgstr "_Non mostrare questo messaggio in futuro."
-
-#~ msgid "Load modmap files"
-#~ msgstr "Caricare i file modmap"
-
-#~ msgid "Would you like to load the modmap file(s)?"
-#~ msgstr "Caricare il/i file modmap?"
-
-#~ msgid "_Load"
-#~ msgstr "_Carica"
-
-#~ msgid "_Loaded files:"
-#~ msgstr "_File caricati:"
-
-#~ msgid "Error creating signal pipe."
-#~ msgstr "Errore nella creazione di una pipe di segnali"
-
-#~ msgid "Type"
-#~ msgstr "Tipo"
-
-#~ msgid ""
-#~ "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-#~ "for preview"
-#~ msgstr ""
-#~ "Tipo di bg_applier: BG_APPLIER_PREVIEW per la finestra di anteprima o "
-#~ "BG_APPLIER_ROOT per la finestra principale"
-
-#~ msgid "Width if applier is a preview: Defaults to 64."
-#~ msgstr "Larghezza se si tratta di un'anteprima: valore predefinito 64."
-
-#~ msgid "Preview Height"
-#~ msgstr "Altezza anteprima"
-
-#~ msgid "Height if applier is a preview: Defaults to 48."
-#~ msgstr "Altezza se si tratta di un'anteprima: valore predefinito 48."
-
-#~ msgid "Screen"
-#~ msgstr "Schermo"
-
-#~ msgid "Screen on which BGApplier is to draw"
-#~ msgstr "Schermo su cui deve disegnare il BGApplier"
-
-#~ msgid "Edited %m/%d/%Y"
-#~ msgstr "Modificato il %d/%m/%Y"
-
-#~ msgid ""
-#~ "If true, the mime handlers for text/plain and text/* will be kept in sync"
-#~ msgstr ""
-#~ "Se VERO, le associazioni mime per text/plain e text/* saranno mantenute "
-#~ "in sincronia"
-
-#~ msgid "Sync text/plain and text/* handlers"
-#~ msgstr "Sincronizza le associazioni text/plain e text/*"
-
-#~ msgid "E-mail"
-#~ msgstr "Email"
-
-#~ msgid "E-mail's shortcut."
-#~ msgstr "Scorciatoia di «Email»."
-
-#~ msgid "Eject"
-#~ msgstr "Espelli"
-
-#~ msgid "Eject's shortcut."
-#~ msgstr "Scorciatoia di «Espelli»."
-
-#~ msgid "Home folder"
-#~ msgstr "Cartella personale"
-
-#~ msgid "Home folder's shortcut."
-#~ msgstr "Scorciatoia di «Cartella personale»."
-
-#~ msgid "Launch help browser"
-#~ msgstr "Lancia il visualizzatore di manuali"
-
-#~ msgid "Launch help browser's shortcut."
-#~ msgstr "Scorciatoia di «lancia il visualizzatore di manuali»."
-
-#~ msgid "Launch web browser"
-#~ msgstr "Lancia il browser web"
-
-#~ msgid "Launch web browser's shortcut."
-#~ msgstr "Scorciatoia di «Lancia il browser web»."
-
-#~ msgid "Lock screen"
-#~ msgstr "Blocca schermo"
-
-#~ msgid "Lock screen's shortcut."
-#~ msgstr "Scorciatoia di «Blocca schermo»."
-
-#~ msgid "Log out"
-#~ msgstr "Termina sessione"
-
-#~ msgid "Log out's shortcut."
-#~ msgstr "Scorciatoia di «Termina sessione»."
-
-# GNOME-2-20
-#~ msgid "Media player"
-#~ msgstr "Lettore multimediale"
-
-# GNOME-2-20
-#~ msgid "Media player key's shortcut."
-#~ msgstr "Scorciatoia per il tasto del lettore multimediale."
-
-#~ msgid "Next track key's shortcut."
-#~ msgstr "Scorciatoia del tasto «Traccia successiva»."
-
-#~ msgid "Pause"
-#~ msgstr "Pausa"
-
-#~ msgid "Pause key's shortcut."
-#~ msgstr "Scorciatoia del tasto «Pausa»."
-
-#~ msgid "Play (or play/pause)"
-#~ msgstr "Riproduci (o Riproduci/Pausa)"
-
-#~ msgid "Play (or play/pause) key's shortcut."
-#~ msgstr "Scorciatoia del tasto «Riproduci (o Riproduci/Pausa)»."
-
-#~ msgid "Previous track key's shortcut."
-#~ msgstr "Scorciatoia del tasto «Traccia precedente»."
-
-#~ msgid "Search's shortcut."
-#~ msgstr "Scorciatoia di «Cerca»."
-
-#~ msgid "Skip to next track"
-#~ msgstr "Salta alla traccia successiva"
-
-#~ msgid "Skip to previous track"
-#~ msgstr "Salta alla traccia precedente"
-
-# FIXME dovrebbe usare ibernare o sospendere ...
-#~ msgid "Sleep"
-#~ msgstr "Sleep"
-
-#~ msgid "Sleep's shortcut."
-#~ msgstr "Scorciatoia per la modalità «sleep»."
-
-#~ msgid "Stop playback key"
-#~ msgstr "Tasto ferma la riproduzione"
-
-#~ msgid "Stop playback key's shortcut."
-#~ msgstr "Scorciatoia per il tasto di interruzione riproduzione."
-
-#~ msgid "Volume down"
-#~ msgstr "Diminuisci il volume"
-
-#~ msgid "Volume down's shortcut."
-#~ msgstr "Scorciatoia per la diminuzione del volume."
-
-#~ msgid "Volume mute"
-#~ msgstr "Azzera il volume"
-
-# GNOME-2-20
-#~ msgid "Volume mute's shortcut."
-#~ msgstr "Scorciatoia per l'azzeramento del volume."
-
-#~ msgid "Volume step"
-#~ msgstr "Passo per la variazione di volume"
-
-#~ msgid "Volume step as percentage of volume."
-#~ msgstr "Passo per la variazione di volume come percentuale del volume."
-
-#~ msgid "Volume up"
-#~ msgstr "Aumenta il volume"
-
-#~ msgid "Volume up's shortcut."
-#~ msgstr "Scorciatoia per l'aumento del volume."
-
-#~ msgid "Display a dialog when there are errors running the screensaver"
-#~ msgstr ""
-#~ "Mostra una finestra di dialogo se si verificano errori eseguendo il "
-#~ "salvaschermo"
-
-#~ msgid "Run screensaver at login"
-#~ msgstr "Avvia salvaschermo al login"
-
-# GNOME-2-20
-#~ msgid "Show Startup Errors"
-#~ msgstr "Mostra errori di avvio"
-
-#~ msgid "Start screensaver"
-#~ msgstr "Avvia salvaschermo"
