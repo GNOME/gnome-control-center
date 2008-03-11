@@ -143,8 +143,15 @@ main(int argc, char **argv)
 
 	if (theme) {
 	    pixbuf = generate_meta_theme_thumbnail (theme);
-	    save_pixbuf (pixbuf, argv[2]);
-	    gdk_pixbuf_unref (pixbuf);
+	    gnome_theme_meta_info_free (theme);
+
+	    if (pixbuf) {
+		    save_pixbuf (pixbuf, argv[2]);
+		    gdk_pixbuf_unref (pixbuf);
+	    } else {
+		    g_printerr ("could not generate thumbnail\n");
+		    return 1;
+	    }
 	}
 	else {
 	    g_printerr ("usage: gnome-theme-thumbnailer theme output-image\n");
