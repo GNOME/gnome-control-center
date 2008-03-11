@@ -1,3 +1,9 @@
+2008-03-11  Jens Granseuer  <jensgr@gmx.net>
+
+	* gconf-property-editor.c: (peditor_numeric_range_widget_changed): don't
+	free the GConf value if we don't have one. Fixes a crash when schemas
+	are not properly installed (bug #520744)
+
 2008-02-27  Jens Granseuer  <jensgr@gmx.net>
 
 	* file-transfer-dialog.c: (file_transfer_dialog_update_num_files),

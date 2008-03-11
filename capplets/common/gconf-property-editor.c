@@ -1122,7 +1122,7 @@ peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 	if (!peditor->p->inited) return;
 
 	/* We try to get the default type from the schemas.  if not, we default
-	 * to a float.
+	 * to an int.
 	 */
 	client = gconf_client_get_default();
 
@@ -1131,17 +1131,16 @@ peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 							      NULL);
 	g_object_unref (client);
 
-	if (default_value)
+	if (default_value) {
 		value_wid = gconf_value_new (default_value->type);
-	else {
+		gconf_value_free (default_value);
+	} else {
 		g_warning ("Unable to find a default value for key for %s.\n"
 			   "I'll assume it is an integer, but that may break things.\n"
 			   "Please be sure that the associated schema is installed",
 			   peditor->p->key);
 		value_wid = gconf_value_new (GCONF_VALUE_INT);
 	}
-
-	gconf_value_free (default_value);
 
 	g_assert (value_wid);
 
@@ -1150,7 +1149,7 @@ peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 	else if (value_wid->type == GCONF_VALUE_FLOAT)
 		gconf_value_set_float (value_wid, gtk_adjustment_get_value (adjustment));
 	else {
-		g_warning ("unable to set a gconf key for %s of type %d\n",
+		g_warning ("unable to set a gconf key for %s of type %d",
 			   peditor->p->key,
 			   value_wid->type);
 		gconf_value_free (value_wid);
