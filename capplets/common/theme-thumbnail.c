@@ -268,7 +268,10 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
     "gtk-icon-theme-name", (char *) theme_thumbnail_data->icon_theme_name->data,
     "gtk-color-scheme", (char *) theme_thumbnail_data->gtk_color_scheme->data,
     NULL);
+
   theme = meta_theme_load ((char *) theme_thumbnail_data->wm_theme_name->data, NULL);
+  if (theme == NULL)
+    return NULL;
 
   /* Represent the icon theme */
   icon = create_folder_icon ((char *) theme_thumbnail_data->icon_theme_name->data);
@@ -473,6 +476,8 @@ create_metacity_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   GdkRegion *region;
 
   theme = meta_theme_load ((char *) theme_thumbnail_data->wm_theme_name->data, NULL);
+  if (theme == NULL)
+    return NULL;
 
   flags = META_FRAME_ALLOWS_DELETE |
           META_FRAME_ALLOWS_MENU |
@@ -712,10 +717,14 @@ message_from_capplet (GIOChannel   *source,
         else
           g_assert_not_reached ();
 
-        width = gdk_pixbuf_get_width (pixbuf);
-        height = gdk_pixbuf_get_height (pixbuf);
-        rowstride = gdk_pixbuf_get_rowstride (pixbuf);
-        pixels = gdk_pixbuf_get_pixels (pixbuf);
+        if (pixbuf == NULL) {
+          width = height = 0;
+        } else {
+          width = gdk_pixbuf_get_width (pixbuf);
+          height = gdk_pixbuf_get_height (pixbuf);
+          rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+          pixels = gdk_pixbuf_get_pixels (pixbuf);
+        }
 
         /* Write the pixbuf's size */
         write (pipe_from_factory_fd[1], &width, sizeof (width));
@@ -723,16 +732,18 @@ message_from_capplet (GIOChannel   *source,
 
         for (i = 0; i < height; i++)
         {
-          write (pipe_from_factory_fd[1], pixels + (rowstride)*i, width * gdk_pixbuf_get_n_channels (pixbuf));
+          write (pipe_from_factory_fd[1], pixels + rowstride * i, width * gdk_pixbuf_get_n_channels (pixbuf));
         }
-        g_object_unref (pixbuf);
-        theme_thumbnail_data->status = READY_FOR_THEME;
+
+        if (pixbuf)
+          g_object_unref (pixbuf);
         g_byte_array_set_size (theme_thumbnail_data->type, 0);
         g_byte_array_set_size (theme_thumbnail_data->control_theme_name, 0);
         g_byte_array_set_size (theme_thumbnail_data->gtk_color_scheme, 0);
         g_byte_array_set_size (theme_thumbnail_data->wm_theme_name, 0);
         g_byte_array_set_size (theme_thumbnail_data->icon_theme_name, 0);
         g_byte_array_set_size (theme_thumbnail_data->application_font, 0);
+        theme_thumbnail_data->status = READY_FOR_THEME;
       }
       return TRUE;
 
@@ -798,9 +809,7 @@ message_from_child (GIOChannel   *source,
     return TRUE;
 
   if (condition == G_IO_HUP)
-  {
     return FALSE;
-  }
 
   status = g_io_channel_read_chars (source,
                                     buffer,
@@ -812,24 +821,28 @@ message_from_child (GIOChannel   *source,
     case G_IO_STATUS_NORMAL:
       g_byte_array_append (async_data.data, (guchar *) buffer, bytes_read);
 
-      if (async_data.thumbnail_width == 0 && async_data.data->len >= 2 * sizeof (gint))
+      if (async_data.thumbnail_width == -1 && async_data.data->len >= 2 * sizeof (gint))
       {
         async_data.thumbnail_width = *((gint *) async_data.data->data);
         async_data.thumbnail_height = *(((gint *) async_data.data->data) + 1);
         g_byte_array_remove_range (async_data.data, 0, 2 * sizeof (gint));
       }
-      else if (async_data.thumbnail_width > 0 && async_data.data->len == async_data.thumbnail_width * async_data.thumbnail_height * 4)
+
+      if (async_data.thumbnail_width >= 0 && async_data.data->len == async_data.thumbnail_width * async_data.thumbnail_height * 4)
       {
-        GdkPixbuf *pixbuf;
-        gchar *pixels;
-        gint i, rowstride;
+        GdkPixbuf *pixbuf = NULL;
 
-        pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, async_data.thumbnail_width, async_data.thumbnail_height);
-        pixels = (gchar *) gdk_pixbuf_get_pixels (pixbuf);
-        rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+        if (async_data.thumbnail_width > 0) {
+          gchar *pixels;
+          gint i, rowstride;
 
-        for (i = 0; i < async_data.thumbnail_height; i++)
-          memcpy (pixels + rowstride * i, async_data.data->data + 4 * async_data.thumbnail_width * i, async_data.thumbnail_width * 4);
+          pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, async_data.thumbnail_width, async_data.thumbnail_height);
+          pixels = (gchar *) gdk_pixbuf_get_pixels (pixbuf);
+          rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+
+          for (i = 0; i < async_data.thumbnail_height; ++i)
+            memcpy (pixels + rowstride * i, async_data.data->data + 4 * async_data.thumbnail_width * i, async_data.thumbnail_width * 4);
+        }
 
         /* callback function needs to unref the pixbuf */
         (* async_data.func) (pixbuf, async_data.theme_name, async_data.user_data);
@@ -843,8 +856,8 @@ message_from_child (GIOChannel   *source,
         g_io_channel_unref (async_data.channel);
 
         /* reset async_data */
-        async_data.thumbnail_width = 0;
-        async_data.thumbnail_height = 0;
+        async_data.thumbnail_width = -1;
+        async_data.thumbnail_height = -1;
         async_data.theme_name = NULL;
         async_data.channel = NULL;
         async_data.func = NULL;
@@ -920,9 +933,14 @@ read_pixbuf (void)
   do
   {
     bytes_read = read (pipe_from_factory_fd[0], ((guint8*) size) + j, 2 * sizeof (gint));
+    if (bytes_read == 0)
+      goto eof;
     j += bytes_read;
   }
   while (j < 2 * sizeof (gint));
+
+  if (size[0] <= 0 || size[1] <= 0)
+    return NULL;
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, size[0], size[1]);
   rowstride = gdk_pixbuf_get_rowstride (pixbuf);
@@ -934,25 +952,28 @@ read_pixbuf (void)
 
     do
     {
-      bytes_read = read (pipe_from_factory_fd[0], pixels + (rowstride)*i + j, size[0] * gdk_pixbuf_get_n_channels (pixbuf) - j);
+      bytes_read = read (pipe_from_factory_fd[0], pixels + rowstride * i + j, size[0] * gdk_pixbuf_get_n_channels (pixbuf) - j);
 
       if (bytes_read > 0)
         j += bytes_read;
       else if (bytes_read == 0)
       {
-        g_warning ("Received EOF while reading thumbnail");
         g_object_unref (pixbuf);
-        close (pipe_to_factory_fd[1]);
-        pipe_to_factory_fd[1] = 0;
-        close (pipe_from_factory_fd[0]);
-        pipe_from_factory_fd[0] = 0;
-        return NULL;
+        goto eof;
       }
     }
     while (j < size[0] * gdk_pixbuf_get_n_channels (pixbuf));
   }
 
   return pixbuf;
+
+eof:
+  g_warning ("Received EOF while reading thumbnail");
+  close (pipe_to_factory_fd[1]);
+  pipe_to_factory_fd[1] = 0;
+  close (pipe_from_factory_fd[0]);
+  pipe_from_factory_fd[0] = 0;
+  return NULL;
 }
 
 static GdkPixbuf *
@@ -1072,8 +1093,8 @@ generate_theme_thumbnail_async (gpointer            theme_info,
   }
 
   async_data.set = TRUE;
-  async_data.thumbnail_width = 0;
-  async_data.thumbnail_height = 0;
+  async_data.thumbnail_width = -1;
+  async_data.thumbnail_height = -1;
   async_data.theme_name = g_strdup (theme_name);
   async_data.func = func;
   async_data.user_data = user_data;
@@ -1205,8 +1226,6 @@ theme_thumbnail_factory_init (int argc, char *argv[])
   close (pipe_to_factory_fd[0]);
   close (pipe_from_factory_fd[1]);
   async_data.set = FALSE;
-  async_data.thumbnail_width = 0;
-  async_data.thumbnail_height = 0;
   async_data.theme_name = NULL;
   async_data.data = g_byte_array_new ();
 }
