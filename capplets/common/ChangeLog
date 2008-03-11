@@ -1,5 +1,11 @@
 2008-03-11  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-theme-apply.c: (gnome_meta_theme_set): actually check the
+	cursor size before changing it in GConf, not the theme name
+	(thanks to Kjartan Maraas)
+
+2008-03-11  Jens Granseuer  <jensgr@gmx.net>
+
 	Encountering a theme that could not be thumbnailed (e.g. because the
 	metacity theme for a metatheme isn't installed) would make the
 	thumbnailer crash. Since it's not restarted by the appearance capplet

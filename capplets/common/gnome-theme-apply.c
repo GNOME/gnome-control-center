@@ -103,9 +103,9 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
     }
 
   old_key_int = gconf_client_get_int (client, CURSOR_SIZE_KEY, NULL);
-  if (old_key_int != meta_theme_info->cursor_theme_name)
+  if (old_key_int != meta_theme_info->cursor_size)
     {
-      gconf_client_set_int (client, CURSOR_SIZE_KEY, meta_theme_info->cursor_size, NULL);    
+      gconf_client_set_int (client, CURSOR_SIZE_KEY, meta_theme_info->cursor_size, NULL);
     }
 #else
   old_key = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);
