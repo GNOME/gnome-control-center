@@ -16,7 +16,6 @@
 #include "eggcellrendererkeys.h"
 #include "activate-settings-daemon.h"
 
-#define LABEL_DATA "gnome-keybinding-properties-label"
 #define MAX_ELEMENTS_BEFORE_SCROLLING 10
 
 typedef struct {
@@ -63,12 +62,7 @@ typedef struct
   char *description;
 } KeyEntry;
 
-static void  reload_key_entries (gpointer                wm_name,
-                                 GladeXML               *dialog);
-static char* binding_name       (guint                   keyval,
-				 guint			 keycode,
-                                 EggVirtualModifierType  mask,
-                                 gboolean                translate);
+static gboolean block_accels = FALSE;
 
 static GtkTreeModel*
 get_real_model (GtkTreeView *tree_view)
@@ -120,7 +114,7 @@ binding_from_string (const char             *str,
 {
   g_return_val_if_fail (accelerator_key != NULL, FALSE);
 
-  if (str == NULL || (str && strcmp (str, "disabled") == 0))
+  if (str == NULL || strcmp (str, "disabled") == 0)
     {
       *accelerator_key = 0;
       *keycode = 0;
@@ -857,6 +851,8 @@ accel_edited_callback (GtkCellRendererText   *cell,
   GError *err = NULL;
   char *str;
 
+  block_accels = FALSE;
+
   model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
@@ -994,6 +990,8 @@ accel_cleared_callback (GtkCellRendererText *cell,
   GError *err = NULL;
   GtkTreeModel *model;
 
+  block_accels = FALSE;
+
   model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
@@ -1070,7 +1068,7 @@ start_editing_kb_cb (GtkTreeView *treeview,
 static gboolean
 start_editing_cb (GtkTreeView    *tree_view,
 		  GdkEventButton *event,
-		  GladeXML       *dialog)
+		  gpointer        user_data)
 {
   GtkTreePath *path;
 
@@ -1096,8 +1094,24 @@ start_editing_cb (GtkTreeView    *tree_view,
       idle_data->path = path;
       g_signal_stop_emission_by_name (G_OBJECT (tree_view), "button_press_event");
       g_idle_add ((GSourceFunc) real_start_editing_cb, idle_data);
+      block_accels = TRUE;
     }
   return TRUE;
+}
+
+/* this handler is used to keep accels from activating while the user
+ * is assigning a new shortcut so that he won't accidentally trigger one
+ * of the widgets */
+static gboolean
+maybe_block_accels (GtkWidget *widget,
+                    GdkEventKey *event,
+                    gpointer user_data)
+{
+  if (block_accels)
+  {
+    return gtk_window_propagate_key_event (GTK_WINDOW (widget), event);
+  }
+  return FALSE;
 }
 
 static void
@@ -1131,10 +1145,10 @@ setup_dialog (GladeXML *dialog)
 
   g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 		    "button_press_event",
-		    G_CALLBACK (start_editing_cb), dialog);
+		    G_CALLBACK (start_editing_cb), NULL);
   g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 		    "row-activated",
-		    G_CALLBACK (start_editing_kb_cb), dialog);
+		    G_CALLBACK (start_editing_kb_cb), NULL);
 
   column = gtk_tree_view_column_new_with_attributes (_("Action"),
 						     gtk_cell_renderer_text_new (),
@@ -1184,6 +1198,7 @@ setup_dialog (GladeXML *dialog)
   capplet_set_icon (widget, "gnome-settings-keybindings");
   gtk_widget_show (widget);
 
+  g_signal_connect (G_OBJECT (widget), "key_press_event", G_CALLBACK (maybe_block_accels), NULL);
   g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK (cb_dialog_response), dialog);
 }
 

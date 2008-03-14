@@ -1,3 +1,12 @@
+2008-03-15  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-keybinding-properties.c: (accel_edited_callback),
+	(accel_cleared_callback), (start_editing_cb),
+	(maybe_block_accels), (setup_dialog): stop widget accelerators
+	from activating while the user is entering a new shortcut. This
+	allows binding shortcuts that are used as accels in the capplet
+	dialog, e.g. for the Help and Close buttons (bug #313228)
+
 2008-03-14  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-keybinding-properties.c: (append_keys_to_tree_from_file):
