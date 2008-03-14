@@ -722,8 +722,6 @@ append_keys_to_tree_from_file (GladeXML   *dialog,
       title = _(keylist->name);
     }
 
-  g_message ("title: %s", title);
-
   append_keys_to_tree (dialog, title, keys);
 
   g_free (keylist->name);
