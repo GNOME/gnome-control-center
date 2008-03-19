@@ -227,7 +227,7 @@ xkb_layouts_dnd_data_get (GtkWidget * widget, GdkDragContext * dc,
 			  GtkSelectionData * selection_data, guint info,
 			  guint t, GladeXML * dialog)
 {
-	/* Storing the value into selection - 
+	/* Storing the value into selection -
 	 * while it is actually not used
 	 */
 	gint idx = find_selected_layout_idx (dialog);
@@ -248,13 +248,17 @@ xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
 	GtkTreeViewDropPosition pos;
 	gint didx;
 	gchar *id;
-	GSList *layouts_list = xkb_layouts_get_selected_list ();
-	GSList *node2Remove = g_slist_nth (layouts_list, sidx);
+	GSList *layouts_list;
+	GSList *node2Remove;
 
-	layouts_list = g_slist_remove_link (layouts_list, node2Remove);
+	if (sidx == -1)
+		return;
+
+	layouts_list = xkb_layouts_get_selected_list ();
+	node2Remove = g_slist_nth (layouts_list, sidx);
 
 	id = (gchar *) node2Remove->data;
-	g_slist_free_1 (node2Remove);
+	layouts_list = g_slist_delete_link (layouts_list, node2Remove);
 
 	if (!gtk_tree_view_get_dest_row_at_pos
 	    (GTK_TREE_VIEW (tree_view), x, y, &path, &pos)) {
