@@ -1,3 +1,11 @@
+2008-03-19  Jens Granseuer  <jensgr@gmx.net>
+
+	* data/appearance.glade: don't declare the backgrounds icon view
+	reorderable. It's not. Besides, setting this property breaks the
+	custom drag and drop functionality (bug #523347). This fixes the
+	critical warning when trying to drag an unselected item, but it looks
+	like the new nautilus doesn't support background drag and drop, anyway
+
 2008-03-11  Jens Granseuer  <jensgr@gmx.net>
 
 	* data/appearance.glade: don't resize the font samples vertically when
