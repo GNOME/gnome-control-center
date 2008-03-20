@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.22.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-04 10:24+0100\n"
-"PO-Revision-Date: 2008-03-03 21:23+0100\n"
+"POT-Creation-Date: 2008-03-20 21:44+0100\n"
+"PO-Revision-Date: 2008-03-20 21:53+0100\n"
 "Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -1173,8 +1173,8 @@ msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
 "you need to compile."
 msgstr ""
-"Sembra che «%s» non sia un tema valido. Potrebbe essere un motore di tema "
-"che è necessario compilare."
+"Sembra che «%s» non sia un tema valido. Potrebbe essere un motore di tema che "
+"è necessario compilare."
 
 #: ../capplets/appearance/theme-installer.c:282
 #, c-format
@@ -1444,7 +1444,7 @@ msgstr ""
 "Callback eseguita quando deve essere liberata la memoria dei dati "
 "dell'oggetto editor delle proprietà"
 
-#: ../capplets/common/gconf-property-editor.c:1468
+#: ../capplets/common/gconf-property-editor.c:1467
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1457,7 +1457,7 @@ msgstr ""
 "Assicurarsi che esista e riprovare, in alternativa scegliere una immagine di "
 "sfondo diversa."
 
-#: ../capplets/common/gconf-property-editor.c:1476
+#: ../capplets/common/gconf-property-editor.c:1475
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1470,11 +1470,11 @@ msgstr ""
 "\n"
 "Scegliere un'altra immagine."
 
-#: ../capplets/common/gconf-property-editor.c:1595
+#: ../capplets/common/gconf-property-editor.c:1594
 msgid "Please select an image."
 msgstr "Selezionare un'immagine."
 
-#: ../capplets/common/gconf-property-editor.c:1600
+#: ../capplets/common/gconf-property-editor.c:1599
 msgid "_Select"
 msgstr "_Seleziona"
 
@@ -1566,10 +1566,10 @@ msgstr "<b>Client di posta</b>"
 msgid "<b>Mobility</b>"
 msgstr "<b>Mobilità</b>"
 
-# GNOME-2-20
+# GNOME-2-22
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "<b>Multimedia Player</b>"
-msgstr "<b>Lettore multimediale</b>"
+msgstr "<b>Riproduttore multimediale</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "<b>Terminal Emulator</b>"
@@ -1661,10 +1661,12 @@ msgstr "_Esegui all'avvio"
 msgid "Balsa"
 msgstr "Balsa"
 
-# GNOME-2-20
+# GNOME-2-22
+# tolto music player visto che appare 
+# nell'elenco dei music player...
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Banshee Music Player"
-msgstr "Lettore musicale Banshee"
+msgstr "Banshee"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Claws Mail"
@@ -1693,13 +1695,19 @@ msgstr "ETerm"
 msgid "Encompass"
 msgstr "Encompass"
 
+# GNOME-2-22
+# tolto web browser perché appare nell'elenco
+# dei web browser...
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Epiphany Web Browser"
-msgstr "Browser web Epiphany"
+msgstr "Epiphany"
 
+# GNOME-2-22
+# tolto email client perché appare nell'elenco
+# degli email client...
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
 msgid "Evolution Mail Reader"
-msgstr "Client di posta Evolution"
+msgstr "Evolution"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Firebird"
@@ -1780,10 +1788,10 @@ msgstr "Konsole"
 msgid "Linux Screen Reader"
 msgstr "Linux Screen Reader"
 
-# GNOME-2-20
+# GNOME-2-22
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Linux Screen Reader with Magnifier"
-msgstr "Linux Screen Reader con Ingranditore"
+msgstr "Linux Screen Reader con ingranditore"
 
 # GNOME-2-22
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
@@ -1806,10 +1814,10 @@ msgstr "Mozilla Mail"
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-# GNOME-2-20
+# GNOME-2-22
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Muine Music Player"
-msgstr "Lettore musicale Muine"
+msgstr "Muine"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Mutt"
@@ -1841,10 +1849,12 @@ msgstr "Orca con ingranditore"
 msgid "RXVT"
 msgstr "RXVT"
 
-# GNOME-2-20
+# GNOME-2-22
+# tolto lettore musicale perché appare
+# solo nell'elenco dei lettori musicali...
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
 msgid "Rhythmbox Music Player"
-msgstr "Lettore musicale Rhythmbox"
+msgstr "Rhythmbox"
 
 # GNOME-2-20
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
@@ -1877,10 +1887,14 @@ msgstr "Terminator"
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-# GNOME-2-20
+# GNOME-2-22
+# tolto movie player per gli stessi 
+# motivi di prima
+#
+# (per la 2.24 apro un bug...)
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
 msgid "Totem Movie Player"
-msgstr "Lettore filmati Totem"
+msgstr "Totem"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
 msgid "aterm"
@@ -1890,9 +1904,12 @@ msgstr "aterm"
 msgid "Change screen resolution"
 msgstr "Cambia la risoluzione dello schermo"
 
+# GNOME-2-22
+# tolto "dello" perché è l'unico strumento
+# di preferenze ad aver la preposizione.
 #: ../capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
-msgstr "Risoluzione dello schermo"
+msgstr "Risoluzione schermo"
 
 # rotazione
 #: ../capplets/display/main.c:29
@@ -2045,12 +2062,12 @@ msgid "The type of accelerator."
 msgstr "Il tipo di acceleratore."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:112
+#: ../capplets/keybindings/gnome-keybinding-properties.c:106
 #: ../typing-break/drwright.c:483
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:523
+#: ../capplets/keybindings/gnome-keybinding-properties.c:517
 msgid "<Unknown Action>"
 msgstr "<Azione sconosciuta>"
 
@@ -2058,7 +2075,7 @@ msgstr "<Azione sconosciuta>"
 # tasto speciale (per esempio "G").
 #
 # Adattata al meglio la traduzione italiana.c
-#: ../capplets/keybindings/gnome-keybinding-properties.c:915
+#: ../capplets/keybindings/gnome-keybinding-properties.c:909
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2069,7 +2086,7 @@ msgstr ""
 "digitazione.\n"
 "Provare ad usare in combinazione un tasto come Ctrl, Alt o Maiusc.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:938
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -2078,24 +2095,24 @@ msgstr ""
 "La scorciatoia «%s» è già in uso per:\n"
 " «%s»\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:976
+#: ../capplets/keybindings/gnome-keybinding-properties.c:970
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Errore nell'impostare il nuovo acceleratore nel database di configurazione: %"
 "s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1022
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Errore nell'azzerare l'acceleratore nel database di configurazione: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1153
 msgid "Action"
 msgstr "Azione"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1177
 msgid "Shortcut"
 msgstr "Scorciatoia"
 
@@ -2348,10 +2365,11 @@ msgstr "Anteprima:"
 msgid "Repeat keys speed"
 msgstr "Velocità ripetizione tasti"
 
-# GNOME-2-20
+# GNOME-2-22
+# cambiato accelertore per collisione
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "Reset to De_faults"
-msgstr "Ri_pristina predefinite"
+msgstr "Ripristina pr_edefinite"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "S_peed:"
@@ -2458,12 +2476,12 @@ msgstr "Sconosciuto"
 # passato al femminile, dovrebbe riferirsi sempre 
 # a "disposizione" tastiera (aka layout)  --Luca
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
 msgid "Default"
 msgstr "Predefinita"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:305
 msgid "Layout"
 msgstr "Disposizione"
 
@@ -3481,8 +3499,8 @@ msgstr ""
 msgid ""
 "if true, the control-center will close when a \"Common Task\" is activated."
 msgstr ""
-"Se vero, il centro di controllo verrà chiuso all'attivazione di una "
-"«attività comune»"
+"Se vero, il centro di controllo verrà chiuso all'attivazione di una «attività "
+"comune»"
 
 #: ../shell/gnomecc.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
