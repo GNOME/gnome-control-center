@@ -222,7 +222,7 @@ drw_break_window_init (DrwBreakWindow *window)
 	gtk_widget_show (hbox);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, FALSE, 0);
 
-	priv->image = gtk_image_new_from_stock ("gtk-stop", GTK_ICON_SIZE_DIALOG);
+	priv->image = gtk_image_new_from_stock (GTK_STOCK_STOP, GTK_ICON_SIZE_DIALOG);
 	gtk_misc_set_alignment (GTK_MISC (priv->image), 1, 0.5);
 	gtk_widget_show (priv->image);
 	gtk_box_pack_start (GTK_BOX (hbox), priv->image, TRUE, TRUE, 8);
