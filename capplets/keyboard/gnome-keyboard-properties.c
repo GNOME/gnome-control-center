@@ -130,6 +130,7 @@ static void
 setup_dialog (GladeXML * dialog, GConfChangeSet * changeset)
 {
 	GObject *peditor;
+	gchar *monitor;
 
 	peditor = gconf_peditor_new_boolean
 	    (changeset, "/desktop/gnome/peripherals/keyboard/repeat",
@@ -159,28 +160,39 @@ setup_dialog (GladeXML * dialog, GConfChangeSet * changeset)
 					 blink_from_widget, NULL);
 
 	/* Ergonomics */
-	peditor = gconf_peditor_new_boolean
-	    (changeset, "/desktop/gnome/typing_break/enabled",
-	     WID ("break_enabled_toggle"), NULL);
-	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
-					WID ("break_details_table"));
-	gconf_peditor_new_numeric_range (changeset,
-					 "/desktop/gnome/typing_break/type_time",
-					 WID ("break_enabled_spin"), NULL);
-	gconf_peditor_new_numeric_range (changeset,
-					 "/desktop/gnome/typing_break/break_time",
-					 WID ("break_interval_spin"),
-					 NULL);
-	gconf_peditor_new_boolean (changeset,
-				   "/desktop/gnome/typing_break/allow_postpone",
-				   WID ("break_postponement_toggle"),
-				   NULL);
-	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response",
-			  (GCallback) dialog_response, changeset);
+	monitor = g_find_program_in_path ("gnome-typing-monitor");
+	if (monitor != NULL) {
+		g_free (monitor);
 
-	gtk_label_set_use_markup (GTK_LABEL
-				  (GTK_BIN (WID ("break_enabled_toggle"))->
-				   child), TRUE);
+		peditor = gconf_peditor_new_boolean
+			(changeset, "/desktop/gnome/typing_break/enabled",
+	     		WID ("break_enabled_toggle"), NULL);
+		gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
+						WID ("break_details_table"));
+		gconf_peditor_new_numeric_range (changeset,
+						 "/desktop/gnome/typing_break/type_time",
+						 WID ("break_enabled_spin"), NULL);
+		gconf_peditor_new_numeric_range (changeset,
+						 "/desktop/gnome/typing_break/break_time",
+						 WID ("break_interval_spin"),
+						 NULL);
+		gconf_peditor_new_boolean (changeset,
+					   "/desktop/gnome/typing_break/allow_postpone",
+					   WID ("break_postponement_toggle"),
+					   NULL);
+
+		gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("break_enabled_toggle"))->child),
+					  TRUE);
+
+	} else {
+		/* don't show the typing break tab if the daemon is not available */
+		GtkNotebook *nb = GTK_NOTEBOOK (WID ("keyboard_notebook"));
+		gint tb_page = gtk_notebook_page_num (nb, WID ("break_enabled_toggle"));
+		gtk_notebook_remove_page (nb, tb_page);
+	}
+
+	g_signal_connect (WID ("keyboard_dialog"), "response",
+			  (GCallback) dialog_response, changeset);
 
 	setup_xkb_tabs (dialog, changeset);
 	setup_a11y_tabs (dialog, changeset);
