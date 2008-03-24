@@ -24,7 +24,7 @@ gnome_typing_monitor_CFLAGS = \
 gnome_typing_monitor_LDADD = @TYPING_LIBS@ @SCREENSAVER_LIBS@
 
 imagedir = $(pkgdatadir)/pixmaps
-dist_image_DATA = stop.png bar.png bar-red.png bar-green.png bar-disabled.png ocean-stripes.png
+dist_image_DATA = bar.png bar-red.png bar-green.png bar-disabled.png ocean-stripes.png
 
 # Themeable application icon
 icondir = $(datadir)/icons/hicolor/48x48/apps
