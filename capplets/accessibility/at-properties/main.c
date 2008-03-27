@@ -32,6 +32,9 @@ create_dialog (void)
 		gtk_button_set_image (GTK_BUTTON (WID ("keyboard_button")), image);
 
 		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
+		gtk_button_set_image (GTK_BUTTON (WID ("mouse_button")), image);
+
+		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
 		gtk_button_set_image (GTK_BUTTON (WID ("login_button")), image);
 
 		gtk_image_set_from_file (GTK_IMAGE (WID ("at_enable_image")),
@@ -47,19 +50,25 @@ create_dialog (void)
 static void
 cb_at_preferences (GtkDialog *dialog, gint response_id)
 {
-	g_spawn_command_line_async("gnome-default-applications-properties", NULL);
+	g_spawn_command_line_async ("gnome-default-applications-properties", NULL);
 }
 
 static void
 cb_keyboard_preferences (GtkDialog *dialog, gint response_id)
 {
-	g_spawn_command_line_async("gnome-keyboard-properties --a11y", NULL);
+	g_spawn_command_line_async ("gnome-keyboard-properties --a11y", NULL);
+}
+
+static void
+cb_mouse_preferences (GtkDialog *dialog, gint response_id)
+{
+	g_spawn_command_line_async ("gnome-mouse-properties --show-page=accessibility", NULL);
 }
 
 static void
 cb_login_preferences (GtkDialog *dialog, gint response_id)
 {
-	g_spawn_command_line_async("gdmsetup", NULL);
+	g_spawn_command_line_async ("gdmsetup", NULL);
 }
 
 static void
@@ -107,8 +116,8 @@ at_enable_toggled (GtkToggleButton *toggle_button,
 }
 
 static void
-at_enable_update  (GConfClient *client,
-		   GladeXML    *dialog)
+at_enable_update (GConfClient *client,
+		  GladeXML    *dialog)
 {
 	gboolean is_enabled = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
 
@@ -162,6 +171,10 @@ setup_dialog (GladeXML *dialog)
 	g_signal_connect (G_OBJECT (WID("keyboard_button")),
 			  "clicked",
 			  G_CALLBACK (cb_keyboard_preferences), NULL);
+
+	g_signal_connect (G_OBJECT (WID("mouse_button")),
+			  "clicked",
+			  G_CALLBACK (cb_mouse_preferences), NULL);
 
 	g_signal_connect (G_OBJECT (WID("login_button")),
 			  "clicked",

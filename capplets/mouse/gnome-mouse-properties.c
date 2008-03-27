@@ -470,14 +470,31 @@ main (int argc, char **argv)
 	GnomeProgram   *program;
 	GConfClient    *client;
 	GladeXML       *dialog;
-	GtkWidget      *dialog_win;
+	GtkWidget      *dialog_win, *w;
+	GOptionContext *context;
+	gchar *start_page = NULL;
+
+	GOptionEntry cap_options[] = {
+		{"show-page", 'p', G_OPTION_FLAG_IN_MAIN,
+		 G_OPTION_ARG_STRING,
+		 &start_page,
+		 /* TRANSLATORS: don't translate the terms in brackets */
+		 N_("Specify the name of the page to show (general|accessibility)"),
+		 N_("page") },
+		{NULL}
+	};
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
+	context = g_option_context_new (_("- GNOME Mouse Preferences"));
+	g_option_context_add_main_entries (context, cap_options,
+					   GETTEXT_PACKAGE);
+
 	program = gnome_program_init ("gnome-mouse-properties", VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
+				      GNOME_PARAM_GOPTION_CONTEXT, context,
 				      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 				      NULL);
 
@@ -497,6 +514,25 @@ main (int argc, char **argv)
 		dialog_win = WID ("mouse_properties_dialog");
 		g_signal_connect (dialog_win, "response",
 				  G_CALLBACK (dialog_response_cb), NULL);
+
+		if (start_page != NULL) {
+			gchar *page_name;
+
+			page_name = g_strconcat (start_page, "_vbox", NULL);
+			g_free (start_page);
+
+			w = WID (page_name);
+			if (w != NULL) {
+				GtkNotebook *nb;
+				gint pindex;
+
+				nb = GTK_NOTEBOOK (WID ("prefs_widget"));
+				pindex = gtk_notebook_page_num (nb, w);
+				if (pindex != -1)
+					gtk_notebook_set_current_page (nb, pindex);
+			}
+			g_free (page_name);
+		}
 
 		capplet_set_icon (dialog_win, "gnome-dev-mouse-optical");
 		gtk_widget_show (dialog_win);

@@ -309,6 +309,25 @@
 			      </child>
 
 			      <child>
+				<widget class="GtkButton" id="mouse_button">
+				  <property name="visible">True</property>
+				  <property name="can_focus">True</property>
+				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
+				  <property name="label" translatable="yes">_Mouse Accessibility</property>
+				  <property name="use_underline">True</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_description" translatable="yes">Jump to the Mouse Accessibility dialog</atkproperty>
+				  </accessibility>
+				</widget>
+				<packing>
+				  <property name="padding">5</property>
+				  <property name="expand">False</property>
+				  <property name="fill">False</property>
+				</packing>
+			      </child>
+
+			      <child>
 				<widget class="GtkButton" id="login_button">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
@@ -321,7 +340,7 @@
 				  </accessibility>
 				</widget>
 				<packing>
-				  <property name="padding">0</property>
+				  <property name="padding">5</property>
 				  <property name="expand">False</property>
 				  <property name="fill">False</property>
 				</packing>
