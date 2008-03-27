@@ -329,7 +329,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 	theme_source_dir = gnome_vfs_uri_new (tmp_dir);
 	theme_dest_dir = gnome_vfs_uri_new (target_dir);
 
-	xfer_options = GNOME_VFS_XFER_DELETE_ITEMS | GNOME_VFS_XFER_RECURSIVE;
+	xfer_options = GNOME_VFS_XFER_RECURSIVE;
 	if (filetype != DIRECTORY)
 		xfer_options |= GNOME_VFS_XFER_REMOVESOURCE;
 
@@ -655,6 +655,7 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 
 	file_transfer_dialog_copy_async (FILE_TRANSFER_DIALOG (dialog),
 					 src, target,
+					 FILE_TRANSFER_DIALOG_DEFAULT,
 					 G_PRIORITY_DEFAULT);
 	gtk_widget_show (dialog);
 

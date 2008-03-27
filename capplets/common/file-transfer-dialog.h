@@ -36,6 +36,11 @@ typedef struct _FileTransferDialog FileTransferDialog;
 typedef struct _FileTransferDialogClass FileTransferDialogClass;
 typedef struct _FileTransferDialogPrivate FileTransferDialogPrivate;
 
+typedef enum {
+	FILE_TRANSFER_DIALOG_DEFAULT = 1 << 0,
+	FILE_TRANSFER_DIALOG_OVERWRITE = 1 << 1
+} FileTransferDialogOptions;
+
 struct _FileTransferDialog
 {
 	GtkDialog dialog;
@@ -55,6 +60,7 @@ GtkWidget*     file_transfer_dialog_new_with_parent (GtkWindow *parent);
 void	       file_transfer_dialog_copy_async (FileTransferDialog *dlg,
 						GList *source_files,
 						GList *target_files,
+						FileTransferDialogOptions options,
 						int priority);
 
 

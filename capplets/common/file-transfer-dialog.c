@@ -68,8 +68,20 @@ typedef struct _FileTransferJob
 	FileTransferDialog *dialog;
 	GSList *source_uris;
 	GSList *target_uris;
+	FileTransferDialogOptions options;
 } FileTransferJob;
 
+/* structure passed to the various callbacks */
+typedef struct {
+	FileTransferDialog *dialog;
+	gchar *source;
+	gchar *target;
+	guint current_file;
+	guint total_files;
+	goffset current_bytes;
+	goffset total_bytes;
+	gint response;
+} FileTransferData;
 
 static GObjectClass *parent_class;
 
@@ -171,6 +183,8 @@ file_transfer_dialog_set_prop (GObject *object, guint prop_id, const GValue *val
 			gtk_window_set_title (GTK_WINDOW (dlg),
 					      _("Copying files"));
 		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	}
 }
 
@@ -187,6 +201,8 @@ file_transfer_dialog_get_prop (GObject *object, guint prop_id, GValue *value, GP
 	case PROP_TOTAL_URIS:
 		g_value_set_uint (value, dlg->priv->total);
 		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	}
 }
 
@@ -295,7 +311,7 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox, TRUE, TRUE, 0);
 
 	dlg->priv->status = gtk_label_new (NULL);
-	markup = g_strdup_printf ("<big><b>%s</b></big>", _("Copying files"));
+	markup = g_strconcat ("<big><b>", _("Copying files"), "</b></big>", NULL);
 	gtk_label_set_markup (GTK_LABEL (dlg->priv->status), markup);
 	g_free (markup);
 
@@ -373,32 +389,43 @@ file_transfer_dialog_new_with_parent (GtkWindow *parent)
 					 "parent", parent, NULL));
 }
 
-static void
-file_transfer_job_update_before (FileTransferJob *job)
+static gboolean
+file_transfer_job_update (gpointer user_data)
 {
-	gchar *from, *to;
+	FileTransferData *data = user_data;
+	gdouble fraction;
+	gdouble current_fraction;
 
-	from = job->source_uris->data;
-	to = job->target_uris->data;
+	if (data->total_bytes == 0)
+		current_fraction = 0.0;
+	else
+		current_fraction = ((gdouble) data->current_bytes) / data->total_bytes;
 
-	g_object_set (job->dialog,
-		      "from_uri", from,
-		      "to_uri", to,
+	fraction = ((gdouble) data->current_file - 1) / data->total_files +
+		   (1.0 / data->total_files) * current_fraction;
+
+	g_object_set (data->dialog,
+		      "from_uri", data->source,
+		      "to_uri", data->target,
+		      "nth_uri", data->current_file,
+		      "fraction_complete", fraction,
 		      NULL);
+	return FALSE;
 }
 
 static void
-file_transfer_job_update_after (FileTransferJob *job)
+file_transfer_job_progress (goffset current_bytes,
+			    goffset total_bytes,
+			    gpointer user_data)
 {
-	guint n, total;
+	FileTransferData *data = user_data;
 
-	n = job->dialog->priv->nth + 1;
-	total = job->dialog->priv->total;
+	data->current_bytes = current_bytes;
+	data->total_bytes = total_bytes;
 
-	g_object_set (job->dialog,
-		      "nth_uri", n,
-		      "fraction_complete", ((gdouble) n) / total,
-		      NULL);
+	gdk_threads_enter ();
+	file_transfer_job_update (data);
+	gdk_threads_leave ();
 }
 
 static void
@@ -431,42 +458,114 @@ file_transfer_dialog_cancel (FileTransferDialog *dialog)
 }
 
 static gboolean
+file_transfer_dialog_overwrite (gpointer user_data)
+{
+	FileTransferData *data = user_data;
+	GtkDialog *dialog;
+	GtkWidget *button;
+
+	dialog = GTK_DIALOG (gtk_message_dialog_new (GTK_WINDOW (data->dialog),
+						     GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
+						     GTK_BUTTONS_NONE,
+						     _("File '%s' already exists. Do you want to overwrite it?"),
+						     data->target));
+
+	gtk_dialog_add_button (dialog, _("_Skip"), GTK_RESPONSE_NO);
+	gtk_dialog_add_button (dialog, _("Overwrite _All"), GTK_RESPONSE_APPLY);
+
+	button = gtk_button_new_with_label (_("_Overwrite"));
+	gtk_button_set_image (GTK_BUTTON (button),
+			      gtk_image_new_from_stock (GTK_STOCK_APPLY,
+							GTK_ICON_SIZE_BUTTON));
+	gtk_dialog_add_action_widget (dialog, button, GTK_RESPONSE_YES);
+	gtk_widget_show (button);
+
+	data->response = gtk_dialog_run (dialog);
+
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+	return FALSE;
+}
+
+/* TODO: support transferring directories recursively? */
+static gboolean
 file_transfer_job_schedule (GIOSchedulerJob *io_job,
 			    GCancellable *cancellable,
 			    FileTransferJob *job)
 {
 	GFile *source, *target;
 	gboolean success;
-
-	g_io_scheduler_job_send_to_mainloop (io_job,
-					     (GSourceFunc) file_transfer_job_update_before,
-					     job,
-					     NULL);
+	GFileCopyFlags copy_flags = G_FILE_COPY_NONE;
+	FileTransferData data;
+	GError *error;
+	gboolean retry;
 
 	/* take the first file from the list and copy it */
-	source = g_file_new_for_path (job->source_uris->data);
-	g_free (job->source_uris->data);
+	data.dialog = job->dialog;
+	data.current_file = job->dialog->priv->nth + 1;
+	data.total_files = job->dialog->priv->total;
+	data.source = job->source_uris->data;
+	data.target = job->target_uris->data;
+
+	source = g_file_new_for_path (data.source);
 	job->source_uris = g_slist_delete_link (job->source_uris, job->source_uris);
 
-	target = g_file_new_for_path (job->target_uris->data);
-	g_free (job->target_uris->data);
+	target = g_file_new_for_path (data.target);
 	job->target_uris = g_slist_delete_link (job->target_uris, job->target_uris);
 
-	success = g_file_copy (source, target,
-			       G_FILE_COPY_NONE,
-			       job->dialog->priv->cancellable,
-			       NULL, NULL, NULL);
+	g_io_scheduler_job_send_to_mainloop (io_job,
+					     file_transfer_job_update,
+					     &data,
+					     NULL);
+
+	if (job->options & FILE_TRANSFER_DIALOG_OVERWRITE)
+		copy_flags |= G_FILE_COPY_OVERWRITE;
+
+	do {
+		retry = FALSE;
+		error = NULL;
+		success = g_file_copy (source, target,
+				       copy_flags,
+				       job->dialog->priv->cancellable,
+				       file_transfer_job_progress,
+				       &data,
+				       &error);
+
+		if (error != NULL)
+		{
+			if (error->domain == G_IO_ERROR &&
+			    error->code == G_IO_ERROR_EXISTS)
+			{
+				/* since the job is run in a thread, we cannot simply run
+				 * a dialog here and need to defer it to the mainloop */
+				data.response = GTK_RESPONSE_NONE;
+				g_io_scheduler_job_send_to_mainloop (io_job,
+								     file_transfer_dialog_overwrite,
+								     &data,
+								     NULL);
+
+				if (data.response == GTK_RESPONSE_YES) {
+					retry = TRUE;
+					copy_flags |= G_FILE_COPY_OVERWRITE;
+				} else if (data.response == GTK_RESPONSE_APPLY) {
+					retry = TRUE;
+					job->options |= FILE_TRANSFER_DIALOG_OVERWRITE;
+					copy_flags |= G_FILE_COPY_OVERWRITE;
+				} else {
+					success = TRUE;
+				}
+			}
+			g_error_free (error);
+		}
+	} while (retry);
 
 	g_object_unref (source);
 	g_object_unref (target);
 
+	g_free (data.source);
+	g_free (data.target);
+
 	if (success)
 	{
-		g_io_scheduler_job_send_to_mainloop (io_job,
-						     (GSourceFunc) file_transfer_job_update_after,
-						     job,
-						     NULL);
-
 		if (job->source_uris == NULL)
 		{
 			g_io_scheduler_job_send_to_mainloop_async (io_job,
@@ -493,6 +592,7 @@ void
 file_transfer_dialog_copy_async (FileTransferDialog *dlg,
 				 GList *source_files,
 				 GList *target_files,
+				 FileTransferDialogOptions options,
 				 int priority)
 {
 	FileTransferJob *job;
@@ -501,6 +601,7 @@ file_transfer_dialog_copy_async (FileTransferDialog *dlg,
 
 	job = g_new0 (FileTransferJob, 1);
 	job->dialog = g_object_ref (dlg);
+	job->options = options;
 
 	/* we need to copy the list contents for private use */
 	n = 0;
@@ -517,7 +618,6 @@ file_transfer_dialog_copy_async (FileTransferDialog *dlg,
 
 	g_object_set (dlg, "total_uris", n, NULL);
 
-	/* TODO: support transferring directories recursively? */
 	g_io_scheduler_push_job ((GIOSchedulerJobFunc) file_transfer_job_schedule,
 				 job,
 				 (GDestroyNotify) file_transfer_job_destroy,
