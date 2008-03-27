@@ -44,6 +44,8 @@
 enum
 {
         DOUBLE_CLICK_MAXIMIZE,
+        DOUBLE_CLICK_MAXIMIZE_VERTICALLY,
+        DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY,
         DOUBLE_CLICK_MINIMIZE,
         DOUBLE_CLICK_SHADE,
         DOUBLE_CLICK_NONE
@@ -211,6 +213,12 @@ metacity_change_settings (GnomeWindowManager    *wm,
                 case DOUBLE_CLICK_MAXIMIZE:
                         action = "toggle_maximize";
                         break;
+                case DOUBLE_CLICK_MAXIMIZE_VERTICALLY:
+                        action = "toggle_maximize_vert";
+                        break;
+                case DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY:
+                        action = "toggle_maximize_horiz";
+                        break;
                 case DOUBLE_CLICK_MINIMIZE:
                         action = "minimize";
                         break;
@@ -362,6 +370,10 @@ metacity_get_settings (GnomeWindowManager *wm,
                         settings->double_click_action = DOUBLE_CLICK_SHADE;
                 else if (strcmp (str, "toggle_maximize") == 0)
                         settings->double_click_action = DOUBLE_CLICK_MAXIMIZE;
+                else if (strcmp (str, "toggle_maximize_horiz") == 0)
+                        settings->double_click_action = DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY;
+                else if (strcmp (str, "toggle_maximize_vert") == 0)
+                        settings->double_click_action = DOUBLE_CLICK_MAXIMIZE_VERTICALLY;
                 else if (strcmp (str, "minimize") == 0)
                         settings->double_click_action = DOUBLE_CLICK_MINIMIZE;
                 else if (strcmp (str, "none") == 0)
@@ -388,6 +400,8 @@ metacity_get_double_click_actions (GnomeWindowManager              *wm,
 {
         static GnomeWMDoubleClickAction actions[] = {
                 { DOUBLE_CLICK_MAXIMIZE, N_("Maximize") },
+                { DOUBLE_CLICK_MAXIMIZE_VERTICALLY, N_("Maximize Vertically") },
+                { DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY, N_("Maximize Horizontally") },
                 { DOUBLE_CLICK_MINIMIZE, N_("Minimize") },
                 { DOUBLE_CLICK_SHADE, N_("Roll up") },
                 { DOUBLE_CLICK_NONE, N_("None") }
