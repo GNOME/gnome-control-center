@@ -60,7 +60,13 @@ typedef struct {
   GtkWidget *theme_message_area;
   GtkWidget *theme_message_label;
   GtkWidget *apply_background_button;
+  GtkWidget *revert_font_button;
   GtkWidget *apply_font_button;
+  gchar *revert_application_font;
+  gchar *revert_documents_font;
+  gchar *revert_desktop_font;
+  gchar *revert_windowtitle_font;
+  gchar *revert_monospace_font;
 
   /* style */
   GdkPixbuf *gtk_theme_icon;
