@@ -72,19 +72,17 @@ create_dialog (void)
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("repeat_delay_scale"));
 	gtk_size_group_add_widget (size_group, WID ("repeat_speed_scale"));
-	gtk_size_group_add_widget (size_group,
-				   WID ("cursor_blink_time_scale"));
+	gtk_size_group_add_widget (size_group, WID ("cursor_blink_time_scale"));
 	g_object_unref (G_OBJECT (size_group));
 
-	image =
-	    gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
+	image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (WID ("xkb_layouts_add")), image);
 
-	image =
-	    gtk_image_new_from_stock (GTK_STOCK_REFRESH,
-				      GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")),
-			      image);
+	image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")), image);
+
+	image = gtk_image_new_from_icon_name ("gnome-settings-sound", GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("notifications_button")), image);
 
 	return dialog;
 }
@@ -180,9 +178,6 @@ setup_dialog (GladeXML * dialog, GConfChangeSet * changeset)
 					   "/desktop/gnome/typing_break/allow_postpone",
 					   WID ("break_postponement_toggle"),
 					   NULL);
-
-		gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("break_enabled_toggle"))->child),
-					  TRUE);
 
 	} else {
 		/* don't show the typing break tab if the daemon is not available */

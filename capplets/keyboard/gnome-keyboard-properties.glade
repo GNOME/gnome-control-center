@@ -609,28 +609,9 @@
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="spacing">6</property>
                         <child>
-                          <widget class="GtkLabel" id="label71">
-                            <property name="visible">True</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">&lt;b&gt;General&lt;/b&gt;</property>
-                            <property name="use_markup">True</property>
-                          </widget>
-                        </child>
-                        <child>
                           <widget class="GtkHBox" id="hbox39">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <child>
-                              <widget class="GtkLabel" id="label72">
-                                <property name="visible">True</property>
-                                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="label">    </property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                              </packing>
-                            </child>
                             <child>
                               <widget class="GtkVBox" id="vbox79">
                                 <property name="visible">True</property>
@@ -641,7 +622,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                    <property name="label" translatable="yes">_Allow to turn accessibility features on and off from the keyboard</property>
+                                    <property name="label" translatable="yes">_Accessibility features can be toggled with keyboard shortcuts</property>
                                     <property name="use_underline">True</property>
                                     <property name="response_id">0</property>
                                     <property name="draw_indicator">True</property>
@@ -703,7 +684,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                    <property name="label" translatable="yes">_Simulate simultanous keypresses</property>
+                                    <property name="label" translatable="yes">_Simulate simultaneous keypresses</property>
                                     <property name="use_underline">True</property>
                                     <property name="response_id">0</property>
                                     <property name="draw_indicator">True</property>
@@ -1019,7 +1000,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="label" translatable="yes">_Notifications...</property>
+                            <property name="label" translatable="yes">Audio _Feedback...</property>
                             <property name="use_underline">True</property>
                             <property name="response_id">0</property>
                           </widget>
@@ -1062,7 +1043,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="label" translatable="yes">_Allow to control the pointer using the keyboard</property>
+                            <property name="label" translatable="yes">_Pointer can be controlled using the keypad</property>
                             <property name="use_underline">True</property>
                             <property name="response_id">0</property>
                             <property name="draw_indicator">True</property>
@@ -1339,7 +1320,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="tooltip" translatable="yes">Lock screen after a certain duration to help prevent repetitive keyboard use injuries</property>
-                                <property name="label" translatable="yes">&lt;b&gt;_Lock screen to enforce typing break&lt;/b&gt;</property>
+                                <property name="label" translatable="yes">_Lock screen to enforce typing break</property>
                                 <property name="use_underline">True</property>
                                 <property name="response_id">0</property>
                                 <property name="draw_indicator">True</property>
@@ -1976,7 +1957,7 @@
   <widget class="GtkDialog" id="a11y_notifications_dialog">
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Keyboard Accessibility Notifications</property>
+    <property name="title" translatable="yes">Keyboard Accessibility Audio Feedback</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <property name="has_separator">False</property>

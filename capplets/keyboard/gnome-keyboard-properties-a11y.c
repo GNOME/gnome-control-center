@@ -183,8 +183,6 @@ setup_a11y_tabs (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GConfClient *client;
 	GtkWidget *w;
-	GtkLabel *mousekeys_label;
-	gchar *label;
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, CONFIG_ROOT, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -241,12 +239,6 @@ setup_a11y_tabs (GladeXML *dialog, GConfChangeSet *changeset)
 	g_signal_connect (w, "toggled",
 			  G_CALLBACK (mousekeys_enable_toggled_cb), dialog);
 	mousekeys_enable_toggled_cb (w, dialog);
-
-	mousekeys_label = GTK_LABEL (GTK_BIN (w)->child);
-	label = g_strconcat ("<b>", gtk_label_get_label (mousekeys_label), "</b>", NULL);
-	gtk_label_set_label (mousekeys_label, label);
-	gtk_label_set_use_markup (mousekeys_label, TRUE);
-	g_free (label);
 
 	gconf_peditor_new_numeric_range (changeset,
 					 CONFIG_ROOT "/mousekeys_accel_time",
