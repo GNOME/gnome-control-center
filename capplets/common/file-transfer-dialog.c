@@ -66,6 +66,7 @@ struct _FileTransferDialogPrivate
 typedef struct _FileTransferJob
 {
 	FileTransferDialog *dialog;
+	GtkDialog *overwrite_dialog;
 	GSList *source_uris;
 	GSList *target_uris;
 	FileTransferDialogOptions options;
@@ -81,6 +82,7 @@ typedef struct {
 	goffset current_bytes;
 	goffset total_bytes;
 	gint response;
+	GtkDialog *overwrite_dialog;
 } FileTransferData;
 
 static GObjectClass *parent_class;
@@ -436,6 +438,8 @@ file_transfer_job_destroy (FileTransferJob *job)
 	g_slist_foreach (job->target_uris, (GFunc) g_free, NULL);
 	g_slist_free (job->source_uris);
 	g_slist_free (job->target_uris);
+	if (job->overwrite_dialog != NULL)
+		gtk_widget_destroy (GTK_WIDGET (job->overwrite_dialog));
 	g_free (job);
 }
 
@@ -462,27 +466,35 @@ file_transfer_dialog_overwrite (gpointer user_data)
 {
 	FileTransferData *data = user_data;
 	GtkDialog *dialog;
-	GtkWidget *button;
 
-	dialog = GTK_DIALOG (gtk_message_dialog_new (GTK_WINDOW (data->dialog),
-						     GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
-						     GTK_BUTTONS_NONE,
-						     _("File '%s' already exists. Do you want to overwrite it?"),
-						     data->target));
+	dialog = data->overwrite_dialog;
 
-	gtk_dialog_add_button (dialog, _("_Skip"), GTK_RESPONSE_NO);
-	gtk_dialog_add_button (dialog, _("Overwrite _All"), GTK_RESPONSE_APPLY);
+	if (dialog != NULL) {
+	} else {
+		GtkWidget *button;
 
-	button = gtk_button_new_with_label (_("_Overwrite"));
-	gtk_button_set_image (GTK_BUTTON (button),
-			      gtk_image_new_from_stock (GTK_STOCK_APPLY,
-							GTK_ICON_SIZE_BUTTON));
-	gtk_dialog_add_action_widget (dialog, button, GTK_RESPONSE_YES);
-	gtk_widget_show (button);
+		dialog = GTK_DIALOG (gtk_message_dialog_new (GTK_WINDOW (data->dialog),
+							     GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
+							     GTK_BUTTONS_NONE,
+							     _("File '%s' already exists. Do you want to overwrite it?"),
+							     data->target));
+
+		gtk_dialog_add_button (dialog, _("_Skip"), GTK_RESPONSE_NO);
+		gtk_dialog_add_button (dialog, _("Overwrite _All"), GTK_RESPONSE_APPLY);
+
+		button = gtk_button_new_with_label (_("_Overwrite"));
+		gtk_button_set_image (GTK_BUTTON (button),
+				      gtk_image_new_from_stock (GTK_STOCK_APPLY,
+								GTK_ICON_SIZE_BUTTON));
+		gtk_dialog_add_action_widget (dialog, button, GTK_RESPONSE_YES);
+		gtk_widget_show (button);
+
+		data->overwrite_dialog = dialog;
+	}
 
 	data->response = gtk_dialog_run (dialog);
 
-	gtk_widget_destroy (GTK_WIDGET (dialog));
+	gtk_widget_hide (GTK_WIDGET (dialog));
 	return FALSE;
 }
 
@@ -501,6 +513,7 @@ file_transfer_job_schedule (GIOSchedulerJob *io_job,
 
 	/* take the first file from the list and copy it */
 	data.dialog = job->dialog;
+	data.overwrite_dialog = job->overwrite_dialog;
 	data.current_file = job->dialog->priv->nth + 1;
 	data.total_files = job->dialog->priv->total;
 	data.source = job->source_uris->data;
@@ -553,6 +566,8 @@ file_transfer_job_schedule (GIOSchedulerJob *io_job,
 				} else {
 					success = TRUE;
 				}
+
+				job->overwrite_dialog = data.overwrite_dialog;
 			}
 			g_error_free (error);
 		}

@@ -1,3 +1,10 @@
+2008-03-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* file-transfer-dialog.c: (file_transfer_job_destroy),
+	(file_transfer_dialog_overwrite), (file_transfer_job_schedule): keep
+	the overwrite confirmation around for an entire job, so we don't reset
+	the window position all the time
+
 2008-03-27  Jens Granseuer  <jensgr@gmx.net>
 
 	* file-transfer-dialog.c: (file_transfer_dialog_set_prop),
