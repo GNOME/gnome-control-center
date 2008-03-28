@@ -627,7 +627,6 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 	else {
 		invalid_theme_dialog (base, FALSE);
 		g_free (base);
-		gnome_vfs_uri_list_unref (src);
 		return;
 	}
 	g_free (base);
