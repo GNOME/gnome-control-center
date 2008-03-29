@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-27 23:49+0000\n"
-"PO-Revision-Date: 2008-03-28 19:05+0100\n"
+"PO-Revision-Date: 2008-03-29 08:15+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgid "Images"
 msgstr "Slike"
 
 #: ../capplets/about-me/gnome-about-me.c:716
-#: ../capplets/appearance/theme-installer.c:696
+#: ../capplets/appearance/theme-installer.c:694
 msgid "All Files"
 msgstr "Vse datoteke"
 
@@ -459,22 +459,14 @@ msgid "Jump to the Keyboard Accessibility dialog"
 msgstr "Skok na okno Dostopnost tipkovnice"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-msgid "Jump to the Mouse Accessibility dialog"
-msgstr "Skok na okno Dostopnost tipkovnice"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
 msgid "_Enable assistive technologies"
 msgstr "_Vključi pomožne tehnologije"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
 msgid "_Keyboard Accessibility"
 msgstr "_Dostopnost tipkovnice"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:13
-msgid "_Mouse Accessibility"
-msgstr "_Dostopnost miške"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:14
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
 msgid "_Preferred Applications"
 msgstr "_Prednostni programi"
 
@@ -538,7 +530,6 @@ msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "Določitev ime strani za prikaz (theme|background|fonts|interface)"
 
 #: ../capplets/appearance/appearance-main.c:117
-#: ../capplets/mouse/gnome-mouse-properties.c:483
 msgid "page"
 msgstr "stran"
 
@@ -552,47 +543,27 @@ msgstr "[TAPETA ...]"
 msgid "Default Pointer"
 msgstr "Privzet kazalec"
 
-#: ../capplets/appearance/appearance-themes.c:649
+#: ../capplets/appearance/appearance-themes.c:534
 msgid "Apply Background"
 msgstr "Uveljavi ozadje"
 
-#: ../capplets/appearance/appearance-themes.c:653
+#: ../capplets/appearance/appearance-themes.c:538
 msgid "Apply Font"
 msgstr "Uveljavi pisavo"
 
-#: ../capplets/appearance/appearance-themes.c:657
-msgid "Revert Font"
-msgstr "Povratna pisava"
-
-#: ../capplets/appearance/appearance-themes.c:679
-msgid "The current theme suggests a background and a font. Also, the last applied font suggestion can be reverted."
-msgstr "Trenutna tema predlaga ozadje in pisavo.  Nazadnje uporabljeno pisavo je mogoče povrniti."
-
-#: ../capplets/appearance/appearance-themes.c:681
-msgid "The current theme suggests a background. Also, the last applied font suggestion can be reverted."
-msgstr "Trenutna tema predlaga ozadje. Nazadnje uporabljeno pisavo je mogoče povrniti."
-
-#: ../capplets/appearance/appearance-themes.c:683
+#: ../capplets/appearance/appearance-themes.c:563
 msgid "The current theme suggests a background and a font."
 msgstr "Trenutna tema predlaga ozadje in pisavo."
 
-#: ../capplets/appearance/appearance-themes.c:685
-msgid "The current theme suggests a font. Also, the last applied font suggestion can be reverted."
-msgstr "Trenutna tema vključuje tudi pisavo. Nazadnje uporabljeno pisavo je mogoče povrniti."
-
-#: ../capplets/appearance/appearance-themes.c:687
+#: ../capplets/appearance/appearance-themes.c:568
 msgid "The current theme suggests a background."
 msgstr "Trenutna tema predlaga ozadje."
 
-#: ../capplets/appearance/appearance-themes.c:689
-msgid "The last applied font suggestion can be reverted."
-msgstr "Nazadnje uporabljeno pisavo je mogoče povrniti."
-
-#: ../capplets/appearance/appearance-themes.c:691
+#: ../capplets/appearance/appearance-themes.c:573
 msgid "The current theme suggests a font."
 msgstr "Trenutna tema predlaga pisavo."
 
-#: ../capplets/appearance/appearance-themes.c:1000
+#: ../capplets/appearance/appearance-themes.c:857
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -826,7 +797,7 @@ msgid "Window Border"
 msgstr "Rob okna"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
 msgid "_Add..."
 msgstr "_Dodaj ..."
 
@@ -1094,11 +1065,11 @@ msgstr ""
 msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
 msgstr "%s je pot, kamor bo tema nameščena. Ne morate je izbrati kot izvirnega mesta za namestitev "
 
-#: ../capplets/appearance/theme-installer.c:685
+#: ../capplets/appearance/theme-installer.c:683
 msgid "Select Theme"
 msgstr "Izbor teme"
 
-#: ../capplets/appearance/theme-installer.c:689
+#: ../capplets/appearance/theme-installer.c:687
 msgid "Theme Packages"
 msgstr "Paketi teme"
 
@@ -1112,7 +1083,6 @@ msgid "The theme already exists. Would you like to replace it?"
 msgstr "Ta tema že obstaja. Ali jo želite zamenjati?"
 
 #: ../capplets/appearance/theme-save.c:162
-#: ../capplets/common/file-transfer-dialog.c:476
 msgid "_Overwrite"
 msgstr "_Prepiši"
 
@@ -1143,7 +1113,7 @@ msgid "Just apply settings and quit"
 msgstr "Le uveljavi nastavitve in končaj"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/keyboard/gnome-keyboard-properties.c:261
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Prenesi in shrani zapuščene nastavitve"
@@ -1153,81 +1123,68 @@ msgstr "Prenesi in shrani zapuščene nastavitve"
 msgid "There was an error displaying help: %s"
 msgstr "Ob prikazovanju pomoči se je zgodila napaka: %s"
 
-#: ../capplets/common/file-transfer-dialog.c:96
+#: ../capplets/common/file-transfer-dialog.c:84
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "Kopiranje datoteke: %u of %u"
 
-#: ../capplets/common/file-transfer-dialog.c:144
+#: ../capplets/common/file-transfer-dialog.c:132
 #, c-format
 msgid "Copying '%s'"
 msgstr "Kopiranje '%s'"
 
-#: ../capplets/common/file-transfer-dialog.c:184
-#: ../capplets/common/file-transfer-dialog.c:314
+#: ../capplets/common/file-transfer-dialog.c:172
+#: ../capplets/common/file-transfer-dialog.c:298
 msgid "Copying files"
 msgstr "Kopiranje datotek"
 
-#: ../capplets/common/file-transfer-dialog.c:223
+#: ../capplets/common/file-transfer-dialog.c:207
 msgid "Parent Window"
 msgstr "Nadrejeno okno"
 
-#: ../capplets/common/file-transfer-dialog.c:224
+#: ../capplets/common/file-transfer-dialog.c:208
 msgid "Parent window of the dialog"
 msgstr "Nadrejeno okno pogovornega okna"
 
-#: ../capplets/common/file-transfer-dialog.c:230
+#: ../capplets/common/file-transfer-dialog.c:214
 msgid "From URI"
 msgstr "Iz URI"
 
-#: ../capplets/common/file-transfer-dialog.c:231
+#: ../capplets/common/file-transfer-dialog.c:215
 msgid "URI currently transferring from"
 msgstr "URI iz katerega se trenutno prenaša"
 
-#: ../capplets/common/file-transfer-dialog.c:238
+#: ../capplets/common/file-transfer-dialog.c:222
 msgid "To URI"
 msgstr "V URI"
 
-#: ../capplets/common/file-transfer-dialog.c:239
+#: ../capplets/common/file-transfer-dialog.c:223
 msgid "URI currently transferring to"
 msgstr "URI na katerega se trenutno prenaša:"
 
-#: ../capplets/common/file-transfer-dialog.c:246
+#: ../capplets/common/file-transfer-dialog.c:230
 msgid "Fraction completed"
 msgstr "Zaključen del"
 
-#: ../capplets/common/file-transfer-dialog.c:247
+#: ../capplets/common/file-transfer-dialog.c:231
 msgid "Fraction of transfer currently completed"
 msgstr "Del prenosa, ki je trenutno opravljen"
 
-#: ../capplets/common/file-transfer-dialog.c:254
+#: ../capplets/common/file-transfer-dialog.c:238
 msgid "Current URI index"
 msgstr "Trenutni kazalec URI"
 
-#: ../capplets/common/file-transfer-dialog.c:255
+#: ../capplets/common/file-transfer-dialog.c:239
 msgid "Current URI index - starts from 1"
 msgstr "Trenutni kazalec URI - začne od 1"
 
-#: ../capplets/common/file-transfer-dialog.c:262
+#: ../capplets/common/file-transfer-dialog.c:246
 msgid "Total URIs"
 msgstr "Skupno URIjev"
 
-#: ../capplets/common/file-transfer-dialog.c:263
+#: ../capplets/common/file-transfer-dialog.c:247
 msgid "Total number of URIs"
 msgstr "Skupno število URIjev"
-
-#: ../capplets/common/file-transfer-dialog.c:470
-#, c-format
-msgid "File '%s' already exists. Do you want to overwrite it?"
-msgstr "Datoteka '%s' že obstaja. Ali jo želite prepisati?"
-
-#: ../capplets/common/file-transfer-dialog.c:473
-msgid "_Skip"
-msgstr "_Preskoči"
-
-#: ../capplets/common/file-transfer-dialog.c:474
-msgid "Overwrite _All"
-msgstr "_Prepiši vse"
 
 #: ../capplets/common/gconf-property-editor.c:170
 msgid "Key"
@@ -1435,7 +1392,7 @@ msgid "<b>Web Browser</b>"
 msgstr "<b>Spletni brskalnik</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "Dostopnost"
@@ -1891,22 +1848,22 @@ msgstr "Za urejanje bližnjic tipk kliknite ustrezno vrstico in vnesite novo bli
 msgid "Assign shortcut keys to commands"
 msgstr "Ukazom določi tipkovne bližnjice"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:248
 #: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/keyboard/gnome-keyboard-properties.c:258
 #: ../capplets/sound/sound-properties-capplet.c:1026
 #: ../capplets/sound/sound-properties-capplet.c:1028
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Uveljavi nastavitve in končaj (za kompatibilnost; sedaj nastavitve obravnava demon)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:260
+#: ../capplets/keyboard/gnome-keyboard-properties.c:265
 msgid "Start the page with the typing break settings showing"
 msgstr "Zaženi stran, ki pokaže nastavitve premora tipkanja"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:265
+#: ../capplets/keyboard/gnome-keyboard-properties.c:270
 msgid "Start the page with the accessibility settings showing"
 msgstr "Zaženi stran, ki pokaže nastavitve pomožnih tehnologij"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:274
+#: ../capplets/keyboard/gnome-keyboard-properties.c:279
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Nastavitev tipkovnice za GNOME"
 
@@ -1934,41 +1891,41 @@ msgstr "<b>Počasne tipke<b>"
 msgid "<b>Sticky Keys</b>"
 msgstr "<b>Lepljive tipke</b>"
 
-#. fast acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+msgid "<b>_Lock screen to enforce typing break</b>"
+msgstr "<b>_Zakleni zaslon za uveljavitev premora med tipkanjem</b>"
+
+#. fast acceleration
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Hitro</i></small>"
 
 #. long delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Dolgo</i></small>"
 
 #. short delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kratko</i></small>"
 
 #. slow acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Počasi</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "A_cceleration:"
 msgstr "_Pospeševanje:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "All_ow postponing of breaks"
 msgstr "Dovoli _odlašanje premorov"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
-msgid "Audio _Feedback..."
-msgstr "Zvočni _odziv ..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Beep when _accessibility features are turned on or off"
@@ -2046,8 +2003,8 @@ msgid "Key presses _repeat when key is held down"
 msgstr "Ponavljanje p_ritiskov tipk, ko je tipka neprestano pritisnjena"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "Keyboard Accessibility Audio Feedback"
-msgstr "Dostopnost tipkovnice odziva zvoka"
+msgid "Keyboard Accessibility Notifications"
+msgstr "Obvestila dostopnost tipkovnice"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "Keyboard Layout Options"
@@ -2101,49 +2058,49 @@ msgstr "Ločene _razporeditve za vsako okno posebej"
 msgid "Typing Break"
 msgstr "Premor tipkanja"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
-msgid "_Accessibility features can be toggled with keyboard shortcuts"
-msgstr "_Možnosti dostopnosti je mogoče preklopiti z tipkovnimi bližnjicami"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
+msgid "_Allow to control the pointer using the keyboard"
+msgstr "_Kazalnik je mogoče upravljati s tipkovnico"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
+msgid "_Allow to turn accessibility features on and off from the keyboard"
+msgstr "_Možnosti dostopnosti je mogoče preklopiti z tipkovnimi bližnjicami"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
 msgid "_Break interval lasts:"
 msgstr "_Trajanje premora:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "_Premor:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
 msgid "_Ignore fast duplicate keypresses"
 msgstr "_Prezri hitre podvojene pritiske tipk"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
 msgid "_Layouts:"
 msgstr "_Razporeditve:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
-msgid "_Lock screen to enforce typing break"
-msgstr "_Zakleni zaslon za vsiljen premor med tipkanjem"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
 msgid "_Models:"
 msgstr "_Modeli:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
-msgid "_Only accept long keypresses"
-msgstr "_Sprejmi le dolge klike"
+msgid "_Notifications..."
+msgstr "_Obvestila ..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
-msgid "_Pointer can be controlled using the keypad"
-msgstr "_Kazalnik je mogoče upravljati s številčno tipkovnico"
+msgid "_Only accept long keypresses"
+msgstr "_Sprejmi le dolge klike"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
 msgid "_Selected layouts:"
 msgstr "_Izbrane razporeditve:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
-msgid "_Simulate simultaneous keypresses"
+msgid "_Simulate simultanous keypresses"
 msgstr "_Oponašaj sočasne pritiske tipk"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
@@ -2229,15 +2186,6 @@ msgstr "Premik navzdol"
 #: ../capplets/mouse/gnome-mouse-accessibility.c:109
 msgid "gesture|Disabled"
 msgstr "Onemogočeno"
-
-#. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/mouse/gnome-mouse-properties.c:482
-msgid "Specify the name of the page to show (general|accessibility)"
-msgstr "Določitev ime strani za prikaz (običajno|dostopnost)"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:491
-msgid "- GNOME Mouse Preferences"
-msgstr "- Nastavitve GNOME miške"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid "<b>Double-Click Timeout</b>"
@@ -2550,8 +2498,8 @@ msgid "Devices"
 msgstr "Naprave"
 
 #: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing"
-msgstr "Omogoči programsko mešanje zvoka"
+msgid "E_nable software sound mixing (ESD)"
+msgstr "Omogoči programsko mešanje zvoka (ESD)"
 
 #: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
@@ -3013,27 +2961,19 @@ msgstr "Sistemski zvoki"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Upravljalnik oken \"%s\" ni registrirano nastavitveno orodje\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:402
+#: ../libwindow-settings/metacity-window-manager.c:390
 msgid "Maximize"
 msgstr "Povečaj"
 
-#: ../libwindow-settings/metacity-window-manager.c:403
-msgid "Maximize Vertically"
-msgstr "Razpri navpično"
-
-#: ../libwindow-settings/metacity-window-manager.c:404
-msgid "Maximize Horizontally"
-msgstr "Razpri  vodoravno"
-
-#: ../libwindow-settings/metacity-window-manager.c:405
+#: ../libwindow-settings/metacity-window-manager.c:391
 msgid "Minimize"
 msgstr "Skrči"
 
-#: ../libwindow-settings/metacity-window-manager.c:406
+#: ../libwindow-settings/metacity-window-manager.c:392
 msgid "Roll up"
 msgstr "Zvij"
 
-#: ../libwindow-settings/metacity-window-manager.c:407
+#: ../libwindow-settings/metacity-window-manager.c:393
 msgid "None"
 msgstr "Brez"
 
@@ -3422,413 +3362,4 @@ msgstr "Uveljavi temo"
 #: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Nastavi privzeto temo"
-
-#~ msgid "There was an error launching the mouse preferences dialog: %s"
-#~ msgstr "Ob zaganjanju dialoga nastavitev miške se je zgodila napaka: %s"
-#~ msgid "Unable to import AccessX settings from file '%s'"
-#~ msgstr "Ni mogoče uvoziti nastavitev AccessX iz datoteke '%s'"
-#~ msgid "Import Feature Settings File"
-#~ msgstr "_Uvozi datoteko nastavitev možnosti"
-#~ msgid "_Import"
-#~ msgstr "Uvoz_i"
-#~ msgid "Set your keyboard accessibility preferences"
-#~ msgstr "Nastavitve dostopnosti tipkovnice"
-#~ msgid ""
-#~ "This system does not seem to have the XKB extension.  The keyboard "
-#~ "accessibility features will not operate without it."
-#~ msgstr ""
-#~ "Zdi se, da ta sistem nima razširitve XKB.  Možnosti dostopnosti "
-#~ "tipkovnice brez nje ne bodo delovale."
-#~ msgid "<b>Enable _Mouse Keys</b>"
-#~ msgstr "<b>Vključi _miškine tipke</b>"
-#~ msgid "<b>Enable _Repeat Keys</b>"
-#~ msgstr "<b>Vključi _ponavljajoče tipke</b>"
-#~ msgid "<b>Features</b>"
-#~ msgstr "<b>Možnosti</b>"
-#~ msgid "<b>Toggle Keys</b>"
-#~ msgstr "<b>Preklopne tipke</b>"
-#~ msgid "Basic"
-#~ msgstr "Osnovno"
-#~ msgid "Beep when an LED is turned on and two beeps when one is turned off."
-#~ msgstr ""
-#~ "Zapiskaj, ko je vklopljena lučka LED in dvakrat zapiskaj, ko je "
-#~ "izklopljena."
-#~ msgid "Delay between keypress and pointer mo_vement:"
-#~ msgstr "Premor med pritiski tipk in pre_mikom kazalca:"
-#~ msgid "E_nable Toggle Keys"
-#~ msgstr "Vključi _preklopne tipke"
-#~ msgid "Filters"
-#~ msgstr "Filtri"
-#~ msgid ""
-#~ "Ignore all subsequent presses of the SAME key if they happen within a "
-#~ "user selectable period of time."
-#~ msgstr ""
-#~ "Prezri vse zaporedne pritiske iste tipke, če se zgodijo znotraj časa, ki "
-#~ "ga navede uporabnik."
-#~ msgid "Keyboard Accessibility Preferences (AccessX)"
-#~ msgstr "Nastavitve dostopnosti tipkovnice (AccessX)"
-#~ msgid "Ma_ximum pointer speed:"
-#~ msgstr "Na_jvečja hitrost kazalca :"
-#~ msgid "Mouse _Preferences..."
-#~ msgstr "_Nastavitve miške ..."
-#~ msgid ""
-#~ "Only accept keys after they have been pressed and held for a user "
-#~ "adjustable amount of time."
-#~ msgstr ""
-#~ "Sprejmi le tipke, ko so bile pritisnjene in zadržane toliko časa, kot je "
-#~ "nastavil uporabnik."
-#~ msgid ""
-#~ "Perform multiple simultaneous key press operations by pressing modifier "
-#~ "keys in sequence."
-#~ msgstr ""
-#~ "Izvedi več hkratnih pritiskov tipk s pritiskom spremenilnik tipk v "
-#~ "zaporedju."
-#~ msgid "Time to acce_lerate to maximum speed:"
-#~ msgstr "Čas za _pospešitev na največjo hitrost:"
-#~ msgid "Turn the numeric keypad into a mouse control pad."
-#~ msgstr "Spremeni numerično tipkovnico v plošček za nadzor miške."
-#~ msgid "_Disable if unused for:"
-#~ msgstr "_Izključi, če ni uporabljeno več kot:"
-#~ msgid "_Enable keyboard accessibility features"
-#~ msgstr "_Vključi možnosti dostopnosti tipkovnice"
-#~ msgid "_Import Feature Settings..."
-#~ msgstr "_Uvozi nastavitve možnosti ..."
-#~ msgid "_accepted"
-#~ msgstr "_sprejeta"
-#~ msgid "_pressed"
-#~ msgstr "_pritisnjena"
-#~ msgid "_rejected"
-#~ msgstr "_zavrnjena"
-#~ msgid "characters/second"
-#~ msgstr "znakov/sekundo"
-#~ msgid "milliseconds"
-#~ msgstr "milisekund"
-#~ msgid "pixels/second"
-#~ msgstr "točk/sekundo"
-#~ msgid "Go _to Fonts Folder"
-#~ msgstr "Pojdi v mapo _pisav"
-#~ msgid "Connecting..."
-#~ msgstr "Povezovanje ..."
-#~ msgid "Autostart the preferred AT"
-#~ msgstr "Samodejen zagon želenega AT"
-#~ msgid "Visual"
-#~ msgstr "Vidno"
-#~ msgid "There was an error launching the keyboard tool: %s"
-#~ msgstr "Prišlo je do napake pri zaganjanju orodja za tipkovnice: %s"
-#~ msgid "_Accessibility..."
-#~ msgstr "_Dostopnost ..."
-#~ msgid "Language and Location"
-#~ msgstr "Jezik in Lega"
-#~ msgid "Set your language and location preferences"
-#~ msgstr "Nastavitve jezika in kraja"
-#~ msgid ""
-#~ "<i>Region and language changes take effect the next time you log in.</i>"
-#~ msgstr ""
-#~ "<i>Sprememba jezikovnih značilnosti bodo uveljavljene ob naslednji "
-#~ "prijavi</i>."
-#~ msgid "Localization Preferences"
-#~ msgstr "Nastavitve jezikovnih značilnosti"
-#~ msgid "Region:"
-#~ msgstr "Regija:"
-#~ msgid "Selected languages:"
-#~ msgstr "Izbrani jeziki:"
-#~ msgid "%d millisecond"
-#~ msgid_plural "%d milliseconds"
-#~ msgstr[0] "%d milisekund"
-#~ msgstr[1] "%d milisekunda"
-#~ msgstr[2] "%d milisekundi"
-#~ msgstr[3] "%d milisekunde"
-#~ msgid "<i>Fast</i>"
-#~ msgstr "<i>Hitro</i>"
-#~ msgid "<i>High</i>"
-#~ msgstr "<i>Visoko</i>"
-#~ msgid "<i>Large</i>"
-#~ msgstr "<i>Veliko</i>"
-#~ msgid "<i>Low</i>"
-#~ msgstr "<i>Nizko</i>"
-#~ msgid "<i>Slow</i>"
-#~ msgstr "<i>Počasno</i>"
-#~ msgid "<i>Small</i>"
-#~ msgstr "<i>Majhno</i>"
-#~ msgid "Buttons"
-#~ msgstr "Gumbi"
-#~ msgid "Motion"
-#~ msgstr "Gibanje"
-#~ msgid "      "
-#~ msgstr "      "
-#~ msgid "Volume"
-#~ msgstr "Glasnost"
-#~ msgid "Slow Keys Alert"
-#~ msgstr "Opozorilo o počasnih tipkah"
-#~ msgid ""
-#~ "You just held down the Shift key for 8 seconds.  This is the shortcut for "
-#~ "the Slow Keys feature, which affects the way your keyboard works."
-#~ msgstr ""
-#~ "Držite tipko Shift pritisnjeno 8 sekund. To je bližnjica za možnost "
-#~ "počasnih tipk, ki se nanaša na delovanje vaše tipkovnice."
-#~ msgid "Do you want to activate Slow Keys?"
-#~ msgstr "Ali želite vključiti počasne tipke?"
-#~ msgid "Do you want to deactivate Slow Keys?"
-#~ msgstr "Ali želite izključiti počasne tipke?"
-#~ msgid "_Activate"
-#~ msgstr "_Vključi"
-#~ msgid "_Deactivate"
-#~ msgstr "_Izključi"
-#~ msgid "Do_n't activate"
-#~ msgstr "_Ne vključi"
-#~ msgid "Do_n't deactivate"
-#~ msgstr "_Ne izključi"
-#~ msgid "Sticky Keys Alert"
-#~ msgstr "Opozorilo o lepljivih tipkah"
-#~ msgid ""
-#~ "You just pressed the Shift key 5 times in a row.  This is the shortcut "
-#~ "for the Sticky Keys feature, which affects the way your keyboard works."
-#~ msgstr ""
-#~ "Pravkar ste pritisnili tipko Shift 5-krat zapovrstjo. To je bližnjica za "
-#~ "možnost lepljivih tipk, ki se nanaša na delovanje vaše tipkovnice."
-#~ msgid ""
-#~ "You just pressed two keys at once, or pressed the Shift key 5 times in a "
-#~ "row.  This turns off the Sticky Keys feature, which affects the way your "
-#~ "keyboard works."
-#~ msgstr ""
-#~ "Pravkar ste pritisnili dve tipki hkrati ali tipko Shift 5-krat "
-#~ "zapovrstjo. S tem ste izključili možnost lepljivih tipk, ki se nanaša na "
-#~ "delovanje vaše tipkovnice."
-#~ msgid "Do you want to activate Sticky Keys?"
-#~ msgstr "Ali želite vključiti lepljive tipke?"
-#~ msgid "Do you want to deactivate Sticky Keys?"
-#~ msgstr "Ali želite izključiti lepljive tipke?"
-#~ msgid ""
-#~ "Cannot create the directory \"%s\".\n"
-#~ "This is needed to allow changing the mouse pointer theme."
-#~ msgstr ""
-#~ "Ni mogoče ustvariti mape \"%s\".\n"
-#~ "Ustvarjanje je potrebno za dovolitev spreminjanja tem kazalcev."
-#~ msgid ""
-#~ "Cannot create the directory \"%s\".\n"
-#~ "This is needed to allow changing cursors."
-#~ msgstr ""
-#~ "Ni mogoče ustvariti imenika \"%s\".\n"
-#~ "To je potrebno za spreminjanje kazalcev."
-#~ msgid "Key Binding (%s) has its action defined multiple times\n"
-#~ msgstr "Tipkovna povezava (%s) ima nastavljenih več različnih dejanj\n"
-#~ msgid "Key Binding (%s) has its binding defined multiple times\n"
-#~ msgstr "Tipkovna povezava (%s) ima nastavljenih več različnih dejanj\n"
-#~ msgid "Key Binding (%s) is incomplete\n"
-#~ msgstr "Tipkovna povezava (%s) ni popolna\n"
-#~ msgid "Key Binding (%s) is invalid\n"
-#~ msgstr "Tipkovna povezava (%s) je neveljavna\n"
-#~ msgid "It seems that another application already has access to key '%u'."
-#~ msgstr "Dostop do tipke '%u' že ima nek drug program."
-#~ msgid "Key Binding (%s) is already in use\n"
-#~ msgstr "Tipkovna povezava (%s) je že v uporabi\n"
-#~ msgid ""
-#~ "Error while trying to run (%s)\n"
-#~ "which is linked to the key (%s)"
-#~ msgstr ""
-#~ "Napaka ob poskusu zagona (%s),\n"
-#~ "ki je povezan s tipko (%s)"
-#~ msgid ""
-#~ "Error activating XKB configuration.\n"
-#~ "It can happen under various circumstances:\n"
-#~ "- a bug in libxklavier library\n"
-#~ "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-#~ "- X server with incompatible libxkbfile implementation\n"
-#~ "\n"
-#~ "X server version data:\n"
-#~ "%s\n"
-#~ "%d\n"
-#~ "%s\n"
-#~ "If you report this situation as a bug, please include:\n"
-#~ "- The result of <b>%s</b>\n"
-#~ "- The result of <b>%s</b>"
-#~ msgstr ""
-#~ "Napaka pri vključitvi nastavitve XKB.\n"
-#~ "Razlogi zanjo so lahko različni:\n"
-#~ "- hrošč v knjižnici libxklavier\n"
-#~ "- hrošč v strežniku X (xkbcomp, orodja xmodmap)\n"
-#~ "- strežnik X z nezdružljivo izvedbo libxkbfile\n"
-#~ "\n"
-#~ "Podatki o različici strežnika X:\n"
-#~ "%s\n"
-#~ "%d\n"
-#~ "%s\n"
-#~ "Če boste o težavi poročali kot o hrošču, dodajte še:\n"
-#~ "- Rezultat v <b>%s</b>\n"
-#~ "- Rezultat v <b>%s</b>"
-#~ msgid ""
-#~ "You are using XFree 4.3.0.\n"
-#~ "There are known problems with complex XKB configurations.\n"
-#~ "Try using a simpler configuration or taking a fresher version of XFree "
-#~ "software."
-#~ msgstr ""
-#~ "Poskusite uporabiti preprostejšo nastavitev ali novejšo različico XFree."
-#~ msgid ""
-#~ "Could not get default terminal. Verify that your default terminal command "
-#~ "is set and points to a valid application."
-#~ msgstr ""
-#~ "Ni mogoče priklicati privzetega terminala. Preverite, če je ukaz za zagon "
-#~ "terminala ustrezno določen."
-#~ msgid ""
-#~ "Couldn't execute command: %s\n"
-#~ "Verify that this is a valid command."
-#~ msgstr ""
-#~ "Ni mogoče izvesti ukaza: %s\n"
-#~ "Preverite ali je ukaz veljaven."
-#~ msgid ""
-#~ "Couldn't put the machine to sleep.\n"
-#~ "Verify that the machine is correctly configured."
-#~ msgstr ""
-#~ "Sistema ni mogoče pripraviti na spanje.\n"
-#~ "Preverite, da je pravilno nastavljen."
-#~ msgid ""
-#~ "There was an error starting up the screensaver:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Screensaver functionality will not work in this session."
-#~ msgstr ""
-#~ "Ob poskusu zagona ohranjevalnika zaslona se je zgodila napaka:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Ohranjevalnik zaslona v tej seji ne bo deloval"
-#~ msgid "_Do not show this message again"
-#~ msgstr "_Ne pokaži več tega sporočila"
-#~ msgid "Couldn't load sound file %s as sample %s"
-#~ msgstr "Ni mogoče naložiti zvočne datoteke %s kot vzorca %s"
-#~ msgid "Cannot determine user's home directory"
-#~ msgstr "Ni mogoče ugotoviti uporabnikovega domačega imenika"
-#~ msgid "GConf key %s set to type %s but its expected type was %s\n"
-#~ msgstr ""
-#~ "GConf ključ %s nastavljen na vrsto %s, a njegov pričakovan tip je bil %s\n"
-#~ msgid "A_vailable files:"
-#~ msgstr "Datoteke na _voljo:"
-#~ msgid "Do _not show this warning again."
-#~ msgstr "_Ne pokaži več tega opozorila."
-#~ msgid "Load modmap files"
-#~ msgstr "Naloži datoteke modmap"
-#~ msgid "Would you like to load the modmap file(s)?"
-#~ msgstr "Želite naložiti datoteke modmap?"
-#~ msgid "_Load"
-#~ msgstr "Na_loži"
-#~ msgid "_Loaded files:"
-#~ msgstr "Naložene datoteke:"
-#~ msgid "Error creating signal pipe."
-#~ msgstr "Napaka ob ustvarjanju signalne cevi."
-#~ msgid "Type"
-#~ msgstr "Vrsta"
-#~ msgid ""
-#~ "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-#~ "for preview"
-#~ msgstr ""
-#~ "Vrsta bg_applier-ja: BG_APPLIER_ROOT za korensko okno ali "
-#~ "BG_APPLIER_PREVIEW za predogled"
-#~ msgid "Preview Width"
-#~ msgstr "Širina predogleda"
-#~ msgid "Width if applier is a preview: Defaults to 64."
-#~ msgstr "Širina (za predogled): privzeto je 64."
-#~ msgid "Preview Height"
-#~ msgstr "Višina predogleda"
-#~ msgid "Height if applier is a preview: Defaults to 48."
-#~ msgstr "Višina (za predogled): privzeto je 48."
-#~ msgid "Screen"
-#~ msgstr "Zaslon"
-#~ msgid "Screen on which BGApplier is to draw"
-#~ msgstr "Zaslon na katerem naj se riše BGApplier"
-#~ msgid "Edited %m/%d/%Y"
-#~ msgstr "Urejeno %d.%m.%Y"
-#~ msgid ""
-#~ "If true, the mime handlers for text/plain and text/* will be kept in sync"
-#~ msgstr ""
-#~ "Možnost omogoča, da bodo upravljalniki mime za besedila ohranjeni v "
-#~ "usklajeni"
-#~ msgid "Sync text/plain and text/* handlers"
-#~ msgstr "Uskladi upravljalnika text/plain in text/*"
-#~ msgid "E-mail"
-#~ msgstr "E-pošta"
-#~ msgid "E-mail's shortcut."
-#~ msgstr "Bližnjica za e-pošto."
-#~ msgid "Eject"
-#~ msgstr "Izvrzi"
-#~ msgid "Eject's shortcut."
-#~ msgstr "Bližnjica za odpiranje CD pogona."
-#~ msgid "Home folder"
-#~ msgstr "Domača mapa"
-#~ msgid "Home folder's shortcut."
-#~ msgstr "Bližnjica za domačo mapo."
-#~ msgid "Launch calculator"
-#~ msgstr "Zagon kalkulatorja"
-#~ msgid "Launch calculator's shortcut"
-#~ msgstr "Bližnjica za zagon kalkulatorja."
-#~ msgid "Launch help browser"
-#~ msgstr "Zaženi brskalnik pomoči"
-#~ msgid "Launch help browser's shortcut."
-#~ msgstr "Bližnjica za zagon brskalnika pomoči."
-#~ msgid "Launch web browser"
-#~ msgstr "Zaženi spletni brskalnik"
-#~ msgid "Launch web browser's shortcut."
-#~ msgstr "Bližnjica za zagon spletnega brskalnika."
-#~ msgid "Lock screen"
-#~ msgstr "Zakleni zaslon"
-#~ msgid "Lock screen's shortcut."
-#~ msgstr "Bližnjica za zaklep zaslona."
-#~ msgid "Log out"
-#~ msgstr "Odjava"
-#~ msgid "Log out's shortcut."
-#~ msgstr "Bližnjica za odjavo."
-#~ msgid "Media player"
-#~ msgstr "Media predvajalnik"
-#~ msgid "Media player key's shortcut."
-#~ msgstr "Bližnjica tipke za predvajalnik."
-#~ msgid "Next track key's shortcut."
-#~ msgstr "Bližnjica tipke za naslednjo skladbo."
-#~ msgid "Pause"
-#~ msgstr "Premor"
-#~ msgid "Pause key's shortcut."
-#~ msgstr "Bližnjica za premor."
-#~ msgid "Play (or play/pause)"
-#~ msgstr "Predvajanje (ali predvajanje/premor)"
-#~ msgid "Play (or play/pause) key's shortcut."
-#~ msgstr "Bližnjica za predvajanje (ali premor)."
-#~ msgid "Previous track key's shortcut."
-#~ msgstr "Bližnjica za prejšnjo skladbo."
-#~ msgid "Search's shortcut."
-#~ msgstr "Bližnjica za iskanje."
-#~ msgid "Skip to next track"
-#~ msgstr "Preskoči na naslednjo skladbo"
-#~ msgid "Skip to previous track"
-#~ msgstr "Preskoči na prejšnjo skladbo"
-#~ msgid "Sleep"
-#~ msgstr "Spanje"
-#~ msgid "Sleep's shortcut."
-#~ msgstr "Bližnjica za spanje."
-#~ msgid "Stop playback key"
-#~ msgstr "Tipka za zaustavitev predvajanja"
-#~ msgid "Stop playback key's shortcut."
-#~ msgstr "Bližnjica tipke za zaustavitev predvajanja."
-#~ msgid "Volume down"
-#~ msgstr "Tišje"
-#~ msgid "Volume down's shortcut."
-#~ msgstr "Bližnjica za zmanjševanje glasnosti."
-#~ msgid "Volume mute"
-#~ msgstr "Tišina"
-#~ msgid "Volume mute's shortcut."
-#~ msgstr "Bližnjica za utišanje."
-#~ msgid "Volume step"
-#~ msgstr "Korak glasnosti"
-#~ msgid "Volume step as percentage of volume."
-#~ msgstr "Korak glasnosti kot odstotek glasnosti."
-#~ msgid "Volume up"
-#~ msgstr "Glasneje"
-#~ msgid "Volume up's shortcut."
-#~ msgstr "Bližnjica za uravnavanje glasnosti."
-#~ msgid "Display a dialog when there are errors running the screensaver"
-#~ msgstr "Ob napakah pri zagonu ohranjevalnika zaslona pokaži pogovorno okno"
-#~ msgid "Run screensaver at login"
-#~ msgstr "Ob prijavi zaženi ohranjevalnik zaslona"
-#~ msgid "Show Startup Errors"
-#~ msgstr "Pokaži napake programov ob zagonu"
-#~ msgid "Start screensaver"
-#~ msgstr "Zaženi ohranjevalnik zaslona"
 
