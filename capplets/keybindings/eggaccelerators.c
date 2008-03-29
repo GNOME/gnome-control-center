@@ -345,7 +345,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 		    {
 		      bad_keyval = TRUE;
 		    }
-		  else
+		  else if (keycode != NULL)
 		    {
 		      *keycode = tmp_keycode;
 		      /* 0x00 is an invalid keycode too. */
@@ -353,6 +353,12 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 			bad_keyval = TRUE;
 		    }
 		}
+	    }
+	  else if (keycode != NULL)
+	    {
+	      *keycode = XKeysymToKeycode (GDK_DISPLAY(), keyval);
+	      if (*keycode == 0)
+	 	bad_keyval = TRUE;
 	    }
 
           accelerator += len;
