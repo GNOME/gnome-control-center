@@ -206,7 +206,7 @@ is_keycode (const gchar *string)
  * can represent various keyboard keys (numlock, meta, hyper, etc.),
  * the virtual modifier represents the keyboard key, the concrete
  * modifier the actual Mod2-Mod5 bits in the key press event.
- * 
+ *
  * Returns: %TRUE on success.
  */
 gboolean
@@ -219,7 +219,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
   GdkModifierType mods;
   gint len;
   gboolean bad_keyval;
-  
+
   if (accelerator_key)
     *accelerator_key = 0;
   if (accelerator_mods)
@@ -230,7 +230,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
   g_return_val_if_fail (accelerator != NULL, FALSE);
 
   bad_keyval = FALSE;
-  
+
   keyval = 0;
   mods = 0;
   len = strlen (accelerator);
@@ -313,7 +313,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 	  else
 	    {
 	      gchar last_ch;
-	      
+
 	      last_ch = *accelerator;
 	      while (last_ch && last_ch != '>')
 		{
@@ -329,7 +329,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 
           if (keyval == 0)
 	    {
-	      /* If keyval is 0, than maybe it's a keycode.  Check for 0x## */
+	      /* If keyval is 0, then maybe it's a keycode.  Check for 0x## */
 	      if (len >= 4 && is_keycode (accelerator))
 		{
 		  char keystring[5];
@@ -359,7 +359,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
           len -= len;
 	}
     }
-  
+
   if (accelerator_key)
     *accelerator_key = gdk_keyval_to_lower (keyval);
   if (accelerator_mods)
@@ -373,7 +373,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
  * @accelerator_key:  accelerator keyval
  * @accelerator_mods: accelerator modifier mask
  * @returns:          a newly-allocated accelerator name
- * 
+ *
  * Converts an accelerator keyval and modifier mask
  * into a string parseable by egg_accelerator_parse_virtual().
  * For example, if you pass in #GDK_q and #EGG_VIRTUAL_CONTROL_MASK,
@@ -386,124 +386,21 @@ egg_virtual_accelerator_name (guint                  accelerator_key,
 			      guint		     keycode,
                               EggVirtualModifierType accelerator_mods)
 {
-  static const gchar text_release[] = "<Release>";
-  static const gchar text_shift[] = "<Shift>";
-  static const gchar text_control[] = "<Control>";
-  static const gchar text_mod1[] = "<Alt>";
-  static const gchar text_mod2[] = "<Mod2>";
-  static const gchar text_mod3[] = "<Mod3>";
-  static const gchar text_mod4[] = "<Mod4>";
-  static const gchar text_mod5[] = "<Mod5>";
-  static const gchar text_meta[] = "<Meta>";
-  static const gchar text_super[] = "<Super>";
-  static const gchar text_hyper[] = "<Hyper>";
-  guint l;
-  gchar *keyval_name, *str = NULL;
-  gchar *accelerator;
+  gchar *gtk_name;
+  GdkModifierType gdkmods = 0;
 
-  accelerator_mods &= EGG_VIRTUAL_MODIFIER_MASK;
+  egg_keymap_resolve_virtual_modifiers (NULL, accelerator_mods, &gdkmods);
+  gtk_name = gtk_accelerator_name (accelerator_key, gdkmods);
 
   if (!accelerator_key)
     {
-      str = g_strdup_printf ("0x%02x", keycode);
-      keyval_name = str;
-    }
-  else
-    {
-      keyval_name = gdk_keyval_name (gdk_keyval_to_lower (accelerator_key));
-      if (!keyval_name)
-        keyval_name = "";
+	gchar *name;
+	name = g_strdup_printf ("%s0x%02x", gtk_name, keycode);
+	g_free (gtk_name);
+	return name;
     }
 
-  l = 0;
-  if (accelerator_mods & EGG_VIRTUAL_RELEASE_MASK)
-    l += sizeof (text_release) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_SHIFT_MASK)
-    l += sizeof (text_shift) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_CONTROL_MASK)
-    l += sizeof (text_control) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_ALT_MASK)
-    l += sizeof (text_mod1) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_MOD2_MASK)
-    l += sizeof (text_mod2) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_MOD3_MASK)
-    l += sizeof (text_mod3) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_MOD4_MASK)
-    l += sizeof (text_mod4) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_MOD5_MASK)
-    l += sizeof (text_mod5) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_META_MASK)
-    l += sizeof (text_meta) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_HYPER_MASK)
-    l += sizeof (text_hyper) - 1;
-  if (accelerator_mods & EGG_VIRTUAL_SUPER_MASK)
-    l += sizeof (text_super) - 1;
-  l += strlen (keyval_name);
-
-  accelerator = g_new (gchar, l + 1);
-
-  l = 0;
-  accelerator[l] = 0;
-  if (accelerator_mods & EGG_VIRTUAL_RELEASE_MASK)
-    {
-      strcpy (accelerator + l, text_release);
-      l += sizeof (text_release) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_SHIFT_MASK)
-    {
-      strcpy (accelerator + l, text_shift);
-      l += sizeof (text_shift) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_CONTROL_MASK)
-    {
-      strcpy (accelerator + l, text_control);
-      l += sizeof (text_control) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_ALT_MASK)
-    {
-      strcpy (accelerator + l, text_mod1);
-      l += sizeof (text_mod1) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_MOD2_MASK)
-    {
-      strcpy (accelerator + l, text_mod2);
-      l += sizeof (text_mod2) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_MOD3_MASK)
-    {
-      strcpy (accelerator + l, text_mod3);
-      l += sizeof (text_mod3) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_MOD4_MASK)
-    {
-      strcpy (accelerator + l, text_mod4);
-      l += sizeof (text_mod4) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_MOD5_MASK)
-    {
-      strcpy (accelerator + l, text_mod5);
-      l += sizeof (text_mod5) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_META_MASK)
-    {
-      strcpy (accelerator + l, text_meta);
-      l += sizeof (text_meta) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_HYPER_MASK)
-    {
-      strcpy (accelerator + l, text_hyper);
-      l += sizeof (text_hyper) - 1;
-    }
-  if (accelerator_mods & EGG_VIRTUAL_SUPER_MASK)
-    {
-      strcpy (accelerator + l, text_super);
-      l += sizeof (text_super) - 1;
-    }
-  
-  strcpy (accelerator + l, keyval_name);
-  g_free (str);
-
-  return accelerator;
+  return gtk_name;
 }
 
 /**
@@ -511,7 +408,7 @@ egg_virtual_accelerator_name (guint                  accelerator_key,
  * @accelerator_key:  accelerator keyval
  * @accelerator_mods: accelerator modifier mask
  * @returns:          a newly-allocated accelerator label
- * 
+ *
  * Converts an accelerator keyval and modifier mask
  * into a (possibly translated) string that can be displayed to
  * a user.
@@ -526,10 +423,9 @@ egg_virtual_accelerator_label (guint                  accelerator_key,
 			       EggVirtualModifierType accelerator_mods)
 {
   gchar *gtk_label;
-  GdkModifierType gdkmods;
+  GdkModifierType gdkmods = 0;
 
-  egg_keymap_resolve_virtual_modifiers (gdk_keymap_get_default (),
-					accelerator_mods, &gdkmods);
+  egg_keymap_resolve_virtual_modifiers (NULL, accelerator_mods, &gdkmods);
   gtk_label = gtk_accelerator_get_label (accelerator_key, gdkmods);
 
   if (!accelerator_key)
@@ -552,21 +448,18 @@ egg_keymap_resolve_virtual_modifiers (GdkKeymap              *keymap,
   int i;
   const EggModmap *modmap;
 
-  g_return_if_fail (GDK_IS_KEYMAP (keymap));
   g_return_if_fail (concrete_mods != NULL);
-  
+  g_return_if_fail (keymap == NULL || GDK_IS_KEYMAP (keymap));
+
   modmap = egg_keymap_get_modmap (keymap);
-  
+
   /* Not so sure about this algorithm. */
-  
+
   concrete = 0;
-  i = 0;
-  while (i < EGG_MODMAP_ENTRY_LAST)
+  for (i = 0; i < EGG_MODMAP_ENTRY_LAST; ++i)
     {
       if (modmap->mapping[i] & virtual_mods)
-        concrete |= (1 << i);
-
-      ++i;
+        concrete |= MODMAP_ENTRY_TO_MODIFIER (i);
     }
 
   *concrete_mods = concrete;
@@ -580,27 +473,26 @@ egg_keymap_virtualize_modifiers (GdkKeymap              *keymap,
   GdkModifierType virtual;
   int i;
   const EggModmap *modmap;
-  
-  g_return_if_fail (GDK_IS_KEYMAP (keymap));
+
   g_return_if_fail (virtual_mods != NULL);
+  g_return_if_fail (keymap == NULL || GDK_IS_KEYMAP (keymap));
 
   modmap = egg_keymap_get_modmap (keymap);
-  
+
   /* Not so sure about this algorithm. */
-  
+
   virtual = 0;
-  i = 0;
-  while (i < EGG_MODMAP_ENTRY_LAST)
+  for (i = 0; i < EGG_MODMAP_ENTRY_LAST; ++i)
     {
-      if ((1 << i) & concrete_mods)
+      if (MODMAP_ENTRY_TO_MODIFIER (i) & concrete_mods)
         {
           EggVirtualModifierType cleaned;
-          
+
           cleaned = modmap->mapping[i] & ~(EGG_VIRTUAL_MOD2_MASK |
                                            EGG_VIRTUAL_MOD3_MASK |
                                            EGG_VIRTUAL_MOD4_MASK |
                                            EGG_VIRTUAL_MOD5_MASK);
-          
+
           if (cleaned != 0)
             {
               virtual |= cleaned;
@@ -613,10 +505,8 @@ egg_keymap_virtualize_modifiers (GdkKeymap              *keymap,
               virtual |= modmap->mapping[i];
             }
         }
-      
-      ++i;
     }
-  
+
   *virtual_mods = virtual;
 }
 
@@ -632,13 +522,12 @@ reload_modmap (GdkKeymap *keymap,
   xmodmap = XGetModifierMapping (gdk_x11_get_default_xdisplay ());
 
   memset (modmap->mapping, 0, sizeof (modmap->mapping));
-  
-  /* there are 8 modifiers, and the first 3 are shift, shift lock,
-   * and control
+
+  /* there are 8 modifiers in the order shift, shift lock,
+   * control, mod1-5 with up to max_keypermod bindings each
    */
   map_size = 8 * xmodmap->max_keypermod;
-  i = 3 * xmodmap->max_keypermod;
-  while (i < map_size)
+  for (i = 3 * xmodmap->max_keypermod; i < map_size; ++i)
     {
       /* get the key code at this point in the map,
        * see if its keysym is one we're interested in
@@ -649,7 +538,7 @@ reload_modmap (GdkKeymap *keymap,
       int n_entries;
       int j;
       EggVirtualModifierType mask;
-      
+
       keys = NULL;
       keyvals = NULL;
       n_entries = 0;
@@ -657,11 +546,10 @@ reload_modmap (GdkKeymap *keymap,
       gdk_keymap_get_entries_for_keycode (keymap,
                                           keycode,
                                           &keys, &keyvals, &n_entries);
-      
+
       mask = 0;
-      j = 0;
-      while (j < n_entries)
-        {          
+      for (j = 0; j < n_entries; ++j)
+        {
           if (keyvals[j] == GDK_Num_Lock)
             mask |= EGG_VIRTUAL_NUM_LOCK_MASK;
           else if (keyvals[j] == GDK_Scroll_Lock)
@@ -677,20 +565,16 @@ reload_modmap (GdkKeymap *keymap,
             mask |= EGG_VIRTUAL_SUPER_MASK;
           else if (keyvals[j] == GDK_Mode_switch)
             mask |= EGG_VIRTUAL_MODE_SWITCH_MASK;
-          
-          ++j;
         }
 
       /* Mod1Mask is 1 << 3 for example, i.e. the
        * fourth modifier, i / keyspermod is the modifier
        * index
-       */      
+       */
       modmap->mapping[i/xmodmap->max_keypermod] |= mask;
-      
+
       g_free (keyvals);
-      g_free (keys);      
-      
-      ++i;
+      g_free (keys);
     }
 
   /* Add in the not-really-virtual fixed entries */
@@ -702,7 +586,7 @@ reload_modmap (GdkKeymap *keymap,
   modmap->mapping[EGG_MODMAP_ENTRY_MOD3] |= EGG_VIRTUAL_MOD3_MASK;
   modmap->mapping[EGG_MODMAP_ENTRY_MOD4] |= EGG_VIRTUAL_MOD4_MASK;
   modmap->mapping[EGG_MODMAP_ENTRY_MOD5] |= EGG_VIRTUAL_MOD5_MASK;
-  
+
   XFreeModifiermap (xmodmap);
 }
 
@@ -711,12 +595,14 @@ egg_keymap_get_modmap (GdkKeymap *keymap)
 {
   EggModmap *modmap;
 
+  if (keymap == NULL)
+    keymap = gdk_keymap_get_default ();
+
   /* This is all a hack, much simpler when we can just
    * modify GDK directly.
    */
-  
-  modmap = g_object_get_data (G_OBJECT (keymap),
-                              "egg-modmap");
+
+  modmap = g_object_get_data (G_OBJECT (keymap), "egg-modmap");
 
   if (modmap == NULL)
     {
@@ -725,9 +611,9 @@ egg_keymap_get_modmap (GdkKeymap *keymap)
       /* FIXME modify keymap change events with an event filter
        * and force a reload if we get one
        */
-      
+
       reload_modmap (keymap, modmap);
-      
+
       g_object_set_data_full (G_OBJECT (keymap),
                               "egg-modmap",
                               modmap,
@@ -735,6 +621,6 @@ egg_keymap_get_modmap (GdkKeymap *keymap)
     }
 
   g_assert (modmap != NULL);
-  
+
   return modmap;
 }

@@ -1,3 +1,14 @@
+2008-03-29  Jens Granseuer  <jensgr@gmx.net>
+
+	* eggaccelerators.c: (egg_accelerator_parse_virtual),
+	(egg_virtual_accelerator_name), (egg_virtual_accelerator_label),
+	(egg_keymap_resolve_virtual_modifiers),
+	(egg_keymap_virtualize_modifiers), (reload_modmap),
+	(egg_keymap_get_modmap):
+	* eggaccelerators.h: fix mismatched modifier mapping between egg
+	and GTK (so that e.g. <Super> works) and replace some custom
+	functionality with stock GTK
+
 2008-03-15  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-keybinding-properties.c: (accel_edited_callback),
