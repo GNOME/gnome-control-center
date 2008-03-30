@@ -87,6 +87,8 @@ typedef struct {
 
 static GObjectClass *parent_class;
 
+G_DEFINE_TYPE (FileTransferDialog, file_transfer_dialog, GTK_TYPE_DIALOG)
+
 static void
 file_transfer_dialog_update_num_files (FileTransferDialog *dlg)
 {
@@ -344,37 +346,6 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 6);
 
 	gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);
-}
-
-GType
-file_transfer_dialog_get_type (void)
-{
-	static GType file_transfer_dialog_type = 0;
-
-	if (!file_transfer_dialog_type)
-	{
-		const GTypeInfo file_transfer_dialog_info =
-		{
-			sizeof (FileTransferDialogClass),
-			NULL, /* GBaseInitFunc */
-			NULL, /* GBaseFinalizeFunc */
-			(GClassInitFunc) file_transfer_dialog_class_init,
-			NULL, /* GClassFinalizeFunc */
-			NULL, /* data */
-			sizeof (FileTransferDialog),
-			0, /* n_preallocs */
-			(GInstanceInitFunc) file_transfer_dialog_init,
-			NULL
-		};
-
-		file_transfer_dialog_type =
-			g_type_register_static (GTK_TYPE_DIALOG,
-					 	"FileTransferDialog",
-						&file_transfer_dialog_info,
-						0);
-	}
-
-	return file_transfer_dialog_type;
 }
 
 GtkWidget*
