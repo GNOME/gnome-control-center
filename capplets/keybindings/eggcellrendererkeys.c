@@ -421,7 +421,8 @@ grab_key_callback (GtkWidget    *widget,
 
   egg_keymap_resolve_virtual_modifiers (gdk_keymap_get_default (),
                                         EGG_VIRTUAL_NUM_LOCK_MASK |
-                                        EGG_VIRTUAL_SCROLL_LOCK_MASK,
+                                        EGG_VIRTUAL_SCROLL_LOCK_MASK |
+                                        EGG_VIRTUAL_LOCK_MASK,
                                         &ignored_modifiers);
   
   /* http://bugzilla.gnome.org/show_bug.cgi?id=139605
