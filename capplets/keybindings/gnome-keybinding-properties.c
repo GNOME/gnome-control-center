@@ -711,6 +711,7 @@ append_keys_to_tree_from_file (GladeXML   *dialog,
   keys = (KeyListEntry *) g_array_free (keylist->entries, FALSE);
   if (keylist->package)
     {
+      bind_textdomain_codeset (keylist->package, "UTF-8");
       title = dgettext (keylist->package, keylist->name);
     } else {
       title = _(keylist->name);
