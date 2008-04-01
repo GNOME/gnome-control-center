@@ -64,7 +64,7 @@ create_mixer_device_tree_model (void)
 
     factory = gst_element_get_factory (mixer);
     longname = gst_element_factory_get_longname (factory);
-    factory_name = gst_plugin_feature_get_name (GST_PLUGIN_FEATURE (factory)); 
+    factory_name = gst_plugin_feature_get_name (GST_PLUGIN_FEATURE (factory));
 
     /* gst_element_set_state (mixer, GST_STATE_NULL); */
 
@@ -88,10 +88,10 @@ create_mixer_device_tree_model (void)
       g_free (device);
       device = tmp;
     } else {
-      device = g_strdup (factory_name); 
+      device = g_strdup (factory_name);
     }
 
-    gtk_list_store_insert_with_values (device_store, &tree_iter, -1, 
+    gtk_list_store_insert_with_values (device_store, &tree_iter, -1,
 	MIXER_DEVICE_MODEL_NAME_COLUMN, name,
 	MIXER_DEVICE_MODEL_DEVICE_COLUMN, device,
 	MIXER_DEVICE_MODEL_MIXER_COLUMN, mixer,
@@ -105,6 +105,10 @@ create_mixer_device_tree_model (void)
   }
 
   g_list_free (mixer_list);
+
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (device_store),
+					MIXER_DEVICE_MODEL_NAME_COLUMN,
+					GTK_SORT_ASCENDING);
 
   return GTK_TREE_MODEL (device_store);
 }
