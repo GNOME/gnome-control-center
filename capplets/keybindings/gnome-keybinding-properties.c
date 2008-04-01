@@ -64,22 +64,6 @@ typedef struct
 
 static gboolean block_accels = FALSE;
 
-static GtkTreeModel*
-get_real_model (GtkTreeView *tree_view)
-{
-  GtkTreeModel *model;
-  GtkTreeModel *submodel;
-
-  model = gtk_tree_view_get_model (tree_view);
-
-  if (model)
-    submodel = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (model));
-  else
-    submodel = NULL;
-
-  return submodel;
-}
-
 static GladeXML *
 create_dialog (void)
 {
@@ -268,32 +252,27 @@ keyentry_sort_func (GtkTreeModel *model,
 }
 
 static void
-clear_old_model (GladeXML  *dialog)
+clear_old_model (GladeXML *dialog)
 {
   GtkWidget *tree_view;
   GtkTreeModel *model;
 
   tree_view = WID ("shortcut_treeview");
-  model = get_real_model (GTK_TREE_VIEW (tree_view));
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 
   if (model == NULL)
     {
       /* create a new model */
-      GtkTreeModel *sort_model;
-
       model = (GtkTreeModel *) gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
 
-      sort_model = gtk_tree_model_sort_new_with_model (model);
-
-      gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model),
+      gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
                                        KEYENTRY_COLUMN,
                                        keyentry_sort_func,
                                        NULL, NULL);
 
-      gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), sort_model);
+      gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), model);
 
       g_object_unref (model);
-      g_object_unref (sort_model);
     }
   else
     {
@@ -307,8 +286,6 @@ clear_old_model (GladeXML  *dialog)
       /* we need the schema name below;
        * cached values do not have that set, though */
       gconf_client_clear_cache (client);
-
-      g_object_ref (model);
 
       for (valid = gtk_tree_model_get_iter_first (model, &iter);
            valid;
@@ -327,8 +304,7 @@ clear_old_model (GladeXML  *dialog)
             }
         }
 
-      gtk_tree_store_clear(GTK_TREE_STORE(model));
-   	  g_object_unref (model);
+      gtk_tree_store_clear (GTK_TREE_STORE (model));
       g_object_unref (client);
     }
 
@@ -410,7 +386,7 @@ append_keys_to_tree (GladeXML           *dialog,
   gint i, j;
 
   client = gconf_client_get_default ();
-  model = get_real_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
 
   /* Try to find a section parent iter, if it already exists */
   i = gtk_tree_model_iter_n_children (model, NULL);
@@ -868,7 +844,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
   /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
   mask &= ~EGG_VIRTUAL_LOCK_MASK;
 
-  model = get_real_model (view);
   tmp_key.model  = model;
   tmp_key.keyval = keyval;
   tmp_key.keycode = keycode;
