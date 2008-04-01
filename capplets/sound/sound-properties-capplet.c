@@ -101,7 +101,7 @@ CheckXKB (void)
 
 	gdk_error_trap_push ();
 	dpy = GDK_DISPLAY ();
-	have_xkb = XkbQueryExtension (dpy, &opcode, &xkbEventBase, 
+	have_xkb = XkbQueryExtension (dpy, &opcode, &xkbEventBase,
 				      &errorBase, &major, &minor)
 		   && XkbUseExtension (dpy, &major, &minor);
 	XSync (dpy, FALSE);
@@ -157,7 +157,7 @@ bell_flash_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 }
 
 static GladeXML *
-create_dialog (void) 
+create_dialog (void)
 {
 	GladeXML *dialog;
 	GtkWidget *widget, *box, *view, *image;
@@ -198,7 +198,7 @@ create_dialog (void)
 	if (!CheckXKB()) {
 		gtk_widget_set_sensitive (WID ("bell_flash_alignment"), FALSE);
 	}
-		
+
 	return dialog;
 }
 
@@ -249,29 +249,29 @@ add_device (int type, const gchar *pipeline, const gchar *description, const gch
 	GtkTreeIter found_pipeline_iter = { };
 	GtkTreeIter found_selected_iter = { };
 
-	/* only display pipelines available on this system */	
+	/* only display pipelines available on this system */
 	if (!element_available (pipeline))
 		return;
-	
+
 	for (l = device_choosers; l != NULL; l = l->next) {
 		device_chooser = (DeviceChooser *) l->data;
-		
+
 		if (device_chooser->type != type)
 			continue;
-		
+
 		/* if we're adding/updating the currently selected device
 		 * we're only interested in the DeviceChooser for the
 		 * corresponding profile */
 		if (selection != NULL && strcmp (selection, device_chooser->profile) != 0)
 			continue;
-			
+
 		selected = (selection != NULL);
-		
+
 		found_pipeline = FALSE;
 		found_selected = FALSE;
-		
+
 		model = GTK_TREE_MODEL (device_chooser->model);
-		
+
 		if (gtk_tree_model_get_iter_first (model, &iter)) {
 			do {
 				gtk_tree_model_get (model, &iter, 0, &row_pipeline, 2, &row_selected, -1);
@@ -289,7 +289,7 @@ add_device (int type, const gchar *pipeline, const gchar *description, const gch
 
 			} while (gtk_tree_model_iter_next (model, &iter));
 		}
-		
+
 		if (found_pipeline) {
 			/* the specified pipeline is already in the model */
 			iter = found_pipeline_iter;
@@ -309,13 +309,13 @@ add_device (int type, const gchar *pipeline, const gchar *description, const gch
 			gtk_list_store_append (device_chooser->model, &iter);
 			gtk_list_store_set (device_chooser->model, &iter, 2, selected, -1);
 		}
-		
+
 		gtk_list_store_set (device_chooser->model, &iter, 0, pipeline, -1);
-		
+
 		if (!selected || !found_pipeline) {
 			/* either we're appending a new row or we're updating
 			 * a row with non-appropriate description */
-			 
+
 			if (selected) {
 				/* we add the specified pipeline only because
 				 * it's the preferred device but it's neither
@@ -331,14 +331,14 @@ add_device (int type, const gchar *pipeline, const gchar *description, const gch
 				description_mod = g_strdup (description);
 			}
 			gtk_list_store_set (device_chooser->model, &iter, 1, description_mod, -1);
-			
+
 			/* we need to store the unmodified description to not
 			 * modify already modified descriptions */
 			gtk_list_store_set (device_chooser->model, &iter, 3, description, -1);
-			
+
 			g_free (description_mod);
 		}
-		
+
 		if (selected) {
 			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (device_chooser->combobox), &iter);
 		}
@@ -356,13 +356,13 @@ remove_device (int type, const gchar *pipeline)
 	gchar *description;
 	gchar *description_mod;
 	GtkTreeModel *model;
-	
+
 	for (l = device_choosers; l != NULL; l = l->next) {
 		device_chooser = (DeviceChooser *) l->data;
-		
+
 		if (device_chooser->type != type)
 			continue;
-		
+
 		model = GTK_TREE_MODEL (device_chooser->model);
 
 		gtk_combo_box_get_active_iter (GTK_COMBO_BOX (device_chooser->combobox), &iter);
@@ -371,7 +371,7 @@ remove_device (int type, const gchar *pipeline)
 		/* don't remove currently selected devices */
 		if (strcmp (row_pipeline, pipeline) == 0) {
 			g_free (row_pipeline);
-			
+
 			/* let the user know that they have to reconnect the
 			 * sound device */
 			gtk_tree_model_get (model, &iter, 3, &description, -1);
@@ -400,20 +400,28 @@ remove_device (int type, const gchar *pipeline)
 static void
 device_added_callback (LibHalContext *ctx, const char *udi)
 {
-	DBusError error;
 	gchar *type_string;
+	gchar *class_string;
 	int type;
 	const gchar *element;
 	gchar *pipeline, *description;
-	
-	dbus_error_init (&error);
+	gboolean ignore;
 
-	if (!libhal_device_query_capability (ctx, udi, "alsa", &error)) {
-		dbus_error_free (&error);
+	if (!libhal_device_query_capability (ctx, udi, "alsa", NULL)) {
 		return;
 	}
 
-	type_string = libhal_device_get_property_string (ctx, udi, "alsa.type", &error);
+	/* filter out "digitizer", "modem", "none", "unknown" */
+	class_string = libhal_device_get_property_string (ctx, udi, "alsa.pcm_class", NULL);
+	ignore = class_string != NULL
+		 && strcmp (class_string, "generic") != 0
+		 && strcmp (class_string, "multi") != 0;
+	libhal_free_string (class_string);
+	if (ignore) {
+		return;
+	}
+
+	type_string = libhal_device_get_property_string (ctx, udi, "alsa.type", NULL);
 	if (strcmp (type_string, "playback") == 0) {
 		type = AUDIO_PLAYBACK;
 		element = "halaudiosink";
@@ -426,30 +434,27 @@ device_added_callback (LibHalContext *ctx, const char *udi)
 	}
 	libhal_free_string (type_string);
 	if (type == -1) {
-		dbus_error_free (&error);
 		return;
 	}
-	
+
 	pipeline = g_strdup_printf ("%s udi=%s", element, udi);
-	description = libhal_device_get_property_string (ctx, udi, "alsa.device_id", &error);
+	description = libhal_device_get_property_string (ctx, udi, "alsa.device_id", NULL);
 
 	add_device (type, pipeline, description, NULL);
 
 	g_free (pipeline);
 	libhal_free_string (description);
-
-	dbus_error_free (&error);
 }
 
 static void
 device_removed_callback (LibHalContext *ctx, const char *udi)
 {
 	gchar *pipeline;
-	
+
 	pipeline = g_strdup_printf ("halaudiosink udi=%s", udi);
 	remove_device (AUDIO_PLAYBACK, pipeline);
 	g_free (pipeline);
-	
+
 	pipeline = g_strdup_printf ("halaudiosrc udi=%s", udi);
 	remove_device (AUDIO_CAPTURE, pipeline);
 	g_free (pipeline);
@@ -465,7 +470,7 @@ setup_hal_devices (void)
 	int i, num = 0;
 
 	dbus_error_init (&error);
-	
+
 	connection = dbus_bus_get (DBUS_BUS_SYSTEM, &error);
 	if (connection == NULL) {
 		/* cannot get a dbus connection */
@@ -475,12 +480,12 @@ setup_hal_devices (void)
 		}
 		return;
 	}
-	
+
 	dbus_connection_setup_with_g_main (connection, g_main_context_default ());
-	
+
 	ctx = libhal_ctx_new ();
 	g_return_if_fail (ctx != NULL);
-	
+
 	libhal_ctx_set_device_added (ctx, device_added_callback);
 	libhal_ctx_set_device_removed (ctx, device_removed_callback);
 	libhal_ctx_set_dbus_connection (ctx, connection);
@@ -507,7 +512,7 @@ setup_hal_devices (void)
 	for (i = 0; i < num; i++) {
 		device_added_callback (ctx, devices[i]);
 	}
-	
+
 	dbus_free_string_array (devices);
 }
 #endif
@@ -516,11 +521,11 @@ static void
 device_test_button_clicked (GtkWidget *button, gpointer user_data)
 {
 	DeviceChooser *device_chooser = (DeviceChooser *) user_data;
-	
+
 	GladeXML *dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", NULL, NULL);
 
 	user_test_pipeline (dialog, GTK_WINDOW (dialog_win), device_chooser->test_pipeline);
-	
+
 	g_object_unref (dialog);
 }
 
@@ -528,7 +533,7 @@ static gchar *
 get_gconf_key_for_profile (const gchar *profile, int type)
 {
 	const gchar *element_type;
-	
+
 	switch (type) {
 		case AUDIO_PLAYBACK:
 			element_type = "audiosink";
@@ -545,7 +550,7 @@ get_gconf_key_for_profile (const gchar *profile, int type)
 		default:
 			g_return_val_if_reached (NULL);
 	}
-	
+
 	return g_strdup_printf ("%s/default/%s%s", GST_GCONF_DIR, profile, element_type);
 }
 
@@ -556,10 +561,10 @@ device_changed (GtkComboBox *widget, gpointer user_data)
 	GtkTreeIter iter;
 	gchar *pipeline, *description;
 	gchar *base_key, *key;
-	
+
 	gtk_combo_box_get_active_iter (widget, &iter);
 	gtk_tree_model_get (GTK_TREE_MODEL (device_chooser->model), &iter, 0, &pipeline, 3, &description, -1);
-	
+
 	base_key = get_gconf_key_for_profile (device_chooser->profile, device_chooser->type);
 	gconf_client_set_string (gconf_client, base_key, pipeline, NULL);
 	g_free (pipeline);
@@ -576,14 +581,14 @@ get_gconf_description_for_profile (const gchar *profile, int type)
 	gchar *base_key;
 	gchar *key;
 	gchar *description;
-	
+
 	base_key = get_gconf_key_for_profile (profile, type);
 	key = g_strconcat (base_key, "_description", NULL);
 	g_free (base_key);
 
 	description = gconf_client_get_string (gconf_client, key, NULL);
 	g_free (key);
-	
+
 	return description;
 }
 
@@ -592,11 +597,11 @@ gconf_key_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, gpoint
 {
 	DeviceChooser *device_chooser = (DeviceChooser *) data;
 	gchar *description;
-	
+
 	description = get_gconf_description_for_profile (device_chooser->profile, device_chooser->type);
-	
+
 	add_device (device_chooser->type, gconf_value_get_string (gconf_entry_get_value (entry)), description, device_chooser->profile);
-	
+
 	g_free (description);
 }
 
@@ -606,10 +611,10 @@ setup_device_chooser (const gchar *profile, int type, GtkWidget *combobox, GtkWi
 	DeviceChooser *device_chooser;
 	GtkCellRenderer *cell;
 	gchar *gconf_key;
-	
+
 	g_return_if_fail (GTK_IS_COMBO_BOX (combobox));
 	g_return_if_fail (GTK_IS_BUTTON (test_button));
-	
+
 	device_chooser = g_malloc0 (sizeof (DeviceChooser));
 
 	device_chooser->profile = profile;
@@ -621,14 +626,14 @@ setup_device_chooser (const gchar *profile, int type, GtkWidget *combobox, GtkWi
 	cell = gtk_cell_renderer_text_new ();
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox), cell, TRUE);
 	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combobox), cell, "text", 1);
-	
+
 	device_choosers = g_list_prepend (device_choosers, device_chooser);
-	
+
 	gconf_key = get_gconf_key_for_profile (profile, type);
 	gconf_client_notify_add (gconf_client, gconf_key, gconf_key_changed,
 				 device_chooser, NULL, NULL);
 	g_free (gconf_key);
-	
+
 	g_signal_connect (combobox, "changed", G_CALLBACK (device_changed), device_chooser);
 
 	g_signal_connect (test_button, "clicked", G_CALLBACK (device_test_button_clicked), device_chooser);
@@ -644,13 +649,13 @@ add_selected_device (const gchar *profile, int type)
 	gconf_key = get_gconf_key_for_profile (profile, type);
 	pipeline = gconf_client_get_string (gconf_client, gconf_key, NULL);
 	g_free (gconf_key);
-	
+
 	g_return_if_fail (pipeline != NULL);
-	
+
 	description = get_gconf_description_for_profile (profile, type);
-	
+
 	add_device (type, pipeline, description, profile);
-	
+
 	g_free (description);
 	g_free (pipeline);
 }
@@ -674,7 +679,7 @@ setup_devices (void)
 	add_device (AUDIO_CAPTURE, "pulsesrc", _("PulseAudio Sound Server"), NULL);
 	add_device (AUDIO_CAPTURE, "audiotestsrc wave=triangle is-live=true", _("Test Sound"), NULL);
 	add_device (AUDIO_CAPTURE, "audiotestsrc wave=silence is-live=true", _("Silence"), NULL);
-	
+
 	add_selected_device ("", AUDIO_PLAYBACK);
 	add_selected_device ("music", AUDIO_PLAYBACK);
 	add_selected_device ("chat", AUDIO_PLAYBACK);
@@ -691,7 +696,7 @@ mixer_device_combobox_changed (GtkComboBox *widget, gpointer user_data)
 		gchar *device = NULL;
 
 		model = gtk_combo_box_get_model (widget);
-		gtk_tree_model_get (model, &iter, 
+		gtk_tree_model_get (model, &iter,
 				MIXER_DEVICE_MODEL_DEVICE_COLUMN, &device, -1);
 
 		gconf_client_set_string (gconf_client, DEFAULT_MIXER_DEVICE_KEY, device, NULL);
@@ -716,7 +721,7 @@ mixer_tracks_selection_changed (GtkTreeSelection *selection, gpointer user_data)
 {
 	GSList *label_list = NULL;
 
-	gtk_tree_selection_selected_foreach (selection, 
+	gtk_tree_selection_selected_foreach (selection,
 			(GtkTreeSelectionForeachFunc)add_track_label_to_list,
 			&label_list);
 
@@ -759,10 +764,10 @@ update_mixer_tracks_selection (GSList *tracks, GladeXML *dialog)
 					}
 				}
 				g_free (label);
-			} while (gtk_tree_model_iter_next (model, &iter));		
+			} while (gtk_tree_model_iter_next (model, &iter));
 		}
 	}
-		
+
 	g_signal_handlers_unblock_by_func (G_OBJECT (selection), G_CALLBACK (mixer_tracks_selection_changed), NULL);
 
 	/* FIXME: if none selected, select master track */
@@ -774,7 +779,7 @@ default_mixer_tracks_notify (GConfClient *client, guint cnxn_id, GConfEntry *ent
 	GSList *tracks;
 
 	tracks = gconf_client_get_list (gconf_client, DEFAULT_MIXER_TRACKS_KEY, GCONF_VALUE_STRING, NULL);
-	
+
 	update_mixer_tracks_selection (tracks, dialog);
 
 	g_slist_foreach (tracks, (GFunc) g_free, NULL);
@@ -881,7 +886,7 @@ setup_default_mixer (GladeXML *dialog)
 
 	model = create_mixer_device_tree_model ();
 	gtk_combo_box_set_model (GTK_COMBO_BOX (device_widget), model);
-	g_object_unref (G_OBJECT (model)); 
+	g_object_unref (G_OBJECT (model));
 
 	renderer = gtk_cell_renderer_text_new ();
         g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
@@ -918,7 +923,7 @@ setup_default_mixer (GladeXML *dialog)
  */
 
 static void
-setup_dialog (GladeXML *dialog, GConfChangeSet *changeset) 
+setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GObject *peditor;
 	GtkSizeGroup *combobox_size_group;
@@ -988,7 +993,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
  */
 
 static void
-get_legacy_settings (void) 
+get_legacy_settings (void)
 {
 	GConfClient *client;
 	gboolean val_bool, def;
@@ -1000,7 +1005,7 @@ get_legacy_settings (void)
 }
 
 static void
-dialog_response_cb (GtkWidget *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_response_cb (GtkWidget *dialog, gint response_id, GConfChangeSet *changeset)
 {
 	if (response_id == GTK_RESPONSE_HELP) {
 		capplet_help (GTK_WINDOW (dialog),
@@ -1008,12 +1013,12 @@ dialog_response_cb (GtkWidget *dialog, gint response_id, GConfChangeSet *changes
 			"goscustmulti-2");
 		return;
 	}
-	
+
 	gtk_widget_destroy (dialog);
 }
 
 int
-main (int argc, char **argv) 
+main (int argc, char **argv)
 {
 	GConfChangeSet *changeset;
 	GladeXML       *dialog;
@@ -1053,7 +1058,7 @@ main (int argc, char **argv)
 				      NULL);
 
 	activate_settings_daemon ();
-	
+
 	gconf_client = gconf_client_get_default ();
 	gconf_client_add_dir (gconf_client, "/desktop/gnome/sound", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (gconf_client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -1079,7 +1084,7 @@ main (int argc, char **argv)
 			g_object_unref (dialog);
 		}
 	}
-	
+
 	g_object_unref (gconf_client);
 	g_object_unref (program);
 
