@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 17:17+0100\n"
-"PO-Revision-Date: 2008-02-23 17:17+0100\n"
-"Last-Translator: Åsmund Skjæveland <aasmunds@ulrik.uio.no>\n"
-"Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
+"POT-Creation-Date: 2008-04-07 14:34+0200\n"
+"PO-Revision-Date: 2008-04-07 14:34+0200\n"
+"Last-Translator: Eskild Hustvedt <eskildh@gnome.org>\n"
+"Language-Team: Norwegian Nynorsk <i18n-no@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: VIM\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
@@ -61,11 +61,11 @@ msgid "Images"
 msgstr "Bilete"
 
 #: ../capplets/about-me/gnome-about-me.c:716
-#: ../capplets/appearance/theme-installer.c:700
+#: ../capplets/appearance/theme-installer.c:695
 msgid "All Files"
 msgstr "Alle filer"
 
-#: ../capplets/about-me/gnome-about-me.c:853
+#: ../capplets/about-me/gnome-about-me.c:854
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -73,16 +73,16 @@ msgstr ""
 "Ein feil oppsod under freistnaden på å henta adressebokinformasjon\n"
 "Evolution Data Server kan ikkje handsama protokollen"
 
-#: ../capplets/about-me/gnome-about-me.c:874
+#: ../capplets/about-me/gnome-about-me.c:875
 msgid "Unable to open address book"
 msgstr "Kan ikkje opna adressebok"
 
-#: ../capplets/about-me/gnome-about-me.c:888
+#: ../capplets/about-me/gnome-about-me.c:889
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Ukjend innloggings-ID, brukadatabasen kan vera defekt"
 
-#: ../capplets/about-me/gnome-about-me.c:918
-#: ../capplets/about-me/gnome-about-me.c:920
+#: ../capplets/about-me/gnome-about-me.c:919
+#: ../capplets/about-me/gnome-about-me.c:921
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
@@ -447,7 +447,7 @@ msgstr "Pålo_gging med hjelpeteknologi"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 msgid "Assistive Technologies Preferences"
-msgstr "Brukarval for hjelpeteknologi"
+msgstr "Innstillingar for hjelpeteknologi"
 
 #
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
@@ -475,17 +475,29 @@ msgstr "Gå til dialog for pålogging med hjelp"
 msgid "Jump to the Keyboard Accessibility dialog"
 msgstr "Gå til dialog for tastaturhjelp"
 
+#
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
+#, fuzzy
+msgid "Jump to the Mouse Accessibility dialog"
+msgstr "Gå til dialog for tastaturhjelp"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
 msgid "_Enable assistive technologies"
 msgstr "_Slå på hjelpeteknologi"
 
 #
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
 msgid "_Keyboard Accessibility"
 msgstr "_Tastaturhjelp"
 
 #
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:13
+#, fuzzy
+msgid "_Mouse Accessibility"
+msgstr "Hjelpeteknologi"
+
+#
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:14
 msgid "_Preferred Applications"
 msgstr "_Foretrukne program"
 
@@ -575,6 +587,7 @@ msgstr "Oppgje namn på sida som skal visast (theme|background|fonts|interface)"
 
 #
 #: ../capplets/appearance/appearance-main.c:117
+#: ../capplets/mouse/gnome-mouse-properties.c:483
 msgid "page"
 msgstr "side"
 
@@ -590,31 +603,61 @@ msgid "Default Pointer"
 msgstr "Forvald peikar"
 
 #
-#: ../capplets/appearance/appearance-themes.c:534
+#: ../capplets/appearance/appearance-themes.c:649
 msgid "Apply Background"
 msgstr "Bruk bakgrunn"
 
 #
-#: ../capplets/appearance/appearance-themes.c:538
+#: ../capplets/appearance/appearance-themes.c:653
 msgid "Apply Font"
 msgstr "Bruk skrifttype"
 
+#: ../capplets/appearance/appearance-themes.c:657
+msgid "Revert Font"
+msgstr ""
+
 #
-#: ../capplets/appearance/appearance-themes.c:563
-msgid "The current theme suggests a background and a font."
+#: ../capplets/appearance/appearance-themes.c:679
+#, fuzzy
+msgid ""
+"The current theme suggests a background and a font. Also, the last applied "
+"font suggestion can be reverted."
 msgstr "Noverande drakt foreslår ein bakgrunn og ein skrifttype."
 
 #
-#: ../capplets/appearance/appearance-themes.c:568
+#: ../capplets/appearance/appearance-themes.c:681
+#, fuzzy
+msgid ""
+"The current theme suggests a background. Also, the last applied font "
+"suggestion can be reverted."
+msgstr "Noverande drakt foreslår ein bakgrunn og ein skrifttype."
+
+#
+#: ../capplets/appearance/appearance-themes.c:683
+msgid "The current theme suggests a background and a font."
+msgstr "Noverande drakt foreslår ein bakgrunn og ein skrifttype."
+
+#: ../capplets/appearance/appearance-themes.c:685
+msgid ""
+"The current theme suggests a font. Also, the last applied font suggestion "
+"can be reverted."
+msgstr ""
+
+#
+#: ../capplets/appearance/appearance-themes.c:687
 msgid "The current theme suggests a background."
 msgstr "Noverande drakt foreslår ein bakgrunn."
 
+#: ../capplets/appearance/appearance-themes.c:689
+msgid "The last applied font suggestion can be reverted."
+msgstr ""
+
 #
-#: ../capplets/appearance/appearance-themes.c:573
+#: ../capplets/appearance/appearance-themes.c:691
 msgid "The current theme suggests a font."
 msgstr "Noverande drakt foreslår ein skrift."
 
-#: ../capplets/appearance/appearance-themes.c:857
+#: ../capplets/appearance/appearance-themes.c:1000
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -663,7 +706,7 @@ msgstr "<b>_Bakgrunn</b>"
 #
 #: ../capplets/appearance/data/appearance.glade.h:10
 msgid "Appearance Preferences"
-msgstr "Brukarval for utsjåande"
+msgstr "Innstillingar for utsjåande"
 
 #
 #: ../capplets/appearance/data/appearance.glade.h:11
@@ -874,7 +917,7 @@ msgid "Window Border"
 msgstr "Vindaugsramme"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
 msgid "_Add..."
 msgstr "_Legg til ..."
 
@@ -1072,82 +1115,82 @@ msgstr[0] "piksel"
 msgstr[1] "pikslar"
 
 #
-#: ../capplets/appearance/theme-installer.c:171
-#: ../capplets/appearance/theme-installer.c:221
+#: ../capplets/appearance/theme-installer.c:166
+#: ../capplets/appearance/theme-installer.c:216
 msgid "Cannot install theme"
 msgstr "Kan ikkje installera drakta"
 
-#: ../capplets/appearance/theme-installer.c:173
+#: ../capplets/appearance/theme-installer.c:168
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "Verktøyet %s er ikkje installert."
 
 #
-#: ../capplets/appearance/theme-installer.c:223
+#: ../capplets/appearance/theme-installer.c:218
 msgid "There was a problem while extracting the theme."
 msgstr "Det oppsto eit problem under utpakking av drakta."
 
 #
-#: ../capplets/appearance/theme-installer.c:246
+#: ../capplets/appearance/theme-installer.c:241
 msgid "There was an error installing the selected file"
 msgstr "Det oppsto ein feil under installering av vald fil"
 
-#: ../capplets/appearance/theme-installer.c:247
+#: ../capplets/appearance/theme-installer.c:242
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "«%s» ser ikkje ut til å vera ei gyldig drakt."
 
-#: ../capplets/appearance/theme-installer.c:248
+#: ../capplets/appearance/theme-installer.c:243
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
 "you need to compile."
 msgstr ""
-"«%s» ser ikkje ut til å vera ei gyldig drakt. Det kan vera ein draktmotor "
-"som du må kompilera."
+"«%s» ser ikkje ut til å vera ei gyldig drakt. Det kan vera ein draktmotor som "
+"du må kompilera."
 
-#: ../capplets/appearance/theme-installer.c:287
+#: ../capplets/appearance/theme-installer.c:282
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME-drakta %s installert"
 
-#: ../capplets/appearance/theme-installer.c:347
+#: ../capplets/appearance/theme-installer.c:342
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Installasjon av drakta «%s» mislukkast."
 
-#: ../capplets/appearance/theme-installer.c:379
+#: ../capplets/appearance/theme-installer.c:374
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Drakta «%s» er installert."
 
 #
-#: ../capplets/appearance/theme-installer.c:385
+#: ../capplets/appearance/theme-installer.c:380
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Vil du byta drakt no, eller bruka den noverande drakta?"
 
-#: ../capplets/appearance/theme-installer.c:387
+#: ../capplets/appearance/theme-installer.c:382
 msgid "Keep Current Theme"
 msgstr "Bruk gamal drakt"
 
-#: ../capplets/appearance/theme-installer.c:389
+#: ../capplets/appearance/theme-installer.c:384
 msgid "Apply New Theme"
 msgstr "Bruk ny drakt"
 
-#: ../capplets/appearance/theme-installer.c:491
+#: ../capplets/appearance/theme-installer.c:486
 msgid "Failed to create temporary directory"
 msgstr "Klarte ikkje å laga mellombels katalog"
 
 #
-#: ../capplets/appearance/theme-installer.c:551
+#: ../capplets/appearance/theme-installer.c:546
 msgid "New themes have been successfully installed."
 msgstr "Nye drakter vart installerte."
 
-#: ../capplets/appearance/theme-installer.c:579
+#: ../capplets/appearance/theme-installer.c:573
 msgid "No theme file location specified to install"
 msgstr "Ikkje oppgjeve nokon adresser til draktfiler som skal installerast"
 
-#: ../capplets/appearance/theme-installer.c:599
+#: ../capplets/appearance/theme-installer.c:593
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1156,7 +1199,7 @@ msgstr ""
 "Har ikkje dei naudsynte løyva til å installera drakta i:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:621
+#: ../capplets/appearance/theme-installer.c:615
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1166,12 +1209,12 @@ msgstr ""
 "kjeldeadresse"
 
 #
-#: ../capplets/appearance/theme-installer.c:689
+#: ../capplets/appearance/theme-installer.c:684
 msgid "Select Theme"
 msgstr "Vel drakt"
 
 #
-#: ../capplets/appearance/theme-installer.c:693
+#: ../capplets/appearance/theme-installer.c:688
 msgid "Theme Packages"
 msgstr "Draktpakkar"
 
@@ -1186,6 +1229,7 @@ msgstr "Drakta finst frå før. Vil du erstatta henne?"
 
 #
 #: ../capplets/appearance/theme-save.c:162
+#: ../capplets/common/file-transfer-dialog.c:456
 msgid "_Overwrite"
 msgstr "_Overskriv"
 
@@ -1209,8 +1253,8 @@ msgid ""
 msgstr ""
 "Kan ikkje starta «gnome-settings-daemon», programmet som styrer "
 "innstillingane. Når dette programmet ikkje køyrer, kan det vera nokon av "
-"brukarvala dine som ikkje vert verksame. Dette kan tyda på eit problem med "
-"Bonobo, eller at ein annan innstillingshandsamar (t.d. KDE sin) allereie "
+"instillingane dine som ikkje vert verksame. Dette kan tyda på eit problem "
+"med Bonobo, eller at ein annan innstillingshandsamar (t.d. KDE sin) allereie "
 "køyrer, og skapar problem for GNOME sin innstillingshandsamar."
 
 #: ../capplets/common/capplet-stock-icons.c:67
@@ -1223,8 +1267,8 @@ msgid "Just apply settings and quit"
 msgstr "Ta i bruk innstillingar og avslutt"
 
 #: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:249
-#: ../capplets/sound/sound-properties-capplet.c:1030
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/sound/sound-properties-capplet.c:1035
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagra gamle innstillingar"
 
@@ -1233,75 +1277,86 @@ msgstr "Hent og lagra gamle innstillingar"
 msgid "There was an error displaying help: %s"
 msgstr "Ein feil oppstod når hjelpeteksten skulle visast: %s"
 
-#: ../capplets/common/file-transfer-dialog.c:94
+#: ../capplets/common/file-transfer-dialog.c:100
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "Kopierer fil: %u av %u"
 
-#: ../capplets/common/file-transfer-dialog.c:154
+#: ../capplets/common/file-transfer-dialog.c:148
 #, c-format
 msgid "Copying '%s'"
 msgstr "Kopierer «%s»"
 
-#: ../capplets/common/file-transfer-dialog.c:185
-#: ../capplets/common/file-transfer-dialog.c:309
+#: ../capplets/common/file-transfer-dialog.c:188
+#: ../capplets/common/file-transfer-dialog.c:318
 msgid "Copying files"
 msgstr "Kopierer filer"
 
 #
-#: ../capplets/common/file-transfer-dialog.c:221
+#: ../capplets/common/file-transfer-dialog.c:227
 msgid "Parent Window"
 msgstr "Opphavsvindauge"
 
 #
-#: ../capplets/common/file-transfer-dialog.c:222
+#: ../capplets/common/file-transfer-dialog.c:228
 msgid "Parent window of the dialog"
 msgstr "Dialogens opphavsvindauge"
 
-#: ../capplets/common/file-transfer-dialog.c:228
+#: ../capplets/common/file-transfer-dialog.c:234
 msgid "From URI"
 msgstr "Frå URI"
 
-#: ../capplets/common/file-transfer-dialog.c:229
+#: ../capplets/common/file-transfer-dialog.c:235
 msgid "URI currently transferring from"
 msgstr "URI overføringa kjem frå"
 
-#: ../capplets/common/file-transfer-dialog.c:236
+#: ../capplets/common/file-transfer-dialog.c:242
 msgid "To URI"
 msgstr "til URI"
 
-#: ../capplets/common/file-transfer-dialog.c:237
+#: ../capplets/common/file-transfer-dialog.c:243
 msgid "URI currently transferring to"
 msgstr "URI vert overført til"
 
-#: ../capplets/common/file-transfer-dialog.c:244
+#: ../capplets/common/file-transfer-dialog.c:250
 msgid "Fraction completed"
 msgstr "Del som er ferdig"
 
-#: ../capplets/common/file-transfer-dialog.c:245
+#: ../capplets/common/file-transfer-dialog.c:251
 msgid "Fraction of transfer currently completed"
 msgstr "Kor stor del av overføringa som er ferdig"
 
-#: ../capplets/common/file-transfer-dialog.c:252
+#: ../capplets/common/file-transfer-dialog.c:258
 msgid "Current URI index"
 msgstr "Indeks av noverande URI"
 
 # TRN: Treng tankestrek, ikkje bindestrek.
-#: ../capplets/common/file-transfer-dialog.c:253
+#: ../capplets/common/file-transfer-dialog.c:259
 msgid "Current URI index - starts from 1"
 msgstr "Noverande URI-indeks - Startar på 1"
 
-#: ../capplets/common/file-transfer-dialog.c:260
+#: ../capplets/common/file-transfer-dialog.c:266
 msgid "Total URIs"
 msgstr "URI-ar totalt"
 
-#: ../capplets/common/file-transfer-dialog.c:261
+#: ../capplets/common/file-transfer-dialog.c:267
 msgid "Total number of URIs"
 msgstr "Tal på kor mange URI-ar det er totalt"
 
-#: ../capplets/common/file-transfer-dialog.c:422
-msgid "Connecting..."
-msgstr "Koplar til ..."
+#: ../capplets/common/file-transfer-dialog.c:450
+#, fuzzy, c-format
+msgid "File '%s' already exists. Do you want to overwrite it?"
+msgstr "Drakta finst frå før. Vil du erstatta henne?"
+
+#: ../capplets/common/file-transfer-dialog.c:453
+msgid "_Skip"
+msgstr ""
+
+#
+#: ../capplets/common/file-transfer-dialog.c:454
+#, fuzzy
+msgid "Overwrite _All"
+msgstr "_Overskriv"
 
 #: ../capplets/common/gconf-property-editor.c:170
 msgid "Key"
@@ -1378,7 +1433,7 @@ msgstr ""
 "Tilbakekall som skal sendast når eigenskapsredigeringsprogrammet skal "
 "frigjera objektdata"
 
-#: ../capplets/common/gconf-property-editor.c:1468
+#: ../capplets/common/gconf-property-editor.c:1467
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1390,7 +1445,7 @@ msgstr ""
 "\n"
 "Kontroller at fila finst og prøv på nytt, eller vel eit anna bakgrunnsbilete."
 
-#: ../capplets/common/gconf-property-editor.c:1476
+#: ../capplets/common/gconf-property-editor.c:1475
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1403,11 +1458,11 @@ msgstr ""
 "\n"
 "Vel eit anna bilete i staden."
 
-#: ../capplets/common/gconf-property-editor.c:1595
+#: ../capplets/common/gconf-property-editor.c:1594
 msgid "Please select an image."
 msgstr "Vel eit bilete."
 
-#: ../capplets/common/gconf-property-editor.c:1600
+#: ../capplets/common/gconf-property-editor.c:1599
 msgid "_Select"
 msgstr "_Vel"
 
@@ -1527,7 +1582,7 @@ msgstr "<b>Nettlesar</b>"
 
 #
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "Hjelpeteknologi"
@@ -1871,7 +1926,7 @@ msgstr "Innstillingar for skjerm %d\n"
 
 #: ../capplets/display/main.c:593
 msgid "Screen Resolution Preferences"
-msgstr "Brukarval for skjermoppløysingar"
+msgstr "Innstillingar for skjermoppløysingar"
 
 #: ../capplets/display/main.c:628
 #, c-format
@@ -1969,16 +2024,16 @@ msgid "The type of accelerator."
 msgstr "Typen snøggtast."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:112
+#: ../capplets/keybindings/gnome-keybinding-properties.c:90
 #: ../typing-break/drwright.c:483
 msgid "Disabled"
 msgstr "Av"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:523
+#: ../capplets/keybindings/gnome-keybinding-properties.c:493
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:915
+#: ../capplets/keybindings/gnome-keybinding-properties.c:885
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1989,7 +2044,7 @@ msgstr ""
 "denne tasten.\n"
 "Prøv att med ein tastekombinasjon som inneheld Control, Alt eller Shift.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:914
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1998,21 +2053,21 @@ msgstr ""
 "Snøggtasten «%s» er allereie brukt til:\n"
 " «%s»\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:976
+#: ../capplets/keybindings/gnome-keybinding-properties.c:946
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Feil ved lagring av ny snøggtast i oppsettdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
+#: ../capplets/keybindings/gnome-keybinding-properties.c:998
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Feil ved fjerning av snøggtast frå oppsettdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1129
 msgid "Action"
 msgstr "Handling"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1153
 msgid "Shortcut"
 msgstr "Snøggtast"
 
@@ -2037,27 +2092,27 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Tileigna snøggtastar til kommandoar"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:241
-#: ../capplets/keyboard/gnome-keyboard-properties.c:246
-#: ../capplets/sound/sound-properties-capplet.c:1026
-#: ../capplets/sound/sound-properties-capplet.c:1028
+#: ../capplets/keyboard/gnome-keyboard-properties.c:248
+#: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/sound/sound-properties-capplet.c:1031
+#: ../capplets/sound/sound-properties-capplet.c:1033
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Berre gjer endringane aktive og avslutt (berre for kompatibilitet; vert no "
 "handsama av nissen)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/keyboard/gnome-keyboard-properties.c:260
 msgid "Start the page with the typing break settings showing"
 msgstr "Start sida med innstillingane for skrivepausar framme"
 
 #
-#: ../capplets/keyboard/gnome-keyboard-properties.c:258
+#: ../capplets/keyboard/gnome-keyboard-properties.c:265
 msgid "Start the page with the accessibility settings showing"
 msgstr "Vis sida med innstillingane for hjelpeteknologi"
 
 #
-#: ../capplets/keyboard/gnome-keyboard-properties.c:267
+#: ../capplets/keyboard/gnome-keyboard-properties.c:274
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Innstillingar for tastatur"
 
@@ -2089,42 +2144,42 @@ msgstr "<b>Trege tastar</b>"
 msgid "<b>Sticky Keys</b>"
 msgstr "<b>Seige tastar</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "<b>_Lock screen to enforce typing break</b>"
-msgstr "<b>_Lås skjermen for å tvinga ein skrivepause.</b>"
-
 #. fast acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Snøgg</i></small>"
 
 #. long delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lang</i></small>"
 
 #. short delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Stutt</i></small>"
 
 #. slow acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Treg</i></small>"
 
 #
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_cceleration:"
 msgstr "A_ksellerasjon:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "All_ow postponing of breaks"
 msgstr "Till_at utsetjing av pausar"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Audio _Feedback..."
+msgstr ""
 
 #
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
@@ -2214,8 +2269,9 @@ msgstr "Tastetrykk vert _repeterte når tasten vert halden nede"
 
 #
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "Keyboard Accessibility Notifications"
-msgstr "Varsling om hjelpefunksjonar for tastatur"
+#, fuzzy
+msgid "Keyboard Accessibility Audio Feedback"
+msgstr "_Tastaturhjelp"
 
 #
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
@@ -2224,7 +2280,7 @@ msgstr "Alternativ for tastaturutforming"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "Keyboard Preferences"
-msgstr "Brukarval for tastatur"
+msgstr "Innstillingar for tastatur"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard _model:"
@@ -2278,33 +2334,34 @@ msgid "Typing Break"
 msgstr "Skrivepause"
 
 #
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
-msgid "_Allow to control the pointer using the keyboard"
-msgstr "_Gjer det mogleg å styra muspeikaren med tastaturet"
-
-#
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
-msgid "_Allow to turn accessibility features on and off from the keyboard"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
+#, fuzzy
+msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr "_Gjer det mogleg å slå av og på hjelpefunksjonar med tastaturet"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
 msgid "_Break interval lasts:"
 msgstr "_Pausen varar:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "_Pause:"
 
 #
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Ignore fast duplicate keypresses"
 msgstr "_Oversjå fleire raske trykk på same tast"
 
 #
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
 msgid "_Layouts:"
 msgstr "_Utformingar:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
+#, fuzzy
+msgid "_Lock screen to enforce typing break"
+msgstr "<b>_Lås skjermen for å tvinga ein skrivepause.</b>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
 msgid "_Models:"
@@ -2312,13 +2369,14 @@ msgstr "_Modellar:"
 
 #
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
-msgid "_Notifications..."
-msgstr "_Varsling ..."
+msgid "_Only accept long keypresses"
+msgstr "_Godta berre lange tastetrykk"
 
 #
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
-msgid "_Only accept long keypresses"
-msgstr "_Godta berre lange tastetrykk"
+#, fuzzy
+msgid "_Pointer can be controlled using the keypad"
+msgstr "_Gjer det mogleg å styra muspeikaren med tastaturet"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
 msgid "_Selected layouts:"
@@ -2326,7 +2384,8 @@ msgstr "_Valde utformingar:"
 
 #
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
-msgid "_Simulate simultanous keypresses"
+#, fuzzy
+msgid "_Simulate simultaneous keypresses"
 msgstr "_Simuler samtidige tastetrykk"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
@@ -2360,12 +2419,12 @@ msgid "Unknown"
 msgstr "Ukjend"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
 msgid "Default"
 msgstr "Standard"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:305
 msgid "Layout"
 msgstr "Formgjeving"
 
@@ -2384,7 +2443,7 @@ msgstr "Tastatur"
 
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
-msgstr "Gjer brukarvala dine for tastaturet"
+msgstr "Sett opp instillingar for tastatur"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
@@ -2415,6 +2474,19 @@ msgstr "Flytt ned"
 #: ../capplets/mouse/gnome-mouse-accessibility.c:109
 msgid "gesture|Disabled"
 msgstr "Av"
+
+#
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/mouse/gnome-mouse-properties.c:482
+#, fuzzy
+msgid "Specify the name of the page to show (general|accessibility)"
+msgstr "Oppgje namn på sida som skal visast (theme|background|fonts|interface)"
+
+#
+#: ../capplets/mouse/gnome-mouse-properties.c:491
+#, fuzzy
+msgid "- GNOME Mouse Preferences"
+msgstr "- Innstillingar for lyd"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid "<b>Double-Click Timeout</b>"
@@ -2562,7 +2634,7 @@ msgstr "Mus"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
-msgstr "Still inn brukarvala dine for musa"
+msgstr "Sett opp instillingane for musa"
 
 #: ../capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
@@ -2570,7 +2642,7 @@ msgstr "Mellomtenar i nettverket"
 
 #: ../capplets/network/gnome-network-preferences.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
-msgstr "Sett brukarval for mellomtenar i nettverket"
+msgstr "Sett opp instillingane for mellomtenar i nettverket"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:1
 msgid "<b>Di_rect internet connection</b>"
@@ -2610,7 +2682,7 @@ msgstr "H_TTP-mellomtenar:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Preferences"
-msgstr "Brukarval for mellomtenar i nettverket"
+msgstr "Innstillingar for mellomtenar i nettverket"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:11
 msgid "Port:"
@@ -2669,51 +2741,51 @@ msgid "Not connected"
 msgstr "Ikkje tilkopla"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:666
 msgid "Autodetect"
 msgstr "Gjenkjenn automatisk"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:666
-#: ../capplets/sound/sound-properties-capplet.c:667
+#: ../capplets/sound/sound-properties-capplet.c:671
+#: ../capplets/sound/sound-properties-capplet.c:672
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Avansert Linux lydarkitektur"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:668
+#: ../capplets/sound/sound-properties-capplet.c:673
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART lydtenar"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:669
-#: ../capplets/sound/sound-properties-capplet.c:670
+#: ../capplets/sound/sound-properties-capplet.c:674
+#: ../capplets/sound/sound-properties-capplet.c:675
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened lydtenar"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:671
-#: ../capplets/sound/sound-properties-capplet.c:672
+#: ../capplets/sound/sound-properties-capplet.c:676
+#: ../capplets/sound/sound-properties-capplet.c:677
 msgid "OSS - Open Sound System"
 msgstr "OSS - Ope lydsystem"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:673
-#: ../capplets/sound/sound-properties-capplet.c:674
+#: ../capplets/sound/sound-properties-capplet.c:678
+#: ../capplets/sound/sound-properties-capplet.c:679
 msgid "PulseAudio Sound Server"
 msgstr "PulseAudio lydtenar"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:675
+#: ../capplets/sound/sound-properties-capplet.c:680
 msgid "Test Sound"
 msgstr "Testlyd"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:676
+#: ../capplets/sound/sound-properties-capplet.c:681
 msgid "Silence"
 msgstr "Stille"
 
 #
-#: ../capplets/sound/sound-properties-capplet.c:1043
+#: ../capplets/sound/sound-properties-capplet.c:1048
 msgid "- GNOME Sound Preferences"
 msgstr "- Innstillingar for lyd"
 
@@ -2747,7 +2819,8 @@ msgid "Devices"
 msgstr "Einingar"
 
 #: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing (ESD)"
+#, fuzzy
+msgid "E_nable software sound mixing"
 msgstr "B_ruk programvare-lydmiksing (ESD)"
 
 #: ../capplets/sound/sound-properties.glade.h:9
@@ -2827,7 +2900,7 @@ msgstr "_Visuelt systempip"
 #
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
-msgstr "Kan ikkje starta brukarvalprogrammet til vindushandsamaren din"
+msgstr "Kan ikkje starta innstillingsprogrammet til vindaugehandsamaren din"
 
 #. translators: this is the Control key
 #: ../capplets/windows/gnome-window-properties.c:602
@@ -2870,7 +2943,7 @@ msgstr ""
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
-msgstr "Brukarval for vindauge"
+msgstr "Innstillingar for vindauge"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
@@ -2922,12 +2995,12 @@ msgid "Uninstall"
 msgstr "Avinstaller"
 
 #
-#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:737
+#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:741
 msgid "Remove from Favorites"
 msgstr "Fjern frå favorittar"
 
 #
-#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:739
+#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:743
 msgid "Add to Favorites"
 msgstr "Legg til i favorittar"
 
@@ -2958,31 +3031,31 @@ msgid "Other"
 msgstr "Anna"
 
 #
-#: ../libslab/bookmark-agent.c:1060
+#: ../libslab/bookmark-agent.c:1075
 msgid "New Spreadsheet"
 msgstr "Nytt rekneark"
 
 #
-#: ../libslab/bookmark-agent.c:1064
+#: ../libslab/bookmark-agent.c:1079
 msgid "New Document"
 msgstr "Nytt dokument"
 
 #
-#: ../libslab/bookmark-agent.c:1114
+#: ../libslab/bookmark-agent.c:1131
 msgid "Home"
 msgstr "Heim"
 
 #
-#: ../libslab/bookmark-agent.c:1130
+#: ../libslab/bookmark-agent.c:1147
 msgid "File System"
 msgstr "Filsystem"
 
 #
-#: ../libslab/bookmark-agent.c:1134
+#: ../libslab/bookmark-agent.c:1151
 msgid "Network Servers"
 msgstr "Nettverkstenarar"
 
-#: ../libslab/bookmark-agent.c:1163
+#: ../libslab/bookmark-agent.c:1180
 msgid "Search"
 msgstr "Søk"
 
@@ -3012,17 +3085,17 @@ msgstr "Flytt til papirkorg"
 
 #
 #: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:850
+#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:854
 msgid "Delete"
 msgstr "Slett"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1022
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1026
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Er du sikker på at du vil sletta «%s» for godt?"
 
 #
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1026
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1030
 msgid "If you delete an item, it is permanently lost."
 msgstr "Viss du sletter ei oppføring, vert ho borte for godt."
 
@@ -3041,31 +3114,31 @@ msgstr "Opna med det vanlege programmet"
 msgid "Open in File Manager"
 msgstr "Opna i filhandsamar"
 
-#: ../libslab/document-tile.c:633
+#: ../libslab/document-tile.c:637
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:640
+#: ../libslab/document-tile.c:644
 msgid "%l:%M %p"
 msgstr "%H.%M"
 
-#: ../libslab/document-tile.c:648
+#: ../libslab/document-tile.c:652
 msgid "Today %l:%M %p"
 msgstr "I dag, %H.%M"
 
-#: ../libslab/document-tile.c:658
+#: ../libslab/document-tile.c:662
 msgid "Yesterday %l:%M %p"
 msgstr "I går, %H.%M"
 
-#: ../libslab/document-tile.c:670
+#: ../libslab/document-tile.c:674
 msgid "%a %l:%M %p"
 msgstr "%a %H.%M"
 
-#: ../libslab/document-tile.c:678
+#: ../libslab/document-tile.c:682
 msgid "%b %d %l:%M %p"
 msgstr "%d. %b, %H.%M"
 
-#: ../libslab/document-tile.c:680
+#: ../libslab/document-tile.c:684
 msgid "%b %d %Y"
 msgstr "%d. %b %Y"
 
@@ -3232,21 +3305,29 @@ msgstr "Systemlydar"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Vindaugehandsamaren «%s» har ikkje registrert noko oppsettsverktøy\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:390
+#: ../libwindow-settings/metacity-window-manager.c:402
 msgid "Maximize"
 msgstr "Maksimer"
 
+#: ../libwindow-settings/metacity-window-manager.c:403
+msgid "Maximize Vertically"
+msgstr ""
+
+#: ../libwindow-settings/metacity-window-manager.c:404
+msgid "Maximize Horizontally"
+msgstr ""
+
 #
-#: ../libwindow-settings/metacity-window-manager.c:391
+#: ../libwindow-settings/metacity-window-manager.c:405
 msgid "Minimize"
 msgstr "Minimer"
 
-#: ../libwindow-settings/metacity-window-manager.c:392
+#: ../libwindow-settings/metacity-window-manager.c:406
 msgid "Roll up"
 msgstr "Rull opp"
 
 #
-#: ../libwindow-settings/metacity-window-manager.c:393
+#: ../libwindow-settings/metacity-window-manager.c:407
 msgid "None"
 msgstr "Ingen"
 
@@ -3384,7 +3465,7 @@ msgstr "Ta ein pause!"
 #. translators: keep the initial "/"
 #: ../typing-break/drwright.c:129
 msgid "/_Preferences"
-msgstr "/_Brukarval"
+msgstr "/_Innstillingar"
 
 #: ../typing-break/drwright.c:130
 msgid "/_About"
@@ -3718,3 +3799,14 @@ msgstr "Bruk drakt"
 #: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Vel forvald drakt"
+
+#~ msgid "Connecting..."
+#~ msgstr "Koplar til ..."
+
+#
+#~ msgid "Keyboard Accessibility Notifications"
+#~ msgstr "Varsling om hjelpefunksjonar for tastatur"
+
+#
+#~ msgid "_Notifications..."
+#~ msgstr "_Varsling ..."
