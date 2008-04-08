@@ -21,6 +21,7 @@ create_dialog (void)
 
 	if (dialog) {
 		GtkWidget *image;
+		gchar *prog;
 
 		image = gtk_image_new_from_stock (GTK_STOCK_QUIT, GTK_ICON_SIZE_BUTTON);
 		gtk_button_set_image (GTK_BUTTON (WID ("at_close_logout_button")), image);
@@ -42,6 +43,12 @@ create_dialog (void)
 
 		gtk_image_set_from_file (GTK_IMAGE (WID ("at_applications_image")),
 					 PIXMAPDIR "/at-support.png");
+
+		prog = g_find_program_in_path ("gdmsetup");
+		if (prog == NULL)
+			gtk_widget_hide (WID ("login_button"));
+
+		g_free (prog);
 	}
 
 	return dialog;
