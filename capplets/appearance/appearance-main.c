@@ -20,9 +20,10 @@
 
 #include "appearance.h"
 #include "appearance-desktop.h"
+#include "appearance-desktop-effects.h"
 #include "appearance-font.h"
-#include "appearance-themes.h"
 #include "appearance-style.h"
+#include "appearance-themes.h"
 #include "appearance-ui.h"
 #include "theme-installer.h"
 #include "theme-thumbnail.h"
@@ -79,6 +80,7 @@ main_window_response (GtkWidget *widget,
 
     themes_shutdown (data);
     style_shutdown (data);
+    desktop_effects_shutdown (data);
     desktop_shutdown (data);
     font_shutdown (data);
 
@@ -151,6 +153,7 @@ main (int argc, char **argv)
   themes_init (data);
   style_init (data);
   desktop_init (data, (const gchar **) wallpaper_files);
+  desktop_effects_init (data);
   g_strfreev (wallpaper_files);
   font_init (data);
   ui_init (data);

@@ -48,6 +48,10 @@ typedef struct {
   GtkWidget *wp_image;
   GSList *wp_uris;
 
+  /* desktop effects */
+  GtkWidget *enable_effects_button;
+  GtkWidget *customize_effects_button;
+
   /* font */
   GtkWidget *font_details;
   GSList *font_groups;

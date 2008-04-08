@@ -9,6 +9,8 @@ gnome_appearance_properties_SOURCES = \
 	appearance.h \
 	appearance-desktop.c \
 	appearance-desktop.h \
+	appearance-desktop-effects.c \
+	appearance-desktop-effects.h \
 	appearance-font.c \
 	appearance-font.h \
 	appearance-main.c \
