@@ -46,42 +46,6 @@
 #include <X11/Xcursor/Xcursor.h>
 #endif
 
-/******************************************************************************/
-/* A quick custom widget to ensure that the left handed toggle works no matter
- * which button is pressed.
- */
-typedef struct { GtkCheckButton parent; } MouseCappletCheckButton;
-typedef struct { GtkCheckButtonClass parent; } MouseCappletCheckButtonClass;
-GNOME_CLASS_BOILERPLATE (MouseCappletCheckButton, mouse_capplet_check_button,
-			 GtkCheckButton, GTK_TYPE_CHECK_BUTTON)
-static void mouse_capplet_check_button_instance_init (MouseCappletCheckButton *obj) { }
-
-static gboolean
-mouse_capplet_check_button_button_press (GtkWidget *widget, GdkEventButton *event)
-{
-	if (event->type == GDK_BUTTON_PRESS) {
-		if (!GTK_WIDGET_HAS_FOCUS (widget))
-			gtk_widget_grab_focus (widget);
-		gtk_button_pressed (GTK_BUTTON (widget));
-	}
-	return TRUE;
-}
-static gboolean
-mouse_capplet_check_button_button_release (GtkWidget *widget, GdkEventButton *event)
-{
-      gtk_button_released (GTK_BUTTON (widget));
-      return TRUE;
-}
-
-static void
-mouse_capplet_check_button_class_init (MouseCappletCheckButtonClass *klass)
-{
-	GtkWidgetClass *widget_class = (GtkWidgetClass *)klass;
-	widget_class->button_press_event   = mouse_capplet_check_button_button_press;
-	widget_class->button_release_event = mouse_capplet_check_button_button_release;
-}
-/******************************************************************************/
-
 enum
 {
 	DOUBLE_CLICK_TEST_OFF,
@@ -254,7 +218,7 @@ event_box_button_press_event (GtkWidget   *widget,
 	static gint                test_on_timeout_id     = 0;
 	static gint                test_maybe_timeout_id  = 0;
 	static guint32             double_click_timestamp = 0;
-	GtkWidget                  *image;
+	GtkWidget                 *image;
 	GConfClient               *client;
 
 	if (event->type != GDK_BUTTON_PRESS)
@@ -407,9 +371,6 @@ create_dialog (void)
 {
 	GladeXML     *dialog;
 	GtkSizeGroup *size_group;
-
-	/* register the custom type */
-	(void) mouse_capplet_check_button_get_type ();
 
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
 	if (!dialog)
