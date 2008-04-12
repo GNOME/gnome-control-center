@@ -19,6 +19,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <string.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <fcntl.h>
@@ -27,12 +32,6 @@
 #define INCLUDE_SYMBOL ((gpointer) 1)
 #define ENGINE_SYMBOL ((gpointer) 2)
 #define COLOR_SCHEME_SYMBOL ((gpointer) 3)
-
-static gint
-str_nequal (const gchar *a, const gchar *b)
-{
-	return !g_str_equal (a, b);
-}
 
 gchar *
 gtkrc_find_named (const gchar *name)
@@ -96,7 +95,7 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 		if (filename == NULL)
 			continue;
 
-		if (g_slist_find_custom (read_files, filename, (GCompareFunc) str_nequal))
+		if (g_slist_find_custom (read_files, filename, (GCompareFunc) strcmp))
 		{
 			g_warning ("Recursion in the gtkrc detected!");
 			g_free (filename);
@@ -121,7 +120,7 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 					token = g_scanner_get_next_token (scanner);
 					if (token != G_TOKEN_IDENTIFIER)
 						continue;
-					if (!g_slist_find_custom (*symbolic_colors, scanner->value.v_identifier, (GCompareFunc) str_nequal))
+					if (!g_slist_find_custom (*symbolic_colors, scanner->value.v_identifier, (GCompareFunc) strcmp))
 						*symbolic_colors = g_slist_append (*symbolic_colors, g_strdup (scanner->value.v_identifier));
 					continue;
 				}
@@ -150,7 +149,7 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 					string_token = g_scanner_get_next_token (scanner);
 					if (string_token != G_TOKEN_STRING)
 						continue;
-					if (!g_slist_find_custom (*engines, scanner->value.v_string, (GCompareFunc) str_nequal))
+					if (!g_slist_find_custom (*engines, scanner->value.v_string, (GCompareFunc) strcmp))
 						*engines = g_slist_append (*engines, g_strdup (scanner->value.v_string));
 				}
 
@@ -166,7 +165,7 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 
 
 gchar *
-gtkrc_get_color_scheme (gchar *filename)
+gtkrc_get_color_scheme (const gchar *gtkrc_file)
 {
 	gint file = -1;
 	gchar *result = NULL;
@@ -179,16 +178,16 @@ gtkrc_get_color_scheme (gchar *filename)
 	g_scanner_scope_add_symbol (scanner, 0, "gtk_color_scheme", COLOR_SCHEME_SYMBOL);
 	g_scanner_scope_add_symbol (scanner, 0, "gtk-color-scheme", COLOR_SCHEME_SYMBOL);
 
-	files = g_slist_prepend (files, g_strdup (filename));
+	files = g_slist_prepend (files, g_strdup (gtkrc_file));
 	while (files != NULL)
 	{
-		filename = files->data;
+		gchar *filename = files->data;
 		files = g_slist_delete_link (files, files);
 
 		if (filename == NULL)
 			continue;
 
-		if (g_slist_find_custom (read_files, filename, (GCompareFunc) str_nequal))
+		if (g_slist_find_custom (read_files, filename, (GCompareFunc) strcmp))
 		{
 			g_warning ("Recursion in the gtkrc detected!");
 			g_free (filename);

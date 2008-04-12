@@ -1,3 +1,9 @@
+2008-04-12  Jens Granseuer  <jensgr@gmx.net>
+
+	* gtkrc-utils.c: (gtkrc_get_details), (gtkrc_get_color_scheme):
+	* gtkrc-utils.h: include config.h, use strcmp instead of our home-grown
+	g_str_nequal, and constify the parameter of gtkrc_get_color_scheme
+
 2008-03-30  Jens Granseuer  <jensgr@gmx.net>
 
 	* file-transfer-dialog.c: (file_transfer_dialog_init): use
