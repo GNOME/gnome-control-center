@@ -1,3 +1,15 @@
+2008-04-13  Jens Granseuer  <jensgr@gmx.net>
+
+	Disable theme thumbnailing on MacOS. Some CoreFoundation functionality
+	can apparently no longer be used from forked processes (see bug
+	#525058). Unfortunately, it is used by freetype/pango/cairo/gtk, and
+	as such by our forked thumbnailer. This change means no thumbnails on
+	MacOS, but I suppose that's better than crashing. Reworking the
+	thumbnailer to work without forking is going to be a major effort.
+
+	* theme-thumbnail.c: (theme_thumbnail_factory_init): only enable the
+	asynchronous thumbnailer if not on MacOS
+
 2008-04-12  Jens Granseuer  <jensgr@gmx.net>
 
 	* gtkrc-utils.c: (gtkrc_get_details), (gtkrc_get_color_scheme):

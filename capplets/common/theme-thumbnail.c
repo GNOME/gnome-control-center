@@ -20,8 +20,6 @@
 #include "gtkrc-utils.h"
 #include "capplet-util.h"
 
-static gint child_pid;
-
 typedef struct
 {
   gboolean set;
@@ -1184,9 +1182,19 @@ generate_icon_theme_thumbnail_async (GnomeThemeIconInfo *theme_info,
 void
 theme_thumbnail_factory_init (int argc, char *argv[])
 {
+#ifndef __APPLE__
+  gint child_pid;
+#endif
+
   pipe (pipe_to_factory_fd);
   pipe (pipe_from_factory_fd);
 
+/* Apple's CoreFoundation classes must not be used from forked
+ * processes. Since freetype (and thus GTK) uses them, we simply
+ * disable the thumbnailer on MacOS for now. That means no thumbs
+ * until the thumbnailing process is rewritten, but at least we won't
+ * make apps crash. */
+#ifndef __APPLE__
   child_pid = fork ();
   if (child_pid == 0)
   {
@@ -1225,8 +1233,9 @@ theme_thumbnail_factory_init (int argc, char *argv[])
   /* Parent */
   close (pipe_to_factory_fd[0]);
   close (pipe_from_factory_fd[1]);
+#endif /* __APPLE__ */
+
   async_data.set = FALSE;
   async_data.theme_name = NULL;
   async_data.data = g_byte_array_new ();
 }
-
