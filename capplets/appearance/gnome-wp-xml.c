@@ -117,6 +117,8 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
     if (!strcmp ((gchar *)list->name, "wallpaper")) {
       GnomeWPItem * wp;
       gchar *pcolor = NULL, *scolor = NULL;
+      gchar *s;
+      gboolean have_scale = FALSE, have_shade = FALSE;
 
       wp = g_new0 (GnomeWPItem, 1);
 
@@ -128,7 +130,7 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	    const char * none = "(none)";
 	    gchar *content = g_strstrip ((gchar *)wpa->last->content);
 
-	    if (!strncmp (content, none, strlen (none)))
+	    if (!strcmp (content, none))
 	      wp->filename = g_strdup (content);
 	    else if (g_utf8_validate (content, -1, NULL) &&
 		     g_file_test (content, G_FILE_TEST_EXISTS))
@@ -160,14 +162,13 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "options")) {
 	  if (wpa->last != NULL) {
-	    wp->options = g_strdup (g_strstrip ((gchar *)wpa->last->content));
-	  } else {
-	    wp->options = gconf_client_get_string (data->client,
-						   WP_OPTIONS_KEY, NULL);
+	    wp->options = wp_item_string_to_option (g_strstrip ((gchar *)wpa->last->content));
+	    have_scale = TRUE;
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "shade_type")) {
 	  if (wpa->last != NULL) {
-	    wp->shade_type = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	    wp->shade_type = wp_item_string_to_shading (g_strstrip ((gchar *)wpa->last->content));
+	    have_shade = TRUE;
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "pcolor")) {
 	  if (wpa->last != NULL) {
@@ -195,10 +196,18 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
       }
 
       /* Verify the colors and alloc some GdkColors here */
-      if (wp->shade_type == NULL) {
-	wp->shade_type = gconf_client_get_string (data->client,
-						  WP_SHADING_KEY, NULL);
+      if (!have_scale) {
+        s = gconf_client_get_string (data->client, WP_OPTIONS_KEY, NULL);
+        wp->options = wp_item_string_to_option (s);
+        g_free (s);
       }
+
+      if (!have_shade) {
+        s = gconf_client_get_string (data->client, WP_SHADING_KEY, NULL);
+        wp->shade_type = wp_item_string_to_shading (s);
+        g_free (s);
+      }
+
       if (pcolor == NULL) {
 	pcolor = gconf_client_get_string (data->client,
 					  WP_PCOLOR_KEY, NULL);
@@ -379,6 +388,7 @@ void gnome_wp_xml_save_list (AppearanceData *data) {
     GnomeWPItem * wpitem = list->data;
     const char * none = "(none)";
     gchar * filename;
+    const gchar * scale, * shade;
     gchar * pcolor, * scolor;
 
     if (!strcmp (wpitem->filename, none) ||
@@ -390,13 +400,15 @@ void gnome_wp_xml_save_list (AppearanceData *data) {
 
     pcolor = gdk_color_to_string (wpitem->pcolor);
     scolor = gdk_color_to_string (wpitem->scolor);
+    scale = wp_item_option_to_string (wpitem->options);
+    shade = wp_item_shading_to_string (wpitem->shade_type);
 
     wallpaper = xmlNewChild (root, NULL, (xmlChar *)"wallpaper", NULL);
     gnome_wp_xml_set_bool (wallpaper, (xmlChar *)"deleted", wpitem->deleted);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"name", (xmlChar *)wpitem->name);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"filename", (xmlChar *)filename);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"options", (xmlChar *)wpitem->options);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"shade_type", (xmlChar *)wpitem->shade_type);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"options", (xmlChar *)scale);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"shade_type", (xmlChar *)shade);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"pcolor", (xmlChar *)pcolor);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)scolor);
     g_free (pcolor);

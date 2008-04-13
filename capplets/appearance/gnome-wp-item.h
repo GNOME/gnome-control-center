@@ -47,8 +47,8 @@ struct _GnomeWPItem {
   gchar * name;
   gchar * filename;
   gchar * description;
-  gchar * options;
-  gchar * shade_type;
+  GnomeBGPlacement options;
+  GnomeBGColorType shade_type;
 
   /* Where the Item is in the List */
   GtkTreeRowReference * rowref;
@@ -67,15 +67,20 @@ struct _GnomeWPItem {
   gint height;
 };
 
-GnomeWPItem * gnome_wp_item_new (const gchar * filename,
-				 GHashTable * wallpapers,
-				 GnomeThumbnailFactory * thumbnails);
-void gnome_wp_item_free (GnomeWPItem * item);
-GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
-					 GnomeThumbnailFactory * thumbs);
-void gnome_wp_item_update (GnomeWPItem * item);
-void gnome_wp_item_update_description (GnomeWPItem * item);
+GnomeWPItem * gnome_wp_item_new (const gchar *filename,
+				 GHashTable *wallpapers,
+				 GnomeThumbnailFactory *thumbnails);
+
+void gnome_wp_item_free (GnomeWPItem *item);
+GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem *item,
+					 GnomeThumbnailFactory *thumbs);
+void gnome_wp_item_update (GnomeWPItem *item);
+void gnome_wp_item_update_description (GnomeWPItem *item);
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);
 
-#endif
+const gchar *wp_item_option_to_string (GnomeBGPlacement type);
+const gchar *wp_item_shading_to_string (GnomeBGColorType type);
+GnomeBGPlacement wp_item_string_to_option (const gchar *option);
+GnomeBGColorType wp_item_string_to_shading (const gchar *shade_type);
 
+#endif

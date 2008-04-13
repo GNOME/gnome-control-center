@@ -31,27 +31,13 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
 
-typedef enum {
-  GNOME_WP_SHADE_TYPE_SOLID,
-  GNOME_WP_SHADE_TYPE_HORIZ,
-  GNOME_WP_SHADE_TYPE_VERT
-} GnomeWPShadeType;
-
-typedef enum {
-  GNOME_WP_SCALE_TYPE_CENTERED,
-  GNOME_WP_SCALE_TYPE_STRETCHED,
-  GNOME_WP_SCALE_TYPE_SCALED,
-  GNOME_WP_SCALE_TYPE_ZOOM,
-  GNOME_WP_SCALE_TYPE_TILED
-} GnomeWPScaleType;
-
 enum {
   TARGET_URI_LIST,
   TARGET_BGIMAGE
 };
 
 static const GtkTargetEntry drop_types[] = {
-  {"text/uri-list", 0, TARGET_URI_LIST},
+  { "text/uri-list", 0, TARGET_URI_LIST },
   { "property/bgimage", 0, TARGET_BGIMAGE }
 };
 
@@ -248,47 +234,23 @@ wp_add_images (AppearanceData *data,
 
 static void
 wp_option_menu_set (AppearanceData *data,
-                    const gchar *value,
+                    int value,
                     gboolean shade_type)
 {
   if (shade_type)
   {
-    if (!strcmp (value, "horizontal-gradient"))
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_color_menu),
-                                GNOME_WP_SHADE_TYPE_HORIZ);
-      gtk_widget_show (data->wp_scpicker);
-    }
-    else if (!strcmp (value, "vertical-gradient"))
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_color_menu),
-                                GNOME_WP_SHADE_TYPE_VERT);
-      gtk_widget_show (data->wp_scpicker);
-    }
-    else
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_color_menu),
-                                GNOME_WP_SHADE_TYPE_SOLID);
+    gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_color_menu),
+                              value);
+
+    if (value == GNOME_BG_COLOR_SOLID)
       gtk_widget_hide (data->wp_scpicker);
-    }
+    else
+      gtk_widget_show (data->wp_scpicker);
   }
   else
   {
-    gint style;
-
-    if (!strcmp (value, "centered"))
-      style = GNOME_WP_SCALE_TYPE_CENTERED;
-    else if (!strcmp (value, "stretched"))
-      style = GNOME_WP_SCALE_TYPE_STRETCHED;
-    else if (!strcmp (value, "scaled"))
-      style = GNOME_WP_SCALE_TYPE_SCALED;
-    else if (!strcmp (value, "zoom"))
-      style = GNOME_WP_SCALE_TYPE_ZOOM;
-    else
-      style = GNOME_WP_SCALE_TYPE_TILED;
-
     gtk_combo_box_set_active (GTK_COMBO_BOX (data->wp_style_menu),
-                              style);
+                              value);
   }
 }
 
@@ -343,29 +305,7 @@ wp_scale_type_changed (GtkComboBox *combobox,
   if (item == NULL)
     return;
 
-  g_free (item->options);
-
-  switch (gtk_combo_box_get_active (GTK_COMBO_BOX (data->wp_style_menu)))
-  {
-  case GNOME_WP_SCALE_TYPE_CENTERED:
-    item->options = g_strdup ("centered");
-    break;
-  case GNOME_WP_SCALE_TYPE_STRETCHED:
-    item->options = g_strdup ("stretched");
-    break;
-  case GNOME_WP_SCALE_TYPE_SCALED:
-    item->options = g_strdup ("scaled");
-    break;
-  case GNOME_WP_SCALE_TYPE_ZOOM:
-    item->options = g_strdup ("zoom");
-    break;
-  case GNOME_WP_SCALE_TYPE_TILED:
-    item->options = g_strdup ("wallpaper");
-    break;
-  default:
-    item->options = g_strdup ("none");
-    break;
-  }
+  item->options = gtk_combo_box_get_active (GTK_COMBO_BOX (data->wp_style_menu));
 
   pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model),
@@ -376,7 +316,8 @@ wp_scale_type_changed (GtkComboBox *combobox,
     g_object_unref (pixbuf);
 
   if (gconf_client_key_is_writable (data->client, WP_OPTIONS_KEY, NULL))
-    gconf_client_set_string (data->client, WP_OPTIONS_KEY, item->options, NULL);
+    gconf_client_set_string (data->client, WP_OPTIONS_KEY,
+                             wp_item_option_to_string (item->options), NULL);
 }
 
 static void
@@ -392,24 +333,7 @@ wp_shade_type_changed (GtkWidget *combobox,
   if (item == NULL)
     return;
 
-  g_free (item->shade_type);
-
-  switch (gtk_combo_box_get_active (GTK_COMBO_BOX (data->wp_color_menu)))
-  {
-  case GNOME_WP_SHADE_TYPE_HORIZ:
-    item->shade_type = g_strdup ("horizontal-gradient");
-    gtk_widget_show (data->wp_scpicker);
-    break;
-  case GNOME_WP_SHADE_TYPE_VERT:
-    item->shade_type = g_strdup ("vertical-gradient");
-    gtk_widget_show (data->wp_scpicker);
-    break;
-  case GNOME_WP_SHADE_TYPE_SOLID:
-  default:
-    item->shade_type = g_strdup ("solid");
-    gtk_widget_hide (data->wp_scpicker);
-    break;
-  }
+  item->shade_type = gtk_combo_box_get_active (GTK_COMBO_BOX (data->wp_color_menu));
 
   pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
@@ -420,7 +344,7 @@ wp_shade_type_changed (GtkWidget *combobox,
 
   if (gconf_client_key_is_writable (data->client, WP_SHADING_KEY, NULL))
     gconf_client_set_string (data->client, WP_SHADING_KEY,
-                             item->shade_type, NULL);
+                             wp_item_shading_to_string (item->shade_type), NULL);
 }
 
 static void
@@ -546,8 +470,7 @@ wp_options_changed (GConfClient *client, guint id,
 
   if (item != NULL)
   {
-    g_free (item->options);
-    item->options = g_strdup (option);
+    item->options = wp_item_string_to_option (option);
     wp_option_menu_set (data, item->options, FALSE);
   }
 }
@@ -565,8 +488,7 @@ wp_shading_changed (GConfClient *client, guint id,
 
   if (item != NULL)
   {
-    g_free (item->shade_type);
-    item->shade_type = g_strdup (gconf_value_get_string (entry->value));
+    item->shade_type = wp_item_string_to_shading (gconf_value_get_string (entry->value));
     wp_option_menu_set (data, item->shade_type, TRUE);
   }
 }
@@ -630,16 +552,18 @@ wp_props_wp_set (AppearanceData *data, GnomeWPItem *item)
       uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
 
     if (uri == NULL) {
-      g_warning ("Failed to convert filename to UTF-8: %s\n", item->filename);
+      g_warning ("Failed to convert filename to UTF-8: %s", item->filename);
     } else {
       gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
       g_free (uri);
     }
 
-    gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
+    gconf_change_set_set_string (cs, WP_OPTIONS_KEY,
+                                 wp_item_option_to_string (item->options));
   }
 
-  gconf_change_set_set_string (cs, WP_SHADING_KEY, item->shade_type);
+  gconf_change_set_set_string (cs, WP_SHADING_KEY,
+                               wp_item_shading_to_string (item->shade_type));
 
   pcolor = gdk_color_to_string (item->pcolor);
   scolor = gdk_color_to_string (item->scolor);
@@ -868,7 +792,7 @@ static gboolean
 wp_load_stuffs (void *user_data)
 {
   AppearanceData *data;
-  gchar *imagepath, *style, *uri;
+  gchar *imagepath, *uri, *style;
   GnomeWPItem *item;
 
   data = (AppearanceData *) user_data;
@@ -940,7 +864,7 @@ wp_load_stuffs (void *user_data)
     if (!strcmp (style, "none"))
     {
       select_item (data, item, FALSE);
-      wp_option_menu_set (data, style, FALSE);
+      wp_option_menu_set (data, GNOME_BG_PLACEMENT_SCALED, FALSE);
     }
   }
   g_free (imagepath);

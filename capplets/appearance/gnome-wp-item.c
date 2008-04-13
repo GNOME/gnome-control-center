@@ -25,44 +25,55 @@
 #include <gnome.h>
 #include <string.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
-#define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnomeui/gnome-bg.h>
 #include "gnome-wp-item.h"
+
+static GConfEnumStringPair options_lookup[] = {
+  { GNOME_BG_PLACEMENT_CENTERED, "centered" },
+  { GNOME_BG_PLACEMENT_FILL_SCREEN, "stretched" },
+  { GNOME_BG_PLACEMENT_SCALED, "scaled" },
+  { GNOME_BG_PLACEMENT_ZOOMED, "zoomed" },
+  { GNOME_BG_PLACEMENT_TILED, "wallpaper" },
+  { 0, NULL }
+};
+
+static GConfEnumStringPair shade_lookup[] = {
+  { GNOME_BG_COLOR_SOLID, "solid" },
+  { GNOME_BG_COLOR_H_GRADIENT, "horizontal-gradient" },
+  { GNOME_BG_COLOR_V_GRADIENT, "vertical-gradient" },
+  { 0, NULL }
+};
+
+const gchar *wp_item_option_to_string (GnomeBGPlacement type)
+{
+  return gconf_enum_to_string (options_lookup, type);
+}
+
+const gchar *wp_item_shading_to_string (GnomeBGColorType type)
+{
+  return gconf_enum_to_string (shade_lookup, type);
+}
+
+GnomeBGPlacement wp_item_string_to_option (const gchar *option)
+{
+  int i = GNOME_BG_PLACEMENT_SCALED;
+  gconf_string_to_enum (options_lookup, option, &i);
+  return i;
+}
+
+GnomeBGColorType wp_item_string_to_shading (const gchar *shade_type)
+{
+  int i = GNOME_BG_COLOR_SOLID;
+  gconf_string_to_enum (shade_lookup, shade_type, &i);
+  return i;
+}
 
 static void set_bg_properties (GnomeWPItem *item)
 {
-  GnomeBGColorType color;
-  GnomeBGPlacement placement;
-
-  color = GNOME_BG_COLOR_SOLID;
-
-  if (item->shade_type) {
-    if (!strcmp (item->shade_type, "horizontal-gradient")) {
-      color = GNOME_BG_COLOR_H_GRADIENT;
-    } else if (!strcmp (item->shade_type, "vertical-gradient")) {
-      color = GNOME_BG_COLOR_V_GRADIENT;
-    }
-  }
-
-  placement = GNOME_BG_PLACEMENT_TILED;
-
-  if (item->options) {
-    if (!strcmp (item->options, "centered")) {
-      placement = GNOME_BG_PLACEMENT_CENTERED;
-    } else if (!strcmp (item->options, "stretched")) {
-      placement = GNOME_BG_PLACEMENT_FILL_SCREEN;
-    } else if (!strcmp (item->options, "scaled")) {
-      placement = GNOME_BG_PLACEMENT_SCALED;
-    } else if (!strcmp (item->options, "zoom")) {
-      placement = GNOME_BG_PLACEMENT_ZOOMED;
-    }
-  }
-
   if (item->filename)
     gnome_bg_set_uri (item->bg, item->filename);
 
-  gnome_bg_set_color (item->bg, color, item->pcolor, item->scolor);
-  gnome_bg_set_placement (item->bg, placement);
+  gnome_bg_set_color (item->bg, item->shade_type, item->pcolor, item->scolor);
+  gnome_bg_set_placement (item->bg, item->options);
 }
 
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item)
@@ -77,32 +88,28 @@ void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item)
 void gnome_wp_item_update (GnomeWPItem *item) {
   GConfClient *client;
   GdkColor color1 = { 0, 0, 0, 0 }, color2 = { 0, 0, 0, 0 };
-  gchar *col_str;
+  gchar *s;
 
   client = gconf_client_get_default ();
 
-  g_free (item->options);
-  item->options = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
-  if (item->options == NULL || !strcmp (item->options, "none")) {
-    g_free (item->options);
-    item->options = g_strdup ("scaled");
+  s = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
+  item->options = wp_item_string_to_option (s);
+  g_free (s);
+
+  s = gconf_client_get_string (client, WP_SHADING_KEY, NULL);
+  item->shade_type = wp_item_string_to_shading (s);
+  g_free (s);
+
+  s = gconf_client_get_string (client, WP_PCOLOR_KEY, NULL);
+  if (s != NULL) {
+    gdk_color_parse (s, &color1);
+    g_free (s);
   }
 
-  g_free (item->shade_type);
-  item->shade_type = gconf_client_get_string (client, WP_SHADING_KEY, NULL);
-  if (item->shade_type == NULL)
-    item->shade_type = g_strdup ("solid");
-
-  col_str = gconf_client_get_string (client, WP_PCOLOR_KEY, NULL);
-  if (col_str != NULL) {
-    gdk_color_parse (col_str, &color1);
-    g_free (col_str);
-  }
-
-  col_str = gconf_client_get_string (client, WP_SCOLOR_KEY, NULL);
-  if (col_str != NULL) {
-    gdk_color_parse (col_str, &color2);
-    g_free (col_str);
+  s = gconf_client_get_string (client, WP_SCOLOR_KEY, NULL);
+  if (s != NULL) {
+    gdk_color_parse (s, &color2);
+    g_free (s);
   }
 
   g_object_unref (client);
@@ -158,8 +165,6 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   g_free (item->name);
   g_free (item->filename);
   g_free (item->description);
-  g_free (item->options);
-  g_free (item->shade_type);
 
   if (item->pcolor != NULL)
     gdk_color_free (item->pcolor);

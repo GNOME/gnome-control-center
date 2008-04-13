@@ -1,3 +1,19 @@
+2008-04-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-desktop.c: (wp_option_menu_set),
+	(wp_scale_type_changed), (wp_shade_type_changed),
+	(wp_options_changed), (wp_shading_changed), (wp_props_wp_set),
+	(wp_load_stuffs):
+	* data/appearance.glade:
+	* gnome-wp-item.c: (wp_item_option_to_string),
+	(wp_item_shading_to_string), (wp_item_string_to_option),
+	(wp_item_string_to_shading), (set_bg_properties),
+	(gnome_wp_item_update), (gnome_wp_item_free):
+	* gnome-wp-item.h:
+	* gnome-wp-xml.c: (gnome_wp_xml_load_xml),
+	(gnome_wp_xml_save_list): use the GnomeBG enum types instead of
+	strings to handle options internally and only convert when needed
+
 2008-04-08  Jens Granseuer  <jensgr@gmx.net>
 
 	* gedit-message-area.h: fix include (sync with gedit)
