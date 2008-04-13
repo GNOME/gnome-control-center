@@ -707,23 +707,22 @@ passdlg_set_busy (PasswordDialog *pdialog, gboolean busy)
 
 /* Launch an error dialog */
 static void
-passdlg_error_dialog (const gchar *title, const gchar *msg, const gchar *details)
+passdlg_error_dialog (GtkWindow *parent, const gchar *title,
+		      const gchar *msg, const gchar *details)
 {
-	GtkWidget	*dialog;
+	GtkWidget *dialog;
 
-	dialog = eel_alert_dialog_new (NULL, 0,
-								   GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-								   msg, NULL, title);
+	dialog = gtk_message_dialog_new (parent, GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+					 msg);
+	if (title)
+		gtk_window_set_title (GTK_WINDOW (dialog), title);
 
-	if (details != NULL) {
-		eel_alert_dialog_set_details_label (EEL_ALERT_DIALOG (dialog), details);
-	}
-
-	g_signal_connect (G_OBJECT (dialog), "response",
-					  G_CALLBACK (gtk_widget_destroy), NULL);
-
-	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	gtk_widget_show (dialog);
+	if (details)
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  details);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
 }
 
 /* Set authenticated state of dialog according to state
@@ -814,11 +813,15 @@ passdlg_spawn_passwd (PasswordDialog *pdialog)
 
 	/* Spawn backend */
 	if (!spawn_passwd (pdialog, &error)) {
+		GtkWidget *parent = glade_xml_get_widget (pdialog->xml,
+							  "change-password");
+
 		/* translators: Unable to launch <program>: <error message> */
 		details = g_strdup_printf (_("Unable to launch %s: %s"),
 					   "/usr/bin/passwd", error->message);
 
-		passdlg_error_dialog (_("Unable to launch backend"),
+		passdlg_error_dialog (GTK_WINDOW (parent),
+				      _("Unable to launch backend"),
 				      _("A system error has occurred"),
 				      details);
 
@@ -843,6 +846,7 @@ passdlg_authenticate (GtkButton *button, PasswordDialog *pdialog)
 
 	/* Spawn backend */
 	if (!passdlg_spawn_passwd (pdialog)) {
+		passdlg_set_busy (pdialog, FALSE);
 		return;
 	}
 

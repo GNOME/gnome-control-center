@@ -1,3 +1,11 @@
+2008-04-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-about-me-password.c: (passdlg_error_dialog),
+	(passdlg_spawn_passwd), (passdlg_authenticate): launch the error
+	dialog with the proper parent so it actually becomes possible to
+	dismiss it. Also use GtkMessageDialog instead of eel, and reset the
+	busy cursor when launching passwd fails.
+
 2008-02-28  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-about-me-password.c: (io_watch_stdout): fix misspelling of
