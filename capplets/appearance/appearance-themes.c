@@ -28,6 +28,7 @@
 #include "gtkrc-utils.h"
 #include "gedit-message-area.h"
 #include "wp-cellrenderer.h"
+#include "caption-cellrenderer.h"
 
 #include <glib/gi18n.h>
 #include <libwindow-settings/gnome-wm-manager.h>
@@ -1039,7 +1040,7 @@ themes_init (AppearanceData *data)
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (icon_view), renderer,
                                   "pixbuf", COL_THUMBNAIL, NULL);
 
-  renderer = gtk_cell_renderer_text_new ();
+  renderer = cell_renderer_caption_new ();
   g_object_set (renderer, "alignment", PANGO_ALIGN_CENTER,
 			  "wrap-mode", PANGO_WRAP_WORD_CHAR,
 			  "wrap-width", gtk_icon_view_get_item_width (icon_view),

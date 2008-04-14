@@ -33,7 +33,9 @@ gnome_appearance_properties_SOURCES = \
 	theme-util.c \
 	theme-util.h \
 	wp-cellrenderer.c \
-	wp-cellrenderer.h
+	wp-cellrenderer.h \
+	caption-cellrenderer.c \
+	caption-cellrenderer.h
 
 gnome_appearance_properties_LDADD = \
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la \
