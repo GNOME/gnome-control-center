@@ -129,7 +129,6 @@ reset_to_defaults (GtkWidget * button, GladeXML * dialog)
 
 	gkbd_keyboard_config_init (&empty_kbd_config, xkb_gconf_client,
 				   engine);
-	gkbd_keyboard_config_save_to_gconf_backup (&empty_kbd_config);
 	gkbd_keyboard_config_save_to_gconf (&empty_kbd_config);
 	gkbd_keyboard_config_term (&empty_kbd_config);
 
