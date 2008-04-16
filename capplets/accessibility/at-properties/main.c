@@ -57,7 +57,7 @@ create_dialog (void)
 static void
 cb_at_preferences (GtkDialog *dialog, gint response_id)
 {
-	g_spawn_command_line_async ("gnome-default-applications-properties", NULL);
+	g_spawn_command_line_async ("gnome-default-applications-properties --show-page=a11y", NULL);
 }
 
 static void
