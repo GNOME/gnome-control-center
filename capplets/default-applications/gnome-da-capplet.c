@@ -1082,7 +1082,7 @@ fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
 }
 
 static void
-show_dialog (GnomeDACapplet *capplet)
+show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 {
     GConfValue *value;
 
@@ -1285,9 +1285,27 @@ show_dialog (GnomeDACapplet *capplet)
     g_signal_connect (capplet->new_win_radiobutton, "toggled", G_CALLBACK (web_radiobutton_toggled_cb), capplet);
     g_signal_connect (capplet->new_tab_radiobutton, "toggled", G_CALLBACK (web_radiobutton_toggled_cb), capplet);
 
-    /* capplet_set_icon (GTK_WINDOW (main_dlg), "gnome-settings-default-applications"); */
     gtk_window_set_icon_name (GTK_WINDOW (capplet->window),
 			      "gnome-settings-default-applications");
+
+    if (start_page != NULL) {
+        gchar *page_name;
+        GtkWidget *w;
+
+        page_name = g_strconcat (start_page, "_vbox", NULL);
+
+        w = glade_xml_get_widget (capplet->xml, page_name);
+        if (w != NULL) {
+            GtkNotebook *nb;
+            gint pindex;
+
+            nb = GTK_NOTEBOOK (glade_xml_get_widget (capplet->xml, "preferred_apps_notebook"));
+            pindex = gtk_notebook_page_num (nb, w);
+            if (pindex != -1)
+                gtk_notebook_set_current_page (nb, pindex);
+        }
+        g_free (page_name);
+    }
 
     gtk_widget_show (capplet->window);
 }
@@ -1298,14 +1316,32 @@ main (int argc, char **argv)
     GnomeProgram *program;
     GnomeDACapplet *capplet;
 
+    gchar *start_page = NULL;
+    GOptionContext *option_context;
+    GOptionEntry option_entries[] = {
+        { "show-page",
+          'p',
+          G_OPTION_FLAG_IN_MAIN,
+          G_OPTION_ARG_STRING,
+          &start_page,
+          /* TRANSLATORS: don't translate the terms in brackets */
+          N_("Specify the name of the page to show (internet|multimedia|system|a11y)"),
+          N_("page") },
+        { NULL }
+    };
+
 #ifdef ENABLE_NLS
     bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
 #endif
 
+    option_context = g_option_context_new (NULL);
+    g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
+
     program = gnome_program_init ("gnome-default-applications-properties",
     				  VERSION, LIBGNOMEUI_MODULE, argc, argv,
+    				  GNOME_PARAM_GOPTION_CONTEXT, option_context,
 				  GNOME_PARAM_NONE);
 
     glade_init ();
@@ -1340,7 +1376,8 @@ main (int argc, char **argv)
 
     gnome_da_xml_load_list (capplet);
 
-    show_dialog (capplet);
+    show_dialog (capplet, start_page);
+    g_free (start_page);
 
     gtk_main ();
 
