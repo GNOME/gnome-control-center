@@ -20,6 +20,7 @@
 
 #include "appearance.h"
 #include "gnome-wp-item.h"
+#include <gio/gio.h>
 #include <string.h>
 #include <libxml/parser.h>
 
@@ -246,27 +247,93 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
   xmlFreeDoc (wplist);
 }
 
-static void gnome_wp_file_changed (GnomeVFSMonitorHandle * handle,
-				   const gchar * monitor_uri,
-				   const gchar * info_uri,
-				   GnomeVFSMonitorEventType event_type,
-				   AppearanceData *data) {
+static void gnome_wp_file_changed (GFileMonitor *monitor,
+                                   GFile *file,
+                                   GFile *other_file,
+                                   GFileMonitorEvent event_type,
+                                   AppearanceData *data) {
   gchar * filename;
 
   switch (event_type) {
-  case GNOME_VFS_MONITOR_EVENT_CHANGED:
-  case GNOME_VFS_MONITOR_EVENT_CREATED:
-    filename = gnome_vfs_get_local_path_from_uri (info_uri);
+  case G_FILE_MONITOR_EVENT_CHANGED:
+  case G_FILE_MONITOR_EVENT_CREATED:
+    filename = g_file_get_path (file);
     gnome_wp_xml_load_xml (data, filename);
     g_free (filename);
+    break;
   default:
     break;
   }
 }
 
+static void gnome_wp_xml_add_monitor (GFile *directory,
+                                      AppearanceData *data) {
+  GFileMonitor *monitor;
+  GError *error = NULL;
+
+  monitor = g_file_monitor_directory (directory,
+                                      G_FILE_MONITOR_NONE,
+                                      NULL,
+                                      &error);
+  if (error != NULL) {
+    gchar *path;
+
+    path = g_file_get_parse_name (directory);
+    g_warning ("Unable to monitor directory %s: %s",
+               path, error->message);
+    g_error_free (error);
+    g_free (path);
+    return;
+  }
+
+  g_signal_connect (monitor, "changed",
+                    G_CALLBACK (gnome_wp_file_changed),
+                    data);
+}
+
+static void gnome_wp_xml_load_from_dir (const gchar *path,
+                                        AppearanceData *data) {
+  GFile *directory;
+  GFileEnumerator *enumerator;
+  GError *error = NULL;
+  GFileInfo *info;
+
+  if (!g_file_test (path, G_FILE_TEST_IS_DIR)) {
+    return;
+  }
+
+  directory = g_file_new_for_path (path);
+  enumerator = g_file_enumerate_children (directory,
+                                          G_FILE_ATTRIBUTE_STANDARD_NAME,
+                                          G_FILE_QUERY_INFO_NONE,
+                                          NULL,
+                                          &error);
+  if (error != NULL) {
+    g_warning ("Unable to check directory %s: %s", path, error->message);
+    g_error_free (error);
+    g_object_unref (directory);
+    return;
+  }
+
+  while ((info = g_file_enumerator_next_file (enumerator, NULL, NULL))) {
+    const gchar *filename;
+    gchar *fullpath;
+
+    filename = g_file_info_get_name (info);
+    fullpath = g_build_filename (path, filename, NULL);
+    g_object_unref (info);
+
+    gnome_wp_xml_load_xml (data, fullpath);
+    g_free (fullpath);
+  }
+  g_file_enumerator_close (enumerator, NULL, NULL);
+
+  gnome_wp_xml_add_monitor (directory, data);
+
+  g_object_unref (directory);
+}
+
 void gnome_wp_xml_load_list (AppearanceData *data) {
-  GnomeVFSMonitorHandle * handle;
-  GList * list, * l;
   const gchar * xdgdirslist;
   gchar * wpdbfile;
   gchar ** xdgdirs;
@@ -301,54 +368,12 @@ void gnome_wp_xml_load_list (AppearanceData *data) {
 
     datadir = g_build_filename (xdgdirs[i], "gnome-background-properties",
 				NULL);
-    if (g_file_test (datadir, G_FILE_TEST_IS_DIR)) {
-      gnome_vfs_directory_list_load (&list, datadir,
-				     GNOME_VFS_FILE_INFO_DEFAULT |
-				     GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-
-      for (l = list; l != NULL; l = l->next) {
-	GnomeVFSFileInfo * info = l->data;
-
-	if (strcmp (".", info->name) != 0 && strcmp ("..", info->name) != 0) {
-	  gchar * filename;
-
-	  filename = g_build_filename (datadir, info->name, NULL);
-	  gnome_wp_xml_load_xml (data, filename);
-	  g_free (filename);
-	}
-      }
-      gnome_vfs_file_info_list_free (list);
-
-      gnome_vfs_monitor_add (&handle, datadir, GNOME_VFS_MONITOR_DIRECTORY,
-			     (GnomeVFSMonitorCallback) gnome_wp_file_changed,
-			     data);
-    }
+    gnome_wp_xml_load_from_dir (datadir, data);
     g_free (datadir);
   }
   g_strfreev (xdgdirs);
 
-  if (g_file_test (WALLPAPER_DATADIR, G_FILE_TEST_IS_DIR)) {
-    gnome_vfs_directory_list_load (&list, WALLPAPER_DATADIR,
-				   GNOME_VFS_FILE_INFO_DEFAULT |
-				   GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-
-    for (l = list; l != NULL; l = l->next) {
-      GnomeVFSFileInfo * info = l->data;
-
-      if (strcmp (".", info->name) != 0 && strcmp ("..", info->name) != 0) {
-	gchar * filename;
-
-	filename = g_build_filename (WALLPAPER_DATADIR, info->name, NULL);
-	gnome_wp_xml_load_xml (data, filename);
-	g_free (filename);
-      }
-    }
-    gnome_vfs_file_info_list_free (list);
-
-    gnome_vfs_monitor_add (&handle, WALLPAPER_DATADIR, GNOME_VFS_MONITOR_DIRECTORY,
-			   (GnomeVFSMonitorCallback) gnome_wp_file_changed,
-			   data);
-  }
+  gnome_wp_xml_load_from_dir (WALLPAPER_DATADIR, data);
 
   gnome_wp_load_legacy (data);
 }
