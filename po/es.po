@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-16 17:39+0100\n"
-"PO-Revision-Date: 2008-04-17 20:46+0200\n"
+"POT-Creation-Date: 2008-04-19 10:30+0000\n"
+"PO-Revision-Date: 2008-04-19 13:24+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -594,19 +594,55 @@ msgstr "[Tapiz…]"
 msgid "Default Pointer"
 msgstr "Puntero predeterminado"
 
-#: ../capplets/appearance/appearance-themes.c:650
+#: ../capplets/appearance/appearance-themes.c:363
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme '%s' is "
+"not installed."
+msgstr ""
+"Este tema no se mostrará como se pretende porque el el tema GTK+ necesario "
+"«%s» no está instalado."
+
+#: ../capplets/appearance/appearance-themes.c:370
+#, c-format
+msgid ""
+"This theme will not look as intended because the required window manager "
+"theme '%s' is not installed."
+msgstr ""
+"Este tema no se mostrará como se pretende porque el tema del gestor de ventanas "
+"necesario «%s» no está instalado."
+
+#: ../capplets/appearance/appearance-themes.c:376
+#, c-format
+msgid ""
+"This theme will not look as intended because the required icon theme '%s' is "
+"not installed."
+msgstr ""
+"Este tema no se mostrará como se pretende porque el tema de iconos necesario "
+"«%s» no está instalado."
+
+#: ../capplets/appearance/appearance-themes.c:400
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme engine "
+"'%s' is not installed."
+msgstr ""
+"Este tema no se mostrará como se pretende porque el motor de temas GTK+ necesario "
+"«%s» no está instalado."
+
+#: ../capplets/appearance/appearance-themes.c:717
 msgid "Apply Background"
 msgstr "Aplicar tapiz"
 
-#: ../capplets/appearance/appearance-themes.c:654
+#: ../capplets/appearance/appearance-themes.c:721
 msgid "Apply Font"
 msgstr "Aplicar tipografía"
 
-#: ../capplets/appearance/appearance-themes.c:658
+#: ../capplets/appearance/appearance-themes.c:725
 msgid "Revert Font"
 msgstr "Revertir la tipografía"
 
-#: ../capplets/appearance/appearance-themes.c:680
+#: ../capplets/appearance/appearance-themes.c:751
 msgid ""
 "The current theme suggests a background and a font. Also, the last applied "
 "font suggestion can be reverted."
@@ -614,7 +650,7 @@ msgstr ""
 "El tema actual sugiere un tapiz y una tipografía. Además, se puede revertir "
 "la última sugerencia de tipografía aplicada."
 
-#: ../capplets/appearance/appearance-themes.c:682
+#: ../capplets/appearance/appearance-themes.c:753
 msgid ""
 "The current theme suggests a background. Also, the last applied font "
 "suggestion can be reverted."
@@ -622,11 +658,11 @@ msgstr ""
 "El tema actual sugiere un tapiz. Además, se puede revertir la última "
 "sugerencia de tipografía aplicada."
 
-#: ../capplets/appearance/appearance-themes.c:684
+#: ../capplets/appearance/appearance-themes.c:755
 msgid "The current theme suggests a background and a font."
 msgstr "El tema actual sugiere un tapiz y una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:686
+#: ../capplets/appearance/appearance-themes.c:757
 msgid ""
 "The current theme suggests a font. Also, the last applied font suggestion "
 "can be reverted."
@@ -634,19 +670,19 @@ msgstr ""
 "El tema actual sugiere una tipografía. Además, se puede revertir la última "
 "sugerencia de tipografía aplicada."
 
-#: ../capplets/appearance/appearance-themes.c:688
+#: ../capplets/appearance/appearance-themes.c:759
 msgid "The current theme suggests a background."
 msgstr "El tema actual sugiere un tapiz."
 
-#: ../capplets/appearance/appearance-themes.c:690
+#: ../capplets/appearance/appearance-themes.c:761
 msgid "The last applied font suggestion can be reverted."
 msgstr "Se puede revertir la última sugerencia de tipografía aplicada."
 
-#: ../capplets/appearance/appearance-themes.c:692
+#: ../capplets/appearance/appearance-themes.c:763
 msgid "The current theme suggests a font."
 msgstr "El tema actual sugiere una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:1001
+#: ../capplets/appearance/appearance-themes.c:1083
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:327
 msgid "Custom"
@@ -1475,7 +1511,9 @@ msgstr "Asegúrese de que la miniaplicación está instalada correctamente"
 #. TRANSLATORS: don't translate the terms in brackets
 #: ../capplets/default-applications/gnome-da-capplet.c:1328
 msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
-msgstr "Especifique el nombre de la página para mostrar (internet|multimedia|system|a11y)"
+msgstr ""
+"Especifique el nombre de la página para mostrar (internet|multimedia|system|"
+"a11y)"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "<b>Image Viewer</b>"
