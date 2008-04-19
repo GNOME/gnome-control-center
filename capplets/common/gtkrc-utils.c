@@ -117,6 +117,8 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 				GTokenType string_token;
 				if (token == '@')
 				{
+					if (symbolic_colors == NULL)
+						continue;
 					token = g_scanner_get_next_token (scanner);
 					if (token != G_TOKEN_IDENTIFIER)
 						continue;

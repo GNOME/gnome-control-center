@@ -351,6 +351,67 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
   return TRUE;
 }
 
+static gchar *
+theme_validate (const GnomeThemeMetaInfo *info)
+{
+  GnomeThemeInfo *theme;
+  gchar *gtkrc;
+
+  theme = gnome_theme_info_find (info->gtk_theme_name);
+  if (!theme || !theme->has_gtk) {
+    return g_strdup_printf (
+        _("This theme will not look as intended because the required GTK+ theme '%s' is not installed."),
+          info->gtk_theme_name);
+  }
+
+  theme = gnome_theme_info_find (info->metacity_theme_name);
+  if (!theme || !theme->has_metacity) {
+    return g_strdup_printf (
+        _("This theme will not look as intended because the required window manager theme '%s' is not installed."),
+          info->metacity_theme_name);
+  }
+
+  if (!gnome_theme_icon_info_find (info->icon_theme_name)) {
+    return g_strdup_printf (
+        _("This theme will not look as intended because the required icon theme '%s' is not installed."),
+        info->gtk_theme_name);
+  }
+
+  /* check for gtk theme engines */
+  gtkrc = gtkrc_find_named (info->gtk_theme_name);
+  if (gtkrc) {
+    GSList *engines = NULL, *l;
+    gchar *msg = NULL;
+    gboolean found;
+
+    gtkrc_get_details (gtkrc, &engines, NULL);
+    g_free (gtkrc);
+
+    for (l = engines; l; l = l->next) {
+      gchar *lib = g_strconcat ("lib", l->data, ".so", NULL);
+      gchar *full = g_build_filename (GTK_ENGINE_DIR, lib, NULL);
+
+      g_free (lib);
+      found = g_file_test (full, G_FILE_TEST_EXISTS);
+      g_free (full);
+
+      if (!found) {
+        msg = g_strdup_printf (
+            _("This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."),
+            (gchar *) l->data);
+        break;
+      }
+    }
+
+    g_slist_foreach (engines, (GFunc) g_free, NULL);
+    g_slist_free (engines);
+
+    return msg;
+  }
+
+  return NULL;
+}
+
 static void
 theme_set_custom_from_theme (const GnomeThemeMetaInfo *info, AppearanceData *data)
 {
@@ -574,8 +635,10 @@ theme_message_area_update (AppearanceData *data)
   const GnomeThemeMetaInfo *theme;
   gboolean show_apply_background = FALSE;
   gboolean show_apply_font = FALSE;
-  gboolean show_revert_font;
+  gboolean show_revert_font = FALSE;
+  gboolean show_error;
   const gchar *message;
+  gchar *error_message;
   gchar *font;
 
   theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
@@ -583,60 +646,64 @@ theme_message_area_update (AppearanceData *data)
   if (!theme)
     return;
 
-  if (theme->background_image != NULL) {
-    gchar *background;
+  error_message = theme_validate (theme);
+  show_error = (error_message != NULL);
 
-    background = gconf_client_get_string (data->client, BACKGROUND_KEY, NULL);
-    show_apply_background =
-        (!background || strcmp (theme->background_image, background) != 0);
-    g_free (background);
+  if (!show_error) {
+    if (theme->background_image != NULL) {
+      gchar *background;
+
+      background = gconf_client_get_string (data->client, BACKGROUND_KEY, NULL);
+      show_apply_background =
+          (!background || strcmp (theme->background_image, background) != 0);
+      g_free (background);
+    }
+
+    if (theme->application_font) {
+      font = gconf_client_get_string (data->client, APPLICATION_FONT_KEY, NULL);
+      show_apply_font =
+          (!font || strcmp (theme->application_font, font) != 0);
+      g_free (font);
+    }
+
+    if (!show_apply_font && theme->documents_font) {
+      font = gconf_client_get_string (data->client, DOCUMENTS_FONT_KEY, NULL);
+      show_apply_font =
+          (!font || strcmp (theme->application_font, font) != 0);
+      g_free (font);
+    }
+
+    if (!show_apply_font && theme->desktop_font) {
+      font = gconf_client_get_string (data->client, DESKTOP_FONT_KEY, NULL);
+      show_apply_font =
+          (!font || strcmp (theme->application_font, font) != 0);
+      g_free (font);
+    }
+
+    if (!show_apply_font && theme->windowtitle_font) {
+      font = gconf_client_get_string (data->client, WINDOWTITLE_FONT_KEY, NULL);
+      show_apply_font =
+          (!font || strcmp (theme->application_font, font) != 0);
+      g_free (font);
+    }
+
+    if (!show_apply_font && theme->monospace_font) {
+      font = gconf_client_get_string (data->client, MONOSPACE_FONT_KEY, NULL);
+      show_apply_font =
+          (!font || strcmp (theme->application_font, font) != 0);
+      g_free (font);
+    }
+
+    show_revert_font = (data->revert_application_font != NULL ||
+      data->revert_documents_font != NULL || data->revert_desktop_font != NULL ||
+      data->revert_windowtitle_font != NULL || data->revert_monospace_font != NULL);
   }
-
-  if (theme->application_font) {
-    font = gconf_client_get_string (data->client, APPLICATION_FONT_KEY, NULL);
-    show_apply_font =
-        (!font || strcmp (theme->application_font, font) != 0);
-    g_free (font);
-  }
-
-  if (!show_apply_font && theme->documents_font) {
-    font = gconf_client_get_string (data->client, DOCUMENTS_FONT_KEY, NULL);
-    show_apply_font =
-        (!font || strcmp (theme->application_font, font) != 0);
-    g_free (font);
-  }
-
-  if (!show_apply_font && theme->desktop_font) {
-    font = gconf_client_get_string (data->client, DESKTOP_FONT_KEY, NULL);
-    show_apply_font =
-        (!font || strcmp (theme->application_font, font) != 0);
-    g_free (font);
-  }
-
- if (!show_apply_font && theme->windowtitle_font) {
-    font = gconf_client_get_string (data->client, WINDOWTITLE_FONT_KEY, NULL);
-    show_apply_font =
-        (!font || strcmp (theme->application_font, font) != 0);
-    g_free (font);
-  }
-
-  if (!show_apply_font && theme->monospace_font) {
-    font = gconf_client_get_string (data->client, MONOSPACE_FONT_KEY, NULL);
-    show_apply_font =
-        (!font || strcmp (theme->application_font, font) != 0);
-    g_free (font);
-  }
-
-  show_revert_font = (data->revert_application_font != NULL ||
-    data->revert_documents_font != NULL || data->revert_desktop_font != NULL ||
-    data->revert_windowtitle_font != NULL || data->revert_monospace_font != NULL);
 
   if (data->theme_message_area == NULL) {
     GtkWidget *hbox;
-    GtkWidget *icon;
     GtkWidget *parent;
 
-    if (!show_apply_background && !show_revert_font && !show_apply_font)
+    if (!show_apply_background && !show_revert_font && !show_apply_font && !show_error)
       return;
 
     data->theme_message_area = gedit_message_area_new ();
@@ -665,10 +732,12 @@ theme_message_area_update (AppearanceData *data)
 
     hbox = gtk_hbox_new (FALSE, 9);
     gtk_widget_show (hbox);
-    icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_DIALOG);
-    gtk_widget_show (icon);
-    gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0);
-    gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    data->theme_info_icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_DIALOG);
+    data->theme_error_icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
+    gtk_misc_set_alignment (GTK_MISC (data->theme_info_icon), 0.5, 0);
+    gtk_misc_set_alignment (GTK_MISC (data->theme_error_icon), 0.5, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), data->theme_info_icon, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), data->theme_error_icon, FALSE, FALSE, 0);
     gtk_box_pack_start (GTK_BOX (hbox), data->theme_message_label, TRUE, TRUE, 0);
     gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (data->theme_message_area), hbox);
 
@@ -676,7 +745,9 @@ theme_message_area_update (AppearanceData *data)
     gtk_box_pack_start (GTK_BOX (parent), data->theme_message_area, FALSE, FALSE, 0);
   }
 
-  if (show_apply_background && show_apply_font && show_revert_font)
+  if (show_error)
+    message = error_message;
+  else if (show_apply_background && show_apply_font && show_revert_font)
     message = _("The current theme suggests a background and a font. Also, the last applied font suggestion can be reverted.");
   else if (show_apply_background && show_revert_font)
     message = _("The current theme suggests a background. Also, the last applied font suggestion can be reverted.");
@@ -708,14 +779,23 @@ theme_message_area_update (AppearanceData *data)
   else
     gtk_widget_hide (data->revert_font_button);
 
-  if (show_apply_background || show_apply_font || show_revert_font) {
+  if (show_error || show_apply_background || show_apply_font || show_revert_font) {
     gtk_widget_show (data->theme_message_area);
     gtk_widget_queue_draw (data->theme_message_area);
+
+    if (show_error) {
+      gtk_widget_show (data->theme_error_icon);
+      gtk_widget_hide (data->theme_info_icon);
+    } else {
+      gtk_widget_show (data->theme_info_icon);
+      gtk_widget_hide (data->theme_error_icon);
+    }
   } else {
     gtk_widget_hide (data->theme_message_area);
   }
 
   gtk_label_set_text (GTK_LABEL (data->theme_message_label), message);
+  g_free (error_message);
 }
 
 static void
@@ -987,6 +1067,8 @@ themes_init (AppearanceData *data)
   data->revert_monospace_font = NULL;
   data->theme_save_dialog = NULL;
   data->theme_message_area = NULL;
+  data->theme_info_icon = NULL;
+  data->theme_error_icon = NULL;
   data->theme_custom = gnome_theme_meta_info_new ();
   data->theme_icon = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/theme-thumbnailing.png", NULL);
   data->theme_store = theme_store =
