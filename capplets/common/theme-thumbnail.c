@@ -842,11 +842,14 @@ message_from_child (GIOChannel   *source,
             memcpy (pixels + rowstride * i, async_data.data->data + 4 * async_data.thumbnail_width * i, async_data.thumbnail_width * 4);
         }
 
-        /* callback function needs to unref the pixbuf */
+        /* callback function needs to ref the pixbuf if it wants to keep it */
         (* async_data.func) (pixbuf, async_data.theme_name, async_data.user_data);
 
         if (async_data.destroy)
           (* async_data.destroy) (async_data.user_data);
+
+        if (pixbuf)
+          g_object_unref (pixbuf);
 
         /* Clean up async_data */
         g_free (async_data.theme_name);

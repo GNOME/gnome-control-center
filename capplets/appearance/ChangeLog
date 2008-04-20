@@ -1,3 +1,11 @@
+2008-04-20  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (update_thumbnail_in_treeview):
+	* appearance-themes.c: (theme_thumbnail_update),
+	(theme_thumbnail_generate): adapt to modified refcounting in the
+	thumbnailer; thumbnails don't need to be unref'ed unless we explicitly
+	retain a reference
+
 2008-04-19  Jens Granseuer  <jensgr@gmx.net>
 
 	* Makefile.am:

@@ -114,8 +114,6 @@ theme_thumbnail_update (GdkPixbuf *pixbuf,
       g_free (path);
     }
   }
-
-  g_object_unref (pixbuf);
 }
 
 static GdkPixbuf *
@@ -159,9 +157,10 @@ theme_thumbnail_generate (GnomeThemeMetaInfo *info, AppearanceData *data)
 
   thumb = theme_get_thumbnail_from_cache (info, data);
 
-  if (thumb != NULL)
+  if (thumb != NULL) {
     theme_thumbnail_update (thumb, info->name, data, FALSE);
-  else
+    g_object_unref (thumb);
+  } else
     generate_meta_theme_thumbnail_async (info,
         (ThemeThumbnailFunc) theme_thumbnail_done_cb, data, NULL);
 }

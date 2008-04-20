@@ -633,8 +633,6 @@ update_thumbnail_in_treeview (const gchar *tv_name,
           COL_THUMBNAIL, theme_thumbnail,
           -1);
   }
-
-  g_object_unref (theme_thumbnail);
 }
 
 static void

@@ -1,3 +1,9 @@
+2008-04-20  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-thumbnail.c: (message_from_child): unref the thumbnail image
+	after passing it to the callback. Callers will have to ref it if they
+	want to keep it until after the callback has returned
+
 2008-04-19  Jens Granseuer  <jensgr@gmx.net>
 
 	* gtkrc-utils.c: (gtkrc_get_details): accept NULL for the
