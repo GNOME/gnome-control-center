@@ -1,5 +1,10 @@
 2008-04-20  Jens Granseuer  <jensgr@gmx.net>
 
+	* file-transfer-dialog.c: (file_transfer_dialog_finalize),
+	(file_transfer_dialog_class_init): drop redundant GType stuff
+
+2008-04-20  Jens Granseuer  <jensgr@gmx.net>
+
 	* theme-thumbnail.c: (message_from_child): unref the thumbnail image
 	after passing it to the callback. Callers will have to ref it if they
 	want to keep it until after the callback has returned

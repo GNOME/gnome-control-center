@@ -85,8 +85,6 @@ typedef struct {
 	GtkDialog *overwrite_dialog;
 } FileTransferData;
 
-static GObjectClass *parent_class;
-
 G_DEFINE_TYPE (FileTransferDialog, file_transfer_dialog, GTK_TYPE_DIALOG)
 
 static void
@@ -122,8 +120,7 @@ file_transfer_dialog_finalize (GObject *object)
 		dlg->priv->cancellable = NULL;
 	}
 
-	if (parent_class->finalize)
-		parent_class->finalize (object);
+	G_OBJECT_CLASS (file_transfer_dialog_parent_class)->finalize (object);
 }
 
 static void
@@ -287,9 +284,6 @@ file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 			      G_TYPE_NONE, 0);
 
         g_type_class_add_private (klass, sizeof (FileTransferDialogPrivate));
-
-	parent_class =
-		G_OBJECT_CLASS (g_type_class_ref (GTK_TYPE_DIALOG));
 }
 
 static void
