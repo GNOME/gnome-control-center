@@ -177,13 +177,11 @@ static void
 about_me_commit (GnomeAboutMe *me)
 {
 	EContactName *name;
-	GError *error;
 
 	char *strings[4], **stringptr;
 	char *fileas;
 
 	name = NULL;
-	error = NULL;
 
 	if (me->create_self) {
 		if (me->username == NULL)
@@ -209,11 +207,11 @@ about_me_commit (GnomeAboutMe *me)
 	}
 
 	if (me->create_self) {
-		e_book_add_contact (me->book, me->contact, &error);
-		e_book_set_self (me->book, me->contact, &error);
+		e_book_add_contact (me->book, me->contact, NULL);
+		e_book_set_self (me->book, me->contact, NULL);
 	} else {
-		if (e_book_commit_contact (me->book, me->contact, &error) == FALSE)
-			g_print ("There was an undetermined error\n");
+		if (!e_book_commit_contact (me->book, me->contact, NULL))
+			g_warning ("Could not save contact information");
 	}
 
 	me->create_self = FALSE;
@@ -230,7 +228,7 @@ about_me_commit_from_timeout (GnomeAboutMe *me)
 static gboolean
 about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 {
-	gchar *str = NULL;
+	gchar *str;
 	const gchar *wid;
 	gint i;
 
@@ -240,7 +238,7 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 		return FALSE;
 
 	for (i = 0; ids[i].wid != NULL; i++)
-		if (g_ascii_strcasecmp (ids[i].wid, wid) == 0)
+		if (strcmp (ids[i].wid, wid) == 0)
 			break;
 
 	if (ids[i].cid == 0) {
@@ -346,33 +344,27 @@ about_me_set_address_field (EContactAddress *addr, guint cid, gchar *str)
 {
 	switch (cid) {
 		case ADDRESS_STREET:
-			if (addr->street)
-				g_free (addr->street);
+			g_free (addr->street);
 			addr->street = g_strdup (str);
 			break;
 		case ADDRESS_POBOX:
-			if (addr->po)
-				g_free (addr->po);
+			g_free (addr->po);
 			addr->po = g_strdup (str);
 			break;
 		case ADDRESS_LOCALITY:
-			if (addr->locality)
-				g_free (addr->locality);
+			g_free (addr->locality);
 			addr->locality = g_strdup (str);
 			break;
 		case ADDRESS_CODE:
-			if (addr->code)
-				g_free (addr->code);
+			g_free (addr->code);
 			addr->code = g_strdup (str);
 			break;
 		case ADDRESS_REGION:
-			if (addr->region)
-				g_free (addr->region);
+			g_free (addr->region);
 			addr->region = g_strdup (str);
 			break;
 		case ADDRESS_COUNTRY:
-			if (addr->country)
-				g_free (addr->country);
+			g_free (addr->country);
 			addr->country = g_strdup (str);
 			break;
 	}
@@ -827,7 +819,7 @@ about_me_setup_dialog (void)
 
 	/* Connect the close button signal */
 	main_dialog = WID ("about-me-dialog");
-	g_signal_connect (G_OBJECT (main_dialog), "response",
+	g_signal_connect (main_dialog, "response",
 			  G_CALLBACK (about_me_button_clicked_cb), me);
 
 	gtk_window_set_resizable (GTK_WINDOW (main_dialog), FALSE);
@@ -894,7 +886,7 @@ about_me_setup_dialog (void)
 
 	/************************************************/
 
-	if (tok[0] == NULL || strlen (tok[0]) == 0)
+	if (tok[0] == NULL || *tok[0] == '\0')
 		me->username = NULL;
 	else
 		me->username = g_strdup (tok[0]);
@@ -903,7 +895,7 @@ about_me_setup_dialog (void)
 	about_me_load_photo (me, me->contact);
 
 	widget = WID ("fullname");
-	if (tok[0] == NULL || strlen (tok[0]) == 0) {
+	if (tok[0] == NULL || *tok[0] == '\0') {
 		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", me->login);
 	} else {
 		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", tok[0]);
@@ -915,7 +907,7 @@ about_me_setup_dialog (void)
 	widget = WID ("login");
 	gtk_label_set_text (GTK_LABEL (widget), me->login);
 
-	if (tok[0] == NULL || strlen (tok[0]) == 0) {
+	if (tok[0] == NULL || *tok[0] == '\0') {
 		str = g_strdup_printf (_("About %s"), me->login);
 	} else {
 		str = g_strdup_printf (_("About %s"), tok[0]);
@@ -925,15 +917,15 @@ about_me_setup_dialog (void)
 	g_strfreev (tok);
 
 	widget = WID ("password");
-	g_signal_connect (G_OBJECT (widget), "clicked",
+	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (about_me_passwd_clicked_cb), me);
 
 	widget = WID ("button-image");
-	g_signal_connect (G_OBJECT (widget), "clicked",
+	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (about_me_image_clicked_cb), me);
 
 	widget = WID ("image-chooser");
-	g_signal_connect (G_OBJECT (widget), "changed",
+	g_signal_connect (widget, "changed",
 			  G_CALLBACK (about_me_image_changed_cb), me);
 
 	/* Address tab: set up the focus chains */
