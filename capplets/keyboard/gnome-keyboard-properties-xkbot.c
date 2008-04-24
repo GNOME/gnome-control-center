@@ -351,6 +351,12 @@ xkb_options_load_options (GladeXML * dialog)
 	gtk_widget_show_all (opts_vbox);
 }
 
+static void
+chooser_response_cb (GtkDialog *dialog, gint response, gpointer data)
+{
+	if (response == GTK_RESPONSE_CLOSE)
+		gtk_widget_destroy (GTK_WIDGET (dialog));
+}
 
 /* Create popup dialog*/
 void
@@ -367,9 +373,10 @@ xkb_options_popup_dialog (GladeXML * dialog)
 						  ("keyboard_dialog")));
 	xkb_options_load_options (chooser_dialog);
 
-	gtk_dialog_run (GTK_DIALOG (chooser));
+	g_signal_connect (chooser, "response",
+	    G_CALLBACK (chooser_response_cb), dialog);
 
-	gtk_widget_destroy (chooser);
+	gtk_dialog_run (GTK_DIALOG (chooser));
 }
 
 /* Respond to a change in the xkb gconf settings */
