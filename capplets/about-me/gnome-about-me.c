@@ -517,7 +517,8 @@ about_me_load_photo (GnomeAboutMe *me, EContact *contact)
 
 	widget = WID ("image-chooser");
 
-	e_image_chooser_set_from_file (E_IMAGE_CHOOSER (widget), me->person);
+	if (me->person)
+		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (widget), me->person);
 
 	photo = e_contact_get (contact, E_CONTACT_PHOTO);
 
@@ -894,10 +895,10 @@ about_me_setup_dialog (void)
 	me->theme = gtk_icon_theme_get_for_screen (me->screen);
 
 	icon = gtk_icon_theme_lookup_icon (me->theme, "stock_person", 80, 0);
-
-	me->person = g_strdup (gtk_icon_info_get_filename (icon));
-
-	gtk_icon_info_free (icon);
+	if (icon != NULL) {
+		me->person = g_strdup (gtk_icon_info_get_filename (icon));
+		gtk_icon_info_free (icon);
+	}
 
 	g_signal_connect_object (me->theme, "changed",
 				 G_CALLBACK (about_me_icon_theme_changed),
