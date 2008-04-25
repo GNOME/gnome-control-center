@@ -1,3 +1,14 @@
+2008-04-25  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-about-me.c: (about_me_destroy), (about_me_update_email),
+	(about_me_commit), (about_me_focus_out), (about_me_setup_email),
+	(about_me_load_string_field), (about_me_setup_dialog): rebuild email
+	addresses completely when saving. The email fields are synthetic in
+	e-d-s which means they might be reshuffled at will so we never know
+	quite where the address we saved at pos 3 will end up. This should
+	finally fix problems with the home address not being saved, and
+	addresses being swapped or the like (bug #317835)
+
 2008-04-21  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-about-me.c: (about_me_commit), (about_me_focus_out),

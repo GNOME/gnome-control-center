@@ -42,6 +42,8 @@
 #define MAX_HEIGHT 150
 #define MAX_WIDTH  150
 
+#define EMAIL_SLOTS 4
+
 typedef struct {
 	EContact 	*contact;
 	EBook    	*book;
@@ -54,6 +56,8 @@ typedef struct {
 
 	EContactAddress *addr1;
 	EContactAddress *addr2;
+	gchar           *email[EMAIL_SLOTS];
+	const gchar     *email_types[EMAIL_SLOTS];
 
 	gboolean      	 have_image;
 	gboolean      	 image_changed;
@@ -82,15 +86,15 @@ enum {
 	ADDRESS_COUNTRY
 };
 
-#define EMAIL_HOME              0
-#define EMAIL_WORK              1
+#define EMAIL_WORK              0
+#define EMAIL_HOME              1
 #define ADDRESS_HOME		21
 #define ADDRESS_WORK		27
 
 struct WidToCid ids[] = {
 
-	{ "email-work-e",      E_CONTACT_EMAIL_1             },	/* 00 */
-	{ "email-home-e",      E_CONTACT_EMAIL_2             }, /* 01 */
+	{ "email-work-e",      0                             }, /* 00 */
+	{ "email-home-e",      1                             }, /* 01 */
 
 	{ "phone-home-e",      E_CONTACT_PHONE_HOME          }, /* 02 */
 	{ "phone-mobile-e",    E_CONTACT_PHONE_MOBILE        }, /* 03 */
@@ -134,6 +138,7 @@ struct WidToCid ids[] = {
 
 #define ATTRIBUTE_HOME "HOME"
 #define ATTRIBUTE_WORK "WORK"
+#define ATTRIBUTE_OTHER "OTHER"
 
 static void about_me_set_address_field (EContactAddress *, guint, gchar *);
 
@@ -167,10 +172,43 @@ about_me_destroy (GnomeAboutMe *me)
 	if (me->dialog)
 		g_object_unref (me->dialog);
 
+	g_free (me->email[0]);
+	g_free (me->email[1]);
+	g_free (me->email[2]);
+	g_free (me->email[3]);
+
 	g_free (me->person);
 	g_free (me->login);
 	g_free (me->username);
 	g_free (me);
+}
+
+static void
+about_me_update_email (GnomeAboutMe *me)
+{
+	GList *attrs = NULL;
+	gint i;
+
+	for (i = 0; i < EMAIL_SLOTS; ++i) {
+		if (me->email[i] != NULL) {
+			EVCardAttribute *attr;
+			const gchar *type = me->email_types[i];
+
+			attr = e_vcard_attribute_new (NULL, EVC_EMAIL);
+
+			e_vcard_attribute_add_param_with_value (attr,
+								e_vcard_attribute_param_new (EVC_TYPE),
+								type ? type : ATTRIBUTE_OTHER);
+
+			e_vcard_attribute_add_value (attr, me->email[i]);
+			attrs = g_list_append (attrs, attr);
+		}
+	}
+
+	e_contact_set_attributes (me->contact, E_CONTACT_EMAIL, attrs);
+
+	g_list_foreach (attrs, (GFunc) e_vcard_attribute_free, NULL);
+	g_list_free (attrs);
 }
 
 static void
@@ -205,6 +243,8 @@ about_me_commit (GnomeAboutMe *me)
 		e_contact_name_free (name);
 		g_free (fileas);
 	}
+
+	about_me_update_email (me);
 
 	if (me->create_self) {
 		e_book_add_contact (me->book, me->contact, NULL);
@@ -241,10 +281,6 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 		if (strcmp (ids[i].wid, wid) == 0)
 			break;
 
-	if (ids[i].cid == 0) {
-		return FALSE;
-	}
-
 	if (GTK_IS_ENTRY (widget)) {
 		str = gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1);
 	} else if (GTK_IS_TEXT_VIEW (widget)) {
@@ -258,11 +294,18 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 		gtk_text_iter_forward_to_end (&iter_end);
 		str = gtk_text_iter_get_text (&iter_start, &iter_end);
 	} else {
-		str = g_strdup ("");
+		return FALSE;
 	}
 
+	if (i == EMAIL_HOME || i == EMAIL_WORK) {
+
+		g_free (me->email[ids[i].cid]);
+		if (str[0] == '\0')
+			me->email[ids[i].cid] = NULL;
+		else
+			me->email[ids[i].cid] = g_strdup (str);
 	/* FIXME: i'm getting an empty address field in evolution */
-	if (i >= ADDRESS_HOME && i < ADDRESS_WORK) {
+	} else if (i >= ADDRESS_HOME && i < ADDRESS_WORK) {
 		about_me_set_address_field (me->addr1, ids[i].cid, str);
 		e_contact_set (me->contact, E_CONTACT_ADDRESS_HOME, me->addr1);
 	} else if (i >= ADDRESS_WORK) {
@@ -371,31 +414,50 @@ about_me_set_address_field (EContactAddress *addr, guint cid, gchar *str)
 }
 
 static void
-about_me_setup_email (EContact *contact)
+about_me_setup_email (GnomeAboutMe *me)
 {
-	GList *attrs, *a;
+	GList *attrs, *la;
 	gboolean has_home = FALSE, has_work = FALSE;
-	guint cid;
+	guint i;
 
-	attrs = e_contact_get_attributes (contact, E_CONTACT_EMAIL);
+	attrs = e_contact_get_attributes (me->contact, E_CONTACT_EMAIL);
 
-	for (a = attrs, cid = E_CONTACT_EMAIL_1; a; a = a->next, ++cid) {
-		EVCardAttribute *att = (EVCardAttribute *) a->data;
+	for (la = attrs, i = 0; la; la = la->next, ++i) {
+		EVCardAttribute *a = la->data;
 
-		if (!has_home &&
-		    e_vcard_attribute_has_type (att, ATTRIBUTE_HOME)) {
-			has_home = TRUE;
-			ids[EMAIL_HOME].cid = cid;
-		} else if (!has_work &&
-			   e_vcard_attribute_has_type (att, ATTRIBUTE_WORK)) {
-			has_work = TRUE;
-			ids[EMAIL_WORK].cid = cid;
+		me->email[i] = e_vcard_attribute_get_value (a);
+		if (e_vcard_attribute_has_type (a, ATTRIBUTE_HOME)) {
+			me->email_types[i] = ATTRIBUTE_HOME;
+			if (!has_home) {
+				ids[EMAIL_HOME].cid = i;
+				has_home = TRUE;
+			}
+		} else if (e_vcard_attribute_has_type (a, ATTRIBUTE_WORK)) {
+			me->email_types[i] = ATTRIBUTE_WORK;
+			if (!has_work) {
+				ids[EMAIL_WORK].cid = i;
+				has_work = TRUE;
+			}
+		} else {
+			me->email_types[i] = ATTRIBUTE_OTHER;
 		}
-		e_vcard_attribute_free (att);
+
+		e_vcard_attribute_free (a);
 	}
 
 	g_list_free (attrs);
+
+	if (ids[EMAIL_HOME].cid == ids[EMAIL_WORK].cid) {
+		if (has_home)
+			ids[EMAIL_WORK].cid = 1;
+		else
+			ids[EMAIL_HOME].cid = 0;
+	}
+
+	me->email_types[ids[EMAIL_WORK].cid] = ATTRIBUTE_WORK;
+	me->email_types[ids[EMAIL_HOME].cid] = ATTRIBUTE_HOME;
 }
+
 /**
  * about_me_load_string_field:
  *
@@ -420,7 +482,9 @@ about_me_load_string_field (GnomeAboutMe *me, const gchar *wid, guint cid, guint
 		return;
 	}
 
-	if (aid >= ADDRESS_HOME && aid < ADDRESS_WORK) {
+	if (aid == EMAIL_HOME || aid == EMAIL_WORK) {
+		str = e_contact_get_const (me->contact, E_CONTACT_EMAIL_1 + cid);
+	} else if (aid >= ADDRESS_HOME && aid < ADDRESS_WORK) {
 		str = about_me_get_address_field (me->addr1, cid);
 	} else if (aid >= ADDRESS_WORK) {
 		str = about_me_get_address_field (me->addr2, cid);
@@ -869,7 +933,7 @@ about_me_setup_dialog (void)
 			}
 		}
 	} else {
-		about_me_setup_email (me->contact);
+		about_me_setup_email (me);
 	}
 
 	/************************************************/
