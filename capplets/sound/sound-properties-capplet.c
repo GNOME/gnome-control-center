@@ -44,6 +44,7 @@
 #include <libhal.h>
 #endif
 #include <gst/gst.h>
+#include <gst/interfaces/propertyprobe.h>
 
 /* Needed only for the sound capplet */
 
@@ -345,6 +346,74 @@ add_device (int type, const gchar *pipeline, const gchar *description, const gch
 	}
 }
 
+/* Adds an element which supports the GstPropertyProbe interface. Will add
+ * entries for all available devices. Elements should support retrieving the
+ * device-name in NULL state for this to work properly/nicely.
+ *
+ * Returns TRUE if probing was successful and one or more devices were found
+ */
+static gboolean
+add_device_with_probe (int type, const gchar *element_name, const gchar *system_description)
+{
+	GstPropertyProbe *probe;
+	GstElement *element;
+	GValueArray *vals;
+	gboolean res = FALSE;
+	guint i;
+
+	/* only display pipelines available on this system */
+	element = gst_element_factory_make (element_name, NULL);
+	if (element == NULL)
+		return FALSE;
+
+	if (!GST_IS_PROPERTY_PROBE (element))
+		goto done;
+
+	probe = GST_PROPERTY_PROBE (element);
+	vals = gst_property_probe_probe_and_get_values_name (probe, "device");
+
+	if (vals == NULL)
+		goto done;
+
+	for (i = 0; i < vals->n_values; ++i) {
+		gchar *device_name = NULL;
+		gchar *pipeline, *desc;
+		const gchar *device;
+		GValue *val;
+
+		val = g_value_array_get_nth (vals, i);
+		device = g_value_get_string (val);
+
+		g_object_set (element, "device", device, NULL);
+
+		/* we assume the element is able to retrieve the description
+		 * even if the device is in NULL state (ie. not open) */
+		g_object_get (element, "device-name", &device_name, NULL);
+
+		if (device_name) {
+			desc = g_strdup_printf ("%s - %s", system_description, device_name);
+		} else {
+			/* fallback, shouldn't happen */
+			desc = g_strdup_printf ("%s - %s", system_description, device);
+		}
+
+		pipeline = g_strdup_printf ("%s device=%s", element_name, device);
+
+		add_device (type, pipeline, desc, NULL);
+		res = TRUE;
+
+		g_free (pipeline);
+		g_free (desc);
+		g_free (device_name);
+	}
+
+	g_value_array_free (vals);
+
+done:
+	gst_object_unref (element);
+	return res;
+}
+
 #if USE_HAL
 static void
 remove_device (int type, const gchar *pipeline)
@@ -398,7 +467,7 @@ remove_device (int type, const gchar *pipeline)
 }
 
 static void
-device_added_callback (LibHalContext *ctx, const char *udi)
+device_added_alsa (LibHalContext *ctx, const char *udi)
 {
 	gchar *type_string;
 	gchar *class_string;
@@ -406,10 +475,6 @@ device_added_callback (LibHalContext *ctx, const char *udi)
 	const gchar *element;
 	gchar *pipeline, *description;
 	gboolean ignore;
-
-	if (!libhal_device_query_capability (ctx, udi, "alsa", NULL)) {
-		return;
-	}
 
 	/* filter out "digitizer", "modem", "none", "unknown" */
 	class_string = libhal_device_get_property_string (ctx, udi, "alsa.pcm_class", NULL);
@@ -437,7 +502,7 @@ device_added_callback (LibHalContext *ctx, const char *udi)
 		return;
 	}
 
-	pipeline = g_strdup_printf ("%s udi=%s", element, udi);
+	pipeline = g_strconcat (element, " udi=", udi, NULL);
 	description = libhal_device_get_property_string (ctx, udi, "alsa.device_id", NULL);
 
 	add_device (type, pipeline, description, NULL);
@@ -447,17 +512,86 @@ device_added_callback (LibHalContext *ctx, const char *udi)
 }
 
 static void
+device_added_oss (LibHalContext *ctx, const char *udi)
+{
+	gchar *type_string;
+	int type;
+	const gchar *element;
+	gchar *pipeline, *description;
+
+	type_string = libhal_device_get_property_string (ctx, udi, "oss.type", NULL);
+	if (strcmp (type_string, "pcm") == 0) {
+		type = AUDIO_PLAYBACK;
+		element = "halaudiosink";
+	} else if (strcmp (type_string, "mixer") == 0) {
+		type = AUDIO_CAPTURE;
+		element = "halaudiosrc";
+	} else {
+		type = -1;
+		element = NULL;
+	}
+	libhal_free_string (type_string);
+	if (type == -1) {
+		return;
+	}
+
+	pipeline = g_strconcat (element, " udi=", udi, NULL);
+	description = libhal_device_get_property_string (ctx, udi, "oss.device_id", NULL);
+
+	add_device (type, pipeline, description, NULL);
+
+	g_free (pipeline);
+	libhal_free_string (description);
+}
+
+static void
+device_added_callback (LibHalContext *ctx, const char *udi)
+{
+	if (libhal_device_query_capability (ctx, udi, "alsa", NULL)) {
+		device_added_alsa (ctx, udi);
+	} else if (libhal_device_query_capability (ctx, udi, "oss", NULL)) {
+		device_added_oss (ctx, udi);
+	}
+
+}
+
+static void
 device_removed_callback (LibHalContext *ctx, const char *udi)
 {
 	gchar *pipeline;
 
-	pipeline = g_strdup_printf ("halaudiosink udi=%s", udi);
+	pipeline = g_strconcat ("halaudiosink udi=", udi, NULL);
 	remove_device (AUDIO_PLAYBACK, pipeline);
 	g_free (pipeline);
 
-	pipeline = g_strdup_printf ("halaudiosrc udi=%s", udi);
+	pipeline = g_strconcat ("halaudiosrc udi=", udi, NULL);
 	remove_device (AUDIO_CAPTURE, pipeline);
 	g_free (pipeline);
+}
+
+static void
+setup_devices_by_capability (LibHalContext *ctx, const gchar *cap)
+{
+	DBusError error;
+	char **devices;
+	int num = 0;
+
+	dbus_error_init (&error);
+
+	devices = libhal_find_device_by_capability (ctx, cap, &num, &error);
+	if (devices != NULL) {
+		int i;
+
+		for (i = 0; i < num; ++i) {
+			device_added_callback (ctx, devices[i]);
+		}
+		dbus_free_string_array (devices);
+	} else {
+		if (dbus_error_is_set (&error)) {
+			g_warning ("Calling a hal function an error occured: %s", error.message);
+			dbus_error_free (&error);
+		}
+	}
 }
 
 static void
@@ -466,8 +600,6 @@ setup_hal_devices (void)
 	DBusConnection *connection;
 	DBusError error;
 	LibHalContext *ctx;
-	char **devices;
-	int i, num = 0;
 
 	dbus_error_init (&error);
 
@@ -499,21 +631,8 @@ setup_hal_devices (void)
 		return;
 	}
 
-	devices = libhal_find_device_by_capability (ctx, "alsa", &num, &error);
-	if (devices == NULL) {
-		/* error in the libhal_find_device_by_capability function */
-		if (dbus_error_is_set (&error)) {
-			g_warning ("Calling a hal function an error occured: %s", error.message);
-			dbus_error_free (&error);
-		}
-		return;
-	}
-
-	for (i = 0; i < num; i++) {
-		device_added_callback (ctx, devices[i]);
-	}
-
-	dbus_free_string_array (devices);
+	setup_devices_by_capability (ctx, "alsa");
+	setup_devices_by_capability (ctx, "oss");
 }
 #endif
 
@@ -673,8 +792,13 @@ setup_devices (void)
 	add_device (AUDIO_PLAYBACK, "artsdsink", _("Artsd - ART Sound Daemon"), NULL);
 	add_device (AUDIO_PLAYBACK, "esdsink", _("ESD - Enlightened Sound Daemon"), NULL);
 	add_device (AUDIO_CAPTURE, "esdmon", _("ESD - Enlightened Sound Daemon"), NULL);
-	add_device (AUDIO_PLAYBACK, "osssink", _("OSS - Open Sound System"), NULL);
-	add_device (AUDIO_CAPTURE, "osssrc", _("OSS - Open Sound System"), NULL);
+	/* only show legacy OSS if OSS4 isn't active and working */
+	if (!add_device_with_probe (AUDIO_PLAYBACK, "oss4sink", "OSS4")) {
+		add_device (AUDIO_PLAYBACK, "osssink", _("OSS - Open Sound System"), NULL);
+	}
+	if (!add_device_with_probe (AUDIO_CAPTURE, "oss4src", "OSS4")) {
+		add_device (AUDIO_CAPTURE, "osssrc", _("OSS - Open Sound System"), NULL);
+	}
 	add_device (AUDIO_PLAYBACK, "pulsesink", _("PulseAudio Sound Server"), NULL);
 	add_device (AUDIO_CAPTURE, "pulsesrc", _("PulseAudio Sound Server"), NULL);
 	add_device (AUDIO_CAPTURE, "audiotestsrc wave=triangle is-live=true", _("Test Sound"), NULL);
