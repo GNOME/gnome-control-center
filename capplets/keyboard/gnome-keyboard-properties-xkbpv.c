@@ -81,50 +81,59 @@ xkb_layout_preview_update (GladeXML * chooser_dialog)
 }
 
 void
-xkb_layout_preview_set_drawing_layout (GtkWidget * kbdraw, const gchar * id)
+xkb_layout_preview_set_drawing_layout (GtkWidget * kbdraw,
+				       const gchar * id)
 {
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
-	if (kbdraw != NULL && id != NULL) {
-		XklConfigRec *data;
-		char **p, *layout, *variant;
-		XkbComponentNamesRec component_names;
+	if (kbdraw != NULL) {
+		if (id != NULL) {
+			XklConfigRec *data;
+			char **p, *layout, *variant;
+			XkbComponentNamesRec component_names;
 
-		data = xkl_config_rec_new ();
-		if (xkl_config_rec_get_from_server (data, engine)) {
-			if ((p = data->layouts) != NULL)
-				g_strfreev (data->layouts);
+			data = xkl_config_rec_new ();
+			if (xkl_config_rec_get_from_server (data, engine)) {
+				if ((p = data->layouts) != NULL)
+					g_strfreev (data->layouts);
 
-			if ((p = data->variants) != NULL)
-				g_strfreev (data->variants);
+				if ((p = data->variants) != NULL)
+					g_strfreev (data->variants);
 
-			data->layouts = g_new0 (char *, 2);
-			data->variants = g_new0 (char *, 2);
-			if (gkbd_keyboard_config_split_items
-			    (id, &layout, &variant)
-			    && variant != NULL) {
-				data->layouts[0] =
-				    (layout ==
-				     NULL) ? NULL : g_strdup (layout);
-				data->variants[0] =
-				    (variant ==
-				     NULL) ? NULL : g_strdup (variant);
-			} else {
-				data->layouts[0] =
-				    (id == NULL) ? NULL : g_strdup (id);
-				data->variants[0] = NULL;
+				data->layouts = g_new0 (char *, 2);
+				data->variants = g_new0 (char *, 2);
+				if (gkbd_keyboard_config_split_items
+				    (id, &layout, &variant)
+				    && variant != NULL) {
+					data->layouts[0] =
+					    (layout ==
+					     NULL) ? NULL :
+					    g_strdup (layout);
+					data->variants[0] =
+					    (variant ==
+					     NULL) ? NULL :
+					    g_strdup (variant);
+				} else {
+					data->layouts[0] =
+					    (id ==
+					     NULL) ? NULL : g_strdup (id);
+					data->variants[0] = NULL;
+				}
+
+				if (xkl_xkb_config_native_prepare
+				    (engine, data, &component_names)) {
+					gkbd_keyboard_drawing_set_keyboard
+					    (GKBD_KEYBOARD_DRAWING
+					     (kbdraw), &component_names);
+
+					xkl_xkb_config_native_cleanup
+					    (engine, &component_names);
+				}
 			}
+			g_object_unref (G_OBJECT (data));
+		} else
+			gkbd_keyboard_drawing_set_keyboard
+			    (GKBD_KEYBOARD_DRAWING (kbdraw), NULL);
 
-			if (xkl_xkb_config_native_prepare
-			    (engine, data, &component_names)) {
-				gkbd_keyboard_drawing_set_keyboard
-				    (GKBD_KEYBOARD_DRAWING (kbdraw),
-				     &component_names);
-
-				xkl_xkb_config_native_cleanup (engine,
-							       &component_names);
-			}
-		}
-		g_object_unref (G_OBJECT (data));
 	}
 #endif
 }
