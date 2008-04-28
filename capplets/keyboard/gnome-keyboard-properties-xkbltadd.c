@@ -40,14 +40,10 @@
 #define DEFAULT_GROUP_SWITCH "grp:alts_toggle"
 #define DEFAULT_VARIANT_ID "__default__"
 
-#define LANG_THRESHOLD_1 15
-#define LANG_THRESHOLD_2 5
-
 enum {
 	COMBO_BOX_MODEL_COL_DESCRIPTION,
 	COMBO_BOX_MODEL_COL_XKB_ID,
-	COMBO_BOX_MODEL_COL_REAL_ID,
-	COMBO_BOX_MODEL_COL_COUNTER
+	COMBO_BOX_MODEL_COL_REAL_ID
 };
 
 typedef void (*LayoutIterFunc) (XklConfigRegistry * config,
@@ -65,9 +61,6 @@ static void
 					    LayoutIterFunc layout_iterator,
 					    ConfigItemProcessFunc
 					    layout_handler,
-					    gint sort_column_id,
-					    GtkTreeIterCompareFunc
-					    sort_func,
 					    GCallback
 					    combo_changed_notify);
 
@@ -115,13 +108,6 @@ static void
 }
 
 static void
-inc_counter (XklConfigRegistry * config_registry, XklConfigItem *
-	     layout, XklConfigItem * variant, gint * counter)
-{
-	(*counter)++;
-}
-
-static void
 xkb_layout_chooser_add_language_to_available_languages (XklConfigRegistry *
 							config_registry,
 							XklConfigItem *
@@ -129,27 +115,11 @@ xkb_layout_chooser_add_language_to_available_languages (XklConfigRegistry *
 							GtkListStore *
 							list_store)
 {
-	gint counter = 0;
-	gchar *descr;
-	gchar *size;
-	xkl_config_registry_foreach_language_variant
-	    (config_registry, config_item->name,
-	     (TwoConfigItemsProcessFunc)
-	     inc_counter, &counter);
-	size =
-	    counter > LANG_THRESHOLD_1 ? "x-large" : counter >
-	    LANG_THRESHOLD_2 ? "large" : "medium";
-	descr =
-	    g_strdup_printf ("<span size=\"%s\">%s</span>", size,
-			     config_item->description);
 	gtk_list_store_insert_with_values (list_store, NULL, -1,
 					   COMBO_BOX_MODEL_COL_DESCRIPTION,
-					   descr,
+					   config_item->description,
 					   COMBO_BOX_MODEL_COL_REAL_ID,
-					   config_item->name,
-					   COMBO_BOX_MODEL_COL_COUNTER,
-					   counter, -1);
-	g_free (descr);
+					   config_item->name, -1);
 }
 
 static void
@@ -176,8 +146,9 @@ xkb_layout_chooser_enable_disable_buttons (GladeXML * chooser_dialog)
 		  "xkb_language_variants_available" :
 		  "xkb_country_variants_available");
 	GtkTreeIter viter;
-	gboolean enable_ok = gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbv),
-					      &viter);
+	gboolean enable_ok =
+	    gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbv),
+					   &viter);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG
 					   (CWID
@@ -210,83 +181,10 @@ xkb_layout_chooser_available_country_changed (GladeXML * chooser_dialog)
 }
 
 static void
-xkb_layout_chooser_page_changed (GtkWidget* notebook, GtkWidget * page, gint page_num, GladeXML * chooser_dialog)
+xkb_layout_chooser_page_changed (GtkWidget * notebook, GtkWidget * page,
+				 gint page_num, GladeXML * chooser_dialog)
 {
 	xkb_layout_chooser_available_variant_changed (chooser_dialog);
-}
-
-static gint
-xkb_layout_chooser_language_compare_func (GtkTreeModel * model,
-					  GtkTreeIter * a,
-					  GtkTreeIter * b,
-					  gpointer user_data)
-{
-	gchar *desc_a = NULL, *desc_b = NULL;
-	gint a_cnt = 0, b_cnt = 0;
-	gint retval;
-
-	gtk_tree_model_get (model, a,
-			    COMBO_BOX_MODEL_COL_DESCRIPTION,
-			    &desc_a,
-			    COMBO_BOX_MODEL_COL_COUNTER, &a_cnt, -1);
-	gtk_tree_model_get (model, b,
-			    COMBO_BOX_MODEL_COL_DESCRIPTION,
-			    &desc_b,
-			    COMBO_BOX_MODEL_COL_COUNTER, &b_cnt, -1);
-	/* Compare languages, using scopes 0-5, 6-15, 16-... */
-	if ((a_cnt > LANG_THRESHOLD_1 && b_cnt <= LANG_THRESHOLD_1)
-	    || (a_cnt > LANG_THRESHOLD_2 && b_cnt <= LANG_THRESHOLD_2))
-		retval = -1;
-	else if ((a_cnt <= LANG_THRESHOLD_1 && b_cnt > LANG_THRESHOLD_1)
-		 || (a_cnt <= LANG_THRESHOLD_2
-		     && b_cnt > LANG_THRESHOLD_2))
-		retval = 1;
-	else if (desc_a != NULL && desc_b != NULL)
-		retval = g_utf8_collate (desc_a, desc_b);
-	else if (desc_a != NULL)
-		/* desc_b == NULL hence b is the separator, and a is not the default => b < a */
-		retval = 1;
-	else if (desc_b != NULL)
-		/* desc_a == NULL hence a is the separator, and b is not the default => a < b */
-		retval = -1;
-	else
-		retval = 0;
-
-	g_free (desc_a);
-	g_free (desc_b);
-
-	return retval;
-}
-
-static gint
-xkb_layout_chooser_variant_compare_func (GtkTreeModel * model,
-					 GtkTreeIter * a,
-					 GtkTreeIter * b,
-					 gpointer user_data)
-{
-	gchar *desc_a = NULL, *desc_b = NULL;
-	gint retval;
-
-	gtk_tree_model_get (model, a,
-			    COMBO_BOX_MODEL_COL_DESCRIPTION, &desc_a, -1);
-	gtk_tree_model_get (model, b,
-			    COMBO_BOX_MODEL_COL_DESCRIPTION, &desc_b, -1);
-
-	if (desc_a != NULL && desc_b != NULL)
-		retval = g_utf8_collate (desc_a, desc_b);
-	else if (desc_a != NULL)
-		/* desc_b == NULL hence b is the separator, and a is not the default => b < a */
-		retval = 1;
-	else if (desc_b != NULL)
-		/* desc_a == NULL hence a is the separator, and b is not the default => a < b */
-		retval = -1;
-	else
-		retval = 0;
-
-	g_free (desc_a);
-	g_free (desc_b);
-
-	return retval;
 }
 
 static void
@@ -299,7 +197,7 @@ xkb_layout_chooser_available_language_variants_fill (GladeXML *
 	GtkTreeIter liter;
 
 	list_store = gtk_list_store_new
-	    (4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
+	    (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbl), &liter)) {
 		GtkTreeModel *lm =
@@ -321,11 +219,6 @@ xkb_layout_chooser_available_language_variants_fill (GladeXML *
 	}
 
 	/* Turn on sorting after filling the store, since that's faster */
-	gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (list_store),
-					 COMBO_BOX_MODEL_COL_DESCRIPTION,
-					 (GtkTreeIterCompareFunc)
-					 xkb_layout_chooser_variant_compare_func,
-					 NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
 					      (list_store),
 					      COMBO_BOX_MODEL_COL_DESCRIPTION,
@@ -333,14 +226,6 @@ xkb_layout_chooser_available_language_variants_fill (GladeXML *
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbv),
 				 GTK_TREE_MODEL (list_store));
-
-	/* Select the default variant */
-	/* TODO
-	   if (set_default) {
-	   gtk_combo_box_set_active_iter (GTK_COMBO_BOX
-	   (cbev), &vdefault_iter);
-	   }
-	 */
 }
 
 static void
@@ -354,7 +239,7 @@ xkb_layout_chooser_available_country_variants_fill (GladeXML *
 	gboolean set_default = FALSE;
 
 	list_store = gtk_list_store_new
-	    (4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
+	    (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbl), &liter)) {
 		GtkTreeModel *lm =
@@ -375,11 +260,6 @@ xkb_layout_chooser_available_country_variants_fill (GladeXML *
 	}
 
 	/* Turn on sorting after filling the store, since that's faster */
-	gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (list_store),
-					 COMBO_BOX_MODEL_COL_DESCRIPTION,
-					 (GtkTreeIterCompareFunc)
-					 xkb_layout_chooser_variant_compare_func,
-					 NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
 					      (list_store),
 					      COMBO_BOX_MODEL_COL_DESCRIPTION,
@@ -403,17 +283,14 @@ xkb_layout_chooser_available_layouts_fill (GladeXML *
 					   LayoutIterFunc layout_iterator,
 					   ConfigItemProcessFunc
 					   layout_handler,
-					   gint sort_column_id,
-					   GtkTreeIterCompareFunc
-					   sort_func,
 					   GCallback combo_changed_notify)
 {
 	GtkWidget *cbl = CWID (cblid);
 	GtkWidget *cbev = CWID (cbvid);
 	GtkCellRenderer *renderer;
 	GtkListStore *list_store =
-	    gtk_list_store_new (4, G_TYPE_STRING, G_TYPE_STRING,
-				G_TYPE_STRING, G_TYPE_INT);
+	    gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
+				G_TYPE_STRING);
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbl),
 				 GTK_TREE_MODEL (list_store));
@@ -428,13 +305,9 @@ xkb_layout_chooser_available_layouts_fill (GladeXML *
 	layout_iterator (config_registry, layout_handler, list_store);
 
 	/* Turn on sorting after filling the model since that's faster */
-	if (sort_func)
-		gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE
-						 (list_store),
-						 sort_column_id, sort_func,
-						 NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-					      (list_store), sort_column_id,
+					      (list_store),
+					      COMBO_BOX_MODEL_COL_DESCRIPTION,
 					      GTK_SORT_ASCENDING);
 
 	g_signal_connect_swapped (G_OBJECT (cbl), "changed",
@@ -562,6 +435,8 @@ xkb_layout_choose (GladeXML * dialog)
 			   "/gnome-keyboard-properties.glade",
 			   "xkb_layout_chooser", NULL);
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
+	GtkWidget *lang_chooser = CWID ("xkb_languages_available");
+	GtkWidget *notebook = CWID ("choosers_nb");
 	GtkWidget *kbdraw = NULL;
 	GtkWidget *toplevel = NULL;
 
@@ -575,8 +450,6 @@ xkb_layout_choose (GladeXML * dialog)
 						   xkl_config_registry_foreach_country,
 						   (ConfigItemProcessFunc)
 						   xkb_layout_chooser_add_country_to_available_countries,
-						   COMBO_BOX_MODEL_COL_DESCRIPTION,
-						   NULL,
 						   G_CALLBACK
 						   (xkb_layout_chooser_available_country_changed));
 	xkb_layout_chooser_available_layouts_fill (chooser_dialog,
@@ -585,18 +458,30 @@ xkb_layout_choose (GladeXML * dialog)
 						   xkl_config_registry_foreach_language,
 						   (ConfigItemProcessFunc)
 						   xkb_layout_chooser_add_language_to_available_languages,
-						   COMBO_BOX_MODEL_COL_COUNTER,
-						   xkb_layout_chooser_language_compare_func,
 						   G_CALLBACK
 						   (xkb_layout_chooser_available_language_changed));
 
-	g_signal_connect_after (G_OBJECT (CWID("choosers_nb")), "switch_page",
-				  G_CALLBACK
-				  (xkb_layout_chooser_page_changed),
-				  chooser_dialog);
+	g_signal_connect_after (G_OBJECT (notebook), "switch_page",
+				G_CALLBACK
+				(xkb_layout_chooser_page_changed),
+				chooser_dialog);
 
 	xkb_layout_chooser_available_country_changed (chooser_dialog);
-	xkb_layout_chooser_available_language_changed (chooser_dialog);
+
+	if (gtk_tree_model_iter_n_children
+	    (gtk_combo_box_get_model (GTK_COMBO_BOX (lang_chooser)),
+	     NULL)) {
+		xkb_layout_chooser_available_language_changed
+		    (chooser_dialog);
+	} else {
+		/* If language info is not available - remove the corresponding tab,
+		   pretend there is no notebook at all */
+		gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), 1);
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook),
+					    FALSE);
+		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook),
+					      FALSE);
+	}
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 	if (!strcmp (xkl_engine_get_backend_name (engine), "XKB")) {
