@@ -20,9 +20,10 @@
 #include <config.h>
 
 #include "themus-properties-view.h"
-#include <gnome-theme-info.h>
+#include "gnome-theme-info.h"
 
 #include <glib/gi18n-lib.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 
 #define LOAD_BUFFER_SIZE 8192
@@ -118,7 +119,7 @@ themus_properties_view_init (ThemusPropertiesView *self)
 						 THEMUS_TYPE_PROPERTIES_VIEW,
 						 ThemusPropertiesViewDetails);
 
-    gnome_theme_init (NULL);
+    gnome_theme_init ();
 
     gtk_table_resize (GTK_TABLE (self), 3, 2);
     gtk_table_set_homogeneous (GTK_TABLE (self), FALSE);
@@ -215,16 +216,16 @@ void
 themus_properties_view_set_location (ThemusPropertiesView *self,
 				     const char *location)
 {
-    GnomeVFSURI *uri;
-    GnomeThemeMetaInfo *theme;
-
     g_assert (THEMUS_IS_PROPERTIES_VIEW (self));
 
     if (location) {
-	uri = gnome_vfs_uri_new (location);
+	GFile *file;
+	GnomeThemeMetaInfo *theme;
 
-	theme = gnome_theme_read_meta_theme (uri);
-	gnome_vfs_uri_unref (uri);
+	file = g_file_new_for_path (location);
+
+	theme = gnome_theme_read_meta_theme (file);
+	g_object_unref (file);
 
 	gtk_label_set_text (GTK_LABEL (self->details->description),
 			    theme->comment);
@@ -243,4 +244,3 @@ themus_properties_view_set_location (ThemusPropertiesView *self,
 	gtk_label_set_text (GTK_LABEL (self->details->icon_theme), "");
     }
 }
-

@@ -675,7 +675,7 @@ static GnomeVFSMethod method = {
 GnomeVFSMethod*
 vfs_module_init (const char *method_name, const char *args)
 {
-	gnome_theme_init (NULL);
+	gnome_theme_init ();
 	if (!strcmp (method_name, "themes"))
 	{
 		gnome_theme_info_register_theme_change (theme_changed_callback, NULL);

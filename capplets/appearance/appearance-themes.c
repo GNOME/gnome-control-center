@@ -1056,7 +1056,7 @@ themes_init (AppearanceData *data)
   GtkSettings *settings;
 
   /* initialise some stuff */
-  gnome_theme_init (NULL);
+  gnome_theme_init ();
   gnome_wm_manager_init ();
 
   data->revert_application_font = NULL;

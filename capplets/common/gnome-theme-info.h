@@ -23,10 +23,8 @@
 #ifndef GNOME_THEME_INFO_H
 #define GNOME_THEME_INFO_H
 
-#include <config.h>
-
 #include <glib.h>
-#include <libgnomevfs/gnome-vfs.h>
+#include <gio/gio.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdk.h>
 
@@ -157,15 +155,14 @@ gint                  gnome_theme_cursor_info_compare      (GnomeThemeCursorInfo
 /* Meta themes*/
 GnomeThemeMetaInfo *gnome_theme_meta_info_new              (void);
 void                gnome_theme_meta_info_free             (GnomeThemeMetaInfo *meta_theme_info);
-void                gnome_theme_meta_info_print            (GnomeThemeMetaInfo *meta_theme_info);
 GnomeThemeMetaInfo *gnome_theme_meta_info_find             (const gchar        *meta_theme_name);
 GList              *gnome_theme_meta_info_find_all         (void);
 gint                gnome_theme_meta_info_compare          (GnomeThemeMetaInfo *a,
 							    GnomeThemeMetaInfo *b);
-GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GnomeVFSURI        *meta_theme_uri);
+GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GFile              *meta_theme_uri);
 
 /* Other */
-void                gnome_theme_init                       (gboolean            *monitor_not_added);
+void                gnome_theme_init                       (void);
 void                gnome_theme_info_register_theme_change (ThemeChangedCallback func,
 							    gpointer             data);
 

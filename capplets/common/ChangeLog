@@ -1,3 +1,27 @@
+2008-05-01  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-theme-apply.c:
+	* gnome-theme-info.c: (get_file_type), (add_theme_to_hash_by_name),
+	(get_theme_from_hash_by_name), (gnome_theme_read_meta_theme),
+	(read_icon_theme), (gdk_pixbuf_from_xcursor_image),
+	(read_cursor_theme), (handle_change_signal), (update_theme_index),
+	(update_gtk2_index), (update_keybinding_index),
+	(update_metacity_index), (update_common_theme_dir_index),
+	(update_meta_theme_index), (update_icon_theme_index),
+	(update_cursor_theme_index), (gtk2_dir_changed),
+	(keybinding_dir_changed), (metacity_dir_changed),
+	(common_theme_dir_changed), (common_icon_theme_dir_changed),
+	(add_common_theme_dir_monitor),
+	(add_common_icon_theme_dir_monitor),
+	(remove_common_theme_dir_monitor),
+	(remove_common_icon_theme_dir_monitor), (top_theme_dir_changed),
+	(top_icon_theme_dir_changed), (real_add_top_theme_dir_monitor),
+	(add_top_theme_dir_monitor), (add_top_icon_theme_dir_monitor),
+	(gnome_theme_init):
+	* gnome-theme-info.h:
+	* gnome-theme-test.c: (main): port from gnome-vfs to gio (part of
+	bug #524401)
+
 2008-04-20  Jens Granseuer  <jensgr@gmx.net>
 
 	* file-transfer-dialog.c: (file_transfer_dialog_finalize),

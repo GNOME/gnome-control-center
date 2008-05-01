@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* 
+/*
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -22,11 +22,11 @@
 #include <stdlib.h>
 
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/gnome-ui-init.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <gconf/gconf-client.h>
 
 #include <gnome-theme-info.h>
@@ -58,7 +58,7 @@ run_apply_font_dialog (GnomeThemeMetaInfo *theme)
 					     _("ABCDEFG"),
 					     "</span>",
 					     NULL));
-						
+
 			if (gtk_dialog_run (GTK_DIALOG(font_dialog)) == GTK_RESPONSE_OK)
 				apply_font = TRUE;
 
@@ -74,7 +74,7 @@ run_apply_font_dialog (GnomeThemeMetaInfo *theme)
 int
 main (int argc, char **argv)
 {
-	GnomeVFSURI *uri;
+	GFile *file;
 	GnomeThemeMetaInfo *theme;
 	GnomeProgram *program;
 	gboolean apply_font;
@@ -107,16 +107,13 @@ main (int argc, char **argv)
 		goto error;
 	}
 
-	uri = gnome_vfs_uri_new (arguments[0]);
+	file = g_file_new_for_path (arguments[0]);
 	g_strfreev (arguments);
 
-	if (!uri)
-		goto error;
+	gnome_theme_init ();
 
-	gnome_theme_init (NULL);
-
-	theme = gnome_theme_read_meta_theme (uri);
-	gnome_vfs_uri_unref (uri);
+	theme = gnome_theme_read_meta_theme (file);
+	g_object_unref (file);
 
 	if (!theme)
 		goto error;
