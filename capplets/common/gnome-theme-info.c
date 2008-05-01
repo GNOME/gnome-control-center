@@ -532,7 +532,7 @@ read_cursor_theme (GFile *cursor_theme_uri)
       }
 
       cursor_theme_info = gnome_theme_cursor_info_new ();
-      cursor_theme_info->path = g_file_get_path (parent_uri);
+      cursor_theme_info->path = g_file_get_uri (parent_uri);
       cursor_theme_info->name = name;
       cursor_theme_info->sizes = sizes;
       cursor_theme_info->thumbnail = thumbnail;
@@ -658,7 +658,7 @@ read_cursor_fonts (void)
     theme_info->thumbnail = gdk_pixbuf_new_from_file (filename, NULL);
     g_free (filename);
 
-    theme_info->path = g_build_filename (GNOMECC_DATA_DIR, builtins[i][0], NULL);
+    theme_info->path = g_build_filename ("file://" GNOMECC_DATA_DIR, builtins[i][0], NULL);
     theme_info->name = g_strdup (theme_info->path);
 
     if (!strcmp (theme_info->path, cursor_font))
@@ -753,7 +753,7 @@ update_theme_index (GFile            *index_uri,
   /* Next, we see what currently exists */
   parent = g_file_get_parent (index_uri);
   common_theme_dir_uri = g_file_get_parent (parent);
-  common_theme_dir = g_file_get_path (common_theme_dir_uri);
+  common_theme_dir = g_file_get_uri (common_theme_dir_uri);
 
   theme_info = g_hash_table_lookup (theme_hash_by_uri, common_theme_dir);
   if (theme_info == NULL) {

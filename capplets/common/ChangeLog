@@ -1,5 +1,12 @@
 2008-05-01  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-theme-info.c: (read_cursor_theme), (read_cursor_fonts),
+	(update_theme_index): always use URIs instead for info->path; since
+	gio cleanly distinguishes path/uri (contrary to gnome-vfs), the
+	random mix we have right now is becoming a nuisance
+
+2008-05-01  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-theme-apply.c:
 	* gnome-theme-info.c: (get_file_type), (add_theme_to_hash_by_name),
 	(get_theme_from_hash_by_name), (gnome_theme_read_meta_theme),
