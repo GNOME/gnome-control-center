@@ -25,6 +25,7 @@
 #include "gnome-wp-xml.h"
 #include "wp-cellrenderer.h"
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-thumbnail.h>
@@ -638,15 +639,15 @@ wp_drag_received (GtkWidget *widget,
 {
   if (info == TARGET_URI_LIST || info == TARGET_BGIMAGE)
   {
-    GList * uris;
-    GSList * realuris = NULL;
+    GSList *realuris = NULL;
+    gchar **uris;
 
-    uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
-
-    if (uris != NULL && uris->data != NULL)
+    uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+    if (uris != NULL)
     {
       GdkWindow *window;
       GdkCursor *cursor;
+      gchar **uri;
 
       window = glade_xml_get_widget (data->xml, "appearance_window")->window;
 
@@ -655,16 +656,20 @@ wp_drag_received (GtkWidget *widget,
       gdk_window_set_cursor (window, cursor);
       gdk_cursor_unref (cursor);
 
-      for (; uris != NULL; uris = uris->next)
+      for (uri = uris; *uri; ++uri)
       {
-        realuris = g_slist_append (realuris,
-            g_strdup (gnome_vfs_uri_get_path (uris->data)));
+        GFile *f;
+
+        f = g_file_new_for_uri (*uri);
+        realuris = g_slist_append (realuris, g_file_get_path (f));
+        g_object_unref (f);
       }
 
       wp_add_images (data, realuris);
       gdk_window_set_cursor (window, NULL);
+
+      g_strfreev (uris);
     }
-    gnome_vfs_uri_list_free (uris);
   }
 }
 
@@ -760,16 +765,28 @@ wp_update_preview (GtkFileChooser *chooser,
   if (uri)
   {
     GdkPixbuf *pixbuf = NULL;
-    gchar *mime_type;
+    const gchar *mime_type = NULL;
+    GFile *file;
+    GFileInfo *file_info;
 
-    mime_type = gnome_vfs_get_mime_type (uri);
+    file = g_file_new_for_uri (uri);
+    file_info = g_file_query_info (file,
+                                   G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+                                   G_FILE_QUERY_INFO_NONE,
+                                   NULL, NULL);
+    g_object_unref (file);
+
+    if (file_info != NULL)
+    {
+      mime_type = g_file_info_get_content_type (file_info);
+      g_object_unref (file_info);
+    }
 
     if (mime_type)
     {
       pixbuf = gnome_thumbnail_factory_generate_thumbnail (data->thumb_factory,
                                                            uri,
                                                            mime_type);
-      g_free (mime_type);
     }
 
     if (pixbuf != NULL)
