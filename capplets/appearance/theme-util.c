@@ -25,27 +25,88 @@
 #include <glib/gi18n.h>
 #include <string.h>
 
+static gboolean
+directory_delete_recursive (GFile *directory, GError **error)
+{
+  GFileEnumerator *enumerator;
+  GFileInfo *info;
+  gboolean success = TRUE;
+
+  enumerator = g_file_enumerate_children (directory,
+                                          G_FILE_ATTRIBUTE_STANDARD_NAME ","
+                                          G_FILE_ATTRIBUTE_STANDARD_TYPE,
+                                          G_FILE_QUERY_INFO_NONE,
+                                          NULL, error);
+  if (enumerator == NULL)
+    return FALSE;
+
+  while (success &&
+         (info = g_file_enumerator_next_file (enumerator, NULL, NULL))) {
+    GFile *child;
+
+    child = g_file_get_child (directory, g_file_info_get_name (info));
+
+    if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
+      success = directory_delete_recursive (child, error);
+    }
+    g_object_unref (info);
+
+    if (success)
+      success = g_file_delete (child, NULL, error);
+  }
+  g_file_enumerator_close (enumerator, NULL, NULL);
+
+  return success;
+}
+
+static gboolean
+file_delete_recursive (GFile *file, GError **error)
+{
+  GFileInfo *info;
+  GFileType type;
+
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+  info = g_file_query_info (file,
+                            G_FILE_ATTRIBUTE_STANDARD_TYPE,
+                            G_FILE_QUERY_INFO_NONE,
+                            NULL, error);
+  if (info == NULL)
+    return FALSE;
+
+  type = g_file_info_get_file_type (info);
+  g_object_unref (info);
+
+  if (type == G_FILE_TYPE_DIRECTORY)
+    return directory_delete_recursive (file, error);
+  else
+    return g_file_delete (file, NULL, error);
+}
+
 gboolean
 theme_is_writable (const gpointer theme)
 {
   GnomeThemeCommonInfo *info = theme;
-  GnomeVFSResult vfs_result;
-  GnomeVFSFileInfo *vfs_info;
+  GFile *file;
+  GFileInfo *file_info;
   gboolean writable;
 
   if (info == NULL || info->path == NULL)
     return FALSE;
 
-  vfs_info = gnome_vfs_file_info_new ();
-  vfs_result = gnome_vfs_get_file_info (info->path,
-					vfs_info,
-					GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS);
+  file = g_file_new_for_uri (info->path);
+  file_info = g_file_query_info (file,
+                                 G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
+                                 G_FILE_QUERY_INFO_NONE,
+                                 NULL, NULL);
+  g_object_unref (file);
 
-  writable = ((vfs_result == GNOME_VFS_OK) &&
-              (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ACCESS) &&
-              (vfs_info->permissions & GNOME_VFS_PERM_ACCESS_WRITABLE));
+  if (file_info == NULL)
+    return FALSE;
 
-  gnome_vfs_file_info_unref (vfs_info);
+  writable = g_file_info_get_attribute_boolean (file_info,
+                                                G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+  g_object_unref (file_info);
 
   return writable;
 }
@@ -57,10 +118,8 @@ theme_delete (const gchar *name, ThemeType type)
   GtkDialog *dialog;
   gchar *theme_dir;
   gint response;
-  GList *uri_list;
-  GnomeVFSResult result;
-  GnomeVFSURI *uri;
   GnomeThemeCommonInfo *theme;
+  GFile *dir;
 
   dialog = (GtkDialog *) gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL,
@@ -103,17 +162,10 @@ theme_delete (const gchar *name, ThemeType type)
       return FALSE;
   }
 
-  uri = gnome_vfs_uri_new (theme_dir);
+  dir = g_file_new_for_uri (theme_dir);
   g_free (theme_dir);
 
-  uri_list = g_list_prepend (NULL, uri);
-
-  result = gnome_vfs_xfer_delete_list (uri_list,
-				       GNOME_VFS_XFER_ERROR_MODE_ABORT,
-				       GNOME_VFS_XFER_RECURSIVE,
-				       NULL, NULL);
-
-  if (result != GNOME_VFS_OK) {
+  if (!file_delete_recursive (dir, NULL)) {
     GtkWidget *info_dialog = gtk_message_dialog_new (NULL,
 						     GTK_DIALOG_MODAL,
 						     GTK_MESSAGE_ERROR,
@@ -124,14 +176,13 @@ theme_delete (const gchar *name, ThemeType type)
     rc = FALSE;
   } else {
     /* also delete empty parent directories */
-    GnomeVFSURI *parent = gnome_vfs_uri_get_parent (uri);
-    gnome_vfs_remove_directory_from_uri (parent);
-    gnome_vfs_uri_unref (parent);
+    GFile *parent = g_file_get_parent (dir);
+    g_file_delete (parent, NULL, NULL);
+    g_object_unref (parent);
     rc = TRUE;
   }
 
-  gnome_vfs_uri_list_free (uri_list);
-
+  g_object_unref (dir);
   return rc;
 }
 

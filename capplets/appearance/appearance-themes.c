@@ -65,19 +65,21 @@ theme_get_mtime (const char *name)
 
   theme = gnome_theme_meta_info_find (name);
   if (theme != NULL) {
-    GnomeVFSFileInfo *file_info;
-    GnomeVFSResult result;
+    GFile *file;
+    GFileInfo *file_info;
 
-    file_info = gnome_vfs_file_info_new ();
+    file = g_file_new_for_path (theme->path);
+    file_info = g_file_query_info (file,
+                                   G_FILE_ATTRIBUTE_TIME_MODIFIED,
+                                   G_FILE_QUERY_INFO_NONE,
+                                   NULL, NULL);
+    g_object_unref (file);
 
-    result = gnome_vfs_get_file_info (theme->path, file_info,
-				      GNOME_VFS_FILE_INFO_DEFAULT |
-				      GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-
-    if (result == GNOME_VFS_OK)
-      mtime = file_info->mtime;
-
-    gnome_vfs_file_info_unref (file_info);
+    if (file_info != NULL) {
+      mtime = g_file_info_get_attribute_uint64 (file_info,
+                                                G_FILE_ATTRIBUTE_TIME_MODIFIED);
+      g_object_unref (file_info);
+    }
   }
 
   return mtime;
@@ -1010,28 +1012,24 @@ theme_drag_data_received_cb (GtkWidget *widget,
                              guint info, guint time,
                              AppearanceData *data)
 {
-  GList *uris;
+  gchar **uris;
 
   if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
     return;
 
-  uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+  uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
 
-  if (uris != NULL && uris->data != NULL) {
-    GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
-    gchar *filename;
-
-    if (gnome_vfs_uri_is_local (uri))
-      filename = gnome_vfs_unescape_string (gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
-    else
-      filename = gnome_vfs_unescape_string (gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE), G_DIR_SEPARATOR_S);
-
-    gnome_vfs_uri_list_unref (uris);
+  if (uris != NULL && uris[0] != NULL) {
+    GFile *f = g_file_new_for_uri (uris[0]);
+    gchar *filename = g_file_get_path (f);
+    g_object_unref (f);
 
     gnome_theme_install_from_uri (filename,
         GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")));
     g_free (filename);
   }
+
+  g_strfreev (uris);
 }
 
 static void

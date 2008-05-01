@@ -1,5 +1,13 @@
 2008-05-01  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-themes.c: (theme_get_mtime),
+	(theme_drag_data_received_cb):
+	* theme-util.c: (directory_delete_recursive),
+	(file_delete_recursive), (theme_is_writable), (theme_delete): port a
+	few more functions to gio (part of bug #524401)
+
+2008-05-01  Jens Granseuer  <jensgr@gmx.net>
+
 	Based on a patch by: Lincoln de Sousa <lincoln@minaslivre.org>
 
 	* appearance-desktop.c: (wp_drag_received), (wp_update_preview): more
