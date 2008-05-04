@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+#include <gio/gio.h>
 #include <gdk/gdk.h>
 #include <gnome-theme-info.h>
 #include <theme-thumbnail.h>
@@ -122,8 +123,9 @@ main(int argc, char **argv)
 {
 	GdkPixbuf *pixbuf;
 	GnomeThemeMetaInfo *theme;
-	GnomeVFSURI *uri;
+	GFile *file;
 
+	g_type_init ();
 	g_thread_init (NULL);
 	theme_thumbnail_factory_init (argc, argv);
 
@@ -132,14 +134,9 @@ main(int argc, char **argv)
 		return 1;
 	}
 
-	if (!gnome_vfs_init ()) {
-		g_printerr ("could not initialise gnome-vfs\n");
-		return 1;
-	}
-
-	uri = gnome_vfs_uri_new (argv[1]);
-	theme = gnome_theme_read_meta_theme (uri);
-	gnome_vfs_uri_unref (uri);
+	file = g_file_new_for_commandline_arg (argv[1]);
+	theme = gnome_theme_read_meta_theme (file);
+	g_object_unref (file);
 
 	if (theme) {
 	    pixbuf = generate_meta_theme_thumbnail (theme);
