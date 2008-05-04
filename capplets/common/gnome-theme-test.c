@@ -1,8 +1,5 @@
+#include <config.h>
 #include <gtk/gtk.h>
-#include <libgnomevfs/gnome-vfs-init.h>
-#include <libgnomevfs/gnome-vfs-ops.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
-#include <libgnomevfs/gnome-vfs-directory.h>
 #include <string.h>
 #include <libgnome/gnome-desktop-item.h>
 #include "gnome-theme-info.h"
@@ -14,7 +11,6 @@ main (int argc, char *argv[])
 
   g_thread_init (NULL);
   gtk_init (&argc, &argv);
-  gnome_vfs_init ();
   gnome_theme_init ();
 
   themes = gnome_theme_meta_info_find_all ();
