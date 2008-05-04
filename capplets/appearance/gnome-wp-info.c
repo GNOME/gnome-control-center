@@ -19,52 +19,60 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+#include <glib/gi18n.h>
+#include <gio/gio.h>
 #include "gnome-wp-info.h"
 
 GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
 				 GnomeThumbnailFactory * thumbs) {
-  GnomeWPInfo * new;
-  GnomeVFSFileInfo * info;
-  GnomeVFSResult result;
-  gchar * escaped_path;
+  GnomeWPInfo *wp;
+  GFile *file;
+  GFileInfo *info;
 
-  info = gnome_vfs_file_info_new ();
-  escaped_path = gnome_vfs_escape_path_string (uri);
+  file = g_file_new_for_commandline_arg (uri);
 
-  result = gnome_vfs_get_file_info (escaped_path, info,
-				    GNOME_VFS_FILE_INFO_DEFAULT |
-				    GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
-				    GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (info == NULL || info->mime_type == NULL || result != GNOME_VFS_OK) {
+  info = g_file_query_info (file,
+                            G_FILE_ATTRIBUTE_STANDARD_NAME ","
+                            G_FILE_ATTRIBUTE_STANDARD_SIZE ","
+                            G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE ","
+                            G_FILE_ATTRIBUTE_TIME_MODIFIED,
+                            G_FILE_QUERY_INFO_NONE,
+                            NULL, NULL);
+  g_object_unref (file);
+
+  if (info == NULL || g_file_info_get_content_type (info) == NULL) {
     if (!strcmp (uri, "(none)")) {
-      new = g_new0 (GnomeWPInfo, 1);
+      wp = g_new0 (GnomeWPInfo, 1);
 
-      new->mime_type = g_strdup ("image/x-no-data");
-      new->uri = g_strdup (uri);
-      new->name = g_strdup (_("No Wallpaper"));
-      new->size = 0;
+      wp->mime_type = g_strdup ("image/x-no-data");
+      wp->uri = g_strdup (uri);
+      wp->name = g_strdup (_("No Wallpaper"));
+      wp->size = 0;
     } else {
-      new = NULL;
+      wp = NULL;
     }
   } else {
-    new = g_new0 (GnomeWPInfo, 1);
+    wp = g_new0 (GnomeWPInfo, 1);
 
-    new->uri = g_strdup (uri);
+    wp->uri = g_strdup (uri);
 
-    new->thumburi = gnome_thumbnail_factory_lookup (thumbs,
-						    escaped_path,
-						    info->mtime);
-    new->name = g_strdup (info->name);
-    new->mime_type = g_strdup (info->mime_type);
+    wp->name = g_strdup (g_file_info_get_name (info));
+    if (g_file_info_get_content_type (info) != NULL)
+      wp->mime_type = g_strdup (g_file_info_get_content_type (info));
+    wp->size = g_file_info_get_size (info);
+    wp->mtime = g_file_info_get_attribute_uint64 (info,
+                                                  G_FILE_ATTRIBUTE_TIME_MODIFIED);
 
-    new->size = info->size;
-    new->mtime = info->mtime;
+    wp->thumburi = gnome_thumbnail_factory_lookup (thumbs,
+						   uri,
+						   wp->mtime);
+
   }
-  g_free (escaped_path);
-  gnome_vfs_file_info_unref (info);
 
-  return new;
+  if (info != NULL)
+    g_object_unref (info);
+
+  return wp;
 }
 
 void gnome_wp_info_free (GnomeWPInfo * info) {
@@ -76,7 +84,4 @@ void gnome_wp_info_free (GnomeWPInfo * info) {
   g_free (info->thumburi);
   g_free (info->name);
   g_free (info->mime_type);
-
-  info = NULL;
 }
-

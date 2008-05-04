@@ -24,7 +24,6 @@
 #include <gconf/gconf-client.h>
 #include <gnome.h>
 #include <string.h>
-#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include "gnome-wp-item.h"
 
 static GConfEnumStringPair options_lookup[] = {
@@ -129,20 +128,18 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 				 GnomeThumbnailFactory * thumbnails) {
   GnomeWPItem *item = g_new0 (GnomeWPItem, 1);
 
-  item->filename = gnome_vfs_unescape_string_for_display (filename);
+  item->filename = g_strdup (filename);
+  item->fileinfo = gnome_wp_info_new (filename, thumbnails);
 
-  item->fileinfo = gnome_wp_info_new (item->filename, thumbnails);
-
-  if (item->fileinfo != NULL &&
+  if (item->fileinfo != NULL && item->fileinfo->mime_type != NULL &&
       (g_str_has_prefix (item->fileinfo->mime_type, "image/") ||
        strcmp (item->fileinfo->mime_type, "application/xml") == 0)) {
-    if (item->name == NULL) {
-      if (g_utf8_validate (item->fileinfo->name, -1, NULL))
-	item->name = g_strdup (item->fileinfo->name);
-      else
-	item->name = g_filename_to_utf8 (item->fileinfo->name, -1, NULL,
-					 NULL, NULL);
-    }
+
+    if (g_utf8_validate (item->fileinfo->name, -1, NULL))
+      item->name = g_strdup (item->fileinfo->name);
+    else
+      item->name = g_filename_to_utf8 (item->fileinfo->name, -1, NULL,
+				       NULL, NULL);
 
     gnome_wp_item_update (item);
     gnome_wp_item_update_description (item);
@@ -211,7 +208,7 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
     if (strcmp (item->fileinfo->mime_type, "application/xml") == 0)
       description = _("Slide Show");
     else
-      description = gnome_vfs_mime_get_description (item->fileinfo->mime_type);
+      description = g_content_type_get_description (item->fileinfo->mime_type);
 
     /* translators: <b>wallpaper name</b>
      * mime type, x pixel(s) by y pixel(s)

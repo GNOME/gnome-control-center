@@ -22,7 +22,6 @@
 #define _GNOME_WP_INFO_H_
 
 #include <glib.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <libgnomeui/gnome-thumbnail.h>
 
 typedef struct _GnomeWPInfo GnomeWPInfo;
@@ -33,7 +32,7 @@ struct _GnomeWPInfo {
   gchar * name;
   gchar * mime_type;
 
-  GnomeVFSFileSize size;
+  goffset size;
 
   time_t mtime;
 };

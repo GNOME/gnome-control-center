@@ -931,8 +931,6 @@ desktop_init (AppearanceData *data,
 
   data->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
-  gconf_client_add_dir (data->client, WP_KEYBOARD_PATH,
-      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (data->client, WP_PATH_KEY,
       GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
