@@ -251,6 +251,12 @@ theme_free (GnomeThemeCommonInfo *info)
   }
 }
 
+GQuark
+gnome_theme_info_error_quark (void)
+{
+  return g_quark_from_static_string ("gnome-theme-info-error-quark");
+}
+
 GnomeThemeMetaInfo *
 gnome_theme_read_meta_theme (GFile *meta_theme_uri)
 {
@@ -1552,6 +1558,71 @@ gnome_theme_meta_info_free (GnomeThemeMetaInfo *meta_theme_info)
   g_free (meta_theme_info->icon_theme_name);
   g_free (meta_theme_info->metacity_theme_name);
   g_free (meta_theme_info);
+}
+
+gboolean
+gnome_theme_meta_info_validate (GnomeThemeMetaInfo *info, GError **error)
+{
+  GnomeThemeInfo *theme;
+  gchar *gtkrc;
+
+  g_assert (error == NULL || *error == NULL);
+
+  theme = gnome_theme_info_find (info->gtk_theme_name);
+  if (!theme || !theme->has_gtk) {
+    g_set_error (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_GTK_THEME_NOT_AVAILABLE,
+                 _("This theme will not look as intended because the required GTK+ theme '%s' is not installed."),
+                 info->gtk_theme_name);
+    return FALSE;
+  }
+
+  theme = gnome_theme_info_find (info->metacity_theme_name);
+  if (!theme || !theme->has_metacity) {
+    g_set_error (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_WM_THEME_NOT_AVAILABLE,
+                 _("This theme will not look as intended because the required window manager theme '%s' is not installed."),
+                 info->metacity_theme_name);
+    return FALSE;
+  }
+
+  if (!gnome_theme_icon_info_find (info->icon_theme_name)) {
+    g_set_error (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_ICON_THEME_NOT_AVAILABLE,
+                 _("This theme will not look as intended because the required icon theme '%s' is not installed."),
+                 info->icon_theme_name);
+    return FALSE;
+  }
+
+  /* check for gtk theme engines */
+  gtkrc = gtkrc_find_named (info->gtk_theme_name);
+  if (gtkrc) {
+    GSList *engines = NULL, *l;
+    gboolean found;
+
+    gtkrc_get_details (gtkrc, &engines, NULL);
+    g_free (gtkrc);
+
+    for (l = engines; l; l = l->next) {
+      gchar *lib = g_strconcat ("lib", l->data, ".so", NULL);
+      gchar *full = g_build_filename (GTK_ENGINE_DIR, lib, NULL);
+
+      g_free (lib);
+      found = g_file_test (full, G_FILE_TEST_EXISTS);
+      g_free (full);
+
+      if (!found) {
+        g_set_error (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_GTK_THEME_NOT_AVAILABLE,
+                     _("This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."),
+                     (gchar *) l->data);
+        break;
+      }
+    }
+
+    g_slist_foreach (engines, (GFunc) g_free, NULL);
+    g_slist_free (engines);
+
+    return found;
+  }
+
+  return TRUE;
 }
 
 GnomeThemeMetaInfo *

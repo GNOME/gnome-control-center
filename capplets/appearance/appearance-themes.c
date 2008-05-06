@@ -352,67 +352,6 @@ theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
   return TRUE;
 }
 
-static gchar *
-theme_validate (const GnomeThemeMetaInfo *info)
-{
-  GnomeThemeInfo *theme;
-  gchar *gtkrc;
-
-  theme = gnome_theme_info_find (info->gtk_theme_name);
-  if (!theme || !theme->has_gtk) {
-    return g_strdup_printf (
-        _("This theme will not look as intended because the required GTK+ theme '%s' is not installed."),
-          info->gtk_theme_name);
-  }
-
-  theme = gnome_theme_info_find (info->metacity_theme_name);
-  if (!theme || !theme->has_metacity) {
-    return g_strdup_printf (
-        _("This theme will not look as intended because the required window manager theme '%s' is not installed."),
-          info->metacity_theme_name);
-  }
-
-  if (!gnome_theme_icon_info_find (info->icon_theme_name)) {
-    return g_strdup_printf (
-        _("This theme will not look as intended because the required icon theme '%s' is not installed."),
-        info->gtk_theme_name);
-  }
-
-  /* check for gtk theme engines */
-  gtkrc = gtkrc_find_named (info->gtk_theme_name);
-  if (gtkrc) {
-    GSList *engines = NULL, *l;
-    gchar *msg = NULL;
-    gboolean found;
-
-    gtkrc_get_details (gtkrc, &engines, NULL);
-    g_free (gtkrc);
-
-    for (l = engines; l; l = l->next) {
-      gchar *lib = g_strconcat ("lib", l->data, ".so", NULL);
-      gchar *full = g_build_filename (GTK_ENGINE_DIR, lib, NULL);
-
-      g_free (lib);
-      found = g_file_test (full, G_FILE_TEST_EXISTS);
-      g_free (full);
-
-      if (!found) {
-        msg = g_strdup_printf (
-            _("This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."),
-            (gchar *) l->data);
-        break;
-      }
-    }
-
-    g_slist_foreach (engines, (GFunc) g_free, NULL);
-    g_slist_free (engines);
-
-    return msg;
-  }
-
-  return NULL;
-}
-
 static void
 theme_set_custom_from_theme (const GnomeThemeMetaInfo *info, AppearanceData *data)
 {
@@ -639,16 +578,15 @@ theme_message_area_update (AppearanceData *data)
   gboolean show_revert_font = FALSE;
   gboolean show_error;
   const gchar *message;
-  gchar *error_message;
   gchar *font;
+  GError *error = NULL;
 
   theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
 
   if (!theme)
     return;
 
-  error_message = theme_validate (theme);
-  show_error = (error_message != NULL);
+  show_error = !gnome_theme_meta_info_validate (theme, &error);
 
   if (!show_error) {
     if (theme->background_image != NULL) {
@@ -747,7 +685,7 @@ theme_message_area_update (AppearanceData *data)
   }
 
   if (show_error)
-    message = error_message;
+    message = error->message;
   else if (show_apply_background && show_apply_font && show_revert_font)
     message = _("The current theme suggests a background and a font. Also, the last applied font suggestion can be reverted.");
   else if (show_apply_background && show_revert_font)
@@ -796,7 +734,7 @@ theme_message_area_update (AppearanceData *data)
   }
 
   gtk_label_set_text (GTK_LABEL (data->theme_message_label), message);
-  g_free (error_message);
+  g_clear_error (&error);
 }
 
 static void

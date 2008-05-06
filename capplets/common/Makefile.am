@@ -3,13 +3,13 @@ EXTRA_DIST = ChangeLog
 INCLUDES = \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
+	-DGTK_ENGINE_DIR="\"$(GTK_ENGINE_DIR)\"" 			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-DINSTALL_PREFIX=\"$(prefix)\"					\
 	-I$(top_srcdir)							\
 	-I$(top_srcdir)/libbackground					\
 	-I$(top_srcdir)/libwindow-settings				\
 	$(DBUS_CFLAGS)							\
-	$(VFS_CAPPLET_CFLAGS)						\
 	$(GNOME_DESKTOP_CFLAGS)						\
 	$(METACITY_CFLAGS)						\
 	$(GSD_DBUS_CFLAGS)

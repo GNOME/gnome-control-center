@@ -128,13 +128,23 @@ typedef void (* ThemeChangedCallback) (GnomeThemeCommonInfo *theme,
 				       GnomeThemeChangeType  change_type,
 				       gpointer              user_data);
 
+#define GNOME_THEME_ERROR gnome_theme_info_error_quark ()
+
+enum {
+  GNOME_THEME_ERROR_GTK_THEME_NOT_AVAILABLE = 1,
+  GNOME_THEME_ERROR_WM_THEME_NOT_AVAILABLE,
+  GNOME_THEME_ERROR_ICON_THEME_NOT_AVAILABLE,
+  GNOME_THEME_ERROR_GTK_ENGINE_NOT_AVAILABLE,
+  GNOME_THEME_ERROR_UNKNOWN
+};
+
 
 /* GTK/Metacity/keybinding Themes */
 GnomeThemeInfo     *gnome_theme_info_new                   (void);
 void                gnome_theme_info_free                  (GnomeThemeInfo     *theme_info);
 GnomeThemeInfo     *gnome_theme_info_find                  (const gchar        *theme_name);
 GList              *gnome_theme_info_find_by_type          (guint               elements);
-
+GQuark              gnome_theme_info_error_quark           (void);
 
 /* Icon Themes */
 GnomeThemeIconInfo *gnome_theme_icon_info_new              (void);
@@ -159,6 +169,8 @@ GnomeThemeMetaInfo *gnome_theme_meta_info_find             (const gchar        *
 GList              *gnome_theme_meta_info_find_all         (void);
 gint                gnome_theme_meta_info_compare          (GnomeThemeMetaInfo *a,
 							    GnomeThemeMetaInfo *b);
+gboolean            gnome_theme_meta_info_validate         (const GnomeThemeMetaInfo *info,
+                                                            GError            **error);
 GnomeThemeMetaInfo *gnome_theme_read_meta_theme            (GFile              *meta_theme_uri);
 
 /* Other */

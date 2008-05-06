@@ -57,7 +57,6 @@ INCLUDES = \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_GLADE_DIR="\"$(gladedir)\"" \
 	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \
-	-DGTK_ENGINE_DIR="\"$(GTK_ENGINE_DIR)\"" \
 	-DWALLPAPER_DATADIR="\"$(wallpaperdir)\""
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
