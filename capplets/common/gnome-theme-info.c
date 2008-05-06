@@ -1561,12 +1561,12 @@ gnome_theme_meta_info_free (GnomeThemeMetaInfo *meta_theme_info)
 }
 
 gboolean
-gnome_theme_meta_info_validate (GnomeThemeMetaInfo *info, GError **error)
+gnome_theme_meta_info_validate (const GnomeThemeMetaInfo *info, GError **error)
 {
   GnomeThemeInfo *theme;
   gchar *gtkrc;
 
-  g_assert (error == NULL || *error == NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   theme = gnome_theme_info_find (info->gtk_theme_name);
   if (!theme || !theme->has_gtk) {
@@ -1609,7 +1609,7 @@ gnome_theme_meta_info_validate (GnomeThemeMetaInfo *info, GError **error)
       g_free (full);
 
       if (!found) {
-        g_set_error (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_GTK_THEME_NOT_AVAILABLE,
+        g_set_error (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_GTK_ENGINE_NOT_AVAILABLE,
                      _("This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."),
                      (gchar *) l->data);
         break;
