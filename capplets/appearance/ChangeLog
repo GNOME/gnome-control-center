@@ -1,5 +1,18 @@
 2008-05-07  Jens Granseuer  <jensgr@gmx.net>
 
+	Add support for installing missing GTK+ theme engines via
+	packagekit (bug #511065)
+
+	* appearance-themes.c: (theme_message_area_response_cb),
+	(theme_message_area_update): when we detect a missing engine,
+	check if packagekit is available on the session bus. If it is show
+	an install button to pull the corresponding package
+	* appearance.h:
+	* theme-util.c: (packagekit_available), (theme_install_file):
+	* theme-util.h: add support functions
+
+2008-05-07  Jens Granseuer  <jensgr@gmx.net>
+
 	Patch by: Lincoln de Sousa <lincoln@minaslivre.org>
 
 	* theme-save.c: (setup_directory_structure), (write_theme_to_disk):

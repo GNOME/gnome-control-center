@@ -20,10 +20,13 @@
  */
 
 #include "appearance.h"
-#include "theme-util.h"
 
-#include <glib/gi18n.h>
 #include <string.h>
+#include <glib/gi18n.h>
+#include <dbus/dbus-glib.h>
+#include <dbus/dbus-glib-bindings.h>
+
+#include "theme-util.h"
 
 static gboolean
 directory_delete_recursive (GFile *directory, GError **error)
@@ -234,4 +237,73 @@ theme_find_in_model (GtkTreeModel *model, const gchar *name, GtkTreeIter *iter)
   }
 
   return FALSE;
+}
+
+gboolean
+packagekit_available (void)
+{
+  DBusGConnection *connection;
+  DBusGProxy *proxy;
+  gboolean available = FALSE;
+
+  connection = dbus_g_bus_get (DBUS_BUS_SESSION, NULL);
+  if (connection == NULL) {
+    return FALSE;
+  }
+
+  proxy = dbus_g_proxy_new_for_name (connection,
+                                     DBUS_SERVICE_DBUS,
+                                     DBUS_PATH_DBUS,
+                                     DBUS_INTERFACE_DBUS);
+
+  org_freedesktop_DBus_name_has_owner (proxy,
+                                       "org.freedesktop.PackageKit",
+                                       &available,
+                                       NULL);
+
+  g_object_unref (proxy);
+  dbus_g_connection_unref (connection);
+
+  return available;
+}
+
+void
+theme_install_file (GtkWindow *parent, const gchar *path)
+{
+  DBusGConnection *connection;
+  DBusGProxy *proxy;
+  GError *error = NULL;
+  gboolean ret;
+
+  connection = dbus_g_bus_get (DBUS_BUS_SESSION, NULL);
+  if (connection == NULL) {
+    g_warning ("Could not get session bus");
+    return;
+  }
+
+  proxy = dbus_g_proxy_new_for_name (connection,
+                                     "org.freedesktop.PackageKit",
+                                     "/org/freedesktop/PackageKit",
+                                     "org.freedesktop.PackageKit");
+
+
+  ret = dbus_g_proxy_call (proxy, "InstallProvideFile", &error,
+                           G_TYPE_STRING, path,
+                           G_TYPE_INVALID, G_TYPE_INVALID);
+
+  g_object_unref (proxy);
+
+  if (!ret) {
+    GtkWidget *dialog = gtk_message_dialog_new (NULL,
+			GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_ERROR,
+			GTK_BUTTONS_OK,
+			_("Could not install theme engine"));
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), error->message);
+
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
+    g_error_free (error);
+  }
+  dbus_g_connection_unref (connection);
 }

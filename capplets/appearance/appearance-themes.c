@@ -42,7 +42,8 @@ enum
 {
   RESPONSE_APPLY_BG,
   RESPONSE_REVERT_FONT,
-  RESPONSE_APPLY_FONT
+  RESPONSE_APPLY_FONT,
+  RESPONSE_INSTALL_ENGINE
 };
 
 enum
@@ -56,6 +57,8 @@ static const GtkTargetEntry drop_types[] =
   {"text/uri-list", 0, TARGET_URI_LIST},
   {"_NETSCAPE_URL", 0, TARGET_NS_URL}
 };
+
+static void theme_message_area_update (AppearanceData *data);
 
 static time_t
 theme_get_mtime (const char *name)
@@ -441,6 +444,7 @@ theme_message_area_response_cb (GtkWidget *w,
 {
   const GnomeThemeMetaInfo *theme;
   gchar *tmpfont;
+  gchar *engine_path;
 
   theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
   if (!theme)
@@ -566,6 +570,16 @@ theme_message_area_response_cb (GtkWidget *w,
                                  theme->monospace_font, NULL);
       }
       break;
+
+    case RESPONSE_INSTALL_ENGINE:
+      engine_path = gtk_theme_info_missing_engine (theme->gtk_theme_name, FALSE);
+      if (engine_path != NULL) {
+              theme_install_file (GTK_WINDOW (gtk_widget_get_toplevel (data->install_button)),
+                                  engine_path);
+              g_free (engine_path);
+      }
+      theme_message_area_update (data);
+      break;
   }
 }
 
@@ -583,8 +597,11 @@ theme_message_area_update (AppearanceData *data)
 
   theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
 
-  if (!theme)
+  if (!theme) {
+    if (data->theme_message_area != NULL)
+      gtk_widget_hide (data->theme_message_area);
     return;
+  }
 
   show_error = !gnome_theme_meta_info_validate (theme, &error);
 
@@ -663,6 +680,10 @@ theme_message_area_update (AppearanceData *data)
         GEDIT_MESSAGE_AREA (data->theme_message_area),
         _("Revert Font"),
         RESPONSE_REVERT_FONT);
+    data->install_button = gedit_message_area_add_button (
+        GEDIT_MESSAGE_AREA (data->theme_message_area),
+        _("Install"),
+        RESPONSE_INSTALL_ENGINE);
 
     data->theme_message_label = gtk_label_new (NULL);
     gtk_widget_show (data->theme_message_label);
@@ -717,6 +738,13 @@ theme_message_area_update (AppearanceData *data)
     gtk_widget_show (data->revert_font_button);
   else
     gtk_widget_hide (data->revert_font_button);
+
+  if (show_error
+      && g_error_matches (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_GTK_ENGINE_NOT_AVAILABLE)
+      && packagekit_available ())
+    gtk_widget_show (data->install_button);
+  else
+    gtk_widget_hide (data->install_button);
 
   if (show_error || show_apply_background || show_apply_font || show_revert_font) {
     gtk_widget_show (data->theme_message_area);

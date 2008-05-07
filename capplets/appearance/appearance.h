@@ -62,6 +62,7 @@ typedef struct {
   GtkWidget *apply_background_button;
   GtkWidget *revert_font_button;
   GtkWidget *apply_font_button;
+  GtkWidget *install_button;
   GtkWidget *theme_info_icon;
   GtkWidget *theme_error_icon;
   gchar *revert_application_font;
