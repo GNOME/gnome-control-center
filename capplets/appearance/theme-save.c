@@ -21,7 +21,7 @@
 
 #include "appearance.h"
 
-#include <libgnomevfs/gnome-vfs-ops.h>
+#include <glib/gstdio.h>
 
 #include "theme-save.h"
 #include "theme-util.h"
@@ -125,31 +125,24 @@ setup_directory_structure (const gchar  *theme_name,
 			   GError      **error)
 {
   gchar *dir, *theme_name_dir;
-  GnomeVFSURI *uri;
   gboolean retval = TRUE;
 
   theme_name_dir = str_remove_slash (theme_name);
 
   dir = g_build_filename (g_get_home_dir (), ".themes", NULL);
-  uri = gnome_vfs_uri_new (dir);
-  if (!gnome_vfs_uri_exists (uri))
-    gnome_vfs_make_directory_for_uri (uri, 0775);
-  gnome_vfs_uri_unref (uri);
+  if (!g_file_test (dir, G_FILE_TEST_EXISTS))
+    g_mkdir (dir, 0775);
   g_free (dir);
 
   dir = g_build_filename (g_get_home_dir (), ".themes", theme_name_dir, NULL);
-  uri = gnome_vfs_uri_new (dir);
-  if (!gnome_vfs_uri_exists (uri))
-    gnome_vfs_make_directory_for_uri (uri, 0775);
-  gnome_vfs_uri_unref (uri);
+  if (!g_file_test (dir, G_FILE_TEST_EXISTS))
+    g_mkdir (dir, 0775);
   g_free (dir);
 
   dir = g_build_filename (g_get_home_dir (), ".themes", theme_name_dir, "index.theme", NULL);
   g_free (theme_name_dir);
-  uri = gnome_vfs_uri_new (dir);
-  g_free (dir);
 
-  if (gnome_vfs_uri_exists (uri)) {
+  if (g_file_test (dir, G_FILE_TEST_EXISTS)) {
     GtkDialog *dialog;
     GtkWidget *button;
     gint response;
@@ -166,8 +159,7 @@ setup_directory_structure (const gchar  *theme_name,
     gtk_widget_destroy (GTK_WIDGET (dialog));
     retval = (response != GTK_RESPONSE_CANCEL);
   }
-
-  gnome_vfs_uri_unref (uri);
+  g_free (dir);
 
   return retval;
 }
@@ -180,10 +172,10 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
 		     GError             **error)
 {
   gchar *dir, *theme_name_dir;
-  GnomeVFSURI *uri;
-  GnomeVFSURI *target_uri;
-  GnomeVFSHandle *handle = NULL;
-  GnomeVFSFileSize bytes_written;
+  GFile *tmp_file;
+  GFile *target_file;
+  GOutputStream *output;
+
   gchar *str, *current_background;
   GConfClient *client;
   const gchar *theme_header =
@@ -201,20 +193,19 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
   dir = g_build_filename (g_get_home_dir (), ".themes", theme_name_dir, "index.theme~", NULL);
   g_free (theme_name_dir);
 
-  uri = gnome_vfs_uri_new (dir);
+  tmp_file = g_file_new_for_path (dir);
   dir [strlen (dir) - 1] = '\000';
-  target_uri = gnome_vfs_uri_new (dir);
+  target_file = g_file_new_for_path (dir);
   g_free (dir);
-  gnome_vfs_create_uri (&handle, uri, GNOME_VFS_OPEN_READ | GNOME_VFS_OPEN_WRITE, FALSE, 0644);
-
-  gnome_vfs_truncate_handle (handle, 0);
 
   /* start making the theme file */
   str = g_strdup_printf (theme_header, theme_name, theme_description,
 			 theme_info->gtk_theme_name,
 			 theme_info->metacity_theme_name,
 			 theme_info->icon_theme_name);
-  gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+
+  output = G_OUTPUT_STREAM (g_file_create (tmp_file, G_FILE_CREATE_NONE, NULL, NULL));
+  g_output_stream_write (output, str, strlen (str), NULL, NULL);
   g_free (str);
 
   if (theme_info->gtk_color_scheme) {
@@ -224,7 +215,8 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
       if (*a == '\n')
         *a = ',';
     str = g_strdup_printf ("GtkColorScheme=%s\n", tmp);
-    gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+    g_output_stream_write (output, str, strlen (str), NULL, NULL);
+
     g_free (str);
     g_free (tmp);
   }
@@ -238,7 +230,7 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
 #else
     str = g_strdup_printf ("CursorFont=%s\n", theme_info->cursor_theme_name);
 #endif
-    gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+    g_output_stream_write (output, str, strlen (str), NULL, NULL);
     g_free (str);
   }
 
@@ -249,7 +241,7 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
     if (current_background != NULL) {
       str = g_strdup_printf ("BackgroundImage=%s\n", current_background);
 
-      gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+      g_output_stream_write (output, str, strlen (str), NULL, NULL);
 
       g_free (current_background);
       g_free (str);
@@ -257,11 +249,11 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
     g_object_unref (client);
   }
 
-  gnome_vfs_close (handle);
+  g_file_move (tmp_file, target_file, G_FILE_COPY_NONE, NULL, NULL, NULL, NULL);
+  g_output_stream_close (output, NULL, NULL);
 
-  gnome_vfs_move_uri (uri, target_uri, TRUE);
-  gnome_vfs_uri_unref (uri);
-  gnome_vfs_uri_unref (target_uri);
+  g_object_unref (tmp_file);
+  g_object_unref (target_file);
 
   return TRUE;
 }
