@@ -145,6 +145,8 @@ void                gnome_theme_info_free                  (GnomeThemeInfo     *
 GnomeThemeInfo     *gnome_theme_info_find                  (const gchar        *theme_name);
 GList              *gnome_theme_info_find_by_type          (guint               elements);
 GQuark              gnome_theme_info_error_quark           (void);
+gchar              *gtk_theme_info_missing_engine          (const gchar *gtk_theme,
+                                                            gboolean nameOnly);
 
 /* Icon Themes */
 GnomeThemeIconInfo *gnome_theme_icon_info_new              (void);

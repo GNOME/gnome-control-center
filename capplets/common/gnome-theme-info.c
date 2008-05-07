@@ -1417,6 +1417,45 @@ gnome_theme_info_find_all_helper (const gchar *key,
   *themes = g_list_prepend (*themes, list->data);
 }
 
+gchar *
+gtk_theme_info_missing_engine (const gchar *gtk_theme, gboolean nameOnly)
+{
+  gchar *engine = NULL;
+  gchar *gtkrc;
+
+  gtkrc = gtkrc_find_named (gtk_theme);
+  if (gtkrc) {
+    GSList *engines = NULL, *l;
+    gboolean found;
+
+    gtkrc_get_details (gtkrc, &engines, NULL);
+    g_free (gtkrc);
+
+    for (l = engines; l; l = l->next) {
+      gchar *lib = g_strconcat ("lib", l->data, ".so", NULL);
+      gchar *full = g_build_filename (GTK_ENGINE_DIR, lib, NULL);
+
+      g_free (lib);
+      found = g_file_test (full, G_FILE_TEST_EXISTS);
+
+      if (!found) {
+        if (nameOnly)
+          engine = g_strdup (l->data);
+        else
+          engine = full;
+        break;
+      }
+
+      g_free (full);
+    }
+
+    g_slist_foreach (engines, (GFunc) g_free, NULL);
+    g_slist_free (engines);
+  }
+
+  return engine;
+}
+
 /* Icon themes */
 GnomeThemeIconInfo *
 gnome_theme_icon_info_new (void)
@@ -1564,7 +1603,7 @@ gboolean
 gnome_theme_meta_info_validate (const GnomeThemeMetaInfo *info, GError **error)
 {
   GnomeThemeInfo *theme;
-  gchar *gtkrc;
+  gchar *engine;
 
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -1592,34 +1631,13 @@ gnome_theme_meta_info_validate (const GnomeThemeMetaInfo *info, GError **error)
   }
 
   /* check for gtk theme engines */
-  gtkrc = gtkrc_find_named (info->gtk_theme_name);
-  if (gtkrc) {
-    GSList *engines = NULL, *l;
-    gboolean found;
-
-    gtkrc_get_details (gtkrc, &engines, NULL);
-    g_free (gtkrc);
-
-    for (l = engines; l; l = l->next) {
-      gchar *lib = g_strconcat ("lib", l->data, ".so", NULL);
-      gchar *full = g_build_filename (GTK_ENGINE_DIR, lib, NULL);
-
-      g_free (lib);
-      found = g_file_test (full, G_FILE_TEST_EXISTS);
-      g_free (full);
-
-      if (!found) {
-        g_set_error (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_GTK_ENGINE_NOT_AVAILABLE,
-                     _("This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."),
-                     (gchar *) l->data);
-        break;
-      }
-    }
-
-    g_slist_foreach (engines, (GFunc) g_free, NULL);
-    g_slist_free (engines);
-
-    return found;
+  engine = gtk_theme_info_missing_engine (info->gtk_theme_name, TRUE);
+  if (engine != NULL) {
+    g_set_error (error, GNOME_THEME_ERROR, GNOME_THEME_ERROR_GTK_ENGINE_NOT_AVAILABLE,
+                 _("This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."),
+                 engine);
+    g_free (engine);
+    return FALSE;
   }
 
   return TRUE;
