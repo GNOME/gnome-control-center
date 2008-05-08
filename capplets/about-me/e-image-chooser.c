@@ -25,17 +25,12 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <gtk/gtkalignment.h>
-#include <gtk/gtkframe.h>
-#include <gtk/gtkimage.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtkdnd.h>
+#include <gtk/gtk.h>
 
 #include "e-image-chooser.h"
 
 struct _EImageChooserPrivate {
 
-	GtkWidget *frame;
 	GtkWidget *image;
 	GtkWidget *browse_button;
 
@@ -62,9 +57,6 @@ static void e_image_chooser_dispose      (GObject *object);
 static gboolean image_drag_motion_cb (GtkWidget *widget,
 				      GdkDragContext *context,
 				      gint x, gint y, guint time, EImageChooser *chooser);
-static void image_drag_leave_cb (GtkWidget *widget,
-				 GdkDragContext *context,
-				 guint time, EImageChooser *chooser);
 static gboolean image_drag_drop_cb (GtkWidget *widget,
 				    GdkDragContext *context,
 				    gint x, gint y, guint time, EImageChooser *chooser);
@@ -144,26 +136,20 @@ e_image_chooser_init (EImageChooser *chooser)
 
 	priv = chooser->priv = g_new0 (EImageChooserPrivate, 1);
 
-	priv->frame = gtk_frame_new ("");
 	priv->image = gtk_image_new ();
 
-	gtk_frame_set_shadow_type (GTK_FRAME (priv->frame), GTK_SHADOW_NONE);
-
-	gtk_container_add (GTK_CONTAINER (priv->frame), priv->image);
 	gtk_box_set_homogeneous (GTK_BOX (chooser), FALSE);
-	gtk_box_pack_start (GTK_BOX (chooser), priv->frame, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (chooser), priv->image, TRUE, TRUE, 0);
 
 	gtk_drag_dest_set (priv->image, 0, image_drag_types, num_image_drag_types, GDK_ACTION_COPY);
 	g_signal_connect (priv->image,
 			  "drag_motion", G_CALLBACK (image_drag_motion_cb), chooser);
 	g_signal_connect (priv->image,
-			  "drag_leave", G_CALLBACK (image_drag_leave_cb), chooser);
-	g_signal_connect (priv->image,
 			  "drag_drop", G_CALLBACK (image_drag_drop_cb), chooser);
 	g_signal_connect (priv->image,
 			  "drag_data_received", G_CALLBACK (image_drag_data_received_cb), chooser);
 
-	gtk_widget_show_all (priv->frame);
+	gtk_widget_show_all (priv->image);
 
 	/* we default to being editable */
 	priv->editable = TRUE;
@@ -209,9 +195,15 @@ set_image_from_data (EImageChooser *chooser,
 
 	if (pixbuf) {
 		GdkPixbuf *scaled;
+		GtkRequisition chooser_size;
 
 		float scale;
 		int new_height, new_width;
+
+		gtk_widget_size_request (gtk_widget_get_parent (GTK_WIDGET (chooser)),
+		                         &chooser_size);
+		chooser_size.width -= 5;
+		chooser_size.height -= 5;
 
 		new_height = gdk_pixbuf_get_height (pixbuf);
 		new_width = gdk_pixbuf_get_width (pixbuf);
@@ -224,16 +216,16 @@ set_image_from_data (EImageChooser *chooser,
 			 || chooser->priv->image_width < new_width) {
 			/* we need to scale down */
 			if (new_height > new_width)
-				scale = (float)chooser->priv->image_height / new_height;
+				scale = (float)chooser_size.height / new_height;
 			else
-				scale = (float)chooser->priv->image_width / new_width;
+				scale = (float)chooser_size.width / new_width;
 		}
 		else {
 			/* we need to scale up */
 			if (new_height > new_width)
-				scale = (float)new_height / chooser->priv->image_height;
+				scale = (float)new_height / chooser_size.height;
 			else
-				scale = (float)new_width / chooser->priv->image_width;
+				scale = (float)new_width / chooser_size.width;
 		}
 
 		if (scale == 1.0) {
@@ -245,8 +237,8 @@ set_image_from_data (EImageChooser *chooser,
 		else {
 			new_width *= scale;
 			new_height *= scale;
-			new_width = MIN (new_width, chooser->priv->image_width);
-			new_height = MIN (new_height, chooser->priv->image_height);
+			new_width = MIN (new_width, chooser_size.width);
+			new_height = MIN (new_height, chooser_size.height);
 
 			scaled = gdk_pixbuf_scale_simple (pixbuf,
 							  new_width, new_height,
@@ -288,23 +280,13 @@ image_drag_motion_cb (GtkWidget *widget,
 		if (!strcmp (possible_type, URI_LIST_TYPE)) {
 			g_free (possible_type);
 			gdk_drag_status (context, GDK_ACTION_COPY, time);
-			gtk_frame_set_shadow_type (GTK_FRAME (chooser->priv->frame), GTK_SHADOW_IN);
 			return TRUE;
 		}
 
 		g_free (possible_type);
 	}
 
-	gtk_frame_set_shadow_type (GTK_FRAME (chooser->priv->frame), GTK_SHADOW_NONE);
 	return FALSE;
-}
-
-static void
-image_drag_leave_cb (GtkWidget *widget,
-		     GdkDragContext *context,
-		     guint time, EImageChooser *chooser)
-{
-	gtk_frame_set_shadow_type (GTK_FRAME (chooser->priv->frame), GTK_SHADOW_NONE);
 }
 
 static gboolean
@@ -318,7 +300,6 @@ image_drag_drop_cb (GtkWidget *widget,
 		return FALSE;
 
 	if (context->targets == NULL) {
-		gtk_frame_set_shadow_type (GTK_FRAME (chooser->priv->frame), GTK_SHADOW_NONE);
 		return FALSE;
 	}
 
@@ -331,14 +312,12 @@ image_drag_drop_cb (GtkWidget *widget,
 			gtk_drag_get_data (widget, context,
 					   GDK_POINTER_TO_ATOM (p->data),
 					   time);
-			gtk_frame_set_shadow_type (GTK_FRAME (chooser->priv->frame), GTK_SHADOW_NONE);
 			return TRUE;
 		}
 
 		g_free (possible_type);
 	}
 
-	gtk_frame_set_shadow_type (GTK_FRAME (chooser->priv->frame), GTK_SHADOW_NONE);
 	return FALSE;
 }
 
