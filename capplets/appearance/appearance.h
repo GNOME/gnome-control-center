@@ -75,4 +75,7 @@ typedef struct {
   GdkPixbuf *gtk_theme_icon;
   GdkPixbuf *window_theme_icon;
   GdkPixbuf *icon_theme_icon;
+  GtkWidget *style_message_area;
+  GtkWidget *style_message_label;
+  GtkWidget *style_install_button;
 } AppearanceData;
