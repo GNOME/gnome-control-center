@@ -333,7 +333,7 @@ get_user_login (void)
 	struct passwd pwd, *err;
 
 	int i;
-#if __sun
+#if defined(__sun) && !defined(_POSIX_PTHREAD_SEMANTICS)
 	i = getpwuid_r (getuid (), &pwd, buf, sizeof (buf));
 	return (i != 0) ? g_strdup (pwd.pw_name) : NULL;
 #else
