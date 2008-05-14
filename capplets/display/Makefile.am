@@ -1,9 +1,18 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = display
 
+gladedir = $(pkgdatadir)/glade
+dist_glade_DATA = display-capplet.glade
+
 bin_PROGRAMS = gnome-display-properties
 
-gnome_display_properties_SOURCES = main.c
+gnome_display_properties_SOURCES =	\
+	xrandr-capplet.c		\
+	scrollarea.c			\
+	foo-marshal.c			\
+	scrollarea.h			\
+	foo-marshal.h
+
 gnome_display_properties_LDFLAGS = -export-dynamic
 gnome_display_properties_LDADD = \
 	$(DISPLAY_CAPPLET_LIBS) \
