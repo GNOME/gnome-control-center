@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.21.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-06 18:34+0200\n"
-"PO-Revision-Date: 2008-05-06 18:38+0200\n"
+"POT-Creation-Date: 2008-05-14 14:08+0200\n"
+"PO-Revision-Date: 2008-05-14 14:08+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -572,53 +572,40 @@ msgstr "side"
 msgid "[WALLPAPER...]"
 msgstr "[BAKGRUNN...]"
 
-#: ../capplets/appearance/appearance-style.c:157
-#: ../capplets/common/gnome-theme-info.c:436
-#: ../capplets/common/gnome-theme-info.c:625
+#: ../capplets/appearance/appearance-style.c:160
+#: ../capplets/common/gnome-theme-info.c:442
+#: ../capplets/common/gnome-theme-info.c:631
 msgid "Default Pointer"
 msgstr "Forvalgt peker"
 
-#: ../capplets/appearance/appearance-themes.c:365
-#, c-format
-msgid ""
-"This theme will not look as intended because the required GTK+ theme '%s' is "
-"not installed."
-msgstr "Dette temaet vil ikke se ut som det var tenkt fordi GTK+-tema «%s» ikke er installert."
+#: ../capplets/appearance/appearance-style.c:222
+#: ../capplets/appearance/appearance-themes.c:686
+msgid "Install"
+msgstr "Installer"
 
-#: ../capplets/appearance/appearance-themes.c:372
-#, c-format
-msgid ""
-"This theme will not look as intended because the required window manager "
-"theme '%s' is not installed."
-msgstr "Dette temaet vil ikke se ut som det var tenkt fordi tema «%s» for vindushåndtereren ikke er installert."
-
-#: ../capplets/appearance/appearance-themes.c:378
-#, c-format
-msgid ""
-"This theme will not look as intended because the required icon theme '%s' is "
-"not installed."
-msgstr "Dette temaet vil ikke se ut som tenkt fordi ikontemaet «%s» ikke er installert."
-
-#: ../capplets/appearance/appearance-themes.c:402
+#: ../capplets/appearance/appearance-style.c:242
+#: ../capplets/common/gnome-theme-info.c:1637
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
 "'%s' is not installed."
-msgstr "Dette temaet vil ikke se ut som tenkt fordi temamotor «%s» for GTK+ ikke er installert."
+msgstr ""
+"Dette temaet vil ikke se ut som tenkt fordi temamotor «%s» for GTK+ ikke er "
+"installert."
 
-#: ../capplets/appearance/appearance-themes.c:719
+#: ../capplets/appearance/appearance-themes.c:674
 msgid "Apply Background"
 msgstr "Bruk bakgrunn"
 
-#: ../capplets/appearance/appearance-themes.c:723
+#: ../capplets/appearance/appearance-themes.c:678
 msgid "Apply Font"
 msgstr "Bruk skrift"
 
-#: ../capplets/appearance/appearance-themes.c:727
+#: ../capplets/appearance/appearance-themes.c:682
 msgid "Revert Font"
 msgstr "Forkast skrift"
 
-#: ../capplets/appearance/appearance-themes.c:753
+#: ../capplets/appearance/appearance-themes.c:712
 msgid ""
 "The current theme suggests a background and a font. Also, the last applied "
 "font suggestion can be reverted."
@@ -626,7 +613,7 @@ msgstr ""
 "Aktivt tema foreslår en bakgrunn og en skrift. I tillegg kan sist brukte "
 "skriftforslag forkastes."
 
-#: ../capplets/appearance/appearance-themes.c:755
+#: ../capplets/appearance/appearance-themes.c:714
 msgid ""
 "The current theme suggests a background. Also, the last applied font "
 "suggestion can be reverted."
@@ -634,29 +621,29 @@ msgstr ""
 "Aktivt tema foreslår en bakgrunn. Sist valgte skriftforslag kan også "
 "forkastes."
 
-#: ../capplets/appearance/appearance-themes.c:757
+#: ../capplets/appearance/appearance-themes.c:716
 msgid "The current theme suggests a background and a font."
 msgstr "Aktivt tema foreslår en bakgrunn og en skrift."
 
-#: ../capplets/appearance/appearance-themes.c:759
+#: ../capplets/appearance/appearance-themes.c:718
 msgid ""
 "The current theme suggests a font. Also, the last applied font suggestion "
 "can be reverted."
 msgstr "Aktivt tema foreslår også en skrift. Skriften kan også forkastes."
 
-#: ../capplets/appearance/appearance-themes.c:761
+#: ../capplets/appearance/appearance-themes.c:720
 msgid "The current theme suggests a background."
 msgstr "Aktivt tema foreslår en bakgrunn."
 
-#: ../capplets/appearance/appearance-themes.c:763
+#: ../capplets/appearance/appearance-themes.c:722
 msgid "The last applied font suggestion can be reverted."
 msgstr "Sist valgte skriftforslag kan forkastes."
 
-#: ../capplets/appearance/appearance-themes.c:765
+#: ../capplets/appearance/appearance-themes.c:724
 msgid "The current theme suggests a font."
 msgstr "Aktivt tema foreslår en skrift."
 
-#: ../capplets/appearance/appearance-themes.c:1081
+#: ../capplets/appearance/appearance-themes.c:1047
 #: ../capplets/default-applications/gnome-da-capplet.c:1080
 #: ../capplets/sound/sound-properties-capplet.c:328
 msgid "Custom"
@@ -1177,22 +1164,26 @@ msgstr "Temapakker"
 msgid "Theme name must be present"
 msgstr "Navn på tema må oppgis"
 
-#: ../capplets/appearance/theme-save.c:161
+#: ../capplets/appearance/theme-save.c:154
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "Tema eksisterer allerede. Vil du erstatte det?"
 
-#: ../capplets/appearance/theme-save.c:162
+#: ../capplets/appearance/theme-save.c:155
 #: ../capplets/common/file-transfer-dialog.c:450
 msgid "_Overwrite"
 msgstr "_Overskriv"
 
-#: ../capplets/appearance/theme-util.c:128
+#: ../capplets/appearance/theme-util.c:131
 msgid "Would you like to delete this theme?"
 msgstr "Vil du slette dette temaet?"
 
-#: ../capplets/appearance/theme-util.c:173
+#: ../capplets/appearance/theme-util.c:176
 msgid "Theme cannot be deleted"
 msgstr "Tema kan ikke slettes"
+
+#: ../capplets/appearance/theme-util.c:301
+msgid "Could not install theme engine"
+msgstr "Kan ikke installere temamotor"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1414,33 +1405,60 @@ msgstr "Vennligst velg et bilde."
 msgid "_Select"
 msgstr "_Velg"
 
-#: ../capplets/common/gnome-theme-info.c:626
+#: ../capplets/common/gnome-theme-info.c:632
 msgid "Default Pointer - Current"
 msgstr "Forvalgt peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:630
+#: ../capplets/common/gnome-theme-info.c:636
 msgid "White Pointer"
 msgstr "Hvit peker"
 
-#: ../capplets/common/gnome-theme-info.c:631
+#: ../capplets/common/gnome-theme-info.c:637
 msgid "White Pointer - Current"
 msgstr "Hvit peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:635
+#: ../capplets/common/gnome-theme-info.c:641
 msgid "Large Pointer"
 msgstr "Stor peker"
 
-#: ../capplets/common/gnome-theme-info.c:636
+#: ../capplets/common/gnome-theme-info.c:642
 msgid "Large Pointer - Current"
 msgstr "Stor peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:640
+#: ../capplets/common/gnome-theme-info.c:646
 msgid "Large White Pointer - Current"
 msgstr "Stor hvit peker - nåværende"
 
-#: ../capplets/common/gnome-theme-info.c:641
+#: ../capplets/common/gnome-theme-info.c:647
 msgid "Large White Pointer"
 msgstr "Stor hvit peker"
+
+#: ../capplets/common/gnome-theme-info.c:1613
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme '%s' is "
+"not installed."
+msgstr ""
+"Dette temaet vil ikke se ut som det var tenkt fordi GTK+-tema «%s» ikke er "
+"installert."
+
+#: ../capplets/common/gnome-theme-info.c:1621
+#, c-format
+msgid ""
+"This theme will not look as intended because the required window manager "
+"theme '%s' is not installed."
+msgstr ""
+"Dette temaet vil ikke se ut som det var tenkt fordi tema «%s» for "
+"vindushåndtereren ikke er installert."
+
+#: ../capplets/common/gnome-theme-info.c:1628
+#, c-format
+msgid ""
+"This theme will not look as intended because the required icon theme '%s' is "
+"not installed."
+msgstr ""
+"Dette temaet vil ikke se ut som tenkt fordi ikontemaet «%s» ikke er "
+"installert."
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
@@ -1907,7 +1925,7 @@ msgid "Sound"
 msgstr "Lyd"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1156
+#: ../libslab/bookmark-agent.c:1158
 msgid "Desktop"
 msgstr "Skrivebord"
 
@@ -2836,36 +2854,36 @@ msgid "Windows"
 msgstr "Vinduer"
 
 #. make start action
-#: ../libslab/application-tile.c:369
+#: ../libslab/application-tile.c:372
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>Start %s</b>"
 
-#: ../libslab/application-tile.c:388 ../libslab/bookmark-agent.c:1059
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1059
 msgid "Help"
 msgstr "Hjelp"
 
-#: ../libslab/application-tile.c:435
+#: ../libslab/application-tile.c:438
 msgid "Upgrade"
 msgstr "Oppgrader"
 
-#: ../libslab/application-tile.c:450
+#: ../libslab/application-tile.c:453
 msgid "Uninstall"
 msgstr "Avinstaller"
 
-#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:741
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:760
 msgid "Remove from Favorites"
 msgstr "Fjern fra favoritter"
 
-#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:743
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:762
 msgid "Add to Favorites"
 msgstr "Legg til i favoritter"
 
-#: ../libslab/application-tile.c:864
+#: ../libslab/application-tile.c:867
 msgid "Remove from Startup Programs"
 msgstr "Fjern fra oppstartsprogrammer"
 
-#: ../libslab/application-tile.c:866
+#: ../libslab/application-tile.c:869
 msgid "Add to Startup Programs"
 msgstr "Legg til i oppstartsprogrammer"
 
@@ -2896,31 +2914,31 @@ msgstr "Utlogging"
 msgid "Shutdown"
 msgstr "Slå av"
 
-#: ../libslab/bookmark-agent.c:1089
+#: ../libslab/bookmark-agent.c:1090
 msgid "New Spreadsheet"
 msgstr "Nytt regneark"
 
-#: ../libslab/bookmark-agent.c:1093
+#: ../libslab/bookmark-agent.c:1095
 msgid "New Document"
 msgstr "Nytt dokument"
 
-#: ../libslab/bookmark-agent.c:1145
+#: ../libslab/bookmark-agent.c:1147
 msgid "Home"
 msgstr "Hjem"
 
-#: ../libslab/bookmark-agent.c:1150
+#: ../libslab/bookmark-agent.c:1152
 msgid "Documents"
 msgstr "Dokumenter"
 
-#: ../libslab/bookmark-agent.c:1163
+#: ../libslab/bookmark-agent.c:1165
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../libslab/bookmark-agent.c:1167
+#: ../libslab/bookmark-agent.c:1169
 msgid "Network Servers"
 msgstr "Nettverkstjenere"
 
-#: ../libslab/bookmark-agent.c:1196
+#: ../libslab/bookmark-agent.c:1198
 msgid "Search"
 msgstr "Søk"
 
@@ -2931,72 +2949,72 @@ msgid "<b>Open</b>"
 msgstr "<b>Åpne</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:228
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:242
 msgid "Rename..."
 msgstr "Endre navn..."
 
 #: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
-#: ../libslab/document-tile.c:242 ../libslab/document-tile.c:251
+#: ../libslab/document-tile.c:256 ../libslab/document-tile.c:265
 msgid "Send To..."
 msgstr "Send til..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:277
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:291
 msgid "Move to Trash"
 msgstr "Flytt til papirkurv"
 
 #: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:854
+#: ../libslab/document-tile.c:301 ../libslab/document-tile.c:873
 msgid "Delete"
 msgstr "Slett"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1026
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1045
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Er du sikker på at du vil slette «%s» permanent?"
 
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1030
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1049
 msgid "If you delete an item, it is permanently lost."
 msgstr "Hvis du sletter en oppføring blir den borte for godt."
 
-#: ../libslab/document-tile.c:189
+#: ../libslab/document-tile.c:203
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Åpne med «%s»</b>"
 
-#: ../libslab/document-tile.c:201
+#: ../libslab/document-tile.c:215
 msgid "Open with Default Application"
 msgstr "Åpne med forvalgt program"
 
-#: ../libslab/document-tile.c:212
+#: ../libslab/document-tile.c:226
 msgid "Open in File Manager"
 msgstr "Åpne i filhåndterer"
 
-#: ../libslab/document-tile.c:637
+#: ../libslab/document-tile.c:656
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:644
+#: ../libslab/document-tile.c:663
 msgid "%l:%M %p"
 msgstr "%h.%m"
 
-#: ../libslab/document-tile.c:652
+#: ../libslab/document-tile.c:671
 msgid "Today %l:%M %p"
 msgstr "I dag %h.%m"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:681
 msgid "Yesterday %l:%M %p"
 msgstr "I går %h.%m"
 
-#: ../libslab/document-tile.c:674
+#: ../libslab/document-tile.c:693
 msgid "%a %l:%M %p"
 msgstr "%a %h.%m"
 
-#: ../libslab/document-tile.c:682
+#: ../libslab/document-tile.c:701
 msgid "%b %d %l:%M %p"
 msgstr "%b %d %h.%m"
 
-#: ../libslab/document-tile.c:684
+#: ../libslab/document-tile.c:703
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
