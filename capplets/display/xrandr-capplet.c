@@ -24,7 +24,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "scrollarea.h"
-#define I_KNOW_THIS_IS_UNSTABLE_AND_ONLY_IN_FEDORA
+#define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/randrwrap.h>
 #include <libgnomeui/monitor-db.h>
 #include <gdk/gdkx.h>
