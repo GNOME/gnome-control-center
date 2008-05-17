@@ -7,7 +7,6 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-DINSTALL_PREFIX=\"$(prefix)\"					\
 	-I$(top_srcdir)							\
-	-I$(top_srcdir)/libbackground					\
 	-I$(top_srcdir)/libwindow-settings				\
 	$(DBUS_CFLAGS)							\
 	$(GNOME_DESKTOP_CFLAGS)						\
@@ -41,7 +40,7 @@ libcommon_la_SOURCES = \
 	wm-common.c			\
 	wm-common.h
 
-libcommon_la_LIBADD = $(top_builddir)/libbackground/libbackground.la	\
+libcommon_la_LIBADD =							\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \
 	$(METACITY_LIBS)							\
 	$(DBUS_LIBS)							\
