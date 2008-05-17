@@ -48,8 +48,6 @@ enum {
 	PROP_DATA_FREE_CB
 };
 
-typedef void (*GConfPropertyEditorDataFreeCb) (gpointer data);
-
 struct _GConfPropertyEditorPrivate
 {
 	gchar                   *key;
@@ -61,8 +59,8 @@ struct _GConfPropertyEditorPrivate
 	GConfClientNotifyFunc    callback;
 	gboolean                 inited;
 
-	gpointer 		      data;
-	GConfPropertyEditorDataFreeCb data_free_cb;
+	gpointer 		 data;
+	GFreeFunc                data_free_cb;
 };
 
 typedef struct
@@ -75,13 +73,6 @@ typedef struct
 } GConfPropertyEditorEnumData;
 
 static guint peditor_signals[LAST_SIGNAL];
-
-static GObjectClass *parent_class;
-
-static void gconf_property_editor_init        (GConfPropertyEditor      *gconf_property_editor,
-					       GConfPropertyEditorClass *class);
-static void gconf_property_editor_class_init  (GConfPropertyEditorClass *class);
-static void gconf_property_editor_base_init   (GConfPropertyEditorClass *class);
 
 static void gconf_property_editor_set_prop    (GObject      *object,
 					       guint         prop_id,
@@ -103,33 +94,11 @@ static GObject *gconf_peditor_new             (const gchar           *key,
 					       const gchar	     *first_custom,
 					       ...);
 
-GType
-gconf_property_editor_get_type (void)
-{
-	static GType gconf_property_editor_type = 0;
+G_DEFINE_TYPE (GConfPropertyEditor, gconf_property_editor, G_TYPE_OBJECT)
 
-	if (!gconf_property_editor_type) {
-		GTypeInfo gconf_property_editor_info = {
-			sizeof (GConfPropertyEditorClass),
-			(GBaseInitFunc) gconf_property_editor_base_init,
-			NULL, /* GBaseFinalizeFunc */
-			(GClassInitFunc) gconf_property_editor_class_init,
-			NULL, /* GClassFinalizeFunc */
-			NULL, /* user-supplied data */
-			sizeof (GConfPropertyEditor),
-			0, /* n_preallocs */
-			(GInstanceInitFunc) gconf_property_editor_init,
-			NULL
-		};
+#define GCONF_PROPERTY_EDITOR_GET_PRIVATE(object) \
+        (G_TYPE_INSTANCE_GET_PRIVATE ((object), gconf_property_editor_get_type (), GConfPropertyEditorPrivate))
 
-		gconf_property_editor_type =
-			g_type_register_static (G_TYPE_OBJECT,
-						"GConfPropertyEditor",
-						&gconf_property_editor_info, 0);
-	}
-
-	return gconf_property_editor_type;
-}
 
 static GConfValue*
 gconf_property_editor_conv_default (GConfPropertyEditor *peditor,
@@ -139,18 +108,12 @@ gconf_property_editor_conv_default (GConfPropertyEditor *peditor,
 }
 
 static void
-gconf_property_editor_init (GConfPropertyEditor      *gconf_property_editor,
-			    GConfPropertyEditorClass *class)
+gconf_property_editor_init (GConfPropertyEditor *gconf_property_editor)
 {
-	gconf_property_editor->p = g_new0 (GConfPropertyEditorPrivate, 1);
+	gconf_property_editor->p = GCONF_PROPERTY_EDITOR_GET_PRIVATE (gconf_property_editor);
 	gconf_property_editor->p->conv_to_widget_cb = gconf_property_editor_conv_default;
 	gconf_property_editor->p->conv_from_widget_cb = gconf_property_editor_conv_default;
 	gconf_property_editor->p->inited = FALSE;
-}
-
-static void
-gconf_property_editor_base_init (GConfPropertyEditorClass *class)
-{
 }
 
 static void
@@ -225,8 +188,7 @@ gconf_property_editor_class_init (GConfPropertyEditorClass *class)
 				       _("Callback to be issued when property editor object data is to be freed"),
 				       G_PARAM_WRITABLE));
 
-	parent_class = G_OBJECT_CLASS
-		(g_type_class_ref (G_TYPE_OBJECT));
+	g_type_class_add_private (class, sizeof (GConfPropertyEditorPrivate));
 }
 
 static void
@@ -344,9 +306,7 @@ gconf_property_editor_finalize (GObject *object)
 		g_object_unref (client);
 	}
 
-	g_free (gconf_property_editor->p);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gconf_property_editor_parent_class)->finalize (object);
 }
 
 static GObject *
@@ -388,7 +348,7 @@ gconf_peditor_new (const gchar           *key,
 	GCONF_PROPERTY_EDITOR (obj)->p->callback (client, 0, gconf_entry, obj);
 	GCONF_PROPERTY_EDITOR (obj)->p->inited = TRUE;
 	gconf_entry_free (gconf_entry);
-	g_object_unref (G_OBJECT (client));
+	g_object_unref (client);
 
 	return obj;
 }
@@ -490,7 +450,7 @@ gconf_peditor_new_boolean (GConfChangeSet *changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (checkbox), "toggled",
+	g_signal_connect_swapped (checkbox, "toggled",
 				  (GCallback) peditor_boolean_widget_changed, peditor);
 
 	return peditor;
@@ -559,7 +519,7 @@ gconf_peditor_new_integer_valist (GConfChangeSet *changeset,
 		 first_property_name,
 		 var_args, NULL);
 
-	g_signal_connect_swapped (G_OBJECT (entry), "changed",
+	g_signal_connect_swapped (entry, "changed",
 				  (GCallback) peditor_integer_widget_changed, peditor);
 
 	return peditor;
@@ -653,7 +613,7 @@ gconf_peditor_new_string_valist (GConfChangeSet *changeset,
 		 first_property_name,
 		 var_args, NULL);
 
-	g_signal_connect_swapped (G_OBJECT (entry), "changed",
+	g_signal_connect_swapped (entry, "changed",
 				  (GCallback) peditor_string_widget_changed, peditor);
 
 	return peditor;
@@ -788,7 +748,7 @@ gconf_peditor_new_color (GConfChangeSet *changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (cb), "color_set",
+	g_signal_connect_swapped (cb, "color_set",
 				  (GCallback) peditor_color_widget_changed, peditor);
 
 	return peditor;
@@ -941,7 +901,7 @@ gconf_peditor_new_combo_box (GConfChangeSet *changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (combo_box), "changed",
+	g_signal_connect_swapped (combo_box, "changed",
 				  (GCallback) peditor_combo_box_widget_changed, peditor);
 
 	return peditor;
@@ -991,7 +951,7 @@ gconf_peditor_new_combo_box_with_enum	(GConfChangeSet *changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (combo_box), "changed",
+	g_signal_connect_swapped (combo_box, "changed",
 				  (GCallback) peditor_combo_box_widget_changed, peditor);
 
 	return peditor;
@@ -1078,7 +1038,7 @@ gconf_peditor_new_select_radio (GConfChangeSet *changeset,
 	va_end (var_args);
 
 	for (item = radio_group; item != NULL; item = item->next)
-		g_signal_connect_swapped (G_OBJECT (item->data), "toggled",
+		g_signal_connect_swapped (item->data, "toggled",
 					  (GCallback) peditor_select_radio_widget_changed, peditor);
 
 	return peditor;
@@ -1190,7 +1150,7 @@ gconf_peditor_new_numeric_range (GConfChangeSet *changeset,
 		(key,
 		 (GConfClientNotifyFunc) peditor_numeric_range_value_changed,
 		 changeset,
-		 G_OBJECT (adjustment),
+		 adjustment,
 		 first_property_name,
 		 var_args, NULL);
 
@@ -1237,7 +1197,6 @@ gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor,
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
 	client = gconf_client_get_default ();
-
 	value = gconf_client_get (client, peditor->p->key, NULL);
 	g_object_unref (client);
 
@@ -1248,7 +1207,7 @@ gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor,
                 g_warning ("NULL GConf value: %s: possibly incomplete setup", peditor->p->key);
 	}
 
-	g_signal_connect (G_OBJECT (peditor), "value-changed", (GCallback) guard_value_changed, widget);
+	g_signal_connect (peditor, "value-changed", (GCallback) guard_value_changed, widget);
 }
 
 GConfValue *
@@ -1442,7 +1401,7 @@ gconf_peditor_new_enum_toggle  (GConfChangeSet		*changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (checkbox), "toggled",
+	g_signal_connect_swapped (checkbox, "toggled",
 				  (GCallback) peditor_boolean_widget_changed, peditor);
 
 	return peditor;
@@ -1519,7 +1478,7 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 	}
 
 	gtk_image_set_from_pixbuf (image, pixbuf);
-	g_object_unref (G_OBJECT (pixbuf));
+	g_object_unref (pixbuf);
 
 	return TRUE;
 }
@@ -1637,10 +1596,10 @@ peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
 	if (filename && strcmp (filename, ""))
 		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (chooser), filename);
 
-	g_signal_connect (G_OBJECT (chooser), "update-preview",
+	g_signal_connect (chooser, "update-preview",
 			  G_CALLBACK (peditor_image_chooser_update_preview_cb),
 			  preview);
-	g_signal_connect (G_OBJECT (chooser), "response",
+	g_signal_connect (chooser, "response",
 			  G_CALLBACK (peditor_image_chooser_response_cb),
 			  peditor);
 
@@ -1700,7 +1659,7 @@ gconf_peditor_new_image (GConfChangeSet	  *changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (button), "clicked",
+	g_signal_connect_swapped (button, "clicked",
 				  (GCallback) peditor_image_clicked_cb, peditor);
 
 	return peditor;
@@ -1754,7 +1713,7 @@ gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
 	va_end (var_args);
 
 	for (item = radio_group; item != NULL; item = item->next)
-		g_signal_connect_swapped (G_OBJECT (item->data), "toggled",
+		g_signal_connect_swapped (item->data, "toggled",
 					  (GCallback) peditor_select_radio_widget_changed, peditor);
 
 	return peditor;

@@ -1,3 +1,21 @@
+2008-05-18  Jens Granseuer  <jensgr@gmx.net>
+
+	* gconf-property-editor.c: (gconf_property_editor_init),
+	(gconf_property_editor_class_init),
+	(gconf_property_editor_finalize), (gconf_peditor_new),
+	(gconf_peditor_new_boolean), (gconf_peditor_new_integer_valist),
+	(gconf_peditor_new_string_valist), (gconf_peditor_new_color),
+	(gconf_peditor_new_combo_box),
+	(gconf_peditor_new_combo_box_with_enum),
+	(gconf_peditor_new_select_radio),
+	(gconf_peditor_new_numeric_range),
+	(gconf_peditor_widget_set_guard), (gconf_peditor_new_enum_toggle),
+	(peditor_image_set_filename), (peditor_image_clicked_cb),
+	(gconf_peditor_new_image),
+	(gconf_peditor_new_select_radio_with_enum): use G_DEFINE_TYPE to
+	get rid of the boilerplate code and remove a number of unnecessary
+	casts
+
 ==================== 2.23.2 ====================
 
 2008-05-17  Jens Granseuer  <jensgr@gmx.net>
