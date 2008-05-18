@@ -179,7 +179,7 @@ gconf_property_editor_class_init (GConfPropertyEditorClass *class)
 		 g_param_spec_pointer ("data",
 				       _("Property editor object data"),
 				       _("Custom data required by the specific property editor"),
-				       G_PARAM_WRITABLE));
+				       G_PARAM_READWRITE));
 
 	g_object_class_install_property
 		(object_class, PROP_DATA_FREE_CB,
@@ -276,6 +276,9 @@ gconf_property_editor_get_prop (GObject    *object,
 		g_value_set_pointer (value, peditor->p->changeset);
 		break;
 
+	case PROP_DATA:
+		g_value_set_pointer (value, peditor->p->data);
+		break;
 	default:
 		g_warning ("Bad argument get");
 		break;
