@@ -100,7 +100,7 @@ theme_is_writable (const gpointer theme)
   if (info == NULL || info->path == NULL)
     return FALSE;
 
-  file = g_file_new_for_uri (info->path);
+  file = g_file_new_for_path (info->path);
   file_info = g_file_query_info (file,
                                  G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
                                  G_FILE_QUERY_INFO_NONE,
@@ -168,7 +168,7 @@ theme_delete (const gchar *name, ThemeType type)
       return FALSE;
   }
 
-  dir = g_file_new_for_uri (theme_dir);
+  dir = g_file_new_for_path (theme_dir);
   g_free (theme_dir);
 
   if (!file_delete_recursive (dir, NULL)) {

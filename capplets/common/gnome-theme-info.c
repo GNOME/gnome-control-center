@@ -269,14 +269,14 @@ gnome_theme_read_meta_theme (GFile *meta_theme_uri)
 
   meta_theme_file = g_file_get_uri (meta_theme_uri);
   meta_theme_ditem = gnome_desktop_item_new_from_uri (meta_theme_file, 0, NULL);
-  if (meta_theme_ditem == NULL) {
-    g_free (meta_theme_file);
+  g_free (meta_theme_file);
+
+  if (meta_theme_ditem == NULL)
     return NULL;
-  }
 
   common_theme_dir_uri = g_file_get_parent (meta_theme_uri);
   meta_theme_info = gnome_theme_meta_info_new ();
-  meta_theme_info->path = meta_theme_file;
+  meta_theme_info->path = g_file_get_path (meta_theme_uri);
   meta_theme_info->name = g_file_get_basename (common_theme_dir_uri);
   g_object_unref (common_theme_dir_uri);
 
@@ -390,15 +390,14 @@ read_icon_theme (GFile *icon_theme_uri)
 
   icon_theme_file = g_file_get_uri (icon_theme_uri);
   icon_theme_ditem = gnome_desktop_item_new_from_uri (icon_theme_file, 0, NULL);
-  if (icon_theme_ditem == NULL) {
-    g_free (icon_theme_file);
+  g_free (icon_theme_file);
+
+  if (icon_theme_ditem == NULL)
     return NULL;
-  }
 
   name = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Name");
   if (name == NULL) {
     gnome_desktop_item_unref (icon_theme_ditem);
-    g_free (icon_theme_file);
     return NULL;
   }
 
@@ -406,7 +405,6 @@ read_icon_theme (GFile *icon_theme_uri)
   directories = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Directories");
   if (directories == NULL) {
     gnome_desktop_item_unref (icon_theme_ditem);
-    g_free (icon_theme_file);
     return NULL;
   }
 
@@ -416,13 +414,12 @@ read_icon_theme (GFile *icon_theme_uri)
     gchar *dir_name;
     icon_theme_info = gnome_theme_icon_info_new ();
     icon_theme_info->readable_name = g_strdup (name);
-    icon_theme_info->path = icon_theme_file;
-    dir_name = g_path_get_dirname (icon_theme_file);
+    icon_theme_info->path = g_file_get_path (icon_theme_uri);
+    dir_name = g_path_get_dirname (icon_theme_info->path);
     icon_theme_info->name = g_path_get_basename (dir_name);
     g_free (dir_name);
   } else {
     icon_theme_info = NULL;
-    g_free (icon_theme_file);
   }
 
   gnome_desktop_item_unref (icon_theme_ditem);
@@ -538,7 +535,7 @@ read_cursor_theme (GFile *cursor_theme_uri)
       }
 
       cursor_theme_info = gnome_theme_cursor_info_new ();
-      cursor_theme_info->path = g_file_get_uri (parent_uri);
+      cursor_theme_info->path = g_file_get_path (parent_uri);
       cursor_theme_info->name = name;
       cursor_theme_info->sizes = sizes;
       cursor_theme_info->thumbnail = thumbnail;
@@ -664,7 +661,7 @@ read_cursor_fonts (void)
     theme_info->thumbnail = gdk_pixbuf_new_from_file (filename, NULL);
     g_free (filename);
 
-    theme_info->path = g_build_filename ("file://" GNOMECC_DATA_DIR, builtins[i][0], NULL);
+    theme_info->path = g_build_filename (GNOMECC_DATA_DIR, builtins[i][0], NULL);
     theme_info->name = g_strdup (theme_info->path);
 
     if (!strcmp (theme_info->path, cursor_font))
@@ -759,7 +756,7 @@ update_theme_index (GFile            *index_uri,
   /* Next, we see what currently exists */
   parent = g_file_get_parent (index_uri);
   common_theme_dir_uri = g_file_get_parent (parent);
-  common_theme_dir = g_file_get_uri (common_theme_dir_uri);
+  common_theme_dir = g_file_get_path (common_theme_dir_uri);
 
   theme_info = g_hash_table_lookup (theme_hash_by_uri, common_theme_dir);
   if (theme_info == NULL) {

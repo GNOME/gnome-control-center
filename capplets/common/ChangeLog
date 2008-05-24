@@ -1,3 +1,10 @@
+2008-05-24  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-theme-info.c: (gnome_theme_read_meta_theme),
+	(read_icon_theme), (read_cursor_theme), (read_cursor_fonts),
+	(update_theme_index): return to using paths instead of URIs since
+	most of the code using them expects paths
+
 2008-05-18  Thomas Wood  <thos@gnome.org>
 
 	* gconf-property-editor.c: (gconf_property_editor_class_init),
