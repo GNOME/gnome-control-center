@@ -57,7 +57,7 @@ cleanup_tmp_dir (GIOSchedulerJob *job,
 	GFile *directory;
 
 	directory = g_file_new_for_path (tmp_dir);
-	file_delete_recursive (directory, &err);
+	file_delete_recursive (directory, NULL);
 	g_object_unref (directory);
 
 	return FALSE;
