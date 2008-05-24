@@ -59,6 +59,9 @@ directory_delete_recursive (GFile *directory, GError **error)
   }
   g_file_enumerator_close (enumerator, NULL, NULL);
 
+  if (success)
+    success = g_file_delete (directory, NULL, error);
+
   return success;
 }
 
