@@ -49,7 +49,6 @@ init_appearance_data (int *argc, char ***argv)
   g_thread_init (NULL);
   theme_thumbnail_factory_init (*argc, *argv);
   gtk_init (argc, argv);
-  gnome_vfs_init ();
   activate_settings_daemon ();
 
   /* set up the data */

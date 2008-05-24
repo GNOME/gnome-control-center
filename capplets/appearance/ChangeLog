@@ -1,3 +1,20 @@
+2008-05-24  Jens Granseuer  <jensgr@gmx.net>
+
+	Based on a patch by: Lincoln de Sousa <lincoln@minaslivre.org>
+
+	Port the last remaining bits of gnome-vfs to gio (bug
+	#524401).
+
+	* appearance-main.c: (init_appearance_data):
+	* theme-installer.c: (cleanup_tmp_dir), (file_theme_type),
+	(transfer_cancel_cb), (gnome_theme_install_real),
+	(transfer_done_cb): use gio instead of gnome-vfs
+
+	* theme-util.c:
+	* theme-util.h: make file_delete_recursive public
+
+	* gnome-wp-info.c: include string.h to avoid warning
+
 ==================== 2.23.2 ====================
 
 2008-05-08  Jens Granseuer  <jensgr@gmx.net>

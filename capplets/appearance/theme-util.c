@@ -62,7 +62,7 @@ directory_delete_recursive (GFile *directory, GError **error)
   return success;
 }
 
-static gboolean
+gboolean
 file_delete_recursive (GFile *file, GError **error)
 {
   GFileInfo *info;

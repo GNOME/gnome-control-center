@@ -26,6 +26,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <glib/gstdio.h>
 
 #include "file-transfer-dialog.h"
 #include "theme-installer.h"
@@ -48,17 +49,18 @@ enum {
 	DIRECTORY
 };
 
-static void
-cleanup_tmp_dir (const gchar *tmp_dir)
+static gboolean
+cleanup_tmp_dir (GIOSchedulerJob *job,
+		 GCancellable *cancellable,
+		 const gchar *tmp_dir)
 {
-	if (gnome_vfs_remove_directory (tmp_dir) == GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY) {
-		GList *list;
+	GFile *directory;
 
-		list = g_list_prepend (NULL, gnome_vfs_uri_new (tmp_dir));
-		gnome_vfs_xfer_delete_list (list, GNOME_VFS_XFER_RECURSIVE,
-					GNOME_VFS_XFER_ERROR_MODE_ABORT, NULL, NULL);
-		gnome_vfs_uri_list_free (list);
-	}
+	directory = g_file_new_for_path (tmp_dir);
+	file_delete_recursive (directory, &err);
+	g_object_unref (directory);
+
+	return FALSE;
 }
 
 static int
@@ -74,16 +76,12 @@ file_theme_type (const gchar *dir)
 	exists = g_file_test (filename, G_FILE_TEST_IS_REGULAR);
 
 	if (exists) {
-		GPatternSpec *pattern = NULL;
+		GPatternSpec *pattern;
 		gchar *file_contents = NULL;
-		gint file_size;
-		gchar *uri;
+		gsize file_size;
 		gboolean match;
 
-		uri = gnome_vfs_get_uri_from_local_path (filename);
-		g_free (filename);
-		gnome_vfs_read_entire_file (uri, &file_size, &file_contents);
-		g_free (uri);
+		g_file_get_contents (filename, &file_contents, &file_size, NULL);
 
 		pattern = g_pattern_spec_new ("*[Icon Theme]*");
 		match = g_pattern_match_string (pattern, file_contents);
@@ -93,6 +91,7 @@ file_theme_type (const gchar *dir)
 			pattern = g_pattern_spec_new ("*Directories=*");
 			match = g_pattern_match_string (pattern, file_contents);
 			g_pattern_spec_free (pattern);
+			g_free (file_contents);
 
 			if (match) {
 				/* check if we have a cursor, too */
@@ -111,6 +110,7 @@ file_theme_type (const gchar *dir)
 		pattern = g_pattern_spec_new ("*[X-GNOME-Metatheme]*");
 		match = g_pattern_match_string (pattern, file_contents);
 		g_pattern_spec_free (pattern);
+		g_free (file_contents);
 
 		if (match)
 			return THEME_GNOME;
@@ -153,7 +153,12 @@ file_theme_type (const gchar *dir)
 static void
 transfer_cancel_cb (GtkWidget *dlg, gchar *path)
 {
-	gnome_vfs_unlink (path);
+	GFile *todelete;
+
+	todelete = g_file_new_for_path (path);
+	g_file_delete (todelete, NULL, NULL);
+
+	g_object_unref (todelete);
 	g_free (path);
 	gtk_widget_destroy (dlg);
 }
@@ -259,8 +264,8 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 {
 	gboolean success = TRUE;
 	GtkWidget *dialog, *apply_button;
-	int xfer_options;
-	GnomeVFSURI *theme_source_dir, *theme_dest_dir;
+	GFile *theme_source_dir, *theme_dest_dir;
+	GError *error = NULL;
 	gint theme_type;
 	gchar *user_message = NULL;
 	gchar *target_dir = NULL;
@@ -307,13 +312,25 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 		    && (file_theme_type (path) == THEME_ICON))
 		{
 			gchar *new_path, *update_icon_cache;
+			GFile *new_file;
+			GFile *src_file;
 
+			src_file = g_file_new_for_path (path);
 			new_path = g_build_path (G_DIR_SEPARATOR_S,
 						 g_get_home_dir (),
 						 ".icons",
 						 theme_name, NULL);
-			/* XXX: make some noise if we couldn't install it? */
-			gnome_vfs_move (path, new_path, FALSE);
+			new_file = g_file_new_for_path (new_path);
+
+			if (!g_file_move (src_file, new_file, G_FILE_COPY_NONE,
+					  NULL, NULL, NULL, &error)) {
+				g_warning ("Error while moving from `%s' to `%s': %s",
+					   path, new_path, error->message);
+				g_error_free (error);
+				error = NULL;
+			}
+			g_object_unref (new_file);
+			g_object_unref (src_file);
 
 			/* update icon cache - shouldn't really matter if this fails */
 			update_icon_cache = g_strdup_printf ("gtk-update-icon-cache %s", new_path);
@@ -326,17 +343,12 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 	}
 
 	/* Move the dir to the target dir */
-	theme_source_dir = gnome_vfs_uri_new (tmp_dir);
-	theme_dest_dir = gnome_vfs_uri_new (target_dir);
+	theme_source_dir = g_file_new_for_path (tmp_dir);
+	theme_dest_dir = g_file_new_for_path (target_dir);
 
-	xfer_options = GNOME_VFS_XFER_RECURSIVE;
-	if (filetype != DIRECTORY)
-		xfer_options |= GNOME_VFS_XFER_REMOVESOURCE;
-
-	if (gnome_vfs_xfer_uri (theme_source_dir, theme_dest_dir, xfer_options,
-				GNOME_VFS_XFER_ERROR_MODE_ABORT,
-				GNOME_VFS_XFER_OVERWRITE_MODE_REPLACE,
-				NULL, NULL) != GNOME_VFS_OK) {
+	if (!g_file_move (theme_source_dir, theme_dest_dir,
+			  G_FILE_COPY_OVERWRITE, NULL, NULL,
+			  NULL, &error)) {
 		gchar *str;
 
 		str = g_strdup_printf (_("Installation for theme \"%s\" failed."), theme_name);
@@ -345,7 +357,13 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 					GTK_MESSAGE_ERROR,
 					GTK_BUTTONS_OK,
 					str);
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  error->message);
+
 		g_free (str);
+		g_error_free (error);
+		error = NULL;
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		success = FALSE;
@@ -475,12 +493,13 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 		gchar *tmp_dir;
 		gboolean ok;
 		gint n_themes;
+		GFile *todelete;
 
 		tmp_dir = g_strdup_printf ("%s/.themes/.theme-%u",
 					   g_get_home_dir (),
 					   g_random_int ());
 
-		if ((gnome_vfs_make_directory (tmp_dir, 0700)) != GNOME_VFS_OK) {
+		if ((g_mkdir (tmp_dir, 0700)) != 0) {
 			dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
 							GTK_BUTTONS_OK,
 							_("Failed to create temporary directory"));
@@ -491,17 +510,20 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			return;
 		}
 
-
 		if (!transfer_done_archive (filetype, tmp_dir, path) ||
 		    ((dir = g_dir_open (tmp_dir, 0, NULL)) == NULL))
 		{
-			cleanup_tmp_dir (tmp_dir);
+			g_io_scheduler_push_job ((GIOSchedulerJobFunc) cleanup_tmp_dir,
+						 g_strdup (tmp_dir), g_free,
+						 G_PRIORITY_DEFAULT, NULL);
 			g_free (tmp_dir);
 			g_free (path);
 			return;
 		}
 
-		gnome_vfs_unlink (path);
+		todelete = g_file_new_for_path (path);
+		g_file_delete (todelete, NULL, NULL);
+		g_object_unref (todelete);
 
 		/* See whether we have multiple themes to install. If so,
 		 * we won't ask the user whether to apply the new theme
@@ -547,9 +569,9 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 		}
-
-		cleanup_tmp_dir (tmp_dir);
-		g_free (tmp_dir);
+		g_io_scheduler_push_job ((GIOSchedulerJobFunc) cleanup_tmp_dir,
+					 tmp_dir, g_free,
+					 G_PRIORITY_DEFAULT, NULL);
 	}
 
 	g_free (path);
