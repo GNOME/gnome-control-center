@@ -1503,6 +1503,12 @@ check_required_virtual_size (App *app)
 
     rw_screen_get_ranges (app->screen, &min_width, &max_width, &min_height, &max_height);
 
+    g_print ("X Server supports:\n");
+    g_print ("min_width = %d, max_width = %d\n", min_width, max_width);
+    g_print ("min_height = %d, max_height = %d\n", min_height, max_height);
+
+    g_print ("Requesting size of %dx%d\n", req_width, req_height);
+
     if (!(min_width <= req_width && req_width <= max_width
 	  && min_height <= req_height && req_height <= max_height))
     {
