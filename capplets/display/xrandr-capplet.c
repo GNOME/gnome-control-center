@@ -1512,7 +1512,8 @@ check_required_virtual_size (App *app)
     if (!(min_width <= req_width && req_width <= max_width
 	  && min_height <= req_height && req_height <= max_height))
     {
-	g_print ("Your X server sucks because it doesn't support the size I need\n");
+	/* FIXME: present a useful dialog, maybe even before the user tries to Apply */
+	g_print ("Your X server needs a larger Virtual size!\n");
     }
 }
 
