@@ -1468,11 +1468,56 @@ gnome_randr_atom (void)
 }
 
 static void
+find_required_virtual_size (Configuration *config, int *ret_width, int *ret_height)
+{
+    int i;
+    int width, height;
+
+    width = height = 0;
+
+    for (i = 0; config->outputs[i] != NULL; i++)
+    {
+	Output *output;
+
+	output = config->outputs[i];
+
+	if (output->on)
+	{
+	    width = MAX (width, output->x + output->width);
+	    height = MAX (height, output->y + output->height);
+	}
+    }
+
+    *ret_width = width;
+    *ret_height = height;
+}
+
+static void
+check_required_virtual_size (App *app)
+{
+    int req_width, req_height;
+    int min_width, max_width;
+    int min_height, max_height;
+
+    find_required_virtual_size (app->current_configuration, &req_width, &req_height);
+
+    rw_screen_get_ranges (app->screen, &min_width, &max_width, &min_height, &max_height);
+
+    if (!(min_width <= req_width && req_width <= max_width
+	  && min_height <= req_height && req_height <= max_height))
+    {
+	g_print ("Your X server sucks because it doesn't support the size I need\n");
+    }
+}
+
+static void
 apply (App *app)
 {
     GError *err = NULL;
 
     configuration_sanitize (app->current_configuration);
+
+    check_required_virtual_size (app);
 
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
     
