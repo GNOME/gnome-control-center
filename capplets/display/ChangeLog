@@ -1,3 +1,12 @@
+2008-05-29  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (apply): Before applying the settings, check if
+	the X server supports the Virtual size we need.
+	(check_required_virtual_size): New function; does the checking
+	against what the X server supports.
+	This still needs to present a friendly dialog box.
+	(compute_virtual_size_for_configuration): New function.
+
 Wed May 14 18:16:10 2008  Søren Sandmann  <sandmann@redhat.com>
 
 	* xrandr-capplet.c: Add GNOME_DESKTOP_USE_UNSTABLE_API define
