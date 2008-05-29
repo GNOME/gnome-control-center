@@ -1468,7 +1468,7 @@ gnome_randr_atom (void)
 }
 
 static void
-find_required_virtual_size (Configuration *config, int *ret_width, int *ret_height)
+compute_virtual_size_for_configuration (Configuration *config, int *ret_width, int *ret_height)
 {
     int i;
     int width, height;
@@ -1499,7 +1499,7 @@ check_required_virtual_size (App *app)
     int min_width, max_width;
     int min_height, max_height;
 
-    find_required_virtual_size (app->current_configuration, &req_width, &req_height);
+    compute_virtual_size_for_configuration (app->current_configuration, &req_width, &req_height);
 
     rw_screen_get_ranges (app->screen, &min_width, &max_width, &min_height, &max_height);
 
