@@ -69,7 +69,7 @@ GnomeBGColorType wp_item_string_to_shading (const gchar *shade_type)
 static void set_bg_properties (GnomeWPItem *item)
 {
   if (item->filename)
-    gnome_bg_set_uri (item->bg, item->filename);
+    gnome_bg_set_filename (item->bg, item->filename);
 
   gnome_bg_set_color (item->bg, item->shade_type, item->pcolor, item->scolor);
   gnome_bg_set_placement (item->bg, item->options);
