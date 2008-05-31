@@ -16,6 +16,7 @@
 #include "eggcellrendererkeys.h"
 #include "activate-settings-daemon.h"
 
+#define GCONF_BINDING_DIR "/desktop/gnome/keybindings"
 #define MAX_ELEMENTS_BEFORE_SCROLLING 10
 
 typedef struct {
@@ -38,6 +39,7 @@ typedef enum {
 typedef struct
 {
   char *name;
+  char *description;
   int value;
   char *key;
   Comparison comparison;
@@ -428,11 +430,10 @@ append_keys_to_tree (GladeXML           *dialog,
   for (j = 0; keys_list[j].name != NULL; j++)
     {
       GConfEntry *entry;
-      GConfSchema *schema = NULL;
       KeyEntry *key_entry;
-      GError *error = NULL;
       const gchar *key_string;
       gchar *key_value;
+      gchar *description;
 
       if (!should_show_key (&keys_list[j]))
 	continue;
@@ -443,30 +444,42 @@ append_keys_to_tree (GladeXML           *dialog,
                                       key_string,
 				      NULL,
 				      TRUE,
-				      &error);
-      if (error || entry == NULL)
+				      NULL);
+      if (entry == NULL)
 	{
 	  /* We don't actually want to popup a dialog - just skip this one */
-	  if (error)
-	    g_error_free (error);
 	  continue;
 	}
 
-      if (gconf_entry_get_schema_name (entry))
-	schema = gconf_client_get_schema (client, gconf_entry_get_schema_name (entry), &error);
+      if (keys_list[j].description != NULL)
+        {
+          description = g_strdup (keys_list[j].description);
+        }
+      else
+        {
+          description = NULL;
 
-      if (error || schema == NULL)
-	{
-	  /* We don't actually want to popup a dialog - just skip this one */
-	  if (error)
-	    g_error_free (error);
-	  continue;
-	}
+          if (gconf_entry_get_schema_name (entry))
+            {
+              GConfSchema *schema;
 
-      key_value = gconf_client_get_string (client, key_string, &error);
+              schema = gconf_client_get_schema (client,
+                                                gconf_entry_get_schema_name (entry),
+                                                NULL);
+              if (schema != NULL)
+                {
+                  description = g_strdup (gconf_schema_get_short_desc (schema));
+                  gconf_schema_free (schema);
+                }
+            }
+        }
+
+
+      key_value = gconf_client_get_string (client, key_string, NULL);
 
       key_entry = g_new0 (KeyEntry, 1);
       key_entry->gconf_key = g_strdup (key_string);
+      key_entry->description = description;
       key_entry->editable = gconf_entry_get_is_writable (entry);
       key_entry->model = model;
       gconf_client_add_dir (client, key_string, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -476,13 +489,13 @@ append_keys_to_tree (GladeXML           *dialog,
 						       key_entry, NULL, NULL);
       binding_from_string (key_value, &key_entry->keyval, &key_entry->keycode, &key_entry->mask);
       g_free (key_value);
-      key_entry->description = g_strdup (gconf_schema_get_short_desc (schema));
 
+      gconf_entry_free (entry);
       ensure_scrollbar (dialog, i);
 
       i++;
       gtk_tree_store_append (GTK_TREE_STORE (model), &iter, &parent_iter);
-      if (gconf_schema_get_short_desc (schema))
+      if (key_entry->description != NULL)
 	gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
 			    DESCRIPTION_COLUMN,
                             key_entry->description,
@@ -494,8 +507,6 @@ append_keys_to_tree (GladeXML           *dialog,
 			    KEYENTRY_COLUMN, key_entry,
 			    -1);
       gtk_tree_view_expand_all (GTK_TREE_VIEW (WID ("shortcut_treeview")));
-      gconf_entry_free (entry);
-      gconf_schema_free (schema);
     }
 
   g_object_unref (client);
@@ -613,6 +624,7 @@ parse_start_tag (GMarkupParseContext *ctx,
     return;
 
   key.name = g_strdup (name);
+  key.description = NULL;
   key.value = value;
   if (gconf_key)
     key.key = g_strdup (gconf_key);
@@ -679,6 +691,7 @@ append_keys_to_tree_from_file (GladeXML   *dialog,
 
   /* Empty KeyListEntry to end the array */
   key.name = NULL;
+  key.description = NULL;
   key.key = NULL;
   key.value = 0;
   key.comparison = COMPARISON_NONE;
@@ -700,6 +713,64 @@ append_keys_to_tree_from_file (GladeXML   *dialog,
   for (i = 0; keys[i].name != NULL; i++)
     g_free (keys[i].name);
   g_free (keylist);
+}
+
+static void
+append_keys_to_tree_from_gconf (GladeXML *dialog, const gchar *gconf_path)
+{
+  GConfClient *client;
+  GSList *custom_list, *l;
+  GArray *entries;
+  KeyListEntry key;
+
+  /* load custom shortcuts from GConf */
+  entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
+
+  key.key = NULL;
+  key.value = 0;
+  key.comparison = COMPARISON_NONE;
+
+  client = gconf_client_get_default ();
+  custom_list = gconf_client_all_dirs (client, gconf_path, NULL);
+
+  for (l = custom_list; l != NULL; l = l->next)
+    {
+      gchar *gconf_key;
+
+      key.name = g_strconcat (l->data, "/binding", NULL);
+
+      gconf_key = g_strconcat (l->data, "/action", NULL);
+      key.description = gconf_client_get_string (client, gconf_key, NULL);
+      g_free (gconf_key);
+
+      g_array_append_val (entries, key);
+
+      g_free (l->data);
+    }
+
+  g_slist_free (custom_list);
+  g_object_unref (client);
+
+  if (entries->len > 0)
+    {
+      KeyListEntry *keys;
+      int i;
+
+      /* Empty KeyListEntry to end the array */
+      key.name = NULL;
+      key.description = NULL;
+      g_array_append_val (entries, key);
+
+      keys = (KeyListEntry *) entries->data;
+      append_keys_to_tree (dialog, _("Custom Shortcuts"), keys);
+      for (i = 0; i < entries->len; ++i)
+        {
+          g_free (keys[i].name);
+          g_free (keys[i].description);
+        }
+    }
+
+  g_array_free (entries, TRUE);
 }
 
 static void
@@ -736,6 +807,8 @@ reload_key_entries (gpointer wm_name, GladeXML *dialog)
 	g_free (path);
     }
   g_list_free (list);
+
+  append_keys_to_tree_from_gconf (dialog, GCONF_BINDING_DIR);
 }
 
 static void
