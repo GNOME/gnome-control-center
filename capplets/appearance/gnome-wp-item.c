@@ -30,7 +30,7 @@ static GConfEnumStringPair options_lookup[] = {
   { GNOME_BG_PLACEMENT_CENTERED, "centered" },
   { GNOME_BG_PLACEMENT_FILL_SCREEN, "stretched" },
   { GNOME_BG_PLACEMENT_SCALED, "scaled" },
-  { GNOME_BG_PLACEMENT_ZOOMED, "zoomed" },
+  { GNOME_BG_PLACEMENT_ZOOMED, "zoom" },
   { GNOME_BG_PLACEMENT_TILED, "wallpaper" },
   { 0, NULL }
 };
