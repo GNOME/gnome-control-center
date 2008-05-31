@@ -177,6 +177,9 @@ wp_add_image (AppearanceData *data,
 {
   GnomeWPItem *item;
 
+  if (!filename)
+    return NULL;
+  
   item = g_hash_table_lookup (data->wp_hash, filename);
 
   if (item != NULL)
@@ -422,7 +425,8 @@ wp_uri_changed (const gchar *uri,
     if (item == NULL)
       item = wp_add_image (data, uri);
 
-    select_item (data, item, TRUE);
+    if (item)
+      select_item (data, item, TRUE);
   }
 }
 
@@ -684,8 +688,14 @@ wp_drag_get_data (GtkWidget *widget,
     GnomeWPItem *item = get_selected_item (data, NULL);
 
     if (item != NULL) {
-      gchar *uris[] = { item->filename, NULL };
+      char *uris[2];
+
+      uris[0] = g_filename_to_uri (item->filename, NULL, NULL);
+      uris[1] = NULL;
+    
       gtk_selection_data_set_uris (selection_data, uris);
+
+      g_free (uris[0]);
     }
   }
 }
@@ -858,7 +868,8 @@ wp_load_stuffs (void *user_data)
   else if (strcmp (style, "none") != 0)
   {
     item = wp_add_image (data, imagepath);
-    select_item (data, item, FALSE);
+    if (item)
+      select_item (data, item, FALSE);
   }
 
   item = g_hash_table_lookup (data->wp_hash, "(none)");

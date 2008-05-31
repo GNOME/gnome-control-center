@@ -1,3 +1,13 @@
+Sat May 31 02:05:32 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* appearance-desktop.c (wp_drag_get_data): Make sure the data we
+	produce is actually a list of uris, not a list of paths. (Prevents
+	crash when someone drags a thumbnail back into the list).
+	
+	* appearance-desktop.c (wp_add_image): Be robust against NULL
+	filenames; this can happen if someone drops an http url on the
+	dialog.
+
 Sat May 31 00:41:20 2008  Søren Sandmann  <sandmann@redhat.com>
 
 	* gnome-wp-item.c (options_lookup): The gconf string is "zoom",
