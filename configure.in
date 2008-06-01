@@ -94,8 +94,6 @@ COMMON_MODULES="gtk+-2.0 >= 2.11.6 dnl
  gconf-2.0 dnl
  libgnomeui-2.0 >= 2.2.0 dnl
  libglade-2.0 >= 2.0.0 dnl
- libbonobo-2.0 dnl
- libbonoboui-2.0 dnl
  gnome-desktop-2.0 >= 2.23.3"
 PKG_CHECK_MODULES(LIBSLAB, $COMMON_MODULES gnome-desktop-2.0 librsvg-2.0 libgnome-menu pango eel-2.0)
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
@@ -190,7 +188,7 @@ AC_SUBST(LIBGNOMEKBDUI_CFLAGS)
 AC_SUBST(LIBGNOMEKBDUI_LIBS)
 
 dnl ==============================================
-dnl themus and fontilus dependencies
+dnl fontilus dependencies
 dnl ==============================================
 
 AC_ARG_ENABLE(vfs-methods,
@@ -200,23 +198,6 @@ AC_ARG_ENABLE(vfs-methods,
 
 if test x$enable_vfs_methods = xyes; then
 
-  PKG_CHECK_MODULES(THEME_METHOD,
-  [gnome-vfs-module-2.0 >= 2.2.0 dnl
-   gnome-vfs-2.0 >= 2.2.0])
-  PKG_CHECK_MODULES(THEMUS_THUMBNAILER,
-  [gdk-2.0 >= 2.2.0 dnl
-   libgnomeui-2.0 >= 2.2.0 dnl
-   libmetacity-private dnl
-   gnome-vfs-2.0 >= 2.2.0])
-  PKG_CHECK_MODULES(THEMUS_COMPONENT,
-  [glib-2.0 >= 2.8.0 dnl
-   gtk+-2.0 >= 2.4.0 dnl
-   libnautilus-extension >= nautilus_minver])
-  PKG_CHECK_MODULES(THEMUS_APPLIER,
-  [gtk+-2.0 >= 2.4.0 dnl
-   libglade-2.0 >= 2.0 dnl
-   gnome-vfs-2.0 >= 2.2.0 dnl
-   libgnome-2.0 >= 2.2.0])
   PKG_CHECK_MODULES(FONT_METHOD,
   [gnome-vfs-module-2.0 >= gnomevfs_minver dnl
    fontconfig >= fontconfig_minver])
@@ -241,9 +222,7 @@ if test x$enable_vfs_methods = xyes; then
   FONT_THUMBNAILER_CFLAGS="$FONT_THUMBNAILER_CFLAGS `$FREETYPE_CONFIG --cflags`"
   FONT_THUMBNAILER_LIBS="$FONT_THUMBNAILER_LIBS `$FREETYPE_CONFIG --libs`"
 
-  THEMUS=themus
   FONTILUS=fontilus
-  AC_SUBST(THEMUS)
   AC_SUBST(FONTILUS)
 
   # Determine the install dir for the nautilus extensions.
@@ -253,8 +232,6 @@ if test x$enable_vfs_methods = xyes; then
   # update LIBS for $export_dynamic
   export_dynamic=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
   if test -n "$export_dynamic"; then
-    THEME_METHOD_LIBS=`echo $THEME_METHOD_LIBS | sed -e "s/$export_dynamic//"`
-    THEMUS_COMPONENT_LIBS=`echo $THEMUS_COMPONENT_LIBS | sed -e "s/$export_dynamic//"`
     FONT_VIEW_LIBS=`echo $FONT_VIEW_LIBS | sed -e "s/$export_dynamic//"`
     FONT_CONTEXT_MENU_LIBS=`echo $FONT_CONTEXT_MENU_LIBS | sed -e "s/$export_dynamic//"`
     FONT_THUMBNAILER_LIBS=`echo $FONT_THUMBNAILER_LIBS | sed -e "s/$export_dynamic//"`
@@ -461,8 +438,6 @@ typing-break/Makefile
 vfs-methods/Makefile
 vfs-methods/fontilus/Makefile
 vfs-methods/fontilus/gnome-font-viewer.desktop.in
-vfs-methods/themus/Makefile
-vfs-methods/themus/themus-theme-applier.desktop.in
 ])
 
 dnl due to a bug in intltool we need to expand something from the root last control-center.spec
