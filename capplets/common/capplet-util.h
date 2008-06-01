@@ -42,49 +42,8 @@
 	if (!def)                                                               \
 		gconf_client_set_##type (client, key, val_##type, NULL);
 
-/* Callback to apply the settings in the given database */
-typedef void (*ApplySettingsFn) (void);
+/* Some miscellaneous functions useful to all capplets */
 
-/* Callback to set up the dialog proper */
-typedef GtkWidget *(*CreateDialogFn) (void);
-
-/* Callback to set up property editors for the dialog */
-typedef void (*SetupPropertyEditorsFn) (GtkWidget *dialog, GConfChangeSet *changeset);
-
-/* Callback to retrieve legacy settings and store them in the new configuration
- * database */
-typedef void (*GetLegacySettingsFn) (void);
-
-/* Set up the session management so that this capplet will apply its
- * settings on every startup
- */
-
-void setup_session_mgmt (const gchar *binary_name);
-
-/* Wrapper function for the entire capplet. This handles all initialization and
- * runs the capplet for you. Just supply the appropriate callbacks and your argc
- * and argv from main()
- *
- * This function makes several assumptions, requiring that all capplets follow a
- * particular convention. In particular, suppose the name of the capplet binary
- * is foo-properties-capplet. Then:
- *
- *   - The factory IID is Bonobo_Control_Capplet_foo_properties_Factory
- *   - The default configuration moniker is archiver:foo-properties
- *
- * Following this convention yields capplets that are more uniform and thus
- * easier to maintain, and simplifies the interfaces quite a bit. All capplet in
- * this package are required to follow this convention.
- */
-
-void capplet_init (int                      argc,
-		   gchar                  **argv,
-		   ApplySettingsFn          apply_fn,
-		   CreateDialogFn           create_dialog_fn,
-		   SetupPropertyEditorsFn   setup_property_editors_fn,
-		   GetLegacySettingsFn      get_legacy_settings_fn);
-
-void capplet_error_dialog (GtkWindow *parent, char const *msg, GError *err);
 void capplet_help (GtkWindow *parent, char const *helpfile, char const *section);
 void capplet_set_icon (GtkWidget *window, char const *icon_file_name);
 
