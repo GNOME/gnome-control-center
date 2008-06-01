@@ -39,9 +39,9 @@ typedef enum {
 typedef struct
 {
   char *name;
-  char *description;
   int value;
   char *key;
+  char *description_name;
   Comparison comparison;
 } KeyListEntry;
 
@@ -60,8 +60,11 @@ typedef struct
   EggVirtualModifierType mask;
   gboolean editable;
   GtkTreeModel *model;
-  guint gconf_cnxn;
   char *description;
+  char *desc_gconf_key;
+  gboolean desc_editable;
+  guint gconf_cnxn;
+  guint gconf_cnxn_desc;
 } KeyEntry;
 
 static gboolean block_accels = FALSE;
@@ -69,13 +72,8 @@ static gboolean block_accels = FALSE;
 static GladeXML *
 create_dialog (void)
 {
-  GladeXML *dialog;
-
-  dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
-  if (!dialog)
-    dialog = glade_xml_new ("gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
-
-  return dialog;
+  return glade_xml_new (GNOMECC_GLADE_DIR "/gnome-keybinding-properties.glade",
+                        "gnome-keybinding-dialog", NULL);
 }
 
 static char*
@@ -130,11 +128,11 @@ accel_set_func (GtkTreeViewColumn *tree_column,
                       -1);
 
   if (key_entry == NULL)
-    g_object_set (G_OBJECT (cell),
+    g_object_set (cell,
 		  "visible", FALSE,
 		  NULL);
   else if (! key_entry->editable)
-    g_object_set (G_OBJECT (cell),
+    g_object_set (cell,
 		  "visible", TRUE,
 		  "editable", FALSE,
 		  "accel_key", key_entry->keyval,
@@ -143,13 +141,34 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 		  "style", PANGO_STYLE_ITALIC,
 		  NULL);
   else
-    g_object_set (G_OBJECT (cell),
+    g_object_set (cell,
 		  "visible", TRUE,
 		  "editable", TRUE,
 		  "accel_key", key_entry->keyval,
 		  "accel_mask", key_entry->mask,
 		  "keycode", key_entry->keycode,
 		  "style", PANGO_STYLE_NORMAL,
+		  NULL);
+}
+
+static void
+description_set_func (GtkTreeViewColumn *tree_column,
+                      GtkCellRenderer   *cell,
+                      GtkTreeModel      *model,
+                      GtkTreeIter       *iter,
+                      gpointer           data)
+{
+  KeyEntry *key_entry;
+
+  gtk_tree_model_get (model, iter,
+                      KEYENTRY_COLUMN, &key_entry,
+                      -1);
+
+  if (key_entry != NULL)
+    g_object_set (cell,
+		  "editable", key_entry->desc_editable,
+		  "text", key_entry->description != NULL ?
+			  key_entry->description : _("<Unknown Action>"),
 		  NULL);
 }
 
@@ -184,11 +203,31 @@ keybinding_key_changed (GConfClient *client,
   KeyEntry *key_entry;
   const gchar *key_value;
 
-  key_entry = (KeyEntry *)user_data;
-  key_value = gconf_value_get_string (entry->value);
+  key_entry = (KeyEntry *) user_data;
+  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
 
   binding_from_string (key_value, &key_entry->keyval, &key_entry->keycode, &key_entry->mask);
   key_entry->editable = gconf_entry_get_is_writable (entry);
+
+  /* update the model */
+  gtk_tree_model_foreach (key_entry->model, keybinding_key_changed_foreach, key_entry);
+}
+
+static void
+keybinding_description_changed (GConfClient *client,
+				guint        cnxn_id,
+				GConfEntry  *entry,
+				gpointer     user_data)
+{
+  KeyEntry *key_entry;
+  const gchar *key_value;
+
+  key_entry = (KeyEntry *) user_data;
+  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
+
+  g_free (key_entry->description);
+  key_entry->description = key_value ? g_strdup (key_value) : NULL;
+  key_entry->desc_editable = gconf_entry_get_is_writable (entry);
 
   /* update the model */
   gtk_tree_model_foreach (key_entry->model, keybinding_key_changed_foreach, key_entry);
@@ -299,9 +338,13 @@ clear_old_model (GladeXML *dialog)
 
           if (key_entry != NULL)
             {
+              gconf_client_remove_dir (client, key_entry->gconf_key, NULL);
               gconf_client_notify_remove (client, key_entry->gconf_cnxn);
+              if (key_entry->gconf_cnxn_desc != 0)
+                gconf_client_notify_remove (client, key_entry->gconf_cnxn_desc);
               g_free (key_entry->gconf_key);
               g_free (key_entry->description);
+              g_free (key_entry->desc_gconf_key);
               g_free (key_entry);
             }
         }
@@ -451,9 +494,9 @@ append_keys_to_tree (GladeXML           *dialog,
 	  continue;
 	}
 
-      if (keys_list[j].description != NULL)
+      if (keys_list[j].description_name != NULL)
         {
-          description = g_strdup (keys_list[j].description);
+          description = gconf_client_get_string (client, keys_list[j].description_name, NULL);
         }
       else
         {
@@ -474,38 +517,40 @@ append_keys_to_tree (GladeXML           *dialog,
             }
         }
 
-
-      key_value = gconf_client_get_string (client, key_string, NULL);
-
       key_entry = g_new0 (KeyEntry, 1);
       key_entry->gconf_key = g_strdup (key_string);
-      key_entry->description = description;
       key_entry->editable = gconf_entry_get_is_writable (entry);
       key_entry->model = model;
+      key_entry->description = description;
+      if (keys_list[j].description_name != NULL)
+        {
+          key_entry->desc_gconf_key =  g_strdup (keys_list[j].description_name);
+          key_entry->desc_editable = gconf_client_key_is_writable (client, key_entry->desc_gconf_key, NULL);
+          key_entry->gconf_cnxn_desc = gconf_client_notify_add (client,
+								key_entry->desc_gconf_key,
+								(GConfClientNotifyFunc) &keybinding_description_changed,
+								key_entry, NULL, NULL);
+        }
+
       gconf_client_add_dir (client, key_string, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
       key_entry->gconf_cnxn = gconf_client_notify_add (client,
 						       key_string,
 						       (GConfClientNotifyFunc) &keybinding_key_changed,
 						       key_entry, NULL, NULL);
+
+      key_value = gconf_client_get_string (client, key_string, NULL);
       binding_from_string (key_value, &key_entry->keyval, &key_entry->keycode, &key_entry->mask);
       g_free (key_value);
 
       gconf_entry_free (entry);
       ensure_scrollbar (dialog, i);
 
-      i++;
+      ++i;
       gtk_tree_store_append (GTK_TREE_STORE (model), &iter, &parent_iter);
-      if (key_entry->description != NULL)
-	gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
-			    DESCRIPTION_COLUMN,
-                            key_entry->description,
-			    KEYENTRY_COLUMN, key_entry,
-			    -1);
-      else
-	gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
-			    DESCRIPTION_COLUMN, _("<Unknown Action>"),
-			    KEYENTRY_COLUMN, key_entry,
-			    -1);
+      /* we use the DESCRIPTION_COLUMN only for the section headers */
+      gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
+			  KEYENTRY_COLUMN, key_entry,
+			  -1);
       gtk_tree_view_expand_all (GTK_TREE_VIEW (WID ("shortcut_treeview")));
     }
 
@@ -624,7 +669,7 @@ parse_start_tag (GMarkupParseContext *ctx,
     return;
 
   key.name = g_strdup (name);
-  key.description = NULL;
+  key.description_name = NULL;
   key.value = value;
   if (gconf_key)
     key.key = g_strdup (gconf_key);
@@ -691,7 +736,7 @@ append_keys_to_tree_from_file (GladeXML   *dialog,
 
   /* Empty KeyListEntry to end the array */
   key.name = NULL;
-  key.description = NULL;
+  key.description_name = NULL;
   key.key = NULL;
   key.value = 0;
   key.comparison = COMPARISON_NONE;
@@ -735,14 +780,8 @@ append_keys_to_tree_from_gconf (GladeXML *dialog, const gchar *gconf_path)
 
   for (l = custom_list; l != NULL; l = l->next)
     {
-      gchar *gconf_key;
-
       key.name = g_strconcat (l->data, "/binding", NULL);
-
-      gconf_key = g_strconcat (l->data, "/action", NULL);
-      key.description = gconf_client_get_string (client, gconf_key, NULL);
-      g_free (gconf_key);
-
+      key.description_name = g_strconcat (l->data, "/action", NULL);
       g_array_append_val (entries, key);
 
       g_free (l->data);
@@ -758,7 +797,7 @@ append_keys_to_tree_from_gconf (GladeXML *dialog, const gchar *gconf_path)
 
       /* Empty KeyListEntry to end the array */
       key.name = NULL;
-      key.description = NULL;
+      key.description_name = NULL;
       g_array_append_val (entries, key);
 
       keys = (KeyListEntry *) entries->data;
@@ -766,7 +805,7 @@ append_keys_to_tree_from_gconf (GladeXML *dialog, const gchar *gconf_path)
       for (i = 0; i < entries->len; ++i)
         {
           g_free (keys[i].name);
-          g_free (keys[i].description);
+          g_free (keys[i].description_name);
         }
     }
 
@@ -848,6 +887,8 @@ cb_check_for_uniqueness (GtkTreeModel *model,
   new_key->editable = FALSE;
   new_key->gconf_key = element->gconf_key;
   new_key->description = element->description;
+  new_key->desc_gconf_key = element->desc_gconf_key;
+  new_key->desc_editable = element->desc_editable;
   return TRUE;
 }
 
@@ -956,7 +997,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 				  GTK_MESSAGE_WARNING,
 				  GTK_BUTTONS_CANCEL,
 				  _("The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
-				  "Please try with a key such as Control, Alt or Shift at the same time.\n"),
+				  "Please try with a key such as Control, Alt or Shift at the same time."),
 				  name);
 
 	g_free (name);
@@ -984,7 +1025,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
                                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
                                 GTK_MESSAGE_WARNING,
                                 GTK_BUTTONS_CANCEL,
-                                _("The shortcut \"%s\" is already used for:\n \"%s\"\n"),
+                                _("The shortcut \"%s\" is already used for:\n \"%s\""),
                                 name,
                                 tmp_key.description ?
                                 tmp_key.description : tmp_key.gconf_key);
@@ -1000,13 +1041,13 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
   str = binding_name (keyval, keycode, mask, FALSE);
 
-  client = gconf_client_get_default();
+  client = gconf_client_get_default ();
   gconf_client_set_string (client,
                            key_entry->gconf_key,
                            str,
                            &err);
   g_free (str);
-  g_object_unref (G_OBJECT (client));
+  g_object_unref (client);
 
   if (err != NULL)
     {
@@ -1016,7 +1057,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 				       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_WARNING,
 				       GTK_BUTTONS_OK,
-				       _("Error setting new accelerator in configuration database: %s\n"),
+				       _("Error setting new accelerator in configuration database: %s"),
 				       err->message);
       gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -1058,7 +1099,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
 			   key_entry->gconf_key,
 			   "disabled",
 			   &err);
-  g_object_unref (G_OBJECT (client));
+  g_object_unref (client);
 
   if (err != NULL)
     {
@@ -1068,7 +1109,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
 				       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_WARNING,
 				       GTK_BUTTONS_OK,
-				       _("Error unsetting accelerator in configuration database: %s\n"),
+				       _("Error unsetting accelerator in configuration database: %s"),
 				       err->message);
       gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -1078,11 +1119,44 @@ accel_cleared_callback (GtkCellRendererText *cell,
     }
 }
 
+static void
+description_edited_callback (GtkCellRendererText *renderer,
+                             gchar               *path_string,
+                             gchar               *new_text,
+                             gpointer             user_data)
+{
+  GConfClient *client;
+  GtkTreeView *view = GTK_TREE_VIEW (user_data);
+  GtkTreeModel *model;
+  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
+  GtkTreeIter iter;
+  KeyEntry *key_entry;
+
+  model = gtk_tree_view_get_model (view);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_path_free (path);
+
+  gtk_tree_model_get (model, &iter,
+		      KEYENTRY_COLUMN, &key_entry,
+		      -1);
+
+  /* sanity check */
+  if (key_entry == NULL || key_entry->desc_gconf_key == NULL)
+    return;
+
+  client = gconf_client_get_default ();
+  if (!gconf_client_set_string (client, key_entry->desc_gconf_key, new_text, NULL))
+    key_entry->desc_editable = FALSE;
+
+  g_object_unref (client);
+}
+
 
 typedef struct
 {
   GtkTreeView *tree_view;
   GtkTreePath *path;
+  GtkTreeViewColumn *column;
 } IdleData;
 
 static gboolean
@@ -1091,9 +1165,8 @@ real_start_editing_cb (IdleData *idle_data)
   gtk_widget_grab_focus (GTK_WIDGET (idle_data->tree_view));
   gtk_tree_view_set_cursor (idle_data->tree_view,
 			    idle_data->path,
-			    gtk_tree_view_get_column (idle_data->tree_view, 1),
+			    idle_data->column,
 			    TRUE);
-
   gtk_tree_path_free (idle_data->path);
   g_free (idle_data);
   return FALSE;
@@ -1120,6 +1193,7 @@ start_editing_cb (GtkTreeView    *tree_view,
 		  gpointer        user_data)
 {
   GtkTreePath *path;
+  GtkTreeViewColumn *column;
 
   if (event->window != gtk_tree_view_get_bin_window (tree_view))
     return FALSE;
@@ -1127,10 +1201,13 @@ start_editing_cb (GtkTreeView    *tree_view,
   if (gtk_tree_view_get_path_at_pos (tree_view,
 				     (gint) event->x,
 				     (gint) event->y,
-				     &path, NULL,
+				     &path, &column,
 				     NULL, NULL))
     {
       IdleData *idle_data;
+      GtkTreeModel *model;
+      GtkTreeIter iter;
+      KeyEntry *key;
 
       if (gtk_tree_path_get_depth (path) == 1)
 	{
@@ -1138,10 +1215,20 @@ start_editing_cb (GtkTreeView    *tree_view,
 	  return FALSE;
 	}
 
+      model = gtk_tree_view_get_model (tree_view);
+      gtk_tree_model_get_iter (model, &iter, path);
+      gtk_tree_model_get (model, &iter,
+                          KEYENTRY_COLUMN, &key,
+                         -1);
+
       idle_data = g_new (IdleData, 1);
       idle_data->tree_view = tree_view;
       idle_data->path = path;
-      g_signal_stop_emission_by_name (G_OBJECT (tree_view), "button_press_event");
+      /* if only the accel can be edited on the selected row
+       * always select the accel column */
+      idle_data->column = key->desc_editable ? column :
+                          gtk_tree_view_get_column (tree_view, 1);
+      g_signal_stop_emission_by_name (tree_view, "button_press_event");
       g_idle_add ((GSourceFunc) real_start_editing_cb, idle_data);
       block_accels = TRUE;
     }
@@ -1188,49 +1275,52 @@ setup_dialog (GladeXML *dialog)
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
   GtkWidget *widget;
+  GtkTreeView *treeview = GTK_TREE_VIEW (WID ("shortcut_treeview"));
   gchar *wm_name;
 
   client = gconf_client_get_default ();
 
-  g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
-		    "button_press_event",
+  g_signal_connect (treeview, "button_press_event",
 		    G_CALLBACK (start_editing_cb), NULL);
-  g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
-		    "row-activated",
+  g_signal_connect (treeview, "row-activated",
 		    G_CALLBACK (start_editing_kb_cb), NULL);
 
+  renderer = gtk_cell_renderer_text_new ();
+
+  g_signal_connect (renderer, "edited",
+                    G_CALLBACK (description_edited_callback),
+                    treeview);
+
   column = gtk_tree_view_column_new_with_attributes (_("Action"),
-						     gtk_cell_renderer_text_new (),
+						     renderer,
 						     "text", DESCRIPTION_COLUMN,
 						     NULL);
+  gtk_tree_view_column_set_cell_data_func (column, renderer, description_set_func, NULL, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
 
-  gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
+  gtk_tree_view_append_column (treeview, column);
   gtk_tree_view_column_set_sort_column_id (column, DESCRIPTION_COLUMN);
 
   renderer = (GtkCellRenderer *) g_object_new (EGG_TYPE_CELL_RENDERER_KEYS,
-					       "editable", TRUE,
 					       "accel_mode", EGG_CELL_RENDERER_KEYS_MODE_X,
 					       NULL);
 
-  g_signal_connect (G_OBJECT (renderer),
-		    "accel_edited",
+  g_signal_connect (renderer, "accel_edited",
                     G_CALLBACK (accel_edited_callback),
-                    WID ("shortcut_treeview"));
+                    treeview);
 
-  g_signal_connect (G_OBJECT (renderer),
-		    "accel_cleared",
+  g_signal_connect (renderer, "accel_cleared",
                     G_CALLBACK (accel_cleared_callback),
-                    WID ("shortcut_treeview"));
+                    treeview);
 
   column = gtk_tree_view_column_new_with_attributes (_("Shortcut"), renderer, NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
 
-  gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
+  gtk_tree_view_append_column (treeview, column);
   gtk_tree_view_column_set_sort_column_id (column, KEYENTRY_COLUMN);
 
-  gconf_client_add_dir (client, "/apps/gnome_keybinding_properties", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  gconf_client_add_dir (client, GCONF_BINDING_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_notify_add (client,
 			   "/apps/metacity/general/num_workspaces",
@@ -1247,8 +1337,8 @@ setup_dialog (GladeXML *dialog)
   capplet_set_icon (widget, "gnome-settings-keybindings");
   gtk_widget_show (widget);
 
-  g_signal_connect (G_OBJECT (widget), "key_press_event", G_CALLBACK (maybe_block_accels), NULL);
-  g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK (cb_dialog_response), dialog);
+  g_signal_connect (widget, "key_press_event", G_CALLBACK (maybe_block_accels), NULL);
+  g_signal_connect (widget, "response", G_CALLBACK (cb_dialog_response), dialog);
 }
 
 int
