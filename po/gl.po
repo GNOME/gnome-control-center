@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-30 11:20+0200\n"
-"PO-Revision-Date: 2008-04-30 11:29+0200\n"
+"POT-Creation-Date: 2008-06-01 13:47+0200\n"
+"PO-Revision-Date: 2008-06-01 13:48+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -58,12 +58,12 @@ msgid "No Image"
 msgstr "Sen imaxe"
 
 #: ../capplets/about-me/gnome-about-me.c:769
-#: ../capplets/appearance/appearance-desktop.c:1054
+#: ../capplets/appearance/appearance-desktop.c:1080
 msgid "Images"
 msgstr "Imaxes"
 
 #: ../capplets/about-me/gnome-about-me.c:773
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:717
 msgid "All Files"
 msgstr "Todos os ficheiros"
 
@@ -506,11 +506,11 @@ msgid "Enable support for GNOME assistive technologies at login"
 msgstr ""
 "Activa o soporte para as tecnoloxías adaptadas do Gnome ao iniciar sesión"
 
-#: ../capplets/appearance/appearance-desktop.c:1022
+#: ../capplets/appearance/appearance-desktop.c:1048
 msgid "Add Wallpaper"
 msgstr "Engadir unha imaxe de fondo"
 
-#: ../capplets/appearance/appearance-desktop.c:1058
+#: ../capplets/appearance/appearance-desktop.c:1084
 msgid "All files"
 msgstr "Todos os ficheiros"
 
@@ -562,64 +562,43 @@ msgstr "Usar o tipo de letra anterior"
 msgid "Use selected font"
 msgstr "Uar o tipo de letra seleccionado"
 
-#: ../capplets/appearance/appearance-main.c:108
+#: ../capplets/appearance/appearance-main.c:107
 msgid "Specify the filename of a theme to install"
 msgstr "Especificar o nome do ficheiro do tema a instalar"
 
-#: ../capplets/appearance/appearance-main.c:109
+#: ../capplets/appearance/appearance-main.c:108
 msgid "filename"
 msgstr "nome de ficheiro"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
 "Especificar o nome da páxina a mostrar (tema|fondo|tipos de letra|interface)"
 
-#: ../capplets/appearance/appearance-main.c:117
-#: ../capplets/default-applications/gnome-da-capplet.c:1329
+#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/default-applications/gnome-da-capplet.c:880
 #: ../capplets/mouse/gnome-mouse-properties.c:444
 msgid "page"
 msgstr "páxina"
 
-#: ../capplets/appearance/appearance-main.c:124
+#: ../capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[IMAXE DE FONDO...]"
 
-#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:159
 #: ../capplets/common/gnome-theme-info.c:439
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:628
 msgid "Default Pointer"
 msgstr "O punteiro por defecto"
 
-#: ../capplets/appearance/appearance-themes.c:362
-#, c-format
-msgid ""
-"This theme will not look as intended because the required GTK+ theme '%s' is "
-"not installed."
-msgstr ""
-"Este tema non se mostrará como se pretende porque o tema GTK+ '%s' non está "
-"instalado."
+#: ../capplets/appearance/appearance-style.c:221
+#: ../capplets/appearance/appearance-themes.c:685
+msgid "Install"
+msgstr "Instalar"
 
-#: ../capplets/appearance/appearance-themes.c:369
-#, c-format
-msgid ""
-"This theme will not look as intended because the required window manager "
-"theme '%s' is not installed."
-msgstr ""
-"Este tema non se mostrará como se pretende porque o tema do xestor de ventás "
-"necesario '%s' non está instalado."
-
-#: ../capplets/appearance/appearance-themes.c:375
-#, c-format
-msgid ""
-"This theme will not look as intended because the required icon theme '%s' is "
-"not installed."
-msgstr ""
-"Este tema non se mostrará como se pretende porque o tema de iconas necesario "
-"'%s' non está instalado."
-
-#: ../capplets/appearance/appearance-themes.c:399
+#: ../capplets/appearance/appearance-style.c:241
+#: ../capplets/common/gnome-theme-info.c:1634
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
@@ -628,19 +607,19 @@ msgstr ""
 "Este tema non se mostrará como se pretende porque o motor de temas GTK+ "
 "necesario '%s' non está instalado."
 
-#: ../capplets/appearance/appearance-themes.c:716
+#: ../capplets/appearance/appearance-themes.c:673
 msgid "Apply Background"
 msgstr "Aplicar fondo"
 
-#: ../capplets/appearance/appearance-themes.c:720
+#: ../capplets/appearance/appearance-themes.c:677
 msgid "Apply Font"
 msgstr "Aplicar tipo de letra"
 
-#: ../capplets/appearance/appearance-themes.c:724
+#: ../capplets/appearance/appearance-themes.c:681
 msgid "Revert Font"
 msgstr "Revertir tipo de letra"
 
-#: ../capplets/appearance/appearance-themes.c:750
+#: ../capplets/appearance/appearance-themes.c:711
 msgid ""
 "The current theme suggests a background and a font. Also, the last applied "
 "font suggestion can be reverted."
@@ -648,7 +627,7 @@ msgstr ""
 "O tema actual suxire un fondo e un tipo de letra. Ademáis, pódese revertir a "
 "última suxestión de tipo de letra."
 
-#: ../capplets/appearance/appearance-themes.c:752
+#: ../capplets/appearance/appearance-themes.c:713
 msgid ""
 "The current theme suggests a background. Also, the last applied font "
 "suggestion can be reverted."
@@ -656,11 +635,11 @@ msgstr ""
 "O tema actual suxire un fondo e un tipo de letra. Ademáis, pódese revertir a "
 "última suxestión de tipo de letra aplicada."
 
-#: ../capplets/appearance/appearance-themes.c:754
+#: ../capplets/appearance/appearance-themes.c:715
 msgid "The current theme suggests a background and a font."
 msgstr "O tema actual suxire un fondo e un tipo de letra."
 
-#: ../capplets/appearance/appearance-themes.c:756
+#: ../capplets/appearance/appearance-themes.c:717
 msgid ""
 "The current theme suggests a font. Also, the last applied font suggestion "
 "can be reverted."
@@ -668,20 +647,20 @@ msgstr ""
 "O tema actual suxire un tipo de letra. Ademáis, pódese revertir a última "
 "suxestión de tipo de letra aplicada."
 
-#: ../capplets/appearance/appearance-themes.c:758
+#: ../capplets/appearance/appearance-themes.c:719
 msgid "The current theme suggests a background."
 msgstr "O tema actual suxire un fondo."
 
-#: ../capplets/appearance/appearance-themes.c:760
+#: ../capplets/appearance/appearance-themes.c:721
 msgid "The last applied font suggestion can be reverted."
 msgstr "Pódese revertir a última suxestión de tipo de letra aplicada."
 
-#: ../capplets/appearance/appearance-themes.c:762
+#: ../capplets/appearance/appearance-themes.c:723
 msgid "The current theme suggests a font."
 msgstr "O tema actual suxire un tipo de letra."
 
-#: ../capplets/appearance/appearance-themes.c:1082
-#: ../capplets/default-applications/gnome-da-capplet.c:1080
+#: ../capplets/appearance/appearance-themes.c:1046
+#: ../capplets/default-applications/gnome-da-capplet.c:630
 #: ../capplets/sound/sound-properties-capplet.c:328
 msgid "Custom"
 msgstr "Personalizar"
@@ -1070,11 +1049,11 @@ msgstr "Instalador de temas"
 msgid "Gnome Theme Package"
 msgstr "Paquete de tema de Gnome"
 
-#: ../capplets/appearance/gnome-wp-info.c:45
+#: ../capplets/appearance/gnome-wp-info.c:50
 msgid "No Wallpaper"
 msgstr "Sen imaxe de fondo"
 
-#: ../capplets/appearance/gnome-wp-item.c:212
+#: ../capplets/appearance/gnome-wp-item.c:209
 msgid "Slide Show"
 msgstr "Presentación de diapositivas"
 
@@ -1082,7 +1061,7 @@ msgstr "Presentación de diapositivas"
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:220
+#: ../capplets/appearance/gnome-wp-item.c:217
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1093,37 +1072,37 @@ msgstr ""
 "%s, %d %s por %d %s\n"
 "Cartafol: %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:226
-#: ../capplets/appearance/gnome-wp-item.c:228
+#: ../capplets/appearance/gnome-wp-item.c:223
+#: ../capplets/appearance/gnome-wp-item.c:225
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "píxel"
 msgstr[1] "píxeles"
 
-#: ../capplets/appearance/theme-installer.c:166
-#: ../capplets/appearance/theme-installer.c:216
+#: ../capplets/appearance/theme-installer.c:171
+#: ../capplets/appearance/theme-installer.c:221
 msgid "Cannot install theme"
 msgstr "Non se pode instalar o tema"
 
-#: ../capplets/appearance/theme-installer.c:168
+#: ../capplets/appearance/theme-installer.c:173
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "A utilidade %s non está instalada."
 
-#: ../capplets/appearance/theme-installer.c:218
+#: ../capplets/appearance/theme-installer.c:223
 msgid "There was a problem while extracting the theme."
 msgstr "Ocorreu un problema extraendo o tema."
 
-#: ../capplets/appearance/theme-installer.c:241
+#: ../capplets/appearance/theme-installer.c:246
 msgid "There was an error installing the selected file"
 msgstr "Ocorreu un erro instalando o ficheiro seleccionado"
 
-#: ../capplets/appearance/theme-installer.c:242
+#: ../capplets/appearance/theme-installer.c:247
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "\"%s\" non parece ser un tema válido."
 
-#: ../capplets/appearance/theme-installer.c:243
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
@@ -1132,47 +1111,47 @@ msgstr ""
 "\"%s\" non parece ser un tema válido. Pode ser un motor de temas que debe "
 "compilar."
 
-#: ../capplets/appearance/theme-installer.c:282
+#: ../capplets/appearance/theme-installer.c:287
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "O tema de Gnome %s instalouse correctamente"
 
-#: ../capplets/appearance/theme-installer.c:342
+#: ../capplets/appearance/theme-installer.c:354
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Fallou a instalación do tema \"%s\"."
 
-#: ../capplets/appearance/theme-installer.c:374
+#: ../capplets/appearance/theme-installer.c:392
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Foi instalado o tema \"%s\"."
 
-#: ../capplets/appearance/theme-installer.c:380
+#: ../capplets/appearance/theme-installer.c:398
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Quere aplicalo agora, ou manter o tema actual?"
 
-#: ../capplets/appearance/theme-installer.c:382
+#: ../capplets/appearance/theme-installer.c:400
 msgid "Keep Current Theme"
 msgstr "Manter o tema actual"
 
-#: ../capplets/appearance/theme-installer.c:384
+#: ../capplets/appearance/theme-installer.c:402
 msgid "Apply New Theme"
 msgstr "Aplicar o tema novo"
 
-#: ../capplets/appearance/theme-installer.c:486
+#: ../capplets/appearance/theme-installer.c:505
 msgid "Failed to create temporary directory"
 msgstr "Fallou ao crear o directorio temporal"
 
-#: ../capplets/appearance/theme-installer.c:546
+#: ../capplets/appearance/theme-installer.c:568
 msgid "New themes have been successfully installed."
 msgstr "Os novos temas instaláronse satisfactoriamente."
 
-#: ../capplets/appearance/theme-installer.c:573
+#: ../capplets/appearance/theme-installer.c:595
 msgid "No theme file location specified to install"
 msgstr ""
 "Non se especificou ningunha localización do ficheiro de tema para instalar"
 
-#: ../capplets/appearance/theme-installer.c:593
+#: ../capplets/appearance/theme-installer.c:615
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1181,7 +1160,7 @@ msgstr ""
 "Permisos insuficientes para instalar o tema en:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:615
+#: ../capplets/appearance/theme-installer.c:637
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1190,11 +1169,11 @@ msgstr ""
 "%s é a ruta onde se instalarán o ficheiros de temas. Isto non se pode "
 "seleccionar como localización de orixe"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:706
 msgid "Select Theme"
 msgstr "Seleccionar tema"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:710
 msgid "Theme Packages"
 msgstr "Paquetes de tema"
 
@@ -1203,22 +1182,26 @@ msgstr "Paquetes de tema"
 msgid "Theme name must be present"
 msgstr "O nome do tema debe estar presente"
 
-#: ../capplets/appearance/theme-save.c:161
+#: ../capplets/appearance/theme-save.c:154
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "O tema xa existe. Quere substituílo?"
 
-#: ../capplets/appearance/theme-save.c:162
+#: ../capplets/appearance/theme-save.c:155
 #: ../capplets/common/file-transfer-dialog.c:450
 msgid "_Overwrite"
 msgstr "_Substituír"
 
-#: ../capplets/appearance/theme-util.c:69
+#: ../capplets/appearance/theme-util.c:134
 msgid "Would you like to delete this theme?"
 msgstr "Quere eliminar este tema?"
 
-#: ../capplets/appearance/theme-util.c:121
+#: ../capplets/appearance/theme-util.c:179
 msgid "Theme cannot be deleted"
 msgstr "O tema non se pode eliminar"
+
+#: ../capplets/appearance/theme-util.c:304
+msgid "Could not install theme engine"
+msgstr "Non se puido instalar o motor do tema"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1331,84 +1314,84 @@ msgstr "_Saltar"
 msgid "Overwrite _All"
 msgstr "_Substituír todo"
 
-#: ../capplets/common/gconf-property-editor.c:170
+#: ../capplets/common/gconf-property-editor.c:133
 msgid "Key"
 msgstr "Tecla"
 
-#: ../capplets/common/gconf-property-editor.c:171
+#: ../capplets/common/gconf-property-editor.c:134
 msgid "GConf key to which this property editor is attached"
 msgstr "Tecla do GConf á que está anexado este editor de propiedades"
 
-#: ../capplets/common/gconf-property-editor.c:177
+#: ../capplets/common/gconf-property-editor.c:140
 msgid "Callback"
 msgstr "Chamada de retorno"
 
-#: ../capplets/common/gconf-property-editor.c:178
+#: ../capplets/common/gconf-property-editor.c:141
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Emitir esta chamada de retorno cando se modifique o valor asociado a unha "
 "tecla"
 
-#: ../capplets/common/gconf-property-editor.c:183
+#: ../capplets/common/gconf-property-editor.c:146
 msgid "Change set"
 msgstr "Conxunto de cambios"
 
-#: ../capplets/common/gconf-property-editor.c:184
+#: ../capplets/common/gconf-property-editor.c:147
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Conxunto de cambios que conteñen datos do GConf e que se reenviarán ao "
 "cliente GConf cando se apliquen"
 
-#: ../capplets/common/gconf-property-editor.c:189
+#: ../capplets/common/gconf-property-editor.c:152
 msgid "Conversion to widget callback"
 msgstr "Chamada de retorno de conversión a widget"
 
-#: ../capplets/common/gconf-property-editor.c:190
+#: ../capplets/common/gconf-property-editor.c:153
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Chamada de retorno que debe emitirse cando os datos sexan convertidos do "
 "GConf ao widget"
 
-#: ../capplets/common/gconf-property-editor.c:195
+#: ../capplets/common/gconf-property-editor.c:158
 msgid "Conversion from widget callback"
 msgstr "Chamada de retorno de conversión desde widget"
 
-#: ../capplets/common/gconf-property-editor.c:196
+#: ../capplets/common/gconf-property-editor.c:159
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Chamada de retorno que debe emitirse cando os datos se convertan para o "
 "GConf desde o widget"
 
-#: ../capplets/common/gconf-property-editor.c:201
+#: ../capplets/common/gconf-property-editor.c:164
 msgid "UI Control"
 msgstr "Control da interface de usuario"
 
-#: ../capplets/common/gconf-property-editor.c:202
+#: ../capplets/common/gconf-property-editor.c:165
 msgid "Object that controls the property (normally a widget)"
 msgstr "Obxecto que controla a propiedade (normalmente un widget)"
 
-#: ../capplets/common/gconf-property-editor.c:217
+#: ../capplets/common/gconf-property-editor.c:180
 msgid "Property editor object data"
 msgstr "Datos de obxecto do editor de propiedades"
 
-#: ../capplets/common/gconf-property-editor.c:218
+#: ../capplets/common/gconf-property-editor.c:181
 msgid "Custom data required by the specific property editor"
 msgstr "Datos personalizados requiridos polo editor específico de propiedades"
 
-#: ../capplets/common/gconf-property-editor.c:224
+#: ../capplets/common/gconf-property-editor.c:187
 msgid "Property editor data freeing callback"
 msgstr "Chamada de retorno que libera datos do editor de propiedades"
 
-#: ../capplets/common/gconf-property-editor.c:225
+#: ../capplets/common/gconf-property-editor.c:188
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Chamada de retorno que se emite cando se van liberar os datos de obxecto do "
 "editor de propiedades"
 
-#: ../capplets/common/gconf-property-editor.c:1467
+#: ../capplets/common/gconf-property-editor.c:1429
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1421,7 +1404,7 @@ msgstr ""
 "Asegúrese de que existe e volva a tentalo ou escolla unha imaxe de fondo "
 "diferente."
 
-#: ../capplets/common/gconf-property-editor.c:1475
+#: ../capplets/common/gconf-property-editor.c:1437
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1434,41 +1417,68 @@ msgstr ""
 "\n"
 "Seleccione no seu lugar outra imaxe diferente."
 
-#: ../capplets/common/gconf-property-editor.c:1594
+#: ../capplets/common/gconf-property-editor.c:1556
 msgid "Please select an image."
 msgstr "Seleccione unha imaxe."
 
-#: ../capplets/common/gconf-property-editor.c:1599
+#: ../capplets/common/gconf-property-editor.c:1561
 msgid "_Select"
 msgstr "_Seleccionar"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:629
 msgid "Default Pointer - Current"
 msgstr "Punteiro predeterminado - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:633
 msgid "White Pointer"
 msgstr "Punteiro branco"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "White Pointer - Current"
 msgstr "Punteiro branco - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Large Pointer"
 msgstr "Punteiro grande"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Large Pointer - Current"
 msgstr "Punteiro grande - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:653
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "Large White Pointer - Current"
 msgstr "Punteiro branco grande - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:654
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large White Pointer"
 msgstr "Punteiro branco grande"
+
+#: ../capplets/common/gnome-theme-info.c:1610
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme '%s' is "
+"not installed."
+msgstr ""
+"Este tema non se mostrará como se pretende porque o tema GTK+ '%s' non está "
+"instalado."
+
+#: ../capplets/common/gnome-theme-info.c:1618
+#, c-format
+msgid ""
+"This theme will not look as intended because the required window manager "
+"theme '%s' is not installed."
+msgstr ""
+"Este tema non se mostrará como se pretende porque o tema do xestor de ventás "
+"necesario '%s' non está instalado."
+
+#: ../capplets/common/gnome-theme-info.c:1625
+#, c-format
+msgid ""
+"This theme will not look as intended because the required icon theme '%s' is "
+"not installed."
+msgstr ""
+"Este tema non se mostrará como se pretende porque o tema de iconas necesario "
+"'%s' non está instalado."
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
@@ -1487,32 +1497,23 @@ msgstr "Iniciar a tecnoloxía de asistencia visual preferida"
 msgid "Visual Assistance"
 msgstr "Asistencia visual"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:112
-#: ../capplets/default-applications/gnome-da-capplet.c:133
-#: ../capplets/default-applications/gnome-da-capplet.c:177
-#: ../capplets/default-applications/gnome-da-capplet.c:222
-#: ../capplets/default-applications/gnome-da-capplet.c:279
-#: ../capplets/default-applications/gnome-da-capplet.c:330
-#: ../capplets/default-applications/gnome-da-capplet.c:381
-#: ../capplets/default-applications/gnome-da-capplet.c:434
-#: ../capplets/default-applications/gnome-da-capplet.c:484
-#: ../capplets/default-applications/gnome-da-capplet.c:877
-#: ../capplets/default-applications/gnome-da-capplet.c:899
+#: ../capplets/default-applications/gnome-da-capplet.c:94
+#: ../capplets/default-applications/gnome-da-capplet.c:345
+#: ../capplets/default-applications/gnome-da-capplet.c:366
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Erro ao gardar a configuración: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1100
+#: ../capplets/default-applications/gnome-da-capplet.c:650
 msgid "Could not load the main interface"
 msgstr "Non se puido cargar a interface principal"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1102
+#: ../capplets/default-applications/gnome-da-capplet.c:652
 msgid "Please make sure that the applet is properly installed"
 msgstr "Asegúrese de que a miniaplicación está instalada correctamente"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/default-applications/gnome-da-capplet.c:1328
+#: ../capplets/default-applications/gnome-da-capplet.c:879
 msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
 msgstr ""
 "Especificar o nome da páxina a mostrar (internet|multimedia|system|a11y)"
@@ -1936,7 +1937,7 @@ msgid "Sound"
 msgstr "Son"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1156
+#: ../libslab/bookmark-agent.c:1158
 msgid "Desktop"
 msgstr "Escritorio"
 
@@ -1968,16 +1969,20 @@ msgid "The type of accelerator."
 msgstr "O tipo de tecla rápida."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:90
+#: ../capplets/keybindings/gnome-keybinding-properties.c:92
 #: ../typing-break/drwright.c:483
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:493
+#: ../capplets/keybindings/gnome-keybinding-properties.c:506
 msgid "<Unknown Action>"
 msgstr "<Acción descoñecida>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:885
+#: ../capplets/keybindings/gnome-keybinding-properties.c:765
+msgid "Custom Shortcuts"
+msgstr "Atallos personalizados"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:958
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1988,7 +1993,7 @@ msgstr ""
 "esta tecla.\n"
 "Ténteo cunha tecla como Control, Alt ou Maiús ao mesmo tempo.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:914
+#: ../capplets/keybindings/gnome-keybinding-properties.c:987
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1997,24 +2002,24 @@ msgstr ""
 "O atallo \"%s\" xa se usa para:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:946
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1019
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Erro ao configurar un novo acelerador na base de datos da configuración: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:998
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1071
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Erro ao eliminar a configuración dunha tecla rápida na base de datos de "
 "configuración: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1129
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1202
 msgid "Action"
 msgstr "Acción"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1153
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1226
 msgid "Shortcut"
 msgstr "Atallo"
 
@@ -2874,36 +2879,36 @@ msgid "Windows"
 msgstr "Ventás"
 
 #. make start action
-#: ../libslab/application-tile.c:369
+#: ../libslab/application-tile.c:372
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>Iniciar %s</b>"
 
-#: ../libslab/application-tile.c:388 ../libslab/bookmark-agent.c:1059
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1059
 msgid "Help"
 msgstr "Axuda"
 
-#: ../libslab/application-tile.c:435
+#: ../libslab/application-tile.c:438
 msgid "Upgrade"
 msgstr "Actualizar"
 
-#: ../libslab/application-tile.c:450
+#: ../libslab/application-tile.c:453
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:741
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:760
 msgid "Remove from Favorites"
 msgstr "Eliminar dos preferidos"
 
-#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:743
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:762
 msgid "Add to Favorites"
 msgstr "Engadir aos preferidos"
 
-#: ../libslab/application-tile.c:864
+#: ../libslab/application-tile.c:867
 msgid "Remove from Startup Programs"
 msgstr "Eliminar dos programas de inicio"
 
-#: ../libslab/application-tile.c:866
+#: ../libslab/application-tile.c:869
 msgid "Add to Startup Programs"
 msgstr "Engadir aos programas de inicio"
 
@@ -2934,31 +2939,31 @@ msgstr "Terminar a sesión"
 msgid "Shutdown"
 msgstr "Apagar"
 
-#: ../libslab/bookmark-agent.c:1089
+#: ../libslab/bookmark-agent.c:1090
 msgid "New Spreadsheet"
 msgstr "Nova folla de cálculo"
 
-#: ../libslab/bookmark-agent.c:1093
+#: ../libslab/bookmark-agent.c:1095
 msgid "New Document"
 msgstr "Novo documento"
 
-#: ../libslab/bookmark-agent.c:1145
+#: ../libslab/bookmark-agent.c:1147
 msgid "Home"
 msgstr "Inicio"
 
-#: ../libslab/bookmark-agent.c:1150
+#: ../libslab/bookmark-agent.c:1152
 msgid "Documents"
 msgstr "Documentos"
 
-#: ../libslab/bookmark-agent.c:1163
+#: ../libslab/bookmark-agent.c:1165
 msgid "File System"
 msgstr "Sistema de ficheiros"
 
-#: ../libslab/bookmark-agent.c:1167
+#: ../libslab/bookmark-agent.c:1169
 msgid "Network Servers"
 msgstr "Servidores de rede"
 
-#: ../libslab/bookmark-agent.c:1196
+#: ../libslab/bookmark-agent.c:1198
 msgid "Search"
 msgstr "Buscar"
 
@@ -2969,72 +2974,72 @@ msgid "<b>Open</b>"
 msgstr "<b>Abrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:228
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:242
 msgid "Rename..."
 msgstr "Renomear..."
 
 #: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
-#: ../libslab/document-tile.c:242 ../libslab/document-tile.c:251
+#: ../libslab/document-tile.c:256 ../libslab/document-tile.c:265
 msgid "Send To..."
 msgstr "Enviar a..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:277
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:291
 msgid "Move to Trash"
 msgstr "Mover ao lixo"
 
 #: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:854
+#: ../libslab/document-tile.c:301 ../libslab/document-tile.c:873
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1026
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1045
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Está seguro de que quere borrar permanentemente \"%s\"?"
 
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1030
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1049
 msgid "If you delete an item, it is permanently lost."
 msgstr "Se borra un elemento, perderase permanentemente."
 
-#: ../libslab/document-tile.c:189
+#: ../libslab/document-tile.c:203
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Abrir con \"%s\"</b>"
 
-#: ../libslab/document-tile.c:201
+#: ../libslab/document-tile.c:215
 msgid "Open with Default Application"
 msgstr "Abrir coa aplicación predeterminada"
 
-#: ../libslab/document-tile.c:212
+#: ../libslab/document-tile.c:226
 msgid "Open in File Manager"
 msgstr "Abrir co xestor de ficheiros"
 
-#: ../libslab/document-tile.c:637
+#: ../libslab/document-tile.c:656
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:644
+#: ../libslab/document-tile.c:663
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#: ../libslab/document-tile.c:652
+#: ../libslab/document-tile.c:671
 msgid "Today %l:%M %p"
 msgstr "Hoxe ás %H:%M"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:681
 msgid "Yesterday %l:%M %p"
 msgstr "Onte ás %H:%M"
 
-#: ../libslab/document-tile.c:674
+#: ../libslab/document-tile.c:693
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../libslab/document-tile.c:682
+#: ../libslab/document-tile.c:701
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %H:%M"
 
-#: ../libslab/document-tile.c:684
+#: ../libslab/document-tile.c:703
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
@@ -3602,19 +3607,19 @@ msgstr "_Aplicar tipo de letra"
 msgid "Themes"
 msgstr "Temas"
 
-#: ../vfs-methods/themus/themus-properties-view.c:127
+#: ../vfs-methods/themus/themus-properties-view.c:128
 msgid "Description"
 msgstr "Descrición"
 
-#: ../vfs-methods/themus/themus-properties-view.c:134
+#: ../vfs-methods/themus/themus-properties-view.c:135
 msgid "Control theme"
 msgstr "Tema de control"
 
-#: ../vfs-methods/themus/themus-properties-view.c:140
+#: ../vfs-methods/themus/themus-properties-view.c:141
 msgid "Window border theme"
 msgstr "Tema do bordo da ventá"
 
-#: ../vfs-methods/themus/themus-properties-view.c:146
+#: ../vfs-methods/themus/themus-properties-view.c:147
 msgid "Icon theme"
 msgstr "Tema de icona"
 
