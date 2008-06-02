@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.23.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-31 12:55+0000\n"
-"PO-Revision-Date: 2008-06-01 22:47+0930\n"
+"POT-Creation-Date: 2008-06-01 16:58+0000\n"
+"PO-Revision-Date: 2008-06-02 16:03+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1200,17 +1200,7 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr "Không thể nạp biểu tượng kho « %s »\n"
 
-#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
-msgid "Just apply settings and quit"
-msgstr "Chỉ áp dụng các thiết lập rồi thoát"
-
-#: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:256
-#: ../capplets/sound/sound-properties-capplet.c:1159
-msgid "Retrieve and store legacy settings"
-msgstr "Nhận và lưu thiết lập cũ"
-
-#: ../capplets/common/capplet-util.c:344
+#: ../capplets/common/capplet-util.c:80
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Gặp lỗi khi hiển thị trợ giúp: %s"
@@ -1963,53 +1953,53 @@ msgid "The type of accelerator."
 msgstr "Kiểu phím tắt."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:92
+#: ../capplets/keybindings/gnome-keybinding-properties.c:90
 #: ../typing-break/drwright.c:483
 msgid "Disabled"
 msgstr "Tắt"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:506
+#: ../capplets/keybindings/gnome-keybinding-properties.c:171
 msgid "<Unknown Action>"
 msgstr "<Hành động lạ>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:765
+#: ../capplets/keybindings/gnome-keybinding-properties.c:804
 msgid "Custom Shortcuts"
 msgstr "Lối tắt tự chọn"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:958
+#: ../capplets/keybindings/gnome-keybinding-properties.c:999
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
 "using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
-"Không thể dùng phím tắt \"%s\" vì không thể gõ nó bằng phím này.\n"
-"Hãy thử lại với phím như Ctrl, Alt hay Shift đồng thời.\n"
+"Không thể dùng phím tắt « %s » vì sẽ không thể gõ nó bằng phím này.\n"
+"Hãy thử lại với phím như Ctrl, Alt hay Shift đồng thời."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:987
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1028
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
-" \"%s\"\n"
+" \"%s\""
 msgstr ""
-"Lối tắt « %s » đã dùng cho:\n"
-" « %s »\n"
+"Phím tắt « %s » đã dùng cho:\n"
+" « %s »"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1019
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
 #, c-format
-msgid "Error setting new accelerator in configuration database: %s\n"
-msgstr "Gặp lỗi khi thiết lập phím tắt mới trong cơ sở dữ liệu cấu hình: %s\n"
+msgid "Error setting new accelerator in configuration database: %s"
+msgstr "Gặp lỗi khi thiết lập phím tắt mới trong cơ sở dữ liệu cấu hình: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1071
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1112
 #, c-format
-msgid "Error unsetting accelerator in configuration database: %s\n"
-msgstr "Gặp lỗi khi hủy thiết lập phím tắt trong cơ sở dữ liệu cấu hình: %s\n"
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "Gặp lỗi khi hủy thiết lập phím tắt trong cơ sở dữ liệu cấu hình: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1202
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1294
 msgid "Action"
 msgstr "Hành động"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1226
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1316
 msgid "Shortcut"
 msgstr "Phím tắt"
 
@@ -2042,6 +2032,11 @@ msgid ""
 msgstr ""
 "Chỉ áp dụng các thiết lập rồi thoát (chỉ để tương thích; lúc này được xử lý "
 "bởi tiến trình nền)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/sound/sound-properties-capplet.c:1159
+msgid "Retrieve and store legacy settings"
+msgstr "Nhận và lưu thiết lập cũ"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:260
 msgid "Start the page with the typing break settings showing"
