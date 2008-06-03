@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 13:47+0200\n"
-"PO-Revision-Date: 2008-06-01 13:48+0200\n"
+"POT-Creation-Date: 2008-06-03 21:55+0200\n"
+"PO-Revision-Date: 2008-06-03 21:56+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgid "No Image"
 msgstr "Sen imaxe"
 
 #: ../capplets/about-me/gnome-about-me.c:769
-#: ../capplets/appearance/appearance-desktop.c:1080
+#: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "Imaxes"
 
@@ -506,11 +506,11 @@ msgid "Enable support for GNOME assistive technologies at login"
 msgstr ""
 "Activa o soporte para as tecnoloxías adaptadas do Gnome ao iniciar sesión"
 
-#: ../capplets/appearance/appearance-desktop.c:1048
+#: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
 msgstr "Engadir unha imaxe de fondo"
 
-#: ../capplets/appearance/appearance-desktop.c:1084
+#: ../capplets/appearance/appearance-desktop.c:665
 msgid "All files"
 msgstr "Todos os ficheiros"
 
@@ -1223,17 +1223,7 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr "Non se puido cargar a icona xenérica'%s'\n"
 
-#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
-msgid "Just apply settings and quit"
-msgstr "Aplicar as configuracións e saír"
-
-#: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:256
-#: ../capplets/sound/sound-properties-capplet.c:1159
-msgid "Retrieve and store legacy settings"
-msgstr "Obter e almacenar opcións anteriores"
-
-#: ../capplets/common/capplet-util.c:344
+#: ../capplets/common/capplet-util.c:80
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ocorreu un erro ao mostrar a axuda: %s"
@@ -1969,57 +1959,57 @@ msgid "The type of accelerator."
 msgstr "O tipo de tecla rápida."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:92
+#: ../capplets/keybindings/gnome-keybinding-properties.c:90
 #: ../typing-break/drwright.c:483
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:506
+#: ../capplets/keybindings/gnome-keybinding-properties.c:171
 msgid "<Unknown Action>"
 msgstr "<Acción descoñecida>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:765
+#: ../capplets/keybindings/gnome-keybinding-properties.c:804
 msgid "Custom Shortcuts"
 msgstr "Atallos personalizados"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:958
+#: ../capplets/keybindings/gnome-keybinding-properties.c:999
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
 "using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
 "Non se pode usar o atallo \"%s\" porque se faría imposible teclear usando "
 "esta tecla.\n"
-"Ténteo cunha tecla como Control, Alt ou Maiús ao mesmo tempo.\n"
+"Ténteo cunha tecla como Control, Alt ou Maiús ao mesmo tempo."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:987
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1028
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
-" \"%s\"\n"
+" \"%s\""
 msgstr ""
 "O atallo \"%s\" xa se usa para:\n"
-" \"%s\"\n"
+" \"%s\""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1019
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
 #, c-format
-msgid "Error setting new accelerator in configuration database: %s\n"
+msgid "Error setting new accelerator in configuration database: %s"
 msgstr ""
-"Erro ao configurar un novo acelerador na base de datos da configuración: %s\n"
+"Erro ao configurar un novo acelerador na base de datos da configuración: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1071
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1112
 #, c-format
-msgid "Error unsetting accelerator in configuration database: %s\n"
+msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Erro ao eliminar a configuración dunha tecla rápida na base de datos de "
-"configuración: %s\n"
+"configuración: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1202
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1294
 msgid "Action"
 msgstr "Acción"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1226
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1316
 msgid "Shortcut"
 msgstr "Atallo"
 
@@ -2052,6 +2042,11 @@ msgid ""
 msgstr ""
 "Aplicar a configuración e saír (só compatibilidade; xestionado agora polo "
 "daemon)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/sound/sound-properties-capplet.c:1159
+msgid "Retrieve and store legacy settings"
+msgstr "Obter e almacenar opcións anteriores"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:260
 msgid "Start the page with the typing break settings showing"
@@ -3677,6 +3672,9 @@ msgstr "Aplicar tema"
 #: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Establece o tema predeterminado"
+
+#~ msgid "Just apply settings and quit"
+#~ msgstr "Aplicar as configuracións e saír"
 
 #~ msgid ""
 #~ "Centered\n"
