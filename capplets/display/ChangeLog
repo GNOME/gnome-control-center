@@ -1,3 +1,11 @@
+2008-06-04  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (driver_is_randr_10): New function, currently
+	unused, to detect whether the graphics driver used in the X server
+	only supports the RANDR 1.0 API.  We may find this information
+	useful to tell the user that not all the features in the capplet
+	will work as intended, or to actually disable features that won't work.
+
 2008-05-29  Federico Mena Quintero  <federico@novell.com>
 
 	* xrandr-capplet.c (apply): Before applying the settings, check if

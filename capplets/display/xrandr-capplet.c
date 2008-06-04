@@ -494,6 +494,17 @@ count_active_outputs (App *app)
     return count;
 }
 
+static int
+count_all_outputs (Configuration *config)
+{
+    int i;
+
+    for (i = 0; config->outputs[i] != NULL; i++)
+	;
+
+    return i;
+}
+
 static void
 rebuild_resolution_combo (App *app)
 {
@@ -1543,6 +1554,27 @@ apply (App *app)
 		    FALSE,
 		    StructureNotifyMask, &message);
     }
+}
+
+/* Returns whether the graphics driver doesn't advertise RANDR 1.2 features, and just 1.0 */
+static gboolean
+driver_is_randr_10 (Configuration *config)
+{
+    /* In the Xorg code, see xserver/randr/rrinfo.c:RRScanOldConfig().  It gets
+     * called when the graphics driver doesn't support RANDR 1.2 yet, just 1.0.
+     * In that case, the X server's base code (which supports RANDR 1.2) will
+     * simulate having a single output called "default".  For drivers that *do*
+     * support RANDR 1.2, the separate outputs will be named differently, we
+     * hope.
+     *
+     * This heuristic is courtesy of Dirk Mueller <dmueller@suse.de>
+     *
+     * FIXME: however, we don't even check for XRRQueryVersion() returning 1.2, neither
+     * here nor in gnome-desktop/libgnomedesktop/*.c.  Do we need to check for that,
+     * or is rw_screen_new()'s return value sufficient?
+     */
+
+    return (count_all_outputs (config) == 1 && strcmp (config->outputs[0]->name, "default") == 0);
 }
 
 static void
