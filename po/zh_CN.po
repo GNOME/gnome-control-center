@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-11 22:00+0000\n"
-"PO-Revision-Date: 2008-02-24 19:00+0800\n"
+"POT-Creation-Date: 2008-06-01 16:58+0000\n"
+"PO-Revision-Date: 2008-06-08 20:13+08+0800\n"
 "Last-Translator: Yang Zhang <zyangmath@gmail.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -47,25 +47,25 @@ msgstr "提醒对话框中显示的按钮"
 msgid "Show more _details"
 msgstr "显示更多细节(_D)"
 
-#: ../capplets/about-me/gnome-about-me.c:665
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Select Image"
 msgstr "选择图像"
 
-#: ../capplets/about-me/gnome-about-me.c:667
+#: ../capplets/about-me/gnome-about-me.c:741
 msgid "No Image"
 msgstr "无图像"
 
-#: ../capplets/about-me/gnome-about-me.c:695
-#: ../capplets/appearance/appearance-desktop.c:1141
+#: ../capplets/about-me/gnome-about-me.c:769
+#: ../capplets/appearance/appearance-desktop.c:1080
 msgid "Images"
 msgstr "图像"
 
-#: ../capplets/about-me/gnome-about-me.c:699
-#: ../capplets/appearance/theme-installer.c:700
+#: ../capplets/about-me/gnome-about-me.c:773
+#: ../capplets/appearance/theme-installer.c:717
 msgid "All Files"
 msgstr "全部文件"
 
-#: ../capplets/about-me/gnome-about-me.c:836
+#: ../capplets/about-me/gnome-about-me.c:911
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -73,16 +73,16 @@ msgstr ""
 "试图获取地址簿信息时出错\n"
 "Evolution 数据服务器无法处理协议"
 
-#: ../capplets/about-me/gnome-about-me.c:857
+#: ../capplets/about-me/gnome-about-me.c:932
 msgid "Unable to open address book"
 msgstr "无法打开地址簿"
 
-#: ../capplets/about-me/gnome-about-me.c:871
+#: ../capplets/about-me/gnome-about-me.c:946
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "未知的登录 ID，用户数据库可能已经损坏"
 
-#: ../capplets/about-me/gnome-about-me.c:901
-#: ../capplets/about-me/gnome-about-me.c:903
+#: ../capplets/about-me/gnome-about-me.c:976
+#: ../capplets/about-me/gnome-about-me.c:978
 #, c-format
 msgid "About %s"
 msgstr "关于 %s"
@@ -217,7 +217,7 @@ msgid "Personal Info"
 msgstr "个人信息"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:32
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:938
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
 msgstr "请在<b>重新输入新密码</b>框中再输入一次密码。"
@@ -396,33 +396,33 @@ msgid "The old and new passwords are the same."
 msgstr "旧密码和新密码相同。"
 
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:818
+#: ../capplets/about-me/gnome-about-me-password.c:820
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "无法启动 %s：%s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:821
+#: ../capplets/about-me/gnome-about-me-password.c:824
 msgid "Unable to launch backend"
 msgstr "无法调用后端"
 
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:825
 msgid "A system error has occurred"
 msgstr "发生了系统错误"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:842
+#: ../capplets/about-me/gnome-about-me-password.c:845
 msgid "Checking password..."
 msgstr "正在检查密码..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:928
+#: ../capplets/about-me/gnome-about-me-password.c:932
 msgid "Click <b>Change password</b> to change your password."
 msgstr "单击<b>更改密码</b>可更改密码。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:931
+#: ../capplets/about-me/gnome-about-me-password.c:935
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "请在<b>新密码</b>框中输入您的新密码。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:941
 msgid "The two passwords are not equal."
 msgstr "输入的两个密码不同。"
 
@@ -465,14 +465,22 @@ msgid "Jump to the Keyboard Accessibility dialog"
 msgstr "跳转到键盘辅助功能对话框"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
+msgid "Jump to the Mouse Accessibility dialog"
+msgstr "跳转到鼠标辅助功能对话框"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
 msgid "_Enable assistive technologies"
 msgstr "启用辅助技术(_E)"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
 msgid "_Keyboard Accessibility"
 msgstr "键盘辅助功能(_K)"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:13
+msgid "_Mouse Accessibility"
+msgstr "鼠标辅助功能(_M)"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:14
 msgid "_Preferred Applications"
 msgstr "首选应用程序(_P)"
 
@@ -484,11 +492,11 @@ msgstr "辅助技术"
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "登录时启用 GNOME 的辅助技术支持"
 
-#: ../capplets/appearance/appearance-desktop.c:1109
+#: ../capplets/appearance/appearance-desktop.c:1048
 msgid "Add Wallpaper"
 msgstr "添加壁纸"
 
-#: ../capplets/appearance/appearance-desktop.c:1145
+#: ../capplets/appearance/appearance-desktop.c:1084
 msgid "All files"
 msgstr "全部文件"
 
@@ -529,56 +537,97 @@ msgstr "使用先前的字体"
 msgid "Use selected font"
 msgstr "使用选中的字体"
 
-#: ../capplets/appearance/appearance-main.c:108
+#: ../capplets/appearance/appearance-main.c:107
 msgid "Specify the filename of a theme to install"
 msgstr "指定要安装的主题文件名"
 
-#: ../capplets/appearance/appearance-main.c:109
+#: ../capplets/appearance/appearance-main.c:108
 msgid "filename"
 msgstr "文件名"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "指定要显示的页面名称(theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:117
+#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/default-applications/gnome-da-capplet.c:880
+#: ../capplets/mouse/gnome-mouse-properties.c:444
 msgid "page"
 msgstr "page"
 
-#: ../capplets/appearance/appearance-main.c:124
+#: ../capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[壁纸...]"
 
-#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:159
 #: ../capplets/common/gnome-theme-info.c:439
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:628
 msgid "Default Pointer"
 msgstr "默认指针"
 
-#: ../capplets/appearance/appearance-themes.c:534
+#: ../capplets/appearance/appearance-style.c:221
+#: ../capplets/appearance/appearance-themes.c:685
+msgid "Install"
+msgstr "安装"
+
+#: ../capplets/appearance/appearance-style.c:241
+#: ../capplets/common/gnome-theme-info.c:1634
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme engine "
+"'%s' is not installed."
+msgstr "此主题可能与设计之初看起来不同，因为其所需的 GTK+ 主题引擎“%s”未安装。"
+
+#: ../capplets/appearance/appearance-themes.c:673
 msgid "Apply Background"
 msgstr "应用背景"
 
-#: ../capplets/appearance/appearance-themes.c:538
+#: ../capplets/appearance/appearance-themes.c:677
 msgid "Apply Font"
 msgstr "应用字体"
 
-#: ../capplets/appearance/appearance-themes.c:563
+#: ../capplets/appearance/appearance-themes.c:681
+msgid "Revert Font"
+msgstr "恢复字体"
+
+#: ../capplets/appearance/appearance-themes.c:711
+msgid ""
+"The current theme suggests a background and a font. Also, the last applied "
+"font suggestion can be reverted."
+msgstr "当前主题建议了一个背景和一种字体。同时，上次应用的字体建议可被恢复。"
+
+#: ../capplets/appearance/appearance-themes.c:713
+msgid ""
+"The current theme suggests a background. Also, the last applied font "
+"suggestion can be reverted."
+msgstr "当前主题建议了一个背景。同时，上次应用的字体建议可被恢复。"
+
+#: ../capplets/appearance/appearance-themes.c:715
 msgid "The current theme suggests a background and a font."
 msgstr "当前主题建议了一个背景和一种字体。"
 
-#: ../capplets/appearance/appearance-themes.c:568
+#: ../capplets/appearance/appearance-themes.c:717
+msgid ""
+"The current theme suggests a font. Also, the last applied font suggestion "
+"can be reverted."
+msgstr "当前主题建议了一种字体。同时，上次应用的字体建议可被恢复。"
+
+#: ../capplets/appearance/appearance-themes.c:719
 msgid "The current theme suggests a background."
 msgstr "当前主题建议了一个背景。"
 
-#: ../capplets/appearance/appearance-themes.c:573
+#: ../capplets/appearance/appearance-themes.c:721
+msgid "The last applied font suggestion can be reverted."
+msgstr "上次应用的字体建议可被恢复。"
+
+#: ../capplets/appearance/appearance-themes.c:723
 msgid "The current theme suggests a font."
 msgstr "当前主题建议了一种字体。"
 
-#: ../capplets/appearance/appearance-themes.c:857
-#: ../capplets/default-applications/gnome-da-capplet.c:1080
-#: ../capplets/sound/sound-properties-capplet.c:327
+#: ../capplets/appearance/appearance-themes.c:1046
+#: ../capplets/default-applications/gnome-da-capplet.c:630
+#: ../capplets/sound/sound-properties-capplet.c:328
 msgid "Custom"
 msgstr "自定义"
 
@@ -640,120 +689,106 @@ msgid "C_ut"
 msgstr "剪切(_U)"
 
 #: ../capplets/appearance/data/appearance.glade.h:16
-msgid ""
-"Centered\n"
-"Fill screen\n"
-"Scaled\n"
-"Zoom\n"
-"Tiled"
-msgstr ""
-"居中\n"
-"填充屏幕\n"
-"缩小\n"
-"放大\n"
-"平铺"
-
-#: ../capplets/appearance/data/appearance.glade.h:21
 msgid "Changing your cursor theme takes effect the next time you log in."
 msgstr "更改您的指针主题将会在您下次登录时生效。"
 
-#: ../capplets/appearance/data/appearance.glade.h:22
+#: ../capplets/appearance/data/appearance.glade.h:17
 msgid "Colors"
 msgstr "颜色"
 
-#: ../capplets/appearance/data/appearance.glade.h:23
+#: ../capplets/appearance/data/appearance.glade.h:18
 msgid "Controls"
 msgstr "控件"
 
-#: ../capplets/appearance/data/appearance.glade.h:24
+#: ../capplets/appearance/data/appearance.glade.h:19
 msgid "Customize Theme"
 msgstr "自定义主题"
 
-#: ../capplets/appearance/data/appearance.glade.h:25
+#: ../capplets/appearance/data/appearance.glade.h:20
 msgid "D_etails..."
 msgstr "细节(_E)..."
 
-#: ../capplets/appearance/data/appearance.glade.h:26
+#: ../capplets/appearance/data/appearance.glade.h:21
 msgid "Des_ktop font:"
 msgstr "桌面字体(_K)："
 
-#: ../capplets/appearance/data/appearance.glade.h:27
+#: ../capplets/appearance/data/appearance.glade.h:22
 msgid "Edit"
 msgstr "编辑"
 
-#: ../capplets/appearance/data/appearance.glade.h:28
+#: ../capplets/appearance/data/appearance.glade.h:23
 msgid "Font Rendering Details"
 msgstr "字体渲染细节"
 
-#: ../capplets/appearance/data/appearance.glade.h:29
+#: ../capplets/appearance/data/appearance.glade.h:24
 msgid "Fonts"
 msgstr "字体"
 
-#: ../capplets/appearance/data/appearance.glade.h:30
+#: ../capplets/appearance/data/appearance.glade.h:25
 msgid "Gra_yscale"
 msgstr "灰度(_Y)"
 
-#: ../capplets/appearance/data/appearance.glade.h:31
+#: ../capplets/appearance/data/appearance.glade.h:26
 msgid "Icons"
 msgstr "图标"
 
-#: ../capplets/appearance/data/appearance.glade.h:32
+#: ../capplets/appearance/data/appearance.glade.h:27
 msgid "Interface"
 msgstr "界面"
 
-#: ../capplets/appearance/data/appearance.glade.h:33
+#: ../capplets/appearance/data/appearance.glade.h:28
 msgid "Large"
 msgstr "大"
 
-#: ../capplets/appearance/data/appearance.glade.h:34
+#: ../capplets/appearance/data/appearance.glade.h:29
 msgid "N_one"
 msgstr "无(_O)"
 
-#: ../capplets/appearance/data/appearance.glade.h:35
+#: ../capplets/appearance/data/appearance.glade.h:30
 msgid "New File"
 msgstr "新建文件"
 
-#: ../capplets/appearance/data/appearance.glade.h:36
+#: ../capplets/appearance/data/appearance.glade.h:31
 msgid "Open File"
 msgstr "打开文件"
 
-#: ../capplets/appearance/data/appearance.glade.h:37
+#: ../capplets/appearance/data/appearance.glade.h:32
 msgid "Open a dialog to specify the color"
 msgstr "打开指定颜色的对话框"
 
-#: ../capplets/appearance/data/appearance.glade.h:38
+#: ../capplets/appearance/data/appearance.glade.h:33
 msgid "Pointer"
 msgstr "指针"
 
-#: ../capplets/appearance/data/appearance.glade.h:39
+#: ../capplets/appearance/data/appearance.glade.h:34
 msgid "R_esolution:"
 msgstr "分辨率(_E)："
 
-#: ../capplets/appearance/data/appearance.glade.h:40
+#: ../capplets/appearance/data/appearance.glade.h:35
 msgid "Save File"
 msgstr "保存文件"
 
-#: ../capplets/appearance/data/appearance.glade.h:41
+#: ../capplets/appearance/data/appearance.glade.h:36
 msgid "Save Theme As..."
 msgstr "主题另存为..."
 
-#: ../capplets/appearance/data/appearance.glade.h:42
+#: ../capplets/appearance/data/appearance.glade.h:37
 msgid "Save _As..."
 msgstr "另存为(_A)..."
 
-#: ../capplets/appearance/data/appearance.glade.h:43
+#: ../capplets/appearance/data/appearance.glade.h:38
 msgid "Save _background image"
 msgstr "保存背景图像(_B)"
 
-#: ../capplets/appearance/data/appearance.glade.h:44
+#: ../capplets/appearance/data/appearance.glade.h:39
 msgid "Show _icons in menus"
 msgstr "在菜单中显示图标(_I)"
 
-#: ../capplets/appearance/data/appearance.glade.h:45
+#: ../capplets/appearance/data/appearance.glade.h:40
 msgid "Small"
 msgstr "小"
 
-#: ../capplets/appearance/data/appearance.glade.h:46
+#: ../capplets/appearance/data/appearance.glade.h:41
 msgid ""
 "Solid color\n"
 "Horizontal gradient\n"
@@ -763,19 +798,19 @@ msgstr ""
 "水平渐变\n"
 "垂直渐变"
 
-#: ../capplets/appearance/data/appearance.glade.h:49
+#: ../capplets/appearance/data/appearance.glade.h:44
 msgid "Sub_pixel (LCDs)"
 msgstr "次像素(LCD)(_P)"
 
-#: ../capplets/appearance/data/appearance.glade.h:50
+#: ../capplets/appearance/data/appearance.glade.h:45
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "次像素平滑(LCD)(_P)"
 
-#: ../capplets/appearance/data/appearance.glade.h:51
+#: ../capplets/appearance/data/appearance.glade.h:46
 msgid "Text"
 msgstr "文本"
 
-#: ../capplets/appearance/data/appearance.glade.h:52
+#: ../capplets/appearance/data/appearance.glade.h:47
 msgid ""
 "Text below items\n"
 "Text beside items\n"
@@ -787,14 +822,28 @@ msgstr ""
 "只有图标\n"
 "只有文本"
 
-#: ../capplets/appearance/data/appearance.glade.h:56
+#: ../capplets/appearance/data/appearance.glade.h:51
 msgid "The current controls theme does not support color schemes."
 msgstr "当前控件主题不支持配色方案。"
 
-#: ../capplets/appearance/data/appearance.glade.h:57
+#: ../capplets/appearance/data/appearance.glade.h:52
 #: ../vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "主题"
+
+#: ../capplets/appearance/data/appearance.glade.h:53
+msgid ""
+"Tiled\n"
+"Zoom\n"
+"Centered\n"
+"Scaled\n"
+"Fill screen"
+msgstr ""
+"平铺\n"
+"放大\n"
+"居中\n"
+"缩小\n"
+"适合屏幕"
 
 #: ../capplets/appearance/data/appearance.glade.h:58
 msgid "Toolbar _button labels:"
@@ -810,7 +859,7 @@ msgid "Window Border"
 msgstr "窗口边框"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
 msgid "_Add..."
 msgstr "添加(_A)..."
 
@@ -965,11 +1014,11 @@ msgstr "主题安装程序"
 msgid "Gnome Theme Package"
 msgstr "Gnome 主题包"
 
-#: ../capplets/appearance/gnome-wp-info.c:45
+#: ../capplets/appearance/gnome-wp-info.c:50
 msgid "No Wallpaper"
 msgstr "无壁纸"
 
-#: ../capplets/appearance/gnome-wp-item.c:200
+#: ../capplets/appearance/gnome-wp-item.c:209
 msgid "Slide Show"
 msgstr "幻灯片演示"
 
@@ -977,7 +1026,7 @@ msgstr "幻灯片演示"
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:208
+#: ../capplets/appearance/gnome-wp-item.c:217
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -988,8 +1037,8 @@ msgstr ""
 "%s, %d %s x %d %s\n"
 "文件夹：%s"
 
-#: ../capplets/appearance/gnome-wp-item.c:214
-#: ../capplets/appearance/gnome-wp-item.c:216
+#: ../capplets/appearance/gnome-wp-item.c:223
+#: ../capplets/appearance/gnome-wp-item.c:225
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "像素"
@@ -1029,41 +1078,41 @@ msgstr "“%s”似乎不是有效的主题。它可能是需要编译才能使�
 msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME 主题 %s 已正确安装"
 
-#: ../capplets/appearance/theme-installer.c:347
+#: ../capplets/appearance/theme-installer.c:354
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "主题“%s”的安装失败。"
 
-#: ../capplets/appearance/theme-installer.c:379
+#: ../capplets/appearance/theme-installer.c:392
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "主题“%s”已安装。"
 
-#: ../capplets/appearance/theme-installer.c:385
+#: ../capplets/appearance/theme-installer.c:398
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "您是想要现在就应用，还是保持您当前的主题？"
 
-#: ../capplets/appearance/theme-installer.c:387
+#: ../capplets/appearance/theme-installer.c:400
 msgid "Keep Current Theme"
 msgstr "保持当前主题"
 
-#: ../capplets/appearance/theme-installer.c:389
+#: ../capplets/appearance/theme-installer.c:402
 msgid "Apply New Theme"
 msgstr "应用新主题"
 
-#: ../capplets/appearance/theme-installer.c:491
+#: ../capplets/appearance/theme-installer.c:505
 msgid "Failed to create temporary directory"
 msgstr "创建临时目录失败"
 
-#: ../capplets/appearance/theme-installer.c:551
+#: ../capplets/appearance/theme-installer.c:568
 msgid "New themes have been successfully installed."
 msgstr "新主题已成功安装。"
 
-#: ../capplets/appearance/theme-installer.c:579
+#: ../capplets/appearance/theme-installer.c:595
 msgid "No theme file location specified to install"
 msgstr "未指定要安装得主题文件位置"
 
-#: ../capplets/appearance/theme-installer.c:599
+#: ../capplets/appearance/theme-installer.c:615
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1072,40 +1121,46 @@ msgstr ""
 "没有足够的权限将主题安装在：\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:621
+#: ../capplets/appearance/theme-installer.c:637
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s 是将要用来安装主题文件的目标路径。您无法将其选为源位置"
 
-#: ../capplets/appearance/theme-installer.c:689
+#: ../capplets/appearance/theme-installer.c:706
 msgid "Select Theme"
 msgstr "选择主题"
 
-#: ../capplets/appearance/theme-installer.c:693
+#: ../capplets/appearance/theme-installer.c:710
 msgid "Theme Packages"
 msgstr "主题包"
 
 #: ../capplets/appearance/theme-save.c:91
+#, c-format
 msgid "Theme name must be present"
 msgstr "主题必须有名称"
 
-#: ../capplets/appearance/theme-save.c:161
+#: ../capplets/appearance/theme-save.c:154
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "主题已经存在。您是否想要替换？"
 
-#: ../capplets/appearance/theme-save.c:162
+#: ../capplets/appearance/theme-save.c:155
+#: ../capplets/common/file-transfer-dialog.c:450
 msgid "_Overwrite"
 msgstr "覆盖(_O)"
 
-#: ../capplets/appearance/theme-util.c:69
+#: ../capplets/appearance/theme-util.c:134
 msgid "Would you like to delete this theme?"
 msgstr "您是否想要删除此主题？"
 
-#: ../capplets/appearance/theme-util.c:121
+#: ../capplets/appearance/theme-util.c:179
 msgid "Theme cannot be deleted"
 msgstr "主题无法删除"
+
+#: ../capplets/appearance/theme-util.c:304
+msgid "Could not install theme engine"
+msgstr "无法安装主题引擎"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1125,156 +1180,155 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr "无法装入图标“%s”\n"
 
-#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
-msgid "Just apply settings and quit"
-msgstr "应用设置并退出"
-
-#: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:249
-#: ../capplets/sound/sound-properties-capplet.c:1030
-msgid "Retrieve and store legacy settings"
-msgstr "取得并保存原有的设置"
-
-#: ../capplets/common/capplet-util.c:344
+#: ../capplets/common/capplet-util.c:80
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "显示帮助时出错：%s"
 
-#: ../capplets/common/file-transfer-dialog.c:94
+#: ../capplets/common/file-transfer-dialog.c:98
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "正在复制文件：第%u个，共%u个"
 
-#: ../capplets/common/file-transfer-dialog.c:154
+#: ../capplets/common/file-transfer-dialog.c:145
 #, c-format
 msgid "Copying '%s'"
 msgstr "正在复制“%s”"
 
 #: ../capplets/common/file-transfer-dialog.c:185
-#: ../capplets/common/file-transfer-dialog.c:309
+#: ../capplets/common/file-transfer-dialog.c:312
 msgid "Copying files"
 msgstr "正在复制文件"
 
-#: ../capplets/common/file-transfer-dialog.c:221
+#: ../capplets/common/file-transfer-dialog.c:224
 msgid "Parent Window"
 msgstr "父窗口"
 
-#: ../capplets/common/file-transfer-dialog.c:222
+#: ../capplets/common/file-transfer-dialog.c:225
 msgid "Parent window of the dialog"
 msgstr "对话框的父窗口"
 
-#: ../capplets/common/file-transfer-dialog.c:228
+#: ../capplets/common/file-transfer-dialog.c:231
 msgid "From URI"
 msgstr "从 URI"
 
-#: ../capplets/common/file-transfer-dialog.c:229
+#: ../capplets/common/file-transfer-dialog.c:232
 msgid "URI currently transferring from"
 msgstr "当前传输的来源 URI"
 
-#: ../capplets/common/file-transfer-dialog.c:236
+#: ../capplets/common/file-transfer-dialog.c:239
 msgid "To URI"
 msgstr "到 URI"
 
-#: ../capplets/common/file-transfer-dialog.c:237
+#: ../capplets/common/file-transfer-dialog.c:240
 msgid "URI currently transferring to"
 msgstr "当前传输的目的 URI"
 
-#: ../capplets/common/file-transfer-dialog.c:244
+#: ../capplets/common/file-transfer-dialog.c:247
 msgid "Fraction completed"
 msgstr "完成的比例"
 
-#: ../capplets/common/file-transfer-dialog.c:245
+#: ../capplets/common/file-transfer-dialog.c:248
 msgid "Fraction of transfer currently completed"
 msgstr "目前完成的传输比例"
 
-#: ../capplets/common/file-transfer-dialog.c:252
+#: ../capplets/common/file-transfer-dialog.c:255
 msgid "Current URI index"
 msgstr "当前 URI 序号"
 
-#: ../capplets/common/file-transfer-dialog.c:253
+#: ../capplets/common/file-transfer-dialog.c:256
 msgid "Current URI index - starts from 1"
 msgstr "当前 URI 序号 - 从1开始"
 
-#: ../capplets/common/file-transfer-dialog.c:260
+#: ../capplets/common/file-transfer-dialog.c:263
 msgid "Total URIs"
 msgstr "URI 总数"
 
-#: ../capplets/common/file-transfer-dialog.c:261
+#: ../capplets/common/file-transfer-dialog.c:264
 msgid "Total number of URIs"
 msgstr "URI 的总数"
 
-#: ../capplets/common/file-transfer-dialog.c:422
-msgid "Connecting..."
-msgstr "正在连接..."
+#: ../capplets/common/file-transfer-dialog.c:444
+#, c-format
+msgid "File '%s' already exists. Do you want to overwrite it?"
+msgstr "文件“%s”已经存在。您是否想要覆盖？"
 
-#: ../capplets/common/gconf-property-editor.c:170
+#: ../capplets/common/file-transfer-dialog.c:447
+msgid "_Skip"
+msgstr "跳过(_S)"
+
+#: ../capplets/common/file-transfer-dialog.c:448
+msgid "Overwrite _All"
+msgstr "全部覆盖(_A)"
+
+#: ../capplets/common/gconf-property-editor.c:133
 msgid "Key"
 msgstr "键"
 
-#: ../capplets/common/gconf-property-editor.c:171
+#: ../capplets/common/gconf-property-editor.c:134
 msgid "GConf key to which this property editor is attached"
 msgstr "本属性编辑器编辑的 GConf 键"
 
-#: ../capplets/common/gconf-property-editor.c:177
+#: ../capplets/common/gconf-property-editor.c:140
 msgid "Callback"
 msgstr "回调"
 
-#: ../capplets/common/gconf-property-editor.c:178
+#: ../capplets/common/gconf-property-editor.c:141
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "当和键关联的值改变时执行该回调"
 
-#: ../capplets/common/gconf-property-editor.c:183
+#: ../capplets/common/gconf-property-editor.c:146
 msgid "Change set"
 msgstr "改动集"
 
-#: ../capplets/common/gconf-property-editor.c:184
+#: ../capplets/common/gconf-property-editor.c:147
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr "包含应用修改时要传递给 gconf 客户端的数据的 GConf 改动集合"
 
-#: ../capplets/common/gconf-property-editor.c:189
+#: ../capplets/common/gconf-property-editor.c:152
 msgid "Conversion to widget callback"
 msgstr "转换到部件时的回调"
 
-#: ../capplets/common/gconf-property-editor.c:190
+#: ../capplets/common/gconf-property-editor.c:153
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "当数据从 GConf 转换到部件时使用的回调"
 
-#: ../capplets/common/gconf-property-editor.c:195
+#: ../capplets/common/gconf-property-editor.c:158
 msgid "Conversion from widget callback"
 msgstr "从部件转换时的回调"
 
-#: ../capplets/common/gconf-property-editor.c:196
+#: ../capplets/common/gconf-property-editor.c:159
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "当数据从部件转换到 GConf 时使用的回调"
 
-#: ../capplets/common/gconf-property-editor.c:201
+#: ../capplets/common/gconf-property-editor.c:164
 msgid "UI Control"
 msgstr "用户界面控件"
 
-#: ../capplets/common/gconf-property-editor.c:202
+#: ../capplets/common/gconf-property-editor.c:165
 msgid "Object that controls the property (normally a widget)"
 msgstr "控制属性的对象(通常为部件)"
 
-#: ../capplets/common/gconf-property-editor.c:217
+#: ../capplets/common/gconf-property-editor.c:180
 msgid "Property editor object data"
 msgstr "属性编辑器对象数据"
 
-#: ../capplets/common/gconf-property-editor.c:218
+#: ../capplets/common/gconf-property-editor.c:181
 msgid "Custom data required by the specific property editor"
 msgstr "特定的属性编辑器所需要的自定义数据"
 
-#: ../capplets/common/gconf-property-editor.c:224
+#: ../capplets/common/gconf-property-editor.c:187
 msgid "Property editor data freeing callback"
 msgstr "属性编辑器数据释放回调函数"
 
-#: ../capplets/common/gconf-property-editor.c:225
+#: ../capplets/common/gconf-property-editor.c:188
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "当属性编辑器对象数据要被释放时要调用的回调函数"
 
-#: ../capplets/common/gconf-property-editor.c:1468
+#: ../capplets/common/gconf-property-editor.c:1429
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1286,7 +1340,7 @@ msgstr ""
 "\n"
 "请确定该文件存在后重试，或选择另一背景图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1476
+#: ../capplets/common/gconf-property-editor.c:1437
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1299,41 +1353,62 @@ msgstr ""
 "\n"
 "请选择其他图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1595
+#: ../capplets/common/gconf-property-editor.c:1556
 msgid "Please select an image."
 msgstr "请选择图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1600
+#: ../capplets/common/gconf-property-editor.c:1561
 msgid "_Select"
 msgstr "选择(_S)"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:629
 msgid "Default Pointer - Current"
 msgstr "默认指针 - 当前"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:633
 msgid "White Pointer"
 msgstr "白指针"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "White Pointer - Current"
 msgstr "白指针 - 当前"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Large Pointer"
 msgstr "大指针"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Large Pointer - Current"
 msgstr "大指针 - 当前"
 
-#: ../capplets/common/gnome-theme-info.c:653
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "Large White Pointer - Current"
 msgstr "大号的白色指针 - 当前"
 
-#: ../capplets/common/gnome-theme-info.c:654
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large White Pointer"
 msgstr "大号的白色指针"
+
+#: ../capplets/common/gnome-theme-info.c:1610
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme '%s' is "
+"not installed."
+msgstr ""
+
+#: ../capplets/common/gnome-theme-info.c:1618
+#, c-format
+msgid ""
+"This theme will not look as intended because the required window manager "
+"theme '%s' is not installed."
+msgstr ""
+
+#: ../capplets/common/gnome-theme-info.c:1625
+#, c-format
+msgid ""
+"This theme will not look as intended because the required icon theme '%s' is "
+"not installed."
+msgstr ""
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
@@ -1352,29 +1427,25 @@ msgstr "启动首选的视觉辅助技术"
 msgid "Visual Assistance"
 msgstr "视觉辅助"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:112
-#: ../capplets/default-applications/gnome-da-capplet.c:133
-#: ../capplets/default-applications/gnome-da-capplet.c:177
-#: ../capplets/default-applications/gnome-da-capplet.c:222
-#: ../capplets/default-applications/gnome-da-capplet.c:279
-#: ../capplets/default-applications/gnome-da-capplet.c:330
-#: ../capplets/default-applications/gnome-da-capplet.c:381
-#: ../capplets/default-applications/gnome-da-capplet.c:434
-#: ../capplets/default-applications/gnome-da-capplet.c:484
-#: ../capplets/default-applications/gnome-da-capplet.c:877
-#: ../capplets/default-applications/gnome-da-capplet.c:899
+#: ../capplets/default-applications/gnome-da-capplet.c:94
+#: ../capplets/default-applications/gnome-da-capplet.c:345
+#: ../capplets/default-applications/gnome-da-capplet.c:366
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "保存配置出错：%s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1100
+#: ../capplets/default-applications/gnome-da-capplet.c:650
 msgid "Could not load the main interface"
 msgstr "无法装入主界面"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1102
+#: ../capplets/default-applications/gnome-da-capplet.c:652
 msgid "Please make sure that the applet is properly installed"
 msgstr "请确定小程序已经正确安装了。"
+
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/default-applications/gnome-da-capplet.c:879
+msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
+msgstr "指定要显示的页面名称(internet|multimedia|system|a11y)"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "<b>Image Viewer</b>"
@@ -1417,7 +1488,7 @@ msgid "<b>Web Browser</b>"
 msgstr "<b>Web 浏览器</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "辅助功能"
@@ -1729,20 +1800,20 @@ msgstr "默认设置"
 msgid "Screen %d Settings\n"
 msgstr "第 %d 个屏幕的设置\n"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:593
 msgid "Screen Resolution Preferences"
 msgstr "屏幕分辨率首选项"
 
-#: ../capplets/display/main.c:627
+#: ../capplets/display/main.c:628
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "只对此计算机(%s)设为默认(_M)"
 
-#: ../capplets/display/main.c:644
+#: ../capplets/display/main.c:648
 msgid "Options"
 msgstr "选项"
 
-#: ../capplets/display/main.c:664
+#: ../capplets/display/main.c:668
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1752,29 +1823,29 @@ msgid_plural ""
 "settings will be restored."
 msgstr[0] "测试新设置。如果您在 %d 秒内不响应的话，将会恢复为先前的设置。"
 
-#: ../capplets/display/main.c:704
+#: ../capplets/display/main.c:708
 msgid "Keep Resolution"
 msgstr "保留分辨率"
 
-#: ../capplets/display/main.c:708
+#: ../capplets/display/main.c:712
 msgid "Do you want to keep this resolution?"
 msgstr "您想保留此分辨率吗？"
 
-#: ../capplets/display/main.c:734
+#: ../capplets/display/main.c:738
 msgid "Use _Previous Resolution"
 msgstr "使用先前的分辨率(_P)"
 
-#: ../capplets/display/main.c:735
+#: ../capplets/display/main.c:739
 msgid "_Keep Resolution"
 msgstr "保留分辨率(_K)"
 
-#: ../capplets/display/main.c:883
+#: ../capplets/display/main.c:888
 msgid ""
 "The X server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr "Xserver 不支持 XRandR 扩展。无法在运行时刻对显示大小进行更改。"
 
-#: ../capplets/display/main.c:890
+#: ../capplets/display/main.c:895
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1786,6 +1857,7 @@ msgid "Sound"
 msgstr "音效"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+#: ../libslab/bookmark-agent.c:1158
 msgid "Desktop"
 msgstr "桌面"
 
@@ -1817,49 +1889,53 @@ msgid "The type of accelerator."
 msgstr "加速键类型。"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:112
+#: ../capplets/keybindings/gnome-keybinding-properties.c:90
 #: ../typing-break/drwright.c:483
 msgid "Disabled"
 msgstr "禁用"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:523
+#: ../capplets/keybindings/gnome-keybinding-properties.c:171
 msgid "<Unknown Action>"
 msgstr "<未知操作>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:915
+#: ../capplets/keybindings/gnome-keybinding-properties.c:804
+msgid "Custom Shortcuts"
+msgstr "自定义快捷键"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:999
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
 "using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
 "无法使用快捷键“%s”，原因是使用此键将无法输入。\n"
-"请同时使用 Ctrl、Alt 或 Shift 再试一次。\n"
+"请同时使用 Ctrl、Alt 或 Shift 再试一次。"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1028
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
-" \"%s\"\n"
+" \"%s\""
 msgstr ""
 "快捷键“%s”已经用于：\n"
-"“%s”\n"
+"“%s”"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:976
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
 #, c-format
-msgid "Error setting new accelerator in configuration database: %s\n"
-msgstr "在配置数据库中设置新加速键时出错：%s\n"
+msgid "Error setting new accelerator in configuration database: %s"
+msgstr "在配置数据库中设置新加速键时出错：%s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1112
 #, c-format
-msgid "Error unsetting accelerator in configuration database: %s\n"
-msgstr "在配置数据库中取消设置新加速键时出错：%s\n"
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "在配置数据库中取消设置新加速键时出错：%s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1294
 msgid "Action"
 msgstr "动作"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1316
 msgid "Shortcut"
 msgstr "快捷键"
 
@@ -1881,23 +1957,28 @@ msgstr "要编辑快捷键，请单击相应的行，然后输入新加速键，
 msgid "Assign shortcut keys to commands"
 msgstr "为命令指定快捷键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:241
-#: ../capplets/keyboard/gnome-keyboard-properties.c:246
-#: ../capplets/sound/sound-properties-capplet.c:1026
-#: ../capplets/sound/sound-properties-capplet.c:1028
+#: ../capplets/keyboard/gnome-keyboard-properties.c:248
+#: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/sound/sound-properties-capplet.c:1155
+#: ../capplets/sound/sound-properties-capplet.c:1157
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "应用设置并退出(仅为兼容，现在已由守护进程处理)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/sound/sound-properties-capplet.c:1159
+msgid "Retrieve and store legacy settings"
+msgstr "取得并保存原有的设置"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:260
 msgid "Start the page with the typing break settings showing"
 msgstr "以显示的打字间隔设置启动页面"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:258
+#: ../capplets/keyboard/gnome-keyboard-properties.c:265
 msgid "Start the page with the accessibility settings showing"
 msgstr "以显示的辅助功能设置启动页面"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:267
+#: ../capplets/keyboard/gnome-keyboard-properties.c:274
 msgid "- GNOME Keyboard Preferences"
 msgstr "- GNOME 键盘首选项"
 
@@ -1925,41 +2006,41 @@ msgstr "<b>筛选键</b>"
 msgid "<b>Sticky Keys</b>"
 msgstr "<b>粘滞键</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "<b>_Lock screen to enforce typing break</b>"
-msgstr "<b>锁定屏幕来强制打字间断(_L)</b>"
-
 #. fast acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>快</i></small>"
 
 #. long delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>长</i></small>"
 
 #. short delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>短</i></small>"
 
 #. slow acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>慢</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_cceleration:"
 msgstr "加速(_C)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "All_ow postponing of breaks"
 msgstr "允许推迟间断(_O)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Audio _Feedback..."
+msgstr ""
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Beep when _accessibility features are turned on or off"
@@ -1990,176 +2071,188 @@ msgid "Beep when key is _rejected"
 msgstr "拒绝键时鸣笛(_R)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "By _country"
+msgstr "按国家/地区(_C)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+msgid "By _language"
+msgstr "按语言(_L)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Check if breaks are allowed to be postponed"
 msgstr "检查是否允许推迟间断"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Choose a Keyboard Model"
 msgstr "选择键盘型号"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Choose a Layout"
 msgstr "选择布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Cursor _blinks in text fields"
 msgstr "文本域中的光标会闪烁(_B)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "Cursor blinks speed"
 msgstr "光标闪烁速度"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "D_elay:"
 msgstr "延时(_E)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr "若同时按两个键则禁用(_B)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Duration of the break when typing is disallowed"
 msgstr "不允许打字时间断持续时间"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "Duration of work before forcing a break"
 msgstr "强制间断前的工作持续时间"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:36
 msgid "General"
 msgstr "常规"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "Key presses _repeat when key is held down"
 msgstr "按住某一键时重复该键(_R)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "Keyboard Accessibility Notifications"
-msgstr "键盘辅助功能通知"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+msgid "Keyboard Accessibility Audio Feedback"
+msgstr "键盘辅助功能音频反馈"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard Layout Options"
 msgstr "键盘布局选项"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "Keyboard Preferences"
 msgstr "键盘首选项"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "Keyboard _model:"
 msgstr "键盘型号(_M)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "Layout _Options..."
 msgstr "布局选项(_O)..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "Layouts"
 msgstr "布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr "每隔一段时间锁定屏幕，以便重复性的键盘工作使手臂过度劳累"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "Mouse Keys"
 msgstr "鼠标键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "Preview:"
 msgstr "预览："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "Repeat keys speed"
 msgstr "重复键速度"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
 msgid "Reset to De_faults"
 msgstr "重置为默认值(_F)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
 msgid "S_peed:"
 msgstr "速度(_P)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
 msgid "Separate _layout for each window"
 msgstr "每个窗口使用独立的布局(_L)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
 msgid "Typing Break"
 msgstr "打字间断"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
-msgid "_Allow to control the pointer using the keyboard"
-msgstr "允许使用键盘控制指针(_A)"
-
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
-msgid "_Allow to turn accessibility features on and off from the keyboard"
-msgstr "允许通过键盘打开或关闭辅助特性(_A)"
+msgid "_Accessibility features can be toggled with keyboard shortcuts"
+msgstr "允许通过快捷键打开或关闭辅助特性(_A)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
 msgstr "间断间隔持续(_B)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+msgid "_Country:"
+msgstr "国家/地区(_C)："
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "延时(_D)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
 msgid "_Ignore fast duplicate keypresses"
 msgstr "忽略快速重复按键(_I)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
-msgid "_Layouts:"
-msgstr "布局(_L)："
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
+msgid "_Language:"
+msgstr "语言(_L)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+msgid "_Lock screen to enforce typing break"
+msgstr "锁定屏幕来强制打字间断(_L)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
 msgid "_Models:"
 msgstr "型号(_M)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
-msgid "_Notifications..."
-msgstr "通知(_N)..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
 msgid "_Only accept long keypresses"
 msgstr "仅接受长按键(_O)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+msgid "_Pointer can be controlled using the keypad"
+msgstr "允许使用键盘控制指针(_P)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
 msgid "_Selected layouts:"
 msgstr "选择布局(_S)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
-msgid "_Simulate simultanous keypresses"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
+msgid "_Simulate simultaneous keypresses"
 msgstr "模拟同时按键(_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
 msgid "_Speed:"
 msgstr "速度(_S)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
 msgid "_Type to test settings:"
 msgstr "输入字符来测试设置(_T)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
 msgid "_Variants:"
 msgstr "变体(_V)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
 msgid "_Vendors:"
 msgstr "制造商(_V)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
 msgid "_Work interval lasts:"
 msgstr "工作间隔持续(_W)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "分钟"
 
@@ -2167,15 +2260,14 @@ msgstr "分钟"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:305
+msgid "Layout"
+msgstr "布局"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
 msgid "Default"
 msgstr "默认"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
-msgid "Layout"
-msgstr "布局"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:169
 msgid "Vendors"
@@ -2223,6 +2315,15 @@ msgstr "下移"
 msgid "gesture|Disabled"
 msgstr "禁用"
 
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/mouse/gnome-mouse-properties.c:443
+msgid "Specify the name of the page to show (general|accessibility)"
+msgstr "指定要显示的页面名称(general|accessibility)"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:452
+msgid "- GNOME Mouse Preferences"
+msgstr "- GNOME 鼠标首选项"
+
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid "<b>Double-Click Timeout</b>"
 msgstr "<b>双击超时</b>"
@@ -2256,18 +2357,14 @@ msgstr "<b>模拟第二击</b>"
 msgid ""
 "<i>To test your double-click settings, try to double-click on the light bulb."
 "</i>"
-msgstr ""
-"<i>测试您的双击设置。请尝试双击右侧的灯泡。"
-"</i>"
-
+msgstr "<i>测试您的双击设置。请尝试双击右侧的灯泡。</i>"
 
 #. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid ""
 "<i>You can also use the Dwell Click panel applet to choose the click type.</"
 "i>"
-msgstr ""
-"<i>您也可以使用 停留点击 面板小程序来选择点击的类型。</i>"
+msgstr "<i>您也可以使用 停留点击 面板小程序来选择点击的类型。</i>"
 
 #. high sensitivity
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -2399,20 +2496,20 @@ msgid "<b>_Use authentication</b>"
 msgstr "<b>需要身份验证(_U)</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:6
-msgid "Advanced Configuration"
-msgstr "高级配置"
-
-#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "Autoconfiguration _URL:"
 msgstr "自动配置 _URL："
 
-#: ../capplets/network/gnome-network-preferences.glade.h:8
+#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "HTTP Proxy Details"
 msgstr "HTTP 代理细节"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:9
+#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "H_TTP proxy:"
 msgstr "H_TTP 代理："
+
+#: ../capplets/network/gnome-network-preferences.glade.h:9
+msgid "Ignored Hosts"
+msgstr "忽略的主机"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Preferences"
@@ -2468,48 +2565,48 @@ msgstr "未知的音量控制 %d"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "为‘%s’创建测试流水线失败"
 
-#: ../capplets/sound/sound-properties-capplet.c:325
-#: ../capplets/sound/sound-properties-capplet.c:378
+#: ../capplets/sound/sound-properties-capplet.c:326
+#: ../capplets/sound/sound-properties-capplet.c:447
 msgid "Not connected"
 msgstr "未连接"
 
-#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:785
 msgid "Autodetect"
 msgstr "自动检测"
 
-#: ../capplets/sound/sound-properties-capplet.c:666
-#: ../capplets/sound/sound-properties-capplet.c:667
+#: ../capplets/sound/sound-properties-capplet.c:790
+#: ../capplets/sound/sound-properties-capplet.c:791
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - 高级 Linux 声音架构"
 
-#: ../capplets/sound/sound-properties-capplet.c:668
+#: ../capplets/sound/sound-properties-capplet.c:792
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART 声音守护程序"
 
-#: ../capplets/sound/sound-properties-capplet.c:669
-#: ../capplets/sound/sound-properties-capplet.c:670
+#: ../capplets/sound/sound-properties-capplet.c:793
+#: ../capplets/sound/sound-properties-capplet.c:794
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened 声音守护程序"
 
-#: ../capplets/sound/sound-properties-capplet.c:671
-#: ../capplets/sound/sound-properties-capplet.c:672
+#: ../capplets/sound/sound-properties-capplet.c:797
+#: ../capplets/sound/sound-properties-capplet.c:800
 msgid "OSS - Open Sound System"
 msgstr "OSS - 开放声音系统"
 
-#: ../capplets/sound/sound-properties-capplet.c:673
-#: ../capplets/sound/sound-properties-capplet.c:674
+#: ../capplets/sound/sound-properties-capplet.c:802
+#: ../capplets/sound/sound-properties-capplet.c:803
 msgid "PulseAudio Sound Server"
 msgstr "PulseAudio 声音服务器"
 
-#: ../capplets/sound/sound-properties-capplet.c:675
+#: ../capplets/sound/sound-properties-capplet.c:804
 msgid "Test Sound"
 msgstr "测试声音"
 
-#: ../capplets/sound/sound-properties-capplet.c:676
+#: ../capplets/sound/sound-properties-capplet.c:805
 msgid "Silence"
 msgstr "静音"
 
-#: ../capplets/sound/sound-properties-capplet.c:1043
+#: ../capplets/sound/sound-properties-capplet.c:1172
 msgid "- GNOME Sound Preferences"
 msgstr "- GNOME 声音首选项"
 
@@ -2542,8 +2639,8 @@ msgid "Devices"
 msgstr "设备"
 
 #: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing (ESD)"
-msgstr "允许软件混音(ESD)(_N)"
+msgid "E_nable software sound mixing"
+msgstr "允许软件混音(_N)"
 
 #: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
@@ -2687,36 +2784,36 @@ msgid "Windows"
 msgstr "窗口"
 
 #. make start action
-#: ../libslab/application-tile.c:369
+#: ../libslab/application-tile.c:372
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>启动 %s</b>"
 
-#: ../libslab/application-tile.c:388
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1059
 msgid "Help"
 msgstr "帮助"
 
-#: ../libslab/application-tile.c:435
+#: ../libslab/application-tile.c:438
 msgid "Upgrade"
 msgstr "升级"
 
-#: ../libslab/application-tile.c:450
+#: ../libslab/application-tile.c:453
 msgid "Uninstall"
 msgstr "卸载"
 
-#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:737
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:760
 msgid "Remove from Favorites"
 msgstr "从收藏夹中删除"
 
-#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:739
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:762
 msgid "Add to Favorites"
 msgstr "添加到收藏夹"
 
-#: ../libslab/application-tile.c:864
+#: ../libslab/application-tile.c:867
 msgid "Remove from Startup Programs"
 msgstr "从启动程序中删除"
 
-#: ../libslab/application-tile.c:866
+#: ../libslab/application-tile.c:869
 msgid "Add to Startup Programs"
 msgstr "添加到启动程序"
 
@@ -2735,102 +2832,119 @@ msgstr ""
 msgid "Other"
 msgstr "其它"
 
-#: ../libslab/bookmark-agent.c:1060
+#: ../libslab/bookmark-agent.c:1061
+msgid "Lock Screen"
+msgstr "锁住屏幕"
+
+#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:45
+msgid "Logout"
+msgstr "注销"
+
+#: ../libslab/bookmark-agent.c:1065
+msgid "Shutdown"
+msgstr "关机"
+
+#: ../libslab/bookmark-agent.c:1090
 msgid "New Spreadsheet"
 msgstr "新建电子表格"
 
-#: ../libslab/bookmark-agent.c:1064
+#: ../libslab/bookmark-agent.c:1095
 msgid "New Document"
 msgstr "新建文档"
 
-#: ../libslab/bookmark-agent.c:1114
+#: ../libslab/bookmark-agent.c:1147
 msgid "Home"
 msgstr "家庭"
 
-#: ../libslab/bookmark-agent.c:1130
+#: ../libslab/bookmark-agent.c:1152
+msgid "Documents"
+msgstr "文档"
+
+#: ../libslab/bookmark-agent.c:1165
 msgid "File System"
 msgstr "文件系统"
 
-#: ../libslab/bookmark-agent.c:1134
+#: ../libslab/bookmark-agent.c:1169
 msgid "Network Servers"
 msgstr "网络服务器"
 
-#: ../libslab/bookmark-agent.c:1163
+#: ../libslab/bookmark-agent.c:1198
 msgid "Search"
 msgstr "搜索"
 
 #. make open with default action
 #: ../libslab/directory-tile.c:170
+#, c-format
 msgid "<b>Open</b>"
 msgstr "<b>打开</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:228
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:242
 msgid "Rename..."
 msgstr "重命名..."
 
 #: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
-#: ../libslab/document-tile.c:242 ../libslab/document-tile.c:251
+#: ../libslab/document-tile.c:256 ../libslab/document-tile.c:265
 msgid "Send To..."
 msgstr "发送至..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:277
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:291
 msgid "Move to Trash"
 msgstr "移至回收站"
 
 #: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:850
+#: ../libslab/document-tile.c:301 ../libslab/document-tile.c:873
 msgid "Delete"
 msgstr "删除"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1022
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1045
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "您确定想要永久删除“%s”吗？"
 
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1026
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1049
 msgid "If you delete an item, it is permanently lost."
 msgstr "如果您删除一项的话，它将永久丢失。"
 
-#: ../libslab/document-tile.c:189
+#: ../libslab/document-tile.c:203
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>用“%s”打开</b>"
 
-#: ../libslab/document-tile.c:201
+#: ../libslab/document-tile.c:215
 msgid "Open with Default Application"
 msgstr "用默认应用程序打开"
 
-#: ../libslab/document-tile.c:212
+#: ../libslab/document-tile.c:226
 msgid "Open in File Manager"
 msgstr "在文件管理器中打开"
 
-#: ../libslab/document-tile.c:633
+#: ../libslab/document-tile.c:656
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:640
+#: ../libslab/document-tile.c:663
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:648
+#: ../libslab/document-tile.c:671
 msgid "Today %l:%M %p"
 msgstr "今天 %H:%M"
 
-#: ../libslab/document-tile.c:658
+#: ../libslab/document-tile.c:681
 msgid "Yesterday %l:%M %p"
 msgstr "昨天 %H:%M"
 
-#: ../libslab/document-tile.c:670
+#: ../libslab/document-tile.c:693
 msgid "%a %l:%M %p"
 msgstr "%A%H:%M"
 
-#: ../libslab/document-tile.c:678
+#: ../libslab/document-tile.c:701
 msgid "%b %d %l:%M %p"
 msgstr "%m月%d日%H:%M"
 
-#: ../libslab/document-tile.c:680
+#: ../libslab/document-tile.c:703
 msgid "%b %d %Y"
 msgstr "%Y-%m-%d"
 
@@ -2863,6 +2977,7 @@ msgid "Unexpected tag '%s' inside '%s'"
 msgstr "“%2$s”中不应该出现“%1$s”"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
+#, c-format
 msgid "No valid bookmark file found in data dirs"
 msgstr "数据目录中未找到有效的书签文件"
 
@@ -2923,42 +3038,39 @@ msgid "<b>Open %s</b>"
 msgstr "<b>打开 %s</b>"
 
 #: ../libslab/system-tile.c:141
+#, c-format
 msgid "Remove from System Items"
 msgstr "从系统项目中删除"
 
-#: ../libsounds/sound-view.c:43
+#: ../libsounds/sound-view.c:44
 msgid "Login"
 msgstr "登录"
 
-#: ../libsounds/sound-view.c:44
-msgid "Logout"
-msgstr "注销"
-
-#: ../libsounds/sound-view.c:45
+#: ../libsounds/sound-view.c:46
 msgid "Boing"
 msgstr "啵嘤"
 
-#: ../libsounds/sound-view.c:46
+#: ../libsounds/sound-view.c:47
 msgid "Siren"
 msgstr "鸣笛"
 
-#: ../libsounds/sound-view.c:47
+#: ../libsounds/sound-view.c:48
 msgid "Clink"
 msgstr "叮咚"
 
-#: ../libsounds/sound-view.c:48
+#: ../libsounds/sound-view.c:49
 msgid "Beep"
 msgstr "响铃"
 
-#: ../libsounds/sound-view.c:49
+#: ../libsounds/sound-view.c:50
 msgid "No sound"
 msgstr "无声音"
 
-#: ../libsounds/sound-view.c:131
+#: ../libsounds/sound-view.c:132
 msgid "Sound not set for this event."
 msgstr "此事件未设定音效。"
 
-#: ../libsounds/sound-view.c:140
+#: ../libsounds/sound-view.c:141
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2966,24 +3078,24 @@ msgstr ""
 "此事件的声音文件不存在。\n"
 "您需要安装 gnome-audio 软件包以获得一组默认声音。"
 
-#: ../libsounds/sound-view.c:151
+#: ../libsounds/sound-view.c:152
 msgid "The sound file for this event does not exist."
 msgstr "此事件的声音文件不存在。"
 
-#: ../libsounds/sound-view.c:182
+#: ../libsounds/sound-view.c:183
 msgid "Select Sound File"
 msgstr "选择声音文件"
 
-#: ../libsounds/sound-view.c:209
+#: ../libsounds/sound-view.c:210
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "文件 %s 不是有效的 wav 文件"
 
-#: ../libsounds/sound-view.c:270
+#: ../libsounds/sound-view.c:271
 msgid "Select sound file..."
 msgstr "选择声音文件..."
 
-#: ../libsounds/sound-view.c:372
+#: ../libsounds/sound-view.c:373
 msgid "System Sounds"
 msgstr "系统声音"
 
@@ -2992,19 +3104,27 @@ msgstr "系统声音"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "窗口管理器“%s”没有注册配置工具\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:390
+#: ../libwindow-settings/metacity-window-manager.c:402
 msgid "Maximize"
 msgstr "最大化"
 
-#: ../libwindow-settings/metacity-window-manager.c:391
+#: ../libwindow-settings/metacity-window-manager.c:403
+msgid "Maximize Vertically"
+msgstr "垂直最大化"
+
+#: ../libwindow-settings/metacity-window-manager.c:404
+msgid "Maximize Horizontally"
+msgstr "水平最大化"
+
+#: ../libwindow-settings/metacity-window-manager.c:405
 msgid "Minimize"
 msgstr "最小化"
 
-#: ../libwindow-settings/metacity-window-manager.c:392
+#: ../libwindow-settings/metacity-window-manager.c:406
 msgid "Roll up"
 msgstr "卷起"
 
-#: ../libwindow-settings/metacity-window-manager.c:393
+#: ../libwindow-settings/metacity-window-manager.c:407
 msgid "None"
 msgstr "无"
 
@@ -3130,6 +3250,7 @@ msgid_plural "%d minutes until the next break"
 msgstr[0] "距下次间隔还有 %d 分钟"
 
 #: ../typing-break/drwright.c:505
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "距下次间隔还有不到一分钟。"
 
@@ -3348,19 +3469,19 @@ msgstr "应用字体(_A)"
 msgid "Themes"
 msgstr "主题"
 
-#: ../vfs-methods/themus/themus-properties-view.c:127
+#: ../vfs-methods/themus/themus-properties-view.c:128
 msgid "Description"
 msgstr "描述"
 
-#: ../vfs-methods/themus/themus-properties-view.c:134
+#: ../vfs-methods/themus/themus-properties-view.c:135
 msgid "Control theme"
 msgstr "控件主题"
 
-#: ../vfs-methods/themus/themus-properties-view.c:140
+#: ../vfs-methods/themus/themus-properties-view.c:141
 msgid "Window border theme"
 msgstr "窗口边框主题"
 
-#: ../vfs-methods/themus/themus-properties-view.c:146
+#: ../vfs-methods/themus/themus-properties-view.c:147
 msgid "Icon theme"
 msgstr "图标主题"
 
@@ -3414,17 +3535,3 @@ msgstr "应用主题"
 msgid "Sets the default theme"
 msgstr "设定默认主题"
 
-#~ msgid "Go _to Fonts Folder"
-#~ msgstr "转到字体文件夹(_T)"
-
-#~ msgid "Autostart the preferred AT"
-#~ msgstr "自动启动首选的辅助技术"
-
-#~ msgid "Visual"
-#~ msgstr "视觉"
-
-#~ msgid "    "
-#~ msgstr "    "
-
-#~ msgid "      "
-#~ msgstr "      "
