@@ -1,3 +1,13 @@
+2008-06-15  Jens Granseuer  <jensgr@gmx.net>
+
+	Patch by: Andrey Gusev <ronne@list.ru>
+
+	* drwright.c: (update_icon), (blink_timeout_cb),
+	(maybe_change_state), (update_tooltip), (break_window_postpone_cb):
+	when postponing a voluntary break, go back to the state before taking
+	the break instead of going to warn state as we do when a regular
+	break is postponed (bug #134595)
+
 ==================== 2.23.2 ====================
 
 2008-03-24  Jens Granseuer  <jensgr@gmx.net>
