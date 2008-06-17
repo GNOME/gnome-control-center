@@ -901,6 +901,13 @@ wp_load_stuffs (void *user_data)
   uri = gconf_client_get_string (data->client,
                                  WP_FILE_KEY,
                                  NULL);
+
+  if (uri && *uri == '\0')
+  {
+    g_free (uri);
+    uri = NULL;
+  }
+  
   if (uri == NULL)
     uri = g_strdup ("(none)");
 

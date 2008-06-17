@@ -1,3 +1,38 @@
+Tue Jun 17 19:51:03 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* Merge randr-12 to trunk
+
+Tue Jun 17 18:29:46 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* Port to changes in gnome-desktop
+
+2008-06-04  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (driver_is_randr_10): New function, currently
+	unused, to detect whether the graphics driver used in the X server
+	only supports the RANDR 1.0 API.  We may find this information
+	useful to tell the user that not all the features in the capplet
+	will work as intended, or to actually disable features that won't work.
+
+2008-05-29  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (apply): Before applying the settings, check if
+	the X server supports the Virtual size we need.
+	(check_required_virtual_size): New function; does the checking
+	against what the X server supports.
+	This still needs to present a friendly dialog box.
+	(compute_virtual_size_for_configuration): New function.
+
+Wed May 14 18:16:10 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* xrandr-capplet.c: Add GNOME_DESKTOP_USE_UNSTABLE_API define
+
+	* scrollarea.[ch]: Add copyright statement
+
+2008-05-14  Soren Sandmann Pedersen  <sandmann@redhat.com>
+
+	* *: Check in new RandR 1.2 enabled capplet
+
 ==================== 2.23.2 ====================
 
 2008-02-19  Jens Granseuer  <jensgr@gmx.net>
