@@ -24,10 +24,10 @@
 #  include <config.h>
 #endif
 
+#include <string.h>
 #include <libgnome/libgnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
-#include <libgnomevfs/gnome-vfs-uri.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -336,27 +336,58 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	g_object_unref (client);
 }
 
+static gchar *
+get_hostname_from_uri (const gchar *uri)
+{
+	const gchar *start, *end;
+	gchar *host;
+
+	if (uri == NULL)
+		return NULL;
+
+	/* skip the scheme part */
+	start = strchr (uri, ':');
+	if (start == NULL)
+		return NULL;
+
+	/* forward until after the last '/' */
+	do {
+		++start;
+	} while (*start == '/');
+
+	if (*start == '\0')
+	  return NULL;
+
+	/* maybe we have a port? */
+	end = strchr (start, ':');
+	if (end == NULL)
+		end = strchr (start, '/');
+
+	if (end != NULL)
+		host = g_strndup (start, end - start);
+	else
+		host = g_strdup (start);
+
+	return host;
+}
+
 static GConfValue *
 extract_proxy_host (GConfPropertyEditor *peditor, const GConfValue *orig)
 {
-	char const  *entered_text = gconf_value_get_string (orig);
-	GConfValue  *res = NULL;
+	char const *entered_text = gconf_value_get_string (orig);
+	GConfValue *res = NULL;
 
 	if (entered_text != NULL) {
-		GnomeVFSURI *uri = gnome_vfs_uri_new (entered_text);
-		if (uri != NULL) {
-			char const  *host	  = gnome_vfs_uri_get_host_name (uri);
-			if (host != NULL) {
-				res = gconf_value_new (GCONF_VALUE_STRING);
-				gconf_value_set_string (res, host);
-			}
-			gnome_vfs_uri_unref (uri);
+		gchar *host = get_hostname_from_uri (entered_text);
+
+		if (host != NULL) {
+			res = gconf_value_new (GCONF_VALUE_STRING);
+			gconf_value_set_string (res, host);
+			g_free (host);
 		}
 	}
 
-	if (res != NULL)
-		return res;
-	return gconf_value_copy (orig);
+	return (res != NULL) ? res : gconf_value_copy (orig);
 }
 
 static void
@@ -538,8 +569,6 @@ main (int argc, char **argv)
 				      argc, argv, GNOME_PARAM_NONE);
 
 	client = gconf_client_get_default ();
-	gconf_client_add_dir (client, "/system/gnome-vfs",
-			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (client, "/system/http_proxy",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (client, "/system/proxy",

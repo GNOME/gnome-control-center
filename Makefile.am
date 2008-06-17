@@ -1,4 +1,4 @@
-SUBDIRS = po libsounds libbackground libwindow-settings libslab capplets shell help vfs-methods $(TYPING_BREAK)
+SUBDIRS = po libsounds libwindow-settings libslab capplets shell help vfs-methods $(TYPING_BREAK)
 
 ACLOCAL_AMFLAGS = -I m4
 

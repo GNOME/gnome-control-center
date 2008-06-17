@@ -1,3 +1,64 @@
+2008-06-01  Thomas Wood  <thos@gnome.org>
+
+	* appearance-desktop.c: (wp_props_wp_selected), (wp_load_stuffs),
+	(wp_select_after_realize), (desktop_init), (desktop_shutdown):
+
+	Delay the creation of the wallpaper file chooser dialog to save time on
+	start up.
+
+Sat May 31 02:05:32 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* appearance-desktop.c (wp_drag_get_data): Make sure the data we
+	produce is actually a list of uris, not a list of paths. (Prevents
+	crash when someone drags a thumbnail back into the list).
+	
+	* appearance-desktop.c (wp_add_image): Be robust against NULL
+	filenames; this can happen if someone drops an http url on the
+	dialog.
+
+Sat May 31 00:41:20 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-wp-item.c (options_lookup): The gconf string is "zoom",
+	not "zoomed".
+
+Fri May 30 23:01:57 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-wp-item.c (set_bg_properties): Update to match API change
+	in libgnome-desktop.
+
+2008-05-24  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-util.c: (theme_is_writable), (theme_delete): expect
+	a path instead of an URI in theme_info->path
+
+2008-05-24  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-util.c: (directory_delete_recursive): also delete the
+	directory itself
+
+2008-05-24  Jens Granseuer  <jensgr@gmx.net>
+
+	* theme-installer.c: (cleanup_tmp_dir): fix up last commit
+
+2008-05-24  Jens Granseuer  <jensgr@gmx.net>
+
+	Based on a patch by: Lincoln de Sousa <lincoln@minaslivre.org>
+
+	Port the last remaining bits of gnome-vfs to gio (bug
+	#524401).
+
+	* appearance-main.c: (init_appearance_data):
+	* theme-installer.c: (cleanup_tmp_dir), (file_theme_type),
+	(transfer_cancel_cb), (gnome_theme_install_real),
+	(transfer_done_cb): use gio instead of gnome-vfs
+
+	* theme-util.c:
+	* theme-util.h: make file_delete_recursive public
+
+	* gnome-wp-info.c: include string.h to avoid warning
+
+==================== 2.23.2 ====================
+
 2008-05-08  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-style.c: (style_message_area_response_cb),

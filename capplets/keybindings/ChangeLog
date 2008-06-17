@@ -1,3 +1,30 @@
+2008-06-01  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-keybinding-properties.c: (create_dialog), (accel_set_func),
+	(description_set_func), (keybinding_key_changed),
+	(keybinding_description_changed), (clear_old_model),
+	(append_keys_to_tree), (parse_start_tag),
+	(append_keys_to_tree_from_file), (append_keys_to_tree_from_gconf),
+	(cb_check_for_uniqueness), (accel_edited_callback),
+	(accel_cleared_callback), (description_edited_callback),
+	(real_start_editing_cb), (start_editing_cb), (setup_dialog):
+	make editing the shortcut action work for custom bindings
+
+2008-05-31  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-keybinding-properties.c: (append_keys_to_tree),
+	(parse_start_tag), (append_keys_to_tree_from_file),
+	(append_keys_to_tree_from_gconf), (reload_key_entries): add
+	initial support for editing custom shortcuts (bug #114796).
+	Adding/deleting shortcuts is not yet possible
+
+2008-05-29  William Jon McCann  <jmccann@redhat.com>
+
+	* eggcellrendererkeys.c (egg_cell_renderer_keys_class_init):
+	Don't use deprecated GTK+ symbol.
+
+==================== 2.23.2 ====================
+
 2008-04-01  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-keybinding-properties.c: (get_real_model), (clear_old_model),

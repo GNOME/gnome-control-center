@@ -1,3 +1,98 @@
+gnome-control-center 2.23.4 (2008-06-16)
+
+default applications:
+- Convert to use GConfPropertyEditor and remove a lot of duplicated code in
+  the process (Thomas Wood)
+- Provide a Tango style application icon (Jakub Steiner, Thomas Wood) (#397312)
+
+typing break:
+- When postponing a voluntary break, go back to the state before taking the
+  break instead of going to warn state (Andrey Gusev) (#134595)
+
+general:
+- Increased gnome-desktop requirement (Rodrigo Moya)
+
+updated translations:
+- ar (Djihed Afifi)
+- es (Jorge Gonzalez)
+- hu (Gabor Kelemen)
+- nb (Kjartan Maraas)
+- th (Theppitak Karoonboonyanan)
+- zh_CN (Funda Wang)
+------------------------------------------------------------------------------
+gnome-control-center 2.23.3 (2008-06-04)
+
+appearance:
+- Remove the last traces of gnome-vfs (Lincoln de Sousa) (#524401)
+- Fix theme deletion (Jens Granseuer)
+- Update to match API changes in gnome-desktop (Soeren Sandmann)
+- Fix "zoom" mode (Soeren Sandmann)
+- Use URIs instead of paths for drag and drop (Soeren Sandmann)
+- Delay creation of the wallaper file chooser for increased startup
+  performance (Thomas Wood)
+
+default-applications:
+- Major refactoring to use GConfPropertyEditor and reduce code duplication
+  (Thomas Wood)
+
+keybindings:
+- Don't use deprecated GTK+ symbol (William Jon McCann)
+- Add support for editing custom keybindings (create/delete not yet
+  implemented) (Jens Granseuer)
+
+general:
+- Remove themus vfs-method (Thomas Wood)
+- Minor cleanup in capplet-util and gconf-property-editor (Thomas Wood,
+  Jens Granseuer)
+
+updated translations:
+- ar (Djihed Afifi)
+- gl (Ignacio Casal Quinteiro)
+- vi (Clytie Siddall)
+
+------------------------------------------------------------------------------
+gnome-control-center 2.23.2 (2008-05-17)
+
+about-me:
+- Fix image scaling on the photo button (Ben LeMasurier) (#309629)
+- Fix build on Solaris (Laszlo Peter) (#532893)
+- Properly handle errors when no icon is available (Jens Granseuer)
+- Fix handling of Home and Work email addresses (Jens Granseuer) (#317835)
+- Close a memory leak (Jens Granseuer)
+
+appearance:
+- Convert some more parts to gio (Lincoln de Sousa, Jens Granseuer)
+- Show errors for incomplete control themes (Jens Granseuer)
+- Add support for installing missing GTK+ theme engines via PackageKit
+  (Jens Granseuer) (#511065)
+
+keyboard:
+- Don't close the Keyboard Layout Options window when the Help button is
+  clicked (Thomas Wood) (#529772)
+- Access keyboard layouts by country or language (Sergey Udaltsov)
+
+network;
+- Drop gnome-vfs dependency (Jens Granseuer)
+
+sound:
+- Add support for OSS4 mixers (Tim-Phillip Mueller) (#529720)
+
+general:
+- libbackground is no longer needed (Soeren Sandmann)
+- Remove iso-codes dependency again (Sergey Udaltsov)
+- Require libxklavier 3.6 (Sergey Udaltsov)
+- Port theme handling code from gnome-vfs to gio (Jens Granseuer)
+
+updated translations:
+- es (Jorge Gonzalez)
+- fr (Stephane Raimbault)
+- gl (Ignacio Casal Quinteiro)
+- he (Yair Hershkovitz)
+- hu (Gabor Kelemen)
+- nb (Kjartan Maraas)
+- pt_BR (Leonardo Ferreira Fontenelle)
+
+------------------------------------------------------------------------------
 gnome-control-center 2.23.1
 
 about-me:
