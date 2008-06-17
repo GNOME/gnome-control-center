@@ -25,8 +25,8 @@
 #include <stdlib.h>
 #include "scrollarea.h"
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnomeui/randrwrap.h>
-#include <libgnomeui/monitor-db.h>
+#include <libgnomeui/gnome-rr.h>
+#include <libgnomeui/gnome-rr-config.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 
@@ -35,9 +35,9 @@ typedef struct GrabInfo GrabInfo;
 
 struct App
 {
-    RWScreen       *screen;
-    Configuration  *current_configuration;
-    Output         *current_output;
+    GnomeRRScreen       *screen;
+    GnomeRRConfig  *current_configuration;
+    GnomeOutputInfo         *current_output;
     
     GtkWidget	   *dialog;
     GtkListStore   *resolution_store;
@@ -93,31 +93,31 @@ idle_free (gchar *s)
 static int
 compare_outputs (const void *p1, const void *p2)
 {
-    Output *const *o1 = p1;
-    Output *const *o2 = p2;
+    GnomeOutputInfo *const *o1 = p1;
+    GnomeOutputInfo *const *o2 = p2;
 
     return (**o1).x - (**o2).x;
 }
 
 static void
-on_screen_changed (RWScreen *scr,
+on_screen_changed (GnomeRRScreen *scr,
 		   gpointer data)
 {
-    Configuration *current;
+    GnomeRRConfig *current;
     App *app = data;
     int i;
-    Output *best;
+    GnomeOutputInfo *best;
 
-    current = configuration_new_current (app->screen);
+    current = gnome_rr_config_new_current (app->screen);
 
     if (app->current_configuration)
-	configuration_free (app->current_configuration);
+	gnome_rr_config_free (app->current_configuration);
     
     app->current_configuration = current;
 
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
-	Output *o = app->current_configuration->outputs[i];
+	GnomeOutputInfo *o = app->current_configuration->outputs[i];
 	
 	g_print ("  output %s %s: %d %d %d %d\n", o->name, o->on? "on" : "off", o->x, o->y, o->width, o->height);
     }
@@ -127,13 +127,13 @@ on_screen_changed (RWScreen *scr,
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
 	;
 	
-    qsort (app->current_configuration->outputs, i, sizeof (Output *),
+    qsort (app->current_configuration->outputs, i, sizeof (GnomeOutputInfo *),
 	   compare_outputs);
 
 #if 0
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
-	Output *o = app->current_configuration->outputs[i];
+	GnomeOutputInfo *o = app->current_configuration->outputs[i];
 	
 	g_print ("  output: %d %d %d %d\n", o->x, o->y, o->width, o->height);
     }
@@ -143,7 +143,7 @@ on_screen_changed (RWScreen *scr,
     best = NULL;
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
-	Output *output = app->current_configuration->outputs[i];
+	GnomeOutputInfo *output = app->current_configuration->outputs[i];
 
 	if (output->connected)
 	{
@@ -230,7 +230,7 @@ static void
 add_key (GtkWidget *widget,
 	 const char *text,
 	 int width, int height, int rate,
-	 RWRotation rotation)
+	 GnomeRRRotation rotation)
 {
     ForeachInfo info;
     GtkComboBox *box = GTK_COMBO_BOX (widget);
@@ -285,19 +285,19 @@ combo_select (GtkWidget *widget, const char *text)
 }
 
 static gboolean
-has_similar_mode (RWOutput *output, RWMode *mode)
+has_similar_mode (GnomeRROutput *output, GnomeRRMode *mode)
 {
     int i;
-    RWMode **modes = rw_output_list_modes (output);
-    int width = rw_mode_get_width (mode);
-    int height = rw_mode_get_height (mode);
+    GnomeRRMode **modes = gnome_rr_output_list_modes (output);
+    int width = gnome_rr_mode_get_width (mode);
+    int height = gnome_rr_mode_get_height (mode);
 
     for (i = 0; modes[i] != NULL; ++i)
     {
-	RWMode *m = modes[i];
+	GnomeRRMode *m = modes[i];
 
-	if (rw_mode_get_width (m) == width	&&
-	    rw_mode_get_height (m) == height)
+	if (gnome_rr_mode_get_width (m) == width	&&
+	    gnome_rr_mode_get_height (m) == height)
 	{
 	    return TRUE;
 	}
@@ -306,21 +306,21 @@ has_similar_mode (RWOutput *output, RWMode *mode)
     return FALSE;
 }
 
-static RWMode **
-list_clone_modes (Configuration *config, RWScreen *screen)
+static GnomeRRMode **
+list_clone_modes (GnomeRRConfig *config, GnomeRRScreen *screen)
 {
     int i;
     GPtrArray *result;
-    RWMode **modes;
+    GnomeRRMode **modes;
 
     for (i = 0; config->outputs[i] != NULL; ++i)
     {
 	if (config->outputs[i]->connected)
 	{
-	    RWOutput *output =
-		rw_screen_get_output_by_name (screen, config->outputs[i]->name);
+	    GnomeRROutput *output =
+		gnome_rr_screen_get_output_by_name (screen, config->outputs[i]->name);
 
-	    modes = rw_output_list_modes (output);
+	    modes = gnome_rr_output_list_modes (output);
 	}
     }
 
@@ -338,7 +338,7 @@ list_clone_modes (Configuration *config, RWScreen *screen)
 	{
 	    if (config->outputs[j]->connected)
 	    {
-		RWOutput *output = rw_screen_get_output_by_name (
+		GnomeRROutput *output = gnome_rr_screen_get_output_by_name (
 		    screen, config->outputs[j]->name);
 
 		if (!has_similar_mode (output, modes[i]))
@@ -355,13 +355,13 @@ list_clone_modes (Configuration *config, RWScreen *screen)
 
     g_ptr_array_add (result, NULL);
     
-    return (RWMode **)g_ptr_array_free (result, FALSE);
+    return (GnomeRRMode **)g_ptr_array_free (result, FALSE);
 }
 
-static RWMode **
+static GnomeRRMode **
 get_current_modes (App *app)
 {
-    RWOutput *output;
+    GnomeRROutput *output;
 
     if (app->current_configuration->clone)
     {
@@ -372,13 +372,13 @@ get_current_modes (App *app)
 	if (!app->current_output)
 	    return NULL;
 	
-	output = rw_screen_get_output_by_name (
+	output = gnome_rr_screen_get_output_by_name (
 	    app->screen, app->current_output->name);
 	
 	if (!output)
 	    return NULL;
 	
-	return rw_output_list_modes (output);
+	return gnome_rr_output_list_modes (output);
     }
 }
 
@@ -387,17 +387,17 @@ rebuild_rotation_combo (App *app)
 {
     typedef struct
     {
-	RWRotation	rotation;
+	GnomeRRRotation	rotation;
 	const char *	name;
     } RotationInfo;
     static const RotationInfo rotations[] = {
-	{ RW_ROTATION_0, "Normal" },
-	{ RW_ROTATION_90, "Left" },
-	{ RW_ROTATION_270, "Right" },
-	{ RW_ROTATION_180, "Upside Down" },
+	{ GNOME_RR_ROTATION_0, "Normal" },
+	{ GNOME_RR_ROTATION_90, "Left" },
+	{ GNOME_RR_ROTATION_270, "Right" },
+	{ GNOME_RR_ROTATION_180, "Upside Down" },
     };
     const char *selection;
-    RWRotation current;
+    GnomeRRRotation current;
     int i;
     
     clear_combo (app->rotation_combo);
@@ -417,7 +417,7 @@ rebuild_rotation_combo (App *app)
 	
 	app->current_output->rotation = info->rotation;
 
-	if (configuration_applicable (app->current_configuration, app->screen))
+	if (gnome_rr_config_applicable (app->current_configuration, app->screen))
 	{
  	    add_key (app->rotation_combo, info->name, 0, 0, 0, info->rotation);
 
@@ -438,7 +438,7 @@ static void
 rebuild_rate_combo (App *app)
 {
     GHashTable *rates;
-    RWMode **modes;
+    GnomeRRMode **modes;
     int best;
     int i;
 
@@ -456,12 +456,12 @@ rebuild_rate_combo (App *app)
     best = -1;
     for (i = 0; modes[i] != NULL; ++i)
     {
-	RWMode *mode = modes[i];
+	GnomeRRMode *mode = modes[i];
 	int width, height, rate;
 
-	width = rw_mode_get_width (mode);
-	height = rw_mode_get_height (mode);
-	rate = rw_mode_get_freq (mode);
+	width = gnome_rr_mode_get_width (mode);
+	height = gnome_rr_mode_get_height (mode);
+	rate = gnome_rr_mode_get_freq (mode);
 
 	if (width == app->current_output->width		&&
 	    height == app->current_output->height)
@@ -486,7 +486,7 @@ count_active_outputs (App *app)
     
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
-	Output *output = app->current_configuration->outputs[i];
+	GnomeOutputInfo *output = app->current_configuration->outputs[i];
 	if (output->on)
 	    count++;
     }
@@ -495,7 +495,7 @@ count_active_outputs (App *app)
 }
 
 static int
-count_all_outputs (Configuration *config)
+count_all_outputs (GnomeRRConfig *config)
 {
     int i;
 
@@ -509,7 +509,7 @@ static void
 rebuild_resolution_combo (App *app)
 {
     int i;
-    RWMode **modes;
+    GnomeRRMode **modes;
     int best_w, best_h;
     const char *current;
 
@@ -524,8 +524,8 @@ rebuild_resolution_combo (App *app)
     {
 	int width, height;
 
-	width = rw_mode_get_width (modes[i]);
-	height = rw_mode_get_height (modes[i]);
+	width = gnome_rr_mode_get_width (modes[i]);
+	height = gnome_rr_mode_get_height (modes[i]);
 	
 	add_key (app->resolution_combo,
 		 idle_free (g_strdup_printf ("%d x %d", width, height)),
@@ -599,7 +599,7 @@ rebuild_gui (App *app)
 }
 
 static gboolean
-get_mode (GtkWidget *widget, int *width, int *height, int *freq, RWRotation *rot)
+get_mode (GtkWidget *widget, int *width, int *height, int *freq, GnomeRRRotation *rot)
 {
     GtkTreeIter iter;
     GtkTreeModel *model;
@@ -619,7 +619,7 @@ get_mode (GtkWidget *widget, int *width, int *height, int *freq, RWRotation *rot
 	freq = &dummy;
 
     if (!rot)
-	rot = (RWRotation *)&dummy;
+	rot = (GnomeRRRotation *)&dummy;
     
     model = gtk_combo_box_get_model (box);
     gtk_tree_model_get (model, &iter,
@@ -637,7 +637,7 @@ static void
 on_rotation_changed (GtkComboBox *box, gpointer data)
 {
     App *app = data;
-    RWRotation rotation;
+    GnomeRRRotation rotation;
 
     if (!app->current_output)
 	return;
@@ -690,7 +690,7 @@ on_resolution_changed (GtkComboBox *box, gpointer data)
 	x = 0;
 	for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
 	{
-	    Output *output = app->current_configuration->outputs[i];
+	    GnomeOutputInfo *output = app->current_configuration->outputs[i];
 	    
 	    if (output->connected)
 	    {
@@ -734,7 +734,7 @@ on_clone_changed (GtkWidget *box, gpointer data)
 }
 
 static void
-get_geometry (Output *output, int *w, int *h)
+get_geometry (GnomeOutputInfo *output, int *w, int *h)
 {
     if (output->on)
     {
@@ -766,7 +766,7 @@ list_connected_outputs (App *app, int *total_w, int *total_h)
     *total_h = 0;
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
-	Output *output = app->current_configuration->outputs[i];
+	GnomeOutputInfo *output = app->current_configuration->outputs[i];
 
 	if (output->connected)
 	{
@@ -807,7 +807,7 @@ compute_scale (App *app)
 
 typedef struct Edge
 {
-    Output *output;
+    GnomeOutputInfo *output;
     int x1, y1;
     int x2, y2;
 } Edge;
@@ -820,7 +820,7 @@ typedef struct Snap
 } Snap;
 
 static void
-add_edge (Output *output, int x1, int y1, int x2, int y2, GArray *edges)
+add_edge (GnomeOutputInfo *output, int x1, int y1, int x2, int y2, GArray *edges)
 {
     Edge e;
     
@@ -834,7 +834,7 @@ add_edge (Output *output, int x1, int y1, int x2, int y2, GArray *edges)
 }
 
 static void
-list_edges_for_output (Output *output, GArray *edges)
+list_edges_for_output (GnomeOutputInfo *output, GArray *edges)
 {
     int x, y, w, h;
     
@@ -850,13 +850,13 @@ list_edges_for_output (Output *output, GArray *edges)
 }
 
 static void
-list_edges (Configuration *config, GArray *edges)
+list_edges (GnomeRRConfig *config, GArray *edges)
 {
     int i;
 
     for (i = 0; config->outputs[i]; ++i)
     {
-	Output *output = config->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 
 	if (output->connected)
 	    list_edges_for_output (output, edges);
@@ -944,7 +944,7 @@ add_edge_snaps (Edge *snapper, Edge *snappee, GArray *snaps)
 }
 
 static void
-list_snaps (Output *output, GArray *edges, GArray *snaps)
+list_snaps (GnomeOutputInfo *output, GArray *edges, GArray *snaps)
 {
     int i;
 
@@ -1000,7 +1000,7 @@ edges_align (Edge *e1, Edge *e2)
 }
 
 static gboolean
-output_is_aligned (Output *output, GArray *edges)
+output_is_aligned (GnomeOutputInfo *output, GArray *edges)
 {
     gboolean result = FALSE;
     int i;
@@ -1037,7 +1037,7 @@ done:
 }
 
 static void
-get_output_rect (Output *output, GdkRectangle *rect)
+get_output_rect (GnomeOutputInfo *output, GdkRectangle *rect)
 {
     int w, h;
 
@@ -1050,7 +1050,7 @@ get_output_rect (Output *output, GdkRectangle *rect)
 }
 
 static gboolean
-output_overlaps (Output *output, Configuration *config)
+output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config)
 {
     int i;
     GdkRectangle output_rect;
@@ -1059,7 +1059,7 @@ output_overlaps (Output *output, Configuration *config)
 
     for (i = 0; config->outputs[i]; ++i)
     {
-	Output *other = config->outputs[i];
+	GnomeOutputInfo *other = config->outputs[i];
 
 	if (other != output && other->connected)
 	{
@@ -1075,14 +1075,14 @@ output_overlaps (Output *output, Configuration *config)
 }
 
 static gboolean
-configuration_is_aligned (Configuration *config, GArray *edges)
+gnome_rr_config_is_aligned (GnomeRRConfig *config, GArray *edges)
 {
     int i;
     gboolean result = TRUE;
 
     for (i = 0; config->outputs[i]; ++i)
     {
-	Output *output = config->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 
 	if (output->connected)
 	{
@@ -1153,7 +1153,7 @@ on_output_event (FooScrollArea *area,
 		 FooScrollAreaEvent *event,
 		 gpointer data)
 {
-    Output *output = data;
+    GnomeOutputInfo *output = data;
     App *app = g_object_get_data (G_OBJECT (area), "app");
 
     if (event->type == FOO_BUTTON_PRESS)
@@ -1218,7 +1218,7 @@ on_output_event (FooScrollArea *area,
 		g_array_set_size (new_edges, 0);
 		list_edges (app->current_configuration, new_edges);
 		
-		if (configuration_is_aligned (app->current_configuration, new_edges))
+		if (gnome_rr_config_is_aligned (app->current_configuration, new_edges))
 		{
 		    g_array_free (new_edges, TRUE);
 		    break;
@@ -1270,7 +1270,7 @@ on_canvas_event (FooScrollArea *area,
 
 static PangoLayout *
 get_display_name (App *app,
-		  Output *output)
+		  GnomeOutputInfo *output)
 {
     const char *text;
     
@@ -1319,7 +1319,7 @@ paint_output (App *app, cairo_t *cr, int i)
     double x, y;
     int total_w, total_h;
     GList *connected_outputs = list_connected_outputs (app, &total_w, &total_h); 
-    Output *output = g_list_nth (connected_outputs, i)->data;
+    GnomeOutputInfo *output = g_list_nth (connected_outputs, i)->data;
     PangoLayout *layout = get_display_name (app, output);
     PangoRectangle extent;
     GdkRectangle viewport;
@@ -1479,7 +1479,7 @@ gnome_randr_atom (void)
 }
 
 static void
-compute_virtual_size_for_configuration (Configuration *config, int *ret_width, int *ret_height)
+compute_virtual_size_for_configuration (GnomeRRConfig *config, int *ret_width, int *ret_height)
 {
     int i;
     int width, height;
@@ -1488,7 +1488,7 @@ compute_virtual_size_for_configuration (Configuration *config, int *ret_width, i
 
     for (i = 0; config->outputs[i] != NULL; i++)
     {
-	Output *output;
+	GnomeOutputInfo *output;
 
 	output = config->outputs[i];
 
@@ -1512,7 +1512,7 @@ check_required_virtual_size (App *app)
 
     compute_virtual_size_for_configuration (app->current_configuration, &req_width, &req_height);
 
-    rw_screen_get_ranges (app->screen, &min_width, &max_width, &min_height, &max_height);
+    gnome_rr_screen_get_ranges (app->screen, &min_width, &max_width, &min_height, &max_height);
 
     g_print ("X Server supports:\n");
     g_print ("min_width = %d, max_width = %d\n", min_width, max_width);
@@ -1533,13 +1533,13 @@ apply (App *app)
 {
     GError *err = NULL;
 
-    configuration_sanitize (app->current_configuration);
+    gnome_rr_config_sanitize (app->current_configuration);
 
     check_required_virtual_size (app);
 
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
     
-    if (configuration_save (app->current_configuration, &err))
+    if (gnome_rr_config_save (app->current_configuration, &err))
     {
 	XEvent message;
 
@@ -1558,7 +1558,7 @@ apply (App *app)
 
 /* Returns whether the graphics driver doesn't advertise RANDR 1.2 features, and just 1.0 */
 static gboolean
-driver_is_randr_10 (Configuration *config)
+driver_is_randr_10 (GnomeRRConfig *config)
 {
     /* In the Xorg code, see xserver/randr/rrinfo.c:RRScanOldConfig().  It gets
      * called when the graphics driver doesn't support RANDR 1.2 yet, just 1.0.
@@ -1570,8 +1570,8 @@ driver_is_randr_10 (Configuration *config)
      * This heuristic is courtesy of Dirk Mueller <dmueller@suse.de>
      *
      * FIXME: however, we don't even check for XRRQueryVersion() returning 1.2, neither
-     * here nor in gnome-desktop/libgnomedesktop/*.c.  Do we need to check for that,
-     * or is rw_screen_new()'s return value sufficient?
+     * here nor in gnome-desktop/libgnomedesktop*.c.  Do we need to check for that,
+     * or is gnome_rr_screen_new()'s return value sufficient?
      */
 
     return (count_all_outputs (config) == 1 && strcmp (config->outputs[0]->name, "default") == 0);
@@ -1582,7 +1582,7 @@ on_detect_displays (GtkWidget *widget, gpointer data)
 {
     App *app = data;
 
-    rw_screen_refresh (app->screen);
+    gnome_rr_screen_refresh (app->screen);
 }
 
 static void
@@ -1602,7 +1602,7 @@ run_application (App *app)
 	return;
     }
     
-    app->screen = rw_screen_new (gdk_screen_get_default(),
+    app->screen = gnome_rr_screen_new (gdk_screen_get_default(),
 				 on_screen_changed, app);
 
     app->dialog = glade_xml_get_widget (xml, "dialog");

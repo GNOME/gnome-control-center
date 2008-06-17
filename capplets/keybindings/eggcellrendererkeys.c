@@ -214,7 +214,7 @@ egg_cell_renderer_keys_class_init (EggCellRendererKeysClass *cell_keys_class)
                 G_SIGNAL_RUN_LAST,
                 G_STRUCT_OFFSET (EggCellRendererKeysClass, accel_cleared),
                 NULL, NULL,
-                gtk_marshal_VOID__STRING,
+                g_cclosure_marshal_VOID__STRING,
                 G_TYPE_NONE, 1,
 		G_TYPE_STRING);
 }
