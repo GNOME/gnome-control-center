@@ -1334,7 +1334,7 @@ setup_dialog (GladeXML *dialog)
   g_free (wm_name);
 
   widget = WID ("gnome-keybinding-dialog");
-  capplet_set_icon (widget, "gnome-settings-keybindings");
+  capplet_set_icon (widget, "preferences-desktop-keyboard-shortcuts");
   gtk_widget_show (widget);
 
   g_signal_connect (widget, "key_press_event", G_CALLBACK (maybe_block_accels), NULL);

@@ -467,7 +467,7 @@ main (int argc, char **argv)
                 ++i;
         }
 
-        capplet_set_icon (dialog_win, "gnome-window-manager");
+        capplet_set_icon (dialog_win, "preferences-system-windows");
         gtk_widget_show (dialog_win);
 
         gtk_main ();

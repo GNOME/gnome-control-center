@@ -312,7 +312,7 @@ main (int argc, char **argv)
 		}
 
 		capplet_set_icon (WID ("keyboard_dialog"),
-				  "gnome-dev-keyboard");
+				  "preferences-desktop-keyboard");
 		gtk_widget_show (WID ("keyboard_dialog"));
 		gtk_main ();
 	}

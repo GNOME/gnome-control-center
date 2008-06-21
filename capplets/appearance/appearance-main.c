@@ -156,7 +156,7 @@ main (int argc, char **argv)
 
   /* prepare the main window */
   w = glade_xml_get_widget (data->xml, "appearance_window");
-  capplet_set_icon (w, "gnome-settings-theme");
+  capplet_set_icon (w, "preferences-desktop-theme");
   gtk_widget_show_all (w);
 
   g_signal_connect_after (w, "response",
