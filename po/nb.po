@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.21.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-07 18:31+0200\n"
-"PO-Revision-Date: 2008-06-07 18:32+0200\n"
+"POT-Creation-Date: 2008-06-25 01:41+0200\n"
+"PO-Revision-Date: 2008-06-25 01:42+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -845,7 +845,6 @@ msgid "The current controls theme does not support color schemes."
 msgstr "Aktivt tema for kontroller støtter ikke fargeskjema."
 
 #: ../capplets/appearance/data/appearance.glade.h:52
-#: ../vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "Tema"
 
@@ -1790,6 +1789,46 @@ msgstr "Totem filmavspiller"
 msgid "aterm"
 msgstr "aterm"
 
+#: ../capplets/display/display-capplet.glade.h:1
+msgid "Include _Panel"
+msgstr "Ta med _panel"
+
+#: ../capplets/display/display-capplet.glade.h:2
+msgid "Mirror Screens"
+msgstr "Speil skjermer"
+
+#: ../capplets/display/display-capplet.glade.h:3
+msgid "Monitor Resolution Settings"
+msgstr "Innstillinger for skjermoppløsing"
+
+#: ../capplets/display/display-capplet.glade.h:4
+msgid ""
+"Normal\n"
+"Left\n"
+"Right\n"
+"Upside-down\n"
+msgstr ""
+"Normal\n"
+"Venstre\n"
+"Høyre\n"
+"Opp-ned\n"
+
+#: ../capplets/display/display-capplet.glade.h:9
+msgid "R_otation"
+msgstr "R_otasjon"
+
+#: ../capplets/display/display-capplet.glade.h:10
+msgid "Re_fresh Rate:"
+msgstr "Opp_friskingsrate"
+
+#: ../capplets/display/display-capplet.glade.h:11
+msgid "_Detect Displays"
+msgstr "_Søk etter skjermer"
+
+#: ../capplets/display/display-capplet.glade.h:12
+msgid "_Resolution"
+msgstr "_Oppløsning"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Endre oppløsning for skjermen"
@@ -1939,7 +1978,7 @@ msgstr "Type hurtigtast."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
-#: ../typing-break/drwright.c:483
+#: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -1958,8 +1997,10 @@ msgid ""
 "using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
-"Snarveien «%s» kan ikke brukes fordi den vil være umulig å skrive med denne tasten.\n"
-"Vennligst prøv igjen med en tastekombinasjon som inneholder Control, Alt eller Shift."
+"Snarveien «%s» kan ikke brukes fordi den vil være umulig å skrive med denne "
+"tasten.\n"
+"Vennligst prøv igjen med en tastekombinasjon som inneholder Control, Alt "
+"eller Shift."
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:1028
 #, c-format
@@ -1976,7 +2017,7 @@ msgid "Error setting new accelerator in configuration database: %s"
 msgstr "Feil under setting av ny snarvei i konfigurasjonsdatabasen: %s"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:1112
-#, fuzzy, c-format
+#, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "Feil under fjerning av snarveitast i konfigurasjonsdatabasen: %s"
 
@@ -3299,50 +3340,50 @@ msgstr "Ta en pause!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #. translators: keep the initial "/"
-#: ../typing-break/drwright.c:129
+#: ../typing-break/drwright.c:130
 msgid "/_Preferences"
 msgstr "/_Brukervalg"
 
-#: ../typing-break/drwright.c:130
+#: ../typing-break/drwright.c:131
 msgid "/_About"
 msgstr "/_Om"
 
-#: ../typing-break/drwright.c:132
+#: ../typing-break/drwright.c:133
 msgid "/_Take a Break"
 msgstr "/_Ta en pause"
 
-#: ../typing-break/drwright.c:501
+#: ../typing-break/drwright.c:489
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minutt til neste pause"
 msgstr[1] "%d minutter til neste pause"
 
-#: ../typing-break/drwright.c:505
+#: ../typing-break/drwright.c:493
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Mindre enn ett minutt til neste pause"
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:580
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "Kan ikke vise egenskaperdialog for skrivepause pga følgende feil: %s"
 
-#: ../typing-break/drwright.c:611
+#: ../typing-break/drwright.c:599
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Skrevet av Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:612
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Eye candy lagt til av Anders Carlsson"
 
-#: ../typing-break/drwright.c:621
+#: ../typing-break/drwright.c:609
 msgid "A computer break reminder."
 msgstr "Påminnelse om pause fra datamaskinen."
 
-#: ../typing-break/drwright.c:623
+#: ../typing-break/drwright.c:611
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
@@ -3523,96 +3564,3 @@ msgstr "SKRIFTFIL UTDATAFIL"
 #, c-format
 msgid "Error parsing arguments: %s\n"
 msgstr "Feil ved lesing av argumenter: %s\n"
-
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Bruk ny skrift?</span>"
-
-#: ../vfs-methods/themus/apply-font.glade.h:2
-msgid "Do _not apply font"
-msgstr "Ikke bruk _skrift"
-
-#: ../vfs-methods/themus/apply-font.glade.h:3
-msgid ""
-"The theme you have selected suggests a new font. A preview of the font is "
-"shown below."
-msgstr ""
-"Temaet du valgte foreslår en ny skrift. En forhåndsvisning av skriften "
-"finnes under."
-
-#: ../vfs-methods/themus/apply-font.glade.h:4
-msgid "_Apply font"
-msgstr "Bruk _skrift"
-
-#: ../vfs-methods/themus/theme-method.c:485
-msgid "Themes"
-msgstr "Tema"
-
-#: ../vfs-methods/themus/themus-properties-view.c:128
-msgid "Description"
-msgstr "Beskrivelse"
-
-#: ../vfs-methods/themus/themus-properties-view.c:135
-msgid "Control theme"
-msgstr "Kontroller tema"
-
-#: ../vfs-methods/themus/themus-properties-view.c:141
-msgid "Window border theme"
-msgstr "Tema for vinduskant"
-
-#: ../vfs-methods/themus/themus-properties-view.c:147
-msgid "Icon theme"
-msgstr "Ikontema"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:1
-msgid "If set to true, then installed themes will be thumbnailed."
-msgstr "Installerte tema vil ha miniatyrvisninger hvis denne settes til «true»."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:2
-msgid "If set to true, then themes will be thumbnailed."
-msgstr "Tema vil ha miniatyrer hvis denne settes til «true»."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"Sett denne nøkkelen til kommandoen som skal brukes for å lage miniatyrer for "
-"installerte tema."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:4
-msgid "Set this key to the command used to create thumbnails for themes."
-msgstr ""
-"Sett denne nøkkelen til kommandoen som brukes for å lage miniatyrer for tema."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:5
-msgid "Thumbnail command for installed themes"
-msgstr "Kommando for å lage miniatyrer av installerte tema"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:6
-msgid "Thumbnail command for themes"
-msgstr "Kommando for å lage miniatyrer av tema"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:7
-msgid "Whether to thumbnail installed themes"
-msgstr "Om miniatyrer for installerte tema skal brukes"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:8
-msgid "Whether to thumbnail themes"
-msgstr "Om miniatyrer for tema skal brukes"
-
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "ABCDÆØÅ"
-
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[FIL]"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "Bruk tema"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "Setter forvalgt tema"
