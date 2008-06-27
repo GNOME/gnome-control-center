@@ -656,11 +656,15 @@ break_window_postpone_cb (GtkWidget *window,
 	dr->state = STATE_TYPE;
 	dr->break_window = NULL;
 
-	elapsed_time = g_timer_elapsed (dr->timer, NULL) + dr->save_last_time;
+	elapsed_time = g_timer_elapsed (dr->timer, NULL);
 
-	if (elapsed_time >= dr->type_time) {
-		/* time is expired, but break was postponed */
-		dr->save_last_time = dr->type_time - dr->warn_time;
+	if (elapsed_time + dr->save_last_time >= dr->type_time) {
+		/* Typing time has expired, but break was postponed.
+		 * We'll warn again in (elapsed * sqrt (typing_time))^2 */
+		gfloat postpone_time = (((float) elapsed_time) / dr->break_time)
+					* sqrt (dr->type_time);
+		postpone_time *= postpone_time;
+		dr->save_last_time = dr->type_time - MAX (dr->warn_time, (gint) postpone_time);
 	}
 
 	g_timer_start (dr->timer);
