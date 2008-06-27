@@ -15,12 +15,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 16:58+0000\n"
-"PO-Revision-Date: 2008-06-07 14:37+0200\n"
+"POT-Creation-Date: 2008-06-24 23:44+0000\n"
+"PO-Revision-Date: 2008-06-27 14:43+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type:  text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
@@ -64,7 +64,7 @@ msgid "No Image"
 msgstr "Sin imagen"
 
 #: ../capplets/about-me/gnome-about-me.c:769
-#: ../capplets/appearance/appearance-desktop.c:1080
+#: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "Imágenes"
 
@@ -88,8 +88,7 @@ msgstr "Imposible abrir la libreta de direcciones"
 
 #: ../capplets/about-me/gnome-about-me.c:946
 msgid "Unknown login ID, the user database might be corrupted"
-msgstr ""
-"ID de inicio desconocido, la base de datos de usuarios quizá esté corrupta"
+msgstr "ID de inicio desconocido, la base de datos de usuarios quizá esté corrupta"
 
 #: ../capplets/about-me/gnome-about-me.c:976
 #: ../capplets/about-me/gnome-about-me.c:978
@@ -228,8 +227,7 @@ msgstr "Datos personales"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:32
 #: ../capplets/about-me/gnome-about-me-password.c:938
-msgid ""
-"Please type your password again in the <b>Retype new password</b> field."
+msgid "Please type your password again in the <b>Retype new password</b> field."
 msgstr ""
 "Por favor, teclee la contraseña de nuevo en el campo <b>Teclee la contraseña "
 "nueva otra vez</b>."
@@ -511,11 +509,11 @@ msgstr ""
 "Active el soporte para las tecnologías de asistencia de GNOME durante el "
 "inicio"
 
-#: ../capplets/appearance/appearance-desktop.c:1048
+#: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
 msgstr "Añadir tapiz"
 
-#: ../capplets/appearance/appearance-desktop.c:1084
+#: ../capplets/appearance/appearance-desktop.c:665
 msgid "All files"
 msgstr "Todos los archivos"
 
@@ -867,7 +865,6 @@ msgid "The current controls theme does not support color schemes."
 msgstr "El tema actual de controles no soporta esquemas de colores."
 
 #: ../capplets/appearance/data/appearance.glade.h:52
-#: ../vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "Tema"
 
@@ -1153,8 +1150,7 @@ msgstr "Los nuevos temas se han instalado con éxito."
 
 #: ../capplets/appearance/theme-installer.c:595
 msgid "No theme file location specified to install"
-msgstr ""
-"No se ha especificado ninguna ubicación del archivo del tema para instalar"
+msgstr "No se ha especificado ninguna ubicación del archivo del tema para instalar"
 
 #: ../capplets/appearance/theme-installer.c:615
 #, c-format
@@ -1323,16 +1319,14 @@ msgstr "Retorno de llamada"
 
 #: ../capplets/common/gconf-property-editor.c:141
 msgid "Issue this callback when the value associated with key gets changed"
-msgstr ""
-"Emitir este retorno de llamada cuando cambie el valor asociado con la clave"
+msgstr "Emitir este retorno de llamada cuando cambie el valor asociado con la clave"
 
 #: ../capplets/common/gconf-property-editor.c:146
 msgid "Change set"
 msgstr "Conjunto de cambios"
 
 #: ../capplets/common/gconf-property-editor.c:147
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Conjunto de cambios de gconf que contiene datos que deben remitirse al "
 "cliente de gconf cuando se apliquen"
@@ -1342,8 +1336,7 @@ msgid "Conversion to widget callback"
 msgstr "Conversión a retorno de llamada del widget"
 
 #: ../capplets/common/gconf-property-editor.c:153
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Retorno de llamada que se debe emitir cuando se vayan a convertir datos de "
 "gconf al widget"
@@ -1353,8 +1346,7 @@ msgid "Conversion from widget callback"
 msgstr "Conversión desde el retorno de llamada del widget"
 
 #: ../capplets/common/gconf-property-editor.c:159
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Retorno de llamada que se debe emitir cuando se vayan a convertir datos del "
 "widget a gconf"
@@ -1373,8 +1365,7 @@ msgstr "Datos de objeto del editor de propiedades"
 
 #: ../capplets/common/gconf-property-editor.c:181
 msgid "Custom data required by the specific property editor"
-msgstr ""
-"Datos personalizados requeridos por el editor de propiedades específico"
+msgstr "Datos personalizados requeridos por el editor de propiedades específico"
 
 #: ../capplets/common/gconf-property-editor.c:187
 msgid "Property editor data freeing callback"
@@ -1817,6 +1808,46 @@ msgstr "Reproductor de películas Totem"
 msgid "aterm"
 msgstr "aterm"
 
+#: ../capplets/display/display-capplet.glade.h:1
+msgid "Include _Panel"
+msgstr "Incluir pa_nel"
+
+#: ../capplets/display/display-capplet.glade.h:2
+msgid "Mirror Screens"
+msgstr "Espejar pantallas"
+
+#: ../capplets/display/display-capplet.glade.h:3
+msgid "Monitor Resolution Settings"
+msgstr "Ajustes de resolución del monitor"
+
+#: ../capplets/display/display-capplet.glade.h:4
+msgid ""
+"Normal\n"
+"Left\n"
+"Right\n"
+"Upside-down\n"
+msgstr ""
+"Normal\n"
+"Izquierda\n"
+"Derecha\n"
+"Hacia abajo\n"
+
+#: ../capplets/display/display-capplet.glade.h:9
+msgid "R_otation"
+msgstr "R_otación"
+
+#: ../capplets/display/display-capplet.glade.h:10
+msgid "Re_fresh Rate:"
+msgstr "Tasa de re_fresco:"
+
+#: ../capplets/display/display-capplet.glade.h:11
+msgid "_Detect Displays"
+msgstr "_Detectar dispositivos"
+
+#: ../capplets/display/display-capplet.glade.h:12
+msgid "_Resolution"
+msgstr "_Resolución"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Cambie la resolución de la pantalla"
@@ -1966,7 +1997,7 @@ msgstr "El tipo de combinación."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
-#: ../typing-break/drwright.c:483
+#: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -2045,8 +2076,7 @@ msgstr "Asigne una combinación de teclas a comandos"
 #: ../capplets/keyboard/gnome-keyboard-properties.c:253
 #: ../capplets/sound/sound-properties-capplet.c:1155
 #: ../capplets/sound/sound-properties-capplet.c:1157
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Tan sólo aplicar la configuración y salir (sólo por compatibilidad; "
 "manipulado ahora por un demonio)"
@@ -2130,8 +2160,7 @@ msgstr "Co_mentarios sobre el sonido..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Beep when _accessibility features are turned on or off"
-msgstr ""
-"Pitar cuando se activen o desactiven las características de _accesibilidad"
+msgstr "Pitar cuando se activen o desactiven las características de _accesibilidad"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Beep when a _modifier key is pressed"
@@ -2210,8 +2239,7 @@ msgstr "General"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "Key presses _repeat when key is held down"
-msgstr ""
-"La pulsaciones de teclas se _repiten cuando la tecla se mantiene pulsada"
+msgstr "La pulsaciones de teclas se _repiten cuando la tecla se mantiene pulsada"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "Keyboard Accessibility Audio Feedback"
@@ -2410,8 +2438,7 @@ msgstr "Desactivado"
 #. TRANSLATORS: don't translate the terms in brackets
 #: ../capplets/mouse/gnome-mouse-properties.c:443
 msgid "Specify the name of the page to show (general|accessibility)"
-msgstr ""
-"Especifique el nombre de la página para mostrar (general|accessibility)"
+msgstr "Especifique el nombre de la página para mostrar (general|accessibility)"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:452
 msgid "- GNOME Mouse Preferences"
@@ -2554,8 +2581,7 @@ msgstr "_Tiempo de espera:"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:51
 msgid "_Trigger secondary click by holding down the primary button"
-msgstr ""
-"D_isparar la pulsación secundaria al mantener pulsado el botón primario"
+msgstr "D_isparar la pulsación secundaria al mantener pulsado el botón primario"
 
 #: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
@@ -2810,8 +2836,7 @@ msgstr "Campana _visual del sistema"
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
-msgstr ""
-"No se puede iniciar la aplicación de preferencias para su gestor de ventanas"
+msgstr "No se puede iniciar la aplicación de preferencias para su gestor de ventanas"
 
 #. translators: this is the Control key
 #: ../capplets/windows/gnome-window-properties.c:602
@@ -3082,8 +3107,7 @@ msgstr "Etiqueta «%s» inesperada dentro de «%s»"
 #: ../libslab/libslab-bookmarkfile.c:1929
 #, c-format
 msgid "No valid bookmark file found in data dirs"
-msgstr ""
-"No se encontró un archivo de marcadores válido en los directorios de datos"
+msgstr "No se encontró un archivo de marcadores válido en los directorios de datos"
 
 #: ../libslab/libslab-bookmarkfile.c:2130
 #, c-format
@@ -3207,8 +3231,7 @@ msgstr "Sonidos del sistema"
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
-msgstr ""
-"El gestor de ventanas «%s» no ha registrado una herramienta de configuración\n"
+msgstr "El gestor de ventanas «%s» no ha registrado una herramienta de configuración\n"
 
 #: ../libwindow-settings/metacity-window-manager.c:402
 msgid "Maximize"
@@ -3333,8 +3356,7 @@ msgstr ""
 "desktop]"
 
 #: ../shell/control-center.schemas.in.h:14
-msgid ""
-"if true, the control-center will close when a \"Common Task\" is activated."
+msgid "if true, the control-center will close when a \"Common Task\" is activated."
 msgstr ""
 "Si es verdadero, el centro de control se cerrará cuando se active una «Tarea "
 "común»."
@@ -3353,31 +3375,31 @@ msgstr "¡Tómese un descanso!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #. translators: keep the initial "/"
-#: ../typing-break/drwright.c:129
+#: ../typing-break/drwright.c:130
 msgid "/_Preferences"
 msgstr "/Prefere_ncias"
 
-#: ../typing-break/drwright.c:130
+#: ../typing-break/drwright.c:131
 msgid "/_About"
 msgstr "/_Acerca de"
 
-#: ../typing-break/drwright.c:132
+#: ../typing-break/drwright.c:133
 msgid "/_Take a Break"
 msgstr "/_Tomar un descanso"
 
-#: ../typing-break/drwright.c:501
+#: ../typing-break/drwright.c:489
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minuto hasta su siguiente descanso"
 msgstr[1] "%d minutos hasta su siguiente descanso"
 
-#: ../typing-break/drwright.c:505
+#: ../typing-break/drwright.c:493
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Menos de un minuto hasta su siguiente descanso"
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:580
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3386,19 +3408,19 @@ msgstr ""
 "No se puede mostrar el diálogo de las propiedades del descanso de escritura "
 "por el siguiente error: %s"
 
-#: ../typing-break/drwright.c:611
+#: ../typing-break/drwright.c:599
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Escrito por Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:612
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Vistosidad agregada por Anders Carlsson"
 
-#: ../typing-break/drwright.c:621
+#: ../typing-break/drwright.c:609
 msgid "A computer break reminder."
 msgstr "Un recordatorio para los descansos frente a la computadora."
 
-#: ../typing-break/drwright.c:623
+#: ../typing-break/drwright.c:611
 msgid "translator-credits"
 msgstr ""
 "Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008\n"
@@ -3447,27 +3469,22 @@ msgstr "Establece la tipografía predeterminada para las aplicaciones"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr ""
-"Si está puesto a «true», entonces las tipografías OpenType se miniaturizarán."
+msgstr "Si está puesto a «true», entonces las tipografías OpenType se miniaturizarán."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:2
 msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr ""
-"Si está puesto a «true», entonces las tipografías PFC se miniaturizarán."
+msgstr "Si está puesto a «true», entonces las tipografías PFC se miniaturizarán."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:3
 msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr ""
-"Si está puesto a «true», entonces las tipografías TrueType se miniaturizarán."
+msgstr "Si está puesto a «true», entonces las tipografías TrueType se miniaturizarán."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:4
 msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr ""
-"Si está puesto a «true», entonces las tipografías Type1 se miniaturizarán."
+msgstr "Si está puesto a «true», entonces las tipografías Type1 se miniaturizarán."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
+msgid "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Ponga en esta clave el comando que se debe usar para crear miniaturas de las "
 "tipografías OpenType."
@@ -3479,8 +3496,7 @@ msgstr ""
 "tipografías PCF."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
+msgid "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Ponga en esta clave el comando que se debe usar para crear miniaturas de las "
 "tipografías TrueType."
@@ -3597,102 +3613,3 @@ msgstr "ARCHIVO-DE-TIPOGRAFÍA ARCHIVO-DE-SALIDA"
 msgid "Error parsing arguments: %s\n"
 msgstr "Error al analizar los argumentos: %s\n"
 
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">¿Desea aplicar la tipografía nueva?</"
-"span>"
-
-#: ../vfs-methods/themus/apply-font.glade.h:2
-msgid "Do _not apply font"
-msgstr "_No aplicar la tipografía"
-
-#: ../vfs-methods/themus/apply-font.glade.h:3
-msgid ""
-"The theme you have selected suggests a new font. A preview of the font is "
-"shown below."
-msgstr ""
-"El tema que ha seleccionado sugiere una tipografía nueva. A continuación se "
-"muestra una vista previa de la tipografía."
-
-#: ../vfs-methods/themus/apply-font.glade.h:4
-msgid "_Apply font"
-msgstr "_Aplicar tipografía"
-
-#: ../vfs-methods/themus/theme-method.c:485
-msgid "Themes"
-msgstr "Temas"
-
-#: ../vfs-methods/themus/themus-properties-view.c:128
-msgid "Description"
-msgstr "Descripción"
-
-#: ../vfs-methods/themus/themus-properties-view.c:135
-msgid "Control theme"
-msgstr "Tema de control"
-
-#: ../vfs-methods/themus/themus-properties-view.c:141
-msgid "Window border theme"
-msgstr "Tema del borde de la ventana"
-
-#: ../vfs-methods/themus/themus-properties-view.c:147
-msgid "Icon theme"
-msgstr "Tema de iconos"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:1
-msgid "If set to true, then installed themes will be thumbnailed."
-msgstr ""
-"Si se establece a «true», entonces los temas instalados se miniaturizarán."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:2
-msgid "If set to true, then themes will be thumbnailed."
-msgstr "Si se establece a «true», entonces los temas se miniautizarán."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"Establezca esta clave con el comando utilizado para crear las miniaturas de "
-"los temas instalados."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:4
-msgid "Set this key to the command used to create thumbnails for themes."
-msgstr ""
-"Establezca esta clave con el comando utilizado para crear las miniaturas de "
-"los temas."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:5
-msgid "Thumbnail command for installed themes"
-msgstr "Comando para miniaturizar los temas instalados"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:6
-msgid "Thumbnail command for themes"
-msgstr "Comando para miniaturizar los temas"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:7
-msgid "Whether to thumbnail installed themes"
-msgstr "Indica si se deben miniaturizar los temas instalados"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:8
-msgid "Whether to thumbnail themes"
-msgstr "Indica si hay que miniaturizar los temas"
-
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "ÁÉÍÓÚÑÜÇ"
-
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[ARCHIVO]"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "Aplicar tema"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "Establece el tema predeterminado"
-
-#~ msgid "Just apply settings and quit"
-#~ msgstr "Aplicar los cambios y salir"
