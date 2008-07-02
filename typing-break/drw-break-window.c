@@ -145,6 +145,7 @@ drw_break_window_init (DrwBreakWindow *window)
 
 	gtk_window_set_keep_above (GTK_WINDOW (window), TRUE);
 	gtk_window_fullscreen (GTK_WINDOW (window));
+	gtk_window_set_modal (GTK_WINDOW (window), TRUE);
 
 	screen = gdk_screen_get_default ();
 	gdk_screen_get_monitor_geometry (screen, root_monitor, &monitor);
