@@ -19,6 +19,7 @@
  * Author: Soren Sandmann <sandmann@redhat.com>
  */
 
+#include <config.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <string.h>
@@ -29,6 +30,7 @@
 #include <libgnomeui/gnome-rr-config.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
+#include <glib/gi18n.h>
 
 typedef struct App App;
 typedef struct GrabInfo GrabInfo;
@@ -115,14 +117,18 @@ on_screen_changed (GnomeRRScreen *scr,
     
     app->current_configuration = current;
 
+#if 0
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
 	GnomeOutputInfo *o = app->current_configuration->outputs[i];
 	
 	g_print ("  output %s %s: %d %d %d %d\n", o->name, o->on? "on" : "off", o->x, o->y, o->width, o->height);
     }
+#endif
     
+#if 0
     g_print ("sorting\n");
+#endif
     /* Sort outputs according to X coordinate */
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
 	;
@@ -391,10 +397,10 @@ rebuild_rotation_combo (App *app)
 	const char *	name;
     } RotationInfo;
     static const RotationInfo rotations[] = {
-	{ GNOME_RR_ROTATION_0, "Normal" },
-	{ GNOME_RR_ROTATION_90, "Left" },
-	{ GNOME_RR_ROTATION_270, "Right" },
-	{ GNOME_RR_ROTATION_180, "Upside Down" },
+	{ GNOME_RR_ROTATION_0, N_("Normal") },
+	{ GNOME_RR_ROTATION_90, N_("Left") },
+	{ GNOME_RR_ROTATION_270, N_("Right") },
+	{ GNOME_RR_ROTATION_180, N_("Upside Down") },
     };
     const char *selection;
     GnomeRRRotation current;
@@ -429,7 +435,7 @@ rebuild_rotation_combo (App *app)
     app->current_output->rotation = current;
     
     if (!(selection && combo_select (app->rotation_combo, selection)))
-	combo_select (app->rotation_combo, "Normal");
+	combo_select (app->rotation_combo, N_("Normal"));
 }
 
 #define idle_free_printf(x) idle_free (g_strdup_printf (x))
@@ -467,7 +473,7 @@ rebuild_rate_combo (App *app)
 	    height == app->current_output->height)
 	{
 	    add_key (app->refresh_combo,
-		     idle_free (g_strdup_printf ("%d Hz", rate)),
+		     idle_free (g_strdup_printf (_("%d Hz"), rate)),
 		     0, 0, rate, -1);
 
 	    if (rate > best)
@@ -475,8 +481,8 @@ rebuild_rate_combo (App *app)
 	}
     }
 
-    if (!combo_select (app->refresh_combo, idle_free (g_strdup_printf ("%d Hz", app->current_output->rate))))
-	combo_select (app->refresh_combo, idle_free (g_strdup_printf ("%d Hz", best)));
+    if (!combo_select (app->refresh_combo, idle_free (g_strdup_printf (_("%d Hz"), app->current_output->rate))))
+	combo_select (app->refresh_combo, idle_free (g_strdup_printf (_("%d Hz"), best)));
 }
 
 static int
@@ -528,7 +534,7 @@ rebuild_resolution_combo (App *app)
 	height = gnome_rr_mode_get_height (modes[i]);
 	
 	add_key (app->resolution_combo,
-		 idle_free (g_strdup_printf ("%d x %d", width, height)),
+		 idle_free (g_strdup_printf (_("%d x %d"), width, height)),
 		 width, height, 0, -1);
 
 	if (width * height > best_w * best_h)
@@ -539,7 +545,7 @@ rebuild_resolution_combo (App *app)
     }
 
     if (count_active_outputs (app) > 1 || !app->current_output->on)
-	add_key (app->resolution_combo, "Off", 0, 0, 0, 0);
+	add_key (app->resolution_combo, _("Off"), 0, 0, 0, 0);
 
     if (!app->current_output->on)
     {
@@ -547,7 +553,7 @@ rebuild_resolution_combo (App *app)
     }
     else
     {
-	current = idle_free (g_strdup_printf ("%d x %d",
+	current = idle_free (g_strdup_printf (_("%d x %d"),
 					      app->current_output->width,
 					      app->current_output->height));
     }
@@ -557,7 +563,7 @@ rebuild_resolution_combo (App *app)
     {
 	combo_select (app->resolution_combo,
 		      idle_free (
-			  g_strdup_printf ("%d x %d", best_w, best_h)));
+			  g_strdup_printf (_("%d x %d"), best_w, best_h)));
     }
 }
 
@@ -1241,7 +1247,9 @@ on_output_event (FooScrollArea *area,
 		g_free (output->user_data);
 		output->user_data = NULL;
 
+#if 0
 		g_print ("new position: %d %d %d %d\n", output->x, output->y, output->width, output->height);
+#endif
 	    }
 
 	    foo_scroll_area_invalidate (area);
@@ -1275,7 +1283,7 @@ get_display_name (App *app,
     const char *text;
     
     if (app->current_configuration->clone)
-	text = "Cloned Output";
+	text = _("Cloned Output");
     else
 	text = output->display_name;
 
@@ -1514,17 +1522,21 @@ check_required_virtual_size (App *app)
 
     gnome_rr_screen_get_ranges (app->screen, &min_width, &max_width, &min_height, &max_height);
 
+#if 0
     g_print ("X Server supports:\n");
     g_print ("min_width = %d, max_width = %d\n", min_width, max_width);
     g_print ("min_height = %d, max_height = %d\n", min_height, max_height);
 
     g_print ("Requesting size of %dx%d\n", req_width, req_height);
+#endif
 
     if (!(min_width <= req_width && req_width <= max_width
 	  && min_height <= req_height && req_height <= max_height))
     {
 	/* FIXME: present a useful dialog, maybe even before the user tries to Apply */
+#if 0
 	g_print ("Your X server needs a larger Virtual size!\n");
+#endif
     }
 }
 
@@ -1547,7 +1559,9 @@ apply (App *app)
 	message.xclient.message_type = gnome_randr_atom();
 	message.xclient.format = 8;
 
+#if 0
 	g_print ("Sending client message\n");
+#endif
 
 	XSendEvent (gdk_x11_get_default_xdisplay(),
 		    gdk_x11_get_default_root_xwindow(),
@@ -1666,7 +1680,6 @@ restart:
     switch (gtk_dialog_run (GTK_DIALOG (app->dialog)))
     {
     default:
-	g_print ("Unknown response\n");
 	/* Fall Through */
     case GTK_RESPONSE_DELETE_EVENT:
     case GTK_RESPONSE_CLOSE:
@@ -1692,11 +1705,9 @@ main (int argc, char **argv)
 {
     App *app;
     
-#if 0
-    bindtextdomain (GETTEXT_PACKAGE, DESKTOPEFFECTSLOCALEDIR);
+    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
-#endif
     
     gtk_init (&argc, &argv);
 

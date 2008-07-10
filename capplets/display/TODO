@@ -1,5 +1,24 @@
 Highlevel overview:
 
+Tablet rotation things
+only when there is a tablet attached.
+
+Here is the OS X Display menu:
+
+	Detect Displays
+	Turn on mirroring
+	--------------------------
+	SyncMaster
+		- 1280 x 1024, 60 Hz, Millions
+	        - 1344 x ...
+	--------------------------------
+	Color LCD
+		- 1024 x 1024 ...
+	--------------------------
+	Displays Preferences
+	
+	Color LCD means "laptop panel".
+
 - GTK+ work.
 
 	Allow applications to be notified whenever monitors are added
@@ -216,6 +235,7 @@ Needed XRandr output properties:
      - They should be set to the correct mode on login. 
        Note that this involves setting the right position in the
        framebuffer too.
+
        What if someone swaps two monitors? Users are going to expect
        that the images will switch position.
 
@@ -403,15 +423,17 @@ Structure of capplet:
 
   - Given a list of modes, pick the one closest to a given mode. 
 
-      	     (a possibility here is: pick an exact match, if that's impossible, then
-	      pick the best one with the same width/height, if that's impossible, then
-	      just pick the best mode on the list).
+      	     (a possibility here is: pick an exact match, if that's
+	      impossible, then pick the best one with the same
+	      width/height, if that's impossible, then just pick the
+	      best mode on the list).
 
-  - For a configuation, fix the mode for a subset of the outputs, then list the 
-    combinations for the rest of the outputs.
+  - For a configuation, fix the mode for a subset of the outputs, then
+    list the combinations for the rest of the outputs.
 
-    	     An obvious possibility here is to simply list all possibilities, then 
-	     weed out those that don't work. Is this too expensive? It might be.
+    	     An obvious possibility here is to simply list all possibilities, 
+	     then  weed out those that don't work. Is this too expensive? 
+	     It might be.
 
 Structure of login time program:
 
