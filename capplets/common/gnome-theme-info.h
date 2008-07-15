@@ -100,6 +100,7 @@ struct _GnomeThemeMetaInfo
   gchar *gtk_color_scheme;
   gchar *metacity_theme_name;
   gchar *icon_theme_name;
+  gchar *notification_theme_name;
   gchar *sound_theme_name;
   gchar *cursor_theme_name;
   guint cursor_size;

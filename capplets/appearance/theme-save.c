@@ -234,6 +234,12 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
     g_free (str);
   }
 
+  if (theme_info->notification_theme_name) {
+    str = g_strdup_printf ("NotificationTheme=%s\n", theme_info->notification_theme_name);
+    g_output_stream_write (output, str, strlen (str), NULL, NULL);
+    g_free (str);
+  }
+
   if (save_background) {
     client = gconf_client_get_default ();
     current_background = gconf_client_get_string (client, BACKGROUND_KEY, NULL);

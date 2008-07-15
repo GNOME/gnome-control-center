@@ -1,3 +1,16 @@
+2008-07-15  Matthias Clasen  <mclasen@redhat.com>
+
+	Bug 533611 - add notification themes to the metatheme format
+
+	* appearance-themes.c: When loading a metatheme from GConf, read
+	the notification theme from /apps/notification-daemon/theme.
+
+	* appearance-theme-save.c: When saving a metatheme to disk,
+	save the notification theme with the key NotificationTheme.
+
+	* appearance-theme-util.h: Add a define for the GConf key
+	used for notification theme.
+
 2008-06-21  Jens Granseuer  <jensgr@gmx.net>
 
 	Patch by: Matthias Clasen <mclasen@redhat.com>

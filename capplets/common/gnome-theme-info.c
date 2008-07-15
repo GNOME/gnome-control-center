@@ -25,6 +25,7 @@
 #define METACITY_THEME_KEY "X-GNOME-Metatheme/MetacityTheme"
 #define ICON_THEME_KEY "X-GNOME-Metatheme/IconTheme"
 #define CURSOR_THEME_KEY "X-GNOME-Metatheme/CursorTheme"
+#define NOTIFICATION_THEME_KEY "X-GNOME-Metatheme/NotificationTheme"
 #define CURSOR_SIZE_KEY "X-GNOME-Metatheme/CursorSize"
 #define SOUND_THEME_KEY "X-GNOME-Metatheme/SoundTheme"
 #define APPLICATION_FONT_KEY "X-GNOME-Metatheme/ApplicationFont"
@@ -334,6 +335,10 @@ gnome_theme_read_meta_theme (GFile *meta_theme_uri)
     return NULL;
   }
   meta_theme_info->icon_theme_name = g_strdup (str);
+
+  str = gnome_desktop_item_get_string (meta_theme_ditem, NOTIFICATION_THEME_KEY);
+  if (str != NULL)
+    meta_theme_info->notification_theme_name = g_strdup (str);
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, CURSOR_THEME_KEY);
   if (str != NULL) {
@@ -1593,6 +1598,7 @@ gnome_theme_meta_info_free (GnomeThemeMetaInfo *meta_theme_info)
   g_free (meta_theme_info->gtk_color_scheme);
   g_free (meta_theme_info->icon_theme_name);
   g_free (meta_theme_info->metacity_theme_name);
+  g_free (meta_theme_info->notification_theme_name);
   g_free (meta_theme_info);
 }
 
@@ -1692,6 +1698,9 @@ gnome_theme_meta_info_compare (GnomeThemeMetaInfo *a,
   if (cmp != 0) return cmp;
 
   cmp = safe_strcmp (a->icon_theme_name, b->icon_theme_name);
+  if (cmp != 0) return cmp;
+
+  cmp = safe_strcmp (a->notification_theme_name, b->notification_theme_name);
   if (cmp != 0) return cmp;
 
   cmp = safe_strcmp (a->sound_theme_name, b->sound_theme_name);

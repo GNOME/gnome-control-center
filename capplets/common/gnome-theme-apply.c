@@ -34,6 +34,7 @@
 #define CURSOR_FONT_KEY   "/desktop/gnome/peripherals/mouse/cursor_font"
 #define CURSOR_THEME_KEY   "/desktop/gnome/peripherals/mouse/cursor_theme"
 #define CURSOR_SIZE_KEY    "/desktop/gnome/peripherals/mouse/cursor_size"
+#define NOTIFICATION_THEME_KEY    "/apps/notification-daemon/theme"
 
 #define compare(x,y) (!x && y) || (x && !y) || (x && y && strcmp (x, y))
 
@@ -42,6 +43,7 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
 {
   GConfClient *client;
   gchar *old_key;
+  gchar *new_key;
   gint old_key_int;
   GnomeWindowManager *window_manager;
   GnomeWMSettings wm_settings;
@@ -95,6 +97,17 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
   if (compare (old_key, meta_theme_info->icon_theme_name))
     {
       gconf_client_set_string (client, ICON_THEME_KEY, meta_theme_info->icon_theme_name, NULL);
+    }
+  g_free (old_key);
+
+  /* set the notification theme */
+  old_key = gconf_client_get_string (client, NOTIFICATION_THEME_KEY, NULL);
+  new_key = meta_theme_info->notification_theme_name;
+  if (new_key == NULL)
+    new_key = "standard";
+  if (compare (old_key, new_key))
+    {
+      gconf_client_set_string (client, NOTIFICATION_THEME_KEY, new_key, NULL);
     }
   g_free (old_key);
 

@@ -21,6 +21,7 @@
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
 #define METACITY_THEME_KEY "/apps/metacity/general/theme"
 #define ICON_THEME_KEY "/desktop/gnome/interface/icon_theme"
+#define NOTIFICATION_THEME_KEY "/apps/notification-daemon/theme"
 #define COLOR_SCHEME_KEY "/desktop/gnome/interface/gtk_color_scheme"
 #define LOCKDOWN_KEY "/desktop/gnome/lockdown/disable_theme_settings"
 #define BACKGROUND_KEY "/desktop/gnome/background/picture_filename"

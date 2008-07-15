@@ -1,3 +1,16 @@
+2008-07-15  Matthias Clasen  <mclasen@redhat.com>
+
+	Bug 533611 - add notification themes to the metatheme format
+
+	* gnome-theme-apply.c: When applying a metatheme, apply
+	the notification theme, too.
+
+	* gnome-theme-info.h: Add a notification_theme_name field
+	to the metatheme info struct.
+
+	* gnome-theme-info.c: When reading a metatheme from a keyfile,
+	handle notification themes.
+
 2008-06-01  Thomas Wood  <thos@gnome.org>
 
 	* capplet-util.c:
