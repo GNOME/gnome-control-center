@@ -790,20 +790,33 @@ list_connected_outputs (App *app, int *total_w, int *total_h)
     return g_list_reverse (result);
 }
 
+static int
+get_n_connected (App *app)
+{
+    GList *connected_outputs = list_connected_outputs (app, NULL, NULL);
+    int n = g_list_length (connected_outputs);
+
+    g_list_free (connected_outputs);
+
+    return n;
+}
+
 static double
 compute_scale (App *app)
 {
-    GList *connected_outputs;
     int available_w, available_h;
     int total_w, total_h;
     int n_monitors;
     GdkRectangle viewport;
+    GList *connected_outputs;
     
     foo_scroll_area_get_viewport (FOO_SCROLL_AREA (app->area), &viewport);
 
     connected_outputs = list_connected_outputs (app, &total_w, &total_h);
     
     n_monitors = g_list_length (connected_outputs);
+
+    g_list_free (connected_outputs);
 
     available_w = viewport.width - 2 * MARGIN - (n_monitors - 1) * SPACE;
     available_h = viewport.height - 2 * MARGIN - (n_monitors - 1) * SPACE;
@@ -1128,7 +1141,7 @@ compare_snaps (gconstpointer v1, gconstpointer v2)
 
     d = sv1 - sv2;
 
-    /* This snapping algorithm is good for rock'n'roll, but
+    /* This snapping algorithm is good enough for rock'n'roll, but
      * this is probably a better:
      *
      *    First do a horizontal/vertical snap, then
@@ -1169,17 +1182,20 @@ on_output_event (FooScrollArea *area,
 	app->current_output = output;
 
 	rebuild_gui (app);
-	
-	foo_scroll_area_begin_grab (area, on_output_event, data);
 
-	info = g_new0 (GrabInfo, 1);
-	info->grab_x = event->x;
-	info->grab_y = event->y;
-	info->output_x = output->x;
-	info->output_y = output->y;
+	if (!app->current_configuration->clone && get_n_connected (app) > 1)
+	{
+	    foo_scroll_area_begin_grab (area, on_output_event, data);
+	    
+	    info = g_new0 (GrabInfo, 1);
+	    info->grab_x = event->x;
+	    info->grab_y = event->y;
+	    info->output_x = output->x;
+	    info->output_y = output->y;
+	    
+	    output->user_data = info;
+	}
 	
-	output->user_data = info;
-
 	foo_scroll_area_invalidate (area);
     }
     else
