@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-24 23:44+0000\n"
-"PO-Revision-Date: 2008-06-27 14:43+0200\n"
+"POT-Creation-Date: 2008-07-14 19:47+0000\n"
+"PO-Revision-Date: 2008-07-15 18:18+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1856,107 +1856,44 @@ msgstr "Cambie la resolución de la pantalla"
 msgid "Screen Resolution"
 msgstr "Resolución de la pantalla"
 
-#: ../capplets/display/main.c:29
+#: ../capplets/display/xrandr-capplet.c:400
+#: ../capplets/display/xrandr-capplet.c:438
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/main.c:30
+#: ../capplets/display/xrandr-capplet.c:401
 msgid "Left"
 msgstr "Izquierdo"
 
-#: ../capplets/display/main.c:31
-msgid "Inverted"
-msgstr "Invertido"
-
-#: ../capplets/display/main.c:32
+#: ../capplets/display/xrandr-capplet.c:402
 msgid "Right"
 msgstr "Derecho"
 
-#: ../capplets/display/main.c:374
+#: ../capplets/display/xrandr-capplet.c:403
+msgid "Upside Down"
+msgstr "Hacia abajo"
+
+#: ../capplets/display/xrandr-capplet.c:476
+#: ../capplets/display/xrandr-capplet.c:484
+#: ../capplets/display/xrandr-capplet.c:485
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:514
-msgid "_Resolution:"
-msgstr "_Resolución:"
-
-#: ../capplets/display/main.c:532
-msgid "Re_fresh rate:"
-msgstr "Tasa de re_fresco:"
-
-#: ../capplets/display/main.c:550
-msgid "R_otation:"
-msgstr "R_otación:"
-
-#: ../capplets/display/main.c:569
-msgid "Default Settings"
-msgstr "Configuración predeterminada"
-
-#: ../capplets/display/main.c:571
+#: ../capplets/display/xrandr-capplet.c:537
+#: ../capplets/display/xrandr-capplet.c:556
+#: ../capplets/display/xrandr-capplet.c:566
 #, c-format
-msgid "Screen %d Settings\n"
-msgstr "Configuración de la pantalla %d\n"
+msgid "%d x %d"
+msgstr "%d x %d"
 
-#: ../capplets/display/main.c:593
-msgid "Screen Resolution Preferences"
-msgstr "Preferencias de la resolución de la pantalla"
+#: ../capplets/display/xrandr-capplet.c:548
+msgid "Off"
+msgstr "Apagado"
 
-#: ../capplets/display/main.c:628
-#, c-format
-msgid "_Make default for this computer (%s) only"
-msgstr "Utilizar como predeterminado sólo para este _equipo (%s)"
-
-#: ../capplets/display/main.c:648
-msgid "Options"
-msgstr "Opciones"
-
-#: ../capplets/display/main.c:668
-#, c-format
-msgid ""
-"Testing the new settings. If you don't respond in %d second the previous "
-"settings will be restored."
-msgid_plural ""
-"Testing the new settings. If you don't respond in %d seconds the previous "
-"settings will be restored."
-msgstr[0] ""
-"Probando la configuración nueva. Si no responde en %d segundo se recuperará "
-"la configuración anterior."
-msgstr[1] ""
-"Probando la configuración nueva. Si no responde en %d segundos se recuperará "
-"la configuración anterior."
-
-#: ../capplets/display/main.c:708
-msgid "Keep Resolution"
-msgstr "Conservar resolución"
-
-#: ../capplets/display/main.c:712
-msgid "Do you want to keep this resolution?"
-msgstr "¿Desea conservar esta resolución?"
-
-#: ../capplets/display/main.c:738
-msgid "Use _Previous Resolution"
-msgstr "Usar la resolución _anterior"
-
-#: ../capplets/display/main.c:739
-msgid "_Keep Resolution"
-msgstr "_Conservar la resolución"
-
-#: ../capplets/display/main.c:888
-msgid ""
-"The X server does not support the XRandR extension.  Runtime resolution "
-"changes to the display size are not available."
-msgstr ""
-"El servidor X no soporta la extensión XRandR. Los cambios de resolución de "
-"la pantalla durante la sesión no están disponibles."
-
-#: ../capplets/display/main.c:895
-msgid ""
-"The version of the XRandR extension is incompatible with this program. "
-"Runtime changes to the display size are not available."
-msgstr ""
-"La versión de la extensión XRandR es incompatible con este programa. Los "
-"cambios del tamaño de la pantalla durante la sesión no están disponibles."
+#: ../capplets/display/xrandr-capplet.c:1286
+msgid "Cloned Output"
+msgstr "Salida clonada"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -3365,11 +3302,11 @@ msgstr ""
 msgid "The GNOME configuration tool"
 msgstr "La herramienta de configuración de GNOME"
 
-#: ../typing-break/drw-break-window.c:188
+#: ../typing-break/drw-break-window.c:189
 msgid "_Postpone Break"
 msgstr "_Posponer el descanso"
 
-#: ../typing-break/drw-break-window.c:244
+#: ../typing-break/drw-break-window.c:245
 msgid "Take a break!"
 msgstr "¡Tómese un descanso!"
 
