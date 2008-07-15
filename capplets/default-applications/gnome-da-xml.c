@@ -248,7 +248,7 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 			visual_item->run_at_startup = gnome_da_xml_get_bool (element, "run-at-startup");
 
 			capplet->visual_ats = g_list_append (capplet->visual_ats, visual_item);
-		    } 
+		    }
                     else
                         g_free (executable);
 		}
@@ -284,6 +284,9 @@ void
 gnome_da_xml_load_list (GnomeDACapplet *capplet)
 {
     gchar *filename;
+    gchar *dirname;
+    const gchar *extra_file;
+    GDir *app_dir;
 
     filename = g_build_filename (GNOMECC_DATA_DIR,
 				 "gnome-default-applications.xml",
@@ -296,6 +299,22 @@ gnome_da_xml_load_list (GnomeDACapplet *capplet)
 
     if (capplet->web_browsers == NULL)
 	gnome_da_xml_load_xml (capplet, "./gnome-default-applications.xml");
+
+    dirname = g_build_filename (GNOMECC_DATA_DIR, "default-apps", NULL);
+    app_dir = g_dir_open (dirname, 0, NULL);
+
+    if (app_dir != NULL) {
+        while ((extra_file = g_dir_read_name (app_dir)) != NULL) {
+            filename = g_build_filename (dirname, extra_file, NULL);
+
+            if (g_str_has_suffix (filename, ".xml"))
+                gnome_da_xml_load_xml (capplet, filename);
+
+            g_free (filename);
+        }
+        g_dir_close (app_dir);
+    }
+    g_free (dirname);
 }
 
 void
