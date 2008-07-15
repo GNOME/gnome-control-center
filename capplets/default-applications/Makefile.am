@@ -26,12 +26,15 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = default-applications.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
+pkgconfigdir = $(datadir)/pkgconfig
+pkgconfig_DATA = gnome-default-applications.pc
+
 autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files = gnome-at-session.desktop.in
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
 xmldata_in_files = gnome-default-applications.xml.in
-xmldatadir = $(pkgdatadir)
+xmldatadir = $(pkgdatadir)/default-apps
 xmldata_DATA = $(xmldata_in_files:.xml.in=.xml)
 @INTLTOOL_XML_RULE@
 
@@ -40,8 +43,7 @@ INCLUDES   = 					\
 	$(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"\
 	-DGNOMECC_GLADE_DIR=\""$(gladedir)"\"	\
-	-DGNOMECC_DATA_DIR=\""$(pkgdatadir)"\"
-
+	-DGNOMECC_APPS_DIR=\""$(xmldatadir)"\"
 
 icons16dir = $(datadir)/icons/hicolor/16x16/apps
 dist_icons16_DATA = icons/16x16/gnome-settings-default-applications.png
@@ -68,4 +70,4 @@ update-icon-cache:
 
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xmldata_DATA) $(autostart_DATA) $(bin_SCRIPTS)
-EXTRA_DIST = $(xmldata_in_files)
+EXTRA_DIST = $(xmldata_in_files) gnome-default-applications.pc.in

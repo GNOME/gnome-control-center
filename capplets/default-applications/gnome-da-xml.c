@@ -283,29 +283,14 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 void
 gnome_da_xml_load_list (GnomeDACapplet *capplet)
 {
-    gchar *filename;
-    gchar *dirname;
-    const gchar *extra_file;
-    GDir *app_dir;
-
-    filename = g_build_filename (GNOMECC_DATA_DIR,
-				 "gnome-default-applications.xml",
-				 NULL);
-
-    if (g_file_test (filename, G_FILE_TEST_EXISTS))
-        gnome_da_xml_load_xml (capplet, filename);
-
-    g_free (filename);
-
-    if (capplet->web_browsers == NULL)
-	gnome_da_xml_load_xml (capplet, "./gnome-default-applications.xml");
-
-    dirname = g_build_filename (GNOMECC_DATA_DIR, "default-apps", NULL);
-    app_dir = g_dir_open (dirname, 0, NULL);
+    GDir *app_dir = g_dir_open (GNOMECC_APPS_DIR, 0, NULL);
 
     if (app_dir != NULL) {
+        const gchar *extra_file;
+        gchar *filename;
+
         while ((extra_file = g_dir_read_name (app_dir)) != NULL) {
-            filename = g_build_filename (dirname, extra_file, NULL);
+            filename = g_build_filename (GNOMECC_APPS_DIR, extra_file, NULL);
 
             if (g_str_has_suffix (filename, ".xml"))
                 gnome_da_xml_load_xml (capplet, filename);
@@ -314,7 +299,6 @@ gnome_da_xml_load_list (GnomeDACapplet *capplet)
         }
         g_dir_close (app_dir);
     }
-    g_free (dirname);
 }
 
 void
