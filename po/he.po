@@ -8,13 +8,13 @@
 # Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER.
 # Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002,2003.
 # Yuval Tanny, 2005.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-29 02:44+0000\n"
+"POT-Creation-Date: 2008-07-14 19:47+0000\n"
 "PO-Revision-Date: 2008-02-09 06:42+0000\n"
 "Last-Translator: Mark Krapivner (Revan) <mark125@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -61,12 +61,12 @@ msgid "No Image"
 msgstr "בלי תמונה"
 
 #: ../capplets/about-me/gnome-about-me.c:769
-#: ../capplets/appearance/appearance-desktop.c:1054
+#: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "תמונות"
 
 #: ../capplets/about-me/gnome-about-me.c:773
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:717
 msgid "All Files"
 msgstr "כל הקבצים"
 
@@ -471,9 +471,8 @@ msgid "Jump to the Keyboard Accessibility dialog"
 msgstr "קפוץ לתיבת הדו-שיח של נגישות מקלדת"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-#, fuzzy
 msgid "Jump to the Mouse Accessibility dialog"
-msgstr "קפוץ לתיבת הדו-שיח של נגישות מקלדת"
+msgstr "קפוץ לתיבת הדו-שיח של נגישות העכבר"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
 msgid "_Enable assistive technologies"
@@ -499,11 +498,11 @@ msgstr "טכנולוגיות מסייעות"
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "אפשר תמיכה לטכנולוגיות המסייעות של GNOME בהתחברות"
 
-#: ../capplets/appearance/appearance-desktop.c:1022
+#: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
 msgstr "הוסף טפט"
 
-#: ../capplets/appearance/appearance-desktop.c:1058
+#: ../capplets/appearance/appearance-desktop.c:665
 msgid "All files"
 msgstr "כל הקבצים"
 
@@ -553,115 +552,99 @@ msgstr "השתמש בגופן ה_קודם"
 msgid "Use selected font"
 msgstr "השתמש בגופן הנבחר"
 
-#: ../capplets/appearance/appearance-main.c:108
+#: ../capplets/appearance/appearance-main.c:107
 msgid "Specify the filename of a theme to install"
 msgstr "Specify the filename of a theme to install"
 
-#: ../capplets/appearance/appearance-main.c:109
+#: ../capplets/appearance/appearance-main.c:108
 msgid "filename"
 msgstr "filename"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
 "Specify the name of the page to show (theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:117
-#: ../capplets/default-applications/gnome-da-capplet.c:1329
+#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/default-applications/gnome-da-capplet.c:880
 #: ../capplets/mouse/gnome-mouse-properties.c:444
 msgid "page"
 msgstr "page"
 
-#: ../capplets/appearance/appearance-main.c:124
+#: ../capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[WALLPAPER...]"
 
-#: ../capplets/appearance/appearance-style.c:156
+#: ../capplets/appearance/appearance-style.c:159
 #: ../capplets/common/gnome-theme-info.c:439
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:628
 msgid "Default Pointer"
 msgstr "סמן ברירת מחדל"
 
-#: ../capplets/appearance/appearance-themes.c:362
-#, c-format
-msgid ""
-"This theme will not look as intended because the required GTK+ theme '%s' is "
-"not installed."
-msgstr ""
+#: ../capplets/appearance/appearance-style.c:221
+#: ../capplets/appearance/appearance-themes.c:685
+msgid "Install"
+msgstr "התקן"
 
-#: ../capplets/appearance/appearance-themes.c:369
-#, c-format
-msgid ""
-"This theme will not look as intended because the required window manager "
-"theme '%s' is not installed."
-msgstr ""
-
-#: ../capplets/appearance/appearance-themes.c:375
-#, c-format
-msgid ""
-"This theme will not look as intended because the required icon theme '%s' is "
-"not installed."
-msgstr ""
-
-#: ../capplets/appearance/appearance-themes.c:399
+#: ../capplets/appearance/appearance-style.c:241
+#: ../capplets/common/gnome-theme-info.c:1634
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
 "'%s' is not installed."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:716
+#: ../capplets/appearance/appearance-themes.c:673
 msgid "Apply Background"
 msgstr "החל רקע"
 
-#: ../capplets/appearance/appearance-themes.c:720
+#: ../capplets/appearance/appearance-themes.c:677
 msgid "Apply Font"
 msgstr "החל גופן"
 
-#: ../capplets/appearance/appearance-themes.c:724
-#, fuzzy
+#: ../capplets/appearance/appearance-themes.c:681
 msgid "Revert Font"
-msgstr "_שחזר"
+msgstr "שחזר גופן"
 
-#: ../capplets/appearance/appearance-themes.c:750
+#: ../capplets/appearance/appearance-themes.c:711
 #, fuzzy
 msgid ""
 "The current theme suggests a background and a font. Also, the last applied "
 "font suggestion can be reverted."
 msgstr "ערכת הנושא הנוכחית מציע רקע וגופן."
 
-#: ../capplets/appearance/appearance-themes.c:752
+#: ../capplets/appearance/appearance-themes.c:713
 #, fuzzy
 msgid ""
 "The current theme suggests a background. Also, the last applied font "
 "suggestion can be reverted."
 msgstr "ערכת הנושא הנוכחית מציע רקע וגופן."
 
-#: ../capplets/appearance/appearance-themes.c:754
+#: ../capplets/appearance/appearance-themes.c:715
 msgid "The current theme suggests a background and a font."
 msgstr "ערכת הנושא הנוכחית מציע רקע וגופן."
 
-#: ../capplets/appearance/appearance-themes.c:756
+#: ../capplets/appearance/appearance-themes.c:717
 msgid ""
 "The current theme suggests a font. Also, the last applied font suggestion "
 "can be reverted."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:758
+#: ../capplets/appearance/appearance-themes.c:719
 msgid "The current theme suggests a background."
 msgstr "ערכת הנושא הנוכחית מציע רקע."
 
-#: ../capplets/appearance/appearance-themes.c:760
+#: ../capplets/appearance/appearance-themes.c:721
 msgid "The last applied font suggestion can be reverted."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:762
+#: ../capplets/appearance/appearance-themes.c:723
 msgid "The current theme suggests a font."
 msgstr "ערכת הנושא הנוכחית מציע גופן."
 
-#: ../capplets/appearance/appearance-themes.c:1082
-#: ../capplets/default-applications/gnome-da-capplet.c:1080
+#: ../capplets/appearance/appearance-themes.c:1046
+#: ../capplets/default-applications/gnome-da-capplet.c:630
 #: ../capplets/sound/sound-properties-capplet.c:328
 msgid "Custom"
 msgstr "מותאם אישית"
@@ -863,7 +846,6 @@ msgid "The current controls theme does not support color schemes."
 msgstr "ערכת הנושא של הפקדים לא תומכת בערכות צבעים."
 
 #: ../capplets/appearance/data/appearance.glade.h:52
-#: ../vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "ערכת נושא"
 
@@ -1045,11 +1027,11 @@ msgstr "מתקין ערכות נושא"
 msgid "Gnome Theme Package"
 msgstr "חבילת ערכת נושא של GNOME"
 
-#: ../capplets/appearance/gnome-wp-info.c:45
+#: ../capplets/appearance/gnome-wp-info.c:50
 msgid "No Wallpaper"
 msgstr "בלי טפט"
 
-#: ../capplets/appearance/gnome-wp-item.c:212
+#: ../capplets/appearance/gnome-wp-item.c:209
 msgid "Slide Show"
 msgstr "מצגת שקפים"
 
@@ -1057,7 +1039,7 @@ msgstr "מצגת שקפים"
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:220
+#: ../capplets/appearance/gnome-wp-item.c:217
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1068,83 +1050,83 @@ msgstr ""
 "%s, %d %s על %d %s\n"
 "תיקייה: %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:226
-#: ../capplets/appearance/gnome-wp-item.c:228
+#: ../capplets/appearance/gnome-wp-item.c:223
+#: ../capplets/appearance/gnome-wp-item.c:225
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "פיקסל"
 msgstr[1] "פיקסלים"
 
-#: ../capplets/appearance/theme-installer.c:166
-#: ../capplets/appearance/theme-installer.c:216
+#: ../capplets/appearance/theme-installer.c:171
+#: ../capplets/appearance/theme-installer.c:221
 msgid "Cannot install theme"
 msgstr "לא ניתן להתקין את ערכת הנושא"
 
-#: ../capplets/appearance/theme-installer.c:168
+#: ../capplets/appearance/theme-installer.c:173
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "הכלי %s אינו מותקן."
 
-#: ../capplets/appearance/theme-installer.c:218
+#: ../capplets/appearance/theme-installer.c:223
 msgid "There was a problem while extracting the theme."
 msgstr "ארעה שגיאה בחילוץ ערכת הנושא."
 
-#: ../capplets/appearance/theme-installer.c:241
+#: ../capplets/appearance/theme-installer.c:246
 msgid "There was an error installing the selected file"
 msgstr "ארעה שגיאה בהתקנת הקובץ הנבחר"
 
-#: ../capplets/appearance/theme-installer.c:242
+#: ../capplets/appearance/theme-installer.c:247
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "‏\"%s\" אינה ערכת נושא תקנית."
 
-#: ../capplets/appearance/theme-installer.c:243
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
 "you need to compile."
 msgstr "‏\"%s\" אינה ערכת נושא תקנית. ייתכן וזהו מנוע לערכת נושא שעלייך להדר."
 
-#: ../capplets/appearance/theme-installer.c:282
+#: ../capplets/appearance/theme-installer.c:287
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "ערכת הנושא של GNOME %s הותקנה בהצלחה"
 
-#: ../capplets/appearance/theme-installer.c:342
+#: ../capplets/appearance/theme-installer.c:354
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "התקנת ערכת הנושא \"%s\" נכשלה."
 
-#: ../capplets/appearance/theme-installer.c:374
+#: ../capplets/appearance/theme-installer.c:392
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "ערכת הנושא \"%s\" הותקנה."
 
-#: ../capplets/appearance/theme-installer.c:380
+#: ../capplets/appearance/theme-installer.c:398
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "לטעון את הערכה החדשה, או לשמור על ערכת הנושא הנוכחית שלך?"
 
-#: ../capplets/appearance/theme-installer.c:382
+#: ../capplets/appearance/theme-installer.c:400
 msgid "Keep Current Theme"
 msgstr "שמור על ערכת הנושא הנוכחית"
 
-#: ../capplets/appearance/theme-installer.c:384
+#: ../capplets/appearance/theme-installer.c:402
 msgid "Apply New Theme"
 msgstr "החל ערכת נושא חדשה"
 
-#: ../capplets/appearance/theme-installer.c:486
+#: ../capplets/appearance/theme-installer.c:505
 msgid "Failed to create temporary directory"
 msgstr "יצירת תיקייה זמנית נכשלה."
 
-#: ../capplets/appearance/theme-installer.c:546
+#: ../capplets/appearance/theme-installer.c:568
 msgid "New themes have been successfully installed."
 msgstr "ערכות נושא חדשות הותקנו בהצלחה."
 
-#: ../capplets/appearance/theme-installer.c:573
+#: ../capplets/appearance/theme-installer.c:595
 msgid "No theme file location specified to install"
 msgstr "לא צויין נתיב לקובץ ערכת נושא להתקנה"
 
-#: ../capplets/appearance/theme-installer.c:593
+#: ../capplets/appearance/theme-installer.c:615
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1153,18 +1135,18 @@ msgstr ""
 "אין לך הרשאות להתקין ערכת נושא\n"
 "ב-%s"
 
-#: ../capplets/appearance/theme-installer.c:615
+#: ../capplets/appearance/theme-installer.c:637
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "‏%s הוא הנתיב בו יותקנו ערכות הנושא. לא ניתן לבחור אותו כנתיב המקור"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:706
 msgid "Select Theme"
 msgstr "בחר ערכת נושא"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:710
 msgid "Theme Packages"
 msgstr "חבילות ערכת נושא"
 
@@ -1173,22 +1155,26 @@ msgstr "חבילות ערכת נושא"
 msgid "Theme name must be present"
 msgstr "ערכת הנושא חייבת להיות בנמצא"
 
-#: ../capplets/appearance/theme-save.c:161
+#: ../capplets/appearance/theme-save.c:154
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "ערכת הנושא כבר קיימת. להחליף אותה?"
 
-#: ../capplets/appearance/theme-save.c:162
+#: ../capplets/appearance/theme-save.c:155
 #: ../capplets/common/file-transfer-dialog.c:450
 msgid "_Overwrite"
 msgstr "_החלף"
 
-#: ../capplets/appearance/theme-util.c:69
+#: ../capplets/appearance/theme-util.c:134
 msgid "Would you like to delete this theme?"
 msgstr "למחוק את ערכת הנושא?"
 
-#: ../capplets/appearance/theme-util.c:121
+#: ../capplets/appearance/theme-util.c:179
 msgid "Theme cannot be deleted"
 msgstr "לא ניתן למחוק את ערכת הנושא"
+
+#: ../capplets/appearance/theme-util.c:304
+msgid "Could not install theme engine"
+msgstr "לא ניתן להתקין את מנוע ערכת הנושא"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1208,17 +1194,7 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr "לא ניתן לטעון את הסמל '%s'\n"
 
-#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
-msgid "Just apply settings and quit"
-msgstr "רק החל הגדרות וצא"
-
-#: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:256
-#: ../capplets/sound/sound-properties-capplet.c:1159
-msgid "Retrieve and store legacy settings"
-msgstr "קבל ושמור הגדרות מהזיכרון"
-
-#: ../capplets/common/capplet-util.c:344
+#: ../capplets/common/capplet-util.c:80
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "ארעה שגיאה בהצגת העזרה: %s"
@@ -1299,77 +1275,77 @@ msgstr "_דלג"
 msgid "Overwrite _All"
 msgstr "_החלף הכל"
 
-#: ../capplets/common/gconf-property-editor.c:170
+#: ../capplets/common/gconf-property-editor.c:133
 msgid "Key"
 msgstr "Key"
 
-#: ../capplets/common/gconf-property-editor.c:171
+#: ../capplets/common/gconf-property-editor.c:134
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf key to which this property editor is attached"
 
-#: ../capplets/common/gconf-property-editor.c:177
+#: ../capplets/common/gconf-property-editor.c:140
 msgid "Callback"
 msgstr "Callback"
 
-#: ../capplets/common/gconf-property-editor.c:178
+#: ../capplets/common/gconf-property-editor.c:141
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Issue this callback when the value associated with key gets changed"
 
-#: ../capplets/common/gconf-property-editor.c:183
+#: ../capplets/common/gconf-property-editor.c:146
 msgid "Change set"
 msgstr "Change set"
 
-#: ../capplets/common/gconf-property-editor.c:184
+#: ../capplets/common/gconf-property-editor.c:147
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 
-#: ../capplets/common/gconf-property-editor.c:189
+#: ../capplets/common/gconf-property-editor.c:152
 msgid "Conversion to widget callback"
 msgstr "Conversion to widget callback"
 
-#: ../capplets/common/gconf-property-editor.c:190
+#: ../capplets/common/gconf-property-editor.c:153
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 
-#: ../capplets/common/gconf-property-editor.c:195
+#: ../capplets/common/gconf-property-editor.c:158
 msgid "Conversion from widget callback"
 msgstr "Conversion from widget callback"
 
-#: ../capplets/common/gconf-property-editor.c:196
+#: ../capplets/common/gconf-property-editor.c:159
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 
-#: ../capplets/common/gconf-property-editor.c:201
+#: ../capplets/common/gconf-property-editor.c:164
 msgid "UI Control"
 msgstr "UI Control"
 
-#: ../capplets/common/gconf-property-editor.c:202
+#: ../capplets/common/gconf-property-editor.c:165
 msgid "Object that controls the property (normally a widget)"
 msgstr "Object that controls the property (normally a widget)"
 
-#: ../capplets/common/gconf-property-editor.c:217
+#: ../capplets/common/gconf-property-editor.c:180
 msgid "Property editor object data"
 msgstr "Property editor object data"
 
-#: ../capplets/common/gconf-property-editor.c:218
+#: ../capplets/common/gconf-property-editor.c:181
 msgid "Custom data required by the specific property editor"
 msgstr "Custom data required by the specific property editor"
 
-#: ../capplets/common/gconf-property-editor.c:224
+#: ../capplets/common/gconf-property-editor.c:187
 msgid "Property editor data freeing callback"
 msgstr "Property editor data freeing callback"
 
-#: ../capplets/common/gconf-property-editor.c:225
+#: ../capplets/common/gconf-property-editor.c:188
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Callback to be issued when property editor object data is to be freed"
 
-#: ../capplets/common/gconf-property-editor.c:1467
+#: ../capplets/common/gconf-property-editor.c:1429
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1381,7 +1357,7 @@ msgstr ""
 "\n"
 "אנא ודא כי הוא קיים, או בחר תמונת רקע אחרת."
 
-#: ../capplets/common/gconf-property-editor.c:1475
+#: ../capplets/common/gconf-property-editor.c:1437
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1394,41 +1370,62 @@ msgstr ""
 "\n"
 "אנא בחר תמונה אחרת במקום."
 
-#: ../capplets/common/gconf-property-editor.c:1594
+#: ../capplets/common/gconf-property-editor.c:1556
 msgid "Please select an image."
 msgstr "אנא בחר תמונה."
 
-#: ../capplets/common/gconf-property-editor.c:1599
+#: ../capplets/common/gconf-property-editor.c:1561
 msgid "_Select"
 msgstr "_בחר"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:629
 msgid "Default Pointer - Current"
 msgstr "סמן ברירת מחדל - נוכחי"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:633
 msgid "White Pointer"
 msgstr "סמן לבן"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "White Pointer - Current"
 msgstr "סמן לבן - נוכחי"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Large Pointer"
 msgstr "<b>סמן גדול</b>"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Large Pointer - Current"
 msgstr "סמן גדול - נוכחי"
 
-#: ../capplets/common/gnome-theme-info.c:653
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "Large White Pointer - Current"
 msgstr "סמן גדול לבן - נוכחי"
 
-#: ../capplets/common/gnome-theme-info.c:654
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large White Pointer"
 msgstr "סמן גדול לבן"
+
+#: ../capplets/common/gnome-theme-info.c:1610
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme '%s' is "
+"not installed."
+msgstr ""
+
+#: ../capplets/common/gnome-theme-info.c:1618
+#, c-format
+msgid ""
+"This theme will not look as intended because the required window manager "
+"theme '%s' is not installed."
+msgstr ""
+
+#: ../capplets/common/gnome-theme-info.c:1625
+#, c-format
+msgid ""
+"This theme will not look as intended because the required icon theme '%s' is "
+"not installed."
+msgstr ""
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
@@ -1447,32 +1444,23 @@ msgstr "הפעל את טכונולגית הסיוע החזותי המועדפת"
 msgid "Visual Assistance"
 msgstr "סיוע חזותי"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:112
-#: ../capplets/default-applications/gnome-da-capplet.c:133
-#: ../capplets/default-applications/gnome-da-capplet.c:177
-#: ../capplets/default-applications/gnome-da-capplet.c:222
-#: ../capplets/default-applications/gnome-da-capplet.c:279
-#: ../capplets/default-applications/gnome-da-capplet.c:330
-#: ../capplets/default-applications/gnome-da-capplet.c:381
-#: ../capplets/default-applications/gnome-da-capplet.c:434
-#: ../capplets/default-applications/gnome-da-capplet.c:484
-#: ../capplets/default-applications/gnome-da-capplet.c:877
-#: ../capplets/default-applications/gnome-da-capplet.c:899
+#: ../capplets/default-applications/gnome-da-capplet.c:94
+#: ../capplets/default-applications/gnome-da-capplet.c:345
+#: ../capplets/default-applications/gnome-da-capplet.c:366
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "שגיאה בשמירת ההגדרות: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1100
+#: ../capplets/default-applications/gnome-da-capplet.c:650
 msgid "Could not load the main interface"
 msgstr "לא ניתן להעלות את הממשק הראשי"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1102
+#: ../capplets/default-applications/gnome-da-capplet.c:652
 msgid "Please make sure that the applet is properly installed"
 msgstr "נא ודא שהיישומון מותקן היטב"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/default-applications/gnome-da-capplet.c:1328
+#: ../capplets/default-applications/gnome-da-capplet.c:879
 msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
 msgstr "Specify the name of the page to show (internet|multimedia|system|a11y)"
 
@@ -1779,112 +1767,89 @@ msgstr "נגן הסרטים Totem"
 msgid "aterm"
 msgstr "aterm"
 
+#: ../capplets/display/display-capplet.glade.h:1
+msgid "Include _Panel"
+msgstr ""
+
+#: ../capplets/display/display-capplet.glade.h:2
+#, fuzzy
+msgid "Mirror Screens"
+msgstr "Lock screen"
+
+#: ../capplets/display/display-capplet.glade.h:3
+msgid "Monitor Resolution Settings"
+msgstr ""
+
+#: ../capplets/display/display-capplet.glade.h:4
+msgid ""
+"Normal\n"
+"Left\n"
+"Right\n"
+"Upside-down\n"
+msgstr ""
+
+#: ../capplets/display/display-capplet.glade.h:9
+msgid "R_otation"
+msgstr "הי_פוך"
+
+#: ../capplets/display/display-capplet.glade.h:10
+msgid "Re_fresh Rate:"
+msgstr "תדירות ר_ענון:"
+
+#: ../capplets/display/display-capplet.glade.h:11
+msgid "_Detect Displays"
+msgstr "_זהה תצוגות"
+
+#: ../capplets/display/display-capplet.glade.h:12
+msgid "_Resolution"
+msgstr "_הפרדה"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
-msgstr "שנה את רזולוציית המסך"
+msgstr "שנה את הפרדת המסך"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
-msgstr "רזולוציית מסך"
+msgstr "הפרדת מסך"
 
-#: ../capplets/display/main.c:29
+#: ../capplets/display/xrandr-capplet.c:400
+#: ../capplets/display/xrandr-capplet.c:438
 msgid "Normal"
 msgstr "רגיל"
 
-#: ../capplets/display/main.c:30
+#: ../capplets/display/xrandr-capplet.c:401
 msgid "Left"
 msgstr "שמאלה"
 
-#: ../capplets/display/main.c:31
-msgid "Inverted"
-msgstr "הפוך"
-
-#: ../capplets/display/main.c:32
+#: ../capplets/display/xrandr-capplet.c:402
 msgid "Right"
 msgstr "ימינה"
 
-#: ../capplets/display/main.c:374
+#: ../capplets/display/xrandr-capplet.c:403
+msgid "Upside Down"
+msgstr ""
+
+#: ../capplets/display/xrandr-capplet.c:476
+#: ../capplets/display/xrandr-capplet.c:484
+#: ../capplets/display/xrandr-capplet.c:485
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:514
-msgid "_Resolution:"
-msgstr "_רזולוצייה:"
-
-#: ../capplets/display/main.c:532
-msgid "Re_fresh rate:"
-msgstr "תדירות ר_ענון:"
-
-#: ../capplets/display/main.c:550
-msgid "R_otation:"
-msgstr "הי_פוך::"
-
-#: ../capplets/display/main.c:569
-msgid "Default Settings"
-msgstr "הגדרות ברירת מחדל"
-
-#: ../capplets/display/main.c:571
+#: ../capplets/display/xrandr-capplet.c:537
+#: ../capplets/display/xrandr-capplet.c:556
+#: ../capplets/display/xrandr-capplet.c:566
 #, c-format
-msgid "Screen %d Settings\n"
-msgstr "הגדרות מסך %d\n"
+msgid "%d x %d"
+msgstr "%d x %d"
 
-#: ../capplets/display/main.c:593
-msgid "Screen Resolution Preferences"
-msgstr "העדפות רזולוציית מסך"
-
-#: ../capplets/display/main.c:628
-#, c-format
-msgid "_Make default for this computer (%s) only"
-msgstr "עשה כברירת מחדל ל_מחשב זה (%s) בלבד"
-
-#: ../capplets/display/main.c:648
-msgid "Options"
-msgstr "אפשרויות"
-
-#: ../capplets/display/main.c:668
-#, c-format
-msgid ""
-"Testing the new settings. If you don't respond in %d second the previous "
-"settings will be restored."
-msgid_plural ""
-"Testing the new settings. If you don't respond in %d seconds the previous "
-"settings will be restored."
-msgstr[0] ""
-"בודק את ההגדרות החדשות. אם לא תגיב תוך שניה אחת ההגדרות הקודמות יוחזרו."
-msgstr[1] ""
-"בודק את ההגדרות החדשות. אם לא תגיב תוך %d שניות ההגדרות הקודמות יוחזרו."
-
-#: ../capplets/display/main.c:708
-msgid "Keep Resolution"
-msgstr "השאר רזולוצייה"
-
-#: ../capplets/display/main.c:712
-msgid "Do you want to keep this resolution?"
-msgstr "האם ברצונך להשאיר רזולוצייה זו?"
-
-#: ../capplets/display/main.c:738
-msgid "Use _Previous Resolution"
-msgstr "השתמש ברזולוצייה ה_קודמת"
-
-#: ../capplets/display/main.c:739
-msgid "_Keep Resolution"
-msgstr "_השאר רזולוצייה"
-
-#: ../capplets/display/main.c:888
-msgid ""
-"The X server does not support the XRandR extension.  Runtime resolution "
-"changes to the display size are not available."
+#: ../capplets/display/xrandr-capplet.c:548
+msgid "Off"
 msgstr ""
-"שרת ה-X אינו תומך בהרחבה XRandR.  שינויי הפרדת מסך בזמן הריצה אינם זמינים."
 
-#: ../capplets/display/main.c:895
-msgid ""
-"The version of the XRandR extension is incompatible with this program. "
-"Runtime changes to the display size are not available."
+#: ../capplets/display/xrandr-capplet.c:1286
+msgid "Cloned Output"
 msgstr ""
-"הגירסה של הרחבת XRandR אינה תואמת לתוכנית הזו. שינויי רזולוציות בזמן הריצה "
-"לגודל הצג אינם זמינים."
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -1892,7 +1857,7 @@ msgid "Sound"
 msgstr "קול"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1156
+#: ../libslab/bookmark-agent.c:1158
 msgid "Desktop"
 msgstr "שולחן עבודה"
 
@@ -1925,47 +1890,51 @@ msgstr "סוג הקיצור."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
-#: ../typing-break/drwright.c:483
+#: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "כבוי"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:493
+#: ../capplets/keybindings/gnome-keybinding-properties.c:171
 msgid "<Unknown Action>"
 msgstr "<פעולה לא ידועה>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:885
-#, c-format
+#: ../capplets/keybindings/gnome-keybinding-properties.c:804
+msgid "Custom Shortcuts"
+msgstr "קיצורי דרך מותאמים אישית"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:999
+#, fuzzy, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
 "using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
 "לא ניתן להשתמש בקיצור הדרך \"%s\" מכיוון שלא ניתן יהיה להקליד באמצעות מקש "
 "זה.\n"
 "נא נסה מקש או צירוף מקשים שונה כגון לחיצה על Ctrl, Alt או Shift יחדיו.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:914
-#, c-format
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1028
+#, fuzzy, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
-" \"%s\"\n"
+" \"%s\""
 msgstr "קיצור הדרך \"%s\" כבר משמש ל:  \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:946
-#, c-format
-msgid "Error setting new accelerator in configuration database: %s\n"
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
+#, fuzzy, c-format
+msgid "Error setting new accelerator in configuration database: %s"
 msgstr "שגיאה בקביעת קיצור חדש במסד נתוני ההגדרות: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:998
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s\n"
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1112
+#, fuzzy, c-format
+msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "שגיאה בביטול מאיץ במסד נתוני ההגדרות: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1129
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1294
 msgid "Action"
 msgstr "פעולה"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1153
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1316
 msgid "Shortcut"
 msgstr "קיצור"
 
@@ -1995,6 +1964,11 @@ msgstr "שייך מקשי קיצור לפקודות"
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "רק החל הגדרות וצא (תאימות בלבד; עכשיו מנוהל על-ידי תהליך שירות)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/sound/sound-properties-capplet.c:1159
+msgid "Retrieve and store legacy settings"
+msgstr "קבל ושמור הגדרות מהזיכרון"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:260
 msgid "Start the page with the typing break settings showing"
@@ -2365,9 +2339,8 @@ msgstr "<b>גרור וזרוק</b>"
 
 #. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-#, fuzzy
 msgid "<b>Dwell Click</b>"
-msgstr "<b>פרק זמן ללחיצה כפולה</b>"
+msgstr "<b>לחיצת שהייה</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Locate Pointer</b>"
@@ -2541,7 +2514,6 @@ msgid "H_TTP proxy:"
 msgstr "מתווך H_TTP:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:9
-#, fuzzy
 msgid "Ignored Hosts"
 msgstr ""
 
@@ -2820,36 +2792,36 @@ msgid "Windows"
 msgstr "חלונות"
 
 #. make start action
-#: ../libslab/application-tile.c:369
+#: ../libslab/application-tile.c:372
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>התחל %s</b>"
 
-#: ../libslab/application-tile.c:388 ../libslab/bookmark-agent.c:1059
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1059
 msgid "Help"
 msgstr "עזרה"
 
-#: ../libslab/application-tile.c:435
+#: ../libslab/application-tile.c:438
 msgid "Upgrade"
 msgstr "שדרג"
 
-#: ../libslab/application-tile.c:450
+#: ../libslab/application-tile.c:453
 msgid "Uninstall"
 msgstr "הסר"
 
-#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:741
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:760
 msgid "Remove from Favorites"
 msgstr "הסר מהמועדפים"
 
-#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:743
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:762
 msgid "Add to Favorites"
 msgstr "הוסף למועדפים"
 
-#: ../libslab/application-tile.c:864
+#: ../libslab/application-tile.c:867
 msgid "Remove from Startup Programs"
 msgstr "הסר מתוכניות אתחול"
 
-#: ../libslab/application-tile.c:866
+#: ../libslab/application-tile.c:869
 msgid "Add to Startup Programs"
 msgstr "הוסף לתוכניות אתחול"
 
@@ -2869,9 +2841,8 @@ msgid "Other"
 msgstr "אחר"
 
 #: ../libslab/bookmark-agent.c:1061
-#, fuzzy
 msgid "Lock Screen"
-msgstr "Lock screen"
+msgstr "נעל מסך"
 
 #: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:45
 msgid "Logout"
@@ -2879,33 +2850,33 @@ msgstr "התנתק"
 
 #: ../libslab/bookmark-agent.c:1065
 msgid "Shutdown"
-msgstr ""
+msgstr "כבה"
 
-#: ../libslab/bookmark-agent.c:1089
+#: ../libslab/bookmark-agent.c:1090
 msgid "New Spreadsheet"
 msgstr "גיליון אלקטרוני חדש"
 
-#: ../libslab/bookmark-agent.c:1093
+#: ../libslab/bookmark-agent.c:1095
 msgid "New Document"
 msgstr "מסמך חדש"
 
-#: ../libslab/bookmark-agent.c:1145
+#: ../libslab/bookmark-agent.c:1147
 msgid "Home"
 msgstr "בית"
 
-#: ../libslab/bookmark-agent.c:1150
+#: ../libslab/bookmark-agent.c:1152
 msgid "Documents"
 msgstr "מסמכים"
 
-#: ../libslab/bookmark-agent.c:1163
+#: ../libslab/bookmark-agent.c:1165
 msgid "File System"
 msgstr "מערכת קבצים"
 
-#: ../libslab/bookmark-agent.c:1167
+#: ../libslab/bookmark-agent.c:1169
 msgid "Network Servers"
 msgstr "שרתי רשת"
 
-#: ../libslab/bookmark-agent.c:1196
+#: ../libslab/bookmark-agent.c:1198
 msgid "Search"
 msgstr "חיפוש"
 
@@ -2916,72 +2887,72 @@ msgid "<b>Open</b>"
 msgstr "<b>פתח</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:228
+#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:242
 msgid "Rename..."
 msgstr "החלף שם..."
 
 #: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
-#: ../libslab/document-tile.c:242 ../libslab/document-tile.c:251
+#: ../libslab/document-tile.c:256 ../libslab/document-tile.c:265
 msgid "Send To..."
 msgstr "שלח אל..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:277
+#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:291
 msgid "Move to Trash"
 msgstr "העבר לאשפה"
 
 #: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:854
+#: ../libslab/document-tile.c:301 ../libslab/document-tile.c:873
 msgid "Delete"
 msgstr "מחק"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1026
+#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1045
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "אתה בטוח שברצונך למחוק לצמיתות את \"%s\"?"
 
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1030
+#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1049
 msgid "If you delete an item, it is permanently lost."
 msgstr "אם תמחק את הפריט, הוא יאבד נצח."
 
-#: ../libslab/document-tile.c:189
+#: ../libslab/document-tile.c:203
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>פתח עם \"%s\"</b>"
 
-#: ../libslab/document-tile.c:201
+#: ../libslab/document-tile.c:215
 msgid "Open with Default Application"
 msgstr "פתח עם יישום ברירת המחדל"
 
-#: ../libslab/document-tile.c:212
+#: ../libslab/document-tile.c:226
 msgid "Open in File Manager"
 msgstr "פתח במנהל הקבצים"
 
-#: ../libslab/document-tile.c:637
+#: ../libslab/document-tile.c:656
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:644
+#: ../libslab/document-tile.c:663
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#: ../libslab/document-tile.c:652
+#: ../libslab/document-tile.c:671
 msgid "Today %l:%M %p"
 msgstr "היום %l:%M %p"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:681
 msgid "Yesterday %l:%M %p"
 msgstr "אתמול %l:%M %p"
 
-#: ../libslab/document-tile.c:674
+#: ../libslab/document-tile.c:693
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../libslab/document-tile.c:682
+#: ../libslab/document-tile.c:701
 msgid "%b %d %l:%M %p"
 msgstr "%b %d %l:%M %p"
 
-#: ../libslab/document-tile.c:684
+#: ../libslab/document-tile.c:703
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
@@ -3264,60 +3235,60 @@ msgstr ""
 msgid "The GNOME configuration tool"
 msgstr "כלי ההגדרה של GNOME"
 
-#: ../typing-break/drw-break-window.c:188
+#: ../typing-break/drw-break-window.c:189
 msgid "_Postpone Break"
 msgstr "_דחה הפסקה"
 
-#: ../typing-break/drw-break-window.c:244
+#: ../typing-break/drw-break-window.c:245
 msgid "Take a break!"
 msgstr "קח הפסקה!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #. translators: keep the initial "/"
-#: ../typing-break/drwright.c:129
+#: ../typing-break/drwright.c:130
 msgid "/_Preferences"
 msgstr "/_העדפות"
 
-#: ../typing-break/drwright.c:130
+#: ../typing-break/drwright.c:131
 msgid "/_About"
 msgstr "/_אודות"
 
-#: ../typing-break/drwright.c:132
+#: ../typing-break/drwright.c:133
 msgid "/_Take a Break"
 msgstr "/_קח הפסקה"
 
-#: ../typing-break/drwright.c:501
+#: ../typing-break/drwright.c:489
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "דקה עד ההפסקה הבאה"
 msgstr[1] "%d דקות עד ההפסקה הבאה"
 
-#: ../typing-break/drwright.c:505
+#: ../typing-break/drwright.c:493
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "פחות מדקה אחת עד ההפסקה הבאה"
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:580
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "לא ניתן להביא את דו-שיח מאפייני הפסקת הקלדה עם השגיאה הבאה: %s"
 
-#: ../typing-break/drwright.c:611
+#: ../typing-break/drwright.c:599
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "נכתב על-ידי Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:612
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "סוכריות לעיניים נוספו על-ידי Anders Carlsson"
 
-#: ../typing-break/drwright.c:621
+#: ../typing-break/drwright.c:609
 msgid "A computer break reminder."
 msgstr "מזכיר הפסקות ממוחשב."
 
-#: ../typing-break/drwright.c:623
+#: ../typing-break/drwright.c:611
 msgid "translator-credits"
 msgstr ""
 "יאיר הרשקוביץ <yairhr@gmail.com>\n"
@@ -3499,94 +3470,131 @@ msgstr "FONT-FILE OUTPUT-FILE"
 msgid "Error parsing arguments: %s\n"
 msgstr "Error parsing arguments: %s\n"
 
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">להחל גופן חדש?</span>"
+#~ msgid "Just apply settings and quit"
+#~ msgstr "רק החל הגדרות וצא"
 
-#: ../vfs-methods/themus/apply-font.glade.h:2
-msgid "Do _not apply font"
-msgstr "_אל תחל גופן"
+#~ msgid "Inverted"
+#~ msgstr "הפוך"
 
-#: ../vfs-methods/themus/apply-font.glade.h:3
-msgid ""
-"The theme you have selected suggests a new font. A preview of the font is "
-"shown below."
-msgstr "ערכת הנושא שבחרת מציעה גופן חדש. תצוגה מקדימה של הגופן מוצגת מטה."
+#~ msgid "Default Settings"
+#~ msgstr "הגדרות ברירת מחדל"
 
-#: ../vfs-methods/themus/apply-font.glade.h:4
-msgid "_Apply font"
-msgstr "החל _גופן"
+#~ msgid "Screen %d Settings\n"
+#~ msgstr "הגדרות מסך %d\n"
 
-#: ../vfs-methods/themus/theme-method.c:485
-msgid "Themes"
-msgstr "ערכות נושא"
+#~ msgid "Screen Resolution Preferences"
+#~ msgstr "העדפות רזולוציית מסך"
 
-#: ../vfs-methods/themus/themus-properties-view.c:127
-msgid "Description"
-msgstr "תיאור"
+#~ msgid "_Make default for this computer (%s) only"
+#~ msgstr "עשה כברירת מחדל ל_מחשב זה (%s) בלבד"
 
-#: ../vfs-methods/themus/themus-properties-view.c:134
-msgid "Control theme"
-msgstr "ערכת נושא לפקדים"
+#~ msgid "Options"
+#~ msgstr "אפשרויות"
 
-#: ../vfs-methods/themus/themus-properties-view.c:140
-msgid "Window border theme"
-msgstr "ערכת נושא למסגרת החלון"
+#~ msgid ""
+#~ "Testing the new settings. If you don't respond in %d second the previous "
+#~ "settings will be restored."
+#~ msgid_plural ""
+#~ "Testing the new settings. If you don't respond in %d seconds the previous "
+#~ "settings will be restored."
+#~ msgstr[0] ""
+#~ "בודק את ההגדרות החדשות. אם לא תגיב תוך שניה אחת ההגדרות הקודמות יוחזרו."
+#~ msgstr[1] ""
+#~ "בודק את ההגדרות החדשות. אם לא תגיב תוך %d שניות ההגדרות הקודמות יוחזרו."
 
-#: ../vfs-methods/themus/themus-properties-view.c:146
-msgid "Icon theme"
-msgstr "ערכת נושא לסמלים"
+#~ msgid "Keep Resolution"
+#~ msgstr "השאר רזולוצייה"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:1
-msgid "If set to true, then installed themes will be thumbnailed."
-msgstr "If set to true, then installed themes will be thumbnailed."
+#~ msgid "Do you want to keep this resolution?"
+#~ msgstr "האם ברצונך להשאיר רזולוצייה זו?"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:2
-msgid "If set to true, then themes will be thumbnailed."
-msgstr "If set to true, then themes will be thumbnailed."
+#~ msgid "Use _Previous Resolution"
+#~ msgstr "השתמש ברזולוצייה ה_קודמת"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"Set this key to the command used to create thumbnails for installed themes."
+#~ msgid "_Keep Resolution"
+#~ msgstr "_השאר רזולוצייה"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:4
-msgid "Set this key to the command used to create thumbnails for themes."
-msgstr "Set this key to the command used to create thumbnails for themes."
+#~ msgid ""
+#~ "The X server does not support the XRandR extension.  Runtime resolution "
+#~ "changes to the display size are not available."
+#~ msgstr ""
+#~ "שרת ה-X אינו תומך בהרחבה XRandR.  שינויי הפרדת מסך בזמן הריצה אינם זמינים."
 
-#: ../vfs-methods/themus/themus.schemas.in.h:5
-msgid "Thumbnail command for installed themes"
-msgstr "Thumbnail command for installed themes"
+#~ msgid ""
+#~ "The version of the XRandR extension is incompatible with this program. "
+#~ "Runtime changes to the display size are not available."
+#~ msgstr ""
+#~ "הגירסה של הרחבת XRandR אינה תואמת לתוכנית הזו. שינויי רזולוציות בזמן "
+#~ "הריצה לגודל הצג אינם זמינים."
 
-#: ../vfs-methods/themus/themus.schemas.in.h:6
-msgid "Thumbnail command for themes"
-msgstr "Thumbnail command for themes"
+#~ msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+#~ msgstr "<span weight=\"bold\" size=\"larger\">להחל גופן חדש?</span>"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:7
-msgid "Whether to thumbnail installed themes"
-msgstr "Whether to thumbnail installed themes"
+#~ msgid "Do _not apply font"
+#~ msgstr "_אל תחל גופן"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:8
-msgid "Whether to thumbnail themes"
-msgstr "Whether to thumbnail themes"
+#~ msgid ""
+#~ "The theme you have selected suggests a new font. A preview of the font is "
+#~ "shown below."
+#~ msgstr "ערכת הנושא שבחרת מציעה גופן חדש. תצוגה מקדימה של הגופן מוצגת מטה."
 
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "ABCDEFG אבגדהוז"
+#~ msgid "_Apply font"
+#~ msgstr "החל _גופן"
 
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[FILE]"
+#~ msgid "Themes"
+#~ msgstr "ערכות נושא"
 
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "החל ערכת נושא"
+#~ msgid "Description"
+#~ msgstr "תיאור"
 
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "קובע את ערכת נושא ברירת המחדל"
+#~ msgid "Control theme"
+#~ msgstr "ערכת נושא לפקדים"
+
+#~ msgid "Window border theme"
+#~ msgstr "ערכת נושא למסגרת החלון"
+
+#~ msgid "Icon theme"
+#~ msgstr "ערכת נושא לסמלים"
+
+#~ msgid "If set to true, then installed themes will be thumbnailed."
+#~ msgstr "If set to true, then installed themes will be thumbnailed."
+
+#~ msgid "If set to true, then themes will be thumbnailed."
+#~ msgstr "If set to true, then themes will be thumbnailed."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for installed "
+#~ "themes."
+#~ msgstr ""
+#~ "Set this key to the command used to create thumbnails for installed "
+#~ "themes."
+
+#~ msgid "Set this key to the command used to create thumbnails for themes."
+#~ msgstr "Set this key to the command used to create thumbnails for themes."
+
+#~ msgid "Thumbnail command for installed themes"
+#~ msgstr "Thumbnail command for installed themes"
+
+#~ msgid "Thumbnail command for themes"
+#~ msgstr "Thumbnail command for themes"
+
+#~ msgid "Whether to thumbnail installed themes"
+#~ msgstr "Whether to thumbnail installed themes"
+
+#~ msgid "Whether to thumbnail themes"
+#~ msgstr "Whether to thumbnail themes"
+
+#~ msgid "ABCDEFG"
+#~ msgstr "ABCDEFG אבגדהוז"
+
+#~ msgid "[FILE]"
+#~ msgstr "[FILE]"
+
+#~ msgid "Apply theme"
+#~ msgstr "החל ערכת נושא"
+
+#~ msgid "Sets the default theme"
+#~ msgstr "קובע את ערכת נושא ברירת המחדל"
 
 #~ msgid ""
 #~ "Centered\n"
