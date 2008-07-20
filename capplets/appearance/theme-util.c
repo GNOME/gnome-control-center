@@ -126,6 +126,7 @@ theme_delete (const gchar *name, ThemeType type)
   gint response;
   GnomeThemeCommonInfo *theme;
   GFile *dir;
+  gboolean del_empty_parent;
 
   dialog = (GtkDialog *) gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL,
@@ -138,6 +139,10 @@ theme_delete (const gchar *name, ThemeType type)
   if (response == GTK_RESPONSE_CANCEL)
     return FALSE;
 
+  /* Most theme types are put into separate subdirectories. For those
+     we want to delete those directories as well. */
+  del_empty_parent = TRUE;
+
   switch (type) {
     case THEME_TYPE_GTK:
       theme = (GnomeThemeCommonInfo *) gnome_theme_info_find (name);
@@ -147,6 +152,7 @@ theme_delete (const gchar *name, ThemeType type)
     case THEME_TYPE_ICON:
       theme = (GnomeThemeCommonInfo *) gnome_theme_icon_info_find (name);
       theme_dir = g_path_get_dirname (theme->path);
+      del_empty_parent = FALSE;
       break;
 
     case THEME_TYPE_WINDOW:
@@ -181,10 +187,12 @@ theme_delete (const gchar *name, ThemeType type)
     gtk_widget_destroy (info_dialog);
     rc = FALSE;
   } else {
-    /* also delete empty parent directories */
-    GFile *parent = g_file_get_parent (dir);
-    g_file_delete (parent, NULL, NULL);
-    g_object_unref (parent);
+    if (del_empty_parent) {
+      /* also delete empty parent directories */
+      GFile *parent = g_file_get_parent (dir);
+      g_file_delete (parent, NULL, NULL);
+      g_object_unref (parent);
+    }
     rc = TRUE;
   }
 
