@@ -1,3 +1,50 @@
+gnome-control-center 2.23.5 (2008-07-24)
+
+General:
+- Remove VFS methods code (Rodrigo Moya)
+- Intltool churn (Jens Granseuer, Soren Sandmann)
+- Use standard icon names from icon naming spec (Matthias Clasen,
+  #539339)
+
+Appearance Capplet:
+- Don't delete ~/.icons when deleting the last icon theme
+  (Jens Granseuer, #543763)
+- Add notification themes to the metatheme format (Matthias
+  Clasen, #533611)
+
+Display Capplet:
+- New RandR 1.2 based capplet with support for dual screens and stuff.
+  (Soren Sandmann, Federico Mena Quintero)
+
+Default Applications:
+- Use -x instead of -e as exec_flag for Terminator. (Jens
+  Granseuer, #544058).
+- Install the default apps list in the default-apps subdirectory (Jens Granseuer)
+- Make it possible for apps to install additional XML files to
+  extend the list of available applications (Aprotim Sanyal,
+  #527304).
+
+Mouse Capplet:
+- Decrease lower boundary of dwell delay to 0.2 (Gerd Kohlberger)
+
+Translations:
+- Remove pa.po from toplevel (Gerd Kohlberger)
+- es (Jorge Gonzalez)
+- gl (Ignacio Casal Quinteiro)
+- fr (Bruno Brouard, Claude Paroz)
+- he (Yair Hershkovitz)
+- be@latin (Ihar Hrachyshka)
+- th (Theppitak Karoonboonyanan)
+- oc (Yannig Marchegay)
+- nb (Kjartan Maraas)
+- et (Priit Laes)
+
+Typing Break:
+- Use a modal window (Andrey Gusev, #441786)
+- When postponing a break don't go right back to warn state,
+  but award some bonus time according to the already elapsed break time
+  (Andrey Gusev, #133295).
+-------------------------------------------------------------------------------
 gnome-control-center 2.23.4 (2008-06-16)
 
 default applications:

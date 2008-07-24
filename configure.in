@@ -1,4 +1,4 @@
-AC_INIT([gnome-control-center], [2.23.4],
+AC_INIT([gnome-control-center], [2.23.5],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -36,7 +36,7 @@ changequote([,])dnl
 
 # Internationalization support
 
-IT_PROG_INTLTOOL([0.40.0])
+IT_PROG_INTLTOOL([0.37.1])
 
 GETTEXT_PACKAGE=gnome-control-center-2.0
 AC_SUBST(GETTEXT_PACKAGE)
@@ -67,6 +67,8 @@ AC_CHECK_FUNC(XScreenSaverQueryInfo, [
   LIBS=$save_LIBS])
 AC_SUBST(TYPING_BREAK)
 AC_SUBST(SCREENSAVER_LIBS)
+
+AM_CONDITIONAL(HAVE_TYPING_BREAK, test $TYPING_BREAK = typing-break)
 
 dnl keyboard-properties-capplet
 savecppflags=$CPPFLAGS

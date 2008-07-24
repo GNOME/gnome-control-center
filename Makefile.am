@@ -1,4 +1,8 @@
-SUBDIRS = po libsounds libwindow-settings libslab capplets shell help $(TYPING_BREAK)
+SUBDIRS = po libsounds libwindow-settings libslab capplets shell help
+
+if HAVE_TYPING_BREAK
+SUBDIRS += typing-break
+endif
 
 ACLOCAL_AMFLAGS = -I m4
 
