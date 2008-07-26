@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-19 09:45+0200\n"
-"PO-Revision-Date: 2008-07-19 09:47+0200\n"
+"POT-Creation-Date: 2008-07-26 12:49+0200\n"
+"PO-Revision-Date: 2008-07-26 12:50+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -1190,15 +1190,15 @@ msgstr "O tema xa existe. Quere substituílo?"
 msgid "_Overwrite"
 msgstr "_Substituír"
 
-#: ../capplets/appearance/theme-util.c:134
+#: ../capplets/appearance/theme-util.c:135
 msgid "Would you like to delete this theme?"
 msgstr "Quere eliminar este tema?"
 
-#: ../capplets/appearance/theme-util.c:179
+#: ../capplets/appearance/theme-util.c:185
 msgid "Theme cannot be deleted"
 msgstr "O tema non se pode eliminar"
 
-#: ../capplets/appearance/theme-util.c:304
+#: ../capplets/appearance/theme-util.c:312
 msgid "Could not install theme engine"
 msgstr "Non se puido instalar o motor do tema"
 
@@ -1948,7 +1948,12 @@ msgstr "<Acción descoñecida>"
 msgid "Custom Shortcuts"
 msgstr "Atallos personalizados"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:999
+#: ../capplets/keybindings/gnome-keybinding-properties.c:938
+#, c-format
+msgid "Error saving the new shortcut: %s"
+msgstr "Erro ao gardar o novo atallo: %s"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1016
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1959,33 +1964,37 @@ msgstr ""
 "esta tecla.\n"
 "Ténteo cunha tecla como Control, Alt ou Maiús ao mesmo tempo."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1028
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1046
 #, c-format
 msgid ""
-"The shortcut \"%s\" is already used for:\n"
-" \"%s\""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
 msgstr ""
 "O atallo \"%s\" xa se usa para:\n"
-" \"%s\""
+"\"%s\""
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1052
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "Se reasigna o atallo a \"%s\", o atallo \"%s\" desactivarase."
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:1060
-#, c-format
-msgid "Error setting new accelerator in configuration database: %s"
-msgstr ""
-"Erro ao configurar un novo acelerador na base de datos da configuración: %s"
+msgid "_Reassign"
+msgstr "_Reasignar"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1112
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1180
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Erro ao eliminar a configuración dunha tecla rápida na base de datos de "
 "configuración: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1294
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1362
 msgid "Action"
 msgstr "Acción"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1316
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1384
 msgid "Shortcut"
 msgstr "Atallo"
 
@@ -2902,7 +2911,7 @@ msgstr "Outros"
 msgid "Lock Screen"
 msgstr "Bloquear pantalla"
 
-#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:45
+#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:44
 msgid "Logout"
 msgstr "Terminar a sesión"
 
@@ -3110,35 +3119,35 @@ msgstr "<b>Abrir %s</b>"
 msgid "Remove from System Items"
 msgstr "Eliminar dos elementos de sistema"
 
-#: ../libsounds/sound-view.c:44
+#: ../libsounds/sound-view.c:43
 msgid "Login"
 msgstr "Inicio de sesión"
 
-#: ../libsounds/sound-view.c:46
+#: ../libsounds/sound-view.c:45
 msgid "Boing"
 msgstr "Boing"
 
-#: ../libsounds/sound-view.c:47
+#: ../libsounds/sound-view.c:46
 msgid "Siren"
 msgstr "Sirena"
 
-#: ../libsounds/sound-view.c:48
+#: ../libsounds/sound-view.c:47
 msgid "Clink"
 msgstr "Tintinar"
 
-#: ../libsounds/sound-view.c:49
+#: ../libsounds/sound-view.c:48
 msgid "Beep"
 msgstr "Ton de aviso"
 
-#: ../libsounds/sound-view.c:50
+#: ../libsounds/sound-view.c:49
 msgid "No sound"
 msgstr "Sen son"
 
-#: ../libsounds/sound-view.c:132
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "Non hai ningún son definido para este evento."
 
-#: ../libsounds/sound-view.c:141
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -3147,24 +3156,24 @@ msgstr ""
 "Talvez queira instalar o paquete Gnome-audio para dispor dun conxunto de "
 "sons predeterminados."
 
-#: ../libsounds/sound-view.c:152
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "O ficheiro de son para este evento non existe."
 
-#: ../libsounds/sound-view.c:183
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "Seleccionar un ficheiro de son"
 
-#: ../libsounds/sound-view.c:210
+#: ../libsounds/sound-view.c:209
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "O ficheiro %s non é un ficheiro wav válido"
 
-#: ../libsounds/sound-view.c:271
+#: ../libsounds/sound-view.c:270
 msgid "Select sound file..."
 msgstr "Seleccionar ficheiro de son..."
 
-#: ../libsounds/sound-view.c:373
+#: ../libsounds/sound-view.c:372
 msgid "System Sounds"
 msgstr "Sons do sistema"
 
@@ -3389,6 +3398,11 @@ msgstr ""
 "Parece que non ten a área de notificación no seu panel. Pode engadilo "
 "premendo co botón dereito sobre o seu panel e seleccionando 'Engadir ao "
 "panel', seleccionando 'Área de notificación' e premendo en 'Engadir'."
+
+#~ msgid "Error setting new accelerator in configuration database: %s"
+#~ msgstr ""
+#~ "Erro ao configurar un novo acelerador na base de datos da configuración: %"
+#~ "s"
 
 #~ msgid "Inverted"
 #~ msgstr "Invertido"
