@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-18 22:17+0000\n"
-"PO-Revision-Date: 2008-07-21 22:55+0200\n"
+"POT-Creation-Date: 2008-07-26 09:14+0000\n"
+"PO-Revision-Date: 2008-07-26 11:53+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1192,15 +1192,15 @@ msgstr "El tema ya existe. ¿Quiere reemplazarlo?"
 msgid "_Overwrite"
 msgstr "_Sobreescribir"
 
-#: ../capplets/appearance/theme-util.c:134
+#: ../capplets/appearance/theme-util.c:135
 msgid "Would you like to delete this theme?"
 msgstr "¿Quiere eliminar este tema?"
 
-#: ../capplets/appearance/theme-util.c:179
+#: ../capplets/appearance/theme-util.c:185
 msgid "Theme cannot be deleted"
 msgstr "No se puede borrar el tema"
 
-#: ../capplets/appearance/theme-util.c:304
+#: ../capplets/appearance/theme-util.c:312
 msgid "Could not install theme engine"
 msgstr "No se pudo instalar el motor del tema"
 
@@ -1946,7 +1946,12 @@ msgstr "<Acción desconocida>"
 msgid "Custom Shortcuts"
 msgstr "Combinación personalizada"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:999
+#: ../capplets/keybindings/gnome-keybinding-properties.c:938
+#, c-format
+msgid "Error saving the new shortcut: %s"
+msgstr "Error al guardar la combinación nueva: %s"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1016
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1958,34 +1963,36 @@ msgstr ""
 "Por favor, inténtelo con una tecla como Control, Alt o Mayús. al mismo "
 "tiempo."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1028
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1046
 #, c-format
 msgid ""
-"The shortcut \"%s\" is already used for:\n"
-" \"%s\""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
 msgstr ""
-"La combinación «%s» ya se usa para:\n"
+"La combinación «%s» ya se está usando para\n"
 "«%s»"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1052
 #, c-format
-msgid "Error setting new accelerator in configuration database: %s"
-msgstr ""
-"Error al establecer una combinación nueva en la base de datos de "
-"configuración: %s"
+msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "Si reasigna la combinación a «%s» se desactivará la combinación «%s»."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1112
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
+msgid "_Reassign"
+msgstr "_Reasignar"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1180
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Error al borrar una combinación de teclas en la base de datos de "
 "configuración: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1294
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1362
 msgid "Action"
 msgstr "Acción"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1316
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1384
 msgid "Shortcut"
 msgstr "Combinación"
 
@@ -2240,9 +2247,7 @@ msgstr "Descanso de escritura"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
-msgstr ""
-"Permitir conmutar las características de _accesibilidad desde atajos de "
-"teclado"
+msgstr "Permitir conmutar las características de _accesibilidad desde combinaciones de teclas"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
@@ -2901,7 +2906,7 @@ msgstr "Otras"
 msgid "Lock Screen"
 msgstr "Bloquear la pantalla"
 
-#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:45
+#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:44
 msgid "Logout"
 msgstr "Salida"
 
@@ -3107,35 +3112,35 @@ msgstr "<b>Abrir %s</b>"
 msgid "Remove from System Items"
 msgstr "Quitar de los elementos del sistema"
 
-#: ../libsounds/sound-view.c:44
+#: ../libsounds/sound-view.c:43
 msgid "Login"
 msgstr "Entrada"
 
-#: ../libsounds/sound-view.c:46
+#: ../libsounds/sound-view.c:45
 msgid "Boing"
 msgstr "Boing"
 
-#: ../libsounds/sound-view.c:47
+#: ../libsounds/sound-view.c:46
 msgid "Siren"
 msgstr "Sirena"
 
-#: ../libsounds/sound-view.c:48
+#: ../libsounds/sound-view.c:47
 msgid "Clink"
 msgstr "Clink"
 
-#: ../libsounds/sound-view.c:49
+#: ../libsounds/sound-view.c:48
 msgid "Beep"
 msgstr "Bip"
 
-#: ../libsounds/sound-view.c:50
+#: ../libsounds/sound-view.c:49
 msgid "No sound"
 msgstr "Sin sonido"
 
-#: ../libsounds/sound-view.c:132
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "No hay un sonido para este evento."
 
-#: ../libsounds/sound-view.c:141
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -3144,24 +3149,24 @@ msgstr ""
 "Quizá quiera instalar el paquete gnome-audio para tener\n"
 "un conjunto de sonidos predeterminados."
 
-#: ../libsounds/sound-view.c:152
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "No existe el archivo de sonido correspondiente a este evento."
 
-#: ../libsounds/sound-view.c:183
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "Seleccione un archivo de sonido"
 
-#: ../libsounds/sound-view.c:210
+#: ../libsounds/sound-view.c:209
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "El archivo %s no es un archivo wav válido"
 
-#: ../libsounds/sound-view.c:271
+#: ../libsounds/sound-view.c:270
 msgid "Select sound file..."
 msgstr "Seleccione un archivo de sonido…"
 
-#: ../libsounds/sound-view.c:373
+#: ../libsounds/sound-view.c:372
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
 
