@@ -87,7 +87,7 @@ binding_name (guint                   keyval,
 	egg_virtual_accelerator_label (keyval, keycode, mask) :
 	egg_virtual_accelerator_name (keyval, keycode, mask);
   else
-    return translate ? g_strdup (_("Disabled")) : g_strdup ("disabled");
+    return g_strdup (translate ? _("Disabled") : "");
 }
 
 static gboolean
@@ -926,6 +926,23 @@ keyval_is_forbidden (guint keyval)
 }
 
 static void
+show_error (GtkWindow *parent,
+	    GError *err)
+{
+  GtkWidget *dialog;
+
+  dialog = gtk_message_dialog_new (parent,
+				   GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+				   GTK_MESSAGE_WARNING,
+				   GTK_BUTTONS_OK,
+				   _("Error saving the new shortcut: %s"),
+				   err->message);
+
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+}
+
+static void
 accel_edited_callback (GtkCellRendererText   *cell,
                        const char            *path_string,
                        guint                  keyval,
@@ -1017,25 +1034,86 @@ accel_edited_callback (GtkCellRendererText   *cell,
     {
       GtkWidget *dialog;
       char *name;
+      int response;
 
       name = binding_name (keyval, keycode, mask, TRUE);
 
       dialog =
-        gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
-                                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-                                GTK_MESSAGE_WARNING,
-                                GTK_BUTTONS_CANCEL,
-                                _("The shortcut \"%s\" is already used for:\n \"%s\""),
-                                name,
-                                tmp_key.description ?
-                                tmp_key.description : tmp_key.gconf_key);
+	gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+				GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+				GTK_MESSAGE_WARNING,
+				GTK_BUTTONS_CANCEL,
+				_("The shortcut \"%s\" is already used for\n\"%s\""),
+				name, tmp_key.description ?
+				tmp_key.description : tmp_key.gconf_key);
       g_free (name);
-      gtk_dialog_run (GTK_DIALOG (dialog));
+
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+	  _("If you reassign the shortcut to \"%s\", the \"%s\" shortcut "
+	    "will be disabled."),
+	  key_entry->description ?
+	  key_entry->description : key_entry->gconf_key,
+	  tmp_key.description ?
+	  tmp_key.description : tmp_key.gconf_key);
+
+      gtk_dialog_add_button (GTK_DIALOG (dialog),
+                             _("_Reassign"),
+			     GTK_RESPONSE_ACCEPT);
+
+      gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+				       GTK_RESPONSE_ACCEPT);
+
+      response = gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
 
-      /* set it back to its previous value. */
-      egg_cell_renderer_keys_set_accelerator (EGG_CELL_RENDERER_KEYS (cell),
-					      key_entry->keyval, key_entry->keycode, key_entry->mask);
+      if (response == GTK_RESPONSE_ACCEPT)
+	{
+	  GConfClient *client;
+
+	  client = gconf_client_get_default ();
+
+          gconf_client_set_string (client,
+				   tmp_key.gconf_key,
+				   "", &err);
+
+	  if (err != NULL)
+	    {
+	       show_error (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+			   err);
+	       g_error_free (err);
+	       g_object_unref (client);
+	       return;
+	    }
+
+	  str = binding_name (keyval, keycode, mask, FALSE);
+	  gconf_client_set_string (client,
+				   key_entry->gconf_key,
+				   str, &err);
+
+	  if (err != NULL)
+	    {
+	       show_error (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+			   err);
+	       g_error_free (err);
+
+	       /* reset the previous shortcut */
+	       gconf_client_set_string (client,
+					tmp_key.gconf_key,
+					str, NULL);
+	    }
+
+	  g_free (str);
+	  g_object_unref (client);
+	}
+      else
+	{
+	  /* set it back to its previous value. */
+	  egg_cell_renderer_keys_set_accelerator (EGG_CELL_RENDERER_KEYS (cell),
+						  key_entry->keyval,
+						  key_entry->keycode,
+						  key_entry->mask);
+	}
+
       return;
     }
 
@@ -1051,17 +1129,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
   if (err != NULL)
     {
-      GtkWidget *dialog;
-
-      dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
-				       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-				       GTK_MESSAGE_WARNING,
-				       GTK_BUTTONS_OK,
-				       _("Error setting new accelerator in configuration database: %s"),
-				       err->message);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-
-      gtk_widget_destroy (dialog);
+      show_error (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))), err);
       g_error_free (err);
       key_entry->editable = FALSE;
     }
@@ -1097,7 +1165,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
   client = gconf_client_get_default();
   gconf_client_set_string (client,
 			   key_entry->gconf_key,
-			   "disabled",
+			   "",
 			   &err);
   g_object_unref (client);
 
