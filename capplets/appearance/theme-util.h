@@ -61,4 +61,4 @@ gboolean theme_find_in_model (GtkTreeModel *model, const gchar *name, GtkTreeIte
 
 void     theme_install_file (GtkWindow *parent, const gchar *path);
 gboolean packagekit_available (void);
-gboolean file_delete_recursive (GFile *directory, GError **error);
+

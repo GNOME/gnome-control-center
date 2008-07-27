@@ -11,7 +11,8 @@ INCLUDES = \
 	$(DBUS_CFLAGS)							\
 	$(GNOME_DESKTOP_CFLAGS)						\
 	$(METACITY_CFLAGS)						\
-	$(GSD_DBUS_CFLAGS)
+	$(GSD_DBUS_CFLAGS)						\
+	$(GIO_CFLAGS)
 
 
 noinst_LTLIBRARIES = libcommon.la
@@ -42,9 +43,10 @@ libcommon_la_SOURCES = \
 
 libcommon_la_LIBADD =							\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \
-	$(METACITY_LIBS)							\
+	$(METACITY_LIBS)						\
 	$(DBUS_LIBS)							\
-	$(GNOME_DESKTOP_LIBS)
+	$(GNOME_DESKTOP_LIBS)						\
+	$(GIO_LIBS)
 
 gnome_theme_test_SOURCES = \
 	gnome-theme-test.c

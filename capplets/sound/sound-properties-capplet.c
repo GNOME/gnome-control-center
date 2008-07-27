@@ -35,7 +35,6 @@
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
-#include "libsounds/sound-view.h"
 
 #include <glade/glade.h>
 
@@ -53,8 +52,8 @@
 
 #include "activate-settings-daemon.h"
 #include "pipeline-tests.h"
-
 #include "mixer-support.h"
+#include "sound-theme.h"
 
 typedef enum {
 	AUDIO_PLAYBACK,
@@ -72,13 +71,11 @@ typedef struct _DeviceChooser
 	const gchar *test_pipeline;
 } DeviceChooser;
 
-#define ENABLE_ESD_KEY             "/desktop/gnome/sound/enable_esd"
 #define EVENT_SOUNDS_KEY           "/desktop/gnome/sound/event_sounds"
+#define INPUT_SOUNDS_KEY           "/desktop/gnome/sound/input_feedback_sounds"
 #define DEFAULT_MIXER_DEVICE_KEY   "/desktop/gnome/sound/default_mixer_device"
 #define DEFAULT_MIXER_TRACKS_KEY   "/desktop/gnome/sound/default_mixer_tracks"
-#define VISUAL_BELL_KEY            "/apps/metacity/general/visual_bell"
 #define AUDIO_BELL_KEY             "/apps/metacity/general/audible_bell"
-#define VISUAL_BELL_TYPE_KEY       "/apps/metacity/general/visual_bell_type"
 #define GST_GCONF_DIR              "/system/gstreamer/0.10"
 
 #define AUDIO_TEST_SOURCE          "audiotestsrc wave=sine freq=512"
@@ -88,7 +85,6 @@ typedef struct _DeviceChooser
 
 /* Capplet-specific prototypes */
 
-static SoundProperties *props = NULL;
 static GConfClient     *gconf_client = NULL;
 static GtkWidget       *dialog_win = NULL;
 static GList           *device_choosers = NULL;
@@ -111,78 +107,18 @@ CheckXKB (void)
 	return have_xkb;
 }
 
-static void
-props_changed_cb (SoundProperties *p, SoundEvent *event, gpointer data)
-{
-	sound_properties_user_save (p);
-}
-
-
-
-static GConfEnumStringPair bell_flash_enums[] = {
-	{ 0, "frame_flash" },
-	{ 1, "fullscreen" },
-	{ -1, NULL }
-};
-
-static GConfValue *
-bell_flash_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_STRING);
-	gconf_value_set_string (new_value,
-				gconf_enum_to_string (bell_flash_enums, gconf_value_get_int (value)));
-
-	return new_value;
-}
-
-static GConfValue *
-bell_flash_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-	GConfValue *new_value;
-	const gchar *str;
-	gint val = 2;
-
-	str = (value && (value->type == GCONF_VALUE_STRING)) ? gconf_value_get_string (value) : NULL;
-
-	new_value = gconf_value_new (GCONF_VALUE_INT);
-	if (value->type == GCONF_VALUE_STRING) {
-		gconf_string_to_enum (bell_flash_enums,
-				      str,
-				      &val);
-	}
-	gconf_value_set_int (new_value, val);
-
-	return new_value;
-}
-
 static GladeXML *
 create_dialog (void)
 {
 	GladeXML *dialog;
-	GtkWidget *widget, *box, *view, *image;
+	GtkWidget *image;
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "sound_prefs_dialog", NULL);
-	if (dialog == NULL)
-	  return NULL;
-
-	widget = glade_xml_get_widget (dialog, "sound_prefs_dialog");
-
-	props = sound_properties_new ();
-	sound_properties_add_defaults (props, NULL);
-	g_signal_connect (G_OBJECT (props), "event_changed",
-			  (GCallback) props_changed_cb, NULL);
-	view = sound_view_new (props);
-	box = glade_xml_get_widget (dialog, "events_vbox");
-	gtk_box_pack_start (GTK_BOX (box), view, TRUE, TRUE, 0);
-	gtk_widget_show_all (view);
-
-	g_signal_connect_swapped (G_OBJECT (widget), "destroy",
-				  (GCallback) gtk_object_destroy, props);
-
-	gtk_image_set_from_file (GTK_IMAGE (WID ("bell_image")),
-				 GNOMECC_DATA_DIR "/pixmaps/visual-bell.png");
+	dialog = glade_xml_new ("sound-properties.glade", "sound_prefs_dialog", NULL);
+	if (dialog == NULL) {
+		dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "sound_prefs_dialog", NULL);
+		if (dialog == NULL)
+			return NULL;
+	}
 
 	image = gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (WID ("sounds_playback_test")), image);
@@ -195,10 +131,6 @@ create_dialog (void)
 
 	image = gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (WID ("chat_audio_capture_test")), image);
-
-	if (!CheckXKB()) {
-		gtk_widget_set_sensitive (WID ("bell_flash_alignment"), FALSE);
-	}
 
 	return dialog;
 }
@@ -1082,29 +1014,16 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 			      WID ("chat_audio_capture_test"),
 			      "gconfaudiosrc" AUDIO_TEST_IN_BETWEEN "gconfaudiosink profile=chat");
 
-#ifdef HAVE_ESD
-	peditor = gconf_peditor_new_boolean (NULL, ENABLE_ESD_KEY, WID ("enable_toggle"), NULL);
-	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_toggle"));
-	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_vbox"));
-#else
-	gtk_widget_hide (WID ("enable_toggle"));
-#endif
-	gconf_peditor_new_boolean (NULL, EVENT_SOUNDS_KEY, WID ("events_toggle"), NULL);
-
+	peditor = gconf_peditor_new_boolean (NULL, EVENT_SOUNDS_KEY, WID ("events_toggle"), NULL);
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("input_feedback_toggle"));
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("sound_theme_combobox"));
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("sounds_treeview"));
+	gconf_peditor_new_boolean (NULL, INPUT_SOUNDS_KEY, WID ("input_feedback_toggle"), NULL);
 	gconf_peditor_new_boolean (NULL, AUDIO_BELL_KEY, WID ("bell_audible_toggle"), NULL);
 
-	peditor = gconf_peditor_new_boolean (NULL, VISUAL_BELL_KEY, WID ("bell_visual_toggle"), NULL);
-	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("bell_flash_vbox"));
-
-	/* peditor not so convenient for the radiobuttons */
-	gconf_peditor_new_select_radio (NULL,
-					VISUAL_BELL_TYPE_KEY,
-					gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("bell_flash_window_radio"))),
-					"conv-to-widget-cb", bell_flash_to_widget,
-					"conv-from-widget-cb", bell_flash_from_widget,
-					NULL);
-
 	setup_default_mixer (dialog);
+	setup_sound_theme (dialog);
+	setup_sound_theme_custom (dialog, CheckXKB());
 }
 
 /* get_legacy_settings
@@ -1123,7 +1042,6 @@ get_legacy_settings (void)
 	gboolean val_bool, def;
 
 	client = gconf_client_get_default ();
-	COPY_FROM_LEGACY (bool, "/desktop/gnome/sound/enable_esd", "/sound/system/settings/start_esd=false");
 	COPY_FROM_LEGACY (bool, "/desktop/gnome/sound/event_sounds", "/sound/system/settings/event_sounds=false");
 	g_object_unref (G_OBJECT (client));
 }

@@ -28,67 +28,6 @@
 
 #include "theme-util.h"
 
-static gboolean
-directory_delete_recursive (GFile *directory, GError **error)
-{
-  GFileEnumerator *enumerator;
-  GFileInfo *info;
-  gboolean success = TRUE;
-
-  enumerator = g_file_enumerate_children (directory,
-                                          G_FILE_ATTRIBUTE_STANDARD_NAME ","
-                                          G_FILE_ATTRIBUTE_STANDARD_TYPE,
-                                          G_FILE_QUERY_INFO_NONE,
-                                          NULL, error);
-  if (enumerator == NULL)
-    return FALSE;
-
-  while (success &&
-         (info = g_file_enumerator_next_file (enumerator, NULL, NULL))) {
-    GFile *child;
-
-    child = g_file_get_child (directory, g_file_info_get_name (info));
-
-    if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
-      success = directory_delete_recursive (child, error);
-    }
-    g_object_unref (info);
-
-    if (success)
-      success = g_file_delete (child, NULL, error);
-  }
-  g_file_enumerator_close (enumerator, NULL, NULL);
-
-  if (success)
-    success = g_file_delete (directory, NULL, error);
-
-  return success;
-}
-
-gboolean
-file_delete_recursive (GFile *file, GError **error)
-{
-  GFileInfo *info;
-  GFileType type;
-
-  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-
-  info = g_file_query_info (file,
-                            G_FILE_ATTRIBUTE_STANDARD_TYPE,
-                            G_FILE_QUERY_INFO_NONE,
-                            NULL, error);
-  if (info == NULL)
-    return FALSE;
-
-  type = g_file_info_get_file_type (info);
-  g_object_unref (info);
-
-  if (type == G_FILE_TYPE_DIRECTORY)
-    return directory_delete_recursive (file, error);
-  else
-    return g_file_delete (file, NULL, error);
-}
-
 gboolean
 theme_is_writable (const gpointer theme)
 {

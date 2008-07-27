@@ -4,15 +4,23 @@ cappletname = sound
 bin_PROGRAMS = gnome-sound-properties
 
 gnome_sound_properties_LDADD = \
-	$(top_builddir)/libsounds/libsounds.la \
 	$(GNOMECC_CAPPLETS_LIBS) \
-	$(SOUND_CAPPLET_LIBS) \
+	$(CANBERRA_LIBS) $(SOUND_CAPPLET_LIBS) \
 	$(HAL_LIBS)
-gnome_sound_properties_SOURCES = sound-properties-capplet.c pipeline-tests.h pipeline-tests.c mixer-support.h mixer-support.c
+gnome_sound_properties_SOURCES =				\
+	sound-properties-capplet.c				\
+	pipeline-tests.h					\
+	pipeline-tests.c					\
+	mixer-support.h						\
+	mixer-support.c						\
+	sound-theme.c						\
+	sound-theme.h						\
+	sound-theme-file-utils.c				\
+	sound-theme-file-utils.h
 
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
-	$(SOUND_CAPPLET_CFLAGS) \
+	$(CANBERRA_CFLAGS) $(SOUND_CAPPLET_CFLAGS) \
 	$(HAL_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \

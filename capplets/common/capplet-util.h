@@ -24,6 +24,7 @@
 #ifndef __CAPPLET_UTIL_H
 #define __CAPPLET_UTIL_H
 
+#include <gio/gio.h>
 #include <gnome.h>
 #include <gconf/gconf.h>
 #include <gconf/gconf-changeset.h>
@@ -46,5 +47,6 @@
 
 void capplet_help (GtkWindow *parent, char const *helpfile, char const *section);
 void capplet_set_icon (GtkWidget *window, char const *icon_file_name);
+gboolean capplet_file_delete_recursive (GFile *directory, GError **error);
 
 #endif /* __CAPPLET_UTIL_H */
