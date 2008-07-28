@@ -451,6 +451,30 @@ setting_set_func (GtkTreeViewColumn *tree_column,
 	g_free (filename);
 }
 
+static void
+play_sound_preview (GtkFileChooser *chooser,
+		    gpointer user_data)
+{
+	char *filename;
+	ca_context *ctx;
+
+	filename = gtk_file_chooser_get_preview_filename (GTK_FILE_CHOOSER (chooser));
+	if (filename == NULL)
+		return;
+
+	ctx = ca_gtk_context_get ();
+	ca_gtk_play_for_widget (GTK_WIDGET (chooser), 0,
+				CA_PROP_APPLICATION_NAME, _("Sound Preferences"),
+				CA_PROP_MEDIA_FILENAME, filename,
+				CA_PROP_EVENT_DESCRIPTION, _("Testing event sound"),
+				CA_PROP_CANBERRA_CACHE_CONTROL, "never",
+#ifdef CA_PROP_CANBERRA_ENABLE
+				CA_PROP_CANBERRA_ENABLE, "1",
+#endif
+				NULL);
+	g_free (filename);
+}
+
 static char *
 get_sound_filename (GladeXML *dialog)
 {
@@ -477,6 +501,9 @@ get_sound_filename (GladeXML *dialog)
 	gtk_file_filter_add_mime_type (filter, "audio/x-wav");
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
 	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+	g_signal_connect (G_OBJECT (chooser), "update-preview",
+			  G_CALLBACK (play_sound_preview), NULL);
 
 	data_dirs = g_get_system_data_dirs ();
 	for (i = 0; data_dirs[i] != NULL; i++) {
