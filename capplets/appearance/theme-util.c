@@ -116,7 +116,7 @@ theme_delete (const gchar *name, ThemeType type)
   dir = g_file_new_for_path (theme_dir);
   g_free (theme_dir);
 
-  if (!file_delete_recursive (dir, NULL)) {
+  if (!capplet_file_delete_recursive (dir, NULL)) {
     GtkWidget *info_dialog = gtk_message_dialog_new (NULL,
 						     GTK_DIALOG_MODAL,
 						     GTK_MESSAGE_ERROR,

@@ -28,6 +28,7 @@
 #include <gio/gio.h>
 #include <glib/gstdio.h>
 
+#include "capplet-util.h"
 #include "file-transfer-dialog.h"
 #include "theme-installer.h"
 #include "theme-util.h"
@@ -57,7 +58,7 @@ cleanup_tmp_dir (GIOSchedulerJob *job,
 	GFile *directory;
 
 	directory = g_file_new_for_path (tmp_dir);
-	file_delete_recursive (directory, NULL);
+	capplet_file_delete_recursive (directory, NULL);
 	g_object_unref (directory);
 
 	return FALSE;
