@@ -1,5 +1,11 @@
 2008-07-28  Bastien Nocera  <hadess@hadess.net>
 
+	* sound-theme.c (save_custom_theme): Fix permissions on the
+	custom theme directory, otherwise not even the user can read the files
+	in there
+
+2008-07-28  Bastien Nocera  <hadess@hadess.net>
+
 	* Makefile.am:
 	* sound-properties-capplet.c (create_dialog), (setup_dialog),
 	(get_legacy_settings):

@@ -615,7 +615,7 @@ save_custom_theme (GtkTreeModel *model, const char *parent)
 
 	/* Create the custom directory */
 	path = custom_theme_dir_path (NULL);
-	g_mkdir_with_parents (path, 0644);
+	g_mkdir_with_parents (path, 0755);
 	g_free (path);
 
 	/* Save the sounds themselves */
