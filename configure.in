@@ -109,6 +109,7 @@ PKG_CHECK_MODULES(METACITY, libmetacity-private >= 2.23.1)
 PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-2.0)
 PKG_CHECK_MODULES(LIBSOUNDS, gio-2.0 libgnome-2.0 libgnomeui-2.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
+PKG_CHECK_MODULES(GIO, gio-2.0)
 
 gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-2.0`
 gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-2.0`
@@ -244,30 +245,6 @@ fi
 AM_GCONF_SOURCE_2
 
 dnl ==============================================
-dnl Esd section
-dnl ==============================================
-have_esd=no
-AC_ARG_ENABLE(esd,
-  AC_HELP_STRING([--disable-esd],
-                 [turn off ESD audio support]),
-       [case "${enableval}" in
-               yes) WANT_ESD=yes ;;
-               no)  WANT_ESD=no ;;
-               *) AC_MSG_ERROR(bad value ${enableval} for --disable-esd) ;;
-       esac],
-       [WANT_ESD=yes]) dnl Default value
-
-if test x$WANT_ESD = xyes ; then
-       PKG_CHECK_MODULES(ESD, esound >= 0.2.28,
-               have_esd=yes
-	       AC_DEFINE(HAVE_ESD, 1, [Define if ESD sound server should be used]),
-               AC_MSG_RESULT([disabled]))
-fi
-
-AC_SUBST(ESD_CFLAGS)
-AC_SUBST(ESD_LIBS)
-
-dnl ==============================================
 dnl GStreamer section
 dnl ==============================================
 GST_MAJORMINOR=auto
@@ -302,9 +279,15 @@ AM_CONDITIONAL(HAVE_GSTREAMER, test "x$have_gstreamer" = "xyes")
 AC_SUBST(GST_LIBS)
 AC_SUBST(GST_CFLAGS)
 
-if test "x$have_gstreamer" = "xyes"; then
-  SOUND_CAPPLET_LIBS="$ESD_LIBS $GST_LIBS -lgstaudio-0.10 -lgstinterfaces-0.10"
-  SOUND_CAPPLET_CFLAGS="$ESD_CFLAGS $GST_CFLAGS"
+dnl ==============================================
+dnl sound capplet section
+dnl ==============================================
+
+PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk gio-2.0, have_canberra=yes, have_canberra=no)
+
+if test "x$have_gstreamer" = "xyes" && test "x$have_canberra" = "xyes" ; then
+  SOUND_CAPPLET_LIBS="$GST_LIBS -lgstaudio-0.10 -lgstinterfaces-0.10"
+  SOUND_CAPPLET_CFLAGS="$GST_CFLAGS"
   AC_SUBST(SOUND_CAPPLET_LIBS)
   AC_SUBST(SOUND_CAPPLET_CFLAGS)
 else
@@ -379,7 +362,6 @@ capplets/windows/window-properties.desktop.in
 help/Makefile
 libslab/Makefile
 libslab/libslab.pc
-libsounds/Makefile
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
 po/Makefile.in
