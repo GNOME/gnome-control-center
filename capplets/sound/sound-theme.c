@@ -506,7 +506,8 @@ get_sound_filename (GladeXML *dialog)
 		g_free (path);
 	}
 	data_dir = g_get_user_special_dir (G_USER_DIRECTORY_MUSIC);
-	gtk_file_chooser_add_shortcut_folder (GTK_FILE_CHOOSER (chooser), data_dir, NULL);
+	if (data_dir != NULL)
+		gtk_file_chooser_add_shortcut_folder (GTK_FILE_CHOOSER (chooser), data_dir, NULL);
 
 	response = gtk_dialog_run (GTK_DIALOG (chooser));
 	filename = NULL;
@@ -747,7 +748,7 @@ setting_column_edited (GtkCellRendererText *renderer,
 	if (new_text == NULL)
 		return;
 
-	g_object_get (G_OBJECT (renderer),
+	g_object_get (renderer,
 		      "model", &model,
 		      NULL);
 
@@ -762,13 +763,17 @@ setting_column_edited (GtkCellRendererText *renderer,
 
 	gtk_tree_model_get_iter_first (model, &iter);
 	do {
+		gint cmp;
+
 		gtk_tree_model_get (model, &iter, 0, &text, 1, &setting, -1);
-		if (g_utf8_collate (text, new_text) == 0) {
+		cmp = g_utf8_collate (text, new_text);
+		g_free (text);
+
+		if (cmp == 0) {
 			if (type == SOUND_TYPE_NORMAL || type == SOUND_TYPE_FEEDBACK || type == SOUND_TYPE_AUDIO_BELL) {
-				char *filename;
 
 				if (setting == SOUND_CUSTOM || (setting == SOUND_CUSTOM_OLD && old_filename == NULL)) {
-					filename = get_sound_filename (dialog);
+					char *filename = get_sound_filename (dialog);
 					if (filename == NULL)
 						break;
 					gtk_tree_store_set (GTK_TREE_STORE (tree_model),
@@ -777,6 +782,7 @@ setting_column_edited (GtkCellRendererText *renderer,
 							    HAS_PREVIEW_COL, setting != SOUND_OFF,
 							    FILENAME_COL, filename,
 							    -1);
+					g_free (filename);
 				} else if (setting == SOUND_CUSTOM_OLD) {
 					gtk_tree_store_set (GTK_TREE_STORE (tree_model),
 							    &tree_iter,
@@ -904,11 +910,15 @@ theme_changed_custom_reinit (GtkTreeModel *model,
 			     gpointer data)
 {
 	int type;
+	gboolean sensitive;
 
-	gtk_tree_model_get (model, iter, TYPE_COL, &type, -1);
+	gtk_tree_model_get (model, iter,
+			    TYPE_COL, &type,
+			    SENSITIVE_COL, &sensitive, -1);
 	if (type != -1 && type != SOUND_TYPE_VISUAL_BELL) {
 		gtk_tree_store_set (GTK_TREE_STORE (model), iter,
 				    SETTING_COL, SOUND_BUILTIN,
+				    HAS_PREVIEW_COL, sensitive,
 				    -1);
 	}
 	return FALSE;

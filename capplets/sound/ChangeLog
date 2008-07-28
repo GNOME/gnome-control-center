@@ -1,5 +1,15 @@
 2008-07-28  Jens Granseuer  <jensgr@gmx.net>
 
+	* sound-theme.c: (get_sound_filename): fix critical warning when music
+	directory isn't set
+
+	* (setting_column_edited): fix more leaks
+
+	* (theme_changed_custom_reinit): when resetting a theme, also reset
+	the preview icon status
+
+2008-07-28  Jens Granseuer  <jensgr@gmx.net>
+
 	* sound-theme.c: (load_index_theme_name),
 	(set_combox_for_theme_name), (theme_combobox_changed),
 	(setup_sound_theme), (get_sound_filename), (dump_theme),
