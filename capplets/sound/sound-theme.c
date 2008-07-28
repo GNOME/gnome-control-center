@@ -936,7 +936,7 @@ get_file_type (const char *sound_name, char **linked_name)
 	name = g_strdup_printf ("%s.disabled", sound_name);
 	filename = custom_theme_dir_path (name);
 	g_free (name);
-	
+
 	if (g_file_test (filename, G_FILE_TEST_IS_REGULAR) != FALSE) {
 		g_free (filename);
 		return SOUND_OFF;
@@ -1007,6 +1007,7 @@ custom_treeview_button_press_event_cb (GtkWidget *tree_view,
 			GtkTreeModel *model;
 			GtkTreeIter iter;
 			char **sound_names;
+			gboolean sensitive;
 			ca_context *ctx;
 
 			model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
@@ -1016,8 +1017,10 @@ custom_treeview_button_press_event_cb (GtkWidget *tree_view,
 			}
 			gtk_tree_path_free (path);
 
-			gtk_tree_model_get (model, &iter, SOUND_NAMES_COL, &sound_names, -1);
-			if (sound_names == NULL)
+			gtk_tree_model_get (model, &iter,
+					    SOUND_NAMES_COL, &sound_names,
+					    SENSITIVE_COL, &sensitive, -1);
+			if (!sensitive || sound_names == NULL)
 				return FALSE;
 
 			ctx = ca_gtk_context_get ();
