@@ -129,7 +129,7 @@ static char *
 load_index_theme_name (const char *index, char **parent)
 {
 	GKeyFile *file;
-	char *indexname;
+	char *indexname = NULL;
 	gboolean hidden;
 
 	file = g_key_file_new ();
@@ -139,21 +139,20 @@ load_index_theme_name (const char *index, char **parent)
 	}
 	/* Don't add hidden themes to the list */
 	hidden = g_key_file_get_boolean (file, "Sound Theme", "Hidden", NULL);
-	if (hidden != FALSE)
-		return NULL;
+	if (!hidden) {
+		indexname = g_key_file_get_locale_string (file,
+							  "Sound Theme",
+							  "Name",
+							  NULL,
+							  NULL);
 
-	indexname = g_key_file_get_locale_string (file,
-						  "Sound Theme",
-						  "Name",
-						  NULL,
-						  NULL);
-
-	/* Save the parent theme, if there's one */
-	if (parent != NULL) {
-		*parent = g_key_file_get_string (file,
-						 "Sound Theme",
-						 "Inherits",
-						 NULL);
+		/* Save the parent theme, if there's one */
+		if (parent != NULL) {
+			*parent = g_key_file_get_string (file,
+							 "Sound Theme",
+							 "Inherits",
+							 NULL);
+		}
 	}
 
 	g_key_file_free (file);
@@ -234,34 +233,29 @@ set_combox_for_theme_name (GladeXML *dialog, const char *name)
 	if (name == NULL || *name == '\0')
 		name = "freedesktop";
 
-	found = FALSE;
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (WID ("sound_theme_combobox")));
 
 	if (gtk_tree_model_get_iter_first (model, &iter) == FALSE) {
 		return;
 	}
 
-	while (1) {
+	do {
 		char *value;
 
 		gtk_tree_model_get (model, &iter, THEME_IDENTIFIER_COL, &value, -1);
-		if (value != NULL && strcmp (value, name) == 0) {
-			g_free (value);
-			found = TRUE;
-			break;
-		}
-		if (gtk_tree_model_iter_next (model, &iter) == FALSE)
-			break;
-	}
+		found = (value != NULL && strcmp (value, name) == 0);
+		g_free (value);
+
+	} while (!found && gtk_tree_model_iter_next (model, &iter));
 
 	/* When we can't find the theme we need to set, try to set the default
 	 * one "freedesktop" */
-	if (found == FALSE && strcmp (name, "freedesktop") != 0) {
+	if (found) {
+		gtk_combo_box_set_active_iter (GTK_COMBO_BOX (WID ("sound_theme_combobox")), &iter);
+	} else if (strcmp (name, "freedesktop") != 0) {
 		g_debug ("not found, falling back to fdo");
 		set_combox_for_theme_name (dialog, "freedesktop");
 	}
-	else if (found != FALSE)
-		gtk_combo_box_set_active_iter (GTK_COMBO_BOX (WID ("sound_theme_combobox")), &iter);
 }
 
 static void
@@ -281,7 +275,7 @@ theme_combobox_changed (GtkComboBox *widget,
 
 	client = gconf_client_get_default ();
 	gconf_client_set_string (client, SOUND_THEME_KEY, theme_name, NULL);
-	g_object_unref (G_OBJECT (client));
+	g_object_unref (client);
 
 	/* Don't reinit a custom theme */
 	if (strcmp (theme_name, CUSTOM_THEME_NAME) != 0) {
@@ -294,7 +288,7 @@ theme_combobox_changed (GtkComboBox *widget,
 		/* And the combo box entry */
 		model = gtk_combo_box_get_model (GTK_COMBO_BOX (WID ("sound_theme_combobox")));
 		gtk_tree_model_get_iter_first (model, &iter);
-		while (1) {
+		do {
 			char *parent;
 			gtk_tree_model_get (model, &iter, THEME_PARENT_ID_COL, &parent, -1);
 			if (parent != NULL && strcmp (parent, CUSTOM_THEME_NAME) != 0) {
@@ -303,9 +297,7 @@ theme_combobox_changed (GtkComboBox *widget,
 				break;
 			}
 			g_free (parent);
-			if (gtk_tree_model_iter_next (model, &iter) == FALSE)
-				break;
-		}
+		} while (gtk_tree_model_iter_next (model, &iter));
 	}
 }
 
@@ -342,6 +334,7 @@ setup_sound_theme (GladeXML *dialog)
 	if (g_hash_table_size (hash) == 0) {
 		gtk_widget_set_sensitive (WID ("sounds_vbox"), FALSE);
 		g_warning ("Bad setup, install the freedesktop sound theme");
+		g_hash_table_destroy (hash);
 		return;
 	}
 
@@ -374,9 +367,9 @@ setup_sound_theme (GladeXML *dialog)
 	/* Listen for changes in GConf, and on the combobox */
 	gconf_client_notify_add (client, SOUND_THEME_KEY,
 				 (GConfClientNotifyFunc) theme_changed_cb, dialog, NULL, NULL);
-	g_object_unref (G_OBJECT (client));
+	g_object_unref (client);
 
-	g_signal_connect (G_OBJECT (WID ("sound_theme_combobox")), "changed",
+	g_signal_connect (WID ("sound_theme_combobox"), "changed",
 			  G_CALLBACK (theme_combobox_changed), dialog);
 }
 
@@ -503,7 +496,7 @@ get_sound_filename (GladeXML *dialog)
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
 	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
 
-	g_signal_connect (G_OBJECT (chooser), "update-preview",
+	g_signal_connect (chooser, "update-preview",
 			  G_CALLBACK (play_sound_preview), NULL);
 
 	data_dirs = g_get_system_data_dirs ();
@@ -708,15 +701,13 @@ dump_theme (GladeXML *dialog)
 			g_free (parent);
 		}
 		gtk_tree_model_get_iter_first (model, &iter);
-		while (1) {
+		do {
 			gtk_tree_model_get (model, &iter, THEME_PARENT_ID_COL, &parent, -1);
 			if (parent != NULL && strcmp (parent, CUSTOM_THEME_NAME) != 0) {
 				gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 				break;
 			}
-			if (gtk_tree_model_iter_next (model, &iter) == FALSE)
-				break;
-		}
+		} while (gtk_tree_model_iter_next (model, &iter));
 
 		delete_custom_theme_dir ();
 	} else {
@@ -770,7 +761,7 @@ setting_column_edited (GtkCellRendererText *renderer,
 			    -1);
 
 	gtk_tree_model_get_iter_first (model, &iter);
-	while (1) {
+	do {
 		gtk_tree_model_get (model, &iter, 0, &text, 1, &setting, -1);
 		if (g_utf8_collate (text, new_text) == 0) {
 			if (type == SOUND_TYPE_NORMAL || type == SOUND_TYPE_FEEDBACK || type == SOUND_TYPE_AUDIO_BELL) {
@@ -819,10 +810,7 @@ setting_column_edited (GtkCellRendererText *renderer,
 			}
 			g_assert_not_reached ();
 		}
-
-		if (gtk_tree_model_iter_next (model, &iter) == FALSE)
-			break;
-	}
+	} while (gtk_tree_model_iter_next (model, &iter));
 	g_free (old_filename);
 }
 
@@ -1073,7 +1061,7 @@ setup_sound_theme_custom (GladeXML *dialog, gboolean have_xkb)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("sounds_treeview")), column);
 
 	/* The 2nd column with the sound settings */
-	renderer = gtk_cell_renderer_combo_new();
+	renderer = gtk_cell_renderer_combo_new ();
 	g_signal_connect (renderer, "edited", G_CALLBACK (setting_column_edited), dialog);
 	g_signal_connect (renderer, "editing-started", G_CALLBACK (combobox_editing_started), dialog);
 	custom_model = GTK_TREE_MODEL (gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT));
@@ -1179,6 +1167,6 @@ setup_sound_theme_custom (GladeXML *dialog, gboolean have_xkb)
 		gtk_tree_model_foreach (GTK_TREE_MODEL (store), theme_changed_custom_init, NULL);
 	g_free (theme_name);
 
-	g_object_unref (G_OBJECT (client));
+	g_object_unref (client);
 }
 
