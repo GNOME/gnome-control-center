@@ -81,7 +81,7 @@ create_dialog (void)
 	image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")), image);
 
-	image = gtk_image_new_from_icon_name ("preferences-desktop-sound", GTK_ICON_SIZE_BUTTON);
+	image = gtk_image_new_from_icon_name ("gnome-sound-properties", GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (WID ("notifications_button")), image);
 
 	return dialog;
