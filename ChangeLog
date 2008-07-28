@@ -1,3 +1,10 @@
+2008-07-28  Lennart Poettering  <lennart@poettering.net>
+
+	* sound-theme.c: pass 'cache control' property explicitly to make sure
+	that the sound is never cached when it is previewed. Pass 'enable'
+	property explicitly to make sure that the sound is guaranteed to be
+	played, even when sound events are otherwise disabled.
+
 2008-07-28  Bastien Nocera  <hadess@hadess.net>
 
 	* Makefile.am:

@@ -983,6 +983,10 @@ custom_treeview_button_press_event_cb (GtkWidget *tree_view,
 						CA_PROP_APPLICATION_NAME, _("Sound Preferences"),
 						CA_PROP_EVENT_ID, sound_names[0],
 						CA_PROP_EVENT_DESCRIPTION, _("Testing event sound"),
+						CA_PROP_CANBERRA_CACHE_CONTROL, "never",
+#ifdef CA_PROP_CANBERRA_ENABLE
+						CA_PROP_CANBERRA_ENABLE, "1",
+#endif
 						NULL);
 
 			g_strfreev (sound_names);
