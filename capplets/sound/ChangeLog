@@ -1,5 +1,14 @@
 2008-07-28  Bastien Nocera  <hadess@hadess.net>
 
+	* sound-theme.c (setting_set_func), (fill_custom_model),
+	(save_sounds), (count_customised_sounds), (setting_column_edited):
+	When selecting a non-custom sound (such as disabled, or builtin),
+	don't remove the previous custom file's filename from the tree store,
+	When a custom file was previously selected, always show it in the
+	combo box drop-down (Closes: #545055)
+
+2008-07-28  Bastien Nocera  <hadess@hadess.net>
+
 	* sound-theme.c (play_sound_preview), (get_sound_filename):
 	When selecting custom files, listen to "update-preview", and try
 	to play everything that the user might select (Closes: #545056)

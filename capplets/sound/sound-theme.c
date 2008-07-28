@@ -53,7 +53,8 @@ enum {
 	SOUND_UNSET,
 	SOUND_OFF,
 	SOUND_BUILTIN,
-	SOUND_CUSTOM
+	SOUND_CUSTOM,
+	SOUND_CUSTOM_OLD
 };
 
 #define SOUND_VISUAL_BELL_TITLEBAR SOUND_BUILTIN
@@ -424,7 +425,7 @@ setting_set_func (GtkTreeViewColumn *tree_column,
 			g_object_set (cell,
 				      "text", _("Default"),
 				      NULL);
-		} else if (setting == SOUND_CUSTOM) {
+		} else if (setting == SOUND_CUSTOM || setting == SOUND_CUSTOM_OLD) {
 			char *display;
 
 			display = g_filename_display_basename (filename);
@@ -536,7 +537,7 @@ fill_custom_model (GtkListStore *store, const char *prev_filename)
 		display = g_filename_display_basename (prev_filename);
 		gtk_list_store_insert_with_values (store, &iter, G_MAXINT,
 						   0, display,
-						   1, SOUND_CUSTOM,
+						   1, SOUND_CUSTOM_OLD,
 						   -1);
 		g_free (display);
 	}
@@ -623,7 +624,7 @@ save_sounds (GtkTreeModel *model,
 	} else if (setting == SOUND_OFF) {
 		delete_old_files (sounds);
 		add_disabled_file (sounds);
-	} else if (setting == SOUND_CUSTOM) {
+	} else if (setting == SOUND_CUSTOM || setting == SOUND_CUSTOM_OLD) {
 		delete_old_files (sounds);
 		delete_disabled_files (sounds);
 		add_custom_file (sounds, filename);
@@ -675,7 +676,7 @@ count_customised_sounds (GtkTreeModel *model,
 	if (type == SOUND_TYPE_VISUAL_BELL)
 		return FALSE;
 
-	if (setting == SOUND_OFF || setting == SOUND_CUSTOM)
+	if (setting == SOUND_OFF || setting == SOUND_CUSTOM || setting == SOUND_CUSTOM_OLD)
 		(*num_custom)++;
 
 	return FALSE;
@@ -749,7 +750,7 @@ setting_column_edited (GtkCellRendererText *renderer,
 	GtkTreeModel *model, *tree_model;
 	GtkTreeIter iter, tree_iter;
 	SoundType type;
-	char *text;
+	char *text, *old_filename;
 	int setting;
 
 	if (new_text == NULL)
@@ -763,7 +764,10 @@ setting_column_edited (GtkCellRendererText *renderer,
 	if (gtk_tree_model_get_iter_from_string (tree_model, &tree_iter, path) == FALSE)
 		return;
 
-	gtk_tree_model_get (tree_model, &tree_iter, TYPE_COL, &type, -1);
+	gtk_tree_model_get (tree_model, &tree_iter,
+			    TYPE_COL, &type,
+			    FILENAME_COL, &old_filename,
+			    -1);
 
 	gtk_tree_model_get_iter_first (model, &iter);
 	while (1) {
@@ -772,20 +776,30 @@ setting_column_edited (GtkCellRendererText *renderer,
 			if (type == SOUND_TYPE_NORMAL || type == SOUND_TYPE_FEEDBACK || type == SOUND_TYPE_AUDIO_BELL) {
 				char *filename;
 
-				if (setting == SOUND_CUSTOM) {
+				if (setting == SOUND_CUSTOM || (setting == SOUND_CUSTOM_OLD && old_filename == NULL)) {
 					filename = get_sound_filename (dialog);
 					if (filename == NULL)
 						break;
+					gtk_tree_store_set (GTK_TREE_STORE (tree_model),
+							    &tree_iter,
+							    SETTING_COL, setting,
+							    HAS_PREVIEW_COL, setting != SOUND_OFF,
+							    FILENAME_COL, filename,
+							    -1);
+				} else if (setting == SOUND_CUSTOM_OLD) {
+					gtk_tree_store_set (GTK_TREE_STORE (tree_model),
+							    &tree_iter,
+							    SETTING_COL, setting,
+							    HAS_PREVIEW_COL, setting != SOUND_OFF,
+							    FILENAME_COL, old_filename,
+							    -1);
 				} else {
-					filename = NULL;
+					gtk_tree_store_set (GTK_TREE_STORE (tree_model),
+							    &tree_iter,
+							    SETTING_COL, setting,
+							    HAS_PREVIEW_COL, setting != SOUND_OFF,
+							    -1);
 				}
-
-				gtk_tree_store_set (GTK_TREE_STORE (tree_model),
-						    &tree_iter,
-						    SETTING_COL, setting,
-						    HAS_PREVIEW_COL, setting != SOUND_OFF,
-						    FILENAME_COL, filename,
-						    -1);
 
 				g_debug ("Something changed, dump theme");
 				dump_theme (dialog);
@@ -809,6 +823,7 @@ setting_column_edited (GtkCellRendererText *renderer,
 		if (gtk_tree_model_iter_next (model, &iter) == FALSE)
 			break;
 	}
+	g_free (old_filename);
 }
 
 /* Functions to toggle whether the Input feedback sounds are editable */
