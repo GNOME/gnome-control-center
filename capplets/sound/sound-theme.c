@@ -656,6 +656,8 @@ save_custom_theme (GtkTreeModel *model, const char *parent)
 	g_file_set_contents (path, data, -1, NULL);
 	g_free (path);
 	g_free (data);
+
+	custom_theme_update_time ();
 }
 
 static gboolean

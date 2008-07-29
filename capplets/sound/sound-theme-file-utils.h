@@ -33,4 +33,6 @@ void delete_disabled_files (char **sounds);
 void add_disabled_file (char **sounds);
 void add_custom_file (char **sounds, const char *filename);
 
+void custom_theme_update_time (void);
+
 #endif /* __SOUND_THEME_FILE_UTILS_HH__ */

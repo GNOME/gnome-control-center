@@ -23,10 +23,24 @@
 #include <config.h>
 #include <glib/gstdio.h>
 #include <gio/gio.h>
+#include <utime.h>
 
+#include "sound-theme-file-utils.h"
 #include "capplet-util.h"
 
 #define CUSTOM_THEME_NAME	"__custom"
+
+/* This function needs to be called after each individual
+ * changeset to the theme */
+void
+custom_theme_update_time (void)
+{
+	char *path;
+	
+	path = custom_theme_dir_path (NULL);
+	utime (path, NULL);
+	g_free (path);
+}
 
 char *
 custom_theme_dir_path (const char *child)

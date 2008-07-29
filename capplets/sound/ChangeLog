@@ -1,5 +1,12 @@
 2008-07-29  Bastien Nocera  <hadess@hadess.net>
 
+	* sound-theme-file-utils.c (custom_theme_update_time):
+	* sound-theme-file-utils.h:
+	* sound-theme.c (save_custom_theme): "touch" the custom theme
+	directory every time we make a change (Closes: #545373)
+
+2008-07-29  Bastien Nocera  <hadess@hadess.net>
+
 	* sound-theme.c (setup_sound_theme_custom): Never mind, the define is
 	actually used
 
