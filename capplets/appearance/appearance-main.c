@@ -142,9 +142,12 @@ main (int argc, char **argv)
         GNOME_PARAM_GOPTION_CONTEXT, option_context,
         NULL);
 
-  if (install_filename != NULL)
-     gnome_theme_install_from_uri (install_filename, NULL);
-  g_free (install_filename);
+  if (install_filename != NULL) {
+    GFile *inst = g_file_new_for_commandline_arg (install_filename);
+    g_free (install_filename);
+    gnome_theme_install (inst, NULL);
+    g_object_unref (inst);
+  }
 
   /* init tabs */
   themes_init (data);

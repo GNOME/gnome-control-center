@@ -579,16 +579,14 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 }
 
 void
-gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
+gnome_theme_install (GFile *file, GtkWindow *parent)
 {
 	GtkWidget *dialog;
 	gchar *path, *base;
 	GList *src, *target;
-	gchar *temppath;
 	const gchar *template;
-	int cmp;
 
-	if (filename == NULL || strcmp (filename, "") == 0) {
+	if (file == NULL) {
 		dialog = gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL,
 						 GTK_MESSAGE_ERROR,
@@ -599,9 +597,10 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 		return;
 	}
 
-	/* see if someone dropped a directory */
-	if (g_file_test (filename, G_FILE_TEST_IS_DIR))	{
-		transfer_done_cb (NULL, g_strdup (filename));
+	/* see if someone dropped a local directory */
+	if (g_file_is_native (file) &&
+	    g_file_query_file_type (file, G_FILE_QUERY_INFO_NONE, NULL) == G_FILE_TYPE_DIRECTORY) {
+		transfer_done_cb (NULL, g_file_get_path (file));
 		return;
 	}
 
@@ -620,28 +619,7 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 		return;
 	}
 
-	/* To avoid the copy of /root/.themes to /root/.themes/.themes
-	 * which causes an infinite loop. The user asks to transfer the all
-	 * contents of a folder, to a folder under itself. So ignore the
-	 * situation.
-	 */
-	temppath = g_build_filename (filename, ".themes", NULL);
-	cmp = strcmp (temppath, path);
-	g_free (path);
-	g_free (temppath);
-
-	if (cmp == 0) {
-		dialog = gtk_message_dialog_new (NULL,
-						 GTK_DIALOG_MODAL,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_OK,
-						 _("%s is the path where the theme files will be installed. This can not be selected as the source location"), filename);
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-		return;
-	}
-
-	base = g_path_get_basename (filename);
+	base = g_file_get_basename (file);
 
 	if (g_str_has_suffix (base, ".tar.gz") || g_str_has_suffix (base, ".tgz") || g_str_has_suffix (base, ".gtp"))
 		template = "gnome-theme-%d.gtp";
@@ -654,7 +632,7 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 	}
 	g_free (base);
 
-	src = g_list_append (NULL, g_file_new_for_path (filename));
+	src = g_list_append (NULL, g_object_ref (file));
 
 	path = NULL;
 	do {
@@ -694,7 +672,6 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 	static gboolean running_theme_install = FALSE;
 	static gchar old_folder[512] = "";
 	GtkWidget *dialog;
-	gchar *filename_selected, *folder;
 	GtkFileFilter *filter;
 
 	if (running_theme_install)
@@ -725,7 +702,9 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
 	{
-		filename_selected = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		gchar *uri_selected, *folder;
+
+		uri_selected = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog));
 
 		folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
 		g_strlcpy (old_folder, folder, 255);
@@ -733,8 +712,13 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 
 		gtk_widget_destroy (dialog);
 
-		gnome_theme_install_from_uri (filename_selected, parent);
-		g_free (filename_selected);
+		if (uri_selected != NULL) {
+			GFile *file = g_file_new_for_uri (uri_selected);
+			g_free (uri_selected);
+
+			gnome_theme_install (file, parent);
+			g_object_unref (file);
+		}
 	}
 	else
 		gtk_widget_destroy (dialog);

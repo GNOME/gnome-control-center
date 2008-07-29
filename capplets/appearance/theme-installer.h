@@ -22,7 +22,7 @@
 #ifndef THEME_INSTALLER_H
 #define THEME_INSTALLER_H
 
-void gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent);
+void gnome_theme_install (GFile *file, GtkWindow *parent);
 void gnome_theme_installer_run (GtkWindow *parent, const gchar *filename);
 
 #endif /* THEME_INSTALLER_H */

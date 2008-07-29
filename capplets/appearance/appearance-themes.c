@@ -989,12 +989,10 @@ theme_drag_data_received_cb (GtkWidget *widget,
 
   if (uris != NULL && uris[0] != NULL) {
     GFile *f = g_file_new_for_uri (uris[0]);
-    gchar *filename = g_file_get_path (f);
-    g_object_unref (f);
 
-    gnome_theme_install_from_uri (filename,
+    gnome_theme_install (f,
         GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")));
-    g_free (filename);
+    g_object_unref (f);
   }
 
   g_strfreev (uris);

@@ -1,5 +1,14 @@
 2008-07-29  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-main.c: (main):
+	* appearance-themes.c: (theme_drag_data_received_cb):
+	* theme-installer.c: (gnome_theme_install),
+	(gnome_theme_installer_run):
+	* theme-installer.h: make theme installation from GIO-supported
+	sources work (including drag and drop) (bug #545335)
+
+2008-07-29  Jens Granseuer  <jensgr@gmx.net>
+
 	* theme-installer.c: (gnome_theme_install_from_uri): file transfer
 	dialog now uses GFiles internally, so update the caller
 
