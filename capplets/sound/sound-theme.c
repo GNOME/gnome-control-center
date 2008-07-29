@@ -40,6 +40,7 @@
 #define AUDIO_BELL_KEY		"/apps/metacity/general/audible_bell"
 
 #define CUSTOM_THEME_NAME	"__custom"
+#define PREVIEW_BUTTON_XPAD	5
 
 enum {
 	THEME_DISPLAY_COL,
@@ -1090,7 +1091,6 @@ setup_sound_theme_custom (GladeXML *dialog, gboolean have_xkb)
 		      "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE,
 		      "icon-name", "media-playback-start",
 		      "stock-size", GTK_ICON_SIZE_MENU,
-		      "xpad", PREVIEW_BUTTON_XPAD,
 		      NULL);
 	column = gtk_tree_view_column_new_with_attributes ("Preview", renderer,
 							   "visible", HAS_PREVIEW_COL,
