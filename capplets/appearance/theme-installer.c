@@ -654,7 +654,7 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 	}
 	g_free (base);
 
-	src = g_list_append (NULL, g_strdup (filename));
+	src = g_list_append (NULL, g_file_new_for_path (filename));
 
 	path = NULL;
 	do {
@@ -667,7 +667,7 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 	} while (g_file_test (path, G_FILE_TEST_EXISTS));
 
 
-	target = g_list_append (NULL, path);
+	target = g_list_append (NULL, g_file_new_for_path (path));
 
 	dialog = file_transfer_dialog_new_with_parent (parent);
 	g_signal_connect (dialog, "cancel",
@@ -681,9 +681,10 @@ gnome_theme_install_from_uri (const gchar *filename, GtkWindow *parent)
 					 G_PRIORITY_DEFAULT);
 	gtk_widget_show (dialog);
 
-	g_list_foreach (src, (GFunc) g_free, NULL);
-	/* don't free the target item since we're using that for the signals */
+	/* don't free the path since we're using that for the signals */
+	g_list_foreach (src, (GFunc) g_object_unref, NULL);
 	g_list_free (src);
+	g_list_foreach (target, (GFunc) g_object_unref, NULL);
 	g_list_free (target);
 }
 

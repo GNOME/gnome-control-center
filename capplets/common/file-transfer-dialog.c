@@ -67,8 +67,8 @@ typedef struct _FileTransferJob
 {
 	FileTransferDialog *dialog;
 	GtkDialog *overwrite_dialog;
-	GSList *source_uris;
-	GSList *target_uris;
+	GSList *source_files;
+	GSList *target_files;
 	FileTransferDialogOptions options;
 } FileTransferJob;
 
@@ -399,10 +399,10 @@ static void
 file_transfer_job_destroy (FileTransferJob *job)
 {
 	g_object_unref (job->dialog);
-	g_slist_foreach (job->source_uris, (GFunc) g_free, NULL);
-	g_slist_foreach (job->target_uris, (GFunc) g_free, NULL);
-	g_slist_free (job->source_uris);
-	g_slist_free (job->target_uris);
+	g_slist_foreach (job->source_files, (GFunc) g_object_unref, NULL);
+	g_slist_foreach (job->target_files, (GFunc) g_object_unref, NULL);
+	g_slist_free (job->source_files);
+	g_slist_free (job->target_files);
 	if (job->overwrite_dialog != NULL)
 		gtk_widget_destroy (GTK_WIDGET (job->overwrite_dialog));
 	g_free (job);
@@ -477,18 +477,18 @@ file_transfer_job_schedule (GIOSchedulerJob *io_job,
 	gboolean retry;
 
 	/* take the first file from the list and copy it */
+	source = job->source_files->data;
+	job->source_files = g_slist_delete_link (job->source_files, job->source_files);
+
+	target = job->target_files->data;
+	job->target_files = g_slist_delete_link (job->target_files, job->target_files);
+
 	data.dialog = job->dialog;
 	data.overwrite_dialog = job->overwrite_dialog;
 	data.current_file = job->dialog->priv->nth + 1;
 	data.total_files = job->dialog->priv->total;
-	data.source = job->source_uris->data;
-	data.target = job->target_uris->data;
-
-	source = g_file_new_for_path (data.source);
-	job->source_uris = g_slist_delete_link (job->source_uris, job->source_uris);
-
-	target = g_file_new_for_path (data.target);
-	job->target_uris = g_slist_delete_link (job->target_uris, job->target_uris);
+	data.source = g_file_get_basename (source);
+	data.target = g_file_get_basename (target);
 
 	g_io_scheduler_job_send_to_mainloop (io_job,
 					     file_transfer_job_update,
@@ -546,7 +546,7 @@ file_transfer_job_schedule (GIOSchedulerJob *io_job,
 
 	if (success)
 	{
-		if (job->source_uris == NULL)
+		if (job->source_files == NULL)
 		{
 			g_io_scheduler_job_send_to_mainloop_async (io_job,
 								   (GSourceFunc) file_transfer_dialog_done,
@@ -587,13 +587,13 @@ file_transfer_dialog_copy_async (FileTransferDialog *dlg,
 	n = 0;
 	for (l = g_list_last (source_files); l; l = l->prev, ++n)
 	{
-		job->source_uris = g_slist_prepend (job->source_uris,
-						    g_strdup (l->data));
+		job->source_files = g_slist_prepend (job->source_files,
+						     g_object_ref (l->data));
 	}
 	for (l = g_list_last (target_files); l; l = l->prev)
 	{
-		job->target_uris = g_slist_prepend (job->target_uris,
-						    g_strdup (l->data));
+		job->target_files = g_slist_prepend (job->target_files,
+						     g_object_ref (l->data));
 	}
 
 	g_object_set (dlg, "total_uris", n, NULL);
