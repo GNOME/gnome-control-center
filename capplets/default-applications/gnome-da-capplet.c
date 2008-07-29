@@ -548,7 +548,7 @@ combo_conv_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
          * prevent the combo box from jumping back to the previous value if the
          * user has selected Custom */
         gconf_value_set_string (ret, "");
-        return NULL;
+        return ret;
     }
     else
     {

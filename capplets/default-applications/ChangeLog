@@ -1,3 +1,11 @@
+2008-07-29  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	Patch from James Westby <jw+debian@jameswestby.net>
+	
+	* gnome-da-capplet.c (combo_conv_from_widget): don't return NULL, but
+	the already set 'ret' variable, to allow Custom commands to work (bug
+	#545280)
+
 2008-07-24  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-default-applications.xml.in: use -x instead of -e as exec_flag
