@@ -31,6 +31,7 @@
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <glib/gi18n.h>
+#include <gconf/gconf-client.h>
 
 typedef struct App App;
 typedef struct GrabInfo GrabInfo;
@@ -49,9 +50,11 @@ struct App
     GtkWidget	   *panel_checkbox;
     GtkWidget	   *panel_label;
     GtkWidget	   *clone_checkbox;
+    GtkWidget	   *show_icon_checkbox;
     
     GtkWidget      *area;
     gboolean	    ignore_gui_changes;
+    GConfClient	   *client;
 };
 
 static void rebuild_gui (App *app);
@@ -1615,6 +1618,19 @@ on_detect_displays (GtkWidget *widget, gpointer data)
     gnome_rr_screen_refresh (app->screen);
 }
 
+#define SHOW_ICON_KEY "/apps/gnome_settings_daemon/xrandr/show_notification_icon"
+
+
+static void
+on_show_icon_toggled (GtkWidget *widget, gpointer data)
+{
+    GtkToggleButton *tb = GTK_TOGGLE_BUTTON (widget);
+    App *app = data;
+    
+    gconf_client_set_bool (app->client, SHOW_ICON_KEY,
+			   gtk_toggle_button_get_active (tb), NULL);
+}
+
 static void
 run_application (App *app)
 {
@@ -1631,7 +1647,8 @@ run_application (App *app)
 	g_warning ("Could not open " GLADE_FILE);
 	return;
     }
-    
+
+    app->client = gconf_client_get_default ();
     app->screen = gnome_rr_screen_new (gdk_screen_get_default(),
 				 on_screen_changed, app);
 
@@ -1659,6 +1676,13 @@ run_application (App *app)
 
     g_signal_connect (glade_xml_get_widget (xml, "detect_displays_button"),
 		      "clicked", G_CALLBACK (on_detect_displays), app);
+
+    app->show_icon_checkbox = glade_xml_get_widget (xml, "show_notification_icon");
+
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->show_icon_checkbox),
+				  gconf_client_get_bool (app->client, SHOW_ICON_KEY, NULL));
+    
+    g_signal_connect (app->show_icon_checkbox, "toggled", G_CALLBACK (on_show_icon_toggled), app);
     
     app->panel_checkbox = glade_xml_get_widget (xml, "panel_checkbox");
     app->panel_label = glade_xml_get_widget (xml, "panel_label");
