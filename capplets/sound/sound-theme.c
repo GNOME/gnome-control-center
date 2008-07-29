@@ -40,7 +40,6 @@
 #define AUDIO_BELL_KEY		"/apps/metacity/general/audible_bell"
 
 #define CUSTOM_THEME_NAME	"__custom"
-#define PREVIEW_BUTTON_XPAD	5
 
 enum {
 	THEME_DISPLAY_COL,
