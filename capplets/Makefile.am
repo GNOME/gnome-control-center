@@ -19,7 +19,7 @@ if BUILD_ABOUTME
 SUBDIRS += about-me
 endif
 
-if HAVE_GSTREAMER
+if BUILD_SOUND
 SUBDIRS += sound
 endif
 
