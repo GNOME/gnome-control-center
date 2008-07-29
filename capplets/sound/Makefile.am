@@ -31,9 +31,6 @@ INCLUDES = \
 gladedir   = $(pkgdatadir)/glade
 dist_glade_DATA = sound-properties.glade
 
-pixmapdir = $(pkgdatadir)/pixmaps
-dist_pixmap_DATA = visual-bell.png
-
 icons16dir = $(datadir)/icons/hicolor/16x16/apps
 dist_icons16_DATA = icons/16x16/gnome-sound-properties.png
 icons22dir = $(datadir)/icons/hicolor/22x22/apps
