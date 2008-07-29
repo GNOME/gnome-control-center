@@ -283,7 +283,7 @@ dnl ==============================================
 dnl sound capplet section
 dnl ==============================================
 
-PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk gio-2.0, have_canberra=yes, have_canberra=no)
+PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk >= 0.4 gio-2.0, have_canberra=yes, have_canberra=no)
 
 if test "x$have_gstreamer" = "xyes" && test "x$have_canberra" = "xyes" ; then
   SOUND_CAPPLET_LIBS="$GST_LIBS -lgstaudio-0.10 -lgstinterfaces-0.10"
