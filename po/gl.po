@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-28 21:14+0200\n"
-"PO-Revision-Date: 2008-07-28 21:20+0200\n"
+"POT-Creation-Date: 2008-07-31 16:33+0200\n"
+"PO-Revision-Date: 2008-07-31 16:34+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgid "Images"
 msgstr "Imaxes"
 
 #: ../capplets/about-me/gnome-about-me.c:773
-#: ../capplets/appearance/theme-installer.c:718
+#: ../capplets/appearance/theme-installer.c:696
 msgid "All Files"
 msgstr "Todos os ficheiros"
 
@@ -659,10 +659,10 @@ msgstr "Pódese revertir a última suxestión de tipo de letra aplicada."
 msgid "The current theme suggests a font."
 msgstr "O tema actual suxire un tipo de letra."
 
-#: ../capplets/appearance/appearance-themes.c:1048
+#: ../capplets/appearance/appearance-themes.c:1046
 #: ../capplets/default-applications/gnome-da-capplet.c:630
 #: ../capplets/sound/sound-properties-capplet.c:260
-#: ../capplets/sound/sound-theme.c:654 ../capplets/sound/sound-theme.c:726
+#: ../capplets/sound/sound-theme.c:648 ../capplets/sound/sound-theme.c:720
 msgid "Custom"
 msgstr "Personalizar"
 
@@ -1146,12 +1146,12 @@ msgstr "Fallou ao crear o directorio temporal"
 msgid "New themes have been successfully installed."
 msgstr "Os novos temas instaláronse satisfactoriamente."
 
-#: ../capplets/appearance/theme-installer.c:596
+#: ../capplets/appearance/theme-installer.c:594
 msgid "No theme file location specified to install"
 msgstr ""
 "Non se especificou ningunha localización do ficheiro de tema para instalar"
 
-#: ../capplets/appearance/theme-installer.c:616
+#: ../capplets/appearance/theme-installer.c:615
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1160,20 +1160,11 @@ msgstr ""
 "Permisos insuficientes para instalar o tema en:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:638
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s é a ruta onde se instalarán o ficheiros de temas. Isto non se pode "
-"seleccionar como localización de orixe"
-
-#: ../capplets/appearance/theme-installer.c:707
+#: ../capplets/appearance/theme-installer.c:685
 msgid "Select Theme"
 msgstr "Seleccionar tema"
 
-#: ../capplets/appearance/theme-installer.c:711
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Theme Packages"
 msgstr "Paquetes de tema"
 
@@ -1851,6 +1842,10 @@ msgstr "_Detectar dispositivos"
 msgid "_Resolution"
 msgstr "_Resolución"
 
+#: ../capplets/display/display-capplet.glade.h:13
+msgid "_Show Displays in Panel"
+msgstr "_Mostrar dispositivos no panel"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Cambiar a resolución da pantalla"
@@ -1859,42 +1854,42 @@ msgstr "Cambiar a resolución da pantalla"
 msgid "Screen Resolution"
 msgstr "Resolución da pantalla"
 
-#: ../capplets/display/xrandr-capplet.c:400
-#: ../capplets/display/xrandr-capplet.c:438
+#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:441
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/xrandr-capplet.c:401
+#: ../capplets/display/xrandr-capplet.c:404
 msgid "Left"
 msgstr "Esquerda"
 
-#: ../capplets/display/xrandr-capplet.c:402
+#: ../capplets/display/xrandr-capplet.c:405
 msgid "Right"
 msgstr "Dereita"
 
-#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:406
 msgid "Upside Down"
 msgstr "Cara abaixo"
 
-#: ../capplets/display/xrandr-capplet.c:476
-#: ../capplets/display/xrandr-capplet.c:484
-#: ../capplets/display/xrandr-capplet.c:485
+#: ../capplets/display/xrandr-capplet.c:479
+#: ../capplets/display/xrandr-capplet.c:487
+#: ../capplets/display/xrandr-capplet.c:488
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:537
-#: ../capplets/display/xrandr-capplet.c:556
-#: ../capplets/display/xrandr-capplet.c:566
+#: ../capplets/display/xrandr-capplet.c:540
+#: ../capplets/display/xrandr-capplet.c:559
+#: ../capplets/display/xrandr-capplet.c:569
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:548
+#: ../capplets/display/xrandr-capplet.c:551
 msgid "Off"
 msgstr "Apagado"
 
-#: ../capplets/display/xrandr-capplet.c:1302
+#: ../capplets/display/xrandr-capplet.c:1305
 msgid "Cloned Output"
 msgstr "Saída clonada"
 
@@ -1939,8 +1934,8 @@ msgstr "O tipo de tecla rápida."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
-#: ../capplets/sound/sound-theme.c:422 ../capplets/sound/sound-theme.c:440
-#: ../capplets/sound/sound-theme.c:549 ../capplets/sound/sound-theme.c:565
+#: ../capplets/sound/sound-theme.c:415 ../capplets/sound/sound-theme.c:433
+#: ../capplets/sound/sound-theme.c:543 ../capplets/sound/sound-theme.c:559
 #: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "Desactivado"
@@ -2339,7 +2334,7 @@ msgstr "Disposición"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
-#: ../capplets/sound/sound-theme.c:426 ../capplets/sound/sound-theme.c:545
+#: ../capplets/sound/sound-theme.c:419 ../capplets/sound/sound-theme.c:539
 msgid "Default"
 msgstr "Predeterminado"
 
@@ -2750,7 +2745,7 @@ msgid "Sou_nd capture:"
 msgstr "Captura de so_n:"
 
 #: ../capplets/sound/sound-properties.glade.h:15
-#: ../capplets/sound/sound-theme.c:468 ../capplets/sound/sound-theme.c:1025
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1028
 msgid "Sound Preferences"
 msgstr "Preferencias de son"
 
@@ -2816,12 +2811,12 @@ msgstr "Ventá restaurada"
 msgid "Window minimised"
 msgstr "Ventá minimizada"
 
-#: ../capplets/sound/sound-theme-definition.h:57 ../libsounds/sound-view.c:43
+#: ../capplets/sound/sound-theme-definition.h:57
 msgid "Login"
 msgstr "Inicio de sesión"
 
 #: ../capplets/sound/sound-theme-definition.h:58
-#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:44
+#: ../libslab/bookmark-agent.c:1063
 msgid "Logout"
 msgstr "Terminar a sesión"
 
@@ -2858,27 +2853,27 @@ msgstr "Erro"
 msgid "Battery warning"
 msgstr "Aviso de batería"
 
-#: ../capplets/sound/sound-theme.c:444 ../capplets/sound/sound-theme.c:569
+#: ../capplets/sound/sound-theme.c:437 ../capplets/sound/sound-theme.c:563
 msgid "Flash screen"
 msgstr "Flash de pantalla"
 
-#: ../capplets/sound/sound-theme.c:448 ../capplets/sound/sound-theme.c:573
+#: ../capplets/sound/sound-theme.c:441 ../capplets/sound/sound-theme.c:567
 msgid "Flash window"
 msgstr "Flash de ventá"
 
-#: ../capplets/sound/sound-theme.c:470 ../capplets/sound/sound-theme.c:1027
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1030
 msgid "Testing event sound"
 msgstr "Probando son de evento"
 
-#: ../capplets/sound/sound-theme.c:489 ../libsounds/sound-view.c:182
+#: ../capplets/sound/sound-theme.c:482
 msgid "Select Sound File"
 msgstr "Seleccionar un ficheiro de son"
 
-#: ../capplets/sound/sound-theme.c:500
+#: ../capplets/sound/sound-theme.c:493
 msgid "Sound files"
 msgstr "Ficheiros de son"
 
-#: ../capplets/sound/sound-theme.c:553
+#: ../capplets/sound/sound-theme.c:547
 msgid "Custom..."
 msgstr "Personalizar..."
 
@@ -3214,56 +3209,6 @@ msgstr "<b>Abrir %s</b>"
 msgid "Remove from System Items"
 msgstr "Eliminar dos elementos de sistema"
 
-#: ../libsounds/sound-view.c:45
-msgid "Boing"
-msgstr "Boing"
-
-#: ../libsounds/sound-view.c:46
-msgid "Siren"
-msgstr "Sirena"
-
-#: ../libsounds/sound-view.c:47
-msgid "Clink"
-msgstr "Tintinar"
-
-#: ../libsounds/sound-view.c:48
-msgid "Beep"
-msgstr "Ton de aviso"
-
-#: ../libsounds/sound-view.c:49
-msgid "No sound"
-msgstr "Sen son"
-
-#: ../libsounds/sound-view.c:131
-msgid "Sound not set for this event."
-msgstr "Non hai ningún son definido para este evento."
-
-#: ../libsounds/sound-view.c:140
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"O ficheiro de son para este evento non existe.\n"
-"Talvez queira instalar o paquete Gnome-audio para dispor dun conxunto de "
-"sons predeterminados."
-
-#: ../libsounds/sound-view.c:151
-msgid "The sound file for this event does not exist."
-msgstr "O ficheiro de son para este evento non existe."
-
-#: ../libsounds/sound-view.c:209
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "O ficheiro %s non é un ficheiro wav válido"
-
-#: ../libsounds/sound-view.c:270
-msgid "Select sound file..."
-msgstr "Seleccionar ficheiro de son..."
-
-#: ../libsounds/sound-view.c:372
-msgid "System Sounds"
-msgstr "Sons do sistema"
-
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
@@ -3485,6 +3430,52 @@ msgstr ""
 "Parece que non ten a área de notificación no seu panel. Pode engadilo "
 "premendo co botón dereito sobre o seu panel e seleccionando 'Engadir ao "
 "panel', seleccionando 'Área de notificación' e premendo en 'Engadir'."
+
+#~ msgid ""
+#~ "%s is the path where the theme files will be installed. This can not be "
+#~ "selected as the source location"
+#~ msgstr ""
+#~ "%s é a ruta onde se instalarán o ficheiros de temas. Isto non se pode "
+#~ "seleccionar como localización de orixe"
+
+#~ msgid "Boing"
+#~ msgstr "Boing"
+
+#~ msgid "Siren"
+#~ msgstr "Sirena"
+
+#~ msgid "Clink"
+#~ msgstr "Tintinar"
+
+#~ msgid "Beep"
+#~ msgstr "Ton de aviso"
+
+#~ msgid "No sound"
+#~ msgstr "Sen son"
+
+#~ msgid "Sound not set for this event."
+#~ msgstr "Non hai ningún son definido para este evento."
+
+#~ msgid ""
+#~ "The sound file for this event does not exist.\n"
+#~ "You may want to install the gnome-audio package for a set of default "
+#~ "sounds."
+#~ msgstr ""
+#~ "O ficheiro de son para este evento non existe.\n"
+#~ "Talvez queira instalar o paquete Gnome-audio para dispor dun conxunto de "
+#~ "sons predeterminados."
+
+#~ msgid "The sound file for this event does not exist."
+#~ msgstr "O ficheiro de son para este evento non existe."
+
+#~ msgid "The file %s is not a valid wav file"
+#~ msgstr "O ficheiro %s non é un ficheiro wav válido"
+
+#~ msgid "Select sound file..."
+#~ msgstr "Seleccionar ficheiro de son..."
+
+#~ msgid "System Sounds"
+#~ msgstr "Sons do sistema"
 
 #~ msgid "E_nable software sound mixing"
 #~ msgstr "Activar _mestura de sons por software"
