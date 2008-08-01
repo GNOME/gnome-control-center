@@ -495,7 +495,7 @@ main (int argc, char **argv)
 			g_free (page_name);
 		}
 
-		capplet_set_icon (dialog_win, "gnome-dev-mouse-optical");
+		capplet_set_icon (dialog_win, "input-mouse");
 		gtk_widget_show (dialog_win);
 
 		gtk_main ();
