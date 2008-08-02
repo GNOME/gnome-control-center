@@ -62,6 +62,11 @@ typedef enum {
 	VIDEO_CAPTURE
 } device_type;
 
+typedef enum {
+	SYSTEM_ALSA,
+	SYSTEM_OSS
+} SoundSystemType;
+
 typedef struct _DeviceChooser
 {
 	const gchar *profile;
@@ -398,15 +403,38 @@ remove_device (int type, const gchar *pipeline)
 	}
 }
 
-static void
-device_added_alsa (LibHalContext *ctx, const char *udi)
+static gboolean
+filter_device_generic (LibHalContext *ctx, const char *udi)
 {
-	gchar *type_string;
-	gchar *class_string;
-	int type;
-	const gchar *element;
-	gchar *pipeline, *description;
+	gboolean ignore = FALSE;
+	gchar *parent_udi;
+	gchar *subsystem;
+
+	parent_udi = libhal_device_get_property_string (ctx, udi, "info.parent", NULL);
+
+	if (!parent_udi)
+		return FALSE;
+
+	subsystem = libhal_device_get_property_string (ctx, parent_udi, "info.subsystem", NULL);
+
+	/* filter out pc speaker */
+	if (subsystem && (!strcmp (subsystem, "platform") || !strcmp (subsystem, "sound"))) {
+		gchar *device_id = libhal_device_get_property_string (ctx, parent_udi, "platform.id", NULL);
+		ignore = device_id && !strncmp (device_id, "pcspk", 5);
+		libhal_free_string (device_id);
+	}
+
+	libhal_free_string (parent_udi);
+	libhal_free_string (subsystem);
+
+	return ignore;
+}
+
+static gboolean
+filter_device_alsa (LibHalContext *ctx, const char *udi)
+{
 	gboolean ignore;
+	gchar *class_string;
 
 	/* filter out "digitizer", "modem", "none", "unknown" */
 	class_string = libhal_device_get_property_string (ctx, udi, "alsa.pcm_class", NULL);
@@ -414,9 +442,93 @@ device_added_alsa (LibHalContext *ctx, const char *udi)
 		 && strcmp (class_string, "generic") != 0
 		 && strcmp (class_string, "multi") != 0;
 	libhal_free_string (class_string);
-	if (ignore) {
-		return;
+
+	if (!ignore)
+		ignore = filter_device_generic (ctx, udi);
+
+	return ignore;
+}
+
+static gboolean
+filter_device_oss (LibHalContext *ctx, const char *udi)
+{
+	gboolean ignore = FALSE;
+	gchar *parent_udi;
+	gchar *subsystem;
+
+	parent_udi = libhal_device_get_property_string (ctx, udi, "info.parent", NULL);
+
+	if (!parent_udi)
+		return FALSE;
+
+	subsystem = libhal_device_get_property_string (ctx, parent_udi, "info.subsystem", NULL);
+	/* filter out modem devices */
+	if (subsystem && !strcmp (subsystem, "pci")) {
+		dbus_int32_t device_class = libhal_device_get_property_int (ctx, parent_udi, "pci.device_class", NULL);
+		/* this means "Simple communications controllers". Maybe there is a headerfile with definitions?
+		 * visit http://www.acm.uiuc.edu/sigops/roll_your_own/7.c.1.html for further information */
+		ignore = (device_class == 0x7);
 	}
+
+	libhal_free_string (parent_udi);
+	libhal_free_string (subsystem);
+
+	if (!ignore)
+		ignore = filter_device_generic (ctx, udi);
+
+	return ignore;
+}
+
+static gchar *
+get_device_description (LibHalContext *ctx, const char *udi, SoundSystemType snd_sys)
+{
+	gchar *card_id = NULL, *device_id = NULL, *product, *desc;
+	const gchar *indicator = NULL;
+
+	/* the device number should be reported if there is a second (playback)
+	 * device with the same description on the same card */
+	/* dbus_int32_t device_num = 0; */
+
+	switch (snd_sys) {
+	case SYSTEM_ALSA:
+	       	card_id = libhal_device_get_property_string (ctx, udi, "alsa.card_id", NULL);
+		device_id = libhal_device_get_property_string (ctx, udi, "alsa.device_id", NULL);
+		/* device_num = libhal_device_get_property_int (ctx, udi, "alsa.device", NULL); */
+		indicator = "(ALSA)";
+		break;
+	case SYSTEM_OSS:
+		card_id = libhal_device_get_property_string (ctx, udi, "oss.card_id", NULL);
+		device_id = libhal_device_get_property_string (ctx, udi, "oss.device_id", NULL);
+		/* device_num = libhal_device_get_property_int (ctx, udi, "oss.device", NULL); */
+		indicator = "(OSS)";
+	}
+
+	/* card_id and device_id are not mandatory in OSS and ALSA namespace
+	 * according to the specification so it could be possible go get an
+	 * empty string */
+	if (card_id && device_id) {
+		desc = g_strconcat (card_id, " ", device_id, " ", indicator, NULL);
+	} else {
+		product = libhal_device_get_property_string (ctx, udi, "info.product", NULL);
+		desc = g_strconcat (product, " ", indicator, NULL);
+		libhal_free_string (product);
+	}
+	libhal_free_string (card_id);
+	libhal_free_string (device_id);
+
+	return desc;
+}
+
+static void
+device_added_alsa (LibHalContext *ctx, const char *udi)
+{
+	gchar *type_string;
+	int type;
+	const gchar *element;
+	gchar *pipeline, *description;
+
+	if (filter_device_alsa (ctx, udi))
+		return;
 
 	type_string = libhal_device_get_property_string (ctx, udi, "alsa.type", NULL);
 	if (strcmp (type_string, "playback") == 0) {
@@ -435,12 +547,12 @@ device_added_alsa (LibHalContext *ctx, const char *udi)
 	}
 
 	pipeline = g_strconcat (element, " udi=", udi, NULL);
-	description = libhal_device_get_property_string (ctx, udi, "alsa.device_id", NULL);
+	description = get_device_description (ctx, udi, SYSTEM_ALSA);
 
 	add_device (type, pipeline, description, NULL);
 
 	g_free (pipeline);
-	libhal_free_string (description);
+	g_free (description);
 }
 
 static void
@@ -450,6 +562,9 @@ device_added_oss (LibHalContext *ctx, const char *udi)
 	int type;
 	const gchar *element;
 	gchar *pipeline, *description;
+
+	if (filter_device_oss (ctx, udi))
+		return;
 
 	type_string = libhal_device_get_property_string (ctx, udi, "oss.type", NULL);
 	if (strcmp (type_string, "pcm") == 0) {
@@ -468,12 +583,12 @@ device_added_oss (LibHalContext *ctx, const char *udi)
 	}
 
 	pipeline = g_strconcat (element, " udi=", udi, NULL);
-	description = libhal_device_get_property_string (ctx, udi, "oss.device_id", NULL);
+	description = get_device_description (ctx, udi, SYSTEM_OSS);
 
 	add_device (type, pipeline, description, NULL);
 
 	g_free (pipeline);
-	libhal_free_string (description);
+	g_free (description);
 }
 
 static void
