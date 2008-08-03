@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-26 09:14+0000\n"
-"PO-Revision-Date: 2008-07-26 11:53+0200\n"
+"POT-Creation-Date: 2008-07-31 14:34+0000\n"
+"PO-Revision-Date: 2008-08-03 19:31+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgid "Images"
 msgstr "Imágenes"
 
 #: ../capplets/about-me/gnome-about-me.c:773
-#: ../capplets/appearance/theme-installer.c:717
+#: ../capplets/appearance/theme-installer.c:696
 msgid "All Files"
 msgstr "Todos los archivos"
 
@@ -661,9 +661,10 @@ msgstr "Se puede revertir la última sugerencia de tipografía aplicada."
 msgid "The current theme suggests a font."
 msgstr "El tema actual sugiere una tipografía."
 
-#: ../capplets/appearance/appearance-themes.c:1048
+#: ../capplets/appearance/appearance-themes.c:1046
 #: ../capplets/default-applications/gnome-da-capplet.c:630
-#: ../capplets/sound/sound-properties-capplet.c:328
+#: ../capplets/sound/sound-properties-capplet.c:260
+#: ../capplets/sound/sound-theme.c:648 ../capplets/sound/sound-theme.c:720
 msgid "Custom"
 msgstr "Personalizar"
 
@@ -1081,30 +1082,30 @@ msgid_plural "pixels"
 msgstr[0] "píxel"
 msgstr[1] "píxeles"
 
-#: ../capplets/appearance/theme-installer.c:171
-#: ../capplets/appearance/theme-installer.c:221
+#: ../capplets/appearance/theme-installer.c:172
+#: ../capplets/appearance/theme-installer.c:222
 msgid "Cannot install theme"
 msgstr "No se puede instalar el tema"
 
-#: ../capplets/appearance/theme-installer.c:173
+#: ../capplets/appearance/theme-installer.c:174
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "La utilidad %s no está instalada."
 
-#: ../capplets/appearance/theme-installer.c:223
+#: ../capplets/appearance/theme-installer.c:224
 msgid "There was a problem while extracting the theme."
 msgstr "Hubo un problema al extraer el tema."
 
-#: ../capplets/appearance/theme-installer.c:246
+#: ../capplets/appearance/theme-installer.c:247
 msgid "There was an error installing the selected file"
 msgstr "Hubo un error al instalar el archivo seleccionado"
 
-#: ../capplets/appearance/theme-installer.c:247
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "«%s» no parece ser un tema válido."
 
-#: ../capplets/appearance/theme-installer.c:248
+#: ../capplets/appearance/theme-installer.c:249
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
@@ -1113,42 +1114,42 @@ msgstr ""
 "«%s» no parece ser un tema válido. Puede ser un motor de temas que debe "
 "compilar."
 
-#: ../capplets/appearance/theme-installer.c:287
+#: ../capplets/appearance/theme-installer.c:288
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "El tema de GNOME %s se instaló correctamente"
 
-#: ../capplets/appearance/theme-installer.c:354
+#: ../capplets/appearance/theme-installer.c:355
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "La instalación del tema «%s» falló."
 
-#: ../capplets/appearance/theme-installer.c:392
+#: ../capplets/appearance/theme-installer.c:393
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Se ha instalado el tema «%s»."
 
-#: ../capplets/appearance/theme-installer.c:398
+#: ../capplets/appearance/theme-installer.c:399
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "¿Desea aplicarlo ahora, o mantener su tema actual?"
 
-#: ../capplets/appearance/theme-installer.c:400
+#: ../capplets/appearance/theme-installer.c:401
 msgid "Keep Current Theme"
 msgstr "Mantener el tema actual"
 
-#: ../capplets/appearance/theme-installer.c:402
+#: ../capplets/appearance/theme-installer.c:403
 msgid "Apply New Theme"
 msgstr "Aplicar el nuevo tema"
 
-#: ../capplets/appearance/theme-installer.c:505
+#: ../capplets/appearance/theme-installer.c:506
 msgid "Failed to create temporary directory"
 msgstr "Falló al crear la carpeta temporal"
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:569
 msgid "New themes have been successfully installed."
 msgstr "Los nuevos temas se han instalado con éxito."
 
-#: ../capplets/appearance/theme-installer.c:595
+#: ../capplets/appearance/theme-installer.c:594
 msgid "No theme file location specified to install"
 msgstr "No se ha especificado ninguna ubicación del archivo del tema para instalar"
 
@@ -1161,20 +1162,11 @@ msgstr ""
 "Permisos insuficientes para instalar el tema en:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:637
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s es la ruta donde se van a instalar los archivos del tema. Esto no puede "
-"seleccionarse como ubicación de origen"
-
-#: ../capplets/appearance/theme-installer.c:706
+#: ../capplets/appearance/theme-installer.c:685
 msgid "Select Theme"
 msgstr "Seleccione un tema"
 
-#: ../capplets/appearance/theme-installer.c:710
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Theme Packages"
 msgstr "Paquete de tema"
 
@@ -1192,15 +1184,15 @@ msgstr "El tema ya existe. ¿Quiere reemplazarlo?"
 msgid "_Overwrite"
 msgstr "_Sobreescribir"
 
-#: ../capplets/appearance/theme-util.c:135
+#: ../capplets/appearance/theme-util.c:74
 msgid "Would you like to delete this theme?"
 msgstr "¿Quiere eliminar este tema?"
 
-#: ../capplets/appearance/theme-util.c:185
+#: ../capplets/appearance/theme-util.c:124
 msgid "Theme cannot be deleted"
 msgstr "No se puede borrar el tema"
 
-#: ../capplets/appearance/theme-util.c:312
+#: ../capplets/appearance/theme-util.c:251
 msgid "Could not install theme engine"
 msgstr "No se pudo instalar el motor del tema"
 
@@ -1848,6 +1840,10 @@ msgstr "_Detectar dispositivos"
 msgid "_Resolution"
 msgstr "_Resolución"
 
+#: ../capplets/display/display-capplet.glade.h:13
+msgid "_Show Displays in Panel"
+msgstr "_Mostrar dispositivos en el panel"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Cambie la resolución de la pantalla"
@@ -1856,42 +1852,42 @@ msgstr "Cambie la resolución de la pantalla"
 msgid "Screen Resolution"
 msgstr "Resolución de la pantalla"
 
-#: ../capplets/display/xrandr-capplet.c:400
-#: ../capplets/display/xrandr-capplet.c:438
+#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:441
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/xrandr-capplet.c:401
+#: ../capplets/display/xrandr-capplet.c:404
 msgid "Left"
 msgstr "Izquierdo"
 
-#: ../capplets/display/xrandr-capplet.c:402
+#: ../capplets/display/xrandr-capplet.c:405
 msgid "Right"
 msgstr "Derecho"
 
-#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:406
 msgid "Upside Down"
 msgstr "Hacia abajo"
 
-#: ../capplets/display/xrandr-capplet.c:476
-#: ../capplets/display/xrandr-capplet.c:484
-#: ../capplets/display/xrandr-capplet.c:485
+#: ../capplets/display/xrandr-capplet.c:479
+#: ../capplets/display/xrandr-capplet.c:487
+#: ../capplets/display/xrandr-capplet.c:488
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:537
-#: ../capplets/display/xrandr-capplet.c:556
-#: ../capplets/display/xrandr-capplet.c:566
+#: ../capplets/display/xrandr-capplet.c:540
+#: ../capplets/display/xrandr-capplet.c:559
+#: ../capplets/display/xrandr-capplet.c:569
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:548
+#: ../capplets/display/xrandr-capplet.c:551
 msgid "Off"
 msgstr "Apagado"
 
-#: ../capplets/display/xrandr-capplet.c:1302
+#: ../capplets/display/xrandr-capplet.c:1305
 msgid "Cloned Output"
 msgstr "Salida clonada"
 
@@ -1900,7 +1896,9 @@ msgstr "Salida clonada"
 msgid "Sound"
 msgstr "Sonido"
 
+#. Desktop
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+#: ../capplets/sound/sound-theme-definition.h:56
 #: ../libslab/bookmark-agent.c:1157
 msgid "Desktop"
 msgstr "Escritorio"
@@ -1934,6 +1932,8 @@ msgstr "El tipo de combinación."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
+#: ../capplets/sound/sound-theme.c:415 ../capplets/sound/sound-theme.c:433
+#: ../capplets/sound/sound-theme.c:543 ../capplets/sound/sound-theme.c:559
 #: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "Desactivado"
@@ -2018,15 +2018,15 @@ msgstr "Asigne una combinación de teclas a comandos"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:248
 #: ../capplets/keyboard/gnome-keyboard-properties.c:253
-#: ../capplets/sound/sound-properties-capplet.c:1155
-#: ../capplets/sound/sound-properties-capplet.c:1157
+#: ../capplets/sound/sound-properties-capplet.c:1073
+#: ../capplets/sound/sound-properties-capplet.c:1075
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Tan sólo aplicar la configuración y salir (sólo por compatibilidad; "
 "manipulado ahora por un demonio)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:256
-#: ../capplets/sound/sound-properties-capplet.c:1159
+#: ../capplets/sound/sound-properties-capplet.c:1077
 msgid "Retrieve and store legacy settings"
 msgstr "Obtener y almacenar configuración heredada"
 
@@ -2247,7 +2247,9 @@ msgstr "Descanso de escritura"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
-msgstr "Permitir conmutar las características de _accesibilidad desde combinaciones de teclas"
+msgstr ""
+"Permitir conmutar las características de _accesibilidad desde combinaciones "
+"de teclas"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
@@ -2328,6 +2330,7 @@ msgstr "Distribución"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
+#: ../capplets/sound/sound-theme.c:419 ../capplets/sound/sound-theme.c:539
 msgid "Default"
 msgstr "Predeterminado"
 
@@ -2631,48 +2634,48 @@ msgstr "Control de volumen desconocido %d"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "Ha fallado la construcción de la tubería de prueba para «%s»"
 
-#: ../capplets/sound/sound-properties-capplet.c:326
-#: ../capplets/sound/sound-properties-capplet.c:447
+#: ../capplets/sound/sound-properties-capplet.c:258
+#: ../capplets/sound/sound-properties-capplet.c:379
 msgid "Not connected"
 msgstr "No conectado"
 
-#: ../capplets/sound/sound-properties-capplet.c:785
+#: ../capplets/sound/sound-properties-capplet.c:717
 msgid "Autodetect"
 msgstr "Autodetectar"
 
-#: ../capplets/sound/sound-properties-capplet.c:790
-#: ../capplets/sound/sound-properties-capplet.c:791
+#: ../capplets/sound/sound-properties-capplet.c:722
+#: ../capplets/sound/sound-properties-capplet.c:723
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:724
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:793
-#: ../capplets/sound/sound-properties-capplet.c:794
+#: ../capplets/sound/sound-properties-capplet.c:725
+#: ../capplets/sound/sound-properties-capplet.c:726
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:797
-#: ../capplets/sound/sound-properties-capplet.c:800
+#: ../capplets/sound/sound-properties-capplet.c:729
+#: ../capplets/sound/sound-properties-capplet.c:732
 msgid "OSS - Open Sound System"
 msgstr "OSS - Open Sound System"
 
-#: ../capplets/sound/sound-properties-capplet.c:802
-#: ../capplets/sound/sound-properties-capplet.c:803
+#: ../capplets/sound/sound-properties-capplet.c:734
+#: ../capplets/sound/sound-properties-capplet.c:735
 msgid "PulseAudio Sound Server"
 msgstr "PulseAudio Sound Server"
 
-#: ../capplets/sound/sound-properties-capplet.c:804
+#: ../capplets/sound/sound-properties-capplet.c:736
 msgid "Test Sound"
 msgstr "Sonido de prueba"
 
-#: ../capplets/sound/sound-properties-capplet.c:805
+#: ../capplets/sound/sound-properties-capplet.c:737
 msgid "Silence"
 msgstr "Silencio"
 
-#: ../capplets/sound/sound-properties-capplet.c:1172
+#: ../capplets/sound/sound-properties-capplet.c:1090
 msgid "- GNOME Sound Preferences"
 msgstr "- Preferencias de sonido de GNOME"
 
@@ -2693,28 +2696,28 @@ msgid "<b>Sound Events</b>"
 msgstr "<b>Eventos de sonido</b>"
 
 #: ../capplets/sound/sound-properties.glade.h:5
+msgid "<b>Sound theme</b>"
+msgstr "<b>Tema de sonido</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "<b>System sounds</b>"
+msgstr "<b>Sonidos del sistema</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Probar…</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "Click OK to finish."
 msgstr "Pulse «Aceptar» para terminar."
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "Dispositivos"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing"
-msgstr "Activar _mezcla de sonido por software"
-
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "Flash _entire screen"
-msgstr "Destellar la pantalla _completa"
-
 #: ../capplets/sound/sound-properties.glade.h:10
-msgid "Flash _window titlebar"
-msgstr "Destello en el título de la _ventana"
+msgid "Play sounds when buttons are pressed"
+msgstr "Reproducir sonidos al pulsar botones"
 
 #: ../capplets/sound/sound-properties.glade.h:11
 msgid "S_ound playback:"
@@ -2737,6 +2740,7 @@ msgid "Sou_nd capture:"
 msgstr "Captura de so_nido:"
 
 #: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1028
 msgid "Sound Preferences"
 msgstr "Preferencias de sonido"
 
@@ -2745,36 +2749,128 @@ msgid "Sounds"
 msgstr "Sonidos"
 
 #: ../capplets/sound/sound-properties.glade.h:17
-msgid "System Beep"
-msgstr "Campana del sistema"
-
-#: ../capplets/sound/sound-properties.glade.h:18
 msgid "Test"
 msgstr "Probar"
 
-#: ../capplets/sound/sound-properties.glade.h:19
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "Testing Pipeline"
 msgstr "Probar pipeline"
 
-#: ../capplets/sound/sound-properties.glade.h:20
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "_Device:"
 msgstr "_Dispositivo:"
 
-#: ../capplets/sound/sound-properties.glade.h:21
-msgid "_Enable system beep"
-msgstr "_Activar campana del sistema"
+#: ../capplets/sound/sound-properties.glade.h:20
+msgid "_Play system beep sound"
+msgstr "_Reproducir pitido del sistema"
 
-#: ../capplets/sound/sound-properties.glade.h:22
+#: ../capplets/sound/sound-properties.glade.h:21
 msgid "_Play system sounds"
 msgstr "_Reproducir sonidos del sistema"
 
-#: ../capplets/sound/sound-properties.glade.h:23
+#: ../capplets/sound/sound-properties.glade.h:22
 msgid "_Sound playback:"
 msgstr "Reproducción de _sonido:"
 
-#: ../capplets/sound/sound-properties.glade.h:24
-msgid "_Visual system beep"
-msgstr "Campana _visual del sistema"
+#. Bell
+#: ../capplets/sound/sound-theme-definition.h:46
+msgid "Audible bell"
+msgstr "Campana audible"
+
+#: ../capplets/sound/sound-theme-definition.h:47
+msgid "Visual bell"
+msgstr "Campana visual"
+
+#. Windows and buttons
+#: ../capplets/sound/sound-theme-definition.h:49
+msgid "Windows and Buttons"
+msgstr "Ventanas y botones"
+
+#: ../capplets/sound/sound-theme-definition.h:50
+msgid "Button clicked"
+msgstr "Botón pulsado"
+
+#: ../capplets/sound/sound-theme-definition.h:51
+msgid "Button toggled"
+msgstr "Botón conmutado"
+
+#: ../capplets/sound/sound-theme-definition.h:52
+msgid "Window maximized"
+msgstr "Ventana maximizada"
+
+#: ../capplets/sound/sound-theme-definition.h:53
+msgid "Window unmaximized"
+msgstr "Ventana desmaximizada"
+
+#: ../capplets/sound/sound-theme-definition.h:54
+msgid "Window minimised"
+msgstr "Ventana minimizada"
+
+#: ../capplets/sound/sound-theme-definition.h:57
+msgid "Login"
+msgstr "Entrada"
+
+#: ../capplets/sound/sound-theme-definition.h:58
+#: ../libslab/bookmark-agent.c:1063
+msgid "Logout"
+msgstr "Salida"
+
+#: ../capplets/sound/sound-theme-definition.h:59
+msgid "New e-mail"
+msgstr "Correo-e nuevo"
+
+#: ../capplets/sound/sound-theme-definition.h:60
+msgid "Empty Trash"
+msgstr "Vaciado de la papelera"
+
+#: ../capplets/sound/sound-theme-definition.h:61
+msgid "Long action completed (download, CD burning, etc.)"
+msgstr "Acción larga completada (descaga, grabación de CD, etc.)"
+
+#. Alerts?
+#: ../capplets/sound/sound-theme-definition.h:63
+msgid "Alerts"
+msgstr "Alertas"
+
+#: ../capplets/sound/sound-theme-definition.h:64
+msgid "Information or Question"
+msgstr "Información o pregunta"
+
+#: ../capplets/sound/sound-theme-definition.h:65
+msgid "Warning"
+msgstr "Advertencia"
+
+#: ../capplets/sound/sound-theme-definition.h:66
+msgid "Error"
+msgstr "Error"
+
+#: ../capplets/sound/sound-theme-definition.h:67
+msgid "Battery warning"
+msgstr "Advertencia de batería baja"
+
+#: ../capplets/sound/sound-theme.c:437 ../capplets/sound/sound-theme.c:563
+msgid "Flash screen"
+msgstr "Destello de pantalla"
+
+#: ../capplets/sound/sound-theme.c:441 ../capplets/sound/sound-theme.c:567
+msgid "Flash window"
+msgstr "Destello de ventana"
+
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1030
+msgid "Testing event sound"
+msgstr "Comprobando el sonido de evento"
+
+#: ../capplets/sound/sound-theme.c:482
+msgid "Select Sound File"
+msgstr "Seleccione un archivo de sonido"
+
+#: ../capplets/sound/sound-theme.c:493
+msgid "Sound files"
+msgstr "Archivos de sonido"
+
+#: ../capplets/sound/sound-theme.c:547
+msgid "Custom..."
+msgstr "Personalizado…"
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
@@ -2871,11 +2967,11 @@ msgstr "Actualizar"
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:756
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:728
 msgid "Remove from Favorites"
 msgstr "Quitar de favoritos"
 
-#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:758
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:730
 msgid "Add to Favorites"
 msgstr "Añadir a favoritos"
 
@@ -2905,10 +3001,6 @@ msgstr "Otras"
 #: ../libslab/bookmark-agent.c:1061
 msgid "Lock Screen"
 msgstr "Bloquear la pantalla"
-
-#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:44
-msgid "Logout"
-msgstr "Salida"
 
 #: ../libslab/bookmark-agent.c:1065
 msgid "Shutdown"
@@ -2964,16 +3056,16 @@ msgid "Move to Trash"
 msgstr "Mover a la papelera"
 
 #: ../libslab/directory-tile.c:239 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:300 ../libslab/document-tile.c:869
+#: ../libslab/document-tile.c:300 ../libslab/document-tile.c:841
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../libslab/directory-tile.c:569 ../libslab/document-tile.c:1041
+#: ../libslab/directory-tile.c:569 ../libslab/document-tile.c:1013
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "¿Está seguro de que quiere borrar permanentemente «%s»?"
 
-#: ../libslab/directory-tile.c:574 ../libslab/document-tile.c:1045
+#: ../libslab/directory-tile.c:574 ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "Si borra un elemento se pierde para siempre."
 
@@ -2990,31 +3082,31 @@ msgstr "Abrir con la aplicación predeterminada"
 msgid "Open in File Manager"
 msgstr "Abrir en el gestor de archivos"
 
-#: ../libslab/document-tile.c:652
+#: ../libslab/document-tile.c:624
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:659
+#: ../libslab/document-tile.c:631
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:667
+#: ../libslab/document-tile.c:639
 msgid "Today %l:%M %p"
 msgstr "Hoy %H:%M"
 
-#: ../libslab/document-tile.c:677
+#: ../libslab/document-tile.c:649
 msgid "Yesterday %l:%M %p"
 msgstr "Ayer %H:%M"
 
-#: ../libslab/document-tile.c:689
+#: ../libslab/document-tile.c:661
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../libslab/document-tile.c:697
+#: ../libslab/document-tile.c:669
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %H:%M"
 
-#: ../libslab/document-tile.c:699
+#: ../libslab/document-tile.c:671
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
 
@@ -3111,64 +3203,6 @@ msgstr "<b>Abrir %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Quitar de los elementos del sistema"
-
-#: ../libsounds/sound-view.c:43
-msgid "Login"
-msgstr "Entrada"
-
-#: ../libsounds/sound-view.c:45
-msgid "Boing"
-msgstr "Boing"
-
-#: ../libsounds/sound-view.c:46
-msgid "Siren"
-msgstr "Sirena"
-
-#: ../libsounds/sound-view.c:47
-msgid "Clink"
-msgstr "Clink"
-
-#: ../libsounds/sound-view.c:48
-msgid "Beep"
-msgstr "Bip"
-
-#: ../libsounds/sound-view.c:49
-msgid "No sound"
-msgstr "Sin sonido"
-
-#: ../libsounds/sound-view.c:131
-msgid "Sound not set for this event."
-msgstr "No hay un sonido para este evento."
-
-#: ../libsounds/sound-view.c:140
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"No existe el archivo de sonido para este evento.\n"
-"Quizá quiera instalar el paquete gnome-audio para tener\n"
-"un conjunto de sonidos predeterminados."
-
-#: ../libsounds/sound-view.c:151
-msgid "The sound file for this event does not exist."
-msgstr "No existe el archivo de sonido correspondiente a este evento."
-
-#: ../libsounds/sound-view.c:182
-msgid "Select Sound File"
-msgstr "Seleccione un archivo de sonido"
-
-#: ../libsounds/sound-view.c:209
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "El archivo %s no es un archivo wav válido"
-
-#: ../libsounds/sound-view.c:270
-msgid "Select sound file..."
-msgstr "Seleccione un archivo de sonido…"
-
-#: ../libsounds/sound-view.c:372
-msgid "System Sounds"
-msgstr "Sonidos del sistema"
 
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
