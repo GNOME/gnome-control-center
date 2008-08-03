@@ -43,7 +43,6 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
 {
   GConfClient *client;
   gchar *old_key;
-  gchar *new_key;
   gint old_key_int;
   GnomeWindowManager *window_manager;
   GnomeWMSettings wm_settings;
@@ -102,12 +101,9 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
 
   /* set the notification theme */
   old_key = gconf_client_get_string (client, NOTIFICATION_THEME_KEY, NULL);
-  new_key = meta_theme_info->notification_theme_name;
-  if (new_key == NULL)
-    new_key = "standard";
-  if (compare (old_key, new_key))
+  if (compare (old_key, meta_theme_info->notification_theme_name))
     {
-      gconf_client_set_string (client, NOTIFICATION_THEME_KEY, new_key, NULL);
+      gconf_client_set_string (client, NOTIFICATION_THEME_KEY, meta_theme_info->notification_theme_name, NULL);
     }
   g_free (old_key);
 
