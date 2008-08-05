@@ -15,6 +15,7 @@ gnome_sound_properties_SOURCES =				\
 	mixer-support.c						\
 	sound-theme.c						\
 	sound-theme.h						\
+	sound-theme-definition.h				\
 	sound-theme-file-utils.c				\
 	sound-theme-file-utils.h
 
