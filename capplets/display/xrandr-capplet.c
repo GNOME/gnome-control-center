@@ -1350,6 +1350,7 @@ paint_output (App *app, cairo_t *cr, int i)
     PangoLayout *layout = get_display_name (app, output);
     PangoRectangle extent;
     GdkRectangle viewport;
+    double angle;
 
     cairo_save (cr);
     
@@ -1376,6 +1377,46 @@ paint_output (App *app, cairo_t *cr, int i)
     g_print ("%f %f %f %f\n", x, y, w * scale + 0.5, h * scale + 0.5);
 #endif
 
+    cairo_save (cr);
+
+    cairo_translate (cr,
+		     x + (w * scale + 0.5) / 2,
+		     y + (h * scale + 0.5) / 2);
+    
+    if (output->rotation & GNOME_RR_ROTATION_0)
+    {
+	angle = 0;
+    }
+    else if (output->rotation & GNOME_RR_ROTATION_90)
+    {
+	angle = G_PI / 2;
+    }
+    else if (output->rotation & GNOME_RR_ROTATION_180)
+    {
+	angle = G_PI;
+    }
+    else if (output->rotation & GNOME_RR_ROTATION_270)
+    {
+	angle = 1.5 * G_PI;
+    }
+    else
+    {
+	angle = 0;
+    }
+
+    cairo_rotate (cr, angle);
+    
+    if (output->rotation & GNOME_RR_REFLECT_X)
+	cairo_scale (cr, -1, 1);
+    
+    if (output->rotation & GNOME_RR_REFLECT_Y)
+	cairo_scale (cr, 1, -1);
+    
+    cairo_translate (cr,	
+		     - x - (w * scale + 0.5) / 2,
+		     - y - (h * scale + 0.5) / 2);
+    
+
     cairo_rectangle (cr, x, y, w * scale + 0.5, h * scale + 0.5);
     cairo_clip_preserve (cr);
     
@@ -1391,12 +1432,12 @@ paint_output (App *app, cairo_t *cr, int i)
     if (output == app->current_output)
     {
 	cairo_rectangle (cr, x + 2, y + 2, w * scale + 0.5 - 4, h * scale + 0.5 - 4);
-    
+	
 	cairo_set_line_width (cr, 4);
 	cairo_set_source_rgba (cr, 0.33, 0.43, 0.57, 1.0);
 	cairo_stroke (cr);
     }
-
+    
     cairo_rectangle (cr, x + 0.5, y + 0.5, w * scale + 0.5 - 1, h * scale + 0.5 - 1);
     
     cairo_set_line_width (cr, 1);
@@ -1420,9 +1461,10 @@ paint_output (App *app, cairo_t *cr, int i)
 	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
     
     pango_cairo_show_layout (cr, layout);
-    g_object_unref (layout);
 
     cairo_restore (cr);
+    
+    g_object_unref (layout);
 }
 
 static void
