@@ -1,3 +1,51 @@
+gnome-control-center 2.23.6 (2008-08-04)
+
+Appearance:
+- Make theme installation from GIO-supported sources work (including
+  drag and drop) (Jens Granseuer) (#545335)
+
+Default Applications:
+- Fix custom commands for mail default application (James Westby)
+
+Display:
+- Add a check box to turn on and off display icon (Soren Sandmann)
+- Draw rotated outputs rotated (Soren Sandmann)
+
+General:
+- Move directory deletion code from appearance capplet into common
+  code (Bastien Nocera)
+- Make the file transfer dialog work with GFiles instead of gchar
+  paths internally (Jens Granseuer)
+- Don't set notification theme to "standard" if the metatheme loaded
+  doesn't define one (Jens Granseuer) (#546036)
+
+Keybindings:
+- When trying to assign a shortcut that is already in use, ask the user
+  whether to reassign it instead of refusing to do anything (Denis
+  Washington) (#133318)
+
+Shell:
+- Don't do thumbnailing, let Nautilus do it (Federico Mena Quintero)
+- Fix a build warning (Cosimo Cecchi) (#544538)
+
+Sound:
+- Remove separate bell settings tab (Bastien Nocera)
+- Remove libsounds dependency (Bastien Nocera)
+- Add freedesktop sound theme support through libcanberra (Bastien Nocera)
+- Fix property passing (Lennart Poettering)
+- Plug some leaks (Jens Granseuer)
+- Add some filtering for OSS devices and create more useful device
+  descriptions (Alexander Schwenn) (#545275)
+- Added missing file to pass distcheck (Rodrigo Moya)
+
+Translations:
+- ar (Djihed Afifi)
+- es (Jorge Gonzalez)
+- gl (Ignacio Casal Quinteiro)
+- nb (Kjartan Maraas)
+- pt_BR (Leonardo Ferreira Fontenelle)
+- sv (Daniel Nylander)
+-------------------------------------------------------------------------------
 gnome-control-center 2.23.5 (2008-07-24)
 
 General:
