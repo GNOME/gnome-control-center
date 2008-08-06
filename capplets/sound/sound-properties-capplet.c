@@ -118,12 +118,9 @@ create_dialog (void)
 	GladeXML *dialog;
 	GtkWidget *image;
 
-	dialog = glade_xml_new ("sound-properties.glade", "sound_prefs_dialog", NULL);
-	if (dialog == NULL) {
-		dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "sound_prefs_dialog", NULL);
-		if (dialog == NULL)
-			return NULL;
-	}
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "sound_prefs_dialog", NULL);
+	if (dialog == NULL)
+		return NULL;
 
 	image = gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (WID ("sounds_playback_test")), image);
