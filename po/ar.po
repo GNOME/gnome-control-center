@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-29 02:14+0100\n"
+"POT-Creation-Date: 2008-08-06 09:17+0100\n"
 "PO-Revision-Date: 2008-07-27 12:29+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -66,7 +66,7 @@ msgid "Images"
 msgstr "صور"
 
 #: ../capplets/about-me/gnome-about-me.c:773
-#: ../capplets/appearance/theme-installer.c:718
+#: ../capplets/appearance/theme-installer.c:696
 msgid "All Files"
 msgstr "كل الملفّات"
 
@@ -666,10 +666,10 @@ msgstr "يمكن التراجع عن آخر خط مقترح تم تفعيله."
 msgid "The current theme suggests a font."
 msgstr "السمة الحالية تقترح خطًا."
 
-#: ../capplets/appearance/appearance-themes.c:1048
+#: ../capplets/appearance/appearance-themes.c:1046
 #: ../capplets/default-applications/gnome-da-capplet.c:630
-#: ../capplets/sound/sound-properties-capplet.c:260
-#: ../capplets/sound/sound-theme.c:647 ../capplets/sound/sound-theme.c:717
+#: ../capplets/sound/sound-properties-capplet.c:265
+#: ../capplets/sound/sound-theme.c:648 ../capplets/sound/sound-theme.c:720
 msgid "Custom"
 msgstr "مخصص"
 
@@ -1154,11 +1154,11 @@ msgstr "فشل إنشاء دليل مؤقت"
 msgid "New themes have been successfully installed."
 msgstr "أضيفت السِمات الجديدة بنجاح."
 
-#: ../capplets/appearance/theme-installer.c:596
+#: ../capplets/appearance/theme-installer.c:594
 msgid "No theme file location specified to install"
 msgstr "لم يحدّد موقع ملف السِمة لتثبيتها"
 
-#: ../capplets/appearance/theme-installer.c:616
+#: ../capplets/appearance/theme-installer.c:615
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1167,19 +1167,11 @@ msgstr ""
 "تّصريحات غير كافية لتثبيت السِمة في:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:638
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"‏%s هو المسار الذي ستثبّت فيه ملفات السِمة، لذا لا يمكن اختياره كموقع المصدر"
-
-#: ../capplets/appearance/theme-installer.c:707
+#: ../capplets/appearance/theme-installer.c:685
 msgid "Select Theme"
 msgstr "اختر سمة"
 
-#: ../capplets/appearance/theme-installer.c:711
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Theme Packages"
 msgstr "حزم السمة"
 
@@ -1795,7 +1787,7 @@ msgstr "ثندربرد"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
 msgid "Totem Movie Player"
-msgstr "مشغل الأفلام طوطم"
+msgstr "مشغل الأفلام توتم"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
 msgid "aterm"
@@ -1841,6 +1833,10 @@ msgstr ""
 msgid "_Resolution"
 msgstr "الا_ستبانة:"
 
+#: ../capplets/display/display-capplet.glade.h:13
+msgid "_Show Displays in Panel"
+msgstr ""
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "غيِّر استبانة الشاشة"
@@ -1849,42 +1845,42 @@ msgstr "غيِّر استبانة الشاشة"
 msgid "Screen Resolution"
 msgstr "استبانة الشاشة"
 
-#: ../capplets/display/xrandr-capplet.c:400
-#: ../capplets/display/xrandr-capplet.c:438
+#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:441
 msgid "Normal"
 msgstr "عادي"
 
-#: ../capplets/display/xrandr-capplet.c:401
+#: ../capplets/display/xrandr-capplet.c:404
 msgid "Left"
 msgstr "يسار"
 
-#: ../capplets/display/xrandr-capplet.c:402
+#: ../capplets/display/xrandr-capplet.c:405
 msgid "Right"
 msgstr "يمين"
 
-#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:406
 msgid "Upside Down"
 msgstr ""
 
-#: ../capplets/display/xrandr-capplet.c:476
-#: ../capplets/display/xrandr-capplet.c:484
-#: ../capplets/display/xrandr-capplet.c:485
+#: ../capplets/display/xrandr-capplet.c:479
+#: ../capplets/display/xrandr-capplet.c:487
+#: ../capplets/display/xrandr-capplet.c:488
 #, c-format
 msgid "%d Hz"
 msgstr "%Id هرتز"
 
-#: ../capplets/display/xrandr-capplet.c:537
-#: ../capplets/display/xrandr-capplet.c:556
-#: ../capplets/display/xrandr-capplet.c:566
+#: ../capplets/display/xrandr-capplet.c:540
+#: ../capplets/display/xrandr-capplet.c:559
+#: ../capplets/display/xrandr-capplet.c:569
 #, c-format
 msgid "%d x %d"
 msgstr ""
 
-#: ../capplets/display/xrandr-capplet.c:548
+#: ../capplets/display/xrandr-capplet.c:551
 msgid "Off"
 msgstr ""
 
-#: ../capplets/display/xrandr-capplet.c:1302
+#: ../capplets/display/xrandr-capplet.c:1305
 msgid "Cloned Output"
 msgstr ""
 
@@ -1929,8 +1925,8 @@ msgstr "نوع مفتاح الاختصار."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
-#: ../capplets/sound/sound-theme.c:414 ../capplets/sound/sound-theme.c:432
-#: ../capplets/sound/sound-theme.c:542 ../capplets/sound/sound-theme.c:558
+#: ../capplets/sound/sound-theme.c:415 ../capplets/sound/sound-theme.c:433
+#: ../capplets/sound/sound-theme.c:543 ../capplets/sound/sound-theme.c:559
 #: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "معطّل"
@@ -2012,15 +2008,15 @@ msgstr "اربط مفاتيح اختصار بأوامر"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:248
 #: ../capplets/keyboard/gnome-keyboard-properties.c:253
-#: ../capplets/sound/sound-properties-capplet.c:1073
-#: ../capplets/sound/sound-properties-capplet.c:1075
+#: ../capplets/sound/sound-properties-capplet.c:1188
+#: ../capplets/sound/sound-properties-capplet.c:1190
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "فقط طبّق الإعدادات واخرج (للتوافق فقط؛ يتم التعامل معها عن طريق جنّي حاليا)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:256
-#: ../capplets/sound/sound-properties-capplet.c:1077
+#: ../capplets/sound/sound-properties-capplet.c:1192
 msgid "Retrieve and store legacy settings"
 msgstr "استرجع و خزن الإعدادات التقليديّة"
 
@@ -2321,7 +2317,7 @@ msgstr "التصميم"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
-#: ../capplets/sound/sound-theme.c:418 ../capplets/sound/sound-theme.c:538
+#: ../capplets/sound/sound-theme.c:419 ../capplets/sound/sound-theme.c:539
 msgid "Default"
 msgstr "المبدئي"
 
@@ -2621,48 +2617,48 @@ msgstr "تحكم شدّة مجهول %Id"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "فشل تركيب خط أنابيب اختبار '%s'"
 
-#: ../capplets/sound/sound-properties-capplet.c:258
-#: ../capplets/sound/sound-properties-capplet.c:379
+#: ../capplets/sound/sound-properties-capplet.c:263
+#: ../capplets/sound/sound-properties-capplet.c:384
 msgid "Not connected"
 msgstr "غير متّصل"
 
-#: ../capplets/sound/sound-properties-capplet.c:717
+#: ../capplets/sound/sound-properties-capplet.c:832
 msgid "Autodetect"
 msgstr "تعرف آليا"
 
-#: ../capplets/sound/sound-properties-capplet.c:722
-#: ../capplets/sound/sound-properties-capplet.c:723
+#: ../capplets/sound/sound-properties-capplet.c:837
+#: ../capplets/sound/sound-properties-capplet.c:838
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "‏ALSA - معماريّة لينكس المتقدّمة للصوت"
 
-#: ../capplets/sound/sound-properties-capplet.c:724
+#: ../capplets/sound/sound-properties-capplet.c:839
 msgid "Artsd - ART Sound Daemon"
 msgstr "‏Artsd - جني صوت ART"
 
-#: ../capplets/sound/sound-properties-capplet.c:725
-#: ../capplets/sound/sound-properties-capplet.c:726
+#: ../capplets/sound/sound-properties-capplet.c:840
+#: ../capplets/sound/sound-properties-capplet.c:841
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "‏ESD - جني صوت إنلايتنمنت"
 
-#: ../capplets/sound/sound-properties-capplet.c:729
-#: ../capplets/sound/sound-properties-capplet.c:732
+#: ../capplets/sound/sound-properties-capplet.c:844
+#: ../capplets/sound/sound-properties-capplet.c:847
 msgid "OSS - Open Sound System"
 msgstr "‏OSS - نظام الصوت المفتوح"
 
-#: ../capplets/sound/sound-properties-capplet.c:734
-#: ../capplets/sound/sound-properties-capplet.c:735
+#: ../capplets/sound/sound-properties-capplet.c:849
+#: ../capplets/sound/sound-properties-capplet.c:850
 msgid "PulseAudio Sound Server"
 msgstr "خادوم صوت PulseAudio"
 
-#: ../capplets/sound/sound-properties-capplet.c:736
+#: ../capplets/sound/sound-properties-capplet.c:851
 msgid "Test Sound"
 msgstr "اختبر الصوت"
 
-#: ../capplets/sound/sound-properties-capplet.c:737
+#: ../capplets/sound/sound-properties-capplet.c:852
 msgid "Silence"
 msgstr "صمت"
 
-#: ../capplets/sound/sound-properties-capplet.c:1090
+#: ../capplets/sound/sound-properties-capplet.c:1205
 msgid "- GNOME Sound Preferences"
 msgstr "- تفضيلات صوت جنوم"
 
@@ -2729,7 +2725,7 @@ msgid "Sou_nd capture:"
 msgstr "الت_قاط الصوت:"
 
 #: ../capplets/sound/sound-properties.glade.h:15
-#: ../capplets/sound/sound-theme.c:460 ../capplets/sound/sound-theme.c:1025
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1028
 msgid "Sound Preferences"
 msgstr "تفضيلات الصوت"
 
@@ -2798,12 +2794,12 @@ msgstr ""
 msgid "Window minimised"
 msgstr "النوافذ"
 
-#: ../capplets/sound/sound-theme-definition.h:57 ../libsounds/sound-view.c:43
+#: ../capplets/sound/sound-theme-definition.h:57
 msgid "Login"
 msgstr "ادخل"
 
 #: ../capplets/sound/sound-theme-definition.h:58
-#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:44
+#: ../libslab/bookmark-agent.c:1063
 msgid "Logout"
 msgstr "اخرج"
 
@@ -2842,31 +2838,31 @@ msgstr ""
 msgid "Battery warning"
 msgstr ""
 
-#: ../capplets/sound/sound-theme.c:436 ../capplets/sound/sound-theme.c:562
+#: ../capplets/sound/sound-theme.c:437 ../capplets/sound/sound-theme.c:563
 #, fuzzy
 msgid "Flash screen"
 msgstr "أومض كا_مل الشاشة"
 
-#: ../capplets/sound/sound-theme.c:440 ../capplets/sound/sound-theme.c:566
+#: ../capplets/sound/sound-theme.c:441 ../capplets/sound/sound-theme.c:567
 #, fuzzy
 msgid "Flash window"
 msgstr "أومض شريط عنوان ال_نافذة"
 
-#: ../capplets/sound/sound-theme.c:462 ../capplets/sound/sound-theme.c:1027
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1030
 #, fuzzy
 msgid "Testing event sound"
 msgstr "اختبر الصوت"
 
-#: ../capplets/sound/sound-theme.c:481 ../libsounds/sound-view.c:182
+#: ../capplets/sound/sound-theme.c:482
 msgid "Select Sound File"
 msgstr "اختر ملف صوت"
 
-#: ../capplets/sound/sound-theme.c:492
+#: ../capplets/sound/sound-theme.c:493
 #, fuzzy
 msgid "Sound files"
 msgstr "أصوات"
 
-#: ../capplets/sound/sound-theme.c:546
+#: ../capplets/sound/sound-theme.c:547
 #, fuzzy
 msgid "Custom..."
 msgstr "_خصِّص..."
@@ -3199,55 +3195,6 @@ msgstr "<b>افتح %s</b>"
 msgid "Remove from System Items"
 msgstr "احذف من عناصر النظام"
 
-#: ../libsounds/sound-view.c:45
-msgid "Boing"
-msgstr "بوينج"
-
-#: ../libsounds/sound-view.c:46
-msgid "Siren"
-msgstr "صافرة إنذار"
-
-#: ../libsounds/sound-view.c:47
-msgid "Clink"
-msgstr "صلصلة"
-
-#: ../libsounds/sound-view.c:48
-msgid "Beep"
-msgstr "صافِرة"
-
-#: ../libsounds/sound-view.c:49
-msgid "No sound"
-msgstr "لا صوت"
-
-#: ../libsounds/sound-view.c:131
-msgid "Sound not set for this event."
-msgstr "الصوت لهذا الحدث غير معين."
-
-#: ../libsounds/sound-view.c:140
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"ملف الصوت لهذا الحدث غير موجود.\n"
-"قد يتوجب عليك تثبيت حزمة gnome-audio للحصول على مجموعة من الأصوات المبدئية."
-
-#: ../libsounds/sound-view.c:151
-msgid "The sound file for this event does not exist."
-msgstr "ملف الصوت لهذا الحدث غير موجود."
-
-#: ../libsounds/sound-view.c:209
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "الملف %s ليس ملف wav سليم"
-
-#: ../libsounds/sound-view.c:270
-msgid "Select sound file..."
-msgstr "اخترِ ملف صوت..."
-
-#: ../libsounds/sound-view.c:372
-msgid "System Sounds"
-msgstr "أصوات النظام"
-
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
@@ -3461,6 +3408,51 @@ msgstr ""
 "يستخدم مراقب الكتابة مساحة التبليغ لعرض المعلومات. يبدو أنك لا تملك مساحة "
 "تبليغ على شريطك. يمكنك إضافتها بنقر يمينيّ على شريطك و اختيار 'أضِف للشريط' ثم "
 "اختيار 'مساحة التبليغ' ثم النقر على أضِف."
+
+#~ msgid ""
+#~ "%s is the path where the theme files will be installed. This can not be "
+#~ "selected as the source location"
+#~ msgstr ""
+#~ "‏%s هو المسار الذي ستثبّت فيه ملفات السِمة، لذا لا يمكن اختياره كموقع المصدر"
+
+#~ msgid "Boing"
+#~ msgstr "بوينج"
+
+#~ msgid "Siren"
+#~ msgstr "صافرة إنذار"
+
+#~ msgid "Clink"
+#~ msgstr "صلصلة"
+
+#~ msgid "Beep"
+#~ msgstr "صافِرة"
+
+#~ msgid "No sound"
+#~ msgstr "لا صوت"
+
+#~ msgid "Sound not set for this event."
+#~ msgstr "الصوت لهذا الحدث غير معين."
+
+#~ msgid ""
+#~ "The sound file for this event does not exist.\n"
+#~ "You may want to install the gnome-audio package for a set of default "
+#~ "sounds."
+#~ msgstr ""
+#~ "ملف الصوت لهذا الحدث غير موجود.\n"
+#~ "قد يتوجب عليك تثبيت حزمة gnome-audio للحصول على مجموعة من الأصوات "
+#~ "المبدئية."
+
+#~ msgid "The sound file for this event does not exist."
+#~ msgstr "ملف الصوت لهذا الحدث غير موجود."
+
+#~ msgid "The file %s is not a valid wav file"
+#~ msgstr "الملف %s ليس ملف wav سليم"
+
+#~ msgid "Select sound file..."
+#~ msgstr "اخترِ ملف صوت..."
+
+#~ msgid "System Sounds"
+#~ msgstr "أصوات النظام"
 
 #~ msgid "Inverted"
 #~ msgstr "معكوس"
