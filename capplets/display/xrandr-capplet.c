@@ -11,7 +11,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -41,7 +41,7 @@ struct App
     GnomeRRScreen       *screen;
     GnomeRRConfig  *current_configuration;
     GnomeOutputInfo         *current_output;
-    
+
     GtkWidget	   *dialog;
     GtkListStore   *resolution_store;
     GtkWidget	   *resolution_combo;
@@ -51,7 +51,7 @@ struct App
     GtkWidget	   *panel_label;
     GtkWidget	   *clone_checkbox;
     GtkWidget	   *show_icon_checkbox;
-    
+
     GtkWidget      *area;
     gboolean	    ignore_gui_changes;
     GConfClient	   *client;
@@ -66,15 +66,15 @@ show_error (const GError *err)
 {
     if (!err)
 	return;
-    
+
     GtkWidget *dialog = gtk_message_dialog_new (
 	NULL,
 	GTK_DIALOG_DESTROY_WITH_PARENT,
 	GTK_MESSAGE_WARNING,
 	GTK_BUTTONS_OK, err->message);
-    
+
     gtk_window_set_title (GTK_WINDOW (dialog), "");
-    
+
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
 }
@@ -117,25 +117,25 @@ on_screen_changed (GnomeRRScreen *scr,
 
     if (app->current_configuration)
 	gnome_rr_config_free (app->current_configuration);
-    
+
     app->current_configuration = current;
 
 #if 0
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
 	GnomeOutputInfo *o = app->current_configuration->outputs[i];
-	
+
 	g_print ("  output %s %s: %d %d %d %d\n", o->name, o->on? "on" : "off", o->x, o->y, o->width, o->height);
     }
 #endif
-    
+
 #if 0
     g_print ("sorting\n");
 #endif
     /* Sort outputs according to X coordinate */
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
 	;
-	
+
     qsort (app->current_configuration->outputs, i, sizeof (GnomeOutputInfo *),
 	   compare_outputs);
 
@@ -143,11 +143,11 @@ on_screen_changed (GnomeRRScreen *scr,
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
 	GnomeOutputInfo *o = app->current_configuration->outputs[i];
-	
+
 	g_print ("  output: %d %d %d %d\n", o->x, o->y, o->width, o->height);
     }
 #endif
-    
+
     /* Select an output */
     best = NULL;
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
@@ -224,7 +224,7 @@ foreach (GtkTreeModel *model,
     gtk_tree_model_get (model, iter, 0, &text, -1);
 
     g_assert (text != NULL);
-    
+
     if (strcmp (info->text, text) == 0)
     {
 	info->found = TRUE;
@@ -249,7 +249,7 @@ add_key (GtkWidget *widget,
 
     info.text = text;
     info.found = FALSE;
-    
+
     gtk_tree_model_foreach (model, foreach, &info);
 
     if (!info.found)
@@ -283,7 +283,7 @@ combo_select (GtkWidget *widget, const char *text)
 
     info.text = text;
     info.found = FALSE;
-    
+
     gtk_tree_model_foreach (model, foreach, &info);
 
     if (!info.found)
@@ -342,7 +342,7 @@ list_clone_modes (GnomeRRConfig *config, GnomeRRScreen *screen)
     {
 	gboolean valid = TRUE;
 	int j;
-	
+
 	for (j = 0; config->outputs[j] != NULL; ++j)
 	{
 	    if (config->outputs[j]->connected)
@@ -363,7 +363,7 @@ list_clone_modes (GnomeRRConfig *config, GnomeRRScreen *screen)
     }
 
     g_ptr_array_add (result, NULL);
-    
+
     return (GnomeRRMode **)g_ptr_array_free (result, FALSE);
 }
 
@@ -380,13 +380,13 @@ get_current_modes (App *app)
     {
 	if (!app->current_output)
 	    return NULL;
-	
+
 	output = gnome_rr_screen_get_output_by_name (
 	    app->screen, app->current_output->name);
-	
+
 	if (!output)
 	    return NULL;
-	
+
 	return gnome_rr_output_list_modes (output);
     }
 }
@@ -408,22 +408,22 @@ rebuild_rotation_combo (App *app)
     const char *selection;
     GnomeRRRotation current;
     int i;
-    
+
     clear_combo (app->rotation_combo);
 
     gtk_widget_set_sensitive (
 	app->rotation_combo, app->current_output && app->current_output->on);
-    
+
     if (!app->current_output)
 	return;
-    
+
     current = app->current_output->rotation;
 
     selection = NULL;
     for (i = 0; i < G_N_ELEMENTS (rotations); ++i)
     {
 	const RotationInfo *info = &(rotations[i]);
-	
+
 	app->current_output->rotation = info->rotation;
 
 	if (gnome_rr_config_applicable (app->current_configuration, app->screen))
@@ -436,7 +436,7 @@ rebuild_rotation_combo (App *app)
     }
 
     app->current_output->rotation = current;
-    
+
     if (!(selection && combo_select (app->rotation_combo, selection)))
 	combo_select (app->rotation_combo, N_("Normal"));
 }
@@ -458,10 +458,10 @@ rebuild_rate_combo (App *app)
 
     if (!(modes = get_current_modes (app)))
 	return;
-    
+
     rates = g_hash_table_new_full (
 	g_str_hash, g_str_equal, (GFreeFunc)g_free, NULL);
-    
+
     best = -1;
     for (i = 0; modes[i] != NULL; ++i)
     {
@@ -492,14 +492,14 @@ static int
 count_active_outputs (App *app)
 {
     int i, count = 0;
-    
+
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
     {
 	GnomeOutputInfo *output = app->current_configuration->outputs[i];
 	if (output->on)
 	    count++;
     }
-    
+
     return count;
 }
 
@@ -523,7 +523,7 @@ rebuild_resolution_combo (App *app)
     const char *current;
 
     clear_combo (app->resolution_combo);
-    
+
     if (!(modes = get_current_modes (app)))
 	return;
 
@@ -535,7 +535,7 @@ rebuild_resolution_combo (App *app)
 
 	width = gnome_rr_mode_get_width (modes[i]);
 	height = gnome_rr_mode_get_height (modes[i]);
-	
+
 	add_key (app->resolution_combo,
 		 idle_free (g_strdup_printf (_("%d x %d"), width, height)),
 		 width, height, 0, -1);
@@ -560,7 +560,7 @@ rebuild_resolution_combo (App *app)
 					      app->current_output->width,
 					      app->current_output->height));
     }
-	     
+
 
     if (!combo_select (app->resolution_combo, current))
     {
@@ -579,7 +579,7 @@ rebuild_gui (App *app)
      * just assert if that happens
      */
     g_assert (app->ignore_gui_changes == FALSE);
-    
+
     app->ignore_gui_changes = TRUE;
 
     sensitive = app->current_output? TRUE : FALSE;
@@ -587,7 +587,7 @@ rebuild_gui (App *app)
 #if 0
     g_print ("rebuild gui, is on: %d\n", app->current_output->on);
 #endif
-    
+
     rebuild_resolution_combo (app);
     rebuild_rate_combo (app);
     rebuild_rotation_combo (app);
@@ -629,7 +629,7 @@ get_mode (GtkWidget *widget, int *width, int *height, int *freq, GnomeRRRotation
 
     if (!rot)
 	rot = (GnomeRRRotation *)&dummy;
-    
+
     model = gtk_combo_box_get_model (box);
     gtk_tree_model_get (model, &iter,
 			1, width,
@@ -692,7 +692,7 @@ on_resolution_changed (GtkComboBox *box, gpointer data)
 	else
 	    app->current_output->on = TRUE;
     }
-    
+
 #if 0
     if (app->current_configuration)
     {
@@ -700,20 +700,20 @@ on_resolution_changed (GtkComboBox *box, gpointer data)
 	for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
 	{
 	    GnomeOutputInfo *output = app->current_configuration->outputs[i];
-	    
+
 	    if (output->connected)
 	    {
 		output->x = x;
-		
+
 		x += output->width;
 	    }
 	}
     }
 #endif
-    
+
     rebuild_rate_combo (app);
     rebuild_rotation_combo (app);
-    
+
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
 }
 
@@ -738,7 +738,7 @@ on_clone_changed (GtkWidget *box, gpointer data)
 	    }
 	}
     }
-    
+
     rebuild_gui (app);
 }
 
@@ -780,7 +780,7 @@ list_connected_outputs (App *app, int *total_w, int *total_h)
 	if (output->connected)
 	{
 	    int w, h;
-	    
+
 	    result = g_list_prepend (result, output);
 
 	    get_geometry (output, &w, &h);
@@ -812,11 +812,11 @@ compute_scale (App *app)
     int n_monitors;
     GdkRectangle viewport;
     GList *connected_outputs;
-    
+
     foo_scroll_area_get_viewport (FOO_SCROLL_AREA (app->area), &viewport);
 
     connected_outputs = list_connected_outputs (app, &total_w, &total_h);
-    
+
     n_monitors = g_list_length (connected_outputs);
 
     g_list_free (connected_outputs);
@@ -838,14 +838,14 @@ typedef struct Snap
 {
     Edge *snapper;		/* Edge that should be snapped */
     Edge *snappee;
-    int dy, dx;		
+    int dy, dx;
 } Snap;
 
 static void
 add_edge (GnomeOutputInfo *output, int x1, int y1, int x2, int y2, GArray *edges)
 {
     Edge e;
-    
+
     e.x1 = x1;
     e.x2 = x2;
     e.y1 = y1;
@@ -859,11 +859,11 @@ static void
 list_edges_for_output (GnomeOutputInfo *output, GArray *edges)
 {
     int x, y, w, h;
-    
+
     x = output->x;
     y = output->y;
     get_geometry (output, &w, &h);
-    
+
     /* Top, Bottom, Left, Right */
     add_edge (output, x, y, x + w, y, edges);
     add_edge (output, x, y + h, x + w, y + h, edges);
@@ -905,7 +905,7 @@ vertical_overlap (Edge *snapper, Edge *snappee)
 {
     if (snapper->x1 != snapper->x2 || snappee->x1 != snappee->x2)
 	return FALSE;
-    
+
     return overlap (snapper->y1, snapper->y2, snappee->y1, snappee->y2);
 }
 
@@ -923,7 +923,7 @@ add_edge_snaps (Edge *snapper, Edge *snappee, GArray *snaps)
 
     snap.snapper = snapper;
     snap.snappee = snappee;
-    
+
     if (horizontal_overlap (snapper, snappee))
     {
 	snap.dx = 0;
@@ -943,9 +943,9 @@ add_edge_snaps (Edge *snapper, Edge *snappee, GArray *snaps)
     /* 1->1 */
     snap.dx = snappee->x1 - snapper->x1;
     snap.dy = snappee->y1 - snapper->y1;
-    
+
     add_snap (snaps, snap);
-    
+
     /* 1->2 */
     snap.dx = snappee->x2 - snapper->x1;
     snap.dy = snappee->y2 - snapper->y1;
@@ -977,9 +977,9 @@ list_snaps (GnomeOutputInfo *output, GArray *edges, GArray *snaps)
 	if (output_edge->output == output)
 	{
 	    int j;
-	    
+
 	    for (j = 0; j < edges->len; ++j)
-	    {	
+	    {
 		Edge *edge = &(g_array_index (edges, Edge, j));
 
 		if (edge->output != output)
@@ -1002,7 +1002,7 @@ corner_on_edge (int x, int y, Edge *e)
 {
     if (x == e->x1 && x == e->x2 && y >= e->y1 && y <= e->y2)
 	return TRUE;
-    
+
     if (y == e->y1 && y == e->y2 && x >= e->x1 && x <= e->x2)
 	return TRUE;
 
@@ -1086,7 +1086,7 @@ output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config)
 	if (other != output && other->connected)
 	{
 	    GdkRectangle other_rect;
-	    
+
 	    get_output_rect (other, &other_rect);
 	    if (gdk_rectangle_intersect (&output_rect, &other_rect, NULL))
 		return TRUE;
@@ -1181,7 +1181,7 @@ on_output_event (FooScrollArea *area,
     if (event->type == FOO_BUTTON_PRESS)
     {
 	GrabInfo *info;
-	
+
 	app->current_output = output;
 
 	rebuild_gui (app);
@@ -1189,16 +1189,16 @@ on_output_event (FooScrollArea *area,
 	if (!app->current_configuration->clone && get_n_connected (app) > 1)
 	{
 	    foo_scroll_area_begin_grab (area, on_output_event, data);
-	    
+
 	    info = g_new0 (GrabInfo, 1);
 	    info->grab_x = event->x;
 	    info->grab_y = event->y;
 	    info->output_x = output->x;
 	    info->output_y = output->y;
-	    
+
 	    output->user_data = info;
 	}
-	
+
 	foo_scroll_area_invalidate (area);
     }
     else
@@ -1216,14 +1216,14 @@ on_output_event (FooScrollArea *area,
 	    old_y = output->y;
 	    new_x = info->output_x + (event->x - info->grab_x) / scale;
 	    new_y = info->output_y + (event->y - info->grab_y) / scale;
-	    
+
 	    output->x = new_x;
 	    output->y = new_y;
 
 	    edges = g_array_new (TRUE, TRUE, sizeof (Edge));
 	    snaps = g_array_new (TRUE, TRUE, sizeof (Snap));
 	    new_edges = g_array_new (TRUE, TRUE, sizeof (Edge));
-	    
+
 	    list_edges (app->current_configuration, edges);
 	    list_snaps (output, edges, snaps);
 
@@ -1231,7 +1231,7 @@ on_output_event (FooScrollArea *area,
 
 	    output->x = info->output_x;
 	    output->y = info->output_y;
-	    
+
 	    for (i = 0; i < snaps->len; ++i)
 	    {
 		Snap *snap = &(g_array_index (snaps, Snap, i));
@@ -1242,7 +1242,7 @@ on_output_event (FooScrollArea *area,
 
 		g_array_set_size (new_edges, 0);
 		list_edges (app->current_configuration, new_edges);
-		
+
 		if (gnome_rr_config_is_aligned (app->current_configuration, new_edges))
 		{
 		    g_array_free (new_edges, TRUE);
@@ -1258,7 +1258,7 @@ on_output_event (FooScrollArea *area,
 	    g_array_free (new_edges, TRUE);
 	    g_array_free (snaps, TRUE);
 	    g_array_free (edges, TRUE);
-	    
+
 	    if (event->type == FOO_BUTTON_RELEASE)
 	    {
 		foo_scroll_area_end_grab (area);
@@ -1283,7 +1283,7 @@ on_canvas_event (FooScrollArea *area,
 		 gpointer data)
 {
     App *app = g_object_get_data (G_OBJECT (area), "app");
-    
+
     if (event->type == FOO_BUTTON_PRESS)
     {
 	app->current_output = NULL;
@@ -1300,7 +1300,7 @@ get_display_name (App *app,
 		  GnomeOutputInfo *output)
 {
     const char *text;
-    
+
     if (app->current_configuration->clone)
 	text = _("Cloned Output");
     else
@@ -1320,7 +1320,7 @@ paint_background (FooScrollArea *area,
     GdkRectangle viewport;
 
     foo_scroll_area_get_viewport (area, &viewport);
-    
+
     cairo_set_source_rgba (cr, BACKGROUND_FILL_RGBA);
 
     cairo_rectangle (cr,
@@ -1345,7 +1345,7 @@ paint_output (App *app, cairo_t *cr, int i)
     double scale = compute_scale (app);
     double x, y;
     int total_w, total_h;
-    GList *connected_outputs = list_connected_outputs (app, &total_w, &total_h); 
+    GList *connected_outputs = list_connected_outputs (app, &total_w, &total_h);
     GnomeOutputInfo *output = g_list_nth (connected_outputs, i)->data;
     PangoLayout *layout = get_display_name (app, output);
     PangoRectangle extent;
@@ -1353,11 +1353,11 @@ paint_output (App *app, cairo_t *cr, int i)
     double angle;
 
     cairo_save (cr);
-    
+
     foo_scroll_area_get_viewport (FOO_SCROLL_AREA (app->area), &viewport);
-    
+
     get_geometry (output, &w, &h);
-    
+
 #if 0
     g_print ("%s (%p) geometry %d %d %d\n", output->name, output,
 	     w, h, output->rate);
@@ -1365,7 +1365,7 @@ paint_output (App *app, cairo_t *cr, int i)
 
     viewport.height -= 2 * MARGIN;
     viewport.width -= 2 * MARGIN;
-    
+
     x = output->x * scale + MARGIN + (viewport.width - total_w * scale) / 2.0;
     y = output->y * scale + MARGIN + (viewport.height - total_h * scale) / 2.0;
 
@@ -1373,7 +1373,7 @@ paint_output (App *app, cairo_t *cr, int i)
     g_print ("scaled: %f %f\n", x, y);
 
     g_print ("scale: %f\n", scale);
-    
+
     g_print ("%f %f %f %f\n", x, y, w * scale + 0.5, h * scale + 0.5);
 #endif
 
@@ -1382,7 +1382,7 @@ paint_output (App *app, cairo_t *cr, int i)
     cairo_translate (cr,
 		     x + (w * scale + 0.5) / 2,
 		     y + (h * scale + 0.5) / 2);
-    
+
     if (output->rotation & GNOME_RR_ROTATION_0)
     {
 	angle = 0;
@@ -1405,41 +1405,41 @@ paint_output (App *app, cairo_t *cr, int i)
     }
 
     cairo_rotate (cr, angle);
-    
+
     if (output->rotation & GNOME_RR_REFLECT_X)
 	cairo_scale (cr, -1, 1);
-    
+
     if (output->rotation & GNOME_RR_REFLECT_Y)
 	cairo_scale (cr, 1, -1);
-    
-    cairo_translate (cr,	
+
+    cairo_translate (cr,
 		     - x - (w * scale + 0.5) / 2,
 		     - y - (h * scale + 0.5) / 2);
-    
+
 
     cairo_rectangle (cr, x, y, w * scale + 0.5, h * scale + 0.5);
     cairo_clip_preserve (cr);
-    
+
     if (output->on)
 	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
     else
 	cairo_set_source_rgba (cr, 0.2, 0.2, 0.2, 1.0);
-    
+
     foo_scroll_area_add_input_from_fill (FOO_SCROLL_AREA (app->area),
 					 cr, on_output_event, output);
     cairo_fill (cr);
-    
+
     if (output == app->current_output)
     {
 	cairo_rectangle (cr, x + 2, y + 2, w * scale + 0.5 - 4, h * scale + 0.5 - 4);
-	
+
 	cairo_set_line_width (cr, 4);
 	cairo_set_source_rgba (cr, 0.33, 0.43, 0.57, 1.0);
 	cairo_stroke (cr);
     }
-    
+
     cairo_rectangle (cr, x + 0.5, y + 0.5, w * scale + 0.5 - 1, h * scale + 0.5 - 1);
-    
+
     cairo_set_line_width (cr, 1);
     cairo_set_source_rgba (cr, 0.0, 0.0, 0.0, 1.0);
 
@@ -1447,23 +1447,23 @@ paint_output (App *app, cairo_t *cr, int i)
     cairo_set_line_width (cr, 2);
 
     layout_set_font (layout, "Sans Bold 12");
-    
+
     pango_layout_get_pixel_extents (layout, NULL, &extent);
 
     extent.x = x + ((w * scale + 0.5) - extent.width) / 2;
     extent.y = y + ((h * scale + 0.5) - extent.height) / 2;
 
     cairo_move_to (cr, extent.x, extent.y);
-    
+
     if (output->on)
 	cairo_set_source_rgb (cr, 0.2, 0.2, 0.8);
     else
 	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-    
+
     pango_cairo_show_layout (cr, layout);
 
     cairo_restore (cr);
-    
+
     g_object_unref (layout);
 }
 
@@ -1480,17 +1480,17 @@ on_area_paint (FooScrollArea *area,
     GList *list;
 
     paint_background (area, cr);
-    
+
     if (!app->current_configuration)
 	return;
-    
+
     scale = compute_scale (app);
     connected_outputs = list_connected_outputs (app, NULL, NULL);
-    
+
 #if 0
     g_print ("scale: %f\n", scale);
 #endif
-    
+
     for (list = connected_outputs; list != NULL; list = list->next)
     {
 	paint_output (app, cr, g_list_position (connected_outputs, list));
@@ -1507,16 +1507,16 @@ make_text_combo (GtkWidget *widget, int sort_column)
     GtkListStore *store = gtk_list_store_new (
 	6,
 	G_TYPE_STRING,		/* Text */
-	G_TYPE_INT,		/* Width */	
+	G_TYPE_INT,		/* Width */
 	G_TYPE_INT,		/* Height */
 	G_TYPE_INT,		/* Frequency */
 	G_TYPE_INT,		/* Width * Height */
 	G_TYPE_INT);		/* Rotation */
-	
+
     GtkCellRenderer *cell;
 
     gtk_cell_layout_clear (GTK_CELL_LAYOUT (widget));
-    
+
     gtk_combo_box_set_model (box, GTK_TREE_MODEL (store));
 
     cell = gtk_cell_renderer_text_new ();
@@ -1611,7 +1611,7 @@ apply (App *app)
     check_required_virtual_size (app);
 
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
-    
+
     if (gnome_rr_config_save (app->current_configuration, &err))
     {
 	XEvent message;
@@ -1668,7 +1668,7 @@ on_show_icon_toggled (GtkWidget *widget, gpointer data)
 {
     GtkToggleButton *tb = GTK_TOGGLE_BUTTON (widget);
     App *app = data;
-    
+
     gconf_client_set_bool (app->client, SHOW_ICON_KEY,
 			   gtk_toggle_button_get_active (tb), NULL);
 }
@@ -1723,23 +1723,23 @@ run_application (App *app)
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->show_icon_checkbox),
 				  gconf_client_get_bool (app->client, SHOW_ICON_KEY, NULL));
-    
+
     g_signal_connect (app->show_icon_checkbox, "toggled", G_CALLBACK (on_show_icon_toggled), app);
-    
+
     app->panel_checkbox = glade_xml_get_widget (xml, "panel_checkbox");
     app->panel_label = glade_xml_get_widget (xml, "panel_label");
 
     make_text_combo (app->resolution_combo, 4);
     make_text_combo (app->refresh_combo, 3);
     make_text_combo (app->rotation_combo, -1);
-    
+
     g_assert (app->panel_checkbox);
-    
+
     /* Scroll Area */
     app->area = (GtkWidget *)foo_scroll_area_new ();
 
     g_object_set_data (G_OBJECT (app->area), "app", app);
-    
+
     /* FIXME: this should be computed dynamically */
     foo_scroll_area_set_min_size (FOO_SCROLL_AREA (app->area), -1, 200);
     gtk_widget_show (app->area);
@@ -1757,7 +1757,8 @@ run_application (App *app)
 
     gtk_widget_hide (app->panel_checkbox);
     gtk_widget_hide (app->panel_label);
-    
+    g_object_unref (xml);
+
 restart:
     switch (gtk_dialog_run (GTK_DIALOG (app->dialog)))
     {
@@ -1786,16 +1787,18 @@ int
 main (int argc, char **argv)
 {
     App *app;
-    
+
     bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
-    
+
     gtk_init (&argc, &argv);
 
     app = g_new0 (App, 1);
 
     run_application (app);
-    
+
+    g_free (app);
+
     return 0;
 }
