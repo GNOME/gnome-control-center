@@ -1,5 +1,12 @@
 2008-08-08  Jens Granseuer  <jensgr@gmx.net>
 
+	* xrandr-capplet.c: (on_screen_changed), (rebuild_gui),
+	(print_edge), (on_output_event), (paint_output), (on_area_paint),
+	(check_required_virtual_size), (apply), (run_application): replace
+	all uses of g_print by g_debug
+
+2008-08-08  Jens Granseuer  <jensgr@gmx.net>
+
 	* xrandr-capplet.c: (run_application), (main): don't leak the
 	application or the GladeXML
 

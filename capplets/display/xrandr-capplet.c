@@ -125,12 +125,12 @@ on_screen_changed (GnomeRRScreen *scr,
     {
 	GnomeOutputInfo *o = app->current_configuration->outputs[i];
 
-	g_print ("  output %s %s: %d %d %d %d\n", o->name, o->on? "on" : "off", o->x, o->y, o->width, o->height);
+	g_debug ("  output %s %s: %d %d %d %d", o->name, o->on? "on" : "off", o->x, o->y, o->width, o->height);
     }
 #endif
 
 #if 0
-    g_print ("sorting\n");
+    g_debug ("sorting");
 #endif
     /* Sort outputs according to X coordinate */
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
@@ -144,7 +144,7 @@ on_screen_changed (GnomeRRScreen *scr,
     {
 	GnomeOutputInfo *o = app->current_configuration->outputs[i];
 
-	g_print ("  output: %d %d %d %d\n", o->x, o->y, o->width, o->height);
+	g_debug ("  output: %d %d %d %d", o->x, o->y, o->width, o->height);
     }
 #endif
 
@@ -585,7 +585,7 @@ rebuild_gui (App *app)
     sensitive = app->current_output? TRUE : FALSE;
 
 #if 0
-    g_print ("rebuild gui, is on: %d\n", app->current_output->on);
+    g_debug ("rebuild gui, is on: %d", app->current_output->on);
 #endif
 
     rebuild_resolution_combo (app);
@@ -595,7 +595,7 @@ rebuild_gui (App *app)
     gtk_widget_set_sensitive (app->resolution_combo, sensitive);
 
 #if 0
-    g_print ("sensitive: %d, on: %d\n", sensitive, app->current_output->on);
+    g_debug ("sensitive: %d, on: %d", sensitive, app->current_output->on);
 #endif
     gtk_widget_set_sensitive (app->panel_checkbox, sensitive);
 
@@ -993,7 +993,7 @@ list_snaps (GnomeOutputInfo *output, GArray *edges, GArray *snaps)
 static void
 print_edge (Edge *edge)
 {
-    g_print ("(%d %d %d %d)", edge->x1, edge->y1, edge->x2, edge->y2);
+    g_debug ("(%d %d %d %d)", edge->x1, edge->y1, edge->x2, edge->y2);
 }
 #endif
 
@@ -1267,7 +1267,7 @@ on_output_event (FooScrollArea *area,
 		output->user_data = NULL;
 
 #if 0
-		g_print ("new position: %d %d %d %d\n", output->x, output->y, output->width, output->height);
+		g_debug ("new position: %d %d %d %d", output->x, output->y, output->width, output->height);
 #endif
 	    }
 
@@ -1359,7 +1359,7 @@ paint_output (App *app, cairo_t *cr, int i)
     get_geometry (output, &w, &h);
 
 #if 0
-    g_print ("%s (%p) geometry %d %d %d\n", output->name, output,
+    g_debug ("%s (%p) geometry %d %d %d", output->name, output,
 	     w, h, output->rate);
 #endif
 
@@ -1370,11 +1370,11 @@ paint_output (App *app, cairo_t *cr, int i)
     y = output->y * scale + MARGIN + (viewport.height - total_h * scale) / 2.0;
 
 #if 0
-    g_print ("scaled: %f %f\n", x, y);
+    g_debug ("scaled: %f %f", x, y);
 
-    g_print ("scale: %f\n", scale);
+    g_debug ("scale: %f", scale);
 
-    g_print ("%f %f %f %f\n", x, y, w * scale + 0.5, h * scale + 0.5);
+    g_debug ("%f %f %f %f", x, y, w * scale + 0.5, h * scale + 0.5);
 #endif
 
     cairo_save (cr);
@@ -1488,7 +1488,7 @@ on_area_paint (FooScrollArea *area,
     connected_outputs = list_connected_outputs (app, NULL, NULL);
 
 #if 0
-    g_print ("scale: %f\n", scale);
+    g_debug ("scale: %f", scale);
 #endif
 
     for (list = connected_outputs; list != NULL; list = list->next)
@@ -1584,11 +1584,11 @@ check_required_virtual_size (App *app)
     gnome_rr_screen_get_ranges (app->screen, &min_width, &max_width, &min_height, &max_height);
 
 #if 0
-    g_print ("X Server supports:\n");
-    g_print ("min_width = %d, max_width = %d\n", min_width, max_width);
-    g_print ("min_height = %d, max_height = %d\n", min_height, max_height);
+    g_debug ("X Server supports:");
+    g_debug ("min_width = %d, max_width = %d", min_width, max_width);
+    g_debug ("min_height = %d, max_height = %d", min_height, max_height);
 
-    g_print ("Requesting size of %dx%d\n", req_width, req_height);
+    g_debug ("Requesting size of %dx%d", req_width, req_height);
 #endif
 
     if (!(min_width <= req_width && req_width <= max_width
@@ -1596,7 +1596,7 @@ check_required_virtual_size (App *app)
     {
 	/* FIXME: present a useful dialog, maybe even before the user tries to Apply */
 #if 0
-	g_print ("Your X server needs a larger Virtual size!\n");
+	g_debug ("Your X server needs a larger Virtual size!");
 #endif
     }
 }
@@ -1621,7 +1621,7 @@ apply (App *app)
 	message.xclient.format = 8;
 
 #if 0
-	g_print ("Sending client message\n");
+	g_debug ("Sending client message");
 #endif
 
 	XSendEvent (gdk_x11_get_default_xdisplay(),
@@ -1766,11 +1766,15 @@ restart:
 	/* Fall Through */
     case GTK_RESPONSE_DELETE_EVENT:
     case GTK_RESPONSE_CLOSE:
-	g_print ("Close\n");
+#if 0
+	g_debug ("Close");
+#endif
 	break;
 
     case GTK_RESPONSE_HELP:
-	g_print ("Help\n");
+#if 0
+	g_debug ("Help");
+#endif
 	goto restart;
 	break;
 
