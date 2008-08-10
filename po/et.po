@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNOME Control Center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 16:58+0000\n"
-"PO-Revision-Date: 2008-06-15 17:44+0300\n"
+"POT-Creation-Date: 2008-08-07 20:19+0000\n"
+"PO-Revision-Date: 2008-08-10 10:10+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -61,12 +61,12 @@ msgid "No Image"
 msgstr "Pilt puudub"
 
 #: ../capplets/about-me/gnome-about-me.c:769
-#: ../capplets/appearance/appearance-desktop.c:1080
+#: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "Pildid"
 
 #: ../capplets/about-me/gnome-about-me.c:773
-#: ../capplets/appearance/theme-installer.c:717
+#: ../capplets/appearance/theme-installer.c:696
 msgid "All Files"
 msgstr "Kõik failid"
 
@@ -500,11 +500,11 @@ msgstr "Abistav tehnika"
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "GNOME abistava tehnika toe lubamine sisselogimisel"
 
-#: ../capplets/appearance/appearance-desktop.c:1048
+#: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
 msgstr "Tapeedi lisamine"
 
-#: ../capplets/appearance/appearance-desktop.c:1084
+#: ../capplets/appearance/appearance-desktop.c:665
 msgid "All files"
 msgstr "Kõik failid"
 
@@ -570,75 +570,76 @@ msgid "[WALLPAPER...]"
 msgstr "[TAPEET...]"
 
 #: ../capplets/appearance/appearance-style.c:159
-#: ../capplets/common/gnome-theme-info.c:439
-#: ../capplets/common/gnome-theme-info.c:628
+#: ../capplets/common/gnome-theme-info.c:444
+#: ../capplets/common/gnome-theme-info.c:633
 msgid "Default Pointer"
 msgstr "Vaikimisi kursor"
 
 #: ../capplets/appearance/appearance-style.c:221
-#: ../capplets/appearance/appearance-themes.c:685
+#: ../capplets/appearance/appearance-themes.c:687
 msgid "Install"
 msgstr "Paigalda"
 
 #: ../capplets/appearance/appearance-style.c:241
-#: ../capplets/common/gnome-theme-info.c:1634
+#: ../capplets/common/gnome-theme-info.c:1640
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
 "'%s' is not installed."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:673
+#: ../capplets/appearance/appearance-themes.c:675
 msgid "Apply Background"
 msgstr "Rakenda taust"
 
-#: ../capplets/appearance/appearance-themes.c:677
+#: ../capplets/appearance/appearance-themes.c:679
 msgid "Apply Font"
 msgstr "Rakenda kirjatüüp"
 
-#: ../capplets/appearance/appearance-themes.c:681
+#: ../capplets/appearance/appearance-themes.c:683
 msgid "Revert Font"
 msgstr "Taasta kirjatüüp"
 
-#: ../capplets/appearance/appearance-themes.c:711
+#: ../capplets/appearance/appearance-themes.c:713
 #, fuzzy
 msgid ""
 "The current theme suggests a background and a font. Also, the last applied "
 "font suggestion can be reverted."
 msgstr "Käesolev teema vihjab taustale ja kirjatüübile."
 
-#: ../capplets/appearance/appearance-themes.c:713
+#: ../capplets/appearance/appearance-themes.c:715
 #, fuzzy
 msgid ""
 "The current theme suggests a background. Also, the last applied font "
 "suggestion can be reverted."
 msgstr "Käesolev teema vihjab taustale ja kirjatüübile."
 
-#: ../capplets/appearance/appearance-themes.c:715
+#: ../capplets/appearance/appearance-themes.c:717
 msgid "The current theme suggests a background and a font."
 msgstr "Käesolev teema vihjab taustale ja kirjatüübile."
 
-#: ../capplets/appearance/appearance-themes.c:717
+#: ../capplets/appearance/appearance-themes.c:719
 msgid ""
 "The current theme suggests a font. Also, the last applied font suggestion "
 "can be reverted."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:719
+#: ../capplets/appearance/appearance-themes.c:721
 msgid "The current theme suggests a background."
 msgstr "Käesolev teema vihjab taustale."
 
-#: ../capplets/appearance/appearance-themes.c:721
+#: ../capplets/appearance/appearance-themes.c:723
 msgid "The last applied font suggestion can be reverted."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:723
+#: ../capplets/appearance/appearance-themes.c:725
 msgid "The current theme suggests a font."
 msgstr "Käesolev teema vihjab kirjatüübile."
 
 #: ../capplets/appearance/appearance-themes.c:1046
 #: ../capplets/default-applications/gnome-da-capplet.c:630
-#: ../capplets/sound/sound-properties-capplet.c:328
+#: ../capplets/sound/sound-properties-capplet.c:262
+#: ../capplets/sound/sound-theme.c:648 ../capplets/sound/sound-theme.c:720
 msgid "Custom"
 msgstr "Kohandatud"
 
@@ -838,7 +839,6 @@ msgid "The current controls theme does not support color schemes."
 msgstr "Praegune juhtteema ei toeta värviskeeme."
 
 #: ../capplets/appearance/data/appearance.glade.h:52
-#: ../vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "Teema"
 
@@ -1050,30 +1050,30 @@ msgid_plural "pixels"
 msgstr[0] "piksel"
 msgstr[1] "pikslit"
 
-#: ../capplets/appearance/theme-installer.c:171
-#: ../capplets/appearance/theme-installer.c:221
+#: ../capplets/appearance/theme-installer.c:172
+#: ../capplets/appearance/theme-installer.c:222
 msgid "Cannot install theme"
 msgstr "Teemat pole võimalik paigaldada"
 
-#: ../capplets/appearance/theme-installer.c:173
+#: ../capplets/appearance/theme-installer.c:174
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "Utiliit %s pole paigaldatud."
 
-#: ../capplets/appearance/theme-installer.c:223
+#: ../capplets/appearance/theme-installer.c:224
 msgid "There was a problem while extracting the theme."
 msgstr "Teema lahtipakkimisel tekkis probleem."
 
-#: ../capplets/appearance/theme-installer.c:246
+#: ../capplets/appearance/theme-installer.c:247
 msgid "There was an error installing the selected file"
 msgstr "Valitud faili paigaldamisel tekkis viga"
 
-#: ../capplets/appearance/theme-installer.c:247
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "\"%s\" ei paista olevat korrektne teema."
 
-#: ../capplets/appearance/theme-installer.c:248
+#: ../capplets/appearance/theme-installer.c:249
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
@@ -1082,42 +1082,42 @@ msgstr ""
 "\"%s\" ei paista olevat korrektne teema. Võib-olla on see teemamootor, mida "
 "peab kompileerima."
 
-#: ../capplets/appearance/theme-installer.c:287
+#: ../capplets/appearance/theme-installer.c:288
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME Teema %s on korralikult paigaldatud"
 
-#: ../capplets/appearance/theme-installer.c:354
+#: ../capplets/appearance/theme-installer.c:355
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Tõrge teema \"%s\" paigaldamisel."
 
-#: ../capplets/appearance/theme-installer.c:392
+#: ../capplets/appearance/theme-installer.c:393
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Teema \"%s\" on paigaldatud."
 
-#: ../capplets/appearance/theme-installer.c:398
+#: ../capplets/appearance/theme-installer.c:399
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Kas soovid seda kohe rakendada või hoa praeguse teema alles?"
 
-#: ../capplets/appearance/theme-installer.c:400
+#: ../capplets/appearance/theme-installer.c:401
 msgid "Keep Current Theme"
 msgstr "Praeguse teema säilitamine"
 
-#: ../capplets/appearance/theme-installer.c:402
+#: ../capplets/appearance/theme-installer.c:403
 msgid "Apply New Theme"
 msgstr "Uue teema rakendamine"
 
-#: ../capplets/appearance/theme-installer.c:505
+#: ../capplets/appearance/theme-installer.c:506
 msgid "Failed to create temporary directory"
 msgstr "Tõrge ajutise kataloogi loomisel"
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:569
 msgid "New themes have been successfully installed."
 msgstr "Uued teemad on edukalt paigaldatud."
 
-#: ../capplets/appearance/theme-installer.c:595
+#: ../capplets/appearance/theme-installer.c:594
 msgid "No theme file location specified to install"
 msgstr "Paigaldamisel pole teemafaili asukohta määratud"
 
@@ -1130,20 +1130,11 @@ msgstr ""
 "Pole piisavalt õiguseid teema paigaldamiseks asukohale:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:637
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s on teemafailide paigaldamise rada ja seda pole võimalik lähtekohaks "
-"määrata"
-
-#: ../capplets/appearance/theme-installer.c:706
+#: ../capplets/appearance/theme-installer.c:685
 msgid "Select Theme"
 msgstr "Teema valimine"
 
-#: ../capplets/appearance/theme-installer.c:710
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Theme Packages"
 msgstr "Teemapakid"
 
@@ -1161,15 +1152,15 @@ msgstr "Teema on juba olemas. Soovid sa seda asendada?"
 msgid "_Overwrite"
 msgstr "_Kirjuta üle"
 
-#: ../capplets/appearance/theme-util.c:134
+#: ../capplets/appearance/theme-util.c:74
 msgid "Would you like to delete this theme?"
 msgstr "Soovid sa seda teemat eemaldada?"
 
-#: ../capplets/appearance/theme-util.c:179
+#: ../capplets/appearance/theme-util.c:124
 msgid "Theme cannot be deleted"
 msgstr "Teemat pole võimalik kustutada"
 
-#: ../capplets/appearance/theme-util.c:304
+#: ../capplets/appearance/theme-util.c:251
 msgid "Could not install theme engine"
 msgstr "Teemamootorit pole võimalik paigaldada"
 
@@ -1375,49 +1366,49 @@ msgstr "Palun vali pilt."
 msgid "_Select"
 msgstr "_Vali"
 
-#: ../capplets/common/gnome-theme-info.c:629
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer - Current"
 msgstr "Vaikimisi kursor - käesolev"
 
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "White Pointer"
 msgstr "Valge kursor"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "White Pointer - Current"
 msgstr "Valge kursor - käesolev"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "Large Pointer"
 msgstr "Suur kursor"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large Pointer - Current"
 msgstr "Suur kursor - käesolev"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:648
 msgid "Large White Pointer - Current"
 msgstr "Suur valge kursor - käesolev"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large White Pointer"
 msgstr "Suur valge kursor"
 
-#: ../capplets/common/gnome-theme-info.c:1610
+#: ../capplets/common/gnome-theme-info.c:1616
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme '%s' is "
 "not installed."
 msgstr ""
 
-#: ../capplets/common/gnome-theme-info.c:1618
+#: ../capplets/common/gnome-theme-info.c:1624
 #, c-format
 msgid ""
 "This theme will not look as intended because the required window manager "
 "theme '%s' is not installed."
 msgstr ""
 
-#: ../capplets/common/gnome-theme-info.c:1625
+#: ../capplets/common/gnome-theme-info.c:1631
 #, c-format
 msgid ""
 "This theme will not look as intended because the required icon theme '%s' is "
@@ -1765,6 +1756,50 @@ msgstr "Totem filmiesitaja"
 msgid "aterm"
 msgstr "aterm"
 
+#: ../capplets/display/display-capplet.glade.h:1
+msgid "Include _Panel"
+msgstr ""
+
+#: ../capplets/display/display-capplet.glade.h:2
+msgid "Mirror Screens"
+msgstr ""
+
+#: ../capplets/display/display-capplet.glade.h:3
+msgid "Monitor Resolution Settings"
+msgstr "Monitori eraldusvõime sätted"
+
+#: ../capplets/display/display-capplet.glade.h:4
+msgid ""
+"Normal\n"
+"Left\n"
+"Right\n"
+"Upside-down\n"
+msgstr ""
+"Tavaline\n"
+"Vasakule\n"
+"Paremale\n"
+"Tagurpidi\n"
+
+#: ../capplets/display/display-capplet.glade.h:9
+msgid "R_otation"
+msgstr "_Pööramine"
+
+#: ../capplets/display/display-capplet.glade.h:10
+msgid "Re_fresh Rate:"
+msgstr "_Värskendussagedus:"
+
+#: ../capplets/display/display-capplet.glade.h:11
+msgid "_Detect Displays"
+msgstr ""
+
+#: ../capplets/display/display-capplet.glade.h:12
+msgid "_Resolution"
+msgstr "_Eraldusvõime"
+
+#: ../capplets/display/display-capplet.glade.h:13
+msgid "_Show Displays in Panel"
+msgstr ""
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Ekraani eraldusvõime muutmine"
@@ -1773,115 +1808,54 @@ msgstr "Ekraani eraldusvõime muutmine"
 msgid "Screen Resolution"
 msgstr "Ekraani eraldusvõime"
 
-#: ../capplets/display/main.c:29
+#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:441
 msgid "Normal"
 msgstr "Tavaline"
 
-#: ../capplets/display/main.c:30
+#: ../capplets/display/xrandr-capplet.c:404
 msgid "Left"
 msgstr "Vasakule"
 
-#: ../capplets/display/main.c:31
-msgid "Inverted"
-msgstr "Tagurpidi"
-
-#: ../capplets/display/main.c:32
+#: ../capplets/display/xrandr-capplet.c:405
 msgid "Right"
 msgstr "Paremale"
 
-#: ../capplets/display/main.c:374
+#: ../capplets/display/xrandr-capplet.c:406
+msgid "Upside Down"
+msgstr ""
+
+#: ../capplets/display/xrandr-capplet.c:479
+#: ../capplets/display/xrandr-capplet.c:487
+#: ../capplets/display/xrandr-capplet.c:488
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:514
-msgid "_Resolution:"
-msgstr "_Eraldusvõime:"
-
-#: ../capplets/display/main.c:532
-msgid "Re_fresh rate:"
-msgstr "_Värskendussagedus:"
-
-#: ../capplets/display/main.c:550
-msgid "R_otation:"
-msgstr "_Pööramine:"
-
-#: ../capplets/display/main.c:569
-msgid "Default Settings"
-msgstr "Vaikimisi sätted"
-
-#: ../capplets/display/main.c:571
+#: ../capplets/display/xrandr-capplet.c:540
+#: ../capplets/display/xrandr-capplet.c:559
+#: ../capplets/display/xrandr-capplet.c:569
 #, c-format
-msgid "Screen %d Settings\n"
-msgstr "Ekraani %d sätted\n"
-
-#: ../capplets/display/main.c:593
-msgid "Screen Resolution Preferences"
-msgstr "Ekraani eraldusvõime eelistused"
-
-#: ../capplets/display/main.c:628
-#, c-format
-msgid "_Make default for this computer (%s) only"
-msgstr "_Määratakse vaikimisi ainult selle arvuti (%s) jaoks"
-
-#: ../capplets/display/main.c:648
-msgid "Options"
-msgstr "Valikud"
-
-#: ../capplets/display/main.c:668
-#, c-format
-msgid ""
-"Testing the new settings. If you don't respond in %d second the previous "
-"settings will be restored."
-msgid_plural ""
-"Testing the new settings. If you don't respond in %d seconds the previous "
-"settings will be restored."
-msgstr[0] ""
-"Uute sätete testimine. Kui sa ei reageeri %d sekundi jooksul, siis "
-"taastatakse eelmised sätted."
-msgstr[1] ""
-"Uute sätete testimine. Kui sa ei reageeri %d sekundi jooksul, siis "
-"taastatakse eelmised sätted."
-
-#: ../capplets/display/main.c:708
-msgid "Keep Resolution"
-msgstr "Jätka selle eraldusvõimega"
-
-#: ../capplets/display/main.c:712
-msgid "Do you want to keep this resolution?"
-msgstr "Kas tahad seda eraldusvõimet kasutada?"
-
-#: ../capplets/display/main.c:738
-msgid "Use _Previous Resolution"
-msgstr "Kasuta _eelmist eraldusvõimet"
-
-#: ../capplets/display/main.c:739
-msgid "_Keep Resolution"
-msgstr "_Jätka selle eraldusvõimega"
-
-#: ../capplets/display/main.c:888
-msgid ""
-"The X server does not support the XRandR extension.  Runtime resolution "
-"changes to the display size are not available."
+msgid "%d x %d"
 msgstr ""
-"X-server ei toeta XRandR laiendust. Seetõttu pole ka võimalik töö käigus "
-"kuva eraldusvõime muutmine."
 
-#: ../capplets/display/main.c:895
-msgid ""
-"The version of the XRandR extension is incompatible with this program. "
-"Runtime changes to the display size are not available."
+#: ../capplets/display/xrandr-capplet.c:551
+msgid "Off"
 msgstr ""
-"XRandR'i laienduse versioon pole selle programmiga ühilduv. Töö käigus kuva "
-"eraldusvõime muutmine pole saadaval."
+
+#: ../capplets/display/xrandr-capplet.c:1305
+msgid "Cloned Output"
+msgstr ""
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Heli"
 
+#. Desktop
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1158
+#: ../capplets/sound/sound-theme-definition.h:56
+#: ../libslab/bookmark-agent.c:1157
 msgid "Desktop"
 msgstr "Töölaud"
 
@@ -1914,7 +1888,9 @@ msgstr "Kiirklahvi liik."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
-#: ../typing-break/drwright.c:483
+#: ../capplets/sound/sound-theme.c:415 ../capplets/sound/sound-theme.c:433
+#: ../capplets/sound/sound-theme.c:543 ../capplets/sound/sound-theme.c:559
+#: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "Välja lülitatud"
 
@@ -1926,7 +1902,12 @@ msgstr "<tundmatu tegevus>"
 msgid "Custom Shortcuts"
 msgstr "Kohandatud kiirklahvid"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:999
+#: ../capplets/keybindings/gnome-keybinding-properties.c:938
+#, fuzzy, c-format
+msgid "Error saving the new shortcut: %s"
+msgstr "Viga sätete salvestamisel: %s"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1016
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1937,33 +1918,41 @@ msgstr ""
 "klahvi kasutamise võimatuks.\n"
 "Palun proovi klahvi kombineerida klahvidega Control, Alt või Shift."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1028
-#, c-format
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1046
+#, fuzzy, c-format
 msgid ""
-"The shortcut \"%s\" is already used for:\n"
-" \"%s\""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
 msgstr ""
 "Kiirklahv \"%s\" on juba kasutusel:\n"
 " \"%s\""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1052
 #, c-format
-msgid "Error setting new accelerator in configuration database: %s"
-msgstr "Viga uue kiirklahvi seadmisel sätete andmebaasis: %s"
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1112
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
+msgid "_Reassign"
+msgstr ""
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1180
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "Viga kiirklahvi eemaldamisel sätete andmebaasist: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1294
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1362
 msgid "Action"
 msgstr "Tegevus"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1316
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1384
 msgid "Shortcut"
 msgstr "Kiirklahv"
 
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
@@ -1983,8 +1972,8 @@ msgstr "Käskudele kiirklahvide seadmine"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:248
 #: ../capplets/keyboard/gnome-keyboard-properties.c:253
-#: ../capplets/sound/sound-properties-capplet.c:1155
-#: ../capplets/sound/sound-properties-capplet.c:1157
+#: ../capplets/sound/sound-properties-capplet.c:1185
+#: ../capplets/sound/sound-properties-capplet.c:1187
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1992,7 +1981,7 @@ msgstr ""
 "hallatakse nüüd deemoni poolt)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:256
-#: ../capplets/sound/sound-properties-capplet.c:1159
+#: ../capplets/sound/sound-properties-capplet.c:1189
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
@@ -2159,9 +2148,8 @@ msgid "Key presses _repeat when key is held down"
 msgstr "Klaviatuur k_ordab kui klahvi hoitakse all"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
-#, fuzzy
 msgid "Keyboard Accessibility Audio Feedback"
-msgstr "_Klaviatuurihõlbustused"
+msgstr "Klaviatuurihõlbustuste heliline tagasiside"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard Layout Options"
@@ -2306,6 +2294,7 @@ msgstr "Paigutus"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
+#: ../capplets/sound/sound-theme.c:419 ../capplets/sound/sound-theme.c:539
 msgid "Default"
 msgstr "Vaikimisi"
 
@@ -2609,96 +2598,101 @@ msgstr "Tundmatu helijuhtimine %d"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "Tõrge '%s' jaoks testkonveieri loomisel"
 
-#: ../capplets/sound/sound-properties-capplet.c:326
-#: ../capplets/sound/sound-properties-capplet.c:447
+#: ../capplets/sound/sound-properties-capplet.c:260
+#: ../capplets/sound/sound-properties-capplet.c:381
 msgid "Not connected"
 msgstr "Ühendamata"
 
-#: ../capplets/sound/sound-properties-capplet.c:785
+#: ../capplets/sound/sound-properties-capplet.c:829
 msgid "Autodetect"
 msgstr "Automaattuvastus"
 
-#: ../capplets/sound/sound-properties-capplet.c:790
-#: ../capplets/sound/sound-properties-capplet.c:791
+#: ../capplets/sound/sound-properties-capplet.c:834
+#: ../capplets/sound/sound-properties-capplet.c:835
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Linux'i laiendatud heliarhitektuur"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:836
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART helideemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:793
-#: ../capplets/sound/sound-properties-capplet.c:794
+#: ../capplets/sound/sound-properties-capplet.c:837
+#: ../capplets/sound/sound-properties-capplet.c:838
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened heliteemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:797
-#: ../capplets/sound/sound-properties-capplet.c:800
+#: ../capplets/sound/sound-properties-capplet.c:841
+#: ../capplets/sound/sound-properties-capplet.c:844
 msgid "OSS - Open Sound System"
 msgstr "OSS - Open Sound System"
 
-#: ../capplets/sound/sound-properties-capplet.c:802
-#: ../capplets/sound/sound-properties-capplet.c:803
+#: ../capplets/sound/sound-properties-capplet.c:846
+#: ../capplets/sound/sound-properties-capplet.c:847
 msgid "PulseAudio Sound Server"
 msgstr "PulseAudio heliserver"
 
-#: ../capplets/sound/sound-properties-capplet.c:804
+#: ../capplets/sound/sound-properties-capplet.c:848
 msgid "Test Sound"
 msgstr "Testheli"
 
-#: ../capplets/sound/sound-properties-capplet.c:805
+#: ../capplets/sound/sound-properties-capplet.c:849
 msgid "Silence"
 msgstr "Vaikus"
 
-#: ../capplets/sound/sound-properties-capplet.c:1172
+#: ../capplets/sound/sound-properties-capplet.c:1202
 msgid "- GNOME Sound Preferences"
 msgstr "- GNOME Helieelistused"
 
 #: ../capplets/sound/sound-properties.glade.h:1
+msgid "<b>Alerts and Sound Effects</b>"
+msgstr "<b>Hoiatused ja heliefektid</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:2
 msgid "<b>Audio Conferencing</b>"
 msgstr "<b>Audiokonverentsid</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:3
 msgid "<b>Default Mixer Tracks</b>"
 msgstr "<b>Vaikimisi miksimisrajad</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Music and Movies</b>"
 msgstr "<b>Muusika ja filmid</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<b>Sound Events</b>"
 msgstr "<b>Helisündmused</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "<b>Sound Theme</b>"
+msgstr "<b>Heliteema</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Testimine...</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "Click OK to finish."
 msgstr "Lõpetamiseks vajuta Olgu"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "Seadmed"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing"
-msgstr "_Tarkvaraline helimiksimine on lubatud"
-
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "Flash _entire screen"
-msgstr "Sähvatus kogu _ekraanil"
-
 #: ../capplets/sound/sound-properties.glade.h:10
-msgid "Flash _window titlebar"
-msgstr "Sähvatus akna _tiitliribal"
+#, fuzzy
+msgid "Play _alert sound"
+msgstr "_Esitatakse süsteemseid helisid"
 
 #: ../capplets/sound/sound-properties.glade.h:11
+msgid "Play _sound effects when buttons are clicked"
+msgstr ""
+
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "S_ound playback:"
 msgstr "H_elide esitamine:"
 
-#: ../capplets/sound/sound-properties.glade.h:12
+#: ../capplets/sound/sound-properties.glade.h:13
 msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
@@ -2706,25 +2700,22 @@ msgstr ""
 "Vali klaviatuuri abil juhitavad seda ja rajad. Mitme raja valimiseks kasuta "
 "Shift ja Control klahve."
 
-#: ../capplets/sound/sound-properties.glade.h:13
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "So_und playback:"
 msgstr "Hel_ide esitamine:"
 
-#: ../capplets/sound/sound-properties.glade.h:14
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "Sou_nd capture:"
 msgstr "Helide sal_vestamine:"
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1028
 msgid "Sound Preferences"
 msgstr "Helieelistused"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:17
 msgid "Sounds"
 msgstr "Helid"
-
-#: ../capplets/sound/sound-properties.glade.h:17
-msgid "System Beep"
-msgstr "Süsteemne piiks"
 
 #: ../capplets/sound/sound-properties.glade.h:18
 msgid "Test"
@@ -2739,20 +2730,112 @@ msgid "_Device:"
 msgstr "Sea_de:"
 
 #: ../capplets/sound/sound-properties.glade.h:21
-msgid "_Enable system beep"
-msgstr "Süsteemne _piiks on lubatud"
+msgid "_Play alerts and sound effects"
+msgstr ""
 
 #: ../capplets/sound/sound-properties.glade.h:22
-msgid "_Play system sounds"
-msgstr "_Esitatakse süsteemseid helisid"
-
-#: ../capplets/sound/sound-properties.glade.h:23
 msgid "_Sound playback:"
 msgstr "_Helide esitamine:"
 
-#: ../capplets/sound/sound-properties.glade.h:24
-msgid "_Visual system beep"
-msgstr "Süsteemne piiks on _visuaalne"
+#. Bell
+#: ../capplets/sound/sound-theme-definition.h:46
+msgid "Alert sound"
+msgstr "Hoiatusheli"
+
+#: ../capplets/sound/sound-theme-definition.h:47
+msgid "Visual alert"
+msgstr "Visuaalne hoiatus"
+
+#. Windows and buttons
+#: ../capplets/sound/sound-theme-definition.h:49
+msgid "Windows and Buttons"
+msgstr "Aknad ja nupud"
+
+#: ../capplets/sound/sound-theme-definition.h:50
+msgid "Button clicked"
+msgstr "Nupu klõpsamine"
+
+#: ../capplets/sound/sound-theme-definition.h:51
+msgid "Toggle button clicked"
+msgstr ""
+
+#: ../capplets/sound/sound-theme-definition.h:52
+msgid "Window maximized"
+msgstr "Akna maksimeerimine"
+
+#: ../capplets/sound/sound-theme-definition.h:53
+msgid "Window unmaximized"
+msgstr "Akna taastamine maksimeeritud olekust"
+
+#: ../capplets/sound/sound-theme-definition.h:54
+msgid "Window minimised"
+msgstr "Akna minimeerimine"
+
+#: ../capplets/sound/sound-theme-definition.h:57
+msgid "Login"
+msgstr "Sisselogimine"
+
+#: ../capplets/sound/sound-theme-definition.h:58
+#: ../libslab/bookmark-agent.c:1063
+msgid "Logout"
+msgstr "Väljalogimine"
+
+#: ../capplets/sound/sound-theme-definition.h:59
+msgid "New e-mail"
+msgstr "Uus e-sõnum"
+
+#: ../capplets/sound/sound-theme-definition.h:60
+msgid "Empty trash"
+msgstr ""
+
+#: ../capplets/sound/sound-theme-definition.h:61
+msgid "Long action completed (download, CD burning, etc.)"
+msgstr ""
+
+#. Alerts?
+#: ../capplets/sound/sound-theme-definition.h:63
+msgid "Alerts"
+msgstr "Hoiatused"
+
+#: ../capplets/sound/sound-theme-definition.h:64
+msgid "Information or question"
+msgstr ""
+
+#: ../capplets/sound/sound-theme-definition.h:65
+msgid "Warning"
+msgstr "Hoiatus"
+
+#: ../capplets/sound/sound-theme-definition.h:66
+msgid "Error"
+msgstr "Viga"
+
+#: ../capplets/sound/sound-theme-definition.h:67
+msgid "Battery warning"
+msgstr "Aku hoiatus"
+
+#: ../capplets/sound/sound-theme.c:437 ../capplets/sound/sound-theme.c:563
+msgid "Flash screen"
+msgstr ""
+
+#: ../capplets/sound/sound-theme.c:441 ../capplets/sound/sound-theme.c:567
+msgid "Flash window"
+msgstr ""
+
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1030
+msgid "Testing event sound"
+msgstr "Sündmuse heli testimine"
+
+#: ../capplets/sound/sound-theme.c:482
+msgid "Select Sound File"
+msgstr "Helifaili valimine"
+
+#: ../capplets/sound/sound-theme.c:493
+msgid "Sound files"
+msgstr "Helifailid"
+
+#: ../capplets/sound/sound-theme.c:547
+msgid "Custom..."
+msgstr "Kohandatud..."
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
@@ -2845,11 +2928,11 @@ msgstr "Uuenda"
 msgid "Uninstall"
 msgstr "Eemalda"
 
-#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:760
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:728
 msgid "Remove from Favorites"
 msgstr "Eemalda lemmikute hulgast"
 
-#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:762
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:730
 msgid "Add to Favorites"
 msgstr "Lisa lemmikute hulka"
 
@@ -2880,10 +2963,6 @@ msgstr "Ülejäänud"
 msgid "Lock Screen"
 msgstr "Ekraani lukustamine"
 
-#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:45
-msgid "Logout"
-msgstr "Väljalogimine"
-
 #: ../libslab/bookmark-agent.c:1065
 msgid "Shutdown"
 msgstr ""
@@ -2896,99 +2975,99 @@ msgstr "Uus arvutustabel"
 msgid "New Document"
 msgstr "Uus dokument"
 
-#: ../libslab/bookmark-agent.c:1147
+#: ../libslab/bookmark-agent.c:1146
 msgid "Home"
 msgstr "Kodus"
 
-#: ../libslab/bookmark-agent.c:1152
+#: ../libslab/bookmark-agent.c:1151
 msgid "Documents"
 msgstr "Dokumendid"
 
-#: ../libslab/bookmark-agent.c:1165
+#: ../libslab/bookmark-agent.c:1164
 msgid "File System"
 msgstr "Failisüsteem"
 
-#: ../libslab/bookmark-agent.c:1169
+#: ../libslab/bookmark-agent.c:1168
 msgid "Network Servers"
 msgstr "Võrguserverid"
 
-#: ../libslab/bookmark-agent.c:1198
+#: ../libslab/bookmark-agent.c:1197
 msgid "Search"
 msgstr "Otsing"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:170
+#: ../libslab/directory-tile.c:172
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Ava</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:242
+#: ../libslab/directory-tile.c:191 ../libslab/document-tile.c:241
 msgid "Rename..."
 msgstr "Muuda nime..."
 
-#: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
-#: ../libslab/document-tile.c:256 ../libslab/document-tile.c:265
+#: ../libslab/directory-tile.c:205 ../libslab/directory-tile.c:214
+#: ../libslab/document-tile.c:255 ../libslab/document-tile.c:264
 msgid "Send To..."
 msgstr "Saada..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:291
+#: ../libslab/directory-tile.c:229 ../libslab/document-tile.c:290
 msgid "Move to Trash"
 msgstr "Tõsta prügikasti"
 
-#: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:301 ../libslab/document-tile.c:873
+#: ../libslab/directory-tile.c:239 ../libslab/directory-tile.c:457
+#: ../libslab/document-tile.c:300 ../libslab/document-tile.c:841
 msgid "Delete"
 msgstr "Kustuta"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1045
+#: ../libslab/directory-tile.c:569 ../libslab/document-tile.c:1013
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Kas sa soovid \"%s\" jäädavalt kustutada?"
 
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1049
+#: ../libslab/directory-tile.c:574 ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "Kui sa kirje kustutad, siis on see jäädavalt kadunud."
 
-#: ../libslab/document-tile.c:203
+#: ../libslab/document-tile.c:202
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Ava programmiga \"%s\"</b>"
 
-#: ../libslab/document-tile.c:215
+#: ../libslab/document-tile.c:214
 msgid "Open with Default Application"
 msgstr "Ava vaikimisi rakendusega"
 
-#: ../libslab/document-tile.c:226
+#: ../libslab/document-tile.c:225
 msgid "Open in File Manager"
 msgstr "Ava failihaldur"
 
-#: ../libslab/document-tile.c:656
+#: ../libslab/document-tile.c:624
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:663
+#: ../libslab/document-tile.c:631
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:671
+#: ../libslab/document-tile.c:639
 msgid "Today %l:%M %p"
 msgstr "Täna %H:%M"
 
-#: ../libslab/document-tile.c:681
+#: ../libslab/document-tile.c:649
 msgid "Yesterday %l:%M %p"
 msgstr "Eile %H:%M"
 
-#: ../libslab/document-tile.c:693
+#: ../libslab/document-tile.c:661
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../libslab/document-tile.c:701
+#: ../libslab/document-tile.c:669
 msgid "%b %d %l:%M %p"
 msgstr "%d. %b %H:%M"
 
-#: ../libslab/document-tile.c:703
+#: ../libslab/document-tile.c:671
 msgid "%b %d %Y"
 msgstr "%d. %b %Y"
 
@@ -3085,64 +3164,6 @@ msgstr "<b>Ava programmiga \"%s\"</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Eemalda süsteemsete kirjete hulgast"
-
-#: ../libsounds/sound-view.c:44
-msgid "Login"
-msgstr "Sisselogimine"
-
-#: ../libsounds/sound-view.c:46
-msgid "Boing"
-msgstr "Plõnn"
-
-#: ../libsounds/sound-view.c:47
-msgid "Siren"
-msgstr "Sireen"
-
-#: ../libsounds/sound-view.c:48
-msgid "Clink"
-msgstr "Kõlks"
-
-#: ../libsounds/sound-view.c:49
-msgid "Beep"
-msgstr "Piiks"
-
-#: ../libsounds/sound-view.c:50
-msgid "No sound"
-msgstr "Heli puudub"
-
-#: ../libsounds/sound-view.c:132
-msgid "Sound not set for this event."
-msgstr "Selle sündmuse jaoks pole heli määratud"
-
-#: ../libsounds/sound-view.c:141
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"Selle sündmuse jaoks pole helifaili.\n"
-"Võib-olla on sul vaja vaikimisi määratud helide jaoks tarvis paigaldada "
-"gnome-audio pakk."
-
-#: ../libsounds/sound-view.c:152
-msgid "The sound file for this event does not exist."
-msgstr "Selle sündmuse jaoks pole helifaili olemas."
-
-#: ../libsounds/sound-view.c:183
-msgid "Select Sound File"
-msgstr "Helifaili valimine"
-
-#: ../libsounds/sound-view.c:210
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "Fail %s pole korrektne wav fail"
-
-#: ../libsounds/sound-view.c:271
-msgid "Select sound file..."
-msgstr "Vali helifail..."
-
-#: ../libsounds/sound-view.c:373
-msgid "System Sounds"
-msgstr "Süsteemsed helid"
 
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
@@ -3276,41 +3297,41 @@ msgstr ""
 msgid "The GNOME configuration tool"
 msgstr "GNOME seadistusprogramm"
 
-#: ../typing-break/drw-break-window.c:188
+#: ../typing-break/drw-break-window.c:189
 msgid "_Postpone Break"
 msgstr "_Lükka puhkepaus edasi"
 
-#: ../typing-break/drw-break-window.c:244
+#: ../typing-break/drw-break-window.c:245
 msgid "Take a break!"
 msgstr "Tee üks puhkepaus!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #. translators: keep the initial "/"
-#: ../typing-break/drwright.c:129
+#: ../typing-break/drwright.c:130
 msgid "/_Preferences"
 msgstr "/_Eelistused"
 
-#: ../typing-break/drwright.c:130
+#: ../typing-break/drwright.c:131
 msgid "/_About"
 msgstr "/_Rakendist lähemalt"
 
-#: ../typing-break/drwright.c:132
+#: ../typing-break/drwright.c:133
 msgid "/_Take a Break"
 msgstr "/_Tee vaheaeg"
 
-#: ../typing-break/drwright.c:501
+#: ../typing-break/drwright.c:489
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minut järgmise puhkepausini"
 msgstr[1] "%d minutit järgmise puhkepausini"
 
-#: ../typing-break/drwright.c:505
+#: ../typing-break/drwright.c:493
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Järgmise puhkepausini on vähem kui minut"
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:580
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3318,19 +3339,19 @@ msgid ""
 msgstr ""
 "Puhkepausi omaduste dialoogi pole järgneva vea tõttu võimalik kuvada: %s"
 
-#: ../typing-break/drwright.c:611
+#: ../typing-break/drwright.c:599
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Autor: Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:612
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Andres Carlsson'i poolt lisatud silmarõõm"
 
-#: ../typing-break/drwright.c:621
+#: ../typing-break/drwright.c:609
 msgid "A computer break reminder."
 msgstr "Puhkepausist meeldetuletaja."
 
-#: ../typing-break/drwright.c:623
+#: ../typing-break/drwright.c:611
 msgid "translator-credits"
 msgstr ""
 "Lauris Kaplinski <lauris@ariman.ee>, 1999.\n"
@@ -3361,997 +3382,3 @@ msgstr ""
 "paneelil pole teateala. Seda on võimalik sinna lisada kui teha paneelil "
 "paremklõps, valida 'Lisa paneelile', siis valida 'Teateala' ja klõpsata "
 "nupul 'Lisa'."
-
-#: ../vfs-methods/fontilus/fontilus-context-menu.c:132
-msgid "Set as Application Font"
-msgstr "Rakenduste kirjatüübi seadmine"
-
-#: ../vfs-methods/fontilus/fontilus-context-menu.c:133
-msgid "Sets the default application font"
-msgstr "Rakenduste vaikimisi kirjatüübi seadmine"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "Kui määratud, siis tehakse OpenType kirjatüüpidest pisipilte."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "Kui määratud, siis tehakse PCF kirjatüüpidest pisipilte."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "Kui määratud, siis tehakse TrueType kirjatüüpidest pisipilte."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "Kui määratud, siis tehakse Type1 kirjatüüpidest pisipilte."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"Selle võtmega määratakse OpenType kirjatüüpidest pisipiltide tegemise käsk."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "Selle võtmega määratakse PCF kirjatüüpidest pisipiltide tegemise käsk."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"Selle võtmega määratakse TrueType kirjatüüpidest pisipiltide tegemise käsk."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"Selle võtmega määratakse Type1 kirjatüüpidest pisipiltide tegemise käsk."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "OpenType kirjatüüpidest pisipiltide tegemise käsk"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "PCF kirjatüüpidest pisipiltide tegemise käsk"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "TrueType kirjatüüpidest pisipiltide tegemise käsk"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "Type1 kirjatüüpidest pisipiltide tegemise käsk"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "Kas OpenType kirjatüüpidest tehakse pisipilte"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "Kas PCF kirjatüüpidest tehakse pisipilte"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "Kas TrueType kirjatüüpidest tehakse pisipilte"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "Kas Type1 kirjatüüpidest tehakse pisipilte"
-
-# Leiutasin stringi, kus oleks võimalikult palju eestile omaseid tähti. ökul
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "Väike könn sõi ükskord garaažis šokolaadi. 0123456789"
-
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "Nimi:"
-
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "Laad:"
-
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "Tüüp:"
-
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "Suurus:"
-
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "Versioon:"
-
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "Autoriõigused:"
-
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "Kirjeldus:"
-
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "kasutamine: %s kirjatüübifail\n"
-
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "Kirjatüüpide näitaja"
-
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "Kirjatüüpide eelvaade"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:242
-msgid "Text to thumbnail (default: Aa)"
-msgstr "Pisipildiks tehtav tekst (vaikimisi: Aa)"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:242
-msgid "TEXT"
-msgstr "TEKST"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:244
-msgid "Font size (default: 64)"
-msgstr "Kirjatüübi suurus (vaikimisi 64)"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:244
-msgid "SIZE"
-msgstr "SUURUS"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:246
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "KIRJATÜÜBIFAIL VÄLJUNDFAIL"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:262
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "Viga argumentide analüüsimisel: %s\n"
-
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Rakendada uus kirjatüüp?</span>"
-
-#: ../vfs-methods/themus/apply-font.glade.h:2
-msgid "Do _not apply font"
-msgstr "Ära rake_nda kirjatüüpi"
-
-#: ../vfs-methods/themus/apply-font.glade.h:3
-msgid ""
-"The theme you have selected suggests a new font. A preview of the font is "
-"shown below."
-msgstr ""
-"Sinu poolt valitud teema soovitab uut kirjatüüpi. Selle kirjatüübi eelvaadet "
-"näidatakse allpool."
-
-#: ../vfs-methods/themus/apply-font.glade.h:4
-msgid "_Apply font"
-msgstr "_Rakenda kirjatüüp"
-
-#: ../vfs-methods/themus/theme-method.c:485
-msgid "Themes"
-msgstr "Teemad"
-
-#: ../vfs-methods/themus/themus-properties-view.c:128
-msgid "Description"
-msgstr "Kirjeldus"
-
-#: ../vfs-methods/themus/themus-properties-view.c:135
-msgid "Control theme"
-msgstr "Juhtteema"
-
-#: ../vfs-methods/themus/themus-properties-view.c:141
-msgid "Window border theme"
-msgstr "Akna äärise teema"
-
-#: ../vfs-methods/themus/themus-properties-view.c:147
-msgid "Icon theme"
-msgstr "Ikoonide teema"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:1
-msgid "If set to true, then installed themes will be thumbnailed."
-msgstr "Kui määratud, siis paigaldatud teemadest tehakse pisipildid."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:2
-msgid "If set to true, then themes will be thumbnailed."
-msgstr "Kui määratud, siis teemadest tehakse pisipildid."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"Selle võtmega määratakse paigaldatud teemadest pisipiltide tegemise käsk."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:4
-msgid "Set this key to the command used to create thumbnails for themes."
-msgstr "Selle võtmega määratakse teemadest pisipiltide tegemise käsk."
-
-#: ../vfs-methods/themus/themus.schemas.in.h:5
-msgid "Thumbnail command for installed themes"
-msgstr "Paigaldatud teemade jaoks pisipiltide tegemise käsk"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:6
-msgid "Thumbnail command for themes"
-msgstr "Teemade jaoks pisipiltide tegemise käsk"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:7
-msgid "Whether to thumbnail installed themes"
-msgstr "Kas teha paigaldatud teemadest pisipilte"
-
-#: ../vfs-methods/themus/themus.schemas.in.h:8
-msgid "Whether to thumbnail themes"
-msgstr "Kas teha teemadest pisipilte"
-
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "ABCDÕÄÖÜ"
-
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[FAIL]"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "Teema rakendamine"
-
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "Vaikimisi teema seadmine"
-
-#~ msgid ""
-#~ "Centered\n"
-#~ "Fill screen\n"
-#~ "Scaled\n"
-#~ "Zoom\n"
-#~ "Tiled"
-#~ msgstr ""
-#~ "Keskel\n"
-#~ "Üle ekraani\n"
-#~ "Skaleeritud\n"
-#~ "Suurendatud\n"
-#~ "Paanidena"
-
-#~ msgid "Just apply settings and quit"
-#~ msgstr "Rakenda sätted ja lõpeta"
-
-#~ msgid "Connecting..."
-#~ msgstr "Ühendamine..."
-
-#~ msgid "Keyboard Accessibility Notifications"
-#~ msgstr "Klaviatuurihõlbustuste teavitused"
-
-#~ msgid "_Layouts:"
-#~ msgstr "_Paigutused:"
-
-#~ msgid "_Notifications..."
-#~ msgstr "_Teavitused..."
-
-#~ msgid "Advanced Configuration"
-#~ msgstr "Laiendatud sätted"
-
-#~ msgid "Go _to Fonts Folder"
-#~ msgstr "_Ava kirjatüüpide kataloog"
-
-#~ msgid "Autostart the preferred AT"
-#~ msgstr "Eelistatava automaatse tehnika automaatkäivitus"
-
-#~ msgid "There was an error launching the mouse preferences dialog: %s"
-#~ msgstr "Hiire-eelistuste käivitamisel tekkis viga: %s"
-
-#~ msgid "Unable to import AccessX settings from file '%s'"
-#~ msgstr "AccessX sätteid pole failist '%s' võimalik importida"
-
-#~ msgid "<b>Enable Bo_unce Keys</b>"
-#~ msgstr "<b>_Põrkeklahvid on lubatud</b>"
-
-#~ msgid "<b>Enable Slo_w Keys</b>"
-#~ msgstr "<b>Ae_glased klahvid on lubatud</b>"
-
-#~ msgid "<b>Enable _Mouse Keys</b>"
-#~ msgstr "<b>_Hiireklahvid on lubatud</b>"
-
-#~ msgid "<b>Enable _Repeat Keys</b>"
-#~ msgstr "<b>K_ordavate klahvide lubamine</b>"
-
-#~ msgid "<b>Enable _Sticky Keys</b>"
-#~ msgstr "<b>K_leepuvate klahvide lubamine</b>"
-
-#~ msgid "<b>Features</b>"
-#~ msgstr "<b>Võimalused</b>"
-
-#~ msgid "<b>Toggle Keys</b>"
-#~ msgstr "<b>Lülitavad Klahvid</b>"
-
-#~ msgid "Basic"
-#~ msgstr "Põhiline"
-
-#~ msgid "Beep if key is re_jected"
-#~ msgstr "Klahv _hülgamisel tehakse piiksu"
-
-#~ msgid "Beep when _features turned on or off from keyboard"
-#~ msgstr "_Valikute klaviatuurilt sisse- ja väljalülitamisel tehakse piiksu"
-
-#~ msgid "Beep when _modifier is pressed"
-#~ msgstr "Muuteklahvi vajutamisel tehakse _piiksu"
-
-#~ msgid "Beep when an LED is turned on and two beeps when one is turned off."
-#~ msgstr ""
-#~ "Klaviatuuri valgusdioodi (LED) sisselülitamisel tehakse piiksu ja "
-#~ "väljalülitamisel kaks piiksu."
-
-#~ msgid "Beep when key is:"
-#~ msgstr "Piiksumine, kui klahvi:"
-
-#~ msgid "Delay between keypress and pointer mo_vement:"
-#~ msgstr "Klahvivajutuste ja hiirekursori liigutamise vahel _viivitus:"
-
-#~ msgid "Disa_ble if two keys pressed together"
-#~ msgstr "Ka_he klahvi koosvajutamisel keelatakse"
-
-#~ msgid "E_nable Toggle Keys"
-#~ msgstr "_Lülitavad klahvid on lubatud"
-
-#~ msgid "Filters"
-#~ msgstr "Filtrid"
-
-#~ msgid "I_gnore duplicate keypresses within:"
-#~ msgstr "Klahvide korduvvajutusi _eiratakse selle aja vältel:"
-
-#~ msgid ""
-#~ "Ignore all subsequent presses of the SAME key if they happen within a "
-#~ "user selectable period of time."
-#~ msgstr ""
-#~ "Eiratakse järjestikuseid SAMA klahvi vajutusi, kui need toimuvad kasutaja "
-#~ "määratud vahemiku jooksul."
-
-#~ msgid "Keyboard Accessibility Preferences (AccessX)"
-#~ msgstr "Klaviatuurikasutuse hõlbustamise eelistused (AccessX)"
-
-#~ msgid "Ma_ximum pointer speed:"
-#~ msgstr "Suu_rim kursori kiirus:"
-
-#~ msgid "Mouse _Preferences..."
-#~ msgstr "Hiire-_eelistused..."
-
-#~ msgid ""
-#~ "Only accept keys after they have been pressed and held for a user "
-#~ "adjustable amount of time."
-#~ msgstr ""
-#~ "Lubab ainult klahvivajutusi, mis kestavad kauem kui kasutaja määratud aeg."
-
-#~ msgid ""
-#~ "Perform multiple simultaneous key press operations by pressing modifier "
-#~ "keys in sequence."
-#~ msgstr ""
-#~ "Koostab klahvikombinatsioonid, vajutades muuteklahve järjest ükshaaval."
-
-#~ msgid "Time to acce_lerate to maximum speed:"
-#~ msgstr "Suurima kiiruseni kiirendamise _aeg:"
-
-#~ msgid "Turn the numeric keypad into a mouse control pad."
-#~ msgstr "Muuda numbriklaviatuur hiire juhtklahvideks."
-
-#~ msgid "_Disable if unused for:"
-#~ msgstr "_Lülitada välja kui kasutamata:"
-
-#~ msgid "_Enable keyboard accessibility features"
-#~ msgstr "_Klaviatuurikasutamise hõlbustused on lubatud"
-
-#~ msgid "_Only accept keys held for:"
-#~ msgstr "_Aktsepteerida klahvivajutus pärast:"
-
-#~ msgid "_accepted"
-#~ msgstr "_aktsepteeriti"
-
-#~ msgid "_pressed"
-#~ msgstr "_vajutati"
-
-#~ msgid "_rejected"
-#~ msgstr "hül_jati"
-
-#~ msgid "characters/second"
-#~ msgstr "märki/sekundis"
-
-#~ msgid "milliseconds"
-#~ msgstr "millisekundit"
-
-#~ msgid "pixels/second"
-#~ msgstr "pikslit/sek"
-
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
-
-#~ msgid "gtk-help"
-#~ msgstr "gtk-help"
-
-#~ msgid "Language and Location"
-#~ msgstr "Keel ja asukoht"
-
-#~ msgid "Set your language and location preferences"
-#~ msgstr "Sinu keele ja asukoha eelistuste seadmine"
-
-#~ msgid ""
-#~ "<i>Region and language changes take effect the next time you log in.</i>"
-#~ msgstr ""
-#~ "<i>Regiooni ja keele muudatused rakenduvad järgmisel sisselogimisel.</i>"
-
-#~ msgid "Localization Preferences"
-#~ msgstr "Lokaliseeringute eelistused"
-
-#~ msgid "Region:"
-#~ msgstr "Regioon:"
-
-#~ msgid "Selected languages:"
-#~ msgstr "Valitud keeled:"
-
-#~ msgid "%d millisecond"
-#~ msgid_plural "%d milliseconds"
-#~ msgstr[0] "%d millisekund"
-#~ msgstr[1] "%d millisekundit"
-
-#~ msgid "<i>Fast</i>"
-#~ msgstr "<i>Kiire</i>"
-
-#~ msgid "<i>High</i>"
-#~ msgstr "<i>Kõrge</i>"
-
-#~ msgid "<i>Large</i>"
-#~ msgstr "<i>Suur</i>"
-
-#~ msgid "<i>Low</i>"
-#~ msgstr "<i>Madal</i>"
-
-#~ msgid "<i>Slow</i>"
-#~ msgstr "<i>Aeglane</i>"
-
-#~ msgid "<i>Small</i>"
-#~ msgstr "<i>Väike</i>"
-
-#~ msgid "Buttons"
-#~ msgstr "Nupud"
-
-#~ msgid "Motion"
-#~ msgstr "Liikumine"
-
-#~ msgid "Volume"
-#~ msgstr "Helitugevus"
-
-#~ msgid "Slow Keys Alert"
-#~ msgstr "Aeglaste klahvide hoiatus"
-
-#~ msgid ""
-#~ "You just held down the Shift key for 8 seconds.  This is the shortcut for "
-#~ "the Slow Keys feature, which affects the way your keyboard works."
-#~ msgstr ""
-#~ "Sa hoidsid Shift klahvi all 8 sekundi vältel.  See on kiirklahv, mis "
-#~ "lülitab sisse aeglaste klahvide funktsionaalsuse ja seetõttu muudab ka "
-#~ "Sinu klaviatuuri käitumist."
-
-#~ msgid "Do you want to activate Slow Keys?"
-#~ msgstr "Kas soovid aeglaseid klahve sisse lülitada?"
-
-#~ msgid "Do you want to deactivate Slow Keys?"
-#~ msgstr "Kas soovid aeglaseid klahve välja lülitada?"
-
-#~ msgid "_Activate"
-#~ msgstr "Lülita _sisse"
-
-#~ msgid "_Deactivate"
-#~ msgstr "Lülita _välja"
-
-#~ msgid "Do_n't activate"
-#~ msgstr "Ä_ra lülita sisse"
-
-#~ msgid "Do_n't deactivate"
-#~ msgstr "Ä_ra lülita välja"
-
-#~ msgid "Sticky Keys Alert"
-#~ msgstr "Kleepuvate klahvide hoiatus"
-
-#~ msgid ""
-#~ "You just pressed the Shift key 5 times in a row.  This is the shortcut "
-#~ "for the Sticky Keys feature, which affects the way your keyboard works."
-#~ msgstr ""
-#~ "Sa vajutasid Shift klahvi 5 korda järjest.  See on kiirklahv, mis lülitab "
-#~ "sisse kleepuvate klahvide funktsionaalsuse ja seetõttu muudab ka Sinu "
-#~ "klaviatuuri käitumist."
-
-#~ msgid ""
-#~ "You just pressed two keys at once, or pressed the Shift key 5 times in a "
-#~ "row.  This turns off the Sticky Keys feature, which affects the way your "
-#~ "keyboard works."
-#~ msgstr ""
-#~ "Sa vajutasid korraga kahte klahvi või vajutasid Shift klahvi 5 korda "
-#~ "järjest. See lülitab sisse kleepuvate klahvide funktsionaalsuse ja "
-#~ "seetõttu muudab ka Sinu klaviatuuri käitumist."
-
-#~ msgid "Do you want to activate Sticky Keys?"
-#~ msgstr "Kas soovid kleepuvaid klahve sisse lülitada?"
-
-#~ msgid "Do you want to deactivate Sticky Keys?"
-#~ msgstr "Kas soovid kleepuvaid klahve välja lülitadada?"
-
-#~ msgid ""
-#~ "Cannot create the directory \"%s\".\n"
-#~ "This is needed to allow changing the mouse pointer theme."
-#~ msgstr ""
-#~ "Kataloogi \"%s\" pole võimalik luua.\n"
-#~ "See on kursoriteema vahetamiseks vajalik."
-
-#~ msgid ""
-#~ "Cannot create the directory \"%s\".\n"
-#~ "This is needed to allow changing cursors."
-#~ msgstr ""
-#~ "Kataloogi \"%s\" pole võimalik luua.\n"
-#~ "See on kursorite vahetamiseks vajalik."
-
-#~ msgid "Key Binding (%s) has its action defined multiple times\n"
-#~ msgstr "Klahviseose (%s) tegevus on mitu korda defineeritud\n"
-
-#~ msgid "Key Binding (%s) has its binding defined multiple times\n"
-#~ msgstr "Klahviseose (%s) seos on mitu korda defineeritud\n"
-
-#~ msgid "Key Binding (%s) is incomplete\n"
-#~ msgstr "Klahviseos (%s) on poolik\n"
-
-#~ msgid "Key Binding (%s) is invalid\n"
-#~ msgstr "Klahviseos (%s) on vigane\n"
-
-#~ msgid "It seems that another application already has access to key '%u'."
-#~ msgstr "Paistab, et mingi rakendus omab juba klahvile '%u' ligipääsu'"
-
-#~ msgid "Key Binding (%s) is already in use\n"
-#~ msgstr "Klahviseos (%s) on juba kasutusel\n"
-
-#~ msgid ""
-#~ "Error while trying to run (%s)\n"
-#~ "which is linked to the key (%s)"
-#~ msgstr ""
-#~ "Viga kävitamise proovimisel (%s),\n"
-#~ "see on ühendatud klahviga (%s)"
-
-#~ msgid ""
-#~ "Error activating XKB configuration.\n"
-#~ "It can happen under various circumstances:\n"
-#~ "- a bug in libxklavier library\n"
-#~ "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-#~ "- X server with incompatible libxkbfile implementation\n"
-#~ "\n"
-#~ "X server version data:\n"
-#~ "%s\n"
-#~ "%d\n"
-#~ "%s\n"
-#~ "If you report this situation as a bug, please include:\n"
-#~ "- The result of <b>%s</b>\n"
-#~ "- The result of <b>%s</b>"
-#~ msgstr ""
-#~ "Viga XKB seadistuse aktiveerimisel.\n"
-#~ "See viga võib tekkida järgnevatel asjaoludel:\n"
-#~ "- viga libxklavier teegis\n"
-#~ "- viga X-serveris (utiliidid xkbcomp ja xmodmap)\n"
-#~ "- X-serveri libxkbfile ühildamatu teostus\n"
-#~ "\n"
-#~ "X-serveri versiooniandmed:\n"
-#~ "%s\n"
-#~ "%d\n"
-#~ "%s\n"
-#~ "Kui sa saadad selle olukorra kohta veakirjelduse, siis lisa sellele ka:\n"
-#~ "- <b>%s</b> tulemus\n"
-#~ "- <b>%s</b> tulemus"
-
-#~ msgid ""
-#~ "You are using XFree 4.3.0.\n"
-#~ "There are known problems with complex XKB configurations.\n"
-#~ "Try using a simpler configuration or taking a fresher version of XFree "
-#~ "software."
-#~ msgstr ""
-#~ "Sa kasutad XFree versiooni 4.3.0.\n"
-#~ "Sellega on teadaolevaid probleeme XKB komplekssete seadistustega.\n"
-#~ "Proovi kasutada lihtsamaid sätteid või hangi omale XFree värskem versioon."
-
-#~ msgid ""
-#~ "Could not get default terminal. Verify that your default terminal command "
-#~ "is set and points to a valid application."
-#~ msgstr ""
-#~ "Vaikimisi terminali pole võimalik hankida. Veendu, et vaikimisi terminali "
-#~ "käsuks on määratud sobilik rakendus."
-
-#~ msgid ""
-#~ "Couldn't execute command: %s\n"
-#~ "Verify that this is a valid command."
-#~ msgstr ""
-#~ "Käsku pole võimalik käivitada: %s\n"
-#~ "Veendu, et selline käsk on olemas."
-
-#~ msgid ""
-#~ "There was an error starting up the screensaver:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Screensaver functionality will not work in this session."
-#~ msgstr ""
-#~ "Ekraanisäästja käivitamisel tekkis viga:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Ekraanisäästja funktsionaalsus selle seansi jooksul ei tööta."
-
-#~ msgid "_Do not show this message again"
-#~ msgstr "_Ära näita seda teadet uuesti"
-
-#~ msgid "Couldn't load sound file %s as sample %s"
-#~ msgstr "Helifaili %s pole võimalik sämplina %s laadida"
-
-#~ msgid "Cannot determine user's home directory"
-#~ msgstr "Kasutaja kodukataloogi pole võimalik tuvastada"
-
-#~ msgid "GConf key %s set to type %s but its expected type was %s\n"
-#~ msgstr "GConf võti %s on tüübiga %s, eeldatakse tüüpi %s\n"
-
-#~ msgid "A_vailable files:"
-#~ msgstr "_Saadaolevad failid:"
-
-#~ msgid "Do _not show this warning again."
-#~ msgstr "Seda _hoiatust mitte enam kuvada."
-
-#~ msgid "Load modmap files"
-#~ msgstr "Modmap failide laadimine"
-
-#~ msgid "Would you like to load the modmap file(s)?"
-#~ msgstr "Kas soovid modmap faile laadida?"
-
-#~ msgid "_Load"
-#~ msgstr "_Lae"
-
-#~ msgid "_Loaded files:"
-#~ msgstr "Laaditud _failid:"
-
-#~ msgid "Error creating signal pipe."
-#~ msgstr "Viga toru loomisel."
-
-#~ msgid "Type"
-#~ msgstr "Tüüp"
-
-#~ msgid "Preview Width"
-#~ msgstr "Eelvaate laius"
-
-#~ msgid "Width if applier is a preview: Defaults to 64."
-#~ msgstr "Laius, kui rakendajaks on eelvaade: Vaikimisi 64."
-
-#~ msgid "Preview Height"
-#~ msgstr "Eelvaate kõrgus"
-
-#~ msgid "Height if applier is a preview: Defaults to 48."
-#~ msgstr "Kõrgus, kui rakendajaks on eelvaade: Vaikimisi 48."
-
-#~ msgid "Screen"
-#~ msgstr "Ekraan"
-
-#~ msgid "Screen on which BGApplier is to draw"
-#~ msgstr "Ekraan, millele BGApplier joonistab"
-
-#~ msgid "Edited %m/%d/%Y"
-#~ msgstr "Muudetud %d. %m %Y"
-
-#~ msgid ""
-#~ "If true, the mime handlers for text/plain and text/* will be kept in sync"
-#~ msgstr ""
-#~ "Kui märgitud, siis text/plain ja text/* mime-käsitlejaid hoitakse "
-#~ "sünkroonis"
-
-#~ msgid "Sync text/plain and text/* handlers"
-#~ msgstr "text/plain ja text/* käsitlejate sünkroniseerimine"
-
-#~ msgid "E-mail"
-#~ msgstr "E-post"
-
-#~ msgid "E-mail's shortcut."
-#~ msgstr "E-posti kiirklahv."
-
-#~ msgid "Eject"
-#~ msgstr "Sahtli lahtilükkamine"
-
-#~ msgid "Eject's shortcut."
-#~ msgstr "Sahtli lahtilükkamise kiirklahv"
-
-#~ msgid "Home folder"
-#~ msgstr "Kodukataloog"
-
-#~ msgid "Home folder's shortcut."
-#~ msgstr "Kodukataloogi kiirklahv."
-
-#~ msgid "Launch calculator"
-#~ msgstr "Kalkulaatori käivitamine"
-
-#~ msgid "Launch calculator's shortcut"
-#~ msgstr "Kalkulaatori käivitamise kiirklahv"
-
-#~ msgid "Launch help browser"
-#~ msgstr "Abiteabe sirvija käivitamine"
-
-#~ msgid "Launch help browser's shortcut."
-#~ msgstr "Abiteabe sirvija käivitamise kiirklahv."
-
-#~ msgid "Launch web browser"
-#~ msgstr "Veebisirvija käivitamine"
-
-#~ msgid "Launch web browser's shortcut."
-#~ msgstr "Veebisirvija käivitamise kiirklahv."
-
-#~ msgid "Lock screen's shortcut."
-#~ msgstr "Ekraani lukustamise kiirklahv"
-
-#~ msgid "Log out"
-#~ msgstr "Väljalogimine"
-
-#~ msgid "Log out's shortcut."
-#~ msgstr "Väljalogimise kiirklahv"
-
-#~ msgid "Media player"
-#~ msgstr "Meediaesitaja"
-
-#~ msgid "Media player key's shortcut."
-#~ msgstr "Meediaesitaja klahvi kiirklahv."
-
-#~ msgid "Next track key's shortcut."
-#~ msgstr "Järgmise loo kiirklahv."
-
-#~ msgid "Pause"
-#~ msgstr "Paus"
-
-#~ msgid "Pause key's shortcut."
-#~ msgstr "Pausi kiirklahv."
-
-#~ msgid "Play (or play/pause)"
-#~ msgstr "Esitamine (või esitamine/paus)"
-
-#~ msgid "Play (or play/pause) key's shortcut."
-#~ msgstr "Esitamise (või mängimise/pausi) kiirklahv"
-
-#~ msgid "Previous track key's shortcut."
-#~ msgstr "Eelmise loo kiirklahv."
-
-#~ msgid "Search's shortcut."
-#~ msgstr "Otsingu kiirklahv."
-
-#~ msgid "Skip to next track"
-#~ msgstr "Järgmise loo peale hüppamine"
-
-#~ msgid "Skip to previous track"
-#~ msgstr "Eelmise loo peale hüppamine"
-
-#~ msgid "Sleep"
-#~ msgstr "Uinumine"
-
-#~ msgid "Sleep's shortcut."
-#~ msgstr "Uinumise kiirklahv."
-
-#~ msgid "Stop playback key"
-#~ msgstr "Esitamise lõpetamine"
-
-#~ msgid "Stop playback key's shortcut."
-#~ msgstr "Esitamise lõpetamise kiirklahv."
-
-#~ msgid "Volume down"
-#~ msgstr "Heli vaiksemaks"
-
-#~ msgid "Volume down's shortcut."
-#~ msgstr "Heli vaiksemakskeeramise kiirklahv."
-
-#~ msgid "Volume mute"
-#~ msgstr "Heli vaigistamine"
-
-#~ msgid "Volume mute's shortcut."
-#~ msgstr "Heli vaigistamise kiirklahv."
-
-#~ msgid "Volume step"
-#~ msgstr "Helitugevuse samm"
-
-#~ msgid "Volume step as percentage of volume."
-#~ msgstr "Helitugevuse reguleerimise samm protsentides."
-
-#~ msgid "Volume up"
-#~ msgstr "Heli valjemaks"
-
-#~ msgid "Volume up's shortcut."
-#~ msgstr "Heli valjemakskeeramise kiirklahv."
-
-#~ msgid "Display a dialog when there are errors running the screensaver"
-#~ msgstr "Dialoogi kuvamine, kui ekraanisäästja käivitamisel esineb vigu"
-
-#~ msgid "Run screensaver at login"
-#~ msgstr "Ekraanisäästja käivitamine sisselogimisel"
-
-#~ msgid "Show Startup Errors"
-#~ msgstr "Käivitusvigade näitamine"
-
-#~ msgid "Start screensaver"
-#~ msgstr "Ekraanisäästja käivitamine"
-
-#~ msgid "Links Text Browser"
-#~ msgstr "Veebisirvija Links"
-
-#~ msgid "Lynx Text Browser"
-#~ msgstr "Veebisirvija Lynx"
-
-#~ msgid "Simple OnScreen Keyboard"
-#~ msgstr "Lihtne ekraaniklaviatuur"
-
-#~ msgid "W3M Text Browser"
-#~ msgstr "Veebisirvija W3M"
-
-#~ msgid "_Keep resolution"
-#~ msgstr "_Jätka selle eraldusvõimega"
-
-#~ msgid "There was an error launching the keyboard tool: %s"
-#~ msgstr "Klaviatuuri tööriista käivitamisel tekkis viga: %s"
-
-#~ msgid "Choose..."
-#~ msgstr "Vali..."
-
-#~ msgid "Microsoft Natural Keyboard"
-#~ msgstr "Microsoft Natural Keyboard"
-
-#~ msgid "_Accessibility..."
-#~ msgstr "_Hõlbustused..."
-
-#~ msgid "The theme is an engine. You need to compile it."
-#~ msgstr "Teema on teemamootor. Sa pead teema kompileerima."
-
-#~ msgid "The file format is invalid"
-#~ msgstr "Failivorming on vigane"
-
-#~ msgid "This theme is not in a supported format."
-#~ msgstr "See teema pole toetatud vormingus."
-
-#~ msgid "The file format is invalid."
-#~ msgstr "Failivorming on vigane."
-
-#~ msgid "Do _not show this warning again"
-#~ msgstr "Seda _hoiatust uuesti mitte näidata"
-
-#~ msgid ""
-#~ "<b>The X system keyboard settings differ from your current GNOME keyboard "
-#~ "settings.</b>\n"
-#~ "\n"
-#~ "Expected was %s, but the the following settings were found: %s.\n"
-#~ "\n"
-#~ "Which set would you like to use?"
-#~ msgstr ""
-#~ "<b>X-süsteemi klaviatuuri sätted erinevad praegustest GNOME klaviatuuri "
-#~ "sätetest.</b>\n"
-#~ "\n"
-#~ "Oodati sätteid %s, kuid leiti hoopis järgnevad sätted: %s\n"
-#~ "\n"
-#~ "Milliseid sätteid Sa soovid kasutada?"
-
-#~ msgid "Use X settings"
-#~ msgstr "X'i seadistuste kasutamine"
-
-#~ msgid "Keep GNOME settings"
-#~ msgstr "GNOME sätete säilitamine"
-
-#~ msgid "Theme Details"
-#~ msgstr "Teema üksikasjad"
-
-#~ msgid "Start these assistive technologies every time you log in:"
-#~ msgstr "Järgnevate abistavate vahendite käivitamine igal sisselogimisel:"
-
-#~ msgid ""
-#~ "No Assistive Technology is available on your system.  The 'gok' package "
-#~ "must be installed in order to get on-screen keyboard support, and the "
-#~ "'orca' package must be installed for screenreading and magnifying "
-#~ "capabilities."
-#~ msgstr ""
-#~ "Abistav tehnika pole sinu süsteemis saadaval. Ekraaniklaviatuuri toe "
-#~ "saamiseks tuleb paigaldada pakk 'gok' ja ekraanilt lugemise ning luubi "
-#~ "toe saamiseks tuleb paigaldada pakk 'orca'."
-
-#~ msgid ""
-#~ "Not all available assistive technologies are installed on your system.  "
-#~ "The 'gok' package must be installed in order to get on-screen keyboard "
-#~ "support."
-#~ msgstr ""
-#~ "Mitte kõik abistava tehnikad pole sinu süsteemi paigaldatud. "
-#~ "Ekraaniklaviatuuri toe saamiseks tuleb paigaldada pakk 'gok'."
-
-#~ msgid ""
-#~ "Not all available assistive technologies are installed on your system.  "
-#~ "The 'orca' package must be installed for screenreading and magnifying "
-#~ "capabilities."
-#~ msgstr ""
-#~ "Mitte kõik abistavad tehnikad pole sinu süsteemi paigaldatud. Ekraanilt "
-#~ "lugemise ning luubi toe saamiseks tuleb paigaldada pakk 'orca'."
-
-#~ msgid "Change your Desktop Background settings"
-#~ msgstr "Töölaua tausta seadistamine"
-
-#~ msgid "Desktop Background"
-#~ msgstr "Töölaua taust"
-
-#~ msgid "Desktop Background Preferences"
-#~ msgstr "Töölaua tausta eelistused"
-
-#~ msgid "_Add Wallpaper"
-#~ msgstr "L_isa tapeet"
-
-#~ msgid "_Finish"
-#~ msgstr "Lõ_peta"
-
-#~ msgid "_Remove"
-#~ msgstr "_Eemalda"
-
-#~ msgid "Centered"
-#~ msgstr "Keskel"
-
-#~ msgid "Fill Screen"
-#~ msgstr "Üle ekraani"
-
-#~ msgid "Scaled"
-#~ msgstr "Skaleeritud"
-
-#~ msgid "Zoom"
-#~ msgstr "Suurendus"
-
-#~ msgid "Tiled"
-#~ msgstr "Paanidena"
-
-#~ msgid "Solid Color"
-#~ msgstr "Ühtlane värv"
-
-#~ msgid "Horizontal Gradient"
-#~ msgstr "Horisontaalse üleminekuga"
-
-#~ msgid "Vertical Gradient"
-#~ msgstr "Vertikaalse üleminekuga"
-
-#~ msgid "Select fonts for the desktop"
-#~ msgstr "Töölaua kirjatüüpide valimine"
-
-#~ msgid "Window Management"
-#~ msgstr "Akende haldus"
-
-#~ msgid "A_vailable layouts:"
-#~ msgstr "Võimalikud pai_gutused:"
-
-#~ msgid "Medium"
-#~ msgstr "Keskmine"
-
-#~ msgid "Theme deleted succesfully. Please select another theme."
-#~ msgstr "Teema on edukalt kustutatud. Palun vali mõni muu teema."
-
-#~ msgid "The theme file location specified to install is invalid"
-#~ msgstr "Paigaldamisel määratud teemafaili asukoht on vigane"
-
-#~ msgid "You can save this theme by pressing the Save Theme button."
-#~ msgstr ""
-#~ "Sul on võimalik seda teemat \"Salvesta teema\" nupu abil salvestada."
-
-#~ msgid "Select themes for various parts of the desktop"
-#~ msgstr "Töölaua erinevate osade teemade valimine"
-
-#~ msgid "<b>You do not have permission to change theme settings</b>"
-#~ msgstr "<b>Sul pole teema sätete muutmiseks õiguseid</b>"
-
-#~ msgid "This theme does not suggest any particular font or background."
-#~ msgstr "See teema ei täpsusta kirjatüüpi ega tausta."
-
-#~ msgid "This theme suggests a font and a background:"
-#~ msgstr "See teema soovitab kirjatüüpi ja tausta:"
-
-#~ msgid "_Install Theme..."
-#~ msgstr "_Paigalda teema..."
-
-#~ msgid "_Save Theme..."
-#~ msgstr "Sa_lvesta teema..."
-
-#~ msgid "Customize the appearance of toolbars and menubars in applications"
-#~ msgstr "Rakenduste menüü- ja tööriistaribade välimuse kohandamine"
-
-#~ msgid "<b>Behavior and Appearance</b>"
-#~ msgstr "<b>Käitumine ja välimus</b>"
