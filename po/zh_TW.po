@@ -6,15 +6,15 @@
 # GNOME 2.x:
 # Abel Cheung <abel@oaka.org>, 2001-2003, 2005.
 # Woodman Tuen <wmtuen@gmail.com>, 2004-07.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.21.90\n"
+"Project-Id-Version: gnome-control-center 2.23.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-09 16:51+0800\n"
-"PO-Revision-Date: 2008-03-09 16:51+0800\n"
-"Last-Translator: Woodman Tuen <wmtuen@gmail.com>\n"
+"POT-Creation-Date: 2008-08-11 06:35+0800\n"
+"PO-Revision-Date: 2008-08-08 16:51+0800\n"
+"Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,25 +49,25 @@ msgstr "在警告對話方塊中顯示的按鈕"
 msgid "Show more _details"
 msgstr "顯示更多詳細資料(_D)"
 
-#: ../capplets/about-me/gnome-about-me.c:682
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Select Image"
 msgstr "選擇圖片"
 
-#: ../capplets/about-me/gnome-about-me.c:684
+#: ../capplets/about-me/gnome-about-me.c:741
 msgid "No Image"
 msgstr "沒有圖片"
 
-#: ../capplets/about-me/gnome-about-me.c:712
-#: ../capplets/appearance/appearance-desktop.c:1130
+#: ../capplets/about-me/gnome-about-me.c:769
+#: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "圖片"
 
-#: ../capplets/about-me/gnome-about-me.c:716
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/about-me/gnome-about-me.c:773
+#: ../capplets/appearance/theme-installer.c:696
 msgid "All Files"
 msgstr "全部檔案"
 
-#: ../capplets/about-me/gnome-about-me.c:854
+#: ../capplets/about-me/gnome-about-me.c:911
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -75,16 +75,16 @@ msgstr ""
 "嘗試取得地址薄資訊時發生錯誤\n"
 "Evolution 資料伺服器無法處理該通訊協定"
 
-#: ../capplets/about-me/gnome-about-me.c:875
+#: ../capplets/about-me/gnome-about-me.c:932
 msgid "Unable to open address book"
 msgstr "無法開啟地址薄"
 
-#: ../capplets/about-me/gnome-about-me.c:889
+#: ../capplets/about-me/gnome-about-me.c:946
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "不明的登入 ID，使用者資料庫可能已經受損"
 
-#: ../capplets/about-me/gnome-about-me.c:919
-#: ../capplets/about-me/gnome-about-me.c:921
+#: ../capplets/about-me/gnome-about-me.c:976
+#: ../capplets/about-me/gnome-about-me.c:978
 #, c-format
 msgid "About %s"
 msgstr "關於 %s"
@@ -219,7 +219,7 @@ msgid "Personal Info"
 msgstr "個人資訊"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:32
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:938
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
 msgstr "請在<b>再輸入新的密碼</b>中，再次輸入您的密碼。"
@@ -398,33 +398,33 @@ msgid "The old and new passwords are the same."
 msgstr "舊密碼與新密碼是相同的。"
 
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:818
+#: ../capplets/about-me/gnome-about-me-password.c:820
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "無法執行 %s：%s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:821
+#: ../capplets/about-me/gnome-about-me-password.c:824
 msgid "Unable to launch backend"
 msgstr "無法執行後端程式"
 
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:825
 msgid "A system error has occurred"
 msgstr "發生了系統錯誤"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:842
+#: ../capplets/about-me/gnome-about-me-password.c:845
 msgid "Checking password..."
 msgstr "檢查密碼..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:928
+#: ../capplets/about-me/gnome-about-me-password.c:932
 msgid "Click <b>Change password</b> to change your password."
 msgstr "按下<b>變更密碼</b>來變更您的密碼。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:931
+#: ../capplets/about-me/gnome-about-me-password.c:935
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "請在<b>新密碼</b>中輸新的密碼。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:941
 msgid "The two passwords are not equal."
 msgstr "兩個密碼不是相同。"
 
@@ -467,14 +467,22 @@ msgid "Jump to the Keyboard Accessibility dialog"
 msgstr "移至鍵盤可存取性對話盒"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
+msgid "Jump to the Mouse Accessibility dialog"
+msgstr "移至滑鼠無障礙功能對話盒"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
 msgid "_Enable assistive technologies"
 msgstr "啟用輔助科技(_E)"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
 msgid "_Keyboard Accessibility"
 msgstr "鍵盤可存取性(_K)"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:13
+msgid "_Mouse Accessibility"
+msgstr "滑鼠無障礙功能(_M)"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:14
 msgid "_Preferred Applications"
 msgstr "首選應用程式(_P)"
 
@@ -486,11 +494,11 @@ msgstr "輔助科技"
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "登入時啟用 GNOME 輔助科技支援"
 
-#: ../capplets/appearance/appearance-desktop.c:1098
+#: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
 msgstr "加入桌布"
 
-#: ../capplets/appearance/appearance-desktop.c:1134
+#: ../capplets/appearance/appearance-desktop.c:665
 msgid "All files"
 msgstr "所有檔案"
 
@@ -533,56 +541,99 @@ msgstr "使用以前的字型"
 msgid "Use selected font"
 msgstr "使用已選字型"
 
-#: ../capplets/appearance/appearance-main.c:108
+#: ../capplets/appearance/appearance-main.c:107
 msgid "Specify the filename of a theme to install"
 msgstr "指定要安裝的佈景主題名稱"
 
-#: ../capplets/appearance/appearance-main.c:109
+#: ../capplets/appearance/appearance-main.c:108
 msgid "filename"
 msgstr "檔案名稱"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "指定要顯示的頁面名稱 (theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:117
+#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/default-applications/gnome-da-capplet.c:880
+#: ../capplets/mouse/gnome-mouse-properties.c:444
 msgid "page"
 msgstr "頁面"
 
-#: ../capplets/appearance/appearance-main.c:124
+#: ../capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[桌布...]"
 
-#: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/common/gnome-theme-info.c:439
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/appearance/appearance-style.c:159
+#: ../capplets/common/gnome-theme-info.c:444
+#: ../capplets/common/gnome-theme-info.c:633
 msgid "Default Pointer"
 msgstr "預設鼠標"
 
-#: ../capplets/appearance/appearance-themes.c:534
+#: ../capplets/appearance/appearance-style.c:221
+#: ../capplets/appearance/appearance-themes.c:687
+msgid "Install"
+msgstr "安裝"
+
+#: ../capplets/appearance/appearance-style.c:241
+#: ../capplets/common/gnome-theme-info.c:1640
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme engine "
+"'%s' is not installed."
+msgstr "這個佈景主題無法正確顯示，因為要求的 GTK+ 佈景主題引擎「%s」尚未安裝。"
+
+#: ../capplets/appearance/appearance-themes.c:675
 msgid "Apply Background"
 msgstr "套用背景圖案"
 
-#: ../capplets/appearance/appearance-themes.c:538
+#: ../capplets/appearance/appearance-themes.c:679
 msgid "Apply Font"
 msgstr "套用字型"
 
-#: ../capplets/appearance/appearance-themes.c:563
+#: ../capplets/appearance/appearance-themes.c:683
+msgid "Revert Font"
+msgstr "還原字型"
+
+#: ../capplets/appearance/appearance-themes.c:713
+msgid ""
+"The current theme suggests a background and a font. Also, the last applied "
+"font suggestion can be reverted."
+msgstr ""
+"目前的佈景主題建議使用指定的背景與字型。同時，上次套用的建議字型會被還原。"
+
+#: ../capplets/appearance/appearance-themes.c:715
+msgid ""
+"The current theme suggests a background. Also, the last applied font "
+"suggestion can be reverted."
+msgstr "目前的佈景主題建議使用指定的背景。同時，上次套用的建議字型會被還原。"
+
+#: ../capplets/appearance/appearance-themes.c:717
 msgid "The current theme suggests a background and a font."
 msgstr "本佈景主題建議使用指定的背景與字型。"
 
-#: ../capplets/appearance/appearance-themes.c:568
+#: ../capplets/appearance/appearance-themes.c:719
+msgid ""
+"The current theme suggests a font. Also, the last applied font suggestion "
+"can be reverted."
+msgstr "目前的佈景主題有建議搭配的字型。同時，上次套用的建議字型會被還原。"
+
+#: ../capplets/appearance/appearance-themes.c:721
 msgid "The current theme suggests a background."
 msgstr "本佈景主題建議使用指定的背景。"
 
-#: ../capplets/appearance/appearance-themes.c:573
+#: ../capplets/appearance/appearance-themes.c:723
+msgid "The last applied font suggestion can be reverted."
+msgstr "上次套用的建議字型會被還原。"
+
+#: ../capplets/appearance/appearance-themes.c:725
 msgid "The current theme suggests a font."
 msgstr "本佈景主題建議使用指定的字型。"
 
-#: ../capplets/appearance/appearance-themes.c:857
-#: ../capplets/default-applications/gnome-da-capplet.c:1080
-#: ../capplets/sound/sound-properties-capplet.c:327
+#: ../capplets/appearance/appearance-themes.c:1046
+#: ../capplets/default-applications/gnome-da-capplet.c:630
+#: ../capplets/sound/sound-properties-capplet.c:262
+#: ../capplets/sound/sound-theme.c:648 ../capplets/sound/sound-theme.c:720
 msgid "Custom"
 msgstr "自訂"
 
@@ -644,120 +695,106 @@ msgid "C_ut"
 msgstr "剪下(_U)"
 
 #: ../capplets/appearance/data/appearance.glade.h:16
-msgid ""
-"Centered\n"
-"Fill screen\n"
-"Scaled\n"
-"Zoom\n"
-"Tiled"
-msgstr ""
-"置中\n"
-"全螢幕\n"
-"縮小\n"
-"放大\n"
-"並排顯示"
-
-#: ../capplets/appearance/data/appearance.glade.h:21
 msgid "Changing your cursor theme takes effect the next time you log in."
 msgstr "改變游標主題會在下次登入時生效。"
 
-#: ../capplets/appearance/data/appearance.glade.h:22
+#: ../capplets/appearance/data/appearance.glade.h:17
 msgid "Colors"
 msgstr "顏色"
 
-#: ../capplets/appearance/data/appearance.glade.h:23
+#: ../capplets/appearance/data/appearance.glade.h:18
 msgid "Controls"
 msgstr "界面控制"
 
-#: ../capplets/appearance/data/appearance.glade.h:24
+#: ../capplets/appearance/data/appearance.glade.h:19
 msgid "Customize Theme"
 msgstr "自訂佈景主題"
 
-#: ../capplets/appearance/data/appearance.glade.h:25
+#: ../capplets/appearance/data/appearance.glade.h:20
 msgid "D_etails..."
 msgstr "詳細設定(_E)..."
 
-#: ../capplets/appearance/data/appearance.glade.h:26
+#: ../capplets/appearance/data/appearance.glade.h:21
 msgid "Des_ktop font:"
 msgstr "桌面字型(_K)："
 
-#: ../capplets/appearance/data/appearance.glade.h:27
+#: ../capplets/appearance/data/appearance.glade.h:22
 msgid "Edit"
 msgstr "編輯"
 
-#: ../capplets/appearance/data/appearance.glade.h:28
+#: ../capplets/appearance/data/appearance.glade.h:23
 msgid "Font Rendering Details"
 msgstr "描繪字型的設定細節"
 
-#: ../capplets/appearance/data/appearance.glade.h:29
+#: ../capplets/appearance/data/appearance.glade.h:24
 msgid "Fonts"
 msgstr "字型"
 
-#: ../capplets/appearance/data/appearance.glade.h:30
+#: ../capplets/appearance/data/appearance.glade.h:25
 msgid "Gra_yscale"
 msgstr "灰階(_Y)"
 
-#: ../capplets/appearance/data/appearance.glade.h:31
+#: ../capplets/appearance/data/appearance.glade.h:26
 msgid "Icons"
 msgstr "圖示"
 
-#: ../capplets/appearance/data/appearance.glade.h:32
+#: ../capplets/appearance/data/appearance.glade.h:27
 msgid "Interface"
 msgstr "界面"
 
-#: ../capplets/appearance/data/appearance.glade.h:33
+#: ../capplets/appearance/data/appearance.glade.h:28
 msgid "Large"
 msgstr "大"
 
-#: ../capplets/appearance/data/appearance.glade.h:34
+#: ../capplets/appearance/data/appearance.glade.h:29
 msgid "N_one"
 msgstr "無(_O)"
 
-#: ../capplets/appearance/data/appearance.glade.h:35
+#: ../capplets/appearance/data/appearance.glade.h:30
 msgid "New File"
 msgstr "新增檔案"
 
-#: ../capplets/appearance/data/appearance.glade.h:36
+#: ../capplets/appearance/data/appearance.glade.h:31
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: ../capplets/appearance/data/appearance.glade.h:37
+#: ../capplets/appearance/data/appearance.glade.h:32
 msgid "Open a dialog to specify the color"
 msgstr "開啟對話方塊來指定顏色"
 
-#: ../capplets/appearance/data/appearance.glade.h:38
+#: ../capplets/appearance/data/appearance.glade.h:33
 msgid "Pointer"
 msgstr "指標"
 
-#: ../capplets/appearance/data/appearance.glade.h:39
+#: ../capplets/appearance/data/appearance.glade.h:34
 msgid "R_esolution:"
 msgstr "解析度(_E)："
 
-#: ../capplets/appearance/data/appearance.glade.h:40
+#: ../capplets/appearance/data/appearance.glade.h:35
 msgid "Save File"
 msgstr "儲存檔案"
 
-#: ../capplets/appearance/data/appearance.glade.h:41
+#: ../capplets/appearance/data/appearance.glade.h:36
 msgid "Save Theme As..."
 msgstr "另存佈景主題..."
 
-#: ../capplets/appearance/data/appearance.glade.h:42
+#: ../capplets/appearance/data/appearance.glade.h:37
 msgid "Save _As..."
 msgstr "另存新檔(_A)..."
 
-#: ../capplets/appearance/data/appearance.glade.h:43
+#: ../capplets/appearance/data/appearance.glade.h:38
 msgid "Save _background image"
 msgstr "儲存背景圖片(_B)"
 
-#: ../capplets/appearance/data/appearance.glade.h:44
+#: ../capplets/appearance/data/appearance.glade.h:39
 msgid "Show _icons in menus"
 msgstr "在選單中顯示圖示(_I)"
 
-#: ../capplets/appearance/data/appearance.glade.h:45
+#: ../capplets/appearance/data/appearance.glade.h:40
 msgid "Small"
 msgstr "小"
 
-#: ../capplets/appearance/data/appearance.glade.h:46
+#: ../capplets/appearance/data/appearance.glade.h:41
 msgid ""
 "Solid color\n"
 "Horizontal gradient\n"
@@ -767,19 +804,19 @@ msgstr ""
 "水平漸層\n"
 "垂直漸層"
 
-#: ../capplets/appearance/data/appearance.glade.h:49
+#: ../capplets/appearance/data/appearance.glade.h:44
 msgid "Sub_pixel (LCDs)"
 msgstr "次像素(sub_pixel) [LCD]"
 
-#: ../capplets/appearance/data/appearance.glade.h:50
+#: ../capplets/appearance/data/appearance.glade.h:45
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "次像素(sub_pixel)平滑方式 [LCD]"
 
-#: ../capplets/appearance/data/appearance.glade.h:51
+#: ../capplets/appearance/data/appearance.glade.h:46
 msgid "Text"
 msgstr "文字"
 
-#: ../capplets/appearance/data/appearance.glade.h:52
+#: ../capplets/appearance/data/appearance.glade.h:47
 msgid ""
 "Text below items\n"
 "Text beside items\n"
@@ -791,14 +828,22 @@ msgstr ""
 "只有圖示\n"
 "只有文字"
 
-#: ../capplets/appearance/data/appearance.glade.h:56
+#: ../capplets/appearance/data/appearance.glade.h:51
 msgid "The current controls theme does not support color schemes."
 msgstr "本控制佈景不支援色彩配置。"
 
-#: ../capplets/appearance/data/appearance.glade.h:57
-#: ../vfs-methods/themus/themus-properties-main.c:92
+#: ../capplets/appearance/data/appearance.glade.h:52
 msgid "Theme"
 msgstr "佈景主題"
+
+#: ../capplets/appearance/data/appearance.glade.h:53
+msgid ""
+"Tiled\n"
+"Zoom\n"
+"Centered\n"
+"Scaled\n"
+"Fill screen"
+msgstr ""
 
 #: ../capplets/appearance/data/appearance.glade.h:58
 msgid "Toolbar _button labels:"
@@ -814,7 +859,7 @@ msgid "Window Border"
 msgstr "視窗邊框"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
 msgid "_Add..."
 msgstr "加入(_A)..."
 
@@ -969,11 +1014,11 @@ msgstr "佈景主題安裝程式"
 msgid "Gnome Theme Package"
 msgstr "Gnome 佈景主題套件"
 
-#: ../capplets/appearance/gnome-wp-info.c:45
+#: ../capplets/appearance/gnome-wp-info.c:50
 msgid "No Wallpaper"
 msgstr "沒有桌布"
 
-#: ../capplets/appearance/gnome-wp-item.c:207
+#: ../capplets/appearance/gnome-wp-item.c:209
 msgid "Slide Show"
 msgstr "幻燈片顯示"
 
@@ -981,7 +1026,7 @@ msgstr "幻燈片顯示"
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:215
+#: ../capplets/appearance/gnome-wp-item.c:217
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -992,82 +1037,82 @@ msgstr ""
 "%s, 長 %d %s 寬 %d %s\n"
 "資料夾： %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:221
 #: ../capplets/appearance/gnome-wp-item.c:223
+#: ../capplets/appearance/gnome-wp-item.c:225
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "像素"
 
-#: ../capplets/appearance/theme-installer.c:166
-#: ../capplets/appearance/theme-installer.c:216
+#: ../capplets/appearance/theme-installer.c:172
+#: ../capplets/appearance/theme-installer.c:222
 msgid "Cannot install theme"
 msgstr "不能安裝主題"
 
-#: ../capplets/appearance/theme-installer.c:168
+#: ../capplets/appearance/theme-installer.c:174
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "%s 程式並沒有安裝在系統上。"
 
-#: ../capplets/appearance/theme-installer.c:218
+#: ../capplets/appearance/theme-installer.c:224
 msgid "There was a problem while extracting the theme."
 msgstr "解壓縮佈景主題時發生錯誤。"
 
-#: ../capplets/appearance/theme-installer.c:241
+#: ../capplets/appearance/theme-installer.c:247
 msgid "There was an error installing the selected file"
 msgstr "安裝選定的檔案時發生錯誤"
 
-#: ../capplets/appearance/theme-installer.c:242
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "「%s」似乎不是有效的主題。"
 
-#: ../capplets/appearance/theme-installer.c:243
+#: ../capplets/appearance/theme-installer.c:249
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
 "you need to compile."
 msgstr "「%s」似乎不是有效的主題。它可能是需要您自己編譯的主題引擎。"
 
-#: ../capplets/appearance/theme-installer.c:282
+#: ../capplets/appearance/theme-installer.c:288
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME 佈景主題 %s 已正確地安裝"
 
-#: ../capplets/appearance/theme-installer.c:342
+#: ../capplets/appearance/theme-installer.c:355
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "安裝佈景主題「%s」失敗。"
 
-#: ../capplets/appearance/theme-installer.c:374
+#: ../capplets/appearance/theme-installer.c:393
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "佈景主題“%s”已經安裝。"
 
-#: ../capplets/appearance/theme-installer.c:380
+#: ../capplets/appearance/theme-installer.c:399
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "想現在就立即套用，還是保留現有的佈景主題？"
 
-#: ../capplets/appearance/theme-installer.c:382
+#: ../capplets/appearance/theme-installer.c:401
 msgid "Keep Current Theme"
 msgstr "保留目前的佈景主題"
 
-#: ../capplets/appearance/theme-installer.c:384
+#: ../capplets/appearance/theme-installer.c:403
 msgid "Apply New Theme"
 msgstr "套用新的佈景主題"
 
-#: ../capplets/appearance/theme-installer.c:486
+#: ../capplets/appearance/theme-installer.c:506
 msgid "Failed to create temporary directory"
 msgstr "建構暫存目錄失敗"
 
-#: ../capplets/appearance/theme-installer.c:546
+#: ../capplets/appearance/theme-installer.c:569
 msgid "New themes have been successfully installed."
 msgstr "新的佈景主題已經安裝完成。"
 
-#: ../capplets/appearance/theme-installer.c:573
+#: ../capplets/appearance/theme-installer.c:594
 msgid "No theme file location specified to install"
 msgstr "沒有指定安裝佈景主題檔案的位置"
 
-#: ../capplets/appearance/theme-installer.c:593
+#: ../capplets/appearance/theme-installer.c:615
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1076,18 +1121,11 @@ msgstr ""
 "沒有足夠的權安裝佈景主題至：\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:615
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr "佈景主題檔案會安裝在 %s 中。不能將其選成是原始檔的位置"
-
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:685
 msgid "Select Theme"
 msgstr "選擇佈景主題"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Theme Packages"
 msgstr "佈景主題套件"
 
@@ -1096,21 +1134,26 @@ msgstr "佈景主題套件"
 msgid "Theme name must be present"
 msgstr "必須指定佈景主題名稱"
 
-#: ../capplets/appearance/theme-save.c:161
+#: ../capplets/appearance/theme-save.c:154
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "佈景主題已經存在。要取代它嗎？"
 
-#: ../capplets/appearance/theme-save.c:162
+#: ../capplets/appearance/theme-save.c:155
+#: ../capplets/common/file-transfer-dialog.c:450
 msgid "_Overwrite"
 msgstr "覆寫(_O)"
 
-#: ../capplets/appearance/theme-util.c:69
+#: ../capplets/appearance/theme-util.c:74
 msgid "Would you like to delete this theme?"
 msgstr "是否刪除此佈景主題？"
 
-#: ../capplets/appearance/theme-util.c:121
+#: ../capplets/appearance/theme-util.c:124
 msgid "Theme cannot be deleted"
 msgstr "佈景主題無法刪除"
+
+#: ../capplets/appearance/theme-util.c:251
+msgid "Could not install theme engine"
+msgstr "無法安裝主題引擎"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1130,152 +1173,155 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr "無法載入圖示‘%s’\n"
 
-#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
-msgid "Just apply settings and quit"
-msgstr "套用設定並離開"
-
-#: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:249
-#: ../capplets/sound/sound-properties-capplet.c:1030
-msgid "Retrieve and store legacy settings"
-msgstr "讀入舊版本的設定"
-
-#: ../capplets/common/capplet-util.c:344
+#: ../capplets/common/capplet-util.c:80
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "顯示說明文件時發生錯誤：%s"
 
-#: ../capplets/common/file-transfer-dialog.c:84
+#: ../capplets/common/file-transfer-dialog.c:98
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "複製檔案：%u 之 %u"
 
-#: ../capplets/common/file-transfer-dialog.c:132
+#: ../capplets/common/file-transfer-dialog.c:145
 #, c-format
 msgid "Copying '%s'"
 msgstr "正在複製‘%s’"
 
-#: ../capplets/common/file-transfer-dialog.c:172
-#: ../capplets/common/file-transfer-dialog.c:298
+#: ../capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:312
 msgid "Copying files"
 msgstr "正在複製檔案"
 
-#: ../capplets/common/file-transfer-dialog.c:207
+#: ../capplets/common/file-transfer-dialog.c:224
 msgid "Parent Window"
 msgstr "主視窗"
 
-#: ../capplets/common/file-transfer-dialog.c:208
+#: ../capplets/common/file-transfer-dialog.c:225
 msgid "Parent window of the dialog"
 msgstr "對話視窗的主視窗"
 
-#: ../capplets/common/file-transfer-dialog.c:214
+#: ../capplets/common/file-transfer-dialog.c:231
 msgid "From URI"
 msgstr "URI 來源地"
 
-#: ../capplets/common/file-transfer-dialog.c:215
+#: ../capplets/common/file-transfer-dialog.c:232
 msgid "URI currently transferring from"
 msgstr "檔案傳送程序的來源地 URI"
 
-#: ../capplets/common/file-transfer-dialog.c:222
+#: ../capplets/common/file-transfer-dialog.c:239
 msgid "To URI"
 msgstr "URI 目的地"
 
-#: ../capplets/common/file-transfer-dialog.c:223
+#: ../capplets/common/file-transfer-dialog.c:240
 msgid "URI currently transferring to"
 msgstr "檔案傳送程序的目的地 URI"
 
-#: ../capplets/common/file-transfer-dialog.c:230
+#: ../capplets/common/file-transfer-dialog.c:247
 msgid "Fraction completed"
 msgstr "完成比例"
 
-#: ../capplets/common/file-transfer-dialog.c:231
+#: ../capplets/common/file-transfer-dialog.c:248
 msgid "Fraction of transfer currently completed"
 msgstr "檔案傳送程序的完成比例"
 
-#: ../capplets/common/file-transfer-dialog.c:238
+#: ../capplets/common/file-transfer-dialog.c:255
 msgid "Current URI index"
 msgstr "目前的 URI 編號"
 
-#: ../capplets/common/file-transfer-dialog.c:239
+#: ../capplets/common/file-transfer-dialog.c:256
 msgid "Current URI index - starts from 1"
 msgstr "目前的 URI 編號 ─ 由 1 開始"
 
-#: ../capplets/common/file-transfer-dialog.c:246
+#: ../capplets/common/file-transfer-dialog.c:263
 msgid "Total URIs"
 msgstr "URI 總數"
 
-#: ../capplets/common/file-transfer-dialog.c:247
+#: ../capplets/common/file-transfer-dialog.c:264
 msgid "Total number of URIs"
 msgstr "URI 的總數"
 
-#: ../capplets/common/gconf-property-editor.c:170
+#: ../capplets/common/file-transfer-dialog.c:444
+#, c-format
+msgid "File '%s' already exists. Do you want to overwrite it?"
+msgstr "檔案「%s」已經存在。是否要覆蓋它？"
+
+#: ../capplets/common/file-transfer-dialog.c:447
+msgid "_Skip"
+msgstr "略過(_S)"
+
+#: ../capplets/common/file-transfer-dialog.c:448
+msgid "Overwrite _All"
+msgstr "覆蓋全部(_A)"
+
+#: ../capplets/common/gconf-property-editor.c:133
 msgid "Key"
 msgstr "設定鍵"
 
-#: ../capplets/common/gconf-property-editor.c:171
+#: ../capplets/common/gconf-property-editor.c:134
 msgid "GConf key to which this property editor is attached"
 msgstr "該屬性修改程式所修改的 GConf 設定鍵"
 
-#: ../capplets/common/gconf-property-editor.c:177
+#: ../capplets/common/gconf-property-editor.c:140
 msgid "Callback"
 msgstr "Callback"
 
-#: ../capplets/common/gconf-property-editor.c:178
+#: ../capplets/common/gconf-property-editor.c:141
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "當設定鍵的值有改變時，發出這個 callback"
 
-#: ../capplets/common/gconf-property-editor.c:183
+#: ../capplets/common/gconf-property-editor.c:146
 msgid "Change set"
 msgstr "Change set"
 
-#: ../capplets/common/gconf-property-editor.c:184
+#: ../capplets/common/gconf-property-editor.c:147
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr "在套用時將 Gconf change set 中包含的資料會傳送給 gconf 客戶端"
 
-#: ../capplets/common/gconf-property-editor.c:189
+#: ../capplets/common/gconf-property-editor.c:152
 msgid "Conversion to widget callback"
 msgstr "轉化為視窗元件的改變所需的 callback"
 
-#: ../capplets/common/gconf-property-editor.c:190
+#: ../capplets/common/gconf-property-editor.c:153
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "需要將變更後的 GConf 資料轉化為視窗元件的改變時，所發出的 callback"
 
-#: ../capplets/common/gconf-property-editor.c:195
+#: ../capplets/common/gconf-property-editor.c:158
 msgid "Conversion from widget callback"
 msgstr "由視窗元件的改變所需的 callback 轉化"
 
-#: ../capplets/common/gconf-property-editor.c:196
+#: ../capplets/common/gconf-property-editor.c:159
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "需要將視窗元件的改變轉化為變更後的 GConf 資料時，所發出的 callback"
 
-#: ../capplets/common/gconf-property-editor.c:201
+#: ../capplets/common/gconf-property-editor.c:164
 msgid "UI Control"
 msgstr "界面控制"
 
-#: ../capplets/common/gconf-property-editor.c:202
+#: ../capplets/common/gconf-property-editor.c:165
 msgid "Object that controls the property (normally a widget)"
 msgstr "控制該屬性的物件（通常是視窗元件）"
 
-#: ../capplets/common/gconf-property-editor.c:217
+#: ../capplets/common/gconf-property-editor.c:180
 msgid "Property editor object data"
 msgstr "屬性修改程式的物件資料"
 
-#: ../capplets/common/gconf-property-editor.c:218
+#: ../capplets/common/gconf-property-editor.c:181
 msgid "Custom data required by the specific property editor"
 msgstr "特定的屬性修改程式需要自定的資料"
 
-#: ../capplets/common/gconf-property-editor.c:224
+#: ../capplets/common/gconf-property-editor.c:187
 msgid "Property editor data freeing callback"
 msgstr "屬性修改程式釋放資料的 callback"
 
-#: ../capplets/common/gconf-property-editor.c:225
+#: ../capplets/common/gconf-property-editor.c:188
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "當屬性修改程式釋放物件資料時，發出 callback"
 
-#: ../capplets/common/gconf-property-editor.c:1468
+#: ../capplets/common/gconf-property-editor.c:1429
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1287,7 +1333,7 @@ msgstr ""
 "\n"
 "請確定檔案已經存在並再試一次，或是選擇其它背景圖案。"
 
-#: ../capplets/common/gconf-property-editor.c:1476
+#: ../capplets/common/gconf-property-editor.c:1437
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1300,41 +1346,63 @@ msgstr ""
 "\n"
 "請選擇其它圖案。"
 
-#: ../capplets/common/gconf-property-editor.c:1595
+#: ../capplets/common/gconf-property-editor.c:1556
 msgid "Please select an image."
 msgstr "請選取圖片。"
 
-#: ../capplets/common/gconf-property-editor.c:1600
+#: ../capplets/common/gconf-property-editor.c:1561
 msgid "_Select"
 msgstr "選取(_S)"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer - Current"
 msgstr "預設鼠標 - 使用中"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "White Pointer"
 msgstr "白色鼠標"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "White Pointer - Current"
 msgstr "白色鼠標 - 使用中"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "Large Pointer"
 msgstr "大型鼠標"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large Pointer - Current"
 msgstr "大型鼠標 - 使用中"
 
-#: ../capplets/common/gnome-theme-info.c:653
+#: ../capplets/common/gnome-theme-info.c:648
 msgid "Large White Pointer - Current"
 msgstr "大型白色鼠標 - 使用中"
 
-#: ../capplets/common/gnome-theme-info.c:654
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large White Pointer"
 msgstr "大型白色鼠標"
+
+#: ../capplets/common/gnome-theme-info.c:1616
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme '%s' is "
+"not installed."
+msgstr "這個佈景主題無法正確顯示，因為要求的 GTK+ 佈景主題「%s」尚未安裝。"
+
+#: ../capplets/common/gnome-theme-info.c:1624
+#, c-format
+msgid ""
+"This theme will not look as intended because the required window manager "
+"theme '%s' is not installed."
+msgstr ""
+"這個佈景主題無法正確顯示，因為要求的視窗管理程式佈景主題「%s」尚未安裝。"
+
+#: ../capplets/common/gnome-theme-info.c:1631
+#, c-format
+msgid ""
+"This theme will not look as intended because the required icon theme '%s' is "
+"not installed."
+msgstr "這個佈景主題無法正確顯示，因為要求的圖示主題「%s」尚未安裝。"
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
@@ -1353,29 +1421,25 @@ msgstr "啟動首選的視覺輔助技術"
 msgid "Visual Assistance"
 msgstr "視覺輔助"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:112
-#: ../capplets/default-applications/gnome-da-capplet.c:133
-#: ../capplets/default-applications/gnome-da-capplet.c:177
-#: ../capplets/default-applications/gnome-da-capplet.c:222
-#: ../capplets/default-applications/gnome-da-capplet.c:279
-#: ../capplets/default-applications/gnome-da-capplet.c:330
-#: ../capplets/default-applications/gnome-da-capplet.c:381
-#: ../capplets/default-applications/gnome-da-capplet.c:434
-#: ../capplets/default-applications/gnome-da-capplet.c:484
-#: ../capplets/default-applications/gnome-da-capplet.c:877
-#: ../capplets/default-applications/gnome-da-capplet.c:899
+#: ../capplets/default-applications/gnome-da-capplet.c:94
+#: ../capplets/default-applications/gnome-da-capplet.c:345
+#: ../capplets/default-applications/gnome-da-capplet.c:366
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "儲存設定時出現錯誤：%s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1100
+#: ../capplets/default-applications/gnome-da-capplet.c:650
 msgid "Could not load the main interface"
 msgstr "無法載入主介面"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1102
+#: ../capplets/default-applications/gnome-da-capplet.c:652
 msgid "Please make sure that the applet is properly installed"
 msgstr "請確定該面板程式已經安裝妥當。"
+
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/default-applications/gnome-da-capplet.c:879
+msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
+msgstr "指定要顯示的頁面名稱 (internet|multimedia|system|a11y)"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "<b>Image Viewer</b>"
@@ -1418,7 +1482,7 @@ msgid "<b>Web Browser</b>"
 msgstr "<b>網頁瀏覽器</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "無障礙環境"
@@ -1680,6 +1744,50 @@ msgstr "Totem 影片播放程式"
 msgid "aterm"
 msgstr "aterm"
 
+#: ../capplets/display/display-capplet.glade.h:1
+msgid "Include _Panel"
+msgstr "包含面板(_P)"
+
+#: ../capplets/display/display-capplet.glade.h:2
+msgid "Mirror Screens"
+msgstr "鏡射螢幕"
+
+#: ../capplets/display/display-capplet.glade.h:3
+msgid "Monitor Resolution Settings"
+msgstr "螢幕解析度設定值"
+
+#: ../capplets/display/display-capplet.glade.h:4
+msgid ""
+"Normal\n"
+"Left\n"
+"Right\n"
+"Upside-down\n"
+msgstr ""
+"一般\n"
+"左邊\n"
+"右邊\n"
+"由上而下\n"
+
+#: ../capplets/display/display-capplet.glade.h:9
+msgid "R_otation"
+msgstr "旋轉(_O)"
+
+#: ../capplets/display/display-capplet.glade.h:10
+msgid "Re_fresh Rate:"
+msgstr "更新頻率(_F):"
+
+#: ../capplets/display/display-capplet.glade.h:11
+msgid "_Detect Displays"
+msgstr "偵測顯示器(_D)"
+
+#: ../capplets/display/display-capplet.glade.h:12
+msgid "_Resolution"
+msgstr "解析度(_R)"
+
+#: ../capplets/display/display-capplet.glade.h:13
+msgid "_Show Displays in Panel"
+msgstr "在面板顯示螢幕(_S)"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "變更螢幕解析度"
@@ -1688,105 +1796,54 @@ msgstr "變更螢幕解析度"
 msgid "Screen Resolution"
 msgstr "螢幕解析度"
 
-#: ../capplets/display/main.c:29
+#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:441
 msgid "Normal"
 msgstr "正常"
 
-#: ../capplets/display/main.c:30
+#: ../capplets/display/xrandr-capplet.c:404
 msgid "Left"
 msgstr "左"
 
-#: ../capplets/display/main.c:31
-msgid "Inverted"
-msgstr "相反"
-
-#: ../capplets/display/main.c:32
+#: ../capplets/display/xrandr-capplet.c:405
 msgid "Right"
 msgstr "右"
 
-#: ../capplets/display/main.c:374
+#: ../capplets/display/xrandr-capplet.c:406
+msgid "Upside Down"
+msgstr "由上而下"
+
+#: ../capplets/display/xrandr-capplet.c:479
+#: ../capplets/display/xrandr-capplet.c:487
+#: ../capplets/display/xrandr-capplet.c:488
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:514
-msgid "_Resolution:"
-msgstr "解析度(_R)："
-
-#: ../capplets/display/main.c:532
-msgid "Re_fresh rate:"
-msgstr "更新頻率(_F)："
-
-#: ../capplets/display/main.c:550
-msgid "R_otation:"
-msgstr "旋轉(_O)："
-
-#: ../capplets/display/main.c:569
-msgid "Default Settings"
-msgstr "預設設定"
-
-#: ../capplets/display/main.c:571
+#: ../capplets/display/xrandr-capplet.c:540
+#: ../capplets/display/xrandr-capplet.c:559
+#: ../capplets/display/xrandr-capplet.c:569
 #, c-format
-msgid "Screen %d Settings\n"
-msgstr "第 %d 個畫面的設定\n"
+msgid "%d x %d"
+msgstr "%d x %d"
 
-#: ../capplets/display/main.c:593
-msgid "Screen Resolution Preferences"
-msgstr "畫面解析度偏好設定"
+#: ../capplets/display/xrandr-capplet.c:551
+msgid "Off"
+msgstr "關閉"
 
-#: ../capplets/display/main.c:628
-#, c-format
-msgid "_Make default for this computer (%s) only"
-msgstr "只在這部電腦 (%s) 中成為預設值(_M)"
-
-#: ../capplets/display/main.c:648
-msgid "Options"
-msgstr "選項"
-
-#: ../capplets/display/main.c:668
-#, fuzzy, c-format
-msgid ""
-"Testing the new settings. If you don't respond in %d second the previous "
-"settings will be restored."
-msgid_plural ""
-"Testing the new settings. If you don't respond in %d seconds the previous "
-"settings will be restored."
-msgstr[0] "正在測試新的設定。如果在 %d 秒內沒有回應，則會回復舊的。"
-
-#: ../capplets/display/main.c:708
-msgid "Keep Resolution"
-msgstr "保留解析度"
-
-#: ../capplets/display/main.c:712
-msgid "Do you want to keep this resolution?"
-msgstr "是否保留這個解析度？"
-
-#: ../capplets/display/main.c:738
-msgid "Use _Previous Resolution"
-msgstr "使用以前的解析度(_P)"
-
-#: ../capplets/display/main.c:739
-msgid "_Keep Resolution"
-msgstr "保留解析度(_K)"
-
-#: ../capplets/display/main.c:888
-msgid ""
-"The X server does not support the XRandR extension.  Runtime resolution "
-"changes to the display size are not available."
-msgstr "這個 X 伺服器不支援 XRandR 擴展功能，因此無法即時變更畫面的大小。"
-
-#: ../capplets/display/main.c:895
-msgid ""
-"The version of the XRandR extension is incompatible with this program. "
-"Runtime changes to the display size are not available."
-msgstr "系統中的 XRandR 擴展功能和本程式的不相容，因此無法即時變更畫面解析度。"
+#: ../capplets/display/xrandr-capplet.c:1305
+msgid "Cloned Output"
+msgstr "複製式輸出"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "音效"
 
+#. Desktop
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+#: ../capplets/sound/sound-theme-definition.h:56
+#: ../libslab/bookmark-agent.c:1157
 msgid "Desktop"
 msgstr "桌面"
 
@@ -1818,49 +1875,65 @@ msgid "The type of accelerator."
 msgstr "捷徑鍵的類型。"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:112
-#: ../typing-break/drwright.c:483
+#: ../capplets/keybindings/gnome-keybinding-properties.c:90
+#: ../capplets/sound/sound-theme.c:415 ../capplets/sound/sound-theme.c:433
+#: ../capplets/sound/sound-theme.c:543 ../capplets/sound/sound-theme.c:559
+#: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "暫停使用"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:523
+#: ../capplets/keybindings/gnome-keybinding-properties.c:171
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:915
+#: ../capplets/keybindings/gnome-keybinding-properties.c:804
+msgid "Custom Shortcuts"
+msgstr "自訂捷徑鍵"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:938
+#, c-format
+msgid "Error saving the new shortcut: %s"
+msgstr "儲存新的捷徑鍵時發生錯誤：%s"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1016
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
 "using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
 "捷徑“%s”無法使用，原因是會無法按下此按鍵。\n"
-"請試用其它的按鍵：如同時使用 Control，Alt  或 Shift。\n"
+"請試用其它的按鍵：如同時使用 Control，Alt  或 Shift。"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1046
 #, c-format
 msgid ""
-"The shortcut \"%s\" is already used for:\n"
-" \"%s\"\n"
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
 msgstr ""
 "捷徑鍵“%s”己經使用於：\n"
-"“%s”\n"
+"“%s”"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:976
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1052
 #, c-format
-msgid "Error setting new accelerator in configuration database: %s\n"
-msgstr "在組態資料庫中設定新的捷徑鍵時出現錯誤：%s\n"
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "如果您重新指派捷徑鍵為「%s」，「%s」的捷徑鍵就會停用。"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
+msgid "_Reassign"
+msgstr "重新指派(_R)"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1180
 #, c-format
-msgid "Error unsetting accelerator in configuration database: %s\n"
-msgstr "在組態資料庫中取消設定捷徑鍵時出現錯誤：%s\n"
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "在組態資料庫中取消設定捷徑鍵時出現錯誤：%s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1362
 msgid "Action"
 msgstr "行動"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1384
 msgid "Shortcut"
 msgstr "捷徑鍵"
 
@@ -1882,23 +1955,28 @@ msgstr "要編輯捷徑鍵，在相應的行中按下新設的捷徑鍵，或以
 msgid "Assign shortcut keys to commands"
 msgstr "為不同的指令分配捷徑鍵"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:241
-#: ../capplets/keyboard/gnome-keyboard-properties.c:246
-#: ../capplets/sound/sound-properties-capplet.c:1026
-#: ../capplets/sound/sound-properties-capplet.c:1028
+#: ../capplets/keyboard/gnome-keyboard-properties.c:248
+#: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/sound/sound-properties-capplet.c:1185
+#: ../capplets/sound/sound-properties-capplet.c:1187
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "套用設定並離開（現在已經由伺服程式處理，此選擇只為提供相容性而設）"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/sound/sound-properties-capplet.c:1189
+msgid "Retrieve and store legacy settings"
+msgstr "讀入舊版本的設定"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:260
 msgid "Start the page with the typing break settings showing"
 msgstr "啟動頁面時顯示鍵盤輸入間隔設定"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:258
+#: ../capplets/keyboard/gnome-keyboard-properties.c:265
 msgid "Start the page with the accessibility settings showing"
 msgstr "啟動頁面時顯示可存取性設定值"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:267
+#: ../capplets/keyboard/gnome-keyboard-properties.c:274
 msgid "- GNOME Keyboard Preferences"
 msgstr " - GNOME 鍵盤偏好設定"
 
@@ -1926,41 +2004,41 @@ msgstr "<b>啟用遲緩按鍵</b>"
 msgid "<b>Sticky Keys</b>"
 msgstr "<b>啟用黏性特殊鍵</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "<b>_Lock screen to enforce typing break</b>"
-msgstr "<b>透過鎖定畫面來強制休息</b>(_L)"
-
 #. fast acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>快</i></small>"
 
 #. long delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>長</i></small>"
 
 #. short delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>短</i></small>"
 
 #. slow acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>慢</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_cceleration:"
 msgstr "加速度(_C):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "All_ow postponing of breaks"
 msgstr "可以暫時放棄休息(_O)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Audio _Feedback..."
+msgstr "音效回饋(_F)..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Beep when _accessibility features are turned on or off"
@@ -1991,176 +2069,188 @@ msgid "Beep when key is _rejected"
 msgstr "如果拒絕按鍵動作則發出聲響(_R)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "By _country"
+msgstr "依國家(_C)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+msgid "By _language"
+msgstr "依語言(_L)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Check if breaks are allowed to be postponed"
 msgstr "選用這個設定可以讓您暫時放棄休息"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Choose a Keyboard Model"
 msgstr "選擇鍵盤型號"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Choose a Layout"
 msgstr "選擇配置"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Cursor _blinks in text fields"
 msgstr "文字輸入欄中的游標可以閃爍(_B)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "Cursor blinks speed"
 msgstr "游標閃爍速度"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "D_elay:"
 msgstr "延遲(_E):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr "如果同時按下任何兩鍵則關閉黏性鍵功能(_B)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Duration of the break when typing is disallowed"
 msgstr "指定休息時間長度，這段期間內不允許使用鍵盤"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "Duration of work before forcing a break"
 msgstr "強制休息前可以工作的時間"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:36
 msgid "General"
 msgstr "一般"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "Key presses _repeat when key is held down"
 msgstr "當按下某鍵不放時重複輸出該字元(_R)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "Keyboard Accessibility Notifications"
-msgstr "鍵盤可存取性通知"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+msgid "Keyboard Accessibility Audio Feedback"
+msgstr "鍵盤無障礙功能音效回饋"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard Layout Options"
 msgstr "鍵盤配置選項"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "Keyboard Preferences"
 msgstr "鍵盤偏好設定"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "Keyboard _model:"
 msgstr "鍵盤模式(_M)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "Layout _Options..."
 msgstr "配置選項(_O)..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "Layouts"
 msgstr "配置"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr "每隔某段時間鎖定畫面，避免因為不斷使用鍵盤導致手部受損"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "Mouse Keys"
 msgstr "滑鼠控制鍵"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "Preview:"
 msgstr "預覽："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "Repeat keys speed"
 msgstr "按鍵重複速度"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
 msgid "Reset to De_faults"
 msgstr "重置為預設值(_F)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
 msgid "S_peed:"
 msgstr "速度(_P)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
 msgid "Separate _layout for each window"
 msgstr "給每一個視窗獨立的配置(_L)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
 msgid "Typing Break"
 msgstr "休息提示"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
-msgid "_Allow to control the pointer using the keyboard"
-msgstr "允許使用鍵盤控制游標(_A)"
-
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
-msgid "_Allow to turn accessibility features on and off from the keyboard"
-msgstr "允許使用鍵盤開啟和關閉無障礙功能(_A)"
+msgid "_Accessibility features can be toggled with keyboard shortcuts"
+msgstr "允許使用鍵盤捷徑鍵開啟和關閉無障礙功能(_A)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
 msgstr "休息時間為(_B)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+msgid "_Country:"
+msgstr "國家(_C):"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "延遲(_D)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
 msgid "_Ignore fast duplicate keypresses"
 msgstr "忽略快速重複按鍵(_I)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
-msgid "_Layouts:"
-msgstr "配置(_L):"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
+msgid "_Language:"
+msgstr "語言(_L):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+msgid "_Lock screen to enforce typing break"
+msgstr "透過鎖定畫面來強制休息(_L)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
 msgid "_Models:"
 msgstr "型號(_M)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
-msgid "_Notifications..."
-msgstr "通知(_N)..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
 msgid "_Only accept long keypresses"
 msgstr "按下某鍵不放，達到指定時間後方會生效(_O)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+msgid "_Pointer can be controlled using the keypad"
+msgstr "允許使用鍵盤控制滑鼠指標(_P)"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
 msgid "_Selected layouts:"
 msgstr "已選的配置(_S)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
-msgid "_Simulate simultanous keypresses"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
+msgid "_Simulate simultaneous keypresses"
 msgstr "模擬同時按鍵(_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
 msgid "_Speed:"
 msgstr "速度(_S)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
 msgid "_Type to test settings:"
 msgstr "請輸入文字來測試設定(_T)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
 msgid "_Variants:"
 msgstr "變體(_V):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
 msgid "_Vendors:"
 msgstr "製造商(_V):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
 msgid "_Work interval lasts:"
 msgstr "工作時間為(_W)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "分鐘"
 
@@ -2168,15 +2258,15 @@ msgstr "分鐘"
 msgid "Unknown"
 msgstr "不明"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
-msgid "Default"
-msgstr "預設"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:305
 msgid "Layout"
 msgstr "配置"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
+#: ../capplets/sound/sound-theme.c:419 ../capplets/sound/sound-theme.c:539
+msgid "Default"
+msgstr "預設"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:169
 msgid "Vendors"
@@ -2224,6 +2314,15 @@ msgstr "向下劃"
 msgid "gesture|Disabled"
 msgstr "停用手勢"
 
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/mouse/gnome-mouse-properties.c:443
+msgid "Specify the name of the page to show (general|accessibility)"
+msgstr "指定要顯示的頁面名稱 (general|accessibility)"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:452
+msgid "- GNOME Mouse Preferences"
+msgstr "- GNOME 滑鼠偏好設定"
+
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid "<b>Double-Click Timeout</b>"
 msgstr "<b>雙擊分辨時間</b>"
@@ -2234,9 +2333,8 @@ msgstr "<b>拖曳</b>"
 
 #. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-#, fuzzy
 msgid "<b>Dwell Click</b>"
-msgstr "<b>雙擊分辨時間</b>"
+msgstr "<b>替代點擊</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Locate Pointer</b>"
@@ -2265,7 +2363,7 @@ msgstr "<i>要測試您的雙擊設定值，請試著在此電燈泡上雙擊。
 msgid ""
 "<i>You can also use the Dwell Click panel applet to choose the click type.</"
 "i>"
-msgstr ""
+msgstr "<i>您可以使用「替代點擊」面板程式來選擇點擊的類型。</i>"
 
 #. high sensitivity
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -2397,20 +2495,20 @@ msgid "<b>_Use authentication</b>"
 msgstr "<b>需要認證</b>(_U)"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:6
-msgid "Advanced Configuration"
-msgstr "進階設定"
-
-#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "Autoconfiguration _URL:"
 msgstr "自動設定所需的 _URL："
 
-#: ../capplets/network/gnome-network-preferences.glade.h:8
+#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "HTTP Proxy Details"
 msgstr "HTTP 代理伺服器設定"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:9
+#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "H_TTP proxy:"
 msgstr "H_TTP 代理伺服器："
+
+#: ../capplets/network/gnome-network-preferences.glade.h:9
+msgid "Ignored Hosts"
+msgstr "忽略的主機"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Preferences"
@@ -2466,120 +2564,121 @@ msgstr "不明的音量控制 %d"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "無法建立‘%s’的測試管道"
 
-#: ../capplets/sound/sound-properties-capplet.c:325
-#: ../capplets/sound/sound-properties-capplet.c:378
+#: ../capplets/sound/sound-properties-capplet.c:260
+#: ../capplets/sound/sound-properties-capplet.c:381
 msgid "Not connected"
 msgstr "沒有連接"
 
-#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:829
 msgid "Autodetect"
 msgstr "自動偵測"
 
-#: ../capplets/sound/sound-properties-capplet.c:666
-#: ../capplets/sound/sound-properties-capplet.c:667
+#: ../capplets/sound/sound-properties-capplet.c:834
+#: ../capplets/sound/sound-properties-capplet.c:835
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - 先進 Linux 音效架構"
 
-#: ../capplets/sound/sound-properties-capplet.c:668
+#: ../capplets/sound/sound-properties-capplet.c:836
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART 音效服務程式"
 
-#: ../capplets/sound/sound-properties-capplet.c:669
-#: ../capplets/sound/sound-properties-capplet.c:670
+#: ../capplets/sound/sound-properties-capplet.c:837
+#: ../capplets/sound/sound-properties-capplet.c:838
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightenment 音效服務程式"
 
-#: ../capplets/sound/sound-properties-capplet.c:671
-#: ../capplets/sound/sound-properties-capplet.c:672
+#: ../capplets/sound/sound-properties-capplet.c:841
+#: ../capplets/sound/sound-properties-capplet.c:844
 msgid "OSS - Open Sound System"
 msgstr "OSS - 開放音效系統"
 
-#: ../capplets/sound/sound-properties-capplet.c:673
-#: ../capplets/sound/sound-properties-capplet.c:674
+#: ../capplets/sound/sound-properties-capplet.c:846
+#: ../capplets/sound/sound-properties-capplet.c:847
 msgid "PulseAudio Sound Server"
 msgstr "Polypaudio 音效伺服器"
 
-#: ../capplets/sound/sound-properties-capplet.c:675
+#: ../capplets/sound/sound-properties-capplet.c:848
 msgid "Test Sound"
 msgstr "測試音效"
 
-#: ../capplets/sound/sound-properties-capplet.c:676
+#: ../capplets/sound/sound-properties-capplet.c:849
 msgid "Silence"
 msgstr "無聲"
 
-#: ../capplets/sound/sound-properties-capplet.c:1043
+#: ../capplets/sound/sound-properties-capplet.c:1202
 msgid "- GNOME Sound Preferences"
 msgstr " - GNOME 音效偏好設定"
 
 #: ../capplets/sound/sound-properties.glade.h:1
+msgid "<b>Alerts and Sound Effects</b>"
+msgstr "<b>警示與聲音效果</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:2
 msgid "<b>Audio Conferencing</b>"
 msgstr "<b>音訊會議</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:3
 msgid "<b>Default Mixer Tracks</b>"
 msgstr "<b>預設混音器聲道</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Music and Movies</b>"
 msgstr "<b>音樂及影片</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<b>Sound Events</b>"
 msgstr "<b>事件音效</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "<b>Sound Theme</b>"
+msgstr "<b>音效佈景主題</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">測試中...</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "Click OK to finish."
 msgstr "按確定來完成"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "裝置"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing (ESD)"
-msgstr "啟用軟體混音[ESD](_N)"
-
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "Flash _entire screen"
-msgstr "閃動整個畫面(_E)"
-
 #: ../capplets/sound/sound-properties.glade.h:10
-msgid "Flash _window titlebar"
-msgstr "閃動視窗標題列(_W)"
+msgid "Play _alert sound"
+msgstr "播放警示聲音(_A)"
 
 #: ../capplets/sound/sound-properties.glade.h:11
+msgid "Play _sound effects when buttons are clicked"
+msgstr "當按鈕被點擊時播放音效(_S)"
+
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "S_ound playback:"
 msgstr "聲音播放(_O)："
 
-#: ../capplets/sound/sound-properties.glade.h:12
+#: ../capplets/sound/sound-properties.glade.h:13
 msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
 msgstr "以鍵盤選取裝置及聲道。如需要時使用 Shift 及 Control 鍵來選擇多條聲道。"
 
-#: ../capplets/sound/sound-properties.glade.h:13
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "So_und playback:"
 msgstr "聲音播放(_U)："
 
-#: ../capplets/sound/sound-properties.glade.h:14
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "Sou_nd capture:"
 msgstr "聲音擷取(_N)："
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1028
 msgid "Sound Preferences"
 msgstr "音效偏好設定"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:17
 msgid "Sounds"
 msgstr "音效"
-
-#: ../capplets/sound/sound-properties.glade.h:17
-msgid "System Beep"
-msgstr "系統鈴聲"
 
 #: ../capplets/sound/sound-properties.glade.h:18
 msgid "Test"
@@ -2594,20 +2693,112 @@ msgid "_Device:"
 msgstr "裝置(_D)："
 
 #: ../capplets/sound/sound-properties.glade.h:21
-msgid "_Enable system beep"
-msgstr "啟用系統鈴聲(_E)"
+msgid "_Play alerts and sound effects"
+msgstr "播放警示與聲音效果(_P)"
 
 #: ../capplets/sound/sound-properties.glade.h:22
-msgid "_Play system sounds"
-msgstr "播放系統音效(_P)"
-
-#: ../capplets/sound/sound-properties.glade.h:23
 msgid "_Sound playback:"
 msgstr "聲音播放(_S)："
 
-#: ../capplets/sound/sound-properties.glade.h:24
-msgid "_Visual system beep"
-msgstr "以畫面閃爍代替鈴聲(_V)"
+#. Bell
+#: ../capplets/sound/sound-theme-definition.h:46
+msgid "Alert sound"
+msgstr "警示聲音"
+
+#: ../capplets/sound/sound-theme-definition.h:47
+msgid "Visual alert"
+msgstr "視覺警示"
+
+#. Windows and buttons
+#: ../capplets/sound/sound-theme-definition.h:49
+msgid "Windows and Buttons"
+msgstr "視窗與按鈕"
+
+#: ../capplets/sound/sound-theme-definition.h:50
+msgid "Button clicked"
+msgstr "按鈕被點擊"
+
+#: ../capplets/sound/sound-theme-definition.h:51
+msgid "Toggle button clicked"
+msgstr "切換按鈕點擊"
+
+#: ../capplets/sound/sound-theme-definition.h:52
+msgid "Window maximized"
+msgstr "視窗最大化"
+
+#: ../capplets/sound/sound-theme-definition.h:53
+msgid "Window unmaximized"
+msgstr "視窗取消最大化"
+
+#: ../capplets/sound/sound-theme-definition.h:54
+msgid "Window minimised"
+msgstr "視窗最小化"
+
+#: ../capplets/sound/sound-theme-definition.h:57
+msgid "Login"
+msgstr "登入"
+
+#: ../capplets/sound/sound-theme-definition.h:58
+#: ../libslab/bookmark-agent.c:1063
+msgid "Logout"
+msgstr "登出"
+
+#: ../capplets/sound/sound-theme-definition.h:59
+msgid "New e-mail"
+msgstr "新郵件通知"
+
+#: ../capplets/sound/sound-theme-definition.h:60
+msgid "Empty trash"
+msgstr "清理回收筒"
+
+#: ../capplets/sound/sound-theme-definition.h:61
+msgid "Long action completed (download, CD burning, etc.)"
+msgstr "長時間動作已完成（下載、燒錄 CD 等等）"
+
+#. Alerts?
+#: ../capplets/sound/sound-theme-definition.h:63
+msgid "Alerts"
+msgstr "警示"
+
+#: ../capplets/sound/sound-theme-definition.h:64
+msgid "Information or question"
+msgstr "資訊或問題"
+
+#: ../capplets/sound/sound-theme-definition.h:65
+msgid "Warning"
+msgstr "警告"
+
+#: ../capplets/sound/sound-theme-definition.h:66
+msgid "Error"
+msgstr "錯誤"
+
+#: ../capplets/sound/sound-theme-definition.h:67
+msgid "Battery warning"
+msgstr "電池警示"
+
+#: ../capplets/sound/sound-theme.c:437 ../capplets/sound/sound-theme.c:563
+msgid "Flash screen"
+msgstr "閃動螢幕"
+
+#: ../capplets/sound/sound-theme.c:441 ../capplets/sound/sound-theme.c:567
+msgid "Flash window"
+msgstr "閃動視窗"
+
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1030
+msgid "Testing event sound"
+msgstr "測試事件聲音"
+
+#: ../capplets/sound/sound-theme.c:482
+msgid "Select Sound File"
+msgstr "選取音效檔"
+
+#: ../capplets/sound/sound-theme.c:493
+msgid "Sound files"
+msgstr "聲音檔案"
+
+#: ../capplets/sound/sound-theme.c:547
+msgid "Custom..."
+msgstr "自訂..."
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
@@ -2683,36 +2874,36 @@ msgid "Windows"
 msgstr "視窗"
 
 #. make start action
-#: ../libslab/application-tile.c:369
+#: ../libslab/application-tile.c:372
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>啟動 %s</b>"
 
-#: ../libslab/application-tile.c:388
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1059
 msgid "Help"
 msgstr "求助"
 
-#: ../libslab/application-tile.c:435
+#: ../libslab/application-tile.c:438
 msgid "Upgrade"
 msgstr "更新"
 
-#: ../libslab/application-tile.c:450
+#: ../libslab/application-tile.c:453
 msgid "Uninstall"
 msgstr "移除"
 
-#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:737
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:728
 msgid "Remove from Favorites"
 msgstr "自最愛中移除"
 
-#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:739
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:730
 msgid "Add to Favorites"
 msgstr "加入最愛"
 
-#: ../libslab/application-tile.c:864
+#: ../libslab/application-tile.c:867
 msgid "Remove from Startup Programs"
 msgstr "從「初始啟動程式」中移除"
 
-#: ../libslab/application-tile.c:866
+#: ../libslab/application-tile.c:869
 msgid "Add to Startup Programs"
 msgstr "加入「初始啟動程式」"
 
@@ -2732,103 +2923,115 @@ msgstr ""
 msgid "Other"
 msgstr "其它"
 
-#: ../libslab/bookmark-agent.c:1060
+#: ../libslab/bookmark-agent.c:1061
+msgid "Lock Screen"
+msgstr "鎖定螢幕"
+
+#: ../libslab/bookmark-agent.c:1065
+msgid "Shutdown"
+msgstr "關機"
+
+#: ../libslab/bookmark-agent.c:1090
 msgid "New Spreadsheet"
 msgstr "新試算表"
 
-#: ../libslab/bookmark-agent.c:1064
+#: ../libslab/bookmark-agent.c:1095
 msgid "New Document"
 msgstr "新文件"
 
-#: ../libslab/bookmark-agent.c:1114
+#: ../libslab/bookmark-agent.c:1146
 msgid "Home"
 msgstr "家"
 
-#: ../libslab/bookmark-agent.c:1130
+#: ../libslab/bookmark-agent.c:1151
+msgid "Documents"
+msgstr "文件"
+
+#: ../libslab/bookmark-agent.c:1164
 msgid "File System"
 msgstr "檔案系統"
 
-#: ../libslab/bookmark-agent.c:1134
+#: ../libslab/bookmark-agent.c:1168
 msgid "Network Servers"
 msgstr "網路伺服器"
 
-#: ../libslab/bookmark-agent.c:1163
+#: ../libslab/bookmark-agent.c:1197
 msgid "Search"
 msgstr "尋找"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:170
+#: ../libslab/directory-tile.c:172
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>開啟</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:228
+#: ../libslab/directory-tile.c:191 ../libslab/document-tile.c:241
 msgid "Rename..."
 msgstr "重新命名..."
 
-#: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
-#: ../libslab/document-tile.c:242 ../libslab/document-tile.c:251
+#: ../libslab/directory-tile.c:205 ../libslab/directory-tile.c:214
+#: ../libslab/document-tile.c:255 ../libslab/document-tile.c:264
 msgid "Send To..."
 msgstr "傳送至..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:277
+#: ../libslab/directory-tile.c:229 ../libslab/document-tile.c:290
 msgid "Move to Trash"
 msgstr "移至回收筒"
 
-#: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:850
+#: ../libslab/directory-tile.c:239 ../libslab/directory-tile.c:457
+#: ../libslab/document-tile.c:300 ../libslab/document-tile.c:841
 msgid "Delete"
 msgstr "刪除"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1022
+#: ../libslab/directory-tile.c:569 ../libslab/document-tile.c:1013
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "確定要永遠刪除「%s」？"
 
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1026
+#: ../libslab/directory-tile.c:574 ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "如果將項目刪除，它將會永久失去。"
 
-#: ../libslab/document-tile.c:189
+#: ../libslab/document-tile.c:202
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>以“%s”開啟</b>"
 
-#: ../libslab/document-tile.c:201
+#: ../libslab/document-tile.c:214
 msgid "Open with Default Application"
 msgstr "以預設的應用程式開啟"
 
-#: ../libslab/document-tile.c:212
+#: ../libslab/document-tile.c:225
 msgid "Open in File Manager"
 msgstr "在檔案管理員中開啟"
 
-#: ../libslab/document-tile.c:633
+#: ../libslab/document-tile.c:624
 msgid "?"
 msgstr "？"
 
-#: ../libslab/document-tile.c:640
+#: ../libslab/document-tile.c:631
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#: ../libslab/document-tile.c:648
+#: ../libslab/document-tile.c:639
 msgid "Today %l:%M %p"
 msgstr "今天 %l:%M %p"
 
-#: ../libslab/document-tile.c:658
+#: ../libslab/document-tile.c:649
 msgid "Yesterday %l:%M %p"
 msgstr "昨天 %l:%M %p"
 
-#: ../libslab/document-tile.c:670
+#: ../libslab/document-tile.c:661
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../libslab/document-tile.c:678
+#: ../libslab/document-tile.c:669
 msgid "%b %d %l:%M %p"
 msgstr "%b %d %l:%M %p"
 
-#: ../libslab/document-tile.c:680
+#: ../libslab/document-tile.c:671
 msgid "%b %d %Y"
 msgstr "%Y %b %d"
 
@@ -2926,85 +3129,32 @@ msgstr "<b>以“%s”開啟</b>"
 msgid "Remove from System Items"
 msgstr "自系統項目中移除"
 
-#: ../libsounds/sound-view.c:44
-msgid "Login"
-msgstr "登入"
-
-#: ../libsounds/sound-view.c:45
-msgid "Logout"
-msgstr "登出"
-
-#: ../libsounds/sound-view.c:46
-msgid "Boing"
-msgstr "彈簧"
-
-#: ../libsounds/sound-view.c:47
-msgid "Siren"
-msgstr "警報"
-
-#: ../libsounds/sound-view.c:48
-msgid "Clink"
-msgstr "叮噹"
-
-#: ../libsounds/sound-view.c:49
-msgid "Beep"
-msgstr "鈴聲"
-
-#: ../libsounds/sound-view.c:50
-msgid "No sound"
-msgstr "沒有聲音"
-
-#: ../libsounds/sound-view.c:132
-msgid "Sound not set for this event."
-msgstr "此事件沒有設定音效。"
-
-#: ../libsounds/sound-view.c:141
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"代表該事件的音效檔不存在。\n"
-"安裝 gnome-audio 套件可獲得一套預設的音效。"
-
-#: ../libsounds/sound-view.c:152
-msgid "The sound file for this event does not exist."
-msgstr "代表該事件的音效檔不存在。"
-
-#: ../libsounds/sound-view.c:183
-msgid "Select Sound File"
-msgstr "選取音效檔"
-
-#: ../libsounds/sound-view.c:210
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "檔案 %s 不是有效的 wav 檔案"
-
-#: ../libsounds/sound-view.c:271
-msgid "Select sound file..."
-msgstr "選取音效檔..."
-
-#: ../libsounds/sound-view.c:373
-msgid "System Sounds"
-msgstr "系統音效"
-
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "視窗管理員“%s”沒有登記任何設定工具\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:390
+#: ../libwindow-settings/metacity-window-manager.c:402
 msgid "Maximize"
 msgstr "最大化"
 
-#: ../libwindow-settings/metacity-window-manager.c:391
+#: ../libwindow-settings/metacity-window-manager.c:403
+msgid "Maximize Vertically"
+msgstr "垂直最大化"
+
+#: ../libwindow-settings/metacity-window-manager.c:404
+msgid "Maximize Horizontally"
+msgstr "水平最大化"
+
+#: ../libwindow-settings/metacity-window-manager.c:405
 msgid "Minimize"
 msgstr "最小化"
 
-#: ../libwindow-settings/metacity-window-manager.c:392
+#: ../libwindow-settings/metacity-window-manager.c:406
 msgid "Roll up"
 msgstr "捲起"
 
-#: ../libwindow-settings/metacity-window-manager.c:393
+#: ../libwindow-settings/metacity-window-manager.c:407
 msgid "None"
 msgstr "無"
 
@@ -3101,59 +3251,59 @@ msgstr "如設定為‘true’，控制中心會在「一般工作」使用後�
 msgid "The GNOME configuration tool"
 msgstr "GNOME 設定工具"
 
-#: ../typing-break/drw-break-window.c:188
+#: ../typing-break/drw-break-window.c:189
 msgid "_Postpone Break"
 msgstr "停止休息(_P)"
 
-#: ../typing-break/drw-break-window.c:244
+#: ../typing-break/drw-break-window.c:245
 msgid "Take a break!"
 msgstr "請休息一下！"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #. translators: keep the initial "/"
-#: ../typing-break/drwright.c:129
+#: ../typing-break/drwright.c:130
 msgid "/_Preferences"
 msgstr "/偏好設定(_P)"
 
-#: ../typing-break/drwright.c:130
+#: ../typing-break/drwright.c:131
 msgid "/_About"
 msgstr "/關於(_A)"
 
-#: ../typing-break/drwright.c:132
+#: ../typing-break/drwright.c:133
 msgid "/_Take a Break"
 msgstr "/立刻休息(_T)"
 
-#: ../typing-break/drwright.c:501
+#: ../typing-break/drwright.c:489
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "距離休息時間還有 %d 分鐘"
 
-#: ../typing-break/drwright.c:505
+#: ../typing-break/drwright.c:493
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "距離休息時間少於 1 分鐘"
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:580
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "無法顯示「休息提示」偏好設定對話方塊，因為出現以下的錯誤：%s"
 
-#: ../typing-break/drwright.c:611
+#: ../typing-break/drwright.c:599
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "由 Richard Hult <richard@imendio.com> 編寫"
 
-#: ../typing-break/drwright.c:612
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "由 Anders Carlsson 加入視覺效果"
 
-#: ../typing-break/drwright.c:621
+#: ../typing-break/drwright.c:609
 msgid "A computer break reminder."
 msgstr "在使用電腦時發出休息提示的小工具。"
 
-#: ../typing-break/drwright.c:623
+#: ../typing-break/drwright.c:611
 msgid "translator-credits"
 msgstr ""
 "如對翻譯有任何意見，請送一封電子郵件給\n"
@@ -3185,236 +3335,313 @@ msgstr ""
 "以在面板上按滑鼠右邊按鈕，選取「加入至面板」及其中的「程式狀態通知區」後，再"
 "按「新增」。"
 
-#: ../vfs-methods/fontilus/fontilus-context-menu.c:132
-msgid "Set as Application Font"
-msgstr "指定為應用程式字型"
+#~ msgid ""
+#~ "Centered\n"
+#~ "Fill screen\n"
+#~ "Scaled\n"
+#~ "Zoom\n"
+#~ "Tiled"
+#~ msgstr ""
+#~ "置中\n"
+#~ "全螢幕\n"
+#~ "縮小\n"
+#~ "放大\n"
+#~ "並排顯示"
 
-#: ../vfs-methods/fontilus/fontilus-context-menu.c:133
-msgid "Sets the default application font"
-msgstr "設定應用程式的預設字型"
+#~ msgid ""
+#~ "%s is the path where the theme files will be installed. This can not be "
+#~ "selected as the source location"
+#~ msgstr "佈景主題檔案會安裝在 %s 中。不能將其選成是原始檔的位置"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "如設定為‘true’，則會顯示 OpenType 字型的縮圖。"
+#~ msgid "Just apply settings and quit"
+#~ msgstr "套用設定並離開"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "如設定為‘true’，則會顯示 PCF 字型的縮圖。"
+#~ msgid "Inverted"
+#~ msgstr "相反"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "如設定為‘true’，則會顯示 TrueType 字型的縮圖。"
+#~ msgid "Default Settings"
+#~ msgstr "預設設定"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "如設定為‘true’，則會顯示 Type1 字型的縮圖。"
+#~ msgid "Screen %d Settings\n"
+#~ msgstr "第 %d 個畫面的設定\n"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr "本設定鍵指定了用來製作 OpenType 字型縮圖的指令。"
+#~ msgid "Screen Resolution Preferences"
+#~ msgstr "畫面解析度偏好設定"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "本設定鍵指定了用來製作 PCF 字型縮圖的指令。"
+#~ msgid "_Make default for this computer (%s) only"
+#~ msgstr "只在這部電腦 (%s) 中成為預設值(_M)"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr "本設定鍵指定了用來製作 TrueType 字型縮圖的指令。"
+#~ msgid "Options"
+#~ msgstr "選項"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr "本設定鍵指定了用來製作 Type1 字型縮圖的指令。"
+#, fuzzy
+#~ msgid ""
+#~ "Testing the new settings. If you don't respond in %d second the previous "
+#~ "settings will be restored."
+#~ msgid_plural ""
+#~ "Testing the new settings. If you don't respond in %d seconds the previous "
+#~ "settings will be restored."
+#~ msgstr[0] "正在測試新的設定。如果在 %d 秒內沒有回應，則會回復舊的。"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "製作 OpenType 字型縮圖的指令"
+#~ msgid "Keep Resolution"
+#~ msgstr "保留解析度"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "製作 PCF 字型縮圖的指令"
+#~ msgid "Do you want to keep this resolution?"
+#~ msgstr "是否保留這個解析度？"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "製作 TrueType 字型縮圖的指令"
+#~ msgid "Use _Previous Resolution"
+#~ msgstr "使用以前的解析度(_P)"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "製作 Type1 字型縮圖的指令"
+#~ msgid "_Keep Resolution"
+#~ msgstr "保留解析度(_K)"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "是否為 OpenType 字型製作縮圖"
+#~ msgid ""
+#~ "The X server does not support the XRandR extension.  Runtime resolution "
+#~ "changes to the display size are not available."
+#~ msgstr "這個 X 伺服器不支援 XRandR 擴展功能，因此無法即時變更畫面的大小。"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "是否為 PCF 字型製作縮圖"
+#~ msgid ""
+#~ "The version of the XRandR extension is incompatible with this program. "
+#~ "Runtime changes to the display size are not available."
+#~ msgstr ""
+#~ "系統中的 XRandR 擴展功能和本程式的不相容，因此無法即時變更畫面解析度。"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "是否為 TrueType 字型製作縮圖"
+#~ msgid "Error setting new accelerator in configuration database: %s\n"
+#~ msgstr "在組態資料庫中設定新的捷徑鍵時出現錯誤：%s\n"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "是否為 Type1 字型製作縮圖"
+#~ msgid "Keyboard Accessibility Notifications"
+#~ msgstr "鍵盤可存取性通知"
 
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "0123456789 The following is Chinese: '中文測試'"
+#~ msgid "_Layouts:"
+#~ msgstr "配置(_L):"
 
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "名稱："
+#~ msgid "_Notifications..."
+#~ msgstr "通知(_N)..."
 
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "字款："
+#~ msgid "Advanced Configuration"
+#~ msgstr "進階設定"
 
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "類型："
+#~ msgid "E_nable software sound mixing (ESD)"
+#~ msgstr "啟用軟體混音[ESD](_N)"
 
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "大小："
+#~ msgid "System Beep"
+#~ msgstr "系統鈴聲"
 
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "版本："
+#~ msgid "_Enable system beep"
+#~ msgstr "啟用系統鈴聲(_E)"
 
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "版權："
+#~ msgid "_Visual system beep"
+#~ msgstr "以畫面閃爍代替鈴聲(_V)"
 
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "說明："
+#~ msgid "Boing"
+#~ msgstr "彈簧"
 
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "用法：%s 字型檔\n"
+#~ msgid "Siren"
+#~ msgstr "警報"
 
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "字型檢視程式"
+#~ msgid "Clink"
+#~ msgstr "叮噹"
 
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "預覽字型"
+#~ msgid "Beep"
+#~ msgstr "鈴聲"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:242
-msgid "Text to thumbnail (default: Aa)"
-msgstr "文字轉為縮圖（預設：Aa）"
+#~ msgid "No sound"
+#~ msgstr "沒有聲音"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:242
-msgid "TEXT"
-msgstr "文字"
+#~ msgid "Sound not set for this event."
+#~ msgstr "此事件沒有設定音效。"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:244
-msgid "Font size (default: 64)"
-msgstr "字型大小（預設：64）"
+#~ msgid ""
+#~ "The sound file for this event does not exist.\n"
+#~ "You may want to install the gnome-audio package for a set of default "
+#~ "sounds."
+#~ msgstr ""
+#~ "代表該事件的音效檔不存在。\n"
+#~ "安裝 gnome-audio 套件可獲得一套預設的音效。"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:244
-msgid "SIZE"
-msgstr "大小"
+#~ msgid "The sound file for this event does not exist."
+#~ msgstr "代表該事件的音效檔不存在。"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:246
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "字型檔 輸出檔"
+#~ msgid "The file %s is not a valid wav file"
+#~ msgstr "檔案 %s 不是有效的 wav 檔案"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:262
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "分析參數時發生錯誤：%s\n"
+#~ msgid "Select sound file..."
+#~ msgstr "選取音效檔..."
 
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">是否套用新的字型？</span>"
+#~ msgid "System Sounds"
+#~ msgstr "系統音效"
 
-#: ../vfs-methods/themus/apply-font.glade.h:2
-msgid "Do _not apply font"
-msgstr "不套用字型(_N)"
+#~ msgid "Set as Application Font"
+#~ msgstr "指定為應用程式字型"
 
-#: ../vfs-methods/themus/apply-font.glade.h:3
-msgid ""
-"The theme you have selected suggests a new font. A preview of the font is "
-"shown below."
-msgstr "您選取的佈景主題建議使用一款新的字型。可以在下面的地方預覽該字型。"
+#~ msgid "Sets the default application font"
+#~ msgstr "設定應用程式的預設字型"
 
-#: ../vfs-methods/themus/apply-font.glade.h:4
-msgid "_Apply font"
-msgstr "套用字型(_A)"
+#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會顯示 OpenType 字型的縮圖。"
 
-#: ../vfs-methods/themus/theme-method.c:485
-msgid "Themes"
-msgstr "佈景主題"
+#~ msgid "If set to true, then PCF fonts will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會顯示 PCF 字型的縮圖。"
 
-#: ../vfs-methods/themus/themus-properties-view.c:127
-msgid "Description"
-msgstr "說明"
+#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會顯示 TrueType 字型的縮圖。"
 
-#: ../vfs-methods/themus/themus-properties-view.c:134
-msgid "Control theme"
-msgstr "界面主題"
+#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會顯示 Type1 字型的縮圖。"
 
-#: ../vfs-methods/themus/themus-properties-view.c:140
-msgid "Window border theme"
-msgstr "視窗邊框主題"
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for OpenType fonts."
+#~ msgstr "本設定鍵指定了用來製作 OpenType 字型縮圖的指令。"
 
-#: ../vfs-methods/themus/themus-properties-view.c:146
-msgid "Icon theme"
-msgstr "圖示主題"
+#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
+#~ msgstr "本設定鍵指定了用來製作 PCF 字型縮圖的指令。"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:1
-msgid "If set to true, then installed themes will be thumbnailed."
-msgstr "如設定為‘true’，則會為已安裝的佈景主題製作縮圖。"
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for TrueType fonts."
+#~ msgstr "本設定鍵指定了用來製作 TrueType 字型縮圖的指令。"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:2
-msgid "If set to true, then themes will be thumbnailed."
-msgstr "如設定為‘true’，則會為佈景主題製作縮圖。"
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for Type1 fonts."
+#~ msgstr "本設定鍵指定了用來製作 Type1 字型縮圖的指令。"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr "本設定鍵的內容是為已安裝的佈景主題製作縮圖所用的指令。"
+#~ msgid "Thumbnail command for OpenType fonts"
+#~ msgstr "製作 OpenType 字型縮圖的指令"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:4
-msgid "Set this key to the command used to create thumbnails for themes."
-msgstr "本設定鍵的內容是為佈景主題製作縮圖所用的指令。"
+#~ msgid "Thumbnail command for PCF fonts"
+#~ msgstr "製作 PCF 字型縮圖的指令"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:5
-msgid "Thumbnail command for installed themes"
-msgstr "為已安裝的佈景主題製作縮圖所用的指令"
+#~ msgid "Thumbnail command for TrueType fonts"
+#~ msgstr "製作 TrueType 字型縮圖的指令"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:6
-msgid "Thumbnail command for themes"
-msgstr "為佈景主題製作縮圖所用的指令"
+#~ msgid "Thumbnail command for Type1 fonts"
+#~ msgstr "製作 Type1 字型縮圖的指令"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:7
-msgid "Whether to thumbnail installed themes"
-msgstr "是否為已安裝的佈景主題製作縮圖"
+#~ msgid "Whether to thumbnail OpenType fonts"
+#~ msgstr "是否為 OpenType 字型製作縮圖"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:8
-msgid "Whether to thumbnail themes"
-msgstr "是否為佈景主題製作縮圖"
+#~ msgid "Whether to thumbnail PCF fonts"
+#~ msgstr "是否為 PCF 字型製作縮圖"
 
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "ABC 中文測試"
+#~ msgid "Whether to thumbnail TrueType fonts"
+#~ msgstr "是否為 TrueType 字型製作縮圖"
 
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[檔案]"
+#~ msgid "Whether to thumbnail Type1 fonts"
+#~ msgstr "是否為 Type1 字型製作縮圖"
 
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "套用佈景主題"
+#~ msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+#~ msgstr "0123456789 The following is Chinese: '中文測試'"
 
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "設定預設的佈景主題"
+#~ msgid "Name:"
+#~ msgstr "名稱："
+
+#~ msgid "Style:"
+#~ msgstr "字款："
+
+#~ msgid "Type:"
+#~ msgstr "類型："
+
+#~ msgid "Size:"
+#~ msgstr "大小："
+
+#~ msgid "Version:"
+#~ msgstr "版本："
+
+#~ msgid "Copyright:"
+#~ msgstr "版權："
+
+#~ msgid "Description:"
+#~ msgstr "說明："
+
+#~ msgid "usage: %s fontfile\n"
+#~ msgstr "用法：%s 字型檔\n"
+
+#~ msgid "Font Viewer"
+#~ msgstr "字型檢視程式"
+
+#~ msgid "Preview fonts"
+#~ msgstr "預覽字型"
+
+#~ msgid "Text to thumbnail (default: Aa)"
+#~ msgstr "文字轉為縮圖（預設：Aa）"
+
+#~ msgid "TEXT"
+#~ msgstr "文字"
+
+#~ msgid "Font size (default: 64)"
+#~ msgstr "字型大小（預設：64）"
+
+#~ msgid "SIZE"
+#~ msgstr "大小"
+
+#~ msgid "FONT-FILE OUTPUT-FILE"
+#~ msgstr "字型檔 輸出檔"
+
+#~ msgid "Error parsing arguments: %s\n"
+#~ msgstr "分析參數時發生錯誤：%s\n"
+
+#~ msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+#~ msgstr "<span weight=\"bold\" size=\"larger\">是否套用新的字型？</span>"
+
+#~ msgid "Do _not apply font"
+#~ msgstr "不套用字型(_N)"
+
+#~ msgid ""
+#~ "The theme you have selected suggests a new font. A preview of the font is "
+#~ "shown below."
+#~ msgstr "您選取的佈景主題建議使用一款新的字型。可以在下面的地方預覽該字型。"
+
+#~ msgid "_Apply font"
+#~ msgstr "套用字型(_A)"
+
+#~ msgid "Themes"
+#~ msgstr "佈景主題"
+
+#~ msgid "Description"
+#~ msgstr "說明"
+
+#~ msgid "Control theme"
+#~ msgstr "界面主題"
+
+#~ msgid "Window border theme"
+#~ msgstr "視窗邊框主題"
+
+#~ msgid "Icon theme"
+#~ msgstr "圖示主題"
+
+#~ msgid "If set to true, then installed themes will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會為已安裝的佈景主題製作縮圖。"
+
+#~ msgid "If set to true, then themes will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會為佈景主題製作縮圖。"
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for installed "
+#~ "themes."
+#~ msgstr "本設定鍵的內容是為已安裝的佈景主題製作縮圖所用的指令。"
+
+#~ msgid "Set this key to the command used to create thumbnails for themes."
+#~ msgstr "本設定鍵的內容是為佈景主題製作縮圖所用的指令。"
+
+#~ msgid "Thumbnail command for installed themes"
+#~ msgstr "為已安裝的佈景主題製作縮圖所用的指令"
+
+#~ msgid "Thumbnail command for themes"
+#~ msgstr "為佈景主題製作縮圖所用的指令"
+
+#~ msgid "Whether to thumbnail installed themes"
+#~ msgstr "是否為已安裝的佈景主題製作縮圖"
+
+#~ msgid "Whether to thumbnail themes"
+#~ msgstr "是否為佈景主題製作縮圖"
+
+#~ msgid "ABCDEFG"
+#~ msgstr "ABC 中文測試"
+
+#~ msgid "[FILE]"
+#~ msgstr "[檔案]"
+
+#~ msgid "Apply theme"
+#~ msgstr "套用佈景主題"
+
+#~ msgid "Sets the default theme"
+#~ msgstr "設定預設的佈景主題"
