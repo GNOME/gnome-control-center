@@ -1690,9 +1690,16 @@ run_application (App *app)
 	return;
     }
 
+    app->screen = gnome_rr_screen_new (gdk_screen_get_default (),
+				       on_screen_changed, app);
+    if (!app->screen)
+    {
+	g_error ("Could not get screen info");
+	g_object_unref (xml);
+	return;
+    }
+
     app->client = gconf_client_get_default ();
-    app->screen = gnome_rr_screen_new (gdk_screen_get_default(),
-				 on_screen_changed, app);
 
     app->dialog = glade_xml_get_widget (xml, "dialog");
 
@@ -1785,6 +1792,8 @@ restart:
     }
 
     gtk_widget_destroy (app->dialog);
+    gnome_rr_screen_destroy (app->screen);
+    g_object_unref (app->client);
 }
 
 int
