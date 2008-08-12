@@ -96,12 +96,16 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
   {
     GtkListStore *list_store;
     GtkTreeIter iter, sort_iter;
+    GdkPixbuf *thumbnail;
 
     list_store = GTK_LIST_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (store)));
 
+    g_object_get (peditor, "data", &thumbnail, NULL);
     gtk_list_store_insert_with_values (list_store, &iter, 0,
                                        COL_LABEL, curr_value,
-                                       COL_NAME, curr_value, -1);
+                                       COL_NAME, curr_value,
+                                       COL_THUMBNAIL, thumbnail,
+                                       -1);
     /* convert the tree store iter for use with the sort model */
     gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT (store),
                                                     &sort_iter, &iter);
@@ -923,6 +927,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   peditor = gconf_peditor_new_tree_view (NULL, key, list,
       "conv-to-widget-cb", conv_to_widget_cb,
       "conv-from-widget-cb", conv_from_widget_cb,
+      "data", thumbnail,
       NULL);
   g_signal_connect (peditor, "value-changed", callback, data);
 
