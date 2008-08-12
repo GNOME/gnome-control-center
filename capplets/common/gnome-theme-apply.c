@@ -100,12 +100,15 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
   g_free (old_key);
 
   /* set the notification theme */
-  old_key = gconf_client_get_string (client, NOTIFICATION_THEME_KEY, NULL);
-  if (compare (old_key, meta_theme_info->notification_theme_name))
+  if (meta_theme_info->notification_theme_name != NULL)
     {
-      gconf_client_set_string (client, NOTIFICATION_THEME_KEY, meta_theme_info->notification_theme_name, NULL);
+      old_key = gconf_client_get_string (client, NOTIFICATION_THEME_KEY, NULL);
+      if (compare (old_key, meta_theme_info->notification_theme_name))
+        {
+          gconf_client_set_string (client, NOTIFICATION_THEME_KEY, meta_theme_info->notification_theme_name, NULL);
+        }
+      g_free (old_key);
     }
-  g_free (old_key);
 
   /* Set the cursor theme key */
 #ifdef HAVE_XCURSOR
