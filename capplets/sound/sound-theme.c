@@ -986,6 +986,50 @@ theme_changed_custom_init (GtkTreeModel *model,
 }
 
 static gboolean
+play_sound_at_path (GtkWidget	      *tree_view,
+		    GtkTreeViewColumn *column,
+		    GtkTreePath       *path)
+{
+	GObject *preview_column;
+
+	preview_column = g_object_get_data (G_OBJECT (tree_view), "preview-column");
+	if (column == (GtkTreeViewColumn *) preview_column) {
+		GtkTreeModel *model;
+		GtkTreeIter iter;
+		char **sound_names;
+		gboolean sensitive;
+		ca_context *ctx;
+
+		model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
+		if (gtk_tree_model_get_iter (model, &iter, path) == FALSE) {
+			return FALSE;
+		}
+
+		gtk_tree_model_get (model, &iter,
+				    SOUND_NAMES_COL, &sound_names,
+				    SENSITIVE_COL, &sensitive, -1);
+		if (!sensitive || sound_names == NULL)
+			return FALSE;
+
+		ctx = ca_gtk_context_get ();
+		ca_gtk_play_for_widget (GTK_WIDGET (tree_view), 0,
+					CA_PROP_APPLICATION_NAME, _("Sound Preferences"),
+					CA_PROP_EVENT_ID, sound_names[0],
+					CA_PROP_EVENT_DESCRIPTION, _("Testing event sound"),
+					CA_PROP_CANBERRA_CACHE_CONTROL, "never",
+#ifdef CA_PROP_CANBERRA_ENABLE
+					CA_PROP_CANBERRA_ENABLE, "1",
+#endif
+					NULL);
+
+		g_strfreev (sound_names);
+
+		return TRUE;
+	}
+	return FALSE;
+}
+
+static gboolean
 custom_treeview_button_press_event_cb (GtkWidget *tree_view,
 				       GdkEventButton *event,
 				       GladeXML *dialog)
@@ -993,6 +1037,7 @@ custom_treeview_button_press_event_cb (GtkWidget *tree_view,
 	GtkTreePath *path;
 	GtkTreeViewColumn *column;
 	GdkEventButton *button_event = (GdkEventButton *) event;
+	gboolean res = FALSE;
 
 	if (event->type != GDK_BUTTON_PRESS)
 		return TRUE;
@@ -1000,48 +1045,55 @@ custom_treeview_button_press_event_cb (GtkWidget *tree_view,
 	if (gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (tree_view),
 					   button_event->x, button_event->y,
 					   &path, &column, NULL, NULL)) {
-		GObject *preview_column;
-
-		preview_column = g_object_get_data (G_OBJECT (tree_view), "preview-column");
-		if (column == (GtkTreeViewColumn *) preview_column) {
-			GtkTreeModel *model;
-			GtkTreeIter iter;
-			char **sound_names;
-			gboolean sensitive;
-			ca_context *ctx;
-
-			model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
-			if (gtk_tree_model_get_iter (model, &iter, path) == FALSE) {
-				gtk_tree_path_free (path);
-				return FALSE;
-			}
-			gtk_tree_path_free (path);
-
-			gtk_tree_model_get (model, &iter,
-					    SOUND_NAMES_COL, &sound_names,
-					    SENSITIVE_COL, &sensitive, -1);
-			if (!sensitive || sound_names == NULL)
-				return FALSE;
-
-			ctx = ca_gtk_context_get ();
-			ca_gtk_play_for_widget (GTK_WIDGET (tree_view), 0,
-						CA_PROP_APPLICATION_NAME, _("Sound Preferences"),
-						CA_PROP_EVENT_ID, sound_names[0],
-						CA_PROP_EVENT_DESCRIPTION, _("Testing event sound"),
-						CA_PROP_CANBERRA_CACHE_CONTROL, "never",
-#ifdef CA_PROP_CANBERRA_ENABLE
-						CA_PROP_CANBERRA_ENABLE, "1",
-#endif
-						NULL);
-
-			g_strfreev (sound_names);
-
-			return TRUE;
-		}
+		res = play_sound_at_path (tree_view, column, path);
+		gtk_tree_path_free (path);
 	}
 
-	return FALSE;
+	return res;
 }
+
+typedef GtkCellRendererPixbuf      ActivatableCellRendererPixbuf;
+typedef GtkCellRendererPixbufClass ActivatableCellRendererPixbufClass;
+
+#define ACTIVATABLE_TYPE_CELL_RENDERER_PIXBUF (activatable_cell_renderer_pixbuf_get_type ())
+G_DEFINE_TYPE (ActivatableCellRendererPixbuf, activatable_cell_renderer_pixbuf, GTK_TYPE_CELL_RENDERER_PIXBUF);
+
+static gboolean
+activatable_cell_renderer_pixbuf_activate (GtkCellRenderer      *cell,
+                                 	   GdkEvent             *event,
+                                   	   GtkWidget            *widget,
+                                   	   const gchar          *path_string,
+                                   	   GdkRectangle         *background_area,
+                                   	   GdkRectangle         *cell_area,
+                                   	   GtkCellRendererState  flags)
+{
+	GtkTreeViewColumn *preview_column;
+	GtkTreePath *path;
+	gboolean res;
+
+        preview_column = g_object_get_data (G_OBJECT (widget), "preview-column");
+	path = gtk_tree_path_new_from_string (path_string);
+	res = play_sound_at_path (widget, preview_column, path);
+	gtk_tree_path_free (path);
+
+	return res;
+}
+
+static void
+activatable_cell_renderer_pixbuf_init (ActivatableCellRendererPixbuf *cell)
+{
+}
+
+static void
+activatable_cell_renderer_pixbuf_class_init (ActivatableCellRendererPixbufClass *class)
+{
+  GtkCellRendererClass *cell_class;
+
+  cell_class = GTK_CELL_RENDERER_CLASS (class);
+
+  cell_class->activate = activatable_cell_renderer_pixbuf_activate;
+}
+
 
 void
 setup_sound_theme_custom (GladeXML *dialog, gboolean have_xkb)
@@ -1088,7 +1140,7 @@ setup_sound_theme_custom (GladeXML *dialog, gboolean have_xkb)
 	gtk_tree_view_column_set_cell_data_func (column, renderer, setting_set_func, NULL, NULL);
 
 	/* The 3rd column with the preview pixbuf */
-	renderer = gtk_cell_renderer_pixbuf_new ();
+	renderer = g_object_new (ACTIVATABLE_TYPE_CELL_RENDERER_PIXBUF, NULL);
 	g_object_set (renderer,
 		      "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE,
 		      "icon-name", "media-playback-start",

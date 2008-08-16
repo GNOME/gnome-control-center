@@ -1,3 +1,16 @@
+2008-08-16  Jens Granseuer  <jensgr@gmx.net>
+
+	Patch by: Matthias Clasen <mclasen@redhat.com>
+
+	* sound-theme.c: (play_sound_at_path),
+	(custom_treeview_button_press_event_cb),
+	(activatable_cell_renderer_pixbuf_activate),
+	(activatable_cell_renderer_pixbuf_init),
+	(activatable_cell_renderer_pixbuf_class_init),
+	(setup_sound_theme_custom): make the event sound preview button
+	listen to the "activate" signal so it becomes accessible via
+	keyboard (bug #547808)
+
 2008-08-07  Jens Granseuer  <jensgr@gmx.net>
 
 	Based on a patch by: Bastien Nocera <hadess@hadess.net>
