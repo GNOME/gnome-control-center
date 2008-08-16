@@ -1,5 +1,11 @@
 2008-08-13  Federico Mena Quintero  <federico@novell.com>
 
+	* xrandr-capplet.c (paint_output): Instead of using hard-coded
+	colors for the rectangles that represent the monitors, get the
+	colors from the GnomeRRLabeler.
+
+2008-08-13  Federico Mena Quintero  <federico@novell.com>
+
 	* xrandr-capplet.c (on_screen_changed): Create a GnomeRRLabeler
 	based on the current screen configuration, so that the physical
 	monitors will be labeled while the capplet is up.

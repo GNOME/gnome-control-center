@@ -1360,6 +1360,8 @@ paint_output (App *app, cairo_t *cr, int i)
     PangoRectangle extent;
     GdkRectangle viewport;
     double angle;
+    GdkColor output_color;
+    double r, g, b;
 
     cairo_save (cr);
 
@@ -1429,10 +1431,20 @@ paint_output (App *app, cairo_t *cr, int i)
     cairo_rectangle (cr, x, y, w * scale + 0.5, h * scale + 0.5);
     cairo_clip_preserve (cr);
 
-    if (output->on)
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
-    else
-	cairo_set_source_rgba (cr, 0.2, 0.2, 0.2, 1.0);
+    gnome_rr_labeler_get_color_for_output (app->labeler, output, &output_color);
+    r = output_color.red / 65535.0;
+    g = output_color.green / 65535.0;
+    b = output_color.blue / 65535.0;
+
+    if (!output->on)
+    {
+	/* If the output is turned off, just darken the selected color */
+	r *= 0.2;
+	g *= 0.2;
+	b *= 0.2;
+    }
+
+    cairo_set_source_rgba (cr, r, g, b, 1.0);
 
     foo_scroll_area_add_input_from_fill (FOO_SCROLL_AREA (app->area),
 					 cr, on_output_event, output);
