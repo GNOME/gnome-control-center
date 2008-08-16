@@ -34,6 +34,7 @@
 #define WINDOWTITLE_FONT_KEY "X-GNOME-Metatheme/WindowTitleFont"
 #define MONOSPACE_FONT_KEY "X-GNOME-Metatheme/MonospaceFont"
 #define BACKGROUND_IMAGE_KEY "X-GNOME-Metatheme/BackgroundImage"
+#define HIDDEN_KEY "X-GNOME-Metatheme/Hidden"
 
 /* Terminology used in this lib:
  *
@@ -378,6 +379,9 @@ gnome_theme_read_meta_theme (GFile *meta_theme_uri)
   if (str != NULL)
     meta_theme_info->background_image = g_strdup (str);
 
+  meta_theme_info->hidden = gnome_desktop_item_get_boolean (meta_theme_ditem,
+                                                            HIDDEN_KEY);
+
   gnome_desktop_item_unref (meta_theme_ditem);
 
   return meta_theme_info;
@@ -389,9 +393,9 @@ read_icon_theme (GFile *icon_theme_uri)
   GnomeThemeIconInfo *icon_theme_info;
   GnomeDesktopItem *icon_theme_ditem;
   gchar *icon_theme_file;
+  gchar *dir_name;
   const gchar *name;
   const gchar *directories;
-  const gchar *hidden_theme_icon;
 
   icon_theme_file = g_file_get_uri (icon_theme_uri);
   icon_theme_ditem = gnome_desktop_item_new_from_uri (icon_theme_file, 0, NULL);
@@ -413,19 +417,13 @@ read_icon_theme (GFile *icon_theme_uri)
     return NULL;
   }
 
-  hidden_theme_icon = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Hidden");
-  if (hidden_theme_icon == NULL ||
-      strcmp (hidden_theme_icon, "false") == 0) {
-    gchar *dir_name;
-    icon_theme_info = gnome_theme_icon_info_new ();
-    icon_theme_info->readable_name = g_strdup (name);
-    icon_theme_info->path = g_file_get_path (icon_theme_uri);
-    dir_name = g_path_get_dirname (icon_theme_info->path);
-    icon_theme_info->name = g_path_get_basename (dir_name);
-    g_free (dir_name);
-  } else {
-    icon_theme_info = NULL;
-  }
+  icon_theme_info = gnome_theme_icon_info_new ();
+  icon_theme_info->readable_name = g_strdup (name);
+  icon_theme_info->path = g_file_get_path (icon_theme_uri);
+  icon_theme_info->hidden = gnome_desktop_item_get_boolean (icon_theme_ditem, "Icon Theme/Hidden");
+  dir_name = g_path_get_dirname (icon_theme_info->path);
+  icon_theme_info->name = g_path_get_basename (dir_name);
+  g_free (dir_name);
 
   gnome_desktop_item_unref (icon_theme_ditem);
 
@@ -558,6 +556,9 @@ read_cursor_theme (GFile *cursor_theme_uri)
           cursor_theme_info->readable_name = g_strdup (readable_name);
         else
           cursor_theme_info->readable_name = g_strdup (name);
+
+        cursor_theme_info->hidden = gnome_desktop_item_get_boolean (cursor_theme_ditem,
+                                                                    "Icon Theme/Hidden");
 
         gnome_desktop_item_unref (cursor_theme_ditem);
       } else {
@@ -1416,7 +1417,9 @@ gnome_theme_info_find_all_helper (const gchar *key,
                                   GList *list,
                                   GList **themes)
 {
-  *themes = g_list_prepend (*themes, list->data);
+  /* only return visible themes */
+  if (!((GnomeThemeCommonInfo *) list->data)->hidden)
+    *themes = g_list_prepend (*themes, list->data);
 }
 
 gchar *

@@ -56,6 +56,7 @@ struct _GnomeThemeCommonInfo
   gchar *name;
   gchar *readable_name;
   gint priority;
+  gboolean hidden;
 };
 
 typedef struct _GnomeThemeInfo GnomeThemeInfo;
@@ -66,6 +67,7 @@ struct _GnomeThemeInfo
   gchar *name;
   gchar *readable_name;
   gint priority;
+  gboolean hidden;
 
   guint has_gtk : 1;
   guint has_keybinding : 1;
@@ -79,6 +81,7 @@ struct _GnomeThemeCursorInfo {
   gchar *name;
   gchar *readable_name;
   gint priority;
+  gboolean hidden;
 
   GArray *sizes;
   GdkPixbuf *thumbnail;
@@ -92,6 +95,7 @@ struct _GnomeThemeMetaInfo
   gchar *name;
   gchar *readable_name;
   gint priority;
+  gboolean hidden;
 
   gchar *comment;
   gchar *icon_file;
