@@ -1,3 +1,10 @@
+2008-08-13  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (on_screen_changed): Create a GnomeRRLabeler
+	based on the current screen configuration, so that the physical
+	monitors will be labeled while the capplet is up.
+	(struct App): New field "labeler".
+
 2008-08-11  Jens Granseuer  <jensgr@gmx.net>
 
 	* xrandr-capplet.c: (run_application): fail gracefully if we cannot

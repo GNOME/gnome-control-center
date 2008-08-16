@@ -28,6 +28,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-rr.h>
 #include <libgnomeui/gnome-rr-config.h>
+#include <libgnomeui/gnome-rr-labeler.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <glib/gi18n.h>
@@ -40,6 +41,7 @@ struct App
 {
     GnomeRRScreen       *screen;
     GnomeRRConfig  *current_configuration;
+    GnomeRRLabeler *labeler;
     GnomeOutputInfo         *current_output;
 
     GtkWidget	   *dialog;
@@ -138,6 +140,13 @@ on_screen_changed (GnomeRRScreen *scr,
 
     qsort (app->current_configuration->outputs, i, sizeof (GnomeOutputInfo *),
 	   compare_outputs);
+
+    if (app->labeler) {
+	gnome_rr_labeler_hide (app->labeler);
+	g_object_unref (app->labeler);
+    }
+
+    app->labeler = gnome_rr_labeler_new (app->current_configuration);
 
 #if 0
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
