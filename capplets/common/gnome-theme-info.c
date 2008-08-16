@@ -1444,9 +1444,10 @@ gtk_theme_info_missing_engine (const gchar *gtk_theme, gboolean nameOnly)
       found = g_file_test (full, G_FILE_TEST_EXISTS);
 
       if (!found) {
-        if (nameOnly)
+        if (nameOnly) {
           engine = g_strdup (l->data);
-        else
+          g_free (full);
+        } else
           engine = full;
         break;
       }

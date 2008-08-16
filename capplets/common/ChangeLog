@@ -1,5 +1,10 @@
 2008-08-16  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-theme-info.c: (gtk_theme_info_missing_engine): don't leak
+	the theme engine path
+
+2008-08-16  Jens Granseuer  <jensgr@gmx.net>
+
 	Keep track of hidden themes, too, so that e.g. we don't erroneously
 	show "GTK theme missing" when a metatheme references a hidden GTK
 	theme (part of bug #547301)
