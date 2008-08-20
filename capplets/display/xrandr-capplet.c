@@ -1310,9 +1310,14 @@ get_display_name (App *app,
 {
     const char *text;
 
-    if (app->current_configuration->clone)
+    if (app->current_configuration->clone) {
+	/* Translators:  this is the feature where what you see on your laptop's
+	 * screen is the same as your external monitor.  Here, "Mirror" is being
+	 * used as an adjective, not as a verb.  For example, the Spanish
+	 * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+	 */
 	text = _("Mirror Screens");
-    else
+    } else
 	text = output->display_name;
 
     return gtk_widget_create_pango_layout (
