@@ -1311,7 +1311,7 @@ get_display_name (App *app,
     const char *text;
 
     if (app->current_configuration->clone)
-	text = _("Cloned Output");
+	text = _("Mirror Screens");
     else
 	text = output->display_name;
 
