@@ -227,7 +227,7 @@ set_combox_for_theme_name (GladeXML *dialog, const char *name)
 	GtkTreeModel *model;
 	gboolean found;
 
-	g_debug ("setting theme %s", name);
+	g_debug ("setting theme %s", name ? name : "(null)");
 
 	/* If the name is empty, use "freedesktop" */
 	if (name == NULL || *name == '\0')
