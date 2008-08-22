@@ -34,6 +34,7 @@ typedef void (* ThumbnailGenFunc) (void               *type,
 				   GDestroyNotify     *destroy);
 
 static void update_message_area (AppearanceData *data);
+static void create_thumbnail (const gchar *name, GdkPixbuf *default_thumb, AppearanceData *data);
 
 static const gchar *symbolic_names[NUM_SYMBOLIC_COLORS] = {
   "fg_color", "bg_color",
@@ -97,6 +98,7 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
     GtkListStore *list_store;
     GtkTreeIter iter, sort_iter;
     GdkPixbuf *thumbnail;
+    AppearanceData *data = g_object_get_data (G_OBJECT (peditor), "app_data");
 
     list_store = GTK_LIST_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (store)));
 
@@ -110,6 +112,8 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
     gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT (store),
                                                     &sort_iter, &iter);
     path = gtk_tree_model_get_string_from_iter (store, &sort_iter);
+
+    create_thumbnail (curr_value, thumbnail, data);
   }
 
   new_value = gconf_value_new (GCONF_VALUE_STRING);
@@ -754,6 +758,33 @@ icon_theme_thumbnail_cb (GdkPixbuf *pixbuf,
 }
 
 static void
+create_thumbnail (const gchar *name, GdkPixbuf *default_thumb, AppearanceData *data)
+{
+  if (default_thumb == data->icon_theme_icon) {
+    GnomeThemeIconInfo *info;
+    info = gnome_theme_icon_info_find (name);
+    if (info != NULL) {
+      generate_icon_theme_thumbnail_async (info,
+          (ThemeThumbnailFunc) icon_theme_thumbnail_cb, data, NULL);
+    }
+  } else if (default_thumb == data->gtk_theme_icon) {
+    GnomeThemeInfo *info;
+    info = gnome_theme_info_find (name);
+    if (info != NULL && info->has_gtk) {
+      generate_gtk_theme_thumbnail_async (info,
+          (ThemeThumbnailFunc) gtk_theme_thumbnail_cb, data, NULL);
+    }
+  } else if (default_thumb == data->window_theme_icon) {
+    GnomeThemeInfo *info;
+    info = gnome_theme_info_find (name);
+    if (info != NULL && info->has_metacity) {
+      generate_metacity_theme_thumbnail_async (info,
+          (ThemeThumbnailFunc) metacity_theme_thumbnail_cb, data, NULL);
+    }
+  }
+}
+
+static void
 changed_on_disk_cb (GnomeThemeCommonInfo *theme,
 		    GnomeThemeChangeType  change_type,
 		    AppearanceData       *data)
@@ -929,6 +960,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
       "conv-from-widget-cb", conv_from_widget_cb,
       "data", thumbnail,
       NULL);
+  g_object_set_data (peditor, "app_data", data);
   g_signal_connect (peditor, "value-changed", callback, data);
 
   /* init the delete buttons */
