@@ -18,7 +18,7 @@
 
 #define EGG_CELL_RENDERER_TEXT_PATH "egg-cell-renderer-text"
 
-#define TOOLTIP_TEXT _("New accelerator...")
+#define TOOLTIP_TEXT _("New shortcut...")
 
 static void             egg_cell_renderer_keys_finalize      (GObject             *object);
 static void             egg_cell_renderer_keys_init          (EggCellRendererKeys *cell_keys);
@@ -124,7 +124,7 @@ marshal_VOID__STRING_UINT_FLAGS_UINT (GClosure     *closure,
       data1 = g_value_peek_pointer (param_values + 0);
       data2 = closure->data;
     }
-  
+
   callback = (GMarshalFunc_VOID__STRING_UINT_FLAGS_UINT) (marshal_data ? marshal_data : cc->callback);
 
   callback (data1,
@@ -144,7 +144,7 @@ egg_cell_renderer_keys_class_init (EggCellRendererKeysClass *cell_keys_class)
   object_class = G_OBJECT_CLASS (cell_keys_class);
   cell_renderer_class = GTK_CELL_RENDERER_CLASS (cell_keys_class);
   parent_class = g_type_class_peek_parent (object_class);
-  
+
   GTK_CELL_RENDERER_CLASS (cell_keys_class)->start_editing = egg_cell_renderer_keys_start_editing;
 
   object_class->set_property = egg_cell_renderer_keys_set_property;
@@ -152,11 +152,11 @@ egg_cell_renderer_keys_class_init (EggCellRendererKeysClass *cell_keys_class)
   cell_renderer_class->get_size = egg_cell_renderer_keys_get_size;
 
   object_class->finalize = egg_cell_renderer_keys_finalize;
-  
+
   /* FIXME if this gets moved to a real library, rename the properties
    * to match whatever the GTK convention is
    */
-  
+
   g_object_class_install_property (object_class,
                                    PROP_ACCEL_KEY,
                                    g_param_spec_uint ("accel_key",
@@ -185,7 +185,7 @@ egg_cell_renderer_keys_class_init (EggCellRendererKeysClass *cell_keys_class)
 						      G_MAXINT,
 						      0,
 						      G_PARAM_READABLE | G_PARAM_WRITABLE));
-  
+
   /* FIXME: Register the enum when moving to GTK+ */
   g_object_class_install_property (object_class,
                                    PROP_ACCEL_MODE,
@@ -196,7 +196,7 @@ egg_cell_renderer_keys_class_init (EggCellRendererKeysClass *cell_keys_class)
 						     2,
 						     0,
 						     G_PARAM_READABLE | G_PARAM_WRITABLE));
-  
+
   g_signal_new ("accel_edited",
                 EGG_TYPE_CELL_RENDERER_KEYS,
                 G_SIGNAL_RUN_LAST,
@@ -229,7 +229,7 @@ egg_cell_renderer_keys_new (void)
 static void
 egg_cell_renderer_keys_finalize (GObject *object)
 {
-  
+
   (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
@@ -255,7 +255,7 @@ egg_cell_renderer_keys_get_property  (GObject                  *object,
   g_return_if_fail (EGG_IS_CELL_RENDERER_KEYS (object));
 
   keys = EGG_CELL_RENDERER_KEYS (object);
-  
+
   switch (param_id)
     {
     case PROP_ACCEL_KEY:
@@ -286,7 +286,7 @@ egg_cell_renderer_keys_set_property  (GObject                  *object,
   g_return_if_fail (EGG_IS_CELL_RENDERER_KEYS (object));
 
   keys = EGG_CELL_RENDERER_KEYS (object);
-  
+
   switch (param_id)
     {
     case PROP_ACCEL_KEY:
@@ -312,13 +312,13 @@ egg_cell_renderer_keys_set_property  (GObject                  *object,
     case PROP_ACCEL_MODE:
       egg_cell_renderer_keys_set_accel_mode (keys, g_value_get_int (value));
       break;
-      
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
     }
 }
 
-static gboolean 
+static gboolean
 is_modifier (guint keycode)
 {
   gint i;
@@ -373,7 +373,7 @@ egg_cell_renderer_keys_get_size (GtkCellRenderer *cell,
 /* FIXME: Currently we don't differentiate between a 'bogus' key (like tab in
  * GTK mode) and a removed key.
  */
-   
+
 static gboolean
 grab_key_callback (GtkWidget    *widget,
                    GdkEventKey  *event,
@@ -385,10 +385,10 @@ grab_key_callback (GtkWidget    *widget,
   char *path;
   gboolean edited;
   gboolean cleared;
-  GdkModifierType consumed_modifiers;  
+  GdkModifierType consumed_modifiers;
   guint upper;
   GdkModifierType ignored_modifiers;
-  
+
   keys = EGG_CELL_RENDERER_KEYS (data);
 
   if (is_modifier (event->hardware_keycode))
@@ -406,11 +406,11 @@ grab_key_callback (GtkWidget    *widget,
 
   upper = event->keyval;
   accel_keyval = gdk_keyval_to_lower (upper);
-  if (accel_keyval == GDK_ISO_Left_Tab) 
+  if (accel_keyval == GDK_ISO_Left_Tab)
     accel_keyval = GDK_Tab;
 
 
-  
+
   /* Put shift back if it changed the case of the key, not otherwise.
    */
   if (upper != accel_keyval &&
@@ -424,7 +424,7 @@ grab_key_callback (GtkWidget    *widget,
                                         EGG_VIRTUAL_SCROLL_LOCK_MASK |
                                         EGG_VIRTUAL_LOCK_MASK,
                                         &ignored_modifiers);
-  
+
   /* http://bugzilla.gnome.org/show_bug.cgi?id=139605
    * mouse keys should effect keybindings */
   ignored_modifiers |=	GDK_BUTTON1_MASK |
@@ -441,7 +441,7 @@ grab_key_callback (GtkWidget    *widget,
     accel_mods = event->state & GDK_MODIFIER_MASK & ~(ignored_modifiers);
   else
     g_assert_not_reached ();
-    
+
   if (accel_mods == 0 && accel_keyval == GDK_Escape)
     goto out; /* cancel */
 
@@ -460,19 +460,19 @@ grab_key_callback (GtkWidget    *widget,
 	  accel_mods = 0;
 	}
     }
-  
+
   edited = TRUE;
  out:
   gdk_keyboard_ungrab (event->time);
   gdk_pointer_ungrab (event->time);
-  
+
   path = g_strdup (g_object_get_data (G_OBJECT (keys->edit_widget), EGG_CELL_RENDERER_TEXT_PATH));
 
   gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (keys->edit_widget));
   gtk_cell_editable_remove_widget (GTK_CELL_EDITABLE (keys->edit_widget));
   keys->edit_widget = NULL;
   keys->grab_widget = NULL;
-  
+
   if (edited)
     {
       g_signal_emit_by_name (G_OBJECT (keys), "accel_edited", path,
@@ -537,7 +537,7 @@ pointless_eventbox_subclass_get_type (void)
         NULL, NULL };
 
       eventbox_type = g_type_register_static (GTK_TYPE_EVENT_BOX, "EggCellEditableEventBox", &eventbox_info, 0);
-      
+
       g_type_add_interface_static (eventbox_type,
 				   GTK_TYPE_CELL_EDITABLE,
 				   &cell_editable_info);
@@ -559,16 +559,16 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
   EggCellRendererKeys *keys;
   GtkWidget *label;
   GtkWidget *eventbox;
-  
+
   celltext = GTK_CELL_RENDERER_TEXT (cell);
   keys = EGG_CELL_RENDERER_KEYS (cell);
-  
+
   /* If the cell isn't editable we return NULL. */
   if (celltext->editable == FALSE)
     return NULL;
 
   g_return_val_if_fail (widget->window != NULL, NULL);
-  
+
   if (gdk_keyboard_grab (widget->window, FALSE,
                          gdk_event_get_time (event)) != GDK_GRAB_SUCCESS)
     return NULL;
@@ -581,7 +581,7 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
       gdk_keyboard_ungrab (gdk_event_get_time (event));
       return NULL;
     }
-  
+
   keys->grab_widget = widget;
 
   g_signal_connect (G_OBJECT (widget), "key_press_event",
@@ -593,31 +593,31 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
   keys->edit_widget = eventbox;
   g_object_add_weak_pointer (G_OBJECT (keys->edit_widget),
                              (void**) &keys->edit_widget);
-  
+
   label = gtk_label_new (NULL);
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  
+
   gtk_widget_modify_bg (eventbox, GTK_STATE_NORMAL,
                         &widget->style->bg[GTK_STATE_SELECTED]);
 
   gtk_widget_modify_fg (label, GTK_STATE_NORMAL,
                         &widget->style->fg[GTK_STATE_SELECTED]);
-  
+
   gtk_label_set_text (GTK_LABEL (label),
 		  TOOLTIP_TEXT);
 
   gtk_container_add (GTK_CONTAINER (eventbox), label);
-  
+
   g_object_set_data_full (G_OBJECT (keys->edit_widget), EGG_CELL_RENDERER_TEXT_PATH,
                           g_strdup (path), g_free);
-  
+
   gtk_widget_show_all (keys->edit_widget);
 
   g_signal_connect (G_OBJECT (keys->edit_widget), "unrealize",
                     G_CALLBACK (ungrab_stuff), keys);
-  
+
   keys->edit_key = keys->accel_key;
-  
+
   return GTK_CELL_EDITABLE (keys->edit_widget);
 }
 
@@ -635,7 +635,7 @@ egg_cell_renderer_keys_set_accelerator (EggCellRendererKeys *keys,
   g_object_freeze_notify (G_OBJECT (keys));
 
   changed = FALSE;
-  
+
   if (keyval != keys->accel_key)
     {
       keys->accel_key = keyval;
@@ -649,7 +649,7 @@ egg_cell_renderer_keys_set_accelerator (EggCellRendererKeys *keys,
 
       g_object_notify (G_OBJECT (keys), "accel_mask");
       changed = TRUE;
-    }  
+    }
 
   if (keycode != keys->keycode)
     {
