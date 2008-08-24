@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-09 23:58+0900\n"
-"PO-Revision-Date: 2008-08-09 23:58+0900\n"
+"POT-Creation-Date: 2008-08-25 00:32+0900\n"
+"PO-Revision-Date: 2008-08-25 00:28+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -496,8 +496,8 @@ msgid "Assistive Technologies"
 msgstr "支援技術"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Enable support for GNOME assistive technologies at login"
-msgstr "起動時に GNOME 支援技術のサポートを有効にします"
+msgid "Choose which accessibility features to enable when you log in"
+msgstr "ログインした時にアクセシビリティの機能を有効にするかどうかを選択します"
 
 #: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
@@ -576,19 +576,19 @@ msgstr "PAGE"
 msgid "[WALLPAPER...]"
 msgstr "[壁紙...]"
 
-#: ../capplets/appearance/appearance-style.c:159
-#: ../capplets/common/gnome-theme-info.c:444
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/appearance/appearance-style.c:167
+#: ../capplets/common/gnome-theme-info.c:442
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer"
 msgstr "デフォルトのポインタ"
 
-#: ../capplets/appearance/appearance-style.c:221
+#: ../capplets/appearance/appearance-style.c:229
 #: ../capplets/appearance/appearance-themes.c:687
 msgid "Install"
 msgstr "インストール"
 
-#: ../capplets/appearance/appearance-style.c:241
-#: ../capplets/common/gnome-theme-info.c:1640
+#: ../capplets/appearance/appearance-style.c:249
+#: ../capplets/common/gnome-theme-info.c:1644
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
@@ -1386,35 +1386,35 @@ msgstr "画像を一つ選択して下さい。"
 msgid "_Select"
 msgstr "選択(_S)"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:635
 msgid "Default Pointer - Current"
 msgstr "デフォルトのポインタ - 使用中"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "White Pointer"
 msgstr "白いポインタ"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:640
 msgid "White Pointer - Current"
 msgstr "白いポインタ - 使用中"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large Pointer"
 msgstr "大きなポインタ"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:645
 msgid "Large Pointer - Current"
 msgstr "大きなポインタ - 使用中"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large White Pointer - Current"
 msgstr "大きな白いポインタ - 使用中"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:650
 msgid "Large White Pointer"
 msgstr "大きな白いポインタ"
 
-#: ../capplets/common/gnome-theme-info.c:1616
+#: ../capplets/common/gnome-theme-info.c:1620
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme '%s' is "
@@ -1423,7 +1423,7 @@ msgstr ""
 "このテーマは、必要となる GTK+ のテーマ (%s) がインストールされていないため、"
 "意図したようには正しく表示されないでしょう。"
 
-#: ../capplets/common/gnome-theme-info.c:1624
+#: ../capplets/common/gnome-theme-info.c:1628
 #, c-format
 msgid ""
 "This theme will not look as intended because the required window manager "
@@ -1432,7 +1432,7 @@ msgstr ""
 "このテーマは、必要となるウィンドウ・マネージャのテーマ (%s) がインストールさ"
 "れていないため、意図したようには正しく表示されないでしょう。"
 
-#: ../capplets/common/gnome-theme-info.c:1631
+#: ../capplets/common/gnome-theme-info.c:1635
 #, c-format
 msgid ""
 "This theme will not look as intended because the required icon theme '%s' is "
@@ -1785,7 +1785,13 @@ msgstr "ATerm"
 msgid "Include _Panel"
 msgstr "パネルを含める(_P)"
 
+#. Translators:  this is the feature where what you see on your laptop's
+#. * screen is the same as your external monitor.  Here, "Mirror" is being
+#. * used as an adjective, not as a verb.  For example, the Spanish
+#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#.
 #: ../capplets/display/display-capplet.glade.h:2
+#: ../capplets/display/xrandr-capplet.c:1319
 msgid "Mirror Screens"
 msgstr "複数の画面をミラーする"
 
@@ -1833,44 +1839,40 @@ msgstr "画面の解像度を変更します"
 msgid "Screen Resolution"
 msgstr "画面の解像度"
 
-#: ../capplets/display/xrandr-capplet.c:403
-#: ../capplets/display/xrandr-capplet.c:441
+#: ../capplets/display/xrandr-capplet.c:412
+#: ../capplets/display/xrandr-capplet.c:450
 msgid "Normal"
 msgstr "標準"
 
-#: ../capplets/display/xrandr-capplet.c:404
+#: ../capplets/display/xrandr-capplet.c:413
 msgid "Left"
 msgstr "左回り"
 
-#: ../capplets/display/xrandr-capplet.c:405
+#: ../capplets/display/xrandr-capplet.c:414
 msgid "Right"
 msgstr "右回り"
 
-#: ../capplets/display/xrandr-capplet.c:406
+#: ../capplets/display/xrandr-capplet.c:415
 msgid "Upside Down"
 msgstr "逆さま"
 
-#: ../capplets/display/xrandr-capplet.c:479
-#: ../capplets/display/xrandr-capplet.c:487
 #: ../capplets/display/xrandr-capplet.c:488
+#: ../capplets/display/xrandr-capplet.c:496
+#: ../capplets/display/xrandr-capplet.c:497
 #, c-format
 msgid "%d Hz"
 msgstr " %dHz"
 
-#: ../capplets/display/xrandr-capplet.c:540
-#: ../capplets/display/xrandr-capplet.c:559
-#: ../capplets/display/xrandr-capplet.c:569
+#: ../capplets/display/xrandr-capplet.c:549
+#: ../capplets/display/xrandr-capplet.c:568
+#: ../capplets/display/xrandr-capplet.c:578
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:551
+#: ../capplets/display/xrandr-capplet.c:560
 msgid "Off"
 msgstr "無効"
-
-#: ../capplets/display/xrandr-capplet.c:1305
-msgid "Cloned Output"
-msgstr "別の出力"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -1880,13 +1882,13 @@ msgstr "サウンド"
 #. Desktop
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
 #: ../capplets/sound/sound-theme-definition.h:56
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1154
 msgid "Desktop"
 msgstr "デスクトップ"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
-msgid "New accelerator..."
-msgstr "新しいアクセラレータ..."
+msgid "New shortcut..."
+msgstr "新しいショートカット..."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:163
 #: ../capplets/keybindings/eggcellrendererkeys.c:164
@@ -1987,11 +1989,11 @@ msgstr "キーボード・ショートカット"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new "
-"accelerator, or press backspace to clear."
+"To edit a shortcut key, click on the corresponding row and type a new key "
+"combination, or press backspace to clear."
 msgstr ""
-"キーボード・ショートカットを編集する場合は、対応する操作をクリックして新しい"
-"アクセラレータ・キーを押下して下さい ([BS] キーで取り消します)"
+"キーボード・ショートカットを編集する際は、対応する操作をクリックして新しい"
+"キーの組み合わせを押下して下さい ([BS] キーで取り消します)"
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -2721,7 +2723,7 @@ msgid "Sou_nd capture:"
 msgstr "キャプチャ(_N):"
 
 #: ../capplets/sound/sound-properties.glade.h:16
-#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1028
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1016
 msgid "Sound Preferences"
 msgstr "効果音の設定"
 
@@ -2788,7 +2790,7 @@ msgid "Login"
 msgstr "ログイン"
 
 #: ../capplets/sound/sound-theme-definition.h:58
-#: ../libslab/bookmark-agent.c:1063
+#: ../libslab/bookmark-agent.c:1060
 msgid "Logout"
 msgstr "ログアウト"
 
@@ -2833,7 +2835,7 @@ msgstr "画面全体を点滅させる"
 msgid "Flash window"
 msgstr "ウィンドウのタイトルバーを点滅させる"
 
-#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1030
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1018
 msgid "Testing event sound"
 msgstr "イベント音のテスト中"
 
@@ -2928,7 +2930,7 @@ msgstr "ウィンドウ"
 msgid "<b>Start %s</b>"
 msgstr "<b>%sを起動する</b>"
 
-#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1059
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1056
 msgid "Help"
 msgstr "ヘルプ"
 
@@ -2940,11 +2942,11 @@ msgstr "アップグレード"
 msgid "Uninstall"
 msgstr "アンインストール"
 
-#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:728
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:715
 msgid "Remove from Favorites"
 msgstr "お気に入りから削除する"
 
-#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:730
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:717
 msgid "Add to Favorites"
 msgstr "お気に入りに追加する"
 
@@ -2971,199 +2973,117 @@ msgstr ""
 msgid "Other"
 msgstr "その他"
 
-#: ../libslab/bookmark-agent.c:1061
+#: ../libslab/bookmark-agent.c:1058
 msgid "Lock Screen"
 msgstr "画面のロック"
 
-#: ../libslab/bookmark-agent.c:1065
+#: ../libslab/bookmark-agent.c:1062
 msgid "Shutdown"
 msgstr "シャットダウン"
 
-#: ../libslab/bookmark-agent.c:1090
+#: ../libslab/bookmark-agent.c:1087
 msgid "New Spreadsheet"
 msgstr "新しいスプレッドシート"
 
-#: ../libslab/bookmark-agent.c:1095
+#: ../libslab/bookmark-agent.c:1092
 msgid "New Document"
 msgstr "新しいドキュメント"
 
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1143
 msgid "Home"
 msgstr "ホーム"
 
-#: ../libslab/bookmark-agent.c:1151
+#: ../libslab/bookmark-agent.c:1148
 msgid "Documents"
 msgstr "ドキュメント"
 
-#: ../libslab/bookmark-agent.c:1164
+#: ../libslab/bookmark-agent.c:1161
 msgid "File System"
 msgstr "ファイルシステム"
 
-#: ../libslab/bookmark-agent.c:1168
+#: ../libslab/bookmark-agent.c:1165
 msgid "Network Servers"
 msgstr "ネットワーク・サーバ"
 
-#: ../libslab/bookmark-agent.c:1197
+#: ../libslab/bookmark-agent.c:1194
 msgid "Search"
 msgstr "検索する"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:172
+#: ../libslab/directory-tile.c:171
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>開く</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:191 ../libslab/document-tile.c:241
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:235
 msgid "Rename..."
 msgstr "名前の変更..."
 
-#: ../libslab/directory-tile.c:205 ../libslab/directory-tile.c:214
-#: ../libslab/document-tile.c:255 ../libslab/document-tile.c:264
+#: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
+#: ../libslab/document-tile.c:249 ../libslab/document-tile.c:258
 msgid "Send To..."
 msgstr "送る..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:229 ../libslab/document-tile.c:290
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:284
 msgid "Move to Trash"
 msgstr "ゴミ箱へ移動する"
 
-#: ../libslab/directory-tile.c:239 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:300 ../libslab/document-tile.c:841
+#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:456
+#: ../libslab/document-tile.c:294 ../libslab/document-tile.c:831
 msgid "Delete"
 msgstr "削除する"
 
-#: ../libslab/directory-tile.c:569 ../libslab/document-tile.c:1013
+#: ../libslab/directory-tile.c:532 ../libslab/document-tile.c:980
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "本当に \"%s\" を完全に削除してもよろしいですか？"
 
-#: ../libslab/directory-tile.c:574 ../libslab/document-tile.c:1017
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:981
 msgid "If you delete an item, it is permanently lost."
 msgstr "アイテムを削除してしまうと、元に戻すことはできません。"
 
-#: ../libslab/document-tile.c:202
+#: ../libslab/document-tile.c:196
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>\"%s\" で開く</b>"
 
-#: ../libslab/document-tile.c:214
+#: ../libslab/document-tile.c:208
 msgid "Open with Default Application"
 msgstr "デフォルトのアプリで開く"
 
-#: ../libslab/document-tile.c:225
+#: ../libslab/document-tile.c:219
 msgid "Open in File Manager"
 msgstr "ファイル・マネージャで開く"
 
-#: ../libslab/document-tile.c:624
+#: ../libslab/document-tile.c:611
 msgid "?"
 msgstr "？"
 
-#: ../libslab/document-tile.c:631
+#: ../libslab/document-tile.c:618
 msgid "%l:%M %p"
 msgstr "%p%l:%M"
 
-#: ../libslab/document-tile.c:639
+#: ../libslab/document-tile.c:626
 msgid "Today %l:%M %p"
 msgstr "今日の%p%l:%M"
 
-#: ../libslab/document-tile.c:649
+#: ../libslab/document-tile.c:636
 msgid "Yesterday %l:%M %p"
 msgstr "昨日の%p%l:%M"
 
-#: ../libslab/document-tile.c:661
+#: ../libslab/document-tile.c:648
 msgid "%a %l:%M %p"
 msgstr "%p%l:%M (%a)"
 
-#: ../libslab/document-tile.c:669
+#: ../libslab/document-tile.c:656
 msgid "%b %d %l:%M %p"
 msgstr "%B%e日 %p%l:%M"
 
-#: ../libslab/document-tile.c:671
+#: ../libslab/document-tile.c:658
 msgid "%b %d %Y"
 msgstr "%Y年%B%e日"
-
-#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
-#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
-#, c-format
-msgid "Unexpected attribute '%s' for element '%s'"
-msgstr "要素 '%2$s' に対する想定外の属性 '%1$s'"
-
-#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
-#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
-#, c-format
-msgid "Attribute '%s' of element '%s' not found"
-msgstr "要素 '%2$s' の属性 '%1$s' が見つかりません"
-
-#: ../libslab/libslab-bookmarkfile.c:1087
-#: ../libslab/libslab-bookmarkfile.c:1152
-#: ../libslab/libslab-bookmarkfile.c:1216
-#: ../libslab/libslab-bookmarkfile.c:1226
-#, c-format
-msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr "想定外のタグ '%s' (想定していたタグ '%s')"
-
-#: ../libslab/libslab-bookmarkfile.c:1112
-#: ../libslab/libslab-bookmarkfile.c:1126
-#: ../libslab/libslab-bookmarkfile.c:1194
-#: ../libslab/libslab-bookmarkfile.c:1246
-#, c-format
-msgid "Unexpected tag '%s' inside '%s'"
-msgstr "'%2$s' の中に想定外のタグ '%1$s'"
-
-#: ../libslab/libslab-bookmarkfile.c:1929
-#, c-format
-msgid "No valid bookmark file found in data dirs"
-msgstr "データ・フォルダに妥当なブックマーク・ファイルはありません"
-
-#: ../libslab/libslab-bookmarkfile.c:2130
-#, c-format
-msgid "A bookmark for URI '%s' already exists"
-msgstr "URI '%s' のブックマークが既に存在しています"
-
-#: ../libslab/libslab-bookmarkfile.c:2176
-#: ../libslab/libslab-bookmarkfile.c:2333
-#: ../libslab/libslab-bookmarkfile.c:2418
-#: ../libslab/libslab-bookmarkfile.c:2499
-#: ../libslab/libslab-bookmarkfile.c:2584
-#: ../libslab/libslab-bookmarkfile.c:2667
-#: ../libslab/libslab-bookmarkfile.c:2745
-#: ../libslab/libslab-bookmarkfile.c:2824
-#: ../libslab/libslab-bookmarkfile.c:2866
-#: ../libslab/libslab-bookmarkfile.c:2963
-#: ../libslab/libslab-bookmarkfile.c:3089
-#: ../libslab/libslab-bookmarkfile.c:3279
-#: ../libslab/libslab-bookmarkfile.c:3355
-#: ../libslab/libslab-bookmarkfile.c:3508
-#: ../libslab/libslab-bookmarkfile.c:3573
-#: ../libslab/libslab-bookmarkfile.c:3663
-#: ../libslab/libslab-bookmarkfile.c:3790
-#, c-format
-msgid "No bookmark found for URI '%s'"
-msgstr "URI '%s' のブックマークはありません"
-
-#: ../libslab/libslab-bookmarkfile.c:2508
-#, c-format
-msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr "URI '%s' のブックマークの中には MIME 型が定義されていません"
-
-#: ../libslab/libslab-bookmarkfile.c:2593
-#, c-format
-msgid "No private flag has been defined in bookmark for URI '%s'"
-msgstr ""
-"URI '%s' のブックマークの中にはプライベートなフラグが定義されていませんでした"
-
-#: ../libslab/libslab-bookmarkfile.c:2972
-#, c-format
-msgid "No groups set in bookmark for URI '%s'"
-msgstr "URI '%s' のブックマークの中にはグループはありません"
-
-#: ../libslab/libslab-bookmarkfile.c:3373
-#: ../libslab/libslab-bookmarkfile.c:3518
-#, c-format
-msgid "No application with name '%s' registered a bookmark for '%s'"
-msgstr ""
-"'%2$s' のブックマークを登録した '%1$s' というアプリケーションはありません"
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
