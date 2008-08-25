@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-14 14:53+0700\n"
-"PO-Revision-Date: 2008-08-14 15:18+0700\n"
+"POT-Creation-Date: 2008-08-25 21:10+0700\n"
+"PO-Revision-Date: 2008-08-25 21:22+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -492,8 +492,8 @@ msgid "Assistive Technologies"
 msgstr "เทคโนโลยีสิ่งอำนวยความสะดวก"
 
 #: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Enable support for GNOME assistive technologies at login"
-msgstr "ใช้เทคโนโลยีสิ่งอำนวยความสะดวกเมื่อเข้าระบบ"
+msgid "Choose which accessibility features to enable when you log in"
+msgstr "เลือกเทคโนโลยีสิ่งอำนวยความสะดวกที่จะเปิดใช้เมื่อเข้าระบบ"
 
 #: capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
@@ -566,19 +566,19 @@ msgstr "หน้า"
 msgid "[WALLPAPER...]"
 msgstr "[WALLPAPER...]"
 
-#: capplets/appearance/appearance-style.c:163
-#: capplets/common/gnome-theme-info.c:444
-#: capplets/common/gnome-theme-info.c:633
+#: capplets/appearance/appearance-style.c:167
+#: capplets/common/gnome-theme-info.c:442
+#: capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer"
 msgstr "ตัวชี้ปริยาย"
 
-#: capplets/appearance/appearance-style.c:225
+#: capplets/appearance/appearance-style.c:229
 #: capplets/appearance/appearance-themes.c:687
 msgid "Install"
 msgstr "ติดตั้ง"
 
-#: capplets/appearance/appearance-style.c:245
-#: capplets/common/gnome-theme-info.c:1640
+#: capplets/appearance/appearance-style.c:249
+#: capplets/common/gnome-theme-info.c:1644
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
@@ -1364,35 +1364,35 @@ msgstr "กรุณาเลือกภาพที่จะใช้"
 msgid "_Select"
 msgstr "เ_ลือก"
 
-#: capplets/common/gnome-theme-info.c:634
+#: capplets/common/gnome-theme-info.c:635
 msgid "Default Pointer - Current"
 msgstr "ตัวชี้ปริยาย - ใช้อยู่"
 
-#: capplets/common/gnome-theme-info.c:638
+#: capplets/common/gnome-theme-info.c:639
 msgid "White Pointer"
 msgstr "ตัวชี้ขาว"
 
-#: capplets/common/gnome-theme-info.c:639
+#: capplets/common/gnome-theme-info.c:640
 msgid "White Pointer - Current"
 msgstr "ตัวชี้ขาว - ใช้อยู่"
 
-#: capplets/common/gnome-theme-info.c:643
+#: capplets/common/gnome-theme-info.c:644
 msgid "Large Pointer"
 msgstr "ตัวชี้ใหญ่"
 
-#: capplets/common/gnome-theme-info.c:644
+#: capplets/common/gnome-theme-info.c:645
 msgid "Large Pointer - Current"
 msgstr "ตัวชี้ใหญ่ - ใช้อยู่"
 
-#: capplets/common/gnome-theme-info.c:648
+#: capplets/common/gnome-theme-info.c:649
 msgid "Large White Pointer - Current"
 msgstr "ตัวชี้ขาวใหญ่ - ใช้อยู่"
 
-#: capplets/common/gnome-theme-info.c:649
+#: capplets/common/gnome-theme-info.c:650
 msgid "Large White Pointer"
 msgstr "ตัวชี้ขาวใหญ่"
 
-#: capplets/common/gnome-theme-info.c:1616
+#: capplets/common/gnome-theme-info.c:1620
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme '%s' is "
@@ -1400,7 +1400,7 @@ msgid ""
 msgstr ""
 "ชุดตกแต่งนี้อาจแสดงไม่เหมือนที่ออกแบบไว้ เพราะชุดตกแต่ง GTK+ '%s' ที่ต้องการ ไม่ได้ติดตั้งไว้"
 
-#: capplets/common/gnome-theme-info.c:1624
+#: capplets/common/gnome-theme-info.c:1628
 #, c-format
 msgid ""
 "This theme will not look as intended because the required window manager "
@@ -1408,7 +1408,7 @@ msgid ""
 msgstr ""
 "ชุดตกแต่งนี้อาจแสดงไม่เหมือนที่ออกแบบไว้ เพราะชุดตกแต่งหน้าต่าง '%s' ที่ต้องการ ไม่ได้ติดตั้งไว้"
 
-#: capplets/common/gnome-theme-info.c:1631
+#: capplets/common/gnome-theme-info.c:1635
 #, c-format
 msgid ""
 "This theme will not look as intended because the required icon theme '%s' is "
@@ -1760,9 +1760,15 @@ msgstr "aterm"
 msgid "Include _Panel"
 msgstr "รวม_พาเนล"
 
+#. Translators:  this is the feature where what you see on your laptop's
+#. * screen is the same as your external monitor.  Here, "Mirror" is being
+#. * used as an adjective, not as a verb.  For example, the Spanish
+#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#.
 #: capplets/display/display-capplet.glade.h:2
+#: capplets/display/xrandr-capplet.c:1319
 msgid "Mirror Screens"
-msgstr "กลับหน้าจอซ้ายเป็นขวา"
+msgstr "หน้าจอแสดงเหมือนกัน"
 
 #: capplets/display/display-capplet.glade.h:3
 msgid "Monitor Resolution Settings"
@@ -1808,44 +1814,40 @@ msgstr "เปลี่ยนความละเอียดของจอ"
 msgid "Screen Resolution"
 msgstr "ความละเอียดของจอ"
 
-#: capplets/display/xrandr-capplet.c:403
-#: capplets/display/xrandr-capplet.c:441
+#: capplets/display/xrandr-capplet.c:412
+#: capplets/display/xrandr-capplet.c:450
 msgid "Normal"
 msgstr "ปกติ"
 
-#: capplets/display/xrandr-capplet.c:404
+#: capplets/display/xrandr-capplet.c:413
 msgid "Left"
 msgstr "ซ้าย"
 
-#: capplets/display/xrandr-capplet.c:405
+#: capplets/display/xrandr-capplet.c:414
 msgid "Right"
 msgstr "ขวา"
 
-#: capplets/display/xrandr-capplet.c:406
+#: capplets/display/xrandr-capplet.c:415
 msgid "Upside Down"
 msgstr "กลับหัว"
 
-#: capplets/display/xrandr-capplet.c:479
-#: capplets/display/xrandr-capplet.c:487
 #: capplets/display/xrandr-capplet.c:488
+#: capplets/display/xrandr-capplet.c:496
+#: capplets/display/xrandr-capplet.c:497
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/xrandr-capplet.c:540
-#: capplets/display/xrandr-capplet.c:559
-#: capplets/display/xrandr-capplet.c:569
+#: capplets/display/xrandr-capplet.c:549
+#: capplets/display/xrandr-capplet.c:568
+#: capplets/display/xrandr-capplet.c:578
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: capplets/display/xrandr-capplet.c:551
+#: capplets/display/xrandr-capplet.c:560
 msgid "Off"
 msgstr "ปิด"
-
-#: capplets/display/xrandr-capplet.c:1305
-msgid "Cloned Output"
-msgstr "การแสดงผลที่ถอดแบบมา"
 
 #: capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -1857,12 +1859,12 @@ msgstr "เสียง"
 #. Desktop
 #: capplets/keybindings/01-desktop-key.xml.in.h:1
 #: capplets/sound/sound-theme-definition.h:56
-#: libslab/bookmark-agent.c:1157
+#: libslab/bookmark-agent.c:1154
 msgid "Desktop"
 msgstr "เบ็ดเตล็ด"
 
 #: capplets/keybindings/eggcellrendererkeys.c:21
-msgid "New accelerator..."
+msgid "New shortcut..."
 msgstr "ปุ่มลัดใหม่..."
 
 #: capplets/keybindings/eggcellrendererkeys.c:163
@@ -1961,11 +1963,11 @@ msgstr "ปุ่มลัด"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new "
-"accelerator, or press backspace to clear."
+"To edit a shortcut key, click on the corresponding row and type a new key "
+"combination, or press backspace to clear."
 msgstr ""
-"ถ้าต้องการเปลี่ยนปุ่มลัด คลิกที่รายการที่ต้องการแล้วกดปุ่มลัดปุ่มใหม่ หรือกดปุ่ม Backspace "
-"ถ้าไม่ต้องการใช้"
+"ถ้าต้องการเปลี่ยนปุ่มลัด คลิกที่รายการที่ต้องการแล้วกดปุ่มลัดชุดใหม่ หรือกดปุ่ม Backspace "
+"ถ้าต้องการล้างปุ่มลัด"
 
 #: capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -2692,7 +2694,7 @@ msgid "Sou_nd capture:"
 msgstr "อุปกรณ์_รับเสียง:"
 
 #: capplets/sound/sound-properties.glade.h:16
-#: capplets/sound/sound-theme.c:461 capplets/sound/sound-theme.c:1028
+#: capplets/sound/sound-theme.c:461 capplets/sound/sound-theme.c:1016
 msgid "Sound Preferences"
 msgstr "ค่าตั้งของเสียง"
 
@@ -2759,7 +2761,7 @@ msgid "Login"
 msgstr "เข้าระบบ"
 
 #: capplets/sound/sound-theme-definition.h:58
-#: libslab/bookmark-agent.c:1063
+#: libslab/bookmark-agent.c:1060
 msgid "Logout"
 msgstr "ออกจากระบบ"
 
@@ -2804,7 +2806,7 @@ msgstr "กะพริบหน้าจอ"
 msgid "Flash window"
 msgstr "กะพริบหน้าต่าง"
 
-#: capplets/sound/sound-theme.c:463 capplets/sound/sound-theme.c:1030
+#: capplets/sound/sound-theme.c:463 capplets/sound/sound-theme.c:1018
 msgid "Testing event sound"
 msgstr "ทดสอบเสียง"
 
@@ -2899,7 +2901,7 @@ msgstr "หน้าต่าง"
 msgid "<b>Start %s</b>"
 msgstr "<b>เริ่ม %s</b>"
 
-#: libslab/application-tile.c:391 libslab/bookmark-agent.c:1059
+#: libslab/application-tile.c:391 libslab/bookmark-agent.c:1056
 msgid "Help"
 msgstr "วิธีใช้"
 
@@ -2911,11 +2913,11 @@ msgstr "ปรับรุ่น"
 msgid "Uninstall"
 msgstr "ถอดถอน"
 
-#: libslab/application-tile.c:780 libslab/document-tile.c:727
+#: libslab/application-tile.c:780 libslab/document-tile.c:715
 msgid "Remove from Favorites"
 msgstr "ลบออกจากรายการโปรด"
 
-#: libslab/application-tile.c:782 libslab/document-tile.c:729
+#: libslab/application-tile.c:782 libslab/document-tile.c:717
 msgid "Add to Favorites"
 msgstr "เพิ่มในรายการโปรด"
 
@@ -2942,39 +2944,39 @@ msgstr ""
 msgid "Other"
 msgstr "อื่นๆ"
 
-#: libslab/bookmark-agent.c:1061
+#: libslab/bookmark-agent.c:1058
 msgid "Lock Screen"
 msgstr "ล็อคหน้าจอ"
 
-#: libslab/bookmark-agent.c:1065
+#: libslab/bookmark-agent.c:1062
 msgid "Shutdown"
 msgstr "ปิดเครื่อง"
 
-#: libslab/bookmark-agent.c:1090
+#: libslab/bookmark-agent.c:1087
 msgid "New Spreadsheet"
 msgstr "สร้างตารางคำนวณ"
 
-#: libslab/bookmark-agent.c:1095
+#: libslab/bookmark-agent.c:1092
 msgid "New Document"
 msgstr "สร้างเอกสาร"
 
-#: libslab/bookmark-agent.c:1146
+#: libslab/bookmark-agent.c:1143
 msgid "Home"
 msgstr "บ้าน"
 
-#: libslab/bookmark-agent.c:1151
+#: libslab/bookmark-agent.c:1148
 msgid "Documents"
 msgstr "เอกสาร"
 
-#: libslab/bookmark-agent.c:1164
+#: libslab/bookmark-agent.c:1161
 msgid "File System"
 msgstr "ระบบแฟ้ม"
 
-#: libslab/bookmark-agent.c:1168
+#: libslab/bookmark-agent.c:1165
 msgid "Network Servers"
 msgstr "เซิร์ฟเวอร์ในเครือข่าย"
 
-#: libslab/bookmark-agent.c:1197
+#: libslab/bookmark-agent.c:1194
 msgid "Search"
 msgstr "ค้นหา"
 
@@ -2985,154 +2987,74 @@ msgid "<b>Open</b>"
 msgstr "<b>เปิด</b>"
 
 #. make rename action
-#: libslab/directory-tile.c:190 libslab/document-tile.c:240
+#: libslab/directory-tile.c:190 libslab/document-tile.c:235
 msgid "Rename..."
 msgstr "เปลี่ยนชื่อ..."
 
 #: libslab/directory-tile.c:204 libslab/directory-tile.c:213
-#: libslab/document-tile.c:254 libslab/document-tile.c:263
+#: libslab/document-tile.c:249 libslab/document-tile.c:258
 msgid "Send To..."
 msgstr "ส่งไปยัง..."
 
 #. make move to trash action
-#: libslab/directory-tile.c:228 libslab/document-tile.c:289
+#: libslab/directory-tile.c:228 libslab/document-tile.c:284
 msgid "Move to Trash"
 msgstr "ทิ้งลงถังขยะ"
 
 #: libslab/directory-tile.c:238 libslab/directory-tile.c:456
-#: libslab/document-tile.c:299 libslab/document-tile.c:840
+#: libslab/document-tile.c:294 libslab/document-tile.c:831
 msgid "Delete"
 msgstr "ลบ"
 
-#: libslab/directory-tile.c:567 libslab/document-tile.c:1011
+#: libslab/directory-tile.c:532 libslab/document-tile.c:980
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "ยืนยันที่จะลบ \"%s\" อย่างถาวรหรือไม่?"
 
-#: libslab/directory-tile.c:568 libslab/document-tile.c:1012
+#: libslab/directory-tile.c:533 libslab/document-tile.c:981
 msgid "If you delete an item, it is permanently lost."
 msgstr "ถ้าคุณลบ รายการนี้จะสูญหายอย่างถาวร"
 
-#: libslab/document-tile.c:201
+#: libslab/document-tile.c:196
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>เปิดด้วย \"%s\"</b>"
 
-#: libslab/document-tile.c:213
+#: libslab/document-tile.c:208
 msgid "Open with Default Application"
 msgstr "เปิดด้วยโปรแกรมปริยาย"
 
-#: libslab/document-tile.c:224
+#: libslab/document-tile.c:219
 msgid "Open in File Manager"
 msgstr "เปิดในโปรแกรมจัดการแฟ้ม"
 
-#: libslab/document-tile.c:623
+#: libslab/document-tile.c:611
 msgid "?"
 msgstr "?"
 
-#: libslab/document-tile.c:630
+#: libslab/document-tile.c:618
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: libslab/document-tile.c:638
+#: libslab/document-tile.c:626
 msgid "Today %l:%M %p"
 msgstr "วันนี้ %H:%M"
 
-#: libslab/document-tile.c:648
+#: libslab/document-tile.c:636
 msgid "Yesterday %l:%M %p"
 msgstr "เมื่อวาน %H:%M"
 
-#: libslab/document-tile.c:660
+#: libslab/document-tile.c:648
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: libslab/document-tile.c:668
+#: libslab/document-tile.c:656
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %H:%M"
 
-#: libslab/document-tile.c:670
+#: libslab/document-tile.c:658
 msgid "%b %d %Y"
 msgstr "%d %b %Ey"
-
-#: libslab/libslab-bookmarkfile.c:700 libslab/libslab-bookmarkfile.c:777
-#: libslab/libslab-bookmarkfile.c:856 libslab/libslab-bookmarkfile.c:903
-#, c-format
-msgid "Unexpected attribute '%s' for element '%s'"
-msgstr "พบแอตทริบิวต์ '%s' ที่ไม่ต้องการ สำหรับอิลิเมนต์ '%s'"
-
-#: libslab/libslab-bookmarkfile.c:711 libslab/libslab-bookmarkfile.c:788
-#: libslab/libslab-bookmarkfile.c:798 libslab/libslab-bookmarkfile.c:914
-#, c-format
-msgid "Attribute '%s' of element '%s' not found"
-msgstr "ไม่พบแอตทริบิวต์ '%s' สำหรับอิลิเมนต์ '%s'"
-
-#: libslab/libslab-bookmarkfile.c:1087
-#: libslab/libslab-bookmarkfile.c:1152
-#: libslab/libslab-bookmarkfile.c:1216
-#: libslab/libslab-bookmarkfile.c:1226
-#, c-format
-msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr "พบแท็ก '%s' ที่ไม่ต้องการ ขณะที่ต้องการแท็ก '%s'"
-
-#: libslab/libslab-bookmarkfile.c:1112
-#: libslab/libslab-bookmarkfile.c:1126
-#: libslab/libslab-bookmarkfile.c:1194
-#: libslab/libslab-bookmarkfile.c:1246
-#, c-format
-msgid "Unexpected tag '%s' inside '%s'"
-msgstr "พบแท็ก '%s' ที่ไม่ต้องการภายใน '%s'"
-
-#: libslab/libslab-bookmarkfile.c:1929
-#, c-format
-msgid "No valid bookmark file found in data dirs"
-msgstr "ไม่พบแฟ้มที่คั่นหน้าที่ใช้การได้ในไดเรกทอรีข้อมูล"
-
-#: libslab/libslab-bookmarkfile.c:2130
-#, c-format
-msgid "A bookmark for URI '%s' already exists"
-msgstr "มีที่คั่นหน้าสำหรับ URI '%s' อยู่ก่อนแล้ว"
-
-#: libslab/libslab-bookmarkfile.c:2176
-#: libslab/libslab-bookmarkfile.c:2333
-#: libslab/libslab-bookmarkfile.c:2418
-#: libslab/libslab-bookmarkfile.c:2499
-#: libslab/libslab-bookmarkfile.c:2584
-#: libslab/libslab-bookmarkfile.c:2667
-#: libslab/libslab-bookmarkfile.c:2745
-#: libslab/libslab-bookmarkfile.c:2824
-#: libslab/libslab-bookmarkfile.c:2866
-#: libslab/libslab-bookmarkfile.c:2963
-#: libslab/libslab-bookmarkfile.c:3089
-#: libslab/libslab-bookmarkfile.c:3279
-#: libslab/libslab-bookmarkfile.c:3355
-#: libslab/libslab-bookmarkfile.c:3508
-#: libslab/libslab-bookmarkfile.c:3573
-#: libslab/libslab-bookmarkfile.c:3663
-#: libslab/libslab-bookmarkfile.c:3790
-#, c-format
-msgid "No bookmark found for URI '%s'"
-msgstr "ไม่พบที่คั่นหน้าสำหรับ URI '%s'"
-
-#: libslab/libslab-bookmarkfile.c:2508
-#, c-format
-msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr "ไม่ได้กำหนดชนิด MIME ไว้ในที่คั่นหน้าสำหรับ URI '%s'"
-
-#: libslab/libslab-bookmarkfile.c:2593
-#, c-format
-msgid "No private flag has been defined in bookmark for URI '%s'"
-msgstr "ไม่ได้กำหนดแฟล็กส่วนตัวไว้ในที่คั่นหน้าสำหรับ URI '%s'"
-
-#: libslab/libslab-bookmarkfile.c:2972
-#, c-format
-msgid "No groups set in bookmark for URI '%s'"
-msgstr "ไม่ได้กำหนดกลุ่มไว้ในที่คั่นหน้าสำหรับ URI '%s'"
-
-#: libslab/libslab-bookmarkfile.c:3373
-#: libslab/libslab-bookmarkfile.c:3518
-#, c-format
-msgid "No application with name '%s' registered a bookmark for '%s'"
-msgstr "ไม่มีโปรแกรมประยุกต์ชื่อ '%s' ที่ลงทะเบียนที่คั่นหน้าสำหรับ '%s' ไว้"
 
 #: libslab/search-bar.c:255
 msgid "Find Now"
@@ -3353,6 +3275,48 @@ msgstr ""
 "โปรแกรมแจ้งเตือนพักพิมพ์ใช้พื้นที่รายงานแจ้งเตือนในการแสดงข้อมูล "
 "ซึ่งดูเหมือนจะไม่มีบนพาเนลในขณะนี้ คุณสามารถเพิ่มพื้นที่รายงานแจ้งเตือนได้ โดยคลิกขวาบนพาเนล "
 "แล้วเลือก 'เพิ่มลงในพาเนล' จากนั้นเลือก 'พื้นที่รายงานแจ้งเตือน' แล้วกด 'เพิ่ม'"
+
+#~ msgid "Enable support for GNOME assistive technologies at login"
+#~ msgstr "ใช้เทคโนโลยีสิ่งอำนวยความสะดวกเมื่อเข้าระบบ"
+
+#~ msgid "Cloned Output"
+#~ msgstr "การแสดงผลที่ถอดแบบมา"
+
+#~ msgid "New accelerator..."
+#~ msgstr "ปุ่มลัดใหม่..."
+
+#~ msgid "Unexpected attribute '%s' for element '%s'"
+#~ msgstr "พบแอตทริบิวต์ '%s' ที่ไม่ต้องการ สำหรับอิลิเมนต์ '%s'"
+
+#~ msgid "Attribute '%s' of element '%s' not found"
+#~ msgstr "ไม่พบแอตทริบิวต์ '%s' สำหรับอิลิเมนต์ '%s'"
+
+#~ msgid "Unexpected tag '%s', tag '%s' expected"
+#~ msgstr "พบแท็ก '%s' ที่ไม่ต้องการ ขณะที่ต้องการแท็ก '%s'"
+
+#~ msgid "Unexpected tag '%s' inside '%s'"
+#~ msgstr "พบแท็ก '%s' ที่ไม่ต้องการภายใน '%s'"
+
+#~ msgid "No valid bookmark file found in data dirs"
+#~ msgstr "ไม่พบแฟ้มที่คั่นหน้าที่ใช้การได้ในไดเรกทอรีข้อมูล"
+
+#~ msgid "A bookmark for URI '%s' already exists"
+#~ msgstr "มีที่คั่นหน้าสำหรับ URI '%s' อยู่ก่อนแล้ว"
+
+#~ msgid "No bookmark found for URI '%s'"
+#~ msgstr "ไม่พบที่คั่นหน้าสำหรับ URI '%s'"
+
+#~ msgid "No MIME type defined in the bookmark for URI '%s'"
+#~ msgstr "ไม่ได้กำหนดชนิด MIME ไว้ในที่คั่นหน้าสำหรับ URI '%s'"
+
+#~ msgid "No private flag has been defined in bookmark for URI '%s'"
+#~ msgstr "ไม่ได้กำหนดแฟล็กส่วนตัวไว้ในที่คั่นหน้าสำหรับ URI '%s'"
+
+#~ msgid "No groups set in bookmark for URI '%s'"
+#~ msgstr "ไม่ได้กำหนดกลุ่มไว้ในที่คั่นหน้าสำหรับ URI '%s'"
+
+#~ msgid "No application with name '%s' registered a bookmark for '%s'"
+#~ msgstr "ไม่มีโปรแกรมประยุกต์ชื่อ '%s' ที่ลงทะเบียนที่คั่นหน้าสำหรับ '%s' ไว้"
 
 #~ msgid ""
 #~ "%s is the path where the theme files will be installed. This can not be "
@@ -3724,9 +3688,6 @@ msgstr ""
 
 #~ msgid "Eject"
 #~ msgstr "ดันแผ่นออก"
-
-#~ msgid "Eject's shortcut."
-#~ msgstr "ปุ่มลัดสำหรับดันแผ่นออก"
 
 #~ msgid "Home folder"
 #~ msgstr "โฟลเดอร์บ้าน"
