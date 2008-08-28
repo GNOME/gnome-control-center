@@ -1178,7 +1178,7 @@ setup_sound_theme_custom (GladeXML *dialog, gboolean have_xkb)
 
 		if (sounds[i].type == SOUND_TYPE_VISUAL_BELL)
 			gtk_tree_store_insert_with_values (store, &iter, _parent, G_MAXINT,
-							   DISPLAY_COL, _(sounds[i].display_name),
+							   DISPLAY_COL, g_dpgettext2 (NULL, "Sound event", sounds[i].display_name),
 							   SETTING_COL, visual_bell_setting,
 							   TYPE_COL, sounds[i].type,
 							   HAS_PREVIEW_COL, FALSE,
@@ -1186,7 +1186,7 @@ setup_sound_theme_custom (GladeXML *dialog, gboolean have_xkb)
 							   -1);
 		else if (sounds[i].type != -1)
 			gtk_tree_store_insert_with_values (store, &iter, _parent, G_MAXINT,
-							   DISPLAY_COL, _(sounds[i].display_name),
+							   DISPLAY_COL, g_dpgettext2 (NULL, "Sound event", sounds[i].display_name),
 							   SETTING_COL, SOUND_BUILTIN,
 							   TYPE_COL, sounds[i].type,
 							   SOUND_NAMES_COL, sounds[i].names,
@@ -1196,7 +1196,7 @@ setup_sound_theme_custom (GladeXML *dialog, gboolean have_xkb)
 		else
 			/* Category */
 			gtk_tree_store_insert_with_values (store, &iter, _parent, G_MAXINT,
-							   DISPLAY_COL, _(sounds[i].display_name),
+							   DISPLAY_COL, g_dpgettext2 (NULL, "Sound event", sounds[i].display_name),
 							   SETTING_COL, SOUND_UNSET,
 							   TYPE_COL, sounds[i].type,
 							   SENSITIVE_COL, TRUE,
