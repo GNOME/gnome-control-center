@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-26 12:23+0200\n"
-"PO-Revision-Date: 2008-07-26 12:42+0100\n"
+"POT-Creation-Date: 2008-08-28 22:13+0200\n"
+"PO-Revision-Date: 2008-08-28 22:19+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgid "Images"
 msgstr "Bilder"
 
 #: ../capplets/about-me/gnome-about-me.c:773
-#: ../capplets/appearance/theme-installer.c:717
+#: ../capplets/appearance/theme-installer.c:696
 msgid "All Files"
 msgstr "Alla filer"
 
@@ -484,8 +484,8 @@ msgid "Assistive Technologies"
 msgstr "Hjälpmedelsteknik"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Enable support for GNOME assistive technologies at login"
-msgstr "Aktivera stöd för GNOME-hjälpmedelsfunktioner vid inloggning"
+msgid "Choose which accessibility features to enable when you log in"
+msgstr "Välj vilka tillgänglighetsfunktioner som ska aktiveras när du loggar in"
 
 #: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
@@ -544,19 +544,19 @@ msgstr "sida"
 msgid "[WALLPAPER...]"
 msgstr "[BAKGRUNDSBILD...]"
 
-#: ../capplets/appearance/appearance-style.c:159
-#: ../capplets/common/gnome-theme-info.c:444
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/appearance/appearance-style.c:167
+#: ../capplets/common/gnome-theme-info.c:442
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer"
 msgstr "Standardmuspekare"
 
-#: ../capplets/appearance/appearance-style.c:221
+#: ../capplets/appearance/appearance-style.c:229
 #: ../capplets/appearance/appearance-themes.c:687
 msgid "Install"
 msgstr "Installera"
 
-#: ../capplets/appearance/appearance-style.c:241
-#: ../capplets/common/gnome-theme-info.c:1640
+#: ../capplets/appearance/appearance-style.c:249
+#: ../capplets/common/gnome-theme-info.c:1644
 #, c-format
 msgid "This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."
 msgstr "Detta tema kommer inte att se ut som det var tänkt därför att den nödvändiga GTK+-temamotorn \"%s\" inte är installerat."
@@ -601,9 +601,11 @@ msgstr "Det senaste tillämpade typsnittsförslaget kan återställas."
 msgid "The current theme suggests a font."
 msgstr "Det aktuella temat föreslår ett typsnitt."
 
-#: ../capplets/appearance/appearance-themes.c:1048
+#: ../capplets/appearance/appearance-themes.c:1046
 #: ../capplets/default-applications/gnome-da-capplet.c:630
-#: ../capplets/sound/sound-properties-capplet.c:328
+#: ../capplets/sound/sound-properties-capplet.c:262
+#: ../capplets/sound/sound-theme.c:648
+#: ../capplets/sound/sound-theme.c:720
 msgid "Custom"
 msgstr "Anpassad"
 
@@ -1020,70 +1022,70 @@ msgid_plural "pixels"
 msgstr[0] "bildpunkt"
 msgstr[1] "bildpunkter"
 
-#: ../capplets/appearance/theme-installer.c:171
-#: ../capplets/appearance/theme-installer.c:221
+#: ../capplets/appearance/theme-installer.c:172
+#: ../capplets/appearance/theme-installer.c:222
 msgid "Cannot install theme"
 msgstr "Kan inte installera tema"
 
-#: ../capplets/appearance/theme-installer.c:173
+#: ../capplets/appearance/theme-installer.c:174
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "Verktyget %s är inte installerat."
 
-#: ../capplets/appearance/theme-installer.c:223
+#: ../capplets/appearance/theme-installer.c:224
 msgid "There was a problem while extracting the theme."
 msgstr "Det inträffade ett problem vid extrahering av temat."
 
-#: ../capplets/appearance/theme-installer.c:246
+#: ../capplets/appearance/theme-installer.c:247
 msgid "There was an error installing the selected file"
 msgstr "Det inträffade ett fel vid installation av den valda filen"
 
-#: ../capplets/appearance/theme-installer.c:247
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "\"%s\" verkar inte vara ett giltigt tema."
 
-#: ../capplets/appearance/theme-installer.c:248
+#: ../capplets/appearance/theme-installer.c:249
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme. It may be a theme engine which you need to compile."
 msgstr "\"%s\" verkar inte vara ett giltigt tema. Den kan vara en temamotor som du behöver kompilera."
 
-#: ../capplets/appearance/theme-installer.c:287
+#: ../capplets/appearance/theme-installer.c:288
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "GNOME-temat %s korrekt installerat"
 
-#: ../capplets/appearance/theme-installer.c:354
+#: ../capplets/appearance/theme-installer.c:355
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Installation av temat \"%s\" misslyckades."
 
-#: ../capplets/appearance/theme-installer.c:392
+#: ../capplets/appearance/theme-installer.c:393
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Temat \"%s\" har installerats."
 
-#: ../capplets/appearance/theme-installer.c:398
+#: ../capplets/appearance/theme-installer.c:399
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Vill du använda det nu eller behålla ditt aktuella tema?"
 
-#: ../capplets/appearance/theme-installer.c:400
+#: ../capplets/appearance/theme-installer.c:401
 msgid "Keep Current Theme"
 msgstr "Behåll aktuellt tema"
 
-#: ../capplets/appearance/theme-installer.c:402
+#: ../capplets/appearance/theme-installer.c:403
 msgid "Apply New Theme"
 msgstr "Använd nytt tema"
 
-#: ../capplets/appearance/theme-installer.c:505
+#: ../capplets/appearance/theme-installer.c:506
 msgid "Failed to create temporary directory"
 msgstr "Misslyckades med att skapa temporär katalog"
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:569
 msgid "New themes have been successfully installed."
 msgstr "Nya teman har installerats."
 
-#: ../capplets/appearance/theme-installer.c:595
+#: ../capplets/appearance/theme-installer.c:594
 msgid "No theme file location specified to install"
 msgstr "Ingen temafilplats angiven för installation"
 
@@ -1096,16 +1098,11 @@ msgstr ""
 "Otillräckliga rättigheter för att installera temat i:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:637
-#, c-format
-msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
-msgstr "%s är sökvägen där temafilerna kommer att installeras. Detta kan inte väljas som källplatsen"
-
-#: ../capplets/appearance/theme-installer.c:706
+#: ../capplets/appearance/theme-installer.c:685
 msgid "Select Theme"
 msgstr "Välj tema"
 
-#: ../capplets/appearance/theme-installer.c:710
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Theme Packages"
 msgstr "Temapaket"
 
@@ -1123,15 +1120,15 @@ msgstr "Temat finns redan. Vill du ersätta det?"
 msgid "_Overwrite"
 msgstr "Skriv _över"
 
-#: ../capplets/appearance/theme-util.c:135
+#: ../capplets/appearance/theme-util.c:74
 msgid "Would you like to delete this theme?"
 msgstr "Vill du ta bort det här temat?"
 
-#: ../capplets/appearance/theme-util.c:185
+#: ../capplets/appearance/theme-util.c:124
 msgid "Theme cannot be deleted"
 msgstr "Temat kan inte tas bort"
 
-#: ../capplets/appearance/theme-util.c:312
+#: ../capplets/appearance/theme-util.c:251
 msgid "Could not install theme engine"
 msgstr "Kunde inte installera temamotor"
 
@@ -1325,45 +1322,45 @@ msgstr "Välj en bild."
 msgid "_Select"
 msgstr "_Välj"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:635
 msgid "Default Pointer - Current"
 msgstr "Standardmuspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "White Pointer"
 msgstr "Vit muspekare"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:640
 msgid "White Pointer - Current"
 msgstr "Vit muspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large Pointer"
 msgstr "Stor muspekare"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:645
 msgid "Large Pointer - Current"
 msgstr "Stor muspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large White Pointer - Current"
 msgstr "Stor vit muspekare - Aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:650
 msgid "Large White Pointer"
 msgstr "Stor vit muspekare"
 
-#: ../capplets/common/gnome-theme-info.c:1616
+#: ../capplets/common/gnome-theme-info.c:1620
 #, c-format
 msgid "This theme will not look as intended because the required GTK+ theme '%s' is not installed."
 msgstr "Detta tema kommer inte att se ut som det var tänkt därför att det nödvändiga GTK+-temat \"%s\" inte är installerat."
 
-#: ../capplets/common/gnome-theme-info.c:1624
+#: ../capplets/common/gnome-theme-info.c:1628
 #, c-format
 msgid "This theme will not look as intended because the required window manager theme '%s' is not installed."
 msgstr "Detta tema kommer inte att se ut som det var tänkt därför att det nödvändiga fönsterhanterartemat \"%s\" inte är installerat."
 
-#: ../capplets/common/gnome-theme-info.c:1631
+#: ../capplets/common/gnome-theme-info.c:1635
 #, c-format
 msgid "This theme will not look as intended because the required icon theme '%s' is not installed."
 msgstr "Detta tema kommer inte att se ut som det var tänkt därför att det nödvändiga ikontemat \"%s\" inte är installerat."
@@ -1712,7 +1709,13 @@ msgstr "aterm"
 msgid "Include _Panel"
 msgstr "Inkludera _panel"
 
+#. Translators:  this is the feature where what you see on your laptop's
+#. * screen is the same as your external monitor.  Here, "Mirror" is being
+#. * used as an adjective, not as a verb.  For example, the Spanish
+#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#.
 #: ../capplets/display/display-capplet.glade.h:2
+#: ../capplets/display/xrandr-capplet.c:1319
 msgid "Mirror Screens"
 msgstr "Spegla skärmar"
 
@@ -1748,6 +1751,10 @@ msgstr "_Detektera skärmar"
 msgid "_Resolution"
 msgstr "_Upplösning"
 
+#: ../capplets/display/display-capplet.glade.h:13
+msgid "_Show Displays in Panel"
+msgstr "_Visa displayer i panelen"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Ändra skärmupplösning"
@@ -1756,58 +1763,56 @@ msgstr "Ändra skärmupplösning"
 msgid "Screen Resolution"
 msgstr "Skärmupplösning"
 
-#: ../capplets/display/xrandr-capplet.c:400
-#: ../capplets/display/xrandr-capplet.c:438
+#: ../capplets/display/xrandr-capplet.c:412
+#: ../capplets/display/xrandr-capplet.c:450
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/xrandr-capplet.c:401
+#: ../capplets/display/xrandr-capplet.c:413
 msgid "Left"
 msgstr "Vänster"
 
-#: ../capplets/display/xrandr-capplet.c:402
+#: ../capplets/display/xrandr-capplet.c:414
 msgid "Right"
 msgstr "Höger"
 
-#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:415
 msgid "Upside Down"
 msgstr "Upp och ned"
 
-#: ../capplets/display/xrandr-capplet.c:476
-#: ../capplets/display/xrandr-capplet.c:484
-#: ../capplets/display/xrandr-capplet.c:485
+#: ../capplets/display/xrandr-capplet.c:488
+#: ../capplets/display/xrandr-capplet.c:496
+#: ../capplets/display/xrandr-capplet.c:497
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:537
-#: ../capplets/display/xrandr-capplet.c:556
-#: ../capplets/display/xrandr-capplet.c:566
+#: ../capplets/display/xrandr-capplet.c:549
+#: ../capplets/display/xrandr-capplet.c:568
+#: ../capplets/display/xrandr-capplet.c:578
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:548
+#: ../capplets/display/xrandr-capplet.c:560
 msgid "Off"
 msgstr "Av"
-
-#: ../capplets/display/xrandr-capplet.c:1302
-msgid "Cloned Output"
-msgstr "Klonad utmatning"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Ljud"
 
+#. Desktop
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1157
+#: ../capplets/sound/sound-theme-definition.h:56
+#: ../libslab/bookmark-agent.c:1154
 msgid "Desktop"
 msgstr "Skrivbord"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
-msgid "New accelerator..."
-msgstr "Ny snabbtangent..."
+msgid "New shortcut..."
+msgstr "Ny genväg..."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:163
 #: ../capplets/keybindings/eggcellrendererkeys.c:164
@@ -1834,6 +1839,10 @@ msgstr "Typen av snabbtangent."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
+#: ../capplets/sound/sound-theme.c:415
+#: ../capplets/sound/sound-theme.c:433
+#: ../capplets/sound/sound-theme.c:543
+#: ../capplets/sound/sound-theme.c:559
 #: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "Inaktiverad"
@@ -1900,8 +1909,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Tangentbordsgenvägar"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
-msgid "To edit a shortcut key, click on the corresponding row and type a new accelerator, or press backspace to clear."
-msgstr "För att redigera en genväg klickar du på motsvarande rad och trycker en ny snabbtangent, eller trycker backsteg för att tömma."
+msgid "To edit a shortcut key, click on the corresponding row and type a new key combination, or press backspace to clear."
+msgstr "För att redigera en genvägstangent så klickar du på motsvarande rad och trycker en ny tangentkombination, eller trycker på backsteg för att tömma."
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -1909,13 +1918,13 @@ msgstr "Associera snabbtangenter med kommandon"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:248
 #: ../capplets/keyboard/gnome-keyboard-properties.c:253
-#: ../capplets/sound/sound-properties-capplet.c:1155
-#: ../capplets/sound/sound-properties-capplet.c:1157
+#: ../capplets/sound/sound-properties-capplet.c:1185
+#: ../capplets/sound/sound-properties-capplet.c:1187
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Verkställ bara ändringar och avsluta (endast för kompatibilitet; hanteras nu av demon)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:256
-#: ../capplets/sound/sound-properties-capplet.c:1159
+#: ../capplets/sound/sound-properties-capplet.c:1189
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
@@ -2214,6 +2223,8 @@ msgstr "Layout"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
+#: ../capplets/sound/sound-theme.c:419
+#: ../capplets/sound/sound-theme.c:539
 msgid "Default"
 msgstr "Standard"
 
@@ -2509,118 +2520,120 @@ msgstr "Okänd volymkontroll %d"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "Misslyckades med att konstruera teströrledning för \"%s\""
 
-#: ../capplets/sound/sound-properties-capplet.c:326
-#: ../capplets/sound/sound-properties-capplet.c:447
+#: ../capplets/sound/sound-properties-capplet.c:260
+#: ../capplets/sound/sound-properties-capplet.c:381
 msgid "Not connected"
 msgstr "Inte ansluten"
 
-#: ../capplets/sound/sound-properties-capplet.c:785
+#: ../capplets/sound/sound-properties-capplet.c:829
 msgid "Autodetect"
 msgstr "Detektera automatiskt"
 
-#: ../capplets/sound/sound-properties-capplet.c:790
-#: ../capplets/sound/sound-properties-capplet.c:791
+#: ../capplets/sound/sound-properties-capplet.c:834
+#: ../capplets/sound/sound-properties-capplet.c:835
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:836
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:793
-#: ../capplets/sound/sound-properties-capplet.c:794
+#: ../capplets/sound/sound-properties-capplet.c:837
+#: ../capplets/sound/sound-properties-capplet.c:838
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:797
-#: ../capplets/sound/sound-properties-capplet.c:800
+#: ../capplets/sound/sound-properties-capplet.c:841
+#: ../capplets/sound/sound-properties-capplet.c:844
 msgid "OSS - Open Sound System"
 msgstr "OSS - Open Sound System"
 
-#: ../capplets/sound/sound-properties-capplet.c:802
-#: ../capplets/sound/sound-properties-capplet.c:803
+#: ../capplets/sound/sound-properties-capplet.c:846
+#: ../capplets/sound/sound-properties-capplet.c:847
 msgid "PulseAudio Sound Server"
 msgstr "PulseAudio Sound Server"
 
-#: ../capplets/sound/sound-properties-capplet.c:804
+#: ../capplets/sound/sound-properties-capplet.c:848
 msgid "Test Sound"
 msgstr "Ljudtest"
 
-#: ../capplets/sound/sound-properties-capplet.c:805
+#: ../capplets/sound/sound-properties-capplet.c:849
 msgid "Silence"
 msgstr "Tystnad"
 
-#: ../capplets/sound/sound-properties-capplet.c:1172
+#: ../capplets/sound/sound-properties-capplet.c:1202
 msgid "- GNOME Sound Preferences"
 msgstr "- Ljudinställningar för GNOME"
 
 #: ../capplets/sound/sound-properties.glade.h:1
+msgid "<b>Alerts and Sound Effects</b>"
+msgstr "<b>Larm och ljudeffekter</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:2
 msgid "<b>Audio Conferencing</b>"
 msgstr "<b>Ljudkonferens</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:3
 msgid "<b>Default Mixer Tracks</b>"
 msgstr "<b>Standardmixerspår</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Music and Movies</b>"
 msgstr "<b>Musik och filmer</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<b>Sound Events</b>"
 msgstr "<b>Ljudhändelser</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "<b>Sound Theme</b>"
+msgstr "<b>Ljudtema</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Testar...</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "Click OK to finish."
 msgstr "Klicka OK för att färdigställa."
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "Enheter"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing"
-msgstr "A_ktivera ljudmixning via programvara"
-
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "Flash _entire screen"
-msgstr "Blinka _hela skärmen"
-
 #: ../capplets/sound/sound-properties.glade.h:10
-msgid "Flash _window titlebar"
-msgstr "Blinka _fönstertitelrad"
+msgid "Play _alert sound"
+msgstr "Spela upp l_armljud"
 
 #: ../capplets/sound/sound-properties.glade.h:11
+msgid "Play _sound effects when buttons are clicked"
+msgstr "Spela upp _ljudeffekter när knappar trycks ned"
+
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "S_ound playback:"
 msgstr "Ljud_uppspelning:"
 
-#: ../capplets/sound/sound-properties.glade.h:12
+#: ../capplets/sound/sound-properties.glade.h:13
 msgid "Select the device and tracks to control with the keyboard. Use the Shift and Control keys to select multiple tracks if required."
 msgstr "Välj enheten och spåren att kontrollera med tangentbordet. Använd tangenterna Skift och Control för att välja flera spår om det behövs."
 
-#: ../capplets/sound/sound-properties.glade.h:13
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "So_und playback:"
 msgstr "Ljudupps_pelning:"
 
-#: ../capplets/sound/sound-properties.glade.h:14
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "Sou_nd capture:"
 msgstr "Ljudfå_ngst:"
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-theme.c:461
+#: ../capplets/sound/sound-theme.c:1016
 msgid "Sound Preferences"
 msgstr "Ljudinställningar"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:17
 msgid "Sounds"
 msgstr "Ljud"
-
-#: ../capplets/sound/sound-properties.glade.h:17
-msgid "System Beep"
-msgstr "Systemsignal"
 
 #: ../capplets/sound/sound-properties.glade.h:18
 msgid "Test"
@@ -2628,27 +2641,122 @@ msgstr "Testa"
 
 #: ../capplets/sound/sound-properties.glade.h:19
 msgid "Testing Pipeline"
-msgstr "Testar rör"
+msgstr "Testar rörledning"
 
 #: ../capplets/sound/sound-properties.glade.h:20
 msgid "_Device:"
 msgstr "_Enhet:"
 
 #: ../capplets/sound/sound-properties.glade.h:21
-msgid "_Enable system beep"
-msgstr "_Aktivera systemsignal"
+msgid "_Play alerts and sound effects"
+msgstr "_Spela upp larm och ljudeffekter"
 
 #: ../capplets/sound/sound-properties.glade.h:22
-msgid "_Play system sounds"
-msgstr "_Spela upp systemljud"
-
-#: ../capplets/sound/sound-properties.glade.h:23
 msgid "_Sound playback:"
 msgstr "_Ljuduppspelning:"
 
-#: ../capplets/sound/sound-properties.glade.h:24
-msgid "_Visual system beep"
-msgstr "_Visuell systemsignal"
+#. Bell
+#: ../capplets/sound/sound-theme-definition.h:46
+msgid "Alert sound"
+msgstr "Larmljud"
+
+#: ../capplets/sound/sound-theme-definition.h:47
+msgid "Visual alert"
+msgstr "Visuellt larm"
+
+#. Windows and buttons
+#: ../capplets/sound/sound-theme-definition.h:49
+msgid "Windows and Buttons"
+msgstr "Fönster och knappar"
+
+#: ../capplets/sound/sound-theme-definition.h:50
+msgid "Button clicked"
+msgstr "Knapp nedtryckt"
+
+#: ../capplets/sound/sound-theme-definition.h:51
+msgid "Toggle button clicked"
+msgstr "Växlingsknapp nedtryckt"
+
+#: ../capplets/sound/sound-theme-definition.h:52
+msgid "Window maximized"
+msgstr "Fönster maximerat"
+
+#: ../capplets/sound/sound-theme-definition.h:53
+msgid "Window unmaximized"
+msgstr "Fönster avmaximerat"
+
+#: ../capplets/sound/sound-theme-definition.h:54
+msgid "Window minimised"
+msgstr "Fönster minimerat"
+
+#: ../capplets/sound/sound-theme-definition.h:57
+msgid "Login"
+msgstr "Inloggning"
+
+#: ../capplets/sound/sound-theme-definition.h:58
+#: ../libslab/bookmark-agent.c:1060
+msgid "Logout"
+msgstr "Utloggning"
+
+#: ../capplets/sound/sound-theme-definition.h:59
+msgid "New e-mail"
+msgstr "Ny e-post"
+
+#: ../capplets/sound/sound-theme-definition.h:60
+msgid "Empty trash"
+msgstr "Töm papperskorg"
+
+#: ../capplets/sound/sound-theme-definition.h:61
+msgid "Long action completed (download, CD burning, etc.)"
+msgstr "Lång åtgärd är färdig (hämtning, skivbränning, etc.)"
+
+#. Alerts?
+#: ../capplets/sound/sound-theme-definition.h:63
+msgid "Alerts"
+msgstr "Larm"
+
+#: ../capplets/sound/sound-theme-definition.h:64
+msgid "Information or question"
+msgstr "Information eller fråga"
+
+#: ../capplets/sound/sound-theme-definition.h:65
+msgid "Warning"
+msgstr "Varning"
+
+#: ../capplets/sound/sound-theme-definition.h:66
+msgid "Error"
+msgstr "Fel"
+
+#: ../capplets/sound/sound-theme-definition.h:67
+msgid "Battery warning"
+msgstr "Batterivarning"
+
+#: ../capplets/sound/sound-theme.c:437
+#: ../capplets/sound/sound-theme.c:563
+msgid "Flash screen"
+msgstr "Blinka skärm"
+
+#: ../capplets/sound/sound-theme.c:441
+#: ../capplets/sound/sound-theme.c:567
+msgid "Flash window"
+msgstr "Blinka fönster"
+
+#: ../capplets/sound/sound-theme.c:463
+#: ../capplets/sound/sound-theme.c:1018
+msgid "Testing event sound"
+msgstr "Testar händelseljud"
+
+#: ../capplets/sound/sound-theme.c:482
+msgid "Select Sound File"
+msgstr "Välj ljudfil"
+
+#: ../capplets/sound/sound-theme.c:493
+msgid "Sound files"
+msgstr "Ljudfiler"
+
+#: ../capplets/sound/sound-theme.c:547
+msgid "Custom..."
+msgstr "Anpassad..."
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
@@ -2730,7 +2838,7 @@ msgid "<b>Start %s</b>"
 msgstr "<b>Starta %s</b>"
 
 #: ../libslab/application-tile.c:391
-#: ../libslab/bookmark-agent.c:1059
+#: ../libslab/bookmark-agent.c:1056
 msgid "Help"
 msgstr "Hjälp"
 
@@ -2743,12 +2851,12 @@ msgid "Uninstall"
 msgstr "Avinstallera"
 
 #: ../libslab/application-tile.c:780
-#: ../libslab/document-tile.c:756
+#: ../libslab/document-tile.c:715
 msgid "Remove from Favorites"
 msgstr "Ta bort från favoriter"
 
 #: ../libslab/application-tile.c:782
-#: ../libslab/document-tile.c:758
+#: ../libslab/document-tile.c:717
 msgid "Add to Favorites"
 msgstr "Lägg till i favoriter"
 
@@ -2775,214 +2883,125 @@ msgstr ""
 msgid "Other"
 msgstr "Övrigt"
 
-#: ../libslab/bookmark-agent.c:1061
+#: ../libslab/bookmark-agent.c:1058
 msgid "Lock Screen"
 msgstr "Lås skärmen"
 
-#: ../libslab/bookmark-agent.c:1063
-#: ../libsounds/sound-view.c:44
-msgid "Logout"
-msgstr "Logga ut"
-
-#: ../libslab/bookmark-agent.c:1065
+#: ../libslab/bookmark-agent.c:1062
 msgid "Shutdown"
 msgstr "Stäng av"
 
-#: ../libslab/bookmark-agent.c:1090
+#: ../libslab/bookmark-agent.c:1087
 msgid "New Spreadsheet"
 msgstr "Nytt kalkylblad"
 
-#: ../libslab/bookmark-agent.c:1095
+#: ../libslab/bookmark-agent.c:1092
 msgid "New Document"
 msgstr "Nytt dokument"
 
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1143
 msgid "Home"
 msgstr "Hem"
 
-#: ../libslab/bookmark-agent.c:1151
+#: ../libslab/bookmark-agent.c:1148
 msgid "Documents"
 msgstr "Dokument"
 
-#: ../libslab/bookmark-agent.c:1164
+#: ../libslab/bookmark-agent.c:1161
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../libslab/bookmark-agent.c:1168
+#: ../libslab/bookmark-agent.c:1165
 msgid "Network Servers"
 msgstr "Nätverksservrar"
 
-#: ../libslab/bookmark-agent.c:1197
+#: ../libslab/bookmark-agent.c:1194
 msgid "Search"
 msgstr "Sök"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:172
+#: ../libslab/directory-tile.c:171
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Öppna</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:191
-#: ../libslab/document-tile.c:241
+#: ../libslab/directory-tile.c:190
+#: ../libslab/document-tile.c:235
 msgid "Rename..."
 msgstr "Byt namn..."
 
-#: ../libslab/directory-tile.c:205
-#: ../libslab/directory-tile.c:214
-#: ../libslab/document-tile.c:255
-#: ../libslab/document-tile.c:264
+#: ../libslab/directory-tile.c:204
+#: ../libslab/directory-tile.c:213
+#: ../libslab/document-tile.c:249
+#: ../libslab/document-tile.c:258
 msgid "Send To..."
 msgstr "Skicka till..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:229
-#: ../libslab/document-tile.c:290
+#: ../libslab/directory-tile.c:228
+#: ../libslab/document-tile.c:284
 msgid "Move to Trash"
 msgstr "Flytta till papperskorg"
 
-#: ../libslab/directory-tile.c:239
-#: ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:300
-#: ../libslab/document-tile.c:869
+#: ../libslab/directory-tile.c:238
+#: ../libslab/directory-tile.c:456
+#: ../libslab/document-tile.c:294
+#: ../libslab/document-tile.c:831
 msgid "Delete"
 msgstr "Ta bort"
 
-#: ../libslab/directory-tile.c:569
-#: ../libslab/document-tile.c:1041
+#: ../libslab/directory-tile.c:532
+#: ../libslab/document-tile.c:980
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Är du säker på att du vill ta bort \"%s\" permanent?"
 
-#: ../libslab/directory-tile.c:574
-#: ../libslab/document-tile.c:1045
+#: ../libslab/directory-tile.c:533
+#: ../libslab/document-tile.c:981
 msgid "If you delete an item, it is permanently lost."
 msgstr "Om du tar bort ett objekt så går det inte att få tillbaka igen."
 
-#: ../libslab/document-tile.c:202
+#: ../libslab/document-tile.c:196
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Öppna med \"%s\"</b>"
 
-#: ../libslab/document-tile.c:214
+#: ../libslab/document-tile.c:208
 msgid "Open with Default Application"
 msgstr "Öppna med standardprogram"
 
-#: ../libslab/document-tile.c:225
+#: ../libslab/document-tile.c:219
 msgid "Open in File Manager"
 msgstr "Öppna i filhanterare"
 
-#: ../libslab/document-tile.c:652
+#: ../libslab/document-tile.c:611
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:659
+#: ../libslab/document-tile.c:618
 msgid "%l:%M %p"
 msgstr "%H.%M"
 
-#: ../libslab/document-tile.c:667
+#: ../libslab/document-tile.c:626
 msgid "Today %l:%M %p"
 msgstr "Idag %H.%M"
 
-#: ../libslab/document-tile.c:677
+#: ../libslab/document-tile.c:636
 msgid "Yesterday %l:%M %p"
 msgstr "Igår %H.%M"
 
-#: ../libslab/document-tile.c:689
+#: ../libslab/document-tile.c:648
 msgid "%a %l:%M %p"
 msgstr "%a %H.%M"
 
-#: ../libslab/document-tile.c:697
+#: ../libslab/document-tile.c:656
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %H.%M"
 
-#: ../libslab/document-tile.c:699
+#: ../libslab/document-tile.c:658
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
-
-#: ../libslab/libslab-bookmarkfile.c:700
-#: ../libslab/libslab-bookmarkfile.c:777
-#: ../libslab/libslab-bookmarkfile.c:856
-#: ../libslab/libslab-bookmarkfile.c:903
-#, c-format
-msgid "Unexpected attribute '%s' for element '%s'"
-msgstr "Oväntat attribut \"%s\" för elementet \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:711
-#: ../libslab/libslab-bookmarkfile.c:788
-#: ../libslab/libslab-bookmarkfile.c:798
-#: ../libslab/libslab-bookmarkfile.c:914
-#, c-format
-msgid "Attribute '%s' of element '%s' not found"
-msgstr "Attributet \"%s\" för elementet \"%s\" hittades inte"
-
-#: ../libslab/libslab-bookmarkfile.c:1087
-#: ../libslab/libslab-bookmarkfile.c:1152
-#: ../libslab/libslab-bookmarkfile.c:1216
-#: ../libslab/libslab-bookmarkfile.c:1226
-#, c-format
-msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr "Oväntad tagg \"%s\", taggen \"%s\" förväntades"
-
-#: ../libslab/libslab-bookmarkfile.c:1112
-#: ../libslab/libslab-bookmarkfile.c:1126
-#: ../libslab/libslab-bookmarkfile.c:1194
-#: ../libslab/libslab-bookmarkfile.c:1246
-#, c-format
-msgid "Unexpected tag '%s' inside '%s'"
-msgstr "Oväntad tagg \"%s\" inne i \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:1929
-#, c-format
-msgid "No valid bookmark file found in data dirs"
-msgstr "Ingen giltig bokmärkesfil hittades i datakatalogerna"
-
-#: ../libslab/libslab-bookmarkfile.c:2130
-#, c-format
-msgid "A bookmark for URI '%s' already exists"
-msgstr "Ett bokmärke för uri:n \"%s\" finns redan"
-
-#: ../libslab/libslab-bookmarkfile.c:2176
-#: ../libslab/libslab-bookmarkfile.c:2333
-#: ../libslab/libslab-bookmarkfile.c:2418
-#: ../libslab/libslab-bookmarkfile.c:2499
-#: ../libslab/libslab-bookmarkfile.c:2584
-#: ../libslab/libslab-bookmarkfile.c:2667
-#: ../libslab/libslab-bookmarkfile.c:2745
-#: ../libslab/libslab-bookmarkfile.c:2824
-#: ../libslab/libslab-bookmarkfile.c:2866
-#: ../libslab/libslab-bookmarkfile.c:2963
-#: ../libslab/libslab-bookmarkfile.c:3089
-#: ../libslab/libslab-bookmarkfile.c:3279
-#: ../libslab/libslab-bookmarkfile.c:3355
-#: ../libslab/libslab-bookmarkfile.c:3508
-#: ../libslab/libslab-bookmarkfile.c:3573
-#: ../libslab/libslab-bookmarkfile.c:3663
-#: ../libslab/libslab-bookmarkfile.c:3790
-#, c-format
-msgid "No bookmark found for URI '%s'"
-msgstr "Inget bokmärke hittades för uri:n \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:2508
-#, c-format
-msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr "Ingen mime-typ definierad i bokmärket för uri:n \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:2593
-#, c-format
-msgid "No private flag has been defined in bookmark for URI '%s'"
-msgstr "Ingen privat flagga har definierats i bokmärket för uri:n \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:2972
-#, c-format
-msgid "No groups set in bookmark for URI '%s'"
-msgstr "Inga grupper inställda i bokmärket för uri:n \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:3373
-#: ../libslab/libslab-bookmarkfile.c:3518
-#, c-format
-msgid "No application with name '%s' registered a bookmark for '%s'"
-msgstr "Inget program med namnet \"%s\" har registrerat ett bokmärke för \"%s\""
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
@@ -2997,63 +3016,6 @@ msgstr "<b>Öppna %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Ta bort från systemobjekt"
-
-#: ../libsounds/sound-view.c:43
-msgid "Login"
-msgstr "Logga in"
-
-#: ../libsounds/sound-view.c:45
-msgid "Boing"
-msgstr "Boing"
-
-#: ../libsounds/sound-view.c:46
-msgid "Siren"
-msgstr "Siren"
-
-#: ../libsounds/sound-view.c:47
-msgid "Clink"
-msgstr "Klink"
-
-#: ../libsounds/sound-view.c:48
-msgid "Beep"
-msgstr "Pip"
-
-#: ../libsounds/sound-view.c:49
-msgid "No sound"
-msgstr "Inget ljud"
-
-#: ../libsounds/sound-view.c:131
-msgid "Sound not set for this event."
-msgstr "Inget ljud är inställt för den här händelsen."
-
-#: ../libsounds/sound-view.c:140
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"Ljudfilen för denna händelse existerar inte.\n"
-"Du kanske vill installera paketet gnome-audio för att få en uppsättning med standardljud."
-
-#: ../libsounds/sound-view.c:151
-msgid "The sound file for this event does not exist."
-msgstr "Ljudfilen för denna händelse finns inte."
-
-#: ../libsounds/sound-view.c:182
-msgid "Select Sound File"
-msgstr "Välj ljudfil"
-
-#: ../libsounds/sound-view.c:209
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "Filen %s är inte en giltig wav-fil"
-
-#: ../libsounds/sound-view.c:270
-msgid "Select sound file..."
-msgstr "Välj ljudfil..."
-
-#: ../libsounds/sound-view.c:372
-msgid "System Sounds"
-msgstr "Systemljud"
 
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
@@ -3244,6 +3206,81 @@ msgstr "Skrivandeövervakare"
 msgid "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choosing 'Add to panel', selecting 'Notification area' and clicking 'Add'."
 msgstr "Skrivandeövervakaren använder notifieringsytan för att visa information. Du verkar inte ha en sådan i din panel. Du kan lägga till den genom att högerklicka på panelen och välja \"Lägg till i panelen\", välja \"Notifieringsyta\" och klicka på \"Lägg till\"."
 
+#~ msgid "Enable support for GNOME assistive technologies at login"
+#~ msgstr "Aktivera stöd för GNOME-hjälpmedelsfunktioner vid inloggning"
+#~ msgid "Cloned Output"
+#~ msgstr "Klonad utmatning"
+#~ msgid "New accelerator..."
+#~ msgstr "Ny snabbtangent..."
+#~ msgid "<b>System sounds</b>"
+#~ msgstr "<b>Systemljud</b>"
+
+#, fuzzy
+#~ msgid "_Play system beep sound"
+#~ msgstr "_Spela upp systemljud"
+#~ msgid "Unexpected attribute '%s' for element '%s'"
+#~ msgstr "Oväntat attribut \"%s\" för elementet \"%s\""
+#~ msgid "Attribute '%s' of element '%s' not found"
+#~ msgstr "Attributet \"%s\" för elementet \"%s\" hittades inte"
+#~ msgid "Unexpected tag '%s', tag '%s' expected"
+#~ msgstr "Oväntad tagg \"%s\", taggen \"%s\" förväntades"
+#~ msgid "Unexpected tag '%s' inside '%s'"
+#~ msgstr "Oväntad tagg \"%s\" inne i \"%s\""
+#~ msgid "No valid bookmark file found in data dirs"
+#~ msgstr "Ingen giltig bokmärkesfil hittades i datakatalogerna"
+#~ msgid "A bookmark for URI '%s' already exists"
+#~ msgstr "Ett bokmärke för uri:n \"%s\" finns redan"
+#~ msgid "No bookmark found for URI '%s'"
+#~ msgstr "Inget bokmärke hittades för uri:n \"%s\""
+#~ msgid "No MIME type defined in the bookmark for URI '%s'"
+#~ msgstr "Ingen mime-typ definierad i bokmärket för uri:n \"%s\""
+#~ msgid "No private flag has been defined in bookmark for URI '%s'"
+#~ msgstr "Ingen privat flagga har definierats i bokmärket för uri:n \"%s\""
+#~ msgid "No groups set in bookmark for URI '%s'"
+#~ msgstr "Inga grupper inställda i bokmärket för uri:n \"%s\""
+#~ msgid "No application with name '%s' registered a bookmark for '%s'"
+#~ msgstr ""
+#~ "Inget program med namnet \"%s\" har registrerat ett bokmärke för \"%s\""
+#~ msgid ""
+#~ "%s is the path where the theme files will be installed. This can not be "
+#~ "selected as the source location"
+#~ msgstr ""
+#~ "%s är sökvägen där temafilerna kommer att installeras. Detta kan inte "
+#~ "väljas som källplatsen"
+#~ msgid "E_nable software sound mixing"
+#~ msgstr "A_ktivera ljudmixning via programvara"
+#~ msgid "System Beep"
+#~ msgstr "Systemsignal"
+#~ msgid "_Enable system beep"
+#~ msgstr "_Aktivera systemsignal"
+#~ msgid "_Visual system beep"
+#~ msgstr "_Visuell systemsignal"
+#~ msgid "Boing"
+#~ msgstr "Boing"
+#~ msgid "Siren"
+#~ msgstr "Siren"
+#~ msgid "Clink"
+#~ msgstr "Klink"
+#~ msgid "Beep"
+#~ msgstr "Pip"
+#~ msgid "No sound"
+#~ msgstr "Inget ljud"
+#~ msgid "Sound not set for this event."
+#~ msgstr "Inget ljud är inställt för den här händelsen."
+#~ msgid ""
+#~ "The sound file for this event does not exist.\n"
+#~ "You may want to install the gnome-audio package for a set of default "
+#~ "sounds."
+#~ msgstr ""
+#~ "Ljudfilen för denna händelse existerar inte.\n"
+#~ "Du kanske vill installera paketet gnome-audio för att få en uppsättning "
+#~ "med standardljud."
+#~ msgid "The sound file for this event does not exist."
+#~ msgstr "Ljudfilen för denna händelse finns inte."
+#~ msgid "The file %s is not a valid wav file"
+#~ msgstr "Filen %s är inte en giltig wav-fil"
+#~ msgid "Select sound file..."
+#~ msgstr "Välj ljudfil..."
 #~ msgid ""
 #~ "<i>Region and language changes take effect the next time you log in.</i>"
 #~ msgstr ""
@@ -3466,8 +3503,6 @@ msgstr "Skrivandeövervakaren använder notifieringsytan för att visa informati
 #~ msgstr "Gå _till typsnittsmappen"
 #~ msgid "Autostart the preferred AT"
 #~ msgstr "Starta automatiskt den föredragna hjälptekniken"
-#~ msgid "Visual"
-#~ msgstr "Visuell"
 #~ msgid "    "
 #~ msgstr "    "
 #~ msgid "      "
@@ -3489,8 +3524,6 @@ msgstr "Skrivandeövervakaren använder notifieringsytan för att visa informati
 #~ msgstr "Genvägen för e-post."
 #~ msgid "Eject"
 #~ msgstr "Mata ut"
-#~ msgid "Eject's shortcut."
-#~ msgstr "Genvägen för mata ut."
 #~ msgid "Home folder"
 #~ msgstr "Hemmapp"
 #~ msgid "Home folder's shortcut."
