@@ -27,8 +27,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-17 20:31+0200\n"
-"PO-Revision-Date: 2008-07-17 20:32+0200\n"
+"POT-Creation-Date: 2008-08-28 23:12+0200\n"
+"PO-Revision-Date: 2008-08-28 23:13+0200\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -80,7 +80,7 @@ msgid "Images"
 msgstr "Images"
 
 #: ../capplets/about-me/gnome-about-me.c:773
-#: ../capplets/appearance/theme-installer.c:717
+#: ../capplets/appearance/theme-installer.c:696
 msgid "All Files"
 msgstr "Tous les fichiers"
 
@@ -91,7 +91,7 @@ msgid ""
 msgstr ""
 "Une erreur est survenue lors de l'accès aux informations du carnet "
 "d'adresses.\n"
-"Evolution Data Server ne gère pas le protocole."
+"Evolution Data Server ne peut gérer le protocole."
 
 #: ../capplets/about-me/gnome-about-me.c:932
 msgid "Unable to open address book"
@@ -249,7 +249,7 @@ msgstr ""
 
 #: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Select your photo"
-msgstr "Choisissez votre photo"
+msgstr "Choisir votre photo"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:34
 msgid "State/Pro_vince:"
@@ -469,7 +469,7 @@ msgstr "<b>Préférences</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
 msgid "Accessible Lo_gin"
-msgstr "I_dentification accessible"
+msgstr "Accessibilité de l'i_dentification"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 msgid "Assistive Technologies Preferences"
@@ -493,7 +493,7 @@ msgstr "Ouvrir la boîte de dialogue des applications préférées"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
 msgid "Jump to the Accessible Login dialog"
-msgstr "Ouvrir la boîte de dialogue d'identification accessible"
+msgstr "Ouvrir la boîte de dialogue d'accessibilité de l'identification"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
 msgid "Jump to the Keyboard Accessibility dialog"
@@ -524,9 +524,9 @@ msgid "Assistive Technologies"
 msgstr "Outils d'accessibilité"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Enable support for GNOME assistive technologies at login"
+msgid "Choose which accessibility features to enable when you log in"
 msgstr ""
-"Activer la prise en charge des outils d'accessibilité de GNOME à la connexion"
+"Choix des fonctionnalités d'accessibilité à activer au moment de la connexion"
 
 #: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
@@ -594,7 +594,6 @@ msgstr "Indique le nom de fichier de thème à installer"
 msgid "filename"
 msgstr "nom de fichier"
 
-# cf. http://bugzilla.gnome.org/show_bug.cgi?id=474648
 #. TRANSLATORS: don't translate the terms in brackets
 #: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
@@ -611,19 +610,19 @@ msgstr "page"
 msgid "[WALLPAPER...]"
 msgstr "[PAPIER PEINT...]"
 
-#: ../capplets/appearance/appearance-style.c:159
-#: ../capplets/common/gnome-theme-info.c:444
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/appearance/appearance-style.c:167
+#: ../capplets/common/gnome-theme-info.c:442
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer"
 msgstr "Pointeur par défaut"
 
-#: ../capplets/appearance/appearance-style.c:221
+#: ../capplets/appearance/appearance-style.c:229
 #: ../capplets/appearance/appearance-themes.c:687
 msgid "Install"
 msgstr "Installer"
 
-#: ../capplets/appearance/appearance-style.c:241
-#: ../capplets/common/gnome-theme-info.c:1640
+#: ../capplets/appearance/appearance-style.c:249
+#: ../capplets/common/gnome-theme-info.c:1644
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
@@ -649,7 +648,7 @@ msgid ""
 "The current theme suggests a background and a font. Also, the last applied "
 "font suggestion can be reverted."
 msgstr ""
-"Le thème actuel propose un arrière-plan et une police. La dernière "
+"Le thème actuel propose un arrière-plan et une police. La dernière "
 "suggestion de police appliquée peut être rétablie."
 
 #: ../capplets/appearance/appearance-themes.c:715
@@ -662,7 +661,7 @@ msgstr ""
 
 #: ../capplets/appearance/appearance-themes.c:717
 msgid "The current theme suggests a background and a font."
-msgstr "Le thème actuel propose un arrière-plan et une police."
+msgstr "Le thème actuel propose un arrière-plan et une police."
 
 #: ../capplets/appearance/appearance-themes.c:719
 msgid ""
@@ -684,9 +683,10 @@ msgstr "La dernière suggestion de police appliquée peut être rétablie."
 msgid "The current theme suggests a font."
 msgstr "Le thème actuel propose une police."
 
-#: ../capplets/appearance/appearance-themes.c:1048
+#: ../capplets/appearance/appearance-themes.c:1046
 #: ../capplets/default-applications/gnome-da-capplet.c:630
-#: ../capplets/sound/sound-properties-capplet.c:328
+#: ../capplets/sound/sound-properties-capplet.c:262
+#: ../capplets/sound/sound-theme.c:648 ../capplets/sound/sound-theme.c:720
 msgid "Custom"
 msgstr "Personnalisé"
 
@@ -1106,30 +1106,30 @@ msgid_plural "pixels"
 msgstr[0] "pixel"
 msgstr[1] "pixels"
 
-#: ../capplets/appearance/theme-installer.c:171
-#: ../capplets/appearance/theme-installer.c:221
+#: ../capplets/appearance/theme-installer.c:172
+#: ../capplets/appearance/theme-installer.c:222
 msgid "Cannot install theme"
 msgstr "Impossible d'installer le thème"
 
-#: ../capplets/appearance/theme-installer.c:173
+#: ../capplets/appearance/theme-installer.c:174
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "L'utilitaire %s n'est pas installé."
 
-#: ../capplets/appearance/theme-installer.c:223
+#: ../capplets/appearance/theme-installer.c:224
 msgid "There was a problem while extracting the theme."
 msgstr "Un problème est survenu lors de l'extraction du thème."
 
-#: ../capplets/appearance/theme-installer.c:246
+#: ../capplets/appearance/theme-installer.c:247
 msgid "There was an error installing the selected file"
 msgstr "Une erreur est survenue lors de l'installation du fichier sélectionné"
 
-#: ../capplets/appearance/theme-installer.c:247
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "« %s » ne semble pas être un thème valide."
 
-#: ../capplets/appearance/theme-installer.c:248
+#: ../capplets/appearance/theme-installer.c:249
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
@@ -1138,43 +1138,43 @@ msgstr ""
 "« %s » ne semble pas être un thème valide. Il peut s'agir d'un moteur de "
 "thème que vous devez compiler."
 
-#: ../capplets/appearance/theme-installer.c:287
+#: ../capplets/appearance/theme-installer.c:288
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "Le thème GNOME %s a été correctement installé"
 
-#: ../capplets/appearance/theme-installer.c:354
+#: ../capplets/appearance/theme-installer.c:355
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "L'installation du thème « %s » a échoué."
 
-#: ../capplets/appearance/theme-installer.c:392
+#: ../capplets/appearance/theme-installer.c:393
 #, c-format
 msgid "The theme \"%s\" has been installed."
-msgstr "Le theme « %s » a été installé."
+msgstr "Le thème « %s » a été installé."
 
-#: ../capplets/appearance/theme-installer.c:398
+#: ../capplets/appearance/theme-installer.c:399
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr ""
 "Voulez-vous appliquer ce thème maintenant ou conserver le thème actuel ?"
 
-#: ../capplets/appearance/theme-installer.c:400
+#: ../capplets/appearance/theme-installer.c:401
 msgid "Keep Current Theme"
 msgstr "Conserver le thème actuel"
 
-#: ../capplets/appearance/theme-installer.c:402
+#: ../capplets/appearance/theme-installer.c:403
 msgid "Apply New Theme"
 msgstr "Appliquer le nouveau thème"
 
-#: ../capplets/appearance/theme-installer.c:505
+#: ../capplets/appearance/theme-installer.c:506
 msgid "Failed to create temporary directory"
 msgstr "La création du dossier temporaire a échoué"
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:569
 msgid "New themes have been successfully installed."
 msgstr "Les nouveaux thèmes ont été installés avec succès."
 
-#: ../capplets/appearance/theme-installer.c:595
+#: ../capplets/appearance/theme-installer.c:594
 msgid "No theme file location specified to install"
 msgstr "Aucun emplacement de fichier de thème à installer n'a été indiqué"
 
@@ -1187,20 +1187,11 @@ msgstr ""
 "Droits d'accès insuffisants pour installer le thème dans :\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:637
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s est le chemin où les fichiers de thème seront installés. Il ne peut pas "
-"être sélectionné comme emplacement source"
-
-#: ../capplets/appearance/theme-installer.c:706
+#: ../capplets/appearance/theme-installer.c:685
 msgid "Select Theme"
 msgstr "Sélectionnez un thème"
 
-#: ../capplets/appearance/theme-installer.c:710
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Theme Packages"
 msgstr "Paquets de thèmes"
 
@@ -1218,15 +1209,15 @@ msgstr "Le thème existe déjà. Voulez-vous le remplacer ?"
 msgid "_Overwrite"
 msgstr "Éc_raser"
 
-#: ../capplets/appearance/theme-util.c:134
+#: ../capplets/appearance/theme-util.c:74
 msgid "Would you like to delete this theme?"
 msgstr "Voulez-vous supprimer ce thème ?"
 
-#: ../capplets/appearance/theme-util.c:179
+#: ../capplets/appearance/theme-util.c:124
 msgid "Theme cannot be deleted"
 msgstr "Le thème ne peut pas être supprimé"
 
-#: ../capplets/appearance/theme-util.c:304
+#: ../capplets/appearance/theme-util.c:251
 msgid "Could not install theme engine"
 msgstr "Impossible d'installer le moteur de thème"
 
@@ -1333,11 +1324,11 @@ msgstr "Tout éc_raser"
 
 #: ../capplets/common/gconf-property-editor.c:133
 msgid "Key"
-msgstr "Touche"
+msgstr "Clé"
 
 #: ../capplets/common/gconf-property-editor.c:134
 msgid "GConf key to which this property editor is attached"
-msgstr "Touche GConf à laquelle cet éditeur de paramètres est rattaché"
+msgstr "Clé GConf à laquelle cet éditeur de paramètres est rattaché"
 
 #: ../capplets/common/gconf-property-editor.c:140
 msgid "Callback"
@@ -1443,59 +1434,59 @@ msgstr "Sélectionnez une image."
 msgid "_Select"
 msgstr "_Sélectionner"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:635
 msgid "Default Pointer - Current"
 msgstr "Pointeur par défaut - actuel"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "White Pointer"
 msgstr "Pointeur blanc"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:640
 msgid "White Pointer - Current"
 msgstr "Pointeur blanc - actuel"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large Pointer"
 msgstr "Grand pointeur"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:645
 msgid "Large Pointer - Current"
 msgstr "Grand pointeur - actuel"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large White Pointer - Current"
 msgstr "Grand pointeur blanc - actuel"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:650
 msgid "Large White Pointer"
 msgstr "Grand pointeur blanc"
 
-#: ../capplets/common/gnome-theme-info.c:1616
+#: ../capplets/common/gnome-theme-info.c:1620
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme '%s' is "
 "not installed."
 msgstr ""
-"Ce thème n'aura pas l'aspect souhaité car le thème GTK+ requis « %s » n'est "
+"Ce thème n'aura pas l'aspect souhaité car le thème GTK+ requis « %s » n'est "
 "pas installé."
 
-#: ../capplets/common/gnome-theme-info.c:1624
+#: ../capplets/common/gnome-theme-info.c:1628
 #, c-format
 msgid ""
 "This theme will not look as intended because the required window manager "
 "theme '%s' is not installed."
 msgstr ""
 "Ce thème n'aura pas l'aspect souhaité car le thème requis du gestionnaire de "
-"fenêtre « %s » n'est pas installé."
+"fenêtre « %s » n'est pas installé."
 
-#: ../capplets/common/gnome-theme-info.c:1631
+#: ../capplets/common/gnome-theme-info.c:1635
 #, c-format
 msgid ""
 "This theme will not look as intended because the required icon theme '%s' is "
 "not installed."
 msgstr ""
-"Ce thème n'aura pas l'aspect souhaité car l'icône requise du thème « %s » "
+"Ce thème n'aura pas l'aspect souhaité car l'icône requise du thème « %s » "
 "n'est pas installée."
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
@@ -1842,7 +1833,13 @@ msgstr "aterm"
 msgid "Include _Panel"
 msgstr "Inclure le _tableau de bord"
 
+#. Translators:  this is the feature where what you see on your laptop's
+#. * screen is the same as your external monitor.  Here, "Mirror" is being
+#. * used as an adjective, not as a verb.  For example, the Spanish
+#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#.
 #: ../capplets/display/display-capplet.glade.h:2
+#: ../capplets/display/xrandr-capplet.c:1319
 msgid "Mirror Screens"
 msgstr "Écrans clones"
 
@@ -1878,6 +1875,10 @@ msgstr "_Détecter l'affichage"
 msgid "_Resolution"
 msgstr "_Résolution"
 
+#: ../capplets/display/display-capplet.glade.h:13
+msgid "_Show Displays in Panel"
+msgstr "Icône de l'_affichage visible dans le tableau de bord"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Modifier la résolution de l'écran"
@@ -1886,44 +1887,40 @@ msgstr "Modifier la résolution de l'écran"
 msgid "Screen Resolution"
 msgstr "Résolution de l'écran"
 
-#: ../capplets/display/xrandr-capplet.c:400
-#: ../capplets/display/xrandr-capplet.c:438
+#: ../capplets/display/xrandr-capplet.c:412
+#: ../capplets/display/xrandr-capplet.c:450
 msgid "Normal"
 msgstr "Normale"
 
-#: ../capplets/display/xrandr-capplet.c:401
+#: ../capplets/display/xrandr-capplet.c:413
 msgid "Left"
 msgstr "À gauche"
 
-#: ../capplets/display/xrandr-capplet.c:402
+#: ../capplets/display/xrandr-capplet.c:414
 msgid "Right"
 msgstr "À droite"
 
-#: ../capplets/display/xrandr-capplet.c:403
+#: ../capplets/display/xrandr-capplet.c:415
 msgid "Upside Down"
 msgstr "Inversée"
 
-#: ../capplets/display/xrandr-capplet.c:476
-#: ../capplets/display/xrandr-capplet.c:484
-#: ../capplets/display/xrandr-capplet.c:485
+#: ../capplets/display/xrandr-capplet.c:488
+#: ../capplets/display/xrandr-capplet.c:496
+#: ../capplets/display/xrandr-capplet.c:497
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:537
-#: ../capplets/display/xrandr-capplet.c:556
-#: ../capplets/display/xrandr-capplet.c:566
+#: ../capplets/display/xrandr-capplet.c:549
+#: ../capplets/display/xrandr-capplet.c:568
+#: ../capplets/display/xrandr-capplet.c:578
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:548
+#: ../capplets/display/xrandr-capplet.c:560
 msgid "Off"
 msgstr "Désactivée"
-
-#: ../capplets/display/xrandr-capplet.c:1302
-msgid "Cloned Output"
-msgstr "Sortie en miroir"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -1931,12 +1928,12 @@ msgid "Sound"
 msgstr "Son"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1154
 msgid "Desktop"
 msgstr "Bureau"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
-msgid "New accelerator..."
+msgid "New shortcut..."
 msgstr "Nouveau raccourci..."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:163
@@ -1964,6 +1961,8 @@ msgstr "Le type du raccourci clavier."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:90
+#: ../capplets/sound/sound-theme.c:415 ../capplets/sound/sound-theme.c:433
+#: ../capplets/sound/sound-theme.c:543 ../capplets/sound/sound-theme.c:559
 #: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "Désactivé"
@@ -1976,7 +1975,12 @@ msgstr "<Action inconnue>"
 msgid "Custom Shortcuts"
 msgstr "Raccourcis personnalisés"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:999
+#: ../capplets/keybindings/gnome-keybinding-properties.c:938
+#, c-format
+msgid "Error saving the new shortcut: %s"
+msgstr "Erreur lors de l'enregistrement du nouveau raccourci : %s"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1016
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1987,34 +1991,38 @@ msgstr ""
 "taper en utilisant cette touche.\n"
 "Veuillez essayer avec une touche telle que Ctrl, Alt ou Maj en même temps."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1028
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1046
 #, c-format
 msgid ""
-"The shortcut \"%s\" is already used for:\n"
-" \"%s\""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
 msgstr ""
-"Le raccourci clavier « %s » est déjà utilisé pour :\n"
-" « %s »"
+"Le raccourci clavier « %s » est déjà utilisé pour \n"
+"« %s »"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1052
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr ""
+"Si vous réassignez le raccourci à « %s », le raccourci « %s » sera désactivé."
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:1060
-#, c-format
-msgid "Error setting new accelerator in configuration database: %s"
-msgstr ""
-"Erreur lors de la définition du nouveau raccourci clavier dans la base de "
-"données de configuration : %s"
+msgid "_Reassign"
+msgstr "_Réassigner"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1112
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1180
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Erreur lors de la suppression du raccourci clavier de la base de données de "
 "configuration : %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1294
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1362
 msgid "Action"
 msgstr "Action"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1316
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1384
 msgid "Shortcut"
 msgstr "Raccourci"
 
@@ -2028,8 +2036,8 @@ msgstr "Raccourcis clavier"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new "
-"accelerator, or press backspace to clear."
+"To edit a shortcut key, click on the corresponding row and type a new key "
+"combination, or press backspace to clear."
 msgstr ""
 "Pour modifier un raccourci clavier, cliquez sur la ligne correspondante et "
 "saisissez un nouveau raccourci, ou pressez « Retour arrière » pour l'effacer."
@@ -2040,8 +2048,8 @@ msgstr "Assigner des raccourcis clavier aux commandes"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:248
 #: ../capplets/keyboard/gnome-keyboard-properties.c:253
-#: ../capplets/sound/sound-properties-capplet.c:1155
-#: ../capplets/sound/sound-properties-capplet.c:1157
+#: ../capplets/sound/sound-properties-capplet.c:1185
+#: ../capplets/sound/sound-properties-capplet.c:1187
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -2049,7 +2057,7 @@ msgstr ""
 "maintenant géré par un démon)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:256
-#: ../capplets/sound/sound-properties-capplet.c:1159
+#: ../capplets/sound/sound-properties-capplet.c:1189
 msgid "Retrieve and store legacy settings"
 msgstr "Récupérer et enregistrer une configuration antérieure"
 
@@ -2087,7 +2095,7 @@ msgstr "<b>Touches lentes</b>"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>Sticky Keys</b>"
-msgstr "<b>Touches collantes</b>"
+msgstr "<b>Touches rémanentes</b>"
 
 #. fast acceleration
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
@@ -2128,7 +2136,7 @@ msgstr "_Réactions audio..."
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Beep when _accessibility features are turned on or off"
 msgstr ""
-"Bip lorsque les fonctionnalités d'accessibilité sont activées ou désactivées"
+"Bip lorsque les fonctionnalités d'_accessibilité sont activées ou désactivées"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Beep when a _modifier key is pressed"
@@ -2140,7 +2148,7 @@ msgstr "Bip lorsqu'une touche de _basculement est enfoncée"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Beep when a key is pr_essed"
-msgstr "Bip lorsqu'une touche est _enfoncée"
+msgstr "Bip lorsqu'une touche est e_nfoncée"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Beep when a key is reje_cted"
@@ -2148,11 +2156,11 @@ msgstr "Bip si la touche est re_jetée"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Beep when key is _accepted"
-msgstr "Bip si la touche est _acceptée"
+msgstr "Bip si la touche est acce_ptée"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Beep when key is _rejected"
-msgstr "Bip si la touche est re_jetée"
+msgstr "Bip si la touche est _rejetée"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "By _country"
@@ -2191,7 +2199,7 @@ msgstr "Dé_lai :"
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr ""
-"Désactiver les touches _collantes si deux touches sont enfoncées "
+"Désactiver les touches _rémanentes si deux touches sont enfoncées "
 "simultanément"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
@@ -2336,7 +2344,7 @@ msgstr "_Variantes :"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
 msgid "_Vendors:"
-msgstr "_Fabriquants :"
+msgstr "_Fabricants :"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
 msgid "_Work interval lasts:"
@@ -2356,12 +2364,13 @@ msgstr "Agencement"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
+#: ../capplets/sound/sound-theme.c:419 ../capplets/sound/sound-theme.c:539
 msgid "Default"
 msgstr "Par défaut"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:169
 msgid "Vendors"
-msgstr "Fabriquants"
+msgstr "Fabricants"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:235
 msgid "Models"
@@ -2660,96 +2669,100 @@ msgstr "Contrôle de volume %d inconnu"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "La construction du tube de test pour « %s » a échoué"
 
-#: ../capplets/sound/sound-properties-capplet.c:326
-#: ../capplets/sound/sound-properties-capplet.c:447
+#: ../capplets/sound/sound-properties-capplet.c:260
+#: ../capplets/sound/sound-properties-capplet.c:381
 msgid "Not connected"
 msgstr "Non connecté"
 
-#: ../capplets/sound/sound-properties-capplet.c:785
+#: ../capplets/sound/sound-properties-capplet.c:829
 msgid "Autodetect"
 msgstr "Détection automatique"
 
-#: ../capplets/sound/sound-properties-capplet.c:790
-#: ../capplets/sound/sound-properties-capplet.c:791
+#: ../capplets/sound/sound-properties-capplet.c:834
+#: ../capplets/sound/sound-properties-capplet.c:835
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:836
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:793
-#: ../capplets/sound/sound-properties-capplet.c:794
+#: ../capplets/sound/sound-properties-capplet.c:837
+#: ../capplets/sound/sound-properties-capplet.c:838
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:797
-#: ../capplets/sound/sound-properties-capplet.c:800
+#: ../capplets/sound/sound-properties-capplet.c:841
+#: ../capplets/sound/sound-properties-capplet.c:844
 msgid "OSS - Open Sound System"
 msgstr "OSS - Open Sound System"
 
-#: ../capplets/sound/sound-properties-capplet.c:802
-#: ../capplets/sound/sound-properties-capplet.c:803
+#: ../capplets/sound/sound-properties-capplet.c:846
+#: ../capplets/sound/sound-properties-capplet.c:847
 msgid "PulseAudio Sound Server"
 msgstr "Serveur de son PulseAudio"
 
-#: ../capplets/sound/sound-properties-capplet.c:804
+#: ../capplets/sound/sound-properties-capplet.c:848
 msgid "Test Sound"
 msgstr "Tester le son"
 
-#: ../capplets/sound/sound-properties-capplet.c:805
+#: ../capplets/sound/sound-properties-capplet.c:849
 msgid "Silence"
 msgstr "Silence"
 
-#: ../capplets/sound/sound-properties-capplet.c:1172
+#: ../capplets/sound/sound-properties-capplet.c:1202
 msgid "- GNOME Sound Preferences"
 msgstr "- Préférences du son GNOME"
 
 #: ../capplets/sound/sound-properties.glade.h:1
+msgid "<b>Alerts and Sound Effects</b>"
+msgstr "<b>Alertes et effets sonores</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:2
 msgid "<b>Audio Conferencing</b>"
 msgstr "<b>Conférence audio</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:3
 msgid "<b>Default Mixer Tracks</b>"
 msgstr "<b>Pistes de mixer par défaut</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Music and Movies</b>"
 msgstr "<b>Musique et vidéos</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<b>Sound Events</b>"
 msgstr "<b>Événements sonores</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "<b>Sound Theme</b>"
+msgstr "<b>Thème sonore</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Test...</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "Click OK to finish."
 msgstr "Cliquez sur Valider pour terminer."
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "Périphériques"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing"
-msgstr "Activer le _mixage son logiciel"
-
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "Flash _entire screen"
-msgstr "Faire clignoter l'écran en _entier"
-
 #: ../capplets/sound/sound-properties.glade.h:10
-msgid "Flash _window titlebar"
-msgstr "Faire clignoter la barre de titre de la fenê_tre"
+msgid "Play _alert sound"
+msgstr "Activer le son d'_alerte"
 
 #: ../capplets/sound/sound-properties.glade.h:11
+msgid "Play _sound effects when buttons are clicked"
+msgstr "Activer les effets sonores lors des clics sur les _boutons"
+
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "S_ound playback:"
 msgstr "Lecture du s_on :"
 
-#: ../capplets/sound/sound-properties.glade.h:12
+#: ../capplets/sound/sound-properties.glade.h:13
 msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
@@ -2758,25 +2771,22 @@ msgstr ""
 "Utilisez les touches Maj et Ctrl pour sélectionner plusieurs pistes si "
 "nécessaire."
 
-#: ../capplets/sound/sound-properties.glade.h:13
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "So_und playback:"
 msgstr "Lect_ure du son :"
 
-#: ../capplets/sound/sound-properties.glade.h:14
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "Sou_nd capture:"
 msgstr "Capture du so_n :"
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1016
 msgid "Sound Preferences"
 msgstr "Préférences du son"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:17
 msgid "Sounds"
 msgstr "Sons"
-
-#: ../capplets/sound/sound-properties.glade.h:17
-msgid "System Beep"
-msgstr "Bip système"
 
 #: ../capplets/sound/sound-properties.glade.h:18
 msgid "Test"
@@ -2791,20 +2801,136 @@ msgid "_Device:"
 msgstr "_Périphérique :"
 
 #: ../capplets/sound/sound-properties.glade.h:21
-msgid "_Enable system beep"
-msgstr "Activer les _bips systèmes"
+msgid "_Play alerts and sound effects"
+msgstr "Activer les effets et alertes _sonores"
 
 #: ../capplets/sound/sound-properties.glade.h:22
-msgid "_Play system sounds"
-msgstr "_Jouer les sons systèmes"
-
-#: ../capplets/sound/sound-properties.glade.h:23
 msgid "_Sound playback:"
 msgstr "Lecture du _son :"
 
-#: ../capplets/sound/sound-properties.glade.h:24
-msgid "_Visual system beep"
-msgstr "Alerte _visuelle"
+#. Bell
+#: ../capplets/sound/sound-theme-definition.h:46
+msgctxt "Sound event"
+msgid "Alert sound"
+msgstr "Son d'alerte"
+
+#: ../capplets/sound/sound-theme-definition.h:47
+msgctxt "Sound event"
+msgid "Visual alert"
+msgstr "Alerte visuelle"
+
+#. Windows and buttons
+#: ../capplets/sound/sound-theme-definition.h:49
+msgctxt "Sound event"
+msgid "Windows and Buttons"
+msgstr "Fenêtres et boutons"
+
+#: ../capplets/sound/sound-theme-definition.h:50
+msgctxt "Sound event"
+msgid "Button clicked"
+msgstr "Bouton cliqué"
+
+#: ../capplets/sound/sound-theme-definition.h:51
+msgctxt "Sound event"
+msgid "Toggle button clicked"
+msgstr "Bouton à deux états cliqué"
+
+#: ../capplets/sound/sound-theme-definition.h:52
+msgctxt "Sound event"
+msgid "Window maximized"
+msgstr "Fenêtre maximisée"
+
+#: ../capplets/sound/sound-theme-definition.h:53
+msgctxt "Sound event"
+msgid "Window unmaximized"
+msgstr "Fenêtre démaximisée"
+
+#: ../capplets/sound/sound-theme-definition.h:54
+msgctxt "Sound event"
+msgid "Window minimised"
+msgstr "Fenêtre minimisée"
+
+#. Desktop
+#: ../capplets/sound/sound-theme-definition.h:56
+msgctxt "Sound event"
+msgid "Desktop"
+msgstr "Bureau"
+
+#: ../capplets/sound/sound-theme-definition.h:57
+msgctxt "Sound event"
+msgid "Login"
+msgstr "Connexion"
+
+#: ../capplets/sound/sound-theme-definition.h:58
+msgctxt "Sound event"
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: ../capplets/sound/sound-theme-definition.h:59
+msgctxt "Sound event"
+msgid "New e-mail"
+msgstr "Nouveau courriel"
+
+#: ../capplets/sound/sound-theme-definition.h:60
+msgctxt "Sound event"
+msgid "Empty trash"
+msgstr "Vidage de la corbeille"
+
+#: ../capplets/sound/sound-theme-definition.h:61
+msgctxt "Sound event"
+msgid "Long action completed (download, CD burning, etc.)"
+msgstr "Action longue effectuée (téléchargement, gravure de CD, etc.)"
+
+#. Alerts?
+#: ../capplets/sound/sound-theme-definition.h:63
+msgctxt "Sound event"
+msgid "Alerts"
+msgstr "Alertes"
+
+#: ../capplets/sound/sound-theme-definition.h:64
+msgctxt "Sound event"
+msgid "Information or question"
+msgstr "Information ou question"
+
+#: ../capplets/sound/sound-theme-definition.h:65
+msgctxt "Sound event"
+msgid "Warning"
+msgstr "Avertissement"
+
+#: ../capplets/sound/sound-theme-definition.h:66
+msgctxt "Sound event"
+msgid "Error"
+msgstr "Erreur"
+
+#: ../capplets/sound/sound-theme-definition.h:67
+msgctxt "Sound event"
+msgid "Battery warning"
+msgstr "Avertissement de la batterie"
+
+#: ../capplets/sound/sound-theme.c:437 ../capplets/sound/sound-theme.c:563
+msgid "Flash screen"
+msgstr "Faire clignoter l'écran"
+
+#: ../capplets/sound/sound-theme.c:441 ../capplets/sound/sound-theme.c:567
+msgid "Flash window"
+msgstr "Faire clignoter la fenêtre"
+
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1018
+msgid "Testing event sound"
+msgstr "Test d'un son d'événement"
+
+# Titre de boîte de dialogue
+#: ../capplets/sound/sound-theme.c:482
+msgid "Select Sound File"
+msgstr "Sélection d'un fichier son"
+
+#: ../capplets/sound/sound-theme.c:493
+msgid "Sound files"
+msgstr "Fichiers son"
+
+#: ../capplets/sound/sound-theme.c:547
+msgid "Custom..."
+msgstr "Personnaliser..."
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
@@ -2889,7 +3015,7 @@ msgstr "Fenêtres"
 msgid "<b>Start %s</b>"
 msgstr "<b>Démarrer %s</b>"
 
-#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1059
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1056
 msgid "Help"
 msgstr "Aide"
 
@@ -2901,17 +3027,17 @@ msgstr "Mettre à jour"
 msgid "Uninstall"
 msgstr "Désinstaller"
 
-#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:756
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:715
 msgid "Remove from Favorites"
 msgstr "Enlever des favoris"
 
-#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:758
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:717
 msgid "Add to Favorites"
 msgstr "Ajouter aux favoris"
 
 #: ../libslab/application-tile.c:867
 msgid "Remove from Startup Programs"
-msgstr "Retirer parmi les programmes au démarrage"
+msgstr "Retirer des programmes au démarrage"
 
 #: ../libslab/application-tile.c:869
 msgid "Add to Startup Programs"
@@ -2932,204 +3058,121 @@ msgstr ""
 msgid "Other"
 msgstr "Autre"
 
-#: ../libslab/bookmark-agent.c:1061
+#: ../libslab/bookmark-agent.c:1058
 msgid "Lock Screen"
 msgstr "Verrouiller l'écran"
 
-#: ../libslab/bookmark-agent.c:1063 ../libsounds/sound-view.c:45
+#: ../libslab/bookmark-agent.c:1060
 msgid "Logout"
 msgstr "Se déconnecter"
 
-#: ../libslab/bookmark-agent.c:1065
+#: ../libslab/bookmark-agent.c:1062
 msgid "Shutdown"
 msgstr "Éteindre"
 
-#: ../libslab/bookmark-agent.c:1090
+#: ../libslab/bookmark-agent.c:1087
 msgid "New Spreadsheet"
 msgstr "Nouvelle feuille de calcul"
 
-#: ../libslab/bookmark-agent.c:1095
+#: ../libslab/bookmark-agent.c:1092
 msgid "New Document"
 msgstr "Nouveau document"
 
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1143
 msgid "Home"
 msgstr "Dossier personnel"
 
-#: ../libslab/bookmark-agent.c:1151
+#: ../libslab/bookmark-agent.c:1148
 msgid "Documents"
 msgstr "Documents"
 
-#: ../libslab/bookmark-agent.c:1164
+#: ../libslab/bookmark-agent.c:1161
 msgid "File System"
 msgstr "Système de fichiers"
 
-#: ../libslab/bookmark-agent.c:1168
+#: ../libslab/bookmark-agent.c:1165
 msgid "Network Servers"
 msgstr "Serveurs réseau"
 
-#: ../libslab/bookmark-agent.c:1197
+#: ../libslab/bookmark-agent.c:1194
 msgid "Search"
 msgstr "Rechercher"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:172
+#: ../libslab/directory-tile.c:171
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Ouvrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:191 ../libslab/document-tile.c:241
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:235
 msgid "Rename..."
 msgstr "Renommer..."
 
-#: ../libslab/directory-tile.c:205 ../libslab/directory-tile.c:214
-#: ../libslab/document-tile.c:255 ../libslab/document-tile.c:264
+#: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
+#: ../libslab/document-tile.c:249 ../libslab/document-tile.c:258
 msgid "Send To..."
 msgstr "Envoyer à..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:229 ../libslab/document-tile.c:290
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:284
 msgid "Move to Trash"
 msgstr "Mettre à la corbeille"
 
-#: ../libslab/directory-tile.c:239 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:300 ../libslab/document-tile.c:869
+#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:456
+#: ../libslab/document-tile.c:294 ../libslab/document-tile.c:831
 msgid "Delete"
 msgstr "Effacer"
 
-#: ../libslab/directory-tile.c:569 ../libslab/document-tile.c:1041
+#: ../libslab/directory-tile.c:532 ../libslab/document-tile.c:980
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Voulez-vous vraiment supprimer définitivement « %s » ?"
 
-#: ../libslab/directory-tile.c:574 ../libslab/document-tile.c:1045
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:981
 msgid "If you delete an item, it is permanently lost."
 msgstr "Si vous supprimez un élément, il sera perdu définitivement."
 
-#: ../libslab/document-tile.c:202
+#: ../libslab/document-tile.c:196
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Ouvrir avec « %s »</b>"
 
-#: ../libslab/document-tile.c:214
+#: ../libslab/document-tile.c:208
 msgid "Open with Default Application"
 msgstr "Ouvrir avec l'application par défaut"
 
-#: ../libslab/document-tile.c:225
+#: ../libslab/document-tile.c:219
 msgid "Open in File Manager"
 msgstr "Ouvrir dans le gestionnaire de fichiers"
 
-#: ../libslab/document-tile.c:652
+#: ../libslab/document-tile.c:611
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:659
+#: ../libslab/document-tile.c:618
 msgid "%l:%M %p"
 msgstr "%k:%M"
 
-#: ../libslab/document-tile.c:667
+#: ../libslab/document-tile.c:626
 msgid "Today %l:%M %p"
 msgstr "Aujourd'hui %k:%M"
 
-#: ../libslab/document-tile.c:677
+#: ../libslab/document-tile.c:636
 msgid "Yesterday %l:%M %p"
 msgstr "Hier %k:%M"
 
-#: ../libslab/document-tile.c:689
+#: ../libslab/document-tile.c:648
 msgid "%a %l:%M %p"
 msgstr "%a %k:%M"
 
-#: ../libslab/document-tile.c:697
+#: ../libslab/document-tile.c:656
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %k:%M"
 
-#: ../libslab/document-tile.c:699
+#: ../libslab/document-tile.c:658
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
-
-#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
-#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
-#, c-format
-msgid "Unexpected attribute '%s' for element '%s'"
-msgstr "Attribut « %s » inattendu pour l'élément « %s »"
-
-#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
-#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
-#, c-format
-msgid "Attribute '%s' of element '%s' not found"
-msgstr "Attribut « %s » de l'élément « %s » non trouvé"
-
-#: ../libslab/libslab-bookmarkfile.c:1087
-#: ../libslab/libslab-bookmarkfile.c:1152
-#: ../libslab/libslab-bookmarkfile.c:1216
-#: ../libslab/libslab-bookmarkfile.c:1226
-#, c-format
-msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr "Balise « %s » inattendue, « %s » était attendu"
-
-#: ../libslab/libslab-bookmarkfile.c:1112
-#: ../libslab/libslab-bookmarkfile.c:1126
-#: ../libslab/libslab-bookmarkfile.c:1194
-#: ../libslab/libslab-bookmarkfile.c:1246
-#, c-format
-msgid "Unexpected tag '%s' inside '%s'"
-msgstr "Balise « %s » inattendue à l'intérieur de « %s »"
-
-#: ../libslab/libslab-bookmarkfile.c:1929
-#, c-format
-msgid "No valid bookmark file found in data dirs"
-msgstr ""
-"Aucun fichier de signets valide n'a été trouvé dans les répertoires de "
-"données"
-
-#: ../libslab/libslab-bookmarkfile.c:2130
-#, c-format
-msgid "A bookmark for URI '%s' already exists"
-msgstr "Un signet pour l'URI « %s » existe déjà"
-
-#: ../libslab/libslab-bookmarkfile.c:2176
-#: ../libslab/libslab-bookmarkfile.c:2333
-#: ../libslab/libslab-bookmarkfile.c:2418
-#: ../libslab/libslab-bookmarkfile.c:2499
-#: ../libslab/libslab-bookmarkfile.c:2584
-#: ../libslab/libslab-bookmarkfile.c:2667
-#: ../libslab/libslab-bookmarkfile.c:2745
-#: ../libslab/libslab-bookmarkfile.c:2824
-#: ../libslab/libslab-bookmarkfile.c:2866
-#: ../libslab/libslab-bookmarkfile.c:2963
-#: ../libslab/libslab-bookmarkfile.c:3089
-#: ../libslab/libslab-bookmarkfile.c:3279
-#: ../libslab/libslab-bookmarkfile.c:3355
-#: ../libslab/libslab-bookmarkfile.c:3508
-#: ../libslab/libslab-bookmarkfile.c:3573
-#: ../libslab/libslab-bookmarkfile.c:3663
-#: ../libslab/libslab-bookmarkfile.c:3790
-#, c-format
-msgid "No bookmark found for URI '%s'"
-msgstr "Aucun signet pour l'URI « %s »"
-
-#: ../libslab/libslab-bookmarkfile.c:2508
-#, c-format
-msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr "Aucun type MIME défini dans le signet de l'URI « %s »"
-
-#: ../libslab/libslab-bookmarkfile.c:2593
-#, c-format
-msgid "No private flag has been defined in bookmark for URI '%s'"
-msgstr "Aucun drapeau privé n'a été défini dans le signet de l'URI « %s »"
-
-#: ../libslab/libslab-bookmarkfile.c:2972
-#, c-format
-msgid "No groups set in bookmark for URI '%s'"
-msgstr "Aucun groupe n'a été défini dans le signet de l'URI « %s »"
-
-#: ../libslab/libslab-bookmarkfile.c:3373
-#: ../libslab/libslab-bookmarkfile.c:3518
-#, c-format
-msgid "No application with name '%s' registered a bookmark for '%s'"
-msgstr ""
-"Aucune application avec le nom « %s » n'a enregistrée un signet pour « %s »"
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
@@ -3144,64 +3187,6 @@ msgstr "<b>Ouvrir %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Supprimer parmi les éléments systèmes"
-
-#: ../libsounds/sound-view.c:44
-msgid "Login"
-msgstr "Identifiant"
-
-#: ../libsounds/sound-view.c:46
-msgid "Boing"
-msgstr "Boïng"
-
-#: ../libsounds/sound-view.c:47
-msgid "Siren"
-msgstr "Sirène"
-
-#: ../libsounds/sound-view.c:48
-msgid "Clink"
-msgstr "Clink"
-
-#: ../libsounds/sound-view.c:49
-msgid "Beep"
-msgstr "Bip"
-
-#: ../libsounds/sound-view.c:50
-msgid "No sound"
-msgstr "Aucun son"
-
-#: ../libsounds/sound-view.c:132
-msgid "Sound not set for this event."
-msgstr "Aucun son attribué à cet événement."
-
-#: ../libsounds/sound-view.c:141
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"Le fichier son pour cet événement n'existe pas.\n"
-"Vous devriez installer le paquet gnome-audio pour disposer des sons par "
-"défaut."
-
-#: ../libsounds/sound-view.c:152
-msgid "The sound file for this event does not exist."
-msgstr "Le fichier son défini pour cet événement n'existe pas."
-
-#: ../libsounds/sound-view.c:183
-msgid "Select Sound File"
-msgstr "Sélectionnez le fichier son"
-
-#: ../libsounds/sound-view.c:210
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "Le fichier %s n'est pas un fichier wave valide"
-
-#: ../libsounds/sound-view.c:271
-msgid "Select sound file..."
-msgstr "Sélectionnez un fichier son..."
-
-#: ../libsounds/sound-view.c:373
-msgid "System Sounds"
-msgstr "Sons systèmes"
 
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
@@ -3249,7 +3234,7 @@ msgstr "Groupes"
 
 #: ../shell/control-center.c:159
 msgid "Common Tasks"
-msgstr "Tâches communes"
+msgstr "Tâches courantes"
 
 #: ../shell/control-center.c:163 ../shell/gnomecc.desktop.in.in.h:1
 #: ../shell/gnomecc.directory.in.h:1
@@ -3402,7 +3387,7 @@ msgstr ""
 "Sebastien Oustric <sebastien.oustric@laposte.net>, 2002\n"
 "Simon Manlay <simon@solintech.fr>, 2005\n"
 "Vincent Untz <vuntz@gnome.org>, 2005\n"
-"Robert-André Mauchin <zebob.m@gmail.com>, 2006-2007\n"
+"Robert-André Mauchin <zebob.m@pengzone.org>, 2006-2008\n"
 "Jonathan Ernst <jonathan@ernstfamily.ch>, 2006-2007\n"
 "Benoît Dejean <benoit@placenet.org>, 2006\n"
 "Samuel Mutel <samuel.mutel@free.fr>, 2006\n"
@@ -3438,188 +3423,5 @@ msgstr ""
 "tableau de bord, puis choisissez « Ajouter au tableau de bord », sélectionnez "
 "« Zone de notification » et cliquez sur « Ajouter »."
 
-#: ../vfs-methods/fontilus/fontilus-context-menu.c:132
-msgid "Set as Application Font"
-msgstr "Définir comme police des applications"
-
-#: ../vfs-methods/fontilus/fontilus-context-menu.c:133
-msgid "Sets the default application font"
-msgstr "Définit la police par défaut des applications"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "Si vrai, les polices OpenType s'afficheront en vignettes."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "Si vrai, les polices PCF s'afficheront en vignettes."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "Si vrai, les polices TrueType s'afficheront en vignettes."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "Si vrai, les polices Type1 s'afficheront en vignettes."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"Définissez cette clé à la commande servant à créer les vignettes pour les "
-"polices OpenType."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Définissez cette clé à la commande servant à créer les vignettes pour les "
-"polices PCF."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"Définissez cette clé à la commande servant à créer les vignettes pour les "
-"polices TrueType."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"Définissez cette clé à la commande servant à créer les vignettes pour les "
-"polices Type1."
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "Commande de création de vignettes pour les polices OpenType"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "Commande de création de vignettes pour les polices PCF"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "Commande de création de vignettes pour les polices TrueType"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "Commande de création de vignettes pour les polices Type1"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "Indique s'il faut créer ou non des vignettes pour les polices OpenType"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "Indique s'il faut créer ou non des vignettes pour les polices PCF"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "Indique s'il faut créer ou non des vignettes pour les polices TrueType"
-
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "Indique s'il faut créer ou non des vignettes pour les polices Type1"
-
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr ""
-"Dès Noël où un zéphyr haï me vêt de glaçons würmiens je dîne d’exquis rôtis "
-"de bœuf au kir à l’aÿ d’âge mûr & cætera ! 0123456789."
-
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "Nom :"
-
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "Style :"
-
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "Type :"
-
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "Taille :"
-
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "Version :"
-
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "Copyright :"
-
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "Description :"
-
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "usage : %s fichierpolice\n"
-
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "Visionneur de polices"
-
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "Prévisualisation des polices"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:242
-msgid "Text to thumbnail (default: Aa)"
-msgstr "Texte à utiliser dans les vignettes (par défaut : Aa)"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:242
-msgid "TEXT"
-msgstr "TEXTE"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:244
-msgid "Font size (default: 64)"
-msgstr "Taille de la police (par défaut : 64)"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:244
-msgid "SIZE"
-msgstr "TAILLE"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:246
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "FICHIER-POLICE FICHIER-SORTIE"
-
-#: ../vfs-methods/fontilus/thumbnailer.c:262
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "Impossible d'analyser les arguments : %s\n"
-
-#~ msgid "Inverted"
-#~ msgstr "À l'envers"
-
-#~ msgid "_Resolution:"
-#~ msgstr "_Résolution :"
-
-#~ msgid "Re_fresh rate:"
-#~ msgstr "_Fréquence de rafraîchissement :"
-
-#~ msgid "R_otation:"
-#~ msgstr "R_otation :"
-
-#~ msgid "Default Settings"
-#~ msgstr "Réglages par défaut"
-
-#~ msgid "Screen Resolution Preferences"
-#~ msgstr "Préférences de la résolution de l'écran"
-
-#~ msgid "Keep Resolution"
-#~ msgstr "Conserver la résolution"
-
-#~ msgid "Do you want to keep this resolution?"
-#~ msgstr "Voulez-vous garder cette résolution ?"
-
-#~ msgid "Use _Previous Resolution"
-#~ msgstr "Utiliser la résolution _précédente"
-
-#~ msgid "_Keep Resolution"
-#~ msgstr "_Conserver la résolution"
+#~ msgid "Cloned Output"
+#~ msgstr "Sortie en miroir"
