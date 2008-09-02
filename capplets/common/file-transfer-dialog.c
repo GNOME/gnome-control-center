@@ -487,6 +487,7 @@ file_transfer_job_schedule (GIOSchedulerJob *io_job,
 	data.overwrite_dialog = job->overwrite_dialog;
 	data.current_file = job->dialog->priv->nth + 1;
 	data.total_files = job->dialog->priv->total;
+	data.current_bytes = data.total_bytes = 0;
 	data.source = g_file_get_basename (source);
 	data.target = g_file_get_basename (target);
 
