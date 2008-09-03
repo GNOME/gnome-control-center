@@ -226,6 +226,7 @@ xkb_layout_chooser_available_language_variants_fill (GladeXML *
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbv),
 				 GTK_TREE_MODEL (list_store));
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cbv), 0);
 }
 
 static void
@@ -235,8 +236,7 @@ xkb_layout_chooser_available_country_variants_fill (GladeXML *
 	GtkWidget *cbl = CWID ("xkb_countries_available");
 	GtkWidget *cbv = CWID ("xkb_country_variants_available");
 	GtkListStore *list_store;
-	GtkTreeIter liter, vdefault_iter;
-	gboolean set_default = FALSE;
+	GtkTreeIter liter;
 
 	list_store = gtk_list_store_new
 	    (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
@@ -267,12 +267,7 @@ xkb_layout_chooser_available_country_variants_fill (GladeXML *
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbv),
 				 GTK_TREE_MODEL (list_store));
-
-	/* Select the default variant */
-	if (set_default) {
-		gtk_combo_box_set_active_iter (GTK_COMBO_BOX
-					       (cbv), &vdefault_iter);
-	}
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cbv), 0);
 }
 
 static void
