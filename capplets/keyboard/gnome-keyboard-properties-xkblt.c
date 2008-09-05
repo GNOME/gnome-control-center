@@ -365,15 +365,10 @@ gchar *
 xkb_layout_description_utf8 (const gchar * visible)
 {
 	char *l, *sl, *v, *sv;
-	char *v1, *utf_visible;
 	if (gkbd_keyboard_config_get_descriptions
 	    (config_registry, visible, &sl, &l, &sv, &v))
 		visible = gkbd_keyboard_config_format_full_layout (l, v);
-	v1 = g_strdup (visible);
-	utf_visible =
-	    g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
-	g_free (v1);
-	return utf_visible;
+	return g_strstrip (g_strdup (visible));
 }
 
 void

@@ -48,8 +48,7 @@ char *
 xci_desc_to_utf8 (XklConfigItem * ci)
 {
 	char *sd = g_strstrip (ci->description);
-	return sd[0] == 0 ? g_strdup (ci->name) :
-	    g_locale_to_utf8 (sd, -1, NULL, NULL, NULL);
+	return sd[0] == 0 ? g_strdup (ci->name) : g_strdup (sd);
 }
 
 static void
@@ -88,7 +87,8 @@ static void
 model_key_changed (GConfClient * client,
 		   guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
 {
-	set_model_text (WID ("xkb_model_pick"), gconf_entry_get_value (entry));
+	set_model_text (WID ("xkb_model_pick"),
+			gconf_entry_get_value (entry));
 
 	enable_disable_restoring (dialog);
 }
