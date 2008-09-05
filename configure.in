@@ -17,7 +17,6 @@ AM_PROG_LIBTOOL
 # Use the GNOME documentation framework
 GNOME_DOC_INIT
 
-m4_define(gnomevfs_minver, 2.0.0)
 m4_define(fontconfig_minver, 1.0.0)
 m4_define(xft_minver, 2.1.2)
 m4_define(gtk_minver, 2.11.6)
@@ -103,7 +102,6 @@ PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1 libpanelapplet-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
-PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(METACITY, libmetacity-private >= 2.23.1)

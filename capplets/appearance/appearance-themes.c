@@ -33,7 +33,6 @@
 #include <glib/gi18n.h>
 #include <libwindow-settings/gnome-wm-manager.h>
 #include <string.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <libgnomeui/gnome-thumbnail.h>
 
 #define CUSTOM_THEME_NAME "__custom__"

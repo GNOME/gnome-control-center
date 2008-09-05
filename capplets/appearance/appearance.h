@@ -23,7 +23,6 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-thumbnail.h>
 
