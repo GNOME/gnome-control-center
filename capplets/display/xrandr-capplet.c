@@ -1324,18 +1324,21 @@ get_display_name (App *app,
 	GTK_WIDGET (app->area), text);
 }
 
-#define BACKGROUND_FILL_RGBA	0.72, 0.78, 0.87, 1.0
-#define BACKGROUND_STROKE_RGBA	0.44, 0.59, 0.76, 1.0
-
 static void
 paint_background (FooScrollArea *area,
 		  cairo_t       *cr)
 {
     GdkRectangle viewport;
+    GtkWidget *widget;
+
+    widget = GTK_WIDGET (area);
 
     foo_scroll_area_get_viewport (area, &viewport);
 
-    cairo_set_source_rgba (cr, BACKGROUND_FILL_RGBA);
+    cairo_set_source_rgb (cr,
+                          widget->style->base[GTK_STATE_SELECTED].red / 65535.0,
+                          widget->style->base[GTK_STATE_SELECTED].green / 65535.0,
+                          widget->style->base[GTK_STATE_SELECTED].blue / 65535.0);
 
     cairo_rectangle (cr,
 		     viewport.x, viewport.y,
@@ -1347,7 +1350,10 @@ paint_background (FooScrollArea *area,
     foo_scroll_area_add_input_from_fill (area, cr, on_canvas_event, NULL);
 #endif
 
-    cairo_set_source_rgba (cr, BACKGROUND_STROKE_RGBA);
+    cairo_set_source_rgb (cr,
+                          widget->style->dark[GTK_STATE_SELECTED].red / 65535.0,
+                          widget->style->dark[GTK_STATE_SELECTED].green / 65535.0,
+                          widget->style->dark[GTK_STATE_SELECTED].blue / 65535.0);
 
     cairo_stroke (cr);
 }
