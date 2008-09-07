@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 12:53+0100\n"
-"PO-Revision-Date: 2008-08-12 13:10+0000\n"
+"POT-Creation-Date: 2008-08-28 20:51+0000\n"
+"PO-Revision-Date: 2008-09-07 21:25+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -493,8 +493,9 @@ msgid "Assistive Technologies"
 msgstr "Tecnologias Assistivas"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Enable support for GNOME assistive technologies at login"
-msgstr "Activar suporte para tecnologias assistivas GNOME ao iniciar sessão"
+msgid "Choose which accessibility features to enable when you log in"
+msgstr ""
+"Seleccionar que funcionalidades de acessibilidade activar ao iniciar sessão"
 
 #: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
@@ -576,19 +577,19 @@ msgstr "página"
 msgid "[WALLPAPER...]"
 msgstr "[PAPELDEPAREDE...]"
 
-#: ../capplets/appearance/appearance-style.c:159
-#: ../capplets/common/gnome-theme-info.c:444
-#: ../capplets/common/gnome-theme-info.c:633
+#: ../capplets/appearance/appearance-style.c:167
+#: ../capplets/common/gnome-theme-info.c:442
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer"
 msgstr "Cursor Por Omissão"
 
-#: ../capplets/appearance/appearance-style.c:221
+#: ../capplets/appearance/appearance-style.c:229
 #: ../capplets/appearance/appearance-themes.c:687
 msgid "Install"
 msgstr "Instalar"
 
-#: ../capplets/appearance/appearance-style.c:241
-#: ../capplets/common/gnome-theme-info.c:1640
+#: ../capplets/appearance/appearance-style.c:249
+#: ../capplets/common/gnome-theme-info.c:1644
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
@@ -1388,35 +1389,35 @@ msgstr "Seleccione uma imagem."
 msgid "_Select"
 msgstr "_Seleccionar"
 
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:635
 msgid "Default Pointer - Current"
 msgstr "Cursor por Omissão - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "White Pointer"
 msgstr "Cursor Branco"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:640
 msgid "White Pointer - Current"
 msgstr "Cursor Branco - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large Pointer"
 msgstr "Cursor Grande"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:645
 msgid "Large Pointer - Current"
 msgstr "Cursor Grande - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large White Pointer - Current"
 msgstr "Cursor Branco Grande - Actual"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:650
 msgid "Large White Pointer"
 msgstr "Cursor Branco Grande"
 
-#: ../capplets/common/gnome-theme-info.c:1616
+#: ../capplets/common/gnome-theme-info.c:1620
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme '%s' is "
@@ -1425,7 +1426,7 @@ msgstr ""
 "Este tema não terá a aparência pretendida pois o necessário tema GTK+ '%s' "
 "não está instalado."
 
-#: ../capplets/common/gnome-theme-info.c:1624
+#: ../capplets/common/gnome-theme-info.c:1628
 #, c-format
 msgid ""
 "This theme will not look as intended because the required window manager "
@@ -1434,14 +1435,14 @@ msgstr ""
 "Este tema não terá a aparência pretendida pois o necessário tema de gestor "
 "de janelas '%s' não está instalado."
 
-#: ../capplets/common/gnome-theme-info.c:1631
+#: ../capplets/common/gnome-theme-info.c:1635
 #, c-format
 msgid ""
 "This theme will not look as intended because the required icon theme '%s' is "
 "not installed."
 msgstr ""
-"Este tema não terá a aparência pretendida pois o necessário tema de ícones "
-"'%s' não está instalado."
+"Este tema não terá a aparência pretendida pois o necessário tema de ícones '%"
+"s' não está instalado."
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
@@ -1788,7 +1789,13 @@ msgstr "aterm"
 msgid "Include _Panel"
 msgstr "Incluir _Painel"
 
+#. Translators:  this is the feature where what you see on your laptop's
+#. * screen is the same as your external monitor.  Here, "Mirror" is being
+#. * used as an adjective, not as a verb.  For example, the Spanish
+#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#.
 #: ../capplets/display/display-capplet.glade.h:2
+#: ../capplets/display/xrandr-capplet.c:1319
 msgid "Mirror Screens"
 msgstr "Espelhar Ecrãs"
 
@@ -1836,59 +1843,53 @@ msgstr "Alterar a resolução de ecrã"
 msgid "Screen Resolution"
 msgstr "Resolução de Ecrã"
 
-#: ../capplets/display/xrandr-capplet.c:403
-#: ../capplets/display/xrandr-capplet.c:441
+#: ../capplets/display/xrandr-capplet.c:412
+#: ../capplets/display/xrandr-capplet.c:450
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/xrandr-capplet.c:404
+#: ../capplets/display/xrandr-capplet.c:413
 msgid "Left"
 msgstr "Esquerda"
 
-#: ../capplets/display/xrandr-capplet.c:405
+#: ../capplets/display/xrandr-capplet.c:414
 msgid "Right"
 msgstr "Direita"
 
-#: ../capplets/display/xrandr-capplet.c:406
+#: ../capplets/display/xrandr-capplet.c:415
 msgid "Upside Down"
 msgstr "Pernas para o Ar"
 
-#: ../capplets/display/xrandr-capplet.c:479
-#: ../capplets/display/xrandr-capplet.c:487
 #: ../capplets/display/xrandr-capplet.c:488
+#: ../capplets/display/xrandr-capplet.c:496
+#: ../capplets/display/xrandr-capplet.c:497
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:540
-#: ../capplets/display/xrandr-capplet.c:559
-#: ../capplets/display/xrandr-capplet.c:569
+#: ../capplets/display/xrandr-capplet.c:549
+#: ../capplets/display/xrandr-capplet.c:568
+#: ../capplets/display/xrandr-capplet.c:578
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:551
+#: ../capplets/display/xrandr-capplet.c:560
 msgid "Off"
 msgstr "Inactivo"
-
-#: ../capplets/display/xrandr-capplet.c:1305
-msgid "Cloned Output"
-msgstr "Saída Clonada"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Som"
 
-#. Desktop
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../capplets/sound/sound-theme-definition.h:56
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1154
 msgid "Desktop"
 msgstr "Ambiente de Trabalho"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
-msgid "New accelerator..."
+msgid "New shortcut..."
 msgstr "Novo atalho..."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:163
@@ -1959,8 +1960,7 @@ msgstr ""
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr ""
-"Se reatribuir o atalho a \"%s\", o atalho \"%s\" será desactivado."
+msgstr "Se reatribuir o atalho a \"%s\", o atalho \"%s\" será desactivado."
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:1060
 msgid "_Reassign"
@@ -1990,11 +1990,11 @@ msgstr "Atalhos de Teclado"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new "
-"accelerator, or press backspace to clear."
+"To edit a shortcut key, click on the corresponding row and type a new key "
+"combination, or press backspace to clear."
 msgstr ""
-"Para editar um atalho, clique na linha correspondente e introduza um novo "
-"atalho, ou prima backspace para limpar."
+"Para editar um atalho, clique na linha correspondente e introduza uma nova "
+"combinação de teclas, ou prima backspace para limpar."
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -2237,7 +2237,8 @@ msgstr "Intervalo de Utilização"
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr ""
-"Funcionalidades de _acessibilidade podem ser alternadas com atalhos de teclado"
+"Funcionalidades de _acessibilidade podem ser alternadas com atalhos de "
+"teclado"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
@@ -2732,7 +2733,7 @@ msgid "Sou_nd capture:"
 msgstr "Captura de So_m:"
 
 #: ../capplets/sound/sound-properties.glade.h:16
-#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1028
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1016
 msgid "Sound Preferences"
 msgstr "Preferências de Som"
 
@@ -2762,85 +2763,100 @@ msgstr "Reprodução de _som:"
 
 #. Bell
 #: ../capplets/sound/sound-theme-definition.h:46
+msgctxt "Sound event"
 msgid "Alert sound"
 msgstr "Som de alerta"
 
 #: ../capplets/sound/sound-theme-definition.h:47
+msgctxt "Sound event"
 msgid "Visual alert"
 msgstr "Alerta visual"
 
 #. Windows and buttons
 #: ../capplets/sound/sound-theme-definition.h:49
+msgctxt "Sound event"
 msgid "Windows and Buttons"
 msgstr "Janelas e Botões"
 
 #: ../capplets/sound/sound-theme-definition.h:50
+msgctxt "Sound event"
 msgid "Button clicked"
 msgstr "Botão clicado"
 
 #: ../capplets/sound/sound-theme-definition.h:51
+msgctxt "Sound event"
 msgid "Toggle button clicked"
 msgstr "Botão de alternar clicado"
 
 #: ../capplets/sound/sound-theme-definition.h:52
+msgctxt "Sound event"
 msgid "Window maximized"
 msgstr "Janela maximizada"
 
 #: ../capplets/sound/sound-theme-definition.h:53
+msgctxt "Sound event"
 msgid "Window unmaximized"
 msgstr "Janela restaurada"
 
 #: ../capplets/sound/sound-theme-definition.h:54
+msgctxt "Sound event"
 msgid "Window minimised"
 msgstr "Janela minimizada"
 
-#: ../capplets/sound/sound-theme-definition.h:54
-msgid "Window minimized"
-msgstr "Janela minimizada"
+#. Desktop
+#: ../capplets/sound/sound-theme-definition.h:56
+msgctxt "Sound event"
+msgid "Desktop"
+msgstr "Ambiente de Trabalho"
 
 #: ../capplets/sound/sound-theme-definition.h:57
+msgctxt "Sound event"
 msgid "Login"
 msgstr "Iniciar Sessão"
 
 #: ../capplets/sound/sound-theme-definition.h:58
-#: ../libslab/bookmark-agent.c:1063
+msgctxt "Sound event"
 msgid "Logout"
 msgstr "Terminar Sessão"
 
 #: ../capplets/sound/sound-theme-definition.h:59
+msgctxt "Sound event"
 msgid "New e-mail"
 msgstr "Novo email"
 
-#: ../capplets/sound/sound-theme-definition.h:59
-msgid "New email"
-msgstr "Novo email"
-
 #: ../capplets/sound/sound-theme-definition.h:60
+msgctxt "Sound event"
 msgid "Empty trash"
 msgstr "Esvaziar o lixo"
 
 #: ../capplets/sound/sound-theme-definition.h:61
+msgctxt "Sound event"
 msgid "Long action completed (download, CD burning, etc.)"
 msgstr "Acção demorada terminada (download, gravar CD, etc.)"
 
 #. Alerts?
 #: ../capplets/sound/sound-theme-definition.h:63
+msgctxt "Sound event"
 msgid "Alerts"
 msgstr "Alertas"
 
 #: ../capplets/sound/sound-theme-definition.h:64
+msgctxt "Sound event"
 msgid "Information or question"
 msgstr "Informação ou questão"
 
 #: ../capplets/sound/sound-theme-definition.h:65
+msgctxt "Sound event"
 msgid "Warning"
 msgstr "Aviso"
 
 #: ../capplets/sound/sound-theme-definition.h:66
+msgctxt "Sound event"
 msgid "Error"
 msgstr "Erro"
 
 #: ../capplets/sound/sound-theme-definition.h:67
+msgctxt "Sound event"
 msgid "Battery warning"
 msgstr "Aviso de bateria"
 
@@ -2852,7 +2868,7 @@ msgstr "\"Flash\" no ecrã"
 msgid "Flash window"
 msgstr "\"Flash\" na janela"
 
-#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1030
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1018
 msgid "Testing event sound"
 msgstr "Testar o som de evento"
 
@@ -2948,7 +2964,7 @@ msgstr "Janelas"
 msgid "<b>Start %s</b>"
 msgstr "<b>Iniciar %s</b>"
 
-#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1059
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1056
 msgid "Help"
 msgstr "Ajuda"
 
@@ -2960,11 +2976,11 @@ msgstr "Actualizar"
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:727
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:715
 msgid "Remove from Favorites"
 msgstr "Remover dos Favoritos"
 
-#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:729
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:717
 msgid "Add to Favorites"
 msgstr "Adicionar aos Favoritos"
 
@@ -2991,39 +3007,43 @@ msgstr ""
 msgid "Other"
 msgstr "Outro"
 
-#: ../libslab/bookmark-agent.c:1061
+#: ../libslab/bookmark-agent.c:1058
 msgid "Lock Screen"
 msgstr "Trancar o Ecrã"
 
-#: ../libslab/bookmark-agent.c:1065
+#: ../libslab/bookmark-agent.c:1060
+msgid "Logout"
+msgstr "Terminar Sessão"
+
+#: ../libslab/bookmark-agent.c:1062
 msgid "Shutdown"
 msgstr "Desligar"
 
-#: ../libslab/bookmark-agent.c:1090
+#: ../libslab/bookmark-agent.c:1087
 msgid "New Spreadsheet"
 msgstr "Nova Folha de Cálculo"
 
-#: ../libslab/bookmark-agent.c:1095
+#: ../libslab/bookmark-agent.c:1092
 msgid "New Document"
 msgstr "Novo Documento"
 
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1143
 msgid "Home"
 msgstr "Pasta Pessoal"
 
-#: ../libslab/bookmark-agent.c:1151
+#: ../libslab/bookmark-agent.c:1148
 msgid "Documents"
 msgstr "Documentos"
 
-#: ../libslab/bookmark-agent.c:1164
+#: ../libslab/bookmark-agent.c:1161
 msgid "File System"
 msgstr "Sistema de Ficheiros"
 
-#: ../libslab/bookmark-agent.c:1168
+#: ../libslab/bookmark-agent.c:1165
 msgid "Network Servers"
 msgstr "Servidores na Rede"
 
-#: ../libslab/bookmark-agent.c:1197
+#: ../libslab/bookmark-agent.c:1194
 msgid "Search"
 msgstr "Procurar"
 
@@ -3034,156 +3054,74 @@ msgid "<b>Open</b>"
 msgstr "<b>Abrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:240
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:235
 msgid "Rename..."
 msgstr "Renomear..."
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:254 ../libslab/document-tile.c:263
+#: ../libslab/document-tile.c:249 ../libslab/document-tile.c:258
 msgid "Send To..."
 msgstr "Enviar Para..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:289
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:284
 msgid "Move to Trash"
 msgstr "Mover para o Lixo"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:456
-#: ../libslab/document-tile.c:299 ../libslab/document-tile.c:840
+#: ../libslab/document-tile.c:294 ../libslab/document-tile.c:831
 msgid "Delete"
 msgstr "Apagar"
 
-#: ../libslab/directory-tile.c:567 ../libslab/document-tile.c:1011
+#: ../libslab/directory-tile.c:532 ../libslab/document-tile.c:980
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Tem a certeza de que deseja apagar permanentemente \"%s\"?"
 
-#: ../libslab/directory-tile.c:568 ../libslab/document-tile.c:1012
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:981
 msgid "If you delete an item, it is permanently lost."
 msgstr "Se apagar um item, este será permanentemente perdido."
 
-#: ../libslab/document-tile.c:201
+#: ../libslab/document-tile.c:196
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Abrir com \"%s\"</b>"
 
-#: ../libslab/document-tile.c:213
+#: ../libslab/document-tile.c:208
 msgid "Open with Default Application"
 msgstr "Abrir com a Aplicação por Omissão"
 
-#: ../libslab/document-tile.c:224
+#: ../libslab/document-tile.c:219
 msgid "Open in File Manager"
 msgstr "Abrir No Gestor de Ficheiros"
 
-#: ../libslab/document-tile.c:623
+#: ../libslab/document-tile.c:611
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:630
+#: ../libslab/document-tile.c:618
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#: ../libslab/document-tile.c:638
+#: ../libslab/document-tile.c:626
 msgid "Today %l:%M %p"
 msgstr "Hoje %l:%M %p"
 
-#: ../libslab/document-tile.c:648
+#: ../libslab/document-tile.c:636
 msgid "Yesterday %l:%M %p"
 msgstr "Ontem %l:%M %p"
 
-#: ../libslab/document-tile.c:660
+#: ../libslab/document-tile.c:648
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../libslab/document-tile.c:668
+#: ../libslab/document-tile.c:656
 msgid "%b %d %l:%M %p"
 msgstr "%b %d %l:%M %p"
 
-#: ../libslab/document-tile.c:670
+#: ../libslab/document-tile.c:658
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
-
-#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
-#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
-#, c-format
-msgid "Unexpected attribute '%s' for element '%s'"
-msgstr "Atributo '%s' inesperado para o elemento '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
-#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
-#, c-format
-msgid "Attribute '%s' of element '%s' not found"
-msgstr "Não foi encontrado o atributo '%s' do elemento '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:1087
-#: ../libslab/libslab-bookmarkfile.c:1152
-#: ../libslab/libslab-bookmarkfile.c:1216
-#: ../libslab/libslab-bookmarkfile.c:1226
-#, c-format
-msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr "Etiqueta '%s' inesperada, era esperada a etiqueta '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:1112
-#: ../libslab/libslab-bookmarkfile.c:1126
-#: ../libslab/libslab-bookmarkfile.c:1194
-#: ../libslab/libslab-bookmarkfile.c:1246
-#, c-format
-msgid "Unexpected tag '%s' inside '%s'"
-msgstr "Etiqueta '%s' inesperada dentro de '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:1929
-#, c-format
-msgid "No valid bookmark file found in data dirs"
-msgstr ""
-"Não foi encontrado nenhum ficheiro de marcadores válido nos directórios de "
-"dados"
-
-#: ../libslab/libslab-bookmarkfile.c:2130
-#, c-format
-msgid "A bookmark for URI '%s' already exists"
-msgstr "Já existe um marcador para o URI '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:2176
-#: ../libslab/libslab-bookmarkfile.c:2333
-#: ../libslab/libslab-bookmarkfile.c:2418
-#: ../libslab/libslab-bookmarkfile.c:2499
-#: ../libslab/libslab-bookmarkfile.c:2584
-#: ../libslab/libslab-bookmarkfile.c:2667
-#: ../libslab/libslab-bookmarkfile.c:2745
-#: ../libslab/libslab-bookmarkfile.c:2824
-#: ../libslab/libslab-bookmarkfile.c:2866
-#: ../libslab/libslab-bookmarkfile.c:2963
-#: ../libslab/libslab-bookmarkfile.c:3089
-#: ../libslab/libslab-bookmarkfile.c:3279
-#: ../libslab/libslab-bookmarkfile.c:3355
-#: ../libslab/libslab-bookmarkfile.c:3508
-#: ../libslab/libslab-bookmarkfile.c:3573
-#: ../libslab/libslab-bookmarkfile.c:3663
-#: ../libslab/libslab-bookmarkfile.c:3790
-#, c-format
-msgid "No bookmark found for URI '%s'"
-msgstr "Nenhum marcador encontrado para o URI '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:2508
-#, c-format
-msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr "Nenhum tipo MIME definido no marcador para o URI '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:2593
-#, c-format
-msgid "No private flag has been defined in bookmark for URI '%s'"
-msgstr "Não foi definido nenhum parâmetro privado no marcador para o URI '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:2972
-#, c-format
-msgid "No groups set in bookmark for URI '%s'"
-msgstr "Nenhum grupo definido no marcador para o URI '%s'"
-
-#: ../libslab/libslab-bookmarkfile.c:3373
-#: ../libslab/libslab-bookmarkfile.c:3518
-#, c-format
-msgid "No application with name '%s' registered a bookmark for '%s'"
-msgstr "Nenhuma aplicação com o nome '%s' registou um marcador para '%s'"
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
@@ -3412,6 +3350,57 @@ msgstr ""
 "Pode adicioná-la clicando com o botão direito do rato no painel e "
 "seleccionando 'Adicionar ao painel', depois 'Área de notificação' e clicando "
 "em 'Adicionar'."
+
+#~ msgid "Enable support for GNOME assistive technologies at login"
+#~ msgstr "Activar suporte para tecnologias assistivas GNOME ao iniciar sessão"
+
+#~ msgid "Cloned Output"
+#~ msgstr "Saída Clonada"
+
+#~ msgid "New accelerator..."
+#~ msgstr "Novo atalho..."
+
+#~ msgid "Window minimized"
+#~ msgstr "Janela minimizada"
+
+#~ msgid "New email"
+#~ msgstr "Novo email"
+
+#~ msgid "Unexpected attribute '%s' for element '%s'"
+#~ msgstr "Atributo '%s' inesperado para o elemento '%s'"
+
+#~ msgid "Attribute '%s' of element '%s' not found"
+#~ msgstr "Não foi encontrado o atributo '%s' do elemento '%s'"
+
+#~ msgid "Unexpected tag '%s', tag '%s' expected"
+#~ msgstr "Etiqueta '%s' inesperada, era esperada a etiqueta '%s'"
+
+#~ msgid "Unexpected tag '%s' inside '%s'"
+#~ msgstr "Etiqueta '%s' inesperada dentro de '%s'"
+
+#~ msgid "No valid bookmark file found in data dirs"
+#~ msgstr ""
+#~ "Não foi encontrado nenhum ficheiro de marcadores válido nos directórios "
+#~ "de dados"
+
+#~ msgid "A bookmark for URI '%s' already exists"
+#~ msgstr "Já existe um marcador para o URI '%s'"
+
+#~ msgid "No bookmark found for URI '%s'"
+#~ msgstr "Nenhum marcador encontrado para o URI '%s'"
+
+#~ msgid "No MIME type defined in the bookmark for URI '%s'"
+#~ msgstr "Nenhum tipo MIME definido no marcador para o URI '%s'"
+
+#~ msgid "No private flag has been defined in bookmark for URI '%s'"
+#~ msgstr ""
+#~ "Não foi definido nenhum parâmetro privado no marcador para o URI '%s'"
+
+#~ msgid "No groups set in bookmark for URI '%s'"
+#~ msgstr "Nenhum grupo definido no marcador para o URI '%s'"
+
+#~ msgid "No application with name '%s' registered a bookmark for '%s'"
+#~ msgstr "Nenhuma aplicação com o nome '%s' registou um marcador para '%s'"
 
 #~ msgid ""
 #~ "Centered\n"
@@ -4240,9 +4229,6 @@ msgstr ""
 
 #~ msgid "Eject"
 #~ msgstr "Ejectar"
-
-#~ msgid "Eject's shortcut."
-#~ msgstr "Atalhos para ejectar."
 
 #~ msgid "Home folder"
 #~ msgstr "Pasta pessoal"
