@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--*- mode: xml -*-->
+<?xml version="1.0"?>
 <glade-interface>
   <widget class="GtkDialog" id="keyboard_dialog">
-    <property name="border_width">6</property>
+    <property name="border_width">5</property>
     <property name="title" translatable="yes">Keyboard Preferences</property>
     <property name="default_width">450</property>
     <property name="default_height">430</property>
@@ -391,6 +389,7 @@
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Keyboard _model:</property>
                             <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">xkb_model_pick</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
