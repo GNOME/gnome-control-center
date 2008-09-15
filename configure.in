@@ -281,17 +281,28 @@ dnl ==============================================
 dnl sound capplet section
 dnl ==============================================
 
-PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk >= 0.4 gio-2.0, have_canberra=yes, have_canberra=no)
+AC_ARG_WITH(libcanberra,
+  AC_HELP_STRING([--without-libcanberra],[Don't build parts depending on libcanberra]),
+  with_libcanberra=$withval,
+  with_libcanberra=yes)
 
-if test "x$have_gstreamer" = "xyes" && test "x$have_canberra" = "xyes" ; then
-  SOUND_CAPPLET_LIBS="$GST_LIBS -lgstaudio-0.10 -lgstinterfaces-0.10"
-  SOUND_CAPPLET_CFLAGS="$GST_CFLAGS"
-  AC_SUBST(SOUND_CAPPLET_LIBS)
-  AC_SUBST(SOUND_CAPPLET_CFLAGS)
+if test "x$with_libcanberra" != "xno"; then
+  PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk >= 0.4 gio-2.0, have_canberra=yes, have_canberra=no)
+  if test "x$have_gstreamer" = "xyes" && test "x$have_canberra" = "xyes" ; then
+    SOUND_CAPPLET_LIBS="$GST_LIBS -lgstaudio-0.10 -lgstinterfaces-0.10"
+    SOUND_CAPPLET_CFLAGS="$GST_CFLAGS"
+    AC_SUBST(SOUND_CAPPLET_LIBS)
+    AC_SUBST(SOUND_CAPPLET_CFLAGS)
+  else
+    if test "x$with_libcanberra" = "xyes" -a "x$have_canberra" = "xno"; then
+      AC_MSG_ERROR([Sound capplet requested but libcanberra not found])
+    fi
+    AC_MSG_NOTICE([*** Sound capplet will not be built]);
+  fi
 else
   AC_MSG_NOTICE([*** Sound capplet will not be built]);
 fi
-AM_CONDITIONAL(BUILD_SOUND, test "x$have_gstreamer" = "xyes" && test "x$have_canberra" = "xyes")
+AM_CONDITIONAL(BUILD_SOUND, test "x$with_libcanberra" = "xyes")
 
 dnl ==============================================
 dnl Define the main variables
