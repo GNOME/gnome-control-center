@@ -204,7 +204,7 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
 			 theme_info->metacity_theme_name,
 			 theme_info->icon_theme_name);
 
-  output = G_OUTPUT_STREAM (g_file_create (tmp_file, G_FILE_CREATE_NONE, NULL, NULL));
+  output = G_OUTPUT_STREAM (g_file_replace (tmp_file, NULL, FALSE, G_FILE_CREATE_NONE, NULL, NULL));
   g_output_stream_write (output, str, strlen (str), NULL, NULL);
   g_free (str);
 
@@ -255,7 +255,7 @@ write_theme_to_disk (GnomeThemeMetaInfo  *theme_info,
     g_object_unref (client);
   }
 
-  g_file_move (tmp_file, target_file, G_FILE_COPY_NONE, NULL, NULL, NULL, NULL);
+  g_file_move (tmp_file, target_file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, NULL);
   g_output_stream_close (output, NULL, NULL);
 
   g_object_unref (tmp_file);
