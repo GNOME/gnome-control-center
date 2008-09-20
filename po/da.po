@@ -28,8 +28,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-09 00:10+0100\n"
-"PO-Revision-Date: 2008-03-08 20:53+0100\n"
+"POT-Creation-Date: 2008-09-20 22:23+0200\n"
+"PO-Revision-Date: 2008-09-20 15:23+0200\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -65,25 +65,25 @@ msgstr "De viste knapper i påmindelsesvinduet"
 msgid "Show more _details"
 msgstr "Vis flere _detaljer"
 
-#: ../capplets/about-me/gnome-about-me.c:682
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Select Image"
 msgstr "Vælg billede"
 
-#: ../capplets/about-me/gnome-about-me.c:684
+#: ../capplets/about-me/gnome-about-me.c:741
 msgid "No Image"
 msgstr "Intet billede"
 
-#: ../capplets/about-me/gnome-about-me.c:712
-#: ../capplets/appearance/appearance-desktop.c:1130
+#: ../capplets/about-me/gnome-about-me.c:769
+#: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "Billeder"
 
-#: ../capplets/about-me/gnome-about-me.c:716
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/about-me/gnome-about-me.c:773
+#: ../capplets/appearance/theme-installer.c:696
 msgid "All Files"
 msgstr "Alle filer"
 
-#: ../capplets/about-me/gnome-about-me.c:854
+#: ../capplets/about-me/gnome-about-me.c:911
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -91,16 +91,16 @@ msgstr ""
 "Der opstod en fejl i forsøget på at hente informationer fra adressebogen\n"
 "Evolution Data Server kan ikke håndtere protokollen"
 
-#: ../capplets/about-me/gnome-about-me.c:875
+#: ../capplets/about-me/gnome-about-me.c:932
 msgid "Unable to open address book"
 msgstr "Kunne ikke åbne adressebogen"
 
-#: ../capplets/about-me/gnome-about-me.c:889
+#: ../capplets/about-me/gnome-about-me.c:946
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Ukendt logind-id, bruger-databasen kan være ødelagt"
 
-#: ../capplets/about-me/gnome-about-me.c:919
-#: ../capplets/about-me/gnome-about-me.c:921
+#: ../capplets/about-me/gnome-about-me.c:976
+#: ../capplets/about-me/gnome-about-me.c:978
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
@@ -235,7 +235,7 @@ msgid "Personal Info"
 msgstr "Personlig information"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:32
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:938
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
 msgstr ""
@@ -419,33 +419,33 @@ msgid "The old and new passwords are the same."
 msgstr "Gammel og ny adgangskode er ens."
 
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:818
+#: ../capplets/about-me/gnome-about-me-password.c:820
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "Kunne ikke starte %s: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:821
+#: ../capplets/about-me/gnome-about-me-password.c:824
 msgid "Unable to launch backend"
 msgstr "Kunne ikke starte bagende"
 
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:825
 msgid "A system error has occurred"
 msgstr "Der opstod en systemfejl"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:842
+#: ../capplets/about-me/gnome-about-me-password.c:845
 msgid "Checking password..."
 msgstr "Kontrollerer adgangskode..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:928
+#: ../capplets/about-me/gnome-about-me-password.c:932
 msgid "Click <b>Change password</b> to change your password."
 msgstr "Klik på <b>Skift adgangskode</b> for at skifte adgangskoden."
 
-#: ../capplets/about-me/gnome-about-me-password.c:931
+#: ../capplets/about-me/gnome-about-me-password.c:935
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "Indtast venligst din adgangskode i feltet <b>Ny adgangskode</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:941
 msgid "The two passwords are not equal."
 msgstr "De to adgangskoder er forskellige."
 
@@ -491,14 +491,22 @@ msgid "Jump to the Keyboard Accessibility dialog"
 msgstr "Spring til dialogvinduet tastaturtilgængelighed"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
+msgid "Jump to the Mouse Accessibility dialog"
+msgstr "Spring til dialogvinduet musetilgængelighed"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
 msgid "_Enable assistive technologies"
 msgstr "_Aktivér hjælpeteknologier"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
 msgid "_Keyboard Accessibility"
 msgstr "_Tastaturtilgængelighed"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:13
+msgid "_Mouse Accessibility"
+msgstr "_Musetilgængelighed"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:14
 msgid "_Preferred Applications"
 msgstr "_Foretrukne programmer"
 
@@ -507,14 +515,15 @@ msgid "Assistive Technologies"
 msgstr "Hjælpeteknologier"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Enable support for GNOME assistive technologies at login"
-msgstr "Aktivér understøttelse af hjælpeteknologier ved logind"
+msgid "Choose which accessibility features to enable when you log in"
+msgstr ""
+"Vælg hvilke tilgængelighedsfaciliteter der skal aktiveres når der logges ind"
 
-#: ../capplets/appearance/appearance-desktop.c:1098
+#: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
 msgstr "Tilføj skrivebordsbaggrund"
 
-#: ../capplets/appearance/appearance-desktop.c:1134
+#: ../capplets/appearance/appearance-desktop.c:665
 msgid "All files"
 msgstr "Alle filer"
 
@@ -564,58 +573,108 @@ msgstr "Benyt forrige skrifttype"
 msgid "Use selected font"
 msgstr "Brug markeret skrifttype"
 
-#: ../capplets/appearance/appearance-main.c:108
+#: ../capplets/appearance/appearance-main.c:107
 msgid "Specify the filename of a theme to install"
 msgstr "Angiv filnavnet på et tema der ønskes installeret"
 
-#: ../capplets/appearance/appearance-main.c:109
+#: ../capplets/appearance/appearance-main.c:108
 msgid "filename"
 msgstr "filnavn"
 
 # ????
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/appearance/appearance-main.c:115
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
 "Angiv navnet på siden der skal vises (theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:117
+#: ../capplets/appearance/appearance-main.c:116
+#: ../capplets/default-applications/gnome-da-capplet.c:880
+#: ../capplets/mouse/gnome-mouse-properties.c:444
 msgid "page"
 msgstr "side"
 
-#: ../capplets/appearance/appearance-main.c:124
+#: ../capplets/appearance/appearance-main.c:123
 msgid "[WALLPAPER...]"
 msgstr "[SKRIVEBORDSBAGGRUND...]"
 
-#: ../capplets/appearance/appearance-style.c:156
-#: ../capplets/common/gnome-theme-info.c:439
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/appearance/appearance-style.c:167
+#: ../capplets/common/gnome-theme-info.c:442
+#: ../capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer"
 msgstr "Standardmarkør"
 
-#: ../capplets/appearance/appearance-themes.c:534
+#: ../capplets/appearance/appearance-style.c:229
+#: ../capplets/appearance/appearance-themes.c:686
+msgid "Install"
+msgstr "Installér"
+
+#: ../capplets/appearance/appearance-style.c:249
+#: ../capplets/common/gnome-theme-info.c:1644
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme engine "
+"'%s' is not installed."
+msgstr ""
+"Dette tema vil ikke se ud som ønsket, da den påkrævede GTK+-temamotor \"%s\" "
+"ikke er installeret."
+
+#: ../capplets/appearance/appearance-themes.c:674
 msgid "Apply Background"
 msgstr "Anvend baggrund"
 
-#: ../capplets/appearance/appearance-themes.c:538
+#: ../capplets/appearance/appearance-themes.c:678
 msgid "Apply Font"
 msgstr "Anvend skrifttype"
 
-#: ../capplets/appearance/appearance-themes.c:563
+#: ../capplets/appearance/appearance-themes.c:682
+msgid "Revert Font"
+msgstr "Nulstil skrifttype"
+
+#: ../capplets/appearance/appearance-themes.c:712
+msgid ""
+"The current theme suggests a background and a font. Also, the last applied "
+"font suggestion can be reverted."
+msgstr ""
+"Det aktuelle tema foreslår en baggrund og en skrifttype.  I øvrigt kan den "
+"sidst anvendte skrifttype fortrydes."
+
+#: ../capplets/appearance/appearance-themes.c:714
+msgid ""
+"The current theme suggests a background. Also, the last applied font "
+"suggestion can be reverted."
+msgstr ""
+"Det aktuelle tema foreslår en baggrund. I øvrigt kan det sidst anvendte "
+"skrifttypeforslag fortrydes."
+
+#: ../capplets/appearance/appearance-themes.c:716
 msgid "The current theme suggests a background and a font."
 msgstr "Det aktuelle tema foreslår en baggrund og en skrifttype."
 
-#: ../capplets/appearance/appearance-themes.c:568
+#: ../capplets/appearance/appearance-themes.c:718
+msgid ""
+"The current theme suggests a font. Also, the last applied font suggestion "
+"can be reverted."
+msgstr ""
+"Det aktuelle tema foreslår en skrifttype. I øvrigt kan det sidst anvendte "
+"skrifttypeforslag fortrydes."
+
+#: ../capplets/appearance/appearance-themes.c:720
 msgid "The current theme suggests a background."
 msgstr "Det aktuelle tema foreslår en baggrund."
 
-#: ../capplets/appearance/appearance-themes.c:573
+#: ../capplets/appearance/appearance-themes.c:722
+msgid "The last applied font suggestion can be reverted."
+msgstr "Det sidst anvendte skrifttypeforslag kan fortrydes."
+
+#: ../capplets/appearance/appearance-themes.c:724
 msgid "The current theme suggests a font."
 msgstr "Det aktuelle tema foreslår en skrifttype."
 
-#: ../capplets/appearance/appearance-themes.c:857
-#: ../capplets/default-applications/gnome-da-capplet.c:1080
-#: ../capplets/sound/sound-properties-capplet.c:327
+#: ../capplets/appearance/appearance-themes.c:1045
+#: ../capplets/default-applications/gnome-da-capplet.c:630
+#: ../capplets/sound/sound-properties-capplet.c:262
+#: ../capplets/sound/sound-theme.c:648 ../capplets/sound/sound-theme.c:720
 msgid "Custom"
 msgstr "Tilpasset"
 
@@ -679,120 +738,106 @@ msgid "C_ut"
 msgstr "K_lip"
 
 #: ../capplets/appearance/data/appearance.glade.h:16
-msgid ""
-"Centered\n"
-"Fill screen\n"
-"Scaled\n"
-"Zoom\n"
-"Tiled"
-msgstr ""
-"Centreret\n"
-"Fyld skærmen\n"
-"Skaleret\n"
-"Forstørret\n"
-"Fliselagt"
-
-#: ../capplets/appearance/data/appearance.glade.h:21
 msgid "Changing your cursor theme takes effect the next time you log in."
 msgstr "Ændring af markørtema træder i kraft næste gang du logger ind."
 
-#: ../capplets/appearance/data/appearance.glade.h:22
+#: ../capplets/appearance/data/appearance.glade.h:17
 msgid "Colors"
 msgstr "Farver"
 
-#: ../capplets/appearance/data/appearance.glade.h:23
+#: ../capplets/appearance/data/appearance.glade.h:18
 msgid "Controls"
 msgstr "Kontroller"
 
-#: ../capplets/appearance/data/appearance.glade.h:24
+#: ../capplets/appearance/data/appearance.glade.h:19
 msgid "Customize Theme"
 msgstr "Tilpas tema"
 
-#: ../capplets/appearance/data/appearance.glade.h:25
+#: ../capplets/appearance/data/appearance.glade.h:20
 msgid "D_etails..."
 msgstr "D_etaljer..."
 
-#: ../capplets/appearance/data/appearance.glade.h:26
+#: ../capplets/appearance/data/appearance.glade.h:21
 msgid "Des_ktop font:"
 msgstr "Skrifttype for _skrivebordet:"
 
-#: ../capplets/appearance/data/appearance.glade.h:27
+#: ../capplets/appearance/data/appearance.glade.h:22
 msgid "Edit"
 msgstr "Redigér"
 
-#: ../capplets/appearance/data/appearance.glade.h:28
+#: ../capplets/appearance/data/appearance.glade.h:23
 msgid "Font Rendering Details"
 msgstr "Skriftvisningsdetaljer"
 
-#: ../capplets/appearance/data/appearance.glade.h:29
+#: ../capplets/appearance/data/appearance.glade.h:24
 msgid "Fonts"
 msgstr "Skrifttyper"
 
-#: ../capplets/appearance/data/appearance.glade.h:30
+#: ../capplets/appearance/data/appearance.glade.h:25
 msgid "Gra_yscale"
 msgstr "_Gråtone"
 
-#: ../capplets/appearance/data/appearance.glade.h:31
+#: ../capplets/appearance/data/appearance.glade.h:26
 msgid "Icons"
 msgstr "Ikoner"
 
-#: ../capplets/appearance/data/appearance.glade.h:32
+#: ../capplets/appearance/data/appearance.glade.h:27
 msgid "Interface"
 msgstr "Grænseflade"
 
-#: ../capplets/appearance/data/appearance.glade.h:33
+#: ../capplets/appearance/data/appearance.glade.h:28
 msgid "Large"
 msgstr "Stor"
 
-#: ../capplets/appearance/data/appearance.glade.h:34
+#: ../capplets/appearance/data/appearance.glade.h:29
 msgid "N_one"
 msgstr "_Ingen"
 
-#: ../capplets/appearance/data/appearance.glade.h:35
+#: ../capplets/appearance/data/appearance.glade.h:30
 msgid "New File"
 msgstr "Ny fil"
 
-#: ../capplets/appearance/data/appearance.glade.h:36
+#: ../capplets/appearance/data/appearance.glade.h:31
 msgid "Open File"
 msgstr "Åbn fil"
 
-#: ../capplets/appearance/data/appearance.glade.h:37
+#: ../capplets/appearance/data/appearance.glade.h:32
 msgid "Open a dialog to specify the color"
 msgstr "Åbn et dialogvindue til farvevalg"
 
-#: ../capplets/appearance/data/appearance.glade.h:38
+#: ../capplets/appearance/data/appearance.glade.h:33
 msgid "Pointer"
 msgstr "Markør"
 
-#: ../capplets/appearance/data/appearance.glade.h:39
+#: ../capplets/appearance/data/appearance.glade.h:34
 msgid "R_esolution:"
 msgstr "_Opløsning:"
 
-#: ../capplets/appearance/data/appearance.glade.h:40
+#: ../capplets/appearance/data/appearance.glade.h:35
 msgid "Save File"
 msgstr "Gem fil"
 
-#: ../capplets/appearance/data/appearance.glade.h:41
+#: ../capplets/appearance/data/appearance.glade.h:36
 msgid "Save Theme As..."
 msgstr "Gem tema som..."
 
-#: ../capplets/appearance/data/appearance.glade.h:42
+#: ../capplets/appearance/data/appearance.glade.h:37
 msgid "Save _As..."
 msgstr "Gem _som..."
 
-#: ../capplets/appearance/data/appearance.glade.h:43
+#: ../capplets/appearance/data/appearance.glade.h:38
 msgid "Save _background image"
 msgstr "Gem _baggrundsbillede"
 
-#: ../capplets/appearance/data/appearance.glade.h:44
+#: ../capplets/appearance/data/appearance.glade.h:39
 msgid "Show _icons in menus"
 msgstr "Vis _ikoner i menuer"
 
-#: ../capplets/appearance/data/appearance.glade.h:45
+#: ../capplets/appearance/data/appearance.glade.h:40
 msgid "Small"
 msgstr "Lille"
 
-#: ../capplets/appearance/data/appearance.glade.h:46
+#: ../capplets/appearance/data/appearance.glade.h:41
 msgid ""
 "Solid color\n"
 "Horizontal gradient\n"
@@ -802,19 +847,19 @@ msgstr ""
 "Vandret farvegradient\n"
 "Lodret farvegradient"
 
-#: ../capplets/appearance/data/appearance.glade.h:49
+#: ../capplets/appearance/data/appearance.glade.h:44
 msgid "Sub_pixel (LCDs)"
 msgstr "Del_punkt (LCD-skærme)"
 
-#: ../capplets/appearance/data/appearance.glade.h:50
+#: ../capplets/appearance/data/appearance.glade.h:45
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Del_punktsudjævning (LCD-skærme)"
 
-#: ../capplets/appearance/data/appearance.glade.h:51
+#: ../capplets/appearance/data/appearance.glade.h:46
 msgid "Text"
 msgstr "Tekst"
 
-#: ../capplets/appearance/data/appearance.glade.h:52
+#: ../capplets/appearance/data/appearance.glade.h:47
 msgid ""
 "Text below items\n"
 "Text beside items\n"
@@ -826,14 +871,28 @@ msgstr ""
 "Kun ikoner\n"
 "Kun tekst"
 
-#: ../capplets/appearance/data/appearance.glade.h:56
+#: ../capplets/appearance/data/appearance.glade.h:51
 msgid "The current controls theme does not support color schemes."
 msgstr "Det nuværende kontroltema understøtter ikke farveskemaer."
 
-#: ../capplets/appearance/data/appearance.glade.h:57
-#: ../vfs-methods/themus/themus-properties-main.c:92
+#: ../capplets/appearance/data/appearance.glade.h:52
 msgid "Theme"
 msgstr "Tema"
+
+# Gad vide hvad forskellen er på zoom og scaled
+#: ../capplets/appearance/data/appearance.glade.h:53
+msgid ""
+"Tiled\n"
+"Zoom\n"
+"Centered\n"
+"Scaled\n"
+"Fill screen"
+msgstr ""
+"Side om side\n"
+"Zoom\n"
+"Centreret\n"
+"Skaleret\n"
+"Fyld skærmen"
 
 #: ../capplets/appearance/data/appearance.glade.h:58
 msgid "Toolbar _button labels:"
@@ -849,7 +908,7 @@ msgid "Window Border"
 msgstr "Vindueskant"
 
 #: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
 msgid "_Add..."
 msgstr "_Tilføj..."
 
@@ -1004,11 +1063,11 @@ msgstr "Temainstalleringsprogram"
 msgid "Gnome Theme Package"
 msgstr "Gnome temapakke"
 
-#: ../capplets/appearance/gnome-wp-info.c:45
+#: ../capplets/appearance/gnome-wp-info.c:50
 msgid "No Wallpaper"
 msgstr "Ingen baggrund"
 
-#: ../capplets/appearance/gnome-wp-item.c:207
+#: ../capplets/appearance/gnome-wp-item.c:209
 msgid "Slide Show"
 msgstr "Diasshow"
 
@@ -1017,7 +1076,7 @@ msgstr "Diasshow"
 #. * mime type, x pixel(s) by y pixel(s)
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:215
+#: ../capplets/appearance/gnome-wp-item.c:217
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1028,37 +1087,37 @@ msgstr ""
 "%s, %d %s gange %d %s\n"
 "Katalog: %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:221
 #: ../capplets/appearance/gnome-wp-item.c:223
+#: ../capplets/appearance/gnome-wp-item.c:225
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "billedpunkt"
 msgstr[1] "billedpunkter"
 
-#: ../capplets/appearance/theme-installer.c:166
-#: ../capplets/appearance/theme-installer.c:216
+#: ../capplets/appearance/theme-installer.c:172
+#: ../capplets/appearance/theme-installer.c:222
 msgid "Cannot install theme"
 msgstr "Kan ikke installere tema"
 
-#: ../capplets/appearance/theme-installer.c:168
+#: ../capplets/appearance/theme-installer.c:174
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "Værktøjet %s er ikke installeret."
 
-#: ../capplets/appearance/theme-installer.c:218
+#: ../capplets/appearance/theme-installer.c:224
 msgid "There was a problem while extracting the theme."
 msgstr "Der opstod et problem under udpakningen af temaet."
 
-#: ../capplets/appearance/theme-installer.c:241
+#: ../capplets/appearance/theme-installer.c:247
 msgid "There was an error installing the selected file"
 msgstr "Der opstod en fejl under installation af den valgte fil"
 
-#: ../capplets/appearance/theme-installer.c:242
+#: ../capplets/appearance/theme-installer.c:248
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "\"%s\" synes ikke at være et gyldigt tema."
 
-#: ../capplets/appearance/theme-installer.c:243
+#: ../capplets/appearance/theme-installer.c:249
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
@@ -1067,46 +1126,46 @@ msgstr ""
 "\"%s\" synes ikke at være et gyldigt tema. Det er måske en temamotor som "
 "skal kompileres."
 
-#: ../capplets/appearance/theme-installer.c:282
+#: ../capplets/appearance/theme-installer.c:288
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "Gnome-temaet %s er installeret korrekt"
 
-#: ../capplets/appearance/theme-installer.c:342
+#: ../capplets/appearance/theme-installer.c:355
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Installation af temaet \"%s\" mislykkedes."
 
-#: ../capplets/appearance/theme-installer.c:374
+#: ../capplets/appearance/theme-installer.c:393
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Temaet \"%s\" er blevet installeret."
 
-#: ../capplets/appearance/theme-installer.c:380
+#: ../capplets/appearance/theme-installer.c:399
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Vil du anvende det nu eller beholde dit nuværende tema?"
 
-#: ../capplets/appearance/theme-installer.c:382
+#: ../capplets/appearance/theme-installer.c:401
 msgid "Keep Current Theme"
 msgstr "Behold nuværende tema"
 
-#: ../capplets/appearance/theme-installer.c:384
+#: ../capplets/appearance/theme-installer.c:403
 msgid "Apply New Theme"
 msgstr "Anvend nyt tema"
 
-#: ../capplets/appearance/theme-installer.c:486
+#: ../capplets/appearance/theme-installer.c:506
 msgid "Failed to create temporary directory"
 msgstr "Kunne ikke oprette midlertidigt katalog"
 
-#: ../capplets/appearance/theme-installer.c:546
+#: ../capplets/appearance/theme-installer.c:569
 msgid "New themes have been successfully installed."
 msgstr "Nye temaer er blevet installeret."
 
-#: ../capplets/appearance/theme-installer.c:573
+#: ../capplets/appearance/theme-installer.c:594
 msgid "No theme file location specified to install"
 msgstr "Ingen temafilplacering angivet til installering"
 
-#: ../capplets/appearance/theme-installer.c:593
+#: ../capplets/appearance/theme-installer.c:615
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1115,20 +1174,11 @@ msgstr ""
 "Mangler rettigheder til at installere temaet i:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:615
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s er den sti hvor temafilerne vil blive installeret. Dette kan ikke vælges "
-"som kildeplaceringen"
-
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:685
 msgid "Select Theme"
 msgstr "Vælg tema"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:689
 msgid "Theme Packages"
 msgstr "Temapakker"
 
@@ -1137,21 +1187,26 @@ msgstr "Temapakker"
 msgid "Theme name must be present"
 msgstr "Temanavn skal være til stede"
 
-#: ../capplets/appearance/theme-save.c:161
+#: ../capplets/appearance/theme-save.c:154
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "Temaet eksisterer allerede. Vil du overskrive det?"
 
-#: ../capplets/appearance/theme-save.c:162
+#: ../capplets/appearance/theme-save.c:155
+#: ../capplets/common/file-transfer-dialog.c:450
 msgid "_Overwrite"
 msgstr "_Overskriv"
 
-#: ../capplets/appearance/theme-util.c:69
+#: ../capplets/appearance/theme-util.c:74
 msgid "Would you like to delete this theme?"
 msgstr "Ønsker du at fjerne dette tema?"
 
-#: ../capplets/appearance/theme-util.c:121
+#: ../capplets/appearance/theme-util.c:124
 msgid "Theme cannot be deleted"
 msgstr "Temaet kan ikke slettes"
+
+#: ../capplets/appearance/theme-util.c:251
+msgid "Could not install theme engine"
+msgstr "Kunne ikke installere temamotor"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1172,162 +1227,165 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr "Kunne ikke indlæse lagerikon \"%s\"\n"
 
-#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
-msgid "Just apply settings and quit"
-msgstr "Anvend indstillingerne og afslut"
-
-#: ../capplets/common/capplet-util.c:244
-#: ../capplets/keyboard/gnome-keyboard-properties.c:249
-#: ../capplets/sound/sound-properties-capplet.c:1030
-msgid "Retrieve and store legacy settings"
-msgstr "Fremskaf og gem gamle indstillinger"
-
-#: ../capplets/common/capplet-util.c:344
+#: ../capplets/common/capplet-util.c:80
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Der opstod en fejl ved visningen af hjælp: %s"
 
-#: ../capplets/common/file-transfer-dialog.c:84
+#: ../capplets/common/file-transfer-dialog.c:98
 #, c-format
 msgid "Copying file: %u of %u"
 msgstr "Kopierer fil: %u af %u"
 
-#: ../capplets/common/file-transfer-dialog.c:132
+#: ../capplets/common/file-transfer-dialog.c:145
 #, c-format
 msgid "Copying '%s'"
 msgstr "Kopierer \"%s\""
 
-#: ../capplets/common/file-transfer-dialog.c:172
-#: ../capplets/common/file-transfer-dialog.c:298
+#: ../capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:312
 msgid "Copying files"
 msgstr "Kopierer filer"
 
-#: ../capplets/common/file-transfer-dialog.c:207
+#: ../capplets/common/file-transfer-dialog.c:224
 msgid "Parent Window"
 msgstr "Forældervindue"
 
-#: ../capplets/common/file-transfer-dialog.c:208
+#: ../capplets/common/file-transfer-dialog.c:225
 msgid "Parent window of the dialog"
 msgstr "Dialogvinduets forældervindue"
 
-#: ../capplets/common/file-transfer-dialog.c:214
+#: ../capplets/common/file-transfer-dialog.c:231
 msgid "From URI"
 msgstr "Fra-adresse"
 
-#: ../capplets/common/file-transfer-dialog.c:215
+#: ../capplets/common/file-transfer-dialog.c:232
 msgid "URI currently transferring from"
 msgstr "Adresse der i øjeblikket overføres fra"
 
-#: ../capplets/common/file-transfer-dialog.c:222
+#: ../capplets/common/file-transfer-dialog.c:239
 msgid "To URI"
 msgstr "Til-adresse"
 
-#: ../capplets/common/file-transfer-dialog.c:223
+#: ../capplets/common/file-transfer-dialog.c:240
 msgid "URI currently transferring to"
 msgstr "Adresse der i øjeblikket overføres til"
 
-#: ../capplets/common/file-transfer-dialog.c:230
+#: ../capplets/common/file-transfer-dialog.c:247
 msgid "Fraction completed"
 msgstr "Fuldført andel"
 
-#: ../capplets/common/file-transfer-dialog.c:231
+#: ../capplets/common/file-transfer-dialog.c:248
 msgid "Fraction of transfer currently completed"
 msgstr "Andelen af overførslen som i øjeblikket er fuldført"
 
-#: ../capplets/common/file-transfer-dialog.c:238
+#: ../capplets/common/file-transfer-dialog.c:255
 msgid "Current URI index"
 msgstr "Aktuelt adresseindeks"
 
-#: ../capplets/common/file-transfer-dialog.c:239
+#: ../capplets/common/file-transfer-dialog.c:256
 msgid "Current URI index - starts from 1"
 msgstr "Aktuelt adresseindeks - begynder ved 1"
 
-#: ../capplets/common/file-transfer-dialog.c:246
+#: ../capplets/common/file-transfer-dialog.c:263
 msgid "Total URIs"
 msgstr "Totalt adresser"
 
-#: ../capplets/common/file-transfer-dialog.c:247
+#: ../capplets/common/file-transfer-dialog.c:264
 msgid "Total number of URIs"
 msgstr "Totalt antal af adresser"
 
-#: ../capplets/common/gconf-property-editor.c:170
+#: ../capplets/common/file-transfer-dialog.c:444
+#, c-format
+msgid "File '%s' already exists. Do you want to overwrite it?"
+msgstr "Filen \"%s\" findes allerede. Vil du overskrive den?"
+
+#: ../capplets/common/file-transfer-dialog.c:447
+msgid "_Skip"
+msgstr "_Spring over"
+
+#: ../capplets/common/file-transfer-dialog.c:448
+msgid "Overwrite _All"
+msgstr "Overskriv _alle"
+
+#: ../capplets/common/gconf-property-editor.c:133
 msgid "Key"
 msgstr "Nøgle"
 
-#: ../capplets/common/gconf-property-editor.c:171
+#: ../capplets/common/gconf-property-editor.c:134
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nøgle som dette egenskabsredigeringsprogram er tilknyttet til"
 
-#: ../capplets/common/gconf-property-editor.c:177
+#: ../capplets/common/gconf-property-editor.c:140
 msgid "Callback"
 msgstr "Tilbagekald"
 
-#: ../capplets/common/gconf-property-editor.c:178
+#: ../capplets/common/gconf-property-editor.c:141
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Udfør dette tilbagekald når værdien der er associeret med nøglen, ændres"
 
-#: ../capplets/common/gconf-property-editor.c:183
+#: ../capplets/common/gconf-property-editor.c:146
 msgid "Change set"
 msgstr "Skift sæt"
 
-#: ../capplets/common/gconf-property-editor.c:184
+#: ../capplets/common/gconf-property-editor.c:147
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-skiftesæt som indeholder data der skal videresendes til GConf-klienten "
 "ved anvendelse"
 
-#: ../capplets/common/gconf-property-editor.c:189
+#: ../capplets/common/gconf-property-editor.c:152
 msgid "Conversion to widget callback"
 msgstr "Konvertering til kontrol-tilbagekald"
 
-#: ../capplets/common/gconf-property-editor.c:190
+#: ../capplets/common/gconf-property-editor.c:153
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres fra GConf til "
 "kontrollen"
 
-#: ../capplets/common/gconf-property-editor.c:195
+#: ../capplets/common/gconf-property-editor.c:158
 msgid "Conversion from widget callback"
 msgstr "Konvertering fra kontrol-tilbagekald"
 
-#: ../capplets/common/gconf-property-editor.c:196
+#: ../capplets/common/gconf-property-editor.c:159
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres til GConf fra "
 "kontrollen"
 
-#: ../capplets/common/gconf-property-editor.c:201
+#: ../capplets/common/gconf-property-editor.c:164
 msgid "UI Control"
 msgstr "Grænsefladekontrol"
 
-#: ../capplets/common/gconf-property-editor.c:202
+#: ../capplets/common/gconf-property-editor.c:165
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt der kontrollerer egenskaben (normalt en kontrol)"
 
-#: ../capplets/common/gconf-property-editor.c:217
+#: ../capplets/common/gconf-property-editor.c:180
 msgid "Property editor object data"
 msgstr "Objektdata for egenskabsredigering"
 
-#: ../capplets/common/gconf-property-editor.c:218
+#: ../capplets/common/gconf-property-editor.c:181
 msgid "Custom data required by the specific property editor"
 msgstr ""
 "Brugerdefinerede data som behøves af den specifikke egenskabsredigering"
 
-#: ../capplets/common/gconf-property-editor.c:224
+#: ../capplets/common/gconf-property-editor.c:187
 msgid "Property editor data freeing callback"
 msgstr "Datafrigørelsestilbagekald for egenskabsredigering"
 
-#: ../capplets/common/gconf-property-editor.c:225
+#: ../capplets/common/gconf-property-editor.c:188
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Tilbagekald som bliver udført når objektdata for egenskabsredigeringen skal "
 "frigøres"
 
-#: ../capplets/common/gconf-property-editor.c:1468
+#: ../capplets/common/gconf-property-editor.c:1429
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1340,7 +1398,7 @@ msgstr ""
 "Sikr dig at den eksisterer og prøv igen, eller vælg et andet "
 "baggrundsbillede."
 
-#: ../capplets/common/gconf-property-editor.c:1476
+#: ../capplets/common/gconf-property-editor.c:1437
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1353,41 +1411,68 @@ msgstr ""
 "\n"
 "Vælg venligst et andet billede i stedet for."
 
-#: ../capplets/common/gconf-property-editor.c:1595
+#: ../capplets/common/gconf-property-editor.c:1556
 msgid "Please select an image."
 msgstr "Vælg venligst et billede."
 
-#: ../capplets/common/gconf-property-editor.c:1600
+#: ../capplets/common/gconf-property-editor.c:1561
 msgid "_Select"
 msgstr "_Vælg"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:635
 msgid "Default Pointer - Current"
 msgstr "Standardmarkør - aktuel"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "White Pointer"
 msgstr "Hvid markør"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:640
 msgid "White Pointer - Current"
 msgstr "Hvid markør - aktuel"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "Large Pointer"
 msgstr "Stor markør"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:645
 msgid "Large Pointer - Current"
 msgstr "Stor markør - aktuel"
 
-#: ../capplets/common/gnome-theme-info.c:653
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large White Pointer - Current"
 msgstr "Stor hvid markør - aktuel"
 
-#: ../capplets/common/gnome-theme-info.c:654
+#: ../capplets/common/gnome-theme-info.c:650
 msgid "Large White Pointer"
 msgstr "Stor hvid markør"
+
+#: ../capplets/common/gnome-theme-info.c:1620
+#, c-format
+msgid ""
+"This theme will not look as intended because the required GTK+ theme '%s' is "
+"not installed."
+msgstr ""
+"Dette tema vil ikke se ud som ønsket, da det påkrævede GTK+-tema \"%s\" ikke "
+"er installeret."
+
+#: ../capplets/common/gnome-theme-info.c:1628
+#, c-format
+msgid ""
+"This theme will not look as intended because the required window manager "
+"theme '%s' is not installed."
+msgstr ""
+"Dette tema vil ikke se ud som ønsket, da det påkrævede "
+"vindueshåndteringstema \"%s\" ikke er installeret."
+
+#: ../capplets/common/gnome-theme-info.c:1635
+#, c-format
+msgid ""
+"This theme will not look as intended because the required icon theme '%s' is "
+"not installed."
+msgstr ""
+"Dette tema vil ikke se ud som ønsket, da det påkrævede ikontema \"%s\" ikke "
+"er installeret."
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
@@ -1406,29 +1491,26 @@ msgstr "Start den foretrukne visuelle hjælpeteknologi"
 msgid "Visual Assistance"
 msgstr "Visuel assistance"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:112
-#: ../capplets/default-applications/gnome-da-capplet.c:133
-#: ../capplets/default-applications/gnome-da-capplet.c:177
-#: ../capplets/default-applications/gnome-da-capplet.c:222
-#: ../capplets/default-applications/gnome-da-capplet.c:279
-#: ../capplets/default-applications/gnome-da-capplet.c:330
-#: ../capplets/default-applications/gnome-da-capplet.c:381
-#: ../capplets/default-applications/gnome-da-capplet.c:434
-#: ../capplets/default-applications/gnome-da-capplet.c:484
-#: ../capplets/default-applications/gnome-da-capplet.c:877
-#: ../capplets/default-applications/gnome-da-capplet.c:899
+#: ../capplets/default-applications/gnome-da-capplet.c:94
+#: ../capplets/default-applications/gnome-da-capplet.c:345
+#: ../capplets/default-applications/gnome-da-capplet.c:366
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Fejl ved gemning af konfiguration: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1100
+#: ../capplets/default-applications/gnome-da-capplet.c:650
 msgid "Could not load the main interface"
 msgstr "Kunne ikke indlæse hovedgrænseflade"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:1102
+#: ../capplets/default-applications/gnome-da-capplet.c:652
 msgid "Please make sure that the applet is properly installed"
 msgstr "Kontrollér venligst at panelprogrammet er installeret korrekt"
+
+# ????
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/default-applications/gnome-da-capplet.c:879
+msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
+msgstr "Angiv navnet på siden der skal vises (internet|multimedia|system|a11y)"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "<b>Image Viewer</b>"
@@ -1471,7 +1553,7 @@ msgid "<b>Web Browser</b>"
 msgstr "<b>Webbrowser</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "Accessibility"
 msgstr "Tilgængelighed"
@@ -1734,6 +1816,56 @@ msgstr "Totem - filmafspiller"
 msgid "aterm"
 msgstr "aterm"
 
+#: ../capplets/display/display-capplet.glade.h:1
+msgid "Include _Panel"
+msgstr "Inkludér _panel"
+
+#. Translators:  this is the feature where what you see on your laptop's
+#. * screen is the same as your external monitor.  Here, "Mirror" is being
+#. * used as an adjective, not as a verb.  For example, the Spanish
+#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#.
+#: ../capplets/display/display-capplet.glade.h:2
+#: ../capplets/display/xrandr-capplet.c:1319
+msgid "Mirror Screens"
+msgstr "Klonede skærme"
+
+#: ../capplets/display/display-capplet.glade.h:3
+msgid "Monitor Resolution Settings"
+msgstr "Indstillinger for skærmopløsning"
+
+#: ../capplets/display/display-capplet.glade.h:4
+msgid ""
+"Normal\n"
+"Left\n"
+"Right\n"
+"Upside-down\n"
+msgstr ""
+"Normal\n"
+"Venstre\n"
+"Højre\n"
+"På hovedet\n"
+
+#: ../capplets/display/display-capplet.glade.h:9
+msgid "R_otation"
+msgstr "R_otation"
+
+#: ../capplets/display/display-capplet.glade.h:10
+msgid "Re_fresh Rate:"
+msgstr "Optegnings_frekvens:"
+
+#: ../capplets/display/display-capplet.glade.h:11
+msgid "_Detect Displays"
+msgstr "_Detektér skærme"
+
+#: ../capplets/display/display-capplet.glade.h:12
+msgid "_Resolution"
+msgstr "_Opløsning"
+
+#: ../capplets/display/display-capplet.glade.h:13
+msgid "_Show Displays in Panel"
+msgstr "_Vis skærme i panel"
+
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Skift skærmopløsning"
@@ -1742,107 +1874,40 @@ msgstr "Skift skærmopløsning"
 msgid "Screen Resolution"
 msgstr "Skærmopløsning"
 
-#: ../capplets/display/main.c:29
+#: ../capplets/display/xrandr-capplet.c:412
+#: ../capplets/display/xrandr-capplet.c:450
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/main.c:30
+#: ../capplets/display/xrandr-capplet.c:413
 msgid "Left"
 msgstr "Venstre"
 
-#: ../capplets/display/main.c:31
-msgid "Inverted"
-msgstr "Omvendt"
-
-#: ../capplets/display/main.c:32
+#: ../capplets/display/xrandr-capplet.c:414
 msgid "Right"
 msgstr "Højre"
 
-#: ../capplets/display/main.c:374
+#: ../capplets/display/xrandr-capplet.c:415
+msgid "Upside Down"
+msgstr "På hovedet"
+
+#: ../capplets/display/xrandr-capplet.c:488
+#: ../capplets/display/xrandr-capplet.c:496
+#: ../capplets/display/xrandr-capplet.c:497
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:514
-msgid "_Resolution:"
-msgstr "_Opløsning:"
-
-#: ../capplets/display/main.c:532
-msgid "Re_fresh rate:"
-msgstr "Optegnings_frekvens:"
-
-#: ../capplets/display/main.c:550
-msgid "R_otation:"
-msgstr "R_otation:"
-
-#: ../capplets/display/main.c:569
-msgid "Default Settings"
-msgstr "Forvalgte indstillinger"
-
-#: ../capplets/display/main.c:571
+#: ../capplets/display/xrandr-capplet.c:549
+#: ../capplets/display/xrandr-capplet.c:568
+#: ../capplets/display/xrandr-capplet.c:578
 #, c-format
-msgid "Screen %d Settings\n"
-msgstr "Indstillinger for skærm %d\n"
+msgid "%d x %d"
+msgstr "%d x %d"
 
-#: ../capplets/display/main.c:593
-msgid "Screen Resolution Preferences"
-msgstr "Indstillinger for skærmopløsning"
-
-#: ../capplets/display/main.c:628
-#, c-format
-msgid "_Make default for this computer (%s) only"
-msgstr "Gør til forvalg for denne _maskine (%s) kun"
-
-#: ../capplets/display/main.c:648
-msgid "Options"
-msgstr "Indstillinger"
-
-#: ../capplets/display/main.c:668
-#, c-format
-msgid ""
-"Testing the new settings. If you don't respond in %d second the previous "
-"settings will be restored."
-msgid_plural ""
-"Testing the new settings. If you don't respond in %d seconds the previous "
-"settings will be restored."
-msgstr[0] ""
-"Tester de nye indstillinger. Hvis du ikke svarer inden for %d sekund, vil de "
-"foregående indstillinger blive gendannet."
-msgstr[1] ""
-"Tester de nye indstillinger. Hvis du ikke svarer inden for %d sekunder, vil "
-"de foregående indstillinger blive gendannet."
-
-#: ../capplets/display/main.c:708
-msgid "Keep Resolution"
-msgstr "Behold opløsning"
-
-#: ../capplets/display/main.c:712
-msgid "Do you want to keep this resolution?"
-msgstr "Vil du beholde denne opløsning?"
-
-#: ../capplets/display/main.c:738
-msgid "Use _Previous Resolution"
-msgstr "Benyt _foregående opløsning"
-
-#: ../capplets/display/main.c:739
-msgid "_Keep Resolution"
-msgstr "_Behold opløsning"
-
-#: ../capplets/display/main.c:888
-msgid ""
-"The X server does not support the XRandR extension.  Runtime resolution "
-"changes to the display size are not available."
-msgstr ""
-"X-serveren understøtter ikke XRandR-udvidelsen.  Skift af opløsning under "
-"kørsel er ikke muligt."
-
-#: ../capplets/display/main.c:895
-msgid ""
-"The version of the XRandR extension is incompatible with this program. "
-"Runtime changes to the display size are not available."
-msgstr ""
-"Versionen af XRandR-udvidelsen kan ikke bruges med dette program. Skift af "
-"opløsning under kørsel er ikke muligt."
+#: ../capplets/display/xrandr-capplet.c:560
+msgid "Off"
+msgstr "Slået fra"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -1850,12 +1915,13 @@ msgid "Sound"
 msgstr "Lyd"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
+#: ../libslab/bookmark-agent.c:1154
 msgid "Desktop"
 msgstr "Skrivebord"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
-msgid "New accelerator..."
-msgstr "Ny tastaturgenvej..."
+msgid "New shortcut..."
+msgstr "Ny genvej..."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:163
 #: ../capplets/keybindings/eggcellrendererkeys.c:164
@@ -1881,50 +1947,67 @@ msgid "The type of accelerator."
 msgstr "Genvejstypen."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:112
-#: ../typing-break/drwright.c:483
+#: ../capplets/keybindings/gnome-keybinding-properties.c:90
+#: ../capplets/sound/sound-theme.c:415 ../capplets/sound/sound-theme.c:433
+#: ../capplets/sound/sound-theme.c:543 ../capplets/sound/sound-theme.c:559
+#: ../typing-break/drwright.c:480
 msgid "Disabled"
 msgstr "Deaktiveret"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:523
+#: ../capplets/keybindings/gnome-keybinding-properties.c:171
 msgid "<Unknown Action>"
 msgstr "<ukendt handling>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:915
+#: ../capplets/keybindings/gnome-keybinding-properties.c:804
+msgid "Custom Shortcuts"
+msgstr "Brugertilpassede genvej"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:938
+#, c-format
+msgid "Error saving the new shortcut: %s"
+msgstr "Fejl ved gemning af ny genvej: %s"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1016
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
 "using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
-"Genvejstasten \"%s\" kan ikke bruges da den derved ikke ville kunne bruges "
-"til at skrive med.\n"
-"Prøv venligst med f.eks. Ctrl-, Alt- eller Skift-tasten på samme tid.\n"
+"Genvejen \"%s\" kan ikke bruges da det derved vil være umuligt at skrive med "
+"denne tast.\n"
+"Prøv venligst med f.eks. Ctrl-, Alt- eller Skift-tasten på samme tid."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:944
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1046
 #, c-format
 msgid ""
-"The shortcut \"%s\" is already used for:\n"
-" \"%s\"\n"
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
 msgstr ""
-"Genvejstasten \"%s\" bliver allerede benyttet til:\n"
-" \"%s\"\n"
+"Genvejen \"%s\" bliver allerede benyttet til\n"
+"\"%s\""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:976
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1052
 #, c-format
-msgid "Error setting new accelerator in configuration database: %s\n"
-msgstr "Fejl ved anbringelse af ny genvej i konfigurationsdatabasen: %s\n"
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr ""
+"Hvis du laver genvejen til \"%s\" om, vil \"%s\"-genvejen blive deaktiveret."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1026
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1060
+msgid "_Reassign"
+msgstr "_Omtildel"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1180
 #, c-format
-msgid "Error unsetting accelerator in configuration database: %s\n"
-msgstr "Fejl ved fjernelse af genvej i konfigurationsdatabasen: %s\n"
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "Fejl ved fjernelse af genvej i konfigurationsdatabasen: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1141
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1362
 msgid "Action"
 msgstr "Handling"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1384
 msgid "Shortcut"
 msgstr "Genvej"
 
@@ -1938,35 +2021,40 @@ msgstr "Tastaturgenveje"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new "
-"accelerator, or press backspace to clear."
+"To edit a shortcut key, click on the corresponding row and type a new key "
+"combination, or press backspace to clear."
 msgstr ""
 "En genvejstast ændres ved at klikke på den tilsvarende række og indtaste en "
-"ny genvej, eller frigøres ved at trykke på tilbagetasten."
+"ny tastekombination, eller frigøres ved at trykke på tilbagetasten."
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Tildel genvejstaster til kommandoer"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:241
-#: ../capplets/keyboard/gnome-keyboard-properties.c:246
-#: ../capplets/sound/sound-properties-capplet.c:1026
-#: ../capplets/sound/sound-properties-capplet.c:1028
+#: ../capplets/keyboard/gnome-keyboard-properties.c:248
+#: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/sound/sound-properties-capplet.c:1185
+#: ../capplets/sound/sound-properties-capplet.c:1187
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Anvend blot indstillingerne og afslut (for kompatibilitet kun; nu håndteret "
 "af dæmon)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:253
+#: ../capplets/keyboard/gnome-keyboard-properties.c:256
+#: ../capplets/sound/sound-properties-capplet.c:1189
+msgid "Retrieve and store legacy settings"
+msgstr "Fremskaf og gem gamle indstillinger"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:260
 msgid "Start the page with the typing break settings showing"
 msgstr "Start siden med tastepauseindstillingerne"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:258
+#: ../capplets/keyboard/gnome-keyboard-properties.c:265
 msgid "Start the page with the accessibility settings showing"
 msgstr "Start siden med tilgængeligedsindstillinger synlige"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:267
+#: ../capplets/keyboard/gnome-keyboard-properties.c:274
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Gnome tastaturindstillinger"
 
@@ -1994,41 +2082,41 @@ msgstr "<b>Langsomme taster</b>"
 msgid "<b>Sticky Keys</b>"
 msgstr "<b>Blivende taster</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "<b>_Lock screen to enforce typing break</b>"
-msgstr "<b>_Lås skærm for at gennemtvinge tastepauser</b>"
-
 #. fast acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Hurtig</i></small>"
 
 #. long delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lang</i></small>"
 
 #. short delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kort</i></small>"
 
 #. slow acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Langsom</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_cceleration:"
 msgstr "A_cceleration:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "All_ow postponing of breaks"
 msgstr "Tillad _udsættelse af pauser"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Audio _Feedback..."
+msgstr "Lyd_tilbagemelding..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Beep when _accessibility features are turned on or off"
@@ -2060,77 +2148,85 @@ msgid "Beep when key is _rejected"
 msgstr "Bip når tast af_vises"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "By _country"
+msgstr "Efter _land"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+msgid "By _language"
+msgstr "Efter _sprog"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Om pauser må udskydes"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Choose a Keyboard Model"
 msgstr "Vælg en tastaturmodel"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Choose a Layout"
 msgstr "Vælg et layout"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Cursor _blinks in text fields"
 msgstr "Markør _blinker i tekstfelter"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:31
 msgid "Cursor blinks speed"
 msgstr "Markør blinke-hastighed"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:32
 msgid "D_elay:"
 msgstr "V_entetid:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr "_Deaktivér blivende taster hvis to taster holdes nede samtidig"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Duration of the break when typing is disallowed"
 msgstr "Varighed af pausen når tastetryk ikke er tilladt"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "Duration of work before forcing a break"
 msgstr "Varighed af arbejdstiden før en pause gennemtvinges"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:36
 msgid "General"
 msgstr "Generelt"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "Key presses _repeat when key is held down"
 msgstr "_Gentag tastetryk når en tast holdes ned"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "Keyboard Accessibility Notifications"
-msgstr "Påmindelser for tastaturtilgængelighed"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+msgid "Keyboard Accessibility Audio Feedback"
+msgstr "Lydtilbagemelding for tastaturtilgængelighed"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "Keyboard Layout Options"
 msgstr "Indstillinger for tastaturlayout"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "Keyboard Preferences"
 msgstr "Indstillinger for tastatur"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "Keyboard _model:"
 msgstr "Tastatur_model:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "Layout _Options..."
 msgstr "Layout_valg..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "Layouts"
 msgstr "Layout"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -2138,117 +2234,121 @@ msgstr ""
 "Lås skærm efter et bestemt tidsrum for at hjælpe med at forebygge skader fra "
 "gentaget tastaturarbejde"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "Mouse Keys"
 msgstr "Musetaster"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "Preview:"
 msgstr "Forhåndsvisning:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
 msgid "Repeat keys speed"
 msgstr "Taste-gentagelseshastighed"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
 msgid "Reset to De_faults"
 msgstr "Nulstil til _standardværdier"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
 msgid "S_peed:"
 msgstr "_Fart:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
 msgid "Separate _layout for each window"
 msgstr "Separat _layout for hvert vindue"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
 msgid "Typing Break"
 msgstr "Tastepause"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
-msgid "_Allow to control the pointer using the keyboard"
-msgstr "_Tillad markørkontrol med tastaturet"
-
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
-msgid "_Allow to turn accessibility features on and off from the keyboard"
+msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr ""
-"_Tillad aktivering/deaktivering af tilgængelighedsfaciliteter med tastaturet"
+"_Tilgængelighedsfunktionalitet kan aktiveres/deaktiveres med tastaturgenveje"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
 msgid "_Break interval lasts:"
 msgstr "_Pauseinterval tager:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+msgid "_Country:"
+msgstr "_Land:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:43
 msgid "_Delay:"
 msgstr "_Ventetid:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
 msgid "_Ignore fast duplicate keypresses"
 msgstr "_Ignorér hurtige dobbelte tastetryk"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
-msgid "_Layouts:"
-msgstr "_Layout:"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
+msgid "_Language:"
+msgstr "_Sprog:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+msgid "_Lock screen to enforce typing break"
+msgstr "_Lås skærm for at gennemtvinge tastepauser"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
 msgid "_Models:"
 msgstr "_Modeller:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
-msgid "_Notifications..."
-msgstr "_Påmindelser..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
 msgid "_Only accept long keypresses"
 msgstr "_Acceptér kun langvarige tastetryk"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+msgid "_Pointer can be controlled using the keypad"
+msgstr "_Markøren kan styres med numerisk tastatur"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
 msgid "_Selected layouts:"
 msgstr "_Valgte layout:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
-msgid "_Simulate simultanous keypresses"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
+msgid "_Simulate simultaneous keypresses"
 msgstr "_Simulér samtidige tastetryk"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
 msgid "_Speed:"
 msgstr "_Fart:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
 msgid "_Type to test settings:"
 msgstr "_Tast for at teste indstillinger:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
 msgid "_Variants:"
 msgstr "_Varianter:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
 msgid "_Vendors:"
 msgstr "_Forhandlere:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
 msgid "_Work interval lasts:"
 msgstr "_Arbejdsinterval tager:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
 msgid "minutes"
 msgstr "minutter"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:81
 msgid "Unknown"
 msgstr "Ukendt"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbltadd.c:211
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:307
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
-msgid "Default"
-msgstr "Forvalg"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:301
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:305
 msgid "Layout"
 msgstr "Layout"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:311
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:211
+#: ../capplets/sound/sound-theme.c:419 ../capplets/sound/sound-theme.c:539
+msgid "Default"
+msgstr "Forvalg"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:169
 msgid "Vendors"
@@ -2295,6 +2395,15 @@ msgstr "Flyt ned"
 #: ../capplets/mouse/gnome-mouse-accessibility.c:109
 msgid "gesture|Disabled"
 msgstr "Deaktiveret"
+
+#. TRANSLATORS: don't translate the terms in brackets
+#: ../capplets/mouse/gnome-mouse-properties.c:443
+msgid "Specify the name of the page to show (general|accessibility)"
+msgstr "Angiv navnet på siden der skal vises (general|accessibility)"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:452
+msgid "- GNOME Mouse Preferences"
+msgstr "- GNOME-museindstillinger"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid "<b>Double-Click Timeout</b>"
@@ -2470,20 +2579,20 @@ msgid "<b>_Use authentication</b>"
 msgstr "<b>_Benyt brugerverifikation</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:6
-msgid "Advanced Configuration"
-msgstr "Avanceret konfiguration"
+msgid "Autoconfiguration _URL:"
+msgstr "_URL til autokonfiguration:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:7
-msgid "Autoconfiguration _URL:"
-msgstr "_URL til automatisk konf.:"
-
-#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "HTTP Proxy Details"
 msgstr "Detaljer for HTTP-proxy"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:9
+#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "H_TTP proxy:"
 msgstr "H_TTP-proxy:"
+
+#: ../capplets/network/gnome-network-preferences.glade.h:9
+msgid "Ignored Hosts"
+msgstr "Ignorerede værter"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Preferences"
@@ -2539,98 +2648,102 @@ msgstr "Ukendt lydstyrkekontrol %d"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "Kunne ikke konstruere testrørledning til \"%s\""
 
-#: ../capplets/sound/sound-properties-capplet.c:325
-#: ../capplets/sound/sound-properties-capplet.c:378
+#: ../capplets/sound/sound-properties-capplet.c:260
+#: ../capplets/sound/sound-properties-capplet.c:381
 msgid "Not connected"
 msgstr "Ikke tilsluttet"
 
-#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:829
 msgid "Autodetect"
 msgstr "Autodetektér"
 
-#: ../capplets/sound/sound-properties-capplet.c:666
-#: ../capplets/sound/sound-properties-capplet.c:667
+#: ../capplets/sound/sound-properties-capplet.c:834
+#: ../capplets/sound/sound-properties-capplet.c:835
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:668
+#: ../capplets/sound/sound-properties-capplet.c:836
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:669
-#: ../capplets/sound/sound-properties-capplet.c:670
+#: ../capplets/sound/sound-properties-capplet.c:837
+#: ../capplets/sound/sound-properties-capplet.c:838
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:671
-#: ../capplets/sound/sound-properties-capplet.c:672
+#: ../capplets/sound/sound-properties-capplet.c:841
+#: ../capplets/sound/sound-properties-capplet.c:844
 msgid "OSS - Open Sound System"
 msgstr "OSS - Open Sound System"
 
-#: ../capplets/sound/sound-properties-capplet.c:673
-#: ../capplets/sound/sound-properties-capplet.c:674
+#: ../capplets/sound/sound-properties-capplet.c:846
+#: ../capplets/sound/sound-properties-capplet.c:847
 msgid "PulseAudio Sound Server"
 msgstr "PulseAudio Sound Server"
 
-#: ../capplets/sound/sound-properties-capplet.c:675
+#: ../capplets/sound/sound-properties-capplet.c:848
 msgid "Test Sound"
 msgstr "Test lyd"
 
-#: ../capplets/sound/sound-properties-capplet.c:676
+#: ../capplets/sound/sound-properties-capplet.c:849
 msgid "Silence"
 msgstr "Stilhed"
 
-#: ../capplets/sound/sound-properties-capplet.c:1043
+#: ../capplets/sound/sound-properties-capplet.c:1202
 msgid "- GNOME Sound Preferences"
-msgstr "- Gnome Lydindstillinger"
+msgstr "- GNOME-Lydindstillinger"
 
 #: ../capplets/sound/sound-properties.glade.h:1
+msgid "<b>Alerts and Sound Effects</b>"
+msgstr "<b>Påmindelser og lydeffekter</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:2
 msgid "<b>Audio Conferencing</b>"
 msgstr "<b>Lydkonferencer</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:3
 msgid "<b>Default Mixer Tracks</b>"
 msgstr "<b>Standardmikserspor</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Music and Movies</b>"
 msgstr "<b>Musik og film</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<b>Sound Events</b>"
 msgstr "<b>Lydbegivenheder</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "<b>Sound Theme</b>"
+msgstr "<b>Lydtema</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Tester...</span>"
 
 # OK vs. O.k.
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "Click OK to finish."
 msgstr "Klik O.k. for at færdiggøre."
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "Enheder"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "E_nable software sound mixing (ESD)"
-msgstr "A_ktivér software lydmiks (ESD)"
-
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "Flash _entire screen"
-msgstr "Blink med _hele skærmen"
-
 #: ../capplets/sound/sound-properties.glade.h:10
-msgid "Flash _window titlebar"
-msgstr "Blink med _vinduestitellinje"
+msgid "Play _alert sound"
+msgstr "Afspil _påmindelseslyd"
 
 #: ../capplets/sound/sound-properties.glade.h:11
+msgid "Play _sound effects when buttons are clicked"
+msgstr "Afspil _lydeffekter når der klikkes på knapper"
+
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "S_ound playback:"
 msgstr "L_ydafspilning:"
 
 # Tvetydig: "tracks to control | with the keyboard" eller "tracks | to control with the keyboard". Heldigvis kan vi bare oversætte det så den samme flertydighed findes på dansk
-#: ../capplets/sound/sound-properties.glade.h:12
+#: ../capplets/sound/sound-properties.glade.h:13
 msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
@@ -2638,25 +2751,22 @@ msgstr ""
 "Vælg enheden og sporene som styres med tastaturet. Brug Skift- og Ctrl-"
 "knapperne til at vælge flere spor hvis ønsket."
 
-#: ../capplets/sound/sound-properties.glade.h:13
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "So_und playback:"
 msgstr "L_ydafspilning:"
 
-#: ../capplets/sound/sound-properties.glade.h:14
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "Sou_nd capture:"
 msgstr "Ly_doptagelse:"
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-theme.c:461 ../capplets/sound/sound-theme.c:1016
 msgid "Sound Preferences"
 msgstr "Lydindstillinger"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:17
 msgid "Sounds"
 msgstr "Lyde"
-
-#: ../capplets/sound/sound-properties.glade.h:17
-msgid "System Beep"
-msgstr "Systembip"
 
 #: ../capplets/sound/sound-properties.glade.h:18
 msgid "Test"
@@ -2672,20 +2782,36 @@ msgid "_Device:"
 msgstr "_Enhed:"
 
 #: ../capplets/sound/sound-properties.glade.h:21
-msgid "_Enable system beep"
-msgstr "_Aktivér systembip"
+msgid "_Play alerts and sound effects"
+msgstr "_Afspil påmindelser og lydeffekter"
 
 #: ../capplets/sound/sound-properties.glade.h:22
-msgid "_Play system sounds"
-msgstr "Afs_pil systemlyde"
-
-#: ../capplets/sound/sound-properties.glade.h:23
 msgid "_Sound playback:"
 msgstr "_Lydafspilning:"
 
-#: ../capplets/sound/sound-properties.glade.h:24
-msgid "_Visual system beep"
-msgstr "_Visuel systembip"
+#: ../capplets/sound/sound-theme.c:437 ../capplets/sound/sound-theme.c:563
+msgid "Flash screen"
+msgstr "Blink med skærmen"
+
+#: ../capplets/sound/sound-theme.c:441 ../capplets/sound/sound-theme.c:567
+msgid "Flash window"
+msgstr "Blink med vindue"
+
+#: ../capplets/sound/sound-theme.c:463 ../capplets/sound/sound-theme.c:1018
+msgid "Testing event sound"
+msgstr "Tester begivenhedslyd"
+
+#: ../capplets/sound/sound-theme.c:482
+msgid "Select Sound File"
+msgstr "Vælg en lydfil"
+
+#: ../capplets/sound/sound-theme.c:493
+msgid "Sound files"
+msgstr "Lydfiler"
+
+#: ../capplets/sound/sound-theme.c:547
+msgid "Custom..."
+msgstr "Tilpas..."
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
@@ -2762,37 +2888,37 @@ msgid "Windows"
 msgstr "Vinduer"
 
 #. make start action
-#: ../libslab/application-tile.c:369
+#: ../libslab/application-tile.c:372
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>Start %s</b>"
 
-#: ../libslab/application-tile.c:388
+#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1056
 msgid "Help"
 msgstr "Hjælp"
 
 # Verbum eller subst?
-#: ../libslab/application-tile.c:435
+#: ../libslab/application-tile.c:438
 msgid "Upgrade"
 msgstr "Opgradér"
 
-#: ../libslab/application-tile.c:450
+#: ../libslab/application-tile.c:453
 msgid "Uninstall"
 msgstr "Afinstallér"
 
-#: ../libslab/application-tile.c:777 ../libslab/document-tile.c:737
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:715
 msgid "Remove from Favorites"
 msgstr "Fjern fra favoritter"
 
-#: ../libslab/application-tile.c:779 ../libslab/document-tile.c:739
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:717
 msgid "Add to Favorites"
 msgstr "Føj til favoritter"
 
-#: ../libslab/application-tile.c:864
+#: ../libslab/application-tile.c:867
 msgid "Remove from Startup Programs"
 msgstr "Fjern fra opstartsprogrammer"
 
-#: ../libslab/application-tile.c:866
+#: ../libslab/application-tile.c:869
 msgid "Add to Startup Programs"
 msgstr "Føj til opstartsprogrammer"
 
@@ -2811,185 +2937,121 @@ msgstr ""
 msgid "Other"
 msgstr "Anden"
 
+#: ../libslab/bookmark-agent.c:1058
+msgid "Lock Screen"
+msgstr "Lås skærm"
+
 #: ../libslab/bookmark-agent.c:1060
+msgid "Logout"
+msgstr "Logud"
+
+#: ../libslab/bookmark-agent.c:1062
+msgid "Shutdown"
+msgstr "Luk ned"
+
+#: ../libslab/bookmark-agent.c:1087
 msgid "New Spreadsheet"
 msgstr "Nyt regneark"
 
-#: ../libslab/bookmark-agent.c:1064
+#: ../libslab/bookmark-agent.c:1092
 msgid "New Document"
 msgstr "Nyt dokument"
 
-#: ../libslab/bookmark-agent.c:1114
+#: ../libslab/bookmark-agent.c:1143
 msgid "Home"
 msgstr "Hjem"
 
-#: ../libslab/bookmark-agent.c:1130
+#: ../libslab/bookmark-agent.c:1148
+msgid "Documents"
+msgstr "Dokumenter"
+
+#: ../libslab/bookmark-agent.c:1161
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../libslab/bookmark-agent.c:1134
+#: ../libslab/bookmark-agent.c:1165
 msgid "Network Servers"
 msgstr "Netværksservere"
 
-#: ../libslab/bookmark-agent.c:1163
+#: ../libslab/bookmark-agent.c:1194
 msgid "Search"
 msgstr "Søg"
 
 #. make open with default action
-#: ../libslab/directory-tile.c:170
+#: ../libslab/directory-tile.c:171
 #, c-format
 msgid "<b>Open</b>"
 msgstr "<b>Åbn</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:189 ../libslab/document-tile.c:228
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:235
 msgid "Rename..."
 msgstr "Omdøb..."
 
-#: ../libslab/directory-tile.c:203 ../libslab/directory-tile.c:212
-#: ../libslab/document-tile.c:242 ../libslab/document-tile.c:251
+#: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
+#: ../libslab/document-tile.c:249 ../libslab/document-tile.c:258
 msgid "Send To..."
 msgstr "Send til..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:227 ../libslab/document-tile.c:277
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:284
 msgid "Move to Trash"
 msgstr "Flyt til affald"
 
-#: ../libslab/directory-tile.c:237 ../libslab/directory-tile.c:450
-#: ../libslab/document-tile.c:287 ../libslab/document-tile.c:850
+#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:456
+#: ../libslab/document-tile.c:294 ../libslab/document-tile.c:831
 msgid "Delete"
 msgstr "Slet"
 
-#: ../libslab/directory-tile.c:575 ../libslab/document-tile.c:1022
+#: ../libslab/directory-tile.c:532 ../libslab/document-tile.c:979
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Er du sikker på at du vil slette \"%s\" permanent?"
 
-#: ../libslab/directory-tile.c:580 ../libslab/document-tile.c:1026
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:980
 msgid "If you delete an item, it is permanently lost."
 msgstr "Hvis du sletter et objekt, er det permanent tabt."
 
-#: ../libslab/document-tile.c:189
+#: ../libslab/document-tile.c:196
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Åbn med \"%s\"</b>"
 
-#: ../libslab/document-tile.c:201
+#: ../libslab/document-tile.c:208
 msgid "Open with Default Application"
 msgstr "Åbn med standardprogram"
 
-#: ../libslab/document-tile.c:212
+#: ../libslab/document-tile.c:219
 msgid "Open in File Manager"
 msgstr "Åbn i filhåndtering"
 
-#: ../libslab/document-tile.c:633
+#: ../libslab/document-tile.c:611
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:640
+#: ../libslab/document-tile.c:618
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#: ../libslab/document-tile.c:648
+#: ../libslab/document-tile.c:626
 msgid "Today %l:%M %p"
 msgstr "I dag %l:%M %p"
 
-#: ../libslab/document-tile.c:658
+#: ../libslab/document-tile.c:636
 msgid "Yesterday %l:%M %p"
 msgstr "I går %l:%M %p"
 
-#: ../libslab/document-tile.c:670
+#: ../libslab/document-tile.c:648
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../libslab/document-tile.c:678
+#: ../libslab/document-tile.c:656
 msgid "%b %d %l:%M %p"
 msgstr "%b %d %l: %M %p"
 
-#: ../libslab/document-tile.c:680
+#: ../libslab/document-tile.c:658
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
-
-#: ../libslab/libslab-bookmarkfile.c:700 ../libslab/libslab-bookmarkfile.c:777
-#: ../libslab/libslab-bookmarkfile.c:856 ../libslab/libslab-bookmarkfile.c:903
-#, c-format
-msgid "Unexpected attribute '%s' for element '%s'"
-msgstr "Uventet egenskab \"%s\" for elementet \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:711 ../libslab/libslab-bookmarkfile.c:788
-#: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
-#, c-format
-msgid "Attribute '%s' of element '%s' not found"
-msgstr "Egenskaben \"%s\" for elementet \"%s\" blev ikke fundet"
-
-#: ../libslab/libslab-bookmarkfile.c:1087
-#: ../libslab/libslab-bookmarkfile.c:1152
-#: ../libslab/libslab-bookmarkfile.c:1216
-#: ../libslab/libslab-bookmarkfile.c:1226
-#, c-format
-msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr "Uventet mærke \"%s\", forventede mærket \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:1112
-#: ../libslab/libslab-bookmarkfile.c:1126
-#: ../libslab/libslab-bookmarkfile.c:1194
-#: ../libslab/libslab-bookmarkfile.c:1246
-#, c-format
-msgid "Unexpected tag '%s' inside '%s'"
-msgstr "Uventet mærke \"%s\" inden i \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:1929
-#, c-format
-msgid "No valid bookmark file found in data dirs"
-msgstr "Ingen gyldig bogmærkefil blev fundet i datakatalogerne"
-
-#: ../libslab/libslab-bookmarkfile.c:2130
-#, c-format
-msgid "A bookmark for URI '%s' already exists"
-msgstr "Et bogmærke for URI'en \"%s\" findes allerede"
-
-#: ../libslab/libslab-bookmarkfile.c:2176
-#: ../libslab/libslab-bookmarkfile.c:2333
-#: ../libslab/libslab-bookmarkfile.c:2418
-#: ../libslab/libslab-bookmarkfile.c:2499
-#: ../libslab/libslab-bookmarkfile.c:2584
-#: ../libslab/libslab-bookmarkfile.c:2667
-#: ../libslab/libslab-bookmarkfile.c:2745
-#: ../libslab/libslab-bookmarkfile.c:2824
-#: ../libslab/libslab-bookmarkfile.c:2866
-#: ../libslab/libslab-bookmarkfile.c:2963
-#: ../libslab/libslab-bookmarkfile.c:3089
-#: ../libslab/libslab-bookmarkfile.c:3279
-#: ../libslab/libslab-bookmarkfile.c:3355
-#: ../libslab/libslab-bookmarkfile.c:3508
-#: ../libslab/libslab-bookmarkfile.c:3573
-#: ../libslab/libslab-bookmarkfile.c:3663
-#: ../libslab/libslab-bookmarkfile.c:3790
-#, c-format
-msgid "No bookmark found for URI '%s'"
-msgstr "Intet bogmærke fundet for URI'en \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:2508
-#, c-format
-msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr "Ingen MIME-type defineret i bogmærket for URI'en \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:2593
-#, c-format
-msgid "No private flag has been defined in bookmark for URI '%s'"
-msgstr "Ingen private flag er defineret i bogmærket for URI'en \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:2972
-#, c-format
-msgid "No groups set in bookmark for URI '%s'"
-msgstr "Ingen grupper anført i bogmærket for URI'en \"%s\""
-
-#: ../libslab/libslab-bookmarkfile.c:3373
-#: ../libslab/libslab-bookmarkfile.c:3518
-#, c-format
-msgid "No application with name '%s' registered a bookmark for '%s'"
-msgstr "Intet program ved navn \"%s\" har registreret et bogmærke for \"%s\""
 
 #: ../libslab/search-bar.c:255
 msgid "Find Now"
@@ -3005,86 +3067,33 @@ msgstr "<b>Åbn %s</b>"
 msgid "Remove from System Items"
 msgstr "Fjern fra systemelementer"
 
-#: ../libsounds/sound-view.c:44
-msgid "Login"
-msgstr "Logind"
-
-#: ../libsounds/sound-view.c:45
-msgid "Logout"
-msgstr "Logud"
-
-#: ../libsounds/sound-view.c:46
-msgid "Boing"
-msgstr "Boing"
-
-#: ../libsounds/sound-view.c:47
-msgid "Siren"
-msgstr "Sirene"
-
-#: ../libsounds/sound-view.c:48
-msgid "Clink"
-msgstr "Klink"
-
-#: ../libsounds/sound-view.c:49
-msgid "Beep"
-msgstr "Bip"
-
-#: ../libsounds/sound-view.c:50
-msgid "No sound"
-msgstr "Ingen lyd"
-
-#: ../libsounds/sound-view.c:132
-msgid "Sound not set for this event."
-msgstr "Lyd ikke angivet for denne hændelse."
-
-#: ../libsounds/sound-view.c:141
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"Lydfilen for denne hændelse eksisterer ikke.\n"
-"Du kan installere programpakken gnome-audio for et sæt standardlyde."
-
-#: ../libsounds/sound-view.c:152
-msgid "The sound file for this event does not exist."
-msgstr "Lydfilen for denne hændelse eksisterer ikke."
-
-#: ../libsounds/sound-view.c:183
-msgid "Select Sound File"
-msgstr "Vælg en lydfil"
-
-#: ../libsounds/sound-view.c:210
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "Filen %s er ikke en gyldig wav-fil"
-
-#: ../libsounds/sound-view.c:271
-msgid "Select sound file..."
-msgstr "Vælg lydfil..."
-
-#: ../libsounds/sound-view.c:373
-msgid "System Sounds"
-msgstr "Systemlyde"
-
 #: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
 "Vindueshåndteringen \"%s\" har ikke registreret et konfigurationsværktøj\n"
 
-#: ../libwindow-settings/metacity-window-manager.c:390
+#: ../libwindow-settings/metacity-window-manager.c:402
 msgid "Maximize"
 msgstr "Maksimér"
 
-#: ../libwindow-settings/metacity-window-manager.c:391
+#: ../libwindow-settings/metacity-window-manager.c:403
+msgid "Maximize Vertically"
+msgstr "Maksimér lodret"
+
+#: ../libwindow-settings/metacity-window-manager.c:404
+msgid "Maximize Horizontally"
+msgstr "Maksimér vandret"
+
+#: ../libwindow-settings/metacity-window-manager.c:405
 msgid "Minimize"
 msgstr "Minimér"
 
-#: ../libwindow-settings/metacity-window-manager.c:392
+#: ../libwindow-settings/metacity-window-manager.c:406
 msgid "Roll up"
 msgstr "Rul op"
 
-#: ../libwindow-settings/metacity-window-manager.c:393
+#: ../libwindow-settings/metacity-window-manager.c:407
 msgid "None"
 msgstr "Ingen"
 
@@ -3192,41 +3201,41 @@ msgstr ""
 msgid "The GNOME configuration tool"
 msgstr "Et centralt opsætningsværktøj til Gnome"
 
-#: ../typing-break/drw-break-window.c:188
+#: ../typing-break/drw-break-window.c:189
 msgid "_Postpone Break"
 msgstr "_Udsæt pause"
 
-#: ../typing-break/drw-break-window.c:244
+#: ../typing-break/drw-break-window.c:245
 msgid "Take a break!"
 msgstr "Tag en pause!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #. translators: keep the initial "/"
-#: ../typing-break/drwright.c:129
+#: ../typing-break/drwright.c:130
 msgid "/_Preferences"
 msgstr "/_Indstillinger"
 
-#: ../typing-break/drwright.c:130
+#: ../typing-break/drwright.c:131
 msgid "/_About"
 msgstr "/_Om"
 
-#: ../typing-break/drwright.c:132
+#: ../typing-break/drwright.c:133
 msgid "/_Take a Break"
 msgstr "/_Tag en pause"
 
-#: ../typing-break/drwright.c:501
+#: ../typing-break/drwright.c:489
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minut til næste pause"
 msgstr[1] "%d minutter til næste pause"
 
-#: ../typing-break/drwright.c:505
+#: ../typing-break/drwright.c:493
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Mindre end et minut til næste pause"
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:580
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3234,19 +3243,19 @@ msgid ""
 msgstr ""
 "Kunne ikke vise vinduet for tastepauseindstillinger med den følgende fejl: %s"
 
-#: ../typing-break/drwright.c:611
+#: ../typing-break/drwright.c:599
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Skrevet af Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:612
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Guf for øjnene tilføjet af Anders Carlsson"
 
-#: ../typing-break/drwright.c:621
+#: ../typing-break/drwright.c:609
 msgid "A computer break reminder."
 msgstr "Et program til at påminde om tastepauser."
 
-#: ../typing-break/drwright.c:623
+#: ../typing-break/drwright.c:611
 msgid "translator-credits"
 msgstr ""
 "Kenneth Christiansen\n"
@@ -3284,263 +3293,469 @@ msgstr ""
 "ved at højreklikke på panelet og vælge \"Tilføj til panel\", markere "
 "\"Statusområde\" og klikke \"tilføj\"."
 
-#: ../vfs-methods/fontilus/fontilus-context-menu.c:132
-msgid "Set as Application Font"
-msgstr "Vælg som programskrifttype"
+#~ msgctxt "Sound event"
+#~ msgid "Alert sound"
+#~ msgstr "Påmindelseslyd"
 
-#: ../vfs-methods/fontilus/fontilus-context-menu.c:133
-msgid "Sets the default application font"
-msgstr "Sætter standardprogram-skrifttypen"
+#~ msgctxt "Sound event"
+#~ msgid "Visual alert"
+#~ msgstr "Visuel påmindelse"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr ""
-"Hvis dette er sat til sand, oprettes miniaturebilleder for OpenType-"
-"skrifttyper."
+#~ msgctxt "Sound event"
+#~ msgid "Windows and Buttons"
+#~ msgstr "Vinduer og knapper"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr ""
-"Hvis dette er sat til sand, oprettes miniaturebilleder for PCF-skrifttyper."
+#~ msgctxt "Sound event"
+#~ msgid "Button clicked"
+#~ msgstr "Klik på knap"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr ""
-"Hvis dette er sat til sand, oprettes miniaturebilleder for TrueType-"
-"skrifttyper."
+#~ msgctxt "Sound event"
+#~ msgid "Toggle button clicked"
+#~ msgstr "Klik på skifteknap"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr ""
-"Hvis dette er sat til sand, oprettes miniaturebilleder for Type1-skrifttyper."
+#~ msgctxt "Sound event"
+#~ msgid "Window maximized"
+#~ msgstr "Vindue maksimeret"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"Sæt denne nøgle til kommandoen til at oprette miniature til OpenType-"
-"skrifttyper."
+#~ msgctxt "Sound event"
+#~ msgid "Window unmaximized"
+#~ msgstr "Vindue afmaksimeret"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Sæt denne nøgle til kommandoen til at oprette miniature til PCF-skrifttyper."
+#~ msgctxt "Sound event"
+#~ msgid "Window minimised"
+#~ msgstr "Vindue minimeret"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"Sæt denne nøgle til kommandoen til at oprette miniature til TrueType-"
-"skrifttyper."
+#~ msgctxt "Sound event"
+#~ msgid "Desktop"
+#~ msgstr "Skrivebord"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"Sæt denne nøgle til kommandoen til at oprette miniature til Type1-"
-"skrifttyper."
+#~ msgctxt "Sound event"
+#~ msgid "Login"
+#~ msgstr "Logind"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "Miniaturekommando for OpenType-skrifttyper"
+#~ msgctxt "Sound event"
+#~ msgid "Logout"
+#~ msgstr "Logud"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "Miniaturekommando for PCF-skrifttyper"
+#~ msgctxt "Sound event"
+#~ msgid "New e-mail"
+#~ msgstr "Nyt e-brev"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "Miniaturekommando for TrueType-skrifttyper"
+#~ msgctxt "Sound event"
+#~ msgid "Empty trash"
+#~ msgstr "Tøm affaldskurv"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "Miniaturekommando for Type1-skrifttyper"
+#~ msgctxt "Sound event"
+#~ msgid "Long action completed (download, CD burning, etc.)"
+#~ msgstr "Langvarig handling fuldført (download, cd-brænding osv.)"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "Opret miniaturer for OpenType-skrifttyper"
+#~ msgctxt "Sound event"
+#~ msgid "Alerts"
+#~ msgstr "Påmindelser"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "Opret miniaturer for PCF-skrifttyper"
+#~ msgctxt "Sound event"
+#~ msgid "Information or question"
+#~ msgstr "Information eller spørgsmål"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "Opret miniaturer for TrueType-skrifttyper"
+#~ msgctxt "Sound event"
+#~ msgid "Warning"
+#~ msgstr "Advarsel"
 
-#: ../vfs-methods/fontilus/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "Opret miniaturer for Type1-skrifttyper"
+#~ msgctxt "Sound event"
+#~ msgid "Error"
+#~ msgstr "Fejl"
+
+#~ msgctxt "Sound event"
+#~ msgid "Battery warning"
+#~ msgstr "Batteriadvarsel"
+
+#~ msgid "Enable support for GNOME assistive technologies at login"
+#~ msgstr "Aktivér understøttelse af hjælpeteknologier ved logind"
+
+#~ msgid ""
+#~ "Centered\n"
+#~ "Fill screen\n"
+#~ "Scaled\n"
+#~ "Zoom\n"
+#~ "Tiled"
+#~ msgstr ""
+#~ "Centreret\n"
+#~ "Fyld skærmen\n"
+#~ "Skaleret\n"
+#~ "Forstørret\n"
+#~ "Fliselagt"
+
+#~ msgid ""
+#~ "%s is the path where the theme files will be installed. This can not be "
+#~ "selected as the source location"
+#~ msgstr ""
+#~ "%s er den sti hvor temafilerne vil blive installeret. Dette kan ikke "
+#~ "vælges som kildeplaceringen"
+
+#~ msgid "Just apply settings and quit"
+#~ msgstr "Anvend indstillingerne og afslut"
+
+#~ msgid "Inverted"
+#~ msgstr "Omvendt"
+
+#~ msgid "Default Settings"
+#~ msgstr "Forvalgte indstillinger"
+
+#~ msgid "Screen %d Settings\n"
+#~ msgstr "Indstillinger for skærm %d\n"
+
+#~ msgid "Screen Resolution Preferences"
+#~ msgstr "Indstillinger for skærmopløsning"
+
+#~ msgid "_Make default for this computer (%s) only"
+#~ msgstr "Gør til forvalg for denne _maskine (%s) kun"
+
+#~ msgid "Options"
+#~ msgstr "Indstillinger"
+
+#~ msgid ""
+#~ "Testing the new settings. If you don't respond in %d second the previous "
+#~ "settings will be restored."
+#~ msgid_plural ""
+#~ "Testing the new settings. If you don't respond in %d seconds the previous "
+#~ "settings will be restored."
+#~ msgstr[0] ""
+#~ "Tester de nye indstillinger. Hvis du ikke svarer inden for %d sekund, vil "
+#~ "de foregående indstillinger blive gendannet."
+#~ msgstr[1] ""
+#~ "Tester de nye indstillinger. Hvis du ikke svarer inden for %d sekunder, "
+#~ "vil de foregående indstillinger blive gendannet."
+
+#~ msgid "Keep Resolution"
+#~ msgstr "Behold opløsning"
+
+#~ msgid "Do you want to keep this resolution?"
+#~ msgstr "Vil du beholde denne opløsning?"
+
+#~ msgid "Use _Previous Resolution"
+#~ msgstr "Benyt _foregående opløsning"
+
+#~ msgid "_Keep Resolution"
+#~ msgstr "_Behold opløsning"
+
+#~ msgid ""
+#~ "The X server does not support the XRandR extension.  Runtime resolution "
+#~ "changes to the display size are not available."
+#~ msgstr ""
+#~ "X-serveren understøtter ikke XRandR-udvidelsen.  Skift af opløsning under "
+#~ "kørsel er ikke muligt."
+
+#~ msgid ""
+#~ "The version of the XRandR extension is incompatible with this program. "
+#~ "Runtime changes to the display size are not available."
+#~ msgstr ""
+#~ "Versionen af XRandR-udvidelsen kan ikke bruges med dette program. Skift "
+#~ "af opløsning under kørsel er ikke muligt."
+
+#~ msgid "New accelerator..."
+#~ msgstr "Ny tastaturgenvej..."
+
+#~ msgid "Error setting new accelerator in configuration database: %s\n"
+#~ msgstr "Fejl ved anbringelse af ny genvej i konfigurationsdatabasen: %s\n"
+
+#~ msgid "Keyboard Accessibility Notifications"
+#~ msgstr "Påmindelser for tastaturtilgængelighed"
+
+#~ msgid "_Layouts:"
+#~ msgstr "_Layout:"
+
+#~ msgid "_Notifications..."
+#~ msgstr "_Påmindelser..."
+
+#~ msgid "Advanced Configuration"
+#~ msgstr "Avanceret konfiguration"
+
+#~ msgid "E_nable software sound mixing (ESD)"
+#~ msgstr "A_ktivér software lydmiks (ESD)"
+
+#~ msgid "System Beep"
+#~ msgstr "Systembip"
+
+#~ msgid "_Enable system beep"
+#~ msgstr "_Aktivér systembip"
+
+#~ msgid "_Visual system beep"
+#~ msgstr "_Visuel systembip"
+
+#~ msgid "Unexpected attribute '%s' for element '%s'"
+#~ msgstr "Uventet egenskab \"%s\" for elementet \"%s\""
+
+#~ msgid "Attribute '%s' of element '%s' not found"
+#~ msgstr "Egenskaben \"%s\" for elementet \"%s\" blev ikke fundet"
+
+#~ msgid "Unexpected tag '%s', tag '%s' expected"
+#~ msgstr "Uventet mærke \"%s\", forventede mærket \"%s\""
+
+#~ msgid "Unexpected tag '%s' inside '%s'"
+#~ msgstr "Uventet mærke \"%s\" inden i \"%s\""
+
+#~ msgid "No valid bookmark file found in data dirs"
+#~ msgstr "Ingen gyldig bogmærkefil blev fundet i datakatalogerne"
+
+#~ msgid "A bookmark for URI '%s' already exists"
+#~ msgstr "Et bogmærke for URI'en \"%s\" findes allerede"
+
+#~ msgid "No bookmark found for URI '%s'"
+#~ msgstr "Intet bogmærke fundet for URI'en \"%s\""
+
+#~ msgid "No MIME type defined in the bookmark for URI '%s'"
+#~ msgstr "Ingen MIME-type defineret i bogmærket for URI'en \"%s\""
+
+#~ msgid "No private flag has been defined in bookmark for URI '%s'"
+#~ msgstr "Ingen private flag er defineret i bogmærket for URI'en \"%s\""
+
+#~ msgid "No groups set in bookmark for URI '%s'"
+#~ msgstr "Ingen grupper anført i bogmærket for URI'en \"%s\""
+
+#~ msgid "No application with name '%s' registered a bookmark for '%s'"
+#~ msgstr ""
+#~ "Intet program ved navn \"%s\" har registreret et bogmærke for \"%s\""
+
+#~ msgid "Boing"
+#~ msgstr "Boing"
+
+#~ msgid "Siren"
+#~ msgstr "Sirene"
+
+#~ msgid "Clink"
+#~ msgstr "Klink"
+
+#~ msgid "Beep"
+#~ msgstr "Bip"
+
+#~ msgid "No sound"
+#~ msgstr "Ingen lyd"
+
+#~ msgid "Sound not set for this event."
+#~ msgstr "Lyd ikke angivet for denne hændelse."
+
+#~ msgid ""
+#~ "The sound file for this event does not exist.\n"
+#~ "You may want to install the gnome-audio package for a set of default "
+#~ "sounds."
+#~ msgstr ""
+#~ "Lydfilen for denne hændelse eksisterer ikke.\n"
+#~ "Du kan installere programpakken gnome-audio for et sæt standardlyde."
+
+#~ msgid "The sound file for this event does not exist."
+#~ msgstr "Lydfilen for denne hændelse eksisterer ikke."
+
+#~ msgid "The file %s is not a valid wav file"
+#~ msgstr "Filen %s er ikke en gyldig wav-fil"
+
+#~ msgid "Select sound file..."
+#~ msgstr "Vælg lydfil..."
+
+#~ msgid "System Sounds"
+#~ msgstr "Systemlyde"
+
+#~ msgid "Set as Application Font"
+#~ msgstr "Vælg som programskrifttype"
+
+#~ msgid "Sets the default application font"
+#~ msgstr "Sætter standardprogram-skrifttypen"
+
+#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
+#~ msgstr ""
+#~ "Hvis dette er sat til sand, oprettes miniaturebilleder for OpenType-"
+#~ "skrifttyper."
+
+#~ msgid "If set to true, then PCF fonts will be thumbnailed."
+#~ msgstr ""
+#~ "Hvis dette er sat til sand, oprettes miniaturebilleder for PCF-"
+#~ "skrifttyper."
+
+#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
+#~ msgstr ""
+#~ "Hvis dette er sat til sand, oprettes miniaturebilleder for TrueType-"
+#~ "skrifttyper."
+
+#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
+#~ msgstr ""
+#~ "Hvis dette er sat til sand, oprettes miniaturebilleder for Type1-"
+#~ "skrifttyper."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for OpenType fonts."
+#~ msgstr ""
+#~ "Sæt denne nøgle til kommandoen til at oprette miniature til OpenType-"
+#~ "skrifttyper."
+
+#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
+#~ msgstr ""
+#~ "Sæt denne nøgle til kommandoen til at oprette miniature til PCF-"
+#~ "skrifttyper."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for TrueType fonts."
+#~ msgstr ""
+#~ "Sæt denne nøgle til kommandoen til at oprette miniature til TrueType-"
+#~ "skrifttyper."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for Type1 fonts."
+#~ msgstr ""
+#~ "Sæt denne nøgle til kommandoen til at oprette miniature til Type1-"
+#~ "skrifttyper."
+
+#~ msgid "Thumbnail command for OpenType fonts"
+#~ msgstr "Miniaturekommando for OpenType-skrifttyper"
+
+#~ msgid "Thumbnail command for PCF fonts"
+#~ msgstr "Miniaturekommando for PCF-skrifttyper"
+
+#~ msgid "Thumbnail command for TrueType fonts"
+#~ msgstr "Miniaturekommando for TrueType-skrifttyper"
+
+#~ msgid "Thumbnail command for Type1 fonts"
+#~ msgstr "Miniaturekommando for Type1-skrifttyper"
+
+#~ msgid "Whether to thumbnail OpenType fonts"
+#~ msgstr "Opret miniaturer for OpenType-skrifttyper"
+
+#~ msgid "Whether to thumbnail PCF fonts"
+#~ msgstr "Opret miniaturer for PCF-skrifttyper"
+
+#~ msgid "Whether to thumbnail TrueType fonts"
+#~ msgstr "Opret miniaturer for TrueType-skrifttyper"
+
+#~ msgid "Whether to thumbnail Type1 fonts"
+#~ msgstr "Opret miniaturer for Type1-skrifttyper"
 
 # Qatarsk står i retstrivningsordbogen. 19 bogstaver kortere end "Quizdeltagerne spiste jordbær med fløde..."
-#: ../vfs-methods/fontilus/font-view.c:115
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr ""
-"Cølibatisk havfrue på brynjeklædt wc med plexiglas i qatarsk zoo. 0123456789"
+#~ msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+#~ msgstr ""
+#~ "Cølibatisk havfrue på brynjeklædt wc med plexiglas i qatarsk zoo. "
+#~ "0123456789"
 
-#: ../vfs-methods/fontilus/font-view.c:276
-msgid "Name:"
-msgstr "Navn:"
+#~ msgid "Name:"
+#~ msgstr "Navn:"
 
-#: ../vfs-methods/fontilus/font-view.c:279
-msgid "Style:"
-msgstr "Stil:"
+#~ msgid "Style:"
+#~ msgstr "Stil:"
 
-#: ../vfs-methods/fontilus/font-view.c:289
-msgid "Type:"
-msgstr "Type:"
+#~ msgid "Type:"
+#~ msgstr "Type:"
 
-#: ../vfs-methods/fontilus/font-view.c:295
-msgid "Size:"
-msgstr "Størrelse:"
+#~ msgid "Size:"
+#~ msgstr "Størrelse:"
 
-#: ../vfs-methods/fontilus/font-view.c:339
-#: ../vfs-methods/fontilus/font-view.c:352
-msgid "Version:"
-msgstr "Udgave:"
+#~ msgid "Version:"
+#~ msgstr "Udgave:"
 
-#: ../vfs-methods/fontilus/font-view.c:343
-#: ../vfs-methods/fontilus/font-view.c:354
-msgid "Copyright:"
-msgstr "Copyright:"
+#~ msgid "Copyright:"
+#~ msgstr "Copyright:"
 
-#: ../vfs-methods/fontilus/font-view.c:347
-msgid "Description:"
-msgstr "Beskrivning:"
+#~ msgid "Description:"
+#~ msgstr "Beskrivning:"
 
-#: ../vfs-methods/fontilus/font-view.c:408
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "brug: %s skriftfil\n"
+#~ msgid "usage: %s fontfile\n"
+#~ msgstr "brug: %s skriftfil\n"
 
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "Skrifttypeviser"
+#~ msgid "Font Viewer"
+#~ msgstr "Skrifttypeviser"
 
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "Forhåndsvisning af skrifttyper"
+#~ msgid "Preview fonts"
+#~ msgstr "Forhåndsvisning af skrifttyper"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:242
-msgid "Text to thumbnail (default: Aa)"
-msgstr "Tekst til miniaturer (forvalg: Aa)"
+#~ msgid "Text to thumbnail (default: Aa)"
+#~ msgstr "Tekst til miniaturer (forvalg: Aa)"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:242
-msgid "TEXT"
-msgstr "TEKST"
+#~ msgid "TEXT"
+#~ msgstr "TEKST"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:244
-msgid "Font size (default: 64)"
-msgstr "Skriftstørrelse (forvalg: 64)"
+#~ msgid "Font size (default: 64)"
+#~ msgstr "Skriftstørrelse (forvalg: 64)"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:244
-msgid "SIZE"
-msgstr "STØRRELSE"
+#~ msgid "SIZE"
+#~ msgstr "STØRRELSE"
 
 # det er vel navne på identifiere
-#: ../vfs-methods/fontilus/thumbnailer.c:246
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "SKRIFTTYPEFIL OUTPUTFIL"
+#~ msgid "FONT-FILE OUTPUT-FILE"
+#~ msgstr "SKRIFTTYPEFIL OUTPUTFIL"
 
-#: ../vfs-methods/fontilus/thumbnailer.c:262
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "Fejl ved fortolkning af argumenter: %s\n"
+#~ msgid "Error parsing arguments: %s\n"
+#~ msgstr "Fejl ved fortolkning af argumenter: %s\n"
 
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Anvend ny skrifttype?</span>"
+#~ msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+#~ msgstr "<span weight=\"bold\" size=\"larger\">Anvend ny skrifttype?</span>"
 
-#: ../vfs-methods/themus/apply-font.glade.h:2
-msgid "Do _not apply font"
-msgstr "Anvend _ikke skrifttype"
+#~ msgid "Do _not apply font"
+#~ msgstr "Anvend _ikke skrifttype"
 
-#: ../vfs-methods/themus/apply-font.glade.h:3
-msgid ""
-"The theme you have selected suggests a new font. A preview of the font is "
-"shown below."
-msgstr ""
-"Det tema du har valgt, foreslår en ny skrifttype. Et eksempel på skrifttypen "
-"vises nedenfor."
+#~ msgid ""
+#~ "The theme you have selected suggests a new font. A preview of the font is "
+#~ "shown below."
+#~ msgstr ""
+#~ "Det tema du har valgt, foreslår en ny skrifttype. Et eksempel på "
+#~ "skrifttypen vises nedenfor."
 
-#: ../vfs-methods/themus/apply-font.glade.h:4
-msgid "_Apply font"
-msgstr "_Anvend skrifttype"
+#~ msgid "_Apply font"
+#~ msgstr "_Anvend skrifttype"
 
-#: ../vfs-methods/themus/theme-method.c:485
-msgid "Themes"
-msgstr "Temaer"
+#~ msgid "Themes"
+#~ msgstr "Temaer"
 
-#: ../vfs-methods/themus/themus-properties-view.c:127
-msgid "Description"
-msgstr "Beskrivelse"
+#~ msgid "Description"
+#~ msgstr "Beskrivelse"
 
-#: ../vfs-methods/themus/themus-properties-view.c:134
-msgid "Control theme"
-msgstr "Tema for kontroller"
+#~ msgid "Control theme"
+#~ msgstr "Tema for kontroller"
 
-#: ../vfs-methods/themus/themus-properties-view.c:140
-msgid "Window border theme"
-msgstr "Tema for vindueskanter"
+#~ msgid "Window border theme"
+#~ msgstr "Tema for vindueskanter"
 
-#: ../vfs-methods/themus/themus-properties-view.c:146
-msgid "Icon theme"
-msgstr "Ikontema"
+#~ msgid "Icon theme"
+#~ msgstr "Ikontema"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:1
-msgid "If set to true, then installed themes will be thumbnailed."
-msgstr ""
-"Hvis sat til sand, vil der blive genereret miniaturer for installerede "
-"temaer."
+#~ msgid "If set to true, then installed themes will be thumbnailed."
+#~ msgstr ""
+#~ "Hvis sat til sand, vil der blive genereret miniaturer for installerede "
+#~ "temaer."
 
-#: ../vfs-methods/themus/themus.schemas.in.h:2
-msgid "If set to true, then themes will be thumbnailed."
-msgstr "Hvis sat til sand, vil der blive genereret miniaturer for temaer."
+#~ msgid "If set to true, then themes will be thumbnailed."
+#~ msgstr "Hvis sat til sand, vil der blive genereret miniaturer for temaer."
 
-#: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"Sæt denne nøgle til den kommando der skal benyttes til at oprette miniaturer "
-"for installerede temaer."
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for installed "
+#~ "themes."
+#~ msgstr ""
+#~ "Sæt denne nøgle til den kommando der skal benyttes til at oprette "
+#~ "miniaturer for installerede temaer."
 
-#: ../vfs-methods/themus/themus.schemas.in.h:4
-msgid "Set this key to the command used to create thumbnails for themes."
-msgstr ""
-"Sæt denne nøgle til den kommando der skal benyttes til at oprette miniaturer "
-"for temaer."
+#~ msgid "Set this key to the command used to create thumbnails for themes."
+#~ msgstr ""
+#~ "Sæt denne nøgle til den kommando der skal benyttes til at oprette "
+#~ "miniaturer for temaer."
 
-#: ../vfs-methods/themus/themus.schemas.in.h:5
-msgid "Thumbnail command for installed themes"
-msgstr "Miniaturekommando for installerede temaer"
+#~ msgid "Thumbnail command for installed themes"
+#~ msgstr "Miniaturekommando for installerede temaer"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:6
-msgid "Thumbnail command for themes"
-msgstr "Miniaturekommando for temaer"
+#~ msgid "Thumbnail command for themes"
+#~ msgstr "Miniaturekommando for temaer"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:7
-msgid "Whether to thumbnail installed themes"
-msgstr "Generér miniaturer for installerede temaer"
+#~ msgid "Whether to thumbnail installed themes"
+#~ msgstr "Generér miniaturer for installerede temaer"
 
-#: ../vfs-methods/themus/themus.schemas.in.h:8
-msgid "Whether to thumbnail themes"
-msgstr "Generér miniaturer for temaer"
+#~ msgid "Whether to thumbnail themes"
+#~ msgstr "Generér miniaturer for temaer"
 
-#. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:58
-msgid "ABCDEFG"
-msgstr "ABCDEFG...ÆØÅ"
+#~ msgid "ABCDEFG"
+#~ msgstr "ABCDEFG...ÆØÅ"
 
-#: ../vfs-methods/themus/themus-theme-applier.c:84
-msgid "[FILE]"
-msgstr "[FIL]"
+#~ msgid "[FILE]"
+#~ msgstr "[FIL]"
 
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-msgid "Apply theme"
-msgstr "Anvend tema"
+#~ msgid "Apply theme"
+#~ msgstr "Anvend tema"
 
-#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-msgid "Sets the default theme"
-msgstr "Sætter standardtemaet"
+#~ msgid "Sets the default theme"
+#~ msgstr "Sætter standardtemaet"
 
 #~ msgid " "
 #~ msgstr " "
@@ -3683,9 +3898,6 @@ msgstr "Sætter standardtemaet"
 #~ msgid "Autostart the preferred AT"
 #~ msgstr "Start den foretrukne AT automatisk"
 
-#~ msgid "Visual"
-#~ msgstr "Visuel"
-
 #~ msgid "Evolution Mail Reader 1.4"
 #~ msgstr "Evolution 1.4 - postprogram"
 
@@ -3721,9 +3933,6 @@ msgstr "Sætter standardtemaet"
 
 #~ msgid "There was an error launching the keyboard tool: %s"
 #~ msgstr "Der opstod en fejl ved kørsel af tastaturværktøjet: %s"
-
-#~ msgid "_Accessibility"
-#~ msgstr "_Tilgængelighed"
 
 #~ msgid "Choose..."
 #~ msgstr "Vælg..."
@@ -4040,9 +4249,6 @@ msgstr "Sætter standardtemaet"
 #~ msgid "Eject"
 #~ msgstr "Skub ud"
 
-#~ msgid "Eject's shortcut."
-#~ msgstr "Genvej til udskubning."
-
 #~ msgid "Home folder"
 #~ msgstr "Hjemmemappe"
 
@@ -4060,9 +4266,6 @@ msgstr "Sætter standardtemaet"
 
 #~ msgid "Launch web browser's shortcut."
 #~ msgstr "Genvej til start af webbrowser."
-
-#~ msgid "Lock screen"
-#~ msgstr "Lås skærm"
 
 #~ msgid "Lock screen's shortcut."
 #~ msgstr "Genvej til låsning af skærm."
@@ -4175,9 +4378,6 @@ msgstr "Sætter standardtemaet"
 #~ msgid "Centered"
 #~ msgstr "Centreret"
 
-#~ msgid "Fill Screen"
-#~ msgstr "Udfyld skærm"
-
 #~ msgid "Scaled"
 #~ msgstr "Skaleret"
 
@@ -4279,9 +4479,6 @@ msgstr "Sætter standardtemaet"
 #~ msgid "_Install Theme..."
 #~ msgstr "_Installér tema..."
 
-#~ msgid "_Revert"
-#~ msgstr "Fort_ryd ændringer"
-
 #~ msgid "_Save Theme..."
 #~ msgstr "_Gem tema..."
 
@@ -4349,9 +4546,6 @@ msgstr "Sætter standardtemaet"
 
 #~ msgid "*"
 #~ msgstr "*"
-
-#~ msgid "Window Management"
-#~ msgstr "Vindueshåndtering"
 
 #~ msgid "A_vailable layouts:"
 #~ msgstr "_Tilgængelige layout:"
