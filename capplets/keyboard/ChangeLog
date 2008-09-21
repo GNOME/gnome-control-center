@@ -1,3 +1,9 @@
+2008-09-21  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-keyboard-properties.glade: set GtkAdjustment page size to 0
+	to avoid problems due to newly enforced value boundaries in GTK+
+	2.14. See bug #551740 for a description of the problem.
+
 2008-09-05  Sergey Udaltsov <svu@gnome.org>
 
 	* gnome-keyboard-properties-xkb.c, gnome-keyboard-properties-xkblt.c:

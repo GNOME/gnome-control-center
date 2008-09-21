@@ -1,3 +1,9 @@
+2008-09-21  Jens Granseuer  <jensgr@gmx.net>
+
+	* data/appearance.glade: set GtkAdjustment page size to 0 to avoid
+	problems due to newly enforced value boundaries in GTK+ 2.14.  See
+	bug #551740 for a description of the problem.
+
 2008-09-18  Jens Granseuer  <jensgr@gmx.net>
 
 	* theme-save.c: (write_theme_to_disk): don't fail if the destination
