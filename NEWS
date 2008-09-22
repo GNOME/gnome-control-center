@@ -1,3 +1,51 @@
+gnome-control-center 2.24.0 (2008-09-22)
+
+Accessibility:
+- improve tooltip wording (Wang Xin)
+
+Appearance:
+- when a hidden theme is selected, and therefore becomes visible, 
+  create a thumbnail for it (Jens Granseuer) (#547301)
+- don't fail if the destination	files already exist and the user tries 
+  to overwrite them (Jens Granseuer) (#552671)
+- set GtkAdjustment page size to 0 to avoid roblems due to newly enforced 
+  value boundaries in GTK+ 2.14. (Jens Granseuer ) (#551740)
+
+Common:
+- properly initialize the callback data (Jens Granseuer) (#550263)
+
+Default application:
+- don't advertise startup-notify. The script doesn't support it (Jens Granseuer)
+  (#550694)
+- use a11y icon instead of searchtool (Jens Granseuer) (#550742)
+
+Display:
+- Use "Mirror Screens" instead of "Cloned Output" in the display of monitors, 
+  to be consistent with the corresponding checkbox from the Glade file.
+  (Federico Mena Quintero)
+- use theme colours for the background (Bruce Cowan) (#545117)
+
+Keybindings:
+- don't use the term "accelerator" in the UI (Jens Granseuer) (#547276)
+
+Keyboard:
+- chosing first variant by default (Sergey Udaltsov) (#550722)
+- using the fact that latest libxklavier returns descriptions in UTF-8,
+  no need to convert in 8-bit locales (Sergey Udaltsov)
+- set GtkAdjustment page size to 0 to avoid problems due to newly enforced 
+  value boundaries in GTK+ 2.14. (Jens Granseuer) (#551740)
+
+Network:
+- set GtkAdjustment page size to 0 to avoid roblems due to newly enforced 
+  value boundaries in GTK+ 2.14. (Jens Granseuer ) (#551740)
+
+Sound:
+- trying to print NULL strings crashes on Solaris (Brian Cameron) (#548586)
+- add context to event sound names (Claude Paroz ) (#549489)
+
+Translations:
+
+-------------------------------------------------------------------------------
 gnome-control-center 2.23.90 (2008-08-18)
 
 Appearance:
