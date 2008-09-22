@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 2.23.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-16 19:53+0200\n"
-"PO-Revision-Date: 2008-09-17 22:23+0200\n"
+"PO-Revision-Date: 2008-09-22 14:17+0200\n"
 "Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -79,10 +79,10 @@ msgstr ""
 msgid "Unable to open address book"
 msgstr "Impossibile aprire la rubrica"
 
+# GNOME-2-24
 #: ../capplets/about-me/gnome-about-me.c:946
 msgid "Unknown login ID, the user database might be corrupted"
-msgstr ""
-"ID di login sconosciuto, il database degli utenti potrebbe essere corrotto"
+msgstr "ID di accesso sconosciuto, il database degli utenti potrebbe essere danneggiato"
 
 #: ../capplets/about-me/gnome-about-me.c:976
 #: ../capplets/about-me/gnome-about-me.c:978
@@ -192,9 +192,10 @@ msgstr "Na_zione:"
 msgid "Current _password:"
 msgstr "Password _attuale:"
 
+# GNOME-2-24
 #: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Full Name"
-msgstr "Nome intero"
+msgstr "Nome completo"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:26
 msgid "Hom_e:"
@@ -353,7 +354,7 @@ msgstr "Impossibile arrestare il canale di IO backend_stdout: %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:409
 msgid "Authenticated!"
-msgstr "Autenticazione riuscita!"
+msgstr "Autenticazione riuscita."
 
 #. This is a re-auth, and it failed.
 #. * The password must have been changed in the meantime!
@@ -366,9 +367,7 @@ msgstr "Autenticazione riuscita!"
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
-msgstr ""
-"La propria password è cambiata da quando si è inizialmente effettuata "
-"l'autenticazione! Eseguire nuovamente l'autenticazione."
+msgstr "La propria password è cambiata da quando si è inizialmente effettuata l'autenticazione. Eseguire nuovamente l'autenticazione."
 
 #: ../capplets/about-me/gnome-about-me-password.c:477
 msgid "That password was incorrect."
@@ -459,14 +458,12 @@ msgstr "Lo_gin accessibile"
 msgid "Assistive Technologies Preferences"
 msgstr "Preferenze delle tecnologie assistive"
 
-# GNOME-2-20
+# GNOME-2-24
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
 msgid ""
 "Changes to enable assistive technologies will not take effect until your "
 "next log in."
-msgstr ""
-"I cambiamenti per abilitare le tecnologie assistive non avranno effetto fino "
-"prossimo login."
+msgstr "I cambiamenti per abilitare le tecnologie assistive non avranno effetto fino prossimo accesso."
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
@@ -804,12 +801,10 @@ msgstr "_Personalizza..."
 msgid "C_ut"
 msgstr "_Taglia"
 
-# GNOME-2-20
+# GNOME-2-24
 #: ../capplets/appearance/data/appearance.glade.h:16
 msgid "Changing your cursor theme takes effect the next time you log in."
-msgstr ""
-"I cambiamenti al proprio tema per il cursore avranno effetto al prossimo "
-"login."
+msgstr "I cambiamenti al proprio tema per il cursore avranno effetto al prossimo accesso."
 
 #: ../capplets/appearance/data/appearance.glade.h:17
 msgid "Colors"
@@ -1166,9 +1161,10 @@ msgstr "Aspetto"
 msgid "Customize the look of the desktop"
 msgstr "Personalizza l'aspetto dell'ambiente grafico"
 
+# GNOME-2-24
 #: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:1
 msgid "Installs themes packages for various parts of the desktop"
-msgstr "Installa i pacchetti di temi per varie parti del «desktop»"
+msgstr "Installa i pacchetti di temi per varie parti dell'ambiente grafico"
 
 #: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:2
 msgid "Theme Installer"
@@ -1254,20 +1250,21 @@ msgstr ""
 msgid "GNOME Theme %s correctly installed"
 msgstr "Il tema «%s» per GNOME è stato installato correttamente"
 
-# GNOME-2-22
+# GNOME-2-24
 #: ../capplets/appearance/theme-installer.c:355
 #, c-format
 msgid "Installation for theme \"%s\" failed."
-msgstr "Installazione del tema «%s» fallita."
+msgstr "Installazione del tema «%s» non riuscita."
 
 #: ../capplets/appearance/theme-installer.c:393
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Il tema «%s» è stato installato."
 
+# GNOME-2-24
 #: ../capplets/appearance/theme-installer.c:399
 msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "Mantenere il tema corrente o applicare il tema appena installato?"
+msgstr "Mantenere il tema corrente o applicare quello appena installato?"
 
 #: ../capplets/appearance/theme-installer.c:401
 msgid "Keep Current Theme"
@@ -1277,9 +1274,10 @@ msgstr "Mantieni tema corrente"
 msgid "Apply New Theme"
 msgstr "Applica nuovo tema"
 
+# GNOME-2-24
 #: ../capplets/appearance/theme-installer.c:506
 msgid "Failed to create temporary directory"
-msgstr "Creazione della cartella temporanea fallita"
+msgstr "Creazione della cartella temporanea non riuscita"
 
 # GNOME-2-22
 #: ../capplets/appearance/theme-installer.c:569
@@ -1347,12 +1345,8 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
-"Impossibile avviare il gestore delle impostazioni «gnome-setting-daemon».\n"
-"Senza il gestore delle impostazioni di GNOME in esecuzione alcune preferenze "
-"possono non avere effetto. Questa situazione indica un possibile problema "
-"con Bonobo, oppure che un gestore di impostazioni non di GNOME (p.e. quello "
-"di KDE) è già in esecuzione creando conflitto con il gestore di impostazioni "
-"di GNOME."
+"Impossibile avviare il gestore delle impostazioni «gnome-settings-daemon».\n"
+"Senza il gestore delle impostazioni di GNOME in esecuzione alcune preferenze possono non avere effetto. Questa situazione indica un possibile problema con Bonobo, oppure che un gestore di impostazioni non di GNOME (p.e. quello di KDE) è già in esecuzione creando conflitto con il gestore di impostazioni di GNOME."
 
 #: ../capplets/common/capplet-stock-icons.c:67
 #, c-format
@@ -1384,9 +1378,10 @@ msgstr "Copia dei file"
 msgid "Parent Window"
 msgstr "Finestra genitore"
 
+# GNOME-2-24
 #: ../capplets/common/file-transfer-dialog.c:225
 msgid "Parent window of the dialog"
-msgstr "Finestra genitore della finestra di dialogo"
+msgstr "Finestra genitore del dialogo"
 
 #: ../capplets/common/file-transfer-dialog.c:231
 msgid "From URI"
@@ -1521,6 +1516,7 @@ msgstr ""
 "Callback eseguita quando deve essere liberata la memoria dei dati "
 "dell'oggetto editor delle proprietà"
 
+# GNOME-2-24
 #: ../capplets/common/gconf-property-editor.c:1429
 #, c-format
 msgid ""
@@ -1531,8 +1527,7 @@ msgid ""
 msgstr ""
 "Impossibile trovare il file \"%s\".\n"
 "\n"
-"Assicurarsi che esista e riprovare, in alternativa scegliere una immagine di "
-"sfondo diversa."
+"Assicurarsi che esista e riprovare, in alternativa scegliere un'immagine di sfondo diversa."
 
 #: ../capplets/common/gconf-property-editor.c:1437
 #, c-format
@@ -2962,10 +2957,11 @@ msgstr "Abilita l'audio e associa suoni ad eventi"
 msgid "Unknown Volume Control %d"
 msgstr "Controllo volume %d sconosciuto"
 
+# GNOME-2-24
 #: ../capplets/sound/pipeline-tests.c:84
 #, c-format
 msgid "Failed to construct test pipeline for '%s'"
-msgstr "Fallita costruzione pipeline di prova per «%s»"
+msgstr "Costruzione pipeline di prova per «%s» non riuscita"
 
 #: ../capplets/sound/sound-properties-capplet.c:260
 #: ../capplets/sound/sound-properties-capplet.c:381
@@ -3298,10 +3294,10 @@ msgstr "<b>Azione per la barra del titolo</b>"
 msgid "<b>Window Selection</b>"
 msgstr "<b>Selezione della finestra</b>"
 
+# GNOME-2-24
 #: ../capplets/windows/gnome-window-properties.glade.h:4
 msgid "To move a window, press-and-hold this key then grab the window:"
-msgstr ""
-"Per muovere una finestra tener premuto questo tasto mentre la si cattura:"
+msgstr "Per muovere una finestra tenere premuto questo tasto mentre la si cattura:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
@@ -3369,6 +3365,7 @@ msgstr "Rimuovi da programmi all'avvio"
 msgid "Add to Startup Programs"
 msgstr "Aggiungi nei programmi all'avvio"
 
+# GNOME-2-24
 #: ../libslab/app-shell.c:750
 #, c-format
 msgid ""
@@ -3378,7 +3375,7 @@ msgid ""
 msgstr ""
 "<span size=\"large\"><b>Nessuna corrispondenza trovata.</b> </span><span>\n"
 "\n"
-" Il filtro \"<b>%s</b>\" non seleziona nessun elemento.</span>"
+" Il filtro \"<b>%s</b>\" non seleziona alcun elemento.</span>"
 
 #: ../libslab/app-shell.c:900
 msgid "Other"
@@ -3713,14 +3710,13 @@ msgstr[1] "Mancano %d minuti alla prossima pausa"
 msgid "Less than one minute until the next break"
 msgstr "Manca meno di un minuto alla prossima pausa"
 
+# GNOME-2-24
 #: ../typing-break/drwright.c:580
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
-msgstr ""
-"Impossibile mostrare la finestra di dialogo per le proprietà delle pause a "
-"causa del seguente errore: %s"
+msgstr "Impossibile mostrare il dialogo per le proprietà delle pause a causa del seguente errore: %s"
 
 #: ../typing-break/drwright.c:599
 msgid "Written by Richard Hult <richard@imendio.com>"
@@ -3760,12 +3756,7 @@ msgid ""
 "don't seem to have a notification area on your panel. You can add it by "
 "right-clicking on your panel and choosing 'Add to panel', selecting "
 "'Notification area' and clicking 'Add'."
-msgstr ""
-"Il programma per il controllo della digitazione utilizza l'area di notifica "
-"per visualizzare le informazioni. Non è stata trovata nessuna area di "
-"notifica nel pannello. Può essere aggiunta facendo clic col pulsante destro "
-"sul pannello e scegliendo \"Aggiungi al pannello\", selezionando \"Area di "
-"notifica\"e premendo il pulsante «Aggiungi»."
+msgstr "Il programma per il controllo della digitazione utilizza l'area di notifica per visualizzare le informazioni. Non è stata trovata alcuna area di notifica nel pannello. Può essere aggiunta facendo clic col pulsante destro sul pannello e scegliendo «Aggiungi al pannello» selezionando «Area di notifica» e premendo il pulsante «Aggiungi»."
 
 #~ msgid "Enable support for GNOME assistive technologies at login"
 #~ msgstr "Abilita il supporto per le tecnologie assistive di GNOME al login"
