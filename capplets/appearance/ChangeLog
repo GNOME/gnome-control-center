@@ -1,3 +1,10 @@
+2008-09-24  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (conv_to_widget_cb), (prepare_list): make sure
+	the GConf to widget conversion funtion has all the data it needs
+	when it is called for the first time. Fixes a possible crash when
+	starting the capplet (bug #553541)
+
 2008-09-21  Jens Granseuer  <jensgr@gmx.net>
 
 	* data/appearance.glade: set GtkAdjustment page size to 0 to avoid

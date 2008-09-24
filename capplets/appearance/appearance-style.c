@@ -33,6 +33,11 @@ typedef void (* ThumbnailGenFunc) (void               *type,
 				   AppearanceData     *data,
 				   GDestroyNotify     *destroy);
 
+typedef struct {
+  AppearanceData *data;
+  GdkPixbuf *thumbnail;
+} PEditorConvData;
+
 static void update_message_area (AppearanceData *data);
 static void create_thumbnail (const gchar *name, GdkPixbuf *default_thumb, AppearanceData *data);
 
@@ -97,23 +102,22 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
   {
     GtkListStore *list_store;
     GtkTreeIter iter, sort_iter;
-    GdkPixbuf *thumbnail;
-    AppearanceData *data = g_object_get_data (G_OBJECT (peditor), "app_data");
+    PEditorConvData *conv;
 
     list_store = GTK_LIST_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (store)));
 
-    g_object_get (peditor, "data", &thumbnail, NULL);
+    g_object_get (peditor, "data", &conv, NULL);
     gtk_list_store_insert_with_values (list_store, &iter, 0,
                                        COL_LABEL, curr_value,
                                        COL_NAME, curr_value,
-                                       COL_THUMBNAIL, thumbnail,
+                                       COL_THUMBNAIL, conv->thumbnail,
                                        -1);
     /* convert the tree store iter for use with the sort model */
     gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT (store),
                                                     &sort_iter, &iter);
     path = gtk_tree_model_get_string_from_iter (store, &sort_iter);
 
-    create_thumbnail (curr_value, thumbnail, data);
+    create_thumbnail (curr_value, conv->thumbnail, conv->data);
   }
 
   new_value = gconf_value_new (GCONF_VALUE_STRING);
@@ -863,6 +867,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   GConfValue *value;
   ThumbnailGenFunc generator;
   ThemeThumbnailFunc thumb_cb;
+  PEditorConvData *conv_data;
 
   switch (type)
   {
@@ -955,12 +960,15 @@ prepare_list (AppearanceData *data, GtkWidget *list, ThemeType type, GCallback c
   gtk_tree_view_column_add_attribute (column, renderer, "text", COL_LABEL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
 
+  conv_data = g_new (PEditorConvData, 1);
+  conv_data->data = data;
+  conv_data->thumbnail = thumbnail;
   peditor = gconf_peditor_new_tree_view (NULL, key, list,
       "conv-to-widget-cb", conv_to_widget_cb,
       "conv-from-widget-cb", conv_from_widget_cb,
-      "data", thumbnail,
+      "data", conv_data,
+      "data-free-cb", g_free,
       NULL);
-  g_object_set_data (peditor, "app_data", data);
   g_signal_connect (peditor, "value-changed", callback, data);
 
   /* init the delete buttons */
