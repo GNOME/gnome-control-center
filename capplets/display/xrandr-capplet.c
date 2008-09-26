@@ -62,25 +62,20 @@ struct App
 static void rebuild_gui (App *app);
 static void on_rate_changed (GtkComboBox *box, gpointer data);
 
-#if 0
 static void
-show_error (const GError *err)
+show_error (const char *err)
 {
-    if (!err)
-	return;
-
     GtkWidget *dialog = gtk_message_dialog_new (
 	NULL,
 	GTK_DIALOG_DESTROY_WITH_PARENT,
 	GTK_MESSAGE_WARNING,
-	GTK_BUTTONS_OK, err->message);
+	GTK_BUTTONS_OK, err);
 
     gtk_window_set_title (GTK_WINDOW (dialog), "");
 
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
 }
-#endif
 
 static gboolean
 do_free (gpointer data)
@@ -1726,7 +1721,8 @@ run_application (App *app)
 				       on_screen_changed, app);
     if (!app->screen)
     {
-	g_error ("Could not get screen info");
+	g_warning (_("The X server does not support the XRANDR extension.  Runtime resolution changes to the display size are not available."));
+	show_error (_("The X server does not support the XRANDR extension.  Runtime resolution changes to the display size are not available."));
 	g_object_unref (xml);
 	return;
     }
