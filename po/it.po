@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.23.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-27 21:15+0200\n"
-"PO-Revision-Date: 2008-09-27 21:16+0200\n"
+"POT-Creation-Date: 2008-09-28 21:41+0200\n"
+"PO-Revision-Date: 2008-09-28 21:40+0200\n"
 "Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -256,9 +256,10 @@ msgstr ""
 msgid "User name:"
 msgstr "Nome utente:"
 
+# GNOME-2-24
 #: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "Web _log:"
-msgstr "Blog sul _web:"
+msgstr "_Blog:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Wor_k:"
@@ -537,7 +538,10 @@ msgstr "Tutti i file"
 msgid "Font may be too large"
 msgstr "Il carattere potrebbe essere troppo grande"
 
-# GNOME-2-20
+# GNOME-2-24
+#
+# <i punti tipografici misurano l'altezza del carattere non la larghezza>
+# by Daniele Forsi
 #: ../capplets/appearance/appearance-font.c:498
 #, c-format
 msgid ""
@@ -549,15 +553,15 @@ msgid_plural ""
 "effectively use the computer. It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
-"Il carattere selezionato è largo %d punto e potrebbe rendere difficoltoso "
+"Il carattere selezionato è alto %d punto e potrebbe rendere difficoltoso "
 "usare efficacemente il computer. Si raccomanda di selezionare una dimensione "
 "minore di %d."
 msgstr[1] ""
-"Il carattere selezionato è largo %d punti e potrebbe rendere difficoltoso "
+"Il carattere selezionato è alto %d punti e potrebbe rendere difficoltoso "
 "usare efficacemente il computer. Si raccomanda di selezionare una dimensione "
 "minore di %d."
 
-# GNOME-2-20
+# GNOME-2-24
 #: ../capplets/appearance/appearance-font.c:511
 #, c-format
 msgid ""
@@ -569,11 +573,11 @@ msgid_plural ""
 "effectively use the computer. It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
-"Il carattere selezionato è largo %d punto e potrebbe rendere difficoltoso "
+"Il carattere selezionato è alto %d punto e potrebbe rendere difficoltoso "
 "usare efficacemente il computer. Si raccomanda di selezionare un carattere "
 "di dimensione minore."
 msgstr[1] ""
-"Il carattere selezionato è largo %d punti e potrebbe rendere difficoltoso "
+"Il carattere selezionato è alto %d punti e potrebbe rendere difficoltoso "
 "usare efficacemente il computer. Si raccomanda di selezionare un carattere "
 "di dimensione minore."
 
@@ -684,7 +688,7 @@ msgid ""
 "The current theme suggests a font. Also, the last applied font suggestion "
 "can be reverted."
 msgstr ""
-"Il tema corrente suggerisce uno tipo di carattere. È inoltre possibile "
+"Il tema corrente suggerisce un tipo di carattere. È inoltre possibile "
 "ripristinare l'ultimo tipo di carattere suggerito applicato."
 
 # GNOME-2-20
@@ -1522,10 +1526,11 @@ msgstr "Dati particolari richiesti dallo specifico editor delle proprietà"
 msgid "Property editor data freeing callback"
 msgstr "Callback di rilascio dati per l'editor delle proprietà"
 
+# GNOME-2-24
 #: ../capplets/common/gconf-property-editor.c:188
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
-"Callback eseguita quando deve essere liberata la memoria dei dati "
+"Callback da eseguire quando deve essere liberata la memoria dei dati "
 "dell'oggetto editor delle proprietà"
 
 # GNOME-2-24
@@ -2137,7 +2142,9 @@ msgstr "Disattivata"
 msgid ""
 "The X server does not support the XRANDR extension.  Runtime resolution "
 "changes to the display size are not available."
-msgstr "L'estensione XRANDR non è supportata dal server X. Non è possibile cambiare la risoluzione dello schermo in «tempo reale»."
+msgstr ""
+"L'estensione XRANDR non è supportata dal server X. Non è possibile cambiare "
+"la risoluzione dello schermo in «tempo reale»."
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -2772,11 +2779,11 @@ msgstr ""
 msgid "<small><i>High</i></small>"
 msgstr "<small><i>Alta</i></small>"
 
-# GNOME-2-22
+# GNOME-2-24
 #. large threshold
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "<small><i>Large</i></small>"
-msgstr "<small><i>Larga</i></small>"
+msgstr "<small><i>Grande</i></small>"
 
 # GNOME-2-22
 #. low sensitivity
@@ -3389,7 +3396,7 @@ msgstr "Aggiungi ai preferiti"
 
 #: ../libslab/application-tile.c:867
 msgid "Remove from Startup Programs"
-msgstr "Rimuovi da programmi all'avvio"
+msgstr "Rimuovi dai programmi all'avvio"
 
 #: ../libslab/application-tile.c:869
 msgid "Add to Startup Programs"
@@ -3624,8 +3631,7 @@ msgstr "Chiude il centro di controllo all'attivazione di un'attività"
 
 #: ../shell/control-center.schemas.in.h:2
 msgid "Exit shell on add or remove action performed"
-msgstr ""
-" Esce dal terminale se viene eseguita un'azione di aggiunta o rimozione"
+msgstr "Esce dal terminale se viene eseguita un'azione di aggiunta o rimozione"
 
 #: ../shell/control-center.schemas.in.h:3
 msgid "Exit shell on help action performed"
@@ -3669,9 +3675,10 @@ msgstr ""
 "Indica se chiudere la shell quando viene eseguita un'azione di aggiornamento "
 "o disinstallazione."
 
+# GNOME-2-24
 #: ../shell/control-center.schemas.in.h:10
 msgid "Task names and associated .desktop files"
-msgstr "Nome dell'attività e file .desktop associato"
+msgstr "Nomi delle attività e dei file .desktop associati"
 
 # GNOME-2-22
 #: ../shell/control-center.schemas.in.h:11
