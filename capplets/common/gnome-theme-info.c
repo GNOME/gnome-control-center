@@ -404,10 +404,13 @@ read_icon_theme (GFile *icon_theme_uri)
   if (icon_theme_ditem == NULL)
     return NULL;
 
-  name = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Name");
-  if (name == NULL) {
-    gnome_desktop_item_unref (icon_theme_ditem);
-    return NULL;
+  name = gnome_desktop_item_get_localestring (icon_theme_ditem, "Icon Theme/Name");
+  if (!name) {
+    name = gnome_desktop_item_get_localestring (icon_theme_ditem, GNOME_DESKTOP_ITEM_NAME);
+    if (!name) {
+      gnome_desktop_item_unref (icon_theme_ditem);
+      return NULL;
+    }
   }
 
   /* If index.theme has no Directories entry, it is only a cursor theme */
