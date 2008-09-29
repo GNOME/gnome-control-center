@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-23 11:01+0300\n"
-"PO-Revision-Date: 2008-09-23 11:02+0300\n"
+"POT-Creation-Date: 2008-09-29 06:38+0300\n"
+"PO-Revision-Date: 2008-09-29 06:30+0300\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -579,18 +579,18 @@ msgstr "sivu"
 msgid "[WALLPAPER...]"
 msgstr "[TAUSTAKUVA...]"
 
-#: ../capplets/appearance/appearance-style.c:167
+#: ../capplets/appearance/appearance-style.c:171
 #: ../capplets/common/gnome-theme-info.c:442
 #: ../capplets/common/gnome-theme-info.c:634
 msgid "Default Pointer"
 msgstr "Oletusosoitin"
 
-#: ../capplets/appearance/appearance-style.c:229
+#: ../capplets/appearance/appearance-style.c:233
 #: ../capplets/appearance/appearance-themes.c:686
 msgid "Install"
 msgstr "Asenna"
 
-#: ../capplets/appearance/appearance-style.c:249
+#: ../capplets/appearance/appearance-style.c:253
 #: ../capplets/common/gnome-theme-info.c:1644
 #, c-format
 msgid ""
@@ -845,8 +845,8 @@ msgid ""
 "Icons only\n"
 "Text only"
 msgstr ""
-"Teksti kohdan alla\n"
-"Teksti kohdan vieressä\n"
+"Teksti kuvakkeen alla\n"
+"Teksti kuvakkeen vieressä\n"
 "Vain kuvakkeet\n"
 "Vain teksti"
 
@@ -1794,7 +1794,7 @@ msgstr "Sisällytä _paneeli"
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
 #: ../capplets/display/display-capplet.glade.h:2
-#: ../capplets/display/xrandr-capplet.c:1319
+#: ../capplets/display/xrandr-capplet.c:1314
 msgid "Mirror Screens"
 msgstr "Peilaa näytöt"
 
@@ -1842,40 +1842,49 @@ msgstr "Muuta näytön tarkkuutta"
 msgid "Screen Resolution"
 msgstr "Näytön tarkkuus"
 
-#: ../capplets/display/xrandr-capplet.c:412
-#: ../capplets/display/xrandr-capplet.c:450
+#: ../capplets/display/xrandr-capplet.c:407
+#: ../capplets/display/xrandr-capplet.c:445
 msgid "Normal"
 msgstr "Tavallinen"
 
-#: ../capplets/display/xrandr-capplet.c:413
+#: ../capplets/display/xrandr-capplet.c:408
 msgid "Left"
 msgstr "Vasen"
 
-#: ../capplets/display/xrandr-capplet.c:414
+#: ../capplets/display/xrandr-capplet.c:409
 msgid "Right"
 msgstr "Oikea"
 
-#: ../capplets/display/xrandr-capplet.c:415
+#: ../capplets/display/xrandr-capplet.c:410
 msgid "Upside Down"
 msgstr "Ylösalaisin"
 
-#: ../capplets/display/xrandr-capplet.c:488
-#: ../capplets/display/xrandr-capplet.c:496
-#: ../capplets/display/xrandr-capplet.c:497
+#: ../capplets/display/xrandr-capplet.c:483
+#: ../capplets/display/xrandr-capplet.c:491
+#: ../capplets/display/xrandr-capplet.c:492
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:549
-#: ../capplets/display/xrandr-capplet.c:568
-#: ../capplets/display/xrandr-capplet.c:578
+#: ../capplets/display/xrandr-capplet.c:544
+#: ../capplets/display/xrandr-capplet.c:563
+#: ../capplets/display/xrandr-capplet.c:573
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:560
+#: ../capplets/display/xrandr-capplet.c:555
 msgid "Off"
 msgstr "Pois päältä"
+
+#: ../capplets/display/xrandr-capplet.c:1724
+#: ../capplets/display/xrandr-capplet.c:1725
+msgid ""
+"The X server does not support the XRANDR extension.  Runtime resolution "
+"changes to the display size are not available."
+msgstr ""
+"X-palvelin ei tue XRANDR-laajennosta, joten näytön tarkkuutta "
+"ei voi vaihtaa lennosta."
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -2756,6 +2765,105 @@ msgstr "_Soita varoituksia ja ääniefektejä"
 msgid "_Sound playback:"
 msgstr "Äänen _toisto:"
 
+#. Bell
+#: ../capplets/sound/sound-theme-definition.h:46
+msgctxt "Sound event"
+msgid "Alert sound"
+msgstr "Varoitusääni"
+
+#: ../capplets/sound/sound-theme-definition.h:47
+msgctxt "Sound event"
+msgid "Visual alert"
+msgstr "Näkyvä varoitus"
+
+#. Windows and buttons
+#: ../capplets/sound/sound-theme-definition.h:49
+msgctxt "Sound event"
+msgid "Windows and Buttons"
+msgstr "Ikkunat ja painikkeet"
+
+#: ../capplets/sound/sound-theme-definition.h:50
+msgctxt "Sound event"
+msgid "Button clicked"
+msgstr "Painiketta napsautettu"
+
+#: ../capplets/sound/sound-theme-definition.h:51
+msgctxt "Sound event"
+msgid "Toggle button clicked"
+msgstr "Vaihtopainiketta napsautettu"
+
+#: ../capplets/sound/sound-theme-definition.h:52
+msgctxt "Sound event"
+msgid "Window maximized"
+msgstr "Ikkuna suurennettu"
+
+#: ../capplets/sound/sound-theme-definition.h:53
+msgctxt "Sound event"
+msgid "Window unmaximized"
+msgstr "Ikkuna palautettu"
+
+#: ../capplets/sound/sound-theme-definition.h:54
+msgctxt "Sound event"
+msgid "Window minimised"
+msgstr "Ikkuna pienennetty"
+
+#. Desktop
+#: ../capplets/sound/sound-theme-definition.h:56
+msgctxt "Sound event"
+msgid "Desktop"
+msgstr "Työpöytä"
+
+#: ../capplets/sound/sound-theme-definition.h:57
+msgctxt "Sound event"
+msgid "Login"
+msgstr "Kirjaudu sisään"
+
+#: ../capplets/sound/sound-theme-definition.h:58
+msgctxt "Sound event"
+msgid "Logout"
+msgstr "Kirjaudu ulos"
+
+#: ../capplets/sound/sound-theme-definition.h:59
+msgctxt "Sound event"
+msgid "New e-mail"
+msgstr "Uusi sähköposti"
+
+#: ../capplets/sound/sound-theme-definition.h:60
+msgctxt "Sound event"
+msgid "Empty trash"
+msgstr "Tyhjennä roskakori"
+
+#: ../capplets/sound/sound-theme-definition.h:61
+msgctxt "Sound event"
+msgid "Long action completed (download, CD burning, etc.)"
+msgstr "Pitkä toiminto valmistui (nouto, CD-kirjoitus, jne.)"
+
+#. Alerts?
+#: ../capplets/sound/sound-theme-definition.h:63
+msgctxt "Sound event"
+msgid "Alerts"
+msgstr "Hälytykset"
+
+#: ../capplets/sound/sound-theme-definition.h:64
+msgctxt "Sound event"
+msgid "Information or question"
+msgstr "Tietoja tai kysymys"
+
+#: ../capplets/sound/sound-theme-definition.h:65
+msgctxt "Sound event"
+msgid "Warning"
+msgstr "Varoitus"
+
+#: ../capplets/sound/sound-theme-definition.h:66
+msgctxt "Sound event"
+msgid "Error"
+msgstr "Virhe"
+
+#: ../capplets/sound/sound-theme-definition.h:67
+msgctxt "Sound event"
+msgid "Battery warning"
+msgstr "Akkuvaroitus"
+
 #: ../capplets/sound/sound-theme.c:437 ../capplets/sound/sound-theme.c:563
 msgid "Flash screen"
 msgstr "Välkäytä koko näyttöä"
@@ -3247,82 +3355,6 @@ msgstr ""
 "napsauttamalla paneelia hiiren oikealla painikkeella ja valitsemalla \"Lisää "
 "paneeliin\" ja valitsemalla \"Ilmoitusalue\"."
 
-#~ msgctxt "Sound event"
-#~ msgid "Alert sound"
-#~ msgstr "Varoitusääni"
-
-#~ msgctxt "Sound event"
-#~ msgid "Visual alert"
-#~ msgstr "Näkyvä varoitus"
-
-#~ msgctxt "Sound event"
-#~ msgid "Windows and Buttons"
-#~ msgstr "Ikkunat ja painikkeet"
-
-#~ msgctxt "Sound event"
-#~ msgid "Button clicked"
-#~ msgstr "Painiketta napsautettu"
-
-#~ msgctxt "Sound event"
-#~ msgid "Toggle button clicked"
-#~ msgstr "Vaihtopainiketta napsautettu"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window maximized"
-#~ msgstr "Ikkuna suurennettu"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window unmaximized"
-#~ msgstr "Ikkuna palautettu"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window minimised"
-#~ msgstr "Ikkuna pienennetty"
-
-#~ msgctxt "Sound event"
-#~ msgid "Desktop"
-#~ msgstr "Työpöytä"
-
-#~ msgctxt "Sound event"
-#~ msgid "Login"
-#~ msgstr "Kirjaudu sisään"
-
-#~ msgctxt "Sound event"
-#~ msgid "Logout"
-#~ msgstr "Kirjaudu ulos"
-
-#~ msgctxt "Sound event"
-#~ msgid "New e-mail"
-#~ msgstr "Uusi sähköposti"
-
-#~ msgctxt "Sound event"
-#~ msgid "Empty trash"
-#~ msgstr "Tyhjennä roskakori"
-
-#~ msgctxt "Sound event"
-#~ msgid "Long action completed (download, CD burning, etc.)"
-#~ msgstr "Pitkä toiminto valmistui (nouto, CD-kirjoitus, jne.)"
-
-#~ msgctxt "Sound event"
-#~ msgid "Alerts"
-#~ msgstr "Hälytykset"
-
-#~ msgctxt "Sound event"
-#~ msgid "Information or question"
-#~ msgstr "Tietoja tai kysymys"
-
-#~ msgctxt "Sound event"
-#~ msgid "Warning"
-#~ msgstr "Varoitus"
-
-#~ msgctxt "Sound event"
-#~ msgid "Error"
-#~ msgstr "Virhe"
-
-#~ msgctxt "Sound event"
-#~ msgid "Battery warning"
-#~ msgstr "Akkuvaroitus"
-
 #~ msgid "Enable support for GNOME assistive technologies at login"
 #~ msgstr ""
 #~ "Ota käyttöön tuki Gnomen esteettömyysohjelmille sisään kirjauduttaessa"
@@ -3434,13 +3466,6 @@ msgstr ""
 
 #~ msgid "_Keep Resolution"
 #~ msgstr "_Säilytä tarkkuus"
-
-#~ msgid ""
-#~ "The X server does not support the XRandR extension.  Runtime resolution "
-#~ "changes to the display size are not available."
-#~ msgstr ""
-#~ "X-palvelin ei tue XRandR-laajennosta, joten näytön tarkkuutta ei voi "
-#~ "vaihtaa lennosta."
 
 #~ msgid ""
 #~ "The version of the XRandR extension is incompatible with this program. "
