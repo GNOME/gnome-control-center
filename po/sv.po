@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 16:26+0200\n"
-"PO-Revision-Date: 2008-09-29 16:27+0100\n"
+"POT-Creation-Date: 2008-10-05 10:52+0200\n"
+"PO-Revision-Date: 2008-10-05 10:52+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -545,8 +545,8 @@ msgid "[WALLPAPER...]"
 msgstr "[BAKGRUNDSBILD...]"
 
 #: ../capplets/appearance/appearance-style.c:171
-#: ../capplets/common/gnome-theme-info.c:442
-#: ../capplets/common/gnome-theme-info.c:634
+#: ../capplets/common/gnome-theme-info.c:445
+#: ../capplets/common/gnome-theme-info.c:637
 msgid "Default Pointer"
 msgstr "Standardmuspekare"
 
@@ -556,7 +556,7 @@ msgid "Install"
 msgstr "Installera"
 
 #: ../capplets/appearance/appearance-style.c:253
-#: ../capplets/common/gnome-theme-info.c:1644
+#: ../capplets/common/gnome-theme-info.c:1647
 #, c-format
 msgid "This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."
 msgstr "Detta tema kommer inte att se ut som det var tänkt därför att den nödvändiga GTK+-temamotorn \"%s\" inte är installerat."
@@ -1053,7 +1053,7 @@ msgstr "\"%s\" verkar inte vara ett giltigt tema. Den kan vara en temamotor som 
 #: ../capplets/appearance/theme-installer.c:288
 #, c-format
 msgid "GNOME Theme %s correctly installed"
-msgstr "GNOME-temat %s korrekt installerat"
+msgstr "GNOME-temat %s installerades"
 
 #: ../capplets/appearance/theme-installer.c:355
 #, c-format
@@ -1322,45 +1322,45 @@ msgstr "Välj en bild."
 msgid "_Select"
 msgstr "_Välj"
 
-#: ../capplets/common/gnome-theme-info.c:635
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Default Pointer - Current"
 msgstr "Standardmuspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:639
+#: ../capplets/common/gnome-theme-info.c:642
 msgid "White Pointer"
 msgstr "Vit muspekare"
 
-#: ../capplets/common/gnome-theme-info.c:640
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "White Pointer - Current"
 msgstr "Vit muspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:644
+#: ../capplets/common/gnome-theme-info.c:647
 msgid "Large Pointer"
 msgstr "Stor muspekare"
 
-#: ../capplets/common/gnome-theme-info.c:645
+#: ../capplets/common/gnome-theme-info.c:648
 msgid "Large Pointer - Current"
 msgstr "Stor muspekare - aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:649
+#: ../capplets/common/gnome-theme-info.c:652
 msgid "Large White Pointer - Current"
 msgstr "Stor vit muspekare - Aktuell"
 
-#: ../capplets/common/gnome-theme-info.c:650
+#: ../capplets/common/gnome-theme-info.c:653
 msgid "Large White Pointer"
 msgstr "Stor vit muspekare"
 
-#: ../capplets/common/gnome-theme-info.c:1620
+#: ../capplets/common/gnome-theme-info.c:1623
 #, c-format
 msgid "This theme will not look as intended because the required GTK+ theme '%s' is not installed."
 msgstr "Detta tema kommer inte att se ut som det var tänkt därför att det nödvändiga GTK+-temat \"%s\" inte är installerat."
 
-#: ../capplets/common/gnome-theme-info.c:1628
+#: ../capplets/common/gnome-theme-info.c:1631
 #, c-format
 msgid "This theme will not look as intended because the required window manager theme '%s' is not installed."
 msgstr "Detta tema kommer inte att se ut som det var tänkt därför att det nödvändiga fönsterhanterartemat \"%s\" inte är installerat."
 
-#: ../capplets/common/gnome-theme-info.c:1635
+#: ../capplets/common/gnome-theme-info.c:1638
 #, c-format
 msgid "This theme will not look as intended because the required icon theme '%s' is not installed."
 msgstr "Detta tema kommer inte att se ut som det var tänkt därför att det nödvändiga ikontemat \"%s\" inte är installerat."
@@ -2658,6 +2658,105 @@ msgstr "_Spela upp larm och ljudeffekter"
 msgid "_Sound playback:"
 msgstr "_Ljuduppspelning:"
 
+#. Bell
+#: ../capplets/sound/sound-theme-definition.h:46
+msgctxt "Sound event"
+msgid "Alert sound"
+msgstr "Larmljud"
+
+#: ../capplets/sound/sound-theme-definition.h:47
+msgctxt "Sound event"
+msgid "Visual alert"
+msgstr "Visuellt larm"
+
+#. Windows and buttons
+#: ../capplets/sound/sound-theme-definition.h:49
+msgctxt "Sound event"
+msgid "Windows and Buttons"
+msgstr "Fönster och knappar"
+
+#: ../capplets/sound/sound-theme-definition.h:50
+msgctxt "Sound event"
+msgid "Button clicked"
+msgstr "Knapp nedtryckt"
+
+#: ../capplets/sound/sound-theme-definition.h:51
+msgctxt "Sound event"
+msgid "Toggle button clicked"
+msgstr "Växlingsknapp nedtryckt"
+
+#: ../capplets/sound/sound-theme-definition.h:52
+msgctxt "Sound event"
+msgid "Window maximized"
+msgstr "Fönster maximerat"
+
+#: ../capplets/sound/sound-theme-definition.h:53
+msgctxt "Sound event"
+msgid "Window unmaximized"
+msgstr "Fönster avmaximerat"
+
+#: ../capplets/sound/sound-theme-definition.h:54
+msgctxt "Sound event"
+msgid "Window minimised"
+msgstr "Fönster minimerat"
+
+#. Desktop
+#: ../capplets/sound/sound-theme-definition.h:56
+msgctxt "Sound event"
+msgid "Desktop"
+msgstr "Skrivbord"
+
+#: ../capplets/sound/sound-theme-definition.h:57
+msgctxt "Sound event"
+msgid "Login"
+msgstr "Inloggning"
+
+#: ../capplets/sound/sound-theme-definition.h:58
+msgctxt "Sound event"
+msgid "Logout"
+msgstr "Utloggning"
+
+#: ../capplets/sound/sound-theme-definition.h:59
+msgctxt "Sound event"
+msgid "New e-mail"
+msgstr "Ny e-post"
+
+#: ../capplets/sound/sound-theme-definition.h:60
+msgctxt "Sound event"
+msgid "Empty trash"
+msgstr "Töm papperskorg"
+
+#: ../capplets/sound/sound-theme-definition.h:61
+msgctxt "Sound event"
+msgid "Long action completed (download, CD burning, etc.)"
+msgstr "Lång åtgärd är färdig (hämtning, skivbränning, etc.)"
+
+#. Alerts?
+#: ../capplets/sound/sound-theme-definition.h:63
+msgctxt "Sound event"
+msgid "Alerts"
+msgstr "Larm"
+
+#: ../capplets/sound/sound-theme-definition.h:64
+msgctxt "Sound event"
+msgid "Information or question"
+msgstr "Information eller fråga"
+
+#: ../capplets/sound/sound-theme-definition.h:65
+msgctxt "Sound event"
+msgid "Warning"
+msgstr "Varning"
+
+#: ../capplets/sound/sound-theme-definition.h:66
+msgctxt "Sound event"
+msgid "Error"
+msgstr "Fel"
+
+#: ../capplets/sound/sound-theme-definition.h:67
+msgctxt "Sound event"
+msgid "Battery warning"
+msgstr "Batterivarning"
+
 #: ../capplets/sound/sound-theme.c:437
 #: ../capplets/sound/sound-theme.c:563
 msgid "Flash screen"
@@ -3137,63 +3236,6 @@ msgstr "Skrivandeövervakare"
 msgid "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choosing 'Add to panel', selecting 'Notification area' and clicking 'Add'."
 msgstr "Skrivandeövervakaren använder notifieringsytan för att visa information. Du verkar inte ha en sådan i din panel. Du kan lägga till den genom att högerklicka på panelen och välja \"Lägg till i panelen\", välja \"Notifieringsyta\" och klicka på \"Lägg till\"."
 
-#~ msgctxt "Sound event"
-#~ msgid "Alert sound"
-#~ msgstr "Larmljud"
-#~ msgctxt "Sound event"
-#~ msgid "Visual alert"
-#~ msgstr "Visuellt larm"
-#~ msgctxt "Sound event"
-#~ msgid "Windows and Buttons"
-#~ msgstr "Fönster och knappar"
-#~ msgctxt "Sound event"
-#~ msgid "Button clicked"
-#~ msgstr "Knapp nedtryckt"
-#~ msgctxt "Sound event"
-#~ msgid "Toggle button clicked"
-#~ msgstr "Växlingsknapp nedtryckt"
-#~ msgctxt "Sound event"
-#~ msgid "Window maximized"
-#~ msgstr "Fönster maximerat"
-#~ msgctxt "Sound event"
-#~ msgid "Window unmaximized"
-#~ msgstr "Fönster avmaximerat"
-#~ msgctxt "Sound event"
-#~ msgid "Window minimised"
-#~ msgstr "Fönster minimerat"
-#~ msgctxt "Sound event"
-#~ msgid "Desktop"
-#~ msgstr "Skrivbord"
-#~ msgctxt "Sound event"
-#~ msgid "Login"
-#~ msgstr "Inloggning"
-#~ msgctxt "Sound event"
-#~ msgid "Logout"
-#~ msgstr "Utloggning"
-#~ msgctxt "Sound event"
-#~ msgid "New e-mail"
-#~ msgstr "Ny e-post"
-#~ msgctxt "Sound event"
-#~ msgid "Empty trash"
-#~ msgstr "Töm papperskorg"
-#~ msgctxt "Sound event"
-#~ msgid "Long action completed (download, CD burning, etc.)"
-#~ msgstr "Lång åtgärd är färdig (hämtning, skivbränning, etc.)"
-#~ msgctxt "Sound event"
-#~ msgid "Alerts"
-#~ msgstr "Larm"
-#~ msgctxt "Sound event"
-#~ msgid "Information or question"
-#~ msgstr "Information eller fråga"
-#~ msgctxt "Sound event"
-#~ msgid "Warning"
-#~ msgstr "Varning"
-#~ msgctxt "Sound event"
-#~ msgid "Error"
-#~ msgstr "Fel"
-#~ msgctxt "Sound event"
-#~ msgid "Battery warning"
-#~ msgstr "Batterivarning"
 #~ msgid "Enable support for GNOME assistive technologies at login"
 #~ msgstr "Aktivera stöd för GNOME-hjälpmedelsfunktioner vid inloggning"
 #~ msgid "Cloned Output"
