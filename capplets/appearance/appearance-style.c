@@ -392,7 +392,7 @@ static void
 style_response_cb (GtkDialog *dialog, gint response_id)
 {
   if (response_id == GTK_RESPONSE_HELP) {
-    /* FIXME: help */
+    capplet_help (GTK_WINDOW (dialog), "user-guide.xml", "goscustdesk-61");
   } else {
     gtk_widget_hide (GTK_WIDGET (dialog));
   }
