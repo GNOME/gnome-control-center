@@ -214,10 +214,10 @@ metacity_change_settings (GnomeWindowManager    *wm,
                         action = "toggle_maximize";
                         break;
                 case DOUBLE_CLICK_MAXIMIZE_VERTICALLY:
-                        action = "toggle_maximize_vert";
+                        action = "toggle_maximize_vertically";
                         break;
                 case DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY:
-                        action = "toggle_maximize_horiz";
+                        action = "toggle_maximize_horizontally";
                         break;
                 case DOUBLE_CLICK_MINIMIZE:
                         action = "minimize";
@@ -370,9 +370,11 @@ metacity_get_settings (GnomeWindowManager *wm,
                         settings->double_click_action = DOUBLE_CLICK_SHADE;
                 else if (strcmp (str, "toggle_maximize") == 0)
                         settings->double_click_action = DOUBLE_CLICK_MAXIMIZE;
-                else if (strcmp (str, "toggle_maximize_horiz") == 0)
+                else if (strcmp (str, "toggle_maximize_horizontally") == 0 ||
+                         strcmp (str, "toggle_maximize_horiz") == 0)
                         settings->double_click_action = DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY;
-                else if (strcmp (str, "toggle_maximize_vert") == 0)
+                else if (strcmp (str, "toggle_maximize_vertically") == 0 ||
+                         strcmp (str, "toggle_maximize_vert") == 0)
                         settings->double_click_action = DOUBLE_CLICK_MAXIMIZE_VERTICALLY;
                 else if (strcmp (str, "minimize") == 0)
                         settings->double_click_action = DOUBLE_CLICK_MINIMIZE;
