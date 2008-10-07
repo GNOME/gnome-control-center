@@ -85,6 +85,38 @@ main_window_response (GtkWidget *widget,
     g_object_unref (data->client);
     g_object_unref (data->xml);
   }
+  else if (response_id == GTK_RESPONSE_HELP)
+  {
+      GtkNotebook *nb;
+      gint pindex;
+
+      nb = GTK_NOTEBOOK (glade_xml_get_widget (data->xml, "main_notebook"));
+      pindex = gtk_notebook_get_current_page (nb);
+
+      switch (pindex)
+      {
+        case 0: /* theme */
+          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
+                                    "goscustdesk-12"); 
+          break;
+        case 1: /* background */
+          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
+                                    "goscustdesk-7"); 
+          break;
+        case 2: /* fonts */
+          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
+                                    "goscustdesk-38"); 
+          break;
+        case 3: /* interface */
+          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
+                                    "goscustuserinter-2"); 
+          break;
+        default:
+          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
+                                    "prefs-look-and-feel"); 
+          break;
+       }
+  }
 }
 
 int
