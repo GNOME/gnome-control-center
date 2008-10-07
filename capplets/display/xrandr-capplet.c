@@ -1406,7 +1406,7 @@ paint_output (App *app, cairo_t *cr, int i)
     }
     else if (output->rotation & GNOME_RR_ROTATION_90)
     {
-	angle = G_PI / 2;
+	angle = 1.5 * G_PI;
     }
     else if (output->rotation & GNOME_RR_ROTATION_180)
     {
@@ -1414,7 +1414,7 @@ paint_output (App *app, cairo_t *cr, int i)
     }
     else if (output->rotation & GNOME_RR_ROTATION_270)
     {
-	angle = 1.5 * G_PI;
+	angle = G_PI / 2;
     }
     else
     {
