@@ -15,8 +15,8 @@ gnome_display_properties_SOURCES =	\
 
 gnome_display_properties_LDFLAGS = -export-dynamic
 gnome_display_properties_LDADD = \
-	$(DISPLAY_CAPPLET_LIBS) \
-	$(top_builddir)/capplets/common/libcommon.la
+	$(top_builddir)/capplets/common/libcommon.la \
+	$(DISPLAY_CAPPLET_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 

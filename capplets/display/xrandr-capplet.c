@@ -50,7 +50,6 @@ struct App
     GtkWidget	   *refresh_combo;
     GtkWidget	   *rotation_combo;
     GtkWidget	   *panel_checkbox;
-    GtkWidget	   *panel_label;
     GtkWidget	   *clone_checkbox;
     GtkWidget	   *show_icon_checkbox;
 
@@ -69,7 +68,7 @@ show_error (const char *err)
 	NULL,
 	GTK_DIALOG_DESTROY_WITH_PARENT,
 	GTK_MESSAGE_WARNING,
-	GTK_BUTTONS_OK, err);
+	GTK_BUTTONS_OK, "%s", err);
 
     gtk_window_set_title (GTK_WINDOW (dialog), "");
 
@@ -259,16 +258,14 @@ add_key (GtkWidget *widget,
     if (!info.found)
     {
 	GtkTreeIter iter;
-	gtk_list_store_append (store, &iter);
-
-	gtk_list_store_set (store, &iter,
-			    0, text,
-			    1, width,
-			    2, height,
-			    3, rate,
-			    4, width * height,
-			    5, rotation,
-			    -1);
+	gtk_list_store_insert_with_values (store, &iter, -1,
+                                           0, text,
+                                           1, width,
+                                           2, height,
+                                           3, rate,
+                                           4, width * height,
+                                           5, rotation,
+                                           -1);
 
 	retval = TRUE;
     }
@@ -445,8 +442,6 @@ rebuild_rotation_combo (App *app)
 	combo_select (app->rotation_combo, N_("Normal"));
 }
 
-#define idle_free_printf(x) idle_free (g_strdup_printf (x))
-
 static void
 rebuild_rate_combo (App *app)
 {
@@ -507,6 +502,7 @@ count_active_outputs (App *app)
     return count;
 }
 
+#if 0
 static int
 count_all_outputs (GnomeRRConfig *config)
 {
@@ -517,6 +513,7 @@ count_all_outputs (GnomeRRConfig *config)
 
     return i;
 }
+#endif
 
 static void
 rebuild_resolution_combo (App *app)
@@ -1658,6 +1655,7 @@ apply (App *app)
     }
 }
 
+#if 0
 /* Returns whether the graphics driver doesn't advertise RANDR 1.2 features, and just 1.0 */
 static gboolean
 driver_is_randr_10 (GnomeRRConfig *config)
@@ -1678,6 +1676,7 @@ driver_is_randr_10 (GnomeRRConfig *config)
 
     return (count_all_outputs (config) == 1 && strcmp (config->outputs[0]->name, "default") == 0);
 }
+#endif
 
 static void
 on_detect_displays (GtkWidget *widget, gpointer data)
@@ -1762,7 +1761,6 @@ run_application (App *app)
     g_signal_connect (app->show_icon_checkbox, "toggled", G_CALLBACK (on_show_icon_toggled), app);
 
     app->panel_checkbox = glade_xml_get_widget (xml, "panel_checkbox");
-    app->panel_label = glade_xml_get_widget (xml, "panel_label");
 
     make_text_combo (app->resolution_combo, 4);
     make_text_combo (app->refresh_combo, 3);
@@ -1788,10 +1786,7 @@ run_application (App *app)
     gtk_container_add (GTK_CONTAINER (align), app->area);
 
     on_screen_changed (app->screen, app);
-    rebuild_gui (app);
 
-    gtk_widget_hide (app->panel_checkbox);
-    gtk_widget_hide (app->panel_label);
     g_object_unref (xml);
 
 restart:
