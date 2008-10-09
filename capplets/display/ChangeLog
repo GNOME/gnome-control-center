@@ -1,3 +1,9 @@
+Wed Oct  8 21:20:21 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* scrollarea.c (foo_scroll_area_size_allocate): XOR the old and
+	the new regions instead of subtracting old from new. Fixes bug
+	551566, reported by Christian Persch.
+
 Wed Oct  8 21:15:04 2008  Søren Sandmann  <sandmann@redhat.com>
 
 	* xrandr-capplet.c: Make use of new clone mode API in

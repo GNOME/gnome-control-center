@@ -816,7 +816,7 @@ foo_scroll_area_size_allocate (GtkWidget     *widget,
 		       -widget->allocation.x, -widget->allocation.y);
     invalid = gdk_region_rectangle (allocation);
     gdk_region_offset (invalid, -allocation->x, -allocation->y);
-    gdk_region_subtract (invalid, old_allocation);
+    gdk_region_xor (invalid, old_allocation);
     allocation_to_canvas_region (scroll_area, invalid);
     foo_scroll_area_invalidate_region (scroll_area, invalid);
     gdk_region_destroy (old_allocation);
