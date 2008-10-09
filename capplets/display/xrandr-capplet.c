@@ -294,80 +294,6 @@ combo_select (GtkWidget *widget, const char *text)
     return TRUE;
 }
 
-static gboolean
-has_similar_mode (GnomeRROutput *output, GnomeRRMode *mode)
-{
-    int i;
-    GnomeRRMode **modes = gnome_rr_output_list_modes (output);
-    int width = gnome_rr_mode_get_width (mode);
-    int height = gnome_rr_mode_get_height (mode);
-
-    for (i = 0; modes[i] != NULL; ++i)
-    {
-	GnomeRRMode *m = modes[i];
-
-	if (gnome_rr_mode_get_width (m) == width	&&
-	    gnome_rr_mode_get_height (m) == height)
-	{
-	    return TRUE;
-	}
-    }
-
-    return FALSE;
-}
-
-static GnomeRRMode **
-list_clone_modes (GnomeRRConfig *config, GnomeRRScreen *screen)
-{
-    int i;
-    GPtrArray *result;
-    GnomeRRMode **modes;
-
-    for (i = 0; config->outputs[i] != NULL; ++i)
-    {
-	if (config->outputs[i]->connected)
-	{
-	    GnomeRROutput *output =
-		gnome_rr_screen_get_output_by_name (screen, config->outputs[i]->name);
-
-	    modes = gnome_rr_output_list_modes (output);
-	}
-    }
-
-    if (!modes)
-	return NULL;
-
-    result = g_ptr_array_new ();
-
-    for (i = 0; modes[i] != NULL; ++i)
-    {
-	gboolean valid = TRUE;
-	int j;
-
-	for (j = 0; config->outputs[j] != NULL; ++j)
-	{
-	    if (config->outputs[j]->connected)
-	    {
-		GnomeRROutput *output = gnome_rr_screen_get_output_by_name (
-		    screen, config->outputs[j]->name);
-
-		if (!has_similar_mode (output, modes[i]))
-		{
-		    valid = FALSE;
-		    break;
-		}
-	    }
-	}
-
-	if (valid)
-	    g_ptr_array_add (result, modes[i]);
-    }
-
-    g_ptr_array_add (result, NULL);
-
-    return (GnomeRRMode **)g_ptr_array_free (result, FALSE);
-}
-
 static GnomeRRMode **
 get_current_modes (App *app)
 {
@@ -375,7 +301,7 @@ get_current_modes (App *app)
 
     if (app->current_configuration->clone)
     {
-	return list_clone_modes (app->current_configuration, app->screen);
+	return gnome_rr_screen_list_clone_modes (app->screen);
     }
     else
     {
