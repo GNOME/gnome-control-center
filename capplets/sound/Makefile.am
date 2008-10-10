@@ -25,6 +25,7 @@ INCLUDES = \
 	$(HAL_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DSOUND_DATA_DIR="\"$(datadir)/sounds\"" \
 	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
 
 @INTLTOOL_DESKTOP_RULE@

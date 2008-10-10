@@ -509,6 +509,8 @@ get_sound_filename (GladeXML *dialog)
 	if (data_dir != NULL)
 		gtk_file_chooser_add_shortcut_folder (GTK_FILE_CHOOSER (chooser), data_dir, NULL);
 
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser), SOUND_DATA_DIR);
+
 	response = gtk_dialog_run (GTK_DIALOG (chooser));
 	filename = NULL;
 	if (response == GTK_RESPONSE_ACCEPT)
