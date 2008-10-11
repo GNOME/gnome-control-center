@@ -8,6 +8,7 @@ INCLUDES = \
 	-DINSTALL_PREFIX=\"$(prefix)\"					\
 	-I$(top_srcdir)							\
 	-I$(top_srcdir)/libwindow-settings				\
+	$(CAPPLET_CFLAGS)						\
 	$(DBUS_CFLAGS)							\
 	$(GNOME_DESKTOP_CFLAGS)						\
 	$(METACITY_CFLAGS)						\
