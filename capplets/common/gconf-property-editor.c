@@ -1468,6 +1468,7 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 						      GTK_DIALOG_MODAL,
 						      GTK_MESSAGE_ERROR,
 						      GTK_BUTTONS_OK,
+						      "%s",
 						      message);
 			gtk_dialog_run (GTK_DIALOG (box));
 			gtk_widget_destroy (box);
