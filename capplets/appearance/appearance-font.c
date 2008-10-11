@@ -524,10 +524,11 @@ application_font_to_gconf (GConfPropertyEditor *peditor,
 					     GTK_DIALOG_MODAL,
 					     GTK_MESSAGE_WARNING,
 					     GTK_BUTTONS_NONE,
+					     "%s",
 					     warning_label);
 
     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (warning_dialog),
-					      warning_label2);
+					      "%s", warning_label2);
 
     gtk_dialog_add_button (GTK_DIALOG (warning_dialog),
 			   _("Use previous font"), GTK_RESPONSE_CLOSE);

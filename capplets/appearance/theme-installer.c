@@ -249,7 +249,7 @@ invalid_theme_dialog (const gchar *filename, gboolean maybe_theme_engine)
 	const gchar *engine = _("\"%s\" does not appear to be a valid theme. It may be a theme engine which you need to compile.");
 
 	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-			GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, primary);
+			GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "%s", primary);
 	if (maybe_theme_engine)
 		gtk_message_dialog_format_secondary_text (
 				GTK_MESSAGE_DIALOG (dialog), engine, filename);
@@ -357,9 +357,10 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 					GTK_DIALOG_MODAL,
 					GTK_MESSAGE_ERROR,
 					GTK_BUTTONS_OK,
+					"%s",
 					str);
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-							  error->message);
+							  "%s", error->message);
 
 		g_free (str);
 		g_error_free (error);
@@ -394,7 +395,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 				user_message = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>", str);
 				g_free (str);
 
-				dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, user_message);
+				dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, "%s", user_message);
 
 				gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("Would you like to apply it now, or keep your current theme?"));
 
@@ -444,6 +445,7 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 				       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_INFO,
 				       GTK_BUTTONS_OK,
+				       "%s",
 				       user_message);
 				gtk_dialog_run (GTK_DIALOG (dialog));
 			}
