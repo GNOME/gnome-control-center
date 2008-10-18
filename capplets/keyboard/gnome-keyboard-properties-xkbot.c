@@ -34,6 +34,7 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
+static GladeXML *chooser_dialog = NULL;
 static const char *current1st_level_id = NULL;
 static GtkWidget *current_vbox = NULL;
 static GtkWidget *current_none_radio = NULL;
@@ -92,6 +93,13 @@ xkb_options_expander_selcounter_add (GtkWidget * expander, int value)
 			   GINT_TO_POINTER
 			   (xkb_options_expander_selcounter_get (expander)
 			    + value));
+}
+
+static void
+xkb_options_expander_selcounter_reset (GtkWidget * expander)
+{
+	g_object_set_data (G_OBJECT (expander), SELCOUNTER_PROP,
+			   GINT_TO_POINTER (0));
 }
 
 static void
@@ -273,6 +281,8 @@ xkb_options_add_group (XklConfigRegistry * config_registry,
 	gtk_expander_set_use_markup (GTK_EXPANDER (expander), TRUE);
 	g_object_set_data_full (G_OBJECT (expander), "utfGroupName",
 				utf_group_name, g_free);
+	g_object_set_data_full (G_OBJECT (expander), "groupId",
+				g_strdup (config_item->name), g_free);
 
 	g_free (titlemarkup);
 	align = gtk_alignment_new (0, 0, 1, 1);
@@ -342,27 +352,30 @@ xkb_options_load_options (GladeXML * dialog)
 		expanders_list = expanders_list->next;
 	}
 
-	/* just cleanup */
-	expanders_list =
-	    g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
-	g_object_set_data (G_OBJECT (dialog), EXPANDERS_PROP, NULL);
-	g_slist_free (expanders_list);
-
 	gtk_widget_show_all (opts_vbox);
 }
 
 static void
 chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 {
-	if (response == GTK_RESPONSE_CLOSE)
+	if (response == GTK_RESPONSE_CLOSE) {
+		/* just cleanup */
+		GSList *expanders_list =
+		    g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
+		g_object_set_data (G_OBJECT (dialog), EXPANDERS_PROP,
+				   NULL);
+		g_slist_free (expanders_list);
+
 		gtk_widget_destroy (GTK_WIDGET (dialog));
+		chooser_dialog = NULL;
+	}
 }
 
 /* Create popup dialog*/
 void
 xkb_options_popup_dialog (GladeXML * dialog)
 {
-	GladeXML *chooser_dialog =
+	chooser_dialog =
 	    glade_xml_new (GNOMECC_GLADE_DIR
 			   "/gnome-keyboard-properties.glade",
 			   "xkb_options_dialog", NULL);
@@ -379,6 +392,20 @@ xkb_options_popup_dialog (GladeXML * dialog)
 	gtk_dialog_run (GTK_DIALOG (chooser));
 }
 
+/* Update selected option counters for a group-bound expander */
+static void
+xkb_options_update_option_counters (XklConfigRegistry * config_registry,
+				    XklConfigItem * config_item,
+				    GtkWidget * expander)
+{
+	gchar *full_option_name =
+	    g_strdup (gkbd_keyboard_config_merge_items
+		      (current1st_level_id, config_item->name));
+	gboolean current_state =
+	    xkb_options_is_selected (full_option_name);
+	xkb_options_expander_selcounter_add (expander, current_state);
+}
+
 /* Respond to a change in the xkb gconf settings */
 static void
 xkb_options_update (GConfClient * client,
@@ -388,6 +415,27 @@ xkb_options_update (GConfClient * client,
 	   This is here to avoid calling it N_OPTIONS times for each gconf
 	   change. */
 	enable_disable_restoring (dialog);
+
+	if (chooser_dialog != NULL) {
+		GSList *expanders_list =
+		    g_object_get_data (G_OBJECT (chooser_dialog),
+				       EXPANDERS_PROP);
+		while (expanders_list) {
+			GtkWidget *expander =
+			    GTK_WIDGET (expanders_list->data);
+			gchar *group_id =
+			    g_object_get_data (G_OBJECT (expander),
+					       "groupId");
+			current1st_level_id = group_id;
+			xkb_options_expander_selcounter_reset (expander);
+			xkl_config_registry_foreach_option
+			    (config_registry, group_id,
+			     (ConfigItemProcessFunc)
+			     xkb_options_update_option_counters, expander);
+			xkb_options_expander_highlight (expander);
+			expanders_list = expanders_list->next;
+		}
+	}
 }
 
 void
