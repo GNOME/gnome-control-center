@@ -304,9 +304,9 @@ xkb_options_expanders_compare (GtkWidget * expander1,
 			       GtkWidget * expander2)
 {
 	const gchar *t1 =
-	    gtk_expander_get_label (GTK_EXPANDER (expander1));
+	    g_object_get_data (G_OBJECT (expander1), "utfGroupName");
 	const gchar *t2 =
-	    gtk_expander_get_label (GTK_EXPANDER (expander2));
+	    g_object_get_data (G_OBJECT (expander2), "utfGroupName");
 	return g_utf8_collate (t1, t2);
 }
 
@@ -352,7 +352,7 @@ xkb_options_load_options (GladeXML * dialog)
 }
 
 static void
-chooser_response_cb (GtkDialog *dialog, gint response, gpointer data)
+chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 {
 	if (response == GTK_RESPONSE_CLOSE)
 		gtk_widget_destroy (GTK_WIDGET (dialog));
@@ -374,7 +374,7 @@ xkb_options_popup_dialog (GladeXML * dialog)
 	xkb_options_load_options (chooser_dialog);
 
 	g_signal_connect (chooser, "response",
-	    G_CALLBACK (chooser_response_cb), dialog);
+			  G_CALLBACK (chooser_response_cb), dialog);
 
 	gtk_dialog_run (GTK_DIALOG (chooser));
 }
