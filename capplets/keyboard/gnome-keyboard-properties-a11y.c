@@ -203,6 +203,11 @@ setup_a11y_tabs (GladeXML *dialog, GConfChangeSet *changeset)
 			  G_CALLBACK (stickykeys_enable_toggled_cb), dialog);
 	stickykeys_enable_toggled_cb (w, dialog);
 
+	w = WID ("stickykeys_two_key_off");
+	gconf_peditor_new_boolean (changeset,
+				   CONFIG_ROOT "/stickykeys_two_key_off",
+				   w, NULL);
+
 	w = WID ("slowkeys_enable");
 	gconf_peditor_new_boolean (changeset,
 				   CONFIG_ROOT "/slowkeys_enable",
