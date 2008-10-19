@@ -170,6 +170,9 @@ description_set_func (GtkTreeViewColumn *tree_column,
 		  "text", key_entry->description != NULL ?
 			  key_entry->description : _("<Unknown Action>"),
 		  NULL);
+  else 
+    g_object_set (cell,
+		  "editable", FALSE, NULL);
 }
 
 static gboolean
