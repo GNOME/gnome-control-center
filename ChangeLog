@@ -1,5 +1,12 @@
 2008-10-19  Matthias Clasen  <mclasen@redhat.com>
 
+	Bug 556977 – avoid duplicate custom keybindings
+
+	* capplets/keybindings/gnome-keybinding-properties.c: Filter
+	out custom keybindings that are also listed in xml files.
+
+2008-10-19  Matthias Clasen  <mclasen@redhat.com>
+
 	Bug 556967 – fix editability of group headings
 
 	* capplets/keybindings/gnome-keybinding-properties.c

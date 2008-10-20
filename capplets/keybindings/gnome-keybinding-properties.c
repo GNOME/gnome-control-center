@@ -361,6 +361,42 @@ clear_old_model (GladeXML *dialog)
   gtk_widget_set_usize (WID ("actions_swindow"), -1, -1);
 }
 
+typedef struct {
+  const char *key;
+  gboolean found;
+} KeyMatchData;
+
+static gboolean
+key_match (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+  KeyMatchData *match_data = data;
+  KeyEntry *element;
+
+  gtk_tree_model_get (model, iter,
+		      KEYENTRY_COLUMN, &element,
+		      -1);
+
+  if (element && g_strcmp0 (element->gconf_key, match_data->key) == 0) 
+    {
+      match_data->found = TRUE;
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static gboolean 
+key_is_already_shown (GtkTreeModel *model, const KeyListEntry *entry)
+{
+  KeyMatchData data;
+
+  data.key = entry->name;
+  data.found = FALSE; 
+  gtk_tree_model_foreach (model, key_match, &data);
+
+  return data.found;
+}
+
 static gboolean
 should_show_key (const KeyListEntry *entry)
 {
@@ -432,6 +468,7 @@ append_keys_to_tree (GladeXML           *dialog,
   GtkTreeModel *model;
   gboolean found;
   gint i, j;
+  gint rows_before;
 
   client = gconf_client_get_default ();
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
@@ -473,6 +510,7 @@ append_keys_to_tree (GladeXML           *dialog,
    * then we need to scroll now */
   ensure_scrollbar (dialog, i - 1);
 
+  rows_before = i;
   for (j = 0; keys_list[j].name != NULL; j++)
     {
       GConfEntry *entry;
@@ -482,6 +520,9 @@ append_keys_to_tree (GladeXML           *dialog,
       gchar *description;
 
       if (!should_show_key (&keys_list[j]))
+	continue;
+
+      if (key_is_already_shown (model, &keys_list[j]))
 	continue;
 
       key_string = keys_list[j].name;
@@ -556,8 +597,12 @@ append_keys_to_tree (GladeXML           *dialog,
 			  -1);
       gtk_tree_view_expand_all (GTK_TREE_VIEW (WID ("shortcut_treeview")));
     }
-
+  
   g_object_unref (client);
+
+  /* Don't show an empty section */
+  if (i == rows_before)
+    gtk_tree_store_remove (GTK_TREE_STORE (model), &parent_iter);
 
   if (i == 0)
       gtk_widget_hide (WID ("shortcuts_vbox"));
@@ -850,6 +895,11 @@ reload_key_entries (gpointer wm_name, GladeXML *dialog)
     }
   g_list_free (list);
 
+  /* Load custom shortcuts _after_ system-provided ones, 
+   * since some of the custom shortcuts may also be listed
+   * in a file. Loading the custom shortcuts last makes
+   * such keys not show up in the custom section.
+   */
   append_keys_to_tree_from_gconf (dialog, GCONF_BINDING_DIR);
 }
 
