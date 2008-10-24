@@ -25,9 +25,9 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <glib/gi18n.h>
 
 #include <libgnomekbd/gkbd-desktop-config.h>
 #include <libgnomekbd/gkbd-keyboard-drawing.h>

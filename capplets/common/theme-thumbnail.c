@@ -14,7 +14,6 @@
 #undef N_
 
 #include <glib.h>
-#include <libgnomeui/gnome-icon-theme.h>
 
 #include "theme-thumbnail.h"
 #include "gtkrc-utils.h"

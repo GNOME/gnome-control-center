@@ -22,7 +22,6 @@
 
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
-#include <gnome.h>
 #include <string.h>
 #include "gnome-wp-item.h"
 

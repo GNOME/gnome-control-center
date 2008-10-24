@@ -21,6 +21,7 @@
 
 #include <string.h>
 #include <pango/pango.h>
+#include <glib/gi18n.h>
 
 #include "theme-util.h"
 #include "gtkrc-utils.h"

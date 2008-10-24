@@ -29,6 +29,7 @@
 #include <gdk/gdkx.h>
 #include <X11/Xft/Xft.h>
 #endif /* HAVE_XFT2 */
+#include <glib/gi18n.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"

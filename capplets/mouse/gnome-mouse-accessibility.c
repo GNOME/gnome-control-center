@@ -17,6 +17,7 @@
 
 #include <gtk/gtk.h>
 #include <glade/glade.h>
+#include <glib/gi18n.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"

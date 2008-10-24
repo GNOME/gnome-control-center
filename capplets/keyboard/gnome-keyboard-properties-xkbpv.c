@@ -25,7 +25,6 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
 #include <glade/glade.h>
 
 #include <libgnomekbd/gkbd-keyboard-drawing.h>

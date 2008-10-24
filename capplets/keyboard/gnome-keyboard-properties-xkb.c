@@ -25,10 +25,11 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <string.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <glib/gi18n.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"

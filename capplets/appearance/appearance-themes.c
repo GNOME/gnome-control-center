@@ -113,7 +113,7 @@ theme_thumbnail_update (GdkPixbuf *pixbuf,
       path = g_strconcat ("themes:///", theme_name, NULL);
 
       gnome_desktop_thumbnail_factory_save_thumbnail (data->thumb_factory,
-					      pixbuf, path, mtime);
+						      pixbuf, path, mtime);
 
       g_free (path);
     }
@@ -137,7 +137,7 @@ theme_get_thumbnail_from_cache (GnomeThemeMetaInfo *info, AppearanceData *data)
   /* try to share thumbs with nautilus, use themes:/// */
   path = g_strconcat ("themes:///", info->name, NULL);
   thumb_filename = gnome_desktop_thumbnail_factory_lookup (data->thumb_factory,
-                                                   path, mtime);
+							   path, mtime);
   g_free (path);
 
   if (thumb_filename != NULL) {

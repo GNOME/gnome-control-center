@@ -65,9 +65,8 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
                                                   G_FILE_ATTRIBUTE_TIME_MODIFIED);
 
     wp->thumburi = gnome_desktop_thumbnail_factory_lookup (thumbs,
-						   uri,
-						   wp->mtime);
-
+							   uri,
+							   wp->mtime);
   }
 
   if (info != NULL)

@@ -27,7 +27,6 @@
 
 #include <string.h>
 
-#include <gnome.h>
 #include <glade/glade.h>
 
 #include <libgnomekbd/gkbd-keyboard-drawing.h>

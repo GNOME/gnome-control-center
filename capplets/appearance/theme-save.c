@@ -22,6 +22,8 @@
 #include "appearance.h"
 
 #include <glib/gstdio.h>
+#include <glib/gi18n.h>
+#include <string.h>
 
 #include "theme-save.h"
 #include "theme-util.h"

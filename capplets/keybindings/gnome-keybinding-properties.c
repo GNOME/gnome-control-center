@@ -10,6 +10,8 @@
 #include <gdk/gdkx.h>
 #include <glade/glade.h>
 #include <X11/Xatom.h>
+#include <glib/gi18n.h>
+#include <gdk/gdkkeysyms.h>
 
 #include "wm-common.h"
 #include "capplet-util.h"
@@ -1464,7 +1466,6 @@ setup_dialog (GladeXML *dialog)
 int
 main (int argc, char *argv[])
 {
-  GnomeProgram *program;
   GladeXML *dialog;
 
   g_thread_init (NULL);
@@ -1474,10 +1475,7 @@ main (int argc, char *argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  program = gnome_program_init ("gnome-keybinding-properties", VERSION,
-		      LIBGNOMEUI_MODULE, argc, argv,
-		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-		      NULL);
+  gtk_init (&argc, &argv);
 
   activate_settings_daemon ();
 
@@ -1488,7 +1486,6 @@ main (int argc, char *argv[])
   gtk_main ();
 
   g_object_unref (dialog);
-  g_object_unref (program);
   return 0;
 }
 

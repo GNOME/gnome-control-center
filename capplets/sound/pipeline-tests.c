@@ -29,10 +29,10 @@
 
 #include <locale.h>
 #include <string.h>
-#include <gnome.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <gst/gst.h>
+#include <glib/gi18n.h>
 
 #include "pipeline-tests.h"
 #define WID(s) glade_xml_get_widget (interface_xml, s)

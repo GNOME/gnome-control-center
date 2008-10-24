@@ -27,6 +27,7 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <glib/gstdio.h>
+#include <unistd.h>
 
 #include "capplet-util.h"
 #include "file-transfer-dialog.h"
