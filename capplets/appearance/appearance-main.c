@@ -29,10 +29,6 @@
 #include "activate-settings-daemon.h"
 #include "capplet-util.h"
 
-/* required for gnome_program_init(): */
-#include <libgnome/libgnome.h>
-#include <libgnomeui/gnome-ui-init.h>
-/* ---------------------------------- */
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 
 static AppearanceData *
@@ -118,7 +114,6 @@ int
 main (int argc, char **argv)
 {
   AppearanceData *data;
-  GnomeProgram *program;
   GtkWidget *w;
 
   gchar *install_filename = NULL;
@@ -159,15 +154,7 @@ main (int argc, char **argv)
   option_context = g_option_context_new (NULL);
   g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
 
-  /* this appears to be required for gnome_wm_manager_init (), which is called
-   * inside gnome_meta_theme_set ();
-   * TODO: try to remove if possible
-   */
-  program = gnome_program_init ("appearance", VERSION,
-        LIBGNOMEUI_MODULE, argc, argv,
-        GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-        GNOME_PARAM_GOPTION_CONTEXT, option_context,
-        NULL);
+  capplet_init (option_context, &argc, &argv);
 
   if (install_filename != NULL) {
     GFile *inst = g_file_new_for_commandline_arg (install_filename);
@@ -220,7 +207,6 @@ main (int argc, char **argv)
 
   /* free stuff */
   g_free (data);
-  g_object_unref (program);
 
   return 0;
 }

@@ -39,17 +39,9 @@ create_dialog (void)
 int
 main (int argc, char *argv[])
 {
-	GnomeProgram *program;
 	GtkWidget *dialog;
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-
-	program = gnome_program_init ("gnome-localization-properties", VERSION,
-				      LIBGNOMEUI_MODULE, argc, argv,
-				      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-				      NULL);
+	capplet_init (NULL, &argc, &argv);
 
 	/* open main dialog */
 	dialog = create_dialog ();
@@ -57,7 +49,6 @@ main (int argc, char *argv[])
 	gtk_widget_show (dialog);
 
 	gtk_main ();
-	g_object_unref (program);
 
 	return 0;
 }

@@ -1027,22 +1027,13 @@ main (int argc, char **argv)
 	GnomeProgram *program;
 	int rc = 0;
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-
-	program = gnome_program_init ("gnome-about-me", VERSION,
-			LIBGNOMEUI_MODULE, argc, argv,
-			GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-			NULL);
+	capplet_init (NULL, &argc, &argv);
 
 	rc = about_me_setup_dialog ();
 
 	if (rc != -1) {
 		gtk_main ();
 	}
-
-	g_object_unref (program);
 
 	return rc;
 }

@@ -201,17 +201,9 @@ setup_dialog (GladeXML *dialog)
 int
 main (int argc, char *argv[])
 {
-	GnomeProgram *program;
 	GladeXML *dialog;
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-
-	program = gnome_program_init ("gnome-at-properties", VERSION,
-				      LIBGNOMEUI_MODULE, argc, argv,
-				      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-				      NULL);
+	capplet_init (NULL, &argc, &argv);
 
 	activate_settings_daemon ();
 
@@ -225,8 +217,6 @@ main (int argc, char *argv[])
 
 		g_object_unref (dialog);
 	}
-
-	g_object_unref (program);
 
 	return 0;
 }
