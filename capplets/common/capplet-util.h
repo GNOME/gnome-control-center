@@ -25,7 +25,8 @@
 #define __CAPPLET_UTIL_H
 
 #include <gio/gio.h>
-#include <gnome.h>
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <gconf/gconf.h>
 #include <gconf/gconf-changeset.h>
 
@@ -34,14 +35,6 @@
 /* Retrieve a widget from the Glade object */
 
 #define WID(s) glade_xml_get_widget (dialog, s)
-
-/* Copy a setting from the legacy gnome-config settings to the ConfigDatabase */
-
-#define COPY_FROM_LEGACY(type, key, legacy_key)                                 \
-	val_##type = gnome_config_get_##type##_with_default (legacy_key, &def); \
-                                                                                \
-	if (!def)                                                               \
-		gconf_client_set_##type (client, key, val_##type, NULL);
 
 /* Some miscellaneous functions useful to all capplets */
 

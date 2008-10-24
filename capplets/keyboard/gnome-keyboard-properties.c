@@ -192,42 +192,6 @@ setup_dialog (GladeXML * dialog, GConfChangeSet * changeset)
 	setup_a11y_tabs (dialog, changeset);
 }
 
-static void
-get_legacy_settings (void)
-{
-	GConfClient *client;
-	gboolean val_bool, def;
-	gulong val_int;
-
-	client = gconf_client_get_default ();
-
-	COPY_FROM_LEGACY (bool,
-			  "/gnome/desktop/peripherals/keyboard/repeat",
-			  "/Desktop/Keyboard/repeat=true");
-	COPY_FROM_LEGACY (bool,
-			  "/gnome/desktop/peripherals/keyboard/click",
-			  "/Desktop/Keyboard/click=true");
-	COPY_FROM_LEGACY (int, "/gnome/desktop/peripherals/keyboard/rate",
-			  "/Desktop/Keyboard/rate=30");
-	COPY_FROM_LEGACY (int, "/gnome/desktop/peripherals/keyboard/delay",
-			  "/Desktop/Keyboard/delay=500");
-	COPY_FROM_LEGACY (int,
-			  "/gnome/desktop/peripherals/keyboard/volume",
-			  "/Desktop/Keyboard/clickvolume=0");
-#if 0
-	COPY_FROM_LEGACY (int,
-			  "/gnome/desktop/peripherals/keyboard/bell_volume",
-			  "/Desktop/Bell/percent=50");
-#endif
-	COPY_FROM_LEGACY (int,
-			  "/gnome/desktop/peripherals/keyboard/bell_pitch",
-			  "/Desktop/Bell/pitch=50");
-	COPY_FROM_LEGACY (int,
-			  "/gnome/desktop/peripherals/keyboard/bell_duration",
-			  "/Desktop/Bell/duration=100");
-	g_object_unref (G_OBJECT (client));
-}
-
 int
 main (int argc, char **argv)
 {
@@ -237,7 +201,6 @@ main (int argc, char **argv)
 	GOptionContext *context;
 
 	static gboolean apply_only = FALSE;
-	static gboolean get_legacy = FALSE;
 	static gboolean switch_to_typing_break_page = FALSE;
 	static gboolean switch_to_a11y_page = FALSE;
 
@@ -251,8 +214,6 @@ main (int argc, char **argv)
 		 N_
 		 ("Just apply settings and quit (compatibility only; now handled by daemon)"),
 		 NULL},
-		{"get-legacy", 0, 0, G_OPTION_ARG_NONE, &get_legacy,
-		 N_("Retrieve and store legacy settings"), NULL},
 		{"typing-break", 0, 0, G_OPTION_ARG_NONE,
 		 &switch_to_typing_break_page,
 		 N_
@@ -283,31 +244,27 @@ main (int argc, char **argv)
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	g_object_unref (client);
 
-	if (get_legacy) {
-		get_legacy_settings ();
-	} else {
-		changeset = NULL;
-		dialog = create_dialog ();
-		setup_dialog (dialog, changeset);
-		if (switch_to_typing_break_page) {
-			gtk_notebook_set_current_page (GTK_NOTEBOOK
-						       (WID
-							("keyboard_notebook")),
-						       4);
-		}
-		else if (switch_to_a11y_page) {
-			gtk_notebook_set_current_page (GTK_NOTEBOOK
-						       (WID
-							("keyboard_notebook")),
-						       2);
-
-		}
-
-		capplet_set_icon (WID ("keyboard_dialog"),
-				  "preferences-desktop-keyboard");
-		gtk_widget_show (WID ("keyboard_dialog"));
-		gtk_main ();
+	changeset = NULL;
+	dialog = create_dialog ();
+	setup_dialog (dialog, changeset);
+	if (switch_to_typing_break_page) {
+		gtk_notebook_set_current_page (GTK_NOTEBOOK
+					       (WID
+						("keyboard_notebook")),
+					       4);
 	}
+	else if (switch_to_a11y_page) {
+		gtk_notebook_set_current_page (GTK_NOTEBOOK
+					       (WID
+						("keyboard_notebook")),
+					       2);
+		
+	}
+	
+	capplet_set_icon (WID ("keyboard_dialog"),
+			  "preferences-desktop-keyboard");
+	gtk_widget_show (WID ("keyboard_dialog"));
+	gtk_main ();
 
 	return 0;
 }

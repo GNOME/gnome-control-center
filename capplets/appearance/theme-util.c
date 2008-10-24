@@ -26,6 +26,7 @@
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-bindings.h>
 
+#include "capplet-util.h"
 #include "theme-util.h"
 
 gboolean

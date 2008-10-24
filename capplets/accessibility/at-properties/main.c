@@ -2,6 +2,7 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <gnome.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"

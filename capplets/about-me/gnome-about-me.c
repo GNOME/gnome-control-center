@@ -1024,7 +1024,6 @@ about_me_setup_dialog (void)
 int
 main (int argc, char **argv)
 {
-	GnomeProgram *program;
 	int rc = 0;
 
 	capplet_init (NULL, &argc, &argv);

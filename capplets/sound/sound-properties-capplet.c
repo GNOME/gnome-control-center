@@ -1138,26 +1138,6 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	setup_sound_theme_custom (dialog, CheckXKB());
 }
 
-/* get_legacy_settings
- *
- * Retrieve older gnome_config -style settings and store them in the
- * configuration database.
- *
- * In most cases, it's best to use the COPY_FROM_LEGACY macro defined in
- * capplets/common/capplet-util.h.
- */
-
-static void
-get_legacy_settings (void)
-{
-	GConfClient *client;
-	gboolean val_bool, def;
-
-	client = gconf_client_get_default ();
-	COPY_FROM_LEGACY (bool, "/desktop/gnome/sound/event_sounds", "/sound/system/settings/event_sounds=false");
-	g_object_unref (G_OBJECT (client));
-}
-
 static void
 dialog_response_cb (GtkWidget *dialog, gint response_id, GConfChangeSet *changeset)
 {
@@ -1177,14 +1157,11 @@ main (int argc, char **argv)
 	GladeXML       *dialog;
  	GOptionContext *context;
 	gboolean apply_only = FALSE;
-	gboolean get_legacy = FALSE;
  	GOptionEntry cap_options[] = {
  		{ "apply", 0, 0, G_OPTION_ARG_NONE, &apply_only,
 		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
 		{ "init-session-settings", 0, 0, G_OPTION_ARG_NONE, &apply_only,
 		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
- 		{ "get-legacy", 0, 0, G_OPTION_ARG_NONE, &get_legacy,
-		  N_("Retrieve and store legacy settings"), NULL },
  		{ NULL }
 	};
 
@@ -1205,26 +1182,22 @@ main (int argc, char **argv)
 	gconf_client_add_dir (gconf_client, "/desktop/gnome/sound", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (gconf_client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	if (get_legacy) {
-		get_legacy_settings ();
-	} else {
-		dialog = create_dialog ();
-
-		if (dialog) {
-			changeset = gconf_change_set_new ();
-			setup_dialog (dialog, changeset);
-			setup_devices ();
-
-			dialog_win = WID ("sound_prefs_dialog");
-			g_signal_connect (dialog_win, "response", G_CALLBACK (dialog_response_cb), changeset);
-			g_signal_connect (dialog_win, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-			capplet_set_icon (dialog_win, "gnome-sound-properties");
-			gtk_widget_show (dialog_win);
-
-			gtk_main ();
-			gconf_change_set_unref (changeset);
-			g_object_unref (dialog);
-		}
+	dialog = create_dialog ();
+	
+	if (dialog) {
+		changeset = gconf_change_set_new ();
+		setup_dialog (dialog, changeset);
+		setup_devices ();
+		
+		dialog_win = WID ("sound_prefs_dialog");
+		g_signal_connect (dialog_win, "response", G_CALLBACK (dialog_response_cb), changeset);
+		g_signal_connect (dialog_win, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+		capplet_set_icon (dialog_win, "gnome-sound-properties");
+		gtk_widget_show (dialog_win);
+		
+		gtk_main ();
+		gconf_change_set_unref (changeset);
+		g_object_unref (dialog);
 	}
 
 	g_object_unref (gconf_client);

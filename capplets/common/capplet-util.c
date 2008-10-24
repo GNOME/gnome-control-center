@@ -32,6 +32,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <glib/gi18n.h>
+#include <stdlib.h>
 
 #include "capplet-util.h"
 
