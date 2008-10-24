@@ -448,7 +448,7 @@ main (int argc, char **argv)
 	textdomain (GETTEXT_PACKAGE);
 
 	if (!gtk_init_with_args (&argc, &argv, _("- GNOME Mouse Preferences"), cap_options, GETTEXT_PACKAGE, &err)) {
-	    g_printerr (err->message);
+	    g_printerr ("%s\n", err->message);
 	    
 	    return 1;
 	}
