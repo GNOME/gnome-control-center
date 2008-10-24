@@ -33,7 +33,7 @@
 #include <glib/gi18n.h>
 #include <libwindow-settings/gnome-wm-manager.h>
 #include <string.h>
-#include <libgnomeui/gnome-thumbnail.h>
+#include <libgnomeui/gnome-desktop-thumbnail.h>
 
 #define CUSTOM_THEME_NAME "__custom__"
 
@@ -112,7 +112,7 @@ theme_thumbnail_update (GdkPixbuf *pixbuf,
       /* try to share thumbs with nautilus, use themes:/// */
       path = g_strconcat ("themes:///", theme_name, NULL);
 
-      gnome_thumbnail_factory_save_thumbnail (data->thumb_factory,
+      gnome_desktop_thumbnail_factory_save_thumbnail (data->thumb_factory,
 					      pixbuf, path, mtime);
 
       g_free (path);
@@ -136,7 +136,7 @@ theme_get_thumbnail_from_cache (GnomeThemeMetaInfo *info, AppearanceData *data)
 
   /* try to share thumbs with nautilus, use themes:/// */
   path = g_strconcat ("themes:///", info->name, NULL);
-  thumb_filename = gnome_thumbnail_factory_lookup (data->thumb_factory,
+  thumb_filename = gnome_desktop_thumbnail_factory_lookup (data->thumb_factory,
                                                    path, mtime);
   g_free (path);
 

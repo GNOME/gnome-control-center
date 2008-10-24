@@ -24,14 +24,14 @@
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
-#include <libgnomeui/gnome-thumbnail.h>
+#include <libgnomeui/gnome-desktop-thumbnail.h>
 
 #include "gnome-theme-info.h"
 
 typedef struct {
   GConfClient *client;
   GladeXML *xml;
-  GnomeThumbnailFactory *thumb_factory;
+  GnomeDesktopThumbnailFactory *thumb_factory;
 
   /* desktop */
   GHashTable *wp_hash;

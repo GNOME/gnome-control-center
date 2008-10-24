@@ -22,7 +22,7 @@
 #include <gio/gio.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtktreeview.h>
-#include <libgnomeui/gnome-thumbnail.h>
+#include <libgnomeui/gnome-desktop-thumbnail.h>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
 
@@ -68,11 +68,11 @@ struct _GnomeWPItem {
 
 GnomeWPItem * gnome_wp_item_new (const gchar *filename,
 				 GHashTable *wallpapers,
-				 GnomeThumbnailFactory *thumbnails);
+				 GnomeDesktopThumbnailFactory *thumbnails);
 
 void gnome_wp_item_free (GnomeWPItem *item);
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem *item,
-					 GnomeThumbnailFactory *thumbs);
+					 GnomeDesktopThumbnailFactory *thumbs);
 void gnome_wp_item_update (GnomeWPItem *item);
 void gnome_wp_item_update_description (GnomeWPItem *item);
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);

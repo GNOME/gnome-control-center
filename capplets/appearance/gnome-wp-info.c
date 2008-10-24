@@ -25,7 +25,7 @@
 #include "gnome-wp-info.h"
 
 GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
-				 GnomeThumbnailFactory * thumbs) {
+				 GnomeDesktopThumbnailFactory * thumbs) {
   GnomeWPInfo *wp;
   GFile *file;
   GFileInfo *info;
@@ -64,7 +64,7 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
     wp->mtime = g_file_info_get_attribute_uint64 (info,
                                                   G_FILE_ATTRIBUTE_TIME_MODIFIED);
 
-    wp->thumburi = gnome_thumbnail_factory_lookup (thumbs,
+    wp->thumburi = gnome_desktop_thumbnail_factory_lookup (thumbs,
 						   uri,
 						   wp->mtime);
 

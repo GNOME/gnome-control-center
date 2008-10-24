@@ -29,7 +29,7 @@
 #include <gio/gio.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
-#include <libgnomeui/gnome-thumbnail.h>
+#include <libgnomeui/gnome-desktop-thumbnail.h>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
 
@@ -858,7 +858,7 @@ wp_update_preview (GtkFileChooser *chooser,
 
     if (mime_type)
     {
-      pixbuf = gnome_thumbnail_factory_generate_thumbnail (data->thumb_factory,
+      pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (data->thumb_factory,
                                                            uri,
                                                            mime_type);
     }

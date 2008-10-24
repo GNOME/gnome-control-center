@@ -27,7 +27,7 @@
 #include <gnome.h>
 #include <pwd.h>
 #include <gio/gio.h>
-#include <libgnomeui/gnome-thumbnail.h>
+#include <libgnomeui/gnome-desktop-thumbnail.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <pwd.h>
@@ -52,7 +52,7 @@ typedef struct {
 
 	GdkScreen    	*screen;
 	GtkIconTheme 	*theme;
-	GnomeThumbnailFactory *thumbs;
+	GnomeDesktopThumbnailFactory *thumbs;
 
 	EContactAddress *addr1;
 	EContactAddress *addr2;
@@ -680,7 +680,7 @@ about_me_update_preview (GtkFileChooser *chooser,
 		GFileInfo *file_info;
 
 		if (!me->thumbs)
-			me->thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
+			me->thumbs = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
 		file = g_file_new_for_uri (uri);
 		file_info = g_file_query_info (file,
@@ -698,7 +698,7 @@ about_me_update_preview (GtkFileChooser *chooser,
 
 				mime_type = g_content_type_get_mime_type (content_type);
 
-				pixbuf = gnome_thumbnail_factory_generate_thumbnail (me->thumbs,
+				pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (me->thumbs,
 										     uri,
 										     mime_type);
 				g_free (mime_type);

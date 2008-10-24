@@ -125,7 +125,7 @@ void gnome_wp_item_update (GnomeWPItem *item) {
 
 GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 				 GHashTable * wallpapers,
-				 GnomeThumbnailFactory * thumbnails) {
+				 GnomeDesktopThumbnailFactory * thumbnails) {
   GnomeWPItem *item = g_new0 (GnomeWPItem, 1);
 
   item->filename = g_strdup (filename);
@@ -181,7 +181,7 @@ void gnome_wp_item_free (GnomeWPItem * item) {
 #define LIST_IMAGE_WIDTH 108
 
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
-					 GnomeThumbnailFactory * thumbs) {
+					 GnomeDesktopThumbnailFactory * thumbs) {
   GdkPixbuf *pixbuf;
   double aspect =
     (double)gdk_screen_get_height (gdk_screen_get_default()) /
