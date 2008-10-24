@@ -25,7 +25,7 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
 
 #include <gdk/gdkx.h>
