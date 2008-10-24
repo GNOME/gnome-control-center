@@ -25,8 +25,8 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
 #include <string.h>
-#include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <gdk/gdkx.h>
@@ -427,12 +427,11 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changes
 int
 main (int argc, char **argv)
 {
-	GnomeProgram   *program;
 	GConfClient    *client;
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win, *w;
-	GOptionContext *context;
 	gchar *start_page = NULL;
+	GError *err = NULL;
 
 	GOptionEntry cap_options[] = {
 		{"show-page", 'p', G_OPTION_FLAG_IN_MAIN,
@@ -448,16 +447,12 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	context = g_option_context_new (_("- GNOME Mouse Preferences"));
-	g_option_context_add_main_entries (context, cap_options,
-					   GETTEXT_PACKAGE);
-
-	program = gnome_program_init ("gnome-mouse-properties", VERSION,
-				      LIBGNOMEUI_MODULE, argc, argv,
-				      GNOME_PARAM_GOPTION_CONTEXT, context,
-				      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-				      NULL);
-
+	if (!gtk_init_with_args (&argc, &argv, _("- GNOME Mouse Preferences"), cap_options, GETTEXT_PACKAGE, &err)) {
+	    g_printerr (err->message);
+	    
+	    return 1;
+	}
+	
 	capplet_init_stock_icons ();
 
 	activate_settings_daemon ();
@@ -503,7 +498,6 @@ main (int argc, char **argv)
 	}
 
 	g_object_unref (client);
-	g_object_unref (program);
 
 	return 0;
 }
