@@ -346,6 +346,8 @@ xkb_options_load_options (GladeXML * dialog)
 	expanders_list =
 	    g_slist_sort (expanders_list,
 			  (GCompareFunc) xkb_options_expanders_compare);
+	g_object_set_data (G_OBJECT (dialog), EXPANDERS_PROP,
+			   expanders_list);
 	while (expanders_list) {
 		expander = GTK_WIDGET (expanders_list->data);
 		gtk_box_pack_start (GTK_BOX (opts_vbox), expander, FALSE,
