@@ -24,7 +24,8 @@
 #ifndef __GCONF_PROPERTY_EDITOR_H
 #define __GCONF_PROPERTY_EDITOR_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
 #include <gconf/gconf-changeset.h>
 
@@ -85,11 +86,6 @@ GObject *gconf_peditor_new_integer      (GConfChangeSet          *changeset,
 GObject *gconf_peditor_new_string       (GConfChangeSet          *changeset,
 					 const gchar             *key,
 					 GtkWidget               *entry,
-					 const gchar             *first_property_name,
-					 ...);
-GObject *gconf_peditor_new_filename     (GConfChangeSet          *changeset,
-					 const gchar             *key,
-					 GtkWidget               *file_entry,
 					 const gchar             *first_property_name,
 					 ...);
 GObject *gconf_peditor_new_color        (GConfChangeSet          *changeset,

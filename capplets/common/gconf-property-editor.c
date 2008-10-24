@@ -27,6 +27,7 @@
 
 #include <string.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 #include "gconf-property-editor.h"
 #include "gconf-property-editor-marshal.h"
@@ -640,32 +641,6 @@ gconf_peditor_new_string (GConfChangeSet *changeset,
 
 	peditor = gconf_peditor_new_string_valist
 		(changeset, key, entry,
-		 first_property_name, var_args);
-
-	va_end (var_args);
-
-	return peditor;
-}
-
-GObject *
-gconf_peditor_new_filename (GConfChangeSet *changeset,
-			    const gchar    *key,
-			    GtkWidget      *file_entry,
-			    const gchar    *first_property_name,
-			    ...)
-{
-	GObject *peditor;
-	va_list var_args;
-
-	g_return_val_if_fail (key != NULL, NULL);
-	g_return_val_if_fail (file_entry != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (file_entry), NULL);
-
-	va_start (var_args, first_property_name);
-
-	peditor = gconf_peditor_new_string_valist
-		(changeset, key,
-		 gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (file_entry)),
 		 first_property_name, var_args);
 
 	va_end (var_args);
