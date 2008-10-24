@@ -867,7 +867,7 @@ main (int argc, char **argv)
     GnomeDACapplet *capplet;
 
     gchar *start_page = NULL;
-    GOptionContext *option_context;
+    GError *err = NULL;
     GOptionEntry option_entries[] = {
         { "show-page",
           'p',
@@ -886,10 +886,11 @@ main (int argc, char **argv)
     textdomain (GETTEXT_PACKAGE);
 #endif
 
-    option_context = g_option_context_new (NULL);
-    g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
-
-    gtk_init_with_args (&argc, &argv, NULL, option_entries, NULL, NULL);
+    if (!gtk_init_with_args (&argc, &argv, "- GNOME Default Applications",
+			     option_entries, GETTEXT_PACKAGE, &err)) {
+	    g_printerr ("%s\n", err->message);
+	    return 1;
+    }
 
     glade_init ();
 
