@@ -24,7 +24,6 @@
 #endif
 
 #include <glib/gstdio.h>
-#include <gnome.h>
 #include <pwd.h>
 #include <gio/gio.h>
 #include <libgnomeui/gnome-desktop-thumbnail.h>
@@ -621,10 +620,11 @@ about_me_update_photo (GnomeAboutMe *me)
 		/* Update the image in the card */
 		e_contact_set (me->contact, E_CONTACT_PHOTO, NULL);
 
-		/* Update GDM configuration */
-		gnome_config_set_string ("/gdmphotosetup/last/picture", "");
-		gnome_config_set_string ("/gdm/face/picture", "");
-		gnome_config_sync ();
+		file = g_build_filename (g_get_home_dir (), ".face", NULL);
+
+		g_unlink (file);
+
+		g_free (file);
 	}
 
 	about_me_commit (me);

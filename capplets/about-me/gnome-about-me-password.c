@@ -28,7 +28,7 @@
 #endif
 
 /* Are all of these needed? */
-#include <gnome.h>
+#include <gdk/gdkkeysyms.h>
 #include <pwd.h>
 #include <stdlib.h>
 #include <glade/glade.h>
