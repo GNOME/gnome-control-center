@@ -1175,7 +1175,6 @@ main (int argc, char **argv)
 {
 	GConfChangeSet *changeset;
 	GladeXML       *dialog;
-	GnomeProgram   *program;
  	GOptionContext *context;
 	gboolean apply_only = FALSE;
 	gboolean get_legacy = FALSE;
@@ -1189,26 +1188,16 @@ main (int argc, char **argv)
  		{ NULL }
 	};
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-
         /* Since gstreamer and gnome-vfs require threads, we
          * have to initialise threads here as the first call to glib.
          */
         g_thread_init (NULL);
 
  	context = g_option_context_new (N_("- GNOME Sound Preferences"));
-#if GLIB_CHECK_VERSION (2, 12, 0)
-        g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
-#endif
  	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
 	g_option_context_add_group (context, gst_init_get_option_group ());
 
-	program = gnome_program_init ("gnome-sound-properties", VERSION,
-				      LIBGNOMEUI_MODULE, argc, argv,
- 			    	      GNOME_PARAM_GOPTION_CONTEXT, context,
-				      NULL);
+	capplet_init (context, &argc, &argv);
 
 	activate_settings_daemon ();
 
@@ -1239,7 +1228,6 @@ main (int argc, char **argv)
 	}
 
 	g_object_unref (gconf_client);
-	g_object_unref (program);
 
 	return 0;
 }

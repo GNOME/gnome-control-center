@@ -431,8 +431,8 @@ main (int argc, char **argv)
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win, *w;
 	gchar *start_page = NULL;
-	GError *err = NULL;
 
+	GOptionContext *context;
 	GOptionEntry cap_options[] = {
 		{"show-page", 'p', G_OPTION_FLAG_IN_MAIN,
 		 G_OPTION_ARG_STRING,
@@ -443,15 +443,9 @@ main (int argc, char **argv)
 		{NULL}
 	};
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-
-	if (!gtk_init_with_args (&argc, &argv, _("- GNOME Mouse Preferences"), cap_options, GETTEXT_PACKAGE, &err)) {
-	    g_printerr ("%s\n", err->message);
-	    
-	    return 1;
-	}
+	context = g_option_context_new (_("- GNOME Mouse Preferences"));
+	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
+	capplet_init (context, &argc, &argv);
 	
 	capplet_init_stock_icons ();
 
