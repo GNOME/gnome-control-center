@@ -48,5 +48,6 @@
 void capplet_help (GtkWindow *parent, char const *section);
 void capplet_set_icon (GtkWidget *window, char const *icon_file_name);
 gboolean capplet_file_delete_recursive (GFile *directory, GError **error);
+void capplet_init (GOptionContext *context, int *argc, char ***argv);
 
 #endif /* __CAPPLET_UTIL_H */

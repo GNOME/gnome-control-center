@@ -867,7 +867,7 @@ main (int argc, char **argv)
     GnomeDACapplet *capplet;
 
     gchar *start_page = NULL;
-    GError *err = NULL;
+    GOptionContext *context;
     GOptionEntry option_entries[] = {
         { "show-page",
           'p',
@@ -880,17 +880,10 @@ main (int argc, char **argv)
         { NULL }
     };
 
-#ifdef ENABLE_NLS
-    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-    textdomain (GETTEXT_PACKAGE);
-#endif
+    context = g_option_context_new (_("- GNOME Default Applications"));
+    g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
 
-    if (!gtk_init_with_args (&argc, &argv, "- GNOME Default Applications",
-			     option_entries, GETTEXT_PACKAGE, &err)) {
-	    g_printerr ("%s\n", err->message);
-	    return 1;
-    }
+    capplet_init (context, &argc, &argv);
 
     glade_init ();
 

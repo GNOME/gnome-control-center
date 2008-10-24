@@ -179,3 +179,27 @@ capplet_file_delete_recursive (GFile *file, GError **error)
 		return g_file_delete (file, NULL, error);
 }
 
+void
+capplet_init (GOptionContext *context,
+	      int *argc,
+	      char ***argv)
+{
+	GError *err = NULL;
+	
+#ifdef ENABLE_NLS
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+#endif
+	
+	if (context) {
+		g_option_context_add_group (context, gtk_get_option_group (TRUE));
+		
+		if (!g_option_context_parse (context, argc, argv, &err)) {
+			g_printerr ("%s\n", err->message);
+			exit (1);
+		}
+	}
+	
+	gtk_init (argc, argv);
+}
