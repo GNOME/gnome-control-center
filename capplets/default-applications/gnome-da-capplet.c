@@ -24,8 +24,8 @@
 #endif
 
 #include <string.h>
-#include <gnome.h>
 #include <glib/gi18n.h>
+#include <stdlib.h>
 
 #include "gconf-property-editor.h"
 #include "gnome-da-capplet.h"
@@ -864,7 +864,6 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 int
 main (int argc, char **argv)
 {
-    GnomeProgram *program;
     GnomeDACapplet *capplet;
 
     gchar *start_page = NULL;
@@ -890,10 +889,7 @@ main (int argc, char **argv)
     option_context = g_option_context_new (NULL);
     g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
 
-    program = gnome_program_init ("gnome-default-applications-properties",
-    				  VERSION, LIBGNOMEUI_MODULE, argc, argv,
-    				  GNOME_PARAM_GOPTION_CONTEXT, option_context,
-				  GNOME_PARAM_NONE);
+    gtk_init_with_args (&argc, &argv, NULL, option_entries, NULL, NULL);
 
     glade_init ();
 
@@ -909,7 +905,6 @@ main (int argc, char **argv)
     g_object_unref (capplet->gconf);
 
     gnome_da_xml_free (capplet);
-    g_object_unref (program);
 
     return 0;
 }
