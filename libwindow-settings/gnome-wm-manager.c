@@ -32,7 +32,6 @@
 #include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
-#include <libgnome/gnome-util.h>
 
 #include <sys/types.h>
 #include <dirent.h>
@@ -93,8 +92,7 @@ list_desktop_files_in_dir (gchar *directory)
                         continue;
                 
                 result = g_list_prepend (result, 
-                                         g_concat_dir_and_file (directory,
-                                                                child->d_name));
+                                         g_build_filename (directory, child->d_name, NULL));
         }
         closedir (dir);
         
@@ -225,11 +223,11 @@ gnome_wm_manager_init (void)
 
         done_scan = TRUE;
         
-        tempdir = gnome_unconditional_datadir_file ("gnome/wm-properties/");
+        tempdir = g_build_filename (GNOME_WM_PROPERTY_PATH, "gnome", "wm-properties", NULL);
         scan_wm_directory (tempdir, FALSE);
         g_free (tempdir);
-        
-	tempdir = gnome_util_home_file("wm-properties/");
+
+	tempdir = g_build_filename (g_get_home_dir(), ".gnome2", "wm-properties", NULL);
         scan_wm_directory (tempdir, TRUE);
         g_free (tempdir);
 

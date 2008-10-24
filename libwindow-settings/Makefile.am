@@ -4,7 +4,8 @@ INCLUDES = 								\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
-	-DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(WM_MODULE_DIR)"\" \
+	-DGNOME_WM_PROPERTY_PATH=\"$(datadir)/gnome/wm-properties\"	\
+	-DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(WM_MODULE_DIR)"\"	\
 	-I$(top_srcdir)/						\
 	@CAPPLET_CFLAGS@						\
 	-DMETACITY_THEME_DIR=\""$(datadir)/themes"\"
