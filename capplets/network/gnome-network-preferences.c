@@ -25,9 +25,9 @@
 #endif
 
 #include <string.h>
-#include <libgnome/libgnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <glib/gi18n.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -553,7 +553,6 @@ setup_dialog (GladeXML *dialog)
 int
 main (int argc, char **argv)
 {
-	GnomeProgram *program;
 	GladeXML    *dialog;
 	GConfClient *client;
 	GtkWidget   *widget;
@@ -562,9 +561,7 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	program = gnome_program_init ("gnome-network-preferences",
-				      VERSION, LIBGNOMEUI_MODULE,
-				      argc, argv, GNOME_PARAM_NONE);
+	gtk_init (&argc, &argv);
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/system/http_proxy",
@@ -583,7 +580,6 @@ main (int argc, char **argv)
 
 	g_object_unref (dialog);
 	g_object_unref (client);
-	g_object_unref (program);
 
 	return 0;
 }
