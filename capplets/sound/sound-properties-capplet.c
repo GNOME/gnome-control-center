@@ -1163,7 +1163,6 @@ dialog_response_cb (GtkWidget *dialog, gint response_id, GConfChangeSet *changes
 {
 	if (response_id == GTK_RESPONSE_HELP) {
 		capplet_help (GTK_WINDOW (dialog),
-			"user-guide.xml",
 			"goscustmulti-2");
 		return;
 	}

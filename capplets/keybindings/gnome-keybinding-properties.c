@@ -1377,7 +1377,6 @@ cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
 	if (response_id == GTK_RESPONSE_HELP)
           {
             capplet_help (GTK_WINDOW (widget),
-                          "user-guide.xml",
                           "goscustdesk-39");
           }
 	else

@@ -96,24 +96,19 @@ main_window_response (GtkWidget *widget,
       switch (pindex)
       {
         case 0: /* theme */
-          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
-                                    "goscustdesk-12"); 
+          capplet_help (GTK_WINDOW (widget), "goscustdesk-12"); 
           break;
         case 1: /* background */
-          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
-                                    "goscustdesk-7"); 
+          capplet_help (GTK_WINDOW (widget), "goscustdesk-7"); 
           break;
         case 2: /* fonts */
-          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
-                                    "goscustdesk-38"); 
+          capplet_help (GTK_WINDOW (widget), "goscustdesk-38"); 
           break;
         case 3: /* interface */
-          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
-                                    "goscustuserinter-2"); 
+          capplet_help (GTK_WINDOW (widget), "goscustuserinter-2"); 
           break;
         default:
-          capplet_help (GTK_WINDOW (widget), "user-guide.xml", 
-                                    "prefs-look-and-feel"); 
+          capplet_help (GTK_WINDOW (widget), "prefs-look-and-feel"); 
           break;
        }
   }

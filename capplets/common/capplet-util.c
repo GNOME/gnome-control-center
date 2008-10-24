@@ -31,6 +31,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <glib/gi18n.h>
 
 #include "capplet-util.h"
 
@@ -65,20 +66,32 @@ capplet_error_dialog (GtkWindow *parent, char const *msg, GError *err)
  * Havoc happy way.
  **/
 void
-capplet_help (GtkWindow *parent, char const *helpfile, char const *section)
+capplet_help (GtkWindow *parent, char const *section)
 {
 	GError *error = NULL;
+	char *uri;
+	GError *err = NULL;
+	GdkScreen *screen;
 
-	g_return_if_fail (helpfile != NULL);
 	g_return_if_fail (section != NULL);
 
-	gnome_help_display_desktop (NULL,
-		"user-guide",
-		helpfile, section, &error);
-	if (error != NULL)
-		capplet_error_dialog (parent, 
+	if (!parent)
+		screen = gdk_screen_get_default();
+	else
+		screen = gtk_widget_get_screen (GTK_WIDGET (parent));
+	
+	uri = g_strdup_printf ("ghelp:user-guide#%s", section);
+	
+	if (!gtk_show_uri (screen, uri, gtk_get_current_event_time(), &err)) {
+		capplet_error_dialog (
+			parent, 
 			_("There was an error displaying help: %s"),
 			error);
+		
+		g_error_free (err);
+	}
+
+	g_free (uri);
 }
 
 /**

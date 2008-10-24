@@ -45,7 +45,7 @@
 
 /* Some miscellaneous functions useful to all capplets */
 
-void capplet_help (GtkWindow *parent, char const *helpfile, char const *section);
+void capplet_help (GtkWindow *parent, char const *section);
 void capplet_set_icon (GtkWidget *window, char const *icon_file_name);
 gboolean capplet_file_delete_recursive (GFile *directory, GError **error);
 

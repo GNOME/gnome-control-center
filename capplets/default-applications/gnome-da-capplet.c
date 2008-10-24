@@ -44,7 +44,7 @@ static void
 close_cb (GtkWidget *window, gint response, gpointer user_data)
 {
     if (response == GTK_RESPONSE_HELP) {
-	capplet_help (GTK_WINDOW (window), "user-guide.xml", "prefs-preferredapps");
+	capplet_help (GTK_WINDOW (window), "prefs-preferredapps");
     }
     else {
 	gtk_widget_destroy (window);

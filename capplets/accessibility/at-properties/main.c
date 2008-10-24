@@ -84,7 +84,6 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 	GnomeClient *client;
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			      "user-guide.xml",
 			      "goscustaccess-11");
 	else if (response_id == GTK_RESPONSE_CLOSE || response_id == GTK_RESPONSE_DELETE_EVENT)
 		gtk_main_quit ();

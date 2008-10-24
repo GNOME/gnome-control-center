@@ -419,7 +419,6 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changes
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			      "user-guide.xml",
 			      "goscustperiph-5");
 	else
 		gtk_main_quit ();

@@ -804,7 +804,6 @@ cb_details_response (GtkDialog *dialog, gint response_id)
 {
   if (response_id == GTK_RESPONSE_HELP) {
     capplet_help (GTK_WINDOW (dialog),
-		  "user-guide.xml",
 		  "goscustdesk-38");
   } else
     gtk_widget_hide (GTK_WIDGET (dialog));

@@ -118,8 +118,7 @@ dialog_response (GtkWidget * widget,
 		 gint response_id, GConfChangeSet * changeset)
 {
 	if (response_id == GTK_RESPONSE_HELP)
-		capplet_help (GTK_WINDOW (widget),
-			      "user-guide.xml", "goscustperiph-2");
+		capplet_help (GTK_WINDOW (widget), "goscustperiph-2");
 	else
 		gtk_main_quit ();
 }
