@@ -20,7 +20,6 @@
  */
 
 #include <config.h>
-#include <gnome.h>
 #include <glade/glade-xml.h>
 
 static GtkWidget *

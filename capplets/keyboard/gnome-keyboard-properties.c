@@ -28,7 +28,6 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
