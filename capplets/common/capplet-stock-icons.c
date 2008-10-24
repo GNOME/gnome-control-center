@@ -25,7 +25,7 @@
 
 #include <gtk/gtkstock.h>
 #include <gtk/gtkiconfactory.h>
-#include <gnome.h>
+#include <glib/gi18n.h>
 
 #include "capplet-stock-icons.h"
 
@@ -61,10 +61,10 @@ capplet_register_stock_icons (GtkIconFactory *factory)
 	for (i = 0; i <  G_N_ELEMENTS (items); ++i) {
 		GtkIconSet *icon_set;
 		char *filename;
-		filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP, items[i].name, TRUE, NULL);
+		filename = g_build_filename (PIXMAP_DIR, items[i].name, NULL);
 
 		if (!filename) {
-			g_warning (_("Unable to load stock icon '%s'\n"), items[i].name);
+		        g_warning (_("Unable to load stock icon '%s'\n"), items[i].name);
 			icon_set = gtk_icon_factory_lookup_default (GTK_STOCK_MISSING_IMAGE);
 			gtk_icon_factory_add (factory, items[i].stock_id, icon_set);
 			continue;
