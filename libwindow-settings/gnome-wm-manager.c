@@ -223,7 +223,7 @@ gnome_wm_manager_init (void)
 
         done_scan = TRUE;
         
-        tempdir = g_build_filename (GNOME_WM_PROPERTY_PATH, "gnome", "wm-properties", NULL);
+        tempdir = g_build_filename (GNOME_WM_PROPERTY_PATH, NULL);
         scan_wm_directory (tempdir, FALSE);
         g_free (tempdir);
 

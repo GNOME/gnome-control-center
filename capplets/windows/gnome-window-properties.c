@@ -27,6 +27,9 @@
 #include <config.h>
 #endif
 
+#include <stdlib.h>
+#include <glib/gi18n.h>
+#include <string.h>
 #include <glade/glade.h>
 #include <gnome-wm-manager.h>
 
@@ -373,7 +376,6 @@ try_spawn_config_tool (GdkScreen *screen)
 int
 main (int argc, char **argv)
 {
-	GnomeProgram *program;
         GdkScreen *screen;
 	GnomeWMSettings new_settings;
 	int rc = 0;
@@ -383,9 +385,7 @@ main (int argc, char **argv)
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 
-  	program = gnome_program_init ("gnome-window-properties", VERSION,
-				      LIBGNOMEUI_MODULE, argc, argv,
-				      NULL);
+        gtk_init (&argc, &argv);
 
         gnome_wm_manager_init ();
 
@@ -474,7 +474,6 @@ main (int argc, char **argv)
 	g_object_unref (dialog);
 
 out:
-	g_object_unref (program);
         return rc;
 }
 
