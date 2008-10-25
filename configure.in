@@ -17,13 +17,6 @@ AM_PROG_LIBTOOL
 # Use the GNOME documentation framework
 GNOME_DOC_INIT
 
-m4_define(fontconfig_minver, 1.0.0)
-m4_define(xft_minver, 2.1.2)
-m4_define(gtk_minver, 2.11.6)
-m4_define(libbonobo_minver, 2.0.0)
-m4_define(libgnomeui_minver, 2.2.0)
-m4_define(nautilus_minver, 2.6.0)
-
 changequote(,)dnl
 if test "x$GCC" = "xyes"; then
   case " $CFLAGS " in
@@ -92,7 +85,7 @@ dnl ==============================================
 ENABLE_DYNAMIC_LIBSLAB=0
 AM_CONDITIONAL(ENABLE_DYNAMIC_LIBSLAB, test "x$ENABLE_DYNAMIC_LIBSLAB" = "x1")
 
-COMMON_MODULES="gtk+-2.0 >= 2.11.6 dnl
+COMMON_MODULES="gtk+-2.0 >= 2.13.1 dnl
  glib-2.0 >= 2.17.4 dnl
  gio-2.0 dnl
  gconf-2.0 dnl
