@@ -1,13 +1,13 @@
 
-INCLUDES = $(GNOMECC_CAPPLETS_CFLAGS) -DDIRECTORY_DIR=\"$(directorydir)\" \
+INCLUDES = $(FONT_VIEWER_CFLAGS) $(GNOMECC_CAPPLETS_CFLAGS) -DDIRECTORY_DIR=\"$(directorydir)\" \
   -DGNOMELOCALEDIR=\"$(datadir)/locale\"
 
 bin_PROGRAMS = gnome-thumbnail-font gnome-font-viewer
 
-gnome_thumbnail_font_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(FONT_CAPPLET_LIBS)
+gnome_thumbnail_font_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(FONT_VIEWER_LIBS)
 gnome_thumbnail_font_SOURCES = ftstream-vfs.c font-thumbnailer.c
 
-gnome_font_viewer_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(FONT_CAPPLET_LIBS)
+gnome_font_viewer_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(FONT_VIEWER_LIBS)
 gnome_font_viewer_SOURCES = ftstream-vfs.c font-view.c
 
 schemasdir = $(GCONF_SCHEMA_FILE_DIR)
