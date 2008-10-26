@@ -2,7 +2,19 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
-#include <gnome.h>
+
+#include <dbus/dbus-glib.h>
+#include <dbus/dbus-glib-lowlevel.h>
+
+#define GSM_SERVICE_DBUS   "org.gnome.SessionManager"
+#define GSM_PATH_DBUS      "/org/gnome/SessionManager"
+#define GSM_INTERFACE_DBUS "org.gnome.SessionManager"
+
+enum {
+        GSM_LOGOUT_MODE_NORMAL = 0,
+        GSM_LOGOUT_MODE_NO_CONFIRMATION,
+        GSM_LOGOUT_MODE_FORCE
+};
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -79,10 +91,69 @@ cb_login_preferences (GtkDialog *dialog, gint response_id)
 	g_spawn_command_line_async ("gdmsetup", NULL);
 }
 
+/* get_session_bus(), get_sm_proxy(), and do_logout() are all
+ * based on code from gnome-session-save.c from gnome-session.
+ */
+static DBusGConnection *
+get_session_bus (void)
+{
+        DBusGConnection *bus;
+        GError *error = NULL;
+
+        bus = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
+
+        if (bus == NULL) {
+                g_warning ("Couldn't connect to session bus: %s", error->message);
+                g_error_free (error);
+        }
+
+        return bus;
+}
+
+static DBusGProxy *
+get_sm_proxy (void)
+{
+        DBusGConnection *connection;
+        DBusGProxy      *sm_proxy;
+
+        if (!(connection = get_session_bus ()))
+		return NULL;
+
+        sm_proxy = dbus_g_proxy_new_for_name (connection,
+					      GSM_SERVICE_DBUS,
+					      GSM_PATH_DBUS,
+					      GSM_INTERFACE_DBUS);
+
+        return sm_proxy;
+}
+
+static gboolean
+do_logout (GError **err)
+{
+        DBusGProxy *sm_proxy;
+        GError     *error;
+        gboolean    res;
+
+        sm_proxy = get_sm_proxy ();
+        if (sm_proxy == NULL)
+		return FALSE;
+
+        res = dbus_g_proxy_call (sm_proxy,
+                                 "Logout",
+                                 &error,
+                                 G_TYPE_UINT, 0,   /* '0' means 'log out normally' */
+                                 G_TYPE_INVALID,
+                                 G_TYPE_INVALID);
+
+        if (sm_proxy)
+                g_object_unref (sm_proxy);
+
+	return res;
+}
+
 static void
 cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
-	GnomeClient *client;
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
 			      "goscustaccess-11");
@@ -90,12 +161,9 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 		gtk_main_quit ();
 	else {
 	        g_message ("CLOSE AND LOGOUT!");
-		if (!(client = gnome_master_client ())) {
 
+		if (!do_logout (NULL))
 			gtk_main_quit ();
-		}
-		gnome_client_request_save (client, GNOME_SAVE_GLOBAL, TRUE,
-					   GNOME_INTERACT_ANY, FALSE, TRUE);
 	}
 }
 
