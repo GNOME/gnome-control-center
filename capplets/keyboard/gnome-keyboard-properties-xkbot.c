@@ -179,6 +179,20 @@ xkb_options_is_selected (gchar * optionname)
 	return retval;
 }
 
+/* Make sure selected options stay visible when navigating with the keyboard */
+static gboolean
+option_focused_cb (GtkWidget *widget, GdkEventFocus *event, gpointer data)
+{
+	GtkScrolledWindow *win = GTK_SCROLLED_WINDOW (data);
+	GtkAllocation *alloc = &widget->allocation;
+	GtkAdjustment *adj;
+
+	adj = gtk_scrolled_window_get_vadjustment (win);
+	gtk_adjustment_clamp_page (adj, alloc->y, alloc->y + alloc->height);
+
+	return FALSE;
+}
+
 /* Update xkb backend to reflect the new UI state */
 static void
 option_toggled_cb (GtkWidget * checkbutton, gpointer data)
@@ -228,6 +242,10 @@ xkb_options_add_option (XklConfigRegistry * config_registry,
 			    gtk_radio_button_get_group (GTK_RADIO_BUTTON
 							(option_check));
 			current_none_radio = option_check;
+
+			g_signal_connect (option_check, "focus-in-event",
+					  G_CALLBACK (option_focused_cb),
+					  WID ("options_scroll"));
 		}
 		option_check =
 		    gtk_radio_button_new_with_label (current_radio_group,
@@ -248,8 +266,12 @@ xkb_options_add_option (XklConfigRegistry * config_registry,
 	g_object_set_data_full (G_OBJECT (option_check), OPTION_ID_PROP,
 				full_option_name, g_free);
 
-	g_signal_connect (G_OBJECT (option_check), "toggled",
+	g_signal_connect (option_check, "toggled",
 			  G_CALLBACK (option_toggled_cb), NULL);
+
+	g_signal_connect (option_check, "focus-in-event",
+			  G_CALLBACK (option_focused_cb),
+			  WID ("options_scroll"));
 
 	gtk_box_pack_start_defaults (GTK_BOX (current_vbox), option_check);
 
@@ -308,6 +330,10 @@ xkb_options_add_group (XklConfigRegistry * config_registry,
 	expanders_list = g_slist_append (expanders_list, expander);
 	g_object_set_data (G_OBJECT (dialog), EXPANDERS_PROP,
 			   expanders_list);
+
+	g_signal_connect (expander, "focus-in-event",
+			  G_CALLBACK (option_focused_cb),
+			  WID ("options_scroll"));
 }
 
 static gint
