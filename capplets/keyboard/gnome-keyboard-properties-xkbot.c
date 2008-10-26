@@ -400,16 +400,18 @@ chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 	}
 }
 
-/* Create popup dialog*/
+/* Create popup dialog */
 void
 xkb_options_popup_dialog (GladeXML * dialog)
 {
+	GtkWidget *chooser;
+
 	chooser_dialog =
 	    glade_xml_new (GNOMECC_GLADE_DIR
 			   "/gnome-keyboard-properties.glade",
 			   "xkb_options_dialog", NULL);
-	GtkWidget *chooser = CWID ("xkb_options_dialog");
 
+	chooser = CWID ("xkb_options_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
 				      GTK_WINDOW (WID
 						  ("keyboard_dialog")));
