@@ -87,8 +87,6 @@ capplet_help (GtkWindow *parent, char const *section)
 			parent,
 			_("There was an error displaying help: %s"),
 			error);
-
-		g_error_free (error);
 	}
 
 	g_free (uri);
