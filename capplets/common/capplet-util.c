@@ -71,25 +71,24 @@ capplet_help (GtkWindow *parent, char const *section)
 {
 	GError *error = NULL;
 	char *uri;
-	GError *err = NULL;
 	GdkScreen *screen;
 
 	g_return_if_fail (section != NULL);
 
 	if (!parent)
-		screen = gdk_screen_get_default();
+		screen = gdk_screen_get_default ();
 	else
 		screen = gtk_widget_get_screen (GTK_WIDGET (parent));
-	
+
 	uri = g_strdup_printf ("ghelp:user-guide#%s", section);
-	
-	if (!gtk_show_uri (screen, uri, gtk_get_current_event_time(), &err)) {
+
+	if (!gtk_show_uri (screen, uri, gtk_get_current_event_time (), &error)) {
 		capplet_error_dialog (
-			parent, 
+			parent,
 			_("There was an error displaying help: %s"),
 			error);
-		
-		g_error_free (err);
+
+		g_error_free (error);
 	}
 
 	g_free (uri);
@@ -186,24 +185,24 @@ capplet_init (GOptionContext *context,
 	      char ***argv)
 {
 	GError *err = NULL;
-	
+
 #ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 #endif
-	
+
 	if (context) {
 #if GLIB_CHECK_VERSION (2, 12, 0)
 		g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
 #endif
 		g_option_context_add_group (context, gtk_get_option_group (TRUE));
-		
+
 		if (!g_option_context_parse (context, argc, argv, &err)) {
 			g_printerr ("%s\n", err->message);
 			exit (1);
 		}
 	}
-	
+
 	gtk_init (argc, argv);
 }
