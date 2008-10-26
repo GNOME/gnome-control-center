@@ -18,6 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include <glib/gi18n.h>
 #include "appearance.h"
 #include "appearance-desktop.h"
 #include "appearance-font.h"
@@ -28,8 +29,6 @@
 #include "theme-thumbnail.h"
 #include "activate-settings-daemon.h"
 #include "capplet-util.h"
-
-#include <libgnomeui/gnome-desktop-thumbnail.h>
 
 static AppearanceData *
 init_appearance_data (int *argc, char ***argv)

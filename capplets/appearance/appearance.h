@@ -24,7 +24,6 @@
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
-#define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 
 #include "gnome-theme-info.h"
