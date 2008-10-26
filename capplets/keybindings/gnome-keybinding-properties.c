@@ -20,6 +20,9 @@
 
 #define GCONF_BINDING_DIR "/desktop/gnome/keybindings"
 #define MAX_ELEMENTS_BEFORE_SCROLLING 10
+#define MAX_CUSTOM_SHORTCUTS 1000
+#define RESPONSE_ADD 0
+#define RESPONSE_REMOVE 1
 
 typedef struct {
   char *name;
@@ -44,6 +47,7 @@ typedef struct
   int value;
   char *key;
   char *description_name;
+  char *cmd_name;
   Comparison comparison;
 } KeyListEntry;
 
@@ -65,17 +69,24 @@ typedef struct
   char *description;
   char *desc_gconf_key;
   gboolean desc_editable;
+  char *command;
+  char *cmd_gconf_key;
+  gboolean cmd_editable;
   guint gconf_cnxn;
   guint gconf_cnxn_desc;
+  guint gconf_cnxn_cmd;
 } KeyEntry;
 
 static gboolean block_accels = FALSE;
+static GtkWidget *custom_shortcut_dialog = NULL;
+static GtkWidget *custom_shortcut_name_entry = NULL;
+static GtkWidget *custom_shortcut_command_entry = NULL;
 
 static GladeXML *
 create_dialog (void)
 {
   return glade_xml_new (GNOMECC_GLADE_DIR "/gnome-keybinding-properties.glade",
-                        "gnome-keybinding-dialog", NULL);
+                        NULL, NULL);
 }
 
 static char*
@@ -168,7 +179,7 @@ description_set_func (GtkTreeViewColumn *tree_column,
 
   if (key_entry != NULL)
     g_object_set (cell,
-		  "editable", key_entry->desc_editable,
+		  "editable", FALSE,
 		  "text", key_entry->description != NULL ?
 			  key_entry->description : _("<Unknown Action>"),
 		  NULL);
@@ -233,6 +244,26 @@ keybinding_description_changed (GConfClient *client,
   g_free (key_entry->description);
   key_entry->description = key_value ? g_strdup (key_value) : NULL;
   key_entry->desc_editable = gconf_entry_get_is_writable (entry);
+
+  /* update the model */
+  gtk_tree_model_foreach (key_entry->model, keybinding_key_changed_foreach, key_entry);
+}
+
+static void
+keybinding_command_changed (GConfClient *client,
+			guint        cnxn_id,
+			GConfEntry  *entry,
+			gpointer     user_data)
+{
+  KeyEntry *key_entry;
+  const gchar *key_value;
+
+  key_entry = (KeyEntry *) user_data;
+  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
+
+  g_free (key_entry->command);
+  key_entry->command = key_value ? g_strdup (key_value) : NULL;
+  key_entry->cmd_editable = gconf_entry_get_is_writable (entry);
 
   /* update the model */
   gtk_tree_model_foreach (key_entry->model, keybinding_key_changed_foreach, key_entry);
@@ -347,9 +378,13 @@ clear_old_model (GladeXML *dialog)
               gconf_client_notify_remove (client, key_entry->gconf_cnxn);
               if (key_entry->gconf_cnxn_desc != 0)
                 gconf_client_notify_remove (client, key_entry->gconf_cnxn_desc);
+              if (key_entry->gconf_cnxn_cmd != 0)
+                gconf_client_notify_remove (client, key_entry->gconf_cnxn_cmd);
               g_free (key_entry->gconf_key);
               g_free (key_entry->description);
               g_free (key_entry->desc_gconf_key);
+              g_free (key_entry->command);
+              g_free (key_entry->cmd_gconf_key);
               g_free (key_entry);
             }
         }
@@ -461,6 +496,40 @@ ensure_scrollbar (GladeXML *dialog, int i)
 }
 
 static void
+find_section (GtkTreeModel *model,
+              GtkTreeIter  *iter,
+	      const char   *title)
+{
+  gint i, j;
+  gboolean found;
+   
+  i = gtk_tree_model_iter_n_children (model, NULL);
+  found = FALSE;
+  gtk_tree_model_get_iter_first (model, iter);
+  for (j = 0; j < i; j++)
+    { 
+      char *description = NULL;
+
+      gtk_tree_model_iter_next (model, iter);
+      gtk_tree_model_get (model, iter,
+			  DESCRIPTION_COLUMN, &description,
+			  -1);
+      if (g_strcmp0 (description, title) == 0)
+        {
+	  found = TRUE;
+     	  break;
+        }
+    }
+  if (!found)
+    {
+      gtk_tree_store_append (GTK_TREE_STORE (model), iter, NULL);
+      gtk_tree_store_set (GTK_TREE_STORE (model), iter,
+			  DESCRIPTION_COLUMN, title,
+			  -1);
+    }
+}
+
+static void
 append_keys_to_tree (GladeXML           *dialog,
 		     const gchar        *title,
 		     const KeyListEntry *keys_list)
@@ -468,7 +537,6 @@ append_keys_to_tree (GladeXML           *dialog,
   GConfClient *client;
   GtkTreeIter parent_iter, iter;
   GtkTreeModel *model;
-  gboolean found;
   gint i, j;
   gint rows_before;
 
@@ -476,34 +544,8 @@ append_keys_to_tree (GladeXML           *dialog,
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
 
   /* Try to find a section parent iter, if it already exists */
-  i = gtk_tree_model_iter_n_children (model, NULL);
-  found = FALSE;
-  gtk_tree_model_get_iter_first (model, &iter);
-  for (j = 0; j < i; j++)
-    {
-      char *description = NULL;
-
-      gtk_tree_model_iter_next (model, &iter);
-      gtk_tree_model_get (model, &iter,
-			  DESCRIPTION_COLUMN, &description,
-			  -1);
-      if (description != NULL && g_str_equal (description, title))
-        {
-	  found = TRUE;
-	  break;
-        }
-    }
-
-  if (found)
-    {
-      parent_iter = iter;
-    } else {
-      gtk_tree_store_append (GTK_TREE_STORE (model), &parent_iter, NULL);
-      gtk_tree_store_set (GTK_TREE_STORE (model), &parent_iter,
-			  DESCRIPTION_COLUMN, title,
-			  -1);
-    }
-
+  find_section (model, &iter, title); 
+  parent_iter = iter;
 
   i = 0;
   gtk_tree_model_foreach (model, count_rows_foreach, &i);
@@ -520,6 +562,7 @@ append_keys_to_tree (GladeXML           *dialog,
       const gchar *key_string;
       gchar *key_value;
       gchar *description;
+      gchar *command;
 
       if (!should_show_key (&keys_list[j]))
 	continue;
@@ -563,11 +606,21 @@ append_keys_to_tree (GladeXML           *dialog,
             }
         }
 
+      if (keys_list[j].cmd_name != NULL)
+        {
+          command = gconf_client_get_string (client, keys_list[j].cmd_name, NULL);
+        }
+      else
+        {
+          command = NULL;
+        }
+
       key_entry = g_new0 (KeyEntry, 1);
       key_entry->gconf_key = g_strdup (key_string);
       key_entry->editable = gconf_entry_get_is_writable (entry);
       key_entry->model = model;
       key_entry->description = description;
+      key_entry->command = command;
       if (keys_list[j].description_name != NULL)
         {
           key_entry->desc_gconf_key =  g_strdup (keys_list[j].description_name);
@@ -575,6 +628,15 @@ append_keys_to_tree (GladeXML           *dialog,
           key_entry->gconf_cnxn_desc = gconf_client_notify_add (client,
 								key_entry->desc_gconf_key,
 								(GConfClientNotifyFunc) &keybinding_description_changed,
+								key_entry, NULL, NULL);
+        }
+      if (keys_list[j].cmd_name != NULL)
+        {
+          key_entry->cmd_gconf_key =  g_strdup (keys_list[j].cmd_name);
+          key_entry->cmd_editable = gconf_client_key_is_writable (client, key_entry->cmd_gconf_key, NULL);
+          key_entry->gconf_cnxn_cmd = gconf_client_notify_add (client,
+							       key_entry->cmd_gconf_key,
+								(GConfClientNotifyFunc) &keybinding_command_changed,
 								key_entry, NULL, NULL);
         }
 
@@ -726,6 +788,7 @@ parse_start_tag (GMarkupParseContext *ctx,
   else
     key.key = NULL;
   key.comparison = comparison;
+  key.cmd_name = NULL;
   g_array_append_val (keylist->entries, key);
 }
 
@@ -831,7 +894,8 @@ append_keys_to_tree_from_gconf (GladeXML *dialog, const gchar *gconf_path)
   for (l = custom_list; l != NULL; l = l->next)
     {
       key.name = g_strconcat (l->data, "/binding", NULL);
-      key.description_name = g_strconcat (l->data, "/action", NULL);
+      key.cmd_name = g_strconcat (l->data, "/action", NULL);
+      key.description_name = g_strconcat (l->data, "/name", NULL);
       g_array_append_val (entries, key);
 
       g_free (l->data);
@@ -990,9 +1054,10 @@ show_error (GtkWindow *parent,
 				   GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
 				   GTK_MESSAGE_WARNING,
 				   GTK_BUTTONS_OK,
-				   _("Error saving the new shortcut: %s"),
-				   err->message);
+				   _("Error saving the new shortcut"));
 
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                            "%s", err->message);
   gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
 }
@@ -1296,16 +1361,250 @@ real_start_editing_cb (IdleData *idle_data)
 }
 
 static gboolean
+edit_custom_shortcut (KeyEntry *key)
+{
+  gint result;
+  const gchar *text;
+  gboolean ret;
+
+  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_name_entry), key->description);
+  gtk_widget_set_sensitive (custom_shortcut_name_entry, key->desc_editable);
+  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_command_entry), key->command);
+  gtk_widget_set_sensitive (custom_shortcut_command_entry, key->cmd_editable);
+
+  gtk_window_present (GTK_WINDOW (custom_shortcut_dialog));
+  result = gtk_dialog_run (GTK_DIALOG (custom_shortcut_dialog));
+  switch (result)
+    {
+    case GTK_RESPONSE_OK:
+      text = gtk_entry_get_text (GTK_ENTRY (custom_shortcut_name_entry));
+      g_free (key->description);
+      key->description = g_strdup (text);
+      text = gtk_entry_get_text (GTK_ENTRY (custom_shortcut_command_entry));
+      g_free (key->command);
+      key->command = g_strdup (text);
+      ret = TRUE;
+      break;
+    default:
+      ret = FALSE;
+      break;
+    }
+
+  gtk_widget_hide (custom_shortcut_dialog);
+
+  return ret;
+}
+
+static gboolean
+remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
+{
+  GtkTreeIter parent;
+  GConfClient *client;
+  gchar *base;
+  KeyEntry *key;
+
+  gtk_tree_model_get (model, iter,
+                      KEYENTRY_COLUMN, &key,
+                      -1);
+
+  /* not a custom shortcut */
+  if (key->command == NULL)
+    return FALSE;
+
+  client = gconf_client_get_default ();
+
+  gconf_client_notify_remove (client, key->gconf_cnxn);
+  if (key->gconf_cnxn_desc != 0)
+    gconf_client_notify_remove (client, key->gconf_cnxn_desc);
+  if (key->gconf_cnxn_cmd != 0)
+    gconf_client_notify_remove (client, key->gconf_cnxn_cmd);
+
+  base = g_path_get_dirname (key->gconf_key);
+  gconf_client_recursive_unset (client, base, 0, NULL);
+  g_free (base);
+  g_object_unref (client);
+
+  g_free (key->gconf_key);
+  g_free (key->description);
+  g_free (key->desc_gconf_key);
+  g_free (key->command);
+  g_free (key->cmd_gconf_key);
+  g_free (key);
+
+  gtk_tree_model_iter_parent (model, &parent, iter);
+  gtk_tree_store_remove (GTK_TREE_STORE (model), iter);
+  if (!gtk_tree_model_iter_has_child (model, &parent))
+    gtk_tree_store_remove (GTK_TREE_STORE (model), &parent);
+
+  return TRUE;
+}
+
+static void
+update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
+{
+  KeyEntry *key;
+
+  gtk_tree_model_get (model, iter,
+                      KEYENTRY_COLUMN, &key,
+                      -1);
+
+  edit_custom_shortcut (key);
+  if (key->command == NULL || key->command[0] == '\0')
+    remove_custom_shortcut (model, iter);
+  else 
+    gtk_tree_store_set (GTK_TREE_STORE (model), iter, 
+	                KEYENTRY_COLUMN, key, -1);
+}
+
+static gchar *
+find_free_gconf_key (GError **error)
+{
+  GConfClient *client;
+
+  gchar *dir;
+  int i;
+
+  client = gconf_client_get_default ();
+
+  for (i = 0; i < MAX_CUSTOM_SHORTCUTS; i++)
+    {
+      dir = g_strdup_printf ("%s/custom%d", GCONF_BINDING_DIR, i);
+      if (!gconf_client_dir_exists (client, dir, NULL))
+        break;
+      g_free (dir);
+    }
+
+  if (i == MAX_CUSTOM_SHORTCUTS)
+    {
+      dir = NULL;
+      g_set_error_literal (error,
+                           g_quark_from_string ("Keyboard Shortcuts"),
+                           0,
+                           _("Too many custom shortcuts"));
+    }
+
+  g_object_unref (client);
+
+  return dir;
+}
+
+static void
+add_custom_shortcut (GtkTreeView  *tree_view,
+                     GtkTreeModel *model)
+{
+  KeyEntry *key_entry;
+  GtkTreeIter iter;
+  GtkTreeIter parent_iter;
+  GtkTreePath *path;
+  gchar *dir;
+  GConfClient *client;
+  GError *error;
+
+  error = NULL;
+  dir = find_free_gconf_key (&error);
+  if (dir == NULL)
+    {
+      show_error (gtk_widget_get_toplevel (tree_view), error);
+
+      g_error_free (error);
+      return;
+    }
+
+  key_entry = g_new0 (KeyEntry, 1);
+  key_entry->gconf_key = g_strconcat (dir, "/binding", NULL);
+  key_entry->editable = TRUE;
+  key_entry->model = model;
+  key_entry->desc_gconf_key = g_strconcat (dir, "/name", NULL);
+  key_entry->description = g_strdup ("");
+  key_entry->desc_editable = TRUE;
+  key_entry->cmd_gconf_key = g_strconcat (dir, "/action", NULL);
+  key_entry->command = g_strdup ("");
+  key_entry->cmd_editable = TRUE;
+  g_free (dir);
+
+  if (edit_custom_shortcut (key_entry) &&
+      key_entry->command && key_entry->command[0])
+    {
+      find_section (model, &iter, _("Custom Shortcuts"));
+      parent_iter = iter;
+      gtk_tree_store_append (GTK_TREE_STORE (model), &iter, &parent_iter);
+      gtk_tree_store_set (GTK_TREE_STORE (model), &iter, KEYENTRY_COLUMN, key_entry, -1);
+
+      /* store in gconf */
+      client = gconf_client_get_default ();
+      gconf_client_set_string (client, key_entry->gconf_key, "", NULL);
+      gconf_client_set_string (client, key_entry->desc_gconf_key, key_entry->description, NULL);
+      gconf_client_set_string (client, key_entry->cmd_gconf_key, key_entry->command, NULL);
+
+      /* add gconf watches */
+      key_entry->gconf_cnxn_desc = gconf_client_notify_add (client,
+                                                            key_entry->desc_gconf_key,
+					    		    (GConfClientNotifyFunc) &keybinding_description_changed,
+																            key_entry, NULL, NULL);
+      key_entry->gconf_cnxn_cmd = gconf_client_notify_add (client,
+	                                                   key_entry->cmd_gconf_key,
+						           (GConfClientNotifyFunc) &keybinding_command_changed,
+						           key_entry, NULL, NULL);
+      key_entry->gconf_cnxn = gconf_client_notify_add (client,
+	                                               key_entry->gconf_key,
+						       (GConfClientNotifyFunc) &keybinding_key_changed,
+					               key_entry, NULL, NULL);
+
+
+      g_object_unref (client);
+
+      /* make the new shortcut visible */
+      path = gtk_tree_model_get_path (model, &iter);
+      gtk_tree_view_expand_to_path (tree_view, path);
+      gtk_tree_view_scroll_to_cell (tree_view, path, NULL, FALSE, 0, 0);
+      gtk_tree_path_free (path);
+    }
+  else
+    {
+      g_free (key_entry->gconf_key);
+      g_free (key_entry->description);
+      g_free (key_entry->desc_gconf_key);
+      g_free (key_entry->command);
+      g_free (key_entry->cmd_gconf_key);
+      g_free (key_entry);
+    }
+}
+
+static gboolean
 start_editing_kb_cb (GtkTreeView *treeview,
 			  GtkTreePath *path,
 			  GtkTreeViewColumn *column,
 			  gpointer user_data)
 {
-  gtk_widget_grab_focus (GTK_WIDGET (treeview));
-  gtk_tree_view_set_cursor (treeview,
-			    path,
-			    gtk_tree_view_get_column (treeview, 1),
-			    TRUE);
+      GtkTreeModel *model;
+      GtkTreeIter iter;
+      KeyEntry *key;
+
+      model = gtk_tree_view_get_model (treeview);
+      gtk_tree_model_get_iter (model, &iter, path);
+      gtk_tree_model_get (model, &iter,
+                          KEYENTRY_COLUMN, &key,
+                         -1);
+
+      /* if only the accel can be edited on the selected row
+       * always select the accel column */
+      if (key->desc_editable &&
+          column == gtk_tree_view_get_column (treeview, 0))
+        {
+          gtk_widget_grab_focus (GTK_WIDGET (treeview));
+          gtk_tree_view_set_cursor (treeview, path,
+                                    gtk_tree_view_get_column (treeview, 0),
+                                    FALSE);
+          update_custom_shortcut (model, &iter);
+        }
+      else
+        {
+          gtk_widget_grab_focus (GTK_WIDGET (treeview));
+          gtk_tree_view_set_cursor (treeview,
+                                    path,
+                                    gtk_tree_view_get_column (treeview, 1),
+                                    TRUE);
+        }
 
   return FALSE;
 }
@@ -1344,16 +1643,28 @@ start_editing_cb (GtkTreeView    *tree_view,
                           KEYENTRY_COLUMN, &key,
                          -1);
 
-      idle_data = g_new (IdleData, 1);
-      idle_data->tree_view = tree_view;
-      idle_data->path = path;
       /* if only the accel can be edited on the selected row
        * always select the accel column */
-      idle_data->column = key->desc_editable ? column :
-                          gtk_tree_view_get_column (tree_view, 1);
+      if (key->desc_editable &&
+          column == gtk_tree_view_get_column (tree_view, 0))
+        {
+          gtk_widget_grab_focus (GTK_WIDGET (tree_view));
+          gtk_tree_view_set_cursor (tree_view, path,
+                                    gtk_tree_view_get_column (tree_view, 0),
+                                    FALSE);
+          update_custom_shortcut (model, &iter);
+        }
+      else
+        {
+          idle_data = g_new (IdleData, 1);
+          idle_data->tree_view = tree_view;
+          idle_data->path = path;
+          idle_data->column = key->desc_editable ? column :
+                              gtk_tree_view_get_column (tree_view, 1);
+          g_idle_add ((GSourceFunc) real_start_editing_cb, idle_data);
+          block_accels = TRUE;
+        }
       g_signal_stop_emission_by_name (tree_view, "button_press_event");
-      g_idle_add ((GSourceFunc) real_start_editing_cb, idle_data);
-      block_accels = TRUE;
     }
   return TRUE;
 }
@@ -1376,18 +1687,58 @@ maybe_block_accels (GtkWidget *widget,
 static void
 cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
 {
-	if (response_id == GTK_RESPONSE_HELP)
-          {
-            capplet_help (GTK_WINDOW (widget),
-                          "goscustdesk-39");
-          }
-	else
-          {
-            GladeXML *dialog = data;
+  GladeXML *dialog = data;
+  GtkTreeView *treeview;
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  GtkTreeIter iter;
 
-            clear_old_model (dialog);
-            gtk_main_quit ();
-          }
+  treeview = GTK_TREE_VIEW (WID ("shortcut_treeview"));
+  model = gtk_tree_view_get_model (treeview);
+
+  if (response_id == GTK_RESPONSE_HELP)
+    {
+      capplet_help (GTK_WINDOW (widget),
+                    "user-guide.xml",
+                    "goscustdesk-39");
+    }
+  else if (response_id == RESPONSE_ADD)
+    {
+      add_custom_shortcut (treeview, model);
+    }
+  else if (response_id == RESPONSE_REMOVE)
+    {
+      selection = gtk_tree_view_get_selection (treeview);
+      if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+        {
+          remove_custom_shortcut (model, &iter);
+        }
+    }
+  else
+    {
+      clear_old_model (dialog);
+      gtk_main_quit ();
+    }
+}
+
+static void
+selection_changed (GtkTreeSelection *selection, gpointer data)
+{
+  GtkWidget *button = data;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  KeyEntry *key;
+  gboolean can_remove;
+
+  can_remove = FALSE;
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      gtk_tree_model_get (model, &iter, KEYENTRY_COLUMN, &key, -1);
+      if (key && key->command != NULL && key->editable)
+	can_remove = TRUE;
+    }
+
+  gtk_widget_set_sensitive (button, can_remove);   
 }
 
 static void
@@ -1399,11 +1750,13 @@ setup_dialog (GladeXML *dialog)
   GtkWidget *widget;
   GtkTreeView *treeview = GTK_TREE_VIEW (WID ("shortcut_treeview"));
   gchar *wm_name;
+  GtkTreeSelection *selection;
+  GSList *accepted_keys;
 
   client = gconf_client_get_default ();
 
   g_signal_connect (treeview, "button_press_event",
-		    G_CALLBACK (start_editing_cb), NULL);
+		    G_CALLBACK (start_editing_cb), dialog);
   g_signal_connect (treeview, "row-activated",
 		    G_CALLBACK (start_editing_kb_cb), NULL);
 
@@ -1448,7 +1801,6 @@ setup_dialog (GladeXML *dialog)
 			   "/apps/metacity/general/num_workspaces",
 			   (GConfClientNotifyFunc) key_entry_controlling_key_changed,
 			   dialog, NULL, NULL);
-  g_object_unref (client);
 
   /* set up the dialog */
   wm_name = wm_common_get_current_window_manager();
@@ -1461,6 +1813,19 @@ setup_dialog (GladeXML *dialog)
 
   g_signal_connect (widget, "key_press_event", G_CALLBACK (maybe_block_accels), NULL);
   g_signal_connect (widget, "response", G_CALLBACK (cb_dialog_response), dialog);
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+  g_signal_connect (selection, "changed",
+                    G_CALLBACK (selection_changed), WID ("remove-button"));
+
+  g_object_unref (client);
+
+  /* setup the custom shortcut dialog */
+  custom_shortcut_dialog = WID ("custom-shortcut-dialog");
+  custom_shortcut_name_entry = WID ("custom-shortcut-name-entry");
+  custom_shortcut_command_entry = WID ("custom-shortcut-command-entry");
+  gtk_window_set_transient_for (GTK_WINDOW (custom_shortcut_dialog),
+                                GTK_WINDOW (widget));
 }
 
 int
