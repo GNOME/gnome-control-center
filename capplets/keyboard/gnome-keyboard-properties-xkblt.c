@@ -208,16 +208,43 @@ xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 				  (n_selected_selected_layouts > 0));
 }
 
+static GtkTreeViewColumn *
+xkb_layouts_create_default_layout_column ()
+{
+	GtkTreeViewColumn *def_column =
+	    gtk_tree_view_column_new_with_attributes (_("Default"),
+						      toggle_renderer,
+						      "active",
+						      SEL_LAYOUT_TREE_COL_DEFAULT,
+						      NULL);
+	gtk_tree_view_column_set_sizing (def_column,
+					 GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+	gtk_tree_view_column_set_resizable (def_column, TRUE);
+	gtk_tree_view_column_set_expand (def_column, FALSE);
+	return def_column;
+}
+
 void
 xkb_layouts_enable_disable_default (GladeXML * dialog, gboolean enable)
 {
-	GValue val = { 0 };
 	GtkWidget *tree_view = WID ("xkb_layouts_selected");
 
-	g_value_init (&val, G_TYPE_BOOLEAN);
-	g_value_set_boolean (&val, enable);
-	g_object_set_property (G_OBJECT (toggle_renderer), "activatable",
-			       &val);
+	if (enable) {
+		gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
+					     xkb_layouts_create_default_layout_column
+					     ());
+		g_object_unref (toggle_renderer);
+	} else {
+		GtkTreeViewColumn *col =
+		    gtk_tree_view_get_column (GTK_TREE_VIEW (tree_view),
+					      1);
+		if (col != NULL) {
+			g_object_ref (toggle_renderer);
+			gtk_tree_view_column_clear (col);
+			gtk_tree_view_remove_column (GTK_TREE_VIEW
+						     (tree_view), col);
+		}
+	}
 
 	gtk_widget_draw (tree_view, NULL);
 }
@@ -290,28 +317,23 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 	    gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_BOOLEAN,
 				G_TYPE_STRING);
 	GtkWidget *tree_view = WID ("xkb_layouts_selected");
-	GtkTreeViewColumn *desc_column, *def_column;
 	GtkTreeSelection *selection;
 	GtkTargetEntry self_drag_target =
 	    { "xkb_layouts_selected", GTK_TARGET_SAME_WIDGET, 0 };
+	GtkTreeViewColumn *desc_column;
 
 	text_renderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
 	toggle_renderer =
 	    GTK_CELL_RENDERER (gtk_cell_renderer_toggle_new ());
 	gtk_cell_renderer_toggle_set_radio (GTK_CELL_RENDERER_TOGGLE
 					    (toggle_renderer), TRUE);
+	g_object_ref (toggle_renderer);
 
 	desc_column =
 	    gtk_tree_view_column_new_with_attributes (_("Layout"),
 						      text_renderer,
 						      "text",
 						      SEL_LAYOUT_TREE_COL_DESCRIPTION,
-						      NULL);
-	def_column =
-	    gtk_tree_view_column_new_with_attributes (_("Default"),
-						      toggle_renderer,
-						      "active",
-						      SEL_LAYOUT_TREE_COL_DEFAULT,
 						      NULL);
 	selection =
 	    gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
@@ -321,17 +343,11 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 
 	gtk_tree_view_column_set_sizing (desc_column,
 					 GTK_TREE_VIEW_COLUMN_AUTOSIZE);
-	gtk_tree_view_column_set_sizing (def_column,
-					 GTK_TREE_VIEW_COLUMN_AUTOSIZE);
 	gtk_tree_view_column_set_resizable (desc_column, TRUE);
-	gtk_tree_view_column_set_resizable (def_column, TRUE);
 	gtk_tree_view_column_set_expand (desc_column, TRUE);
-	gtk_tree_view_column_set_expand (def_column, FALSE);
 
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
 				     desc_column);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
-				     def_column);
 
 	g_signal_connect_swapped (G_OBJECT (selection), "changed",
 				  G_CALLBACK
