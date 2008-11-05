@@ -1,3 +1,73 @@
+gnome-control-center 2.25.1 (2008-11-05)
+
+General:
+- resurrect gnome-font-viewer and gnome-thumbnail-font (Davyd Madeley)
+- reduce libgnome* usage (Søren Sandmann)
+- require GTK+ 2.13.1 (Jens Granseuer)
+- require gnome-desktop 2.25.1 (Jens Granseuer)
+- code cleanups (Jens Granseuer, Christian Persch, Kjartan Maraas, Bastien Nocera)
+
+Common:
+- use translated names for icon themes if available (Jens Granseuer) (#554272)
+- fix error handling when launching help (Jens Granseuer)
+
+Appearance:
+- connect the help buttons to the most appropriate sections in the user guide
+  (Matthias Clasen) (#554957)
+
+Default application:
+- add Listen to the list of media players (Julien Lavergne)
+
+Display:
+- show an error dialog instead of crashing when initialization fails due to
+  XRandR not being available (Matt Keenan) (#553762)
+- fix preview orientation when using left or right rotation (Jens Granseuer) (#555241)
+- use new clone mode API in gnome-desktop (Søren Sandmann)
+- XOR the old and the new regions instead of subtracting old from new (Søren
+  Sandmann) (#551566)
+
+Keybindings:
+- fix editability of group headings (Matthias Clasen) (#556967)
+- avoid duplicate custom keybindings (Matthias Clasen) (#556977)
+- add UI for adding and removing named custom shortcuts (Matthias Clasen) (#114796)
+
+Keyboard:
+- fix group sorting (Sergey Udaltsov)
+- update group expander highlighting dynamically (Sergey Udaltsov)
+- connect the stickykeys_two_key_off button (Jens Granseuer) (#556818)
+- remember sorted list of expanders in properties (Sergey Udaltsov)
+- scroll the options window when the keyboard focus moves out of the visible
+  part (Jens Granseuer) (#557944)
+- hide/show the "Default" column depending on the "layout per window" checkbox
+  (Sergey Udaltsov) (#555261)
+
+Sound:
+- make the filechooser default to a sensible directory (Bastien Nocera)
+
+Windows:
+- Use the right values for the h/v maximization titlebar doubleclick action
+  (Matthias Clasen) (#554962)
+
+Translations:
+- ast (Esbardu)
+- bg (Yavor Doganov)
+- ca@valencia (Robert Millan)
+- cs (Petr Kovar)
+- da (Ask Hjorth Larsen)
+- el (nikosCharonitakis)
+- et (Priit Laes)
+- fi (Timo Jyrinki)
+- he (Mark Krapivner)
+- hu (Gabor Kelemen)
+- nb (Kjartan Maraas)
+- nl (Wouter Bolsterlee)
+- pt_BR (Leonardo Ferreira Fontenelle)
+- sk (Pavol Šimo)
+- sr (Данило Шеган)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+- uk (Maxim V. Dziumanenko)
+
 gnome-control-center 2.24.0.1 (2008-09-24)
 
 Appearance:
