@@ -31,19 +31,15 @@
 #include "capplet-util.h"
 
 static AppearanceData *
-init_appearance_data (int *argc, char ***argv)
+init_appearance_data (int *argc, char ***argv, GOptionContext *context)
 {
   AppearanceData *data = NULL;
   gchar *gladefile;
   GladeXML *ui;
 
-  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-
   g_thread_init (NULL);
   theme_thumbnail_factory_init (*argc, *argv);
-  gtk_init (argc, argv);
+  capplet_init (argc, argv);
   activate_settings_daemon ();
 
   /* set up the data */
@@ -91,19 +87,19 @@ main_window_response (GtkWidget *widget,
       switch (pindex)
       {
         case 0: /* theme */
-          capplet_help (GTK_WINDOW (widget), "goscustdesk-12"); 
+          capplet_help (GTK_WINDOW (widget), "goscustdesk-12");
           break;
         case 1: /* background */
-          capplet_help (GTK_WINDOW (widget), "goscustdesk-7"); 
+          capplet_help (GTK_WINDOW (widget), "goscustdesk-7");
           break;
         case 2: /* fonts */
-          capplet_help (GTK_WINDOW (widget), "goscustdesk-38"); 
+          capplet_help (GTK_WINDOW (widget), "goscustdesk-38");
           break;
         case 3: /* interface */
-          capplet_help (GTK_WINDOW (widget), "goscustuserinter-2"); 
+          capplet_help (GTK_WINDOW (widget), "goscustuserinter-2");
           break;
         default:
-          capplet_help (GTK_WINDOW (widget), "prefs-look-and-feel"); 
+          capplet_help (GTK_WINDOW (widget), "prefs-look-and-feel");
           break;
        }
   }
@@ -145,15 +141,13 @@ main (int argc, char **argv)
       { NULL }
     };
 
-  /* init */
-  data = init_appearance_data (&argc, &argv);
-  if (!data)
-    return 1;
-
   option_context = g_option_context_new (NULL);
   g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
 
-  capplet_init (option_context, &argc, &argv);
+  /* init */
+  data = init_appearance_data (&argc, &argv, option_context);
+  if (!data)
+    return 1;
 
   if (install_filename != NULL) {
     GFile *inst = g_file_new_for_commandline_arg (install_filename);
@@ -200,6 +194,8 @@ main (int argc, char **argv)
     }
     g_free (page_name);
   }
+
+  g_option_context_free (option_context);
 
   /* start the mainloop */
   gtk_main ();
