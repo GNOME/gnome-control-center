@@ -39,7 +39,7 @@ init_appearance_data (int *argc, char ***argv, GOptionContext *context)
 
   g_thread_init (NULL);
   theme_thumbnail_factory_init (*argc, *argv);
-  capplet_init (argc, argv);
+  capplet_init (context, argc, argv);
   activate_settings_daemon ();
 
   /* set up the data */
