@@ -1750,7 +1750,7 @@ setup_dialog (GladeXML *dialog)
   GtkTreeView *treeview = GTK_TREE_VIEW (WID ("shortcut_treeview"));
   gchar *wm_name;
   GtkTreeSelection *selection;
-  GSList *accepted_keys;
+  GSList *allowed_keys;
 
   client = gconf_client_get_default ();
 
@@ -1816,6 +1816,17 @@ setup_dialog (GladeXML *dialog)
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (selection_changed), WID ("remove-button"));
+
+  allowed_keys = gconf_client_get_list (client,
+                                        GCONF_BINDING_DIR "/allowed_keys",
+                                        GCONF_VALUE_STRING,
+                                        NULL);
+  if (allowed_keys != NULL)
+    {
+      g_slist_foreach (allowed_keys, (GFunc)g_free, NULL);
+      g_slist_free (allowed_keys);
+      gtk_widget_set_sensitive (WID ("add-button"), FALSE);
+    }
 
   g_object_unref (client);
 
