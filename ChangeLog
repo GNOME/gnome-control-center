@@ -1,3 +1,9 @@
+2008-11-18  Jens Granseuer  <jensgr@gmx.net>
+
+	* font-viewer/font-view.c: (add_face_info), (set_icon):
+	* font-viewer/ftstream-vfs.c: (vfs_stream_open): fix another
+	leak, an invalid free, and a simplify error handling
+
 2008-11-18  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* font-viewer/font-view.c (set_icon): don't leak icon_name.

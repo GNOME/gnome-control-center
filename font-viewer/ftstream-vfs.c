@@ -89,17 +89,17 @@ vfs_stream_open(FT_Stream stream,
 
     info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_SIZE,
                               G_FILE_QUERY_INFO_NONE, NULL, &error);
+    g_object_unref (file);
+
     if (! info) {
         g_warning (error->message);
 
         g_error_free (error);
-        g_object_unref (file);
         return FT_Err_Cannot_Open_Resource;
     }
 
     stream->size = g_file_info_get_size (info);
 
-    g_object_unref (file);
     g_object_unref (info);
 
     stream->descriptor.pointer = handle;

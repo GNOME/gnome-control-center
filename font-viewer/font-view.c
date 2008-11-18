@@ -157,7 +157,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     /* calculate size of pixmap to use (with 4 pixels padding) ... */
     pixmap_width = 8;
     pixmap_height = 8;
-    
+
     font = get_font(xdisplay, face, alpha_size, charset);
     charset = FcCharSetCopy (font->charset);
     XftTextExtentsUtf8(xdisplay, font,
@@ -284,6 +284,7 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
                               G_FILE_ATTRIBUTE_STANDARD_SIZE,
                               G_FILE_QUERY_INFO_NONE,
                               NULL, NULL);
+    g_object_unref (file);
 
     if (info) {
         s = g_content_type_get_description (g_file_info_get_content_type (info));
@@ -296,8 +297,6 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 
         g_object_unref (info);
     }
-
-    g_object_unref (file);
 
     if (FT_IS_SFNT(face)) {
 	gint i, len;
@@ -376,7 +375,7 @@ set_icon(GtkWindow *window, const gchar *uri)
     GFileInfo *info;
     GdkScreen *screen;
     GtkIconTheme *icon_theme;
-    gchar *icon_name = NULL, *content_type = NULL;
+    const gchar *icon_name = NULL, *content_type;
 
     screen = gtk_widget_get_screen (GTK_WIDGET (window));
     icon_theme = gtk_icon_theme_get_for_screen (screen);
@@ -385,10 +384,10 @@ set_icon(GtkWindow *window, const gchar *uri)
 
     info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
                               G_FILE_QUERY_INFO_NONE, NULL, NULL);
-    if (! info) {
-	g_object_unref (file);
+    g_object_unref (file);
+
+    if (! info)
 	return;
-    }
 
     content_type = g_file_info_get_content_type (info);
     icon = g_content_type_get_icon (content_type);
@@ -399,21 +398,20 @@ set_icon(GtkWindow *window, const gchar *uri)
        names = g_themed_icon_get_names (G_THEMED_ICON (icon));
        if (names) {
           gint i;
-          for (i = 0; names[i]; i++)
+          for (i = 0; names[i]; i++) {
 	      if (gtk_icon_theme_has_icon (icon_theme, names[i])) {
-		  icon_name = g_strdup (names[i]);
+		  icon_name = names[i];
 		  break;
 	      }
+          }
        }
     }
 
     if (icon_name) {
         gtk_window_set_icon_name (window, icon_name);
-	g_free (icon_name);
     }
 
     g_object_unref (icon);
-    g_free (content_type);
 }
 
 int
@@ -449,7 +447,7 @@ main(int argc, char **argv)
     if (error) {
 	g_printerr("could not initialise freetype\n");
 	return 1;
-    }  
+    }
 
     file = g_file_new_for_commandline_arg (argv[1]);
     font_file = g_file_get_uri (file);
