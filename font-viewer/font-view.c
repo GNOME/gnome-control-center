@@ -385,8 +385,10 @@ set_icon(GtkWindow *window, const gchar *uri)
 
     info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
                               G_FILE_QUERY_INFO_NONE, NULL, NULL);
-    if (! info)
-        goto end;
+    if (! info) {
+	g_object_unref (file);
+	return;
+    }
 
     content_type = g_file_info_get_content_type (info);
     icon = g_content_type_get_icon (content_type);
@@ -398,22 +400,20 @@ set_icon(GtkWindow *window, const gchar *uri)
        if (names) {
           gint i;
           for (i = 0; names[i]; i++)
-             if (gtk_icon_theme_has_icon (icon_theme, names[i]))
-                icon_name = g_strdup (names[i]);
+	      if (gtk_icon_theme_has_icon (icon_theme, names[i])) {
+		  icon_name = g_strdup (names[i]);
+		  break;
+	      }
        }
     }
 
-    if (icon_name)
+    if (icon_name) {
         gtk_window_set_icon_name (window, icon_name);
+	g_free (icon_name);
+    }
 
     g_object_unref (icon);
     g_free (content_type);
-
- end:
-    if (icon_name)
-       g_free(icon_name);
-
-    g_object_unref (file);
 }
 
 int

@@ -68,10 +68,10 @@ static FT_Error
 vfs_stream_open(FT_Stream stream,
 		const char *uri)
 {
-    GFile *file = NULL;
+    GFile *file;
     GError *error = NULL;
-    GFileInfo *info = NULL;
-    GFileInputStream *handle = NULL;
+    GFileInfo *info;
+    GFileInputStream *handle;
 
     if (!stream)
         return FT_Err_Invalid_Stream_Handle;
@@ -81,6 +81,7 @@ vfs_stream_open(FT_Stream stream,
     handle = g_file_read (file, NULL, &error);
     if (! handle) {
         g_message (error->message);
+	g_object_unref (file);
 
         g_error_free (error);
         return FT_Err_Cannot_Open_Resource;
