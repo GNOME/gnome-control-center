@@ -27,9 +27,9 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include <libgnomevfs/gnome-vfs.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
+#include <gio/gio.h>
 #include <glib/gi18n.h>
 
 static const gchar *
@@ -224,6 +224,7 @@ main(int argc, char **argv)
     FT_Library library;
     FT_Face face;
     FT_UInt glyph_index1, glyph_index2;
+    GFile *file;
     gchar *uri;
     GdkPixbuf *pixbuf;
     guchar *buffer;
@@ -285,18 +286,16 @@ main(int argc, char **argv)
 	}
     }
 
-    if (!gnome_vfs_init()) {
-	g_printerr("could not initialise gnome-vfs\n");
-	goto out;
-    }
-
     error = FT_Init_FreeType(&library);
     if (error) {
 	g_printerr("could not initialise freetype: %s\n", get_ft_error(error));
 	goto out;
     }
 
-    uri = gnome_vfs_make_uri_from_shell_arg (arguments[0]);
+    file = g_file_new_for_commandline_arg (arguments[0]);
+    uri = g_file_get_uri (file);
+    g_object_unref (file);
+
     error = FT_New_Face_From_URI(library, uri, 0, &face);
     if (error) {
 	g_printerr("could not load face '%s': %s\n", uri,
@@ -304,6 +303,7 @@ main(int argc, char **argv)
         g_free (uri);
 	goto out;
     }
+
     g_free (uri);
 
     error = FT_Set_Pixel_Sizes(face, 0, font_size);

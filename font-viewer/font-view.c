@@ -29,12 +29,10 @@
 #include <X11/Xlib.h>
 #include <X11/Xft/Xft.h>
 
-#include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
-#include <libgnomevfs/gnome-vfs.h>
-#include <libgnomevfs/gnome-vfs-mime-handlers.h>
-#include <libgnomeui/gnome-icon-lookup.h>
+#include <glib/gi18n.h>
 
 FT_Error FT_New_Face_From_URI(FT_Library library,
 			      const gchar *uri,
@@ -269,8 +267,9 @@ add_row(GtkWidget *table, gint *row_p,
 static void
 add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 {
-    GnomeVFSFileInfo *file_info;
-    GnomeVFSResult res;
+    gchar *s;
+    GFile *file;
+    GFileInfo *info;
     PS_FontInfoRec ps_info;
 
     add_row(table, row_p, _("Name:"), face->family_name, FALSE);
@@ -278,25 +277,27 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
     if (face->style_name)
 	add_row(table, row_p, _("Style:"), face->style_name, FALSE);
 
-    file_info = gnome_vfs_file_info_new();
-    res = gnome_vfs_get_file_info(uri, file_info,
-				  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
-				  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-    if (res == GNOME_VFS_OK) {
-	if ((file_info->valid_fields&GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE)!=0){
-	    const gchar *type = gnome_vfs_mime_get_description(file_info->mime_type);
+    file = g_file_new_for_uri (uri);
 
-	    add_row(table, row_p, _("Type:"),
-		    type ? type : file_info->mime_type, FALSE);
-	}
-	if ((file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE) != 0) {
-	    gchar *size;
-	    size = gnome_vfs_format_file_size_for_display(file_info->size);
-	    add_row(table, row_p, _("Size:"), size, FALSE);
-	    g_free(size);
-	}
+    info = g_file_query_info (file,
+                              G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE ","
+                              G_FILE_ATTRIBUTE_STANDARD_SIZE,
+                              G_FILE_QUERY_INFO_NONE,
+                              NULL, NULL);
+
+    if (info) {
+        s = g_content_type_get_description (g_file_info_get_content_type (info));
+        add_row (table, row_p, _("Type:"), s, FALSE);
+        g_free (s);
+
+        s = g_format_size_for_display (g_file_info_get_size (info));
+        add_row (table, row_p, _("Size:"), s, FALSE);
+        g_free (s);
+
+        g_object_unref (info);
     }
-    gnome_vfs_file_info_unref(file_info);
+
+    g_object_unref (file);
 
     if (FT_IS_SFNT(face)) {
 	gint i, len;
@@ -370,20 +371,49 @@ expose_event(GtkWidget *widget, GdkEventExpose *event, GdkPixmap *pixmap)
 static void
 set_icon(GtkWindow *window, const gchar *uri)
 {
+    GFile *file;
+    GIcon *icon;
+    GFileInfo *info;
     GdkScreen *screen;
     GtkIconTheme *icon_theme;
-    gchar *icon_name = NULL;
+    gchar *icon_name = NULL, *content_type = NULL;
 
     screen = gtk_widget_get_screen (GTK_WIDGET (window));
     icon_theme = gtk_icon_theme_get_for_screen (screen);
 
-    icon_name = gnome_icon_lookup_sync(icon_theme, NULL, uri, NULL,
-				       GNOME_ICON_LOOKUP_FLAGS_NONE, NULL);
-    if (!icon_name) goto end;
+    file = g_file_new_for_uri (uri);
 
-    gtk_window_set_icon_name (window, icon_name);
+    info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+                              G_FILE_QUERY_INFO_NONE, NULL, NULL);
+    if (! info)
+        goto end;
+
+    content_type = g_file_info_get_content_type (info);
+    icon = g_content_type_get_icon (content_type);
+
+    if (G_IS_THEMED_ICON (icon)) {
+       const gchar * const *names = NULL;
+
+       names = g_themed_icon_get_names (G_THEMED_ICON (icon));
+       if (names) {
+          gint i;
+          for (i = 0; names[i]; i++)
+             if (gtk_icon_theme_has_icon (icon_theme, names[i]))
+                icon_name = g_strdup (names[i]);
+       }
+    }
+
+    if (icon_name)
+        gtk_window_set_icon_name (window, icon_name);
+
+    g_object_unref (icon);
+    g_free (content_type);
+
  end:
-    g_free(icon_name);
+    if (icon_name)
+       g_free(icon_name);
+
+    g_object_unref (file);
 }
 
 int
@@ -392,6 +422,7 @@ main(int argc, char **argv)
     FT_Error error;
     FT_Library library;
     FT_Face face;
+    GFile *file;
     gchar *font_file, *title;
     gint row;
     GtkWidget *window, *vbox, *table, *swin, *drawing_area;
@@ -409,11 +440,6 @@ main(int argc, char **argv)
 	return 1;
     }
 
-    if (!gnome_vfs_init()) {
-	g_printerr("could not initialise gnome-vfs\n");
-	return 1;
-    }
-
     if (!XftInitFtLibrary()) {
 	g_printerr("could not initialise freetype library\n");
 	return 1;
@@ -425,7 +451,10 @@ main(int argc, char **argv)
 	return 1;
     }  
 
-    font_file = gnome_vfs_make_uri_from_shell_arg (argv[1]);
+    file = g_file_new_for_commandline_arg (argv[1]);
+    font_file = g_file_get_uri (file);
+    g_object_unref (file);
+
     if (!font_file) {
 	g_printerr("could not parse argument into a URI\n");
 	return 1;

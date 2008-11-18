@@ -24,7 +24,8 @@
 #include <stdlib.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
-#include <libgnomevfs/gnome-vfs.h>
+
+#include <gio/gio.h>
 
 static unsigned long
 vfs_stream_read(FT_Stream stream,
@@ -32,64 +33,73 @@ vfs_stream_read(FT_Stream stream,
 		unsigned char *buffer,
 		unsigned long count)
 {
-    GnomeVFSHandle *handle = (GnomeVFSHandle *)stream->descriptor.pointer;
-    GnomeVFSFileSize bytes_read = 0;
+    GFileInputStream *handle = (GFileInputStream *)stream->descriptor.pointer;
+    gssize bytes_read = 0;
 
-    if (gnome_vfs_seek(handle, GNOME_VFS_SEEK_START, offset) != GNOME_VFS_OK)
-	return 0;
+    if (! g_seekable_seek (G_SEEKABLE (handle), offset, G_SEEK_SET, NULL, NULL))
+        return 0;
+
     if (count > 0) {
-	if (gnome_vfs_read(handle, buffer, count, &bytes_read) != GNOME_VFS_OK)
-	    return 0;
+        bytes_read = g_input_stream_read (G_INPUT_STREAM (handle), buffer, count, NULL, NULL);
+
+        if (bytes_read == -1)
+            return 0;
     }
+
     return bytes_read;
 }
 
 static void
 vfs_stream_close(FT_Stream stream)
 {
-    GnomeVFSHandle *handle = (GnomeVFSHandle *)stream->descriptor.pointer;
+    GFileInputStream *handle = (GFileInputStream *)stream->descriptor.pointer;
 
-    if (!handle)
-	return;
-    gnome_vfs_close(handle);
+    if (! handle)
+        return;
+
+    g_object_unref (handle);
 
     stream->descriptor.pointer = NULL;
     stream->size               = 0;
-    stream->base               = NULL;    
+    stream->base               = NULL;
 }
 
 static FT_Error
 vfs_stream_open(FT_Stream stream,
 		const char *uri)
 {
-    GnomeVFSHandle *handle;
-    GnomeVFSFileInfo *finfo;
+    GFile *file = NULL;
+    GError *error = NULL;
+    GFileInfo *info = NULL;
+    GFileInputStream *handle = NULL;
 
     if (!stream)
-	return FT_Err_Invalid_Stream_Handle;
+        return FT_Err_Invalid_Stream_Handle;
 
-    if (gnome_vfs_open(&handle, uri,
-	       GNOME_VFS_OPEN_READ | GNOME_VFS_OPEN_RANDOM) != GNOME_VFS_OK) {
-	g_message("could not open URI");
-	return FT_Err_Cannot_Open_Resource;
+    file = g_file_new_for_uri (uri);
+
+    handle = g_file_read (file, NULL, &error);
+    if (! handle) {
+        g_message (error->message);
+
+        g_error_free (error);
+        return FT_Err_Cannot_Open_Resource;
     }
 
-    finfo = gnome_vfs_file_info_new();
-    if (gnome_vfs_get_file_info_from_handle(handle, finfo,0) != GNOME_VFS_OK) {
-	g_warning("could not get file info");
-	gnome_vfs_file_info_unref(finfo);
-	gnome_vfs_close(handle);
-	return FT_Err_Cannot_Open_Resource;
+    info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_SIZE,
+                              G_FILE_QUERY_INFO_NONE, NULL, &error);
+    if (! info) {
+        g_warning (error->message);
+
+        g_error_free (error);
+        g_object_unref (file);
+        return FT_Err_Cannot_Open_Resource;
     }
 
-    if ((finfo->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE) == 0) {
-	g_warning("file info did not include file size");
-	gnome_vfs_file_info_unref(finfo);
-	gnome_vfs_close(handle);
-	return FT_Err_Cannot_Open_Resource;
-    }	
-    stream->size = finfo->size;
-    gnome_vfs_file_info_unref(finfo);
+    stream->size = g_file_info_get_size (info);
+
+    g_object_unref (file);
+    g_object_unref (info);
 
     stream->descriptor.pointer = handle;
     stream->pathname.pointer   = NULL;
