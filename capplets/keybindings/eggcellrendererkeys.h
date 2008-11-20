@@ -20,7 +20,7 @@
 #ifndef __EGG_CELL_RENDERER_KEYS_H__
 #define __EGG_CELL_RENDERER_KEYS_H__
 
-#include <gtk/gtkcellrenderertext.h>
+#include <gtk/gtk.h>
 #include "eggaccelerators.h"
 
 G_BEGIN_DECLS

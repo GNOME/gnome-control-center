@@ -22,7 +22,7 @@
 #include <config.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
-#include <gtk/gtkinvisible.h>
+#include <gtk/gtk.h>
 #include <math.h>
 #include <unistd.h>
 #include <sys/ioctl.h>

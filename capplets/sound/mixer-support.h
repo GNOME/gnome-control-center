@@ -22,7 +22,7 @@
 #ifndef __GNOME_SETTINGS_MIXER_SUPPORT__
 #define __GNOME_SETTINGS_MIXER_SUPPORT__
 
-#include <gtk/gtktreemodel.h>
+#include <gtk/gtk.h>
 #include <gst/interfaces/mixer.h>
 
 G_BEGIN_DECLS

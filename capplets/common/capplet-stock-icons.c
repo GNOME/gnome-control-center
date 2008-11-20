@@ -23,8 +23,7 @@
  *	Taken bits of code from panel-stock-icons.c, Thanks Mark <mark@skynet.ie>
  */
 
-#include <gtk/gtkstock.h>
-#include <gtk/gtkiconfactory.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
 #include "capplet-stock-icons.h"

@@ -27,7 +27,6 @@
 #include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
-#include <gdk/gdkspawn.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 

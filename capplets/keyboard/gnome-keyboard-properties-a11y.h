@@ -25,7 +25,7 @@
 #define __GNOME_KEYBOARD_PROPERTY_A11Y_H
 
 #include <gconf/gconf-changeset.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include <glade/glade.h>
 
 extern void setup_a11y_tabs (GladeXML * dialog, GConfChangeSet * changeset);

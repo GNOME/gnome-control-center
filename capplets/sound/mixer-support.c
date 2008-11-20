@@ -24,11 +24,11 @@
 
 #include <string.h>
 
-#include <glib/glist.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <gst/audio/mixerutils.h>
 
-#include <gtk/gtkliststore.h>
+#include <gtk/gtk.h>
 
 #include "mixer-support.h"
 

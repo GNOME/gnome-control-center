@@ -24,7 +24,7 @@
 #include <string.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtkaccelgroup.h>
+#include <gtk/gtk.h>
 
 enum
 {

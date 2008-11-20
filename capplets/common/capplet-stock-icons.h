@@ -26,8 +26,8 @@
 #ifndef __CAPPLET_STOCK_ICONS_H__
 #define __CAPPLET_STOCK_ICONS_H__
 
-#include <glib/gmacros.h>
-#include <gtk/gtkenums.h>
+#include <glib.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
