@@ -1,3 +1,11 @@
+2008-11-20  Jens Granseuer  <jensgr@gmx.net>
+
+	Patch by: Maxim Ermilov <zaspire@rambler.ru>
+
+	* drw-selection.c: (drw_selection_reset),
+	(drw_selection_find_existing): use g_object_unref instead of the
+	deprecated gdk_window_unref (bug #561679)
+
 ==================== 2.25.1 ====================
 
 ==================== 2.24.0.1 ====================

@@ -15,7 +15,7 @@
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL RED HAT
  * BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
  * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
- * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
+ * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  * Author:  Owen Taylor, Red Hat, Inc.
@@ -46,10 +46,10 @@ drw_selection_reset (DrwSelection *drw_selection)
 	if (drw_selection->owner_window) {
 		gdk_window_remove_filter (drw_selection->owner_window,
 					  drw_selection_filter, drw_selection);
-		gdk_window_unref (drw_selection->owner_window);
+		g_object_unref (drw_selection->owner_window);
 		drw_selection->owner_window = NULL;
 	}
-	
+
 	if (drw_selection->invisible) {
 		gtk_widget_destroy (drw_selection->invisible);
 		drw_selection->invisible = NULL;
@@ -81,20 +81,20 @@ drw_selection_find_existing (DrwSelection *drw_selection)
 		drw_selection->owner_window = gdk_window_foreign_new (old);
 	}
 	XSync (xdisplay, False);
-  
+
 	if (gdk_error_trap_pop () == 0 && drw_selection->owner_window) {
 		gdk_window_add_filter (drw_selection->owner_window,
 				       drw_selection_filter, drw_selection);
-		
+
 		XUngrabServer (xdisplay);
-		
+
 		return TRUE;
 	} else {
 		if (drw_selection->owner_window) {
-			gdk_window_unref (drw_selection->owner_window);
+			g_object_unref (drw_selection->owner_window);
 			drw_selection->owner_window = NULL;
 		}
-		
+
 		return FALSE;
 	}
 }
@@ -105,8 +105,8 @@ drw_selection_claim (DrwSelection *drw_selection)
 	drw_selection->invisible = gtk_invisible_new ();
 	g_signal_connect (drw_selection->invisible, "selection-clear-event",
 			  G_CALLBACK (drw_selection_clear), drw_selection);
-  
-  
+
+
 	if (gtk_selection_owner_set (drw_selection->invisible,
 				     gdk_atom_intern (SELECTION_NAME, FALSE),
 				     GDK_CURRENT_TIME)) {
@@ -167,7 +167,7 @@ DrwSelection *
 drw_selection_start (void)
 {
 	DrwSelection *drw_selection = g_new (DrwSelection, 1);
-  
+
 	drw_selection->owner_window = NULL;
 	drw_selection->invisible = NULL;
 
