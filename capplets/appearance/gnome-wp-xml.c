@@ -34,7 +34,7 @@ static gboolean gnome_wp_xml_get_bool (const xmlNode * parent,
 
   prop = xmlGetProp ((xmlNode *) parent, (xmlChar*)prop_name);
   if (prop != NULL) {
-    if (!g_strcasecmp ((gchar *)prop, "true") || !g_strcasecmp ((gchar *)prop, "1")) {
+    if (!g_ascii_strcasecmp ((gchar *)prop, "true") || !g_ascii_strcasecmp ((gchar *)prop, "1")) {
       ret_val = TRUE;
     } else {
       ret_val = FALSE;
