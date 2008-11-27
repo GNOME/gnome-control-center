@@ -158,7 +158,7 @@ transfer_cancel_cb (GtkWidget *dlg, gchar *path)
 	GFile *todelete;
 
 	todelete = g_file_new_for_path (path);
-	g_file_delete (todelete, NULL, NULL);
+	capplet_file_delete_recursive (todelete, NULL);
 
 	g_object_unref (todelete);
 	g_free (path);
