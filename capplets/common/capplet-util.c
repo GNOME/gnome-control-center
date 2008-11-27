@@ -76,7 +76,7 @@ capplet_help (GtkWindow *parent, char const *helpfile, char const *section)
 		"user-guide",
 		helpfile, section, &error);
 	if (error != NULL)
-		capplet_error_dialog (parent, 
+		capplet_error_dialog (parent,
 			_("There was an error displaying help: %s"),
 			error);
 }
@@ -120,11 +120,10 @@ directory_delete_recursive (GFile *directory, GError **error)
 
 		if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
 			success = directory_delete_recursive (child, error);
+		} else {
+			success = g_file_delete (child, NULL, error);
 		}
 		g_object_unref (info);
-
-		if (success)
-			success = g_file_delete (child, NULL, error);
 	}
 	g_file_enumerator_close (enumerator, NULL, NULL);
 
