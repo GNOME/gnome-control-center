@@ -32,9 +32,16 @@
 #include <pwd.h>
 #include <unistd.h>
 #include <libebook/e-book.h>
+#include <dbus/dbus-glib-bindings.h>
+
+#ifdef HAVE_POLKIT
+#include <polkit-gnome/polkit-gnome.h>
+#endif
 
 #include "e-image-chooser.h"
 #include "gnome-about-me-password.h"
+#include "gnome-about-me-fingerprint.h"
+#include "marshal.h"
 
 #include "capplet-util.h"
 
@@ -48,6 +55,8 @@ typedef struct {
 	EBook    	*book;
 
 	GladeXML 	*dialog;
+	GtkWidget	*enable_fingerprint_button;
+	GtkWidget	*disable_fingerprint_button;
 
 	GdkScreen    	*screen;
 	GtkIconTheme 	*theme;
@@ -156,6 +165,28 @@ about_me_error (GtkWindow *parent, gchar *str)
 	gtk_widget_destroy (dialog);
 }
 
+#ifdef HAVE_POLKIT
+static GtkWidget *
+create_fingerprint_button (const char *msg, const char *name)
+{
+	GtkWidget *button;
+	PolKitAction *action;
+	PolKitGnomeAction *gaction;
+
+	action = polkit_action_new_from_string_representation ("net.reactivated.fprint.device.enroll");
+	polkit_action_set_action_id (action, name);
+	gaction = polkit_gnome_action_new_default (name,
+						   action,
+						   msg,
+						   NULL);
+	polkit_action_unref (action);
+
+	button = polkit_gnome_action_create_button (gaction);
+	g_object_unref (gaction);
+
+	return button;
+}
+#endif /* HAVE_POLKIT */
 
 /********************/
 static void
@@ -650,6 +681,9 @@ about_me_load_info (GnomeAboutMe *me)
 	for (i = 0; ids[i].wid != NULL; i++) {
 		about_me_load_string_field (me, ids[i].wid, ids[i].cid, i);
 	}
+
+	set_fingerprint_label (me->enable_fingerprint_button,
+			       me->disable_fingerprint_button);
 }
 
 GtkWidget *
@@ -856,6 +890,14 @@ about_me_passwd_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	gnome_about_me_password (GTK_WINDOW (WID ("about-me-dialog")));
 }
 
+static void
+about_me_fingerprint_button_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
+{
+	fingerprint_button_clicked (me->dialog,
+				    me->enable_fingerprint_button,
+				    me->disable_fingerprint_button);
+}
+
 static gint
 about_me_setup_dialog (void)
 {
@@ -989,6 +1031,25 @@ about_me_setup_dialog (void)
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (about_me_image_clicked_cb), me);
 
+#ifdef HAVE_POLKIT
+	gtk_widget_destroy (WID ("enable_fingerprint_button"));
+	gtk_widget_destroy (WID ("disable_fingerprint_button"));
+
+	me->enable_fingerprint_button = create_fingerprint_button (_("Enable _Fingerprint Login..."), "enable-action");
+	gtk_container_add (GTK_CONTAINER (WID("buttons_vbox")), me->enable_fingerprint_button);
+
+	me->disable_fingerprint_button = create_fingerprint_button (_("Disable _Fingerprint Login..."), "disable-action");
+	gtk_container_add (GTK_CONTAINER (WID("buttons_vbox")), me->disable_fingerprint_button);
+#else
+	me->enable_fingerprint_button = WID ("enable_fingerprint_button");
+	me->disable_fingerprint_button = WID ("disable_fingerprint_button");
+#endif /* HAVE_POLKIT */
+
+	g_signal_connect (me->enable_fingerprint_button, "clicked",
+			  G_CALLBACK (about_me_fingerprint_button_clicked_cb), me);
+	g_signal_connect (me->disable_fingerprint_button, "clicked",
+			  G_CALLBACK (about_me_fingerprint_button_clicked_cb), me);
+
 	widget = WID ("image-chooser");
 	g_signal_connect (widget, "changed",
 			  G_CALLBACK (about_me_image_changed_cb), me);
@@ -1027,6 +1088,8 @@ main (int argc, char **argv)
 	int rc = 0;
 
 	capplet_init (NULL, &argc, &argv);
+	dbus_g_object_register_marshaller (fprintd_marshal_VOID__STRING_BOOLEAN,
+					   G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_INVALID);
 
 	rc = about_me_setup_dialog ();
 
