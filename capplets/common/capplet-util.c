@@ -131,11 +131,10 @@ directory_delete_recursive (GFile *directory, GError **error)
 
 		if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
 			success = directory_delete_recursive (child, error);
+		} else {
+			success = g_file_delete (child, NULL, error);
 		}
 		g_object_unref (info);
-
-		if (success)
-			success = g_file_delete (child, NULL, error);
 	}
 	g_file_enumerator_close (enumerator, NULL, NULL);
 
