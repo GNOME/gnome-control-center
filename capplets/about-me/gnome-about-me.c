@@ -174,7 +174,6 @@ create_fingerprint_button (const char *msg, const char *name)
 	PolKitGnomeAction *gaction;
 
 	action = polkit_action_new_from_string_representation ("net.reactivated.fprint.device.enroll");
-	polkit_action_set_action_id (action, name);
 	gaction = polkit_gnome_action_new_default (name,
 						   action,
 						   msg,
