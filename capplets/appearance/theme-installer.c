@@ -84,6 +84,7 @@ file_theme_type (const gchar *dir)
 		gboolean match;
 
 		g_file_get_contents (filename, &file_contents, &file_size, NULL);
+		g_free (filename);
 
 		pattern = g_pattern_spec_new ("*[Icon Theme]*");
 		match = g_pattern_match_string (pattern, file_contents);
