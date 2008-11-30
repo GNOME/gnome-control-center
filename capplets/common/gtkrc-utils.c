@@ -149,7 +149,7 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 				else if (scanner->value.v_symbol == ENGINE_SYMBOL)
 				{
 					string_token = g_scanner_get_next_token (scanner);
-					if (string_token != G_TOKEN_STRING)
+					if (string_token != G_TOKEN_STRING || scanner->value.v_string[0] == '\0')
 						continue;
 					if (!g_slist_find_custom (*engines, scanner->value.v_string, (GCompareFunc) strcmp))
 						*engines = g_slist_append (*engines, g_strdup (scanner->value.v_string));
