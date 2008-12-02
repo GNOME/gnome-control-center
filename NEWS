@@ -1,3 +1,48 @@
+gnome-control-center 2.25.2 (2008-12-02)
+
+General:
+- Only include top-level headers for glib and GTK+ (Maxim Ermilov) (#561562)
+- Optionally check for PolicyKit (Bastien Nocera)
+- Don't try to delete directories twice (Jens Granseuer) (#562371)
+- Don't recognize "" as a valid engine for certain GTK themes (Jens Granseuer)
+  (#315286)
+
+About me:
+- Add support for enrolling fingerprints using the fprintd D-Bus service
+  (Bastien Nocera) (#561881)
+
+Appearance:
+- Don't initialize gettext and GTK twice (Jens Granseuer)
+- Add missing arg to capplet_init (Kjartan Maraas)
+- Use g_ascii_strcasecmp instead of the deprecated g_strcasecmp (Maxim Ermilov)
+  (#560424)
+- Really remove the temp dir when the transfer is cancelled (Jens Granseuer)
+- Fix leak (Jens Granseuer)
+
+Font viewer:
+- Remove gnome-vfs dependency (Saleem Abdulrasool) (#561319)
+
+Keybindings:
+- Respect the /desktop/gnome/keybindings/allowed_keys key (Matthias Clasen)
+
+Network:
+- Add support for network profiles (Maxim Ermilov) (#477040)
+
+Typing break:
+- Use g_object_unref instead of the deprecated gdk_window_unref (Maxim Ermilov)
+  (#561679)
+
+Shell:
+- Add libgnomeui dependency back (Kjartan Maraas)
+- Remove eel dependency (dmacks@netscape.org) (#561944)
+- Fix leak (Federico Mena Quintero)
+- Use the new GtkTooltip mechanism rather than the deprecated GtkTooltips
+  (Federico Mena Quintero)
+
+Translations:
+- es (Jorge Gonzalez)
+- it (Luca Ferretti)
+-------------------------------------------------------------------------------
 gnome-control-center 2.25.1 (2008-11-05)
 
 General:
@@ -67,12 +112,12 @@ Translations:
 - sv (Daniel Nylander)
 - th (Theppitak Karoonboonyanan)
 - uk (Maxim V. Dziumanenko)
-
+-------------------------------------------------------------------------------
 gnome-control-center 2.24.0.1 (2008-09-24)
 
 Appearance:
 - fix newly-introduced crash in theme tab (Jens Granseuer) (#553541)
-
+-------------------------------------------------------------------------------
 gnome-control-center 2.24.0 (2008-09-22)
 
 Accessibility:
