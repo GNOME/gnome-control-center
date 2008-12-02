@@ -61,4 +61,4 @@ marshal.c: marshal.h
 endif # BUILD_ABOUTME
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_DATA) $(MARSHALFILES)
-EXTRA_DIST = $(glade_files) $(pixmap_files)
+EXTRA_DIST = $(glade_files) $(pixmap_files) fprintd-marshal.list
