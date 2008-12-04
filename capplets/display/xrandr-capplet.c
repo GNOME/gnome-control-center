@@ -33,6 +33,8 @@
 #include <X11/Xlib.h>
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
+#include <dbus/dbus-glib.h>
+#include <dbus/dbus-glib-bindings.h>
 
 typedef struct App App;
 typedef struct GrabInfo GrabInfo;
@@ -62,15 +64,16 @@ static void rebuild_gui (App *app);
 static void on_rate_changed (GtkComboBox *box, gpointer data);
 
 static void
-show_error (const char *err)
+error_message (App *app, const char *primary_text, const char *secondary_text)
 {
-    GtkWidget *dialog = gtk_message_dialog_new (
-	NULL,
-	GTK_DIALOG_DESTROY_WITH_PARENT,
-	GTK_MESSAGE_WARNING,
-	GTK_BUTTONS_OK, "%s", err);
+    GtkWidget *dialog;
 
-    gtk_window_set_title (GTK_WINDOW (dialog), "");
+    dialog = gtk_message_dialog_new ((app && app->dialog) ? GTK_WINDOW (app->dialog) : NULL,
+				     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
+				     GTK_MESSAGE_ERROR,
+				     GTK_BUTTONS_CLOSE,
+				     "%s", primary_text);
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", secondary_text);
 
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
@@ -353,7 +356,8 @@ rebuild_rotation_combo (App *app)
 
 	app->current_output->rotation = info->rotation;
 
-	if (gnome_rr_config_applicable (app->current_configuration, app->screen))
+	/* NULL-GError --- FIXME: we should say why this rotation is not available! */
+	if (gnome_rr_config_applicable (app->current_configuration, app->screen, NULL))
 	{
  	    add_key (app->rotation_combo, info->name, 0, 0, 0, info->rotation);
 
@@ -1483,20 +1487,6 @@ make_text_combo (GtkWidget *widget, int sort_column)
     }
 }
 
-static Atom
-gnome_randr_atom (void)
-{
-    static Atom atom = None;
-
-    if (!atom)
-    {
-	atom = XInternAtom (gdk_x11_get_default_xdisplay(),
-			    "_GNOME_RANDR_ATOM", FALSE);
-    }
-
-    return atom;
-}
-
 static void
 compute_virtual_size_for_configuration (GnomeRRConfig *config, int *ret_width, int *ret_height)
 {
@@ -1554,7 +1544,9 @@ check_required_virtual_size (App *app)
 static void
 apply (App *app)
 {
-    GError *err = NULL;
+    GError *error = NULL;
+    DBusGConnection *connection;
+    DBusGProxy *proxy;
 
     gnome_rr_config_sanitize (app->current_configuration);
 
@@ -1562,23 +1554,37 @@ apply (App *app)
 
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
 
-    if (gnome_rr_config_save (app->current_configuration, &err))
+    if (!gnome_rr_config_save (app->current_configuration, &error))
     {
-	XEvent message;
-
-	message.xclient.type = ClientMessage;
-	message.xclient.message_type = gnome_randr_atom();
-	message.xclient.format = 8;
-
-#if 0
-	g_debug ("Sending client message");
-#endif
-
-	XSendEvent (gdk_x11_get_default_xdisplay(),
-		    gdk_x11_get_default_root_xwindow(),
-		    FALSE,
-		    StructureNotifyMask, &message);
+	error_message (app, _("Could not save the monitor configuration"), error->message);
+	g_error_free (error);
+	return;
     }
+
+    connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
+    if (connection == NULL) {
+	error_message (app, _("Could not get session bus while applying display configuration"), error->message);
+	g_error_free (error);
+	return;
+    }
+
+    proxy = dbus_g_proxy_new_for_name (connection,
+				       "org.gnome.SettingsDaemon",
+				       "/org/gnome/SettingsDaemon/XRANDR",
+				       "org.gnome.SettingsDaemon.XRANDR");
+    if (!proxy) {
+	error_message (app, _("Could not get org.gnome.SettingsDaemon.XRANDR"), NULL);
+	return;
+
+    }
+
+    if (!dbus_g_proxy_call (proxy, "ApplyConfiguration", &error, G_TYPE_INVALID, G_TYPE_INVALID)) {
+	error_message (app, _("Could not apply the selected configuration"), error->message);
+	g_error_free (error);
+    }
+
+    g_object_unref (proxy);
+    dbus_g_connection_unref (connection);
 }
 
 #if 0
@@ -1608,8 +1614,15 @@ static void
 on_detect_displays (GtkWidget *widget, gpointer data)
 {
     App *app = data;
+    GError *error;
 
-    gnome_rr_screen_refresh (app->screen);
+    error = NULL;
+    if (!gnome_rr_screen_refresh (app->screen, &error)) {
+	if (error) {
+	    error_message (app, _("Could not detect displays"), error->message);
+	    g_error_free (error);
+	}
+    }
 }
 
 #define SHOW_ICON_KEY "/apps/gnome_settings_daemon/xrandr/show_notification_icon"
@@ -1634,6 +1647,7 @@ run_application (App *app)
 #define GLADE_FILE GLADEDIR "/display-capplet.glade"
     GladeXML *xml;
     GtkWidget *align;
+    GError *error;
 
     xml = glade_xml_new (GLADE_FILE, NULL, NULL);
     if (!xml)
@@ -1642,12 +1656,13 @@ run_application (App *app)
 	return;
     }
 
+    error = NULL;
     app->screen = gnome_rr_screen_new (gdk_screen_get_default (),
-				       on_screen_changed, app);
+				       on_screen_changed, app, &error);
     if (!app->screen)
     {
-	g_warning (_("The X server does not support the XRANDR extension.  Runtime resolution changes to the display size are not available."));
-	show_error (_("The X server does not support the XRANDR extension.  Runtime resolution changes to the display size are not available."));
+	error_message (NULL, _("Could not get screen information"), error->message);
+	g_error_free (error);
 	g_object_unref (xml);
 	return;
     }

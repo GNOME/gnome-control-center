@@ -1,3 +1,15 @@
+2008-12-03  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (rebuild_rotation_combo): Pass a NULL error
+	argument to gnome_rr_config_applicable; we should really show why
+	that rotation is not available.
+	(apply): Use the new DBus interface from the XRANDR plugin in
+	g-s-d instead of an X client message.  Display an error if g-s-d
+	couldn't apply the monitor configuration.
+	(gnome_randr_atom): Removed.
+	(on_detect_displays): Display an error if detecting the displays fails.
+	(run_application): Display error messages.
+
 ==================== 2.25.2 ====================
 
 ==================== 2.25.1 ====================
