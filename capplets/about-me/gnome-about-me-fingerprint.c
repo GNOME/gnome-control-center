@@ -25,6 +25,9 @@
 #include "fingerprint-strings.h"
 #include "capplet-util.h"
 
+/* This must match the number of images on the 2nd page in the glade file */
+#define MAX_ENROLL_STAGES 3
+
 static DBusGProxy *manager = NULL;
 static DBusGConnection *connection = NULL;
 static gboolean is_disable = FALSE;
@@ -45,6 +48,8 @@ typedef struct {
 
 	DBusGProxy *device;
 	gboolean is_swipe;
+	int num_enroll_stages;
+	int num_stages_done;
 	char *name;
 	const char *finger;
 	gint state;
@@ -326,11 +331,20 @@ enroll_result (GObject *object, const char *result, gboolean done, EnrollData *d
 	GladeXML *dialog = data->dialog_page2;
 	char *msg;
 
+	if (g_str_equal (result, "enroll-completed") || g_str_equal (result, "enroll-stage-passed")) {
+		char *name;
+
+		data->num_stages_done++;
+		name = g_strdup_printf ("image%d", data->num_stages_done);
+		gtk_image_set_from_stock (GTK_IMAGE (WID (name)), GTK_STOCK_YES, GTK_ICON_SIZE_DIALOG);
+		g_free (name);
+	}
+	if (g_str_equal (result, "enroll-completed")) {
+		gtk_label_set_text (GTK_LABEL (WID ("status-label")), _("Done!"));
+		gtk_assistant_set_page_complete (GTK_ASSISTANT (data->ass), WID ("page2"), TRUE);
+	}
+
 	if (done != FALSE) {
-		if (g_str_equal (result, "enroll-completed")) {
-			gtk_image_set_from_stock (GTK_IMAGE (WID ("image1")), GTK_STOCK_YES, GTK_ICON_SIZE_DIALOG);
-			gtk_assistant_set_page_complete (GTK_ASSISTANT (data->ass), WID ("page2"), TRUE);
-		}
 		dbus_g_proxy_call(data->device, "EnrollStop", NULL, G_TYPE_INVALID, G_TYPE_INVALID);
 		data->state = STATE_CLAIMED;
 		if (g_str_equal (result, "enroll-completed") == FALSE) {
@@ -360,7 +374,8 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 	if (g_str_equal (name, "enroll")) {
 		DBusGProxy *p;
 		GError *error = NULL;
-		int num_enroll_stages;
+		GladeXML *dialog = data->dialog_page2;
+		guint i;
 		GValue value = { 0, };
 
 		if (!dbus_g_proxy_call (data->device, "Claim", &error, G_TYPE_STRING, "", G_TYPE_INVALID, G_TYPE_INVALID)) {
@@ -404,9 +419,17 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 			return;
 		}
 		g_object_unref (p);
-		num_enroll_stages = g_value_get_int (&value);
 
-		/* FIXME handle num_enroll_stages != 1 */
+		data->num_enroll_stages = g_value_get_int (&value);
+
+		/* Hide the extra "bulbs" if not needed */
+		for (i = MAX_ENROLL_STAGES; i > data->num_enroll_stages; i--) {
+			char *name;
+
+			name = g_strdup_printf ("image%d", i);
+			gtk_widget_hide (WID (name));
+			g_free (name);
+		}
 
 		dbus_g_proxy_add_signal(data->device, "EnrollStatus", G_TYPE_STRING, G_TYPE_BOOLEAN, NULL);
 		dbus_g_proxy_connect_signal(data->device, "EnrollStatus", G_CALLBACK(enroll_result), data, NULL);
