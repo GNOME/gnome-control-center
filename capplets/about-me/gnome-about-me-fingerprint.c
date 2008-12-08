@@ -492,6 +492,7 @@ enroll_fingerprints (GtkWindow *parent, GtkWidget *enable, GtkWidget *disable)
 	g_object_unref (p);
 
 	ass = gtk_assistant_new ();
+	gtk_window_set_title (GTK_WINDOW (ass), _("Enable Fingerprint Login"));
 	gtk_window_set_transient_for (GTK_WINDOW (ass), parent);
 	gtk_window_set_position (GTK_WINDOW (ass), GTK_WIN_POS_CENTER_ON_PARENT);
 	g_signal_connect (G_OBJECT (ass), "cancel",
