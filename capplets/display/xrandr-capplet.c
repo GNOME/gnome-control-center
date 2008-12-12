@@ -62,6 +62,7 @@ struct App
 
 static void rebuild_gui (App *app);
 static void on_rate_changed (GtkComboBox *box, gpointer data);
+static gboolean output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config);
 
 static void
 error_message (App *app, const char *primary_text, const char *secondary_text)
@@ -649,6 +650,47 @@ on_resolution_changed (GtkComboBox *box, gpointer data)
 }
 
 static void
+lay_out_outputs_horizontally (App *app)
+{
+    int i;
+    int x;
+
+    /* Lay out all the monitors horizontally when "mirror screens" is turned
+     * off, to avoid having all of them overlapped initially.  We put the
+     * outputs turned off on the right-hand side.
+     */
+
+    x = 0;
+
+    /* First pass, all "on" outputs */
+
+    for (i = 0; app->current_configuration->outputs[i]; ++i)
+    {
+	GnomeOutputInfo *output;
+
+	output = app->current_configuration->outputs[i];
+	if (output->connected && output->on)
+	    output->x = x;
+
+	x += output->width;
+    }
+
+    /* Second pass, all the black screens */
+
+    for (i = 0; app->current_configuration->outputs[i]; ++i)
+    {
+	GnomeOutputInfo *output;
+
+	output = app->current_configuration->outputs[i];
+	if (!(output->connected && output->on))
+	    output->x = x;
+
+	x += output->width;
+    }
+    
+}
+
+static void
 on_clone_changed (GtkWidget *box, gpointer data)
 {
     App *app = data;
@@ -668,6 +710,11 @@ on_clone_changed (GtkWidget *box, gpointer data)
 		break;
 	    }
 	}
+    }
+    else
+    {
+	if (output_overlaps (app->current_output, app->current_configuration))
+	    lay_out_outputs_horizontally (app);
     }
 
     rebuild_gui (app);

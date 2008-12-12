@@ -1,3 +1,12 @@
+2008-12-12  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (on_clone_changed): If we turn off "mirror
+	screens", and if the monitors are still overlapping, lay out the
+	monitors from left to right so that the user will know that all
+	the monitors are present.  Previously you had to know that you had
+	to un-overlap them by hand.
+	(lay_out_outputs_horizontally): New function.
+
 2008-12-03  Federico Mena Quintero  <federico@novell.com>
 
 	* xrandr-capplet.c (rebuild_rotation_combo): Pass a NULL error
