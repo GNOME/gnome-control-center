@@ -47,6 +47,8 @@ struct App
     GnomeOutputInfo         *current_output;
 
     GtkWidget	   *dialog;
+    GtkWidget      *current_monitor_event_box;
+    GtkWidget      *current_monitor_label;
     GtkListStore   *resolution_store;
     GtkWidget	   *resolution_combo;
     GtkWidget	   *refresh_combo;
@@ -447,6 +449,39 @@ count_all_outputs (GnomeRRConfig *config)
 #endif
 
 static void
+rebuild_current_monitor_label (App *app)
+{
+	char *str;
+	gboolean free_str;
+	GdkColor color;
+	gboolean use_color;
+
+	if (app->current_output)
+	{
+	    str = g_strdup_printf (_("<b>Monitor: %s</b>"), app->current_output->display_name);
+	    free_str = TRUE;
+	    gnome_rr_labeler_get_color_for_output (app->labeler, app->current_output, &color);
+	    use_color = TRUE;
+	}
+	else
+	{
+	    str = _("<b>Monitor</b>");
+	    free_str = FALSE;
+	    use_color = FALSE;
+	}
+
+	gtk_label_set_markup (GTK_LABEL (app->current_monitor_label), str);
+
+	if (free_str)
+	    g_free (str);
+
+	if (use_color)
+	    gtk_widget_modify_bg (app->current_monitor_event_box, app->current_monitor_event_box->state, &color);
+
+	gtk_event_box_set_visible_window (GTK_EVENT_BOX (app->current_monitor_event_box), use_color);
+}
+
+static void
 rebuild_resolution_combo (App *app)
 {
     int i;
@@ -520,6 +555,7 @@ rebuild_gui (App *app)
     g_debug ("rebuild gui, is on: %d", app->current_output->on);
 #endif
 
+    rebuild_current_monitor_label (app);
     rebuild_resolution_combo (app);
     rebuild_rate_combo (app);
     rebuild_rotation_combo (app);
@@ -1721,6 +1757,9 @@ run_application (App *app)
     gtk_window_set_default_icon_name ("gnome-display-properties");
     gtk_window_set_icon_name (GTK_WINDOW (app->dialog),
 			      "gnome-display-properties");
+
+    app->current_monitor_event_box = glade_xml_get_widget (xml, "current_monitor_event_box");
+    app->current_monitor_label = glade_xml_get_widget (xml, "current_monitor_label");
 
     app->resolution_combo = glade_xml_get_widget (xml, "resolution_combo");
     g_signal_connect (app->resolution_combo, "changed",

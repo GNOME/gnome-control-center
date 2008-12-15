@@ -1,3 +1,17 @@
+2008-12-15  Federico Mena Quintero  <federico@novell.com>
+
+	* display-capplet.glade: Put the "Monitor" label inside an event
+	box, so we can change the background color of the event box.  Give
+	names to both widgets: current_monitor_label,
+	current_monitor_event_box.
+
+	* xrandr-capplet.c (rebuild_gui): When a monitor is selected,
+	update the "Monitor" label to include the monitor's name and color
+	so the user will know which monitor he is editing.
+	(rebuild_current_monitor_label): New function.
+	(struct App): New fields current_monitor_label,
+	current_monitor_event_box.
+
 2008-12-12  Federico Mena Quintero  <federico@novell.com>
 
 	https://bugzilla.novell.com/show_bug.cgi?id=381030 - Prettify the
