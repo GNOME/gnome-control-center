@@ -1721,6 +1721,134 @@ on_show_icon_toggled (GtkWidget *widget, gpointer data)
 			   gtk_toggle_button_get_active (tb), NULL);
 }
 
+static GnomeOutputInfo *
+get_nearest_output (GnomeRRConfig *configuration, int x, int y)
+{
+    int i;
+    int nearest_index;
+    int nearest_dist;
+
+    nearest_index = -1;
+    nearest_dist = G_MAXINT;
+
+    for (i = 0; configuration->outputs[i] != NULL; i++)
+    {
+	GnomeOutputInfo *output;
+	int dist_x, dist_y;
+
+	output = configuration->outputs[i];
+
+	if (!(output->connected && output->on))
+	    continue;
+
+	if (x < output->x)
+	    dist_x = output->x - x;
+	else if (x >= output->x + output->width)
+	    dist_x = x - (output->x + output->width) + 1;
+	else
+	    dist_x = 0;
+
+	if (y < output->y)
+	    dist_y = output->y - y;
+	else if (y >= output->y + output->height)
+	    dist_y = y - (output->y + output->height) + 1;
+	else
+	    dist_y = 0;
+
+	if (MIN (dist_x, dist_y) < nearest_dist)
+	{
+	    nearest_dist = MIN (dist_x, dist_y);
+	    nearest_index = i;
+	}
+    }
+
+    if (nearest_index != -1)
+	return configuration->outputs[nearest_index];
+    else
+	return NULL;
+		
+}
+
+/* Gets the output that contains the largest intersection with the window.
+ * Logic stolen from gdk_screen_get_monitor_at_window().
+ */
+static GnomeOutputInfo *
+get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
+{
+    GdkRectangle win_rect;
+    int i;
+    int largest_area;
+    int largest_index;
+
+    gdk_window_get_geometry (window, &win_rect.x, &win_rect.y, &win_rect.width, &win_rect.height, NULL);
+    gdk_window_get_origin (window, &win_rect.x, &win_rect.y);
+
+    largest_area = 0;
+    largest_index = -1;
+
+    for (i = 0; configuration->outputs[i] != NULL; i++)
+    {
+	GnomeOutputInfo *output;
+	GdkRectangle output_rect, intersection;
+
+	output = configuration->outputs[i];
+
+	output_rect.x	   = output->x;
+	output_rect.y	   = output->y;
+	output_rect.width  = output->width;
+	output_rect.height = output->height;
+
+	if (output->connected && output->on && gdk_rectangle_intersect (&win_rect, &output_rect, &intersection))
+	{
+	    int area;
+
+	    area = intersection.width * intersection.height;
+	    if (area > largest_area)
+	    {
+		largest_area = area;
+		largest_index = i;
+	    }
+	}
+    }
+
+    if (largest_index != -1)
+	return configuration->outputs[largest_index];
+    else
+	return get_nearest_output (configuration,
+				   win_rect.x + win_rect.width / 2,
+				   win_rect.y + win_rect.height / 2);
+}
+
+/* We select the current output, i.e. select the one being edited, based on
+ * which output is showing the configuration dialog.
+ */
+static void
+select_current_output_from_dialog_position (App *app)
+{
+    GnomeOutputInfo *output;
+
+    output = get_output_for_window (app->current_configuration, app->dialog->window);
+
+    if (output)
+    {
+	app->current_output = output;
+	rebuild_gui (app);
+    }
+}
+
+/* This is a GtkWidget::map-event handler.  We wait for the display-properties
+ * dialog to be mapped, and then we select the output which corresponds to the
+ * monitor on which the dialog is being shown.
+ */
+static gboolean
+dialog_map_event_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
+{
+    App *app = data;
+
+    select_current_output_from_dialog_position (app);
+    return FALSE;
+}
+
 static void
 run_application (App *app)
 {
@@ -1753,6 +1881,8 @@ run_application (App *app)
     app->client = gconf_client_get_default ();
 
     app->dialog = glade_xml_get_widget (xml, "dialog");
+    g_signal_connect_after (app->dialog, "map-event",
+			    G_CALLBACK (dialog_map_event_cb), app);
 
     gtk_window_set_default_icon_name ("gnome-display-properties");
     gtk_window_set_icon_name (GTK_WINDOW (app->dialog),
