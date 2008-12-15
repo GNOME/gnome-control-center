@@ -1,5 +1,15 @@
 2008-12-12  Federico Mena Quintero  <federico@novell.com>
 
+	https://bugzilla.novell.com/show_bug.cgi?id=381030 - Prettify the
+	Display capplet's dialog
+
+	* display-capplet.glade: Use the HIG's recommended colons,
+	capitalization, and spacing.  Use headers to separate the Monitor
+	options from the Panel icon option.  Add instructions on how to
+	operate the draggable monitors.
+
+2008-12-12  Federico Mena Quintero  <federico@novell.com>
+
 	* xrandr-capplet.c (on_clone_changed): If we turn off "mirror
 	screens", and if the monitors are still overlapping, lay out the
 	monitors from left to right so that the user will know that all
