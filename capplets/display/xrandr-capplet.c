@@ -65,6 +65,7 @@ struct App
 static void rebuild_gui (App *app);
 static void on_rate_changed (GtkComboBox *box, gpointer data);
 static gboolean output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config);
+static void select_current_output_from_dialog_position (App *app);
 
 static void
 error_message (App *app, const char *primary_text, const char *secondary_text)
@@ -113,7 +114,6 @@ on_screen_changed (GnomeRRScreen *scr,
     GnomeRRConfig *current;
     App *app = data;
     int i;
-    GnomeOutputInfo *best;
 
     current = gnome_rr_config_new_current (app->screen);
 
@@ -157,25 +157,7 @@ on_screen_changed (GnomeRRScreen *scr,
     }
 #endif
 
-    /* Select an output */
-    best = NULL;
-    for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
-    {
-	GnomeOutputInfo *output = app->current_configuration->outputs[i];
-
-	if (output->connected)
-	{
-	    char *cur_name =
-		app->current_output? app->current_output->name : NULL;
-
-	    if ((cur_name && strcmp (output->name, cur_name) == 0) || !best)
-		best = output;
-	}
-    }
-
-    app->current_output = best;
-
-    rebuild_gui (app);
+    select_current_output_from_dialog_position (app);
 }
 
 static void
@@ -1825,15 +1807,15 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
 static void
 select_current_output_from_dialog_position (App *app)
 {
-    GnomeOutputInfo *output;
-
-    output = get_output_for_window (app->current_configuration, app->dialog->window);
-
-    if (output)
+    if (GTK_WIDGET_REALIZED (app->dialog))
     {
-	app->current_output = output;
-	rebuild_gui (app);
+	output = get_output_for_window (app->current_configuration, app->dialog->window);
+
+	if (output)
+	    app->current_output = output;
     }
+
+    rebuild_gui (app);
 }
 
 /* This is a GtkWidget::map-event handler.  We wait for the display-properties

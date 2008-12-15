@@ -1,5 +1,11 @@
 2008-12-15  Federico Mena Quintero  <federico@novell.com>
 
+	* xrandr-capplet.c (on_screen_changed): Use
+	select_current_output_from_dialog_position() instead of selecting
+	an output ourselves.
+
+2008-12-15  Federico Mena Quintero  <federico@novell.com>
+
 	* xrandr-capplet.c (select_current_output_from_dialog_position):
 	New function.
 	(dialog_map_event_cb): New GtkWidget::map-event handler for the
