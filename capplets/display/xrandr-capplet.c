@@ -1807,6 +1807,8 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
 static void
 select_current_output_from_dialog_position (App *app)
 {
+    GnomeRROutput *output;
+
     if (GTK_WIDGET_REALIZED (app->dialog))
     {
 	output = get_output_for_window (app->current_configuration, app->dialog->window);
