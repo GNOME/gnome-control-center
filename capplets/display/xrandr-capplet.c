@@ -1834,6 +1834,32 @@ dialog_map_event_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
 }
 
 static void
+hide_help_button (App *app)
+{
+    GtkWidget *action_area;
+    GList *children;
+    GList *l;
+
+    action_area = gtk_dialog_get_action_area (GTK_DIALOG (app->dialog));
+    children = gtk_container_get_children (GTK_CONTAINER (action_area));
+
+    for (l = children; l; l = l->next)
+    {
+	GtkWidget *child;
+	int response;
+
+	child = GTK_WIDGET (l->data);
+
+	response = gtk_dialog_get_response_for_widget (GTK_DIALOG (app->dialog), child);
+	if (response == GTK_RESPONSE_HELP)
+	{
+	    gtk_widget_hide (child);
+	    return;
+	}
+    }
+}
+
+static void
 run_application (App *app)
 {
 #ifndef GLADEDIR
@@ -1925,6 +1951,9 @@ run_application (App *app)
     align = glade_xml_get_widget (xml, "align");
 
     gtk_container_add (GTK_CONTAINER (align), app->area);
+
+    /* Until we have help to show, we'll just hide the Help button */
+    hide_help_button (app);
 
     on_screen_changed (app->screen, app);
 

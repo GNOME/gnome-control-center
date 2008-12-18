@@ -1,3 +1,12 @@
+2008-12-16  Federico Mena Quintero  <federico@novell.com>
+
+	https://bugzilla.novell.com/show_bug.cgi?id=450141 - Help button
+	in the Display capplet does nothing.
+
+	* xrandr-capplet.c (run_application): Hide the Help button as we
+	have no help to show for this capplet yet.
+	(hide_help_button): New function.
+
 2008-12-16  Frederic Peters  <fpeters@0d.be>
 
 	* xrandr-capplet.c: (select_current_output_from_dialog_position):
