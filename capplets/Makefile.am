@@ -19,9 +19,5 @@ if BUILD_ABOUTME
 SUBDIRS += about-me
 endif
 
-if BUILD_SOUND
-SUBDIRS += sound
-endif
-
 DIST_SUBDIRS = \
-	$(always_built_SUBDIRS) display about-me sound
+	$(always_built_SUBDIRS) display about-me
