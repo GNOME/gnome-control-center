@@ -513,11 +513,14 @@ rebuild_resolution_combo (App *app)
 
     clear_combo (app->resolution_combo);
 
-    if (!(modes = get_current_modes (app)))
+    if (!(modes = get_current_modes (app))
+	|| !app->current_output->on)
     {
 	gtk_widget_set_sensitive (app->resolution_combo, FALSE);
 	return;
     }
+
+    g_assert (app->current_output != NULL);
 
     gtk_widget_set_sensitive (app->resolution_combo, TRUE);
 
@@ -541,20 +544,9 @@ rebuild_resolution_combo (App *app)
 	}
     }
 
-    if (count_active_outputs (app) > 1 || !app->current_output->on)
-	add_key (app->resolution_combo, _("Off"), 0, 0, 0, 0);
-
-    if (!app->current_output->on)
-    {
-	current = "Off";
-    }
-    else
-    {
-	current = idle_free (g_strdup_printf (_("%d x %d"),
-					      app->current_output->width,
-					      app->current_output->height));
-    }
-
+    current = idle_free (g_strdup_printf (_("%d x %d"),
+					  app->current_output->width,
+					  app->current_output->height));
 
     if (!combo_select (app->resolution_combo, current))
     {
