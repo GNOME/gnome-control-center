@@ -1,5 +1,11 @@
 2008-12-18  Federico Mena Quintero  <federico@novell.com>
 
+	* xrandr-capplet.c (get_output_for_window): Include "off" outputs
+	in the intersected rectangles.  This makes the capplet not select
+	a new output when changing virtual desktops.
+
+2008-12-18  Federico Mena Quintero  <federico@novell.com>
+
 	https://bugzilla.novell.com/show_bug.cgi?id=433939 - It's not
 	obvious how to turn on a new monitor.
 

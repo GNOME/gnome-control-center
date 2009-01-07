@@ -1854,7 +1854,7 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
 	output_rect.width  = output->width;
 	output_rect.height = output->height;
 
-	if (output->connected && output->on && gdk_rectangle_intersect (&win_rect, &output_rect, &intersection))
+	if (output->connected && gdk_rectangle_intersect (&win_rect, &output_rect, &intersection))
 	{
 	    int area;
 
