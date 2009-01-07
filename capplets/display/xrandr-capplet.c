@@ -476,15 +476,13 @@ rebuild_on_off_radios (App *app)
     g_signal_handlers_block_by_func (app->monitor_on_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
     g_signal_handlers_block_by_func (app->monitor_off_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
 
-    if (count_active_outputs (app) <= 1)
+    if (app->current_output)
     {
-	sensitive = FALSE;
-	on_active = app->current_output ? app->current_output->on : FALSE;
-	off_active = app->current_output ? !on_active : FALSE;
-    }
-    else if (app->current_output)
-    {
-	sensitive = TRUE;
+	if (count_active_outputs (app) > 1 || !app->current_output->on)
+	    sensitive = TRUE;
+	else
+	    sensitive = FALSE;
+
 	on_active = app->current_output->on;
 	off_active = !on_active;
     }
