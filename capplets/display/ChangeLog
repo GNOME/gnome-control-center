@@ -1,5 +1,23 @@
 2008-12-18  Federico Mena Quintero  <federico@novell.com>
 
+	https://bugzilla.novell.com/show_bug.cgi?id=433939 - It's not
+	obvious how to turn on a new monitor.
+
+	* display-capplet.glade: Add On/Off radio buttons for the selected
+	monitor, as it is hard to find that the on/off state is actually
+	set by the Resolution combo.
+
+	* xrandr-capplet.c (rebuild_gui): Don't set sensitivity of
+	resolution_combo here...
+	(rebuild_resolution_combo): ... but do it here instead.  This is
+	so that we can match the state of the monitor on/off buttons.
+	(rebuild_on_off_radios): New function.  We set the on/off radio
+	buttons based on the "on" state of the current output.
+	(monitor_on_off_toggled_cb): New callback; we toggle the current
+	output's on/off state.
+
+2008-12-18  Federico Mena Quintero  <federico@novell.com>
+
 	* xrandr-capplet.c (select_current_output_from_dialog_position):
 	Fix the type of the "output" variable.
 

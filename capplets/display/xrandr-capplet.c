@@ -49,6 +49,8 @@ struct App
     GtkWidget	   *dialog;
     GtkWidget      *current_monitor_event_box;
     GtkWidget      *current_monitor_label;
+    GtkWidget      *monitor_on_radio;
+    GtkWidget      *monitor_off_radio;
     GtkListStore   *resolution_store;
     GtkWidget	   *resolution_combo;
     GtkWidget	   *refresh_combo;
@@ -66,6 +68,7 @@ static void rebuild_gui (App *app);
 static void on_rate_changed (GtkComboBox *box, gpointer data);
 static gboolean output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config);
 static void select_current_output_from_dialog_position (App *app);
+static void monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data);
 
 static void
 error_message (App *app, const char *primary_text, const char *secondary_text)
@@ -464,6 +467,45 @@ rebuild_current_monitor_label (App *app)
 }
 
 static void
+rebuild_on_off_radios (App *app)
+{
+    gboolean sensitive;
+    gboolean on_active;
+    gboolean off_active;
+
+    g_signal_handlers_block_by_func (app->monitor_on_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
+    g_signal_handlers_block_by_func (app->monitor_off_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
+
+    if (count_active_outputs (app) <= 1)
+    {
+	sensitive = FALSE;
+	on_active = app->current_output ? app->current_output->on : FALSE;
+	off_active = app->current_output ? !on_active : FALSE;
+    }
+    else if (app->current_output)
+    {
+	sensitive = TRUE;
+	on_active = app->current_output->on;
+	off_active = !on_active;
+    }
+    else
+    {
+	sensitive = FALSE;
+	on_active = FALSE;
+	off_active = FALSE;
+    }
+
+    gtk_widget_set_sensitive (app->monitor_on_radio, sensitive);
+    gtk_widget_set_sensitive (app->monitor_off_radio, sensitive);
+
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->monitor_on_radio), on_active);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->monitor_off_radio), off_active);
+
+    g_signal_handlers_unblock_by_func (app->monitor_on_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
+    g_signal_handlers_unblock_by_func (app->monitor_off_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
+}
+
+static void
 rebuild_resolution_combo (App *app)
 {
     int i;
@@ -474,7 +516,12 @@ rebuild_resolution_combo (App *app)
     clear_combo (app->resolution_combo);
 
     if (!(modes = get_current_modes (app)))
+    {
+	gtk_widget_set_sensitive (app->resolution_combo, FALSE);
 	return;
+    }
+
+    gtk_widget_set_sensitive (app->resolution_combo, TRUE);
 
     best_w = 0;
     best_h = 0;
@@ -538,11 +585,10 @@ rebuild_gui (App *app)
 #endif
 
     rebuild_current_monitor_label (app);
+    rebuild_on_off_radios (app);
     rebuild_resolution_combo (app);
     rebuild_rate_combo (app);
     rebuild_rotation_combo (app);
-
-    gtk_widget_set_sensitive (app->resolution_combo, sensitive);
 
 #if 0
     g_debug ("sensitive: %d, on: %d", sensitive, app->current_output->on);
@@ -619,6 +665,34 @@ on_rate_changed (GtkComboBox *box, gpointer data)
     if (get_mode (app->refresh_combo, NULL, NULL, &rate, NULL))
 	app->current_output->rate = rate;
 
+    foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
+}
+
+static void
+monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data)
+{
+    App *app = data;
+    gboolean is_on;
+
+    if (!app->current_output)
+	return;
+
+    if (!gtk_toggle_button_get_active (toggle))
+	return;
+
+    if (GTK_WIDGET (toggle) == app->monitor_on_radio)
+	is_on = TRUE;
+    else if (GTK_WIDGET (toggle) == app->monitor_off_radio)
+	is_on = FALSE;
+    else
+    {
+	g_assert_not_reached ();
+	return;
+    }
+
+    app->current_output->on = is_on;
+
+    rebuild_gui (app);
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
 }
 
@@ -1900,6 +1974,13 @@ run_application (App *app)
 
     app->current_monitor_event_box = glade_xml_get_widget (xml, "current_monitor_event_box");
     app->current_monitor_label = glade_xml_get_widget (xml, "current_monitor_label");
+
+    app->monitor_on_radio = glade_xml_get_widget (xml, "monitor_on_radio");
+    app->monitor_off_radio = glade_xml_get_widget (xml, "monitor_off_radio");
+    g_signal_connect (app->monitor_on_radio, "toggled",
+		      G_CALLBACK (monitor_on_off_toggled_cb), app);
+    g_signal_connect (app->monitor_off_radio, "toggled",
+		      G_CALLBACK (monitor_on_off_toggled_cb), app);
 
     app->resolution_combo = glade_xml_get_widget (xml, "resolution_combo");
     g_signal_connect (app->resolution_combo, "changed",
