@@ -240,7 +240,7 @@ xkb_options_add_option (XklConfigRegistry * config_registry,
 			   to enforce its first position in the list */
 			g_object_set_data_full (G_OBJECT (option_check),
 						"utfOptionName",
-						g_strdup ("_"), g_free);
+						g_strdup (" "), g_free);
 			option_checks_list =
 			    g_slist_append (option_checks_list,
 					    option_check);
