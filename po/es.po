@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&amp;component=general\n"
-"POT-Creation-Date: 2008-12-18 19:25+0000\n"
-"PO-Revision-Date: 2009-01-01 20:42+0100\n"
+"control-center&component=general\n"
+"POT-Creation-Date: 2009-01-07 23:28+0000\n"
+"PO-Revision-Date: 2009-01-10 03:12+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2080,7 +2080,7 @@ msgid "aterm"
 msgstr "aterm"
 
 #: ../capplets/display/display-capplet.glade.h:1
-#: ../capplets/display/xrandr-capplet.c:450
+#: ../capplets/display/xrandr-capplet.c:453
 msgid "<b>Monitor</b>"
 msgstr "<b>Monitor</b>"
 
@@ -2113,26 +2113,35 @@ msgstr ""
 "Hacia abajo\n"
 
 #: ../capplets/display/display-capplet.glade.h:11
+#: ../capplets/display/xrandr-capplet.c:547
+msgid "Off"
+msgstr "Apagado"
+
+#: ../capplets/display/display-capplet.glade.h:12
+msgid "On"
+msgstr "Encendido"
+
+#: ../capplets/display/display-capplet.glade.h:13
 msgid "R_otation:"
 msgstr "R_otación:"
 
-#: ../capplets/display/display-capplet.glade.h:12
+#: ../capplets/display/display-capplet.glade.h:14
 msgid "Re_fresh rate:"
 msgstr "Tasa de re_fresco:"
 
-#: ../capplets/display/display-capplet.glade.h:13
+#: ../capplets/display/display-capplet.glade.h:15
 msgid "_Detect Monitors"
 msgstr "_Detectar monitores"
 
-#: ../capplets/display/display-capplet.glade.h:14
+#: ../capplets/display/display-capplet.glade.h:16
 msgid "_Mirror screens"
 msgstr "_Espejar pantallas"
 
-#: ../capplets/display/display-capplet.glade.h:15
+#: ../capplets/display/display-capplet.glade.h:17
 msgid "_Resolution:"
 msgstr "_Resolución:"
 
-#: ../capplets/display/display-capplet.glade.h:16
+#: ../capplets/display/display-capplet.glade.h:18
 msgid "_Show displays in panel"
 msgstr "_Mostrar pantallas en el panel"
 
@@ -2144,78 +2153,74 @@ msgstr "Cambie la resolución de la pantalla"
 msgid "Screen Resolution"
 msgstr "Resolución de la pantalla"
 
-#: ../capplets/display/xrandr-capplet.c:318
-#: ../capplets/display/xrandr-capplet.c:357
+#: ../capplets/display/xrandr-capplet.c:321
+#: ../capplets/display/xrandr-capplet.c:360
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/xrandr-capplet.c:319
+#: ../capplets/display/xrandr-capplet.c:322
 msgid "Left"
 msgstr "Izquierdo"
 
-#: ../capplets/display/xrandr-capplet.c:320
+#: ../capplets/display/xrandr-capplet.c:323
 msgid "Right"
 msgstr "Derecho"
 
-#: ../capplets/display/xrandr-capplet.c:321
+#: ../capplets/display/xrandr-capplet.c:324
 msgid "Upside Down"
 msgstr "Hacia abajo"
 
-#: ../capplets/display/xrandr-capplet.c:393
-#: ../capplets/display/xrandr-capplet.c:401
-#: ../capplets/display/xrandr-capplet.c:402
+#: ../capplets/display/xrandr-capplet.c:396
+#: ../capplets/display/xrandr-capplet.c:404
+#: ../capplets/display/xrandr-capplet.c:405
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:443
+#: ../capplets/display/xrandr-capplet.c:446
 #, c-format
 msgid "<b>Monitor: %s</b>"
 msgstr "<b>Monitor: %s</b>"
 
-#: ../capplets/display/xrandr-capplet.c:489
-#: ../capplets/display/xrandr-capplet.c:508
-#: ../capplets/display/xrandr-capplet.c:518
+#: ../capplets/display/xrandr-capplet.c:536
+#: ../capplets/display/xrandr-capplet.c:555
+#: ../capplets/display/xrandr-capplet.c:565
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
-
-#: ../capplets/display/xrandr-capplet.c:500
-msgid "Off"
-msgstr "Apagado"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1306
+#: ../capplets/display/xrandr-capplet.c:1380
 msgid "Mirror Screens"
 msgstr "Espejar pantallas"
 
-#: ../capplets/display/xrandr-capplet.c:1624
+#: ../capplets/display/xrandr-capplet.c:1698
 msgid "Could not save the monitor configuration"
 msgstr "No se pudo guardar la configuración del monitor"
 
-#: ../capplets/display/xrandr-capplet.c:1631
+#: ../capplets/display/xrandr-capplet.c:1705
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "No se pudo obtener la sesión del bus al aplicar la configuración de la "
 "pantalla"
 
-#: ../capplets/display/xrandr-capplet.c:1641
+#: ../capplets/display/xrandr-capplet.c:1715
 msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
 msgstr "No se pudo org.gnome.SettingsDaemin.XRANDR"
 
-#: ../capplets/display/xrandr-capplet.c:1647
+#: ../capplets/display/xrandr-capplet.c:1721
 msgid "Could not apply the selected configuration"
 msgstr "No se pudo aplicar la configuración seleccionada"
 
-#: ../capplets/display/xrandr-capplet.c:1687
+#: ../capplets/display/xrandr-capplet.c:1761
 msgid "Could not detect displays"
 msgstr "No se pudieron detectar las pantallas"
 
-#: ../capplets/display/xrandr-capplet.c:1885
+#: ../capplets/display/xrandr-capplet.c:1959
 msgid "Could not get screen information"
 msgstr "No se pudo obtener la información de la pantalla"
 
@@ -2224,7 +2229,7 @@ msgid "Sound"
 msgstr "Sonido"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1160
+#: ../libslab/bookmark-agent.c:1146
 msgid "Desktop"
 msgstr "Escritorio"
 
@@ -3071,7 +3076,7 @@ msgstr "Ventanas"
 msgid "<b>Start %s</b>"
 msgstr "<b>Iniciar %s</b>"
 
-#: ../libslab/application-tile.c:391 ../libslab/bookmark-agent.c:1056
+#: ../libslab/application-tile.c:391
 msgid "Help"
 msgstr "Ayuda"
 
@@ -3083,11 +3088,11 @@ msgstr "Actualizar"
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:710
+#: ../libslab/application-tile.c:780 ../libslab/document-tile.c:715
 msgid "Remove from Favorites"
 msgstr "Quitar de favoritos"
 
-#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:712
+#: ../libslab/application-tile.c:782 ../libslab/document-tile.c:717
 msgid "Add to Favorites"
 msgstr "Añadir a favoritos"
 
@@ -3099,7 +3104,7 @@ msgstr "Quitar de los programas de inicio"
 msgid "Add to Startup Programs"
 msgstr "Añadir a los programas de inicio"
 
-#: ../libslab/app-shell.c:750
+#: ../libslab/app-shell.c:753
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3110,47 +3115,35 @@ msgstr ""
 "\n"
 " Su filtro «<b>%s</b>» no coincide con ningún elemento.</span>"
 
-#: ../libslab/app-shell.c:900
+#: ../libslab/app-shell.c:903
 msgid "Other"
 msgstr "Otras"
 
-#: ../libslab/bookmark-agent.c:1058
-msgid "Lock Screen"
-msgstr "Bloquear la pantalla"
-
-#: ../libslab/bookmark-agent.c:1060
-msgid "Logout"
-msgstr "Salida"
-
-#: ../libslab/bookmark-agent.c:1062
-msgid "Shutdown"
-msgstr "Apagar"
-
-#: ../libslab/bookmark-agent.c:1091
+#: ../libslab/bookmark-agent.c:1077
 msgid "New Spreadsheet"
 msgstr "Hoja de cálculo nueva"
 
-#: ../libslab/bookmark-agent.c:1096
+#: ../libslab/bookmark-agent.c:1082
 msgid "New Document"
 msgstr "Documento nuevo"
 
-#: ../libslab/bookmark-agent.c:1149
+#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "Domicilio"
 
-#: ../libslab/bookmark-agent.c:1154
+#: ../libslab/bookmark-agent.c:1140
 msgid "Documents"
 msgstr "Documentos"
 
-#: ../libslab/bookmark-agent.c:1167
+#: ../libslab/bookmark-agent.c:1153
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#: ../libslab/bookmark-agent.c:1171
+#: ../libslab/bookmark-agent.c:1157
 msgid "Network Servers"
 msgstr "Servidores de red"
 
-#: ../libslab/bookmark-agent.c:1200
+#: ../libslab/bookmark-agent.c:1186
 msgid "Search"
 msgstr "Buscar"
 
@@ -3161,72 +3154,72 @@ msgid "<b>Open</b>"
 msgstr "<b>Abrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:230
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:231
 msgid "Rename..."
 msgstr "Renombrar…"
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:244 ../libslab/document-tile.c:253
+#: ../libslab/document-tile.c:245 ../libslab/document-tile.c:254
 msgid "Send To..."
 msgstr "Enviar a…"
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:279
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:280
 msgid "Move to Trash"
 msgstr "Mover a la papelera"
 
-#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:456
-#: ../libslab/document-tile.c:289 ../libslab/document-tile.c:826
+#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
+#: ../libslab/document-tile.c:290 ../libslab/document-tile.c:831
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../libslab/directory-tile.c:532 ../libslab/document-tile.c:974
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:979
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "¿Está seguro de que quiere borrar permanentemente «%s»?"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:975
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:980
 msgid "If you delete an item, it is permanently lost."
 msgstr "Si borra un elemento se pierde para siempre."
 
-#: ../libslab/document-tile.c:191
+#: ../libslab/document-tile.c:192
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>Abrir con «%s»</b>"
 
-#: ../libslab/document-tile.c:203
+#: ../libslab/document-tile.c:204
 msgid "Open with Default Application"
 msgstr "Abrir con la aplicación predeterminada"
 
-#: ../libslab/document-tile.c:214
+#: ../libslab/document-tile.c:215
 msgid "Open in File Manager"
 msgstr "Abrir en el gestor de archivos"
 
-#: ../libslab/document-tile.c:606
+#: ../libslab/document-tile.c:611
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:613
+#: ../libslab/document-tile.c:618
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:621
+#: ../libslab/document-tile.c:626
 msgid "Today %l:%M %p"
 msgstr "Hoy %H:%M"
 
-#: ../libslab/document-tile.c:631
+#: ../libslab/document-tile.c:636
 msgid "Yesterday %l:%M %p"
 msgstr "Ayer %H:%M"
 
-#: ../libslab/document-tile.c:643
+#: ../libslab/document-tile.c:648
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../libslab/document-tile.c:651
+#: ../libslab/document-tile.c:656
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %H:%M"
 
-#: ../libslab/document-tile.c:653
+#: ../libslab/document-tile.c:658
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
 
@@ -3441,11 +3434,11 @@ msgstr "Un recordatorio para los descansos frente a la computadora."
 #: ../typing-break/drwright.c:610
 msgid "translator-credits"
 msgstr ""
-"Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008\n"
+"Jorge González <jorgegonz@svn.gnome.org>, 2007, 2009\n"
+"Traductores anteriores:\n"
 "Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2007\n"
 "Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, "
 "2006\n"
-"Traductores anteriores:\n"
 "Pablo Saratxaga <srtxg@chanae.alphanet.ch>, 1998-2001\n"
 "Carlos Perelló Marín <carlos@gnome-db.org>, 2001\n"
 "Héctor García Álvarez <hector@scouts-es.org>, 2001\n"
@@ -3629,6 +3622,15 @@ msgstr "ARCHIVO-DE-TIPOGRAFÍA ARCHIVO-DE-SALIDA"
 #, c-format
 msgid "Error parsing arguments: %s\n"
 msgstr "Error al analizar los argumentos: %s\n"
+
+#~ msgid "Lock Screen"
+#~ msgstr "Bloquear la pantalla"
+
+#~ msgid "Logout"
+#~ msgstr "Salida"
+
+#~ msgid "Shutdown"
+#~ msgstr "Apagar"
 
 #~ msgid "Enable sound and associate sounds with events"
 #~ msgstr "Active el sonido y asocie sonidos con eventos"
