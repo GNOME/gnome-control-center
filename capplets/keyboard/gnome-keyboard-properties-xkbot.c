@@ -351,6 +351,9 @@ xkb_options_add_group (XklConfigRegistry * config_registry,
 		gtk_box_pack_start_defaults (GTK_BOX (vbox), option_check);
 		option_checks_list = option_checks_list->next;
 	}
+	/* free it */
+	g_slist_free (option_checks_list);
+	option_checks_list = NULL;
 
 	xkb_options_expander_highlight ();
 
