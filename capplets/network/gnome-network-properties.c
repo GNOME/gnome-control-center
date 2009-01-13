@@ -1,4 +1,4 @@
-/* gnome-network-preferences.c: network preferences capplet
+/* gnome-network-properties.c: network preferences capplet
  *
  * Copyright (C) 2002 Sun Microsystems Inc.
  *
@@ -231,7 +231,7 @@ cb_http_details_button_clicked (GtkWidget *button,
 		return;
 	}
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-preferences.glade",
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-properties.glade",
 				"details_dialog", NULL);
 
 	details_dialog = widget = WID ("details_dialog");
@@ -258,7 +258,7 @@ cb_http_details_button_clicked (GtkWidget *button,
 	g_signal_connect (widget, "response",
 			  G_CALLBACK (cb_details_dialog_response), NULL);
 
-	capplet_set_icon (widget, "gnome-network-preferences");
+	capplet_set_icon (widget, "gnome-network-properties");
 
 	gtk_widget_show_all (widget);
 }
@@ -730,7 +730,7 @@ location_new (GladeXML *capplet, GtkWidget *parent)
 
 	client = gconf_client_get_default ();
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-preferences.glade",
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-properties.glade",
 				"location_new_dialog", NULL);
 
 	gtk_button_set_image (GTK_BUTTON (WID ("new_location")),
@@ -1224,12 +1224,12 @@ main (int argc, char **argv)
 	gconf_client_add_dir (client, "/system/proxy",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-preferences.glade",
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-properties.glade",
 				"network_dialog", NULL);
 
 	setup_dialog (dialog);
 	widget = WID ("network_dialog");
-	capplet_set_icon (widget, "gnome-network-preferences");
+	capplet_set_icon (widget, "gnome-network-properties");
 	gtk_widget_show_all (widget);
 	gtk_main ();
 

@@ -1,31 +1,31 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = network
 
-bin_PROGRAMS = gnome-network-preferences
+bin_PROGRAMS = gnome-network-properties
 
-gnome_network_preferences_SOURCES = gnome-network-preferences.c
-gnome_network_preferences_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_network_properties_SOURCES = gnome-network-properties.c
+gnome_network_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 
 gladedir = $(pkgdatadir)/glade
-dist_glade_DATA = gnome-network-preferences.glade
+dist_glade_DATA = gnome-network-properties.glade
 
 icons16dir = $(datadir)/icons/hicolor/16x16/apps
-dist_icons16_DATA = icons/16x16/gnome-network-preferences.png
+dist_icons16_DATA = icons/16x16/gnome-network-properties.png
 icons22dir = $(datadir)/icons/hicolor/22x22/apps
-dist_icons22_DATA = icons/22x22/gnome-network-preferences.png
+dist_icons22_DATA = icons/22x22/gnome-network-properties.png
 icons24dir = $(datadir)/icons/hicolor/24x24/apps
-dist_icons24_DATA = icons/24x24/gnome-network-preferences.png
+dist_icons24_DATA = icons/24x24/gnome-network-properties.png
 icons32dir = $(datadir)/icons/hicolor/32x32/apps
-dist_icons32_DATA = icons/32x32/gnome-network-preferences.png
+dist_icons32_DATA = icons/32x32/gnome-network-properties.png
 icons48dir = $(datadir)/icons/hicolor/48x48/apps
-dist_icons48_DATA = icons/48x48/gnome-network-preferences.png
+dist_icons48_DATA = icons/48x48/gnome-network-properties.png
 iconssvgdir = $(datadir)/icons/hicolor/scalable/apps
-dist_iconssvg_DATA = icons/scalable/gnome-network-preferences.svg
+dist_iconssvg_DATA = icons/scalable/gnome-network-properties.svg
 
 desktopdir = $(datadir)/applications
-desktop_in_files = gnome-network-preferences.desktop.in
+desktop_in_files = gnome-network-properties.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES = \
