@@ -90,6 +90,8 @@ web_radiobutton_toggled_cb (GtkWidget *togglebutton, GnomeDACapplet *capplet)
 
     gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, command, &error);
 
+    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), command);
+
     if (error != NULL) {
 	g_warning (_("Error saving configuration: %s"), error->message);
 	g_error_free (error);
@@ -124,6 +126,8 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_widget_set_sensitive (capplet->web_browser_command_entry, is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
+
+    web_radiobutton_toggled_cb (NULL, capplet);
 }
 
 /* FIXME: Refactor these two functions below into one... */
@@ -450,6 +454,7 @@ web_combo_conv_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 
     ret = gconf_value_new (GCONF_VALUE_INT);
     gconf_value_set_int (ret, index);
+
     return ret;
 }
 
