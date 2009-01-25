@@ -183,7 +183,7 @@ description_set_func (GtkTreeViewColumn *tree_column,
 		  "text", key_entry->description != NULL ?
 			  key_entry->description : _("<Unknown Action>"),
 		  NULL);
-  else 
+  else
     g_object_set (cell,
 		  "editable", FALSE, NULL);
 }
@@ -413,7 +413,7 @@ key_match (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer d
 		      KEYENTRY_COLUMN, &element,
 		      -1);
 
-  if (element && g_strcmp0 (element->gconf_key, match_data->key) == 0) 
+  if (element && g_strcmp0 (element->gconf_key, match_data->key) == 0)
     {
       match_data->found = TRUE;
       return TRUE;
@@ -422,13 +422,13 @@ key_match (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer d
   return FALSE;
 }
 
-static gboolean 
+static gboolean
 key_is_already_shown (GtkTreeModel *model, const KeyListEntry *entry)
 {
   KeyMatchData data;
 
   data.key = entry->name;
-  data.found = FALSE; 
+  data.found = FALSE;
   gtk_tree_model_foreach (model, key_match, &data);
 
   return data.found;
@@ -502,12 +502,12 @@ find_section (GtkTreeModel *model,
 {
   gint i, j;
   gboolean found;
-   
+
   i = gtk_tree_model_iter_n_children (model, NULL);
   found = FALSE;
   gtk_tree_model_get_iter_first (model, iter);
   for (j = 0; j < i; j++)
-    { 
+    {
       char *description = NULL;
 
       gtk_tree_model_iter_next (model, iter);
@@ -544,7 +544,7 @@ append_keys_to_tree (GladeXML           *dialog,
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
 
   /* Try to find a section parent iter, if it already exists */
-  find_section (model, &iter, title); 
+  find_section (model, &iter, title);
   parent_iter = iter;
 
   i = 0;
@@ -661,7 +661,7 @@ append_keys_to_tree (GladeXML           *dialog,
 			  -1);
       gtk_tree_view_expand_all (GTK_TREE_VIEW (WID ("shortcut_treeview")));
     }
-  
+
   g_object_unref (client);
 
   /* Don't show an empty section */
@@ -961,7 +961,7 @@ reload_key_entries (gpointer wm_name, GladeXML *dialog)
     }
   g_list_free (list);
 
-  /* Load custom shortcuts _after_ system-provided ones, 
+  /* Load custom shortcuts _after_ system-provided ones,
    * since some of the custom shortcuts may also be listed
    * in a file. Loading the custom shortcuts last makes
    * such keys not show up in the custom section.
@@ -1451,8 +1451,8 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   edit_custom_shortcut (key);
   if (key->command == NULL || key->command[0] == '\0')
     remove_custom_shortcut (model, iter);
-  else 
-    gtk_tree_store_set (GTK_TREE_STORE (model), iter, 
+  else
+    gtk_tree_store_set (GTK_TREE_STORE (model), iter,
 	                KEYENTRY_COLUMN, key, -1);
 }
 
@@ -1504,7 +1504,7 @@ add_custom_shortcut (GtkTreeView  *tree_view,
   dir = find_free_gconf_key (&error);
   if (dir == NULL)
     {
-      show_error (gtk_widget_get_toplevel (tree_view), error);
+      show_error (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tree_view))), error);
 
       g_error_free (error);
       return;
@@ -1737,7 +1737,7 @@ selection_changed (GtkTreeSelection *selection, gpointer data)
 	can_remove = TRUE;
     }
 
-  gtk_widget_set_sensitive (button, can_remove);   
+  gtk_widget_set_sensitive (button, can_remove);
 }
 
 static void
