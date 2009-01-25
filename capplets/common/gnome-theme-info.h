@@ -131,6 +131,7 @@ enum {
 
 typedef void (* ThemeChangedCallback) (GnomeThemeCommonInfo *theme,
 				       GnomeThemeChangeType  change_type,
+                                       GnomeThemeElement     element_type,
 				       gpointer              user_data);
 
 #define GNOME_THEME_ERROR gnome_theme_info_error_quark ()

@@ -688,7 +688,8 @@ read_cursor_fonts (void)
 
 static void
 handle_change_signal (gpointer             data,
-                      GnomeThemeChangeType change_type)
+                      GnomeThemeChangeType change_type,
+                      GnomeThemeElement    element_type)
 {
 #ifdef DEBUG
   gchar *type_str = NULL;
@@ -703,7 +704,7 @@ handle_change_signal (gpointer             data,
 
   for (list = callbacks; list; list = list->next) {
     ThemeCallbackData *callback_data = list->data;
-    (* callback_data->func) (theme, change_type, callback_data->data);
+    (* callback_data->func) (theme, change_type, element_type, callback_data->data);
   }
 
 #ifdef DEBUG
@@ -714,12 +715,11 @@ handle_change_signal (gpointer             data,
   else if (theme->type == GNOME_THEME_TYPE_CURSOR)
     type_str = "cursor";
   else if (theme->type == GNOME_THEME_TYPE_REGULAR) {
-    GnomeThemeInfo *rtheme = (GnomeThemeInfo *) theme;
-    if (rtheme->has_gtk)
+    if (element_type & GNOME_THEME_GTK_2)
       element_str = "gtk-2";
-    else if (rtheme->has_keybinding)
+    else if (element_type & GNOME_THEME_GTK_2_KEYBINDING)
       element_str = "keybinding";
-    else if (rtheme->has_metacity)
+    else if (element_type & GNOME_THEME_METACITY)
       element_str = "metacity";
   }
 
@@ -784,7 +784,7 @@ update_theme_index (GFile            *index_uri,
 
       g_hash_table_insert (theme_hash_by_uri, g_strdup (common_theme_dir), theme_info);
       add_theme_to_hash_by_name (theme_hash_by_name, theme_info);
-      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CREATED);
+      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CREATED, key_element);
     }
   } else {
     gboolean theme_used_to_exist = FALSE;
@@ -806,11 +806,11 @@ update_theme_index (GFile            *index_uri,
     }
 
     if (theme_exists && theme_used_to_exist) {
-      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CHANGED);
+      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CHANGED, key_element);
     } else if (theme_exists && !theme_used_to_exist) {
-      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CREATED);
+      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CREATED, key_element);
     } else if (!theme_exists && theme_used_to_exist) {
-      handle_change_signal (theme_info, GNOME_THEME_CHANGE_DELETED);
+      handle_change_signal (theme_info, GNOME_THEME_CHANGE_DELETED, key_element);
     }
 
     if (!theme_info->has_metacity && !theme_info->has_keybinding && !theme_info->has_gtk) {
@@ -906,7 +906,7 @@ update_common_theme_dir_index (GFile         *theme_index_uri,
     if (theme_exists) {
       g_hash_table_insert (hash_by_uri, g_strdup (common_theme_dir), theme_info);
       add_theme_to_hash_by_name (hash_by_name, theme_info);
-      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CREATED);
+      handle_change_signal (theme_info, GNOME_THEME_CHANGE_CREATED, 0);
     }
   } else {
     if (theme_exists) {
@@ -916,7 +916,7 @@ update_common_theme_dir_index (GFile         *theme_index_uri,
         remove_theme_from_hash_by_name (hash_by_name, old_theme_info);
         g_hash_table_insert (hash_by_uri, g_strdup (common_theme_dir), theme_info);
         add_theme_to_hash_by_name (hash_by_name, theme_info);
-        handle_change_signal (theme_info, GNOME_THEME_CHANGE_CHANGED);
+        handle_change_signal (theme_info, GNOME_THEME_CHANGE_CHANGED, 0);
         theme_free (old_theme_info);
       } else {
         theme_free (theme_info);
@@ -925,7 +925,7 @@ update_common_theme_dir_index (GFile         *theme_index_uri,
       g_hash_table_remove (hash_by_uri, common_theme_dir);
       remove_theme_from_hash_by_name (hash_by_name, old_theme_info);
 
-      handle_change_signal (old_theme_info, GNOME_THEME_CHANGE_DELETED);
+      handle_change_signal (old_theme_info, GNOME_THEME_CHANGE_DELETED, 0);
       theme_free (old_theme_info);
     }
   }

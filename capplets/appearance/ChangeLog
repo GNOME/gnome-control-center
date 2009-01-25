@@ -1,3 +1,14 @@
+2009-01-25  Jens Granseuer  <jensgr@gmx.net>
+
+	Fix newly installed themes appearing twice in the GTK themes list if
+	the package contains themes for both GTK and metacity (bug #568595)
+
+	* appearance-style.c: (changed_on_disk_cb): check the new
+	GnomeThemeElement parameter instead of the theme properties to
+	determine what part of the theme changed
+	* appearance-themes.c: (theme_changed_on_disk_cb): use new callback
+	signature
+
 ==================== 2.25.3 ====================
 ==================== 2.25.2 ====================
 

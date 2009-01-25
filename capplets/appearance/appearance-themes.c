@@ -172,6 +172,7 @@ theme_thumbnail_generate (GnomeThemeMetaInfo *info, AppearanceData *data)
 static void
 theme_changed_on_disk_cb (GnomeThemeCommonInfo *theme,
 			  GnomeThemeChangeType  change_type,
+                          GnomeThemeElement     element_type,
 			  AppearanceData       *data)
 {
   if (theme->type == GNOME_THEME_TYPE_METATHEME) {

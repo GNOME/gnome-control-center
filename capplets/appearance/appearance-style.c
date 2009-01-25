@@ -793,19 +793,20 @@ create_thumbnail (const gchar *name, GdkPixbuf *default_thumb, AppearanceData *d
 static void
 changed_on_disk_cb (GnomeThemeCommonInfo *theme,
 		    GnomeThemeChangeType  change_type,
+                    GnomeThemeElement     element_type,
 		    AppearanceData       *data)
 {
   if (theme->type == GNOME_THEME_TYPE_REGULAR) {
     GnomeThemeInfo *info = (GnomeThemeInfo *) theme;
 
     if (change_type == GNOME_THEME_CHANGE_DELETED) {
-      if (info->has_gtk)
+      if (element_type & GNOME_THEME_GTK_2)
         remove_from_treeview ("gtk_themes_list", info->name, data);
-      if (info->has_metacity)
+      if (element_type & GNOME_THEME_METACITY)
         remove_from_treeview ("window_themes_list", info->name, data);
 
     } else {
-      if (info->has_gtk) {
+      if (element_type & GNOME_THEME_GTK_2) {
         if (change_type == GNOME_THEME_CHANGE_CREATED)
           add_to_treeview ("gtk_themes_list", info->name, info->name, data->gtk_theme_icon, data);
         else if (change_type == GNOME_THEME_CHANGE_CHANGED)
@@ -815,7 +816,7 @@ changed_on_disk_cb (GnomeThemeCommonInfo *theme,
             (ThemeThumbnailFunc) gtk_theme_thumbnail_cb, data, NULL);
       }
 
-      if (info->has_metacity) {
+      if (element_type & GNOME_THEME_METACITY) {
         if (change_type == GNOME_THEME_CHANGE_CREATED)
           add_to_treeview ("window_themes_list", info->name, info->name, data->window_theme_icon, data);
         else if (change_type == GNOME_THEME_CHANGE_CHANGED)
