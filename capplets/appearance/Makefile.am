@@ -37,6 +37,8 @@ gnome_appearance_properties_SOURCES = \
 	caption-cellrenderer.c \
 	caption-cellrenderer.h
 
+gnome_appearance_properties_CFLAGS = -DGNOME_DESKTOP_USE_UNSTABLE_API
+
 gnome_appearance_properties_LDADD = \
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la \
 	$(top_builddir)/capplets/common/libcommon.la \
