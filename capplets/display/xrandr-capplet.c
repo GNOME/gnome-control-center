@@ -373,11 +373,12 @@ rebuild_rate_combo (App *app)
     gtk_widget_set_sensitive (
 	app->refresh_combo, app->current_output && app->current_output->on);
 
-    if (!(modes = get_current_modes (app)))
+    if (!app->current_output
+        || !(modes = get_current_modes (app)))
 	return;
 
     rates = g_hash_table_new_full (
-	g_str_hash, g_str_equal, (GFreeFunc)g_free, NULL);
+	g_str_hash, g_str_equal, (GFreeFunc) g_free, NULL);
 
     best = -1;
     for (i = 0; modes[i] != NULL; ++i)
@@ -514,6 +515,7 @@ rebuild_resolution_combo (App *app)
     clear_combo (app->resolution_combo);
 
     if (!(modes = get_current_modes (app))
+	|| !app->current_output
 	|| !app->current_output->on)
     {
 	gtk_widget_set_sensitive (app->resolution_combo, FALSE);
@@ -568,7 +570,7 @@ rebuild_gui (App *app)
 
     app->ignore_gui_changes = TRUE;
 
-    sensitive = app->current_output? TRUE : FALSE;
+    sensitive = app->current_output ? TRUE : FALSE;
 
 #if 0
     g_debug ("rebuild gui, is on: %d", app->current_output->on);
@@ -769,7 +771,7 @@ lay_out_outputs_horizontally (App *app)
 
 	x += output->width;
     }
-    
+
 }
 
 static void
@@ -1812,7 +1814,7 @@ get_nearest_output (GnomeRRConfig *configuration, int x, int y)
 	return configuration->outputs[nearest_index];
     else
 	return NULL;
-		
+
 }
 
 /* Gets the output that contains the largest intersection with the window.
