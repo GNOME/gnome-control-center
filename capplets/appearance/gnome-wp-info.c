@@ -47,7 +47,7 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
 
       wp->mime_type = g_strdup ("image/x-no-data");
       wp->uri = g_strdup (uri);
-      wp->name = g_strdup (_("No Wallpaper"));
+      wp->name = g_strdup (_("No Desktop Background"));
       wp->size = 0;
     } else {
       wp = NULL;
