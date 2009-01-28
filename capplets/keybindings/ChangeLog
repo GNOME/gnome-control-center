@@ -1,5 +1,14 @@
 2009-01-28  Bastien Nocera  <hadess@hadess.net>
 
+	* gnome-keybinding-properties.c (append_keys_to_tree),
+	(edit_custom_shortcut), (update_custom_shortcut): Only print
+	warnings for non-custom keybindings, Set the GConf key for
+	the description when editing existing custom key shortcuts,
+	Avoid warnings when the description for a custom key shortcut
+	is empty
+
+2009-01-28  Bastien Nocera  <hadess@hadess.net>
+
 	* gnome-keybinding-properties.c (append_keys_to_tree):
 	Print a warning when a key doesn't have a schema, so no
 	description, makes debugging things like:

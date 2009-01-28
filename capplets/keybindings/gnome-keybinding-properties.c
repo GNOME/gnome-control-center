@@ -608,7 +608,9 @@ append_keys_to_tree (GladeXML           *dialog,
 
       if (description == NULL)
         {
-	  g_warning ("No description for key '%s'", key_string);
+	  /* Only print a warning for keys that should have a schema */
+	  if (keys_list[j].description_name == NULL)
+	    g_warning ("No description for key '%s'", key_string);
 	  description = g_path_get_basename (key_string);
 	}
 
@@ -1373,9 +1375,9 @@ edit_custom_shortcut (KeyEntry *key)
   const gchar *text;
   gboolean ret;
 
-  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_name_entry), key->description);
+  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_name_entry), key->description ? key->description : "");
   gtk_widget_set_sensitive (custom_shortcut_name_entry, key->desc_editable);
-  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_command_entry), key->command);
+  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_command_entry), key->command ? key->command : "");
   gtk_widget_set_sensitive (custom_shortcut_command_entry, key->cmd_editable);
 
   gtk_window_present (GTK_WINDOW (custom_shortcut_dialog));
@@ -1456,10 +1458,19 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
 
   edit_custom_shortcut (key);
   if (key->command == NULL || key->command[0] == '\0')
-    remove_custom_shortcut (model, iter);
+    {
+      remove_custom_shortcut (model, iter);
+    }
   else
-    gtk_tree_store_set (GTK_TREE_STORE (model), iter,
-	                KEYENTRY_COLUMN, key, -1);
+    {
+      GConfClient *client;
+
+      gtk_tree_store_set (GTK_TREE_STORE (model), iter,
+			  KEYENTRY_COLUMN, key, -1);
+      client = gconf_client_get_default ();
+      gconf_client_set_string (client, key->desc_gconf_key, key->description, NULL);
+      g_object_unref (client);
+    }
 }
 
 static gchar *
