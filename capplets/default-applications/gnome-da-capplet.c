@@ -105,6 +105,7 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gboolean is_custom_active;
     gboolean has_net_remote;
     GnomeDAWebItem *item;
+    GtkWidget *active = NULL;
 
     current_index = gtk_combo_box_get_active (combo);
 
@@ -127,7 +128,17 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
 
-    web_radiobutton_toggled_cb (NULL, capplet);
+    if (has_net_remote) {
+
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (capplet->new_win_radiobutton)))
+            active = capplet->new_win_radiobutton;
+        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (capplet->new_tab_radiobutton)))
+            active = capplet->new_tab_radiobutton;
+        else
+            active = capplet->default_radiobutton;
+    }
+
+    web_radiobutton_toggled_cb (active, capplet);
 }
 
 /* FIXME: Refactor these two functions below into one... */
