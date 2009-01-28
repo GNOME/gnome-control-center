@@ -606,6 +606,12 @@ append_keys_to_tree (GladeXML           *dialog,
             }
         }
 
+      if (description == NULL)
+        {
+	  g_warning ("No description for key '%s'", key_string);
+	  description = g_path_get_basename (key_string);
+	}
+
       if (keys_list[j].cmd_name != NULL)
         {
           command = gconf_client_get_string (client, keys_list[j].cmd_name, NULL);
