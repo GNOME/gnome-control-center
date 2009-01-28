@@ -1851,6 +1851,8 @@ setup_dialog (GladeXML *dialog)
   custom_shortcut_dialog = WID ("custom-shortcut-dialog");
   custom_shortcut_name_entry = WID ("custom-shortcut-name-entry");
   custom_shortcut_command_entry = WID ("custom-shortcut-command-entry");
+  gtk_dialog_set_default_response (GTK_DIALOG (custom_shortcut_dialog),
+				   GTK_RESPONSE_OK);
   gtk_window_set_transient_for (GTK_WINDOW (custom_shortcut_dialog),
                                 GTK_WINDOW (widget));
 }
