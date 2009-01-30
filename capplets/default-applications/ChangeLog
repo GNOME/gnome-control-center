@@ -1,3 +1,9 @@
+2009-01-30  Bastien Nocera  <hadess@hadess.net>
+
+	* gnome-da-capplet.c (web_radiobutton_toggled_cb): Fix potential
+	crasher when web_radiobutton_toggled_cb is called and the
+	browser in GConf doesn't exist on the system anymore
+
 2009-01-28  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-da-capplet.c: (web_combo_changed_cb): update the entry with
