@@ -23,6 +23,11 @@ gnome_typing_monitor_CFLAGS = \
 
 gnome_typing_monitor_LDADD = @TYPING_LIBS@ @SCREENSAVER_LIBS@
 
+if HAVE_LIBCANBERRA_GTK
+  gnome_typing_monitor_CFLAGS += -DHAVE_CANBERRA_GTK @LIBCANBERRA_GTK_CFLAGS@ 
+  gnome_typing_monitor_LDADD += @LIBCANBERRA_GTK_LIBS@
+endif
+
 imagedir = $(pkgdatadir)/pixmaps
 dist_image_DATA = bar.png bar-red.png bar-green.png bar-disabled.png ocean-stripes.png
 
