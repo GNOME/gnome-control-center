@@ -67,7 +67,7 @@ PKG_CHECK_MODULES(LIBCANBERRA_GTK, libcanberra-gtk, [
   ], [])
 AM_CONDITIONAL(HAVE_LIBCANBERRA_GTK, test "x$CANBERRA_GTK" = "x1")
 
-AM_CONDITIONAL(HAVE_TYPING_BREAK, test $TYPING_BREAK = typing-break)
+AM_CONDITIONAL(HAVE_TYPING_BREAK, test "x$TYPING_BREAK" = xtyping-break)
 
 dnl keyboard-properties-capplet
 savecppflags=$CPPFLAGS
