@@ -335,6 +335,7 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 			me->email[ids[i].cid] = NULL;
 		else
 			me->email[ids[i].cid] = g_strdup (str);
+		me->email_types[ids[i].cid] = (i == EMAIL_HOME) ? ATTRIBUTE_HOME : ATTRIBUTE_WORK;
 	/* FIXME: i'm getting an empty address field in evolution */
 	} else if (i >= ADDRESS_HOME && i < ADDRESS_WORK) {
 		about_me_set_address_field (me->addr1, ids[i].cid, str);
