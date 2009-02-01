@@ -26,13 +26,15 @@
 #include <glib/gstdio.h>
 #include <pwd.h>
 #include <gio/gio.h>
-#include <libgnomeui/gnome-desktop-thumbnail.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <pwd.h>
 #include <unistd.h>
 #include <libebook/e-book.h>
 #include <dbus/dbus-glib-bindings.h>
+
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnomeui/gnome-desktop-thumbnail.h>
 
 #ifdef HAVE_POLKIT
 #include <polkit-gnome/polkit-gnome.h>
