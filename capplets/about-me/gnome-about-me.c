@@ -555,7 +555,8 @@ about_me_load_photo (GnomeAboutMe *me, EContact *contact)
 
 	if (photo && photo->type == E_CONTACT_PHOTO_TYPE_INLINED) {
 		me->have_image = TRUE;
-		e_image_chooser_set_image_data (E_IMAGE_CHOOSER (widget), photo->data.inlined.data, photo->data.inlined.length);
+		e_image_chooser_set_image_data (E_IMAGE_CHOOSER (widget),
+						(char *) photo->data.inlined.data, photo->data.inlined.length);
 		e_contact_photo_free (photo);
 	} else {
 		me->have_image = FALSE;
@@ -620,7 +621,7 @@ about_me_update_photo (GnomeAboutMe *me)
 						   "compression", "9", NULL);
 
 			g_free (data);
-			data = scaled_data;
+			data = (guchar *) scaled_data;
 			length = scaled_length;
 		}
 
@@ -635,7 +636,7 @@ about_me_update_photo (GnomeAboutMe *me)
 		error = NULL;
 		file = g_build_filename (g_get_home_dir (), ".face", NULL);
 		if (g_file_set_contents (file,
-					 photo->data.inlined.data,
+					 (gchar *) photo->data.inlined.data,
 					 photo->data.inlined.length,
 					 &error) != FALSE) {
 			g_chmod (file, 0644);
@@ -966,7 +967,7 @@ about_me_setup_dialog (void)
 		if (me->book == NULL) {
 			me->book = e_book_new_system_addressbook (&error);
 			if (me->book == NULL || error != NULL) {
-				g_error ("%s\n", error->message);
+				g_error ("%s", error->message);
 				g_clear_error (&error);
 			}
 
