@@ -69,6 +69,7 @@ static void on_rate_changed (GtkComboBox *box, gpointer data);
 static gboolean output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config);
 static void select_current_output_from_dialog_position (App *app);
 static void monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data);
+static void get_geometry (GnomeOutputInfo *output, int *w, int *h);
 
 static void
 error_message (App *app, const char *primary_text, const char *secondary_text)
@@ -689,14 +690,62 @@ monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data)
 }
 
 static void
+realign_outputs_after_resolution_change (App *app, GnomeOutputInfo *output_that_changed, int old_width, int old_height)
+{
+    /* We find the outputs that were below or to the right of the output that
+     * changed, and realign them; we also do that for outputs that shared the
+     * right/bottom edges with the output that changed.  The outputs that are
+     * above or to the left of that output don't need to change.
+     */
+
+    int i;
+    int old_right_edge, old_bottom_edge;
+    int dx, dy;
+
+    g_assert (app->current_configuration != NULL);
+
+    old_right_edge = output_that_changed->x + old_width;
+    old_bottom_edge = output_that_changed->y + old_height;
+
+    dx = output_that_changed->width - old_width;
+    dy = output_that_changed->height - old_height;
+
+    for (i = 0; app->current_configuration->outputs[i] != NULL; i++) {
+	GnomeOutputInfo *output;
+	int output_width, output_height;
+
+	output = app->current_configuration->outputs[i];
+
+	if (output == output_that_changed || !output->connected)
+	    continue;
+
+	get_geometry (output, &output_width, &output_height);
+
+	if (output->x >= old_right_edge)
+	    output->x += dx;
+	else if (output->x + output_width == old_right_edge)
+	    output->x = output_that_changed->x + output_that_changed->width - output_width;
+
+	if (output->y >= old_bottom_edge)
+	    output->y += dy;
+	else if (output->y + output_height == old_bottom_edge)
+	    output->y = output_that_changed->y + output_that_changed->height - output_height;
+    }
+}
+
+static void
 on_resolution_changed (GtkComboBox *box, gpointer data)
 {
     App *app = data;
+    int old_width, old_height;
     int width;
     int height;
 
     if (!app->current_output)
 	return;
+
+    old_width = app->current_output->width;
+    old_height = app->current_output->height;
 
     if (get_mode (app->resolution_combo, &width, &height, NULL, NULL))
     {
@@ -709,23 +758,7 @@ on_resolution_changed (GtkComboBox *box, gpointer data)
 	    app->current_output->on = TRUE;
     }
 
-#if 0
-    if (app->current_configuration)
-    {
-	x = 0;
-	for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
-	{
-	    GnomeOutputInfo *output = app->current_configuration->outputs[i];
-
-	    if (output->connected)
-	    {
-		output->x = x;
-
-		x += output->width;
-	    }
-	}
-    }
-#endif
+    realign_outputs_after_resolution_change (app, app->current_output, old_width, old_height);
 
     rebuild_rate_combo (app);
     rebuild_rotation_combo (app);

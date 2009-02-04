@@ -1,3 +1,14 @@
+2009-02-04  Federico Mena Quintero  <federico@novell.com>
+
+	https://bugzilla.novell.com/show_bug.cgi?id=434729 - Realign the
+	outputs when changing the resolution of one of them, so one
+	doesn't get overlapping monitors (when the resolution becomes
+	bigger) or disjoint monitors (when the resolution becomes smaller).
+
+	* xrandr-capplet.c (on_resolution_changed): Align the monitors.
+	(realign_outputs_after_resolution_change): New function.  The
+	algorithm here could certainly be improved...
+
 ==================== 2.25.90 ====================
 
 2009-01-26  Jens Granseuer  <jensgr@gmx.net>
