@@ -62,6 +62,11 @@ struct App
     GtkWidget      *area;
     gboolean	    ignore_gui_changes;
     GConfClient	   *client;
+
+    /* These are used while we are waiting for the ApplyConfiguration method to be executed over D-bus */
+    DBusGConnection *connection;
+    DBusGProxy *proxy;
+    
 };
 
 static void rebuild_gui (App *app);
@@ -1709,8 +1714,6 @@ static void
 apply (App *app)
 {
     GError *error = NULL;
-    DBusGConnection *connection;
-    DBusGProxy *proxy;
 
     gnome_rr_config_sanitize (app->current_configuration);
 
@@ -1725,30 +1728,37 @@ apply (App *app)
 	return;
     }
 
-    connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
-    if (connection == NULL) {
+    g_assert (app->connection == NULL);
+    g_assert (app->proxy == NULL);
+
+    app->connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
+    if (app->connection == NULL) {
 	error_message (app, _("Could not get session bus while applying display configuration"), error->message);
 	g_error_free (error);
 	return;
     }
 
-    proxy = dbus_g_proxy_new_for_name (connection,
-				       "org.gnome.SettingsDaemon",
-				       "/org/gnome/SettingsDaemon/XRANDR",
-				       "org.gnome.SettingsDaemon.XRANDR");
-    if (!proxy) {
+    app->proxy = dbus_g_proxy_new_for_name (app->connection,
+					    "org.gnome.SettingsDaemon",
+					    "/org/gnome/SettingsDaemon/XRANDR",
+					    "org.gnome.SettingsDaemon.XRANDR");
+    if (!app->proxy) {
 	error_message (app, _("Could not get org.gnome.SettingsDaemon.XRANDR"), NULL);
+	dbus_g_connection_unref (app->connection);
+	app->connection = NULL;
 	return;
-
     }
 
-    if (!dbus_g_proxy_call (proxy, "ApplyConfiguration", &error, G_TYPE_INVALID, G_TYPE_INVALID)) {
+    if (!dbus_g_proxy_call (app->proxy, "ApplyConfiguration", &error, G_TYPE_INVALID, G_TYPE_INVALID)) {
 	error_message (app, _("Could not apply the selected configuration"), error->message);
 	g_error_free (error);
     }
 
-    g_object_unref (proxy);
-    dbus_g_connection_unref (connection);
+    g_object_unref (app->proxy);
+    app->proxy = NULL;
+
+    dbus_g_connection_unref (app->connection);
+    app->connection = NULL;
 }
 
 #if 0
