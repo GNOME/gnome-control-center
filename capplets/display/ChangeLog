@@ -1,3 +1,14 @@
+2009-02-05  Federico Mena Quintero  <federico@novell.com>
+
+	https://bugzilla.novell.com/show_bug.cgi?id=472226 - Don't block
+	the display capplet's GUI while changing the RANDR configuration.
+
+	* xrandr-capplet.c (struct App): Move the D-bus fields into here,
+	outside of apply().
+	(apply): Use an async D-bus call to gnome-settings-daemon so we
+	don't block the GUI.  Keep the GUI desensitized while the call is
+	happening.
+
 2009-02-04  Federico Mena Quintero  <federico@novell.com>
 
 	https://bugzilla.novell.com/show_bug.cgi?id=434729 - Realign the
