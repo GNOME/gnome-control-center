@@ -66,7 +66,7 @@ struct App
     /* These are used while we are waiting for the ApplyConfiguration method to be executed over D-bus */
     DBusGConnection *connection;
     DBusGProxy *proxy;
-    
+    DBusGProxyCall *proxy_call;
 };
 
 static void rebuild_gui (App *app);
@@ -1710,6 +1710,36 @@ check_required_virtual_size (App *app)
     }
 }
 
+/* Callback for dbus_g_proxy_begin_call() */
+static void
+apply_configuration_returned_cb (DBusGProxy       *proxy,
+				 DBusGProxyCall   *call_id,
+				 void             *data)
+{
+    App *app = data;
+    gboolean success;
+    GError *error;
+
+    g_assert (call_id == app->proxy_call);
+
+    error = NULL;
+    success = dbus_g_proxy_end_call (proxy, call_id, &error, G_TYPE_INVALID);
+
+    if (!success) {
+	error_message (app, _("Could not apply the selected configuration"), error->message);
+	g_error_free (error);
+    }
+
+    g_object_unref (app->proxy);
+    app->proxy = NULL;
+
+    dbus_g_connection_unref (app->connection);
+    app->connection = NULL;
+    app->proxy_call = NULL;
+
+    gtk_widget_set_sensitive (app->dialog, TRUE);
+}
+
 static void
 apply (App *app)
 {
@@ -1730,6 +1760,7 @@ apply (App *app)
 
     g_assert (app->connection == NULL);
     g_assert (app->proxy == NULL);
+    g_assert (app->proxy_call == NULL);
 
     app->connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
     if (app->connection == NULL) {
@@ -1749,16 +1780,12 @@ apply (App *app)
 	return;
     }
 
-    if (!dbus_g_proxy_call (app->proxy, "ApplyConfiguration", &error, G_TYPE_INVALID, G_TYPE_INVALID)) {
-	error_message (app, _("Could not apply the selected configuration"), error->message);
-	g_error_free (error);
-    }
-
-    g_object_unref (app->proxy);
-    app->proxy = NULL;
-
-    dbus_g_connection_unref (app->connection);
-    app->connection = NULL;
+    gtk_widget_set_sensitive (app->dialog, FALSE);
+    app->proxy_call = dbus_g_proxy_begin_call (app->proxy, "ApplyConfiguration",
+					       apply_configuration_returned_cb, app,
+					       NULL,
+					       G_TYPE_INVALID,
+					       G_TYPE_INVALID);
 }
 
 #if 0
