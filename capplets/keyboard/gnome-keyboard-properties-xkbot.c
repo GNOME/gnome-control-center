@@ -416,16 +416,24 @@ xkb_options_load_options (GladeXML * dialog)
 static void
 chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 {
-	if (response == GTK_RESPONSE_CLOSE) {
-		/* just cleanup */
-		GSList *expanders_list =
-		    g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
-		g_object_set_data (G_OBJECT (dialog), EXPANDERS_PROP,
-				   NULL);
-		g_slist_free (expanders_list);
+	switch (response) {
+	case GTK_RESPONSE_HELP:
+		capplet_help (GTK_WINDOW (dialog),
+			      "prefs-keyboard-layoutoptions");
+		break;
+	case GTK_RESPONSE_CLOSE:{
+			/* just cleanup */
+			GSList *expanders_list =
+			    g_object_get_data (G_OBJECT (dialog),
+					       EXPANDERS_PROP);
+			g_object_set_data (G_OBJECT (dialog),
+					   EXPANDERS_PROP, NULL);
+			g_slist_free (expanders_list);
 
-		gtk_widget_destroy (GTK_WIDGET (dialog));
-		chooser_dialog = NULL;
+			gtk_widget_destroy (GTK_WIDGET (dialog));
+			chooser_dialog = NULL;
+		}
+		break;
 	}
 }
 
