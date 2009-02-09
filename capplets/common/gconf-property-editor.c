@@ -1518,7 +1518,7 @@ peditor_image_chooser_update_preview_cb (GtkFileChooser *chooser,
 	g_free (filename);
 
 	if (pixbuf != NULL)
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (pixbuf);
 }
 
 static void

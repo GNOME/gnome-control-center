@@ -214,7 +214,7 @@ save_pixbuf(GdkPixbuf *pixbuf, gchar *filename)
 					 trim_right - trim_left,
 					 trim_bottom - trim_top);
     gdk_pixbuf_save(subpixbuf, filename, "png", NULL, NULL);
-    gdk_pixbuf_unref(subpixbuf);
+    g_object_unref(subpixbuf);
 }
 
 int
