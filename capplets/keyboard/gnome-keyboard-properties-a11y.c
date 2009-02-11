@@ -65,6 +65,55 @@ bouncekeys_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
 }
 
 static void
+visual_bell_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
+{
+	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
+
+	if (notifications_dialog) {
+		gtk_widget_set_sensitive (NWID ("visual_bell_titlebar"), active);
+		gtk_widget_set_sensitive (NWID ("visual_bell_fullscreen"), active);
+	}
+}
+
+static GConfEnumStringPair bell_flash_enums[] = {
+        { 0, "frame_flash" },
+        { 1, "fullscreen" },
+        { -1, NULL }
+};
+
+static GConfValue *
+bell_flash_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+        GConfValue *new_value;
+
+        new_value = gconf_value_new (GCONF_VALUE_STRING);
+        gconf_value_set_string (new_value,
+                                gconf_enum_to_string (bell_flash_enums, gconf_value_get_int (value)));
+
+        return new_value;
+}
+
+static GConfValue *
+bell_flash_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+        GConfValue *new_value;
+        const gchar *str;
+        gint val = 2;
+
+        str = (value && (value->type == GCONF_VALUE_STRING)) ? gconf_value_get_string (value) : NULL;
+
+        new_value = gconf_value_new (GCONF_VALUE_INT);
+        if (value->type == GCONF_VALUE_STRING) {
+                gconf_string_to_enum (bell_flash_enums,
+                                      str,
+                                      &val);
+        }
+        gconf_value_set_int (new_value, val);
+
+        return new_value;
+}
+
+static void
 a11y_notifications_dialog_response_cb (GtkWidget *w, gint response)
 {
 	if (response == GTK_RESPONSE_HELP) {
@@ -121,6 +170,21 @@ notifications_button_clicked_cb (GtkWidget *button, GladeXML *dialog)
 	gconf_peditor_new_boolean (NULL,
 	                          CONFIG_ROOT "/bouncekeys_beep_reject",
 	                          w, NULL);
+
+	w = NWID ("visual_bell_enable");
+	gconf_peditor_new_boolean (NULL, 
+				   "/apps/metacity/general/visual_bell",
+				   w, NULL);
+        g_signal_connect (w, "toggled",
+                          G_CALLBACK (visual_bell_enable_toggled_cb), dialog);
+        visual_bell_enable_toggled_cb (w, dialog);
+
+       gconf_peditor_new_select_radio (NULL,
+                                        "/apps/metacity/general/visual_bell_type",
+                                        gtk_radio_button_get_group (GTK_RADIO_BUTTON (NWID ("visual_bell_titlebar"))),
+                                        "conv-to-widget-cb", bell_flash_to_widget,
+                                        "conv-from-widget-cb", bell_flash_from_widget,
+                                        NULL);
 
 	w = NWID ("a11y_notifications_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (w),
