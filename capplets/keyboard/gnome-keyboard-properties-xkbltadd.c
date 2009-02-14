@@ -460,13 +460,12 @@ xkb_layout_choose (GladeXML * dialog)
 				(xkb_layout_chooser_page_changed),
 				chooser_dialog);
 
-	xkb_layout_chooser_available_country_changed (chooser_dialog);
+       gtk_combo_box_set_active (CWID ("xkb_countries_available"), 0);
 
 	if (gtk_tree_model_iter_n_children
 	    (gtk_combo_box_get_model (GTK_COMBO_BOX (lang_chooser)),
 	     NULL)) {
-		xkb_layout_chooser_available_language_changed
-		    (chooser_dialog);
+               gtk_combo_box_set_active (CWID ("xkb_languages_available"), 0);
 	} else {
 		/* If language info is not available - remove the corresponding tab,
 		   pretend there is no notebook at all */
@@ -513,6 +512,7 @@ xkb_layout_choose (GladeXML * dialog)
 		}
 	}
 
+        xkb_layout_preview_update (chooser_dialog);
 	gtk_dialog_run (GTK_DIALOG (chooser));
 	gtk_widget_destroy (chooser);
 }
