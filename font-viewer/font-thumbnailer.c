@@ -254,6 +254,8 @@ main(int argc, char **argv)
 
     setlocale (LC_ALL, "");
 
+    g_type_init ();
+
     context = g_option_context_new (NULL);
     g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
 
@@ -385,6 +387,6 @@ main(int argc, char **argv)
     g_strfreev (arguments);
     g_free (thumbstr);
     g_free (thumbstr_utf8);
-    
+
     return rv;
 }
