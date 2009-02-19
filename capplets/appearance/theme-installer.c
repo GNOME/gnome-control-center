@@ -270,7 +270,6 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 	GFile *theme_source_dir, *theme_dest_dir;
 	GError *error = NULL;
 	gint theme_type;
-	gchar *user_message = NULL;
 	gchar *target_dir = NULL;
 
 	/* What type of theme is it? */
@@ -287,8 +286,6 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 		target_dir = g_build_path (G_DIR_SEPARATOR_S,
 					   g_get_home_dir (), ".themes",
 			 		   theme_name, NULL);
-		user_message = g_strdup_printf (_("GNOME Theme %s correctly installed"),
-						theme_name);
 		break;
 	case THEME_METACITY:
 	case THEME_GTK:
@@ -386,18 +383,17 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 		if (ask_user)
 		{
 			/* Ask to apply theme (if we can) */
-			if ((theme_type == THEME_GTK || theme_type == THEME_METACITY ||
+			if (theme_type == THEME_GTK || theme_type == THEME_METACITY ||
 			    theme_type == THEME_ICON || theme_type == THEME_CURSOR ||
-			    theme_type == THEME_ICON_CURSOR) && ask_user)
+			    theme_type == THEME_ICON_CURSOR)
 			{
 				/* TODO: currently cannot apply "gnome themes" */
 				gchar *str;
 
 				str = g_strdup_printf (_("The theme \"%s\" has been installed."), theme_name);
-				user_message = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>", str);
+				dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE,
+									     "<span weight=\"bold\" size=\"larger\">%s</span>", str);
 				g_free (str);
-
-				dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, "%s", user_message);
 
 				gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("Would you like to apply it now, or keep your current theme?"));
 
@@ -447,15 +443,14 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 				       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_INFO,
 				       GTK_BUTTONS_OK,
-				       "%s",
-				       user_message);
+				       _("GNOME Theme %s correctly installed"),
+				       theme_name);
 				gtk_dialog_run (GTK_DIALOG (dialog));
 			}
 			gtk_widget_destroy (dialog);
 		}
 	}
 
-	g_free (user_message);
 	g_free (target_dir);
 
 	return success;
