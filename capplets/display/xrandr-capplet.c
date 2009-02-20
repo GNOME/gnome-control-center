@@ -1579,7 +1579,7 @@ paint_output (App *app, cairo_t *cr, int i)
     cairo_move_to (cr, extent.x, extent.y);
 
     if (output->on)
-	cairo_set_source_rgb (cr, 0.2, 0.2, 0.8);
+	cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
     else
 	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
 
