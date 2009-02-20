@@ -1469,6 +1469,7 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
 			  KEYENTRY_COLUMN, key, -1);
       client = gconf_client_get_default ();
       gconf_client_set_string (client, key->desc_gconf_key, key->description, NULL);
+      gconf_client_set_string (client, key->cmd_gconf_key, key->command, NULL);
       g_object_unref (client);
     }
 }
