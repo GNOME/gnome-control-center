@@ -205,19 +205,19 @@ set_pixmap_background (GtkWidget *window)
 				 height,
 				 -1);
 
-	gdk_pixbuf_render_to_drawable_alpha (tmp_pixbuf,
-					     pixmap,
-					     0,
-					     0,
-					     0,
-					     0,
-					     width,
-					     height,
-					     GDK_PIXBUF_ALPHA_BILEVEL,
-					     0,
-					     GDK_RGB_DITHER_NONE,
-					     0,
-					     0);
+	gdk_draw_pixbuf (pixmap,
+                         NULL, 
+                         tmp_pixbuf,
+                         0,
+                         0,
+                         0,
+                         0,
+                         width,
+                         height,
+                         GDK_RGB_DITHER_NONE,
+                         0,
+                         0);
+
 	g_object_unref (tmp_pixbuf);
 
 	gdk_window_set_back_pixmap (window->window, pixmap, FALSE);

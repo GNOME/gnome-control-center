@@ -235,23 +235,23 @@ event_box_button_press_event (GtkWidget   *widget,
 		double_click_time = gconf_value_get_int (value);
 
 	if (test_maybe_timeout_id != 0)
-		gtk_timeout_remove  (test_maybe_timeout_id);
+		g_source_remove  (test_maybe_timeout_id);
 	if (test_on_timeout_id != 0)
-		gtk_timeout_remove (test_on_timeout_id);
+		g_source_remove (test_on_timeout_id);
 
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_OFF:
 		double_click_state = DOUBLE_CLICK_TEST_MAYBE;
 		data.image = image;
 		data.timeout_id = &test_maybe_timeout_id;
-		test_maybe_timeout_id = gtk_timeout_add (double_click_time, (GtkFunction) test_maybe_timeout, &data);
+		test_maybe_timeout_id = g_timeout_add (double_click_time, (GtkFunction) test_maybe_timeout, &data);
 		break;
 	case DOUBLE_CLICK_TEST_MAYBE:
 		if (event->time - double_click_timestamp < double_click_time) {
 			double_click_state = DOUBLE_CLICK_TEST_ON;
 			data.image = image;
 			data.timeout_id = &test_on_timeout_id;
-			test_on_timeout_id = gtk_timeout_add (2500, (GtkFunction) test_maybe_timeout, &data);
+			test_on_timeout_id = g_timeout_add (2500, (GtkFunction) test_maybe_timeout, &data);
 		}
 		break;
 	case DOUBLE_CLICK_TEST_ON:

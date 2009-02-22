@@ -105,9 +105,8 @@ sample_expose (GtkWidget      *darea,
 		      0, 0,
 		      darea->allocation.width - 1, darea->allocation.height - 1);
 
-  gdk_pixbuf_render_to_drawable (pixbuf, darea->window, NULL,
-				 0, 0, x, y, width, height,
-				 GDK_RGB_DITHER_NORMAL, 0, 0);
+  gdk_draw_pixbuf (darea->window, NULL, pixbuf, 0, 0, x, y, width, height,
+                   GDK_RGB_DITHER_NORMAL, 0, 0);
 }
 
 typedef enum {
