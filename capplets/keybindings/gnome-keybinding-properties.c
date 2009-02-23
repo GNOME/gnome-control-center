@@ -611,7 +611,6 @@ append_keys_to_tree (GladeXML           *dialog,
 	  /* Only print a warning for keys that should have a schema */
 	  if (keys_list[j].description_name == NULL)
 	    g_warning ("No description for key '%s'", key_string);
-	  description = g_path_get_basename (key_string);
 	}
 
       if (keys_list[j].cmd_name != NULL)
@@ -1468,7 +1467,10 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
       gtk_tree_store_set (GTK_TREE_STORE (model), iter,
 			  KEYENTRY_COLUMN, key, -1);
       client = gconf_client_get_default ();
-      gconf_client_set_string (client, key->desc_gconf_key, key->description, NULL);
+      if (key->description != NULL)
+        gconf_client_set_string (client, key->desc_gconf_key, key->description, NULL);
+      else
+        gconf_client_unset (client, key->desc_gconf_key, NULL);
       gconf_client_set_string (client, key->cmd_gconf_key, key->command, NULL);
       g_object_unref (client);
     }
