@@ -395,7 +395,7 @@ clear_old_model (GladeXML *dialog)
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
 				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_widget_set_usize (WID ("actions_swindow"), -1, -1);
+  gtk_widget_set_size_request (WID ("actions_swindow"), -1, -1);
 }
 
 typedef struct {

@@ -348,7 +348,7 @@ xkb_options_add_group (XklConfigRegistry * config_registry,
 			  (GCompareFunc) xkb_option_checks_compare);
 	while (option_checks_list) {
 		option_check = GTK_WIDGET (option_checks_list->data);
-		gtk_box_pack_start_defaults (GTK_BOX (vbox), option_check);
+		gtk_box_pack_start (GTK_BOX (vbox), option_check, TRUE, TRUE, 0);
 		option_checks_list = option_checks_list->next;
 	}
 	/* free it */
