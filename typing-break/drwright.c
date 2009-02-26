@@ -61,7 +61,7 @@ struct _DrWright {
 
 	DrwMonitor     *monitor;
 
-	GtkItemFactory *popup_factory;
+	GtkUIManager *ui_manager;
 
 	DrwState        state;
 	GTimer         *timer;
@@ -105,31 +105,19 @@ static void     break_window_postpone_cb       (GtkWidget      *window,
 						DrWright       *dr);
 static void     break_window_destroy_cb        (GtkWidget      *window,
 						DrWright       *dr);
-static void     popup_break_cb                 (gpointer        callback_data,
-						guint           action,
-						GtkWidget      *widget);
-static void     popup_preferences_cb           (gpointer        callback_data,
-						guint           action,
-						GtkWidget      *widget);
-static void     popup_about_cb                 (gpointer        callback_data,
-						guint           action,
-						GtkWidget      *widget);
-static gchar *  item_factory_trans_cb          (const gchar    *path,
-						gpointer        data);
+static void     popup_break_cb                 (GtkAction      *action,
+						DrWright       *dr);
+static void     popup_preferences_cb           (GtkAction      *action,
+						DrWright       *dr);
+static void     popup_about_cb                 (GtkAction      *action,
+						DrWright       *dr);
 static void     init_tray_icon                 (DrWright       *dr);
 static GList *  create_secondary_break_windows (void);
 
-
-
-#define GIF_CB(x) ((GtkItemFactoryCallback)(x))
-
-static GtkItemFactoryEntry popup_items[] = {
-/*	{ N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },*/
-	/* translators: keep the initial "/" */
-	{ N_("/_Preferences"),  NULL, GIF_CB (popup_preferences_cb), 0,                  "<StockItem>",  GTK_STOCK_PREFERENCES },
-	{ N_("/_About"),        NULL, GIF_CB (popup_about_cb),       0,                  "<StockItem>",  GTK_STOCK_ABOUT },
-	{ "/sep1",              NULL, NULL,                          0,                  "<Separator>",  NULL },
-	{ N_("/_Take a Break"), NULL, GIF_CB (popup_break_cb),       POPUP_ITEM_BREAK,   "<Item>",       NULL }
+static const GtkActionEntry actions[] = {
+  {"Preferences", GTK_STOCK_PREFERENCES, NULL, NULL, NULL, G_CALLBACK (popup_preferences_cb)},
+  {"About", GTK_STOCK_ABOUT, NULL, NULL, NULL, G_CALLBACK (popup_about_cb)},
+  {"TakeABreak", NULL, N_("_Take a Break"), NULL, NULL, G_CALLBACK (popup_break_cb)}
 };
 
 extern gboolean debug;
@@ -536,8 +524,8 @@ gconf_notify_cb (GConfClient *client,
 			dr->enabled = gconf_value_get_bool (entry->value);
 			dr->state = STATE_START;
 
-			item = gtk_item_factory_get_widget_by_action (dr->popup_factory,
-								      POPUP_ITEM_BREAK);
+			item = gtk_ui_manager_get_widget (dr->ui_manager,
+							  "/Pop/TakeABreak");
 			gtk_widget_set_sensitive (item, dr->enabled);
 
 			update_tooltip (dr);
@@ -548,12 +536,8 @@ gconf_notify_cb (GConfClient *client,
 }
 
 static void
-popup_break_cb (gpointer   callback_data,
-		guint      action,
-		GtkWidget *widget)
+popup_break_cb (GtkAction *action, DrWright *dr)
 {
-	DrWright *dr = callback_data;
-
 	if (dr->enabled) {
 		dr->state = STATE_BREAK_SETUP;
 		maybe_change_state (dr);
@@ -561,14 +545,14 @@ popup_break_cb (gpointer   callback_data,
 }
 
 static void
-popup_preferences_cb (gpointer   callback_data,
-		      guint      action,
-		      GtkWidget *widget)
+popup_preferences_cb (GtkAction *action, DrWright *dr)
 {
 	GdkScreen *screen;
 	GError    *error = NULL;
+	GtkWidget *menu;
 
-	screen = gtk_widget_get_screen (widget);
+	menu = gtk_ui_manager_get_widget (dr->ui_manager, "/Pop");
+	screen = gtk_widget_get_screen (menu);
 
 	if (!gdk_spawn_command_line_on_screen (screen, "gnome-keyboard-properties --typing-break", &error)) {
 		GtkWidget *error_dialog;
@@ -589,9 +573,7 @@ popup_preferences_cb (gpointer   callback_data,
 }
 
 static void
-popup_about_cb (gpointer   callback_data,
-		guint      action,
-		GtkWidget *widget)
+popup_about_cb (GtkAction *action, DrWright *dr)
 {
 	gint   i;
 	gchar *authors[] = {
@@ -620,7 +602,7 @@ popup_menu_cb (GtkWidget *widget,
 {
 	GtkWidget *menu;
 
-	menu = gtk_item_factory_get_widget (dr->popup_factory, "");
+	menu = gtk_ui_manager_get_widget (dr->ui_manager, "/Pop");
 
 	gtk_menu_popup (GTK_MENU (menu),
 			NULL,
@@ -686,13 +668,6 @@ break_window_destroy_cb (GtkWidget *window,
 	dr->secondary_break_windows = NULL;
 }
 
-static char *
-item_factory_trans_cb (const gchar *path,
-		       gpointer     data)
-{
-	return _((gchar*) path);
-}
-
 static void
 init_tray_icon (DrWright *dr)
 {
@@ -751,6 +726,17 @@ drwright_new (void)
 	DrWright  *dr;
 	GtkWidget *item;
 	GConfClient *client;
+	GtkActionGroup *action_group;
+
+	const char ui_description[] =
+	  "<ui>"
+	  "  <popup name='Pop'>"
+	  "    <menuitem action='Preferences'/>"
+	  "    <menuitem action='About'/>"
+	  "    <separator/>"
+	  "    <menuitem action='TakeABreak'/>"
+	  "  </popup>"
+	  "</ui>";
 
         dr = g_new0 (DrWright, 1);
 
@@ -786,23 +772,15 @@ drwright_new (void)
 		setup_debug_values (dr);
 	}
 
-	dr->popup_factory = gtk_item_factory_new (GTK_TYPE_MENU,
-						      "<main>",
-						      NULL);
-	gtk_item_factory_set_translate_func (dr->popup_factory,
-					     item_factory_trans_cb,
-					     NULL,
-					     NULL);
+	dr->ui_manager = gtk_ui_manager_new ();
 
-	gtk_item_factory_create_items (dr->popup_factory,
-				       G_N_ELEMENTS (popup_items),
-				       popup_items,
-				       dr);
+	action_group = gtk_action_group_new ("MenuActions");
+	gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+	gtk_action_group_add_actions (action_group, actions, G_N_ELEMENTS (actions), dr);
+	gtk_ui_manager_insert_action_group (dr->ui_manager, action_group, 0);
+	gtk_ui_manager_add_ui_from_string (dr->ui_manager, ui_description, -1, NULL);
 
-	/*item = gtk_item_factory_get_widget_by_action (dr->popup_factory, POPUP_ITEM_ENABLED);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), dr->enabled);*/
-
-	item = gtk_item_factory_get_widget_by_action (dr->popup_factory, POPUP_ITEM_BREAK);
+	item = gtk_ui_manager_get_widget (dr->ui_manager, "/Pop/TakeABreak");
 	gtk_widget_set_sensitive (item, dr->enabled);
 
 	dr->timer = g_timer_new ();
