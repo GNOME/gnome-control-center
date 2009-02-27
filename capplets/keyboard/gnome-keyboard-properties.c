@@ -80,9 +80,6 @@ create_dialog (void)
 	image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")), image);
 
-	image = gtk_image_new_from_icon_name ("gnome-sound-properties", GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image (GTK_BUTTON (WID ("notifications_button")), image);
-
 	return dialog;
 }
 
@@ -226,7 +223,7 @@ main (int argc, char **argv)
 		{NULL}
 	};
 
-	
+
 	context = g_option_context_new (_("- GNOME Keyboard Preferences"));
 	g_option_context_add_main_entries (context, cap_options,
 					   GETTEXT_PACKAGE);
@@ -257,9 +254,9 @@ main (int argc, char **argv)
 					       (WID
 						("keyboard_notebook")),
 					       2);
-		
+
 	}
-	
+
 	capplet_set_icon (WID ("keyboard_dialog"),
 			  "preferences-desktop-keyboard");
 	gtk_widget_show (WID ("keyboard_dialog"));
