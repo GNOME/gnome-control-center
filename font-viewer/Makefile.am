@@ -5,7 +5,7 @@ INCLUDES = $(FONT_VIEWER_CFLAGS) $(GNOMECC_CAPPLETS_CFLAGS) -DDIRECTORY_DIR=\"$(
 bin_PROGRAMS = gnome-thumbnail-font gnome-font-viewer
 
 gnome_thumbnail_font_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(FONT_VIEWER_LIBS)
-gnome_thumbnail_font_SOURCES = ftstream-vfs.c font-thumbnailer.c
+gnome_thumbnail_font_SOURCES = ftstream-vfs.c font-thumbnailer.c totem-resources.c totem-resources.h
 
 gnome_font_viewer_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(FONT_VIEWER_LIBS)
 gnome_font_viewer_SOURCES = ftstream-vfs.c font-view.c

@@ -32,6 +32,8 @@
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 
+#include "totem-resources.h"
+
 static const gchar *
 get_ft_error(FT_Error error)
 {
@@ -255,6 +257,7 @@ main(int argc, char **argv)
     setlocale (LC_ALL, "");
 
     g_type_init ();
+    g_thread_init (NULL);
 
     context = g_option_context_new (NULL);
     g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
@@ -293,6 +296,8 @@ main(int argc, char **argv)
 	g_printerr("could not initialise freetype: %s\n", get_ft_error(error));
 	goto out;
     }
+
+    totem_resources_monitor_start (arguments[0], 30);
 
     file = g_file_new_for_commandline_arg (arguments[0]);
     uri = g_file_get_uri (file);
@@ -366,6 +371,8 @@ main(int argc, char **argv)
     }
     save_pixbuf(pixbuf, arguments[1]);
     g_object_unref(pixbuf);
+
+    totem_resources_monitor_stop ();
 
     /* freeing the face causes a crash I haven't tracked down yet */
     error = FT_Done_Face(face);
