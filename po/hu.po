@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2009-02-26 19:19+0000\n"
-"PO-Revision-Date: 2009-02-28 23:36+0100\n"
+"POT-Creation-Date: 2009-03-03 19:36+0000\n"
+"PO-Revision-Date: 2009-03-03 21:34+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@fsf.hu>\n"
 "MIME-Version: 1.0\n"
@@ -2234,7 +2234,7 @@ msgstr "A gyorsbillentyű típusa."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:103
-#: ../typing-break/drwright.c:467
+#: ../typing-break/drwright.c:479
 msgid "Disabled"
 msgstr "Tiltva"
 
@@ -2328,22 +2328,22 @@ msgstr "_Parancs:"
 msgid "Assign shortcut keys to commands"
 msgstr "Gyorsbillentyűk parancsokhoz rendelése"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:209
-#: ../capplets/keyboard/gnome-keyboard-properties.c:214
+#: ../capplets/keyboard/gnome-keyboard-properties.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties.c:211
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Csak alkalmazza a beállításokat, és lépjen ki (csak kompatibilitás; most már "
 "egy démon kezeli)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:219
+#: ../capplets/keyboard/gnome-keyboard-properties.c:216
 msgid "Start the page with the typing break settings showing"
 msgstr "Oldal indítása a gépelési szünet beállításaival"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:224
+#: ../capplets/keyboard/gnome-keyboard-properties.c:221
 msgid "Start the page with the accessibility settings showing"
 msgstr "Oldal indítása az akadálymentesítés beállításaival"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:230
+#: ../capplets/keyboard/gnome-keyboard-properties.c:227
 msgid "- GNOME Keyboard Preferences"
 msgstr "– GNOME billentyűzetbeállítások"
 
@@ -3356,24 +3356,36 @@ msgstr "_Szünet elhalasztása"
 msgid "Take a break!"
 msgstr "Tartson szünetet!"
 
-#: ../typing-break/drwright.c:120
-#| msgid "/_Take a Break"
-msgid "_Take a Break"
-msgstr "_Szünet tartása"
+#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
+#. translators: keep the initial "/"
+#: ../typing-break/drwright.c:129
+#| msgid "Mouse Preferences"
+msgid "/_Preferences"
+msgstr "/_Beállítások"
 
-#: ../typing-break/drwright.c:476
+#: ../typing-break/drwright.c:130
+#| msgid "About %s"
+msgid "/_About"
+msgstr "/_Névjegy"
+
+#: ../typing-break/drwright.c:132
+#| msgid "_Take a Break"
+msgid "/_Take a Break"
+msgstr "/_Szünet tartása"
+
+#: ../typing-break/drwright.c:488
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d perc van hátra a következő szünetig"
 msgstr[1] "%d perc van hátra a következő szünetig"
 
-#: ../typing-break/drwright.c:480
+#: ../typing-break/drwright.c:492
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Kevesebb mint egy perc van hátra a következő szünetig"
 
-#: ../typing-break/drwright.c:563
+#: ../typing-break/drwright.c:579
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3382,20 +3394,20 @@ msgstr ""
 "A következő hiba miatt nem hozható fel a gépelési szünet tulajdonságai "
 "párbeszédablak: %s"
 
-#: ../typing-break/drwright.c:580
+#: ../typing-break/drwright.c:598
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Írta: Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:581
+#: ../typing-break/drwright.c:599
 msgid "Eye candy added by Anders Carlsson"
 msgstr "A csinosításokat Anders Carlsson végezte"
 
 # FIXME ezt szebben
-#: ../typing-break/drwright.c:590
+#: ../typing-break/drwright.c:608
 msgid "A computer break reminder."
 msgstr "Emlékeztető gépelési szünet tartására."
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:610
 msgid "translator-credits"
 msgstr ""
 "Dvornik László <dvornik@gnome.hu>\n"
@@ -3543,27 +3555,27 @@ msgstr "Betűtípus-megjelenítő"
 msgid "Preview fonts"
 msgstr "Betűkészletek előnézete"
 
-#: ../font-viewer/font-thumbnailer.c:243
+#: ../font-viewer/font-thumbnailer.c:245
 msgid "Text to thumbnail (default: Aa)"
 msgstr "Bélyegkép szövege (alapértelmezés: Aa)"
 
-#: ../font-viewer/font-thumbnailer.c:243
+#: ../font-viewer/font-thumbnailer.c:245
 msgid "TEXT"
 msgstr "SZÖVEG"
 
-#: ../font-viewer/font-thumbnailer.c:245
+#: ../font-viewer/font-thumbnailer.c:247
 msgid "Font size (default: 64)"
 msgstr "Betűméret (alapértelmezett: 64)"
 
-#: ../font-viewer/font-thumbnailer.c:245
+#: ../font-viewer/font-thumbnailer.c:247
 msgid "SIZE"
 msgstr "MÉRET"
 
-#: ../font-viewer/font-thumbnailer.c:247
+#: ../font-viewer/font-thumbnailer.c:249
 msgid "FONT-FILE OUTPUT-FILE"
 msgstr "BETŰKÉSZLETFÁJL KIMENETIFÁJL"
 
-#: ../font-viewer/font-thumbnailer.c:265
+#: ../font-viewer/font-thumbnailer.c:268
 #, c-format
 msgid "Error parsing arguments: %s\n"
 msgstr "Hiba történt a paraméterek feldolgozása közben: %s\n"
