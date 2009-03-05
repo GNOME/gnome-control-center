@@ -22,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-27 08:53-0500\n"
-"PO-Revision-Date: 2009-02-27 08:53-0500\n"
-"Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
+"POT-Creation-Date: 2009-03-04 22:43-0500\n"
+"PO-Revision-Date: 2009-03-05 00:09-0300\n"
+"Last-Translator: Andre Gondim <andregondim@ubuntu.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2274,7 +2274,7 @@ msgstr "O tipo de atalho."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:103
-#: ../typing-break/drwright.c:467
+#: ../typing-break/drwright.c:479
 msgid "Disabled"
 msgstr "Desabilitado"
 
@@ -2367,24 +2367,24 @@ msgstr "C_omando:"
 msgid "Assign shortcut keys to commands"
 msgstr "Atribuir teclas de atalhos a comandos"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:209
-#: ../capplets/keyboard/gnome-keyboard-properties.c:214
+#: ../capplets/keyboard/gnome-keyboard-properties.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties.c:211
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Aplicar as configurações e sair (apenas para compatibilidade; agora tratado "
 "pelo daemon)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:219
+#: ../capplets/keyboard/gnome-keyboard-properties.c:216
 msgid "Start the page with the typing break settings showing"
 msgstr "Iniciar a página com as configurações de intervalo à mostra"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:224
+#: ../capplets/keyboard/gnome-keyboard-properties.c:221
 msgid "Start the page with the accessibility settings showing"
 msgstr "Iniciar a página com as configurações de acessibilidade à mostra"
 
 # Verificar onde "GNOME" deve ficar
-#: ../capplets/keyboard/gnome-keyboard-properties.c:230
+#: ../capplets/keyboard/gnome-keyboard-properties.c:227
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Preferências do Teclado GNOME"
 
@@ -3398,23 +3398,33 @@ msgstr "_Adiar intervalo"
 msgid "Take a break!"
 msgstr "Faça um intervalo!"
 
-#: ../typing-break/drwright.c:120
-msgid "_Take a Break"
-msgstr "_Fazer uma pausa"
+#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
+#. translators: keep the initial "/"
+#: ../typing-break/drwright.c:129
+msgid "/_Preferences"
+msgstr "/_Preferências"
 
-#: ../typing-break/drwright.c:476
+#: ../typing-break/drwright.c:130
+msgid "/_About"
+msgstr "/_Sobre"
+
+#: ../typing-break/drwright.c:132
+msgid "/_Take a Break"
+msgstr "/_Fazer uma pausa"
+
+#: ../typing-break/drwright.c:488
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minuto até o próximo intervalo"
 msgstr[1] "%d minutos até o próximo intervalo"
 
-#: ../typing-break/drwright.c:480
+#: ../typing-break/drwright.c:492
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Menos de um minuto para o próximo intervalo"
 
-#: ../typing-break/drwright.c:563
+#: ../typing-break/drwright.c:579
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3423,19 +3433,19 @@ msgstr ""
 "Não foi possível abrir o diálogo de propriedades do intervalo com o seguinte "
 "erro: %s"
 
-#: ../typing-break/drwright.c:580
+#: ../typing-break/drwright.c:598
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Escrito por Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:581
+#: ../typing-break/drwright.c:599
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Efeitos visuais adicionados por Anders Carlsson"
 
-#: ../typing-break/drwright.c:590
+#: ../typing-break/drwright.c:608
 msgid "A computer break reminder."
 msgstr "Um lembrete para intervalos do computador."
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:610
 msgid "translator-credits"
 msgstr ""
 "Ivan Passos <ivan@cyclades.com>\n"
@@ -3452,7 +3462,8 @@ msgstr ""
 "Raul Pereira <contato@raulpereira.com>\n"
 "Jonh Wendell <wendell@bani.com.br>\n"
 "Henrique P Machado <zehrique@gmail.com>\n"
-"Djavan Fagundes <dnoway@gmail.com>"
+"Djavan Fagundes <dnoway@gmail.com>\n"
+"André Gondim <andregondim@ubuntu.com>"
 
 #: ../typing-break/main.c:61
 msgid "Enable debugging code"
@@ -3598,36 +3609,30 @@ msgstr "Visualizador de Fontes"
 msgid "Preview fonts"
 msgstr "Visualizar fontes"
 
-#: ../font-viewer/font-thumbnailer.c:243
+#: ../font-viewer/font-thumbnailer.c:245
 msgid "Text to thumbnail (default: Aa)"
 msgstr "Texto para miniaturas (padrão: Aa)"
 
-#: ../font-viewer/font-thumbnailer.c:243
+#: ../font-viewer/font-thumbnailer.c:245
 msgid "TEXT"
 msgstr "TEXTO"
 
-#: ../font-viewer/font-thumbnailer.c:245
+#: ../font-viewer/font-thumbnailer.c:247
 msgid "Font size (default: 64)"
 msgstr "Tamanho da fonte (padrão: 64)"
 
-#: ../font-viewer/font-thumbnailer.c:245
+#: ../font-viewer/font-thumbnailer.c:247
 msgid "SIZE"
 msgstr "TAMANHO"
 
-#: ../font-viewer/font-thumbnailer.c:247
+#: ../font-viewer/font-thumbnailer.c:249
 msgid "FONT-FILE OUTPUT-FILE"
 msgstr "ARQUIVO-FONTE ARQUIVO-SAIDA"
 
-#: ../font-viewer/font-thumbnailer.c:265
+#: ../font-viewer/font-thumbnailer.c:268
 #, c-format
 msgid "Error parsing arguments: %s\n"
 msgstr "Erro analisando argumentos: %s\n"
-
-#~ msgid "/_Preferences"
-#~ msgstr "/_Preferências"
-
-#~ msgid "/_About"
-#~ msgstr "/_Sobre"
 
 #~ msgid "Screen Resolution"
 #~ msgstr "Resolução de tela"
