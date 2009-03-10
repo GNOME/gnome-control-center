@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-28 18:57+0300\n"
-"PO-Revision-Date: 2009-02-15 17:11+0300\n"
+"POT-Creation-Date: 2009-03-10 13:06+0200\n"
+"PO-Revision-Date: 2009-03-10 13:07+0200\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1799,7 +1799,11 @@ msgstr "Esteettömyys"
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "Kaikki %s esiintymää korvataan oikealla linkillä"
 
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
 msgid "C_ommand:"
 msgstr "Ko_mento:"
 
@@ -2235,7 +2239,7 @@ msgstr "Pikanäppäimen tyyppi."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:103
-#: ../typing-break/drwright.c:467
+#: ../typing-break/drwright.c:479
 msgid "Disabled"
 msgstr "Ei käytössä"
 
@@ -2301,29 +2305,22 @@ msgstr "Toiminto"
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid "Custom Shortcut"
 msgstr "Oma pikanäppäin"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:3
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:3
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new key "
 "combination, or press backspace to clear."
 msgstr ""
 "Voit muokata pikanäppäintä napsauttamalla sen riviä ja syöttämällä uusi "
 "näppäinyhdistelmä. Askelpalauttimen painaminen tyhjentää pikanäppäimen."
-
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:4
-msgid "_Command:"
-msgstr "_Komento:"
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -3349,23 +3346,33 @@ msgstr "_Lykkää taukoa"
 msgid "Take a break!"
 msgstr "Pidäpä tauko!"
 
-#: ../typing-break/drwright.c:120
-msgid "_Take a Break"
-msgstr "_Pidä tauko"
+#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
+#. translators: keep the initial "/"
+#: ../typing-break/drwright.c:129
+msgid "/_Preferences"
+msgstr "/_Asetukset"
 
-#: ../typing-break/drwright.c:476
+#: ../typing-break/drwright.c:130
+msgid "/_About"
+msgstr "/_Tietoja"
+
+#: ../typing-break/drwright.c:132
+msgid "/_Take a Break"
+msgstr "/_Pidä tauko"
+
+#: ../typing-break/drwright.c:488
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minuutti seuraavaan taukoon"
 msgstr[1] "%d minuuttia seuraavaan taukoon"
 
-#: ../typing-break/drwright.c:480
+#: ../typing-break/drwright.c:492
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Alle yksi minuutti seuraavaan taukoon"
 
-#: ../typing-break/drwright.c:563
+#: ../typing-break/drwright.c:579
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3374,19 +3381,19 @@ msgstr ""
 "Kirjoitustaukojen ominaisuusikkunan avaaminen ei onnistunut, sillä seuraava "
 "virhe tapahtui: %s"
 
-#: ../typing-break/drwright.c:580
+#: ../typing-break/drwright.c:598
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Kirjoittanut Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:581
+#: ../typing-break/drwright.c:599
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Anders Carlsson lisäsi silmänruokaa"
 
-#: ../typing-break/drwright.c:590
+#: ../typing-break/drwright.c:608
 msgid "A computer break reminder."
 msgstr "Tietokoneen käyttötauoista muistuttava ohjelma."
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:610
 msgid "translator-credits"
 msgstr ""
 "Ilkka Tuohela, 2005-2008\n"
@@ -3534,33 +3541,30 @@ msgstr "Kirjasinlajien katselin"
 msgid "Preview fonts"
 msgstr "Kirjasinten esikatselu"
 
-#: ../font-viewer/font-thumbnailer.c:243
+#: ../font-viewer/font-thumbnailer.c:245
 msgid "Text to thumbnail (default: Aa)"
 msgstr "Teksti pienoiskuvaksi (oletus: Aa)"
 
-#: ../font-viewer/font-thumbnailer.c:243
+#: ../font-viewer/font-thumbnailer.c:245
 msgid "TEXT"
 msgstr "TEKSTI"
 
-#: ../font-viewer/font-thumbnailer.c:245
+#: ../font-viewer/font-thumbnailer.c:247
 msgid "Font size (default: 64)"
 msgstr "Kirjasinkoko (oletus: 64)"
 
-#: ../font-viewer/font-thumbnailer.c:245
+#: ../font-viewer/font-thumbnailer.c:247
 msgid "SIZE"
 msgstr "KOKO"
 
-#: ../font-viewer/font-thumbnailer.c:247
+#: ../font-viewer/font-thumbnailer.c:249
 msgid "FONT-FILE OUTPUT-FILE"
 msgstr "KIRJASINTIEDOSTO TULOSTIEDOSTO"
 
-#: ../font-viewer/font-thumbnailer.c:265
+#: ../font-viewer/font-thumbnailer.c:268
 #, c-format
 msgid "Error parsing arguments: %s\n"
 msgstr "Virhe tulkittaessa valitsimia: %s\n"
 
-#~ msgid "/_Preferences"
-#~ msgstr "/_Asetukset"
-
-#~ msgid "/_About"
-#~ msgstr "/_Tietoja"
+#~ msgid "_Command:"
+#~ msgstr "_Komento:"
