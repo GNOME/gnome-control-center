@@ -7,7 +7,7 @@
 # Karl Eichwalder <ke@suse.de>, 1999, 2000.
 # Christian Meyer <chrisime@gnome.org>, 2000, 2001, 2002.
 # Christian Neumair <chris@gnome-de.org>, 2002-2004.
-# Hendrik Richter <hendrikr@gnome.org>, 2004, 2005, 2006, 2007, 2008.
+# Hendrik Richter <hendrikr@gnome.org>, 2004, 2005, 2006, 2007, 2008, 2009.
 # Hendrik Brandt <heb@gnome-de.org>, 2004-2005.
 # Frank Arnold <frank@scirocco-5v-turbo.de>, 2005.
 # Jens Seidel <jseidel@cvs.gnome.org>, 2005.
@@ -17,11 +17,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&component=general\n"
-"POT-Creation-Date: 2009-03-02 23:06+0000\n"
-"PO-Revision-Date: 2009-03-03 08:20+0100\n"
-"Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-10 10:27+0100\n"
+"PO-Revision-Date: 2009-03-10 10:29+0100\n"
+"Last-Translator: Hendrik Richter <hendrikr@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1837,7 +1836,11 @@ msgstr "Barrierefreiheit"
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "Alle Vorkommen von %s werden durch den übergebenen Link ersetzt"
 
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
 msgid "C_ommand:"
 msgstr "Be_fehl:"
 
@@ -2224,6 +2227,8 @@ msgstr "Die Bildschirmkonfiguration konnte nicht gespeichert werden"
 #: ../capplets/display/xrandr-capplet.c:1767
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
+"Beim Anwenden der Bildschirmeinstellungen konnte der Sitzungsbus nicht "
+"erhalten werden"
 
 #: ../capplets/display/xrandr-capplet.c:1777
 msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
@@ -2275,7 +2280,7 @@ msgstr "Der Tastenkombinationstyp."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:103
-#: ../typing-break/drwright.c:467
+#: ../typing-break/drwright.c:479
 msgid "Disabled"
 msgstr "Deaktiviert"
 
@@ -2345,30 +2350,23 @@ msgstr "Aktion"
 msgid "Shortcut"
 msgstr "Tastenkombination"
 
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid "Custom Shortcut"
 msgstr "Individuelle Tastenkombination"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:3
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
 # extrem gekürzt, wirkt sich auf Fensterbreite aus
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:3
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new key "
 "combination, or press backspace to clear."
 msgstr ""
 "Klicken Sie auf eine Zeile und geben Sie eine neue Tastenkombination ein, um "
 "diese zu übernehmen, oder drücken Sie die Rücktaste, um sie zu löschen."
-
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:4
-msgid "_Command:"
-msgstr "Be_fehl:"
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -2544,7 +2542,7 @@ msgstr "Fensterleiste _blinken"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "Flash entire _screen"
-msgstr "Ganzen Bildschirm blinken"
+msgstr "Ganzen Bildschirm b_linken"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:36
@@ -3422,24 +3420,33 @@ msgstr "Pause _verschieben"
 msgid "Take a break!"
 msgstr "Mach 'ne Pause!"
 
-#: ../typing-break/drwright.c:120
-#| msgid "/_Take a Break"
-msgid "_Take a Break"
-msgstr "Eine _Pause machen"
+#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
+#. translators: keep the initial "/"
+#: ../typing-break/drwright.c:129
+msgid "/_Preferences"
+msgstr "/_Einstellungen"
 
-#: ../typing-break/drwright.c:476
+#: ../typing-break/drwright.c:130
+msgid "/_About"
+msgstr "/_Info"
+
+#: ../typing-break/drwright.c:132
+msgid "/_Take a Break"
+msgstr "/Eine _Pause machen"
+
+#: ../typing-break/drwright.c:488
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d Minute bis zur nächsten Pause"
 msgstr[1] "%d Minuten bis zur nächsten Pause"
 
-#: ../typing-break/drwright.c:480
+#: ../typing-break/drwright.c:492
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Weniger als eine Minute bis zur nächsten Pause"
 
-#: ../typing-break/drwright.c:563
+#: ../typing-break/drwright.c:579
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3448,19 +3455,19 @@ msgstr ""
 "Der Tipppausen-Eigenschaftsdialog konnte auf Grund folgenden Fehlers nicht "
 "angezeigt werden: %s"
 
-#: ../typing-break/drwright.c:580
+#: ../typing-break/drwright.c:598
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Geschrieben von Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:581
+#: ../typing-break/drwright.c:599
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Augenschmaus von Anders Carlsson"
 
-#: ../typing-break/drwright.c:590
+#: ../typing-break/drwright.c:608
 msgid "A computer break reminder."
 msgstr "Ein Pausenerinnerer für den Computer."
 
-#: ../typing-break/drwright.c:592
+#: ../typing-break/drwright.c:610
 msgid "translator-credits"
 msgstr ""
 "Christian Kintner <mail@christian-kintner.de>\n"
@@ -3640,11 +3647,8 @@ msgstr "SCHRIFT-DATEI AUSGABE-DATEI"
 msgid "Error parsing arguments: %s\n"
 msgstr "Beim Verarbeiten der Argumente ist ein Fehler aufgetreten: %s\n"
 
-#~ msgid "/_Preferences"
-#~ msgstr "/_Einstellungen"
-
-#~ msgid "/_About"
-#~ msgstr "/_Info"
+#~ msgid "_Command:"
+#~ msgstr "Be_fehl:"
 
 #~ msgid "<b>_Wallpaper</b>"
 #~ msgstr "<b>_Hintergrund</b>"
