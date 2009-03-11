@@ -353,17 +353,17 @@ rebuild_rotation_combo (App *app)
 	/* NULL-GError --- FIXME: we should say why this rotation is not available! */
 	if (gnome_rr_config_applicable (app->current_configuration, app->screen, NULL))
 	{
- 	    add_key (app->rotation_combo, info->name, 0, 0, 0, info->rotation);
+ 	    add_key (app->rotation_combo, _(info->name), 0, 0, 0, info->rotation);
 
 	    if (info->rotation == current)
-		selection = info->name;
+		selection = _(info->name);
 	}
     }
 
     app->current_output->rotation = current;
 
     if (!(selection && combo_select (app->rotation_combo, selection)))
-	combo_select (app->rotation_combo, N_("Normal"));
+	combo_select (app->rotation_combo, _("Normal"));
 }
 
 static void
