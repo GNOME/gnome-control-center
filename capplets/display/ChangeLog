@@ -1,3 +1,16 @@
+2009-03-11  Federico Mena Quintero  <federico@novell.com>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=574865 - Crash when
+	refreshing the RANDR configuration.
+
+	* xrandr-capplet.c (select_current_output_from_dialog_position):
+	Always set app->current_output; otherwise we could be left with a
+	dangling pointer to the old current_output (which is invalid after
+	refreshing the current_configuration).
+	(on_screen_changed): Null out the current_output when we get a new
+	RANDR configuration, as it will become obsolete as soon as we free
+	the old configuration.
+
 2009-03-11  Gabor Kelemen  <kelemeng@gnome.hu>
 
 	* xrandr-capplet.c: Make the strings of the Rotation dialog appear

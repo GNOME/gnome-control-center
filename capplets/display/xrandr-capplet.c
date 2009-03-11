@@ -130,6 +130,7 @@ on_screen_changed (GnomeRRScreen *scr,
 	gnome_rr_config_free (app->current_configuration);
 
     app->current_configuration = current;
+    app->current_output = NULL;
 
 #if 0
     for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
@@ -1944,14 +1945,9 @@ static void
 select_current_output_from_dialog_position (App *app)
 {
     if (GTK_WIDGET_REALIZED (app->dialog))
-    {
-	GnomeOutputInfo *output;
-
-	output = get_output_for_window (app->current_configuration, app->dialog->window);
-
-	if (output)
-	    app->current_output = output;
-    }
+	app->current_output = get_output_for_window (app->current_configuration, app->dialog->window);
+    else
+	app->current_output = NULL;
 
     rebuild_gui (app);
 }
