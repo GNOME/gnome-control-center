@@ -310,7 +310,7 @@ finger_radio_button_toggled (GtkToggleButton *button, EnrollData *data)
 static void
 finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 {
-	data->finger = selected_finger (data->dialog_page2);
+	data->finger = selected_finger (data->dialog_page1);
 }
 
 static void
