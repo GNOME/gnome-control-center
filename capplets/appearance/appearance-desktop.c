@@ -182,7 +182,7 @@ wp_add_image (AppearanceData *data,
 
   if (!filename)
     return NULL;
-  
+
   item = g_hash_table_lookup (data->wp_hash, filename);
 
   if (item != NULL)
@@ -410,6 +410,7 @@ wp_remove_wallpaper (GtkWidget *widget,
       path = gtk_tree_path_new_first ();
 
     gtk_icon_view_select_path (data->wp_view, path);
+    gtk_icon_view_set_cursor (data->wp_view, path, NULL, FALSE);
     gtk_tree_path_free (path);
   }
 }
@@ -755,7 +756,7 @@ wp_drag_get_data (GtkWidget *widget,
 
       uris[0] = g_filename_to_uri (item->filename, NULL, NULL);
       uris[1] = NULL;
-    
+
       gtk_selection_data_set_uris (selection_data, uris);
 
       g_free (uris[0]);
@@ -906,7 +907,7 @@ wp_load_stuffs (void *user_data)
     g_free (uri);
     uri = NULL;
   }
-  
+
   if (uri == NULL)
     uri = g_strdup ("(none)");
 
