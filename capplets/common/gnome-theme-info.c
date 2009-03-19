@@ -1823,7 +1823,9 @@ gnome_theme_init ()
   GFile *top_theme_dir;
   gchar *top_theme_dir_string;
   static gboolean initted = FALSE;
-  const gchar *gtk_data_dir;
+  gchar **search_path;
+  gint i, n;
+
   if (initted)
     return;
 
@@ -1855,43 +1857,32 @@ gnome_theme_init ()
   add_top_theme_dir_monitor (top_theme_dir, 0, NULL);
   g_object_unref (top_theme_dir);
 
-  /* The weird /usr/share/icons */
-  top_theme_dir = g_file_new_for_path ("/usr/share/icons");
-  add_top_icon_theme_dir_monitor (top_theme_dir, 2, NULL);
+  /* ~/.icons */
+  top_theme_dir_string = g_build_filename (g_get_home_dir (), ".icons", NULL);
+  top_theme_dir = g_file_new_for_path (top_theme_dir_string);
+  g_free (top_theme_dir_string);
+  if (!g_file_query_exists (top_theme_dir, NULL))
+    g_file_make_directory (top_theme_dir, NULL, NULL);
   g_object_unref (top_theme_dir);
 
-  /* $datadir/icons */
-  gtk_data_dir = g_getenv ("GTK_DATA_PREFIX");
-  if (gtk_data_dir)
-    top_theme_dir_string = g_build_filename (gtk_data_dir, "share", "icons", NULL);
-  else
-    top_theme_dir_string = g_build_filename (INSTALL_PREFIX, "share", "icons", NULL);
+  /* icon theme search path */
+  gtk_icon_theme_get_search_path (gtk_icon_theme_get_default (), &search_path, &n);
+  for (i = 0; i < n; ++i) {
+    top_theme_dir = g_file_new_for_path (search_path[i]);
+    add_top_icon_theme_dir_monitor (top_theme_dir, i, NULL);
+    g_object_unref (top_theme_dir);
+  }
+  g_strfreev (search_path);
 
 #ifdef XCURSOR_ICONDIR
   /* if there's a separate xcursors dir, add that as well */
   if (strcmp (XCURSOR_ICONDIR, top_theme_dir_string) &&
       strcmp (XCURSOR_ICONDIR, "/usr/share/icons")) {
     top_theme_dir = g_file_new_for_path (XCURSOR_ICONDIR);
-    if (g_file_query_exists (top_theme_dir, NULL))
-      add_top_icon_theme_dir_monitor (top_theme_dir, 1, NULL);
+    add_top_icon_theme_dir_monitor (top_theme_dir, 1, NULL);
     g_object_unref (top_theme_dir);
   }
 #endif
-
-  top_theme_dir = g_file_new_for_path (top_theme_dir_string);
-  g_free (top_theme_dir_string);
-  add_top_icon_theme_dir_monitor (top_theme_dir, 1, NULL);
-  g_object_unref (top_theme_dir);
-
-  /* ~/.icons */
-  top_theme_dir_string = g_build_filename (g_get_home_dir (), ".icons", NULL);
-  top_theme_dir = g_file_new_for_path (top_theme_dir_string);
-  g_free (top_theme_dir_string);
-
-  if (!g_file_query_exists (top_theme_dir, NULL))
-    g_file_make_directory (top_theme_dir, NULL, NULL);
-  add_top_icon_theme_dir_monitor (top_theme_dir, 0, NULL);
-  g_object_unref (top_theme_dir);
 
 #ifdef HAVE_XCURSOR
   /* make sure we have the default theme */
