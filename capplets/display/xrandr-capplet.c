@@ -67,6 +67,11 @@ struct App
     DBusGConnection *connection;
     DBusGProxy *proxy;
     DBusGProxyCall *proxy_call;
+
+    enum {
+	APPLYING_VERSION_1,
+	APPLYING_VERSION_2
+    } apply_configuration_state;
 };
 
 static void rebuild_gui (App *app);
@@ -75,6 +80,7 @@ static gboolean output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config)
 static void select_current_output_from_dialog_position (App *app);
 static void monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data);
 static void get_geometry (GnomeOutputInfo *output, int *w, int *h);
+static void apply_configuration_returned_cb (DBusGProxy *proxy, DBusGProxyCall *call_id, void *data);
 
 static void
 error_message (App *app, const char *primary_text, const char *secondary_text)
@@ -86,7 +92,9 @@ error_message (App *app, const char *primary_text, const char *secondary_text)
 				     GTK_MESSAGE_ERROR,
 				     GTK_BUTTONS_CLOSE,
 				     "%s", primary_text);
-    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", secondary_text);
+
+    if (secondary_text)
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", secondary_text);
 
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
@@ -1711,6 +1719,56 @@ check_required_virtual_size (App *app)
     }
 }
 
+static gboolean
+begin_version2_apply_configuration (App *app, GdkWindow *parent_window, guint32 timestamp)
+{
+    XID parent_window_xid;
+
+    parent_window_xid = GDK_WINDOW_XID (parent_window);
+
+    app->proxy = dbus_g_proxy_new_for_name (app->connection,
+					    "org.gnome.SettingsDaemon",
+					    "/org/gnome/SettingsDaemon/XRANDR",
+					    "org.gnome.SettingsDaemon.XRANDR_2");
+    if (!app->proxy) {
+	error_message (app, _("Could not get org.gnome.SettingsDaemon.XRANDR_2"), NULL);
+	return FALSE;
+    }
+
+    app->apply_configuration_state = APPLYING_VERSION_2;
+    app->proxy_call = dbus_g_proxy_begin_call (app->proxy, "ApplyConfiguration",
+					       apply_configuration_returned_cb, app,
+					       NULL,
+					       G_TYPE_INT64, (gint64) parent_window_xid,
+					       G_TYPE_INT64, (gint64) timestamp,
+					       G_TYPE_INVALID,
+					       G_TYPE_INVALID);
+
+    return TRUE;
+}
+
+static gboolean
+begin_version1_apply_configuration (App *app)
+{
+    app->proxy = dbus_g_proxy_new_for_name (app->connection,
+					    "org.gnome.SettingsDaemon",
+					    "/org/gnome/SettingsDaemon/XRANDR",
+					    "org.gnome.SettingsDaemon.XRANDR");
+    if (!app->proxy) {
+	error_message (app, _("Could not get org.gnome.SettingsDaemon.XRANDR"), NULL);
+	return FALSE;
+    }
+
+    app->apply_configuration_state = APPLYING_VERSION_1;
+    app->proxy_call = dbus_g_proxy_begin_call (app->proxy, "ApplyConfiguration",
+					       apply_configuration_returned_cb, app,
+					       NULL,
+					       G_TYPE_INVALID,
+					       G_TYPE_INVALID);
+
+    return TRUE;
+}
+
 /* Callback for dbus_g_proxy_begin_call() */
 static void
 apply_configuration_returned_cb (DBusGProxy       *proxy,
@@ -1727,8 +1785,16 @@ apply_configuration_returned_cb (DBusGProxy       *proxy,
     success = dbus_g_proxy_end_call (proxy, call_id, &error, G_TYPE_INVALID);
 
     if (!success) {
-	error_message (app, _("Could not apply the selected configuration"), error->message);
-	g_error_free (error);
+	if (app->apply_configuration_state == APPLYING_VERSION_2
+	    && g_error_matches (error, DBUS_GERROR, DBUS_GERROR_UNKNOWN_METHOD)) {
+	    g_error_free (error);
+
+	    if (begin_version1_apply_configuration (app))
+		return;
+	} else {
+	    error_message (app, _("Could not apply the selected configuration"), error->message);
+	    g_error_free (error);
+	}
     }
 
     g_object_unref (app->proxy);
@@ -1770,23 +1836,18 @@ apply (App *app)
 	return;
     }
 
-    app->proxy = dbus_g_proxy_new_for_name (app->connection,
-					    "org.gnome.SettingsDaemon",
-					    "/org/gnome/SettingsDaemon/XRANDR",
-					    "org.gnome.SettingsDaemon.XRANDR");
-    if (!app->proxy) {
-	error_message (app, _("Could not get org.gnome.SettingsDaemon.XRANDR"), NULL);
+    gtk_widget_set_sensitive (app->dialog, FALSE);
+
+    if (!begin_version2_apply_configuration (app, gtk_widget_get_window (app->dialog), gtk_get_current_event_time ())
+	&& !begin_version1_apply_configuration (app)) {
 	dbus_g_connection_unref (app->connection);
 	app->connection = NULL;
+	app->proxy_call = NULL;
+
+	gtk_widget_set_sensitive (app->dialog, TRUE);
+	error_message (app, _("Could not get object to apply display configuration"), NULL);
 	return;
     }
-
-    gtk_widget_set_sensitive (app->dialog, FALSE);
-    app->proxy_call = dbus_g_proxy_begin_call (app->proxy, "ApplyConfiguration",
-					       apply_configuration_returned_cb, app,
-					       NULL,
-					       G_TYPE_INVALID,
-					       G_TYPE_INVALID);
 }
 
 #if 0
