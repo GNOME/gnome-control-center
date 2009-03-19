@@ -1,3 +1,23 @@
+2009-03-19  Federico Mena Quintero  <federico@novell.com>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=576006 - The
+	confirmation dialog from the RANDR plugin can appear behind the
+	window from gnome-display-properties.  This also depends on a
+	change to gnome-settings-daemon, although it will work with older
+	g-s-d as well.
+	
+	* xrandr-capplet.c (apply): Call the new DBus API for
+	ApplyConfiguration in org.gnome.SettingsDaemon.XRANDR_2, or the
+	old one if that fails.
+	(begin_version2_apply_configuration): New helper function; calls
+	the new API.
+	(begin_version1_apply_configuration): New helper function; calls
+	the old API.
+	(apply_configuration_returned_cb): If the new API is not
+	available, try the old one.  This makes us compatible with older
+	versions of gnome-settings-daemon.
+	(error_message): Allow a NULL secondary_text.
+
 2009-03-11  Federico Mena Quintero  <federico@novell.com>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=574865 - Crash when
