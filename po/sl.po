@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2009-03-07 14:51+0000\n"
-"PO-Revision-Date: 2009-03-07 20:01+0100\n"
+"POT-Creation-Date: 2009-03-19 23:50+0000\n"
+"PO-Revision-Date: 2009-03-20 08:54+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +183,7 @@ msgid "No Image"
 msgstr "Brez slike"
 
 #: ../capplets/about-me/gnome-about-me.c:806
-#: ../capplets/appearance/appearance-desktop.c:660
+#: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "Slike"
 
@@ -736,11 +736,11 @@ msgstr "Pomožne tehnologije"
 msgid "Choose which accessibility features to enable when you log in"
 msgstr "Izbor pomožnih tehnologij, ki naj bodo omogočene ob zagonu"
 
-#: ../capplets/appearance/appearance-desktop.c:628
+#: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
 msgstr "Dodaj ozadje"
 
-#: ../capplets/appearance/appearance-desktop.c:664
+#: ../capplets/appearance/appearance-desktop.c:665
 msgid "All files"
 msgstr "Vse datoteke"
 
@@ -1970,7 +1970,7 @@ msgid "aterm"
 msgstr "aterm"
 
 #: ../capplets/display/display-capplet.glade.h:1
-#: ../capplets/display/xrandr-capplet.c:460
+#: ../capplets/display/xrandr-capplet.c:469
 msgid "<b>Monitor</b>"
 msgstr "<b>Nadzor</b>"
 
@@ -2042,38 +2042,38 @@ msgstr "Spremeni ločljivost zaslona"
 msgid "Display"
 msgstr "Prikaži"
 
-#: ../capplets/display/xrandr-capplet.c:327
-#: ../capplets/display/xrandr-capplet.c:366
+#: ../capplets/display/xrandr-capplet.c:336
+#: ../capplets/display/xrandr-capplet.c:375
 msgid "Normal"
 msgstr "Običajno"
 
-#: ../capplets/display/xrandr-capplet.c:328
+#: ../capplets/display/xrandr-capplet.c:337
 msgid "Left"
 msgstr "Levo"
 
-#: ../capplets/display/xrandr-capplet.c:329
+#: ../capplets/display/xrandr-capplet.c:338
 msgid "Right"
 msgstr "Desno"
 
-#: ../capplets/display/xrandr-capplet.c:330
+#: ../capplets/display/xrandr-capplet.c:339
 msgid "Upside Down"
 msgstr "Zgoraj navzdol"
 
-#: ../capplets/display/xrandr-capplet.c:403
-#: ../capplets/display/xrandr-capplet.c:411
 #: ../capplets/display/xrandr-capplet.c:412
+#: ../capplets/display/xrandr-capplet.c:420
+#: ../capplets/display/xrandr-capplet.c:421
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:453
+#: ../capplets/display/xrandr-capplet.c:462
 #, c-format
 msgid "<b>Monitor: %s</b>"
 msgstr "<b>Zaslon: %s</b>"
 
-#: ../capplets/display/xrandr-capplet.c:545
-#: ../capplets/display/xrandr-capplet.c:555
-#: ../capplets/display/xrandr-capplet.c:563
+#: ../capplets/display/xrandr-capplet.c:554
+#: ../capplets/display/xrandr-capplet.c:564
+#: ../capplets/display/xrandr-capplet.c:572
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
@@ -2083,31 +2083,39 @@ msgstr "%d x %d"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1410
+#: ../capplets/display/xrandr-capplet.c:1419
 msgid "Mirror Screens"
 msgstr "Podvojitev zaslona"
 
-#: ../capplets/display/xrandr-capplet.c:1729
-msgid "Could not apply the selected configuration"
-msgstr "Ni mogoče uporabiti izbranih nastavitev"
+#: ../capplets/display/xrandr-capplet.c:1734
+msgid "Could not get org.gnome.SettingsDaemon.XRANDR_2"
+msgstr "Ni mogoče pridobiti org.gnome.SettingsDaemon.XRANDR_2"
 
-#: ../capplets/display/xrandr-capplet.c:1756
-msgid "Could not save the monitor configuration"
-msgstr "Ni mogoče shraniti nastavitev zaslona"
-
-#: ../capplets/display/xrandr-capplet.c:1767
-msgid "Could not get session bus while applying display configuration"
-msgstr "Ni mogoče pridobiti vodila seje med spreminjanjem nastavitev zaslona"
-
-#: ../capplets/display/xrandr-capplet.c:1777
+#: ../capplets/display/xrandr-capplet.c:1758
 msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
 msgstr "Ni mogoče pridobiti org.gnome.SettingsDaemon.XRANDR"
 
+#: ../capplets/display/xrandr-capplet.c:1795
+msgid "Could not apply the selected configuration"
+msgstr "Ni mogoče uporabiti izbranih nastavitev"
+
 #: ../capplets/display/xrandr-capplet.c:1823
+msgid "Could not save the monitor configuration"
+msgstr "Ni mogoče shraniti nastavitev zaslona"
+
+#: ../capplets/display/xrandr-capplet.c:1834
+msgid "Could not get session bus while applying display configuration"
+msgstr "Ni mogoče pridobiti vodila seje med spreminjanjem nastavitev zaslona"
+
+#: ../capplets/display/xrandr-capplet.c:1848
+msgid "Could not get object to apply display configuration"
+msgstr "Ni mogoče pridobiti predmeta za spreminjanje nastavitev zaslona"
+
+#: ../capplets/display/xrandr-capplet.c:1885
 msgid "Could not detect displays"
 msgstr "Ni mogoče zaznati zaslonov"
 
-#: ../capplets/display/xrandr-capplet.c:2021
+#: ../capplets/display/xrandr-capplet.c:2078
 msgid "Could not get screen information"
 msgstr "Ni mogoče dobiti podatkov zaslona"
 
