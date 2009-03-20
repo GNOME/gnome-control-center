@@ -1,3 +1,13 @@
+2009-03-20  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (begin_version2_apply_configuration): There is no need
+	to check the result of dbus_g_proxy_new_for_name(); it can't fail.
+	(begin_version1_apply_configuration): Likewise.
+	(apply_configuration_returned_cb): Fix a potential leak of the
+	proxy in the error case.
+	(apply): Simplify a bit, now that the initial call to
+	begin_version2_apply_configuration() can't fail.
+
 2009-03-19  Federico Mena Quintero  <federico@novell.com>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=576006 - The

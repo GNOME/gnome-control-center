@@ -1719,7 +1719,7 @@ check_required_virtual_size (App *app)
     }
 }
 
-static gboolean
+static void
 begin_version2_apply_configuration (App *app, GdkWindow *parent_window, guint32 timestamp)
 {
     XID parent_window_xid;
@@ -1730,10 +1730,7 @@ begin_version2_apply_configuration (App *app, GdkWindow *parent_window, guint32 
 					    "org.gnome.SettingsDaemon",
 					    "/org/gnome/SettingsDaemon/XRANDR",
 					    "org.gnome.SettingsDaemon.XRANDR_2");
-    if (!app->proxy) {
-	error_message (app, _("Could not get org.gnome.SettingsDaemon.XRANDR_2"), NULL);
-	return FALSE;
-    }
+    g_assert (app->proxy != NULL); /* that call does not fail unless we pass bogus names */
 
     app->apply_configuration_state = APPLYING_VERSION_2;
     app->proxy_call = dbus_g_proxy_begin_call (app->proxy, "ApplyConfiguration",
@@ -1743,21 +1740,20 @@ begin_version2_apply_configuration (App *app, GdkWindow *parent_window, guint32 
 					       G_TYPE_INT64, (gint64) timestamp,
 					       G_TYPE_INVALID,
 					       G_TYPE_INVALID);
-
-    return TRUE;
+    /* FIXME: we don't check for app->proxy_call == NULL, which could happen if
+     * the connection was disconnected.  This is left as an exercise for the
+     * reader.
+     */
 }
 
-static gboolean
+static void
 begin_version1_apply_configuration (App *app)
 {
     app->proxy = dbus_g_proxy_new_for_name (app->connection,
 					    "org.gnome.SettingsDaemon",
 					    "/org/gnome/SettingsDaemon/XRANDR",
 					    "org.gnome.SettingsDaemon.XRANDR");
-    if (!app->proxy) {
-	error_message (app, _("Could not get org.gnome.SettingsDaemon.XRANDR"), NULL);
-	return FALSE;
-    }
+    g_assert (app->proxy != NULL); /* that call does not fail unless we pass bogus names */
 
     app->apply_configuration_state = APPLYING_VERSION_1;
     app->proxy_call = dbus_g_proxy_begin_call (app->proxy, "ApplyConfiguration",
@@ -1765,8 +1761,10 @@ begin_version1_apply_configuration (App *app)
 					       NULL,
 					       G_TYPE_INVALID,
 					       G_TYPE_INVALID);
-
-    return TRUE;
+    /* FIXME: we don't check for app->proxy_call == NULL, which could happen if
+     * the connection was disconnected.  This is left as an exercise for the
+     * reader.
+     */
 }
 
 /* Callback for dbus_g_proxy_begin_call() */
@@ -1789,8 +1787,11 @@ apply_configuration_returned_cb (DBusGProxy       *proxy,
 	    && g_error_matches (error, DBUS_GERROR, DBUS_GERROR_UNKNOWN_METHOD)) {
 	    g_error_free (error);
 
-	    if (begin_version1_apply_configuration (app))
-		return;
+	    g_object_unref (app->proxy);
+	    app->proxy = NULL;
+
+	    begin_version1_apply_configuration (app);
+	    return;
 	} else {
 	    error_message (app, _("Could not apply the selected configuration"), error->message);
 	    g_error_free (error);
@@ -1838,16 +1839,7 @@ apply (App *app)
 
     gtk_widget_set_sensitive (app->dialog, FALSE);
 
-    if (!begin_version2_apply_configuration (app, gtk_widget_get_window (app->dialog), gtk_get_current_event_time ())
-	&& !begin_version1_apply_configuration (app)) {
-	dbus_g_connection_unref (app->connection);
-	app->connection = NULL;
-	app->proxy_call = NULL;
-
-	gtk_widget_set_sensitive (app->dialog, TRUE);
-	error_message (app, _("Could not get object to apply display configuration"), NULL);
-	return;
-    }
+    begin_version2_apply_configuration (app, gtk_widget_get_window (app->dialog), gtk_get_current_event_time ());
 }
 
 #if 0
