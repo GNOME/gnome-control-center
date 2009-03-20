@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-07 12:55+0900\n"
-"PO-Revision-Date: 2009-03-07 12:51+0900\n"
+"POT-Creation-Date: 2009-03-20 16:50+0900\n"
+"PO-Revision-Date: 2009-03-20 16:50+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +183,7 @@ msgid "No Image"
 msgstr "画像なし"
 
 #: ../capplets/about-me/gnome-about-me.c:806
-#: ../capplets/appearance/appearance-desktop.c:660
+#: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "画像"
 
@@ -760,11 +760,11 @@ msgstr "支援技術"
 msgid "Choose which accessibility features to enable when you log in"
 msgstr "ログインした時にアクセシビリティの機能を有効にするかどうかを選択します"
 
-#: ../capplets/appearance/appearance-desktop.c:628
+#: ../capplets/appearance/appearance-desktop.c:629
 msgid "Add Wallpaper"
 msgstr "壁紙の追加"
 
-#: ../capplets/appearance/appearance-desktop.c:664
+#: ../capplets/appearance/appearance-desktop.c:665
 msgid "All files"
 msgstr "全てのファイル"
 
@@ -2054,7 +2054,7 @@ msgid "aterm"
 msgstr "ATerm"
 
 #: ../capplets/display/display-capplet.glade.h:1
-#: ../capplets/display/xrandr-capplet.c:460
+#: ../capplets/display/xrandr-capplet.c:469
 msgid "<b>Monitor</b>"
 msgstr "<b>モニタ</b>"
 
@@ -2127,38 +2127,38 @@ msgstr "画面の解像度を変更します"
 msgid "Display"
 msgstr "ディスプレイ"
 
-#: ../capplets/display/xrandr-capplet.c:327
-#: ../capplets/display/xrandr-capplet.c:366
+#: ../capplets/display/xrandr-capplet.c:336
+#: ../capplets/display/xrandr-capplet.c:375
 msgid "Normal"
 msgstr "標準"
 
-#: ../capplets/display/xrandr-capplet.c:328
+#: ../capplets/display/xrandr-capplet.c:337
 msgid "Left"
 msgstr "左回り"
 
-#: ../capplets/display/xrandr-capplet.c:329
+#: ../capplets/display/xrandr-capplet.c:338
 msgid "Right"
 msgstr "右回り"
 
-#: ../capplets/display/xrandr-capplet.c:330
+#: ../capplets/display/xrandr-capplet.c:339
 msgid "Upside Down"
 msgstr "逆さま"
 
-#: ../capplets/display/xrandr-capplet.c:403
-#: ../capplets/display/xrandr-capplet.c:411
 #: ../capplets/display/xrandr-capplet.c:412
+#: ../capplets/display/xrandr-capplet.c:420
+#: ../capplets/display/xrandr-capplet.c:421
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:453
+#: ../capplets/display/xrandr-capplet.c:462
 #, c-format
 msgid "<b>Monitor: %s</b>"
 msgstr "<b>モニタ: %s</b>"
 
-#: ../capplets/display/xrandr-capplet.c:545
-#: ../capplets/display/xrandr-capplet.c:555
-#: ../capplets/display/xrandr-capplet.c:563
+#: ../capplets/display/xrandr-capplet.c:554
+#: ../capplets/display/xrandr-capplet.c:564
+#: ../capplets/display/xrandr-capplet.c:572
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
@@ -2168,31 +2168,39 @@ msgstr "%d x %d"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1410
+#: ../capplets/display/xrandr-capplet.c:1419
 msgid "Mirror Screens"
 msgstr "複数の画面をミラーする"
 
-#: ../capplets/display/xrandr-capplet.c:1729
-msgid "Could not apply the selected configuration"
-msgstr "指定した設定を適用できませんでした"
+#: ../capplets/display/xrandr-capplet.c:1734
+msgid "Could not get org.gnome.SettingsDaemon.XRANDR_2"
+msgstr " org.gnome.SettingsDaemon.XRANDR_2 を取得できませんでした"
 
-#: ../capplets/display/xrandr-capplet.c:1756
-msgid "Could not save the monitor configuration"
-msgstr "モニタの設定を保存できませんでした"
-
-#: ../capplets/display/xrandr-capplet.c:1767
-msgid "Could not get session bus while applying display configuration"
-msgstr "ディスプレイの設定を適用する際にセッション・バスの取得に失敗しました"
-
-#: ../capplets/display/xrandr-capplet.c:1777
+#: ../capplets/display/xrandr-capplet.c:1758
 msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
 msgstr "org.gnome.SettingsDaemon.XRANDR を取得できませんでした"
 
+#: ../capplets/display/xrandr-capplet.c:1795
+msgid "Could not apply the selected configuration"
+msgstr "指定した設定を適用できませんでした"
+
 #: ../capplets/display/xrandr-capplet.c:1823
+msgid "Could not save the monitor configuration"
+msgstr "モニタの設定を保存できませんでした"
+
+#: ../capplets/display/xrandr-capplet.c:1834
+msgid "Could not get session bus while applying display configuration"
+msgstr "ディスプレイの設定を適用するセッション・バスの取得に失敗しました"
+
+#: ../capplets/display/xrandr-capplet.c:1848
+msgid "Could not get object to apply display configuration"
+msgstr "ディスプレイの設定を適用するオブジェクトの取得に失敗しました"
+
+#: ../capplets/display/xrandr-capplet.c:1885
 msgid "Could not detect displays"
 msgstr "ディスプレイを検出できませんでした"
 
-#: ../capplets/display/xrandr-capplet.c:2021
+#: ../capplets/display/xrandr-capplet.c:2078
 msgid "Could not get screen information"
 msgstr "スクリーンの情報を取得できませんでした"
 
@@ -3315,7 +3323,7 @@ msgid ""
 "[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;default-"
 "applications.desktop,Add Printer;gnome-cups-manager.desktop]"
 msgstr ""
-"[テーマの変更;gtk-theme-selector.desktop,お気に入りのアプリ;default-"
+"[外観の設定;gnome-appearance-properties.desktop,お気に入りのアプリ;default-"
 "applications.desktop,プリンタの追加;gnome-cups-manager.desktop]"
 
 #: ../shell/control-center.schemas.in.h:14
@@ -3554,6 +3562,3 @@ msgstr "フォント・ファイル 出力先のファイル"
 #, c-format
 msgid "Error parsing arguments: %s\n"
 msgstr "引数を解析する際にエラーが発生しました: %s\n"
-
-#~ msgid "_Command:"
-#~ msgstr "コマンド(_C):"
