@@ -1,3 +1,10 @@
+2009-03-30  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (ensure_current_configuration_is_saved): Save
+	monitors.xml with the current configuration before changing it, so
+	that we'll have something to go back to even on a first-time login
+	(when monitors.xml doesn't exist).
+
 2009-03-20  Federico Mena Quintero  <federico@novell.com>
 
 	* xrandr-capplet.c (begin_version2_apply_configuration): There is no need
