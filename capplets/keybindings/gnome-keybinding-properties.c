@@ -1590,7 +1590,7 @@ add_custom_shortcut (GtkTreeView  *tree_view,
     }
 }
 
-static gboolean
+static void
 start_editing_kb_cb (GtkTreeView *treeview,
 			  GtkTreePath *path,
 			  GtkTreeViewColumn *column,
@@ -1605,6 +1605,16 @@ start_editing_kb_cb (GtkTreeView *treeview,
       gtk_tree_model_get (model, &iter,
                           KEYENTRY_COLUMN, &key,
                          -1);
+
+      if (key == NULL)
+        {
+	  /* This is a section heading - expand or collapse */
+	  if (gtk_tree_view_row_expanded (treeview, path))
+	    gtk_tree_view_collapse_row (treeview, path);
+	  else
+	    gtk_tree_view_expand_row (treeview, path, FALSE);
+          return;
+	}
 
       /* if only the accel can be edited on the selected row
        * always select the accel column */
@@ -1625,8 +1635,6 @@ start_editing_kb_cb (GtkTreeView *treeview,
                                     gtk_tree_view_get_column (treeview, 1),
                                     TRUE);
         }
-
-  return FALSE;
 }
 
 static gboolean
