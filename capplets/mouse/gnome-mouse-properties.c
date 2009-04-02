@@ -41,6 +41,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#ifdef HAVE_XINPUT
+#include <X11/Xatom.h>
+#include <X11/extensions/XInput.h>
+#endif
 
 #ifdef HAVE_XCURSOR
 #include <X11/Xcursor/Xcursor.h>
@@ -312,6 +316,99 @@ left_handed_to_gconf (GConfPropertyEditor *peditor,
 	return new_value;
 }
 
+static void
+scrollmethod_radio_button_release_event (GtkWidget *widget,
+					 GdkEventButton *event,
+					 GladeXML *dialog)
+{
+	gtk_widget_set_sensitive (WID ("horiz_scroll_toggle"),
+				  (widget != WID ("scroll_disabled_radio")));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+}
+
+static GConfValue *
+scroll_method_from_gconf (GConfPropertyEditor *peditor,
+			  const GConfValue *value)
+{
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+
+	gconf_value_set_int (new_value, gconf_value_get_int (value));
+
+	return new_value;
+}
+
+static GConfValue *
+scroll_method_to_gconf (GConfPropertyEditor *peditor,
+		        const GConfValue *value)
+{
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+
+	gconf_value_set_int (new_value, gconf_value_get_int (value));
+
+	return new_value;
+}
+
+static gboolean
+find_synaptics (void)
+{
+	gboolean ret = FALSE;
+#ifdef HAVE_XINPUT
+	int numdevices, i;
+	XDeviceInfo *devicelist;
+	Atom realtype, prop;
+	int realformat;
+	unsigned long nitems, bytes_after;
+	unsigned char *data;
+	XExtensionVersion *version;
+
+	/* Input device properties require version 1.5 or higher */
+	version = XGetExtensionVersion (GDK_DISPLAY (), "XInputExtension");
+	if (!version->present ||
+		(version->major_version * 1000 + version->minor_version) < 1005) {
+		XFree (version);
+		return False;
+	}
+
+	prop = XInternAtom (GDK_DISPLAY (), "Synaptics Off", True);
+	if (!prop)
+		return False;
+
+	devicelist = XListInputDevices (GDK_DISPLAY (), &numdevices);
+	for (i = 0; i < numdevices; i++) {
+		if (devicelist[i].use != IsXExtensionPointer)
+			continue;
+
+		gdk_error_trap_push();
+		XDevice *device = XOpenDevice (GDK_DISPLAY (),
+					       devicelist[i].id);
+		if (gdk_error_trap_pop ())
+			continue;
+
+		gdk_error_trap_push ();
+		if ((XGetDeviceProperty (GDK_DISPLAY (), device, prop, 0, 1, False,
+					 XA_INTEGER, &realtype, &realformat, &nitems,
+					 &bytes_after, &data) == Success) && (realtype != None)) {
+			XFree (data);
+			ret = TRUE;
+		}
+		gdk_error_trap_pop ();
+
+		XCloseDevice (GDK_DISPLAY (), device);
+
+		if (ret)
+			break;
+	}
+
+	XFree (version);
+	XFreeDeviceList (devicelist);
+#endif
+	return ret;
+}
+
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
@@ -362,6 +459,31 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
 		 "conv-to-widget-cb", drag_threshold_from_gconf,
 		 NULL);
+
+	/* Trackpad page */
+	if (find_synaptics () == FALSE)
+		gtk_notebook_remove_page (GTK_NOTEBOOK (WID ("prefs_widget")), -1);
+	else {
+		peditor = gconf_peditor_new_boolean
+			(changeset, "/desktop/gnome/peripherals/touchpad/disable_while_typing", WID ("disable_w_typing_toggle"), NULL);
+		peditor = gconf_peditor_new_boolean
+			(changeset, "/desktop/gnome/peripherals/touchpad/tap_to_click", WID ("tap_to_click_toggle"), NULL);
+		peditor = gconf_peditor_new_boolean
+			(changeset, "/desktop/gnome/peripherals/touchpad/horiz_scroll_enabled", WID ("horiz_scroll_toggle"), NULL);
+		radio = GTK_RADIO_BUTTON (WID ("scroll_disabled_radio"));
+		peditor = gconf_peditor_new_select_radio
+			(changeset, "/desktop/gnome/peripherals/touchpad/scroll_method", gtk_radio_button_get_group (radio),
+			 "conv-to-widget-cb", scroll_method_from_gconf,
+			 "conv-from-widget-cb", scroll_method_to_gconf,
+			 NULL);
+			 g_signal_connect (WID ("scroll_disabled_radio"), "button_release_event",
+				 G_CALLBACK (scrollmethod_radio_button_release_event), dialog);
+			 g_signal_connect (WID ("scroll_edge_radio"), "button_release_event",
+				 G_CALLBACK (scrollmethod_radio_button_release_event), dialog);
+			 g_signal_connect (WID ("scroll_twofinger_radio"), "button_release_event",
+				 G_CALLBACK (scrollmethod_radio_button_release_event), dialog);
+	}
+
 }
 
 /* Construct the dialog */
