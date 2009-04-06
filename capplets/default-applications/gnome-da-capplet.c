@@ -77,10 +77,10 @@ web_radiobutton_toggled_cb (GtkWidget *togglebutton, GnomeDACapplet *capplet)
 	return;
 
     item = (GnomeDAWebItem *) g_list_nth_data (capplet->web_browsers, index);
-    if (item == NULL)
-        return;
-
-    if (togglebutton == capplet->new_win_radiobutton) {
+    if (item == NULL) {
+	command = "";
+    }
+    else if (togglebutton == capplet->new_win_radiobutton) {
 	command = item->win_command;
     }
     else if (togglebutton == capplet->new_tab_radiobutton) {
