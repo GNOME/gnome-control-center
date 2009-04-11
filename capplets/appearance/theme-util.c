@@ -76,7 +76,7 @@ theme_delete (const gchar *name, ThemeType type)
   gtk_dialog_add_button (dialog, GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT);
   response = gtk_dialog_run (dialog);
   gtk_widget_destroy (GTK_WIDGET (dialog));
-  if (response == GTK_RESPONSE_CANCEL)
+  if (response != GTK_RESPONSE_ACCEPT)
     return FALSE;
 
   /* Most theme types are put into separate subdirectories. For those
