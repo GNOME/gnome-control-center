@@ -1,3 +1,8 @@
+2009-04-14  Jens Granseuer  <jensgr@gmx.net>
+
+	* gtkrc-utils.c: (gtkrc_get_details): close gtkrc files after use so
+	we don't run out of file descriptors (bug #578835)
+
 2009-03-19  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-theme-info.c: (gnome_theme_init): search the GTK+ icon theme

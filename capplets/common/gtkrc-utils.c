@@ -24,6 +24,7 @@
 #endif
 
 #include <string.h>
+#include <unistd.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <fcntl.h>
@@ -156,6 +157,7 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 				}
 
 			}
+			close (file);
 		}
 	}
 
