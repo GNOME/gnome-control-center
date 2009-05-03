@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <glib/gi18n.h>
+#include <gmodule.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <gio/gio.h>
@@ -1440,10 +1441,8 @@ gtk_theme_info_missing_engine (const gchar *gtk_theme, gboolean nameOnly)
     g_free (gtkrc);
 
     for (l = engines; l; l = l->next) {
-      gchar *lib = g_strconcat ("lib", l->data, ".so", NULL);
-      gchar *full = g_build_filename (GTK_ENGINE_DIR, lib, NULL);
+      gchar *full = g_module_build_path (GTK_ENGINE_DIR, l->data);
 
-      g_free (lib);
       found = g_file_test (full, G_FILE_TEST_EXISTS);
 
       if (!found) {

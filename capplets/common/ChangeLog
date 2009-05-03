@@ -1,3 +1,11 @@
+2009-05-03  Jens Granseuer  <jensgr@gmx.net>
+
+	Patch by: <yselkowitz@users.sourceforge.net>
+
+	* gnome-theme-info.c (gtk_theme_info_missing_engine): fix theme
+	engine lookups on platforms that don't use .so by using
+	g_module_build_path (bug #581156)
+
 2009-04-14  Jens Granseuer  <jensgr@gmx.net>
 
 	* gtkrc-utils.c: (gtkrc_get_details): close gtkrc files after use so
