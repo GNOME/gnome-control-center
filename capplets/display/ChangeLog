@@ -1,3 +1,12 @@
+2009-05-06  Federico Mena Quintero  <federico@novell.com>
+
+	* xrandr-capplet.c (rebuild_current_monitor_label): Make the label
+	of the heading for the current monitor be explicitly black.  We
+	don't want to follow the theme's colors, as the label is always
+	shown against a light pastel background --- using the theme's
+	colors makes the label hard to read on "inverse" themes.  Fixes
+	the gnome-control-center part of bug #556050.
+
 2009-04-11  Matthias Clasen  <mclasen@redhat.com>
 
 	* display-capplet.glade: Make all mnemonics work. (#578572)

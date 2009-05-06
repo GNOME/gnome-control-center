@@ -477,7 +477,25 @@ rebuild_current_monitor_label (App *app)
 	    g_free (str);
 
 	if (use_color)
+	{
+	    GdkColor black = { 0, 0, 0, 0 };
+
 	    gtk_widget_modify_bg (app->current_monitor_event_box, app->current_monitor_event_box->state, &color);
+
+	    /* Make the label explicitly black.  We don't want it to follow the
+	     * theme's colors, since the label is always shown against a light
+	     * pastel background.  See bgo#556050
+	     */
+	    gtk_widget_modify_fg (app->current_monitor_label, GTK_WIDGET_STATE (app->current_monitor_label), &black);
+	}
+	else
+	{
+	    /* Remove any modifications we did on the label's color */
+	    GtkRcStyle *reset_rc_style;
+
+	    reset_rc_style = gtk_rc_style_new ();
+	    gtk_widget_modify_style (app->current_monitor_label, reset_rc_style); /* takes ownership of, and destroys, the rc style */
+	}
 
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (app->current_monitor_event_box), use_color);
 }
