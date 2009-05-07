@@ -80,7 +80,7 @@ vfs_stream_open(FT_Stream stream,
 
     handle = g_file_read (file, NULL, &error);
     if (! handle) {
-        g_message (error->message);
+        g_message ("%s", error->message);
 	g_object_unref (file);
 
         g_error_free (error);
@@ -92,7 +92,7 @@ vfs_stream_open(FT_Stream stream,
     g_object_unref (file);
 
     if (! info) {
-        g_warning (error->message);
+        g_warning ("%s", error->message);
 
         g_error_free (error);
         return FT_Err_Cannot_Open_Resource;
