@@ -1376,6 +1376,7 @@ edit_custom_shortcut (KeyEntry *key)
 
   gtk_entry_set_text (GTK_ENTRY (custom_shortcut_name_entry), key->description ? key->description : "");
   gtk_widget_set_sensitive (custom_shortcut_name_entry, key->desc_editable);
+  gtk_widget_grab_focus (custom_shortcut_name_entry);
   gtk_entry_set_text (GTK_ENTRY (custom_shortcut_command_entry), key->command ? key->command : "");
   gtk_widget_set_sensitive (custom_shortcut_command_entry, key->cmd_editable);
 
