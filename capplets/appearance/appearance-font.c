@@ -390,20 +390,20 @@ static void
 font_radio_toggled (GtkToggleButton *toggle_button,
 		    FontPair        *pair)
 {
-  GConfClient *client = gconf_client_get_default ();
-
   if (!in_change) {
+    GConfClient *client = gconf_client_get_default ();
+
     gconf_client_set_string (client, FONT_ANTIALIASING_KEY,
 			     gconf_enum_to_string (antialias_enums, pair->antialiasing),
 			     NULL);
     gconf_client_set_string (client, FONT_HINTING_KEY,
 			     gconf_enum_to_string (hint_enums, pair->hinting),
 			     NULL);
-  }
 
-  /* Restore back to the previous state until we get notification */
-  font_render_load (client);
-  g_object_unref (client);
+    /* Restore back to the previous state until we get notification */
+    font_render_load (client);
+    g_object_unref (client);
+  }
 }
 
 static void
@@ -792,11 +792,13 @@ dpi_value_changed (GtkSpinButton *spinner,
    * If the user changes the value faster than responses are
    * received from GConf, this may cause mildly strange effects.
    */
-  gdouble new_dpi = gtk_spin_button_get_value (spinner);
+  if (!in_change) {
+    gdouble new_dpi = gtk_spin_button_get_value (spinner);
 
-  gconf_client_set_float (client, FONT_DPI_KEY, new_dpi, NULL);
+    gconf_client_set_float (client, FONT_DPI_KEY, new_dpi, NULL);
 
-  dpi_load (client, spinner);
+    dpi_load (client, spinner);
+  }
 }
 
 static void
