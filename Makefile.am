@@ -1,4 +1,4 @@
-SUBDIRS = po libwindow-settings libslab capplets font-viewer shell help
+SUBDIRS = po libwindow-settings capplets font-viewer shell help
 
 if HAVE_TYPING_BREAK
 SUBDIRS += typing-break

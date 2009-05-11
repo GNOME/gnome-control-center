@@ -1,5 +1,4 @@
 INCLUDES =					\
-	-I$(top_srcdir)/libslab			\
 	$(GNOMECC_SHELL_CFLAGS)
 
 bin_PROGRAMS = gnome-control-center 
@@ -8,8 +7,7 @@ gnome_control_center_SOURCES =		\
 	control-center.c
 
 gnome_control_center_LDADD =						\
-	$(GNOMECC_SHELL_LIBS)						\
-	$(top_builddir)/libslab/libslab.la
+	$(GNOMECC_SHELL_LIBS)
 
 AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
