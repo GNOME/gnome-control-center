@@ -1091,6 +1091,10 @@ main (int argc, char **argv)
 	int rc = 0;
 
 	capplet_init (NULL, &argc, &argv);
+
+	if (!g_thread_supported ())
+		g_thread_init (NULL);
+
 	dbus_g_object_register_marshaller (fprintd_marshal_VOID__STRING_BOOLEAN,
 					   G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_INVALID);
 
