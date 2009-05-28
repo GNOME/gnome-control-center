@@ -297,7 +297,7 @@ main(int argc, char **argv)
 	goto out;
     }
 
-    totem_resources_monitor_start (arguments[0], 30);
+    totem_resources_monitor_start (arguments[0], 30 * G_USEC_PER_SEC);
 
     file = g_file_new_for_commandline_arg (arguments[0]);
     uri = g_file_get_uri (file);

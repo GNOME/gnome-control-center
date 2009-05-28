@@ -1,3 +1,9 @@
+2009-05-28  Jens Granseuer  <jensgr@gmx.net>
+
+	* font-viewer/font-thumbnailer.c (main): Timeout value was supposed
+	to be 30 seconds; 30 milliseconds is a bit too short to get any
+	amount of thumbnailing done (bug #584107)
+
 2009-05-07  Christian Persch  <chpe@gnome.org>
 
 	* font-viewer/ftstream-vfs.c: (vfs_stream_open): Safely printf
