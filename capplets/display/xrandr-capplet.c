@@ -818,10 +818,11 @@ lay_out_outputs_horizontally (App *app)
 	GnomeOutputInfo *output;
 
 	output = app->current_configuration->outputs[i];
-	if (output->connected && output->on)
+	if (output->connected && output->on) {
 	    output->x = x;
-
-	x += output->width;
+	    output->y = 0;
+	    x += output->width;
+	}
     }
 
     /* Second pass, all the black screens */
@@ -831,10 +832,11 @@ lay_out_outputs_horizontally (App *app)
 	GnomeOutputInfo *output;
 
 	output = app->current_configuration->outputs[i];
-	if (!(output->connected && output->on))
+	if (!(output->connected && output->on)) {
 	    output->x = x;
-
-	x += output->width;
+	    output->y = 0;
+	    x += output->width;
+	}
     }
 
 }
