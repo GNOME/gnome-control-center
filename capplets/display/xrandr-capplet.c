@@ -59,6 +59,10 @@ struct App
     GtkWidget	   *clone_checkbox;
     GtkWidget	   *show_icon_checkbox;
 
+    /* We store the event timestamp when the Apply button is clicked */
+    GtkWidget      *apply_button;
+    guint32         apply_button_clicked_timestamp;
+
     GtkWidget      *area;
     gboolean	    ignore_gui_changes;
     GConfClient	   *client;
@@ -1886,7 +1890,7 @@ apply (App *app)
 
     gtk_widget_set_sensitive (app->dialog, FALSE);
 
-    begin_version2_apply_configuration (app, gtk_widget_get_window (app->dialog), gtk_get_current_event_time ());
+    begin_version2_apply_configuration (app, gtk_widget_get_window (app->dialog), app->apply_button_clicked_timestamp);
 }
 
 #if 0
@@ -2092,6 +2096,19 @@ hide_help_button (App *app)
 }
 
 static void
+apply_button_clicked_cb (GtkButton *button, gpointer data)
+{
+    App *app = data;
+
+    /* We simply store the timestamp at which the Apply button was clicked.
+     * We'll just wait for the dialog to return from gtk_dialog_run(), and
+     * *then* use the timestamp when applying the RANDR configuration.
+     */
+
+    app->apply_button_clicked_timestamp = gtk_get_current_event_time ();
+}
+
+static void
 run_application (App *app)
 {
 #ifndef GLADEDIR
@@ -2193,6 +2210,10 @@ run_application (App *app)
 
     /* Until we have help to show, we'll just hide the Help button */
     hide_help_button (app);
+
+    app->apply_button = glade_xml_get_widget (xml, "apply_button");
+    g_signal_connect (app->apply_button, "clicked",
+		      G_CALLBACK (apply_button_clicked_cb), app);
 
     on_screen_changed (app->screen, app);
 
