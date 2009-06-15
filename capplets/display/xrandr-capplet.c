@@ -1842,7 +1842,9 @@ apply_configuration_returned_cb (DBusGProxy       *proxy,
 	    begin_version1_apply_configuration (app);
 	    return;
 	} else {
-	    error_message (app, _("Could not apply the selected configuration"), error->message);
+	    /* We don't pop up an error message; gnome-settings-daemon already does that
+	     * in case the selected RANDR configuration could not be applied.
+	     */
 	    g_error_free (error);
 	}
     }
