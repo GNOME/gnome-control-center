@@ -119,7 +119,7 @@ PKG_CHECK_MODULES(LIBSLAB, [
 			   have_libslab=no)
 AC_SUBST(LIBSLAB_CFLAGS)
 AC_SUBST(LIBSLAB_LIBS)
-AM_CONDITIONAL(HAVE_LIBSLAB, test "x$have_libslab"="xyes")
+AM_CONDITIONAL(HAVE_LIBSLAB, [test $have_libslab = yes])
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
