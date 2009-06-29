@@ -42,6 +42,7 @@ XklEngine *engine;
 XklConfigRegistry *config_registry;
 
 GkbdKeyboardConfig initial_config;
+GkbdDesktopConfig desktop_config;
 
 GConfClient *xkb_gconf_client;
 
@@ -114,6 +115,7 @@ setup_model_entry (GladeXML * dialog)
 static void
 cleanup_xkb_tabs (GladeXML * dialog)
 {
+	gkbd_desktop_config_term (&desktop_config);
 	gkbd_keyboard_config_term (&initial_config);
 	g_object_unref (G_OBJECT (config_registry));
 	config_registry = NULL;
@@ -155,7 +157,12 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 
 	engine = xkl_engine_get_instance (GDK_DISPLAY ());
 	config_registry = xkl_config_registry_get_instance (engine);
-	xkl_config_registry_load (config_registry);
+
+	gkbd_desktop_config_init (&desktop_config, xkb_gconf_client, engine);
+	gkbd_desktop_config_load_from_gconf (&desktop_config);
+
+	xkl_config_registry_load (config_registry,
+				  desktop_config.load_extra_items);
 
 	gkbd_keyboard_config_init (&initial_config, xkb_gconf_client,
 				   engine);
