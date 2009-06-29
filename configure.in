@@ -87,16 +87,12 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-ENABLE_DYNAMIC_LIBSLAB=0
-AM_CONDITIONAL(ENABLE_DYNAMIC_LIBSLAB, test "x$ENABLE_DYNAMIC_LIBSLAB" = "x1")
-
 COMMON_MODULES="gtk+-2.0 >= 2.13.1 dnl
  glib-2.0 >= 2.17.4 dnl
  gio-2.0 dnl
  gconf-2.0 dnl
  libglade-2.0 >= 2.0.0 dnl
  gnome-desktop-2.0 >= 2.25.1"
-PKG_CHECK_MODULES(LIBSLAB, $COMMON_MODULES libgnomeui-2.0 gnome-desktop-2.0 librsvg-2.0 libgnome-menu pango libgnomeui-2.0)
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1)
 PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnomeui-2.0 libgnome-menu libpanelapplet-2.0)
@@ -112,6 +108,18 @@ gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-2.0`
 gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-2.0`
 GTK_ENGINE_DIR="$gtk_lib_dir/gtk-2.0/$gtk_binary_version/engines"
 AC_SUBST(GTK_ENGINE_DIR)
+
+dnl
+dnl Check if we have libslab
+dnl
+PKG_CHECK_MODULES(LIBSLAB, [
+			   libslab libgnomeui-2.0 gnome-desktop-2.0 librsvg-2.0 libgnome-menu pango libgnomeui-2.0
+			   ],
+			   have_libslab=yes,
+			   have_libslab=no)
+AC_SUBST(LIBSLAB_CFLAGS)
+AC_SUBST(LIBSLAB_LIBS)
+AM_CONDITIONAL(HAVE_LIBSLAB, test "x$have_libslab"="xyes")
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
@@ -313,8 +321,6 @@ capplets/windows/window-properties.desktop.in
 font-viewer/Makefile
 font-viewer/gnome-font-viewer.desktop.in
 help/Makefile
-libslab/Makefile
-libslab/libslab.pc
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
 po/Makefile.in
