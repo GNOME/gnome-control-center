@@ -1,3 +1,78 @@
+gnome-control-center 2.27.3 (2009-06-29)
+
+About me:
+- Initialize GThread subsystem (Vivian Zhang) (#583451)
+
+Appearance:
+- After removing an image set the cursor to the newly selected wallpaper so
+  that keyboard navigation works as expected (Jens Granseuer) (#575075)
+- Search GTK+ icon theme search path for icon themes (Jens Granseuer) (#575906)
+- Only delete the theme if the user pressed OK (Benjamin Berg) (#578694)
+- Close gtkrc files after use (Jens Granseuer) (#578835)
+- Fix theme engine detection on non-UNIX platform (Jens Granseuer) (#581156)
+- Don't unref NULL GConf entries (Jens Granseuer)
+- After removing an image set the cursor to the newly selected wallpaper (Jens
+  Granseuer) (#575075)
+
+Default applications:
+- Add Arora to list of browsers (Bastien Nocera)
+
+Display:
+- Pass a transient parent ID to the ApplyConfiguration callback so that it
+  can make its confirmation dialog a child of the parent (Federico Mena Quintero)
+  (#576006)
+- Simplify calls to dbus-glib which cannot fail (Federico Mena Quintero)
+- Ensure that there will be a backup file before committing (Federico Mena Quintero)
+  (#486093)
+- Make the monitor heading be explicitly black (Federico Mena Quintero) (#556050)
+- Fix the layout-outputs-horizontally helper (Federico Mena Quintero)
+- Use the timestamp of the Apply button to change the RANDR configuration (Federico
+  Mena Quintero)
+- Don't pop up a redundant error dialog (Federico Mena Quintero)
+
+Font viewer:
+- Safely printf strings (Christian Persch)
+- Interrupt thumbnailing at 30 s instead of 30 msecs (Jens Granseuer) (#584107)
+
+Keybindings:
+- Make activating a section header row expand or collapse the section as expected
+  instead of crashing (Jens Granseuer) (#577474)
+- Make the custom keybinding UI smoother (Matthias Clasen)
+- Don't needlessly write entries back to gconf on startup (Matthias Clasen) (#581986)
+
+Keyboard:
+- Dependency on libxklavier 4.0, optional load/display of extra layouts (Sergey V.
+  Udaltsov)
+
+Shell:
+- Fix libslab svn:external problem (Rodrigo Moya)
+
+Translations:
+- ar (Djihed Afifi)
+- ca (Gil Forcada)
+- cs (Petr Kovar)
+- crh (Reşat SABIQ)
+- de (Jürg Billeter, Andre Klapper)
+- es (Jorge Gonzalez Gonzalez)
+- et (Ivar Smolin, Mattias Põldaru)
+- fr (Bruno Brouard)
+- gr (Marios Zindilis, Nikos Charonitakis)
+- hi (Manoj Kumar Giri, Rajesh Ranjan)
+- hu (Gabor Kelemen)
+- it (miloc)
+- ja (Takeshi AIHANA)
+- kn (Shankar Prasad)
+- lv (Raivis Dejus)
+- nb (Kjartan Maraas)
+- or (Manoj Kumar Giri)
+- ru (Nickolay V. Shmyrev)
+- sl (Matej Urbančič)
+- sk (Marcel Telka)
+- sr@Latin (Miloš Popović)
+- vi (Nguyễn Thái Ngọc Duy)
+- zh_CN (M Zhang, Deng Xiyue)
+
+-------------------------------------------------------------------------------
 gnome-control-center 2.26.0 (2009-03-16)
 
 About me:
