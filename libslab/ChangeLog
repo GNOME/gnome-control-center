@@ -1,0 +1,248 @@
+=== ChangeLog discontinued ===
+
+	With the move to Git, gnome-main-menu is switching from a ChangeLog file
+	to relying on commit messages to provide change history.
+
+2009-01-07  Magnus Boman  <captain.magnus@gmail.com>
+
+	reviewed by: Magnus Boman
+
+	* app-resizer.c:
+	* app-resizer.h:
+	* app-shell.c (delete_old_data):
+	* app-shell.h:
+	* application-tile.c (application_tile_setup):
+	* directory-tile.c (directory_tile_new):
+	* document-tile.c (document_tile_new):
+	* nameplate-tile.c (nameplate_tile_class_init),
+	(nameplate_tile_get_property), (nameplate_tile_set_property):
+	* search-bar.h:
+	* search-context-picker.c:
+	* search-context-picker.h:
+	- Use single GTK inclues - Fix bgo#551850#c2
+	  Patch by Cosimo Cecchi
+	- Compile with G*_DISABLE_DEPRECATED - Fixes bgo#551850#c3
+	  Patch by Cosimo Cecchi
+
+==================== 0.9.12 ====================
+
+2008-11-06  Federico Mena Quintero  <federico@novell.com>
+
+	Use the new GtkTooltip mechanism rather than the deprecated
+	GtkTooltips.  This also fixes a leak of GtkTooltips objects.
+
+	* nameplate-tile.c (NameplateTilePrivate): Removed the "tooltips" field.
+	(nameplate_tile_set_property): Use gtk_widget_set_tooltip_text()
+	rather than creating a GtkTooltips object and setting the tooltips there.
+	(nameplate_tile_get_property): Use gtk_widget_get_tooltip_text()
+	instead of getting a GtkTooltipsData object.
+
+2008-11-06  Federico Mena Quintero  <federico@novell.com>
+
+	* bookmark-agent.c (create_app_item): Free the title of the
+	bookmark file.
+
+2008-10-27  Federico Mena Quintero  <federico@novell.com>
+
+	Fix some memory leaks:
+
+	* tile.c (tile_finalize): Actually destroy the context menu, don't
+	ref/sink it.
+	(tile_set_property): Attach the context menu to the tile, don't
+	just store its pointer.
+
+	* nameplate-tile.c (nameplate_tile_finalize): Free the tooltips.
+
+	* bookmark-agent.c (create_app_item): Free the URI.
+	(create_doc_item): Likewise.
+	(create_dir_item): Likewise.
+
+2008-09-22  Scott Reeves  <sreeves@novell.com>
+	* document-tile.c:
+	show remote docs - use gio for tooltip, show icon
+
+==================== 0.9.11 ====================
+
+2008-09-07  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* app-shell.c: (show_no_results_message):
+	Escape the markup text properly.
+	Patch by Denis Washington (#518749).
+
+2008-08-22  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* Makefile.am:
+	* app-shell.c: (generate_new_apps):
+	* bookmark-agent.c: (bookmark_agent_move_item),
+	(bookmark_agent_remove_item), (bookmark_agent_new), (finalize),
+	(update_user_spec_path), (store_monitor_cb),
+	(recent_item_mru_comp_func):
+	* directory-tile.c: (directory_tile_new),
+	(directory_tile_private_setup), (directory_tile_finalize),
+	(rename_entry_activate_cb), (move_to_trash_trigger),
+	(delete_trigger), (open_with_default_trigger):
+	* document-tile.c: (document_tile_new),
+	(document_tile_private_setup), (document_tile_finalize),
+	(rename_entry_activate_cb), (open_with_default_trigger),
+	(move_to_trash_trigger), (delete_trigger), (user_docs_trigger):
+	* recent-files.c: (main_menu_recent_monitor_init),
+	(main_menu_recent_file_init), (main_menu_recent_monitor_finalize),
+	(main_menu_recent_file_finalize), (main_menu_recent_monitor_new),
+	(get_files), (main_menu_recent_file_get_uri),
+	(main_menu_recent_file_get_mime_type),
+	(main_menu_recent_file_get_modified),
+	(main_menu_rename_recent_file), (main_menu_remove_recent_file),
+	(recent_file_store_monitor_cb), (recent_item_mru_comp_func):
+	* slab-gnome-util.c: (copy_file):
+	Port to GIO and drop gnome-vfs dependency (#527903).
+
+2008-08-11  A. Walton  <awalton@gnome.org>
+
+	reviewed by: Federico Mena Quintero
+
+	* directory-tile.c (delete_trigger):
+	* document-tile.c (delete_trigger):
+	Remove Eel dependency from libslab. Bug #524778.
+
+2008-07-28  Federico Mena Quintero  <federico@novell.com>
+
+	https://bugzilla.novell.com/show_bug.cgi?id=402256 - Main-menu has
+	high CPU usage on NIS/NFS home directories.
+
+	* document-tile.c (load_image): Don't do thumbnailing ourselves,
+	as we don't have the threading logic to do it in the background.
+	Instead, let Nautilus handle thumbnailing by itself.
+
+2008-07-24  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=544538
+
+	* app-shell.c: (generate_launchers):
+	Fix a build warning.
+
+==================== 0.9.10 ====================
+
+2008-05-13  Federico Mena Quintero  <federico@novell.com>
+
+	* application-tile.c (application_tile_setup): Ensure that name
+	and desc are non-NULL before comparing them.
+
+2008-05-09  Magnus Boman  <captain.magnus@gmail.com>
+
+        https://bugzilla.novell.com/show_bug.cgi?id=224885 -
+        Don't display both generic name and description if they are the same.
+
+        * libslab/application-tile.c (application_tile_setup): Set subheader
+        to NULL if description is the same as generic name.
+
+2008-04-28  Scott Reeves  <sreeves@novell.com>
+
+	* bookmark-agent.c:
+	Fix for BNC#308998 - missing translation in menu
+
+2008-04-23  Federico Mena Quintero  <federico@novell.com>
+
+	* libslab-utils.c (create_thumbnail_factory): Continue the fix for
+	the last bug; when a second instance of the applet gets added, it
+	will want to initialize the thumbnail factory again.
+
+2008-04-23  Federico Mena Quintero  <federico@novell.com>
+
+	https://bugzilla.novell.com/show_bug.cgi?id=380339 - Crash when
+	there are two main-menu applets.
+
+	* libslab-utils.c (libslab_thumbnail_factory_preinit): Check if
+	the idle handler is already set up, so we don't try to initialize
+	the factory twice if there is more than one main-menu applet
+	(e.g. for multiple monitors).
+
+2008-04-09  Federico Mena Quintero  <federico@novell.com>
+
+	* bookmark-agent.c (create_doc_item): Don't leak the template
+	filename.
+
+2008-04-08  Federico Mena Quintero  <federico@novell.com>
+
+	* bookmark-agent.c (bookmark_agent_remove_item): Free the uris we
+	got from the GBookmarkFile.
+	(load_xbel_store): Likewise.
+
+2008-04-04  Federico Mena Quintero  <federico@novell.com>
+
+	* libslab-utils.c (libslab_checkpoint_init): New public function;
+	initializes a checkpoint file.
+	(libslab_checkpoint): New public function to add checkpoints to
+	the code for profiling purposes.
+	(libslab_thumbnail_factory_preinit): New public function to queue
+	the initialization of the thumbnail factory in an idle handler.
+	With this we can create the thumbnail factory between the applet
+	hitting the main loop initially and the user activating the
+	Computer menu.
+	(libslab_thumbnail_factory_get): New public function.
+
+	* bookmark-agent.c (bookmark_agent_update_from_bookmark_file): New
+	public function; allows the caller to update a BookmarkAgent
+	explicitly from a given GBookmarkFile.  This makes the
+	BookmarkAgent not monitor the recent-files store on its own, to
+	give more control to the caller.
+
+	* document-tile.c (document_tile_new): Don't call load_image()
+	here; it already gets done in document_tile_style_set().
+	(load_image): Use libslab_thumbnail_factory_get() to use the
+	global thumbnail factory, instead of one of our own.
+
+2008-03-10  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* Makefile.am: only set libtool versioning when building dynamic lib.
+
+==================== 0.9.9 ====================
+
+2008-02-17  Jens Granseuer  <jensgr@gmx.net>
+
+	* slab-gnome-util.c: (get_slab_gconf_bool), (get_slab_gconf_int),
+	(get_slab_gconf_string), (free_list_of_strings),
+	(free_slab_gconf_slist_of_strings),
+	(get_package_name_from_desktop_item): fix a few leaks and don't
+	open-code g_(s)list_foreach
+
+2008-02-08  Federico Mena Quintero  <federico@novell.com>
+
+	* Makefile.am (libslab_la_LDFLAGS): Specify libtool versioning
+	info.  Copied from libgnomeui/libgnomeui/Makefile.am.
+
+2007-09-16  Andre Klapper  <a9016009@gmx.de>
+
+	* system-tile.c: revert to svn revision 339 (=before
+	GNOME string freeze break).
+
+2007-02-12  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* application-tile.c (application_tile_setup): check strings before
+	calling g_str_has_prefix().
+
+2007-02-12  Damien Carbery <damien.carbery@sun.com>
+
+	Fixes #383022
+
+	* document-tile.c:
+	* gnome-utils.c: use more portable G_GNUC_FUNCTION instead of
+	__FUNCTION__.
+
+2007-02-06  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* application-tile.[ch] (application_tile_new_full): added 'gconf_prefix'
+	argument, so that the AppTile object is able to disable context menu
+	items based on the presence of some GConf keys.
+	(application_tile_set_property): free previous values for not leaking.
+
+	* app-shell.c (insert_launcher_into_category): pass the GConf prefix we
+	get from the application to the App tiles.
+
+2007-02-01  Scott Reeves  <sreeves@novell.com>
+	* application-tile.c: small fixup of previous patch to not try and
+	add the menu item when no help available.
+
+2007-02-01  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* application-tile.c (application_tile_setup): don't show the 'Help
+	unavailable' item when there is no documentation.

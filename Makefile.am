@@ -1,7 +1,7 @@
 SUBDIRS = po libwindow-settings capplets font-viewer help
 
-if HAVE_LIBSLAB
-SUBDIRS += shell
+if HAVE_LIBSLAB_DEPS
+SUBDIRS += libslab shell
 endif
 
 if HAVE_TYPING_BREAK
