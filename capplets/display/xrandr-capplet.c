@@ -21,7 +21,6 @@
 
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <string.h>
 #include <stdlib.h>
 #include "scrollarea.h"
@@ -2110,38 +2109,47 @@ apply_button_clicked_cb (GtkButton *button, gpointer data)
     app->apply_button_clicked_timestamp = gtk_get_current_event_time ();
 }
 
+static GtkWidget*
+_gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
+{
+    return GTK_WIDGET (gtk_builder_get_object (builder, name));
+}
+
 static void
 run_application (App *app)
 {
-#ifndef GLADEDIR
-#define GLADEDIR "."
+#ifndef UIDIR
+#define UIDIR "."
 #endif
-#define GLADE_FILE GLADEDIR "/display-capplet.glade"
-    GladeXML *xml;
+#define UI_FILE UIDIR "/display-capplet.ui"
+    GtkBuilder *builder;
     GtkWidget *align;
     GError *error;
 
-    xml = glade_xml_new (GLADE_FILE, NULL, NULL);
-    if (!xml)
+    error = NULL;
+    builder = gtk_builder_new ();
+
+    if (gtk_builder_add_from_file (builder, UI_FILE, &error) == 0)
     {
-	g_warning ("Could not open " GLADE_FILE);
+	g_warning ("Could not parse UI definition: %s", error->message);
+	g_error_free (error);
+	g_object_unref (builder);
 	return;
     }
 
-    error = NULL;
     app->screen = gnome_rr_screen_new (gdk_screen_get_default (),
 				       on_screen_changed, app, &error);
     if (!app->screen)
     {
 	error_message (NULL, _("Could not get screen information"), error->message);
 	g_error_free (error);
-	g_object_unref (xml);
+	g_object_unref (builder);
 	return;
     }
 
     app->client = gconf_client_get_default ();
 
-    app->dialog = glade_xml_get_widget (xml, "dialog");
+    app->dialog = _gtk_builder_get_widget (builder, "dialog");
     g_signal_connect_after (app->dialog, "map-event",
 			    G_CALLBACK (dialog_map_event_cb), app);
 
@@ -2149,43 +2157,49 @@ run_application (App *app)
     gtk_window_set_icon_name (GTK_WINDOW (app->dialog),
 			      "gnome-display-properties");
 
-    app->current_monitor_event_box = glade_xml_get_widget (xml, "current_monitor_event_box");
-    app->current_monitor_label = glade_xml_get_widget (xml, "current_monitor_label");
+    app->current_monitor_event_box = _gtk_builder_get_widget (builder,
+    						   "current_monitor_event_box");
+    app->current_monitor_label = _gtk_builder_get_widget (builder,
+    						       "current_monitor_label");
 
-    app->monitor_on_radio = glade_xml_get_widget (xml, "monitor_on_radio");
-    app->monitor_off_radio = glade_xml_get_widget (xml, "monitor_off_radio");
+    app->monitor_on_radio = _gtk_builder_get_widget (builder,
+    						     "monitor_on_radio");
+    app->monitor_off_radio = _gtk_builder_get_widget (builder,
+    						      "monitor_off_radio");
     g_signal_connect (app->monitor_on_radio, "toggled",
 		      G_CALLBACK (monitor_on_off_toggled_cb), app);
     g_signal_connect (app->monitor_off_radio, "toggled",
 		      G_CALLBACK (monitor_on_off_toggled_cb), app);
 
-    app->resolution_combo = glade_xml_get_widget (xml, "resolution_combo");
+    app->resolution_combo = _gtk_builder_get_widget (builder,
+    						     "resolution_combo");
     g_signal_connect (app->resolution_combo, "changed",
 		      G_CALLBACK (on_resolution_changed), app);
 
-    app->refresh_combo = glade_xml_get_widget (xml, "refresh_combo");
+    app->refresh_combo = _gtk_builder_get_widget (builder, "refresh_combo");
     g_signal_connect (app->refresh_combo, "changed",
 		      G_CALLBACK (on_rate_changed), app);
 
-    app->rotation_combo = glade_xml_get_widget (xml, "rotation_combo");
+    app->rotation_combo = _gtk_builder_get_widget (builder, "rotation_combo");
     g_signal_connect (app->rotation_combo, "changed",
 		      G_CALLBACK (on_rotation_changed), app);
 
-    app->clone_checkbox = glade_xml_get_widget (xml, "clone_checkbox");
+    app->clone_checkbox = _gtk_builder_get_widget (builder, "clone_checkbox");
     g_signal_connect (app->clone_checkbox, "toggled",
 		      G_CALLBACK (on_clone_changed), app);
 
-    g_signal_connect (glade_xml_get_widget (xml, "detect_displays_button"),
+    g_signal_connect (_gtk_builder_get_widget (builder, "detect_displays_button"),
 		      "clicked", G_CALLBACK (on_detect_displays), app);
 
-    app->show_icon_checkbox = glade_xml_get_widget (xml, "show_notification_icon");
+    app->show_icon_checkbox = _gtk_builder_get_widget (builder,
+						      "show_notification_icon");
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->show_icon_checkbox),
 				  gconf_client_get_bool (app->client, SHOW_ICON_KEY, NULL));
 
     g_signal_connect (app->show_icon_checkbox, "toggled", G_CALLBACK (on_show_icon_toggled), app);
 
-    app->panel_checkbox = glade_xml_get_widget (xml, "panel_checkbox");
+    app->panel_checkbox = _gtk_builder_get_widget (builder, "panel_checkbox");
 
     make_text_combo (app->resolution_combo, 4);
     make_text_combo (app->refresh_combo, 3);
@@ -2206,20 +2220,20 @@ run_application (App *app)
     g_signal_connect (app->area, "viewport_changed",
 		      G_CALLBACK (on_viewport_changed), app);
 
-    align = glade_xml_get_widget (xml, "align");
+    align = _gtk_builder_get_widget (builder, "align");
 
     gtk_container_add (GTK_CONTAINER (align), app->area);
 
     /* Until we have help to show, we'll just hide the Help button */
     hide_help_button (app);
 
-    app->apply_button = glade_xml_get_widget (xml, "apply_button");
+    app->apply_button = _gtk_builder_get_widget (builder, "apply_button");
     g_signal_connect (app->apply_button, "clicked",
 		      G_CALLBACK (apply_button_clicked_cb), app);
 
     on_screen_changed (app->screen, app);
 
-    g_object_unref (xml);
+    g_object_unref (builder);
 
 restart:
     switch (gtk_dialog_run (GTK_DIALOG (app->dialog)))

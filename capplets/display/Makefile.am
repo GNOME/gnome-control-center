@@ -1,8 +1,8 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = display
 
-gladedir = $(pkgdatadir)/glade
-dist_glade_DATA = display-capplet.glade
+uidir = $(pkgdatadir)/ui
+dist_ui_DATA = display-capplet.ui
 
 bin_PROGRAMS = gnome-display-properties
 
@@ -37,7 +37,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
              $(GNOMECC_CAPPLETS_CFLAGS) \
-	     -DGLADEDIR="\"$(gladedir)\"" \
+	     -DUIDIR="\"$(uidir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
 
