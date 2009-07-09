@@ -30,7 +30,6 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <string.h>
-#include <glade/glade.h>
 #include <gnome-wm-manager.h>
 
 #include "capplet-util.h"
@@ -44,15 +43,14 @@ typedef struct
         GtkWidget *radio;
 } MouseClickModifier;
 
-static GladeXML *dialog;
 static GnomeWindowManager *current_wm; /* may be NULL */
 static GtkWidget *dialog_win;
-static GtkWidget *focus_mode_checkbutton;
-static GtkWidget *autoraise_checkbutton;
-static GtkWidget *autoraise_delay_slider;
+static GObject *focus_mode_checkbutton;
+static GObject *autoraise_checkbutton;
+static GObject *autoraise_delay_slider;
 static GtkWidget *autoraise_delay_hbox;
-static GtkWidget *double_click_titlebar_optionmenu;
-static GtkWidget *alt_click_hbox;
+static GObject *double_click_titlebar_optionmenu;
+static GObject *alt_click_hbox;
 
 static GnomeWMSettings *settings;
 static const GnomeWMDoubleClickAction *double_click_actions = NULL;
@@ -132,7 +130,7 @@ alt_click_radio_toggled_callback (GtkWidget *radio,
         active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio));
 
         if (active && current_wm != NULL) {
-                 new_settings.mouse_move_modifier = modifier->value;
+                new_settings.mouse_move_modifier = modifier->value;
 
                 if ((settings->mouse_move_modifier == NULL) ||
                     (strcmp (new_settings.mouse_move_modifier,
@@ -144,13 +142,13 @@ alt_click_radio_toggled_callback (GtkWidget *radio,
 static void
 update_sensitivity (void)
 {
-        gtk_widget_set_sensitive (autoraise_checkbutton,
+        gtk_widget_set_sensitive (GTK_WIDGET (autoraise_checkbutton),
                                   settings->focus_follows_mouse);
 
         gtk_widget_set_sensitive (autoraise_delay_hbox,
                                   settings->focus_follows_mouse && settings->autoraise);
 
-        gtk_widget_set_sensitive (double_click_titlebar_optionmenu,
+        gtk_widget_set_sensitive (GTK_WIDGET (double_click_titlebar_optionmenu),
                                   n_double_click_actions > 1);
 
         /* disable the whole dialog while no WM is running, or
@@ -299,7 +297,7 @@ update_wm (GdkScreen *screen,
 
         for (i = 0; i < n_double_click_actions; i++) {
                 gtk_combo_box_append_text (GTK_COMBO_BOX (double_click_titlebar_optionmenu),
-               		double_click_actions[i].human_readable_name);
+                                           double_click_actions[i].human_readable_name);
         }
 
         if (load_settings)
@@ -378,6 +376,8 @@ main (int argc, char **argv)
 {
         GdkScreen *screen;
 	GnomeWMSettings new_settings;
+        GtkBuilder *builder;
+        GError *error = NULL;
 	int rc = 0;
         int i;
 
@@ -398,22 +398,30 @@ main (int argc, char **argv)
                 goto out;
         }
 
-        dialog = glade_xml_new (GLADEDIR "/gnome-window-properties.glade",
-                                "main-dialog", GETTEXT_PACKAGE);
+        builder = gtk_builder_new ();
+        gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
 
-        if (dialog == NULL) {
-                g_warning ("Missing glade file for gnome-window-properties");
+        if (gtk_builder_add_from_file (builder, UIDIR "/gnome-window-properties.ui", &error) == 0) {
+                g_warning ("Could not parse UI file: %s", error->message);
+                g_error_free (error);
+                g_object_unref (builder);
                 rc = 1;
                 goto out;
         }
 
-        dialog_win = WID ("main-dialog");
-        focus_mode_checkbutton = WID ("focus-mode-checkbutton");
-        autoraise_checkbutton = WID ("autoraise-checkbutton");
-        autoraise_delay_slider = WID ("autoraise-delay-slider");
-        autoraise_delay_hbox = WID ("autoraise-delay-hbox");
-        double_click_titlebar_optionmenu = WID ("double-click-titlebar-optionmenu");
-        alt_click_hbox = WID ("alt-click-box");
+        dialog_win = GTK_WIDGET (gtk_builder_get_object (builder,
+                                                         "main-dialog"));
+        focus_mode_checkbutton = gtk_builder_get_object (builder,
+                                                         "focus-mode-checkbutton");
+        autoraise_checkbutton = gtk_builder_get_object (builder,
+                                                        "autoraise-checkbutton");
+        autoraise_delay_slider = gtk_builder_get_object (builder,
+                                                         "autoraise-delay-slider");
+        autoraise_delay_hbox = GTK_WIDGET (gtk_builder_get_object (builder,
+                                                                   "autoraise-delay-hbox"));
+        double_click_titlebar_optionmenu = gtk_builder_get_object (builder,
+                                                                   "double-click-titlebar-optionmenu");
+        alt_click_hbox = gtk_builder_get_object (builder, "alt-click-box");
 
         gtk_range_set_range (GTK_RANGE (autoraise_delay_slider),
                              0, 10);
@@ -432,7 +440,7 @@ main (int argc, char **argv)
         gtk_range_set_value (GTK_RANGE (autoraise_delay_slider),
                              new_settings.autoraise_delay / 1000.0);
         gtk_combo_box_set_active (GTK_COMBO_BOX (double_click_titlebar_optionmenu),
-                                     new_settings.double_click_action);
+                                  new_settings.double_click_action);
 
         reload_settings (); /* must come before below signal connections */
 
@@ -443,16 +451,16 @@ main (int argc, char **argv)
                           G_CALLBACK (gtk_main_quit), NULL);
 
 
-        g_signal_connect (G_OBJECT (focus_mode_checkbutton), "toggled",
+        g_signal_connect (focus_mode_checkbutton, "toggled",
                           G_CALLBACK (mouse_focus_toggled_callback), NULL);
 
-        g_signal_connect (G_OBJECT (autoraise_checkbutton), "toggled",
+        g_signal_connect (autoraise_checkbutton, "toggled",
                           G_CALLBACK (autoraise_toggled_callback), NULL);
 
-        g_signal_connect (G_OBJECT (autoraise_delay_slider), "value_changed",
+        g_signal_connect (autoraise_delay_slider, "value_changed",
                           G_CALLBACK (autoraise_delay_value_changed_callback), NULL);
 
-        g_signal_connect (G_OBJECT (double_click_titlebar_optionmenu), "changed",
+        g_signal_connect (double_click_titlebar_optionmenu, "changed",
                           G_CALLBACK (double_click_titlebar_changed_callback), NULL);
 
         g_signal_connect (G_OBJECT (screen), "window_manager_changed",
@@ -471,7 +479,7 @@ main (int argc, char **argv)
 
         gtk_main ();
 
-	g_object_unref (dialog);
+        g_object_unref (builder);
 
 out:
         return rc;
@@ -487,7 +495,7 @@ fill_radio (GtkRadioButton     *group,
 {
         modifier->radio =
                 gtk_radio_button_new_with_mnemonic_from_widget (group,
-                                                             modifier->name);
+                                                                modifier->name);
         gtk_box_pack_start (GTK_BOX (alt_click_hbox),
                             modifier->radio, FALSE, FALSE, 0);
 
