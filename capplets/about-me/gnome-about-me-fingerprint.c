@@ -332,12 +332,14 @@ enroll_result (GObject *object, const char *result, gboolean done, EnrollData *d
 	char *msg;
 
 	if (g_str_equal (result, "enroll-completed") || g_str_equal (result, "enroll-stage-passed")) {
-		char *name;
+		char *name, *path;
 
 		data->num_stages_done++;
 		name = g_strdup_printf ("image%d", data->num_stages_done);
-		gtk_image_set_from_stock (GTK_IMAGE (WID (name)), GTK_STOCK_YES, GTK_ICON_SIZE_DIALOG);
+		path = g_build_filename (GNOMECC_PIXMAP_DIR, "print_ok.png", NULL);
+		gtk_image_set_from_file (GTK_IMAGE (WID (name)), path);
 		g_free (name);
+		g_free (path);
 	}
 	if (g_str_equal (result, "enroll-completed")) {
 		gtk_label_set_text (GTK_LABEL (WID ("status-label")), _("Done!"));
@@ -375,6 +377,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 		DBusGProxy *p;
 		GError *error = NULL;
 		GladeXML *dialog = data->dialog_page2;
+		char *path;
 		guint i;
 		GValue value = { 0, };
 
@@ -430,6 +433,21 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 			gtk_widget_hide (WID (name));
 			g_free (name);
 		}
+		/* And set the right image */
+		{
+			char *filename;
+
+			filename = g_strdup_printf ("%s.png", data->finger);
+			path = g_build_filename (GNOMECC_PIXMAP_DIR, filename, NULL);
+			g_free (filename);
+		}
+		for (i = 1; i <= data->num_enroll_stages; i++) {
+			char *name;
+			name = g_strdup_printf ("image%d", i);
+			gtk_image_set_from_file (GTK_IMAGE (WID (name)), path);
+			g_free (name);
+		}
+		g_free (path);
 
 		dbus_g_proxy_add_signal(data->device, "EnrollStatus", G_TYPE_STRING, G_TYPE_BOOLEAN, NULL);
 		dbus_g_proxy_connect_signal(data->device, "EnrollStatus", G_CALLBACK(enroll_result), data, NULL);
