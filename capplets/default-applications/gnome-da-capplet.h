@@ -22,7 +22,6 @@
 #define _GNOME_DA_CAPPLET_H_
 
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <gconf/gconf-client.h>
 
 // Set http, https, about, and unknown keys to the chosen web browser.
@@ -73,7 +72,7 @@
 typedef struct _GnomeDACapplet GnomeDACapplet;
 
 struct _GnomeDACapplet {
-    GladeXML *xml;
+    GtkBuilder *builder;
 
     GtkIconTheme *icon_theme;
 

@@ -318,6 +318,6 @@ gnome_da_xml_free (GnomeDACapplet *capplet)
     g_list_free (capplet->visual_ats);
     g_list_free (capplet->mobility_ats);
 
-    g_object_unref (capplet->xml);
+    g_object_unref (capplet->builder);
     g_free (capplet);
 }

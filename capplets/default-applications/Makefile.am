@@ -13,8 +13,8 @@ gnome_default_applications_properties_SOURCES = \
 
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir = $(pkgdatadir)/glade
-dist_glade_DATA = gnome-default-applications-properties.glade
+uidir = $(pkgdatadir)/ui
+dist_ui_DATA = gnome-default-applications-properties.ui
 
 gnome-at-visual: gnome-at-commandline.in
 	cp $< $@
@@ -42,7 +42,7 @@ INCLUDES   = 					\
 	$(GNOMECC_CAPPLETS_CFLAGS)		\
 	$(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"\
-	-DGNOMECC_GLADE_DIR=\""$(gladedir)"\"	\
+	-DGNOMECC_UI_DIR=\""$(uidir)"\"	\
 	-DGNOMECC_APPS_DIR=\""$(xmldatadir)"\"
 
 icons16dir = $(datadir)/icons/hicolor/16x16/apps

@@ -259,11 +259,11 @@ static struct {
 static void
 theme_changed_cb (GtkIconTheme *theme, GnomeDACapplet *capplet)
 {
-    GtkWidget *icon;
+    GObject *icon;
     gint i;
 
     for (i = 0; i < G_N_ELEMENTS (icons); i++) {
-	icon = glade_xml_get_widget (capplet->xml, icons[i].name);
+	icon = gtk_builder_get_object (capplet->builder, icons[i].name);
 	set_icon (GTK_IMAGE (icon), theme, icons[i].icon);
     }
 
@@ -649,19 +649,30 @@ fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
 			-1);
 }
 
+static GtkWidget*
+_gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
+{
+    return GTK_WIDGET (gtk_builder_get_object (builder, name));
+}
+
+
 static void
 show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 {
     GObject *obj;
+    GtkBuilder *builder;
+    guint builder_result;
 
-    if (g_file_test (GNOMECC_GLADE_DIR "/gnome-default-applications-properties.glade", G_FILE_TEST_EXISTS) != FALSE) {
-	capplet->xml = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-default-applications-properties.glade", NULL, NULL);
+    capplet->builder = builder = gtk_builder_new ();
+
+    if (g_file_test (GNOMECC_UI_DIR "/gnome-default-applications-properties.ui", G_FILE_TEST_EXISTS) != FALSE) {
+	builder_result = gtk_builder_add_from_file (builder, GNOMECC_UI_DIR "/gnome-default-applications-properties.ui", NULL);
     }
     else {
-	capplet->xml = glade_xml_new ("./gnome-default-applications-properties.glade", NULL, NULL);
+	builder_result = gtk_builder_add_from_file (builder, "./gnome-default-applications-properties.ui", NULL);
     }
 
-    if (capplet->xml == NULL) {
+    if (builder_result == 0) {
 	GtkWidget *dialog;
 
 	dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
@@ -675,43 +686,43 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 	exit (EXIT_FAILURE);
     }
 
-    capplet->window = glade_xml_get_widget (capplet->xml, "preferred_apps_dialog");
+    capplet->window = _gtk_builder_get_widget (builder,"preferred_apps_dialog");
     g_signal_connect (capplet->window, "response", G_CALLBACK (close_cb), NULL);
 
-    capplet->web_browser_command_entry = glade_xml_get_widget (capplet->xml, "web_browser_command_entry");
-    capplet->web_browser_command_label = glade_xml_get_widget (capplet->xml, "web_browser_command_label");
-    capplet->web_browser_terminal_checkbutton = glade_xml_get_widget (capplet->xml, "web_browser_terminal_checkbutton");
-    capplet->default_radiobutton = glade_xml_get_widget (capplet->xml, "web_browser_default_radiobutton");
-    capplet->new_win_radiobutton = glade_xml_get_widget (capplet->xml, "web_browser_new_win_radiobutton");
-    capplet->new_tab_radiobutton = glade_xml_get_widget (capplet->xml, "web_browser_new_tab_radiobutton");
+    capplet->web_browser_command_entry = _gtk_builder_get_widget (builder, "web_browser_command_entry");
+    capplet->web_browser_command_label = _gtk_builder_get_widget (builder, "web_browser_command_label");
+    capplet->web_browser_terminal_checkbutton = _gtk_builder_get_widget(builder, "web_browser_terminal_checkbutton");
+    capplet->default_radiobutton = _gtk_builder_get_widget (builder, "web_browser_default_radiobutton");
+    capplet->new_win_radiobutton = _gtk_builder_get_widget (builder, "web_browser_new_win_radiobutton");
+    capplet->new_tab_radiobutton = _gtk_builder_get_widget (builder, "web_browser_new_tab_radiobutton");
 
-    capplet->mail_reader_command_entry = glade_xml_get_widget (capplet->xml, "mail_reader_command_entry");
-    capplet->mail_reader_command_label = glade_xml_get_widget (capplet->xml, "mail_reader_command_label");
-    capplet->mail_reader_terminal_checkbutton = glade_xml_get_widget (capplet->xml, "mail_reader_terminal_checkbutton");
+    capplet->mail_reader_command_entry = _gtk_builder_get_widget (builder, "mail_reader_command_entry");
+    capplet->mail_reader_command_label = _gtk_builder_get_widget (builder, "mail_reader_command_label");
+    capplet->mail_reader_terminal_checkbutton = _gtk_builder_get_widget (builder, "mail_reader_terminal_checkbutton");
 
-    capplet->terminal_command_entry = glade_xml_get_widget (capplet->xml, "terminal_command_entry");
-    capplet->terminal_command_label = glade_xml_get_widget (capplet->xml, "terminal_command_label");
-    capplet->terminal_exec_flag_entry = glade_xml_get_widget (capplet->xml, "terminal_exec_flag_entry");
-    capplet->terminal_exec_flag_label = glade_xml_get_widget (capplet->xml, "terminal_exec_flag_label");
+    capplet->terminal_command_entry = _gtk_builder_get_widget (builder, "terminal_command_entry");
+    capplet->terminal_command_label = _gtk_builder_get_widget (builder, "terminal_command_label");
+    capplet->terminal_exec_flag_entry = _gtk_builder_get_widget (builder, "terminal_exec_flag_entry");
+    capplet->terminal_exec_flag_label = _gtk_builder_get_widget (builder, "terminal_exec_flag_label");
 
-    capplet->media_player_command_entry = glade_xml_get_widget (capplet->xml, "media_player_command_entry");
-    capplet->media_player_command_label = glade_xml_get_widget (capplet->xml, "media_player_command_label");
-    capplet->media_player_terminal_checkbutton = glade_xml_get_widget (capplet->xml, "media_player_terminal_checkbutton");
+    capplet->media_player_command_entry = _gtk_builder_get_widget (builder, "media_player_command_entry");
+    capplet->media_player_command_label = _gtk_builder_get_widget (builder, "media_player_command_label");
+    capplet->media_player_terminal_checkbutton = _gtk_builder_get_widget (builder, "media_player_terminal_checkbutton");
 
-    capplet->visual_command_entry = glade_xml_get_widget (capplet->xml, "visual_command_entry");
-    capplet->visual_command_label = glade_xml_get_widget (capplet->xml, "visual_command_label");
-    capplet->visual_startup_checkbutton = glade_xml_get_widget (capplet->xml, "visual_start_checkbutton");
+    capplet->visual_command_entry = _gtk_builder_get_widget (builder, "visual_command_entry");
+    capplet->visual_command_label = _gtk_builder_get_widget (builder, "visual_command_label");
+    capplet->visual_startup_checkbutton = _gtk_builder_get_widget (builder, "visual_start_checkbutton");
 
-    capplet->mobility_command_entry = glade_xml_get_widget (capplet->xml, "mobility_command_entry");
-    capplet->mobility_command_label = glade_xml_get_widget (capplet->xml, "mobility_command_label");
-    capplet->mobility_startup_checkbutton = glade_xml_get_widget (capplet->xml, "mobility_start_checkbutton");
+    capplet->mobility_command_entry = _gtk_builder_get_widget (builder, "mobility_command_entry");
+    capplet->mobility_command_label = _gtk_builder_get_widget (builder, "mobility_command_label");
+    capplet->mobility_startup_checkbutton = _gtk_builder_get_widget (builder, "mobility_start_checkbutton");
 
-    capplet->web_combo_box = glade_xml_get_widget (capplet->xml, "web_browser_combobox");
-    capplet->mail_combo_box = glade_xml_get_widget (capplet->xml, "mail_reader_combobox");
-    capplet->term_combo_box = glade_xml_get_widget (capplet->xml, "terminal_combobox");
-    capplet->media_combo_box = glade_xml_get_widget (capplet->xml, "media_player_combobox");
-    capplet->visual_combo_box = glade_xml_get_widget (capplet->xml, "visual_combobox");
-    capplet->mobility_combo_box = glade_xml_get_widget (capplet->xml, "mobility_combobox");
+    capplet->web_combo_box = _gtk_builder_get_widget (builder, "web_browser_combobox");
+    capplet->mail_combo_box = _gtk_builder_get_widget (builder, "mail_reader_combobox");
+    capplet->term_combo_box = _gtk_builder_get_widget (builder, "terminal_combobox");
+    capplet->media_combo_box = _gtk_builder_get_widget (builder, "media_player_combobox");
+    capplet->visual_combo_box = _gtk_builder_get_widget (builder, "visual_combobox");
+    capplet->mobility_combo_box = _gtk_builder_get_widget (builder, "mobility_combobox");
 
     g_signal_connect (capplet->window, "screen-changed", G_CALLBACK (screen_changed_cb), capplet);
     screen_changed_cb (capplet->window, gdk_screen_get_default (), capplet);
@@ -863,12 +874,13 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 
         page_name = g_strconcat (start_page, "_vbox", NULL);
 
-        w = glade_xml_get_widget (capplet->xml, page_name);
+        w = _gtk_builder_get_widget (builder, page_name);
         if (w != NULL) {
             GtkNotebook *nb;
             gint pindex;
 
-            nb = GTK_NOTEBOOK (glade_xml_get_widget (capplet->xml, "preferred_apps_notebook"));
+            nb = GTK_NOTEBOOK (_gtk_builder_get_widget (builder,
+                                                        "preferred_apps_notebook"));
             pindex = gtk_notebook_page_num (nb, w);
             if (pindex != -1)
                 gtk_notebook_set_current_page (nb, pindex);
@@ -902,8 +914,6 @@ main (int argc, char **argv)
     g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
 
     capplet_init (context, &argc, &argv);
-
-    glade_init ();
 
     capplet = g_new0 (GnomeDACapplet, 1);
     capplet->gconf = gconf_client_get_default ();
