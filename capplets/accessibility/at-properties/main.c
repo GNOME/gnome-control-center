@@ -1,7 +1,6 @@
 #include <config.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
@@ -25,46 +24,44 @@ enum {
 
 static gboolean initial_state;
 
-static GladeXML *
-create_dialog (void)
+static GtkBuilder *
+create_builder (void)
 {
-	GladeXML *dialog;
+	GtkBuilder *builder;
+	GError *error = NULL;
+	static const gchar *uifile = UIDIR "/at-enable-dialog.ui";
 
-	dialog = glade_xml_new (GLADEDIR "/at-enable-dialog.glade", "at_properties_dialog", NULL);
+	builder = gtk_builder_new ();
 
-	if (dialog) {
-		GtkWidget *image;
+	if (gtk_builder_add_from_file (builder, uifile, &error)) {
+		GObject *object;
 		gchar *prog;
 
-		image = gtk_image_new_from_stock (GTK_STOCK_QUIT, GTK_ICON_SIZE_BUTTON);
-		gtk_button_set_image (GTK_BUTTON (WID ("at_close_logout_button")), image);
-
-		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
-		gtk_button_set_image (GTK_BUTTON (WID ("at_pref_button")), image);
-
-		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
-		gtk_button_set_image (GTK_BUTTON (WID ("keyboard_button")), image);
-
-		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
-		gtk_button_set_image (GTK_BUTTON (WID ("mouse_button")), image);
-
-		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
-		gtk_button_set_image (GTK_BUTTON (WID ("login_button")), image);
-
-		gtk_image_set_from_file (GTK_IMAGE (WID ("at_enable_image")),
+		object = gtk_builder_get_object (builder, "at_enable_image");
+		gtk_image_set_from_file (GTK_IMAGE (object),
 					 PIXMAPDIR "/at-startup.png");
 
-		gtk_image_set_from_file (GTK_IMAGE (WID ("at_applications_image")),
+		object = gtk_builder_get_object (builder,
+						 "at_applications_image");
+		gtk_image_set_from_file (GTK_IMAGE (object),
 					 PIXMAPDIR "/at-support.png");
 
 		prog = g_find_program_in_path ("gdmsetup");
-		if (prog == NULL)
-			gtk_widget_hide (WID ("login_button"));
+		if (prog == NULL) {
+			object = gtk_builder_get_object (builder,
+							 "login_button");
+			gtk_widget_hide (GTK_WIDGET (object));
+		}
 
 		g_free (prog);
+	} else {
+		g_warning ("Could not load UI: %s", error->message);
+		g_error_free (error);
+		g_object_unref (builder);
+		builder = NULL;
 	}
 
-	return dialog;
+	return builder;
 }
 
 static void
@@ -168,18 +165,20 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 }
 
 static void
-close_logout_update (GladeXML *dialog)
+close_logout_update (GtkBuilder *builder)
 {
 	GConfClient *client = gconf_client_get_default ();
 	gboolean curr_state = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
+	GObject *btn = gtk_builder_get_object (builder,
+					       "at_close_logout_button");
 
-	gtk_widget_set_sensitive (WID ("at_close_logout_button"), initial_state != curr_state);
+	gtk_widget_set_sensitive (GTK_WIDGET (btn), initial_state != curr_state);
 	g_object_unref (client);
 }
 
 static void
 at_enable_toggled (GtkToggleButton *toggle_button,
-		   GladeXML        *dialog)
+		   GtkBuilder      *builder)
 {
 	GConfClient *client = gconf_client_get_default ();
 	gboolean is_enabled = gtk_toggle_button_get_active (toggle_button);
@@ -192,11 +191,12 @@ at_enable_toggled (GtkToggleButton *toggle_button,
 
 static void
 at_enable_update (GConfClient *client,
-		  GladeXML    *dialog)
+		  GtkBuilder  *builder)
 {
 	gboolean is_enabled = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
+	GObject *btn = gtk_builder_get_object (builder, "at_enable_toggle");
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_enable_toggle")),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (btn),
 				      is_enabled);
 }
 
@@ -211,10 +211,11 @@ at_enable_changed (GConfClient *client,
 }
 
 static void
-setup_dialog (GladeXML *dialog)
+setup_dialog (GtkBuilder *builder)
 {
 	GConfClient *client;
 	GtkWidget *widget;
+	GObject *object;
 	GObject *peditor;
 
 	client = gconf_client_get_default ();
@@ -222,40 +223,41 @@ setup_dialog (GladeXML *dialog)
 	gconf_client_add_dir (client, ACCESSIBILITY_KEY_DIR,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	widget = WID ("at_enable_toggle");
-	g_signal_connect (widget, "toggled",
+	object = gtk_builder_get_object (builder, "at_enable_toggle");
+	g_signal_connect (object, "toggled",
 			  G_CALLBACK (at_enable_toggled),
-			  dialog);
+			  builder);
 
 	peditor = gconf_peditor_new_boolean (NULL, ACCESSIBILITY_KEY,
-					     widget,
+					     GTK_WIDGET (object),
 					     NULL);
 
 	initial_state = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
 
-	at_enable_update (client, dialog);
+	at_enable_update (client, builder);
 
 	gconf_client_notify_add (client, ACCESSIBILITY_KEY_DIR,
 				 at_enable_changed,
-				 dialog, NULL, NULL);
+				 builder, NULL, NULL);
 
-	g_signal_connect (G_OBJECT (WID("at_pref_button")),
-			  "clicked",
+	object = gtk_builder_get_object (builder, "at_pref_button");
+	g_signal_connect (object, "clicked",
 			  G_CALLBACK (cb_at_preferences), NULL);
 
-	g_signal_connect (G_OBJECT (WID("keyboard_button")),
-			  "clicked",
+	object = gtk_builder_get_object (builder, "keyboard_button");
+	g_signal_connect (object, "clicked",
 			  G_CALLBACK (cb_keyboard_preferences), NULL);
 
-	g_signal_connect (G_OBJECT (WID("mouse_button")),
-			  "clicked",
+	object = gtk_builder_get_object (builder, "mouse_button");
+	g_signal_connect (object, "clicked",
 			  G_CALLBACK (cb_mouse_preferences), NULL);
 
-	g_signal_connect (G_OBJECT (WID("login_button")),
-			  "clicked",
+	object = gtk_builder_get_object (builder, "login_button");
+	g_signal_connect (object, "clicked",
 			  G_CALLBACK (cb_login_preferences), NULL);
 
-	widget = WID ("at_properties_dialog");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder,
+						     "at_properties_dialog"));
 	capplet_set_icon (widget, "preferences-desktop-accessibility");
 
 	g_signal_connect (G_OBJECT (widget),
@@ -270,21 +272,21 @@ setup_dialog (GladeXML *dialog)
 int
 main (int argc, char *argv[])
 {
-	GladeXML *dialog;
+	GtkBuilder *builder;
 
 	capplet_init (NULL, &argc, &argv);
 
 	activate_settings_daemon ();
 
-	dialog = create_dialog ();
+	builder = create_builder ();
 
-	if (dialog) {
+	if (builder) {
 
-		setup_dialog (dialog);
+		setup_dialog (builder);
 
 		gtk_main ();
 
-		g_object_unref (dialog);
+		g_object_unref (builder);
 	}
 
 	return 0;

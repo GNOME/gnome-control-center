@@ -16,14 +16,14 @@ pixmap_DATA =					\
 	at-startup.png				\
 	at-support.png
 
-gladedir = $(pkgdatadir)/glade
-glade_DATA = at-enable-dialog.glade
+uidir = $(pkgdatadir)/ui
+ui_DATA = at-enable-dialog.ui
 
 INCLUDES   = $(AT_CAPPLET_CFLAGS)     \
              $(GNOMECC_CAPPLETS_CFLAGS) \
-	     -DGLADEDIR=\""$(gladedir)"\" \
+	     -DUIDIR=\""$(uidir)"\" \
 	     -DPIXMAPDIR=\""$(pixmapdir)"\" \
 	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)
+EXTRA_DIST = $(ui_DATA) $(pixmap_DATA)
