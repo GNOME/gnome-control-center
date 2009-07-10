@@ -13,8 +13,8 @@ gnome_keybinding_properties_SOURCES = 	\
 
 @INTLTOOL_DESKTOP_RULE@
 
-Gladedir   = $(pkgdatadir)/glade
-Glade_DATA = gnome-keybinding-properties.glade
+uidir   = $(pkgdatadir)/ui
+ui_DATA = gnome-keybinding-properties.ui
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = keybinding.desktop.in
@@ -33,12 +33,12 @@ INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\"" \
+	-DGNOMECC_UI_DIR="\"$(uidir)\"" \
 	-DGNOMECC_KEYBINDINGS_DIR="\"$(pkgdatadir)/keybindings\""
 CLEANFILES = \
 	$(GNOMECC_CAPPLETS_CLEANFILES) \
 	$(Desktop_in_files) \
 	$(desktop_DATA) \
 	$(xml_DATA)
-EXTRA_DIST = $(Glade_DATA) $(xml_in_files) gnome-keybindings.pc.in
+EXTRA_DIST = $(ui_DATA) $(xml_in_files) gnome-keybindings.pc.in
 

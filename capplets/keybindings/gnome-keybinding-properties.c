@@ -4,11 +4,11 @@
 
 #include <config.h>
 
+#include <stdlib.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <gdk/gdkx.h>
-#include <glade/glade.h>
 #include <X11/Xatom.h>
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
@@ -82,11 +82,27 @@ static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
 static GtkWidget *custom_shortcut_command_entry = NULL;
 
-static GladeXML *
-create_dialog (void)
+static GtkWidget*
+_gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 {
-  return glade_xml_new (GNOMECC_GLADE_DIR "/gnome-keybinding-properties.glade",
-                        NULL, NULL);
+  return GTK_WIDGET (gtk_builder_get_object (builder, name));
+}
+
+static GtkBuilder *
+create_builder (void)
+{
+  GtkBuilder *builder = gtk_builder_new();
+  GError *error = NULL;
+  static const gchar *uifile = GNOMECC_UI_DIR "/gnome-keybinding-properties.ui";
+
+  if (gtk_builder_add_from_file (builder, uifile, &error) == 0) {
+    g_warning ("Could not load UI: %s", error->message);
+    g_error_free (error);
+    g_object_unref (builder);
+    builder = NULL;
+  }
+
+  return builder;
 }
 
 static char*
@@ -329,12 +345,13 @@ keyentry_sort_func (GtkTreeModel *model,
 }
 
 static void
-clear_old_model (GladeXML *dialog)
+clear_old_model (GtkBuilder *builder)
 {
   GtkWidget *tree_view;
+  GtkWidget *actions_swindow;
   GtkTreeModel *model;
 
-  tree_view = WID ("shortcut_treeview");
+  tree_view = _gtk_builder_get_widget (builder, "shortcut_treeview");
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 
   if (model == NULL)
@@ -393,9 +410,10 @@ clear_old_model (GladeXML *dialog)
       g_object_unref (client);
     }
 
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
+  actions_swindow = _gtk_builder_get_widget (builder, "actions_swindow");
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (actions_swindow),
 				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_widget_set_size_request (WID ("actions_swindow"), -1, -1);
+  gtk_widget_set_size_request (actions_swindow, -1, -1);
 }
 
 typedef struct {
@@ -482,15 +500,19 @@ count_rows_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, g
 }
 
 static void
-ensure_scrollbar (GladeXML *dialog, int i)
+ensure_scrollbar (GtkBuilder *builder, int i)
 {
   if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
     {
       GtkRequisition rectangle;
-      gtk_widget_ensure_style (WID ("shortcut_treeview"));
-      gtk_widget_size_request (WID ("shortcut_treeview"), &rectangle);
-      gtk_widget_set_size_request (WID ("shortcut_treeview"), -1, rectangle.height);
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
+      GObject *actions_swindow = gtk_builder_get_object (builder,
+                                                         "actions_swindow");
+      GtkWidget *treeview = _gtk_builder_get_widget (builder,
+                                                     "shortcut_treeview");
+      gtk_widget_ensure_style (treeview);
+      gtk_widget_size_request (treeview, &rectangle);
+      gtk_widget_set_size_request (treeview, -1, rectangle.height);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (actions_swindow),
 				      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
     }
 }
@@ -530,7 +552,7 @@ find_section (GtkTreeModel *model,
 }
 
 static void
-append_keys_to_tree (GladeXML           *dialog,
+append_keys_to_tree (GtkBuilder         *builder,
 		     const gchar        *title,
 		     const KeyListEntry *keys_list)
 {
@@ -541,7 +563,7 @@ append_keys_to_tree (GladeXML           *dialog,
   gint rows_before;
 
   client = gconf_client_get_default ();
-  model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "shortcut_treeview")));
 
   /* Try to find a section parent iter, if it already exists */
   find_section (model, &iter, title);
@@ -552,7 +574,7 @@ append_keys_to_tree (GladeXML           *dialog,
 
   /* If the header we just added is the MAX_ELEMENTS_BEFORE_SCROLLING th,
    * then we need to scroll now */
-  ensure_scrollbar (dialog, i - 1);
+  ensure_scrollbar (builder, i - 1);
 
   rows_before = i;
   for (j = 0; keys_list[j].name != NULL; j++)
@@ -658,7 +680,7 @@ append_keys_to_tree (GladeXML           *dialog,
       g_free (key_value);
 
       gconf_entry_free (entry);
-      ensure_scrollbar (dialog, i);
+      ensure_scrollbar (builder, i);
 
       ++i;
       gtk_tree_store_append (GTK_TREE_STORE (model), &iter, &parent_iter);
@@ -666,7 +688,7 @@ append_keys_to_tree (GladeXML           *dialog,
       gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
 			  KEYENTRY_COLUMN, key_entry,
 			  -1);
-      gtk_tree_view_expand_all (GTK_TREE_VIEW (WID ("shortcut_treeview")));
+      gtk_tree_view_expand_all (GTK_TREE_VIEW (gtk_builder_get_object (builder, "shortcut_treeview")));
     }
 
   g_object_unref (client);
@@ -676,9 +698,9 @@ append_keys_to_tree (GladeXML           *dialog,
     gtk_tree_store_remove (GTK_TREE_STORE (model), &parent_iter);
 
   if (i == 0)
-      gtk_widget_hide (WID ("shortcuts_vbox"));
+      gtk_widget_hide (_gtk_builder_get_widget (builder, "shortcuts_vbox"));
   else
-      gtk_widget_show (WID ("shortcuts_vbox"));
+      gtk_widget_show (_gtk_builder_get_widget (builder, "shortcuts_vbox"));
 }
 
 static void
@@ -800,7 +822,7 @@ parse_start_tag (GMarkupParseContext *ctx,
 }
 
 static void
-append_keys_to_tree_from_file (GladeXML   *dialog,
+append_keys_to_tree_from_file (GtkBuilder *builder,
 			       const char *filename,
 			       const char *wm_name)
 {
@@ -871,7 +893,7 @@ append_keys_to_tree_from_file (GladeXML   *dialog,
       title = _(keylist->name);
     }
 
-  append_keys_to_tree (dialog, title, keys);
+  append_keys_to_tree (builder, title, keys);
 
   g_free (keylist->name);
   g_free (keylist->package);
@@ -881,7 +903,7 @@ append_keys_to_tree_from_file (GladeXML   *dialog,
 }
 
 static void
-append_keys_to_tree_from_gconf (GladeXML *dialog, const gchar *gconf_path)
+append_keys_to_tree_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
 {
   GConfClient *client;
   GSList *custom_list, *l;
@@ -922,7 +944,7 @@ append_keys_to_tree_from_gconf (GladeXML *dialog, const gchar *gconf_path)
       g_array_append_val (entries, key);
 
       keys = (KeyListEntry *) entries->data;
-      append_keys_to_tree (dialog, _("Custom Shortcuts"), keys);
+      append_keys_to_tree (builder, _("Custom Shortcuts"), keys);
       for (i = 0; i < entries->len; ++i)
         {
           g_free (keys[i].name);
@@ -934,13 +956,13 @@ append_keys_to_tree_from_gconf (GladeXML *dialog, const gchar *gconf_path)
 }
 
 static void
-reload_key_entries (gpointer wm_name, GladeXML *dialog)
+reload_key_entries (gpointer wm_name, GtkBuilder *builder)
 {
   GDir *dir;
   const char *name;
   GList *list, *l;
 
-  clear_old_model (dialog);
+  clear_old_model (builder);
 
   dir = g_dir_open (GNOMECC_KEYBINDINGS_DIR, 0, NULL);
   if (!dir)
@@ -962,7 +984,7 @@ reload_key_entries (gpointer wm_name, GladeXML *dialog)
         gchar *path;
 
 	path = g_build_filename (GNOMECC_KEYBINDINGS_DIR, l->data, NULL);
-        append_keys_to_tree_from_file (dialog, path, wm_name);
+        append_keys_to_tree_from_file (builder, path, wm_name);
 	g_free (l->data);
 	g_free (path);
     }
@@ -973,7 +995,7 @@ reload_key_entries (gpointer wm_name, GladeXML *dialog)
    * in a file. Loading the custom shortcuts last makes
    * such keys not show up in the custom section.
    */
-  append_keys_to_tree_from_gconf (dialog, GCONF_BINDING_DIR);
+  append_keys_to_tree_from_gconf (builder, GCONF_BINDING_DIR);
 }
 
 static void
@@ -1716,13 +1738,14 @@ maybe_block_accels (GtkWidget *widget,
 static void
 cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
 {
-  GladeXML *dialog = data;
+  GtkBuilder *builder = data;
   GtkTreeView *treeview;
   GtkTreeModel *model;
   GtkTreeSelection *selection;
   GtkTreeIter iter;
 
-  treeview = GTK_TREE_VIEW (WID ("shortcut_treeview"));
+  treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
+                                                    "shortcut_treeview"));
   model = gtk_tree_view_get_model (treeview);
 
   if (response_id == GTK_RESPONSE_HELP)
@@ -1744,7 +1767,7 @@ cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
     }
   else
     {
-      clear_old_model (dialog);
+      clear_old_model (builder);
       gtk_main_quit ();
     }
 }
@@ -1770,21 +1793,24 @@ selection_changed (GtkTreeSelection *selection, gpointer data)
 }
 
 static void
-setup_dialog (GladeXML *dialog)
+setup_dialog (GtkBuilder *builder)
 {
   GConfClient *client;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
   GtkWidget *widget;
-  GtkTreeView *treeview = GTK_TREE_VIEW (WID ("shortcut_treeview"));
+  GtkTreeView *treeview;
   gchar *wm_name;
   GtkTreeSelection *selection;
   GSList *allowed_keys;
 
+  treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
+                                                    "shortcut_treeview"));
+
   client = gconf_client_get_default ();
 
   g_signal_connect (treeview, "button_press_event",
-		    G_CALLBACK (start_editing_cb), dialog);
+		    G_CALLBACK (start_editing_cb), builder);
   g_signal_connect (treeview, "row-activated",
 		    G_CALLBACK (start_editing_kb_cb), NULL);
 
@@ -1828,23 +1854,24 @@ setup_dialog (GladeXML *dialog)
   gconf_client_notify_add (client,
 			   "/apps/metacity/general/num_workspaces",
 			   (GConfClientNotifyFunc) key_entry_controlling_key_changed,
-			   dialog, NULL, NULL);
+			   builder, NULL, NULL);
 
   /* set up the dialog */
   wm_name = wm_common_get_current_window_manager();
-  reload_key_entries (wm_name, dialog);
+  reload_key_entries (wm_name, builder);
   g_free (wm_name);
 
-  widget = WID ("gnome-keybinding-dialog");
+  widget = _gtk_builder_get_widget (builder, "gnome-keybinding-dialog");
   capplet_set_icon (widget, "preferences-desktop-keyboard-shortcuts");
   gtk_widget_show (widget);
 
   g_signal_connect (widget, "key_press_event", G_CALLBACK (maybe_block_accels), NULL);
-  g_signal_connect (widget, "response", G_CALLBACK (cb_dialog_response), dialog);
+  g_signal_connect (widget, "response", G_CALLBACK (cb_dialog_response), builder);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
-                    G_CALLBACK (selection_changed), WID ("remove-button"));
+                    G_CALLBACK (selection_changed),
+		    _gtk_builder_get_widget (builder, "remove-button"));
 
   allowed_keys = gconf_client_get_list (client,
                                         GCONF_BINDING_DIR "/allowed_keys",
@@ -1854,15 +1881,19 @@ setup_dialog (GladeXML *dialog)
     {
       g_slist_foreach (allowed_keys, (GFunc)g_free, NULL);
       g_slist_free (allowed_keys);
-      gtk_widget_set_sensitive (WID ("add-button"), FALSE);
+      gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "add-button"),
+                                FALSE);
     }
 
   g_object_unref (client);
 
   /* setup the custom shortcut dialog */
-  custom_shortcut_dialog = WID ("custom-shortcut-dialog");
-  custom_shortcut_name_entry = WID ("custom-shortcut-name-entry");
-  custom_shortcut_command_entry = WID ("custom-shortcut-command-entry");
+  custom_shortcut_dialog = _gtk_builder_get_widget (builder,
+                                                    "custom-shortcut-dialog");
+  custom_shortcut_name_entry = _gtk_builder_get_widget (builder,
+                                                        "custom-shortcut-name-entry");
+  custom_shortcut_command_entry = _gtk_builder_get_widget (builder,
+                                                           "custom-shortcut-command-entry");
   gtk_dialog_set_default_response (GTK_DIALOG (custom_shortcut_dialog),
 				   GTK_RESPONSE_OK);
   gtk_window_set_transient_for (GTK_WINDOW (custom_shortcut_dialog),
@@ -1872,7 +1903,7 @@ setup_dialog (GladeXML *dialog)
 int
 main (int argc, char *argv[])
 {
-  GladeXML *dialog;
+  GtkBuilder *builder;
 
   g_thread_init (NULL);
   gtk_init (&argc, &argv);
@@ -1885,13 +1916,17 @@ main (int argc, char *argv[])
 
   activate_settings_daemon ();
 
-  dialog = create_dialog ();
-  wm_common_register_window_manager_change ((GFunc) reload_key_entries, dialog);
-  setup_dialog (dialog);
+  builder = create_builder ();
+
+  if (!builder) /* Warning was already printed to console */
+    exit (EXIT_FAILURE);
+
+  wm_common_register_window_manager_change ((GFunc) reload_key_entries, builder);
+  setup_dialog (builder);
 
   gtk_main ();
 
-  g_object_unref (dialog);
+  g_object_unref (builder);
   return 0;
 }
 
