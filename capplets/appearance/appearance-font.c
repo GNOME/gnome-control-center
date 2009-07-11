@@ -429,7 +429,7 @@ setup_font_pair (GtkWidget    *radio,
 static void
 metacity_titlebar_load_sensitivity (AppearanceData *data)
 {
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "window_title_font"),
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "window_title_font"),
 			    !gconf_client_get_bool (data->client,
 						    WINDOW_TITLE_USES_SYSTEM_KEY,
 						    NULL));
@@ -820,12 +820,12 @@ cb_show_details (GtkWidget *button,
     GtkWidget *widget;
     EnumGroup *group;
 
-    data->font_details = glade_xml_get_widget (data->xml, "render_details");
+    data->font_details = appearance_capplet_get_widget (data, "render_details");
 
     gtk_window_set_transient_for (GTK_WINDOW (data->font_details),
-				  GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")));
+                                  GTK_WINDOW (appearance_capplet_get_widget (data, "appearance_window")));
 
-    widget = glade_xml_get_widget (data->xml, "dpi_spinner");
+    widget = appearance_capplet_get_widget (data, "dpi_spinner");
 
     /* pick a sensible maximum dpi */
     adjustment = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (widget));
@@ -838,48 +838,46 @@ cb_show_details (GtkWidget *button,
     gconf_client_notify_add (data->client, FONT_DPI_KEY,
 			     dpi_changed, widget, NULL, NULL);
 
-    setup_font_sample (glade_xml_get_widget (data->xml, "antialias_none_sample"),      ANTIALIAS_NONE,      HINT_FULL);
-    setup_font_sample (glade_xml_get_widget (data->xml, "antialias_grayscale_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
-    setup_font_sample (glade_xml_get_widget (data->xml, "antialias_subpixel_sample"),  ANTIALIAS_RGBA,      HINT_FULL);
+    setup_font_sample (appearance_capplet_get_widget (data, "antialias_none_sample"),      ANTIALIAS_NONE,      HINT_FULL);
+    setup_font_sample (appearance_capplet_get_widget (data, "antialias_grayscale_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
+    setup_font_sample (appearance_capplet_get_widget (data, "antialias_subpixel_sample"),  ANTIALIAS_RGBA,      HINT_FULL);
 
     group = enum_group_create (
     	FONT_ANTIALIASING_KEY, antialias_enums, ANTIALIAS_GRAYSCALE,
-	glade_xml_get_widget (data->xml, "antialias_none_radio"),      ANTIALIAS_NONE,
-	glade_xml_get_widget (data->xml, "antialias_grayscale_radio"), ANTIALIAS_GRAYSCALE,
-	glade_xml_get_widget (data->xml, "antialias_subpixel_radio"),  ANTIALIAS_RGBA,
+	appearance_capplet_get_widget (data, "antialias_none_radio"),      ANTIALIAS_NONE,
+	appearance_capplet_get_widget (data, "antialias_grayscale_radio"), ANTIALIAS_GRAYSCALE,
+	appearance_capplet_get_widget (data, "antialias_subpixel_radio"),  ANTIALIAS_RGBA,
 	NULL);
     data->font_groups = g_slist_prepend (data->font_groups, group);
 
-    setup_font_sample (glade_xml_get_widget (data->xml, "hint_none_sample"),   ANTIALIAS_GRAYSCALE, HINT_NONE);
-    setup_font_sample (glade_xml_get_widget (data->xml, "hint_slight_sample"), ANTIALIAS_GRAYSCALE, HINT_SLIGHT);
-    setup_font_sample (glade_xml_get_widget (data->xml, "hint_medium_sample"), ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
-    setup_font_sample (glade_xml_get_widget (data->xml, "hint_full_sample"),   ANTIALIAS_GRAYSCALE, HINT_FULL);
+    setup_font_sample (appearance_capplet_get_widget (data, "hint_none_sample"),   ANTIALIAS_GRAYSCALE, HINT_NONE);
+    setup_font_sample (appearance_capplet_get_widget (data, "hint_slight_sample"), ANTIALIAS_GRAYSCALE, HINT_SLIGHT);
+    setup_font_sample (appearance_capplet_get_widget (data, "hint_medium_sample"), ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
+    setup_font_sample (appearance_capplet_get_widget (data, "hint_full_sample"),   ANTIALIAS_GRAYSCALE, HINT_FULL);
 
-    group = enum_group_create (
-    	FONT_HINTING_KEY, hint_enums, HINT_FULL,
-	glade_xml_get_widget (data->xml, "hint_none_radio"),   HINT_NONE,
-	glade_xml_get_widget (data->xml, "hint_slight_radio"), HINT_SLIGHT,
-	glade_xml_get_widget (data->xml, "hint_medium_radio"), HINT_MEDIUM,
-	glade_xml_get_widget (data->xml, "hint_full_radio"),   HINT_FULL,
-	NULL);
+    group = enum_group_create (FONT_HINTING_KEY, hint_enums, HINT_FULL,
+                               appearance_capplet_get_widget (data, "hint_none_radio"),   HINT_NONE,
+                               appearance_capplet_get_widget (data, "hint_slight_radio"), HINT_SLIGHT,
+                               appearance_capplet_get_widget (data, "hint_medium_radio"), HINT_MEDIUM,
+                               appearance_capplet_get_widget (data, "hint_full_radio"),   HINT_FULL,
+                               NULL);
     data->font_groups = g_slist_prepend (data->font_groups, group);
 
-    gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_rgb_image")),
-			     GNOMECC_PIXMAP_DIR "/subpixel-rgb.png");
-    gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_bgr_image")),
-			     GNOMECC_PIXMAP_DIR "/subpixel-bgr.png");
-    gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_vrgb_image")),
-			     GNOMECC_PIXMAP_DIR "/subpixel-vrgb.png");
-    gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_vbgr_image")),
-			     GNOMECC_PIXMAP_DIR "/subpixel-vbgr.png");
+    gtk_image_set_from_file (GTK_IMAGE (appearance_capplet_get_widget (data, "subpixel_rgb_image")),
+                             GNOMECC_PIXMAP_DIR "/subpixel-rgb.png");
+    gtk_image_set_from_file (GTK_IMAGE (appearance_capplet_get_widget (data, "subpixel_bgr_image")),
+                             GNOMECC_PIXMAP_DIR "/subpixel-bgr.png");
+    gtk_image_set_from_file (GTK_IMAGE (appearance_capplet_get_widget (data, "subpixel_vrgb_image")),
+                             GNOMECC_PIXMAP_DIR "/subpixel-vrgb.png");
+    gtk_image_set_from_file (GTK_IMAGE (appearance_capplet_get_widget (data, "subpixel_vbgr_image")),
+                             GNOMECC_PIXMAP_DIR "/subpixel-vbgr.png");
 
-    group = enum_group_create (
-    	FONT_RGBA_ORDER_KEY, rgba_order_enums, RGBA_RGB,
-	glade_xml_get_widget (data->xml, "subpixel_rgb_radio"),  RGBA_RGB,
-	glade_xml_get_widget (data->xml, "subpixel_bgr_radio"),  RGBA_BGR,
-	glade_xml_get_widget (data->xml, "subpixel_vrgb_radio"), RGBA_VRGB,
-	glade_xml_get_widget (data->xml, "subpixel_vbgr_radio"), RGBA_VBGR,
-	NULL);
+    group = enum_group_create (FONT_RGBA_ORDER_KEY, rgba_order_enums, RGBA_RGB,
+                               appearance_capplet_get_widget (data, "subpixel_rgb_radio"),  RGBA_RGB,
+                               appearance_capplet_get_widget (data, "subpixel_bgr_radio"),  RGBA_BGR,
+                               appearance_capplet_get_widget (data, "subpixel_vrgb_radio"), RGBA_VRGB,
+                               appearance_capplet_get_widget (data, "subpixel_vbgr_radio"), RGBA_VBGR,
+                               NULL);
     data->font_groups = g_slist_prepend (data->font_groups, group);
 
     g_signal_connect (G_OBJECT (data->font_details),
@@ -914,7 +912,7 @@ font_init (AppearanceData *data)
 			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 #endif  /* HAVE_XFT2 */
 
-  widget = glade_xml_get_widget (data->xml, "application_font");
+  widget = appearance_capplet_get_widget (data, "application_font");
   peditor = gconf_peditor_new_font (NULL, GTK_FONT_KEY,
 				    widget,
 				    "conv-from-widget-cb", application_font_to_gconf,
@@ -925,20 +923,20 @@ font_init (AppearanceData *data)
   application_font_changed (widget);
 
   peditor = gconf_peditor_new_font (NULL, DOCUMENT_FONT_KEY,
-				    glade_xml_get_widget (data->xml, "document_font"),
-				    NULL);
+                                    appearance_capplet_get_widget (data, "document_font"),
+                                    NULL);
 
   peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_KEY,
-				    glade_xml_get_widget (data->xml, "desktop_font"),
-				    NULL);
+                                    appearance_capplet_get_widget (data, "desktop_font"),
+                                    NULL);
 
   peditor = gconf_peditor_new_font (NULL, WINDOW_TITLE_FONT_KEY,
-				    glade_xml_get_widget (data->xml, "window_title_font"),
-				    NULL);
+                                    appearance_capplet_get_widget (data, "window_title_font"),
+                                    NULL);
 
   peditor = gconf_peditor_new_font (NULL, MONOSPACE_FONT_KEY,
-				    glade_xml_get_widget (data->xml, "monospace_font"),
-				    NULL);
+                                    appearance_capplet_get_widget (data, "monospace_font"),
+                                    NULL);
 
   gconf_client_notify_add (data->client, WINDOW_TITLE_USES_SYSTEM_KEY,
 			   metacity_changed,
@@ -947,18 +945,18 @@ font_init (AppearanceData *data)
   metacity_titlebar_load_sensitivity (data);
 
 #ifdef HAVE_XFT2
-  setup_font_pair (glade_xml_get_widget (data->xml, "monochrome_radio"),
-		   glade_xml_get_widget (data->xml, "monochrome_sample"),
-		   ANTIALIAS_NONE, HINT_FULL);
-  setup_font_pair (glade_xml_get_widget (data->xml, "best_shapes_radio"),
-		   glade_xml_get_widget (data->xml, "best_shapes_sample"),
-		   ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
-  setup_font_pair (glade_xml_get_widget (data->xml, "best_contrast_radio"),
-		   glade_xml_get_widget (data->xml, "best_contrast_sample"),
-		   ANTIALIAS_GRAYSCALE, HINT_FULL);
-  setup_font_pair (glade_xml_get_widget (data->xml, "subpixel_radio"),
-		   glade_xml_get_widget (data->xml, "subpixel_sample"),
-		   ANTIALIAS_RGBA, HINT_FULL);
+  setup_font_pair (appearance_capplet_get_widget (data, "monochrome_radio"),
+                   appearance_capplet_get_widget (data, "monochrome_sample"),
+                   ANTIALIAS_NONE, HINT_FULL);
+  setup_font_pair (appearance_capplet_get_widget (data, "best_shapes_radio"),
+                   appearance_capplet_get_widget (data, "best_shapes_sample"),
+                   ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
+  setup_font_pair (appearance_capplet_get_widget (data, "best_contrast_radio"),
+                   appearance_capplet_get_widget (data, "best_contrast_sample"),
+                   ANTIALIAS_GRAYSCALE, HINT_FULL);
+  setup_font_pair (appearance_capplet_get_widget (data, "subpixel_radio"),
+                   appearance_capplet_get_widget (data, "subpixel_sample"),
+                   ANTIALIAS_RGBA, HINT_FULL);
 
   font_render_load (data->client);
 
@@ -966,10 +964,10 @@ font_init (AppearanceData *data)
 			   font_render_changed,
 			   data->client, NULL, NULL);
 
-  g_signal_connect (glade_xml_get_widget (data->xml, "details_button"),
-		    "clicked", G_CALLBACK (cb_show_details), data);
+  g_signal_connect (appearance_capplet_get_widget (data, "details_button"),
+                    "clicked", G_CALLBACK (cb_show_details), data);
 #else /* !HAVE_XFT2 */
-  gtk_widget_hide (glade_xml_get_widget (data->xml, "font_render_frame"));
+  gtk_widget_hide (appearance_capplet_get_widget (data, "font_render_frame"));
 #endif /* HAVE_XFT2 */
 }
 

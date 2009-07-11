@@ -247,7 +247,7 @@ update_message_area (AppearanceData *data)
     gtk_widget_show_all (data->style_message_area);
     gtk_widget_set_no_show_all (data->style_message_area, TRUE);
 
-    parent = glade_xml_get_widget (data->xml, "gtk_themes_vbox");
+    parent = appearance_capplet_get_widget (data, "gtk_themes_vbox");
     gtk_box_pack_start (GTK_BOX (parent), data->style_message_area, FALSE, FALSE, 0);
   }
 
@@ -282,7 +282,7 @@ update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *dat
 
   /* now set all the buttons to the correct settings */
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
-    widget = glade_xml_get_widget (data->xml, symbolic_names[i]);
+    widget = appearance_capplet_get_widget (data, symbolic_names[i]);
     gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &colors[i]);
   }
 }
@@ -297,7 +297,7 @@ update_color_buttons_from_settings (GtkSettings *settings,
   g_object_get (settings, "gtk-color-scheme", &setting, NULL);
 
   if (scheme == NULL || strcmp (scheme, "") == 0)
-    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
+    gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "color_scheme_defaults_button"), FALSE);
 
   g_free (scheme);
   update_color_buttons_from_string (setting, data);
@@ -333,7 +333,7 @@ check_color_schemes_enabled (GtkSettings *settings,
     gboolean found;
 
     found = (g_slist_find_custom (symbolic_colors, symbolic_names[i], (GCompareFunc) strcmp) != NULL);
-    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, symbolic_names[i]), found);
+    gtk_widget_set_sensitive (appearance_capplet_get_widget (data, symbolic_names[i]), found);
 
     enable_colors |= found;
   }
@@ -341,13 +341,13 @@ check_color_schemes_enabled (GtkSettings *settings,
   g_slist_foreach (symbolic_colors, (GFunc) g_free, NULL);
   g_slist_free (symbolic_colors);
 
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_table"), enable_colors);
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), enable_colors);
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "color_scheme_table"), enable_colors);
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "color_scheme_defaults_button"), enable_colors);
 
   if (enable_colors)
-    gtk_widget_hide (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
+    gtk_widget_hide (appearance_capplet_get_widget (data, "color_scheme_message_hbox"));
   else
-    gtk_widget_show (glade_xml_get_widget (data->xml, "color_scheme_message_hbox"));
+    gtk_widget_show (appearance_capplet_get_widget (data, "color_scheme_message_hbox"));
 }
 
 static void
@@ -361,7 +361,7 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   gint i;
 
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
-    widget = glade_xml_get_widget (data->xml, symbolic_names[i]);
+    widget = appearance_capplet_get_widget (data, symbolic_names[i]);
     gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &color);
 
     colstr = gdk_color_to_string (&color);
@@ -377,7 +377,7 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
   if (!gnome_theme_color_scheme_equal (old_scheme, scheme->str)) {
     gconf_client_set_string (data->client, COLOR_SCHEME_KEY, scheme->str, NULL);
 
-    gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), TRUE);
+    gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "color_scheme_defaults_button"), TRUE);
   }
   g_free (old_scheme);
   g_string_free (scheme, TRUE);
@@ -387,7 +387,7 @@ static void
 color_scheme_defaults_button_clicked_cb (GtkWidget *button, AppearanceData *data)
 {
   gconf_client_unset (data->client, COLOR_SCHEME_KEY, NULL);
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), FALSE);
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "color_scheme_defaults_button"), FALSE);
 }
 
 static void
@@ -431,7 +431,7 @@ gtk_theme_changed (GConfPropertyEditor *peditor,
     update_color_buttons_from_settings (settings, data);
   }
 
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "gtk_themes_delete"),
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "gtk_themes_delete"),
 			    theme_is_writable (theme));
 }
 
@@ -447,7 +447,7 @@ window_theme_changed (GConfPropertyEditor *peditor,
   if (value && (name = gconf_value_get_string (value)))
     theme = gnome_theme_info_find (name);
 
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "window_themes_delete"),
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "window_themes_delete"),
 			    theme_is_writable (theme));
 }
 
@@ -463,7 +463,7 @@ icon_theme_changed (GConfPropertyEditor *peditor,
   if (value && (name = gconf_value_get_string (value)))
     theme = gnome_theme_icon_info_find (name);
 
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "icon_themes_delete"),
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "icon_themes_delete"),
 			    theme_is_writable (theme));
 }
 
@@ -508,10 +508,10 @@ update_cursor_size_scale (GnomeThemeCursorInfo *theme,
   gboolean sensitive;
   gint size, gconf_size;
 
-  cursor_size_scale = glade_xml_get_widget (data->xml, "cursor_size_scale");
-  cursor_size_label = glade_xml_get_widget (data->xml, "cursor_size_label");
-  cursor_size_small_label = glade_xml_get_widget (data->xml, "cursor_size_small_label");
-  cursor_size_large_label = glade_xml_get_widget (data->xml, "cursor_size_large_label");
+  cursor_size_scale = appearance_capplet_get_widget (data, "cursor_size_scale");
+  cursor_size_label = appearance_capplet_get_widget (data, "cursor_size_label");
+  cursor_size_small_label = appearance_capplet_get_widget (data, "cursor_size_small_label");
+  cursor_size_large_label = appearance_capplet_get_widget (data, "cursor_size_large_label");
 
   sensitive = theme && theme->sizes->len > 1;
   gtk_widget_set_sensitive (cursor_size_scale, sensitive);
@@ -585,7 +585,7 @@ cursor_theme_changed (GConfPropertyEditor *peditor,
 
   update_cursor_size_scale (theme, data);
 
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "cursor_themes_delete"),
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "cursor_themes_delete"),
 			    theme_is_writable (theme));
 
 }
@@ -593,7 +593,7 @@ cursor_theme_changed (GConfPropertyEditor *peditor,
 static void
 generic_theme_delete (const gchar *tv_name, ThemeType type, AppearanceData *data)
 {
-  GtkTreeView *treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  GtkTreeView *treeview = GTK_TREE_VIEW (appearance_capplet_get_widget (data, tv_name));
   GtkTreeSelection *selection = gtk_tree_view_get_selection (treeview);
   GtkTreeModel *model;
   GtkTreeIter iter;
@@ -661,7 +661,7 @@ add_to_treeview (const gchar *tv_name,
   GtkTreeView *treeview;
   GtkListStore *model;
 
-  treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  treeview = GTK_TREE_VIEW (appearance_capplet_get_widget (data, tv_name));
   model = GTK_LIST_STORE (
           gtk_tree_model_sort_get_model (
           GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (treeview))));
@@ -682,7 +682,7 @@ remove_from_treeview (const gchar *tv_name,
   GtkListStore *model;
   GtkTreeIter iter;
 
-  treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  treeview = GTK_TREE_VIEW (appearance_capplet_get_widget (data, tv_name));
   model = GTK_LIST_STORE (
           gtk_tree_model_sort_get_model (
           GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (treeview))));
@@ -701,7 +701,7 @@ update_in_treeview (const gchar *tv_name,
   GtkListStore *model;
   GtkTreeIter iter;
 
-  treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  treeview = GTK_TREE_VIEW (appearance_capplet_get_widget (data, tv_name));
   model = GTK_LIST_STORE (
           gtk_tree_model_sort_get_model (
           GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (treeview))));
@@ -727,7 +727,7 @@ update_thumbnail_in_treeview (const gchar *tv_name,
   if (theme_thumbnail == NULL)
     return;
 
-  treeview = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, tv_name));
+  treeview = GTK_TREE_VIEW (appearance_capplet_get_widget (data, tv_name));
   model = GTK_LIST_STORE (
           gtk_tree_model_sort_get_model (
           GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (treeview))));
@@ -997,19 +997,19 @@ style_init (AppearanceData *data)
   data->style_message_label = NULL;
   data->style_install_button = NULL;
 
-  w = glade_xml_get_widget (data->xml, "theme_details");
+  w = appearance_capplet_get_widget (data, "theme_details");
   g_signal_connect (w, "response", (GCallback) style_response_cb, NULL);
   g_signal_connect (w, "delete_event", (GCallback) gtk_true, NULL);
 
-  prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), THEME_TYPE_WINDOW, (GCallback) window_theme_changed);
-  prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), THEME_TYPE_GTK, (GCallback) gtk_theme_changed);
-  prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), THEME_TYPE_ICON, (GCallback) icon_theme_changed);
-  prepare_list (data, glade_xml_get_widget (data->xml, "cursor_themes_list"), THEME_TYPE_CURSOR, (GCallback) cursor_theme_changed);
+  prepare_list (data, appearance_capplet_get_widget (data, "window_themes_list"), THEME_TYPE_WINDOW, (GCallback) window_theme_changed);
+  prepare_list (data, appearance_capplet_get_widget (data, "gtk_themes_list"), THEME_TYPE_GTK, (GCallback) gtk_theme_changed);
+  prepare_list (data, appearance_capplet_get_widget (data, "icon_themes_list"), THEME_TYPE_ICON, (GCallback) icon_theme_changed);
+  prepare_list (data, appearance_capplet_get_widget (data, "cursor_themes_list"), THEME_TYPE_CURSOR, (GCallback) cursor_theme_changed);
 
-  w = glade_xml_get_widget (data->xml, "color_scheme_message_hbox");
+  w = appearance_capplet_get_widget (data, "color_scheme_message_hbox");
   gtk_widget_set_no_show_all (w, TRUE);
 
-  w = glade_xml_get_widget (data->xml, "color_scheme_defaults_button");
+  w = appearance_capplet_get_widget (data, "color_scheme_defaults_button");
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock (GTK_STOCK_REVERT_TO_SAVED,
                                                   GTK_ICON_SIZE_BUTTON));
@@ -1018,38 +1018,38 @@ style_init (AppearanceData *data)
   g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
 
 #ifdef HAVE_XCURSOR
-  w = glade_xml_get_widget (data->xml, "cursor_size_scale");
+  w = appearance_capplet_get_widget (data, "cursor_size_scale");
   g_signal_connect (w, "value-changed", (GCallback) cursor_size_scale_value_changed_cb, data);
 
-  w = glade_xml_get_widget (data->xml, "cursor_size_small_label");
+  w = appearance_capplet_get_widget (data, "cursor_size_small_label");
   label = g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w)));
   gtk_label_set_markup (GTK_LABEL (w), label);
   g_free (label);
 
-  w = glade_xml_get_widget (data->xml, "cursor_size_large_label");
+  w = appearance_capplet_get_widget (data, "cursor_size_large_label");
   label = g_strdup_printf ("<small><i>%s</i></small>", gtk_label_get_text (GTK_LABEL (w)));
   gtk_label_set_markup (GTK_LABEL (w), label);
   g_free (label);
 #else
-  w = glade_xml_get_widget (data->xml, "cursor_size_hbox");
+  w = appearance_capplet_get_widget (data, "cursor_size_hbox");
   gtk_widget_set_no_show_all (w, TRUE);
   gtk_widget_hide (w);
-  gtk_widget_show (glade_xml_get_widget (data->xml, "cursor_message_hbox"));
-  gtk_box_set_spacing (GTK_BOX (glade_xml_get_widget (data->xml, "cursor_vbox")), 12);
+  gtk_widget_show (appearance_capplet_get_widget (data, "cursor_message_hbox"));
+  gtk_box_set_spacing (GTK_BOX (appearance_capplet_get_widget (data, "cursor_vbox")), 12);
 #endif
 
   /* connect signals */
   /* color buttons */
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i)
-    g_signal_connect (glade_xml_get_widget (data->xml, symbolic_names[i]), "color-set", (GCallback) color_button_clicked_cb, data);
+    g_signal_connect (appearance_capplet_get_widget (data, symbolic_names[i]), "color-set", (GCallback) color_button_clicked_cb, data);
 
   /* revert button */
-  g_signal_connect (glade_xml_get_widget (data->xml, "color_scheme_defaults_button"), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
+  g_signal_connect (appearance_capplet_get_widget (data, "color_scheme_defaults_button"), "clicked", (GCallback) color_scheme_defaults_button_clicked_cb, data);
   /* delete buttons */
-  g_signal_connect (glade_xml_get_widget (data->xml, "gtk_themes_delete"), "clicked", (GCallback) gtk_theme_delete_cb, data);
-  g_signal_connect (glade_xml_get_widget (data->xml, "window_themes_delete"), "clicked", (GCallback) window_theme_delete_cb, data);
-  g_signal_connect (glade_xml_get_widget (data->xml, "icon_themes_delete"), "clicked", (GCallback) icon_theme_delete_cb, data);
-  g_signal_connect (glade_xml_get_widget (data->xml, "cursor_themes_delete"), "clicked", (GCallback) cursor_theme_delete_cb, data);
+  g_signal_connect (appearance_capplet_get_widget (data, "gtk_themes_delete"), "clicked", (GCallback) gtk_theme_delete_cb, data);
+  g_signal_connect (appearance_capplet_get_widget (data, "window_themes_delete"), "clicked", (GCallback) window_theme_delete_cb, data);
+  g_signal_connect (appearance_capplet_get_widget (data, "icon_themes_delete"), "clicked", (GCallback) icon_theme_delete_cb, data);
+  g_signal_connect (appearance_capplet_get_widget (data, "cursor_themes_delete"), "clicked", (GCallback) cursor_theme_delete_cb, data);
 
   update_message_area (data);
   gnome_theme_info_register_theme_change ((ThemeChangedCallback) changed_on_disk_cb, data);

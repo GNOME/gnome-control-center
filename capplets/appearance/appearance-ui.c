@@ -35,9 +35,9 @@ static GConfEnumStringPair toolbar_style_enums[] = {
 static void
 show_handlebar (AppearanceData *data, gboolean show)
 {
-  GtkWidget *handlebox = glade_xml_get_widget (data->xml, "toolbar_handlebox");
-  GtkWidget *toolbar = glade_xml_get_widget (data->xml, "toolbar_toolbar");
-  GtkWidget *align = glade_xml_get_widget (data->xml, "toolbar_align");
+  GtkWidget *handlebox = appearance_capplet_get_widget (data, "toolbar_handlebox");
+  GtkWidget *toolbar = appearance_capplet_get_widget (data, "toolbar_toolbar");
+  GtkWidget *align = appearance_capplet_get_widget (data, "toolbar_align");
 
   g_object_ref (handlebox);
   g_object_ref (toolbar);
@@ -70,7 +70,7 @@ set_toolbar_style (AppearanceData *data, const char *value)
   if (!gconf_string_to_enum (toolbar_style_enums, value, &enum_val))
 	  enum_val = 0;
 
-  gtk_toolbar_set_style (GTK_TOOLBAR (glade_xml_get_widget (data->xml, "toolbar_toolbar")),
+  gtk_toolbar_set_style (GTK_TOOLBAR (appearance_capplet_get_widget (data, "toolbar_toolbar")),
 			 gtk_toolbar_styles[enum_val]);
 }
 
@@ -92,7 +92,7 @@ set_have_icons (AppearanceData *data, gboolean value)
   const char **name;
 
   for (name = menu_item_names; *name != NULL; name++) {
-    GtkImageMenuItem *item = GTK_IMAGE_MENU_ITEM (glade_xml_get_widget (data->xml, *name));
+    GtkImageMenuItem *item = GTK_IMAGE_MENU_ITEM (appearance_capplet_get_widget (data, *name));
     GtkWidget *image;
 
     if (value) {
@@ -193,11 +193,11 @@ ui_init (AppearanceData *data)
 
   peditor = gconf_peditor_new_boolean
     (NULL, "/desktop/gnome/interface/can_change_accels",
-     glade_xml_get_widget (data->xml, "menu_accel_toggle"), NULL);
+     appearance_capplet_get_widget (data, "menu_accel_toggle"), NULL);
 
   peditor = gconf_peditor_new_boolean
     (NULL, "/desktop/gnome/interface/menus_have_icons",
-     glade_xml_get_widget (data->xml, "menu_icons_toggle"), NULL);
+     appearance_capplet_get_widget (data, "menu_icons_toggle"), NULL);
   g_signal_connect (peditor, "value_changed",
 		    (GCallback) menus_have_icons_cb, data);
 
@@ -208,14 +208,14 @@ ui_init (AppearanceData *data)
 
   peditor = gconf_peditor_new_combo_box
     (NULL, "/desktop/gnome/interface/toolbar_style",
-     glade_xml_get_widget (data->xml, "toolbar_style_select"),
+     appearance_capplet_get_widget (data, "toolbar_style_select"),
      "conv-to-widget-cb", toolbar_to_widget,
      "conv-from-widget-cb", toolbar_from_widget,
      NULL);
   g_signal_connect (peditor, "value_changed",
 		    (GCallback) toolbar_style_cb, data);
 
-  g_signal_connect (glade_xml_get_widget (data->xml, "toolbar_handlebox"),
+  g_signal_connect (appearance_capplet_get_widget (data, "toolbar_handlebox"),
 		    "button_press_event",
 		    (GCallback) button_press_block_cb, NULL);
 

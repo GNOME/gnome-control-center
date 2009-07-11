@@ -361,7 +361,7 @@ static void
 theme_set_custom_from_theme (const GnomeThemeMetaInfo *info, AppearanceData *data)
 {
   GnomeThemeMetaInfo *custom = data->theme_custom;
-  GtkIconView *icon_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
+  GtkIconView *icon_view = GTK_ICON_VIEW (appearance_capplet_get_widget (data, "theme_list"));
   GtkTreeModel *model;
   GtkTreeIter iter;
   GtkTreePath *path;
@@ -448,7 +448,7 @@ theme_message_area_response_cb (GtkWidget *w,
   gchar *tmpfont;
   gchar *engine_path;
 
-  theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
+  theme = theme_get_selected (GTK_ICON_VIEW (appearance_capplet_get_widget (data, "theme_list")), data);
   if (!theme)
     return;
 
@@ -597,7 +597,7 @@ theme_message_area_update (AppearanceData *data)
   gchar *font;
   GError *error = NULL;
 
-  theme = theme_get_selected (GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list")), data);
+  theme = theme_get_selected (GTK_ICON_VIEW (appearance_capplet_get_widget (data, "theme_list")), data);
 
   if (!theme) {
     if (data->theme_message_area != NULL)
@@ -703,7 +703,7 @@ theme_message_area_update (AppearanceData *data)
     gtk_box_pack_start (GTK_BOX (hbox), data->theme_message_label, TRUE, TRUE, 0);
     gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (data->theme_message_area), hbox);
 
-    parent = glade_xml_get_widget (data->xml, "theme_list_vbox");
+    parent = appearance_capplet_get_widget (data, "theme_list_vbox");
     gtk_box_pack_start (GTK_BOX (parent), data->theme_message_area, FALSE, FALSE, 0);
   }
 
@@ -802,9 +802,9 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
     g_list_free (selection);
   }
 
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_delete"),
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "theme_delete"),
 			    theme_is_writable (theme));
-  gtk_widget_set_sensitive (glade_xml_get_widget (data->xml, "theme_save"), is_custom);
+  gtk_widget_set_sensitive (appearance_capplet_get_widget (data, "theme_save"), is_custom);
 }
 
 static void
@@ -812,8 +812,8 @@ theme_custom_cb (GtkWidget *button, AppearanceData *data)
 {
   GtkWidget *w, *parent;
 
-  w = glade_xml_get_widget (data->xml, "theme_details");
-  parent = glade_xml_get_widget (data->xml, "appearance_window");
+  w = appearance_capplet_get_widget (data, "theme_details");
+  parent = appearance_capplet_get_widget (data, "appearance_window");
   gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (parent));
   gtk_widget_show_all (w);
 }
@@ -828,13 +828,13 @@ static void
 theme_install_cb (GtkWidget *button, AppearanceData *data)
 {
   gnome_theme_installer_run (
-      GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")), NULL);
+      GTK_WINDOW (appearance_capplet_get_widget (data, "appearance_window")), NULL);
 }
 
 static void
 theme_delete_cb (GtkWidget *button, AppearanceData *data)
 {
-  GtkIconView *icon_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
+  GtkIconView *icon_view = GTK_ICON_VIEW (appearance_capplet_get_widget (data, "theme_list"));
   GList *selected = gtk_icon_view_get_selected_items (icon_view);
 
   if (selected) {
@@ -880,7 +880,7 @@ theme_details_changed_cb (AppearanceData *data)
   gconf_theme = theme_load_from_gconf (data->client);
 
   /* check if it's our currently selected theme */
-  icon_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
+  icon_view = GTK_ICON_VIEW (appearance_capplet_get_widget (data, "theme_list"));
   selected = theme_get_selected (icon_view, data);
 
   if (!selected || !(done = theme_is_equal (selected, gconf_theme))) {
@@ -991,7 +991,7 @@ theme_drag_data_received_cb (GtkWidget *widget,
     GFile *f = g_file_new_for_uri (uris[0]);
 
     gnome_theme_install (f,
-        GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")));
+        GTK_WINDOW (appearance_capplet_get_widget (data, "appearance_window")));
     g_object_unref (f);
   }
 
@@ -1076,7 +1076,7 @@ themes_init (AppearanceData *data)
   g_list_foreach (theme_list, (GFunc) theme_thumbnail_generate, data);
   g_list_free (theme_list);
 
-  icon_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "theme_list"));
+  icon_view = GTK_ICON_VIEW (appearance_capplet_get_widget (data, "theme_list"));
 
   renderer = cell_renderer_wallpaper_new ();
   g_object_set (renderer, "xpad", 5, "ypad", 5,
@@ -1103,25 +1103,25 @@ themes_init (AppearanceData *data)
   g_signal_connect (icon_view, "selection-changed", (GCallback) theme_selection_changed_cb, data);
   g_signal_connect_after (icon_view, "realize", (GCallback) theme_select_name, meta_theme->name);
 
-  w = glade_xml_get_widget (data->xml, "theme_install");
+  w = appearance_capplet_get_widget (data, "theme_install");
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON));
   g_signal_connect (w, "clicked", (GCallback) theme_install_cb, data);
 
-  w = glade_xml_get_widget (data->xml, "theme_save");
+  w = appearance_capplet_get_widget (data, "theme_save");
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock (GTK_STOCK_SAVE_AS, GTK_ICON_SIZE_BUTTON));
   g_signal_connect (w, "clicked", (GCallback) theme_save_cb, data);
 
-  w = glade_xml_get_widget (data->xml, "theme_custom");
+  w = appearance_capplet_get_widget (data, "theme_custom");
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock (GTK_STOCK_EDIT, GTK_ICON_SIZE_BUTTON));
   g_signal_connect (w, "clicked", (GCallback) theme_custom_cb, data);
 
-  del_button = glade_xml_get_widget (data->xml, "theme_delete");
+  del_button = appearance_capplet_get_widget (data, "theme_delete");
   g_signal_connect (del_button, "clicked", (GCallback) theme_delete_cb, data);
 
-  w = glade_xml_get_widget (data->xml, "theme_vbox");
+  w = appearance_capplet_get_widget (data, "theme_vbox");
   gtk_drag_dest_set (w, GTK_DEST_DEFAULT_ALL,
 		     drop_types, G_N_ELEMENTS (drop_types),
 		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
@@ -1151,15 +1151,15 @@ themes_init (AppearanceData *data)
 
   /* monitor individual font choice buttons, so
      "revert font" option (if any) can be cleared */
-  w = glade_xml_get_widget (data->xml, "application_font");
+  w = appearance_capplet_get_widget (data, "application_font");
   g_signal_connect (w, "font_set", (GCallback) custom_font_cb, data);
-  w = glade_xml_get_widget (data->xml, "document_font");
+  w = appearance_capplet_get_widget (data, "document_font");
   g_signal_connect (w, "font_set", (GCallback) custom_font_cb, data);
-  w = glade_xml_get_widget (data->xml, "desktop_font");
+  w = appearance_capplet_get_widget (data, "desktop_font");
   g_signal_connect (w, "font_set", (GCallback) custom_font_cb, data);
-  w = glade_xml_get_widget (data->xml, "window_title_font");
+  w = appearance_capplet_get_widget (data, "window_title_font");
   g_signal_connect (w, "font_set", (GCallback) custom_font_cb, data);
-  w = glade_xml_get_widget (data->xml, "monospace_font");
+  w = appearance_capplet_get_widget (data, "monospace_font");
   g_signal_connect (w, "font_set", (GCallback) custom_font_cb, data);
 }
 

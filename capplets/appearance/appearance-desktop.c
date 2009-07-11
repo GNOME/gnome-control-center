@@ -211,10 +211,12 @@ wp_add_images (AppearanceData *data,
                GSList *images)
 {
   GdkWindow *window;
+  GtkWidget *w;
   GdkCursor *cursor;
   GnomeWPItem *item;
 
-  window = glade_xml_get_widget (data->xml, "appearance_window")->window;
+  w = appearance_capplet_get_widget (data, "appearance_window");
+  window = gtk_widget_get_window (w);
 
   item = NULL;
   cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
@@ -627,7 +629,7 @@ wp_create_filechooser (AppearanceData *data)
 
   data->wp_filesel = GTK_FILE_CHOOSER (
   		     gtk_file_chooser_dialog_new_with_backend (_("Add Wallpaper"),
-                     GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")),
+                     GTK_WINDOW (appearance_capplet_get_widget (data, "appearance_window")),
                      GTK_FILE_CHOOSER_ACTION_OPEN,
                      "gtk+",
                      GTK_STOCK_CANCEL,
@@ -713,11 +715,13 @@ wp_drag_received (GtkWidget *widget,
     uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
     if (uris != NULL)
     {
+      GtkWidget *w;
       GdkWindow *window;
       GdkCursor *cursor;
       gchar **uri;
 
-      window = glade_xml_get_widget (data->xml, "appearance_window")->window;
+      w = appearance_capplet_get_widget (data, "appearance_window");
+      window = gtk_widget_get_window (w);
 
       cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
              GDK_WATCH);
@@ -1038,7 +1042,7 @@ desktop_init (AppearanceData *data,
                                                  G_TYPE_STRING,
                                                  G_TYPE_STRING));
 
-  data->wp_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "wp_view"));
+  data->wp_view = GTK_ICON_VIEW (appearance_capplet_get_widget (data, "wp_view"));
   gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
 
   g_signal_connect_after (data->wp_view, "realize",
@@ -1071,34 +1075,34 @@ desktop_init (AppearanceData *data,
   g_signal_connect (data->wp_view, "drag-data-get",
 		    (GCallback) wp_drag_get_data, data);
 
-  data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
+  data->wp_style_menu = appearance_capplet_get_widget (data, "wp_style_menu");
 
   g_signal_connect (data->wp_style_menu, "changed",
                     (GCallback) wp_scale_type_changed, data);
 
-  data->wp_color_menu = glade_xml_get_widget (data->xml, "wp_color_menu");
+  data->wp_color_menu = appearance_capplet_get_widget (data, "wp_color_menu");
 
   g_signal_connect (data->wp_color_menu, "changed",
                     (GCallback) wp_shade_type_changed, data);
 
-  data->wp_scpicker = glade_xml_get_widget (data->xml, "wp_scpicker");
+  data->wp_scpicker = appearance_capplet_get_widget (data, "wp_scpicker");
 
   g_signal_connect (data->wp_scpicker, "color-set",
                     (GCallback) wp_scolor_changed, data);
 
-  data->wp_pcpicker = glade_xml_get_widget (data->xml, "wp_pcpicker");
+  data->wp_pcpicker = appearance_capplet_get_widget (data, "wp_pcpicker");
 
   g_signal_connect (data->wp_pcpicker, "color-set",
                     (GCallback) wp_scolor_changed, data);
 
-  add_button = glade_xml_get_widget (data->xml, "wp_add_button");
+  add_button = appearance_capplet_get_widget (data, "wp_add_button");
   gtk_button_set_image (GTK_BUTTON (add_button),
                         gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON));
 
   g_signal_connect (add_button, "clicked",
                     (GCallback) wp_file_open_dialog, data);
 
-  data->wp_rem_button = glade_xml_get_widget (data->xml, "wp_rem_button");
+  data->wp_rem_button = appearance_capplet_get_widget (data, "wp_rem_button");
 
   g_signal_connect (data->wp_rem_button, "clicked",
                     (GCallback) wp_remove_wallpaper, data);

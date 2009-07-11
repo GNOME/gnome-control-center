@@ -1,6 +1,6 @@
 
-gladedir = $(pkgdatadir)/glade
-dist_glade_DATA = appearance.glade
+gtkbuilderdir = $(pkgdatadir)/gtkbuilder
+dist_gtkbuilder_DATA = appearance.ui
 
 pixmapdir = $(pkgdatadir)/pixmaps
 dist_pixmap_DATA = \

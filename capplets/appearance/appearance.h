@@ -22,15 +22,15 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 
 #include "gnome-theme-info.h"
 
-typedef struct {
+typedef struct
+{
   GConfClient *client;
-  GladeXML *xml;
+  GtkBuilder  *ui;
   GnomeDesktopThumbnailFactory *thumb_factory;
 
   /* desktop */
@@ -78,3 +78,5 @@ typedef struct {
   GtkWidget *style_message_label;
   GtkWidget *style_install_button;
 } AppearanceData;
+
+#define appearance_capplet_get_widget(x, y) (GtkWidget *) gtk_builder_get_object (x->ui, y)

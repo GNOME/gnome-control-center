@@ -34,8 +34,9 @@ static AppearanceData *
 init_appearance_data (int *argc, char ***argv, GOptionContext *context)
 {
   AppearanceData *data = NULL;
-  gchar *gladefile;
-  GladeXML *ui;
+  gchar *uifile;
+  GtkBuilder *ui;
+  GError *err = NULL;
 
   g_thread_init (NULL);
   theme_thumbnail_factory_init (*argc, *argv);
@@ -43,16 +44,24 @@ init_appearance_data (int *argc, char ***argv, GOptionContext *context)
   activate_settings_daemon ();
 
   /* set up the data */
-  gladefile = g_build_filename (GNOMECC_GLADE_DIR, "appearance.glade", NULL);
-  ui = glade_xml_new (gladefile, NULL, NULL);
-  g_free (gladefile);
+  uifile = g_build_filename (GNOMECC_GTKBUILDER_DIR, "appearance.ui",
+                             NULL);
+  ui = gtk_builder_new();
+  gtk_builder_add_from_file (ui, uifile, &err);
+  g_free (uifile);
 
-  if (ui) {
-    data = g_new (AppearanceData, 1);
-    data->client = gconf_client_get_default ();
-    data->xml = ui;
-    data->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
-  }
+  if (err)
+    {
+      g_warning (_("Could not load user interface file: %s"), err->message);
+      g_error_free (err);
+    }
+  else
+    {
+      data = g_new (AppearanceData, 1);
+      data->client = gconf_client_get_default ();
+      data->ui = ui;
+      data->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+    }
 
   return data;
 }
@@ -74,14 +83,14 @@ main_window_response (GtkWidget *widget,
 
     g_object_unref (data->thumb_factory);
     g_object_unref (data->client);
-    g_object_unref (data->xml);
+    g_object_unref (data->ui);
   }
   else if (response_id == GTK_RESPONSE_HELP)
   {
       GtkNotebook *nb;
       gint pindex;
 
-      nb = GTK_NOTEBOOK (glade_xml_get_widget (data->xml, "main_notebook"));
+      nb = GTK_NOTEBOOK (appearance_capplet_get_widget (data, "main_notebook"));
       pindex = gtk_notebook_get_current_page (nb);
 
       switch (pindex)
@@ -165,7 +174,7 @@ main (int argc, char **argv)
   ui_init (data);
 
   /* prepare the main window */
-  w = glade_xml_get_widget (data->xml, "appearance_window");
+  w = appearance_capplet_get_widget (data, "appearance_window");
   capplet_set_icon (w, "preferences-desktop-theme");
   gtk_widget_show_all (w);
 
@@ -182,12 +191,12 @@ main (int argc, char **argv)
     page_name = g_strconcat (start_page, "_vbox", NULL);
     g_free (start_page);
 
-    w = glade_xml_get_widget (data->xml, page_name);
+    w = appearance_capplet_get_widget (data, page_name);
     if (w != NULL) {
       GtkNotebook *nb;
       gint pindex;
 
-      nb = GTK_NOTEBOOK (glade_xml_get_widget (data->xml, "main_notebook"));
+      nb = GTK_NOTEBOOK (appearance_capplet_get_widget (data, "main_notebook"));
       pindex = gtk_notebook_page_num (nb, w);
       if (pindex != -1)
         gtk_notebook_set_current_page (nb, pindex);

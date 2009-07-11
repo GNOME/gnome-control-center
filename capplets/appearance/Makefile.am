@@ -37,7 +37,7 @@ gnome_appearance_properties_SOURCES = \
 	caption-cellrenderer.c \
 	caption-cellrenderer.h
 
-gnome_appearance_properties_CFLAGS = -DGNOME_DESKTOP_USE_UNSTABLE_API
+AM_CFLAGS = -DGNOME_DESKTOP_USE_UNSTABLE_API
 
 gnome_appearance_properties_LDADD = \
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la \
@@ -47,7 +47,7 @@ gnome_appearance_properties_LDADD = \
 	$(METACITY_LIBS)
 gnome_appearance_properties_LDFLAGS = -export-dynamic
 
-gladedir = $(pkgdatadir)/glade
+gtkbuilderdir = $(pkgdatadir)/gtkbuilder
 pixmapdir = $(pkgdatadir)/pixmaps
 wallpaperdir = $(datadir)/gnome-background-properties
 
@@ -57,7 +57,7 @@ INCLUDES = \
 	$(FONT_CAPPLET_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	-DGNOMECC_GLADE_DIR="\"$(gladedir)\"" \
+	-DGNOMECC_GTKBUILDER_DIR="\"$(gtkbuilderdir)\"" \
 	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \
 	-DWALLPAPER_DATADIR="\"$(wallpaperdir)\""
 

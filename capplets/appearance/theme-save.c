@@ -303,10 +303,10 @@ save_dialog_response (GtkWidget      *save_dialog,
     gboolean save_background;
     GError *error = NULL;
 
-    entry = glade_xml_get_widget (data->xml, "save_dialog_entry");
+    entry = appearance_capplet_get_widget (data, "save_dialog_entry");
     theme_name = escape_string_and_dup (gtk_entry_get_text (GTK_ENTRY (entry)));
 
-    text_view = glade_xml_get_widget (data->xml, "save_dialog_textview");
+    text_view = appearance_capplet_get_widget (data, "save_dialog_textview");
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
     gtk_text_buffer_get_start_iter (buffer, &start_iter);
     gtk_text_buffer_get_end_iter (buffer, &end_iter);
@@ -315,7 +315,7 @@ save_dialog_response (GtkWidget      *save_dialog,
     g_free (buffer_text);
     theme_info = (GnomeThemeMetaInfo *) g_object_get_data (G_OBJECT (save_dialog), "meta-theme-info");
     save_background = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
-		      glade_xml_get_widget (data->xml, "save_background_checkbutton")));
+		      appearance_capplet_get_widget (data, "save_background_checkbutton")));
 
     if (save_theme_to_disk (theme_info, theme_name, theme_description, save_background, &error)) {
       /* remove the custom theme */
@@ -335,13 +335,15 @@ save_dialog_response (GtkWidget      *save_dialog,
 
 static void
 entry_text_changed (GtkEditable *editable,
-		    GladeXML    *dialog)
+                    AppearanceData  *data)
 {
   const gchar *text;
+  GtkWidget *button;
 
   text = gtk_entry_get_text (GTK_ENTRY (editable));
-  gtk_widget_set_sensitive (glade_xml_get_widget (dialog, "save_dialog_save_button"),
-			    text != NULL && text[0] != '\000');
+  button = appearance_capplet_get_widget (data, "save_dialog_save_button");
+
+  gtk_widget_set_sensitive (button, text != NULL && text[0] != '\000');
 }
 
 void
@@ -352,28 +354,28 @@ theme_save_dialog_run (GnomeThemeMetaInfo *theme_info,
   GtkWidget *text_view;
   GtkTextBuffer *text_buffer;
 
-  entry = glade_xml_get_widget (data->xml, "save_dialog_entry");
-  text_view = glade_xml_get_widget (data->xml, "save_dialog_textview");
+  entry = appearance_capplet_get_widget (data, "save_dialog_entry");
+  text_view = appearance_capplet_get_widget (data, "save_dialog_textview");
 
   if (data->theme_save_dialog == NULL) {
-    data->theme_save_dialog = glade_xml_get_widget (data->xml, "theme_save_dialog");
+    data->theme_save_dialog = appearance_capplet_get_widget (data, "theme_save_dialog");
 
     g_signal_connect (data->theme_save_dialog, "response", (GCallback) save_dialog_response, data);
     g_signal_connect (data->theme_save_dialog, "delete-event", (GCallback) gtk_true, NULL);
-    g_signal_connect (entry, "changed", (GCallback) entry_text_changed, data->xml);
+    g_signal_connect (entry, "changed", (GCallback) entry_text_changed, data);
 
     error_quark = g_quark_from_string ("gnome-theme-save");
     gtk_widget_set_size_request (text_view, 300, 100);
   }
 
   gtk_entry_set_text (GTK_ENTRY (entry), "");
-  entry_text_changed (GTK_EDITABLE (entry), data->xml);
+  entry_text_changed (GTK_EDITABLE (entry), data);
   gtk_widget_grab_focus (entry);
 
   text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, "", 0);
   g_object_set_data (G_OBJECT (data->theme_save_dialog), "meta-theme-info", theme_info);
   gtk_window_set_transient_for (GTK_WINDOW (data->theme_save_dialog),
-				GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")));
+                                GTK_WINDOW (appearance_capplet_get_widget (data, "appearance_window")));
   gtk_widget_show (data->theme_save_dialog);
 }
