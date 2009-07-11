@@ -24,7 +24,6 @@
 #include "gnome-wp-info.h"
 #include "gnome-wp-item.h"
 #include "gnome-wp-xml.h"
-#include "wp-cellrenderer.h"
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <string.h>
@@ -1050,7 +1049,7 @@ desktop_init (AppearanceData *data,
 
   gtk_cell_layout_clear (GTK_CELL_LAYOUT (data->wp_view));
 
-  cr = cell_renderer_wallpaper_new ();
+  cr = gtk_cell_renderer_pixbuf_new ();
   g_object_set (cr, "xpad", 5, "ypad", 5, NULL);
 
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (data->wp_view), cr, TRUE);

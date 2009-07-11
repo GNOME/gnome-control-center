@@ -31,11 +31,7 @@ gnome_appearance_properties_SOURCES = \
 	theme-save.c \
 	theme-save.h \
 	theme-util.c \
-	theme-util.h \
-	wp-cellrenderer.c \
-	wp-cellrenderer.h \
-	caption-cellrenderer.c \
-	caption-cellrenderer.h
+	theme-util.h
 
 AM_CFLAGS = -DGNOME_DESKTOP_USE_UNSTABLE_API
 
