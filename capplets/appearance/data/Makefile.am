@@ -1,5 +1,5 @@
 
-gtkbuilderdir = $(pkgdatadir)/gtkbuilder
+gtkbuilderdir = $(pkgdatadir)/ui
 dist_gtkbuilder_DATA = appearance.ui
 
 pixmapdir = $(pkgdatadir)/pixmaps

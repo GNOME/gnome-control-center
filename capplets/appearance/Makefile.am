@@ -43,7 +43,7 @@ gnome_appearance_properties_LDADD = \
 	$(METACITY_LIBS)
 gnome_appearance_properties_LDFLAGS = -export-dynamic
 
-gtkbuilderdir = $(pkgdatadir)/gtkbuilder
+gtkbuilderdir = $(pkgdatadir)/ui
 pixmapdir = $(pkgdatadir)/pixmaps
 wallpaperdir = $(datadir)/gnome-background-properties
 
