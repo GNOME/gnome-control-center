@@ -46,7 +46,7 @@ init_appearance_data (int *argc, char ***argv, GOptionContext *context)
   /* set up the data */
   uifile = g_build_filename (GNOMECC_GTKBUILDER_DIR, "appearance.ui",
                              NULL);
-  ui = gtk_builder_new();
+  ui = gtk_builder_new ();
   gtk_builder_add_from_file (ui, uifile, &err);
   g_free (uifile);
 
@@ -54,6 +54,7 @@ init_appearance_data (int *argc, char ***argv, GOptionContext *context)
     {
       g_warning (_("Could not load user interface file: %s"), err->message);
       g_error_free (err);
+      g_object_unref (ui);
     }
   else
     {
