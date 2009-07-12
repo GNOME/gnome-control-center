@@ -21,7 +21,7 @@
 #ifndef __NLD_SEARCH_ENTRY_H__
 #define __NLD_SEARCH_ENTRY_H__
 
-#include <gtk/gtkentry.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
