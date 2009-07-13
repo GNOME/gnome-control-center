@@ -22,9 +22,7 @@
 #define __SHELL_WINDOW_H__
 
 #include <glib.h>
-#include <gtk/gtkwindow.h>
-#include <gtk/gtkbox.h>
-#include <gtk/gtkframe.h>
+#include <gtk/gtk.h>
 #include <libgnome/gnome-desktop-item.h>
 #include "app-shell.h"
 

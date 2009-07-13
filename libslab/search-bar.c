@@ -24,8 +24,7 @@
 #include "nld-marshal.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkalignment.h>
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 
 typedef struct
 {

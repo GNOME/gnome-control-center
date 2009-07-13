@@ -22,7 +22,7 @@
 #define __SLAB_SECTION_H__
 
 #include <glib.h>
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

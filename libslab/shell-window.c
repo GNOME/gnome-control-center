@@ -20,12 +20,7 @@
 
 #include "shell-window.h"
 
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkalignment.h>
-#include <gtk/gtkbin.h>
-#include <gtk/gtkframe.h>
-#include <gtk/gtklayout.h>
-#include <gtk/gtkscrolledwindow.h>
+#include <gtk/gtk.h>
 
 #include "app-resizer.h"
 
