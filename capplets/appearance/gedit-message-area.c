@@ -25,7 +25,7 @@
  * list of people on the gedit Team.
  * See the ChangeLog files for a list of changes.
  *
- * $Id: gedit-message-area.c 5080 2006-08-09 15:17:37Z pborelli $
+ * $Id$
  */
 
 /* TODO: Style properties */
@@ -152,55 +152,22 @@ paint_message_area (GtkWidget      *widget,
 			    NULL,
 			    widget,
 			    "tooltip",
-			    widget->allocation.x,
-			    widget->allocation.y,
-			    widget->allocation.width,
-			    widget->allocation.height);
+			    widget->allocation.x + 1,
+			    widget->allocation.y + 1,
+			    widget->allocation.width - 2,
+			    widget->allocation.height - 2);
 
 	return FALSE;
-}
-
-static void
-style_set (GtkWidget *widget,
-	   GtkStyle  *prev_style)
-{
-	GtkTooltips *tooltips;
-	GtkStyle *style;
-
-	GeditMessageArea *message_area = GEDIT_MESSAGE_AREA (widget);
-
-	if (message_area->priv->changing_style)
-		return;
-
-	tooltips = gtk_tooltips_new ();
-	g_object_ref_sink (tooltips);
-
-	gtk_tooltips_force_window (tooltips);
-
-  if (GTK_IS_WIDGET (tooltips->tip_window)) {
-		gtk_widget_ensure_style (tooltips->tip_window);
-		style = gtk_widget_get_style (tooltips->tip_window);
-
-  	message_area->priv->changing_style = TRUE;
-  	gtk_widget_set_style (GTK_WIDGET (widget), style);
-  	message_area->priv->changing_style = FALSE;
-	}
-
-	g_object_unref (tooltips);
 }
 
 static void
 gedit_message_area_class_init (GeditMessageAreaClass *klass)
 {
 	GObjectClass *object_class;
-	GtkWidgetClass *widget_class;
 	GtkBindingSet *binding_set;
 
 	object_class = G_OBJECT_CLASS (klass);
-	widget_class = GTK_WIDGET_CLASS (klass);
 	object_class->finalize = gedit_message_area_finalize;
-
-	widget_class->style_set = style_set;
 
 	klass->close = gedit_message_area_close;
 
@@ -226,6 +193,32 @@ gedit_message_area_class_init (GeditMessageAreaClass *klass)
 	binding_set = gtk_binding_set_by_class (klass);
 
 	gtk_binding_entry_add_signal (binding_set, GDK_Escape, 0, "close", 0);
+}
+
+static void
+style_set (GtkWidget        *widget,
+	   GtkStyle         *prev_style,
+	   GeditMessageArea *message_area)
+{
+	GtkWidget *window;
+	GtkStyle *style;
+
+	if (message_area->priv->changing_style)
+		return;
+
+	/* This is a hack needed to use the tooltip background color */
+	window = gtk_window_new (GTK_WINDOW_POPUP);
+	gtk_widget_set_name (window, "gtk-tooltip");
+	gtk_widget_ensure_style (window);
+	style = gtk_widget_get_style (window);
+
+	message_area->priv->changing_style = TRUE;
+	gtk_widget_set_style (GTK_WIDGET (message_area), style);
+	message_area->priv->changing_style = FALSE;
+
+	gtk_widget_destroy (window);
+
+	gtk_widget_queue_draw (GTK_WIDGET (message_area));
 }
 
 static void
@@ -255,9 +248,18 @@ gedit_message_area_init (GeditMessageArea *message_area)
 	gtk_widget_set_app_paintable (GTK_WIDGET (message_area), TRUE);
 
 	g_signal_connect (message_area,
-			  "expose_event",
+			  "expose-event",
 			  G_CALLBACK (paint_message_area),
 			  NULL);
+
+	/* Note that we connect to style-set on one of the internal
+	 * widgets, not on the message area itself, since gtk does
+	 * not deliver any further style-set signals for a widget on
+	 * which the style has been forced with gtk_widget_set_style() */
+	g_signal_connect (message_area->priv->main_hbox,
+			  "style-set",
+			  G_CALLBACK (style_set),
+			  message_area);
 }
 
 static gint
@@ -333,6 +335,13 @@ gedit_message_area_add_action_widget (GeditMessageArea *message_area,
 				    0);
 }
 
+/**
+ * gedit_message_area_set_contents:
+ * @message_area: a #GeditMessageArea
+ * @contents: widget you want to add to the contents area
+ *
+ * Adds the @contents widget to the contents area of #GeditMessageArea.
+ */
 void
 gedit_message_area_set_contents	(GeditMessageArea *message_area,
 				 GtkWidget        *contents)
@@ -348,6 +357,19 @@ gedit_message_area_set_contents	(GeditMessageArea *message_area,
 			    0);
 }
 
+/**
+ * gedit_message_area_add_button:
+ * @message_area: a #GeditMessageArea
+ * @button_text: text of button, or stock ID
+ * @response_id: response ID for the button
+ * 
+ * Adds a button with the given text (or a stock button, if button_text is a stock ID)
+ * and sets things up so that clicking the button will emit the "response" signal
+ * with the given response_id. The button is appended to the end of the message area's
+ * action area. The button widget is returned, but usually you don't need it.
+ *
+ * Returns: the button widget that was added
+ */
 GtkWidget*
 gedit_message_area_add_button (GeditMessageArea *message_area,
 			       const gchar      *button_text,
@@ -401,6 +423,16 @@ add_buttons_valist (GeditMessageArea *message_area,
 	}
 }
 
+/**
+ * gedit_message_area_add_buttons:
+ * @message_area: a #GeditMessageArea
+ * @first_button_text: button text or stock ID
+ * @...: response ID for first button, then more text-response_id pairs
+ *
+ * Adds more buttons, same as calling gedit_message_area_add_button() repeatedly.
+ * The variable argument list should be NULL-terminated as with
+ * gedit_message_area_new_with_buttons(). Each button must have both text and response ID.
+ */
 void
 gedit_message_area_add_buttons (GeditMessageArea *message_area,
 				const gchar      *first_button_text,
@@ -417,12 +449,33 @@ gedit_message_area_add_buttons (GeditMessageArea *message_area,
 	va_end (args);
 }
 
+/**
+ * gedit_message_area_new:
+ * 
+ * Creates a new #GeditMessageArea object.
+ * 
+ * Returns: a new #GeditMessageArea object
+ */
 GtkWidget *
 gedit_message_area_new (void)
 {
 	return g_object_new (GEDIT_TYPE_MESSAGE_AREA, NULL);
 }
 
+/**
+ * gedit_message_area_new_with_buttons:
+ * @first_button_text: stock ID or text to go in first button, or NULL
+ * @...: response ID for first button, then additional buttons, ending with NULL
+ * 
+ * Creates a new #GeditMessageArea with buttons. Button text/response ID pairs 
+ * should be listed, with a NULL pointer ending the list. Button text can be either
+ * a stock ID such as GTK_STOCK_OK, or some arbitrary text. A response ID can be any
+ * positive number, or one of the values in the GtkResponseType enumeration. If 
+ * the user clicks one of these dialog buttons, GeditMessageArea will emit the "response"
+ * signal with the corresponding response ID.
+ *
+ * Returns: a new #GeditMessageArea
+ */
 GtkWidget *
 gedit_message_area_new_with_buttons (const gchar *first_button_text,
                                      ...)
@@ -443,6 +496,16 @@ gedit_message_area_new_with_buttons (const gchar *first_button_text,
 	return GTK_WIDGET (message_area);
 }
 
+/**
+ * gedit_message_area_set_response_sensitive:
+ * @message_area: a #GeditMessageArea
+ * @response_id: a response ID
+ * @setting: TRUE for sensitive
+ *
+ * Calls gtk_widget_set_sensitive (widget, setting) for each widget in the dialog's
+ * action area with the given response_id. A convenient way to sensitize/desensitize
+ * dialog buttons.
+ */
 void
 gedit_message_area_set_response_sensitive (GeditMessageArea *message_area,
 					   gint              response_id,
@@ -470,6 +533,15 @@ gedit_message_area_set_response_sensitive (GeditMessageArea *message_area,
 	g_list_free (children);
 }
 
+/**
+ * gedit_message_area_set_default_response:
+ * @message_area: a #GeditMessageArea
+ * @response_id: a response ID
+ *
+ * Sets the last widget in the message area's action area with the given response_id
+ * as the default widget for the dialog. Pressing "Enter" normally activates the
+ * default widget.
+ */
 void
 gedit_message_area_set_default_response (GeditMessageArea *message_area,
 					 gint              response_id)
@@ -496,6 +568,13 @@ gedit_message_area_set_default_response (GeditMessageArea *message_area,
 	g_list_free (children);
 }
 
+/**
+ * gedit_message_area_set_default_response:
+ * @message_area: a #GeditMessageArea
+ * @response_id: a response ID
+ *
+ * Emits the 'response' signal with the given @response_id.
+ */
 void
 gedit_message_area_response (GeditMessageArea *message_area,
 			     gint              response_id)
@@ -508,6 +587,15 @@ gedit_message_area_response (GeditMessageArea *message_area,
 		       response_id);
 }
 
+/**
+ * gedit_message_area_add_stock_button_with_text:
+ * @message_area: a #GeditMessageArea
+ * @text: the text to visualize in the button
+ * @stock_id: the stock ID of the button
+ * @response_id: a response ID
+ *
+ * Same as gedit_message_area_add_button() but with a specific text.
+ */
 GtkWidget *
 gedit_message_area_add_stock_button_with_text (GeditMessageArea *message_area,
 				    	       const gchar      *text,
