@@ -18,6 +18,8 @@
  * Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#undef GTK_DISABLE_DEPRECATED
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

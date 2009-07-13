@@ -20,7 +20,7 @@
 
 #include "double-click-detector.h"
 
-#include <gtk/gtksettings.h>
+#include <gtk/gtk.h>
 
 #include "libslab-utils.h"
 
