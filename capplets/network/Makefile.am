@@ -8,8 +8,8 @@ gnome_network_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir = $(pkgdatadir)/glade
-dist_glade_DATA = gnome-network-properties.glade
+uidir = $(pkgdatadir)/ui
+dist_ui_DATA = gnome-network-properties.ui
 
 icons16dir = $(datadir)/icons/hicolor/16x16/apps
 dist_icons16_DATA = icons/16x16/gnome-network-properties.png
@@ -31,7 +31,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
+	-DGNOMECC_UI_DIR="\"$(uidir)\""
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 uninstall-hook: update-icon-cache

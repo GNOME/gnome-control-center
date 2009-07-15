@@ -24,9 +24,9 @@
 #  include <config.h>
 #endif
 
+#include <stdlib.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <glib/gi18n.h>
 
 #include "capplet-util.h"
@@ -77,6 +77,8 @@ enum {
 #define LOCATION_DIR "/apps/control-center/network"
 #define CURRENT_LOCATION "/apps/control-center/network/current_location"
 
+#define GNOMECC_GNP_UI_FILE (GNOMECC_UI_DIR "/gnome-network-properties.ui")
+
 static GtkWidget *details_dialog = NULL;
 static GSList *ignore_hosts = NULL;
 static GtkTreeModel *model = NULL;
@@ -125,19 +127,27 @@ config_treeview(GtkTreeView *tree, GtkTreeModel *model)
 	return GTK_WIDGET(tree);
 }
 
+static GtkWidget*
+_gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
+{
+	return GTK_WIDGET (gtk_builder_get_object (builder, name));
+}
+
+
 static void
 cb_add_url (GtkButton *button, gpointer data)
 {
-	GladeXML *dialog = (GladeXML *) data;
+	GtkBuilder *builder = GTK_BUILDER (data);
 	gchar *new_url = NULL;
 	GConfClient *client;
 
-	new_url = g_strdup(gtk_entry_get_text(GTK_ENTRY(WID("entry_url"))));
+	new_url = g_strdup (gtk_entry_get_text (GTK_ENTRY (gtk_builder_get_object (builder, "entry_url"))));
 	if (strlen (new_url) == 0)
 		return;
 	ignore_hosts = g_slist_append(ignore_hosts, new_url);
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
-	gtk_entry_set_text(GTK_ENTRY(WID("entry_url")), "");
+	gtk_entry_set_text(GTK_ENTRY (gtk_builder_get_object (builder,
+							     "entry_url")), "");
 
 	client = gconf_client_get_default ();
 	gconf_client_set_list (client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
@@ -147,12 +157,12 @@ cb_add_url (GtkButton *button, gpointer data)
 static void
 cb_remove_url (GtkButton *button, gpointer data)
 {
-	GladeXML *dialog = (GladeXML *) data;
+	GtkBuilder *builder = GTK_BUILDER (data);
 	GtkTreeSelection *selection;
 	GtkTreeIter       iter;
 	GConfClient *client;
 
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(WID("treeview_ignore_host")));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (gtk_builder_get_object (builder, "treeview_ignore_host")));
 	if (gtk_tree_selection_get_selected(selection, &model, &iter))
 	{
 		gchar *url;
@@ -221,7 +231,9 @@ static void
 cb_http_details_button_clicked (GtkWidget *button,
 			        GtkWidget *parent)
 {
-	GladeXML  *dialog;
+	GtkBuilder *builder;
+	gchar *builder_widgets[] = { "details_dialog", NULL };
+	GError *error = NULL;
 	GtkWidget *widget;
 	GConfPropertyEditor *peditor;
 
@@ -231,28 +243,38 @@ cb_http_details_button_clicked (GtkWidget *button,
 		return;
 	}
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-properties.glade",
-				"details_dialog", NULL);
+	builder = gtk_builder_new ();
+	if (gtk_builder_add_objects_from_file (builder, GNOMECC_GNP_UI_FILE,
+					       builder_widgets, &error) == 0) {
+		g_warning ("Could not load details dialog: %s", error->message);
+		g_error_free (error);
+		g_object_unref (builder);
+		return;
+	}
 
-	details_dialog = widget = WID ("details_dialog");
+	details_dialog = widget = _gtk_builder_get_widget (builder,
+							   "details_dialog");
 
 	gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (parent));
 
-	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("use_auth_checkbutton"))->child), TRUE);
+	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (gtk_builder_get_object (builder, "use_auth_checkbutton"))->child), TRUE);
 
-	g_signal_connect (G_OBJECT (WID ("use_auth_checkbutton")),
+	g_signal_connect (gtk_builder_get_object (builder, "use_auth_checkbutton"),
 			  "toggled",
 			  G_CALLBACK (cb_use_auth_toggled),
-			  WID ("auth_table"));
+			  _gtk_builder_get_widget (builder, "auth_table"));
 
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_boolean (
-			NULL, HTTP_USE_AUTH_KEY, WID ("use_auth_checkbutton"),
+			NULL, HTTP_USE_AUTH_KEY,
+			_gtk_builder_get_widget (builder, "use_auth_checkbutton"),
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, HTTP_AUTH_USER_KEY, WID ("username_entry"),
+			NULL, HTTP_AUTH_USER_KEY,
+			_gtk_builder_get_widget (builder, "username_entry"),
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, HTTP_AUTH_PASSWD_KEY, WID ("password_entry"),
+			NULL, HTTP_AUTH_PASSWD_KEY,
+			_gtk_builder_get_widget (builder, "password_entry"),
 			NULL));
 
 	g_signal_connect (widget, "response",
@@ -583,17 +605,17 @@ location_combo_separator (GtkTreeModel *model,
 
 static void
 update_locations (GConfClient *client,
-		  GladeXML *dialog);
+		  GtkBuilder *builder);
 
 static void
 cb_location_changed (GtkWidget *location,
-		     GladeXML *dialog);
+		     GtkBuilder *builder);
 
 static void
 cb_current_location (GConfClient *client,
 		     guint cnxn_id,
 		     GConfEntry *entry,
-		     GladeXML *dialog)
+		     GtkBuilder *builder)
 {
 	GConfValue *value;
 	const gchar *newval;
@@ -608,20 +630,20 @@ cb_current_location (GConfClient *client,
 
 	/* prevent the current settings from being saved by blocking
 	 * the signal handler */
-	g_signal_handlers_block_by_func (WID ("location_combobox"),
-	                                 cb_location_changed, dialog);
-	update_locations (client, dialog);
-	g_signal_handlers_unblock_by_func (WID ("location_combobox"),
-	                                   cb_location_changed, dialog);
+	g_signal_handlers_block_by_func (gtk_builder_get_object (builder, "location_combobox"),
+	                                 cb_location_changed, builder);
+	update_locations (client, builder);
+	g_signal_handlers_unblock_by_func (gtk_builder_get_object (builder, "location_combobox"),
+	                                   cb_location_changed, builder);
 }
 
 static void
 update_locations (GConfClient *client,
-		  GladeXML *dialog)
+		  GtkBuilder *builder)
 {
 	int i, select;
 	gchar *current;
-	GtkComboBox *location = GTK_COMBO_BOX (WID ("location_combobox"));
+	GtkComboBox *location = GTK_COMBO_BOX (gtk_builder_get_object (builder, "location_combobox"));
 	GSList *list = gconf_client_all_dirs (client, LOCATION_DIR, NULL);
 	GtkTreeIter titer;
 	GtkListStore *store;
@@ -665,7 +687,9 @@ update_locations (GConfClient *client,
 				    COL_STYLE, PANGO_STYLE_NORMAL, -1);
 		select = i++;
 	}
-	gtk_widget_set_sensitive (WID ("delete_button"), i > 1);
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
+							   "delete_button"),
+				  i > 1);
 
 	gtk_list_store_append (store, &titer);
 	gtk_list_store_set (store, &titer,
@@ -685,7 +709,7 @@ update_locations (GConfClient *client,
 }
 
 static void
-cb_location_new_text_changed (GtkEntry *entry, GladeXML *dialog)
+cb_location_new_text_changed (GtkEntry *entry, GtkBuilder *builder)
 {
 	gboolean exists;
 	gchar *current, *esc, *key;
@@ -712,17 +736,24 @@ cb_location_new_text_changed (GtkEntry *entry, GladeXML *dialog)
 	g_object_unref (client);
 
 	if (exists)
-		gtk_widget_show (WID ("error_label"));
+		gtk_widget_show (_gtk_builder_get_widget (builder,
+							  "error_label"));
 	else
-		gtk_widget_hide (WID ("error_label"));
+		gtk_widget_hide (_gtk_builder_get_widget (builder,
+							  "error_label"));
 
-	gtk_widget_set_sensitive (WID ("new_location"), !exists);
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
+							   "new_location"),
+				  !exists);
 }
 
 static void
-location_new (GladeXML *capplet, GtkWidget *parent)
+location_new (GtkBuilder *capplet_builder, GtkWidget *parent)
 {
-	GladeXML *dialog;
+	GtkBuilder *builder;
+	GError *error = NULL;
+	gchar *builder_widgets[] = { "location_new_dialog",
+				     "new_location_btn_img", NULL };
 	GtkWidget *askdialog;
 	const gchar *name;
 	int response;
@@ -730,20 +761,25 @@ location_new (GladeXML *capplet, GtkWidget *parent)
 
 	client = gconf_client_get_default ();
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-properties.glade",
-				"location_new_dialog", NULL);
+	builder = gtk_builder_new ();
+	if (gtk_builder_add_objects_from_file (builder, GNOMECC_GNP_UI_FILE,
+					       builder_widgets, &error) == 0) {
+		g_warning ("Could not load location dialog: %s",
+			   error->message);
+		g_error_free (error);
+		g_object_unref (builder);
+		return;
+	}
 
-	gtk_button_set_image (GTK_BUTTON (WID ("new_location")),
-			      gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON));
-	askdialog = WID ("location_new_dialog");
+	askdialog =  _gtk_builder_get_widget (builder, "location_new_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (askdialog), GTK_WINDOW (parent));
 	g_signal_connect (askdialog, "response",
 			  G_CALLBACK (gtk_widget_hide), NULL);
-	g_signal_connect (WID ("text"), "changed",
-			  G_CALLBACK (cb_location_new_text_changed), dialog);
+	g_signal_connect (gtk_builder_get_object (builder, "text"), "changed",
+			  G_CALLBACK (cb_location_new_text_changed), builder);
 	response = gtk_dialog_run (GTK_DIALOG (askdialog));
-	name = gtk_entry_get_text (GTK_ENTRY (WID ("text")));
-	g_object_unref (dialog);
+	name = gtk_entry_get_text (GTK_ENTRY (gtk_builder_get_object (builder, "text")));
+	g_object_unref (builder);
 
 	if (response == GTK_RESPONSE_OK && name[0] != '\0')
 	{
@@ -771,7 +807,7 @@ location_new (GladeXML *capplet, GtkWidget *parent)
 			g_free (key);
 
 			gconf_client_set_string (client, CURRENT_LOCATION, name, NULL);
-			update_locations (client, capplet);
+			update_locations (client, capplet_builder);
 		}
 		else
 		{
@@ -798,7 +834,7 @@ location_new (GladeXML *capplet, GtkWidget *parent)
 
 static void
 cb_location_changed (GtkWidget *location,
-		     GladeXML *dialog)
+		     GtkBuilder *builder)
 {
 	gchar *current;
 	gchar *name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (location));
@@ -815,7 +851,7 @@ cb_location_changed (GtkWidget *location,
 	{
 		if (strcmp (name, _("New Location...")) == 0)
 		{
-			location_new (dialog, WID ("network_dialog"));
+			location_new (builder, _gtk_builder_get_widget (builder, "network_dialog"));
 		}
 		else
 		{
@@ -850,19 +886,20 @@ cb_location_changed (GtkWidget *location,
 
 static void
 cb_delete_button_clicked (GtkWidget *button,
-			  GladeXML *dialog)
+			  GtkBuilder *builder)
 {
 	GConfClient *client;
-	GtkComboBox *box = GTK_COMBO_BOX (WID ("location_combobox"));
+	GtkComboBox *box = GTK_COMBO_BOX (gtk_builder_get_object (builder,
+								  "location_combobox"));
 	int active = gtk_combo_box_get_active (box);
 	gchar *current, *key, *esc;
 
 	/* prevent the current settings from being saved by blocking
 	 * the signal handler */
-	g_signal_handlers_block_by_func (box, cb_location_changed, dialog);
+	g_signal_handlers_block_by_func (box, cb_location_changed, builder);
 	gtk_combo_box_set_active (box, (active == 0) ? 1 : 0);
 	gtk_combo_box_remove_text (box, active);
-	g_signal_handlers_unblock_by_func (box, cb_location_changed, dialog);
+	g_signal_handlers_unblock_by_func (box, cb_location_changed, builder);
 
 	/* set the new location */
 	client = gconf_client_get_default ();
@@ -887,7 +924,7 @@ cb_delete_button_clicked (GtkWidget *button,
 
 static void
 cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
-					GladeXML *dialog)
+				       GtkBuilder *builder)
 {
 	GConfClient *client;
 	gboolean same_proxy;
@@ -954,12 +991,24 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	}
 
 	/* Set the proxy entries insensitive if we are using the same proxy for all */
-	gtk_widget_set_sensitive (WID ("secure_host_entry"), !same_proxy);
-	gtk_widget_set_sensitive (WID ("secure_port_spinbutton"), !same_proxy);
-	gtk_widget_set_sensitive (WID ("ftp_host_entry"), !same_proxy);
-	gtk_widget_set_sensitive (WID ("ftp_port_spinbutton"), !same_proxy);
-	gtk_widget_set_sensitive (WID ("socks_host_entry"), !same_proxy);
-	gtk_widget_set_sensitive (WID ("socks_port_spinbutton"), !same_proxy);
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
+							   "secure_host_entry"),
+				  !same_proxy);
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
+							   "secure_port_spinbutton"),
+				  !same_proxy);
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
+							   "ftp_host_entry"),
+				  !same_proxy);
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
+							   "ftp_port_spinbutton"),
+				  !same_proxy);
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
+							   "socks_host_entry"),
+				  !same_proxy);
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
+							   "socks_port_spinbutton"),
+				  !same_proxy);
 
 	g_object_unref (client);
 }
@@ -1020,7 +1069,7 @@ extract_proxy_host (GConfPropertyEditor *peditor, const GConfValue *orig)
 
 static void
 proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
-				   GladeXML *dialog)
+				   GtkBuilder *builder)
 {
 	GSList *mode_group;
 	int mode;
@@ -1030,16 +1079,16 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 		return;
 
 	mode_group = g_slist_copy (gtk_radio_button_get_group
-		(GTK_RADIO_BUTTON (WID ("none_radiobutton"))));
+		(GTK_RADIO_BUTTON (gtk_builder_get_object (builder, "none_radiobutton"))));
 	mode_group = g_slist_reverse (mode_group);
 	mode = g_slist_index (mode_group, widget);
 	g_slist_free (mode_group);
 
-	gtk_widget_set_sensitive (WID ("manual_box"),
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "manual_box"),
 				  mode == PROXYMODE_MANUAL);
-	gtk_widget_set_sensitive (WID ("same_proxy_checkbutton"),
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "same_proxy_checkbutton"),
 				  mode == PROXYMODE_MANUAL);
-	gtk_widget_set_sensitive (WID ("auto_box"),
+	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "auto_box"),
 				  mode == PROXYMODE_AUTO);
 	client = gconf_client_get_default ();
 	gconf_client_set_bool (client, USE_PROXY_KEY,
@@ -1048,18 +1097,18 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 }
 
 static void
-connect_sensitivity_signals (GladeXML *dialog, GSList *mode_group)
+connect_sensitivity_signals (GtkBuilder *builder, GSList *mode_group)
 {
 	for (; mode_group != NULL; mode_group = mode_group->next)
 	{
 		g_signal_connect (G_OBJECT (mode_group->data), "clicked",
 				  G_CALLBACK(proxy_mode_radiobutton_clicked_cb),
-				  dialog);
+				  builder);
 	}
 }
 
 static void
-setup_dialog (GladeXML *dialog)
+setup_dialog (GtkBuilder *builder)
 {
 	GConfPropertyEditor *peditor;
 	GSList *mode_group;
@@ -1078,19 +1127,16 @@ setup_dialog (GladeXML *dialog)
 	client = gconf_client_get_default ();
 
 	/* Locations */
-	location_box = WID ("location_combobox");
+	location_box = _gtk_builder_get_widget (builder, "location_combobox");
 	store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
 	gtk_combo_box_set_model (GTK_COMBO_BOX (location_box), GTK_TREE_MODEL (store));
 
-	update_locations (client, dialog);
+	update_locations (client, builder);
 	gconf_client_add_dir (client, LOCATION_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	gconf_client_notify_add (client, CURRENT_LOCATION, (GConfClientNotifyFunc) cb_current_location, dialog, NULL, NULL);
+	gconf_client_notify_add (client, CURRENT_LOCATION, (GConfClientNotifyFunc) cb_current_location, builder, NULL, NULL);
 
-	g_signal_connect (location_box, "changed", G_CALLBACK (cb_location_changed), dialog);
-	g_signal_connect (WID ("delete_button"), "clicked", G_CALLBACK (cb_delete_button_clicked), dialog);
-
-	gtk_button_set_image (GTK_BUTTON (WID ("delete_button")),
-			      gtk_image_new_from_stock (GTK_STOCK_DELETE, GTK_ICON_SIZE_BUTTON));
+	g_signal_connect (location_box, "changed", G_CALLBACK (cb_location_changed), builder);
+	g_signal_connect (gtk_builder_get_object (builder, "delete_button"), "clicked", G_CALLBACK (cb_delete_button_clicked), builder);
 
 	location_renderer = gtk_cell_renderer_text_new ();
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (location_box), location_renderer, TRUE);
@@ -1100,13 +1146,13 @@ setup_dialog (GladeXML *dialog)
 					"style", COL_STYLE, NULL);
 
 	/* Hackety hack */
-	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("none_radiobutton"))->child), TRUE);
-	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("manual_radiobutton"))->child), TRUE);
-	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("auto_radiobutton"))->child), TRUE);
+	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (gtk_builder_get_object (builder, "none_radiobutton"))->child), TRUE);
+	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (gtk_builder_get_object (builder, "manual_radiobutton"))->child), TRUE);
+	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (gtk_builder_get_object (builder, "auto_radiobutton"))->child), TRUE);
 
 	/* Mode */
-	mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("none_radiobutton")));
-	connect_sensitivity_signals (dialog, mode_group);
+	mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (gtk_builder_get_object (builder, "none_radiobutton")));
+	connect_sensitivity_signals (builder, mode_group);
 
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_select_radio_with_enum (NULL,
 			PROXY_MODE_KEY, mode_group, mode_type,
@@ -1114,101 +1160,112 @@ setup_dialog (GladeXML *dialog)
 
 	/* Use same proxy for all protocols */
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_boolean (NULL,
-			USE_SAME_PROXY_KEY, WID ("same_proxy_checkbutton"), NULL));
+			USE_SAME_PROXY_KEY, _gtk_builder_get_widget (builder, "same_proxy_checkbutton"), NULL));
 
-	g_signal_connect (G_OBJECT (WID ("same_proxy_checkbutton")),
+	g_signal_connect (gtk_builder_get_object (builder, "same_proxy_checkbutton"),
 			"toggled",
 			G_CALLBACK (cb_use_same_proxy_checkbutton_clicked),
-			dialog);
+			builder);
 
 	/* Http */
 	port_value = gconf_client_get_int (client, HTTP_PROXY_PORT_KEY, NULL);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("http_port_spinbutton")), (gdouble) port_value);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "http_port_spinbutton")), (gdouble) port_value);
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, HTTP_PROXY_HOST_KEY, WID ("http_host_entry"),
+			NULL, HTTP_PROXY_HOST_KEY, _gtk_builder_get_widget (builder, "http_host_entry"),
 			"conv-from-widget-cb", extract_proxy_host,
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, HTTP_PROXY_PORT_KEY, WID ("http_port_spinbutton"),
+			NULL, HTTP_PROXY_PORT_KEY,
+			_gtk_builder_get_widget (builder, "http_port_spinbutton"),
 			NULL));
-	g_signal_connect (G_OBJECT (WID ("details_button")),
+	g_signal_connect (gtk_builder_get_object (builder, "details_button"),
 			  "clicked",
 			  G_CALLBACK (cb_http_details_button_clicked),
-			  WID ("network_dialog"));
+			  _gtk_builder_get_widget (builder, "network_dialog"));
 
 	/* Secure */
  	port_value = gconf_client_get_int (client, SECURE_PROXY_PORT_KEY, NULL);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("secure_port_spinbutton")), (gdouble) port_value);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "secure_port_spinbutton")), (gdouble) port_value);
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, SECURE_PROXY_HOST_KEY, WID ("secure_host_entry"),
+			NULL, SECURE_PROXY_HOST_KEY,
+			_gtk_builder_get_widget (builder, "secure_host_entry"),
 			"conv-from-widget-cb", extract_proxy_host,
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, SECURE_PROXY_PORT_KEY, WID ("secure_port_spinbutton"),
+			NULL, SECURE_PROXY_PORT_KEY,
+			_gtk_builder_get_widget (builder, "secure_port_spinbutton"),
 			NULL));
 
 	/* Ftp */
  	port_value = gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("ftp_port_spinbutton")), (gdouble) port_value);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "ftp_port_spinbutton")), (gdouble) port_value);
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, FTP_PROXY_HOST_KEY, WID ("ftp_host_entry"),
+			NULL, FTP_PROXY_HOST_KEY,
+			_gtk_builder_get_widget (builder, "ftp_host_entry"),
 			"conv-from-widget-cb", extract_proxy_host,
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, FTP_PROXY_PORT_KEY, WID ("ftp_port_spinbutton"),
+			NULL, FTP_PROXY_PORT_KEY,
+			_gtk_builder_get_widget (builder, "ftp_port_spinbutton"),
 			NULL));
 
 	/* Socks */
  	port_value = gconf_client_get_int (client, SOCKS_PROXY_PORT_KEY, NULL);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("socks_port_spinbutton")), (gdouble) port_value);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "socks_port_spinbutton")), (gdouble) port_value);
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, SOCKS_PROXY_HOST_KEY, WID ("socks_host_entry"),
+			NULL, SOCKS_PROXY_HOST_KEY,
+			_gtk_builder_get_widget (builder, "socks_host_entry"),
 			"conv-from-widget-cb", extract_proxy_host,
 			NULL));
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, SOCKS_PROXY_PORT_KEY, WID ("socks_port_spinbutton"),
+			NULL, SOCKS_PROXY_PORT_KEY,
+			_gtk_builder_get_widget (builder, "socks_port_spinbutton"),
 			NULL));
 
 	/* Set the proxy entries insensitive if we are using the same proxy for all */
 	if (gconf_client_get_bool (client, USE_SAME_PROXY_KEY, NULL))
 	{
-		gtk_widget_set_sensitive (WID ("secure_host_entry"), FALSE);
-		gtk_widget_set_sensitive (WID ("secure_port_spinbutton"), FALSE);
-		gtk_widget_set_sensitive (WID ("ftp_host_entry"), FALSE);
-		gtk_widget_set_sensitive (WID ("ftp_port_spinbutton"), FALSE);
-		gtk_widget_set_sensitive (WID ("socks_host_entry"), FALSE);
-		gtk_widget_set_sensitive (WID ("socks_port_spinbutton"), FALSE);
+		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "secure_host_entry"), FALSE);
+		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "secure_port_spinbutton"), FALSE);
+		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "ftp_host_entry"), FALSE);
+		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "ftp_port_spinbutton"), FALSE);
+		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "socks_host_entry"), FALSE);
+		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "socks_port_spinbutton"), FALSE);
 	}
 
 	/* Autoconfiguration */
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, PROXY_AUTOCONFIG_URL_KEY, WID ("autoconfig_entry"),
+			NULL, PROXY_AUTOCONFIG_URL_KEY,
+			_gtk_builder_get_widget (builder, "autoconfig_entry"),
 			NULL));
 
-	g_signal_connect (WID ("network_dialog"), "response",
-			  G_CALLBACK (cb_dialog_response), NULL);
+	g_signal_connect (gtk_builder_get_object (builder, "network_dialog"),
+			  "response", G_CALLBACK (cb_dialog_response), NULL);
 
 
-	gtk_label_set_use_markup (GTK_LABEL (WID ("label_ignore_host")), TRUE);
 	ignore_hosts = gconf_client_get_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, NULL);
 	g_object_unref (client);
 
 	model = create_listmodel();
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
-	config_treeview(GTK_TREE_VIEW(WID("treeview_ignore_host")), model);
+	config_treeview(GTK_TREE_VIEW(gtk_builder_get_object (builder, "treeview_ignore_host")), model);
 
-	g_signal_connect (WID ("button_add_url"), "clicked",
-						G_CALLBACK (cb_add_url), dialog);
-	g_signal_connect (WID ("entry_url"), "activate",
-						G_CALLBACK (cb_add_url), dialog);
-	g_signal_connect (WID ("button_remove_url"), "clicked",
-						G_CALLBACK (cb_remove_url), dialog);
+	g_signal_connect (gtk_builder_get_object (builder, "button_add_url"),
+			  "clicked", G_CALLBACK (cb_add_url), builder);
+	g_signal_connect (gtk_builder_get_object (builder, "entry_url"),
+			  "activate", G_CALLBACK (cb_add_url), builder);
+	g_signal_connect (gtk_builder_get_object (builder, "button_remove_url"),
+			  "clicked", G_CALLBACK (cb_remove_url), builder);
 }
 
 int
 main (int argc, char **argv)
 {
-	GladeXML    *dialog;
+	GtkBuilder  *builder;
+	GError *error = NULL;
+	gchar *builder_widgets[] = {"network_dialog", "adjustment1",
+				    "adjustment2", "adjustment3", "adjustment4",
+				    "delete_button_img", NULL};
 	GConfClient *client;
 	GtkWidget   *widget;
 
@@ -1224,16 +1281,24 @@ main (int argc, char **argv)
 	gconf_client_add_dir (client, "/system/proxy",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-properties.glade",
-				"network_dialog", NULL);
+	builder = gtk_builder_new ();
+	if (gtk_builder_add_objects_from_file (builder, GNOMECC_GNP_UI_FILE,
+					       builder_widgets, &error) == 0) {
+		g_warning ("Could not load main dialog: %s",
+			   error->message);
+		g_error_free (error);
+		g_object_unref (builder);
+		g_object_unref (client);
+		return (EXIT_FAILURE);
+	}
 
-	setup_dialog (dialog);
-	widget = WID ("network_dialog");
+	setup_dialog (builder);
+	widget = _gtk_builder_get_widget (builder, "network_dialog");
 	capplet_set_icon (widget, "gnome-network-properties");
 	gtk_widget_show_all (widget);
 	gtk_main ();
 
-	g_object_unref (dialog);
+	g_object_unref (builder);
 	g_object_unref (client);
 
 	return 0;
