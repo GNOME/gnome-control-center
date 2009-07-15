@@ -551,7 +551,6 @@ rebuild_resolution_combo (App *app)
 {
     int i;
     GnomeRRMode **modes;
-    int best_w, best_h;
     const char *current;
 
     clear_combo (app->resolution_combo);
@@ -565,11 +564,10 @@ rebuild_resolution_combo (App *app)
     }
 
     g_assert (app->current_output != NULL);
+    g_assert (app->current_output->width != 0 && app->current_output->height != 0);
 
     gtk_widget_set_sensitive (app->resolution_combo, TRUE);
 
-    best_w = 0;
-    best_h = 0;
     for (i = 0; modes[i] != NULL; ++i)
     {
 	int width, height;
@@ -580,21 +578,12 @@ rebuild_resolution_combo (App *app)
 	add_key (app->resolution_combo,
 		 idle_free (make_resolution_string (width, height)),
 		 width, height, 0, -1);
-
-	if (width * height > best_w * best_h)
-	{
-	    best_w = width;
-	    best_h = height;
-	}
     }
 
     current = idle_free (make_resolution_string (app->current_output->width, app->current_output->height));
 
     if (!combo_select (app->resolution_combo, current))
-    {
-	combo_select (app->resolution_combo,
-		      idle_free (make_resolution_string (best_w, best_h)));
-    }
+	g_assert_not_reached ();
 }
 
 static void
@@ -700,6 +689,52 @@ on_rate_changed (GtkComboBox *box, gpointer data)
 }
 
 static void
+find_best_mode (GnomeRRMode **modes, int *out_width, int *out_height)
+{
+    int i;
+
+    *out_width = 0;
+    *out_height = 0;
+
+    for (i = 0; modes[i] != NULL; i++)
+    {
+	int w, h;
+
+	w = gnome_rr_mode_get_width (modes[i]);
+	h = gnome_rr_mode_get_height (modes[i]);
+
+	if (w * h > *out_width * *out_height)
+	{
+	    *out_width = w;
+	    *out_height = h;
+	}
+    }
+}
+
+static void
+select_resolution_for_current_output (App *app)
+{
+    GnomeRRMode **modes;
+    int width, height;
+
+    if (app->current_output->pref_width != 0 && app->current_output->pref_height != 0)
+    {
+	app->current_output->width = app->current_output->pref_width;
+	app->current_output->height = app->current_output->pref_height;
+	return;
+    }
+
+    modes = get_current_modes (app);
+    if (!modes)
+	return;
+
+    find_best_mode (modes, &width, &height);
+
+    app->current_output->width = width;
+    app->current_output->height = height;
+}
+
+static void
 monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data)
 {
     App *app = data;
@@ -722,6 +757,9 @@ monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data)
     }
 
     app->current_output->on = is_on;
+
+    if (is_on)
+	select_resolution_for_current_output (app); /* The refresh rate will be picked in rebuild_rate_combo() */
 
     rebuild_gui (app);
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
