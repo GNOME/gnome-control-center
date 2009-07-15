@@ -12,3 +12,5 @@ pixmaps_DATA =			\
 	right-middle-finger.svg	\
 	right-ring-finger.svg	\
 	right-thumb.svg
+
+EXTRA_DIST = $(pixmaps_DATA)
