@@ -42,3 +42,5 @@ CLEANFILES = \
 	$(xml_DATA)
 EXTRA_DIST = $(ui_DATA) $(xml_in_files) gnome-keybindings.pc.in
 
+
+-include $(top_srcdir)/git.mk

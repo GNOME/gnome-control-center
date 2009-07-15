@@ -103,3 +103,5 @@ CLEANFILES =				\
 EXTRA_DIST=				\
 	search-entry-watermark.svg	\
 	nld-marshal.list
+
+-include $(top_srcdir)/git.mk

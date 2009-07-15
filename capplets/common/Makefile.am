@@ -59,3 +59,5 @@ gnome_theme_test_LDADD = 						\
 
 noinst_PROGRAMS = \
 	gnome-theme-test
+
+-include $(top_srcdir)/git.mk

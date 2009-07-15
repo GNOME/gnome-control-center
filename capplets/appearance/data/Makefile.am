@@ -57,3 +57,5 @@ EXTRA_DIST = $(xml_in_files)
 
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(mime_DATA)
+
+-include $(top_srcdir)/git.mk

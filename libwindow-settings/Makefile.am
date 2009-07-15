@@ -52,3 +52,5 @@ libmetacity_la_LDFLAGS = $(wms_flags)
 libmetacity_la_LIBADD = 		\
 	$(GNOMECC_LIBS)			\
 	libgnome-window-settings.la
+
+-include $(top_srcdir)/git.mk

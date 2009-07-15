@@ -46,3 +46,5 @@ update-icon-cache:
 	fi
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_in_files) $(desktop_DATA)
+
+-include $(top_srcdir)/git.mk

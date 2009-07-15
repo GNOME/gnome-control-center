@@ -43,3 +43,5 @@ menu_DATA = gnomecc.menu
 EXTRA_DIST = gnomecc.desktop.in.in gnomecc.directory.in gnomecc.menu $(schemas_DATA).in
 
 DISTCLEANFILES = gnomecc.desktop gnomecc.desktop.in gnomecc.directory $(schemas_DATA)
+
+-include $(top_srcdir)/git.mk

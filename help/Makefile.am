@@ -6,3 +6,5 @@ DOC_ENTITIES = config-accessibility-keyboard.xml config-background.xml config-be
 DOC_INCLUDES = 
 
 DOC_LINGUAS = ca ca@valencia cs de el en_GB es fr it ja oc pa pl pt pt_BR ru sv uk vi zh_CN
+
+-include $(top_srcdir)/git.mk

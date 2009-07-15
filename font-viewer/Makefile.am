@@ -44,3 +44,5 @@ CLEANFILES = $(desktop_in_files) $(desktop_DATA) \
 EXTRA_DIST = \
   fontilus.schemas.in \
   gnome-font-viewer.desktop.in.in
+
+-include $(top_srcdir)/git.mk

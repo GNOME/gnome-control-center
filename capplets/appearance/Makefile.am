@@ -58,3 +58,5 @@ INCLUDES = \
 	-DWALLPAPER_DATADIR="\"$(wallpaperdir)\""
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
+
+-include $(top_srcdir)/git.mk

@@ -31,3 +31,5 @@ INCLUDES = \
 	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA)
+
+-include $(top_srcdir)/git.mk

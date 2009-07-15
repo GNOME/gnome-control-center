@@ -21,3 +21,5 @@ endif
 
 DIST_SUBDIRS = \
 	$(always_built_SUBDIRS) display about-me
+
+-include $(top_srcdir)/git.mk

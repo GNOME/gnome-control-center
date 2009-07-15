@@ -24,3 +24,4 @@ INCLUDES =						\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
+-include $(top_srcdir)/git.mk
