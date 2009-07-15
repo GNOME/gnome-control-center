@@ -540,6 +540,12 @@ rebuild_on_off_radios (App *app)
     g_signal_handlers_unblock_by_func (app->monitor_off_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
 }
 
+static char *
+make_resolution_string (int width, int height)
+{
+    return g_strdup_printf (_("%d x %d"), width, height);
+}
+
 static void
 rebuild_resolution_combo (App *app)
 {
@@ -572,7 +578,7 @@ rebuild_resolution_combo (App *app)
 	height = gnome_rr_mode_get_height (modes[i]);
 
 	add_key (app->resolution_combo,
-		 idle_free (g_strdup_printf (_("%d x %d"), width, height)),
+		 idle_free (make_resolution_string (width, height)),
 		 width, height, 0, -1);
 
 	if (width * height > best_w * best_h)
@@ -582,15 +588,12 @@ rebuild_resolution_combo (App *app)
 	}
     }
 
-    current = idle_free (g_strdup_printf (_("%d x %d"),
-					  app->current_output->width,
-					  app->current_output->height));
+    current = idle_free (make_resolution_string (app->current_output->width, app->current_output->height));
 
     if (!combo_select (app->resolution_combo, current))
     {
 	combo_select (app->resolution_combo,
-		      idle_free (
-			  g_strdup_printf (_("%d x %d"), best_w, best_h)));
+		      idle_free (make_resolution_string (best_w, best_h)));
     }
 }
 
