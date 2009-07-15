@@ -378,6 +378,12 @@ rebuild_rotation_combo (App *app)
 	combo_select (app->rotation_combo, _("Normal"));
 }
 
+static char *
+make_rate_string (int hz)
+{
+    return g_strdup_printf (_("%d Hz"), hz);
+}
+
 static void
 rebuild_rate_combo (App *app)
 {
@@ -412,7 +418,7 @@ rebuild_rate_combo (App *app)
 	    height == app->current_output->height)
 	{
 	    add_key (app->refresh_combo,
-		     idle_free (g_strdup_printf (_("%d Hz"), rate)),
+		     idle_free (make_rate_string (rate)),
 		     0, 0, rate, -1);
 
 	    if (rate > best)
@@ -420,8 +426,8 @@ rebuild_rate_combo (App *app)
 	}
     }
 
-    if (!combo_select (app->refresh_combo, idle_free (g_strdup_printf (_("%d Hz"), app->current_output->rate))))
-	combo_select (app->refresh_combo, idle_free (g_strdup_printf (_("%d Hz"), best)));
+    if (!combo_select (app->refresh_combo, idle_free (make_rate_string (app->current_output->rate))))
+	combo_select (app->refresh_combo, idle_free (make_rate_string (best)));
 }
 
 static int
