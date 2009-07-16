@@ -627,10 +627,9 @@ wp_create_filechooser (AppearanceData *data)
   GtkFileFilter *filter;
 
   data->wp_filesel = GTK_FILE_CHOOSER (
-  		     gtk_file_chooser_dialog_new_with_backend (_("Add Wallpaper"),
+                     gtk_file_chooser_dialog_new (_("Add Wallpaper"),
                      GTK_WINDOW (appearance_capplet_get_widget (data, "appearance_window")),
                      GTK_FILE_CHOOSER_ACTION_OPEN,
-                     "gtk+",
                      GTK_STOCK_CANCEL,
                      GTK_RESPONSE_CANCEL,
                      GTK_STOCK_OPEN,
