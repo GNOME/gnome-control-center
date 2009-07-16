@@ -786,6 +786,9 @@ realign_outputs_after_resolution_change (App *app, GnomeOutputInfo *output_that_
 
     g_assert (app->current_configuration != NULL);
 
+    if (output_that_changed->width == old_width && output_that_changed->height == old_height)
+	return;
+
     old_right_edge = output_that_changed->x + old_width;
     old_bottom_edge = output_that_changed->y + old_height;
 
