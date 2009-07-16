@@ -246,7 +246,7 @@ xkb_layouts_enable_disable_default (GladeXML * dialog, gboolean enable)
 		}
 	}
 
-	gtk_widget_draw (tree_view, NULL);
+	gtk_widget_queue_draw (tree_view);
 }
 
 static void
