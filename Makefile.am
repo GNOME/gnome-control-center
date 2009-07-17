@@ -38,4 +38,6 @@ EXTRA_DIST = \
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb
 
+GITIGNOREFILES=m4
+
 -include $(top_srcdir)/git.mk
