@@ -24,7 +24,6 @@
 #include <glib/gi18n.h>
 #include <glib.h>
 #include <gconf/gconf-client.h>
-#include <libgnomeui/gnome-client.h>
 
 #include "bookmark-agent.h"
 #include "slab-gnome-util.h"

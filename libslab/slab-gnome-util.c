@@ -21,7 +21,6 @@
 #include "slab-gnome-util.h"
 
 #include <gconf/gconf-client.h>
-#include <libgnome/gnome-url.h>
 #include <gio/gio.h>
 #include <string.h>
 

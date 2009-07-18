@@ -22,7 +22,6 @@
 
 #include <glib/gi18n.h>
 #include <string.h>
-#include <libgnomeui/gnome-icon-lookup.h>
 #include <gio/gio.h>
 #include <gdk/gdk.h>
 #include <unistd.h>
