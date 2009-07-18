@@ -91,7 +91,6 @@ static int pipe_from_factory_fd[2];
 #define GTK_THUMBNAIL_SIZE         96
 #define METACITY_THUMBNAIL_WIDTH  120
 #define METACITY_THUMBNAIL_HEIGHT  60
-#define ICON_THUMBNAIL_SIZE        48
 
 
 static void
@@ -164,43 +163,34 @@ static GdkPixbuf *
 create_folder_icon (char *icon_theme_name)
 {
   GtkIconTheme *icon_theme;
-  GdkPixbuf *folder_icon = NULL, *retval;
+  GdkPixbuf *folder_icon = NULL;
   GtkIconInfo *folder_icon_info;
-  const gchar *filename;
   gchar *example_icon_name;
+  const gchar *icon_names[5];
+  gint i;
 
   icon_theme = gtk_icon_theme_new ();
   gtk_icon_theme_set_custom_theme (icon_theme, icon_theme_name);
 
-  folder_icon_info = NULL;
+  i = 0;
   /* Get the Example icon name in the theme if specified */
   example_icon_name = gtk_icon_theme_get_example_icon_name (icon_theme);
   if (example_icon_name != NULL)
-    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, example_icon_name, 48, GTK_ICON_LOOKUP_FORCE_SVG);
-  g_free (example_icon_name);
+    icon_names[i++] = example_icon_name;
+  icon_names[i++] = "x-directory-normal";
+  icon_names[i++] = "gnome-fs-directory";
+  icon_names[i++] = "folder";
+  icon_names[i++] = NULL;
 
-  /* If an Example is not specified, fall back to using the folder icons in
-     the order of Icon Nameing Spec, "gnome-fs-directory", and "folder" */
-  if (folder_icon_info == NULL)
-    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "x-directory-normal", 48, GTK_ICON_LOOKUP_FORCE_SVG);
-  if (folder_icon_info == NULL)
-    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, GTK_ICON_LOOKUP_FORCE_SVG);
-  if (folder_icon_info == NULL)
-    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "folder", 48, GTK_ICON_LOOKUP_FORCE_SVG);
-
-  g_object_unref (icon_theme);
-
+  folder_icon_info = gtk_icon_theme_choose_icon (icon_theme, icon_names, 48, GTK_ICON_LOOKUP_FORCE_SIZE);
   if (folder_icon_info != NULL)
   {
-    filename = gtk_icon_info_get_filename (folder_icon_info);
-
-    if (filename != NULL)
-    {
-      folder_icon = gdk_pixbuf_new_from_file (filename, NULL);
-    }
-
+    folder_icon = gtk_icon_info_load_icon (folder_icon_info, NULL);
     gtk_icon_info_free (folder_icon_info);
   }
+
+  g_object_unref (icon_theme);
+  g_free (example_icon_name);
 
   /* render the icon to the thumbnail */
   if (folder_icon == NULL)
@@ -216,25 +206,7 @@ create_folder_icon (char *icon_theme_name)
     gtk_widget_destroy (dummy);
   }
 
-  /* Some icons don't come back at the requested dimensions, so we need to scale
-   * them. The width is usually the largest dimension for icons that come at
-   * irregular sizes, so use this to calculate the scale factor
-   */
-  if (gdk_pixbuf_get_width (folder_icon) != ICON_THUMBNAIL_SIZE) {
-    int width, height;
-    gdouble scale;
-
-    scale = ((double) ICON_THUMBNAIL_SIZE) / gdk_pixbuf_get_width (folder_icon);
-    width = ICON_THUMBNAIL_SIZE;
-    height = scale * gdk_pixbuf_get_height (folder_icon);
-
-    retval = gdk_pixbuf_scale_simple (folder_icon, width, height, GDK_INTERP_BILINEAR);
-    g_object_unref (folder_icon);
-  } else {
-    retval = folder_icon;
-  }
-
-  return retval;
+  return folder_icon;
 }
 
 static GdkPixbuf *
