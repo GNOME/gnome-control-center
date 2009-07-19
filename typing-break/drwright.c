@@ -463,7 +463,7 @@ update_tooltip (DrWright *dr)
 	gchar *str;
 
 	if (!dr->enabled) {
-		gtk_status_icon_set_tooltip (dr->icon,
+		gtk_status_icon_set_tooltip_text (dr->icon,
 					     _("Disabled"));
 		return TRUE;
 	}
@@ -480,7 +480,7 @@ update_tooltip (DrWright *dr)
 		str = g_strdup_printf (_("Less than one minute until the next break"));
 	}
 
-	gtk_status_icon_set_tooltip (dr->icon,
+	gtk_status_icon_set_tooltip_text (dr->icon,
 				     str);
 
 	g_free (str);
