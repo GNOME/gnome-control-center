@@ -5,7 +5,8 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-desktop-item.h>
-#include <libgnomeui/gnome-thumbnail.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API 1
+#include <libgnomeui/gnome-desktop-thumbnail.h>
 
 G_BEGIN_DECLS
 
@@ -29,7 +30,7 @@ gchar            *libslab_string_replace_once (const gchar *string, const gchar 
 void              libslab_spawn_command (const gchar *cmd);
 
 void libslab_thumbnail_factory_preinit (void);
-GnomeThumbnailFactory *libslab_thumbnail_factory_get (void);
+GnomeDesktopThumbnailFactory *libslab_thumbnail_factory_get (void);
 
 void libslab_checkpoint_init (const char *checkpoint_config_file_basename, const char *checkpoint_file_basename);
 void libslab_checkpoint (const char *format, ...);

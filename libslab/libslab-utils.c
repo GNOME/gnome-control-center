@@ -571,7 +571,7 @@ libslab_spawn_command (const gchar *cmd)
 }
 
 static guint thumbnail_factory_idle_id;
-static GnomeThumbnailFactory *thumbnail_factory;
+static GnomeDesktopThumbnailFactory *thumbnail_factory;
 
 static void
 create_thumbnail_factory (void)
@@ -584,7 +584,7 @@ create_thumbnail_factory (void)
 
 	libslab_checkpoint ("create_thumbnail_factory(): start");
 
-	thumbnail_factory = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
+	thumbnail_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
 	libslab_checkpoint ("create_thumbnail_factory(): end");
 }
@@ -603,7 +603,7 @@ libslab_thumbnail_factory_preinit (void)
 	thumbnail_factory_idle_id = g_idle_add (init_thumbnail_factory_idle_cb, NULL);
 }
 
-GnomeThumbnailFactory *
+GnomeDesktopThumbnailFactory *
 libslab_thumbnail_factory_get (void)
 {
 	if (thumbnail_factory_idle_id != 0) {

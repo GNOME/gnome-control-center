@@ -22,7 +22,6 @@
 
 #include <glib/gi18n.h>
 #include <string.h>
-#include <libgnomeui/gnome-icon-lookup.h>
 #include <gio/gio.h>
 
 #include "slab-gnome-util.h"
@@ -413,7 +412,8 @@ load_image (DocumentTile *tile)
 
 	gchar *icon_id = NULL;
 	gboolean free_icon_id = TRUE;
-	GnomeThumbnailFactory *thumbnail_factory;
+	GnomeDesktopThumbnailFactory *thumbnail_factory;
+	GIcon *icon;
 
 	libslab_checkpoint ("document-tile.c: load_image(): start for %s", TILE (tile)->uri);
 
@@ -429,12 +429,14 @@ load_image (DocumentTile *tile)
 
 	thumbnail_factory = libslab_thumbnail_factory_get ();
 
-	icon_id = gnome_thumbnail_factory_lookup (thumbnail_factory, TILE (tile)->uri, priv->modified);
+	icon_id = gnome_desktop_thumbnail_factory_lookup (thumbnail_factory, TILE (tile)->uri, priv->modified);
 
-	if (! icon_id)
-		icon_id = gnome_icon_lookup (
-			gtk_icon_theme_get_default (), thumbnail_factory,
-			TILE (tile)->uri, NULL, NULL, priv->mime_type, 0, NULL);
+	if (! icon_id) {
+		icon = g_content_type_get_icon (priv->mime_type);
+		g_object_get (icon, "name", &icon_id, NULL);
+
+		g_object_unref (icon);
+	}
 
 exit:
 
