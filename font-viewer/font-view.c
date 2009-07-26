@@ -221,7 +221,8 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 
 static void
 add_row(GtkWidget *table, gint *row_p,
-	const gchar *name, const gchar *value, gboolean multiline)
+	const gchar *name, const gchar *value, gboolean multiline,
+        gboolean expand)
 {
     gchar *bold_name;
     GtkWidget *name_w, *value_w;
@@ -236,26 +237,34 @@ add_row(GtkWidget *table, gint *row_p,
 		     GTK_FILL, GTK_FILL, 0, 0);
 
     if (multiline) {
-	GtkWidget *textview;
-	GtkTextBuffer *buffer;
+	GtkWidget *label, *viewport;
+        guint flags;
 
-	textview = gtk_text_view_new();
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview), FALSE);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview), FALSE);
-	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview), GTK_WRAP_WORD);
-	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
-	gtk_text_buffer_set_text(buffer, value, -1);
+        label = gtk_label_new (value);
+        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+        gtk_label_set_selectable (GTK_LABEL (label), TRUE);
+        gtk_widget_set_size_request (label, 200, -1);
+        gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
 
-	value_w = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(value_w),
-			GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(value_w),
-					    GTK_SHADOW_IN);
-	gtk_widget_set_size_request(value_w, -1, 100);
-	gtk_container_add(GTK_CONTAINER(value_w), textview);
+
+        value_w = gtk_scrolled_window_new(NULL, NULL);
+        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(value_w),
+                                       GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+
+        viewport = gtk_viewport_new (gtk_scrolled_window_get_hadjustment (value_w),
+                                     gtk_scrolled_window_get_vadjustment (value_w));
+        gtk_viewport_set_shadow_type (GTK_VIEWPORT (viewport), GTK_SHADOW_NONE);
+
+        gtk_container_add (GTK_CONTAINER(value_w), viewport);
         (*row_p)++;
+        if (expand)
+          flags = GTK_FILL|GTK_EXPAND;
+        else
+          flags = GTK_FILL;
         gtk_table_attach(GTK_TABLE(table), value_w, 0, 2, *row_p, *row_p + 1,
-                         GTK_FILL|GTK_EXPAND, GTK_FILL, 0, 0);
+                         GTK_FILL|GTK_EXPAND, flags, 0, 0);
+
+        gtk_container_add (GTK_CONTAINER (viewport), label);
     } else {
         value_w = gtk_label_new(value);
         gtk_misc_set_alignment(GTK_MISC(value_w), 0.0, 0.5);
@@ -276,10 +285,10 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
     GFileInfo *info;
     PS_FontInfoRec ps_info;
 
-    add_row(table, row_p, _("Name:"), face->family_name, FALSE);
+    add_row(table, row_p, _("Name:"), face->family_name, FALSE, FALSE);
 
     if (face->style_name)
-	add_row(table, row_p, _("Style:"), face->style_name, FALSE);
+	add_row(table, row_p, _("Style:"), face->style_name, FALSE, FALSE);
 
     file = g_file_new_for_uri (uri);
 
@@ -292,11 +301,11 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 
     if (info) {
         s = g_content_type_get_description (g_file_info_get_content_type (info));
-        add_row (table, row_p, _("Type:"), s, FALSE);
+        add_row (table, row_p, _("Type:"), s, FALSE, FALSE);
         g_free (s);
 
         s = g_format_size_for_display (g_file_info_get_size (info));
-        add_row (table, row_p, _("Size:"), s, FALSE);
+        add_row (table, row_p, _("Size:"), s, FALSE, FALSE);
         g_free (s);
 
         g_object_unref (info);
@@ -340,22 +349,22 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 	    }
 	}
 	if (version) {
-	    add_row(table, row_p, _("Version:"), version, FALSE);
+	    add_row(table, row_p, _("Version:"), version, FALSE, FALSE);
 	    g_free(version);
 	}
 	if (copyright) {
-	    add_row(table, row_p, _("Copyright:"), copyright, TRUE);
+	    add_row(table, row_p, _("Copyright:"), copyright, TRUE, FALSE);
 	    g_free(copyright);
 	}
 	if (description) {
-	    add_row(table, row_p, _("Description:"), description, TRUE);
+	    add_row(table, row_p, _("Description:"), description, TRUE, TRUE);
 	    g_free(description);
 	}
     } else if (FT_Get_PS_Font_Info(face, &ps_info) == 0) {
 	if (ps_info.version && g_utf8_validate(ps_info.version, -1, NULL))
-	    add_row(table, row_p, _("Version:"), ps_info.version, FALSE);
+	    add_row(table, row_p, _("Version:"), ps_info.version, FALSE, FALSE);
 	if (ps_info.notice && g_utf8_validate(ps_info.notice, -1, NULL))
-	    add_row(table, row_p, _("Copyright:"), ps_info.notice, TRUE);
+	    add_row(table, row_p, _("Copyright:"), ps_info.notice, TRUE, FALSE);
     }
 }
 
