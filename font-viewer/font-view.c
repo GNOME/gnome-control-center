@@ -427,6 +427,70 @@ set_icon(GtkWindow *window, const gchar *uri)
     g_object_unref (icon);
 }
 
+static void
+font_install_finished_cb (GObject      *source_object,
+                          GAsyncResult *res,
+                          gpointer      data)
+{
+    GError *err = NULL;
+
+    g_file_copy_finish (G_FILE (source_object), res, &err);
+
+    if (!err) {
+        gtk_button_set_label (GTK_BUTTON (data), _("Installed"));
+    }
+    else {
+        gtk_button_set_label (GTK_BUTTON (data), _("Install Failed"));
+        g_debug ("Install failed: %s", err->message);
+        g_error_free (err);
+    }
+    gtk_widget_set_sensitive (GTK_WIDGET (data), FALSE);
+}
+
+static void
+install_button_clicked_cb (GtkButton   *button,
+                           const gchar *font_file)
+{
+    GFile *src, *dest;
+    gchar *dest_path, *dest_filename;
+
+    GError *err = NULL;
+
+    /* first check if ~/.fonts exists */
+    dest_path = g_build_filename (g_get_home_dir (), ".fonts", NULL);
+    if (!g_file_test (dest_path, G_FILE_TEST_EXISTS)) {
+        GFile *f = g_file_new_for_path (dest_path);
+        g_file_make_directory_with_parents (f, NULL, err);
+        if (err) {
+            /* TODO: show error dialog */
+            g_warning ("Could not create fonts directory: %s", err->message);
+            g_error_free (err);
+            g_object_unref (f);
+            g_free (dest_path);
+            return;
+        }
+        g_object_unref (f);
+    }
+    g_free (dest_path);
+
+    /* create destination filename */
+    dest_filename = g_path_get_basename (font_file);
+    dest_path = g_build_filename (g_get_home_dir (), ".fonts", dest_filename, NULL);
+    g_free (dest_filename);
+
+    dest = g_file_new_for_path (dest_path);
+
+    src = g_file_new_for_uri (font_file);
+
+    /* TODO: show error dialog if file exists */
+    g_file_copy_async (src, dest, G_FILE_COPY_NONE, 0, NULL, NULL, NULL,
+                       font_install_finished_cb, button);
+
+    g_object_unref (src);
+    g_object_unref (dest);
+    g_free (dest_path);
+}
+
 int
 main(int argc, char **argv)
 {
@@ -440,6 +504,7 @@ main(int argc, char **argv)
     GdkPixmap *pixmap;
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
     gint height;
+    GtkWidget *button, *align;
 
     bindtextdomain(GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
@@ -517,6 +582,17 @@ main(int argc, char **argv)
 
     row = 0;
     add_face_info(table, &row, font_file, face);
+
+    /* add install button */
+    align = gtk_alignment_new (1.0, 0.5, 0.0, 0.0);
+    gtk_table_attach (GTK_TABLE (table), align, 0, 2, row, row + 1,
+                      GTK_FILL|GTK_EXPAND, GTK_FILL, 0, 0);
+
+    button = gtk_button_new_with_mnemonic (_("I_nstall Font"));
+    g_signal_connect (button, "clicked",
+                      G_CALLBACK (install_button_clicked_cb), font_file);
+    gtk_container_add (GTK_CONTAINER (align), button);
+
 
     gtk_table_set_col_spacings(GTK_TABLE(table), 8);
     gtk_table_set_row_spacings(GTK_TABLE(table), 2);
