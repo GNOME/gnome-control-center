@@ -126,7 +126,9 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
       wp->deleted = gnome_wp_xml_get_bool (list, "deleted");
 
       for (wpa = list->children; wpa != NULL; wpa = wpa->next) {
-	if (!strcmp ((gchar *)wpa->name, "filename")) {
+	if (wpa->type == XML_COMMENT_NODE) {
+	  continue;
+	} else if (!strcmp ((gchar *)wpa->name, "filename")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    const char * none = "(none)";
 	    gchar *content = g_strstrip ((gchar *)wpa->last->content);
@@ -182,7 +184,7 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	} else if (!strcmp ((gchar *)wpa->name, "text")) {
 	  /* Do nothing here, libxml2 is being weird */
 	} else {
-	  g_warning ("Unknown Tag: %s\n", wpa->name);
+	  g_warning ("Unknown Tag: %s", wpa->name);
 	}
       }
 
