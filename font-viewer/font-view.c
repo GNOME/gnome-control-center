@@ -439,6 +439,7 @@ main(int argc, char **argv)
     GtkWidget *window, *hbox, *table, *swin, *drawing_area;
     GdkPixmap *pixmap;
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
+    gint height;
 
     bindtextdomain(GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
@@ -490,9 +491,8 @@ main(int argc, char **argv)
     gtk_container_add(GTK_CONTAINER(window), hbox);
 
     swin = gtk_scrolled_window_new(NULL, NULL);
-    gtk_widget_set_size_request(swin, 500, 200);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swin),
-				   GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+				   GTK_POLICY_AUTOMATIC, GTK_POLICY_NEVER);
     gtk_box_pack_start(GTK_BOX(hbox), swin, TRUE, TRUE, 0);
 
     drawing_area = gtk_drawing_area_new();
@@ -501,6 +501,11 @@ main(int argc, char **argv)
 					  drawing_area);
 
     pixmap = create_text_pixmap(drawing_area, face);
+
+    /* set the minimum size on the scrolled window to prevent
+     * unnecessary scrolling */
+    gdk_drawable_get_size (GDK_DRAWABLE (pixmap), NULL, &height);
+    gtk_widget_set_size_request(swin, 500, height + 30);
 
     g_signal_connect(drawing_area, "expose_event",
 		     G_CALLBACK(expose_event), pixmap);
