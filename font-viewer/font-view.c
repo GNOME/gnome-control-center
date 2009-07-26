@@ -229,8 +229,11 @@ add_row(GtkWidget *table, gint *row_p,
     bold_name = g_strconcat("<b>", name, "</b>", NULL);
     name_w = gtk_label_new(bold_name);
     g_free(bold_name);
-    gtk_misc_set_alignment(GTK_MISC(name_w), 1.0, 0.0);
+    gtk_misc_set_alignment(GTK_MISC(name_w), 0.0, 0.0);
     gtk_label_set_use_markup(GTK_LABEL(name_w), TRUE);
+
+    gtk_table_attach(GTK_TABLE(table), name_w, 0, 1, *row_p, *row_p + 1,
+		     GTK_FILL, GTK_FILL, 0, 0);
 
     if (multiline) {
 	GtkWidget *textview;
@@ -248,18 +251,19 @@ add_row(GtkWidget *table, gint *row_p,
 			GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(value_w),
 					    GTK_SHADOW_IN);
-	gtk_widget_set_size_request(value_w, -1, 50);
+	gtk_widget_set_size_request(value_w, -1, 100);
 	gtk_container_add(GTK_CONTAINER(value_w), textview);
+        (*row_p)++;
+        gtk_table_attach(GTK_TABLE(table), value_w, 0, 2, *row_p, *row_p + 1,
+                         GTK_FILL|GTK_EXPAND, GTK_FILL, 0, 0);
     } else {
-	value_w = gtk_label_new(value);
-	gtk_misc_set_alignment(GTK_MISC(value_w), 0.0, 0.5);
+        value_w = gtk_label_new(value);
+        gtk_misc_set_alignment(GTK_MISC(value_w), 0.0, 0.5);
 	gtk_label_set_selectable(GTK_LABEL(value_w), TRUE);
+        gtk_table_attach(GTK_TABLE(table), value_w, 1, 2, *row_p, *row_p + 1,
+                         GTK_FILL|GTK_EXPAND, GTK_FILL, 0, 0);
     }
 
-    gtk_table_attach(GTK_TABLE(table), name_w, 0, 1, *row_p, *row_p + 1,
-		     GTK_FILL, GTK_FILL, 0, 0);
-    gtk_table_attach(GTK_TABLE(table), value_w, 1, 2, *row_p, *row_p + 1,
-		     GTK_FILL|GTK_EXPAND, GTK_FILL, 0, 0);
 
     (*row_p)++;
 }
@@ -423,7 +427,7 @@ main(int argc, char **argv)
     GFile *file;
     gchar *font_file, *title;
     gint row;
-    GtkWidget *window, *vbox, *table, *swin, *drawing_area;
+    GtkWidget *window, *hbox, *table, *swin, *drawing_area;
     GdkPixmap *pixmap;
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
 
@@ -473,24 +477,14 @@ main(int argc, char **argv)
     g_free(title);
     gtk_window_set_resizable(GTK_WINDOW(window), TRUE);
 
-    vbox = gtk_vbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(window), vbox);
-
-    table = gtk_table_new(1, 2, FALSE);
-    gtk_container_set_border_width(GTK_CONTAINER(table), 5);
-    gtk_box_pack_start(GTK_BOX(vbox), table, FALSE, TRUE, 0);
-
-    row = 0;
-    add_face_info(table, &row, font_file, face);
-
-    gtk_table_set_col_spacings(GTK_TABLE(table), 8);
-    gtk_table_set_row_spacings(GTK_TABLE(table), 2);
+    hbox = gtk_hbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(window), hbox);
 
     swin = gtk_scrolled_window_new(NULL, NULL);
     gtk_widget_set_size_request(swin, 500, 200);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swin),
 				   GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-    gtk_box_pack_start(GTK_BOX(vbox), swin, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(hbox), swin, TRUE, TRUE, 0);
 
     drawing_area = gtk_drawing_area_new();
     gtk_widget_modify_bg(drawing_area, GTK_STATE_NORMAL, &white);
@@ -503,6 +497,15 @@ main(int argc, char **argv)
 		     G_CALLBACK(expose_event), pixmap);
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
+    table = gtk_table_new(1, 2, FALSE);
+    gtk_container_set_border_width(GTK_CONTAINER(table), 5);
+    gtk_box_pack_start(GTK_BOX(hbox), table, FALSE, TRUE, 0);
+
+    row = 0;
+    add_face_info(table, &row, font_file, face);
+
+    gtk_table_set_col_spacings(GTK_TABLE(table), 8);
+    gtk_table_set_row_spacings(GTK_TABLE(table), 2);
     gtk_widget_show_all(window);
 
     gtk_main();
