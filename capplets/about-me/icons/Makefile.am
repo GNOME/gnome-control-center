@@ -1,5 +1,7 @@
 pixmapsdir = $(pkgdatadir)/pixmaps
 pixmaps_DATA =			\
+	gnome-about-me-lock.png	\
+	gnome-about-me-lock-open.png	\
 	left-index-finger.svg	\
 	left-little-finger.svg	\
 	left-middle-finger.svg	\
