@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2009-06-29 16:52+0000\n"
-"PO-Revision-Date: 2009-07-03 00:04+0300\n"
+"POT-Creation-Date: 2009-07-16 12:56+0000\n"
+"PO-Revision-Date: 2009-07-27 21:30+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -640,6 +640,10 @@ msgstr "Kasuta eelmist kirjatüüpi"
 msgid "Use selected font"
 msgstr "Kasuta valitud kirjatüüpi"
 
+#, c-format
+msgid "Could not load user interface file: %s"
+msgstr "Kasutajaliide faili pole võimalik laadida: %s"
+
 msgid "Specify the filename of a theme to install"
 msgstr "Paigaldatava teemafaili nime määramine"
 
@@ -755,8 +759,8 @@ msgstr "Parim k_ontrast"
 msgid "C_ustomize..."
 msgstr "_Kohanda..."
 
-msgid "C_ut"
-msgstr "_Lõika"
+msgid "Centered"
+msgstr "Keskel"
 
 msgid "Changing your cursor theme takes effect the next time you log in."
 msgstr "Kursoriteema muudatused rakenduvad järgmisel sisselogimisel."
@@ -779,6 +783,9 @@ msgstr "_Töölaua kirjatüüp:"
 msgid "Edit"
 msgstr "Redaktor"
 
+msgid "Fill screen"
+msgstr "Üle ekraani"
+
 msgid "Font Rendering Details"
 msgstr "Kirjatüübi renderdamise üksikasjad"
 
@@ -788,8 +795,14 @@ msgstr "Kirjatüübid"
 msgid "Gra_yscale"
 msgstr "_Halltoon"
 
+msgid "Horizontal gradient"
+msgstr "Rõhtne üleminek"
+
 msgid "Icons"
 msgstr "Ikoonid"
+
+msgid "Icons only"
+msgstr "Ainult ikoonid"
 
 msgid "Interface"
 msgstr "Liides"
@@ -800,12 +813,6 @@ msgstr "Suur"
 msgid "N_one"
 msgstr "P_uudub"
 
-msgid "New File"
-msgstr "Uus fail"
-
-msgid "Open File"
-msgstr "Faili avamine"
-
 msgid "Open a dialog to specify the color"
 msgstr "Dialoogi avamine värvi määramiseks"
 
@@ -814,9 +821,6 @@ msgstr "Kursor"
 
 msgid "R_esolution:"
 msgstr "_Eraldusvõime:"
-
-msgid "Save File"
-msgstr "Faili salvestamine"
 
 msgid "Save Theme As..."
 msgstr "Teema salvestamine kui..."
@@ -827,20 +831,17 @@ msgstr "Salvesta _kui..."
 msgid "Save _background image"
 msgstr "Salvesta _taustapilt"
 
+msgid "Scaled"
+msgstr "Skaleeritud"
+
 msgid "Show _icons in menus"
 msgstr "Menüüdes _näidatakse ikoone"
 
 msgid "Small"
 msgstr "Väike"
 
-msgid ""
-"Solid color\n"
-"Horizontal gradient\n"
-"Vertical gradient"
-msgstr ""
-"Ühtlane värvus\n"
-"Rõhtne üleminek\n"
-"Püstine üleminek"
+msgid "Solid color"
+msgstr "Ühtlane värvus"
 
 msgid "Sub_pixel (LCDs)"
 msgstr "Alam_piksel (LCDd)"
@@ -851,16 +852,14 @@ msgstr "Alam_piksli silumine (LCDd)"
 msgid "Text"
 msgstr "Tekst"
 
-msgid ""
-"Text below items\n"
-"Text beside items\n"
-"Icons only\n"
-"Text only"
-msgstr ""
-"Tekst kirjete all\n"
-"Tekst kirjete kõrval\n"
-"Ainult ikoonid\n"
-"Ainult tekst"
+msgid "Text below items"
+msgstr "Tekst kirjete all"
+
+msgid "Text beside items"
+msgstr "Tekst kirjete kõrval"
+
+msgid "Text only"
+msgstr "Ainult tekst"
 
 msgid "The current controls theme does not support color schemes."
 msgstr "Praegune juhtteema ei toeta värviskeeme."
@@ -868,18 +867,8 @@ msgstr "Praegune juhtteema ei toeta värviskeeme."
 msgid "Theme"
 msgstr "Teema"
 
-msgid ""
-"Tiled\n"
-"Zoom\n"
-"Centered\n"
-"Scaled\n"
-"Fill screen"
-msgstr ""
-"Paanidena\n"
-"Suurendatud\n"
-"Keskel\n"
-"Skaleeritud\n"
-"Üle ekraani"
+msgid "Tiled"
+msgstr "Paanidena"
 
 msgid "Toolbar _button labels:"
 msgstr "Tööriistariba nuppude si_ldid:"
@@ -888,8 +877,14 @@ msgstr "Tööriistariba nuppude si_ldid:"
 msgid "VB_GR"
 msgstr "VS_RP"
 
+msgid "Vertical gradient"
+msgstr "Püstine üleminek"
+
 msgid "Window Border"
 msgstr "Akna ääris"
+
+msgid "Zoom"
+msgstr "Suurendatud"
 
 msgid "_Add..."
 msgstr "_Lisa..."
@@ -900,9 +895,6 @@ msgstr "_Rakenduste kirjatüüp:"
 #. pixel order blue, green, red
 msgid "_BGR"
 msgstr "_SRP"
-
-msgid "_Copy"
-msgstr "_Kopeeri"
 
 msgid "_Description:"
 msgstr "_Kirjeldus:"
@@ -937,23 +929,8 @@ msgstr "_Monokroom"
 msgid "_Name:"
 msgstr "_Nimi:"
 
-msgid "_New"
-msgstr "_Uus"
-
 msgid "_None"
 msgstr "Puu_dub"
-
-msgid "_Open"
-msgstr "_Ava"
-
-msgid "_Paste"
-msgstr "_Aseta"
-
-msgid "_Print"
-msgstr "_Trüki"
-
-msgid "_Quit"
-msgstr "_Lõpeta"
 
 #. pixel order red, green, blue
 msgid "_RGB"
@@ -961,9 +938,6 @@ msgstr "_PRS"
 
 msgid "_Reset to Defaults"
 msgstr "Taasta _vaikeväärtused"
-
-msgid "_Save"
-msgstr "_Salvesta"
 
 msgid "_Selected items:"
 msgstr "_Valitud kirjed:"
@@ -1602,16 +1576,11 @@ msgstr "Kuvaeelistused"
 msgid "Include _panel"
 msgstr "_Paneeli kaasamine"
 
-msgid ""
-"Normal\n"
-"Left\n"
-"Right\n"
-"Upside-down\n"
-msgstr ""
-"Tavaline\n"
-"Vasakule\n"
-"Paremale\n"
-"Tagurpidi\n"
+msgid "Left"
+msgstr "Vasakule"
+
+msgid "Normal"
+msgstr "Tavaline"
 
 msgid "Off"
 msgstr "Välja lülitatud"
@@ -1624,6 +1593,12 @@ msgstr "_Pööramine:"
 
 msgid "Re_fresh rate:"
 msgstr "_Värskendussagedus:"
+
+msgid "Right"
+msgstr "Paremale"
+
+msgid "Upside-down"
+msgstr "Tagurpidi"
 
 msgid "_Detect Monitors"
 msgstr "_Tuvasta kuvad"
@@ -1642,15 +1617,6 @@ msgstr "Ekraani eraldusvõime muutmine"
 
 msgid "Display"
 msgstr "Kuva"
-
-msgid "Normal"
-msgstr "Tavaline"
-
-msgid "Left"
-msgstr "Vasakule"
-
-msgid "Right"
-msgstr "Paremale"
 
 msgid "Upside Down"
 msgstr "Pea peal"
@@ -2082,6 +2048,9 @@ msgstr "<b>Vasaku- või paremakäeliste hiir</b>"
 msgid "<b>Pointer Speed</b>"
 msgstr "<b>Kursori kiirus</b>"
 
+msgid "<b>Scrolling</b>"
+msgstr "<b>Kerimine</b>"
+
 msgid "<b>Simulated Secondary Click</b>"
 msgstr "<b>Simuleeritud teine klõps</b>"
 
@@ -2129,6 +2098,12 @@ msgstr "T_opeltklõps:"
 msgid "D_rag click:"
 msgstr "_Lohistamise klõps:"
 
+msgid "Enable _horizontal scrolling"
+msgstr ""
+
+msgid "Enable mouse _clicks with touchpad"
+msgstr ""
+
 msgid "Mouse Preferences"
 msgstr "Hiire-eelistused"
 
@@ -2144,8 +2119,23 @@ msgstr "Klõpsu liigi _aken on nähtaval"
 msgid "Thr_eshold:"
 msgstr "_Lävi:"
 
+msgid "Touchpad"
+msgstr ""
+
+msgid "Two-_finger scrolling"
+msgstr ""
+
 msgid "_Acceleration:"
 msgstr "K_iirendus:"
+
+msgid "_Disable touchpad while typing"
+msgstr ""
+
+msgid "_Disabled"
+msgstr "_Välja lülitatud"
+
+msgid "_Edge scrolling"
+msgstr ""
 
 msgid "_Initiate click when stopping pointer movement"
 msgstr "_Kursori peatumisel tehakse hiireklõps"
@@ -2430,16 +2420,8 @@ msgstr "_Lükka puhkepaus edasi"
 msgid "Take a break!"
 msgstr "Tee üks puhkepaus!"
 
-#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#. translators: keep the initial "/"
-msgid "/_Preferences"
-msgstr "/_Eelistused"
-
-msgid "/_About"
-msgstr "/_Rakendist lähemalt"
-
-msgid "/_Take a Break"
-msgstr "/_Tee vaheaeg"
+msgid "_Take a Break"
+msgstr "_Tee vaheaeg"
 
 #, c-format
 msgid "%d minute until the next break"
@@ -2618,7 +2600,7 @@ msgid "Help"
 msgstr "Abi"
 
 msgid "Upgrade"
-msgstr ""
+msgstr "Uuenda"
 
 msgid "Uninstall"
 msgstr ""
@@ -2693,7 +2675,7 @@ msgid "Open in File Manager"
 msgstr "Ava failihalduris"
 
 msgid "?"
-msgstr ""
+msgstr "?"
 
 msgid "%l:%M %p"
 msgstr "%H:%M"
