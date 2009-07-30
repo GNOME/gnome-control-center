@@ -26,9 +26,6 @@
 /* 5th entry in combo box */
 #define DIRECTION_DISABLE 4
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 enum {
 	CLICK_TYPE_SINGLE,
 	CLICK_TYPE_DOUBLE,

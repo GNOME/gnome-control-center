@@ -49,9 +49,6 @@
 #include <X11/Xcursor/Xcursor.h>
 #endif
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 enum
 {
 	DOUBLE_CLICK_TEST_OFF,

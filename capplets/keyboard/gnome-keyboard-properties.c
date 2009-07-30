@@ -38,9 +38,6 @@
 #include "gnome-keyboard-properties-a11y.h"
 #include "gnome-keyboard-properties-xkb.h"
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 enum {
 	RESPONSE_APPLY = 1,
 	RESPONSE_CLOSE

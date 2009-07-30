@@ -39,9 +39,6 @@
 #define SEL_LAYOUT_TREE_COL_DEFAULT 1
 #define SEL_LAYOUT_TREE_COL_ID 2
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 static int idx2select = -1;
 static int max_selected_layouts = -1;
 static int default_group = -1;

@@ -34,9 +34,6 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 static GtkBuilder *chooser_dialog = NULL;
 static const char *current1st_level_id = NULL;
 static GSList *option_checks_list = NULL;

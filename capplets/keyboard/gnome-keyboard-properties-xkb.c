@@ -37,9 +37,6 @@
 
 #include <libgnomekbd/gkbd-desktop-config.h>
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 XklEngine *engine;
 XklConfigRegistry *config_registry;
 

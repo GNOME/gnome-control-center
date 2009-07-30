@@ -27,9 +27,6 @@
 /* This must match the number of images on the 2nd page in the UI file */
 #define MAX_ENROLL_STAGES 3
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 static DBusGProxy *manager = NULL;
 static DBusGConnection *connection = NULL;
 static gboolean is_disable = FALSE;

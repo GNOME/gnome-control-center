@@ -32,9 +32,9 @@
 
 /* Macros to make certain repetitive tasks a bit easier */
 
-/* Retrieve a widget from the Glade object */
+/* Retrieve a widget from the UI object */
 
-#define WID(s) glade_xml_get_widget (dialog, s)
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
 /* Some miscellaneous functions useful to all capplets */
 

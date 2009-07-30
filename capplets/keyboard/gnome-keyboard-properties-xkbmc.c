@@ -33,9 +33,6 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 static gchar *current_model_name = NULL;
 static gchar *current_vendor_name = NULL;
 

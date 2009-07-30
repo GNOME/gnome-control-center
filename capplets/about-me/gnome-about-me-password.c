@@ -44,9 +44,6 @@
 #include "capplet-util.h"
 #include "eel-alert-dialog.h"
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 /* Passwd states */
 typedef enum {
 	PASSWD_STATE_NONE,		/* Passwd is not asking for anything */

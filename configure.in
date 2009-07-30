@@ -91,7 +91,7 @@ COMMON_MODULES="gtk+-2.0 >= 2.15.0 dnl
  glib-2.0 >= 2.17.4 dnl
  gio-2.0 dnl
  gconf-2.0 dnl
- libglade-2.0 >= 2.0.0 dnl
+ libxml-2.0 dnl
  gnome-desktop-2.0 >= 2.25.1"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1)
@@ -284,7 +284,7 @@ GNOMECC_CAPPLETS_CFLAGS="${COMMON_CFLAGS} ${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${DB
 GNOMECC_CAPPLETS_LIBS="${COMMON_LIBS} ${CAPPLET_LIBS} ${DBUS_LIBS}"
 
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
-GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"
+GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(pixmaps_DATA)"
 
 AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
 AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)

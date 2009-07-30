@@ -51,9 +51,6 @@
 
 #define EMAIL_SLOTS 4
 
-#undef WID
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 typedef struct {
 	EContact 	*contact;
 	EBook    	*book;
