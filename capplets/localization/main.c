@@ -20,17 +20,18 @@
  */
 
 #include <config.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtk.h>
 
 static GtkWidget *
 create_dialog (void)
 {
-	GladeXML *xml;
+	GtkBuilder *ui;
 	GtkWidget *dialog;
 
-	xml = glade_xml_new (GNOMECC_GLADEDIR "/localization.glade", "i18n_dialog", NULL);
-	dialog = glade_xml_get_widget (xml, "i18n_dialog");
-	g_object_unref (xml);
+	ui = gtk_builder_new ();
+	gtk_builder_add_from_file (ui, GNOMECC_UI_DIR "/localization.ui", NULL);
+	dialog = GTK_WIDGET (gtk_builder_get_object (ui, "i18n_dialog"));
+	g_object_unref (ui);
 
 	return dialog;
 }
