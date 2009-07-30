@@ -27,7 +27,6 @@
 #include <pwd.h>
 #include <gio/gio.h>
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <pwd.h>
 #include <unistd.h>
 #include <libebook/e-book.h>
@@ -52,13 +51,17 @@
 
 #define EMAIL_SLOTS 4
 
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
+
 typedef struct {
 	EContact 	*contact;
 	EBook    	*book;
 
-	GladeXML 	*dialog;
+	GtkBuilder 	*dialog;
 	GtkWidget	*enable_fingerprint_button;
 	GtkWidget	*disable_fingerprint_button;
+	GtkWidget   *image_chooser;
 
 	GdkScreen    	*screen;
 	GtkIconTheme 	*theme;
@@ -303,7 +306,7 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 	const gchar *wid;
 	gint i;
 
-	wid = glade_get_widget_name (widget);
+	wid = gtk_widget_get_name (widget);
 
 	if (wid == NULL)
 		return FALSE;
@@ -493,7 +496,7 @@ about_me_setup_email (GnomeAboutMe *me)
 /**
  * about_me_load_string_field:
  *
- * wid: glade widget name
+ * wid: UI widget name
  * cid: id of the field (EDS id)
  * aid: position in the array WidToCid
  **/
@@ -501,8 +504,8 @@ about_me_setup_email (GnomeAboutMe *me)
 static void
 about_me_load_string_field (GnomeAboutMe *me, const gchar *wid, guint cid, guint aid)
 {
-	GtkWidget *widget;
-	GladeXML  *dialog;
+	GtkWidget   *widget;
+	GtkBuilder  *dialog;
 	const gchar *str;
 
 	dialog = me->dialog;
@@ -541,22 +544,19 @@ about_me_load_string_field (GnomeAboutMe *me, const gchar *wid, guint cid, guint
 static void
 about_me_load_photo (GnomeAboutMe *me, EContact *contact)
 {
-	GtkWidget     *widget;
-	GladeXML      *dialog;
+	GtkBuilder    *dialog;
 	EContactPhoto *photo;
 
 	dialog = me->dialog;
 
-	widget = WID ("image-chooser");
-
 	if (me->person)
-		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (widget), me->person);
+		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (me->image_chooser), me->person);
 
 	photo = e_contact_get (contact, E_CONTACT_PHOTO);
 
 	if (photo && photo->type == E_CONTACT_PHOTO_TYPE_INLINED) {
 		me->have_image = TRUE;
-		e_image_chooser_set_image_data (E_IMAGE_CHOOSER (widget),
+		e_image_chooser_set_image_data (E_IMAGE_CHOOSER (me->image_chooser),
 						(char *) photo->data.inlined.data, photo->data.inlined.length);
 		e_contact_photo_free (photo);
 	} else {
@@ -567,8 +567,7 @@ about_me_load_photo (GnomeAboutMe *me, EContact *contact)
 static void
 about_me_update_photo (GnomeAboutMe *me)
 {
-	GtkWidget     *widget;
-	GladeXML      *dialog;
+	GtkBuilder    *dialog;
 	EContactPhoto *photo;
 	gchar         *file;
 	GError        *error;
@@ -586,8 +585,7 @@ about_me_update_photo (GnomeAboutMe *me)
 		gboolean do_scale = FALSE;
 		float scale;
 
-		widget = WID ("image-chooser");
-		e_image_chooser_get_image_data (E_IMAGE_CHOOSER (widget), (char **) &data, &length);
+		e_image_chooser_get_image_data (E_IMAGE_CHOOSER (me->image_chooser), (char **) &data, &length);
 
 		/* Before updating the image in EDS scale it to a reasonable size
 		   so that the user doesn't get an application that does not respond
@@ -689,19 +687,6 @@ about_me_load_info (GnomeAboutMe *me)
 			       me->disable_fingerprint_button);
 }
 
-GtkWidget *
-eab_create_image_chooser_widget (gchar *name,
-				 gchar *string1, gchar *string2,
-				 gint int1, gint int2)
-{
-	GtkWidget *w = NULL;
-
-	w = e_image_chooser_new ();
-	gtk_widget_show_all (w);
-
-	return w;
-}
-
 static void
 about_me_update_preview (GtkFileChooser *chooser,
 			 GnomeAboutMe   *me)
@@ -762,15 +747,13 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 {
 	GtkFileChooser *chooser_dialog;
 	gint response;
-	GtkWidget *image_chooser;
-	GladeXML *dialog;
-	GtkWidget *image;
+	GtkBuilder *dialog;
+	GtkWidget  *image;
 	const gchar *chooser_dir = DATADIR"/pixmaps/faces";
 	const gchar *pics_dir;
 	GtkFileFilter *filter;
 
 	dialog = me->dialog;
-	image_chooser = WID ("image-chooser");
 
 	chooser_dialog = GTK_FILE_CHOOSER (
 			 gtk_file_chooser_dialog_new (_("Select Image"), GTK_WINDOW (WID ("about-me-dialog")),
@@ -820,13 +803,13 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 		me->have_image = TRUE;
 		me->image_changed = TRUE;
 
-		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (image_chooser), filename);
+		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (me->image_chooser), filename);
 		g_free (filename);
 		about_me_update_photo (me);
 	} else if (response == GTK_RESPONSE_NO) {
 		me->have_image = FALSE;
 		me->image_changed = TRUE;
-		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (image_chooser), me->person);
+		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (me->image_chooser), me->person);
 		about_me_update_photo (me);
 	}
 
@@ -847,9 +830,7 @@ static void
 about_me_icon_theme_changed (GtkWindow    *window,
 			     GtkIconTheme *theme)
 {
-	GtkWidget   *widget;
 	GtkIconInfo *icon;
-	GladeXML    *dialog;
 
 	icon = gtk_icon_theme_lookup_icon (me->theme, "stock_person", 80, 0);
 	if (icon == NULL) {
@@ -860,12 +841,8 @@ about_me_icon_theme_changed (GtkWindow    *window,
 
 	gtk_icon_info_free (icon);
 
-	if (me->have_image) {
-		dialog = me->dialog;
-
-		widget = WID ("image-chooser");
-		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (widget), me->person);
-	}
+	if (me->have_image)
+		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (me->image_chooser), me->person);
 }
 
 static void
@@ -887,7 +864,7 @@ about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, GnomeAboutMe *m
 static void
 about_me_passwd_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 {
-	GladeXML *dialog;
+	GtkBuilder *dialog;
 
 	dialog = me->dialog;
 	gnome_about_me_password (GTK_WINDOW (WID ("about-me-dialog")));
@@ -907,7 +884,7 @@ about_me_setup_dialog (void)
 	GtkWidget    *widget;
 	GtkWidget    *main_dialog;
 	GtkIconInfo  *icon;
-	GladeXML     *dialog;
+	GtkBuilder   *dialog;
 	GError 	     *error = NULL;
 	GList        *chain;
 
@@ -917,8 +894,11 @@ about_me_setup_dialog (void)
 
 	me = g_new0 (GnomeAboutMe, 1);
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-about-me.glade",
-				"about-me-dialog", NULL);
+	dialog = gtk_builder_new ();
+	gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR "/gnome-about-me-dialog.ui", NULL);
+    
+	me->image_chooser = e_image_chooser_new ();
+	gtk_container_add (GTK_CONTAINER (WID ("button-image")), me->image_chooser);
 
 	if (dialog == NULL) {
 		about_me_destroy (me);
@@ -1053,8 +1033,7 @@ about_me_setup_dialog (void)
 	g_signal_connect (me->disable_fingerprint_button, "clicked",
 			  G_CALLBACK (about_me_fingerprint_button_clicked_cb), me);
 
-	widget = WID ("image-chooser");
-	g_signal_connect (widget, "changed",
+	g_signal_connect (me->image_chooser, "changed",
 			  G_CALLBACK (about_me_image_changed_cb), me);
 
 	/* Address tab: set up the focus chains */

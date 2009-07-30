@@ -3,7 +3,7 @@ SUBDIRS = icons
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = about-me
 
-glade_files = gnome-about-me.glade gnome-about-me-fingerprint.glade
+ui_files = gnome-about-me-dialog.ui gnome-about-me-password.ui gnome-about-me-fingerprint.ui
 Desktop_in_files = gnome-about-me.desktop.in
 
 gnome_about_me_SOURCES =	 	\
@@ -31,8 +31,8 @@ gnome_about_me_LDFLAGS = -export-dynamic
 desktopdir = $(datadir)/applications
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-gladedir   = $(pkgdatadir)/glade
-glade_DATA = $(glade_files)
+uidir   = $(pkgdatadir)/ui
+ui_DATA = $(ui_files)
 
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
@@ -40,7 +40,7 @@ INCLUDES = \
 	$(POLKIT_GNOME_CFLAGS) \
 	-DDATADIR="\"$(datadir)\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	-DGNOMECC_GLADE_DIR="\"$(gladedir)\"" \
+	-DGNOMECC_UI_DIR="\"$(uidir)\"" \
 	-DGNOMECC_PIXMAP_DIR="\"$(pkgdatadir)/pixmaps\"" \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
@@ -56,6 +56,6 @@ marshal.c: marshal.h
 endif # BUILD_ABOUTME
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_DATA) $(MARSHALFILES)
-EXTRA_DIST = $(glade_files) fprintd-marshal.list
+EXTRA_DIST = $(ui_files) fprintd-marshal.list
 
 -include $(top_srcdir)/git.mk

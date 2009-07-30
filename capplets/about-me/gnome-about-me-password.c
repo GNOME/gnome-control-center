@@ -31,7 +31,6 @@
 #include <gdk/gdkkeysyms.h>
 #include <pwd.h>
 #include <stdlib.h>
-#include <glade/glade.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
@@ -45,6 +44,9 @@
 #include "capplet-util.h"
 #include "eel-alert-dialog.h"
 
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
+
 /* Passwd states */
 typedef enum {
 	PASSWD_STATE_NONE,		/* Passwd is not asking for anything */
@@ -55,7 +57,7 @@ typedef enum {
 } PasswdState;
 
 typedef struct {
-	GladeXML  *xml;
+	GtkBuilder  *ui;
 
 	/* Commonly used widgets */
 	GtkEntry *current_password;
@@ -428,7 +430,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 	GError		*error = NULL;
 
 	gchar		*msg = NULL;		/* Status error message */
-	GladeXML	*dialog;
+	GtkBuilder	*dialog;
 
 	gboolean	reinit = FALSE;
 
@@ -437,7 +439,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 		str = g_string_new ("");
 	}
 
-	dialog = pdialog->xml;
+	dialog = pdialog->ui;
 
 	if (g_io_channel_read_chars (source, buf, BUFSIZE, &bytes_read, &error) != G_IO_STATUS_NORMAL) {
 		g_warning ("IO Channel read error: %s", error->message);
@@ -661,12 +663,12 @@ update_password (PasswordDialog *pdialog)
 static void
 passdlg_set_busy (PasswordDialog *pdialog, gboolean busy)
 {
-	GladeXML   *dialog;
+	GtkBuilder *dialog;
 	GtkWidget  *toplevel;
 	GdkCursor  *cursor = NULL;
 	GdkDisplay *display;
 
-	dialog = pdialog->xml;
+	dialog = pdialog->ui;
 
 	/* Set cursor */
 	toplevel = WID ("change-password");
@@ -738,9 +740,9 @@ passdlg_error_dialog (GtkWindow *parent, const gchar *title,
 static void
 passdlg_set_auth_state (PasswordDialog *pdialog, gboolean state)
 {
-	GladeXML	*dialog;
+	GtkBuilder *dialog;
 
-	dialog = pdialog->xml;
+	dialog = pdialog->ui;
 
 	/* Widgets which require a not-authenticated state to be accessible */
 	g_object_set (pdialog->current_password, "sensitive", !state, NULL);
@@ -813,8 +815,7 @@ passdlg_spawn_passwd (PasswordDialog *pdialog)
 
 	/* Spawn backend */
 	if (!spawn_passwd (pdialog, &error)) {
-		GtkWidget *parent = glade_xml_get_widget (pdialog->xml,
-							  "change-password");
+		GtkWidget *parent = GTK_WIDGET (gtk_builder_get_object (pdialog->ui, "change-password"));
 
 		/* translators: Unable to launch <program>: <error message> */
 		details = g_strdup_printf (_("Unable to launch %s: %s"),
@@ -865,11 +866,11 @@ passdlg_authenticate (GtkButton *button, PasswordDialog *pdialog)
 static guint
 passdlg_validate_passwords (PasswordDialog *pdialog)
 {
-	GladeXML		*dialog;
+	GtkBuilder	*dialog;
 	const gchar	*new_password, *retyped_password;
 	glong			nlen, rlen;
 
-	dialog = pdialog->xml;
+	dialog = pdialog->ui;
 
 	new_password = gtk_entry_get_text (pdialog->new_password);
 	retyped_password = gtk_entry_get_text (pdialog->retyped_password);
@@ -902,11 +903,11 @@ passdlg_validate_passwords (PasswordDialog *pdialog)
 static guint
 passdlg_refresh_password_state (PasswordDialog *pdialog)
 {
-	GladeXML	*dialog;
+	GtkBuilder *dialog;
 	guint		ret;
 	gboolean	valid = FALSE;
 
-	dialog = pdialog->xml;
+	dialog = pdialog->ui;
 
 	ret = passdlg_validate_passwords (pdialog);
 
@@ -1008,13 +1009,14 @@ passdlg_activate (GtkEntry *entry, GtkWidget *w)
 static void
 passdlg_init (PasswordDialog *pdialog, GtkWindow *parent)
 {
-	GladeXML		*dialog;
+	GtkBuilder		*dialog;
 	GtkWidget		*wpassdlg;
 	GtkAccelGroup	*group;
 
 	/* Initialize dialog */
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-about-me.glade", "change-password", NULL);
-	pdialog->xml = dialog;
+	dialog = gtk_builder_new ();
+    gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR "/gnome-about-me-password.ui", NULL);
+	pdialog->ui = dialog;
 
 	wpassdlg = WID ("change-password");
 	capplet_set_icon (wpassdlg, "user-info");
@@ -1098,7 +1100,7 @@ void
 gnome_about_me_password (GtkWindow *parent)
 {
 	PasswordDialog	*pdialog;
-	GladeXML		*dialog;
+	GtkBuilder		*dialog;
 	GtkWidget		*wpassdlg;
 
 	gint			result;
@@ -1108,7 +1110,7 @@ gnome_about_me_password (GtkWindow *parent)
 	pdialog = g_new0 (PasswordDialog, 1);
 	passdlg_init (pdialog, parent);
 
-	dialog = pdialog->xml;
+	dialog = pdialog->ui;
 	wpassdlg = WID ("change-password");
 
 	/* Go! */

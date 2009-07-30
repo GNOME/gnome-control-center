@@ -19,14 +19,16 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <dbus/dbus-glib-bindings.h>
 
 #include "fingerprint-strings.h"
 #include "capplet-util.h"
 
-/* This must match the number of images on the 2nd page in the glade file */
+/* This must match the number of images on the 2nd page in the UI file */
 #define MAX_ENROLL_STAGES 3
+
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
 static DBusGProxy *manager = NULL;
 static DBusGConnection *connection = NULL;
@@ -43,8 +45,7 @@ typedef struct {
 	GtkWidget *disable;
 
 	GtkWidget *ass;
-	GladeXML *dialog_page1;
-	GladeXML *dialog_page2;
+	GtkBuilder *dialog;
 
 	DBusGProxy *device;
 	gboolean is_swipe;
@@ -208,7 +209,7 @@ delete_fingerprints (void)
 }
 
 static void
-delete_fingerprints_question (GladeXML *dialog, GtkWidget *enable, GtkWidget *disable)
+delete_fingerprints_question (GtkBuilder *dialog, GtkWidget *enable, GtkWidget *disable)
 {
 	GtkWidget *question;
 	GtkWidget *button;
@@ -254,8 +255,7 @@ enroll_data_destroy (EnrollData *data)
 	case STATE_NONE:
 		g_free (data->name);
 		g_object_unref (data->device);
-		g_object_unref (data->dialog_page1);
-		g_object_unref (data->dialog_page2);
+		g_object_unref (data->dialog);
 		gtk_widget_destroy (data->ass);
 
 		g_free (data);
@@ -263,7 +263,7 @@ enroll_data_destroy (EnrollData *data)
 }
 
 static const char *
-selected_finger (GladeXML *dialog)
+selected_finger (GtkBuilder *dialog)
 {
 	int index;
 
@@ -304,13 +304,13 @@ selected_finger (GladeXML *dialog)
 static void
 finger_radio_button_toggled (GtkToggleButton *button, EnrollData *data)
 {
-	data->finger = selected_finger (data->dialog_page1);
+	data->finger = selected_finger (data->dialog);
 }
 
 static void
 finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 {
-	data->finger = selected_finger (data->dialog_page1);
+	data->finger = selected_finger (data->dialog);
 }
 
 static void
@@ -328,7 +328,7 @@ assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 static void
 enroll_result (GObject *object, const char *result, gboolean done, EnrollData *data)
 {
-	GladeXML *dialog = data->dialog_page2;
+	GtkBuilder *dialog = data->dialog;
 	char *msg;
 
 	if (g_str_equal (result, "enroll-completed") || g_str_equal (result, "enroll-stage-passed")) {
@@ -376,7 +376,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 	if (g_str_equal (name, "enroll")) {
 		DBusGProxy *p;
 		GError *error = NULL;
-		GladeXML *dialog = data->dialog_page2;
+		GtkBuilder *dialog = data->dialog;
 		char *path;
 		guint i;
 		GValue value = { 0, };
@@ -488,7 +488,7 @@ enroll_fingerprints (GtkWindow *parent, GtkWidget *enable, GtkWidget *disable)
 {
 	DBusGProxy *device, *p;
 	GHashTable *props;
-	GladeXML *dialog;
+	GtkBuilder *dialog;
 	EnrollData *data;
 	GtkWidget *ass;
 	char *msg;
@@ -532,7 +532,11 @@ enroll_fingerprints (GtkWindow *parent, GtkWidget *enable, GtkWidget *disable)
 	}
 	g_object_unref (p);
 
-	ass = gtk_assistant_new ();
+	dialog = gtk_builder_new ();
+	gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR "/gnome-about-me-fingerprint.ui", NULL);
+	data->dialog = dialog;
+
+	ass = WID ("assistant");
 	gtk_window_set_title (GTK_WINDOW (ass), _("Enable Fingerprint Login"));
 	gtk_window_set_transient_for (GTK_WINDOW (ass), parent);
 	gtk_window_set_position (GTK_WINDOW (ass), GTK_WIN_POS_CENTER_ON_PARENT);
@@ -544,13 +548,6 @@ enroll_fingerprints (GtkWindow *parent, GtkWidget *enable, GtkWidget *disable)
 			  G_CALLBACK (assistant_prepare), data);
 
 	/* Page 1 */
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-about-me-fingerprint.glade",
-				"page1", NULL);
-	data->dialog_page1 = dialog;
-
-	gtk_assistant_append_page (GTK_ASSISTANT (ass), WID("page1"));
-	gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page1"), _("Select finger"));
-	gtk_assistant_set_page_type (GTK_ASSISTANT (ass), WID("page1"), GTK_ASSISTANT_PAGE_CONTENT);
 	gtk_combo_box_set_active (GTK_COMBO_BOX (WID ("finger_combobox")), 0);
 
 	g_signal_connect (G_OBJECT (WID ("radiobutton1")), "toggled",
@@ -578,15 +575,10 @@ enroll_fingerprints (GtkWindow *parent, GtkWidget *enable, GtkWidget *disable)
 	gtk_assistant_set_page_complete (GTK_ASSISTANT (ass), WID("page1"), TRUE);
 
 	/* Page 2 */
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-about-me-fingerprint.glade",
-				"page2", NULL);
-	data->dialog_page2 = dialog;
-	gtk_assistant_append_page (GTK_ASSISTANT (ass), WID("page2"));
 	if (data->is_swipe != FALSE)
 		gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page2"), _("Swipe finger on reader"));
 	else
 		gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page2"), _("Place finger on reader"));
-	gtk_assistant_set_page_type (GTK_ASSISTANT (ass), WID("page2"), GTK_ASSISTANT_PAGE_CONTENT);
 
 	g_object_set_data (G_OBJECT (WID("page2")), "name", "enroll");
 
@@ -595,12 +587,6 @@ enroll_fingerprints (GtkWindow *parent, GtkWidget *enable, GtkWidget *disable)
 	g_free (msg);
 
 	/* Page 3 */
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-about-me-fingerprint.glade",
-				"page3", NULL);
-	gtk_assistant_append_page (GTK_ASSISTANT (ass), WID("page3"));
-	gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page3"), _("Done!"));
-	gtk_assistant_set_page_type (GTK_ASSISTANT (ass), WID("page3"), GTK_ASSISTANT_PAGE_SUMMARY);
-
 	g_object_set_data (G_OBJECT (WID("page3")), "name", "summary");
 
 	data->ass = ass;
@@ -608,7 +594,7 @@ enroll_fingerprints (GtkWindow *parent, GtkWidget *enable, GtkWidget *disable)
 }
 
 void
-fingerprint_button_clicked (GladeXML *dialog,
+fingerprint_button_clicked (GtkBuilder *dialog,
 			    GtkWidget *enable,
 			    GtkWidget *disable)
 {
