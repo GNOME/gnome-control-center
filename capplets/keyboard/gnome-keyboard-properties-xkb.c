@@ -28,7 +28,6 @@
 #include <string.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <glib/gi18n.h>
 
 #include "capplet-util.h"
@@ -37,6 +36,9 @@
 #include "gnome-keyboard-properties-xkb.h"
 
 #include <libgnomekbd/gkbd-desktop-config.h>
+
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
 XklEngine *engine;
 XklConfigRegistry *config_registry;
@@ -87,7 +89,7 @@ set_model_text (GtkWidget * picker, GConfValue * value)
 
 static void
 model_key_changed (GConfClient * client,
-		   guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
+		   guint cnxn_id, GConfEntry * entry, GtkBuilder * dialog)
 {
 	set_model_text (WID ("xkb_model_pick"),
 			gconf_entry_get_value (entry));
@@ -96,7 +98,7 @@ model_key_changed (GConfClient * client,
 }
 
 static void
-setup_model_entry (GladeXML * dialog)
+setup_model_entry (GtkBuilder * dialog)
 {
 	GConfValue *value;
 
@@ -113,7 +115,7 @@ setup_model_entry (GladeXML * dialog)
 }
 
 static void
-cleanup_xkb_tabs (GladeXML * dialog)
+cleanup_xkb_tabs (GtkBuilder * dialog)
 {
 	gkbd_desktop_config_term (&desktop_config);
 	gkbd_keyboard_config_term (&initial_config);
@@ -126,7 +128,7 @@ cleanup_xkb_tabs (GladeXML * dialog)
 }
 
 static void
-reset_to_defaults (GtkWidget * button, GladeXML * dialog)
+reset_to_defaults (GtkWidget * button, GtkBuilder * dialog)
 {
 	GkbdKeyboardConfig empty_kbd_config;
 
@@ -142,7 +144,7 @@ static void
 chk_separate_group_per_window_toggled (GConfPropertyEditor * peditor,
 				       const gchar * key,
 				       const GConfValue * value,
-				       GladeXML * dialog)
+				       GtkBuilder * dialog)
 {
 	xkb_layouts_enable_disable_default (dialog, value
 					    &&
@@ -150,7 +152,7 @@ chk_separate_group_per_window_toggled (GConfPropertyEditor * peditor,
 }
 
 void
-setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
+setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 {
 	GObject *peditor;
 	xkb_gconf_client = gconf_client_get_default ();
@@ -215,7 +217,7 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 }
 
 void
-enable_disable_restoring (GladeXML * dialog)
+enable_disable_restoring (GtkBuilder * dialog)
 {
 	GkbdKeyboardConfig gswic;
 	gboolean enable;

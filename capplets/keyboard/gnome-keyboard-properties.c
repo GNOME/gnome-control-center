@@ -29,7 +29,6 @@
 #endif
 
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -39,22 +38,25 @@
 #include "gnome-keyboard-properties-a11y.h"
 #include "gnome-keyboard-properties-xkb.h"
 
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
+
 enum {
 	RESPONSE_APPLY = 1,
 	RESPONSE_CLOSE
 };
 
-static GladeXML *
+static GtkBuilder *
 create_dialog (void)
 {
-	GladeXML *dialog;
+	GtkBuilder *dialog;
 	GtkSizeGroup *size_group;
 	GtkWidget *image;
 
-	dialog =
-	    glade_xml_new (GNOMECC_GLADE_DIR
-			   "/gnome-keyboard-properties.glade",
-			   "keyboard_dialog", NULL);
+	dialog = gtk_builder_new ();
+    gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR
+                               "/gnome-keyboard-properties-dialog.ui",
+                               NULL);
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("repeat_slow_label"));
@@ -120,7 +122,7 @@ dialog_response (GtkWidget * widget,
 }
 
 static void
-setup_dialog (GladeXML * dialog, GConfChangeSet * changeset)
+setup_dialog (GtkBuilder * dialog, GConfChangeSet * changeset)
 {
 	GObject *peditor;
 	gchar *monitor;
@@ -193,7 +195,7 @@ main (int argc, char **argv)
 {
 	GConfClient *client;
 	GConfChangeSet *changeset;
-	GladeXML *dialog;
+	GtkBuilder *dialog;
 	GOptionContext *context;
 
 	static gboolean apply_only = FALSE;

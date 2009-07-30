@@ -29,13 +29,15 @@
 #include <glib/gi18n.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 
 #include "capplet-util.h"
 
 #include "gnome-keyboard-properties-xkb.h"
 
-static GladeXML *chooser_dialog = NULL;
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
+
+static GtkBuilder *chooser_dialog = NULL;
 static const char *current1st_level_id = NULL;
 static GSList *option_checks_list = NULL;
 static GtkWidget *current_none_radio = NULL;
@@ -211,7 +213,7 @@ option_toggled_cb (GtkWidget * checkbutton, gpointer data)
    the top of this file. */
 static void
 xkb_options_add_option (XklConfigRegistry * config_registry,
-			XklConfigItem * config_item, GladeXML * dialog)
+			XklConfigItem * config_item, GtkBuilder * dialog)
 {
 	GtkWidget *option_check;
 	gchar *utf_option_name = xci_desc_to_utf8 (config_item);
@@ -302,7 +304,7 @@ xkb_option_checks_compare (GtkWidget * chk1, GtkWidget * chk2)
    add widgets for all the options in the group. */
 static void
 xkb_options_add_group (XklConfigRegistry * config_registry,
-		       XklConfigItem * config_item, GladeXML * dialog)
+		       XklConfigItem * config_item, GtkBuilder * dialog)
 {
 	GtkWidget *align, *vbox, *option_check;
 	gboolean allow_multiple_selection =
@@ -379,7 +381,7 @@ xkb_options_expanders_compare (GtkWidget * expander1,
 
 /* Create widgets to represent the options made available by the backend */
 void
-xkb_options_load_options (GladeXML * dialog)
+xkb_options_load_options (GtkBuilder * dialog)
 {
 	GtkWidget *opts_vbox = WID ("options_vbox");
 	GSList *expanders_list;
@@ -439,14 +441,14 @@ chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 
 /* Create popup dialog */
 void
-xkb_options_popup_dialog (GladeXML * dialog)
+xkb_options_popup_dialog (GtkBuilder * dialog)
 {
 	GtkWidget *chooser;
 
-	chooser_dialog =
-	    glade_xml_new (GNOMECC_GLADE_DIR
-			   "/gnome-keyboard-properties.glade",
-			   "xkb_options_dialog", NULL);
+	chooser_dialog = gtk_builder_new ();
+    gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
+                               "/gnome-keyboard-properties-options-dialog.ui",
+                               NULL);
 
 	chooser = CWID ("xkb_options_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
@@ -476,7 +478,7 @@ xkb_options_update_option_counters (XklConfigRegistry * config_registry,
 /* Respond to a change in the xkb gconf settings */
 static void
 xkb_options_update (GConfClient * client,
-		    guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
+		    guint cnxn_id, GConfEntry * entry, GtkBuilder * dialog)
 {
 	/* Updating options is handled by gconf notifies for each widget
 	   This is here to avoid calling it N_OPTIONS times for each gconf
@@ -507,7 +509,7 @@ xkb_options_update (GConfClient * client,
 }
 
 void
-xkb_options_register_gconf_listener (GladeXML * dialog)
+xkb_options_register_gconf_listener (GtkBuilder * dialog)
 {
 	gconf_client_notify_add (xkb_gconf_client,
 				 GKBD_KEYBOARD_CONFIG_KEY_OPTIONS,

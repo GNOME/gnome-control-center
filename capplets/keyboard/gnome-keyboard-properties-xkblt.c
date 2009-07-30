@@ -26,7 +26,6 @@
 #endif
 
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <glib/gi18n.h>
 
 #include <libgnomekbd/gkbd-desktop-config.h>
@@ -39,6 +38,9 @@
 #define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
 #define SEL_LAYOUT_TREE_COL_DEFAULT 1
 #define SEL_LAYOUT_TREE_COL_ID 2
+
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
 static int idx2select = -1;
 static int max_selected_layouts = -1;
@@ -61,7 +63,7 @@ clear_xkb_elements_list (GSList * list)
 }
 
 static gint
-find_selected_layout_idx (GladeXML * dialog)
+find_selected_layout_idx (GtkBuilder * dialog)
 {
 	GtkTreeSelection *selection =
 	    gtk_tree_view_get_selection (GTK_TREE_VIEW
@@ -122,7 +124,7 @@ save_default_group (int default_group)
 
 static void
 def_group_in_ui_changed (GtkCellRendererToggle * cell_renderer,
-			 gchar * path, GladeXML * dialog)
+			 gchar * path, GtkBuilder * dialog)
 {
 	GtkTreePath *chpath = gtk_tree_path_new_from_string (path);
 	int new_default_group = -1;
@@ -141,7 +143,7 @@ def_group_in_ui_changed (GtkCellRendererToggle * cell_renderer,
 static void
 def_group_in_gconf_changed (GConfClient * client,
 			    guint cnxn_id,
-			    GConfEntry * entry, GladeXML * dialog)
+			    GConfEntry * entry, GtkBuilder * dialog)
 {
 	GConfValue *value = gconf_entry_get_value (entry);
 
@@ -177,7 +179,7 @@ def_group_in_gconf_changed (GConfClient * client,
 }
 
 static void
-xkb_layouts_enable_disable_buttons (GladeXML * dialog)
+xkb_layouts_enable_disable_buttons (GtkBuilder * dialog)
 {
 	GtkWidget *add_layout_btn = WID ("xkb_layouts_add");
 	GtkWidget *print_layout_btn = WID ("xkb_layouts_print");
@@ -225,7 +227,7 @@ xkb_layouts_create_default_layout_column ()
 }
 
 void
-xkb_layouts_enable_disable_default (GladeXML * dialog, gboolean enable)
+xkb_layouts_enable_disable_default (GtkBuilder * dialog, gboolean enable)
 {
 	GtkWidget *tree_view = WID ("xkb_layouts_selected");
 
@@ -252,7 +254,7 @@ xkb_layouts_enable_disable_default (GladeXML * dialog, gboolean enable)
 static void
 xkb_layouts_dnd_data_get (GtkWidget * widget, GdkDragContext * dc,
 			  GtkSelectionData * selection_data, guint info,
-			  guint t, GladeXML * dialog)
+			  guint t, GtkBuilder * dialog)
 {
 	/* Storing the value into selection -
 	 * while it is actually not used
@@ -267,7 +269,7 @@ static void
 xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
 			       gint x, gint y,
 			       GtkSelectionData * selection_data,
-			       guint info, guint t, GladeXML * dialog)
+			       guint info, guint t, GtkBuilder * dialog)
 {
 	gint sidx = find_selected_layout_idx (dialog);
 	GtkWidget *tree_view = WID ("xkb_layouts_selected");
@@ -310,7 +312,7 @@ xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
 }
 
 void
-xkb_layouts_prepare_selected_tree (GladeXML * dialog,
+xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
 				   GConfChangeSet * changeset)
 {
 	GtkListStore *list_store =
@@ -388,7 +390,7 @@ xkb_layout_description_utf8 (const gchar * visible)
 }
 
 void
-xkb_layouts_fill_selected_tree (GladeXML * dialog)
+xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 {
 	GConfEntry *gce;
 	GError *err = NULL;
@@ -452,13 +454,13 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
 }
 
 static void
-add_selected_layout (GtkWidget * button, GladeXML * dialog)
+add_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 {
 	xkb_layout_choose (dialog);
 }
 
 static void
-print_selected_layout (GtkWidget * button, GladeXML * dialog)
+print_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 {
 	gint idx = find_selected_layout_idx (dialog);
 
@@ -484,7 +486,7 @@ print_selected_layout (GtkWidget * button, GladeXML * dialog)
 }
 
 static void
-remove_selected_layout (GtkWidget * button, GladeXML * dialog)
+remove_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 {
 	gint idx = find_selected_layout_idx (dialog);
 
@@ -511,7 +513,7 @@ remove_selected_layout (GtkWidget * button, GladeXML * dialog)
 }
 
 void
-xkb_layouts_register_buttons_handlers (GladeXML * dialog)
+xkb_layouts_register_buttons_handlers (GtkBuilder * dialog)
 {
 	g_signal_connect (G_OBJECT (WID ("xkb_layouts_add")), "clicked",
 			  G_CALLBACK (add_selected_layout), dialog);
@@ -524,14 +526,14 @@ xkb_layouts_register_buttons_handlers (GladeXML * dialog)
 static void
 xkb_layouts_update_list (GConfClient * client,
 			 guint cnxn_id, GConfEntry * entry,
-			 GladeXML * dialog)
+			 GtkBuilder * dialog)
 {
 	xkb_layouts_fill_selected_tree (dialog);
 	enable_disable_restoring (dialog);
 }
 
 void
-xkb_layouts_register_gconf_listener (GladeXML * dialog)
+xkb_layouts_register_gconf_listener (GtkBuilder * dialog)
 {
 	gconf_client_notify_add (xkb_gconf_client,
 				 GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS,

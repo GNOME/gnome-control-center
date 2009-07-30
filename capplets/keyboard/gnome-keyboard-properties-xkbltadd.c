@@ -27,13 +27,14 @@
 
 #include <string.h>
 
-#include <glade/glade.h>
-
 #include <libgnomekbd/gkbd-keyboard-drawing.h>
 #include <libgnomekbd/gkbd-util.h>
 
 #include "capplet-util.h"
 #include "gnome-keyboard-properties-xkb.h"
+
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
 #define GROUP_SWITCHERS_GROUP "grp"
 #define DEFAULT_GROUP_SWITCH "grp:alts_toggle"
@@ -62,7 +63,7 @@ static void
 
 
 
-xkb_layout_chooser_available_layouts_fill (GladeXML * chooser_dialog,
+xkb_layout_chooser_available_layouts_fill (GtkBuilder * chooser_dialog,
 					   const gchar cblid[],
 					   const gchar cbvid[],
 					   LayoutIterFunc layout_iterator,
@@ -78,7 +79,7 @@ static void
 
 
 
-xkb_layout_chooser_available_language_variants_fill (GladeXML *
+xkb_layout_chooser_available_language_variants_fill (GtkBuilder *
 						     chooser_dialog);
 
 static void
@@ -89,7 +90,7 @@ static void
 
 
 
-xkb_layout_chooser_available_country_variants_fill (GladeXML *
+xkb_layout_chooser_available_country_variants_fill (GtkBuilder *
 						    chooser_dialog);
 
 static void
@@ -178,7 +179,7 @@ xkb_layout_chooser_add_country_to_available_countries (XklConfigRegistry *
 }
 
 static void
-xkb_layout_chooser_enable_disable_buttons (GladeXML * chooser_dialog)
+xkb_layout_chooser_enable_disable_buttons (GtkBuilder * chooser_dialog)
 {
 	GtkWidget *cbv =
 	    CWID (gtk_notebook_get_current_page
@@ -198,14 +199,14 @@ xkb_layout_chooser_enable_disable_buttons (GladeXML * chooser_dialog)
 }
 
 static void
-xkb_layout_chooser_available_variant_changed (GladeXML * chooser_dialog)
+xkb_layout_chooser_available_variant_changed (GtkBuilder * chooser_dialog)
 {
 	xkb_layout_preview_update (chooser_dialog);
 	xkb_layout_chooser_enable_disable_buttons (chooser_dialog);
 }
 
 static void
-xkb_layout_chooser_available_language_changed (GladeXML * chooser_dialog)
+xkb_layout_chooser_available_language_changed (GtkBuilder * chooser_dialog)
 {
 	xkb_layout_chooser_available_language_variants_fill
 	    (chooser_dialog);
@@ -213,7 +214,7 @@ xkb_layout_chooser_available_language_changed (GladeXML * chooser_dialog)
 }
 
 static void
-xkb_layout_chooser_available_country_changed (GladeXML * chooser_dialog)
+xkb_layout_chooser_available_country_changed (GtkBuilder * chooser_dialog)
 {
 	xkb_layout_chooser_available_country_variants_fill
 	    (chooser_dialog);
@@ -222,13 +223,13 @@ xkb_layout_chooser_available_country_changed (GladeXML * chooser_dialog)
 
 static void
 xkb_layout_chooser_page_changed (GtkWidget * notebook, GtkWidget * page,
-				 gint page_num, GladeXML * chooser_dialog)
+				 gint page_num, GtkBuilder * chooser_dialog)
 {
 	xkb_layout_chooser_available_variant_changed (chooser_dialog);
 }
 
 static void
-xkb_layout_chooser_available_language_variants_fill (GladeXML *
+xkb_layout_chooser_available_language_variants_fill (GtkBuilder *
 						     chooser_dialog)
 {
 	GtkWidget *cbl = CWID ("xkb_languages_available");
@@ -271,7 +272,7 @@ xkb_layout_chooser_available_language_variants_fill (GladeXML *
 }
 
 static void
-xkb_layout_chooser_available_country_variants_fill (GladeXML *
+xkb_layout_chooser_available_country_variants_fill (GtkBuilder *
 						    chooser_dialog)
 {
 	GtkWidget *cbl = CWID ("xkb_countries_available");
@@ -313,7 +314,7 @@ xkb_layout_chooser_available_country_variants_fill (GladeXML *
 }
 
 static void
-xkb_layout_chooser_available_layouts_fill (GladeXML *
+xkb_layout_chooser_available_layouts_fill (GtkBuilder *
 					   chooser_dialog,
 					   const gchar cblid[],
 					   const gchar cbvid[],
@@ -410,7 +411,7 @@ xkl_layout_chooser_add_default_switcher_if_necessary (GSList *
 }
 
 static void
-xkb_layout_chooser_print (GladeXML * chooser_dialog)
+xkb_layout_chooser_print (GtkBuilder * chooser_dialog)
 {
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
 	GtkWidget *kbdraw =
@@ -428,7 +429,7 @@ xkb_layout_chooser_print (GladeXML * chooser_dialog)
 
 static void
 xkb_layout_chooser_response (GtkDialog * dialog,
-			     gint response, GladeXML * chooser_dialog)
+			     gint response, GtkBuilder * chooser_dialog)
 {
 	GdkRectangle rect;
 
@@ -465,12 +466,14 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 }
 
 void
-xkb_layout_choose (GladeXML * dialog)
+xkb_layout_choose (GtkBuilder * dialog)
 {
-	GladeXML *chooser_dialog =
-	    glade_xml_new (GNOMECC_GLADE_DIR
-			   "/gnome-keyboard-properties.glade",
-			   "xkb_layout_chooser", NULL);
+	GtkBuilder *chooser_dialog;
+    
+    chooser_dialog = gtk_builder_new ();
+    gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
+                               "/gnome-keyboard-properties-layout-chooser.ui",
+                               NULL);
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
 	GtkWidget *lang_chooser = CWID ("xkb_languages_available");
 	GtkWidget *notebook = CWID ("choosers_nb");
@@ -566,7 +569,7 @@ xkb_layout_choose (GladeXML * dialog)
 }
 
 gchar *
-xkb_layout_chooser_get_selected_id (GladeXML * chooser_dialog)
+xkb_layout_chooser_get_selected_id (GtkBuilder * chooser_dialog)
 {
 	GtkWidget *cbv =
 	    CWID (gtk_notebook_get_current_page

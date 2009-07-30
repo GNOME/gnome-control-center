@@ -25,8 +25,6 @@
 #  include <config.h>
 #endif
 
-#include <glade/glade.h>
-
 #include <libgnomekbd/gkbd-keyboard-drawing.h>
 
 #include "capplet-util.h"
@@ -57,7 +55,7 @@ static GkbdKeyboardDrawingGroupLevel *pGroupsLevels[] = {
 };
 
 GtkWidget *
-xkb_layout_preview_create_widget (GladeXML * chooserDialog)
+xkb_layout_preview_create_widget (GtkBuilder * chooserDialog)
 {
 	GtkWidget *kbdraw = gkbd_keyboard_drawing_new ();
 
@@ -67,7 +65,7 @@ xkb_layout_preview_create_widget (GladeXML * chooserDialog)
 }
 
 void
-xkb_layout_preview_update (GladeXML * chooser_dialog)
+xkb_layout_preview_update (GtkBuilder * chooser_dialog)
 {
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");

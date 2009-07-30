@@ -30,12 +30,14 @@
 #include "capplet-util.h"
 
 #define CONFIG_ROOT "/desktop/gnome/accessibility/keyboard"
-#define NWID(s) glade_xml_get_widget (notifications_dialog, s)
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
+#define NWID(s) GTK_WIDGET (gtk_builder_get_object (notifications_dialog, s))
 
-static GladeXML *notifications_dialog = NULL;
+static GtkBuilder *notifications_dialog = NULL;
 
 static void
-stickykeys_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
+stickykeys_enable_toggled_cb (GtkWidget *w, GtkBuilder *dialog)
 {
 	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 
@@ -45,7 +47,7 @@ stickykeys_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
 }
 
 static void
-slowkeys_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
+slowkeys_enable_toggled_cb (GtkWidget *w, GtkBuilder *dialog)
 {
 	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 
@@ -55,7 +57,7 @@ slowkeys_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
 }
 
 static void
-bouncekeys_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
+bouncekeys_enable_toggled_cb (GtkWidget *w, GtkBuilder *dialog)
 {
 	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 
@@ -65,7 +67,7 @@ bouncekeys_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
 }
 
 static void
-visual_bell_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
+visual_bell_enable_toggled_cb (GtkWidget *w, GtkBuilder *dialog)
 {
 	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 
@@ -124,13 +126,14 @@ a11y_notifications_dialog_response_cb (GtkWidget *w, gint response)
 	}
 }
 static void
-notifications_button_clicked_cb (GtkWidget *button, GladeXML *dialog)
+notifications_button_clicked_cb (GtkWidget *button, GtkBuilder *dialog)
 {
 	GtkWidget *w;
-
-	notifications_dialog = glade_xml_new (GNOMECC_GLADE_DIR
-					      "/gnome-keyboard-properties.glade",
-					      "a11y_notifications_dialog", NULL);
+    
+    notifications_dialog = gtk_builder_new ();
+    gtk_builder_add_from_file (notifications_dialog, GNOMECC_UI_DIR
+                               "/gnome-keyboard-properties-a11y-notifications.ui",
+                               NULL);
 
 	stickykeys_enable_toggled_cb (WID ("stickykeys_enable"), dialog);
 	slowkeys_enable_toggled_cb (WID ("slowkeys_enable"), dialog);
@@ -199,7 +202,7 @@ notifications_button_clicked_cb (GtkWidget *button, GladeXML *dialog)
 }
 
 static void
-mousekeys_enable_toggled_cb (GtkWidget *w, GladeXML *dialog)
+mousekeys_enable_toggled_cb (GtkWidget *w, GtkBuilder *dialog)
 {
 	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 	gtk_widget_set_sensitive (WID ("mousekeys_table"), active);
@@ -243,7 +246,7 @@ mousekeys_accel_time_from_widget (GConfPropertyEditor *peditor, const GConfValue
 }
 
 void
-setup_a11y_tabs (GladeXML *dialog, GConfChangeSet *changeset)
+setup_a11y_tabs (GtkBuilder *dialog, GConfChangeSet *changeset)
 {
 	GConfClient *client;
 	GtkWidget *w;

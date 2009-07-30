@@ -19,8 +19,12 @@ gnome_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBGNOMEKBDUI_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 
-Gladedir   = $(pkgdatadir)/glade
-Glade_DATA = gnome-keyboard-properties.glade
+uidir   = $(pkgdatadir)/ui
+dist_ui_DATA = gnome-keyboard-properties-a11y-notifications.ui \
+               gnome-keyboard-properties-dialog.ui \
+               gnome-keyboard-properties-layout-chooser.ui \
+               gnome-keyboard-properties-model-chooser.ui \
+               gnome-keyboard-properties-options-dialog.ui
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = keyboard.desktop.in
@@ -31,8 +35,8 @@ INCLUDES = \
 	$(LIBGNOMEKBDUI_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
+	-DGNOMECC_UI_DIR="\"$(uidir)\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(Glade_DATA)
+EXTRA_DIST = $(ui_DATA)
 
 -include $(top_srcdir)/git.mk

@@ -27,19 +27,21 @@
 
 #include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <glib/gi18n.h>
 
 #include "capplet-util.h"
 
 #include "gnome-keyboard-properties-xkb.h"
 
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
+
 static gchar *current_model_name = NULL;
 static gchar *current_vendor_name = NULL;
 
-static void fill_models_list (GladeXML * chooser_dialog);
+static void fill_models_list (GtkBuilder * chooser_dialog);
 
-static gboolean fill_vendors_list (GladeXML * chooser_dialog);
+static gboolean fill_vendors_list (GtkBuilder * chooser_dialog);
 
 static GtkTreePath *
 gtk_list_store_find_entry (GtkListStore * list_store,
@@ -129,7 +131,7 @@ add_model_to_list (XklConfigRegistry * config_registry,
 
 static void
 xkb_model_chooser_change_vendor_sel (GtkTreeSelection * selection,
-				     GladeXML * chooser_dialog)
+				     GtkBuilder * chooser_dialog)
 {
 	GtkTreeIter iter;
 	GtkTreeModel *list_store = NULL;
@@ -151,7 +153,7 @@ xkb_model_chooser_change_vendor_sel (GtkTreeSelection * selection,
 
 static void
 xkb_model_chooser_change_model_sel (GtkTreeSelection * selection,
-				    GladeXML * chooser_dialog)
+				    GtkBuilder * chooser_dialog)
 {
 	gboolean anysel =
 	    gtk_tree_selection_get_selected (selection, NULL, NULL);
@@ -161,7 +163,7 @@ xkb_model_chooser_change_model_sel (GtkTreeSelection * selection,
 }
 
 static void
-prepare_vendors_list (GladeXML * chooser_dialog)
+prepare_vendors_list (GtkBuilder * chooser_dialog)
 {
 	GtkWidget *vendors_list = CWID ("vendors_list");
 	GtkCellRenderer *renderer = gtk_cell_renderer_text_new ();
@@ -176,7 +178,7 @@ prepare_vendors_list (GladeXML * chooser_dialog)
 }
 
 static gboolean
-fill_vendors_list (GladeXML * chooser_dialog)
+fill_vendors_list (GtkBuilder * chooser_dialog)
 {
 	GtkWidget *vendors_list = CWID ("vendors_list");
 	GtkListStore *list_store = gtk_list_store_new (1, G_TYPE_STRING);
@@ -227,7 +229,7 @@ fill_vendors_list (GladeXML * chooser_dialog)
 }
 
 static void
-prepare_models_list (GladeXML * chooser_dialog)
+prepare_models_list (GtkBuilder * chooser_dialog)
 {
 	GtkWidget *models_list = CWID ("models_list");
 	GtkCellRenderer *renderer = gtk_cell_renderer_text_new ();
@@ -242,7 +244,7 @@ prepare_models_list (GladeXML * chooser_dialog)
 }
 
 static void
-fill_models_list (GladeXML * chooser_dialog)
+fill_models_list (GtkBuilder * chooser_dialog)
 {
 	GtkWidget *models_list = CWID ("models_list");
 	GtkTreeIter iter;
@@ -286,7 +288,7 @@ fill_models_list (GladeXML * chooser_dialog)
 
 static void
 xkb_model_chooser_response (GtkDialog * dialog,
-			    gint response, GladeXML * chooser_dialog)
+			    gint response, GtkBuilder * chooser_dialog)
 {
 	if (response == GTK_RESPONSE_OK) {
 		GtkWidget *models_list = CWID ("models_list");
@@ -310,13 +312,16 @@ xkb_model_chooser_response (GtkDialog * dialog,
 }
 
 void
-choose_model (GladeXML * dialog)
+choose_model (GtkBuilder * dialog)
 {
-	GladeXML *chooser_dialog =
-	    glade_xml_new (GNOMECC_GLADE_DIR
-			   "/gnome-keyboard-properties.glade",
-			   "xkb_model_chooser", NULL);
-	GtkWidget *chooser = CWID ("xkb_model_chooser");
+	GtkBuilder *chooser_dialog;
+    GtkWidget *chooser;
+    
+    chooser_dialog = gtk_builder_new ();
+    gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
+                               "/gnome-keyboard-properties-model-chooser.ui",
+                               NULL);
+	chooser = CWID ("xkb_model_chooser");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
 				      GTK_WINDOW (WID
 						  ("keyboard_dialog")));
