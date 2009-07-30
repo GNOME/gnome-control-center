@@ -17,8 +17,8 @@ pixmap_DATA = \
 	double-click-off.png		\
 	double-click-maybe.png
 
-Gladedir   = $(pkgdatadir)/glade
-Glade_DATA = gnome-mouse-properties.glade
+uidir   = $(pkgdatadir)/ui
+ui_DATA = gnome-mouse-properties.ui
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-settings-mouse.desktop.in
@@ -28,8 +28,8 @@ INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
+	-DGNOMECC_UI_DIR="\"$(uidir)\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA)
+EXTRA_DIST = $(ui_DATA) $(pixmap_DATA)
 
 -include $(top_srcdir)/git.mk

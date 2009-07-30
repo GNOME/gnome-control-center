@@ -28,7 +28,6 @@
 #include <glib/gi18n.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <gdk/gdkx.h>
 #include <math.h>
 
@@ -49,6 +48,9 @@
 #ifdef HAVE_XCURSOR
 #include <X11/Xcursor/Xcursor.h>
 #endif
+
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
 enum
 {
@@ -319,7 +321,7 @@ left_handed_to_gconf (GConfPropertyEditor *peditor,
 static void
 scrollmethod_radio_button_release_event (GtkWidget *widget,
 					 GdkEventButton *event,
-					 GladeXML *dialog)
+					 GtkBuilder *dialog)
 {
 	gtk_widget_set_sensitive (WID ("horiz_scroll_toggle"),
 				  (widget != WID ("scroll_disabled_radio")));
@@ -411,7 +413,7 @@ find_synaptics (void)
 
 /* Set up the property editors in the dialog. */
 static void
-setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
+setup_dialog (GtkBuilder *dialog, GConfChangeSet *changeset)
 {
 	GtkRadioButton    *radio;
 	GObject           *peditor;
@@ -488,15 +490,19 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 /* Construct the dialog */
 
-static GladeXML *
+static GtkBuilder *
 create_dialog (void)
 {
-	GladeXML     *dialog;
+	GtkBuilder   *dialog;
 	GtkSizeGroup *size_group;
+	GError       *error = NULL;   
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
-	if (!dialog)
+	dialog = gtk_builder_new ();
+	gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR "/gnome-mouse-properties.ui", &error);
+	if (error != NULL) {
+		g_warning ("Error loading UI file: %s", error->message);
 		return NULL;
+	}
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("acceleration_label"));
@@ -550,7 +556,7 @@ int
 main (int argc, char **argv)
 {
 	GConfClient    *client;
-	GladeXML       *dialog;
+	GtkBuilder     *dialog;
 	GtkWidget      *dialog_win, *w;
 	gchar *start_page = NULL;
 

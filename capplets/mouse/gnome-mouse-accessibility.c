@@ -16,7 +16,6 @@
  */
 
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <glib/gi18n.h>
 
 #include "capplet-util.h"
@@ -27,6 +26,9 @@
 /* 5th entry in combo box */
 #define DIRECTION_DISABLE 4
 
+#undef WID
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
+
 enum {
 	CLICK_TYPE_SINGLE,
 	CLICK_TYPE_DOUBLE,
@@ -36,7 +38,7 @@ enum {
 };
 
 static void
-update_mode_sensitivity (GladeXML *dialog, gint mode)
+update_mode_sensitivity (GtkBuilder *dialog, gint mode)
 {
 	gtk_widget_set_sensitive (WID ("box_ctw"), !mode);
 	gtk_widget_set_sensitive (WID ("box_gesture"), mode);
@@ -119,14 +121,14 @@ populate_gesture_combo (GtkWidget *combo)
 }
 
 static void
-delay_enable_toggled_cb (GtkWidget *checkbox, GladeXML *dialog)
+delay_enable_toggled_cb (GtkWidget *checkbox, GtkBuilder *dialog)
 {
 	gtk_widget_set_sensitive (WID ("delay_box"),
 				  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox)));
 }
 
 static void
-dwell_enable_toggled_cb (GtkWidget *checkbox, GladeXML *dialog)
+dwell_enable_toggled_cb (GtkWidget *checkbox, GtkBuilder *dialog)
 {
 	gtk_widget_set_sensitive (WID ("dwell_box"),
 				  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox)));
@@ -171,7 +173,7 @@ gconf_value_changed (GConfClient *client,
 }
 
 void
-setup_accessibility (GladeXML *dialog, GConfClient *client)
+setup_accessibility (GtkBuilder *dialog, GConfClient *client)
 {
 	gconf_client_add_dir (client, MT_GCONF_HOME,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);

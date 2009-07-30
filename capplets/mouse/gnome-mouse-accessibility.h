@@ -18,12 +18,11 @@
 #ifndef __GNOME_MOUSE_A11Y_H
 #define __GNOME_MOUSE_A11Y_H
 
-#include <glade/glade.h>
 #include <gconf/gconf-client.h>
 
 G_BEGIN_DECLS
 
-void setup_accessibility (GladeXML *dialog, GConfClient *client);
+void setup_accessibility (GtkBuilder *dialog, GConfClient *client);
 
 G_END_DECLS
 
