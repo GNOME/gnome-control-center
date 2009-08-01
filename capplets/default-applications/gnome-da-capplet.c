@@ -68,7 +68,7 @@ web_radiobutton_toggled_cb (GtkWidget *togglebutton, GnomeDACapplet *capplet)
 {
     gint index;
     GnomeDAWebItem *item;
-    gchar *command;
+    const gchar *command;
     GError *error = NULL;
 
     index = gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->web_combo_box));
@@ -77,10 +77,10 @@ web_radiobutton_toggled_cb (GtkWidget *togglebutton, GnomeDACapplet *capplet)
 	return;
 
     item = (GnomeDAWebItem *) g_list_nth_data (capplet->web_browsers, index);
-    if (item == NULL) {
-	command = "";
-    }
-    else if (togglebutton == capplet->new_win_radiobutton) {
+    if (item == NULL)
+	return;
+
+    if (togglebutton == capplet->new_win_radiobutton) {
 	command = item->win_command;
     }
     else if (togglebutton == capplet->new_tab_radiobutton) {
@@ -492,11 +492,9 @@ web_combo_conv_from_widget (GConfPropertyEditor *peditor, const GConfValue *valu
     if (!item)
     {
         /* if item was not found, this is probably the "Custom" item */
-
-        /* XXX: returning "" as the value here is not ideal, but required to
-         * prevent the combo box from jumping back to the previous value if the
-         * user has selected Custom */
-        gconf_value_set_string (ret, "");
+        gchar *c = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL);
+        gconf_value_set_string (ret, (c != NULL) ? c : "");
+        g_free (c);
         return ret;
     }
     else
