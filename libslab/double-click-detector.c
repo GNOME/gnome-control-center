@@ -24,43 +24,11 @@
 
 #include "libslab-utils.h"
 
-static void double_click_detector_class_init (DoubleClickDetectorClass *);
-static void double_click_detector_init (DoubleClickDetector *);
-static void double_click_detector_dispose (GObject *);
-
-GType
-double_click_detector_get_type (void)
-{
-	static GType object_type = 0;
-
-	if (!object_type)
-	{
-		static const GTypeInfo object_info = {
-			sizeof (DoubleClickDetectorClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) double_click_detector_class_init,
-			NULL,
-			NULL,
-			sizeof (DoubleClickDetector),
-			0,
-			(GInstanceInitFunc) double_click_detector_init
-		};
-
-		object_type =
-			g_type_register_static (G_TYPE_OBJECT, "DoubleClickDetector", &object_info,
-			0);
-	}
-
-	return object_type;
-}
+G_DEFINE_TYPE (DoubleClickDetector, double_click_detector, G_TYPE_OBJECT);
 
 static void
 double_click_detector_class_init (DoubleClickDetectorClass * detector_class)
 {
-	GObjectClass *g_obj_class = (GObjectClass *) detector_class;
-
-	g_obj_class->dispose = double_click_detector_dispose;
 }
 
 static void
@@ -81,11 +49,6 @@ DoubleClickDetector *
 double_click_detector_new ()
 {
 	return g_object_new (DOUBLE_CLICK_DETECTOR_TYPE, NULL);
-}
-
-static void
-double_click_detector_dispose (GObject * obj)
-{
 }
 
 gboolean

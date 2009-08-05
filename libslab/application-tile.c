@@ -19,10 +19,11 @@
  */
 
 #include "application-tile.h"
+#include "config.h"
 
 #include <string.h>
 #include <glib.h>
-#include <glib/gi18n.h>
+#include <glib/gi18n-lib.h>
 #include <glib/gstdio.h>
 #include <gconf/gconf-client.h>
 #include <unistd.h>

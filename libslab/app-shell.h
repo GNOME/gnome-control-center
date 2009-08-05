@@ -25,9 +25,10 @@
 #include <gtk/gtk.h>
 #define GMENU_I_KNOW_THIS_IS_UNSTABLE
 #include <gmenu-tree.h>
+#include <libgnome/gnome-desktop-item.h>
 
-#include "slab-section.h"
-#include "tile.h"
+#include <libslab/slab-section.h>
+#include <libslab/tile.h>
 
 G_BEGIN_DECLS
 
@@ -54,10 +55,10 @@ typedef struct
 
 typedef struct _AppShellData
 {
-	GtkWidget *main_gnome_app;
-	gint main_gnome_app_window_x;
-	gint main_gnome_app_window_y;
-	gboolean main_gnome_app_window_shown_once;
+	GtkWidget *main_app;
+	gint main_app_window_x;
+	gint main_app_window_y;
+	gboolean main_app_window_shown_once;
 
 	GtkWidget *shell;
 	GtkWidget *groups_section;

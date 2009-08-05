@@ -24,8 +24,6 @@
 #include "app-shell.h"
 #include "app-resizer.h"
 
-static GtkLayoutClass *parent_class = NULL;
-
 static void app_resizer_class_init (AppResizerClass *);
 static void app_resizer_init (AppResizer *);
 static void app_resizer_destroy (GtkObject *);
@@ -34,38 +32,13 @@ static void app_resizer_size_allocate (GtkWidget * resizer, GtkAllocation * allo
 static gboolean app_resizer_paint_window (GtkWidget * widget, GdkEventExpose * event,
 	AppShellData * app_data);
 
-GType
-app_resizer_get_type (void)
-{
-	static GType object_type = 0;
+G_DEFINE_TYPE (AppResizer, app_resizer, GTK_TYPE_LAYOUT);
 
-	if (!object_type)
-	{
-		static const GTypeInfo object_info = {
-			sizeof (AppResizerClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) app_resizer_class_init,
-			NULL,
-			NULL,
-			sizeof (AppResizer),
-			0,
-			(GInstanceInitFunc) app_resizer_init
-		};
-
-		object_type =
-			g_type_register_static (GTK_TYPE_LAYOUT, "AppResizer", &object_info, 0);
-	}
-
-	return object_type;
-}
 
 static void
 app_resizer_class_init (AppResizerClass * klass)
 {
 	GtkWidgetClass *widget_class;
-
-	parent_class = g_type_class_peek_parent (klass);
 
 	((GtkObjectClass *) klass)->destroy = app_resizer_destroy;
 
@@ -225,8 +198,8 @@ app_resizer_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
 	if (first_time)
 	{
 		/* we are letting the first show be the "natural" size of the child widget so do nothing. */
-		if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
-			(*GTK_WIDGET_CLASS (parent_class)->size_allocate) (widget, allocation);
+		if (GTK_WIDGET_CLASS (app_resizer_parent_class)->size_allocate)
+			(*GTK_WIDGET_CLASS (app_resizer_parent_class)->size_allocate) (widget, allocation);
 
 		first_time = FALSE;
 		gtk_layout_set_size (GTK_LAYOUT (resizer), child->allocation.width,
@@ -238,8 +211,8 @@ app_resizer_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
 	{
 		GtkAllocation child_allocation;
 
-		if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
-			(*GTK_WIDGET_CLASS (parent_class)->size_allocate) (widget, allocation);
+		if (GTK_WIDGET_CLASS (app_resizer_parent_class)->size_allocate)
+			(*GTK_WIDGET_CLASS (app_resizer_parent_class)->size_allocate) (widget, allocation);
 
 		/* We want the message to center itself and only scroll if it's bigger than the available real size. */
 		child_allocation.x = 0;
@@ -268,8 +241,8 @@ app_resizer_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
 		resizer->cur_num_cols = new_num_cols;
 	}
 
-	if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
-		(*GTK_WIDGET_CLASS (parent_class)->size_allocate) (widget, allocation);
+	if (GTK_WIDGET_CLASS (app_resizer_parent_class)->size_allocate)
+		(*GTK_WIDGET_CLASS (app_resizer_parent_class)->size_allocate) (widget, allocation);
 	gtk_layout_set_size (GTK_LAYOUT (resizer), child->allocation.width,
 		child->allocation.height);
 }

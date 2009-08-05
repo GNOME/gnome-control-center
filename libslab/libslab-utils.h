@@ -29,6 +29,8 @@ gboolean          libslab_desktop_item_is_lockscreen (const gchar *uri);
 gchar            *libslab_string_replace_once (const gchar *string, const gchar *key, const gchar *value);
 void              libslab_spawn_command (const gchar *cmd);
 
+GdkScreen *libslab_get_current_screen (void);
+
 void libslab_thumbnail_factory_preinit (void);
 GnomeDesktopThumbnailFactory *libslab_thumbnail_factory_get (void);
 

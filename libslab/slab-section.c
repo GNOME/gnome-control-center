@@ -20,8 +20,6 @@
 
 #include "slab-section.h"
 
-#include <gtk/gtk.h>
-
 G_DEFINE_TYPE (SlabSection, slab_section, GTK_TYPE_VBOX)
 
 static void slab_section_finalize (GObject *);

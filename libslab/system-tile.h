@@ -21,7 +21,7 @@
 #ifndef __SYSTEM_TILE_H__
 #define __SYSTEM_TILE_H__
 
-#include "nameplate-tile.h"
+#include <libslab/nameplate-tile.h>
 
 #include <libgnome/gnome-desktop-item.h>
 

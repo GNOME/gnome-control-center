@@ -122,7 +122,6 @@ static void
 nameplate_tile_get_property (GObject * g_object, guint prop_id, GValue * value,
 	GParamSpec * param_spec)
 {
-	char *tooltip;
 	NameplateTile *np_tile = NAMEPLATE_TILE (g_object);
 
 	switch (prop_id)

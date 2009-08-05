@@ -12,6 +12,7 @@
 #include <sys/resource.h>
 #include <sys/time.h>
 #include <gconf/gconf-value.h>
+#include <gtk/gtk.h>
 
 #define DESKTOP_ITEM_TERMINAL_EMULATOR_FLAG "TerminalEmulator"
 #define ALTERNATE_DOCPATH_KEY               "DocPath"
@@ -179,6 +180,29 @@ libslab_gnome_desktop_item_get_docpath (GnomeDesktopItem *item)
 	return path;
 }
 
+/* Ugh, here we don't have knowledge of the screen that is being used.  So, do
+ * what we can to find it.
+ */
+GdkScreen *
+libslab_get_current_screen (void)
+{
+	GdkEvent *event;
+	GdkScreen *screen = NULL;
+
+	event = gtk_get_current_event ();
+	if (event) {
+		if (event->any.window)
+			screen = gdk_drawable_get_screen (GDK_DRAWABLE (event->any.window));
+
+		gdk_event_free (event);
+	}
+
+	if (!screen)
+		screen = gdk_screen_get_default ();
+
+	return screen;
+}
+
 gboolean
 libslab_gnome_desktop_item_open_help (GnomeDesktopItem *item)
 {
@@ -198,9 +222,7 @@ libslab_gnome_desktop_item_open_help (GnomeDesktopItem *item)
 	if (doc_path) {
 		help_uri = g_strdup_printf ("ghelp:%s", doc_path);
 
-		gtk_show_uri (NULL, help_uri, gtk_get_current_event_time (), &error);
-
-		if (error) {
+		if (!gtk_show_uri (libslab_get_current_screen (), help_uri, gtk_get_current_event_time (), &error)) {
 			g_warning ("error opening %s [%s]\n", help_uri, error->message);
 
 			g_error_free (error);

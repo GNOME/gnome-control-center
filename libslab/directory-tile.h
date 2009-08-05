@@ -23,7 +23,7 @@
 
 #include <time.h>
 
-#include "nameplate-tile.h"
+#include <libslab/nameplate-tile.h>
 
 G_BEGIN_DECLS
 

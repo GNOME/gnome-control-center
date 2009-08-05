@@ -24,6 +24,8 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include <libslab/app-shell.h>
+
 G_BEGIN_DECLS
 
 #define INITIAL_NUM_COLS 3

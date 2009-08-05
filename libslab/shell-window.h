@@ -24,7 +24,8 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <libgnome/gnome-desktop-item.h>
-#include "app-shell.h"
+
+#include <libslab/app-shell.h>
 
 G_BEGIN_DECLS
 

@@ -19,8 +19,9 @@
  */
 
 #include "document-tile.h"
+#include "config.h"
 
-#include <glib/gi18n.h>
+#include <glib/gi18n-lib.h>
 #include <string.h>
 #include <gio/gio.h>
 
@@ -436,7 +437,7 @@ load_image (DocumentTile *tile)
 		g_object_get (icon, "name", &icon_id, NULL);
 
 		g_object_unref (icon);
-	}
+	}	
 
 exit:
 

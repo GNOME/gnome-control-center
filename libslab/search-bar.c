@@ -19,12 +19,13 @@
  */
 
 #include "search-bar.h"
+#include "config.h"
+
 #include "search-entry.h"
 #include "search-context-picker.h"
 #include "nld-marshal.h"
 
-#include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <glib/gi18n-lib.h>
 
 typedef struct
 {

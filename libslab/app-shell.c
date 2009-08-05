@@ -18,14 +18,11 @@
  * Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#undef GTK_DISABLE_DEPRECATED
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <libgnome/gnome-desktop-item.h>
-#include <libgnomeui/libgnomeui.h>
 #include <gio/gio.h>
 #include <gdk/gdkkeysyms.h>
 #include <sys/types.h>
@@ -97,47 +94,48 @@ gboolean regenerate_categories (AppShellData * app_data);
 void
 hide_shell (AppShellData * app_data)
 {
-	gtk_window_get_position (GTK_WINDOW (app_data->main_gnome_app),
-		&app_data->main_gnome_app_window_x, &app_data->main_gnome_app_window_y);
-	/* printf("x:%d, y:%d\n", app_data->main_gnome_app_window_x, app_data->main_gnome_app_window_y); */
+	gtk_window_get_position (GTK_WINDOW (app_data->main_app),
+		&app_data->main_app_window_x, &app_data->main_app_window_y);
+	/* printf("x:%d, y:%d\n", app_data->main_app_window_x, app_data->main_app_window_y); */
 	/* clear the search bar now so reshowing is fast and flicker free - BNC#283186 */
 	application_launcher_clear_search_bar (app_data);
-	gtk_widget_hide (app_data->main_gnome_app);
+	gtk_widget_hide (app_data->main_app);
 }
 
 void
 show_shell (AppShellData * app_data)
 {
-	gtk_widget_show_all (app_data->main_gnome_app);
+	gtk_widget_show_all (app_data->main_app);
 	if (!app_data->static_actions)
 		gtk_widget_hide_all (app_data->actions_section);  /* don't show unless a launcher is selected */
 
-	if (app_data->main_gnome_app_window_shown_once)
-		gtk_window_move (GTK_WINDOW (app_data->main_gnome_app),
-			app_data->main_gnome_app_window_x, app_data->main_gnome_app_window_y);
+	if (app_data->main_app_window_shown_once)
+		gtk_window_move (GTK_WINDOW (app_data->main_app),
+			app_data->main_app_window_x, app_data->main_app_window_y);
 
 	/* if this is the first time shown, need to clear this handler */
 	else
 		shell_window_clear_resize_handler (SHELL_WINDOW (app_data->shell));
-	app_data->main_gnome_app_window_shown_once = TRUE;
+	app_data->main_app_window_shown_once = TRUE;
 }
 
 gboolean
 create_main_window (AppShellData * app_data, const gchar * app_name, const gchar * title,
 	const gchar * window_icon, gint width, gint height, gboolean hidden)
 {
-	GtkWidget *main_app = gnome_app_new (app_name, title);
-	app_data->main_gnome_app = main_app;
+	GtkWidget *main_app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	app_data->main_app = main_app;
 	gtk_widget_set_name (main_app, app_name);
+	gtk_window_set_title (GTK_WINDOW (main_app), title);
 	/* gtk_window_set_default_size(GTK_WINDOW(main_app), width, height); */
 	gtk_window_set_icon_name (GTK_WINDOW (main_app), window_icon);
-	gnome_app_set_contents (GNOME_APP (main_app), app_data->shell);
+	gtk_container_add (GTK_CONTAINER (main_app), app_data->shell);
 
 	g_signal_connect (main_app, "delete-event", G_CALLBACK (main_delete_callback), app_data);
 	g_signal_connect (main_app, "key-press-event", G_CALLBACK (main_keypress_callback),
 		app_data);
 
-	gtk_window_set_position (GTK_WINDOW (app_data->main_gnome_app), GTK_WIN_POS_CENTER);
+	gtk_window_set_position (GTK_WINDOW (app_data->main_app), GTK_WIN_POS_CENTER);
 	if (!hidden)
 		show_shell (app_data);
 	gtk_main ();

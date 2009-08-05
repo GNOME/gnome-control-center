@@ -24,8 +24,6 @@
 
 #include "app-resizer.h"
 
-static GtkWindowClass *parent_class = NULL;
-
 static void shell_window_class_init (ShellWindowClass *);
 static void shell_window_init (ShellWindow *);
 static void shell_window_destroy (GtkObject *);
@@ -36,38 +34,11 @@ gboolean shell_window_paint_window (GtkWidget * widget, GdkEventExpose * event, 
 
 #define SHELL_WINDOW_BORDER_WIDTH 6
 
-GType
-shell_window_get_type (void)
-{
-	static GType object_type = 0;
-
-	if (!object_type)
-	{
-		static const GTypeInfo object_info = {
-			sizeof (ShellWindowClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) shell_window_class_init,
-			NULL,
-			NULL,
-			sizeof (ShellWindow),
-			0,
-			(GInstanceInitFunc) shell_window_init
-		};
-
-		object_type = g_type_register_static (
-			GTK_TYPE_FRAME, "ShellWindow", &object_info, 0);
-	}
-
-	return object_type;
-}
+G_DEFINE_TYPE (ShellWindow, shell_window, GTK_TYPE_FRAME);
 
 static void
 shell_window_class_init (ShellWindowClass * klass)
 {
-	parent_class = g_type_class_peek_parent (klass);
-
-	((GtkObjectClass *) klass)->destroy = shell_window_destroy;
 }
 
 static void
@@ -96,11 +67,6 @@ shell_window_new (AppShellData * app_data)
 		G_CALLBACK (shell_window_handle_size_request), app_data);
 
 	return GTK_WIDGET (window);
-}
-
-static void
-shell_window_destroy (GtkObject * obj)
-{
 }
 
 void
