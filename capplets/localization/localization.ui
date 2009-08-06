@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-requires gtk+ 2.16 -->
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="i18n_dialog">
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -41,9 +41,11 @@
                     <property name="width_request">280</property>
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">&lt;i&gt;Region and language changes take effect the next time you log in.&lt;/i&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Region and language changes take effect the next time you log in.</property>
                     <property name="wrap">True</property>
+                    <attributes>
+                      <attribute name="style" value="italic"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="position">1</property>

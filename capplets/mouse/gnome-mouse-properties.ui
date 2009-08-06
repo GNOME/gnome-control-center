@@ -90,8 +90,10 @@
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Mouse Orientation&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Mouse Orientation</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -163,8 +165,10 @@
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Locate Pointer&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Locate Pointer</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -208,8 +212,10 @@
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Pointer Speed&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Pointer Speed</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -267,9 +273,12 @@
                                   <object class="GtkLabel" id="acceleration_slow_label">
                                     <property name="visible">True</property>
                                     <property name="xalign">1</property>
-                                    <property comments="slow acceleration" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Slow&lt;/i&gt;&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
+                                    <property comments="slow acceleration" name="label" translatable="yes">Slow</property>
                                     <property name="justify">center</property>
+                                    <attributes>
+                                      <attribute name="style" value="italic"/>
+                                      <attribute name="scale" value="0.83"/>
+                                    </attributes>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -293,9 +302,12 @@
                                   <object class="GtkLabel" id="acceleration_fast_label">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property comments="fast acceleration" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Fast&lt;/i&gt;&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
+                                    <property name="label" comments="fast acceleration" translatable="yes">Fast</property>
                                     <property name="justify">center</property>
+                                    <attributes>
+                                      <attribute name="style" value="italic"/>
+                                      <attribute name="scale" value="0.83"/>
+                                    </attributes>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -317,9 +329,12 @@
                                   <object class="GtkLabel" id="sensitivity_low_label">
                                     <property name="visible">True</property>
                                     <property name="xalign">1</property>
-                                    <property comments="low sensitivity" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Low&lt;/i&gt;&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
+                                    <property comments="low sensitivity" name="label" translatable="yes">Low</property>
                                     <property name="justify">center</property>
+                                    <attributes>
+                                      <attribute name="style" value="italic"/>
+                                      <attribute name="scale" value="0.83"/>
+                                    </attributes>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -343,9 +358,12 @@
                                   <object class="GtkLabel" id="sensitivity_high_label">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property comments="high sensitivity" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;High&lt;/i&gt;&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
+                                    <property comments="high sensitivity" name="label" translatable="yes">High</property>
                                     <property name="justify">center</property>
+                                    <attributes>
+                                      <attribute name="style" value="italic"/>
+                                      <attribute name="scale" value="0.83"/>
+                                    </attributes>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -383,8 +401,10 @@
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Drag and Drop&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Drag and Drop</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -429,9 +449,12 @@
                                       <object class="GtkLabel" id="threshold_small_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">1</property>
-                                        <property comments="small threshold" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Small&lt;/i&gt;&lt;/small&gt;</property>
-                                        <property name="use_markup">True</property>
+                                        <property comments="small threshold" name="label" translatable="yes">Small</property>
                                         <property name="justify">center</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.83"/>
+                                        </attributes>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -464,8 +487,11 @@
                                       <object class="GtkLabel" id="threshold_large_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property comments="large threshold" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Large&lt;/i&gt;&lt;/small&gt;</property>
-                                        <property name="use_markup">True</property>
+                                        <property comments="large threshold" name="label" translatable="yes">Large</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.83"/>
+                                        </attributes>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -506,8 +532,10 @@
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Double-Click Timeout&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Double-Click Timeout</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -552,8 +580,11 @@
                                       <object class="GtkLabel" id="timeout_short_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">1</property>
-                                        <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Short&lt;/i&gt;&lt;/small&gt;</property>
-                                        <property name="use_markup">True</property>
+                                        <property name="label" translatable="yes">Short</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.83"/>
+                                        </attributes>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -585,8 +616,11 @@
                                       <object class="GtkLabel" id="timeout_long_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Long&lt;/i&gt;&lt;/small&gt;</property>
-                                        <property name="use_markup">True</property>
+                                        <property name="label" translatable="yes">Long</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.83"/>
+                                        </attributes>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -615,9 +649,11 @@
                                     <property name="visible">True</property>
                                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">&lt;i&gt;To test your double-click settings, try to double-click on the light bulb.&lt;/i&gt;</property>
-                                    <property name="use_markup">True</property>
+                                    <property name="label" translatable="yes">To test your double-click settings, try to double-click on the light bulb.</property>
                                     <property name="wrap">True</property>
+                                    <attributes>
+                                      <attribute name="style" value="italic"/>
+                                    </attributes>
                                   </object>
                                   <packing>
                                     <property name="position">0</property>
@@ -687,8 +723,10 @@
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Simulated Secondary Click&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Simulated Secondary Click</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -753,8 +791,11 @@
                                             <property name="visible">True</property>
                                             <property name="xalign">1</property>
                                             <property name="yalign">0.4699999988079071</property>
-                                            <property comments="short delay" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Short&lt;/i&gt;&lt;/small&gt;</property>
-                                            <property name="use_markup">True</property>
+                                            <property comments="short delay" name="label" translatable="yes">Short</property>
+                                            <attributes>
+                                              <attribute name="style" value="italic"/>
+                                              <attribute name="scale" value="0.83"/>
+                                            </attributes>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -786,8 +827,11 @@
                                           <object class="GtkLabel" id="simulated_delay_long_label">
                                             <property name="visible">True</property>
                                             <property name="xalign">0</property>
-                                            <property comments="long delay" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Long&lt;/i&gt;&lt;/small&gt;</property>
-                                            <property name="use_markup">True</property>
+                                            <property comments="long delay" name="label" translatable="yes">Long</property>
+                                            <attributes>
+                                              <attribute name="style" value="italic"/>
+                                              <attribute name="scale" value="0.83"/>
+                                            </attributes>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -830,8 +874,10 @@
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
-                        <property comments="Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)" name="label" translatable="yes">&lt;b&gt;Dwell Click&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property comments="Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)" name="label" translatable="yes">Dwell Click</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -920,9 +966,12 @@
                                               <object class="GtkLabel" id="dwell_delay_short_label">
                                                 <property name="visible">True</property>
                                                 <property name="xalign">1</property>
-                                                <property comments="short delay" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Short&lt;/i&gt;&lt;/small&gt;</property>
-                                                <property name="use_markup">True</property>
+                                                <property comments="short delay" name="label" translatable="yes">Short</property>
                                                 <property name="justify">center</property>
+                                                <attributes>
+                                                  <attribute name="style" value="italic"/>
+                                                  <attribute name="scale" value="0.83"/>
+                                                </attributes>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -946,9 +995,12 @@
                                               <object class="GtkLabel" id="dwell_delay_long_label">
                                                 <property name="visible">True</property>
                                                 <property name="xalign">0</property>
-                                                <property comments="long delay" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Long&lt;/i&gt;&lt;/small&gt;</property>
-                                                <property name="use_markup">True</property>
+                                                <property comments="long delay" name="label" translatable="yes">Long</property>
                                                 <property name="justify">center</property>
+                                                <attributes>
+                                                  <attribute name="style" value="italic"/>
+                                                  <attribute name="scale" value="0.83"/>
+                                                </attributes>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -970,9 +1022,12 @@
                                               <object class="GtkLabel" id="dwell_threshold_small_label">
                                                 <property name="visible">True</property>
                                                 <property name="xalign">1</property>
-                                                <property comments="small threshold" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Small&lt;/i&gt;&lt;/small&gt;</property>
-                                                <property name="use_markup">True</property>
+                                                <property comments="small threshold" name="label" translatable="yes">Small</property>
                                                 <property name="justify">center</property>
+                                                <attributes>
+                                                  <attribute name="style" value="italic"/>
+                                                  <attribute name="scale" value="0.83"/>
+                                                </attributes>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -996,9 +1051,12 @@
                                               <object class="GtkLabel" id="dwell_threshold_large_label">
                                                 <property name="visible">True</property>
                                                 <property name="xalign">0</property>
-                                                <property comments="large threshold" name="label" translatable="yes">&lt;small&gt;&lt;i&gt;Large&lt;/i&gt;&lt;/small&gt;</property>
-                                                <property name="use_markup">True</property>
+                                                <property comments="large threshold" name="label" translatable="yes">Large</property>
                                                 <property name="justify">center</property>
+                                                <attributes>
+                                                  <attribute name="style" value="italic"/>
+                                                  <attribute name="scale" value="0.83"/>
+                                                </attributes>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1092,9 +1150,11 @@
                                                             <property name="visible">True</property>
                                                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                                             <property name="xalign">0</property>
-                                                            <property comments="Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)" name="label" translatable="yes">&lt;i&gt;You can also use the Dwell Click panel applet to choose the click type.&lt;/i&gt;</property>
-                                                            <property name="use_markup">True</property>
+                                                            <property comments="Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)" name="label" translatable="yes">You can also use the Dwell Click panel applet to choose the click type.</property>
                                                             <property name="wrap">True</property>
+                                                            <attributes>
+                                                              <attribute name="style" value="italic"/>
+                                                            </attributes>
                                                           </object>
                                                           <packing>
                                                             <property name="position">1</property>
@@ -1331,8 +1391,10 @@
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
                         <property name="yalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;General&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">General</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1439,8 +1501,10 @@
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="xalign">0</property>
                         <property name="yalign">0</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Scrolling&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Scrolling</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="expand">False</property>

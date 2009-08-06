@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.14"/>
+  <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="dialog">
     <property name="border_width">5</property>
@@ -19,8 +19,10 @@
             <child>
               <object class="GtkLabel" id="label6">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">&lt;i&gt;Drag the monitors to set their place&lt;/i&gt;</property>
-                <property name="use_markup">True</property>
+                <property name="label" translatable="yes">Drag the monitors to set their place</property>
+                <attributes>
+                  <attribute name="style" value="italic"/>
+                </attributes>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -86,8 +88,10 @@
                   <object class="GtkLabel" id="current_monitor_label">
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Monitor&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Monitor</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -282,8 +286,10 @@
               <object class="GtkLabel" id="label8">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">&lt;b&gt;Panel icon&lt;/b&gt;</property>
-                <property name="use_markup">True</property>
+                <property name="label" translatable="yes">Panel icon</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
               </object>
               <packing>
                 <property name="expand">False</property>

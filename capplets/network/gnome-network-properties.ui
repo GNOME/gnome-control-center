@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.14"/>
+  <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="network_dialog">
     <property name="border_width">5</property>
@@ -58,12 +58,15 @@
                 <property name="spacing">18</property>
                 <child>
                   <object class="GtkRadioButton" id="none_radiobutton">
-                    <property name="label" translatable="yes">&lt;b&gt;Di_rect internet connection&lt;/b&gt;</property>
+                    <property name="label" translatable="yes">Di_rect internet connection</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
                     <property name="draw_indicator">True</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -81,13 +84,16 @@
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkRadioButton" id="manual_radiobutton">
-                            <property name="label" translatable="yes">&lt;b&gt;_Manual proxy configuration&lt;/b&gt;</property>
+                            <property name="label" translatable="yes">_Manual proxy configuration</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
                             <property name="group">none_radiobutton</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -426,13 +432,16 @@
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkRadioButton" id="auto_radiobutton">
-                            <property name="label" translatable="yes">&lt;b&gt;_Automatic proxy configuration&lt;/b&gt;</property>
+                            <property name="label" translatable="yes">_Automatic proxy configuration</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
                             <property name="group">none_radiobutton</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -523,8 +532,10 @@
                   <object class="GtkLabel" id="label_ignore_host">
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Ignore Host List&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Ignore Host List</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -743,12 +754,15 @@
             <property name="spacing">6</property>
             <child>
               <object class="GtkCheckButton" id="use_auth_checkbutton">
-                <property name="label" translatable="yes">&lt;b&gt;_Use authentication&lt;/b&gt;</property>
+                <property name="label" translatable="yes">_Use authentication</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_underline">True</property>
                 <property name="draw_indicator">True</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
               </object>
               <packing>
                 <property name="expand">False</property>
