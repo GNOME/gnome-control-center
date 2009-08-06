@@ -15,7 +15,7 @@ static void popup_error_message (void)
   dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_WARNING,
 				   GTK_BUTTONS_OK, _("Unable to start the settings manager 'gnome-settings-daemon'.\n"
 				   "Without the GNOME settings manager running, some preferences may not take effect. This could "
-				   "indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already "
+				   "indicate a problem with DBus, or a non-GNOME (e.g. KDE) settings manager may already "
 				   "be active and conflicting with the GNOME settings manager."));
 
   gtk_dialog_run (GTK_DIALOG (dialog));
