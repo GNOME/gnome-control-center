@@ -1500,11 +1500,13 @@ paint_output (App *app, cairo_t *cr, int i)
     GList *connected_outputs = list_connected_outputs (app, &total_w, &total_h);
     GnomeOutputInfo *output = g_list_nth (connected_outputs, i)->data;
     PangoLayout *layout = get_display_name (app, output);
-    PangoRectangle extent;
+    PangoRectangle ink_extent, log_extent;
     GdkRectangle viewport;
     double angle;
     GdkColor output_color;
     double r, g, b;
+    double available_w;
+    double factor;
 
     cairo_save (cr);
 
@@ -1611,13 +1613,19 @@ paint_output (App *app, cairo_t *cr, int i)
     cairo_set_line_width (cr, 2);
 
     layout_set_font (layout, "Sans Bold 12");
+    pango_layout_get_pixel_extents (layout, &ink_extent, &log_extent);
 
-    pango_layout_get_pixel_extents (layout, NULL, &extent);
+    available_w = w * scale + 0.5 - 6; /* Same as the inner rectangle's width, minus 1 pixel of padding on each side */
+    if (available_w < ink_extent.width)
+	factor = available_w / ink_extent.width;
+    else
+	factor = 1.0;
 
-    extent.x = x + ((w * scale + 0.5) - extent.width) / 2;
-    extent.y = y + ((h * scale + 0.5) - extent.height) / 2;
+    cairo_move_to (cr,
+		   x + ((w * scale + 0.5) - factor * log_extent.width) / 2,
+		   y + ((h * scale + 0.5) - factor * log_extent.height) / 2);
 
-    cairo_move_to (cr, extent.x, extent.y);
+    cairo_scale (cr, factor, factor);
 
     if (output->on)
 	cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
