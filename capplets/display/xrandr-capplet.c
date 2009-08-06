@@ -461,29 +461,26 @@ count_all_outputs (GnomeRRConfig *config)
 static void
 rebuild_current_monitor_label (App *app)
 {
-	char *str;
-	gboolean free_str;
+	char *str, *tmp;
 	GdkColor color;
 	gboolean use_color;
 
 	if (app->current_output)
 	{
-	    str = g_strdup_printf (_("<b>Monitor: %s</b>"), app->current_output->display_name);
-	    free_str = TRUE;
+	    tmp = g_strdup_printf (_("Monitor: %s"), app->current_output->display_name);
+	    str = g_strdup_printf ("<b>%s</b>", tmp);
 	    gnome_rr_labeler_get_color_for_output (app->labeler, app->current_output, &color);
 	    use_color = TRUE;
+	    g_free (tmp);
 	}
 	else
 	{
-	    str = _("<b>Monitor</b>");
-	    free_str = FALSE;
+	    str = g_strdup_printf ("<b>%s</b>", _("Monitor"));
 	    use_color = FALSE;
 	}
 
 	gtk_label_set_markup (GTK_LABEL (app->current_monitor_label), str);
-
-	if (free_str)
-	    g_free (str);
+	g_free (str);
 
 	if (use_color)
 	{
