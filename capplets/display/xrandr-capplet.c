@@ -124,7 +124,6 @@ on_screen_changed (GnomeRRScreen *scr,
 {
     GnomeRRConfig *current;
     App *app = data;
-    int i;
 
     current = gnome_rr_config_new_current (app->screen);
 
@@ -134,30 +133,12 @@ on_screen_changed (GnomeRRScreen *scr,
     app->current_configuration = current;
     app->current_output = NULL;
 
-#if 0
-    for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
-    {
-	GnomeOutputInfo *o = app->current_configuration->outputs[i];
-
-	g_debug ("  output %s %s: %d %d %d %d", o->name, o->on? "on" : "off", o->x, o->y, o->width, o->height);
-    }
-#endif
-
     if (app->labeler) {
 	gnome_rr_labeler_hide (app->labeler);
 	g_object_unref (app->labeler);
     }
 
     app->labeler = gnome_rr_labeler_new (app->current_configuration);
-
-#if 0
-    for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
-    {
-	GnomeOutputInfo *o = app->current_configuration->outputs[i];
-
-	g_debug ("  output: %d %d %d %d", o->x, o->y, o->width, o->height);
-    }
-#endif
 
     select_current_output_from_dialog_position (app);
 }
