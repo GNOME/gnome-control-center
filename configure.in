@@ -1,4 +1,4 @@
-AC_INIT([gnome-control-center], [2.27.4.1],
+AC_INIT([gnome-control-center], [2.27.5],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -113,16 +113,21 @@ dnl
 dnl Check dependencies of libslab
 dnl
 PKG_CHECK_MODULES(LIBSLAB, [
-			   libgnomeui-2.0 gnome-desktop-2.0 librsvg-2.0 libgnome-menu pango libgnomeui-2.0
+			   gio-2.0 gnome-desktop-2.0 librsvg-2.0 libgnome-menu pango gconf-2.0
 			   ],
 			   have_libslab_deps=yes,
 			   have_libslab_deps=no)
+WARN_CFLAGS="-Wall"
 AC_SUBST(LIBSLAB_CFLAGS)
 AC_SUBST(LIBSLAB_LIBS)
+AC_SUBST(WARN_CFLAGS)
 AM_CONDITIONAL(HAVE_LIBSLAB_DEPS, [test $have_libslab_deps = yes])
 
-ENABLE_DYNAMIC_LIBSLAB=0
-AM_CONDITIONAL(ENABLE_DYNAMIC_LIBSLAB, test "x$ENABLE_DYNAMIC_LIBSLAB" = "x1")
+# When copying libslab, make sure to change this to match the value specified
+# in libslab's configure.ac file
+
+LT_VERSION=1:2:1
+AC_SUBST(LT_VERSION)
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
