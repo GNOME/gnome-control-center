@@ -65,7 +65,6 @@ search-entry-watermark.h: search-entry-watermark.svg
 	sed -e 's/"/\\"/g' -e 's/$$/\\/' -e 's/#000000/#%s/g' $< >> $@; \
 	echo '"' >> $@
 
-
 MARSHAL_GENERATED = nld-marshal.c nld-marshal.h
 
 nld-marshal.h: nld-marshal.list

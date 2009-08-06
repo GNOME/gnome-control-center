@@ -29,7 +29,6 @@
 #include <dirent.h>
 
 #include "app-shell.h"
-#include "app-shell-startup.h"
 #include "slab-gnome-util.h"
 
 void handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data);
@@ -106,9 +105,7 @@ handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data)
 int
 main (int argc, char *argv[])
 {
-	BonoboApplication *bonobo_app = NULL;
 	gboolean hidden = FALSE;
-	gchar * startup_id;
 	AppShellData *app_data;
 	GSList *actions;
 	GnomeProgram *program;
@@ -131,33 +128,19 @@ main (int argc, char *argv[])
 		hidden = TRUE;
 	}
 
-	startup_id = g_strdup (g_getenv (DESKTOP_STARTUP_ID));
 	program = gnome_program_init ("GNOME Control Center", "0.1", LIBGNOMEUI_MODULE,
 		argc, argv, NULL, NULL);
 
-	if (apss_already_running (argc, argv, &bonobo_app, "GNOME-NLD-ControlCenter", startup_id))
-	{
-		gdk_notify_startup_complete ();
-		bonobo_debug_shutdown ();
-		g_free (startup_id);
-		exit (1);
-	}
-
 	app_data = appshelldata_new ("gnomecc.menu", NULL, CONTROL_CENTER_PREFIX,
-		GTK_ICON_SIZE_DND, FALSE, TRUE);
+				     GTK_ICON_SIZE_DND, FALSE, TRUE);
 	generate_categories (app_data);
 
 	actions = get_actions_list ();
 	layout_shell (app_data, _("Filter"), _("Groups"), _("Common Tasks"), actions,
 		handle_static_action_clicked);
 
-	g_signal_connect (bonobo_app, "new-instance", G_CALLBACK (apss_new_instance_cb), app_data);
 	create_main_window (app_data, "MyControlCenter", _("Control Center"),
 		"gnome-control-center", 975, 600, hidden);
 
-	if (bonobo_app)
-		bonobo_object_unref (bonobo_app);
-	bonobo_debug_shutdown ();
-	g_free (startup_id);
 	return 0;
 };
