@@ -118,15 +118,6 @@ idle_free (gchar *s)
     return s;
 }
 
-static int
-compare_outputs (const void *p1, const void *p2)
-{
-    GnomeOutputInfo *const *o1 = p1;
-    GnomeOutputInfo *const *o2 = p2;
-
-    return (**o1).x - (**o2).x;
-}
-
 static void
 on_screen_changed (GnomeRRScreen *scr,
 		   gpointer data)
@@ -151,16 +142,6 @@ on_screen_changed (GnomeRRScreen *scr,
 	g_debug ("  output %s %s: %d %d %d %d", o->name, o->on? "on" : "off", o->x, o->y, o->width, o->height);
     }
 #endif
-
-#if 0
-    g_debug ("sorting");
-#endif
-    /* Sort outputs according to X coordinate */
-    for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
-	;
-
-    qsort (app->current_configuration->outputs, i, sizeof (GnomeOutputInfo *),
-	   compare_outputs);
 
     if (app->labeler) {
 	gnome_rr_labeler_hide (app->labeler);
