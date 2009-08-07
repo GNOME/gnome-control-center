@@ -25,7 +25,6 @@
 #include <gtk/gtk.h>
 #include <panel-applet.h>
 #include <libgnome/gnome-desktop-item.h>
-#include <libgnomeui/libgnomeui.h>
 #include <dirent.h>
 
 #include "app-shell.h"
@@ -108,7 +107,6 @@ main (int argc, char *argv[])
 	gboolean hidden = FALSE;
 	AppShellData *app_data;
 	GSList *actions;
-	GnomeProgram *program;
 
 #ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -128,8 +126,7 @@ main (int argc, char *argv[])
 		hidden = TRUE;
 	}
 
-	program = gnome_program_init ("GNOME Control Center", "0.1", LIBGNOMEUI_MODULE,
-		argc, argv, NULL, NULL);
+	gtk_init (&argc, &argv);
 
 	app_data = appshelldata_new ("gnomecc.menu", NULL, CONTROL_CENTER_PREFIX,
 				     GTK_ICON_SIZE_DND, FALSE, TRUE);
