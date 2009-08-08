@@ -22,8 +22,8 @@
 
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <panel-applet.h>
 #include <libgnome/gnome-desktop-item.h>
 #include <dirent.h>
 
