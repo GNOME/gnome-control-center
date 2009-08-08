@@ -138,7 +138,6 @@ create_main_window (AppShellData * app_data, const gchar * app_name, const gchar
 	gtk_window_set_position (GTK_WINDOW (app_data->main_app), GTK_WIN_POS_CENTER);
 	if (!hidden)
 		show_shell (app_data);
-	gtk_main ();
 
 	return TRUE;
 }

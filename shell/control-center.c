@@ -20,15 +20,12 @@
 
 #include "config.h"
 
-#include <string.h>
-
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libgnome/gnome-desktop-item.h>
-#include <dirent.h>
+#include <unique/unique.h>
 
-#include "app-shell.h"
-#include "slab-gnome-util.h"
+#include <libslab/slab.h>
 
 void handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data);
 static GSList *get_actions_list ();
@@ -101,10 +98,44 @@ handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data)
 	g_free (temp);
 }
 
+static UniqueResponse
+message_received_cb (UniqueApp         *app,
+		     UniqueCommand      command,
+		     UniqueMessageData *message,
+		     guint              time,
+		     gpointer           user_data)
+{
+	UniqueResponse  res;
+	AppShellData   *app_data = user_data;
+
+	switch (command) {
+	case UNIQUE_ACTIVATE:
+		/* move the main window to the screen that sent us the command */
+		gtk_window_set_screen (GTK_WINDOW (app_data->main_app),
+				       unique_message_data_get_screen (message));
+		if (!app_data->main_app_window_shown_once)
+			show_shell (app_data);
+
+		gtk_window_present_with_time (GTK_WINDOW (app_data->main_app),
+					      time);
+
+		gtk_widget_grab_focus (SLAB_SECTION (app_data->filter_section)->contents);
+
+		res = UNIQUE_RESPONSE_OK;
+		break;
+	default:
+		res = UNIQUE_RESPONSE_PASSTHROUGH;
+		break;
+	}
+
+	return res;
+}
+
 int
 main (int argc, char *argv[])
 {
 	gboolean hidden = FALSE;
+	UniqueApp *unique_app;
 	AppShellData *app_data;
 	GSList *actions;
 	GError *error;
@@ -127,6 +158,22 @@ main (int argc, char *argv[])
 		return 1;
 	}
 
+	unique_app = unique_app_new ("org.opensuse.yast-control-center-gnome", NULL);
+	if (unique_app_is_running (unique_app)) {
+		int retval = 0;
+
+		if (!hidden) {
+			UniqueResponse response;
+			response = unique_app_send_message (unique_app,
+							    UNIQUE_ACTIVATE,
+							    NULL);
+			retval = (response != UNIQUE_RESPONSE_OK);
+		}
+
+		g_object_unref (unique_app);
+		return retval;
+	}
+
 	app_data = appshelldata_new ("gnomecc.menu", NULL, CONTROL_CENTER_PREFIX,
 				     GTK_ICON_SIZE_DND, FALSE, TRUE);
 	generate_categories (app_data);
@@ -137,6 +184,14 @@ main (int argc, char *argv[])
 
 	create_main_window (app_data, "MyControlCenter", _("Control Center"),
 		"gnome-control-center", 975, 600, hidden);
+
+	unique_app_watch_window (unique_app, GTK_WINDOW (app_data->main_app));
+	g_signal_connect (unique_app, "message-received",
+			  G_CALLBACK (message_received_cb), app_data);
+
+	gtk_main ();
+
+	g_object_unref (unique_app);
 
 	return 0;
 };
