@@ -26,7 +26,11 @@ HEADER_FILES=					\
 	system-tile.h				\
 	tile.h
 
+if !LIBSLAB_FOR_INTERNAL_USE
 lib_LTLIBRARIES = libslab.la
+else
+noinst_LTLIBRARIES = libslab.la
+endif
 
 libslab_la_SOURCES =				\
 	$(MARSHAL_GENERATED)			\
@@ -53,10 +57,12 @@ libslab_la_SOURCES =				\
 	tile-action.c				\
 	tile.c
 
+if !LIBSLAB_FOR_INTERNAL_USE
 libslab_includedir = $(includedir)/libslab
 libslab_include_HEADERS = $(HEADER_FILES)
 
 libslab_la_LDFLAGS = -version-info $(LT_VERSION)
+endif
 
 libslab_la_LIBADD = $(LIBSLAB_LIBS)
 
@@ -64,6 +70,7 @@ search-entry-watermark.h: search-entry-watermark.svg
 	echo '#define SEARCH_ENTRY_WATERMARK_SVG "\' > $@; \
 	sed -e 's/"/\\"/g' -e 's/$$/\\/' -e 's/#000000/#%s/g' $< >> $@; \
 	echo '"' >> $@
+
 
 MARSHAL_GENERATED = nld-marshal.c nld-marshal.h
 

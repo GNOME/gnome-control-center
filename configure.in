@@ -121,13 +121,8 @@ WARN_CFLAGS="-Wall"
 AC_SUBST(LIBSLAB_CFLAGS)
 AC_SUBST(LIBSLAB_LIBS)
 AC_SUBST(WARN_CFLAGS)
+AM_CONDITIONAL(LIBSLAB_FOR_INTERNAL_USE, test "yes" = "yes")
 AM_CONDITIONAL(HAVE_LIBSLAB_DEPS, [test $have_libslab_deps = yes])
-
-# When copying libslab, make sure to change this to match the value specified
-# in libslab's configure.ac file
-
-LT_VERSION=1:2:1
-AC_SUBST(LT_VERSION)
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
@@ -348,7 +343,6 @@ libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
 po/Makefile.in
 libslab/Makefile
-libslab/libslab.pc
 shell/Makefile
 shell/gnomecc.desktop.in
 typing-break/Makefile
