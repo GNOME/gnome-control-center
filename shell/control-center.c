@@ -107,6 +107,11 @@ main (int argc, char *argv[])
 	gboolean hidden = FALSE;
 	AppShellData *app_data;
 	GSList *actions;
+	GError *error;
+	GOptionEntry options[] = {
+	  { "hide", 0, 0, G_OPTION_ARG_NONE, &hidden, N_("Hide on start (useful to preload the shell)"), NULL },
+	  { NULL }
+	};
 
 #ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -114,19 +119,13 @@ main (int argc, char *argv[])
 	textdomain (GETTEXT_PACKAGE);
 #endif
 
-	if (argc > 1)
-	{
-		if (argc != 2 || strcmp ("-h", argv[1]))
-		{
-			printf ("Usage - gnome-control-center [-h]\n");
-			printf ("Options: -h : hide on start\n");
-			printf ("\tUseful if you want to autostart the control-center singleton so it can get all its slow loading done\n");
-			exit (1);
-		}
-		hidden = TRUE;
+	error = NULL;
+	if (!gtk_init_with_args (&argc, &argv,
+				 NULL, options, GETTEXT_PACKAGE, &error)) {
+		g_printerr ("%s", error->message);
+		g_error_free (error);
+		return 1;
 	}
-
-	gtk_init (&argc, &argv);
 
 	app_data = appshelldata_new ("gnomecc.menu", NULL, CONTROL_CENTER_PREFIX,
 				     GTK_ICON_SIZE_DND, FALSE, TRUE);
