@@ -122,7 +122,7 @@ main (int argc, char *argv[])
 	error = NULL;
 	if (!gtk_init_with_args (&argc, &argv,
 				 NULL, options, GETTEXT_PACKAGE, &error)) {
-		g_printerr ("%s", error->message);
+		g_printerr ("%s\n", error->message);
 		g_error_free (error);
 		return 1;
 	}
