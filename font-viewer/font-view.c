@@ -225,7 +225,7 @@ add_row(GtkWidget *table, gint *row_p,
         gboolean expand)
 {
     gchar *bold_name;
-    GtkWidget *name_w, *value_w;
+    GtkWidget *name_w;
 
     bold_name = g_strconcat("<b>", name, "</b>", NULL);
     name_w = gtk_label_new(bold_name);
@@ -238,6 +238,7 @@ add_row(GtkWidget *table, gint *row_p,
 
     if (multiline) {
 	GtkWidget *label, *viewport;
+	GtkScrolledWindow *swin;
         guint flags;
 
         label = gtk_label_new (value);
@@ -247,29 +248,29 @@ add_row(GtkWidget *table, gint *row_p,
         gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
 
 
-        value_w = gtk_scrolled_window_new(NULL, NULL);
-        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(value_w),
+        swin = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new(NULL, NULL));
+        gtk_scrolled_window_set_policy(swin,
                                        GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
-        viewport = gtk_viewport_new (gtk_scrolled_window_get_hadjustment (value_w),
-                                     gtk_scrolled_window_get_vadjustment (value_w));
+        viewport = gtk_viewport_new (gtk_scrolled_window_get_hadjustment (swin),
+                                     gtk_scrolled_window_get_vadjustment (swin));
         gtk_viewport_set_shadow_type (GTK_VIEWPORT (viewport), GTK_SHADOW_NONE);
 
-        gtk_container_add (GTK_CONTAINER(value_w), viewport);
+        gtk_container_add (GTK_CONTAINER(swin), viewport);
         (*row_p)++;
         if (expand)
           flags = GTK_FILL|GTK_EXPAND;
         else
           flags = GTK_FILL;
-        gtk_table_attach(GTK_TABLE(table), value_w, 0, 2, *row_p, *row_p + 1,
+        gtk_table_attach(GTK_TABLE(table), GTK_WIDGET(swin), 0, 2, *row_p, *row_p + 1,
                          GTK_FILL|GTK_EXPAND, flags, 0, 0);
 
         gtk_container_add (GTK_CONTAINER (viewport), label);
     } else {
-        value_w = gtk_label_new(value);
-        gtk_misc_set_alignment(GTK_MISC(value_w), 0.0, 0.5);
-	gtk_label_set_selectable(GTK_LABEL(value_w), TRUE);
-        gtk_table_attach(GTK_TABLE(table), value_w, 1, 2, *row_p, *row_p + 1,
+        GtkWidget *label = gtk_label_new(value);
+        gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.5);
+	gtk_label_set_selectable(GTK_LABEL(label), TRUE);
+        gtk_table_attach(GTK_TABLE(table), label, 1, 2, *row_p, *row_p + 1,
                          GTK_FILL|GTK_EXPAND, GTK_FILL, 0, 0);
     }
 
@@ -460,16 +461,15 @@ install_button_clicked_cb (GtkButton   *button,
     dest_path = g_build_filename (g_get_home_dir (), ".fonts", NULL);
     if (!g_file_test (dest_path, G_FILE_TEST_EXISTS)) {
         GFile *f = g_file_new_for_path (dest_path);
-        g_file_make_directory_with_parents (f, NULL, err);
+        g_file_make_directory_with_parents (f, NULL, &err);
+        g_object_unref (f);
         if (err) {
             /* TODO: show error dialog */
             g_warning ("Could not create fonts directory: %s", err->message);
             g_error_free (err);
-            g_object_unref (f);
             g_free (dest_path);
             return;
         }
-        g_object_unref (f);
     }
     g_free (dest_path);
 
