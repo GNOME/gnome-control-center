@@ -652,9 +652,6 @@ message_from_capplet (GIOChannel   *source,
   gchar buffer[1024];
   GIOStatus status;
   gsize bytes_read;
-  GdkPixbuf *pixbuf;
-  gint i, rowstride;
-  guchar *pixels;
   ThemeThumbnailData *theme_thumbnail_data;
 
   theme_thumbnail_data = (ThemeThumbnailData *) data;
@@ -671,9 +668,11 @@ message_from_capplet (GIOChannel   *source,
 
       if (theme_thumbnail_data->status == WRITING_PIXBUF_DATA)
       {
-        char *type;
+        GdkPixbuf *pixbuf = NULL;
+        gint i, rowstride;
+        guchar *pixels;
         gint width, height;
-        type = (char *) theme_thumbnail_data->type->data;
+        const gchar *type = (const gchar *) theme_thumbnail_data->type->data;
 
         if (!strcmp (type, THUMBNAIL_TYPE_META))
           pixbuf = create_meta_theme_pixbuf (theme_thumbnail_data);
@@ -687,7 +686,8 @@ message_from_capplet (GIOChannel   *source,
           g_assert_not_reached ();
 
         if (pixbuf == NULL) {
-          width = height = 0;
+          width = height = rowstride = 0;
+          pixels = NULL;
         } else {
           width = gdk_pixbuf_get_width (pixbuf);
           height = gdk_pixbuf_get_height (pixbuf);
