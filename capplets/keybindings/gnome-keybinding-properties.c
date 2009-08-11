@@ -522,25 +522,20 @@ find_section (GtkTreeModel *model,
               GtkTreeIter  *iter,
 	      const char   *title)
 {
-  gint i, j;
-  gboolean found;
+  gboolean success, found;
 
-  i = gtk_tree_model_iter_n_children (model, NULL);
   found = FALSE;
-  gtk_tree_model_get_iter_first (model, iter);
-  for (j = 0; j < i; j++)
+  success = gtk_tree_model_get_iter_first (model, iter);
+  while (success && !found)
     {
       char *description = NULL;
 
-      gtk_tree_model_iter_next (model, iter);
       gtk_tree_model_get (model, iter,
 			  DESCRIPTION_COLUMN, &description,
 			  -1);
-      if (g_strcmp0 (description, title) == 0)
-        {
-	  found = TRUE;
-     	  break;
-        }
+
+      found = (g_strcmp0 (description, title) == 0);
+      success = gtk_tree_model_iter_next (model, iter);
     }
   if (!found)
     {
