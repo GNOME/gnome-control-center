@@ -1,6 +1,14 @@
+if HAVE_LIBSLAB_DEPS
+REAL_LIBSLAB_CFLAGS = -I$(top_srcdir)/libslab
+REAL_LIBSLAB_LIBS = $(top_builddir)/libslab/libslab.la
+else
+REAL_LIBSLAB_CFLAGS = $(EXTERNAL_LIBSLAB_CFLAGS)
+REAL_LIBSLAB_LIBS = $(EXTERNAL_LIBSLAB_LIBS)
+endif
+
 INCLUDES =					\
 	-I$(top_srcdir)				\
-	-I$(top_srcdir)/libslab			\
+	$(REAL_LIBSLAB_CFLAGS)			\
 	$(GNOMECC_SHELL_CFLAGS)
 
 bin_PROGRAMS = gnome-control-center 
@@ -10,7 +18,7 @@ gnome_control_center_SOURCES =		\
 
 gnome_control_center_LDADD =						\
 	$(GNOMECC_SHELL_LIBS)						\
-	$(top_builddir)/libslab/libslab.la
+	$(REAL_LIBSLAB_LIBS)
 
 AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
