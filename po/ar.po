@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 13:31+0300\n"
-"PO-Revision-Date: 2009-08-06 13:47+0300\n"
+"POT-Creation-Date: 2009-08-14 21:43+0300\n"
+"PO-Revision-Date: 2009-08-14 21:45+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "Language: ar\n"
@@ -1447,13 +1447,13 @@ msgstr "تعذّر تثبيت محرّك السِمات"
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
-"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"effect. This could indicate a problem with DBus, or a non-GNOME (e.g. KDE) "
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
 "تعذّر تشغيل مدير الإعدادات 'gnome-settings-daemon'.\n"
 "لن يكون لبعض التفضيلات تأثير دون عمل مدير إعدادات جنوم، قد يشير ذلك إلى وجود "
-"مشكلة مع بونوبو أو أن مدير إعدادات مغاير (تابع لكدي مثلا) نشط مسبّقا، و "
+"مشكلة مع DBus أو أن مدير إعدادات مغاير (تابع لكدي مثلا) نشط مسبّقا، و "
 "متضارب مع مدير إعدادات جنوم."
 
 #: ../capplets/common/capplet-stock-icons.c:66
@@ -2060,17 +2060,18 @@ msgid "Include _panel"
 msgstr "تضمن ا_لشريط"
 
 #: ../capplets/display/display-capplet.ui.h:4
-#: ../capplets/display/xrandr-capplet.c:340
+#: ../capplets/display/xrandr-capplet.c:302
 msgid "Left"
 msgstr "يسار"
 
 #: ../capplets/display/display-capplet.ui.h:5
+#: ../capplets/display/xrandr-capplet.c:440
 msgid "Monitor"
 msgstr "الشاشة"
 
 #: ../capplets/display/display-capplet.ui.h:6
-#: ../capplets/display/xrandr-capplet.c:339
-#: ../capplets/display/xrandr-capplet.c:378
+#: ../capplets/display/xrandr-capplet.c:301
+#: ../capplets/display/xrandr-capplet.c:340
 msgid "Normal"
 msgstr "طبيعي"
 
@@ -2095,7 +2096,7 @@ msgid "Re_fresh rate:"
 msgstr "تردد الت_حديث:"
 
 #: ../capplets/display/display-capplet.ui.h:12
-#: ../capplets/display/xrandr-capplet.c:341
+#: ../capplets/display/xrandr-capplet.c:303
 msgid "Right"
 msgstr "يمين"
 
@@ -2127,25 +2128,21 @@ msgstr "غيِّر ميز الشاشة"
 msgid "Display"
 msgstr "جهاز العرض"
 
-#: ../capplets/display/xrandr-capplet.c:342
+#: ../capplets/display/xrandr-capplet.c:304
 msgid "Upside Down"
 msgstr "رأسا على عقب"
 
-#: ../capplets/display/xrandr-capplet.c:384
+#: ../capplets/display/xrandr-capplet.c:346
 #, c-format
 msgid "%d Hz"
 msgstr "%Id هرتز"
 
-#: ../capplets/display/xrandr-capplet.c:471
+#: ../capplets/display/xrandr-capplet.c:432
 #, c-format
-msgid "<b>Monitor: %s</b>"
-msgstr "<b>الشاشة: %s</b>"
+msgid "Monitor: %s"
+msgstr "الشاشة: %s"
 
-#: ../capplets/display/xrandr-capplet.c:478
-msgid "<b>Monitor</b>"
-msgstr "<b>الشاشة</b>"
-
-#: ../capplets/display/xrandr-capplet.c:552
+#: ../capplets/display/xrandr-capplet.c:511
 #, c-format
 msgid "%d x %d"
 msgstr "%Id × %Id"
@@ -2155,23 +2152,23 @@ msgstr "%Id × %Id"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1492
+#: ../capplets/display/xrandr-capplet.c:1451
 msgid "Mirror Screens"
 msgstr "انسخ الشاشة"
 
-#: ../capplets/display/xrandr-capplet.c:1926
+#: ../capplets/display/xrandr-capplet.c:1893
 msgid "Could not save the monitor configuration"
 msgstr "تعذّر حفظ إعدادات الشاشة"
 
-#: ../capplets/display/xrandr-capplet.c:1937
+#: ../capplets/display/xrandr-capplet.c:1904
 msgid "Could not get session bus while applying display configuration"
 msgstr "تعذرت معرفة الجلسة أثناء تطبيق تضبيطات العرض"
 
-#: ../capplets/display/xrandr-capplet.c:1979
+#: ../capplets/display/xrandr-capplet.c:1946
 msgid "Could not detect displays"
 msgstr "تعذّر اكتشاف أجهزة العرض"
 
-#: ../capplets/display/xrandr-capplet.c:2194
+#: ../capplets/display/xrandr-capplet.c:2161
 msgid "Could not get screen information"
 msgstr "تعذّرت معرفة معلومات الشاشة"
 
@@ -2221,16 +2218,16 @@ msgstr "معطّل"
 msgid "<Unknown Action>"
 msgstr "<إجراء مجهول>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:947
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1571
+#: ../capplets/keybindings/gnome-keybinding-properties.c:942
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1566
 msgid "Custom Shortcuts"
 msgstr "اختصار مخصص"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1086
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1081
 msgid "Error saving the new shortcut"
 msgstr "خطأ أثناء حفظ الاختصار الجديد"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1160
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2240,7 +2237,7 @@ msgstr ""
 "الاختصار \"%s\" لا يمكن استعماله لأن الكتابة بهذا المفتاح ستصبح مستحيلة. \n"
 "الرجاء المحاولة مجدّدا بمفتاح Control، Alt أو Shift في نفس الوقت."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1195
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1190
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -2249,30 +2246,30 @@ msgstr ""
 "الاختصار \"%s\" مستخدم في:\n"
 "\"%s\""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1201
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1196
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "إذا أعدت تعيين الاختصار \"%s\" فسيُعطّل الاختصار \"%s\"."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1209
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1204
 msgid "_Reassign"
 msgstr "أعِد ال_تعيين"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1329
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1324
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "خطأ عند إلغاء ضبط مفتاح الاختصار في قاعدة بيانات الإعدادات: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1526
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1521
 msgid "Too many custom shortcuts"
 msgstr "الكثير من الاختصارات المخصصة"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1823
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1818
 msgid "Action"
 msgstr "الإجراء"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1845
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1840
 msgid "Shortcut"
 msgstr "الاختصار"
 
@@ -2847,100 +2844,100 @@ msgid "Set your network proxy preferences"
 msgstr "اضبط خيارات وسيط شبكتك"
 
 #: ../capplets/network/gnome-network-properties.ui.h:1
+msgid "<b>Di_rect internet connection</b>"
+msgstr "<b>ات_صال مباشر بالإنترنت</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:2
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr "<b>إعداد آ_لي للوسيط</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:3
+msgid "<b>_Manual proxy configuration</b>"
+msgstr "<b>إعداد _يدوي للوسيط</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:4
+msgid "<b>_Use authentication</b>"
+msgstr "<b>است_خدم الاستيثاق</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:5
 msgid "Autoconfiguration _URL:"
 msgstr "_مسار الإعداد الآلي:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:2
+#: ../capplets/network/gnome-network-properties.ui.h:6
 msgid "C_reate"
 msgstr "أن_شئ"
 
-#: ../capplets/network/gnome-network-properties.ui.h:3
+#: ../capplets/network/gnome-network-properties.ui.h:7
 msgid "Create New Location"
 msgstr "أنشئ مكانا جديدا"
 
-#: ../capplets/network/gnome-network-properties.ui.h:4
-msgid "Di_rect internet connection"
-msgstr "ات_صال مباشر بالإنترنت"
-
-#: ../capplets/network/gnome-network-properties.ui.h:5
+#: ../capplets/network/gnome-network-properties.ui.h:8
 msgid "HTTP Proxy Details"
 msgstr "تفاصيل وسيط HTTP"
 
-#: ../capplets/network/gnome-network-properties.ui.h:6
+#: ../capplets/network/gnome-network-properties.ui.h:9
 msgid "H_TTP proxy:"
 msgstr "و_سيط HTTP:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:7
+#: ../capplets/network/gnome-network-properties.ui.h:10
 msgid "Ignore Host List"
 msgstr "قائمة المستضيفين المُتجاهلين"
 
-#: ../capplets/network/gnome-network-properties.ui.h:8
+#: ../capplets/network/gnome-network-properties.ui.h:11
 msgid "Ignored Hosts"
 msgstr "المستضيفين المُتجاهلين"
 
-#: ../capplets/network/gnome-network-properties.ui.h:9
+#: ../capplets/network/gnome-network-properties.ui.h:12
 msgid "Location:"
 msgstr "المكان:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:10
+#: ../capplets/network/gnome-network-properties.ui.h:13
 msgid "Network Proxy Preferences"
 msgstr "تفضيلات وسيط الشبكة"
 
-#: ../capplets/network/gnome-network-properties.ui.h:11
+#: ../capplets/network/gnome-network-properties.ui.h:14
 msgid "Port:"
 msgstr "المنفذ:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:12
+#: ../capplets/network/gnome-network-properties.ui.h:15
 msgid "Proxy Configuration"
 msgstr "إعداد الوسيط"
 
-#: ../capplets/network/gnome-network-properties.ui.h:13
+#: ../capplets/network/gnome-network-properties.ui.h:16
 msgid "S_ocks host:"
 msgstr "مستضيف S_ocks:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:14
+#: ../capplets/network/gnome-network-properties.ui.h:17
 msgid "The location already exists."
 msgstr "المكان موجود بالفعل"
 
-#: ../capplets/network/gnome-network-properties.ui.h:15
+#: ../capplets/network/gnome-network-properties.ui.h:18
 msgid "U_sername:"
 msgstr "ا_سم المستخدم:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:16
-msgid "_Automatic proxy configuration"
-msgstr "إعداد آ_لي للوسيط"
-
-#: ../capplets/network/gnome-network-properties.ui.h:17
+#: ../capplets/network/gnome-network-properties.ui.h:19
 msgid "_Delete Location"
 msgstr "اح_ذف المكان"
 
-#: ../capplets/network/gnome-network-properties.ui.h:18
+#: ../capplets/network/gnome-network-properties.ui.h:20
 msgid "_Details"
 msgstr "ال_تفاصيل"
 
-#: ../capplets/network/gnome-network-properties.ui.h:19
+#: ../capplets/network/gnome-network-properties.ui.h:21
 msgid "_FTP proxy:"
 msgstr "_وسيط FTP:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:20
+#: ../capplets/network/gnome-network-properties.ui.h:22
 msgid "_Location name:"
 msgstr "ا_سم المكان:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:21
-msgid "_Manual proxy configuration"
-msgstr "إعداد _يدوي للوسيط"
-
-#: ../capplets/network/gnome-network-properties.ui.h:22
+#: ../capplets/network/gnome-network-properties.ui.h:23
 msgid "_Password:"
 msgstr "_كلمة السر:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:23
+#: ../capplets/network/gnome-network-properties.ui.h:24
 msgid "_Secure HTTP proxy:"
 msgstr "وسيط HTTP _آمن:"
-
-#: ../capplets/network/gnome-network-properties.ui.h:24
-msgid "_Use authentication"
-msgstr "است_خدم الاستيثاق"
 
 #: ../capplets/network/gnome-network-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
@@ -3048,24 +3045,28 @@ msgstr "لُف للأعلى"
 msgid "None"
 msgstr "لا شيء"
 
-#: ../shell/control-center.c:54
+#: ../shell/control-center.c:49
 #, c-format
 msgid "key not found [%s]\n"
 msgstr "المفتاح غير موجود [%s]\n"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:143
+msgid "Hide on start (useful to preload the shell)"
+msgstr "أخفِ عند البدء (مفيد لتحميل الصدفة مسبقا)"
+
+#: ../shell/control-center.c:182
 msgid "Filter"
 msgstr "رشِّح"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:182
 msgid "Groups"
 msgstr "المجموعات"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:182
 msgid "Common Tasks"
 msgstr "المهام الشائعة"
 
-#: ../shell/control-center.c:155 ../shell/gnomecc.desktop.in.in.h:1
+#: ../shell/control-center.c:185 ../shell/gnomecc.desktop.in.in.h:1
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "مركز التحكّم"
@@ -3293,39 +3294,39 @@ msgstr "فيما إذا ستنشأ مصغرات لخطوط Type1"
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "أبجد هوز حطي كلمن سعفض قرشت ثخذ ضظغ.  0123456789 ١٢٣٤٥٦٧٨٩٠"
 
-#: ../font-viewer/font-view.c:288
+#: ../font-viewer/font-view.c:289
 msgid "Name:"
 msgstr "الاسم:"
 
-#: ../font-viewer/font-view.c:291
+#: ../font-viewer/font-view.c:292
 msgid "Style:"
 msgstr "الأسلوب:"
 
-#: ../font-viewer/font-view.c:304
+#: ../font-viewer/font-view.c:305
 msgid "Type:"
 msgstr "النوع:"
 
-#: ../font-viewer/font-view.c:308
+#: ../font-viewer/font-view.c:309
 msgid "Size:"
 msgstr "المقاس:"
 
-#: ../font-viewer/font-view.c:352 ../font-viewer/font-view.c:365
+#: ../font-viewer/font-view.c:353 ../font-viewer/font-view.c:366
 msgid "Version:"
 msgstr "الإصدارة:"
 
-#: ../font-viewer/font-view.c:356 ../font-viewer/font-view.c:367
+#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:368
 msgid "Copyright:"
 msgstr "حقوق النشر:"
 
-#: ../font-viewer/font-view.c:360
+#: ../font-viewer/font-view.c:361
 msgid "Description:"
 msgstr "الوصف:"
 
-#: ../font-viewer/font-view.c:440
+#: ../font-viewer/font-view.c:441
 msgid "Installed"
 msgstr "مثبَّت"
 
-#: ../font-viewer/font-view.c:443
+#: ../font-viewer/font-view.c:444
 msgid "Install Failed"
 msgstr "فشل التّثبيت"
 
@@ -3371,7 +3372,7 @@ msgstr "ملف-الخط ملف-الخرج"
 msgid "Error parsing arguments: %s\n"
 msgstr "خطأ أثناء قراءة الإعدادات: %s\n"
 
-#: ../libslab/app-shell.c:753
+#: ../libslab/app-shell.c:752
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3382,7 +3383,7 @@ msgstr ""
 "\n"
 "لا يُطابق مرشِّحك \"<b>%s</b>\" أيّة عناصر.</span>"
 
-#: ../libslab/app-shell.c:903
+#: ../libslab/app-shell.c:902
 msgid "Other"
 msgstr "أخرى"
 
@@ -3533,6 +3534,12 @@ msgstr "<b>افتح %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "احذف من عناصر النظام"
+
+#~ msgid "<b>Monitor: %s</b>"
+#~ msgstr "<b>الشاشة: %s</b>"
+
+#~ msgid "<b>Monitor</b>"
+#~ msgstr "<b>الشاشة</b>"
 
 #~ msgid "<b>Email</b>"
 #~ msgstr "<b>البريد الإلكتروني</b>"
