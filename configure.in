@@ -228,11 +228,6 @@ if test "x$enable_aboutme" = "xyes"; then
   PKG_CHECK_MODULES(LIBEBOOK, [libebook-1.2 >= 1.7.90],
                     [AC_DEFINE([HAVE_LIBEBOOK], 1,
                     [Define if evolution-data-server libebook-1.2 is available])])
-  dnl PolicyKit-gnome is optional
-  PKG_CHECK_MODULES(POLKIT_GNOME, [polkit-gnome],
-  		    [AC_DEFINE([HAVE_POLKIT], 1,
-  		    [Define if PolicyKit-gnome is available])],
-  		    has_polkit=false)
 fi
 
 AM_CONDITIONAL(BUILD_ABOUTME, test "x$enable_aboutme" = "xyes")

@@ -23,7 +23,7 @@ gnome_about_me_SOURCES =	 	\
 if BUILD_ABOUTME
 bin_PROGRAMS = gnome-about-me
 
-gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) $(POLKIT_GNOME_LIBS)
+gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS)
 gnome_about_me_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
@@ -37,7 +37,6 @@ ui_DATA = $(ui_files)
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(LIBEBOOK_CFLAGS) \
-	$(POLKIT_GNOME_CFLAGS) \
 	-DDATADIR="\"$(datadir)\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_UI_DIR="\"$(uidir)\"" \
