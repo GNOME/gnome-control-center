@@ -24,10 +24,8 @@
 #endif
 
 #include <glib/gstdio.h>
-#include <pwd.h>
 #include <gio/gio.h>
 #include <gconf/gconf-client.h>
-#include <pwd.h>
 #include <unistd.h>
 #include <libebook/e-book.h>
 #include <dbus/dbus-glib-bindings.h>
@@ -356,22 +354,6 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 	me->commit_timeout_id = g_timeout_add (600, (GSourceFunc) about_me_commit_from_timeout, me);
 
 	return FALSE;
-}
-
-static char *
-get_user_login (void)
-{
-	char buf[LINE_MAX * 4];
-	struct passwd pwd, *err;
-
-	int i;
-#if defined(__sun) && !defined(_POSIX_PTHREAD_SEMANTICS)
-	i = getpwuid_r (getuid (), &pwd, buf, sizeof (buf));
-	return (i != 0) ? g_strdup (pwd.pw_name) : NULL;
-#else
-	i = getpwuid_r (getuid (), &pwd, buf, sizeof (buf), &err);
-	return ((i == 0) && (err == &pwd)) ? g_strdup (pwd.pw_name) : NULL;
-#endif
 }
 
 /*
@@ -884,16 +866,13 @@ about_me_setup_dialog (void)
 	GtkBuilder   *dialog;
 	GError 	     *error = NULL;
 	GList        *chain;
-
-	struct passwd *pwent;
-	gchar *str;
-	gchar **tok;
+	gchar        *str;
 
 	me = g_new0 (GnomeAboutMe, 1);
 
 	dialog = gtk_builder_new ();
 	gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR "/gnome-about-me-dialog.ui", NULL);
-    
+
 	me->image_chooser = e_image_chooser_new ();
 	gtk_container_add (GTK_CONTAINER (WID ("button-image")), me->image_chooser);
 
@@ -959,34 +938,14 @@ about_me_setup_dialog (void)
 		about_me_setup_email (me);
 	}
 
-	/************************************************/
-	me->login = get_user_login ();
-	setpwent ();
-	pwent = getpwnam (me->login);
-	if (pwent == NULL) {
-		about_me_error (GTK_WINDOW (WID ("about-me-dialog")),
-				_("Unknown login ID, the user database might be corrupted"));
-		about_me_destroy (me);
-		return -1;
-	}
-	tok = g_strsplit (pwent->pw_gecos, ",", 0);
-
-	/************************************************/
-
-	if (tok[0] == NULL || *tok[0] == '\0')
-		me->username = NULL;
-	else
-		me->username = g_strdup (tok[0]);
+	me->login = g_strdup (g_get_user_name ());
+	me->username = g_strdup (g_get_real_name ());
 
 	/* Contact Tab */
 	about_me_load_photo (me, me->contact);
 
 	widget = WID ("fullname");
-	if (tok[0] == NULL || *tok[0] == '\0') {
-		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", me->login);
-	} else {
-		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", tok[0]);
-	}
+	str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", me->username);
 
 	gtk_label_set_markup (GTK_LABEL (widget), str);
 	g_free (str);
@@ -994,14 +953,9 @@ about_me_setup_dialog (void)
 	widget = WID ("login");
 	gtk_label_set_text (GTK_LABEL (widget), me->login);
 
-	if (tok[0] == NULL || *tok[0] == '\0') {
-		str = g_strdup_printf (_("About %s"), me->login);
-	} else {
-		str = g_strdup_printf (_("About %s"), tok[0]);
-	}
+	str = g_strdup_printf (_("About %s"), me->username);
 	gtk_window_set_title (GTK_WINDOW (main_dialog), str);
 	g_free (str);
-	g_strfreev (tok);
 
 	widget = WID ("password");
 	g_signal_connect (widget, "clicked",
