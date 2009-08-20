@@ -896,6 +896,13 @@ get_geometry (GnomeOutputInfo *output, int *w, int *h)
 	*h = output->pref_height;
 	*w = output->pref_width;
     }
+   if ((output->rotation & GNOME_RR_ROTATION_90) || (output->rotation & GNOME_RR_ROTATION_270))
+   {
+        int tmp;
+        tmp = *h;
+        *h = *w;
+        *w = tmp;
+   }
 }
 
 #define SPACE 15
@@ -1502,7 +1509,6 @@ paint_output (App *app, cairo_t *cr, int i)
     PangoLayout *layout = get_display_name (app, output);
     PangoRectangle ink_extent, log_extent;
     GdkRectangle viewport;
-    double angle;
     GdkColor output_color;
     double r, g, b;
     double available_w;
@@ -1539,28 +1545,7 @@ paint_output (App *app, cairo_t *cr, int i)
 		     x + (w * scale + 0.5) / 2,
 		     y + (h * scale + 0.5) / 2);
 
-    if (output->rotation & GNOME_RR_ROTATION_0)
-    {
-	angle = 0;
-    }
-    else if (output->rotation & GNOME_RR_ROTATION_90)
-    {
-	angle = 1.5 * G_PI;
-    }
-    else if (output->rotation & GNOME_RR_ROTATION_180)
-    {
-	angle = G_PI;
-    }
-    else if (output->rotation & GNOME_RR_ROTATION_270)
-    {
-	angle = G_PI / 2;
-    }
-    else
-    {
-	angle = 0;
-    }
-
-    cairo_rotate (cr, angle);
+    /* rotation is already applied in get_geometry */
 
     if (output->rotation & GNOME_RR_REFLECT_X)
 	cairo_scale (cr, -1, 1);
