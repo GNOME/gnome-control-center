@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-13 09:58+0200\n"
-"PO-Revision-Date: 2009-08-13 10:06+0100\n"
+"POT-Creation-Date: 2009-08-20 23:44+0200\n"
+"PO-Revision-Date: 2009-08-20 23:45+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -175,25 +175,25 @@ msgstr "Ditt finger var inte centrerat. Prova att dra ditt finger igen"
 msgid "Remove your finger, and try swiping your finger again"
 msgstr "Ta bort ditt finger och prova att dra ditt finger igen"
 
-#: ../capplets/about-me/gnome-about-me.c:756
+#: ../capplets/about-me/gnome-about-me.c:712
 msgid "Select Image"
 msgstr "Välj bild"
 
-#: ../capplets/about-me/gnome-about-me.c:758
+#: ../capplets/about-me/gnome-about-me.c:714
 msgid "No Image"
 msgstr "Ingen bild"
 
-#: ../capplets/about-me/gnome-about-me.c:786
+#: ../capplets/about-me/gnome-about-me.c:742
 #: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "Bilder"
 
-#: ../capplets/about-me/gnome-about-me.c:790
+#: ../capplets/about-me/gnome-about-me.c:746
 #: ../capplets/appearance/theme-installer.c:695
 msgid "All Files"
 msgstr "Alla filer"
 
-#: ../capplets/about-me/gnome-about-me.c:933
+#: ../capplets/about-me/gnome-about-me.c:886
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -201,29 +201,14 @@ msgstr ""
 "Det inträffade ett fel vid försöket att hämta adressboksinformationen\n"
 "Evolution Data Server kan inte hantera protokollet"
 
-#: ../capplets/about-me/gnome-about-me.c:954
+#: ../capplets/about-me/gnome-about-me.c:907
 msgid "Unable to open address book"
 msgstr "Kan inte öppna adressboken"
 
-#: ../capplets/about-me/gnome-about-me.c:968
-msgid "Unknown login ID, the user database might be corrupted"
-msgstr "Okänt inloggningsid, användardatabasen kan vara trasig"
-
-#: ../capplets/about-me/gnome-about-me.c:998
-#: ../capplets/about-me/gnome-about-me.c:1000
+#: ../capplets/about-me/gnome-about-me.c:930
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
-
-#: ../capplets/about-me/gnome-about-me.c:1018
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:16
-msgid "Enable _Fingerprint Login..."
-msgstr "Aktivera _fingeravtrycksinloggning..."
-
-#: ../capplets/about-me/gnome-about-me.c:1021
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:14
-msgid "Disable _Fingerprint Login..."
-msgstr "Inaktivera _fingeravtrycksinloggning..."
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:1
 msgid "A_IM/iChat:"
@@ -278,9 +263,17 @@ msgstr "Kontakt"
 msgid "Cou_ntry:"
 msgstr "_Land:"
 
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:14
+msgid "Disable _Fingerprint Login..."
+msgstr "Inaktivera _fingeravtrycksinloggning..."
+
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:15
 msgid "Email"
 msgstr "E-post"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:16
+msgid "Enable _Fingerprint Login..."
+msgstr "Aktivera _fingeravtrycksinloggning..."
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:17
 msgid "Full Name"
@@ -2057,23 +2050,23 @@ msgstr "%d x %d"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1451
+#: ../capplets/display/xrandr-capplet.c:1458
 msgid "Mirror Screens"
 msgstr "Spegla skärmar"
 
-#: ../capplets/display/xrandr-capplet.c:1893
+#: ../capplets/display/xrandr-capplet.c:1878
 msgid "Could not save the monitor configuration"
 msgstr "Kunde inte spara skärmkonfigurationen"
 
-#: ../capplets/display/xrandr-capplet.c:1904
+#: ../capplets/display/xrandr-capplet.c:1889
 msgid "Could not get session bus while applying display configuration"
 msgstr "Kunde inte få tag på sessionsbussen under verkställning av skärmkonfigurationen"
 
-#: ../capplets/display/xrandr-capplet.c:1946
+#: ../capplets/display/xrandr-capplet.c:1931
 msgid "Could not detect displays"
 msgstr "Kunde inte detektera display"
 
-#: ../capplets/display/xrandr-capplet.c:2161
+#: ../capplets/display/xrandr-capplet.c:2146
 msgid "Could not get screen information"
 msgstr "Kunde inte få tag på skärminformation"
 
@@ -2738,100 +2731,100 @@ msgid "Set your network proxy preferences"
 msgstr "Ställ in dina inställningar för nätverksproxyserver"
 
 #: ../capplets/network/gnome-network-properties.ui.h:1
+msgid "<b>Di_rect internet connection</b>"
+msgstr "<b>Di_rektanslutning till Internet</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:2
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr "<b>A_utomatisk konfiguration av proxyserver</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:3
+msgid "<b>_Manual proxy configuration</b>"
+msgstr "<b>_Manuell konfiguration av proxyserver</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:4
+msgid "<b>_Use authentication</b>"
+msgstr "<b>_Använd autentisering</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:5
 msgid "Autoconfiguration _URL:"
 msgstr "_URL för automatisk konfiguration:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:2
+#: ../capplets/network/gnome-network-properties.ui.h:6
 msgid "C_reate"
 msgstr "Ska_pa"
 
-#: ../capplets/network/gnome-network-properties.ui.h:3
+#: ../capplets/network/gnome-network-properties.ui.h:7
 msgid "Create New Location"
 msgstr "Skapa ny plats"
 
-#: ../capplets/network/gnome-network-properties.ui.h:4
-msgid "Di_rect internet connection"
-msgstr "Di_rektanslutning till Internet"
-
-#: ../capplets/network/gnome-network-properties.ui.h:5
+#: ../capplets/network/gnome-network-properties.ui.h:8
 msgid "HTTP Proxy Details"
 msgstr "Detaljer för HTTP-proxyserver"
 
-#: ../capplets/network/gnome-network-properties.ui.h:6
+#: ../capplets/network/gnome-network-properties.ui.h:9
 msgid "H_TTP proxy:"
 msgstr "H_TTP-proxyserver:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:7
+#: ../capplets/network/gnome-network-properties.ui.h:10
 msgid "Ignore Host List"
 msgstr "Ignorerade värdar"
 
-#: ../capplets/network/gnome-network-properties.ui.h:8
+#: ../capplets/network/gnome-network-properties.ui.h:11
 msgid "Ignored Hosts"
 msgstr "Ignorerade värdar"
 
-#: ../capplets/network/gnome-network-properties.ui.h:9
+#: ../capplets/network/gnome-network-properties.ui.h:12
 msgid "Location:"
 msgstr "Plats:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:10
+#: ../capplets/network/gnome-network-properties.ui.h:13
 msgid "Network Proxy Preferences"
 msgstr "Inställningar för nätverksproxyserver"
 
-#: ../capplets/network/gnome-network-properties.ui.h:11
+#: ../capplets/network/gnome-network-properties.ui.h:14
 msgid "Port:"
 msgstr "Port:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:12
+#: ../capplets/network/gnome-network-properties.ui.h:15
 msgid "Proxy Configuration"
 msgstr "Konfiguration av proxyserver"
 
-#: ../capplets/network/gnome-network-properties.ui.h:13
+#: ../capplets/network/gnome-network-properties.ui.h:16
 msgid "S_ocks host:"
 msgstr "S_ocks-värd:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:14
+#: ../capplets/network/gnome-network-properties.ui.h:17
 msgid "The location already exists."
 msgstr "Platsen finns redan."
 
-#: ../capplets/network/gnome-network-properties.ui.h:15
+#: ../capplets/network/gnome-network-properties.ui.h:18
 msgid "U_sername:"
 msgstr "_Användarnamn:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:16
-msgid "_Automatic proxy configuration"
-msgstr "A_utomatisk konfiguration av proxyserver"
-
-#: ../capplets/network/gnome-network-properties.ui.h:17
+#: ../capplets/network/gnome-network-properties.ui.h:19
 msgid "_Delete Location"
 msgstr "_Ta bort plats"
 
-#: ../capplets/network/gnome-network-properties.ui.h:18
+#: ../capplets/network/gnome-network-properties.ui.h:20
 msgid "_Details"
 msgstr "_Detaljer"
 
-#: ../capplets/network/gnome-network-properties.ui.h:19
+#: ../capplets/network/gnome-network-properties.ui.h:21
 msgid "_FTP proxy:"
 msgstr "_FTP-proxyserver:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:20
+#: ../capplets/network/gnome-network-properties.ui.h:22
 msgid "_Location name:"
 msgstr "_Platsens namn:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:21
-msgid "_Manual proxy configuration"
-msgstr "_Manuell konfiguration av proxyserver"
-
-#: ../capplets/network/gnome-network-properties.ui.h:22
+#: ../capplets/network/gnome-network-properties.ui.h:23
 msgid "_Password:"
 msgstr "_Lösenord:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:23
+#: ../capplets/network/gnome-network-properties.ui.h:24
 msgid "_Secure HTTP proxy:"
 msgstr "_Proxyserver för säker HTTP:"
-
-#: ../capplets/network/gnome-network-properties.ui.h:24
-msgid "_Use authentication"
-msgstr "_Använd autentisering"
 
 #: ../capplets/network/gnome-network-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
@@ -3414,6 +3407,8 @@ msgstr "<b>Öppna %s</b>"
 msgid "Remove from System Items"
 msgstr "Ta bort från systemobjekt"
 
+#~ msgid "Unknown login ID, the user database might be corrupted"
+#~ msgstr "Okänt inloggningsid, användardatabasen kan vara trasig"
 #~ msgid ""
 #~ "Left thumb\n"
 #~ "Left middle finger\n"
