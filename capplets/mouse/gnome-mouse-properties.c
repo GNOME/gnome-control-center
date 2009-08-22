@@ -316,39 +316,15 @@ left_handed_to_gconf (GConfPropertyEditor *peditor,
 }
 
 static void
-scrollmethod_radio_button_release_event (GtkWidget *widget,
-					 GdkEventButton *event,
-					 GtkBuilder *dialog)
+scrollmethod_changed_event (GConfPropertyEditor *peditor,
+			    const gchar *key,
+			    const GConfValue *value,
+			    GtkBuilder *dialog)
 {
+	GtkToggleButton *disabled = GTK_TOGGLE_BUTTON (WID ("scroll_disabled_radio"));
+
 	gtk_widget_set_sensitive (WID ("horiz_scroll_toggle"),
-				  (widget != WID ("scroll_disabled_radio")));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-}
-
-static GConfValue *
-scroll_method_from_gconf (GConfPropertyEditor *peditor,
-			  const GConfValue *value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_INT);
-
-	gconf_value_set_int (new_value, gconf_value_get_int (value));
-
-	return new_value;
-}
-
-static GConfValue *
-scroll_method_to_gconf (GConfPropertyEditor *peditor,
-		        const GConfValue *value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_INT);
-
-	gconf_value_set_int (new_value, gconf_value_get_int (value));
-
-	return new_value;
+				  !gtk_toggle_button_get_active (disabled));
 }
 
 static gboolean
@@ -422,6 +398,7 @@ setup_dialog (GtkBuilder *dialog, GConfChangeSet *changeset)
 		 "conv-to-widget-cb", left_handed_from_gconf,
 		 "conv-from-widget-cb", left_handed_to_gconf,
 		 NULL);
+	/* explicitly connect to button-release so that you can change orientation with either button */
 	g_signal_connect (WID ("right_handed_radio"), "button_release_event",
 		G_CALLBACK (orientation_radio_button_release_event), NULL);
 	g_signal_connect (WID ("left_handed_radio"), "button_release_event",
@@ -463,24 +440,20 @@ setup_dialog (GtkBuilder *dialog, GConfChangeSet *changeset)
 	if (find_synaptics () == FALSE)
 		gtk_notebook_remove_page (GTK_NOTEBOOK (WID ("prefs_widget")), -1);
 	else {
-		peditor = gconf_peditor_new_boolean
+		gconf_peditor_new_boolean
 			(changeset, "/desktop/gnome/peripherals/touchpad/disable_while_typing", WID ("disable_w_typing_toggle"), NULL);
-		peditor = gconf_peditor_new_boolean
+		gconf_peditor_new_boolean
 			(changeset, "/desktop/gnome/peripherals/touchpad/tap_to_click", WID ("tap_to_click_toggle"), NULL);
-		peditor = gconf_peditor_new_boolean
+		gconf_peditor_new_boolean
 			(changeset, "/desktop/gnome/peripherals/touchpad/horiz_scroll_enabled", WID ("horiz_scroll_toggle"), NULL);
 		radio = GTK_RADIO_BUTTON (WID ("scroll_disabled_radio"));
 		peditor = gconf_peditor_new_select_radio
 			(changeset, "/desktop/gnome/peripherals/touchpad/scroll_method", gtk_radio_button_get_group (radio),
-			 "conv-to-widget-cb", scroll_method_from_gconf,
-			 "conv-from-widget-cb", scroll_method_to_gconf,
 			 NULL);
-			 g_signal_connect (WID ("scroll_disabled_radio"), "button_release_event",
-				 G_CALLBACK (scrollmethod_radio_button_release_event), dialog);
-			 g_signal_connect (WID ("scroll_edge_radio"), "button_release_event",
-				 G_CALLBACK (scrollmethod_radio_button_release_event), dialog);
-			 g_signal_connect (WID ("scroll_twofinger_radio"), "button_release_event",
-				 G_CALLBACK (scrollmethod_radio_button_release_event), dialog);
+
+		scrollmethod_changed_event (GCONF_PROPERTY_EDITOR (peditor), NULL, NULL, dialog);
+		g_signal_connect (peditor, "value-changed",
+				  G_CALLBACK (scrollmethod_changed_event), dialog);
 	}
 
 }
@@ -492,7 +465,7 @@ create_dialog (void)
 {
 	GtkBuilder   *dialog;
 	GtkSizeGroup *size_group;
-	GError       *error = NULL;   
+	GError       *error = NULL;
 
 	dialog = gtk_builder_new ();
 	gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR "/gnome-mouse-properties.ui", &error);
@@ -571,13 +544,14 @@ main (int argc, char **argv)
 	context = g_option_context_new (_("- GNOME Mouse Preferences"));
 	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
 	capplet_init (context, &argc, &argv);
-	
+
 	capplet_init_stock_icons ();
 
 	activate_settings_daemon ();
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_add_dir (client, "/desktop/gnome/peripherals/touchpad", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
 	dialog = create_dialog ();
 
