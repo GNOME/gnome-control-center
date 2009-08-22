@@ -1016,6 +1016,7 @@ themes_init (AppearanceData *data)
   GtkIconView *icon_view;
   GtkCellRenderer *renderer;
   GtkSettings *settings;
+  char *url;
 
   /* initialise some stuff */
   gnome_theme_init ();
@@ -1126,6 +1127,16 @@ themes_init (AppearanceData *data)
   g_signal_connect (w, "drag-data-received", (GCallback) theme_drag_data_received_cb, data);
   if (is_locked_down (data->client))
     gtk_widget_set_sensitive (w, FALSE);
+
+  w = appearance_capplet_get_widget (data, "more_themes_linkbutton");
+  url = gconf_client_get_string (data->client, MORE_THEMES_URL_KEY, NULL);
+  if (url != NULL && url[0] != '\0') {
+    gtk_link_button_set_uri (GTK_LINK_BUTTON (w), url);
+    gtk_widget_show (w);
+  } else {
+    gtk_widget_hide (w);
+  }
+  g_free (url);
 
   /* listen to gconf changes, too */
   gconf_client_add_dir (data->client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_NONE, NULL);

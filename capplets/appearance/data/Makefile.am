@@ -36,7 +36,8 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_XML_RULE@
 
-xml_in_files = gnome-theme-package.xml.in
+xml_in_files = \
+	gnome-theme-package.xml.in
 
 mimedir = $(datadir)/mime/packages
 mime_DATA = $(xml_in_files:.xml.in=.xml)

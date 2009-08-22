@@ -995,8 +995,9 @@ void
 desktop_init (AppearanceData *data,
 	      const gchar **uris)
 {
-  GtkWidget *add_button;
+  GtkWidget *add_button, *w;
   GtkCellRenderer *cr;
+  char *url;
 
   g_object_set (gtk_settings_get_default (), "gtk-tooltip-timeout", 500, NULL);
 
@@ -1009,6 +1010,16 @@ desktop_init (AppearanceData *data,
       uris++;
     }
   }
+
+  w = appearance_capplet_get_widget (data, "more_backgrounds_linkbutton");
+  url = gconf_client_get_string (data->client, MORE_BACKGROUNDS_URL_KEY, NULL);
+  if (url != NULL && url[0] != '\0') {
+    gtk_link_button_set_uri (GTK_LINK_BUTTON (w), url);
+    gtk_widget_show (w);
+  } else {
+    gtk_widget_hide (w);
+  }
+  g_free (url);
 
   data->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
 

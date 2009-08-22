@@ -27,6 +27,10 @@
 
 #include "gnome-theme-info.h"
 
+#define APPEARANCE_KEY_DIR "/apps/control-center/appearance"
+#define MORE_THEMES_URL_KEY APPEARANCE_KEY_DIR "/more_themes_url"
+#define MORE_BACKGROUNDS_URL_KEY APPEARANCE_KEY_DIR "/more_backgrounds_url"
+
 typedef struct
 {
   GConfClient *client;
