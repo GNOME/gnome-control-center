@@ -16,8 +16,6 @@ gnome_appearance_properties_SOURCES = \
 	appearance-themes.h \
 	appearance-style.c \
 	appearance-style.h \
-	appearance-ui.c \
-	appearance-ui.h \
 	gedit-message-area.c \
 	gedit-message-area.h \
 	gnome-wp-info.c \

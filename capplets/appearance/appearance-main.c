@@ -24,7 +24,6 @@
 #include "appearance-font.h"
 #include "appearance-themes.h"
 #include "appearance-style.h"
-#include "appearance-ui.h"
 #include "theme-installer.h"
 #include "theme-thumbnail.h"
 #include "activate-settings-daemon.h"
@@ -165,7 +164,6 @@ main (int argc, char **argv)
   desktop_init (data, (const gchar **) wallpaper_files);
   g_strfreev (wallpaper_files);
   font_init (data);
-  ui_init (data);
 
   /* prepare the main window */
   w = appearance_capplet_get_widget (data, "appearance_window");
