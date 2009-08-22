@@ -20,6 +20,14 @@ gnome_about_me_SOURCES =	 	\
 	fingerprint-strings.h		\
 	gnome-about-me.c
 
+MARSHALFILES = marshal.c marshal.h
+BUILT_SOURCES = $(MARSHALFILES)
+
+marshal.h: fprintd-marshal.list
+	@GLIB_GENMARSHAL@ --prefix=fprintd_marshal $< --header > $@
+marshal.c: fprintd-marshal.list
+	@GLIB_GENMARSHAL@ --prefix=fprintd_marshal $< --body --header > $@
+
 if BUILD_ABOUTME
 bin_PROGRAMS = gnome-about-me
 
@@ -42,15 +50,6 @@ INCLUDES = \
 	-DGNOMECC_UI_DIR="\"$(uidir)\"" \
 	-DGNOMECC_PIXMAP_DIR="\"$(pkgdatadir)/pixmaps\"" \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
-
-MARSHALFILES = marshal.c marshal.h
-BUILT_SOURCES = $(MARSHALFILES)
-
-marshal.h: $(srcdir)/fprintd-marshal.list
-	( $(GLIB_GENMARSHAL) --prefix=fprintd_marshal $(srcdir)/fprintd-marshal.list --header > marshal.h )
-marshal.c: marshal.h
-	( $(GLIB_GENMARSHAL) --prefix=fprintd_marshal $(srcdir)/fprintd-marshal.list --body --header > marshal.c )
-
 
 endif # BUILD_ABOUTME
 

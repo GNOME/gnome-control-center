@@ -1,4 +1,4 @@
-always_built_SUBDIRS = \
+SUBDIRS = \
 	common			\
 	accessibility	\
 	appearance		\
@@ -9,7 +9,19 @@ always_built_SUBDIRS = \
 	network			\
 	windows
 
-SUBDIRS = $(always_built_SUBDIRS)
+DIST_SUBDIRS = \
+	common			\
+	accessibility		\
+	appearance		\
+	default-applications	\
+	keybindings		\
+	keyboard		\
+	mouse			\
+	network			\
+	windows			\
+	display 		\
+	about-me
+
 
 if HAVE_RANDR
 SUBDIRS += display
@@ -18,8 +30,5 @@ endif
 if BUILD_ABOUTME
 SUBDIRS += about-me
 endif
-
-DIST_SUBDIRS = \
-	$(always_built_SUBDIRS) display about-me
 
 -include $(top_srcdir)/git.mk
