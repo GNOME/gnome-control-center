@@ -1,5 +1,5 @@
-/* vim:set noexpandtab sts=8 sw=8: */
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
+ *
  * Copyright (C) 2007 The GNOME Foundation
  * Written by Thomas Wood <thos@gnome.org>
  *            Jens Granseuer <jensgr@gmx.net>
@@ -154,7 +154,8 @@ file_theme_type (const gchar *dir)
 }
 
 static void
-transfer_cancel_cb (GtkWidget *dlg, gchar *path)
+transfer_cancel_cb (GtkWidget *dialog,
+		    gchar *path)
 {
 	GFile *todelete;
 
@@ -163,17 +164,20 @@ transfer_cancel_cb (GtkWidget *dlg, gchar *path)
 
 	g_object_unref (todelete);
 	g_free (path);
-	gtk_widget_destroy (dlg);
+	gtk_widget_destroy (dialog);
 }
 
 static void
-missing_utility_message_dialog (const gchar *utility)
+missing_utility_message_dialog (GtkWindow *parent,
+				const gchar *utility)
 {
-	GtkWidget *dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-			GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-			_("Cannot install theme"));
+	GtkWidget *dialog = gtk_message_dialog_new (parent,
+						    GTK_DIALOG_MODAL,
+						    GTK_MESSAGE_ERROR,
+						    GTK_BUTTONS_OK,
+						    _("Cannot install theme"));
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-			_("The %s utility is not installed."), utility);
+						  _("The %s utility is not installed."), utility);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }
@@ -189,18 +193,21 @@ missing_utility_message_dialog (const gchar *utility)
  * see bugzilla.gnome.org #86141 for details
  */
 static gboolean
-transfer_done_tgz_tbz (const gchar *util, const gchar *tmp_dir, const gchar *archive)
+process_local_theme_tgz_tbz (GtkWindow *parent,
+			     const gchar *util,
+			     const gchar *tmp_dir,
+			     const gchar *archive)
 {
 	gboolean rc;
 	int status;
 	gchar *command, *filename, *zip, *tar;
 
 	if (!(zip = g_find_program_in_path (util))) {
-		missing_utility_message_dialog (util);
+		missing_utility_message_dialog (parent, util);
 		return FALSE;
 	}
 	if (!(tar = g_find_program_in_path ("tar"))) {
-		missing_utility_message_dialog ("tar");
+		missing_utility_message_dialog (parent, "tar");
 		g_free (zip);
 		return FALSE;
 	}
@@ -220,10 +227,13 @@ transfer_done_tgz_tbz (const gchar *util, const gchar *tmp_dir, const gchar *arc
 	if (rc == FALSE) {
 		GtkWidget *dialog;
 
-		dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-				_("Cannot install theme"));
+		dialog = gtk_message_dialog_new (parent,
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 _("Cannot install theme"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-				_("There was a problem while extracting the theme."));
+							  _("There was a problem while extracting the theme."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 	}
@@ -232,38 +242,48 @@ transfer_done_tgz_tbz (const gchar *util, const gchar *tmp_dir, const gchar *arc
 }
 
 static gboolean
-transfer_done_archive (gint filetype, const gchar *tmp_dir, const gchar *archive)
+process_local_theme_archive (GtkWindow *parent,
+			     gint filetype,
+			     const gchar *tmp_dir,
+			     const gchar *archive)
 {
 	if (filetype == TARGZ)
-		return transfer_done_tgz_tbz ("gzip", tmp_dir, archive);
+		return process_local_theme_tgz_tbz (parent, "gzip", tmp_dir, archive);
 	else if (filetype == TARBZ)
-		return transfer_done_tgz_tbz ("bzip2", tmp_dir, archive);
+		return process_local_theme_tgz_tbz (parent, "bzip2", tmp_dir, archive);
 	else
 		return FALSE;
 }
 
 static void
-invalid_theme_dialog (const gchar *filename, gboolean maybe_theme_engine)
+invalid_theme_dialog (GtkWindow *parent,
+		      const gchar *filename,
+		      gboolean maybe_theme_engine)
 {
 	GtkWidget *dialog;
 	const gchar *primary = _("There was an error installing the selected file");
 	const gchar *secondary = _("\"%s\" does not appear to be a valid theme.");
 	const gchar *engine = _("\"%s\" does not appear to be a valid theme. It may be a theme engine which you need to compile.");
 
-	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-			GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "%s", primary);
+	dialog = gtk_message_dialog_new (parent,
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_OK,
+					 "%s", primary);
 	if (maybe_theme_engine)
-		gtk_message_dialog_format_secondary_text (
-				GTK_MESSAGE_DIALOG (dialog), engine, filename);
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), engine, filename);
 	else
-		gtk_message_dialog_format_secondary_text (
-				GTK_MESSAGE_DIALOG (dialog), secondary, filename);
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), secondary, filename);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }
 
 static gboolean
-gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *theme_name, gboolean ask_user)
+gnome_theme_install_real (GtkWindow *parent,
+			  gint filetype,
+			  const gchar *tmp_dir,
+			  const gchar *theme_name,
+			  gboolean ask_user)
 {
 	gboolean success = TRUE;
 	GtkWidget *dialog, *apply_button;
@@ -294,23 +314,21 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 					   theme_name, NULL);
 		break;
 	case THEME_ENGINE:
-		invalid_theme_dialog (theme_name, TRUE);
+		invalid_theme_dialog (parent, theme_name, TRUE);
 		return FALSE;
 	default:
-		invalid_theme_dialog (theme_name, FALSE);
+		invalid_theme_dialog (parent, theme_name, FALSE);
 		return FALSE;
 	}
 
 	/* see if there is an icon theme lurking in this package */
-	if (theme_type == THEME_GNOME)
-	{
+	if (theme_type == THEME_GNOME) {
 		gchar *path;
 
 		path = g_build_path (G_DIR_SEPARATOR_S,
 				     tmp_dir, "icons", NULL);
 		if (g_file_test (path, G_FILE_TEST_IS_DIR)
-		    && (file_theme_type (path) == THEME_ICON))
-		{
+		    && (file_theme_type (path) == THEME_ICON)) {
 			gchar *new_path, *update_icon_cache;
 			GFile *new_file;
 			GFile *src_file;
@@ -352,12 +370,12 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 		gchar *str;
 
 		str = g_strdup_printf (_("Installation for theme \"%s\" failed."), theme_name);
-		dialog = gtk_message_dialog_new (NULL,
-					GTK_DIALOG_MODAL,
-					GTK_MESSAGE_ERROR,
-					GTK_BUTTONS_OK,
-					"%s",
-					str);
+		dialog = gtk_message_dialog_new (parent,
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 "%s",
+						 str);
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 							  "%s", error->message);
 
@@ -380,71 +398,78 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 			g_free (update_icon_cache);
 		}
 
-		if (ask_user)
-		{
+		if (ask_user) {
 			/* Ask to apply theme (if we can) */
-			if (theme_type == THEME_GTK || theme_type == THEME_METACITY ||
-			    theme_type == THEME_ICON || theme_type == THEME_CURSOR ||
-			    theme_type == THEME_ICON_CURSOR)
-			{
+			if (theme_type == THEME_GTK
+			    || theme_type == THEME_METACITY
+			    || theme_type == THEME_ICON
+			    || theme_type == THEME_CURSOR
+			    || theme_type == THEME_ICON_CURSOR) {
 				/* TODO: currently cannot apply "gnome themes" */
 				gchar *str;
 
 				str = g_strdup_printf (_("The theme \"%s\" has been installed."), theme_name);
-				dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE,
-									     "<span weight=\"bold\" size=\"larger\">%s</span>", str);
+				dialog = gtk_message_dialog_new_with_markup (parent,
+									     GTK_DIALOG_MODAL,
+									     GTK_MESSAGE_INFO,
+									     GTK_BUTTONS_NONE,
+									     "<span weight=\"bold\" size=\"larger\">%s</span>",
+									     str);
 				g_free (str);
 
-				gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("Would you like to apply it now, or keep your current theme?"));
+				gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+									  _("Would you like to apply it now, or keep your current theme?"));
 
-				gtk_dialog_add_button (GTK_DIALOG (dialog), _("Keep Current Theme"), GTK_RESPONSE_CLOSE);
+				gtk_dialog_add_button (GTK_DIALOG (dialog),
+						       _("Keep Current Theme"),
+						       GTK_RESPONSE_CLOSE);
 
 				apply_button = gtk_button_new_with_label (_("Apply New Theme"));
-				gtk_button_set_image (GTK_BUTTON (apply_button), gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON));
+				gtk_button_set_image (GTK_BUTTON (apply_button),
+						      gtk_image_new_from_stock (GTK_STOCK_APPLY,
+										GTK_ICON_SIZE_BUTTON));
 				gtk_dialog_add_action_widget (GTK_DIALOG (dialog), apply_button, GTK_RESPONSE_APPLY);
 				GTK_WIDGET_SET_FLAGS (apply_button, GTK_CAN_DEFAULT);
 				gtk_widget_show (apply_button);
 
 				gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_APPLY);
 
-				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_APPLY)
-				{
+				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_APPLY) {
 					/* apply theme here! */
 					GConfClient *gconf_client;
 
 					gconf_client = gconf_client_get_default ();
 
-					switch (theme_type)
-					{
-						case THEME_GTK:
-							gconf_client_set_string (gconf_client, GTK_THEME_KEY, theme_name, NULL);
-							break;
-						case THEME_METACITY:
-							gconf_client_set_string (gconf_client, METACITY_THEME_KEY, theme_name, NULL);
-							break;
-						case THEME_ICON:
-							gconf_client_set_string (gconf_client, ICON_THEME_KEY, theme_name, NULL);
-							break;
-						case THEME_CURSOR:
-							gconf_client_set_string (gconf_client, CURSOR_THEME_KEY, theme_name, NULL);
-							break;
-						case THEME_ICON_CURSOR:
-							gconf_client_set_string (gconf_client, ICON_THEME_KEY, theme_name, NULL);
-							gconf_client_set_string (gconf_client, CURSOR_THEME_KEY, theme_name, NULL);
-							break;
-						default:
-							break;
+					switch (theme_type) {
+					case THEME_GTK:
+						gconf_client_set_string (gconf_client, GTK_THEME_KEY, theme_name, NULL);
+						break;
+					case THEME_METACITY:
+						gconf_client_set_string (gconf_client, METACITY_THEME_KEY, theme_name, NULL);
+						break;
+					case THEME_ICON:
+						gconf_client_set_string (gconf_client, ICON_THEME_KEY, theme_name, NULL);
+						break;
+					case THEME_CURSOR:
+						gconf_client_set_string (gconf_client, CURSOR_THEME_KEY, theme_name, NULL);
+						break;
+					case THEME_ICON_CURSOR:
+						gconf_client_set_string (gconf_client, ICON_THEME_KEY, theme_name, NULL);
+						gconf_client_set_string (gconf_client, CURSOR_THEME_KEY, theme_name, NULL);
+						break;
+					default:
+						break;
 					}
 
 					g_object_unref (gconf_client);
 				}
 			} else {
-				dialog = gtk_message_dialog_new (NULL,
-				       GTK_DIALOG_MODAL,
-				       GTK_MESSAGE_INFO,
-				       GTK_BUTTONS_OK,
-				       _("GNOME Theme %s correctly installed"),
-				       theme_name);
+				dialog = gtk_message_dialog_new (parent,
+								 GTK_DIALOG_MODAL,
+								 GTK_MESSAGE_INFO,
+								 GTK_BUTTONS_OK,
+								 _("GNOME Theme %s correctly installed"),
+								 theme_name);
 				gtk_dialog_run (GTK_DIALOG (dialog));
 			}
 			gtk_widget_destroy (dialog);
@@ -457,34 +482,35 @@ gnome_theme_install_real (gint filetype, const gchar *tmp_dir, const gchar *them
 }
 
 static void
-transfer_done_cb (GtkWidget *dlg, gchar *path)
+process_local_theme (GtkWindow  *parent,
+		     const char *path)
 {
 	GtkWidget *dialog;
 	gint filetype;
 
-	/* XXX: path should be on the local filesystem by now? */
-
-	if (dlg)
-		gtk_widget_destroy (dlg);
-
-	if (g_str_has_suffix (path, ".tar.gz") || g_str_has_suffix (path, ".tgz") || g_str_has_suffix(path, ".gtp"))
+	if (g_str_has_suffix (path, ".tar.gz")
+	    || g_str_has_suffix (path, ".tgz")
+	    || g_str_has_suffix(path, ".gtp")) {
 		filetype = TARGZ;
-	else if (g_str_has_suffix (path, ".tar.bz2"))
+	} else if (g_str_has_suffix (path, ".tar.bz2")) {
 		filetype = TARBZ;
-	else if (g_file_test (path, G_FILE_TEST_IS_DIR))
+	} else if (g_file_test (path, G_FILE_TEST_IS_DIR)) {
 		filetype = DIRECTORY;
-	else {
+	} else {
 		gchar *filename;
 		filename = g_path_get_basename (path);
-		invalid_theme_dialog (filename, FALSE);
+		invalid_theme_dialog (parent, filename, FALSE);
 		g_free (filename);
-		g_free (path);
 		return;
 	}
 
 	if (filetype == DIRECTORY) {
 		gchar *name = g_path_get_basename (path);
-		gnome_theme_install_real (filetype, path, name, TRUE);
+		gnome_theme_install_real (parent,
+					  filetype,
+					  path,
+					  name,
+					  TRUE);
 		g_free (name);
 	} else {
 		/* Create a temp directory and uncompress file there */
@@ -500,24 +526,25 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 					   g_random_int ());
 
 		if ((g_mkdir (tmp_dir, 0700)) != 0) {
-			dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
-							GTK_BUTTONS_OK,
-							_("Failed to create temporary directory"));
+			dialog = gtk_message_dialog_new (parent,
+							 GTK_DIALOG_MODAL,
+							 GTK_MESSAGE_ERROR,
+							 GTK_BUTTONS_OK,
+							 _("Failed to create temporary directory"));
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			g_free (tmp_dir);
-			g_free (path);
 			return;
 		}
 
-		if (!transfer_done_archive (filetype, tmp_dir, path) ||
-		    ((dir = g_dir_open (tmp_dir, 0, NULL)) == NULL))
-		{
+		if (!process_local_theme_archive (parent, filetype, tmp_dir, path)
+		    || ((dir = g_dir_open (tmp_dir, 0, NULL)) == NULL)) {
 			g_io_scheduler_push_job ((GIOSchedulerJobFunc) cleanup_tmp_dir,
-						 g_strdup (tmp_dir), g_free,
-						 G_PRIORITY_DEFAULT, NULL);
+						 g_strdup (tmp_dir),
+						 g_free,
+						 G_PRIORITY_DEFAULT,
+						 NULL);
 			g_free (tmp_dir);
-			g_free (path);
 			return;
 		}
 
@@ -529,9 +556,9 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 		 * we won't ask the user whether to apply the new theme
 		 * after installation. */
 		n_themes = 0;
-		for (name = g_dir_read_name (dir); name && n_themes <= 1;
-		     name = g_dir_read_name (dir))
-		{
+		for (name = g_dir_read_name (dir);
+		     name && n_themes <= 1;
+		     name = g_dir_read_name (dir)) {
 			gchar *theme_dir;
 
 			theme_dir = g_build_filename (tmp_dir, name, NULL);
@@ -545,27 +572,28 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 
 		ok = TRUE;
 		for (name = g_dir_read_name (dir); name && ok;
-		     name = g_dir_read_name (dir))
-		{
+		     name = g_dir_read_name (dir)) {
 			gchar *theme_dir;
 
 			theme_dir = g_build_filename (tmp_dir, name, NULL);
 
 			if (g_file_test (theme_dir, G_FILE_TEST_IS_DIR))
-				ok = gnome_theme_install_real (filetype,
-					theme_dir, name, n_themes == 1);
+				ok = gnome_theme_install_real (parent,
+							       filetype,
+							       theme_dir,
+							       name,
+							       n_themes == 1);
 
 			g_free (theme_dir);
 		}
 		g_dir_close (dir);
 
-		if (ok && n_themes > 1)
-		{
-			dialog = gtk_message_dialog_new (NULL,
-			       GTK_DIALOG_MODAL,
-			       GTK_MESSAGE_INFO,
-			       GTK_BUTTONS_OK,
-			       _("New themes have been successfully installed."));
+		if (ok && n_themes > 1) {
+			dialog = gtk_message_dialog_new (parent,
+							 GTK_DIALOG_MODAL,
+							 GTK_MESSAGE_INFO,
+							 GTK_BUTTONS_OK,
+							 _("New themes have been successfully installed."));
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 		}
@@ -573,20 +601,42 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 					 tmp_dir, g_free,
 					 G_PRIORITY_DEFAULT, NULL);
 	}
+}
 
-	g_free (path);
+typedef struct
+{
+	GtkWindow *parent;
+	char      *path;
+} TransferData;
+
+static void
+transfer_done_cb (GtkWidget *dialog,
+		  TransferData *tdata)
+{
+	/* XXX: path should be on the local filesystem by now? */
+
+	if (dialog != NULL) {
+		gtk_widget_destroy (dialog);
+	}
+
+	process_local_theme (tdata->parent, tdata->path);
+
+	g_free (tdata->path);
+	g_free (tdata);
 }
 
 void
-gnome_theme_install (GFile *file, GtkWindow *parent)
+gnome_theme_install (GFile *file,
+		     GtkWindow *parent)
 {
 	GtkWidget *dialog;
 	gchar *path, *base;
 	GList *src, *target;
 	const gchar *template;
+	TransferData *tdata;
 
 	if (file == NULL) {
-		dialog = gtk_message_dialog_new (NULL,
+		dialog = gtk_message_dialog_new (parent,
 						 GTK_DIALOG_MODAL,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_OK,
@@ -597,9 +647,11 @@ gnome_theme_install (GFile *file, GtkWindow *parent)
 	}
 
 	/* see if someone dropped a local directory */
-	if (g_file_is_native (file) &&
-	    g_file_query_file_type (file, G_FILE_QUERY_INFO_NONE, NULL) == G_FILE_TYPE_DIRECTORY) {
-		transfer_done_cb (NULL, g_file_get_path (file));
+	if (g_file_is_native (file)
+	    && g_file_query_file_type (file, G_FILE_QUERY_INFO_NONE, NULL) == G_FILE_TYPE_DIRECTORY) {
+		path = g_file_get_path (file);
+		process_local_theme (parent, path);
+		g_free (path);
 		return;
 	}
 
@@ -608,10 +660,11 @@ gnome_theme_install (GFile *file, GtkWindow *parent)
 	path = g_build_filename (g_get_home_dir (), ".themes", NULL);
 
 	if (access (path, X_OK | W_OK) != 0) {
-		dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-						GTK_MESSAGE_ERROR,
-						GTK_BUTTONS_OK,
-						_("Insufficient permissions to install the theme in:\n%s"), path);
+		dialog = gtk_message_dialog_new (parent,
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 _("Insufficient permissions to install the theme in:\n%s"), path);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		g_free (path);
@@ -620,12 +673,14 @@ gnome_theme_install (GFile *file, GtkWindow *parent)
 
 	base = g_file_get_basename (file);
 
-	if (g_str_has_suffix (base, ".tar.gz") || g_str_has_suffix (base, ".tgz") || g_str_has_suffix (base, ".gtp"))
+	if (g_str_has_suffix (base, ".tar.gz")
+	    || g_str_has_suffix (base, ".tgz")
+	    || g_str_has_suffix (base, ".gtp"))
 		template = "gnome-theme-%d.gtp";
 	else if (g_str_has_suffix (base, ".tar.bz2"))
 		template = "gnome-theme-%d.tar.bz2";
 	else {
-		invalid_theme_dialog (base, FALSE);
+		invalid_theme_dialog (parent, base, FALSE);
 		g_free (base);
 		return;
 	}
@@ -643,17 +698,22 @@ gnome_theme_install (GFile *file, GtkWindow *parent)
 	  	g_free (file_tmp);
 	} while (g_file_test (path, G_FILE_TEST_EXISTS));
 
-
-	target = g_list_append (NULL, g_file_new_for_path (path));
+	tdata = g_new0 (TransferData, 1);
+	tdata->parent = parent;
+	tdata->path = path;
 
 	dialog = file_transfer_dialog_new_with_parent (parent);
-	g_signal_connect (dialog, "cancel",
+	g_signal_connect (dialog,
+			  "cancel",
 			  (GCallback) transfer_cancel_cb, path);
-	g_signal_connect (dialog, "done",
-			  (GCallback) transfer_done_cb, path);
+	g_signal_connect (dialog,
+			  "done",
+			  (GCallback) transfer_done_cb, tdata);
 
+	target = g_list_append (NULL, g_file_new_for_path (path));
 	file_transfer_dialog_copy_async (FILE_TRANSFER_DIALOG (dialog),
-					 src, target,
+					 src,
+					 target,
 					 FILE_TRANSFER_DIALOG_DEFAULT,
 					 G_PRIORITY_DEFAULT);
 	gtk_widget_show (dialog);
@@ -666,7 +726,8 @@ gnome_theme_install (GFile *file, GtkWindow *parent)
 }
 
 void
-gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
+gnome_theme_installer_run (GtkWindow *parent,
+			   const gchar *filename)
 {
 	static gboolean running_theme_install = FALSE;
 	static gchar old_folder[512] = "";
@@ -681,7 +742,14 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 	if (filename == NULL)
 		filename = old_folder;
 
-	dialog = gtk_file_chooser_dialog_new (_("Select Theme"), parent, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+	dialog = gtk_file_chooser_dialog_new (_("Select Theme"),
+					      parent,
+					      GTK_FILE_CHOOSER_ACTION_OPEN,
+					      GTK_STOCK_CANCEL,
+					      GTK_RESPONSE_REJECT,
+					      GTK_STOCK_OPEN,
+					      GTK_RESPONSE_ACCEPT,
+					      NULL);
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
 
 	filter = gtk_file_filter_new ();
@@ -699,8 +767,7 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 	if (strcmp (old_folder, ""))
 		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), old_folder);
 
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-	{
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
 		gchar *uri_selected, *folder;
 
 		uri_selected = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog));
@@ -718,9 +785,9 @@ gnome_theme_installer_run (GtkWindow *parent, const gchar *filename)
 			gnome_theme_install (file, parent);
 			g_object_unref (file);
 		}
-	}
-	else
+	} else {
 		gtk_widget_destroy (dialog);
+	}
 
 	/*
 	 * we're relying on the gnome theme info module to pick up changes
