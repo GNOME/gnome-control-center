@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-08 01:34+0200\n"
-"PO-Revision-Date: 2009-08-08 01:30+0200\n"
+"POT-Creation-Date: 2009-08-23 02:06+0200\n"
+"PO-Revision-Date: 2009-08-23 01:54+0200\n"
 "Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KAider 0.1\n"
+
+#: ../gnome-control-center.schemas.in.h:1
+msgid "Current network location"
+msgstr "Aktueller Ort im Netzwerk"
+
+#: ../gnome-control-center.schemas.in.h:2
+msgid ""
+"Set this to your current location name. This is used to determine the "
+"appropriate network proxy configuration."
+msgstr ""
+"Legen Sie hier den aktuellen Ortsnamen fest. Er wird zur Bestimmung der "
+"richtigen Konfiguration des Netzwerk-Proxys verwendet."
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -184,25 +196,25 @@ msgid "Remove your finger, and try swiping your finger again"
 msgstr ""
 "Entfernen Sie Ihren Finger und versuchen Sie erneut Ihren Finger abzustreifen"
 
-#: ../capplets/about-me/gnome-about-me.c:756
+#: ../capplets/about-me/gnome-about-me.c:712
 msgid "Select Image"
 msgstr "Bild auswählen"
 
-#: ../capplets/about-me/gnome-about-me.c:758
+#: ../capplets/about-me/gnome-about-me.c:714
 msgid "No Image"
 msgstr "Kein Bild"
 
-#: ../capplets/about-me/gnome-about-me.c:786
+#: ../capplets/about-me/gnome-about-me.c:742
 #: ../capplets/appearance/appearance-desktop.c:661
 msgid "Images"
 msgstr "Bilder"
 
-#: ../capplets/about-me/gnome-about-me.c:790
+#: ../capplets/about-me/gnome-about-me.c:746
 #: ../capplets/appearance/theme-installer.c:695
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: ../capplets/about-me/gnome-about-me.c:933
+#: ../capplets/about-me/gnome-about-me.c:886
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -210,30 +222,14 @@ msgstr ""
 "Beim Auslesen der Adressbuch-Informationen ist ein Fehler aufgetreten\n"
 "Evolution-Data-Server kann dieses Protokoll nicht verarbeiten"
 
-#: ../capplets/about-me/gnome-about-me.c:954
+#: ../capplets/about-me/gnome-about-me.c:907
 msgid "Unable to open address book"
 msgstr "Adressbuch konnte nicht geöffnet werden"
 
-#: ../capplets/about-me/gnome-about-me.c:968
-msgid "Unknown login ID, the user database might be corrupted"
-msgstr ""
-"Unbekannte Anmeldekennung - die Benutzerdatenbank ist womöglich beschädigt"
-
-#: ../capplets/about-me/gnome-about-me.c:998
-#: ../capplets/about-me/gnome-about-me.c:1000
+#: ../capplets/about-me/gnome-about-me.c:930
 #, c-format
 msgid "About %s"
 msgstr "Persönliche Angaben von %s"
-
-#: ../capplets/about-me/gnome-about-me.c:1018
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:16
-msgid "Enable _Fingerprint Login..."
-msgstr "Anmeldung per _Fingerabdruck freischalten …"
-
-#: ../capplets/about-me/gnome-about-me.c:1021
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:14
-msgid "Disable _Fingerprint Login..."
-msgstr "Anmeldung per _Fingerabdruck abschalten …"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:1
 msgid "A_IM/iChat:"
@@ -288,9 +284,17 @@ msgstr "Kontakt"
 msgid "Cou_ntry:"
 msgstr "La_nd:"
 
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:14
+msgid "Disable _Fingerprint Login..."
+msgstr "Anmeldung per _Fingerabdruck abschalten …"
+
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:15
 msgid "Email"
 msgstr "E-Mail"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:16
+msgid "Enable _Fingerprint Login..."
+msgstr "Anmeldung per _Fingerabdruck freischalten …"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:17
 msgid "Full Name"
@@ -335,7 +339,7 @@ msgstr "Persönliche Informationen"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:27
 msgid "Select your photo"
-msgstr "Wählen Sie ihr Foto aus"
+msgstr "Wählen Sie Ihr Foto aus"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:28
 msgid "State/Pro_vince:"
@@ -708,10 +712,11 @@ msgid ""
 msgstr ""
 "Um Ihr Passwort zu ändern, geben Sie bitte Ihr aktuelles Passwort in das "
 "Feld weiter unten ein und klicken Sie anschließend auf <b>Legitimieren</b>.\n"
-"Nachdem Sie sich legitimiert haben, geben Sie bitte ihr neues Passwort ein, "
+"Nachdem Sie sich legitimiert haben, geben Sie bitte Ihr neues Passwort ein, "
 "wiederholen Sie es zur Bestätigung und klicken Sie dann auf <b>Passwort "
 "ändern</b>."
 
+# Sollte hier nicht auch »Legitimieren« stehen?
 #: ../capplets/about-me/gnome-about-me-password.ui.h:8
 msgid "_Authenticate"
 msgstr "_Authentifizieren"
@@ -871,7 +876,7 @@ msgstr ""
 
 #: ../capplets/appearance/appearance-main.c:143
 #: ../capplets/default-applications/gnome-da-capplet.c:907
-#: ../capplets/mouse/gnome-mouse-properties.c:567
+#: ../capplets/mouse/gnome-mouse-properties.c:540
 msgid "page"
 msgstr "Seite"
 
@@ -1372,7 +1377,7 @@ msgid ""
 "you need to compile."
 msgstr ""
 "»%s« scheint kein gültiges Thema zu sein. Es ist möglicherweise eine Themen-"
-"Engine, die Sie kompillieren müssen."
+"Engine, die Sie kompilieren müssen."
 
 #: ../capplets/appearance/theme-installer.c:354
 #, c-format
@@ -1386,7 +1391,7 @@ msgstr "Das Thema »%s« wurde installiert."
 
 #: ../capplets/appearance/theme-installer.c:398
 msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "Möchten Sie dieses jetzt anwenden oder ihr derzeitiges Thema behalten?"
+msgstr "Möchten Sie dieses jetzt anwenden oder Ihr derzeitiges Thema behalten?"
 
 #: ../capplets/appearance/theme-installer.c:400
 msgid "Keep Current Theme"
@@ -1394,12 +1399,12 @@ msgstr "Aktuelles Thema beibehalten"
 
 #: ../capplets/appearance/theme-installer.c:402
 msgid "Apply New Theme"
-msgstr "Neues Thema an_wenden"
+msgstr "Neues Thema anwenden"
 
 #: ../capplets/appearance/theme-installer.c:446
 #, c-format
 msgid "GNOME Theme %s correctly installed"
-msgstr "Das GNOME-Thema %s wurde korrekt installiert"
+msgstr "Das GNOME-Thema »%s« wurde korrekt installiert"
 
 #: ../capplets/appearance/theme-installer.c:505
 msgid "Failed to create temporary directory"
@@ -1468,7 +1473,7 @@ msgstr ""
 "werden. Ohne den GNOME-Einstellungsverwalter werden möglicherweise einige "
 "Einstellungen nicht wirksam. Dies könnte auf ein Problem mit Bonobo oder "
 "einen bereits aktiven, nicht-GNOME- (z.B. KDE-)Einstellungsverwalter "
-"hindeuten, der mit GNOME-Einstellungsverwalter in Konflikt geraten ist."
+"hindeuten, der mit dem GNOME-Einstellungsverwalter in Konflikt geraten ist."
 
 #: ../capplets/common/capplet-stock-icons.c:66
 #, c-format
@@ -1507,19 +1512,19 @@ msgstr "Elternfenster des Dialogs"
 
 #: ../capplets/common/file-transfer-dialog.c:231
 msgid "From URI"
-msgstr "Aus URI"
+msgstr "Von Adresse"
 
 #: ../capplets/common/file-transfer-dialog.c:232
 msgid "URI currently transferring from"
-msgstr "URI wird gerade übertragen von"
+msgstr "Adresse wird gerade übertragen von"
 
 #: ../capplets/common/file-transfer-dialog.c:239
 msgid "To URI"
-msgstr "An URI"
+msgstr "Nach Adresse"
 
 #: ../capplets/common/file-transfer-dialog.c:240
 msgid "URI currently transferring to"
-msgstr "URI wird gerade übertragen nach"
+msgstr "Adresse wird gerade übertragen nach"
 
 # CHECK
 #: ../capplets/common/file-transfer-dialog.c:247
@@ -1532,19 +1537,19 @@ msgstr "Segment des abgeschlossenen Transfers"
 
 #: ../capplets/common/file-transfer-dialog.c:255
 msgid "Current URI index"
-msgstr "Aktueller URI-Index"
+msgstr "Aktueller Adress-Index"
 
 #: ../capplets/common/file-transfer-dialog.c:256
 msgid "Current URI index - starts from 1"
-msgstr "Aktueller URI-Index - beginnt mit 1"
+msgstr "Aktueller Adress-Index - beginnt bei 1"
 
 #: ../capplets/common/file-transfer-dialog.c:263
 msgid "Total URIs"
-msgstr "URIs gesamt"
+msgstr "Adressen gesamt"
 
 #: ../capplets/common/file-transfer-dialog.c:264
 msgid "Total number of URIs"
-msgstr "Gesamtanzahl der URIs"
+msgstr "Gesamtanzahl der Adressen"
 
 #: ../capplets/common/file-transfer-dialog.c:444
 #, c-format
@@ -1575,8 +1580,8 @@ msgstr "Rückfrage"
 #: ../capplets/common/gconf-property-editor.c:142
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
-"Diese Rückfrage ausführen, wenn der mit dem Schlüssel assoziierte Wert "
-"geändert wird"
+"Diese Rückfrage ausführen, wenn der dem Schlüssel zugeordnete Wert geändert "
+"wird"
 
 #: ../capplets/common/gconf-property-editor.c:147
 msgid "Change set"
@@ -1586,8 +1591,8 @@ msgstr "Änderungssatz"
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
-"GConf-Änderungssatz enthält Daten die beim Anwenden an den GConf-"
-"Clientweitergeleitet Daten werden"
+"GConf-Änderungssatz enthält Daten, die beim Anwenden an den GConf-Client "
+"weitergeleitet werden"
 
 #: ../capplets/common/gconf-property-editor.c:153
 msgid "Conversion to widget callback"
@@ -1596,8 +1601,7 @@ msgstr "Umwandlung in Widget-Rückfrage"
 #: ../capplets/common/gconf-property-editor.c:154
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
-"Beim Konvertieren von Daten von GConf zum Widget auszuführende Rückfrage"
+msgstr "Beim Umwandeln von Daten von GConf zum Widget auszuführende Rückfrage"
 
 #: ../capplets/common/gconf-property-editor.c:159
 msgid "Conversion from widget callback"
@@ -1606,8 +1610,7 @@ msgstr "Umwandlung von Widget-Rückfrage"
 #: ../capplets/common/gconf-property-editor.c:160
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr ""
-"Beim Konvertieren von Daten vom Widget zu GConf auszuführende Rückfrage"
+msgstr "Beim Umwandeln von Daten vom Widget zu GConf auszuführende Rückfrage"
 
 #: ../capplets/common/gconf-property-editor.c:165
 msgid "UI Control"
@@ -1673,7 +1676,7 @@ msgstr "Aus_wählen"
 
 #: ../capplets/common/gnome-theme-info.c:639
 msgid "Default Pointer - Current"
-msgstr "Vorgabezeiger – momentan verwendet"
+msgstr "Voreingestellter Zeiger – momentan verwendet"
 
 #: ../capplets/common/gnome-theme-info.c:643
 msgid "White Pointer"
@@ -1752,7 +1755,7 @@ msgstr "Beim Speichern der Konfiguration ist ein Fehler aufgetreten: %s"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:677
 msgid "Could not load the main interface"
-msgstr "Haupt-Interface konnte nicht geladen werden"
+msgstr "Haupt-Schnittstelle konnte nicht geladen werden"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:679
 msgid "Please make sure that the applet is properly installed"
@@ -2189,25 +2192,25 @@ msgstr "%d × %d"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1451
+#: ../capplets/display/xrandr-capplet.c:1458
 msgid "Mirror Screens"
 msgstr "Bildschirme spiegeln"
 
-#: ../capplets/display/xrandr-capplet.c:1893
+#: ../capplets/display/xrandr-capplet.c:1878
 msgid "Could not save the monitor configuration"
 msgstr "Die Bildschirmkonfiguration konnte nicht gespeichert werden"
 
-#: ../capplets/display/xrandr-capplet.c:1904
+#: ../capplets/display/xrandr-capplet.c:1889
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Beim Anwenden der Bildschirmeinstellungen konnte der Sitzungsbus nicht "
-"erhalten werden"
+"angefordert werden"
 
-#: ../capplets/display/xrandr-capplet.c:1946
+#: ../capplets/display/xrandr-capplet.c:1931
 msgid "Could not detect displays"
 msgstr "Anzeigen konnten nicht erkannt werden"
 
-#: ../capplets/display/xrandr-capplet.c:2161
+#: ../capplets/display/xrandr-capplet.c:2146
 msgid "Could not get screen information"
 msgstr "Bildschirminformationen konnten nicht ausgelesen werden"
 
@@ -2232,12 +2235,12 @@ msgstr "Auslösetasten der Kombination"
 #: ../capplets/keybindings/eggcellrendererkeys.c:173
 #: ../capplets/keybindings/eggcellrendererkeys.c:174
 msgid "Accelerator modifiers"
-msgstr "Umschalttasten der Kombination"
+msgstr "Zusatztasten der Kombination"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:182
 #: ../capplets/keybindings/eggcellrendererkeys.c:183
 msgid "Accelerator keycode"
-msgstr "Key-Code der Kombination"
+msgstr "Tastencode der Kombination"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:193
 msgid "Accel Mode"
@@ -2255,18 +2258,18 @@ msgstr "Deaktiviert"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:200
 msgid "<Unknown Action>"
-msgstr "<Unbekannte AKtion>"
+msgstr "<Unbekannte Aktion>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:947
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1571
+#: ../capplets/keybindings/gnome-keybinding-properties.c:942
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1566
 msgid "Custom Shortcuts"
 msgstr "Eigene Tastenkombinationen"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1086
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1081
 msgid "Error saving the new shortcut"
 msgstr "Beim Speichern der neuen Tastenkombination ist ein Fehler aufgetreten"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1165
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1160
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2278,17 +2281,17 @@ msgstr ""
 "Bitte versuchen Sie eine Kombination mit einer Taste wie Strg, Alt oder der "
 "Umschalttaste."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1195
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1190
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
 "\"%s\""
 msgstr ""
 "Die Tastenkombination »%s« wird bereits für\n"
-" »%s«\n"
+"»%s«\n"
 "verwendet."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1201
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1196
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -2296,26 +2299,26 @@ msgstr ""
 "Wenn Sie diese Tastenkombination »%s« zuweisen, wird die Tastenkombination "
 "für »%s« deaktiviert."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1209
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1204
 msgid "_Reassign"
 msgstr "_Zuweisen"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1329
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1324
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Beim Entfernen der Tastenkombination aus der Konfigurations-Datenbank ist "
 "ein Fehler aufgetreten: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1526
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1521
 msgid "Too many custom shortcuts"
 msgstr "Zu viele individuelle Tastenkombinationen"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1823
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1818
 msgid "Action"
 msgstr "Aktion"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1845
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1840
 msgid "Shortcut"
 msgstr "Tastenkombination"
 
@@ -2372,7 +2375,7 @@ msgstr ""
 
 #: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
 msgid "Beep when a _modifier key is pressed"
-msgstr "Signalton ausgeben, wenn eine Ko_mbinationstaste gedrückt wird"
+msgstr "Signalton ausgeben, wenn eine _Zusatztaste gedrückt wird"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
 msgid "Beep when a _toggle key is pressed"
@@ -2716,13 +2719,13 @@ msgid "gesture|Disabled"
 msgstr "Deaktiviert"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/mouse/gnome-mouse-properties.c:566
+#: ../capplets/mouse/gnome-mouse-properties.c:539
 msgid "Specify the name of the page to show (general|accessibility)"
 msgstr ""
 "Der Name der anzuzeigenden Seite. Mögliche Werte: »general« (Allgemein), "
 "»accessibility« (Barrierefreiheit)"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:571
+#: ../capplets/mouse/gnome-mouse-properties.c:544
 msgid "- GNOME Mouse Preferences"
 msgstr "– GNOME Maus-Einstellungen"
 
@@ -2847,7 +2850,7 @@ msgstr "_Deaktiviert"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:40
 msgid "_Edge scrolling"
-msgstr ""
+msgstr "Bildlauf am _Rand"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:41
 msgid "_Initiate click when stopping pointer movement"
@@ -2907,100 +2910,100 @@ msgid "Set your network proxy preferences"
 msgstr "Legen Sie hier Ihre Netzwerk-Proxy-Einstellungen fest"
 
 #: ../capplets/network/gnome-network-properties.ui.h:1
-msgid "Autoconfiguration _URL:"
-msgstr "_URL für Auto-Konfiguration:"
+msgid "<b>Di_rect internet connection</b>"
+msgstr "<b>Di_rekte Internet-Verbindung</b>"
 
 #: ../capplets/network/gnome-network-properties.ui.h:2
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr "<b>_Automatische Proxy-Konfiguration</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:3
+msgid "<b>_Manual proxy configuration</b>"
+msgstr "<b>_Manuelle Proxy-Konfiguration</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:4
+msgid "<b>_Use authentication</b>"
+msgstr "<b>_Legitimation erforderlich</b>"
+
+#: ../capplets/network/gnome-network-properties.ui.h:5
+msgid "Autoconfiguration _URL:"
+msgstr "A_dresse für automatische Konfiguration:"
+
+#: ../capplets/network/gnome-network-properties.ui.h:6
 msgid "C_reate"
 msgstr "E_rstellen"
 
-#: ../capplets/network/gnome-network-properties.ui.h:3
+#: ../capplets/network/gnome-network-properties.ui.h:7
 msgid "Create New Location"
 msgstr "Neuen Ort erstellen"
 
-#: ../capplets/network/gnome-network-properties.ui.h:4
-msgid "Di_rect internet connection"
-msgstr "_Direkte Internet-Verbindung"
-
-#: ../capplets/network/gnome-network-properties.ui.h:5
+#: ../capplets/network/gnome-network-properties.ui.h:8
 msgid "HTTP Proxy Details"
 msgstr "HTTP-Proxy-Details"
 
-#: ../capplets/network/gnome-network-properties.ui.h:6
+#: ../capplets/network/gnome-network-properties.ui.h:9
 msgid "H_TTP proxy:"
 msgstr "H_TTP-Proxy:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:7
+#: ../capplets/network/gnome-network-properties.ui.h:10
 msgid "Ignore Host List"
 msgstr "Ignorierte Rechnerliste"
 
-#: ../capplets/network/gnome-network-properties.ui.h:8
+#: ../capplets/network/gnome-network-properties.ui.h:11
 msgid "Ignored Hosts"
 msgstr "Ignorierte Rechner"
 
-#: ../capplets/network/gnome-network-properties.ui.h:9
+#: ../capplets/network/gnome-network-properties.ui.h:12
 msgid "Location:"
 msgstr "Ort:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:10
+#: ../capplets/network/gnome-network-properties.ui.h:13
 msgid "Network Proxy Preferences"
 msgstr "Netzwerk-Proxy-Einstellungen"
 
-#: ../capplets/network/gnome-network-properties.ui.h:11
+#: ../capplets/network/gnome-network-properties.ui.h:14
 msgid "Port:"
 msgstr "Port:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:12
+#: ../capplets/network/gnome-network-properties.ui.h:15
 msgid "Proxy Configuration"
 msgstr "Proxy-Konfiguration"
 
-#: ../capplets/network/gnome-network-properties.ui.h:13
+#: ../capplets/network/gnome-network-properties.ui.h:16
 msgid "S_ocks host:"
 msgstr "S_ocks-Rechner:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:14
+#: ../capplets/network/gnome-network-properties.ui.h:17
 msgid "The location already exists."
 msgstr "Der Ort ist bereits vorhanden."
 
-#: ../capplets/network/gnome-network-properties.ui.h:15
+#: ../capplets/network/gnome-network-properties.ui.h:18
 msgid "U_sername:"
 msgstr "_Benutzername:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:16
-msgid "_Automatic proxy configuration"
-msgstr "_Automatische Proxy-Konfiguration"
-
-#: ../capplets/network/gnome-network-properties.ui.h:17
+#: ../capplets/network/gnome-network-properties.ui.h:19
 msgid "_Delete Location"
 msgstr "Ort _löschen"
 
-#: ../capplets/network/gnome-network-properties.ui.h:18
+#: ../capplets/network/gnome-network-properties.ui.h:20
 msgid "_Details"
 msgstr "_Details"
 
-#: ../capplets/network/gnome-network-properties.ui.h:19
+#: ../capplets/network/gnome-network-properties.ui.h:21
 msgid "_FTP proxy:"
 msgstr "_FTP-Proxy:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:20
+#: ../capplets/network/gnome-network-properties.ui.h:22
 msgid "_Location name:"
 msgstr "Name des _Orts:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:21
-msgid "_Manual proxy configuration"
-msgstr "_Manuelle Proxy-Konfiguration"
-
-#: ../capplets/network/gnome-network-properties.ui.h:22
+#: ../capplets/network/gnome-network-properties.ui.h:23
 msgid "_Password:"
 msgstr "_Passwort:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:23
+#: ../capplets/network/gnome-network-properties.ui.h:24
 msgid "_Secure HTTP proxy:"
 msgstr "_Sicherer HTTP-Proxy:"
-
-#: ../capplets/network/gnome-network-properties.ui.h:24
-msgid "_Use authentication"
-msgstr "_Legitimation erforderlich"
 
 #: ../capplets/network/gnome-network-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
@@ -3112,24 +3115,28 @@ msgstr "Einrollen"
 msgid "None"
 msgstr "Keine"
 
-#: ../shell/control-center.c:52
+#: ../shell/control-center.c:49
 #, c-format
 msgid "key not found [%s]\n"
 msgstr "Schlüssel »%s« konnte nicht gefunden werden\n"
 
-#: ../shell/control-center.c:136
+#: ../shell/control-center.c:143
+msgid "Hide on start (useful to preload the shell)"
+msgstr "Beim Start verbergen (nützlich, um die Shell vorab zu laden)"
+
+#: ../shell/control-center.c:182
 msgid "Filter"
 msgstr "Filter"
 
-#: ../shell/control-center.c:136
+#: ../shell/control-center.c:182
 msgid "Groups"
 msgstr "Gruppen"
 
-#: ../shell/control-center.c:136
+#: ../shell/control-center.c:182
 msgid "Common Tasks"
 msgstr "Häufige Aktionen"
 
-#: ../shell/control-center.c:139 ../shell/gnomecc.desktop.in.in.h:1
+#: ../shell/control-center.c:185 ../shell/gnomecc.desktop.in.in.h:1
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "Kontrollzentrum"
@@ -3379,46 +3386,46 @@ msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr ""
 "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. 0123456789"
 
-#: ../font-viewer/font-view.c:288
+#: ../font-viewer/font-view.c:289
 msgid "Name:"
 msgstr "Name:"
 
-#: ../font-viewer/font-view.c:291
+#: ../font-viewer/font-view.c:292
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../font-viewer/font-view.c:304
+#: ../font-viewer/font-view.c:305
 msgid "Type:"
 msgstr "Typ:"
 
-#: ../font-viewer/font-view.c:308
+#: ../font-viewer/font-view.c:309
 msgid "Size:"
 msgstr "Größe:"
 
-#: ../font-viewer/font-view.c:352 ../font-viewer/font-view.c:365
+#: ../font-viewer/font-view.c:353 ../font-viewer/font-view.c:366
 msgid "Version:"
 msgstr "Version:"
 
-#: ../font-viewer/font-view.c:356 ../font-viewer/font-view.c:367
+#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:368
 msgid "Copyright:"
 msgstr "Copyright:"
 
-#: ../font-viewer/font-view.c:360
+#: ../font-viewer/font-view.c:361
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: ../font-viewer/font-view.c:440
+#: ../font-viewer/font-view.c:441
 msgid "Installed"
 msgstr "Installiert"
 
-#: ../font-viewer/font-view.c:443
+#: ../font-viewer/font-view.c:444
 msgid "Install Failed"
 msgstr "Installation fehlgeschlagen"
 
 #: ../font-viewer/font-view.c:516
 #, c-format
 msgid "usage: %s fontfile\n"
-msgstr "Aufruf: %s Schriftddatei\n"
+msgstr "Aufruf: %s Schriftdatei\n"
 
 #: ../font-viewer/font-view.c:591
 msgid "I_nstall Font"
@@ -3458,7 +3465,7 @@ msgstr "SCHRIFT-DATEI AUSGABE-DATEI"
 msgid "Error parsing arguments: %s\n"
 msgstr "Beim Verarbeiten der Argumente ist ein Fehler aufgetreten: %s\n"
 
-#: ../libslab/app-shell.c:753
+#: ../libslab/app-shell.c:752
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3469,7 +3476,7 @@ msgstr ""
 "\n"
 " Ihr Suchfilter »<b>%s</b>« ergab keine Einträge.</span>"
 
-#: ../libslab/app-shell.c:903
+#: ../libslab/app-shell.c:902
 msgid "Other"
 msgstr "Sonstige"
 
@@ -3623,6 +3630,10 @@ msgstr "<b>»%s« öffnen</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Aus den Systemelementen entfernen"
+
+#~ msgid "Unknown login ID, the user database might be corrupted"
+#~ msgstr ""
+#~ "Unbekannte Anmeldekennung - die Benutzerdatenbank ist womöglich beschädigt"
 
 #~ msgid "<b>Email</b>"
 #~ msgstr "<b>E-Mail</b>"
