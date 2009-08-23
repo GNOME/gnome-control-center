@@ -1108,6 +1108,19 @@ connect_sensitivity_signals (GtkBuilder *builder, GSList *mode_group)
 }
 
 static void
+cb_ignore_hosts_gconf_changed (GConfClient *client, guint cnxn_id,
+				GConfEntry *entry, gpointer user_data)
+{
+	g_slist_foreach (ignore_hosts, (GFunc) g_free, NULL);
+	g_slist_free (ignore_hosts);
+
+	ignore_hosts = gconf_client_get_list (client, IGNORE_HOSTS_KEY,
+					      GCONF_VALUE_STRING, NULL);
+
+	populate_listmodel (GTK_LIST_STORE (model), ignore_hosts);
+}
+
+static void
 setup_dialog (GtkBuilder *builder)
 {
 	GConfPropertyEditor *peditor;
@@ -1134,6 +1147,8 @@ setup_dialog (GtkBuilder *builder)
 	update_locations (client, builder);
 	gconf_client_add_dir (client, LOCATION_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_notify_add (client, CURRENT_LOCATION, (GConfClientNotifyFunc) cb_current_location, builder, NULL, NULL);
+
+	gconf_client_notify_add (client, IGNORE_HOSTS_KEY, cb_ignore_hosts_gconf_changed, NULL, NULL, NULL);
 
 	g_signal_connect (location_box, "changed", G_CALLBACK (cb_location_changed), builder);
 	g_signal_connect (gtk_builder_get_object (builder, "delete_button"), "clicked", G_CALLBACK (cb_delete_button_clicked), builder);
