@@ -726,7 +726,9 @@ static void
 show_no_results_message (AppShellData * app_data, GtkWidget * containing_vbox)
 {
 	gchar *markup;
-
+	gchar *str1;
+	gchar *str2;
+	
 	if (!app_data->filtered_out_everything_widget)
 	{
 		GtkWidget *hbox;
@@ -748,9 +750,10 @@ show_no_results_message (AppShellData * app_data, GtkWidget * containing_vbox)
 		gtk_container_add (GTK_CONTAINER (app_data->filtered_out_everything_widget), hbox);
 	}
 
-	markup = g_markup_printf_escaped (
-		_("<span size=\"large\"><b>No matches found.</b> </span><span>\n\n Your filter \"<b>%s</b>\" does not match any items.</span>"),
-		app_data->filter_string);
+	str1 = g_strdup_printf ("<b>%s</b>", app_data->filter_string);
+	str2 = g_strdup_printf (_("Your filter \"%s\" does not match any items."), str1);
+	markup = g_markup_printf_escaped ("<span size=\"large\"><b>%s</b></span>\n\n%s",
+		_("No matches found."), str2);
 	gtk_label_set_text (app_data->filtered_out_everything_widget_label, markup);
 	gtk_label_set_use_markup (app_data->filtered_out_everything_widget_label, TRUE);
 	gtk_box_pack_start (GTK_BOX (containing_vbox), app_data->filtered_out_everything_widget,

@@ -304,6 +304,7 @@ application_tile_setup (ApplicationTile *this, const gchar *gconf_prefix)
 
 	const gchar *key;
 	gchar *markup;
+	gchar *str;
 
 	/*Fixme - need to address the entire gconf key location issue */
 	/*Fixme - this is just a temporary stop gap                   */
@@ -370,10 +371,12 @@ application_tile_setup (ApplicationTile *this, const gchar *gconf_prefix)
 
 /* make start action */
 
-	markup = g_markup_printf_escaped (_("<b>Start %s</b>"), this->name);
+	str = g_strdup_printf (_("Start %s"), this->name);
+	markup = g_markup_printf_escaped ("<b>%s</b>", str);
 	action = tile_action_new (TILE (this), start_trigger, markup, TILE_ACTION_OPENS_NEW_WINDOW);
 	actions [APPLICATION_TILE_ACTION_START] = action;
 	g_free (markup);
+	g_free (str);
 
 	menu_item = GTK_WIDGET (tile_action_get_menu_item (action));
 

@@ -137,6 +137,7 @@ document_tile_new (const gchar *in_uri, const gchar *mime_type, time_t modified)
 	gchar *time_str;
 
 	gchar *markup;
+	gchar *str;
 
 	AtkObject *accessible;
 
@@ -189,11 +190,13 @@ document_tile_new (const gchar *in_uri, const gchar *mime_type, time_t modified)
 	/* make open with default action */
 
 	if (priv->default_app) {
-		markup = g_markup_printf_escaped (_("<b>Open with \"%s\"</b>"),
-						    g_app_info_get_name (priv->default_app));
+		str = g_strdup_printf (_("Open with \"%s\""),
+				       g_app_info_get_name (priv->default_app));
+		markup = g_markup_printf_escaped ("<b>%s</b>", str);
 		action = tile_action_new (TILE (this), open_with_default_trigger, markup,
 			TILE_ACTION_OPENS_NEW_WINDOW);
 		g_free (markup);
+		g_free (str);
 
 		TILE (this)->default_action = action;
 
