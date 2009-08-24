@@ -17,14 +17,24 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2009-08-14 16:47+0000\n"
-"PO-Revision-Date: 2009-08-15 08:39+0300\n"
+"POT-Creation-Date: 2009-08-24 11:14+0000\n"
+"PO-Revision-Date: 2009-08-24 17:41+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Current network location"
+msgstr "Praegune võrguasukoht"
+
+msgid ""
+"Set this to your current location name. This is used to determine the "
+"appropriate network proxy configuration."
+msgstr ""
+"Määra siia oma praeguse asukoha nimi. Seda kasutatakse sobilike proksisätete "
+"tuvastamiseks."
 
 msgid "Image/label border"
 msgstr "Pildi/sildi ääris"
@@ -164,18 +174,9 @@ msgstr ""
 msgid "Unable to open address book"
 msgstr "Aadressiraamatut pole võimalik avada"
 
-msgid "Unknown login ID, the user database might be corrupted"
-msgstr "Tundmatu sisselogimise ID, kasutajate andmebaas võib olla rikutud"
-
 #, c-format
 msgid "About %s"
 msgstr "Kasutaja %s andmed"
-
-msgid "Enable _Fingerprint Login..."
-msgstr "_Sõrmejäljega sisselogimise lubamine..."
-
-msgid "Disable _Fingerprint Login..."
-msgstr "_Sõrmejäljega sisselogimise keelamine..."
 
 msgid "A_IM/iChat:"
 msgstr "A_IM/iChat:"
@@ -216,8 +217,14 @@ msgstr "Kontaktaadress"
 msgid "Cou_ntry:"
 msgstr "R_iik:"
 
+msgid "Disable _Fingerprint Login..."
+msgstr "_Sõrmejäljega sisselogimise keelamine..."
+
 msgid "Email"
 msgstr "E-post"
+
+msgid "Enable _Fingerprint Login..."
+msgstr "_Sõrmejäljega sisselogimise lubamine..."
 
 msgid "Full Name"
 msgstr "Täisnimi"
@@ -1183,10 +1190,10 @@ msgid "GConf key to which this property editor is attached"
 msgstr "GConf'i võti, mille külge see omadusteredaktor on ühendatud"
 
 msgid "Callback"
-msgstr ""
+msgstr "Väljakutse"
 
 msgid "Issue this callback when the value associated with key gets changed"
-msgstr ""
+msgstr "Võtmega seotud väärtuse muutumisel tehtav väljakutse"
 
 msgid "Change set"
 msgstr "Muudatuste kogum"
@@ -1197,18 +1204,18 @@ msgstr ""
 "GConf'i klientprogrammile rakendamiseks edastatav GConf'i muudatuste kogum"
 
 msgid "Conversion to widget callback"
-msgstr ""
+msgstr "Vidinale andmete teisendamise väljakutse"
 
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
+msgstr "GConfist pärit andmete vidina jaoks teisendamisel tehtav väljakutse."
 
 msgid "Conversion from widget callback"
-msgstr ""
+msgstr "Vidinalt pärit andmete teisendamise väljakutse"
 
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr ""
+msgstr "Vidinalt pärit andmete GConfi jaoks teisendamisel tehtav väljakutse."
 
 msgid "UI Control"
 msgstr "Kasutajaliidese juhtimine"
@@ -1223,10 +1230,10 @@ msgid "Custom data required by the specific property editor"
 msgstr "Kohandatud andmed eriomaste omaduste redaktori jaoks"
 
 msgid "Property editor data freeing callback"
-msgstr ""
+msgstr "Omaduste redaktori andmete vabastamise väljakutse"
 
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr ""
+msgstr "Omaduste redaktori objektiandmete vabastamise väljakutse"
 
 #, c-format
 msgid ""
@@ -1628,6 +1635,7 @@ msgstr "Pea peal"
 msgid "%d Hz"
 msgstr "%d Hz"
 
+#, c-format
 msgid "Monitor: %s"
 msgstr "Kuvar: %s"
 
@@ -2314,7 +2322,7 @@ msgid "key not found [%s]\n"
 msgstr "klahvi ei leitud [%s]\n"
 
 msgid "Hide on start (useful to preload the shell)"
-msgstr ""
+msgstr "Peidetakse käivitamisel (kasulik kestprogrammi eellaadimiseks)"
 
 msgid "Filter"
 msgstr "Filter"
@@ -2573,22 +2581,19 @@ msgid "Error parsing arguments: %s\n"
 msgstr "Viga argumentide analüüsimisel: %s\n"
 
 #, c-format
-msgid ""
-"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-"\n"
-" Your filter \"<b>%s</b>\" does not match any items.</span>"
-msgstr ""
-"<span size=\"large\"><b>Vastavusi ei leitud.</b> </span><span>\n"
-"\n"
-" Sinu filter \"<b>%s</b>\" ei sobi ühegi kirjega.</span>"
+msgid "Your filter \"%s\" does not match any items."
+msgstr "Sinu filtrile \"%s\" ei vasta ükski kirje."
+
+msgid "No matches found."
+msgstr "Vastavusi ei leitud."
 
 msgid "Other"
 msgstr "Muu"
 
 #. make start action
 #, c-format
-msgid "<b>Start %s</b>"
-msgstr "<b>Käivita %s</b>"
+msgid "Start %s"
+msgstr "Käivita %s"
 
 msgid "Help"
 msgstr "Abi"
@@ -2656,8 +2661,8 @@ msgid "If you delete an item, it is permanently lost."
 msgstr "Kui sa selle kustutad, läheb see jäädavalt kaotsi."
 
 #, c-format
-msgid "<b>Open with \"%s\"</b>"
-msgstr "<b>Ava rakendusega \"%s\"</b>"
+msgid "Open with \"%s\""
+msgstr "Ava rakendusega \"%s\""
 
 msgid "Open with Default Application"
 msgstr "Ava vaikimisi rakendusega"
