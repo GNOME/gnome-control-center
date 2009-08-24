@@ -159,13 +159,6 @@ main (int argc, char **argv)
   if (!data)
     return 1;
 
-  if (install_filename != NULL) {
-    GFile *inst = g_file_new_for_commandline_arg (install_filename);
-    g_free (install_filename);
-    gnome_theme_install (inst, NULL);
-    g_object_unref (inst);
-  }
-
   /* init tabs */
   themes_init (data);
   style_init (data);
@@ -203,6 +196,13 @@ main (int argc, char **argv)
         gtk_notebook_set_current_page (nb, pindex);
     }
     g_free (page_name);
+  }
+
+  if (install_filename != NULL) {
+    GFile *inst = g_file_new_for_commandline_arg (install_filename);
+    g_free (install_filename);
+    gnome_theme_install (inst, GTK_WINDOW (w));
+    g_object_unref (inst);
   }
 
   g_option_context_free (option_context);
