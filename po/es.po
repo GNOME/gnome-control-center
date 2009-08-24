@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2009-08-22 21:16+0000\n"
-"PO-Revision-Date: 2009-08-23 22:51+0200\n"
+"POT-Creation-Date: 2009-08-24 11:14+0000\n"
+"PO-Revision-Date: 2009-08-24 19:00+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,6 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../gnome-control-center.schemas.in.h:1
-#| msgid "Create New Location"
 msgid "Current network location"
 msgstr "Ubicación de red actual"
 
@@ -208,7 +207,7 @@ msgid "Images"
 msgstr "Imágenes"
 
 #: ../capplets/about-me/gnome-about-me.c:746
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:763
 msgid "All Files"
 msgstr "Todos los archivos"
 
@@ -1338,30 +1337,30 @@ msgid_plural "pixels"
 msgstr[0] "píxel"
 msgstr[1] "píxeles"
 
-#: ../capplets/appearance/theme-installer.c:174
-#: ../capplets/appearance/theme-installer.c:224
+#: ../capplets/appearance/theme-installer.c:178
+#: ../capplets/appearance/theme-installer.c:234
 msgid "Cannot install theme"
 msgstr "No se puede instalar el tema"
 
-#: ../capplets/appearance/theme-installer.c:176
+#: ../capplets/appearance/theme-installer.c:180
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "La utilidad %s no está instalada."
 
-#: ../capplets/appearance/theme-installer.c:226
+#: ../capplets/appearance/theme-installer.c:236
 msgid "There was a problem while extracting the theme."
 msgstr "Hubo un problema al extraer el tema."
 
-#: ../capplets/appearance/theme-installer.c:249
+#: ../capplets/appearance/theme-installer.c:264
 msgid "There was an error installing the selected file"
 msgstr "Hubo un error al instalar el archivo seleccionado"
 
-#: ../capplets/appearance/theme-installer.c:250
+#: ../capplets/appearance/theme-installer.c:265
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "«%s» no parece ser un tema válido."
 
-#: ../capplets/appearance/theme-installer.c:251
+#: ../capplets/appearance/theme-installer.c:266
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
@@ -1370,47 +1369,47 @@ msgstr ""
 "«%s» no parece ser un tema válido. Puede ser un motor de temas que debe "
 "compilar."
 
-#: ../capplets/appearance/theme-installer.c:354
+#: ../capplets/appearance/theme-installer.c:372
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "La instalación del tema «%s» falló."
 
-#: ../capplets/appearance/theme-installer.c:393
+#: ../capplets/appearance/theme-installer.c:411
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Se ha instalado el tema «%s»."
 
-#: ../capplets/appearance/theme-installer.c:398
+#: ../capplets/appearance/theme-installer.c:421
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "¿Desea aplicarlo ahora, o mantener su tema actual?"
 
-#: ../capplets/appearance/theme-installer.c:400
+#: ../capplets/appearance/theme-installer.c:424
 msgid "Keep Current Theme"
 msgstr "Mantener el tema actual"
 
-#: ../capplets/appearance/theme-installer.c:402
+#: ../capplets/appearance/theme-installer.c:427
 msgid "Apply New Theme"
 msgstr "Aplicar el nuevo tema"
 
-#: ../capplets/appearance/theme-installer.c:446
+#: ../capplets/appearance/theme-installer.c:471
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "El tema de GNOME %s se instaló correctamente"
 
-#: ../capplets/appearance/theme-installer.c:505
+#: ../capplets/appearance/theme-installer.c:533
 msgid "Failed to create temporary directory"
 msgstr "Falló al crear la carpeta temporal"
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:596
 msgid "New themes have been successfully installed."
 msgstr "Los nuevos temas se han instalado con éxito."
 
-#: ../capplets/appearance/theme-installer.c:593
+#: ../capplets/appearance/theme-installer.c:643
 msgid "No theme file location specified to install"
 msgstr ""
 "No se ha especificado ninguna ubicación del archivo del tema para instalar"
 
-#: ../capplets/appearance/theme-installer.c:614
+#: ../capplets/appearance/theme-installer.c:667
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1419,11 +1418,11 @@ msgstr ""
 "Permisos insuficientes para instalar el tema en:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:745
 msgid "Select Theme"
 msgstr "Seleccionar un tema"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:756
 msgid "Theme Packages"
 msgstr "Paquetes de temas"
 
@@ -3458,52 +3457,51 @@ msgstr "ARCHIVO-DE-TIPOGRAFÍA ARCHIVO-DE-SALIDA"
 msgid "Error parsing arguments: %s\n"
 msgstr "Error al analizar los argumentos: %s\n"
 
-#: ../libslab/app-shell.c:752
+#: ../libslab/app-shell.c:754
 #, c-format
-msgid ""
-"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-"\n"
-" Your filter \"<b>%s</b>\" does not match any items.</span>"
-msgstr ""
-"<span size=\"large\"><b>No se encontraron coincidencias.</b></span><span>\n"
-"\n"
-" Su filtro «<b>%s</b>» no coincide con ningún elemento.</span>"
+msgid "Your filter \"%s\" does not match any items."
+msgstr "Su filtro «%s» no coincide con ningún elemento."
 
-#: ../libslab/app-shell.c:902
+#: ../libslab/app-shell.c:756
+msgid "No matches found."
+msgstr "No se encontró ninguna coincidencia."
+
+#: ../libslab/app-shell.c:905
 msgid "Other"
 msgstr "Otras"
 
 #. make start action
-#: ../libslab/application-tile.c:373
+#: ../libslab/application-tile.c:374
 #, c-format
-msgid "<b>Start %s</b>"
-msgstr "<b>Iniciar %s</b>"
+#| msgid "<b>Start %s</b>"
+msgid "Start %s"
+msgstr "Iniciar %s"
 
-#: ../libslab/application-tile.c:392
+#: ../libslab/application-tile.c:395
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../libslab/application-tile.c:439
+#: ../libslab/application-tile.c:442
 msgid "Upgrade"
 msgstr "Actualizar"
 
-#: ../libslab/application-tile.c:454
+#: ../libslab/application-tile.c:457
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: ../libslab/application-tile.c:781 ../libslab/document-tile.c:718
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
 msgid "Remove from Favorites"
 msgstr "Quitar de favoritos"
 
-#: ../libslab/application-tile.c:783 ../libslab/document-tile.c:720
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
 msgid "Add to Favorites"
 msgstr "Añadir a favoritos"
 
-#: ../libslab/application-tile.c:868
+#: ../libslab/application-tile.c:871
 msgid "Remove from Startup Programs"
 msgstr "Quitar de los programas de inicio"
 
-#: ../libslab/application-tile.c:870
+#: ../libslab/application-tile.c:873
 msgid "Add to Startup Programs"
 msgstr "Añadir a los programas de inicio"
 
@@ -3538,72 +3536,73 @@ msgid "<b>Open</b>"
 msgstr "<b>Abrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:231
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
 msgid "Rename..."
 msgstr "Renombrar…"
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:245 ../libslab/document-tile.c:254
+#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
 msgid "Send To..."
 msgstr "Enviar a…"
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:280
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
 msgid "Move to Trash"
 msgstr "Mover a la papelera"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:290 ../libslab/document-tile.c:834
+#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:982
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "¿Está seguro de que quiere borrar permanentemente «%s»?"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:983
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
 msgid "If you delete an item, it is permanently lost."
 msgstr "Si borra un elemento se pierde para siempre."
 
-#: ../libslab/document-tile.c:192
+#: ../libslab/document-tile.c:193
 #, c-format
-msgid "<b>Open with \"%s\"</b>"
-msgstr "<b>Abrir con «%s»</b>"
+#| msgid "<b>Open with \"%s\"</b>"
+msgid "Open with \"%s\""
+msgstr "Abrir con «%s»"
 
-#: ../libslab/document-tile.c:204
+#: ../libslab/document-tile.c:207
 msgid "Open with Default Application"
 msgstr "Abrir con la aplicación predeterminada"
 
-#: ../libslab/document-tile.c:215
+#: ../libslab/document-tile.c:218
 msgid "Open in File Manager"
 msgstr "Abrir en el gestor de archivos"
 
-#: ../libslab/document-tile.c:614
+#: ../libslab/document-tile.c:617
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:621
+#: ../libslab/document-tile.c:624
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:629
+#: ../libslab/document-tile.c:632
 msgid "Today %l:%M %p"
 msgstr "Hoy %H:%M"
 
-#: ../libslab/document-tile.c:639
+#: ../libslab/document-tile.c:642
 msgid "Yesterday %l:%M %p"
 msgstr "Ayer %H:%M"
 
-#: ../libslab/document-tile.c:651
+#: ../libslab/document-tile.c:654
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../libslab/document-tile.c:659
+#: ../libslab/document-tile.c:662
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %H:%M"
 
-#: ../libslab/document-tile.c:661
+#: ../libslab/document-tile.c:664
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
 
@@ -3620,6 +3619,16 @@ msgstr "<b>Abrir %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Quitar de los elementos del sistema"
+
+#~ msgid ""
+#~ "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
+#~ "\n"
+#~ " Your filter \"<b>%s</b>\" does not match any items.</span>"
+#~ msgstr ""
+#~ "<span size=\"large\"><b>No se encontraron coincidencias.</b></"
+#~ "span><span>\n"
+#~ "\n"
+#~ " Su filtro «<b>%s</b>» no coincide con ningún elemento.</span>"
 
 #~ msgid "Unknown login ID, the user database might be corrupted"
 #~ msgstr ""
