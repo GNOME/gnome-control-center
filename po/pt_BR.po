@@ -24,15 +24,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-18 22:18-0400\n"
-"PO-Revision-Date: 2009-08-17 16:26-0300\n"
-"Last-Translator: Henrique P Machado <zehrique@gmail.com>\n"
+"POT-Creation-Date: 2009-08-24 22:16-0400\n"
+"PO-Revision-Date: 2009-08-24 08:21-0300\n"
+"Last-Translator: Krix Apolinário <krixapolinario@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Country: BRAZIL\n"
+
+#: ../gnome-control-center.schemas.in.h:1
+msgid "Current network location"
+msgstr "Localização da rede atual"
+
+#: ../gnome-control-center.schemas.in.h:2
+msgid ""
+"Set this to your current location name. This is used to determine the "
+"appropriate network proxy configuration."
+msgstr ""
+"Defina isto para o nome de sua localização atual. Isto é usado para "
+"determinar a configuração do proxy de rede apropriada."
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -201,7 +213,7 @@ msgid "Images"
 msgstr "Imagens"
 
 #: ../capplets/about-me/gnome-about-me.c:746
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:763
 msgid "All Files"
 msgstr "Todos os arquivos"
 
@@ -863,7 +875,7 @@ msgstr ""
 
 #: ../capplets/appearance/appearance-main.c:143
 #: ../capplets/default-applications/gnome-da-capplet.c:907
-#: ../capplets/mouse/gnome-mouse-properties.c:567
+#: ../capplets/mouse/gnome-mouse-properties.c:540
 msgid "page"
 msgstr "página"
 
@@ -1333,30 +1345,30 @@ msgid_plural "pixels"
 msgstr[0] "pixel"
 msgstr[1] "pixels"
 
-#: ../capplets/appearance/theme-installer.c:174
-#: ../capplets/appearance/theme-installer.c:224
+#: ../capplets/appearance/theme-installer.c:178
+#: ../capplets/appearance/theme-installer.c:234
 msgid "Cannot install theme"
 msgstr "Não foi possível instalar o tema"
 
-#: ../capplets/appearance/theme-installer.c:176
+#: ../capplets/appearance/theme-installer.c:180
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "O utilitário %s não está instalado."
 
-#: ../capplets/appearance/theme-installer.c:226
+#: ../capplets/appearance/theme-installer.c:236
 msgid "There was a problem while extracting the theme."
 msgstr "Houve um problema ao extrair o tema."
 
-#: ../capplets/appearance/theme-installer.c:249
+#: ../capplets/appearance/theme-installer.c:264
 msgid "There was an error installing the selected file"
 msgstr "Houve um erro ao instalar o arquivo selecionado"
 
-#: ../capplets/appearance/theme-installer.c:250
+#: ../capplets/appearance/theme-installer.c:265
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "\"%s\" parece não ser um tema válido."
 
-#: ../capplets/appearance/theme-installer.c:251
+#: ../capplets/appearance/theme-installer.c:266
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
@@ -1365,46 +1377,46 @@ msgstr ""
 "\"%s\" parece não ser um tema válido. Ele pode ser um mecanismo de tema que "
 "você precisa compilar."
 
-#: ../capplets/appearance/theme-installer.c:354
+#: ../capplets/appearance/theme-installer.c:372
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Falha na instalação do tema \"%s\"."
 
-#: ../capplets/appearance/theme-installer.c:393
+#: ../capplets/appearance/theme-installer.c:411
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "O tema \"%s\" foi instalado."
 
-#: ../capplets/appearance/theme-installer.c:398
+#: ../capplets/appearance/theme-installer.c:421
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Você gostaria de aplicá-lo agora ou continuar com o tema atual?"
 
-#: ../capplets/appearance/theme-installer.c:400
+#: ../capplets/appearance/theme-installer.c:424
 msgid "Keep Current Theme"
 msgstr "Manter tema atual"
 
-#: ../capplets/appearance/theme-installer.c:402
+#: ../capplets/appearance/theme-installer.c:427
 msgid "Apply New Theme"
 msgstr "Aplicar novo tema"
 
-#: ../capplets/appearance/theme-installer.c:446
+#: ../capplets/appearance/theme-installer.c:471
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "Tema %s instalado corretamente"
 
-#: ../capplets/appearance/theme-installer.c:505
+#: ../capplets/appearance/theme-installer.c:533
 msgid "Failed to create temporary directory"
 msgstr "Falha ao criar o diretório temporário"
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:596
 msgid "New themes have been successfully installed."
 msgstr "Novos temas instalados com sucesso."
 
-#: ../capplets/appearance/theme-installer.c:593
+#: ../capplets/appearance/theme-installer.c:643
 msgid "No theme file location specified to install"
 msgstr "Nenhuma localização de temas foi especificada para a instalação"
 
-#: ../capplets/appearance/theme-installer.c:614
+#: ../capplets/appearance/theme-installer.c:667
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1413,11 +1425,11 @@ msgstr ""
 "Permissões insuficientes para instalar o tema em:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:745
 msgid "Select Theme"
 msgstr "Selecionar tema"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:756
 msgid "Theme Packages"
 msgstr "Pacotes de tema"
 
@@ -2180,25 +2192,25 @@ msgstr "%d x %d"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1451
+#: ../capplets/display/xrandr-capplet.c:1458
 msgid "Mirror Screens"
 msgstr "Espelhar telas"
 
-#: ../capplets/display/xrandr-capplet.c:1893
+#: ../capplets/display/xrandr-capplet.c:1878
 msgid "Could not save the monitor configuration"
 msgstr "Não foi possível salvar a configuração do monitor"
 
-#: ../capplets/display/xrandr-capplet.c:1904
+#: ../capplets/display/xrandr-capplet.c:1889
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Não foi possível obter o barramento da sessão ao aplicar a configuração do "
 "vídeo"
 
-#: ../capplets/display/xrandr-capplet.c:1946
+#: ../capplets/display/xrandr-capplet.c:1931
 msgid "Could not detect displays"
 msgstr "Não foi possível detectar telas"
 
-#: ../capplets/display/xrandr-capplet.c:2161
+#: ../capplets/display/xrandr-capplet.c:2146
 msgid "Could not get screen information"
 msgstr "Não foi possível obter informação sobre o vídeo"
 
@@ -2700,12 +2712,12 @@ msgid "gesture|Disabled"
 msgstr "Desabilitado"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/mouse/gnome-mouse-properties.c:566
+#: ../capplets/mouse/gnome-mouse-properties.c:539
 msgid "Specify the name of the page to show (general|accessibility)"
 msgstr "Especifique o nome da página a mostrar (general|accessibility)"
 
 # Verificar onde "GNOME" deve ficar
-#: ../capplets/mouse/gnome-mouse-properties.c:571
+#: ../capplets/mouse/gnome-mouse-properties.c:544
 msgid "- GNOME Mouse Preferences"
 msgstr "- Preferências do Mouse do GNOME"
 
@@ -2796,7 +2808,9 @@ msgstr "_Limiar:"
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:32
 msgid ""
 "To test your double-click settings, try to double-click on the light bulb."
-msgstr "Para testar suas configurações de clique-duplo, tente dar um clique-duplo na lâmpada."
+msgstr ""
+"Para testar suas configurações de clique-duplo, tente dar um clique-duplo na "
+"lâmpada."
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:33
 msgid "Touchpad"
@@ -2824,7 +2838,7 @@ msgstr "Desabilitar touchpad _enquanto digita"
 msgid "_Disabled"
 msgstr "_Desabilitado"
 
-# Todas as referências que encontrei em português falavam em "zona de 
+# Todas as referências que encontrei em português falavam em "zona de
 # rolagem"; em inglês "edge scrolling" é feito na "scroll zone" mas não achei
 # algo como "rolagem na borda" em português. -- Leonardo Fontenelle
 #
@@ -3444,52 +3458,50 @@ msgstr "ARQUIVO-FONTE ARQUIVO-SAIDA"
 msgid "Error parsing arguments: %s\n"
 msgstr "Erro analisando argumentos: %s\n"
 
-#: ../libslab/app-shell.c:752
+#: ../libslab/app-shell.c:754
 #, c-format
-msgid ""
-"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-"\n"
-" Your filter \"<b>%s</b>\" does not match any items.</span>"
+msgid "Your filter \"%s\" does not match any items."
 msgstr ""
-"<span size=\"large\"><b>Não localizado.</b> </span><span>\n"
-"\n"
-" O seu filtro \"<b>%s</b>\" não localizou nenhum item.</span>"
 
-#: ../libslab/app-shell.c:902
+#: ../libslab/app-shell.c:756
+msgid "No matches found."
+msgstr ""
+
+#: ../libslab/app-shell.c:905
 msgid "Other"
 msgstr "Outros"
 
 #. make start action
-#: ../libslab/application-tile.c:373
+#: ../libslab/application-tile.c:374
 #, c-format
-msgid "<b>Start %s</b>"
-msgstr "<b>Iniciar %s</b>"
+msgid "Start %s"
+msgstr "Iniciar %s"
 
-#: ../libslab/application-tile.c:392
+#: ../libslab/application-tile.c:395
 msgid "Help"
 msgstr "Ajuda"
 
-#: ../libslab/application-tile.c:439
+#: ../libslab/application-tile.c:442
 msgid "Upgrade"
 msgstr "Atualizar"
 
-#: ../libslab/application-tile.c:454
+#: ../libslab/application-tile.c:457
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: ../libslab/application-tile.c:781 ../libslab/document-tile.c:718
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
 msgid "Remove from Favorites"
 msgstr "Remover dos favoritos"
 
-#: ../libslab/application-tile.c:783 ../libslab/document-tile.c:720
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
 msgid "Add to Favorites"
 msgstr "Adicionar aos favoritos"
 
-#: ../libslab/application-tile.c:868
+#: ../libslab/application-tile.c:871
 msgid "Remove from Startup Programs"
 msgstr "Remover dos programas iniciais"
 
-#: ../libslab/application-tile.c:870
+#: ../libslab/application-tile.c:873
 msgid "Add to Startup Programs"
 msgstr "Adicionar aos programas iniciais"
 
@@ -3524,72 +3536,72 @@ msgid "<b>Open</b>"
 msgstr "<b>Abrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:231
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
 msgid "Rename..."
 msgstr "Renomear..."
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:245 ../libslab/document-tile.c:254
+#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
 msgid "Send To..."
 msgstr "Enviar para..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:280
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
 msgid "Move to Trash"
 msgstr "Mover para a lixeira"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:290 ../libslab/document-tile.c:834
+#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
 msgid "Delete"
 msgstr "Excluir"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:982
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Você tem certeza que deseja excluir \"%s\" permanentemente?"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:983
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
 msgid "If you delete an item, it is permanently lost."
 msgstr "Se você excluir um item, ele será perdido permanentemente."
 
-#: ../libslab/document-tile.c:192
+#: ../libslab/document-tile.c:193
 #, c-format
-msgid "<b>Open with \"%s\"</b>"
-msgstr "<b>Abrir com \"%s\"</b>"
+msgid "Open with \"%s\""
+msgstr "Abrir com \"%s\""
 
-#: ../libslab/document-tile.c:204
+#: ../libslab/document-tile.c:207
 msgid "Open with Default Application"
 msgstr "Abrir com o aplicativo padrão"
 
-#: ../libslab/document-tile.c:215
+#: ../libslab/document-tile.c:218
 msgid "Open in File Manager"
 msgstr "Abrir no gerenciador de arquivos"
 
-#: ../libslab/document-tile.c:614
+#: ../libslab/document-tile.c:617
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:621
+#: ../libslab/document-tile.c:624
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:629
+#: ../libslab/document-tile.c:632
 msgid "Today %l:%M %p"
 msgstr "Hoje às %H:%M"
 
-#: ../libslab/document-tile.c:639
+#: ../libslab/document-tile.c:642
 msgid "Yesterday %l:%M %p"
 msgstr "Ontem às %H:%M"
 
-#: ../libslab/document-tile.c:651
+#: ../libslab/document-tile.c:654
 msgid "%a %l:%M %p"
 msgstr "%A às %H:%M"
 
-#: ../libslab/document-tile.c:659
+#: ../libslab/document-tile.c:662
 msgid "%b %d %l:%M %p"
 msgstr "%d de %B às %H:%M"
 
-#: ../libslab/document-tile.c:661
+#: ../libslab/document-tile.c:664
 msgid "%b %d %Y"
 msgstr "%d de %B de %Y"
 
@@ -3607,6 +3619,15 @@ msgstr "<b>Abrir %s</b>"
 msgid "Remove from System Items"
 msgstr "Remover dos itens do sistema"
 
+#~ msgid ""
+#~ "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
+#~ "\n"
+#~ " Your filter \"<b>%s</b>\" does not match any items.</span>"
+#~ msgstr ""
+#~ "<span size=\"large\"><b>Não localizado.</b> </span><span>\n"
+#~ "\n"
+#~ " O seu filtro \"<b>%s</b>\" não localizou nenhum item.</span>"
+
 #~ msgid "Unknown login ID, the user database might be corrupted"
 #~ msgstr ""
 #~ "ID de usuário desconhecida, o banco de dados do usuário pode estar "
@@ -3617,228 +3638,3 @@ msgstr "Remover dos itens do sistema"
 
 #~ msgid "<b>Home</b>"
 #~ msgstr "<b>Casa</b>"
-
-# Tentar diferenciar 'work' de 'job'
-#~ msgid "<b>Job</b>"
-#~ msgstr "<b>Ocupação</b>"
-
-#~ msgid "<b>Web</b>"
-#~ msgstr "<b>Web</b>"
-
-#~ msgid "<b>Work</b>"
-#~ msgstr "<b>Trabalho</b>"
-
-#~ msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
-#~ msgstr "<span size=\"larger\" weight=\"bold\">Alterar sua senha</span>"
-
-#~ msgid "<b>Assistive Technologies</b>"
-#~ msgstr "<b>Tecnologias assistivas</b>"
-
-#~ msgid "<b>Preferences</b>"
-#~ msgstr "<b>Preferências</b>"
-
-#~ msgid "<b>C_olors</b>"
-#~ msgstr "<b>C_ores</b>"
-
-#~ msgid "<b>Preview</b>"
-#~ msgstr "<b>Visualização</b>"
-
-#~ msgid "<b>_Desktop Background</b>"
-#~ msgstr "<b>Plano de fundo da área _de trabalho</b>"
-
-#~ msgid "<b>Bounce Keys</b>"
-#~ msgstr "<b>Teclas de repercussão</b>"
-
-#~ msgid "<b>General</b>"
-#~ msgstr "<b>Geral</b>"
-
-#~ msgid "<small><i>Fast</i></small>"
-#~ msgstr "<small><i>Rápido</i></small>"
-
-#~ msgid "<small><i>Long</i></small>"
-#~ msgstr "<small><i>Longo</i></small>"
-
-#~ msgid "<small><i>Short</i></small>"
-#~ msgstr "<small><i>Curto</i></small>"
-
-#~ msgid "<small><i>Slow</i></small>"
-#~ msgstr "<small><i>Lento</i></small>"
-
-#~ msgid "<b>Locate Pointer</b>"
-#~ msgstr "<b>Localizar ponteiro</b>"
-
-#~ msgid "<small><i>High</i></small>"
-#~ msgstr "<small><i>Alta</i></small>"
-
-#~ msgid "<small><i>Large</i></small>"
-#~ msgstr "<small><i>Grande</i></small>"
-
-#~ msgid "<small><i>Low</i></small>"
-#~ msgstr "<small><i>Baixa</i></small>"
-
-#~ msgid "<small><i>Small</i></small>"
-#~ msgstr "<small><i>Pequeno</i></small>"
-
-#~ msgid "<b>Ignore Host List</b>"
-#~ msgstr "<b>Lista de máquinas ignoradas</b>"
-
-#~ msgid ""
-#~ "Left thumb\n"
-#~ "Left middle finger\n"
-#~ "Left ring finger\n"
-#~ "Left little finger\n"
-#~ "Right thumb\n"
-#~ "Right middle finger\n"
-#~ "Right ring finger\n"
-#~ "Right little finger"
-#~ msgstr ""
-#~ "Polegar esquerdo\n"
-#~ "Dedo médio esquerdo\n"
-#~ "Dedo anular esquerdo\n"
-#~ "Dedo mínimo esquerdo\n"
-#~ "Polegar direito\n"
-#~ "Dedo médio direito\n"
-#~ "Dedo anular direito\n"
-#~ "Dedo mínimo direito"
-
-#~ msgid "C_ut"
-#~ msgstr "Recor_tar"
-
-#~ msgid "New File"
-#~ msgstr "Novo arquivo"
-
-#~ msgid "Open File"
-#~ msgstr "Abrir arquivo"
-
-#~ msgid "Save File"
-#~ msgstr "Salvar arquivo"
-
-#~ msgid ""
-#~ "Solid color\n"
-#~ "Horizontal gradient\n"
-#~ "Vertical gradient"
-#~ msgstr ""
-#~ "Cor sólida\n"
-#~ "Gradiente horizontal\n"
-#~ "Gradiente vertical"
-
-#~ msgid ""
-#~ "Text below items\n"
-#~ "Text beside items\n"
-#~ "Icons only\n"
-#~ "Text only"
-#~ msgstr ""
-#~ "Texto abaixo dos ícones\n"
-#~ "Texto ao lado dos ícones\n"
-#~ "Apenas ícones\n"
-#~ "Apenas texto"
-
-#~ msgid ""
-#~ "Tiled\n"
-#~ "Zoom\n"
-#~ "Centered\n"
-#~ "Scaled\n"
-#~ "Fill screen"
-#~ msgstr ""
-#~ "Lado-a-lado\n"
-#~ "Zoom\n"
-#~ "Centralizado\n"
-#~ "Escalado\n"
-#~ "Tela cheia"
-
-#~ msgid "_Copy"
-#~ msgstr "_Copiar"
-
-#~ msgid "_New"
-#~ msgstr "_Novo"
-
-#~ msgid "_Open"
-#~ msgstr "_Abrir"
-
-#~ msgid "_Print"
-#~ msgstr "_Imprimir"
-
-#~ msgid "_Quit"
-#~ msgstr "Sai_r"
-
-#~ msgid "_Save"
-#~ msgstr "_Salvar"
-
-#~ msgid ""
-#~ "Normal\n"
-#~ "Left\n"
-#~ "Right\n"
-#~ "Upside-down\n"
-#~ msgstr ""
-#~ "Normal\n"
-#~ "Esquerda\n"
-#~ "Direta\n"
-#~ "Cabeça para baixo\n"
-
-#~ msgid "Could not apply the selected configuration"
-#~ msgstr "Não foi possível aplicar a configuração selecionada"
-
-#~ msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
-#~ msgstr "Não foi possível obter org.gnome.SettingsDaemon.XRANDR"
-
-#~ msgid "_Command:"
-#~ msgstr "C_omando:"
-
-#~ msgid "/_About"
-#~ msgstr "/_Sobre"
-
-#~ msgid "Screen Resolution"
-#~ msgstr "Resolução de tela"
-
-#~ msgid "<b>_Wallpaper</b>"
-#~ msgstr "<b>_Papel de parede</b>"
-
-#~ msgid "No Wallpaper"
-#~ msgstr "Sem papel de parede"
-
-#~ msgid "Monitor Resolution Settings"
-#~ msgstr "Configurações de resolução do monitor"
-
-#~ msgid ""
-#~ "The X server does not support the XRANDR extension.  Runtime resolution "
-#~ "changes to the display size are not available."
-#~ msgstr ""
-#~ "O servidor X não tem suporte à extensão XRandR. As alterações de "
-#~ "resolução para o tamanho da tela não estão disponíveis durante o tempo de "
-#~ "execução."
-
-#~ msgid "Retrieve and store legacy settings"
-#~ msgstr "Recuperar e armazenar as configurações legadas"
-
-#~ msgid "Enable sound and associate sounds with events"
-#~ msgstr "Habilitar o som e associar os sons aos eventos"
-
-#~ msgid "Unknown Volume Control %d"
-#~ msgstr "Controle de volume desconhecido %d"
-
-#~ msgid "Failed to construct test pipeline for '%s'"
-#~ msgstr "Falha ao construir a linha de processamento de teste para \"%s\""
-
-#~ msgid "Not connected"
-#~ msgstr "Não conectado"
-
-#~ msgid "Autodetect"
-#~ msgstr "Autodetectar"
-
-#~ msgid "ALSA - Advanced Linux Sound Architecture"
-#~ msgstr "ALSA - Advanced Linux Sound Architecture"
-
-#~ msgid "Artsd - ART Sound Daemon"
-#~ msgstr "Artsd - ART Sound Daemon"
-
-#~ msgid "ESD - Enlightened Sound Daemon"
-#~ msgstr "ESD - Enlightened Sound Daemon"
-
-#~ msgid "OSS - Open Sound System"
-#~ msgstr "OSS - Open Sound System"
-
-#~ msgid "PulseAudio Sound Server"
-#~ msgstr "PulseAudio Sound Server"
-
-#~ msgid "Silence"
-#~ msgstr "Silêncio"
