@@ -50,6 +50,7 @@ typedef struct
   GtkFileChooser *wp_filesel;
   GtkWidget *wp_image;
   GSList *wp_uris;
+  gint frame;
 
   /* font */
   GtkWidget *font_details;

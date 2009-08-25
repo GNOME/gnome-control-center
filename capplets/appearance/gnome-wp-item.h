@@ -72,6 +72,9 @@ GnomeWPItem * gnome_wp_item_new (const gchar *filename,
 void gnome_wp_item_free (GnomeWPItem *item);
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem *item,
 					 GnomeDesktopThumbnailFactory *thumbs);
+GdkPixbuf * gnome_wp_item_get_frame_thumbnail (GnomeWPItem *item,
+					 GnomeDesktopThumbnailFactory *thumbs,
+                                         gint frame);
 void gnome_wp_item_update (GnomeWPItem *item);
 void gnome_wp_item_update_description (GnomeWPItem *item);
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);

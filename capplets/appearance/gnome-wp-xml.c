@@ -237,9 +237,9 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	  wp->name = g_strdup (wp->fileinfo->name);
 	}
 
+        gnome_wp_item_ensure_gnome_bg (wp);
 	gnome_wp_item_update_description (wp);
 	g_hash_table_insert (data->wp_hash, wp->filename, wp);
-        gnome_wp_item_ensure_gnome_bg (wp);
       } else {
 	gnome_wp_item_free (wp);
         wp = NULL;

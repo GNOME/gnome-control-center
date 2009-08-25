@@ -131,9 +131,7 @@ static void on_item_changed (GnomeBG *bg, AppearanceData *data) {
 
     pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
     if (pixbuf) {
-      gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
-                          0, pixbuf,
-                         -1);
+      gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter, 0, pixbuf, -1);
       g_object_unref (pixbuf);
     }
 
@@ -316,10 +314,7 @@ wp_scale_type_changed (GtkComboBox *combobox,
   item->options = gtk_combo_box_get_active (GTK_COMBO_BOX (data->wp_style_menu));
 
   pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
-  gtk_list_store_set (GTK_LIST_STORE (data->wp_model),
-                      &iter,
-                      0, pixbuf,
-                      -1);
+  gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter, 0, pixbuf, -1);
   if (pixbuf != NULL)
     g_object_unref (pixbuf);
 
@@ -344,9 +339,7 @@ wp_shade_type_changed (GtkWidget *combobox,
   item->shade_type = gtk_combo_box_get_active (GTK_COMBO_BOX (data->wp_color_menu));
 
   pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
-  gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
-                      0, pixbuf,
-                      -1);
+  gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter, 0, pixbuf, -1);
   if (pixbuf != NULL)
     g_object_unref (pixbuf);
 
@@ -991,6 +984,162 @@ wp_select_after_realize (GtkWidget *widget,
   select_item (data, item, TRUE);
 }
 
+static GdkPixbuf *buttons[3];
+
+static void
+create_button_images (AppearanceData  *data)
+{
+  GtkWidget *widget = (GtkWidget*)data->wp_view;
+  GtkIconSet *icon_set;
+  GdkPixbuf *pixbuf, *pb, *pb2;
+  gint i, w, h;
+
+  icon_set = gtk_style_lookup_icon_set (widget->style, "gtk-media-play");
+  pb = gtk_icon_set_render_icon (icon_set,
+                                 widget->style,
+                                 GTK_TEXT_DIR_RTL,
+                                 GTK_STATE_NORMAL,
+                                 GTK_ICON_SIZE_MENU,
+                                 widget,
+                                 NULL);
+  pb2 = gtk_icon_set_render_icon (icon_set,
+                                  widget->style,
+                                  GTK_TEXT_DIR_LTR,
+                                  GTK_STATE_NORMAL,
+                                  GTK_ICON_SIZE_MENU,
+                                  widget,
+                                  NULL);
+  w = gdk_pixbuf_get_width (pb);
+  h = gdk_pixbuf_get_height (pb);
+
+  for (i = 0; i < 3; i++) {
+    pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 2 * w, h);
+    gdk_pixbuf_fill (pixbuf, 0);
+    if (i > 0)
+      gdk_pixbuf_composite (pb, pixbuf, 0, 0, w, h, 0, 0, 1, 1, GDK_INTERP_NEAREST, 255);
+    if (i < 2)
+      gdk_pixbuf_composite (pb2, pixbuf, w, 0, w, h, w, 0, 1, 1, GDK_INTERP_NEAREST, 255);
+
+    buttons[i] = pixbuf;
+  }
+
+  g_object_unref (pb);
+  g_object_unref (pb2);
+}
+
+static gboolean
+next_frame (AppearanceData  *data,
+            GtkCellRenderer *cr,
+            gint             direction)
+{
+  GnomeWPItem *item;
+  GtkTreeIter iter;
+  GdkPixbuf *pixbuf, *pb;
+  gint frame;
+
+  pixbuf = NULL;
+
+  frame = data->frame + direction;
+  item = get_selected_item (data, &iter);
+
+  if (frame >= 0)
+    pixbuf = gnome_wp_item_get_frame_thumbnail (item, data->thumb_factory, frame);
+  if (pixbuf) {
+    gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter, 0, pixbuf, -1);
+    g_object_unref (pixbuf);
+    data->frame = frame;
+  }
+
+  pb = buttons[1];
+  if (direction < 0) {
+    if (frame == 0)
+      pb = buttons[0];
+  }
+  else {
+    pixbuf = gnome_wp_item_get_frame_thumbnail (item, data->thumb_factory, frame + 1);
+    if (pixbuf)
+      g_object_unref (pixbuf);
+    else
+      pb = buttons[2];
+  }
+  g_object_set (cr, "pixbuf", pb, NULL);
+}
+
+static gboolean
+wp_button_press_cb (GtkWidget      *widget,
+                    GdkEventButton *event,
+                    AppearanceData *data)
+{
+  GtkCellRenderer *cell;
+  GdkEventButton *button_event = (GdkEventButton *) event;
+
+  if (event->type != GDK_BUTTON_PRESS)
+    return FALSE;
+
+  if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW (widget),
+                                     button_event->x, button_event->y,
+                                     NULL, &cell)) {
+    if (g_object_get_data (G_OBJECT (cell), "buttons")) {
+      gint w, h;
+      GtkCellRenderer *cell2 = NULL;
+      gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+      if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW (widget),
+                                         button_event->x + w, button_event->y,
+                                         NULL, &cell2) && cell == cell2)
+        next_frame (data, cell, -1);
+      else
+        next_frame (data, cell, 1);
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+static void
+wp_selected_changed_cb (GtkIconView    *view,
+                        AppearanceData *data)
+{
+  GtkCellRenderer *cr;
+  GList *cells, *l;
+
+  data->frame = -1;
+
+  cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (data->wp_view));
+  for (l = cells; l; l = l->next) {
+    cr = l->data;
+    if (g_object_get_data (cr, "buttons"))
+      g_object_set (cr, "pixbuf", buttons[0], NULL);
+  }
+  g_list_free (cells);
+}
+
+static void
+buttons_cell_data_func (GtkCellLayout   *layout,
+                        GtkCellRenderer *cell,
+                        GtkTreeModel    *model,
+                        GtkTreeIter     *iter,
+                        gpointer         user_data)
+{
+  AppearanceData *data = user_data;
+  GtkTreePath *path;
+  GnomeWPItem *item;
+  gboolean visible;
+
+  path = gtk_tree_model_get_path (model, iter);
+
+  if (gtk_icon_view_path_is_selected (GTK_ICON_VIEW (layout), path)) {
+    item = get_selected_item (data, NULL);
+    visible = gnome_bg_changes_with_time (item->bg);
+  }
+  else
+    visible = FALSE;
+
+  g_object_set (G_OBJECT (cell), "visible", visible, NULL);
+
+  gtk_tree_path_free (path);
+}
+
 void
 desktop_init (AppearanceData *data,
 	      const gchar **uris)
@@ -1066,6 +1215,24 @@ desktop_init (AppearanceData *data,
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (data->wp_view), cr,
                                   "pixbuf", 0,
                                   NULL);
+
+  cr = gtk_cell_renderer_pixbuf_new ();
+  create_button_images (data);
+  g_object_set (cr,
+                "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE,
+                "pixbuf", buttons[0],
+                NULL);
+  g_object_set_data (G_OBJECT (cr), "buttons", GINT_TO_POINTER (TRUE));
+
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (data->wp_view), cr, FALSE);
+  gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (data->wp_view), cr,
+                                      buttons_cell_data_func, data, NULL);
+  g_signal_connect (data->wp_view, "selection-changed",
+                    (GCallback) wp_selected_changed_cb, data);
+  g_signal_connect (data->wp_view, "button-press-event",
+                    G_CALLBACK (wp_button_press_cb), data);
+
+  data->frame = -1;
 
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (data->wp_model), 2,
                                    (GtkTreeIterCompareFunc) wp_list_sort,
