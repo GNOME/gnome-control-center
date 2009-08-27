@@ -140,8 +140,8 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
       item->name = g_filename_to_utf8 (item->fileinfo->name, -1, NULL,
 				       NULL, NULL);
 
-    gnome_wp_item_ensure_gnome_bg (item);
     gnome_wp_item_update (item);
+    gnome_wp_item_ensure_gnome_bg (item);
     gnome_wp_item_update_description (item);
 
     g_hash_table_insert (wallpapers, item->filename, item);
