@@ -336,9 +336,9 @@ static void gnome_wp_xml_load_from_dir (const gchar *path,
 }
 
 void gnome_wp_xml_load_list (AppearanceData *data) {
-  const gchar * xdgdirslist;
+  const char * const *system_data_dirs;
+  gchar * datadir;
   gchar * wpdbfile;
-  gchar ** xdgdirs;
   gint i;
 
   wpdbfile = g_build_filename (g_get_home_dir (),
@@ -360,20 +360,20 @@ void gnome_wp_xml_load_list (AppearanceData *data) {
   }
   g_free (wpdbfile);
 
-  xdgdirslist = g_getenv ("XDG_DATA_DIRS");
-  if (xdgdirslist == NULL || strcmp (xdgdirslist, "") == 0)
-    xdgdirslist = "/usr/local/share:/usr/share";
+  datadir = g_build_filename (g_get_user_data_dir (),
+                              "gnome-background-properties",
+                              NULL);
+  gnome_wp_xml_load_from_dir (datadir, data);
+  g_free (datadir);
 
-  xdgdirs = g_strsplit (xdgdirslist, ":", -1);
-  for (i = 0; xdgdirs && xdgdirs[i]; i++) {
-    gchar * datadir;
-
-    datadir = g_build_filename (xdgdirs[i], "gnome-background-properties",
+  system_data_dirs = g_get_system_data_dirs ();
+  for (i = 0; system_data_dirs[i]; i++) {
+    datadir = g_build_filename (system_data_dirs[i],
+                                "gnome-background-properties",
 				NULL);
     gnome_wp_xml_load_from_dir (datadir, data);
     g_free (datadir);
   }
-  g_strfreev (xdgdirs);
 
   gnome_wp_xml_load_from_dir (WALLPAPER_DATADIR, data);
 
