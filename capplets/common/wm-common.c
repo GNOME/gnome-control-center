@@ -15,10 +15,10 @@ typedef struct _WMCallbackData
 /* Our WM Window */
 static Window wm_window = None;
 
-char*
-wm_common_get_current_window_manager (void)
+static char *
+wm_common_get_window_manager_property (Atom atom)
 {
-  Atom utf8_string, atom, type;
+  Atom utf8_string, type;
   int result;
   char *retval;
   int format;
@@ -30,7 +30,6 @@ wm_common_get_current_window_manager (void)
     return g_strdup (WM_COMMON_UNKNOWN);
 
   utf8_string = XInternAtom (GDK_DISPLAY (), "UTF8_STRING", False);
-  atom = XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False);
 
   gdk_error_trap_push ();
 
@@ -58,6 +57,49 @@ wm_common_get_current_window_manager (void)
     XFree (val);
 
   return retval;
+}
+
+char*
+wm_common_get_current_window_manager (void)
+{
+  Atom atom = XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False);
+  char *result;
+
+  result = wm_common_get_window_manager_property (atom);
+  if (result)
+    return result;
+  else
+    return g_strdup (WM_COMMON_UNKNOWN);
+}
+
+char**
+wm_common_get_current_keybindings (void)
+{
+  Atom keybindings_atom = XInternAtom (GDK_DISPLAY (), "_GNOME_WM_KEYBINDINGS", False);
+  char *keybindings = wm_common_get_window_manager_property (keybindings_atom);
+  char **results;
+
+  if (keybindings)
+    {
+      char **p;
+      results = g_strsplit(keybindings, ",", -1);
+      for (p = results; *p; p++)
+	g_strstrip (*p);
+      g_free (keybindings);
+    }
+  else
+    {
+      Atom wm_atom = XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False);
+      char *wm_name = wm_common_get_window_manager_property (wm_atom);
+      char *to_copy[] = { NULL, NULL };
+
+      to_copy[0] = wm_name;
+
+      results = g_strdupv (to_copy);
+      g_free (wm_name);
+    }
+
+  return results;
 }
 
 static void

@@ -816,10 +816,22 @@ parse_start_tag (GMarkupParseContext *ctx,
   g_array_append_val (keylist->entries, key);
 }
 
+static gboolean
+strv_contains (char **strv,
+	       char  *str)
+{
+  char **p = strv;
+  for (p = strv; *p; p++)
+    if (strcmp (*p, str) == 0)
+      return TRUE;
+
+  return FALSE;
+}
+
 static void
 append_keys_to_tree_from_file (GtkBuilder *builder,
 			       const char *filename,
-			       const char *wm_name)
+			       char      **wm_keybindings)
 {
   GMarkupParseContext *ctx;
   GMarkupParser parser = { parse_start_tag, NULL, NULL, NULL, NULL };
@@ -860,7 +872,7 @@ append_keys_to_tree_from_file (GtkBuilder *builder,
   /* If there's no keys to add, or the settings apply to a window manager
    * that's not the one we're running */
   if (keylist->entries->len == 0
-      || (keylist->wm_name != NULL && !g_str_equal (wm_name, keylist->wm_name))
+      || (keylist->wm_name != NULL && strv_contains (wm_keybindings, keylist->wm_name))
       || keylist->name == NULL)
     {
       g_free (keylist->name);
@@ -951,11 +963,14 @@ append_keys_to_tree_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
 }
 
 static void
-reload_key_entries (gpointer wm_name, GtkBuilder *builder)
+reload_key_entries (GtkBuilder *builder)
 {
+  gchar **wm_keybindings;
   GDir *dir;
   const char *name;
   GList *list, *l;
+
+  wm_keybindings = wm_common_get_current_keybindings();
 
   clear_old_model (builder);
 
@@ -979,7 +994,7 @@ reload_key_entries (gpointer wm_name, GtkBuilder *builder)
         gchar *path;
 
 	path = g_build_filename (GNOMECC_KEYBINDINGS_DIR, l->data, NULL);
-        append_keys_to_tree_from_file (builder, path, wm_name);
+        append_keys_to_tree_from_file (builder, path, wm_keybindings);
 	g_free (l->data);
 	g_free (path);
     }
@@ -991,6 +1006,8 @@ reload_key_entries (gpointer wm_name, GtkBuilder *builder)
    * such keys not show up in the custom section.
    */
   append_keys_to_tree_from_gconf (builder, GCONF_BINDING_DIR);
+
+  g_strfreev (wm_keybindings);
 }
 
 static void
@@ -999,9 +1016,7 @@ key_entry_controlling_key_changed (GConfClient *client,
 				   GConfEntry  *entry,
 				   gpointer     user_data)
 {
-  gchar *wm_name = wm_common_get_current_window_manager();
-  reload_key_entries (wm_name, user_data);
-  g_free (wm_name);
+  reload_key_entries (user_data);
 }
 
 static gboolean
@@ -1795,7 +1810,6 @@ setup_dialog (GtkBuilder *builder)
   GtkTreeViewColumn *column;
   GtkWidget *widget;
   GtkTreeView *treeview;
-  gchar *wm_name;
   GtkTreeSelection *selection;
   GSList *allowed_keys;
 
@@ -1852,9 +1866,7 @@ setup_dialog (GtkBuilder *builder)
 			   builder, NULL, NULL);
 
   /* set up the dialog */
-  wm_name = wm_common_get_current_window_manager();
   reload_key_entries (wm_name, builder);
-  g_free (wm_name);
 
   widget = _gtk_builder_get_widget (builder, "gnome-keybinding-dialog");
   capplet_set_icon (widget, "preferences-desktop-keyboard-shortcuts");
@@ -1895,6 +1907,12 @@ setup_dialog (GtkBuilder *builder)
                                 GTK_WINDOW (widget));
 }
 
+static void
+on_window_manager_change (const char *wm_name, GtkBuilder *builder)
+{
+  reload_key_entries (builder);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -1916,7 +1934,7 @@ main (int argc, char *argv[])
   if (!builder) /* Warning was already printed to console */
     exit (EXIT_FAILURE);
 
-  wm_common_register_window_manager_change ((GFunc) reload_key_entries, builder);
+  wm_common_register_window_manager_change ((GFunc) on_window_manager_change, dialog);
   setup_dialog (builder);
 
   gtk_main ();
