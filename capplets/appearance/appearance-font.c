@@ -830,6 +830,8 @@ cb_show_details (GtkWidget *button,
     /* pick a sensible maximum dpi */
     adjustment = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (widget));
     adjustment->upper = DPI_HIGH_REASONABLE_VALUE;
+    adjustment->lower = DPI_LOW_REASONABLE_VALUE;
+    adjustment->step_increment = 1;
 
     dpi_load (data->client, GTK_SPIN_BUTTON (widget));
     g_signal_connect (widget, "value_changed",
