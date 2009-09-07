@@ -1027,7 +1027,7 @@ create_button_images (AppearanceData  *data)
   g_object_unref (pb2);
 }
 
-static gboolean
+static void
 next_frame (AppearanceData  *data,
             GtkCellRenderer *cr,
             gint             direction)
@@ -1108,7 +1108,7 @@ wp_selected_changed_cb (GtkIconView    *view,
   cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (data->wp_view));
   for (l = cells; l; l = l->next) {
     cr = l->data;
-    if (g_object_get_data (cr, "buttons"))
+    if (g_object_get_data (G_OBJECT (cr), "buttons"))
       g_object_set (cr, "pixbuf", buttons[0], NULL);
   }
   g_list_free (cells);
