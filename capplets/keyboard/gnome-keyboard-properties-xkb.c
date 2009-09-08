@@ -134,6 +134,10 @@ reset_to_defaults (GtkWidget * button, GtkBuilder * dialog)
 	gkbd_keyboard_config_save_to_gconf (&empty_kbd_config);
 	gkbd_keyboard_config_term (&empty_kbd_config);
 
+	gconf_client_unset (xkb_gconf_client,
+			      GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
+			      NULL);
+
 	/* all the rest is g-s-d's business */
 }
 

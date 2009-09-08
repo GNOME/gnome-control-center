@@ -154,7 +154,7 @@ def_group_in_gconf_changed (GConfClient * client,
 				    (GTK_TREE_VIEW (tree_view)));
 		GtkTreeIter iter;
 		int counter = 0;
-		default_group = gconf_value_get_int (value);
+		default_group = MAX(0, gconf_value_get_int (value));
 		if (gtk_tree_model_get_iter_first (model, &iter)) {
 			do {
 				gboolean cur_val;
