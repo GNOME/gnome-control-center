@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-24 21:59+0300\n"
-"PO-Revision-Date: 2009-08-24 21:55+0300\n"
+"POT-Creation-Date: 2009-09-08 08:00+0300\n"
+"PO-Revision-Date: 2009-09-08 07:59+0300\n"
 "Last-Translator: Krasimir \"Bfaf\" Chonov <mk2616@abv.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,12 +28,36 @@ msgid "Current network location"
 msgstr "Текущо местоположение"
 
 #: ../gnome-control-center.schemas.in.h:2
+msgid "More backgrounds URL"
+msgstr "Адрес за допълнителни фонове"
+
+#: ../gnome-control-center.schemas.in.h:3
+msgid "More themes URL"
+msgstr "Адрес за допълнителни теми"
+
+#: ../gnome-control-center.schemas.in.h:4
 msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
 msgstr ""
 "Задайте да е текущото ви местоположение. Използва се за определянето на "
 "подходящ сървър-посредник."
+
+#: ../gnome-control-center.schemas.in.h:5
+msgid ""
+"URL for where to get more desktop backgrounds. If set to an empty string the "
+"link will not appear."
+msgstr ""
+"Адрес, от който могат да се изтеглят допълнителни фонове за работното място. "
+"Ако този ключ е празен низ, връзката няма да се показва."
+
+#: ../gnome-control-center.schemas.in.h:6
+msgid ""
+"URL for where to get more desktop themes. If set to an empty string the link "
+"will not appear."
+msgstr ""
+"Адрес, от който могат да се изтеглят допълнителни теми за работното място. "
+"Ако този ключ е празен низ, връзката няма да се показва."
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -197,7 +221,7 @@ msgid "No Image"
 msgstr "Няма изображение"
 
 #: ../capplets/about-me/gnome-about-me.c:742
-#: ../capplets/appearance/appearance-desktop.c:661
+#: ../capplets/appearance/appearance-desktop.c:654
 msgid "Images"
 msgstr "Изображения"
 
@@ -783,11 +807,11 @@ msgstr "П_редпочитани програми"
 msgid "Choose which accessibility features to enable when you log in"
 msgstr "Изберете кои помощни технологии да се включат при влизане"
 
-#: ../capplets/appearance/appearance-desktop.c:630
+#: ../capplets/appearance/appearance-desktop.c:623
 msgid "Add Wallpaper"
 msgstr "Добавяне на фон"
 
-#: ../capplets/appearance/appearance-desktop.c:665
+#: ../capplets/appearance/appearance-desktop.c:658
 msgid "All files"
 msgstr "Всички файлове"
 
@@ -946,7 +970,7 @@ msgstr "Последното предложение за шрифт може д�
 msgid "The current theme suggests a font."
 msgstr "Текущата тема предлага шрифт."
 
-#: ../capplets/appearance/appearance-themes.c:1044
+#: ../capplets/appearance/appearance-themes.c:1045
 #: ../capplets/default-applications/gnome-da-capplet.c:646
 msgid "Custom"
 msgstr "Потребителски"
@@ -968,8 +992,8 @@ msgid "Best co_ntrast"
 msgstr "Най-добър _контраст"
 
 #: ../capplets/appearance/data/appearance.ui.h:5
-msgid "C_olors"
-msgstr "_Цветове"
+msgid "C_olors:"
+msgstr "_Цветове:"
 
 #: ../capplets/appearance/data/appearance.ui.h:6
 msgid "C_ustomize..."
@@ -1022,267 +1046,271 @@ msgid "Fonts"
 msgstr "Шрифтове"
 
 #: ../capplets/appearance/data/appearance.ui.h:18
+msgid "Get more backgrounds online"
+msgstr "Допълнителни фонове от Интернет"
+
+#: ../capplets/appearance/data/appearance.ui.h:19
+msgid "Get more themes online"
+msgstr "Допълнителни теми от Интернет"
+
+#: ../capplets/appearance/data/appearance.ui.h:20
 msgid "Gra_yscale"
 msgstr "С_тепени на сивото"
 
 #. font hinting
-#: ../capplets/appearance/data/appearance.ui.h:20
+#: ../capplets/appearance/data/appearance.ui.h:22
 msgid "Hinting"
 msgstr "Шрифтови подсказки"
 
-#: ../capplets/appearance/data/appearance.ui.h:21
+#: ../capplets/appearance/data/appearance.ui.h:23
 msgid "Horizontal gradient"
 msgstr "хоризонтална преливка"
 
-#: ../capplets/appearance/data/appearance.ui.h:22
+#: ../capplets/appearance/data/appearance.ui.h:24
 msgid "Icons"
 msgstr "Икони"
 
-#: ../capplets/appearance/data/appearance.ui.h:23
+#: ../capplets/appearance/data/appearance.ui.h:25
 msgid "Icons only"
 msgstr "само икони"
 
-#: ../capplets/appearance/data/appearance.ui.h:24
+#: ../capplets/appearance/data/appearance.ui.h:26
 msgid "Interface"
 msgstr "Интерфейс"
 
-#: ../capplets/appearance/data/appearance.ui.h:25
+#: ../capplets/appearance/data/appearance.ui.h:27
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:16
 msgid "Large"
 msgstr "Голям"
 
-#: ../capplets/appearance/data/appearance.ui.h:26
+#: ../capplets/appearance/data/appearance.ui.h:28
 msgid "Menus and Toolbars"
 msgstr "Менюта и ленти с инструменти"
 
-#: ../capplets/appearance/data/appearance.ui.h:27
+#: ../capplets/appearance/data/appearance.ui.h:29
 msgid "N_one"
 msgstr "Б_ез"
 
-#: ../capplets/appearance/data/appearance.ui.h:28
+#: ../capplets/appearance/data/appearance.ui.h:30
 msgid "Open a dialog to specify the color"
 msgstr "Отваряне на прозорец, за да се определи цвета"
 
-#: ../capplets/appearance/data/appearance.ui.h:29
+#: ../capplets/appearance/data/appearance.ui.h:31
 msgid "Pointer"
 msgstr "Показалци"
 
-#: ../capplets/appearance/data/appearance.ui.h:30
+#: ../capplets/appearance/data/appearance.ui.h:32
 msgid "Preview"
 msgstr "Предварителен преглед"
 
-#: ../capplets/appearance/data/appearance.ui.h:31
+#: ../capplets/appearance/data/appearance.ui.h:33
 msgid "R_esolution:"
 msgstr "_Разделителна способност:"
 
-#: ../capplets/appearance/data/appearance.ui.h:32
+#: ../capplets/appearance/data/appearance.ui.h:34
 msgid "Rendering"
 msgstr "<b>Изписване на шрифтовете</b>"
 
-#: ../capplets/appearance/data/appearance.ui.h:33
+#: ../capplets/appearance/data/appearance.ui.h:35
 msgid "Save Theme As..."
 msgstr "Запазване на темата като…"
 
-#: ../capplets/appearance/data/appearance.ui.h:34
+#: ../capplets/appearance/data/appearance.ui.h:36
 msgid "Save _As..."
 msgstr "Запазване _като…"
 
-#: ../capplets/appearance/data/appearance.ui.h:35
+#: ../capplets/appearance/data/appearance.ui.h:37
 msgid "Save _background image"
 msgstr "Запазване на _фона"
 
-#: ../capplets/appearance/data/appearance.ui.h:36
+#: ../capplets/appearance/data/appearance.ui.h:38
 msgid "Scaled"
 msgstr "увеличаване в екрана"
 
-#: ../capplets/appearance/data/appearance.ui.h:37
+#: ../capplets/appearance/data/appearance.ui.h:39
 msgid "Show _icons in menus"
 msgstr "Показване на _икони в менютата"
 
-#: ../capplets/appearance/data/appearance.ui.h:38
+#: ../capplets/appearance/data/appearance.ui.h:40
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:30
 msgid "Small"
 msgstr "Малък"
 
-#: ../capplets/appearance/data/appearance.ui.h:39
+#: ../capplets/appearance/data/appearance.ui.h:41
 msgid "Smoothing"
 msgstr "Заглаждане"
 
-#: ../capplets/appearance/data/appearance.ui.h:40
+#: ../capplets/appearance/data/appearance.ui.h:42
 msgid "Solid color"
 msgstr "плътен цвят"
 
-#: ../capplets/appearance/data/appearance.ui.h:41
+#: ../capplets/appearance/data/appearance.ui.h:43
 msgid "Sub_pixel (LCDs)"
 msgstr "_Подпикселно (за LCD)"
 
-#: ../capplets/appearance/data/appearance.ui.h:42
+#: ../capplets/appearance/data/appearance.ui.h:44
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Подпикселно за_глаждане (за LCD)"
 
-#: ../capplets/appearance/data/appearance.ui.h:43
+#: ../capplets/appearance/data/appearance.ui.h:45
 msgid "Subpixel Order"
 msgstr "Подпикселна подредба"
 
-#: ../capplets/appearance/data/appearance.ui.h:44
+#: ../capplets/appearance/data/appearance.ui.h:46
 msgid "Text"
 msgstr "Текст"
 
-#: ../capplets/appearance/data/appearance.ui.h:45
+#: ../capplets/appearance/data/appearance.ui.h:47
 msgid "Text below items"
 msgstr "текст под иконите"
 
-#: ../capplets/appearance/data/appearance.ui.h:46
+#: ../capplets/appearance/data/appearance.ui.h:48
 msgid "Text beside items"
 msgstr "текст до иконите"
 
-#: ../capplets/appearance/data/appearance.ui.h:47
+#: ../capplets/appearance/data/appearance.ui.h:49
 msgid "Text only"
 msgstr "само текст"
 
-#: ../capplets/appearance/data/appearance.ui.h:48
+#: ../capplets/appearance/data/appearance.ui.h:50
 msgid "The current controls theme does not support color schemes."
 msgstr "Текущата тема за графични обекти не поддържа цветови схеми."
 
-#: ../capplets/appearance/data/appearance.ui.h:49
+#: ../capplets/appearance/data/appearance.ui.h:51
 msgid "Theme"
 msgstr "Тема"
 
-#: ../capplets/appearance/data/appearance.ui.h:50
+#: ../capplets/appearance/data/appearance.ui.h:52
 msgid "Tiled"
 msgstr "на плочки"
 
-#: ../capplets/appearance/data/appearance.ui.h:51
+#: ../capplets/appearance/data/appearance.ui.h:53
 msgid "Toolbar _button labels:"
 msgstr "Етикети на _бутоните в лентата с инструментите:"
 
 #. vertical hinting, pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.ui.h:53
+#: ../capplets/appearance/data/appearance.ui.h:55
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: ../capplets/appearance/data/appearance.ui.h:54
+#: ../capplets/appearance/data/appearance.ui.h:56
 msgid "Vertical gradient"
 msgstr "вертикална преливка"
 
-#: ../capplets/appearance/data/appearance.ui.h:55
+#: ../capplets/appearance/data/appearance.ui.h:57
 msgid "Window Border"
 msgstr "Рамки на прозорците"
 
-#: ../capplets/appearance/data/appearance.ui.h:56
+#: ../capplets/appearance/data/appearance.ui.h:58
 msgid "Zoom"
 msgstr "дисплеят да е вътре"
 
-#: ../capplets/appearance/data/appearance.ui.h:57
+#: ../capplets/appearance/data/appearance.ui.h:59
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 msgid "_Add..."
 msgstr "_Добавяне…"
 
-#: ../capplets/appearance/data/appearance.ui.h:58
+#: ../capplets/appearance/data/appearance.ui.h:60
 msgid "_Application font:"
 msgstr "_Шрифт за програмите:"
 
 #. pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.ui.h:60
+#: ../capplets/appearance/data/appearance.ui.h:62
 msgid "_BGR"
 msgstr "_BGR"
 
-#: ../capplets/appearance/data/appearance.ui.h:61
+#: ../capplets/appearance/data/appearance.ui.h:63
 msgid "_Description:"
 msgstr "_Описание:"
 
-#: ../capplets/appearance/data/appearance.ui.h:62
-msgid "_Desktop Background"
-msgstr "_Фон на работния плот"
-
-#: ../capplets/appearance/data/appearance.ui.h:63
+#: ../capplets/appearance/data/appearance.ui.h:64
 msgid "_Document font:"
 msgstr "Шрифт за _документите:"
 
-#: ../capplets/appearance/data/appearance.ui.h:64
+#: ../capplets/appearance/data/appearance.ui.h:65
 msgid "_Editable menu shortcut keys"
 msgstr "_Редактируеми ускорители на менюто"
 
-#: ../capplets/appearance/data/appearance.ui.h:65
+#: ../capplets/appearance/data/appearance.ui.h:66
 msgid "_File"
 msgstr "_Файл"
 
-#: ../capplets/appearance/data/appearance.ui.h:66
+#: ../capplets/appearance/data/appearance.ui.h:67
 msgid "_Fixed width font:"
 msgstr "Р_авноширок шрифт:"
 
-#: ../capplets/appearance/data/appearance.ui.h:67
+#: ../capplets/appearance/data/appearance.ui.h:68
 msgid "_Full"
 msgstr "П_ълни"
 
-#: ../capplets/appearance/data/appearance.ui.h:68
+#: ../capplets/appearance/data/appearance.ui.h:69
 msgid "_Input boxes:"
 msgstr "_Кутии за въвеждане:"
 
-#: ../capplets/appearance/data/appearance.ui.h:69
+#: ../capplets/appearance/data/appearance.ui.h:70
 msgid "_Install..."
 msgstr "_Инсталиране…"
 
-#: ../capplets/appearance/data/appearance.ui.h:70
+#: ../capplets/appearance/data/appearance.ui.h:71
 msgid "_Medium"
 msgstr "_Средни"
 
-#: ../capplets/appearance/data/appearance.ui.h:71
+#: ../capplets/appearance/data/appearance.ui.h:72
 msgid "_Monochrome"
 msgstr "_Черно-бяло"
 
-#: ../capplets/appearance/data/appearance.ui.h:72
+#: ../capplets/appearance/data/appearance.ui.h:73
 #: ../capplets/keybindings/gnome-keybinding-properties.ui.h:5
 msgid "_Name:"
 msgstr "_Име:"
 
-#: ../capplets/appearance/data/appearance.ui.h:73
+#: ../capplets/appearance/data/appearance.ui.h:74
 msgid "_None"
 msgstr "_Без"
 
 #. pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.ui.h:75
+#: ../capplets/appearance/data/appearance.ui.h:76
 msgid "_RGB"
 msgstr "_RGB"
 
-#: ../capplets/appearance/data/appearance.ui.h:76
+#: ../capplets/appearance/data/appearance.ui.h:77
 msgid "_Reset to Defaults"
 msgstr "_Стандартни настройки"
 
-#: ../capplets/appearance/data/appearance.ui.h:77
+#: ../capplets/appearance/data/appearance.ui.h:78
 msgid "_Selected items:"
 msgstr "_Избрани записи:"
 
-#: ../capplets/appearance/data/appearance.ui.h:78
+#: ../capplets/appearance/data/appearance.ui.h:79
 msgid "_Size:"
 msgstr "_Размер:"
 
-#: ../capplets/appearance/data/appearance.ui.h:79
+#: ../capplets/appearance/data/appearance.ui.h:80
 msgid "_Slight"
 msgstr "_Леки"
 
-#: ../capplets/appearance/data/appearance.ui.h:80
+#: ../capplets/appearance/data/appearance.ui.h:81
 msgid "_Style:"
 msgstr "_Стил:"
 
-#: ../capplets/appearance/data/appearance.ui.h:81
+#: ../capplets/appearance/data/appearance.ui.h:82
 msgid "_Tooltips:"
 msgstr "_Съвети:"
 
 #. vertical hinting, pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.ui.h:83
+#: ../capplets/appearance/data/appearance.ui.h:84
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: ../capplets/appearance/data/appearance.ui.h:84
+#: ../capplets/appearance/data/appearance.ui.h:85
 msgid "_Window title font:"
 msgstr "Шрифт за _заглавието на прозорците"
 
-#: ../capplets/appearance/data/appearance.ui.h:85
+#: ../capplets/appearance/data/appearance.ui.h:86
 msgid "_Windows:"
 msgstr "П_розорци:"
 
-#: ../capplets/appearance/data/appearance.ui.h:86
+#: ../capplets/appearance/data/appearance.ui.h:87
 msgid "dots per inch"
 msgstr "точки на инч"
 
@@ -1310,31 +1338,39 @@ msgstr "Пакет с тема за GNOME"
 msgid "No Desktop Background"
 msgstr "Без фон на работния плот"
 
-#: ../capplets/appearance/gnome-wp-item.c:208
+#: ../capplets/appearance/gnome-wp-item.c:258
 msgid "Slide Show"
 msgstr "Прожекция"
 
-#. translators: <b>wallpaper name</b>
-#. * mime type, x pixel(s) by y pixel(s)
-#. * Folder: /path/to/file
-#.
-#: ../capplets/appearance/gnome-wp-item.c:216
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %d %s by %d %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %d %s на %d %s\n"
-"Папка: %s"
+#: ../capplets/appearance/gnome-wp-item.c:260
+msgid "Image"
+msgstr "Изображение"
 
-#: ../capplets/appearance/gnome-wp-item.c:222
-#: ../capplets/appearance/gnome-wp-item.c:224
+#: ../capplets/appearance/gnome-wp-item.c:266
+msgid "multiple sizes"
+msgstr "различни размери"
+
+#: ../capplets/appearance/gnome-wp-item.c:271
+#: ../capplets/appearance/gnome-wp-item.c:273
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "пиксел"
 msgstr[1] "пиксела"
+
+#. translators: <b>wallpaper name</b>
+#. * mime type, size
+#. * Folder: /path/to/file
+#.
+#: ../capplets/appearance/gnome-wp-item.c:279
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Папка: %s"
 
 #: ../capplets/appearance/theme-installer.c:178
 #: ../capplets/appearance/theme-installer.c:234
