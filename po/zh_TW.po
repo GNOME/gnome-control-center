@@ -10,10 +10,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.27.90\n"
+"Project-Id-Version: gnome-control-center 2.27.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-24 06:35+0800\n"
-"PO-Revision-Date: 2009-08-24 06:17+0800\n"
+"POT-Creation-Date: 2009-09-13 06:22+0800\n"
+"PO-Revision-Date: 2009-09-13 06:16+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <zh-l10n@lists.linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -26,10 +26,30 @@ msgid "Current network location"
 msgstr "目前的網路位置"
 
 #: ../gnome-control-center.schemas.in.h:2
+msgid "More backgrounds URL"
+msgstr "更多背景 URL"
+
+#: ../gnome-control-center.schemas.in.h:3
+msgid "More themes URL"
+msgstr "更多佈景主題 URL"
+
+#: ../gnome-control-center.schemas.in.h:4
 msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
 msgstr "將此項設定為您目前的位置名稱。這是用來決定合適的網路代理伺服器組態。"
+
+#: ../gnome-control-center.schemas.in.h:5
+msgid ""
+"URL for where to get more desktop backgrounds. If set to an empty string the "
+"link will not appear."
+msgstr "可以取得更多桌面背景的 URL。如果設定為空字串則不會顯示連結。"
+
+#: ../gnome-control-center.schemas.in.h:6
+msgid ""
+"URL for where to get more desktop themes. If set to an empty string the link "
+"will not appear."
+msgstr "可以取得更多桌面主題的 URL。如果設定為空字串則不會顯示連結。"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -193,7 +213,7 @@ msgid "No Image"
 msgstr "沒有圖片"
 
 #: ../capplets/about-me/gnome-about-me.c:742
-#: ../capplets/appearance/appearance-desktop.c:661
+#: ../capplets/appearance/appearance-desktop.c:654
 msgid "Images"
 msgstr "圖片"
 
@@ -765,11 +785,11 @@ msgstr "首選應用程式(_P)"
 msgid "Choose which accessibility features to enable when you log in"
 msgstr "選擇當您登入時要啟用哪個無障礙功能"
 
-#: ../capplets/appearance/appearance-desktop.c:630
+#: ../capplets/appearance/appearance-desktop.c:623
 msgid "Add Wallpaper"
 msgstr "加入桌布"
 
-#: ../capplets/appearance/appearance-desktop.c:665
+#: ../capplets/appearance/appearance-desktop.c:658
 msgid "All files"
 msgstr "所有檔案"
 
@@ -906,7 +926,7 @@ msgstr "上次套用的建議字型會被還原。"
 msgid "The current theme suggests a font."
 msgstr "本佈景主題建議使用指定的字型。"
 
-#: ../capplets/appearance/appearance-themes.c:1044
+#: ../capplets/appearance/appearance-themes.c:1045
 #: ../capplets/default-applications/gnome-da-capplet.c:646
 msgid "Custom"
 msgstr "自訂"
@@ -928,8 +948,8 @@ msgid "Best co_ntrast"
 msgstr "最佳對比(_N)"
 
 #: ../capplets/appearance/data/appearance.ui.h:5
-msgid "C_olors"
-msgstr "顏色(_O)"
+msgid "C_olors:"
+msgstr "顏色(_O):"
 
 #: ../capplets/appearance/data/appearance.ui.h:6
 msgid "C_ustomize..."
@@ -980,268 +1000,271 @@ msgid "Fonts"
 msgstr "字型"
 
 #: ../capplets/appearance/data/appearance.ui.h:18
+msgid "Get more backgrounds online"
+msgstr "線上取得更多背景"
+
+#: ../capplets/appearance/data/appearance.ui.h:19
+msgid "Get more themes online"
+msgstr "線上取得更多佈景主題"
+
+#: ../capplets/appearance/data/appearance.ui.h:20
 msgid "Gra_yscale"
 msgstr "灰階(_Y)"
 
 #. font hinting
-#: ../capplets/appearance/data/appearance.ui.h:20
-#, fuzzy
+#: ../capplets/appearance/data/appearance.ui.h:22
 msgid "Hinting"
-msgstr "Hinting"
+msgstr "字型提示"
 
-#: ../capplets/appearance/data/appearance.ui.h:21
+#: ../capplets/appearance/data/appearance.ui.h:23
 msgid "Horizontal gradient"
 msgstr "水平漸層"
 
-#: ../capplets/appearance/data/appearance.ui.h:22
+#: ../capplets/appearance/data/appearance.ui.h:24
 msgid "Icons"
 msgstr "圖示"
 
-#: ../capplets/appearance/data/appearance.ui.h:23
+#: ../capplets/appearance/data/appearance.ui.h:25
 msgid "Icons only"
 msgstr "只有圖示"
 
-#: ../capplets/appearance/data/appearance.ui.h:24
+#: ../capplets/appearance/data/appearance.ui.h:26
 msgid "Interface"
 msgstr "介面"
 
-#: ../capplets/appearance/data/appearance.ui.h:25
+#: ../capplets/appearance/data/appearance.ui.h:27
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:16
 msgid "Large"
 msgstr "大"
 
-#: ../capplets/appearance/data/appearance.ui.h:26
+#: ../capplets/appearance/data/appearance.ui.h:28
 msgid "Menus and Toolbars"
 msgstr "選單及工具列"
 
-#: ../capplets/appearance/data/appearance.ui.h:27
+#: ../capplets/appearance/data/appearance.ui.h:29
 msgid "N_one"
 msgstr "無(_O)"
 
-#: ../capplets/appearance/data/appearance.ui.h:28
+#: ../capplets/appearance/data/appearance.ui.h:30
 msgid "Open a dialog to specify the color"
 msgstr "開啟對話方塊來指定顏色"
 
-#: ../capplets/appearance/data/appearance.ui.h:29
+#: ../capplets/appearance/data/appearance.ui.h:31
 msgid "Pointer"
 msgstr "指標"
 
-#: ../capplets/appearance/data/appearance.ui.h:30
+#: ../capplets/appearance/data/appearance.ui.h:32
 msgid "Preview"
 msgstr "預覽"
 
-#: ../capplets/appearance/data/appearance.ui.h:31
+#: ../capplets/appearance/data/appearance.ui.h:33
 msgid "R_esolution:"
 msgstr "解析度(_E):"
 
-#: ../capplets/appearance/data/appearance.ui.h:32
+#: ../capplets/appearance/data/appearance.ui.h:34
 msgid "Rendering"
 msgstr "描繪字型"
 
-#: ../capplets/appearance/data/appearance.ui.h:33
+#: ../capplets/appearance/data/appearance.ui.h:35
 msgid "Save Theme As..."
 msgstr "另存佈景主題..."
 
-#: ../capplets/appearance/data/appearance.ui.h:34
+#: ../capplets/appearance/data/appearance.ui.h:36
 msgid "Save _As..."
 msgstr "另存新檔(_A)..."
 
-#: ../capplets/appearance/data/appearance.ui.h:35
+#: ../capplets/appearance/data/appearance.ui.h:37
 msgid "Save _background image"
 msgstr "儲存背景圖片(_B)"
 
-#: ../capplets/appearance/data/appearance.ui.h:36
+#: ../capplets/appearance/data/appearance.ui.h:38
 msgid "Scaled"
 msgstr "縮放"
 
-#: ../capplets/appearance/data/appearance.ui.h:37
+#: ../capplets/appearance/data/appearance.ui.h:39
 msgid "Show _icons in menus"
 msgstr "在選單中顯示圖示(_I)"
 
-#: ../capplets/appearance/data/appearance.ui.h:38
+#: ../capplets/appearance/data/appearance.ui.h:40
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:30
 msgid "Small"
 msgstr "小"
 
-#: ../capplets/appearance/data/appearance.ui.h:39
+#: ../capplets/appearance/data/appearance.ui.h:41
 msgid "Smoothing"
 msgstr "平滑化"
 
-#: ../capplets/appearance/data/appearance.ui.h:40
+#: ../capplets/appearance/data/appearance.ui.h:42
 msgid "Solid color"
 msgstr "單一色彩"
 
-#: ../capplets/appearance/data/appearance.ui.h:41
+#: ../capplets/appearance/data/appearance.ui.h:43
 msgid "Sub_pixel (LCDs)"
 msgstr "次像素(sub_pixel) [LCD]"
 
-#: ../capplets/appearance/data/appearance.ui.h:42
+#: ../capplets/appearance/data/appearance.ui.h:44
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "次像素(sub_pixel)平滑方式 [LCD]"
 
-#: ../capplets/appearance/data/appearance.ui.h:43
+#: ../capplets/appearance/data/appearance.ui.h:45
 msgid "Subpixel Order"
 msgstr "次像素排列次序"
 
-#: ../capplets/appearance/data/appearance.ui.h:44
+#: ../capplets/appearance/data/appearance.ui.h:46
 msgid "Text"
 msgstr "文字"
 
-#: ../capplets/appearance/data/appearance.ui.h:45
+#: ../capplets/appearance/data/appearance.ui.h:47
 msgid "Text below items"
 msgstr "文字在項目下"
 
-#: ../capplets/appearance/data/appearance.ui.h:46
+#: ../capplets/appearance/data/appearance.ui.h:48
 msgid "Text beside items"
 msgstr "文字在項目旁"
 
-#: ../capplets/appearance/data/appearance.ui.h:47
+#: ../capplets/appearance/data/appearance.ui.h:49
 msgid "Text only"
 msgstr "只有文字"
 
-#: ../capplets/appearance/data/appearance.ui.h:48
+#: ../capplets/appearance/data/appearance.ui.h:50
 msgid "The current controls theme does not support color schemes."
 msgstr "本控制佈景不支援色彩配置。"
 
-#: ../capplets/appearance/data/appearance.ui.h:49
+#: ../capplets/appearance/data/appearance.ui.h:51
 msgid "Theme"
 msgstr "佈景主題"
 
-#: ../capplets/appearance/data/appearance.ui.h:50
+#: ../capplets/appearance/data/appearance.ui.h:52
 msgid "Tiled"
 msgstr "拼貼"
 
-#: ../capplets/appearance/data/appearance.ui.h:51
+#: ../capplets/appearance/data/appearance.ui.h:53
 msgid "Toolbar _button labels:"
 msgstr "工具列按鈕文字(_B):"
 
 #. vertical hinting, pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.ui.h:53
+#: ../capplets/appearance/data/appearance.ui.h:55
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: ../capplets/appearance/data/appearance.ui.h:54
+#: ../capplets/appearance/data/appearance.ui.h:56
 msgid "Vertical gradient"
 msgstr "垂直漸層"
 
-#: ../capplets/appearance/data/appearance.ui.h:55
+#: ../capplets/appearance/data/appearance.ui.h:57
 msgid "Window Border"
 msgstr "視窗邊框"
 
-#: ../capplets/appearance/data/appearance.ui.h:56
+#: ../capplets/appearance/data/appearance.ui.h:58
 msgid "Zoom"
 msgstr "縮放"
 
-#: ../capplets/appearance/data/appearance.ui.h:57
+#: ../capplets/appearance/data/appearance.ui.h:59
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 msgid "_Add..."
 msgstr "加入(_A)..."
 
-#: ../capplets/appearance/data/appearance.ui.h:58
+#: ../capplets/appearance/data/appearance.ui.h:60
 msgid "_Application font:"
 msgstr "應用程式字型(_A):"
 
 #. pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.ui.h:60
+#: ../capplets/appearance/data/appearance.ui.h:62
 msgid "_BGR"
 msgstr "_BGR"
 
-#: ../capplets/appearance/data/appearance.ui.h:61
+#: ../capplets/appearance/data/appearance.ui.h:63
 msgid "_Description:"
 msgstr "描述(_D):"
 
-#: ../capplets/appearance/data/appearance.ui.h:62
-msgid "_Desktop Background"
-msgstr "桌面背景(_D)"
-
-#: ../capplets/appearance/data/appearance.ui.h:63
+#: ../capplets/appearance/data/appearance.ui.h:64
 msgid "_Document font:"
 msgstr "文件字型(_D):"
 
-#: ../capplets/appearance/data/appearance.ui.h:64
+#: ../capplets/appearance/data/appearance.ui.h:65
 msgid "_Editable menu shortcut keys"
 msgstr "可編輯選單捷徑鍵(_E)"
 
-#: ../capplets/appearance/data/appearance.ui.h:65
+#: ../capplets/appearance/data/appearance.ui.h:66
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: ../capplets/appearance/data/appearance.ui.h:66
+#: ../capplets/appearance/data/appearance.ui.h:67
 msgid "_Fixed width font:"
 msgstr "固定寬度字型(_F):"
 
-#: ../capplets/appearance/data/appearance.ui.h:67
+#: ../capplets/appearance/data/appearance.ui.h:68
 msgid "_Full"
 msgstr "完整(_F)"
 
-#: ../capplets/appearance/data/appearance.ui.h:68
+#: ../capplets/appearance/data/appearance.ui.h:69
 msgid "_Input boxes:"
 msgstr "輸入視窗(_I):"
 
-#: ../capplets/appearance/data/appearance.ui.h:69
+#: ../capplets/appearance/data/appearance.ui.h:70
 msgid "_Install..."
 msgstr "安裝(_I)..."
 
-#: ../capplets/appearance/data/appearance.ui.h:70
+#: ../capplets/appearance/data/appearance.ui.h:71
 msgid "_Medium"
 msgstr "中(_M)"
 
-#: ../capplets/appearance/data/appearance.ui.h:71
+#: ../capplets/appearance/data/appearance.ui.h:72
 msgid "_Monochrome"
 msgstr "不平滑化(_M)"
 
-#: ../capplets/appearance/data/appearance.ui.h:72
+#: ../capplets/appearance/data/appearance.ui.h:73
 #: ../capplets/keybindings/gnome-keybinding-properties.ui.h:5
 msgid "_Name:"
 msgstr "名稱(_N):"
 
-#: ../capplets/appearance/data/appearance.ui.h:73
+#: ../capplets/appearance/data/appearance.ui.h:74
 msgid "_None"
 msgstr "沒有(_N)"
 
 #. pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.ui.h:75
+#: ../capplets/appearance/data/appearance.ui.h:76
 msgid "_RGB"
 msgstr "_RGB"
 
-#: ../capplets/appearance/data/appearance.ui.h:76
+#: ../capplets/appearance/data/appearance.ui.h:77
 msgid "_Reset to Defaults"
 msgstr "重置為預設值(_R)"
 
-#: ../capplets/appearance/data/appearance.ui.h:77
+#: ../capplets/appearance/data/appearance.ui.h:78
 msgid "_Selected items:"
 msgstr "已選項目(_S):"
 
-#: ../capplets/appearance/data/appearance.ui.h:78
+#: ../capplets/appearance/data/appearance.ui.h:79
 msgid "_Size:"
 msgstr "大小(_S):"
 
-#: ../capplets/appearance/data/appearance.ui.h:79
+#: ../capplets/appearance/data/appearance.ui.h:80
 msgid "_Slight"
 msgstr "輕微(_S)"
 
-#: ../capplets/appearance/data/appearance.ui.h:80
+#: ../capplets/appearance/data/appearance.ui.h:81
 msgid "_Style:"
 msgstr "風格(_S):"
 
-#: ../capplets/appearance/data/appearance.ui.h:81
+#: ../capplets/appearance/data/appearance.ui.h:82
 msgid "_Tooltips:"
 msgstr "工具提示(_T):"
 
 #. vertical hinting, pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.ui.h:83
+#: ../capplets/appearance/data/appearance.ui.h:84
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: ../capplets/appearance/data/appearance.ui.h:84
+#: ../capplets/appearance/data/appearance.ui.h:85
 msgid "_Window title font:"
 msgstr "視窗標題字型(_W):"
 
-#: ../capplets/appearance/data/appearance.ui.h:85
+#: ../capplets/appearance/data/appearance.ui.h:86
 msgid "_Windows:"
 msgstr "視窗(_W):"
 
-#: ../capplets/appearance/data/appearance.ui.h:86
+#: ../capplets/appearance/data/appearance.ui.h:87
 msgid "dots per inch"
 msgstr "解析度(dpi)"
 
@@ -1269,30 +1292,38 @@ msgstr "Gnome 佈景主題套件"
 msgid "No Desktop Background"
 msgstr "無桌面背景"
 
-#: ../capplets/appearance/gnome-wp-item.c:208
+#: ../capplets/appearance/gnome-wp-item.c:258
 msgid "Slide Show"
 msgstr "幻燈片顯示"
 
-#. translators: <b>wallpaper name</b>
-#. * mime type, x pixel(s) by y pixel(s)
-#. * Folder: /path/to/file
-#.
-#: ../capplets/appearance/gnome-wp-item.c:216
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %d %s by %d %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, 長 %d %s 寬 %d %s\n"
-"資料夾： %s"
+#: ../capplets/appearance/gnome-wp-item.c:260
+msgid "Image"
+msgstr "圖片"
 
-#: ../capplets/appearance/gnome-wp-item.c:222
-#: ../capplets/appearance/gnome-wp-item.c:224
+#: ../capplets/appearance/gnome-wp-item.c:266
+msgid "multiple sizes"
+msgstr "多重尺寸"
+
+#: ../capplets/appearance/gnome-wp-item.c:271
+#: ../capplets/appearance/gnome-wp-item.c:273
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "像素"
+
+#. translators: <b>wallpaper name</b>
+#. * mime type, size
+#. * Folder: /path/to/file
+#.
+#: ../capplets/appearance/gnome-wp-item.c:279
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s,  %s\n"
+"資料夾：%s"
 
 #: ../capplets/appearance/theme-installer.c:178
 #: ../capplets/appearance/theme-installer.c:234
@@ -2178,16 +2209,16 @@ msgstr "已停用"
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:942
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:954
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1581
 msgid "Custom Shortcuts"
 msgstr "自訂捷徑鍵"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1081
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1096
 msgid "Error saving the new shortcut"
 msgstr "儲存新的捷徑鍵時發生錯誤"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1160
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1175
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2197,7 +2228,7 @@ msgstr ""
 "捷徑“%s”無法使用，原因是會無法按下此按鍵。\n"
 "請試用其它的按鍵：如同時使用 Control，Alt  或 Shift。"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1190
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1205
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -2206,30 +2237,30 @@ msgstr ""
 "捷徑鍵“%s”己經使用於：\n"
 "“%s”"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1196
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1211
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "如果您重新指派捷徑鍵為「%s」，「%s」的捷徑鍵就會停用。"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1204
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1219
 msgid "_Reassign"
 msgstr "重新指派(_R)"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1324
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1339
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "在組態資料庫中取消設定捷徑鍵時出現錯誤：%s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1521
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1536
 msgid "Too many custom shortcuts"
 msgstr "太多自訂捷徑鍵"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1818
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1832
 msgid "Action"
 msgstr "動作"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1840
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1854
 msgid "Shortcut"
 msgstr "捷徑鍵"
 
@@ -3321,53 +3352,50 @@ msgstr "字型檔 輸出檔"
 msgid "Error parsing arguments: %s\n"
 msgstr "分析參數時發生錯誤：%s\n"
 
-# 翻譯後程式無法顯示字形效果後，應是 bug，故暫將 <b> <span> 等刪除，
-# Woodman
-#: ../libslab/app-shell.c:752
+#: ../libslab/app-shell.c:754
 #, c-format
-msgid ""
-"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-"\n"
-" Your filter \"<b>%s</b>\" does not match any items.</span>"
-msgstr ""
-"找不到相符。\n"
-"篩選 “%s” 時沒有任何匹配的項目。"
+msgid "Your filter \"%s\" does not match any items."
+msgstr "您的過濾條件「%s」沒有任合項目符合。"
 
-#: ../libslab/app-shell.c:902
+#: ../libslab/app-shell.c:756
+msgid "No matches found."
+msgstr "找不到符合項。"
+
+#: ../libslab/app-shell.c:905
 msgid "Other"
 msgstr "其它"
 
 #. make start action
-#: ../libslab/application-tile.c:373
+#: ../libslab/application-tile.c:374
 #, c-format
-msgid "<b>Start %s</b>"
-msgstr "<b>啟動 %s</b>"
+msgid "Start %s"
+msgstr "啟動 %s"
 
-#: ../libslab/application-tile.c:392
+#: ../libslab/application-tile.c:395
 msgid "Help"
 msgstr "求助"
 
-#: ../libslab/application-tile.c:439
+#: ../libslab/application-tile.c:442
 msgid "Upgrade"
 msgstr "更新"
 
-#: ../libslab/application-tile.c:454
+#: ../libslab/application-tile.c:457
 msgid "Uninstall"
 msgstr "移除"
 
-#: ../libslab/application-tile.c:781 ../libslab/document-tile.c:718
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
 msgid "Remove from Favorites"
 msgstr "自最愛中移除"
 
-#: ../libslab/application-tile.c:783 ../libslab/document-tile.c:720
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
 msgid "Add to Favorites"
 msgstr "加入最愛"
 
-#: ../libslab/application-tile.c:868
+#: ../libslab/application-tile.c:871
 msgid "Remove from Startup Programs"
 msgstr "從「初始啟動程式」中移除"
 
-#: ../libslab/application-tile.c:870
+#: ../libslab/application-tile.c:873
 msgid "Add to Startup Programs"
 msgstr "加入「初始啟動程式」"
 
@@ -3402,72 +3430,72 @@ msgid "<b>Open</b>"
 msgstr "<b>開啟</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:231
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
 msgid "Rename..."
 msgstr "重新命名..."
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:245 ../libslab/document-tile.c:254
+#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
 msgid "Send To..."
 msgstr "傳送至..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:280
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
 msgid "Move to Trash"
 msgstr "移至回收筒"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:290 ../libslab/document-tile.c:834
+#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
 msgid "Delete"
 msgstr "刪除"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:982
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "確定要永遠刪除「%s」？"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:983
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
 msgid "If you delete an item, it is permanently lost."
 msgstr "如果將項目刪除，它將會永久失去。"
 
-#: ../libslab/document-tile.c:192
+#: ../libslab/document-tile.c:193
 #, c-format
-msgid "<b>Open with \"%s\"</b>"
-msgstr "<b>以“%s”開啟</b>"
+msgid "Open with \"%s\""
+msgstr "以「%s」開啟"
 
-#: ../libslab/document-tile.c:204
+#: ../libslab/document-tile.c:207
 msgid "Open with Default Application"
 msgstr "以預設的應用程式開啟"
 
-#: ../libslab/document-tile.c:215
+#: ../libslab/document-tile.c:218
 msgid "Open in File Manager"
 msgstr "在檔案管理員中開啟"
 
-#: ../libslab/document-tile.c:614
+#: ../libslab/document-tile.c:617
 msgid "?"
 msgstr "？"
 
-#: ../libslab/document-tile.c:621
+#: ../libslab/document-tile.c:624
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#: ../libslab/document-tile.c:629
+#: ../libslab/document-tile.c:632
 msgid "Today %l:%M %p"
 msgstr "今天 %l:%M %p"
 
-#: ../libslab/document-tile.c:639
+#: ../libslab/document-tile.c:642
 msgid "Yesterday %l:%M %p"
 msgstr "昨天 %l:%M %p"
 
-#: ../libslab/document-tile.c:651
+#: ../libslab/document-tile.c:654
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../libslab/document-tile.c:659
+#: ../libslab/document-tile.c:662
 msgid "%b %d %l:%M %p"
 msgstr "%b %d %l:%M %p"
 
-#: ../libslab/document-tile.c:661
+#: ../libslab/document-tile.c:664
 msgid "%b %d %Y"
 msgstr "%Y %b %d"
 
@@ -3484,6 +3512,19 @@ msgstr "<b>以“%s”開啟</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "自系統項目中移除"
+
+#~ msgid "_Desktop Background"
+#~ msgstr "桌面背景(_D)"
+
+# 翻譯後程式無法顯示字形效果後，應是 bug，故暫將 <b> <span> 等刪除，
+# Woodman
+#~ msgid ""
+#~ "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
+#~ "\n"
+#~ " Your filter \"<b>%s</b>\" does not match any items.</span>"
+#~ msgstr ""
+#~ "找不到相符。\n"
+#~ "篩選 “%s” 時沒有任何匹配的項目。"
 
 #~ msgid "Unknown login ID, the user database might be corrupted"
 #~ msgstr "不明的登入 ID，使用者資料庫可能已經受損"
@@ -3996,9 +4037,6 @@ msgstr "自系統項目中移除"
 
 #~ msgid "Beep"
 #~ msgstr "鈴聲"
-
-#~ msgid "No sound"
-#~ msgstr "沒有聲音"
 
 #~ msgid "Sound not set for this event."
 #~ msgstr "此事件沒有設定音效。"
