@@ -41,15 +41,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-13 20:02+0300\n"
-"PO-Revision-Date: 2009-04-13 20:05+0200\n"
-"Last-Translator: nikosCharonitakis <nikosx@gmail.com>\n"
+"POT-Creation-Date: 2009-09-14 21:09+0300\n"
+"PO-Revision-Date: 2009-09-14 21:35+0200\n"
+"Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 0.2\n"
+
+#: ../gnome-control-center.schemas.in.h:1
+msgid "Current network location"
+msgstr "Τρέχουσα τοποθεσία δικτύου"
+
+#: ../gnome-control-center.schemas.in.h:2
+msgid "More backgrounds URL"
+msgstr "URL για περισότερες εικόνες παρασκηνίου"
+
+#: ../gnome-control-center.schemas.in.h:3
+msgid "More themes URL"
+msgstr "URL για περισσότερα θέματα"
+
+#: ../gnome-control-center.schemas.in.h:4
+msgid "Set this to your current location name. This is used to determine the appropriate network proxy configuration."
+msgstr "Προσθέστε αυτό στο όνομα της τρέχουσας τοποθεσίας σας. Αυτό χρησιμοποιείται για τον καθορισμό της ρύθμισης του διαμεσολαβητή δικτύου."
+
+#: ../gnome-control-center.schemas.in.h:5
+msgid "URL for where to get more desktop backgrounds. If set to an empty string the link will not appear."
+msgstr "URL για την λήψη περισσότερων παρασκηνίων επιφάνειας εργασίας. Αν ορισθεί σε κενό τότε δεν θα εμφανίζεται κανένας δεσμός."
+
+#: ../gnome-control-center.schemas.in.h:6
+msgid "URL for where to get more desktop themes. If set to an empty string the link will not appear."
+msgstr "URL για την λήψη περισσότερων θεμάτων επιφάνειας εργασίας. Αν ορισθεί σε κενό τότε δεν θα εμφανίζεται κανένας δεσμός."
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -204,25 +228,25 @@ msgstr "Το δάχτυλό σας δεν ήταν στο κέντρο, προσ
 msgid "Remove your finger, and try swiping your finger again"
 msgstr "Απομακρύνετε το δάχτυλό σας και προσπαθήστε να το περάσετε ξανά"
 
-#: ../capplets/about-me/gnome-about-me.c:776
+#: ../capplets/about-me/gnome-about-me.c:712
 msgid "Select Image"
 msgstr "Επιλογή εικόνας"
 
-#: ../capplets/about-me/gnome-about-me.c:778
+#: ../capplets/about-me/gnome-about-me.c:714
 msgid "No Image"
 msgstr "Χωρίς εικόνα"
 
-#: ../capplets/about-me/gnome-about-me.c:806
-#: ../capplets/appearance/appearance-desktop.c:661
+#: ../capplets/about-me/gnome-about-me.c:742
+#: ../capplets/appearance/appearance-desktop.c:654
 msgid "Images"
 msgstr "Εικόνες"
 
-#: ../capplets/about-me/gnome-about-me.c:810
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/about-me/gnome-about-me.c:746
+#: ../capplets/appearance/theme-installer.c:763
 msgid "All Files"
 msgstr "Όλα τα αρχεία"
 
-#: ../capplets/about-me/gnome-about-me.c:956
+#: ../capplets/about-me/gnome-about-me.c:886
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -230,65 +254,247 @@ msgstr ""
 "Σφάλμα κατά τη λήψη πληροφοριών ευρετηρίου διευθύνσεων\n"
 "Το Evolution Data Server δεν μπορεί να χειριστεί το πρωτόκολλο"
 
-#: ../capplets/about-me/gnome-about-me.c:977
+#: ../capplets/about-me/gnome-about-me.c:907
 msgid "Unable to open address book"
 msgstr "Αδυναμία ανοίγματος βιβλίου διευθύνσεων"
 
-#: ../capplets/about-me/gnome-about-me.c:991
-msgid "Unknown login ID, the user database might be corrupted"
-msgstr "Άγνωστο ID εισόδου, η βάση δεδομένων χρήστη μπορεί να είναι κατεστραμμένη"
-
-#: ../capplets/about-me/gnome-about-me.c:1021
-#: ../capplets/about-me/gnome-about-me.c:1023
+#: ../capplets/about-me/gnome-about-me.c:930
 #, c-format
 msgid "About %s"
 msgstr "Περί %s"
 
-#: ../capplets/about-me/gnome-about-me.c:1041
-#: ../capplets/about-me/gnome-about-me.glade.h:26
-msgid "Enable _Fingerprint Login..."
-msgstr "Ενεργοποίηση εισόδου με απο_τύπωμα..."
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:1
+msgid "A_IM/iChat:"
+msgstr "A_IM/iChat:"
 
-#: ../capplets/about-me/gnome-about-me.c:1044
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:2
+msgid "A_ddress:"
+msgstr "Διεύ_θυνση:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:3
+msgid "A_ssistant:"
+msgstr "Βοη_θός:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:4
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
+msgid "About Me"
+msgstr "Προσωπικά"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:5
+msgid "Address"
+msgstr "Διεύθυνση"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:6
+msgid "C_ity:"
+msgstr "_Πόλη:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:7
+msgid "C_ompany:"
+msgstr "Ε_ταιρία:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:8
+msgid "Cale_ndar:"
+msgstr "_Ημερολόγιο:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:9
+msgid "Change Passwo_rd..."
+msgstr "Αλλαγή κω_δικού..."
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:10
+msgid "Ci_ty:"
+msgstr "_Πόλη:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:11
+msgid "Co_untry:"
+msgstr "_Χώρα:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:12
+msgid "Contact"
+msgstr "Επαφή"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:13
+msgid "Cou_ntry:"
+msgstr "Χώ_ρα:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:14
 msgid "Disable _Fingerprint Login..."
 msgstr "Απενεργοποίηση εισόδου με απο_τύπωμα..."
 
-#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
-#: ../capplets/about-me/gnome-about-me.glade.h:12
-msgid "About Me"
-msgstr "Προσωπικά"
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:15
+msgid "Email"
+msgstr "Email"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:16
+msgid "Enable _Fingerprint Login..."
+msgstr "Ενεργοποίηση εισόδου με απο_τύπωμα..."
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:17
+msgid "Full Name"
+msgstr "Ονοματεπώνυμο"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:18
+msgid "Hom_e:"
+msgstr "Οι_κία:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:19
+#: ../libslab/bookmark-agent.c:1135
+msgid "Home"
+msgstr "Αρχικός κατάλογος"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:20
+msgid "IC_Q:"
+msgstr "IC_Q:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
+msgid "Instant Messaging"
+msgstr "Instant Messaging"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:22
+msgid "Job"
+msgstr "Εργασία"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:23
+msgid "M_SN:"
+msgstr "M_SN:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:24
+msgid "P.O. _box:"
+msgstr "Ταχ. _Θυρίδα:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:25
+msgid "P._O. box:"
+msgstr "Τα_χ. Θυρίδα:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:26
+msgid "Personal Info"
+msgstr "Προσωπικές πληροφορίες"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:27
+msgid "Select your photo"
+msgstr "Επιλέξτε τη φωτογραφία σας"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:28
+msgid "State/Pro_vince:"
+msgstr "Πολιτεία/Ε_παρχία:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:29
+msgid "Telephone"
+msgstr "Τηλέφωνο"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:30
+msgid "User name:"
+msgstr "Όνομα χρήστη:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:31
+msgid "Web"
+msgstr "Ιστός"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:32
+msgid "Web _log:"
+msgstr "Ιστολό_γιο:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:33
+msgid "Wor_k:"
+msgstr "Εργα_σία:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:34
+msgid "Work"
+msgstr "Εργασία"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:35
+msgid "Work _fax:"
+msgstr "_Φαξ εργασίας:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:36
+msgid "Zip/_Postal code:"
+msgstr "Τ._Κ.:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:37
+msgid "_Address:"
+msgstr "_Διεύθυνση:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:38
+msgid "_Department:"
+msgstr "_Τμήμα:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:39
+msgid "_Groupwise:"
+msgstr "_Groupwise:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:40
+msgid "_Home page:"
+msgstr "Αρ_χική σελίδα:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:41
+msgid "_Home:"
+msgstr "_Οικία:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:42
+msgid "_Jabber:"
+msgstr "_Jabber:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:43
+msgid "_Manager:"
+msgstr "_Διευθυντής:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:44
+msgid "_Mobile:"
+msgstr "_Κινητό:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:45
+msgid "_Profession:"
+msgstr "Ε_πάγγελμα:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:46
+msgid "_State/Province:"
+msgstr "_Πολιτεία/Επαρχία:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:47
+msgid "_Title:"
+msgstr "_Τίτλος:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:48
+msgid "_Work:"
+msgstr "Ερ_γασία:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:49
+msgid "_Yahoo:"
+msgstr "_Yahoo:"
+
+#: ../capplets/about-me/gnome-about-me-dialog.ui.h:50
+msgid "_Zip/Postal code:"
+msgstr "_Τ.Κ.:"
 
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
 msgid "Set your personal information"
 msgstr "Καθορισμός των προσωπικών σας στοιχείων"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:99
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:97
 msgid "You are not allowed to access the device. Contact your system administrator."
 msgstr "Δεν σας επιτρέπεται η πρόσβαση στη συσκευή. Επικοινωνήστε με το διαχειριστή του συστήματος."
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:101
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:99
 msgid "The device is already in use."
 msgstr "Η συσκευή χρησιμοποιείται ήδη."
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:103
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:101
 msgid "An internal error occured"
 msgstr "Συνέβη ένα εσωτερικό σφάλμα"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:220
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:218
 msgid "Delete registered fingerprints?"
 msgstr "Διαγραφή των καταχωρημένων αποτυπωμάτων;"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:223
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:221
 msgid "_Delete Fingerprints"
 msgstr "_Διαγραφή αποτυπωμάτων"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:230
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:228
 msgid "Do you want to delete your registered fingerprints so fingerprint login is disabled?"
 msgstr "Επιθυμείτε να διαγράψετε τα καταχωρημένα αποτυπώματα για να απενεργοποιηθεί η είσοδος με αποτύπωμα;"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:343
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:583
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:342
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:1
 msgid "Done!"
 msgstr "Εντάξει!"
 
@@ -304,324 +510,108 @@ msgstr "Δεν ήταν δυνατή η πρόσβαση στη συσκευή '
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:444
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:459
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Αδυναμία εκκίνησης της καταγραφής αποτυπωμάτων στη συσκευή '%s'"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:491
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:506
 msgid "Could not access any fingerprint readers"
 msgstr "Δεν είναι δυνατή η πρόσβαση σε καμία συσκευή ανάγνωσης αποτυπωμάτων"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:492
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:507
 msgid "Please contact your system administrator for help."
 msgstr "Παρακαλώ, επικοινωνήστε με το διαχειριστή του συστήματος για βοήθεια."
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:518
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:537
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:2
 msgid "Enable Fingerprint Login"
 msgstr "Ενεργοποίηση εισόδου με αποτύπωμα"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:534
-msgid "Select finger"
-msgstr "Επιλογή δαχτύλου"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:555
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:567
 #, c-format
 msgid "To enable fingerprint login, you need to save one of your fingerprints, using the '%s' device."
 msgstr "Για να ενεργοποιήσετε την είσοδο με αποτύπωμα, πρέπει να αποθηκεύσετε ένα δακτυλικό σας αποτύπωμα χρησιμοποιώντας τη συσκευή '%s'."
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:568
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:576
 msgid "Swipe finger on reader"
 msgstr "Περάστε το δάχτυλό σας από τη συσκευή ανάγνωσης"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:570
+#: ../capplets/about-me/gnome-about-me-fingerprint.c:578
 msgid "Place finger on reader"
 msgstr "Τοποθετήστε το δάχτυλό σας στη συσκευή ανάγνωσης"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.glade.h:1
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:3
 msgid "Left index finger"
 msgstr "Αριστερός δείκτης"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.glade.h:2
-msgid ""
-"Left thumb\n"
-"Left middle finger\n"
-"Left ring finger\n"
-"Left little finger\n"
-"Right thumb\n"
-"Right middle finger\n"
-"Right ring finger\n"
-"Right little finger"
-msgstr ""
-"Αριστερός αντίχειρας\n"
-"Αριστερό μεσαίο δάχτυλο\n"
-"Αριστερός παράμεσος\n"
-"Αριστερό μικρό δάχτυλο\n"
-"Δεξιός αντίχειρας\n"
-"Δεξί μεσαίο δάχτυλο\n"
-"Δεξιός παράμεσος\n"
-"Δεξί μικρό δάχτυλο"
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:4
+msgid "Left little finger"
+msgstr "Αριστερό μικρό δάκτυλο"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.glade.h:10
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:5
+msgid "Left middle finger"
+msgstr "Αριστερό μεσαίο δάκτυλο"
+
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:6
+msgid "Left ring finger"
+msgstr "Left ring finger"
+
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:7
+msgid "Left thumb"
+msgstr "Αριστερός αντίχειρας"
+
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:8
 msgid "Other finger: "
 msgstr "Άλλο δάχτυλο: "
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.glade.h:11
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:9
 msgid "Right index finger"
 msgstr "Δεξιός δείκτης"
 
-#: ../capplets/about-me/gnome-about-me-fingerprint.glade.h:12
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:10
+msgid "Right little finger"
+msgstr "Δεξιό μικρό δάκτυλο"
+
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:11
+msgid "Right middle finger"
+msgstr "Δεξιό μεσαίο δάκτυλο"
+
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:12
+msgid "Right ring finger"
+msgstr "Δεξιός δείκτης"
+
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:13
+msgid "Right thumb"
+msgstr "Δεξιός αντίχειρας"
+
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:14
+msgid "Select finger"
+msgstr "Επιλογή δαχτύλου"
+
+#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:15
 msgid "Your fingerprint was successfully saved. You should now be able to log in using your fingerprint reader."
 msgstr "Το αποτύπωμά σας αποθηκεύτηκε επιτυχώς. Θα μπορείτε πλέον να χρησιμοποιείτε τη συσκευή ανάγνωσης αποτυπωμάτων για είσοδο."
 
-#: ../capplets/about-me/gnome-about-me.glade.h:1
-msgid "<b>Email</b>"
-msgstr "<b>Email</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:2
-msgid "<b>Home</b>"
-msgstr "<b>Οικία</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:3
-msgid "<b>Instant Messaging</b>"
-msgstr "<b>Αποστολή άμεσων μηνυμάτων</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:4
-msgid "<b>Job</b>"
-msgstr "<b>Δουλειά</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:5
-msgid "<b>Telephone</b>"
-msgstr "<b>Τηλέφωνο</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:6
-msgid "<b>Web</b>"
-msgstr "<b>Ιστός</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Work</b>"
-msgstr "<b>Εργασία</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
-msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Αλλαγή του κωδικού σας</span>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:9
-msgid "A_IM/iChat:"
-msgstr "A_IM/iChat:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:10
-msgid "A_ddress:"
-msgstr "Διεύ_θυνση:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:11
-msgid "A_ssistant:"
-msgstr "Βοη_θός:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:13
-msgid "Address"
-msgstr "Διεύθυνση"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:14
-msgid "C_ity:"
-msgstr "_Πόλη:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:15
-msgid "C_ompany:"
-msgstr "Ε_ταιρία:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:16
-msgid "Cale_ndar:"
-msgstr "_Ημερολόγιο:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:17
-msgid "Change Passwo_rd..."
-msgstr "Αλλαγή κω_δικού..."
-
-#: ../capplets/about-me/gnome-about-me.glade.h:18
-msgid "Change pa_ssword"
-msgstr "Αλλαγή κω_δικού"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:19
-msgid "Change password"
-msgstr "Αλλαγή κωδικού"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Ci_ty:"
-msgstr "_Πόλη:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:21
-msgid "Co_untry:"
-msgstr "_Χώρα:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:22
-msgid "Contact"
-msgstr "Επαφή"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:23
-msgid "Cou_ntry:"
-msgstr "Χώ_ρα:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:24
-msgid "Current _password:"
-msgstr "Τρέχων _κωδικός:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:27
-msgid "Full Name"
-msgstr "Ονοματεπώνυμο"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:28
-msgid "Hom_e:"
-msgstr "Οι_κία:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "IC_Q:"
-msgstr "IC_Q:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
-msgid "M_SN:"
-msgstr "M_SN:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:31
-msgid "P.O. _box:"
-msgstr "Ταχ. _Θυρίδα:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:32
-msgid "P._O. box:"
-msgstr "Τα_χ. Θυρίδα:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:33
-msgid "Personal Info"
-msgstr "Προσωπικές πληροφορίες"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:34
-#: ../capplets/about-me/gnome-about-me-password.c:938
-msgid "Please type your password again in the <b>Retype new password</b> field."
-msgstr "Παρακαλώ πληκτρολογήστε το κωδικό ξανά στο πεδίο <b>Επαναπληκτρολόγηση νέου κωδικού</b>."
-
-#: ../capplets/about-me/gnome-about-me.glade.h:35
-msgid "Select your photo"
-msgstr "Επιλέξτε τη φωτογραφία σας"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:36
-msgid "State/Pro_vince:"
-msgstr "Πολιτεία/Ε_παρχία:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:37
-msgid ""
-"To change your password, enter your current password in the field below and click <b>Authenticate</b>.\n"
-"After you have authenticated, enter your new password, retype it for verification and click <b>Change password</b>."
-msgstr ""
-"Για να αλλάξετε το κωδικό σας, εισάγετε τον τρέχοντα κωδικός σας στο παρακάτω πεδίο και πατήστε <b>Πιστοποίηση</b>.\n"
-"Μετά την πιστοποίηση σας, εισάγετε το νέο σας κωδικό, πληκτρολογήστε τον ξανά για να τον επαληθεύσετε και κάντε κλικ στο <b>Αλλαγή κωδικού</b>."
-
-#: ../capplets/about-me/gnome-about-me.glade.h:39
-msgid "User name:"
-msgstr "Όνομα χρήστη:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:40
-msgid "Web _log:"
-msgstr "Ιστολό_γιο:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:41
-msgid "Wor_k:"
-msgstr "Εργα_σία:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:42
-msgid "Work _fax:"
-msgstr "_Φαξ εργασίας:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:43
-msgid "Zip/_Postal code:"
-msgstr "Τ._Κ.:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:44
-msgid "_Address:"
-msgstr "_Διεύθυνση:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:45
-msgid "_Authenticate"
-msgstr "_Πιστοποίηση"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:46
-msgid "_Department:"
-msgstr "_Τμήμα:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:47
-msgid "_Groupwise:"
-msgstr "_Groupwise:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:48
-msgid "_Home page:"
-msgstr "Αρ_χική σελίδα:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:49
-msgid "_Home:"
-msgstr "_Οικία:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:50
-msgid "_Jabber:"
-msgstr "_Jabber:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:51
-msgid "_Manager:"
-msgstr "_Διευθυντής:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:52
-msgid "_Mobile:"
-msgstr "_Κινητό:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:53
-msgid "_New password:"
-msgstr "_Νέος κωδικός:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:54
-msgid "_Profession:"
-msgstr "Ε_πάγγελμα:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:55
-msgid "_Retype new password:"
-msgstr "Ε_παναπληκτρολόγηση νέου κωδικού:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:56
-msgid "_State/Province:"
-msgstr "_Πολιτεία/Επαρχία:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:57
-msgid "_Title:"
-msgstr "_Τίτλος:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:58
-msgid "_Work:"
-msgstr "Ερ_γασία:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:59
-msgid "_Yahoo:"
-msgstr "_Yahoo:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:60
-msgid "_Zip/Postal code:"
-msgstr "_Τ.Κ.:"
-
-#: ../capplets/about-me/gnome-about-me-password.c:162
+#: ../capplets/about-me/gnome-about-me-password.c:161
 msgid "Child exited unexpectedly"
 msgstr "Το θυγατρικό τερματίστηκε απρόσμενα"
 
-#: ../capplets/about-me/gnome-about-me-password.c:297
+#: ../capplets/about-me/gnome-about-me-password.c:296
 #, c-format
 msgid "Could not shutdown backend_stdin IO channel: %s"
 msgstr "Αδυναμία κλεισίματος backend_stdin IO channel: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:310
+#: ../capplets/about-me/gnome-about-me-password.c:309
 #, c-format
 msgid "Could not shutdown backend_stdout IO channel: %s"
 msgstr "Αδυναμία κλεισίματος backend_stdout IO channel: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:409
+#: ../capplets/about-me/gnome-about-me-password.c:408
 msgid "Authenticated!"
 msgstr "Επιτυχής πιστοποίηση!"
 
@@ -631,146 +621,184 @@ msgstr "Επιτυχής πιστοποίηση!"
 #.
 #. Update status message and auth state
 #. Authentication failure
-#: ../capplets/about-me/gnome-about-me-password.c:475
-#: ../capplets/about-me/gnome-about-me-password.c:551
+#: ../capplets/about-me/gnome-about-me-password.c:474
+#: ../capplets/about-me/gnome-about-me-password.c:550
 msgid "Your password has been changed since you initially authenticated! Please re-authenticate."
 msgstr "Ο κωδικός πρόσβασης σας έχει αλλάξει από την αρχική σας πιστοποίηση. Παρακαλώ κάντε ξανά πιστοποίηση."
 
-#: ../capplets/about-me/gnome-about-me-password.c:477
+#: ../capplets/about-me/gnome-about-me-password.c:476
 msgid "That password was incorrect."
 msgstr "Αυτός ο κωδικός είναι εσφαλμένος."
 
-#: ../capplets/about-me/gnome-about-me-password.c:524
+#: ../capplets/about-me/gnome-about-me-password.c:523
 msgid "Your password has been changed."
 msgstr "Ο κωδικός σας έχει αλλάξει."
 
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:534
+#: ../capplets/about-me/gnome-about-me-password.c:533
 #, c-format
 msgid "System error: %s."
 msgstr "Σφάλμα συστήματος: %s."
 
-#: ../capplets/about-me/gnome-about-me-password.c:537
+#: ../capplets/about-me/gnome-about-me-password.c:536
 msgid "The password is too short."
 msgstr "Ο κωδικός πρόσβασης είναι πολύ σύντομος."
 
-#: ../capplets/about-me/gnome-about-me-password.c:540
+#: ../capplets/about-me/gnome-about-me-password.c:539
 msgid "The password is too simple."
 msgstr "Ο κωδικός πρόσβασης είναι πολύ απλός."
 
-#: ../capplets/about-me/gnome-about-me-password.c:543
+#: ../capplets/about-me/gnome-about-me-password.c:542
 msgid "The old and new passwords are too similar."
 msgstr "Ο παλιός και ο νέος κωδικός μοιάζουν πολύ."
 
-#: ../capplets/about-me/gnome-about-me-password.c:545
+#: ../capplets/about-me/gnome-about-me-password.c:544
 msgid "The new password must contain numeric or special character(s)."
 msgstr "Ο νέος κωδικός θα πρέπει να περιέχει αριθμητικούς ή ειδικούς χαρακτήρες."
 
-#: ../capplets/about-me/gnome-about-me-password.c:548
+#: ../capplets/about-me/gnome-about-me-password.c:547
 msgid "The old and new passwords are the same."
 msgstr "Ο παλιός και ο νέος κωδικός είναι οι ίδιοι."
 
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:820
+#: ../capplets/about-me/gnome-about-me-password.c:818
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "Αδυναμία εκκίνησης %s: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:824
+#: ../capplets/about-me/gnome-about-me-password.c:822
 msgid "Unable to launch backend"
 msgstr "Αδυναμία εκκίνησης backend"
 
-#: ../capplets/about-me/gnome-about-me-password.c:825
+#: ../capplets/about-me/gnome-about-me-password.c:823
 msgid "A system error has occurred"
 msgstr "Δημιουργήθηκε σφάλμα συστήματος"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:845
+#: ../capplets/about-me/gnome-about-me-password.c:843
 msgid "Checking password..."
 msgstr "Έλεγχος κωδικού..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:932
+#: ../capplets/about-me/gnome-about-me-password.c:930
 msgid "Click <b>Change password</b> to change your password."
 msgstr "Πατήστε στο <b>Αλλαγή κωδικού</b> για να αλλάξετε το κωδικό πρόσβασης."
 
-#: ../capplets/about-me/gnome-about-me-password.c:935
+#: ../capplets/about-me/gnome-about-me-password.c:933
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "Παρακαλώ πληκτρολογήστε το κωδικό σας στο πεδίο <b>Νέος κωδικός</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:941
+#: ../capplets/about-me/gnome-about-me-password.c:936
+#: ../capplets/about-me/gnome-about-me-password.ui.h:5
+msgid "Please type your password again in the <b>Retype new password</b> field."
+msgstr "Παρακαλώ πληκτρολογήστε το κωδικό ξανά στο πεδίο <b>Επαναπληκτρολόγηση νέου κωδικού</b>."
+
+#: ../capplets/about-me/gnome-about-me-password.c:939
 msgid "The two passwords are not equal."
 msgstr "Οι δυο κωδικοί δεν είναι ίσοι."
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-msgid "<b>Assistive Technologies</b>"
-msgstr "<b>Βοηθητικές τεχνολογίες</b>"
+#: ../capplets/about-me/gnome-about-me-password.ui.h:1
+msgid "Change pa_ssword"
+msgstr "Αλλαγή κω_δικού"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-msgid "<b>Preferences</b>"
-msgstr "<b>Προτιμήσεις</b>"
+#: ../capplets/about-me/gnome-about-me-password.ui.h:2
+msgid "Change password"
+msgstr "Αλλαγή κωδικού"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
+#: ../capplets/about-me/gnome-about-me-password.ui.h:3
+msgid "Change your password"
+msgstr "Αλλαγή κωδικού"
+
+#: ../capplets/about-me/gnome-about-me-password.ui.h:4
+msgid "Current _password:"
+msgstr "Τρέχων _κωδικός:"
+
+#: ../capplets/about-me/gnome-about-me-password.ui.h:6
+msgid ""
+"To change your password, enter your current password in the field below and click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for verification and click <b>Change password</b>."
+msgstr ""
+"Για να αλλάξετε το κωδικό σας, εισάγετε τον τρέχοντα κωδικός σας στο παρακάτω πεδίο και πατήστε <b>Πιστοποίηση</b>.\n"
+"Μετά την πιστοποίηση σας, εισάγετε το νέο σας κωδικό, πληκτρολογήστε τον ξανά για να τον επαληθεύσετε και κάντε κλικ στο <b>Αλλαγή κωδικού</b>."
+
+#: ../capplets/about-me/gnome-about-me-password.ui.h:8
+msgid "_Authenticate"
+msgstr "_Πιστοποίηση"
+
+#: ../capplets/about-me/gnome-about-me-password.ui.h:9
+msgid "_New password:"
+msgstr "_Νέος κωδικός:"
+
+#: ../capplets/about-me/gnome-about-me-password.ui.h:10
+msgid "_Retype new password:"
+msgstr "Ε_παναπληκτρολόγηση νέου κωδικού:"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:1
 msgid "Accessible Lo_gin"
 msgstr "Είσοδος με _προσιτότητα"
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
-msgid "Assistive Technologies Preferences"
-msgstr "Προτιμήσεις βοηθητικής τεχνολογίας"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
-msgid "Changes to enable assistive technologies will not take effect until your next log in."
-msgstr "Οι αλλαγές σε αυτή τη ρύθμιση βοηθητικών τεχνολογιών θα πραγματοποιηθούν στην επόμενη είσοδο σας."
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
-msgid "Close and _Log Out"
-msgstr "Κλείσιμο και απο_σύνδεση"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
-msgid "Jump to Preferred Applications dialog"
-msgstr "Μετάβαση στο διάλογο Προτιμώμενων εφαρμογών"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
-msgid "Jump to the Accessible Login dialog"
-msgstr "Μετάβαση στο διάλογο Εισόδου με προσιτότητα"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
-msgid "Jump to the Keyboard Accessibility dialog"
-msgstr "Μετάβαση στο διάλογο Προσιτότητας πληκτρολογίου"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-msgid "Jump to the Mouse Accessibility dialog"
-msgstr "Μετάβαση στο διάλογο Προσιτότητας ποντικιού"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
-msgid "_Enable assistive technologies"
-msgstr "_Ενεργοποίηση βοηθητικών τεχνολογιών"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
-msgid "_Keyboard Accessibility"
-msgstr "Προσιτότητα πλη_κτρολογίου"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:13
-msgid "_Mouse Accessibility"
-msgstr "Προσιτότητα _ποντικιού"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:14
-msgid "_Preferred Applications"
-msgstr "_Προτιμώμενες εφαρμογές"
-
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:2
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technologies"
 msgstr "Βοηθητικές τεχνολογίες"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:3
+msgid "Assistive Technologies Preferences"
+msgstr "Προτιμήσεις βοηθητικής τεχνολογίας"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:4
+msgid "Changes to enable assistive technologies will not take effect until your next log in."
+msgstr "Οι αλλαγές σε αυτή τη ρύθμιση βοηθητικών τεχνολογιών θα πραγματοποιηθούν στην επόμενη είσοδο σας."
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:5
+msgid "Close and _Log Out"
+msgstr "Κλείσιμο και απο_σύνδεση"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:6
+msgid "Jump to Preferred Applications dialog"
+msgstr "Μετάβαση στο διάλογο Προτιμώμενων εφαρμογών"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:7
+msgid "Jump to the Accessible Login dialog"
+msgstr "Μετάβαση στο διάλογο Εισόδου με προσιτότητα"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:8
+msgid "Jump to the Keyboard Accessibility dialog"
+msgstr "Μετάβαση στο διάλογο Προσιτότητας πληκτρολογίου"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:9
+msgid "Jump to the Mouse Accessibility dialog"
+msgstr "Μετάβαση στο διάλογο Προσιτότητας ποντικιού"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:10
+msgid "Preferences"
+msgstr "Προτιμήσεις"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:11
+msgid "_Enable assistive technologies"
+msgstr "_Ενεργοποίηση βοηθητικών τεχνολογιών"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:12
+msgid "_Keyboard Accessibility"
+msgstr "Προσιτότητα πλη_κτρολογίου"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:13
+msgid "_Mouse Accessibility"
+msgstr "Προσιτότητα _ποντικιού"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:14
+msgid "_Preferred Applications"
+msgstr "_Προτιμώμενες εφαρμογές"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Choose which accessibility features to enable when you log in"
 msgstr "Επιλέξτε ποιες λειτουργίες προσιτότητας θα είναι ενεργές όταν συνδέεστε στο σύστημα"
 
-#: ../capplets/appearance/appearance-desktop.c:629
+#: ../capplets/appearance/appearance-desktop.c:623
 msgid "Add Wallpaper"
 msgstr "Προσθήκη ταπετσαρίας"
 
-#: ../capplets/appearance/appearance-desktop.c:665
+#: ../capplets/appearance/appearance-desktop.c:658
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
@@ -800,454 +828,432 @@ msgstr "Χρήση προηγούμενης γραμματοσειράς"
 msgid "Use selected font"
 msgstr "Χρήση επιλεγμένης γραμματοσειράς"
 
-#: ../capplets/appearance/appearance-main.c:124
+#: ../capplets/appearance/appearance-main.c:55
+#, c-format
+msgid "Could not load user interface file: %s"
+msgstr "Αδυναμία φόρτωσης του αρχείου επιφάνειας χρήσης: %s"
+
+#: ../capplets/appearance/appearance-main.c:134
 msgid "Specify the filename of a theme to install"
 msgstr "Καθορίστε το όνομα αρχείου θέματος για εγκατάσταση"
 
-#: ../capplets/appearance/appearance-main.c:125
+#: ../capplets/appearance/appearance-main.c:135
 msgid "filename"
 msgstr "όνομα αρχείου"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:132
+#: ../capplets/appearance/appearance-main.c:142
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "Καθορίστε το όνομα της σελίδας για εμφάνιση (θέμα|παρασκήνιο|γραμματοσειρές|διεπαφή)"
 
-#: ../capplets/appearance/appearance-main.c:133
-#: ../capplets/default-applications/gnome-da-capplet.c:897
-#: ../capplets/mouse/gnome-mouse-properties.c:442
+#: ../capplets/appearance/appearance-main.c:143
+#: ../capplets/default-applications/gnome-da-capplet.c:907
+#: ../capplets/mouse/gnome-mouse-properties.c:540
 msgid "page"
 msgstr "σελίδα"
 
-#: ../capplets/appearance/appearance-main.c:140
+#: ../capplets/appearance/appearance-main.c:150
 msgid "[WALLPAPER...]"
 msgstr "[WALLPAPER...]"
 
 #: ../capplets/appearance/appearance-style.c:173
-#: ../capplets/common/gnome-theme-info.c:445
-#: ../capplets/common/gnome-theme-info.c:637
+#: ../capplets/common/gnome-theme-info.c:446
+#: ../capplets/common/gnome-theme-info.c:638
 msgid "Default Pointer"
 msgstr "Προεπιλεγμένος δείκτης"
 
 #: ../capplets/appearance/appearance-style.c:235
-#: ../capplets/appearance/appearance-themes.c:687
+#: ../capplets/appearance/appearance-themes.c:685
 msgid "Install"
 msgstr "Εγκατάσταση"
 
 #: ../capplets/appearance/appearance-style.c:255
-#: ../capplets/common/gnome-theme-info.c:1647
+#: ../capplets/common/gnome-theme-info.c:1646
 #, c-format
 msgid "This theme will not look as intended because the required GTK+ theme engine '%s' is not installed."
 msgstr "Αυτό το θέμα δεν θα εμφανίζεται σωστά επειδή δεν είναι εγκατεστημένη η απαιτούμενη μηχανή θεμάτων GTK+ '%s'."
 
-#: ../capplets/appearance/appearance-themes.c:675
+#: ../capplets/appearance/appearance-themes.c:673
 msgid "Apply Background"
 msgstr "Εφαρμογή παρασκηνίου"
 
-#: ../capplets/appearance/appearance-themes.c:679
+#: ../capplets/appearance/appearance-themes.c:677
 msgid "Apply Font"
 msgstr "Εφαρμογή γραμματοσειράς"
 
-#: ../capplets/appearance/appearance-themes.c:683
+#: ../capplets/appearance/appearance-themes.c:681
 msgid "Revert Font"
 msgstr "Επαναφορά γραμματοσειράς"
 
-#: ../capplets/appearance/appearance-themes.c:713
+#: ../capplets/appearance/appearance-themes.c:711
 msgid "The current theme suggests a background and a font. Also, the last applied font suggestion can be reverted."
 msgstr "Αυτό το θέμα προτείνει ένα παρασκήνιο και μια γραμματοσειρά. Ακόμα υπάρχει η δυνατότητα επιστροφής στην προηγούμενη πρόταση γραμματοσειράς."
 
-#: ../capplets/appearance/appearance-themes.c:715
+#: ../capplets/appearance/appearance-themes.c:713
 msgid "The current theme suggests a background. Also, the last applied font suggestion can be reverted."
 msgstr "Αυτό το θέμα προτείνει ένα παρασκήνιο και μια γραμματοσειρά. Ακόμα υπάρχει η δυνατότητα επιστροφής στην προηγούμενη πρόταση γραμματοσειράς."
 
-#: ../capplets/appearance/appearance-themes.c:717
+#: ../capplets/appearance/appearance-themes.c:715
 msgid "The current theme suggests a background and a font."
 msgstr "Αυτό το θέμα προτείνει ένα παρασκήνιο και μια γραμματοσειρά."
 
-#: ../capplets/appearance/appearance-themes.c:719
+#: ../capplets/appearance/appearance-themes.c:717
 msgid "The current theme suggests a font. Also, the last applied font suggestion can be reverted."
 msgstr "Το τρέχον θέμα προτείνει μια γραμματοσειρά. Ακόμα, υπάρχει η δυνατότητα επαναφοράς της τελευταίας προτεινόμενης γραμματοσειράς."
 
-#: ../capplets/appearance/appearance-themes.c:721
+#: ../capplets/appearance/appearance-themes.c:719
 msgid "The current theme suggests a background."
 msgstr "Το τρέχον θέμα προτείνει ένα παρασκήνιο."
 
-#: ../capplets/appearance/appearance-themes.c:723
+#: ../capplets/appearance/appearance-themes.c:721
 msgid "The last applied font suggestion can be reverted."
 msgstr "Υπάρχει η δυνατότητα επαναφοράς της τελευταίας προτεινόμενης γραμματοσειράς."
 
-#: ../capplets/appearance/appearance-themes.c:725
+#: ../capplets/appearance/appearance-themes.c:723
 msgid "The current theme suggests a font."
 msgstr "Το τρέχον θέμα προτείνει μια γραμματοσειρά."
 
-#: ../capplets/appearance/appearance-themes.c:1046
-#: ../capplets/default-applications/gnome-da-capplet.c:648
+#: ../capplets/appearance/appearance-themes.c:1045
+#: ../capplets/default-applications/gnome-da-capplet.c:646
 msgid "Custom"
 msgstr "Προσαρμοσμένη"
 
-#: ../capplets/appearance/data/appearance.glade.h:1
-msgid "<b>C_olors</b>"
-msgstr "<b>_Χρώματα</b>"
-
-#. font hinting
-#: ../capplets/appearance/data/appearance.glade.h:3
-msgid "<b>Hinting</b>"
-msgstr "<b>Εξομάλυνση</b>"
-
-#: ../capplets/appearance/data/appearance.glade.h:4
-msgid "<b>Menus and Toolbars</b>"
-msgstr "<b>Μενού και Εργαλειοθήκες</b>"
-
-#: ../capplets/appearance/data/appearance.glade.h:5
-msgid "<b>Preview</b>"
-msgstr "<b>Προεπισκόπηση</b>"
-
-#: ../capplets/appearance/data/appearance.glade.h:6
-msgid "<b>Rendering</b>"
-msgstr "<b>Εμφάνιση</b>"
-
-#: ../capplets/appearance/data/appearance.glade.h:7
-msgid "<b>Smoothing</b>"
-msgstr "<b>Εξομάλυνση</b>"
-
-#: ../capplets/appearance/data/appearance.glade.h:8
-msgid "<b>Subpixel Order</b>"
-msgstr "<b>Σειρά Subpixel</b>"
-
-#: ../capplets/appearance/data/appearance.glade.h:9
-msgid "<b>_Desktop Background</b>"
-msgstr "<b>_Παρασκήνιο επιφάνειας εργασίας</b>"
-
-#: ../capplets/appearance/data/appearance.glade.h:10
+#: ../capplets/appearance/data/appearance.ui.h:1
 msgid "Appearance Preferences"
 msgstr "Προτιμήσεις εμφάνισης"
 
-#: ../capplets/appearance/data/appearance.glade.h:11
+#: ../capplets/appearance/data/appearance.ui.h:2
 msgid "Background"
 msgstr "Παρασκήνιο"
 
-#: ../capplets/appearance/data/appearance.glade.h:12
+#: ../capplets/appearance/data/appearance.ui.h:3
 msgid "Best _shapes"
 msgstr "Βέλτιστα _σχήματα"
 
-#: ../capplets/appearance/data/appearance.glade.h:13
+#: ../capplets/appearance/data/appearance.ui.h:4
 msgid "Best co_ntrast"
 msgstr "Βέλτιστη αντί_θεση"
 
-#: ../capplets/appearance/data/appearance.glade.h:14
+#: ../capplets/appearance/data/appearance.ui.h:5
+msgid "C_olors:"
+msgstr "Χ_ρώματα:"
+
+#: ../capplets/appearance/data/appearance.ui.h:6
 msgid "C_ustomize..."
 msgstr "Προσαρμο_γή..."
 
-#: ../capplets/appearance/data/appearance.glade.h:15
-msgid "C_ut"
-msgstr "Αποκο_πή"
+#: ../capplets/appearance/data/appearance.ui.h:7
+msgid "Centered"
+msgstr "Στο κέντρο"
 
-#: ../capplets/appearance/data/appearance.glade.h:16
+#: ../capplets/appearance/data/appearance.ui.h:8
 msgid "Changing your cursor theme takes effect the next time you log in."
 msgstr "Η αλλαγή του θέματος δρομέα θα πραγματοποιηθεί στην επόμενη σας είσοδο."
 
-#: ../capplets/appearance/data/appearance.glade.h:17
+#: ../capplets/appearance/data/appearance.ui.h:9
 msgid "Colors"
 msgstr "Χρώματα"
 
-#: ../capplets/appearance/data/appearance.glade.h:18
+#: ../capplets/appearance/data/appearance.ui.h:10
 msgid "Controls"
 msgstr "Έλεγχοι"
 
-#: ../capplets/appearance/data/appearance.glade.h:19
+#: ../capplets/appearance/data/appearance.ui.h:11
 msgid "Customize Theme"
 msgstr "Προσαρμογή θέματος"
 
-#: ../capplets/appearance/data/appearance.glade.h:20
+#: ../capplets/appearance/data/appearance.ui.h:12
 msgid "D_etails..."
 msgstr "Λεπτο_μέρειες..."
 
-#: ../capplets/appearance/data/appearance.glade.h:21
+#: ../capplets/appearance/data/appearance.ui.h:13
 msgid "Des_ktop font:"
 msgstr "Γραμματοσειρά ε_πιφάνειας εργασίας:"
 
-#: ../capplets/appearance/data/appearance.glade.h:22
+#: ../capplets/appearance/data/appearance.ui.h:14
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: ../capplets/appearance/data/appearance.glade.h:23
+#: ../capplets/appearance/data/appearance.ui.h:15
+msgid "Fill screen"
+msgstr "Γέμισμα οθόνης"
+
+#: ../capplets/appearance/data/appearance.ui.h:16
 msgid "Font Rendering Details"
 msgstr "Λεπτομέρειες εμφάνισης γραμματοσειράς"
 
-#: ../capplets/appearance/data/appearance.glade.h:24
+#: ../capplets/appearance/data/appearance.ui.h:17
 msgid "Fonts"
 msgstr "Γραμματοσειρές"
 
-#: ../capplets/appearance/data/appearance.glade.h:25
+#: ../capplets/appearance/data/appearance.ui.h:18
+msgid "Get more backgrounds online"
+msgstr "Λήψη περισσότερων εικόνων παρασκηνίου"
+
+#: ../capplets/appearance/data/appearance.ui.h:19
+msgid "Get more themes online"
+msgstr "Λήψη περισσότερων θεμάτων"
+
+#: ../capplets/appearance/data/appearance.ui.h:20
 msgid "Gra_yscale"
 msgstr "Κλίμακα του _γκρι"
 
-#: ../capplets/appearance/data/appearance.glade.h:26
+#. font hinting
+#: ../capplets/appearance/data/appearance.ui.h:22
+msgid "Hinting"
+msgstr "Εξομάλυνση"
+
+#: ../capplets/appearance/data/appearance.ui.h:23
+msgid "Horizontal gradient"
+msgstr "Οριζόντια διαβάθμιση"
+
+#: ../capplets/appearance/data/appearance.ui.h:24
 msgid "Icons"
 msgstr "Εικονίδια"
 
-#: ../capplets/appearance/data/appearance.glade.h:27
+#: ../capplets/appearance/data/appearance.ui.h:25
+msgid "Icons only"
+msgstr "Μόνο εικονίδια"
+
+#: ../capplets/appearance/data/appearance.ui.h:26
 msgid "Interface"
 msgstr "Διεπαφή"
 
-#: ../capplets/appearance/data/appearance.glade.h:28
+#: ../capplets/appearance/data/appearance.ui.h:27
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:16
 msgid "Large"
 msgstr "Μεγάλο"
 
-#: ../capplets/appearance/data/appearance.glade.h:29
+#: ../capplets/appearance/data/appearance.ui.h:28
+msgid "Menus and Toolbars"
+msgstr "Μενού και Εργαλειοθήκες"
+
+#: ../capplets/appearance/data/appearance.ui.h:29
 msgid "N_one"
 msgstr "Κα_νένα"
 
-#: ../capplets/appearance/data/appearance.glade.h:30
-msgid "New File"
-msgstr "Νέο αρχείο"
-
-#: ../capplets/appearance/data/appearance.glade.h:31
-msgid "Open File"
-msgstr "Άνοιγμα αρχείου"
-
-#: ../capplets/appearance/data/appearance.glade.h:32
+#: ../capplets/appearance/data/appearance.ui.h:30
 msgid "Open a dialog to specify the color"
 msgstr "Άνοιγμα ενός διαλόγου για τον καθορισμό του χρώματος"
 
-#: ../capplets/appearance/data/appearance.glade.h:33
+#: ../capplets/appearance/data/appearance.ui.h:31
 msgid "Pointer"
 msgstr "Δείκτης"
 
-#: ../capplets/appearance/data/appearance.glade.h:34
+#: ../capplets/appearance/data/appearance.ui.h:32
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+#: ../capplets/appearance/data/appearance.ui.h:33
 msgid "R_esolution:"
 msgstr "Ανά_λυση:"
 
-#: ../capplets/appearance/data/appearance.glade.h:35
-msgid "Save File"
-msgstr "Αποθήκευση αρχείου"
+#: ../capplets/appearance/data/appearance.ui.h:34
+msgid "Rendering"
+msgstr "Εμφάνιση"
 
 # For lack of a better term...?  Anaklimakwsh ???
-#: ../capplets/appearance/data/appearance.glade.h:36
+#: ../capplets/appearance/data/appearance.ui.h:35
 msgid "Save Theme As..."
 msgstr "Αποθήκευση Θέματος ως..."
 
 # For lack of a better term...?  Anaklimakwsh ???
-#: ../capplets/appearance/data/appearance.glade.h:37
+#: ../capplets/appearance/data/appearance.ui.h:36
 msgid "Save _As..."
 msgstr "Αποθήκευση _ως..."
 
-#: ../capplets/appearance/data/appearance.glade.h:38
+#: ../capplets/appearance/data/appearance.ui.h:37
 msgid "Save _background image"
 msgstr "Αποθήκευση εικόνας _παρασκηνίου"
 
-#: ../capplets/appearance/data/appearance.glade.h:39
+#: ../capplets/appearance/data/appearance.ui.h:38
+msgid "Scaled"
+msgstr "Κλίμακα"
+
+#: ../capplets/appearance/data/appearance.ui.h:39
 msgid "Show _icons in menus"
 msgstr "Εμφάνιση ε_ικονιδίων στα μενού"
 
-#: ../capplets/appearance/data/appearance.glade.h:40
+#: ../capplets/appearance/data/appearance.ui.h:40
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:30
 msgid "Small"
 msgstr "Μικρό"
 
-#: ../capplets/appearance/data/appearance.glade.h:41
-msgid ""
-"Solid color\n"
-"Horizontal gradient\n"
-"Vertical gradient"
-msgstr ""
-"Ενιαίο χρώμα\n"
-"Οριζόντια διαβάθμιση\n"
-"Κάθετη διαβάθμιση"
+#: ../capplets/appearance/data/appearance.ui.h:41
+msgid "Smoothing"
+msgstr "Εξομάλυνση"
 
-#: ../capplets/appearance/data/appearance.glade.h:44
+#: ../capplets/appearance/data/appearance.ui.h:42
+msgid "Solid color"
+msgstr "Συπαγές χρώμα"
+
+#: ../capplets/appearance/data/appearance.ui.h:43
 msgid "Sub_pixel (LCDs)"
 msgstr "Sub_pixel (LCDs)"
 
-#: ../capplets/appearance/data/appearance.glade.h:45
+#: ../capplets/appearance/data/appearance.ui.h:44
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Εξομάλυνση Sub_pixel (LCDs)"
 
-#: ../capplets/appearance/data/appearance.glade.h:46
+#: ../capplets/appearance/data/appearance.ui.h:45
+msgid "Subpixel Order"
+msgstr "Σειρά Subpixel"
+
+#: ../capplets/appearance/data/appearance.ui.h:46
 msgid "Text"
 msgstr "Κείμενο"
 
-#: ../capplets/appearance/data/appearance.glade.h:47
-msgid ""
-"Text below items\n"
-"Text beside items\n"
-"Icons only\n"
-"Text only"
-msgstr ""
-"Κείμενο κάτω από αντικείμενα\n"
-"Κείμενο δίπλα από αντικείμενα\n"
-"Μόνο εικονίδια\n"
-"Μόνο κείμενο"
+#: ../capplets/appearance/data/appearance.ui.h:47
+msgid "Text below items"
+msgstr "Κείμενο κάτω από αντικείμενα"
 
-#: ../capplets/appearance/data/appearance.glade.h:51
+#: ../capplets/appearance/data/appearance.ui.h:48
+msgid "Text beside items"
+msgstr "Κείμενο δίπλα από αντικείμενα"
+
+#: ../capplets/appearance/data/appearance.ui.h:49
+msgid "Text only"
+msgstr "Μόνο κείμενο"
+
+#: ../capplets/appearance/data/appearance.ui.h:50
 msgid "The current controls theme does not support color schemes."
 msgstr "Οι τρέχοντες έλεγχοι θέματος δεν υποστηρίζουν σχήματα χρωμάτων."
 
-#: ../capplets/appearance/data/appearance.glade.h:52
+#: ../capplets/appearance/data/appearance.ui.h:51
 msgid "Theme"
 msgstr "Θέμα"
 
-#: ../capplets/appearance/data/appearance.glade.h:53
-msgid ""
-"Tiled\n"
-"Zoom\n"
-"Centered\n"
-"Scaled\n"
-"Fill screen"
-msgstr ""
-"Πλακίδιο\n"
-"Εστίαση\n"
-"Κέντρο\n"
-"Κλίμακα\n"
-"Γέμισμα οθόνης"
+#: ../capplets/appearance/data/appearance.ui.h:52
+msgid "Tiled"
+msgstr "Πλακίδια"
 
-#: ../capplets/appearance/data/appearance.glade.h:58
+#: ../capplets/appearance/data/appearance.ui.h:53
 msgid "Toolbar _button labels:"
 msgstr "Ετι_κέτες κουμπιών εργαλειοθήκης:"
 
 #. vertical hinting, pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.glade.h:60
+#: ../capplets/appearance/data/appearance.ui.h:55
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: ../capplets/appearance/data/appearance.glade.h:61
+#: ../capplets/appearance/data/appearance.ui.h:56
+msgid "Vertical gradient"
+msgstr "Κάθετη διαβάθμιση"
+
+#: ../capplets/appearance/data/appearance.ui.h:57
 msgid "Window Border"
 msgstr "Περίγραμμα παραθύρου"
 
-#: ../capplets/appearance/data/appearance.glade.h:62
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:54
+#: ../capplets/appearance/data/appearance.ui.h:58
+msgid "Zoom"
+msgstr "Μεγέθυνση"
+
+#: ../capplets/appearance/data/appearance.ui.h:59
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 msgid "_Add..."
 msgstr "_Προσθήκη..."
 
-#: ../capplets/appearance/data/appearance.glade.h:63
+#: ../capplets/appearance/data/appearance.ui.h:60
 msgid "_Application font:"
 msgstr "Γραμματοσειρά εφαρμο_γής:"
 
 #. pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.glade.h:65
+#: ../capplets/appearance/data/appearance.ui.h:62
 msgid "_BGR"
 msgstr "_BGR"
 
-#: ../capplets/appearance/data/appearance.glade.h:66
-msgid "_Copy"
-msgstr "Αντιγρα_φή"
-
-#: ../capplets/appearance/data/appearance.glade.h:67
+#: ../capplets/appearance/data/appearance.ui.h:63
 msgid "_Description:"
 msgstr "Περιγρα_φή:"
 
-#: ../capplets/appearance/data/appearance.glade.h:68
+#: ../capplets/appearance/data/appearance.ui.h:64
 msgid "_Document font:"
 msgstr "Γραμματοσειρά εγγρά_φου:"
 
-#: ../capplets/appearance/data/appearance.glade.h:69
+#: ../capplets/appearance/data/appearance.ui.h:65
 msgid "_Editable menu shortcut keys"
 msgstr "_Παραμετροποίησιμες συντομεύσεις μενού"
 
-#: ../capplets/appearance/data/appearance.glade.h:70
+#: ../capplets/appearance/data/appearance.ui.h:66
 msgid "_File"
 msgstr "_Αρχείο"
 
-#: ../capplets/appearance/data/appearance.glade.h:71
+#: ../capplets/appearance/data/appearance.ui.h:67
 msgid "_Fixed width font:"
 msgstr "Γραμματοσειρά στα_θερού πλάτους:"
 
-#: ../capplets/appearance/data/appearance.glade.h:72
+#: ../capplets/appearance/data/appearance.ui.h:68
 msgid "_Full"
 msgstr "_Πλήρες"
 
-#: ../capplets/appearance/data/appearance.glade.h:73
+#: ../capplets/appearance/data/appearance.ui.h:69
 msgid "_Input boxes:"
 msgstr "Πλαίσια ει_σόδου:"
 
-#: ../capplets/appearance/data/appearance.glade.h:74
+#: ../capplets/appearance/data/appearance.ui.h:70
 msgid "_Install..."
 msgstr "_Εγκατάσταση..."
 
-#: ../capplets/appearance/data/appearance.glade.h:75
+#: ../capplets/appearance/data/appearance.ui.h:71
 msgid "_Medium"
 msgstr "_Μέτριο"
 
-#: ../capplets/appearance/data/appearance.glade.h:76
+#: ../capplets/appearance/data/appearance.ui.h:72
 msgid "_Monochrome"
 msgstr "_Μονόχρωμο"
 
-#: ../capplets/appearance/data/appearance.glade.h:77
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:5
+#: ../capplets/appearance/data/appearance.ui.h:73
+#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:5
 msgid "_Name:"
 msgstr "Ό_νομα:"
 
-#: ../capplets/appearance/data/appearance.glade.h:78
-msgid "_New"
-msgstr "_Νέο"
-
-#: ../capplets/appearance/data/appearance.glade.h:79
+#: ../capplets/appearance/data/appearance.ui.h:74
 msgid "_None"
 msgstr "_Κανένα"
 
-#: ../capplets/appearance/data/appearance.glade.h:80
-msgid "_Open"
-msgstr "Άν_οιγμα"
-
-#: ../capplets/appearance/data/appearance.glade.h:81
-msgid "_Paste"
-msgstr "Επι_κόλληση"
-
-#: ../capplets/appearance/data/appearance.glade.h:82
-msgid "_Print"
-msgstr "_Εκτύπωση"
-
-#: ../capplets/appearance/data/appearance.glade.h:83
-msgid "_Quit"
-msgstr "Έ_ξοδος"
-
 #. pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.glade.h:85
+#: ../capplets/appearance/data/appearance.ui.h:76
 msgid "_RGB"
 msgstr "_RGB"
 
-#: ../capplets/appearance/data/appearance.glade.h:86
+#: ../capplets/appearance/data/appearance.ui.h:77
 msgid "_Reset to Defaults"
 msgstr "Επανα_φορά στις προεπιλογές"
 
-# For lack of a better term...?  Anaklimakwsh ???
-#: ../capplets/appearance/data/appearance.glade.h:87
-msgid "_Save"
-msgstr "_Αποθήκευση"
-
-#: ../capplets/appearance/data/appearance.glade.h:88
+#: ../capplets/appearance/data/appearance.ui.h:78
 msgid "_Selected items:"
 msgstr "Ε_πιλεγμένα αντικείμενα:"
 
-#: ../capplets/appearance/data/appearance.glade.h:89
+#: ../capplets/appearance/data/appearance.ui.h:79
 msgid "_Size:"
 msgstr "Μέ_γεθος:"
 
-#: ../capplets/appearance/data/appearance.glade.h:90
+#: ../capplets/appearance/data/appearance.ui.h:80
 msgid "_Slight"
 msgstr "_Ελαφρύ"
 
-#: ../capplets/appearance/data/appearance.glade.h:91
+#: ../capplets/appearance/data/appearance.ui.h:81
 msgid "_Style:"
 msgstr "_Στυλ:"
 
-#: ../capplets/appearance/data/appearance.glade.h:92
+#: ../capplets/appearance/data/appearance.ui.h:82
 msgid "_Tooltips:"
 msgstr "Συ_μβουλή οθόνης:"
 
 #. vertical hinting, pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.glade.h:94
+#: ../capplets/appearance/data/appearance.ui.h:84
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: ../capplets/appearance/data/appearance.glade.h:95
+#: ../capplets/appearance/data/appearance.ui.h:85
 msgid "_Window title font:"
 msgstr "Γραμματοσειρά τίτλου _παραθύρου:"
 
-#: ../capplets/appearance/data/appearance.glade.h:96
+#: ../capplets/appearance/data/appearance.ui.h:86
 msgid "_Windows:"
 msgstr "_Παράθυρα:"
 
-#: ../capplets/appearance/data/appearance.glade.h:97
+#: ../capplets/appearance/data/appearance.ui.h:87
 msgid "dots per inch"
 msgstr "κουκίδες ανά ίντσα"
 
@@ -1275,100 +1281,108 @@ msgstr "Πακέτο θέματος Gnome"
 msgid "No Desktop Background"
 msgstr "Χωρίς παρασκήνιο επιφάνειας εργασίας"
 
-#: ../capplets/appearance/gnome-wp-item.c:208
+#: ../capplets/appearance/gnome-wp-item.c:258
 msgid "Slide Show"
 msgstr "Προβολή ως διαφάνειες"
 
-#. translators: <b>wallpaper name</b>
-#. * mime type, x pixel(s) by y pixel(s)
-#. * Folder: /path/to/file
-#.
-#: ../capplets/appearance/gnome-wp-item.c:216
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %d %s by %d %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %d %s by %d %s\n"
-"Φάκελος: %s"
+#: ../capplets/appearance/gnome-wp-item.c:260
+msgid "Image"
+msgstr "Εικόνα"
 
-#: ../capplets/appearance/gnome-wp-item.c:222
-#: ../capplets/appearance/gnome-wp-item.c:224
+#: ../capplets/appearance/gnome-wp-item.c:266
+msgid "multiple sizes"
+msgstr "πολλαπλά μεγέθη"
+
+#: ../capplets/appearance/gnome-wp-item.c:271
+#: ../capplets/appearance/gnome-wp-item.c:273
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "εικονοστοιχείο"
 msgstr[1] "εικονοστοιχεία"
 
-#: ../capplets/appearance/theme-installer.c:174
-#: ../capplets/appearance/theme-installer.c:224
+#. translators: <b>wallpaper name</b>
+#. * mime type, size
+#. * Folder: /path/to/file
+#.
+#: ../capplets/appearance/gnome-wp-item.c:279
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Φάκελος: %s"
+
+#: ../capplets/appearance/theme-installer.c:178
+#: ../capplets/appearance/theme-installer.c:234
 msgid "Cannot install theme"
 msgstr "Αδυναμία εγκατάστασης θέματος"
 
-#: ../capplets/appearance/theme-installer.c:176
+#: ../capplets/appearance/theme-installer.c:180
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "Δεν είναι εγκατεστημένη η εφαρμογή %s."
 
-#: ../capplets/appearance/theme-installer.c:226
+#: ../capplets/appearance/theme-installer.c:236
 msgid "There was a problem while extracting the theme."
 msgstr "Υπήρξε ένα πρόβλημα κατά την αποσυμπίεση του θέματος."
 
-#: ../capplets/appearance/theme-installer.c:249
+#: ../capplets/appearance/theme-installer.c:264
 msgid "There was an error installing the selected file"
 msgstr "Υπήρξε ένα σφάλμα εγκατάστασης του επιλεγμένου αρχείου"
 
-#: ../capplets/appearance/theme-installer.c:250
+#: ../capplets/appearance/theme-installer.c:265
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "Το \"%s\" δεν φαίνεται να είναι ένα έγκυρο θέμα."
 
-#: ../capplets/appearance/theme-installer.c:251
+#: ../capplets/appearance/theme-installer.c:266
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme. It may be a theme engine which you need to compile."
 msgstr "Το \"%s\" δεν είναι ένα έγκυρο θέμα. Μπορεί να είναι μια μηχανή θέματος που πρέπει να κάνετε compile."
 
-#: ../capplets/appearance/theme-installer.c:354
+#: ../capplets/appearance/theme-installer.c:372
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Η εγκατάσταση για το θέμα \"%s\" απέτυχε."
 
-#: ../capplets/appearance/theme-installer.c:393
+#: ../capplets/appearance/theme-installer.c:411
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Το θέμα \"%s\" έχει εγκατασταθεί."
 
-#: ../capplets/appearance/theme-installer.c:398
+#: ../capplets/appearance/theme-installer.c:421
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Θέλετε να το εφαρμόσετε τώρα, ή να διατηρήσετε το τρέχον σας θέμα;"
 
-#: ../capplets/appearance/theme-installer.c:400
+#: ../capplets/appearance/theme-installer.c:424
 msgid "Keep Current Theme"
 msgstr "Διατήρηση τρέχοντος θέματος"
 
-#: ../capplets/appearance/theme-installer.c:402
+#: ../capplets/appearance/theme-installer.c:427
 msgid "Apply New Theme"
 msgstr "Εφαρμογή νέου θέματος"
 
-#: ../capplets/appearance/theme-installer.c:446
+#: ../capplets/appearance/theme-installer.c:471
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "Το θέμα %s για το GNOME εγκαταστάθηκε επιτυχώς"
 
-#: ../capplets/appearance/theme-installer.c:505
+#: ../capplets/appearance/theme-installer.c:533
 msgid "Failed to create temporary directory"
 msgstr "Αποτυχία δημιουργίας προσωρινού καταλόγου"
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:596
 msgid "New themes have been successfully installed."
 msgstr "Νέα θέματα έχουν εγκατασταθεί επιτυχώς."
 
-#: ../capplets/appearance/theme-installer.c:593
+#: ../capplets/appearance/theme-installer.c:643
 msgid "No theme file location specified to install"
 msgstr "Δεν καθορίστηκε τοποθεσία αρχείου θέματος για εγκατάσταση"
 
-#: ../capplets/appearance/theme-installer.c:614
+#: ../capplets/appearance/theme-installer.c:667
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1377,11 +1391,11 @@ msgstr ""
 "Ανεπαρκή δικαιώματα για την εγκατάσταση του θέματος στο:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:745
 msgid "Select Theme"
 msgstr "Επιλογή θέματος"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:756
 msgid "Theme Packages"
 msgstr "Πακέτα θέματος"
 
@@ -1414,7 +1428,7 @@ msgstr "Αδυναμία εγκατάστασης μηχανής θέματος"
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
-"Without the GNOME settings manager running, some preferences may not take effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already be active and conflicting with the GNOME settings manager."
+"Without the GNOME settings manager running, some preferences may not take effect. This could indicate a problem with DBus, or a non-GNOME (e.g. KDE) settings manager may already be active and conflicting with the GNOME settings manager."
 msgstr ""
 "Αδυναμία εκκίνησης του διαχειριστή ρυθμίσεων 'gnome-settings-daemon'.\n"
 "Αν δεν τρέχει ο διαχειριστής ρυθμίσεων GNOME ορισμένες από τις προτιμήσεις δε θα πραγματοποιηθούν. Αυτό μάλλον σημαίνει ότι υπάρχει πρόβλημα με το Bonobo, ή ένας εκτός-GNOME διαχειριστής ρυθμίσεων (π.χ. KDE) είναι ήδη ενεργός και είναι σε σύγκρουση με το διαχειριστή ρυθμίσεων GNOME."
@@ -1569,7 +1583,7 @@ msgstr "Δεδομένα επεξεργαστή ιδιότητας που ελε
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Επανάκληση που θα εκδοθεί όταν πρόκειται να ελευθερωθούν δεδομένα αντικειμένου επεξεργαστή ιδιότητας"
 
-#: ../capplets/common/gconf-property-editor.c:1404
+#: ../capplets/common/gconf-property-editor.c:1405
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1580,7 +1594,7 @@ msgstr ""
 "\n"
 "Βεβαιωθείτε ότι υπάρχει και προσπαθήστε ξανά, ή επιλέξτε μια διαφορετική εικόνα παρασκηνίου."
 
-#: ../capplets/common/gconf-property-editor.c:1412
+#: ../capplets/common/gconf-property-editor.c:1413
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1593,59 +1607,59 @@ msgstr ""
 "\n"
 "Επιλέξτε ένα διαφορετικό τύπο εικόνας."
 
-#: ../capplets/common/gconf-property-editor.c:1532
+#: ../capplets/common/gconf-property-editor.c:1533
 msgid "Please select an image."
 msgstr "Παρακαλώ επιλέξτε μια εικόνα."
 
-#: ../capplets/common/gconf-property-editor.c:1537
+#: ../capplets/common/gconf-property-editor.c:1538
 msgid "_Select"
 msgstr "Επιλο_γή"
 
-#: ../capplets/common/gnome-theme-info.c:638
+#: ../capplets/common/gnome-theme-info.c:639
 msgid "Default Pointer - Current"
 msgstr "Προεπιλεγμένος δείκτης - τρέχων"
 
-#: ../capplets/common/gnome-theme-info.c:642
+#: ../capplets/common/gnome-theme-info.c:643
 msgid "White Pointer"
 msgstr "Λευκός δείκτης"
 
-#: ../capplets/common/gnome-theme-info.c:643
+#: ../capplets/common/gnome-theme-info.c:644
 msgid "White Pointer - Current"
 msgstr "Λευκός δείκτης - τρέχων"
 
-#: ../capplets/common/gnome-theme-info.c:647
+#: ../capplets/common/gnome-theme-info.c:648
 msgid "Large Pointer"
 msgstr "Μεγάλος δείκτης"
 
-#: ../capplets/common/gnome-theme-info.c:648
+#: ../capplets/common/gnome-theme-info.c:649
 msgid "Large Pointer - Current"
 msgstr "Μεγάλος δείκτης - τρέχων"
 
-#: ../capplets/common/gnome-theme-info.c:652
+#: ../capplets/common/gnome-theme-info.c:653
 msgid "Large White Pointer - Current"
 msgstr "Λευκός μεγάλος δείκτης - τρέχων"
 
-#: ../capplets/common/gnome-theme-info.c:653
+#: ../capplets/common/gnome-theme-info.c:654
 msgid "Large White Pointer"
 msgstr "Λευκός μεγάλος δείκτης"
 
-#: ../capplets/common/gnome-theme-info.c:1623
+#: ../capplets/common/gnome-theme-info.c:1622
 #, c-format
 msgid "This theme will not look as intended because the required GTK+ theme '%s' is not installed."
 msgstr "Αυτό το θέμα δεν θα εμφανίζεται σωστά επειδή δεν είναι εγκατεστημένη η απαιτούμενη μηχανή θεμάτων GTK+ '%s'."
 
-#: ../capplets/common/gnome-theme-info.c:1631
+#: ../capplets/common/gnome-theme-info.c:1630
 #, c-format
 msgid "This theme will not look as intended because the required window manager theme '%s' is not installed."
 msgstr "Αυτό το θέμα δεν θα εμφανίζεται σωστά επειδή δεν είναι εγκατεστημένο το απαιτούμενο θέμα διαχειριστή παραθύρων '%s'."
 
-#: ../capplets/common/gnome-theme-info.c:1638
+#: ../capplets/common/gnome-theme-info.c:1637
 #, c-format
 msgid "This theme will not look as intended because the required icon theme '%s' is not installed."
 msgstr "Αυτό το θέμα δεν θα εμφανίζεται σωστά επειδή δεν είναι εγκατεστημένη η απαιτούμενη μηχανή εικονιδίων '%s'."
 
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:17
 msgid "Preferred Applications"
 msgstr "Προτιμώμενες εφαρμογές"
 
@@ -1668,70 +1682,30 @@ msgstr "Οπτική βοήθεια"
 msgid "Error saving configuration: %s"
 msgstr "Σφάλμα κατά την αποθήκευση ρύθμισης: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:668
+#: ../capplets/default-applications/gnome-da-capplet.c:677
 msgid "Could not load the main interface"
 msgstr "Αδυναμία φόρτωσης της κύριας επιφάνειας χρήστη"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:670
+#: ../capplets/default-applications/gnome-da-capplet.c:679
 msgid "Please make sure that the applet is properly installed"
 msgstr "Βεβαιωθείτε ότι η μικροεφαρμογή έχει εγκατασταθεί σωστά"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/default-applications/gnome-da-capplet.c:896
+#: ../capplets/default-applications/gnome-da-capplet.c:906
 msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
 msgstr "Καθορίστε το όνομα της σελίδας για εμφάνιση (διαδίκτυο|πολυμέσα|σύστημα|a11y)"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:901
+#: ../capplets/default-applications/gnome-da-capplet.c:911
 msgid "- GNOME Default Applications"
 msgstr "- Προεπιλεγμένες εφαρμογές GNOME"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
-msgid "<b>Image Viewer</b>"
-msgstr "<b>Εφαρμογή προβολής εικόνων</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "<b>Instant Messenger</b>"
-msgstr "<b>Αποστολέας άμεσων μηνυμάτων</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "<b>Mail Reader</b>"
-msgstr "<b>Εφαρμογή αλληλογραφίας</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "<b>Mobility</b>"
-msgstr "<b>Φορητότητα</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "<b>Multimedia Player</b>"
-msgstr "<b>Αναπαραγωγή πολυμέσων</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "<b>Terminal Emulator</b>"
-msgstr "<b>Προσομοίωση τερματικού</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
-msgid "<b>Text Editor</b>"
-msgstr "<b>Επεξεργαστής κειμένου</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "<b>Video Player</b>"
-msgstr "<b>Αναπαραγωγή βίντεο</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "<b>Visual</b>"
-msgstr "<b>Όραση</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "<b>Web Browser</b>"
-msgstr "<b>Περιηγητής ιστοσελίδων</b>"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:2
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:1
 msgid "Accessibility"
 msgstr "Προσιτότητα"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:3
 #, no-c-format
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "Όλες οι επαναλήψεις %s θα αντικατασταθούν με ένα πραγματικό δεσμό"
@@ -1739,52 +1713,92 @@ msgstr "Όλες οι επαναλήψεις %s θα αντικατασταθο�
 #.
 #. * vim: sw=2 ts=8 cindent noai bs=2
 #.
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:4
+#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:1
 msgid "C_ommand:"
 msgstr "Εν_τολή:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:5
 msgid "Co_mmand:"
 msgstr "Εν_τολή:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:6
 msgid "E_xecute flag:"
 msgstr "_Παράμετρος εκτέλεσης:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:7
+msgid "Image Viewer"
+msgstr "Εφαρμογή προβολής εικόνων"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:8
+msgid "Instant Messenger"
+msgstr "Αποστολέας άμεσων μηνυμάτων"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:9
 msgid "Internet"
 msgstr "Διαδίκτυο"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:10
+msgid "Mail Reader"
+msgstr "Εφαρμογή αλληλογραφίας"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:11
+msgid "Mobility"
+msgstr "Φορητότητα"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:12
 msgid "Multimedia"
 msgstr "Πολυμέσα"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:13
+msgid "Multimedia Player"
+msgstr "Αναπαραγωγή πολυμέσων"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:14
 msgid "Open link in new _tab"
 msgstr "Άνοιγμα δεσμού σε νέα _καρτέλα"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:15
 msgid "Open link in new _window"
 msgstr "Άνοιγμα δεσμού σε νέο _παράθυρο"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:16
 msgid "Open link with web browser _default"
 msgstr "Άνοιγμα δεσμού με τις προεπι_λογές του περιηγητή"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Run at st_art"
 msgstr "Εκτέλεση στην ε_κκίνηση"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:19
 msgid "Run in t_erminal"
 msgstr "Εκτέλεση σε τ_ερματικό"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:20
 msgid "System"
 msgstr "Σύστημα"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:21
+msgid "Terminal Emulator"
+msgstr "Προσομοίωση τερματικού"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:22
+msgid "Text Editor"
+msgstr "Επεξεργαστής κειμένου"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:23
+msgid "Video Player"
+msgstr "Αναπαραγωγή βίντεο"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:24
+msgid "Visual"
+msgstr "Οπτική βοήθεια"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:25
+msgid "Web Browser"
+msgstr "Περιηγητής ιστοσελίδων"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:26
 msgid "_Run at start"
 msgstr "Εκτέλεση στην ε_κκίνηση"
 
@@ -1996,68 +2010,76 @@ msgstr "Αναπαραγωγή ταινιών Totem"
 msgid "aterm"
 msgstr "aterm"
 
-#: ../capplets/display/display-capplet.glade.h:1
-#: ../capplets/display/xrandr-capplet.c:469
-msgid "<b>Monitor</b>"
-msgstr "<b>Οθόνη</b>"
-
-#: ../capplets/display/display-capplet.glade.h:2
-msgid "<b>Panel icon</b>"
-msgstr "<b>Εικονίδιο πίνακα εφαρμογών</b>"
-
-#: ../capplets/display/display-capplet.glade.h:3
-msgid "<i>Drag the monitors to set their place</i>"
-msgstr "<i>Σύρτε τις οθόνες για να ορίσετε τη θέση τους</i>"
-
-#: ../capplets/display/display-capplet.glade.h:4
+#: ../capplets/display/display-capplet.ui.h:1
 msgid "Display Preferences"
 msgstr "Προτιμήσεις οθόνης"
 
-#: ../capplets/display/display-capplet.glade.h:5
+#: ../capplets/display/display-capplet.ui.h:2
+msgid "Drag the monitors to set their place"
+msgstr "Σύρετε τις οθόνες για να ορίσετε τη θέση τους"
+
+#: ../capplets/display/display-capplet.ui.h:3
 msgid "Include _panel"
 msgstr "Να περιλαμβάνεται ο _πίνακας εφαρμογών"
 
-#: ../capplets/display/display-capplet.glade.h:6
-msgid ""
-"Normal\n"
-"Left\n"
-"Right\n"
-"Upside-down\n"
-msgstr ""
-"Κανονική\n"
-"Αριστερά\n"
-"Δεξιά\n"
-"Αναποδογύρισμα\n"
+#: ../capplets/display/display-capplet.ui.h:4
+#: ../capplets/display/xrandr-capplet.c:302
+msgid "Left"
+msgstr "Αριστερά"
 
-#: ../capplets/display/display-capplet.glade.h:11
+#: ../capplets/display/display-capplet.ui.h:5
+#: ../capplets/display/xrandr-capplet.c:440
+msgid "Monitor"
+msgstr "Οθόνη"
+
+#: ../capplets/display/display-capplet.ui.h:6
+#: ../capplets/display/xrandr-capplet.c:301
+#: ../capplets/display/xrandr-capplet.c:340
+msgid "Normal"
+msgstr "Κανονική"
+
+#: ../capplets/display/display-capplet.ui.h:7
 msgid "Off"
 msgstr "Ανενεργή"
 
-#: ../capplets/display/display-capplet.glade.h:12
+#: ../capplets/display/display-capplet.ui.h:8
 msgid "On"
 msgstr "Ενεργή"
 
-#: ../capplets/display/display-capplet.glade.h:13
+#: ../capplets/display/display-capplet.ui.h:9
+msgid "Panel icon"
+msgstr "Εικονίδιο πίνακα εφαρμογών"
+
+#: ../capplets/display/display-capplet.ui.h:10
 msgid "R_otation:"
 msgstr "Πε_ριστροφή:"
 
-#: ../capplets/display/display-capplet.glade.h:14
+#: ../capplets/display/display-capplet.ui.h:11
 msgid "Re_fresh rate:"
 msgstr "Ρυθμός ανα_νέωσης:"
 
-#: ../capplets/display/display-capplet.glade.h:15
+#: ../capplets/display/display-capplet.ui.h:12
+#: ../capplets/display/xrandr-capplet.c:303
+msgid "Right"
+msgstr "Δεξιά"
+
+#: ../capplets/display/display-capplet.ui.h:13
+msgid "Upside-down"
+msgstr "Αναποδογύρισμα"
+
+#: ../capplets/display/display-capplet.ui.h:14
 msgid "_Detect Monitors"
 msgstr "Εντοπισμός ο_θονών"
 
-#: ../capplets/display/display-capplet.glade.h:16
+#: ../capplets/display/display-capplet.ui.h:15
 msgid "_Mirror screens"
 msgstr "Καθρεπτι_σμός οθονών"
 
-#: ../capplets/display/display-capplet.glade.h:17
+#: ../capplets/display/display-capplet.ui.h:16
 msgid "_Resolution:"
 msgstr "Ανά_λυση:"
 
-#: ../capplets/display/display-capplet.glade.h:18
+#: ../capplets/display/display-capplet.ui.h:17
 msgid "_Show displays in panel"
 msgstr "_Προβολή οθονών στον πίνακα εφαρμογών"
 
@@ -2069,38 +2091,21 @@ msgstr "Αλλαγή ανάλυσης οθόνης"
 msgid "Display"
 msgstr "Οθόνη"
 
-#: ../capplets/display/xrandr-capplet.c:336
-#: ../capplets/display/xrandr-capplet.c:375
-msgid "Normal"
-msgstr "Κανονική"
-
-#: ../capplets/display/xrandr-capplet.c:337
-msgid "Left"
-msgstr "Αριστερά"
-
-#: ../capplets/display/xrandr-capplet.c:338
-msgid "Right"
-msgstr "Δεξιά"
-
-#: ../capplets/display/xrandr-capplet.c:339
+#: ../capplets/display/xrandr-capplet.c:304
 msgid "Upside Down"
 msgstr "Αναποδογύρισμα"
 
-#: ../capplets/display/xrandr-capplet.c:412
-#: ../capplets/display/xrandr-capplet.c:420
-#: ../capplets/display/xrandr-capplet.c:421
+#: ../capplets/display/xrandr-capplet.c:346
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/xrandr-capplet.c:462
+#: ../capplets/display/xrandr-capplet.c:432
 #, c-format
-msgid "<b>Monitor: %s</b>"
-msgstr "<b>Οθόνη: %s</b>"
+msgid "Monitor: %s"
+msgstr "Οθόνη: %s"
 
-#: ../capplets/display/xrandr-capplet.c:554
-#: ../capplets/display/xrandr-capplet.c:564
-#: ../capplets/display/xrandr-capplet.c:572
+#: ../capplets/display/xrandr-capplet.c:511
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
@@ -2110,27 +2115,23 @@ msgstr "%d x %d"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1419
+#: ../capplets/display/xrandr-capplet.c:1458
 msgid "Mirror Screens"
 msgstr "Καθρεπτισμός οθονών"
 
-#: ../capplets/display/xrandr-capplet.c:1821
-msgid "Could not apply the selected configuration"
-msgstr "Αδυναμία εφαρμογής των επιλεγμένων ρυθμίσεων"
-
-#: ../capplets/display/xrandr-capplet.c:1851
+#: ../capplets/display/xrandr-capplet.c:1878
 msgid "Could not save the monitor configuration"
 msgstr "Αδυναμία αποθήκευσης των ρυθμίσεων της οθόνης"
 
-#: ../capplets/display/xrandr-capplet.c:1862
+#: ../capplets/display/xrandr-capplet.c:1889
 msgid "Could not get session bus while applying display configuration"
 msgstr "Αδυναμία λήψης του διαύλου της συνεδρίας κατά την εφαρμογή των ρυθμίσεων της οθόνης"
 
-#: ../capplets/display/xrandr-capplet.c:1904
+#: ../capplets/display/xrandr-capplet.c:1931
 msgid "Could not detect displays"
 msgstr "Αδυναμία εντοπισμού οθονών"
 
-#: ../capplets/display/xrandr-capplet.c:2097
+#: ../capplets/display/xrandr-capplet.c:2146
 msgid "Could not get screen information"
 msgstr "Αδυναμία λήψης πληροφοριών οθόνης"
 
@@ -2171,25 +2172,25 @@ msgid "The type of accelerator."
 msgstr "Το είδος της συντόμευσης."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:103
-#: ../typing-break/drwright.c:479
+#: ../capplets/keybindings/gnome-keybinding-properties.c:119
+#: ../typing-break/drwright.c:467
 msgid "Disabled"
 msgstr "Ανενεργό"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:184
+#: ../capplets/keybindings/gnome-keybinding-properties.c:200
 msgid "<Unknown Action>"
 msgstr "<Άγνωστη ενέργεια>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:925
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1548
+#: ../capplets/keybindings/gnome-keybinding-properties.c:954
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1581
 msgid "Custom Shortcuts"
 msgstr "Προσαρμοσμένες συντομεύσεις"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1064
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1096
 msgid "Error saving the new shortcut"
 msgstr "Σφάλμα κατά την αποθήκευση της νέας συντόμευσης"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1143
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1175
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
@@ -2198,7 +2199,7 @@ msgstr ""
 "Η συντόμευση \"%s\" δεν θα χρησιμοποιηθεί γιατί θα επηρεάσει την πληκτρολόγηση.\n"
 "Χρησιμοποιήστε την σε συνδυασμό με πλήκτρα όπως το Control, Alt ή Shift."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1173
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1205
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -2207,42 +2208,42 @@ msgstr ""
 "Η συντόμευση \"%s\" χρησιμοποιείται ήδη για:\n"
 " \"%s\""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1179
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1211
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Αν αναθέσετε ξανά τη συντόμευση στο \"%s\", η συντόμευση \"%s\" θα απενεργοποιηθεί."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1187
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1219
 msgid "_Reassign"
 msgstr "Ανά_θεση ξανά"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1307
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1339
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "Σφάλμα κατά τη κατάργηση ρύθμισης συντόμευσης στη βάση δεδομένων ρυθμίσεων: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1503
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1536
 msgid "Too many custom shortcuts"
 msgstr "Υπερβολικά πολλές προσαρμοσμένες συντομεύσεις"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1796
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1832
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1818
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1854
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:2
 msgid "Custom Shortcut"
 msgstr "Προσαρμοσμένη συντόμευση"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:3
+#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:3
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Συντομεύσεις πληκτρολογίου"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:4
+#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:4
 msgid "To edit a shortcut key, click on the corresponding row and type a new key combination, or press backspace to clear."
 msgstr "Για να επεξεργαστείτε μια νέα συντόμευση πατήστε στην αντίστοιχη σειρά ή πατήστε backspace για εκκαθάριση."
 
@@ -2250,330 +2251,326 @@ msgstr "Για να επεξεργαστείτε μια νέα συντόμευ�
 msgid "Assign shortcut keys to commands"
 msgstr "Ορισμός πλήκτρων συντόμευσης σε εντολές"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:206
-#: ../capplets/keyboard/gnome-keyboard-properties.c:211
+#: ../capplets/keyboard/gnome-keyboard-properties.c:205
+#: ../capplets/keyboard/gnome-keyboard-properties.c:210
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Εφαρμογή μόνο των ρυθμίσεων και έξοδος (συμβατότητα μόνο; now handled by daemon)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:216
+#: ../capplets/keyboard/gnome-keyboard-properties.c:215
 msgid "Start the page with the typing break settings showing"
 msgstr "Εκκίνηση της σελίδας με τις ρυθμίζεις διαλείμματος πληκτρολόγησης να φαίνονται"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:221
+#: ../capplets/keyboard/gnome-keyboard-properties.c:220
 msgid "Start the page with the accessibility settings showing"
 msgstr "Εκκίνηση της σελίδας με τις ρυθμίσεις προσιτότητας να φαίνονται"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "- GNOME Keyboard Preferences"
 msgstr "- Προτιμήσεις πληκτρολογίου GNOME"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
-msgid "<b>Bounce Keys</b>"
-msgstr "<b>Πλήκτρα αναπήδησης</b>"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "<b>Cursor Blinking</b>"
-msgstr "<b>Δρομέας αναβοσβήνει</b>"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<b>General</b>"
-msgstr "<b>Γενικά</b>"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "<b>Repeat Keys</b>"
-msgstr "<b>Πλήκτρα επανάληψης</b>"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "<b>Slow Keys</b>"
-msgstr "<b>Αργά πλήκτρα</b>"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
-msgid "<b>Sticky Keys</b>"
-msgstr "<b>Sticky πλήκτρα</b>"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "<b>Visual cues for sounds</b>"
-msgstr "<b>Οπτικές ενδείξεις ήχων</b>"
-
-#. fast acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
-msgid "<small><i>Fast</i></small>"
-msgstr "<small><i>Γρήγορο</i></small>"
-
-#. long delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
-msgid "<small><i>Long</i></small>"
-msgstr "<small><i>Μακρύ</i></small>"
-
-#. short delay
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
-msgid "<small><i>Short</i></small>"
-msgstr "<small><i>Σύντομο</i></small>"
-
-#. slow acceleration
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
-msgid "<small><i>Slow</i></small>"
-msgstr "<small><i>Αργό</i></small>"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
-msgid "A_cceleration:"
-msgstr "_Επιτάχυνση:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
-msgid "All_ow postponing of breaks"
-msgstr "Να επι_τρέπεται η αναβολή διαλειμμάτων"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Audio _Feedback..."
-msgstr "Η_χητική ανάδραση..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
 msgid "Beep when _accessibility features are turned on or off"
 msgstr "Ήχος μπιπ κατά την ενεργοποίηση ή απενεργοποίηση _λειτουργιών προσιτότητας"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
 msgid "Beep when a _modifier key is pressed"
 msgstr "Ήχος μπιπ κατά το πάτημα _modifier"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
 msgid "Beep when a _toggle key is pressed"
 msgstr "Ήχος μπιπ κατά το πάτημα πλήκτρου _toggle"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
 msgid "Beep when a key is pr_essed"
 msgstr "Ήχος μπιπ κατά το _πάτημα πλήκτρου"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
 msgid "Beep when a key is reje_cted"
 msgstr "Ήχος μπιπ κατά την από_ρριψη πλήκτρου"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
 msgid "Beep when key is _accepted"
 msgstr "Ήχος μπιπ στην _αποδοχή πλήκτρου"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
 msgid "Beep when key is _rejected"
 msgstr "Ήχος μπιπ κατά την από_ρριψη πλήκτρου"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "By _country"
-msgstr "Κατά _χώρα"
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:5
+msgid "Bounce Keys"
+msgstr "Πλήκτρα Bounce"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "By _language"
-msgstr "Κατά _γλώσσα"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
-msgid "Check if breaks are allowed to be postponed"
-msgstr "Έλεγχος για τον αν θα επιτρέπεται η αναβολή διαλειμμάτων"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
-msgid "Choose a Keyboard Model"
-msgstr "Επιλέξτε ένα μοντέλο πληκτρολογίου"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
-msgid "Choose a Layout"
-msgstr "Επιλογή μιας διάταξης"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "Cursor _blinks in text fields"
-msgstr "_Αναβοσβήνει σε πεδία και κουτιά κειμένου"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:31
-msgid "Cursor blinks speed"
-msgstr "Ταχύτητα αναβοσβήματος δρομέα"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:32
-msgid "D_elay:"
-msgstr "Καθυ_στέρηση:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
-msgid "Disa_ble sticky keys if two keys are pressed together"
-msgstr "Απενερ_γοποίηση πλήκτρων sticky αν δύο πλήκτρα πατηθούν ταυτόχρονα"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "Duration of the break when typing is disallowed"
-msgstr "Διάρκεια του διαλείμματος όταν απαγορεύεται η πληκτρολόγηση"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "Duration of work before forcing a break"
-msgstr "Διάρκεια εργασίας πριν την επιβολή διαλείμματος"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
 msgid "Flash _window titlebar"
 msgstr "Αναβόσβημα _γραμμής τίτλου παραθύρου"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
 msgid "Flash entire _screen"
 msgstr "Αναβόσβημα _ολόκληρης της οθόνης"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:15
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:14
 msgid "General"
 msgstr "Γενικά"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
-msgid "Key presses _repeat when key is held down"
-msgstr "Επανάληψη _πληκτρολογίου κατά το κράτημα ενός πλήκτρου"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
 msgid "Keyboard Accessibility Audio Feedback"
 msgstr "Ηχητική ανάδραση προσιτότητας πληκτρολογίου"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
-msgid "Keyboard Layout Options"
-msgstr "Επιλογές διάταξης πληκτρολογίου"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
-msgid "Keyboard Preferences"
-msgstr "Προτιμήσεις πληκτρολογίου"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
-msgid "Keyboard _model:"
-msgstr "_Μοντέλο πληκτρολογίου:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
-msgid "Layout _Options..."
-msgstr "Επιλο_γές διάταξης..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
-msgid "Layouts"
-msgstr "Διατάξεις"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:44
-msgid "Lock screen after a certain duration to help prevent repetitive keyboard use injuries"
-msgstr "Κλείδωμα οθόνης μετά από μια συγκεκριμένη διάρκεια για την αποφυγή του συνδρόμου του καρπιαίου σωλήνα"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:45
-msgid "Mouse Keys"
-msgstr "Πλήκτρα ποντικιού"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:46
-msgid "Preview:"
-msgstr "Προεπισκόπηση:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:47
-msgid "Repeat keys speed"
-msgstr "Ταχύτητα επανάληψης πλήκτρων"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:48
-msgid "Reset to De_faults"
-msgstr "Επανα_φορά στις προεπιλογές"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:49
-msgid "S_peed:"
-msgstr "Τα_χύτητα:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:50
-msgid "Separate _layout for each window"
-msgstr "Ξεχωριστή διάτα_ξη για κάθε παράθυρο"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:51
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
 msgid "Show _visual feedback for the alert sound"
 msgstr "Εμφάνιση _οπτικών ενδείξεων για τους ήχους προειδοποίησης"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:52
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+msgid "Slow Keys"
+msgstr "Αργά πλήκτρα"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+msgid "Sticky Keys"
+msgstr "Sticky πλήκτρα"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
+msgid "Visual cues for sounds"
+msgstr "Οπτικές ενδείξεις ήχων"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:1
+msgid "A_cceleration:"
+msgstr "_Επιτάχυνση:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:3
+msgid "All_ow postponing of breaks"
+msgstr "Να επι_τρέπεται η αναβολή διαλειμμάτων"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:4
+msgid "Audio _Feedback..."
+msgstr "Η_χητική ανάδραση..."
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:6
+msgid "Check if breaks are allowed to be postponed"
+msgstr "Έλεγχος για τον αν θα επιτρέπεται η αναβολή διαλειμμάτων"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:7
+msgid "Cursor Blinking"
+msgstr "Δρομέας αναβοσβήνει"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:8
+msgid "Cursor _blinks in text fields"
+msgstr "_Αναβοσβήνει σε πεδία και κουτιά κειμένου"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:9
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:4
+msgid "Cursor blinks speed"
+msgstr "Ταχύτητα αναβοσβήματος δρομέα"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:10
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:5
+msgid "D_elay:"
+msgstr "Καθυ_στέρηση:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:11
+msgid "Disa_ble sticky keys if two keys are pressed together"
+msgstr "Απενερ_γοποίηση πλήκτρων sticky αν δύο πλήκτρα πατηθούν ταυτόχρονα"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:12
+msgid "Duration of the break when typing is disallowed"
+msgstr "Διάρκεια του διαλείμματος όταν απαγορεύεται η πληκτρολόγηση"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:13
+msgid "Duration of work before forcing a break"
+msgstr "Διάρκεια εργασίας πριν την επιβολή διαλείμματος"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:14
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:13
+msgid "Fast"
+msgstr "Γρήγορα"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:16
+msgid "Key presses _repeat when key is held down"
+msgstr "Επανάληψη _πληκτρολογίου κατά το κράτημα ενός πλήκτρου"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:17
+msgid "Keyboard Preferences"
+msgstr "Προτιμήσεις πληκτρολογίου"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:18
+msgid "Keyboard _model:"
+msgstr "_Μοντέλο πληκτρολογίου:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:19
+msgid "Layout _Options..."
+msgstr "Επιλο_γές διάταξης..."
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:20
+msgid "Layouts"
+msgstr "Διατάξεις"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:21
+msgid "Lock screen after a certain duration to help prevent repetitive keyboard use injuries"
+msgstr "Κλείδωμα οθόνης μετά από μια συγκεκριμένη διάρκεια για την αποφυγή του συνδρόμου του καρπιαίου σωλήνα"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:18
+msgid "Long"
+msgstr "Μακρύ"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:23
+msgid "Mouse Keys"
+msgstr "Πλήκτρα ποντικιού"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:24
+msgid "Repeat Keys"
+msgstr "Πλήκτρα επανάληψης"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:25
+msgid "Repeat keys speed"
+msgstr "Ταχύτητα επανάληψης πλήκτρων"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:26
+msgid "Reset to De_faults"
+msgstr "Επανα_φορά στις προεπιλογές"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:27
+msgid "S_peed:"
+msgstr "Τα_χύτητα:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:28
+msgid "Separate _layout for each window"
+msgstr "Ξεχωριστή διάτα_ξη για κάθε παράθυρο"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:26
+msgid "Short"
+msgstr "Σύντομο"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:29
+msgid "Slow"
+msgstr "Αργό"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:33
 msgid "Typing Break"
 msgstr "Διάλειμμα πληκτρολόγησης"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:53
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr "Να ε_πιτρέπεται η απενεργοποίηση των λειτουργιών προσιτότητας από το πληκτρολόγιο"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:55
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "_Break interval lasts:"
 msgstr "Το διά_λειμμα διαρκεί:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:56
-msgid "_Country:"
-msgstr "_Χώρα:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:57
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:43
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:37
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:37
 msgid "_Delay:"
 msgstr "Καθυ_στέρηση:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:58
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:38
 msgid "_Ignore fast duplicate keypresses"
 msgstr "Να α_γνοούνται τα γρήγορα διπλά πατήματα πλήκτρων"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:59
-msgid "_Language:"
-msgstr "_Γλώσσα:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:60
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:39
 msgid "_Lock screen to enforce typing break"
 msgstr "_Κλείδωμα οθόνης για την επιβολή διαλείμματος πληκτρολόγησης"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:61
-msgid "_Models:"
-msgstr "_Μοντέλα:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:62
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:40
 msgid "_Only accept long keypresses"
 msgstr "_Να γίνεται αποδοχή μόνο των πλήκτρων που πατήθηκαν για επαρκές χρονικό διάστημα"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:63
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:41
 msgid "_Pointer can be controlled using the keypad"
 msgstr "Να επιτρέπεται ο έλεγχος του _δείκτη με το πληκτρολόγιο"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:64
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:42
 msgid "_Selected layouts:"
 msgstr "_Επιλεγμένες διατάξεις:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:65
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:43
 msgid "_Simulate simultaneous keypresses"
 msgstr "_Εξομοίωση σύγχρονων πατημάτων πλήκτρων"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:66
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:44
 msgid "_Speed:"
 msgstr "Τα_χύτητα:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:67
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:45
 msgid "_Type to test settings:"
 msgstr "_Πληκτρολογήστε για να δοκιμάσετε τις ρυθμίσεις:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:68
-msgid "_Variants:"
-msgstr "Παραλλα_γές:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:69
-msgid "_Vendors:"
-msgstr "Διανο_μείς:"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:70
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:46
 msgid "_Work interval lasts:"
 msgstr "Η ερ_γασία διαρκεί:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:71
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:47
 msgid "minutes"
 msgstr "λεπτά"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
+msgid "By _country"
+msgstr "Κατά _χώρα"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
+msgid "By _language"
+msgstr "Κατά _γλώσσα"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
+msgid "Choose a Layout"
+msgstr "Επιλογή μιας διάταξης"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
+msgid "Preview:"
+msgstr "Προεπισκόπηση:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
+msgid "_Country:"
+msgstr "_Χώρα:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
+msgid "_Language:"
+msgstr "_Γλώσσα:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
+msgid "_Variants:"
+msgstr "Παραλλα_γές:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
+msgid "Choose a Keyboard Model"
+msgstr "Επιλέξτε ένα μοντέλο πληκτρολογίου"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
+msgid "_Models:"
+msgstr "_Μοντέλα:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
+msgid "_Vendors:"
+msgstr "Διανο_μείς:"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
+msgid "Keyboard Layout Options"
+msgstr "Επιλογές διάταξης πληκτρολογίου"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:215
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:235
-#: ../capplets/network/gnome-network-properties.c:561
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:214
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:234
+#: ../capplets/network/gnome-network-properties.c:583
 msgid "Default"
 msgstr "Προεπιλεγμένη"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:333
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:332
 msgid "Layout"
 msgstr "Διάταξη"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:169
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:168
 msgid "Vendors"
 msgstr "Διανομείς"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:235
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:234
 msgid "Models"
 msgstr "Μοντέλα"
 
@@ -2587,171 +2584,188 @@ msgstr "Καθορισμός των προτιμήσεων πληκτρολογ�
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:90
+#: ../capplets/mouse/gnome-mouse-accessibility.c:89
 msgid "gesture|Move left"
 msgstr "Μετακίνηση αριστερά"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:95
+#: ../capplets/mouse/gnome-mouse-accessibility.c:94
 msgid "gesture|Move right"
 msgstr "Μετακίνηση δεξιά"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:100
+#: ../capplets/mouse/gnome-mouse-accessibility.c:99
 msgid "gesture|Move up"
 msgstr "Μετακίνηση πάνω"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:105
+#: ../capplets/mouse/gnome-mouse-accessibility.c:104
 msgid "gesture|Move down"
 msgstr "Μετακίνηση κάτω"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:110
+#: ../capplets/mouse/gnome-mouse-accessibility.c:109
 msgid "gesture|Disabled"
 msgstr "Ανενεργό"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/mouse/gnome-mouse-properties.c:441
+#: ../capplets/mouse/gnome-mouse-properties.c:539
 msgid "Specify the name of the page to show (general|accessibility)"
 msgstr "Καθορίστε το όνομα της σελίδας για εμφάνιση (γενικά|προσιτότητα)"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:446
+#: ../capplets/mouse/gnome-mouse-properties.c:544
 msgid "- GNOME Mouse Preferences"
 msgstr "- Προτιμήσεις ποντικιού GNOME"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "<b>Double-Click Timeout</b>"
-msgstr "<b>Διάρκεια διπλού κλικ</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<b>Drag and Drop</b>"
-msgstr "<b>Σύρε και Άφησε</b>"
-
-#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Dwell Click</b>"
-msgstr "<b>Dwell κλικ</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<b>Locate Pointer</b>"
-msgstr "<b>Εύρεση δείκτη</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<b>Mouse Orientation</b>"
-msgstr "<b>Προσανατολισμός ποντικιού</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<b>Pointer Speed</b>"
-msgstr "<b>Ταχύτητα δείκτη</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
-msgid "<b>Simulated Secondary Click</b>"
-msgstr "<b>Εξομοίωση δευτερεύοντος κλικ</b>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
-msgid "<i>To test your double-click settings, try to double-click on the light bulb.</i>"
-msgstr "<i>Για να δοκιμάσετε τις ρυθμίσεις διπλού κλικ, κάντε διπλό κλικ στη λάμπα.</i>"
-
-#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
-msgid "<i>You can also use the Dwell Click panel applet to choose the click type.</i>"
-msgstr "<i>Μπορείτε ακόμα να χρησιμοποιήσετε το πίνακα κλικ Dwell για να επιλέξετε τον τύπο κλικ.</i>"
-
-#. high sensitivity
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "<small><i>High</i></small>"
-msgstr "<small><i>Υψηλή</i></small>"
-
-#. large threshold
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
-msgid "<small><i>Large</i></small>"
-msgstr "<small><i>Μεγάλο</i></small>"
-
-#. low sensitivity
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "<small><i>Low</i></small>"
-msgstr "<small><i>Χαμηλή</i></small>"
-
-#. small threshold
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "<small><i>Small</i></small>"
-msgstr "<small><i>Μικρό</i></small>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:29
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:2
 msgid "Choose type of click _beforehand"
 msgstr "Επιλέξτε τον τύπο κλικ από _νωρίτερα"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:30
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:3
 msgid "Choose type of click with mo_use gestures"
 msgstr "Επιλέξτε τύπο κλικ με mo_use gestures"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:33
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:6
 msgid "D_ouble click:"
 msgstr "_Διπλό κλικ:"
 
-#. click to initiate drag-and-drop (like normally click and hold)
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:35
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:7
 msgid "D_rag click:"
 msgstr "Σύ_ρσιμο κλικ:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:37
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:8
+msgid "Double-Click Timeout"
+msgstr "Διάρκεια διπλού κλικ"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:9
+msgid "Drag and Drop"
+msgstr "Μεταφορά και απόθεση"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:10
+msgid "Dwell Click"
+msgstr "Dwell κλικ"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:11
+msgid "Enable _horizontal scrolling"
+msgstr "Ενεργοποίηση ορι_ζόντιας κύλισης"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:12
+msgid "Enable mouse _clicks with touchpad"
+msgstr "Ενεργοποίηση _κλικ ποντικιού μέσω touchpad"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:15
+msgid "High"
+msgstr "Υψηλό"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:17
+msgid "Locate Pointer"
+msgstr "Εντοπισμός δείκτη"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:19
+msgid "Low"
+msgstr "Χαμηλό"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:20
+msgid "Mouse Orientation"
+msgstr "Προσανατολισμός ποντικιού"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:21
 msgid "Mouse Preferences"
 msgstr "Προτιμήσεις ποντικιού"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:38
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:22
+msgid "Pointer Speed"
+msgstr "Ταχύτητα δείκτη"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:23
+msgid "Scrolling"
+msgstr "Κύλιση"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:24
 msgid "Seco_ndary click:"
 msgstr "Δευτε_ρεύον κλικ:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:39
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:25
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "Προ_βολή της θέσης του δρομέα όταν πατιέται το πλήκτρο Control"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:40
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:27
 msgid "Show click type _window"
 msgstr "Προβολή παραθύρου τύπου _κλικ"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:28
+msgid "Simulated Secondary Click"
+msgstr "Εξομοίωση δευτερεύοντος κλικ"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:31
 msgid "Thr_eshold:"
 msgstr "_Κατώφλι:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:42
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:32
+msgid "To test your double-click settings, try to double-click on the light bulb."
+msgstr "Για να δοκιμάσετε τις ρυθμίσεις διπλού κλικ, κάντε διπλό κλικ στη λάμπα."
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:33
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:34
+msgid "Two-_finger scrolling"
+msgstr "Κύλιση με δυο _δάκτυλα"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:35
+msgid "You can also use the Dwell Click panel applet to choose the click type."
+msgstr "Μπορείτε ακόμα να χρησιμοποιήσετε το πίνακα κλικ Dwell για να επιλέξετε τον τύπο κλικ."
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:36
 msgid "_Acceleration:"
 msgstr "_Επιτάχυνση:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:44
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:38
+msgid "_Disable touchpad while typing"
+msgstr "Απε_νεργοποίηση touchpad κατά την πληκτρολόγηση"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:39
+msgid "_Disabled"
+msgstr "Α_νενεργό"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:40
+msgid "_Edge scrolling"
+msgstr "Κύλιση _γωνίας"
+
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:41
 msgid "_Initiate click when stopping pointer movement"
 msgstr "Έ_ναρξη κλικ μετά την διακοπή της κίνησης του δρομέα"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:45
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:42
 msgid "_Left-handed"
 msgstr "_Αριστερόχειρες"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:46
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:43
 msgid "_Motion threshold:"
 msgstr "_Κατώφλι κίνησης:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:47
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:44
 msgid "_Right-handed"
 msgstr "_Δεξιόχειρες"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:48
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:45
 msgid "_Sensitivity:"
 msgstr "_Ευαισθησία:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:49
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:46
 msgid "_Single click:"
 msgstr "_Μονό κλικ:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:50
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:47
 msgid "_Timeout:"
 msgstr "_Διάρκεια:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:51
+#: ../capplets/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Trigger secondary click by holding down the primary button"
 msgstr "_Πάτημα δευτερεύοντος κλικ με το πάτημα και κράτημα του πρωτεύοντος κουμπιού"
 
@@ -2763,12 +2777,12 @@ msgstr "Ποντίκι"
 msgid "Set your mouse preferences"
 msgstr "Καθορισμός προτιμήσεων ποντικιού"
 
-#: ../capplets/network/gnome-network-properties.c:677
-#: ../capplets/network/gnome-network-properties.c:816
+#: ../capplets/network/gnome-network-properties.c:701
+#: ../capplets/network/gnome-network-properties.c:852
 msgid "New Location..."
 msgstr "Νέα τοποθεσία..."
 
-#: ../capplets/network/gnome-network-properties.c:782
+#: ../capplets/network/gnome-network-properties.c:818
 msgid "Location already exists"
 msgstr "Η τοποθεσία υπάρχει ήδη"
 
@@ -2780,168 +2794,168 @@ msgstr "Διαμεσολαβητής δικτύου"
 msgid "Set your network proxy preferences"
 msgstr "Καθορισμός προτιμήσεων διαμεσολαβητή δικτύου"
 
-#: ../capplets/network/gnome-network-properties.glade.h:1
+#: ../capplets/network/gnome-network-properties.ui.h:1
 msgid "<b>Di_rect internet connection</b>"
 msgstr "<b>_Απευθείας σύνδεση στο διαδίκτυο</b>"
 
-#: ../capplets/network/gnome-network-properties.glade.h:2
-msgid "<b>Ignore Host List</b>"
-msgstr "<b>Αγνόηση λίστας κεντρικού συστήματος</b>"
-
-#: ../capplets/network/gnome-network-properties.glade.h:3
+#: ../capplets/network/gnome-network-properties.ui.h:2
 msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>_Αυτόματη ρύθμιση διαμεσολαβητή</b>"
 
-#: ../capplets/network/gnome-network-properties.glade.h:4
+#: ../capplets/network/gnome-network-properties.ui.h:3
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>_Χειροκίνητη ρύθμιση διαμεσολαβητή</b>"
 
-#: ../capplets/network/gnome-network-properties.glade.h:5
+#: ../capplets/network/gnome-network-properties.ui.h:4
 msgid "<b>_Use authentication</b>"
 msgstr "<b>_Χρήση πιστοποίησης</b>"
 
-#: ../capplets/network/gnome-network-properties.glade.h:6
+#: ../capplets/network/gnome-network-properties.ui.h:5
 msgid "Autoconfiguration _URL:"
 msgstr "_URL αυτόματης ρύθμισης:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:7
+#: ../capplets/network/gnome-network-properties.ui.h:6
 msgid "C_reate"
 msgstr "_Δημιουργία"
 
-#: ../capplets/network/gnome-network-properties.glade.h:8
+#: ../capplets/network/gnome-network-properties.ui.h:7
 msgid "Create New Location"
 msgstr "Δημιουργία νέας τοποθεσίας"
 
-#: ../capplets/network/gnome-network-properties.glade.h:9
+#: ../capplets/network/gnome-network-properties.ui.h:8
 msgid "HTTP Proxy Details"
 msgstr "Λεπτομέρειες διαμεσολαβητή HTTP"
 
-#: ../capplets/network/gnome-network-properties.glade.h:10
+#: ../capplets/network/gnome-network-properties.ui.h:9
 msgid "H_TTP proxy:"
 msgstr "Διαμεσολαβητής _HTTP:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:11
+#: ../capplets/network/gnome-network-properties.ui.h:10
+msgid "Ignore Host List"
+msgstr "Αγνόηση λίστας κεντρικού συστήματος"
+
+#: ../capplets/network/gnome-network-properties.ui.h:11
 msgid "Ignored Hosts"
 msgstr "Αγνόηση λίστας κεντρικού συστήματος"
 
-#: ../capplets/network/gnome-network-properties.glade.h:12
+#: ../capplets/network/gnome-network-properties.ui.h:12
 msgid "Location:"
 msgstr "Τοποθεσία:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:13
+#: ../capplets/network/gnome-network-properties.ui.h:13
 msgid "Network Proxy Preferences"
 msgstr "Προτιμήσεις διαμεσολαβητή δικτύου"
 
-#: ../capplets/network/gnome-network-properties.glade.h:14
+#: ../capplets/network/gnome-network-properties.ui.h:14
 msgid "Port:"
 msgstr "Θύρα:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:15
+#: ../capplets/network/gnome-network-properties.ui.h:15
 msgid "Proxy Configuration"
 msgstr "Ρύθμιση διαμεσολαβητή"
 
-#: ../capplets/network/gnome-network-properties.glade.h:16
+#: ../capplets/network/gnome-network-properties.ui.h:16
 msgid "S_ocks host:"
 msgstr "Σύστημα S_ocks:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:17
+#: ../capplets/network/gnome-network-properties.ui.h:17
 msgid "The location already exists."
 msgstr "Η τοποθεσία υπάρχει ήδη."
 
-#: ../capplets/network/gnome-network-properties.glade.h:18
+#: ../capplets/network/gnome-network-properties.ui.h:18
 msgid "U_sername:"
 msgstr "Όν_ομα χρήστη:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:19
+#: ../capplets/network/gnome-network-properties.ui.h:19
 msgid "_Delete Location"
 msgstr "_Διαγραφή τοποθεσίας"
 
-#: ../capplets/network/gnome-network-properties.glade.h:20
+#: ../capplets/network/gnome-network-properties.ui.h:20
 msgid "_Details"
 msgstr "_Λεπτομέρειες"
 
-#: ../capplets/network/gnome-network-properties.glade.h:21
+#: ../capplets/network/gnome-network-properties.ui.h:21
 msgid "_FTP proxy:"
 msgstr "Διαμεσολαβητής _FTP:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:22
+#: ../capplets/network/gnome-network-properties.ui.h:22
 msgid "_Location name:"
 msgstr "Όνομα _τοποθεσίας:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:23
+#: ../capplets/network/gnome-network-properties.ui.h:23
 msgid "_Password:"
 msgstr "_Κωδικός:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:24
+#: ../capplets/network/gnome-network-properties.ui.h:24
 msgid "_Secure HTTP proxy:"
 msgstr "_Ασφαλής διαμεσολαβητής HTTP:"
 
-#: ../capplets/network/gnome-network-properties.glade.h:25
+#: ../capplets/network/gnome-network-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
 msgstr "_Χρήση του ίδιου proxy για όλα τα πρωτόκολλα"
 
-#: ../capplets/windows/gnome-window-properties.c:346
+#: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
 msgstr "Αδυναμία εκκίνησης της εφαρμογής προτιμήσεων για το διαχειριστή παραθύρων σας"
 
 #. translators: this is the Control key
-#: ../capplets/windows/gnome-window-properties.c:600
+#: ../capplets/windows/gnome-window-properties.c:608
 msgid "C_ontrol"
 msgstr "C_ontrol"
 
-#: ../capplets/windows/gnome-window-properties.c:605
+#: ../capplets/windows/gnome-window-properties.c:613
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:611
+#: ../capplets/windows/gnome-window-properties.c:619
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:618
+#: ../capplets/windows/gnome-window-properties.c:626
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (ή \"λογότυπο των Windows\")"
 
-#: ../capplets/windows/gnome-window-properties.c:625
+#: ../capplets/windows/gnome-window-properties.c:633
 msgid "_Meta"
 msgstr "_Meta"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:1
-msgid "<b>Movement Key</b>"
-msgstr "<b>Πλήκτρο κίνησης</b>"
+#: ../capplets/windows/gnome-window-properties.ui.h:1
+msgid "Movement Key"
+msgstr "Πλήκτρο κίνησης"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:2
-msgid "<b>Titlebar Action</b>"
-msgstr "<b>Ενέργεια μπάρας τίτλου</b>"
+#: ../capplets/windows/gnome-window-properties.ui.h:2
+msgid "Titlebar Action"
+msgstr "Ενέργεια μπάρας τίτλου"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:3
-msgid "<b>Window Selection</b>"
-msgstr "<b>Επιλογή παραθύρου</b>"
-
-#: ../capplets/windows/gnome-window-properties.glade.h:4
+#: ../capplets/windows/gnome-window-properties.ui.h:3
 msgid "To move a window, press-and-hold this key then grab the window:"
 msgstr "Για να μετακινήσετε ένα παράθυρο, πατήστε και κρατήστε αυτό το πλήκτρο και μετά σύρετε το παράθυρο:"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:5
+#: ../capplets/windows/gnome-window-properties.ui.h:4
 msgid "Window Preferences"
 msgstr "Προτιμήσεις παραθύρων"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:6
+#: ../capplets/windows/gnome-window-properties.ui.h:5
+msgid "Window Selection"
+msgstr "Επιλογή παραθύρου"
+
+#: ../capplets/windows/gnome-window-properties.ui.h:6
 msgid "_Double-click titlebar to perform this action:"
 msgstr "_Διπλό κλικ στη μπάρα τίτλου για την εκτέλεση αυτής της ενέργειας:"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:7
+#: ../capplets/windows/gnome-window-properties.ui.h:7
 msgid "_Interval before raising:"
 msgstr "_Χρονικό διάστημα πριν την ανασήκωση:"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:8
+#: ../capplets/windows/gnome-window-properties.ui.h:8
 msgid "_Raise selected windows after an interval"
 msgstr "_Ανασήκωση επιλεγμένων παραθύρων μετά από ένα χρονικό διάστημα"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:9
+#: ../capplets/windows/gnome-window-properties.ui.h:9
 msgid "_Select windows when the mouse moves over them"
 msgstr "_Επιλογή παραθύρων όταν το ποντίκι περνάει από επάνω τους"
 
-#: ../capplets/windows/gnome-window-properties.glade.h:10
+#: ../capplets/windows/gnome-window-properties.ui.h:10
 msgid "seconds"
 msgstr "δευτερόλεπτα"
 
@@ -2952,183 +2966,6 @@ msgstr "Καθορισμός ιδιοτήτων παραθύρων"
 #: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Παράθυρα"
-
-#. make start action
-#: ../libslab/application-tile.c:372
-#, c-format
-msgid "<b>Start %s</b>"
-msgstr "<b>Εκκίνηση %s</b>"
-
-#: ../libslab/application-tile.c:391
-msgid "Help"
-msgstr "Βοήθεια"
-
-#: ../libslab/application-tile.c:438
-msgid "Upgrade"
-msgstr "Ενημέρωση"
-
-#: ../libslab/application-tile.c:453
-msgid "Uninstall"
-msgstr "Απεγκατάσταση"
-
-#: ../libslab/application-tile.c:780
-#: ../libslab/document-tile.c:715
-msgid "Remove from Favorites"
-msgstr "Απομάκρυνση από τα αγαπημένα"
-
-#: ../libslab/application-tile.c:782
-#: ../libslab/document-tile.c:717
-msgid "Add to Favorites"
-msgstr "Προσθήκη στα αγαπημένα"
-
-#: ../libslab/application-tile.c:867
-msgid "Remove from Startup Programs"
-msgstr "Απομάκρυνση από τα προγράμματα εκκίνησης"
-
-#: ../libslab/application-tile.c:869
-msgid "Add to Startup Programs"
-msgstr "Προσθήκη στα προγράμματα εκκίνησης"
-
-#: ../libslab/app-shell.c:753
-#, c-format
-msgid ""
-"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-"\n"
-" Your filter \"<b>%s</b>\" does not match any items.</span>"
-msgstr ""
-"<span size=\"large\"><b>Δεν βρέθηκαν ταιριάσματα.</b> </span><span>\n"
-"\n"
-" Το φίλτρο \"<b>%s</b>\" δεν ταιριάζει σε κανένα αντικείμενο.</span>"
-
-#: ../libslab/app-shell.c:903
-msgid "Other"
-msgstr "Άλλα"
-
-#: ../libslab/bookmark-agent.c:1077
-msgid "New Spreadsheet"
-msgstr "Νέο λογιστικό φύλλο"
-
-#: ../libslab/bookmark-agent.c:1082
-msgid "New Document"
-msgstr "Νέο έγγραφο"
-
-#: ../libslab/bookmark-agent.c:1135
-msgid "Home"
-msgstr "Αρχικός κατάλογος"
-
-#: ../libslab/bookmark-agent.c:1140
-msgid "Documents"
-msgstr "Έγγραφα"
-
-#: ../libslab/bookmark-agent.c:1153
-msgid "File System"
-msgstr "Σύστημα αρχείων"
-
-#: ../libslab/bookmark-agent.c:1157
-msgid "Network Servers"
-msgstr "Εξυπηρετητές δικτύου"
-
-#: ../libslab/bookmark-agent.c:1186
-msgid "Search"
-msgstr "Αναζήτηση"
-
-#. make open with default action
-#: ../libslab/directory-tile.c:171
-#, c-format
-msgid "<b>Open</b>"
-msgstr "<b>Άνοιγμα</b>"
-
-#. make rename action
-#: ../libslab/directory-tile.c:190
-#: ../libslab/document-tile.c:231
-msgid "Rename..."
-msgstr "Μετονομασία..."
-
-#: ../libslab/directory-tile.c:204
-#: ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:245
-#: ../libslab/document-tile.c:254
-msgid "Send To..."
-msgstr "Αποστολή σε..."
-
-#. make move to trash action
-#: ../libslab/directory-tile.c:228
-#: ../libslab/document-tile.c:280
-msgid "Move to Trash"
-msgstr "Μετακίνηση στα απορρίμματα"
-
-#: ../libslab/directory-tile.c:238
-#: ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:290
-#: ../libslab/document-tile.c:831
-msgid "Delete"
-msgstr "Διαγραφή"
-
-#: ../libslab/directory-tile.c:533
-#: ../libslab/document-tile.c:979
-#, c-format
-msgid "Are you sure you want to permanently delete \"%s\"?"
-msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετε μόνιμα το \"%s\";"
-
-#: ../libslab/directory-tile.c:534
-#: ../libslab/document-tile.c:980
-msgid "If you delete an item, it is permanently lost."
-msgstr "Αν διαγράψετε ένα αντικείμενο, αυτό θα χαθεί οριστικά."
-
-#: ../libslab/document-tile.c:192
-#, c-format
-msgid "<b>Open with \"%s\"</b>"
-msgstr "<b>Άνοιγμα με \"%s\"</b>"
-
-#: ../libslab/document-tile.c:204
-msgid "Open with Default Application"
-msgstr "Άνοιγμα με την προεπιλεγμένη εφαρμογή"
-
-#: ../libslab/document-tile.c:215
-msgid "Open in File Manager"
-msgstr "Άνοιγμα στον διαχειριστή αρχείων"
-
-#: ../libslab/document-tile.c:611
-msgid "?"
-msgstr ";"
-
-#: ../libslab/document-tile.c:618
-msgid "%l:%M %p"
-msgstr "%l:%M %p"
-
-#: ../libslab/document-tile.c:626
-msgid "Today %l:%M %p"
-msgstr "Σήμερα %l:%M %p"
-
-#: ../libslab/document-tile.c:636
-msgid "Yesterday %l:%M %p"
-msgstr "Χθες %l:%M %p"
-
-#: ../libslab/document-tile.c:648
-msgid "%a %l:%M %p"
-msgstr "%a %l:%M %p"
-
-#: ../libslab/document-tile.c:656
-msgid "%b %d %l:%M %p"
-msgstr "%b %d %l:%M %p"
-
-#: ../libslab/document-tile.c:658
-msgid "%b %d %Y"
-msgstr "%b %d %Y"
-
-#: ../libslab/search-bar.c:255
-msgid "Find Now"
-msgstr "Εύρεση τώρα"
-
-#: ../libslab/system-tile.c:128
-#, c-format
-msgid "<b>Open %s</b>"
-msgstr "<b>Άνοιγμα %s</b>"
-
-#: ../libslab/system-tile.c:141
-#, c-format
-msgid "Remove from System Items"
-msgstr "Απομάκρυνση από τα αντικείμενα συστήματος"
 
 #: ../libwindow-settings/gnome-wm-manager.c:316
 #, c-format
@@ -3159,24 +2996,28 @@ msgstr "Δίπλωση πάνω"
 msgid "None"
 msgstr "Κανένα"
 
-#: ../shell/control-center.c:54
+#: ../shell/control-center.c:49
 #, c-format
 msgid "key not found [%s]\n"
 msgstr "το κλειδί δεν βρέθηκε [%s]\n"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:143
+msgid "Hide on start (useful to preload the shell)"
+msgstr "Απόκρυψη στην εκκίνηση (χρήσιμο για την προ-φόρτωση του κέλυφους)"
+
+#: ../shell/control-center.c:182
 msgid "Filter"
 msgstr "Φίλτρο"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:182
 msgid "Groups"
 msgstr "Ομάδες"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:182
 msgid "Common Tasks"
 msgstr "Συνηθισμένες εργασίες"
 
-#: ../shell/control-center.c:155
+#: ../shell/control-center.c:185
 #: ../shell/gnomecc.desktop.in.in.h:1
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
@@ -3247,50 +3088,40 @@ msgstr "Αναβο_λή διαλείμματος"
 msgid "Take a break!"
 msgstr "Κάντε διάλειμμα!"
 
-#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#. translators: keep the initial "/"
-#: ../typing-break/drwright.c:129
-msgid "/_Preferences"
-msgstr "/_Προτιμήσεις"
+#: ../typing-break/drwright.c:120
+msgid "_Take a Break"
+msgstr "_Κάντε ένα διάλειμμα"
 
-#: ../typing-break/drwright.c:130
-msgid "/_About"
-msgstr "/_Περί"
-
-#: ../typing-break/drwright.c:132
-msgid "/_Take a Break"
-msgstr "/_Κάντε διάλειμμα"
-
-#: ../typing-break/drwright.c:488
+#: ../typing-break/drwright.c:476
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d λεπτό μέχρι το επόμενο διάλειμμα"
 msgstr[1] "%d λεπτά μέχρι το επόμενο διάλειμμα"
 
-#: ../typing-break/drwright.c:492
+#: ../typing-break/drwright.c:480
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Λιγότερο από ένα λεπτό μέχρι το επόμενο διάλειμμα"
 
-#: ../typing-break/drwright.c:579
+#: ../typing-break/drwright.c:563
 #, c-format
 msgid "Unable to bring up the typing break properties dialog with the following error: %s"
 msgstr "Αδυναμία ανάσυρσης του διαλόγου ιδιοτήτων του διαλείμματος πληκτρολόγησης με το ακόλουθο σφάλμα: %s"
 
-#: ../typing-break/drwright.c:598
+#: ../typing-break/drwright.c:580
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Γράφτηκε από τον Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:599
+#: ../typing-break/drwright.c:581
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Γραφικά προστέθηκαν από τον Anders Carlsson"
 
-#: ../typing-break/drwright.c:608
+#: ../typing-break/drwright.c:590
 msgid "A computer break reminder."
 msgstr "Μια υπενθύμιση για διάλειμμα από τον υπολογιστή."
 
-#: ../typing-break/drwright.c:610
+#: ../typing-break/drwright.c:592
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα GNOME\n"
@@ -3387,40 +3218,52 @@ msgstr "Αν θα δημιουργούνται μικρογραφίες των �
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "Θα βγει χοροπηδώντας ψηλά και ξεφωνίζοντας άμουσα. The quick brown fox jumps over the lazy dog. 0123456789"
 
-#: ../font-viewer/font-view.c:275
+#: ../font-viewer/font-view.c:289
 msgid "Name:"
 msgstr "Όνομα:"
 
-#: ../font-viewer/font-view.c:278
+#: ../font-viewer/font-view.c:292
 msgid "Style:"
 msgstr "Στυλ:"
 
-#: ../font-viewer/font-view.c:291
+#: ../font-viewer/font-view.c:305
 msgid "Type:"
 msgstr "Τύπος:"
 
-#: ../font-viewer/font-view.c:295
+#: ../font-viewer/font-view.c:309
 msgid "Size:"
 msgstr "Μέγεθος:"
 
-#: ../font-viewer/font-view.c:339
-#: ../font-viewer/font-view.c:352
+#: ../font-viewer/font-view.c:353
+#: ../font-viewer/font-view.c:366
 msgid "Version:"
 msgstr "Έκδοση:"
 
-#: ../font-viewer/font-view.c:343
-#: ../font-viewer/font-view.c:354
+#: ../font-viewer/font-view.c:357
+#: ../font-viewer/font-view.c:368
 msgid "Copyright:"
 msgstr "Πνευματικά δικαιώματα:"
 
-#: ../font-viewer/font-view.c:347
+#: ../font-viewer/font-view.c:361
 msgid "Description:"
 msgstr "Περιγραφή:"
 
-#: ../font-viewer/font-view.c:437
+#: ../font-viewer/font-view.c:441
+msgid "Installed"
+msgstr "Εγκατεστημένο"
+
+#: ../font-viewer/font-view.c:444
+msgid "Install Failed"
+msgstr "Η εγκατάσταση απέτυχε"
+
+#: ../font-viewer/font-view.c:516
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "χρήση: %s αρχείογραμματοσειράς\n"
+
+#: ../font-viewer/font-view.c:591
+msgid "I_nstall Font"
+msgstr "Ε_γκατάσταση γραμματοσειράς"
 
 #: ../font-viewer/gnome-font-viewer.desktop.in.in.h:1
 msgid "Font Viewer"
@@ -3455,9 +3298,322 @@ msgstr "ΑΡΧΕΙΟ-ΓΡΣΕΙΡΑΣ ΑΡΧΕΙΟ-ΕΞΟΔΟΥ"
 msgid "Error parsing arguments: %s\n"
 msgstr "Σφάλμα κατά την ανάλυση των ορισμάτων: %s\n"
 
+#: ../libslab/app-shell.c:754
+#, c-format
+msgid "Your filter \"%s\" does not match any items."
+msgstr "Το φίλτρο \"%s\" δεν ταιριάζει σε κανένα αντικείμενο"
+
+#: ../libslab/app-shell.c:756
+msgid "No matches found."
+msgstr "Δεν βρέθηκαν ταιριάσματα"
+
+#: ../libslab/app-shell.c:905
+msgid "Other"
+msgstr "Άλλα"
+
+#. make start action
+#: ../libslab/application-tile.c:374
+#, c-format
+msgid "Start %s"
+msgstr "Εκκίνηση %s"
+
+#: ../libslab/application-tile.c:395
+msgid "Help"
+msgstr "Βοήθεια"
+
+#: ../libslab/application-tile.c:442
+msgid "Upgrade"
+msgstr "Ενημέρωση"
+
+#: ../libslab/application-tile.c:457
+msgid "Uninstall"
+msgstr "Απεγκατάσταση"
+
+#: ../libslab/application-tile.c:784
+#: ../libslab/document-tile.c:721
+msgid "Remove from Favorites"
+msgstr "Απομάκρυνση από τα αγαπημένα"
+
+#: ../libslab/application-tile.c:786
+#: ../libslab/document-tile.c:723
+msgid "Add to Favorites"
+msgstr "Προσθήκη στα αγαπημένα"
+
+#: ../libslab/application-tile.c:871
+msgid "Remove from Startup Programs"
+msgstr "Απομάκρυνση από τα προγράμματα εκκίνησης"
+
+#: ../libslab/application-tile.c:873
+msgid "Add to Startup Programs"
+msgstr "Προσθήκη στα προγράμματα εκκίνησης"
+
+#: ../libslab/bookmark-agent.c:1077
+msgid "New Spreadsheet"
+msgstr "Νέο λογιστικό φύλλο"
+
+#: ../libslab/bookmark-agent.c:1082
+msgid "New Document"
+msgstr "Νέο έγγραφο"
+
+#: ../libslab/bookmark-agent.c:1140
+msgid "Documents"
+msgstr "Έγγραφα"
+
+#: ../libslab/bookmark-agent.c:1153
+msgid "File System"
+msgstr "Σύστημα αρχείων"
+
+#: ../libslab/bookmark-agent.c:1157
+msgid "Network Servers"
+msgstr "Εξυπηρετητές δικτύου"
+
+#: ../libslab/bookmark-agent.c:1186
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#. make open with default action
+#: ../libslab/directory-tile.c:171
+#, c-format
+msgid "<b>Open</b>"
+msgstr "<b>Άνοιγμα</b>"
+
+#. make rename action
+#: ../libslab/directory-tile.c:190
+#: ../libslab/document-tile.c:234
+msgid "Rename..."
+msgstr "Μετονομασία..."
+
+#: ../libslab/directory-tile.c:204
+#: ../libslab/directory-tile.c:213
+#: ../libslab/document-tile.c:248
+#: ../libslab/document-tile.c:257
+msgid "Send To..."
+msgstr "Αποστολή σε..."
+
+#. make move to trash action
+#: ../libslab/directory-tile.c:228
+#: ../libslab/document-tile.c:283
+msgid "Move to Trash"
+msgstr "Μετακίνηση στα απορρίμματα"
+
+#: ../libslab/directory-tile.c:238
+#: ../libslab/directory-tile.c:457
+#: ../libslab/document-tile.c:293
+#: ../libslab/document-tile.c:837
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: ../libslab/directory-tile.c:533
+#: ../libslab/document-tile.c:985
+#, c-format
+msgid "Are you sure you want to permanently delete \"%s\"?"
+msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετε μόνιμα το \"%s\";"
+
+#: ../libslab/directory-tile.c:534
+#: ../libslab/document-tile.c:986
+msgid "If you delete an item, it is permanently lost."
+msgstr "Αν διαγράψετε ένα αντικείμενο, αυτό θα χαθεί οριστικά."
+
+#: ../libslab/document-tile.c:193
+#, c-format
+msgid "Open with \"%s\""
+msgstr "Άνοιγμα με \"%s\""
+
+#: ../libslab/document-tile.c:207
+msgid "Open with Default Application"
+msgstr "Άνοιγμα με την προεπιλεγμένη εφαρμογή"
+
+#: ../libslab/document-tile.c:218
+msgid "Open in File Manager"
+msgstr "Άνοιγμα στον διαχειριστή αρχείων"
+
+#: ../libslab/document-tile.c:617
+msgid "?"
+msgstr ";"
+
+#: ../libslab/document-tile.c:624
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#: ../libslab/document-tile.c:632
+msgid "Today %l:%M %p"
+msgstr "Σήμερα %l:%M %p"
+
+#: ../libslab/document-tile.c:642
+msgid "Yesterday %l:%M %p"
+msgstr "Χθες %l:%M %p"
+
+#: ../libslab/document-tile.c:654
+msgid "%a %l:%M %p"
+msgstr "%a %l:%M %p"
+
+#: ../libslab/document-tile.c:662
+msgid "%b %d %l:%M %p"
+msgstr "%b %d %l:%M %p"
+
+#: ../libslab/document-tile.c:664
+msgid "%b %d %Y"
+msgstr "%b %d %Y"
+
+#: ../libslab/search-bar.c:255
+msgid "Find Now"
+msgstr "Εύρεση τώρα"
+
+#: ../libslab/system-tile.c:127
+#, c-format
+msgid "<b>Open %s</b>"
+msgstr "<b>Άνοιγμα %s</b>"
+
+#: ../libslab/system-tile.c:140
+#, c-format
+msgid "Remove from System Items"
+msgstr "Απομάκρυνση από τα αντικείμενα συστήματος"
+
+#~ msgid "Unknown login ID, the user database might be corrupted"
+#~ msgstr ""
+#~ "Άγνωστο ID εισόδου, η βάση δεδομένων χρήστη μπορεί να είναι κατεστραμμένη"
+#~ msgid ""
+#~ "Left thumb\n"
+#~ "Left middle finger\n"
+#~ "Left ring finger\n"
+#~ "Left little finger\n"
+#~ "Right thumb\n"
+#~ "Right middle finger\n"
+#~ "Right ring finger\n"
+#~ "Right little finger"
+#~ msgstr ""
+#~ "Αριστερός αντίχειρας\n"
+#~ "Αριστερό μεσαίο δάχτυλο\n"
+#~ "Αριστερός παράμεσος\n"
+#~ "Αριστερό μικρό δάχτυλο\n"
+#~ "Δεξιός αντίχειρας\n"
+#~ "Δεξί μεσαίο δάχτυλο\n"
+#~ "Δεξιός παράμεσος\n"
+#~ "Δεξί μικρό δάχτυλο"
+#~ msgid "<b>Email</b>"
+#~ msgstr "<b>Email</b>"
+#~ msgid "<b>Home</b>"
+#~ msgstr "<b>Οικία</b>"
+#~ msgid "<b>Job</b>"
+#~ msgstr "<b>Δουλειά</b>"
+#~ msgid "<b>Web</b>"
+#~ msgstr "<b>Ιστός</b>"
+#~ msgid "<b>Work</b>"
+#~ msgstr "<b>Εργασία</b>"
+#~ msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+#~ msgstr "<span size=\"larger\" weight=\"bold\">Αλλαγή του κωδικού σας</span>"
+#~ msgid "<b>Assistive Technologies</b>"
+#~ msgstr "<b>Βοηθητικές τεχνολογίες</b>"
+#~ msgid "<b>Preferences</b>"
+#~ msgstr "<b>Προτιμήσεις</b>"
+#~ msgid "<b>C_olors</b>"
+#~ msgstr "<b>_Χρώματα</b>"
+#~ msgid "<b>Preview</b>"
+#~ msgstr "<b>Προεπισκόπηση</b>"
+#~ msgid "<b>_Desktop Background</b>"
+#~ msgstr "<b>_Παρασκήνιο επιφάνειας εργασίας</b>"
+#~ msgid "C_ut"
+#~ msgstr "Αποκο_πή"
+#~ msgid "New File"
+#~ msgstr "Νέο αρχείο"
+#~ msgid "Open File"
+#~ msgstr "Άνοιγμα αρχείου"
+#~ msgid "Save File"
+#~ msgstr "Αποθήκευση αρχείου"
+#~ msgid ""
+#~ "Solid color\n"
+#~ "Horizontal gradient\n"
+#~ "Vertical gradient"
+#~ msgstr ""
+#~ "Ενιαίο χρώμα\n"
+#~ "Οριζόντια διαβάθμιση\n"
+#~ "Κάθετη διαβάθμιση"
+#~ msgid ""
+#~ "Text below items\n"
+#~ "Text beside items\n"
+#~ "Icons only\n"
+#~ "Text only"
+#~ msgstr ""
+#~ "Κείμενο κάτω από αντικείμενα\n"
+#~ "Κείμενο δίπλα από αντικείμενα\n"
+#~ "Μόνο εικονίδια\n"
+#~ "Μόνο κείμενο"
+#~ msgid ""
+#~ "Tiled\n"
+#~ "Zoom\n"
+#~ "Centered\n"
+#~ "Scaled\n"
+#~ "Fill screen"
+#~ msgstr ""
+#~ "Πλακίδιο\n"
+#~ "Εστίαση\n"
+#~ "Κέντρο\n"
+#~ "Κλίμακα\n"
+#~ "Γέμισμα οθόνης"
+#~ msgid "_Copy"
+#~ msgstr "Αντιγρα_φή"
+#~ msgid "_New"
+#~ msgstr "_Νέο"
+#~ msgid "_Open"
+#~ msgstr "Άν_οιγμα"
+#~ msgid "_Print"
+#~ msgstr "_Εκτύπωση"
+#~ msgid "_Quit"
+#~ msgstr "Έ_ξοδος"
+
+# For lack of a better term...?  Anaklimakwsh ???
+#~ msgid "_Save"
+#~ msgstr "_Αποθήκευση"
+#~ msgid "<b>Visual</b>"
+#~ msgstr "<b>Όραση</b>"
+#~ msgid ""
+#~ "Normal\n"
+#~ "Left\n"
+#~ "Right\n"
+#~ "Upside-down\n"
+#~ msgstr ""
+#~ "Κανονική\n"
+#~ "Αριστερά\n"
+#~ "Δεξιά\n"
+#~ "Αναποδογύρισμα\n"
+#~ msgid "Could not apply the selected configuration"
+#~ msgstr "Αδυναμία εφαρμογής των επιλεγμένων ρυθμίσεων"
+#~ msgid "<b>Bounce Keys</b>"
+#~ msgstr "<b>Πλήκτρα αναπήδησης</b>"
+#~ msgid "<b>General</b>"
+#~ msgstr "<b>Γενικά</b>"
+#~ msgid "<small><i>Fast</i></small>"
+#~ msgstr "<small><i>Γρήγορο</i></small>"
+#~ msgid "<small><i>Long</i></small>"
+#~ msgstr "<small><i>Μακρύ</i></small>"
+#~ msgid "<small><i>Short</i></small>"
+#~ msgstr "<small><i>Σύντομο</i></small>"
+#~ msgid "<small><i>Slow</i></small>"
+#~ msgstr "<small><i>Αργό</i></small>"
+#~ msgid "<b>Locate Pointer</b>"
+#~ msgstr "<b>Εύρεση δείκτη</b>"
+#~ msgid "<small><i>High</i></small>"
+#~ msgstr "<small><i>Υψηλή</i></small>"
+#~ msgid "<small><i>Large</i></small>"
+#~ msgstr "<small><i>Μεγάλο</i></small>"
+#~ msgid "<small><i>Low</i></small>"
+#~ msgstr "<small><i>Χαμηλή</i></small>"
+#~ msgid "<small><i>Small</i></small>"
+#~ msgstr "<small><i>Μικρό</i></small>"
+#~ msgid "<b>Ignore Host List</b>"
+#~ msgstr "<b>Αγνόηση λίστας κεντρικού συστήματος</b>"
+#~ msgid ""
+#~ "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
+#~ "\n"
+#~ " Your filter \"<b>%s</b>\" does not match any items.</span>"
+#~ msgstr ""
+#~ "<span size=\"large\"><b>Δεν βρέθηκαν ταιριάσματα.</b> </span><span>\n"
+#~ "\n"
+#~ " Το φίλτρο \"<b>%s</b>\" δεν ταιριάζει σε κανένα αντικείμενο.</span>"
+#~ msgid "/_About"
+#~ msgstr "/_Περί"
 #~ msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
 #~ msgstr "Αδυναμία λήψης του org.gnome.SettingsDaemon.XRANDR"
-
 #~| msgid "C_ommand:"
 #~ msgid "_Command:"
 #~ msgstr "Εν_τολή:"
@@ -3491,8 +3647,6 @@ msgstr "Σφάλμα κατά την ανάλυση των ορισμάτων: %
 #~ msgstr "OSS - Open Sound System"
 #~ msgid "PulseAudio Sound Server"
 #~ msgstr "PulseAudio Sound Server"
-#~ msgid "Test Sound"
-#~ msgstr "Δοκιμή ήχου"
 #~ msgid "Silence"
 #~ msgstr "Σιωπή"
 #~ msgid "- GNOME Sound Preferences"
@@ -3549,14 +3703,9 @@ msgstr "Σφάλμα κατά την ανάλυση των ορισμάτων: %
 #~ msgctxt "Sound event"
 #~ msgid "Alert sound"
 #~ msgstr "Ήχος προειδοποίησης"
-#, fuzzy
-#~ msgctxt "Sound event"
-#~ msgid "Visual alert"
-#~ msgstr "Οπτική βοήθεια"
 #~ msgctxt "Sound event"
 #~ msgid "Windows and Buttons"
 #~ msgstr "Κουμπιά και παράθυρα"
-
 #, fuzzy
 #~ msgctxt "Sound event"
 #~ msgid "Window minimised"
@@ -3564,9 +3713,6 @@ msgstr "Σφάλμα κατά την ανάλυση των ορισμάτων: %
 #~ msgctxt "Sound event"
 #~ msgid "Desktop"
 #~ msgstr "Επιφάνεια εργασίας"
-#~ msgctxt "Sound event"
-#~ msgid "Login"
-#~ msgstr "Είσοδος"
 #~ msgctxt "Sound event"
 #~ msgid "Logout"
 #~ msgstr "Αποσύνδεση"
