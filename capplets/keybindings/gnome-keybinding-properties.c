@@ -1866,7 +1866,7 @@ setup_dialog (GtkBuilder *builder)
 			   builder, NULL, NULL);
 
   /* set up the dialog */
-  reload_key_entries (wm_name, builder);
+  reload_key_entries (builder);
 
   widget = _gtk_builder_get_widget (builder, "gnome-keybinding-dialog");
   capplet_set_icon (widget, "preferences-desktop-keyboard-shortcuts");
@@ -1934,7 +1934,7 @@ main (int argc, char *argv[])
   if (!builder) /* Warning was already printed to console */
     exit (EXIT_FAILURE);
 
-  wm_common_register_window_manager_change ((GFunc) on_window_manager_change, dialog);
+  wm_common_register_window_manager_change ((GFunc) on_window_manager_change, builder);
   setup_dialog (builder);
 
   gtk_main ();
