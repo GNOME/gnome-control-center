@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2009-08-25 17:03+0000\n"
-"PO-Revision-Date: 2009-09-17 02:31+0530\n"
+"POT-Creation-Date: 2009-09-16 21:02+0000\n"
+"PO-Revision-Date: 2009-09-18 12:45+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Hindi <hindi.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -30,38 +30,37 @@ msgstr ""
 "\n"
 "\n"
 "\n"
+"\n"
 
 #: ../gnome-control-center.schemas.in.h:1
-#| msgid "Create New Location"
 msgid "Current network location"
 msgstr "मौजूदा संजाल स्थान"
 
 #: ../gnome-control-center.schemas.in.h:2
-#| msgid "Save _background image"
 msgid "More backgrounds URL"
 msgstr "अधिक पृष्ठभूमि URL"
 
 #: ../gnome-control-center.schemas.in.h:3
 msgid "More themes URL"
-msgstr ""
+msgstr "अधिक प्रसंग URL"
 
 #: ../gnome-control-center.schemas.in.h:4
 msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
-msgstr ""
+msgstr "अपने मौजूदा स्थान नाम में इसे सेट करें. यह उचित संजाल प्रॉक्सी विन्यास को निर्धारित करने के लिए प्रयुक्त होता है."
 
 #: ../gnome-control-center.schemas.in.h:5
 msgid ""
 "URL for where to get more desktop backgrounds. If set to an empty string the "
 "link will not appear."
-msgstr ""
+msgstr "URL जहाँ से अधिक डेस्कटॉप पृष्ठभूमि पाना है. यदि रिक्त स्ट्रिंग पर सेट किया जाता है कड़ी प्रकट नहीं होगा."
 
 #: ../gnome-control-center.schemas.in.h:6
 msgid ""
 "URL for where to get more desktop themes. If set to an empty string the link "
 "will not appear."
-msgstr ""
+msgstr "URL जहाँ से अधिक डेस्कटॉप प्रसंग पाना है. यदि रिक्त स्ट्रिंग पर सेट किया जाता है कड़ी प्रकट नहीं होगा."
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -562,7 +561,7 @@ msgstr "बाईं अनामिका"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:7
 msgid "Left thumb"
-msgstr ""
+msgstr "बायां थंब"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:8
 msgid "Other finger: "
@@ -862,9 +861,9 @@ msgid "Use selected font"
 msgstr "चुने फाँट का प्रयोग करें"
 
 #: ../capplets/appearance/appearance-main.c:55
-#, fuzzy, c-format
+#, c-format
 msgid "Could not load user interface file: %s"
-msgstr "मुख्य अंतरफलक लोड न कर सका"
+msgstr "उपयोक्ता अंतरफलक फ़ाइल को लोड नहीं कर सका: %s"
 
 #: ../capplets/appearance/appearance-main.c:134
 msgid "Specify the filename of a theme to install"
@@ -1051,13 +1050,12 @@ msgid "Fonts"
 msgstr "फ़ॉन्ट्स"
 
 #: ../capplets/appearance/data/appearance.ui.h:18
-#| msgid "Save _background image"
 msgid "Get more backgrounds online"
 msgstr "अधिक पृष्ठभूमि छवि लाएँ"
 
 #: ../capplets/appearance/data/appearance.ui.h:19
 msgid "Get more themes online"
-msgstr ""
+msgstr "अधिक प्रसंग ऑनलाइन पाएँ"
 
 #: ../capplets/appearance/data/appearance.ui.h:20
 msgid "Gra_yscale"
@@ -1168,7 +1166,7 @@ msgstr "पाठ"
 
 #: ../capplets/appearance/data/appearance.ui.h:47
 msgid "Text below items"
-msgstr ""
+msgstr "मद के नीचे पाठ"
 
 #: ../capplets/appearance/data/appearance.ui.h:48
 msgid "Text beside items"
@@ -1352,13 +1350,12 @@ msgid "Slide Show"
 msgstr "स्लाइड शो"
 
 #: ../capplets/appearance/gnome-wp-item.c:260
-#| msgid "Images"
 msgid "Image"
 msgstr "छवि"
 
 #: ../capplets/appearance/gnome-wp-item.c:266
 msgid "multiple sizes"
-msgstr ""
+msgstr "बहुत आकार"
 
 #: ../capplets/appearance/gnome-wp-item.c:271
 #: ../capplets/appearance/gnome-wp-item.c:273
@@ -1373,10 +1370,6 @@ msgstr[1] "पिक्सेल"
 #.
 #: ../capplets/appearance/gnome-wp-item.c:279
 #, c-format
-#| msgid ""
-#| "<b>%s</b>\n"
-#| "%s, %d %s by %d %s\n"
-#| "Folder: %s"
 msgid ""
 "<b>%s</b>\n"
 "%s, %s\n"
@@ -1501,7 +1494,6 @@ msgid "Could not install theme engine"
 msgstr "प्रसंग इंजन संस्थापित नहीं कर सका"
 
 #: ../capplets/common/activate-settings-daemon.c:16
-#, fuzzy
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -1509,10 +1501,10 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
-"विन्यास प्रबंधक 'गनोम-विन्यास-डेमन' प्रारंभ करने में अक्षम.\n"
-"गनोम विन्यास प्रबंधक प्रारंभ न रहने पर कुछ वरीयताएँ परिणाम नहीं देंगी. यह बोनोबो के साथ "
-"समस्या के कारण भी हो सकता है या गैर गनोम (जैसे केडीई) विन्यास प्रबंधक पहले से ही प्रारंभ "
-"हो और गनोम विन्यास प्रबंधक परस्पर विरोध कर रहा होगा."
+"सेटिंग प्रबंधक 'gnome-settings-daemon' प्रारंभ करने में अक्षम.\n"
+"गनोम सेटिंग प्रबंधक प्रारंभ न रहने पर कुछ वरीयताएँ परिणाम नहीं देंगी. यह DBus के साथ "
+"समस्या दे सकती है या गैर गनोम (जैसे केडीई) सेटिंग प्रबंधक पहले से ही प्रारंभ "
+"हो और गनोम सेटिंग प्रबंधक परस्पर विरोध कर रहा होगा."
 
 #: ../capplets/common/capplet-stock-icons.c:66
 #, c-format
@@ -2284,16 +2276,16 @@ msgstr "अक्षम"
 msgid "<Unknown Action>"
 msgstr "<अज्ञात क्रिया>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:942
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:954
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1581
 msgid "Custom Shortcuts"
 msgstr "पसंदीदा शार्टकट"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1081
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1096
 msgid "Error saving the new shortcut"
 msgstr "नए शॉर्टकट सहेजने में त्रुटि"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1160
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1175
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2304,7 +2296,7 @@ msgstr ""
 "असंभव होगा.\n"
 "कृपया Control, Alt या Shift कुंजी को एक साथ कोशिश करें."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1190
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1205
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -2313,31 +2305,31 @@ msgstr ""
 "यह शार्टकट \"%s\" पहले से ही:\n"
 " \"%s\" हेतु प्रयुक्त है"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1196
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1211
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "यदि आप \"%s\" को फिर नियत करते हैं, \"%s\" शॉर्टकट को निष्क्रिय किया जाएगा."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1204
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1219
 msgid "_Reassign"
 msgstr "फिर नियत करें (_R)"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1324
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1339
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "विन्यास डेटाबेस में नया त्वरक अनसेट करने में त्रुटि: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1521
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1536
 msgid "Too many custom shortcuts"
 msgstr "कई मनपसंद शॉर्टकट"
 
 # #-#-#-#-#  gnome-session.gnome-2-2.hi.po (gnome-session VERSION)  #-#-#-#-#
 # gnome-session/logout.c:266
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1818
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1832
 msgid "Action"
 msgstr "कार्य"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1840
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1854
 msgid "Shortcut"
 msgstr "शार्टकट"
 
@@ -2772,11 +2764,11 @@ msgstr "ड्वेल क्लिक"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:11
 msgid "Enable _horizontal scrolling"
-msgstr ""
+msgstr "क्षैतिद स्क्रॉलिंग सक्रिय करें (_h)"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:12
 msgid "Enable mouse _clicks with touchpad"
-msgstr ""
+msgstr "टचपैड के साथ माउस क्लिक सक्रिय करें (_c)"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:15
 msgid "High"
@@ -2836,7 +2828,7 @@ msgstr "टचपैड"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:34
 msgid "Two-_finger scrolling"
-msgstr ""
+msgstr "दो फिंगर स्क्रॉलिंग (_f)"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:35
 msgid "You can also use the Dwell Click panel applet to choose the click type."
@@ -2848,7 +2840,7 @@ msgstr "त्वरक (_A):"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:38
 msgid "_Disable touchpad while typing"
-msgstr ""
+msgstr "टाइपिंग के दौरान टचपैड निष्क्रिय करें (_D)"
 
 # #-#-#-#-#  gnome-applets.gnome-2-2.hi.po (gnome-applets 2.x)  #-#-#-#-#
 # gtk/gtkinputdialog.c:238
@@ -2858,7 +2850,7 @@ msgstr "निष्क्रिय (_D)"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:40
 msgid "_Edge scrolling"
-msgstr ""
+msgstr "किनारा स्क्रॉलिंग (_E)"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:41
 msgid "_Initiate click when stopping pointer movement"
