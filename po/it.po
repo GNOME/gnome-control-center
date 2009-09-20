@@ -1,24 +1,62 @@
 # Italian translation for gnome-control-center
-# Copyright (C) 2001-2009 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 # This file is relased with the same licence of gnome-control-center-package
-# Christopher R. Gabriel, 2001-2002
-# Alessio Dessì <alkex@inwind.it>, 2003-2007
-# Luca Ferretti <elle.uca@infinito.it>, 2003-2008.
-# Milo Casagrande <milo@ubuntu.com>, 2009
-# Luca Ferretti <elle.uca@libero.it>, 2009.
+# Christopher R. Gabriel, 2001, 2002.
+# Alessio Dessì <alkex@inwind.it>, 2003, 2004, 2005, 2006, 2007.
+# Milo Casagrande <milo@ubuntu.com>, 2009.
+# Luca Ferretti <elle.uca@infinito.it>, 2003, 2004, 2005, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center\n"
+"Project-Id-Version: gnome-control-center 2.28.x\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2009-08-20 08:03+0000\n"
-"PO-Revision-Date: 2009-08-21 01:31+0200\n"
+"POT-Creation-Date: 2009-09-18 10:38+0000\n"
+"PO-Revision-Date: 2009-09-20 10:02+0200\n"
 "Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# (ndt) titolo
+#: ../gnome-control-center.schemas.in.h:1
+#| msgid "Create New Location"
+msgid "Current network location"
+msgstr "Postazione di rete attuale"
+
+#: ../gnome-control-center.schemas.in.h:2
+#| msgid "Save _background image"
+msgid "More backgrounds URL"
+msgstr "URL sfondi aggiuntivi"
+
+#: ../gnome-control-center.schemas.in.h:3
+msgid "More themes URL"
+msgstr "URL temi aggiuntivi"
+
+#: ../gnome-control-center.schemas.in.h:4
+msgid ""
+"Set this to your current location name. This is used to determine the "
+"appropriate network proxy configuration."
+msgstr ""
+"Impostare questa chiave al nome dell'attuale postazione. Viene usato per "
+"determinare la configurazione appropriata per il proxy di rete."
+
+#: ../gnome-control-center.schemas.in.h:5
+msgid ""
+"URL for where to get more desktop backgrounds. If set to an empty string the "
+"link will not appear."
+msgstr ""
+"URL della posizione da cui ottenere sfondi aggiuntivi. Se impostata alla "
+"stringa vuota, il collegamento non viene mostrato."
+
+#: ../gnome-control-center.schemas.in.h:6
+msgid ""
+"URL for where to get more desktop themes. If set to an empty string the link "
+"will not appear."
+msgstr ""
+"URL della posizione da cui ottenere temi del desktop aggiuntivi. Se "
+"impostata alla stringa vuota, il collegamento non viene mostrato."
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -188,12 +226,12 @@ msgid "No Image"
 msgstr "Nessuna immagine"
 
 #: ../capplets/about-me/gnome-about-me.c:742
-#: ../capplets/appearance/appearance-desktop.c:661
+#: ../capplets/appearance/appearance-desktop.c:654
 msgid "Images"
 msgstr "Immagini"
 
 #: ../capplets/about-me/gnome-about-me.c:746
-#: ../capplets/appearance/theme-installer.c:695
+#: ../capplets/appearance/theme-installer.c:763
 msgid "All Files"
 msgstr "Tutti i file"
 
@@ -238,7 +276,7 @@ msgstr "Indirizzo"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:6
 msgid "C_ity:"
-msgstr "C_ittà:"
+msgstr "Ci_ttà:"
 
 # (ndt) o società o azienda?
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:7
@@ -275,6 +313,7 @@ msgid "Disable _Fingerprint Login..."
 msgstr "_Disabilita accesso con impronta..."
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:15
+#| msgid "Small"
 msgid "Email"
 msgstr "Email"
 
@@ -289,7 +328,7 @@ msgstr "Nome completo"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:18
 msgid "Hom_e:"
-msgstr "P_ersonale:"
+msgstr "Cas_a:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:19
 #: ../libslab/bookmark-agent.c:1135
@@ -310,7 +349,7 @@ msgstr "Lavoro"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:23
 msgid "M_SN:"
-msgstr "_MSN:"
+msgstr "M_SN:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:24
 msgid "P.O. _box:"
@@ -333,6 +372,7 @@ msgid "State/Pro_vince:"
 msgstr "Stato/Pro_vincia:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:29
+#| msgid "<b>Telephone</b>"
 msgid "Telephone"
 msgstr "Telefono"
 
@@ -372,10 +412,10 @@ msgstr "Indi_rizzo:"
 msgid "_Department:"
 msgstr "_Dipartimento:"
 
-# (ndt) la w va in conflitto con password
+# (ndt) era sulla w, ma va in conflitto con password
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:39
 msgid "_Groupwise:"
-msgstr "_Groupwise:"
+msgstr "Grou_pwise:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:40
 msgid "_Home page:"
@@ -383,7 +423,7 @@ msgstr "_Homepage:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:41
 msgid "_Home:"
-msgstr "_Personale:"
+msgstr "_Casa:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:42
 msgid "_Jabber:"
@@ -395,7 +435,7 @@ msgstr "Mana_ger:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:44
 msgid "_Mobile:"
-msgstr "Cell_ulare:"
+msgstr "C_ellulare:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:45
 msgid "_Profession:"
@@ -411,7 +451,7 @@ msgstr "_Titolo:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:48
 msgid "_Work:"
-msgstr "_Lavoro:"
+msgstr "La_voro:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:49
 msgid "_Yahoo:"
@@ -419,7 +459,7 @@ msgstr "_Yahoo:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:50
 msgid "_Zip/Postal code:"
-msgstr "CAP/C_odice postale:"
+msgstr "CA_P/Codice postale:"
 
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
 msgid "Set your personal information"
@@ -518,19 +558,22 @@ msgstr "Posiziona il dito sul lettore"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:3
 msgid "Left index finger"
-msgstr "Dito indice sinistro"
+msgstr "Indice sinistro"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:4
+#| msgid "Left index finger"
 msgid "Left little finger"
-msgstr "Dito mignolo sinistro"
+msgstr "Mignolo sinistro"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:5
+#| msgid "Left index finger"
 msgid "Left middle finger"
-msgstr "Dito medio sinistro"
+msgstr "Medio sinistro"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:6
+#| msgid "Left index finger"
 msgid "Left ring finger"
-msgstr "Dito anulare sinistro"
+msgstr "Anulare sinistro"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:7
 msgid "Left thumb"
@@ -542,22 +585,25 @@ msgstr "Altro dito:"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:9
 msgid "Right index finger"
-msgstr "Dito indice destro"
+msgstr "Indice destro"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:10
+#| msgid "Right index finger"
 msgid "Right little finger"
-msgstr "Dito mignolo destro"
+msgstr "Mignolo destro"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:11
+#| msgid "Right index finger"
 msgid "Right middle finger"
-msgstr "Dito medio destro"
+msgstr "Medio destro"
 
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:12
+#| msgid "Right index finger"
 msgid "Right ring finger"
-msgstr "Dito anulare destro"
+msgstr "Anulare destro"
 
-# rotazione
 #: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:13
+#| msgid "Right"
 msgid "Right thumb"
 msgstr "Pollice destro"
 
@@ -692,12 +738,13 @@ msgid "Change password"
 msgstr "Cambia password"
 
 #: ../capplets/about-me/gnome-about-me-password.ui.h:3
+#| msgid "Change password"
 msgid "Change your password"
-msgstr "Cambio della propria password"
+msgstr "Cambia la propria password"
 
 #: ../capplets/about-me/gnome-about-me-password.ui.h:4
 msgid "Current _password:"
-msgstr "_Password attuale:"
+msgstr "Password _attuale:"
 
 #: ../capplets/about-me/gnome-about-me-password.ui.h:6
 msgid ""
@@ -713,7 +760,7 @@ msgstr ""
 
 #: ../capplets/about-me/gnome-about-me-password.ui.h:8
 msgid "_Authenticate"
-msgstr "_Autentica"
+msgstr "A_utentica"
 
 #: ../capplets/about-me/gnome-about-me-password.ui.h:9
 msgid "_New password:"
@@ -798,11 +845,11 @@ msgstr "Sceglie quali funzioni di accessibilità abilitare all'accesso"
 # FIXME
 # (ndt) wallpaper ancora?
 # io metto 'sfondo'
-#: ../capplets/appearance/appearance-desktop.c:630
+#: ../capplets/appearance/appearance-desktop.c:623
 msgid "Add Wallpaper"
 msgstr "Aggiungi sfondo"
 
-#: ../capplets/appearance/appearance-desktop.c:665
+#: ../capplets/appearance/appearance-desktop.c:658
 msgid "All files"
 msgstr "Tutti i file"
 
@@ -859,10 +906,10 @@ msgid "Use selected font"
 msgstr "Usa carattere selezionato"
 
 #: ../capplets/appearance/appearance-main.c:55
-#, fuzzy, c-format
+#, c-format
 #| msgid "Could not load the main interface"
 msgid "Could not load user interface file: %s"
-msgstr "Impossibile caricare l'interfaccia principale"
+msgstr "Impossibile caricare il file dell'interfaccia utente: %s"
 
 #: ../capplets/appearance/appearance-main.c:134
 msgid "Specify the filename of a theme to install"
@@ -880,7 +927,7 @@ msgstr ""
 
 #: ../capplets/appearance/appearance-main.c:143
 #: ../capplets/default-applications/gnome-da-capplet.c:907
-#: ../capplets/mouse/gnome-mouse-properties.c:567
+#: ../capplets/mouse/gnome-mouse-properties.c:540
 msgid "page"
 msgstr "PAGINA"
 
@@ -970,7 +1017,7 @@ msgstr ""
 msgid "The current theme suggests a font."
 msgstr "Il tema corrente suggerisce un tipo di carattere."
 
-#: ../capplets/appearance/appearance-themes.c:1044
+#: ../capplets/appearance/appearance-themes.c:1045
 #: ../capplets/default-applications/gnome-da-capplet.c:646
 msgid "Custom"
 msgstr "Personalizzato"
@@ -992,14 +1039,16 @@ msgid "Best co_ntrast"
 msgstr "Ottimizza cont_rasto"
 
 #: ../capplets/appearance/data/appearance.ui.h:5
-msgid "C_olors"
-msgstr "C_olori"
+#| msgid "Colors"
+msgid "C_olors:"
+msgstr "C_olori:"
 
 #: ../capplets/appearance/data/appearance.ui.h:6
 msgid "C_ustomize..."
 msgstr "_Personalizza..."
 
 #: ../capplets/appearance/data/appearance.ui.h:7
+#| msgid "Internet"
 msgid "Centered"
 msgstr "Centrato"
 
@@ -1032,8 +1081,9 @@ msgstr "Carattere per _scrivania:"
 msgid "Edit"
 msgstr "Modifica"
 
-# (ndt) opzione
+# (ntd) opzione
 #: ../capplets/appearance/data/appearance.ui.h:15
+#| msgid "_Mirror screens"
 msgid "Fill screen"
 msgstr "Riempi schermo"
 
@@ -1046,6 +1096,15 @@ msgid "Fonts"
 msgstr "Tipi di carattere"
 
 #: ../capplets/appearance/data/appearance.ui.h:18
+#| msgid "Save _background image"
+msgid "Get more backgrounds online"
+msgstr "Cerca altri sfondi online"
+
+#: ../capplets/appearance/data/appearance.ui.h:19
+msgid "Get more themes online"
+msgstr "Cerca altri temi online"
+
+#: ../capplets/appearance/data/appearance.ui.h:20
 msgid "Gra_yscale"
 msgstr "_Scala di grigi"
 
@@ -1066,190 +1125,187 @@ msgstr "_Scala di grigi"
 #
 # --Luca
 #. font hinting
-#: ../capplets/appearance/data/appearance.ui.h:20
+#: ../capplets/appearance/data/appearance.ui.h:22
 msgid "Hinting"
 msgstr "Approssimazione (hinting)"
 
-#: ../capplets/appearance/data/appearance.ui.h:21
+#: ../capplets/appearance/data/appearance.ui.h:23
 msgid "Horizontal gradient"
 msgstr "Gradiente orizzontale"
 
-#: ../capplets/appearance/data/appearance.ui.h:22
+#: ../capplets/appearance/data/appearance.ui.h:24
 msgid "Icons"
 msgstr "Icone"
 
-#: ../capplets/appearance/data/appearance.ui.h:23
+#: ../capplets/appearance/data/appearance.ui.h:25
 msgid "Icons only"
 msgstr "Solo icone"
 
-#: ../capplets/appearance/data/appearance.ui.h:24
+#: ../capplets/appearance/data/appearance.ui.h:26
 msgid "Interface"
 msgstr "Interfaccia"
 
-#: ../capplets/appearance/data/appearance.ui.h:25
+#: ../capplets/appearance/data/appearance.ui.h:27
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:16
 msgid "Large"
 msgstr "Grande"
 
-#: ../capplets/appearance/data/appearance.ui.h:26
+#: ../capplets/appearance/data/appearance.ui.h:28
 msgid "Menus and Toolbars"
 msgstr "Barre menù e strumenti"
 
 # hinting --> approssimazione --> femminile
-#: ../capplets/appearance/data/appearance.ui.h:27
+#: ../capplets/appearance/data/appearance.ui.h:29
 msgid "N_one"
 msgstr "N_essuna"
 
-#: ../capplets/appearance/data/appearance.ui.h:28
+#: ../capplets/appearance/data/appearance.ui.h:30
 msgid "Open a dialog to specify the color"
 msgstr "Apre un dialogo per specificare il colore"
 
-#: ../capplets/appearance/data/appearance.ui.h:29
+#: ../capplets/appearance/data/appearance.ui.h:31
 msgid "Pointer"
 msgstr "Puntatore"
 
-#: ../capplets/appearance/data/appearance.ui.h:30
+#: ../capplets/appearance/data/appearance.ui.h:32
 msgid "Preview"
 msgstr "Anteprima"
 
-#: ../capplets/appearance/data/appearance.ui.h:31
+#: ../capplets/appearance/data/appearance.ui.h:33
 msgid "R_esolution:"
 msgstr "Risolu_zione:"
 
-#: ../capplets/appearance/data/appearance.ui.h:32
+#: ../capplets/appearance/data/appearance.ui.h:34
 msgid "Rendering"
 msgstr "Resa a schermo"
 
-#: ../capplets/appearance/data/appearance.ui.h:33
+#: ../capplets/appearance/data/appearance.ui.h:35
 msgid "Save Theme As..."
 msgstr "Salva tema come..."
 
-#: ../capplets/appearance/data/appearance.ui.h:34
+#: ../capplets/appearance/data/appearance.ui.h:36
 msgid "Save _As..."
 msgstr "Sa_lva come..."
 
-#: ../capplets/appearance/data/appearance.ui.h:35
+#: ../capplets/appearance/data/appearance.ui.h:37
 msgid "Save _background image"
 msgstr "Salva l'immagine di s_fondo"
 
-#: ../capplets/appearance/data/appearance.ui.h:36
+#: ../capplets/appearance/data/appearance.ui.h:38
 msgid "Scaled"
 msgstr "Scalato"
 
-#: ../capplets/appearance/data/appearance.ui.h:37
+#: ../capplets/appearance/data/appearance.ui.h:39
 msgid "Show _icons in menus"
 msgstr "_Mostrare le icone nei menù"
 
-#: ../capplets/appearance/data/appearance.ui.h:38
+#: ../capplets/appearance/data/appearance.ui.h:40
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:30
 msgid "Small"
 msgstr "Piccolo"
 
-#: ../capplets/appearance/data/appearance.ui.h:39
+#: ../capplets/appearance/data/appearance.ui.h:41
 msgid "Smoothing"
 msgstr "Sfumatura"
 
-#: ../capplets/appearance/data/appearance.ui.h:40
+#: ../capplets/appearance/data/appearance.ui.h:42
 msgid "Solid color"
 msgstr "Tinta unita"
 
-#: ../capplets/appearance/data/appearance.ui.h:41
+#: ../capplets/appearance/data/appearance.ui.h:43
 msgid "Sub_pixel (LCDs)"
 msgstr "Subpi_xel (LCD)"
 
 # Lisciatura? Spianatura?
-#: ../capplets/appearance/data/appearance.ui.h:42
+#: ../capplets/appearance/data/appearance.ui.h:44
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Sfumatura s_ubpixel (LCD)"
 
-#: ../capplets/appearance/data/appearance.ui.h:43
+#: ../capplets/appearance/data/appearance.ui.h:45
 msgid "Subpixel Order"
 msgstr "Ordine subpixel"
 
-#: ../capplets/appearance/data/appearance.ui.h:44
+#: ../capplets/appearance/data/appearance.ui.h:46
 msgid "Text"
 msgstr "Testo"
 
-#: ../capplets/appearance/data/appearance.ui.h:45
+#: ../capplets/appearance/data/appearance.ui.h:47
 msgid "Text below items"
 msgstr "Testo sotto le icone"
 
-#: ../capplets/appearance/data/appearance.ui.h:46
+#: ../capplets/appearance/data/appearance.ui.h:48
 msgid "Text beside items"
 msgstr "Testo accanto alle icone"
 
-#: ../capplets/appearance/data/appearance.ui.h:47
+#: ../capplets/appearance/data/appearance.ui.h:49
 msgid "Text only"
 msgstr "Solo testo"
 
-#: ../capplets/appearance/data/appearance.ui.h:48
+#: ../capplets/appearance/data/appearance.ui.h:50
 msgid "The current controls theme does not support color schemes."
 msgstr "Il tema corrente per i controlli non supporta gli schemi di colore."
 
-#: ../capplets/appearance/data/appearance.ui.h:49
+#: ../capplets/appearance/data/appearance.ui.h:51
 msgid "Theme"
 msgstr "Tema"
 
-#: ../capplets/appearance/data/appearance.ui.h:50
+#: ../capplets/appearance/data/appearance.ui.h:52
+#| msgid "_Title:"
 msgid "Tiled"
 msgstr "Piastrellato"
 
-#: ../capplets/appearance/data/appearance.ui.h:51
+#: ../capplets/appearance/data/appearance.ui.h:53
 msgid "Toolbar _button labels:"
 msgstr "_Etichette dei pulsanti della barra strumenti:"
 
 #. vertical hinting, pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.ui.h:53
+#: ../capplets/appearance/data/appearance.ui.h:55
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: ../capplets/appearance/data/appearance.ui.h:54
+#: ../capplets/appearance/data/appearance.ui.h:56
 msgid "Vertical gradient"
 msgstr "Gradiente verticale"
 
-#: ../capplets/appearance/data/appearance.ui.h:55
+#: ../capplets/appearance/data/appearance.ui.h:57
 msgid "Window Border"
 msgstr "Bordo finestra"
 
-#: ../capplets/appearance/data/appearance.ui.h:56
+#: ../capplets/appearance/data/appearance.ui.h:58
 msgid "Zoom"
 msgstr "Ingrandito"
 
-#: ../capplets/appearance/data/appearance.ui.h:57
+#: ../capplets/appearance/data/appearance.ui.h:59
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 msgid "_Add..."
 msgstr "A_ggiungi..."
 
-#: ../capplets/appearance/data/appearance.ui.h:58
+#: ../capplets/appearance/data/appearance.ui.h:60
 msgid "_Application font:"
 msgstr "Carattere per _applicazioni:"
 
 #. pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.ui.h:60
+#: ../capplets/appearance/data/appearance.ui.h:62
 msgid "_BGR"
 msgstr "_BGR"
 
-#: ../capplets/appearance/data/appearance.ui.h:61
+#: ../capplets/appearance/data/appearance.ui.h:63
 msgid "_Description:"
 msgstr "_Descrizione:"
 
-#: ../capplets/appearance/data/appearance.ui.h:62
-msgid "_Desktop Background"
-msgstr "S_fondo della scrivania"
-
-#: ../capplets/appearance/data/appearance.ui.h:63
+#: ../capplets/appearance/data/appearance.ui.h:64
 msgid "_Document font:"
 msgstr "Carattere per _documenti:"
 
-#: ../capplets/appearance/data/appearance.ui.h:64
+#: ../capplets/appearance/data/appearance.ui.h:65
 msgid "_Editable menu shortcut keys"
 msgstr "_Tasti scorciatoia dei menù modificabili"
 
-#: ../capplets/appearance/data/appearance.ui.h:65
+#: ../capplets/appearance/data/appearance.ui.h:66
 msgid "_File"
 msgstr "_File"
 
-#: ../capplets/appearance/data/appearance.ui.h:66
+#: ../capplets/appearance/data/appearance.ui.h:67
 msgid "_Fixed width font:"
 msgstr "Carattere a larghezza _fissa:"
 
@@ -1260,51 +1316,51 @@ msgstr "Carattere a larghezza _fissa:"
 #
 #   --Luca
 #
-#: ../capplets/appearance/data/appearance.ui.h:67
+#: ../capplets/appearance/data/appearance.ui.h:68
 msgid "_Full"
 msgstr "Com_pleta"
 
-#: ../capplets/appearance/data/appearance.ui.h:68
+#: ../capplets/appearance/data/appearance.ui.h:69
 msgid "_Input boxes:"
 msgstr "C_aselle di input:"
 
-#: ../capplets/appearance/data/appearance.ui.h:69
+#: ../capplets/appearance/data/appearance.ui.h:70
 msgid "_Install..."
 msgstr "I_nstalla..."
 
 # hinting --> approssimazione --> femminile
-#: ../capplets/appearance/data/appearance.ui.h:70
+#: ../capplets/appearance/data/appearance.ui.h:71
 msgid "_Medium"
 msgstr "_Media"
 
-#: ../capplets/appearance/data/appearance.ui.h:71
+#: ../capplets/appearance/data/appearance.ui.h:72
 msgid "_Monochrome"
 msgstr "_Monocromatico"
 
-#: ../capplets/appearance/data/appearance.ui.h:72
+#: ../capplets/appearance/data/appearance.ui.h:73
 #: ../capplets/keybindings/gnome-keybinding-properties.ui.h:5
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: ../capplets/appearance/data/appearance.ui.h:73
+#: ../capplets/appearance/data/appearance.ui.h:74
 msgid "_None"
 msgstr "_Nessuna"
 
 #. pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.ui.h:75
+#: ../capplets/appearance/data/appearance.ui.h:76
 msgid "_RGB"
 msgstr "_RGB"
 
 # predefiniti (colori)
-#: ../capplets/appearance/data/appearance.ui.h:76
+#: ../capplets/appearance/data/appearance.ui.h:77
 msgid "_Reset to Defaults"
 msgstr "_Ripristina predefiniti"
 
-#: ../capplets/appearance/data/appearance.ui.h:77
+#: ../capplets/appearance/data/appearance.ui.h:78
 msgid "_Selected items:"
 msgstr "_Elementi selezionati:"
 
-#: ../capplets/appearance/data/appearance.ui.h:78
+#: ../capplets/appearance/data/appearance.ui.h:79
 msgid "_Size:"
 msgstr "_Dimensione:"
 
@@ -1317,32 +1373,32 @@ msgstr "_Dimensione:"
 #
 # Quindi qualcosa come minica o trascurabile potrebbe anche
 # essere meglio di leggera  --Luca
-#: ../capplets/appearance/data/appearance.ui.h:79
+#: ../capplets/appearance/data/appearance.ui.h:80
 msgid "_Slight"
 msgstr "_Leggera"
 
-#: ../capplets/appearance/data/appearance.ui.h:80
+#: ../capplets/appearance/data/appearance.ui.h:81
 msgid "_Style:"
 msgstr "_Stile:"
 
-#: ../capplets/appearance/data/appearance.ui.h:81
+#: ../capplets/appearance/data/appearance.ui.h:82
 msgid "_Tooltips:"
 msgstr "_Suggerimenti:"
 
 #. vertical hinting, pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.ui.h:83
+#: ../capplets/appearance/data/appearance.ui.h:84
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: ../capplets/appearance/data/appearance.ui.h:84
+#: ../capplets/appearance/data/appearance.ui.h:85
 msgid "_Window title font:"
 msgstr "Carattere per _titolo finestre:"
 
-#: ../capplets/appearance/data/appearance.ui.h:85
+#: ../capplets/appearance/data/appearance.ui.h:86
 msgid "_Windows:"
 msgstr "_Finestre:"
 
-#: ../capplets/appearance/data/appearance.ui.h:86
+#: ../capplets/appearance/data/appearance.ui.h:87
 msgid "dots per inch"
 msgstr "punti per pollice"
 
@@ -1370,56 +1426,69 @@ msgstr "Pacchetto «Tema di Gnome»"
 msgid "No Desktop Background"
 msgstr "Nessuno sfondo per la scrivania"
 
-#: ../capplets/appearance/gnome-wp-item.c:208
+#: ../capplets/appearance/gnome-wp-item.c:258
 msgid "Slide Show"
 msgstr "Diapositive"
 
-#. translators: <b>wallpaper name</b>
-#. * mime type, x pixel(s) by y pixel(s)
-#. * Folder: /path/to/file
-#.
-#: ../capplets/appearance/gnome-wp-item.c:216
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %d %s by %d %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %d %s per %d %s\n"
-"Cartella: %s"
+#: ../capplets/appearance/gnome-wp-item.c:260
+#| msgid "Images"
+msgid "Image"
+msgstr "Immagine"
 
-#: ../capplets/appearance/gnome-wp-item.c:222
-#: ../capplets/appearance/gnome-wp-item.c:224
+#: ../capplets/appearance/gnome-wp-item.c:266
+msgid "multiple sizes"
+msgstr "dimensioni multiple"
+
+#: ../capplets/appearance/gnome-wp-item.c:271
+#: ../capplets/appearance/gnome-wp-item.c:273
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
 msgstr[1] "pixel"
 
-#: ../capplets/appearance/theme-installer.c:174
-#: ../capplets/appearance/theme-installer.c:224
+#. translators: <b>wallpaper name</b>
+#. * mime type, size
+#. * Folder: /path/to/file
+#.
+#: ../capplets/appearance/gnome-wp-item.c:279
+#, c-format
+#| msgid ""
+#| "<b>%s</b>\n"
+#| "%s, %d %s by %d %s\n"
+#| "Folder: %s"
+msgid ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Cartella: %s"
+
+#: ../capplets/appearance/theme-installer.c:178
+#: ../capplets/appearance/theme-installer.c:234
 msgid "Cannot install theme"
 msgstr "Impossibile installare il tema"
 
-#: ../capplets/appearance/theme-installer.c:176
+#: ../capplets/appearance/theme-installer.c:180
 #, c-format
 msgid "The %s utility is not installed."
 msgstr "Il programma di utilità %s non è installato."
 
-#: ../capplets/appearance/theme-installer.c:226
+#: ../capplets/appearance/theme-installer.c:236
 msgid "There was a problem while extracting the theme."
 msgstr "Si è verificato un problema durante l'estrazione del tema."
 
-#: ../capplets/appearance/theme-installer.c:249
+#: ../capplets/appearance/theme-installer.c:264
 msgid "There was an error installing the selected file"
 msgstr "Si è verificato un errore nell'installare il file selezionato"
 
-#: ../capplets/appearance/theme-installer.c:250
+#: ../capplets/appearance/theme-installer.c:265
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
 msgstr "Sembra che «%s» non sia un tema valido."
 
-#: ../capplets/appearance/theme-installer.c:251
+#: ../capplets/appearance/theme-installer.c:266
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
@@ -1428,46 +1497,46 @@ msgstr ""
 "Sembra che «%s» non sia un tema valido. Potrebbe essere un motore di tema che "
 "è necessario compilare."
 
-#: ../capplets/appearance/theme-installer.c:354
+#: ../capplets/appearance/theme-installer.c:372
 #, c-format
 msgid "Installation for theme \"%s\" failed."
 msgstr "Installazione del tema «%s» non riuscita."
 
-#: ../capplets/appearance/theme-installer.c:393
+#: ../capplets/appearance/theme-installer.c:411
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Il tema «%s» è stato installato."
 
-#: ../capplets/appearance/theme-installer.c:398
+#: ../capplets/appearance/theme-installer.c:421
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Mantenere il tema corrente o applicare quello appena installato?"
 
-#: ../capplets/appearance/theme-installer.c:400
+#: ../capplets/appearance/theme-installer.c:424
 msgid "Keep Current Theme"
 msgstr "Mantieni tema corrente"
 
-#: ../capplets/appearance/theme-installer.c:402
+#: ../capplets/appearance/theme-installer.c:427
 msgid "Apply New Theme"
 msgstr "Applica nuovo tema"
 
-#: ../capplets/appearance/theme-installer.c:446
+#: ../capplets/appearance/theme-installer.c:471
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "Il tema «%s» per GNOME è stato installato correttamente"
 
-#: ../capplets/appearance/theme-installer.c:505
+#: ../capplets/appearance/theme-installer.c:533
 msgid "Failed to create temporary directory"
 msgstr "Creazione della cartella temporanea non riuscita"
 
-#: ../capplets/appearance/theme-installer.c:568
+#: ../capplets/appearance/theme-installer.c:596
 msgid "New themes have been successfully installed."
 msgstr "I nuovi temi sono stati installati con successo."
 
-#: ../capplets/appearance/theme-installer.c:593
+#: ../capplets/appearance/theme-installer.c:643
 msgid "No theme file location specified to install"
 msgstr "Non è stata fornita la posizione del file del tema da installare"
 
-#: ../capplets/appearance/theme-installer.c:614
+#: ../capplets/appearance/theme-installer.c:667
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1476,11 +1545,11 @@ msgstr ""
 "Permessi non sufficienti per installare il tema in:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:684
+#: ../capplets/appearance/theme-installer.c:745
 msgid "Select Theme"
 msgstr "Selezione tema"
 
-#: ../capplets/appearance/theme-installer.c:688
+#: ../capplets/appearance/theme-installer.c:756
 msgid "Theme Packages"
 msgstr "Pacchetti di tema"
 
@@ -1511,6 +1580,12 @@ msgid "Could not install theme engine"
 msgstr "Impossibile installare il motore di tema"
 
 #: ../capplets/common/activate-settings-daemon.c:16
+#| msgid ""
+#| "Unable to start the settings manager 'gnome-settings-daemon'.\n"
+#| "Without the GNOME settings manager running, some preferences may not take "
+#| "effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. "
+#| "KDE) settings manager may already be active and conflicting with the "
+#| "GNOME settings manager."
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -2147,8 +2222,6 @@ msgid "aterm"
 msgstr "aterm"
 
 # (ndt) titolo finestra
-#
-# Nota: usato schermo come traduzione di display e screen, monitor per monitor
 #: ../capplets/display/display-capplet.ui.h:1
 msgid "Display Preferences"
 msgstr "Preferenze dello schermo"
@@ -2209,7 +2282,6 @@ msgstr "Destra"
 
 # capovolto, lo schermo... credo
 #: ../capplets/display/display-capplet.ui.h:13
-#, fuzzy
 #| msgid "Upside Down"
 msgid "Upside-down"
 msgstr "Capovolto"
@@ -2221,7 +2293,7 @@ msgstr "In_dividua monitor"
 # (ndt) opzione
 #: ../capplets/display/display-capplet.ui.h:15
 msgid "_Mirror screens"
-msgstr "Scher_mi clonati"
+msgstr "Clonare gli scher_mi"
 
 #: ../capplets/display/display-capplet.ui.h:16
 msgid "_Resolution:"
@@ -2230,7 +2302,7 @@ msgstr "_Risoluzione:"
 # (ndt) questo mostra un'icona nell'area di notifica
 #: ../capplets/display/display-capplet.ui.h:17
 msgid "_Show displays in panel"
-msgstr "Mostrare gli _schermi nel pannello"
+msgstr "_Mostrare i display nel pannello"
 
 # (ndt) questa è la descrizione della voce di menù
 #: ../capplets/display/display-properties.desktop.in.in.h:1
@@ -2268,27 +2340,27 @@ msgstr "%d × %d"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1451
+#: ../capplets/display/xrandr-capplet.c:1458
 msgid "Mirror Screens"
 msgstr "Schermi clonati"
 
-#: ../capplets/display/xrandr-capplet.c:1893
+#: ../capplets/display/xrandr-capplet.c:1878
 msgid "Could not save the monitor configuration"
 msgstr "Impossibile salvare la configurazione del monitor"
 
-#: ../capplets/display/xrandr-capplet.c:1904
+#: ../capplets/display/xrandr-capplet.c:1889
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Impossibile ottenere un bus di sessione mentre viene applicata la "
 "configurazione dello schermo"
 
-#: ../capplets/display/xrandr-capplet.c:1946
+#: ../capplets/display/xrandr-capplet.c:1931
 msgid "Could not detect displays"
-msgstr "Impossibile individuare gli schermi"
+msgstr "Impossibile individuare i display"
 
-#: ../capplets/display/xrandr-capplet.c:2161
+#: ../capplets/display/xrandr-capplet.c:2146
 msgid "Could not get screen information"
-msgstr "Impossibile ottenere informazioni sullo schermo"
+msgstr "Impossibile ottenere informazioni sull schermo"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 msgid "Sound"
@@ -2338,12 +2410,12 @@ msgstr "Disabilitata"
 msgid "<Unknown Action>"
 msgstr "<Azione sconosciuta>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:942
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:954
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1581
 msgid "Custom Shortcuts"
 msgstr "Scorciatoie personalizzate"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1081
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1096
 msgid "Error saving the new shortcut"
 msgstr "Errore nel salvare la nuova scorciatoia"
 
@@ -2351,7 +2423,7 @@ msgstr "Errore nel salvare la nuova scorciatoia"
 # tasto speciale (per esempio "G").
 #
 # Adattata al meglio la traduzione italiana.c
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1160
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1175
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2362,7 +2434,7 @@ msgstr ""
 "digitare usando questo tasto.\n"
 "Provare ad usare in combinazione un tasto come Ctrl, Alt o Maiusc."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1190
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1205
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -2371,31 +2443,31 @@ msgstr ""
 "La scorciatoia «%s» è già usata per\n"
 "«%s»"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1196
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1211
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "Se si riassegna la scorciatoia a «%s», la scorciatoia «%s» verrà disabilitata."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1204
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1219
 msgid "_Reassign"
 msgstr "_Riassegna"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1324
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1339
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "Errore nell'azzerare l'acceleratore nel database di configurazione: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1521
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1536
 msgid "Too many custom shortcuts"
 msgstr "Troppe scorciatoie personalizzate"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1818
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1832
 msgid "Action"
 msgstr "Azione"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1840
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1854
 msgid "Shortcut"
 msgstr "Scorciatoia"
 
@@ -2476,6 +2548,7 @@ msgstr "Segnale acustico quando il tasto è rifi_utato"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:5
+#| msgid "Mouse Keys"
 msgid "Bounce Keys"
 msgstr "Pressione ravvicinata dei tasti"
 
@@ -2565,10 +2638,9 @@ msgstr "Durata del lavoro prima di obbligare ad una pausa"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:14
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:13
-#, fuzzy
 #| msgid "_Paste"
 msgid "Fast"
-msgstr "_Incolla"
+msgstr "Veloce"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:16
 msgid "Key presses _repeat when key is held down"
@@ -2601,7 +2673,7 @@ msgstr ""
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:22
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:18
 msgid "Long"
-msgstr ""
+msgstr "Lungo"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:23
 msgid "Mouse Keys"
@@ -2629,15 +2701,14 @@ msgstr "Disposizione separata per ciascuna _finestra"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:26
-#, fuzzy
 #| msgid "Shortcut"
 msgid "Short"
-msgstr "Scorciatoia"
+msgstr "Breve"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:29
 msgid "Slow"
-msgstr ""
+msgstr "Lento"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:33
 msgid "Typing Break"
@@ -2808,11 +2879,11 @@ msgid "gesture|Disabled"
 msgstr "Disabilitato"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/mouse/gnome-mouse-properties.c:566
+#: ../capplets/mouse/gnome-mouse-properties.c:539
 msgid "Specify the name of the page to show (general|accessibility)"
 msgstr "Specifica il nome della pagina da mostrare (general|accessibility)"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:571
+#: ../capplets/mouse/gnome-mouse-properties.c:544
 msgid "- GNOME Mouse Preferences"
 msgstr "- Preferenze mouse di GNOME"
 
@@ -2850,22 +2921,22 @@ msgstr "Abilitare lo scorrimento _orizzontale"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:12
 msgid "Enable mouse _clicks with touchpad"
-msgstr "A_bilitare i clic del mouse con il touchpad"
+msgstr "Abilitare i clic del mouse con il _touchpad"
 
 # rotazione
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:15
-#, fuzzy
 #| msgid "Right"
 msgid "High"
-msgstr "Destra"
+msgstr "Alto"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:17
+#| msgid "Large Pointer"
 msgid "Locate Pointer"
 msgstr "Localizzazione del puntatore"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:19
 msgid "Low"
-msgstr ""
+msgstr "Basso"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:20
 msgid "Mouse Orientation"
@@ -2916,7 +2987,7 @@ msgstr "Touchpad"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:34
 msgid "Two-_finger scrolling"
-msgstr "Scorrimento con d_ue dita"
+msgstr "Sco_rrimento a due dita"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:35
 msgid "You can also use the Dwell Click panel applet to choose the click type."
@@ -2930,16 +3001,18 @@ msgstr "_Accelerazione:"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:38
 msgid "_Disable touchpad while typing"
-msgstr "_Disabilitare il touchpad mentre si digita"
+msgstr "Di_sabilitare il touchpad durante la digitazione"
 
-# riferito a scorrimento
+# al femminile, scorciatoia e purtroppo anche audio
+# dove abbiamo "Predefinita" per altri motivi..
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:39
+#| msgid "Disabled"
 msgid "_Disabled"
-msgstr "Dis_abilitato"
+msgstr "_Disabilitato"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:40
 msgid "_Edge scrolling"
-msgstr "Scorri_mento sul bordo"
+msgstr "Scorrimento di _bordo"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:41
 msgid "_Initiate click when stopping pointer movement"
@@ -3001,18 +3074,22 @@ msgid "Set your network proxy preferences"
 msgstr "Imposta le preferenze del proxy di rete"
 
 #: ../capplets/network/gnome-network-properties.ui.h:1
+#| msgid "Di_rect internet connection"
 msgid "<b>Di_rect internet connection</b>"
 msgstr "<b>Connessione _diretta a Internet</b>"
 
 #: ../capplets/network/gnome-network-properties.ui.h:2
+#| msgid "_Automatic proxy configuration"
 msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>Configurazione _automatica proxy</b>"
+msgstr "<b>Configurazione _automatica del proxy</b>"
 
 #: ../capplets/network/gnome-network-properties.ui.h:3
+#| msgid "_Manual proxy configuration"
 msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>Configurazione _manuale proxy</b>"
+msgstr "<b>Configurazione _manuale del proxy</b>"
 
 #: ../capplets/network/gnome-network-properties.ui.h:4
+#| msgid "_Use authentication"
 msgid "<b>_Use authentication</b>"
 msgstr "<b>U_sare autenticazione</b>"
 
@@ -3214,7 +3291,7 @@ msgstr "tasto non trovato [%s]\n"
 
 #: ../shell/control-center.c:143
 msgid "Hide on start (useful to preload the shell)"
-msgstr "Nasconde all'avvio (utile per pre-caricare la shell)"
+msgstr "Nasconde all'avvio (utile per precaricare la shell)"
 
 #: ../shell/control-center.c:182
 msgid "Filter"
@@ -3547,52 +3624,51 @@ msgstr "FILE-CARATTERE FILE-OUTPUT"
 msgid "Error parsing arguments: %s\n"
 msgstr "Errore nell'analizzare gli argomenti: %s\n"
 
-#: ../libslab/app-shell.c:752
+#: ../libslab/app-shell.c:754
 #, c-format
-msgid ""
-"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-"\n"
-" Your filter \"<b>%s</b>\" does not match any items.</span>"
-msgstr ""
-"<span size=\"large\"><b>Nessuna corrispondenza trovata.</b> </span><span>\n"
-"\n"
-" Il filtro \"<b>%s</b>\" non seleziona alcun elemento.</span>"
+msgid "Your filter \"%s\" does not match any items."
+msgstr "Al filtro «%s» non corrisponde alcuna voce."
 
-#: ../libslab/app-shell.c:902
+#: ../libslab/app-shell.c:756
+msgid "No matches found."
+msgstr "Nessuna corrispondenza trovata."
+
+#: ../libslab/app-shell.c:905
 msgid "Other"
 msgstr "Altri"
 
 #. make start action
-#: ../libslab/application-tile.c:373
+#: ../libslab/application-tile.c:374
 #, c-format
-msgid "<b>Start %s</b>"
-msgstr "<b>Avvia %s</b>"
+#| msgid "<b>Start %s</b>"
+msgid "Start %s"
+msgstr "Avvia %s"
 
-#: ../libslab/application-tile.c:392
+#: ../libslab/application-tile.c:395
 msgid "Help"
 msgstr "Aiuto"
 
-#: ../libslab/application-tile.c:439
+#: ../libslab/application-tile.c:442
 msgid "Upgrade"
 msgstr "Aggiornamento"
 
-#: ../libslab/application-tile.c:454
+#: ../libslab/application-tile.c:457
 msgid "Uninstall"
 msgstr "Disinstallazione"
 
-#: ../libslab/application-tile.c:781 ../libslab/document-tile.c:718
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
 msgid "Remove from Favorites"
 msgstr "Rimuovi dai preferiti"
 
-#: ../libslab/application-tile.c:783 ../libslab/document-tile.c:720
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
 msgid "Add to Favorites"
 msgstr "Aggiungi ai preferiti"
 
-#: ../libslab/application-tile.c:868
+#: ../libslab/application-tile.c:871
 msgid "Remove from Startup Programs"
 msgstr "Rimuovi dai programmi all'avvio"
 
-#: ../libslab/application-tile.c:870
+#: ../libslab/application-tile.c:873
 msgid "Add to Startup Programs"
 msgstr "Aggiungi nei programmi all'avvio"
 
@@ -3627,72 +3703,74 @@ msgid "<b>Open</b>"
 msgstr "<b>Apri</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:231
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
 msgid "Rename..."
 msgstr "Rinomina..."
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:245 ../libslab/document-tile.c:254
+#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
 msgid "Send To..."
 msgstr "Invia a..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:280
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
 msgid "Move to Trash"
 msgstr "Sposta nel cestino"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:290 ../libslab/document-tile.c:834
+#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
 msgid "Delete"
 msgstr "Elimina"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:982
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Eliminare definitivamente «%s»?"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:983
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
 msgid "If you delete an item, it is permanently lost."
 msgstr "Se si elimina un oggetto, è perso definitivamente."
 
-#: ../libslab/document-tile.c:192
+# tolte virgolette per omogeneità con Nautilus
+#: ../libslab/document-tile.c:193
 #, c-format
-msgid "<b>Open with \"%s\"</b>"
-msgstr "<b>Apri con «%s»</b>"
+#| msgid "<b>Open with \"%s\"</b>"
+msgid "Open with \"%s\""
+msgstr "Apri con %s"
 
-#: ../libslab/document-tile.c:204
+#: ../libslab/document-tile.c:207
 msgid "Open with Default Application"
 msgstr "Apri con applicazione predefinita"
 
-#: ../libslab/document-tile.c:215
+#: ../libslab/document-tile.c:218
 msgid "Open in File Manager"
 msgstr "Apri nel file manager"
 
-#: ../libslab/document-tile.c:614
+#: ../libslab/document-tile.c:617
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:621
+#: ../libslab/document-tile.c:624
 msgid "%l:%M %p"
 msgstr "%k.%M"
 
-#: ../libslab/document-tile.c:629
+#: ../libslab/document-tile.c:632
 msgid "Today %l:%M %p"
 msgstr "Oggi alle %k.%M"
 
-#: ../libslab/document-tile.c:639
+#: ../libslab/document-tile.c:642
 msgid "Yesterday %l:%M %p"
 msgstr "Ieri alle %k.%M"
 
-#: ../libslab/document-tile.c:651
+#: ../libslab/document-tile.c:654
 msgid "%a %l:%M %p"
 msgstr "%a alle %k.%M"
 
-#: ../libslab/document-tile.c:659
+#: ../libslab/document-tile.c:662
 msgid "%b %d %l:%M %p"
 msgstr "%d %b alle %k.%M"
 
-#: ../libslab/document-tile.c:661
+#: ../libslab/document-tile.c:664
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
 
@@ -3710,192 +3788,3 @@ msgstr "<b>Apri %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Rimuovi da voci di sistema"
-
-#~ msgid "Unknown login ID, the user database might be corrupted"
-#~ msgstr ""
-#~ "ID di accesso sconosciuto, il database degli utenti potrebbe essere "
-#~ "danneggiato"
-
-#~ msgid ""
-#~ "Left thumb\n"
-#~ "Left middle finger\n"
-#~ "Left ring finger\n"
-#~ "Left little finger\n"
-#~ "Right thumb\n"
-#~ "Right middle finger\n"
-#~ "Right ring finger\n"
-#~ "Right little finger"
-#~ msgstr ""
-#~ "Pollice sinistro\n"
-#~ "Dito medio sinistro\n"
-#~ "Anulare sinistro\n"
-#~ "Mignolo sinistro\n"
-#~ "Pollice destro\n"
-#~ "Dito medio destro\n"
-#~ "Anulare destro\n"
-#~ "Mignolo destro"
-
-#~ msgid "<b>Email</b>"
-#~ msgstr "<b>Email</b>"
-
-#~ msgid "<b>Home</b>"
-#~ msgstr "<b>Casa</b>"
-
-#~ msgid "<b>Job</b>"
-#~ msgstr "<b>Lavoro</b>"
-
-#~ msgid "<b>Web</b>"
-#~ msgstr "<b>Web</b>"
-
-#~ msgid "<b>Work</b>"
-#~ msgstr "<b>Lavoro</b>"
-
-#~ msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
-#~ msgstr ""
-#~ "<span size=\"larger\" weight=\"bold\">Cambio della propria password</span>"
-
-#~ msgid "<b>Assistive Technologies</b>"
-#~ msgstr "<b>Tecnologie assistive</b>"
-
-#~ msgid "<b>Preferences</b>"
-#~ msgstr "<b>Preferenze</b>"
-
-#~ msgid "<b>C_olors</b>"
-#~ msgstr "<b>C_olori</b>"
-
-#~ msgid "<b>Preview</b>"
-#~ msgstr "<b>Anteprima</b>"
-
-#~ msgid "<b>_Desktop Background</b>"
-#~ msgstr "<b>Sfondo scri_vania</b>"
-
-#~ msgid "C_ut"
-#~ msgstr "_Taglia"
-
-#~ msgid "New File"
-#~ msgstr "Nuovo file"
-
-#~ msgid "Open File"
-#~ msgstr "Apri file"
-
-#~ msgid "Save File"
-#~ msgstr "Salva file"
-
-#~ msgid ""
-#~ "Solid color\n"
-#~ "Horizontal gradient\n"
-#~ "Vertical gradient"
-#~ msgstr ""
-#~ "Tinta unita\n"
-#~ "Gradiente orizzontale\n"
-#~ "Gradiente verticale"
-
-#~ msgid ""
-#~ "Text below items\n"
-#~ "Text beside items\n"
-#~ "Icons only\n"
-#~ "Text only"
-#~ msgstr ""
-#~ "Testo sotto elementi\n"
-#~ "Testo accanto elementi\n"
-#~ "Solo icone\n"
-#~ "Solo testo"
-
-#~ msgid ""
-#~ "Tiled\n"
-#~ "Zoom\n"
-#~ "Centered\n"
-#~ "Scaled\n"
-#~ "Fill screen"
-#~ msgstr ""
-#~ "Piastrellato\n"
-#~ "Ingrandito\n"
-#~ "Centrato\n"
-#~ "Scalato\n"
-#~ "Riempi schermo"
-
-#~ msgid "_Copy"
-#~ msgstr "_Copia"
-
-#~ msgid "_New"
-#~ msgstr "_Nuovo"
-
-#~ msgid "_Open"
-#~ msgstr "_Apri"
-
-#~ msgid "_Print"
-#~ msgstr "Stam_pa"
-
-#~ msgid "_Quit"
-#~ msgstr "_Esci"
-
-#~ msgid "_Save"
-#~ msgstr "_Salva"
-
-# capovolto, lo schermo... credo
-#~ msgid ""
-#~ "Normal\n"
-#~ "Left\n"
-#~ "Right\n"
-#~ "Upside-down\n"
-#~ msgstr ""
-#~ "Normale\n"
-#~ "Sinistra\n"
-#~ "Destra\n"
-#~ "Capovolto\n"
-
-#~ msgid "Could not get org.gnome.SettingsDaemon.XRANDR_2"
-#~ msgstr "Impossibile ottenere org.gnome.SettingsDaemon.XRANDR_2"
-
-#~ msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
-#~ msgstr "Impossibile ottenere org.gnome.SettingsDaemon.XRANDR"
-
-#~ msgid "Could not apply the selected configuration"
-#~ msgstr "Impossibile applicare la configurazione selezionata"
-
-#~ msgid "Could not get object to apply display configuration"
-#~ msgstr ""
-#~ "Impossibile ottenere un oggetto per applicare la configurazione di "
-#~ "visualizzazione"
-
-#~ msgid "<b>Bounce Keys</b>"
-#~ msgstr "<b>Pressione ravvicinata dei tasti</b>"
-
-#~ msgid "<b>General</b>"
-#~ msgstr "<b>Generale</b>"
-
-#~ msgid "<small><i>Fast</i></small>"
-#~ msgstr "<small><i>Veloce</i></small>"
-
-#~ msgid "<small><i>Long</i></small>"
-#~ msgstr "<small><i>Lungo</i></small>"
-
-#~ msgid "<small><i>Short</i></small>"
-#~ msgstr "<small><i>Breve</i></small>"
-
-#~ msgid "<small><i>Slow</i></small>"
-#~ msgstr "<small><i>Lenta</i></small>"
-
-#~ msgid "<b>Locate Pointer</b>"
-#~ msgstr "<b>Localizzazione del puntatore</b>"
-
-#~ msgid "<small><i>High</i></small>"
-#~ msgstr "<small><i>Alta</i></small>"
-
-#~ msgid "<small><i>Large</i></small>"
-#~ msgstr "<small><i>Grande</i></small>"
-
-#~ msgid "<small><i>Low</i></small>"
-#~ msgstr "<small><i>Bassa</i></small>"
-
-#~ msgid "<small><i>Small</i></small>"
-#~ msgstr "<small><i>Piccola</i></small>"
-
-#~ msgid "<b>Ignore Host List</b>"
-#~ msgstr "<b>Elenco di host da ignorare</b>"
-
-#~ msgid "/_About"
-#~ msgstr "/I_nformazioni"
-
-#~ msgid "_Command:"
-#~ msgstr "C_omando:"
