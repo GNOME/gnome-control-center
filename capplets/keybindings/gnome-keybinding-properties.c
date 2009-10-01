@@ -522,11 +522,10 @@ find_section (GtkTreeModel *model,
               GtkTreeIter  *iter,
 	      const char   *title)
 {
-  gboolean success, found;
+  gboolean success;
 
-  found = FALSE;
   success = gtk_tree_model_get_iter_first (model, iter);
-  while (success && !found)
+  while (success)
     {
       char *description = NULL;
 
@@ -534,16 +533,15 @@ find_section (GtkTreeModel *model,
 			  DESCRIPTION_COLUMN, &description,
 			  -1);
 
-      found = (g_strcmp0 (description, title) == 0);
+      if (g_strcmp0 (description, title) == 0)
+        return;
       success = gtk_tree_model_iter_next (model, iter);
     }
-  if (!found)
-    {
-      gtk_tree_store_append (GTK_TREE_STORE (model), iter, NULL);
-      gtk_tree_store_set (GTK_TREE_STORE (model), iter,
-			  DESCRIPTION_COLUMN, title,
-			  -1);
-    }
+
+    gtk_tree_store_append (GTK_TREE_STORE (model), iter, NULL);
+    gtk_tree_store_set (GTK_TREE_STORE (model), iter,
+                        DESCRIPTION_COLUMN, title,
+                        -1);
 }
 
 static void
@@ -555,7 +553,6 @@ append_keys_to_tree (GtkBuilder         *builder,
   GtkTreeIter parent_iter, iter;
   GtkTreeModel *model;
   gint i, j;
-  gint rows_before;
 
   client = gconf_client_get_default ();
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "shortcut_treeview")));
@@ -571,7 +568,6 @@ append_keys_to_tree (GtkBuilder         *builder,
    * then we need to scroll now */
   ensure_scrollbar (builder, i - 1);
 
-  rows_before = i;
   for (j = 0; keys_list[j].name != NULL; j++)
     {
       GConfEntry *entry;
@@ -689,7 +685,7 @@ append_keys_to_tree (GtkBuilder         *builder,
   g_object_unref (client);
 
   /* Don't show an empty section */
-  if (i == rows_before)
+  if (gtk_tree_model_iter_n_children (model, &parent_iter) == 0)
     gtk_tree_store_remove (GTK_TREE_STORE (model), &parent_iter);
 
   if (i == 0)
