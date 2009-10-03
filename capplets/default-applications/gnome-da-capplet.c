@@ -573,6 +573,50 @@ combo_conv_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
     }
 }
 
+static GConfValue*
+combo_conv_from_widget_term_flag (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+    GConfValue *ret;
+    GList *handlers;
+    gint index;
+    GnomeDATermItem *item;
+
+    g_object_get (G_OBJECT (peditor), "data", &handlers, NULL);
+    index = gconf_value_get_int (value);
+
+    item = g_list_nth_data (handlers, index);
+    ret = gconf_value_new (GCONF_VALUE_STRING);
+
+    if (!item)
+    {
+        /* if item was not found, this is probably the "Custom" item */
+
+        /* XXX: returning "" as the value here is not ideal, but required to
+         * prevent the combo box from jumping back to the previous value if the
+         * user has selected Custom */
+        gconf_value_set_string (ret, "");
+        return ret;
+    }
+    else
+    {
+        gconf_value_set_string (ret, item->exec_flag);
+        return ret;
+    }
+}
+
+static GConfValue*
+combo_conv_to_widget_term_flag (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+    GConfValue *ret;
+    GtkComboBox *combo;
+
+    combo = GTK_COMBO_BOX (gconf_property_editor_get_ui_control (peditor));
+
+    ret = gconf_value_new (GCONF_VALUE_INT);
+    gconf_value_set_int (ret, gtk_combo_box_get_active (combo));
+    return ret;
+}
+
 static gboolean
 is_separator (GtkTreeModel *model, GtkTreeIter *iter, gpointer sep_index)
 {
@@ -811,6 +855,14 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
         capplet->term_combo_box,
         "conv-from-widget-cb", combo_conv_from_widget,
         "conv-to-widget-cb", combo_conv_to_widget,
+        "data", capplet->terminals,
+        NULL);
+
+    gconf_peditor_new_combo_box (NULL,
+        DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG,
+        capplet->term_combo_box,
+        "conv-from-widget-cb", combo_conv_from_widget_term_flag,
+        "conv-to-widget-cb", combo_conv_to_widget_term_flag,
         "data", capplet->terminals,
         NULL);
 
