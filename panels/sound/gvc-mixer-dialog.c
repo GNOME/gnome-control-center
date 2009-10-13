@@ -91,6 +91,7 @@ enum {
         ACTIVE_COLUMN,
         ID_COLUMN,
         SPEAKERS_COLUMN,
+        ICON_COLUMN,
         NUM_COLUMNS
 };
 
@@ -1093,16 +1094,21 @@ add_stream (GvcMixerDialog *dialog,
         if (GVC_IS_MIXER_SOURCE (stream)) {
                 GtkTreeModel *model;
                 GtkTreeIter   iter;
+                GIcon        *icon;
 
                 model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->input_treeview));
                 gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+                icon = gvc_mixer_stream_get_gicon (stream);
                 gtk_list_store_set (GTK_LIST_STORE (model),
                                     &iter,
                                     NAME_COLUMN, gvc_mixer_stream_get_description (stream),
                                     DEVICE_COLUMN, "",
                                     ACTIVE_COLUMN, is_default,
+                                    ICON_COLUMN, icon,
                                     ID_COLUMN, gvc_mixer_stream_get_id (stream),
                                     -1);
+                if (icon != NULL)
+                        g_object_unref (icon);
                 g_signal_connect (stream,
                                   "notify::description",
                                   G_CALLBACK (on_stream_description_notify),
@@ -1111,10 +1117,12 @@ add_stream (GvcMixerDialog *dialog,
                 GtkTreeModel        *model;
                 GtkTreeIter          iter;
                 const GvcChannelMap *map;
+                GIcon               *icon;
 
                 model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
                 gtk_list_store_append (GTK_LIST_STORE (model), &iter);
                 map = gvc_mixer_stream_get_channel_map (stream);
+                icon = gvc_mixer_stream_get_gicon (stream);
                 gtk_list_store_set (GTK_LIST_STORE (model),
                                     &iter,
                                     NAME_COLUMN, gvc_mixer_stream_get_description (stream),
@@ -1123,6 +1131,8 @@ add_stream (GvcMixerDialog *dialog,
                                     ID_COLUMN, gvc_mixer_stream_get_id (stream),
                                     SPEAKERS_COLUMN, gvc_channel_map_get_mapping (map),
                                     -1);
+                if (icon != NULL)
+                        g_object_unref (icon);
                 g_signal_connect (stream,
                                   "notify::description",
                                   G_CALLBACK (on_stream_description_notify),
@@ -1262,6 +1272,8 @@ add_card (GvcMixerDialog *dialog,
                             HW_STATUS_COLUMN, profile->status,
                             HW_SENSITIVE_COLUMN, g_strcmp0 (profile->profile, "off") != 0,
                             -1);
+        if (icon != NULL)
+                g_object_unref (icon);
 
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->hw_treeview));
         if (gtk_tree_selection_get_selected (selection, NULL, NULL) == FALSE) {
@@ -1457,7 +1469,8 @@ create_stream_treeview (GvcMixerDialog *dialog,
                                     G_TYPE_STRING,
                                     G_TYPE_BOOLEAN,
                                     G_TYPE_UINT,
-                                    G_TYPE_STRING);
+                                    G_TYPE_STRING,
+                                    G_TYPE_ICON);
         gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
                                  GTK_TREE_MODEL (store));
 
@@ -1474,9 +1487,20 @@ create_stream_treeview (GvcMixerDialog *dialog,
                           G_CALLBACK (on_toggled),
                           dialog);
 
-        gtk_tree_view_insert_column_with_data_func (GTK_TREE_VIEW (treeview), -1,
-                                                    _("Name"), gtk_cell_renderer_text_new (),
-                                                    name_to_text, NULL, NULL);
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_title (column, _("Name"));
+        renderer = gtk_cell_renderer_pixbuf_new ();
+        gtk_tree_view_column_pack_start (column, renderer, FALSE);
+        g_object_set (G_OBJECT (renderer), "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
+        gtk_tree_view_column_set_attributes (column, renderer,
+                                             "gicon", ICON_COLUMN,
+                                             NULL);
+
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+        gtk_tree_view_column_set_cell_data_func (column, renderer,
+                                                 name_to_text, NULL, NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
 #if 0
         renderer = gtk_cell_renderer_text_new ();

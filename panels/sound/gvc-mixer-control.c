@@ -711,6 +711,58 @@ add_stream (GvcMixerControl *control,
 }
 
 static void
+set_icon_name_from_proplist (GvcMixerStream *stream,
+                             pa_proplist    *l,
+                             const char     *default_icon_name)
+{
+        const char *t;
+
+        if ((t = pa_proplist_gets (l, PA_PROP_DEVICE_ICON_NAME))) {
+                goto finish;
+        }
+
+        if ((t = pa_proplist_gets (l, PA_PROP_MEDIA_ICON_NAME))) {
+                goto finish;
+        }
+
+        if ((t = pa_proplist_gets (l, PA_PROP_WINDOW_ICON_NAME))) {
+                goto finish;
+        }
+
+        if ((t = pa_proplist_gets (l, PA_PROP_APPLICATION_ICON_NAME))) {
+                goto finish;
+        }
+
+        if ((t = pa_proplist_gets (l, PA_PROP_MEDIA_ROLE))) {
+
+                if (strcmp (t, "video") == 0 ||
+                    strcmp (t, "phone") == 0) {
+                        goto finish;
+                }
+
+                if (strcmp (t, "music") == 0) {
+                        t = "audio";
+                        goto finish;
+                }
+
+                if (strcmp (t, "game") == 0) {
+                        t = "applications-games";
+                        goto finish;
+                }
+
+                if (strcmp (t, "event") == 0) {
+                        t = "dialog-information";
+                        goto finish;
+                }
+        }
+
+        t = default_icon_name;
+
+ finish:
+        gvc_mixer_stream_set_icon_name (stream, t);
+}
+
+static void
 update_sink (GvcMixerControl    *control,
              const pa_sink_info *info)
 {
@@ -767,7 +819,7 @@ update_sink (GvcMixerControl    *control,
         gvc_mixer_stream_set_name (stream, info->name);
         gvc_mixer_stream_set_card_index (stream, info->card);
         gvc_mixer_stream_set_description (stream, info->description);
-        gvc_mixer_stream_set_icon_name (stream, "audio-card");
+        set_icon_name_from_proplist (stream, info->proplist, "audio-card");
         gvc_mixer_stream_set_volume (stream, (guint)max_volume);
         gvc_mixer_stream_set_is_muted (stream, info->mute);
         gvc_mixer_stream_set_can_decibel (stream, !!(info->flags & PA_SINK_DECIBEL_VOLUME));
@@ -856,7 +908,7 @@ update_source (GvcMixerControl      *control,
         gvc_mixer_stream_set_name (stream, info->name);
         gvc_mixer_stream_set_card_index (stream, info->card);
         gvc_mixer_stream_set_description (stream, info->description);
-        gvc_mixer_stream_set_icon_name (stream, "audio-input-microphone");
+        set_icon_name_from_proplist (stream, info->proplist, "audio-input-microphone");
         gvc_mixer_stream_set_volume (stream, (guint)max_volume);
         gvc_mixer_stream_set_is_muted (stream, info->mute);
         gvc_mixer_stream_set_can_decibel (stream, !!(info->flags & PA_SOURCE_DECIBEL_VOLUME));
@@ -878,54 +930,6 @@ update_source (GvcMixerControl      *control,
             && strcmp (control->priv->default_source_name, info->name) == 0) {
                 _set_default_source (control, stream);
         }
-}
-
-static void
-set_icon_name_from_proplist (GvcMixerStream *stream,
-                             pa_proplist    *l,
-                             const char     *default_icon_name)
-{
-        const char *t;
-
-        if ((t = pa_proplist_gets (l, PA_PROP_MEDIA_ICON_NAME))) {
-                goto finish;
-        }
-
-        if ((t = pa_proplist_gets (l, PA_PROP_WINDOW_ICON_NAME))) {
-                goto finish;
-        }
-
-        if ((t = pa_proplist_gets (l, PA_PROP_APPLICATION_ICON_NAME))) {
-                goto finish;
-        }
-
-        if ((t = pa_proplist_gets (l, PA_PROP_MEDIA_ROLE))) {
-
-                if (strcmp (t, "video") == 0 ||
-                    strcmp (t, "phone") == 0) {
-                        goto finish;
-                }
-
-                if (strcmp (t, "music") == 0) {
-                        t = "audio";
-                        goto finish;
-                }
-
-                if (strcmp (t, "game") == 0) {
-                        t = "applications-games";
-                        goto finish;
-                }
-
-                if (strcmp (t, "event") == 0) {
-                        t = "dialog-information";
-                        goto finish;
-                }
-        }
-
-        t = default_icon_name;
-
- finish:
-        gvc_mixer_stream_set_icon_name (stream, t);
 }
 
 static void
