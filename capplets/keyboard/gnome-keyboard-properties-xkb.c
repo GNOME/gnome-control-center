@@ -135,8 +135,7 @@ reset_to_defaults (GtkWidget * button, GtkBuilder * dialog)
 	gkbd_keyboard_config_term (&empty_kbd_config);
 
 	gconf_client_unset (xkb_gconf_client,
-			      GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
-			      NULL);
+			    GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP, NULL);
 
 	/* all the rest is g-s-d's business */
 }
@@ -147,21 +146,35 @@ chk_separate_group_per_window_toggled (GConfPropertyEditor * peditor,
 				       const GConfValue * value,
 				       GtkBuilder * dialog)
 {
-	xkb_layouts_enable_disable_default (dialog, value
-					    &&
-					    gconf_value_get_bool (value));
+	gtk_widget_set_sensitive (WID ("chk_new_windows_get_first_layout"),
+				  gconf_value_get_bool (value));
+}
+
+static void
+chk_new_windows_get_first_layout_toggled (GtkWidget *
+					  chk_new_windows_get_first_layout,
+					  GtkBuilder * dialog)
+{
+	xkb_save_default_group (gtk_toggle_button_get_active
+				(GTK_TOGGLE_BUTTON
+				 (chk_new_windows_get_first_layout)) ? 0 :
+				-1);
 }
 
 void
 setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 {
 	GObject *peditor;
+	GtkWidget *chk_new_windows_get_first_layout =
+	    WID ("chk_new_windows_get_first_layout");
+
 	xkb_gconf_client = gconf_client_get_default ();
 
 	engine = xkl_engine_get_instance (GDK_DISPLAY ());
 	config_registry = xkl_config_registry_get_instance (engine);
 
-	gkbd_desktop_config_init (&desktop_config, xkb_gconf_client, engine);
+	gkbd_desktop_config_init (&desktop_config, xkb_gconf_client,
+				  engine);
 	gkbd_desktop_config_load_from_gconf (&desktop_config);
 
 	xkl_config_registry_load (config_registry,
@@ -188,9 +201,23 @@ setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 	xkb_layouts_prepare_selected_tree (dialog, changeset);
 	xkb_layouts_fill_selected_tree (dialog);
 
+	gtk_widget_set_sensitive (chk_new_windows_get_first_layout,
+				  gtk_toggle_button_get_active
+				  (GTK_TOGGLE_BUTTON
+				   (WID
+				    ("chk_separate_group_per_window"))));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+				      (chk_new_windows_get_first_layout),
+				      xkb_get_default_group () == 0);
+
 	xkb_layouts_register_buttons_handlers (dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_reset_to_defaults")),
 			  "clicked", G_CALLBACK (reset_to_defaults),
+			  dialog);
+
+	g_signal_connect (G_OBJECT (chk_new_windows_get_first_layout),
+			  "toggled", (GCallback)
+			  chk_new_windows_get_first_layout_toggled,
 			  dialog);
 
 	g_signal_connect_swapped (G_OBJECT (WID ("xkb_layout_options")),
@@ -210,11 +237,6 @@ setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 			  dialog);
 
 	enable_disable_restoring (dialog);
-	xkb_layouts_enable_disable_default (dialog,
-					    gconf_client_get_bool
-					    (xkb_gconf_client,
-					     GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW,
-					     NULL));
 }
 
 void

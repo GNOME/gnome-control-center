@@ -36,15 +36,13 @@
 
 
 #define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
-#define SEL_LAYOUT_TREE_COL_DEFAULT 1
-#define SEL_LAYOUT_TREE_COL_ID 2
+#define SEL_LAYOUT_TREE_COL_ID 1
 
 static int idx2select = -1;
 static int max_selected_layouts = -1;
 static int default_group = -1;
 
 static GtkCellRenderer *text_renderer;
-static GtkCellRenderer *toggle_renderer;
 
 static gboolean disable_buttons_sensibility_update = FALSE;
 
@@ -108,71 +106,21 @@ xkb_layouts_get_selected_list (void)
 	return retval;
 }
 
-static void
-save_default_group (int default_group)
+gint
+xkb_get_default_group ()
 {
-	if (default_group != gconf_client_get_int (xkb_gconf_client,
-						   GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
-						   NULL))
+	return gconf_client_get_int (xkb_gconf_client,
+				     GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
+				     NULL);
+}
+
+void
+xkb_save_default_group (gint default_group)
+{
+	if (default_group != xkb_get_default_group ())
 		gconf_client_set_int (xkb_gconf_client,
 				      GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
 				      default_group, NULL);
-}
-
-static void
-def_group_in_ui_changed (GtkCellRendererToggle * cell_renderer,
-			 gchar * path, GtkBuilder * dialog)
-{
-	GtkTreePath *chpath = gtk_tree_path_new_from_string (path);
-	int new_default_group = -1;
-	gboolean previously_selected =
-	    gtk_cell_renderer_toggle_get_active (cell_renderer);
-
-	if (!previously_selected) {	/* prev state - non-selected! */
-		int *indices = gtk_tree_path_get_indices (chpath);
-		new_default_group = indices[0];
-	}
-
-	save_default_group (new_default_group);
-	gtk_tree_path_free (chpath);
-}
-
-static void
-def_group_in_gconf_changed (GConfClient * client,
-			    guint cnxn_id,
-			    GConfEntry * entry, GtkBuilder * dialog)
-{
-	GConfValue *value = gconf_entry_get_value (entry);
-
-	if (!value)
-		return;
-
-	if (value->type == GCONF_VALUE_INT) {
-		GtkWidget *tree_view = WID ("xkb_layouts_selected");
-		GtkTreeModel *model =
-		    GTK_TREE_MODEL (gtk_tree_view_get_model
-				    (GTK_TREE_VIEW (tree_view)));
-		GtkTreeIter iter;
-		int counter = 0;
-		default_group = MAX(0, gconf_value_get_int (value));
-		if (gtk_tree_model_get_iter_first (model, &iter)) {
-			do {
-				gboolean cur_val;
-				gtk_tree_model_get (model, &iter,
-						    SEL_LAYOUT_TREE_COL_DEFAULT,
-						    &cur_val, -1);
-				if (cur_val != (counter == default_group))
-					gtk_list_store_set (GTK_LIST_STORE
-							    (model), &iter,
-							    SEL_LAYOUT_TREE_COL_DEFAULT,
-							    counter ==
-							    default_group,
-							    -1);
-				counter++;
-			}
-			while (gtk_tree_model_iter_next (model, &iter));
-		}
-	}
 }
 
 static void
@@ -182,6 +130,8 @@ xkb_layouts_enable_disable_buttons (GtkBuilder * dialog)
 	GtkWidget *print_layout_btn = WID ("xkb_layouts_print");
 	GtkWidget *del_layout_btn = WID ("xkb_layouts_remove");
 	GtkWidget *selected_layouts_tree = WID ("xkb_layouts_selected");
+	GtkWidget *move_up_layout_btn = WID ("xkb_layouts_move_up");
+	GtkWidget *move_down_layout_btn = WID ("xkb_layouts_move_down");
 
 	GtkTreeSelection *s_selection =
 	    gtk_tree_view_get_selection (GTK_TREE_VIEW
@@ -193,6 +143,7 @@ xkb_layouts_enable_disable_buttons (GtkBuilder * dialog)
 	const int n_selected_layouts =
 	    gtk_tree_model_iter_n_children (selected_layouts_model,
 					    NULL);
+	gint sidx = find_selected_layout_idx (dialog);
 
 	if (disable_buttons_sensibility_update)
 		return;
@@ -205,47 +156,9 @@ xkb_layouts_enable_disable_buttons (GtkBuilder * dialog)
 				  && (n_selected_selected_layouts > 0));
 	gtk_widget_set_sensitive (print_layout_btn,
 				  (n_selected_selected_layouts > 0));
-}
-
-static GtkTreeViewColumn *
-xkb_layouts_create_default_layout_column ()
-{
-	GtkTreeViewColumn *def_column =
-	    gtk_tree_view_column_new_with_attributes (_("Default"),
-						      toggle_renderer,
-						      "active",
-						      SEL_LAYOUT_TREE_COL_DEFAULT,
-						      NULL);
-	gtk_tree_view_column_set_sizing (def_column,
-					 GTK_TREE_VIEW_COLUMN_AUTOSIZE);
-	gtk_tree_view_column_set_resizable (def_column, TRUE);
-	gtk_tree_view_column_set_expand (def_column, FALSE);
-	return def_column;
-}
-
-void
-xkb_layouts_enable_disable_default (GtkBuilder * dialog, gboolean enable)
-{
-	GtkWidget *tree_view = WID ("xkb_layouts_selected");
-
-	if (enable) {
-		gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
-					     xkb_layouts_create_default_layout_column
-					     ());
-		g_object_unref (toggle_renderer);
-	} else {
-		GtkTreeViewColumn *col =
-		    gtk_tree_view_get_column (GTK_TREE_VIEW (tree_view),
-					      1);
-		if (col != NULL) {
-			g_object_ref (toggle_renderer);
-			gtk_tree_view_column_clear (col);
-			gtk_tree_view_remove_column (GTK_TREE_VIEW
-						     (tree_view), col);
-		}
-	}
-
-	gtk_widget_queue_draw (tree_view);
+	gtk_widget_set_sensitive (move_up_layout_btn, sidx > 0);
+	gtk_widget_set_sensitive (move_down_layout_btn, sidx >= 0
+				  && sidx < (n_selected_layouts - 1));
 }
 
 static void
@@ -322,11 +235,6 @@ xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
 	GtkTreeViewColumn *desc_column;
 
 	text_renderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
-	toggle_renderer =
-	    GTK_CELL_RENDERER (gtk_cell_renderer_toggle_new ());
-	gtk_cell_renderer_toggle_set_radio (GTK_CELL_RENDERER_TOGGLE
-					    (toggle_renderer), TRUE);
-	g_object_ref (toggle_renderer);
 
 	desc_column =
 	    gtk_tree_view_column_new_with_attributes (_("Layout"),
@@ -353,14 +261,6 @@ xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
 				  (xkb_layouts_enable_disable_buttons),
 				  dialog);
 	max_selected_layouts = xkl_engine_get_max_num_groups (engine);
-
-	gconf_client_notify_add (xkb_gconf_client,
-				 GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
-				 (GConfClientNotifyFunc)
-				 def_group_in_gconf_changed, dialog, NULL,
-				 NULL);
-	g_signal_connect (G_OBJECT (toggle_renderer), "toggled",
-			  G_CALLBACK (def_group_in_ui_changed), dialog);
 
 	/* Setting up DnD */
 	gtk_drag_source_set (tree_view, GDK_BUTTON1_MASK,
@@ -389,14 +289,15 @@ xkb_layout_description_utf8 (const gchar * visible)
 void
 xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 {
-	GConfEntry *gce;
-	GError *err = NULL;
 	GSList *layouts = xkb_layouts_get_selected_list ();
 	GSList *cur_layout;
 	GtkListStore *list_store =
 	    GTK_LIST_STORE (gtk_tree_view_get_model
 			    (GTK_TREE_VIEW
 			     (WID ("xkb_layouts_selected"))));
+	GtkWidget *chk_new_windows_get_first_layout =
+	    WID ("chk_new_windows_get_first_layout");
+	int counter = 0;
 
 	/* temporarily disable the buttons' status update */
 	disable_buttons_sensibility_update = TRUE;
@@ -404,7 +305,7 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 	gtk_list_store_clear (list_store);
 
 	for (cur_layout = layouts; cur_layout != NULL;
-	     cur_layout = cur_layout->next) {
+	     cur_layout = cur_layout->next, counter++) {
 		GtkTreeIter iter;
 		const char *visible = (char *) cur_layout->data;
 		gchar *utf_visible = xkb_layout_description_utf8 (visible);
@@ -412,9 +313,18 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 		gtk_list_store_set (list_store, &iter,
 				    SEL_LAYOUT_TREE_COL_DESCRIPTION,
 				    utf_visible,
-				    SEL_LAYOUT_TREE_COL_DEFAULT, FALSE,
 				    SEL_LAYOUT_TREE_COL_ID,
 				    cur_layout->data, -1);
+		if (!counter) {
+			gchar *chklbl =
+			    g_strdup_printf (_
+					     ("New windows get layout \"%s\""),
+utf_visible);
+			gtk_button_set_label (GTK_BUTTON
+					      (chk_new_windows_get_first_layout),
+					      chklbl);
+			g_free (chklbl);
+		}
 		g_free (utf_visible);
 	}
 
@@ -437,16 +347,6 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 		/* if there is nothing to select - just enable/disable the buttons,
 		   otherwise it would be done by the selection change */
 		xkb_layouts_enable_disable_buttons (dialog);
-	}
-
-	gce = gconf_client_get_entry (xkb_gconf_client,
-				      GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
-				      NULL, TRUE, &err);
-	if (err == NULL) {
-		def_group_in_gconf_changed (xkb_gconf_client, -1, gce,
-					    dialog);
-	} else {
-		g_error_free (err);
 	}
 }
 
@@ -500,10 +400,54 @@ remove_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 		g_free (id);
 
 		if (default_group > idx)
-			save_default_group (default_group - 1);
+			xkb_save_default_group (default_group - 1);
 		else if (default_group == idx)
-			save_default_group (-1);
+			xkb_save_default_group (-1);
 
+		xkb_layouts_set_selected_list (layouts_list);
+		clear_xkb_elements_list (layouts_list);
+	}
+}
+
+static void
+move_up_selected_layout (GtkWidget * button, GtkBuilder * dialog)
+{
+	gint idx = find_selected_layout_idx (dialog);
+
+	if (idx != -1) {
+		GSList *layouts_list = xkb_layouts_get_selected_list ();
+		GSList *node2Remove = g_slist_nth (layouts_list, idx);
+
+		layouts_list =
+		    g_slist_remove_link (layouts_list, node2Remove);
+		layouts_list =
+		    g_slist_insert (layouts_list, node2Remove->data,
+				    idx - 1);
+		g_slist_free_1 (node2Remove);
+
+		idx2select = idx - 1;
+		xkb_layouts_set_selected_list (layouts_list);
+		clear_xkb_elements_list (layouts_list);
+	}
+}
+
+static void
+move_down_selected_layout (GtkWidget * button, GtkBuilder * dialog)
+{
+	gint idx = find_selected_layout_idx (dialog);
+
+	if (idx != -1) {
+		GSList *layouts_list = xkb_layouts_get_selected_list ();
+		GSList *node2Remove = g_slist_nth (layouts_list, idx);
+
+		layouts_list =
+		    g_slist_remove_link (layouts_list, node2Remove);
+		layouts_list =
+		    g_slist_insert (layouts_list, node2Remove->data,
+				    idx + 1);
+		g_slist_free_1 (node2Remove);
+
+		idx2select = idx + 1;
 		xkb_layouts_set_selected_list (layouts_list);
 		clear_xkb_elements_list (layouts_list);
 	}
@@ -518,6 +462,12 @@ xkb_layouts_register_buttons_handlers (GtkBuilder * dialog)
 			  G_CALLBACK (print_selected_layout), dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_layouts_remove")), "clicked",
 			  G_CALLBACK (remove_selected_layout), dialog);
+	g_signal_connect (G_OBJECT (WID ("xkb_layouts_move_up")),
+			  "clicked", G_CALLBACK (move_up_selected_layout),
+			  dialog);
+	g_signal_connect (G_OBJECT (WID ("xkb_layouts_move_down")),
+			  "clicked",
+			  G_CALLBACK (move_down_selected_layout), dialog);
 }
 
 static void

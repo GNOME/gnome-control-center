@@ -35,7 +35,8 @@ extern XklConfigRegistry *config_registry;
 extern GConfClient *xkb_gconf_client;
 extern GkbdKeyboardConfig initial_config;
 
-extern void setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset);
+extern void setup_xkb_tabs (GtkBuilder * dialog,
+			    GConfChangeSet * changeset);
 
 extern void xkb_layouts_fill_selected_tree (GtkBuilder * dialog);
 
@@ -66,9 +67,6 @@ extern void choose_model (GtkBuilder * dialog);
 
 extern void xkb_layout_choose (GtkBuilder * dialog);
 
-extern void xkb_layouts_enable_disable_default (GtkBuilder * dialog,
-						gboolean enable);
-
 extern GSList *xkb_layouts_get_selected_list (void);
 
 extern GSList *xkb_options_get_selected_list (void);
@@ -93,6 +91,10 @@ extern void xkb_layout_preview_set_drawing_layout (GtkWidget * kbdraw,
 
 extern gchar *xkb_layout_chooser_get_selected_id (GtkBuilder *
 						  chooser_dialog);
+
+extern void xkb_save_default_group (gint group_no);
+
+extern gint xkb_get_default_group (void);
 
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */

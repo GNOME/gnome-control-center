@@ -207,7 +207,7 @@
                                             <property name="label" translatable="yes">Short</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -222,7 +222,7 @@
                                             <property name="label" translatable="yes">Slow</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -285,7 +285,7 @@
                                             <property name="label" translatable="yes">Long</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -299,7 +299,7 @@
                                             <property name="label" translatable="yes">Fast</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -420,7 +420,7 @@
                                             <property name="label" translatable="yes">Slow</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -453,7 +453,7 @@
                                             <property name="label" translatable="yes">Fast</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -548,21 +548,6 @@
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkCheckButton" id="chk_separate_group_per_window">
-                            <property name="label" translatable="yes">Separate _layout for each window</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkVBox" id="vbox41">
                             <property name="visible">True</property>
                             <property name="orientation">vertical</property>
@@ -571,7 +556,7 @@
                               <object class="GtkLabel" id="label52">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Selected layouts:</property>
+                                <property name="label" translatable="yes">Selected _layouts:</property>
                                 <property name="use_underline">True</property>
                                 <property name="mnemonic_widget">xkb_layouts_selected</property>
                               </object>
@@ -610,25 +595,37 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="position">1</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox2">
+                          <object class="GtkHBox" id="hbox1">
                             <property name="visible">True</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="spacing">6</property>
                             <child>
-                              <object class="GtkHButtonBox" id="hbuttonbox2">
+                              <object class="GtkVButtonBox" id="vbuttonbox1">
                                 <property name="visible">True</property>
-                                <property name="spacing">6</property>
-                                <property name="layout_style">start</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">3</property>
+                                <child>
+                                  <object class="GtkButton" id="xkb_layouts_add">
+                                    <property name="label" translatable="yes">_Add...</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="use_underline">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
                                 <child>
                                   <object class="GtkButton" id="xkb_layouts_remove">
                                     <property name="label">gtk-remove</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
+                                    <property name="receives_default">True</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -637,59 +634,109 @@
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
+                              </object>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkVButtonBox" id="vbuttonbox2">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
                                 <child>
-                                  <object class="GtkButton" id="xkb_layouts_print">
-                                    <property name="label">gtk-print</property>
+                                  <object class="GtkButton" id="xkb_layouts_move_up">
+                                    <property name="label" translatable="yes">Move _Up</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="use_stock">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="xkb_layouts_add">
-                                    <property name="label" translatable="yes">_Add...</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
+                                    <property name="receives_default">True</property>
                                     <property name="use_underline">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
-                                    <property name="position">3</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="xkb_layouts_move_down">
+                                    <property name="label" translatable="yes">Move _Down</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="use_underline">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
                                   </packing>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="position">0</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="xkb_reset_to_defaults">
-                                <property name="label" translatable="yes">Reset to De_faults</property>
+                              <object class="GtkVButtonBox" id="vbuttonbox3">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_underline">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="layout_style">start</property>
+                                <child>
+                                  <object class="GtkButton" id="xkb_layouts_print">
+                                    <property name="label">gtk-print</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="use_stock">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="pack_type">end</property>
-                                <property name="position">4</property>
+                                <property name="position">2</property>
                               </packing>
                             </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="chk_separate_group_per_window">
+                            <property name="label" translatable="yes">_Separate layout for each window</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="chk_new_windows_get_first_layout">
+                            <property name="label" translatable="yes">New windows get layout "foobar"</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                       </object>
@@ -701,6 +748,7 @@
                       <object class="GtkHButtonBox" id="hbuttonbox3">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="spacing">6</property>
                         <property name="layout_style">end</property>
                         <child>
                           <object class="GtkButton" id="xkb_layout_options">
@@ -715,6 +763,21 @@
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="xkb_reset_to_defaults">
+                            <property name="label" translatable="yes">Reset to De_faults</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="pack_type">end</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
@@ -964,7 +1027,7 @@
                                             <property name="label" translatable="yes">Short</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -997,7 +1060,7 @@
                                             <property name="label" translatable="yes">Long</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -1118,7 +1181,7 @@
                                             <property name="label" translatable="yes">Short</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -1151,7 +1214,7 @@
                                             <property name="label" translatable="yes">Long</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.83"/>
+                                              <attribute name="scale" value="0.830000"/>
                                             </attributes>
                                           </object>
                                           <packing>
@@ -1290,7 +1353,7 @@
                                         <property name="justify">center</property>
                                         <attributes>
                                           <attribute name="style" value="italic"/>
-                                          <attribute name="scale" value="0.83"/>
+                                          <attribute name="scale" value="0.830000"/>
                                         </attributes>
                                       </object>
                                       <packing>
@@ -1310,7 +1373,7 @@
                                         <property name="justify">center</property>
                                         <attributes>
                                           <attribute name="style" value="italic"/>
-                                          <attribute name="scale" value="0.83"/>
+                                          <attribute name="scale" value="0.830000"/>
                                         </attributes>
                                       </object>
                                       <packing>
@@ -1360,7 +1423,7 @@
                                         <property name="justify">center</property>
                                         <attributes>
                                           <attribute name="style" value="italic"/>
-                                          <attribute name="scale" value="0.83"/>
+                                          <attribute name="scale" value="0.830000"/>
                                         </attributes>
                                       </object>
                                       <packing>
@@ -1380,7 +1443,7 @@
                                         <property name="justify">center</property>
                                         <attributes>
                                           <attribute name="style" value="italic"/>
-                                          <attribute name="scale" value="0.83"/>
+                                          <attribute name="scale" value="0.830000"/>
                                         </attributes>
                                       </object>
                                       <packing>
@@ -1444,7 +1507,7 @@
                                         <property name="justify">center</property>
                                         <attributes>
                                           <attribute name="style" value="italic"/>
-                                          <attribute name="scale" value="0.83"/>
+                                          <attribute name="scale" value="0.830000"/>
                                         </attributes>
                                       </object>
                                       <packing>
@@ -1481,7 +1544,7 @@
                                         <property name="justify">center</property>
                                         <attributes>
                                           <attribute name="style" value="italic"/>
-                                          <attribute name="scale" value="0.83"/>
+                                          <attribute name="scale" value="0.830000"/>
                                         </attributes>
                                       </object>
                                       <packing>
@@ -1843,8 +1906,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-11">helpbutton1</action-widget>
-      <action-widget response="-7">button4</action-widget>
+      <action-widget response="-1">helpbutton1</action-widget>
+      <action-widget response="-1">button4</action-widget>
     </action-widgets>
   </object>
 </interface>
