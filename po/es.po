@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2009-08-26 06:01+0000\n"
-"PO-Revision-Date: 2009-10-02 09:02+0200\n"
+"POT-Creation-Date: 2009-10-15 22:20+0000\n"
+"PO-Revision-Date: 2009-10-17 11:20+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1207,7 +1207,7 @@ msgid "Zoom"
 msgstr "Ampliación"
 
 #: ../capplets/appearance/data/appearance.ui.h:59
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:38
 msgid "_Add..."
 msgstr "_Añadir…"
 
@@ -2282,16 +2282,16 @@ msgstr "Desactivado"
 msgid "<Unknown Action>"
 msgstr "<Acción desconocida>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:942
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:954
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1581
 msgid "Custom Shortcuts"
 msgstr "Combinación personalizada"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1081
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1096
 msgid "Error saving the new shortcut"
 msgstr "Error al guardar la combinación nueva"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1160
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1175
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2303,7 +2303,7 @@ msgstr ""
 "Por favor, inténtelo con una tecla como Control, Alt o Mayús. al mismo "
 "tiempo."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1190
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1205
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -2312,32 +2312,32 @@ msgstr ""
 "La combinación «%s» ya se está usando para\n"
 "«%s»"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1196
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1211
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Si reasigna la combinación a «%s» se desactivará la combinación «%s»."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1204
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1219
 msgid "_Reassign"
 msgstr "_Reasignar"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1324
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1339
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Error al borrar una combinación de teclas en la base de datos de "
 "configuración: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1521
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1536
 msgid "Too many custom shortcuts"
 msgstr "Demasiadas combinaciones personalizadas"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1818
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1832
 msgid "Action"
 msgstr "Acción"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1840
+#: ../capplets/keybindings/gnome-keybinding-properties.c:1854
 msgid "Shortcut"
 msgstr "Combinación"
 
@@ -2439,12 +2439,12 @@ msgid "Show _visual feedback for the alert sound"
 msgstr "Mostrar respuesta _visual para las alertas de sonido"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 msgid "Slow Keys"
 msgstr "Teclas lentas"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 msgid "Sticky Keys"
 msgstr "Teclas persistentes"
 
@@ -2542,91 +2542,105 @@ msgid "Mouse Keys"
 msgstr "Teclas del ratón"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:24
+msgid "Move _Down"
+msgstr "_Bajar"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:25
+msgid "Move _Up"
+msgstr "_Subir"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:26
+msgid "New windows get layout \"foobar\""
+msgstr "Las nuevas ventanas obtienen la distribución «foobar»"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:27
 msgid "Repeat Keys"
 msgstr "Repetición de teclas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:28
 msgid "Repeat keys speed"
 msgstr "Velocidad de repetición de teclas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 msgid "Reset to De_faults"
 msgstr "Restablecer valores _predeterminados"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 msgid "S_peed:"
 msgstr "Ve_locidad:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:28
-msgid "Separate _layout for each window"
-msgstr "Separar la _distribución para cada ventana"
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#| msgid "_Selected layouts:"
+msgid "Selected _layouts:"
+msgstr "Distribuciones _seleccionadas:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:32
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:26
 msgid "Short"
 msgstr "Corto"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:33
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:29
 msgid "Slow"
 msgstr "Lenta"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "Typing Break"
 msgstr "Descanso de escritura"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:37
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr ""
 "Permitir conmutar las características de _accesibilidad desde combinaciones "
 "de teclas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:39
 msgid "_Break interval lasts:"
 msgstr "D_uración del intervalo de descanso:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:40
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:37
 msgid "_Delay:"
 msgstr "_Retardo:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:41
 msgid "_Ignore fast duplicate keypresses"
 msgstr "_Ignorar pulsaciones duplicadas rápidas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:42
 msgid "_Lock screen to enforce typing break"
 msgstr "B_loquear la pantalla para forzar un descanso de escritura"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:43
 msgid "_Only accept long keypresses"
 msgstr "S_ólo aceptar teclas pulsadas durante cierto tiempo"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:44
 msgid "_Pointer can be controlled using the keypad"
 msgstr "Permitir controlar el _puntero usando el teclado numérico"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:42
-msgid "_Selected layouts:"
-msgstr "Distribuciones _seleccionadas:"
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:45
+#| msgid "Separate _layout for each window"
+msgid "_Separate layout for each window"
+msgstr "Separar la _distribución para cada ventana"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:43
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:46
 msgid "_Simulate simultaneous keypresses"
 msgstr "_Simular pulsaciones de múltiples teclas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:44
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:47
 msgid "_Speed:"
 msgstr "Ve_locidad:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:45
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:48
 msgid "_Type to test settings:"
 msgstr "_Teclee para probar la configuración:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:46
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:49
 msgid "_Work interval lasts:"
 msgstr "D_uración del intervalo de trabajo:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:47
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:50
 msgid "minutes"
 msgstr "minutos"
 
@@ -2678,15 +2692,14 @@ msgstr "Opciones de distribución del teclado"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:214
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:234
-#: ../capplets/network/gnome-network-properties.c:583
-msgid "Default"
-msgstr "Predeterminado"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:332
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:240
 msgid "Layout"
 msgstr "Distribución"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:321
+#, c-format
+msgid "New windows get layout \"%s\""
+msgstr "Las nuevas ventanas obtienen la distribución «%s»"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:168
 msgid "Vendors"
@@ -2695,6 +2708,11 @@ msgstr "Fabricantes"
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:234
 msgid "Models"
 msgstr "Modelos"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:234
+#: ../capplets/network/gnome-network-properties.c:583
+msgid "Default"
+msgstr "Predeterminado"
 
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
