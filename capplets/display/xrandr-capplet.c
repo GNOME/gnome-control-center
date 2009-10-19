@@ -512,6 +512,29 @@ make_resolution_string (int width, int height)
 }
 
 static void
+find_best_mode (GnomeRRMode **modes, int *out_width, int *out_height)
+{
+    int i;
+
+    *out_width = 0;
+    *out_height = 0;
+
+    for (i = 0; modes[i] != NULL; i++)
+    {
+	int w, h;
+
+	w = gnome_rr_mode_get_width (modes[i]);
+	h = gnome_rr_mode_get_height (modes[i]);
+
+	if (w * h > *out_width * *out_height)
+	{
+	    *out_width = w;
+	    *out_height = h;
+	}
+    }
+}
+
+static void
 rebuild_resolution_combo (App *app)
 {
     int i;
@@ -548,7 +571,12 @@ rebuild_resolution_combo (App *app)
     current = idle_free (make_resolution_string (app->current_output->width, app->current_output->height));
 
     if (!combo_select (app->resolution_combo, current))
-	g_assert_not_reached ();
+    {
+	int best_w, best_h;
+
+	find_best_mode (modes, &best_w, &best_h);
+	combo_select (app->resolution_combo, idle_free (make_resolution_string (best_w, best_h)));
+    }
 }
 
 static void
@@ -651,29 +679,6 @@ on_rate_changed (GtkComboBox *box, gpointer data)
 	app->current_output->rate = rate;
 
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
-}
-
-static void
-find_best_mode (GnomeRRMode **modes, int *out_width, int *out_height)
-{
-    int i;
-
-    *out_width = 0;
-    *out_height = 0;
-
-    for (i = 0; modes[i] != NULL; i++)
-    {
-	int w, h;
-
-	w = gnome_rr_mode_get_width (modes[i]);
-	h = gnome_rr_mode_get_height (modes[i]);
-
-	if (w * h > *out_width * *out_height)
-	{
-	    *out_width = w;
-	    *out_height = h;
-	}
-    }
 }
 
 static void
