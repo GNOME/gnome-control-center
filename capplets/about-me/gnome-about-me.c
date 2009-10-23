@@ -184,6 +184,7 @@ about_me_destroy (GnomeAboutMe *me)
 	g_free (me->login);
 	g_free (me->username);
 	g_free (me);
+	me = NULL;
 }
 
 static void
@@ -269,11 +270,14 @@ about_me_commit_from_timeout (GnomeAboutMe *me)
 }
 
 static gboolean
-about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
+about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *unused)
 {
 	gchar *str;
 	const gchar *wid;
 	gint i;
+
+	if (me == NULL)
+		return FALSE;
 
 	wid = gtk_widget_get_name (widget);
 
@@ -787,7 +791,7 @@ about_me_icon_theme_changed (GtkWindow    *window,
 
 	icon = gtk_icon_theme_lookup_icon (me->theme, "stock_person", 80, 0);
 	if (icon == NULL) {
-		g_print ("Icon not found\n");
+		g_debug ("Icon not found");
 	}
 	g_free (me->person);
 	me->person = g_strdup (gtk_icon_info_get_filename (icon));
