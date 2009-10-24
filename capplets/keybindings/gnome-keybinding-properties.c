@@ -1458,6 +1458,10 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   base = g_path_get_dirname (key->gconf_key);
   gconf_client_recursive_unset (client, base, 0, NULL);
   g_free (base);
+  /* suggest sync now so the unset directory actually gets dropped;
+   * if we don't do this we may end up with 'zombie' shortcuts when
+   * restarting the app */
+  gconf_client_suggest_sync (client, NULL);
   g_object_unref (client);
 
   g_free (key->gconf_key);
