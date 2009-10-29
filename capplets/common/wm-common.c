@@ -27,7 +27,7 @@ wm_common_get_window_manager_property (Atom atom)
   guchar *val;
 
   if (wm_window == None)
-    return g_strdup (WM_COMMON_UNKNOWN);
+    return NULL;
 
   utf8_string = XInternAtom (GDK_DISPLAY (), "UTF8_STRING", False);
 
@@ -46,7 +46,7 @@ wm_common_get_window_manager_property (Atom atom)
       type != utf8_string || format != 8 || nitems == 0 ||
       !g_utf8_validate (val, nitems, NULL))
     {
-      retval = g_strdup (WM_COMMON_UNKNOWN);
+      retval = NULL;
     }
   else
     {
@@ -93,7 +93,7 @@ wm_common_get_current_keybindings (void)
       char *wm_name = wm_common_get_window_manager_property (wm_atom);
       char *to_copy[] = { NULL, NULL };
 
-      to_copy[0] = wm_name;
+      to_copy[0] = wm_name ? wm_name : g_strdup (WM_COMMON_UNKNOWN);
 
       results = g_strdupv (to_copy);
       g_free (wm_name);
