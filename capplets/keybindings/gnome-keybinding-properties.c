@@ -868,7 +868,7 @@ append_keys_to_tree_from_file (GtkBuilder *builder,
   /* If there's no keys to add, or the settings apply to a window manager
    * that's not the one we're running */
   if (keylist->entries->len == 0
-      || (keylist->wm_name != NULL && strv_contains (wm_keybindings, keylist->wm_name))
+      || (keylist->wm_name != NULL && !strv_contains (wm_keybindings, keylist->wm_name))
       || keylist->name == NULL)
     {
       g_free (keylist->name);
