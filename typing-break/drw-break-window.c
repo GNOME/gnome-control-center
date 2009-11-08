@@ -199,9 +199,9 @@ drw_break_window_init (DrwBreakWindow *window)
 			g_source_remove (priv->postpone_sensitize_id);
 		}
 
-		priv->postpone_sensitize_id = g_timeout_add (500,
-							     (GSourceFunc) postpone_sensitize_cb,
-							     window);
+		priv->postpone_sensitize_id = g_timeout_add_seconds (5,
+								     (GSourceFunc) postpone_sensitize_cb,
+								     window);
 
 		g_signal_connect (priv->postpone_button,
 				  "clicked",
