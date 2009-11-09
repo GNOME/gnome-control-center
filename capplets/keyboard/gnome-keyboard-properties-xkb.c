@@ -146,27 +146,27 @@ chk_separate_group_per_window_toggled (GConfPropertyEditor * peditor,
 				       const GConfValue * value,
 				       GtkBuilder * dialog)
 {
-	gtk_widget_set_sensitive (WID ("chk_new_windows_get_first_layout"),
+	gtk_widget_set_sensitive (WID ("chk_new_windows_inherit_layout"),
 				  gconf_value_get_bool (value));
 }
 
 static void
-chk_new_windows_get_first_layout_toggled (GtkWidget *
-					  chk_new_windows_get_first_layout,
-					  GtkBuilder * dialog)
+chk_new_windows_inherit_layout_toggled (GtkWidget *
+					chk_new_windows_inherit_layout,
+					GtkBuilder * dialog)
 {
 	xkb_save_default_group (gtk_toggle_button_get_active
 				(GTK_TOGGLE_BUTTON
-				 (chk_new_windows_get_first_layout)) ? 0 :
-				-1);
+				 (chk_new_windows_inherit_layout)) ? -1 :
+				0);
 }
 
 void
 setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 {
 	GObject *peditor;
-	GtkWidget *chk_new_windows_get_first_layout =
-	    WID ("chk_new_windows_get_first_layout");
+	GtkWidget *chk_new_windows_inherit_layout =
+	    WID ("chk_new_windows_inherit_layout");
 
 	xkb_gconf_client = gconf_client_get_default ();
 
@@ -201,24 +201,23 @@ setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 	xkb_layouts_prepare_selected_tree (dialog, changeset);
 	xkb_layouts_fill_selected_tree (dialog);
 
-	gtk_widget_set_sensitive (chk_new_windows_get_first_layout,
+	gtk_widget_set_sensitive (chk_new_windows_inherit_layout,
 				  gtk_toggle_button_get_active
 				  (GTK_TOGGLE_BUTTON
 				   (WID
 				    ("chk_separate_group_per_window"))));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				      (chk_new_windows_get_first_layout),
-				      xkb_get_default_group () == 0);
+				      (chk_new_windows_inherit_layout),
+				      xkb_get_default_group () < 0);
 
 	xkb_layouts_register_buttons_handlers (dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_reset_to_defaults")),
 			  "clicked", G_CALLBACK (reset_to_defaults),
 			  dialog);
 
-	g_signal_connect (G_OBJECT (chk_new_windows_get_first_layout),
+	g_signal_connect (G_OBJECT (chk_new_windows_inherit_layout),
 			  "toggled", (GCallback)
-			  chk_new_windows_get_first_layout_toggled,
-			  dialog);
+			  chk_new_windows_inherit_layout_toggled, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (WID ("xkb_layout_options")),
 				  "clicked",

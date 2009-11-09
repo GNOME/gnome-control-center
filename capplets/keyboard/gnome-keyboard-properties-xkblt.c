@@ -295,8 +295,6 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 	    GTK_LIST_STORE (gtk_tree_view_get_model
 			    (GTK_TREE_VIEW
 			     (WID ("xkb_layouts_selected"))));
-	GtkWidget *chk_new_windows_get_first_layout =
-	    WID ("chk_new_windows_get_first_layout");
 	int counter = 0;
 
 	/* temporarily disable the buttons' status update */
@@ -315,16 +313,6 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 				    utf_visible,
 				    SEL_LAYOUT_TREE_COL_ID,
 				    cur_layout->data, -1);
-		if (!counter) {
-			gchar *chklbl =
-			    g_strdup_printf (_
-					     ("New windows get layout \"%s\""),
-utf_visible);
-			gtk_button_set_label (GTK_BUTTON
-					      (chk_new_windows_get_first_layout),
-					      chklbl);
-			g_free (chklbl);
-		}
 		g_free (utf_visible);
 	}
 
