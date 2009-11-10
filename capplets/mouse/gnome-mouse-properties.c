@@ -327,6 +327,56 @@ scrollmethod_changed_event (GConfPropertyEditor *peditor,
 				  !gtk_toggle_button_get_active (disabled));
 }
 
+static void
+synaptics_check_capabilities (GtkBuilder *dialog)
+{
+#ifdef HAVE_XINPUT
+	int numdevices, i;
+	XDeviceInfo *devicelist;
+	Atom realtype, prop;
+	int realformat;
+	unsigned long nitems, bytes_after;
+	unsigned char *data;
+
+	prop = XInternAtom (GDK_DISPLAY (), "Synaptics Capabilities", True);
+	if (!prop)
+		return;
+
+	devicelist = XListInputDevices (GDK_DISPLAY (), &numdevices);
+	for (i = 0; i < numdevices; i++) {
+		if (devicelist[i].use != IsXExtensionPointer)
+			continue;
+
+		gdk_error_trap_push ();
+		XDevice *device = XOpenDevice (GDK_DISPLAY (),
+					       devicelist[i].id);
+		if (gdk_error_trap_pop ())
+			continue;
+
+		gdk_error_trap_push ();
+		if ((XGetDeviceProperty (GDK_DISPLAY (), device, prop, 0, 2, False,
+					 XA_INTEGER, &realtype, &realformat, &nitems,
+					 &bytes_after, &data) == Success) && (realtype != None)) {
+			/* Property data is booleans for has_left, has_middle,
+			 * has_right, has_double, has_triple */
+			if (!data[0] || !data[1] || !data[2]) {
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("tap_to_click_toggle")), TRUE);
+				gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), FALSE);
+			}
+
+			if (!data[3])
+				gtk_widget_set_sensitive (WID ("scroll_twofinger_radio"), FALSE);
+
+			XFree (data);
+		}
+		gdk_error_trap_pop ();
+
+		XCloseDevice (GDK_DISPLAY (), device);
+	}
+	XFreeDeviceList (devicelist);
+#endif
+}
+
 static gboolean
 find_synaptics (void)
 {
@@ -451,6 +501,7 @@ setup_dialog (GtkBuilder *dialog, GConfChangeSet *changeset)
 			(changeset, "/desktop/gnome/peripherals/touchpad/scroll_method", gtk_radio_button_get_group (radio),
 			 NULL);
 
+		synaptics_check_capabilities (dialog);
 		scrollmethod_changed_event (GCONF_PROPERTY_EDITOR (peditor), NULL, NULL, dialog);
 		g_signal_connect (peditor, "value-changed",
 				  G_CALLBACK (scrollmethod_changed_event), dialog);
