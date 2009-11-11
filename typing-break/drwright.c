@@ -21,7 +21,6 @@
  */
 
 #include <config.h>
-#include <time.h>
 #include <string.h>
 #include <math.h>
 #include <glib/gi18n.h>
@@ -34,6 +33,7 @@
 #include "drw-break-window.h"
 #include "drw-monitor.h"
 #include "drw-utils.h"
+#include "drw-timer.h"
 
 #define BLINK_TIMEOUT        200
 #define BLINK_TIMEOUT_MIN    120
@@ -44,10 +44,8 @@
 
 typedef enum {
 	STATE_START,
-	STATE_IDLE,
-	STATE_TYPE,
-	STATE_WARN_TYPE,
-	STATE_WARN_IDLE,
+	STATE_RUNNING,
+	STATE_WARN,
 	STATE_BREAK_SETUP,
 	STATE_BREAK,
 	STATE_BREAK_DONE_SETUP,
@@ -64,13 +62,11 @@ struct _DrWright {
 	GtkUIManager *ui_manager;
 
 	DrwState        state;
-	GTimer         *timer;
-	GTimer         *idle_timer;
+	DrwTimer       *timer;
+	DrwTimer       *idle_timer;
 
 	gint            last_elapsed_time;
 	gint            save_last_time;
-
-	gboolean        is_active;
 
 	/* Time settings. */
 	gint            type_time;
@@ -166,7 +162,7 @@ update_icon (DrWright *dr)
 		break;
 
 	default:
-		r = (float) (g_timer_elapsed (dr->timer, NULL) + dr->save_last_time) /
+		r = (float) (drw_timer_elapsed (dr->timer) + dr->save_last_time) /
 		    (float) dr->type_time;
 		break;
 	}
@@ -174,8 +170,7 @@ update_icon (DrWright *dr)
 	offset = CLAMP ((height - 0) * (1.0 - r), 1, height - 0);
 
 	switch (dr->state) {
-	case STATE_WARN_TYPE:
-	case STATE_WARN_IDLE:
+	case STATE_WARN:
 		pixbuf = dr->red_bar;
 		set_pixbuf = FALSE;
 		break;
@@ -220,7 +215,7 @@ blink_timeout_cb (DrWright *dr)
 	gfloat r;
 	gint   timeout;
 
-	r = (dr->type_time - g_timer_elapsed (dr->timer, NULL) - dr->save_last_time) / dr->warn_time;
+	r = (dr->type_time - drw_timer_elapsed (dr->timer) - dr->save_last_time) / dr->warn_time;
 	timeout = BLINK_TIMEOUT + BLINK_TIMEOUT_FACTOR * r;
 
 	if (timeout < BLINK_TIMEOUT_MIN) {
@@ -301,11 +296,11 @@ maybe_change_state (DrWright *dr)
 	gint elapsed_idle_time;
 
 	if (debug) {
-		g_timer_reset (dr->idle_timer);
+		drw_timer_start (dr->idle_timer);
 	}
 
-	elapsed_time = g_timer_elapsed (dr->timer, NULL) + dr->save_last_time;
-	elapsed_idle_time = g_timer_elapsed (dr->idle_timer, NULL);
+	elapsed_time = drw_timer_elapsed (dr->timer) + dr->save_last_time;
+	elapsed_idle_time = drw_timer_elapsed (dr->idle_timer);
 
 	if (elapsed_time > dr->last_elapsed_time + dr->warn_time) {
 		/* If the timeout is delayed by the amount of warning time, then
@@ -327,56 +322,28 @@ maybe_change_state (DrWright *dr)
 
 		dr->save_last_time = 0;
 
-		g_timer_start (dr->timer);
-		g_timer_start (dr->idle_timer);
+		drw_timer_start (dr->timer);
+		drw_timer_start (dr->idle_timer);
 
 		if (dr->enabled) {
-			dr->state = STATE_IDLE;
+			dr->state = STATE_RUNNING;
 		}
 
 		update_tooltip (dr);
 		stop_blinking (dr);
 		break;
 
-	case STATE_IDLE:
+	case STATE_RUNNING:
+	case STATE_WARN:
 		if (elapsed_idle_time >= dr->break_time) {
 			dr->state = STATE_BREAK_DONE_SETUP;
-		} else if (dr->is_active) {
-			dr->state = STATE_TYPE;
-		}
-		break;
-
-	case STATE_TYPE:
-		if (elapsed_time >= dr->type_time - dr->warn_time) {
-			dr->state = STATE_WARN_TYPE;
-
-			start_blinking (dr);
  		} else if (elapsed_time >= dr->type_time) {
 			dr->state = STATE_BREAK_SETUP;
+		} else if (dr->state != STATE_WARN
+			   && elapsed_time >= dr->type_time - dr->warn_time) {
+			dr->state = STATE_WARN;
+			start_blinking (dr);
 		}
-		else if (!dr->is_active) {
-			dr->state = STATE_IDLE;
-			g_timer_start (dr->idle_timer);
-		}
-		break;
-
-	case STATE_WARN_TYPE:
-		if (elapsed_time >= dr->type_time) {
-			dr->state = STATE_BREAK_SETUP;
-		}
-		else if (!dr->is_active) {
-			dr->state = STATE_WARN_IDLE;
-		}
-		break;
-
-	case STATE_WARN_IDLE:
-		if (elapsed_idle_time >= dr->break_time) {
-			dr->state = STATE_BREAK_DONE_SETUP;
-		}
-		else if (dr->is_active) {
-			dr->state = STATE_WARN_TYPE;
-		}
-
 		break;
 
 	case STATE_BREAK_SETUP:
@@ -392,7 +359,7 @@ maybe_change_state (DrWright *dr)
 		gtk_status_icon_set_from_pixbuf (dr->icon,
 						 dr->red_bar);
 
-		g_timer_start (dr->timer);
+		drw_timer_start (dr->timer);
 
 		dr->break_window = drw_break_window_new ();
 
@@ -438,17 +405,14 @@ maybe_change_state (DrWright *dr)
 		break;
 
 	case STATE_BREAK_DONE:
-		if (dr->is_active) {
-			dr->state = STATE_START;
-			if (dr->break_window) {
-				gtk_widget_destroy (dr->break_window);
-				dr->break_window = NULL;
-			}
+		dr->state = STATE_START;
+		if (dr->break_window) {
+			gtk_widget_destroy (dr->break_window);
+			dr->break_window = NULL;
 		}
 		break;
 	}
 
-	dr->is_active = FALSE;
 	dr->last_elapsed_time = elapsed_time;
 
 	update_icon (dr);
@@ -468,7 +432,7 @@ update_tooltip (DrWright *dr)
 		return TRUE;
 	}
 
-	elapsed_time = g_timer_elapsed (dr->timer, NULL);
+	elapsed_time = drw_timer_elapsed (dr->timer);
 
 	min = floor (0.5 + (dr->type_time - elapsed_time - dr->save_last_time) / 60.0);
 
@@ -492,8 +456,7 @@ static void
 activity_detected_cb (DrwMonitor *monitor,
 		      DrWright   *dr)
 {
-	dr->is_active = TRUE;
-	g_timer_start (dr->idle_timer);
+	drw_timer_start (dr->idle_timer);
 }
 
 static void
@@ -634,10 +597,10 @@ break_window_postpone_cb (GtkWidget *window,
 
 	gtk_widget_destroy (dr->break_window);
 
-	dr->state = STATE_TYPE;
+	dr->state = STATE_RUNNING;
 	dr->break_window = NULL;
 
-	elapsed_time = g_timer_elapsed (dr->timer, NULL);
+	elapsed_time = drw_timer_elapsed (dr->timer);
 
 	if (elapsed_time + dr->save_last_time >= dr->type_time) {
 		/* Typing time has expired, but break was postponed.
@@ -648,7 +611,7 @@ break_window_postpone_cb (GtkWidget *window,
 		dr->save_last_time = dr->type_time - MAX (dr->warn_time, (gint) postpone_time);
 	}
 
-	g_timer_start (dr->timer);
+	drw_timer_start (dr->timer);
 	maybe_change_state (dr);
 	update_icon (dr);
 	update_tooltip (dr);
@@ -783,8 +746,8 @@ drwright_new (void)
 	item = gtk_ui_manager_get_widget (dr->ui_manager, "/Pop/TakeABreak");
 	gtk_widget_set_sensitive (item, dr->enabled);
 
-	dr->timer = g_timer_new ();
-	dr->idle_timer = g_timer_new ();
+	dr->timer = drw_timer_new ();
+	dr->idle_timer = drw_timer_new ();
 
 	dr->state = STATE_START;
 

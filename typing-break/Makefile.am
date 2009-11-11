@@ -11,7 +11,9 @@ gnome_typing_monitor_SOURCES =			\
 	drw-utils.c				\
 	drw-utils.h				\
 	drw-selection.c				\
-	drw-selection.h
+	drw-selection.h				\
+	drw-timer.c				\
+	drw-timer.h
 
 gnome_typing_monitor_CPPFLAGS = \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\

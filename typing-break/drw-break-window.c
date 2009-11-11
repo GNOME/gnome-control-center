@@ -35,6 +35,7 @@
 #include "drwright.h"
 #include "drw-utils.h"
 #include "drw-break-window.h"
+#include "drw-timer.h"
 
 struct _DrwBreakWindowPrivate {
 	GtkWidget *clock_label;
@@ -44,7 +45,7 @@ struct _DrwBreakWindowPrivate {
 	GtkWidget *postpone_entry;
 	GtkWidget *postpone_button;
 
-	GTimer    *timer;
+	DrwTimer  *timer;
 
 	gint       break_time;
 	gchar     *break_text;
@@ -270,7 +271,7 @@ drw_break_window_init (DrwBreakWindow *window)
 
 	gtk_window_stick (GTK_WINDOW (window));
 
-	priv->timer = g_timer_new ();
+	priv->timer = drw_timer_new ();
 
 	/* Make sure we have a valid time label from the start. */
 	clock_timeout_cb (window);
@@ -319,7 +320,7 @@ drw_break_window_dispose (GObject *object)
 	priv = window->priv;
 
 	if (priv->timer) {
-		g_timer_destroy (priv->timer);
+		drw_timer_destroy (priv->timer);
 		priv->timer = NULL;
 	}
 
@@ -382,7 +383,7 @@ clock_timeout_cb (DrwBreakWindow *window)
 
 	priv = window->priv;
 
-	seconds = 1 + priv->break_time - g_timer_elapsed (priv->timer, NULL);
+	seconds = 1 + priv->break_time - drw_timer_elapsed (priv->timer);
 	seconds = MAX (0, seconds);
 
 	if (seconds == 0) {
