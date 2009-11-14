@@ -73,8 +73,8 @@ draw_string(Display *xdisplay, XftDraw *draw, XftFont *font, XftColor *colour,
     XGlyphInfo extents;
     gint len = strlen(text);
 
-    XftTextExtentsUtf8(xdisplay, font, text, len, &extents);
-    XftDrawStringUtf8(draw, colour, font, 4, *pos_y + extents.y, text, len);
+    XftTextExtentsUtf8(xdisplay, font, (guchar *)text, len, &extents);
+    XftDrawStringUtf8(draw, colour, font, 4, *pos_y + extents.y, (guchar *)text, len);
     *pos_y += extents.height + 4;
 }
 
@@ -161,15 +161,15 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     font = get_font(xdisplay, face, alpha_size, charset);
     charset = FcCharSetCopy (font->charset);
     XftTextExtentsUtf8(xdisplay, font,
-		       lowercase_text, strlen(lowercase_text), &extents);
+		       (guchar *)lowercase_text, strlen(lowercase_text), &extents);
     pixmap_height += extents.height + 4;
     pixmap_width = MAX(pixmap_width, 8 + extents.width);
     XftTextExtentsUtf8(xdisplay, font,
-		       uppercase_text, strlen(uppercase_text), &extents);
+		       (guchar *)uppercase_text, strlen(uppercase_text), &extents);
     pixmap_height += extents.height + 4;
     pixmap_width = MAX(pixmap_width, 8 + extents.width);
     XftTextExtentsUtf8(xdisplay, font,
-		       punctuation_text, strlen(punctuation_text), &extents);
+		       (guchar *)punctuation_text, strlen(punctuation_text), &extents);
     pixmap_height += extents.height + 4;
     pixmap_width = MAX(pixmap_width, 8 + extents.width);
     XftFontClose(xdisplay, font);
@@ -179,7 +179,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     for (i = 0; i < n_sizes; i++) {
 	font = get_font(xdisplay, face, sizes[i], charset);
 	if (!font) continue;
-	XftTextExtentsUtf8(xdisplay, font, text, textlen, &extents);
+	XftTextExtentsUtf8(xdisplay, font, (guchar *)text, textlen, &extents);
 	pixmap_height += extents.height + 4;
 	pixmap_width = MAX(pixmap_width, 8 + extents.width);
 	XftFontClose(xdisplay, font);
@@ -332,17 +332,17 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 	    switch (sname.name_id) {
 	    case TT_NAME_ID_COPYRIGHT:
 		g_free(copyright);
-		copyright = g_convert(sname.string, sname.string_len,
+		copyright = g_convert((gchar *)sname.string, sname.string_len,
 				      "UTF-8", "UTF-16BE", NULL, NULL, NULL);
 		break;
 	    case TT_NAME_ID_VERSION_STRING:
 		g_free(version);
-		version = g_convert(sname.string, sname.string_len,
+		version = g_convert((gchar *)sname.string, sname.string_len,
 				    "UTF-8", "UTF-16BE", NULL, NULL, NULL);
 		break;
 	    case TT_NAME_ID_DESCRIPTION:
 		g_free(description);
-		description = g_convert(sname.string, sname.string_len,
+		description = g_convert((gchar *)sname.string, sname.string_len,
 					"UTF-8", "UTF-16BE", NULL, NULL, NULL);
 		break;
 	    default:
