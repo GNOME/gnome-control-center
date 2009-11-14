@@ -354,7 +354,7 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 	    g_free(version);
 	}
 	if (copyright) {
-	    add_row(table, row_p, _("Copyright:"), copyright, TRUE, FALSE);
+	    add_row(table, row_p, _("Copyright:"), copyright, TRUE, TRUE);
 	    g_free(copyright);
 	}
 	if (description) {
