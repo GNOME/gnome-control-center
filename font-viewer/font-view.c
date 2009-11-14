@@ -79,7 +79,7 @@ draw_string(Display *xdisplay, XftDraw *draw, XftFont *font, XftColor *colour,
 }
 
 static gboolean
-check_font_contain_text (FT_Face face, gchar *text)
+check_font_contain_text (FT_Face face, const gchar *text)
 {
     while (text && *text)
 	{
@@ -98,7 +98,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 {
     gint i, pixmap_width, pixmap_height, pos_y, textlen;
     GdkPixmap *pixmap = NULL;
-    gchar *text;
+    const gchar *text;
     Display *xdisplay;
     Drawable xdrawable;
     Visual *xvisual;
@@ -110,10 +110,10 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     gint *sizes = NULL, n_sizes, alpha_size;
     FcCharSet *charset = NULL;
 
-    text = _("The quick brown fox jumps over the lazy dog. 0123456789");
+    text = pango_language_get_sample_string(NULL);
     if (! check_font_contain_text (face, text))
 	{
-	    text = "The quick brown fox jumps over the lazy dog. 0123456789";
+	    pango_language_get_sample_string (pango_language_from_string ("en_US"));
 	}
 
     textlen = strlen(text);
