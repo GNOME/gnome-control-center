@@ -9,10 +9,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-21 09:17+0200\n"
-"PO-Revision-Date: 2006-08-22 13:21+0100\n"
-"Last-Translator: Matic Žgur <mr.zgur@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
+"POT-Creation-Date: 2009-03-17 00:04+0000\n"
+"PO-Revision-Date: 2009-11-14 09:53+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -810,7 +810,7 @@ msgstr "Le uveljavi nastavitve in končaj"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
 #: ../capplets/mouse/gnome-mouse-properties.c:1036
-#: ../capplets/sound/sound-properties-capplet.c:762
+#: ../capplets/sound/sound-properties-capplet.c:782
 msgid "Retrieve and store legacy settings"
 msgstr "Prenesi in shrani zapuščene nastavitve"
 
@@ -1574,7 +1574,7 @@ msgstr "Za urejanje bližnjic tipk kliknite ustrezno vrstico in vnesite novo bli
 msgid "Assign shortcut keys to commands"
 msgstr "Ukazom določi tipkovne bližnjice"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:87
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:91
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -1606,8 +1606,8 @@ msgstr "_Dostopnost"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:758
-#: ../capplets/sound/sound-properties-capplet.c:760
+#: ../capplets/sound/sound-properties-capplet.c:778
+#: ../capplets/sound/sound-properties-capplet.c:780
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Le uveljavi nastavitve in končaj (le za kompatibilnost; sedaj stvar obravnava daemon)"
 
@@ -2040,7 +2040,46 @@ msgstr "Vklopi zvoke in poveži zvoke z dogodki"
 msgid "Not connected"
 msgstr "Ni povezan"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:653
+#| msgid "_Authenticate"
+msgid "Autodetect"
+msgstr "Samodejna zaznava"
+
+#: ../capplets/sound/sound-properties-capplet.c:658
+#: ../capplets/sound/sound-properties-capplet.c:659
+msgid "ALSA - Advanced Linux Sound Architecture"
+msgstr "ALSA - Napredna zvočna arhitektura sistema Linux"
+
+#: ../capplets/sound/sound-properties-capplet.c:660
+msgid "Artsd - ART Sound Daemon"
+msgstr "Artsd - ART zvočni demon"
+
+#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:662
+msgid "ESD - Enlightenment Sound Daemon"
+msgstr "ESD - Enlightenment zvočni demon"
+
+#: ../capplets/sound/sound-properties-capplet.c:663
+#: ../capplets/sound/sound-properties-capplet.c:664
+msgid "OSS - Open Sound System"
+msgstr "OSS - Odprti zvočni sistem"
+
+#: ../capplets/sound/sound-properties-capplet.c:665
+#: ../capplets/sound/sound-properties-capplet.c:666
+msgid "Polypaudio Sound Server"
+msgstr "Zvočni strežnik Polypaudio"
+
+#: ../capplets/sound/sound-properties-capplet.c:667
+#| msgid "System Sounds"
+msgid "Test Sound"
+msgstr "Preizkusni zvok"
+
+#: ../capplets/sound/sound-properties-capplet.c:668
+#| msgid "Siren"
+msgid "Silence"
+msgstr "Tišina"
+
+#: ../capplets/sound/sound-properties-capplet.c:812
 msgid "Sound Preferences"
 msgstr "Nastavitve zvoka"
 
@@ -2120,31 +2159,31 @@ msgstr "_Predvajaj sistemske zvoke"
 msgid "_Visual system beep"
 msgstr "Na_videzni sistemski pisk"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:368
+#: ../capplets/theme-switcher/gnome-theme-details.c:369
 msgid "Would you like to remove this theme?"
 msgstr "Želite odstraniti to temo?"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:433
+#: ../capplets/theme-switcher/gnome-theme-details.c:434
 msgid "Theme deleted succesfully. Please select another theme."
 msgstr "Tema uspešno zbrisana. Izberite drugo temo."
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:442
+#: ../capplets/theme-switcher/gnome-theme-details.c:443
 msgid "Theme can not be deleted"
 msgstr "Teme ni moč zbrisati"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:535
+#: ../capplets/theme-switcher/gnome-theme-details.c:536
 msgid "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed, or you haven't installed the \"gnome-themes\" package."
 msgstr "Na vašem sistemu ni bila najdena nobena tema.  To verjetno pomeni, da je bil vaš dialog \"Nastavitve teme\" nepravilno nameščen ali pa niste namestili paketa \"gnome-themes\"."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:255
+#: ../capplets/theme-switcher/gnome-theme-installer.c:258
 msgid "This theme is not in a supported format."
 msgstr "Tema ni v podprti obliki."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:273
+#: ../capplets/theme-switcher/gnome-theme-installer.c:276
 msgid "Failed to create temporary directory"
 msgstr "Ni bilo mogoče ustvariti začasnega imenika"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:294
+#: ../capplets/theme-switcher/gnome-theme-installer.c:297
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2152,13 +2191,13 @@ msgstr ""
 "Tem ni moč namestiti.\n"
 "Program bzip2 ni nameščen."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:313
-#: ../capplets/theme-switcher/gnome-theme-installer.c:352
-#: ../capplets/theme-switcher/gnome-theme-installer.c:432
+#: ../capplets/theme-switcher/gnome-theme-installer.c:316
+#: ../capplets/theme-switcher/gnome-theme-installer.c:355
+#: ../capplets/theme-switcher/gnome-theme-installer.c:435
 msgid "Installation Failed"
 msgstr "Namestitev ni uspela"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
+#: ../capplets/theme-switcher/gnome-theme-installer.c:337
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2166,21 +2205,21 @@ msgstr ""
 "Tem ni moč namestiti.\n"
 "Program gzip ni nameščen."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:378
+#: ../capplets/theme-switcher/gnome-theme-installer.c:381
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "Tema okolja GNOME %s se je pravilno namestila"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:388
+#: ../capplets/theme-switcher/gnome-theme-installer.c:391
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "Tema je izrisovalnik. Morate jo prevesti."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:406
+#: ../capplets/theme-switcher/gnome-theme-installer.c:409
 msgid "The file format is invalid"
 msgstr "Oblika datoteke je neveljavna"
 
 #. TODO: currently cannot apply "gnome themes"
-#: ../capplets/theme-switcher/gnome-theme-installer.c:452
+#: ../capplets/theme-switcher/gnome-theme-installer.c:455
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</span>\n"
@@ -2191,23 +2230,23 @@ msgstr ""
 "\n"
 "Jo želite uporabiti zdaj ali obdržati trenutno temo?"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:455
+#: ../capplets/theme-switcher/gnome-theme-installer.c:458
 msgid "Keep Current Theme"
 msgstr "Obdrži trenutno temo"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:457
+#: ../capplets/theme-switcher/gnome-theme-installer.c:460
 msgid "Apply New Theme"
 msgstr "Uveljavi novo temo"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:531
+#: ../capplets/theme-switcher/gnome-theme-installer.c:534
 msgid "No theme file location specified to install"
 msgstr "Ni navedenega mesta datoteke s temo, ki jo želite namestiti"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:546
+#: ../capplets/theme-switcher/gnome-theme-installer.c:549
 msgid "The theme file location specified to install is invalid"
 msgstr "Navedeno mesto datoteke s temo, ki jo želite namestiti, je neveljavno"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:566
+#: ../capplets/theme-switcher/gnome-theme-installer.c:569
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2216,28 +2255,29 @@ msgstr ""
 "Nimate ustreznih dovoljenj za namestitev teme v:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:587
+#: ../capplets/theme-switcher/gnome-theme-installer.c:590
 msgid "The file format is invalid."
 msgstr "Oblika datoteke je neveljavna."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:614
+#: ../capplets/theme-switcher/gnome-theme-installer.c:617
 #, c-format
 msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
 msgstr "%s je pot, kamor bo tema nameščena. Ne morate je izbrati kot izvirnega mesta za namestitev "
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:686
+#: ../capplets/theme-switcher/gnome-theme-manager.c:701
 msgid "Custom theme"
 msgstr "Prikrojena tema"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:686
+#: ../capplets/theme-switcher/gnome-theme-manager.c:701
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "To temo lahko shranete, če pritisnete gumb \"Shrani temo\"."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1604
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1619
 msgid "The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."
 msgstr "Privzete sheme tem niso bile najdene na vašem sistemu.  To verjetno pomeni, da na vašem sistemu nimate nameščenega upravljalnika oken metacity ali, da je gconf napačno nastavljen."
 
 #: ../capplets/theme-switcher/gnome-theme-save.c:73
+#, c-format
 msgid "Theme name must be present"
 msgstr "Tema mora biti prisotna"
 
@@ -2891,12 +2931,17 @@ msgstr "Zvočna datoteka za ta dogodek ne obstaja."
 msgid "Select Sound File"
 msgstr "Izberi zvočno datoteko"
 
-#: ../libsounds/sound-view.c:202
+#: ../libsounds/sound-view.c:209
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Datoteka %s ni veljavna datoteka wav"
 
-#: ../libsounds/sound-view.c:359
+#: ../libsounds/sound-view.c:270
+#| msgid "Select Sound File"
+msgid "Select sound file..."
+msgstr "Izbor zvočne datoteke ..."
+
+#: ../libsounds/sound-view.c:372
 msgid "System Sounds"
 msgstr "Sistemski zvoki"
 
@@ -3196,6 +3241,7 @@ msgstr[2] "%d minute do naslednjega premora"
 msgstr[3] "%d minut do naslednjega premora"
 
 #: ../typing-break/drwright.c:492
+#, c-format
 msgid "Less than one minute until the next break"
 msgstr "Manj kot minuta do naslednjega premora"
 
