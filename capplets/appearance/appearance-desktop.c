@@ -1148,8 +1148,6 @@ desktop_init (AppearanceData *data,
   GtkCellRenderer *cr;
   char *url;
 
-  g_object_set (gtk_settings_get_default (), "gtk-tooltip-timeout", 500, NULL);
-
   data->wp_update_gconf = TRUE;
 
   data->wp_uris = NULL;
@@ -1289,6 +1287,7 @@ desktop_init (AppearanceData *data,
                     (GCallback) wp_props_wp_selected, data);
   g_signal_connect (data->wp_view, "query-tooltip",
                     (GCallback) wp_view_tooltip_cb, data);
+  gtk_widget_set_has_tooltip (data->wp_view, TRUE);
 
   wp_set_sensitivities (data);
 
