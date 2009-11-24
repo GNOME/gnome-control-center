@@ -1,197 +1,167 @@
 /*
- * This file is part of the Control Center.
+ * Copyright (c) 2009 Intel, Inc.
  *
- * Copyright (c) 2006 Novell, Inc.
+ * The Control Center is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
  *
- * The Control Center is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option)
- * any later version.
+ * The Control Center is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * for more details.
  *
- * The Control Center is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * the Control Center; if not, write to the Free Software Foundation, Inc., 51
- * Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ * You should have received a copy of the GNU General Public License along
+ * with the Control Center; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include "config.h"
-
-#include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-desktop-item.h>
-#include <unique/unique.h>
+#define GMENU_I_KNOW_THIS_IS_UNSTABLE
+#include <gnome-menus/gmenu-tree.h>
 
-#include <libslab/slab.h>
+#define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
-void handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data);
-static GSList *get_actions_list ();
 
-#define CONTROL_CENTER_PREFIX             "/apps/control-center/cc_"
-#define CONTROL_CENTER_ACTIONS_LIST_KEY   (CONTROL_CENTER_PREFIX  "actions_list")
-#define CONTROL_CENTER_ACTIONS_SEPARATOR  ";"
-#define EXIT_SHELL_ON_STATIC_ACTION       "exit_shell_on_static_action"
-
-static GSList *
-get_actions_list (void)
+void
+fill_model (GtkListStore *store)
 {
-	GSList *l;
-	GSList *key_list;
-	GSList *actions_list = NULL;
-	AppAction *action;
+  GSList *list, *l;
+  GMenuTreeDirectory *d;
+  GMenuTree *t;
 
-	key_list = get_slab_gconf_slist (CONTROL_CENTER_ACTIONS_LIST_KEY);
-	if (!key_list)
-	{
-		g_warning (_("key not found [%s]\n"), CONTROL_CENTER_ACTIONS_LIST_KEY);
-		return NULL;
-	}
+  t = gmenu_tree_lookup ("/etc/xdg/menus/gnomecc.menu", 0);
 
-	for (l = key_list; l != NULL; l = l->next)
-	{
-		gchar *entry = (gchar *) l->data;
-		gchar **temp;
+  d = gmenu_tree_get_root_directory (t);
 
-		action = g_new (AppAction, 1);
-		temp = g_strsplit (entry, CONTROL_CENTER_ACTIONS_SEPARATOR, 2);
-		action->name = g_strdup (temp[0]);
-		if ((action->item = load_desktop_item_from_unknown (temp[1])) == NULL)
-		{
-			g_warning ("get_actions_list() - PROBLEM - Can't load %s\n", temp[1]);
-		}
-		else
-		{
-			actions_list = g_slist_prepend (actions_list, action);
-		}
-		g_strfreev (temp);
-		g_free (entry);
-	}
+  list = gmenu_tree_directory_get_contents (d);
 
-	g_slist_free (key_list);
+  for (l = list; l; l = l->next)
+    {
+      GMenuTreeItemType type;
+      type = gmenu_tree_item_get_type (l->data);
+      if (type == GMENU_TREE_ITEM_DIRECTORY)
+        {
+          GSList *foo, *f;
+          foo = gmenu_tree_directory_get_contents (l->data);
+          for (f = foo; f; f = f->next)
+            {
+              if (gmenu_tree_item_get_type (f->data)
+                  == GMENU_TREE_ITEM_ENTRY)
+                {
+                  const gchar *icon = gmenu_tree_entry_get_icon (f->data);
+                  const gchar *name = gmenu_tree_entry_get_name (f->data);
+                  const gchar *exec = gmenu_tree_entry_get_exec (f->data);
 
-	return g_slist_reverse (actions_list);
+                  gtk_list_store_insert_with_values (store, NULL, 0, 
+                                                     0, name,
+                                                     1, exec,
+                                                     2, icon,
+                                                     -1);
+                }
+            }
+        }
+    }
+
 }
 
 void
-handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data)
+plug_added_cb (GtkSocket *socket,
+               GtkBuilder *builder)
 {
-	gchar *temp;
-	AppShellData *app_data = (AppShellData *) data;
-	GnomeDesktopItem *item =
-		(GnomeDesktopItem *) g_object_get_data (G_OBJECT (tile), APP_ACTION_KEY);
+  GtkWidget *notebook;
 
-	if (event->type == TILE_EVENT_ACTIVATED_DOUBLE_CLICK)
-		return;
-	open_desktop_item_exec (item);
+  notebook = W (builder, "notebook");
 
-	temp = g_strdup_printf("%s%s", app_data->gconf_prefix, EXIT_SHELL_ON_STATIC_ACTION);
-	if (get_slab_gconf_bool(temp))
-	{
-		if (app_data->exit_on_close)
-			gtk_main_quit ();
-		else
-			hide_shell (app_data);
-	}
-	g_free (temp);
+  gtk_notebook_set_page (GTK_NOTEBOOK (notebook), 1);
 }
 
-static UniqueResponse
-message_received_cb (UniqueApp         *app,
-		     UniqueCommand      command,
-		     UniqueMessageData *message,
-		     guint              time,
-		     gpointer           user_data)
+void
+item_activated_cb (GtkIconView *icon_view,
+                   GtkTreePath *path,
+                   GtkBuilder *builder)
 {
-	UniqueResponse  res;
-	AppShellData   *app_data = user_data;
+  GtkTreeModel *model;
+  GtkTreeIter iter = {0,};
+  gchar *name, *exec, *command;
+  GtkWidget *socket, *notebook;
+  guint socket_id = 0;
+  static gint index = -1;
 
-	switch (command) {
-	case UNIQUE_ACTIVATE:
-		/* move the main window to the screen that sent us the command */
-		gtk_window_set_screen (GTK_WINDOW (app_data->main_app),
-				       unique_message_data_get_screen (message));
-		if (!app_data->main_app_window_shown_once)
-			show_shell (app_data);
+  /* create new socket */
+  socket = gtk_socket_new ();
 
-		gtk_window_present_with_time (GTK_WINDOW (app_data->main_app),
-					      time);
+  g_signal_connect (socket, "plug-added", G_CALLBACK (plug_added_cb), builder);
 
-		gtk_widget_grab_focus (SLAB_SECTION (app_data->filter_section)->contents);
+  notebook = W (builder, "notebook");
+  if (index >= 0)
+    gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), index);
+  index = gtk_notebook_append_page (GTK_NOTEBOOK (notebook), socket, NULL);
 
-		res = UNIQUE_RESPONSE_OK;
-		break;
-	default:
-		res = UNIQUE_RESPONSE_PASSTHROUGH;
-		break;
-	}
+  gtk_widget_show (socket);
 
-	return res;
+  socket_id = gtk_socket_get_id (GTK_SOCKET (socket));
+
+  /* get exec */
+  model = gtk_icon_view_get_model (icon_view);
+
+  gtk_tree_model_get_iter (model, &iter, path);
+
+  gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, -1);
+
+  gtk_label_set_text (GTK_LABEL (W (builder, "applet-label")),
+                      name);
+  gtk_widget_show (W (builder, "applet-label"));
+  gtk_widget_show (W (builder, "arrow"));
+
+  /* start app */
+  command = g_strdup_printf ("%s --socket=%u", exec, socket_id);
+  g_spawn_command_line_async (command, NULL);
+  g_free (command);
+
+  g_free (name);
+  g_free (exec);
+}
+
+void
+home_button_clicked_cb (GtkButton *button, GtkBuilder *builder)
+{
+  gtk_notebook_set_page (GTK_NOTEBOOK (W (builder, "notebook")), 0);
+  gtk_widget_hide (W (builder, "applet-label"));
+  gtk_widget_hide (W (builder, "arrow"));
 }
 
 int
-main (int argc, char *argv[])
+main (int argc, char **argv)
 {
-	gboolean hidden = FALSE;
-	UniqueApp *unique_app;
-	AppShellData *app_data;
-	GSList *actions;
-	GError *error;
-	GOptionEntry options[] = {
-	  { "hide", 0, 0, G_OPTION_ARG_NONE, &hidden, N_("Hide on start (useful to preload the shell)"), NULL },
-	  { NULL }
-	};
+  GtkBuilder *b;
+  GtkWidget *window, *notebook;
+  GdkColor color = {0, 32767, 32767, 32767};
 
-#ifdef ENABLE_NLS
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-#endif
+  gtk_init (&argc, &argv);
 
-	error = NULL;
-	if (!gtk_init_with_args (&argc, &argv,
-				 NULL, options, GETTEXT_PACKAGE, &error)) {
-		g_printerr ("%s\n", error->message);
-		g_error_free (error);
-		return 1;
-	}
+  b = gtk_builder_new ();
 
-	unique_app = unique_app_new ("org.opensuse.yast-control-center-gnome", NULL);
-	if (unique_app_is_running (unique_app)) {
-		int retval = 0;
+  gtk_builder_add_from_file (b, "shell.ui", NULL);
 
-		if (!hidden) {
-			UniqueResponse response;
-			response = unique_app_send_message (unique_app,
-							    UNIQUE_ACTIVATE,
-							    NULL);
-			retval = (response != UNIQUE_RESPONSE_OK);
-		}
+  window = W (b, "main-window");
+  g_signal_connect (window, "delete-event", G_CALLBACK (gtk_main_quit), NULL);
 
-		g_object_unref (unique_app);
-		return retval;
-	}
+  fill_model (GTK_LIST_STORE (gtk_builder_get_object (b, "liststore")));
 
-	app_data = appshelldata_new ("gnomecc.menu", NULL, CONTROL_CENTER_PREFIX,
-				     GTK_ICON_SIZE_DND, FALSE, TRUE);
-	generate_categories (app_data);
+  notebook = W (b, "notebook");
 
-	actions = get_actions_list ();
-	layout_shell (app_data, _("Filter"), _("Groups"), _("Common Tasks"), actions,
-		handle_static_action_clicked);
+  gtk_widget_modify_text (W (b,"search-entry"), GTK_STATE_NORMAL, &color);
 
-	create_main_window (app_data, "MyControlCenter", _("Control Center"),
-		"gnome-control-center", 975, 600, hidden);
 
-	unique_app_watch_window (unique_app, GTK_WINDOW (app_data->main_app));
-	g_signal_connect (unique_app, "message-received",
-			  G_CALLBACK (message_received_cb), app_data);
+  g_signal_connect (gtk_builder_get_object (b, "iconview"), "item-activated",
+                    G_CALLBACK (item_activated_cb), b);
+  g_signal_connect (gtk_builder_get_object (b, "home-button"), "clicked",
+                    G_CALLBACK (home_button_clicked_cb), b);
 
-	gtk_main ();
+  gtk_widget_show_all (window);
 
-	g_object_unref (unique_app);
+  gtk_main ();
 
-	return 0;
-};
+  return 0;
+}

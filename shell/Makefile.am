@@ -11,7 +11,7 @@ INCLUDES =					\
 	$(REAL_LIBSLAB_CFLAGS)			\
 	$(GNOMECC_SHELL_CFLAGS)
 
-bin_PROGRAMS = gnome-control-center 
+noinst_PROGRAMS = gnome-control-center 
 
 gnome_control_center_SOURCES =		\
 	control-center.c
@@ -49,7 +49,7 @@ endif
 menudir = $(sysconfdir)/xdg/menus
 menu_DATA = gnomecc.menu
 
-EXTRA_DIST = gnomecc.desktop.in.in gnomecc.directory.in gnomecc.menu $(schemas_DATA).in
+EXTRA_DIST = shell.ui gnomecc.desktop.in.in gnomecc.directory.in gnomecc.menu $(schemas_DATA).in
 
 DISTCLEANFILES = gnomecc.desktop gnomecc.desktop.in gnomecc.directory $(schemas_DATA)
 
