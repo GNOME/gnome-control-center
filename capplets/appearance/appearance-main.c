@@ -123,6 +123,7 @@ main (int argc, char **argv)
   gchar *install_filename = NULL;
   gchar *start_page = NULL;
   gchar **wallpaper_files = NULL;
+  guint  socket_id = 0;
   GOptionContext *option_context;
   GOptionEntry option_entries[] = {
       { "install-theme",
@@ -140,6 +141,14 @@ main (int argc, char **argv)
         /* TRANSLATORS: don't translate the terms in brackets */
         N_("Specify the name of the page to show (theme|background|fonts|interface)"),
         N_("page") },
+      { "socket",
+        's',
+        G_OPTION_FLAG_IN_MAIN,
+        G_OPTION_ARG_INT,
+        &socket_id,
+        /* TRANSLATORS: don't translate the terms in brackets */
+        N_("ID of the socket to embed in"),
+        N_("socket") },
       { G_OPTION_REMAINING,
       	0,
       	G_OPTION_FLAG_IN_MAIN,
@@ -167,11 +176,27 @@ main (int argc, char **argv)
 
   /* prepare the main window */
   w = appearance_capplet_get_widget (data, "appearance_window");
-  capplet_set_icon (w, "preferences-desktop-theme");
-  gtk_widget_show_all (w);
+  if (socket_id)
+    {
+      GtkWidget *content, *plug;
 
-  g_signal_connect_after (w, "response",
-                          (GCallback) main_window_response, data);
+      /* re-parent contents */
+      content = appearance_capplet_get_widget (data, "main_notebook");
+
+      plug = gtk_plug_new (socket_id);
+      g_signal_connect (plug, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+
+      gtk_widget_reparent (content, plug);
+      gtk_widget_show_all (plug);
+    }
+  else
+    {
+      capplet_set_icon (w, "preferences-desktop-theme");
+      gtk_widget_show_all (w);
+
+      g_signal_connect_after (w, "response",
+                              (GCallback) main_window_response, data);
+    }
 
   /* default to background page if files were given on the command line */
   if (wallpaper_files && !install_filename && !start_page)
