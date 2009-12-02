@@ -13,66 +13,61 @@
           <object class="GtkToolbar" id="toolbar1">
             <property name="visible">True</property>
             <child>
-              <object class="GtkToolItem" id="home-button1">
-                <property name="visible">True</property>
-                <property name="is_important">True</property>
-                <child>
-                  <object class="GtkButton" id="home-button">
-                    <property name="label" translatable="yes">Settings</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolItem" id="toolbutton3">
-                <property name="visible">True</property>
-                <child>
-                  <object class="GtkArrow" id="arrow">
-                    <property name="no_show_all">True</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolItem" id="toolbutton2">
-                <property name="visible">True</property>
-                <child>
-                  <object class="GtkLabel" id="applet-label">
-                    <property name="no_show_all">True</property>
-                    <property name="label" translatable="yes">Applet</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkToolItem" id="toolbutton1">
                 <property name="visible">True</property>
                 <child>
-                  <object class="GtkAlignment" id="alignment1">
+                  <object class="GtkHBox" id="hbox1">
                     <property name="visible">True</property>
-                    <property name="xalign">1</property>
-                    <property name="xscale">0</property>
+                    <property name="border_width">3</property>
                     <child>
-                      <object class="GtkEntry" id="search-entry">
-                        <property name="width_request">210</property>
+                      <object class="GtkButton" id="home-button">
+                        <property name="label" translatable="yes">Settings</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="is_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
-                        <property name="text" translatable="yes">Type to search your settings</property>
+                        <property name="receives_default">True</property>
                       </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkArrow" id="arrow">
+                        <property name="no_show_all">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="applet-label">
+                        <property name="no_show_all">True</property>
+                        <property name="label" translatable="yes">Applet</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkAlignment" id="alignment1">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="xscale">0</property>
+                        <child>
+                          <object class="GtkEntry" id="search-entry">
+                            <property name="width_request">210</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">&#x25CF;</property>
+                            <property name="text" translatable="yes">Type to search your settings</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">3</property>
+                      </packing>
                     </child>
                   </object>
                 </child>
