@@ -177,14 +177,21 @@ fill_model (GtkBuilder *b)
 }
 
 void
-plug_added_cb (GtkSocket *socket,
+plug_added_cb (GtkSocket  *socket,
                GtkBuilder *builder)
 {
   GtkWidget *notebook;
+  GSList *l, *iconviews;
 
   notebook = W (builder, "notebook");
 
   gtk_notebook_set_page (GTK_NOTEBOOK (notebook), 1);
+
+  /* make sure no items are selected when the user switches back to the icon
+   * views */
+  iconviews = (GSList*) g_object_get_data (G_OBJECT (builder), "iconviews");
+  for (l = iconviews; l; l = l->next)
+      gtk_icon_view_unselect_all (GTK_ICON_VIEW (l->data));
 }
 
 void
