@@ -57,6 +57,8 @@ struct App
     GtkWidget	   *panel_checkbox;
     GtkWidget	   *clone_checkbox;
     GtkWidget	   *show_icon_checkbox;
+    GtkWidget      *rotate_tablet_box;
+    GtkWidget      *rotate_tablet_checkbox;
 
     /* We store the event timestamp when the Apply button is clicked */
     GtkWidget      *apply_button;
@@ -84,6 +86,8 @@ static void select_current_output_from_dialog_position (App *app);
 static void monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data);
 static void get_geometry (GnomeOutputInfo *output, int *w, int *h);
 static void apply_configuration_returned_cb (DBusGProxy *proxy, DBusGProxyCall *call_id, void *data);
+
+#define ROTATE_TABLET_KEY "/apps/gnome_settings_daemon/xrandr/rotate_tablet_with_monitor"
 
 static void
 error_message (App *app, const char *primary_text, const char *secondary_text)
@@ -2116,6 +2120,42 @@ apply_button_clicked_cb (GtkButton *button, gpointer data)
     app->apply_button_clicked_timestamp = gtk_get_current_event_time ();
 }
 
+static void
+rotate_tablet_toggled_cb (GtkToggleButton *button, gpointer data)
+{
+    App *app = data;
+
+    gconf_client_set_bool (app->client, ROTATE_TABLET_KEY, gtk_toggle_button_get_active (app->rotate_tablet_checkbox), NULL);
+}
+
+static gboolean
+tablet_is_present (void)
+{
+    char *path;
+
+    /* This heuristic *SUCKS*, but it will have to do for now */
+
+    path = g_find_program_in_path ("xsetwacom");
+    if (path) {
+	g_free (path);
+	return TRUE;
+    } else
+	return FALSE;
+}
+
+/* Make sure to call this function *before* connecting to app->rotate_tablet_checkbox's "toggled" signal */
+static void
+set_rotate_tablet_widgets (App *app)
+{
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->rotate_tablet_checkbox),
+				  gconf_client_get_bool (app->client, ROTATE_TABLET_KEY, NULL));
+
+    if (tablet_is_present ())
+	gtk_widget_show_all (app->rotate_tablet_box);
+    else
+	gtk_widget_hide (app->rotate_tablet_box);
+}
+
 static GtkWidget*
 _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 {
@@ -2207,6 +2247,11 @@ run_application (App *app)
     g_signal_connect (app->show_icon_checkbox, "toggled", G_CALLBACK (on_show_icon_toggled), app);
 
     app->panel_checkbox = _gtk_builder_get_widget (builder, "panel_checkbox");
+
+    app->rotate_tablet_box = _gtk_builder_get_widget (builder, "rotate-tablet-box");
+    app->rotate_tablet_checkbox = _gtk_builder_get_widget (builder, "rotate-tablet");
+    set_rotate_tablet_widgets (app);
+    g_signal_connect (app->rotate_tablet_checkbox, "toggled", G_CALLBACK (rotate_tablet_toggled_cb), app);
 
     make_text_combo (app->resolution_combo, 4);
     make_text_combo (app->refresh_combo, 3);
