@@ -26,6 +26,28 @@
 void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, GtkBuilder *builder);
 
 
+gboolean
+button_release_cb (GtkWidget      *view,
+                   GdkEventButton *event,
+                   GtkBuilder     *builder)
+{
+  if (event->button == 1)
+    {
+      GList *selection;
+
+      selection = gtk_icon_view_get_selected_items (GTK_ICON_VIEW (view));
+
+      if (!selection)
+        return FALSE;
+
+      item_activated_cb (GTK_ICON_VIEW (view), selection->data, builder);
+
+      g_list_free (selection);
+      return TRUE;
+    }
+  return FALSE;
+}
+
 void
 selection_changed_cb (GtkIconView *view,
                       GtkBuilder  *builder)
@@ -98,6 +120,8 @@ fill_model (GtkBuilder *b)
           gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 120);
           g_signal_connect (iconview, "item-activated",
                             G_CALLBACK (item_activated_cb), b);
+          g_signal_connect (iconview, "button-release-event",
+                            G_CALLBACK (button_release_cb), b);
           g_signal_connect (iconview, "selection-changed",
                             G_CALLBACK (selection_changed_cb), b);
 
