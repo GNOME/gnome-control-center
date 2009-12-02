@@ -23,12 +23,50 @@
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
 
+void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, GtkBuilder *builder);
+
+
 void
-fill_model (GtkListStore *store)
+selection_changed_cb (GtkIconView *view,
+                      GtkBuilder  *builder)
+{
+  GSList *iconviews, *l;
+  GList *selection;
+
+  /* don't clear other selections if this icon view does not have one */
+  selection = gtk_icon_view_get_selected_items (view);
+  if (!selection)
+    return;
+  else
+    g_list_free (selection);
+
+  iconviews = (GSList*) g_object_get_data (G_OBJECT (builder), "iconviews");
+
+  for (l = iconviews; l; l = l->next)
+    {
+      GtkIconView *iconview = l->data;
+
+      if (iconview != view)
+        {
+          if ((selection = gtk_icon_view_get_selected_items (iconview)))
+            {
+              gtk_icon_view_unselect_all (iconview);
+              g_list_free (selection);
+            }
+        }
+    }
+}
+
+void
+fill_model (GtkBuilder *b)
 {
   GSList *list, *l;
   GMenuTreeDirectory *d;
   GMenuTree *t;
+  GtkWidget *vbox;
+  GSList *iconviews;
+
+  vbox = W (b, "main-vbox");
 
   t = gmenu_tree_lookup ("/etc/xdg/menus/gnomecc.menu", 0);
 
@@ -42,21 +80,70 @@ fill_model (GtkListStore *store)
       type = gmenu_tree_item_get_type (l->data);
       if (type == GMENU_TREE_ITEM_DIRECTORY)
         {
+          GtkListStore *store;
+          GtkWidget *header, *iconview;
           GSList *foo, *f;
+          const gchar *dir_name;
+          gchar *header_name;
+
           foo = gmenu_tree_directory_get_contents (l->data);
+          dir_name = gmenu_tree_directory_get_name (l->data);
+
+          store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
+                                      GDK_TYPE_PIXBUF);
+
+          iconview = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
+          gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (iconview), 2);
+          gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), 0);
+          gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 120);
+          g_signal_connect (iconview, "item-activated",
+                            G_CALLBACK (item_activated_cb), b);
+          g_signal_connect (iconview, "selection-changed",
+                            G_CALLBACK (selection_changed_cb), b);
+
+          iconviews = g_slist_prepend (iconviews, iconview);
+          g_object_set_data (G_OBJECT (b), "iconviews", iconviews);
+
+          header_name = g_strdup_printf ("<b>%s</b>", dir_name);
+
+          header = g_object_new (GTK_TYPE_LABEL,
+                                 "use-markup", TRUE,
+                                 "label", header_name,
+                                 "wrap", TRUE,
+                                 "xalign", 0.0,
+                                 "xpad", 6,
+                                 NULL);
+
+          gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, TRUE, 3);
+          gtk_box_pack_start (GTK_BOX (vbox), iconview, FALSE, TRUE, 0);
+
+
           for (f = foo; f; f = f->next)
             {
               if (gmenu_tree_item_get_type (f->data)
                   == GMENU_TREE_ITEM_ENTRY)
                 {
+                  GError *err = NULL;
                   const gchar *icon = gmenu_tree_entry_get_icon (f->data);
                   const gchar *name = gmenu_tree_entry_get_name (f->data);
                   const gchar *exec = gmenu_tree_entry_get_exec (f->data);
+                  GdkPixbuf *pixbuf = NULL;
 
-                  gtk_list_store_insert_with_values (store, NULL, 0, 
+                  pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+                                                     icon, 32,
+                                                     GTK_ICON_LOOKUP_FORCE_SIZE,
+                                                     NULL);
+
+                  if (err)
+                    {
+                      g_warning ("Could not load icon: %s", err->message);
+                      g_error_free (err);
+                    }
+
+                  gtk_list_store_insert_with_values (store, NULL, 0,
                                                      0, name,
                                                      1, exec,
-                                                     2, icon,
+                                                     2, pixbuf,
                                                      -1);
                 }
             }
@@ -147,15 +234,13 @@ main (int argc, char **argv)
   window = W (b, "main-window");
   g_signal_connect (window, "delete-event", G_CALLBACK (gtk_main_quit), NULL);
 
-  fill_model (GTK_LIST_STORE (gtk_builder_get_object (b, "liststore")));
+  fill_model (b);
 
   notebook = W (b, "notebook");
 
   gtk_widget_modify_text (W (b,"search-entry"), GTK_STATE_NORMAL, &color);
 
 
-  g_signal_connect (gtk_builder_get_object (b, "iconview"), "item-activated",
-                    G_CALLBACK (item_activated_cb), b);
   g_signal_connect (gtk_builder_get_object (b, "home-button"), "clicked",
                     G_CALLBACK (home_button_clicked_cb), b);
 
