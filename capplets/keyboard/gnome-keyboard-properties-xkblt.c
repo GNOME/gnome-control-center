@@ -226,8 +226,7 @@ xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
 				   GConfChangeSet * changeset)
 {
 	GtkListStore *list_store =
-	    gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_BOOLEAN,
-				G_TYPE_STRING);
+	    gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
 	GtkWidget *tree_view = WID ("xkb_layouts_selected");
 	GtkTreeSelection *selection;
 	GtkTargetEntry self_drag_target =
