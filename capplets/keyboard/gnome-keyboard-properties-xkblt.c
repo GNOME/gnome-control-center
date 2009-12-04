@@ -37,6 +37,7 @@
 
 #define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
 #define SEL_LAYOUT_TREE_COL_ID 1
+#define SEL_LAYOUT_TREE_COL_ENABLED 2
 
 static int idx2select = -1;
 static int max_selected_layouts = -1;
@@ -226,7 +227,8 @@ xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
 				   GConfChangeSet * changeset)
 {
 	GtkListStore *list_store =
-	    gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+	    gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
+				G_TYPE_BOOLEAN);
 	GtkWidget *tree_view = WID ("xkb_layouts_selected");
 	GtkTreeSelection *selection;
 	GtkTargetEntry self_drag_target =
@@ -240,6 +242,8 @@ xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
 						      text_renderer,
 						      "text",
 						      SEL_LAYOUT_TREE_COL_DESCRIPTION,
+						      "sensitive",
+						      SEL_LAYOUT_TREE_COL_ENABLED,
 						      NULL);
 	selection =
 	    gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
@@ -311,7 +315,9 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 				    SEL_LAYOUT_TREE_COL_DESCRIPTION,
 				    utf_visible,
 				    SEL_LAYOUT_TREE_COL_ID,
-				    cur_layout->data, -1);
+				    cur_layout->data,
+				    SEL_LAYOUT_TREE_COL_ENABLED,
+				    counter < max_selected_layouts, -1);
 		g_free (utf_visible);
 	}
 
