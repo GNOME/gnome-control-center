@@ -474,13 +474,13 @@ install_button_clicked_cb (GtkButton   *button,
     g_free (dest_path);
 
     /* create destination filename */
-    dest_filename = g_path_get_basename (font_file);
+    src = g_file_new_for_uri (font_file);
+
+    dest_filename = g_file_get_basename (src);
     dest_path = g_build_filename (g_get_home_dir (), ".fonts", dest_filename, NULL);
     g_free (dest_filename);
 
     dest = g_file_new_for_path (dest_path);
-
-    src = g_file_new_for_uri (font_file);
 
     /* TODO: show error dialog if file exists */
     g_file_copy_async (src, dest, G_FILE_COPY_NONE, 0, NULL, NULL, NULL,
