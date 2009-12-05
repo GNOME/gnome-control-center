@@ -588,8 +588,7 @@ reload_mouse_modifiers (void)
         g_free (mouse_modifiers);
         mouse_modifiers = NULL;
 
-
-        n_mouse_modifiers = 2; /* control, alt */
+        n_mouse_modifiers = 1; /* alt */
         if (have_super)
                 ++n_mouse_modifiers;
         if (have_hyper)
@@ -597,17 +596,9 @@ reload_mouse_modifiers (void)
         if (have_meta)
                 ++n_mouse_modifiers;
 
-        g_free (mouse_modifiers);
-
         mouse_modifiers = g_new0 (MouseClickModifier, n_mouse_modifiers);
 
         i = 0;
-
-        mouse_modifiers[i].number = i;
-        /* translators: this is the Control key */
-        mouse_modifiers[i].name = g_strdup (_("C_ontrol"));
-        mouse_modifiers[i].value = "Control";
-        ++i;
 
         mouse_modifiers[i].number = i;
         mouse_modifiers[i].name = g_strdup (_("_Alt"));
