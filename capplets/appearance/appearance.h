@@ -36,6 +36,8 @@ typedef struct
   GConfClient *client;
   GtkBuilder  *ui;
   GnomeDesktopThumbnailFactory *thumb_factory;
+  gulong screen_size_handler;
+  gulong screen_monitors_handler;
 
   /* desktop */
   GHashTable *wp_hash;
@@ -51,6 +53,8 @@ typedef struct
   GtkWidget *wp_image;
   GSList *wp_uris;
   gint frame;
+  gint thumb_width;
+  gint thumb_height;
 
   /* font */
   GtkWidget *font_details;

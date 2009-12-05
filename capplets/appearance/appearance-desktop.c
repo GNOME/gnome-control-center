@@ -82,7 +82,6 @@ get_selected_item (AppearanceData *data,
   if (selected != NULL)
   {
     GtkTreeIter sel_iter;
-    gchar *wpfile;
 
     gtk_tree_model_get_iter (data->wp_model, &sel_iter,
                              selected->data);
@@ -93,10 +92,7 @@ get_selected_item (AppearanceData *data,
     if (iter)
       *iter = sel_iter;
 
-    gtk_tree_model_get (data->wp_model, &sel_iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
-    g_free (wpfile);
+    gtk_tree_model_get (data->wp_model, &sel_iter, 1, &item, -1);
   }
 
   return item;
@@ -129,7 +125,10 @@ static void on_item_changed (GnomeBG *bg, AppearanceData *data) {
 
     g_signal_handlers_block_by_func (bg, G_CALLBACK (on_item_changed), data);
 
-    pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
+    pixbuf = gnome_wp_item_get_thumbnail (item,
+                                          data->thumb_factory,
+                                          data->thumb_width,
+                                          data->thumb_height);
     if (pixbuf) {
       gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter, 0, pixbuf, -1);
       g_object_unref (pixbuf);
@@ -153,13 +152,14 @@ wp_props_load_wallpaper (gchar *key,
 
   gtk_list_store_append (GTK_LIST_STORE (data->wp_model), &iter);
 
-  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
+  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory,
+                                        data->thumb_width,
+                                        data->thumb_height);
   gnome_wp_item_update_description (item);
 
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
                       0, pixbuf,
-                      1, item->description,
-                      2, item->filename,
+                      1, item,
                       -1);
 
   if (pixbuf != NULL)
@@ -313,7 +313,9 @@ wp_scale_type_changed (GtkComboBox *combobox,
 
   item->options = gtk_combo_box_get_active (GTK_COMBO_BOX (data->wp_style_menu));
 
-  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
+  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory,
+                                        data->thumb_width,
+                                        data->thumb_height);
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter, 0, pixbuf, -1);
   if (pixbuf != NULL)
     g_object_unref (pixbuf);
@@ -338,7 +340,9 @@ wp_shade_type_changed (GtkWidget *combobox,
 
   item->shade_type = gtk_combo_box_get_active (GTK_COMBO_BOX (data->wp_color_menu));
 
-  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory);
+  pixbuf = gnome_wp_item_get_thumbnail (item, data->thumb_factory,
+                                        data->thumb_width,
+                                        data->thumb_height);
   gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter, 0, pixbuf, -1);
   if (pixbuf != NULL)
     g_object_unref (pixbuf);
@@ -768,7 +772,6 @@ wp_view_tooltip_cb (GtkWidget  *widget,
                     AppearanceData *data)
 {
   GtkTreeIter iter;
-  gchar *wpfile;
   GnomeWPItem *item;
 
   if (gtk_icon_view_get_tooltip_context (data->wp_view,
@@ -778,10 +781,7 @@ wp_view_tooltip_cb (GtkWidget  *widget,
                                          NULL,
                                          &iter))
     {
-      gtk_tree_model_get (data->wp_model, &iter, 2, &wpfile, -1);
-      item = g_hash_table_lookup (data->wp_hash, wpfile);
-      g_free (wpfile);
-
+      gtk_tree_model_get (data->wp_model, &iter, 1, &item, -1);
       gtk_tooltip_set_markup (tooltip, item->description);
 
       return TRUE;
@@ -795,30 +795,24 @@ wp_list_sort (GtkTreeModel *model,
               GtkTreeIter *a, GtkTreeIter *b,
               AppearanceData *data)
 {
-  gchar *foo, *bar;
-  gchar *desca, *descb;
+  GnomeWPItem *itema, *itemb;
   gint retval;
 
-  gtk_tree_model_get (model, a, 1, &desca, 2, &foo, -1);
-  gtk_tree_model_get (model, b, 1, &descb, 2, &bar, -1);
+  gtk_tree_model_get (model, a, 1, &itema, -1);
+  gtk_tree_model_get (model, b, 1, &itemb, -1);
 
-  if (!strcmp (foo, "(none)"))
+  if (!strcmp (itema->filename, "(none)"))
   {
     retval =  -1;
   }
-  else if (!strcmp (bar, "(none)"))
+  else if (!strcmp (itemb->filename, "(none)"))
   {
     retval =  1;
   }
   else
   {
-    retval = g_utf8_collate (desca, descb);
+    retval = g_utf8_collate (itema->description, itemb->description);
   }
-
-  g_free (desca);
-  g_free (descb);
-  g_free (foo);
-  g_free (bar);
 
   return retval;
 }
@@ -875,6 +869,68 @@ wp_update_preview (GtkFileChooser *chooser,
 }
 
 static gboolean
+reload_item (GtkTreeModel *model,
+             GtkTreePath *path,
+             GtkTreeIter *iter,
+             AppearanceData *data)
+{
+  GnomeWPItem *item;
+  GdkPixbuf *pixbuf;
+
+  gtk_tree_model_get (model, iter, 1, &item, -1);
+
+  pixbuf = gnome_wp_item_get_thumbnail (item,
+                                        data->thumb_factory,
+                                        data->thumb_width,
+                                        data->thumb_height);
+  if (pixbuf) {
+    gtk_list_store_set (GTK_LIST_STORE (data->wp_model), iter, 0, pixbuf, -1);
+    g_object_unref (pixbuf);
+  }
+
+  return FALSE;
+}
+
+static gdouble
+get_monitor_aspect_ratio_for_widget (GtkWidget *widget)
+{
+  gdouble aspect;
+  gint monitor;
+  GdkRectangle rect;
+
+  monitor = gdk_screen_get_monitor_at_window (gtk_widget_get_screen (widget), gtk_widget_get_window (widget));
+  gdk_screen_get_monitor_geometry (gtk_widget_get_screen (widget), monitor, &rect);
+  aspect = rect.height / (gdouble)rect.width;
+
+  return aspect;
+}
+
+#define LIST_IMAGE_SIZE 108
+
+static void
+compute_thumbnail_sizes (AppearanceData *data)
+{
+  gdouble aspect;
+
+  aspect = get_monitor_aspect_ratio_for_widget (GTK_WIDGET (data->wp_view));
+  if (aspect > 1) {
+    /* portrait */
+    data->thumb_width = LIST_IMAGE_SIZE / aspect;
+    data->thumb_height = LIST_IMAGE_SIZE;
+  } else {
+    data->thumb_width = LIST_IMAGE_SIZE;
+    data->thumb_height = LIST_IMAGE_SIZE * aspect;
+  }
+}
+
+static void
+reload_wallpapers (AppearanceData *data)
+{
+  compute_thumbnail_sizes (data);
+  gtk_tree_model_foreach (data->wp_model, (GtkTreeModelForeachFunc)reload_item, data);
+}
+
+static gboolean
 wp_load_stuffs (void *user_data)
 {
   AppearanceData *data;
@@ -882,6 +938,8 @@ wp_load_stuffs (void *user_data)
   GnomeWPItem *item;
 
   data = (AppearanceData *) user_data;
+
+  compute_thumbnail_sizes (data);
 
   gnome_wp_xml_load_list (data);
   g_hash_table_foreach (data->wp_hash, (GHFunc) wp_props_load_wallpaper,
@@ -976,8 +1034,11 @@ static void
 wp_select_after_realize (GtkWidget *widget,
                          AppearanceData *data)
 {
-  GnomeWPItem *item = get_selected_item (data, NULL);
+  GnomeWPItem *item;
 
+  g_idle_add (wp_load_stuffs, data);
+
+  item = get_selected_item (data, NULL);
   if (item == NULL)
     item = g_hash_table_lookup (data->wp_hash, "(none)");
 
@@ -1043,7 +1104,11 @@ next_frame (AppearanceData  *data,
   item = get_selected_item (data, &iter);
 
   if (frame >= 0)
-    pixbuf = gnome_wp_item_get_frame_thumbnail (item, data->thumb_factory, frame);
+    pixbuf = gnome_wp_item_get_frame_thumbnail (item,
+                                                data->thumb_factory,
+                                                data->thumb_width,
+                                                data->thumb_height,
+                                                frame);
   if (pixbuf) {
     gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter, 0, pixbuf, -1);
     g_object_unref (pixbuf);
@@ -1056,7 +1121,11 @@ next_frame (AppearanceData  *data,
       pb = buttons[0];
   }
   else {
-    pixbuf = gnome_wp_item_get_frame_thumbnail (item, data->thumb_factory, frame + 1);
+    pixbuf = gnome_wp_item_get_frame_thumbnail (item,
+                                                data->thumb_factory,
+                                                data->thumb_width,
+                                                data->thumb_height,
+                                                frame + 1);
     if (pixbuf)
       g_object_unref (pixbuf);
     else
@@ -1140,6 +1209,13 @@ buttons_cell_data_func (GtkCellLayout   *layout,
   gtk_tree_path_free (path);
 }
 
+static void
+screen_monitors_changed (GdkScreen *screen,
+                         AppearanceData *data)
+{
+  reload_wallpapers (data);
+}
+
 void
 desktop_init (AppearanceData *data,
 	      const gchar **uris)
@@ -1194,9 +1270,8 @@ desktop_init (AppearanceData *data,
                            (GConfClientNotifyFunc) wp_color2_changed,
                            data, NULL, NULL);
 
-  data->wp_model = GTK_TREE_MODEL (gtk_list_store_new (3, GDK_TYPE_PIXBUF,
-                                                 G_TYPE_STRING,
-                                                 G_TYPE_STRING));
+  data->wp_model = GTK_TREE_MODEL (gtk_list_store_new (2, GDK_TYPE_PIXBUF,
+                                                       G_TYPE_POINTER));
 
   data->wp_view = GTK_ICON_VIEW (appearance_capplet_get_widget (data, "wp_view"));
   gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
@@ -1232,12 +1307,12 @@ desktop_init (AppearanceData *data,
 
   data->frame = -1;
 
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (data->wp_model), 2,
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (data->wp_model), 1,
                                    (GtkTreeIterCompareFunc) wp_list_sort,
                                    data, NULL);
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (data->wp_model),
-                                        2, GTK_SORT_ASCENDING);
+                                        1, GTK_SORT_ASCENDING);
 
   gtk_drag_dest_set (GTK_WIDGET (data->wp_view), GTK_DEST_DEFAULT_ALL, drop_types,
                      G_N_ELEMENTS (drop_types), GDK_ACTION_COPY | GDK_ACTION_MOVE);
@@ -1280,14 +1355,20 @@ desktop_init (AppearanceData *data,
 
   g_signal_connect (data->wp_rem_button, "clicked",
                     (GCallback) wp_remove_wallpaper, data);
-
-  g_idle_add (wp_load_stuffs, data);
+  data->screen_monitors_handler = g_signal_connect (gtk_widget_get_screen (GTK_WIDGET (data->wp_view)),
+                                                    "monitors-changed",
+                                                    G_CALLBACK (screen_monitors_changed),
+                                                    data);
+  data->screen_size_handler = g_signal_connect (gtk_widget_get_screen (GTK_WIDGET (data->wp_view)),
+                                                    "size-changed",
+                                                    G_CALLBACK (screen_monitors_changed),
+                                                    data);
 
   g_signal_connect (data->wp_view, "selection-changed",
                     (GCallback) wp_props_wp_selected, data);
   g_signal_connect (data->wp_view, "query-tooltip",
                     (GCallback) wp_view_tooltip_cb, data);
-  gtk_widget_set_has_tooltip (data->wp_view, TRUE);
+  gtk_widget_set_has_tooltip (GTK_WIDGET (data->wp_view), TRUE);
 
   wp_set_sensitivities (data);
 
@@ -1300,6 +1381,18 @@ void
 desktop_shutdown (AppearanceData *data)
 {
   gnome_wp_xml_save_list (data);
+
+  if (data->screen_monitors_handler > 0) {
+    g_signal_handler_disconnect (gtk_widget_get_screen (GTK_WIDGET (data->wp_view)),
+                                 data->screen_monitors_handler);
+    data->screen_monitors_handler = 0;
+  }
+  if (data->screen_size_handler > 0) {
+    g_signal_handler_disconnect (gtk_widget_get_screen (GTK_WIDGET (data->wp_view)),
+                                 data->screen_size_handler);
+    data->screen_size_handler = 0;
+  }
+
   g_slist_foreach (data->wp_uris, (GFunc) g_free, NULL);
   g_slist_free (data->wp_uris);
   if (data->wp_filesel)

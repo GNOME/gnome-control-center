@@ -205,22 +205,19 @@ add_slideshow_frame (GdkPixbuf *pixbuf)
   return tmp;
 }
 
-#define LIST_IMAGE_WIDTH 108
-
 GdkPixbuf * gnome_wp_item_get_frame_thumbnail (GnomeWPItem * item,
 					       GnomeDesktopThumbnailFactory * thumbs,
+                                               int width,
+                                               int height,
                                                gint frame) {
   GdkPixbuf *pixbuf = NULL;
-  double aspect =
-    (double)gdk_screen_get_height (gdk_screen_get_default()) /
-    gdk_screen_get_width (gdk_screen_get_default());
 
   set_bg_properties (item);
 
   if (frame != -1)
-    pixbuf = gnome_bg_create_frame_thumbnail (item->bg, thumbs, gdk_screen_get_default (), LIST_IMAGE_WIDTH, LIST_IMAGE_WIDTH * aspect, frame);
+    pixbuf = gnome_bg_create_frame_thumbnail (item->bg, thumbs, gdk_screen_get_default (), width, height, frame);
   else
-    pixbuf = gnome_bg_create_thumbnail (item->bg, thumbs, gdk_screen_get_default(), LIST_IMAGE_WIDTH, LIST_IMAGE_WIDTH * aspect);
+    pixbuf = gnome_bg_create_thumbnail (item->bg, thumbs, gdk_screen_get_default(), width, height);
 
   if (pixbuf && gnome_bg_changes_with_time (item->bg))
     {
@@ -231,15 +228,17 @@ GdkPixbuf * gnome_wp_item_get_frame_thumbnail (GnomeWPItem * item,
       pixbuf = tmp;
     }
 
-  gnome_bg_get_image_size (item->bg, thumbs, &item->width, &item->height);
+  gnome_bg_get_image_size (item->bg, thumbs, width, height, &item->width, &item->height);
 
   return pixbuf;
 }
 
 
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
-					 GnomeDesktopThumbnailFactory * thumbs) {
-  return gnome_wp_item_get_frame_thumbnail (item, thumbs, -1);
+					 GnomeDesktopThumbnailFactory * thumbs,
+                                         gint width,
+                                         gint height) {
+  return gnome_wp_item_get_frame_thumbnail (item, thumbs, width, height, -1);
 }
 
 void gnome_wp_item_update_description (GnomeWPItem * item) {
@@ -252,37 +251,55 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
     gchar *size;
     gchar *dirname = g_path_get_dirname (item->filename);
 
+    description = NULL;
+    size = NULL;
+
     if (strcmp (item->fileinfo->mime_type, "application/xml") == 0)
       {
         if (gnome_bg_changes_with_time (item->bg))
           description = _("Slide Show");
-        else
+        else if (item->width > 0 && item->height > 0)
           description = _("Image");
       }
     else
       description = g_content_type_get_description (item->fileinfo->mime_type);
 
-    if (gnome_bg_changes_with_size (item->bg))
+    if (gnome_bg_has_multiple_sizes (item->bg))
       size = g_strdup (_("multiple sizes"));
-    else
+    else if (item->width > 0 && item->height > 0) {
       /* translators: x pixel(s) by y pixel(s) */
       size = g_strdup_printf ("%d %s by %d %s",
                               item->width,
                               ngettext ("pixel", "pixels", item->width),
                               item->height,
                               ngettext ("pixel", "pixels", item->height));
+    }
 
-    /* translators: <b>wallpaper name</b>
-     * mime type, size
-     * Folder: /path/to/file
-     */
-    item->description = g_markup_printf_escaped (_("<b>%s</b>\n"
-                                   "%s, %s\n"
-                                   "Folder: %s"),
-                                 item->name,
-                                 description,
-                                 size,
-                                 dirname);
+    if (description && size) {
+      /* translators: <b>wallpaper name</b>
+       * mime type, size
+       * Folder: /path/to/file
+       */
+      item->description = g_markup_printf_escaped (_("<b>%s</b>\n"
+                                                     "%s, %s\n"
+                                                     "Folder: %s"),
+                                                   item->name,
+                                                   description,
+                                                   size,
+                                                   dirname);
+    } else {
+      /* translators: <b>wallpaper name</b>
+       * Image missing
+       * Folder: /path/to/file
+       */
+      item->description = g_markup_printf_escaped (_("<b>%s</b>\n"
+                                                     "%s\n"
+                                                     "Folder: %s"),
+                                                   item->name,
+                                                   _("Image missing"),
+                                                   dirname);
+    }
+
     g_free (size);
     g_free (dirname);
   }
