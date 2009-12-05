@@ -185,7 +185,7 @@ plug_added_cb (GtkSocket  *socket,
 
   notebook = W (builder, "notebook");
 
-  gtk_notebook_set_page (GTK_NOTEBOOK (notebook), 1);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
 
   /* make sure no items are selected when the user switches back to the icon
    * views */
@@ -244,7 +244,7 @@ item_activated_cb (GtkIconView *icon_view,
 void
 home_button_clicked_cb (GtkButton *button, GtkBuilder *builder)
 {
-  gtk_notebook_set_page (GTK_NOTEBOOK (W (builder, "notebook")), 0);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (W (builder, "notebook")), 0);
   gtk_widget_hide (W (builder, "applet-label"));
   gtk_widget_hide (W (builder, "arrow"));
 }
