@@ -492,9 +492,10 @@ web_combo_conv_from_widget (GConfPropertyEditor *peditor, const GConfValue *valu
     if (!item)
     {
         /* if item was not found, this is probably the "Custom" item */
-        gchar *c = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL);
-        gconf_value_set_string (ret, (c != NULL) ? c : "");
-        g_free (c);
+        /* XXX: returning "" as the value here is not ideal, but required to
+         * prevent the combo box from jumping back to the previous value if the
+         * user has selected Custom */
+        gconf_value_set_string (ret, "");
         return ret;
     }
     else
