@@ -93,7 +93,7 @@ wm_common_get_current_keybindings (void)
       char *wm_name = wm_common_get_window_manager_property (wm_atom);
       char *to_copy[] = { NULL, NULL };
 
-      to_copy[0] = wm_name ? wm_name : g_strdup (WM_COMMON_UNKNOWN);
+      to_copy[0] = wm_name ? wm_name : WM_COMMON_UNKNOWN;
 
       results = g_strdupv (to_copy);
       g_free (wm_name);
@@ -160,7 +160,7 @@ wm_window_event_filter (GdkXEvent *xev,
     }
 
   return GDK_FILTER_CONTINUE;
-} 
+}
 
 void
 wm_common_register_window_manager_change (GFunc    func,
@@ -171,7 +171,7 @@ wm_common_register_window_manager_change (GFunc    func,
   ncb_data = g_new0 (WMCallbackData, 1);
 
   ncb_data->func = func;
-  ncb_data->data = data;  
+  ncb_data->data = data;
 
   gdk_window_add_filter (NULL, wm_window_event_filter, ncb_data);
 
