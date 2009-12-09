@@ -858,6 +858,69 @@ lay_out_outputs_horizontally (App *app)
 
 }
 
+/* FIXME: this function is copied from gnome-settings-daemon/plugins/xrandr/gsd-xrandr-manager.c.
+ * Do we need to put this function in gnome-desktop for public use?
+ */
+static gboolean
+get_clone_size (GnomeRRScreen *screen, int *width, int *height)
+{
+        GnomeRRMode **modes = gnome_rr_screen_list_clone_modes (screen);
+        int best_w, best_h;
+        int i;
+
+        best_w = 0;
+        best_h = 0;
+
+        for (i = 0; modes[i] != NULL; ++i) {
+                GnomeRRMode *mode = modes[i];
+                int w, h;
+
+                w = gnome_rr_mode_get_width (mode);
+                h = gnome_rr_mode_get_height (mode);
+
+                if (w * h > best_w * best_h) {
+                        best_w = w;
+                        best_h = h;
+                }
+        }
+
+        if (best_w > 0 && best_h > 0) {
+                if (width)
+                        *width = best_w;
+                if (height)
+                        *height = best_h;
+
+                return TRUE;
+        }
+
+        return FALSE;
+}
+
+static gboolean
+output_info_supports_mode (App *app, GnomeOutputInfo *info, int width, int height)
+{
+    GnomeRROutput *output;
+    GnomeRRMode **modes;
+    int i;
+
+    if (!info->connected)
+	return FALSE;
+
+    output = gnome_rr_screen_get_output_by_name (app->screen, info->name);
+    if (!output)
+	return FALSE;
+
+    modes = gnome_rr_output_list_modes (output);
+
+    for (i = 0; modes[i]; i++) {
+	if (gnome_rr_mode_get_width (modes[i]) == width
+	    && gnome_rr_mode_get_height (modes[i]) == height)
+	    return TRUE;
+    }
+
+    return FALSE;
+}
+
 static void
 on_clone_changed (GtkWidget *box, gpointer data)
 {
@@ -869,6 +932,7 @@ on_clone_changed (GtkWidget *box, gpointer data)
     if (app->current_configuration->clone)
     {
 	int i;
+	int width, height;
 
 	for (i = 0; app->current_configuration->outputs[i]; ++i)
 	{
@@ -876,6 +940,21 @@ on_clone_changed (GtkWidget *box, gpointer data)
 	    {
 		app->current_output = app->current_configuration->outputs[i];
 		break;
+	    }
+	}
+
+	/* Turn on all the connected screens that support the best clone mode.
+	 * The user may hit "Mirror Screens", but he shouldn't have to turn on
+	 * all the required outputs as well.
+	 */
+
+	get_clone_size (app->screen, &width, &height);
+
+	for (i = 0; app->current_configuration->outputs[i]; i++) {
+	    if (output_info_supports_mode (app, app->current_configuration->outputs[i], width, height)) {
+		app->current_configuration->outputs[i]->on = TRUE;
+		app->current_configuration->outputs[i]->width = width;
+		app->current_configuration->outputs[i]->height = height;
 	    }
 	}
     }
