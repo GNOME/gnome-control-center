@@ -24,7 +24,7 @@ wm_common_get_window_manager_property (Atom atom)
   int format;
   gulong nitems;
   gulong bytes_after;
-  guchar *val;
+  gchar *val;
 
   if (wm_window == None)
     return NULL;
@@ -40,7 +40,7 @@ wm_common_get_window_manager_property (Atom atom)
 			       0, G_MAXLONG,
 			       False, utf8_string,
 			       &type, &format, &nitems,
-			       &bytes_after, &val);
+			       &bytes_after, (guchar **) &val);
 
   if (gdk_error_trap_pop () || result != Success ||
       type != utf8_string || format != 8 || nitems == 0 ||
