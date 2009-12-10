@@ -78,12 +78,15 @@ struct App
 };
 
 static void rebuild_gui (App *app);
+static void on_clone_changed (GtkWidget *box, gpointer data);
 static void on_rate_changed (GtkComboBox *box, gpointer data);
 static gboolean output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config);
 static void select_current_output_from_dialog_position (App *app);
 static void monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data);
 static void get_geometry (GnomeOutputInfo *output, int *w, int *h);
 static void apply_configuration_returned_cb (DBusGProxy *proxy, DBusGProxyCall *call_id, void *data);
+static gboolean get_clone_size (GnomeRRScreen *screen, int *width, int *height);
+static gboolean output_info_supports_mode (App *app, GnomeOutputInfo *info, int width, int height);
 
 static void
 error_message (App *app, const char *primary_text, const char *secondary_text)
@@ -420,6 +423,67 @@ count_all_outputs (GnomeRRConfig *config)
 }
 #endif
 
+/* Computes whether "Mirror Screens" (clone mode) is supported based on these criteria:
+ *
+ * 1. There is an available size for cloning.
+ *
+ * 2. There are 2 or more connected outputs that support that size.
+ */
+static gboolean
+mirror_screens_is_supported (App *app)
+{
+    int clone_width, clone_height;
+    gboolean have_clone_size;
+    gboolean mirror_is_supported;
+
+    mirror_is_supported = FALSE;
+
+    have_clone_size = get_clone_size (app->screen, &clone_width, &clone_height);
+
+    if (have_clone_size) {
+	int i;
+	int num_outputs_with_clone_size;
+
+	num_outputs_with_clone_size = 0;
+
+	for (i = 0; app->current_configuration->outputs[i] != NULL; i++)
+	{
+	    GnomeOutputInfo *output = app->current_configuration->outputs[i];
+
+	    /* We count the connected outputs that support the clone size.  It
+	     * doesn't matter if those outputs aren't actually On currently; we
+	     * will turn them on in on_clone_changed().
+	     */
+	    if (output->connected && output_info_supports_mode (app, output, clone_width, clone_height))
+		num_outputs_with_clone_size++;
+	}
+
+	if (num_outputs_with_clone_size >= 2)
+	    mirror_is_supported = TRUE;
+    }
+
+    return mirror_is_supported;
+}
+
+static void
+rebuild_mirror_screens (App *app)
+{
+    gboolean mirror_is_active;
+    gboolean mirror_is_supported;
+
+    g_signal_handlers_block_by_func (app->clone_checkbox, G_CALLBACK (on_clone_changed), app);
+
+    mirror_is_active = app->current_configuration && app->current_configuration->clone;
+
+    /* If mirror_is_active, then it *must* be possible to turn mirroring off */
+    mirror_is_supported = mirror_is_active || mirror_screens_is_supported (app);
+    
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->clone_checkbox), mirror_is_active);
+    gtk_widget_set_sensitive (app->clone_checkbox, mirror_is_supported);
+
+    g_signal_handlers_unblock_by_func (app->clone_checkbox, G_CALLBACK (on_clone_changed), app);
+}
+
 static void
 rebuild_current_monitor_label (App *app)
 {
@@ -597,6 +661,7 @@ rebuild_gui (App *app)
     g_debug ("rebuild gui, is on: %d", app->current_output->on);
 #endif
 
+    rebuild_mirror_screens (app);
     rebuild_current_monitor_label (app);
     rebuild_on_off_radios (app);
     rebuild_resolution_combo (app);
@@ -609,11 +674,6 @@ rebuild_gui (App *app)
     gtk_widget_set_sensitive (app->panel_checkbox, sensitive);
 
     app->ignore_gui_changes = FALSE;
-
-    if (app->current_configuration && app->current_configuration->clone)
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->clone_checkbox), TRUE);
-    else
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->clone_checkbox), FALSE);
 }
 
 static gboolean
