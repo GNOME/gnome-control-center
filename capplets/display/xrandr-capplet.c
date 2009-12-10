@@ -542,7 +542,11 @@ rebuild_on_off_radios (App *app)
     g_signal_handlers_block_by_func (app->monitor_on_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
     g_signal_handlers_block_by_func (app->monitor_off_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
 
-    if (app->current_output)
+    sensitive = FALSE;
+    on_active = FALSE;
+    off_active = FALSE;
+
+    if (!app->current_configuration->clone && app->current_output)
     {
 	if (count_active_outputs (app) > 1 || !app->current_output->on)
 	    sensitive = TRUE;
@@ -551,12 +555,6 @@ rebuild_on_off_radios (App *app)
 
 	on_active = app->current_output->on;
 	off_active = !on_active;
-    }
-    else
-    {
-	sensitive = FALSE;
-	on_active = FALSE;
-	off_active = FALSE;
     }
 
     gtk_widget_set_sensitive (app->monitor_on_radio, sensitive);
