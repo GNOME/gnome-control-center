@@ -922,6 +922,82 @@ cb_delete_button_clicked (GtkWidget *button,
 	g_object_unref (client);
 }
 
+/* When using the same proxy for all protocols, updates every host_entry
+ * as the user types along */
+static void
+synchronize_hosts (GtkEntry *widget,
+		   GtkBuilder *builder)
+{
+	const gchar *hosts[] = {
+		"secure_host_entry",
+		"ftp_host_entry",
+		"socks_host_entry",
+		NULL };
+	const gchar **host, *http_host;
+
+	http_host = gtk_entry_get_text (widget);
+
+	for (host = hosts; *host != NULL; ++host)
+	{
+		widget = GTK_ENTRY (gtk_builder_get_object (builder, *host));
+		gtk_entry_set_text (widget, http_host);
+	}
+}
+
+/* When using the same proxy for all protocols, copies the value of the
+ * http port to the other spinbuttons */
+static void
+synchronize_ports (GtkSpinButton *widget,
+		   GtkBuilder *builder)
+{
+	const gchar *ports[] = {
+		"secure_port_spinbutton",
+		"ftp_port_spinbutton",
+		"socks_port_spinbutton",
+		NULL };
+	gdouble http_port;
+	const gchar **port;
+
+	http_port = gtk_spin_button_get_value (widget);
+
+	for (port = ports; *port != NULL; ++port)
+	{
+		widget = GTK_SPIN_BUTTON (
+			gtk_builder_get_object (builder, *port));
+		gtk_spin_button_set_value (widget, http_port);
+	}
+}
+
+/* Synchronizes all hosts and ports */
+static void
+synchronize_entries (GtkBuilder *builder)
+{
+	g_signal_connect (
+		gtk_builder_get_object (builder, "http_host_entry"),
+		"changed",
+		G_CALLBACK (synchronize_hosts),
+		builder);
+	g_signal_connect (
+		gtk_builder_get_object (builder, "http_port_spinbutton"),
+		"value-changed",
+		G_CALLBACK (synchronize_ports),
+		builder);
+}
+
+/* Unsynchronize hosts and ports */
+static void
+unsynchronize_entries (GtkBuilder *builder)
+{
+	g_signal_handlers_disconnect_by_func (
+		gtk_builder_get_object (builder, "http_host_entry"),
+		synchronize_hosts,
+		builder);
+	g_signal_handlers_disconnect_by_func (
+		gtk_builder_get_object (builder, "http_port_spinbutton"),
+		synchronize_ports,
+		builder);
+}
+
 static void
 cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 				       GtkBuilder *builder)
@@ -968,6 +1044,9 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 
 		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, http_proxy, NULL);
 		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY, http_port, NULL);
+
+		/* Synchronize entries */
+		synchronize_entries (builder);
 	}
 	else
 	{
@@ -988,6 +1067,9 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY,
 			gconf_client_get_int (client, OLD_SOCKS_PROXY_PORT_KEY, NULL), NULL);
 		g_free (host);
+
+		/* Hosts and ports should not be synchronized any more */
+		unsynchronize_entries (builder);
 	}
 
 	/* Set the proxy entries insensitive if we are using the same proxy for all */
@@ -1128,15 +1210,13 @@ setup_dialog (GtkBuilder *builder)
 	GType mode_type = 0;
 	GConfClient *client;
 	gint port_value;
-	GtkWidget *location_box;
+	GtkWidget *location_box, *same_proxy_toggle;
 	GtkCellRenderer *location_renderer;
 	GtkListStore *store;
 
 	mode_type = g_enum_register_static ("NetworkPreferencesProxyType",
 				            proxytype_values);
 
-	/* There's a bug in peditors that cause them to not initialize the entry
-	 * correctly. */
 	client = gconf_client_get_default ();
 
 	/* Locations */
@@ -1174,10 +1254,11 @@ setup_dialog (GtkBuilder *builder)
 			TRUE, NULL));
 
 	/* Use same proxy for all protocols */
+	same_proxy_toggle = _gtk_builder_get_widget (builder, "same_proxy_checkbutton");
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_boolean (NULL,
-			USE_SAME_PROXY_KEY, _gtk_builder_get_widget (builder, "same_proxy_checkbutton"), NULL));
+			USE_SAME_PROXY_KEY, same_proxy_toggle, NULL));
 
-	g_signal_connect (gtk_builder_get_object (builder, "same_proxy_checkbutton"),
+	g_signal_connect (same_proxy_toggle,
 			"toggled",
 			G_CALLBACK (cb_use_same_proxy_checkbutton_clicked),
 			builder);
@@ -1237,8 +1318,9 @@ setup_dialog (GtkBuilder *builder)
 			_gtk_builder_get_widget (builder, "socks_port_spinbutton"),
 			NULL));
 
-	/* Set the proxy entries insensitive if we are using the same proxy for all */
-	if (gconf_client_get_bool (client, USE_SAME_PROXY_KEY, NULL))
+	/* Set the proxy entries insensitive if we are using the same proxy for all,
+	   and make sure they are all synchronized */
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (same_proxy_toggle)))
 	{
 		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "secure_host_entry"), FALSE);
 		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "secure_port_spinbutton"), FALSE);
@@ -1246,6 +1328,8 @@ setup_dialog (GtkBuilder *builder)
 		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "ftp_port_spinbutton"), FALSE);
 		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "socks_host_entry"), FALSE);
 		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "socks_port_spinbutton"), FALSE);
+
+		synchronize_entries (builder);
 	}
 
 	/* Autoconfiguration */
