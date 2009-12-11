@@ -493,7 +493,11 @@ rebuild_current_monitor_label (App *app)
 
 	if (app->current_output)
 	{
-	    tmp = g_strdup_printf (_("Monitor: %s"), app->current_output->display_name);
+	    if (app->current_configuration->clone)
+		tmp = g_strdup (_("Mirror Screens"));
+	    else
+		tmp = g_strdup_printf (_("Monitor: %s"), app->current_output->display_name);
+
 	    str = g_strdup_printf ("<b>%s</b>", tmp);
 	    gnome_rr_labeler_get_color_for_output (app->labeler, app->current_output, &color);
 	    use_color = TRUE;
