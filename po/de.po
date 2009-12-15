@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-09 01:21+0100\n"
-"PO-Revision-Date: 2009-12-05 01:35+0100\n"
+"POT-Creation-Date: 2009-12-15 23:28+0100\n"
+"PO-Revision-Date: 2009-12-15 23:32+0100\n"
 "Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -230,7 +230,7 @@ msgid "No Image"
 msgstr "Kein Bild"
 
 #: ../capplets/about-me/gnome-about-me.c:746
-#: ../capplets/appearance/appearance-desktop.c:654
+#: ../capplets/appearance/appearance-desktop.c:658
 msgid "Images"
 msgstr "Bilder"
 
@@ -821,11 +821,11 @@ msgid "Choose which accessibility features to enable when you log in"
 msgstr ""
 "Die beim Anmelden zu startenden Hilfsmittel für Barrierefreiheit festlegen"
 
-#: ../capplets/appearance/appearance-desktop.c:623
+#: ../capplets/appearance/appearance-desktop.c:627
 msgid "Add Wallpaper"
 msgstr "Hintergrund hinzufügen"
 
-#: ../capplets/appearance/appearance-desktop.c:658
+#: ../capplets/appearance/appearance-desktop.c:662
 msgid "All files"
 msgstr "Alle Dateien"
 
@@ -1061,10 +1061,11 @@ msgstr "Weitere Themen online erhalten"
 msgid "Gra_yscale"
 msgstr "_Graustufen"
 
+# Verbesserung der Lesbarkeit auf Anzeigen mit geringer Auflösung
 #. font hinting
 #: ../capplets/appearance/data/appearance.ui.h:20
 msgid "Hinting"
-msgstr "Tipps"
+msgstr "Hinting"
 
 #: ../capplets/appearance/data/appearance.ui.h:21
 msgid "Horizontal gradient"
@@ -1318,20 +1319,20 @@ msgstr "GNOME Themen-Paket"
 msgid "No Desktop Background"
 msgstr "Kein Arbeitsflächen-Hintergrund"
 
-#: ../capplets/appearance/gnome-wp-item.c:258
+#: ../capplets/appearance/gnome-wp-item.c:260
 msgid "Slide Show"
 msgstr "Diaschau"
 
-#: ../capplets/appearance/gnome-wp-item.c:260
+#: ../capplets/appearance/gnome-wp-item.c:262
 msgid "Image"
 msgstr "Bild"
 
-#: ../capplets/appearance/gnome-wp-item.c:266
+#: ../capplets/appearance/gnome-wp-item.c:268
 msgid "multiple sizes"
 msgstr "mehrere Größen"
 
-#: ../capplets/appearance/gnome-wp-item.c:271
 #: ../capplets/appearance/gnome-wp-item.c:273
+#: ../capplets/appearance/gnome-wp-item.c:275
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "Pixel"
@@ -1341,7 +1342,7 @@ msgstr[1] "Pixel"
 #. * mime type, size
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:279
+#: ../capplets/appearance/gnome-wp-item.c:283
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1351,6 +1352,25 @@ msgstr ""
 "<b>%s</b>\n"
 "%s, %s\n"
 "Ordner: %s"
+
+#. translators: <b>wallpaper name</b>
+#. * Image missing
+#. * Folder: /path/to/file
+#.
+#: ../capplets/appearance/gnome-wp-item.c:295
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s\n"
+"Ordner: %s"
+
+#: ../capplets/appearance/gnome-wp-item.c:299
+msgid "Image missing"
+msgstr "Bild fehlt"
 
 #: ../capplets/appearance/theme-installer.c:178
 #: ../capplets/appearance/theme-installer.c:234
@@ -2104,18 +2124,18 @@ msgid "Include _panel"
 msgstr "Panel _einschließen"
 
 #: ../capplets/display/display-capplet.ui.h:4
-#: ../capplets/display/xrandr-capplet.c:302
+#: ../capplets/display/xrandr-capplet.c:305
 msgid "Left"
 msgstr "Links"
 
 #: ../capplets/display/display-capplet.ui.h:5
-#: ../capplets/display/xrandr-capplet.c:440
+#: ../capplets/display/xrandr-capplet.c:508
 msgid "Monitor"
 msgstr "Monitor"
 
 #: ../capplets/display/display-capplet.ui.h:6
-#: ../capplets/display/xrandr-capplet.c:301
-#: ../capplets/display/xrandr-capplet.c:340
+#: ../capplets/display/xrandr-capplet.c:304
+#: ../capplets/display/xrandr-capplet.c:343
 msgid "Normal"
 msgstr "Normal"
 
@@ -2141,7 +2161,7 @@ msgid "Re_fresh rate:"
 msgstr "Wiederhol_rate:"
 
 #: ../capplets/display/display-capplet.ui.h:12
-#: ../capplets/display/xrandr-capplet.c:303
+#: ../capplets/display/xrandr-capplet.c:306
 msgid "Right"
 msgstr "Rechts"
 
@@ -2173,49 +2193,50 @@ msgstr "Bildschirmauflösung ändern"
 msgid "Display"
 msgstr "Anzeige"
 
-#: ../capplets/display/xrandr-capplet.c:304
+#: ../capplets/display/xrandr-capplet.c:307
 msgid "Upside Down"
 msgstr "Kopfüber"
 
-#: ../capplets/display/xrandr-capplet.c:346
+#: ../capplets/display/xrandr-capplet.c:349
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
-
-#: ../capplets/display/xrandr-capplet.c:432
-#, c-format
-msgid "Monitor: %s"
-msgstr "Monitor: %s"
-
-#: ../capplets/display/xrandr-capplet.c:511
-#, c-format
-msgid "%d x %d"
-msgstr "%d × %d"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:1463
+#: ../capplets/display/xrandr-capplet.c:497
+#: ../capplets/display/xrandr-capplet.c:1604
 msgid "Mirror Screens"
 msgstr "Bildschirme spiegeln"
 
-#: ../capplets/display/xrandr-capplet.c:1883
+#: ../capplets/display/xrandr-capplet.c:499
+#, c-format
+msgid "Monitor: %s"
+msgstr "Monitor: %s"
+
+#: ../capplets/display/xrandr-capplet.c:577
+#, c-format
+msgid "%d x %d"
+msgstr "%d × %d"
+
+#: ../capplets/display/xrandr-capplet.c:2024
 msgid "Could not save the monitor configuration"
 msgstr "Die Bildschirmkonfiguration konnte nicht gespeichert werden"
 
-#: ../capplets/display/xrandr-capplet.c:1894
+#: ../capplets/display/xrandr-capplet.c:2035
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Beim Anwenden der Bildschirmeinstellungen konnte der Sitzungsbus nicht "
 "angefordert werden"
 
-#: ../capplets/display/xrandr-capplet.c:1936
+#: ../capplets/display/xrandr-capplet.c:2077
 msgid "Could not detect displays"
 msgstr "Anzeigen konnten nicht erkannt werden"
 
-#: ../capplets/display/xrandr-capplet.c:2151
+#: ../capplets/display/xrandr-capplet.c:2292
 msgid "Could not get screen information"
 msgstr "Bildschirminformationen konnten nicht ausgelesen werden"
 
