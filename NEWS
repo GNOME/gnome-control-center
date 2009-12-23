@@ -1,3 +1,104 @@
+gnome-control-center 2.29.4 (2009-12-24)
+
+General:
+- Drop obsolete check for HAL (#595832) (Jens Granseuer)
+- Use external libslab when available (Vincent Untz)
+- Add gthread-2.0 to common modules for linking (#600589) (Jens Granseuer)
+- Enable silent build rules (Thomas Wood)
+
+Common:
+- Fix all the keybindings showing up when using compiz (#600021) (Bastien
+  Nocera)
+- Fix leak (Jens Granseuer)
+- Fix warning (Jens Granseuer)
+
+About-me:
+- Fix crash when closing the window using the window button (#592348) (Jens
+  Granseuer)
+- Add missing PNG files (Bastien Nocera)
+
+Appearance:
+- Remove interface tab (#592756) (William Jon McCann)
+- Add OnlyShowIn=GNOME to the .desktop file (#594709) (Thomas Wood)
+- Update the background style option labels (#411048) (Thomas Wood)
+- Fix tooltip in the background chooser (#596369) (Matthias Clasen)
+- Add support for per-monitor backgrounds (#147808) (William Jon McCann)
+
+Default applications:
+- Update the exec arg when changing terminal (#597185) (Vincent Untz)
+- Be sure to add the gconf directories for monitoring (#597186) (Thomas Wood)
+- Return an empty string for the custom web item (Thomas Wood)
+
+Display:
+- Don't assert when the current output doesn't have a resolution set yet
+  (#593866) (Federico Mena Quintero)
+- Automatically turn on outputs which support Mirror Screens (#590823)
+  (Federico Mena Quintero)
+- Sensitize 'Mirror Screens' depending on whether mirror mode is actually
+  supported (Federico Mena Quintero)
+- Desensitize the on/off radio buttons if we are in Mirror Screens mode
+  (Federico Mena Quintero)
+- Show 'Mirror Screens' in the monitor label, not a random monitor's name
+  (Federico Mena Quintero)
+
+Font Viewer:
+- Use pango_language_get_sample_string for sample text (#595107) (Jens
+  Granseuer)
+- Expand the Copyright display to get rid of unnecessary scrollbar (Jens
+  Granseuer)
+- Don't use URI notation when installing fonts (#603732) (Jens Granseuer)
+
+Keybindings:
+- Fix broken logic in keybinding tree model (Robert Ancell)
+- Fix zombie bindings appearing after deleting custom shortcuts (#596351) (Jens
+  Granseuer)
+- Show shortcuts for the active window manager (#600531) (Wang Xin)
+- Remove sleep key entry (#170175) (Bastien Nocera)
+
+Keyboard:
+- Major UI reorganization (Sergey V. Udaltsov)
+- Fix mnemonic conflict in mousekeys tab (#586433) (Jens Granseuer)
+
+Mouse:
+- Disable two-finger scrolling/tapping based on touchpad capabilities. (Peter
+  Hutterer)
+
+Network:
+- Keep proxies in sync when "use same proxy" is selected (#589952) (Cyril
+  Roelandt)
+
+Typing break:
+- Increase delay for activating the postpone button to 5s (#597086) (Tim Waugh)
+- Reset timer after suspend (#430797) (Jens Granseuer)
+
+Windows:
+- Don't allow Ctrl+Click as window movement modifier (#409405) (Jens Granseuer)
+
+Translations:
+- ar (Khaled Hosny)
+- ca (Joan Duran)
+- ca@valencia (Carles Ferrando Garcia)
+- crh (Reşat SABIQ)
+- de (Christian Kirbach)
+- en@shaw (Thomas Thurman)
+- en_GB (Bruce Cowan)
+- es (Jorge González)
+- et (Ivar Smolin)
+- he (Yaron Shahrabani)
+- id (Andika Triwidada)
+- it (Luca Ferretti)
+- lt (Žygimantas Beručka)
+- nb (Kjartan Maraas)
+- nds (Nils-Christoph Fiedler)
+- pl (Tomasz Dominikowski)
+- ro (Adi Roiban)
+- ru (Alexandre Prokoudine)
+- sl (Matej Urbančič)
+- sv (Daniel Nylander)
+- ta (Dr.T.Vasudevan)
+- th (อาคม โชติพันธวานนท์)
+- zh_CN (Tao Wei)
+
 gnome-control-center 2.28.0 (2009-09-21)
 
 Appearance:

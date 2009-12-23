@@ -1,4 +1,4 @@
-EXTRA_DIST = ChangeLog
+EXTRA_DIST =
 
 INCLUDES = \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
