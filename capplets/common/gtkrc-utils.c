@@ -212,15 +212,18 @@ gtkrc_get_color_scheme (const gchar *gtkrc_file)
 			{
 				if (GINT_TO_POINTER (token) == COLOR_SCHEME_SYMBOL)
 				{
-					if (g_scanner_get_next_token (scanner) != '=')
-						continue;
-					token = g_scanner_get_next_token (scanner);
-					if (token != G_TOKEN_STRING)
-						continue;
-					g_free (result);
-					result = g_strdup (scanner->value.v_string);
+					if (g_scanner_get_next_token (scanner) == '=')
+					{
+						token = g_scanner_get_next_token (scanner);
+						if (token == G_TOKEN_STRING)
+						{
+							g_free (result);
+							result = g_strdup (scanner->value.v_string);
+						}
+					}
 				}
 			}
+			close (file);
 		}
 	}
 
