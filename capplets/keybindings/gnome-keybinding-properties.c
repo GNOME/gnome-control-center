@@ -1803,7 +1803,7 @@ selection_changed (GtkTreeSelection *selection, gpointer data)
 }
 
 static void
-setup_dialog (GtkBuilder *builder)
+setup_dialog (GtkBuilder *builder, guint32 socket_id)
 {
   GConfClient *client;
   GtkCellRenderer *renderer;
@@ -1868,12 +1868,39 @@ setup_dialog (GtkBuilder *builder)
   /* set up the dialog */
   reload_key_entries (builder);
 
-  widget = _gtk_builder_get_widget (builder, "gnome-keybinding-dialog");
-  capplet_set_icon (widget, "preferences-desktop-keyboard-shortcuts");
-  gtk_widget_show (widget);
+  if (socket_id)
+    {
+      GtkWidget *content, *plug;
 
-  g_signal_connect (widget, "key_press_event", G_CALLBACK (maybe_block_accels), NULL);
-  g_signal_connect (widget, "response", G_CALLBACK (cb_dialog_response), builder);
+      /* re-parent contents */
+      content = _gtk_builder_get_widget (builder, "shortcut_dialog");
+
+      plug = gtk_plug_new (socket_id);
+      gtk_widget_reparent (content, plug);
+      g_signal_connect (plug, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+
+      gtk_widget_show_all (plug);
+
+      gtk_widget_hide (_gtk_builder_get_widget (builder, "button1"));
+      gtk_widget_hide (_gtk_builder_get_widget (builder, "helpbutton1"));
+      gtk_container_set_border_width (GTK_CONTAINER (content), 12);
+
+      widget = plug;
+    }
+  else
+    {
+      widget = _gtk_builder_get_widget (builder, "gnome-keybinding-dialog");
+
+      capplet_set_icon (widget, "preferences-desktop-keyboard-shortcuts");
+
+      gtk_widget_show (widget);
+
+      g_signal_connect (widget, "key_press_event",
+                        G_CALLBACK (maybe_block_accels), NULL);
+      g_signal_connect (widget, "response", G_CALLBACK (cb_dialog_response),
+                        builder);
+    }
+
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
@@ -1917,15 +1944,28 @@ int
 main (int argc, char *argv[])
 {
   GtkBuilder *builder;
+  guint32 socket_id;
+
+  GOptionContext *context;
+  GOptionEntry cap_options[] = {
+        { "socket",
+          's',
+          G_OPTION_FLAG_IN_MAIN,
+          G_OPTION_ARG_INT,
+          &socket_id,
+          /* TRANSLATORS: don't translate the terms in brackets */
+          N_("ID of the socket to embed in"),
+          N_("socket") },
+
+        { NULL }
+  };
 
   g_thread_init (NULL);
-  gtk_init (&argc, &argv);
 
-  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
+  context = g_option_context_new (_("- GNOME Keybinding Preferences"));
+  g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
 
-  gtk_init (&argc, &argv);
+  capplet_init (context, &argc, &argv);
 
   activate_settings_daemon ();
 
@@ -1935,7 +1975,7 @@ main (int argc, char *argv[])
     exit (EXIT_FAILURE);
 
   wm_common_register_window_manager_change ((GFunc) on_window_manager_change, builder);
-  setup_dialog (builder);
+  setup_dialog (builder, socket_id);
 
   gtk_main ();
 
