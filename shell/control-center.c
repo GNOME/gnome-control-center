@@ -92,7 +92,7 @@ fill_model (GtkBuilder *b)
 
   vbox = W (b, "main-vbox");
 
-  t = gmenu_tree_lookup ("/etc/xdg/menus/gnomecc.menu", 0);
+  t = gmenu_tree_lookup (MENUDIR "/gnomecc.menu", 0);
 
   d = gmenu_tree_get_root_directory (t);
 
@@ -273,7 +273,7 @@ main (int argc, char **argv)
 
   b = gtk_builder_new ();
 
-  ret = gtk_builder_add_from_file (b, "shell.ui", NULL);
+  ret = gtk_builder_add_from_file (b, UIDIR "/shell.ui", NULL);
   if (ret == 0)
     {
       g_error ("Unable to load UI");

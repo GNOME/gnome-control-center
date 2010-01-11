@@ -13,6 +13,12 @@ INCLUDES =					\
 
 noinst_PROGRAMS = gnome-control-center 
 
+menudir = $(sysconfdir)/xdg/menus
+menu_DATA = gnomecc.menu
+
+uidir = $(pkgdatadir)
+ui_DATA = shell.ui
+
 gnome_control_center_SOURCES =		\
 	control-center.c
 
@@ -21,7 +27,9 @@ gnome_control_center_LDADD =						\
 	$(REAL_LIBSLAB_LIBS)
 
 AM_CPPFLAGS =							\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
+	-DUIDIR="\"$(uidir)\""					\
+	-DMENUDIR="\"$(menudir)\""
 
 sysdir = $(datadir)/applications
 sys_in_files = gnomecc.desktop.in
@@ -46,10 +54,7 @@ if GCONF_SCHEMAS_INSTALL
 	fi
 endif
 
-menudir = $(sysconfdir)/xdg/menus
-menu_DATA = gnomecc.menu
-
-EXTRA_DIST = shell.ui gnomecc.desktop.in.in gnomecc.directory.in gnomecc.menu $(schemas_DATA).in
+EXTRA_DIST = $(ui_DATA) gnomecc.desktop.in.in gnomecc.directory.in gnomecc.menu $(schemas_DATA).in
 
 DISTCLEANFILES = gnomecc.desktop gnomecc.desktop.in gnomecc.directory $(schemas_DATA)
 
