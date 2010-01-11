@@ -178,6 +178,14 @@ fill_model (GtkBuilder *b)
 
 }
 
+static gboolean
+switch_after_delay (GtkNotebook *notebook)
+{
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
+
+  return FALSE;
+}
+
 void
 plug_added_cb (GtkSocket  *socket,
                GtkBuilder *builder)
@@ -187,7 +195,9 @@ plug_added_cb (GtkSocket  *socket,
 
   notebook = W (builder, "notebook");
 
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
+  /* FIXME: this shouldn't be necassary if the capplet doesn't add to the socket
+   * until it is fully ready */
+  g_timeout_add (100, switch_after_delay, notebook);
 
   /* make sure no items are selected when the user switches back to the icon
    * views */
