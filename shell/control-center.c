@@ -88,7 +88,7 @@ fill_model (GtkBuilder *b)
   GMenuTreeDirectory *d;
   GMenuTree *t;
   GtkWidget *vbox;
-  GSList *iconviews;
+  GSList *iconviews = NULL;
 
   vbox = W (b, "main-vbox");
 
