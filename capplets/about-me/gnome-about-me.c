@@ -836,7 +836,7 @@ about_me_fingerprint_button_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 }
 
 static gint
-about_me_setup_dialog (void)
+about_me_setup_dialog (guint32 socket_id)
 {
 	GtkWidget    *widget;
 	GtkWidget    *main_dialog;
@@ -861,10 +861,25 @@ about_me_setup_dialog (void)
 
 	me->dialog = dialog;
 
-	/* Connect the close button signal */
-	main_dialog = WID ("about-me-dialog");
-	g_signal_connect (main_dialog, "response",
-			  G_CALLBACK (about_me_button_clicked_cb), me);
+	if (socket_id) {
+		GtkWidget *content, *plug;
+
+		/* re-parent contents */
+		content = WID ("vbox55");
+
+		plug = gtk_plug_new (socket_id);
+		gtk_widget_reparent (content, plug);
+		g_signal_connect (plug, "destroy", G_CALLBACK (gtk_main_quit),
+				  NULL);
+
+		gtk_widget_show_all (plug);
+		main_dialog = plug;
+	}
+	else {
+		main_dialog = WID ("about-me-dialog");
+		g_signal_connect (main_dialog, "response",
+				  G_CALLBACK (about_me_button_clicked_cb), me);
+	}
 
 	gtk_window_set_resizable (GTK_WINDOW (main_dialog), FALSE);
 	capplet_set_icon (main_dialog, "user-info");
@@ -986,8 +1001,26 @@ int
 main (int argc, char **argv)
 {
 	int rc = 0;
+	guint32 socket_id;
 
-	capplet_init (NULL, &argc, &argv);
+	GOptionContext *context;
+	GOptionEntry cap_options[] = {
+		{ "socket",
+		  's',
+		  G_OPTION_FLAG_IN_MAIN,
+		  G_OPTION_ARG_INT,
+		  &socket_id,
+		  /* TRANSLATORS: don't translate the terms in brackets */
+		  N_("ID of the socket to embed in"),
+		  N_("socket") },
+		{NULL}
+	};
+
+	context = g_option_context_new (_("- GNOME About Me"));
+	g_option_context_add_main_entries (context, cap_options,
+					   GETTEXT_PACKAGE);
+
+	capplet_init (context, &argc, &argv);
 
 	if (!g_thread_supported ())
 		g_thread_init (NULL);
@@ -995,7 +1028,7 @@ main (int argc, char **argv)
 	dbus_g_object_register_marshaller (fprintd_marshal_VOID__STRING_BOOLEAN,
 					   G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_INVALID);
 
-	rc = about_me_setup_dialog ();
+	rc = about_me_setup_dialog (socket_id);
 
 	if (rc != -1) {
 		gtk_main ();
