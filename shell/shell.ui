@@ -22,11 +22,20 @@
                     <property name="visible">True</property>
                     <property name="border_width">3</property>
                     <child>
-                      <object class="GtkButton" id="home-button">
-                        <property name="label" translatable="yes">All Settings</property>
+                      <object class="GtkHBox" id="button-box">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <child>
+                          <object class="GtkButton" id="home-button">
+                            <property name="label" translatable="yes">All Settings</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -34,22 +43,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkArrow" id="arrow">
-                        <property name="no_show_all">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkLabel" id="applet-label">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">Applet</property>
+                        <property name="use_markup">True</property>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="position">2</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
@@ -62,13 +62,15 @@
                             <property name="width_request">210</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">&#x25CF;</property>
+                            <property name="invisible_char">&#x2022;</property>
                             <property name="text" translatable="yes">Type to search your settings</property>
                           </object>
                         </child>
                       </object>
                       <packing>
-                        <property name="position">3</property>
+                        <property name="expand">False</property>
+                        <property name="pack_type">end</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>

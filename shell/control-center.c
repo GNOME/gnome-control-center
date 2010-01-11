@@ -213,7 +213,7 @@ item_activated_cb (GtkIconView *icon_view,
 {
   GtkTreeModel *model;
   GtkTreeIter iter = {0,};
-  gchar *name, *exec, *command;
+  gchar *name, *exec, *command, *markup;
   GtkWidget *socket, *notebook;
   guint socket_id = 0;
   static gint index = -1;
@@ -239,10 +239,11 @@ item_activated_cb (GtkIconView *icon_view,
 
   gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, -1);
 
-  gtk_label_set_text (GTK_LABEL (W (builder, "applet-label")),
-                      name);
+  markup = g_strdup_printf ("<b>%s</b>", name);
+  gtk_label_set_markup (GTK_LABEL (W (builder, "applet-label")),
+                        markup);
+  g_free (markup);
   gtk_widget_show (W (builder, "applet-label"));
-  gtk_widget_show (W (builder, "arrow"));
 
   /* start app */
   command = g_strdup_printf ("%s --socket=%u", exec, socket_id);
@@ -258,16 +259,16 @@ home_button_clicked_cb (GtkButton *button, GtkBuilder *builder)
 {
   gtk_notebook_set_current_page (GTK_NOTEBOOK (W (builder, "notebook")), 0);
   gtk_widget_hide (W (builder, "applet-label"));
-  gtk_widget_hide (W (builder, "arrow"));
 }
 
 int
 main (int argc, char **argv)
 {
   GtkBuilder *b;
-  GtkWidget *window, *notebook;
+  GtkWidget *window, *notebook, *widget;
   guint ret;
   GdkColor color = {0, 32767, 32767, 32767};
+  GtkSizeGroup *group;
 
   gtk_init (&argc, &argv);
 
@@ -288,6 +289,16 @@ main (int argc, char **argv)
 
   gtk_widget_modify_text (W (b,"search-entry"), GTK_STATE_NORMAL, &color);
 
+  group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+  widget = W (b, "button-box");
+  if (widget) {
+    gtk_size_group_add_widget (group, widget);
+  }
+  widget = W (b, "search-entry");
+  if (widget) {
+    gtk_size_group_add_widget (group, widget);
+  }
+  g_object_unref (group);
 
   g_signal_connect (gtk_builder_get_object (b, "home-button"), "clicked",
                     G_CALLBACK (home_button_clicked_cb), b);
