@@ -266,13 +266,18 @@ main (int argc, char **argv)
 {
   GtkBuilder *b;
   GtkWidget *window, *notebook;
+  guint ret;
   GdkColor color = {0, 32767, 32767, 32767};
 
   gtk_init (&argc, &argv);
 
   b = gtk_builder_new ();
 
-  gtk_builder_add_from_file (b, "shell.ui", NULL);
+  ret = gtk_builder_add_from_file (b, "shell.ui", NULL);
+  if (ret == 0)
+    {
+      g_error ("Unable to load UI");
+    }
 
   window = W (b, "main-window");
   g_signal_connect (window, "delete-event", G_CALLBACK (gtk_main_quit), NULL);
