@@ -1367,12 +1367,28 @@ main (int argc, char **argv)
 				    "delete_button_img", NULL};
 	GConfClient *client;
 	GtkWidget   *widget;
+	guint32 socket_id = 0;
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
+	GOptionContext *context;
+	GOptionEntry cap_options[] = {
+		{ "socket",
+		  's',
+		  G_OPTION_FLAG_IN_MAIN,
+		  G_OPTION_ARG_INT,
+		  &socket_id,
+		  /* TRANSLATORS: don't translate the terms in brackets */
+		  N_("ID of the socket to embed in"),
+		  N_("socket") },
 
-	gtk_init (&argc, &argv);
+		{ NULL }
+	};
+
+	context = g_option_context_new (_("- GNOME Network Preferences"));
+	g_option_context_add_main_entries (context, cap_options,
+					   GETTEXT_PACKAGE);
+
+	capplet_init (context, &argc, &argv);
+
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/system/http_proxy",
@@ -1392,9 +1408,32 @@ main (int argc, char **argv)
 	}
 
 	setup_dialog (builder);
-	widget = _gtk_builder_get_widget (builder, "network_dialog");
-	capplet_set_icon (widget, "gnome-network-properties");
-	gtk_widget_show_all (widget);
+
+	if (socket_id) {
+		GtkWidget *content, *plug;
+
+		/* re-parent contents */
+		content = _gtk_builder_get_widget (builder, "dialog-vbox1");
+
+		plug = gtk_plug_new (socket_id);
+		gtk_widget_reparent (content, plug);
+		g_signal_connect (plug, "destroy", G_CALLBACK (gtk_main_quit),
+				  NULL);
+
+		gtk_widget_show_all (plug);
+
+		gtk_widget_hide (_gtk_builder_get_widget (builder,
+							  "helpbutton1"));
+		gtk_widget_hide (_gtk_builder_get_widget (builder,
+							  "closebutton1"));
+		gtk_container_set_border_width (GTK_CONTAINER (content), 12);
+
+	} else {
+		widget = _gtk_builder_get_widget (builder, "network_dialog");
+		capplet_set_icon (widget, "gnome-network-properties");
+		gtk_widget_show_all (widget);
+	}
+
 	gtk_main ();
 
 	g_object_unref (builder);
