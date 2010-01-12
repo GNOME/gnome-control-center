@@ -25,7 +25,7 @@
 #define __GCONF_PROPERTY_EDITOR_H
 
 #include <gtk/gtk.h>
-#include <glib/gi18n.h>
+
 #include <gconf/gconf-client.h>
 #include <gconf/gconf-changeset.h>
 

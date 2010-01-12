@@ -29,6 +29,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+#include <glib/gi18n.h>
+
 #include "gconf-property-editor.h"
 #include "gconf-property-editor-marshal.h"
 
