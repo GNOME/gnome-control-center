@@ -359,7 +359,7 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 					 &bytes_after, &data) == Success) && (realtype != None)) {
 			/* Property data is booleans for has_left, has_middle,
 			 * has_right, has_double, has_triple */
-			if (!data[0] || !data[1] || !data[2]) {
+			if (!data[0]) {
 				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("tap_to_click_toggle")), TRUE);
 				gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), FALSE);
 			}
