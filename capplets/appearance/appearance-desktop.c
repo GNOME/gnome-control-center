@@ -192,10 +192,11 @@ wp_add_image (AppearanceData *data,
   }
   else
   {
-    item = gnome_wp_item_new (filename, data->wp_hash, data->thumb_factory);
+    item = gnome_wp_item_new (filename, data->thumb_factory);
 
     if (item != NULL)
     {
+      g_hash_table_insert (data->wp_hash, item->filename, item);
       wp_props_load_wallpaper (item->filename, item, data);
     }
   }
@@ -999,7 +1000,7 @@ wp_load_stuffs (void *user_data)
   item = g_hash_table_lookup (data->wp_hash, "(none)");
   if (item == NULL)
   {
-    item = gnome_wp_item_new ("(none)", data->wp_hash, data->thumb_factory);
+    item = gnome_wp_item_new ("(none)", data->thumb_factory);
     if (item != NULL)
     {
       wp_props_load_wallpaper (item->filename, item, data);

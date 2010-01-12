@@ -43,7 +43,7 @@ init_appearance_data (int *argc, char ***argv, GOptionContext *context)
   activate_settings_daemon ();
 
   /* set up the data */
-  uifile = g_build_filename (GNOMECC_GTKBUILDER_DIR, "appearance.ui",
+  uifile = g_build_filename (GNOMECC_UI_DIR, "appearance.ui",
                              NULL);
   ui = gtk_builder_new ();
   gtk_builder_add_from_file (ui, uifile, &err);

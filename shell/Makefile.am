@@ -2,7 +2,7 @@ INCLUDES =					\
 	-I$(top_srcdir)				\
 	$(GNOMECC_SHELL_CFLAGS)
 
-bin_PROGRAMS = gnome-control-center 
+bin_PROGRAMS = gnome-control-center
 
 menudir = $(sysconfdir)/xdg/menus
 menu_DATA = gnomecc.menu
@@ -11,13 +11,20 @@ uidir = $(pkgdatadir)/ui
 ui_DATA = shell.ui
 
 gnome_control_center_SOURCES =		\
+	cc-page.h			\
+	cc-page.c			\
+	cc-panel.h			\
+	cc-panel.c			\
 	control-center.c
 
 gnome_control_center_LDADD =						\
 	$(GNOMECC_SHELL_LIBS)
 
+gnome_control_center_LDFLAGS = -export-dynamic
+
 AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
+	-DEXTENSION_DIR="\"$(libdir)/control-center-1/extensions\""					\
 	-DUIDIR="\"$(uidir)\""					\
 	-DMENUDIR="\"$(menudir)\""
 

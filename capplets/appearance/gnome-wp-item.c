@@ -123,7 +123,6 @@ void gnome_wp_item_update (GnomeWPItem *item) {
 }
 
 GnomeWPItem * gnome_wp_item_new (const gchar * filename,
-				 GHashTable * wallpapers,
 				 GnomeDesktopThumbnailFactory * thumbnails) {
   GnomeWPItem *item = g_new0 (GnomeWPItem, 1);
 
@@ -143,8 +142,6 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
     gnome_wp_item_update (item);
     gnome_wp_item_ensure_gnome_bg (item);
     gnome_wp_item_update_description (item);
-
-    g_hash_table_insert (wallpapers, item->filename, item);
   } else {
     gnome_wp_item_free (item);
     item = NULL;

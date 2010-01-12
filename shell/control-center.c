@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009, 2010 Intel, Inc.
+ * Copyright (c) 2010 Red Hat, Inc.
  *
  * The Control Center is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by the
@@ -18,14 +19,16 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #define GMENU_I_KNOW_THIS_IS_UNSTABLE
 #include <gnome-menus/gmenu-tree.h>
 
-#define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
+#include "cc-panel.h"
 
+#define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
 typedef struct
 {
@@ -45,6 +48,61 @@ typedef struct
 
 void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
 
+static GHashTable *panels = NULL;
+
+static void
+load_panel_plugins (void)
+{
+  static volatile GType panel_type = G_TYPE_INVALID;
+  static GIOExtensionPoint *ep = NULL;
+  GList *modules;
+  GList *panel_implementations;
+  GList *l;
+
+  /* make sure base type is registered */
+  if (panel_type == G_TYPE_INVALID)
+    {
+      panel_type = g_type_from_name ("CcPanel");
+    }
+
+  panels = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
+
+  if (ep == NULL)
+    {
+      g_debug ("Registering extension point");
+      ep = g_io_extension_point_register (CC_PANEL_EXTENSION_POINT_NAME);
+    }
+
+  /* load all modules */
+  g_debug ("Loading all modules in %s", EXTENSION_DIR);
+  modules = g_io_modules_load_all_in_directory (EXTENSION_DIR);
+
+  g_debug ("Loaded %d modules", g_list_length (modules));
+
+  /* find all extensions */
+  panel_implementations = g_io_extension_point_get_extensions (ep);
+  for (l = panel_implementations; l != NULL; l = l->next)
+    {
+      GIOExtension *extension;
+      CcPanel *panel;
+      char *id;
+
+      extension = l->data;
+
+      g_debug ("Found extension: %s %d", g_io_extension_get_name (extension), g_io_extension_get_priority (extension));
+      panel = g_object_new (g_io_extension_get_type (extension), NULL);
+      g_object_get (panel, "id", &id, NULL);
+      g_hash_table_insert (panels, g_strdup (id), g_object_ref (panel));
+      g_debug ("id: '%s'", id);
+      g_free (id);
+    }
+
+  /* unload all modules; the module our instantiated authority is in won't be unloaded because
+   * we've instantiated a reference to a type in this module
+   */
+  g_list_foreach (modules, (GFunc) g_type_module_unuse, NULL);
+  g_list_free (modules);
+}
 
 gboolean
 button_release_cb (GtkWidget      *view,
@@ -176,11 +234,14 @@ fill_model (ShellData *data)
           foo = gmenu_tree_directory_get_contents (l->data);
           dir_name = gmenu_tree_directory_get_name (l->data);
 
-          store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
+          store = gtk_list_store_new (4,
+                                      G_TYPE_STRING,
+                                      G_TYPE_STRING,
+                                      G_TYPE_STRING,
                                       GDK_TYPE_PIXBUF);
 
           iconview = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
-          gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (iconview), 2);
+          gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (iconview), 3);
           gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), 0);
           gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 120);
           g_signal_connect (iconview, "item-activated",
@@ -214,6 +275,7 @@ fill_model (ShellData *data)
                   GError *err = NULL;
                   const gchar *icon = gmenu_tree_entry_get_icon (f->data);
                   const gchar *name = gmenu_tree_entry_get_name (f->data);
+                  const gchar *id = gmenu_tree_entry_get_desktop_file_id (f->data);
                   const gchar *exec = gmenu_tree_entry_get_exec (f->data);
                   GdkPixbuf *pixbuf = NULL;
 
@@ -231,7 +293,8 @@ fill_model (ShellData *data)
                   gtk_list_store_insert_with_values (store, NULL, 0,
                                                      0, name,
                                                      1, exec,
-                                                     2, pixbuf,
+                                                     2, id,
+                                                     3, pixbuf,
                                                      -1);
 
                   gtk_list_store_insert_with_values (data->store, NULL, 0,
@@ -246,37 +309,6 @@ fill_model (ShellData *data)
 
 }
 
-static gboolean
-switch_after_delay (ShellData *data)
-{
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 2);
-
-  gtk_widget_show (W (data->builder, "home-button"));
-
-  gtk_window_set_title (GTK_WINDOW (data->window), data->current_title);
-
-  return FALSE;
-}
-
-void
-plug_added_cb (GtkSocket  *socket,
-               ShellData  *data)
-{
-  GtkWidget *notebook;
-  GSList *l;
-
-  notebook = W (data->builder, "notebook");
-
-  /* FIXME: this shouldn't be necassary if the capplet doesn't add to the socket
-   * until it is fully ready */
-  g_timeout_add (100, (GSourceFunc) switch_after_delay, data);
-
-  /* make sure no items are selected when the user switches back to the icon
-   * views */
-  for (l = data->icon_views; l; l = l->next)
-      gtk_icon_view_unselect_all (GTK_ICON_VIEW (l->data));
-}
-
 void
 item_activated_cb (GtkIconView *icon_view,
                    GtkTreePath *path,
@@ -284,48 +316,61 @@ item_activated_cb (GtkIconView *icon_view,
 {
   GtkTreeModel *model;
   GtkTreeIter iter = {0,};
-  gchar *name, *exec, *command;
-  GtkWidget *socket, *notebook;
-  guint socket_id = 0;
+  gchar *name, *exec, *id, *markup;
+  GtkWidget *notebook;
   static gint index = -1;
-
-  /* create new socket */
-  socket = gtk_socket_new ();
-
-  g_signal_connect (socket, "plug-added", G_CALLBACK (plug_added_cb), data);
+  CcPanel *panel;
 
   notebook = data->notebook;
   if (index >= 0)
     gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), index);
-  index = gtk_notebook_append_page (GTK_NOTEBOOK (notebook), socket, NULL);
-
-  gtk_widget_show (socket);
-
-  socket_id = gtk_socket_get_id (GTK_SOCKET (socket));
 
   /* get exec */
   model = gtk_icon_view_get_model (icon_view);
 
   gtk_tree_model_get_iter (model, &iter, path);
 
-  gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, -1);
+  gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, 2, &id, -1);
+
+  g_debug ("activated id: '%s'", id);
 
   g_free (data->current_title);
   data->current_title = name;
 
-  /* start app */
-  command = g_strdup_printf ("%s --socket=%u", exec, socket_id);
-  g_spawn_command_line_async (command, NULL);
-  g_free (command);
+  /* first look for a panel module */
+  panel = g_hash_table_lookup (panels, id);
+  if (panel != NULL)
+    {
+      index = gtk_notebook_append_page (GTK_NOTEBOOK (notebook), GTK_WIDGET (panel), NULL);
+      gtk_widget_show_all (GTK_WIDGET (panel));
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), index);
+      gtk_widget_show (W (data->builder, "home-button"));
+      gtk_window_set_title (GTK_WINDOW (data->window), data->current_title);
+    }
+  else
+    {
+      /* start app directly */
+      g_debug ("Panel module not found for %s", id);
+      g_spawn_command_line_async (exec, NULL);
+    }
 
+  g_free (id);
   g_free (exec);
 }
 
-void
+static void
 home_button_clicked_cb (GtkButton *button,
                         ShellData *data)
 {
+  int        page;
+  GtkWidget *widget;
+
+  page = gtk_notebook_get_current_page (GTK_NOTEBOOK (data->notebook));
   gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 0);
+  widget = gtk_notebook_get_nth_page (GTK_NOTEBOOK (data->notebook), page);
+  gtk_widget_hide (widget);
+  gtk_notebook_remove_page (GTK_NOTEBOOK (data->notebook), page);
+
   gtk_window_set_title (GTK_WINDOW (data->window), "System Settings");
 
   gtk_widget_hide (GTK_WIDGET (button));
@@ -414,6 +459,8 @@ main (int argc, char **argv)
                     data);
   g_signal_connect (widget, "key-press-event",
                     G_CALLBACK (search_entry_key_press_event_cb), data);
+
+  load_panel_plugins ();
 
   gtk_widget_show_all (data->window);
 

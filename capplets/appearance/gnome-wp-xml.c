@@ -83,7 +83,7 @@ static void gnome_wp_load_legacy (AppearanceData *data) {
 	  continue;
 	}
 
-	item = gnome_wp_item_new (foo, data->wp_hash, data->thumb_factory);
+	item = gnome_wp_item_new (foo, data->thumb_factory);
 	if (item != NULL && item->fileinfo == NULL) {
 	  gnome_wp_item_free (item);
 	}
