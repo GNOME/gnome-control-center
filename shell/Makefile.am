@@ -11,12 +11,12 @@ INCLUDES =					\
 	$(REAL_LIBSLAB_CFLAGS)			\
 	$(GNOMECC_SHELL_CFLAGS)
 
-noinst_PROGRAMS = gnome-control-center 
+bin_PROGRAMS = gnome-control-center 
 
 menudir = $(sysconfdir)/xdg/menus
 menu_DATA = gnomecc.menu
 
-uidir = $(pkgdatadir)
+uidir = $(pkgdatadir)/ui
 ui_DATA = shell.ui
 
 gnome_control_center_SOURCES =		\
