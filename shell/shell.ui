@@ -22,20 +22,11 @@
                     <property name="visible">True</property>
                     <property name="border_width">3</property>
                     <child>
-                      <object class="GtkHBox" id="button-box">
+                      <object class="GtkButton" id="home-button">
+                        <property name="label" translatable="yes">All Settings</property>
                         <property name="visible">True</property>
-                        <child>
-                          <object class="GtkButton" id="home-button">
-                            <property name="label" translatable="yes">All Settings</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -44,8 +35,6 @@
                     </child>
                     <child>
                       <object class="GtkLabel" id="applet-label">
-                        <property name="no_show_all">True</property>
-                        <property name="label" translatable="yes">Applet</property>
                         <property name="use_markup">True</property>
                       </object>
                       <packing>
@@ -53,23 +42,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment1">
+                      <object class="GtkEntry" id="search-entry">
+                        <property name="width_request">210</property>
                         <property name="visible">True</property>
-                        <property name="xalign">1</property>
-                        <property name="xscale">0</property>
-                        <child>
-                          <object class="GtkEntry" id="search-entry">
-                            <property name="width_request">210</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="invisible_char">&#x2022;</property>
-                            <property name="text" translatable="yes">Type to search your settings</property>
-                          </object>
-                        </child>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="text" translatable="yes">Type to search your settings</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="pack_type">end</property>
                         <property name="position">2</property>
                       </packing>
                     </child>

@@ -243,7 +243,6 @@ item_activated_cb (GtkIconView *icon_view,
   gtk_label_set_markup (GTK_LABEL (W (builder, "applet-label")),
                         markup);
   g_free (markup);
-  gtk_widget_show (W (builder, "applet-label"));
 
   /* start app */
   command = g_strdup_printf ("%s --socket=%u", exec, socket_id);
@@ -258,7 +257,7 @@ void
 home_button_clicked_cb (GtkButton *button, GtkBuilder *builder)
 {
   gtk_notebook_set_current_page (GTK_NOTEBOOK (W (builder, "notebook")), 0);
-  gtk_widget_hide (W (builder, "applet-label"));
+  gtk_label_set_text (GTK_LABEL (W (builder, "applet-label")), "");
 }
 
 int
