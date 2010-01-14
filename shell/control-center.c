@@ -179,9 +179,11 @@ fill_model (GtkBuilder *b)
 }
 
 static gboolean
-switch_after_delay (GtkNotebook *notebook)
+switch_after_delay (GtkBuilder *builder)
 {
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (W (builder, "notebook")), 1);
+
+  gtk_widget_show (W (builder, "home-button"));
 
   return FALSE;
 }
@@ -197,7 +199,7 @@ plug_added_cb (GtkSocket  *socket,
 
   /* FIXME: this shouldn't be necassary if the capplet doesn't add to the socket
    * until it is fully ready */
-  g_timeout_add (100, (GSourceFunc) switch_after_delay, notebook);
+  g_timeout_add (100, (GSourceFunc) switch_after_delay, builder);
 
   /* make sure no items are selected when the user switches back to the icon
    * views */
@@ -256,6 +258,8 @@ home_button_clicked_cb (GtkButton *button, GtkBuilder *builder)
   gtk_notebook_set_current_page (GTK_NOTEBOOK (W (builder, "notebook")), 0);
   gtk_window_set_title (GTK_WINDOW (W (builder, "main-window")),
                         "System Settings");
+
+  gtk_widget_hide (GTK_WIDGET (button));
 }
 
 int
