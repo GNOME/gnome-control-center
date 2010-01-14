@@ -32,6 +32,8 @@ typedef struct
   GtkWidget  *window;
 
   GSList *icon_views;
+
+  gchar  *current_title;
 } ShellData;
 
 void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
@@ -192,6 +194,8 @@ switch_after_delay (ShellData *data)
 
   gtk_widget_show (W (data->builder, "home-button"));
 
+  gtk_window_set_title (GTK_WINDOW (data->window), data->current_title);
+
   return FALSE;
 }
 
@@ -247,14 +251,14 @@ item_activated_cb (GtkIconView *icon_view,
 
   gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, -1);
 
-  gtk_window_set_title (GTK_WINDOW (data->window), name);
+  g_free (data->current_title);
+  data->current_title = name;
 
   /* start app */
   command = g_strdup_printf ("%s --socket=%u", exec, socket_id);
   g_spawn_command_line_async (command, NULL);
   g_free (command);
 
-  g_free (name);
   g_free (exec);
 }
 
@@ -306,6 +310,7 @@ main (int argc, char **argv)
 
   gtk_main ();
 
+  g_free (data->current_title);
   g_free (data);
 
   return 0;
