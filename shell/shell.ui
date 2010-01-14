@@ -34,24 +34,22 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="applet-label">
-                        <property name="use_markup">True</property>
+                      <object class="GtkAlignment" id="alignment1">
+                        <property name="visible">True</property>
+                        <property name="xalign">1</property>
+                        <property name="xscale">0</property>
+                        <child>
+                          <object class="GtkEntry" id="search-entry">
+                            <property name="width_request">210</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">&#x25CF;</property>
+                            <property name="text" translatable="yes">Type to search your settings</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="search-entry">
-                        <property name="width_request">210</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
-                        <property name="text" translatable="yes">Type to search your settings</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>

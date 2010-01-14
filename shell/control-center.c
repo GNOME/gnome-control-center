@@ -213,7 +213,7 @@ item_activated_cb (GtkIconView *icon_view,
 {
   GtkTreeModel *model;
   GtkTreeIter iter = {0,};
-  gchar *name, *exec, *command, *markup;
+  gchar *name, *exec, *command;
   GtkWidget *socket, *notebook;
   guint socket_id = 0;
   static gint index = -1;
@@ -239,10 +239,7 @@ item_activated_cb (GtkIconView *icon_view,
 
   gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, -1);
 
-  markup = g_strdup_printf ("<b>%s</b>", name);
-  gtk_label_set_markup (GTK_LABEL (W (builder, "applet-label")),
-                        markup);
-  g_free (markup);
+  gtk_window_set_title (GTK_WINDOW (W (builder, "main-window")), name);
 
   /* start app */
   command = g_strdup_printf ("%s --socket=%u", exec, socket_id);
@@ -257,7 +254,8 @@ void
 home_button_clicked_cb (GtkButton *button, GtkBuilder *builder)
 {
   gtk_notebook_set_current_page (GTK_NOTEBOOK (W (builder, "notebook")), 0);
-  gtk_label_set_text (GTK_LABEL (W (builder, "applet-label")), "");
+  gtk_window_set_title (GTK_WINDOW (W (builder, "main-window")),
+                        "System Settings");
 }
 
 int
