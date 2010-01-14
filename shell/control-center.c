@@ -197,7 +197,7 @@ plug_added_cb (GtkSocket  *socket,
 
   /* FIXME: this shouldn't be necassary if the capplet doesn't add to the socket
    * until it is fully ready */
-  g_timeout_add (100, switch_after_delay, notebook);
+  g_timeout_add (100, (GSourceFunc) switch_after_delay, notebook);
 
   /* make sure no items are selected when the user switches back to the icon
    * views */
