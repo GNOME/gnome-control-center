@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009 Intel, Inc.
+ * Copyright (c) 2009, 2010 Intel, Inc.
  *
  * The Control Center is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by the
@@ -19,6 +19,8 @@
  */
 
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
+#include <string.h>
 #define GMENU_I_KNOW_THIS_IS_UNSTABLE
 #include <gnome-menus/gmenu-tree.h>
 
@@ -34,6 +36,11 @@ typedef struct
   GSList *icon_views;
 
   gchar  *current_title;
+
+  GtkListStore *store;
+  GtkTreeModel *filter;
+  gchar *filter_string;
+
 } ShellData;
 
 void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
@@ -92,13 +99,38 @@ selection_changed_cb (GtkIconView *view,
     }
 }
 
+gboolean
+model_filter_func (GtkTreeModel *model,
+                   GtkTreeIter  *iter,
+                   ShellData    *data)
+{
+  gchar *name;
+  gchar *needle, *haystack;
+
+  gtk_tree_model_get (model, iter, 0, &name, -1);
+
+  if (!data->filter_string)
+    return FALSE;
+
+  if (!name)
+    return FALSE;
+
+  needle = g_utf8_casefold (data->filter_string, -1);
+  haystack = g_utf8_casefold (name, -1);
+
+  if (strstr (haystack, needle))
+    return TRUE;
+  else
+    return FALSE;
+}
+
 void
 fill_model (ShellData *data)
 {
   GSList *list, *l;
   GMenuTreeDirectory *d;
   GMenuTree *t;
-  GtkWidget *vbox;
+  GtkWidget *vbox, *w;
 
   vbox = W (data->builder, "main-vbox");
 
@@ -107,6 +139,27 @@ fill_model (ShellData *data)
   d = gmenu_tree_get_root_directory (t);
 
   list = gmenu_tree_directory_get_contents (d);
+
+  data->store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
+                                    GDK_TYPE_PIXBUF);
+  data->filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (data->store),
+                                            NULL);
+  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (data->filter),
+                                          (GtkTreeModelFilterVisibleFunc)
+                                            model_filter_func,
+                                          data, NULL);
+  w = (GtkWidget *) gtk_builder_get_object (data->builder, "search-view");
+  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (data->filter));
+  gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (w), 2);
+  gtk_icon_view_set_text_column (GTK_ICON_VIEW (w), 0);
+  gtk_icon_view_set_item_width (GTK_ICON_VIEW (w), 120);
+  g_signal_connect (w, "item-activated",
+                    G_CALLBACK (item_activated_cb), data);
+  g_signal_connect (w, "button-release-event",
+                    G_CALLBACK (button_release_cb), data);
+  g_signal_connect (w, "selection-changed",
+                    G_CALLBACK (selection_changed_cb), data);
+
 
   for (l = list; l; l = l->next)
     {
@@ -180,6 +233,12 @@ fill_model (ShellData *data)
                                                      1, exec,
                                                      2, pixbuf,
                                                      -1);
+
+                  gtk_list_store_insert_with_values (data->store, NULL, 0,
+                                                     0, name,
+                                                     1, exec,
+                                                     2, pixbuf,
+                                                     -1);
                 }
             }
         }
@@ -190,7 +249,7 @@ fill_model (ShellData *data)
 static gboolean
 switch_after_delay (ShellData *data)
 {
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 1);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 2);
 
   gtk_widget_show (W (data->builder, "home-button"));
 
@@ -272,12 +331,58 @@ home_button_clicked_cb (GtkButton *button,
   gtk_widget_hide (GTK_WIDGET (button));
 }
 
+void
+search_entry_changed_cb (GtkEntry  *entry,
+                         ShellData *data)
+{
+  g_free (data->filter_string);
+  data->filter_string = g_strdup (gtk_entry_get_text (entry));
+
+  if (!g_strcmp0 (data->filter_string, ""))
+    {
+      home_button_clicked_cb (GTK_BUTTON (gtk_builder_get_object (data->builder,
+                                                                  "home-button")),
+                                          data);
+    }
+  else
+    {
+      gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (data->filter));
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 1);
+    }
+}
+
+gboolean
+search_entry_key_press_event_cb (GtkEntry    *entry,
+                                 GdkEventKey *event,
+                                 ShellData   *data)
+{
+  if (event->keyval == GDK_Return)
+    {
+      GtkTreePath *path;
+
+      path = gtk_tree_path_new_first ();
+      item_activated_cb ((GtkIconView *) gtk_builder_get_object (data->builder,
+                                                                 "search-view"),
+                         path, data);
+      gtk_tree_path_free (path);
+      return TRUE;
+    }
+
+  if (event->keyval == GDK_Escape)
+    {
+      gtk_entry_set_text (entry, "");
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
 int
 main (int argc, char **argv)
 {
   ShellData *data;
   guint ret;
-  GdkColor color = {0, 32767, 32767, 32767};
+  GtkWidget *widget;
 
   gtk_init (&argc, &argv);
 
@@ -300,16 +405,21 @@ main (int argc, char **argv)
   fill_model (data);
 
 
-  gtk_widget_modify_text (W (data->builder,"search-entry"), GTK_STATE_NORMAL,
-                          &color);
-
   g_signal_connect (gtk_builder_get_object (data->builder, "home-button"),
                     "clicked", G_CALLBACK (home_button_clicked_cb), data);
+
+  widget = (GtkWidget*) gtk_builder_get_object (data->builder, "search-entry");
+
+  g_signal_connect (widget, "changed", G_CALLBACK (search_entry_changed_cb),
+                    data);
+  g_signal_connect (widget, "key-press-event",
+                    G_CALLBACK (search_entry_key_press_event_cb), data);
 
   gtk_widget_show_all (data->window);
 
   gtk_main ();
 
+  g_free (data->filter_string);
   g_free (data->current_title);
   g_free (data);
 
