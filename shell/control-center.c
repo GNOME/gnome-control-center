@@ -25,13 +25,22 @@
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
 
-void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, GtkBuilder *builder);
+typedef struct
+{
+  GtkBuilder *builder;
+  GtkWidget  *notebook;
+  GtkWidget  *window;
+
+  GSList *icon_views;
+} ShellData;
+
+void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
 
 
 gboolean
 button_release_cb (GtkWidget      *view,
                    GdkEventButton *event,
-                   GtkBuilder     *builder)
+                   ShellData      *data)
 {
   if (event->button == 1)
     {
@@ -42,7 +51,7 @@ button_release_cb (GtkWidget      *view,
       if (!selection)
         return FALSE;
 
-      item_activated_cb (GTK_ICON_VIEW (view), selection->data, builder);
+      item_activated_cb (GTK_ICON_VIEW (view), selection->data, data);
 
       g_list_free (selection);
       return TRUE;
@@ -52,7 +61,7 @@ button_release_cb (GtkWidget      *view,
 
 void
 selection_changed_cb (GtkIconView *view,
-                      GtkBuilder  *builder)
+                      ShellData   *data)
 {
   GSList *iconviews, *l;
   GList *selection;
@@ -64,7 +73,7 @@ selection_changed_cb (GtkIconView *view,
   else
     g_list_free (selection);
 
-  iconviews = (GSList*) g_object_get_data (G_OBJECT (builder), "iconviews");
+  iconviews = data->icon_views;
 
   for (l = iconviews; l; l = l->next)
     {
@@ -82,15 +91,14 @@ selection_changed_cb (GtkIconView *view,
 }
 
 void
-fill_model (GtkBuilder *b)
+fill_model (ShellData *data)
 {
   GSList *list, *l;
   GMenuTreeDirectory *d;
   GMenuTree *t;
   GtkWidget *vbox;
-  GSList *iconviews = NULL;
 
-  vbox = W (b, "main-vbox");
+  vbox = W (data->builder, "main-vbox");
 
   t = gmenu_tree_lookup (MENUDIR "/gnomecc.menu", 0);
 
@@ -121,14 +129,13 @@ fill_model (GtkBuilder *b)
           gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), 0);
           gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 120);
           g_signal_connect (iconview, "item-activated",
-                            G_CALLBACK (item_activated_cb), b);
+                            G_CALLBACK (item_activated_cb), data);
           g_signal_connect (iconview, "button-release-event",
-                            G_CALLBACK (button_release_cb), b);
+                            G_CALLBACK (button_release_cb), data);
           g_signal_connect (iconview, "selection-changed",
-                            G_CALLBACK (selection_changed_cb), b);
+                            G_CALLBACK (selection_changed_cb), data);
 
-          iconviews = g_slist_prepend (iconviews, iconview);
-          g_object_set_data (G_OBJECT (b), "iconviews", iconviews);
+          data->icon_views = g_slist_prepend (data->icon_views, iconview);
 
           header_name = g_strdup_printf ("<b>%s</b>", dir_name);
 
@@ -179,39 +186,38 @@ fill_model (GtkBuilder *b)
 }
 
 static gboolean
-switch_after_delay (GtkBuilder *builder)
+switch_after_delay (ShellData *data)
 {
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (W (builder, "notebook")), 1);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 1);
 
-  gtk_widget_show (W (builder, "home-button"));
+  gtk_widget_show (W (data->builder, "home-button"));
 
   return FALSE;
 }
 
 void
 plug_added_cb (GtkSocket  *socket,
-               GtkBuilder *builder)
+               ShellData  *data)
 {
   GtkWidget *notebook;
-  GSList *l, *iconviews;
+  GSList *l;
 
-  notebook = W (builder, "notebook");
+  notebook = W (data->builder, "notebook");
 
   /* FIXME: this shouldn't be necassary if the capplet doesn't add to the socket
    * until it is fully ready */
-  g_timeout_add (100, (GSourceFunc) switch_after_delay, builder);
+  g_timeout_add (100, (GSourceFunc) switch_after_delay, data);
 
   /* make sure no items are selected when the user switches back to the icon
    * views */
-  iconviews = (GSList*) g_object_get_data (G_OBJECT (builder), "iconviews");
-  for (l = iconviews; l; l = l->next)
+  for (l = data->icon_views; l; l = l->next)
       gtk_icon_view_unselect_all (GTK_ICON_VIEW (l->data));
 }
 
 void
 item_activated_cb (GtkIconView *icon_view,
                    GtkTreePath *path,
-                   GtkBuilder *builder)
+                   ShellData   *data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter = {0,};
@@ -223,9 +229,9 @@ item_activated_cb (GtkIconView *icon_view,
   /* create new socket */
   socket = gtk_socket_new ();
 
-  g_signal_connect (socket, "plug-added", G_CALLBACK (plug_added_cb), builder);
+  g_signal_connect (socket, "plug-added", G_CALLBACK (plug_added_cb), data);
 
-  notebook = W (builder, "notebook");
+  notebook = data->notebook;
   if (index >= 0)
     gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), index);
   index = gtk_notebook_append_page (GTK_NOTEBOOK (notebook), socket, NULL);
@@ -241,7 +247,7 @@ item_activated_cb (GtkIconView *icon_view,
 
   gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, -1);
 
-  gtk_window_set_title (GTK_WINDOW (W (builder, "main-window")), name);
+  gtk_window_set_title (GTK_WINDOW (data->window), name);
 
   /* start app */
   command = g_strdup_printf ("%s --socket=%u", exec, socket_id);
@@ -253,11 +259,11 @@ item_activated_cb (GtkIconView *icon_view,
 }
 
 void
-home_button_clicked_cb (GtkButton *button, GtkBuilder *builder)
+home_button_clicked_cb (GtkButton *button,
+                        ShellData *data)
 {
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (W (builder, "notebook")), 0);
-  gtk_window_set_title (GTK_WINDOW (W (builder, "main-window")),
-                        "System Settings");
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 0);
+  gtk_window_set_title (GTK_WINDOW (data->window), "System Settings");
 
   gtk_widget_hide (GTK_WIDGET (button));
 }
@@ -265,48 +271,42 @@ home_button_clicked_cb (GtkButton *button, GtkBuilder *builder)
 int
 main (int argc, char **argv)
 {
-  GtkBuilder *b;
-  GtkWidget *window, *notebook, *widget;
+  ShellData *data;
   guint ret;
   GdkColor color = {0, 32767, 32767, 32767};
-  GtkSizeGroup *group;
 
   gtk_init (&argc, &argv);
 
-  b = gtk_builder_new ();
+  data = g_new0 (ShellData, 1);
 
-  ret = gtk_builder_add_from_file (b, UIDIR "/shell.ui", NULL);
+  data->builder = gtk_builder_new ();
+
+  ret = gtk_builder_add_from_file (data->builder, UIDIR "/shell.ui", NULL);
   if (ret == 0)
     {
       g_error ("Unable to load UI");
     }
 
-  window = W (b, "main-window");
-  g_signal_connect (window, "delete-event", G_CALLBACK (gtk_main_quit), NULL);
+  data->window = W (data->builder, "main-window");
+  g_signal_connect (data->window, "delete-event", G_CALLBACK (gtk_main_quit),
+                    NULL);
 
-  fill_model (b);
+  data->notebook = W (data->builder, "notebook");
 
-  notebook = W (b, "notebook");
+  fill_model (data);
 
-  gtk_widget_modify_text (W (b,"search-entry"), GTK_STATE_NORMAL, &color);
 
-  group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-  widget = W (b, "button-box");
-  if (widget) {
-    gtk_size_group_add_widget (group, widget);
-  }
-  widget = W (b, "search-entry");
-  if (widget) {
-    gtk_size_group_add_widget (group, widget);
-  }
-  g_object_unref (group);
+  gtk_widget_modify_text (W (data->builder,"search-entry"), GTK_STATE_NORMAL,
+                          &color);
 
-  g_signal_connect (gtk_builder_get_object (b, "home-button"), "clicked",
-                    G_CALLBACK (home_button_clicked_cb), b);
+  g_signal_connect (gtk_builder_get_object (data->builder, "home-button"),
+                    "clicked", G_CALLBACK (home_button_clicked_cb), data);
 
-  gtk_widget_show_all (window);
+  gtk_widget_show_all (data->window);
 
   gtk_main ();
+
+  g_free (data);
 
   return 0;
 }
