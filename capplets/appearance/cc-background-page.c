@@ -959,7 +959,7 @@ update_gconf_from_item (CcBackgroundPage *page,
                 gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
                 gconf_change_set_set_string (cs, WP_FILE_KEY, "");
         } else {
-                gchar *uri;
+                char *uri;
 
                 if (g_utf8_validate (filename, -1, NULL))
                         uri = g_strdup (filename);
@@ -973,14 +973,26 @@ update_gconf_from_item (CcBackgroundPage *page,
                         g_free (uri);
                 }
 
+                if (scale == NULL) {
+                        scale = g_strdup ("scaled");
+                }
                 gconf_change_set_set_string (cs,
                                              WP_OPTIONS_KEY,
                                              scale);
         }
 
+        if (shade == NULL) {
+                shade = g_strdup ("solid");
+        }
         gconf_change_set_set_string (cs,
                                      WP_SHADING_KEY,
                                      shade);
+        if (pcolor == NULL) {
+                pcolor = g_strdup ("#000000000000");
+        }
+        if (scolor == NULL) {
+                scolor = g_strdup ("#000000000000");
+        }
         gconf_change_set_set_string (cs, WP_PCOLOR_KEY, pcolor);
         gconf_change_set_set_string (cs, WP_SCOLOR_KEY, scolor);
 
