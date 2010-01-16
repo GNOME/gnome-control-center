@@ -268,6 +268,7 @@ load_xml (CcBackgroundsMonitor *monitor,
                                       "secondary-color", secondary_color,
                                       "placement", options,
                                       "shading", shade_type,
+                                      "is-deleted", deleted,
                                       NULL);
 
                         if (cc_background_item_load (item)) {
