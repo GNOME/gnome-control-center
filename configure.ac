@@ -18,15 +18,6 @@ AM_PROG_LIBTOOL
 # Use the GNOME documentation framework
 GNOME_DOC_INIT
 
-changequote(,)dnl
-if test "x$GCC" = "xyes"; then
-  case " $CFLAGS " in
-  *[\ \	]-Wall[\ \	]*) ;;
-  *) CFLAGS="$CFLAGS -Wall" ;;
-  esac
-fi
-changequote([,])dnl
-
 # Internationalization support
 
 IT_PROG_INTLTOOL([0.37.1])
@@ -325,6 +316,54 @@ GTK_DOC_CHECK([1.9])
 
 CONTROL_CENTER_VERSION=gnome_control_center_version
 AC_SUBST(CONTROL_CENTER_VERSION)
+
+dnl =======================================
+dnl Finish
+dnl =======================================
+
+# Turn on the additional warnings last
+
+AC_ARG_ENABLE(more-warnings,
+              AS_HELP_STRING([--enable-more-warnings],
+                             [Maximum compiler warnings]),
+              set_more_warnings="$enableval",[
+	      if test -d $srcdir/.git; then
+	        set_more_warnings=yes
+	      else
+	        set_more_warnings=no
+              fi])
+
+AC_MSG_CHECKING(for more warnings)
+if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
+        AC_MSG_RESULT(yes)
+        CFLAGS="\
+        -Wall -Wclobbered -Wempty-body -Wignored-qualifiers \
+        -Wmissing-field-initializers -Wmissing-parameter-type \
+        -Wold-style-declaration -Woverride-init -Wtype-limits \
+        -Wuninitialized \
+        -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes \
+        -Wnested-externs -Wpointer-arith \
+        -Wcast-align -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 \
+        $CFLAGS"
+
+        for option in -Wno-strict-aliasing -Wno-sign-compare; do
+                SAVE_CFLAGS="$CFLAGS"
+                CFLAGS="$CFLAGS $option"
+                AC_MSG_CHECKING([whether gcc understands $option])
+                AC_TRY_COMPILE([], [],
+                        has_option=yes,
+                        has_option=no,)
+                if test $has_option = no; then
+                        CFLAGS="$SAVE_CFLAGS"
+                fi
+                AC_MSG_RESULT($has_option)
+                unset has_option
+                unset SAVE_CFLAGS
+        done
+        unset option
+else
+        AC_MSG_RESULT(no)
+fi
 
 
 AC_CONFIG_FILES([
