@@ -1214,21 +1214,26 @@ on_remove_button_clicked (GtkWidget        *widget,
         CcBackgroundItem *item;
         GtkTreeIter       iter;
         GtkTreePath      *path;
+        gboolean          valid;
 
         item = get_selected_item (page, &iter);
         if (item == NULL) {
                 return;
         }
 
-        if (cc_backgrounds_monitor_remove_item (page->priv->monitor, item)) {
-                path = gtk_tree_model_get_path (page->priv->model, &iter);
-        } else {
-                path = gtk_tree_path_new_first ();
-        }
+        valid = gtk_tree_model_iter_next (page->priv->model, &iter);
 
-        gtk_icon_view_select_path (GTK_ICON_VIEW (page->priv->icon_view), path);
-        gtk_icon_view_set_cursor (GTK_ICON_VIEW (page->priv->icon_view), path, NULL, FALSE);
-        gtk_tree_path_free (path);
+        if (cc_backgrounds_monitor_remove_item (page->priv->monitor, item)) {
+                if (valid) {
+                        path = gtk_tree_model_get_path (page->priv->model, &iter);
+                } else {
+                        path = gtk_tree_path_new_first ();
+                }
+
+                gtk_icon_view_select_path (GTK_ICON_VIEW (page->priv->icon_view), path);
+                gtk_icon_view_set_cursor (GTK_ICON_VIEW (page->priv->icon_view), path, NULL, FALSE);
+                gtk_tree_path_free (path);
+        }
 
         g_object_unref (item);
 }
