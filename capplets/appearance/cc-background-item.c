@@ -112,7 +112,9 @@ static GnomeBGPlacement
 string_to_placement (const char *option)
 {
         int i = GNOME_BG_PLACEMENT_SCALED;
-        gconf_string_to_enum (placement_lookup, option, &i);
+        if (option != NULL) {
+                gconf_string_to_enum (placement_lookup, option, &i);
+        }
         return i;
 }
 
@@ -120,7 +122,9 @@ static GnomeBGColorType
 string_to_shading (const char *shading)
 {
         int i = GNOME_BG_COLOR_SOLID;
-        gconf_string_to_enum (shading_lookup, shading, &i);
+        if (shading != NULL) {
+                gconf_string_to_enum (shading_lookup, shading, &i);
+        }
         return i;
 }
 
@@ -165,8 +169,12 @@ set_bg_properties (CcBackgroundItem *item)
         if (item->priv->filename)
                 gnome_bg_set_filename (item->priv->bg, item->priv->filename);
 
-        gdk_color_parse (item->priv->primary_color, &pcolor);
-        gdk_color_parse (item->priv->secondary_color, &scolor);
+        if (item->priv->primary_color != NULL) {
+                gdk_color_parse (item->priv->primary_color, &pcolor);
+        }
+        if (item->priv->secondary_color != NULL) {
+                gdk_color_parse (item->priv->secondary_color, &scolor);
+        }
         placement = string_to_placement (item->priv->placement);
         shading = string_to_shading (item->priv->shading);
 

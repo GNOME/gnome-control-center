@@ -1679,12 +1679,14 @@ on_gconf_color1_changed (GConfClient      *client,
                          CcBackgroundPage *page)
 {
         CcBackgroundItem *item;
-        GdkColor          color;
+        GdkColor          color = { 0, 0, 0, 0 };
         const char       *colorhex;
 
         colorhex = gconf_value_get_string (entry->value);
 
-        gdk_color_parse (colorhex, &color);
+        if (colorhex != NULL) {
+                gdk_color_parse (colorhex, &color);
+        }
         gtk_color_button_set_color (GTK_COLOR_BUTTON (page->priv->primary_color_picker),
                                     &color);
 
@@ -1703,14 +1705,16 @@ on_gconf_color2_changed (GConfClient      *client,
                          CcBackgroundPage *page)
 {
         CcBackgroundItem *item;
-        GdkColor          color;
+        GdkColor          color = { 0, 0, 0, 0 };
         const char       *colorhex;
 
         ui_update_sensitivities (page);
 
         colorhex = gconf_value_get_string (entry->value);
 
-        gdk_color_parse (colorhex, &color);
+        if (colorhex != NULL) {
+                gdk_color_parse (colorhex, &color);
+        }
         gtk_color_button_set_color (GTK_COLOR_BUTTON (page->priv->secondary_color_picker),
                                     &color);
 
