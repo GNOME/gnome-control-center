@@ -2,9 +2,8 @@ NULL =
 
 SUBDIRS = \
 	common			\
-	accessibility	\
+	accessibility		\
 	appearance		\
-	default-applications	\
 	keybindings		\
 	keyboard		\
 	mouse			\
