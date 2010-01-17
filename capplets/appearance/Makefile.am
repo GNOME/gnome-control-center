@@ -7,7 +7,7 @@ cappletname = appearance
 
 INCLUDES = \
 	$(METACITY_CFLAGS) \
-	-I$(top_srcdir)/capplets/common/ \
+	-I$(top_srcdir)/libgnome-control-center-extension	\
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(FONT_CAPPLET_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
@@ -83,7 +83,7 @@ gnome_appearance_properties_SOURCES = \
 gnome_appearance_properties_LDADD = \
 	libappearance-common.la \
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la \
-	$(top_builddir)/capplets/common/libcommon.la \
+	$(top_builddir)/libgnome-control-center-extension/libcommon.la \
 	$(GNOMECC_CAPPLETS_LIBS) \
 	$(FONT_CAPPLET_LIBS) \
 	$(METACITY_LIBS)

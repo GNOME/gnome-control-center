@@ -343,7 +343,6 @@ capplets/appearance/Makefile
 capplets/appearance/data/Makefile
 capplets/appearance/data/gnome-appearance-properties.desktop.in
 capplets/appearance/data/gnome-theme-installer.desktop.in
-capplets/common/Makefile
 capplets/default-applications/Makefile
 capplets/default-applications/default-applications.desktop.in
 capplets/default-applications/gnome-at-commandline.in

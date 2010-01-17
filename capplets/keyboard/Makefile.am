@@ -6,7 +6,7 @@ cappletname = keyboard
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(LIBGNOMEKBDUI_CFLAGS) \
-	-I$(top_srcdir)/capplets/common/ \
+	-I$(top_srcdir)/libgnome-control-center-extension	\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_KEYBINDINGS_DIR="\"$(pkgdatadir)/keybindings\"" \
@@ -60,7 +60,7 @@ gnome_keyboard_properties_SOURCES = \
 	gnome-keyboard-properties.c
 
 gnome_keyboard_properties_LDADD = \
-	$(top_builddir)/capplets/common/libcommon.la \
+	$(top_builddir)/libgnome-control-center-extension/libcommon.la \
 	$(GNOMECC_CAPPLETS_LIBS) \
 	$(LIBGNOMEKBDUI_LIBS)
 

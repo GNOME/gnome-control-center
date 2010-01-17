@@ -1,6 +1,6 @@
 bin_PROGRAMS = gnome-at-properties
 
-gnome_at_properties_LDADD = $(AT_CAPPLET_LIBS) $(GNOMECC_CAPPLETS_LIBS) $(top_builddir)/capplets/common/libcommon.la
+gnome_at_properties_LDADD = $(AT_CAPPLET_LIBS) $(GNOMECC_CAPPLETS_LIBS) $(top_builddir)/libgnome-control-center-extension/libcommon.la
 gnome_at_properties_SOURCES = \
 	main.c
 gnome_at_properties_LDFLAGS = -export-dynamic
@@ -21,7 +21,7 @@ ui_DATA = at-enable-dialog.ui
 
 INCLUDES   = \
 	$(AT_CAPPLET_CFLAGS)     \
-	-I$(top_srcdir)/capplets/common/ \
+	-I$(top_srcdir)/libgnome-control-center-extension/ \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	-DUIDIR=\""$(uidir)"\" \
 	-DPIXMAPDIR=\""$(pixmapdir)"\" \

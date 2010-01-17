@@ -5,7 +5,7 @@ cappletname = mouse
 
 INCLUDES = 						\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
-	-I$(top_srcdir)/capplets/common/		\
+	-I$(top_srcdir)/libgnome-control-center-extension	\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
@@ -40,7 +40,11 @@ libmouse_la_CFLAGS =			\
 
 libmouse_la_LIBTOOLFLAGS = --tag=disable-static
 
-gnome_mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_mouse_properties_LDADD = 		\
+	$(top_builddir)/libgnome-control-center-extension/libcommon.la \
+	$(GNOMECC_CAPPLETS_LIBS)	\
+	$(NULL)
+
 gnome_mouse_properties_SOURCES =	\
 	gnome-mouse-properties.c	\
 	gnome-mouse-accessibility.c	\

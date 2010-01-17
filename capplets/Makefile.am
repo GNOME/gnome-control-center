@@ -1,7 +1,6 @@
 NULL =
 
 SUBDIRS = \
-	common			\
 	accessibility		\
 	appearance		\
 	keyboard		\
@@ -10,7 +9,6 @@ SUBDIRS = \
 	$(NULL)
 
 DIST_SUBDIRS = \
-	common			\
 	accessibility		\
 	appearance		\
 	default-applications	\

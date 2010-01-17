@@ -15,7 +15,7 @@ gnome_display_properties_SOURCES =	\
 
 gnome_display_properties_LDFLAGS = -export-dynamic
 gnome_display_properties_LDADD = \
-	$(top_builddir)/capplets/common/libcommon.la \
+	$(top_builddir)/libgnome-control-center-extension/libcommon.la \
 	$(DISPLAY_CAPPLET_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
@@ -37,7 +37,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
              $(GNOMECC_CAPPLETS_CFLAGS) \
-	     -I$(top_srcdir)/capplets/common/ \
+	     -I$(top_srcdir)/libgnome-control-center-extension \
 	     -DUIDIR="\"$(uidir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
