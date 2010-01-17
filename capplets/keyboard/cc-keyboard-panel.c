@@ -27,13 +27,10 @@
 #include <gio/gio.h>
 #include <glib/gi18n-lib.h>
 
+#include <gconf/gconf-client.h>
+
 #include "cc-keyboard-panel.h"
-
-#include "gconf-property-editor.h"
-#include "capplet-stock-icons.h"
-
-#include "gnome-keyboard-properties-a11y.h"
-#include "gnome-keyboard-properties-xkb.h"
+#include "cc-keyboard-page.h"
 
 #define CC_KEYBOARD_PANEL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelPrivate))
 
@@ -41,7 +38,8 @@
 
 struct CcKeyboardPanelPrivate
 {
-        gpointer dummy;
+        GtkWidget *notebook;
+        CcPage    *keyboard_page;
 };
 
 enum {
@@ -80,137 +78,26 @@ cc_keyboard_panel_get_property (GObject    *object,
         }
 }
 
-
-static GConfValue *
-blink_from_widget (GConfPropertyEditor *peditor,
-                   const GConfValue    *value)
-{
-        GConfValue *new_value;
-
-        new_value = gconf_value_new (GCONF_VALUE_INT);
-        gconf_value_set_int (new_value,
-                             2600 - gconf_value_get_int (value));
-
-        return new_value;
-}
-
-static GConfValue *
-blink_to_widget (GConfPropertyEditor * peditor, const GConfValue * value)
-{
-        GConfValue *new_value;
-        gint current_rate;
-
-        current_rate = gconf_value_get_int (value);
-        new_value = gconf_value_new (GCONF_VALUE_INT);
-        gconf_value_set_int (new_value,
-                             CLAMP (2600 - current_rate, 100, 2500));
-
-        return new_value;
-}
-
 static void
 setup_panel (CcKeyboardPanel *panel)
 {
-        GtkBuilder     *builder;
-        GtkSizeGroup   *size_group;
-        GtkWidget      *image;
-        GtkWidget      *widget;
-        GObject        *peditor;
-        char           *monitor;
-        GConfChangeSet *changeset;
+        GtkWidget *label;
+        char      *display_name;
 
-        changeset = NULL;
+        panel->priv->notebook = gtk_notebook_new ();
+        gtk_container_add (GTK_CONTAINER (panel), panel->priv->notebook);
+        gtk_widget_show (panel->priv->notebook);
 
-        builder = gtk_builder_new ();
-        gtk_builder_add_from_file (builder,
-                                   GNOMECC_UI_DIR
-                                   "/gnome-keyboard-properties-dialog.ui",
-                                   NULL);
-
-        size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-        gtk_size_group_add_widget (size_group, WID ("repeat_slow_label"));
-        gtk_size_group_add_widget (size_group, WID ("delay_short_label"));
-        gtk_size_group_add_widget (size_group, WID ("blink_slow_label"));
-        g_object_unref (G_OBJECT (size_group));
-
-        size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-        gtk_size_group_add_widget (size_group, WID ("repeat_fast_label"));
-        gtk_size_group_add_widget (size_group, WID ("delay_long_label"));
-        gtk_size_group_add_widget (size_group, WID ("blink_fast_label"));
-        g_object_unref (G_OBJECT (size_group));
-
-        size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-        gtk_size_group_add_widget (size_group, WID ("repeat_delay_scale"));
-        gtk_size_group_add_widget (size_group, WID ("repeat_speed_scale"));
-        gtk_size_group_add_widget (size_group, WID ("cursor_blink_time_scale"));
-        g_object_unref (G_OBJECT (size_group));
-
-        image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
-        gtk_button_set_image (GTK_BUTTON (WID ("xkb_layouts_add")), image);
-
-        image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_BUTTON);
-        gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")), image);
-
-        peditor = gconf_peditor_new_boolean (changeset, "/desktop/gnome/peripherals/keyboard/repeat",
-                                             WID ("repeat_toggle"), NULL);
-        gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
-                                        WID ("repeat_table"));
-
-        gconf_peditor_new_numeric_range (changeset, "/desktop/gnome/peripherals/keyboard/delay",
-                                         WID ("repeat_delay_scale"), NULL);
-
-        gconf_peditor_new_numeric_range (changeset, "/desktop/gnome/peripherals/keyboard/rate",
-                                         WID ("repeat_speed_scale"), NULL);
-
-        peditor = gconf_peditor_new_boolean (changeset, "/desktop/gnome/interface/cursor_blink",
-                                             WID ("cursor_toggle"), NULL);
-        gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
-                                        WID ("cursor_hbox"));
-        gconf_peditor_new_numeric_range (changeset,
-                                         "/desktop/gnome/interface/cursor_blink_time",
-                                         WID ("cursor_blink_time_scale"),
-                                         "conv-to-widget-cb",
-                                         blink_to_widget,
-                                         "conv-from-widget-cb",
-                                         blink_from_widget, NULL);
-
-        /* Ergonomics */
-        monitor = g_find_program_in_path ("gnome-typing-monitor");
-        if (monitor != NULL) {
-                g_free (monitor);
-
-                peditor = gconf_peditor_new_boolean (changeset, "/desktop/gnome/typing_break/enabled",
-                                                     WID ("break_enabled_toggle"), NULL);
-                gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
-                                                WID ("break_details_table"));
-                gconf_peditor_new_numeric_range (changeset,
-                                                 "/desktop/gnome/typing_break/type_time",
-                                                 WID ("break_enabled_spin"), NULL);
-                gconf_peditor_new_numeric_range (changeset,
-                                                 "/desktop/gnome/typing_break/break_time",
-                                                 WID ("break_interval_spin"),
-                                                 NULL);
-                gconf_peditor_new_boolean (changeset,
-                                           "/desktop/gnome/typing_break/allow_postpone",
-                                           WID ("break_postponement_toggle"),
-                                           NULL);
-
-        } else {
-                /* don't show the typing break tab if the daemon is not available */
-                GtkNotebook *nb;
-                gint         tb_page;
-
-                nb = GTK_NOTEBOOK (WID ("keyboard_notebook"));
-                tb_page = gtk_notebook_page_num (nb, WID ("break_enabled_toggle"));
-                gtk_notebook_remove_page (nb, tb_page);
-        }
-
-        setup_xkb_tabs (builder, changeset);
-        setup_a11y_tabs (builder, changeset);
-
-        widget = WID ("main-vbox");
-        gtk_widget_reparent (widget, GTK_WIDGET (panel));
-        gtk_widget_show (widget);
+        panel->priv->keyboard_page = cc_keyboard_page_new ();
+        g_object_get (panel->priv->keyboard_page,
+                      "display-name", &display_name,
+                      NULL);
+        label = gtk_label_new (display_name);
+        g_free (display_name);
+        gtk_notebook_append_page (GTK_NOTEBOOK (panel->priv->notebook),
+                                  GTK_WIDGET (panel->priv->keyboard_page),
+                                  label);
+        gtk_widget_show (GTK_WIDGET (panel->priv->keyboard_page));
 }
 
 static GObject *
