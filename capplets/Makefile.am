@@ -1,3 +1,5 @@
+NULL =
+
 SUBDIRS = \
 	common			\
 	accessibility	\
@@ -7,7 +9,7 @@ SUBDIRS = \
 	keyboard		\
 	mouse			\
 	network			\
-	windows
+	$(NULL)
 
 DIST_SUBDIRS = \
 	common			\
