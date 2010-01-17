@@ -14,7 +14,6 @@ DIST_SUBDIRS = \
 	accessibility		\
 	appearance		\
 	default-applications	\
-	keybindings		\
 	keyboard		\
 	mouse			\
 	network			\
