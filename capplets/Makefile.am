@@ -4,7 +4,6 @@ SUBDIRS = \
 	common			\
 	accessibility		\
 	appearance		\
-	keybindings		\
 	keyboard		\
 	mouse			\
 	network			\

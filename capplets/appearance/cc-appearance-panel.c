@@ -120,7 +120,6 @@ setup_panel (CcAppearancePanel *panel)
         GtkWidget *label;
         char      *display_name;
 
-        /* FIXME: should a panel subclass notebook? */
         panel->priv->notebook = gtk_notebook_new ();
         gtk_container_add (GTK_CONTAINER (panel), panel->priv->notebook);
         gtk_widget_show (panel->priv->notebook);

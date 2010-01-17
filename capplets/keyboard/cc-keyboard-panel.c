@@ -31,6 +31,7 @@
 
 #include "cc-keyboard-panel.h"
 #include "cc-keyboard-page.h"
+#include "cc-shortcuts-page.h"
 
 #define CC_KEYBOARD_PANEL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelPrivate))
 
@@ -40,6 +41,7 @@ struct CcKeyboardPanelPrivate
 {
         GtkWidget *notebook;
         CcPage    *keyboard_page;
+        CcPage    *shortcuts_page;
 };
 
 enum {
@@ -98,6 +100,18 @@ setup_panel (CcKeyboardPanel *panel)
                                   GTK_WIDGET (panel->priv->keyboard_page),
                                   label);
         gtk_widget_show (GTK_WIDGET (panel->priv->keyboard_page));
+
+
+        panel->priv->shortcuts_page = cc_shortcuts_page_new ();
+        g_object_get (panel->priv->shortcuts_page,
+                      "display-name", &display_name,
+                      NULL);
+        label = gtk_label_new (display_name);
+        g_free (display_name);
+        gtk_notebook_append_page (GTK_NOTEBOOK (panel->priv->notebook),
+                                  GTK_WIDGET (panel->priv->shortcuts_page),
+                                  label);
+        gtk_widget_show (GTK_WIDGET (panel->priv->shortcuts_page));
 }
 
 static GObject *

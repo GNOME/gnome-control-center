@@ -8,6 +8,7 @@ INCLUDES = \
 	$(LIBGNOMEKBDUI_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DGNOMECC_KEYBINDINGS_DIR="\"$(pkgdatadir)/keybindings\"" \
 	-DGNOMECC_UI_DIR="\"$(uidir)\""
 
 bin_PROGRAMS = gnome-keyboard-properties
@@ -17,6 +18,12 @@ ccmodules_LTLIBRARIES = libkeyboard.la
 
 libkeyboard_la_SOURCES = \
 	keyboard-module.c \
+	eggcellrendererkeys.c \
+	eggcellrendererkeys.h \
+	eggaccelerators.c \
+	eggaccelerators.h \
+	cc-shortcuts-page.h \
+	cc-shortcuts-page.c \
 	cc-keyboard-page.h \
 	cc-keyboard-page.c \
 	cc-keyboard-panel.h \
@@ -62,7 +69,22 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(ui_DATA)
+@INTLTOOL_XML_NOMERGE_RULE@
+
+xmldir       = $(pkgdatadir)/keybindings
+xml_in_files = 00-multimedia-key.xml.in 01-desktop-key.xml.in
+xml_DATA     = $(xml_in_files:.xml.in=.xml)
+
+pkgconfigdir = $(datadir)/pkgconfig
+pkgconfig_DATA = gnome-keybindings.pc
+
+CLEANFILES = \
+	$(GNOMECC_CAPPLETS_CLEANFILES) \
+	$(Desktop_in_files) \
+	$(desktop_DATA) \
+	$(xml_DATA) \
+	$(NULL)
+
+EXTRA_DIST = $(ui_DATA) $(xml_in_files) gnome-keybindings.pc.in
 
 -include $(top_srcdir)/git.mk

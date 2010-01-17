@@ -341,6 +341,7 @@ item_activated_cb (GtkIconView *icon_view,
   panel = g_hash_table_lookup (panels, id);
   if (panel != NULL)
     {
+      gtk_container_set_border_width (GTK_CONTAINER (panel), 12);
       index = gtk_notebook_append_page (GTK_NOTEBOOK (notebook), GTK_WIDGET (panel), NULL);
       gtk_widget_show_all (GTK_WIDGET (panel));
       gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), index);
