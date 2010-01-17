@@ -19,12 +19,15 @@ pixmap_DATA =					\
 uidir = $(pkgdatadir)/ui
 ui_DATA = at-enable-dialog.ui
 
-INCLUDES   = $(AT_CAPPLET_CFLAGS)     \
-             $(GNOMECC_CAPPLETS_CFLAGS) \
-	     -DUIDIR=\""$(uidir)"\" \
-	     -DPIXMAPDIR=\""$(pixmapdir)"\" \
-	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	     -DGNOMELOCALEDIR="\"$(datadir)/locale\""
+INCLUDES   = \
+	$(AT_CAPPLET_CFLAGS)     \
+	-I$(top_srcdir)/capplets/common/ \
+	$(GNOMECC_CAPPLETS_CFLAGS) \
+	-DUIDIR=\""$(uidir)"\" \
+	-DPIXMAPDIR=\""$(pixmapdir)"\" \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
+
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(ui_DATA) $(pixmap_DATA)
 

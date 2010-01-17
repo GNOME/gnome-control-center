@@ -1,11 +1,12 @@
+NULL =
+
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = keyboard
-
-module_flags = -export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'
 
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(LIBGNOMEKBDUI_CFLAGS) \
+	-I$(top_srcdir)/capplets/common/ \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_KEYBINDINGS_DIR="\"$(pkgdatadir)/keybindings\"" \
@@ -13,7 +14,7 @@ INCLUDES = \
 
 bin_PROGRAMS = gnome-keyboard-properties
 
-ccmodulesdir = $(libdir)/control-center-1/extensions
+ccmodulesdir = $(EXTENSIONSDIR)
 ccmodules_LTLIBRARIES = libkeyboard.la
 
 libkeyboard_la_SOURCES = \
@@ -29,16 +30,22 @@ libkeyboard_la_SOURCES = \
 	cc-keyboard-panel.h \
 	cc-keyboard-panel.c
 
-libkeyboard_la_LDFLAGS = \
-	$(module_flags)
+libkeyboard_la_LDFLAGS =		\
+	$(EXTENSION_LIBTOOL_FLAGS)	\
+	$(NULL)
 
-libkeyboard_la_LIBADD = \
-	$(GNOMECC_CAPPLETS_LIBS) \
-	$(LIBGNOMEKBDUI_LIBS)
+libkeyboard_la_LIBADD =			\
+	$(EXTENSION_LIBS)		\
+	$(EXTENSION_COMMON_LIBS)	\
+	$(LIBGNOMEKBDUI_LIBS)		\
+	$(NULL)
 
-libkeyboard_la_CFLAGS = \
-	-I$(top_builddir)/shell \
-	-I$(top_srcdir)/shell
+libkeyboard_la_CFLAGS =			\
+	$(EXTENSION_CFLAGS)		\
+	$(EXTENSION_COMMON_CFLAGS)	\
+	$(NULL)
+
+libkeyboard_la_LIBTOOLFLAGS = --tag=disable-static
 
 gnome_keyboard_properties_SOURCES = \
 	gnome-keyboard-properties-a11y.c \
@@ -53,8 +60,11 @@ gnome_keyboard_properties_SOURCES = \
 	gnome-keyboard-properties.c
 
 gnome_keyboard_properties_LDADD = \
+	$(top_builddir)/capplets/common/libcommon.la \
 	$(GNOMECC_CAPPLETS_LIBS) \
 	$(LIBGNOMEKBDUI_LIBS)
+
+gnome_keyboard_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 

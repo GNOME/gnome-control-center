@@ -50,6 +50,8 @@ libcommon_la_LIBADD =							\
 	$(GNOME_DESKTOP_LIBS)						\
 	$(GIO_LIBS)
 
+libcommon_la_LDFLAGS = -export-dynamic -no-undefined -avoid-version
+
 gnome_theme_test_SOURCES = \
 	gnome-theme-test.c
 

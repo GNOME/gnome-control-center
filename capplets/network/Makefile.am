@@ -4,7 +4,9 @@ cappletname = network
 bin_PROGRAMS = gnome-network-properties
 
 gnome_network_properties_SOURCES = gnome-network-properties.c
-gnome_network_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_network_properties_LDADD = \
+	$(top_builddir)/capplets/common/libcommon.la \
+	$(GNOMECC_CAPPLETS_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -30,6 +32,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
+	-I$(top_srcdir)/capplets/common/ \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_UI_DIR="\"$(uidir)\""
 

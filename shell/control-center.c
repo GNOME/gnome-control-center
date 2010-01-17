@@ -74,8 +74,8 @@ load_panel_plugins (void)
     }
 
   /* load all modules */
-  g_debug ("Loading all modules in %s", EXTENSION_DIR);
-  modules = g_io_modules_load_all_in_directory (EXTENSION_DIR);
+  g_debug ("Loading all modules in %s", EXTENSIONSDIR);
+  modules = g_io_modules_load_all_in_directory (EXTENSIONSDIR);
 
   g_debug ("Loaded %d modules", g_list_length (modules));
 

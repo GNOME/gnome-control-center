@@ -102,6 +102,24 @@ gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-2.0`
 GTK_ENGINE_DIR="$gtk_lib_dir/gtk-2.0/$gtk_binary_version/engines"
 AC_SUBST(GTK_ENGINE_DIR)
 
+dnl ================================================================
+dnl Extensions
+dnl ================================================================
+
+PKG_CHECK_MODULES(EXTENSION_COMMON, $COMMON_MODULES)
+
+EXTENSION_LIBTOOL_FLAGS="-export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'"
+AC_SUBST(EXTENSION_LIBTOOL_FLAGS)
+
+EXTENSIONSDIR="${libdir}/control-center-1/extensions"
+AC_SUBST(EXTENSIONSDIR)
+
+EXTENSION_CFLAGS="-I\$(top_srcdir)/libgnome-control-center-extension"
+AC_SUBST(EXTENSION_CFLAGS)
+
+EXTENSION_LIBS="\$(top_builddir)/libgnome-control-center-extension/libgnome-control-center-extension.la"
+AC_SUBST(EXTENSION_LIBS)
+
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
 dnl when we have it.
@@ -237,8 +255,6 @@ AM_GCONF_SOURCE_2
 dnl ==============================================
 dnl Define the main variables
 dnl ==============================================
-COMMON_CFLAGS="-I\$(top_srcdir)/capplets/common"
-COMMON_LIBS="\$(top_builddir)/capplets/common/libcommon.la"
 
 EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\""
 
@@ -349,6 +365,9 @@ font-viewer/gnome-font-viewer.desktop.in
 help/Makefile
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
+libgnome-control-center-extension/Makefile
+libgnome-control-center-extension/libgnome-control-center-extension.pc
+libgnome-control-center-extension/libgnome-control-center-extension-uninstalled.pc
 po/Makefile.in
 shell/Makefile
 shell/gnomecc.desktop.in

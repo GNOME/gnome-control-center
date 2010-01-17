@@ -1,32 +1,37 @@
+NULL =
+
 INCLUDES =					\
 	-I$(top_srcdir)				\
-	$(GNOMECC_SHELL_CFLAGS)
+	$(EXTENSION_CFLAGS)			\
+	$(EXTENSION_COMMON_CFLAGS)		\
+	$(GNOMECC_SHELL_CFLAGS)			\
+	$(NULL)
 
 bin_PROGRAMS = gnome-control-center
+
+gnome_control_center_SOURCES =			\
+	control-center.c			\
+	$(NULL)
+
+gnome_control_center_LDADD =			\
+	$(EXTENSION_LIBS)			\
+	$(EXTENSION_COMMON_LIBS)		\
+	$(GNOMECC_SHELL_LIBS)			\
+	$(NULL)
+
+gnome_control_center_LDFLAGS = -export-dynamic
+
+AM_CPPFLAGS =							\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
+	-DEXTENSIONSDIR="\"$(EXTENSIONSDIR)\""			\
+	-DUIDIR="\"$(uidir)\""					\
+	-DMENUDIR="\"$(menudir)\""
 
 menudir = $(sysconfdir)/xdg/menus
 menu_DATA = gnomecc.menu
 
 uidir = $(pkgdatadir)/ui
 ui_DATA = shell.ui
-
-gnome_control_center_SOURCES =		\
-	cc-page.h			\
-	cc-page.c			\
-	cc-panel.h			\
-	cc-panel.c			\
-	control-center.c
-
-gnome_control_center_LDADD =						\
-	$(GNOMECC_SHELL_LIBS)
-
-gnome_control_center_LDFLAGS = -export-dynamic
-
-AM_CPPFLAGS =							\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
-	-DEXTENSION_DIR="\"$(libdir)/control-center-1/extensions\""					\
-	-DUIDIR="\"$(uidir)\""					\
-	-DMENUDIR="\"$(menudir)\""
 
 sysdir = $(datadir)/applications
 sys_in_files = gnomecc.desktop.in

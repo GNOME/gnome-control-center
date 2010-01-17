@@ -1,12 +1,13 @@
+NULL =
+
 SUBDIRS = data
 
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = appearance
 
-module_flags = -export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'
-
 INCLUDES = \
 	$(METACITY_CFLAGS) \
+	-I$(top_srcdir)/capplets/common/ \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(FONT_CAPPLET_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
@@ -29,7 +30,7 @@ libappearance_common_la_SOURCES = \
 	theme-util.c \
 	theme-util.h
 
-ccmodulesdir = $(libdir)/control-center-1/extensions
+ccmodulesdir = $(EXTENSIONSDIR)
 ccmodules_LTLIBRARIES = libappearance.la
 
 libappearance_la_SOURCES = \
@@ -43,17 +44,21 @@ libappearance_la_SOURCES = \
 	cc-appearance-panel.h \
 	cc-appearance-panel.c
 
-libappearance_la_LDFLAGS = \
-	$(module_flags)
+libappearance_la_LDFLAGS =		\
+	$(EXTENSION_LIBTOOL_FLAGS)	\
+	$(NULL)
 
-libappearance_la_LIBADD = \
-	libappearance-common.la \
-	$(GNOMECC_CAPPLETS_LIBS) \
-	$(LIBGNOMEKBDUI_LIBS)
+libappearance_la_LIBADD =		\
+	$(EXTENSION_LIBS)		\
+	$(EXTENSION_COMMON_LIBS)	\
+	$(NULL)
 
-libappearance_la_CFLAGS = \
-	-I$(top_builddir)/shell \
-	-I$(top_srcdir)/shell
+libappearance_la_CFLAGS =		\
+	$(EXTENSION_CFLAGS)		\
+	$(EXTENSION_COMMON_CFLAGS)	\
+	$(NULL)
+
+libappearance_la_LIBTOOLFLAGS = --tag=disable-static
 
 gnome_appearance_properties_SOURCES = \
 	appearance.h \
