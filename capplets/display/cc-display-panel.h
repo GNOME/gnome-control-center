@@ -18,37 +18,37 @@
  *
  */
 
-#ifndef __CC_KEYBOARD_PANEL_H
-#define __CC_KEYBOARD_PANEL_H
+#ifndef __CC_DISPLAY_PANEL_H
+#define __CC_DISPLAY_PANEL_H
 
 #include <gtk/gtk.h>
 #include "cc-panel.h"
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_KEYBOARD_PANEL         (cc_keyboard_panel_get_type ())
-#define CC_KEYBOARD_PANEL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanel))
-#define CC_KEYBOARD_PANEL_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelClass))
-#define CC_IS_KEYBOARD_PANEL(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_TYPE_KEYBOARD_PANEL))
-#define CC_IS_KEYBOARD_PANEL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CC_TYPE_KEYBOARD_PANEL))
-#define CC_KEYBOARD_PANEL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelClass))
+#define CC_TYPE_DISPLAY_PANEL         (cc_display_panel_get_type ())
+#define CC_DISPLAY_PANEL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_TYPE_DISPLAY_PANEL, CcDisplayPanel))
+#define CC_DISPLAY_PANEL_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CC_TYPE_DISPLAY_PANEL, CcDisplayPanelClass))
+#define CC_IS_DISPLAY_PANEL(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_TYPE_DISPLAY_PANEL))
+#define CC_IS_DISPLAY_PANEL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CC_TYPE_DISPLAY_PANEL))
+#define CC_DISPLAY_PANEL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CC_TYPE_DISPLAY_PANEL, CcDisplayPanelClass))
 
-typedef struct CcKeyboardPanelPrivate CcKeyboardPanelPrivate;
+typedef struct CcDisplayPanelPrivate CcDisplayPanelPrivate;
 
 typedef struct
 {
         CcPanel                 parent;
-        CcKeyboardPanelPrivate *priv;
-} CcKeyboardPanel;
+        CcDisplayPanelPrivate *priv;
+} CcDisplayPanel;
 
 typedef struct
 {
         CcPanelClass   parent_class;
-} CcKeyboardPanelClass;
+} CcDisplayPanelClass;
 
-GType              cc_keyboard_panel_get_type   (void);
-void               cc_keyboard_panel_register   (GIOModule         *module);
+GType              cc_display_panel_get_type   (void);
+void               cc_display_panel_register   (GIOModule         *module);
 
 G_END_DECLS
 
-#endif /* __CC_KEYBOARD_PANEL_H */
+#endif /* __CC_DISPLAY_PANEL_H */

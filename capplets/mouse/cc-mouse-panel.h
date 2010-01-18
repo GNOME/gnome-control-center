@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef __CC_SIMPLE_PANEL_H
-#define __CC_SIMPLE_PANEL_H
+#ifndef __CC_MOUSE_PANEL_H
+#define __CC_MOUSE_PANEL_H
 
 #include <gtk/gtk.h>
 #include "cc-panel.h"

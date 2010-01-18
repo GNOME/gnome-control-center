@@ -1,22 +1,69 @@
+NULL =
+
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = display
 
-uidir = $(pkgdatadir)/ui
-dist_ui_DATA = display-capplet.ui
+INCLUDES = \
+	$(DISPLAY_CAPPLET_CFLAGS)			\
+	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	-I$(top_srcdir)/libgnome-control-center-extension \
+	-DUIDIR="\"$(uidir)\""				\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
+	$(NULL)
 
 bin_PROGRAMS = gnome-display-properties
 
-gnome_display_properties_SOURCES =	\
-	xrandr-capplet.c		\
+noinst_LTLIBRARIES = libdisplay-common.la
+
+libdisplay_common_la_SOURCES =		\
 	scrollarea.c			\
 	foo-marshal.c			\
 	scrollarea.h			\
-	foo-marshal.h
+	foo-marshal.h			\
+	$(NULL)
+
+ccmodulesdir = $(EXTENSIONSDIR)
+ccmodules_LTLIBRARIES = libdisplay.la
+
+libdisplay_la_SOURCES =			\
+	display-module.c		\
+	cc-display-page.h		\
+	cc-display-page.c		\
+	cc-display-panel.h		\
+	cc-display-panel.c		\
+	$(NULL)
+
+
+libdisplay_la_LDFLAGS =			\
+	$(EXTENSION_LIBTOOL_FLAGS)	\
+	$(NULL)
+
+libdisplay_la_LIBADD =			\
+	libdisplay-common.la		\
+	$(EXTENSION_LIBS)		\
+	$(EXTENSION_COMMON_LIBS)	\
+	$(LIBGNOMEKBDUI_LIBS)		\
+	$(NULL)
+
+libdisplay_la_CFLAGS =			\
+	$(EXTENSION_CFLAGS)		\
+	$(EXTENSION_COMMON_CFLAGS)	\
+	$(NULL)
+
+libdisplay_la_LIBTOOLFLAGS = --tag=disable-static
+
+gnome_display_properties_SOURCES =	\
+	xrandr-capplet.c		\
+	$(NULL)
 
 gnome_display_properties_LDFLAGS = -export-dynamic
-gnome_display_properties_LDADD = \
+
+gnome_display_properties_LDADD =		\
+	libdisplay-common.la			\
 	$(top_builddir)/libgnome-control-center-extension/libcommon.la \
-	$(DISPLAY_CAPPLET_LIBS)
+	$(DISPLAY_CAPPLET_LIBS)			\
+	$(NULL)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -35,12 +82,8 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = display-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
-             $(GNOMECC_CAPPLETS_CFLAGS) \
-	     -I$(top_srcdir)/libgnome-control-center-extension \
-	     -DUIDIR="\"$(uidir)\"" \
-	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
+uidir = $(pkgdatadir)/ui
+dist_ui_DATA = display-capplet.ui
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 
