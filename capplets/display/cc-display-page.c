@@ -2384,17 +2384,6 @@ select_current_output_from_dialog_position (CcDisplayPage *page)
         rebuild_gui (page);
 }
 
-/* This is a GtkWidget show handler.  We wait for the page
- * to be mapped, and then we select the output which corresponds to the
- * monitor on which the dialog is being shown.
- */
-static void
-on_show (GtkWidget     *widget,
-         CcDisplayPage *page)
-{
-        select_current_output_from_dialog_position (page);
-}
-
 static void
 on_apply_button_clicked (GtkButton     *button,
                          CcDisplayPage *page)
@@ -2467,24 +2456,6 @@ setup_page (CcDisplayPage *page)
                 g_error_free (error);
                 return;
         }
-
-        page->priv->screen = gnome_rr_screen_new (gdk_screen_get_default (),
-                                                  (GnomeRRScreenChanged) on_screen_changed,
-                                                  page,
-                                                  &error);
-        if (page->priv->screen == NULL) {
-                error_message (NULL,
-                               _("Could not get screen information"),
-                               error->message);
-                g_error_free (error);
-                g_object_unref (builder);
-                return;
-        }
-
-        g_signal_connect_after (page,
-                                "show",
-                                G_CALLBACK (on_show),
-                                page);
 
         page->priv->current_monitor_event_box = WID ("current_monitor_event_box");
         page->priv->current_monitor_label = WID ("current_monitor_label");
@@ -2580,7 +2551,6 @@ setup_page (CcDisplayPage *page)
                           G_CALLBACK (on_apply_button_clicked),
                           page);
 
-        on_screen_changed (page->priv->screen, page);
 
         widget = WID ("main_vbox");
         gtk_widget_reparent (widget, GTK_WIDGET (page));
@@ -2611,9 +2581,63 @@ cc_display_page_constructor (GType                  type,
 }
 
 static void
+start_working (CcDisplayPage *page)
+{
+        GError *error;
+
+        error = NULL;
+        page->priv->screen = gnome_rr_screen_new (gdk_screen_get_default (),
+                                                  (GnomeRRScreenChanged) on_screen_changed,
+                                                  page,
+                                                  &error);
+        if (page->priv->screen == NULL) {
+                error_message (NULL,
+                               _("Could not get screen information"),
+                               error->message);
+                g_error_free (error);
+                return;
+        }
+        on_screen_changed (page->priv->screen, page);
+
+        select_current_output_from_dialog_position (page);
+
+}
+
+static void
+stop_working (CcDisplayPage *page)
+{
+        gnome_rr_screen_destroy (page->priv->screen);
+        page->priv->screen = NULL;
+
+        if (page->priv->labeler != NULL) {
+                gnome_rr_labeler_hide (page->priv->labeler);
+                g_object_unref (page->priv->labeler);
+                page->priv->labeler = NULL;
+        }
+}
+
+static void
+cc_display_page_active_changed (CcPage  *base_page,
+                                gboolean is_active)
+{
+        CcDisplayPage *page = CC_DISPLAY_PAGE (base_page);
+
+        if (is_active)
+                start_working (page);
+        else
+                stop_working (page);
+
+        CC_PAGE_CLASS (cc_display_page_parent_class)->active_changed (base_page, is_active);
+
+}
+
+static void
 cc_display_page_class_init (CcDisplayPageClass *klass)
 {
         GObjectClass  *object_class = G_OBJECT_CLASS (klass);
+        CcPageClass   *page_class = CC_PAGE_CLASS (klass);
+
+        page_class->active_changed = cc_display_page_active_changed;
 
         object_class->get_property = cc_display_page_get_property;
         object_class->set_property = cc_display_page_set_property;
@@ -2641,7 +2665,7 @@ cc_display_page_finalize (GObject *object)
 
         g_return_if_fail (page->priv != NULL);
 
-        gnome_rr_screen_destroy (page->priv->screen);
+        stop_working (page);
 
         G_OBJECT_CLASS (cc_display_page_parent_class)->finalize (object);
 }
