@@ -34,6 +34,8 @@ struct CcPagePrivate
 {
         char            *id;
         char            *display_name;
+
+        gboolean         is_active;
 };
 
 enum {
@@ -41,6 +43,13 @@ enum {
         PROP_ID,
         PROP_DISPLAY_NAME,
 };
+
+enum {
+        ACTIVE_CHANGED,
+        LAST_SIGNAL
+};
+
+static guint signals [LAST_SIGNAL] = { 0, };
 
 static void     cc_page_class_init    (CcPageClass *klass);
 static void     cc_page_init          (CcPage      *page);
@@ -110,6 +119,37 @@ cc_page_get_property (GObject    *object,
         }
 }
 
+static void
+cc_page_real_active_changed (CcPage  *page,
+                             gboolean is_active)
+{
+        page->priv->is_active = is_active;
+        g_debug ("Page %s is %s",
+                 page->priv->id,
+                 page->priv->is_active ? "active" : "inactive");
+}
+
+void
+cc_page_set_active (CcPage  *page,
+                    gboolean is_active)
+{
+        g_return_if_fail (CC_IS_PAGE (page));
+
+        g_object_ref (page);
+        gtk_widget_queue_resize (GTK_WIDGET (page));
+        if (page->priv->is_active != is_active) {
+                g_signal_emit (page, signals [ACTIVE_CHANGED], 0, is_active);
+        }
+        g_object_unref (page);
+}
+
+gboolean
+cc_page_is_active (CcPage  *page)
+{
+        g_return_val_if_fail (CC_IS_PAGE (page), FALSE);
+        return page->priv->is_active;
+}
+
 static GObject *
 cc_page_constructor (GType                  type,
                      guint                  n_construct_properties,
@@ -134,7 +174,20 @@ cc_page_class_init (CcPageClass *klass)
         object_class->constructor = cc_page_constructor;
         object_class->finalize = cc_page_finalize;
 
+        klass->active_changed = cc_page_real_active_changed;
+
         g_type_class_add_private (klass, sizeof (CcPagePrivate));
+
+        signals [ACTIVE_CHANGED]
+                = g_signal_new ("active-changed",
+                                G_TYPE_FROM_CLASS (object_class),
+                                G_SIGNAL_RUN_FIRST,
+                                G_STRUCT_OFFSET (CcPageClass, active_changed),
+                                NULL,
+                                NULL,
+                                g_cclosure_marshal_VOID__BOOLEAN,
+                                G_TYPE_NONE,
+                                1, G_TYPE_BOOLEAN);
 
         g_object_class_install_property (object_class,
                                          PROP_ID,

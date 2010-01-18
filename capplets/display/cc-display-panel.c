@@ -101,6 +101,10 @@ setup_panel (CcDisplayPanel *panel)
 
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (panel->priv->notebook),
                                     FALSE);
+
+        g_object_set (panel,
+                      "current-page", panel->priv->display_page,
+                      NULL);
 }
 
 static GObject *

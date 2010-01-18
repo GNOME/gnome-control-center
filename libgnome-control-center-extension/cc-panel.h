@@ -46,9 +46,17 @@ typedef struct
 typedef struct
 {
         GtkAlignmentClass   parent_class;
+
+        void (* active_changed)           (CcPanel *panel,
+                                           gboolean is_active);
 } CcPanelClass;
 
 GType               cc_panel_get_type               (void);
+
+gboolean            cc_panel_is_active              (CcPanel *panel);
+
+void                cc_panel_set_active             (CcPanel *panel,
+                                                     gboolean is_active);
 
 G_END_DECLS
 

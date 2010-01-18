@@ -97,6 +97,9 @@ setup_panel (CcMousePanel *panel)
 
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (panel->priv->notebook),
                                     FALSE);
+        g_object_set (panel,
+                      "current-page", panel->priv->mouse_page,
+                      NULL);
 }
 
 static GObject *

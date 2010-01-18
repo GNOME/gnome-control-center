@@ -50,7 +50,7 @@ enum {
 
 static void     cc_keyboard_panel_class_init     (CcKeyboardPanelClass *klass);
 static void     cc_keyboard_panel_init           (CcKeyboardPanel      *keyboard_panel);
-static void     cc_keyboard_panel_finalize       (GObject             *object);
+static void     cc_keyboard_panel_finalize       (GObject              *object);
 
 G_DEFINE_DYNAMIC_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC_TYPE_PANEL)
 
@@ -81,12 +81,36 @@ cc_keyboard_panel_get_property (GObject    *object,
 }
 
 static void
+on_notebook_switch_page (GtkNotebook     *notebook,
+                         GtkNotebookPage *page,
+                         guint            page_num,
+                         CcKeyboardPanel *panel)
+{
+        if (page_num == 0) {
+                g_object_set (panel,
+                              "current-page",
+                              panel->priv->keyboard_page,
+                              NULL);
+        } else {
+                g_object_set (panel,
+                              "current-page",
+                              panel->priv->shortcuts_page,
+                              NULL);
+        }
+}
+
+static void
 setup_panel (CcKeyboardPanel *panel)
 {
         GtkWidget *label;
         char      *display_name;
 
         panel->priv->notebook = gtk_notebook_new ();
+        g_signal_connect (panel->priv->notebook,
+                          "switch-page",
+                          G_CALLBACK (on_notebook_switch_page),
+                          panel);
+
         gtk_container_add (GTK_CONTAINER (panel), panel->priv->notebook);
         gtk_widget_show (panel->priv->notebook);
 
@@ -112,6 +136,10 @@ setup_panel (CcKeyboardPanel *panel)
                                   GTK_WIDGET (panel->priv->shortcuts_page),
                                   label);
         gtk_widget_show (GTK_WIDGET (panel->priv->shortcuts_page));
+
+        g_object_set (panel,
+                      "current-page", panel->priv->keyboard_page,
+                      NULL);
 }
 
 static GObject *

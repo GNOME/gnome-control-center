@@ -44,9 +44,17 @@ typedef struct
 typedef struct
 {
         GtkAlignmentClass   parent_class;
+
+        void (* active_changed)           (CcPage  *page,
+                                           gboolean is_active);
 } CcPageClass;
 
 GType               cc_page_get_type               (void);
+
+gboolean            cc_page_is_active              (CcPage  *page);
+
+void                cc_page_set_active             (CcPage  *page,
+                                                    gboolean is_active);
 
 G_END_DECLS
 

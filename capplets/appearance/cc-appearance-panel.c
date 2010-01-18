@@ -50,9 +50,7 @@
 struct CcAppearancePanelPrivate
 {
         GtkWidget *notebook;
-        CcPage    *theme_page;
         CcPage    *background_page;
-        CcPage    *font_page;
 };
 
 enum {
@@ -67,9 +65,9 @@ G_DEFINE_DYNAMIC_TYPE (CcAppearancePanel, cc_appearance_panel, CC_TYPE_PANEL)
 
 static void
 cc_appearance_panel_set_property (GObject      *object,
-                                guint         prop_id,
-                                const GValue *value,
-                                GParamSpec   *pspec)
+                                  guint         prop_id,
+                                  const GValue *value,
+                                  GParamSpec   *pspec)
 {
         switch (prop_id) {
         default:
@@ -80,9 +78,9 @@ cc_appearance_panel_set_property (GObject      *object,
 
 static void
 cc_appearance_panel_get_property (GObject    *object,
-                                guint       prop_id,
-                                GValue     *value,
-                                GParamSpec *pspec)
+                                  guint       prop_id,
+                                  GValue     *value,
+                                  GParamSpec *pspec)
 {
         switch (prop_id) {
         default:
@@ -133,6 +131,10 @@ setup_panel (CcAppearancePanel *panel)
         g_free (display_name);
         gtk_notebook_append_page (GTK_NOTEBOOK (panel->priv->notebook), GTK_WIDGET (panel->priv->background_page), label);
         gtk_widget_show (GTK_WIDGET (panel->priv->background_page));
+
+        g_object_set (panel,
+                      "current-page", panel->priv->background_page,
+                      NULL);
 }
 
 static GObject *

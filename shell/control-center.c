@@ -39,6 +39,7 @@ typedef struct
   GSList *icon_views;
 
   gchar  *current_title;
+  CcPanel *current_panel;
 
   GtkListStore *store;
   GtkTreeModel *filter;
@@ -341,9 +342,11 @@ item_activated_cb (GtkIconView *icon_view,
   panel = g_hash_table_lookup (panels, id);
   if (panel != NULL)
     {
+      data->current_panel = panel;
       gtk_container_set_border_width (GTK_CONTAINER (panel), 12);
       index = gtk_notebook_append_page (GTK_NOTEBOOK (notebook), GTK_WIDGET (panel), NULL);
       gtk_widget_show_all (GTK_WIDGET (panel));
+      cc_panel_set_active (panel, TRUE);
       gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), index);
       gtk_widget_show (W (data->builder, "home-button"));
       gtk_window_set_title (GTK_WINDOW (data->window), data->current_title);
@@ -371,6 +374,8 @@ home_button_clicked_cb (GtkButton *button,
   widget = gtk_notebook_get_nth_page (GTK_NOTEBOOK (data->notebook), page);
   gtk_widget_hide (widget);
   gtk_notebook_remove_page (GTK_NOTEBOOK (data->notebook), page);
+  if (data->current_panel != NULL)
+    cc_panel_set_active (data->current_panel, FALSE);
 
   gtk_window_set_title (GTK_WINDOW (data->window), "System Settings");
 
