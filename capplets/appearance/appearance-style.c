@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The GNOME Foundation
+ * Copyright (C) 2007, 2010 The GNOME Foundation
  * Written by Thomas Wood <thos@gnome.org>
  * All Rights Reserved
  *
@@ -28,7 +28,6 @@
 #include "gconf-property-editor.h"
 #include "theme-thumbnail.h"
 #include "capplet-util.h"
-#include "gedit-message-area.h"
 
 typedef void (* ThumbnailGenFunc) (void               *type,
 				   ThemeThumbnailFunc  theme,
@@ -221,17 +220,18 @@ update_message_area (AppearanceData *data)
     GtkWidget *hbox;
     GtkWidget *parent;
     GtkWidget *icon;
+    GtkWidget *content;
 
     if (engine == NULL)
       return;
 
-    data->style_message_area = gedit_message_area_new ();
+    data->style_message_area = gtk_info_bar_new ();
 
     g_signal_connect (data->style_message_area, "response",
                       (GCallback) style_message_area_response_cb, data);
 
-    data->style_install_button = gedit_message_area_add_button (
-        GEDIT_MESSAGE_AREA (data->style_message_area),
+    data->style_install_button = gtk_info_bar_add_button (
+        GTK_INFO_BAR (data->style_message_area),
         _("Install"), GTK_RESPONSE_APPLY);
 
     data->style_message_label = gtk_label_new (NULL);
@@ -243,7 +243,8 @@ update_message_area (AppearanceData *data)
     gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0);
     gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
     gtk_box_pack_start (GTK_BOX (hbox), data->style_message_label, TRUE, TRUE, 0);
-    gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (data->style_message_area), hbox);
+    content = gtk_info_bar_get_content_area (GTK_INFO_BAR (data->style_message_area));
+    gtk_container_add (GTK_CONTAINER (content), hbox);
     gtk_widget_show_all (data->style_message_area);
     gtk_widget_set_no_show_all (data->style_message_area, TRUE);
 

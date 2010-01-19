@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The GNOME Foundation
+ * Copyright (C) 2007, 2010 The GNOME Foundation
  * Written by Thomas Wood <thos@gnome.org>
  *            Jens Granseuer <jensgr@gmx.net>
  * All Rights Reserved
@@ -26,7 +26,6 @@
 #include "theme-save.h"
 #include "theme-util.h"
 #include "gtkrc-utils.h"
-#include "gedit-message-area.h"
 
 #include <glib/gi18n.h>
 #include <libwindow-settings/gnome-wm-manager.h>
@@ -658,30 +657,31 @@ theme_message_area_update (AppearanceData *data)
   if (data->theme_message_area == NULL) {
     GtkWidget *hbox;
     GtkWidget *parent;
+    GtkWidget *content;
 
     if (!show_apply_background && !show_revert_font && !show_apply_font && !show_error)
       return;
 
-    data->theme_message_area = gedit_message_area_new ();
+    data->theme_message_area = gtk_info_bar_new ();
     gtk_widget_set_no_show_all (data->theme_message_area, TRUE);
 
     g_signal_connect (data->theme_message_area, "response",
                       (GCallback) theme_message_area_response_cb, data);
 
-    data->apply_background_button = gedit_message_area_add_button (
-        GEDIT_MESSAGE_AREA (data->theme_message_area),
+    data->apply_background_button = gtk_info_bar_add_button (
+        GTK_INFO_BAR (data->theme_message_area),
         _("Apply Background"),
         RESPONSE_APPLY_BG);
-    data->apply_font_button = gedit_message_area_add_button (
-        GEDIT_MESSAGE_AREA (data->theme_message_area),
+    data->apply_font_button = gtk_info_bar_add_button (
+        GTK_INFO_BAR (data->theme_message_area),
         _("Apply Font"),
         RESPONSE_APPLY_FONT);
-    data->revert_font_button = gedit_message_area_add_button (
-        GEDIT_MESSAGE_AREA (data->theme_message_area),
+    data->revert_font_button = gtk_info_bar_add_button (
+        GTK_INFO_BAR (data->theme_message_area),
         _("Revert Font"),
         RESPONSE_REVERT_FONT);
-    data->install_button = gedit_message_area_add_button (
-        GEDIT_MESSAGE_AREA (data->theme_message_area),
+    data->install_button = gtk_info_bar_add_button (
+        GTK_INFO_BAR (data->theme_message_area),
         _("Install"),
         RESPONSE_INSTALL_ENGINE);
 
@@ -699,7 +699,8 @@ theme_message_area_update (AppearanceData *data)
     gtk_box_pack_start (GTK_BOX (hbox), data->theme_info_icon, FALSE, FALSE, 0);
     gtk_box_pack_start (GTK_BOX (hbox), data->theme_error_icon, FALSE, FALSE, 0);
     gtk_box_pack_start (GTK_BOX (hbox), data->theme_message_label, TRUE, TRUE, 0);
-    gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (data->theme_message_area), hbox);
+    content = gtk_info_bar_get_content_area (GTK_INFO_BAR (data->theme_message_area));
+    gtk_container_add (GTK_CONTAINER (content), hbox);
 
     parent = appearance_capplet_get_widget (data, "theme_list_vbox");
     gtk_box_pack_start (GTK_BOX (parent), data->theme_message_area, FALSE, FALSE, 0);
