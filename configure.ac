@@ -281,6 +281,20 @@ AC_ARG_ENABLE(update-mimedb,
                    enable_update_mimedb=yes)
 AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
 
+dnl run in source tree
+AC_ARG_ENABLE(run-in-source-tree,
+  AC_HELP_STRING([--disable-run-in-source-tree],[disable search for UI files and plugins in local directory ]),
+  [case "${enableval}" in
+	yes) ENABLE_RUN_IN_SOURCE_TREE=yes ;;
+	no)  ENABLE_RUN_IN_SOURCE_TREE=no ;;
+	*) AC_MSG_ERROR(bad value ${enableval} for --disable-run-in-source-tree) ;;
+   esac],
+  [ENABLE_RUN_IN_SOURCE_TREE=yes]) dnl Default value
+if test x$ENABLE_RUN_IN_SOURCE_TREE = xyes; then
+	AC_DEFINE(RUN_IN_SOURCE_TREE, 1, [enable search for UI files and plugins in local directory])
+fi
+
+
 dnl =======================================
 dnl Finish
 dnl =======================================
