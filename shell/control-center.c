@@ -279,17 +279,32 @@ fill_model (ShellData *data)
                   const gchar *id = gmenu_tree_entry_get_desktop_file_id (f->data);
                   const gchar *exec = gmenu_tree_entry_get_exec (f->data);
                   GdkPixbuf *pixbuf = NULL;
+                  char *icon2 = NULL;
 
-                  pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-                                                     icon, 32,
-                                                     GTK_ICON_LOOKUP_FORCE_SIZE,
-                                                     NULL);
+                  if (icon != NULL && *icon == '/')
+                    {
+                      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon,
+                                                                        32, 32, TRUE, &err);
+                    }
+                  else
+                    {
+                      if (icon2 == NULL && icon != NULL && g_str_has_suffix (icon, ".png"))
+                        icon2 = g_strndup (icon, strlen (icon) - strlen (".png"));
+
+                      pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+                                                         icon2 ? icon2 : icon, 32,
+                                                         GTK_ICON_LOOKUP_FORCE_SIZE,
+                                                         &err);
+                    }
 
                   if (err)
                     {
-                      g_warning ("Could not load icon: %s", err->message);
+                      g_warning ("Could not load icon '%s': %s", icon2 ? icon2 : icon,
+                                       err->message);
                       g_error_free (err);
                     }
+
+                  g_free (icon2);
 
                   gtk_list_store_insert_with_values (store, NULL, 0,
                                                      0, name,
