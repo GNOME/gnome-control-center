@@ -19,6 +19,8 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
+#include "config.h"
+
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -48,6 +50,39 @@ typedef struct
 } ShellData;
 
 void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
+
+#ifdef RUN_IN_SOURCE_TREE
+static GList *
+load_panel_plugins_from_source (void)
+{
+  GDir *dir;
+  GList *list;
+  const char *name;
+
+  g_message ("capplets!");
+
+  dir = g_dir_open ("../capplets/", 0, NULL);
+  if (dir == NULL)
+    return NULL;
+
+  while ((name = g_dir_read_name (dir)) != NULL)
+    {
+      char *path;
+      GList *l;
+
+      path = g_strconcat ("../capplets/", name, "/.libs", NULL);
+      g_message ("loading modules in %s", path);
+      l = g_io_modules_load_all_in_directory (path);
+      g_free (path);
+
+      if (l)
+        list = g_list_concat (list, l);
+    }
+  g_dir_close (dir);
+
+  return list;
+}
+#endif
 
 static GHashTable *panels = NULL;
 
@@ -79,6 +114,11 @@ load_panel_plugins (void)
   modules = g_io_modules_load_all_in_directory (EXTENSIONSDIR);
 
   g_debug ("Loaded %d modules", g_list_length (modules));
+
+#ifdef RUN_IN_SOURCE_TREE
+  if (g_list_length (modules) == 0)
+    modules = load_panel_plugins_from_source ();
+#endif
 
   /* find all extensions */
   panel_implementations = g_io_extension_point_get_extensions (ep);
@@ -459,8 +499,10 @@ main (int argc, char **argv)
   ret = gtk_builder_add_from_file (data->builder, UIDIR "/shell.ui", NULL);
   if (ret == 0)
     {
+#ifdef RUN_IN_SOURCE_TREE
       ret = gtk_builder_add_from_file (data->builder, "shell.ui", NULL);
       if (ret == 0)
+#endif
         g_error ("Unable to load UI");
     }
 
