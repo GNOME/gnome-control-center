@@ -444,7 +444,9 @@ main (int argc, char **argv)
   ret = gtk_builder_add_from_file (data->builder, UIDIR "/shell.ui", NULL);
   if (ret == 0)
     {
-      g_error ("Unable to load UI");
+      ret = gtk_builder_add_from_file (data->builder, "shell.ui", NULL);
+      if (ret == 0)
+        g_error ("Unable to load UI");
     }
 
   data->window = W (data->builder, "main-window");
