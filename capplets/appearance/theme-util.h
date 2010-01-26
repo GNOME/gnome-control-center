@@ -53,12 +53,17 @@ typedef enum {
   THEME_TYPE_CURSOR
 } ThemeType;
 
-gboolean theme_is_writable (const gpointer theme);
-gboolean theme_delete (const gchar *name, ThemeType type);
+gboolean theme_is_writable     (const gpointer theme);
+gboolean theme_delete          (const gchar *name,
+                                ThemeType type);
 
-gboolean theme_model_iter_last (GtkTreeModel *model, GtkTreeIter *iter);
-gboolean theme_find_in_model (GtkTreeModel *model, const gchar *name, GtkTreeIter *iter);
+gboolean theme_model_iter_last (GtkTreeModel *model,
+                                GtkTreeIter *iter);
+gboolean theme_find_in_model   (GtkTreeModel *model,
+                                const gchar *name,
+                                GtkTreeIter *iter);
 
-void     theme_install_file (GtkWindow *parent, const gchar *path);
-gboolean packagekit_available (void);
+void     theme_install_file    (GtkWindow *parent,
+                                const gchar *path);
+gboolean packagekit_available  (void);
 

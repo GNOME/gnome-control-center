@@ -33,22 +33,28 @@ libappearance_common_la_SOURCES = \
 ccmodulesdir = $(EXTENSIONSDIR)
 ccmodules_LTLIBRARIES = libappearance.la
 
-libappearance_la_SOURCES = \
-	appearance-module.c \
-	cc-backgrounds-monitor.h \
-	cc-backgrounds-monitor.c \
-	cc-background-item.h \
-	cc-background-item.c \
-	cc-background-page.h \
-	cc-background-page.c \
-	cc-appearance-panel.h \
-	cc-appearance-panel.c
+libappearance_la_SOURCES =		\
+	appearance-module.c		\
+	cc-backgrounds-monitor.h	\
+	cc-backgrounds-monitor.c	\
+	cc-background-item.h		\
+	cc-background-item.c		\
+	cc-background-page.h		\
+	cc-background-page.c		\
+	cc-theme-save-dialog.h		\
+	cc-theme-save-dialog.c		\
+	cc-theme-page.h			\
+	cc-theme-page.c			\
+	cc-appearance-panel.h		\
+	cc-appearance-panel.c		\
+	$(NULL)
 
 libappearance_la_LDFLAGS =		\
 	$(EXTENSION_LIBTOOL_FLAGS)	\
 	$(NULL)
 
 libappearance_la_LIBADD =		\
+	libappearance-common.la		\
 	$(EXTENSION_LIBS)		\
 	$(EXTENSION_COMMON_LIBS)	\
 	$(NULL)

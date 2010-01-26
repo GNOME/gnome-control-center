@@ -1818,6 +1818,10 @@ cc_background_page_finalize (GObject *object)
                 g_object_unref (page->priv->monitor);
         }
 
+        if (page->priv->thumb_factory != NULL) {
+                g_object_unref (page->priv->thumb_factory);
+        }
+
         G_OBJECT_CLASS (cc_background_page_parent_class)->finalize (object);
 }
 

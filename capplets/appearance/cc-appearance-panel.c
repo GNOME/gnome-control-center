@@ -30,18 +30,9 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 
+#include "cc-theme-page.h"
 #include "cc-background-page.h"
 #include "cc-appearance-panel.h"
-
-#include "gconf-property-editor.h"
-#if 0
-#include "appearance-desktop.h"
-#include "appearance-font.h"
-#include "appearance-themes.h"
-#include "appearance-style.h"
-#endif
-#include "theme-installer.h"
-#include "theme-thumbnail.h"
 
 #define CC_APPEARANCE_PANEL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_APPEARANCE_PANEL, CcAppearancePanelPrivate))
 
@@ -50,6 +41,7 @@
 struct CcAppearancePanelPrivate
 {
         GtkWidget *notebook;
+        CcPage    *theme_page;
         CcPage    *background_page;
 };
 
@@ -113,16 +105,48 @@ install_theme (CcAppearancePanel *panel,
 #endif
 
 static void
+on_notebook_switch_page (GtkNotebook       *notebook,
+                         GtkNotebookPage   *page,
+                         guint              page_num,
+                         CcAppearancePanel *panel)
+{
+        if (page_num == 0) {
+                g_object_set (panel,
+                              "current-page",
+                              panel->priv->theme_page,
+                              NULL);
+        } else {
+                g_object_set (panel,
+                              "current-page",
+                              panel->priv->background_page,
+                              NULL);
+        }
+}
+
+static void
 setup_panel (CcAppearancePanel *panel)
 {
         GtkWidget *label;
         char      *display_name;
 
         panel->priv->notebook = gtk_notebook_new ();
+        g_signal_connect (panel->priv->notebook,
+                          "switch-page",
+                          G_CALLBACK (on_notebook_switch_page),
+                          panel);
+
         gtk_container_add (GTK_CONTAINER (panel), panel->priv->notebook);
         gtk_widget_show (panel->priv->notebook);
 
-        /* FIXME: load pages */
+        panel->priv->theme_page = cc_theme_page_new ();
+        g_object_get (panel->priv->theme_page,
+                      "display-name", &display_name,
+                      NULL);
+        label = gtk_label_new (display_name);
+        g_free (display_name);
+        gtk_notebook_append_page (GTK_NOTEBOOK (panel->priv->notebook), GTK_WIDGET (panel->priv->theme_page), label);
+        gtk_widget_show (GTK_WIDGET (panel->priv->theme_page));
+
         panel->priv->background_page = cc_background_page_new ();
         g_object_get (panel->priv->background_page,
                       "display-name", &display_name,
@@ -133,7 +157,7 @@ setup_panel (CcAppearancePanel *panel)
         gtk_widget_show (GTK_WIDGET (panel->priv->background_page));
 
         g_object_set (panel,
-                      "current-page", panel->priv->background_page,
+                      "current-page", panel->priv->theme_page,
                       NULL);
 }
 
@@ -152,8 +176,6 @@ cc_appearance_panel_constructor (GType                  type,
                       "display-name", _("Appearance"),
                       "id", "gnome-appearance-properties.desktop",
                       NULL);
-
-        //theme_thumbnail_factory_init (0, NULL);
 
         setup_panel (appearance_panel);
 
@@ -181,17 +203,7 @@ cc_appearance_panel_class_finalize (CcAppearancePanelClass *klass)
 static void
 cc_appearance_panel_init (CcAppearancePanel *panel)
 {
-        GConfClient *client;
-
         panel->priv = CC_APPEARANCE_PANEL_GET_PRIVATE (panel);
-
-        client = gconf_client_get_default ();
-        gconf_client_add_dir (client,
-                              "/desktop/gnome/peripherals/appearance",
-                              GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-        gconf_client_add_dir (client, "/desktop/gnome/interface",
-                              GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-        g_object_unref (client);
 }
 
 static void
