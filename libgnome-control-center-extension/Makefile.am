@@ -68,6 +68,8 @@ libcommon_la_SOURCES = \
 	gnome-theme-info.h		\
 	gtkrc-utils.c			\
 	gtkrc-utils.h			\
+	cc-theme-thumbnailer.c		\
+	cc-theme-thumbnailer.h		\
 	theme-thumbnail.c		\
 	theme-thumbnail.h		\
 	wm-common.c			\
