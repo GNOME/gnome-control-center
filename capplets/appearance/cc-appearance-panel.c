@@ -117,10 +117,15 @@ on_notebook_switch_page (GtkNotebook       *notebook,
                               "current-page",
                               panel->priv->theme_page,
                               NULL);
-        } else {
+        } else if (page_num == 1) {
                 g_object_set (panel,
                               "current-page",
                               panel->priv->background_page,
+                              NULL);
+        } else {
+                g_object_set (panel,
+                              "current-page",
+                              panel->priv->font_page,
                               NULL);
         }
 }
