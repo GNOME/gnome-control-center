@@ -47,6 +47,12 @@ libappearance_la_SOURCES =		\
 	cc-theme-customize-dialog.c	\
 	cc-theme-page.h			\
 	cc-theme-page.c			\
+	cc-font-common.h		\
+	cc-font-common.c		\
+	cc-font-page.h			\
+	cc-font-page.c			\
+	cc-font-details-dialog.h	\
+	cc-font-details-dialog.c	\
 	cc-appearance-panel.h		\
 	cc-appearance-panel.c		\
 	$(NULL)
@@ -58,6 +64,7 @@ libappearance_la_LDFLAGS =		\
 libappearance_la_LIBADD =		\
 	libappearance-common.la		\
 	$(EXTENSION_LIBS)		\
+	$(FONT_CAPPLET_LIBS)		\
 	$(EXTENSION_COMMON_LIBS)	\
 	$(NULL)
 

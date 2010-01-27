@@ -32,6 +32,7 @@
 
 #include "cc-theme-page.h"
 #include "cc-background-page.h"
+#include "cc-font-page.h"
 #include "cc-appearance-panel.h"
 
 #define CC_APPEARANCE_PANEL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_APPEARANCE_PANEL, CcAppearancePanelPrivate))
@@ -43,6 +44,7 @@ struct CcAppearancePanelPrivate
         GtkWidget *notebook;
         CcPage    *theme_page;
         CcPage    *background_page;
+        CcPage    *font_page;
 };
 
 enum {
@@ -155,6 +157,15 @@ setup_panel (CcAppearancePanel *panel)
         g_free (display_name);
         gtk_notebook_append_page (GTK_NOTEBOOK (panel->priv->notebook), GTK_WIDGET (panel->priv->background_page), label);
         gtk_widget_show (GTK_WIDGET (panel->priv->background_page));
+
+        panel->priv->font_page = cc_font_page_new ();
+        g_object_get (panel->priv->font_page,
+                      "display-name", &display_name,
+                      NULL);
+        label = gtk_label_new (display_name);
+        g_free (display_name);
+        gtk_notebook_append_page (GTK_NOTEBOOK (panel->priv->notebook), GTK_WIDGET (panel->priv->font_page), label);
+        gtk_widget_show (GTK_WIDGET (panel->priv->font_page));
 
         g_object_set (panel,
                       "current-page", panel->priv->theme_page,
