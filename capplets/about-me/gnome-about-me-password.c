@@ -500,18 +500,19 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 			/* Passwd is asking for our retyped new password */
 
 			if (is_string_complete (str->str, "successfully",
-											  "short",
-											  "longer",
-											  "palindrome",
-											  "simple",
-											  "similar",
-											  "wrapped",
-											  "recovered",
-											  "unchanged",
-											  "match",
-											  "1 numeric or special",
-											  "failure",
-											  NULL)) {
+							  "short",
+							  "longer",
+							  "palindrome",
+							  "dictionary",
+							  "simple",
+							  "similar",
+							  "wrapped",
+							  "recovered",
+							  "unchanged",
+							  "match",
+							  "1 numeric or special",
+							  "failure",
+							  NULL)) {
 
 				/* What response did we get? */
 				passdlg_set_busy (pdialog, FALSE);
