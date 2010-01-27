@@ -138,30 +138,6 @@ cc_theme_customize_dialog_get_property (GObject        *object,
         }
 }
 
-static gboolean
-do_customize (CcThemeCustomizeDialog *dialog)
-{
-        gboolean ret;
-        ret = FALSE;
-        return ret;
-}
-
-static void
-cc_theme_customize_dialog_response (GtkDialog *dialog,
-                                    int        response_id)
-{
-        switch (response_id) {
-        case GTK_RESPONSE_OK:
-                if (!do_customize (CC_THEME_CUSTOMIZE_DIALOG (dialog))) {
-                        g_signal_stop_emission_by_name (dialog, "response");
-                        gtk_dialog_response (dialog, GTK_RESPONSE_CANCEL);
-                }
-                break;
-        default:
-                break;
-        }
-}
-
 static void
 on_info_bar_response (GtkWidget              *w,
                       int                     response_id,
@@ -1361,14 +1337,11 @@ static void
 cc_theme_customize_dialog_class_init (CcThemeCustomizeDialogClass *klass)
 {
         GObjectClass   *object_class = G_OBJECT_CLASS (klass);
-        GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
 
         object_class->get_property = cc_theme_customize_dialog_get_property;
         object_class->set_property = cc_theme_customize_dialog_set_property;
         object_class->constructor = cc_theme_customize_dialog_constructor;
         object_class->finalize = cc_theme_customize_dialog_finalize;
-
-        dialog_class->response = cc_theme_customize_dialog_response;
 
         g_type_class_add_private (klass, sizeof (CcThemeCustomizeDialogPrivate));
 }

@@ -997,6 +997,16 @@ load_model (CcThemePage *page)
         g_list_free (theme_list);
 }
 
+static void
+on_customize_dialog_response (GtkDialog   *dialog,
+                              int          response_id,
+                              CcThemePage *page)
+{
+        if (page->priv->theme_details != NULL) {
+                gtk_widget_destroy (page->priv->theme_details);
+                page->priv->theme_details = NULL;
+        }
+}
 
 static void
 on_theme_customize_clicked (GtkWidget   *button,
@@ -1011,11 +1021,26 @@ on_theme_customize_clicked (GtkWidget   *button,
 
         if (page->priv->theme_details == NULL) {
                 page->priv->theme_details = cc_theme_customize_dialog_new ();
+                g_signal_connect (page->priv->theme_details,
+                                  "response",
+                                  G_CALLBACK (on_customize_dialog_response),
+                                  page);
         }
 
         gtk_window_set_transient_for (GTK_WINDOW (page->priv->theme_details),
                                       GTK_WINDOW (toplevel));
         gtk_widget_show_all (page->priv->theme_details);
+}
+
+static void
+on_save_dialog_response (GtkDialog   *dialog,
+                         int          response_id,
+                         CcThemePage *page)
+{
+        if (page->priv->save_dialog != NULL) {
+                gtk_widget_destroy (page->priv->save_dialog);
+                page->priv->save_dialog = NULL;
+        }
 }
 
 static void
@@ -1031,6 +1056,10 @@ on_theme_save_clicked (GtkWidget   *button,
 
         if (page->priv->save_dialog == NULL) {
                 page->priv->save_dialog = cc_theme_save_dialog_new ();
+                g_signal_connect (page->priv->save_dialog,
+                                  "response",
+                                  G_CALLBACK (on_save_dialog_response),
+                                  page);
         }
 
         cc_theme_save_dialog_set_theme_info (CC_THEME_SAVE_DIALOG (page->priv->save_dialog),
