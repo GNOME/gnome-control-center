@@ -490,6 +490,7 @@ main (int argc, char **argv)
   guint ret;
   GtkWidget *widget;
 
+  g_thread_init (NULL);
   gtk_init (&argc, &argv);
 
   data = g_new0 (ShellData, 1);

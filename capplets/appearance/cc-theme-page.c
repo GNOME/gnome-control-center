@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
+ * Copyright (C) 2007 Thomas Wood
  * Copyright (C) 2010 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -37,10 +38,12 @@
 
 #include "theme-util.h"
 #include "gnome-theme-info.h"
-#include "theme-thumbnail.h"
 #include "gnome-theme-apply.h"
 #include "theme-installer.h"
+
+#include "cc-theme-thumbnailer.h"
 #include "cc-theme-save-dialog.h"
+#include "cc-theme-customize-dialog.h"
 
 #define CC_THEME_PAGE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_THEME_PAGE, CcThemePagePrivate))
 
@@ -95,6 +98,7 @@ struct CcThemePagePrivate
         char               *revert_monospace_font;
 
         GnomeDesktopThumbnailFactory *thumb_factory;
+        CcThemeThumbnailer           *thumbnailer;
 };
 
 enum {
@@ -251,10 +255,11 @@ thumbnail_generate (CcThemePage        *page,
                 thumbnail_update (page, thumb, info->name, FALSE);
                 g_object_unref (thumb);
         } else {
-                generate_meta_theme_thumbnail_async (info,
-                                                     (ThemeThumbnailFunc) on_thumbnail_done,
-                                                     page,
-                                                     NULL);
+                cc_theme_thumbnailer_create_meta_async (page->priv->thumbnailer,
+                                                        info,
+                                                        (CcThemeThumbnailFunc) on_thumbnail_done,
+                                                        page,
+                                                        NULL);
         }
 }
 
@@ -994,14 +999,18 @@ load_model (CcThemePage *page)
 
 
 static void
-on_theme_custom_clicked (GtkWidget   *button,
-                         CcThemePage *page)
+on_theme_customize_clicked (GtkWidget   *button,
+                            CcThemePage *page)
 {
         GtkWidget *toplevel;
 
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (page));
         if (!GTK_WIDGET_TOPLEVEL (toplevel)) {
                 toplevel = NULL;
+        }
+
+        if (page->priv->theme_details == NULL) {
+                page->priv->theme_details = cc_theme_customize_dialog_new ();
         }
 
         gtk_window_set_transient_for (GTK_WINDOW (page->priv->theme_details),
@@ -1018,6 +1027,10 @@ on_theme_save_clicked (GtkWidget   *button,
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (page));
         if (!GTK_WIDGET_TOPLEVEL (toplevel)) {
                 toplevel = NULL;
+        }
+
+        if (page->priv->save_dialog == NULL) {
+                page->priv->save_dialog = cc_theme_save_dialog_new ();
         }
 
         cc_theme_save_dialog_set_theme_info (CC_THEME_SAVE_DIALOG (page->priv->save_dialog),
@@ -1326,8 +1339,6 @@ setup_page (CcThemePage *page)
 
         page->priv->icon_view = WID ("theme_list");
         page->priv->list_vbox = WID ("theme_list_vbox");
-        page->priv->theme_details = WID ("theme_details");
-        page->priv->save_dialog = cc_theme_save_dialog_new ();
 
         page->priv->custom_info = theme_load_from_gconf (client);
         page->priv->custom_info->name = g_strdup (CUSTOM_THEME_NAME);
@@ -1405,7 +1416,7 @@ setup_page (CcThemePage *page)
                                                         GTK_ICON_SIZE_BUTTON));
         g_signal_connect (w,
                           "clicked",
-                          (GCallback) on_theme_custom_clicked,
+                          (GCallback) on_theme_customize_clicked,
                           page);
 
         page->priv->delete_button = WID ("theme_delete");
@@ -1605,7 +1616,7 @@ cc_theme_page_init (CcThemePage *page)
         page->priv = CC_THEME_PAGE_GET_PRIVATE (page);
 
         page->priv->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
-
+        page->priv->thumbnailer = cc_theme_thumbnailer_new ();
 }
 
 static void
@@ -1635,6 +1646,9 @@ cc_theme_page_finalize (GObject *object)
 
         if (page->priv->thumb_factory != NULL) {
                 g_object_unref (page->priv->thumb_factory);
+        }
+        if (page->priv->thumbnailer != NULL) {
+                g_object_unref (page->priv->thumbnailer);
         }
 
         G_OBJECT_CLASS (cc_theme_page_parent_class)->finalize (object);

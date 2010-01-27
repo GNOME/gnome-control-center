@@ -1678,7 +1678,7 @@
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
-          <object class="GtkNotebook" id="notebook2">
+          <object class="GtkNotebook" id="theme_details_notebook">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -1773,6 +1773,7 @@
                 <child>
                   <object class="GtkHBox" id="color_scheme_message_hbox">
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="no_show_all">True</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkImage" id="image2">
@@ -2299,7 +2300,10 @@
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="label" translatable="yes">Small</property>
-                            <property name="use_markup">True</property>
+                            <attributes>
+                              <attribute name="style" value="normal"/>
+                              <attribute name="scale" value="0.833000"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -2324,7 +2328,10 @@
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="label" translatable="yes">Large</property>
-                            <property name="use_markup">True</property>
+                            <attributes>
+                              <attribute name="style" value="normal"/>
+                              <attribute name="scale" value="0.833000"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>

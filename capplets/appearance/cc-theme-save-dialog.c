@@ -534,6 +534,8 @@ cc_theme_save_dialog_new (void)
         GObject *object;
 
         object = g_object_new (CC_TYPE_THEME_SAVE_DIALOG,
+                               "title", _("Save Theme As..."),
+                               "has-separator", FALSE,
                                NULL);
 
         return GTK_WIDGET (object);

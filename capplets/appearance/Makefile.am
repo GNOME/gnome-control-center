@@ -43,6 +43,8 @@ libappearance_la_SOURCES =		\
 	cc-background-page.c		\
 	cc-theme-save-dialog.h		\
 	cc-theme-save-dialog.c		\
+	cc-theme-customize-dialog.h	\
+	cc-theme-customize-dialog.c	\
 	cc-theme-page.h			\
 	cc-theme-page.c			\
 	cc-appearance-panel.h		\
