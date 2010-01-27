@@ -1156,9 +1156,13 @@ generate_icon_theme_thumbnail_async (GnomeThemeIconInfo *theme_info,
 void
 theme_thumbnail_factory_init (int argc, char *argv[])
 {
+  static gboolean initialized = FALSE;
 #ifndef __APPLE__
   gint child_pid;
 #endif
+
+  if (initialized)
+    return;
 
   pipe (pipe_to_factory_fd);
   pipe (pipe_from_factory_fd);
@@ -1212,4 +1216,6 @@ theme_thumbnail_factory_init (int argc, char *argv[])
   async_data.set = FALSE;
   async_data.theme_name = NULL;
   async_data.data = g_byte_array_new ();
+
+  initialized = TRUE;
 }

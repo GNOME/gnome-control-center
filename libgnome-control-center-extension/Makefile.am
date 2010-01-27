@@ -3,6 +3,7 @@ NULL =
 INCLUDES =						\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
+	-DLIBEXECDIR="\"$(libexecdir)\""				\
 	-DGTK_ENGINE_DIR="\"$(GTK_ENGINE_DIR)\"" 			\
 	-DINSTALL_PREFIX=\"$(prefix)\"					\
 	-I$(top_srcdir)							\
@@ -45,6 +46,19 @@ libgnome_control_center_extension_la_LIBTOOLFLAGS = --tag=disable-static
 
 libgnome_control_center_extension_includedir =		\
 	$(includedir)/gnome-control-center-1/libgnome-control-center-extension	\
+	$(NULL)
+
+libexec_PROGRAMS = cc-theme-thumbnailer-helper
+
+cc_theme_thumbnailer_helper_SOURCES =	\
+	cc-theme-thumbnailer-slave.c	\
+	cc-theme-thumbnailer-slave.h	\
+	cc-theme-thumbnailer-helper.c	\
+	$(NULL)
+
+cc_theme_thumbnailer_helper_LDADD = 	\
+	$(METACITY_LIBS)		\
+	$(GNOMECC_CAPPLETS_LIBS)	\
 	$(NULL)
 
 noinst_LTLIBRARIES = libcommon.la

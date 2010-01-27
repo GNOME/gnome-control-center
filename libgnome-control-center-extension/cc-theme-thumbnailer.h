@@ -56,14 +56,16 @@ typedef enum
 #define CC_THEME_THUMBNAILER_ERROR cc_theme_thumbnailer_error_quark ()
 
 typedef void (* CcThemeThumbnailFunc)          (GdkPixbuf          *pixbuf,
-                                                gchar              *theme_name,
+                                                char               *theme_name,
                                                 gpointer            data);
 
-GQuark                cc_theme_thumbnailer_error_quark                    (void);
-GType                 cc_theme_thumbnailer_get_type                       (void);
+GQuark                cc_theme_thumbnailer_error_quark           (void);
+GType                 cc_theme_thumbnailer_get_type              (void);
 
-CcThemeThumbnailer *   cc_theme_thumbnailer_new                            (void);
+CcThemeThumbnailer *  cc_theme_thumbnailer_new                   (void);
 
+void                  cc_theme_thumbnailer_start                 (CcThemeThumbnailer  *thumbnailer);
+void                  cc_theme_thumbnailer_stop                  (CcThemeThumbnailer  *thumbnailer);
 
 void                  cc_theme_thumbnailer_create_meta_async     (CcThemeThumbnailer  *thumbnailer,
                                                                   GnomeThemeMetaInfo  *theme_info,
