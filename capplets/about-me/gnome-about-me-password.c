@@ -452,7 +452,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 		case PASSWD_STATE_AUTH:
 			/* Passwd is asking for our current password */
 
-			if (is_string_complete (str->str, "assword: ", "failure", "wrong", NULL)) {
+			if (is_string_complete (str->str, "assword: ", "failure", "wrong", "error", NULL)) {
 				/* Which response did we get? */
 				passdlg_set_busy (pdialog, FALSE);
 
@@ -535,7 +535,8 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 						   g_strrstr (str->str, "longer") != NULL) {
 						msg = g_strdup (_("The password is too short."));
 					} else if (g_strrstr (str->str, "palindrome") != NULL ||
-						   g_strrstr (str->str, "simple") != NULL) {
+						   g_strrstr (str->str, "simple") != NULL ||
+						   g_strrstr (str->str, "dictionary") != NULL) {
 						msg = g_strdup (_("The password is too simple."));
 					} else if (g_strrstr (str->str, "similar") != NULL ||
 						   g_strrstr (str->str, "wrapped") != NULL) {
