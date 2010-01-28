@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 #include "scrollarea.h"
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-rr.h>
@@ -51,7 +52,8 @@ struct App
     GtkWidget      *monitor_on_radio;
     GtkWidget      *monitor_off_radio;
     GtkListStore   *resolution_store;
-    GtkWidget	   *resolution_combo;
+    GtkWidget      *resolution_combo;
+    GtkWidget	   *scale_combo;
     GtkWidget	   *refresh_combo;
     GtkWidget	   *rotation_combo;
     GtkWidget	   *panel_checkbox;
@@ -584,6 +586,85 @@ rebuild_resolution_combo (App *app)
 }
 
 static void
+rebuild_scale_combo (App *app)
+{
+    typedef struct
+    {
+	int width;
+	int height;
+	const char * name;
+    } ScaleInfo;
+    static const ScaleInfo scales[] = {
+	{ 0, 0, N_("None") },
+/*	{ 800, 600, N_("800 x 600") }, */
+	{ 1024, 768, N_("1024 x 768") },
+	{ 1024, 900, N_("1024 x 900") },
+/*	{ 1280, 1024, N_("1280 x 1024") } */
+    };
+    const char *selection;
+    GnomeRRTransform current;
+    int i;
+    double best = 0.1;
+
+    clear_combo (app->scale_combo);
+
+    if (!app->current_output || !app->current_output->on)
+    {
+	gtk_widget_set_sensitive (app->scale_combo, FALSE);
+	return;
+    }
+
+    g_assert (app->current_output != NULL);
+
+    gtk_widget_set_sensitive (app->scale_combo, TRUE);
+
+    current = app->current_output->transform;
+
+    selection = NULL;
+    for (i = 0; i < G_N_ELEMENTS (scales); ++i)
+    {
+	const ScaleInfo *info = &(scales[i]);
+	GnomeRRTransform transform = {
+	    {
+		{ 1.0, 0.0, 0.0 },
+		{ 0.0, 1.0, 0.0 },
+		{ 0.0, 0.0, 1.0 }
+	    }
+	};
+	double diff = 0.0;
+	int    j, k;
+
+	if (info->width && info->height)
+	{
+	    transform.transform[0][0] = (double) info->width /
+		app->current_output->width;
+	    transform.transform[1][1] = (double) info->height /
+		app->current_output->height;
+	}
+
+	app->current_output->transform = transform;
+
+	add_key (app->scale_combo, info->name,
+		 info->width, info->height, 0, -1);
+
+	for (j = 0; j < 3; j++)
+	    for (k = 0; k < 3; k++)
+		diff += fabs (transform.transform[j][k] - current.transform[j][k]);
+
+	if (diff < best)
+	{
+	    selection = info->name;
+	    best = diff;
+	}
+    }
+
+    app->current_output->transform = current;
+
+    if (!(selection && combo_select (app->scale_combo, selection)))
+	combo_select (app->scale_combo, N_("None"));
+}
+
+static void
 rebuild_gui (App *app)
 {
     gboolean sensitive;
@@ -604,6 +685,7 @@ rebuild_gui (App *app)
     rebuild_current_monitor_label (app);
     rebuild_on_off_radios (app);
     rebuild_resolution_combo (app);
+    rebuild_scale_combo (app);
     rebuild_rate_combo (app);
     rebuild_rotation_combo (app);
 
@@ -787,6 +869,32 @@ realign_outputs_after_resolution_change (App *app, GnomeOutputInfo *output_that_
 }
 
 static void
+update_scale (App *app)
+{
+    int width;
+    int height;
+
+    if (!app->current_output)
+	return;
+
+    if (get_mode (app->scale_combo, &width, &height, NULL, NULL))
+    {
+	if (width && height)
+        {
+	    app->current_output->transform.transform[0][0] = (double)
+               width / app->current_output->width;
+           app->current_output->transform.transform[1][1] = (double)
+               height / app->current_output->height;
+        }
+        else
+        {
+            app->current_output->transform.transform[0][0] = 1.0;
+            app->current_output->transform.transform[1][1] = 1.0;
+        }
+    }
+}
+
+static void
 on_resolution_changed (GtkComboBox *box, gpointer data)
 {
     App *app = data;
@@ -815,6 +923,17 @@ on_resolution_changed (GtkComboBox *box, gpointer data)
 
     rebuild_rate_combo (app);
     rebuild_rotation_combo (app);
+    rebuild_scale_combo (app);
+    update_scale (app);
+    foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
+}
+
+static void
+on_scale_changed (GtkComboBox *box, gpointer data)
+{
+    App *app = data;
+
+    update_scale (app);
 
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
 }
@@ -1700,7 +1819,7 @@ make_text_combo (GtkWidget *widget, int sort_column)
 }
 
 static void
-compute_virtual_size_for_configuration (GnomeRRConfig *config, int *ret_width, int *ret_height)
+compute_virtual_size_for_configuration (App *app, GnomeRRConfig *config, int *ret_width, int *ret_height)
 {
     int i;
     int width, height;
@@ -1709,14 +1828,44 @@ compute_virtual_size_for_configuration (GnomeRRConfig *config, int *ret_width, i
 
     for (i = 0; config->outputs[i] != NULL; i++)
     {
-	GnomeOutputInfo *output;
+	GnomeOutputInfo *info;
+	GnomeRROutput   *output;
 
-	output = config->outputs[i];
+	info = config->outputs[i];
+	output = gnome_rr_screen_get_output_by_name (app->screen, info->name);
 
-	if (output->on)
+	if (info->on && output)
 	{
-	    width = MAX (width, output->x + output->width);
-	    height = MAX (height, output->y + output->height);
+	    GnomeRRMode **modes = gnome_rr_output_list_modes (output);
+	    int         j;
+
+	    for (j = 0; modes[j] != NULL; ++j)
+	    {
+		GnomeRRMode *mode = modes[i];
+		int         width, height;
+
+		width  = gnome_rr_mode_get_width (mode);
+		height = gnome_rr_mode_get_height (mode);
+
+		if (width == info->width && height == info->height)
+		{
+		    int x, y, w, h;
+		    int x1, y1, x2, y2;
+
+		    gnome_rr_mode_get_geometry (mode,
+						info->rotation,
+						&info->transform,
+						&x1, &y1, &x2, &y2);
+
+		    x = info->x + x1;
+		    y = info->y + y1;
+		    w = x2 - x1;
+		    h = y2 - y1;
+
+		    width = MAX (width, x + w);
+		    height = MAX (height, y + h);
+		}
+	    }
 	}
     }
 
@@ -1731,7 +1880,7 @@ check_required_virtual_size (App *app)
     int min_width, max_width;
     int min_height, max_height;
 
-    compute_virtual_size_for_configuration (app->current_configuration, &req_width, &req_height);
+    compute_virtual_size_for_configuration (app, app->current_configuration, &req_width, &req_height);
 
     gnome_rr_screen_get_ranges (app->screen, &min_width, &max_width, &min_height, &max_height);
 
@@ -2223,6 +2372,11 @@ run_application (App *app)
     g_signal_connect (app->resolution_combo, "changed",
 		      G_CALLBACK (on_resolution_changed), app);
 
+    app->scale_combo = _gtk_builder_get_widget (builder,
+						"scale_combo");
+    g_signal_connect (app->scale_combo, "changed",
+		      G_CALLBACK (on_scale_changed), app);
+
     app->refresh_combo = _gtk_builder_get_widget (builder, "refresh_combo");
     g_signal_connect (app->refresh_combo, "changed",
 		      G_CALLBACK (on_rate_changed), app);
@@ -2254,6 +2408,7 @@ run_application (App *app)
     g_signal_connect (app->rotate_tablet_checkbox, "toggled", G_CALLBACK (rotate_tablet_toggled_cb), app);
 
     make_text_combo (app->resolution_combo, 4);
+    make_text_combo (app->scale_combo, 4);
     make_text_combo (app->refresh_combo, 3);
     make_text_combo (app->rotation_combo, -1);
 
