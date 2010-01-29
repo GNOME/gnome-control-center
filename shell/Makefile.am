@@ -11,6 +11,8 @@ bin_PROGRAMS = gnome-control-center
 
 gnome_control_center_SOURCES =			\
 	control-center.c			\
+	shell-search-renderer.c			\
+	shell-search-renderer.h			\
 	$(NULL)
 
 gnome_control_center_LDADD =			\

@@ -29,6 +29,7 @@
 #include <gnome-menus/gmenu-tree.h>
 
 #include "cc-panel.h"
+#include "shell-search-renderer.h"
 
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
@@ -45,6 +46,7 @@ typedef struct
 
   GtkListStore *store;
   GtkTreeModel *search_filter;
+  GtkCellRenderer *search_renderer;
   gchar *filter_string;
 
 } ShellData;
@@ -63,6 +65,7 @@ enum
   COL_ID,
   COL_PIXBUF,
   COL_CATEGORY,
+  COL_DESCRIPTION,
 
   N_COLS
 };
@@ -221,24 +224,35 @@ model_filter_func (GtkTreeModel *model,
                    GtkTreeIter  *iter,
                    ShellData    *data)
 {
-  gchar *name;
+  gchar *name, *description;
   gchar *needle, *haystack;
+  gchar *full_string;
+  gboolean result;
 
-  gtk_tree_model_get (model, iter, COL_NAME, &name, -1);
+  gtk_tree_model_get (model, iter, COL_NAME, &name,
+                      COL_DESCRIPTION, &description, -1);
 
-  if (!data->filter_string)
-    return FALSE;
+  if (!data->filter_string || !name || !description)
+    {
+      g_free (name);
+      g_free (description);
+      return FALSE;
+    }
 
-  if (!name)
-    return FALSE;
+  full_string = g_strdup_printf ("%s - %s", name, description);
 
   needle = g_utf8_casefold (data->filter_string, -1);
-  haystack = g_utf8_casefold (name, -1);
+  haystack = g_utf8_casefold (full_string, -1);
 
-  if (strstr (haystack, needle))
-    return TRUE;
-  else
-    return FALSE;
+  result = (strstr (haystack, needle) != NULL);
+
+  g_free (name);
+  g_free (description);
+  g_free (haystack);
+  g_free (needle);
+  g_free (full_string);
+
+  return result;
 }
 
 static gboolean
@@ -274,8 +288,9 @@ fill_model (ShellData *data)
 
   list = gmenu_tree_directory_get_contents (d);
 
-  data->store = gtk_list_store_new (N_COLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
-                                    GDK_TYPE_PIXBUF, G_TYPE_STRING);
+  data->store = gtk_list_store_new (N_COLS, G_TYPE_STRING, G_TYPE_STRING,
+                                    G_TYPE_STRING, GDK_TYPE_PIXBUF,
+                                    G_TYPE_STRING, G_TYPE_STRING);
 
   data->search_filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (data->store), NULL);
 
@@ -287,8 +302,15 @@ fill_model (ShellData *data)
   w = (GtkWidget *) gtk_builder_get_object (data->builder, "search-view");
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (data->search_filter));
   gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (w), COL_PIXBUF);
-  gtk_icon_view_set_text_column (GTK_ICON_VIEW (w), COL_NAME);
-  gtk_icon_view_set_item_width (GTK_ICON_VIEW (w), 120);
+
+
+  data->search_renderer = (GtkCellRenderer*) shell_search_renderer_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (w), data->search_renderer, TRUE);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (w), data->search_renderer,
+                                 "title", COL_NAME);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (w), data->search_renderer,
+                                 "description", COL_DESCRIPTION);
+
   g_signal_connect (w, "item-activated",
                     G_CALLBACK (item_activated_cb), data);
   g_signal_connect (w, "button-release-event",
@@ -355,6 +377,7 @@ fill_model (ShellData *data)
                   const gchar *name = gmenu_tree_entry_get_name (f->data);
                   const gchar *id = gmenu_tree_entry_get_desktop_file_id (f->data);
                   const gchar *exec = gmenu_tree_entry_get_exec (f->data);
+                  const gchar *comment = gmenu_tree_entry_get_comment (f->data);
                   GdkPixbuf *pixbuf = NULL;
                   char *icon2 = NULL;
 
@@ -388,6 +411,7 @@ fill_model (ShellData *data)
                                                      COL_ID, id,
                                                      COL_PIXBUF, pixbuf,
                                                      COL_CATEGORY, dir_name,
+                                                     COL_DESCRIPTION, comment,
                                                      -1);
                 }
             }
@@ -473,6 +497,8 @@ search_entry_changed_cb (GtkEntry  *entry,
 {
   g_free (data->filter_string);
   data->filter_string = g_strdup (gtk_entry_get_text (entry));
+
+  g_object_set (data->search_renderer, "search-string", data->filter_string, NULL);
 
   if (!g_strcmp0 (data->filter_string, ""))
     {
