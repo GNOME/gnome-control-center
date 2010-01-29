@@ -49,7 +49,7 @@ typedef struct
 
 } ShellData;
 
-void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
+static void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
 
 #ifdef RUN_IN_SOURCE_TREE
 static GList *
@@ -145,7 +145,7 @@ load_panel_plugins (void)
   g_list_free (modules);
 }
 
-gboolean
+static gboolean
 button_release_cb (GtkWidget      *view,
                    GdkEventButton *event,
                    ShellData      *data)
@@ -167,7 +167,7 @@ button_release_cb (GtkWidget      *view,
   return FALSE;
 }
 
-void
+static void
 selection_changed_cb (GtkIconView *view,
                       ShellData   *data)
 {
@@ -198,7 +198,7 @@ selection_changed_cb (GtkIconView *view,
     }
 }
 
-gboolean
+static gboolean
 model_filter_func (GtkTreeModel *model,
                    GtkTreeIter  *iter,
                    ShellData    *data)
@@ -223,7 +223,7 @@ model_filter_func (GtkTreeModel *model,
     return FALSE;
 }
 
-void
+static void
 fill_model (ShellData *data)
 {
   GSList *list, *l;
@@ -365,14 +365,14 @@ fill_model (ShellData *data)
 
 }
 
-void
+static void
 item_activated_cb (GtkIconView *icon_view,
                    GtkTreePath *path,
                    ShellData   *data)
 {
   GtkTreeModel *model;
-  GtkTreeIter iter = {0,};
-  gchar *name, *exec, *id, *markup;
+  GtkTreeIter iter;
+  gchar *name, *exec, *id;
   GtkWidget *notebook;
   static gint index = -1;
   CcPanel *panel;
@@ -384,7 +384,9 @@ item_activated_cb (GtkIconView *icon_view,
   /* get exec */
   model = gtk_icon_view_get_model (icon_view);
 
-  gtk_tree_model_get_iter (model, &iter, path);
+  /* get the iter and ensure it is valid */
+  if (!gtk_tree_model_get_iter (model, &iter, path))
+    return;
 
   gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, 2, &id, -1);
 
@@ -437,7 +439,7 @@ home_button_clicked_cb (GtkButton *button,
   gtk_widget_hide (GTK_WIDGET (button));
 }
 
-void
+static void
 search_entry_changed_cb (GtkEntry  *entry,
                          ShellData *data)
 {
@@ -457,7 +459,7 @@ search_entry_changed_cb (GtkEntry  *entry,
     }
 }
 
-gboolean
+static gboolean
 search_entry_key_press_event_cb (GtkEntry    *entry,
                                  GdkEventKey *event,
                                  ShellData   *data)
