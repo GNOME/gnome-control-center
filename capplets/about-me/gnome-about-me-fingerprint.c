@@ -301,13 +301,27 @@ selected_finger (GtkBuilder *dialog)
 static void
 finger_radio_button_toggled (GtkToggleButton *button, EnrollData *data)
 {
+	GtkBuilder *dialog = data->dialog;
+	char *msg;
+
 	data->finger = selected_finger (data->dialog);
+
+	msg = g_strdup_printf (finger_str_to_msg (data->finger, data->is_swipe), data->name);
+	gtk_label_set_text (GTK_LABEL (WID("enroll-label")), msg);
+	g_free (msg);
 }
 
 static void
 finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 {
+	GtkBuilder *dialog = data->dialog;
+	char *msg;
+
 	data->finger = selected_finger (data->dialog);
+
+	msg = g_strdup_printf (finger_str_to_msg (data->finger, data->is_swipe), data->name);
+	gtk_label_set_text (GTK_LABEL (WID("enroll-label")), msg);
+	g_free (msg);
 }
 
 static void
