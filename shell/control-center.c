@@ -49,6 +49,13 @@ typedef struct
 
 } ShellData;
 
+enum
+{
+  OVERVIEW_PAGE,
+  SEARCH_PAGE,
+  CAPPLET_PAGE
+};
+
 static void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
 
 #ifdef RUN_IN_SOURCE_TREE
@@ -373,13 +380,7 @@ item_activated_cb (GtkIconView *icon_view,
   GtkTreeModel *model;
   GtkTreeIter iter;
   gchar *name, *exec, *id;
-  GtkWidget *notebook;
-  static gint index = -1;
   CcPanel *panel;
-
-  notebook = data->notebook;
-  if (index >= 0)
-    gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), index);
 
   /* get exec */
   model = gtk_icon_view_get_model (icon_view);
@@ -401,10 +402,14 @@ item_activated_cb (GtkIconView *icon_view,
     {
       data->current_panel = panel;
       gtk_container_set_border_width (GTK_CONTAINER (panel), 12);
-      index = gtk_notebook_append_page (GTK_NOTEBOOK (notebook), GTK_WIDGET (panel), NULL);
       gtk_widget_show_all (GTK_WIDGET (panel));
       cc_panel_set_active (panel, TRUE);
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), index);
+
+      gtk_notebook_insert_page (GTK_NOTEBOOK (data->notebook), GTK_WIDGET (panel), NULL,
+                                CAPPLET_PAGE);
+
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
+
       gtk_widget_show (W (data->builder, "home-button"));
       gtk_window_set_title (GTK_WINDOW (data->window), data->current_title);
     }
@@ -424,13 +429,12 @@ home_button_clicked_cb (GtkButton *button,
                         ShellData *data)
 {
   int        page;
-  GtkWidget *widget;
 
   page = gtk_notebook_get_current_page (GTK_NOTEBOOK (data->notebook));
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 0);
-  widget = gtk_notebook_get_nth_page (GTK_NOTEBOOK (data->notebook), page);
-  gtk_widget_hide (widget);
-  gtk_notebook_remove_page (GTK_NOTEBOOK (data->notebook), page);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), OVERVIEW_PAGE);
+
+  gtk_notebook_remove_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
+
   if (data->current_panel != NULL)
     cc_panel_set_active (data->current_panel, FALSE);
 
@@ -455,7 +459,7 @@ search_entry_changed_cb (GtkEntry  *entry,
   else
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (data->filter));
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), 1);
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), SEARCH_PAGE);
     }
 }
 
