@@ -44,7 +44,7 @@ typedef struct
   CcPanel *current_panel;
 
   GtkListStore *store;
-  GtkTreeModel *filter;
+  GtkTreeModel *search_filter;
   gchar *filter_string;
 
 } ShellData;
@@ -54,6 +54,17 @@ enum
   OVERVIEW_PAGE,
   SEARCH_PAGE,
   CAPPLET_PAGE
+};
+
+enum
+{
+  COL_NAME,
+  COL_EXEC,
+  COL_ID,
+  COL_PIXBUF,
+  COL_CATEGORY,
+
+  N_COLS
 };
 
 static void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
@@ -213,7 +224,7 @@ model_filter_func (GtkTreeModel *model,
   gchar *name;
   gchar *needle, *haystack;
 
-  gtk_tree_model_get (model, iter, 0, &name, -1);
+  gtk_tree_model_get (model, iter, COL_NAME, &name, -1);
 
   if (!data->filter_string)
     return FALSE;
@@ -228,6 +239,23 @@ model_filter_func (GtkTreeModel *model,
     return TRUE;
   else
     return FALSE;
+}
+
+static gboolean
+category_filter_func (GtkTreeModel *model,
+                      GtkTreeIter  *iter,
+                      gchar        *filter)
+{
+  gchar *category;
+  gboolean result;
+
+  gtk_tree_model_get (model, iter, COL_CATEGORY, &category, -1);
+
+  result = (g_strcmp0 (category, filter) == 0);
+
+  g_free (category);
+
+  return result;
 }
 
 static void
@@ -246,18 +274,20 @@ fill_model (ShellData *data)
 
   list = gmenu_tree_directory_get_contents (d);
 
-  data->store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
-                                    GDK_TYPE_PIXBUF);
-  data->filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (data->store),
-                                            NULL);
-  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (data->filter),
+  data->store = gtk_list_store_new (N_COLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
+                                    GDK_TYPE_PIXBUF, G_TYPE_STRING);
+
+  data->search_filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (data->store), NULL);
+
+  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (data->search_filter),
                                           (GtkTreeModelFilterVisibleFunc)
                                             model_filter_func,
                                           data, NULL);
+
   w = (GtkWidget *) gtk_builder_get_object (data->builder, "search-view");
-  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (data->filter));
-  gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (w), 2);
-  gtk_icon_view_set_text_column (GTK_ICON_VIEW (w), 0);
+  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (data->search_filter));
+  gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (w), COL_PIXBUF);
+  gtk_icon_view_set_text_column (GTK_ICON_VIEW (w), COL_NAME);
   gtk_icon_view_set_item_width (GTK_ICON_VIEW (w), 120);
   g_signal_connect (w, "item-activated",
                     G_CALLBACK (item_activated_cb), data);
@@ -273,7 +303,7 @@ fill_model (ShellData *data)
       type = gmenu_tree_item_get_type (l->data);
       if (type == GMENU_TREE_ITEM_DIRECTORY)
         {
-          GtkListStore *store;
+          GtkTreeModel *filter;
           GtkWidget *header, *iconview;
           GSList *foo, *f;
           const gchar *dir_name;
@@ -282,15 +312,15 @@ fill_model (ShellData *data)
           foo = gmenu_tree_directory_get_contents (l->data);
           dir_name = gmenu_tree_directory_get_name (l->data);
 
-          store = gtk_list_store_new (4,
-                                      G_TYPE_STRING,
-                                      G_TYPE_STRING,
-                                      G_TYPE_STRING,
-                                      GDK_TYPE_PIXBUF);
+          filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (data->store), NULL);
+          gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter),
+                                                  (GtkTreeModelFilterVisibleFunc) category_filter_func,
+                                                  g_strdup (dir_name), g_free);
 
-          iconview = gtk_icon_view_new_with_model (GTK_TREE_MODEL (store));
-          gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (iconview), 3);
-          gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), 0);
+          iconview = gtk_icon_view_new_with_model (GTK_TREE_MODEL (filter));
+
+          gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (iconview), COL_PIXBUF);
+          gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), COL_NAME);
           gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 120);
           g_signal_connect (iconview, "item-activated",
                             G_CALLBACK (item_activated_cb), data);
@@ -330,8 +360,7 @@ fill_model (ShellData *data)
 
                   if (icon != NULL && *icon == '/')
                     {
-                      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon,
-                                                                        32, 32, TRUE, &err);
+                      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, 32, 32, TRUE, &err);
                     }
                   else
                     {
@@ -353,17 +382,12 @@ fill_model (ShellData *data)
 
                   g_free (icon2);
 
-                  gtk_list_store_insert_with_values (store, NULL, 0,
-                                                     0, name,
-                                                     1, exec,
-                                                     2, id,
-                                                     3, pixbuf,
-                                                     -1);
-
                   gtk_list_store_insert_with_values (data->store, NULL, 0,
-                                                     0, name,
-                                                     1, exec,
-                                                     2, pixbuf,
+                                                     COL_NAME, name,
+                                                     COL_EXEC, exec,
+                                                     COL_ID, id,
+                                                     COL_PIXBUF, pixbuf,
+                                                     COL_CATEGORY, dir_name,
                                                      -1);
                 }
             }
@@ -389,7 +413,7 @@ item_activated_cb (GtkIconView *icon_view,
   if (!gtk_tree_model_get_iter (model, &iter, path))
     return;
 
-  gtk_tree_model_get (model, &iter, 0, &name, 1, &exec, 2, &id, -1);
+  gtk_tree_model_get (model, &iter, COL_NAME, &name, COL_EXEC, &exec, COL_ID, &id, -1);
 
   g_debug ("activated id: '%s'", id);
 
@@ -458,7 +482,7 @@ search_entry_changed_cb (GtkEntry  *entry,
     }
   else
     {
-      gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (data->filter));
+      gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (data->search_filter));
       gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), SEARCH_PAGE);
     }
 }
