@@ -65,7 +65,7 @@ enum
   COL_ID,
   COL_PIXBUF,
   COL_CATEGORY,
-  COL_DESCRIPTION,
+  COL_SEARCH_TARGET,
 
   N_COLS
 };
@@ -224,33 +224,29 @@ model_filter_func (GtkTreeModel *model,
                    GtkTreeIter  *iter,
                    ShellData    *data)
 {
-  gchar *name, *description;
+  gchar *name, *target;
   gchar *needle, *haystack;
-  gchar *full_string;
   gboolean result;
 
   gtk_tree_model_get (model, iter, COL_NAME, &name,
-                      COL_DESCRIPTION, &description, -1);
+                      COL_SEARCH_TARGET, &target, -1);
 
-  if (!data->filter_string || !name || !description)
+  if (!data->filter_string || !name || !target)
     {
       g_free (name);
-      g_free (description);
+      g_free (target);
       return FALSE;
     }
 
-  full_string = g_strdup_printf ("%s - %s", name, description);
-
   needle = g_utf8_casefold (data->filter_string, -1);
-  haystack = g_utf8_casefold (full_string, -1);
+  haystack = g_utf8_casefold (target, -1);
 
   result = (strstr (haystack, needle) != NULL);
 
   g_free (name);
-  g_free (description);
+  g_free (target);
   g_free (haystack);
   g_free (needle);
-  g_free (full_string);
 
   return result;
 }
@@ -309,7 +305,7 @@ fill_model (ShellData *data)
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (w), data->search_renderer,
                                  "title", COL_NAME);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (w), data->search_renderer,
-                                 "description", COL_DESCRIPTION);
+                                 "search-target", COL_SEARCH_TARGET);
 
   g_signal_connect (w, "item-activated",
                     G_CALLBACK (item_activated_cb), data);
@@ -373,6 +369,7 @@ fill_model (ShellData *data)
                   == GMENU_TREE_ITEM_ENTRY)
                 {
                   GError *err = NULL;
+                  gchar *search_target;
                   const gchar *icon = gmenu_tree_entry_get_icon (f->data);
                   const gchar *name = gmenu_tree_entry_get_name (f->data);
                   const gchar *id = gmenu_tree_entry_get_desktop_file_id (f->data);
@@ -405,14 +402,18 @@ fill_model (ShellData *data)
 
                   g_free (icon2);
 
+                  search_target = g_strconcat (name, " - ", comment, NULL);
+
                   gtk_list_store_insert_with_values (data->store, NULL, 0,
                                                      COL_NAME, name,
                                                      COL_EXEC, exec,
                                                      COL_ID, id,
                                                      COL_PIXBUF, pixbuf,
                                                      COL_CATEGORY, dir_name,
-                                                     COL_DESCRIPTION, comment,
+                                                     COL_SEARCH_TARGET, search_target,
                                                      -1);
+
+                  g_free (search_target);
                 }
             }
         }
@@ -498,7 +499,9 @@ search_entry_changed_cb (GtkEntry  *entry,
   g_free (data->filter_string);
   data->filter_string = g_strdup (gtk_entry_get_text (entry));
 
-  g_object_set (data->search_renderer, "search-string", data->filter_string, NULL);
+  g_object_set (data->search_renderer,
+                "search-string", data->filter_string,
+                NULL);
 
   if (!g_strcmp0 (data->filter_string, ""))
     {

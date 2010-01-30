@@ -29,7 +29,7 @@ G_DEFINE_TYPE (ShellSearchRenderer, shell_search_renderer, GTK_TYPE_CELL_RENDERE
 struct _ShellSearchRendererPrivate
 {
   gchar *title;
-  gchar *description;
+  gchar *search_target;
   gchar *search_string;
 
   PangoLayout *layout;
@@ -38,7 +38,7 @@ struct _ShellSearchRendererPrivate
 enum
 {
   PROP_TITLE = 1,
-  PROP_DESCRIPTION,
+  PROP_SEARCH_TARGET,
   PROP_SEARCH_STRING
 };
 
@@ -52,7 +52,7 @@ shell_search_renderer_get_property (GObject    *object,
   switch (property_id)
     {
   case PROP_TITLE:
-  case PROP_DESCRIPTION:
+  case PROP_SEARCH_TARGET:
   case PROP_SEARCH_STRING:
     break;
 
@@ -77,9 +77,9 @@ shell_search_renderer_set_property (GObject      *object,
     priv->title = g_value_dup_string (value);
     break;
 
-  case PROP_DESCRIPTION:
-    g_free (priv->description);
-    priv->description = g_value_dup_string (value);
+  case PROP_SEARCH_TARGET:
+    g_free (priv->search_target);
+    priv->search_target = g_value_dup_string (value);
     break;
 
   case PROP_SEARCH_STRING:
@@ -109,10 +109,10 @@ shell_search_renderer_finalize (GObject *object)
       priv->title = NULL;
     }
 
-  if (priv->description)
+  if (priv->search_target)
     {
-      g_free (priv->description);
-      priv->description = NULL;
+      g_free (priv->search_target);
+      priv->search_target = NULL;
     }
 
   if (priv->search_string)
@@ -138,7 +138,7 @@ shell_search_renderer_set_layout (ShellSearchRenderer *cell, GtkWidget *widget)
       pango_layout_set_ellipsize (priv->layout, PANGO_ELLIPSIZE_END);
     }
 
-  full_string = g_strdup_printf ("%s - %s", priv->title, priv->description);
+  full_string = priv->search_target;
 
   needle = g_utf8_casefold (priv->search_string, -1);
   haystack = g_utf8_casefold (full_string, -1);
@@ -263,12 +263,12 @@ shell_search_renderer_class_init (ShellSearchRendererClass *klass)
                                G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
   g_object_class_install_property (object_class, PROP_TITLE, pspec);
 
-  pspec = g_param_spec_string ("description",
-                               "Description",
-                               "Item description",
+  pspec = g_param_spec_string ("search-target",
+                               "Search Target",
+                               "The string that will be searched",
                                "",
                                G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
-  g_object_class_install_property (object_class, PROP_DESCRIPTION, pspec);
+  g_object_class_install_property (object_class, PROP_SEARCH_TARGET, pspec);
 
   pspec = g_param_spec_string ("search-string",
                                "Search String",
