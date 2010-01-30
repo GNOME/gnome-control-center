@@ -21,6 +21,7 @@
 
 #include "config.h"
 
+#include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -483,7 +484,7 @@ shell_show_overview_page (ShellData *data)
   if (data->current_panel != NULL)
     cc_panel_set_active (data->current_panel, FALSE);
 
-  gtk_window_set_title (GTK_WINDOW (data->window), "System Settings");
+  gtk_window_set_title (GTK_WINDOW (data->window), _("System Settings"));
 
   /* clear the search text */
   g_free (data->filter_string);
