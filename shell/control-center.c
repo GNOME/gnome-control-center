@@ -51,6 +51,8 @@ typedef struct
   GtkCellRenderer *search_renderer;
   gchar *filter_string;
 
+  GHashTable *panels;
+
 } ShellData;
 
 enum
@@ -107,10 +109,8 @@ load_panel_plugins_from_source (void)
 }
 #endif
 
-static GHashTable *panels = NULL;
-
 static void
-load_panel_plugins (void)
+load_panel_plugins (ShellData *data)
 {
   static volatile GType panel_type = G_TYPE_INVALID;
   static GIOExtensionPoint *ep = NULL;
@@ -124,7 +124,8 @@ load_panel_plugins (void)
       panel_type = g_type_from_name ("CcPanel");
     }
 
-  panels = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
+  data->panels = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
+                                        g_object_unref);
 
   if (ep == NULL)
     {
@@ -156,7 +157,7 @@ load_panel_plugins (void)
       g_debug ("Found extension: %s %d", g_io_extension_get_name (extension), g_io_extension_get_priority (extension));
       panel = g_object_new (g_io_extension_get_type (extension), NULL);
       g_object_get (panel, "id", &id, NULL);
-      g_hash_table_insert (panels, g_strdup (id), g_object_ref (panel));
+      g_hash_table_insert (data->panels, g_strdup (id), g_object_ref (panel));
       g_debug ("id: '%s'", id);
       g_free (id);
     }
@@ -448,7 +449,7 @@ item_activated_cb (GtkIconView *icon_view,
   data->current_title = name;
 
   /* first look for a panel module */
-  panel = g_hash_table_lookup (panels, id);
+  panel = g_hash_table_lookup (data->panels, id);
   if (panel != NULL)
     {
       data->current_panel = panel;
@@ -613,7 +614,7 @@ main (int argc, char **argv)
   g_signal_connect (widget, "key-press-event",
                     G_CALLBACK (search_entry_key_press_event_cb), data);
 
-  load_panel_plugins ();
+  load_panel_plugins (data);
 
   gtk_widget_show_all (data->window);
 
@@ -621,6 +622,7 @@ main (int argc, char **argv)
 
   g_free (data->filter_string);
   g_free (data->current_title);
+  g_hash_table_destroy (data->panels);
   g_free (data);
 
   return 0;
