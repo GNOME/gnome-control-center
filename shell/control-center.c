@@ -38,6 +38,7 @@ typedef struct
   GtkBuilder *builder;
   GtkWidget  *notebook;
   GtkWidget  *window;
+  GtkWidget  *search_entry;
 
   GSList *icon_views;
 
@@ -459,7 +460,6 @@ item_activated_cb (GtkIconView *icon_view,
 
       gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
 
-      gtk_widget_show (W (data->builder, "home-button"));
       gtk_window_set_title (GTK_WINDOW (data->window), data->current_title);
     }
   else
@@ -474,12 +474,8 @@ item_activated_cb (GtkIconView *icon_view,
 }
 
 static void
-home_button_clicked_cb (GtkButton *button,
-                        ShellData *data)
+shell_show_overview_page (ShellData *data)
 {
-  int        page;
-
-  page = gtk_notebook_get_current_page (GTK_NOTEBOOK (data->notebook));
   gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), OVERVIEW_PAGE);
 
   gtk_notebook_remove_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
@@ -489,13 +485,28 @@ home_button_clicked_cb (GtkButton *button,
 
   gtk_window_set_title (GTK_WINDOW (data->window), "System Settings");
 
-  gtk_widget_hide (GTK_WIDGET (button));
+  /* clear the search text */
+  g_free (data->filter_string);
+  data->filter_string = g_strdup ("");
+  gtk_entry_set_text (GTK_ENTRY (data->search_entry), "");
+}
+
+static void
+home_button_clicked_cb (GtkButton *button,
+                        ShellData *data)
+{
+  shell_show_overview_page (data);
 }
 
 static void
 search_entry_changed_cb (GtkEntry  *entry,
                          ShellData *data)
 {
+
+  /* if the entry text was set manually (not by the user) */
+  if (!g_strcmp0 (data->filter_string, gtk_entry_get_text (entry)))
+    return;
+
   g_free (data->filter_string);
   data->filter_string = g_strdup (gtk_entry_get_text (entry));
 
@@ -505,9 +516,7 @@ search_entry_changed_cb (GtkEntry  *entry,
 
   if (!g_strcmp0 (data->filter_string, ""))
     {
-      home_button_clicked_cb (GTK_BUTTON (gtk_builder_get_object (data->builder,
-                                                                  "home-button")),
-                                          data);
+      shell_show_overview_page (data);
     }
   else
     {
@@ -542,6 +551,20 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
   return FALSE;
 }
 
+static void
+notebook_switch_page_cb (GtkNotebook     *book,
+                         GtkNotebookPage *page,
+                         gint             page_num,
+                         ShellData       *data)
+{
+  /* make sure the home button is shown on all pages except the overview page */
+
+  if (page_num == OVERVIEW_PAGE)
+    gtk_widget_hide (W (data->builder, "home-button"));
+  else
+    gtk_widget_show (W (data->builder, "home-button"));
+}
+
 int
 main (int argc, char **argv)
 {
@@ -572,6 +595,9 @@ main (int argc, char **argv)
 
   data->notebook = W (data->builder, "notebook");
 
+  g_signal_connect (data->notebook, "switch-page",
+                    G_CALLBACK (notebook_switch_page_cb), data);
+
   fill_model (data);
 
 
@@ -579,6 +605,7 @@ main (int argc, char **argv)
                     "clicked", G_CALLBACK (home_button_clicked_cb), data);
 
   widget = (GtkWidget*) gtk_builder_get_object (data->builder, "search-entry");
+  data->search_entry = widget;
 
   g_signal_connect (widget, "changed", G_CALLBACK (search_entry_changed_cb),
                     data);
