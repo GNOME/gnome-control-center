@@ -35,7 +35,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment1">
+                      <object class="GtkAlignment" id="entry-alignment">
                         <property name="visible">True</property>
                         <property name="xalign">1</property>
                         <property name="xscale">0</property>
@@ -140,5 +140,12 @@
       <!-- column-name icon -->
       <column type="gchararray"/>
     </columns>
+  </object>
+  <object class="GtkSizeGroup" id="sizegroup">
+    <property name="mode">vertical</property>
+    <widgets>
+      <widget name="home-button"/>
+      <widget name="entry-alignment"/>
+    </widgets>
   </object>
 </interface>
