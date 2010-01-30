@@ -95,6 +95,14 @@ shell_search_renderer_set_property (GObject      *object,
 static void
 shell_search_renderer_dispose (GObject *object)
 {
+  ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (object)->priv;
+
+  if (priv->layout)
+    {
+      g_object_unref (priv->layout);
+      priv->layout = NULL;
+    }
+
   G_OBJECT_CLASS (shell_search_renderer_parent_class)->dispose (object);
 }
 
