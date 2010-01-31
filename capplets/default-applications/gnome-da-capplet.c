@@ -700,8 +700,7 @@ _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 
 
 static void
-show_dialog (GnomeDACapplet *capplet, const gchar *start_page,
-             guint32 socket_id)
+show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 {
     GObject *obj;
     GtkBuilder *builder;
@@ -730,26 +729,10 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page,
 	exit (EXIT_FAILURE);
     }
 
-    if (socket_id) {
-        GtkWidget *content, *plug;
-
-        /* re-parent contents */
-        content = _gtk_builder_get_widget (builder, "preferred_apps_notebook");
-
-        plug = gtk_plug_new (socket_id);
-        gtk_widget_reparent (content, plug);
-        g_signal_connect (plug, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-
-        gtk_widget_show_all (plug);
-        capplet->window = plug;
-    }
-    else {
-        capplet->window = _gtk_builder_get_widget (builder,
-                                                   "preferred_apps_dialog");
-        g_signal_connect (capplet->window, "response", G_CALLBACK (close_cb),
-                          NULL);
-    }
-
+    capplet->window = _gtk_builder_get_widget (builder,
+                                               "preferred_apps_dialog");
+    g_signal_connect (capplet->window, "response", G_CALLBACK (close_cb),
+                      NULL);
 
     capplet->web_browser_command_entry = _gtk_builder_get_widget (builder, "web_browser_command_entry");
     capplet->web_browser_command_label = _gtk_builder_get_widget (builder, "web_browser_command_label");
@@ -965,7 +948,6 @@ int
 main (int argc, char **argv)
 {
     GnomeDACapplet *capplet;
-    guint32 socket_id;
 
     gchar *start_page = NULL;
     GOptionContext *context;
@@ -978,15 +960,6 @@ main (int argc, char **argv)
           /* TRANSLATORS: don't translate the terms in brackets */
           N_("Specify the name of the page to show (internet|multimedia|system|a11y)"),
           N_("page") },
-
-        { "socket",
-          's',
-          G_OPTION_FLAG_IN_MAIN,
-          G_OPTION_ARG_INT,
-          &socket_id,
-          /* TRANSLATORS: don't translate the terms in brackets */
-          N_("ID of the socket to embed in"),
-          N_("socket") },
 
         {NULL}
     };
@@ -1007,7 +980,7 @@ main (int argc, char **argv)
 
     gnome_da_xml_load_list (capplet);
 
-    show_dialog (capplet, start_page, socket_id);
+    show_dialog (capplet, start_page);
     g_free (start_page);
 
     gtk_main ();
