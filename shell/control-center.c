@@ -27,7 +27,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #define GMENU_I_KNOW_THIS_IS_UNSTABLE
-#include <gnome-menus/gmenu-tree.h>
+#include <gmenu-tree.h>
 
 #include "cc-panel.h"
 #include "shell-search-renderer.h"
