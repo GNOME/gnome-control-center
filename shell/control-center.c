@@ -276,14 +276,20 @@ fill_model (ShellData *data)
 {
   GSList *list, *l;
   GMenuTreeDirectory *d;
-  GMenuTree *t;
+  GMenuTree *tree;
   GtkWidget *vbox, *w;
 
   vbox = W (data->builder, "main-vbox");
 
-  t = gmenu_tree_lookup (MENUDIR "/gnomecc.menu", 0);
+  tree = gmenu_tree_lookup (MENUDIR "/gnomecc.menu", 0);
 
-  d = gmenu_tree_get_root_directory (t);
+  if (!tree)
+    {
+      g_warning ("Could not find control center menu");
+      return;
+    }
+
+  d = gmenu_tree_get_root_directory (tree);
 
   list = gmenu_tree_directory_get_contents (d);
 
