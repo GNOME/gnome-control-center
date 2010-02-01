@@ -44,9 +44,7 @@ libgnome_control_center_extension_la_LIBADD = 		\
 
 libgnome_control_center_extension_la_LIBTOOLFLAGS = --tag=disable-static
 
-libgnome_control_center_extension_includedir =		\
-	$(includedir)/gnome-control-center-1/libgnome-control-center-extension	\
-	$(NULL)
+libgnome_control_center_extension_includedir = $(includedir)/gnome-control-center-1/libgnome-control-center-extension
 
 libexec_PROGRAMS = cc-theme-thumbnailer-helper
 
