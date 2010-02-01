@@ -1556,6 +1556,8 @@ setup_page (CcBackgroundPage *page)
         widget = WID ("background_vbox");
         gtk_widget_reparent (widget, GTK_WIDGET (page));
         gtk_widget_show (widget);
+
+        g_object_unref (builder);
 }
 
 static GObject *
