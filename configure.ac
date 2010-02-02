@@ -383,7 +383,7 @@ libgnome-control-center-extension/libgnome-control-center-extension.pc
 libgnome-control-center-extension/libgnome-control-center-extension-uninstalled.pc
 po/Makefile.in
 shell/Makefile
-shell/gnomecc.desktop.in
+shell/gnome-control-center.desktop.in
 typing-break/Makefile
 ])
 

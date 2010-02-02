@@ -27,7 +27,8 @@ AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
 	-DEXTENSIONSDIR="\"$(EXTENSIONSDIR)\""			\
 	-DUIDIR="\"$(uidir)\""					\
-	-DMENUDIR="\"$(menudir)\""
+	-DMENUDIR="\"$(menudir)\""				\
+	$(NULL)
 
 menudir = $(sysconfdir)/xdg/menus
 menu_DATA = gnomecc.menu
@@ -36,7 +37,7 @@ uidir = $(pkgdatadir)/ui
 ui_DATA = shell.ui
 
 sysdir = $(datadir)/applications
-sys_in_files = gnomecc.desktop.in
+sys_in_files = gnome-control-center.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
@@ -58,7 +59,13 @@ if GCONF_SCHEMAS_INSTALL
 	fi
 endif
 
-EXTRA_DIST = $(ui_DATA) gnomecc.desktop.in.in gnomecc.directory.in gnomecc.menu $(schemas_DATA).in
+EXTRA_DIST = 					\
+	$(ui_DATA)				\
+	gnome-control-center.desktop.in.in	\
+	gnomecc.directory.in			\
+	gnomecc.menu				\
+	$(schemas_DATA).in			\
+	$(NULL)
 
 DISTCLEANFILES = gnomecc.desktop gnomecc.desktop.in gnomecc.directory $(schemas_DATA)
 
