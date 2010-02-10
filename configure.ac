@@ -84,6 +84,8 @@ AC_SUBST(XF86MISC_LIBS)
 AC_CHECK_HEADERS(X11/extensions/XKB.h)
 CPPFLAGS=$savecppflags
 
+AC_CHECK_LIB(m, floor)
+
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
