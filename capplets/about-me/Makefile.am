@@ -31,8 +31,8 @@ marshal.c: fprintd-marshal.list
 if BUILD_ABOUTME
 bin_PROGRAMS = gnome-about-me
 
-gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS)
-gnome_about_me_LDFLAGS = -export-dynamic
+gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) $(EXTENSION_LIBS) $(EXTENSION_COMMON_LIBS)
+gnome_about_me_LDFLAGS = -export-dynamic $(EXTENSION_LIBTOOL_FLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -43,6 +43,7 @@ uidir   = $(pkgdatadir)/ui
 ui_DATA = $(ui_files)
 
 INCLUDES = \
+	$(EXTENSION_CFLAGS) \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(LIBEBOOK_CFLAGS) \
 	-DDATADIR="\"$(datadir)\"" \
