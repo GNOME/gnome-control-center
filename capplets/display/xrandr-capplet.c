@@ -2361,7 +2361,10 @@ run_application (App *app)
     g_object_set_data (G_OBJECT (app->area), "app", app);
 
     /* FIXME: this should be computed dynamically */
-    foo_scroll_area_set_min_size (FOO_SCROLL_AREA (app->area), -1, 200);
+    if (gdk_screen_get_height (gdk_screen_get_default ()) <= 600)
+	foo_scroll_area_set_min_size (FOO_SCROLL_AREA (app->area), -1, 150);
+    else
+	foo_scroll_area_set_min_size (FOO_SCROLL_AREA (app->area), -1, 200);
     gtk_widget_show (app->area);
     g_signal_connect (app->area, "paint",
 		      G_CALLBACK (on_area_paint), app);
