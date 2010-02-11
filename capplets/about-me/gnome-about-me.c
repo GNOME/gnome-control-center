@@ -821,10 +821,14 @@ about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, GnomeAboutMe *m
 static void
 about_me_passwd_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 {
+#ifdef HAVE_USERPASSWD
+	g_spawn_command_line_async ("/usr/bin/userpasswd", NULL);
+#else
 	GtkBuilder *dialog;
 
 	dialog = me->dialog;
 	gnome_about_me_password (GTK_WINDOW (WID ("about-me-dialog")));
+#endif
 }
 
 static void

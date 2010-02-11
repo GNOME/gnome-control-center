@@ -248,6 +248,22 @@ AS_IF([test "x$with_window_manager" == "xmetacity"],
 
 PKG_CHECK_MODULES(WINDOW_MANAGER, $WM_REQUIRES)
 
+
+dnl ==============================================
+dnl Allow "userpasswd" to be used in about-me
+dnl ==============================================
+
+AC_ARG_WITH([userpasswd],
+            [AS_HELP_STRING([--with-userpasswd],
+                            [use the "userpasswd" utility to change passwords in about-me])],
+            [with_userpasswd=${withval}],
+            [with_userpasswd=no])
+
+AS_IF([test "x$with_userpasswd" == "xyes"],
+      [AC_DEFINE(HAVE_USERPASSWD, 1, [defined if using userpasswd])],
+      [])
+
+
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
 dnl ==============================================
