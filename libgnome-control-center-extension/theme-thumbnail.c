@@ -1,10 +1,23 @@
-#include <config.h>
+#include "config.h"
 #include <unistd.h>
 #include <string.h>
+
+#ifdef HAVE_MUTTER
+
+#include <mutter-private/util.h>
+#include <mutter-private/theme.h>
+#include <mutter-private/theme-parser.h>
+#include <mutter-private/preview-widget.h>
+
+#else
+
 #include <metacity-private/util.h>
 #include <metacity-private/theme.h>
 #include <metacity-private/theme-parser.h>
 #include <metacity-private/preview-widget.h>
+
+#endif
+
 #include <signal.h>
 #include <errno.h>
 #include <math.h>

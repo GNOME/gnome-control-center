@@ -12,7 +12,7 @@ INCLUDES =						\
 	$(CAPPLET_CFLAGS)						\
 	$(DBUS_CFLAGS)							\
 	$(GNOME_DESKTOP_CFLAGS)						\
-	$(METACITY_CFLAGS)						\
+	$(WINDOW_MANAGER_CFLAGS)						\
 	$(GSD_DBUS_CFLAGS)						\
 	$(GIO_CFLAGS)
 	$(EXTENSION_COMMON_CFLAGS)			\
@@ -55,7 +55,7 @@ cc_theme_thumbnailer_helper_SOURCES =	\
 	$(NULL)
 
 cc_theme_thumbnailer_helper_LDADD = 	\
-	$(METACITY_LIBS)		\
+	$(WINDOW_MANAGER_LIBS)		\
 	$(GNOMECC_CAPPLETS_LIBS)	\
 	$(NULL)
 
@@ -89,7 +89,7 @@ libcommon_la_SOURCES = \
 
 libcommon_la_LIBADD =							\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \
-	$(METACITY_LIBS)						\
+	$(WINDOW_MANAGER_LIBS)						\
 	$(DBUS_LIBS)							\
 	$(GNOME_DESKTOP_LIBS)						\
 	$(GIO_LIBS)

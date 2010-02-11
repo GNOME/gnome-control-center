@@ -92,7 +92,6 @@ PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu unique-1.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
-PKG_CHECK_MODULES(METACITY, libmetacity-private >= 2.23.1)
 PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-2.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 PKG_CHECK_MODULES(GIO, gio-2.0)
@@ -227,6 +226,27 @@ if test "x$enable_aboutme" = "xyes"; then
 fi
 
 AM_CONDITIONAL(BUILD_ABOUTME, test "x$enable_aboutme" = "xyes")
+
+
+dnl ==============================================
+dnl Check the window manager we need to work with
+dnl ==============================================
+
+AC_ARG_WITH([window_manager],
+            [AS_HELP_STRING([--with-window-manager],
+                            [specify which window manager to support (metacity, mutter)])],
+            [with_window_manager=${withval}],
+            [with_window_manager=metacity])
+
+AS_IF([test "x$with_window_manager" == "xmetacity"],
+      [WM_REQUIRES="libmetacity-private >= 2.23.1"
+       AC_DEFINE(HAVE_METACITY, 1, [defined if using metacity])],
+      [test "x$with_window_manager" == "xmutter"],
+      [WM_REQUIRES="libmutter-private >= 2.23.1"
+       AC_DEFINE(HAVE_MUTTER, 1, [defined if using mutter])],
+      [AC_MSG_FAILURE([Unsuported window manager: "$with_window_manager"])])
+
+PKG_CHECK_MODULES(WINDOW_MANAGER, $WM_REQUIRES)
 
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
