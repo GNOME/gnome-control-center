@@ -23,6 +23,7 @@
 #define __CC_PANEL_H
 
 #include <glib-object.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
