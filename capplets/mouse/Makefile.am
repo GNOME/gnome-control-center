@@ -14,31 +14,30 @@ INCLUDES = 						\
 bin_PROGRAMS = gnome-mouse-properties
 
 ccmodulesdir = $(EXTENSIONSDIR)
-ccmodules_LTLIBRARIES = libmouse.la
+ccmodules_LTLIBRARIES = libpointer.la
 
-libmouse_la_SOURCES =			\
-	mouse-module.c			\
-	cc-mouse-panel.h		\
-	cc-mouse-panel.c		\
-	cc-mouse-page.h			\
-	cc-mouse-page.c			\
+libpointer_la_SOURCES =			\
+	pointer-module.c		\
+	cc-pointer-panel.h		\
+	cc-pointer-panel.c		\
+	gnome-mouse-properties.c	\
 	$(NULL)
 
-libmouse_la_LDFLAGS =			\
+libpointer_la_LDFLAGS =			\
 	$(EXTENSION_LIBTOOL_FLAGS)	\
 	$(NULL)
 
-libmouse_la_LIBADD =			\
+libpointer_la_LIBADD =			\
 	$(EXTENSION_LIBS)		\
 	$(EXTENSION_COMMON_LIBS)	\
 	$(NULL)
 
-libmouse_la_CFLAGS =			\
+libpointer_la_CFLAGS =			\
 	$(EXTENSION_CFLAGS)		\
 	$(EXTENSION_COMMON_CFLAGS)	\
 	$(NULL)
 
-libmouse_la_LIBTOOLFLAGS = --tag=disable-static
+libpointer_la_LIBTOOLFLAGS = --tag=disable-static
 
 gnome_mouse_properties_LDADD = 		\
 	$(top_builddir)/libgnome-control-center-extension/libcommon.la \

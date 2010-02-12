@@ -511,7 +511,7 @@ setup_dialog (GtkBuilder *dialog, GConfChangeSet *changeset)
 
 /* Construct the dialog */
 
-static GtkBuilder *
+GtkBuilder *
 create_dialog (void)
 {
 	GtkBuilder   *dialog;
@@ -580,7 +580,7 @@ main (int argc, char **argv)
 	GtkBuilder     *dialog;
 	GtkWidget      *dialog_win, *w;
 	gchar *start_page = NULL;
-	guint32 socket_id;
+	guint32 socket_id = 0;
 
 	GOptionContext *context;
 	GOptionEntry cap_options[] = {
