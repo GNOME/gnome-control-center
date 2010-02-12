@@ -67,6 +67,6 @@ EXTRA_DIST = 					\
 	$(schemas_DATA).in			\
 	$(NULL)
 
-DISTCLEANFILES = gnomecc.desktop gnomecc.desktop.in gnomecc.directory $(schemas_DATA)
+DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory $(schemas_DATA)
 
 -include $(top_srcdir)/git.mk
