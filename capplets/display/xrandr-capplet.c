@@ -1464,6 +1464,30 @@ compare_snaps (gconstpointer v1, gconstpointer v2)
     }
 }
 
+/* Sets a mouse cursor for a widget's window.  As a hack, you can pass
+ * GDK_BLANK_CURSOR to mean "set the cursor to NULL" (i.e. reset the widget's
+ * window's cursor to its default).
+ */
+static void
+set_cursor (GtkWidget *widget, GdkCursorType type)
+{
+	GdkCursor *cursor;
+	GdkWindow *window;
+
+	if (type == GDK_BLANK_CURSOR)
+	    cursor = NULL;
+	else
+	    cursor = gdk_cursor_new_for_display (gtk_widget_get_display (widget), type);
+
+	window = gtk_widget_get_window (widget);
+
+	if (window)
+	    gdk_window_set_cursor (window, cursor);
+
+	if (cursor)
+	    gdk_cursor_unref (cursor);
+}
+
 static void
 on_output_event (FooScrollArea *area,
 		 FooScrollAreaEvent *event,
@@ -1471,6 +1495,13 @@ on_output_event (FooScrollArea *area,
 {
     GnomeOutputInfo *output = data;
     App *app = g_object_get_data (G_OBJECT (area), "app");
+
+    /* If the mouse is inside the outputs, set the cursor to a hand.  See
+     * on_canvas_event() for where we reset the cursor to the default if it
+     * exits the outputs' area.
+     */
+    if (!app->current_configuration->clone && get_n_connected (app) > 1)
+	set_cursor (GTK_WIDGET (area), GDK_HAND1);
 
     if (event->type == FOO_BUTTON_PRESS)
     {
@@ -1570,24 +1601,17 @@ on_output_event (FooScrollArea *area,
     }
 }
 
-#if 0
 static void
 on_canvas_event (FooScrollArea *area,
 		 FooScrollAreaEvent *event,
 		 gpointer data)
 {
-    App *app = g_object_get_data (G_OBJECT (area), "app");
-
-    if (event->type == FOO_BUTTON_PRESS)
-    {
-	app->current_output = NULL;
-
-	rebuild_gui (app);
-
-	foo_scroll_area_invalidate (area);
-    }
+    /* If the mouse exits the outputs, reset the cursor to the default.  See
+     * on_output_event() for where we set the cursor to a hand if it is over one
+     * of the outputs.
+     */
+    set_cursor (GTK_WIDGET (area), GDK_BLANK_CURSOR);
 }
-#endif
 
 static PangoLayout *
 get_display_name (App *app,
@@ -1631,9 +1655,7 @@ paint_background (FooScrollArea *area,
 
     cairo_fill_preserve (cr);
 
-#if 0
     foo_scroll_area_add_input_from_fill (area, cr, on_canvas_event, NULL);
-#endif
 
     cairo_set_source_rgb (cr,
                           widget->style->dark[GTK_STATE_SELECTED].red / 65535.0,
