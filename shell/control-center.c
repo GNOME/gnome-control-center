@@ -282,7 +282,7 @@ fill_model (ShellData *data)
   vbox = W (data->builder, "main-vbox");
 
   tree = gmenu_tree_lookup (MENUDIR "/gnomecc.menu",
-                            GMENU_TREE_FLAGS_INCLUDE_NODSIPLAY);
+                            GMENU_TREE_FLAGS_INCLUDE_NODISPLAY);
 
   if (!tree)
     {
