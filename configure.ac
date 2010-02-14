@@ -96,7 +96,7 @@ COMMON_MODULES="gtk+-2.0 >= 2.18.0 dnl
  gio-2.0 dnl
  gconf-2.0 dnl
  libxml-2.0 dnl
- gnome-desktop-2.0 >= 2.27.91"
+ gnome-desktop-2.0 >= 2.29.4"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1)
 PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu unique-1.0)
