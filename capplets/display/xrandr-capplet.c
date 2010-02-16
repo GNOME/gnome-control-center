@@ -1496,12 +1496,12 @@ on_output_event (FooScrollArea *area,
     GnomeOutputInfo *output = data;
     App *app = g_object_get_data (G_OBJECT (area), "app");
 
-    /* If the mouse is inside the outputs, set the cursor to a hand.  See
+    /* If the mouse is inside the outputs, set the cursor to "you can move me".  See
      * on_canvas_event() for where we reset the cursor to the default if it
      * exits the outputs' area.
      */
     if (!app->current_configuration->clone && get_n_connected (app) > 1)
-	set_cursor (GTK_WIDGET (area), GDK_HAND1);
+	set_cursor (GTK_WIDGET (area), GDK_FLEUR);
 
     if (event->type == FOO_BUTTON_PRESS)
     {
@@ -1607,8 +1607,8 @@ on_canvas_event (FooScrollArea *area,
 		 gpointer data)
 {
     /* If the mouse exits the outputs, reset the cursor to the default.  See
-     * on_output_event() for where we set the cursor to a hand if it is over one
-     * of the outputs.
+     * on_output_event() for where we set the cursor to the movement cursor if
+     * it is over one of the outputs.
      */
     set_cursor (GTK_WIDGET (area), GDK_BLANK_CURSOR);
 }
