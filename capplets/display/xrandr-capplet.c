@@ -2382,6 +2382,8 @@ run_application (App *app)
 
     g_object_set_data (G_OBJECT (app->area), "app", app);
 
+    gtk_widget_set_tooltip_text (app->area, _("Select a monitor to change its properties; drag it to rearrange its placement."));
+
     /* FIXME: this should be computed dynamically */
     foo_scroll_area_set_min_size (FOO_SCROLL_AREA (app->area), -1, 200);
     gtk_widget_show (app->area);
