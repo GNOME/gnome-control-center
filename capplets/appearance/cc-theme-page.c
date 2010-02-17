@@ -952,7 +952,7 @@ load_model (CcThemePage *page)
 {
         GList              *theme_list;
         GList              *l;
-        GnomeThemeMetaInfo *meta_theme;
+        GnomeThemeMetaInfo *meta_theme = NULL;
 
         /* set up theme list */
         theme_list = gnome_theme_meta_info_find_all ();
