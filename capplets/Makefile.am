@@ -1,7 +1,6 @@
 NULL =
 
 SUBDIRS = \
-	accessibility		\
 	appearance		\
 	keyboard		\
 	mouse			\
