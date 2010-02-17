@@ -8,6 +8,7 @@ INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
 	-I$(top_srcdir)/libgnome-control-center-extension \
 	-DUIDIR="\"$(uidir)\""				\
+	-DPIXMAPDIR="\"$(pixmapdir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	$(NULL)
@@ -29,7 +30,7 @@ ccmodules_LTLIBRARIES = libdisplay.la
 libdisplay_la_SOURCES =			\
 	display-module.c		\
 	cc-display-page.h		\
-	cc-display-page.c		\
+	cc-display-minimal-page.c		\
 	cc-display-panel.h		\
 	cc-display-panel.c		\
 	$(NULL)
@@ -39,11 +40,11 @@ libdisplay_la_LDFLAGS =			\
 	$(EXTENSION_LIBTOOL_FLAGS)	\
 	$(NULL)
 
+#	libdisplay-common.la
 libdisplay_la_LIBADD =			\
-	libdisplay-common.la		\
 	$(EXTENSION_LIBS)		\
 	$(EXTENSION_COMMON_LIBS)	\
-	$(LIBGNOMEKBDUI_LIBS)		\
+	$(DISPLAY_CAPPLET_LIBS)		\
 	$(NULL)
 
 libdisplay_la_CFLAGS =			\
@@ -78,12 +79,17 @@ dist_icons32_DATA = icons/32x32/gnome-display-properties.png
 iconssvgdir = $(datadir)/icons/hicolor/scalable/apps
 dist_iconssvg_DATA = icons/scalable/gnome-display-properties.svg
 
+icondir = $(pkgdatadir)/pixmaps
+dist_icon_DATA = \
+	display-netbook-and-external.png \
+	display-netbook-only.png 
+
 desktopdir = $(datadir)/applications
 Desktop_in_files = display-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 uidir = $(pkgdatadir)/ui
-dist_ui_DATA = display-capplet.ui
+dist_ui_DATA = display-capplet.ui display-minimal.ui
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 
