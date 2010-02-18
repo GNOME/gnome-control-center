@@ -31,6 +31,7 @@ static GConfEnumStringPair options_lookup[] = {
   { GNOME_BG_PLACEMENT_SCALED, "scaled" },
   { GNOME_BG_PLACEMENT_ZOOMED, "zoom" },
   { GNOME_BG_PLACEMENT_TILED, "wallpaper" },
+  { GNOME_BG_PLACEMENT_SPANNED, "spanned" },
   { 0, NULL }
 };
 
