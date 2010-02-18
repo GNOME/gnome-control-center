@@ -50,9 +50,9 @@ typedef enum {
 } OutputMode;
 
 enum {
-  COL_MODE = 0,
-  COL_NAME = 1,
-  COL_END = -1
+        COL_MODE = 0,
+        COL_NAME = 1,
+        COL_END = -1
 };
 
 struct CcDisplayPagePrivate
@@ -94,15 +94,6 @@ static void     cc_display_page_finalize       (GObject             *object);
 static void     apply_configuration_returned_cb (DBusGProxy *proxy, DBusGProxyCall *call_id, CcDisplayPage *page);
 
 G_DEFINE_TYPE (CcDisplayPage, cc_display_page, CC_TYPE_PAGE)
-
-
-typedef struct
-{
-    int grab_x;
-    int grab_y;
-    int output_x;
-    int output_y;
-} GrabInfo;
 
 static void
 error_message (CcDisplayPage *page,
@@ -382,10 +373,10 @@ on_apply_button_clicked (GtkButton     *button,
 }
 
 typedef struct {
-  GnomeRRMode *mode;
-  gboolean found;
-  GtkTreeIter iter;
-  GnomeRRMode *found_mode;
+        GnomeRRMode *mode;
+        gboolean found;
+        GtkTreeIter iter;
+        GnomeRRMode *found_mode;
 } FindData;
 
 /*
@@ -394,86 +385,86 @@ typedef struct {
  */
 static gboolean
 find_mode (GtkTreeModel *model,
-           GtkTreePath *path,
-           GtkTreeIter *iter,
-           gpointer user_data)
+           GtkTreePath  *path,
+           GtkTreeIter  *iter,
+           gpointer      user_data)
 {
-  FindData *data = user_data;
-  GnomeRRMode *mode = NULL;
-  int width, height;
+        FindData *data = user_data;
+        GnomeRRMode *mode = NULL;
+        int width, height;
 
-  g_assert (data->mode);
-  g_assert (!data->found);
+        g_assert (data->mode);
+        g_assert (!data->found);
 
-  width = gnome_rr_mode_get_width (data->mode);
-  height = gnome_rr_mode_get_height (data->mode);
+        width = gnome_rr_mode_get_width (data->mode);
+        height = gnome_rr_mode_get_height (data->mode);
 
-  gtk_tree_model_get (model, iter, COL_MODE, &mode, COL_END);
-  g_assert (mode);
+        gtk_tree_model_get (model, iter, COL_MODE, &mode, COL_END);
+        g_assert (mode);
 
-  if (gnome_rr_mode_get_width (mode) == width &&
-      gnome_rr_mode_get_height (mode) == height) {
-    data->found = TRUE;
-    data->iter = *iter;
-    data->found_mode = mode;
-    return TRUE;
-  } else {
-    return FALSE;
-  }
+        if (gnome_rr_mode_get_width (mode) == width &&
+            gnome_rr_mode_get_height (mode) == height) {
+                data->found = TRUE;
+                data->iter = *iter;
+                data->found_mode = mode;
+                return TRUE;
+        } else {
+                return FALSE;
+        }
 }
 
 static void
 update_resolutions (CcDisplayPage *page)
 {
-  GnomeRROutput *output;
-  GnomeRRMode **modes, *current_mode;
-  int i;
+        GnomeRROutput *output;
+        GnomeRRMode **modes, *current_mode;
+        int i;
 
-  gtk_list_store_clear (GTK_LIST_STORE (page->priv->resolution_store));
+        gtk_list_store_clear (GTK_LIST_STORE (page->priv->resolution_store));
 
-  output = gnome_rr_screen_get_output_by_name (page->priv->screen, page->priv->external_output->name);
-  modes = gnome_rr_output_list_modes (output);
-  current_mode = gnome_rr_output_get_current_mode (output);
+        output = gnome_rr_screen_get_output_by_name (page->priv->screen, page->priv->external_output->name);
+        modes = gnome_rr_output_list_modes (output);
+        current_mode = gnome_rr_output_get_current_mode (output);
 
-  for (i = 0; modes[i] != NULL; i++) {
-    GnomeRRMode *mode = modes[i];
-    char *s;
-    FindData data;
+        for (i = 0; modes[i] != NULL; i++) {
+                GnomeRRMode *mode = modes[i];
+                char *s;
+                FindData data;
 
-    /* Skip modes that are too small for our UX */
-    if (gnome_rr_mode_get_width (mode) < 1024 ||
-        gnome_rr_mode_get_height (mode) < 576)
-      continue;
+                /* Skip modes that are too small for our UX */
+                if (gnome_rr_mode_get_width (mode) < 1024 ||
+                    gnome_rr_mode_get_height (mode) < 576)
+                        continue;
 
-    data.mode = mode;
-    data.found = FALSE;
+                data.mode = mode;
+                data.found = FALSE;
 
-    /* See if this have this resolution already in the store */
-    gtk_tree_model_foreach (page->priv->resolution_store, find_mode, &data);
-    if (data.found) {
-      /* This resolution is already in the store.  If this mode is a higher
-         refresh than the one in the store, replace it */
-      if (gnome_rr_mode_get_freq (data.found_mode) <
-          gnome_rr_mode_get_freq (mode)) {
-        gtk_list_store_set (GTK_LIST_STORE (page->priv->resolution_store), &data.iter,
-                            COL_MODE, mode, COL_END);
-      }
-    } else {
-      /* This resolution isn't in the store, add it */
-      s = g_strdup_printf ("%dx%d",
-                           gnome_rr_mode_get_width (mode),
-                           gnome_rr_mode_get_height (mode));
+                /* See if this have this resolution already in the store */
+                gtk_tree_model_foreach (page->priv->resolution_store, find_mode, &data);
+                if (data.found) {
+                        /* This resolution is already in the store.  If this mode is a higher
+                           refresh than the one in the store, replace it */
+                        if (gnome_rr_mode_get_freq (data.found_mode) <
+                            gnome_rr_mode_get_freq (mode)) {
+                                gtk_list_store_set (GTK_LIST_STORE (page->priv->resolution_store), &data.iter,
+                                                    COL_MODE, mode, COL_END);
+                        }
+                } else {
+                        /* This resolution isn't in the store, add it */
+                        s = g_strdup_printf ("%dx%d",
+                                             gnome_rr_mode_get_width (mode),
+                                             gnome_rr_mode_get_height (mode));
 
-      gtk_list_store_insert_with_values (GTK_LIST_STORE (page->priv->resolution_store), &data.iter, -1,
-                                         COL_MODE, mode, COL_NAME, s, COL_END);
-      g_free (s);
-    }
+                        gtk_list_store_insert_with_values (GTK_LIST_STORE (page->priv->resolution_store), &data.iter, -1,
+                                                           COL_MODE, mode, COL_NAME, s, COL_END);
+                        g_free (s);
+                }
 
-    /* If this mode is the current mode, active it */
-    if (mode == current_mode) {
-      gtk_combo_box_set_active_iter (GTK_COMBO_BOX (page->priv->resolution_combo), &data.iter);
-    }
-  }
+                /* If this mode is the current mode, active it */
+                if (mode == current_mode) {
+                        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (page->priv->resolution_combo), &data.iter);
+                }
+        }
 }
 
 static void
@@ -652,7 +643,6 @@ cc_display_page_constructor (GType                  type,
                              GObjectConstructParam *construct_properties)
 {
         CcDisplayPage      *display_page;
-        g_debug (__FUNCTION__);
 
         display_page = CC_DISPLAY_PAGE (G_OBJECT_CLASS (cc_display_page_parent_class)->constructor (type,
                                                                                                     n_construct_properties,
