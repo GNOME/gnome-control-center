@@ -79,8 +79,8 @@ dist_icons32_DATA = icons/32x32/gnome-display-properties.png
 iconssvgdir = $(datadir)/icons/hicolor/scalable/apps
 dist_iconssvg_DATA = icons/scalable/gnome-display-properties.svg
 
-icondir = $(pkgdatadir)/pixmaps
-dist_icon_DATA = \
+pixmapdir = $(pkgdatadir)/pixmaps
+dist_pixmap_DATA = \
 	display-netbook-and-external.png \
 	display-netbook-only.png 
 
