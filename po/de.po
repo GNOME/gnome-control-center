@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-01-30 11:13+0000\n"
-"PO-Revision-Date: 2010-02-07 21:36+0100\n"
+"POT-Creation-Date: 2010-02-17 23:57+0000\n"
+"PO-Revision-Date: 2010-02-19 22:05+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2113,77 +2113,76 @@ msgid "aterm"
 msgstr "aterm"
 
 #: ../capplets/display/display-capplet.ui.h:1
-msgid "Display Preferences"
-msgstr "Anzeige-Einstellungen"
-
-#: ../capplets/display/display-capplet.ui.h:2
-msgid "Drag the monitors to set their place"
-msgstr "Ziehen Sie die Monitore, um ihre Lage festzulegen"
-
-#: ../capplets/display/display-capplet.ui.h:3
 msgid "Include _panel"
 msgstr "Panel _einschließen"
 
-#: ../capplets/display/display-capplet.ui.h:4
+#: ../capplets/display/display-capplet.ui.h:2
 #: ../capplets/display/xrandr-capplet.c:305
 msgid "Left"
 msgstr "Links"
 
-#: ../capplets/display/display-capplet.ui.h:5
+#: ../capplets/display/display-capplet.ui.h:3
 #: ../capplets/display/xrandr-capplet.c:508
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../capplets/display/display-capplet.ui.h:6
+#: ../capplets/display/display-capplet.ui.h:4
+#| msgid "Mouse Preferences"
+msgid "Monitor Preferences"
+msgstr "Bildschirmeinstellungen"
+
+#: ../capplets/display/display-capplet.ui.h:5
 #: ../capplets/display/xrandr-capplet.c:304
 #: ../capplets/display/xrandr-capplet.c:343
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/display-capplet.ui.h:7
+#: ../capplets/display/display-capplet.ui.h:6
 msgid "Off"
 msgstr "Aus"
 
-#: ../capplets/display/display-capplet.ui.h:8
+#: ../capplets/display/display-capplet.ui.h:7
 msgid "On"
 msgstr "Ein"
 
 # CHECK
-#: ../capplets/display/display-capplet.ui.h:9
+#: ../capplets/display/display-capplet.ui.h:8
 msgid "Panel icon"
 msgstr "Symbol im Panel"
 
-#: ../capplets/display/display-capplet.ui.h:10
+#: ../capplets/display/display-capplet.ui.h:9
 msgid "R_otation:"
 msgstr "R_otation:"
 
-#: ../capplets/display/display-capplet.ui.h:11
+#: ../capplets/display/display-capplet.ui.h:10
 msgid "Re_fresh rate:"
 msgstr "Wiederhol_rate:"
 
-#: ../capplets/display/display-capplet.ui.h:12
+#: ../capplets/display/display-capplet.ui.h:11
 #: ../capplets/display/xrandr-capplet.c:306
 msgid "Right"
 msgstr "Rechts"
+
+#: ../capplets/display/display-capplet.ui.h:12
+msgid "Sa_me image in all monitors"
+msgstr "Gleiches Bild auf _allen Bildschirmen"
 
 #: ../capplets/display/display-capplet.ui.h:13
 msgid "Upside-down"
 msgstr "Kopfüber"
 
 #: ../capplets/display/display-capplet.ui.h:14
-msgid "_Detect Monitors"
+#| msgid "_Detect Monitors"
+msgid "_Detect monitors"
 msgstr "_Bildschirme erkennen"
 
 #: ../capplets/display/display-capplet.ui.h:15
-msgid "_Mirror screens"
-msgstr "Bildschirme _spiegeln"
-
-#: ../capplets/display/display-capplet.ui.h:16
 msgid "_Resolution:"
 msgstr "_Auflösung:"
 
-#: ../capplets/display/display-capplet.ui.h:17
-msgid "_Show displays in panel"
+#: ../capplets/display/display-capplet.ui.h:16
+#| msgid "_Show displays in panel"
+msgid "_Show monitors in panel"
 msgstr "Bildschirme im _Panel anzeigen"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
@@ -2209,7 +2208,7 @@ msgstr "%d Hz"
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
 #: ../capplets/display/xrandr-capplet.c:497
-#: ../capplets/display/xrandr-capplet.c:1604
+#: ../capplets/display/xrandr-capplet.c:1628
 msgid "Mirror Screens"
 msgstr "Bildschirme spiegeln"
 
@@ -2223,23 +2222,30 @@ msgstr "Monitor: %s"
 msgid "%d x %d"
 msgstr "%d × %d"
 
-#: ../capplets/display/xrandr-capplet.c:2024
+#: ../capplets/display/xrandr-capplet.c:2046
 msgid "Could not save the monitor configuration"
 msgstr "Die Bildschirmkonfiguration konnte nicht gespeichert werden"
 
-#: ../capplets/display/xrandr-capplet.c:2035
+#: ../capplets/display/xrandr-capplet.c:2057
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Beim Anwenden der Bildschirmeinstellungen konnte der Sitzungsbus nicht "
 "angefordert werden"
 
-#: ../capplets/display/xrandr-capplet.c:2077
+#: ../capplets/display/xrandr-capplet.c:2099
 msgid "Could not detect displays"
 msgstr "Anzeigen konnten nicht erkannt werden"
 
-#: ../capplets/display/xrandr-capplet.c:2292
+#: ../capplets/display/xrandr-capplet.c:2314
 msgid "Could not get screen information"
 msgstr "Bildschirminformationen konnten nicht ausgelesen werden"
+
+#: ../capplets/display/xrandr-capplet.c:2385
+msgid ""
+"Select a monitor to change its properties; drag it to rearrange its placement."
+msgstr ""
+"Wählen Sie einen Bildschirm, um dessen Eigenschaften zu ändern. Ziehen Sie "
+"ihn, um ihn neu zu platzieren."
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 msgid "Sound"
@@ -2780,7 +2786,6 @@ msgid "D_rag click:"
 msgstr "_Mitzieh-Klick:"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:8
-#| msgid "_Disable touchpad while typing"
 msgid "Disable _touchpad while typing"
 msgstr "_Touchpad beim Tippen sperren"
 
@@ -2799,12 +2804,10 @@ msgid "Dwell Click"
 msgstr "Verzögerter Klick"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:12
-#| msgid "Enable mouse _clicks with touchpad"
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Maus_klicks per Touchpad freischalten"
 
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:13
-#| msgid "Enable _horizontal scrolling"
 msgid "Enable h_orizontal scrolling"
 msgstr "_Horizontalen Bildlauf einschalten"
 
@@ -3650,6 +3653,15 @@ msgstr "<b>»%s« öffnen</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Aus den Systemelementen entfernen"
+
+#~ msgid "Display Preferences"
+#~ msgstr "Anzeige-Einstellungen"
+
+#~ msgid "Drag the monitors to set their place"
+#~ msgstr "Ziehen Sie die Monitore, um ihre Lage festzulegen"
+
+#~ msgid "_Mirror screens"
+#~ msgstr "Bildschirme _spiegeln"
 
 #~ msgid "C_ontrol"
 #~ msgstr "_Strg"
