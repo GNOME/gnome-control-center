@@ -154,23 +154,8 @@ PKG_CHECK_MODULES(FONT_VIEWER, $COMMON_MODULES $xft_modules)
 
 PKG_CHECK_MODULES(AT_CAPPLET, $COMMON_MODULES)
 
-dnl
-dnl Check for XRandR, needed for display capplet
-dnl
-
-have_randr=no
-AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
-  [AC_CHECK_HEADER(X11/extensions/Xrandr.h,
-     have_randr=yes
-     RANDR_LIBS="-lXrandr -lXrender"
-     AC_DEFINE(HAVE_RANDR, 1, [Define if Xrandr extension is available]),
-	  :, [#include <X11/Xlib.h>])], : ,
-       -lXrandr -lXrender $x_libs)
-AM_CONDITIONAL(HAVE_RANDR, [test $have_randr = yes])
-
 PKG_CHECK_MODULES(DISPLAY_CAPPLET, $COMMON_MODULES)
-
-DISPLAY_CAPPLET_LIBS="$DISPLAY_CAPPLET_LIBS $RANDR_LIBS"
+DISPLAY_CAPPLET_LIBS="$DISPLAY_CAPPLET_LIBS"
 
 CAPPLET_LIBS="$CAPPLET_LIBS $x_libs"
 GNOMECC_LIBS="$GNOMECC_LIBS $x_libs"

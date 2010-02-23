@@ -3,6 +3,7 @@ SUBDIRS = \
 	accessibility	\
 	appearance		\
 	default-applications	\
+	display			\
 	keybindings		\
 	keyboard		\
 	mouse			\
@@ -22,10 +23,6 @@ DIST_SUBDIRS = \
 	display 		\
 	about-me
 
-
-if HAVE_RANDR
-SUBDIRS += display
-endif
 
 if BUILD_ABOUTME
 SUBDIRS += about-me
