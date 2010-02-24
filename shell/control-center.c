@@ -576,6 +576,13 @@ notebook_switch_page_cb (GtkNotebook     *book,
     gtk_widget_show (W (data->builder, "home-button"));
 }
 
+static void
+search_entry_clear_cb (GtkEntry *entry)
+{
+  gtk_entry_set_text (entry, "");
+}
+
+
 int
 main (int argc, char **argv)
 {
@@ -622,6 +629,8 @@ main (int argc, char **argv)
                     data);
   g_signal_connect (widget, "key-press-event",
                     G_CALLBACK (search_entry_key_press_event_cb), data);
+
+  g_signal_connect (widget, "icon-release", G_CALLBACK (search_entry_clear_cb), data);
 
   load_panel_plugins (data);
 
