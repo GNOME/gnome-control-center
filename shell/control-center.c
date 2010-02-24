@@ -658,14 +658,15 @@ main (int argc, char **argv)
 
       start_id = argv[1];
 
-      iter_valid = gtk_tree_model_get_iter_first (data->store, &iter);
+      iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (data->store),
+                                                  &iter);
 
       while (iter_valid)
         {
           gchar *id;
 
           /* find the details for this item */
-          gtk_tree_model_get (data->store, &iter,
+          gtk_tree_model_get (GTK_TREE_MODEL (data->store), &iter,
                               COL_NAME, &name,
                               COL_ID, &id,
                               -1);
@@ -683,8 +684,8 @@ main (int argc, char **argv)
               id = NULL;
             }
 
-
-          iter_valid = gtk_tree_model_iter_next (data->store, &iter);
+          iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (data->store),
+                                                 &iter);
         }
 
       g_free (data->current_title);
