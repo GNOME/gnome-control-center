@@ -468,7 +468,9 @@ item_activated_cb (GtkIconView *icon_view,
 
       gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
 
-      gtk_window_set_title (GTK_WINDOW (data->window), data->current_title);
+      gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (data->builder, "label-title")),
+                          data->current_title);
+      gtk_widget_show (GTK_WIDGET (gtk_builder_get_object (data->builder, "title-alignment")));
     }
   else
     {
@@ -491,7 +493,8 @@ shell_show_overview_page (ShellData *data)
   if (data->current_panel != NULL)
     cc_panel_set_active (data->current_panel, FALSE);
 
-  gtk_window_set_title (GTK_WINDOW (data->window), _("System Settings"));
+  gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (data->builder, "label-title")), "");
+  gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (data->builder, "title-alignment")));
 
   /* clear the search text */
   g_free (data->filter_string);
