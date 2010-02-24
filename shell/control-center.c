@@ -431,6 +431,43 @@ fill_model (ShellData *data)
 }
 
 static void
+activate_panel (const gchar *id,
+                const gchar *exec,
+                ShellData   *data)
+{
+  CcPanel *panel;
+
+  /* first look for a panel module */
+  panel = g_hash_table_lookup (data->panels, id);
+  if (panel != NULL)
+    {
+      data->current_panel = panel;
+      gtk_container_set_border_width (GTK_CONTAINER (panel), 12);
+      gtk_widget_show_all (GTK_WIDGET (panel));
+      cc_panel_set_active (panel, TRUE);
+
+      gtk_notebook_insert_page (GTK_NOTEBOOK (data->notebook), GTK_WIDGET (panel),
+                                NULL, CAPPLET_PAGE);
+
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
+
+      gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (data->builder,
+                                                             "label-title")),
+                          data->current_title);
+
+      gtk_widget_show (GTK_WIDGET (gtk_builder_get_object (data->builder,
+                                                           "title-alignment")));
+    }
+  else
+    {
+      /* start app directly */
+      g_debug ("Panel module not found for %s", id);
+      g_spawn_command_line_async (exec, NULL);
+    }
+
+}
+
+static void
 item_activated_cb (GtkIconView *icon_view,
                    GtkTreePath *path,
                    ShellData   *data)
@@ -438,7 +475,6 @@ item_activated_cb (GtkIconView *icon_view,
   GtkTreeModel *model;
   GtkTreeIter iter;
   gchar *name, *exec, *id;
-  CcPanel *panel;
 
   /* get exec */
   model = gtk_icon_view_get_model (icon_view);
@@ -454,30 +490,7 @@ item_activated_cb (GtkIconView *icon_view,
   g_free (data->current_title);
   data->current_title = name;
 
-  /* first look for a panel module */
-  panel = g_hash_table_lookup (data->panels, id);
-  if (panel != NULL)
-    {
-      data->current_panel = panel;
-      gtk_container_set_border_width (GTK_CONTAINER (panel), 12);
-      gtk_widget_show_all (GTK_WIDGET (panel));
-      cc_panel_set_active (panel, TRUE);
-
-      gtk_notebook_insert_page (GTK_NOTEBOOK (data->notebook), GTK_WIDGET (panel), NULL,
-                                CAPPLET_PAGE);
-
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
-
-      gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (data->builder, "label-title")),
-                          data->current_title);
-      gtk_widget_show (GTK_WIDGET (gtk_builder_get_object (data->builder, "title-alignment")));
-    }
-  else
-    {
-      /* start app directly */
-      g_debug ("Panel module not found for %s", id);
-      g_spawn_command_line_async (exec, NULL);
-    }
+  activate_panel (id, exec, data);
 
   g_free (id);
   g_free (exec);
@@ -635,6 +648,50 @@ main (int argc, char **argv)
   load_panel_plugins (data);
 
   gtk_widget_show_all (data->window);
+
+  if (argc == 2)
+    {
+      GtkTreeIter iter;
+      gboolean iter_valid;
+      gchar *start_id;
+      gchar *name;
+
+      start_id = argv[1];
+
+      iter_valid = gtk_tree_model_get_iter_first (data->store, &iter);
+
+      while (iter_valid)
+        {
+          gchar *id;
+
+          /* find the details for this item */
+          gtk_tree_model_get (data->store, &iter,
+                              COL_NAME, &name,
+                              COL_ID, &id,
+                              -1);
+          if (id && !strcmp (id, start_id))
+            {
+              g_free (id);
+              break;
+            }
+          else
+            {
+              g_free (id);
+              g_free (name);
+
+              name = NULL;
+              id = NULL;
+            }
+
+
+          iter_valid = gtk_tree_model_iter_next (data->store, &iter);
+        }
+
+      g_free (data->current_title);
+      data->current_title = name;
+
+      activate_panel (start_id, start_id, data);
+    }
 
   gtk_main ();
 
