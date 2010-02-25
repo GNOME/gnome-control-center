@@ -11,6 +11,8 @@ bin_PROGRAMS = gnome-control-center
 
 gnome_control_center_SOURCES =			\
 	control-center.c			\
+	cc-shell.c				\
+	cc-shell.h				\
 	shell-search-renderer.c			\
 	shell-search-renderer.h			\
 	$(NULL)

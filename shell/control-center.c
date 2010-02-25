@@ -30,6 +30,7 @@
 #include <gmenu-tree.h>
 
 #include "cc-panel.h"
+#include "cc-shell.h"
 #include "shell-search-renderer.h"
 
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
@@ -600,7 +601,6 @@ int
 main (int argc, char **argv)
 {
   ShellData *data;
-  guint ret;
   GtkWidget *widget;
 
   g_thread_init (NULL);
@@ -608,17 +608,14 @@ main (int argc, char **argv)
 
   data = g_new0 (ShellData, 1);
 
-  data->builder = gtk_builder_new ();
+  data->builder = (GtkBuilder*) cc_shell_new ();
 
-  ret = gtk_builder_add_from_file (data->builder, UIDIR "/shell.ui", NULL);
-  if (ret == 0)
+  if (!data->builder)
     {
-#ifdef RUN_IN_SOURCE_TREE
-      ret = gtk_builder_add_from_file (data->builder, "shell.ui", NULL);
-      if (ret == 0)
-#endif
-        g_error ("Unable to load UI");
+      g_critical ("Could not build interface");
+      return 1;
     }
+
 
   data->window = W (data->builder, "main-window");
   g_signal_connect (data->window, "delete-event", G_CALLBACK (gtk_main_quit),
