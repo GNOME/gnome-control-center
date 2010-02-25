@@ -48,6 +48,14 @@ G_BEGIN_DECLS
   (G_TYPE_INSTANCE_GET_CLASS ((obj), \
   CC_TYPE_SHELL, CcShellClass))
 
+
+enum
+{
+  OVERVIEW_PAGE,
+  SEARCH_PAGE,
+  CAPPLET_PAGE
+};
+
 typedef struct _CcShell CcShell;
 typedef struct _CcShellClass CcShellClass;
 typedef struct _CcShellPrivate CcShellPrivate;
@@ -67,6 +75,9 @@ struct _CcShellClass
 GType cc_shell_get_type (void) G_GNUC_CONST;
 
 CcShell *cc_shell_new (void);
+
+gboolean cc_shell_set_panel (CcShell *shell, const gchar *id);
+void cc_shell_set_title (CcShell *shell, const gchar *title);
 
 G_END_DECLS
 

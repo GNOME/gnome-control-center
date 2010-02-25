@@ -19,6 +19,7 @@
  */
 
 #include "cc-shell.h"
+#include "cc-panel.h"
 
 G_DEFINE_TYPE (CcShell, cc_shell, GTK_TYPE_BUILDER)
 
@@ -27,7 +28,9 @@ G_DEFINE_TYPE (CcShell, cc_shell, GTK_TYPE_BUILDER)
 
 struct _CcShellPrivate
 {
-  gpointer *dummy;
+  gchar *current_title;
+  CcPanel *current_panel;
+  GHashTable *panels;
 };
 
 
@@ -66,6 +69,14 @@ cc_shell_dispose (GObject *object)
 static void
 cc_shell_finalize (GObject *object)
 {
+  CcShellPrivate *priv = CC_SHELL (object)->priv;
+
+  if (priv->panels)
+    {
+      g_hash_table_destroy (priv->panels);
+      priv->panels = NULL;
+    }
+
   G_OBJECT_CLASS (cc_shell_parent_class)->finalize (object);
 }
 
@@ -113,14 +124,144 @@ cc_shell_class_init (CcShellClass *klass)
   object_class->constructor = cc_shell_constructor;
 }
 
+
+static void
+load_panel_plugins (CcShell *shell)
+{
+  CcShellPrivate *priv = shell->priv;
+  static volatile GType panel_type = G_TYPE_INVALID;
+  static GIOExtensionPoint *ep = NULL;
+  GList *modules;
+  GList *panel_implementations;
+  GList *l;
+
+  /* make sure base type is registered */
+  if (panel_type == G_TYPE_INVALID)
+    {
+      panel_type = g_type_from_name ("CcPanel");
+    }
+
+  priv->panels = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
+                                        g_object_unref);
+
+  if (ep == NULL)
+    {
+      g_debug ("Registering extension point");
+      ep = g_io_extension_point_register (CC_PANEL_EXTENSION_POINT_NAME);
+    }
+
+  /* load all modules */
+  g_debug ("Loading all modules in %s", EXTENSIONSDIR);
+  modules = g_io_modules_load_all_in_directory (EXTENSIONSDIR);
+
+  g_debug ("Loaded %d modules", g_list_length (modules));
+
+#ifdef RUN_IN_SOURCE_TREE
+  if (g_list_length (modules) == 0)
+    modules = load_panel_plugins_from_source ();
+#endif
+
+  /* find all extensions */
+  panel_implementations = g_io_extension_point_get_extensions (ep);
+  for (l = panel_implementations; l != NULL; l = l->next)
+    {
+      GIOExtension *extension;
+      CcPanel *panel;
+      char *id;
+
+      extension = l->data;
+
+      g_debug ("Found extension: %s %d", g_io_extension_get_name (extension), g_io_extension_get_priority (extension));
+      panel = g_object_new (g_io_extension_get_type (extension), NULL);
+      g_object_get (panel, "id", &id, NULL);
+      g_hash_table_insert (priv->panels, g_strdup (id), g_object_ref (panel));
+      g_debug ("id: '%s'", id);
+      g_free (id);
+    }
+
+  /* unload all modules; the module our instantiated authority is in won't be unloaded because
+   * we've instantiated a reference to a type in this module
+   */
+  g_list_foreach (modules, (GFunc) g_type_module_unuse, NULL);
+  g_list_free (modules);
+}
+
 static void
 cc_shell_init (CcShell *self)
 {
   self->priv = SHELL_PRIVATE (self);
+
+  load_panel_plugins (self);
 }
 
 CcShell *
 cc_shell_new (void)
 {
   return g_object_new (CC_TYPE_SHELL, NULL);
+}
+
+gboolean
+cc_shell_set_panel (CcShell     *shell,
+                    const gchar *id)
+{
+  CcPanel *panel;
+  CcShellPrivate *priv = shell->priv;
+  GtkBuilder *builder = GTK_BUILDER (shell);
+  GtkWidget *notebook;
+
+  notebook =
+    (GtkWidget*) gtk_builder_get_object (GTK_BUILDER (shell), "notebook");
+
+
+  if (!id)
+    {
+      if (priv->current_panel != NULL)
+        cc_panel_set_active (priv->current_panel, FALSE);
+
+      priv->current_panel = NULL;
+
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook),
+                                     OVERVIEW_PAGE);
+
+      return TRUE;
+    }
+
+  /* first look for a panel module */
+  panel = g_hash_table_lookup (priv->panels, id);
+  if (panel != NULL)
+    {
+      priv->current_panel = panel;
+      gtk_container_set_border_width (GTK_CONTAINER (panel), 12);
+      gtk_widget_show_all (GTK_WIDGET (panel));
+      cc_panel_set_active (panel, TRUE);
+
+      gtk_notebook_insert_page (GTK_NOTEBOOK (notebook),
+                                GTK_WIDGET (panel), NULL, CAPPLET_PAGE);
+
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook),
+                                     CAPPLET_PAGE);
+
+      gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder,
+                                                             "label-title")),
+                          priv->current_title);
+
+      gtk_widget_show (GTK_WIDGET (gtk_builder_get_object (builder,
+                                                           "title-alignment")));
+      return TRUE;
+    }
+  else
+    {
+      return FALSE;
+    }
+
+}
+
+void
+cc_shell_set_title (CcShell     *shell,
+                    const gchar *title)
+{
+  CcShellPrivate *priv = shell->priv;
+
+  g_free (priv->current_title);
+  priv->current_title = g_strdup (title);
 }

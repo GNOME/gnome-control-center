@@ -45,7 +45,6 @@ typedef struct
   GSList *icon_views;
 
   gchar  *current_title;
-  CcPanel *current_panel;
 
   GtkListStore *store;
   GtkTreeModel *search_filter;
@@ -55,13 +54,6 @@ typedef struct
   GHashTable *panels;
 
 } ShellData;
-
-enum
-{
-  OVERVIEW_PAGE,
-  SEARCH_PAGE,
-  CAPPLET_PAGE
-};
 
 enum
 {
@@ -77,98 +69,6 @@ enum
 
 static void item_activated_cb (GtkIconView *icon_view, GtkTreePath *path, ShellData *data);
 
-#ifdef RUN_IN_SOURCE_TREE
-static GList *
-load_panel_plugins_from_source (void)
-{
-  GDir *dir;
-  GList *list;
-  const char *name;
-
-  g_message ("capplets!");
-
-  dir = g_dir_open ("../capplets/", 0, NULL);
-  if (dir == NULL)
-    return NULL;
-
-  while ((name = g_dir_read_name (dir)) != NULL)
-    {
-      char *path;
-      GList *l;
-
-      path = g_strconcat ("../capplets/", name, "/.libs", NULL);
-      g_message ("loading modules in %s", path);
-      l = g_io_modules_load_all_in_directory (path);
-      g_free (path);
-
-      if (l)
-        list = g_list_concat (list, l);
-    }
-  g_dir_close (dir);
-
-  return list;
-}
-#endif
-
-static void
-load_panel_plugins (ShellData *data)
-{
-  static volatile GType panel_type = G_TYPE_INVALID;
-  static GIOExtensionPoint *ep = NULL;
-  GList *modules;
-  GList *panel_implementations;
-  GList *l;
-
-  /* make sure base type is registered */
-  if (panel_type == G_TYPE_INVALID)
-    {
-      panel_type = g_type_from_name ("CcPanel");
-    }
-
-  data->panels = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
-                                        g_object_unref);
-
-  if (ep == NULL)
-    {
-      g_debug ("Registering extension point");
-      ep = g_io_extension_point_register (CC_PANEL_EXTENSION_POINT_NAME);
-    }
-
-  /* load all modules */
-  g_debug ("Loading all modules in %s", EXTENSIONSDIR);
-  modules = g_io_modules_load_all_in_directory (EXTENSIONSDIR);
-
-  g_debug ("Loaded %d modules", g_list_length (modules));
-
-#ifdef RUN_IN_SOURCE_TREE
-  if (g_list_length (modules) == 0)
-    modules = load_panel_plugins_from_source ();
-#endif
-
-  /* find all extensions */
-  panel_implementations = g_io_extension_point_get_extensions (ep);
-  for (l = panel_implementations; l != NULL; l = l->next)
-    {
-      GIOExtension *extension;
-      CcPanel *panel;
-      char *id;
-
-      extension = l->data;
-
-      g_debug ("Found extension: %s %d", g_io_extension_get_name (extension), g_io_extension_get_priority (extension));
-      panel = g_object_new (g_io_extension_get_type (extension), NULL);
-      g_object_get (panel, "id", &id, NULL);
-      g_hash_table_insert (data->panels, g_strdup (id), g_object_ref (panel));
-      g_debug ("id: '%s'", id);
-      g_free (id);
-    }
-
-  /* unload all modules; the module our instantiated authority is in won't be unloaded because
-   * we've instantiated a reference to a type in this module
-   */
-  g_list_foreach (modules, (GFunc) g_type_module_unuse, NULL);
-  g_list_free (modules);
-}
 
 static gboolean
 button_release_cb (GtkWidget      *view,
@@ -436,30 +336,7 @@ activate_panel (const gchar *id,
                 const gchar *exec,
                 ShellData   *data)
 {
-  CcPanel *panel;
-
-  /* first look for a panel module */
-  panel = g_hash_table_lookup (data->panels, id);
-  if (panel != NULL)
-    {
-      data->current_panel = panel;
-      gtk_container_set_border_width (GTK_CONTAINER (panel), 12);
-      gtk_widget_show_all (GTK_WIDGET (panel));
-      cc_panel_set_active (panel, TRUE);
-
-      gtk_notebook_insert_page (GTK_NOTEBOOK (data->notebook), GTK_WIDGET (panel),
-                                NULL, CAPPLET_PAGE);
-
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
-
-      gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (data->builder,
-                                                             "label-title")),
-                          data->current_title);
-
-      gtk_widget_show (GTK_WIDGET (gtk_builder_get_object (data->builder,
-                                                           "title-alignment")));
-    }
-  else
+  if (!cc_shell_set_panel (CC_SHELL (data->builder), id))
     {
       /* start app directly */
       g_debug ("Panel module not found for %s", id);
@@ -488,8 +365,7 @@ item_activated_cb (GtkIconView *icon_view,
 
   g_debug ("activated id: '%s'", id);
 
-  g_free (data->current_title);
-  data->current_title = name;
+  cc_shell_set_title (CC_SHELL (data->builder), name);
 
   activate_panel (id, exec, data);
 
@@ -504,8 +380,7 @@ shell_show_overview_page (ShellData *data)
 
   gtk_notebook_remove_page (GTK_NOTEBOOK (data->notebook), CAPPLET_PAGE);
 
-  if (data->current_panel != NULL)
-    cc_panel_set_active (data->current_panel, FALSE);
+  cc_shell_set_panel (CC_SHELL (data->builder), NULL);
 
   gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (data->builder, "label-title")), "");
   gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (data->builder, "title-alignment")));
@@ -547,6 +422,9 @@ search_entry_changed_cb (GtkEntry  *entry,
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (data->search_filter));
       gtk_notebook_set_current_page (GTK_NOTEBOOK (data->notebook), SEARCH_PAGE);
+
+      gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (data->builder, "label-title")), "");
+      gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (data->builder, "title-alignment")));
     }
 }
 
@@ -642,8 +520,6 @@ main (int argc, char **argv)
 
   g_signal_connect (widget, "icon-release", G_CALLBACK (search_entry_clear_cb), data);
 
-  load_panel_plugins (data);
-
   gtk_widget_show_all (data->window);
 
   if (argc == 2)
@@ -695,7 +571,6 @@ main (int argc, char **argv)
 
   g_free (data->filter_string);
   g_free (data->current_title);
-  g_hash_table_destroy (data->panels);
   g_free (data);
 
   return 0;
