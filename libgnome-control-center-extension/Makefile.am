@@ -23,6 +23,7 @@ lib_LTLIBRARIES = libgnome-control-center-extension.la
 libgnome_control_center_extension_include_HEADERS =	\
 	cc-page.h					\
 	cc-panel.h					\
+	cc-shell.h					\
 	$(NULL)
 
 libgnome_control_center_extension_la_SOURCES =		\

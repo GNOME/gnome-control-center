@@ -40,6 +40,7 @@ struct CcPanelPrivate
 
         gboolean         is_active;
         CcPage          *current_page;
+        CcShell         *shell;
 };
 
 enum {
@@ -49,6 +50,7 @@ enum {
         PROP_CATEGORY,
         PROP_CURRENT_LOCATION,
         PROP_CURRENT_PAGE,
+        PROP_SHELL,
 };
 
 enum {
@@ -107,6 +109,16 @@ _cc_panel_set_current_page (CcPanel    *panel,
 }
 
 static void
+_cc_panel_set_shell (CcPanel *panel,
+                     CcShell *shell)
+{
+        CcPanelPrivate *priv = panel->priv;
+
+        priv->shell = shell;
+}
+
+
+static void
 cc_panel_set_property (GObject      *object,
                        guint         prop_id,
                        const GValue *value,
@@ -125,6 +137,9 @@ cc_panel_set_property (GObject      *object,
                 break;
         case PROP_CURRENT_PAGE:
                 _cc_panel_set_current_page (self, g_value_get_object (value));
+                break;
+        case PROP_SHELL:
+                _cc_panel_set_shell (self, g_value_get_object (value));
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -151,6 +166,9 @@ cc_panel_get_property (GObject    *object,
                 break;
         case PROP_CURRENT_PAGE:
                 g_value_set_object (value, self->priv->current_page);
+                break;
+        case PROP_SHELL:
+                g_value_set_object (value, self->priv->shell);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -212,6 +230,7 @@ cc_panel_constructor (GType                  type,
 static void
 cc_panel_class_init (CcPanelClass *klass)
 {
+        GParamSpec      *pspec;
         GObjectClass    *object_class = G_OBJECT_CLASS (klass);
 
         object_class->get_property = cc_panel_get_property;
@@ -256,6 +275,15 @@ cc_panel_class_init (CcPanelClass *klass)
                                                               CC_TYPE_PAGE,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 
+        pspec = g_param_spec_object ("shell",
+                                     "Shell",
+                                     "Shell",
+                                     CC_TYPE_SHELL,
+                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS
+                                      | G_PARAM_CONSTRUCT_ONLY);
+
+        g_object_class_install_property (object_class, PROP_SHELL, pspec);
+
 }
 
 static void
@@ -281,4 +309,10 @@ cc_panel_finalize (GObject *object)
         g_free (panel->priv->display_name);
 
         G_OBJECT_CLASS (cc_panel_parent_class)->finalize (object);
+}
+
+CcShell *
+cc_panel_get_shell (CcPanel *panel)
+{
+        return panel->priv->shell;
 }

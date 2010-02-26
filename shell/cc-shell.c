@@ -172,7 +172,9 @@ load_panel_plugins (CcShell *shell)
       extension = l->data;
 
       g_debug ("Found extension: %s %d", g_io_extension_get_name (extension), g_io_extension_get_priority (extension));
-      panel = g_object_new (g_io_extension_get_type (extension), NULL);
+      panel = g_object_new (g_io_extension_get_type (extension),
+                            "shell", shell,
+                            NULL);
       g_object_get (panel, "id", &id, NULL);
       g_hash_table_insert (priv->panels, g_strdup (id), g_object_ref (panel));
       g_debug ("id: '%s'", id);

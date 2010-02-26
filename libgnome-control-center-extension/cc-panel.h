@@ -24,6 +24,7 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
+#include "cc-shell.h"
 
 G_BEGIN_DECLS
 
@@ -58,6 +59,9 @@ gboolean            cc_panel_is_active              (CcPanel *panel);
 
 void                cc_panel_set_active             (CcPanel *panel,
                                                      gboolean is_active);
+
+CcShell*            cc_panel_get_shell              (CcPanel *panel);
+
 
 G_END_DECLS
 
