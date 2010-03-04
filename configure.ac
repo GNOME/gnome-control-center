@@ -411,6 +411,8 @@ capplets/windows/Makefile
 capplets/windows/window-properties.desktop.in
 capplets/security/Makefile
 capplets/security/security.desktop.in
+capplets/power/Makefile
+capplets/power/power-properties.desktop.in
 font-viewer/Makefile
 font-viewer/gnome-font-viewer.desktop.in
 help/Makefile
