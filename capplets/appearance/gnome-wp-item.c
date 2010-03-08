@@ -269,7 +269,7 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
       size = g_strdup (_("multiple sizes"));
     else if (item->width > 0 && item->height > 0) {
       /* translators: x pixel(s) by y pixel(s) */
-      size = g_strdup_printf ("%d %s by %d %s",
+      size = g_strdup_printf (_("%d %s by %d %s"),
                               item->width,
                               ngettext ("pixel", "pixels", item->width),
                               item->height,
