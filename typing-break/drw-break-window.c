@@ -147,7 +147,7 @@ drw_break_window_init (DrwBreakWindow *window)
 					      NULL);
 	g_object_unref (client);
 
-
+	g_object_set (window, "type", GTK_WINDOW_POPUP, NULL);
 	gtk_window_set_keep_above (GTK_WINDOW (window), TRUE);
 	gtk_window_fullscreen (GTK_WINDOW (window));
 	gtk_window_set_modal (GTK_WINDOW (window), TRUE);
