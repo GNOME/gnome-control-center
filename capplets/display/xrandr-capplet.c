@@ -77,6 +77,11 @@ struct App
     } apply_configuration_state;
 };
 
+/* Response codes for custom buttons in the main dialog */
+enum {
+    RESPONSE_MAKE_DEFAULT = 1
+};
+
 static void rebuild_gui (App *app);
 static void on_clone_changed (GtkWidget *box, gpointer data);
 static void on_rate_changed (GtkComboBox *box, gpointer data);
