@@ -39,6 +39,8 @@ init_appearance_data (int *argc, char ***argv, GOptionContext *context)
   GError *err = NULL;
 
   g_thread_init (NULL);
+  gdk_threads_init ();
+  gdk_threads_enter ();
   theme_thumbnail_factory_init (*argc, *argv);
   capplet_init (context, argc, argv);
   activate_settings_daemon ();
@@ -209,6 +211,7 @@ main (int argc, char **argv)
 
   /* start the mainloop */
   gtk_main ();
+  gdk_threads_leave ();
 
   /* free stuff */
   g_free (data);
