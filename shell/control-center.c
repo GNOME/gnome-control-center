@@ -466,6 +466,11 @@ notebook_switch_page_cb (GtkNotebook     *book,
     gtk_widget_hide (W (data->builder, "home-button"));
   else
     gtk_widget_show (W (data->builder, "home-button"));
+
+  if (page_num == CAPPLET_PAGE)
+    gtk_widget_hide (W (data->builder, "search-entry"));
+  else
+    gtk_widget_show (W (data->builder, "search-entry"));
 }
 
 static void
