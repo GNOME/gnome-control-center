@@ -24,6 +24,7 @@
 #include <time.h>
 
 #include "nameplate-tile.h"
+#include "bookmark-agent.h"
 
 G_BEGIN_DECLS
 
@@ -49,11 +50,13 @@ typedef struct {
 #define DOCUMENT_TILE_ACTION_DELETE               4
 #define DOCUMENT_TILE_ACTION_UPDATE_MAIN_MENU     5
 #define DOCUMENT_TILE_ACTION_SEND_TO              6
-#define DOCUMENT_TILE_ACTION_NUM_OF_ACTIONS       7 /* must be last entry and equal to the number of actions */
+#define DOCUMENT_TILE_ACTION_CLEAN_ITEM                  7
+#define DOCUMENT_TILE_ACTION_CLEAN_ALL           8
+#define DOCUMENT_TILE_ACTION_NUM_OF_ACTIONS       9 /* must be last entry and equal to the number of actions */
 
 GType document_tile_get_type (void);
 
-GtkWidget *document_tile_new (const gchar *uri, const gchar *mime_type, time_t modified);
+GtkWidget *document_tile_new (BookmarkStoreType bookmark_store_type, const gchar *uri, const gchar *mime_type, time_t modified);
 
 //If you want to show a icon instead of a thumbnail
 GtkWidget *document_tile_new_force_icon (const gchar *uri, const gchar *mime_type, time_t modified, const gchar *icon);

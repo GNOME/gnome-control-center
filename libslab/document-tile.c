@@ -55,6 +55,8 @@ static void open_with_default_trigger    (Tile *, TileEvent *, TileAction *);
 static void open_in_file_manager_trigger (Tile *, TileEvent *, TileAction *);
 static void rename_trigger               (Tile *, TileEvent *, TileAction *);
 static void move_to_trash_trigger        (Tile *, TileEvent *, TileAction *);
+static void remove_recent_item           (Tile *, TileEvent *, TileAction *);
+static void purge_recent_items           (Tile *, TileEvent *, TileAction *);
 static void delete_trigger               (Tile *, TileEvent *, TileAction *);
 static void user_docs_trigger            (Tile *, TileEvent *, TileAction *);
 static void send_to_trigger              (Tile *, TileEvent *, TileAction *);
@@ -109,14 +111,14 @@ document_tile_new_force_icon (const gchar *in_uri, const gchar *mime_type, time_
 	DocumentTile *this;
 	DocumentTilePrivate *priv;
 	
-	this = (DocumentTile *) document_tile_new (in_uri, mime_type, modified);
+	this = (DocumentTile *) document_tile_new (BOOKMARK_STORE_USER_DOCS, in_uri, mime_type, modified);
 	priv = DOCUMENT_TILE_GET_PRIVATE (this);
 	priv->force_icon_name = g_strdup (icon);
 	return GTK_WIDGET (this);
 }
 
 GtkWidget *
-document_tile_new (const gchar *in_uri, const gchar *mime_type, time_t modified)
+document_tile_new (BookmarkStoreType bookmark_store_type, const gchar *in_uri, const gchar *mime_type, time_t modified)
 {
 	DocumentTile *this;
 	DocumentTilePrivate *priv;
@@ -179,11 +181,11 @@ document_tile_new (const gchar *in_uri, const gchar *mime_type, time_t modified)
 	priv->mime_type   = g_strdup (mime_type);
 	priv->modified    = modified;
 	priv->header_bin  = GTK_BIN (header);
+	priv->agent = bookmark_agent_get_instance (bookmark_store_type);
 
 	document_tile_private_setup (this);
-
-	TILE (this)->actions = g_new0 (TileAction *, 7);
-	TILE (this)->n_actions = 7;
+	TILE (this)->actions = g_new0 (TileAction *, DOCUMENT_TILE_ACTION_NUM_OF_ACTIONS);
+	TILE (this)->n_actions = DOCUMENT_TILE_ACTION_NUM_OF_ACTIONS;
 
 	menu_ctnr = GTK_CONTAINER (TILE (this)->context_menu);
 
@@ -297,6 +299,23 @@ document_tile_new (const gchar *in_uri, const gchar *mime_type, time_t modified)
 		gtk_container_add (menu_ctnr, menu_item);
 	}
 
+	if (!priv->is_bookmarked) {
+		/* clean item from menu */
+		action = tile_action_new (TILE (this), remove_recent_item, _("Remove from recent menu"), 0);
+		TILE (this)->actions[DOCUMENT_TILE_ACTION_CLEAN_ITEM] = action;
+
+		menu_item = GTK_WIDGET (tile_action_get_menu_item (action));
+		gtk_container_add (menu_ctnr, menu_item);
+
+		/* clean all the items from menu */
+
+		action = tile_action_new (TILE (this), purge_recent_items, _("Purge all the recent items"), 0);
+		TILE (this)->actions[DOCUMENT_TILE_ACTION_CLEAN_ALL] = action;
+
+		menu_item = GTK_WIDGET (tile_action_get_menu_item (action));
+		gtk_container_add (menu_ctnr, menu_item);
+	}
+
 	gtk_widget_show_all (GTK_WIDGET (TILE (this)->context_menu));
 
 	accessible = gtk_widget_get_accessible (GTK_WIDGET (this));
@@ -342,8 +361,6 @@ document_tile_private_setup (DocumentTile *this)
 		connect_gconf_notify (GCONF_ENABLE_DELETE_KEY, gconf_enable_delete_cb, this);
 
 	g_object_unref (client);
-
-	priv->agent = bookmark_agent_get_instance (BOOKMARK_STORE_USER_DOCS);
 
 	priv->notify_signal_id = g_signal_connect (
 		G_OBJECT (priv->agent), "notify", G_CALLBACK (agent_notify_cb), this);
@@ -425,7 +442,7 @@ load_image (DocumentTile *tile)
 		if (priv->force_icon_name)
 			icon_id = priv->force_icon_name;
 		else
-			icon_id = "gnome-fs-regular";
+			icon_id = "text-x-preview";
 		free_icon_id = FALSE;
 
 		goto exit;
@@ -715,7 +732,7 @@ update_user_list_menu_item (DocumentTile *this)
 	if (! action)
 		return;
 
-	priv->is_bookmarked = bookmark_agent_has_item (priv->agent, TILE (this)->uri);
+	priv->is_bookmarked = bookmark_agent_has_item (bookmark_agent_get_instance (BOOKMARK_STORE_USER_DOCS), TILE (this)->uri);
 
 	if (priv->is_bookmarked)
 		tile_action_set_menu_item_label (action, _("Remove from Favorites"));
@@ -940,6 +957,20 @@ rename_trigger (Tile *tile, TileEvent *event, TileAction *action)
 
 	gtk_widget_show (entry);
 	gtk_widget_grab_focus (entry);
+}
+
+static void
+remove_recent_item (Tile *tile, TileEvent *event, TileAction *action)
+{
+	DocumentTilePrivate *priv = DOCUMENT_TILE_GET_PRIVATE (tile);
+	bookmark_agent_remove_item (priv->agent, TILE (tile)->uri);
+}
+
+static void
+purge_recent_items (Tile *tile, TileEvent *event, TileAction *action)
+{
+	DocumentTilePrivate *priv = DOCUMENT_TILE_GET_PRIVATE (tile);
+	bookmark_agent_purge_items (priv->agent);
 }
 
 static void

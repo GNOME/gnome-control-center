@@ -332,7 +332,7 @@ load_image (DirectoryTile *tile)
 	if (priv->icon_name)
 		icon_name = priv->icon_name;
 	else
-		icon_name = "gnome-fs-directory";
+		icon_name = "folder";
 
 	priv->image_is_broken = slab_load_image (
 		GTK_IMAGE (NAMEPLATE_TILE (tile)->image), GTK_ICON_SIZE_DND, icon_name);
@@ -624,7 +624,7 @@ static void
 disown_spawned_child (gpointer user_data)
 {
 	setsid  ();
-	setpgrp ();
+	setpgid (0, 0);
 }
 
 static void

@@ -728,7 +728,7 @@ show_no_results_message (AppShellData * app_data, GtkWidget * containing_vbox)
 	gchar *markup;
 	gchar *str1;
 	gchar *str2;
-	
+
 	if (!app_data->filtered_out_everything_widget)
 	{
 		GtkWidget *hbox;
@@ -750,14 +750,16 @@ show_no_results_message (AppShellData * app_data, GtkWidget * containing_vbox)
 		gtk_container_add (GTK_CONTAINER (app_data->filtered_out_everything_widget), hbox);
 	}
 
-	str1 = g_strdup_printf ("<b>%s</b>", app_data->filter_string);
+	str1 = g_markup_printf_escaped ("<b>%s</b>", app_data->filter_string);
 	str2 = g_strdup_printf (_("Your filter \"%s\" does not match any items."), str1);
-	markup = g_markup_printf_escaped ("<span size=\"large\"><b>%s</b></span>\n\n%s",
+	markup = g_strdup_printf ("<span size=\"large\"><b>%s</b></span>\n\n%s",
 		_("No matches found."), str2);
 	gtk_label_set_text (app_data->filtered_out_everything_widget_label, markup);
 	gtk_label_set_use_markup (app_data->filtered_out_everything_widget_label, TRUE);
 	gtk_box_pack_start (GTK_BOX (containing_vbox), app_data->filtered_out_everything_widget,
 		TRUE, TRUE, 0);
+	g_free (str1);
+	g_free (str2);
 	g_free (markup);
 }
 
@@ -811,7 +813,7 @@ populate_application_category_section (AppShellData * app_data, SlabSection * se
 
 	app_resizer_layout_table_default (APP_RESIZER (app_data->category_layout), table,
 		launcher_list);
-	
+
 }
 
 gboolean
@@ -860,7 +862,7 @@ generate_categories (AppShellData * app_data)
 	GMenuTreeDirectory *root_dir;
 	GSList *contents, *l;
 	gboolean need_misc = FALSE;
-	
+
 	if (!app_data->tree)
 	{
 		app_data->tree = gmenu_tree_lookup (app_data->menu_name, GMENU_TREE_FLAGS_NONE);
@@ -869,6 +871,8 @@ generate_categories (AppShellData * app_data)
 	root_dir = gmenu_tree_get_root_directory (app_data->tree);
 	if (root_dir)
 		contents = gmenu_tree_directory_get_contents (root_dir);
+	else
+		contents = NULL;
 	if (!root_dir || !contents)
 	{
 		GtkWidget *dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -909,7 +913,7 @@ generate_categories (AppShellData * app_data)
 		g_hash_table_destroy (app_data->hash);
 		app_data->hash = NULL;
 	}
-	
+
 	gmenu_tree_item_unref (root_dir);
 
 	if (app_data->new_apps && (app_data->new_apps->max_items > 0))

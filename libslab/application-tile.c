@@ -471,7 +471,7 @@ create_header (const gchar *name)
 
 
 	header = gtk_label_new (name);
-	gtk_label_set_ellipsize (GTK_LABEL (header), PANGO_ELLIPSIZE_END);
+	gtk_label_set_line_wrap (GTK_LABEL (header), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (header), 0.0, 0.5);
 
 	g_signal_connect (

@@ -80,7 +80,8 @@ void           bookmark_agent_move_item     (BookmarkAgent *this, const gchar *u
 void           bookmark_agent_remove_item   (BookmarkAgent *this, const gchar *uri);
 void           bookmark_agent_reorder_items (BookmarkAgent *this, const gchar **uris);
 
-void bookmark_agent_update_from_bookmark_file (BookmarkAgent *this, GBookmarkFile *store);
+void	       bookmark_agent_update_from_bookmark_file (BookmarkAgent *this, GBookmarkFile *store);
+void	       bookmark_agent_purge_items (BookmarkAgent *this);
 
 void           bookmark_item_free           (BookmarkItem *item);
 
