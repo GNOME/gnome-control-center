@@ -613,6 +613,7 @@ static void
 transfer_done_cb (GtkWidget *dialog,
 		  TransferData *tdata)
 {
+	gdk_threads_enter ();
 	/* XXX: path should be on the local filesystem by now? */
 
 	if (dialog != NULL) {
@@ -623,6 +624,8 @@ transfer_done_cb (GtkWidget *dialog,
 
 	g_free (tdata->path);
 	g_free (tdata);
+
+	gdk_threads_leave ();
 }
 
 void
