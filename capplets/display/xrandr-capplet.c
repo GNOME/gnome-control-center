@@ -2033,10 +2033,10 @@ apply_configuration_returned_cb (DBusGProxy       *proxy,
     gtk_widget_set_sensitive (app->dialog, TRUE);
 }
 
-static void
-apply (App *app)
+static gboolean
+sanitize_and_save_configuration (App *app)
 {
-    GError *error = NULL;
+    GError *error;
 
     gnome_rr_config_sanitize (app->current_configuration);
 
@@ -2046,12 +2046,24 @@ apply (App *app)
 
     ensure_current_configuration_is_saved ();
 
+    error = NULL;
     if (!gnome_rr_config_save (app->current_configuration, &error))
     {
 	error_message (app, _("Could not save the monitor configuration"), error->message);
 	g_error_free (error);
-	return;
+	return FALSE;
     }
+
+    return TRUE;
+}
+
+static void
+apply (App *app)
+{
+    GError *error = NULL;
+
+    if (!sanitize_and_save_configuration (app))
+	return;
 
     g_assert (app->connection == NULL);
     g_assert (app->proxy == NULL);
