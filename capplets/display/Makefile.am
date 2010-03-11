@@ -53,6 +53,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
              $(GNOMECC_CAPPLETS_CFLAGS) \
+	     -DSBINDIR="\"$(sbindir)\"" \
 	     -DUIDIR="\"$(uidir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
