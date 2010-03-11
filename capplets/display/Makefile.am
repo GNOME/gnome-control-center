@@ -26,6 +26,14 @@ gnome_display_properties_install_systemwide_SOURCES =	\
 gnome_display_properties_install_systemwide_LDADD =	\
 	$(GLIB_LIBS)
 
+polkit_policydir = $(datadir)/polkit-1/actions
+dist_polkit_policy_DATA =					\
+	org.gnome.randr.policy
+
+# You will need a recent intltool or the patch from this bug
+# http://bugzilla.gnome.org/show_bug.cgi?id=462312
+@INTLTOOL_POLICY_RULE@
+
 @INTLTOOL_DESKTOP_RULE@
 
 icons16dir = $(datadir)/icons/hicolor/16x16/apps
@@ -62,5 +70,8 @@ update-icon-cache:
 		echo "*** Icon cache not updated.  After (un)install, run this:"; \
 		echo "***   $(gtk_update_icon_cache)"; \
 	fi
+
+EXTRA_DIST = org.gnome.randr.policy.in
+DISTCLEANFILES = org.gnome.randr.policy
 
 -include $(top_srcdir)/git.mk
