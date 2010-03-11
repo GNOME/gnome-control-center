@@ -25,8 +25,11 @@
 
 #include "config.h"
 
+#include <errno.h>
 #include <locale.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -124,6 +127,7 @@ copy_file (int source_fd, int dest_fd)
 int
 main (int argc, char **argv)
 {
+	uid_t uid, euid;
 	const char *source_filename;
 	const char *dest_name;
 	const char *pkexec_uid_str;
@@ -135,7 +139,7 @@ main (int argc, char **argv)
 	char template[100];
 
 	setlocale (LC_ALL, "");
-	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 

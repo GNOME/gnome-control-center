@@ -4,7 +4,7 @@ cappletname = display
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = display-capplet.ui
 
-bin_PROGRAMS = gnome-display-properties
+bin_PROGRAMS = gnome-display-properties gnome-display-properties-install-systemwide
 
 gnome_display_properties_SOURCES =	\
 	xrandr-capplet.c		\
@@ -17,6 +17,12 @@ gnome_display_properties_LDFLAGS = -export-dynamic
 gnome_display_properties_LDADD = \
 	$(top_builddir)/capplets/common/libcommon.la \
 	$(DISPLAY_CAPPLET_LIBS)
+
+gnome_display_properties_install_systemwide_SOURCES =	\
+	gnome-display-properties-install-systemwide.c
+
+gnome_display_properties_install_systemwide_LDADD =	\
+	$(GLIB_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 
