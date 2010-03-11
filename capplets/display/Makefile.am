@@ -4,7 +4,9 @@ cappletname = display
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = display-capplet.ui
 
-bin_PROGRAMS = gnome-display-properties gnome-display-properties-install-systemwide
+bin_PROGRAMS = gnome-display-properties
+
+sbin_PROGRAMS = gnome-display-properties-install-systemwide
 
 gnome_display_properties_SOURCES =	\
 	xrandr-capplet.c		\
