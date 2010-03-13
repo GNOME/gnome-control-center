@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2010-03-06 22:51+0900\n"
-"PO-Revision-Date: 2010-03-06 23:05+0900\n"
+"POT-Creation-Date: 2010-03-13 23:27+0900\n"
+"PO-Revision-Date: 2010-03-13 23:28+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -35,19 +35,20 @@ msgstr "테마 다운로드 URL"
 msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
-msgstr "현재 위치의 이름입니다. 이 설정은 네트워크 프록시를 맞추는데 이용됩니다."
+msgstr ""
+"현재 위치의 이름입니다. 이 설정은 네트워크 프록시를 맞추는데 이용됩니다."
 
 #: ../gnome-control-center.schemas.in.h:5
 msgid ""
 "URL for where to get more desktop backgrounds. If set to an empty string the "
 "link will not appear."
-msgstr "데스크탑 배경을 받을 수 있는 URL. 빈 문자열이면 링크가 나타나지 않습니다."
+msgstr "데스크톱 배경을 받을 수 있는 URL. 빈 문자열이면 링크가 나타나지 않습니다."
 
 #: ../gnome-control-center.schemas.in.h:6
 msgid ""
 "URL for where to get more desktop themes. If set to an empty string the link "
 "will not appear."
-msgstr "데스크탑 테마를 받을 수 있는 URL. 빈 문자열이면 링크가 나타나지 않습니다."
+msgstr "데스크톱 테마를 받을 수 있는 URL. 빈 문자열이면 링크가 나타나지 않습니다."
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -228,7 +229,7 @@ msgid "Images"
 msgstr "그림"
 
 #: ../capplets/about-me/gnome-about-me.c:750
-#: ../capplets/appearance/theme-installer.c:763
+#: ../capplets/appearance/theme-installer.c:766
 msgid "All Files"
 msgstr "모든 파일"
 
@@ -849,31 +850,31 @@ msgstr "이전 글꼴 사용"
 msgid "Use selected font"
 msgstr "선택한 글꼴 사용"
 
-#: ../capplets/appearance/appearance-main.c:54
+#: ../capplets/appearance/appearance-main.c:56
 #, c-format
 msgid "Could not load user interface file: %s"
 msgstr "사용자 인터페이스 파일을 읽어들일 수 없습니다: %s"
 
-#: ../capplets/appearance/appearance-main.c:133
+#: ../capplets/appearance/appearance-main.c:135
 msgid "Specify the filename of a theme to install"
 msgstr "설치할 테마 이름을 지정하십시오"
 
-#: ../capplets/appearance/appearance-main.c:134
+#: ../capplets/appearance/appearance-main.c:136
 msgid "filename"
 msgstr "파일 이름"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:141
+#: ../capplets/appearance/appearance-main.c:143
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "보여줄 페이지 이름을 지정합니다 (theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:142
+#: ../capplets/appearance/appearance-main.c:144
 #: ../capplets/default-applications/gnome-da-capplet.c:960
 #: ../capplets/mouse/gnome-mouse-properties.c:591
 msgid "page"
 msgstr "탭이름"
 
-#: ../capplets/appearance/appearance-main.c:149
+#: ../capplets/appearance/appearance-main.c:151
 msgid "[WALLPAPER...]"
 msgstr "[바탕그림...]"
 
@@ -955,7 +956,7 @@ msgstr "사용자 설정"
 
 #: ../capplets/appearance/data/appearance.ui.h:1
 msgid "Appearance Preferences"
-msgstr "모양새 기본 설정"
+msgstr "모양 기본 설정"
 
 #: ../capplets/appearance/data/appearance.ui.h:2
 msgid "Background"
@@ -1239,7 +1240,7 @@ msgstr "살짝(_S)"
 
 #: ../capplets/appearance/data/appearance.ui.h:74
 msgid "_Style:"
-msgstr "모양새(_S):"
+msgstr "모양(_S):"
 
 #: ../capplets/appearance/data/appearance.ui.h:75
 msgid "_Tooltips:"
@@ -1264,11 +1265,11 @@ msgstr "인치당 점 개수"
 
 #: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:1
 msgid "Appearance"
-msgstr "모양새"
+msgstr "모양"
 
 #: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:2
 msgid "Customize the look of the desktop"
-msgstr "데스크탑의 모양새를 설정합니다"
+msgstr "데스크톱의 모양을 설정합니다"
 
 #: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:1
 msgid "Installs themes packages for various parts of the desktop"
@@ -1297,6 +1298,12 @@ msgstr "그림"
 #: ../capplets/appearance/gnome-wp-item.c:269
 msgid "multiple sizes"
 msgstr "여러 개 크기"
+
+#. translators: x pixel(s) by y pixel(s)
+#: ../capplets/appearance/gnome-wp-item.c:272
+#, c-format
+msgid "%d %s by %d %s"
+msgstr "%d%s x %d%s"
 
 #: ../capplets/appearance/gnome-wp-item.c:274
 #: ../capplets/appearance/gnome-wp-item.c:276
@@ -1405,11 +1412,11 @@ msgstr "임시 디렉터리를 만드는 데 실패했습니다"
 msgid "New themes have been successfully installed."
 msgstr "\"%s\" 테마를 새로 설치했습니다."
 
-#: ../capplets/appearance/theme-installer.c:643
+#: ../capplets/appearance/theme-installer.c:646
 msgid "No theme file location specified to install"
 msgstr "테마를 파일을 설치할 위치를 지정하지 않았습니다"
 
-#: ../capplets/appearance/theme-installer.c:667
+#: ../capplets/appearance/theme-installer.c:670
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1418,11 +1425,11 @@ msgstr ""
 "다음에 테마를 설치하는 데 필요한 권한이 없습니다:\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:745
+#: ../capplets/appearance/theme-installer.c:748
 msgid "Select Theme"
 msgstr "테마 선택"
 
-#: ../capplets/appearance/theme-installer.c:756
+#: ../capplets/appearance/theme-installer.c:759
 msgid "Theme Packages"
 msgstr "테마 꾸러미"
 
@@ -2185,7 +2192,8 @@ msgstr "화면 정보를 읽어 올 수 없습니다"
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
-msgstr "속성을 바꾸려는 모니터를 선택하십시오. 위치를 바꾸려면 끌어 놓으십시오."
+msgstr ""
+"속성을 바꾸려는 모니터를 선택하십시오. 위치를 바꾸려면 끌어 놓으십시오."
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 msgid "Sound"
