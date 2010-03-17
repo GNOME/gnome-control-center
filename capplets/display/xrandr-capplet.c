@@ -1489,6 +1489,19 @@ set_cursor (GtkWidget *widget, GdkCursorType type)
 }
 
 static void
+set_monitors_tooltip (App *app, gboolean is_dragging)
+{
+    const char *text;
+
+    if (is_dragging)
+	text = NULL;
+    else
+	text = _("Select a monitor to change its properties; drag it to rearrange its placement.");
+
+    gtk_widget_set_tooltip_text (app->area, text);
+}
+
+static void
 on_output_event (FooScrollArea *area,
 		 FooScrollAreaEvent *event,
 		 gpointer data)
@@ -1510,6 +1523,7 @@ on_output_event (FooScrollArea *area,
 	app->current_output = output;
 
 	rebuild_gui (app);
+	set_monitors_tooltip (app, TRUE);
 
 	if (!app->current_configuration->clone && get_n_connected (app) > 1)
 	{
@@ -1587,6 +1601,7 @@ on_output_event (FooScrollArea *area,
 	    if (event->type == FOO_BUTTON_RELEASE)
 	    {
 		foo_scroll_area_end_grab (area);
+		set_monitors_tooltip (app, FALSE);
 
 		g_free (output->user_data);
 		output->user_data = NULL;
@@ -2382,7 +2397,7 @@ run_application (App *app)
 
     g_object_set_data (G_OBJECT (app->area), "app", app);
 
-    gtk_widget_set_tooltip_text (app->area, _("Select a monitor to change its properties; drag it to rearrange its placement."));
+    set_monitors_tooltip (app, FALSE);
 
     /* FIXME: this should be computed dynamically */
     foo_scroll_area_set_min_size (FOO_SCROLL_AREA (app->area), -1, 200);
