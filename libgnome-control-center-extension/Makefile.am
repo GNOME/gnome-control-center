@@ -1,6 +1,7 @@
 NULL =
 
 INCLUDES =						\
+	-DEXTENSIONSDIR="\"$(EXTENSIONSDIR)\""			\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
 	-DLIBEXECDIR="\"$(libexecdir)\""				\
@@ -31,6 +32,8 @@ libgnome_control_center_extension_la_SOURCES =		\
 	cc-page.c					\
 	cc-panel.h					\
 	cc-panel.c					\
+	cc-shell.c					\
+	cc-shell.h					\
 	$(NULL)
 
 #        -version-info @GNOME_CONTROL_CENTER_EXTENSION_VERSION_INFO@
