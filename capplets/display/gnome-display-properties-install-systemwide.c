@@ -176,7 +176,7 @@ main (int argc, char **argv)
 		err = errno;
 
 		/* Translators: first %s is a filename; second %s is an error message */
-		g_print (_("Could not open %s: %s"),
+		g_print (_("Could not open %s: %s\n"),
 			 source_filename,
 			 g_strerror (err));
 		return EXIT_FAILURE;
@@ -212,7 +212,7 @@ main (int argc, char **argv)
 
 	if (statbuf.st_uid != pkexec_uid) {
 		/* Translators: we are complaining that a file must be really owned by the user who called this program */
-		g_print (_("%s must be owned by you"), source_filename);
+		g_print (_("%s must be owned by you\n"), source_filename);
 		return EXIT_FAILURE;
 	}
 
@@ -228,7 +228,7 @@ main (int argc, char **argv)
 	/* Chdir to the destination directory to keep it open... */
 
 	if (chdir (SYSTEM_RANDR_PATH) != 0) {
-		g_print (_("%s must be a directory"), SYSTEM_RANDR_PATH);
+		g_print (_("%s must be a directory\n"), SYSTEM_RANDR_PATH);
 		return EXIT_FAILURE;
 	}
 
@@ -239,7 +239,7 @@ main (int argc, char **argv)
 	if (dest_fd == -1) {
 		err = errno;
 		/* Translators: the first %s/%s is a directory/filename; the last %s is an error message */
-		g_print (_("Could not open %s/%s: %s"),
+		g_print (_("Could not open %s/%s: %s\n"),
 			 SYSTEM_RANDR_PATH,
 			 template,
 			 g_strerror (err));
@@ -259,7 +259,7 @@ main (int argc, char **argv)
 	if (rename (template, dest_name) != 0) {
 		err = errno;
 		unlink (template);
-		g_print (_("Could not rename %s to %s: %s"),
+		g_print (_("Could not rename %s to %s: %s\n"),
 			 template,
 			 dest_name,
 			 g_strerror (err));
