@@ -235,7 +235,7 @@ main (int argc, char **argv)
 	/* ... and open our temporary destination file right there */
 
 	strcpy (template, "gsd-XXXXXX");
-	dest_fd = g_mkstemp_full (template, 0, 0644);
+	dest_fd = g_mkstemp_full (template, O_WRONLY, 0644);
 	if (dest_fd == -1) {
 		err = errno;
 		/* Translators: the first %s/%s is a directory/filename; the last %s is an error message */
