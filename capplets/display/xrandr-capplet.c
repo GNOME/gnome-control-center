@@ -2297,6 +2297,23 @@ apply_button_clicked_cb (GtkButton *button, gpointer data)
 }
 
 static void
+success_dialog_for_make_default (App *app)
+{
+    GtkWidget *dialog;
+
+    dialog = gtk_message_dialog_new (GTK_WINDOW (app->dialog),
+				     GTK_DIALOG_MODAL,
+				     GTK_MESSAGE_INFO,
+				     GTK_BUTTONS_OK,
+				     _("The monitor configuration has been saved"));
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+					      _("This configuration will be used the next time someone logs in."));
+
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
+}
+
+static void
 make_default (App *app)
 {
     char *command_line;
@@ -2322,8 +2339,11 @@ make_default (App *app)
 				    dest_basename);
 
     error = NULL;
+    /* FIXME: pick up stderr and present it nicely in case of error */
     if (!g_spawn_command_line_sync (command_line, NULL, NULL, NULL, &error))
 	error_message (app, _("Could not set the default configuration for monitors"), error ? error->message : NULL);
+    else
+	success_dialog_for_make_default (app);
 
     g_free (dest_filename);
     g_free (dest_basename);
