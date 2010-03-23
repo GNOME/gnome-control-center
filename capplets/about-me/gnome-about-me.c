@@ -163,7 +163,7 @@ about_me_error (GtkWindow *parent, gchar *str)
 
 /********************/
 static void
-about_me_destroy (GnomeAboutMe *me)
+about_me_destroy (void)
 {
 	e_contact_address_free (me->addr1);
 	e_contact_address_free (me->addr2);
@@ -813,7 +813,7 @@ about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, GnomeAboutMe *m
 			about_me_commit (me);
 		}
 
-		about_me_destroy (me);
+		about_me_destroy ();
 		gtk_main_quit ();
 	}
 }
@@ -855,7 +855,7 @@ about_me_setup_dialog (void)
 	gtk_container_add (GTK_CONTAINER (WID ("button-image")), me->image_chooser);
 
 	if (dialog == NULL) {
-		about_me_destroy (me);
+		about_me_destroy ();
 		return -1;
 	}
 
@@ -890,7 +890,7 @@ about_me_setup_dialog (void)
 			about_me_error (NULL, _("There was an error while trying to get the addressbook information\n" \
 						"Evolution Data Server can't handle the protocol"));
 			g_clear_error (&error);
-			about_me_destroy (me);
+			about_me_destroy ();
 			return -1;
 		}
 
