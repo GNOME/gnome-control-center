@@ -279,7 +279,7 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *unuse
 	if (me == NULL)
 		return FALSE;
 
-	wid = gtk_widget_get_name (widget);
+	wid = gtk_buildable_get_name (GTK_BUILDABLE (widget));
 
 	if (wid == NULL)
 		return FALSE;
