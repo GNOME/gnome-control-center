@@ -134,6 +134,7 @@ load_panel_plugins (CcShell *shell)
   GList *modules;
   GList *panel_implementations;
   GList *l;
+  GTimer *timer;
 
   /* make sure base type is registered */
   if (panel_type == G_TYPE_INVALID)
@@ -162,6 +163,7 @@ load_panel_plugins (CcShell *shell)
 #endif
 
   /* find all extensions */
+  timer = g_timer_new ();
   panel_implementations = g_io_extension_point_get_extensions (ep);
   for (l = panel_implementations; l != NULL; l = l->next)
     {
@@ -171,15 +173,19 @@ load_panel_plugins (CcShell *shell)
 
       extension = l->data;
 
-      g_debug ("Found extension: %s %d", g_io_extension_get_name (extension), g_io_extension_get_priority (extension));
+      g_debug ("Found extension: %s %d", g_io_extension_get_name (extension),
+               g_io_extension_get_priority (extension));
       panel = g_object_new (g_io_extension_get_type (extension),
                             "shell", shell,
                             NULL);
       g_object_get (panel, "id", &id, NULL);
       g_hash_table_insert (priv->panels, g_strdup (id), g_object_ref (panel));
-      g_debug ("id: '%s'", id);
+      g_debug ("id: '%s', loaded in %fsec", id, g_timer_elapsed (timer, NULL));
       g_free (id);
+      g_timer_start (timer);
     }
+  g_timer_destroy (timer);
+  timer = NULL;
 
   /* unload all modules; the module our instantiated authority is in won't be unloaded because
    * we've instantiated a reference to a type in this module
