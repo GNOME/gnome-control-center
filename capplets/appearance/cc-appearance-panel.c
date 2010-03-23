@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2010 Red Hat, Inc.
+ * Copyright (C) 2010 Intel, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -131,10 +132,18 @@ on_notebook_switch_page (GtkNotebook       *notebook,
 }
 
 static void
-setup_panel (CcAppearancePanel *panel)
+setup_panel (CcAppearancePanel *panel,
+             gboolean           is_active)
 {
+        static gboolean initialised = FALSE;
+
         GtkWidget *label;
         char      *display_name;
+
+        if (initialised)
+                return;
+
+        initialised = TRUE;
 
         panel->priv->notebook = gtk_notebook_new ();
         g_signal_connect (panel->priv->notebook,
@@ -193,8 +202,6 @@ cc_appearance_panel_constructor (GType                  type,
                       "id", "gnome-appearance-properties.desktop",
                       NULL);
 
-        setup_panel (appearance_panel);
-
         return G_OBJECT (appearance_panel);
 }
 
@@ -220,6 +227,9 @@ static void
 cc_appearance_panel_init (CcAppearancePanel *panel)
 {
         panel->priv = CC_APPEARANCE_PANEL_GET_PRIVATE (panel);
+
+        g_signal_connect (panel, "active-changed", G_CALLBACK (setup_panel),
+                          NULL);
 }
 
 static void
