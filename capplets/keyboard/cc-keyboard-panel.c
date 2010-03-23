@@ -100,10 +100,17 @@ on_notebook_switch_page (GtkNotebook     *notebook,
 }
 
 static void
-setup_panel (CcKeyboardPanel *panel)
+setup_panel (CcKeyboardPanel *panel,
+             gboolean         is_active)
 {
+        static gboolean initialised = FALSE;
         GtkWidget *label;
         char      *display_name;
+
+        if (initialised)
+                return;
+
+        initialised = TRUE;
 
         panel->priv->notebook = gtk_notebook_new ();
         g_signal_connect (panel->priv->notebook,
@@ -157,8 +164,6 @@ cc_keyboard_panel_constructor (GType                  type,
                       "id", "keyboard.desktop",
                       NULL);
 
-        setup_panel (keyboard_panel);
-
         return G_OBJECT (keyboard_panel);
 }
 
@@ -194,6 +199,11 @@ cc_keyboard_panel_init (CcKeyboardPanel *panel)
         gconf_client_add_dir (client, "/desktop/gnome/interface",
                               GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
         g_object_unref (client);
+
+
+        g_signal_connect (panel, "active-changed", G_CALLBACK (setup_panel),
+                          NULL);
+
 }
 
 static void
