@@ -1,5 +1,7 @@
 NULL =
 
+uidir = $(pkgdatadir)/ui
+
 INCLUDES =						\
 	-DEXTENSIONSDIR="\"$(EXTENSIONSDIR)\""			\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
@@ -10,6 +12,7 @@ INCLUDES =						\
 	-I$(top_srcdir)							\
 	-I$(top_srcdir)/libwindow-settings				\
 	-DPIXMAP_DIR=\""$(datadir)/gnome-control-center/pixmaps"\"	\
+	-DUIDIR="\"$(uidir)\""					\
 	$(CAPPLET_CFLAGS)						\
 	$(DBUS_CFLAGS)							\
 	$(GNOME_DESKTOP_CFLAGS)						\
