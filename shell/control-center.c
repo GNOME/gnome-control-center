@@ -33,7 +33,14 @@
 #include "cc-shell.h"
 #include "shell-search-renderer.h"
 
+#include <unique/unique.h>
+
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
+
+enum
+{
+  CC_SHELL_RAISE_COMMAND = 1
+};
 
 typedef struct
 {
@@ -479,15 +486,39 @@ search_entry_clear_cb (GtkEntry *entry)
   gtk_entry_set_text (entry, "");
 }
 
+static UniqueResponse
+message_received (UniqueApp         *app,
+                  gint               command,
+                  UniqueMessageData *message_data,
+                  guint              time_,
+                  GtkWindow         *window)
+{
+  gtk_window_present (window);
+
+  return GTK_RESPONSE_OK;
+}
 
 int
 main (int argc, char **argv)
 {
   ShellData *data;
   GtkWidget *widget;
+  UniqueApp *unique;
 
   g_thread_init (NULL);
   gtk_init (&argc, &argv);
+
+  unique = unique_app_new_with_commands ("org.gnome.ControlCenter",
+                                         NULL,
+                                         "raise",
+                                         CC_SHELL_RAISE_COMMAND,
+                                         NULL);
+
+  if (unique_app_is_running (unique))
+    {
+      unique_app_send_message (unique, 1, NULL);
+      return 0;
+    }
 
   data = g_new0 (ShellData, 1);
 
@@ -526,6 +557,10 @@ main (int argc, char **argv)
   g_signal_connect (widget, "icon-release", G_CALLBACK (search_entry_clear_cb), data);
 
   gtk_widget_show_all (data->window);
+
+  g_signal_connect (unique, "message-received", G_CALLBACK (message_received),
+                    data->window);
+
 
   if (argc == 2)
     {
