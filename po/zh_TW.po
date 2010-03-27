@@ -10,10 +10,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.29.91\n"
+"Project-Id-Version: gnome-control-center 2.29.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-27 20:41+0800\n"
-"PO-Revision-Date: 2010-02-27 18:39+0800\n"
+"POT-Creation-Date: 2010-03-27 20:52+0800\n"
+"PO-Revision-Date: 2010-03-27 14:35+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <zh-l10n@lists.linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -218,7 +218,7 @@ msgid "Images"
 msgstr "圖片"
 
 #: ../capplets/about-me/gnome-about-me.c:750
-#: ../capplets/appearance/theme-installer.c:763
+#: ../capplets/appearance/theme-installer.c:766
 msgid "All Files"
 msgstr "全部檔案"
 
@@ -835,31 +835,31 @@ msgstr "使用以前的字型"
 msgid "Use selected font"
 msgstr "使用已選字型"
 
-#: ../capplets/appearance/appearance-main.c:54
+#: ../capplets/appearance/appearance-main.c:56
 #, c-format
 msgid "Could not load user interface file: %s"
 msgstr "無法載入使用者介面檔案：%s"
 
-#: ../capplets/appearance/appearance-main.c:133
+#: ../capplets/appearance/appearance-main.c:135
 msgid "Specify the filename of a theme to install"
 msgstr "指定要安裝的佈景主題名稱"
 
-#: ../capplets/appearance/appearance-main.c:134
+#: ../capplets/appearance/appearance-main.c:136
 msgid "filename"
 msgstr "檔案名稱"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:141
+#: ../capplets/appearance/appearance-main.c:143
 msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "指定要顯示的頁面名稱 (theme|background|fonts|interface)"
 
-#: ../capplets/appearance/appearance-main.c:142
+#: ../capplets/appearance/appearance-main.c:144
 #: ../capplets/default-applications/gnome-da-capplet.c:960
 #: ../capplets/mouse/gnome-mouse-properties.c:591
 msgid "page"
 msgstr "頁面"
 
-#: ../capplets/appearance/appearance-main.c:149
+#: ../capplets/appearance/appearance-main.c:151
 msgid "[WALLPAPER...]"
 msgstr "[桌布...]"
 
@@ -1279,6 +1279,12 @@ msgstr "圖片"
 msgid "multiple sizes"
 msgstr "多重尺寸"
 
+#. translators: x pixel(s) by y pixel(s)
+#: ../capplets/appearance/gnome-wp-item.c:272
+#, c-format
+msgid "%d %s by %d %s"
+msgstr "寛%d %s 高%d %s"
+
 #: ../capplets/appearance/gnome-wp-item.c:274
 #: ../capplets/appearance/gnome-wp-item.c:276
 msgid "pixel"
@@ -1384,11 +1390,11 @@ msgstr "建構暫存目錄失敗"
 msgid "New themes have been successfully installed."
 msgstr "新的佈景主題已經安裝完成。"
 
-#: ../capplets/appearance/theme-installer.c:643
+#: ../capplets/appearance/theme-installer.c:646
 msgid "No theme file location specified to install"
 msgstr "沒有指定安裝佈景主題檔案的位置"
 
-#: ../capplets/appearance/theme-installer.c:667
+#: ../capplets/appearance/theme-installer.c:670
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1397,11 +1403,11 @@ msgstr ""
 "沒有足夠的權安裝佈景主題至：\n"
 "%s"
 
-#: ../capplets/appearance/theme-installer.c:745
+#: ../capplets/appearance/theme-installer.c:748
 msgid "Select Theme"
 msgstr "選擇佈景主題"
 
-#: ../capplets/appearance/theme-installer.c:756
+#: ../capplets/appearance/theme-installer.c:759
 msgid "Theme Packages"
 msgstr "佈景主題套件"
 
@@ -2124,7 +2130,7 @@ msgstr "%d Hz"
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
 #: ../capplets/display/xrandr-capplet.c:497
-#: ../capplets/display/xrandr-capplet.c:1628
+#: ../capplets/display/xrandr-capplet.c:1643
 msgid "Mirror Screens"
 msgstr "鏡射螢幕"
 
@@ -2138,27 +2144,27 @@ msgstr "顯示器：%s"
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:2046
-msgid "Could not save the monitor configuration"
-msgstr "無法儲存顯示器組態"
-
-#: ../capplets/display/xrandr-capplet.c:2057
-msgid "Could not get session bus while applying display configuration"
-msgstr "在套用顯示組態時無法取得作業階段匯流排"
-
-#: ../capplets/display/xrandr-capplet.c:2099
-msgid "Could not detect displays"
-msgstr "無法偵測顯示器"
-
-#: ../capplets/display/xrandr-capplet.c:2314
-msgid "Could not get screen information"
-msgstr "無法取得螢幕資訊"
-
-#: ../capplets/display/xrandr-capplet.c:2385
+#: ../capplets/display/xrandr-capplet.c:1499
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr "選擇一個螢幕以改變它的屬性；拖曳它則能重新排列它的位置。"
+
+#: ../capplets/display/xrandr-capplet.c:2061
+msgid "Could not save the monitor configuration"
+msgstr "無法儲存顯示器組態"
+
+#: ../capplets/display/xrandr-capplet.c:2072
+msgid "Could not get session bus while applying display configuration"
+msgstr "在套用顯示組態時無法取得作業階段匯流排"
+
+#: ../capplets/display/xrandr-capplet.c:2114
+msgid "Could not detect displays"
+msgstr "無法偵測顯示器"
+
+#: ../capplets/display/xrandr-capplet.c:2329
+msgid "Could not get screen information"
+msgstr "無法取得螢幕資訊"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 msgid "Sound"
