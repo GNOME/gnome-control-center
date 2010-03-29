@@ -1,4 +1,4 @@
-AC_INIT([gnome-control-center], [2.29.92],
+AC_INIT([gnome-control-center], [2.30.0],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
 AC_CONFIG_MACRO_DIR([m4])
