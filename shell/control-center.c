@@ -23,6 +23,7 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
@@ -60,12 +61,14 @@ typedef struct
 
   GHashTable *panels;
 
+  guint32 last_time;
+
 } ShellData;
 
 enum
 {
   COL_NAME,
-  COL_EXEC,
+  COL_DESKTOP_FILE,
   COL_ID,
   COL_PIXBUF,
   COL_CATEGORY,
@@ -90,6 +93,8 @@ button_release_cb (GtkWidget      *view,
 
       if (!selection)
         return FALSE;
+
+      data->last_time = event->time;
 
       item_activated_cb (GTK_ICON_VIEW (view), selection->data, data);
 
@@ -290,7 +295,7 @@ fill_model (ShellData *data)
                   const gchar *icon = gmenu_tree_entry_get_icon (f->data);
                   const gchar *name = gmenu_tree_entry_get_name (f->data);
                   const gchar *id = gmenu_tree_entry_get_desktop_file_id (f->data);
-                  const gchar *exec = gmenu_tree_entry_get_exec (f->data);
+                  const gchar *desktop = gmenu_tree_entry_get_desktop_file_path (f->data);
                   const gchar *comment = gmenu_tree_entry_get_comment (f->data);
                   GdkPixbuf *pixbuf = NULL;
                   char *icon2 = NULL;
@@ -323,7 +328,7 @@ fill_model (ShellData *data)
 
                   gtk_list_store_insert_with_values (data->store, NULL, 0,
                                                      COL_NAME, name,
-                                                     COL_EXEC, exec,
+                                                     COL_DESKTOP_FILE, desktop,
                                                      COL_ID, id,
                                                      COL_PIXBUF, pixbuf,
                                                      COL_CATEGORY, dir_name,
@@ -340,14 +345,51 @@ fill_model (ShellData *data)
 
 static void
 activate_panel (const gchar *id,
-                const gchar *exec,
+                const gchar *desktop_file,
                 ShellData   *data)
 {
   if (!cc_shell_set_panel (CC_SHELL (data->builder), id))
     {
       /* start app directly */
       g_debug ("Panel module not found for %s", id);
-      g_spawn_command_line_async (exec, NULL);
+
+      GAppInfo *appinfo;
+      GError *err = NULL;
+      GdkAppLaunchContext *ctx;
+      GKeyFile *key_file;
+
+      key_file = g_key_file_new ();
+      g_key_file_load_from_file (key_file, desktop_file, 0, &err);
+
+      if (err)
+        {
+          g_warning ("Error starting \"%s\": %s", id, err->message);
+
+          g_error_free (err);
+          err = NULL;
+          return;
+        }
+
+      appinfo = (GAppInfo*) g_desktop_app_info_new_from_keyfile (key_file);
+
+      g_key_file_free (key_file);
+
+
+      ctx = gdk_app_launch_context_new ();
+      gdk_app_launch_context_set_screen (ctx, gdk_screen_get_default ());
+      gdk_app_launch_context_set_timestamp (ctx, data->last_time);
+
+      g_app_info_launch (appinfo, NULL, G_APP_LAUNCH_CONTEXT (ctx), &err);
+
+      g_object_unref (appinfo);
+      g_object_unref (ctx);
+
+      if (err)
+        {
+          g_warning ("Error starting \"%s\": %s", id, err->message);
+          g_error_free (err);
+          err = NULL;
+        }
     }
 
 }
@@ -359,25 +401,26 @@ item_activated_cb (GtkIconView *icon_view,
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
-  gchar *name, *exec, *id;
+  gchar *name, *desktop_file, *id;
 
-  /* get exec */
   model = gtk_icon_view_get_model (icon_view);
 
   /* get the iter and ensure it is valid */
   if (!gtk_tree_model_get_iter (model, &iter, path))
     return;
 
-  gtk_tree_model_get (model, &iter, COL_NAME, &name, COL_EXEC, &exec, COL_ID, &id, -1);
+  gtk_tree_model_get (model, &iter, COL_NAME, &name,
+                      COL_DESKTOP_FILE, &desktop_file,
+                      COL_ID, &id, -1);
 
   g_debug ("activated id: '%s'", id);
 
   cc_shell_set_title (CC_SHELL (data->builder), name);
 
-  activate_panel (id, exec, data);
+  activate_panel (id, desktop_file, data);
 
   g_free (id);
-  g_free (exec);
+  g_free (desktop_file);
 }
 
 static void
@@ -445,6 +488,9 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
       GtkTreePath *path;
 
       path = gtk_tree_path_new_first ();
+
+      data->last_time = event->time;
+
       item_activated_cb ((GtkIconView *) gtk_builder_get_object (data->builder,
                                                                  "search-view"),
                          path, data);
