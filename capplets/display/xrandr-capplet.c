@@ -77,6 +77,11 @@ struct App
     } apply_configuration_state;
 };
 
+/* Response codes for custom buttons in the main dialog */
+enum {
+    RESPONSE_MAKE_DEFAULT = 1
+};
+
 static void rebuild_gui (App *app);
 static void on_clone_changed (GtkWidget *box, gpointer data);
 static void on_rate_changed (GtkComboBox *box, gpointer data);
@@ -2043,10 +2048,10 @@ apply_configuration_returned_cb (DBusGProxy       *proxy,
     gtk_widget_set_sensitive (app->dialog, TRUE);
 }
 
-static void
-apply (App *app)
+static gboolean
+sanitize_and_save_configuration (App *app)
 {
-    GError *error = NULL;
+    GError *error;
 
     gnome_rr_config_sanitize (app->current_configuration);
 
@@ -2056,12 +2061,24 @@ apply (App *app)
 
     ensure_current_configuration_is_saved ();
 
+    error = NULL;
     if (!gnome_rr_config_save (app->current_configuration, &error))
     {
 	error_message (app, _("Could not save the monitor configuration"), error->message);
 	g_error_free (error);
-	return;
+	return FALSE;
     }
+
+    return TRUE;
+}
+
+static void
+apply (App *app)
+{
+    GError *error = NULL;
+
+    if (!sanitize_and_save_configuration (app))
+	return;
 
     g_assert (app->connection == NULL);
     g_assert (app->proxy == NULL);
@@ -2294,6 +2311,61 @@ apply_button_clicked_cb (GtkButton *button, gpointer data)
     app->apply_button_clicked_timestamp = gtk_get_current_event_time ();
 }
 
+static void
+success_dialog_for_make_default (App *app)
+{
+    GtkWidget *dialog;
+
+    dialog = gtk_message_dialog_new (GTK_WINDOW (app->dialog),
+				     GTK_DIALOG_MODAL,
+				     GTK_MESSAGE_INFO,
+				     GTK_BUTTONS_OK,
+				     _("The monitor configuration has been saved"));
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+					      _("This configuration will be used the next time someone logs in."));
+
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
+}
+
+static void
+make_default (App *app)
+{
+    char *command_line;
+    char *source_filename;
+    char *dest_filename;
+    char *dest_basename;
+    GError *error;
+
+    if (!sanitize_and_save_configuration (app))
+	return;
+
+    dest_filename = gconf_client_get_string (app->client, "/apps/gnome_settings_daemon/xrandr/default_configuration_file", NULL);
+    if (!dest_filename)
+	return; /* FIXME: present an error? */
+
+    dest_basename = g_path_get_basename (dest_filename);
+
+    source_filename = gnome_rr_config_get_intended_filename ();
+
+    command_line = g_strdup_printf ("pkexec %s/gnome-display-properties-install-systemwide %s %s",
+				    SBINDIR,
+				    source_filename,
+				    dest_basename);
+
+    error = NULL;
+    /* FIXME: pick up stderr and present it nicely in case of error */
+    if (!g_spawn_command_line_sync (command_line, NULL, NULL, NULL, &error))
+	error_message (app, _("Could not set the default configuration for monitors"), error ? error->message : NULL);
+    else
+	success_dialog_for_make_default (app);
+
+    g_free (dest_filename);
+    g_free (dest_basename);
+    g_free (source_filename);
+    g_free (command_line);
+}
+
 static GtkWidget*
 _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 {
@@ -2443,6 +2515,11 @@ restart:
 
     case GTK_RESPONSE_APPLY:
 	apply (app);
+	goto restart;
+	break;
+
+    case RESPONSE_MAKE_DEFAULT:
+	make_default (app);
 	goto restart;
 	break;
     }

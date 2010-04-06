@@ -113,6 +113,8 @@ gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-2.0`
 GTK_ENGINE_DIR="$gtk_lib_dir/gtk-2.0/$gtk_binary_version/engines"
 AC_SUBST(GTK_ENGINE_DIR)
 
+PKG_CHECK_MODULES(GLIB, glib-2.0)
+
 dnl
 dnl Check dependencies of libslab
 dnl

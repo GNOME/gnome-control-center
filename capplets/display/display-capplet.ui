@@ -351,6 +351,21 @@
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">0</property>
+                <property name="secondary">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="make_default_button">
+                <property name="label" translatable="yes">Make Default</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -365,7 +380,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -380,7 +395,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
@@ -394,6 +409,7 @@
     </child>
     <action-widgets>
       <action-widget response="-11">helpbutton1</action-widget>
+      <action-widget response="1">make_default_button</action-widget>
       <action-widget response="-10">apply_button</action-widget>
       <action-widget response="-7">button2</action-widget>
     </action-widgets>

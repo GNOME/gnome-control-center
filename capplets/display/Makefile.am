@@ -6,6 +6,8 @@ dist_ui_DATA = display-capplet.ui
 
 bin_PROGRAMS = gnome-display-properties
 
+sbin_PROGRAMS = gnome-display-properties-install-systemwide
+
 gnome_display_properties_SOURCES =	\
 	xrandr-capplet.c		\
 	scrollarea.c			\
@@ -17,6 +19,20 @@ gnome_display_properties_LDFLAGS = -export-dynamic
 gnome_display_properties_LDADD = \
 	$(top_builddir)/capplets/common/libcommon.la \
 	$(DISPLAY_CAPPLET_LIBS)
+
+gnome_display_properties_install_systemwide_SOURCES =	\
+	gnome-display-properties-install-systemwide.c
+
+gnome_display_properties_install_systemwide_LDADD =	\
+	$(GLIB_LIBS)
+
+polkit_policydir = $(datadir)/polkit-1/actions
+dist_polkit_policy_DATA =					\
+	org.gnome.randr.policy
+
+# You will need a recent intltool or the patch from this bug
+# http://bugzilla.gnome.org/show_bug.cgi?id=462312
+@INTLTOOL_POLICY_RULE@
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -37,6 +53,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
              $(GNOMECC_CAPPLETS_CFLAGS) \
+	     -DSBINDIR="\"$(sbindir)\"" \
 	     -DUIDIR="\"$(uidir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
@@ -54,5 +71,8 @@ update-icon-cache:
 		echo "*** Icon cache not updated.  After (un)install, run this:"; \
 		echo "***   $(gtk_update_icon_cache)"; \
 	fi
+
+EXTRA_DIST = org.gnome.randr.policy.in
+DISTCLEANFILES = org.gnome.randr.policy
 
 -include $(top_srcdir)/git.mk
