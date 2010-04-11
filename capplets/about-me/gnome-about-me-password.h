@@ -1,7 +1,7 @@
 #ifndef __GNOME_ABOUT_ME_PASSWORD_H__
 #define __GNOME_ABOUT_ME_PASSWORD_H__
 
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 
 void
 gnome_about_me_password (GtkWindow *parent);

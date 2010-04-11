@@ -21,14 +21,10 @@
 
 #include "eel-alert-dialog.h"
 #include "eel-gtk-macros.h"
+
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkvbox.h>
-#include <gtk/gtkimage.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtkiconfactory.h>
-#include <gtk/gtkexpander.h>
+
 #include <string.h>
 
 enum {

@@ -22,7 +22,7 @@
 #ifndef EEL_ALERT_DIALOG_H
 #define EEL_ALERT_DIALOG_H
 
-#include <gtk/gtkmessagedialog.h>
+#include <gtk/gtk.h>
 
 #define EEL_TYPE_ALERT_DIALOG        (eel_alert_dialog_get_type ())
 #define EEL_ALERT_DIALOG(obj)        (G_TYPE_CHECK_INSTANCE_CAST ((obj), EEL_TYPE_ALERT_DIALOG, EelAlertDialog))
