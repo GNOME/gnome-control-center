@@ -9,10 +9,25 @@ INCLUDES =					\
 
 bin_PROGRAMS = gnome-control-center
 
+MARSHAL_FILES = cc-shell-marshal.c cc-shell-marshal.h
+BUILT_SOURCES = $(MARSHAL_FILES)
+
+cc-shell-marshal.h: cc-shell-marshal.list
+	@GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --header > $@
+
+cc-shell-marshal.c: cc-shell-marshal.list
+	@GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --body --header > $@
+
 gnome_control_center_SOURCES =			\
 	control-center.c			\
+	control-center.h			\
 	shell-search-renderer.c			\
 	shell-search-renderer.h			\
+	cc-shell-category-view.c		\
+	cc-shell-category-view.h		\
+	cc-shell-item-view.c			\
+	cc-shell-item-view.h			\
+	$(MARSHAL_FILES)			\
 	$(NULL)
 
 gnome_control_center_LDADD =			\

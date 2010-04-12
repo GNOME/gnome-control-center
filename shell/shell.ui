@@ -125,20 +125,14 @@
               <placeholder/>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="scrolledwindow2">
+              <object class="GtkScrolledWindow" id="search-scrolled-window">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hscrollbar_policy">automatic</property>
                 <property name="vscrollbar_policy">automatic</property>
                 <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkIconView" id="search-view">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="orientation">horizontal</property>
-                    <property name="model">liststore</property>
-                    <property name="spacing">6</property>
-                  </object>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -169,8 +163,8 @@
   <object class="GtkSizeGroup" id="sizegroup">
     <property name="mode">vertical</property>
     <widgets>
-      <widget name="entry-alignment"/>
       <widget name="home-button"/>
+      <widget name="entry-alignment"/>
     </widgets>
   </object>
 </interface>
