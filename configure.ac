@@ -90,7 +90,7 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-COMMON_MODULES="gtk+-2.0 >= 2.18.0 dnl
+COMMON_MODULES="gtk+-2.0 >= 2.20.0 dnl
  glib-2.0 >= 2.17.4 dnl
  gthread-2.0 dnl
  gio-2.0 dnl

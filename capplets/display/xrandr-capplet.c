@@ -527,7 +527,7 @@ rebuild_current_monitor_label (App *app)
 	     * theme's colors, since the label is always shown against a light
 	     * pastel background.  See bgo#556050
 	     */
-	    gtk_widget_modify_fg (app->current_monitor_label, GTK_WIDGET_STATE (app->current_monitor_label), &black);
+	    gtk_widget_modify_fg (app->current_monitor_label, gtk_widget_get_state (app->current_monitor_label), &black);
 	}
 	else
 	{
@@ -2251,7 +2251,7 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
 static void
 select_current_output_from_dialog_position (App *app)
 {
-    if (GTK_WIDGET_REALIZED (app->dialog))
+    if (gtk_widget_get_realized (app->dialog))
 	app->current_output = get_output_for_window (app->current_configuration, app->dialog->window);
     else
 	app->current_output = NULL;

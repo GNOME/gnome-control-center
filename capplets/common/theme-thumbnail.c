@@ -118,7 +118,7 @@ static void
 hbox_foreach (GtkWidget *widget,
               gpointer   data)
 {
-  if (GTK_WIDGET_VISIBLE (widget)) {
+  if (gtk_widget_get_visible (widget)) {
     gtk_widget_realize (widget);
     gtk_widget_map (widget);
     gtk_widget_ensure_style (widget);

@@ -258,9 +258,12 @@ new_adjustment (void)
 static void
 foo_scroll_area_init (FooScrollArea *scroll_area)
 {
-    GTK_WIDGET_SET_FLAGS (scroll_area, GTK_NO_WINDOW);
-    
-    gtk_widget_set_redraw_on_allocate (GTK_WIDGET (scroll_area), FALSE);
+    GtkWidget *widget;
+
+    widget = GTK_WIDGET (scroll_area);
+
+    gtk_widget_set_has_window (widget, FALSE);
+    gtk_widget_set_redraw_on_allocate (widget, FALSE);
     
     scroll_area->priv = g_new0 (FooScrollAreaPrivate, 1);
     scroll_area->priv->width = 0;
@@ -276,7 +279,7 @@ foo_scroll_area_init (FooScrollArea *scroll_area)
     scroll_area->priv->pixmap = NULL;
     scroll_area->priv->update_region = gdk_region_new ();
 
-    gtk_widget_set_double_buffered (GTK_WIDGET (scroll_area), FALSE);
+    gtk_widget_set_double_buffered (widget, FALSE);
 }
 
 static void
@@ -720,8 +723,8 @@ foo_scroll_area_realize (GtkWidget *widget)
     FooScrollArea *area = FOO_SCROLL_AREA (widget);
     GdkWindowAttr attributes;
     gint attributes_mask;
-    
-    GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+
+    gtk_widget_set_realized (widget, TRUE);
     
     attributes.window_type = GDK_WINDOW_CHILD;
     attributes.x = widget->allocation.x;
@@ -1260,7 +1263,7 @@ foo_scrollbar_adjustment_changed (GtkAdjustment *adj,
 	g_assert_not_reached ();
     }
     
-    if (GTK_WIDGET_REALIZED (widget))
+    if (gtk_widget_get_realized (widget))
     {
 	foo_scroll_area_scroll (scroll_area, -dx, -dy);
     
@@ -1461,15 +1464,20 @@ void
 foo_scroll_area_invalidate_region (FooScrollArea *area,
 				   GdkRegion     *region)
 {
+    GtkWidget *widget;
+
     g_return_if_fail (FOO_IS_SCROLL_AREA (area));
-    
+
+    widget = GTK_WIDGET (area);
+
     gdk_region_union (area->priv->update_region, region);
 
-    if (GTK_WIDGET_REALIZED (area))
+    if (gtk_widget_get_realized (widget))
     {
 	canvas_to_window (area, region);
 	
-	gdk_window_invalidate_region (GTK_WIDGET (area)->window, region, TRUE);
+	gdk_window_invalidate_region (gtk_widget_get_window (widget),
+	                              region, TRUE);
 	
 	window_to_canvas (area, region);
     }

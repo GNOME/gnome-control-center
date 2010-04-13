@@ -549,7 +549,7 @@ xkb_layout_choose (GtkBuilder * dialog)
 			  chooser_dialog);
 
 	toplevel = gtk_widget_get_toplevel (chooser);
-	if (GTK_WIDGET_TOPLEVEL (toplevel)) {
+	if (gtk_widget_is_toplevel (toplevel)) {
 		GdkRectangle *rect = gkbd_preview_load_position ();
 		if (rect != NULL) {
 			gtk_window_move (GTK_WINDOW (toplevel),

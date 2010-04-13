@@ -518,7 +518,7 @@ postpone_clicked_cb (GtkWidget *button,
 		return;
 	}
 
-	if (GTK_WIDGET_VISIBLE (priv->postpone_entry)) {
+	if (gtk_widget_get_visible (priv->postpone_entry)) {
 		gtk_widget_activate (priv->postpone_entry);
 		return;
 	}
@@ -611,7 +611,7 @@ label_expose_event_cb (GtkLabel       *label,
 
 	gtk_paint_layout (widget->style,
 			  widget->window,
-			  GTK_WIDGET_STATE (widget),
+			  gtk_widget_get_state (widget),
 			  FALSE,
 			  &event->area,
 			  widget,
