@@ -19,14 +19,4 @@
  */
 
 
-enum
-{
-  COL_NAME,
-  COL_DESKTOP_FILE,
-  COL_ID,
-  COL_PIXBUF,
-  COL_CATEGORY,
-  COL_SEARCH_TARGET,
 
-  N_COLS
-};

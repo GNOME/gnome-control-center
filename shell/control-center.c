@@ -36,6 +36,7 @@
 #include "cc-shell.h"
 #include "shell-search-renderer.h"
 #include "cc-shell-category-view.h"
+#include "cc-shell-model.h"
 
 #include <unique/unique.h>
 
@@ -256,9 +257,7 @@ fill_model (ShellData *data)
 
   list = gmenu_tree_directory_get_contents (d);
 
-  data->store = gtk_list_store_new (N_COLS, G_TYPE_STRING, G_TYPE_STRING,
-                                    G_TYPE_STRING, GDK_TYPE_PIXBUF,
-                                    G_TYPE_STRING, G_TYPE_STRING);
+  data->store = (GtkListStore *) cc_shell_model_new ();
 
 
 
@@ -278,7 +277,8 @@ fill_model (ShellData *data)
           dir_name = gmenu_tree_directory_get_name (l->data);
 
           /* create new category view for this category */
-          filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (data->store), NULL);
+          filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (data->store),
+                                              NULL);
           gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter),
                                                   (GtkTreeModelFilterVisibleFunc) category_filter_func,
                                                   g_strdup (dir_name), g_free);
@@ -293,55 +293,11 @@ fill_model (ShellData *data)
           /* add the items from this category to the model */
           for (f = contents; f; f = f->next)
             {
-              if (gmenu_tree_item_get_type (f->data)
-                  == GMENU_TREE_ITEM_ENTRY)
+              if (gmenu_tree_item_get_type (f->data) == GMENU_TREE_ITEM_ENTRY)
                 {
-                  GError *err = NULL;
-                  gchar *search_target;
-                  const gchar *icon = gmenu_tree_entry_get_icon (f->data);
-                  const gchar *name = gmenu_tree_entry_get_name (f->data);
-                  const gchar *id = gmenu_tree_entry_get_desktop_file_id (f->data);
-                  const gchar *desktop = gmenu_tree_entry_get_desktop_file_path (f->data);
-                  const gchar *comment = gmenu_tree_entry_get_comment (f->data);
-                  GdkPixbuf *pixbuf = NULL;
-                  char *icon2 = NULL;
-
-                  if (icon != NULL && *icon == '/')
-                    {
-                      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, 32, 32, TRUE, &err);
-                    }
-                  else
-                    {
-                      if (icon2 == NULL && icon != NULL && g_str_has_suffix (icon, ".png"))
-                        icon2 = g_strndup (icon, strlen (icon) - strlen (".png"));
-
-                      pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-                                                         icon2 ? icon2 : icon, 32,
-                                                         GTK_ICON_LOOKUP_FORCE_SIZE,
-                                                         &err);
-                    }
-
-                  if (err)
-                    {
-                      g_warning ("Could not load icon '%s': %s", icon2 ? icon2 : icon,
-                                       err->message);
-                      g_error_free (err);
-                    }
-
-                  g_free (icon2);
-
-                  search_target = g_strconcat (name, " - ", comment, NULL);
-
-                  gtk_list_store_insert_with_values (data->store, NULL, 0,
-                                                     COL_NAME, name,
-                                                     COL_DESKTOP_FILE, desktop,
-                                                     COL_ID, id,
-                                                     COL_PIXBUF, pixbuf,
-                                                     COL_CATEGORY, dir_name,
-                                                     COL_SEARCH_TARGET, search_target,
-                                                     -1);
-
-                  g_free (search_target);
+                  cc_shell_model_add_item (CC_SHELL_MODEL (data->store),
+                                           dir_name,
+                                           f->data);
                 }
             }
         }

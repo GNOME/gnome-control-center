@@ -19,7 +19,7 @@
  */
 
 #include "cc-shell-item-view.h"
-#include "control-center.h"
+#include "cc-shell-model.h"
 #include "cc-shell-marshal.h"
 
 G_DEFINE_TYPE (CcShellItemView, cc_shell_item_view, GTK_TYPE_ICON_VIEW)

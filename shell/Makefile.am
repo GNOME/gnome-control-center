@@ -27,6 +27,8 @@ gnome_control_center_SOURCES =			\
 	cc-shell-category-view.h		\
 	cc-shell-item-view.c			\
 	cc-shell-item-view.h			\
+	cc-shell-model.c			\
+	cc-shell-model.h			\
 	$(MARSHAL_FILES)			\
 	$(NULL)
 

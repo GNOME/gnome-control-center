@@ -22,6 +22,7 @@
 #include "cc-shell-item-view.h"
 #include "cc-shell.h"
 #include "control-center.h"
+#include "cc-shell-model.h"
 
 G_DEFINE_TYPE (CcShellCategoryView, cc_shell_category_view, GTK_TYPE_FRAME)
 
