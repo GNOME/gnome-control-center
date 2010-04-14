@@ -81,6 +81,7 @@ EXTRA_DIST = 					\
 	gnome-control-center.desktop.in.in	\
 	gnomecc.directory.in			\
 	gnomecc.menu				\
+	cc-shell-marshal.list			\
 	$(schemas_DATA).in			\
 	$(NULL)
 
