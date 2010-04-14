@@ -83,13 +83,16 @@ activate_panel (const gchar *name,
     }
   else
     {
-      /* start app directly */
-      g_debug ("Panel module not found for %s", id);
-
       GAppInfo *appinfo;
       GError *err = NULL;
       GdkAppLaunchContext *ctx;
       GKeyFile *key_file;
+
+      /* start app directly */
+      g_debug ("Panel module not found for %s", id);
+
+      if (!desktop_file)
+        return;
 
       key_file = g_key_file_new ();
       g_key_file_load_from_file (key_file, desktop_file, 0, &err);
@@ -415,14 +418,69 @@ search_entry_clear_cb (GtkEntry *entry)
   gtk_entry_set_text (entry, "");
 }
 
+static void
+activate_with_id (ShellData   *data,
+                  const gchar *start_id)
+{
+  GtkTreeIter iter;
+  gboolean iter_valid;
+  gchar *name;
+
+
+  iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (data->store),
+                                              &iter);
+
+  while (iter_valid)
+    {
+      gchar *id;
+
+      /* find the details for this item */
+      gtk_tree_model_get (GTK_TREE_MODEL (data->store), &iter,
+                          COL_NAME, &name,
+                          COL_ID, &id,
+                          -1);
+      if (id && !strcmp (id, start_id))
+        {
+          g_free (id);
+          break;
+        }
+      else
+        {
+          g_free (id);
+          g_free (name);
+
+          name = NULL;
+          id = NULL;
+        }
+
+      iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (data->store),
+                                             &iter);
+    }
+
+  g_free (data->current_title);
+  data->current_title = name;
+
+  activate_panel (name, start_id, NULL, data);
+}
+
 static UniqueResponse
 message_received (UniqueApp         *app,
                   gint               command,
                   UniqueMessageData *message_data,
                   guint              time_,
-                  GtkWindow         *window)
+                  ShellData         *data)
 {
-  gtk_window_present (window);
+  const gchar *id;
+  gsize len;
+
+  gtk_window_present (GTK_WINDOW (data->window));
+
+  id = (gchar*) unique_message_data_get (message_data, &len);
+
+  if (id)
+    {
+      activate_with_id (data, id);
+    }
 
   return GTK_RESPONSE_OK;
 }
@@ -445,7 +503,17 @@ main (int argc, char **argv)
 
   if (unique_app_is_running (unique))
     {
-      unique_app_send_message (unique, 1, NULL);
+      UniqueMessageData *data;
+      if (argc == 2)
+        {
+          data = unique_message_data_new ();
+          unique_message_data_set (data, (guchar*) argv[1],
+                                   strlen(argv[1]) + 1);
+        }
+      else
+        data = NULL;
+
+      unique_app_send_message (unique, 1, data);
       return 0;
     }
 
@@ -489,52 +557,16 @@ main (int argc, char **argv)
   gtk_widget_show_all (data->window);
 
   g_signal_connect (unique, "message-received", G_CALLBACK (message_received),
-                    data->window);
+                    data);
 
 
   if (argc == 2)
     {
-      GtkTreeIter iter;
-      gboolean iter_valid;
       gchar *start_id;
-      gchar *name;
 
       start_id = argv[1];
 
-      iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (data->store),
-                                                  &iter);
-
-      while (iter_valid)
-        {
-          gchar *id;
-
-          /* find the details for this item */
-          gtk_tree_model_get (GTK_TREE_MODEL (data->store), &iter,
-                              COL_NAME, &name,
-                              COL_ID, &id,
-                              -1);
-          if (id && !strcmp (id, start_id))
-            {
-              g_free (id);
-              break;
-            }
-          else
-            {
-              g_free (id);
-              g_free (name);
-
-              name = NULL;
-              id = NULL;
-            }
-
-          iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (data->store),
-                                                 &iter);
-        }
-
-      g_free (data->current_title);
-      data->current_title = name;
-
-      activate_panel (name, start_id, NULL, data);
+      activate_with_id (data, start_id);
     }
 
   gtk_main ();
