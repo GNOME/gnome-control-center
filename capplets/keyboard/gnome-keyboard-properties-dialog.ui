@@ -79,14 +79,12 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkVBox" id="vbox1">
             <property name="visible">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
             <property name="border_width">5</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">12</property>
             <child>
               <object class="GtkNotebook" id="keyboard_notebook">
@@ -96,12 +94,10 @@
                   <object class="GtkVBox" id="vbox2">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">18</property>
                     <child>
                       <object class="GtkVBox" id="vbox22">
                         <property name="visible">True</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="label1">
@@ -135,7 +131,6 @@
                             <child>
                               <object class="GtkVBox" id="vbox3">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkCheckButton" id="repeat_toggle">
@@ -159,7 +154,6 @@
                                     <child>
                                       <object class="GtkVBox" id="vbox24">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
                                         <property name="spacing">6</property>
                                         <child>
                                           <object class="GtkLabel" id="repeat_delay_label">
@@ -197,7 +191,6 @@
                                     <child>
                                       <object class="GtkVBox" id="vbox25">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
                                         <property name="spacing">6</property>
                                         <child>
                                           <object class="GtkLabel" id="delay_short_label">
@@ -239,7 +232,6 @@
                                     <child>
                                       <object class="GtkVBox" id="vbox26">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
                                         <property name="spacing">6</property>
                                         <child>
                                           <object class="GtkHScale" id="repeat_delay_scale">
@@ -276,7 +268,6 @@
                                     <child>
                                       <object class="GtkVBox" id="vbox27">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
                                         <property name="spacing">6</property>
                                         <child>
                                           <object class="GtkLabel" id="delay_long_label">
@@ -338,7 +329,6 @@
                     <child>
                       <object class="GtkVBox" id="vbox23">
                         <property name="visible">True</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="label5">
@@ -372,7 +362,6 @@
                             <child>
                               <object class="GtkVBox" id="cursor_vbox">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkCheckButton" id="cursor_toggle">
@@ -504,12 +493,10 @@
                   <object class="GtkVBox" id="vbox33">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkVBox" id="vbox34">
                         <property name="visible">True</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkScrolledWindow" id="scrolledwindow1">
@@ -522,6 +509,7 @@
                               <object class="GtkTreeView" id="xkb_layouts_selected">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="tooltip_text" translatable="yes">List of keyboard layouts selected for usage</property>
                                 <property name="headers_visible">False</property>
                               </object>
                             </child>
@@ -538,7 +526,6 @@
                             <child>
                               <object class="GtkVBox" id="vbox4">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <property name="homogeneous">True</property>
                                 <child>
@@ -547,6 +534,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Select a keyboard layout to be added to the list</property>
                                     <property name="use_underline">True</property>
                                   </object>
                                   <packing>
@@ -559,6 +547,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Remove the selected keyboard layout from the list</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -573,7 +562,6 @@
                             <child>
                               <object class="GtkVBox" id="vbox5">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <property name="homogeneous">True</property>
                                 <child>
@@ -582,6 +570,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Move the selected keyboard layout up in the list</property>
                                     <property name="use_underline">True</property>
                                   </object>
                                   <packing>
@@ -594,6 +583,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Move the selected keyboard layout down in the list</property>
                                     <property name="use_underline">True</property>
                                   </object>
                                   <packing>
@@ -608,7 +598,6 @@
                             <child>
                               <object class="GtkVBox" id="vbox6">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <property name="homogeneous">True</property>
                                 <child>
@@ -617,6 +606,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Print a diagram of the selected keyboard layout</property>
                                     <property name="use_underline">True</property>
                                   </object>
                                   <packing>
@@ -726,6 +716,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="tooltip_text" translatable="yes">View and edit keyboard layout options</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -740,6 +731,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Replace the current keyboard layout settings with the
+default settings</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -776,13 +769,11 @@
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="border_width">12</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">18</property>
                     <child>
                       <object class="GtkVBox" id="vbox78">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkHBox" id="hbox39">
@@ -792,7 +783,6 @@
                               <object class="GtkVBox" id="vbox79">
                                 <property name="visible">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkCheckButton" id="master_enable">
@@ -829,7 +819,6 @@
                       <object class="GtkVBox" id="vbox80">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="label73">
@@ -864,7 +853,6 @@
                               <object class="GtkVBox" id="vbox81">
                                 <property name="visible">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkCheckButton" id="stickykeys_enable">
@@ -914,7 +902,6 @@
                       <object class="GtkVBox" id="vbox82">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="label75">
@@ -949,7 +936,6 @@
                               <object class="GtkVBox" id="vbox83">
                                 <property name="visible">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkCheckButton" id="slowkeys_enable">
@@ -1069,7 +1055,6 @@
                       <object class="GtkVBox" id="vbox84">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="label77">
@@ -1104,7 +1089,6 @@
                               <object class="GtkVBox" id="vbox85">
                                 <property name="visible">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkCheckButton" id="bouncekeys_enable">
@@ -1266,12 +1250,10 @@
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="border_width">12</property>
-                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkVBox" id="vbox90">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkCheckButton" id="mousekeys_enable">
@@ -1306,7 +1288,6 @@
                               <object class="GtkVBox" id="vbox91">
                                 <property name="visible">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkTable" id="mousekeys_table">
@@ -1566,18 +1547,15 @@
                 <child>
                   <object class="GtkVBox" id="vbox14">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkVBox" id="vbox18">
                         <property name="visible">True</property>
                         <property name="border_width">12</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">18</property>
                         <child>
                           <object class="GtkVBox" id="vbox28">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="break_enabled_toggle">
@@ -1612,7 +1590,6 @@
                                 <child>
                                   <object class="GtkVBox" id="break_details_table">
                                     <property name="visible">True</property>
-                                    <property name="orientation">vertical</property>
                                     <property name="spacing">6</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox27">
@@ -1621,7 +1598,6 @@
                                         <child>
                                           <object class="GtkVBox" id="vbox30">
                                             <property name="visible">True</property>
-                                            <property name="orientation">vertical</property>
                                             <property name="spacing">6</property>
                                             <child>
                                               <object class="GtkLabel" id="label37">
@@ -1661,7 +1637,6 @@
                                             <child>
                                               <object class="GtkVBox" id="vbox31">
                                                 <property name="visible">True</property>
-                                                <property name="orientation">vertical</property>
                                                 <property name="spacing">6</property>
                                                 <child>
                                                   <object class="GtkSpinButton" id="break_enabled_spin">
@@ -1695,7 +1670,6 @@
                                             <child>
                                               <object class="GtkVBox" id="vbox32">
                                                 <property name="visible">True</property>
-                                                <property name="orientation">vertical</property>
                                                 <property name="spacing">6</property>
                                                 <child>
                                                   <object class="GtkLabel" id="label39">
