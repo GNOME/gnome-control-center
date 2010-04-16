@@ -770,7 +770,7 @@ passdlg_set_auth_state (PasswordDialog *pdialog, gboolean state)
 		gtk_widget_grab_focus (GTK_WIDGET (pdialog->new_password));
 
 		/* Set open lock image */
-		gtk_image_set_from_file (GTK_IMAGE (pdialog->dialog_image), GNOMECC_PIXMAP_DIR "/gnome-about-me-lock-open.png");
+		gtk_image_set_from_icon_name (GTK_IMAGE (pdialog->dialog_image), "changes-allow", GTK_ICON_SIZE_DIALOG);
 	} else {
 		/* Not authenticated state */
 
@@ -778,7 +778,7 @@ passdlg_set_auth_state (PasswordDialog *pdialog, gboolean state)
 		gtk_widget_grab_focus (GTK_WIDGET (pdialog->current_password));
 
 		/* Set closed lock image */
-		gtk_image_set_from_file (GTK_IMAGE (pdialog->dialog_image), GNOMECC_PIXMAP_DIR "/gnome-about-me-lock.png");
+		gtk_image_set_from_icon_name (GTK_IMAGE (pdialog->dialog_image), "changes-prevent", GTK_ICON_SIZE_DIALOG);
 	}
 }
 
