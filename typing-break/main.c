@@ -31,6 +31,7 @@
 
 gboolean debug = FALSE;
 
+#ifndef HAVE_APP_INDICATOR
 static gboolean
 have_tray (void)
 {
@@ -49,6 +50,7 @@ have_tray (void)
 		return FALSE;
 	}
 }
+#endif /* HAVE_APP_INDICATOR */
 
 int
 main (int argc, char *argv[])
