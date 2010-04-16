@@ -29,15 +29,21 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 
+#ifdef HAVE_APP_INDICATOR
+#include <libappindicator/app-indicator.h>
+#endif /* HAVE_APP_INDICATOR */
+
 #include "drwright.h"
 #include "drw-break-window.h"
 #include "drw-monitor.h"
 #include "drw-utils.h"
 #include "drw-timer.h"
 
+#ifndef HAVE_APP_INDICATOR
 #define BLINK_TIMEOUT        200
 #define BLINK_TIMEOUT_MIN    120
 #define BLINK_TIMEOUT_FACTOR 100
+#endif /* HAVE_APP_INDICATOR */
 
 #define POPUP_ITEM_ENABLED 1
 #define POPUP_ITEM_BREAK   2
@@ -51,6 +57,11 @@ typedef enum {
 	STATE_BREAK_DONE_SETUP,
 	STATE_BREAK_DONE
 } DrwState;
+
+#ifdef HAVE_APP_INDICATOR
+#define TYPING_MONITOR_ACTIVE_ICON "bar-green"
+#define TYPING_MONITOR_ATTENTION_ICON "bar-red"
+#endif /* HAVE_APP_INDICATOR */
 
 struct _DrWright {
 	/* Widgets. */
@@ -76,6 +87,9 @@ struct _DrWright {
 	gboolean        enabled;
 
 	guint           clock_timeout_id;
+#ifdef HAVE_APP_INDICATOR
+	AppIndicator   *indicator;
+#else
 	guint           blink_timeout_id;
 
 	gboolean        blink_on;
@@ -87,6 +101,7 @@ struct _DrWright {
 	GdkPixbuf      *green_bar;
 	GdkPixbuf      *disabled_bar;
 	GdkPixbuf      *composite_bar;
+#endif /* HAVE_APP_INDICATOR */
 
 	GtkWidget      *warn_dialog;
 };
@@ -94,7 +109,8 @@ struct _DrWright {
 static void     activity_detected_cb           (DrwMonitor     *monitor,
 						DrWright       *drwright);
 static gboolean maybe_change_state             (DrWright       *drwright);
-static gboolean update_tooltip                 (DrWright       *drwright);
+static gint     get_time_left                  (DrWright       *drwright);
+static gboolean update_status                  (DrWright       *drwright);
 static void     break_window_done_cb           (GtkWidget      *window,
 						DrWright       *dr);
 static void     break_window_postpone_cb       (GtkWidget      *window,
@@ -107,7 +123,11 @@ static void     popup_preferences_cb           (GtkAction      *action,
 						DrWright       *dr);
 static void     popup_about_cb                 (GtkAction      *action,
 						DrWright       *dr);
+#ifdef HAVE_APP_INDICATOR
+static void     init_app_indicator             (DrWright       *dr);
+#else
 static void     init_tray_icon                 (DrWright       *dr);
+#endif /* HAVE_APP_INDICATOR */
 static GList *  create_secondary_break_windows (void);
 
 static const GtkActionEntry actions[] = {
@@ -126,6 +146,31 @@ setup_debug_values (DrWright *dr)
 	dr->break_time = 10;
 }
 
+#ifdef HAVE_APP_INDICATOR
+static void
+update_app_indicator (DrWright *dr)
+{
+	AppIndicatorStatus new_status;
+
+	if (!dr->enabled) {
+		app_indicator_set_status (dr->indicator,
+					  APP_INDICATOR_STATUS_PASSIVE);
+		return;
+	}
+
+	switch (dr->state) {
+	case STATE_WARN:
+	case STATE_BREAK_SETUP:
+	case STATE_BREAK:
+		new_status = APP_INDICATOR_STATUS_ATTENTION;
+		break;
+	default:
+		new_status = APP_INDICATOR_STATUS_ACTIVE;
+	}
+
+	app_indicator_set_status (dr->indicator, new_status);
+}
+#else
 static void
 update_icon (DrWright *dr)
 {
@@ -242,27 +287,32 @@ blink_timeout_cb (DrWright *dr)
 
 	return FALSE;
 }
+#endif /* HAVE_APP_INDICATOR */
 
 static void
 start_blinking (DrWright *dr)
 {
+#ifndef HAVE_APP_INDICATOR
 	if (!dr->blink_timeout_id) {
 		dr->blink_on = TRUE;
 		blink_timeout_cb (dr);
 	}
 
 	/*gtk_widget_show (GTK_WIDGET (dr->icon));*/
+#endif /* HAVE_APP_INDICATOR */
 }
 
 static void
 stop_blinking (DrWright *dr)
 {
+#ifndef HAVE_APP_INDICATOR
 	if (dr->blink_timeout_id) {
 		g_source_remove (dr->blink_timeout_id);
 		dr->blink_timeout_id = 0;
 	}
 
 	/*gtk_widget_hide (GTK_WIDGET (dr->icon));*/
+#endif /* HAVE_APP_INDICATOR */
 }
 
 static gboolean
@@ -317,8 +367,10 @@ maybe_change_state (DrWright *dr)
 			dr->break_window = NULL;
 		}
 
+#ifndef HAVE_APP_INDICATOR
 		gtk_status_icon_set_from_pixbuf (dr->icon,
 						 dr->neutral_bar);
+#endif /* HAVE_APP_INDICATOR */
 
 		dr->save_last_time = 0;
 
@@ -329,7 +381,7 @@ maybe_change_state (DrWright *dr)
 			dr->state = STATE_RUNNING;
 		}
 
-		update_tooltip (dr);
+		update_status (dr);
 		stop_blinking (dr);
 		break;
 
@@ -356,8 +408,10 @@ maybe_change_state (DrWright *dr)
 		}
 
 		stop_blinking (dr);
+#ifndef HAVE_APP_INDICATOR
 		gtk_status_icon_set_from_pixbuf (dr->icon,
 						 dr->red_bar);
+#endif /* HAVE_APP_INDICATOR */
 
 		drw_timer_start (dr->timer);
 
@@ -398,8 +452,10 @@ maybe_change_state (DrWright *dr)
 
 	case STATE_BREAK_DONE_SETUP:
 		stop_blinking (dr);
+#ifndef HAVE_APP_INDICATOR
 		gtk_status_icon_set_from_pixbuf (dr->icon,
 						 dr->green_bar);
+#endif /* HAVE_APP_INDICATOR */
 
 		dr->state = STATE_BREAK_DONE;
 		break;
@@ -415,41 +471,73 @@ maybe_change_state (DrWright *dr)
 
 	dr->last_elapsed_time = elapsed_time;
 
+#ifdef HAVE_APP_INDICATOR
+	update_app_indicator (dr);
+#else
 	update_icon (dr);
+#endif /* HAVE_APP_INDICATOR */
 
 	return TRUE;
 }
 
 static gboolean
-update_tooltip (DrWright *dr)
+update_status (DrWright *dr)
 {
-	gint   elapsed_time, min;
-	gchar *str;
+	gint       min;
+	gchar     *str;
+#ifdef HAVE_APP_INDICATOR
+	GtkWidget *item;
+#endif /* HAVE_APP_INDICATOR */
 
 	if (!dr->enabled) {
+#ifdef HAVE_APP_INDICATOR
+		app_indicator_set_status (dr->indicator,
+					  APP_INDICATOR_STATUS_PASSIVE);
+#else
 		gtk_status_icon_set_tooltip_text (dr->icon,
-					     _("Disabled"));
+						  _("Disabled"));
+#endif /* HAVE_APP_INDICATOR */
 		return TRUE;
 	}
 
-	elapsed_time = drw_timer_elapsed (dr->timer);
-
-	min = floor (0.5 + (dr->type_time - elapsed_time - dr->save_last_time) / 60.0);
+	min = get_time_left (dr);
 
 	if (min >= 1) {
+#ifdef HAVE_APP_INDICATOR
+		str = g_strdup_printf (_("Take a break now (next in %dm)"), min);
+#else
 		str = g_strdup_printf (ngettext("%d minute until the next break",
 						"%d minutes until the next break",
 						min), min);
+#endif /* HAVE_APP_INDICATOR */
 	} else {
+#ifdef HAVE_APP_INDICATOR
+		str = g_strdup_printf (_("Take a break now (next in less than one minute)"));
+#else
 		str = g_strdup_printf (_("Less than one minute until the next break"));
+#endif /* HAVE_APP_INDICATOR */
 	}
 
-	gtk_status_icon_set_tooltip_text (dr->icon,
-				     str);
+#ifdef HAVE_APP_INDICATOR
+	item = gtk_ui_manager_get_widget (dr->ui_manager, "/Pop/TakeABreak");
+	gtk_menu_item_set_label (GTK_MENU_ITEM (item), str);
+#else
+	gtk_status_icon_set_tooltip_text (dr->icon, str);
+#endif /* HAVE_APP_INDICATOR */
 
 	g_free (str);
 
 	return TRUE;
+}
+
+static gint
+get_time_left (DrWright *dr)
+{
+	gint elapsed_time;
+
+	elapsed_time = drw_timer_elapsed (dr->timer);
+
+	return floor (0.5 + (dr->type_time - elapsed_time - dr->save_last_time) / 60.0);
 }
 
 static void
@@ -491,7 +579,7 @@ gconf_notify_cb (GConfClient *client,
 							  "/Pop/TakeABreak");
 			gtk_widget_set_sensitive (item, dr->enabled);
 
-			update_tooltip (dr);
+			update_status (dr);
 		}
 	}
 
@@ -557,6 +645,7 @@ popup_about_cb (GtkAction *action, DrWright *dr)
 			       NULL);
 }
 
+#ifndef HAVE_APP_INDICATOR
 static void
 popup_menu_cb (GtkWidget *widget,
 	       guint      button,
@@ -573,8 +662,9 @@ popup_menu_cb (GtkWidget *widget,
 			gtk_status_icon_position_menu,
 			dr->icon,
 			0,
-			gtk_get_current_event_time());
+			gtk_get_current_event_time ());
 }
+#endif /* HAVE_APP_INDICATOR */
 
 static void
 break_window_done_cb (GtkWidget *window,
@@ -585,7 +675,7 @@ break_window_done_cb (GtkWidget *window,
 	dr->state = STATE_BREAK_DONE_SETUP;
 	dr->break_window = NULL;
 
-	update_tooltip (dr);
+	update_status (dr);
 	maybe_change_state (dr);
 }
 
@@ -613,8 +703,12 @@ break_window_postpone_cb (GtkWidget *window,
 
 	drw_timer_start (dr->timer);
 	maybe_change_state (dr);
+	update_status (dr);
+#ifdef HAVE_APP_INDICATOR
+	update_app_indicator (dr);
+#else
 	update_icon (dr);
-	update_tooltip (dr);
+#endif /* HAVE_APP_INDICATOR */
 }
 
 static void
@@ -631,12 +725,39 @@ break_window_destroy_cb (GtkWidget *window,
 	dr->secondary_break_windows = NULL;
 }
 
+#ifdef HAVE_APP_INDICATOR
+static void
+init_app_indicator (DrWright *dr)
+{
+	GtkWidget *indicator_menu;
+
+	dr->indicator =
+		app_indicator_new_with_path ("typing-break-indicator",
+					     TYPING_MONITOR_ACTIVE_ICON,
+					     APP_INDICATOR_CATEGORY_APPLICATION_STATUS,
+					     IMAGEDIR);
+	if (dr->enabled) {
+		app_indicator_set_status (dr->indicator,
+					  APP_INDICATOR_STATUS_ACTIVE);
+	} else {
+		app_indicator_set_status (dr->indicator,
+					  APP_INDICATOR_STATUS_PASSIVE);
+	}
+
+	indicator_menu = gtk_ui_manager_get_widget (dr->ui_manager, "/Pop");
+	app_indicator_set_menu (dr->indicator, GTK_MENU (indicator_menu));
+	app_indicator_set_attention_icon (dr->indicator, TYPING_MONITOR_ATTENTION_ICON);
+
+	update_status (dr);
+	update_app_indicator (dr);
+}
+#else
 static void
 init_tray_icon (DrWright *dr)
 {
 	dr->icon = gtk_status_icon_new_from_pixbuf (dr->neutral_bar);
 
-	update_tooltip (dr);
+	update_status (dr);
 	update_icon (dr);
 
 	g_signal_connect (dr->icon,
@@ -644,6 +765,7 @@ init_tray_icon (DrWright *dr)
 			  G_CALLBACK (popup_menu_cb),
 			  dr);
 }
+#endif /* HAVE_APP_INDICATOR */
 
 static GList *
 create_secondary_break_windows (void)
@@ -758,19 +880,24 @@ drwright_new (void)
 			  G_CALLBACK (activity_detected_cb),
 			  dr);
 
+#ifdef HAVE_APP_INDICATOR
+	init_app_indicator (dr);
+#else
 	dr->neutral_bar = gdk_pixbuf_new_from_file (IMAGEDIR "/bar.png", NULL);
 	dr->red_bar = gdk_pixbuf_new_from_file (IMAGEDIR "/bar-red.png", NULL);
 	dr->green_bar = gdk_pixbuf_new_from_file (IMAGEDIR "/bar-green.png", NULL);
 	dr->disabled_bar = gdk_pixbuf_new_from_file (IMAGEDIR "/bar-disabled.png", NULL);
 
 	init_tray_icon (dr);
+#endif /* HAVE_APP_INDICATOR */
 
 	g_timeout_add_seconds (12,
-		       (GSourceFunc) update_tooltip,
-		       dr);
+			       (GSourceFunc) update_status,
+			       dr);
+
 	g_timeout_add_seconds (1,
-		       (GSourceFunc) maybe_change_state,
-		       dr);
+			       (GSourceFunc) maybe_change_state,
+			       dr);
 
 	return dr;
 }

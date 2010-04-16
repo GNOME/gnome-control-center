@@ -95,6 +95,7 @@ main (int argc, char *argv[])
 		return 0;
 	}
 
+#ifndef HAVE_APP_INDICATOR
 	if (!no_check && !have_tray ()) {
 		GtkWidget *dialog;
 
@@ -112,6 +113,7 @@ main (int argc, char *argv[])
 
 		gtk_widget_destroy (dialog);
 	}
+#endif /* HAVE_APP_INDICATOR */
 	
 	drwright = drwright_new ();
 
