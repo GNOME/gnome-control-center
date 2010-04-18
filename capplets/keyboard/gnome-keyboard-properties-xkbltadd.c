@@ -33,10 +33,6 @@
 #include "capplet-util.h"
 #include "gnome-keyboard-properties-xkb.h"
 
-#define GROUP_SWITCHERS_GROUP "grp"
-#define DEFAULT_GROUP_SWITCH "grp:alts_toggle"
-#define DEFAULT_VARIANT_ID "__default__"
-
 enum {
 	COMBO_BOX_MODEL_COL_SORT,
 	COMBO_BOX_MODEL_COL_VISIBLE,
@@ -60,6 +56,8 @@ static void
 
 
 
+
+
 xkb_layout_chooser_available_layouts_fill (GtkBuilder * chooser_dialog,
 					   const gchar cblid[],
 					   const gchar cbvid[],
@@ -76,10 +74,14 @@ static void
 
 
 
+
+
 xkb_layout_chooser_available_language_variants_fill (GtkBuilder *
 						     chooser_dialog);
 
 static void
+
+
 
 
 
@@ -220,7 +222,8 @@ xkb_layout_chooser_available_country_changed (GtkBuilder * chooser_dialog)
 
 static void
 xkb_layout_chooser_page_changed (GtkWidget * notebook, GtkWidget * page,
-				 gint page_num, GtkBuilder * chooser_dialog)
+				 gint page_num,
+				 GtkBuilder * chooser_dialog)
 {
 	xkb_layout_chooser_available_variant_changed (chooser_dialog);
 }
@@ -367,44 +370,15 @@ void
 xkl_layout_chooser_add_default_switcher_if_necessary (GSList *
 						      layouts_list)
 {
-	/* process default switcher */
-	if (g_slist_length (layouts_list) >= 2) {
-		GSList *options_list = xkb_options_get_selected_list ();
-		gboolean any_switcher = False;
-		GSList *option = options_list;
-		while (option != NULL) {
-			char *g, *o;
-			if (gkbd_keyboard_config_split_items
-			    (option->data, &g, &o)) {
-				if (!g_ascii_strcasecmp
-				    (g, GROUP_SWITCHERS_GROUP)) {
-					any_switcher = True;
-					break;
-				}
-			}
-			option = option->next;
-		}
-		if (!any_switcher) {
-			XklConfigItem *ci = xkl_config_item_new ();
-			g_snprintf (ci->name,
-				    XKL_MAX_CI_NAME_LENGTH,
-				    DEFAULT_GROUP_SWITCH);
-			if (xkl_config_registry_find_option
-			    (config_registry, GROUP_SWITCHERS_GROUP, ci)) {
-				const gchar *id =
-				    gkbd_keyboard_config_merge_items
-				    (GROUP_SWITCHERS_GROUP,
-				     DEFAULT_GROUP_SWITCH);
-				options_list =
-				    g_slist_append
-				    (options_list, g_strdup (id));
-				xkb_options_set_selected_list
-				    (options_list);
-			}
-			g_object_unref (G_OBJECT (ci));
-		}
-		clear_xkb_elements_list (options_list);
-	}
+	GSList *options_list = xkb_options_get_selected_list ();
+	gboolean was_appended;
+
+	options_list =
+	    gkbd_keyboard_config_add_default_switch_option_if_necessary
+	    (layouts_list, options_list, &was_appended);
+	if (was_appended)
+		xkb_options_set_selected_list (options_list);
+	clear_xkb_elements_list (options_list);
 }
 
 static void
@@ -466,11 +440,11 @@ void
 xkb_layout_choose (GtkBuilder * dialog)
 {
 	GtkBuilder *chooser_dialog;
-    
-    chooser_dialog = gtk_builder_new ();
-    gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
-                               "/gnome-keyboard-properties-layout-chooser.ui",
-                               NULL);
+
+	chooser_dialog = gtk_builder_new ();
+	gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
+				   "/gnome-keyboard-properties-layout-chooser.ui",
+				   NULL);
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
 	GtkWidget *lang_chooser = CWID ("xkb_languages_available");
 	GtkWidget *notebook = CWID ("choosers_nb");
