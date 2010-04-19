@@ -224,7 +224,7 @@ static void
 cb_use_auth_toggled (GtkToggleButton *toggle,
 		     GtkWidget *table)
 {
-	gtk_widget_set_sensitive (table, toggle->active);
+	gtk_widget_set_sensitive (table, gtk_toggle_button_get_active (toggle));
 }
 
 static void
@@ -256,8 +256,6 @@ cb_http_details_button_clicked (GtkWidget *button,
 							   "details_dialog");
 
 	gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (parent));
-
-	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (gtk_builder_get_object (builder, "use_auth_checkbutton"))->child), TRUE);
 
 	g_signal_connect (gtk_builder_get_object (builder, "use_auth_checkbutton"),
 			  "toggled",
@@ -1239,11 +1237,6 @@ setup_dialog (GtkBuilder *builder)
 					location_renderer,
 					"text", COL_NAME,
 					"style", COL_STYLE, NULL);
-
-	/* Hackety hack */
-	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (gtk_builder_get_object (builder, "none_radiobutton"))->child), TRUE);
-	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (gtk_builder_get_object (builder, "manual_radiobutton"))->child), TRUE);
-	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (gtk_builder_get_object (builder, "auto_radiobutton"))->child), TRUE);
 
 	/* Mode */
 	mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (gtk_builder_get_object (builder, "none_radiobutton")));

@@ -559,21 +559,23 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
   EggCellRendererKeys *keys;
   GtkWidget *label;
   GtkWidget *eventbox;
+  GValue celltext_editable = {0};
 
   celltext = GTK_CELL_RENDERER_TEXT (cell);
   keys = EGG_CELL_RENDERER_KEYS (cell);
 
   /* If the cell isn't editable we return NULL. */
-  if (celltext->editable == FALSE)
+  g_value_init (&celltext_editable, G_TYPE_BOOLEAN);
+  g_object_get_property (G_OBJECT (celltext), "editable", &celltext_editable);
+  if (g_value_get_boolean (&celltext_editable) == FALSE)
     return NULL;
+  g_return_val_if_fail (gtk_widget_get_window (widget) != NULL, NULL);
 
-  g_return_val_if_fail (widget->window != NULL, NULL);
-
-  if (gdk_keyboard_grab (widget->window, FALSE,
+  if (gdk_keyboard_grab (gtk_widget_get_window (widget), FALSE,
                          gdk_event_get_time (event)) != GDK_GRAB_SUCCESS)
     return NULL;
 
-  if (gdk_pointer_grab (widget->window, FALSE,
+  if (gdk_pointer_grab (gtk_widget_get_window (widget), FALSE,
                         GDK_BUTTON_PRESS_MASK,
                         NULL, NULL,
                         gdk_event_get_time (event)) != GDK_GRAB_SUCCESS)
@@ -598,10 +600,10 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 
   gtk_widget_modify_bg (eventbox, GTK_STATE_NORMAL,
-                        &widget->style->bg[GTK_STATE_SELECTED]);
+                        &gtk_widget_get_style (widget)->bg[GTK_STATE_SELECTED]);
 
   gtk_widget_modify_fg (label, GTK_STATE_NORMAL,
-                        &widget->style->fg[GTK_STATE_SELECTED]);
+                        &gtk_widget_get_style (widget)->fg[GTK_STATE_SELECTED]);
 
   gtk_label_set_text (GTK_LABEL (label),
 		  TOOLTIP_TEXT);

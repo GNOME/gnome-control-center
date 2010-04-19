@@ -192,7 +192,8 @@ setup_accessibility (GtkBuilder *dialog, GConfClient *client)
 					 WID ("threshold"), NULL);
 
 	gconf_peditor_new_select_radio (NULL, MT_GCONF_HOME "/dwell_mode",
-					GTK_RADIO_BUTTON (WID ("dwell_mode_ctw"))->group, NULL);
+					gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("dwell_mode_ctw"))),
+										      NULL);
 	update_mode_sensitivity (dialog,
 				 gconf_client_get_int (client,
 						       MT_GCONF_HOME "/dwell_mode",

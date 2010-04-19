@@ -521,7 +521,7 @@ rebuild_current_monitor_label (App *app)
 	{
 	    GdkColor black = { 0, 0, 0, 0 };
 
-	    gtk_widget_modify_bg (app->current_monitor_event_box, app->current_monitor_event_box->state, &color);
+	    gtk_widget_modify_bg (app->current_monitor_event_box, gtk_widget_get_state (app->current_monitor_event_box), &color);
 
 	    /* Make the label explicitly black.  We don't want it to follow the
 	     * theme's colors, since the label is always shown against a light
@@ -1659,15 +1659,17 @@ paint_background (FooScrollArea *area,
 {
     GdkRectangle viewport;
     GtkWidget *widget;
+    GtkStyle *widget_style;
 
     widget = GTK_WIDGET (area);
 
     foo_scroll_area_get_viewport (area, &viewport);
+    widget_style = gtk_widget_get_style (widget);
 
     cairo_set_source_rgb (cr,
-                          widget->style->base[GTK_STATE_SELECTED].red / 65535.0,
-                          widget->style->base[GTK_STATE_SELECTED].green / 65535.0,
-                          widget->style->base[GTK_STATE_SELECTED].blue / 65535.0);
+                          widget_style->base[GTK_STATE_SELECTED].red / 65535.0,
+                          widget_style->base[GTK_STATE_SELECTED].green / 65535.0,
+                          widget_style->base[GTK_STATE_SELECTED].blue / 65535.0);
 
     cairo_rectangle (cr,
 		     viewport.x, viewport.y,
@@ -1678,9 +1680,9 @@ paint_background (FooScrollArea *area,
     foo_scroll_area_add_input_from_fill (area, cr, on_canvas_event, NULL);
 
     cairo_set_source_rgb (cr,
-                          widget->style->dark[GTK_STATE_SELECTED].red / 65535.0,
-                          widget->style->dark[GTK_STATE_SELECTED].green / 65535.0,
-                          widget->style->dark[GTK_STATE_SELECTED].blue / 65535.0);
+                          widget_style->dark[GTK_STATE_SELECTED].red / 65535.0,
+                          widget_style->dark[GTK_STATE_SELECTED].green / 65535.0,
+                          widget_style->dark[GTK_STATE_SELECTED].blue / 65535.0);
 
     cairo_stroke (cr);
 }
@@ -2252,7 +2254,7 @@ static void
 select_current_output_from_dialog_position (App *app)
 {
     if (gtk_widget_get_realized (app->dialog))
-	app->current_output = get_output_for_window (app->current_configuration, app->dialog->window);
+	app->current_output = get_output_for_window (app->current_configuration, gtk_widget_get_window (app->dialog));
     else
 	app->current_output = NULL;
 

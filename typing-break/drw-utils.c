@@ -100,7 +100,7 @@ window_expose_event (GtkWidget      *widget,
 	int              width;
 	int              height;
 
-	context = gdk_cairo_create (widget->window);
+	context = gdk_cairo_create (gtk_widget_get_window (widget));
 
 	cairo_set_operator (context, CAIRO_OPERATOR_SOURCE);
 	gtk_window_get_size (GTK_WINDOW (widget), &width, &height);
@@ -200,7 +200,7 @@ set_pixmap_background (GtkWidget *window)
 
 	g_object_unref (tile_pixbuf);
 
-	pixmap = gdk_pixmap_new (GTK_WIDGET (window)->window,
+	pixmap = gdk_pixmap_new (gtk_widget_get_window (window),
 				 width,
 				 height,
 				 -1);
@@ -220,7 +220,7 @@ set_pixmap_background (GtkWidget *window)
 
 	g_object_unref (tmp_pixbuf);
 
-	gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
+	gdk_window_set_back_pixmap (gtk_widget_get_window (window), pixmap, FALSE);
 	g_object_unref (pixmap);
 }
 

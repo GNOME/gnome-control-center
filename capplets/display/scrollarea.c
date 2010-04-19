@@ -419,12 +419,15 @@ static void
 get_viewport (FooScrollArea *scroll_area,
 	      GdkRectangle  *viewport)
 {
+    GtkAllocation allocation;
     GtkWidget *widget = GTK_WIDGET (scroll_area);
-    
+
+    gtk_widget_get_allocation (widget, &allocation);
+
     viewport->x = scroll_area->priv->x_offset;
     viewport->y = scroll_area->priv->y_offset;
-    viewport->width = widget->allocation.width;
-    viewport->height = widget->allocation.height;
+    viewport->width = allocation.width;
+    viewport->height = allocation.height;
 }
 
 static void
@@ -444,7 +447,7 @@ clear_exposed_input_region (FooScrollArea *area,
     GdkRegion *viewport;
     GdkRectangle allocation;
 
-    allocation = GTK_WIDGET (area)->allocation;
+    gtk_widget_get_allocation (GTK_WIDGET (area), &allocation);
     allocation.x = 0;
     allocation.y = 0;
     allocation_to_canvas (area, &allocation.x, &allocation.y);
@@ -522,7 +525,7 @@ static void
 initialize_background (GtkWidget *widget,
 		       cairo_t   *cr)
 {
-    setup_background_cr (widget->window, cr, 0, 0);
+    setup_background_cr (gtk_widget_get_window (widget), cr, 0, 0);
 
     cairo_paint (cr);
 }
@@ -574,7 +577,9 @@ foo_scroll_area_expose (GtkWidget *widget,
     GdkRegion *region;
     int x_offset, y_offset;
     GdkGC *gc;
-    
+    GtkAllocation widget_allocation;
+    GdkWindow *window = gtk_widget_get_window (widget);
+
     /* I don't think expose can ever recurse for the same area */
     g_assert (!scroll_area->priv->expose_region);
     
@@ -623,13 +628,14 @@ foo_scroll_area_expose (GtkWidget *widget,
     scroll_area->priv->current_input = NULL;
 
     /* Finally draw the backing pixmap */
-    gc = gdk_gc_new (widget->window);
-    
+    gc = gdk_gc_new (window);
+
     gdk_gc_set_clip_region (gc, expose->region);
 
-    gdk_draw_drawable (widget->window, gc, scroll_area->priv->pixmap,
-		       0, 0, widget->allocation.x, widget->allocation.y,
-		       widget->allocation.width, widget->allocation.height);
+    gtk_widget_get_allocation (widget, &widget_allocation);
+    gdk_draw_drawable (window, gc, scroll_area->priv->pixmap,
+		       0, 0, widget_allocation.x, widget_allocation.y,
+		       widget_allocation.width, widget_allocation.height);
 
     g_object_unref (gc);
     gdk_region_destroy (region);
@@ -676,15 +682,12 @@ emit_viewport_changed (FooScrollArea *scroll_area,
 static void
 clamp_adjustment (GtkAdjustment *adj)
 {
-    double old_value = adj->value;
-    
-    if (adj->upper >= adj->page_size)
-	adj->value = CLAMP (adj->value, 0.0, adj->upper - adj->page_size);
+    if (gtk_adjustment_get_upper (adj) >= gtk_adjustment_get_page_size (adj))
+	gtk_adjustment_set_value (adj, CLAMP (gtk_adjustment_get_value (adj), 0.0,
+					      gtk_adjustment_get_upper (adj)
+					       - gtk_adjustment_get_page_size (adj)));
     else
-	adj->value = 0.0;
-    
-    if (old_value != adj->value)
-	gtk_adjustment_value_changed (adj);
+	gtk_adjustment_set_value (adj, 0.0);
     
     gtk_adjustment_changed (adj);
 }
@@ -692,25 +695,30 @@ clamp_adjustment (GtkAdjustment *adj)
 static gboolean
 set_adjustment_values (FooScrollArea *scroll_area)
 {
-    GtkAllocation *allocation = &GTK_WIDGET (scroll_area)->allocation;
-    
+    GtkAllocation allocation;
+
     GtkAdjustment *hadj = scroll_area->priv->hadj;
     GtkAdjustment *vadj = scroll_area->priv->vadj;
     
     /* Horizontal */
-    hadj->page_size = allocation->width;
-    hadj->step_increment = 0.1 * allocation->width;
-    hadj->page_increment = 0.9 * allocation->width;
-    hadj->lower = 0.0;
-    hadj->upper = scroll_area->priv->width;
+    gtk_widget_get_allocation (GTK_WIDGET (scroll_area), &allocation);
+    g_object_freeze_notify (G_OBJECT (hadj));
+    gtk_adjustment_set_page_size (hadj, allocation.width);
+    gtk_adjustment_set_step_increment (hadj, 0.1 * allocation.width);
+    gtk_adjustment_set_page_increment (hadj, 0.9 * allocation.width);
+    gtk_adjustment_set_lower (hadj, 0.0);
+    gtk_adjustment_set_upper (hadj, scroll_area->priv->width);
+    g_object_thaw_notify (G_OBJECT (hadj));
     
     /* Vertical */
-    vadj->page_size = allocation->height;
-    vadj->step_increment = 0.1 * allocation->height;
-    vadj->page_increment = 0.9 * allocation->height;
-    vadj->lower = 0.0;
-    vadj->upper = scroll_area->priv->height;
-    
+    g_object_freeze_notify (G_OBJECT (vadj));
+    gtk_adjustment_set_page_size (vadj, allocation.height);
+    gtk_adjustment_set_step_increment (vadj, 0.1 * allocation.height);
+    gtk_adjustment_set_page_increment (vadj, 0.9 * allocation.height);
+    gtk_adjustment_set_lower (vadj, 0.0);
+    gtk_adjustment_set_upper (vadj, scroll_area->priv->height);
+    g_object_thaw_notify (G_OBJECT (vadj));
+
     clamp_adjustment (hadj);
     clamp_adjustment (vadj);
     
@@ -722,15 +730,18 @@ foo_scroll_area_realize (GtkWidget *widget)
 {
     FooScrollArea *area = FOO_SCROLL_AREA (widget);
     GdkWindowAttr attributes;
+    GtkAllocation widget_allocation;
+    GdkWindow *window;
     gint attributes_mask;
 
+    gtk_widget_get_allocation (widget, &widget_allocation);
     gtk_widget_set_realized (widget, TRUE);
     
     attributes.window_type = GDK_WINDOW_CHILD;
-    attributes.x = widget->allocation.x;
-    attributes.y = widget->allocation.y;
-    attributes.width = widget->allocation.width;
-    attributes.height = widget->allocation.height;
+    attributes.x = widget_allocation.x;
+    attributes.y = widget_allocation.y;
+    attributes.width = widget_allocation.width;
+    attributes.height = widget_allocation.height;
     attributes.wclass = GDK_INPUT_ONLY;
     attributes.event_mask = gtk_widget_get_events (widget);
     attributes.event_mask |= (GDK_BUTTON_PRESS_MASK |
@@ -743,19 +754,20 @@ foo_scroll_area_realize (GtkWidget *widget)
 			      GDK_LEAVE_NOTIFY_MASK);
     
     attributes_mask = GDK_WA_X | GDK_WA_Y;
+
+    window = gtk_widget_get_parent_window (widget);
+    gtk_widget_set_window (widget, window);
+    g_object_ref (window);
     
-    widget->window = gtk_widget_get_parent_window (widget);
-    g_object_ref (widget->window);
-    
-    area->priv->input_window = gdk_window_new (widget->window,
+    area->priv->input_window = gdk_window_new (window,
 					       &attributes, attributes_mask);
-    area->priv->pixmap = gdk_pixmap_new (widget->window, 
-					 widget->allocation.width,
-					 widget->allocation.height,
+    area->priv->pixmap = gdk_pixmap_new (window,
+					 widget_allocation.width,
+					 widget_allocation.height,
 					 -1);
     gdk_window_set_user_data (area->priv->input_window, area);
     
-    widget->style = gtk_style_attach (widget->style, widget->window);
+    gtk_widget_style_attach (widget);
 }
 
 static void
@@ -777,10 +789,14 @@ static GdkPixmap *
 create_new_pixmap (GtkWidget *widget,
 		   GdkPixmap *old)
 {
-    GdkPixmap *new = gdk_pixmap_new (widget->window,
-				     widget->allocation.width,
-				     widget->allocation.height,
-				     -1);
+    GtkAllocation widget_allocation;
+    GdkPixmap *new;
+
+    gtk_widget_get_allocation (widget, &widget_allocation);
+    new = gdk_pixmap_new (gtk_widget_get_window (widget),
+			  widget_allocation.width,
+			  widget_allocation.height,
+			  -1);
 
     /* Unfortunately we don't know in which direction we were resized,
      * so we just assume we were dragged from the south-east corner.
@@ -811,12 +827,14 @@ foo_scroll_area_size_allocate (GtkWidget     *widget,
     GdkRectangle old_viewport;
     GdkRegion *old_allocation;
     GdkRegion *invalid;
+    GtkAllocation widget_allocation;
 
     get_viewport (scroll_area, &old_viewport);
 
-    old_allocation = gdk_region_rectangle (&widget->allocation);
+    gtk_widget_get_allocation (widget, &widget_allocation);
+    old_allocation = gdk_region_rectangle (&widget_allocation);
     gdk_region_offset (old_allocation,
-		       -widget->allocation.x, -widget->allocation.y);
+		       -widget_allocation.x, -widget_allocation.y);
     invalid = gdk_region_rectangle (allocation);
     gdk_region_offset (invalid, -allocation->x, -allocation->y);
     gdk_region_xor (invalid, old_allocation);
@@ -825,7 +843,7 @@ foo_scroll_area_size_allocate (GtkWidget     *widget,
     gdk_region_destroy (old_allocation);
     gdk_region_destroy (invalid);
 
-    widget->allocation = *allocation;
+    gtk_widget_set_allocation (widget, allocation);
     
     if (scroll_area->priv->input_window)
     {
@@ -959,7 +977,7 @@ process_event (FooScrollArea	       *scroll_area,
 		cairo_t *cr;
 		gboolean inside;
 
-		cr = gdk_cairo_create (widget->window);
+		cr = gdk_cairo_create (gtk_widget_get_window (widget));
 		cairo_set_fill_rule (cr, path->fill_rule);
 		cairo_set_line_width (cr, path->line_width);
 		cairo_append_path (cr, path->path);
@@ -1052,21 +1070,17 @@ foo_scroll_area_set_size_fixed_y (FooScrollArea	       *scroll_area,
 				  int			old_y,
 				  int			new_y)
 {
-    int dy = new_y - old_y;
-    
     scroll_area->priv->width = width;
     scroll_area->priv->height = height;
     
 #if 0
     g_print ("diff: %d\n", new_y - old_y);
 #endif
-    
-    scroll_area->priv->vadj->value += dy;
+    g_object_thaw_notify (G_OBJECT (scroll_area->priv->vadj));
+    gtk_adjustment_set_value (scroll_area->priv->vadj, new_y);
     
     set_adjustment_values (scroll_area);
-    
-    if (dy != 0)
-	gtk_adjustment_value_changed  (scroll_area->priv->vadj);
+    g_object_thaw_notify (G_OBJECT (scroll_area->priv->vadj));
 }
 
 void
@@ -1186,11 +1200,12 @@ foo_scroll_area_scroll (FooScrollArea *area,
 			gint dx, 
 			gint dy)
 {
-    GdkRectangle allocation = GTK_WIDGET (area)->allocation;
+    GdkRectangle allocation;
     GdkRectangle src_area;
     GdkRectangle move_area;
     GdkRegion *invalid_region;
 
+    gtk_widget_get_allocation (GTK_WIDGET (area), &allocation);
     allocation.x = 0;
     allocation.y = 0;
 
@@ -1250,13 +1265,13 @@ foo_scrollbar_adjustment_changed (GtkAdjustment *adj,
 	/* FIXME: do we treat the offset as int or double, and,
 	 * if int, how do we round?
 	 */
-	dx = (int)adj->value - scroll_area->priv->x_offset;
-	scroll_area->priv->x_offset = adj->value;
+	dx = (int)gtk_adjustment_get_value (adj) - scroll_area->priv->x_offset;
+	scroll_area->priv->x_offset = gtk_adjustment_get_value (adj);
     }
     else if (adj == scroll_area->priv->vadj)
     {
-	dy = (int)adj->value - scroll_area->priv->y_offset;
-	scroll_area->priv->y_offset = adj->value;
+	dy = (int)gtk_adjustment_get_value (adj) - scroll_area->priv->y_offset;
+	scroll_area->priv->y_offset = gtk_adjustment_get_value (adj);
     }
     else
     {
@@ -1430,34 +1445,40 @@ foo_scroll_area_add_input_from_stroke (FooScrollArea           *scroll_area,
 void
 foo_scroll_area_invalidate (FooScrollArea *scroll_area)
 {
+    GtkAllocation allocation;
     GtkWidget *widget = GTK_WIDGET (scroll_area);
 
+    gtk_widget_get_allocation (widget, &allocation);
     foo_scroll_area_invalidate_rect (scroll_area,
 				     scroll_area->priv->x_offset, scroll_area->priv->y_offset,
-				     widget->allocation.width,
-				     widget->allocation.height);
+				     allocation.width,
+				     allocation.height);
 }
 
 static void
 canvas_to_window (FooScrollArea *area,
 		  GdkRegion *region)
 {
+    GtkAllocation allocation;
     GtkWidget *widget = GTK_WIDGET (area);
     
+    gtk_widget_get_allocation (widget, &allocation);
     gdk_region_offset (region,
-		       -area->priv->x_offset + widget->allocation.x,
-		       -area->priv->y_offset + widget->allocation.y);
+		       -area->priv->x_offset + allocation.x,
+		       -area->priv->y_offset + allocation.y);
 }
 
 static void
 window_to_canvas (FooScrollArea *area,
 		  GdkRegion *region)
 {
+    GtkAllocation allocation;
     GtkWidget *widget = GTK_WIDGET (area);
 
+    gtk_widget_get_allocation (widget, &allocation);
     gdk_region_offset (region,
-		       area->priv->x_offset - widget->allocation.x,
-		       area->priv->y_offset - widget->allocation.y);
+		       area->priv->x_offset - allocation.x,
+		       area->priv->y_offset - allocation.y);
 }
 
 void
@@ -1539,19 +1560,14 @@ foo_scroll_area_set_viewport_pos (FooScrollArea  *scroll_area,
 				  int		  x,
 				  int		  y)
 {
-    int x_changed = scroll_area->priv->hadj->value != (double)x;
-    int y_changed = scroll_area->priv->vadj->value != (double)y;
-    
-    scroll_area->priv->hadj->value = x;
-    scroll_area->priv->vadj->value = y;
-    
+    g_object_freeze_notify (G_OBJECT (scroll_area->priv->hadj));
+    g_object_freeze_notify (G_OBJECT (scroll_area->priv->vadj));
+    gtk_adjustment_set_value (scroll_area->priv->hadj, x);
+    gtk_adjustment_set_value (scroll_area->priv->vadj, y);
+
     set_adjustment_values (scroll_area);
-    
-    if (x_changed)
-	gtk_adjustment_value_changed (scroll_area->priv->hadj);
-    
-    if (y_changed)
-	gtk_adjustment_value_changed (scroll_area->priv->vadj);
+    g_object_thaw_notify (G_OBJECT (scroll_area->priv->hadj));
+    g_object_thaw_notify (G_OBJECT (scroll_area->priv->vadj));
 }
 
 static gboolean

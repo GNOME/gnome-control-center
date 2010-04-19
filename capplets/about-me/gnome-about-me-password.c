@@ -678,7 +678,7 @@ passdlg_set_busy (PasswordDialog *pdialog, gboolean busy)
 		cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
 	}
 
-	gdk_window_set_cursor (toplevel->window, cursor);
+	gdk_window_set_cursor (gtk_widget_get_window (toplevel), cursor);
 	gdk_display_flush (display);
 
 	if (busy) {

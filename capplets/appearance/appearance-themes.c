@@ -984,7 +984,7 @@ theme_drag_data_received_cb (GtkWidget *widget,
   if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
     return;
 
-  uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+  uris = g_uri_list_extract_uris ((gchar *) gtk_selection_data_get_data (selection_data));
 
   if (uris != NULL && uris[0] != NULL) {
     GFile *f = g_file_new_for_uri (uris[0]);

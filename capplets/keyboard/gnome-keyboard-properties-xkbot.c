@@ -183,12 +183,13 @@ option_focused_cb (GtkWidget * widget, GdkEventFocus * event,
 		   gpointer data)
 {
 	GtkScrolledWindow *win = GTK_SCROLLED_WINDOW (data);
-	GtkAllocation *alloc = &widget->allocation;
+	GtkAllocation alloc;
 	GtkAdjustment *adj;
 
+	gtk_widget_get_allocation (widget, &alloc);
 	adj = gtk_scrolled_window_get_vadjustment (win);
-	gtk_adjustment_clamp_page (adj, alloc->y,
-				   alloc->y + alloc->height);
+	gtk_adjustment_clamp_page (adj, alloc.y,
+				   alloc.y + alloc.height);
 
 	return FALSE;
 }

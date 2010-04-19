@@ -354,8 +354,7 @@ try_spawn_config_tool (GdkScreen *screen)
                 gtk_window_set_title (GTK_WINDOW (no_tool_dialog), "");
                 gtk_window_set_resizable (GTK_WINDOW (no_tool_dialog), FALSE);
 
-                gtk_label_set_markup (GTK_LABEL (GTK_MESSAGE_DIALOG (no_tool_dialog)->label),
-                                      str);
+                gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (no_tool_dialog), str);
 
                 g_free (str);
 

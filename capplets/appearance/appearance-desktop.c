@@ -707,7 +707,7 @@ wp_drag_received (GtkWidget *widget,
     GSList *realuris = NULL;
     gchar **uris;
 
-    uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+    uris = g_uri_list_extract_uris ((gchar *) gtk_selection_data_get_data (selection_data));
     if (uris != NULL)
     {
       GtkWidget *w;
@@ -1051,20 +1051,21 @@ static void
 create_button_images (AppearanceData  *data)
 {
   GtkWidget *widget = (GtkWidget*)data->wp_view;
+  GtkStyle *style = gtk_widget_get_style (widget);
   GtkIconSet *icon_set;
   GdkPixbuf *pixbuf, *pb, *pb2;
   gint i, w, h;
 
-  icon_set = gtk_style_lookup_icon_set (widget->style, "gtk-media-play");
+  icon_set = gtk_style_lookup_icon_set (style, "gtk-media-play");
   pb = gtk_icon_set_render_icon (icon_set,
-                                 widget->style,
+                                 style,
                                  GTK_TEXT_DIR_RTL,
                                  GTK_STATE_NORMAL,
                                  GTK_ICON_SIZE_MENU,
                                  widget,
                                  NULL);
   pb2 = gtk_icon_set_render_icon (icon_set,
-                                  widget->style,
+                                  style,
                                   GTK_TEXT_DIR_LTR,
                                   GTK_STATE_NORMAL,
                                   GTK_ICON_SIZE_MENU,

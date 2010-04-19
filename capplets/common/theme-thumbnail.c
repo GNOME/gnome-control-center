@@ -92,38 +92,40 @@ static int pipe_from_factory_fd[2];
 #define METACITY_THUMBNAIL_WIDTH  120
 #define METACITY_THUMBNAIL_HEIGHT  60
 
-
-static void
-fake_expose_widget (GtkWidget *widget,
-                    GdkPixmap *pixmap,
-                    GdkRectangle *area)
+static GdkPixmap*
+draw_window_on_pixbuf (GtkWidget *widget)
 {
-  GdkWindow *tmp_window;
-  GdkEventExpose event;
+  GdkVisual *visual;
+  GdkPixmap *pixmap;
+  GtkStyle  *style;
+  GdkScreen *screen = gdk_screen_get_default ();
+  GdkWindow *window;
+  gint width, height;
 
-  event.type = GDK_EXPOSE;
-  event.window = pixmap;
-  event.send_event = FALSE;
-  event.area = area ? *area : widget->allocation;
-  event.region = NULL;
-  event.count = 0;
+  gtk_widget_ensure_style (widget);
 
-  tmp_window = widget->window;
-  widget->window = pixmap;
-  gtk_widget_send_expose (widget, (GdkEvent *) &event);
-  widget->window = tmp_window;
-}
+  style = gtk_widget_get_style (widget);
 
-static void
-hbox_foreach (GtkWidget *widget,
-              gpointer   data)
-{
-  if (gtk_widget_get_visible (widget)) {
-    gtk_widget_realize (widget);
-    gtk_widget_map (widget);
-    gtk_widget_ensure_style (widget);
-    fake_expose_widget (widget, (GdkPixmap *) data, NULL);
-  }
+  g_assert (style);
+  g_assert (style->font_desc);
+
+  gtk_window_get_size (GTK_WINDOW (widget), &width, &height);
+
+  visual = gtk_widget_get_visual (widget);
+  pixmap = gdk_pixmap_new (NULL, width, height, visual->depth);
+  gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (widget));
+
+  window = gtk_widget_get_window (widget);
+
+  gdk_window_redirect_to_drawable (window, pixmap, 0, 0, 0, 0, width, height);
+  gdk_window_set_override_redirect (window, TRUE);
+  gtk_window_move (GTK_WINDOW (widget), gdk_screen_get_width (screen), gdk_screen_get_height (screen));
+  gtk_widget_show(widget);
+
+  gdk_window_process_updates (window, TRUE);
+  gtk_widget_hide(widget);
+
+  return pixmap;
 }
 
 static void
@@ -223,8 +225,8 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
   GtkRequisition requisition;
   GtkAllocation allocation;
+  GtkAllocation vbox_allocation;
   GdkPixmap *pixmap;
-  GdkVisual *visual;
   MetaFrameFlags flags;
   MetaTheme *theme;
   GdkPixbuf *pixbuf, *icon;
@@ -279,14 +281,6 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_box_pack_start (GTK_BOX (box), radio, FALSE, FALSE, 0);
 
   gtk_widget_show_all (preview);
-  gtk_widget_realize (stock_button);
-  gtk_widget_realize (GTK_BIN (stock_button)->child);
-  gtk_widget_realize (checkbox);
-  gtk_widget_realize (radio);
-  gtk_widget_map (stock_button);
-  gtk_widget_map (GTK_BIN (stock_button)->child);
-  gtk_widget_map (checkbox);
-  gtk_widget_map (radio);
 
   meta_preview_set_frame_flags (META_PREVIEW (preview), flags);
   meta_preview_set_theme (META_PREVIEW (preview), theme);
@@ -302,39 +296,20 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_widget_size_allocate (window, &allocation);
   gtk_widget_size_request (window, &requisition);
 
-  /* Create a pixmap */
-  visual = gtk_widget_get_visual (window);
-  pixmap = gdk_pixmap_new (NULL, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE, visual->depth);
-  gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (window));
-
-  /* Draw the window */
-  gtk_widget_ensure_style (window);
-  g_assert (window->style);
-  g_assert (window->style->font_desc);
-
-  fake_expose_widget (window, pixmap, NULL);
-  fake_expose_widget (preview, pixmap, NULL);
-  /* we call this again here because the preview sometimes draws into the area
-   * of the contents, see http://bugzilla.gnome.org/show_bug.cgi?id=351389 */
-  fake_expose_widget (window, pixmap, &vbox->allocation);
-  fake_expose_widget (stock_button, pixmap, NULL);
-  gtk_container_foreach (GTK_CONTAINER (GTK_BIN (GTK_BIN (stock_button)->child)->child),
-                         hbox_foreach,
-                         pixmap);
-  fake_expose_widget (GTK_BIN (stock_button)->child, pixmap, NULL);
-  fake_expose_widget (checkbox, pixmap, NULL);
-  fake_expose_widget (radio, pixmap, NULL);
+  pixmap = draw_window_on_pixbuf (window);
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
 
+  gtk_widget_get_allocation (vbox, &vbox_allocation);
+
   /* Add the icon theme to the pixbuf */
   gdk_pixbuf_composite (icon, pixbuf,
-                        vbox->allocation.x + vbox->allocation.width - icon_width - 5,
-                        vbox->allocation.y + vbox->allocation.height - icon_height - 5,
+                        vbox_allocation.x + vbox_allocation.width - icon_width - 5,
+                        vbox_allocation.y + vbox_allocation.height - icon_height - 5,
                         icon_width, icon_height,
-                        vbox->allocation.x + vbox->allocation.width - icon_width - 5,
-                        vbox->allocation.y + vbox->allocation.height - icon_height - 5,
+                        vbox_allocation.x + vbox_allocation.width - icon_width - 5,
+                        vbox_allocation.y + vbox_allocation.height - icon_height - 5,
                         1.0, 1.0, GDK_INTERP_BILINEAR, 255);
   region = meta_preview_get_clip_region (META_PREVIEW (preview),
       META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
@@ -344,6 +319,7 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   g_object_unref (icon);
   gtk_widget_destroy (window);
   meta_theme_free (theme);
+  gdk_pixmap_unref (pixmap);
 
   return pixbuf;
 }
@@ -355,7 +331,6 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   GtkWidget *window, *vbox, *box, *stock_button, *checkbox, *radio;
   GtkRequisition requisition;
   GtkAllocation allocation;
-  GdkVisual *visual;
   GdkPixmap *pixmap;
   GdkPixbuf *pixbuf, *retval;
   gint width, height;
@@ -382,11 +357,11 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
   gtk_widget_show_all (vbox);
   gtk_widget_realize (stock_button);
-  gtk_widget_realize (GTK_BIN (stock_button)->child);
+  gtk_widget_realize (gtk_bin_get_child (GTK_BIN (stock_button)));
   gtk_widget_realize (checkbox);
   gtk_widget_realize (radio);
   gtk_widget_map (stock_button);
-  gtk_widget_map (GTK_BIN (stock_button)->child);
+  gtk_widget_map (gtk_bin_get_child (GTK_BIN (stock_button)));
   gtk_widget_map (checkbox);
   gtk_widget_map (radio);
 
@@ -398,25 +373,9 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_widget_size_allocate (window, &allocation);
   gtk_widget_size_request (window, &requisition);
 
-  /* Draw the window */
-  gtk_widget_ensure_style (window);
-  g_assert (window->style);
-  g_assert (window->style->font_desc);
-
   gtk_window_get_size (GTK_WINDOW (window), &width, &height);
 
-  visual = gtk_widget_get_visual (window);
-  pixmap = gdk_pixmap_new (NULL, width, height, visual->depth);
-  gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (window));
-
-  fake_expose_widget (window, pixmap, NULL);
-  fake_expose_widget (stock_button, pixmap, NULL);
-  gtk_container_foreach (GTK_CONTAINER (GTK_BIN (GTK_BIN (stock_button)->child)->child),
-       hbox_foreach,
-       pixmap);
-  fake_expose_widget (GTK_BIN (stock_button)->child, pixmap, NULL);
-  fake_expose_widget (checkbox, pixmap, NULL);
-  fake_expose_widget (radio, pixmap, NULL);
+  pixmap = draw_window_on_pixbuf (window);
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, width, height);
@@ -427,6 +386,7 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
                                     GDK_INTERP_BILINEAR);
   g_object_unref (pixbuf);
   gtk_widget_destroy (window);
+  gdk_pixmap_unref (pixmap);
 
   return retval;
 }
@@ -439,7 +399,6 @@ create_metacity_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   MetaTheme *theme;
   GtkRequisition requisition;
   GtkAllocation allocation;
-  GdkVisual *visual;
   GdkPixmap *pixmap;
   GdkPixbuf *pixbuf, *retval;
   GdkRegion *region;
@@ -484,19 +443,7 @@ create_metacity_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_widget_size_allocate (window, &allocation);
   gtk_widget_size_request (window, &requisition);
 
-  /* Draw the window */
-  gtk_widget_ensure_style (window);
-  g_assert (window->style);
-  g_assert (window->style->font_desc);
-
-  /* Create a pixmap */
-  visual = gtk_widget_get_visual (window);
-  pixmap = gdk_pixmap_new (NULL, (int) METACITY_THUMBNAIL_WIDTH * 1.2, (int) METACITY_THUMBNAIL_HEIGHT * 1.2, visual->depth);
-  gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (window));
-
-  fake_expose_widget (window, pixmap, NULL);
-  fake_expose_widget (preview, pixmap, NULL);
-  fake_expose_widget (window, pixmap, &dummy->allocation);
+  pixmap = draw_window_on_pixbuf (window);
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, (int) METACITY_THUMBNAIL_WIDTH * 1.2, (int) METACITY_THUMBNAIL_HEIGHT * 1.2);
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, (int) METACITY_THUMBNAIL_WIDTH * 1.2, (int) METACITY_THUMBNAIL_HEIGHT * 1.2);
@@ -515,6 +462,8 @@ create_metacity_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
   gtk_widget_destroy (window);
   meta_theme_free (theme);
+  gdk_pixmap_unref (pixmap);
+
   return retval;
 }
 

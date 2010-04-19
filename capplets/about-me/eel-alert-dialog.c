@@ -104,7 +104,7 @@ eel_alert_dialog_class_init (EelAlertDialogClass *class)
 
 	gobject_class->set_property = eel_alert_dialog_set_property;
 	gobject_class->get_property = eel_alert_dialog_get_property;
-  
+
 	gtk_widget_class_install_style_property (widget_class,
 	                                         g_param_spec_int ("alert_border",
 	                                         _("Image/label border"),
@@ -113,7 +113,7 @@ eel_alert_dialog_class_init (EelAlertDialogClass *class)
 	                                         G_MAXINT,
 	                                         5,
 	                                         G_PARAM_READABLE));
-  
+
 	g_object_class_install_property (gobject_class,
 	                                 PROP_ALERT_TYPE,
 	                                 g_param_spec_enum ("alert_type",
@@ -122,7 +122,7 @@ eel_alert_dialog_class_init (EelAlertDialogClass *class)
 	                                 GTK_TYPE_MESSAGE_TYPE,
 	                                 GTK_MESSAGE_INFO,
 	                                 G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT));
-  
+
 	g_object_class_install_property (gobject_class,
 	                                 PROP_BUTTONS,
 	                                 g_param_spec_enum ("buttons",
@@ -187,7 +187,7 @@ eel_alert_dialog_init (EelAlertDialog *dialog)
 
 	gtk_box_pack_start (GTK_BOX (vbox), dialog->details->primary_label,
 	                    FALSE, FALSE, 0);
-		      
+
 	gtk_box_pack_start (GTK_BOX (vbox), dialog->details->secondary_label,
 	                    FALSE, FALSE, 0);
 
@@ -196,11 +196,11 @@ eel_alert_dialog_init (EelAlertDialog *dialog)
 	gtk_expander_set_spacing (GTK_EXPANDER (expander), 6);
 	gtk_container_add (GTK_CONTAINER (expander), dialog->details->details_label);
 	
-	gtk_box_pack_start (GTK_BOX (vbox), expander, 
+	gtk_box_pack_start (GTK_BOX (vbox), expander,
 			    FALSE, FALSE, 0);
 	
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, 
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), hbox,
 	                    FALSE, FALSE, 0);
 
 	gtk_widget_show_all (hbox);
@@ -214,7 +214,7 @@ setup_type (EelAlertDialog *dialog,
 {
 	const gchar *stock_id = NULL;
 	GtkStockItem item;
-  
+
 	switch (type) {
 		case GTK_MESSAGE_INFO:
 			stock_id = GTK_STOCK_DIALOG_INFO;
@@ -245,16 +245,16 @@ setup_type (EelAlertDialog *dialog,
 	}
 }
 
-static void 
+static void
 eel_alert_dialog_set_property (GObject      *object,
                                guint         prop_id,
                                const GValue *value,
                                GParamSpec   *pspec)
 {
 	EelAlertDialog *dialog;
-  
+
 	dialog = EEL_ALERT_DIALOG (object);
-  
+
 	switch (prop_id) {
 		case PROP_ALERT_TYPE:
 			dialog->details->type = g_value_get_enum (value);
@@ -269,16 +269,16 @@ eel_alert_dialog_set_property (GObject      *object,
 	}
 }
 
-static void 
+static void
 eel_alert_dialog_get_property (GObject     *object,
                                guint        prop_id,
                                GValue      *value,
                                GParamSpec  *pspec)
 {
 	EelAlertDialog *dialog;
-  
+
 	dialog = EEL_ALERT_DIALOG (object);
-  
+
 	switch (prop_id) {
 		case PROP_ALERT_TYPE:
 			g_value_set_enum (value, dialog->details->type);
@@ -354,16 +354,16 @@ eel_alert_dialog_new (GtkWindow     *parent,
 	dialog = GTK_DIALOG (widget);
 	
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);		
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 14);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 14);
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_dialog_set_has_separator (dialog, FALSE);
-  
+
 	gtk_window_set_title (GTK_WINDOW (dialog),
 	                      (title != NULL) ? title : "");
 	
 	eel_alert_dialog_set_primary_label (EEL_ALERT_DIALOG (dialog),
 	                                    primary_message);
-		       
+
 	eel_alert_dialog_set_secondary_label (EEL_ALERT_DIALOG (dialog),
 	                                      secondary_message);
 
@@ -397,21 +397,21 @@ eel_alert_dialog_add_buttons (EelAlertDialog* alert_dialog,
 			gtk_dialog_add_button (dialog,
 		                               GTK_STOCK_OK,
 			                       GTK_RESPONSE_OK);
-			gtk_dialog_set_default_response (dialog, 
+			gtk_dialog_set_default_response (dialog,
 			                                GTK_RESPONSE_OK);
 			break;
 		case GTK_BUTTONS_CLOSE:
 			gtk_dialog_add_button (dialog,
 		                               GTK_STOCK_CLOSE,
 			                      GTK_RESPONSE_CLOSE);
-			gtk_dialog_set_default_response (dialog, 
+			gtk_dialog_set_default_response (dialog,
 			                                 GTK_RESPONSE_CLOSE);
 			break;
 		case GTK_BUTTONS_CANCEL:
 			gtk_dialog_add_button (dialog,
 			                       GTK_STOCK_CANCEL,
 			                       GTK_RESPONSE_CANCEL);
-			gtk_dialog_set_default_response (dialog, 
+			gtk_dialog_set_default_response (dialog,
 			                                 GTK_RESPONSE_CANCEL);
 			break;
 		case GTK_BUTTONS_YES_NO:
@@ -421,7 +421,7 @@ eel_alert_dialog_add_buttons (EelAlertDialog* alert_dialog,
 			gtk_dialog_add_button (dialog,
 			                       GTK_STOCK_YES,
 			                       GTK_RESPONSE_YES);
-			gtk_dialog_set_default_response (dialog, 
+			gtk_dialog_set_default_response (dialog,
 			                                 GTK_RESPONSE_YES);
 			break;
 		case GTK_BUTTONS_OK_CANCEL:
@@ -431,13 +431,13 @@ eel_alert_dialog_add_buttons (EelAlertDialog* alert_dialog,
 			gtk_dialog_add_button (dialog,
 			                       GTK_STOCK_OK,
 			                       GTK_RESPONSE_OK);
-			gtk_dialog_set_default_response (dialog, 
+			gtk_dialog_set_default_response (dialog,
 			                                 GTK_RESPONSE_OK);
 			break;
 		default:
 			g_warning ("Unknown GtkButtonsType");
  			break;
-	} 
+	}
 	g_object_notify (G_OBJECT (alert_dialog), "buttons");
 }
 
@@ -450,7 +450,7 @@ eel_alert_dialog_style_set (GtkWidget *widget,
 	
 	border_width = 0;
 
-	parent = GTK_WIDGET (EEL_ALERT_DIALOG (widget)->details->image->parent);
+	parent = gtk_widget_get_parent (EEL_ALERT_DIALOG (widget)->details->image);
 
 	if (parent != NULL) {
 		gtk_widget_style_get (widget, "alert_border",

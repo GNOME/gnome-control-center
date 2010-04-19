@@ -968,7 +968,7 @@ peditor_select_radio_widget_changed (GConfPropertyEditor *peditor,
 	GConfValue *value, *value_wid;
 
 	if (!peditor->p->inited) return;
-	if (!tb->active) return;
+	if (!gtk_toggle_button_get_active (tb)) return;
 
 	value_wid = gconf_value_new (GCONF_VALUE_INT);
 	group = g_slist_copy (gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control)));
@@ -1393,6 +1393,7 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 	GtkImage *image = NULL;
 	const int scale = 100;
 	gchar *message = NULL;
+	GtkWidget *ui_control_child;
 	GList *l;
 
 	/* NULL is not valid, however "" is, but not an error (it's
@@ -1417,11 +1418,13 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 					   filename);
 	}
 
-	if (GTK_IS_IMAGE (GTK_BIN (peditor->p->ui_control)->child))
-		image = GTK_IMAGE (GTK_BIN (peditor->p->ui_control)->child);
+	ui_control_child = gtk_bin_get_child (GTK_BIN (peditor->p->ui_control));
+
+	if (GTK_IS_IMAGE (ui_control_child))
+		image = GTK_IMAGE (ui_control_child);
 	else
 	{
-		for (l = gtk_container_get_children (GTK_CONTAINER (GTK_BIN (peditor->p->ui_control)->child)); l != NULL; l = l->next)
+		for (l = gtk_container_get_children (GTK_CONTAINER (ui_control_child)); l != NULL; l = l->next)
 		{
 			if (GTK_IS_IMAGE (l->data))
 				image = GTK_IMAGE (l->data);

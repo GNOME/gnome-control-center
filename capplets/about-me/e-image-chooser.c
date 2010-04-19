@@ -328,22 +328,22 @@ image_drag_data_received_cb (GtkWidget *widget,
 			     GtkSelectionData *selection_data,
 			     guint info, guint time, EImageChooser *chooser)
 {
-
 	char *target_type;
 	gboolean handled = FALSE;
 
-	target_type = gdk_atom_name (selection_data->target);
+	target_type = gdk_atom_name (gtk_selection_data_get_target (selection_data));
 
 	if (!strcmp (target_type, URI_LIST_TYPE)) {
+		const char *data = gtk_selection_data_get_data (selection_data);
 		char *uri;
 		GFile *file;
 		GInputStream *istream;
-		char *nl = strstr (selection_data->data, "\r\n");
+		char *nl = strstr (data, "\r\n");
 
 		if (nl)
-			uri = g_strndup (selection_data->data, nl - (char *) selection_data->data);
+			uri = g_strndup (data, nl - (char *) data);
 		else
-			uri = g_strdup (selection_data->data);
+			uri = g_strdup (data);
 
 		file = g_file_new_for_uri (uri);
 		istream = G_INPUT_STREAM (g_file_read (file, NULL, NULL));

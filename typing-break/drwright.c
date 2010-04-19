@@ -334,7 +334,7 @@ break_window_map_event_cb (GtkWidget *widget,
 			   GdkEvent  *event,
 			   DrWright  *dr)
 {
-	grab_keyboard_on_window (dr->break_window->window, gtk_get_current_event_time ());
+	grab_keyboard_on_window (gtk_widget_get_window (dr->break_window), gtk_get_current_event_time ());
 
         return FALSE;
 }

@@ -109,6 +109,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     XftFont *font;
     gint *sizes = NULL, n_sizes, alpha_size;
     FcCharSet *charset = NULL;
+    GdkWindow *window = gtk_widget_get_window (drawing_area);
 
     text = pango_language_get_sample_string(NULL);
     if (! check_font_contain_text (face, text))
@@ -122,9 +123,9 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     gtk_widget_realize(drawing_area);
 
     /* create the XftDraw */
-    xdisplay = GDK_PIXMAP_XDISPLAY(drawing_area->window);
-    xvisual = GDK_VISUAL_XVISUAL(gdk_drawable_get_visual(drawing_area->window));
-    xcolormap = GDK_COLORMAP_XCOLORMAP(gdk_drawable_get_colormap(drawing_area->window));
+    xdisplay = GDK_PIXMAP_XDISPLAY(window);
+    xvisual = GDK_VISUAL_XVISUAL(gdk_drawable_get_visual(window));
+    xcolormap = GDK_COLORMAP_XCOLORMAP(gdk_drawable_get_colormap(window));
     XftColorAllocName(xdisplay, xvisual, xcolormap, "black", &colour);
 
     /* work out what sizes to render */
@@ -187,11 +188,11 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 
     /* create pixmap */
     gtk_widget_set_size_request(drawing_area, pixmap_width, pixmap_height);
-    pixmap = gdk_pixmap_new(drawing_area->window,
+    pixmap = gdk_pixmap_new(window,
 			    pixmap_width, pixmap_height, -1);
     if (!pixmap)
 	goto end;
-    gdk_draw_rectangle(pixmap, drawing_area->style->white_gc,
+    gdk_draw_rectangle(pixmap, gtk_widget_get_style(drawing_area)->white_gc,
 		       TRUE, 0, 0, pixmap_width, pixmap_height);
 
     xdrawable = GDK_DRAWABLE_XID(pixmap);
@@ -372,8 +373,8 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 static gboolean
 expose_event(GtkWidget *widget, GdkEventExpose *event, GdkPixmap *pixmap)
 {
-    gdk_draw_drawable(widget->window,
-		      widget->style->fg_gc[gtk_widget_get_state (widget)],
+    gdk_draw_drawable(gtk_widget_get_window (widget),
+		      gtk_widget_get_style (widget)->fg_gc[gtk_widget_get_state (widget)],
 		      pixmap,
 		      event->area.x, event->area.y,
 		      event->area.x, event->area.y,

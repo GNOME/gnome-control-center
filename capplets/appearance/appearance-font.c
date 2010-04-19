@@ -91,21 +91,26 @@ static void
 sample_expose (GtkWidget      *darea,
 	       GdkEventExpose *expose)
 {
+  GtkAllocation allocation;
   GdkPixbuf *pixbuf = g_object_get_data (G_OBJECT (darea), "sample-pixbuf");
+  GdkWindow *window = gtk_widget_get_window (darea);
+  GtkStyle  *style = gtk_widget_get_style (darea);
   int width = gdk_pixbuf_get_width (pixbuf);
   int height = gdk_pixbuf_get_height (pixbuf);
+  int x;
+  int y;
 
-  int x = (darea->allocation.width - width) / 2;
-  int y = (darea->allocation.height - height) / 2;
-
-  gdk_draw_rectangle (darea->window, darea->style->white_gc, TRUE,
+  gtk_widget_get_allocation (darea, &allocation);
+  x = (allocation.width - width) / 2;
+  y = (allocation.height - height) / 2;
+  gdk_draw_rectangle (window, style->white_gc, TRUE,
 		      0, 0,
-		      darea->allocation.width, darea->allocation.height);
-  gdk_draw_rectangle (darea->window, darea->style->black_gc, FALSE,
+		      allocation.width, allocation.height);
+  gdk_draw_rectangle (window, style->black_gc, FALSE,
 		      0, 0,
-		      darea->allocation.width - 1, darea->allocation.height - 1);
+		      allocation.width - 1, allocation.height - 1);
 
-  gdk_draw_pixbuf (darea->window, NULL, pixbuf, 0, 0, x, y, width, height,
+  gdk_draw_pixbuf (window, NULL, pixbuf, 0, 0, x, y, width, height,
                    GDK_RGB_DITHER_NORMAL, 0, 0);
 }
 
@@ -537,7 +542,7 @@ application_font_to_gconf (GConfPropertyEditor *peditor,
 
     gtk_button_set_image (GTK_BUTTON (apply_button), gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON));
     gtk_dialog_add_action_widget (GTK_DIALOG (warning_dialog), apply_button, GTK_RESPONSE_APPLY);
-    GTK_WIDGET_SET_FLAGS (apply_button, GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default (apply_button, TRUE);
     gtk_widget_show (apply_button);
 
     gtk_dialog_set_default_response (GTK_DIALOG (warning_dialog), GTK_RESPONSE_CLOSE);
@@ -829,9 +834,9 @@ cb_show_details (GtkWidget *button,
 
     /* pick a sensible maximum dpi */
     adjustment = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (widget));
-    adjustment->upper = DPI_HIGH_REASONABLE_VALUE;
-    adjustment->lower = DPI_LOW_REASONABLE_VALUE;
-    adjustment->step_increment = 1;
+    gtk_adjustment_set_lower (adjustment, DPI_LOW_REASONABLE_VALUE);
+    gtk_adjustment_set_upper (adjustment, DPI_HIGH_REASONABLE_VALUE);
+    gtk_adjustment_set_step_increment (adjustment, 1);
 
     dpi_load (data->client, GTK_SPIN_BUTTON (widget));
     g_signal_connect (widget, "value_changed",

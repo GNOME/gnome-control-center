@@ -294,19 +294,20 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	GtkWidget *progress_vbox;
 	GtkWidget *table;
 	char      *markup;
+	GtkWidget *content_area;
 
-        dlg->priv = FILE_TRANSFER_DIALOG_GET_PRIVATE (dlg);
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
+	dlg->priv = FILE_TRANSFER_DIALOG_GET_PRIVATE (dlg);
 	dlg->priv->cancellable = g_cancellable_new ();
 
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->vbox),
-					4);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 4);
+	gtk_container_set_border_width (GTK_CONTAINER (content_area), 4);
+	gtk_box_set_spacing (GTK_BOX (content_area), 4);
 
 	gtk_widget_set_size_request (GTK_WIDGET (dlg), 350, -1);
 
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (content_area), vbox, TRUE, TRUE, 0);
 
 	dlg->priv->status = gtk_label_new (NULL);
 	markup = g_strconcat ("<big><b>", _("Copying files"), "</b></big>", NULL);
@@ -339,7 +340,7 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 6);
 
-	gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);
+	gtk_widget_show_all (content_area);
 }
 
 GtkWidget*

@@ -429,7 +429,7 @@ gnome_theme_install_real (GtkWindow *parent,
 						      gtk_image_new_from_stock (GTK_STOCK_APPLY,
 										GTK_ICON_SIZE_BUTTON));
 				gtk_dialog_add_action_widget (GTK_DIALOG (dialog), apply_button, GTK_RESPONSE_APPLY);
-				GTK_WIDGET_SET_FLAGS (apply_button, GTK_CAN_DEFAULT);
+				gtk_widget_set_can_default (apply_button, TRUE);
 				gtk_widget_show (apply_button);
 
 				gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_APPLY);

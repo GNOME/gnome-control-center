@@ -527,7 +527,7 @@ postpone_clicked_cb (GtkWidget *button,
 
 	priv->postpone_timeout_id = g_timeout_add_seconds (POSTPONE_CANCEL, (GSourceFunc) postpone_cancel_cb, bw);
 
-	grab_on_window (priv->postpone_entry->window,  gtk_get_current_event_time ());
+	grab_on_window (gtk_widget_get_window (priv->postpone_entry),  gtk_get_current_event_time ());
 
 	gtk_widget_grab_focus (priv->postpone_entry);
 
@@ -547,26 +547,31 @@ get_layout_location (GtkLabel *label,
                      gint     *xp,
                      gint     *yp)
 {
-	GtkMisc   *misc;
-	GtkWidget *widget;
-	gfloat     xalign;
-	gint       x, y;
+	GtkMisc        *misc;
+	GtkWidget      *widget;
+	GtkAllocation  widget_allocation;
+	GtkRequisition widget_requisition;
+	gfloat         xalign, yalign;
+	gint           x, y;
+	gint           xpad, ypad;
 
 	misc = GTK_MISC (label);
 	widget = GTK_WIDGET (label);
 
-	if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR) {
-		xalign = misc->xalign;
-	} else {
-		xalign = 1.0 - misc->xalign;
-	}
+	gtk_misc_get_alignment (misc, &xalign, &yalign);
+	gtk_misc_get_padding (misc, &xpad, &ypad);
+	gtk_widget_get_allocation (widget, &widget_allocation);
+	gtk_widget_get_requisition (widget, &widget_requisition);
 
-	x = floor (widget->allocation.x + (int)misc->xpad
-		   + ((widget->allocation.width - widget->requisition.width - 1) * xalign)
+	if (gtk_widget_get_direction (widget) != GTK_TEXT_DIR_LTR)
+		xalign = 1.0 - xalign;
+
+	x = floor (widget_allocation.x + (int)xpad
+		   + ((widget_allocation.width - widget_requisition.width - 1) * xalign)
 		   + 0.5);
 
-	y = floor (widget->allocation.y + (int)misc->ypad
-		   + ((widget->allocation.height - widget->requisition.height - 1) * misc->yalign)
+	y = floor (widget_allocation.y + (int)ypad
+		   + ((widget_allocation.height - widget_requisition.height - 1) * yalign)
 		   + 0.5);
 
 	if (xp) {
@@ -586,6 +591,7 @@ label_expose_event_cb (GtkLabel       *label,
 	gint       x, y;
 	GdkColor   color;
 	GtkWidget *widget;
+	GdkWindow *window;
 	GdkGC     *gc;
 
 	color.red = 0;
@@ -596,28 +602,30 @@ label_expose_event_cb (GtkLabel       *label,
 	get_layout_location (label, &x, &y);
 
 	widget = GTK_WIDGET (label);
-	gc = gdk_gc_new (widget->window);
+	window = gtk_widget_get_window (widget);
+
+	gc = gdk_gc_new (window);
 	gdk_gc_set_rgb_fg_color (gc, &color);
 	gdk_gc_set_clip_rectangle (gc, &event->area);
 
-	gdk_draw_layout_with_colors (widget->window,
+	gdk_draw_layout_with_colors (window,
 				     gc,
 				     x + 1,
 				     y + 1,
-				     label->layout,
+				     gtk_label_get_layout (label),
 				     &color,
 				     NULL);
 	g_object_unref (gc);
 
-	gtk_paint_layout (widget->style,
-			  widget->window,
+	gtk_paint_layout (gtk_widget_get_style (widget),
+			  window,
 			  gtk_widget_get_state (widget),
 			  FALSE,
 			  &event->area,
 			  widget,
 			  "label",
 			  x, y,
-			  label->layout);
+			  gtk_label_get_layout (label));
 
 	return TRUE;
 }
