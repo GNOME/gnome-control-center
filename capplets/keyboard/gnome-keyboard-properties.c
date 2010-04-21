@@ -119,8 +119,7 @@ dialog_response (GtkWidget * widget,
 }
 
 static void
-setup_dialog (GtkBuilder * dialog, GConfChangeSet * changeset,
-	      guint32 socket_id)
+setup_dialog (GtkBuilder * dialog, GConfChangeSet * changeset)
 {
 	GObject *peditor;
 	gchar *monitor;
@@ -181,20 +180,8 @@ setup_dialog (GtkBuilder * dialog, GConfChangeSet * changeset,
 		gtk_notebook_remove_page (nb, tb_page);
 	}
 
-	if (socket_id) {
-		GtkWidget *content, *plug;
-
-		/* re-parent contents */
-		content = WID ("vbox1");
-
-		plug = gtk_plug_new (socket_id);
-		gtk_widget_reparent (content, plug);
-		g_signal_connect (plug, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-		gtk_widget_show_all (plug);
-	} else {
-		g_signal_connect (WID ("keyboard_dialog"), "response",
-				  (GCallback) dialog_response, changeset);
-	}
+	g_signal_connect (WID ("keyboard_dialog"), "response",
+			  (GCallback) dialog_response, changeset);
 
 	setup_xkb_tabs (dialog, changeset);
 	setup_a11y_tabs (dialog, changeset);
@@ -211,7 +198,6 @@ main (int argc, char **argv)
 	static gboolean apply_only = FALSE;
 	static gboolean switch_to_typing_break_page = FALSE;
 	static gboolean switch_to_a11y_page = FALSE;
-	static guint32 socket_id = 0;
 
 	static GOptionEntry cap_options[] = {
 		{"apply", 0, 0, G_OPTION_ARG_NONE, &apply_only,
@@ -233,17 +219,6 @@ main (int argc, char **argv)
 		 N_
 		 ("Start the page with the accessibility settings showing"),
 		 NULL},
-
-		{ "socket",
-		  's',
-		  G_OPTION_FLAG_IN_MAIN,
-		  G_OPTION_ARG_INT,
-		  &socket_id,
-		  /* TRANSLATORS: don't translate the terms in brackets */
-		  N_("ID of the socket to embed in"),
-		  N_("socket") },
-
-		{NULL}
 	};
 
 
@@ -265,7 +240,7 @@ main (int argc, char **argv)
 
 	changeset = NULL;
 	dialog = create_dialog ();
-	setup_dialog (dialog, changeset, socket_id);
+	setup_dialog (dialog, changeset);
 	if (switch_to_typing_break_page) {
 		gtk_notebook_set_current_page (GTK_NOTEBOOK
 					       (WID
@@ -282,8 +257,8 @@ main (int argc, char **argv)
 
 	capplet_set_icon (WID ("keyboard_dialog"),
 			  "preferences-desktop-keyboard");
-	if (!socket_id)
-	  gtk_widget_show (WID ("keyboard_dialog"));
+
+	gtk_widget_show (WID ("keyboard_dialog"));
 	gtk_main ();
 
 	return 0;
