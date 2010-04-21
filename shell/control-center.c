@@ -514,6 +514,8 @@ main (int argc, char **argv)
         data = NULL;
 
       unique_app_send_message (unique, 1, data);
+
+      gdk_notify_startup_complete ();
       return 0;
     }
 
