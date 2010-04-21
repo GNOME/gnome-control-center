@@ -21,6 +21,9 @@ libpointer_la_SOURCES =			\
 	cc-pointer-panel.h		\
 	cc-pointer-panel.c		\
 	gnome-mouse-properties.c	\
+	gnome-mouse-properties.h	\
+	gnome-mouse-accessibility.c	\
+	gnome-mouse-accessibility.h	\
 	$(NULL)
 
 libpointer_la_LDFLAGS =			\
@@ -30,6 +33,7 @@ libpointer_la_LDFLAGS =			\
 libpointer_la_LIBADD =			\
 	$(EXTENSION_LIBS)		\
 	$(EXTENSION_COMMON_LIBS)	\
+	$(GNOMECC_CAPPLETS_LIBS)	\
 	$(NULL)
 
 libpointer_la_CFLAGS =			\

@@ -22,6 +22,9 @@
  */
 
 #include "cc-pointer-panel.h"
+#include "gnome-mouse-properties.h"
+#include "gnome-mouse-accessibility.h"
+
 #include <glib/gi18n.h>
 
 G_DEFINE_DYNAMIC_TYPE (CcPointerPanel, cc_pointer_panel, CC_TYPE_PANEL)
@@ -31,7 +34,7 @@ G_DEFINE_DYNAMIC_TYPE (CcPointerPanel, cc_pointer_panel, CC_TYPE_PANEL)
 
 struct _CcPointerPanelPrivate
 {
-  gpointer dummy;
+  GConfClient *client;
 };
 
 
@@ -64,6 +67,14 @@ cc_pointer_panel_set_property (GObject      *object,
 static void
 cc_pointer_panel_dispose (GObject *object)
 {
+  CcPointerPanelPrivate *priv = CC_POINTER_PANEL (object)->priv;
+
+  if (priv->client)
+    {
+      g_object_unref (priv->client);
+      priv->client = NULL;
+    }
+
   G_OBJECT_CLASS (cc_pointer_panel_parent_class)->dispose (object);
 }
 
@@ -72,10 +83,6 @@ cc_pointer_panel_finalize (GObject *object)
 {
   G_OBJECT_CLASS (cc_pointer_panel_parent_class)->finalize (object);
 }
-
-/* this is defined in gnome-mouse-properties.c */
-GtkBuilder * create_dialog (void);
-/* TODO: split out the pages into seperate objects */
 
 static GObject*
 cc_pointer_panel_constructor (GType                  type,
@@ -120,13 +127,16 @@ cc_pointer_panel_class_finalize (CcPointerPanelClass *klass)
 static void
 cc_pointer_panel_init (CcPointerPanel *self)
 {
-  GtkBuilder *builder;
-  GtkWidget *prefs_widget;
+  GtkBuilder  *builder;
+  GtkWidget   *prefs_widget;
 
   self->priv = POINTER_PANEL_PRIVATE (self);
 
+  self->priv->client = mouse_properties_conf_init ();
 
   builder = create_dialog ();
+
+  setup_accessibility (builder, self->priv->client);
 
   prefs_widget = (GtkWidget*) gtk_builder_get_object (builder, "prefs_widget");
 

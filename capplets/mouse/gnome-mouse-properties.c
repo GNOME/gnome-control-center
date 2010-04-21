@@ -25,6 +25,8 @@
 
 #include <config.h>
 
+#include "gnome-mouse-properties.h"
+
 #include <glib/gi18n.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
@@ -558,6 +560,8 @@ create_dialog (void)
 	gtk_size_group_add_widget (size_group, WID ("dwell_delay_long_label"));
 	gtk_size_group_add_widget (size_group, WID ("dwell_threshold_large_label"));
 
+        setup_dialog (dialog, NULL);
+
 	return dialog;
 }
 
@@ -572,6 +576,25 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changes
 	else
 		gtk_main_quit ();
 }
+
+GConfClient *
+mouse_properties_conf_init ()
+{
+	GConfClient *client;
+
+	capplet_init_stock_icons ();
+
+	activate_settings_daemon ();
+
+	client = gconf_client_get_default ();
+	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse",
+			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_add_dir (client, "/desktop/gnome/peripherals/touchpad",
+			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+
+	return client;
+}
+
 
 int
 main (int argc, char **argv)
@@ -609,14 +632,11 @@ main (int argc, char **argv)
 
 	activate_settings_daemon ();
 
-	client = gconf_client_get_default ();
-	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	gconf_client_add_dir (client, "/desktop/gnome/peripherals/touchpad", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	client = mouse_properties_conf_init ();
 
 	dialog = create_dialog ();
 
 	if (dialog) {
-		setup_dialog (dialog, NULL);
 		setup_accessibility (dialog, client);
 
 		if (socket_id) {
