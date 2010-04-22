@@ -1304,6 +1304,9 @@ setup_page (CcNetworkProxyPage *page)
                                             proxytype_values);
 
         /* Locations */
+        page->priv->delete_button = gtk_button_new_with_label (_("Delete Location"));
+        gtk_widget_show (page->priv->delete_button);
+
         page->priv->location_combobox = WID ("location_combobox");
         store = gtk_list_store_new (2,
                                     G_TYPE_STRING,
@@ -1355,7 +1358,6 @@ setup_page (CcNetworkProxyPage *page)
         /* Mode */
         page->priv->none_radiobutton = WID ("none_radiobutton");
         mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (page->priv->none_radiobutton));
-        connect_sensitivity_signals (page, mode_group);
 
         peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_select_radio_with_enum (NULL,
                                                                                    PROXY_MODE_KEY,
@@ -1509,11 +1511,10 @@ setup_page (CcNetworkProxyPage *page)
                           G_CALLBACK (on_remove_button_clicked),
                           page);
 
+        connect_sensitivity_signals (page, mode_group);
 
         /* FIXME: move to .ui once it isn't shared */
         hbox = WID ("hbox2");
-        page->priv->delete_button = gtk_button_new_with_label (_("Delete Location"));
-        gtk_widget_show (page->priv->delete_button);
 
         gtk_box_pack_end (GTK_BOX (hbox), page->priv->delete_button, FALSE,
                           FALSE, 0);
