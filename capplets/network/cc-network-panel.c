@@ -39,7 +39,6 @@
 
 struct CcNetworkPanelPrivate
 {
-        GtkWidget *notebook;
         CcPage    *proxy_page;
 };
 
@@ -80,33 +79,10 @@ cc_network_panel_get_property (GObject    *object,
 }
 
 static void
-on_notebook_switch_page (GtkNotebook       *notebook,
-                         GtkNotebookPage   *page,
-                         guint              page_num,
-                         CcNetworkPanel *panel)
-{
-        if (page_num == 0) {
-                g_object_set (panel,
-                              "current-page",
-                              panel->priv->proxy_page,
-                              NULL);
-        }
-}
-
-static void
 setup_panel (CcNetworkPanel *panel)
 {
         GtkWidget *label;
         char      *display_name;
-
-        panel->priv->notebook = gtk_notebook_new ();
-        g_signal_connect (panel->priv->notebook,
-                          "switch-page",
-                          G_CALLBACK (on_notebook_switch_page),
-                          panel);
-
-        gtk_container_add (GTK_CONTAINER (panel), panel->priv->notebook);
-        gtk_widget_show (panel->priv->notebook);
 
         panel->priv->proxy_page = cc_network_proxy_page_new ();
         g_object_get (panel->priv->proxy_page,
@@ -114,14 +90,13 @@ setup_panel (CcNetworkPanel *panel)
                       NULL);
         label = gtk_label_new (display_name);
         g_free (display_name);
-        gtk_notebook_append_page (GTK_NOTEBOOK (panel->priv->notebook), GTK_WIDGET (panel->priv->proxy_page), label);
         gtk_widget_show (GTK_WIDGET (panel->priv->proxy_page));
 
-        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (panel->priv->notebook),
-                                    FALSE);
         g_object_set (panel,
                       "current-page", panel->priv->proxy_page,
                       NULL);
+
+        gtk_container_add (GTK_CONTAINER (panel), panel->priv->proxy_page);
 }
 
 static GObject *
