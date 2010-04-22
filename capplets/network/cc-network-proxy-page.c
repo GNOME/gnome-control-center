@@ -727,7 +727,6 @@ update_locations (CcNetworkProxyPage *page)
                                 select = i;
                 }
         }
-        g_debug ("i = %d select = %d", i, select);
         if (select == -1) {
                 gtk_list_store_append (store, &titer);
                 gtk_list_store_set (store,
@@ -737,7 +736,6 @@ update_locations (CcNetworkProxyPage *page)
                                     -1);
                 select = i++;
         }
-        g_debug ("i = %d select = %d", i, select);
         gtk_widget_set_sensitive (page->priv->delete_button, i > 1);
 
         gtk_list_store_append (store, &titer);
