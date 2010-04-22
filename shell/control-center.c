@@ -242,6 +242,7 @@ fill_model (ShellData *data)
   GtkWidget *vbox;
 
   vbox = W (data->builder, "main-vbox");
+  gtk_widget_set_size_request (vbox, 0, -1);
 
   gtk_widget_modify_bg (vbox->parent, GTK_STATE_NORMAL,
                         &vbox->style->base[GTK_STATE_NORMAL]);
