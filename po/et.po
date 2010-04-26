@@ -17,9 +17,9 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-03-20 13:13+0000\n"
-"PO-Revision-Date: 2010-03-27 12:57+0200\n"
-"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
+"POT-Creation-Date: 2010-04-24 05:17+0000\n"
+"PO-Revision-Date: 2010-04-24 09:44+0300\n"
+"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -303,7 +303,7 @@ msgstr "Töö"
 msgid "Work _fax:"
 msgstr "_Faks tööl:"
 
-msgid "Zip/_Postal code:"
+msgid "ZIP/_Postal code:"
 msgstr "_Postiindeks:"
 
 msgid "_Address:"
@@ -312,8 +312,8 @@ msgstr "_Aadress:"
 msgid "_Department:"
 msgstr "_Osakond:"
 
-msgid "_Groupwise:"
-msgstr "_Groupwise:"
+msgid "_GroupWise:"
+msgstr "_GroupWise:"
 
 msgid "_Home page:"
 msgstr "_Koduleht:"
@@ -321,9 +321,6 @@ msgstr "_Koduleht:"
 #. Home vs Work (email)
 msgid "_Home:"
 msgstr "_Kodus:"
-
-msgid "_Jabber:"
-msgstr "_Jabber:"
 
 msgid "_Manager:"
 msgstr "_Juhataja:"
@@ -343,10 +340,13 @@ msgstr "_Ametinimetus:"
 msgid "_Work:"
 msgstr "_Tööl:"
 
+msgid "_XMPP:"
+msgstr "_XMPP:"
+
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-msgid "_Zip/Postal code:"
+msgid "_ZIP/Postal code:"
 msgstr "_Postiindeks:"
 
 msgid "Set your personal information"
@@ -1611,6 +1611,9 @@ msgstr "_Paneeli kaasamine"
 msgid "Left"
 msgstr "Vasakule"
 
+msgid "Make Default"
+msgstr "Määra vaikimisi sätteks"
+
 msgid "Monitor"
 msgstr "Kuvar"
 
@@ -1697,6 +1700,15 @@ msgstr "Kuvaseadistuse rakendamisel ei saadud seansisiiniga ühendust"
 
 msgid "Could not detect displays"
 msgstr "Kuvasid pole võimalik tuvastada"
+
+msgid "The monitor configuration has been saved"
+msgstr "Kuvari sätted salvestati"
+
+msgid "This configuration will be used the next time someone logs in."
+msgstr "Seda seadistust kasutatakse järgmisel sisselogimisel."
+
+msgid "Could not set the default configuration for monitors"
+msgstr "Kuvaritele pole võimalik vaikesätteid määrata"
 
 msgid "Could not get screen information"
 msgstr "Ekraani andmeid pole võimalik hankida"
@@ -1902,6 +1914,9 @@ msgstr "Klaviatuuri _mudel:"
 msgid "Layouts"
 msgstr "Paigutused"
 
+msgid "List of keyboard layouts selected for usage"
+msgstr "Kasutuseks valitud klaviatuuripaigutuste loend"
+
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1921,8 +1936,20 @@ msgstr "Liiguta ü_les"
 msgid "Move _Up"
 msgstr "Liiguta _alla"
 
+msgid "Move the selected keyboard layout down in the list"
+msgstr "Valitud klaviatuuripaigutuse liigutamine loendis allapoole"
+
+msgid "Move the selected keyboard layout up in the list"
+msgstr "Valitud klaviatuuripaigutuse liigutamine loendis ülespoole"
+
 msgid "New windows u_se active window's layout"
 msgstr "_Uued aknad kasutavad aktiivse akna paigutust"
+
+msgid "Print a diagram of the selected keyboard layout"
+msgstr "Valitud klaviatuuripaigutusest pildi printimine"
+
+msgid "Remove the selected keyboard layout from the list"
+msgstr "Valitud klaviatuuripaigutuse eemaldamine loendist"
 
 msgid "Repeat Keys"
 msgstr "Klahvide kordamine"
@@ -1930,11 +1957,21 @@ msgstr "Klahvide kordamine"
 msgid "Repeat keys speed"
 msgstr "Klahvide kordamise kiirus"
 
+msgid ""
+"Replace the current keyboard layout settings with the\n"
+"default settings"
+msgstr ""
+"Asenda praegused klaviatuurisätted\n"
+"vaikesätetega"
+
 msgid "Reset to De_faults"
 msgstr "Taasta _vaikeväärtused"
 
 msgid "S_peed:"
 msgstr "_Kiirus:"
+
+msgid "Select a keyboard layout to be added to the list"
+msgstr "Klaviatuuripaigutuse valimine loendisse lisamiseks"
 
 msgid "Short"
 msgstr "Lühike"
@@ -1944,6 +1981,9 @@ msgstr "Aeglane"
 
 msgid "Typing Break"
 msgstr "Tippimise vaheaeg"
+
+msgid "View and edit keyboard layout options"
+msgstr "Klaviatuuripaigutuse valikute kuvamine ja muutmine"
 
 msgid "_Acceleration:"
 msgstr "K_iirendus:"
@@ -2450,10 +2490,18 @@ msgid "_Take a Break"
 msgstr "_Tee vaheaeg"
 
 #, c-format
+msgid "Take a break now (next in %dm)"
+msgstr "Tee praegu vaheaeg (järgmiseni %dm)"
+
+#, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minut järgmise puhkepausini"
 msgstr[1] "%d minutit järgmise puhkepausini"
+
+#, c-format
+msgid "Take a break now (next in less than one minute)"
+msgstr "Tee praegu vaheaeg (järgmiseni on vähem kui minut)"
 
 #, c-format
 msgid "Less than one minute until the next break"
@@ -2733,6 +2781,9 @@ msgstr "<b>Ava %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Eemalda süsteemikirjetest"
+
+#~ msgid "_Jabber:"
+#~ msgstr "_Jabber:"
 
 #~ msgid "Display Preferences"
 #~ msgstr "Kuvaeelistused"
