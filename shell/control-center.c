@@ -158,7 +158,7 @@ main (int argc, char *argv[])
 		return 1;
 	}
 
-	unique_app = unique_app_new ("org.opensuse.yast-control-center-gnome", NULL);
+	unique_app = unique_app_new ("org.gnome.gnome-control-center.shell", NULL);
 	if (unique_app_is_running (unique_app)) {
 		int retval = 0;
 
