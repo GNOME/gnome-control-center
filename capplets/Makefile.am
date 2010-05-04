@@ -2,6 +2,7 @@ NULL =
 
 SUBDIRS = \
 	appearance		\
+	default-applications	\
 	keyboard		\
 	mouse			\
 	network			\

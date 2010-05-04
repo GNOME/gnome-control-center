@@ -5,7 +5,10 @@ bin_PROGRAMS = gnome-default-applications-properties
 
 bin_SCRIPTS = gnome-at-visual gnome-at-mobility
 
-gnome_default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_default_applications_properties_LDADD = \
+	$(GNOMECC_CAPPLETS_LIBS) \
+	$(EXTENSION_LIBS)
+
 gnome_default_applications_properties_SOURCES = \
 	gnome-da-capplet.c gnome-da-capplet.h \
 	gnome-da-xml.c gnome-da-xml.h \
@@ -40,6 +43,7 @@ xmldata_DATA = $(xmldata_in_files:.xml.in=.xml)
 
 INCLUDES   = 					\
 	$(GNOMECC_CAPPLETS_CFLAGS)		\
+	$(EXTENSION_CFLAGS)		\
 	$(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"\
 	-DGNOMECC_UI_DIR=\""$(uidir)"\"	\
