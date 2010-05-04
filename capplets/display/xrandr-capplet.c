@@ -35,8 +35,6 @@
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-bindings.h>
 
-#include "capplet-util.h"
-
 typedef struct App App;
 typedef struct GrabInfo GrabInfo;
 
@@ -47,7 +45,6 @@ struct App
     GnomeRRLabeler *labeler;
     GnomeOutputInfo         *current_output;
 
-    guint32         socket_id;
     GtkWidget	   *dialog;
     GtkWidget      *current_monitor_event_box;
     GtkWidget      *current_monitor_label;
@@ -2258,8 +2255,6 @@ apply_button_clicked_cb (GtkButton *button, gpointer data)
      */
 
     app->apply_button_clicked_timestamp = gtk_get_current_event_time ();
-
-    apply (app);
 }
 
 static GtkWidget*
@@ -2380,39 +2375,38 @@ run_application (App *app)
     /* Until we have help to show, we'll just hide the Help button */
     hide_help_button (app);
 
-    app->apply_button = _gtk_builder_get_widget (builder, "apply-button");
+    app->apply_button = _gtk_builder_get_widget (builder, "apply_button");
     g_signal_connect (app->apply_button, "clicked",
 		      G_CALLBACK (apply_button_clicked_cb), app);
 
-    g_signal_connect (_gtk_builder_get_widget (builder, "close-button"),
-                      "clicked", G_CALLBACK (gtk_main_quit), NULL);
-
     on_screen_changed (app->screen, app);
-
-    if (app->socket_id)
-    {
-      GtkWidget *content, *plug;
-
-      /* re-parent contents */
-      content = _gtk_builder_get_widget (builder, "dialog-vbox1");
-
-      plug = gtk_plug_new (app->socket_id);
-      gtk_widget_reparent (content, plug);
-      g_signal_connect (plug, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-
-      gtk_widget_show_all (plug);
-
-      gtk_widget_hide (_gtk_builder_get_widget (builder, "close-button"));
-      gtk_container_set_border_width (GTK_CONTAINER (content), 12);
-    }
-    else
-    {
-      gtk_widget_show (GTK_WIDGET (app->dialog));
-    }
 
     g_object_unref (builder);
 
-    gtk_main ();
+restart:
+    switch (gtk_dialog_run (GTK_DIALOG (app->dialog)))
+    {
+    default:
+	/* Fall Through */
+    case GTK_RESPONSE_DELETE_EVENT:
+    case GTK_RESPONSE_CLOSE:
+#if 0
+	g_debug ("Close");
+#endif
+	break;
+
+    case GTK_RESPONSE_HELP:
+#if 0
+	g_debug ("Help");
+#endif
+	goto restart;
+	break;
+
+    case GTK_RESPONSE_APPLY:
+	apply (app);
+	goto restart;
+	break;
+    }
 
     gtk_widget_destroy (app->dialog);
     gnome_rr_screen_destroy (app->screen);
@@ -2423,31 +2417,14 @@ int
 main (int argc, char **argv)
 {
     App *app;
-    static guint32 socket_id = 0;
 
-    GOptionContext *context;
-    static GOptionEntry cap_options[] = {
-          { "socket",
-            's',
-            G_OPTION_FLAG_IN_MAIN,
-            G_OPTION_ARG_INT,
-            &socket_id,
-            /* TRANSLATORS: don't translate the terms in brackets */
-            N_("ID of the socket to embed in"),
-            N_("socket") },
+    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
 
-          { NULL }
-    };
-
-
-    context = g_option_context_new (_("- GNOME Display Preferences"));
-    g_option_context_add_main_entries (context, cap_options,
-                                       GETTEXT_PACKAGE);
-
-    capplet_init (context, &argc, &argv);
+    gtk_init (&argc, &argv);
 
     app = g_new0 (App, 1);
-    app->socket_id = socket_id;
 
     run_application (app);
 
