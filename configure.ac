@@ -1,4 +1,5 @@
-AC_INIT([gnome-control-center], [2.31.1],
+m4_define([gnome_control_center_version], 2.31.1)
+AC_INIT([gnome-control-center], [gnome_control_center_version],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -314,6 +315,12 @@ AC_ARG_ENABLE(update-mimedb,
                    enable_update_mimedb=yes)
 AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
 
+# check for gtk-doc
+GTK_DOC_CHECK([1.9])
+
+CONTROL_CENTER_VERSION=gnome_control_center_version
+AC_SUBST(CONTROL_CENTER_VERSION)
+
 
 AC_CONFIG_FILES([
 Makefile
@@ -347,9 +354,15 @@ capplets/network/Makefile
 capplets/network/gnome-network-properties.desktop.in
 capplets/windows/Makefile
 capplets/windows/window-properties.desktop.in
+docs/Makefile
+docs/reference/Makefile
+docs/reference/libgnome-control-center/Makefile
+docs/reference/libgnome-control-center/version.xml
 font-viewer/Makefile
 font-viewer/gnome-font-viewer.desktop.in
 help/Makefile
+libgnome-control-center/Makefile
+libgnome-control-center/libgnome-control-center.pc
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
 po/Makefile.in

@@ -24,4 +24,6 @@ if ! which gnome-autogen.sh ; then
   exit 1
 fi
 
+gtkdocize || exit 1
+
 REQUIRED_AUTOMAKE_VERSION=1.9 . gnome-autogen.sh

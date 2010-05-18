@@ -1,4 +1,5 @@
-SUBDIRS = po libwindow-settings capplets font-viewer help
+SUBDIRS = po libwindow-settings libgnome-control-center capplets font-viewer \
+	  help docs
 DIST_SUBDIRS = po libwindow-settings capplets font-viewer help libslab shell typing-break
 
 if HAVE_LIBSLAB_DEPS
@@ -50,7 +51,7 @@ EXTRA_DIST = \
 	MAINTAINERS \
 	gnome-doc-utils.make
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb --enable-gtk-doc
 
 GITIGNOREFILES=m4
 
