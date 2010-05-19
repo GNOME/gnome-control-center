@@ -1,14 +1,6 @@
-SUBDIRS = po libwindow-settings libgnome-control-center capplets font-viewer \
-	  help docs
-DIST_SUBDIRS = po libwindow-settings capplets font-viewer help libslab shell typing-break
-
-if HAVE_LIBSLAB_DEPS
-SUBDIRS += libslab
-endif
-
-if HAVE_LIBSLAB
-SUBDIRS += shell
-endif
+SUBDIRS = po libwindow-settings libgnome-control-center shell capplets \
+	  font-viewer help docs
+DIST_SUBDIRS = po libwindow-settings capplets font-viewer help shell typing-break
 
 if HAVE_TYPING_BREAK
 SUBDIRS += typing-break

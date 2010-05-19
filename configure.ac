@@ -142,32 +142,6 @@ AC_SUBST(GTK_ENGINE_DIR)
 PKG_CHECK_MODULES(GLIB, glib-2.0)
 
 dnl
-dnl Check dependencies of libslab
-dnl
-PKG_CHECK_MODULES(EXTERNAL_LIBSLAB, [libslab], have_libslab=yes, have_libslab=no)
-
-if test $have_libslab = no; then
-	PKG_CHECK_MODULES(LIBSLAB, [
-				   gio-2.0 gnome-desktop-2.0 librsvg-2.0 libgnome-menu pango gconf-2.0
-				   ],
-				   have_libslab_deps=yes,
-				   have_libslab_deps=no)
-	WARN_CFLAGS="-Wall"
-else
-	have_libslab_deps=no
-fi
-
-AC_SUBST(EXTERNAL_LIBSLAB_CFLAGS)
-AC_SUBST(EXTERNAL_LIBSLAB_LIBS)
-AC_SUBST(LIBSLAB_CFLAGS)
-AC_SUBST(LIBSLAB_LIBS)
-AC_SUBST(WARN_CFLAGS)
-
-AM_CONDITIONAL(HAVE_LIBSLAB, [test $have_libslab = yes -o $have_libslab_deps = yes])
-AM_CONDITIONAL(HAVE_LIBSLAB_DEPS, [test $have_libslab_deps = yes])
-AM_CONDITIONAL(LIBSLAB_FOR_INTERNAL_USE, test "yes" = "yes")
-
-dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
 dnl when we have it.
 dnl
@@ -366,7 +340,6 @@ libgnome-control-center/libgnome-control-center.pc
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
 po/Makefile.in
-libslab/Makefile
 shell/Makefile
 shell/gnome-control-center.desktop.in
 typing-break/Makefile
