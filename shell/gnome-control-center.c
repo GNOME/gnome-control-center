@@ -67,22 +67,61 @@ struct _GnomeControlCenterPrivate
   gchar *filter_string;
 
   guint32 last_time;
+
+  GIOExtensionPoint *extension_point;
 };
 
 
 static void
 activate_panel (GnomeControlCenter *shell,
-                const gchar *id,
-                const gchar *desktop_file)
+                const gchar        *id,
+                const gchar        *desktop_file)
 {
   GnomeControlCenterPrivate *priv = shell->priv;
   GAppInfo *appinfo;
   GError *err = NULL;
   GdkAppLaunchContext *ctx;
   GKeyFile *key_file;
+  GType panel_type = G_TYPE_INVALID;
+  GList *panels, *l;
 
-  /* start app directly */
+  /* check if there is an plugin that implements this panel */
+  panels = g_io_extension_point_get_extensions (priv->extension_point);
 
+  for (l = panels; l != NULL; l = l->next)
+    {
+      GIOExtension *extension;
+      const gchar *name;
+
+      extension = l->data;
+
+      name = g_io_extension_get_name (extension);
+
+      if (!g_strcmp0 (name, id))
+        {
+          panel_type = g_io_extension_get_type (extension);
+          break;
+        }
+    }
+
+  if (panel_type != G_TYPE_INVALID)
+    {
+      GtkWidget *panel;
+      gint i;
+
+      /* create the panel plugin */
+      panel = g_object_new (panel_type, "shell", shell, NULL);
+
+      /* switch to the new panel */
+      i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), panel, NULL);
+      gtk_widget_show_all (panel);
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
+
+      return;
+    }
+
+
+  /* if a plugin was not found, then start app directly */
   if (!desktop_file)
     return;
 
@@ -407,6 +446,30 @@ fill_model (GnomeControlCenter *shell)
 
 }
 
+static void
+load_panel_plugins (GnomeControlCenter *shell)
+{
+  GType panel_type;
+  GList *modules;
+
+  /* only allow this function to be run once to prevent modules being loaded
+   * twice
+   */
+  if (shell->priv->extension_point)
+    return;
+
+  /* make sure the base type is registered */
+  panel_type = g_type_from_name ("CcPanel");
+
+  shell->priv->extension_point
+    = g_io_extension_point_register (CC_SHELL_PANEL_EXTENSION_POINT);
+
+  /* load all the plugins in the panels directory */
+  modules = g_io_modules_load_all_in_directory (PANELS_DIR);
+  g_list_free (modules);
+
+}
+
 
 static void
 home_button_clicked_cb (GtkButton *button,
@@ -640,6 +703,9 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   /* load the available settings panels */
   fill_model (self);
+
+  /* load the panels that are implemented as plugins */
+  load_panel_plugins (self);
 
   /* setup search functionality */
   setup_search (self);
