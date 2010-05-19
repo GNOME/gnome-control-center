@@ -1,30 +1,61 @@
-if HAVE_LIBSLAB_DEPS
-REAL_LIBSLAB_CFLAGS = -I$(top_srcdir)/libslab
-REAL_LIBSLAB_LIBS = $(top_builddir)/libslab/libslab.la
-else
-REAL_LIBSLAB_CFLAGS = $(EXTERNAL_LIBSLAB_CFLAGS)
-REAL_LIBSLAB_LIBS = $(EXTERNAL_LIBSLAB_LIBS)
-endif
+NULL =
 
 INCLUDES =					\
 	-I$(top_srcdir)				\
-	$(REAL_LIBSLAB_CFLAGS)			\
-	$(GNOMECC_SHELL_CFLAGS)
+	-I$(top_srcdir)/libgnome-control-center \
+	$(GIO_CFLAGS)				\
+	$(GNOMECC_SHELL_CFLAGS)			\
+	$(NULL)
 
-bin_PROGRAMS = gnome-control-center 
+bin_PROGRAMS = gnome-control-center
 
-gnome_control_center_SOURCES =		\
-	control-center.c
+MARSHAL_FILES = cc-shell-marshal.c cc-shell-marshal.h
+BUILT_SOURCES = $(MARSHAL_FILES)
 
-gnome_control_center_LDADD =						\
-	$(GNOMECC_SHELL_LIBS)						\
-	$(REAL_LIBSLAB_LIBS)
+cc-shell-marshal.h: cc-shell-marshal.list
+	@GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --header > $@
+
+cc-shell-marshal.c: cc-shell-marshal.list
+	@GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --body --header > $@
+
+gnome_control_center_SOURCES =			\
+	control-center.c			\
+	control-center.h			\
+	gnome-control-center.c			\
+	gnome-control-center.h			\
+	shell-search-renderer.c			\
+	shell-search-renderer.h			\
+	cc-shell-category-view.c		\
+	cc-shell-category-view.h		\
+	cc-shell-item-view.c			\
+	cc-shell-item-view.h			\
+	cc-shell-model.c			\
+	cc-shell-model.h			\
+	$(MARSHAL_FILES)			\
+	$(NULL)
+
+gnome_control_center_LDADD =			\
+	$(top_builddir)/libgnome-control-center/libgnome-control-center.la \
+	$(GNOMECC_SHELL_LIBS)			\
+	$(GIO_LIBS)				\
+	$(NULL)
+
+gnome_control_center_LDFLAGS = -export-dynamic
 
 AM_CPPFLAGS =							\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
+	-DUIDIR="\"$(uidir)\""					\
+	-DMENUDIR="\"$(menudir)\""				\
+	$(NULL)
+
+menudir = $(sysconfdir)/xdg/menus
+menu_DATA = gnomecc.menu
+
+uidir = $(pkgdatadir)/ui
+ui_DATA = shell.ui
 
 sysdir = $(datadir)/applications
-sys_in_files = gnomecc.desktop.in
+sys_in_files = gnome-control-center.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
@@ -46,11 +77,15 @@ if GCONF_SCHEMAS_INSTALL
 	fi
 endif
 
-menudir = $(sysconfdir)/xdg/menus
-menu_DATA = gnomecc.menu
+EXTRA_DIST = 					\
+	$(ui_DATA)				\
+	gnome-control-center.desktop.in.in	\
+	gnomecc.directory.in			\
+	gnomecc.menu				\
+	cc-shell-marshal.list			\
+	$(schemas_DATA).in			\
+	$(NULL)
 
-EXTRA_DIST = gnomecc.desktop.in.in gnomecc.directory.in gnomecc.menu $(schemas_DATA).in
-
-DISTCLEANFILES = gnomecc.desktop gnomecc.desktop.in gnomecc.directory $(schemas_DATA)
+DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory $(schemas_DATA)
 
 -include $(top_srcdir)/git.mk

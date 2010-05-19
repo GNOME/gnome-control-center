@@ -125,7 +125,7 @@ COMMON_MODULES="gtk+-2.0 >= 2.20.0 dnl
  gnome-desktop-2.0 >= 2.29.4"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1)
-PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu unique-1.0)
+PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu unique-1.0 gio-unix-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
@@ -368,7 +368,7 @@ libwindow-settings/gnome-window-settings-2.0.pc
 po/Makefile.in
 libslab/Makefile
 shell/Makefile
-shell/gnomecc.desktop.in
+shell/gnome-control-center.desktop.in
 typing-break/Makefile
 ])
 
