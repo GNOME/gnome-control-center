@@ -277,6 +277,25 @@ AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
 AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
 AC_SUBST(GNOMECC_CAPPLETS_LIBS)
 
+
+
+dnl =======================================
+dnl Panels
+dnl =======================================
+
+PANELS_DIR="${libdir}/control-center-1/panels"
+AC_SUBST(PANELS_DIR)
+
+PANEL_CFLAGS="-I\$(top_srcdir)/libgnome-control-center/"
+AC_SUBST(PANEL_CFLAGS)
+
+PANEL_LIBS="\$(top_builddir)/libgnome-control-center/libgnome-control-center.la"
+AC_SUBST(PANEL_LIBS)
+
+PANEL_LDFLAGS="-export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'"
+AC_SUBST(PANEL_LDFLAGS)
+
+
 dnl =======================================
 dnl Update Mime Database
 dnl =======================================

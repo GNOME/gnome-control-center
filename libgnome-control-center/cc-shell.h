@@ -48,6 +48,9 @@ G_BEGIN_DECLS
   (G_TYPE_INSTANCE_GET_CLASS ((obj), \
   CC_TYPE_SHELL, CcShellClass))
 
+
+#define CC_SHELL_PANEL_EXTENSION_POINT "control-center-1"
+
 typedef struct _CcShell CcShell;
 typedef struct _CcShellClass CcShellClass;
 typedef struct _CcShellPrivate CcShellPrivate;
