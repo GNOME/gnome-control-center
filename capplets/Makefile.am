@@ -6,7 +6,6 @@ SUBDIRS = \
 	display			\
 	keybindings		\
 	keyboard		\
-	mouse			\
 	network			\
 	windows
 
@@ -17,7 +16,6 @@ DIST_SUBDIRS = \
 	default-applications	\
 	keybindings		\
 	keyboard		\
-	mouse			\
 	network			\
 	windows			\
 	display 		\

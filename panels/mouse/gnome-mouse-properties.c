@@ -34,8 +34,8 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "activate-settings-daemon.h"
-#include "capplet-stock-icons.h"
 #include "gnome-mouse-accessibility.h"
+#include "capplet-stock-icons.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -511,19 +511,10 @@ setup_dialog (GtkBuilder *dialog, GConfChangeSet *changeset)
 
 /* Construct the dialog */
 
-static GtkBuilder *
-create_dialog (void)
+static void
+create_dialog (GtkBuilder *dialog)
 {
-	GtkBuilder   *dialog;
 	GtkSizeGroup *size_group;
-	GError       *error = NULL;
-
-	dialog = gtk_builder_new ();
-	gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR "/gnome-mouse-properties.ui", &error);
-	if (error != NULL) {
-		g_warning ("Error loading UI file: %s", error->message);
-		return NULL;
-	}
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("acceleration_label"));
@@ -558,7 +549,6 @@ create_dialog (void)
 	gtk_size_group_add_widget (size_group, WID ("dwell_delay_long_label"));
 	gtk_size_group_add_widget (size_group, WID ("dwell_threshold_large_label"));
 
-	return dialog;
 }
 
 /* Callback issued when a button is clicked on the dialog */
@@ -573,28 +563,11 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changes
 		gtk_main_quit ();
 }
 
-int
-main (int argc, char **argv)
+GtkWidget *
+gnome_mouse_properties_init (GConfClient *client, GtkBuilder *dialog)
 {
-	GConfClient    *client;
-	GtkBuilder     *dialog;
 	GtkWidget      *dialog_win, *w;
 	gchar *start_page = NULL;
-
-	GOptionContext *context;
-	GOptionEntry cap_options[] = {
-		{"show-page", 'p', G_OPTION_FLAG_IN_MAIN,
-		 G_OPTION_ARG_STRING,
-		 &start_page,
-		 /* TRANSLATORS: don't translate the terms in brackets */
-		 N_("Specify the name of the page to show (general|accessibility)"),
-		 N_("page") },
-		{NULL}
-	};
-
-	context = g_option_context_new (_("- GNOME Mouse Preferences"));
-	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
-	capplet_init (context, &argc, &argv);
 
 	capplet_init_stock_icons ();
 
@@ -604,7 +577,7 @@ main (int argc, char **argv)
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/touchpad", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	dialog = create_dialog ();
+	create_dialog (dialog);
 
 	if (dialog) {
 		setup_dialog (dialog, NULL);
@@ -634,14 +607,7 @@ main (int argc, char **argv)
 		}
 
 		capplet_set_icon (dialog_win, "input-mouse");
-		gtk_widget_show (dialog_win);
-
-		gtk_main ();
-
-		g_object_unref (dialog);
 	}
 
-	g_object_unref (client);
-
-	return 0;
+	return dialog_win;
 }

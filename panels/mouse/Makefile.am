@@ -1,13 +1,29 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = mouse
 
-bin_PROGRAMS = gnome-mouse-properties
+INCLUDES = 						\
+	$(PANEL_CFLAGS)					\
+	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
+	-DGNOMECC_UI_DIR="\"$(uidir)\""
+	$(NULL)
 
-gnome_mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_mouse_properties_SOURCES =	\
+
+ccpanelsdir = $(PANELS_DIR)
+ccpanels_LTLIBRARIES = libmouse-properties.la
+
+libmouse_properties_la_SOURCES =	\
+	mouse-module.c			\
+	cc-mouse-panel.c		\
+	cc-mouse-panel.h		\
 	gnome-mouse-properties.c	\
 	gnome-mouse-accessibility.c	\
 	gnome-mouse-accessibility.h
+
+libmouse_properties_la_LIBADD = $(PANEL_LIBS) \
+	$(top_builddir)/capplets/common/libcommon.la
+libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -24,11 +40,6 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-settings-mouse.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES = \
-	$(GNOMECC_CAPPLETS_CFLAGS) \
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	-DGNOMECC_UI_DIR="\"$(uidir)\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(ui_DATA) $(pixmap_DATA)
 
