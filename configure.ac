@@ -295,6 +295,19 @@ AC_SUBST(PANEL_LIBS)
 PANEL_LDFLAGS="-export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'"
 AC_SUBST(PANEL_LDFLAGS)
 
+dnl ==============================================
+dnl Example Panel
+dnl ==============================================
+
+AC_MSG_CHECKING([whether to build the example panel])
+AC_ARG_ENABLE([examples],
+   AC_HELP_STRING([--enable-examples],
+                  [enable the examples]),,
+   [enable_examples=no])
+AC_MSG_RESULT([$enable_examples])
+
+AM_CONDITIONAL(BUILD_EXAMPLES, test "x$enable_examples" = "xyes")
+
 
 dnl =======================================
 dnl Update Mime Database
@@ -351,6 +364,8 @@ docs/Makefile
 docs/reference/Makefile
 docs/reference/libgnome-control-center/Makefile
 docs/reference/libgnome-control-center/version.xml
+examples/Makefile
+examples/gnome-example-panel.desktop.in
 font-viewer/Makefile
 font-viewer/gnome-font-viewer.desktop.in
 help/Makefile

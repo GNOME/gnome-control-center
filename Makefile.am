@@ -1,9 +1,13 @@
 SUBDIRS = po libwindow-settings libgnome-control-center shell capplets \
 	  font-viewer help docs
-DIST_SUBDIRS = po libwindow-settings capplets font-viewer help shell typing-break
+DIST_SUBDIRS = po libwindow-settings capplets font-viewer help shell typing-break examples
 
 if HAVE_TYPING_BREAK
 SUBDIRS += typing-break
+endif
+
+if BUILD_EXAMPLES
+SUBDIRS += examples
 endif
 
 schemasdir   = @GCONF_SCHEMA_FILE_DIR@
