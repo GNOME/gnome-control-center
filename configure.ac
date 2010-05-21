@@ -2,7 +2,6 @@ m4_define([gnome_control_center_version], 2.31.1)
 AC_INIT([gnome-control-center], [gnome_control_center_version],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
-AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([shell])
 AC_CONFIG_HEADERS([config.h])
 

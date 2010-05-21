@@ -1,6 +1,6 @@
 SUBDIRS = po libwindow-settings libgnome-control-center shell capplets panels \
 	  font-viewer help docs
-DIST_SUBDIRS = po libwindow-settings capplets font-viewer help shell typing-break examples
+DIST_SUBDIRS = po libwindow-settings capplets font-viewer help shell typing-break docs examples panels libgnome-control-center
 
 if HAVE_TYPING_BREAK
 SUBDIRS += typing-break
@@ -47,7 +47,7 @@ EXTRA_DIST = \
 	MAINTAINERS \
 	gnome-doc-utils.make
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb --enable-gtk-doc
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb --enable-gtk-doc --enable-examples
 
 GITIGNOREFILES=m4
 
