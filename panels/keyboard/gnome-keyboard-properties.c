@@ -43,17 +43,11 @@ enum {
 	RESPONSE_CLOSE
 };
 
-static GtkBuilder *
-create_dialog (void)
+static void
+create_dialog (GtkBuilder * dialog)
 {
-	GtkBuilder *dialog;
 	GtkSizeGroup *size_group;
 	GtkWidget *image;
-
-	dialog = gtk_builder_new ();
-    gtk_builder_add_from_file (dialog, GNOMECC_UI_DIR
-                               "/gnome-keyboard-properties-dialog.ui",
-                               NULL);
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("repeat_slow_label"));
@@ -70,16 +64,19 @@ create_dialog (void)
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("repeat_delay_scale"));
 	gtk_size_group_add_widget (size_group, WID ("repeat_speed_scale"));
-	gtk_size_group_add_widget (size_group, WID ("cursor_blink_time_scale"));
+	gtk_size_group_add_widget (size_group,
+				   WID ("cursor_blink_time_scale"));
 	g_object_unref (G_OBJECT (size_group));
 
-	image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
+	image =
+	    gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (WID ("xkb_layouts_add")), image);
 
-	image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")), image);
-
-	return dialog;
+	image =
+	    gtk_image_new_from_stock (GTK_STOCK_REFRESH,
+				      GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")),
+			      image);
 }
 
 static GConfValue *
@@ -157,26 +154,34 @@ setup_dialog (GtkBuilder * dialog, GConfChangeSet * changeset)
 		g_free (monitor);
 
 		peditor = gconf_peditor_new_boolean
-			(changeset, "/desktop/gnome/typing_break/enabled",
-	     		WID ("break_enabled_toggle"), NULL);
-		gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
-						WID ("break_details_table"));
+		    (changeset, "/desktop/gnome/typing_break/enabled",
+		     WID ("break_enabled_toggle"), NULL);
+		gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR
+						(peditor),
+						WID
+						("break_details_table"));
 		gconf_peditor_new_numeric_range (changeset,
 						 "/desktop/gnome/typing_break/type_time",
-						 WID ("break_enabled_spin"), NULL);
+						 WID
+						 ("break_enabled_spin"),
+						 NULL);
 		gconf_peditor_new_numeric_range (changeset,
 						 "/desktop/gnome/typing_break/break_time",
-						 WID ("break_interval_spin"),
+						 WID
+						 ("break_interval_spin"),
 						 NULL);
 		gconf_peditor_new_boolean (changeset,
 					   "/desktop/gnome/typing_break/allow_postpone",
-					   WID ("break_postponement_toggle"),
+					   WID
+					   ("break_postponement_toggle"),
 					   NULL);
 
 	} else {
 		/* don't show the typing break tab if the daemon is not available */
 		GtkNotebook *nb = GTK_NOTEBOOK (WID ("keyboard_notebook"));
-		gint tb_page = gtk_notebook_page_num (nb, WID ("break_enabled_toggle"));
+		gint tb_page =
+		    gtk_notebook_page_num (nb,
+					   WID ("break_enabled_toggle"));
 		gtk_notebook_remove_page (nb, tb_page);
 	}
 
@@ -187,79 +192,27 @@ setup_dialog (GtkBuilder * dialog, GConfChangeSet * changeset)
 	setup_a11y_tabs (dialog, changeset);
 }
 
-int
-main (int argc, char **argv)
+
+GtkWidget *
+gnome_keyboard_properties_init (GConfClient * client, GtkBuilder * dialog)
 {
-	GConfClient *client;
-	GConfChangeSet *changeset;
-	GtkBuilder *dialog;
-	GOptionContext *context;
-
-	static gboolean apply_only = FALSE;
-	static gboolean switch_to_typing_break_page = FALSE;
-	static gboolean switch_to_a11y_page = FALSE;
-
-	static GOptionEntry cap_options[] = {
-		{"apply", 0, 0, G_OPTION_ARG_NONE, &apply_only,
-		 N_
-		 ("Just apply settings and quit (compatibility only; now handled by daemon)"),
-		 NULL},
-		{"init-session-settings", 0, 0, G_OPTION_ARG_NONE,
-		 &apply_only,
-		 N_
-		 ("Just apply settings and quit (compatibility only; now handled by daemon)"),
-		 NULL},
-		{"typing-break", 0, 0, G_OPTION_ARG_NONE,
-		 &switch_to_typing_break_page,
-		 N_
-		 ("Start the page with the typing break settings showing"),
-		 NULL},
-		{"a11y", 0, 0, G_OPTION_ARG_NONE,
-		 &switch_to_a11y_page,
-		 N_
-		 ("Start the page with the accessibility settings showing"),
-		 NULL},
-		{NULL}
-	};
-
-
-	context = g_option_context_new (_("- GNOME Keyboard Preferences"));
-	g_option_context_add_main_entries (context, cap_options,
-					   GETTEXT_PACKAGE);
-
-	capplet_init (context, &argc, &argv);
-
+	GtkWidget *dialog_win = NULL;
 	activate_settings_daemon ();
 
-	client = gconf_client_get_default ();
 	gconf_client_add_dir (client,
 			      "/desktop/gnome/peripherals/keyboard",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (client, "/desktop/gnome/interface",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	g_object_unref (client);
-
-	changeset = NULL;
-	dialog = create_dialog ();
-	setup_dialog (dialog, changeset);
-	if (switch_to_typing_break_page) {
-		gtk_notebook_set_current_page (GTK_NOTEBOOK
-					       (WID
-						("keyboard_notebook")),
-					       4);
-	}
-	else if (switch_to_a11y_page) {
-		gtk_notebook_set_current_page (GTK_NOTEBOOK
-					       (WID
-						("keyboard_notebook")),
-					       2);
-
+	create_dialog (dialog);
+	if (dialog) {
+		setup_dialog (dialog, NULL);
+		dialog_win = WID ("keyboard_dialog");
+		/* g_signal_connect (dialog_win, "response",
+		   G_CALLBACK (dialog_response_cb), NULL); */
+		capplet_set_icon (dialog_win,
+				  "preferences-desktop-keyboard");
 	}
 
-	capplet_set_icon (WID ("keyboard_dialog"),
-			  "preferences-desktop-keyboard");
-	gtk_widget_show (WID ("keyboard_dialog"));
-	gtk_main ();
-
-	return 0;
+	return dialog_win;
 }

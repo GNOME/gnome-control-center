@@ -5,7 +5,6 @@ SUBDIRS = \
 	default-applications	\
 	display			\
 	keybindings		\
-	keyboard		\
 	network			\
 	windows
 
@@ -15,7 +14,6 @@ DIST_SUBDIRS = \
 	appearance		\
 	default-applications	\
 	keybindings		\
-	keyboard		\
 	network			\
 	windows			\
 	display 		\

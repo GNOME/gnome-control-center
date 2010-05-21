@@ -390,8 +390,6 @@ capplets/display/display-properties.desktop.in
 capplets/keybindings/Makefile
 capplets/keybindings/gnome-keybindings.pc
 capplets/keybindings/keybinding.desktop.in
-capplets/keyboard/Makefile
-capplets/keyboard/keyboard.desktop.in
 capplets/network/Makefile
 capplets/network/gnome-network-properties.desktop.in
 capplets/windows/Makefile
@@ -412,6 +410,8 @@ libwindow-settings/gnome-window-settings-2.0.pc
 panels/Makefile
 panels/mouse/Makefile
 panels/mouse/gnome-settings-mouse.desktop.in
+panels/keyboard/Makefile
+panels/keyboard/keyboard.desktop.in
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in

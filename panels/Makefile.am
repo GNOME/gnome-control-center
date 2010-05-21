@@ -1,1 +1,1 @@
-SUBDIRS=mouse
+SUBDIRS=mouse keyboard
