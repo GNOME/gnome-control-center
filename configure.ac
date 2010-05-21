@@ -238,13 +238,13 @@ AC_ARG_WITH([window_manager],
             [with_window_manager=${withval}],
             [with_window_manager=metacity])
 
-AS_IF([test "x$with_window_manager" == "xmetacity"],
+AS_IF([test "x$with_window_manager" = "xmetacity"],
       [WM_REQUIRES="libmetacity-private >= 2.23.1"
        AC_DEFINE(HAVE_METACITY, 1, [defined if using metacity])],
-      [test "x$with_window_manager" == "xmutter"],
+      [test "x$with_window_manager" = "xmutter"],
       [WM_REQUIRES="libmutter-private >= 2.23.1"
        AC_DEFINE(HAVE_MUTTER, 1, [defined if using mutter])],
-      [AC_MSG_FAILURE([Unsuported window manager: "$with_window_manager"])])
+      [AC_MSG_FAILURE([Unsupported window manager: "$with_window_manager"])])
 
 PKG_CHECK_MODULES(WINDOW_MANAGER, $WM_REQUIRES)
 
