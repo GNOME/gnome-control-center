@@ -33,7 +33,6 @@
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
-#include "activate-settings-daemon.h"
 #include "gnome-mouse-accessibility.h"
 #include "capplet-stock-icons.h"
 
@@ -556,11 +555,13 @@ create_dialog (GtkBuilder *dialog)
 static void
 dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset)
 {
+/*
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
 			      "goscustperiph-5");
 	else
 		gtk_main_quit ();
+*/
 }
 
 GtkWidget *
@@ -570,8 +571,6 @@ gnome_mouse_properties_init (GConfClient *client, GtkBuilder *dialog)
 	gchar *start_page = NULL;
 
 	capplet_init_stock_icons ();
-
-	activate_settings_daemon ();
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -606,7 +605,6 @@ gnome_mouse_properties_init (GConfClient *client, GtkBuilder *dialog)
 			g_free (page_name);
 		}
 
-		capplet_set_icon (dialog_win, "input-mouse");
 	}
 
 	return dialog_win;

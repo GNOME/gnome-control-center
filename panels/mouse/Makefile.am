@@ -6,7 +6,8 @@ INCLUDES = 						\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
-	-DGNOMECC_UI_DIR="\"$(uidir)\""
+	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
+	-DPIXMAP_DIR=\""$(datadir)/gnome-control-center/pixmaps"\"	\
 	$(NULL)
 
 
@@ -19,10 +20,11 @@ libmouse_properties_la_SOURCES =	\
 	cc-mouse-panel.h		\
 	gnome-mouse-properties.c	\
 	gnome-mouse-accessibility.c	\
-	gnome-mouse-accessibility.h
+	gnome-mouse-accessibility.h	\
+	capplet-stock-icons.c		\
+	capplet-stock-icons.h
 
-libmouse_properties_la_LIBADD = $(PANEL_LIBS) \
-	$(top_builddir)/capplets/common/libcommon.la
+libmouse_properties_la_LIBADD = $(PANEL_LIBS)
 libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@

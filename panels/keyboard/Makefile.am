@@ -27,8 +27,7 @@ libkeyboard_properties_la_SOURCES =	\
 	        gnome-keyboard-properties-xkbpv.c \
 	        gnome-keyboard-properties-xkb.h
 
-libkeyboard_properties_la_LIBADD = $(PANEL_LIBS) $(LIBGNOMEKBDUI_LIBS) \
-	$(top_builddir)/capplets/common/libcommon.la
+libkeyboard_properties_la_LIBADD = $(PANEL_LIBS) $(LIBGNOMEKBDUI_LIBS)
 
 libkeyboard_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 

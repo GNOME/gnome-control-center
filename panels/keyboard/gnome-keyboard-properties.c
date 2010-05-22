@@ -32,8 +32,6 @@
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
-#include "activate-settings-daemon.h"
-#include "capplet-stock-icons.h"
 
 #include "gnome-keyboard-properties-a11y.h"
 #include "gnome-keyboard-properties-xkb.h"
@@ -109,10 +107,12 @@ static void
 dialog_response (GtkWidget * widget,
 		 gint response_id, GConfChangeSet * changeset)
 {
+/*
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (widget), "goscustperiph-2");
 	else
 		gtk_main_quit ();
+*/
 }
 
 static void
@@ -197,7 +197,6 @@ GtkWidget *
 gnome_keyboard_properties_init (GConfClient * client, GtkBuilder * dialog)
 {
 	GtkWidget *dialog_win = NULL;
-	activate_settings_daemon ();
 
 	gconf_client_add_dir (client,
 			      "/desktop/gnome/peripherals/keyboard",
@@ -210,8 +209,6 @@ gnome_keyboard_properties_init (GConfClient * client, GtkBuilder * dialog)
 		dialog_win = WID ("keyboard_dialog");
 		/* g_signal_connect (dialog_win, "response",
 		   G_CALLBACK (dialog_response_cb), NULL); */
-		capplet_set_icon (dialog_win,
-				  "preferences-desktop-keyboard");
 	}
 
 	return dialog_win;

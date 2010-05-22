@@ -11,6 +11,8 @@ lib_LTLIBRARIES = libgnome-control-center.la
 libgnome_control_center_include_HEADERS =	\
 	cc-panel.h				\
 	cc-shell.h				\
+	gconf-property-editor.h			\
+	gconf-property-editor-marshal.h 	\
 	$(NULL)
 
 libgnome_control_center_la_SOURCES =		\
@@ -18,6 +20,10 @@ libgnome_control_center_la_SOURCES =		\
 	cc-panel.h				\
 	cc-shell.c				\
 	cc-shell.h				\
+	gconf-property-editor-marshal.c 	\
+	gconf-property-editor-marshal.h 	\
+	gconf-property-editor.c			\
+	gconf-property-editor.h			\
 	$(NULL)
 
 libgnome_control_center_la_LDFLAGS =		\
