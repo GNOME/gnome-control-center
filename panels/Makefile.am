@@ -1,1 +1,1 @@
-SUBDIRS=mouse keyboard
+SUBDIRS=mouse keyboard network

@@ -1,10 +1,17 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = network
 
-bin_PROGRAMS = gnome-network-properties
+ccpanelsdir = $(PANELS_DIR)
+ccpanels_LTLIBRARIES = libnetwork.la
 
-gnome_network_properties_SOURCES = gnome-network-properties.c
-gnome_network_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+
+libnetwork_la_SOURCES = gnome-network-properties.c \
+			cc-network-panel.c \
+			cc-network-panel.h \
+			network-module.c
+libnetwork_la_LIBADD = $(PANEL_LIBS)
+libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
+
 
 @INTLTOOL_DESKTOP_RULE@
 

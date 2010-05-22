@@ -24,6 +24,8 @@
 #  include <config.h>
 #endif
 
+#include "cc-network-panel.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
@@ -255,7 +257,7 @@ cb_http_details_button_clicked (GtkWidget *button,
 	details_dialog = widget = _gtk_builder_get_widget (builder,
 							   "details_dialog");
 
-	gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (parent));
+	gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (gtk_widget_get_toplevel (parent)));
 
 	g_signal_connect (gtk_builder_get_object (builder, "use_auth_checkbutton"),
 			  "toggled",
@@ -278,7 +280,7 @@ cb_http_details_button_clicked (GtkWidget *button,
 	g_signal_connect (widget, "response",
 			  G_CALLBACK (cb_details_dialog_response), NULL);
 
-	capplet_set_icon (widget, "gnome-network-properties");
+	/* capplet_set_icon (widget, "gnome-network-properties"); */
 
 	gtk_widget_show_all (widget);
 }
@@ -849,7 +851,8 @@ cb_location_changed (GtkWidget *location,
 	{
 		if (strcmp (name, _("New Location...")) == 0)
 		{
-			location_new (builder, _gtk_builder_get_widget (builder, "network_dialog"));
+			location_new (builder,
+				     gtk_widget_get_toplevel (_gtk_builder_get_widget (builder, "network-panel")));
 		}
 		else
 		{
@@ -1212,8 +1215,10 @@ setup_dialog (GtkBuilder *builder)
 	GtkCellRenderer *location_renderer;
 	GtkListStore *store;
 
-	mode_type = g_enum_register_static ("NetworkPreferencesProxyType",
-				            proxytype_values);
+        mode_type = g_type_from_name ("NetworkPreferencesProxyType");
+	if (!mode_type)
+		mode_type = g_enum_register_static ("NetworkPreferencesProxyType",
+						    proxytype_values);
 
 	client = gconf_client_get_default ();
 
@@ -1270,7 +1275,7 @@ setup_dialog (GtkBuilder *builder)
 	g_signal_connect (gtk_builder_get_object (builder, "details_button"),
 			  "clicked",
 			  G_CALLBACK (cb_http_details_button_clicked),
-			  _gtk_builder_get_widget (builder, "network_dialog"));
+			  _gtk_builder_get_widget (builder, "network-panel"));
 
 	/* Secure */
  	port_value = gconf_client_get_int (client, SECURE_PROXY_PORT_KEY, NULL);
@@ -1351,29 +1356,23 @@ setup_dialog (GtkBuilder *builder)
 }
 
 int
-main (int argc, char **argv)
+gnome_network_properties_init (GtkBuilder  *builder,
+                               GConfClient *client)
 {
-	GtkBuilder  *builder;
 	GError *error = NULL;
 	gchar *builder_widgets[] = {"network_dialog", "adjustment1",
 				    "adjustment2", "adjustment3", "adjustment4",
 				    "delete_button_img", NULL};
-	GConfClient *client;
-	GtkWidget   *widget;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gtk_init (&argc, &argv);
-
-	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/system/http_proxy",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (client, "/system/proxy",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	builder = gtk_builder_new ();
 	if (gtk_builder_add_objects_from_file (builder, GNOMECC_GNP_UI_FILE,
 					       builder_widgets, &error) == 0) {
 		g_warning ("Could not load main dialog: %s",
@@ -1381,17 +1380,10 @@ main (int argc, char **argv)
 		g_error_free (error);
 		g_object_unref (builder);
 		g_object_unref (client);
-		return (EXIT_FAILURE);
+		return 1;
 	}
 
 	setup_dialog (builder);
-	widget = _gtk_builder_get_widget (builder, "network_dialog");
-	capplet_set_icon (widget, "gnome-network-properties");
-	gtk_widget_show_all (widget);
-	gtk_main ();
-
-	g_object_unref (builder);
-	g_object_unref (client);
 
 	return 0;
 }
