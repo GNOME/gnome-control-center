@@ -16,6 +16,7 @@ ccpanels_LTLIBRARIES = libkeyboard-properties.la
 libkeyboard_properties_la_SOURCES =	\
 		keyboard-module.c \
 		cc-keyboard-panel.c \
+		cc-keyboard-panel.h \
 	        gnome-keyboard-properties.c \
 	        gnome-keyboard-properties-a11y.c \
 	        gnome-keyboard-properties-a11y.h \
