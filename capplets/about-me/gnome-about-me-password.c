@@ -506,6 +506,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 							  "dictionary",
 							  "simple",
 							  "similar",
+							  "different",
 							  "case",
 							  "wrapped",
 							  "recovered",
@@ -541,6 +542,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 						   g_strrstr (str->str, "dictionary") != NULL) {
 						msg = g_strdup (_("The password is too simple."));
 					} else if (g_strrstr (str->str, "similar") != NULL ||
+					           g_strrstr (str->str, "different") != NULL ||
 					           g_strrstr (str->str, "case") != NULL ||
 						   g_strrstr (str->str, "wrapped") != NULL) {
 						msg = g_strdup (_("The old and new passwords are too similar."));
