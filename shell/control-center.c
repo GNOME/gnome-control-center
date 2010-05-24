@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#include <glib/gi18n.h>
+
 #include "gnome-control-center.h"
 
 #include <gtk/gtk.h>
@@ -75,8 +77,14 @@ main (int argc, char **argv)
   GnomeControlCenter *shell;
   UniqueApp *unique;
 
+  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+
+
   g_thread_init (NULL);
   gtk_init (&argc, &argv);
+
 
   /* use Unique to enforce single instance of this application */
   unique = unique_app_new_with_commands ("org.gnome.ControlCenter",
