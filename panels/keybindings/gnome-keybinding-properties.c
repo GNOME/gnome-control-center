@@ -14,7 +14,6 @@
 #include <gdk/gdkkeysyms.h>
 
 #include "wm-common.h"
-#include "capplet-util.h"
 #include "eggcellrendererkeys.h"
 #include "activate-settings-daemon.h"
 
@@ -86,23 +85,6 @@ static GtkWidget*
 _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 {
   return GTK_WIDGET (gtk_builder_get_object (builder, name));
-}
-
-static GtkBuilder *
-create_builder (void)
-{
-  GtkBuilder *builder = gtk_builder_new();
-  GError *error = NULL;
-  static const gchar *uifile = GNOMECC_UI_DIR "/gnome-keybinding-properties.ui";
-
-  if (gtk_builder_add_from_file (builder, uifile, &error) == 0) {
-    g_warning ("Could not load UI: %s", error->message);
-    g_error_free (error);
-    g_object_unref (builder);
-    builder = NULL;
-  }
-
-  return builder;
 }
 
 static char*
@@ -1745,6 +1727,7 @@ maybe_block_accels (GtkWidget *widget,
   return FALSE;
 }
 
+#if 0
 static void
 cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
 {
@@ -1781,6 +1764,7 @@ cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
       gtk_main_quit ();
     }
 }
+#endif
 
 static void
 selection_changed (GtkTreeSelection *selection, gpointer data)
@@ -1800,6 +1784,40 @@ selection_changed (GtkTreeSelection *selection, gpointer data)
     }
 
   gtk_widget_set_sensitive (button, can_remove);
+}
+
+static void
+add_button_clicked (GtkWidget  *button,
+                    GtkBuilder *builder)
+{
+  GtkTreeView *treeview;
+  GtkTreeModel *model;
+
+  treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
+                                                    "shortcut_treeview"));
+  model = gtk_tree_view_get_model (treeview);
+
+  add_custom_shortcut (treeview, model);
+}
+
+static void
+remove_button_clicked (GtkWidget  *button,
+                       GtkBuilder *builder)
+{
+  GtkTreeView *treeview;
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  GtkTreeIter iter;
+
+  treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
+                                                    "shortcut_treeview"));
+  model = gtk_tree_view_get_model (treeview);
+
+  selection = gtk_tree_view_get_selection (treeview);
+  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+    {
+      remove_custom_shortcut (model, &iter);
+    }
 }
 
 static void
@@ -1869,11 +1887,8 @@ setup_dialog (GtkBuilder *builder)
   reload_key_entries (builder);
 
   widget = _gtk_builder_get_widget (builder, "gnome-keybinding-dialog");
-  capplet_set_icon (widget, "preferences-desktop-keyboard-shortcuts");
-  gtk_widget_show (widget);
 
   g_signal_connect (widget, "key_press_event", G_CALLBACK (maybe_block_accels), NULL);
-  g_signal_connect (widget, "response", G_CALLBACK (cb_dialog_response), builder);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
@@ -1901,10 +1916,18 @@ setup_dialog (GtkBuilder *builder)
                                                         "custom-shortcut-name-entry");
   custom_shortcut_command_entry = _gtk_builder_get_widget (builder,
                                                            "custom-shortcut-command-entry");
+  g_signal_connect (_gtk_builder_get_widget (builder, "add-button"),
+                    "clicked", G_CALLBACK (add_button_clicked), builder);
+  g_signal_connect (_gtk_builder_get_widget (builder, "remove-button"),
+                    "clicked", G_CALLBACK (remove_button_clicked), builder);
+
+#if 0
   gtk_dialog_set_default_response (GTK_DIALOG (custom_shortcut_dialog),
 				   GTK_RESPONSE_OK);
+
   gtk_window_set_transient_for (GTK_WINDOW (custom_shortcut_dialog),
                                 GTK_WINDOW (widget));
+#endif
 }
 
 static void
@@ -1913,34 +1936,12 @@ on_window_manager_change (const char *wm_name, GtkBuilder *builder)
   reload_key_entries (builder);
 }
 
-int
-main (int argc, char *argv[])
+void
+gnome_keybinding_properties_init (GtkBuilder *builder)
 {
-  GtkBuilder *builder;
-
-  g_thread_init (NULL);
-  gtk_init (&argc, &argv);
-
-  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-
-  gtk_init (&argc, &argv);
-
-  activate_settings_daemon ();
-
-  builder = create_builder ();
-
-  if (!builder) /* Warning was already printed to console */
-    exit (EXIT_FAILURE);
-
-  wm_common_register_window_manager_change ((GFunc) on_window_manager_change, builder);
+  wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
+                                            builder);
   setup_dialog (builder);
-
-  gtk_main ();
-
-  g_object_unref (builder);
-  return 0;
 }
 
 /*

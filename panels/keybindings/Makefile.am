@@ -1,10 +1,15 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = keybinding
 
-bin_PROGRAMS = gnome-keybinding-properties
+ccpanelsdir = $(PANELS_DIR)
+ccpanels_LTLIBRARIES = libkeybinding-properties.la
 
-gnome_keybinding_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_keybinding_properties_SOURCES = 	\
+libkeybinding_properties_la_SOURCES =   \
+	keybindings-module.c		\
+	cc-keybindings-panel.c		\
+	cc-keybindings-panel.h		\
+	wm-common.c			\
+	wm-common.h			\
 	gnome-keybinding-properties.c	\
 	eggcellrendererkeys.c		\
 	eggcellrendererkeys.h		\

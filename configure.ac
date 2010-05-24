@@ -387,9 +387,9 @@ panels/default-applications/gnome-at-session.desktop.in
 panels/default-applications/gnome-default-applications.pc
 capplets/display/Makefile
 capplets/display/display-properties.desktop.in
-capplets/keybindings/Makefile
-capplets/keybindings/gnome-keybindings.pc
-capplets/keybindings/keybinding.desktop.in
+panels/keybindings/Makefile
+panels/keybindings/gnome-keybindings.pc
+panels/keybindings/keybinding.desktop.in
 capplets/windows/Makefile
 capplets/windows/window-properties.desktop.in
 docs/Makefile
