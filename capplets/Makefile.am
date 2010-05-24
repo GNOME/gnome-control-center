@@ -2,14 +2,12 @@ SUBDIRS = \
 	common			\
 	accessibility	\
 	appearance		\
-	display			\
-	windows
+	display
 
 DIST_SUBDIRS = \
 	common			\
 	accessibility		\
 	appearance		\
-	windows			\
 	display 		\
 	about-me
 

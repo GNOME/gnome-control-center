@@ -390,8 +390,6 @@ capplets/display/display-properties.desktop.in
 panels/keybindings/Makefile
 panels/keybindings/gnome-keybindings.pc
 panels/keybindings/keybinding.desktop.in
-capplets/windows/Makefile
-capplets/windows/window-properties.desktop.in
 docs/Makefile
 docs/reference/Makefile
 docs/reference/libgnome-control-center/Makefile
