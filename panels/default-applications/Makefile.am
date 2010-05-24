@@ -1,15 +1,20 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = default-applications
 
-bin_PROGRAMS = gnome-default-applications-properties
+ccpanelsdir = $(PANELS_DIR)
+ccpanels_LTLIBRARIES = libdefault-applications.la
 
-bin_SCRIPTS = gnome-at-visual gnome-at-mobility
-
-gnome_default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_default_applications_properties_SOURCES = \
+libdefault_applications_la_SOURCES = \
+	default-applications-module.c \
+	cc-default-applications-panel.c cc-default-applications-panel.h \
 	gnome-da-capplet.c gnome-da-capplet.h \
 	gnome-da-xml.c gnome-da-xml.h \
 	gnome-da-item.c gnome-da-item.h
+
+libdefault_applications_la_LIBADD = $(PANEL_LIBS)
+libdefault_applications_la_LDFLAGS = $(PANEL_LDFLAGS)
+
+bin_SCRIPTS = gnome-at-visual gnome-at-mobility
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -42,7 +47,7 @@ INCLUDES   = 					\
 	$(GNOMECC_CAPPLETS_CFLAGS)		\
 	$(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"\
-	-DGNOMECC_UI_DIR=\""$(uidir)"\"	\
+	-DGNOMECC_UI_DIR=\""$(uidir)"\"		\
 	-DGNOMECC_APPS_DIR=\""$(xmldatadir)"\"
 
 icons16dir = $(datadir)/icons/hicolor/16x16/apps

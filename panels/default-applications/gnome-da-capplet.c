@@ -40,6 +40,7 @@ enum
     N_COLUMNS
 };
 
+/*
 static void
 close_cb (GtkWidget *window, gint response, gpointer user_data)
 {
@@ -51,6 +52,7 @@ close_cb (GtkWidget *window, gint response, gpointer user_data)
 	gtk_main_quit ();
     }
 }
+*/
 
 static void
 set_icon (GtkImage *image, GtkIconTheme *theme, const char *name)
@@ -730,7 +732,6 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
     }
 
     capplet->window = _gtk_builder_get_widget (builder,"preferred_apps_dialog");
-    g_signal_connect (capplet->window, "response", G_CALLBACK (close_cb), NULL);
 
     capplet->web_browser_command_entry = _gtk_builder_get_widget (builder, "web_browser_command_entry");
     capplet->web_browser_command_label = _gtk_builder_get_widget (builder, "web_browser_command_label");
@@ -938,36 +939,11 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
         }
         g_free (page_name);
     }
-
-    gtk_widget_show (capplet->window);
 }
 
-int
-main (int argc, char **argv)
+void
+gnome_default_applications_panel_init (GnomeDACapplet *capplet)
 {
-    GnomeDACapplet *capplet;
-
-    gchar *start_page = NULL;
-    GOptionContext *context;
-    GOptionEntry option_entries[] = {
-        { "show-page",
-          'p',
-          G_OPTION_FLAG_IN_MAIN,
-          G_OPTION_ARG_STRING,
-          &start_page,
-          /* TRANSLATORS: don't translate the terms in brackets */
-          N_("Specify the name of the page to show (internet|multimedia|system|a11y)"),
-          N_("page") },
-        { NULL }
-    };
-
-    context = g_option_context_new (_("- GNOME Default Applications"));
-    g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
-
-    capplet_init (context, &argc, &argv);
-
-    capplet = g_new0 (GnomeDACapplet, 1);
-    capplet->gconf = gconf_client_get_default ();
     gconf_client_add_dir (capplet->gconf, "/desktop/gnome/url-handlers",
                           GCONF_CLIENT_PRELOAD_RECURSIVE, NULL);
     gconf_client_add_dir (capplet->gconf, 
@@ -976,14 +952,5 @@ main (int argc, char **argv)
 
     gnome_da_xml_load_list (capplet);
 
-    show_dialog (capplet, start_page);
-    g_free (start_page);
-
-    gtk_main ();
-
-    g_object_unref (capplet->gconf);
-
-    gnome_da_xml_free (capplet);
-
-    return 0;
+    show_dialog (capplet, 0);
 }

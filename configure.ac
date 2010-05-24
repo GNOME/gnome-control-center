@@ -380,11 +380,11 @@ capplets/appearance/data/Makefile
 capplets/appearance/data/gnome-appearance-properties.desktop.in
 capplets/appearance/data/gnome-theme-installer.desktop.in
 capplets/common/Makefile
-capplets/default-applications/Makefile
-capplets/default-applications/default-applications.desktop.in
-capplets/default-applications/gnome-at-commandline.in
-capplets/default-applications/gnome-at-session.desktop.in
-capplets/default-applications/gnome-default-applications.pc
+panels/default-applications/Makefile
+panels/default-applications/default-applications.desktop.in
+panels/default-applications/gnome-at-commandline.in
+panels/default-applications/gnome-at-session.desktop.in
+panels/default-applications/gnome-default-applications.pc
 capplets/display/Makefile
 capplets/display/display-properties.desktop.in
 capplets/keybindings/Makefile

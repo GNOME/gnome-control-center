@@ -123,4 +123,5 @@ struct _GnomeDACapplet {
     GList *mobility_ats;
 };
 
+void gnome_default_applications_panel_init (GnomeDACapplet *capplet);
 #endif

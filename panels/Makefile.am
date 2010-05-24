@@ -1,1 +1,1 @@
-SUBDIRS=mouse keyboard network
+SUBDIRS=mouse keyboard network default-applications

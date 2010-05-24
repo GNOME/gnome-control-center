@@ -2,7 +2,6 @@ SUBDIRS = \
 	common			\
 	accessibility	\
 	appearance		\
-	default-applications	\
 	display			\
 	keybindings		\
 	windows
@@ -11,7 +10,6 @@ DIST_SUBDIRS = \
 	common			\
 	accessibility		\
 	appearance		\
-	default-applications	\
 	keybindings		\
 	windows			\
 	display 		\
