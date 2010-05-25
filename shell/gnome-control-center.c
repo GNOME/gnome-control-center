@@ -107,14 +107,20 @@ activate_panel (GnomeControlCenter *shell,
   if (panel_type != G_TYPE_INVALID)
     {
       GtkWidget *panel;
+      GtkWidget *box;
       gint i;
 
       /* create the panel plugin */
       panel = g_object_new (panel_type, "shell", shell, NULL);
 
+      box = gtk_alignment_new (0, 0, 1, 1);
+      gtk_alignment_set_padding (GTK_ALIGNMENT (box), 6, 6, 6, 6);
+
+      gtk_container_add (GTK_CONTAINER (box), panel);
+
       /* switch to the new panel */
-      i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), panel, NULL);
-      gtk_widget_show_all (panel);
+      i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box, NULL);
+      gtk_widget_show_all (box);
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
 
       return;
@@ -166,10 +172,6 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
 
   gtk_notebook_remove_page (GTK_NOTEBOOK (priv->notebook), CAPPLET_PAGE);
 
-  gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (priv->builder,
-                                                         "label-title")), "");
-  gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                       "title-alignment")));
 
   /* clear the search text */
   g_free (priv->filter_string);
@@ -271,13 +273,8 @@ search_entry_changed_cb (GtkEntry                  *entry,
   else
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->search_filter));
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), SEARCH_PAGE);
-
-      gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (priv->builder,
-                                                             "label-title")),
-                          "");
-      gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                           "title-alignment")));
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook),
+                                     SEARCH_PAGE);
     }
 }
 

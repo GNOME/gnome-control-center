@@ -71,27 +71,6 @@
           </packing>
         </child>
         <child>
-          <object class="GtkAlignment" id="title-alignment">
-            <property name="no_show_all">True</property>
-            <property name="top_padding">12</property>
-            <property name="left_padding">12</property>
-            <child>
-              <object class="GtkLabel" id="label-title">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkNotebook" id="notebook">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -143,7 +122,7 @@
             </child>
           </object>
           <packing>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
       </object>
@@ -162,8 +141,8 @@
   <object class="GtkSizeGroup" id="sizegroup">
     <property name="mode">vertical</property>
     <widgets>
-      <widget name="home-button"/>
       <widget name="entry-alignment"/>
+      <widget name="home-button"/>
     </widgets>
   </object>
 </interface>
