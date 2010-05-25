@@ -69,13 +69,18 @@ struct _GnomeControlCenterPrivate
   guint32 last_time;
 
   GIOExtensionPoint *extension_point;
+
+  gchar *default_window_title;
+  gchar *default_window_icon;
 };
 
 
 static void
 activate_panel (GnomeControlCenter *shell,
                 const gchar        *id,
-                const gchar        *desktop_file)
+                const gchar        *desktop_file,
+                const gchar        *name,
+                const gchar        *icon_name)
 {
   GnomeControlCenterPrivate *priv = shell->priv;
   GAppInfo *appinfo;
@@ -122,6 +127,10 @@ activate_panel (GnomeControlCenter *shell,
       i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box, NULL);
       gtk_widget_show_all (box);
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
+
+      /* set the title of the window */
+      gtk_window_set_title (GTK_WINDOW (priv->window), name);
+      gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
 
       return;
     }
@@ -177,6 +186,13 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   g_free (priv->filter_string);
   priv->filter_string = g_strdup ("");
   gtk_entry_set_text (GTK_ENTRY (priv->search_entry), "");
+
+  /* reset window title and icon */
+  gtk_window_set_title (GTK_WINDOW (priv->window), priv->default_window_title);
+  gtk_window_set_icon_name (GTK_WINDOW (priv->window),
+                            priv->default_window_icon);
+
+  g_debug ("%s %s", priv->default_window_title, priv->default_window_icon);
 }
 
 
@@ -503,7 +519,7 @@ _shell_set_active_panel_from_id (CcShell      *shell,
   GtkTreeIter iter;
   gboolean iter_valid;
   gchar *name = NULL;
-  gchar *desktop;
+  gchar *desktop, *icon_name;
   GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (shell)->priv;
 
 
@@ -519,6 +535,7 @@ _shell_set_active_panel_from_id (CcShell      *shell,
                           COL_NAME, &name,
                           COL_ID, &id,
                           COL_DESKTOP_FILE, &desktop,
+                          COL_ICON_NAME, &icon_name,
                           -1);
       if (id && !strcmp (id, start_id))
         {
@@ -530,6 +547,7 @@ _shell_set_active_panel_from_id (CcShell      *shell,
           g_free (id);
           g_free (name);
           g_free (desktop);
+          g_free (icon_name);
 
           name = NULL;
           id = NULL;
@@ -546,10 +564,12 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     }
   else
     {
-      activate_panel (GNOME_CONTROL_CENTER (shell), start_id, desktop);
+      activate_panel (GNOME_CONTROL_CENTER (shell), start_id, desktop, name,
+                      icon_name);
 
       g_free (name);
       g_free (desktop);
+      g_free (icon_name);
 
       return TRUE;
     }
@@ -636,6 +656,18 @@ gnome_control_center_finalize (GObject *object)
       priv->filter_string = NULL;
     }
 
+  if (priv->default_window_title)
+    {
+      g_free (priv->default_window_title);
+      priv->default_window_title = NULL;
+    }
+
+  if (priv->default_window_icon)
+    {
+      g_free (priv->default_window_icon);
+      priv->default_window_icon = NULL;
+    }
+
   G_OBJECT_CLASS (gnome_control_center_parent_class)->finalize (object);
 }
 
@@ -707,7 +739,12 @@ gnome_control_center_init (GnomeControlCenter *self)
   /* setup search functionality */
   setup_search (self);
 
+
   gtk_widget_show_all (priv->window);
+
+  /* store default window title and name */
+  priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));
+  priv->default_window_icon = g_strdup (gtk_window_get_icon_name (GTK_WINDOW (priv->window)));
 }
 
 GnomeControlCenter *

@@ -34,7 +34,7 @@ static void
 cc_shell_model_init (CcShellModel *self)
 {
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
-      GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING};
+      GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING};
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -94,6 +94,7 @@ cc_shell_model_add_item (CcShellModel   *model,
                                      COL_PIXBUF, pixbuf,
                                      COL_CATEGORY, category_name,
                                      COL_SEARCH_TARGET, search_target,
+                                     COL_ICON_NAME, icon,
                                      -1);
 
   g_free (search_target);
