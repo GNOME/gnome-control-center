@@ -30,7 +30,7 @@ G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
 
 struct _CcDateTimePanelPrivate
 {
-  gpointer dummy;
+  GtkBuilder *builder;
 };
 
 
@@ -63,6 +63,13 @@ cc_date_time_panel_set_property (GObject      *object,
 static void
 cc_date_time_panel_dispose (GObject *object)
 {
+  CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (object)->priv;
+  if (priv->builder)
+    {
+      g_object_unref (priv->builder);
+      priv->builder = NULL;
+    }
+
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
 
@@ -93,13 +100,33 @@ cc_date_time_panel_class_finalize (CcDateTimePanelClass *klass)
 static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
-  GtkWidget *label;
+  CcDateTimePanelPrivate *priv;
+  gchar *objects[] = { "datetime-panel", NULL };
+  GtkWidget *widget;
+  GError *err = NULL;
 
-  self->priv = DATE_TIME_PANEL_PRIVATE (self);
+  priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
 
-  label = cc_timezone_map_new ();
+  priv->builder = gtk_builder_new ();
 
-  gtk_container_add (GTK_CONTAINER (self), label);
+  gtk_builder_add_objects_from_file (priv->builder, DATADIR"/datetime.ui",
+                                     objects, &err);
+
+  if (err)
+    {
+      g_warning ("Could not load ui: %s", err->message);
+      g_error_free (err);
+      return;
+    }
+
+  widget = (GtkWidget *) cc_timezone_map_new ();
+
+  gtk_container_add (GTK_CONTAINER (gtk_builder_get_object (priv->builder,
+                                                            "aspectmap")),
+                     widget);
+
+  gtk_container_add (GTK_CONTAINER (self),
+                     GTK_WIDGET (gtk_builder_get_object (priv->builder, "datetime-panel")));
 }
 
 void

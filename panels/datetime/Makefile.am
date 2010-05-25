@@ -1,5 +1,7 @@
-uidir = $(datadir)/ui
-ui_DATA = data/bg.png \
+uidir = $(datadir)/ui/datetime
+ui_DATA = \
+	datetime.ui \
+	data/bg.png \
 	data/cc.png \
 	data/timezone_0.png \
 	data/timezone_-10.png \
