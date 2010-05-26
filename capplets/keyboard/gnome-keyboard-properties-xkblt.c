@@ -25,6 +25,7 @@
 #  include <config.h>
 #endif
 
+#include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
 
@@ -128,7 +129,7 @@ static void
 xkb_layouts_enable_disable_buttons (GtkBuilder * dialog)
 {
 	GtkWidget *add_layout_btn = WID ("xkb_layouts_add");
-	GtkWidget *print_layout_btn = WID ("xkb_layouts_print");
+	GtkWidget *show_layout_btn = WID ("xkb_layouts_show");
 	GtkWidget *del_layout_btn = WID ("xkb_layouts_remove");
 	GtkWidget *selected_layouts_tree = WID ("xkb_layouts_selected");
 	GtkWidget *move_up_layout_btn = WID ("xkb_layouts_move_up");
@@ -155,7 +156,7 @@ xkb_layouts_enable_disable_buttons (GtkBuilder * dialog)
 				   || max_selected_layouts == 0));
 	gtk_widget_set_sensitive (del_layout_btn, (n_selected_layouts > 1)
 				  && (n_selected_selected_layouts > 0));
-	gtk_widget_set_sensitive (print_layout_btn,
+	gtk_widget_set_sensitive (show_layout_btn,
 				  (n_selected_selected_layouts > 0));
 	gtk_widget_set_sensitive (move_up_layout_btn, sidx > 0);
 	gtk_widget_set_sensitive (move_down_layout_btn, sidx >= 0
@@ -350,7 +351,7 @@ add_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 }
 
 static void
-print_selected_layout (GtkWidget * button, GtkBuilder * dialog)
+show_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 {
 	gint idx = find_selected_layout_idx (dialog);
 
@@ -358,20 +359,11 @@ print_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 		GSList *layouts_list = xkb_layouts_get_selected_list ();
 		const gchar *id = g_slist_nth_data (layouts_list, idx);
 		char *descr = xkb_layout_description_utf8 (id);
-
-		GtkWidget *window = WID ("keyboard_dialog");
-		GtkWidget *kbdraw =
-		    xkb_layout_preview_create_widget (NULL);
-		g_object_ref_sink (kbdraw);
-		gtk_widget_set_parent (kbdraw, window);
-		xkb_layout_preview_set_drawing_layout (kbdraw, id);
-		gkbd_keyboard_drawing_print (GKBD_KEYBOARD_DRAWING
-					     (kbdraw), GTK_WINDOW (window),
-					     descr);
-		g_object_unref (kbdraw);
-		g_free (descr);
-
+		GtkWidget *parent = WID ("keyboard_dialog");
+		GtkWidget *popup = gkbd_keyboard_drawing_new_dialog (idx, descr);
+		gtk_widget_set_parent (popup, parent);
 		clear_xkb_elements_list (layouts_list);
+		g_free (descr);
 	}
 }
 
@@ -451,8 +443,8 @@ xkb_layouts_register_buttons_handlers (GtkBuilder * dialog)
 {
 	g_signal_connect (G_OBJECT (WID ("xkb_layouts_add")), "clicked",
 			  G_CALLBACK (add_selected_layout), dialog);
-	g_signal_connect (G_OBJECT (WID ("xkb_layouts_print")), "clicked",
-			  G_CALLBACK (print_selected_layout), dialog);
+	g_signal_connect (G_OBJECT (WID ("xkb_layouts_show")), "clicked",
+			  G_CALLBACK (show_selected_layout), dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_layouts_remove")), "clicked",
 			  G_CALLBACK (remove_selected_layout), dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_layouts_move_up")),
