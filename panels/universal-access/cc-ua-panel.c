@@ -116,55 +116,52 @@ cc_ua_panel_class_finalize (CcUaPanelClass *klass)
 {
 }
 
+static gchar *sticky_keys_section[] = {
+    "typing_sticky_keys_disable_two_keys_checkbutton",
+    "typing_sticky_keys_beep_modifier_checkbutton",
+    NULL
+};
+
+static gchar *slow_keys_section[]= {
+    "typing_slowkeys_delay_box",
+    "typing_slow_keys_beeb_box",
+    NULL
+};
+
+static gchar *bounce_keys_section[] = {
+    "typing_bouncekeys_delay_box",
+    "typing_bounce_keys_beep_rejected_checkbutton",
+    NULL
+};
+
+static gchar *secondary_click_section[] = {
+    "pointing_secondary_click_scale_box",
+    NULL
+};
+
+static gchar *dwell_click_section[] = {
+    "pointing_hover_click_delay_scale_box",
+    "pointing_hover_click_threshold_scale_box",
+    NULL
+};
+
 static void
-cc_ua_panel_stick_keys_toggled (GtkToggleButton *button,
-                                CcUaPanel       *panel)
+cc_ua_panel_section_toggled (GtkToggleButton *button,
+                             CcUaPanel       *panel)
 {
   GtkWidget *w;
   gboolean enabled;
+  gchar **widgets, **s;
+
+  widgets = g_object_get_data (G_OBJECT (button), "section-widgets");
 
   enabled = gtk_toggle_button_get_active (button);
 
-  w = WID (panel->priv->builder,
-           "typing_sticky_keys_disable_two_keys_checkbutton");
-  gtk_widget_set_sensitive (w, enabled);
-
-  w = WID (panel->priv->builder,
-           "typing_sticky_keys_beep_modifier_checkbutton");
-  gtk_widget_set_sensitive (w, enabled);
-}
-
-static void
-cc_ua_panel_slow_keys_toggled (GtkToggleButton *button,
-                               CcUaPanel       *panel)
-{
-  GtkWidget *w;
-  gboolean enabled;
-
-  enabled = gtk_toggle_button_get_active (button);
-
-  w = WID (panel->priv->builder, "typing_slowkeys_delay_box");
-  gtk_widget_set_sensitive (w, enabled);
-
-  w = WID (panel->priv->builder, "typing_slow_keys_beeb_box");
-  gtk_widget_set_sensitive (w, enabled);
-}
-
-static void
-cc_ua_panel_bounce_keys_toggled (GtkToggleButton *button,
-                                 CcUaPanel       *panel)
-{
-  GtkWidget *w;
-  gboolean enabled;
-
-  enabled = gtk_toggle_button_get_active (button);
-
-  w = WID (panel->priv->builder, "typing_bouncekeys_delay_box");
-  gtk_widget_set_sensitive (w, enabled);
-
-  w = WID (panel->priv->builder,
-           "typing_bounce_keys_beep_rejected_checkbutton");
-  gtk_widget_set_sensitive (w, enabled);
+  for (s = widgets; *s; s++)
+    {
+      w = WID (panel->priv->builder, *s);
+      gtk_widget_set_sensitive (w, enabled);
+    }
 }
 
 static void
@@ -183,7 +180,8 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   w = WID (priv->builder, "typing_sticky_keys_on_radiobutton");
   gconf_peditor_new_boolean (changeset, KEY_CONFIG_ROOT "/stickeykeys_enable",
                              w, NULL);
-  g_signal_connect (w, "toggled", G_CALLBACK (cc_ua_panel_stick_keys_toggled),
+  g_object_set_data (G_OBJECT (w), "section-widgets", sticky_keys_section);
+  g_signal_connect (w, "toggled", G_CALLBACK (cc_ua_panel_section_toggled),
                     self);
 
   w = WID (priv->builder, "typing_sticky_keys_disable_two_keys_checkbutton");
@@ -200,7 +198,8 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   w = WID (priv->builder, "typing_slow_keys_on_radiobutton");
   gconf_peditor_new_boolean (changeset, KEY_CONFIG_ROOT "/slowkeys_enable", w,
                              NULL);
-  g_signal_connect (w, "toggled", G_CALLBACK (cc_ua_panel_slow_keys_toggled),
+  g_object_set_data (G_OBJECT (w), "section-widgets", slow_keys_section);
+  g_signal_connect (w, "toggled", G_CALLBACK (cc_ua_panel_section_toggled),
                     self);
 
   w = WID (priv->builder, "typing_slowkeys_delay_scale");
@@ -223,7 +222,8 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   w = WID (priv->builder, "typing_bounce_keys_on_radiobutton");
   gconf_peditor_new_boolean (changeset, KEY_CONFIG_ROOT "/bouncekeys_enable",
                              w, NULL);
-  g_signal_connect (w, "toggled", G_CALLBACK (cc_ua_panel_bounce_keys_toggled),
+  g_object_set_data (G_OBJECT (w), "section-widgets", bounce_keys_section);
+  g_signal_connect (w, "toggled", G_CALLBACK (cc_ua_panel_section_toggled),
                     self);
 
   w = WID (priv->builder, "typing_bouncekeys_delay_scale");
@@ -242,6 +242,47 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 static void
 cc_ua_panel_init_mouse (CcUaPanel *self)
 {
+  CcUaPanelPrivate *priv = self->priv;
+  GConfChangeSet *changeset = NULL;
+  GtkWidget *w;
+
+  /* mouse keys */
+  w = WID (priv->builder, "pointing_mouse_keys_on_radiobutton");
+  gconf_peditor_new_boolean (changeset,
+                             KEY_CONFIG_ROOT "/mousekeys_enable", w,
+                             NULL);
+
+  /* simulated secondary click */
+  w = WID (priv->builder, "pointing_second_click_on_radiobutton");
+  gconf_peditor_new_boolean (changeset,
+                             MOUSE_CONFIG_ROOT "/delay_enable", w, NULL);
+  g_object_set_data (G_OBJECT (w), "section-widgets", secondary_click_section);
+  g_signal_connect (w, "toggled", G_CALLBACK (cc_ua_panel_section_toggled),
+                    self);
+
+  w = WID (priv->builder, "pointing_secondary_click_delay_scale");
+  gconf_peditor_new_numeric_range (changeset,
+                                   MOUSE_CONFIG_ROOT "/delay_time", w,
+                                   NULL);
+
+
+  /* dwell click */
+  w = WID (priv->builder, "pointing_hover_click_on_radiobutton");
+  gconf_peditor_new_boolean (changeset,
+                             MOUSE_CONFIG_ROOT "/dwell_enable", w, NULL);
+  g_object_set_data (G_OBJECT (w), "section-widgets", dwell_click_section);
+  g_signal_connect (w, "toggled", G_CALLBACK (cc_ua_panel_section_toggled),
+                    self);
+
+  w = WID (priv->builder, "pointing_dwell_delay_scale");
+  gconf_peditor_new_numeric_range (changeset,
+                                   MOUSE_CONFIG_ROOT "/dwell_time", w,
+                                   NULL);
+
+  w = WID (priv->builder, "pointing_dwell_threshold_scale");
+  gconf_peditor_new_numeric_range (changeset,
+                                   MOUSE_CONFIG_ROOT "/threshold", w,
+                                   NULL);
 }
 
 static void
@@ -282,6 +323,7 @@ cc_ua_panel_init (CcUaPanel *self)
                         GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
   cc_ua_panel_init_keyboard (self);
+  cc_ua_panel_init_mouse (self);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
                                                 "universal_access_box");
