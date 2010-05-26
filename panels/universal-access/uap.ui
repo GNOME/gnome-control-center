@@ -233,9 +233,7 @@
                                                     <property name="active">0</property>
                                                     <child>
                                                       <object class="GtkCellRendererText" id="contrast_renderer">
-                                                        <property name="background_gdk">#000000000000</property>
                                                         <property name="font">Normal</property>
-                                                        <property name="foreground_gdk">#000000000000</property>
                                                       </object>
                                                       <attributes>
                                                         <attribute name="scale">1</attribute>
@@ -1234,7 +1232,7 @@
                                             <property name="visible">True</property>
                                             <property name="spacing">6</property>
                                             <child>
-                                              <object class="GtkRadioButton" id="typing_sticky_keys_on_radiobutton1">
+                                              <object class="GtkRadioButton" id="typing_assistant_on_radiobutton1">
                                                 <property name="label" translatable="yes">On</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
@@ -1248,13 +1246,13 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkRadioButton" id="typing_sticky_keys_off_radiobutton1">
+                                              <object class="GtkRadioButton" id="typing_assistant_off_radiobutton1">
                                                 <property name="label" translatable="yes">Off</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
                                                 <property name="draw_indicator">True</property>
-                                                <property name="group">typing_sticky_keys_on_radiobutton</property>
+                                                <property name="group">typing_assistant_on_radiobutton1</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1347,7 +1345,6 @@
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
-                                                    <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
                                                   </object>
                                                   <packing>
@@ -1361,6 +1358,7 @@
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
+                                                    <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
                                                     <property name="group">typing_sticky_keys_on_radiobutton</property>
                                                   </object>
@@ -1395,6 +1393,7 @@
                                           <object class="GtkCheckButton" id="typing_sticky_keys_disable_two_keys_checkbutton">
                                             <property name="label" translatable="yes">Disable if two keys are pressed together</property>
                                             <property name="visible">True</property>
+                                            <property name="sensitive">False</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="draw_indicator">True</property>
@@ -1408,6 +1407,7 @@
                                           <object class="GtkCheckButton" id="typing_sticky_keys_beep_modifier_checkbutton">
                                             <property name="label" translatable="yes">Beep when a modifer key is pressed</property>
                                             <property name="visible">True</property>
+                                            <property name="sensitive">False</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="draw_indicator">True</property>
@@ -1465,7 +1465,6 @@
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
-                                                    <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
                                                   </object>
                                                   <packing>
@@ -1479,6 +1478,7 @@
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
+                                                    <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
                                                     <property name="group">typing_slow_keys_on_radiobutton</property>
                                                   </object>
@@ -1594,8 +1594,9 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkHBox" id="hbox1">
+                                          <object class="GtkHBox" id="typing_slow_keys_beeb_box">
                                             <property name="visible">True</property>
+                                            <property name="sensitive">False</property>
                                             <property name="spacing">6</property>
                                             <child>
                                               <object class="GtkLabel" id="label26">
@@ -1702,7 +1703,6 @@
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
-                                                    <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
                                                   </object>
                                                   <packing>
@@ -1716,6 +1716,7 @@
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
+                                                    <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
                                                     <property name="group">typing_bounce_keys_on_radiobutton</property>
                                                   </object>
@@ -1833,6 +1834,7 @@
                                           <object class="GtkCheckButton" id="typing_bounce_keys_beep_rejected_checkbutton">
                                             <property name="label" translatable="yes">Beep when a key is rejected</property>
                                             <property name="visible">True</property>
+                                            <property name="sensitive">False</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="draw_indicator">True</property>
@@ -2719,7 +2721,6 @@
       <widget name="seeing_text_size_box"/>
       <widget name="seeing_zoom_enabled_box"/>
       <widget name="seeing_reader_enabled_box"/>
-      <widget name="seeing_braille_enabled_box"/>
     </widgets>
   </object>
   <object class="GtkListStore" id="contrast_model">
