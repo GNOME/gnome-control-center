@@ -319,7 +319,7 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   g_object_unref (icon);
   gtk_widget_destroy (window);
   meta_theme_free (theme);
-  gdk_pixmap_unref (pixmap);
+  g_object_unref (pixmap);
 
   return pixbuf;
 }
@@ -386,7 +386,7 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
                                     GDK_INTERP_BILINEAR);
   g_object_unref (pixbuf);
   gtk_widget_destroy (window);
-  gdk_pixmap_unref (pixmap);
+  g_object_unref (pixmap);
 
   return retval;
 }
@@ -462,7 +462,7 @@ create_metacity_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
   gtk_widget_destroy (window);
   meta_theme_free (theme);
-  gdk_pixmap_unref (pixmap);
+  g_object_unref (pixmap);
 
   return retval;
 }
