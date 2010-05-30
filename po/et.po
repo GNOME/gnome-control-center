@@ -17,9 +17,9 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-04-24 05:17+0000\n"
-"PO-Revision-Date: 2010-05-03 23:07+0300\n"
-"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"POT-Creation-Date: 2010-05-27 18:57+0000\n"
+"PO-Revision-Date: 2010-05-29 22:26+0300\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -704,8 +704,8 @@ msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
 "'%s' is not installed."
 msgstr ""
-"See teema ei näe välja selline nagu peaks, kuna vajalik GTK+ teemamootor '%"
-"s' pole paigaldatud."
+"See teema ei näe välja selline nagu peaks, kuna vajalik GTK+ teemamootor "
+"'%s' pole paigaldatud."
 
 msgid "Apply Background"
 msgstr "Rakenda taust"
@@ -1334,8 +1334,8 @@ msgid ""
 "This theme will not look as intended because the required window manager "
 "theme '%s' is not installed."
 msgstr ""
-"See teema ei näe välja selline nagu peaks, kuna vajalik aknahalduri teema '%"
-"s' pole paigaldatud."
+"See teema ei näe välja selline nagu peaks, kuna vajalik aknahalduri teema "
+"'%s' pole paigaldatud."
 
 #, c-format
 msgid ""
@@ -1366,13 +1366,6 @@ msgstr "Peamist liidest pole võimalik laadida"
 
 msgid "Please make sure that the applet is properly installed"
 msgstr "Veendu, et rakend on õigesti paigaldatud"
-
-#. TRANSLATORS: don't translate the terms in brackets
-msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
-msgstr "Määra näidatava lehe nimi (internet|multimedia|system|a11y)"
-
-msgid "- GNOME Default Applications"
-msgstr "- GNOME vaikimisi rakendused"
 
 msgid "Accessibility"
 msgstr "Hõlbustused"
@@ -1666,6 +1659,79 @@ msgstr "Kuvarite eraldusvõime ja asukoha muutmine"
 msgid "Monitors"
 msgstr "Kuvarid"
 
+#, c-format
+msgid ""
+"Usage: %s SOURCE_FILE DEST_NAME\n"
+"\n"
+"This program installs a RANDR profile for multi-monitor setups into\n"
+"a systemwide location.  The resulting profile will get used when\n"
+"the RANDR plug-in gets run in gnome-settings-daemon.\n"
+"\n"
+"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+"xml\n"
+"\n"
+"DEST_NAME - relative name for the installed file.  This will get put in\n"
+"            the systemwide directory for RANDR configurations,\n"
+"            so the result will typically be %s/DEST_NAME\n"
+msgstr ""
+
+#. Translators: only able to install RANDR profiles as root
+msgid "This program can only be used by the root user"
+msgstr "Seda programmi tohib kasutada ainult juurkasutaja"
+
+msgid "The source filename must be absolute"
+msgstr "Lähtefaili nimi peab olema absoluutne"
+
+#. Translators: first %s is a filename; second %s is an error message
+#, c-format
+msgid "Could not open %s: %s\n"
+msgstr "Faili %s pole võimalik avada: %s\n"
+
+#. Translators: first %s is a filename; second %s is an error message
+#, c-format
+msgid "Could not get information for %s: %s\n"
+msgstr "Faili %s kohta pole võimalik andmeid hankida: %s\n"
+
+#, c-format
+msgid "%s must be a regular file\n"
+msgstr "%s peab olema tavaline fail\n"
+
+msgid "This program must only be run through pkexec(1)"
+msgstr ""
+
+msgid "PKEXEC_UID must be set to an integer value"
+msgstr ""
+
+#. Translators: we are complaining that a file must be really owned by the user who called this program
+#, c-format
+msgid "%s must be owned by you\n"
+msgstr "Fail %s peab sulle kuuluma\n"
+
+#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
+#, c-format
+msgid "%s must not have any directory components\n"
+msgstr ""
+
+#, c-format
+msgid "%s must be a directory\n"
+msgstr "%s peab olema kataloog\n"
+
+#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
+#, c-format
+msgid "Could not open %s/%s: %s\n"
+msgstr "Faili %s/%s pole võimalik avada: %s\n"
+
+#, c-format
+msgid "Could not rename %s to %s: %s\n"
+msgstr ""
+
+msgid ""
+"Authentication is required to install multi-monitor settings for all users"
+msgstr ""
+
+msgid "Install multi-monitor settings for the whole system"
+msgstr ""
+
 msgid "Upside Down"
 msgstr "Pea peal"
 
@@ -1809,21 +1875,6 @@ msgstr ""
 
 msgid "Assign shortcut keys to commands"
 msgstr "Käskudele kiirklahvide seadmine"
-
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
-"Sätete rakendamine ja programmi töö lõpetamine (ühilduvuse eesmärkidel, seda "
-"hallatakse nüüd deemoni poolt)"
-
-msgid "Start the page with the typing break settings showing"
-msgstr "Lehekülje alguses näidatakse tippimisvaheaegade sätteid"
-
-msgid "Start the page with the accessibility settings showing"
-msgstr "Lehekülje alguses näidatakse hõlbustuste sätteid"
-
-msgid "- GNOME Keyboard Preferences"
-msgstr "- GNOME klaviatuurieelistused"
 
 msgid "Beep when _accessibility features are turned on or off"
 msgstr "_Hõlbustusvalikute sisse- ja väljalülitamisel tehakse piiksu"
@@ -2114,13 +2165,6 @@ msgstr "Liigutamine alla"
 msgid "gesture|Disabled"
 msgstr "Keelatud"
 
-#. TRANSLATORS: don't translate the terms in brackets
-msgid "Specify the name of the page to show (general|accessibility)"
-msgstr "Määra näidatava lehe nimi (general|accessibility)"
-
-msgid "- GNOME Mouse Preferences"
-msgstr "- GNOME hiire-eelistused"
-
 msgid "Choose type of click _beforehand"
 msgstr "Klõpsu liik valitakse _ette"
 
@@ -2326,57 +2370,6 @@ msgstr "Tu_rvalise HTTP proksi:"
 msgid "_Use the same proxy for all protocols"
 msgstr "Kõikide _protokollide jaoks kasutatakse sama proksit"
 
-msgid "Cannot start the preferences application for your window manager"
-msgstr "Sinu aknahaldurile pole võimalik eelistuste rakendust käivitada"
-
-msgid "_Alt"
-msgstr "_Alt"
-
-msgid "H_yper"
-msgstr "_Hüper"
-
-msgid "S_uper (or \"Windows logo\")"
-msgstr "S_uper (ehk \"Windowsi logo\")"
-
-msgid "_Meta"
-msgstr "_Meta"
-
-msgid "Movement Key"
-msgstr "Liigutamise klahv"
-
-msgid "Titlebar Action"
-msgstr "Tiitliriba toimingud"
-
-msgid "To move a window, press-and-hold this key then grab the window:"
-msgstr "Akna liigutamiseks hoia seda klahvi all ning seejärel haara aknast:"
-
-msgid "Window Preferences"
-msgstr "Akende eelistused"
-
-msgid "Window Selection"
-msgstr "Akna valimine"
-
-msgid "_Double-click titlebar to perform this action:"
-msgstr "_Topeltklõps tiitliribal: "
-
-msgid "_Interval before raising:"
-msgstr "_Viivitus enne esiletõstmist:"
-
-msgid "_Raise selected windows after an interval"
-msgstr "Valitud aken tõstetakse pärast viivitust _esile"
-
-msgid "_Select windows when the mouse moves over them"
-msgstr "_Akende aktiveerimine, kui hiirekursor üle nende liigub"
-
-msgid "seconds"
-msgstr "sekundit"
-
-msgid "Set your window properties"
-msgstr "Akende omaduste seadmine"
-
-msgid "Windows"
-msgstr "Aknad"
-
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Aknahalduril \"%s\" ei ole registreeritud seadistamisvahendit\n"
@@ -2398,25 +2391,6 @@ msgstr "kerib kokku"
 
 msgid "None"
 msgstr "ei tee midagi"
-
-#, c-format
-msgid "key not found [%s]\n"
-msgstr "klahvi ei leitud [%s]\n"
-
-msgid "Hide on start (useful to preload the shell)"
-msgstr "Peidetakse käivitamisel (kasulik kestprogrammi eellaadimiseks)"
-
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Groups"
-msgstr "Grupid"
-
-msgid "Common Tasks"
-msgstr "Sagedasti kasutatavad"
-
-msgid "Control Center"
-msgstr "Juhtimiskeskus"
 
 msgid "Close the control-center when a task is activated"
 msgstr "Ülesande aktiveerimise korral juhtimiskeskuse sulgemine"
@@ -2481,6 +2455,9 @@ msgid ""
 msgstr ""
 "Kui määratud, siis juhtimiskeskus suletakse \"Sagedasti kasutatava\" "
 "ülesande aktiveerimisel."
+
+msgid "Control Center"
+msgstr "Juhtimiskeskus"
 
 msgid "The GNOME configuration tool"
 msgstr "GNOME seadistusprogramm"
@@ -2666,127 +2643,222 @@ msgstr "KIRJATÜÜBIFAIL VÄLJUNDFAIL"
 msgid "Error parsing arguments: %s\n"
 msgstr "Viga argumentide analüüsimisel: %s\n"
 
-#, c-format
-msgid "Your filter \"%s\" does not match any items."
-msgstr "Sinu filtrile \"%s\" ei vasta ükski kirje."
+msgid "Example Panel"
+msgstr "Näidispaneel"
 
-msgid "No matches found."
-msgstr "Vastavusi ei leitud."
+msgid "Example preferences panel"
+msgstr "Näidiseelistuste paneel"
 
-msgid "Other"
-msgstr "Muu"
+msgid "System Settings"
+msgstr "Süsteemsed sätted"
 
-#. make start action
-#, c-format
-msgid "Start %s"
-msgstr "Käivita %s"
+msgid "_All Settings"
+msgstr "_Kõik sätted"
 
-msgid "Help"
-msgstr "Abi"
+#~ msgid ""
+#~ "Specify the name of the page to show (internet|multimedia|system|a11y)"
+#~ msgstr "Määra näidatava lehe nimi (internet|multimedia|system|a11y)"
 
-msgid "Upgrade"
-msgstr "Uuenda"
+#~ msgid "- GNOME Default Applications"
+#~ msgstr "- GNOME vaikimisi rakendused"
 
-msgid "Uninstall"
-msgstr "Eemalda"
+#~ msgid ""
+#~ "Just apply settings and quit (compatibility only; now handled by daemon)"
+#~ msgstr ""
+#~ "Sätete rakendamine ja programmi töö lõpetamine (ühilduvuse eesmärkidel, "
+#~ "seda hallatakse nüüd deemoni poolt)"
 
-msgid "Remove from Favorites"
-msgstr "Eemalda lemmikute hulgast"
+#~ msgid "Start the page with the typing break settings showing"
+#~ msgstr "Lehekülje alguses näidatakse tippimisvaheaegade sätteid"
 
-msgid "Add to Favorites"
-msgstr "Lisa lemmikute hulka"
+#~ msgid "Start the page with the accessibility settings showing"
+#~ msgstr "Lehekülje alguses näidatakse hõlbustuste sätteid"
 
-msgid "Remove from Startup Programs"
-msgstr "Eemalda isekäivituvate rakenduste hulgast"
+#~ msgid "- GNOME Keyboard Preferences"
+#~ msgstr "- GNOME klaviatuurieelistused"
 
-msgid "Add to Startup Programs"
-msgstr "Lisa rakendus isekäivitumiseks"
+#~ msgid "Specify the name of the page to show (general|accessibility)"
+#~ msgstr "Määra näidatava lehe nimi (general|accessibility)"
 
-msgid "New Spreadsheet"
-msgstr "Uus arvutustabel"
+#~ msgid "- GNOME Mouse Preferences"
+#~ msgstr "- GNOME hiire-eelistused"
 
-msgid "New Document"
-msgstr "Uus dokument"
+#~ msgid "Cannot start the preferences application for your window manager"
+#~ msgstr "Sinu aknahaldurile pole võimalik eelistuste rakendust käivitada"
 
-msgid "Documents"
-msgstr "Dokumendid"
+#~ msgid "_Alt"
+#~ msgstr "_Alt"
 
-msgid "File System"
-msgstr "Failisüsteem"
+#~ msgid "H_yper"
+#~ msgstr "_Hüper"
 
-msgid "Network Servers"
-msgstr "Võrguserverid"
+#~ msgid "S_uper (or \"Windows logo\")"
+#~ msgstr "S_uper (ehk \"Windowsi logo\")"
 
-msgid "Search"
-msgstr "Otsing"
+#~ msgid "_Meta"
+#~ msgstr "_Meta"
 
-#. make open with default action
-#, c-format
-msgid "<b>Open</b>"
-msgstr "<b>Ava</b>"
+#~ msgid "Movement Key"
+#~ msgstr "Liigutamise klahv"
 
-#. make rename action
-msgid "Rename..."
-msgstr "Muuda nime..."
+#~ msgid "Titlebar Action"
+#~ msgstr "Tiitliriba toimingud"
 
-msgid "Send To..."
-msgstr "Saada kuhu..."
+#~ msgid "To move a window, press-and-hold this key then grab the window:"
+#~ msgstr "Akna liigutamiseks hoia seda klahvi all ning seejärel haara aknast:"
 
-#. make move to trash action
-msgid "Move to Trash"
-msgstr "Viska prügikasti"
+#~ msgid "Window Preferences"
+#~ msgstr "Akende eelistused"
 
-msgid "Delete"
-msgstr "Kustuta"
+#~ msgid "Window Selection"
+#~ msgstr "Akna valimine"
 
-#, c-format
-msgid "Are you sure you want to permanently delete \"%s\"?"
-msgstr "Kas soovid \"%s\" jäädavalt kustutada?"
+#~ msgid "_Double-click titlebar to perform this action:"
+#~ msgstr "_Topeltklõps tiitliribal: "
 
-msgid "If you delete an item, it is permanently lost."
-msgstr "Kui sa selle kustutad, läheb see jäädavalt kaotsi."
+#~ msgid "_Interval before raising:"
+#~ msgstr "_Viivitus enne esiletõstmist:"
 
-#, c-format
-msgid "Open with \"%s\""
-msgstr "Ava rakendusega \"%s\""
+#~ msgid "_Raise selected windows after an interval"
+#~ msgstr "Valitud aken tõstetakse pärast viivitust _esile"
 
-msgid "Open with Default Application"
-msgstr "Ava vaikimisi rakendusega"
+#~ msgid "_Select windows when the mouse moves over them"
+#~ msgstr "_Akende aktiveerimine, kui hiirekursor üle nende liigub"
 
-msgid "Open in File Manager"
-msgstr "Ava failihalduris"
+#~ msgid "seconds"
+#~ msgstr "sekundit"
 
-msgid "?"
-msgstr "?"
+#~ msgid "Set your window properties"
+#~ msgstr "Akende omaduste seadmine"
 
-msgid "%l:%M %p"
-msgstr "%H:%M"
+#~ msgid "Windows"
+#~ msgstr "Aknad"
 
-msgid "Today %l:%M %p"
-msgstr "Täna %H:%M"
+#~ msgid "key not found [%s]\n"
+#~ msgstr "klahvi ei leitud [%s]\n"
 
-msgid "Yesterday %l:%M %p"
-msgstr "Eile %H:%M"
+#~ msgid "Hide on start (useful to preload the shell)"
+#~ msgstr "Peidetakse käivitamisel (kasulik kestprogrammi eellaadimiseks)"
 
-msgid "%a %l:%M %p"
-msgstr "%a %H:%M"
+#~ msgid "Filter"
+#~ msgstr "Filter"
 
-msgid "%b %d %l:%M %p"
-msgstr "%d. %b %H:%M"
+#~ msgid "Groups"
+#~ msgstr "Grupid"
 
-msgid "%b %d %Y"
-msgstr "%d. %b %Y"
+#~ msgid "Common Tasks"
+#~ msgstr "Sagedasti kasutatavad"
 
-msgid "Find Now"
-msgstr "Otsi kohe"
+#~ msgid "Your filter \"%s\" does not match any items."
+#~ msgstr "Sinu filtrile \"%s\" ei vasta ükski kirje."
 
-#, c-format
-msgid "<b>Open %s</b>"
-msgstr "<b>Ava %s</b>"
+#~ msgid "No matches found."
+#~ msgstr "Vastavusi ei leitud."
 
-#, c-format
-msgid "Remove from System Items"
-msgstr "Eemalda süsteemikirjetest"
+#~ msgid "Other"
+#~ msgstr "Muu"
+
+#~ msgid "Start %s"
+#~ msgstr "Käivita %s"
+
+#~ msgid "Help"
+#~ msgstr "Abi"
+
+#~ msgid "Upgrade"
+#~ msgstr "Uuenda"
+
+#~ msgid "Uninstall"
+#~ msgstr "Eemalda"
+
+#~ msgid "Remove from Favorites"
+#~ msgstr "Eemalda lemmikute hulgast"
+
+#~ msgid "Add to Favorites"
+#~ msgstr "Lisa lemmikute hulka"
+
+#~ msgid "Remove from Startup Programs"
+#~ msgstr "Eemalda isekäivituvate rakenduste hulgast"
+
+#~ msgid "Add to Startup Programs"
+#~ msgstr "Lisa rakendus isekäivitumiseks"
+
+#~ msgid "New Spreadsheet"
+#~ msgstr "Uus arvutustabel"
+
+#~ msgid "New Document"
+#~ msgstr "Uus dokument"
+
+#~ msgid "Documents"
+#~ msgstr "Dokumendid"
+
+#~ msgid "File System"
+#~ msgstr "Failisüsteem"
+
+#~ msgid "Network Servers"
+#~ msgstr "Võrguserverid"
+
+#~ msgid "Search"
+#~ msgstr "Otsing"
+
+#~ msgid "<b>Open</b>"
+#~ msgstr "<b>Ava</b>"
+
+#~ msgid "Rename..."
+#~ msgstr "Muuda nime..."
+
+#~ msgid "Send To..."
+#~ msgstr "Saada kuhu..."
+
+#~ msgid "Move to Trash"
+#~ msgstr "Viska prügikasti"
+
+#~ msgid "Delete"
+#~ msgstr "Kustuta"
+
+#~ msgid "Are you sure you want to permanently delete \"%s\"?"
+#~ msgstr "Kas soovid \"%s\" jäädavalt kustutada?"
+
+#~ msgid "If you delete an item, it is permanently lost."
+#~ msgstr "Kui sa selle kustutad, läheb see jäädavalt kaotsi."
+
+#~ msgid "Open with \"%s\""
+#~ msgstr "Ava rakendusega \"%s\""
+
+#~ msgid "Open with Default Application"
+#~ msgstr "Ava vaikimisi rakendusega"
+
+#~ msgid "Open in File Manager"
+#~ msgstr "Ava failihalduris"
+
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgid "%l:%M %p"
+#~ msgstr "%H:%M"
+
+#~ msgid "Today %l:%M %p"
+#~ msgstr "Täna %H:%M"
+
+#~ msgid "Yesterday %l:%M %p"
+#~ msgstr "Eile %H:%M"
+
+#~ msgid "%a %l:%M %p"
+#~ msgstr "%a %H:%M"
+
+#~ msgid "%b %d %l:%M %p"
+#~ msgstr "%d. %b %H:%M"
+
+#~ msgid "%b %d %Y"
+#~ msgstr "%d. %b %Y"
+
+#~ msgid "Find Now"
+#~ msgstr "Otsi kohe"
+
+#~ msgid "<b>Open %s</b>"
+#~ msgstr "<b>Ava %s</b>"
+
+#~ msgid "Remove from System Items"
+#~ msgstr "Eemalda süsteemikirjetest"
 
 #~ msgid "_Jabber:"
 #~ msgstr "_Jabber:"
