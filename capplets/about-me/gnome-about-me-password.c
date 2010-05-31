@@ -510,6 +510,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 							  "case",
 							  "wrapped",
 							  "recovered",
+							  "recent"
 							  "unchanged",
 							  "match",
 							  "1 numeric or special",
@@ -551,6 +552,8 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 					} else if (g_strrstr (str->str, "unchanged") != NULL ||
 						   g_strrstr (str->str, "match") != NULL) {
 						msg = g_strdup (_("The old and new passwords are the same."));
+					} else if (g_strrstr (str->str, "recent") != NULL) {
+						msg = g_strdup (_("The new password has already been used recently."));
 					} else if (g_strrstr (str->str, "failure") != NULL) {
 						/* Authentication failure */
 						msg = g_strdup (_("Your password has been changed since you initially authenticated! Please re-authenticate."));
