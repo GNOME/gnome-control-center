@@ -504,7 +504,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 							  "longer",
 							  "palindrome",
 							  "dictionary",
-							  "simple",
+							  "simpl", /* catches both simple and simplistic */
 							  "similar",
 							  "different",
 							  "case",
@@ -539,7 +539,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdi
 						   g_strrstr (str->str, "longer") != NULL) {
 						msg = g_strdup (_("The password is too short."));
 					} else if (g_strrstr (str->str, "palindrome") != NULL ||
-						   g_strrstr (str->str, "simple") != NULL ||
+						   g_strrstr (str->str, "simpl") != NULL ||
 						   g_strrstr (str->str, "dictionary") != NULL) {
 						msg = g_strdup (_("The password is too simple."));
 					} else if (g_strrstr (str->str, "similar") != NULL ||
