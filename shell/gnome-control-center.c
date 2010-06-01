@@ -218,6 +218,160 @@ item_activated_cb (CcShellCategoryView *view,
 }
 
 static gboolean
+category_focus_out (GtkWidget          *view,
+                    GdkEventFocus      *event,
+                    GnomeControlCenter *shell)
+{
+  gtk_icon_view_unselect_all (GTK_ICON_VIEW (view));
+
+  return FALSE;
+}
+
+static gboolean
+category_focus_in (GtkWidget          *view,
+                   GdkEventFocus      *event,
+                   GnomeControlCenter *shell)
+{
+  GtkTreePath *path;
+
+  if (!gtk_icon_view_get_cursor (GTK_ICON_VIEW (view), &path, NULL))
+    {
+      path = gtk_tree_path_new_from_indices (0, -1);
+      gtk_icon_view_set_cursor (GTK_ICON_VIEW (view), path, NULL, FALSE);
+    }
+
+  gtk_icon_view_select_path (GTK_ICON_VIEW (view), path);
+  gtk_tree_path_free (path);
+
+  return FALSE;
+}
+
+static GList *
+get_item_views (GnomeControlCenter *shell)
+{
+  GnomeControlCenterPrivate *priv = shell->priv;
+  GtkWidget *vbox;
+  GList *list, *l;
+  GList *res;
+
+  vbox = W (priv->builder, "main-vbox");
+
+  list = gtk_container_get_children (GTK_CONTAINER (vbox));
+  res = NULL;
+  for (l = list; l; l = l->next)
+    {
+      res = g_list_append (res, cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (l->data)));
+    }
+
+  g_list_free (list);
+
+  return res;
+}
+
+static gboolean
+keynav_failed (GtkIconView        *current_view,
+               GtkDirectionType    direction,
+               GnomeControlCenter *shell)
+{
+  GList *views, *v;
+  GtkIconView *new_view;
+  GtkTreePath *path;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gint col, c, dist, d;
+  GtkTreePath *sel;
+  gboolean res;
+
+  res = FALSE;
+
+  views = get_item_views (shell);
+
+  for (v = views; v; v = v->next)
+    {
+      if (v->data == current_view)
+        break;
+    }
+
+  if (direction == GTK_DIR_DOWN && v->next != NULL)
+    {
+      new_view = v->next->data;
+
+      if (gtk_icon_view_get_cursor (current_view, &path, NULL))
+        {
+          col = gtk_icon_view_get_item_column (current_view, path);
+          gtk_tree_path_free (path);
+
+          sel = NULL;
+          dist = 1000;
+          model = gtk_icon_view_get_model (new_view);
+          gtk_tree_model_get_iter_first (model, &iter);
+          do {
+            path = gtk_tree_model_get_path (model, &iter);
+            c = gtk_icon_view_get_item_column (new_view, path);
+            d = ABS (c - col);
+            if (d < dist)
+              {
+                if (sel)
+                  gtk_tree_path_free (sel);
+                sel = path;
+                dist = d;
+              }
+            else
+              gtk_tree_path_free (path);
+          } while (gtk_tree_model_iter_next (model, &iter));
+
+          gtk_icon_view_set_cursor (new_view, sel, NULL, FALSE);
+          gtk_tree_path_free (sel);
+        }
+
+      gtk_widget_grab_focus (GTK_WIDGET (new_view));
+
+      res = TRUE;
+    }
+
+  if (direction == GTK_DIR_UP && v->prev != NULL)
+    {
+      new_view = v->prev->data;
+
+      if (gtk_icon_view_get_cursor (current_view, &path, NULL))
+        {
+          col = gtk_icon_view_get_item_column (current_view, path);
+          gtk_tree_path_free (path);
+
+          sel = NULL;
+          dist = 1000;
+          model = gtk_icon_view_get_model (new_view);
+          gtk_tree_model_get_iter_first (model, &iter);
+          do {
+            path = gtk_tree_model_get_path (model, &iter);
+            c = gtk_icon_view_get_item_column (new_view, path);
+            d = ABS (c - col);
+            if (d <= dist)
+              {
+                if (sel)
+                  gtk_tree_path_free (sel);
+                sel = path;
+                dist = d;
+              }
+            else
+              gtk_tree_path_free (path);
+          } while (gtk_tree_model_iter_next (model, &iter));
+
+          gtk_icon_view_set_cursor (new_view, sel, NULL, FALSE);
+          gtk_tree_path_free (sel);
+        }
+
+      gtk_widget_grab_focus (GTK_WIDGET (new_view));
+
+      res = TRUE;
+    }
+
+  g_list_free (views);
+
+  return res;
+}
+
+static gboolean
 model_filter_func (GtkTreeModel              *model,
                    GtkTreeIter               *iter,
                    GnomeControlCenterPrivate *priv)
@@ -394,10 +548,14 @@ fill_model (GnomeControlCenter *shell)
   GMenuTreeDirectory *d;
   GMenuTree *tree;
   GtkWidget *vbox;
+  GtkWidget *sw;
 
   GnomeControlCenterPrivate *priv = shell->priv;
 
   vbox = W (priv->builder, "main-vbox");
+  sw = W (priv->builder, "scrolledwindow1");
+  gtk_container_set_focus_vadjustment (GTK_CONTAINER (vbox),
+                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw)));
 
   tree = gmenu_tree_lookup (MENUDIR "/gnomecc.menu", 0);
 
@@ -441,6 +599,16 @@ fill_model (GnomeControlCenter *shell)
                             "desktop-item-activated",
                             G_CALLBACK (item_activated_cb), shell);
           gtk_widget_show (categoryview);
+          g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
+                           "focus-in-event",
+                           G_CALLBACK (category_focus_in), shell);
+          g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
+                           "focus-out-event",
+                           G_CALLBACK (category_focus_out), shell);
+          g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
+                           "keynav-failed",
+                           G_CALLBACK (keynav_failed), shell);
+
 
           /* add the items from this category to the model */
           for (f = contents; f; f = f->next)
