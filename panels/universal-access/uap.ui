@@ -449,6 +449,7 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">seeing_zoom_off_radiobutton</property>
                                                     <child>
                                                       <object class="GtkLabel" id="label16">
                                                         <property name="visible">True</property>
@@ -470,7 +471,6 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">seeing_zoom_on_radiobutton</property>
                                                     <child>
                                                       <object class="GtkLabel" id="label19">
                                                         <property name="visible">True</property>
@@ -729,6 +729,7 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">seeing_reader_off_radiobutton</property>
                                                     <child>
                                                       <object class="GtkLabel" id="label23">
                                                         <property name="visible">True</property>
@@ -750,7 +751,6 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">seeing_reader_on_radiobutton</property>
                                                     <child>
                                                       <object class="GtkLabel" id="label20">
                                                         <property name="visible">True</property>
@@ -929,6 +929,7 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">hearing_visual_alerts_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -942,7 +943,6 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">hearing_visual_alerts_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -969,6 +969,7 @@
                                               <object class="GtkButton" id="hearing_test_flash_button">
                                                 <property name="label" translatable="yes">Test flash</property>
                                                 <property name="visible">True</property>
+                                                <property name="sensitive">False</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
                                               </object>
@@ -982,6 +983,7 @@
                                               <object class="GtkRadioButton" id="hearing_flash_window_title_button">
                                                 <property name="label" translatable="yes">Flash the window title</property>
                                                 <property name="visible">True</property>
+                                                <property name="sensitive">False</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
                                                 <property name="relief">none</property>
@@ -999,6 +1001,7 @@
                                               <object class="GtkRadioButton" id="hearing_flash_screen_button">
                                                 <property name="label" translatable="yes">Flash the entire screen</property>
                                                 <property name="visible">True</property>
+                                                <property name="sensitive">False</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
                                                 <property name="draw_indicator">True</property>
@@ -1094,6 +1097,7 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">hearing_captions_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1101,13 +1105,12 @@
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkRadioButton" id="hearing_haptions_off_radiobutton">
+                                                  <object class="GtkRadioButton" id="hearing_captions_off_radiobutton">
                                                     <property name="label" translatable="yes">Off</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">hearing_captions_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1239,6 +1242,7 @@
                                                 <property name="receives_default">False</property>
                                                 <property name="active">True</property>
                                                 <property name="draw_indicator">True</property>
+                                                <property name="group">typing_assistant_off_radiobutton1</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1252,7 +1256,6 @@
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
                                                 <property name="draw_indicator">True</property>
-                                                <property name="group">typing_assistant_on_radiobutton1</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1346,6 +1349,7 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">typing_sticky_keys_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1360,7 +1364,6 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">typing_sticky_keys_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1466,6 +1469,7 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">typing_slow_keys_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1480,7 +1484,6 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">typing_slow_keys_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1704,6 +1707,7 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">typing_bounce_keys_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1718,7 +1722,6 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">typing_bounce_keys_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1969,6 +1972,7 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">pointing_mouse_keys_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1982,7 +1986,6 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">pointing_mouse_keys_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -2078,6 +2081,7 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">pointing_video_mouse_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -2091,7 +2095,6 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">pointing_video_mouse_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -2187,6 +2190,7 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">pointing_second_click_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -2200,7 +2204,6 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">pointing_second_click_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -2381,6 +2384,7 @@
                                                     <property name="receives_default">False</property>
                                                     <property name="active">True</property>
                                                     <property name="draw_indicator">True</property>
+                                                    <property name="group">pointing_hover_click_off_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -2394,7 +2398,6 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="receives_default">False</property>
                                                     <property name="draw_indicator">True</property>
-                                                    <property name="group">pointing_hover_click_on_radiobutton</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -2717,10 +2720,10 @@
   </object>
   <object class="GtkSizeGroup" id="seeing_sizegroup">
     <widgets>
-      <widget name="seeing_contrast_box"/>
-      <widget name="seeing_text_size_box"/>
-      <widget name="seeing_zoom_enabled_box"/>
       <widget name="seeing_reader_enabled_box"/>
+      <widget name="seeing_zoom_enabled_box"/>
+      <widget name="seeing_text_size_box"/>
+      <widget name="seeing_contrast_box"/>
     </widgets>
   </object>
   <object class="GtkListStore" id="contrast_model">
@@ -2757,58 +2760,58 @@
   </object>
   <object class="GtkSizeGroup" id="typing_sizegroup">
     <widgets>
-      <widget name="typing_assistant_enabled_box"/>
-      <widget name="typing_sticky_keys_enabled_box"/>
-      <widget name="typing_slow_keys_enabled_box"/>
-      <widget name="typing_slowkeys_delay_label"/>
-      <widget name="typing_bounce_keys_enabled_box"/>
       <widget name="typing_bouncekeys_delay_label"/>
+      <widget name="typing_bounce_keys_enabled_box"/>
+      <widget name="typing_slowkeys_delay_label"/>
+      <widget name="typing_slow_keys_enabled_box"/>
+      <widget name="typing_sticky_keys_enabled_box"/>
+      <widget name="typing_assistant_enabled_box"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="pointing_sizegroup">
     <widgets>
-      <widget name="pointing_mouse_keys_enabled_box"/>
-      <widget name="pointing_video_mouse_enabled_box"/>
-      <widget name="pointing_second_click_enabled_box"/>
-      <widget name="pointing_secondary_click_delay_label"/>
-      <widget name="pointing_hover_click_enabled_box"/>
-      <widget name="pointing_dwell_delay_label"/>
       <widget name="pointing_dwell_threshold_label"/>
+      <widget name="pointing_dwell_delay_label"/>
+      <widget name="pointing_hover_click_enabled_box"/>
+      <widget name="pointing_secondary_click_delay_label"/>
+      <widget name="pointing_second_click_enabled_box"/>
+      <widget name="pointing_video_mouse_enabled_box"/>
+      <widget name="pointing_mouse_keys_enabled_box"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="pointing_sizegroup2">
     <widgets>
-      <widget name="pointing_mouse_keys_desc_label"/>
-      <widget name="pointing_video_mouse_desc_label"/>
-      <widget name="pointing_secondary_click_desc_label"/>
-      <widget name="pointing_secondary_click_scale_box"/>
-      <widget name="pointing_hover_click_desc_label"/>
-      <widget name="pointing_hover_click_delay_scale_box"/>
       <widget name="pointing_hover_click_threshold_scale_box"/>
+      <widget name="pointing_hover_click_delay_scale_box"/>
+      <widget name="pointing_hover_click_desc_label"/>
+      <widget name="pointing_secondary_click_scale_box"/>
+      <widget name="pointing_secondary_click_desc_label"/>
+      <widget name="pointing_video_mouse_desc_label"/>
+      <widget name="pointing_mouse_keys_desc_label"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="pointing_scale_sizegroup">
     <widgets>
-      <widget name="pointing_secondary_click_delay_short_label"/>
-      <widget name="pointing_secondary_click_delay_long_label"/>
-      <widget name="pointing_dwell_delay_short_label"/>
-      <widget name="pointing_dwell_delay_long_label"/>
-      <widget name="pointing_dwell_threshold_small_label"/>
       <widget name="pointing_dwell_threshold_large_label"/>
+      <widget name="pointing_dwell_threshold_small_label"/>
+      <widget name="pointing_dwell_delay_long_label"/>
+      <widget name="pointing_dwell_delay_short_label"/>
+      <widget name="pointing_secondary_click_delay_long_label"/>
+      <widget name="pointing_secondary_click_delay_short_label"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="pointing_mouse_keys_settings_button"/>
-      <widget name="pointing_video_mouse_settings_button"/>
-      <widget name="pointing_secondary_click_spacer_label"/>
       <widget name="pointing_hover_click_settings_button"/>
+      <widget name="pointing_secondary_click_spacer_label"/>
+      <widget name="pointing_video_mouse_settings_button"/>
+      <widget name="pointing_mouse_keys_settings_button"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="hearing_sizegroup">
     <widgets>
-      <widget name="hearing_visual_alerts_enabled_box"/>
       <widget name="hearing_captions_enabled_box"/>
+      <widget name="hearing_visual_alerts_enabled_box"/>
     </widgets>
   </object>
 </interface>
