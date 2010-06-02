@@ -77,7 +77,7 @@ struct _GnomeControlCenterPrivate
 
 static void
 activate_panel (GnomeControlCenter *shell,
-                const gchar        *id,
+                const gchar        *nid,
                 const gchar        *desktop_file,
                 const gchar        *name,
                 const gchar        *icon_name)
@@ -89,72 +89,89 @@ activate_panel (GnomeControlCenter *shell,
   GKeyFile *key_file;
   GType panel_type = G_TYPE_INVALID;
   GList *panels, *l;
+  gchar *panel_id;
 
   /* check if there is an plugin that implements this panel */
   panels = g_io_extension_point_get_extensions (priv->extension_point);
 
-  for (l = panels; l != NULL; l = l->next)
-    {
-      GIOExtension *extension;
-      const gchar *name;
-
-      extension = l->data;
-
-      name = g_io_extension_get_name (extension);
-
-      if (!g_strcmp0 (name, id))
-        {
-          panel_type = g_io_extension_get_type (extension);
-          break;
-        }
-    }
-
-  if (panel_type != G_TYPE_INVALID)
-    {
-      GtkWidget *panel;
-      GtkWidget *box;
-      gint i;
-
-      /* create the panel plugin */
-      panel = g_object_new (panel_type, "shell", shell, NULL);
-
-      box = gtk_alignment_new (0, 0, 1, 1);
-      gtk_alignment_set_padding (GTK_ALIGNMENT (box), 6, 6, 6, 6);
-
-      gtk_container_add (GTK_CONTAINER (box), panel);
-
-      /* switch to the new panel */
-      i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box, NULL);
-      gtk_widget_show_all (box);
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
-
-      /* set the title of the window */
-      gtk_window_set_title (GTK_WINDOW (priv->window), name);
-      gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
-
-      return;
-    }
-
-
-  /* if a plugin was not found, then start app directly */
   if (!desktop_file)
     return;
 
   key_file = g_key_file_new ();
   g_key_file_load_from_file (key_file, desktop_file, 0, &err);
 
+  panel_id = g_key_file_get_string (key_file, "Desktop Entry",
+                                    "X-GNOME-Settings-Panel", NULL);
+
+  if (panel_id)
+    {
+
+      for (l = panels; l != NULL; l = l->next)
+        {
+          GIOExtension *extension;
+          const gchar *name;
+
+          extension = l->data;
+
+          name = g_io_extension_get_name (extension);
+
+          if (!g_strcmp0 (name, panel_id))
+            {
+              panel_type = g_io_extension_get_type (extension);
+              break;
+            }
+        }
+
+      if (panel_type != G_TYPE_INVALID)
+        {
+          GtkWidget *panel;
+          GtkWidget *box;
+          gint i;
+
+          /* create the panel plugin */
+          panel = g_object_new (panel_type, "shell", shell, NULL);
+
+          box = gtk_alignment_new (0, 0, 1, 1);
+          gtk_alignment_set_padding (GTK_ALIGNMENT (box), 6, 6, 6, 6);
+
+          gtk_container_add (GTK_CONTAINER (box), panel);
+
+          /* switch to the new panel */
+          i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box, NULL);
+          gtk_widget_show_all (box);
+          gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
+
+          /* set the title of the window */
+          gtk_window_set_title (GTK_WINDOW (priv->window), name);
+          gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
+
+          g_key_file_free (key_file);
+          key_file = NULL;
+
+          return;
+        }
+    }
+
+
+  /* if a plugin was not found, then start app directly */
+
   if (err)
     {
-      g_warning ("Error starting \"%s\": %s", id, err->message);
+      g_warning ("Error starting \"%s\": %s", desktop_file, err->message);
 
       g_error_free (err);
       err = NULL;
+
+      g_key_file_free (key_file);
+      key_file = NULL;
+
       return;
     }
 
   appinfo = (GAppInfo*) g_desktop_app_info_new_from_keyfile (key_file);
 
   g_key_file_free (key_file);
+  key_file = NULL;
 
 
   ctx = gdk_app_launch_context_new ();
@@ -168,7 +185,7 @@ activate_panel (GnomeControlCenter *shell,
 
   if (err)
     {
-      g_warning ("Error starting \"%s\": %s", id, err->message);
+      g_warning ("Error starting \"%s\": %s", desktop_file, err->message);
       g_error_free (err);
       err = NULL;
     }
@@ -191,8 +208,6 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   gtk_window_set_title (GTK_WINDOW (priv->window), priv->default_window_title);
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
                             priv->default_window_icon);
-
-  g_debug ("%s %s", priv->default_window_title, priv->default_window_icon);
 }
 
 

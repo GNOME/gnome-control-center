@@ -106,6 +106,6 @@ cc_example_panel_register (GIOModule *module)
   cc_example_panel_register_type (G_TYPE_MODULE (module));
   g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
                                   CC_TYPE_EXAMPLE_PANEL,
-                                  "gnome-example-panel.desktop", 0);
+                                  "example-panel", 0);
 }
 
