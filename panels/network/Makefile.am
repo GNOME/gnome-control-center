@@ -32,7 +32,7 @@ iconssvgdir = $(datadir)/icons/hicolor/scalable/apps
 dist_iconssvg_DATA = icons/scalable/gnome-network-properties.svg
 
 desktopdir = $(datadir)/applications
-desktop_in_files = gnome-network-properties.desktop.in
+desktop_in_files = gnome-network-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES = \

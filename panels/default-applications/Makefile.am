@@ -28,7 +28,7 @@ gnome-at-mobility: gnome-at-commandline.in
 	cp $< $@
 
 desktopdir = $(datadir)/applications
-Desktop_in_files = default-applications.desktop.in
+Desktop_in_files = gnome-default-applications-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 pkgconfigdir = $(datadir)/pkgconfig

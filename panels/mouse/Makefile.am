@@ -39,7 +39,7 @@ uidir   = $(pkgdatadir)/ui
 ui_DATA = gnome-mouse-properties.ui
 
 desktopdir = $(datadir)/applications
-Desktop_in_files = gnome-settings-mouse.desktop.in
+Desktop_in_files = gnome-mouse-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)

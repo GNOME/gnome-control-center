@@ -381,7 +381,7 @@ capplets/appearance/data/gnome-appearance-properties.desktop.in
 capplets/appearance/data/gnome-theme-installer.desktop.in
 capplets/common/Makefile
 panels/default-applications/Makefile
-panels/default-applications/default-applications.desktop.in
+panels/default-applications/gnome-default-applications-panel.desktop.in
 panels/default-applications/gnome-at-commandline.in
 panels/default-applications/gnome-at-session.desktop.in
 panels/default-applications/gnome-default-applications.pc
@@ -389,7 +389,7 @@ capplets/display/Makefile
 capplets/display/display-properties.desktop.in
 panels/keybindings/Makefile
 panels/keybindings/gnome-keybindings.pc
-panels/keybindings/keybinding.desktop.in
+panels/keybindings/gnome-keybindings-panel.desktop.in
 docs/Makefile
 docs/reference/Makefile
 docs/reference/libgnome-control-center/Makefile
@@ -405,11 +405,11 @@ libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
 panels/Makefile
 panels/mouse/Makefile
-panels/mouse/gnome-settings-mouse.desktop.in
+panels/mouse/gnome-mouse-panel.desktop.in
 panels/keyboard/Makefile
-panels/keyboard/keyboard.desktop.in
+panels/keyboard/gnome-keyboard-panel.desktop.in
 panels/network/Makefile
-panels/network/gnome-network-properties.desktop.in
+panels/network/gnome-network-panel.desktop.in
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in

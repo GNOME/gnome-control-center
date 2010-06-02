@@ -42,7 +42,7 @@ ui_DATA = gnome-keyboard-properties-a11y-notifications.ui \
 		gnome-keyboard-properties-options-dialog.ui
 
 desktopdir = $(datadir)/applications
-Desktop_in_files = keyboard.desktop.in
+Desktop_in_files = gnome-keyboard-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
