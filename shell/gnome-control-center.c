@@ -44,6 +44,8 @@ G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
+#define GNOME_SETTINGS_PANEL_ID_KEY "X-GNOME-Settings-Panel"
+
 enum
 {
   OVERVIEW_PAGE,
@@ -101,7 +103,7 @@ activate_panel (GnomeControlCenter *shell,
   g_key_file_load_from_file (key_file, desktop_file, 0, &err);
 
   panel_id = g_key_file_get_string (key_file, "Desktop Entry",
-                                    "X-GNOME-Settings-Panel", NULL);
+                                    GNOME_SETTINGS_PANEL_ID_KEY, NULL);
 
   if (panel_id)
     {
@@ -121,6 +123,9 @@ activate_panel (GnomeControlCenter *shell,
               break;
             }
         }
+
+      g_free (panel_id);
+      panel_id = NULL;
 
       if (panel_type != G_TYPE_INVALID)
         {
@@ -712,14 +717,26 @@ _shell_set_active_panel_from_id (CcShell      *shell,
   /* find the details for this item */
   while (iter_valid)
     {
+      GKeyFile *key_file;
       gchar *id;
 
       gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
                           COL_NAME, &name,
-                          COL_ID, &id,
                           COL_DESKTOP_FILE, &desktop,
                           COL_ICON_NAME, &icon_name,
                           -1);
+
+      /* load the .desktop file since gnome-menus doesn't have a way to read
+       * custom properties from desktop files */
+
+      key_file = g_key_file_new ();
+      g_key_file_load_from_file (key_file, desktop, 0, NULL);
+
+      id = g_key_file_get_string (key_file, "Desktop Entry",
+                                  GNOME_SETTINGS_PANEL_ID_KEY, NULL);
+      g_key_file_free (key_file);
+      key_file = NULL;
+
       if (id && !strcmp (id, start_id))
         {
           g_free (id);
