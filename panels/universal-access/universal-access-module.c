@@ -1,4 +1,5 @@
-/*
+/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
+ *
  * Copyright (C) 2010 Intel, Inc
  *
  * This program is free software; you can redistribute it and/or modify
