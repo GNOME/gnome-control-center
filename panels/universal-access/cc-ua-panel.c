@@ -232,6 +232,104 @@ gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
   gconf_client_notify (priv->client, key);
 }
 
+/* seeing section */
+#define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
+#define ICON_THEME_KEY "/desktop/gnome/interface/icon_theme"
+#define CONTRAST_MODEL_THEME_COLUMN 3
+
+static void
+contrast_notify_cb (GConfClient *client,
+                    guint        cnxn_id,
+                    GConfEntry  *entry,
+                    CcUaPanel   *panel)
+{
+  CcUaPanelPrivate *priv = panel->priv;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkWidget *combo;
+  gboolean valid;
+  gchar *gconf_value;
+
+  gconf_value = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
+
+  combo = WID (priv->builder, "seeing_contrast_combobox");
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+
+  /* see if there is a matching theme name in the combobox model */
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+  while (valid)
+    {
+      gchar *value;
+
+      gtk_tree_model_get (model, &iter,
+                          CONTRAST_MODEL_THEME_COLUMN, &value,
+                          -1);
+
+      if (!g_strcmp0 (value, gconf_value))
+        {
+          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
+          g_free (value);
+          break;
+        }
+
+      g_free (value);
+      valid = gtk_tree_model_iter_next (model, &iter);
+    }
+
+  /* if a value for the current theme was not found in the combobox, set to the
+   * "normal" option */
+  if (!valid)
+    {
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 1);
+    }
+}
+
+static void
+contrast_combobox_changed_cb (GtkComboBox *box,
+                              CcUaPanel   *panel)
+{
+  CcUaPanelPrivate *priv = panel->priv;
+  gchar *theme_name = NULL;
+  GtkTreeIter iter;
+
+  gtk_combo_box_get_active_iter (box, &iter);
+
+  gtk_tree_model_get (gtk_combo_box_get_model (box), &iter,
+                      CONTRAST_MODEL_THEME_COLUMN, &theme_name,
+                      -1);
+
+  if (g_strcmp0 (theme_name, ""))
+    {
+      gconf_client_set_string (priv->client, GTK_THEME_KEY, theme_name, NULL);
+      gconf_client_set_string (priv->client, ICON_THEME_KEY, theme_name, NULL);
+    }
+  else
+    {
+      gconf_client_unset (priv->client, GTK_THEME_KEY, NULL);
+      gconf_client_unset (priv->client, ICON_THEME_KEY, NULL);
+    }
+
+  g_free (theme_name);
+}
+
+static void
+cc_ua_panel_init_seeing (CcUaPanel *self)
+{
+  CcUaPanelPrivate *priv = self->priv;
+
+  gconf_client_add_dir (priv->client, "/desktop/gnome/interface",
+                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+
+  gconf_client_notify_add (priv->client, GTK_THEME_KEY,
+                           (GConfClientNotifyFunc) contrast_notify_cb,
+                           self, NULL, NULL);
+
+  g_signal_connect (WID (priv->builder, "seeing_contrast_combobox"), "changed",
+                    G_CALLBACK (contrast_combobox_changed_cb), self);
+  gconf_client_notify (priv->client, GTK_THEME_KEY);
+}
+
+
 /* hearing/sound section */
 static void
 visual_bell_type_notify_cb (GConfClient *client,
@@ -472,6 +570,7 @@ cc_ua_panel_init (CcUaPanel *self)
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);
   cc_ua_panel_init_hearing (self);
+  cc_ua_panel_init_seeing (self);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
                                                 "universal_access_box");
