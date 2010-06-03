@@ -130,14 +130,16 @@ activate_panel (GnomeControlCenter *shell,
           gtk_container_add (GTK_CONTAINER (box), panel);
 
           /* switch to the new panel */
-          i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box, NULL);
-          gtk_widget_show_all (box);
+          i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box,
+                                        NULL);
+          gtk_widget_show (box);
           gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
 
           /* set the title of the window */
           gtk_window_set_title (GTK_WINDOW (priv->window), name);
           gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
 
+          gtk_widget_show (panel);
           return;
         }
     }
