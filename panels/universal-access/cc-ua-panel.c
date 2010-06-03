@@ -299,6 +299,17 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
 
 }
 
+/* typing/keyboard section */
+static void
+typing_keyboard_preferences_clicked (GtkButton *button,
+                                     CcUaPanel *panel)
+{
+  CcShell *shell;
+
+  shell = cc_panel_get_shell (CC_PANEL (panel));
+  cc_shell_set_active_panel_from_id (shell, "keyboard", NULL);
+}
+
 static void
 cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
@@ -361,6 +372,21 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   gconf_peditor_new_boolean (changeset,
                              KEY_CONFIG_ROOT "/bouncekeys_beep_reject", w,
                              NULL);
+
+  g_signal_connect (WID (priv->builder, "typing_keyboard_preferences_button"),
+                    "clicked",
+                    G_CALLBACK (typing_keyboard_preferences_clicked), self);
+}
+
+/* mouse/pointing & clicking section */
+static void
+pointing_mouse_preferences_clicked_cb (GtkButton *button,
+                                       CcUaPanel *panel)
+{
+  CcShell *shell;
+
+  shell = cc_panel_get_shell (CC_PANEL (panel));
+  cc_shell_set_active_panel_from_id (shell, "mouse", NULL);
 }
 
 static void
@@ -399,6 +425,11 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
   gconf_peditor_new_numeric_range (changeset,
                                    MOUSE_CONFIG_ROOT "/threshold", w,
                                    NULL);
+
+  /* mouse preferences button */
+  g_signal_connect (WID (priv->builder, "pointing_mouse_preferences_button"),
+                    "clicked",
+                    G_CALLBACK (pointing_mouse_preferences_clicked_cb), self);
 }
 
 static void
