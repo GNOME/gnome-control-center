@@ -22,6 +22,9 @@
 #include "cc-shell-model.h"
 #include <string.h>
 
+#define GNOME_SETTINGS_PANEL_ID_KEY "X-GNOME-Settings-Panel"
+
+
 G_DEFINE_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
 
 static void
@@ -53,14 +56,30 @@ cc_shell_model_add_item (CcShellModel   *model,
 {
   const gchar *icon = gmenu_tree_entry_get_icon (item);
   const gchar *name = gmenu_tree_entry_get_name (item);
-  const gchar *id = gmenu_tree_entry_get_desktop_file_id (item);
   const gchar *desktop = gmenu_tree_entry_get_desktop_file_path (item);
   const gchar *comment = gmenu_tree_entry_get_comment (item);
+  gchar *id;
   GdkPixbuf *pixbuf = NULL;
   gchar *icon2 = NULL;
   GError *err = NULL;
   gchar *search_target;
+  GKeyFile *key_file;
 
+  /* load the .desktop file since gnome-menus doesn't have a way to read
+   * custom properties from desktop files */
+
+  key_file = g_key_file_new ();
+  g_key_file_load_from_file (key_file, desktop, 0, NULL);
+
+  id = g_key_file_get_string (key_file, "Desktop Entry",
+                              GNOME_SETTINGS_PANEL_ID_KEY, NULL);
+  g_key_file_free (key_file);
+  key_file = NULL;
+
+  if (!id)
+    id = g_strdup (gmenu_tree_entry_get_desktop_file_id (item));
+
+  /* find the icon */
   if (icon != NULL && *icon == '/')
     {
       pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, 32, 32, TRUE, &err);
@@ -97,6 +116,6 @@ cc_shell_model_add_item (CcShellModel   *model,
                                      COL_ICON_NAME, icon,
                                      -1);
 
+  g_free (id);
   g_free (search_target);
-
 }
