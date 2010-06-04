@@ -509,6 +509,12 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   g_signal_connect (WID (priv->builder, "seeing_text_size_combobox"), "changed",
                     G_CALLBACK (dpi_combo_box_changed), self);
   gconf_client_notify (priv->client, DPI_KEY);
+
+  gconf_peditor_new_boolean (NULL,
+                             "/desktop/gnome/accessibility/keyboard/togglekeys_enable",
+                             WID (priv->builder,
+                                  "seeing_enable_toggle_keys_checkbutton"),
+                             NULL);
 }
 
 
