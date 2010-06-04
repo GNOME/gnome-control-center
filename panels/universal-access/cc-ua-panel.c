@@ -1,6 +1,7 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
  *
  * Copyright (C) 2010 Intel, Inc
+ * Copyright (C) 2008 William Jon McCann <jmccann@redhat.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,6 +45,8 @@ struct _CcUaPanelPrivate
 {
   GtkBuilder *builder;
   GConfClient *client;
+
+  GSList *notify_list;
 };
 
 
@@ -77,6 +80,21 @@ static void
 cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanelPrivate *priv = CC_UA_PANEL (object)->priv;
+  GSList *l;
+
+  /* remove the notify callbacks, since they rely on builder/client being
+   * available */
+  if (priv->notify_list)
+    {
+      for (l = priv->notify_list; l; l = g_slist_next (l))
+        {
+          gconf_client_notify_remove (priv->client,
+                                      GPOINTER_TO_INT (l->data));
+        }
+      g_slist_free (priv->notify_list);
+      priv->notify_list = NULL;
+    }
+
 
   if (priv->builder)
     {
@@ -236,6 +254,157 @@ gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
 #define ICON_THEME_KEY "/desktop/gnome/interface/icon_theme"
 #define CONTRAST_MODEL_THEME_COLUMN 3
+#define DPI_MODEL_FACTOR_COLUMN 2
+
+#define DPI_KEY "/desktop/gnome/font_rendering/dpi"
+
+/* The following two functions taken from gsd-a11y-preferences-dialog.c
+ *
+ * Copyright (C)  2008 William Jon McCann <jmccann@redhat.com>
+ *
+ * Licensed under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ */
+/* X servers sometimes lie about the screen's physical dimensions, so we cannot
+ * compute an accurate DPI value.  When this happens, the user gets fonts that
+ * are too huge or too tiny.  So, we see what the server returns:  if it reports
+ * something outside of the range [DPI_LOW_REASONABLE_VALUE,
+ * DPI_HIGH_REASONABLE_VALUE], then we assume that it is lying and we use
+ * DPI_FALLBACK instead.
+ *
+ * See get_dpi_from_gconf_or_server() below, and also
+ * https://bugzilla.novell.com/show_bug.cgi?id=217790
+ */
+#define DPI_LOW_REASONABLE_VALUE 50
+#define DPI_HIGH_REASONABLE_VALUE 500
+#define DPI_DEFAULT        96
+
+static gdouble
+dpi_from_pixels_and_mm (gint pixels,
+                        gint mm)
+{
+  gdouble dpi;
+
+  if (mm >= 1)
+    return pixels / (mm / 25.4);
+  else
+    return dpi = 0;
+}
+
+static gdouble
+get_dpi_from_x_server ()
+{
+  GdkScreen *screen;
+  gdouble dpi;
+
+  screen = gdk_screen_get_default ();
+
+  if (screen)
+    {
+      gdouble width_dpi, height_dpi;
+
+      width_dpi = dpi_from_pixels_and_mm (gdk_screen_get_width (screen),
+                                          gdk_screen_get_width_mm (screen));
+      height_dpi = dpi_from_pixels_and_mm (gdk_screen_get_height (screen),
+                                           gdk_screen_get_height_mm (screen));
+
+      if (width_dpi < DPI_LOW_REASONABLE_VALUE
+          || width_dpi > DPI_HIGH_REASONABLE_VALUE
+          || height_dpi < DPI_LOW_REASONABLE_VALUE
+          || height_dpi > DPI_HIGH_REASONABLE_VALUE)
+        {
+          dpi = DPI_DEFAULT;
+        }
+      else
+        {
+          dpi = (width_dpi + height_dpi) / 2.0;
+        }
+    }
+  else
+    dpi = DPI_DEFAULT;
+
+  return dpi;
+}
+
+static void
+dpi_notify_cb (GConfClient *client,
+               guint        cnxn_id,
+               GConfEntry  *entry,
+               CcUaPanel   *panel)
+{
+  CcUaPanelPrivate *priv = panel->priv;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkWidget *combo;
+  gboolean valid;
+  gdouble gconf_value;
+  gdouble x_dpi;
+
+  if (!entry->value)
+    return;
+
+  gconf_value = gconf_value_get_float (entry->value);
+
+  combo = WID (priv->builder, "seeing_text_size_combobox");
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+
+  /* get current value from screen */
+  x_dpi = get_dpi_from_x_server ();
+
+  /* see if the calculated value matches in the combobox model */
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+  while (valid)
+    {
+      gfloat factor;
+
+      gtk_tree_model_get (model, &iter,
+                          DPI_MODEL_FACTOR_COLUMN, &factor,
+                          -1);
+
+      if (gconf_value == (float) (factor * x_dpi))
+        {
+          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
+          break;
+        }
+
+      valid = gtk_tree_model_iter_next (model, &iter);
+    }
+
+  /* if a matching value was not found in the combobox, set to "normal" */
+  if (!valid)
+    {
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
+    }
+}
+
+static void
+dpi_combo_box_changed (GtkComboBox *box,
+                       CcUaPanel *panel)
+{
+  CcUaPanelPrivate *priv = panel->priv;
+  GtkTreeIter iter;
+  gfloat factor;
+
+  gtk_combo_box_get_active_iter (box, &iter);
+
+  gtk_tree_model_get (gtk_combo_box_get_model (box), &iter,
+                      DPI_MODEL_FACTOR_COLUMN, &factor,
+                      -1);
+
+  if (factor == 1.0)
+    gconf_client_unset (priv->client, DPI_KEY, NULL);
+  else
+    {
+      gdouble x_dpi, u_dpi;
+
+      x_dpi = get_dpi_from_x_server ();
+      u_dpi = (gdouble) factor * x_dpi;
+
+      gconf_client_set_float (priv->client, DPI_KEY, u_dpi, NULL);
+    }
+}
+
 
 static void
 contrast_notify_cb (GConfClient *client,
@@ -316,17 +485,30 @@ static void
 cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
+  guint id;
 
   gconf_client_add_dir (priv->client, "/desktop/gnome/interface",
                         GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  gconf_client_add_dir (priv->client, "/desktop/gnome/font_rendering",
+                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-  gconf_client_notify_add (priv->client, GTK_THEME_KEY,
-                           (GConfClientNotifyFunc) contrast_notify_cb,
-                           self, NULL, NULL);
+  id = gconf_client_notify_add (priv->client, GTK_THEME_KEY,
+                                (GConfClientNotifyFunc) contrast_notify_cb,
+                                self, NULL, NULL);
+  priv->notify_list = g_slist_prepend (priv->notify_list, GINT_TO_POINTER (id));
+
+  id = gconf_client_notify_add (priv->client, DPI_KEY,
+                                (GConfClientNotifyFunc) dpi_notify_cb,
+                                self, NULL, NULL);
+  priv->notify_list = g_slist_prepend (priv->notify_list, GINT_TO_POINTER (id));
 
   g_signal_connect (WID (priv->builder, "seeing_contrast_combobox"), "changed",
                     G_CALLBACK (contrast_combobox_changed_cb), self);
   gconf_client_notify (priv->client, GTK_THEME_KEY);
+
+  g_signal_connect (WID (priv->builder, "seeing_text_size_combobox"), "changed",
+                    G_CALLBACK (dpi_combo_box_changed), self);
+  gconf_client_notify (priv->client, DPI_KEY);
 }
 
 
@@ -369,6 +551,7 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
   CcUaPanelPrivate *priv = self->priv;
   GtkWidget *w;
   GConfEntry *entry;
+  guint id;
 
   gconf_client_add_dir (priv->client, "/apps/metacity/general",
                         GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -378,10 +561,13 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
                             w, visual_alerts_section);
 
   /* visual bell type */
-  gconf_client_notify_add (priv->client,
-                           "/apps/metacity/general/visual_bell_type",
-                           (GConfClientNotifyFunc) visual_bell_type_notify_cb,
-                           self, NULL, NULL);
+  id = gconf_client_notify_add (priv->client,
+                                "/apps/metacity/general/visual_bell_type",
+                                (GConfClientNotifyFunc)
+                                visual_bell_type_notify_cb,
+                                self, NULL, NULL);
+  priv->notify_list = g_slist_prepend (priv->notify_list, GINT_TO_POINTER (id));
+
   /* set the initial value */
   entry = gconf_client_get_entry (priv->client,
                                   "/apps/metacity/general/visual_bell_type",
