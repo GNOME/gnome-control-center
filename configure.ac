@@ -372,9 +372,6 @@ capplets/Makefile
 capplets/about-me/Makefile
 capplets/about-me/gnome-about-me.desktop.in
 capplets/about-me/icons/Makefile
-capplets/accessibility/Makefile
-capplets/accessibility/at-properties/at-properties.desktop.in
-capplets/accessibility/at-properties/Makefile
 capplets/appearance/Makefile
 capplets/appearance/data/Makefile
 capplets/appearance/data/gnome-appearance-properties.desktop.in

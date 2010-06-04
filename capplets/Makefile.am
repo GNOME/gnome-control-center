@@ -1,12 +1,10 @@
 SUBDIRS = \
 	common			\
-	accessibility	\
 	appearance		\
 	display
 
 DIST_SUBDIRS = \
 	common			\
-	accessibility		\
 	appearance		\
 	display 		\
 	about-me
