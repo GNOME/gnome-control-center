@@ -391,7 +391,7 @@ panels/keybindings/Makefile
 panels/keybindings/gnome-keybindings.pc
 panels/keybindings/gnome-keybindings-panel.desktop.in
 panels/universal-access/Makefile
-panels/universal-access/gnome-universal-access.desktop.in
+panels/universal-access/gnome-universal-access-panel.desktop.in
 docs/Makefile
 docs/reference/Makefile
 docs/reference/libgnome-control-center/Makefile
