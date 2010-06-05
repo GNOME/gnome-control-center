@@ -13,10 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&component=general\n"
-"POT-Creation-Date: 2010-05-31 19:28+0000\n"
-"PO-Revision-Date: 2010-06-03 13:21+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-05 09:19+0300\n"
+"PO-Revision-Date: 2010-06-05 10:03+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -665,7 +664,6 @@ msgid "The old and new passwords are the same."
 msgstr "הסיסמה הישנה והסיסמה החדשה זהות."
 
 #: ../capplets/about-me/gnome-about-me-password.c:556
-#| msgid "The two passwords are not equal."
 msgid "The new password has already been used recently."
 msgstr "כבר נעשה שימוש לאחרונה בססמה החדשה."
 
@@ -745,69 +743,6 @@ msgstr "סיסמה _חדשה:"
 #: ../capplets/about-me/gnome-about-me-password.ui.h:10
 msgid "_Retype new password:"
 msgstr "הקלד שוב את הסיסמה החדשה:"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:1
-msgid "Accessible Lo_gin"
-msgstr "התחברות _נגישה"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:2
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
-msgid "Assistive Technologies"
-msgstr "טכנולוגיות מסייעות"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:3
-msgid "Assistive Technologies Preferences"
-msgstr "העדפות טכנולוגיות מסייעות"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:4
-msgid ""
-"Changes to enable assistive technologies will not take effect until your "
-"next log in."
-msgstr "שינויים להפעלת טכנולוגיות מסייעות יכנסו לתוקף רק בהתחברות הבאה."
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:5
-msgid "Close and _Log Out"
-msgstr "סגור וה_תנתק"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:6
-msgid "Jump to Preferred Applications dialog"
-msgstr "עבור לתיבת הדו־שיח של היישומים המועדפים"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:7
-msgid "Jump to the Accessible Login dialog"
-msgstr "עבור אל תיבת הדו־שיח להתחברות נגישה"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:8
-msgid "Jump to the Keyboard Accessibility dialog"
-msgstr "עבור למסך נגישות המקלדת"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:9
-msgid "Jump to the Mouse Accessibility dialog"
-msgstr "עבור לתיבת הדו־שיח של נגישות העכבר"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:10
-msgid "Preferences"
-msgstr "העדפות"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:11
-msgid "_Enable assistive technologies"
-msgstr "_אפשר טכנולוגיות מסייעות"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:12
-msgid "_Keyboard Accessibility"
-msgstr "נגישות _מקלדת"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:13
-msgid "_Mouse Accessibility"
-msgstr "_נגישות עכבר"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:14
-msgid "_Preferred Applications"
-msgstr "יישומים מוע_דפים"
-
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Choose which accessibility features to enable when you log in"
-msgstr "בחר אילו תכונות נגישות יופעלו בהתחברות"
 
 #: ../capplets/appearance/appearance-desktop.c:627
 msgid "Add Wallpaper"
@@ -1055,8 +990,10 @@ msgstr "איקונים"
 msgid "Icons only"
 msgstr "איקונים בלבד"
 
+#. large threshold
 #: ../capplets/appearance/data/appearance.ui.h:24
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Large"
 msgstr "גדול"
 
@@ -1096,8 +1033,10 @@ msgstr "שמירת תמונת ה_רקע"
 msgid "Scale"
 msgstr "בגודל מותאם"
 
+#. small threshold
 #: ../capplets/appearance/data/appearance.ui.h:34
 #: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/universal-access/uap.ui.h:78
 msgid "Small"
 msgstr "קטן"
 
@@ -1171,6 +1110,7 @@ msgid "Window Border"
 msgstr "מסגרת חלון"
 
 #: ../capplets/appearance/data/appearance.ui.h:53
+#: ../panels/universal-access/uap.ui.h:95
 msgid "Zoom"
 msgstr "תקריב"
 
@@ -1743,12 +1683,12 @@ msgid ""
 "not installed."
 msgstr "ערכת הנושא לא תראה כמצופה כי ערכת האיקונים '%s' לא מותקנת."
 
-#: ../panels/default-applications/default-applications.desktop.in.in.h:1
+#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
 msgid "Preferred Applications"
 msgstr "יישומים מועדפים"
 
-#: ../panels/default-applications/default-applications.desktop.in.in.h:2
+#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "בחר את יישומי ברירת המחדל שלך"
 
@@ -1891,6 +1831,7 @@ msgid "Claws Mail"
 msgstr "דואר Claws"
 
 #: ../panels/default-applications/gnome-default-applications.xml.in.h:4
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Dasher"
 msgstr "Dasher"
 
@@ -2111,14 +2052,17 @@ msgstr "העדפות צג"
 #: ../capplets/display/display-capplet.ui.h:6
 #: ../capplets/display/xrandr-capplet.c:309
 #: ../capplets/display/xrandr-capplet.c:348
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Normal"
 msgstr "רגיל"
 
 #: ../capplets/display/display-capplet.ui.h:7
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Off"
 msgstr "מכובה"
 
 #: ../capplets/display/display-capplet.ui.h:8
+#: ../panels/universal-access/uap.ui.h:62
 msgid "On"
 msgstr "פעיל"
 
@@ -2437,7 +2381,7 @@ msgid "Custom Shortcut"
 msgstr "קיצור דרך מותאם אישית"
 
 #: ../panels/keybindings/gnome-keybinding-properties.ui.h:3
-#: ../panels/keybindings/keybinding.desktop.in.in.h:2
+#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "קיצורי מקלדת"
 
@@ -2449,7 +2393,7 @@ msgstr ""
 "כדי לערוך מקש קיצור דרך, לחץ על השורה המתאימה ולחץ על הקיצור החדש, או לחץ על "
 "מקש החזר כדי למחוק."
 
-#: ../panels/keybindings/keybinding.desktop.in.in.h:1
+#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "שייך מקשי קיצור לפקודות"
 
@@ -2483,6 +2427,7 @@ msgstr "צפצף כאשר מקש _נדחה"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Bounce Keys"
 msgstr "מקשים קופצים"
 
@@ -2510,11 +2455,13 @@ msgstr "הצגת משוב _חזותי עבור צליל ההתרעה"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Slow Keys"
 msgstr "מקשים אטיים"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Sticky Keys"
 msgstr "מקשים דביקים"
 
@@ -2544,11 +2491,13 @@ msgstr "סמן מ_הבהב בשדות טקסט"
 
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Cursor blinks speed"
 msgstr "מהירות הבהוב סמן"
 
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/universal-access/uap.ui.h:30
 msgid "D_elay:"
 msgstr "ה_שהייה:"
 
@@ -2595,12 +2544,15 @@ msgid ""
 "injuries"
 msgstr "נעל את המסך לאחר פרק זמן מסוים כדי לעזור למנוע נזקי שימוש חוזר במקלדת"
 
+#. long delay
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
 #: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Long"
 msgstr "ארוך"
 
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Mouse Keys"
 msgstr "מקשי עכבר"
 
@@ -2660,8 +2612,10 @@ msgstr "_מהירות:"
 msgid "Select a keyboard layout to be added to the list"
 msgstr "נא לבחור פריסת מקלדת להוספה מהרשימה"
 
+#. short delay
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Short"
 msgstr "קצר"
 
@@ -2805,11 +2759,11 @@ msgstr "מודלים"
 msgid "Default"
 msgstr "ברירת מחדל"
 
-#: ../panels/keyboard/keyboard.desktop.in.in.h:1
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "מקלדת"
 
-#: ../panels/keyboard/keyboard.desktop.in.in.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "קבע את העדפות המקלדת שלך"
 
@@ -2817,25 +2771,25 @@ msgstr "קבע את העדפות המקלדת שלך"
 #. Don't include the prefix "gesture|" in the translation.
 #: ../panels/mouse/gnome-mouse-accessibility.c:89
 msgid "gesture|Move left"
-msgstr "הזז שמאלה"
+msgstr "הזזה שמאלה"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
 #: ../panels/mouse/gnome-mouse-accessibility.c:94
 msgid "gesture|Move right"
-msgstr "הזז ימינה"
+msgstr "הזזה ימינה"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
 #: ../panels/mouse/gnome-mouse-accessibility.c:99
 msgid "gesture|Move up"
-msgstr "הזז למעלה"
+msgstr "הזזה למעלה"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
 #: ../panels/mouse/gnome-mouse-accessibility.c:104
 msgid "gesture|Move down"
-msgstr "הזז למטה"
+msgstr "הזזה למטה"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
@@ -2845,11 +2799,11 @@ msgstr "כבוי"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Choose type of click _beforehand"
-msgstr "בחר את סוג הלחיצה מ_ראש"
+msgstr "יש לבחור את סוג הלחיצה מ_ראש"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Choose type of click with mo_use gestures"
-msgstr "בחר את סוג הלחיצה עם מחוות _עכבר"
+msgstr "יש לבחור את סוג הלחיצה עם מחוות _עכבר"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "D_ouble click:"
@@ -2884,6 +2838,7 @@ msgid "Enable h_orizontal scrolling"
 msgstr "ה_פעלת גלילה אופקית"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/universal-access/uap.ui.h:40
 msgid "High"
 msgstr "גבוה"
 
@@ -2892,6 +2847,7 @@ msgid "Locate Pointer"
 msgstr "איתור סמן"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Low"
 msgstr "נמוך"
 
@@ -2917,15 +2873,16 @@ msgstr "לחיצה _משנית:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Sh_ow position of pointer when the Control key is pressed"
-msgstr "ה_צג את מיקום הסמן בעת לחיצה על Ctrl"
+msgstr "ה_צגת מיקום הסמן בעת לחיצה על Ctrl"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Show click type _window"
-msgstr "הצג את חלון _סוג הלחיצה"
+msgstr "הצגת חלון _סוג הלחיצה"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Simulated Secondary Click"
-msgstr "לחיצה שניה מדומה"
+msgstr "לחיצה שנייה מדומה"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Thr_eshold:"
@@ -2934,7 +2891,7 @@ msgstr "_סף:"
 #: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid ""
 "To test your double-click settings, try to double-click on the light bulb."
-msgstr "כדי לבדוק את הגדרות הלחיצה הכפולה שלך, נסה ללחוץ פעמיים על הנורה."
+msgstr "כדי לבדוק את הגדרות הלחיצה הכפולה שלך, יש לנסות ללחוץ פעמיים על הנורה."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:34
 msgid "Touchpad"
@@ -2958,13 +2915,14 @@ msgstr "גלילת _קצה"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:41
 msgid "_Initiate click when stopping pointer movement"
-msgstr "ה_פעל לחיצה כאשר נעצרת תזוזת העכבר"
+msgstr "ה_פעלת לחיצה כאשר נעצרת תזוזת העכבר"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:42
 msgid "_Left-handed"
 msgstr "שמאליים"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/universal-access/uap.ui.h:98
 msgid "_Motion threshold:"
 msgstr "_סף תנועה:"
 
@@ -2986,15 +2944,15 @@ msgstr "_פרק זמן:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Trigger secondary click by holding down the primary button"
-msgstr "_הפעל לחיצה משנית על ידי החזקת הכפתור הראשי"
+msgstr "ה_פעלת לחיצה משנית על ידי החזקת הכפתור הראשי"
 
-#: ../panels/mouse/gnome-settings-mouse.desktop.in.in.h:1
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "עכבר"
 
-#: ../panels/mouse/gnome-settings-mouse.desktop.in.in.h:2
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
 msgid "Set your mouse preferences"
-msgstr "קבע את העדפות העכבר שלך"
+msgstr "הגדרת העדפות העכבר שלך"
 
 #: ../panels/network/gnome-network-properties.c:701
 #: ../panels/network/gnome-network-properties.c:852
@@ -3005,13 +2963,13 @@ msgstr "מיקום חדש..."
 msgid "Location already exists"
 msgstr "המיקום כבר קיים"
 
-#: ../panels/network/gnome-network-properties.desktop.in.in.h:1
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "מתווך רשת"
 
-#: ../panels/network/gnome-network-properties.desktop.in.in.h:2
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
-msgstr "קבע את העדפות מתווך הרשת"
+msgstr "הגדרת העדפות מתווך הרשת"
 
 #: ../panels/network/gnome-network-properties.ui.h:1
 msgid "<b>Di_rect internet connection</b>"
@@ -3027,7 +2985,7 @@ msgstr "<b>_הגדרות מתווך ידניות</b>"
 
 #: ../panels/network/gnome-network-properties.ui.h:4
 msgid "<b>_Use authentication</b>"
-msgstr "<b>_השתמש באימות</b>"
+msgstr "<b>_שימוש באימות</b>"
 
 #: ../panels/network/gnome-network-properties.ui.h:5
 msgid "Autoconfiguration _URL:"
@@ -3035,11 +2993,11 @@ msgstr "_כתובת הגדרות אוטומטיות:"
 
 #: ../panels/network/gnome-network-properties.ui.h:6
 msgid "C_reate"
-msgstr "צו_ר"
+msgstr "יצי_רה"
 
 #: ../panels/network/gnome-network-properties.ui.h:7
 msgid "Create New Location"
-msgstr "צור מיקום חדש"
+msgstr "יצירת מיקום חדש"
 
 #: ../panels/network/gnome-network-properties.ui.h:8
 msgid "HTTP Proxy Details"
@@ -3051,7 +3009,7 @@ msgstr "מתווך H_TTP:"
 
 #: ../panels/network/gnome-network-properties.ui.h:10
 msgid "Ignore Host List"
-msgstr "התעלם מרשימת מארחים"
+msgstr "התעלמות מרשימת מארחים"
 
 #: ../panels/network/gnome-network-properties.ui.h:11
 msgid "Ignored Hosts"
@@ -3087,7 +3045,7 @@ msgstr "_שם משתמש:"
 
 #: ../panels/network/gnome-network-properties.ui.h:19
 msgid "_Delete Location"
-msgstr "_מחק מיקום"
+msgstr "_מחיקת מיקום"
 
 #: ../panels/network/gnome-network-properties.ui.h:20
 msgid "_Details"
@@ -3103,7 +3061,7 @@ msgstr "_שם מיקום:"
 
 #: ../panels/network/gnome-network-properties.ui.h:23
 msgid "_Password:"
-msgstr "_סיסמה:"
+msgstr "_ססמה:"
 
 #: ../panels/network/gnome-network-properties.ui.h:24
 msgid "_Secure HTTP proxy:"
@@ -3111,7 +3069,319 @@ msgstr "מתווך HTTP מ_אובטח"
 
 #: ../panels/network/gnome-network-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
-msgstr "_השתמש באותו המתווך עבור כל הפרוטוקולים"
+msgstr "_שימוש באותו המתווך עבור כל הפרוטוקולים"
+
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
+msgid "Universal Access"
+msgstr "גישה אוניברסלית"
+
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+msgid "Universal Access Preferences"
+msgstr "העדפות הגישה האוניברסלית"
+
+#: ../panels/universal-access/uap.ui.h:2
+#, no-c-format
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/universal-access/uap.ui.h:4
+#, no-c-format
+msgid "125%"
+msgstr "125%"
+
+#: ../panels/universal-access/uap.ui.h:6
+#, no-c-format
+msgid "150%"
+msgstr "150%"
+
+#: ../panels/universal-access/uap.ui.h:7
+msgid "<span size=\"x-large\">High/Inverse</span>"
+msgstr "<span size=\"x-large\">גבוהה/הפוכה</span>"
+
+#: ../panels/universal-access/uap.ui.h:8
+msgid "<span size=\"x-large\">High</span>"
+msgstr "<span size=\"x-large\">גבוהה</span>"
+
+#: ../panels/universal-access/uap.ui.h:9
+msgid "<span size=\"x-large\">Low</span>"
+msgstr "<span size=\"x-large\">נמוכה</span>"
+
+#: ../panels/universal-access/uap.ui.h:10
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr "<span size=\"x-large\">רגילה</span>"
+
+#: ../panels/universal-access/uap.ui.h:11
+msgid "Acceptance delay:"
+msgstr "השהיית קבלה:"
+
+#: ../panels/universal-access/uap.ui.h:12
+msgid "Accessibility features can be turned on or off with keyboard shortcuts"
+msgstr "ניתן לכבות או להפעיל את תכונות הנגישות בעזרת צירופי מקשים"
+
+#: ../panels/universal-access/uap.ui.h:13
+msgid "Beep when Caps and Num Lock are used"
+msgstr "צפצוף בעת השימוש ב־Caps Lock וב־Num Lock"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Beep when a key is"
+msgstr "צפצוף בעת ביצוע פעולה על מקש"
+
+#: ../panels/universal-access/uap.ui.h:15
+msgid "Beep when a key is rejected"
+msgstr "צפצוף בעת דחיית לחיצת מקש"
+
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Beep when a modifer key is pressed"
+msgstr "צפצוף בעת לחיצה על מקשי החלפה"
+
+#: ../panels/universal-access/uap.ui.h:18
+msgid "Caribou"
+msgstr "Caribou"
+
+#: ../panels/universal-access/uap.ui.h:19
+msgid "Change constrast:"
+msgstr "שינוי הניגודיות:"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Closed Captioning"
+msgstr "כתוביות סיוע"
+
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Contrast:"
+msgstr "ניגודיות:"
+
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Control the pointer using the keypad."
+msgstr "שליטה על סמן העכבר באמצעות לחצני העכבר."
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Control the pointer using the video camera."
+msgstr "שליטה על סמן העכבר באמצעות מצלמת וידאו."
+
+#: ../panels/universal-access/uap.ui.h:24
+msgid "Ctrl+Alt+-"
+msgstr "Ctrl+Alt+-"
+
+#: ../panels/universal-access/uap.ui.h:25
+msgid "Ctrl+Alt+0"
+msgstr "Ctrl+Alt+0"
+
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Ctrl+Alt+4"
+msgstr "Ctrl+Alt+4"
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Ctrl+Alt+8"
+msgstr "Ctrl+Alt+8"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "Ctrl+Alt+="
+msgstr "Ctrl+Alt+="
+
+#: ../panels/universal-access/uap.ui.h:32
+msgid "Decrease size:"
+msgstr "הקטנת הגודל:"
+
+#: ../panels/universal-access/uap.ui.h:33
+msgid "Disable if two keys are pressed together"
+msgstr "נטרול אם שני מקשים נלחצים ביחד"
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Display"
+msgstr "תצוגה"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "Display a textual description of speech and sounds."
+msgstr "הצגת תיאור מילולי של דיבור וצלילים."
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Flash the entire screen"
+msgstr "הבהוב המסך כולו"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "Flash the window title"
+msgstr "הבהוב כותרת החלון"
+
+#: ../panels/universal-access/uap.ui.h:38
+msgid "GOK"
+msgstr "GOK"
+
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Hearing"
+msgstr "שמיעה"
+
+#: ../panels/universal-access/uap.ui.h:41
+msgid "High/Inverse"
+msgstr "גבוהה/הפוכה"
+
+#: ../panels/universal-access/uap.ui.h:42
+msgid "HighContrast"
+msgstr "ניגודיות_גבוהה"
+
+#: ../panels/universal-access/uap.ui.h:43
+msgid "HighContrastInverse"
+msgstr "ניגודית_גבוהה_הפוכה"
+
+#: ../panels/universal-access/uap.ui.h:44
+msgid "Hover Click"
+msgstr "לחיצה במעבר מעל"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgid "I need assistance with:"
+msgstr "אזדקק לעזרה עם:"
+
+#: ../panels/universal-access/uap.ui.h:46
+msgid "Ignores fast duplicate keypresses"
+msgstr "התעלמות מלחיצות מקשים כפולות מהירות"
+
+#: ../panels/universal-access/uap.ui.h:47
+msgid "Increase size:"
+msgstr "הגדלת הגודל"
+
+#: ../panels/universal-access/uap.ui.h:48
+msgid "Keyboard Settings..."
+msgstr "הגדרות מקלדת..."
+
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Larger"
+msgstr "גדול יותר"
+
+#: ../panels/universal-access/uap.ui.h:55
+msgid "LowContrast"
+msgstr "ניגודיות_נמוכה"
+
+#: ../panels/universal-access/uap.ui.h:57
+msgid "Mouse Settings..."
+msgstr "הגדרות העכבר..."
+
+#: ../panels/universal-access/uap.ui.h:58
+msgid "Nomon"
+msgstr "Nomon"
+
+#: ../panels/universal-access/uap.ui.h:59
+#: ../libwindow-settings/metacity-window-manager.c:409
+msgid "None"
+msgstr "ללא"
+
+#: ../panels/universal-access/uap.ui.h:63
+msgid "On screen keyboard"
+msgstr "מקלדת על המסך"
+
+#: ../panels/universal-access/uap.ui.h:64
+msgid "OnBoard"
+msgstr "OnBoard"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Options..."
+msgstr "אפשרויות..."
+
+#: ../panels/universal-access/uap.ui.h:66
+msgid "Pointing and Clicking"
+msgstr "הצבעה ולחיצה"
+
+#: ../panels/universal-access/uap.ui.h:67
+msgid "Puts a delay between when a key is pressed and when it is accepted."
+msgstr "תתווסף השהיה בין לחיצת המקש לבין קבלת הלחיצה."
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Screen Reader"
+msgstr "מקריא מסך"
+
+#: ../panels/universal-access/uap.ui.h:69
+msgid "Seeing"
+msgstr "ראייה"
+
+#: ../panels/universal-access/uap.ui.h:70
+msgid "Shift+Ctrl+Alt+-"
+msgstr "Shift+Ctrl+Alt+-"
+
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Shift+Ctrl+Alt+="
+msgstr "Shift+Ctrl+Alt+="
+
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Show Universal Access status"
+msgstr "הצגת מצב הגישה האוניברסלית"
+
+#: ../panels/universal-access/uap.ui.h:79
+msgid "Sound Settings..."
+msgstr "הגדרות שמע..."
+
+#: ../panels/universal-access/uap.ui.h:81
+msgid "Test flash"
+msgstr "בדיקת ההבהוב"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgid "Test:"
+msgstr "בדיקה:"
+
+#: ../panels/universal-access/uap.ui.h:83
+msgid "Text size:"
+msgstr "גודל הטקסט:"
+
+#: ../panels/universal-access/uap.ui.h:84
+msgid "Treats a sequence of modifier keys as a key combination."
+msgstr "התייחסות לרצף של מקשי החלפה כצירוף מקשים."
+
+#: ../panels/universal-access/uap.ui.h:85
+msgid "Trigger a click when the pointer hovers."
+msgstr "הפעלת לחיצה כאשר העכבר עובר מעל."
+
+#: ../panels/universal-access/uap.ui.h:86
+msgid "Trigger a secondary click by holding down the primary button."
+msgstr "הפעלת לחיצה משנית על ידי החזקת הכפתור הראשי."
+
+#: ../panels/universal-access/uap.ui.h:87
+msgid "Turn on or off:"
+msgstr "הפעלה או כיבוי:"
+
+#: ../panels/universal-access/uap.ui.h:88
+msgid "Type here to test settings"
+msgstr "ניתן לכתוב כאן כדי לבדוק את ההגדרות"
+
+#: ../panels/universal-access/uap.ui.h:89
+msgid "Typing"
+msgstr "הקלדה"
+
+#: ../panels/universal-access/uap.ui.h:90
+msgid "Typing Assistant"
+msgstr "מסייע ההקלדה"
+
+#: ../panels/universal-access/uap.ui.h:91
+msgid "Use a visual indication when an alert sound occurs."
+msgstr "שימוש בחיזוי חזותי כאשר מושמעת התראת צליל."
+
+#: ../panels/universal-access/uap.ui.h:92
+msgid "Use an alternative form of text input"
+msgstr "שימוש בצורה חלופית לקלט טקסט"
+
+#: ../panels/universal-access/uap.ui.h:93
+msgid "Video Mouse"
+msgstr "עכבר בווידאו"
+
+#: ../panels/universal-access/uap.ui.h:94
+msgid "Visual Alerts"
+msgstr "התראות חזותיות"
+
+#: ../panels/universal-access/uap.ui.h:96
+msgid "Zoom in:"
+msgstr "התקרבות:"
+
+#: ../panels/universal-access/uap.ui.h:97
+msgid "Zoom out:"
+msgstr "התרחקות:"
+
+#: ../panels/universal-access/uap.ui.h:99
+msgid "accepted"
+msgstr "התקבל"
+
+#: ../panels/universal-access/uap.ui.h:100
+msgid "pressed"
+msgstr "נלחץ"
+
+#: ../panels/universal-access/uap.ui.h:101
+msgid "rejected"
+msgstr "נדחה"
 
 #: ../libwindow-settings/gnome-wm-manager.c:316
 #, c-format
@@ -3137,10 +3407,6 @@ msgstr "מיזעור"
 #: ../libwindow-settings/metacity-window-manager.c:408
 msgid "Roll up"
 msgstr "גלול מעלה"
-
-#: ../libwindow-settings/metacity-window-manager.c:409
-msgid "None"
-msgstr "ללא"
 
 #: ../shell/control-center.schemas.in.h:1
 msgid "Close the control-center when a task is activated"
@@ -3222,19 +3488,19 @@ msgstr "לוח בקרה"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
-msgstr "כלי ההגדרה של GNOME"
+msgstr "כלי התצורה של GNOME"
 
 #: ../typing-break/drw-break-window.c:194
 msgid "_Postpone Break"
-msgstr "_דחה הפסקה"
+msgstr "_דחיית ההפסקה"
 
 #: ../typing-break/drw-break-window.c:250
 msgid "Take a break!"
-msgstr "קח הפסקה!"
+msgstr "נא לצאת להפסקה!"
 
 #: ../typing-break/drwright.c:136
 msgid "_Take a Break"
-msgstr "_צא להפסקה"
+msgstr "י_ציאה להפסקה"
 
 #: ../typing-break/drwright.c:507
 #, c-format
@@ -3474,6 +3740,53 @@ msgstr "הגדרות מערכת"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_כל ההגדרות"
+
+#~ msgid "Accessible Lo_gin"
+#~ msgstr "התחברות _נגישה"
+
+#~ msgid "Assistive Technologies"
+#~ msgstr "טכנולוגיות מסייעות"
+
+#~ msgid "Assistive Technologies Preferences"
+#~ msgstr "העדפות טכנולוגיות מסייעות"
+
+#~ msgid ""
+#~ "Changes to enable assistive technologies will not take effect until your "
+#~ "next log in."
+#~ msgstr "שינויים להפעלת טכנולוגיות מסייעות יכנסו לתוקף רק בהתחברות הבאה."
+
+#~ msgid "Close and _Log Out"
+#~ msgstr "סגור וה_תנתק"
+
+#~ msgid "Jump to Preferred Applications dialog"
+#~ msgstr "עבור לתיבת הדו־שיח של היישומים המועדפים"
+
+#~ msgid "Jump to the Accessible Login dialog"
+#~ msgstr "עבור אל תיבת הדו־שיח להתחברות נגישה"
+
+#~ msgid "Jump to the Keyboard Accessibility dialog"
+#~ msgstr "עבור למסך נגישות המקלדת"
+
+#~ msgid "Jump to the Mouse Accessibility dialog"
+#~ msgstr "עבור לתיבת הדו־שיח של נגישות העכבר"
+
+#~ msgid "Preferences"
+#~ msgstr "העדפות"
+
+#~ msgid "_Enable assistive technologies"
+#~ msgstr "_אפשר טכנולוגיות מסייעות"
+
+#~ msgid "_Keyboard Accessibility"
+#~ msgstr "נגישות _מקלדת"
+
+#~ msgid "_Mouse Accessibility"
+#~ msgstr "_נגישות עכבר"
+
+#~ msgid "_Preferred Applications"
+#~ msgstr "יישומים מוע_דפים"
+
+#~ msgid "Choose which accessibility features to enable when you log in"
+#~ msgstr "בחר אילו תכונות נגישות יופעלו בהתחברות"
 
 #~ msgid "_Jabber:"
 #~ msgstr "_Jabber:"
@@ -3717,9 +4030,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Change screen resolution"
 #~ msgstr "שנה את הפרדת המסך"
-
-#~ msgid "Display"
-#~ msgstr "תצוגה"
 
 #~ msgid "A_cceleration:"
 #~ msgstr "_קיצור:"
