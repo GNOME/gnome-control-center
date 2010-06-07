@@ -97,6 +97,8 @@ cc_example_panel_init (CcExamplePanel *self)
 
   label = gtk_label_new ("Hello World");
 
+  gtk_widget_show (label);
+
   gtk_container_add (GTK_CONTAINER (self), label);
 }
 
