@@ -4,21 +4,24 @@ cappletname = display
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = display-capplet.ui
 
-bin_PROGRAMS = gnome-display-properties
+ccpanelsdir = $(PANELS_DIR)
+ccpanels_LTLIBRARIES = libdisplay.la
 
-sbin_PROGRAMS = gnome-display-properties-install-systemwide
-
-gnome_display_properties_SOURCES =	\
-	xrandr-capplet.c		\
-	scrollarea.c			\
-	foo-marshal.c			\
-	scrollarea.h			\
+libdisplay_la_SOURCES = 	\
+	display-module.c	\
+	cc-display-panel.c	\
+	cc-display-panel.h	\
+	xrandr-capplet.c	\
+	xrandr-capplet.h	\
+	scrollarea.c		\
+	foo-marshal.c		\
+	scrollarea.h		\
 	foo-marshal.h
 
-gnome_display_properties_LDFLAGS = -export-dynamic
-gnome_display_properties_LDADD = \
-	$(top_builddir)/capplets/common/libcommon.la \
-	$(DISPLAY_CAPPLET_LIBS)
+libdisplay_la_LIBADD = $(PANEL_LIBS)
+libdisplay_la_LDFLAGS = $(PANEL_LDFLAGS) $(DISPLAY_CAPPLET_LIBS)
+
+sbin_PROGRAMS = gnome-display-properties-install-systemwide
 
 gnome_display_properties_install_systemwide_SOURCES =	\
 	gnome-display-properties-install-systemwide.c
@@ -48,7 +51,7 @@ iconssvgdir = $(datadir)/icons/hicolor/scalable/apps
 dist_iconssvg_DATA = icons/scalable/preferences-desktop-display.svg
 
 desktopdir = $(datadir)/applications
-Desktop_in_files = display-properties.desktop.in
+Desktop_in_files = gnome-display-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \

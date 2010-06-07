@@ -1,1 +1,7 @@
-SUBDIRS=mouse keyboard network default-applications keybindings universal-access
+SUBDIRS=display \
+	mouse \
+	keyboard \
+	network \
+	default-applications \
+	keybindings \
+	universal-access

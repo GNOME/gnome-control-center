@@ -2,16 +2,32 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
-  <object class="GtkDialog" id="dialog">
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">Monitor Preferences</property>
-    <property name="type_hint">dialog</property>
-    <property name="has_separator">False</property>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
+  <object class="GtkListStore" id="rotation-liststore">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Normal</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Left</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Right</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Upside-down</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkWindow" id="window1">
+    <child>
+      <object class="GtkVBox" id="display-panel">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
+        <property name="spacing">6</property>
         <child>
           <object class="GtkTable" id="table2">
             <property name="visible">True</property>
@@ -123,6 +139,7 @@
                 <property name="right_attach">2</property>
                 <property name="top_attach">1</property>
                 <property name="bottom_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -272,7 +289,7 @@
                     <child>
                       <object class="GtkComboBox" id="rotation_combo">
                         <property name="visible">True</property>
-                        <property name="model">liststore1</property>
+                        <property name="model">rotation-liststore</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>
@@ -331,29 +348,14 @@
             </child>
           </object>
           <packing>
-            <property name="position">1</property>
+            <property name="position">0</property>
           </packing>
         </child>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1">
+        <child>
+          <object class="GtkHButtonBox" id="hbuttonbox1">
             <property name="visible">True</property>
+            <property name="spacing">6</property>
             <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="helpbutton1">
-                <property name="label">gtk-help</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-                <property name="secondary">True</property>
-              </packing>
-            </child>
             <child>
               <object class="GtkButton" id="make_default_button">
                 <property name="label" translatable="yes">Make Default</property>
@@ -365,7 +367,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">1</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -374,64 +376,22 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
-                <property name="receives_default">False</property>
+                <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="button2">
-                <property name="label">gtk-close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">3</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
+            <property name="position">1</property>
           </packing>
         </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="-11">helpbutton1</action-widget>
-      <action-widget response="1">make_default_button</action-widget>
-      <action-widget response="-10">apply_button</action-widget>
-      <action-widget response="-7">button2</action-widget>
-    </action-widgets>
-  </object>
-  <object class="GtkListStore" id="liststore1">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Normal</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Left</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Right</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Upside-down</col>
-      </row>
-    </data>
   </object>
 </interface>

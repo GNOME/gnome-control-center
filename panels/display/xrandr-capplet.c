@@ -35,6 +35,8 @@
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-bindings.h>
 
+#include "xrandr-capplet.h"
+
 typedef struct App App;
 typedef struct GrabInfo GrabInfo;
 
@@ -45,7 +47,9 @@ struct App
     GnomeRRLabeler *labeler;
     GnomeOutputInfo         *current_output;
 
-    GtkWidget	   *dialog;
+    GtkBuilder     *builder;
+
+    GtkWidget	   *panel;
     GtkWidget      *current_monitor_event_box;
     GtkWidget      *current_monitor_label;
     GtkWidget      *monitor_on_radio;
@@ -96,9 +100,15 @@ static gboolean output_info_supports_mode (App *app, GnomeOutputInfo *info, int 
 static void
 error_message (App *app, const char *primary_text, const char *secondary_text)
 {
+    GtkWidget *toplevel;
     GtkWidget *dialog;
 
-    dialog = gtk_message_dialog_new ((app && app->dialog) ? GTK_WINDOW (app->dialog) : NULL,
+    if (app && app->panel)
+        toplevel = gtk_widget_get_toplevel (app->panel);
+    else
+        toplevel = NULL;
+
+    dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
 				     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				     GTK_MESSAGE_ERROR,
 				     GTK_BUTTONS_CLOSE,
@@ -2047,7 +2057,7 @@ apply_configuration_returned_cb (DBusGProxy       *proxy,
     app->connection = NULL;
     app->proxy_call = NULL;
 
-    gtk_widget_set_sensitive (app->dialog, TRUE);
+    gtk_widget_set_sensitive (app->panel, TRUE);
 }
 
 static gboolean
@@ -2078,6 +2088,7 @@ static void
 apply (App *app)
 {
     GError *error = NULL;
+    GdkWindow *window;
 
     if (!sanitize_and_save_configuration (app))
 	return;
@@ -2093,9 +2104,12 @@ apply (App *app)
 	return;
     }
 
-    gtk_widget_set_sensitive (app->dialog, FALSE);
+    gtk_widget_set_sensitive (app->panel, FALSE);
 
-    begin_version2_apply_configuration (app, gtk_widget_get_window (app->dialog), app->apply_button_clicked_timestamp);
+    window = gtk_widget_get_window (gtk_widget_get_toplevel (app->panel));
+
+    begin_version2_apply_configuration (app, window,
+                                        app->apply_button_clicked_timestamp);
 }
 
 #if 0
@@ -2253,8 +2267,13 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
 static void
 select_current_output_from_dialog_position (App *app)
 {
-    if (gtk_widget_get_realized (app->dialog))
-	app->current_output = get_output_for_window (app->current_configuration, gtk_widget_get_window (app->dialog));
+    GtkWidget *toplevel;
+
+    toplevel = gtk_widget_get_toplevel (app->panel);
+
+    if (gtk_widget_get_realized (toplevel))
+	app->current_output = get_output_for_window (app->current_configuration,
+                                                     gtk_widget_get_window (toplevel));
     else
 	app->current_output = NULL;
 
@@ -2274,31 +2293,6 @@ dialog_map_event_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
     return FALSE;
 }
 
-static void
-hide_help_button (App *app)
-{
-    GtkWidget *action_area;
-    GList *children;
-    GList *l;
-
-    action_area = gtk_dialog_get_action_area (GTK_DIALOG (app->dialog));
-    children = gtk_container_get_children (GTK_CONTAINER (action_area));
-
-    for (l = children; l; l = l->next)
-    {
-	GtkWidget *child;
-	int response;
-
-	child = GTK_WIDGET (l->data);
-
-	response = gtk_dialog_get_response_for_widget (GTK_DIALOG (app->dialog), child);
-	if (response == GTK_RESPONSE_HELP)
-	{
-	    gtk_widget_hide (child);
-	    return;
-	}
-    }
-}
 
 static void
 apply_button_clicked_cb (GtkButton *button, gpointer data)
@@ -2317,8 +2311,11 @@ static void
 success_dialog_for_make_default (App *app)
 {
     GtkWidget *dialog;
+    GtkWidget *toplevel;
 
-    dialog = gtk_message_dialog_new (GTK_WINDOW (app->dialog),
+    toplevel = gtk_widget_get_toplevel (app->panel);
+
+    dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
 				     GTK_DIALOG_MODAL,
 				     GTK_MESSAGE_INFO,
 				     GTK_BUTTONS_OK,
@@ -2375,7 +2372,17 @@ _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 }
 
 static void
-run_application (App *app)
+destroy_app (App *app)
+{
+    gnome_rr_screen_destroy (app->screen);
+    g_object_unref (app->client);
+    g_object_unref (app->builder);
+
+    g_free (app);
+}
+
+GtkWidget*
+run_application ()
 {
 #ifndef UIDIR
 #define UIDIR "."
@@ -2384,16 +2391,20 @@ run_application (App *app)
     GtkBuilder *builder;
     GtkWidget *align;
     GError *error;
+    gchar *objects[] = {"display-panel", "rotation-liststore", NULL};
+    App *app;
+
+    app = g_new0 (App, 1);
 
     error = NULL;
-    builder = gtk_builder_new ();
+    app->builder = builder = gtk_builder_new ();
 
-    if (gtk_builder_add_from_file (builder, UI_FILE, &error) == 0)
+    if (!gtk_builder_add_objects_from_file (builder, UI_FILE, objects, &error))
     {
 	g_warning ("Could not parse UI definition: %s", error->message);
 	g_error_free (error);
 	g_object_unref (builder);
-	return;
+	return NULL;
     }
 
     app->screen = gnome_rr_screen_new (gdk_screen_get_default (),
@@ -2403,18 +2414,17 @@ run_application (App *app)
 	error_message (NULL, _("Could not get screen information"), error->message);
 	g_error_free (error);
 	g_object_unref (builder);
-	return;
+	return NULL;
     }
 
     app->client = gconf_client_get_default ();
 
-    app->dialog = _gtk_builder_get_widget (builder, "dialog");
-    g_signal_connect_after (app->dialog, "map-event",
-			    G_CALLBACK (dialog_map_event_cb), app);
+    app->panel = _gtk_builder_get_widget (builder, "display-panel");
 
-    gtk_window_set_default_icon_name ("preferences-desktop-display");
-    gtk_window_set_icon_name (GTK_WINDOW (app->dialog),
-			      "preferences-desktop-display");
+    if (!app->panel)
+      g_warning ("Missing display-panel object");
+    g_signal_connect_after (app->panel, "map-event",
+			    G_CALLBACK (dialog_map_event_cb), app);
 
     app->current_monitor_event_box = _gtk_builder_get_widget (builder,
     						   "current_monitor_event_box");
@@ -2485,68 +2495,22 @@ run_application (App *app)
 
     gtk_container_add (GTK_CONTAINER (align), app->area);
 
-    /* Until we have help to show, we'll just hide the Help button */
-    hide_help_button (app);
-
     app->apply_button = _gtk_builder_get_widget (builder, "apply_button");
     g_signal_connect (app->apply_button, "clicked",
 		      G_CALLBACK (apply_button_clicked_cb), app);
 
     on_screen_changed (app->screen, app);
 
-    g_object_unref (builder);
+    g_signal_connect_swapped (_gtk_builder_get_widget (builder, "apply_button"),
+                              "clicked", G_CALLBACK (apply), app);
+    g_signal_connect_swapped (_gtk_builder_get_widget (builder,
+                                                       "make_default_button"),
+                              "clicked", G_CALLBACK (make_default), app);
 
-restart:
-    switch (gtk_dialog_run (GTK_DIALOG (app->dialog)))
-    {
-    default:
-	/* Fall Through */
-    case GTK_RESPONSE_DELETE_EVENT:
-    case GTK_RESPONSE_CLOSE:
-#if 0
-	g_debug ("Close");
-#endif
-	break;
+    g_object_weak_ref (G_OBJECT (app->panel), (GWeakNotify) destroy_app, app);
 
-    case GTK_RESPONSE_HELP:
-#if 0
-	g_debug ("Help");
-#endif
-	goto restart;
-	break;
 
-    case GTK_RESPONSE_APPLY:
-	apply (app);
-	goto restart;
-	break;
-
-    case RESPONSE_MAKE_DEFAULT:
-	make_default (app);
-	goto restart;
-	break;
-    }
-
-    gtk_widget_destroy (app->dialog);
-    gnome_rr_screen_destroy (app->screen);
-    g_object_unref (app->client);
+    return app->panel;
 }
 
-int
-main (int argc, char **argv)
-{
-    App *app;
 
-    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-    textdomain (GETTEXT_PACKAGE);
-
-    gtk_init (&argc, &argv);
-
-    app = g_new0 (App, 1);
-
-    run_application (app);
-
-    g_free (app);
-
-    return 0;
-}

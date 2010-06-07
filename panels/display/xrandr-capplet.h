@@ -1,0 +1,3 @@
+
+GtkWidget* run_application ();
+
