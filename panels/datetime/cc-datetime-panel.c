@@ -120,6 +120,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
 
   widget = (GtkWidget *) cc_timezone_map_new ();
+  gtk_widget_show (widget);
 
   gtk_container_add (GTK_CONTAINER (gtk_builder_get_object (priv->builder,
                                                             "aspectmap")),
