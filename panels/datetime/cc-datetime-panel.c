@@ -31,6 +31,8 @@ G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
 struct _CcDateTimePanelPrivate
 {
   GtkBuilder *builder;
+
+  guint timeout;
 };
 
 
@@ -76,6 +78,14 @@ cc_date_time_panel_dispose (GObject *object)
 static void
 cc_date_time_panel_finalize (GObject *object)
 {
+  CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (object)->priv;
+
+  if (priv->timeout)
+    {
+      g_source_remove (priv->timeout);
+      priv->timeout = 0;
+    }
+
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->finalize (object);
 }
 
@@ -95,7 +105,32 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 static void
 cc_date_time_panel_class_finalize (CcDateTimePanelClass *klass)
 {
+
 }
+
+static gboolean
+update_time (CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GTimeVal timeval;
+  GtkWidget *widget;
+  gchar label[32];
+  time_t t;
+
+  g_get_current_time (&timeval);
+
+  priv->timeout = gdk_threads_add_timeout (1000 - timeval.tv_usec / 1000,
+                                           (GSourceFunc) update_time, self);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
+                                                "label_current_time");
+  t = time (NULL);
+  strftime (label, 32, "%X", localtime (&t));
+  gtk_label_set_text (GTK_LABEL (widget), label);
+
+  return FALSE;
+}
+
 
 static void
 cc_date_time_panel_init (CcDateTimePanel *self)
@@ -104,6 +139,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gchar *objects[] = { "datetime-panel", NULL };
   GtkWidget *widget;
   GError *err = NULL;
+  GDate *date;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
 
@@ -127,7 +163,17 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                      widget);
 
   gtk_container_add (GTK_CONTAINER (self),
-                     GTK_WIDGET (gtk_builder_get_object (priv->builder, "datetime-panel")));
+                     GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                         "datetime-panel")));
+
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "calendar");
+  date = g_date_new ();
+  g_date_set_time_t (date, time (NULL));
+  gtk_calendar_select_day (GTK_CALENDAR (widget), g_date_get_day (date));
+  gtk_calendar_select_month (GTK_CALENDAR (widget), g_date_get_month (date) -1,
+                             g_date_get_year (date));
+
+  update_time (self);
 }
 
 void
