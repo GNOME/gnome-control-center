@@ -31,7 +31,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label2">
+                      <object class="GtkLabel" id="label_current_location">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">London</property>
                         <attributes>
@@ -74,7 +74,7 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton1">
+                  <object class="GtkCheckButton" id="check_auto_update">
                     <property name="label" translatable="yes">Keep date and time updated automatically</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -87,7 +87,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCalendar" id="calendar1">
+                  <object class="GtkCalendar" id="calendar">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="year">2010</property>
@@ -112,7 +112,7 @@
                         <property name="visible">True</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkSpinButton" id="spinbutton1">
+                          <object class="GtkSpinButton" id="spin_hour">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">&#x2022;</property>
@@ -123,7 +123,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkSpinButton" id="spinbutton2">
+                          <object class="GtkSpinButton" id="spin_minute">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">&#x2022;</property>
@@ -134,7 +134,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkSpinButton" id="spinbutton3">
+                          <object class="GtkSpinButton" id="spin_second">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">&#x2022;</property>
@@ -160,7 +160,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label4">
+                      <object class="GtkLabel" id="label_current_time">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">12:00:00</property>
@@ -203,7 +203,7 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="button_apply">
                 <property name="label">gtk-apply</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
