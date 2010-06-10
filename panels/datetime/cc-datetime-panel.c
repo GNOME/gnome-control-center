@@ -136,10 +136,13 @@ static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
-  gchar *objects[] = { "datetime-panel", NULL };
+  gchar *objects[] = { "datetime-panel", "adjustment_min", "adjustment_hour",
+      "adjustment_sec", NULL };
   GtkWidget *widget;
   GError *err = NULL;
   GDate *date;
+  struct tm *ltime;
+  time_t t;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
 
@@ -174,6 +177,16 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                              g_date_get_year (date));
 
   update_time (self);
+
+  t = time (NULL);
+  ltime = localtime (&t);
+
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_hour");
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_hour);
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_min);
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_second");
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_sec);
 }
 
 void

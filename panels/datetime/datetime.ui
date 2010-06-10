@@ -117,6 +117,7 @@
                             <property name="can_focus">True</property>
                             <property name="invisible_char">&#x2022;</property>
                             <property name="width_chars">2</property>
+                            <property name="adjustment">adjustment_hour</property>
                           </object>
                           <packing>
                             <property name="position">0</property>
@@ -128,6 +129,7 @@
                             <property name="can_focus">True</property>
                             <property name="invisible_char">&#x2022;</property>
                             <property name="width_chars">2</property>
+                            <property name="adjustment">adjustment_min</property>
                           </object>
                           <packing>
                             <property name="position">1</property>
@@ -139,6 +141,7 @@
                             <property name="can_focus">True</property>
                             <property name="invisible_char">&#x2022;</property>
                             <property name="width_chars">2</property>
+                            <property name="adjustment">adjustment_sec</property>
                           </object>
                           <packing>
                             <property name="position">2</property>
@@ -224,5 +227,23 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_hour">
+    <property name="upper">23</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <property name="page_size">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_min">
+    <property name="upper">60</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <property name="page_size">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_sec">
+    <property name="upper">60</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <property name="page_size">10</property>
   </object>
 </interface>
