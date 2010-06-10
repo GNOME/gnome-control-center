@@ -106,7 +106,7 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-COMMON_MODULES="gtk+-2.0 >= 2.21.1 dnl
+COMMON_MODULES="gtk+-3.0 >= 2.90.0 dnl
  glib-2.0 >= 2.17.4 dnl
  gthread-2.0 dnl
  gio-2.0 dnl
@@ -120,13 +120,13 @@ PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(METACITY, libmetacity-private >= 2.23.1)
-PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-2.0)
+PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-3.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 PKG_CHECK_MODULES(GIO, gio-2.0)
 
-gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-2.0`
-gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-2.0`
-GTK_ENGINE_DIR="$gtk_lib_dir/gtk-2.0/$gtk_binary_version/engines"
+gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-3.0`
+gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-3.0`
+GTK_ENGINE_DIR="$gtk_lib_dir/gtk-3.0/$gtk_binary_version/engines"
 AC_SUBST(GTK_ENGINE_DIR)
 
 PKG_CHECK_MODULES(GLIB, glib-2.0)
