@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-05-01 19:59+0000\n"
-"PO-Revision-Date: 2010-05-02 14:00+0100\n"
+"POT-Creation-Date: 2010-06-07 16:06+0000\n"
+"PO-Revision-Date: 2010-06-20 20:23+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -333,7 +333,6 @@ msgstr "_Privat:"
 
 #. Home vs Work (address)
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "Persönlicher Ordner"
 
@@ -402,7 +401,6 @@ msgid "Work _fax:"
 msgstr "_Fax beruflich:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:38
-#| msgid "Zip/_Postal code:"
 msgid "ZIP/_Postal code:"
 msgstr "_Postleitzahl:"
 
@@ -415,7 +413,6 @@ msgid "_Department:"
 msgstr "Abt_eilung:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:41
-#| msgid "_Groupwise:"
 msgid "_GroupWise:"
 msgstr "_GroupWise:"
 
@@ -461,7 +458,6 @@ msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:53
-#| msgid "_Zip/Postal code:"
 msgid "_ZIP/Postal code:"
 msgstr "Postleit_zahl:"
 
@@ -637,7 +633,7 @@ msgstr "Legitimiert!"
 #. Update status message and auth state
 #. Authentication failure
 #: ../capplets/about-me/gnome-about-me-password.c:474
-#: ../capplets/about-me/gnome-about-me-password.c:554
+#: ../capplets/about-me/gnome-about-me-password.c:559
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
@@ -649,72 +645,76 @@ msgstr ""
 msgid "That password was incorrect."
 msgstr "Das Passwort war falsch."
 
-#: ../capplets/about-me/gnome-about-me-password.c:525
+#: ../capplets/about-me/gnome-about-me-password.c:527
 msgid "Your password has been changed."
 msgstr "Ihr Passwort wurde geändert."
 
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:535
+#: ../capplets/about-me/gnome-about-me-password.c:537
 #, c-format
 msgid "System error: %s."
 msgstr "Systemfehler: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:538
+#: ../capplets/about-me/gnome-about-me-password.c:540
 msgid "The password is too short."
 msgstr "Das Passwort ist zu kurz."
 
-#: ../capplets/about-me/gnome-about-me-password.c:542
+#: ../capplets/about-me/gnome-about-me-password.c:544
 msgid "The password is too simple."
 msgstr "Das Passwort ist zu einfach."
 
-#: ../capplets/about-me/gnome-about-me-password.c:546
+#: ../capplets/about-me/gnome-about-me-password.c:549
 msgid "The old and new passwords are too similar."
 msgstr "Altes und neues Passwort sind sich zu ähnlich."
 
-#: ../capplets/about-me/gnome-about-me-password.c:548
+#: ../capplets/about-me/gnome-about-me-password.c:551
 msgid "The new password must contain numeric or special character(s)."
 msgstr "Das neue Passwort muss Ziffern oder Sonderzeichen enthalten."
 
-#: ../capplets/about-me/gnome-about-me-password.c:551
+#: ../capplets/about-me/gnome-about-me-password.c:554
 msgid "The old and new passwords are the same."
 msgstr "Altes und neues Passwort stimmen überein."
 
+#: ../capplets/about-me/gnome-about-me-password.c:556
+msgid "The new password has already been used recently."
+msgstr "Das neue Passwort wurde kürzlich bereits benutzt."
+
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:827
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "%s konnte nicht gestartet werden: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:826
+#: ../capplets/about-me/gnome-about-me-password.c:831
 msgid "Unable to launch backend"
 msgstr "Das Backend konnte nicht gestartet werden"
 
-#: ../capplets/about-me/gnome-about-me-password.c:827
+#: ../capplets/about-me/gnome-about-me-password.c:832
 msgid "A system error has occurred"
 msgstr "Ein Systemfehler ist aufgetreten"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:847
+#: ../capplets/about-me/gnome-about-me-password.c:852
 msgid "Checking password..."
 msgstr "Passwort wird überprüft …"
 
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:939
 msgid "Click <b>Change password</b> to change your password."
 msgstr "Klicken Sie auf <b>Passwort ändern</b>, um das Passwort zu ändern."
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:942
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "Bitte geben Sie Ihr Passwort in das Feld <b>Neues Passwort</b> ein."
 
-#: ../capplets/about-me/gnome-about-me-password.c:940
+#: ../capplets/about-me/gnome-about-me-password.c:945
 #: ../capplets/about-me/gnome-about-me-password.ui.h:5
 msgid "Please type your password again in the <b>Retype new password</b> field."
 msgstr ""
 "Bitte geben Sie Ihr Passwort erneut in das Feld <b>Neues Passwort "
 "wiederholen</b> ein."
 
-#: ../capplets/about-me/gnome-about-me-password.c:943
+#: ../capplets/about-me/gnome-about-me-password.c:948
 msgid "The two passwords are not equal."
 msgstr "Die beiden Passwörter stimmen nicht überein."
 
@@ -760,72 +760,6 @@ msgstr "_Neues Passwort:"
 #: ../capplets/about-me/gnome-about-me-password.ui.h:10
 msgid "_Retype new password:"
 msgstr "Neues Passwort _wiederholen:"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:1
-msgid "Accessible Lo_gin"
-msgstr "Barrierefreies _Anmelden"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:2
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
-msgid "Assistive Technologies"
-msgstr "Hilfstechnologien"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:3
-msgid "Assistive Technologies Preferences"
-msgstr "Einstellungen der Hilfstechnologien"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:4
-msgid ""
-"Changes to enable assistive technologies will not take effect until your next "
-"log in."
-msgstr ""
-"Änderungen zur Aktivierung der Hilfstechnologien werden erst bei der nächsten "
-"Anmeldung wirksam."
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:5
-msgid "Close and _Log Out"
-msgstr "Schließen und _abmelden"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:6
-msgid "Jump to Preferred Applications dialog"
-msgstr "Zum Dialog »Bevorzugte Anwendungen« springen"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:7
-msgid "Jump to the Accessible Login dialog"
-msgstr "Zum Dialog »Barrierefreies Anmelden« springen"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:8
-msgid "Jump to the Keyboard Accessibility dialog"
-msgstr "Zum Dialog »Tastatur-Barrierefreiheit« springen"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:9
-msgid "Jump to the Mouse Accessibility dialog"
-msgstr "Zum Dialog »Maus-Barrierefreiheit« springen"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:10
-msgid "Preferences"
-msgstr "Einstellungen"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:11
-msgid "_Enable assistive technologies"
-msgstr "Hilfs_technologien aktivieren"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:12
-msgid "_Keyboard Accessibility"
-msgstr "_Tastatur-Barrierefreiheit"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:13
-msgid "_Mouse Accessibility"
-msgstr "_Maus-Barrierefreiheit"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:14
-msgid "_Preferred Applications"
-msgstr "_Bevorzugte Anwendungen"
-
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Choose which accessibility features to enable when you log in"
-msgstr ""
-"Die beim Anmelden zu startenden Hilfsmittel für Barrierefreiheit festlegen"
 
 #: ../capplets/appearance/appearance-desktop.c:627
 msgid "Add Wallpaper"
@@ -904,8 +838,6 @@ msgstr ""
 "»background« (Hintergrund), »fonts« (Schriftarten), »interface« (Oberfläche)"
 
 #: ../capplets/appearance/appearance-main.c:144
-#: ../capplets/default-applications/gnome-da-capplet.c:960
-#: ../capplets/mouse/gnome-mouse-properties.c:591
 msgid "page"
 msgstr "Seite"
 
@@ -988,7 +920,7 @@ msgid "The current theme suggests a font."
 msgstr "Dieses Thema empfiehlt eine Schriftart."
 
 #: ../capplets/appearance/appearance-themes.c:1046
-#: ../capplets/default-applications/gnome-da-capplet.c:691
+#: ../panels/default-applications/gnome-da-capplet.c:693
 msgid "Custom"
 msgstr "Benutzerdefiniert"
 
@@ -1083,8 +1015,10 @@ msgstr "Symbole"
 msgid "Icons only"
 msgstr "Nur Symbole"
 
+#. large threshold
 #: ../capplets/appearance/data/appearance.ui.h:24
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Large"
 msgstr "Groß"
 
@@ -1124,8 +1058,10 @@ msgstr "_Hintergrundbild speichern"
 msgid "Scale"
 msgstr "Skalieren"
 
+#. small threshold
 #: ../capplets/appearance/data/appearance.ui.h:34
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/universal-access/uap.ui.h:78
 msgid "Small"
 msgstr "Klein"
 
@@ -1199,11 +1135,12 @@ msgid "Window Border"
 msgstr "Fensterrahmen"
 
 #: ../capplets/appearance/data/appearance.ui.h:53
+#: ../panels/universal-access/uap.ui.h:95
 msgid "Zoom"
 msgstr "Zoom"
 
 #: ../capplets/appearance/data/appearance.ui.h:54
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:45
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
 msgid "_Add..."
 msgstr "Hin_zufügen …"
 
@@ -1249,7 +1186,7 @@ msgid "_Monochrome"
 msgstr "_Schwarz-Weiß"
 
 #: ../capplets/appearance/data/appearance.ui.h:66
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:5
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
 msgid "_Name:"
 msgstr "_Name:"
 
@@ -1515,6 +1452,7 @@ msgstr ""
 "hindeuten, der mit dem GNOME-Einstellungsverwalter in Konflikt geraten ist."
 
 #: ../capplets/common/capplet-stock-icons.c:66
+#: ../panels/mouse/capplet-stock-icons.c:66
 #, c-format
 msgid "Unable to load stock icon '%s'\n"
 msgstr "Repertoire-Symbol »%s« konnte nicht geladen werden\n"
@@ -1604,29 +1542,35 @@ msgid "Overwrite _All"
 msgstr "_Alle überschreiben"
 
 #: ../capplets/common/gconf-property-editor.c:134
+#: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
 msgstr "Schlüssel"
 
 #: ../capplets/common/gconf-property-editor.c:135
+#: ../libgnome-control-center/gconf-property-editor.c:135
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-Schlüssel, an den dieser Eigenschafteneditor angehängt wird"
 
 # CHECK upto line 505
 #: ../capplets/common/gconf-property-editor.c:141
+#: ../libgnome-control-center/gconf-property-editor.c:141
 msgid "Callback"
 msgstr "Rückfrage"
 
 #: ../capplets/common/gconf-property-editor.c:142
+#: ../libgnome-control-center/gconf-property-editor.c:142
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Diese Rückfrage ausführen, wenn der dem Schlüssel zugeordnete Wert geändert "
 "wird"
 
 #: ../capplets/common/gconf-property-editor.c:147
+#: ../libgnome-control-center/gconf-property-editor.c:147
 msgid "Change set"
 msgstr "Änderungssatz"
 
 #: ../capplets/common/gconf-property-editor.c:148
+#: ../libgnome-control-center/gconf-property-editor.c:148
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
@@ -1634,52 +1578,63 @@ msgstr ""
 "weitergeleitet werden"
 
 #: ../capplets/common/gconf-property-editor.c:153
+#: ../libgnome-control-center/gconf-property-editor.c:153
 msgid "Conversion to widget callback"
 msgstr "Umwandlung in Widget-Rückfrage"
 
 #: ../capplets/common/gconf-property-editor.c:154
+#: ../libgnome-control-center/gconf-property-editor.c:154
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Beim Umwandeln von Daten von GConf zum Widget auszuführende Rückfrage"
 
 #: ../capplets/common/gconf-property-editor.c:159
+#: ../libgnome-control-center/gconf-property-editor.c:159
 msgid "Conversion from widget callback"
 msgstr "Umwandlung von Widget-Rückfrage"
 
 #: ../capplets/common/gconf-property-editor.c:160
+#: ../libgnome-control-center/gconf-property-editor.c:160
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Beim Umwandeln von Daten vom Widget zu GConf auszuführende Rückfrage"
 
 #: ../capplets/common/gconf-property-editor.c:165
+#: ../libgnome-control-center/gconf-property-editor.c:165
 msgid "UI Control"
 msgstr "Benutzeroberflächen-Steuerung"
 
 #: ../capplets/common/gconf-property-editor.c:166
+#: ../libgnome-control-center/gconf-property-editor.c:166
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt, das die Eigenschaft kontrolliert (normalerweise ein Widget)"
 
 #: ../capplets/common/gconf-property-editor.c:181
+#: ../libgnome-control-center/gconf-property-editor.c:181
 msgid "Property editor object data"
 msgstr "Objektdaten des Eigenschafteneditors"
 
 #: ../capplets/common/gconf-property-editor.c:182
+#: ../libgnome-control-center/gconf-property-editor.c:182
 msgid "Custom data required by the specific property editor"
 msgstr "Vom spezifischen Eigenschafteneditor benötigte individuelle Daten"
 
 # gutes deutsch bitte
 #: ../capplets/common/gconf-property-editor.c:188
+#: ../libgnome-control-center/gconf-property-editor.c:188
 msgid "Property editor data freeing callback"
 msgstr "Rückfrage zur Datenfreigabe durch den Eigenschafteneditor"
 
 # CHECK
 #: ../capplets/common/gconf-property-editor.c:189
+#: ../libgnome-control-center/gconf-property-editor.c:189
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Auszuführende Rückfrage, wenn Eigenschafteneditor-Objektdaten freigemacht "
 "werden sollen"
 
 #: ../capplets/common/gconf-property-editor.c:1406
+#: ../libgnome-control-center/gconf-property-editor.c:1406
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1693,6 +1648,7 @@ msgstr ""
 "Hintergrundbild."
 
 #: ../capplets/common/gconf-property-editor.c:1414
+#: ../libgnome-control-center/gconf-property-editor.c:1414
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1706,10 +1662,12 @@ msgstr ""
 "Bitte wählen Sie ein anderes Bild."
 
 #: ../capplets/common/gconf-property-editor.c:1536
+#: ../libgnome-control-center/gconf-property-editor.c:1536
 msgid "Please select an image."
 msgstr "Bitte wählen Sie ein Bild."
 
 #: ../capplets/common/gconf-property-editor.c:1541
+#: ../libgnome-control-center/gconf-property-editor.c:1541
 msgid "_Select"
 msgstr "Aus_wählen"
 
@@ -1768,56 +1726,45 @@ msgstr ""
 "Dieses Thema kann nicht wie gewünscht dargestellt werden, da das benötigte "
 "Symbol-Thema »%s« nicht installiert ist."
 
-#: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:17
+#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
 msgid "Preferred Applications"
 msgstr "Bevorzugte Anwendungen"
 
-#: ../capplets/default-applications/default-applications.desktop.in.in.h:2
+#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "Bevorzugte Anwendungen auswählen"
 
-#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
+#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:1
 msgid "Start the preferred visual assistive technology"
 msgstr "Die bevorzugte visuelle Hilfstechnologie starten"
 
-#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
+#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:2
 msgid "Visual Assistance"
 msgstr "Visuelle Rückmeldung"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:98
-#: ../capplets/default-applications/gnome-da-capplet.c:362
-#: ../capplets/default-applications/gnome-da-capplet.c:383
+#: ../panels/default-applications/gnome-da-capplet.c:100
+#: ../panels/default-applications/gnome-da-capplet.c:364
+#: ../panels/default-applications/gnome-da-capplet.c:385
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Beim Speichern der Konfiguration ist ein Fehler aufgetreten: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:722
+#: ../panels/default-applications/gnome-da-capplet.c:724
 msgid "Could not load the main interface"
 msgstr "Haupt-Schnittstelle konnte nicht geladen werden"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:724
+#: ../panels/default-applications/gnome-da-capplet.c:726
 msgid "Please make sure that the applet is properly installed"
 msgstr "Bitte stellen Sie sicher, dass dieses Applet korrekt installiert ist."
 
-#. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/default-applications/gnome-da-capplet.c:959
-msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
-msgstr ""
-"Der Namen der anzuzeigenden Seite. Mögliche Werte: »internet«, »multimedia«, "
-"»system«, »a11y« (Barrierefreiheit)."
-
-#: ../capplets/default-applications/gnome-da-capplet.c:964
-msgid "- GNOME Default Applications"
-msgstr "- Vorgabe-Anwendungen von GNOME"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:1
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Accessibility"
 msgstr "Barrierefreiheit"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:3
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:3
 #, no-c-format
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "Alle Vorkommen von %s werden durch den übergebenen Link ersetzt"
@@ -1825,388 +1772,387 @@ msgstr "Alle Vorkommen von %s werden durch den übergebenen Link ersetzt"
 #.
 #. * vim: sw=2 ts=8 cindent noai bs=2
 #.
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:4
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:1
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:4
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:1
 msgid "C_ommand:"
 msgstr "Be_fehl:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:5
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:5
 msgid "Co_mmand:"
 msgstr "Be_fehl:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:6
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:6
 msgid "E_xecute flag:"
 msgstr "»Aus_führen«-Option:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:7
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
 msgid "Image Viewer"
 msgstr "Bildbetrachter"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:8
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Instant Messenger"
 msgstr "Sofortnachrichtendienst"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:9
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
 msgid "Internet"
 msgstr "Internet"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:10
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
 msgid "Mail Reader"
 msgstr "E-Mail-Betrachter"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:11
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
 msgid "Mobility"
 msgstr "Mobilität"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:12
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
 msgid "Multimedia"
 msgstr "Multimedia"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:13
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
 msgid "Multimedia Player"
 msgstr "Multimedia-Player"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:14
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
 msgid "Open link in new _tab"
 msgstr "Link in neuem _Reiter öffnen"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:15
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
 msgid "Open link in new _window"
 msgstr "Link in neuem _Fenster öffnen"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:16
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
 msgid "Open link with web browser _default"
 msgstr "Link in der _Vorgabe des Webbrowsers öffnen"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:18
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Run at st_art"
 msgstr "Beim Starten _ausführen"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:19
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
 msgid "Run in t_erminal"
 msgstr "Im _Terminal ausführen"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:20
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:20
 msgid "System"
 msgstr "System"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:21
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:21
 msgid "Terminal Emulator"
 msgstr "Terminal-Emulator"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:22
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:22
 msgid "Text Editor"
 msgstr "Texteditor"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:23
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:23
 msgid "Video Player"
 msgstr "Video-Player"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:24
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:24
 msgid "Visual"
 msgstr "Visueller Alarm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:25
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:25
 msgid "Web Browser"
 msgstr "Webbrowser"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:26
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:26
 msgid "_Run at start"
 msgstr "Beim Starten _ausführen"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
 msgstr "Balsa"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Banshee Music Player"
 msgstr "Banshee Musikwiedergabe"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Claws Mail"
 msgstr "Claws Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Debian Sensible Browser"
 msgstr "Debians voreingestellter Webbrowser"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
 msgid "Debian Terminal Emulator"
 msgstr "Debian Vorgabe-Terminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Encompass"
 msgstr "Encompass"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Epiphany Web Browser"
 msgstr "Epiphany Webbrowser"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
 msgid "Evolution Mail Reader"
 msgstr "Evolution E-Mail-Betrachter"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Firebird"
 msgstr "Firefox"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Firefox"
 msgstr "Firefox"
 
 # CHECK
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
 msgid "GNOME Magnifier without Screen Reader"
 msgstr "GNOME-Bildschirmlupe ohne Bildschirmleseprogramm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
 msgid "GNOME OnScreen Keyboard"
 msgstr "GNOME-Bildschirmtastatur"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
 msgid "GNOME Terminal"
 msgstr "GNOME-Terminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
 msgid "Galeon"
 msgstr "Galeon"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Gnopernicus"
 msgstr "Gnopernicus"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Gnopernicus with Magnifier"
 msgstr "Gnopernicus mit Bildschirmlupe"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
 msgid "Iceape"
 msgstr "Iceape"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
 msgid "Iceape Mail"
 msgstr "Iceape Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
 msgid "Icedove"
 msgstr "Icedove"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Iceweasel"
 msgstr "Iceweasel"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
 msgid "KDE Magnifier without Screen Reader"
 msgstr "KDE-Bildschirmlupe ohne Bildschirmleseprogramm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:25
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:26
 msgid "Konsole"
 msgstr "Konsole"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:27
 msgid "Linux Screen Reader"
 msgstr "Linux-Bildschirmleser"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Linux Screen Reader with Magnifier"
 msgstr "Linux-Bildschirmleser mit Bildschirmlupe"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:29
 msgid "Listen"
 msgstr "Hören"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:30
 msgid "Midori"
 msgstr "Midori"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:31
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:32
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Muine Music Player"
 msgstr "Muine Musik-Player"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:37
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:38
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:39
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
 msgid "Orca"
 msgstr "Orca"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
 msgid "Orca with Magnifier"
 msgstr "Orca mit Bildschirmlupe"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
 msgid "Rhythmbox Music Player"
 msgstr "Rhythmbox Musik-Player"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
 msgid "SeaMonkey"
 msgstr "SeaMonkey"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
 msgid "SeaMonkey Mail"
 msgstr "SeaMonkey Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
 msgid "Standard XTerminal"
 msgstr "Standard-XTerminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
 msgid "Terminator"
 msgstr "Terminator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
 msgid "Totem Movie Player"
 msgstr "Totem Film-Player"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:52
 msgid "aterm"
 msgstr "aterm"
 
-#: ../capplets/display/display-capplet.ui.h:1
+#: ../panels/display/display-capplet.ui.h:1
 msgid "Include _panel"
 msgstr "Panel _einschließen"
 
-#: ../capplets/display/display-capplet.ui.h:2
-#: ../capplets/display/xrandr-capplet.c:310
+#: ../panels/display/display-capplet.ui.h:2
+#: ../panels/display/xrandr-capplet.c:320
 msgid "Left"
 msgstr "Links"
 
-#: ../capplets/display/display-capplet.ui.h:3
-#| msgid "Default"
+#: ../panels/display/display-capplet.ui.h:3
 msgid "Make Default"
 msgstr "Als Vorgabe verwenden"
 
-#: ../capplets/display/display-capplet.ui.h:4
-#: ../capplets/display/xrandr-capplet.c:513
+#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/xrandr-capplet.c:523
 msgid "Monitor"
 msgstr "Bildschirm"
 
-#: ../capplets/display/display-capplet.ui.h:5
-msgid "Monitor Preferences"
-msgstr "Bildschirmeinstellungen"
-
-#: ../capplets/display/display-capplet.ui.h:6
-#: ../capplets/display/xrandr-capplet.c:309
-#: ../capplets/display/xrandr-capplet.c:348
+#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/display/xrandr-capplet.c:319
+#: ../panels/display/xrandr-capplet.c:358
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Normal"
 msgstr "Normal"
 
-#: ../capplets/display/display-capplet.ui.h:7
+#: ../panels/display/display-capplet.ui.h:6
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Off"
 msgstr "Aus"
 
-#: ../capplets/display/display-capplet.ui.h:8
+#: ../panels/display/display-capplet.ui.h:7
+#: ../panels/universal-access/uap.ui.h:62
 msgid "On"
 msgstr "Ein"
 
 # CHECK
-#: ../capplets/display/display-capplet.ui.h:9
+#: ../panels/display/display-capplet.ui.h:8
 msgid "Panel icon"
 msgstr "Symbol im Panel"
 
-#: ../capplets/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:9
 msgid "R_otation:"
 msgstr "R_otation:"
 
-#: ../capplets/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:10
 msgid "Re_fresh rate:"
 msgstr "Wiederhol_rate:"
 
-#: ../capplets/display/display-capplet.ui.h:12
-#: ../capplets/display/xrandr-capplet.c:311
+#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/xrandr-capplet.c:321
 msgid "Right"
 msgstr "Rechts"
 
-#: ../capplets/display/display-capplet.ui.h:13
+#: ../panels/display/display-capplet.ui.h:12
 msgid "Sa_me image in all monitors"
 msgstr "Gleiches Bild auf _allen Bildschirmen"
 
-#: ../capplets/display/display-capplet.ui.h:14
+#: ../panels/display/display-capplet.ui.h:13
 msgid "Upside-down"
 msgstr "Kopfüber"
 
-#: ../capplets/display/display-capplet.ui.h:15
+#: ../panels/display/display-capplet.ui.h:14
 msgid "_Detect monitors"
 msgstr "_Bildschirme erkennen"
 
-#: ../capplets/display/display-capplet.ui.h:16
+#: ../panels/display/display-capplet.ui.h:15
 msgid "_Resolution:"
 msgstr "_Auflösung:"
 
-#: ../capplets/display/display-capplet.ui.h:17
+#: ../panels/display/display-capplet.ui.h:16
 msgid "_Show monitors in panel"
 msgstr "Bildschirme im _Panel anzeigen"
 
-#: ../capplets/display/display-properties.desktop.in.in.h:1
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Change resolution and position of monitors"
 msgstr "Auflösung und Anordnung der Bildschirme ändern"
 
-#: ../capplets/display/display-properties.desktop.in.in.h:2
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:2
 msgid "Monitors"
 msgstr "Bildschirme"
 
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:44
+#: ../panels/display/gnome-display-properties-install-systemwide.c:44
 #, c-format
 msgid ""
 "Usage: %s SOURCE_FILE DEST_NAME\n"
@@ -2221,89 +2167,97 @@ msgid ""
 "            the systemwide directory for RANDR configurations,\n"
 "            so the result will typically be %s/DEST_NAME\n"
 msgstr ""
+"Aufruf: %s QUELLDATEI ZIELNAME\n"
+"\n"
+"Dieses Programm installiert ein RANDR-Profil zur Einrichtung mehrerer\n"
+"Bildschirme an einen systemweiten Ort. Das Profil wird dann verwendet,\n"
+"wenn das RANDR-Plugin durch den GNOME-Einstellungsdienst aufgerufen wird.\n"
+"\n"
+"QUELLDATEI - Voller Pfadname, typisch /home/Benutzername/.config/monitors."
+"xml\n"
+"\n"
+"ZIELNAME - Relativer Name der installierten Datei. Diese wird in\n"
+"            den systemweiten Ordner für RANDR-Konfigurationen gesetzt,\n"
+"            so dass das Ergebnis typischerweise %s/ZIELNAME sein wird.\n"
 
 #. Translators: only able to install RANDR profiles as root
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:151
+#: ../panels/display/gnome-display-properties-install-systemwide.c:151
 msgid "This program can only be used by the root user"
 msgstr "Dieses Programm darf nur vom Benutzer »root« ausgeführt werden"
 
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:168
-#| msgid "Theme name must be present"
+#: ../panels/display/gnome-display-properties-install-systemwide.c:168
 msgid "The source filename must be absolute"
 msgstr "Der Pfad zur Quelldatei muss absolut sein"
 
 #. Translators: first %s is a filename; second %s is an error message
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:179
+#: ../panels/display/gnome-display-properties-install-systemwide.c:179
 #, c-format
-#| msgid "Could not access '%s' device"
 msgid "Could not open %s: %s\n"
 msgstr "%s konnte nicht geöffnet werden: %s\n"
 
 #. Translators: first %s is a filename; second %s is an error message
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:188
+#: ../panels/display/gnome-display-properties-install-systemwide.c:188
 #, c-format
-#| msgid "Could not get screen information"
 msgid "Could not get information for %s: %s\n"
 msgstr "Informationen für %s konnten nicht erhalten werden: %s\n"
 
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:195
+#: ../panels/display/gnome-display-properties-install-systemwide.c:195
 #, c-format
 msgid "%s must be a regular file\n"
 msgstr "%s muss eine reguläre Datei sein\n"
 
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:204
+#: ../panels/display/gnome-display-properties-install-systemwide.c:204
 msgid "This program must only be run through pkexec(1)"
 msgstr "Dieses Programm darf nur durch pkexec(1) ausgeführt werden"
 
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:209
+#: ../panels/display/gnome-display-properties-install-systemwide.c:209
 msgid "PKEXEC_UID must be set to an integer value"
 msgstr "PKEXEC_UID muss auf einen Ganzzahlwert gesetzt sein"
 
 #. Translators: we are complaining that a file must be really owned by the user who called this program
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:215
+#: ../panels/display/gnome-display-properties-install-systemwide.c:215
 #, c-format
 msgid "%s must be owned by you\n"
 msgstr "Sie müssen Eigentümer von %s sein\n"
 
 #. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:223
+#: ../panels/display/gnome-display-properties-install-systemwide.c:223
 #, c-format
 msgid "%s must not have any directory components\n"
 msgstr "%s darf keine Ordnerkomponenten enthalten\n"
 
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:231
+#: ../panels/display/gnome-display-properties-install-systemwide.c:231
 #, c-format
 msgid "%s must be a directory\n"
 msgstr "%s muss ein Ordner sein\n"
 
 #. Translators: the first %s/%s is a directory/filename; the last %s is an error message
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:242
+#: ../panels/display/gnome-display-properties-install-systemwide.c:242
 #, c-format
-#| msgid "Could not access '%s' device"
 msgid "Could not open %s/%s: %s\n"
 msgstr "%s/%s konnte nicht geöffnet werden: %s\n"
 
-#: ../capplets/display/gnome-display-properties-install-systemwide.c:262
+#: ../panels/display/gnome-display-properties-install-systemwide.c:262
 #, c-format
 msgid "Could not rename %s to %s: %s\n"
 msgstr "%s konnte nicht in %s umbenannt werden: %s\n"
 
-#: ../capplets/display/org.gnome.randr.policy.in.h:1
+#: ../panels/display/org.gnome.randr.policy.in.h:1
 msgid ""
 "Authentication is required to install multi-monitor settings for all users"
 msgstr ""
 "Zur Installation von Mehrfachbildschirm-Einstellungen für alle Benutzer ist "
 "Legitimierung erforderlich"
 
-#: ../capplets/display/org.gnome.randr.policy.in.h:2
+#: ../panels/display/org.gnome.randr.policy.in.h:2
 msgid "Install multi-monitor settings for the whole system"
 msgstr "Mehrfachbildschirm-Einstellungen systemweit installieren"
 
-#: ../capplets/display/xrandr-capplet.c:312
+#: ../panels/display/xrandr-capplet.c:322
 msgid "Upside Down"
 msgstr "Kopfüber"
 
-#: ../capplets/display/xrandr-capplet.c:354
+#: ../panels/display/xrandr-capplet.c:364
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
@@ -2313,117 +2267,114 @@ msgstr "%d Hz"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:502
-#: ../capplets/display/xrandr-capplet.c:1648
+#: ../panels/display/xrandr-capplet.c:512
+#: ../panels/display/xrandr-capplet.c:1658
 msgid "Mirror Screens"
 msgstr "Bildschirme spiegeln"
 
-#: ../capplets/display/xrandr-capplet.c:504
+#: ../panels/display/xrandr-capplet.c:514
 #, c-format
 msgid "Monitor: %s"
 msgstr "Bildschirm: %s"
 
-#: ../capplets/display/xrandr-capplet.c:582
+#: ../panels/display/xrandr-capplet.c:592
 #, c-format
 msgid "%d x %d"
 msgstr "%d × %d"
 
-#: ../capplets/display/xrandr-capplet.c:1504
+#: ../panels/display/xrandr-capplet.c:1514
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its placement."
 msgstr ""
 "Wählen Sie einen Bildschirm, um dessen Eigenschaften zu ändern. Ziehen Sie "
 "ihn, um ihn neu zu platzieren."
 
-#: ../capplets/display/xrandr-capplet.c:2069
+#: ../panels/display/xrandr-capplet.c:2079
 msgid "Could not save the monitor configuration"
 msgstr "Die Bildschirmkonfiguration konnte nicht gespeichert werden"
 
-#: ../capplets/display/xrandr-capplet.c:2091
+#: ../panels/display/xrandr-capplet.c:2102
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Beim Anwenden der Bildschirmeinstellungen konnte der Sitzungsbus nicht "
 "angefordert werden"
 
-#: ../capplets/display/xrandr-capplet.c:2133
+#: ../panels/display/xrandr-capplet.c:2147
 msgid "Could not detect displays"
 msgstr "Anzeigen konnten nicht erkannt werden"
 
-#: ../capplets/display/xrandr-capplet.c:2325
-#| msgid "Could not save the monitor configuration"
+#: ../panels/display/xrandr-capplet.c:2322
 msgid "The monitor configuration has been saved"
 msgstr "Die Bildschirmkonfiguration wurde gespeichert"
 
-#: ../capplets/display/xrandr-capplet.c:2327
+#: ../panels/display/xrandr-capplet.c:2324
 msgid "This configuration will be used the next time someone logs in."
 msgstr ""
 "Diese Konfiguration wird verwendet, sobald sich der nächste Benutzer anmeldet."
 
-#: ../capplets/display/xrandr-capplet.c:2361
-#| msgid "Could not save the monitor configuration"
+#: ../panels/display/xrandr-capplet.c:2358
 msgid "Could not set the default configuration for monitors"
 msgstr "Die Bildschirmkonfiguration konnte nicht gespeichert werden"
 
-#: ../capplets/display/xrandr-capplet.c:2403
+#: ../panels/display/xrandr-capplet.c:2414
 msgid "Could not get screen information"
 msgstr "Bildschirminformationen konnten nicht ausgelesen werden"
 
-#: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
+#: ../panels/keybindings/00-multimedia-key.xml.in.h:1
 msgid "Sound"
 msgstr "Audio"
 
-#: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1146
+#: ../panels/keybindings/01-desktop-key.xml.in.h:1
 msgid "Desktop"
 msgstr "Arbeitsfläche"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:21
+#: ../panels/keybindings/eggcellrendererkeys.c:21
 msgid "New shortcut..."
 msgstr "Neue Tastenkombination …"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:163
-#: ../capplets/keybindings/eggcellrendererkeys.c:164
+#: ../panels/keybindings/eggcellrendererkeys.c:163
+#: ../panels/keybindings/eggcellrendererkeys.c:164
 msgid "Accelerator key"
 msgstr "Auslösetasten der Kombination"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:173
-#: ../capplets/keybindings/eggcellrendererkeys.c:174
+#: ../panels/keybindings/eggcellrendererkeys.c:173
+#: ../panels/keybindings/eggcellrendererkeys.c:174
 msgid "Accelerator modifiers"
 msgstr "Zusatztasten der Kombination"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:182
-#: ../capplets/keybindings/eggcellrendererkeys.c:183
+#: ../panels/keybindings/eggcellrendererkeys.c:182
+#: ../panels/keybindings/eggcellrendererkeys.c:183
 msgid "Accelerator keycode"
 msgstr "Tastencode der Kombination"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:193
+#: ../panels/keybindings/eggcellrendererkeys.c:193
 msgid "Accel Mode"
 msgstr "Kombinationsmodus"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:194
+#: ../panels/keybindings/eggcellrendererkeys.c:194
 msgid "The type of accelerator."
 msgstr "Der Tastenkombinationstyp."
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:119
+#: ../panels/keybindings/eggcellrendererkeys.c:242
+#: ../panels/keybindings/gnome-keybinding-properties.c:101
 #: ../typing-break/drwright.c:498
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:200
+#: ../panels/keybindings/gnome-keybinding-properties.c:182
 msgid "<Unknown Action>"
 msgstr "<Unbekannte Aktion>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:950
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1581
+#: ../panels/keybindings/gnome-keybinding-properties.c:932
+#: ../panels/keybindings/gnome-keybinding-properties.c:1563
 msgid "Custom Shortcuts"
 msgstr "Eigene Tastenkombinationen"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1092
+#: ../panels/keybindings/gnome-keybinding-properties.c:1074
 msgid "Error saving the new shortcut"
 msgstr "Beim Speichern der neuen Tastenkombination ist ein Fehler aufgetreten"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1171
+#: ../panels/keybindings/gnome-keybinding-properties.c:1153
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2435,7 +2386,7 @@ msgstr ""
 "Bitte versuchen Sie eine Kombination mit einer Taste wie Strg, Alt oder der "
 "Umschalttaste."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1201
+#: ../panels/keybindings/gnome-keybinding-properties.c:1183
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -2445,7 +2396,7 @@ msgstr ""
 "»%s«\n"
 "verwendet."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1207
+#: ../panels/keybindings/gnome-keybinding-properties.c:1189
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -2453,40 +2404,40 @@ msgstr ""
 "Wenn Sie diese Tastenkombination »%s« zuweisen, wird die Tastenkombination für "
 "»%s« deaktiviert."
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1215
+#: ../panels/keybindings/gnome-keybinding-properties.c:1197
 msgid "_Reassign"
 msgstr "_Zuweisen"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1335
+#: ../panels/keybindings/gnome-keybinding-properties.c:1317
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Beim Entfernen der Tastenkombination aus der Konfigurationsdatenbank ist ein "
 "Fehler aufgetreten: %s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1536
+#: ../panels/keybindings/gnome-keybinding-properties.c:1518
 msgid "Too many custom shortcuts"
 msgstr "Zu viele individuelle Tastenkombinationen"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1832
+#: ../panels/keybindings/gnome-keybinding-properties.c:1850
 msgid "Action"
 msgstr "Aktion"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1854
+#: ../panels/keybindings/gnome-keybinding-properties.c:1872
 msgid "Shortcut"
 msgstr "Tastenkombination"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:2
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:2
 msgid "Custom Shortcut"
 msgstr "Individuelle Tastenkombination"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:3
-#: ../capplets/keybindings/keybinding.desktop.in.in.h:2
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:3
+#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
 # extrem gekürzt, wirkt sich auf Fensterbreite aus
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:4
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:4
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new key "
 "combination, or press backspace to clear."
@@ -2494,172 +2445,155 @@ msgstr ""
 "Klicken Sie auf eine Zeile und geben Sie eine neue Tastenkombination ein, um "
 "diese zu übernehmen, oder drücken Sie die Rücktaste, um sie zu löschen."
 
-#: ../capplets/keybindings/keybinding.desktop.in.in.h:1
+#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Befehlen eine Tastenkombination zuweisen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:205
-#: ../capplets/keyboard/gnome-keyboard-properties.c:210
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
-"Nur Einstellungen anwenden und beenden (Nur zur Kompatibilität; wird nun "
-"durch einen Hintergrunddienst gehandhabt)"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:215
-msgid "Start the page with the typing break settings showing"
-msgstr ""
-"Zu Beginn die Seite anzeigen, die die Einstellungen für Tipppausen enthält"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:220
-msgid "Start the page with the accessibility settings showing"
-msgstr ""
-"Zu Beginn die Seite anzeigen, die die Einstellungen für Barrierefreiheit "
-"enthält"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:226
-msgid "- GNOME Keyboard Preferences"
-msgstr "– GNOME-Tastatureinstellungen"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
 msgid "Beep when _accessibility features are turned on or off"
 msgstr ""
 "Signalton ausgeben, wenn Funktionen zur _Barrierefreiheit aktiviert oder "
 "deaktiviert werden"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
 msgid "Beep when a _modifier key is pressed"
 msgstr "Signalton ausgeben, wenn eine _Zusatztaste gedrückt wird"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
 msgid "Beep when a _toggle key is pressed"
 msgstr "Signalton ausgeben, wenn eine _Umschalttaste gedrückt wird"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
 msgid "Beep when a key is pr_essed"
 msgstr "Signalton ausgeben, wenn eine _Taste gedrückt wird"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
 msgid "Beep when a key is reje_cted"
 msgstr "Signalton ausgeben, wenn eine Taste a_bgewiesen wird"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
 msgid "Beep when key is _accepted"
 msgstr "Signalton ausgeben, wenn eine Taste ak_zeptiert wird"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
 msgid "Beep when key is _rejected"
 msgstr "Signalton ausgeben, wenn Taste ab_gewiesen wird"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Bounce Keys"
 msgstr "Springende Tasten"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
 msgid "Flash _window titlebar"
 msgstr "Fensterleiste _blinken"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
 msgid "Flash entire _screen"
 msgstr "Ganzen Bildschirm b_linken"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:14
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "General"
 msgstr "Allgemein"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
 msgid "Keyboard Accessibility Audio Feedback"
 msgstr "Tastatur-Barrierefreiheit – Signaltöne"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
 msgid "Show _visual feedback for the alert sound"
 msgstr "_Visuelle Rückmeldungen bei Alarmklängen geben"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Slow Keys"
 msgstr "Tastenverzögerung"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Sticky Keys"
 msgstr "Klebrige Tasten"
 
 # CHECK
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
 msgid "Visual cues for sounds"
 msgstr "Visuelle Hinweise für Klänge"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
 msgid "All_ow postponing of breaks"
 msgstr "_Verschieben von Pausen zulassen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
 msgid "Audio _Feedback..."
 msgstr "_Signaltöne …"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Legt fest, ob Pausen verschoben werden dürfen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
 msgid "Cursor Blinking"
 msgstr "Blinkender Cursor"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
 msgid "Cursor _blinks in text fields"
 msgstr "B_linkender Cursor in Textfeldern"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:8
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Cursor blinks speed"
 msgstr "Blinkgeschwindigkeit des Cursors"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:9
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/universal-access/uap.ui.h:30
 msgid "D_elay:"
 msgstr "_Verzögerung:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr "Dea_ktivieren, wenn zwei Tasten zusammen gedrückt werden"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
 msgid "Duration of the break when typing is disallowed"
 msgstr "Dauer der Pause, während der das Tippen unterbunden wird"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
 msgid "Duration of work before forcing a break"
 msgstr "Arbeitsdauer, bevor eine Pause erzwungen wird"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:13
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Fast"
 msgstr "Schnell"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
 msgid "Key presses _repeat when key is held down"
 msgstr "Tasten _wiederholt auslösen, wenn sie gedrückt gehalten werden"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
 msgid "Keyboard Preferences"
 msgstr "Tastatureinstellungen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
 msgid "Keyboard _model:"
 msgstr "Tastatur_modell:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
 msgid "Layouts"
 msgstr "Belegungen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
 msgid "List of keyboard layouts selected for usage"
 msgstr "Liste der zur Benutzung ausgewählten Tastaturbelegungen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -2667,52 +2601,55 @@ msgstr ""
 "Bildschirm nach einer bestimmten Zeit sperren, um die Folgen exzessiven "
 "Tastaturgebrauchs einzudämmen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:21
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:19
+#. long delay
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Long"
 msgstr "Lang"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Mouse Keys"
 msgstr "Maustasten"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:23
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
 msgid "Move _Down"
 msgstr "Hin_unter schieben"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:24
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
 msgid "Move _Up"
 msgstr "Hin_auf schieben"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:25
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
 msgid "Move the selected keyboard layout down in the list"
 msgstr "Die gewählte Tastaturbelegung in der Liste nach unten verschieben"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:26
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
 msgid "Move the selected keyboard layout up in the list"
 msgstr "Die gewählte Tastaturbelegung in der Liste nach oben verschieben"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:27
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
 msgid "New windows u_se active window's layout"
 msgstr "Neue Fenster _verwenden die Belegung des aktiven Fensters"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:28
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:28
 msgid "Print a diagram of the selected keyboard layout"
 msgstr "Eine Übersicht der gewählten Tastaturbelegung drucken"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 msgid "Remove the selected keyboard layout from the list"
 msgstr "Die gewählte Tastaturbelegung aus der Liste entfernen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 msgid "Repeat Keys"
 msgstr "Tastenwiederholung"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
 msgid "Repeat keys speed"
 msgstr "Geschwindigkeit der Tastenwiederholung"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -2720,560 +2657,802 @@ msgstr ""
 "Die aktuellen Einstellungen zur Tastaturbelegung\n"
 "durch die Vorgabeeinstellungen ersetzen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 msgid "Reset to De_faults"
 msgstr "Auf Vor_gabewerte zurücksetzen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:35
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 msgid "S_peed:"
 msgstr "Ge_schwindigkeit:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:36
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "Select a keyboard layout to be added to the list"
 msgstr "Eine zur Liste hinzuzufügende Tastaturbelegung wählen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:37
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:27
+#. short delay
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Short"
 msgstr "Kurz"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:38
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Slow"
 msgstr "Langsam"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:41
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
 msgid "Typing Break"
 msgstr "Tipppause"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:42
-#| msgid "Keyboard Layout Options"
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
 msgid "View and edit keyboard layout options"
 msgstr "Tastaturbelegungseinstellungen betrachten und bearbeiten"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:43
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
 msgid "_Acceleration:"
 msgstr "_Beschleunigung:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:44
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr "Funktionen zur _Barrierefreiheit mittels Tastatur ein- und ausschalten"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:46
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
 msgid "_Break interval lasts:"
 msgstr "_Pausenintervall dauert:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:47
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:38
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
+#: ../panels/mouse/gnome-mouse-properties.ui.h:38
 msgid "_Delay:"
 msgstr "_Verzögerung:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:48
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
 msgid "_Ignore fast duplicate keypresses"
 msgstr "Schnelle _doppelte Tastenanschläge ignorieren"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:49
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:49
 msgid "_Lock screen to enforce typing break"
 msgstr "Bildschirm sperren und so eine _Tipppause erzwingen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:50
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:50
 msgid "_Only accept long keypresses"
 msgstr "Nur _lange Tastenanschläge akzeptieren"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:51
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:51
 msgid "_Options..."
 msgstr "_Optionen …"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:52
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:52
 msgid "_Pointer can be controlled using the keypad"
 msgstr "_Mauszeiger per Tastatur steuern"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:53
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:53
 msgid "_Separate layout for each window"
 msgstr "_Separate Belegung für jedes Fenster"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:54
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:54
 msgid "_Simulate simultaneous keypresses"
 msgstr "Gleich_zeitige Tastenanschläge simulieren"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:55
 msgid "_Speed:"
 msgstr "_Geschwindigkeit:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:56
 msgid "_Type to test settings:"
 msgstr "Einstellungen über_prüfen:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:57
 msgid "_Work interval lasts:"
 msgstr "_Arbeitsintervall dauert:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:58
 msgid "minutes"
 msgstr "Minuten"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
 msgid "By _country"
 msgstr "Nach La_nd"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
 msgid "By _language"
 msgstr "Nach _Sprache"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "Wählen Sie eine Tastaturbelegung"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
 msgid "Preview:"
 msgstr "Vorschau:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
 msgid "_Country:"
 msgstr "La_nd:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
 msgid "_Language:"
 msgstr "_Sprache:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
 msgid "_Variants:"
 msgstr "_Varianten:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
 msgid "Choose a Keyboard Model"
 msgstr "Wählen Sie ein Tastaturmodell"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
 msgid "_Models:"
 msgstr "_Modelle:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
 msgid "_Vendors:"
 msgstr "_Anbieter:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
 msgstr "Tastaturbelegungseinstellungen"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
+#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:82
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:242
 msgid "Layout"
 msgstr "Belegung"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:168
+#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:168
 msgid "Vendors"
 msgstr "Hersteller"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:234
+#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:234
 msgid "Models"
 msgstr "Modelle"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:235
-#: ../capplets/network/gnome-network-properties.c:581
+#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:235
+#: ../panels/network/gnome-network-properties.c:583
 msgid "Default"
 msgstr "Vorgabe"
 
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Die Tastatureinstellungen festlegen"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:89
+#: ../panels/mouse/gnome-mouse-accessibility.c:89
 msgid "gesture|Move left"
 msgstr "Nach links bewegen"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:94
+#: ../panels/mouse/gnome-mouse-accessibility.c:94
 msgid "gesture|Move right"
 msgstr "Nach rechts bewegen"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:99
+#: ../panels/mouse/gnome-mouse-accessibility.c:99
 msgid "gesture|Move up"
 msgstr "Nach oben bewegen"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:104
+#: ../panels/mouse/gnome-mouse-accessibility.c:104
 msgid "gesture|Move down"
 msgstr "Nach unten bewegen"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:109
+#: ../panels/mouse/gnome-mouse-accessibility.c:109
 msgid "gesture|Disabled"
 msgstr "Deaktiviert"
 
-#. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/mouse/gnome-mouse-properties.c:590
-msgid "Specify the name of the page to show (general|accessibility)"
-msgstr ""
-"Der Name der anzuzeigenden Seite. Mögliche Werte: »general« (Allgemein), "
-"»accessibility« (Barrierefreiheit)"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:595
-msgid "- GNOME Mouse Preferences"
-msgstr "– GNOME Maus-Einstellungen"
-
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:2
+#: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Choose type of click _beforehand"
 msgstr "Klicktyp im _Voraus auswählen"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:3
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Choose type of click with mo_use gestures"
 msgstr "Klicktyp mit Maus_gesten auswählen"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "D_ouble click:"
 msgstr "_Doppelklick:"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:7
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "D_rag click:"
 msgstr "_Mitzieh-Klick:"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Disable _touchpad while typing"
 msgstr "_Touchpad beim Tippen sperren"
 
 # CHECK
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Double-Click Timeout"
 msgstr "Max. Doppelklickintervall"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Drag and Drop"
 msgstr "Ziehen und Ablegen"
 
 # CHECK
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "Dwell Click"
 msgstr "Verzögerter Klick"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Maus_klicks per Touchpad freischalten"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Enable h_orizontal scrolling"
 msgstr "_Horizontalen Bildlauf einschalten"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/universal-access/uap.ui.h:40
 msgid "High"
 msgstr "Hoch"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Locate Pointer"
 msgstr "Zeigerposition anzeigen"
 
 # Mausempfindlichkeit
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Low"
 msgstr "Niedrig"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Mouse Orientation"
 msgstr "Mausposition"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 msgid "Mouse Preferences"
 msgstr "Mauseinstellungen"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Pointer Speed"
 msgstr "Zeigergeschwindigkeit"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:24
 msgid "Scrolling"
 msgstr "Bildlauf"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Seco_ndary click:"
 msgstr "Konte_xtklick:"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:26
+#: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "_Position des Mauszeigers anzeigen, wenn die Strg-Taste gedrückt wird"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Show click type _window"
 msgstr "Klicktyp-_Fenster anzeigen"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Simulated Secondary Click"
 msgstr "Simulierter Kontextklick"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:32
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Thr_eshold:"
 msgstr "_Schwellenwert:"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:33
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid ""
 "To test your double-click settings, try to double-click on the light bulb."
 msgstr ""
 "Versuchen Sie, einen Doppelklick auf der Glühlampe auszuführen, um die "
 "Doppelklickeinstellungen zu testen."
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:34
+#: ../panels/mouse/gnome-mouse-properties.ui.h:34
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
 msgid "Two-_finger scrolling"
 msgstr "Bildlauf mit zwei _Fingern"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:36
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "You can also use the Dwell Click panel applet to choose the click type."
 msgstr ""
 "Sie können ebenfalls das Panel-Applet »Verzögerter Klick« verwenden, um den "
 "Klicktyp auszuwählen."
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
 msgid "_Disabled"
 msgstr "_Deaktiviert"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:40
+#: ../panels/mouse/gnome-mouse-properties.ui.h:40
 msgid "_Edge scrolling"
 msgstr "Bildlauf am _Rand"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/mouse/gnome-mouse-properties.ui.h:41
 msgid "_Initiate click when stopping pointer movement"
 msgstr "_Klick ausführen, wenn sich der Mauszeiger nicht mehr bewegt"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:42
+#: ../panels/mouse/gnome-mouse-properties.ui.h:42
 msgid "_Left-handed"
 msgstr "Mit _links bediente Maus"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/universal-access/uap.ui.h:98
 msgid "_Motion threshold:"
 msgstr "_Schwellenwert der Bewegung:"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:44
+#: ../panels/mouse/gnome-mouse-properties.ui.h:44
 msgid "_Right-handed"
 msgstr "Mit _rechts bediente Maus"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:45
+#: ../panels/mouse/gnome-mouse-properties.ui.h:45
 msgid "_Sensitivity:"
 msgstr "_Empfindlichkeit:"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:46
+#: ../panels/mouse/gnome-mouse-properties.ui.h:46
 msgid "_Single click:"
 msgstr "_Einfacher Klick:"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:47
+#: ../panels/mouse/gnome-mouse-properties.ui.h:47
 msgid "_Timeout:"
 msgstr "_Intervall:"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:48
+#: ../panels/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Trigger secondary click by holding down the primary button"
 msgstr "_Kontextklick durch Gedrückthalten der ersten Taste auslösen"
 
-#: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "Maus"
 
-#: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Die Mauseinstellungen festlegen"
 
-#: ../capplets/network/gnome-network-properties.c:699
-#: ../capplets/network/gnome-network-properties.c:850
+#: ../panels/network/gnome-network-properties.c:701
+#: ../panels/network/gnome-network-properties.c:852
 msgid "New Location..."
 msgstr "Neuer Ort …"
 
-#: ../capplets/network/gnome-network-properties.c:816
+#: ../panels/network/gnome-network-properties.c:818
 msgid "Location already exists"
 msgstr "Ort ist bereits vorhanden"
 
-#: ../capplets/network/gnome-network-properties.desktop.in.in.h:1
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "Netzwerk-Proxy"
 
-#: ../capplets/network/gnome-network-properties.desktop.in.in.h:2
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
 msgstr "Legen Sie hier Ihre Netzwerk-Proxy-Einstellungen fest"
 
-#: ../capplets/network/gnome-network-properties.ui.h:1
+#: ../panels/network/gnome-network-properties.ui.h:1
 msgid "<b>Di_rect internet connection</b>"
 msgstr "<b>Di_rekte Internet-Verbindung</b>"
 
-#: ../capplets/network/gnome-network-properties.ui.h:2
+#: ../panels/network/gnome-network-properties.ui.h:2
 msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>_Automatische Proxy-Konfiguration</b>"
 
-#: ../capplets/network/gnome-network-properties.ui.h:3
+#: ../panels/network/gnome-network-properties.ui.h:3
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>_Manuelle Proxy-Konfiguration</b>"
 
-#: ../capplets/network/gnome-network-properties.ui.h:4
+#: ../panels/network/gnome-network-properties.ui.h:4
 msgid "<b>_Use authentication</b>"
 msgstr "<b>_Legitimation erforderlich</b>"
 
-#: ../capplets/network/gnome-network-properties.ui.h:5
+#: ../panels/network/gnome-network-properties.ui.h:5
 msgid "Autoconfiguration _URL:"
 msgstr "A_dresse für automatische Konfiguration:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:6
+#: ../panels/network/gnome-network-properties.ui.h:6
 msgid "C_reate"
 msgstr "E_rstellen"
 
-#: ../capplets/network/gnome-network-properties.ui.h:7
+#: ../panels/network/gnome-network-properties.ui.h:7
 msgid "Create New Location"
 msgstr "Neuen Ort erstellen"
 
-#: ../capplets/network/gnome-network-properties.ui.h:8
+#: ../panels/network/gnome-network-properties.ui.h:8
 msgid "HTTP Proxy Details"
 msgstr "HTTP-Proxy-Details"
 
-#: ../capplets/network/gnome-network-properties.ui.h:9
+#: ../panels/network/gnome-network-properties.ui.h:9
 msgid "H_TTP proxy:"
 msgstr "H_TTP-Proxy:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:10
+#: ../panels/network/gnome-network-properties.ui.h:10
 msgid "Ignore Host List"
 msgstr "Ignorierte Rechnerliste"
 
-#: ../capplets/network/gnome-network-properties.ui.h:11
+#: ../panels/network/gnome-network-properties.ui.h:11
 msgid "Ignored Hosts"
 msgstr "Ignorierte Rechner"
 
-#: ../capplets/network/gnome-network-properties.ui.h:12
+#: ../panels/network/gnome-network-properties.ui.h:12
 msgid "Location:"
 msgstr "Ort:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:13
+#: ../panels/network/gnome-network-properties.ui.h:13
 msgid "Network Proxy Preferences"
 msgstr "Netzwerk-Proxy-Einstellungen"
 
-#: ../capplets/network/gnome-network-properties.ui.h:14
+#: ../panels/network/gnome-network-properties.ui.h:14
 msgid "Port:"
 msgstr "Port:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:15
+#: ../panels/network/gnome-network-properties.ui.h:15
 msgid "Proxy Configuration"
 msgstr "Proxy-Konfiguration"
 
-#: ../capplets/network/gnome-network-properties.ui.h:16
+#: ../panels/network/gnome-network-properties.ui.h:16
 msgid "S_ocks host:"
 msgstr "S_ocks-Rechner:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:17
+#: ../panels/network/gnome-network-properties.ui.h:17
 msgid "The location already exists."
 msgstr "Der Ort ist bereits vorhanden."
 
-#: ../capplets/network/gnome-network-properties.ui.h:18
+#: ../panels/network/gnome-network-properties.ui.h:18
 msgid "U_sername:"
 msgstr "_Benutzername:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:19
+#: ../panels/network/gnome-network-properties.ui.h:19
 msgid "_Delete Location"
 msgstr "Ort _löschen"
 
-#: ../capplets/network/gnome-network-properties.ui.h:20
+#: ../panels/network/gnome-network-properties.ui.h:20
 msgid "_Details"
 msgstr "_Details"
 
-#: ../capplets/network/gnome-network-properties.ui.h:21
+#: ../panels/network/gnome-network-properties.ui.h:21
 msgid "_FTP proxy:"
 msgstr "_FTP-Proxy:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:22
+#: ../panels/network/gnome-network-properties.ui.h:22
 msgid "_Location name:"
 msgstr "Name des _Orts:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:23
+#: ../panels/network/gnome-network-properties.ui.h:23
 msgid "_Password:"
 msgstr "_Passwort:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:24
+#: ../panels/network/gnome-network-properties.ui.h:24
 msgid "_Secure HTTP proxy:"
 msgstr "_Sicherer HTTP-Proxy:"
 
-#: ../capplets/network/gnome-network-properties.ui.h:25
+#: ../panels/network/gnome-network-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
 msgstr "Den se_lben Proxy für alle Protokolle verwenden"
 
-#: ../capplets/windows/gnome-window-properties.c:344
-msgid "Cannot start the preferences application for your window manager"
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
+msgid "Universal Access"
+msgstr "Universeller Zugriff"
+
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+msgid "Universal Access Preferences"
+msgstr "Einstellungen für universellen Zugriff"
+
+#: ../panels/universal-access/uap.ui.h:2
+#, no-c-format
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/universal-access/uap.ui.h:4
+#, no-c-format
+msgid "125%"
+msgstr "125%"
+
+#: ../panels/universal-access/uap.ui.h:6
+#, no-c-format
+msgid "150%"
+msgstr "150%"
+
+#: ../panels/universal-access/uap.ui.h:7
+#, fuzzy
+msgid "<span size=\"x-large\">High/Inverse</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Passwort ändern</span>"
+
+#: ../panels/universal-access/uap.ui.h:8
+msgid "<span size=\"x-large\">High</span>"
+msgstr "<span size=\"x-large\">Hoch</span>"
+
+#: ../panels/universal-access/uap.ui.h:9
+msgid "<span size=\"x-large\">Low</span>"
+msgstr "<span size=\"x-large\">Niedrig</span>"
+
+#: ../panels/universal-access/uap.ui.h:10
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr "<span size=\"x-large\">Normal</span>"
+
+#: ../panels/universal-access/uap.ui.h:11
+msgid "Acceptance delay:"
+msgstr "Annahmeverzögerung:"
+
+#: ../panels/universal-access/uap.ui.h:12
+msgid "Accessibility features can be turned on or off with keyboard shortcuts"
+msgstr "Funktionen zur Barrierefreiheit mittels Tastatur ein- und ausschalten"
+
+#: ../panels/universal-access/uap.ui.h:13
+msgid "Beep when Caps and Num Lock are used"
+msgstr "Signalton ausgeben, wenn Feststelltaste und NumLock aktiv sind"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Beep when a key is"
+msgstr "Signalton ausgeben, wenn eine Taste … ist"
+
+#: ../panels/universal-access/uap.ui.h:15
+msgid "Beep when a key is rejected"
+msgstr "Signalton ausgeben, wenn eine Taste abgewiesen wird"
+
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Beep when a modifer key is pressed"
+msgstr "Signalton ausgeben, wenn eine Zusatztaste gedrückt wird"
+
+#: ../panels/universal-access/uap.ui.h:18
+msgid "Caribou"
+msgstr "Caribou"
+
+#: ../panels/universal-access/uap.ui.h:19
+msgid "Change constrast:"
+msgstr "Kontrast ändern:"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Closed Captioning"
 msgstr ""
-"Die Anwendung für die Fenstermanager-Einstellungen konnte nicht gestartet "
-"werden"
 
-#: ../capplets/windows/gnome-window-properties.c:603
-msgid "_Alt"
-msgstr "_Alt"
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Contrast:"
+msgstr "Kontrast:"
 
-#: ../capplets/windows/gnome-window-properties.c:609
-msgid "H_yper"
-msgstr "H_yper"
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Control the pointer using the keypad."
+msgstr "Mauszeiger per Tastatur steuern"
 
-#: ../capplets/windows/gnome-window-properties.c:616
-msgid "S_uper (or \"Windows logo\")"
-msgstr "Super (»_Windows-Taste«)"
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Control the pointer using the video camera."
+msgstr "Den Zeiger mit einer Videokamera steuern."
 
-#: ../capplets/windows/gnome-window-properties.c:623
-msgid "_Meta"
-msgstr "_Meta"
+#: ../panels/universal-access/uap.ui.h:24
+msgid "Ctrl+Alt+-"
+msgstr "Strg+Alt+-"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:1
-msgid "Movement Key"
-msgstr "Bewegungstasten"
+#: ../panels/universal-access/uap.ui.h:25
+msgid "Ctrl+Alt+0"
+msgstr "Strg+Alt+0"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:2
-msgid "Titlebar Action"
-msgstr "Titelleisten-Aktionen"
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Ctrl+Alt+4"
+msgstr "Strg+Alt+4"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:3
-msgid "To move a window, press-and-hold this key then grab the window:"
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Ctrl+Alt+8"
+msgstr "Strg+Alt+8"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "Ctrl+Alt+="
+msgstr "Strg+Alt+="
+
+#: ../panels/universal-access/uap.ui.h:32
+msgid "Decrease size:"
+msgstr "Verkleinerung:"
+
+#: ../panels/universal-access/uap.ui.h:33
+msgid "Disable if two keys are pressed together"
+msgstr "Deaktivieren, wenn zwei Tasten zusammen gedrückt werden"
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Display"
+msgstr "Anzeige"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "Display a textual description of speech and sounds."
+msgstr "Eine Textbeschreibung von Sprache und Klängen anzeigen."
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Flash the entire screen"
+msgstr "Ganzen Bildschirm blinken"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "Flash the window title"
+msgstr "Fenstertitel blinken"
+
+#: ../panels/universal-access/uap.ui.h:38
+msgid "GOK"
+msgstr "GOK"
+
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Hearing"
+msgstr "Hören"
+
+#: ../panels/universal-access/uap.ui.h:41
+msgid "High/Inverse"
 msgstr ""
-"Zum Verschieben eines Fensters folgende Taste beim Klicken gedrückt halten:"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:4
-msgid "Window Preferences"
-msgstr "Fenstereinstellungen"
+#: ../panels/universal-access/uap.ui.h:42
+msgid "HighContrast"
+msgstr "Hoher Kontrast"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:5
-msgid "Window Selection"
-msgstr "Fensterauswahl"
+#: ../panels/universal-access/uap.ui.h:43
+msgid "HighContrastInverse"
+msgstr "Hoher Kontrast, invertiert"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:6
-msgid "_Double-click titlebar to perform this action:"
-msgstr "_Doppelklick auf Titelleiste führt folgende Aktion aus:"
+# CHECK
+#: ../panels/universal-access/uap.ui.h:44
+#, fuzzy
+msgid "Hover Click"
+msgstr "Verzögerter Klick"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:7
-msgid "_Interval before raising:"
-msgstr "_Verzögerung vor dem Anheben:"
+#: ../panels/universal-access/uap.ui.h:45
+msgid "I need assistance with:"
+msgstr "Ich brauche Unterstützung bei:"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:8
-msgid "_Raise selected windows after an interval"
-msgstr "Aktivierte Fenster nach einer bestimmten Zeit an_heben"
+#: ../panels/universal-access/uap.ui.h:46
+msgid "Ignores fast duplicate keypresses"
+msgstr "Schnelle doppelte Tastenanschläge ignorieren"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:9
-msgid "_Select windows when the mouse moves over them"
-msgstr "Fenster _aktivieren, wenn sich die Maus darüber befindet"
+#: ../panels/universal-access/uap.ui.h:47
+msgid "Increase size:"
+msgstr "Vergrößerung:"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:10
-msgid "seconds"
-msgstr "Sekunden"
+#: ../panels/universal-access/uap.ui.h:48
+msgid "Keyboard Settings..."
+msgstr "Tastatureinstellungen …"
 
-#: ../capplets/windows/window-properties.desktop.in.in.h:1
-msgid "Set your window properties"
-msgstr "Einstellen des Fensterverhaltens"
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Larger"
+msgstr "Größer"
 
-#: ../capplets/windows/window-properties.desktop.in.in.h:2
-msgid "Windows"
-msgstr "Fenster"
+#: ../panels/universal-access/uap.ui.h:55
+msgid "LowContrast"
+msgstr "Geringer Kontrast"
+
+#: ../panels/universal-access/uap.ui.h:57
+msgid "Mouse Settings..."
+msgstr "Mauseinstellungen …"
+
+#: ../panels/universal-access/uap.ui.h:58
+#, fuzzy
+msgid "Nomon"
+msgstr "Keine"
+
+#: ../panels/universal-access/uap.ui.h:59
+#: ../libwindow-settings/metacity-window-manager.c:409
+msgid "None"
+msgstr "Keine"
+
+#: ../panels/universal-access/uap.ui.h:63
+msgid "On screen keyboard"
+msgstr "Bildschirmtastatur"
+
+#: ../panels/universal-access/uap.ui.h:64
+msgid "OnBoard"
+msgstr ""
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Options..."
+msgstr "Optionen …"
+
+#: ../panels/universal-access/uap.ui.h:66
+msgid "Pointing and Clicking"
+msgstr "Zeigen und Klicken"
+
+#: ../panels/universal-access/uap.ui.h:67
+msgid "Puts a delay between when a key is pressed and when it is accepted."
+msgstr ""
+"Setzt eine Verzögerung zwischen dem Drücken einer Taste und der Annahme des "
+"Tastendrucks."
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Screen Reader"
+msgstr "Bildschirmleser"
+
+#: ../panels/universal-access/uap.ui.h:69
+msgid "Seeing"
+msgstr "Sehen"
+
+#: ../panels/universal-access/uap.ui.h:70
+msgid "Shift+Ctrl+Alt+-"
+msgstr "Umschalttaste+Strg+Alt+-"
+
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Shift+Ctrl+Alt+="
+msgstr "Umschalttaste+Strg+Alt+="
+
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Show Universal Access status"
+msgstr "Status für universellen Zugriff anzeigen"
+
+#: ../panels/universal-access/uap.ui.h:79
+msgid "Sound Settings..."
+msgstr "Klangeinstellungen …"
+
+#: ../panels/universal-access/uap.ui.h:81
+msgid "Test flash"
+msgstr "Blinktest"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgid "Test:"
+msgstr "Test:"
+
+#: ../panels/universal-access/uap.ui.h:83
+msgid "Text size:"
+msgstr "Textgröße:"
+
+#: ../panels/universal-access/uap.ui.h:84
+msgid "Treats a sequence of modifier keys as a key combination."
+msgstr "Nimmt eine Abfolge von Zusatztasten als Tastenkombination an."
+
+#: ../panels/universal-access/uap.ui.h:85
+#, fuzzy
+msgid "Trigger a click when the pointer hovers."
+msgstr "_Klick ausführen, wenn sich der Mauszeiger nicht mehr bewegt"
+
+#: ../panels/universal-access/uap.ui.h:86
+msgid "Trigger a secondary click by holding down the primary button."
+msgstr "Kontextklick durch Gedrückthalten der ersten Taste auslösen."
+
+#: ../panels/universal-access/uap.ui.h:87
+msgid "Turn on or off:"
+msgstr "Ein- oder ausschalten:"
+
+#: ../panels/universal-access/uap.ui.h:88
+msgid "Type here to test settings"
+msgstr "Hier tippen, um die Einstellungen zu überprüfen"
+
+#: ../panels/universal-access/uap.ui.h:89
+msgid "Typing"
+msgstr "Tippen"
+
+#: ../panels/universal-access/uap.ui.h:90
+msgid "Typing Assistant"
+msgstr "Tipp-Assistent"
+
+#: ../panels/universal-access/uap.ui.h:91
+msgid "Use a visual indication when an alert sound occurs."
+msgstr "Visuelle anzeige verwenden, wenn ein Alarmklang ertönt."
+
+#: ../panels/universal-access/uap.ui.h:92
+msgid "Use an alternative form of text input"
+msgstr "Eine alternative Form der Texteingabe verwenden"
+
+#: ../panels/universal-access/uap.ui.h:93
+msgid "Video Mouse"
+msgstr "Video-Maus"
+
+#: ../panels/universal-access/uap.ui.h:94
+msgid "Visual Alerts"
+msgstr "Visueller Alarm"
+
+#: ../panels/universal-access/uap.ui.h:96
+msgid "Zoom in:"
+msgstr "Vergrößern:"
+
+#: ../panels/universal-access/uap.ui.h:97
+msgid "Zoom out:"
+msgstr "Verkleinern:"
+
+#: ../panels/universal-access/uap.ui.h:99
+msgid "accepted"
+msgstr "angenommen"
+
+#: ../panels/universal-access/uap.ui.h:100
+msgid "pressed"
+msgstr "gedrückt"
+
+#: ../panels/universal-access/uap.ui.h:101
+msgid "rejected"
+msgstr "abgewiesen"
 
 #: ../libwindow-settings/gnome-wm-manager.c:316
 #, c-format
@@ -3300,36 +3479,6 @@ msgstr "Minimieren"
 #: ../libwindow-settings/metacity-window-manager.c:408
 msgid "Roll up"
 msgstr "Einrollen"
-
-#: ../libwindow-settings/metacity-window-manager.c:409
-msgid "None"
-msgstr "Keine"
-
-#: ../shell/control-center.c:49
-#, c-format
-msgid "key not found [%s]\n"
-msgstr "Schlüssel »%s« konnte nicht gefunden werden\n"
-
-#: ../shell/control-center.c:143
-msgid "Hide on start (useful to preload the shell)"
-msgstr "Beim Start verbergen (nützlich, um die Shell vorab zu laden)"
-
-#: ../shell/control-center.c:182
-msgid "Filter"
-msgstr "Filter"
-
-#: ../shell/control-center.c:182
-msgid "Groups"
-msgstr "Gruppen"
-
-#: ../shell/control-center.c:182
-msgid "Common Tasks"
-msgstr "Häufige Aktionen"
-
-#: ../shell/control-center.c:185 ../shell/gnomecc.desktop.in.in.h:1
-#: ../shell/gnomecc.directory.in.h:1
-msgid "Control Center"
-msgstr "Kontrollzentrum"
 
 #: ../shell/control-center.schemas.in.h:1
 msgid "Close the control-center when a task is activated"
@@ -3413,7 +3562,12 @@ msgstr ""
 "Legt fest, ob das Kontrollzentrum nach dem Aktivieren einer »Häufigen Aktion« "
 "beendet wird."
 
-#: ../shell/gnomecc.desktop.in.in.h:2
+#: ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/gnomecc.directory.in.h:1
+msgid "Control Center"
+msgstr "Kontrollzentrum"
+
+#: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Das GNOME-Konfigurationswerkzeug"
 
@@ -3659,273 +3813,196 @@ msgstr "SCHRIFT-DATEI AUSGABE-DATEI"
 msgid "Error parsing arguments: %s\n"
 msgstr "Beim Verarbeiten der Argumente ist ein Fehler aufgetreten: %s\n"
 
-#: ../libslab/app-shell.c:754
-#, c-format
-msgid "Your filter \"%s\" does not match any items."
-msgstr "Ihr Filter »%s« führt zu keinen Übereinstimmungen."
+#: ../examples/gnome-example-panel.desktop.in.in.h:1
+msgid "Example Panel"
+msgstr "Beispiel-Panel"
 
-#: ../libslab/app-shell.c:756
-msgid "No matches found."
-msgstr "Keine Treffer gefunden."
+#: ../examples/gnome-example-panel.desktop.in.in.h:2
+msgid "Example preferences panel"
+msgstr "Beispielhaftes Einstellungspanel"
 
-#: ../libslab/app-shell.c:905
-msgid "Other"
-msgstr "Sonstige"
+#: ../shell/shell.ui.h:1
+msgid "System Settings"
+msgstr "System-Einstellungen"
 
-#. make start action
-#: ../libslab/application-tile.c:374
-#, c-format
-msgid "Start %s"
-msgstr "%s starten"
+#: ../shell/shell.ui.h:2
+msgid "_All Settings"
+msgstr "_Alle Einstellungen"
 
-#: ../libslab/application-tile.c:395
-msgid "Help"
-msgstr "Hilfe"
+#~ msgid "Accessible Lo_gin"
+#~ msgstr "Barrierefreies _Anmelden"
 
-#: ../libslab/application-tile.c:442
-msgid "Upgrade"
-msgstr "Hochrüsten"
+#~ msgid "Assistive Technologies"
+#~ msgstr "Hilfstechnologien"
 
-#: ../libslab/application-tile.c:457
-msgid "Uninstall"
-msgstr "Entfernen"
-
-# CHECK
-#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
-msgid "Remove from Favorites"
-msgstr "Aus den Favoriten entfernen"
-
-# CHECK
-#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
-msgid "Add to Favorites"
-msgstr "Zu den Favoriten hinzufügen"
-
-#: ../libslab/application-tile.c:871
-msgid "Remove from Startup Programs"
-msgstr "Aus den Startprogrammen entfernen"
-
-#: ../libslab/application-tile.c:873
-msgid "Add to Startup Programs"
-msgstr "Zu den Startprogrammen hinzufügen"
-
-#: ../libslab/bookmark-agent.c:1077
-msgid "New Spreadsheet"
-msgstr "Neue Tabelle"
-
-#: ../libslab/bookmark-agent.c:1082
-msgid "New Document"
-msgstr "Neues Dokument"
-
-#: ../libslab/bookmark-agent.c:1140
-msgid "Documents"
-msgstr "Dokumente"
-
-#: ../libslab/bookmark-agent.c:1153
-msgid "File System"
-msgstr "Dateisystem"
-
-#: ../libslab/bookmark-agent.c:1157
-msgid "Network Servers"
-msgstr "Netzwerkserver"
-
-#: ../libslab/bookmark-agent.c:1186
-msgid "Search"
-msgstr "Suchen"
-
-#. make open with default action
-#: ../libslab/directory-tile.c:171
-#, c-format
-msgid "<b>Open</b>"
-msgstr "<b>Öffnen</b>"
-
-#. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
-msgid "Rename..."
-msgstr "Umbenennen …"
-
-#: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
-msgid "Send To..."
-msgstr "Senden an …"
-
-#. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
-msgid "Move to Trash"
-msgstr "In den Müll verschieben"
-
-#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
-msgid "Delete"
-msgstr "Löschen"
-
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
-#, c-format
-msgid "Are you sure you want to permanently delete \"%s\"?"
-msgstr "Sind Sie sicher, dass Sie »%s« dauerhaft löschen wollen?"
-
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
-msgid "If you delete an item, it is permanently lost."
-msgstr "Sobald Sie ein Objekt löschen, geht es dauerhaft verloren."
-
-#: ../libslab/document-tile.c:193
-#, c-format
-msgid "Open with \"%s\""
-msgstr "Mit »%s« öffnen"
-
-#: ../libslab/document-tile.c:207
-msgid "Open with Default Application"
-msgstr "Mit Vorgabe-Anwendung öffnen"
-
-#: ../libslab/document-tile.c:218
-msgid "Open in File Manager"
-msgstr "In Dateiverwaltung öffnen"
-
-#: ../libslab/document-tile.c:617
-msgid "?"
-msgstr "?"
-
-#: ../libslab/document-tile.c:624
-msgid "%l:%M %p"
-msgstr "%-H:%M"
-
-#: ../libslab/document-tile.c:632
-msgid "Today %l:%M %p"
-msgstr "Heute %-H.%M"
-
-#: ../libslab/document-tile.c:642
-msgid "Yesterday %l:%M %p"
-msgstr "Gestern %-H.%M"
-
-#: ../libslab/document-tile.c:654
-msgid "%a %l:%M %p"
-msgstr "%a %-H:%M"
-
-#: ../libslab/document-tile.c:662
-msgid "%b %d %l:%M %p"
-msgstr "%-d. %b %-H:%M"
-
-#: ../libslab/document-tile.c:664
-msgid "%b %d %Y"
-msgstr "%-d. %b %Y"
-
-#: ../libslab/search-bar.c:255
-msgid "Find Now"
-msgstr "Jetzt suchen"
-
-#: ../libslab/system-tile.c:127
-#, c-format
-msgid "<b>Open %s</b>"
-msgstr "<b>»%s« öffnen</b>"
-
-# CHECK
-#: ../libslab/system-tile.c:140
-#, c-format
-msgid "Remove from System Items"
-msgstr "Aus den Systemelementen entfernen"
-
-#~ msgid "_Jabber:"
-#~ msgstr "_Jabber:"
-
-#~ msgid "Change screen resolution"
-#~ msgstr "Bildschirmauflösung ändern"
-
-#~ msgid "Display"
-#~ msgstr "Anzeige"
-
-#~ msgid "Display Preferences"
-#~ msgstr "Anzeige-Einstellungen"
-
-#~ msgid "Drag the monitors to set their place"
-#~ msgstr "Ziehen Sie die Monitore, um ihre Lage festzulegen"
-
-#~ msgid "_Mirror screens"
-#~ msgstr "Bildschirme _spiegeln"
-
-#~ msgid "C_ontrol"
-#~ msgstr "_Strg"
-
-#~ msgid "Edit"
-#~ msgstr "Bearbeiten"
-
-#~ msgid "Fill screen"
-#~ msgstr "Bildschirme füllen"
-
-#~ msgid "Interface"
-#~ msgstr "Oberfläche"
-
-#~ msgid "Menus and Toolbars"
-#~ msgstr "Menüs und Werkzeugleisten"
-
-#~ msgid "Preview"
-#~ msgstr "Vorschau"
-
-#~ msgid "Show _icons in menus"
-#~ msgstr "_Symbole in den Menüs anzeigen"
-
-#~ msgid "Toolbar _button labels:"
-#~ msgstr "_Knopfbeschriftungen in Werkzeugleisten:"
-
-#~ msgid "_Editable menu shortcut keys"
-#~ msgstr "Anpass_bare Menü-Tastenkombinationen"
-
-#~ msgid "_File"
-#~ msgstr "_Datei"
-
-#~ msgid "A_cceleration:"
-#~ msgstr "_Beschleunigung:"
-
-#~ msgid "_Selected layouts:"
-#~ msgstr "_Gewählte Belegungen:"
-
-#~ msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-#~ msgstr ""
-#~ "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. 0123456789"
-
-#~ msgid "_Desktop Background"
-#~ msgstr "_Arbeitsflächen-Hintergrund"
+#~ msgid "Assistive Technologies Preferences"
+#~ msgstr "Einstellungen der Hilfstechnologien"
 
 #~ msgid ""
-#~ "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-#~ "\n"
-#~ " Your filter \"<b>%s</b>\" does not match any items.</span>"
+#~ "Changes to enable assistive technologies will not take effect until your "
+#~ "next log in."
 #~ msgstr ""
-#~ "<span size=\"large\"><b>Keine Treffer gefunden.</b></span><span>\n"
-#~ "\n"
-#~ " Ihr Suchfilter »<b>%s</b>« ergab keine Einträge.</span>"
+#~ "Änderungen zur Aktivierung der Hilfstechnologien werden erst bei der "
+#~ "nächsten Anmeldung wirksam."
 
-#~ msgid "Unknown login ID, the user database might be corrupted"
+#~ msgid "Close and _Log Out"
+#~ msgstr "Schließen und _abmelden"
+
+#~ msgid "Jump to Preferred Applications dialog"
+#~ msgstr "Zum Dialog »Bevorzugte Anwendungen« springen"
+
+#~ msgid "Jump to the Accessible Login dialog"
+#~ msgstr "Zum Dialog »Barrierefreies Anmelden« springen"
+
+#~ msgid "Jump to the Keyboard Accessibility dialog"
+#~ msgstr "Zum Dialog »Tastatur-Barrierefreiheit« springen"
+
+#~ msgid "Jump to the Mouse Accessibility dialog"
+#~ msgstr "Zum Dialog »Maus-Barrierefreiheit« springen"
+
+#~ msgid "Preferences"
+#~ msgstr "Einstellungen"
+
+#~ msgid "_Enable assistive technologies"
+#~ msgstr "Hilfs_technologien aktivieren"
+
+#~ msgid "_Keyboard Accessibility"
+#~ msgstr "_Tastatur-Barrierefreiheit"
+
+#~ msgid "_Mouse Accessibility"
+#~ msgstr "_Maus-Barrierefreiheit"
+
+#~ msgid "_Preferred Applications"
+#~ msgstr "_Bevorzugte Anwendungen"
+
+#~ msgid "Choose which accessibility features to enable when you log in"
 #~ msgstr ""
-#~ "Unbekannte Anmeldekennung - die Benutzerdatenbank ist womöglich beschädigt"
+#~ "Die beim Anmelden zu startenden Hilfsmittel für Barrierefreiheit festlegen"
 
-#~ msgid "<b>Email</b>"
-#~ msgstr "<b>E-Mail</b>"
+#~ msgid ""
+#~ "Specify the name of the page to show (internet|multimedia|system|a11y)"
+#~ msgstr ""
+#~ "Der Namen der anzuzeigenden Seite. Mögliche Werte: »internet«, »multimedia«, "
+#~ "»system«, »a11y« (Barrierefreiheit)."
 
-#~ msgid "<b>Home</b>"
-#~ msgstr "<b>Wohnort</b>"
+#~ msgid "- GNOME Default Applications"
+#~ msgstr "- Vorgabe-Anwendungen von GNOME"
 
-#~ msgid "<b>Job</b>"
-#~ msgstr "<b>Beruf</b>"
+#~ msgid "Monitor Preferences"
+#~ msgstr "Bildschirmeinstellungen"
 
-#~ msgid "<b>Web</b>"
-#~ msgstr "<b>Netz</b>"
+#~ msgid ""
+#~ "Just apply settings and quit (compatibility only; now handled by daemon)"
+#~ msgstr ""
+#~ "Nur Einstellungen anwenden und beenden (Nur zur Kompatibilität; wird nun "
+#~ "durch einen Hintergrunddienst gehandhabt)"
 
-#~ msgid "<b>Work</b>"
-#~ msgstr "<b>Arbeitsplatz</b>"
+#~ msgid "Start the page with the typing break settings showing"
+#~ msgstr ""
+#~ "Zu Beginn die Seite anzeigen, die die Einstellungen für Tipppausen enthält"
 
-#~ msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
-#~ msgstr "<span size=\"larger\" weight=\"bold\">Passwort ändern</span>"
+#~ msgid "Start the page with the accessibility settings showing"
+#~ msgstr ""
+#~ "Zu Beginn die Seite anzeigen, die die Einstellungen für Barrierefreiheit "
+#~ "enthält"
 
-#~ msgid "<b>Assistive Technologies</b>"
-#~ msgstr "<b>Hilfstechnologien</b>"
+#~ msgid "- GNOME Keyboard Preferences"
+#~ msgstr "– GNOME-Tastatureinstellungen"
 
-#~ msgid "<b>Preferences</b>"
-#~ msgstr "<b>Einstellungen</b>"
+#~ msgid "Specify the name of the page to show (general|accessibility)"
+#~ msgstr ""
+#~ "Der Name der anzuzeigenden Seite. Mögliche Werte: »general« (Allgemein), "
+#~ "»accessibility« (Barrierefreiheit)"
 
-#~ msgid "<b>C_olors</b>"
-#~ msgstr "<b>_Farben</b>"
+#~ msgid "- GNOME Mouse Preferences"
+#~ msgstr "– GNOME Maus-Einstellungen"
 
-#~ msgid "<b>Preview</b>"
-#~ msgstr "<b>Vorschau</b>"
+#~ msgid "Cannot start the preferences application for your window manager"
+#~ msgstr ""
+#~ "Die Anwendung für die Fenstermanager-Einstellungen konnte nicht gestartet "
+#~ "werden"
 
-#~ msgid "<b>_Desktop Background</b>"
-#~ msgstr "<b>_Desktop-Hintergrund</b>"
+#~ msgid "_Alt"
+#~ msgstr "_Alt"
+
+#~ msgid "H_yper"
+#~ msgstr "H_yper"
+
+#~ msgid "S_uper (or \"Windows logo\")"
+#~ msgstr "Super (»_Windows-Taste«)"
+
+#~ msgid "_Meta"
+#~ msgstr "_Meta"
+
+#~ msgid "Movement Key"
+#~ msgstr "Bewegungstasten"
+
+#~ msgid "Titlebar Action"
+#~ msgstr "Titelleisten-Aktionen"
+
+#~ msgid "To move a window, press-and-hold this key then grab the window:"
+#~ msgstr ""
+#~ "Zum Verschieben eines Fensters folgende Taste beim Klicken gedrückt halten:"
+
+#~ msgid "Window Preferences"
+#~ msgstr "Fenstereinstellungen"
+
+#~ msgid "Window Selection"
+#~ msgstr "Fensterauswahl"
+
+#~ msgid "_Double-click titlebar to perform this action:"
+#~ msgstr "_Doppelklick auf Titelleiste führt folgende Aktion aus:"
+
+#~ msgid "_Interval before raising:"
+#~ msgstr "_Verzögerung vor dem Anheben:"
+
+#~ msgid "_Raise selected windows after an interval"
+#~ msgstr "Aktivierte Fenster nach einer bestimmten Zeit an_heben"
+
+#~ msgid "_Select windows when the mouse moves over them"
+#~ msgstr "Fenster _aktivieren, wenn sich die Maus darüber befindet"
+
+#~ msgid "seconds"
+#~ msgstr "Sekunden"
+
+#~ msgid "Set your window properties"
+#~ msgstr "Einstellen des Fensterverhaltens"
+
+#~ msgid "Windows"
+#~ msgstr "Fenster"
+
+#~ msgid "key not found [%s]\n"
+#~ msgstr "Schlüssel »%s« konnte nicht gefunden werden\n"
+
+#~ msgid "Hide on start (useful to preload the shell)"
+#~ msgstr "Beim Start verbergen (nützlich, um die Shell vorab zu laden)"
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgid "Groups"
+#~ msgstr "Gruppen"
+
+#~ msgid "Common Tasks"
+#~ msgstr "Häufige Aktionen"
+
+#~ msgid "Your filter \"%s\" does not match any items."
+#~ msgstr "Ihr Filter »%s« führt zu keinen Übereinstimmungen."
+
+#~ msgid "No matches found."
+#~ msgstr "Keine Treffer gefunden."
+
+#~ msgid "Other"
+#~ msgstr "Sonstige"
+
+#~ msgid "Start %s"
+#~ msgstr "%s starten"
+
+#~ msgid "Help"
+#~ msgstr "Hilfe"
+
+#~ msgid "Upgrade"
+#~ msgstr "Hochrüsten"
+
+#~ msgid "Uninstall"
+#~ msgstr "Entfernen"
