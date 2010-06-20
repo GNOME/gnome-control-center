@@ -28,34 +28,22 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
-
-#include <unique/unique.h>
-
-
-enum
+static void
+application_prepare_action_cb (GApplication *application, GVariant *arguments,
+                               GVariant *platform_data, GnomeControlCenter *shell)
 {
-  CC_SHELL_RAISE_COMMAND = 1
-};
-
-
-static UniqueResponse
-message_received (UniqueApp          *app,
-                  gint                command,
-                  UniqueMessageData  *message_data,
-                  guint               time_,
-                  GnomeControlCenter *shell)
-{
-  const gchar *id;
-  gsize len;
+  GVariantIter iter;
+  GVariant *temp = NULL;
 
   gnome_control_center_present (shell);
 
-  id = (gchar*) unique_message_data_get (message_data, &len);
-
-  if (id)
+  /* we only care about the first argv */
+  g_variant_iter_init (&iter, arguments);
+  temp = g_variant_iter_next_value (&iter);
+  if (temp != NULL)
     {
       GError *err = NULL;
-
+      const gchar *id = g_variant_get_byte_array (temp, NULL);
       if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, &err))
         {
           if (err)
@@ -63,19 +51,16 @@ message_received (UniqueApp          *app,
               g_warning ("Could not load setting panel \"%s\": %s", id,
                          err->message);
               g_error_free (err);
-              err = NULL;
             }
         }
     }
-
-  return GTK_RESPONSE_OK;
 }
 
 int
 main (int argc, char **argv)
 {
   GnomeControlCenter *shell;
-  UniqueApp *unique;
+  GtkApplication *application;
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -85,39 +70,12 @@ main (int argc, char **argv)
   g_thread_init (NULL);
   gtk_init (&argc, &argv);
 
-
-  /* use Unique to enforce single instance of this application */
-  unique = unique_app_new_with_commands ("org.gnome.ControlCenter",
-                                         NULL,
-                                         "raise",
-                                         CC_SHELL_RAISE_COMMAND,
-                                         NULL);
-
-  /* check if the application is already running */
-  if (unique_app_is_running (unique))
-    {
-      UniqueMessageData *data;
-
-      if (argc == 2)
-        {
-          data = unique_message_data_new ();
-          unique_message_data_set (data, (guchar*) argv[1],
-                                   strlen(argv[1]) + 1);
-        }
-      else
-        data = NULL;
-
-      unique_app_send_message (unique, 1, data);
-
-      gdk_notify_startup_complete ();
-      return 0;
-    }
-
-
   shell = gnome_control_center_new ();
 
-  g_signal_connect (unique, "message-received", G_CALLBACK (message_received),
-                    shell);
+  /* enforce single instance of this application */
+  application = gtk_application_new ("org.gnome.ControlCenter", &argc, &argv);
+  g_signal_connect (application, "prepare-activation",
+                    G_CALLBACK (application_prepare_action_cb), shell);
 
   if (argc == 2)
     {
@@ -138,9 +96,10 @@ main (int argc, char **argv)
         }
     }
 
-  gtk_main ();
+  gtk_application_run (application);
 
   g_object_unref (shell);
+  g_object_unref (application);
 
   return 0;
 }
