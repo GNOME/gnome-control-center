@@ -70,15 +70,7 @@ struct _CcPanelClass
 
 GType        cc_panel_get_type         (void);
 
-const gchar* cc_panel_get_id           (CcPanel     *panel);
 CcShell*     cc_panel_get_shell        (CcPanel     *panel);
-
-const gchar* cc_panel_get_display_name (CcPanel     *panel);
-void         cc_panel_set_display_name (CcPanel     *panel,
-                                        const gchar *display_name);
-gboolean     cc_panel_get_active       (CcPanel     *panel);
-void         cc_panel_set_active       (CcPanel     *panel,
-                                        gboolean     is_active);
 
 
 G_END_DECLS

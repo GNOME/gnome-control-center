@@ -158,16 +158,12 @@ cc_shell_set_active_panel (CcShell *shell,
   if (panel != shell->priv->active_panel)
     {
       /* remove the old panel */
-      cc_panel_set_active (shell->priv->active_panel, FALSE);
       g_object_unref (shell->priv->active_panel);
       shell->priv->active_panel = NULL;
 
       /* set the new panel */
       if (panel)
-        {
-          cc_panel_set_active (shell->priv->active_panel, TRUE);
-          shell->priv->active_panel = g_object_ref (panel);
-        }
+        shell->priv->active_panel = g_object_ref (panel);
 
       g_object_notify (G_OBJECT (shell), "active-panel");
     }
