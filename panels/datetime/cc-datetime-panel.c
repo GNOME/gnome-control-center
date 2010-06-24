@@ -22,6 +22,7 @@
 #include "cc-datetime-panel.h"
 
 #include "cc-timezone-map.h"
+#include "set-timezone.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
 
@@ -131,6 +132,51 @@ update_time (CcDateTimePanel *self)
   return FALSE;
 }
 
+static void
+cb (CcDateTimePanel *self,
+    GError          *error)
+{
+  /* TODO: display any error in a user friendly way */
+  if (error)
+    {
+      g_warning ("Could not set system time: %s", error->message);
+    }
+}
+
+static void
+apply_button_clicked_cb (GtkButton       *button,
+                         CcDateTimePanel *self)
+{
+  GtkWidget *widget;
+  CcDateTimePanelPrivate *priv = self->priv;
+  guint h, mon, s, y, min, d;
+  struct tm fulltime;
+  time_t unixtime;
+
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_hour");
+  h = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
+  min = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_second");
+  s = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "calendar");
+  gtk_calendar_get_date (GTK_CALENDAR (widget), &y, &mon, &d);
+
+  fulltime.tm_sec = s;
+  fulltime.tm_min = min;
+  fulltime.tm_hour = h;
+  fulltime.tm_mday = d;
+  fulltime.tm_mon = mon;
+  fulltime.tm_year = y - 1900;
+  fulltime.tm_isdst = -1;
+
+
+  unixtime = mktime (&fulltime);
+
+  set_system_time_async (unixtime, (GFunc) cb, self, NULL);
+
+}
 
 static void
 cc_date_time_panel_init (CcDateTimePanel *self)
@@ -187,6 +233,11 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_min);
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_second");
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_sec);
+
+  g_signal_connect ((GtkWidget*) gtk_builder_get_object (priv->builder, "button_apply"),
+                    "clicked",
+                    G_CALLBACK (apply_button_clicked_cb),
+                    self);
 }
 
 void
