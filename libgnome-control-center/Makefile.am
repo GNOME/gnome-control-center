@@ -28,6 +28,7 @@ libgnome_control_center_la_SOURCES =		\
 
 libgnome_control_center_la_LDFLAGS =		\
 	no-undefined				\
+	-version-info $(LIBGNOMECONTROLCENTER_CURRENT):$(LIBGNOMECONTROLCENTER_REVISION):$(LIBGNOMECONTROLCENTER_AGE) \
 	$(NULL)
 
 libgnome_control_center_la_LIBADD = 		\
