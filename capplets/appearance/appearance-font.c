@@ -269,7 +269,7 @@ setup_font_sample (GtkWidget   *darea,
   width = extents1.xOff + extents2.xOff + 4;
   height = ascent + descent + 2;
 
-  pixmap = gdk_pixmap_new (NULL, width, height, visual->depth);
+  pixmap = gdk_pixmap_new (NULL, width, height, gdk_visual_get_depth (visual));
 
   draw = XftDrawCreate (xdisplay, GDK_DRAWABLE_XID (pixmap), xvisual, xcolormap);
 

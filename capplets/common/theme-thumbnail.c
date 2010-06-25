@@ -112,7 +112,7 @@ draw_window_on_pixbuf (GtkWidget *widget)
   gtk_window_get_size (GTK_WINDOW (widget), &width, &height);
 
   visual = gtk_widget_get_visual (widget);
-  pixmap = gdk_pixmap_new (NULL, width, height, visual->depth);
+  pixmap = gdk_pixmap_new (NULL, width, height, gdk_visual_get_depth (visual));
   gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (widget));
 
   window = gtk_widget_get_window (widget);

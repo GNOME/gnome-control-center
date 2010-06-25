@@ -867,8 +867,9 @@ static void
 gnome_control_center_init (GnomeControlCenter *self)
 {
   GError *err = NULL;
-  GtkWidget *vbox;
+  GtkWidget *vbox, *parent;
   GnomeControlCenterPrivate *priv;
+  GtkStyle *style;
 
   priv = self->priv = CONTROL_CENTER_PRIVATE (self);
 
@@ -901,10 +902,12 @@ gnome_control_center_init (GnomeControlCenter *self)
   vbox = W (priv->builder, "main-vbox");
   gtk_widget_set_size_request (vbox, 0, -1);
 
-  gtk_widget_modify_bg (vbox->parent, GTK_STATE_NORMAL,
-                        &vbox->style->base[GTK_STATE_NORMAL]);
-  gtk_widget_modify_fg (vbox->parent, GTK_STATE_NORMAL,
-                        &vbox->style->text[GTK_STATE_NORMAL]);
+  parent = gtk_widget_get_parent (vbox);
+  style = gtk_widget_get_style (vbox);
+  gtk_widget_modify_bg (parent, GTK_STATE_NORMAL,
+                        &style->base[GTK_STATE_NORMAL]);
+  gtk_widget_modify_fg (parent, GTK_STATE_NORMAL,
+                        &style->text[GTK_STATE_NORMAL]);
 
   /* load the available settings panels */
   fill_model (self);

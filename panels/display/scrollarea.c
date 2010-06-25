@@ -500,24 +500,32 @@ setup_background_cr (GdkWindow *window,
 		     int        x_offset,
 		     int        y_offset)
 {
-    GdkWindowObject *private = (GdkWindowObject *)window;
-    
-    if (private->bg_pixmap == GDK_PARENT_RELATIVE_BG && private->parent)
+    GdkPixmap *pixmap;
+    GdkWindow *parent;
+    gint x, y;
+    GdkColor bg_color;
+
+    gdk_window_get_back_pixmap (window, &pixmap, NULL);
+    parent = gdk_window_get_effective_parent (window);
+    gdk_window_get_geometry (window, &x, &y, NULL, NULL, NULL);
+    gdk_window_get_background (window, &bg_color);
+
+    if (pixmap == GDK_PARENT_RELATIVE_BG && parent)
     {
-	x_offset += private->x;
-	y_offset += private->y;
+	x_offset += x;
+	y_offset += y;
 	
-	setup_background_cr (GDK_WINDOW (private->parent), cr, x_offset, y_offset);
+	setup_background_cr (parent, cr, x_offset, y_offset);
     }
-    else if (private->bg_pixmap &&
-	     private->bg_pixmap != GDK_PARENT_RELATIVE_BG &&
-	     private->bg_pixmap != GDK_NO_BG)
+    else if (pixmap &&
+	     pixmap != GDK_PARENT_RELATIVE_BG &&
+	     pixmap != GDK_NO_BG)
     {
-	gdk_cairo_set_source_pixmap (cr, private->bg_pixmap, -x_offset, -y_offset);
+	gdk_cairo_set_source_pixmap (cr, pixmap, -x_offset, -y_offset);
     }
     else
     {
-	gdk_cairo_set_source_color (cr, &private->bg_color);
+	gdk_cairo_set_source_color (cr, &bg_color);
     }
 }
 

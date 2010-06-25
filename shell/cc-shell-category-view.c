@@ -168,21 +168,22 @@ cc_shell_category_view_style_set (GtkWidget *widget,
                                   GtkStyle  *old_style)
 {
   CcShellCategoryViewPrivate *priv = CC_SHELL_CATEGORY_VIEW (widget)->priv;
+  GtkStyle *style = gtk_widget_get_style (widget);
 
   if (priv->header)
     {
       gtk_widget_modify_bg (priv->header, GTK_STATE_NORMAL,
-                            &widget->style->base[GTK_STATE_NORMAL]);
+                            &style->base[GTK_STATE_NORMAL]);
       gtk_widget_modify_fg (priv->header, GTK_STATE_NORMAL,
-                            &widget->style->text[GTK_STATE_NORMAL]);
+                            &style->text[GTK_STATE_NORMAL]);
     }
 
   if (priv->iconview)
     {
       gtk_widget_modify_bg (priv->iconview, GTK_STATE_NORMAL,
-                            &widget->style->base[GTK_STATE_NORMAL]);
+                            &style->base[GTK_STATE_NORMAL]);
       gtk_widget_modify_fg (priv->iconview, GTK_STATE_NORMAL,
-                            &widget->style->text[GTK_STATE_NORMAL]);
+                            &style->text[GTK_STATE_NORMAL]);
     }
 }
 
