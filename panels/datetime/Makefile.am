@@ -61,7 +61,8 @@ libdate_time_la_SOURCES =		\
 	cc-timezone-map.c	\
 	cc-timezone-map.h	\
 	set-timezone.c		\
-	set-timezone.h
+	set-timezone.h		\
+	tz.c tz.h
 
 libdate_time_la_LIBADD = $(PANEL_LIBS)
 libdate_time_la_LDFLAGS = $(PANEL_LDFLAGS)

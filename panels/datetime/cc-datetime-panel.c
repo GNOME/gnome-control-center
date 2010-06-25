@@ -179,6 +179,18 @@ apply_button_clicked_cb (GtkButton       *button,
 }
 
 static void
+location_changed_cb (CcTimezoneMap   *map,
+                     TzLocation      *location,
+                     CcDateTimePanel *self)
+{
+  GtkWidget *label;
+
+  label = (GtkWidget *) gtk_builder_get_object (self->priv->builder,
+                                                "label_current_location");
+  gtk_label_set_text (GTK_LABEL (label), location->zone);
+}
+
+static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
@@ -205,6 +217,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
 
   widget = (GtkWidget *) cc_timezone_map_new ();
+  g_signal_connect (widget, "location-changed",
+                    G_CALLBACK (location_changed_cb), self);
   gtk_widget_show (widget);
 
   gtk_container_add (GTK_CONTAINER (gtk_builder_get_object (priv->builder,

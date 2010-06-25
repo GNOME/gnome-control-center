@@ -24,6 +24,7 @@
 #define _CC_TIMEZONE_MAP_H
 
 #include <gtk/gtk.h>
+#include "tz.h"
 
 G_BEGIN_DECLS
 

@@ -23,6 +23,8 @@
  */
 
 #include "cc-timezone-map.h"
+#include <math.h>
+#include "tz.h"
 
 G_DEFINE_TYPE (CcTimezoneMap, cc_timezone_map, GTK_TYPE_WIDGET)
 
@@ -51,7 +53,18 @@ struct _CcTimezoneMapPrivate
   gint visible_map_rowstride;
 
   gdouble selected_offset;
+
+  TzDB *tzdb;
+  TzLocation *location;
 };
+
+enum
+{
+  LOCATION_CHANGED,
+  LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL];
 
 
 static CcTimezoneMapOffset color_codes[] =
@@ -162,6 +175,15 @@ cc_timezone_map_dispose (GObject *object)
 static void
 cc_timezone_map_finalize (GObject *object)
 {
+  CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (object)->priv;
+
+  if (priv->tzdb)
+    {
+      g_free (priv->tzdb);
+      priv->tzdb = NULL;
+    }
+
+
   G_OBJECT_CLASS (cc_timezone_map_parent_class)->finalize (object);
 }
 
@@ -237,6 +259,44 @@ cc_timezone_map_realize (GtkWidget *widget)
   gtk_widget_set_window (widget, window);
 }
 
+
+static gdouble
+convert_longtitude_to_x (gdouble longitude, gint map_width)
+{
+  const gdouble xdeg_offset = -6;
+  gdouble x;
+
+  x = (map_width * (180.0 + longitude) / 360.0)
+    + (map_width * xdeg_offset / 180.0);
+
+  return x;
+}
+
+static gdouble
+radians (gdouble degrees)
+{
+  return (degrees / 360.0) * G_PI * 2;
+}
+
+static gdouble
+convert_latitude_to_y (gdouble latitude, gdouble map_height)
+{
+  gdouble bottom_lat = -59;
+  gdouble top_lat = 81;
+  gdouble top_per, y, full_range, top_offset, map_range;
+
+  top_per = top_lat / 180.0;
+  y = 1.25 * log (tan (G_PI_4 + 0.4 * radians (latitude)));
+  full_range = 4.6068250867599998;
+  top_offset = full_range * top_per;
+  map_range = fabs (1.25 * log (tan (G_PI_4 + 0.4 * radians (bottom_lat))) - top_offset);
+  y = fabs (y - top_offset);
+  y = y / map_range;
+  y = y * map_height;
+  return y;
+}
+
+
 static gboolean
 cc_timezone_map_expose_event (GtkWidget      *widget,
                               GdkEventExpose *event)
@@ -247,6 +307,7 @@ cc_timezone_map_expose_event (GtkWidget      *widget,
   GtkAllocation alloc;
   gchar *file;
   GError *err = NULL;
+  gdouble pointx, pointy;
 
   cr = gdk_cairo_create (gtk_widget_get_window (widget));
 
@@ -267,17 +328,30 @@ cc_timezone_map_expose_event (GtkWidget      *widget,
       if (err)
         g_clear_error (&err);
     }
+  else
+    {
 
-  hilight = gdk_pixbuf_scale_simple (orig_hilight, alloc.width, alloc.height,
-                                     GDK_INTERP_BILINEAR);
-  gdk_cairo_set_source_pixbuf (cr, hilight, 0, 0);
+      hilight = gdk_pixbuf_scale_simple (orig_hilight, alloc.width,
+                                         alloc.height, GDK_INTERP_BILINEAR);
+      gdk_cairo_set_source_pixbuf (cr, hilight, 0, 0);
 
-  cairo_paint (cr);
+      cairo_paint (cr);
+      g_object_unref (hilight);
+      g_object_unref (orig_hilight);
+    }
+
+  if (priv->location)
+    {
+      pointx = convert_longtitude_to_x (priv->location->longitude, alloc.width);
+      pointy = convert_latitude_to_y (priv->location->latitude, alloc.height);
+
+      cairo_set_source_rgb (cr, 0, 0, 0);
+      cairo_arc (cr, pointx, pointy, 3.0, 0, 2 * G_PI);
+      cairo_fill (cr);
+    }
 
   cairo_destroy (cr);
 
-  g_object_unref (hilight);
-  g_object_unref (orig_hilight);
 
   return TRUE;
 }
@@ -300,9 +374,33 @@ cc_timezone_map_class_init (CcTimezoneMapClass *klass)
   widget_class->size_allocate = cc_timezone_map_size_allocate;
   widget_class->realize = cc_timezone_map_realize;
   widget_class->expose_event = cc_timezone_map_expose_event;
+
+  signals[LOCATION_CHANGED] = g_signal_new ("location-changed",
+                                            CC_TYPE_TIMEZONE_MAP,
+                                            G_SIGNAL_RUN_FIRST,
+                                            0,
+                                            NULL,
+                                            NULL,
+                                            g_cclosure_marshal_VOID__POINTER,
+                                            G_TYPE_NONE, 1,
+                                            G_TYPE_POINTER);
 }
 
-gboolean
+
+static gint
+sort_locations (TzLocation *a,
+                TzLocation *b)
+{
+  if (a->dist > b->dist)
+    return 1;
+
+  if (a->dist < b->dist)
+    return -1;
+
+  return 0;
+}
+
+static gboolean
 button_press_event (GtkWidget      *widget,
                     GdkEventButton *event)
 {
@@ -312,6 +410,12 @@ button_press_event (GtkWidget      *widget,
   guchar *pixels;
   gint rowstride;
   gint i;
+
+  const GPtrArray *array;
+  gint width, height;
+  GList *distances = NULL;
+  GtkAllocation alloc;
+  TzInfo *info;
 
   x = event->x;
   y = event->y;
@@ -336,6 +440,44 @@ button_press_event (GtkWidget      *widget,
     }
 
   gtk_widget_queue_draw (widget);
+
+  /* work out the co-ordinates */
+
+  array = tz_get_locations (priv->tzdb);
+
+  gtk_widget_get_allocation (widget, &alloc);
+  width = alloc.width;
+  height = alloc.height;
+
+  for (i = 0; i < array->len; i++)
+    {
+      gdouble pointx, pointy, dx, dy;
+      TzLocation *loc = array->pdata[i];
+
+      pointx = convert_longtitude_to_x (loc->longitude, width);
+      pointy = convert_latitude_to_y (loc->latitude, height);
+
+      dx = pointx - x;
+      dy = pointy - y;
+
+      loc->dist = dx * dx + dy * dy;
+      distances = g_list_prepend (distances, loc);
+
+    }
+  distances = g_list_sort (distances, (GCompareFunc) sort_locations);
+
+
+  priv->location = (TzLocation*) distances->data;
+  g_list_free (distances);
+
+  info = tz_info_from_location (priv->location);
+
+  priv->selected_offset = tz_location_get_utc_offset (priv->location)
+    / (60.0*60.0) + ((info->daylight) ? -1.0 : 0.0);
+
+  g_signal_emit (widget, signals[LOCATION_CHANGED], 0, priv->location);
+
+  tz_info_free (info);
 
   return TRUE;
 }
@@ -367,6 +509,7 @@ cc_timezone_map_init (CcTimezoneMap *self)
       g_clear_error (&err);
     }
 
+  priv->tzdb = tz_load_db ();
 
   g_signal_connect (self, "button-press-event", G_CALLBACK (button_press_event),
                     NULL);
