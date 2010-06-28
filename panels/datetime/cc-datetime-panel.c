@@ -184,10 +184,23 @@ location_changed_cb (CcTimezoneMap   *map,
                      CcDateTimePanel *self)
 {
   GtkWidget *label;
+  gchar *s, *p;
 
   label = (GtkWidget *) gtk_builder_get_object (self->priv->builder,
                                                 "label_current_location");
-  gtk_label_set_text (GTK_LABEL (label), location->zone);
+
+  /* replace underscores with spaces */
+  p = s = g_strdup (location->zone);
+  while (*p)
+    {
+      if (*p == '_')
+        *p = ' ';
+      p++;
+    }
+
+  gtk_label_set_text (GTK_LABEL (label), s);
+
+  g_free (s);
 }
 
 static void
