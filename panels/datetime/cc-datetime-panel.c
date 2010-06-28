@@ -183,8 +183,12 @@ location_changed_cb (CcTimezoneMap   *map,
                      TzLocation      *location,
                      CcDateTimePanel *self)
 {
-  GtkWidget *label;
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *label, *widget;
   gchar *s, *p;
+  time_t t;
+  struct tm *ltime;
+  gchar slabel[32];
 
   label = (GtkWidget *) gtk_builder_get_object (self->priv->builder,
                                                 "label_current_location");
@@ -201,6 +205,25 @@ location_changed_cb (CcTimezoneMap   *map,
   gtk_label_set_text (GTK_LABEL (label), s);
 
   g_free (s);
+
+
+  /* tz.c updates the local timezone, which means the spin buttons can be
+   * updated with the current time of the new location */
+
+  t = time (NULL);
+  ltime = localtime (&t);
+
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_hour");
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_hour);
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_min);
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_second");
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_sec);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
+                                                "label_current_time");
+  strftime (slabel, 32, "%X", localtime (&t));
+  gtk_label_set_text (GTK_LABEL (widget), slabel);
 }
 
 static void
