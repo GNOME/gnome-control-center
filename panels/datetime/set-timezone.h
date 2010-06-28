@@ -20,8 +20,17 @@
 
 #ifndef __SET_SYSTEM_TIMEZONE_H__
 
+#include <config.h>
+
 #include <glib.h>
 #include <time.h>
+
+typedef void (*GetTimezoneFunc) (gpointer     data,
+                                 const gchar *timezone,
+                                 GError      *error);
+void     get_system_timezone_async   (GetTimezoneFunc callback,
+                                      gpointer        data,
+                                      GDestroyNotify  notify);
 
 gint     can_set_system_timezone (void);
 
@@ -36,5 +45,13 @@ void     set_system_timezone_async   (const gchar    *filename,
                                       GFunc           callback,
                                       gpointer        data,
                                       GDestroyNotify  notify);
+
+
+
+#ifdef HAVE_SOLARIS
+#define SYSTEM_ZONEINFODIR "/usr/share/lib/zoneinfo/tab"
+#else
+#define SYSTEM_ZONEINFODIR "/usr/share/zoneinfo"
+#endif
 
 #endif

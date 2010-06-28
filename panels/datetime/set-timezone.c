@@ -289,3 +289,85 @@ set_system_timezone_async (const gchar    *filename,
 	set_time_async (data);
 	free_data (data);
 }
+
+/* get timezone */
+
+typedef struct
+{
+  GetTimezoneFunc callback;
+  GDestroyNotify notify;
+
+  gpointer data;
+
+} GetTimezoneData;
+
+static void
+get_timezone_destroy_notify (GetTimezoneData *data)
+{
+	if (data->notify && data->data)
+		data->notify (data);
+
+	g_free (data);
+}
+
+static void
+get_timezone_notify (DBusGProxy     *proxy,
+		     DBusGProxyCall *call,
+		     void           *user_data)
+{
+	GError *error = NULL;
+	gboolean retval;
+	gchar *string = NULL;
+	GetTimezoneData *data = user_data;
+
+	retval = dbus_g_proxy_end_call (proxy, call, &error,
+					G_TYPE_STRING, &string,
+					G_TYPE_INVALID);
+
+	if (data->callback) {
+		if (!retval) {
+			data->callback (data->data, NULL, error);
+			g_error_free (error);
+		}
+		else {
+			data->callback (data->data, string, NULL);
+			g_free (string);
+		}
+	}
+}
+
+void
+get_system_timezone_async (GetTimezoneFunc callback,
+			   gpointer        user_data,
+			   GDestroyNotify  notify)
+{
+	DBusGConnection *bus;
+	DBusGProxy      *proxy;
+	GetTimezoneData *data;
+
+	bus = get_system_bus ();
+	if (bus == NULL)
+		return;
+
+	data = g_new0 (GetTimezoneData, 1);
+	data->data = user_data;
+	data->notify = notify;
+	data->callback = callback;
+
+	proxy = dbus_g_proxy_new_for_name (bus,
+					   "org.gnome.SettingsDaemon.DateTimeMechanism",
+					   "/",
+					   "org.gnome.SettingsDaemon.DateTimeMechanism");
+
+	dbus_g_proxy_begin_call (proxy,
+				 "GetTimezone",
+				 get_timezone_notify,
+				 data,
+				 (GDestroyNotify) get_timezone_destroy_notify,
+				 /* parameters: */
+				 G_TYPE_INVALID,
+				 /* return values: */
+				 G_TYPE_STRING,
+				 G_TYPE_INVALID);
+
+}
