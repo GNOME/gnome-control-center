@@ -400,6 +400,25 @@ sort_locations (TzLocation *a,
   return 0;
 }
 
+static void
+set_location (CcTimezoneMap *map,
+              TzLocation    *location)
+{
+  CcTimezoneMapPrivate *priv = map->priv;
+  TzInfo *info;
+
+  priv->location = location;
+
+  info = tz_info_from_location (priv->location);
+
+  priv->selected_offset = tz_location_get_utc_offset (priv->location)
+    / (60.0*60.0) + ((info->daylight) ? -1.0 : 0.0);
+
+  g_signal_emit (map, signals[LOCATION_CHANGED], 0, priv->location);
+
+  tz_info_free (info);
+}
+
 static gboolean
 button_press_event (GtkWidget      *widget,
                     GdkEventButton *event)
@@ -415,7 +434,6 @@ button_press_event (GtkWidget      *widget,
   gint width, height;
   GList *distances = NULL;
   GtkAllocation alloc;
-  TzInfo *info;
 
   x = event->x;
   y = event->y;
@@ -467,17 +485,9 @@ button_press_event (GtkWidget      *widget,
   distances = g_list_sort (distances, (GCompareFunc) sort_locations);
 
 
-  priv->location = (TzLocation*) distances->data;
+  set_location (CC_TIMEZONE_MAP (widget), (TzLocation*) distances->data);
+
   g_list_free (distances);
-
-  info = tz_info_from_location (priv->location);
-
-  priv->selected_offset = tz_location_get_utc_offset (priv->location)
-    / (60.0*60.0) + ((info->daylight) ? -1.0 : 0.0);
-
-  g_signal_emit (widget, signals[LOCATION_CHANGED], 0, priv->location);
-
-  tz_info_free (info);
 
   return TRUE;
 }
@@ -524,4 +534,25 @@ CcTimezoneMap *
 cc_timezone_map_new (void)
 {
   return g_object_new (CC_TYPE_TIMEZONE_MAP, NULL);
+}
+
+void
+cc_timezone_map_set_timezone (CcTimezoneMap *map,
+                              const gchar   *timezone)
+{
+  GPtrArray *locations;
+  guint i;
+
+  locations = tz_get_locations (map->priv->tzdb);
+
+  for (i = 0; i < locations->len; i++)
+    {
+      TzLocation *loc = locations->pdata[i];
+
+      if (!g_strcmp0 (loc->zone, timezone))
+        {
+          set_location (map, loc);
+          break;
+        }
+    }
 }
