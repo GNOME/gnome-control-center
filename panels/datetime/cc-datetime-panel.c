@@ -32,6 +32,9 @@ G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
 struct _CcDateTimePanelPrivate
 {
   GtkBuilder *builder;
+  GtkWidget *map;
+
+  TzLocation *current_location;
 
   guint timeout;
 };
@@ -133,13 +136,24 @@ update_time (CcDateTimePanel *self)
 }
 
 static void
-cb (CcDateTimePanel *self,
-    GError          *error)
+set_time_cb (CcDateTimePanel *self,
+             GError          *error)
 {
   /* TODO: display any error in a user friendly way */
   if (error)
     {
       g_warning ("Could not set system time: %s", error->message);
+    }
+}
+
+static void
+set_timezone_cb (CcDateTimePanel *self,
+                 GError          *error)
+{
+  /* TODO: display any error in a user friendly way */
+  if (error)
+    {
+      g_warning ("Could not set system timezone: %s", error->message);
     }
 }
 
@@ -152,6 +166,7 @@ apply_button_clicked_cb (GtkButton       *button,
   guint h, mon, s, y, min, d;
   struct tm fulltime;
   time_t unixtime;
+  gchar *filename;
 
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_hour");
   h = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
@@ -174,8 +189,11 @@ apply_button_clicked_cb (GtkButton       *button,
 
   unixtime = mktime (&fulltime);
 
-  set_system_time_async (unixtime, (GFunc) cb, self, NULL);
+  set_system_time_async (unixtime, (GFunc) set_time_cb, self, NULL);
 
+  filename = g_build_filename (SYSTEM_ZONEINFODIR, priv->current_location->zone,
+                               NULL);
+  set_system_timezone_async (filename, (GFunc) set_timezone_cb, self, NULL);
 }
 
 static void
@@ -189,6 +207,8 @@ location_changed_cb (CcTimezoneMap   *map,
   time_t t;
   struct tm *ltime;
   gchar slabel[32];
+
+  priv->current_location = location;
 
   label = (GtkWidget *) gtk_builder_get_object (self->priv->builder,
                                                 "label_current_location");
@@ -227,6 +247,17 @@ location_changed_cb (CcTimezoneMap   *map,
 }
 
 static void
+get_timezone_cb (CcDateTimePanel *self,
+                 const gchar     *timezone,
+                 GError          *error)
+{
+  if (error)
+    g_warning ("Could not get current timezone: %s", error->message);
+  else
+    cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), timezone);
+}
+
+static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
@@ -252,7 +283,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
       return;
     }
 
-  widget = (GtkWidget *) cc_timezone_map_new ();
+  priv->map = widget = (GtkWidget *) cc_timezone_map_new ();
   g_signal_connect (widget, "location-changed",
                     G_CALLBACK (location_changed_cb), self);
   gtk_widget_show (widget);
@@ -288,6 +319,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                     "clicked",
                     G_CALLBACK (apply_button_clicked_cb),
                     self);
+
+  get_system_timezone_async ((GetTimezoneFunc) get_timezone_cb, self, NULL);
 }
 
 void
