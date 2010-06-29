@@ -49,6 +49,7 @@ dist_ui_DATA = \
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(DBUS_CFLAGS)					\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(uidir)\""			\
@@ -67,7 +68,7 @@ libdate_time_la_SOURCES =		\
 	set-timezone.h		\
 	tz.c tz.h
 
-libdate_time_la_LIBADD = $(PANEL_LIBS)
+libdate_time_la_LIBADD = $(PANEL_LIBS) $(DBUS_LIBS)
 libdate_time_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
