@@ -2,7 +2,7 @@
 cappletname = datetime
 
 uidir = $(datadir)/ui/datetime
-ui_DATA = \
+dist_ui_DATA = \
 	datetime.ui \
 	data/bg.png \
 	data/cc.png \
