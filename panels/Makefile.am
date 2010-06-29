@@ -4,4 +4,5 @@ SUBDIRS=display \
 	network \
 	default-applications \
 	keybindings \
-	universal-access
+	universal-access \
+	datetime

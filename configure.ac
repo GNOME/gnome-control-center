@@ -411,6 +411,8 @@ libgnome-control-center/libgnome-control-center.pc
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
 panels/Makefile
+panels/datetime/Makefile
+panels/datetime/gnome-datetime-panel.desktop.in
 panels/mouse/Makefile
 panels/mouse/gnome-mouse-panel.desktop.in
 panels/keyboard/Makefile
