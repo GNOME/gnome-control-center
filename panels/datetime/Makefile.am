@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = datetime
+
 uidir = $(datadir)/ui/datetime
 ui_DATA = \
 	datetime.ui \
