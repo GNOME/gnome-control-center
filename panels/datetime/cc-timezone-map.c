@@ -205,19 +205,25 @@ cc_timezone_map_size_allocate (GtkWidget     *widget,
                                GtkAllocation *allocation)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
-  GdkPixbuf *color_map;
+
+  if (priv->background)
+    g_object_unref (priv->background);
 
   priv->background = gdk_pixbuf_scale_simple (priv->orig_background,
                                               allocation->width,
                                               allocation->height,
                                               GDK_INTERP_BILINEAR);
-  color_map = gdk_pixbuf_scale_simple (priv->orig_color_map,
-                                       allocation->width,
-                                       allocation->height,
-                                       GDK_INTERP_BILINEAR);
 
-  priv->visible_map_pixels = gdk_pixbuf_get_pixels (color_map);
-  priv->visible_map_rowstride = gdk_pixbuf_get_rowstride (color_map);
+  if (priv->color_map)
+    g_object_unref (priv->color_map);
+
+  priv->color_map = gdk_pixbuf_scale_simple (priv->orig_color_map,
+                                             allocation->width,
+                                             allocation->height,
+                                             GDK_INTERP_BILINEAR);
+
+  priv->visible_map_pixels = gdk_pixbuf_get_pixels (priv->color_map);
+  priv->visible_map_rowstride = gdk_pixbuf_get_rowstride (priv->color_map);
 
   GTK_WIDGET_CLASS (cc_timezone_map_parent_class)->size_allocate (widget,
                                                                   allocation);
