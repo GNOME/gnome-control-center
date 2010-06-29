@@ -239,7 +239,7 @@ cc_timezone_map_realize (GtkWidget *widget)
 
   gtk_widget_get_allocation (widget, &allocation);
 
-  GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+  gtk_widget_set_realized (widget, TRUE);
 
   attr.window_type = GDK_WINDOW_CHILD;
   attr.wclass = GDK_INPUT_OUTPUT;
