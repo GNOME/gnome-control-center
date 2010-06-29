@@ -36,7 +36,7 @@
 
 
 static DBusGConnection *
-get_system_bus (void)
+get_system_bus (GError **err)
 {
         GError          *error;
         static DBusGConnection *bus = NULL;
@@ -45,9 +45,7 @@ get_system_bus (void)
         	error = NULL;
         	bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
         	if (bus == NULL) {
-                	g_warning ("Couldn't connect to system bus: %s", 
-				   error->message);
-                	g_error_free (error);
+			g_propagate_error (err, error);
 		}
         }
 
@@ -81,7 +79,7 @@ refresh_can_do (const gchar *action, CanDoFunc callback)
         DBusGConnection *bus;
         DBusGProxy      *proxy;
 
-        bus = get_system_bus ();
+        bus = get_system_bus (NULL);
         if (bus == NULL)
                 return;
 
@@ -207,10 +205,17 @@ set_time_async (SetTimeCallbackData *data)
 {
         DBusGConnection *bus;
         DBusGProxy      *proxy;
+	GError          *err = NULL;
 
-        bus = get_system_bus ();
-        if (bus == NULL)
-                return;
+        bus = get_system_bus (&err);
+        if (bus == NULL) {
+		if (err) {
+			if (data->callback)
+				data->callback (data->data, err);
+			g_clear_error (&err);
+		}
+		return;
+	}
 
 	proxy = dbus_g_proxy_new_for_name (bus,
 					   "org.gnome.SettingsDaemon.DateTimeMechanism",
@@ -344,10 +349,18 @@ get_system_timezone_async (GetTimezoneFunc callback,
 	DBusGConnection *bus;
 	DBusGProxy      *proxy;
 	GetTimezoneData *data;
+	GError          *error = NULL;
 
-	bus = get_system_bus ();
-	if (bus == NULL)
+	bus = get_system_bus (&error);
+	if (bus == NULL) {
+		if (error) {
+			if (callback)
+				callback (user_data, NULL, error);
+			g_clear_error (&error);
+		}
 		return;
+
+        }
 
 	data = g_new0 (GetTimezoneData, 1);
 	data->data = user_data;
