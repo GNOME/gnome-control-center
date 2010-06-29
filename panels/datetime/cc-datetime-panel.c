@@ -191,9 +191,13 @@ apply_button_clicked_cb (GtkButton       *button,
 
   set_system_time_async (unixtime, (GFunc) set_time_cb, self, NULL);
 
-  filename = g_build_filename (SYSTEM_ZONEINFODIR, priv->current_location->zone,
-                               NULL);
-  set_system_timezone_async (filename, (GFunc) set_timezone_cb, self, NULL);
+  if (priv->current_location)
+    {
+      filename = g_build_filename (SYSTEM_ZONEINFODIR,
+                                   priv->current_location->zone,
+                                   NULL);
+      set_system_timezone_async (filename, (GFunc) set_timezone_cb, self, NULL);
+    }
 }
 
 static void
