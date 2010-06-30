@@ -16,8 +16,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <gdk/gdkprivate.h> /* For GDK_PARENT_RELATIVE_BG */
 #include "scrollarea.h"
+
+#include <gdk/gdk.h>
+
 #include "foo-marshal.h"
 
 G_DEFINE_TYPE (FooScrollArea, foo_scroll_area, GTK_TYPE_CONTAINER);
@@ -504,13 +506,14 @@ setup_background_cr (GdkWindow *window,
     GdkWindow *parent;
     gint x, y;
     GdkColor bg_color;
+    gboolean parent_relative;
 
-    gdk_window_get_back_pixmap (window, &pixmap, NULL);
+    gdk_window_get_back_pixmap (window, &pixmap, &parent_relative);
     parent = gdk_window_get_effective_parent (window);
     gdk_window_get_geometry (window, &x, &y, NULL, NULL, NULL);
     gdk_window_get_background (window, &bg_color);
 
-    if (pixmap == GDK_PARENT_RELATIVE_BG && parent)
+    if (parent_relative && parent)
     {
 	x_offset += x;
 	y_offset += y;
@@ -518,7 +521,7 @@ setup_background_cr (GdkWindow *window,
 	setup_background_cr (parent, cr, x_offset, y_offset);
     }
     else if (pixmap &&
-	     pixmap != GDK_PARENT_RELATIVE_BG &&
+	     !parent_relative &&
 	     pixmap != GDK_NO_BG)
     {
 	gdk_cairo_set_source_pixmap (cr, pixmap, -x_offset, -y_offset);
