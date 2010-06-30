@@ -1,7 +1,7 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = datetime
 
-uidir = $(datadir)/ui/datetime
+uidir = $(pkgdatadir)/ui/datetime
 dist_ui_DATA = \
 	datetime.ui \
 	data/bg.png \
