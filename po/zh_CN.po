@@ -15,9 +15,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-04-16 15:08+0000\n"
-"PO-Revision-Date: 2010-04-15 20:50+0800\n"
-"Last-Translator: Xhacker Liu <liu.dongyuan@gmail.com>\n"
+"POT-Creation-Date: 2010-07-01 07:01+0000\n"
+"PO-Revision-Date: 2010-06-21 20:33+0700\n"
+"Last-Translator: 甘露(Gan Lu) <rhythm.gan@gmail.com>\n"
 "Language-Team: zh_CN <zh_CN <i18n-translation@lists.linux.net.cn>>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -318,7 +318,6 @@ msgstr "家庭(_E)："
 
 #. Home vs Work (address)
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "家庭"
 
@@ -611,7 +610,7 @@ msgstr "已通过身份验证！"
 #. Update status message and auth state
 #. Authentication failure
 #: ../capplets/about-me/gnome-about-me-password.c:474
-#: ../capplets/about-me/gnome-about-me-password.c:554
+#: ../capplets/about-me/gnome-about-me-password.c:559
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
@@ -621,71 +620,75 @@ msgstr "您的密码在您首次登录后已经更改。请重新进行身份验
 msgid "That password was incorrect."
 msgstr "密码错误。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:525
+#: ../capplets/about-me/gnome-about-me-password.c:527
 msgid "Your password has been changed."
 msgstr "您的密码已更改。"
 
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:535
+#: ../capplets/about-me/gnome-about-me-password.c:537
 #, c-format
 msgid "System error: %s."
 msgstr "系统错误：%s。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:538
+#: ../capplets/about-me/gnome-about-me-password.c:540
 msgid "The password is too short."
 msgstr "密码太短。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:542
+#: ../capplets/about-me/gnome-about-me-password.c:544
 msgid "The password is too simple."
 msgstr "密码太简单。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:546
+#: ../capplets/about-me/gnome-about-me-password.c:549
 msgid "The old and new passwords are too similar."
 msgstr "旧密码和新密码太相似。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:548
+#: ../capplets/about-me/gnome-about-me-password.c:551
 msgid "The new password must contain numeric or special character(s)."
 msgstr "必须包含数字或特殊字符。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:551
+#: ../capplets/about-me/gnome-about-me-password.c:554
 msgid "The old and new passwords are the same."
 msgstr "旧密码和新密码相同。"
 
+#: ../capplets/about-me/gnome-about-me-password.c:556
+msgid "The new password has already been used recently."
+msgstr "新密码在最近已经使用过。"
+
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:827
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "无法启动 %s：%s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:826
+#: ../capplets/about-me/gnome-about-me-password.c:831
 msgid "Unable to launch backend"
 msgstr "无法调用后端"
 
-#: ../capplets/about-me/gnome-about-me-password.c:827
+#: ../capplets/about-me/gnome-about-me-password.c:832
 msgid "A system error has occurred"
 msgstr "发生了系统错误"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:847
+#: ../capplets/about-me/gnome-about-me-password.c:852
 msgid "Checking password..."
 msgstr "正在检查密码..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:939
 msgid "Click <b>Change password</b> to change your password."
 msgstr "单击<b>更改密码</b>可更改密码。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:942
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "请在<b>新密码</b>框中输入您的新密码。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:940
+#: ../capplets/about-me/gnome-about-me-password.c:945
 #: ../capplets/about-me/gnome-about-me-password.ui.h:5
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
 msgstr "请在<b>重新输入新密码</b>框中再输入一次密码。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:943
+#: ../capplets/about-me/gnome-about-me-password.c:948
 msgid "The two passwords are not equal."
 msgstr "输入的两个密码不同。"
 
@@ -728,69 +731,6 @@ msgstr "新密码(_N)："
 msgid "_Retype new password:"
 msgstr "重新输入新密码(_R)："
 
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:1
-msgid "Accessible Lo_gin"
-msgstr "带辅助功能的登录(_G)"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:2
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
-msgid "Assistive Technologies"
-msgstr "辅助技术"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:3
-msgid "Assistive Technologies Preferences"
-msgstr "辅助技术首选项"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:4
-msgid ""
-"Changes to enable assistive technologies will not take effect until your "
-"next log in."
-msgstr "对启用辅助技术的更改直到下次登录后才会生效。"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:5
-msgid "Close and _Log Out"
-msgstr "关闭并注销(_L)"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:6
-msgid "Jump to Preferred Applications dialog"
-msgstr "跳转到首选应用程序对话框"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:7
-msgid "Jump to the Accessible Login dialog"
-msgstr "跳转到辅助登录对话框"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:8
-msgid "Jump to the Keyboard Accessibility dialog"
-msgstr "跳转到键盘辅助功能对话框"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:9
-msgid "Jump to the Mouse Accessibility dialog"
-msgstr "跳转到鼠标辅助功能对话框"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:10
-msgid "Preferences"
-msgstr "首选项"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:11
-msgid "_Enable assistive technologies"
-msgstr "启用辅助技术(_E)"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:12
-msgid "_Keyboard Accessibility"
-msgstr "键盘辅助功能(_K)"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:13
-msgid "_Mouse Accessibility"
-msgstr "鼠标辅助功能(_M)"
-
-#: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:14
-msgid "_Preferred Applications"
-msgstr "首选应用程序(_P)"
-
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
-msgid "Choose which accessibility features to enable when you log in"
-msgstr "选择您登录时想要启用的辅助特性"
-
 #: ../capplets/appearance/appearance-desktop.c:627
 msgid "Add Wallpaper"
 msgstr "添加壁纸"
@@ -799,11 +739,11 @@ msgstr "添加壁纸"
 msgid "All files"
 msgstr "全部文件"
 
-#: ../capplets/appearance/appearance-font.c:494
+#: ../capplets/appearance/appearance-font.c:499
 msgid "Font may be too large"
 msgstr "字体可能太大"
 
-#: ../capplets/appearance/appearance-font.c:498
+#: ../capplets/appearance/appearance-font.c:503
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -816,7 +756,7 @@ msgid_plural ""
 msgstr[0] ""
 "选中的字体是 %d 磅大。要想有效的使用计算机，推荐您选择小于 %d 的大小。"
 
-#: ../capplets/appearance/appearance-font.c:511
+#: ../capplets/appearance/appearance-font.c:516
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -828,11 +768,11 @@ msgid_plural ""
 "sized font."
 msgstr[0] "选中的字体是 %d 磅大。要想有效的使用计算机，推荐您选择较小的字体。"
 
-#: ../capplets/appearance/appearance-font.c:534
+#: ../capplets/appearance/appearance-font.c:539
 msgid "Use previous font"
 msgstr "使用先前的字体"
 
-#: ../capplets/appearance/appearance-font.c:536
+#: ../capplets/appearance/appearance-font.c:541
 msgid "Use selected font"
 msgstr "使用选中的字体"
 
@@ -855,8 +795,6 @@ msgid "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr "指定要显示的页面名称 (theme|background|fonts|interface)"
 
 #: ../capplets/appearance/appearance-main.c:144
-#: ../capplets/default-applications/gnome-da-capplet.c:960
-#: ../capplets/mouse/gnome-mouse-properties.c:591
 msgid "page"
 msgstr "page"
 
@@ -930,7 +868,7 @@ msgid "The current theme suggests a font."
 msgstr "当前主题推荐了一种字体。"
 
 #: ../capplets/appearance/appearance-themes.c:1046
-#: ../capplets/default-applications/gnome-da-capplet.c:691
+#: ../panels/default-applications/gnome-da-capplet.c:693
 msgid "Custom"
 msgstr "自定义"
 
@@ -1023,8 +961,10 @@ msgstr "图标"
 msgid "Icons only"
 msgstr "仅图标"
 
+#. large threshold
 #: ../capplets/appearance/data/appearance.ui.h:24
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Large"
 msgstr "大"
 
@@ -1064,8 +1004,10 @@ msgstr "保存背景图像(_B)"
 msgid "Scale"
 msgstr "比例放大"
 
+#. small threshold
 #: ../capplets/appearance/data/appearance.ui.h:34
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/universal-access/uap.ui.h:78
 msgid "Small"
 msgstr "小"
 
@@ -1139,11 +1081,12 @@ msgid "Window Border"
 msgstr "窗口边框"
 
 #: ../capplets/appearance/data/appearance.ui.h:53
+#: ../panels/universal-access/uap.ui.h:95
 msgid "Zoom"
 msgstr "缩放"
 
 #: ../capplets/appearance/data/appearance.ui.h:54
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:45
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
 msgid "_Add..."
 msgstr "添加(_A)..."
 
@@ -1189,7 +1132,7 @@ msgid "_Monochrome"
 msgstr "单色(_M)"
 
 #: ../capplets/appearance/data/appearance.ui.h:66
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:5
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
 msgid "_Name:"
 msgstr "名称(_N)："
 
@@ -1421,7 +1364,7 @@ msgid "The theme already exists. Would you like to replace it?"
 msgstr "主题已经存在。您是否想要替换？"
 
 #: ../capplets/appearance/theme-save.c:157
-#: ../capplets/common/file-transfer-dialog.c:450
+#: ../capplets/common/file-transfer-dialog.c:451
 msgid "_Overwrite"
 msgstr "覆盖(_O)"
 
@@ -1451,6 +1394,7 @@ msgstr ""
 "发生冲突。"
 
 #: ../capplets/common/capplet-stock-icons.c:66
+#: ../panels/mouse/capplet-stock-icons.c:66
 #, c-format
 msgid "Unable to load stock icon '%s'\n"
 msgstr "无法装入图标“%s”\n"
@@ -1471,7 +1415,7 @@ msgid "Copying '%s'"
 msgstr "正在复制“%s”"
 
 #: ../capplets/common/file-transfer-dialog.c:185
-#: ../capplets/common/file-transfer-dialog.c:312
+#: ../capplets/common/file-transfer-dialog.c:313
 msgid "Copying files"
 msgstr "正在复制文件"
 
@@ -1523,87 +1467,104 @@ msgstr "URI 总数"
 msgid "Total number of URIs"
 msgstr "URI 的总数"
 
-#: ../capplets/common/file-transfer-dialog.c:444
+#: ../capplets/common/file-transfer-dialog.c:445
 #, c-format
 msgid "File '%s' already exists. Do you want to overwrite it?"
 msgstr "文件“%s”已经存在。您是否想要覆盖？"
 
-#: ../capplets/common/file-transfer-dialog.c:447
+#: ../capplets/common/file-transfer-dialog.c:448
 msgid "_Skip"
 msgstr "跳过(_S)"
 
-#: ../capplets/common/file-transfer-dialog.c:448
+#: ../capplets/common/file-transfer-dialog.c:449
 msgid "Overwrite _All"
 msgstr "全部覆盖(_A)"
 
 #: ../capplets/common/gconf-property-editor.c:134
+#: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
 msgstr "键"
 
 #: ../capplets/common/gconf-property-editor.c:135
+#: ../libgnome-control-center/gconf-property-editor.c:135
 msgid "GConf key to which this property editor is attached"
 msgstr "本属性编辑器编辑的 GConf 键"
 
 #: ../capplets/common/gconf-property-editor.c:141
+#: ../libgnome-control-center/gconf-property-editor.c:141
 msgid "Callback"
 msgstr "回调"
 
 #: ../capplets/common/gconf-property-editor.c:142
+#: ../libgnome-control-center/gconf-property-editor.c:142
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "当和键关联的值改变时执行该回调"
 
 #: ../capplets/common/gconf-property-editor.c:147
+#: ../libgnome-control-center/gconf-property-editor.c:147
 msgid "Change set"
 msgstr "改动集"
 
 #: ../capplets/common/gconf-property-editor.c:148
+#: ../libgnome-control-center/gconf-property-editor.c:148
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr "包含应用修改时要传递给 gconf 客户端的数据的 GConf 改动集合"
 
 #: ../capplets/common/gconf-property-editor.c:153
+#: ../libgnome-control-center/gconf-property-editor.c:153
 msgid "Conversion to widget callback"
 msgstr "转换到部件时的回调"
 
 #: ../capplets/common/gconf-property-editor.c:154
+#: ../libgnome-control-center/gconf-property-editor.c:154
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "当数据从 GConf 转换到部件时使用的回调"
 
 #: ../capplets/common/gconf-property-editor.c:159
+#: ../libgnome-control-center/gconf-property-editor.c:159
 msgid "Conversion from widget callback"
 msgstr "从部件转换时的回调"
 
 #: ../capplets/common/gconf-property-editor.c:160
+#: ../libgnome-control-center/gconf-property-editor.c:160
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "当数据从部件转换到 GConf 时使用的回调"
 
 #: ../capplets/common/gconf-property-editor.c:165
+#: ../libgnome-control-center/gconf-property-editor.c:165
 msgid "UI Control"
 msgstr "用户界面控件"
 
 #: ../capplets/common/gconf-property-editor.c:166
+#: ../libgnome-control-center/gconf-property-editor.c:166
 msgid "Object that controls the property (normally a widget)"
 msgstr "控制属性的对象 (通常为部件)"
 
 #: ../capplets/common/gconf-property-editor.c:181
+#: ../libgnome-control-center/gconf-property-editor.c:181
 msgid "Property editor object data"
 msgstr "属性编辑器对象数据"
 
 #: ../capplets/common/gconf-property-editor.c:182
+#: ../libgnome-control-center/gconf-property-editor.c:182
 msgid "Custom data required by the specific property editor"
 msgstr "特定的属性编辑器所需要的自定义数据"
 
 #: ../capplets/common/gconf-property-editor.c:188
+#: ../libgnome-control-center/gconf-property-editor.c:188
 msgid "Property editor data freeing callback"
 msgstr "属性编辑器数据释放回调函数"
 
 #: ../capplets/common/gconf-property-editor.c:189
+#: ../libgnome-control-center/gconf-property-editor.c:189
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "当属性编辑器对象数据要被释放时要调用的回调函数"
 
-#: ../capplets/common/gconf-property-editor.c:1405
+#: ../capplets/common/gconf-property-editor.c:1406
+#: ../libgnome-control-center/gconf-property-editor.c:1406
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1615,7 +1576,8 @@ msgstr ""
 "\n"
 "请确定该文件存在后重试，或选择另一背景图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1413
+#: ../capplets/common/gconf-property-editor.c:1414
+#: ../libgnome-control-center/gconf-property-editor.c:1414
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1628,11 +1590,13 @@ msgstr ""
 "\n"
 "请选择其他图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1533
+#: ../capplets/common/gconf-property-editor.c:1536
+#: ../libgnome-control-center/gconf-property-editor.c:1536
 msgid "Please select an image."
 msgstr "请选择图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1538
+#: ../capplets/common/gconf-property-editor.c:1541
+#: ../libgnome-control-center/gconf-property-editor.c:1541
 msgid "_Select"
 msgstr "选择(_S)"
 
@@ -1685,54 +1649,53 @@ msgid ""
 "not installed."
 msgstr "此主题的外观将与设计时不同，因为所需的图标主题“%s”未安装。"
 
-#: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:17
-msgid "Preferred Applications"
-msgstr "默认应用程序"
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
+msgid "Date And Time"
+msgstr "日期和时间"
 
-#: ../capplets/default-applications/default-applications.desktop.in.in.h:2
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+msgid "Date and Time preferences panel"
+msgstr "日期和时间首选项面板"
+
+#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
+msgid "Preferred Applications"
+msgstr "首选应用程序"
+
+#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "选择默认的应用程序"
 
-#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
+#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:1
 msgid "Start the preferred visual assistive technology"
-msgstr "启动默认的视觉辅助技术"
+msgstr "启动首选的视觉辅助技术"
 
-#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
+#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:2
 msgid "Visual Assistance"
 msgstr "视觉辅助"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:98
-#: ../capplets/default-applications/gnome-da-capplet.c:362
-#: ../capplets/default-applications/gnome-da-capplet.c:383
+#: ../panels/default-applications/gnome-da-capplet.c:100
+#: ../panels/default-applications/gnome-da-capplet.c:364
+#: ../panels/default-applications/gnome-da-capplet.c:385
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "保存配置出错：%s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:722
+#: ../panels/default-applications/gnome-da-capplet.c:724
 msgid "Could not load the main interface"
 msgstr "无法装入主界面"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:724
+#: ../panels/default-applications/gnome-da-capplet.c:726
 msgid "Please make sure that the applet is properly installed"
-msgstr "请确定小程序已经正确安装。"
+msgstr "请确定小程序已经正确安装"
 
-#. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/default-applications/gnome-da-capplet.c:959
-msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
-msgstr "指定要显示的页面名称 (internet|multimedia|system|a11y)"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:964
-msgid "- GNOME Default Applications"
-msgstr "- GNOME 默认应用程序"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:1
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Accessibility"
 msgstr "辅助功能"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:3
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:3
 #, no-c-format
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "出现的全部 %s 都将被替换为实际链接"
@@ -1740,389 +1703,486 @@ msgstr "出现的全部 %s 都将被替换为实际链接"
 #.
 #. * vim: sw=2 ts=8 cindent noai bs=2
 #.
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:4
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:1
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:4
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:1
 msgid "C_ommand:"
 msgstr "命令(_O)："
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:5
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:5
 msgid "Co_mmand:"
 msgstr "命令(_M)："
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:6
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:6
 msgid "E_xecute flag:"
 msgstr "执行标志(_X)："
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:7
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
 msgid "Image Viewer"
 msgstr "图像查看器"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:8
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Instant Messenger"
 msgstr "即时通讯工具"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:9
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
 msgid "Internet"
 msgstr "互联网"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:10
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
 msgid "Mail Reader"
 msgstr "邮件阅读器"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:11
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
 msgid "Mobility"
 msgstr "移动性 "
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:12
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
 msgid "Multimedia"
 msgstr "多媒体"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:13
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
 msgid "Multimedia Player"
 msgstr "多媒体播放器"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:14
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
 msgid "Open link in new _tab"
 msgstr "在新标签中打开链接(_T)"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:15
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
 msgid "Open link in new _window"
 msgstr "在新窗口中打开链接(_W)"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:16
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
 msgid "Open link with web browser _default"
 msgstr "使用网络浏览器的默认设置打开链接(_D)"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:18
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Run at st_art"
 msgstr "启动时运行(_A)"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:19
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
 msgid "Run in t_erminal"
 msgstr "在终端中运行(_E)"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:20
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:20
 msgid "System"
 msgstr "系统"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:21
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:21
 msgid "Terminal Emulator"
 msgstr "终端模拟器"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:22
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:22
 msgid "Text Editor"
 msgstr "文本编辑器"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:23
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:23
 msgid "Video Player"
 msgstr "视频播放器"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:24
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:24
 msgid "Visual"
 msgstr "视觉效果"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:25
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:25
 msgid "Web Browser"
 msgstr "网络浏览器"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.ui.h:26
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:26
 msgid "_Run at start"
 msgstr "启动时运行(_R)"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
 msgstr "Balsa"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Banshee Music Player"
 msgstr "Banshee 音乐播放器"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Claws Mail"
 msgstr "Claws Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Debian Sensible Browser"
 msgstr "Debian Sensible 浏览器"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
 msgid "Debian Terminal Emulator"
 msgstr "Debian 终端模拟器"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Encompass"
 msgstr "Encompass"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Epiphany Web Browser"
 msgstr "Epiphany 网络浏览器"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
 msgid "Evolution Mail Reader"
 msgstr "Evolution 邮件阅读程序"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Firebird"
 msgstr "Firebird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Firefox"
 msgstr "Firefox"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
 msgid "GNOME Magnifier without Screen Reader"
 msgstr "不带屏幕阅读器的 GNOME 放大镜"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
 msgid "GNOME OnScreen Keyboard"
 msgstr "GNOME 屏幕键盘"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
 msgid "GNOME Terminal"
 msgstr "GNOME 终端"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
 msgid "Galeon"
 msgstr "Galeon"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Gnopernicus"
 msgstr "Gnopernicus"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Gnopernicus with Magnifier"
 msgstr "带放大镜的 Gnopernicus"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
 msgid "Iceape"
 msgstr "Iceape"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
 msgid "Iceape Mail"
 msgstr "Iceape 邮件"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
 msgid "Icedove"
 msgstr "Icedove"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Iceweasel"
 msgstr "Iceweasel"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
 msgid "KDE Magnifier without Screen Reader"
 msgstr "不带屏幕阅读器的 KDE 放大镜"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:25
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:26
 msgid "Konsole"
 msgstr "Konsole"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:27
 msgid "Linux Screen Reader"
 msgstr "Linux 屏幕阅读器"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Linux Screen Reader with Magnifier"
 msgstr "带放大镜的 Linux 屏幕阅读器"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:29
 msgid "Listen"
 msgstr "接听"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:30
 msgid "Midori"
 msgstr "Midori"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:31
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:32
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Mozilla Mail"
 msgstr "Mozilla 邮件"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Muine Music Player"
 msgstr "Muine 音乐播放器"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:37
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:38
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:39
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
 msgid "Orca"
 msgstr "Orca"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
 msgid "Orca with Magnifier"
 msgstr "带放大镜的 Orca"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
 msgid "Rhythmbox Music Player"
 msgstr "Rhythmbox 音乐播放器"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
 msgid "SeaMonkey"
 msgstr "SeaMonkey"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
 msgid "SeaMonkey Mail"
 msgstr "SeaMonkey 邮件"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
 msgid "Standard XTerminal"
 msgstr "标准 X 终端"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
 msgid "Terminator"
 msgstr "Terminator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
 msgid "Totem Movie Player"
 msgstr "Totem 电影播放机"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:52
 msgid "aterm"
 msgstr "aterm"
 
-#: ../capplets/display/display-capplet.ui.h:1
+#: ../panels/display/display-capplet.ui.h:1
 msgid "Include _panel"
 msgstr "包含面板(_P)"
 
-#: ../capplets/display/display-capplet.ui.h:2
-#: ../capplets/display/xrandr-capplet.c:310
+#: ../panels/display/display-capplet.ui.h:2
+#: ../panels/display/xrandr-capplet.c:320
 msgid "Left"
 msgstr "左"
 
-#: ../capplets/display/display-capplet.ui.h:3
+#: ../panels/display/display-capplet.ui.h:3
 msgid "Make Default"
 msgstr "设为默认"
 
-#: ../capplets/display/display-capplet.ui.h:4
-#: ../capplets/display/xrandr-capplet.c:513
+#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/xrandr-capplet.c:523
 msgid "Monitor"
 msgstr "显示器"
 
-#: ../capplets/display/display-capplet.ui.h:5
-msgid "Monitor Preferences"
-msgstr "显示器首选项"
-
-#: ../capplets/display/display-capplet.ui.h:6
-#: ../capplets/display/xrandr-capplet.c:309
-#: ../capplets/display/xrandr-capplet.c:348
+#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/display/xrandr-capplet.c:319
+#: ../panels/display/xrandr-capplet.c:358
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Normal"
 msgstr "普通"
 
-#: ../capplets/display/display-capplet.ui.h:7
+#: ../panels/display/display-capplet.ui.h:6
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Off"
 msgstr "关闭"
 
-#: ../capplets/display/display-capplet.ui.h:8
+#: ../panels/display/display-capplet.ui.h:7
+#: ../panels/universal-access/uap.ui.h:62
 msgid "On"
 msgstr "开"
 
-#: ../capplets/display/display-capplet.ui.h:9
+#: ../panels/display/display-capplet.ui.h:8
 msgid "Panel icon"
 msgstr "面板图标"
 
-#: ../capplets/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:9
 msgid "R_otation:"
 msgstr "旋转(_O)："
 
-#: ../capplets/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:10
 msgid "Re_fresh rate:"
 msgstr "刷新率(_F)："
 
-#: ../capplets/display/display-capplet.ui.h:12
-#: ../capplets/display/xrandr-capplet.c:311
+#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/xrandr-capplet.c:321
 msgid "Right"
 msgstr "右"
 
-#: ../capplets/display/display-capplet.ui.h:13
+#: ../panels/display/display-capplet.ui.h:12
 msgid "Sa_me image in all monitors"
-msgstr "在所有显示器显示同样的图像"
+msgstr "在所有显示器显示同样的图像(_M)"
 
-#: ../capplets/display/display-capplet.ui.h:14
+#: ../panels/display/display-capplet.ui.h:13
 msgid "Upside-down"
 msgstr "上下颠倒"
 
-#: ../capplets/display/display-capplet.ui.h:15
+#: ../panels/display/display-capplet.ui.h:14
 msgid "_Detect monitors"
-msgstr "探测显示器"
+msgstr "检测显示器(_D)"
 
-#: ../capplets/display/display-capplet.ui.h:16
+#: ../panels/display/display-capplet.ui.h:15
 msgid "_Resolution:"
 msgstr "分辨率(_R)："
 
-#: ../capplets/display/display-capplet.ui.h:17
+#: ../panels/display/display-capplet.ui.h:16
 msgid "_Show monitors in panel"
 msgstr "在面板上显示显示器(_S)"
 
-#: ../capplets/display/display-properties.desktop.in.in.h:1
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Change resolution and position of monitors"
 msgstr "更改显示器的分辨率和位置"
 
-#: ../capplets/display/display-properties.desktop.in.in.h:2
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:2
 msgid "Monitors"
 msgstr "显示器"
 
-#: ../capplets/display/xrandr-capplet.c:312
+#: ../panels/display/gnome-display-properties-install-systemwide.c:44
+#, c-format
+msgid ""
+"Usage: %s SOURCE_FILE DEST_NAME\n"
+"\n"
+"This program installs a RANDR profile for multi-monitor setups into\n"
+"a systemwide location.  The resulting profile will get used when\n"
+"the RANDR plug-in gets run in gnome-settings-daemon.\n"
+"\n"
+"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+"xml\n"
+"\n"
+"DEST_NAME - relative name for the installed file.  This will get put in\n"
+"            the systemwide directory for RANDR configurations,\n"
+"            so the result will typically be %s/DEST_NAME\n"
+msgstr ""
+"用法：%s 源文件 目标名称\n"
+"\n"
+"此程序将多显示器设置用到的 RANDR 配置文件安装到系统位置中。而该配置文件\n"
+"将在 gnome-settings-daemon 中运行 RANDR 插件时用到。\n"
+"\n"
+"源文件 - 完整路径，通常是 /home/username/.config/monitors.xml\n"
+"\n"
+"目标名称 - 所安装的文件的相对名。该文件将被放置于 RANDR 配置用到的系统目\n"
+"           录中，因此结果通常都是 %s/目标名称\n"
+
+#. Translators: only able to install RANDR profiles as root
+#: ../panels/display/gnome-display-properties-install-systemwide.c:151
+msgid "This program can only be used by the root user"
+msgstr "此程序只能由 root 用户使用"
+
+#: ../panels/display/gnome-display-properties-install-systemwide.c:168
+msgid "The source filename must be absolute"
+msgstr "源文件名必须绝对"
+
+#. Translators: first %s is a filename; second %s is an error message
+#: ../panels/display/gnome-display-properties-install-systemwide.c:179
+#, c-format
+msgid "Could not open %s: %s\n"
+msgstr "无法打开 %s：%s\n"
+
+#. Translators: first %s is a filename; second %s is an error message
+#: ../panels/display/gnome-display-properties-install-systemwide.c:188
+#, c-format
+msgid "Could not get information for %s: %s\n"
+msgstr "无法获得 %s 的信息：%s\n"
+
+#: ../panels/display/gnome-display-properties-install-systemwide.c:195
+#, c-format
+msgid "%s must be a regular file\n"
+msgstr "%s 必须是普通文件\n"
+
+#: ../panels/display/gnome-display-properties-install-systemwide.c:204
+msgid "This program must only be run through pkexec(1)"
+msgstr "该程序只能通过 pkexec(1) 运行"
+
+#: ../panels/display/gnome-display-properties-install-systemwide.c:209
+msgid "PKEXEC_UID must be set to an integer value"
+msgstr "PKEXEC_UID 必须设定为一个整数值"
+
+#. Translators: we are complaining that a file must be really owned by the user who called this program
+#: ../panels/display/gnome-display-properties-install-systemwide.c:215
+#, c-format
+msgid "%s must be owned by you\n"
+msgstr "%s 必须为您所有\n"
+
+#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
+#: ../panels/display/gnome-display-properties-install-systemwide.c:223
+#, c-format
+msgid "%s must not have any directory components\n"
+msgstr "%s 一定不能有任何目录组件\n"
+
+#: ../panels/display/gnome-display-properties-install-systemwide.c:231
+#, c-format
+msgid "%s must be a directory\n"
+msgstr "%s 必须是个目录\n"
+
+#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
+#: ../panels/display/gnome-display-properties-install-systemwide.c:242
+#, c-format
+msgid "Could not open %s/%s: %s\n"
+msgstr "无法打开 %s/%s：%s\n"
+
+#: ../panels/display/gnome-display-properties-install-systemwide.c:262
+#, c-format
+msgid "Could not rename %s to %s: %s\n"
+msgstr "无法将 %s 重命名为 %s：%s\n"
+
+#: ../panels/display/org.gnome.randr.policy.in.h:1
+msgid ""
+"Authentication is required to install multi-monitor settings for all users"
+msgstr "为所有用户安装多显示器设定需要得到授权"
+
+#: ../panels/display/org.gnome.randr.policy.in.h:2
+msgid "Install multi-monitor settings for the whole system"
+msgstr "为整个系统安装多显示器设置"
+
+#: ../panels/display/xrandr-capplet.c:322
 msgid "Upside Down"
 msgstr "上下颠倒"
 
-#: ../capplets/display/xrandr-capplet.c:354
+#: ../panels/display/xrandr-capplet.c:364
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
@@ -2132,111 +2192,110 @@ msgstr "%d Hz"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../capplets/display/xrandr-capplet.c:502
-#: ../capplets/display/xrandr-capplet.c:1648
+#: ../panels/display/xrandr-capplet.c:512
+#: ../panels/display/xrandr-capplet.c:1658
 msgid "Mirror Screens"
 msgstr "镜像屏幕"
 
-#: ../capplets/display/xrandr-capplet.c:504
+#: ../panels/display/xrandr-capplet.c:514
 #, c-format
 msgid "Monitor: %s"
 msgstr "显示器：%s"
 
-#: ../capplets/display/xrandr-capplet.c:582
+#: ../panels/display/xrandr-capplet.c:592
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:1504
+#: ../panels/display/xrandr-capplet.c:1514
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr "选择一个显示器来更改它的属性；拖动它来排列位置。"
 
-#: ../capplets/display/xrandr-capplet.c:2067
+#: ../panels/display/xrandr-capplet.c:2079
 msgid "Could not save the monitor configuration"
 msgstr "无法保存显示器配置"
 
-#: ../capplets/display/xrandr-capplet.c:2089
+#: ../panels/display/xrandr-capplet.c:2102
 msgid "Could not get session bus while applying display configuration"
 msgstr "应用显示配置时无法获得会话总线"
 
-#: ../capplets/display/xrandr-capplet.c:2131
+#: ../panels/display/xrandr-capplet.c:2147
 msgid "Could not detect displays"
 msgstr "无法探测显示器"
 
-#: ../capplets/display/xrandr-capplet.c:2323
+#: ../panels/display/xrandr-capplet.c:2322
 msgid "The monitor configuration has been saved"
 msgstr "显示器配置已保存"
 
-#: ../capplets/display/xrandr-capplet.c:2325
+#: ../panels/display/xrandr-capplet.c:2324
 msgid "This configuration will be used the next time someone logs in."
-msgstr "这个设置将在下次登入时使用。"
+msgstr "此设置将在下次登入时使用。"
 
-#: ../capplets/display/xrandr-capplet.c:2359
+#: ../panels/display/xrandr-capplet.c:2358
 msgid "Could not set the default configuration for monitors"
 msgstr "无法为显示器设置默认配置"
 
-#: ../capplets/display/xrandr-capplet.c:2401
+#: ../panels/display/xrandr-capplet.c:2414
 msgid "Could not get screen information"
 msgstr "无法获得屏幕信息"
 
-#: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
+#: ../panels/keybindings/00-multimedia-key.xml.in.h:1
 msgid "Sound"
 msgstr "声音"
 
-#: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1146
+#: ../panels/keybindings/01-desktop-key.xml.in.h:1
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:21
+#: ../panels/keybindings/eggcellrendererkeys.c:21
 msgid "New shortcut..."
 msgstr "新建快捷键..."
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:163
-#: ../capplets/keybindings/eggcellrendererkeys.c:164
+#: ../panels/keybindings/eggcellrendererkeys.c:163
+#: ../panels/keybindings/eggcellrendererkeys.c:164
 msgid "Accelerator key"
 msgstr "加速键"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:173
-#: ../capplets/keybindings/eggcellrendererkeys.c:174
+#: ../panels/keybindings/eggcellrendererkeys.c:173
+#: ../panels/keybindings/eggcellrendererkeys.c:174
 msgid "Accelerator modifiers"
 msgstr "加速键修饰键"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:182
-#: ../capplets/keybindings/eggcellrendererkeys.c:183
+#: ../panels/keybindings/eggcellrendererkeys.c:182
+#: ../panels/keybindings/eggcellrendererkeys.c:183
 msgid "Accelerator keycode"
 msgstr "加速键键码"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:193
+#: ../panels/keybindings/eggcellrendererkeys.c:193
 msgid "Accel Mode"
 msgstr "加速模式"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:194
+#: ../panels/keybindings/eggcellrendererkeys.c:194
 msgid "The type of accelerator."
 msgstr "加速键类型。"
 
-#: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:119
+#: ../panels/keybindings/eggcellrendererkeys.c:242
+#: ../panels/keybindings/gnome-keybinding-properties.c:101
 #: ../typing-break/drwright.c:498
 msgid "Disabled"
 msgstr "禁用"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:200
+#: ../panels/keybindings/gnome-keybinding-properties.c:182
 msgid "<Unknown Action>"
 msgstr "<未知操作>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:950
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1581
+#: ../panels/keybindings/gnome-keybinding-properties.c:932
+#: ../panels/keybindings/gnome-keybinding-properties.c:1563
 msgid "Custom Shortcuts"
 msgstr "自定义快捷键"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1092
+#: ../panels/keybindings/gnome-keybinding-properties.c:1074
 msgid "Error saving the new shortcut"
 msgstr "保存新快捷键出错"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1171
+#: ../panels/keybindings/gnome-keybinding-properties.c:1153
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -2246,7 +2305,7 @@ msgstr ""
 "无法使用快捷键“%s”，因为使用此键将无法输入。\n"
 "请同时使用 Ctrl、Alt 或 Shift 再试一次。"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1201
+#: ../panels/keybindings/gnome-keybinding-properties.c:1183
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -2255,806 +2314,1037 @@ msgstr ""
 "快捷键“%s”已经用于\n"
 "“%s”"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1207
+#: ../panels/keybindings/gnome-keybinding-properties.c:1189
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "如果您将快捷键重新指派给“%s”，“%s”的快捷键将被禁用。"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1215
+#: ../panels/keybindings/gnome-keybinding-properties.c:1197
 msgid "_Reassign"
 msgstr "重新指派(_R)"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1335
+#: ../panels/keybindings/gnome-keybinding-properties.c:1317
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "在配置数据库中取消设置新加速键时出错：%s"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1536
+#: ../panels/keybindings/gnome-keybinding-properties.c:1518
 msgid "Too many custom shortcuts"
 msgstr "太多的自定义快捷键"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1832
+#: ../panels/keybindings/gnome-keybinding-properties.c:1850
 msgid "Action"
 msgstr "动作"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:1854
+#: ../panels/keybindings/gnome-keybinding-properties.c:1872
 msgid "Shortcut"
 msgstr "快捷键"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:2
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:2
 msgid "Custom Shortcut"
 msgstr "自定义快捷键"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:3
-#: ../capplets/keybindings/keybinding.desktop.in.in.h:2
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:3
+#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.ui.h:4
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:4
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new key "
 "combination, or press backspace to clear."
 msgstr "要编辑快捷键，请单击相应的行，然后输入新按键组合，或按退格键清除。"
 
-#: ../capplets/keybindings/keybinding.desktop.in.in.h:1
+#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "为命令指定快捷键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:205
-#: ../capplets/keyboard/gnome-keyboard-properties.c:210
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr "应用设置并退出 (仅为兼容，现在已由守护进程处理)"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:215
-msgid "Start the page with the typing break settings showing"
-msgstr "以显示的打字间隔设置启动页面"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:220
-msgid "Start the page with the accessibility settings showing"
-msgstr "以显示的辅助功能设置启动页面"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.c:226
-msgid "- GNOME Keyboard Preferences"
-msgstr "- GNOME 键盘首选项"
-
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
 msgid "Beep when _accessibility features are turned on or off"
 msgstr "辅助功能打开或关闭时鸣笛(_A)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
 msgid "Beep when a _modifier key is pressed"
 msgstr "按下修饰键时鸣笛(_M)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
 msgid "Beep when a _toggle key is pressed"
 msgstr "按下切换键时鸣笛(_T)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
 msgid "Beep when a key is pr_essed"
 msgstr "按下键时鸣笛(_E)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
 msgid "Beep when a key is reje_cted"
 msgstr "拒绝键时鸣笛(_C)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
 msgid "Beep when key is _accepted"
 msgstr "接受键鸣笛(_A)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
 msgid "Beep when key is _rejected"
 msgstr "拒绝键时鸣笛(_R)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Bounce Keys"
 msgstr "回弹键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
 msgid "Flash _window titlebar"
 msgstr "闪烁窗口标题栏(_W)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
 msgid "Flash entire _screen"
 msgstr "闪烁整个屏幕(_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:14
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "General"
 msgstr "常规"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
 msgid "Keyboard Accessibility Audio Feedback"
 msgstr "键盘辅助功能音频反馈"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
 msgid "Show _visual feedback for the alert sound"
 msgstr "为警告声音显示视觉反馈(_V)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Slow Keys"
 msgstr "慢速键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Sticky Keys"
 msgstr "粘滞键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
 msgid "Visual cues for sounds"
 msgstr "声音反馈"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
 msgid "All_ow postponing of breaks"
 msgstr "允许推迟间断(_O)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
 msgid "Audio _Feedback..."
 msgstr "听觉反馈(_F)..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
 msgid "Check if breaks are allowed to be postponed"
 msgstr "检查是否允许推迟间断"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
 msgid "Cursor Blinking"
 msgstr "光标闪烁"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
 msgid "Cursor _blinks in text fields"
 msgstr "文本域中的光标会闪烁(_B)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:8
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Cursor blinks speed"
 msgstr "光标闪烁速度"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:9
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/universal-access/uap.ui.h:30
 msgid "D_elay:"
 msgstr "延时(_E)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr "若同时按两个键则禁用(_B)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
 msgid "Duration of the break when typing is disallowed"
 msgstr "不允许打字时间断持续时间"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
 msgid "Duration of work before forcing a break"
 msgstr "强制间断前的工作持续时间"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:13
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Fast"
 msgstr "快"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
 msgid "Key presses _repeat when key is held down"
 msgstr "按住某一键时重复该键(_R)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
 msgid "Keyboard Preferences"
 msgstr "键盘首选项"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
 msgid "Keyboard _model:"
 msgstr "键盘型号(_M)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
 msgid "Layouts"
 msgstr "布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
 msgid "List of keyboard layouts selected for usage"
-msgstr ""
+msgstr "可选择使用的键盘布局列表"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr "每隔一段时间锁定屏幕，以便重复性的键盘工作使手臂过度劳累"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:21
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:19
+#. long delay
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Long"
 msgstr "长"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Mouse Keys"
 msgstr "鼠标键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:23
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
 msgid "Move _Down"
 msgstr "向下移动(_D)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:24
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
 msgid "Move _Up"
 msgstr "向上移动(_U)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:25
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
 msgid "Move the selected keyboard layout down in the list"
-msgstr ""
+msgstr "在列表中下移选定的键盘布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:26
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
 msgid "Move the selected keyboard layout up in the list"
-msgstr ""
+msgstr "在列表中上移选定的键盘布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:27
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
 msgid "New windows u_se active window's layout"
 msgstr "新窗口使用活动窗口的布局(_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:28
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:28
 msgid "Print a diagram of the selected keyboard layout"
-msgstr ""
+msgstr "打印选中键盘布局的一份图示"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 msgid "Remove the selected keyboard layout from the list"
-msgstr ""
+msgstr "从列表中删除选中的键盘布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 msgid "Repeat Keys"
 msgstr "重复键"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
 msgid "Repeat keys speed"
 msgstr "重复键速度"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
-msgstr ""
+msgstr "使用默认设定替换当前键盘布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 msgid "Reset to De_faults"
 msgstr "重置为默认值(_F)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:35
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 msgid "S_peed:"
 msgstr "速度(_P)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:36
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "Select a keyboard layout to be added to the list"
-msgstr ""
+msgstr "请选择要添加到列表的键盘布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:37
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:27
+#. short delay
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Short"
 msgstr "短"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:38
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Slow"
 msgstr "慢"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:41
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
 msgid "Typing Break"
 msgstr "打字间断"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:42
-#, fuzzy
-#| msgid "Keyboard Layout Options"
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
 msgid "View and edit keyboard layout options"
-msgstr "键盘布局选项"
+msgstr "查看并编辑键盘布局选项"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:43
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
 msgid "_Acceleration:"
 msgstr "加速(_A)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:44
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr "允许通过快捷键打开或关闭辅助特性(_A)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:46
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
 msgid "_Break interval lasts:"
 msgstr "间断间隔持续(_B)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:47
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:38
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
+#: ../panels/mouse/gnome-mouse-properties.ui.h:38
 msgid "_Delay:"
 msgstr "延时(_D)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:48
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
 msgid "_Ignore fast duplicate keypresses"
 msgstr "忽略快速重复按键(_I)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:49
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:49
 msgid "_Lock screen to enforce typing break"
 msgstr "锁定屏幕来强制打字间断(_L)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:50
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:50
 msgid "_Only accept long keypresses"
 msgstr "仅接受长按键(_O)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:51
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:51
 msgid "_Options..."
 msgstr "选项(_O)..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:52
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:52
 msgid "_Pointer can be controlled using the keypad"
 msgstr "允许使用键盘控制指针(_P)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:53
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:53
 msgid "_Separate layout for each window"
 msgstr "每个窗口独立布局(_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:54
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:54
 msgid "_Simulate simultaneous keypresses"
 msgstr "模拟同时按键(_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:55
 msgid "_Speed:"
 msgstr "速度(_S)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:56
 msgid "_Type to test settings:"
 msgstr "输入字符来测试设置(_T)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:57
 msgid "_Work interval lasts:"
 msgstr "工作间隔持续(_W)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:58
 msgid "minutes"
 msgstr "分钟"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
 msgid "By _country"
 msgstr "按国家/地区(_C)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
 msgid "By _language"
 msgstr "按语言(_L)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "选择布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
 msgid "Preview:"
 msgstr "预览："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
 msgid "_Country:"
 msgstr "国家/地区(_C)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
 msgid "_Language:"
 msgstr "语言(_L)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
 msgid "_Variants:"
 msgstr "变体(_V)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
 msgid "Choose a Keyboard Model"
 msgstr "选择键盘型号"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
 msgid "_Models:"
 msgstr "型号(_M)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
 msgid "_Vendors:"
 msgstr "制造商(_V)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
 msgstr "键盘布局选项"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:82
+#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:82
 msgid "Unknown"
 msgstr "未知"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:242
 msgid "Layout"
 msgstr "布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:168
+#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:168
 msgid "Vendors"
 msgstr "制造商"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:234
+#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:234
 msgid "Models"
 msgstr "型号"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:234
-#: ../capplets/network/gnome-network-properties.c:583
+#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:235
+#: ../panels/network/gnome-network-properties.c:583
 msgid "Default"
 msgstr "默认"
 
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "键盘"
 
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "设置键盘首选项"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:89
+#: ../panels/mouse/gnome-mouse-accessibility.c:89
 msgid "gesture|Move left"
 msgstr "左移"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:94
+#: ../panels/mouse/gnome-mouse-accessibility.c:94
 msgid "gesture|Move right"
 msgstr "右移"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:99
+#: ../panels/mouse/gnome-mouse-accessibility.c:99
 msgid "gesture|Move up"
 msgstr "上移"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:104
+#: ../panels/mouse/gnome-mouse-accessibility.c:104
 msgid "gesture|Move down"
 msgstr "下移"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../capplets/mouse/gnome-mouse-accessibility.c:109
+#: ../panels/mouse/gnome-mouse-accessibility.c:109
 msgid "gesture|Disabled"
 msgstr "禁用"
 
-#. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/mouse/gnome-mouse-properties.c:590
-msgid "Specify the name of the page to show (general|accessibility)"
-msgstr "指定要显示的页面名称 (general|accessibility)"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:595
-msgid "- GNOME Mouse Preferences"
-msgstr "- GNOME 鼠标首选项"
-
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:2
+#: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Choose type of click _beforehand"
 msgstr "选择预设的点击类型(_B)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:3
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Choose type of click with mo_use gestures"
 msgstr "鼠标手势选择单击类型(_U)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "D_ouble click:"
 msgstr "双击(_O)："
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:7
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "D_rag click:"
 msgstr "拖曳击(_R)："
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Disable _touchpad while typing"
 msgstr "打字时禁用触摸板(_T)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Double-Click Timeout"
 msgstr "双击超时"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Drag and Drop"
 msgstr "拖放"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "Dwell Click"
 msgstr "悬停点击"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Enable _mouse clicks with touchpad"
 msgstr "启用触摸板的鼠标点击(_M)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Enable h_orizontal scrolling"
 msgstr "启用水平滚动(_O)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/universal-access/uap.ui.h:40
 msgid "High"
 msgstr "高"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Locate Pointer"
 msgstr "定位指针"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Low"
 msgstr "低"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Mouse Orientation"
 msgstr "鼠标方向"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 msgid "Mouse Preferences"
 msgstr "鼠标首选项"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Pointer Speed"
 msgstr "指针速度"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:24
 msgid "Scrolling"
 msgstr "滚动"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Seco_ndary click:"
 msgstr "第二击(_N)："
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:26
+#: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "按住 Ctrl 键时显示指针位置(_O)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Show click type _window"
 msgstr "显示点击类型窗口(_W)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Simulated Secondary Click"
 msgstr "模拟再次点击"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:32
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Thr_eshold:"
 msgstr "阈值(_E)："
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:33
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid ""
 "To test your double-click settings, try to double-click on the light bulb."
 msgstr "要测试您的双击设置，请试着双击右侧的灯泡。"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:34
+#: ../panels/mouse/gnome-mouse-properties.ui.h:34
 msgid "Touchpad"
 msgstr "触摸板"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
 msgid "Two-_finger scrolling"
 msgstr "双指滚动(_F)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:36
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "You can also use the Dwell Click panel applet to choose the click type."
 msgstr "您也可以使用悬停点击面板小程序来选择点击的类型。"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
 msgid "_Disabled"
 msgstr "禁用(_D)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:40
+#: ../panels/mouse/gnome-mouse-properties.ui.h:40
 msgid "_Edge scrolling"
 msgstr "边界滚动(_E)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/mouse/gnome-mouse-properties.ui.h:41
 msgid "_Initiate click when stopping pointer movement"
 msgstr "指针停止运动时执行点击(_I)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:42
+#: ../panels/mouse/gnome-mouse-properties.ui.h:42
 msgid "_Left-handed"
 msgstr "惯用左手(_L)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/universal-access/uap.ui.h:98
 msgid "_Motion threshold:"
 msgstr "运动阈值(_M)："
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:44
+#: ../panels/mouse/gnome-mouse-properties.ui.h:44
 msgid "_Right-handed"
 msgstr "惯用右手(_R)"
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:45
+#: ../panels/mouse/gnome-mouse-properties.ui.h:45
 msgid "_Sensitivity:"
 msgstr "灵敏度(_S)："
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:46
+#: ../panels/mouse/gnome-mouse-properties.ui.h:46
 msgid "_Single click:"
 msgstr "单击(_S)："
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:47
+#: ../panels/mouse/gnome-mouse-properties.ui.h:47
 msgid "_Timeout:"
 msgstr "超时(_T)："
 
-#: ../capplets/mouse/gnome-mouse-properties.ui.h:48
+#: ../panels/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Trigger secondary click by holding down the primary button"
 msgstr "按住鼠标主键不放时触发次击(_T)"
 
-#: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "鼠标"
 
-#: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
 msgid "Set your mouse preferences"
 msgstr "设置鼠标首选项"
 
-#: ../capplets/network/gnome-network-properties.c:701
-#: ../capplets/network/gnome-network-properties.c:852
+#: ../panels/network/gnome-network-properties.c:701
+#: ../panels/network/gnome-network-properties.c:852
 msgid "New Location..."
 msgstr "新建位置..."
 
-#: ../capplets/network/gnome-network-properties.c:818
+#: ../panels/network/gnome-network-properties.c:818
 msgid "Location already exists"
 msgstr "位置已存在"
 
-#: ../capplets/network/gnome-network-properties.desktop.in.in.h:1
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "网络代理"
 
-#: ../capplets/network/gnome-network-properties.desktop.in.in.h:2
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
 msgstr "设置您的网络代理首选项"
 
-#: ../capplets/network/gnome-network-properties.ui.h:1
+#: ../panels/network/gnome-network-properties.ui.h:1
 msgid "<b>Di_rect internet connection</b>"
 msgstr "<b>直接连接到互联网(_R)</b>"
 
-#: ../capplets/network/gnome-network-properties.ui.h:2
+#: ../panels/network/gnome-network-properties.ui.h:2
 msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>自动配置代理(_A)</b>"
 
-#: ../capplets/network/gnome-network-properties.ui.h:3
+#: ../panels/network/gnome-network-properties.ui.h:3
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>手动配置代理(_M)</b>"
 
-#: ../capplets/network/gnome-network-properties.ui.h:4
+#: ../panels/network/gnome-network-properties.ui.h:4
 msgid "<b>_Use authentication</b>"
 msgstr "<b>需要身份验证(_U)</b>"
 
-#: ../capplets/network/gnome-network-properties.ui.h:5
+#: ../panels/network/gnome-network-properties.ui.h:5
 msgid "Autoconfiguration _URL:"
 msgstr "自动配置 URL(_U)："
 
-#: ../capplets/network/gnome-network-properties.ui.h:6
+#: ../panels/network/gnome-network-properties.ui.h:6
 msgid "C_reate"
 msgstr "创建(_R)"
 
-#: ../capplets/network/gnome-network-properties.ui.h:7
+#: ../panels/network/gnome-network-properties.ui.h:7
 msgid "Create New Location"
 msgstr "创建新位置"
 
-#: ../capplets/network/gnome-network-properties.ui.h:8
+#: ../panels/network/gnome-network-properties.ui.h:8
 msgid "HTTP Proxy Details"
 msgstr "HTTP 代理细节"
 
-#: ../capplets/network/gnome-network-properties.ui.h:9
+#: ../panels/network/gnome-network-properties.ui.h:9
 msgid "H_TTP proxy:"
 msgstr "H_TTP 代理："
 
-#: ../capplets/network/gnome-network-properties.ui.h:10
+#: ../panels/network/gnome-network-properties.ui.h:10
 msgid "Ignore Host List"
 msgstr "忽略主机列表"
 
-#: ../capplets/network/gnome-network-properties.ui.h:11
+#: ../panels/network/gnome-network-properties.ui.h:11
 msgid "Ignored Hosts"
 msgstr "忽略的主机"
 
-#: ../capplets/network/gnome-network-properties.ui.h:12
+#: ../panels/network/gnome-network-properties.ui.h:12
 msgid "Location:"
 msgstr "位置："
 
-#: ../capplets/network/gnome-network-properties.ui.h:13
+#: ../panels/network/gnome-network-properties.ui.h:13
 msgid "Network Proxy Preferences"
 msgstr "网络代理首选项"
 
-#: ../capplets/network/gnome-network-properties.ui.h:14
+#: ../panels/network/gnome-network-properties.ui.h:14
 msgid "Port:"
 msgstr "端口："
 
-#: ../capplets/network/gnome-network-properties.ui.h:15
+#: ../panels/network/gnome-network-properties.ui.h:15
 msgid "Proxy Configuration"
 msgstr "代理服务器配置"
 
-#: ../capplets/network/gnome-network-properties.ui.h:16
+#: ../panels/network/gnome-network-properties.ui.h:16
 msgid "S_ocks host:"
 msgstr "S_OCKS 主机："
 
-#: ../capplets/network/gnome-network-properties.ui.h:17
+#: ../panels/network/gnome-network-properties.ui.h:17
 msgid "The location already exists."
 msgstr "该位置已存在。"
 
-#: ../capplets/network/gnome-network-properties.ui.h:18
+#: ../panels/network/gnome-network-properties.ui.h:18
 msgid "U_sername:"
 msgstr "用户名(_S)："
 
-#: ../capplets/network/gnome-network-properties.ui.h:19
+#: ../panels/network/gnome-network-properties.ui.h:19
 msgid "_Delete Location"
 msgstr "删除位置(_D)"
 
-#: ../capplets/network/gnome-network-properties.ui.h:20
+#: ../panels/network/gnome-network-properties.ui.h:20
 msgid "_Details"
 msgstr "细节(_D)"
 
-#: ../capplets/network/gnome-network-properties.ui.h:21
+#: ../panels/network/gnome-network-properties.ui.h:21
 msgid "_FTP proxy:"
 msgstr "_FTP 代理："
 
-#: ../capplets/network/gnome-network-properties.ui.h:22
+#: ../panels/network/gnome-network-properties.ui.h:22
 msgid "_Location name:"
 msgstr "位置名(_L)："
 
-#: ../capplets/network/gnome-network-properties.ui.h:23
+#: ../panels/network/gnome-network-properties.ui.h:23
 msgid "_Password:"
 msgstr "密码(_P)："
 
-#: ../capplets/network/gnome-network-properties.ui.h:24
+#: ../panels/network/gnome-network-properties.ui.h:24
 msgid "_Secure HTTP proxy:"
 msgstr "安全 HTTP 代理(_S)："
 
-#: ../capplets/network/gnome-network-properties.ui.h:25
+#: ../panels/network/gnome-network-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
 msgstr "为所有协议使用相同的代理(_U)"
 
-#: ../capplets/windows/gnome-window-properties.c:344
-msgid "Cannot start the preferences application for your window manager"
-msgstr "无法启动您的窗口管理器的首选项程序"
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
+msgid "Universal Access"
+msgstr "通用辅助功能"
 
-#: ../capplets/windows/gnome-window-properties.c:604
-msgid "_Alt"
-msgstr "_Alt"
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+msgid "Universal Access Preferences"
+msgstr "通用辅助功能首选项"
 
-#: ../capplets/windows/gnome-window-properties.c:610
-msgid "H_yper"
-msgstr "H_yper"
+#: ../panels/universal-access/uap.ui.h:2
+#, no-c-format
+msgid "100%"
+msgstr "100%"
 
-#: ../capplets/windows/gnome-window-properties.c:617
-msgid "S_uper (or \"Windows logo\")"
-msgstr "S_uper (或“Windows 标志”)"
+#: ../panels/universal-access/uap.ui.h:4
+#, no-c-format
+msgid "125%"
+msgstr "125%"
 
-#: ../capplets/windows/gnome-window-properties.c:624
-msgid "_Meta"
-msgstr "_Meta"
+#: ../panels/universal-access/uap.ui.h:6
+#, no-c-format
+msgid "150%"
+msgstr "150%"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:1
-msgid "Movement Key"
-msgstr "移动按键"
+#: ../panels/universal-access/uap.ui.h:7
+msgid "<span size=\"x-large\">High/Inverse</span>"
+msgstr "<span size=\"x-large\">高/反色</span>"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:2
-msgid "Titlebar Action"
-msgstr "标题栏动作"
+#: ../panels/universal-access/uap.ui.h:8
+msgid "<span size=\"x-large\">High</span>"
+msgstr "<span size=\"x-large\">高</span>"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:3
-msgid "To move a window, press-and-hold this key then grab the window:"
-msgstr "要移动窗口，按住此键然后拖曳窗口："
+#: ../panels/universal-access/uap.ui.h:9
+msgid "<span size=\"x-large\">Low</span>"
+msgstr "<span size=\"x-large\">低</span>"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:4
-msgid "Window Preferences"
-msgstr "窗口首选项"
+#: ../panels/universal-access/uap.ui.h:10
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr "<span size=\"x-large\">正常</span>"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:5
-msgid "Window Selection"
-msgstr "窗口选择"
+#: ../panels/universal-access/uap.ui.h:11
+msgid "Acceptance delay:"
+msgstr "可接受延迟："
 
-#: ../capplets/windows/gnome-window-properties.ui.h:6
-msgid "_Double-click titlebar to perform this action:"
-msgstr "双击标题栏执行此操作(_D)："
+#: ../panels/universal-access/uap.ui.h:12
+msgid "Accessibility features can be turned on or off with keyboard shortcuts"
+msgstr "允许通过键盘快捷键打开或关闭辅助功能特性"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:7
-msgid "_Interval before raising:"
-msgstr "提升前延时(_I)："
+#: ../panels/universal-access/uap.ui.h:13
+msgid "Beep when Caps and Num Lock are used"
+msgstr "当使用 Caps Lock 键或 Num Lock 键时发出蜂鸣声"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:8
-msgid "_Raise selected windows after an interval"
-msgstr "一段间隔后提升选中窗口(_R)"
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Beep when a key is"
+msgstr "发出蜂鸣声当使用键"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:9
-msgid "_Select windows when the mouse moves over them"
-msgstr "鼠标移动到窗口之上时选中该窗口(_S)"
+#: ../panels/universal-access/uap.ui.h:15
+msgid "Beep when a key is rejected"
+msgstr "当某个键被拒绝时发出蜂鸣声"
 
-#: ../capplets/windows/gnome-window-properties.ui.h:10
-msgid "seconds"
-msgstr "秒"
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Beep when a modifer key is pressed"
+msgstr "当按下修饰键时发出蜂鸣声"
 
-#: ../capplets/windows/window-properties.desktop.in.in.h:1
-msgid "Set your window properties"
-msgstr "设定您的窗口属性"
+#: ../panels/universal-access/uap.ui.h:18
+msgid "Caribou"
+msgstr "Caribou"
 
-#: ../capplets/windows/window-properties.desktop.in.in.h:2
-msgid "Windows"
-msgstr "窗口"
+#: ../panels/universal-access/uap.ui.h:19
+msgid "Change constrast:"
+msgstr "改变对比度"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Closed Captioning"
+msgstr "闭合注释"
+
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Contrast:"
+msgstr "对比度："
+
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Control the pointer using the keypad."
+msgstr "使用小键盘控制鼠标指针。"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Control the pointer using the video camera."
+msgstr "使用摄像机控制鼠标指针"
+
+#: ../panels/universal-access/uap.ui.h:24
+msgid "Ctrl+Alt+-"
+msgstr "Ctrl+Alt+-"
+
+#: ../panels/universal-access/uap.ui.h:25
+msgid "Ctrl+Alt+0"
+msgstr "Ctrl+Alt+0"
+
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Ctrl+Alt+4"
+msgstr "Ctrl+Alt+4"
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Ctrl+Alt+8"
+msgstr "Ctrl+Alt+8"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "Ctrl+Alt+="
+msgstr "Ctrl+Alt+="
+
+#: ../panels/universal-access/uap.ui.h:32
+msgid "Decrease size:"
+msgstr "减少大小："
+
+#: ../panels/universal-access/uap.ui.h:33
+msgid "Disable if two keys are pressed together"
+msgstr "若同时按下两个键则禁用"
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Display"
+msgstr "显示"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "Display a textual description of speech and sounds."
+msgstr "显示语音和声音的文字描述。"
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Flash the entire screen"
+msgstr "闪烁整个屏幕"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "Flash the window title"
+msgstr "闪烁窗口标题栏"
+
+#: ../panels/universal-access/uap.ui.h:38
+msgid "GOK"
+msgstr "GNOME 屏幕键盘"
+
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Hearing"
+msgstr "听觉"
+
+#: ../panels/universal-access/uap.ui.h:41
+msgid "High/Inverse"
+msgstr "高/反色"
+
+#: ../panels/universal-access/uap.ui.h:42
+msgid "HighContrast"
+msgstr "高对比度"
+
+#: ../panels/universal-access/uap.ui.h:43
+msgid "HighContrastInverse"
+msgstr "高对比反色"
+
+#: ../panels/universal-access/uap.ui.h:44
+msgid "Hover Click"
+msgstr "悬停点击"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgid "I need assistance with:"
+msgstr "我需要帮助使用："
+
+#: ../panels/universal-access/uap.ui.h:46
+msgid "Ignores fast duplicate keypresses"
+msgstr "忽略快速重复按键"
+
+#: ../panels/universal-access/uap.ui.h:47
+msgid "Increase size:"
+msgstr "增加大小："
+
+#: ../panels/universal-access/uap.ui.h:48
+msgid "Keyboard Settings..."
+msgstr "键盘设置..."
+
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Larger"
+msgstr "较大"
+
+#: ../panels/universal-access/uap.ui.h:55
+msgid "LowContrast"
+msgstr "低对比度"
+
+#: ../panels/universal-access/uap.ui.h:57
+msgid "Mouse Settings..."
+msgstr "鼠标设置..."
+
+#: ../panels/universal-access/uap.ui.h:58
+#, fuzzy
+#| msgid "None"
+msgid "Nomon"
+msgstr "无"
+
+#: ../panels/universal-access/uap.ui.h:59
+#: ../libwindow-settings/metacity-window-manager.c:409
+msgid "None"
+msgstr "无"
+
+#: ../panels/universal-access/uap.ui.h:63
+msgid "On screen keyboard"
+msgstr "屏幕键盘"
+
+#: ../panels/universal-access/uap.ui.h:64
+msgid "OnBoard"
+msgstr "板载"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Options..."
+msgstr "选项..."
+
+#: ../panels/universal-access/uap.ui.h:66
+msgid "Pointing and Clicking"
+msgstr "指向和单击"
+
+#: ../panels/universal-access/uap.ui.h:67
+msgid "Puts a delay between when a key is pressed and when it is accepted."
+msgstr "当某键按下和接收之间放置延迟"
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Screen Reader"
+msgstr "屏幕阅读器"
+
+#: ../panels/universal-access/uap.ui.h:69
+msgid "Seeing"
+msgstr "视觉"
+
+#: ../panels/universal-access/uap.ui.h:70
+msgid "Shift+Ctrl+Alt+-"
+msgstr "Shift+Ctrl+Alt+-"
+
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Shift+Ctrl+Alt+="
+msgstr "Shift+Ctrl+Alt+="
+
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Show Universal Access status"
+msgstr "显示通用辅助功能状态"
+
+#: ../panels/universal-access/uap.ui.h:79
+msgid "Sound Settings..."
+msgstr "声音设置..."
+
+#: ../panels/universal-access/uap.ui.h:81
+msgid "Test flash"
+msgstr "文字闪烁"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgid "Test:"
+msgstr "测试："
+
+#: ../panels/universal-access/uap.ui.h:83
+msgid "Text size:"
+msgstr "文字大小："
+
+#: ../panels/universal-access/uap.ui.h:84
+msgid "Treats a sequence of modifier keys as a key combination."
+msgstr "将一串修改过的键当作一个组合键。"
+
+#: ../panels/universal-access/uap.ui.h:85
+msgid "Trigger a click when the pointer hovers."
+msgstr "指针悬停时执行点击"
+
+#: ../panels/universal-access/uap.ui.h:86
+msgid "Trigger a secondary click by holding down the primary button."
+msgstr "按住鼠标主键不放时触发次击"
+
+#: ../panels/universal-access/uap.ui.h:87
+msgid "Turn on or off:"
+msgstr "打开或关闭："
+
+#: ../panels/universal-access/uap.ui.h:88
+msgid "Type here to test settings"
+msgstr "在此输入字符以测试设定"
+
+#: ../panels/universal-access/uap.ui.h:89
+msgid "Typing"
+msgstr "打字中"
+
+#: ../panels/universal-access/uap.ui.h:90
+msgid "Typing Assistant"
+msgstr "打字助手"
+
+#: ../panels/universal-access/uap.ui.h:91
+msgid "Use a visual indication when an alert sound occurs."
+msgstr "当警告声发生时使用视觉提示"
+
+#: ../panels/universal-access/uap.ui.h:92
+msgid "Use an alternative form of text input"
+msgstr "使用另外格式的文字输入"
+
+#: ../panels/universal-access/uap.ui.h:93
+msgid "Video Mouse"
+msgstr "视频鼠标"
+
+#: ../panels/universal-access/uap.ui.h:94
+msgid "Visual Alerts"
+msgstr "视觉提示"
+
+#: ../panels/universal-access/uap.ui.h:96
+msgid "Zoom in:"
+msgstr "放大："
+
+#: ../panels/universal-access/uap.ui.h:97
+msgid "Zoom out:"
+msgstr "缩小："
+
+#: ../panels/universal-access/uap.ui.h:99
+msgid "accepted"
+msgstr "已接受"
+
+#: ../panels/universal-access/uap.ui.h:100
+msgid "pressed"
+msgstr "已按下"
+
+#: ../panels/universal-access/uap.ui.h:101
+msgid "rejected"
+msgstr "已拒绝"
 
 #: ../libwindow-settings/gnome-wm-manager.c:316
 #, c-format
@@ -3080,36 +3370,6 @@ msgstr "最小化"
 #: ../libwindow-settings/metacity-window-manager.c:408
 msgid "Roll up"
 msgstr "卷起"
-
-#: ../libwindow-settings/metacity-window-manager.c:409
-msgid "None"
-msgstr "无"
-
-#: ../shell/control-center.c:49
-#, c-format
-msgid "key not found [%s]\n"
-msgstr "键未找到 [%s]\n"
-
-#: ../shell/control-center.c:143
-msgid "Hide on start (useful to preload the shell)"
-msgstr "启动时隐藏 (对于预先启动 shell 非常有用)"
-
-#: ../shell/control-center.c:182
-msgid "Filter"
-msgstr "过滤器"
-
-#: ../shell/control-center.c:182
-msgid "Groups"
-msgstr "分组"
-
-#: ../shell/control-center.c:182
-msgid "Common Tasks"
-msgstr "公共任务"
-
-#: ../shell/control-center.c:185 ../shell/gnomecc.desktop.in.in.h:1
-#: ../shell/gnomecc.directory.in.h:1
-msgid "Control Center"
-msgstr "控制中心"
 
 #: ../shell/control-center.schemas.in.h:1
 msgid "Close the control-center when a task is activated"
@@ -3178,7 +3438,12 @@ msgid ""
 "if true, the control-center will close when a \"Common Task\" is activated."
 msgstr "如果为 true，在一个“常见任务”激活时，控制中心将关闭。"
 
-#: ../shell/gnomecc.desktop.in.in.h:2
+#: ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/gnomecc.directory.in.h:1
+msgid "Control Center"
+msgstr "控制中心"
+
+#: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "GNOME 配置工具"
 
@@ -3197,7 +3462,7 @@ msgstr "休息一下(_T)"
 #: ../typing-break/drwright.c:507
 #, c-format
 msgid "Take a break now (next in %dm)"
-msgstr ""
+msgstr "现在休息一下 (下次在 %d 分钟后)"
 
 #: ../typing-break/drwright.c:509
 #, c-format
@@ -3208,7 +3473,7 @@ msgstr[0] "距下次间隔还有 %d 分钟"
 #: ../typing-break/drwright.c:515
 #, c-format
 msgid "Take a break now (next in less than one minute)"
-msgstr ""
+msgstr "现在休息一下 (下次在一分钟内)"
 
 #: ../typing-break/drwright.c:517
 #, c-format
@@ -3330,48 +3595,48 @@ msgstr "是否为 TrueType 字体制作缩略图"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "是否为 Type1 字体制作缩略图"
 
-#: ../font-viewer/font-view.c:289
+#: ../font-viewer/font-view.c:290
 msgid "Name:"
 msgstr "名称："
 
-#: ../font-viewer/font-view.c:292
+#: ../font-viewer/font-view.c:293
 msgid "Style:"
 msgstr "样式："
 
-#: ../font-viewer/font-view.c:305
+#: ../font-viewer/font-view.c:306
 msgid "Type:"
 msgstr "类型："
 
-#: ../font-viewer/font-view.c:309
+#: ../font-viewer/font-view.c:310
 msgid "Size:"
 msgstr "大小："
 
-#: ../font-viewer/font-view.c:353 ../font-viewer/font-view.c:366
+#: ../font-viewer/font-view.c:354 ../font-viewer/font-view.c:367
 msgid "Version:"
 msgstr "版本："
 
-#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:368
+#: ../font-viewer/font-view.c:358 ../font-viewer/font-view.c:369
 msgid "Copyright:"
 msgstr "版权："
 
-#: ../font-viewer/font-view.c:361
+#: ../font-viewer/font-view.c:362
 msgid "Description:"
 msgstr "描述："
 
-#: ../font-viewer/font-view.c:441
+#: ../font-viewer/font-view.c:442
 msgid "Installed"
 msgstr "已安装"
 
-#: ../font-viewer/font-view.c:444
+#: ../font-viewer/font-view.c:445
 msgid "Install Failed"
 msgstr "安装失败"
 
-#: ../font-viewer/font-view.c:516
+#: ../font-viewer/font-view.c:517
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "用法：%s fontfile\n"
 
-#: ../font-viewer/font-view.c:591
+#: ../font-viewer/font-view.c:592
 msgid "I_nstall Font"
 msgstr "安装字体(_N)"
 
@@ -3408,619 +3673,18 @@ msgstr "字体-文件输出-文件"
 msgid "Error parsing arguments: %s\n"
 msgstr "处理参数时出错：%s\n"
 
-#: ../libslab/app-shell.c:754
-#, c-format
-msgid "Your filter \"%s\" does not match any items."
-msgstr "您的过滤器“%s”不符合任何项。"
-
-#: ../libslab/app-shell.c:756
-msgid "No matches found."
-msgstr "没有找到符合的。"
-
-#: ../libslab/app-shell.c:905
-msgid "Other"
-msgstr "其他"
-
-#. make start action
-#: ../libslab/application-tile.c:374
-#, c-format
-msgid "Start %s"
-msgstr "启动 %s"
-
-#: ../libslab/application-tile.c:395
-msgid "Help"
-msgstr "帮助"
-
-#: ../libslab/application-tile.c:442
-msgid "Upgrade"
-msgstr "升级"
-
-#: ../libslab/application-tile.c:457
-msgid "Uninstall"
-msgstr "卸载"
-
-#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
-msgid "Remove from Favorites"
-msgstr "从收藏夹中删除"
-
-#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
-msgid "Add to Favorites"
-msgstr "添加到收藏夹"
-
-#: ../libslab/application-tile.c:871
-msgid "Remove from Startup Programs"
-msgstr "从启动程序中删除"
-
-#: ../libslab/application-tile.c:873
-msgid "Add to Startup Programs"
-msgstr "添加到启动程序"
-
-#: ../libslab/bookmark-agent.c:1077
-msgid "New Spreadsheet"
-msgstr "新建电子表格"
-
-#: ../libslab/bookmark-agent.c:1082
-msgid "New Document"
-msgstr "新建文档"
-
-#: ../libslab/bookmark-agent.c:1140
-msgid "Documents"
-msgstr "文档"
-
-#: ../libslab/bookmark-agent.c:1153
-msgid "File System"
-msgstr "文件系统"
-
-#: ../libslab/bookmark-agent.c:1157
-msgid "Network Servers"
-msgstr "网络服务器"
-
-#: ../libslab/bookmark-agent.c:1186
-msgid "Search"
-msgstr "搜索"
-
-#. make open with default action
-#: ../libslab/directory-tile.c:171
-#, c-format
-msgid "<b>Open</b>"
-msgstr "<b>打开</b>"
-
-#. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
-msgid "Rename..."
-msgstr "重命名..."
-
-#: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
-msgid "Send To..."
-msgstr "发送到..."
-
-#. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
-msgid "Move to Trash"
-msgstr "移至回收站"
-
-#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
-msgid "Delete"
-msgstr "删除"
-
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
-#, c-format
-msgid "Are you sure you want to permanently delete \"%s\"?"
-msgstr "您确定要永久删除“%s”吗？"
-
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
-msgid "If you delete an item, it is permanently lost."
-msgstr "如果您删除一项，它将永久丢失。"
-
-#: ../libslab/document-tile.c:193
-#, c-format
-msgid "Open with \"%s\""
-msgstr "用“%s”打开"
-
-#: ../libslab/document-tile.c:207
-msgid "Open with Default Application"
-msgstr "用默认应用程序打开"
-
-#: ../libslab/document-tile.c:218
-msgid "Open in File Manager"
-msgstr "在文件管理器中打开"
-
-#: ../libslab/document-tile.c:617
-msgid "?"
-msgstr "？"
-
-#: ../libslab/document-tile.c:624
-msgid "%l:%M %p"
-msgstr "%H:%M"
-
-#: ../libslab/document-tile.c:632
-msgid "Today %l:%M %p"
-msgstr "今天 %H:%M"
-
-#: ../libslab/document-tile.c:642
-msgid "Yesterday %l:%M %p"
-msgstr "昨天 %H:%M"
-
-#: ../libslab/document-tile.c:654
-msgid "%a %l:%M %p"
-msgstr "%A%H:%M"
-
-#: ../libslab/document-tile.c:662
-msgid "%b %d %l:%M %p"
-msgstr "%m月%d日%H:%M"
-
-#: ../libslab/document-tile.c:664
-msgid "%b %d %Y"
-msgstr "%Y-%m-%d"
-
-#: ../libslab/search-bar.c:255
-msgid "Find Now"
-msgstr "立即查找"
-
-#: ../libslab/system-tile.c:127
-#, c-format
-msgid "<b>Open %s</b>"
-msgstr "<b>打开 %s</b>"
-
-#: ../libslab/system-tile.c:140
-#, c-format
-msgid "Remove from System Items"
-msgstr "从系统项目中删除"
-
-#~ msgid "_Jabber:"
-#~ msgstr "_Jabber："
-
-#~ msgid "Display Preferences"
-#~ msgstr "显示首选项"
-
-#~ msgid "Drag the monitors to set their place"
-#~ msgstr "拖动显示器以设定它们的位置"
-
-#~ msgid "_Mirror screens"
-#~ msgstr "镜像屏幕(_M)"
-
-#~ msgid "Change screen resolution"
-#~ msgstr "更改屏幕分辨率"
-
-#~ msgid "Display"
-#~ msgstr "显示"
-
-#~ msgid "C_ontrol"
-#~ msgstr "C_trl"
-
-#~ msgid "Edit"
-#~ msgstr "编辑"
-
-#~ msgid "Fill screen"
-#~ msgstr "适合屏幕"
-
-#~ msgid "Interface"
-#~ msgstr "界面"
-
-#~ msgid "Menus and Toolbars"
-#~ msgstr "菜单和工具栏"
-
-#~ msgid "Preview"
-#~ msgstr "预览"
-
-#~ msgid "Show _icons in menus"
-#~ msgstr "在菜单中显示图标(_I)"
-
-#~ msgid "Toolbar _button labels:"
-#~ msgstr "工具栏按钮标签(_B)："
-
-#~ msgid "_Editable menu shortcut keys"
-#~ msgstr "可编辑的菜单快捷键(_E)"
-
-#~ msgid "_File"
-#~ msgstr "文件(_F)"
-
-#~ msgid "A_cceleration:"
-#~ msgstr "加速(_C)："
-
-#~ msgid "Selected _layouts:"
-#~ msgstr "选择布局(_L)："
-
-#~ msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-#~ msgstr "The quick brown fox jumps over the lazy dog. 0123456789"
-
-#~ msgid "Unknown login ID, the user database might be corrupted"
-#~ msgstr "未知的登录 ID，用户数据库可能已经损坏"
-
-#~ msgid ""
-#~ "Left thumb\n"
-#~ "Left middle finger\n"
-#~ "Left ring finger\n"
-#~ "Left little finger\n"
-#~ "Right thumb\n"
-#~ "Right middle finger\n"
-#~ "Right ring finger\n"
-#~ "Right little finger"
-#~ msgstr ""
-#~ "左手拇指\n"
-#~ "左手中指\n"
-#~ "左手无名指\n"
-#~ "左手小指\n"
-#~ "右手拇指\n"
-#~ "右手中指\n"
-#~ "右手无名指\n"
-#~ "右手小指"
-
-#~ msgid "<b>Email</b>"
-#~ msgstr "<i>电子邮件</i>"
-
-#~ msgid "<b>Home</b>"
-#~ msgstr "<b>家庭</b>"
-
-#~ msgid "<b>Job</b>"
-#~ msgstr "<b>工作</b>"
-
-#~ msgid "<b>Web</b>"
-#~ msgstr "<b>Web</b>"
-
-#~ msgid "<b>Work</b>"
-#~ msgstr "<b>工作</b>"
-
-#~ msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
-#~ msgstr "<span size=\"larger\" weight=\"bold\">更改您的密码</span>"
-
-#~ msgid "<b>Assistive Technologies</b>"
-#~ msgstr "<b>辅助技术</b>"
-
-#~ msgid "<b>Preferences</b>"
-#~ msgstr "<b>首选项</b>"
-
-#~ msgid "<b>C_olors</b>"
-#~ msgstr "<b>颜色(_O)</b>"
-
-#~ msgid "<b>Preview</b>"
-#~ msgstr "<b>预览</b>"
-
-#~ msgid "<b>_Desktop Background</b>"
-#~ msgstr "<b>桌面背景(_D)</b>"
-
-#~ msgid "C_ut"
-#~ msgstr "剪切(_U)"
-
-#~ msgid "New File"
-#~ msgstr "新建文件"
-
-#~ msgid "Open File"
-#~ msgstr "打开文件"
-
-#~ msgid "Save File"
-#~ msgstr "保存文件"
-
-#~ msgid ""
-#~ "Solid color\n"
-#~ "Horizontal gradient\n"
-#~ "Vertical gradient"
-#~ msgstr ""
-#~ "纯色\n"
-#~ "水平渐变\n"
-#~ "垂直渐变"
-
-#~ msgid ""
-#~ "Text below items\n"
-#~ "Text beside items\n"
-#~ "Icons only\n"
-#~ "Text only"
-#~ msgstr ""
-#~ "文本在项目下\n"
-#~ "文本在项目旁\n"
-#~ "只有图标\n"
-#~ "只有文本"
-
-#~ msgid ""
-#~ "Tiled\n"
-#~ "Zoom\n"
-#~ "Centered\n"
-#~ "Scaled\n"
-#~ "Fill screen"
-#~ msgstr ""
-#~ "平铺\n"
-#~ "放大\n"
-#~ "居中\n"
-#~ "缩小\n"
-#~ "适合屏幕"
-
-#~ msgid "_Copy"
-#~ msgstr "复制(_C)"
-
-#~ msgid "_New"
-#~ msgstr "新建(_N)"
-
-#~ msgid "_Open"
-#~ msgstr "打开(_O)"
-
-#~ msgid "_Print"
-#~ msgstr "打印(_P)"
-
-#~ msgid "_Quit"
-#~ msgstr "退出(_Q)"
-
-#~ msgid "_Save"
-#~ msgstr "保存(_S)"
-
-#~ msgid "<b>Visual</b>"
-#~ msgstr "<i>视觉</i>"
-
-#~ msgid ""
-#~ "Normal\n"
-#~ "Left\n"
-#~ "Right\n"
-#~ "Upside-down\n"
-#~ msgstr ""
-#~ "普通\n"
-#~ "左转\n"
-#~ "右转\n"
-#~ "颠倒\n"
-
-#~ msgid "Could not apply the selected configuration"
-#~ msgstr "无法应用选定的配置"
-
-#~ msgid "<b>Bounce Keys</b>"
-#~ msgstr "<b>回弹键</b>"
-
-#~ msgid "<b>General</b>"
-#~ msgstr "<b>常规</b>"
-
-#~ msgid "<small><i>Fast</i></small>"
-#~ msgstr "<small><i>快</i></small>"
-
-#~ msgid "<small><i>Long</i></small>"
-#~ msgstr "<small><i>长</i></small>"
-
-#~ msgid "<small><i>Short</i></small>"
-#~ msgstr "<small><i>短</i></small>"
-
-#~ msgid "<small><i>Slow</i></small>"
-#~ msgstr "<small><i>慢</i></small>"
-
-#~ msgid "<b>Locate Pointer</b>"
-#~ msgstr "<b>定位指针</b>"
-
-#~ msgid "<small><i>High</i></small>"
-#~ msgstr "<small><i>高</i></small>"
-
-#~ msgid "<small><i>Large</i></small>"
-#~ msgstr "<small><i>大</i></small>"
-
-#~ msgid "<small><i>Low</i></small>"
-#~ msgstr "<small><i>低</i></small>"
-
-#~ msgid "<small><i>Small</i></small>"
-#~ msgstr "<small><i>小</i></small>"
-
-#~ msgid "<b>Ignore Host List</b>"
-#~ msgstr "<b>忽略主机列表</b>"
-
-#~ msgid ""
-#~ "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-#~ "\n"
-#~ " Your filter \"<b>%s</b>\" does not match any items.</span>"
-#~ msgstr ""
-#~ "<span size=\"large\"><b>无匹配项。</b></span><span>\n"
-#~ "\n"
-#~ "您的过滤器“<b>%s</b>” 不与任何项匹配。</span>"
-
-#~ msgid "/_About"
-#~ msgstr "/关于(_A)"
-
-#~ msgid "<b>_Wallpaper</b>"
-#~ msgstr "<b>壁纸(_W)</b>"
-
-#~ msgid "No Wallpaper"
-#~ msgstr "无壁纸"
-
-#~ msgid "Screen Resolution"
-#~ msgstr "屏幕分辨率"
-
-#~ msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
-#~ msgstr "无法得到 org.gnome.SettingsDaemon.XRANDR"
-
-#~ msgid "_Command:"
-#~ msgstr "命令(_C)："
-
-#~ msgid "Monitor Resolution Settings"
-#~ msgstr "显示器分辨率设置"
-
-#~ msgid "Retrieve and store legacy settings"
-#~ msgstr "取得并保存原有的设置"
-
-#~ msgid "Enable sound and associate sounds with events"
-#~ msgstr "启用窗口管理器的事件音效"
-
-#~ msgid "Unknown Volume Control %d"
-#~ msgstr "未知的音量控制 %d"
-
-#~ msgid "Failed to construct test pipeline for '%s'"
-#~ msgstr "为‘%s’创建测试流水线失败"
-
-#~ msgid "Not connected"
-#~ msgstr "未连接"
-
-#~ msgid "Autodetect"
-#~ msgstr "自动检测"
-
-#~ msgid "ALSA - Advanced Linux Sound Architecture"
-#~ msgstr "ALSA - 高级 Linux 声音架构"
-
-#~ msgid "Artsd - ART Sound Daemon"
-#~ msgstr "Artsd - ART 声音守护程序"
-
-#~ msgid "ESD - Enlightened Sound Daemon"
-#~ msgstr "ESD - Enlightened 声音守护程序"
-
-#~ msgid "OSS - Open Sound System"
-#~ msgstr "OSS - 开放声音系统"
-
-#~ msgid "PulseAudio Sound Server"
-#~ msgstr "PulseAudio 声音服务器"
-
-#~ msgid "Silence"
-#~ msgstr "静音"
-
-#~ msgid "- GNOME Sound Preferences"
-#~ msgstr "- GNOME 声音首选项"
-
-#~ msgid "<b>Alerts and Sound Effects</b>"
-#~ msgstr "<b>警告和音效</b>"
-
-#~ msgid "<b>Audio Conferencing</b>"
-#~ msgstr "<b>音频会议</b>"
-
-#~ msgid "<b>Default Mixer Tracks</b>"
-#~ msgstr "<b>默认混音器轨道</b>"
-
-#~ msgid "<b>Music and Movies</b>"
-#~ msgstr "<b>音乐和电影</b>"
-
-#~ msgid "<b>Sound Events</b>"
-#~ msgstr "<b>声音事件</b>"
-
-#~ msgid "<b>Sound Theme</b>"
-#~ msgstr "<b>声音主题</b>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">正在测试...</span>"
-
-#~ msgid "Click OK to finish."
-#~ msgstr "单击确定完成。"
-
-#~ msgid "Devices"
-#~ msgstr "设备"
-
-#~ msgid "Play _alert sound"
-#~ msgstr "播放警报声音(_A)"
-
-#~ msgid "Play _sound effects when buttons are clicked"
-#~ msgstr "点击按钮时播放音效(_S)"
-
-#~ msgid "S_ound playback:"
-#~ msgstr "声音回放(_O)："
-
-#~ msgid ""
-#~ "Select the device and tracks to control with the keyboard. Use the Shift "
-#~ "and Control keys to select multiple tracks if required."
-#~ msgstr ""
-#~ "用键盘选择待控制的设备和音轨。如果需要可使用 Shift 和 Control 键来选择多个"
-#~ "音轨。"
-
-#~ msgid "So_und playback:"
-#~ msgstr "声音回放(_U)："
-
-#~ msgid "Sou_nd capture:"
-#~ msgstr "声音抓取(_N)："
-
-#~ msgid "Sound Preferences"
-#~ msgstr "声音首选项"
-
-#~ msgid "Sounds"
-#~ msgstr "音效"
-
-#~ msgid "Test"
-#~ msgstr "测试"
-
-#~ msgid "Testing Pipeline"
-#~ msgstr "正在测试流水线"
-
-#~ msgid "_Device:"
-#~ msgstr "设备(_D)："
-
-#~ msgid "_Play alerts and sound effects"
-#~ msgstr "播放警报和音效(_P)"
-
-#~ msgid "_Sound playback:"
-#~ msgstr "声音回放(_S)："
-
-#~ msgctxt "Sound event"
-#~ msgid "Alert sound"
-#~ msgstr "报警声"
-
-#~ msgctxt "Sound event"
-#~ msgid "Windows and Buttons"
-#~ msgstr "窗口和按钮"
-
-#~ msgctxt "Sound event"
-#~ msgid "Button clicked"
-#~ msgstr "点击按钮"
-
-#~ msgctxt "Sound event"
-#~ msgid "Toggle button clicked"
-#~ msgstr "点击切换按钮"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window maximized"
-#~ msgstr "窗口最大化"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window unmaximized"
-#~ msgstr "窗口还原"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window minimised"
-#~ msgstr "窗口最小化"
-
-#~ msgctxt "Sound event"
-#~ msgid "Desktop"
-#~ msgstr "桌面"
-
-#~ msgctxt "Sound event"
-#~ msgid "Logout"
-#~ msgstr "注销"
-
-#~ msgctxt "Sound event"
-#~ msgid "New e-mail"
-#~ msgstr "新邮件"
-
-#~ msgctxt "Sound event"
-#~ msgid "Empty trash"
-#~ msgstr "清空回收站"
-
-#~ msgctxt "Sound event"
-#~ msgid "Long action completed (download, CD burning, etc.)"
-#~ msgstr "完成长操作(下载、光盘刻录等等)"
-
-#~ msgctxt "Sound event"
-#~ msgid "Alerts"
-#~ msgstr "警报"
-
-#~ msgctxt "Sound event"
-#~ msgid "Information or question"
-#~ msgstr "信息或提问"
-
-#~ msgctxt "Sound event"
-#~ msgid "Warning"
-#~ msgstr "警告"
-
-#~ msgctxt "Sound event"
-#~ msgid "Error"
-#~ msgstr "出错"
-
-#~ msgctxt "Sound event"
-#~ msgid "Battery warning"
-#~ msgstr "电池警告"
-
-#~ msgid "Testing event sound"
-#~ msgstr "测试事件声音"
-
-#~ msgid "Select Sound File"
-#~ msgstr "选择声音文件"
-
-#~ msgid "Sound files"
-#~ msgstr "声音文件"
-
-#~ msgid "Custom..."
-#~ msgstr "自定义..."
-
-#~ msgid "Lock Screen"
-#~ msgstr "锁住屏幕"
-
-#~ msgid "Logout"
-#~ msgstr "注销"
-
-#~ msgid "Shutdown"
-#~ msgstr "关机"
+#: ../examples/gnome-example-panel.desktop.in.in.h:1
+msgid "Example Panel"
+msgstr "示例面板"
+
+#: ../examples/gnome-example-panel.desktop.in.in.h:2
+msgid "Example preferences panel"
+msgstr "示例首选项面板"
+
+#: ../shell/shell.ui.h:1
+msgid "System Settings"
+msgstr "系统设置"
+
+#: ../shell/shell.ui.h:2
+msgid "_All Settings"
+msgstr "全部设置(_A)"
