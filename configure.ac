@@ -376,15 +376,6 @@ fi
 
 AC_CONFIG_FILES([
 Makefile
-capplets/Makefile
-capplets/about-me/Makefile
-capplets/about-me/gnome-about-me.desktop.in
-capplets/about-me/icons/Makefile
-capplets/appearance/Makefile
-capplets/appearance/data/Makefile
-capplets/appearance/data/gnome-appearance-properties.desktop.in
-capplets/appearance/data/gnome-theme-installer.desktop.in
-capplets/common/Makefile
 panels/default-applications/Makefile
 panels/default-applications/gnome-default-applications-panel.desktop.in
 panels/default-applications/gnome-at-commandline.in

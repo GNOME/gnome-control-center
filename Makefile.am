@@ -1,6 +1,6 @@
-SUBDIRS = po libwindow-settings libgnome-control-center shell capplets panels \
+SUBDIRS = po libwindow-settings libgnome-control-center shell panels \
 	  font-viewer help docs
-DIST_SUBDIRS = po libwindow-settings capplets font-viewer help shell typing-break docs examples panels libgnome-control-center
+DIST_SUBDIRS = po libwindow-settings font-viewer help shell typing-break docs examples panels libgnome-control-center
 
 if HAVE_TYPING_BREAK
 SUBDIRS += typing-break
