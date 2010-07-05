@@ -1825,11 +1825,11 @@ paint_output (App *app, cairo_t *cr, int i)
 }
 
 static void
-on_area_paint (FooScrollArea *area,
-	       cairo_t	     *cr,
-	       GdkRectangle  *extent,
-	       GdkRegion     *region,
-	       gpointer	      data)
+on_area_paint (FooScrollArea  *area,
+	       cairo_t	      *cr,
+	       GdkRectangle   *extent,
+	       cairo_region_t *region,
+	       gpointer	       data)
 {
     App *app = data;
     double scale;

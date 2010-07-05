@@ -67,10 +67,10 @@ struct FooScrollAreaClass
 			      GdkRectangle  *old_viewport,
 			      GdkRectangle  *new_viewport);
 
-    void (*paint) (FooScrollArea *scroll_area,
-		   cairo_t       *cr,
-		   GdkRectangle  *extents,
-		   GdkRegion     *region);
+    void (*paint) (FooScrollArea  *scroll_area,
+		   cairo_t        *cr,
+		   GdkRectangle   *extents,
+		   cairo_region_t *region);
 };
 
 GType foo_scroll_area_get_type (void);
@@ -104,8 +104,8 @@ void          foo_scroll_area_add_input_from_fill (FooScrollArea *scroll_area,
 						      cairo_t	      *cr,
 						      FooScrollAreaEventFunc func,
 						      gpointer       data);
-void          foo_scroll_area_invalidate_region (FooScrollArea *area,
-						 GdkRegion     *region);
+void          foo_scroll_area_invalidate_region (FooScrollArea  *area,
+						 cairo_region_t *region);
 void	      foo_scroll_area_invalidate (FooScrollArea *scroll_area);
 void	      foo_scroll_area_invalidate_rect (FooScrollArea *scroll_area,
 					       int	      x,

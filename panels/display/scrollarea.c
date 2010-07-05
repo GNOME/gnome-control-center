@@ -28,30 +28,9 @@ static GtkWidgetClass *parent_class;
 
 typedef struct BackingStore BackingStore;
 
-typedef void (* ExposeFunc) (cairo_t *cr, GdkRegion *region, gpointer data);
-
-#if 0
-static void          backing_store_draw (BackingStore *store, 
-					 GdkDrawable *dest,
-					 GdkRegion *clip,
-					 int dest_x,
-					 int dest_y);
-static void          backing_store_scroll (BackingStore *store,
-					   int dx, int dy);
-static void          backing_store_invalidate_rect (BackingStore *store,
-						    GdkRectangle *rect);
-static void          backing_store_invalidate_region (BackingStore *store,
-						      GdkRegion *region);
-static void          backing_store_invalidate_all (BackingStore *store);
-static BackingStore *backing_store_new (GdkWindow *window,
-					int width, int height);
-static void          backing_store_resize (BackingStore *store,
-					   int width, int height);
-static void          backing_store_process_updates (BackingStore *store,
-						    ExposeFunc func,
-						    gpointer data);
-static void	     backing_store_free (BackingStore *store);
-#endif
+typedef void (* ExposeFunc) (cairo_t        *cr,
+                             cairo_region_t *region,
+                             gpointer        data);
 
 typedef struct InputPath InputPath;
 typedef struct InputRegion InputRegion;
@@ -73,7 +52,9 @@ struct InputPath
 /* InputRegions are mutually disjoint */
 struct InputRegion
 {
-    GdkRegion *region;		/* the boundary of this area in canvas coordinates */
+    /* the boundary of this area in canvas coordinates */
+    cairo_region_t *region;
+
     InputPath *paths;
 };
 
@@ -113,7 +94,7 @@ struct FooScrollAreaPrivate
      *
      * It is used for clipping of input areas
      */
-    GdkRegion		       *expose_region;
+    cairo_region_t	       *expose_region;
     InputRegion		       *current_input;
     
     gboolean			grabbed;
@@ -121,7 +102,7 @@ struct FooScrollAreaPrivate
     gpointer			grab_data;
 
     GdkPixmap		       *pixmap;
-    GdkRegion		       *update_region;		/* In canvas coordinates */
+    cairo_region_t             *update_region; /* In canvas coordinates */
 };
 
 enum
@@ -279,7 +260,7 @@ foo_scroll_area_init (FooScrollArea *scroll_area)
     scroll_area->priv->auto_scroll_info = NULL;
     scroll_area->priv->input_regions = g_ptr_array_new ();
     scroll_area->priv->pixmap = NULL;
-    scroll_area->priv->update_region = gdk_region_new ();
+    scroll_area->priv->update_region = cairo_region_create ();
 
     gtk_widget_set_double_buffered (widget, FALSE);
 }
@@ -298,26 +279,6 @@ translate_cairo_device (cairo_t       *cr,
     dev_y += y_offset;
     cairo_surface_set_device_offset (surface, dev_x, dev_y);
 }
-
-#if 0
-static void
-print_region (const char *header, GdkRegion *region)
-{
-    GdkRectangle *rects;
-    int n_rects;
-    int i;
-    
-    g_print ("%s\n", header);
-    
-    gdk_region_get_rectangles (region, &rects, &n_rects);
-    for (i = 0; i < n_rects; ++i)
-    {
-	GdkRectangle *rect = &(rects[i]);
-	g_print ("  %d %d %d %d\n",
-		 rect->x, rect->y, rect->width, rect->height);
-    }
-}
-#endif
 
 typedef void (* PathForeachFunc) (double  *x,
 				  double  *y,
@@ -412,7 +373,7 @@ static void
 input_region_free (InputRegion *region)
 {
     input_path_free_list (region->paths);
-    gdk_region_destroy (region->region);
+    cairo_region_destroy (region->region);
 
     g_free (region);
 }
@@ -442,58 +403,35 @@ allocation_to_canvas (FooScrollArea *area,
 }
 
 static void
-clear_exposed_input_region (FooScrollArea *area,
-			    GdkRegion *exposed)	/* in canvas coordinates */
+clear_exposed_input_region (FooScrollArea  *area,
+                            cairo_region_t *exposed) /* in canvas coordinates */
 {
     int i;
-    GdkRegion *viewport;
+    cairo_region_t *viewport;
     GdkRectangle allocation;
 
     gtk_widget_get_allocation (GTK_WIDGET (area), &allocation);
     allocation.x = 0;
     allocation.y = 0;
     allocation_to_canvas (area, &allocation.x, &allocation.y);
-    viewport = gdk_region_rectangle (&allocation);
-    gdk_region_subtract (viewport, exposed);
+
+    viewport = cairo_region_create_rectangle (&allocation);
+    cairo_region_subtract (viewport, exposed);
     
     for (i = 0; i < area->priv->input_regions->len; ++i)
     {
 	InputRegion *region = area->priv->input_regions->pdata[i];
 
-	gdk_region_intersect (region->region, viewport);
+	cairo_region_intersect (region->region, viewport);
 
-	if (gdk_region_empty (region->region))
+	if (cairo_region_is_empty (region->region))
 	{
 	    input_region_free (region);
 	    g_ptr_array_remove_index_fast (area->priv->input_regions, i--);
 	}
     }
 
-    gdk_region_destroy (viewport);
-    
-#if 0
-	path = region->paths;
-	while (path != NULL)
-	{
-	    GdkRectangle rect;
-
-	    path_compute_extents (path->path, &rect);
-
-	    if (gdk_region_rect_in (area->priv->expose_region, &rect) == GDK_OVERLAP_RECTANGLE_IN)
-		g_print ("we would have deleted it\n");
-#if 0
-	    else
-		g_print ("nope (%d %d %d %d)\n", );
-#endif
-	    
-	    path = path->next;
-	}
-	
-	/* FIXME: we should also delete paths (and path segments)
-	 * completely contained in the expose_region
-	 */
-    }
-#endif
+    cairo_region_destroy (viewport);
 }
 
 static void
@@ -521,8 +459,8 @@ setup_background_cr (GdkWindow *window,
 	setup_background_cr (parent, cr, x_offset, y_offset);
     }
     else if (pixmap &&
-	     !parent_relative &&
-	     pixmap != GDK_NO_BG)
+	     !parent_relative/* &&
+	     pixmap != GDK_NO_BG*/)
     {
 	gdk_cairo_set_source_pixmap (cr, pixmap, -x_offset, -y_offset);
     }
@@ -542,23 +480,10 @@ initialize_background (GtkWidget *widget,
 }
 
 static void
-clip_to_region (cairo_t *cr, GdkRegion *region)
+clip_to_region (cairo_t *cr, cairo_region_t *region)
 {
-    int n_rects;
-    GdkRectangle *rects;
-
-    gdk_region_get_rectangles (region, &rects, &n_rects);
-
-    cairo_new_path (cr);
-    while (n_rects--)
-    {
-	GdkRectangle *rect = &(rects[n_rects]);
-
-	cairo_rectangle (cr, rect->x, rect->y, rect->width, rect->height);
-    }
+    gdk_cairo_region (cr, region);
     cairo_clip (cr);
-
-    g_free (rects);
 }
 
 static void
@@ -585,7 +510,7 @@ foo_scroll_area_expose (GtkWidget *widget,
     FooScrollArea *scroll_area = FOO_SCROLL_AREA (widget);
     cairo_t *cr;
     GdkRectangle extents;
-    GdkRegion *region;
+    cairo_region_t *region;
     int x_offset, y_offset;
     GdkGC *gc;
     GtkAllocation widget_allocation;
@@ -613,13 +538,13 @@ foo_scroll_area_expose (GtkWidget *widget,
     clear_exposed_input_region (scroll_area, scroll_area->priv->update_region);
     
     scroll_area->priv->current_input = g_new0 (InputRegion, 1);
-    scroll_area->priv->current_input->region = gdk_region_copy (scroll_area->priv->update_region);
+    scroll_area->priv->current_input->region = cairo_region_copy (scroll_area->priv->update_region);
     scroll_area->priv->current_input->paths = NULL;
     g_ptr_array_add (scroll_area->priv->input_regions,
 		     scroll_area->priv->current_input);
 
     region = scroll_area->priv->update_region;
-    scroll_area->priv->update_region = gdk_region_new ();
+    scroll_area->priv->update_region = cairo_region_create ();
     
     /* Create cairo context */
     cr = gdk_cairo_create (scroll_area->priv->pixmap);
@@ -628,7 +553,7 @@ foo_scroll_area_expose (GtkWidget *widget,
     initialize_background (widget, cr);
 
     /* Create regions */
-    gdk_region_get_clipbox (region, &extents);
+    cairo_region_get_extents (region, &extents);
 
     g_signal_emit (widget, signals[PAINT], 0, cr, &extents, region);
 
@@ -649,7 +574,7 @@ foo_scroll_area_expose (GtkWidget *widget,
 		       widget_allocation.width, widget_allocation.height);
 
     g_object_unref (gc);
-    gdk_region_destroy (region);
+    cairo_region_destroy (region);
     
     return TRUE;
 }
@@ -822,12 +747,27 @@ create_new_pixmap (GtkWidget *widget,
 }
 		   
 static void
-allocation_to_canvas_region (FooScrollArea *area,
-			     GdkRegion *region)
+allocation_to_canvas_region (FooScrollArea  *area,
+                             cairo_region_t *region)
 {
-    gdk_region_offset (region, area->priv->x_offset, area->priv->y_offset);
+    cairo_region_translate (region, area->priv->x_offset, area->priv->y_offset);
 }
-			     
+
+static void
+_cairo_region_xor (cairo_region_t       *dst,
+                   const cairo_region_t *src)
+{
+  cairo_region_t *trb;
+
+  trb = cairo_region_copy (src);
+
+  cairo_region_subtract (trb, dst);
+  cairo_region_subtract (dst, src);
+
+  cairo_region_union (dst, trb);
+
+  cairo_region_destroy (trb);
+}
 
 static void
 foo_scroll_area_size_allocate (GtkWidget     *widget,
@@ -836,23 +776,26 @@ foo_scroll_area_size_allocate (GtkWidget     *widget,
     FooScrollArea *scroll_area = FOO_SCROLL_AREA (widget);
     GdkRectangle new_viewport;
     GdkRectangle old_viewport;
-    GdkRegion *old_allocation;
-    GdkRegion *invalid;
+    cairo_region_t *old_allocation;
+    cairo_region_t *invalid;
     GtkAllocation widget_allocation;
 
     get_viewport (scroll_area, &old_viewport);
 
     gtk_widget_get_allocation (widget, &widget_allocation);
-    old_allocation = gdk_region_rectangle (&widget_allocation);
-    gdk_region_offset (old_allocation,
-		       -widget_allocation.x, -widget_allocation.y);
-    invalid = gdk_region_rectangle (allocation);
-    gdk_region_offset (invalid, -allocation->x, -allocation->y);
-    gdk_region_xor (invalid, old_allocation);
+
+    old_allocation = cairo_region_create_rectangle (&widget_allocation);
+    cairo_region_translate (old_allocation,
+                            -widget_allocation.x, -widget_allocation.y);
+
+    invalid = cairo_region_create_rectangle (allocation);
+    cairo_region_translate (invalid, -allocation->x, -allocation->y);
+    _cairo_region_xor (invalid, old_allocation);
     allocation_to_canvas_region (scroll_area, invalid);
     foo_scroll_area_invalidate_region (scroll_area, invalid);
-    gdk_region_destroy (old_allocation);
-    gdk_region_destroy (invalid);
+
+    cairo_region_destroy (old_allocation);
+    cairo_region_destroy (invalid);
 
     gtk_widget_set_allocation (widget, allocation);
     
@@ -978,7 +921,7 @@ process_event (FooScrollArea	       *scroll_area,
 	print_region ("region:", region->region);
 #endif
 	
-	if (gdk_region_point_in (region->region, x, y))
+	if (cairo_region_contains_point (region->region, x, y))
 	{
 	    InputPath *path;
 
@@ -1184,28 +1127,6 @@ translate_input_regions (FooScrollArea *scroll_area,
 #endif
 }
 
-#if 0
-static void
-paint_region (FooScrollArea *area, GdkRegion *region)
-{
-    int n_rects;
-    GdkRectangle *rects;
-    region = gdk_region_copy (region);
-    
-    gdk_region_get_rectangles (region, &rects, &n_rects);
-
-    gdk_region_offset (region,
-		       GTK_WIDGET (area)->allocation.x,
-		       GTK_WIDGET (area)->allocation.y);
-
-    GdkGC *gc = gdk_gc_new (GTK_WIDGET (area)->window);
-    gdk_gc_set_clip_region (gc, region);
-    gdk_draw_rectangle (GTK_WIDGET (area)->window, gc, TRUE, 0, 0, -1, -1);
-    g_object_unref (gc);
-    g_free (rects);
-}
-#endif
-
 static void
 foo_scroll_area_scroll (FooScrollArea *area,
 			gint dx, 
@@ -1214,7 +1135,7 @@ foo_scroll_area_scroll (FooScrollArea *area,
     GdkRectangle allocation;
     GdkRectangle src_area;
     GdkRectangle move_area;
-    GdkRegion *invalid_region;
+    cairo_region_t *invalid_region;
 
     gtk_widget_get_allocation (GTK_WIDGET (area), &allocation);
     allocation.x = 0;
@@ -1224,11 +1145,11 @@ foo_scroll_area_scroll (FooScrollArea *area,
     src_area.x -= dx;
     src_area.y -= dy;
 
-    invalid_region = gdk_region_rectangle (&allocation);
+    invalid_region = cairo_region_create_rectangle (&allocation);
     
     if (gdk_rectangle_intersect (&allocation, &src_area, &move_area))
     {
-	GdkRegion *move_region;
+	cairo_region_t *move_region;
 
 #if 0
 	g_print ("scrolling %d %d %d %d (%d %d)\n",
@@ -1243,10 +1164,10 @@ foo_scroll_area_scroll (FooScrollArea *area,
 			      move_area.width, move_area.height);
 	gtk_widget_queue_draw (GTK_WIDGET (area));
 	
-	move_region = gdk_region_rectangle (&move_area);
-	gdk_region_offset (move_region, dx, dy);
-	gdk_region_subtract (invalid_region, move_region);
-	gdk_region_destroy (move_region);
+	move_region = cairo_region_create_rectangle (&move_area);
+	cairo_region_translate (move_region, dx, dy);
+	cairo_region_subtract (invalid_region, move_region);
+	cairo_region_destroy (move_region);
     }
 
 #if 0
@@ -1257,7 +1178,7 @@ foo_scroll_area_scroll (FooScrollArea *area,
 
     foo_scroll_area_invalidate_region (area, invalid_region);
     
-    gdk_region_destroy (invalid_region);
+    cairo_region_destroy (invalid_region);
 }
 
 static void
@@ -1467,34 +1388,34 @@ foo_scroll_area_invalidate (FooScrollArea *scroll_area)
 }
 
 static void
-canvas_to_window (FooScrollArea *area,
-		  GdkRegion *region)
+canvas_to_window (FooScrollArea  *area,
+                  cairo_region_t *region)
 {
     GtkAllocation allocation;
     GtkWidget *widget = GTK_WIDGET (area);
     
     gtk_widget_get_allocation (widget, &allocation);
-    gdk_region_offset (region,
-		       -area->priv->x_offset + allocation.x,
-		       -area->priv->y_offset + allocation.y);
+    cairo_region_translate (region,
+                            -area->priv->x_offset + allocation.x,
+                            -area->priv->y_offset + allocation.y);
 }
 
 static void
-window_to_canvas (FooScrollArea *area,
-		  GdkRegion *region)
+window_to_canvas (FooScrollArea  *area,
+                  cairo_region_t *region)
 {
     GtkAllocation allocation;
     GtkWidget *widget = GTK_WIDGET (area);
 
     gtk_widget_get_allocation (widget, &allocation);
-    gdk_region_offset (region,
-		       area->priv->x_offset - allocation.x,
-		       area->priv->y_offset - allocation.y);
+    cairo_region_translate (region,
+                            area->priv->x_offset - allocation.x,
+                            area->priv->y_offset - allocation.y);
 }
 
 void
-foo_scroll_area_invalidate_region (FooScrollArea *area,
-				   GdkRegion     *region)
+foo_scroll_area_invalidate_region (FooScrollArea  *area,
+                                   cairo_region_t *region)
 {
     GtkWidget *widget;
 
@@ -1502,7 +1423,7 @@ foo_scroll_area_invalidate_region (FooScrollArea *area,
 
     widget = GTK_WIDGET (area);
 
-    gdk_region_union (area->priv->update_region, region);
+    cairo_region_union (area->priv->update_region, region);
 
     if (gtk_widget_get_realized (widget))
     {
@@ -1522,16 +1443,16 @@ foo_scroll_area_invalidate_rect (FooScrollArea *scroll_area,
 				 int	        width,
 				 int	        height)
 {
-    GdkRectangle rect = { x, y, width, height };
-    GdkRegion *region;
+    cairo_rectangle_int_t rect = { x, y, width, height };
+    cairo_region_t *region;
     
     g_return_if_fail (FOO_IS_SCROLL_AREA (scroll_area));
 
-    region = gdk_region_rectangle (&rect);
+    region = cairo_region_create_rectangle (&rect);
 
     foo_scroll_area_invalidate_region (scroll_area, region);
 
-    gdk_region_destroy (region);
+    cairo_region_destroy (region);
 }
 
 void
@@ -1767,189 +1688,3 @@ foo_scroll_area_end_auto_scroll (FooScrollArea *scroll_area)
     stop_scrolling (scroll_area);
 }
 
-
-
-#if 0
-/*
- * Backing Store
- */
-struct BackingStore
-{
-    GdkPixmap *pixmap;
-    GdkRegion *update_region;
-    int width;
-    int height;
-};
-
-static BackingStore *
-backing_store_new (GdkWindow *window,
-		   int width, int height)
-{
-    BackingStore *store = g_new0 (BackingStore, 1);
-    GdkRectangle rect = { 0, 0, width, height };
-    
-    store->pixmap = gdk_pixmap_new (window, width, height, -1);
-    store->update_region = gdk_region_rectangle (&rect);
-    store->width = width;
-    store->height = height;
-
-    return store;
-}
-
-static void
-backing_store_free (BackingStore *store)
-{
-    g_object_unref (store->pixmap);
-    gdk_region_destroy (store->update_region);
-    g_free (store);
-}
-
-static void
-backing_store_draw (BackingStore  *store, 
-		    GdkDrawable   *dest,
-		    GdkRegion     *clip,
-		    int		   x,
-		    int            y)
-{
-    GdkGC *gc = gdk_gc_new (dest);
-    
-    gdk_gc_set_clip_region (gc, clip);
-
-    gdk_draw_drawable (dest, gc, store->pixmap,
-		       0, 0, x, y, store->width, store->height);
-
-    g_object_unref (gc);
-}
-
-static void
-backing_store_scroll (BackingStore *store,
-		      int           dx,
-		      int           dy)
-{
-    GdkGC *gc = gdk_gc_new (store->pixmap);
-    GdkRectangle rect;
-    
-    gdk_draw_drawable (store->pixmap, gc, store->pixmap,
-		       0, 0, dx, dy,
-		       store->width, store->height);
-
-    /* Invalidate vertically */
-    rect.x = 0;
-    rect.width = store->width;
-
-    if (dy > 0)
-    {
-	rect.y = 0;
-	rect.height = dy;
-    }
-    else
-    {
-	rect.y = store->height + dy;
-	rect.y = -dy;
-    }
-
-    gdk_region_union_with_rect (store->update_region, &rect);
-    
-    /* Invalidate horizontally */
-    rect.y = 0;
-    rect.height = store->height;
-
-    if (dx > 0)
-    {
-	rect.x = 0;
-	rect.width = dx;
-    }
-    else
-    {
-	rect.x = store->width + dx;
-	rect.width = -dx;
-    }
-
-    gdk_region_union_with_rect (store->update_region, &rect);
-}
-
-static void
-backing_store_invalidate_rect (BackingStore *store,
-			       GdkRectangle *rect)
-{
-    gdk_region_union_with_rect (store->update_region, rect);
-}
-
-static void
-backing_store_invalidate_region (BackingStore *store,
-				 GdkRegion *region)
-{
-    gdk_region_union (store->update_region, region);
-}
-
-static void
-backing_store_invalidate_all (BackingStore *store)
-{
-    GdkRectangle rect = { 0, 0, store->width, store->height };
-    gdk_region_destroy (store->update_region);
-    store->update_region = gdk_region_rectangle (&rect);
-}
-
-static void
-backing_store_resize (BackingStore *store,
-		      int           width,
-		      int           height)
-{
-    GdkPixmap *pixmap = gdk_pixmap_new (store->pixmap, width, height, -1);
-
-    /* Unfortunately we don't know in which direction we were resized,
-     * so we just assume we were dragged from the south-east corner.
-     *
-     * Although, maybe we could get the root coordinates of the input-window?
-     * That might just work, actually. We need to make sure metacity uses
-     * static gravity for the window before this will be useful.
-     */
-    simple_draw_drawable (pixmap, store->pixmap, 0, 0, 0, 0, -1, -1);
-
-    g_object_unref (store->pixmap);
-
-    store->pixmap = pixmap;
-
-    /* FIXME: invalidate uncovered strip only */
-
-    backing_store_invalidate_all (store);
-}
-
-static void
-cclip_to_region (cairo_t *cr, GdkRegion *region)
-{
-    int n_rects;
-    GdkRectangle *rects;
-
-    gdk_region_get_rectangles (region, &rects, &n_rects);
-
-    cairo_new_path (cr);
-    while (n_rects--)
-    {
-	GdkRectangle *rect = &(rects[n_rects]);
-
-	cairo_rectangle (cr, rect->x, rect->y, rect->width, rect->height);
-    }
-    cairo_clip (cr);
-
-    g_free (rects);
-}
-
-static void
-backing_store_process_updates (BackingStore *store,
-			       ExposeFunc    func,
-			       gpointer      data)
-{
-    cairo_t *cr = gdk_cairo_create (store->pixmap);
-    GdkRegion *region = store->update_region;
-    store->update_region = gdk_region_new ();
-
-    cclip_to_region (cr, store->update_region);
-
-    func (cr, store->update_region, data);
-
-    gdk_region_destroy (region);
-    cairo_destroy (cr);
-}
-
-#endif
