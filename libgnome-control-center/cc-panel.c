@@ -60,7 +60,7 @@ enum
     PROP_SHELL,
 };
 
-G_DEFINE_ABSTRACT_TYPE (CcPanel, cc_panel, GTK_TYPE_ALIGNMENT)
+G_DEFINE_ABSTRACT_TYPE (CcPanel, cc_panel, GTK_TYPE_BIN)
 
 static void
 cc_panel_set_property (GObject      *object,
@@ -123,16 +123,61 @@ cc_panel_finalize (GObject *object)
   G_OBJECT_CLASS (cc_panel_parent_class)->finalize (object);
 }
 
+static void
+cc_panel_size_request (GtkWidget      *widget,
+                       GtkRequisition *requisition)
+{
+  GtkBin *bin = GTK_BIN (widget);
+  GtkWidget *child;
+  guint border_width;
+
+  if ((child = gtk_bin_get_child (bin)))
+    {
+      GtkRequisition child_requisition;
+
+      gtk_widget_size_request (child, &child_requisition);
+
+      requisition->width = child_requisition.width;
+      requisition->height = child_requisition.height;
+    }
+
+  border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
+  requisition->width += 2 * border_width;
+  requisition->height += 2 * border_width;
+}
+
+static void
+cc_panel_size_allocate (GtkWidget     *widget,
+                             GtkAllocation *allocation)
+{
+  GtkAllocation child_allocation;
+  guint border_width;
+
+  child_allocation = *allocation;
+
+  border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
+
+
+  child_allocation.width -= 2 * border_width;
+  child_allocation.height -= 2 * border_width;
+
+  gtk_widget_size_allocate (gtk_bin_get_child (GTK_BIN (widget)),
+                            &child_allocation);
+}
 
 static void
 cc_panel_class_init (CcPanelClass *klass)
 {
   GParamSpec      *pspec;
   GObjectClass    *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass  *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->get_property = cc_panel_get_property;
   object_class->set_property = cc_panel_set_property;
   object_class->finalize = cc_panel_finalize;
+
+  widget_class->size_request = cc_panel_size_request;
+  widget_class->size_allocate = cc_panel_size_allocate;
 
   g_type_class_add_private (klass, sizeof (CcPanelPrivate));
 

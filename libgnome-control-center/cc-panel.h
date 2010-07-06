@@ -54,7 +54,7 @@ typedef struct _CcPanelClass  CcPanelClass;
 struct _CcPanel
 {
   /*< private >*/
-  GtkAlignment    parent;
+  GtkBin          parent;
   CcPanelPrivate *priv;
 };
 /**
@@ -65,7 +65,7 @@ struct _CcPanel
 struct _CcPanelClass
 {
   /*< private >*/
-  GtkAlignmentClass   parent_class;
+  GtkBinClass parent_class;
 };
 
 GType        cc_panel_get_type         (void);
