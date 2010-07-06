@@ -732,6 +732,10 @@ cc_ua_panel_init (CcUaPanel *self)
                        "text_size_model", "slowkeys_delay_adjustment",
                        "bouncekeys_delay_adjustment", "click_delay_adjustment",
                        "dwell_time_adjustment", "dwell_threshold_adjustment",
+                       "seeing_sizegroup", "typing_sizegroup",
+                       "pointing_sizegroup", "pointing_sizegroup2",
+                       "pointing_scale_sizegroup", "sizegroup1",
+                       "hearing_sizegroup",
                        "NULL" };
 
   priv = self->priv = UA_PANEL_PRIVATE (self);
