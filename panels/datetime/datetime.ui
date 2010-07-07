@@ -123,24 +123,22 @@
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkLabel" id="label2">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">:</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkSpinButton" id="spin_minute">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">&#x2022;</property>
                             <property name="width_chars">2</property>
                             <property name="adjustment">adjustment_min</property>
-                          </object>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSpinButton" id="spin_second">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="invisible_char">&#x2022;</property>
-                            <property name="width_chars">2</property>
-                            <property name="adjustment">adjustment_sec</property>
                           </object>
                           <packing>
                             <property name="position">2</property>
@@ -232,10 +230,6 @@
     <property name="step_increment">1</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_min">
-    <property name="upper">60</property>
-    <property name="step_increment">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_sec">
     <property name="upper">60</property>
     <property name="step_increment">1</property>
   </object>

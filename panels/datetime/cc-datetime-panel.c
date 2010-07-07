@@ -163,7 +163,7 @@ apply_button_clicked_cb (GtkButton       *button,
 {
   GtkWidget *widget;
   CcDateTimePanelPrivate *priv = self->priv;
-  guint h, mon, s, y, min, d;
+  guint h, mon, y, min, d;
   struct tm fulltime;
   time_t unixtime;
   gchar *filename;
@@ -172,13 +172,11 @@ apply_button_clicked_cb (GtkButton       *button,
   h = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
   min = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_second");
-  s = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
 
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "calendar");
   gtk_calendar_get_date (GTK_CALENDAR (widget), &y, &mon, &d);
 
-  fulltime.tm_sec = s;
+  fulltime.tm_sec = 0;
   fulltime.tm_min = min;
   fulltime.tm_hour = h;
   fulltime.tm_mday = d;
@@ -241,8 +239,6 @@ location_changed_cb (CcTimezoneMap   *map,
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_hour);
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_min);
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_second");
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_sec);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
                                                 "label_current_time");
@@ -316,8 +312,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_hour);
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_min);
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_second");
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_sec);
 
   g_signal_connect ((GtkWidget*) gtk_builder_get_object (priv->builder, "button_apply"),
                     "clicked",
