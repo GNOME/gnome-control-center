@@ -15,7 +15,6 @@
 
 #include "wm-common.h"
 #include "eggcellrendererkeys.h"
-#include "activate-settings-daemon.h"
 
 #define GCONF_BINDING_DIR "/desktop/gnome/keybindings"
 #define MAX_ELEMENTS_BEFORE_SCROLLING 10

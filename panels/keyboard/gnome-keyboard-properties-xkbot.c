@@ -30,8 +30,6 @@
 #include <string.h>
 #include <gconf/gconf-client.h>
 
-#include "capplet-util.h"
-
 #include "gnome-keyboard-properties-xkb.h"
 
 static GtkBuilder *chooser_dialog = NULL;
@@ -418,8 +416,8 @@ chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 {
 	switch (response) {
 	case GTK_RESPONSE_HELP:
-		capplet_help (GTK_WINDOW (dialog),
-			      "prefs-keyboard-layoutoptions");
+		/* capplet_help (GTK_WINDOW (dialog),
+			      "prefs-keyboard-layoutoptions"); */
 		break;
 	case GTK_RESPONSE_CLOSE:{
 			/* just cleanup */

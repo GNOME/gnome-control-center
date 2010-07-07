@@ -27,7 +27,6 @@
 
 #include <libgnomekbd/gkbd-keyboard-drawing.h>
 
-#include "capplet-util.h"
 #include "gnome-keyboard-properties-xkb.h"
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H

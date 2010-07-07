@@ -29,8 +29,6 @@
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
 
-#include "capplet-util.h"
-
 #include "gnome-keyboard-properties-xkb.h"
 
 static gchar *current_model_name = NULL;

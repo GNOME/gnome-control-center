@@ -259,13 +259,10 @@ AM_GCONF_SOURCE_2
 dnl ==============================================
 dnl Define the main variables
 dnl ==============================================
-COMMON_CFLAGS="-I\$(top_srcdir)/capplets/common"
-COMMON_LIBS="\$(top_builddir)/capplets/common/libcommon.la"
-
 EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\""
 
-GNOMECC_CAPPLETS_CFLAGS="${COMMON_CFLAGS} ${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${DBUS_CFLAGS}"
-GNOMECC_CAPPLETS_LIBS="${COMMON_LIBS} ${CAPPLET_LIBS} ${DBUS_LIBS}"
+GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${DBUS_CFLAGS}"
+GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} ${DBUS_LIBS}"
 
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
 GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(pixmaps_DATA)"

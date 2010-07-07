@@ -25,11 +25,13 @@
 #define __GNOME_KEYBOARD_PROPERTY_XKB_H
 
 #include <gconf/gconf-client.h>
+#include <gtk/gtk.h>
 
 #include "libgnomekbd/gkbd-keyboard-config.h"
 
 G_BEGIN_DECLS
 #define CWID(s) GTK_WIDGET (gtk_builder_get_object (chooser_dialog, s))
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 extern XklEngine *engine;
 extern XklConfigRegistry *config_registry;
 extern GConfClient *xkb_gconf_client;

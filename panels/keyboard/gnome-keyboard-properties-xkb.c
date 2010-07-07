@@ -30,7 +30,6 @@
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
 
-#include "capplet-util.h"
 #include "gconf-property-editor.h"
 
 #include "gnome-keyboard-properties-xkb.h"

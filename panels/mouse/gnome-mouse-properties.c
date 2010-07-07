@@ -31,7 +31,6 @@
 #include <gdk/gdkx.h>
 #include <math.h>
 
-#include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "gnome-mouse-accessibility.h"
 #include "capplet-stock-icons.h"
@@ -47,6 +46,8 @@
 #ifdef HAVE_XCURSOR
 #include <X11/Xcursor/Xcursor.h>
 #endif
+
+#define WID(x) (GtkWidget*) gtk_builder_get_object (dialog, x)
 
 enum
 {

@@ -27,11 +27,10 @@
 #include <glib/gi18n.h>
 #include <stdlib.h>
 
-#include "gconf-property-editor.h"
+#include "libgnome-control-center/gconf-property-editor.h"
 #include "gnome-da-capplet.h"
 #include "gnome-da-xml.h"
 #include "gnome-da-item.h"
-#include "capplet-util.h"
 
 enum
 {

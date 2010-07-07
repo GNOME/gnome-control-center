@@ -31,8 +31,7 @@
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
 
-#include "capplet-util.h"
-#include "gconf-property-editor.h"
+#include "libgnome-control-center/gconf-property-editor.h"
 
 enum ProxyMode
 {
@@ -196,10 +195,10 @@ cb_remove_url (GtkButton *button, gpointer data)
 static void
 cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
-	if (response_id == GTK_RESPONSE_HELP)
+	/* if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
 			"goscustdesk-50");
-	else if (response_id == GTK_RESPONSE_CLOSE || response_id == GTK_RESPONSE_DELETE_EVENT)
+	else */ if (response_id == GTK_RESPONSE_CLOSE || response_id == GTK_RESPONSE_DELETE_EVENT)
 	{
 		if (ignore_hosts) {
 			g_slist_foreach (ignore_hosts, (GFunc) g_free, NULL);
@@ -213,10 +212,10 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 static void
 cb_details_dialog_response (GtkDialog *dialog, gint response_id)
 {
-	if (response_id == GTK_RESPONSE_HELP)
-		capplet_help (GTK_WINDOW (dialog),
-			      "goscustdesk-50");
-	else {
+	if (response_id == GTK_RESPONSE_HELP) {
+		/* capplet_help (GTK_WINDOW (dialog),
+			      "goscustdesk-50"); */
+        } else {
 		gtk_widget_destroy (GTK_WIDGET (dialog));
 		details_dialog = NULL;
 	}

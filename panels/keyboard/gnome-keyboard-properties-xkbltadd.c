@@ -30,7 +30,6 @@
 #include <libgnomekbd/gkbd-keyboard-drawing.h>
 #include <libgnomekbd/gkbd-util.h>
 
-#include "capplet-util.h"
 #include "gnome-keyboard-properties-xkb.h"
 
 enum {

@@ -30,7 +30,6 @@
 
 #include <gconf/gconf-client.h>
 
-#include "capplet-util.h"
 #include "gconf-property-editor.h"
 
 #include "gnome-keyboard-properties-a11y.h"

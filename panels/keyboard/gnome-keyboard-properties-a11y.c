@@ -27,10 +27,10 @@
 #include "gnome-keyboard-properties-a11y.h"
 #include <gconf/gconf-client.h>
 #include "gconf-property-editor.h"
-#include "capplet-util.h"
 
 #define CONFIG_ROOT "/desktop/gnome/accessibility/keyboard"
 #define NWID(s) GTK_WIDGET (gtk_builder_get_object (notifications_dialog, s))
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
 static GtkBuilder *notifications_dialog = NULL;
 

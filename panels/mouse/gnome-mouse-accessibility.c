@@ -18,13 +18,14 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
-#include "capplet-util.h"
 #include "gconf-property-editor.h"
 
 #define MT_GCONF_HOME "/desktop/gnome/accessibility/mouse"
 
 /* 5th entry in combo box */
 #define DIRECTION_DISABLE 4
+
+#define WID(x) (GtkWidget*) gtk_builder_get_object (dialog, x)
 
 enum {
 	CLICK_TYPE_SINGLE,
