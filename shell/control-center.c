@@ -43,7 +43,7 @@ application_prepare_action_cb (GApplication *application, GVariant *arguments,
   if (temp != NULL)
     {
       GError *err = NULL;
-      const gchar *id = g_variant_get_byte_array (temp, NULL);
+      const gchar *id = g_variant_get_bytestring (temp);
       if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, &err))
         {
           if (err)
