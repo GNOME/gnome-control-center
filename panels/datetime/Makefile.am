@@ -1,6 +1,19 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = datetime
 
+icons16dir = $(datadir)/icons/hicolor/16x16/apps
+dist_icons16_DATA = icons/16x16/preferences-system-time.png
+icons22dir = $(datadir)/icons/hicolor/22x22/apps
+dist_icons22_DATA = icons/22x22/preferences-system-time.png
+icons32dir = $(datadir)/icons/hicolor/32x32/apps
+dist_icons32_DATA = icons/32x32/preferences-system-time.png
+icons48dir = $(datadir)/icons/hicolor/48x48/apps
+dist_icons48_DATA = icons/48x48/preferences-system-time.png
+icons256dir = $(datadir)/icons/hicolor/256x256/apps
+dist_icons256_DATA = icons/256x256/preferences-system-time.png
+iconsscalabledir = $(datadir)/icons/hicolor/scalable/apps
+dist_iconsscalable_DATA = icons/scalable/preferences-system-time.svg
+
 uidir = $(pkgdatadir)/ui/datetime
 dist_ui_DATA = \
 	datetime.ui \
@@ -80,3 +93,4 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 CLEANFILES = $(desktop_in_files) $(desktop_DATA)
 
 -include $(top_srcdir)/git.mk
+
