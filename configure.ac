@@ -122,12 +122,10 @@ COMMON_MODULES="gtk+-3.0 >= 2.90.0 dnl
  libxml-2.0 dnl
  gnome-desktop-3.0 >= 2.29.4"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
-PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1)
 PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-3.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
-PKG_CHECK_MODULES(METACITY, libmetacity-private >= 2.23.1)
 PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-3.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 PKG_CHECK_MODULES(GIO, gio-2.0)
@@ -172,8 +170,6 @@ PKG_CHECK_MODULES(XCURSOR, [
 	AC_DEFINE(HAVE_XCURSOR, 1, [Define if the Xcursor extension is available]),
 	have_xcursor=no)
 AM_CONDITIONAL(HAVE_XCURSOR, [test $have_xcursor=yes])
-AC_SUBST(XCURSOR_CFLAGS)
-AC_SUBST(XCURSOR_LIBS)
 
 if test x$have_xcursor = xyes; then
   AC_MSG_CHECKING([for XCURSOR cursor location])
@@ -197,8 +193,6 @@ PKG_CHECK_MODULES(XINPUT, [xi >= 1.2],
 	AC_DEFINE(HAVE_XINPUT, 1, [Define if the XInput extension is available]),
 	have_xinput=no)
 AM_CONDITIONAL(HAVE_XINPUT, [test $have_xinput=yes])
-AC_SUBST(XINPUT_CFLAGS)
-AC_SUBST(XINPUT_LIBS)
 
 CAPPLET_LIBS="$CAPPLET_LIBS $XINPUT_LIBS"
 
@@ -206,31 +200,8 @@ dnl ==============
 dnl gswitchit
 dnl ==============
 PKG_CHECK_MODULES(LIBGNOMEKBD, [libgnomekbd >= 2.31.1 libxklavier >= 4.0])
-AC_SUBST(LIBGNOMEKBD_CFLAGS)
-AC_SUBST(LIBGNOMEKBD_LIBS)
 
 PKG_CHECK_MODULES(LIBGNOMEKBDUI, [libgnomekbdui >= 2.31.2])
-AC_SUBST(LIBGNOMEKBDUI_CFLAGS)
-AC_SUBST(LIBGNOMEKBDUI_LIBS)
-
-dnl ==============================================
-dnl About-me
-dnl ==============================================
-
-AC_MSG_CHECKING([whether to enable About Me])
-AC_ARG_ENABLE([aboutme],
-   AC_HELP_STRING([--enable-aboutme],
-                  [enable about-me capplet]),,
-   [enable_aboutme=no])
-AC_MSG_RESULT([$enable_aboutme])
-
-if test "x$enable_aboutme" = "xyes"; then
-  PKG_CHECK_MODULES(LIBEBOOK, [libebook-1.2 >= 1.7.90],
-                    [AC_DEFINE([HAVE_LIBEBOOK], 1,
-                    [Define if evolution-data-server libebook-1.2 is available])])
-fi
-
-AM_CONDITIONAL(BUILD_ABOUTME, test "x$enable_aboutme" = "xyes")
 
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
@@ -373,18 +344,6 @@ fi
 
 AC_CONFIG_FILES([
 Makefile
-panels/default-applications/Makefile
-panels/default-applications/gnome-default-applications-panel.desktop.in
-panels/default-applications/gnome-at-commandline.in
-panels/default-applications/gnome-at-session.desktop.in
-panels/default-applications/gnome-default-applications.pc
-panels/display/Makefile
-panels/display/gnome-display-panel.desktop.in
-panels/keybindings/Makefile
-panels/keybindings/gnome-keybindings.pc
-panels/keybindings/gnome-keybindings-panel.desktop.in
-panels/universal-access/Makefile
-panels/universal-access/gnome-universal-access-panel.desktop.in
 docs/Makefile
 docs/reference/Makefile
 docs/reference/libgnome-control-center/Makefile
@@ -399,12 +358,24 @@ libgnome-control-center/libgnome-control-center.pc
 panels/Makefile
 panels/datetime/Makefile
 panels/datetime/gnome-datetime-panel.desktop.in
-panels/mouse/Makefile
-panels/mouse/gnome-mouse-panel.desktop.in
+panels/default-applications/Makefile
+panels/default-applications/gnome-at-commandline.in
+panels/default-applications/gnome-at-session.desktop.in
+panels/default-applications/gnome-default-applications-panel.desktop.in
+panels/default-applications/gnome-default-applications.pc
+panels/display/Makefile
+panels/display/gnome-display-panel.desktop.in
+panels/keybindings/Makefile
+panels/keybindings/gnome-keybindings-panel.desktop.in
+panels/keybindings/gnome-keybindings.pc
 panels/keyboard/Makefile
 panels/keyboard/gnome-keyboard-panel.desktop.in
+panels/mouse/Makefile
+panels/mouse/gnome-mouse-panel.desktop.in
 panels/network/Makefile
 panels/network/gnome-network-panel.desktop.in
+panels/universal-access/Makefile
+panels/universal-access/gnome-universal-access-panel.desktop.in
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in
