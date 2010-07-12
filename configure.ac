@@ -396,8 +396,6 @@ font-viewer/gnome-font-viewer.desktop.in
 help/Makefile
 libgnome-control-center/Makefile
 libgnome-control-center/libgnome-control-center.pc
-libwindow-settings/Makefile
-libwindow-settings/gnome-window-settings-2.0.pc
 panels/Makefile
 panels/datetime/Makefile
 panels/datetime/gnome-datetime-panel.desktop.in
