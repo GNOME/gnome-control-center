@@ -1,3 +1,3 @@
 
-GtkWidget* run_application ();
+GtkWidget* run_application (void);
 

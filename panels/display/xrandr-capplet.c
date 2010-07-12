@@ -2377,12 +2377,14 @@ destroy_app (App *app)
     gnome_rr_screen_destroy (app->screen);
     g_object_unref (app->client);
     g_object_unref (app->builder);
+    gnome_rr_labeler_hide (app->labeler);
+    g_object_unref (app->labeler);
 
     g_free (app);
 }
 
 GtkWidget*
-run_application ()
+run_application (void)
 {
 #ifndef UIDIR
 #define UIDIR "."
