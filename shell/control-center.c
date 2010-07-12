@@ -29,21 +29,23 @@
 #include <string.h>
 
 static void
-application_prepare_action_cb (GApplication *application, GVariant *arguments,
-                               GVariant *platform_data, GnomeControlCenter *shell)
+application_prepare_action_cb (GApplication       *application,
+                               GVariant           *arguments,
+                               GVariant           *platform_data,
+                               GnomeControlCenter *shell)
 {
-  GVariantIter iter;
-  GVariant *temp = NULL;
+  gchar **argv;
+  gsize length;
 
   gnome_control_center_present (shell);
 
-  /* we only care about the first argv */
-  g_variant_iter_init (&iter, arguments);
-  temp = g_variant_iter_next_value (&iter);
-  if (temp != NULL)
+  argv = g_variant_get_bytestring_array (arguments, &length);
+
+  if (length == 2)
     {
       GError *err = NULL;
-      const gchar *id = g_variant_get_bytestring (temp);
+      const gchar *id = argv[1];
+
       if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, &err))
         {
           if (err)
