@@ -668,7 +668,7 @@ home_button_clicked_cb (GtkButton *button,
 
 static void
 notebook_switch_page_cb (GtkNotebook               *book,
-                         GtkNotebookPage           *page,
+                         GtkWidget                 *child,
                          gint                       page_num,
                          GnomeControlCenterPrivate *priv)
 {
