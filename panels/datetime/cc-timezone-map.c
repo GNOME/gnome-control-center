@@ -348,12 +348,89 @@ cc_timezone_map_expose_event (GtkWidget      *widget,
 
   if (priv->location)
     {
+      PangoLayout *layout;
+      PangoRectangle rect;
+      gint width, height;
+      gdouble x1, y1, radius = 5;
+      gchar *zone, *s;
+
       pointx = convert_longtitude_to_x (priv->location->longitude, alloc.width);
       pointy = convert_latitude_to_y (priv->location->latitude, alloc.height);
 
+      /* allow for the line width */
+      pointy -= 2;
+
+      zone = g_strdup (priv->location->zone);
+
+      /* convert underscores to spaces */
+      for (s = zone; *s; s++)
+        if (*s == '_')
+          *s = ' ';
+
+      layout = gtk_widget_create_pango_layout (widget, zone);
+
+      pango_layout_get_pixel_extents (layout, NULL, &rect);
+      width = rect.width - rect.x;
+      height = rect.height - rect.y;
+
+      x1 = (int) (pointx - width / 2);
+      y1 = (int) (pointy - 10 - height - radius);
+
+      /* rotate the bubble upside-down if there is not enough vertical room */
+      if (y1 < radius)
+        {
+          cairo_translate (cr, pointx, pointy);
+          cairo_rotate (cr, G_PI);
+          cairo_translate (cr, -pointx, -pointy);
+        }
+
+      /* offset the arrow if there is not enough horizontal room */
+      if (x1 - radius - 2 < 0)
+        x1 -= (x1 - radius - 2);
+
+      if (x1 + width + radius + 2 > alloc.width)
+        x1 -= (x1 + width + radius + 2) - alloc.width;
+
+      /* draw the bubble */
+      cairo_arc (cr, x1, y1, radius, G_PI, G_PI * 1.5);
+      cairo_line_to (cr, x1 + width, y1 - radius);
+
+      cairo_arc (cr, x1 + width, y1, radius, G_PI * 1.5, 0);
+      cairo_line_to (cr, x1 + width + radius, y1 + height);
+
+      cairo_arc (cr, x1 + width, y1 + height, radius, 0, G_PI * 0.5);
+      cairo_line_to (cr, pointx + 10, pointy - 10);
+
+      cairo_line_to (cr, pointx, pointy);
+      cairo_line_to (cr, pointx - 10, pointy - 10);
+      cairo_line_to (cr, x1, y1 + height + radius);
+
+      cairo_arc (cr, x1, y1 + height, radius, G_PI * 0.5, G_PI);
+      cairo_line_to (cr, x1 - radius, y1);
+
+      cairo_set_source_rgba (cr, 1, 1, 1, 0.7);
+      cairo_fill_preserve (cr);
+
+      cairo_set_source_rgba (cr, 0, 0, 0, 0.7);
+      cairo_stroke (cr);
+
+
+      if (y1 < radius)
+        {
+          cairo_translate (cr, pointx, pointy);
+          cairo_rotate (cr, G_PI);
+          cairo_translate (cr, -pointx, -pointy);
+
+          y1 += height + 20 + 2 * radius;
+        }
+
+      /* draw the location name */
       cairo_set_source_rgb (cr, 0, 0, 0);
-      cairo_arc (cr, pointx, pointy, 3.0, 0, 2 * G_PI);
-      cairo_fill (cr);
+      cairo_move_to (cr, x1, y1);
+      pango_cairo_show_layout (cr, layout);
+
+      g_object_unref (layout);
+      g_free (zone);
     }
 
   cairo_destroy (cr);
