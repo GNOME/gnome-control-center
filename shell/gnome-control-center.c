@@ -72,6 +72,8 @@ struct _GnomeControlCenterPrivate
 
   gchar *default_window_title;
   gchar *default_window_icon;
+
+  gint overview_width, overview_height;
 };
 
 
@@ -119,7 +121,8 @@ activate_panel (GnomeControlCenter *shell,
         {
           GtkWidget *panel;
           GtkWidget *box;
-          gint i;
+          gint i, old_page;
+          GtkRequisition min, nat;
 
           /* create the panel plugin */
           panel = g_object_new (panel_type, "shell", shell, NULL);
@@ -129,9 +132,22 @@ activate_panel (GnomeControlCenter *shell,
 
           gtk_container_add (GTK_CONTAINER (box), panel);
 
-          /* switch to the new panel */
+          old_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->notebook));
+
+          /* store the old size */
+          if (old_page == OVERVIEW_PAGE)
+            {
+              GtkAllocation alloc;
+
+              gtk_widget_get_allocation (priv->window, &alloc);
+              priv->overview_width = alloc.width;
+              priv->overview_height = alloc.height;
+            }
+
           i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box,
                                         NULL);
+
+          /* switch to the new panel */
           gtk_widget_show (box);
           gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
 
@@ -140,6 +156,12 @@ activate_panel (GnomeControlCenter *shell,
           gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
 
           gtk_widget_show (panel);
+
+          gtk_size_request_get_size (GTK_SIZE_REQUEST (priv->window), &min,
+                                     &nat);
+
+          /* resize to the preferred size of the panel */
+          gtk_window_resize (GTK_WINDOW (priv->window), nat.width, nat.height);
           return;
         }
     }
@@ -200,6 +222,11 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   gtk_window_set_title (GTK_WINDOW (priv->window), priv->default_window_title);
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
                             priv->default_window_icon);
+
+  /* resize back to the original overview size */
+  if (priv->overview_width > 0 && priv->overview_height > 0)
+    gtk_window_resize (GTK_WINDOW (priv->window), priv->overview_width,
+                       priv->overview_height);
 }
 
 

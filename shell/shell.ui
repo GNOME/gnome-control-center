@@ -3,9 +3,10 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="main-window">
+    <property name="width_request">750</property>
+    <property name="height_request">500</property>
     <property name="title" translatable="yes">System Settings</property>
-    <property name="default_width">800</property>
-    <property name="default_height">500</property>
+    <property name="resizable">False</property>
     <property name="icon_name">gnome-control-center</property>
     <child>
       <object class="GtkVBox" id="vbox1">
