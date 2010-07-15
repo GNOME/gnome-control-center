@@ -11,36 +11,21 @@
         <child>
           <object class="GtkHBox" id="vbox">
             <property name="visible">True</property>
-            <property name="spacing">6</property>
+            <property name="spacing">12</property>
             <child>
               <object class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
                 <child>
-                  <object class="GtkHBox" id="hbox1">
+                  <object class="GtkAspectFrame" id="aspectmap">
                     <property name="visible">True</property>
-                    <property name="spacing">6</property>
+                    <property name="label_xalign">0</property>
+                    <property name="shadow_type">none</property>
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
                     <child>
-                      <object class="GtkLabel" id="label1">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Current Location:</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label_current_location">
-                        <property name="visible">True</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">1</property>
-                      </packing>
+                      <placeholder/>
                     </child>
                   </object>
                   <packing>
@@ -49,16 +34,64 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkAspectFrame" id="aspectmap">
+                  <object class="GtkHBox" id="hbox1">
                     <property name="visible">True</property>
-                    <property name="label_xalign">0</property>
-                    <property name="shadow_type">none</property>
-                    <property name="yalign">0</property>
+                    <property name="spacing">12</property>
                     <child>
-                      <placeholder/>
+                      <object class="GtkLabel" id="label1">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Region:</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkComboBox" id="region_combobox">
+                        <property name="visible">True</property>
+                        <property name="model">region-liststore</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label4">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">City:</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkComboBox" id="city_combobox">
+                        <property name="visible">True</property>
+                        <property name="model">city-modelfilter</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">3</property>
+                      </packing>
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">False</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -71,7 +104,7 @@
               <object class="GtkVBox" id="vbox4">
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">6</property>
+                <property name="spacing">12</property>
                 <child>
                   <object class="GtkCheckButton" id="check_auto_update">
                     <property name="label" translatable="yes">Keep date and time updated automatically</property>
@@ -232,5 +265,24 @@
   <object class="GtkAdjustment" id="adjustment_min">
     <property name="upper">60</property>
     <property name="step_increment">1</property>
+  </object>
+  <object class="GtkListStore" id="region-liststore">
+    <columns>
+      <!-- column-name region -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="city-liststore">
+    <columns>
+      <!-- column-name city -->
+      <column type="gchararray"/>
+      <!-- column-name region -->
+      <column type="gchararray"/>
+      <!-- column-name location -->
+      <column type="gpointer"/>
+    </columns>
+  </object>
+  <object class="GtkTreeModelFilter" id="city-modelfilter">
+    <property name="child_model">city-liststore</property>
   </object>
 </interface>

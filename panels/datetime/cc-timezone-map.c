@@ -194,8 +194,8 @@ cc_timezone_map_size_request (GtkWidget      *widget,
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
 
-  req->width = gdk_pixbuf_get_width (priv->orig_background) / 2;
-  req->height = gdk_pixbuf_get_height (priv->orig_background) / 2;
+  req->width = gdk_pixbuf_get_width (priv->orig_background) * 0.7;
+  req->height = gdk_pixbuf_get_height (priv->orig_background) * 0.7;
 
   GTK_WIDGET_CLASS (cc_timezone_map_parent_class)->size_request (widget, req);
 }
@@ -356,6 +356,9 @@ cc_timezone_map_expose_event (GtkWidget      *widget,
 
       pointx = convert_longtitude_to_x (priv->location->longitude, alloc.width);
       pointy = convert_latitude_to_y (priv->location->latitude, alloc.height);
+
+      if (pointy > alloc.height)
+        pointy = alloc.height;
 
       /* allow for the line width */
       pointy -= 2;
@@ -638,4 +641,6 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
           break;
         }
     }
+
+  gtk_widget_queue_draw (GTK_WIDGET (map));
 }
