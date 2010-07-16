@@ -157,10 +157,10 @@ activate_panel (GnomeControlCenter *shell,
 
           gtk_widget_show (panel);
 
+          /* resize to the preferred size of the panel */
+          gtk_widget_set_size_request (priv->window, -1, -1);
           gtk_size_request_get_size (GTK_SIZE_REQUEST (priv->window), &min,
                                      &nat);
-
-          /* resize to the preferred size of the panel */
           gtk_window_resize (GTK_WINDOW (priv->window), nat.width, nat.height);
           return;
         }
@@ -225,8 +225,14 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
 
   /* resize back to the original overview size */
   if (priv->overview_width > 0 && priv->overview_height > 0)
-    gtk_window_resize (GTK_WINDOW (priv->window), priv->overview_width,
-                       priv->overview_height);
+    {
+      gtk_widget_set_size_request (priv->window,
+                                   priv->overview_width,
+                                   priv->overview_height);
+      gtk_window_resize (GTK_WINDOW (priv->window),
+                         priv->overview_width,
+                         priv->overview_height);
+    }
 }
 
 
