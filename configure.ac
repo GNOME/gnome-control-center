@@ -115,7 +115,7 @@ dnl Check that we meet the  dependencies
 dnl ==============================================
 
 COMMON_MODULES="gtk+-3.0 >= 2.90.0 dnl
- glib-2.0 >= 2.17.4 dnl
+ glib-2.0 >= 2.25.11 dnl
  gthread-2.0 dnl
  gio-2.0 dnl
  gconf-2.0 dnl
