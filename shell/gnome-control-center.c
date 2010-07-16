@@ -654,6 +654,8 @@ fill_model (GnomeControlCenter *shell)
                                            f->data);
                 }
             }
+
+          g_slist_free (contents);
         }
     }
 
