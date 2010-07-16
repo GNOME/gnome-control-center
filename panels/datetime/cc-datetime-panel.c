@@ -327,7 +327,7 @@ get_regions (TzLocation             *loc,
   gtk_list_store_insert_with_values (data->city_store, NULL, 0,
                                      0, split[1],
                                      1, split[0],
-                                     2, loc,
+                                     2, loc->zone,
                                      -1);
 
   g_strfreev (split);
@@ -389,6 +389,8 @@ load_regions_model (GtkListStore *regions, GtkListStore *cities)
                                         GTK_SORT_ASCENDING);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (cities), 0,
                                         GTK_SORT_ASCENDING);
+
+  tz_db_free (db);
 }
 
 static void
@@ -404,7 +406,7 @@ city_changed_cb (GtkComboBox     *box,
 {
   static gboolean inside = FALSE;
   GtkTreeIter iter;
-  TzLocation *location;
+  gchar *zone;
 
   /* prevent re-entry from location changed callback */
   if (inside)
@@ -415,10 +417,11 @@ city_changed_cb (GtkComboBox     *box,
   if (gtk_combo_box_get_active_iter (box, &iter))
     {
       gtk_tree_model_get (gtk_combo_box_get_model (box), &iter,
-                          2, &location, -1);
+                          2, &zone, -1);
 
-      cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map),
-                                    location->zone);
+      cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), zone);
+
+      g_free (zone);
     }
 
   inside = FALSE;
@@ -471,6 +474,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gtk_calendar_select_day (GTK_CALENDAR (widget), g_date_get_day (date));
   gtk_calendar_select_month (GTK_CALENDAR (widget), g_date_get_month (date) -1,
                              g_date_get_year (date));
+  g_date_free (date);
+  date = NULL;
 
   update_time (self);
 

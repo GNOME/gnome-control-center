@@ -128,6 +128,24 @@ tz_load_db (void)
 	return tz_db;
 }    
 
+static void
+tz_location_free (TzLocation *loc)
+{
+	g_free (loc->country);
+	g_free (loc->zone);
+	g_free (loc->comment);
+
+	g_free (loc);
+}
+
+void
+tz_db_free (TzDB *db)
+{
+	g_ptr_array_foreach (db->locations, tz_location_free, NULL);
+	g_ptr_array_free (db->locations, TRUE);
+	g_free (db);
+}
+
 GPtrArray *
 tz_get_locations (TzDB *db)
 {
@@ -178,7 +196,6 @@ tz_location_get_utc_offset (TzLocation *loc)
 gint
 tz_location_set_locally (TzLocation *loc)
 {
-	gchar *str;
 	time_t curtime;
 	struct tm *curzone;
 	gboolean is_dst = FALSE;
@@ -191,8 +208,7 @@ tz_location_set_locally (TzLocation *loc)
 	curzone = localtime (&curtime);
 	is_dst = curzone->tm_isdst;
 
-	str = g_strdup_printf ("TZ=%s", loc->zone);
-	putenv (str);
+	setenv ("TZ", loc->zone, 1);
 #if 0
 	curtime = time (NULL);
 	curzone = localtime (&curtime);
@@ -212,15 +228,13 @@ TzInfo *
 tz_info_from_location (TzLocation *loc)
 {
 	TzInfo *tzinfo;
-	gchar *str;
 	time_t curtime;
 	struct tm *curzone;
 	
 	g_return_val_if_fail (loc != NULL, NULL);
 	g_return_val_if_fail (loc->zone != NULL, NULL);
 	
-	str = g_strdup_printf ("TZ=%s", loc->zone);
-	putenv (str);
+	setenv ("TZ", loc->zone, 1);
 	
 #if 0
 	tzset ();

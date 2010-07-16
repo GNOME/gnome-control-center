@@ -179,7 +179,7 @@ cc_timezone_map_finalize (GObject *object)
 
   if (priv->tzdb)
     {
-      g_free (priv->tzdb);
+      tz_db_free (priv->tzdb);
       priv->tzdb = NULL;
     }
 
@@ -327,6 +327,9 @@ cc_timezone_map_expose_event (GtkWidget      *widget,
   file = g_strdup_printf (DATADIR "/timezone_%g.png",
                           priv->selected_offset);
   orig_hilight = gdk_pixbuf_new_from_file (file, &err);
+  g_free (file);
+  file = NULL;
+
   if (!orig_hilight)
     {
       g_warning ("Could not load hilight: %s",

@@ -70,6 +70,7 @@ struct _TzInfo
 
 
 TzDB      *tz_load_db                 (void);
+void       tz_db_free                 (TzDB *db);
 GPtrArray *tz_get_locations           (TzDB *db);
 void       tz_location_get_position   (TzLocation *loc,
 				       double *longitude, double *latitude);
