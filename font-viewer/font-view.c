@@ -93,6 +93,9 @@ check_font_contain_text (FT_Face face, const gchar *text)
     return TRUE;
 }
 
+
+static gboolean expose_event(GtkWidget *widget, GdkEventExpose *event, GdkPixmap *pixmap);
+
 static GdkPixmap *
 create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 {
@@ -118,9 +121,6 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 	}
 
     textlen = strlen(text);
-
-    /* create pixmap */
-    gtk_widget_realize(drawing_area);
 
     /* create the XftDraw */
     xdisplay = GDK_PIXMAP_XDISPLAY(window);
@@ -213,6 +213,9 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 	draw_string(xdisplay, draw, font, &colour, text, &pos_y);
 	XftFontClose(xdisplay, font);
     }
+
+    g_signal_connect(drawing_area, "expose-event", G_CALLBACK(expose_event),
+                     pixmap);
 
  end:
     g_free(sizes);
@@ -504,7 +507,6 @@ main(int argc, char **argv)
     GtkWidget *window, *hbox, *table, *swin, *drawing_area;
     GdkPixmap *pixmap;
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
-    gint height;
     GtkWidget *button, *align;
 
     bindtextdomain(GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -565,16 +567,12 @@ main(int argc, char **argv)
     gtk_widget_modify_bg(drawing_area, GTK_STATE_NORMAL, &white);
     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(swin),
 					  drawing_area);
-
-    pixmap = create_text_pixmap(drawing_area, face);
+    g_signal_connect (drawing_area, "realize", create_text_pixmap, face);
 
     /* set the minimum size on the scrolled window to prevent
      * unnecessary scrolling */
-    gdk_drawable_get_size (GDK_DRAWABLE (pixmap), NULL, &height);
-    gtk_widget_set_size_request(swin, 500, height + 30);
+    gtk_widget_set_size_request(swin, 500, -1);
 
-    g_signal_connect(drawing_area, "expose_event",
-		     G_CALLBACK(expose_event), pixmap);
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
     table = gtk_table_new(1, 2, FALSE);
