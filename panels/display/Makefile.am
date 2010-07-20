@@ -18,7 +18,7 @@ libdisplay_la_SOURCES = 	\
 	scrollarea.h		\
 	foo-marshal.h
 
-libdisplay_la_LIBADD = $(PANEL_LIBS)
+libdisplay_la_LIBADD = $(DBUS_LIBS) $(PANEL_LIBS)
 libdisplay_la_LDFLAGS = $(PANEL_LDFLAGS) $(DISPLAY_CAPPLET_LIBS)
 
 sbin_PROGRAMS = gnome-display-properties-install-systemwide
@@ -55,6 +55,7 @@ Desktop_in_files = gnome-display-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
+	     $(DBUS_CFLAGS) \
              $(GNOMECC_CAPPLETS_CFLAGS) \
 	     -DSBINDIR="\"$(sbindir)\"" \
 	     -DUIDIR="\"$(uidir)\"" \
