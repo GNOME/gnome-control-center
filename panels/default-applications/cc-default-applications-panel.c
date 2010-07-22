@@ -72,6 +72,13 @@ cc_default_applications_panel_dispose (GObject *object)
       g_object_unref (priv->capplet->gconf);
       gnome_da_xml_free (priv->capplet);
 
+      if (priv->capplet->theme_changed_id > 0)
+        {
+          g_signal_handler_disconnect (priv->capplet->icon_theme,
+                                       priv->capplet->theme_changed_id);
+          priv->capplet->theme_changed_id = 0;
+        }
+
       priv->capplet = NULL;
     }
 

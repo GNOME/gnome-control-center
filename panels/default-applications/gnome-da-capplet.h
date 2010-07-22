@@ -121,6 +121,8 @@ struct _GnomeDACapplet {
     GList *media_players;
     GList *visual_ats;
     GList *mobility_ats;
+
+    guint theme_changed_id;
 };
 
 void gnome_default_applications_panel_init (GnomeDACapplet *capplet);

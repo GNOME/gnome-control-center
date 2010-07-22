@@ -286,7 +286,7 @@ screen_changed_cb (GtkWidget *widget, GdkScreen *screen, GnomeDACapplet *capplet
     if (capplet->icon_theme != NULL) {
 	g_signal_handlers_disconnect_by_func (capplet->icon_theme, theme_changed_cb, capplet);
     }
-    g_signal_connect (theme, "changed", G_CALLBACK (theme_changed_cb), capplet);
+    capplet->theme_changed_id = g_signal_connect (theme, "changed", G_CALLBACK (theme_changed_cb), capplet);
     theme_changed_cb (theme, capplet);
 
     capplet->icon_theme = theme;
