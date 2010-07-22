@@ -22,6 +22,7 @@
 #include "cc-default-applications-panel.h"
 
 #include "gnome-da-capplet.h"
+#include "gnome-da-xml.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcDefaultApplicationsPanel, cc_default_applications_panel, CC_TYPE_PANEL)
 
