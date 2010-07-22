@@ -194,8 +194,8 @@ cc_timezone_map_size_request (GtkWidget      *widget,
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
 
-  req->width = gdk_pixbuf_get_width (priv->orig_background) * 0.7;
-  req->height = gdk_pixbuf_get_height (priv->orig_background) * 0.7;
+  req->width = gdk_pixbuf_get_width (priv->orig_background) * 0.6;
+  req->height = gdk_pixbuf_get_height (priv->orig_background) * 0.6;
 
   GTK_WIDGET_CLASS (cc_timezone_map_parent_class)->size_request (widget, req);
 }
