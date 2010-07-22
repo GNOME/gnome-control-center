@@ -73,8 +73,12 @@ struct _GnomeControlCenterPrivate
   gchar *default_window_title;
   gchar *default_window_icon;
 
-  gint overview_width, overview_height;
+  gint overview_height;
 };
+
+/* Use a fixed width for the shell, since resizing horizontally is more awkward
+ * for the user than resizing vertically */
+#define FIXED_WIDTH 750
 
 
 static void
@@ -140,7 +144,6 @@ activate_panel (GnomeControlCenter *shell,
               GtkAllocation alloc;
 
               gtk_widget_get_allocation (priv->window, &alloc);
-              priv->overview_width = alloc.width;
               priv->overview_height = alloc.height;
             }
 
@@ -158,10 +161,11 @@ activate_panel (GnomeControlCenter *shell,
           gtk_widget_show (panel);
 
           /* resize to the preferred size of the panel */
-          gtk_widget_set_size_request (priv->window, -1, -1);
+          gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
           gtk_size_request_get_size (GTK_SIZE_REQUEST (priv->window), &min,
                                      &nat);
-          gtk_window_resize (GTK_WINDOW (priv->window), nat.width, nat.height);
+          gtk_window_resize (GTK_WINDOW (priv->window), FIXED_WIDTH,
+                             nat.height);
           return;
         }
     }
@@ -223,14 +227,14 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
                             priv->default_window_icon);
 
-  /* resize back to the original overview size */
-  if (priv->overview_width > 0 && priv->overview_height > 0)
+  /* resize back to the original overview height */
+  if (priv->overview_height > 0)
     {
       gtk_widget_set_size_request (priv->window,
-                                   priv->overview_width,
+                                   FIXED_WIDTH,
                                    priv->overview_height);
       gtk_window_resize (GTK_WINDOW (priv->window),
-                         priv->overview_width,
+                         FIXED_WIDTH,
                          priv->overview_height);
     }
 }
