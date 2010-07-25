@@ -365,6 +365,8 @@ panels/default-applications/gnome-default-applications-panel.desktop.in
 panels/default-applications/gnome-default-applications.pc
 panels/display/Makefile
 panels/display/gnome-display-panel.desktop.in
+panels/fonts/Makefile
+panels/fonts/gnome-fonts-panel.desktop.in
 panels/keybindings/Makefile
 panels/keybindings/gnome-keybindings-panel.desktop.in
 panels/keybindings/gnome-keybindings.pc

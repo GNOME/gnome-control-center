@@ -1,4 +1,5 @@
 SUBDIRS=display \
+	fonts \
 	mouse \
 	keyboard \
 	network \
