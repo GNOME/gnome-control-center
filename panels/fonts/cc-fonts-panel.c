@@ -1019,8 +1019,6 @@ cc_fonts_panel_init (CcFontsPanel *panel)
 
   priv->builder = gtk_builder_new ();
 
-  g_print ("ZZZZZ %s\n", GNOMECC_UI_DIR"/gnome-font-properties.ui");
-
   gtk_builder_add_objects_from_file (priv->builder,
                                      GNOMECC_UI_DIR"/gnome-font-properties.ui",
                                      objects,
@@ -1046,7 +1044,6 @@ cc_fonts_panel_init (CcFontsPanel *panel)
 #endif  /* HAVE_XFT2 */
 
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "fonts_panel");
-  if (!widget) g_print ("lala\n");
   gtk_widget_show (widget);
   gtk_container_add (GTK_CONTAINER (panel), widget);
 
