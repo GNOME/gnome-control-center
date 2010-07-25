@@ -81,6 +81,7 @@ struct _CcFontsPanelPrivate
   GtkBuilder *builder;
   GConfClient *client;
   GSList *font_groups;
+  GSList *font_pairs;
   GtkWidget *font_details;
 };
 
@@ -373,21 +374,20 @@ typedef struct {
   GtkToggleButton *radio;
 } FontPair;
 
-static GSList *font_pairs = NULL;
-
 static void
-font_render_load (GConfClient *client)
+font_render_load (CcFontsPanel *panel)
 {
+  CcFontsPanelPrivate *priv = panel->priv;
   Antialiasing antialiasing;
   Hinting hinting;
   gboolean inconsistent = TRUE;
   GSList *tmp_list;
 
-  font_render_get_gconf (client, &antialiasing, &hinting);
+  font_render_get_gconf (priv->client, &antialiasing, &hinting);
 
   in_change = TRUE;
 
-  for (tmp_list = font_pairs; tmp_list; tmp_list = tmp_list->next) {
+  for (tmp_list = priv->font_pairs; tmp_list; tmp_list = tmp_list->next) {
     FontPair *pair = tmp_list->data;
 
     if (antialiasing == pair->antialiasing && hinting == pair->hinting) {
@@ -397,7 +397,7 @@ font_render_load (GConfClient *client)
     }
   }
 
-  for (tmp_list = font_pairs; tmp_list; tmp_list = tmp_list->next) {
+  for (tmp_list = priv->font_pairs; tmp_list; tmp_list = tmp_list->next) {
     FontPair *pair = tmp_list->data;
 
     gtk_toggle_button_set_inconsistent (pair->radio, inconsistent);
@@ -412,35 +412,40 @@ font_render_changed (GConfClient *client,
                      GConfEntry  *entry,
                      gpointer     user_data)
 {
-  font_render_load (client);
+  font_render_load (user_data);
 }
 
 static void
 font_radio_toggled (GtkToggleButton *toggle_button,
-		    FontPair        *pair)
+		    CcFontsPanel    *panel)
 {
-  if (!in_change) {
-    GConfClient *client = gconf_client_get_default ();
+  CcFontsPanelPrivate *priv = panel->priv;
 
-    gconf_client_set_string (client, FONT_ANTIALIASING_KEY,
+  if (!in_change) {
+    FontPair *pair;
+
+    pair = g_object_get_data (G_OBJECT (toggle_button), "font-pair");
+
+    gconf_client_set_string (priv->client, FONT_ANTIALIASING_KEY,
 			     gconf_enum_to_string (antialias_enums, pair->antialiasing),
 			     NULL);
-    gconf_client_set_string (client, FONT_HINTING_KEY,
+    gconf_client_set_string (priv->client, FONT_HINTING_KEY,
 			     gconf_enum_to_string (hint_enums, pair->hinting),
 			     NULL);
 
     /* Restore back to the previous state until we get notification */
-    font_render_load (client);
-    g_object_unref (client);
+    font_render_load (panel);
   }
 }
 
 static void
-setup_font_pair (GtkWidget    *radio,
+setup_font_pair (CcFontsPanel *panel,
+		 GtkWidget    *radio,
 		 GtkWidget    *darea,
 		 Antialiasing  antialiasing,
 		 Hinting       hinting)
 {
+  CcFontsPanelPrivate *priv = panel->priv;
   FontPair *pair = g_new (FontPair, 1);
 
   pair->antialiasing = antialiasing;
@@ -448,10 +453,11 @@ setup_font_pair (GtkWidget    *radio,
   pair->radio = GTK_TOGGLE_BUTTON (radio);
 
   setup_font_sample (darea, antialiasing, hinting);
-  font_pairs = g_slist_prepend (font_pairs, pair);
+  priv->font_pairs = g_slist_prepend (priv->font_pairs, pair);
 
+  g_object_set_data (G_OBJECT (radio), "font-pair", pair);
   g_signal_connect (radio, "toggled",
-		    G_CALLBACK (font_radio_toggled), pair);
+		    G_CALLBACK (font_radio_toggled), panel);
 }
 #endif /* HAVE_XFT2 */
 
@@ -978,9 +984,9 @@ cc_fonts_panel_finalize (GObject *object)
 
   g_slist_foreach (priv->font_groups, (GFunc) enum_group_destroy, NULL);
   g_slist_free (priv->font_groups);
-  g_slist_foreach (font_pairs, (GFunc) g_free, NULL);
-  g_slist_free (font_pairs);
-  g_free (old_font);
+  g_slist_foreach (priv->font_pairs, (GFunc) g_free, NULL);
+  g_slist_free (priv->font_pairs);
+/*  g_free (old_font);*/
 
   G_OBJECT_CLASS (cc_fonts_panel_parent_class)->finalize (object);
 }
@@ -1031,6 +1037,7 @@ cc_fonts_panel_init (CcFontsPanel *panel)
 
   priv->font_details = NULL;
   priv->font_groups = NULL;
+  priv->font_pairs = NULL;
 
   gconf_client_add_dir (priv->client, "/desktop/gnome/interface",
 			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -1080,24 +1087,28 @@ cc_fonts_panel_init (CcFontsPanel *panel)
   metacity_titlebar_load_sensitivity (panel);
 
 #ifdef HAVE_XFT2
-  setup_font_pair ((GtkWidget *) gtk_builder_get_object (priv->builder,  "monochrome_radio"),
+  setup_font_pair (panel,
+                   (GtkWidget *) gtk_builder_get_object (priv->builder,  "monochrome_radio"),
                    (GtkWidget *) gtk_builder_get_object (priv->builder,  "monochrome_sample"),
                    ANTIALIAS_NONE, HINT_FULL);
-  setup_font_pair ((GtkWidget *) gtk_builder_get_object (priv->builder,  "best_shapes_radio"),
+  setup_font_pair (panel,
+                   (GtkWidget *) gtk_builder_get_object (priv->builder,  "best_shapes_radio"),
                    (GtkWidget *) gtk_builder_get_object (priv->builder,  "best_shapes_sample"),
                    ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
-  setup_font_pair ((GtkWidget *) gtk_builder_get_object (priv->builder,  "best_contrast_radio"),
+  setup_font_pair (panel,
+                   (GtkWidget *) gtk_builder_get_object (priv->builder,  "best_contrast_radio"),
                    (GtkWidget *) gtk_builder_get_object (priv->builder,  "best_contrast_sample"),
                    ANTIALIAS_GRAYSCALE, HINT_FULL);
-  setup_font_pair ((GtkWidget *) gtk_builder_get_object (priv->builder,  "subpixel_radio"),
+  setup_font_pair (panel,
+                   (GtkWidget *) gtk_builder_get_object (priv->builder,  "subpixel_radio"),
                    (GtkWidget *) gtk_builder_get_object (priv->builder,  "subpixel_sample"),
                    ANTIALIAS_RGBA, HINT_FULL);
 
-  font_render_load (priv->client);
+  font_render_load (panel);
 
   gconf_client_notify_add (priv->client, FONT_RENDER_DIR,
 			   font_render_changed,
-			   priv->client, NULL, NULL);
+			   panel, NULL, NULL);
 
   g_signal_connect ((GtkWidget *) gtk_builder_get_object (priv->builder,  "details_button"),
                     "clicked", G_CALLBACK (cb_show_details), panel);
