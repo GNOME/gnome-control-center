@@ -112,6 +112,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     XftFont *font;
     gint *sizes = NULL, n_sizes, alpha_size;
     FcCharSet *charset = NULL;
+    cairo_t *cr;
     GdkWindow *window = gtk_widget_get_window (drawing_area);
 
     text = pango_language_get_sample_string(NULL);
@@ -192,8 +193,11 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 			    pixmap_width, pixmap_height, -1);
     if (!pixmap)
 	goto end;
-    gdk_draw_rectangle(pixmap, gtk_widget_get_style(drawing_area)->white_gc,
-		       TRUE, 0, 0, pixmap_width, pixmap_height);
+    
+    cr = gdk_cairo_create (pixmap);
+    cairo_set_source_rgb (cr, 1, 1, 1);
+    cairo_paint (cr);
+    cairo_destroy (cr);
 
     xdrawable = GDK_DRAWABLE_XID(pixmap);
     draw = XftDrawCreate(xdisplay, xdrawable, xvisual, xcolormap);
@@ -376,12 +380,16 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 static gboolean
 expose_event(GtkWidget *widget, GdkEventExpose *event, GdkPixmap *pixmap)
 {
-    gdk_draw_drawable(gtk_widget_get_window (widget),
-		      gtk_widget_get_style (widget)->fg_gc[gtk_widget_get_state (widget)],
-		      pixmap,
-		      event->area.x, event->area.y,
-		      event->area.x, event->area.y,
-		      event->area.width, event->area.height);
+    cairo_t *cr;
+
+    cr = gdk_cairo_create (gtk_widget_get_window (widget));
+
+    gdk_cairo_set_source_pixmap (cr, pixmap, 0, 0);
+    gdk_cairo_region (cr, event->region);
+    cairo_fill (cr);
+
+    cairo_destroy (cr);
+
     return FALSE;
 }
 
@@ -505,7 +513,6 @@ main(int argc, char **argv)
     gchar *font_file, *title;
     gint row;
     GtkWidget *window, *hbox, *table, *swin, *drawing_area;
-    GdkPixmap *pixmap;
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
     GtkWidget *button, *align;
 
@@ -567,7 +574,7 @@ main(int argc, char **argv)
     gtk_widget_modify_bg(drawing_area, GTK_STATE_NORMAL, &white);
     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(swin),
 					  drawing_area);
-    g_signal_connect (drawing_area, "realize", create_text_pixmap, face);
+    g_signal_connect (drawing_area, "realize", G_CALLBACK (create_text_pixmap), face);
 
     /* set the minimum size on the scrolled window to prevent
      * unnecessary scrolling */

@@ -150,6 +150,7 @@ set_pixmap_background (GtkWidget *window)
 	GdkRectangle  rect;
 	GdkColor      color;
 	gint          width, height;
+        cairo_t      *cr;
 
 	gtk_widget_realize (window);
 
@@ -205,18 +206,10 @@ set_pixmap_background (GtkWidget *window)
 				 height,
 				 -1);
 
-	gdk_draw_pixbuf (pixmap,
-                         NULL, 
-                         tmp_pixbuf,
-                         0,
-                         0,
-                         0,
-                         0,
-                         width,
-                         height,
-                         GDK_RGB_DITHER_NONE,
-                         0,
-                         0);
+        cr = gdk_cairo_create (pixmap);
+        gdk_cairo_set_source_pixbuf (cr, tmp_pixbuf, 0, 0);
+        cairo_paint (cr);
+        cairo_destroy (cr);
 
 	g_object_unref (tmp_pixbuf);
 
