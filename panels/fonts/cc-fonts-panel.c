@@ -854,14 +854,15 @@ cb_show_details (GtkWidget *button, CcFontsPanel *panel)
   CcFontsPanelPrivate *priv = panel->priv;
 
   if (!priv->font_details) {
+    GtkWindow *window;
     GtkAdjustment *adjustment;
     GtkWidget *widget;
     EnumGroup *group;
 
     priv->font_details = (GtkWidget *) gtk_builder_get_object (priv->builder,  "render_details");
 
-    gtk_window_set_transient_for (GTK_WINDOW (priv->font_details),
-                                  GTK_WINDOW ((GtkWidget *) gtk_builder_get_object (priv->builder,  "appearance_window")));
+    window = gtk_widget_get_toplevel (button);
+    gtk_window_set_transient_for (GTK_WINDOW (priv->font_details), window);
 
     widget = (GtkWidget *) gtk_builder_get_object (priv->builder,  "dpi_spinner");
 
@@ -1014,7 +1015,7 @@ static void
 cc_fonts_panel_init (CcFontsPanel *panel)
 {
   CcFontsPanelPrivate *priv;
-  gchar *objects[] = {"fonts_panel", "details_dialog", NULL};
+  gchar *objects[] = {"fonts_panel", "render_details", NULL};
   GObject *peditor;
   GtkWidget *widget;
   GError *error = NULL;
