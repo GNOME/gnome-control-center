@@ -26,6 +26,13 @@ libfonts_la_LDFLAGS = \
 	$(PANEL_LDFLAGS) \
 	$(FONT_CAPPLET_LDFLAGS)
 
+pixmapdir = $(pkgdatadir)/pixmaps
+dist_pixmap_DATA = \
+        subpixel-bgr.png \
+        subpixel-rgb.png \
+        subpixel-vbgr.png \
+        subpixel-vrgb.png
+
 @INTLTOOL_DESKTOP_RULE@
 
 uidir = $(pkgdatadir)/ui
