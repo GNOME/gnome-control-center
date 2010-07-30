@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-05-01 19:59+0000\n"
-"PO-Revision-Date: 2010-05-02 11:03+0200\n"
+"POT-Creation-Date: 2010-07-29 16:43+0000\n"
+"PO-Revision-Date: 2010-07-30 08:27+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -631,7 +631,7 @@ msgstr "Autenticado"
 #. Update status message and auth state
 #. Authentication failure
 #: ../capplets/about-me/gnome-about-me-password.c:474
-#: ../capplets/about-me/gnome-about-me-password.c:554
+#: ../capplets/about-me/gnome-about-me-password.c:559
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
@@ -643,65 +643,70 @@ msgstr ""
 msgid "That password was incorrect."
 msgstr "Esa contraseña fue incorrecta."
 
-#: ../capplets/about-me/gnome-about-me-password.c:525
+#: ../capplets/about-me/gnome-about-me-password.c:527
 msgid "Your password has been changed."
 msgstr "Su contraseña se ha cambiado."
 
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:535
+#: ../capplets/about-me/gnome-about-me-password.c:537
 #, c-format
 msgid "System error: %s."
 msgstr "Error del sistema: %s."
 
-#: ../capplets/about-me/gnome-about-me-password.c:538
+#: ../capplets/about-me/gnome-about-me-password.c:540
 msgid "The password is too short."
 msgstr "La contraseña es demasiado corta."
 
-#: ../capplets/about-me/gnome-about-me-password.c:542
+#: ../capplets/about-me/gnome-about-me-password.c:544
 msgid "The password is too simple."
 msgstr "La contraseña es demasiado simple."
 
-#: ../capplets/about-me/gnome-about-me-password.c:546
+#: ../capplets/about-me/gnome-about-me-password.c:549
 msgid "The old and new passwords are too similar."
 msgstr "La contraseña antigua y la nueva son demasiado similares."
 
-#: ../capplets/about-me/gnome-about-me-password.c:548
+#: ../capplets/about-me/gnome-about-me-password.c:551
 msgid "The new password must contain numeric or special character(s)."
 msgstr "La contraseña nueva debe contener caracteres numéricos o especiales."
 
-#: ../capplets/about-me/gnome-about-me-password.c:551
+#: ../capplets/about-me/gnome-about-me-password.c:554
 msgid "The old and new passwords are the same."
 msgstr "La contraseña nueva y la antigua son la misma."
 
+#: ../capplets/about-me/gnome-about-me-password.c:556
+#| msgid "The two passwords are not equal."
+msgid "The new password has already been used recently."
+msgstr "La contraseña nueva ya se ha usado recientemente."
+
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:827
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "No se puede lanzar %s: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:826
+#: ../capplets/about-me/gnome-about-me-password.c:831
 msgid "Unable to launch backend"
 msgstr "Imposible lanzar el backend"
 
-#: ../capplets/about-me/gnome-about-me-password.c:827
+#: ../capplets/about-me/gnome-about-me-password.c:832
 msgid "A system error has occurred"
 msgstr "Ha ocurrido un error del sistema"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:847
+#: ../capplets/about-me/gnome-about-me-password.c:852
 msgid "Checking password..."
 msgstr "Comprobando contraseña…"
 
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:939
 msgid "Click <b>Change password</b> to change your password."
 msgstr "Pulse en <b>Cambiar contraseña</b> para cambiar su contraseña."
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:942
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "Teclee su contraseña en el campo <b>Contraseña nueva</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:940
+#: ../capplets/about-me/gnome-about-me-password.c:945
 #: ../capplets/about-me/gnome-about-me-password.ui.h:5
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
@@ -709,7 +714,7 @@ msgstr ""
 "Por favor, teclee la contraseña de nuevo en el campo <b>Teclee la contraseña "
 "nueva otra vez</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:943
+#: ../capplets/about-me/gnome-about-me-password.c:948
 msgid "The two passwords are not equal."
 msgstr "Las dos contraseñas no son iguales."
 
@@ -2228,21 +2233,18 @@ msgid "This program can only be used by the root user"
 msgstr "Sólo el usuario «root» puede usar este programa"
 
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:168
-#| msgid "Theme name must be present"
 msgid "The source filename must be absolute"
 msgstr "El origen del nombre del archivo debe ser absoluto"
 
 #. Translators: first %s is a filename; second %s is an error message
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:179
 #, c-format
-#| msgid "Could not access '%s' device"
 msgid "Could not open %s: %s\n"
 msgstr "No se pudo abrir %s: %s\n"
 
 #. Translators: first %s is a filename; second %s is an error message
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:188
 #, c-format
-#| msgid "Could not get screen information"
 msgid "Could not get information for %s: %s\n"
 msgstr "No se pudo obtener la información para %s: %s\n"
 
@@ -2279,7 +2281,6 @@ msgstr "%s debe ser un directorio\n"
 #. Translators: the first %s/%s is a directory/filename; the last %s is an error message
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:242
 #, c-format
-#| msgid "Could not access '%s' device"
 msgid "Could not open %s/%s: %s\n"
 msgstr "No se pudo abrir %s/%s: %s\n"
 
@@ -2786,22 +2787,26 @@ msgid "_Separate layout for each window"
 msgstr "Separar la _distribución para cada ventana"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:54
+msgid "_Show..."
+msgstr "_Mostrar…"
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
 msgid "_Simulate simultaneous keypresses"
 msgstr "_Simular pulsaciones de múltiples teclas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
 msgid "_Speed:"
 msgstr "Ve_locidad:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
 msgid "_Type to test settings:"
 msgstr "_Teclee para probar la configuración:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
 msgid "_Work interval lasts:"
 msgstr "D_uración del intervalo de trabajo:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:59
 msgid "minutes"
 msgstr "minutos"
 
@@ -2853,7 +2858,7 @@ msgstr "Opciones de distribución del teclado"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:242
 msgid "Layout"
 msgstr "Distribución"
 
@@ -3584,48 +3589,48 @@ msgstr "Indica si debe miniaturizar las tipografías TrueType"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Indica si debe miniaturizar las tipografías Type1"
 
-#: ../font-viewer/font-view.c:290
+#: ../font-viewer/font-view.c:293
 msgid "Name:"
 msgstr "Nombre:"
 
-#: ../font-viewer/font-view.c:293
+#: ../font-viewer/font-view.c:296
 msgid "Style:"
 msgstr "Estilo:"
 
-#: ../font-viewer/font-view.c:306
+#: ../font-viewer/font-view.c:309
 msgid "Type:"
 msgstr "Tipo:"
 
-#: ../font-viewer/font-view.c:310
+#: ../font-viewer/font-view.c:313
 msgid "Size:"
 msgstr "Tamaño:"
 
-#: ../font-viewer/font-view.c:354 ../font-viewer/font-view.c:367
+#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:370
 msgid "Version:"
 msgstr "Versión:"
 
-#: ../font-viewer/font-view.c:358 ../font-viewer/font-view.c:369
+#: ../font-viewer/font-view.c:361 ../font-viewer/font-view.c:372
 msgid "Copyright:"
 msgstr "Copyright:"
 
-#: ../font-viewer/font-view.c:362
+#: ../font-viewer/font-view.c:365
 msgid "Description:"
 msgstr "Descripción:"
 
-#: ../font-viewer/font-view.c:442
+#: ../font-viewer/font-view.c:445
 msgid "Installed"
 msgstr "Instalado"
 
-#: ../font-viewer/font-view.c:445
+#: ../font-viewer/font-view.c:448
 msgid "Install Failed"
 msgstr "Falló la instalación"
 
-#: ../font-viewer/font-view.c:517
+#: ../font-viewer/font-view.c:519
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "uso: %s archivo de tipografías\n"
 
-#: ../font-viewer/font-view.c:592
+#: ../font-viewer/font-view.c:590
 msgid "I_nstall Font"
 msgstr "I_nstalar tipografía"
 
