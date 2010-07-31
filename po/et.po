@@ -14,12 +14,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNOME Control Center MASTER\n"
+"Project-Id-Version: GNOME Control Center 2.32\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-04-24 05:17+0000\n"
-"PO-Revision-Date: 2010-05-03 23:07+0300\n"
-"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"POT-Creation-Date: 2010-07-29 16:43+0000\n"
+"PO-Revision-Date: 2010-07-30 11:33+0300\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -518,6 +518,9 @@ msgstr "Uus parool peab sisaldama numbreid või erimärke."
 
 msgid "The old and new passwords are the same."
 msgstr "Vana ja uus parool on ühesugused."
+
+msgid "The new password has already been used recently."
+msgstr "Uus parool on hiljuti kasutusel olnud."
 
 #. translators: Unable to launch <program>: <error message>
 #, c-format
@@ -1646,7 +1649,7 @@ msgid "Right"
 msgstr "Paremale"
 
 msgid "Sa_me image in all monitors"
-msgstr "Sama pilt kõi_gil ekraanidel"
+msgstr "Sama pilt kõi_gil kuvaritel"
 
 msgid "Upside-down"
 msgstr "Tagurpidi"
@@ -1665,6 +1668,93 @@ msgstr "Kuvarite eraldusvõime ja asukoha muutmine"
 
 msgid "Monitors"
 msgstr "Kuvarid"
+
+#, c-format
+msgid ""
+"Usage: %s SOURCE_FILE DEST_NAME\n"
+"\n"
+"This program installs a RANDR profile for multi-monitor setups into\n"
+"a systemwide location.  The resulting profile will get used when\n"
+"the RANDR plug-in gets run in gnome-settings-daemon.\n"
+"\n"
+"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+"xml\n"
+"\n"
+"DEST_NAME - relative name for the installed file.  This will get put in\n"
+"            the systemwide directory for RANDR configurations,\n"
+"            so the result will typically be %s/DEST_NAME\n"
+msgstr ""
+"Kasutamine: %s LÄHTEFAIL SIHTNIMI\n"
+"\n"
+"See programm paigaldab mitme kuvari sätete jaoks vajaliku RANDR-profiili\n"
+"süsteemsesse asukohta. Seda profiili kasutatakse olukorras, kus GNOME\n"
+"sätetedeemon (gnome-settings-daemon) käivitab RANDR-plugina.\n"
+"\n"
+"LÄHTEFAIL - täielik rada, harilikult /home/kasutajanimi/.config/monitors."
+"xml\n"
+"\n"
+"SIHTNIMI - paigaldatud faili suhteline nimi. See fail pannakse\n"
+"           RANDR-seadistuste ülesüsteemilisse kataloogi, harilikult\n"
+"           on selleks %s/SIHTNIMI\n"
+
+#. Translators: only able to install RANDR profiles as root
+msgid "This program can only be used by the root user"
+msgstr "Seda programmi tohib kasutada ainult juurkasutaja"
+
+msgid "The source filename must be absolute"
+msgstr "Lähtefaili nimi peab olema täieliku rajaga"
+
+#. Translators: first %s is a filename; second %s is an error message
+#, c-format
+msgid "Could not open %s: %s\n"
+msgstr "Faili %s pole võimalik avada: %s\n"
+
+#. Translators: first %s is a filename; second %s is an error message
+#, c-format
+msgid "Could not get information for %s: %s\n"
+msgstr "Faili %s kohta pole võimalik andmeid hankida:%s\n"
+
+#, c-format
+msgid "%s must be a regular file\n"
+msgstr "%s peab olema tavaline fail\n"
+
+msgid "This program must only be run through pkexec(1)"
+msgstr "See programm peab olema käivitatud pkexec(1) kaudu"
+
+msgid "PKEXEC_UID must be set to an integer value"
+msgstr "PKEXEC_UID väärtus peab olema täisarv"
+
+#. Translators: we are complaining that a file must be really owned by the user who called this program
+#, c-format
+msgid "%s must be owned by you\n"
+msgstr "Fail %s peab kuuluma sulle\n"
+
+#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
+#, c-format
+msgid "%s must not have any directory components\n"
+msgstr "%s ei tohi sisaldada viiteid kataloogidele\n"
+
+#, c-format
+msgid "%s must be a directory\n"
+msgstr "%s peab olema kataloog\n"
+
+#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
+#, c-format
+msgid "Could not open %s/%s: %s\n"
+msgstr "Faili %s/%s pole võimalik avada: %s\n"
+
+#, c-format
+msgid "Could not rename %s to %s: %s\n"
+msgstr "Nime muutmine %s -> %s pole võimalik: %s\n"
+
+msgid ""
+"Authentication is required to install multi-monitor settings for all users"
+msgstr ""
+"Kõigile kasutajatele mitme kuvari sätete paigaldamiseks on vajalik ennast "
+"autentida"
+
+msgid "Install multi-monitor settings for the whole system"
+msgstr "Mitme kuvari sätete paigaldamine kogu süsteemile"
 
 msgid "Upside Down"
 msgstr "Pea peal"
@@ -2019,6 +2109,9 @@ msgstr "_Kursorit on võimalik juhtida klaviatuuri abil"
 
 msgid "_Separate layout for each window"
 msgstr "Eraldi _paigutus iga akna jaoks"
+
+msgid "_Show..."
+msgstr "_Näita..."
 
 msgid "_Simulate simultaneous keypresses"
 msgstr "_Mitme klahvi allhoidmisi simuleeritakse"
@@ -2787,21 +2880,3 @@ msgstr "<b>Ava %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Eemalda süsteemikirjetest"
-
-#~ msgid "_Jabber:"
-#~ msgstr "_Jabber:"
-
-#~ msgid "Display Preferences"
-#~ msgstr "Kuvaeelistused"
-
-#~ msgid "Drag the monitors to set their place"
-#~ msgstr "Kuvarite asukoha määramiseks lohista need sobivale kohale"
-
-#~ msgid "_Mirror screens"
-#~ msgstr "Ekraanid on pee_geldatud"
-
-#~ msgid "Change screen resolution"
-#~ msgstr "Ekraani eraldusvõime muutmine"
-
-#~ msgid "Display"
-#~ msgstr "Kuva"
