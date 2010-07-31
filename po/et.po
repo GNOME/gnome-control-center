@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-06-07 16:06+0000\n"
-"PO-Revision-Date: 2010-06-09 10:18+0300\n"
+"POT-Creation-Date: 2010-07-29 16:43+0000\n"
+"PO-Revision-Date: 2010-07-30 11:33+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -520,7 +520,7 @@ msgid "The old and new passwords are the same."
 msgstr "Vana ja uus parool on ühesugused."
 
 msgid "The new password has already been used recently."
-msgstr "Uut parooli on hiljuti juba kasutatud."
+msgstr "Uus parool on hiljuti kasutusel olnud."
 
 #. translators: Unable to launch <program>: <error message>
 #, c-format
@@ -581,6 +581,53 @@ msgstr "_Uus parool:"
 
 msgid "_Retype new password:"
 msgstr "Uus pa_rool uuesti:"
+
+msgid "Accessible Lo_gin"
+msgstr "_Hõlbustustega sisselogimine"
+
+msgid "Assistive Technologies"
+msgstr "Abistav tehnika"
+
+msgid "Assistive Technologies Preferences"
+msgstr "Abistava tehnika eelistused"
+
+msgid ""
+"Changes to enable assistive technologies will not take effect until your "
+"next log in."
+msgstr "Abistavate tehnikate lubamine rakendub alles järgmisel sisselogimisel."
+
+msgid "Close and _Log Out"
+msgstr "Sulge ja _logi välja"
+
+msgid "Jump to Preferred Applications dialog"
+msgstr "Eelistatud rakenduste dialoogi avamine"
+
+msgid "Jump to the Accessible Login dialog"
+msgstr "Abistava tehnika toega sisselogimise dialoogi avamine"
+
+msgid "Jump to the Keyboard Accessibility dialog"
+msgstr "Klaviatuurihõlbustuste dialoogi avamine"
+
+msgid "Jump to the Mouse Accessibility dialog"
+msgstr "Hiirehõlbustuste dialoogi avamine"
+
+msgid "Preferences"
+msgstr "Eelistused"
+
+msgid "_Enable assistive technologies"
+msgstr "_Abistav tehnika on lubatud"
+
+msgid "_Keyboard Accessibility"
+msgstr "_Klaviatuurihõlbustused"
+
+msgid "_Mouse Accessibility"
+msgstr "_Hiirehõlbustused"
+
+msgid "_Preferred Applications"
+msgstr "_Eelistatud rakendused"
+
+msgid "Choose which accessibility features to enable when you log in"
+msgstr "Sisselogimisel kasutatavate hõlbustuste valimine"
 
 msgid "Add Wallpaper"
 msgstr "Tapeedi lisamine"
@@ -660,8 +707,8 @@ msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
 "'%s' is not installed."
 msgstr ""
-"See teema ei näe välja selline nagu peaks, kuna vajalik GTK+ teemamootor "
-"'%s' pole paigaldatud."
+"See teema ei näe välja selline nagu peaks, kuna vajalik GTK+ teemamootor '%"
+"s' pole paigaldatud."
 
 msgid "Apply Background"
 msgstr "Rakenda taust"
@@ -775,7 +822,6 @@ msgstr "Ikoonid"
 msgid "Icons only"
 msgstr "Ainult ikoonid"
 
-#. large threshold
 msgid "Large"
 msgstr "Suur"
 
@@ -806,7 +852,6 @@ msgstr "Salvesta _taustapilt"
 msgid "Scale"
 msgstr "Kogu pilt nähtaval"
 
-#. small threshold
 msgid "Small"
 msgstr "Väike"
 
@@ -1292,8 +1337,8 @@ msgid ""
 "This theme will not look as intended because the required window manager "
 "theme '%s' is not installed."
 msgstr ""
-"See teema ei näe välja selline nagu peaks, kuna vajalik aknahalduri teema "
-"'%s' pole paigaldatud."
+"See teema ei näe välja selline nagu peaks, kuna vajalik aknahalduri teema '%"
+"s' pole paigaldatud."
 
 #, c-format
 msgid ""
@@ -1324,6 +1369,13 @@ msgstr "Peamist liidest pole võimalik laadida"
 
 msgid "Please make sure that the applet is properly installed"
 msgstr "Veendu, et rakend on õigesti paigaldatud"
+
+#. TRANSLATORS: don't translate the terms in brackets
+msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
+msgstr "Määra näidatava lehe nimi (internet|multimedia|system|a11y)"
+
+msgid "- GNOME Default Applications"
+msgstr "- GNOME vaikimisi rakendused"
 
 msgid "Accessibility"
 msgstr "Hõlbustused"
@@ -1572,6 +1624,9 @@ msgstr "Määra vaikimisi sätteks"
 msgid "Monitor"
 msgstr "Kuvar"
 
+msgid "Monitor Preferences"
+msgstr "Kuvari eelistused"
+
 msgid "Normal"
 msgstr "Tavaline"
 
@@ -1594,7 +1649,7 @@ msgid "Right"
 msgstr "Paremale"
 
 msgid "Sa_me image in all monitors"
-msgstr "Sama pilt kõi_gil ekraanidel"
+msgstr "Sama pilt kõi_gil kuvaritel"
 
 msgid "Upside-down"
 msgstr "Tagurpidi"
@@ -1629,13 +1684,25 @@ msgid ""
 "            the systemwide directory for RANDR configurations,\n"
 "            so the result will typically be %s/DEST_NAME\n"
 msgstr ""
+"Kasutamine: %s LÄHTEFAIL SIHTNIMI\n"
+"\n"
+"See programm paigaldab mitme kuvari sätete jaoks vajaliku RANDR-profiili\n"
+"süsteemsesse asukohta. Seda profiili kasutatakse olukorras, kus GNOME\n"
+"sätetedeemon (gnome-settings-daemon) käivitab RANDR-plugina.\n"
+"\n"
+"LÄHTEFAIL - täielik rada, harilikult /home/kasutajanimi/.config/monitors."
+"xml\n"
+"\n"
+"SIHTNIMI - paigaldatud faili suhteline nimi. See fail pannakse\n"
+"           RANDR-seadistuste ülesüsteemilisse kataloogi, harilikult\n"
+"           on selleks %s/SIHTNIMI\n"
 
 #. Translators: only able to install RANDR profiles as root
 msgid "This program can only be used by the root user"
 msgstr "Seda programmi tohib kasutada ainult juurkasutaja"
 
 msgid "The source filename must be absolute"
-msgstr "Lähtefaili nimi peab olema absoluutne"
+msgstr "Lähtefaili nimi peab olema täieliku rajaga"
 
 #. Translators: first %s is a filename; second %s is an error message
 #, c-format
@@ -1645,27 +1712,27 @@ msgstr "Faili %s pole võimalik avada: %s\n"
 #. Translators: first %s is a filename; second %s is an error message
 #, c-format
 msgid "Could not get information for %s: %s\n"
-msgstr "Faili %s kohta pole võimalik andmeid hankida: %s\n"
+msgstr "Faili %s kohta pole võimalik andmeid hankida:%s\n"
 
 #, c-format
 msgid "%s must be a regular file\n"
 msgstr "%s peab olema tavaline fail\n"
 
 msgid "This program must only be run through pkexec(1)"
-msgstr ""
+msgstr "See programm peab olema käivitatud pkexec(1) kaudu"
 
 msgid "PKEXEC_UID must be set to an integer value"
-msgstr ""
+msgstr "PKEXEC_UID väärtus peab olema täisarv"
 
 #. Translators: we are complaining that a file must be really owned by the user who called this program
 #, c-format
 msgid "%s must be owned by you\n"
-msgstr "Fail %s peab sulle kuuluma\n"
+msgstr "Fail %s peab kuuluma sulle\n"
 
 #. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
 #, c-format
 msgid "%s must not have any directory components\n"
-msgstr ""
+msgstr "%s ei tohi sisaldada viiteid kataloogidele\n"
 
 #, c-format
 msgid "%s must be a directory\n"
@@ -1678,14 +1745,16 @@ msgstr "Faili %s/%s pole võimalik avada: %s\n"
 
 #, c-format
 msgid "Could not rename %s to %s: %s\n"
-msgstr ""
+msgstr "Nime muutmine %s -> %s pole võimalik: %s\n"
 
 msgid ""
 "Authentication is required to install multi-monitor settings for all users"
 msgstr ""
+"Kõigile kasutajatele mitme kuvari sätete paigaldamiseks on vajalik ennast "
+"autentida"
 
 msgid "Install multi-monitor settings for the whole system"
-msgstr ""
+msgstr "Mitme kuvari sätete paigaldamine kogu süsteemile"
 
 msgid "Upside Down"
 msgstr "Pea peal"
@@ -1831,6 +1900,21 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Käskudele kiirklahvide seadmine"
 
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+"Sätete rakendamine ja programmi töö lõpetamine (ühilduvuse eesmärkidel, seda "
+"hallatakse nüüd deemoni poolt)"
+
+msgid "Start the page with the typing break settings showing"
+msgstr "Lehekülje alguses näidatakse tippimisvaheaegade sätteid"
+
+msgid "Start the page with the accessibility settings showing"
+msgstr "Lehekülje alguses näidatakse hõlbustuste sätteid"
+
+msgid "- GNOME Keyboard Preferences"
+msgstr "- GNOME klaviatuurieelistused"
+
 msgid "Beep when _accessibility features are turned on or off"
 msgstr "_Hõlbustusvalikute sisse- ja väljalülitamisel tehakse piiksu"
 
@@ -1935,7 +2019,6 @@ msgstr ""
 "Ekraani lukustamine kindlate ajavahemike järel hoiab ära liigsest "
 "arvutikasutamisest tulenevaid tervisekahjustusi"
 
-#. long delay
 msgid "Long"
 msgstr "Pikk"
 
@@ -1985,7 +2068,6 @@ msgstr "_Kiirus:"
 msgid "Select a keyboard layout to be added to the list"
 msgstr "Klaviatuuripaigutuse valimine loendisse lisamiseks"
 
-#. short delay
 msgid "Short"
 msgstr "Lühike"
 
@@ -2027,6 +2109,9 @@ msgstr "_Kursorit on võimalik juhtida klaviatuuri abil"
 
 msgid "_Separate layout for each window"
 msgstr "Eraldi _paigutus iga akna jaoks"
+
+msgid "_Show..."
+msgstr "_Näita..."
 
 msgid "_Simulate simultaneous keypresses"
 msgstr "_Mitme klahvi allhoidmisi simuleeritakse"
@@ -2121,6 +2206,13 @@ msgstr "Liigutamine alla"
 #. Don't include the prefix "gesture|" in the translation.
 msgid "gesture|Disabled"
 msgstr "Keelatud"
+
+#. TRANSLATORS: don't translate the terms in brackets
+msgid "Specify the name of the page to show (general|accessibility)"
+msgstr "Määra näidatava lehe nimi (general|accessibility)"
+
+msgid "- GNOME Mouse Preferences"
+msgstr "- GNOME hiire-eelistused"
 
 msgid "Choose type of click _beforehand"
 msgstr "Klõpsu liik valitakse _ette"
@@ -2327,239 +2419,56 @@ msgstr "Tu_rvalise HTTP proksi:"
 msgid "_Use the same proxy for all protocols"
 msgstr "Kõikide _protokollide jaoks kasutatakse sama proksit"
 
-msgid "Universal Access"
-msgstr "Universaalne ligipääs"
+msgid "Cannot start the preferences application for your window manager"
+msgstr "Sinu aknahaldurile pole võimalik eelistuste rakendust käivitada"
 
-msgid "Universal Access Preferences"
-msgstr "Universaalse ligipääsu eelistused"
+msgid "_Alt"
+msgstr "_Alt"
 
-#, no-c-format
-msgid "100%"
-msgstr "100%"
+msgid "H_yper"
+msgstr "_Hüper"
 
-#, no-c-format
-msgid "125%"
-msgstr "125%"
+msgid "S_uper (or \"Windows logo\")"
+msgstr "S_uper (ehk \"Windowsi logo\")"
 
-#, no-c-format
-msgid "150%"
-msgstr "150%"
+msgid "_Meta"
+msgstr "_Meta"
 
-msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr ""
+msgid "Movement Key"
+msgstr "Liigutamise klahv"
 
-msgid "<span size=\"x-large\">High</span>"
-msgstr ""
+msgid "Titlebar Action"
+msgstr "Tiitliriba toimingud"
 
-msgid "<span size=\"x-large\">Low</span>"
-msgstr ""
+msgid "To move a window, press-and-hold this key then grab the window:"
+msgstr "Akna liigutamiseks hoia seda klahvi all ning seejärel haara aknast:"
 
-msgid "<span size=\"x-large\">Normal</span>"
-msgstr ""
+msgid "Window Preferences"
+msgstr "Akende eelistused"
 
-msgid "Acceptance delay:"
-msgstr ""
+msgid "Window Selection"
+msgstr "Akna valimine"
 
-msgid "Accessibility features can be turned on or off with keyboard shortcuts"
-msgstr "Hõlbustusi on võimalik klaviatuuri abil sisse ja välja lülitada"
+msgid "_Double-click titlebar to perform this action:"
+msgstr "_Topeltklõps tiitliribal: "
 
-msgid "Beep when Caps and Num Lock are used"
-msgstr "Caps ja NumLock klahvide vajutamisel tehakse piiksu"
+msgid "_Interval before raising:"
+msgstr "_Viivitus enne esiletõstmist:"
 
-msgid "Beep when a key is"
-msgstr ""
+msgid "_Raise selected windows after an interval"
+msgstr "Valitud aken tõstetakse pärast viivitust _esile"
 
-msgid "Beep when a key is rejected"
-msgstr "Klahvi hülgamisel tehakse piiksu"
+msgid "_Select windows when the mouse moves over them"
+msgstr "_Akende aktiveerimine, kui hiirekursor üle nende liigub"
 
-msgid "Beep when a modifer key is pressed"
-msgstr "Muuteklahvi vajutamisel tehakse piiksu"
+msgid "seconds"
+msgstr "sekundit"
 
-msgid "Caribou"
-msgstr ""
+msgid "Set your window properties"
+msgstr "Akende omaduste seadmine"
 
-msgid "Change constrast:"
-msgstr "Kontrasti muutmine:"
-
-msgid "Closed Captioning"
-msgstr ""
-
-msgid "Contrast:"
-msgstr "Kontrast:"
-
-msgid "Control the pointer using the keypad."
-msgstr ""
-
-msgid "Control the pointer using the video camera."
-msgstr ""
-
-msgid "Ctrl+Alt+-"
-msgstr "Ctrl+Alt+-"
-
-msgid "Ctrl+Alt+0"
-msgstr "Ctrl+Alt+0"
-
-msgid "Ctrl+Alt+4"
-msgstr "Ctrl+Alt+4"
-
-msgid "Ctrl+Alt+8"
-msgstr "Ctrl+Alt+8"
-
-msgid "Ctrl+Alt+="
-msgstr "Ctrl+Alt+="
-
-msgid "Decrease size:"
-msgstr "Suuruse vähendamine:"
-
-msgid "Disable if two keys are pressed together"
-msgstr "Keelatakse kahe klahvi koosvajutamisel"
-
-msgid "Display"
-msgstr "Kuva"
-
-msgid "Display a textual description of speech and sounds."
-msgstr ""
-
-msgid "Flash the entire screen"
-msgstr "Kogu ekraani vilgutamine"
-
-msgid "Flash the window title"
-msgstr "Akna tiitliriba vilgutamine"
-
-msgid "GOK"
-msgstr "GOK"
-
-msgid "Hearing"
-msgstr ""
-
-msgid "High/Inverse"
-msgstr ""
-
-msgid "HighContrast"
-msgstr "KõrgKontrastne"
-
-msgid "HighContrastInverse"
-msgstr ""
-
-msgid "Hover Click"
-msgstr ""
-
-msgid "I need assistance with:"
-msgstr ""
-
-msgid "Ignores fast duplicate keypresses"
-msgstr "Kiireid klahvide korduvvajutusi eiratakse"
-
-msgid "Increase size:"
-msgstr "Suuruse suurendamine:"
-
-msgid "Keyboard Settings..."
-msgstr "Klaviatuuri sätted..."
-
-msgid "Larger"
-msgstr "Suurem"
-
-msgid "LowContrast"
-msgstr "MadalKontrastne"
-
-msgid "Mouse Settings..."
-msgstr "Hiire sätted..."
-
-msgid "Nomon"
-msgstr ""
-
-msgid "None"
-msgstr "ei tee midagi"
-
-msgid "On screen keyboard"
-msgstr "Ekraaniklaviatuur"
-
-msgid "OnBoard"
-msgstr ""
-
-msgid "Options..."
-msgstr "Valikud..."
-
-msgid "Pointing and Clicking"
-msgstr ""
-
-msgid "Puts a delay between when a key is pressed and when it is accepted."
-msgstr ""
-
-msgid "Screen Reader"
-msgstr "Ekraanilugeja"
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Shift+Ctrl+Alt+-"
-msgstr "Shift+Ctrl+Alt+-"
-
-msgid "Shift+Ctrl+Alt+="
-msgstr "Shift+Ctrl+Alt+="
-
-msgid "Show Universal Access status"
-msgstr ""
-
-msgid "Sound Settings..."
-msgstr "Helisätted..."
-
-msgid "Test flash"
-msgstr ""
-
-msgid "Test:"
-msgstr "Tekst:"
-
-msgid "Text size:"
-msgstr "Teksti suurus:"
-
-msgid "Treats a sequence of modifier keys as a key combination."
-msgstr ""
-
-msgid "Trigger a click when the pointer hovers."
-msgstr ""
-
-msgid "Trigger a secondary click by holding down the primary button."
-msgstr "Vasaku nupu allhoidmisel tehakse paremklõps"
-
-msgid "Turn on or off:"
-msgstr ""
-
-msgid "Type here to test settings"
-msgstr "Sätete testimiseks tipi siia"
-
-msgid "Typing"
-msgstr "Tippimine"
-
-msgid "Typing Assistant"
-msgstr "Tippimisabiline"
-
-msgid "Use a visual indication when an alert sound occurs."
-msgstr ""
-
-msgid "Use an alternative form of text input"
-msgstr ""
-
-msgid "Video Mouse"
-msgstr ""
-
-msgid "Visual Alerts"
-msgstr "Visuaalsed hoiatused"
-
-msgid "Zoom in:"
-msgstr ""
-
-msgid "Zoom out:"
-msgstr ""
-
-msgid "accepted"
-msgstr ""
-
-msgid "pressed"
-msgstr ""
-
-msgid "rejected"
-msgstr ""
+msgid "Windows"
+msgstr "Aknad"
 
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
@@ -2579,6 +2488,28 @@ msgstr "minimeerib"
 
 msgid "Roll up"
 msgstr "kerib kokku"
+
+msgid "None"
+msgstr "ei tee midagi"
+
+#, c-format
+msgid "key not found [%s]\n"
+msgstr "klahvi ei leitud [%s]\n"
+
+msgid "Hide on start (useful to preload the shell)"
+msgstr "Peidetakse käivitamisel (kasulik kestprogrammi eellaadimiseks)"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Groups"
+msgstr "Grupid"
+
+msgid "Common Tasks"
+msgstr "Sagedasti kasutatavad"
+
+msgid "Control Center"
+msgstr "Juhtimiskeskus"
 
 msgid "Close the control-center when a task is activated"
 msgstr "Ülesande aktiveerimise korral juhtimiskeskuse sulgemine"
@@ -2643,9 +2574,6 @@ msgid ""
 msgstr ""
 "Kui määratud, siis juhtimiskeskus suletakse \"Sagedasti kasutatava\" "
 "ülesande aktiveerimisel."
-
-msgid "Control Center"
-msgstr "Juhtimiskeskus"
 
 msgid "The GNOME configuration tool"
 msgstr "GNOME seadistusprogramm"
@@ -2831,189 +2759,130 @@ msgstr "KIRJATÜÜBIFAIL VÄLJUNDFAIL"
 msgid "Error parsing arguments: %s\n"
 msgstr "Viga argumentide analüüsimisel: %s\n"
 
-msgid "Example Panel"
-msgstr "Näidispaneel"
+#, c-format
+msgid "Your filter \"%s\" does not match any items."
+msgstr "Sinu filtrile \"%s\" ei vasta ükski kirje."
 
-msgid "Example preferences panel"
-msgstr "Näidiseelistuste paneel"
+msgid "No matches found."
+msgstr "Vastavusi ei leitud."
 
-msgid "System Settings"
-msgstr "Süsteemsed sätted"
+msgid "Other"
+msgstr "Muu"
 
-msgid "_All Settings"
-msgstr "_Kõik sätted"
+#. make start action
+#, c-format
+msgid "Start %s"
+msgstr "Käivita %s"
 
-#~ msgid "Accessible Lo_gin"
-#~ msgstr "_Hõlbustustega sisselogimine"
+msgid "Help"
+msgstr "Abi"
 
-#~ msgid "Assistive Technologies"
-#~ msgstr "Abistav tehnika"
+msgid "Upgrade"
+msgstr "Uuenda"
 
-#~ msgid "Assistive Technologies Preferences"
-#~ msgstr "Abistava tehnika eelistused"
+msgid "Uninstall"
+msgstr "Eemalda"
 
-#~ msgid ""
-#~ "Changes to enable assistive technologies will not take effect until your "
-#~ "next log in."
-#~ msgstr ""
-#~ "Abistavate tehnikate lubamine rakendub alles järgmisel sisselogimisel."
+msgid "Remove from Favorites"
+msgstr "Eemalda lemmikute hulgast"
 
-#~ msgid "Close and _Log Out"
-#~ msgstr "Sulge ja _logi välja"
+msgid "Add to Favorites"
+msgstr "Lisa lemmikute hulka"
 
-#~ msgid "Jump to Preferred Applications dialog"
-#~ msgstr "Eelistatud rakenduste dialoogi avamine"
+msgid "Remove from Startup Programs"
+msgstr "Eemalda isekäivituvate rakenduste hulgast"
 
-#~ msgid "Jump to the Accessible Login dialog"
-#~ msgstr "Abistava tehnika toega sisselogimise dialoogi avamine"
+msgid "Add to Startup Programs"
+msgstr "Lisa rakendus isekäivitumiseks"
 
-#~ msgid "Jump to the Keyboard Accessibility dialog"
-#~ msgstr "Klaviatuurihõlbustuste dialoogi avamine"
+msgid "New Spreadsheet"
+msgstr "Uus arvutustabel"
 
-#~ msgid "Jump to the Mouse Accessibility dialog"
-#~ msgstr "Hiirehõlbustuste dialoogi avamine"
+msgid "New Document"
+msgstr "Uus dokument"
 
-#~ msgid "_Enable assistive technologies"
-#~ msgstr "_Abistav tehnika on lubatud"
+msgid "Documents"
+msgstr "Dokumendid"
 
-#~ msgid "_Keyboard Accessibility"
-#~ msgstr "_Klaviatuurihõlbustused"
+msgid "File System"
+msgstr "Failisüsteem"
 
-#~ msgid "_Mouse Accessibility"
-#~ msgstr "_Hiirehõlbustused"
+msgid "Network Servers"
+msgstr "Võrguserverid"
 
-#~ msgid "_Preferred Applications"
-#~ msgstr "_Eelistatud rakendused"
+msgid "Search"
+msgstr "Otsing"
 
-#~ msgid "Choose which accessibility features to enable when you log in"
-#~ msgstr "Sisselogimisel kasutatavate hõlbustuste valimine"
+#. make open with default action
+#, c-format
+msgid "<b>Open</b>"
+msgstr "<b>Ava</b>"
 
-#~ msgid "Monitor Preferences"
-#~ msgstr "Kuvari eelistused"
+#. make rename action
+msgid "Rename..."
+msgstr "Muuda nime..."
 
-#~ msgid ""
-#~ "Specify the name of the page to show (internet|multimedia|system|a11y)"
-#~ msgstr "Määra näidatava lehe nimi (internet|multimedia|system|a11y)"
+msgid "Send To..."
+msgstr "Saada kuhu..."
 
-#~ msgid "- GNOME Default Applications"
-#~ msgstr "- GNOME vaikimisi rakendused"
+#. make move to trash action
+msgid "Move to Trash"
+msgstr "Viska prügikasti"
 
-#~ msgid ""
-#~ "Just apply settings and quit (compatibility only; now handled by daemon)"
-#~ msgstr ""
-#~ "Sätete rakendamine ja programmi töö lõpetamine (ühilduvuse eesmärkidel, "
-#~ "seda hallatakse nüüd deemoni poolt)"
+msgid "Delete"
+msgstr "Kustuta"
 
-#~ msgid "Start the page with the typing break settings showing"
-#~ msgstr "Lehekülje alguses näidatakse tippimisvaheaegade sätteid"
+#, c-format
+msgid "Are you sure you want to permanently delete \"%s\"?"
+msgstr "Kas soovid \"%s\" jäädavalt kustutada?"
 
-#~ msgid "Start the page with the accessibility settings showing"
-#~ msgstr "Lehekülje alguses näidatakse hõlbustuste sätteid"
+msgid "If you delete an item, it is permanently lost."
+msgstr "Kui sa selle kustutad, läheb see jäädavalt kaotsi."
 
-#~ msgid "- GNOME Keyboard Preferences"
-#~ msgstr "- GNOME klaviatuurieelistused"
+#, c-format
+msgid "Open with \"%s\""
+msgstr "Ava rakendusega \"%s\""
 
-#~ msgid "Specify the name of the page to show (general|accessibility)"
-#~ msgstr "Määra näidatava lehe nimi (general|accessibility)"
+msgid "Open with Default Application"
+msgstr "Ava vaikimisi rakendusega"
 
-#~ msgid "- GNOME Mouse Preferences"
-#~ msgstr "- GNOME hiire-eelistused"
+msgid "Open in File Manager"
+msgstr "Ava failihalduris"
 
-#~ msgid "Cannot start the preferences application for your window manager"
-#~ msgstr "Sinu aknahaldurile pole võimalik eelistuste rakendust käivitada"
+msgid "?"
+msgstr "?"
 
-#~ msgid "_Double-click titlebar to perform this action:"
-#~ msgstr "_Topeltklõps tiitliribal: "
+msgid "%l:%M %p"
+msgstr "%H:%M"
 
-#~ msgid "_Interval before raising:"
-#~ msgstr "_Viivitus enne esiletõstmist:"
+msgid "Today %l:%M %p"
+msgstr "Täna %H:%M"
 
-#~ msgid "_Raise selected windows after an interval"
-#~ msgstr "Valitud aken tõstetakse pärast viivitust _esile"
+msgid "Yesterday %l:%M %p"
+msgstr "Eile %H:%M"
 
-#~ msgid "_Select windows when the mouse moves over them"
-#~ msgstr "_Akende aktiveerimine, kui hiirekursor üle nende liigub"
+msgid "%a %l:%M %p"
+msgstr "%a %H:%M"
 
-#~ msgid "Set your window properties"
-#~ msgstr "Akende omaduste seadmine"
+msgid "%b %d %l:%M %p"
+msgstr "%d. %b %H:%M"
 
-#~ msgid "key not found [%s]\n"
-#~ msgstr "klahvi ei leitud [%s]\n"
+msgid "%b %d %Y"
+msgstr "%d. %b %Y"
 
-#~ msgid "Hide on start (useful to preload the shell)"
-#~ msgstr "Peidetakse käivitamisel (kasulik kestprogrammi eellaadimiseks)"
+msgid "Find Now"
+msgstr "Otsi kohe"
 
-#~ msgid "Your filter \"%s\" does not match any items."
-#~ msgstr "Sinu filtrile \"%s\" ei vasta ükski kirje."
+#, c-format
+msgid "<b>Open %s</b>"
+msgstr "<b>Ava %s</b>"
 
-#~ msgid "No matches found."
-#~ msgstr "Vastavusi ei leitud."
+#, c-format
+msgid "Remove from System Items"
+msgstr "Eemalda süsteemikirjetest"
 
-#~ msgid "Remove from Favorites"
-#~ msgstr "Eemalda lemmikute hulgast"
-
-#~ msgid "Add to Favorites"
-#~ msgstr "Lisa lemmikute hulka"
-
-#~ msgid "Remove from Startup Programs"
-#~ msgstr "Eemalda isekäivituvate rakenduste hulgast"
-
-#~ msgid "Add to Startup Programs"
-#~ msgstr "Lisa rakendus isekäivitumiseks"
-
-#~ msgid "New Spreadsheet"
-#~ msgstr "Uus arvutustabel"
-
-#~ msgid "New Document"
-#~ msgstr "Uus dokument"
-
-#~ msgid "Documents"
-#~ msgstr "Dokumendid"
-
-#~ msgid "File System"
-#~ msgstr "Failisüsteem"
-
-#~ msgid "Network Servers"
-#~ msgstr "Võrguserverid"
-
-#~ msgid "Are you sure you want to permanently delete \"%s\"?"
-#~ msgstr "Kas soovid \"%s\" jäädavalt kustutada?"
-
-#~ msgid "If you delete an item, it is permanently lost."
-#~ msgstr "Kui sa selle kustutad, läheb see jäädavalt kaotsi."
-
-#~ msgid "Open with \"%s\""
-#~ msgstr "Ava rakendusega \"%s\""
-
-#~ msgid "Open with Default Application"
-#~ msgstr "Ava vaikimisi rakendusega"
-
-#~ msgid "Open in File Manager"
-#~ msgstr "Ava failihalduris"
-
-#~ msgid "%l:%M %p"
-#~ msgstr "%H:%M"
-
-#~ msgid "Today %l:%M %p"
-#~ msgstr "Täna %H:%M"
-
-#~ msgid "Yesterday %l:%M %p"
-#~ msgstr "Eile %H:%M"
-
-#~ msgid "%a %l:%M %p"
-#~ msgstr "%a %H:%M"
-
-#~ msgid "%b %d %l:%M %p"
-#~ msgstr "%d. %b %H:%M"
-
-#~ msgid "%b %d %Y"
-#~ msgstr "%d. %b %Y"
-
-#~ msgid "Find Now"
-#~ msgstr "Otsi kohe"
-
-#~ msgid "Remove from System Items"
-#~ msgstr "Eemalda süsteemikirjetest"
+#~ msgid "_Jabber:"
+#~ msgstr "_Jabber:"
 
 #~ msgid "Display Preferences"
 #~ msgstr "Kuvaeelistused"
@@ -3026,3 +2895,6 @@ msgstr "_Kõik sätted"
 
 #~ msgid "Change screen resolution"
 #~ msgstr "Ekraani eraldusvõime muutmine"
+
+#~ msgid "Display"
+#~ msgstr "Kuva"
