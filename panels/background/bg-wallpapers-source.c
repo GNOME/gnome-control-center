@@ -29,7 +29,7 @@
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 #include <gio/gio.h>
 
-G_DEFINE_TYPE (BgWallpapersSource, bg_wallpapers_source, G_TYPE_OBJECT)
+G_DEFINE_TYPE (BgWallpapersSource, bg_wallpapers_source, BG_TYPE_SOURCE)
 
 #define WALLPAPERS_SOURCE_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_WALLPAPERS_SOURCE, BgWallpapersSourcePrivate))
@@ -71,12 +71,6 @@ static void
 bg_wallpapers_source_dispose (GObject *object)
 {
   BgWallpapersSourcePrivate *priv = BG_WALLPAPERS_SOURCE (object)->priv;
-
-  if (priv->store)
-    {
-      g_object_unref (priv->store);
-      priv->store = NULL;
-    }
 
   if (priv->thumb_factory)
     {
@@ -160,24 +154,26 @@ item_changed_cb (GnomeBG    *bg,
 
 
 static void
-load_wallpapers (gchar                     *key,
-                 GnomeWPItem               *item,
-                 BgWallpapersSourcePrivate *priv)
+load_wallpapers (gchar              *key,
+                 GnomeWPItem        *item,
+                 BgWallpapersSource *source)
 {
+  BgWallpapersSourcePrivate *priv = source->priv;
   GtkTreeIter iter;
   GtkTreePath *path;
   GdkPixbuf *pixbuf;
+  GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
 
   if (item->deleted == TRUE)
     return;
 
-  gtk_list_store_append (GTK_LIST_STORE (priv->store), &iter);
+  gtk_list_store_append (store, &iter);
 
   pixbuf = gnome_wp_item_get_thumbnail (item, priv->thumb_factory,
                                         100, 75);
   gnome_wp_item_update_description (item);
 
-  gtk_list_store_set (GTK_LIST_STORE (priv->store), &iter,
+  gtk_list_store_set (store, &iter,
                       0, pixbuf,
                       1, item,
                       -1);
@@ -185,9 +181,8 @@ load_wallpapers (gchar                     *key,
   if (pixbuf)
     g_object_unref (pixbuf);
 
-  path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
-  item->rowref = gtk_tree_row_reference_new (GTK_TREE_MODEL (priv->store), path);
-  ///g_signal_connect (item->bg, "changed", G_CALLBACK (item_changed_cb), priv->wp_xml);
+  path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), &iter);
+  item->rowref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
   gtk_tree_path_free (path);
 }
 
@@ -199,8 +194,6 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
 
   priv = self->priv = WALLPAPERS_SOURCE_PRIVATE (self);
 
-  priv->store = gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_POINTER);
-
   priv->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
@@ -208,7 +201,7 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   wp_xml = g_new0 (GnomeWpXml, 1);
   wp_xml->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
   wp_xml->client = gconf_client_get_default ();
-  wp_xml->wp_model = priv->store;
+  wp_xml->wp_model = bg_source_get_liststore (BG_SOURCE (self));
   wp_xml->thumb_width = 100;
   wp_xml->thumb_height = 75;
   wp_xml->thumb_factory = priv->thumb_factory;
@@ -216,7 +209,7 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   gnome_wp_xml_load_list (wp_xml);
   g_hash_table_foreach (wp_xml->wp_hash,
                         (GHFunc) load_wallpapers,
-                        priv);
+                        self);
 
   g_hash_table_destroy (wp_xml->wp_hash);
   g_object_unref (wp_xml->client);
@@ -229,9 +222,3 @@ bg_wallpapers_source_new (void)
   return g_object_new (BG_TYPE_WALLPAPERS_SOURCE, NULL);
 }
 
-
-GtkListStore *
-bg_wallpapers_source_get_liststore (BgWallpapersSource *source)
-{
-  return source->priv->store;
-}

@@ -29,15 +29,13 @@
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 
 
-G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, G_TYPE_OBJECT)
+G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
 
 #define PICTURES_SOURCE_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_PICTURES_SOURCE, BgPicturesSourcePrivate))
 
 struct _BgPicturesSourcePrivate
 {
-  GtkListStore *liststore;
-
   GFile *dir;
 
   GCancellable *cancellable;
@@ -84,12 +82,6 @@ bg_pictures_source_dispose (GObject *object)
       priv->cancellable = NULL;
     }
 
-  if (priv->liststore)
-    {
-      g_object_unref (priv->liststore);
-      priv->liststore = NULL;
-    }
-
   if (priv->thumb_factory)
     {
       g_object_unref (priv->thumb_factory);
@@ -129,11 +121,13 @@ file_info_async_ready (GObject      *source,
                        GAsyncResult *res,
                        gpointer      user_data)
 {
-  BgPicturesSourcePrivate *priv = BG_PICTURES_SOURCE (user_data)->priv;
+  BgPicturesSource *bg_source = BG_PICTURES_SOURCE (user_data);
+  BgPicturesSourcePrivate *priv = bg_source->priv;
   GList *files, *l;
   GError *err = NULL;
   GFile *parent;
   gchar *path;
+  GtkListStore *store = bg_source_get_liststore (BG_SOURCE (bg_source));
 
   files = g_file_enumerator_next_files_finish (G_FILE_ENUMERATOR (source),
                                                res,
@@ -192,14 +186,14 @@ file_info_async_ready (GObject      *source,
           /* insert the item into the liststore */
           pixbuf = gdk_pixbuf_new_from_file_at_scale (filename, 100, 75, TRUE,
                                                       NULL);
-          gtk_list_store_insert_with_values (priv->liststore, &iter, 0,
+          gtk_list_store_insert_with_values (store, &iter, 0,
                                              0, pixbuf,
                                              1, item,
                                              -1);
-          tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->liststore),
+          tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (store),
                                                &iter);
           item->rowref =
-            gtk_tree_row_reference_new (GTK_TREE_MODEL (priv->liststore),
+            gtk_tree_row_reference_new (GTK_TREE_MODEL (store),
                                         tree_path);
           gtk_tree_path_free (tree_path);
 
@@ -247,9 +241,6 @@ bg_pictures_source_init (BgPicturesSource *self)
   BgPicturesSourcePrivate *priv;
   priv = self->priv = PICTURES_SOURCE_PRIVATE (self);
 
-
-  priv->liststore = gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_POINTER);
-
   priv->cancellable = g_cancellable_new ();
 
   pictures_path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
@@ -273,8 +264,3 @@ bg_pictures_source_new (void)
   return g_object_new (BG_TYPE_PICTURES_SOURCE, NULL);
 }
 
-GtkListStore*
-bg_pictures_source_get_liststore (BgPicturesSource *source)
-{
-  return source->priv->liststore;
-}

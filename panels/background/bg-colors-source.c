@@ -27,46 +27,14 @@
 
 #include <glib/gi18n-lib.h>
 
-G_DEFINE_TYPE (BgColorsSource, bg_colors_source, G_TYPE_OBJECT)
+G_DEFINE_TYPE (BgColorsSource, bg_colors_source, BG_TYPE_SOURCE)
 
 #define COLORS_SOURCE_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_COLORS_SOURCE, BgColorsSourcePrivate))
 
-struct _BgColorsSourcePrivate
-{
-  GtkListStore *store;
-};
-
-
-static void
-bg_colors_source_dispose (GObject *object)
-{
-  BgColorsSourcePrivate *priv = BG_COLORS_SOURCE (object)->priv;
-
-  if (priv->store)
-    {
-      g_object_unref (priv->store);
-      priv->store = NULL;
-    }
-
-  G_OBJECT_CLASS (bg_colors_source_parent_class)->dispose (object);
-}
-
-static void
-bg_colors_source_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (bg_colors_source_parent_class)->finalize (object);
-}
-
 static void
 bg_colors_source_class_init (BgColorsSourceClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (BgColorsSourcePrivate));
-
-  object_class->dispose = bg_colors_source_dispose;
-  object_class->finalize = bg_colors_source_finalize;
 }
 
 static gchar *colors[] =
@@ -103,13 +71,10 @@ static void
 bg_colors_source_init (BgColorsSource *self)
 {
   GnomeDesktopThumbnailFactory *thumb_factory;
-  BgColorsSourcePrivate *priv;
   gchar **c, **n;
+  GtkListStore *store;
 
-
-  priv = self->priv = COLORS_SOURCE_PRIVATE (self);
-
-  priv->store = gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_POINTER);
+  store = bg_source_get_liststore (BG_SOURCE (self));
 
   thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
@@ -136,7 +101,7 @@ bg_colors_source_init (BgColorsSource *self)
       pixbuf = gnome_wp_item_get_thumbnail (item,
                                             thumb_factory,
                                             100, 75);
-      gtk_list_store_insert_with_values (priv->store, NULL, 0,
+      gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,
                                          1, item,
                                          -1);
@@ -151,8 +116,3 @@ bg_colors_source_new (void)
   return g_object_new (BG_TYPE_COLORS_SOURCE, NULL);
 }
 
-GtkListStore *
-bg_colors_source_get_liststore (BgColorsSource *source)
-{
-  return source->priv->store;
-}

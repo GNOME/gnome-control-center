@@ -24,6 +24,7 @@
 #define _BG_FLICKR_SOURCE_H
 
 #include <gtk/gtk.h>
+#include "bg-source.h"
 
 G_BEGIN_DECLS
 
@@ -55,20 +56,19 @@ typedef struct _BgFlickrSourcePrivate BgFlickrSourcePrivate;
 
 struct _BgFlickrSource
 {
-  GObject parent;
+  BgSource parent;
 
   BgFlickrSourcePrivate *priv;
 };
 
 struct _BgFlickrSourceClass
 {
-  GObjectClass parent_class;
+  BgSourceClass parent_class;
 };
 
 GType bg_flickr_source_get_type (void) G_GNUC_CONST;
 
 BgFlickrSource *bg_flickr_source_new (void);
-GtkListStore * bg_flickr_source_get_liststore (BgFlickrSource *source);
 
 G_END_DECLS
 

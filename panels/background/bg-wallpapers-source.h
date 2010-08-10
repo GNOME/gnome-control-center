@@ -25,6 +25,7 @@
 #define _BG_WALLPAPERS_SOURCE_H
 
 #include <gtk/gtk.h>
+#include "bg-source.h"
 
 G_BEGIN_DECLS
 
@@ -56,14 +57,14 @@ typedef struct _BgWallpapersSourcePrivate BgWallpapersSourcePrivate;
 
 struct _BgWallpapersSource
 {
-  GObject parent;
+  BgSource parent;
 
   BgWallpapersSourcePrivate *priv;
 };
 
 struct _BgWallpapersSourceClass
 {
-  GObjectClass parent_class;
+  BgSourceClass parent_class;
 };
 
 GType bg_wallpapers_source_get_type (void) G_GNUC_CONST;

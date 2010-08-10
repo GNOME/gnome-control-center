@@ -25,6 +25,7 @@
 #define _BG_PICTURES_SOURCE_H
 
 #include <gtk/gtk.h>
+#include "bg-source.h"
 
 G_BEGIN_DECLS
 
@@ -56,20 +57,19 @@ typedef struct _BgPicturesSourcePrivate BgPicturesSourcePrivate;
 
 struct _BgPicturesSource
 {
-  GObject parent;
+  BgSource parent;
 
   BgPicturesSourcePrivate *priv;
 };
 
 struct _BgPicturesSourceClass
 {
-  GObjectClass parent_class;
+  BgSourceClass parent_class;
 };
 
 GType bg_pictures_source_get_type (void) G_GNUC_CONST;
 
 BgPicturesSource *bg_pictures_source_new (void);
-GtkListStore     *bg_pictures_source_get_liststore (BgPicturesSource *source);
 
 G_END_DECLS
 

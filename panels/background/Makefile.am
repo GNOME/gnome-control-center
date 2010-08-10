@@ -23,6 +23,8 @@ libbackground_la_SOURCES =		\
 	background-module.c	\
 	cc-background-panel.c	\
 	cc-background-panel.h	\
+	bg-source.c		\
+	bg-source.h		\
 	bg-pictures-source.c			\
 	bg-pictures-source.h			\
 	bg-wallpapers-source.c			\

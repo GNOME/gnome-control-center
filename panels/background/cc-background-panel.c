@@ -53,8 +53,6 @@ struct _CcBackgroundPanelPrivate
   BgFlickrSource *flickr_source;
 #endif
 
-  GtkListStore *selected_store;
-
   GConfClient *client;
 
   GnomeDesktopThumbnailFactory *thumb_factory;
@@ -202,34 +200,21 @@ source_changed_cb (GtkTreeSelection         *selection,
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
-  GtkListStore *store;
   GtkIconView *view;
   guint type;
+  BgSource *source;
 
   gtk_tree_selection_get_selected (selection, &model, &iter);
   gtk_tree_model_get (model, &iter,
                       1, &type,
-                      2, &priv->current_source_readonly, -1);
+                      2, &priv->current_source_readonly,
+                      3, &source, -1);
 
   view = (GtkIconView *) gtk_builder_get_object (priv->builder,
                                                  "backgrounds-iconview");
 
-  if (type == SOURCE_WALLPAPERS)
-    store = bg_wallpapers_source_get_liststore (priv->wallpapers_source);
-  else if (type == SOURCE_PICTURES)
-    store = bg_pictures_source_get_liststore (priv->pictures_source);
-  else if (type == SOURCE_COLORS)
-    store = bg_colors_source_get_liststore (priv->colors_source);
-#ifdef HAVE_LIBSOCIALWEB
-  else if (type == SOURCE_FLICKR)
-    store = bg_flickr_source_get_liststore (priv->flickr_source);
-#endif
-  else
-    store = NULL;
-
-  priv->selected_store = store;
-
-  gtk_icon_view_set_model (view, GTK_TREE_MODEL (store));
+  gtk_icon_view_set_model (view,
+                           GTK_TREE_MODEL (bg_source_get_liststore (source)));
 }
 
 static void
@@ -551,30 +536,38 @@ cc_background_panel_init (CcBackgroundPanel *self)
   store = (GtkListStore*) gtk_builder_get_object (priv->builder,
                                                   "sources-liststore");
 
-  priv->pictures_source = bg_pictures_source_new ();
+  priv->wallpapers_source = bg_wallpapers_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
                                      0, _("Wallpapers"),
                                      1, SOURCE_WALLPAPERS,
-                                     2, TRUE, -1);
+                                     2, TRUE,
+                                     3, priv->wallpapers_source,
+                                     -1);
 
-  priv->wallpapers_source = bg_wallpapers_source_new ();
+  priv->pictures_source = bg_pictures_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
                                      0, _("Pictures Folder"),
                                      1, SOURCE_PICTURES,
-                                     2, FALSE, -1);
+                                     2, FALSE,
+                                     3, priv->pictures_source,
+                                     -1);
 
   priv->colors_source = bg_colors_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
                                      0, _("Colors"),
                                      1, SOURCE_COLORS,
-                                     2, TRUE, -1);
+                                     2, TRUE,
+                                     3, priv->colors_source,
+                                     -1);
 
 #ifdef HAVE_LIBSOCIALWEB
   priv->flickr_source = bg_flickr_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
                                      0, _("Flickr"),
                                      1, SOURCE_FLICKR,
-                                     2, FALSE, -1);
+                                     2, FALSE,
+                                     3, priv->flickr_source,
+                                     -1);
 #endif
 
 

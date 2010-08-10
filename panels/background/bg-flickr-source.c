@@ -28,15 +28,13 @@
 
 #include "gnome-wp-item.h"
 
-G_DEFINE_TYPE (BgFlickrSource, bg_flickr_source, G_TYPE_OBJECT)
+G_DEFINE_TYPE (BgFlickrSource, bg_flickr_source, BG_TYPE_SOURCE)
 
 #define FLICKR_SOURCE_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_FLICKR_SOURCE, BgFlickrSourcePrivate))
 
 struct _BgFlickrSourcePrivate
 {
-  GtkListStore *store;
-
   SwClient *client;
   SwClientService *service;
 };
@@ -46,12 +44,6 @@ static void
 bg_flickr_source_dispose (GObject *object)
 {
   BgFlickrSourcePrivate *priv = BG_FLICKR_SOURCE (object)->priv;
-
-  if (priv->store)
-    {
-      g_object_unref (priv->store);
-      priv->store = NULL;
-    }
 
   if (priv->client)
     {
@@ -91,7 +83,8 @@ _view_items_added_cb (SwClientItemView *item_view,
                       gpointer          userdata)
 {
   GList *l;
-  BgFlickrSourcePrivate *priv = (BgFlickrSourcePrivate *) userdata;
+  BgFlickrSource *source = (BgFlickrSource *) userdata;
+  GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
 
   for (l = items; l; l = l->next)
     {
@@ -119,7 +112,7 @@ _view_items_added_cb (SwClientItemView *item_view,
       thumb_url = sw_item_get_value (sw_item, "thumbnail");
       pixbuf = gdk_pixbuf_new_from_file_at_scale (thumb_url, 100, 75, TRUE,
                                                   NULL);
-      gtk_list_store_insert_with_values (priv->store, NULL, 0,
+      gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,
                                          1, item,
                                          -1);
@@ -159,13 +152,9 @@ bg_flickr_source_init (BgFlickrSource *self)
                                      "feed",
                                      NULL,
                                      _query_open_view_cb,
-                                     priv);
-
-  priv->store = gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_POINTER);
+                                     self);
 
   thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
-
-
 
   g_object_unref (thumb_factory);
 }
@@ -176,8 +165,3 @@ bg_flickr_source_new (void)
   return g_object_new (BG_TYPE_FLICKR_SOURCE, NULL);
 }
 
-GtkListStore *
-bg_flickr_source_get_liststore (BgFlickrSource *source)
-{
-  return source->priv->store;
-}

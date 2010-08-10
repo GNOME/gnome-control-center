@@ -1,4 +1,3 @@
-/* bg-colors-source.h */
 /*
  * Copyright (C) 2010 Intel, Inc
  *
@@ -20,53 +19,55 @@
  *
  */
 
-#ifndef _BG_COLORS_SOURCE_H
-#define _BG_COLORS_SOURCE_H
+#ifndef _BG_SOURCE_H
+#define _BG_SOURCE_H
 
 #include <gtk/gtk.h>
-#include "bg-source.h"
 
 G_BEGIN_DECLS
 
-#define BG_TYPE_COLORS_SOURCE bg_colors_source_get_type()
+#define BG_TYPE_SOURCE bg_source_get_type()
 
-#define BG_COLORS_SOURCE(obj) \
+#define BG_SOURCE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  BG_TYPE_COLORS_SOURCE, BgColorsSource))
+  BG_TYPE_SOURCE, BgSource))
 
-#define BG_COLORS_SOURCE_CLASS(klass) \
+#define BG_SOURCE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  BG_TYPE_COLORS_SOURCE, BgColorsSourceClass))
+  BG_TYPE_SOURCE, BgSourceClass))
 
-#define BG_IS_COLORS_SOURCE(obj) \
+#define BG_IS_SOURCE(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  BG_TYPE_COLORS_SOURCE))
+  BG_TYPE_SOURCE))
 
-#define BG_IS_COLORS_SOURCE_CLASS(klass) \
+#define BG_IS_SOURCE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  BG_TYPE_COLORS_SOURCE))
+  BG_TYPE_SOURCE))
 
-#define BG_COLORS_SOURCE_GET_CLASS(obj) \
+#define BG_SOURCE_GET_CLASS(obj) \
   (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  BG_TYPE_COLORS_SOURCE, BgColorsSourceClass))
+  BG_TYPE_SOURCE, BgSourceClass))
 
-typedef struct _BgColorsSource BgColorsSource;
-typedef struct _BgColorsSourceClass BgColorsSourceClass;
+typedef struct _BgSource BgSource;
+typedef struct _BgSourceClass BgSourceClass;
+typedef struct _BgSourcePrivate BgSourcePrivate;
 
-struct _BgColorsSource
+struct _BgSource
 {
-  BgSource parent;
+  GObject parent;
+
+  BgSourcePrivate *priv;
 };
 
-struct _BgColorsSourceClass
+struct _BgSourceClass
 {
-  BgSourceClass parent_class;
+  GObjectClass parent_class;
 };
 
-GType bg_colors_source_get_type (void) G_GNUC_CONST;
+GType bg_source_get_type (void) G_GNUC_CONST;
 
-BgColorsSource *bg_colors_source_new (void);
+GtkListStore* bg_source_get_liststore (BgSource *source);
 
 G_END_DECLS
 
-#endif /* _BG_COLORS_SOURCE_H */
+#endif /* _BG_SOURCE_H */
