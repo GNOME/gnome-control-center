@@ -274,6 +274,23 @@ AC_MSG_RESULT([$enable_examples])
 
 AM_CONDITIONAL(BUILD_EXAMPLES, test "x$enable_examples" = "xyes")
 
+dnl ==============================================
+dnl libsocialweb
+dnl ==============================================
+
+AC_MSG_CHECKING([Enable libsocialweb support])
+AC_ARG_WITH([libsocialweb],
+   AC_HELP_STRING([--with-libsocialweb],
+                  [enable libsocialweb support]),,
+   [with_libsocialweb=no])
+AC_MSG_RESULT([$with_libsocialweb])
+
+if test "x$with_libsocialweb" == "xyes"; then
+  PKG_CHECK_MODULES(SOCIALWEB, libsocialweb-client)
+  AC_DEFINE(HAVE_LIBSOCIALWEB, 1, [Defined if libsocialweb is available])
+fi
+AM_CONDITIONAL(WITH_LIBSOCIALWEB, test "x$with_libsocialweb" = "xyes")
+
 
 dnl =======================================
 dnl Update Mime Database
@@ -356,6 +373,8 @@ help/Makefile
 libgnome-control-center/Makefile
 libgnome-control-center/libgnome-control-center.pc
 panels/Makefile
+panels/background/Makefile
+panels/background/gnome-background-panel.desktop.in
 panels/datetime/Makefile
 panels/datetime/gnome-datetime-panel.desktop.in
 panels/default-applications/Makefile

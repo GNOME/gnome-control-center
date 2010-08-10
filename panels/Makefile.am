@@ -1,4 +1,6 @@
-SUBDIRS=display \
+SUBDIRS= \
+	background \
+	display \
 	mouse \
 	keyboard \
 	network \
