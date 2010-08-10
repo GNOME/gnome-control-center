@@ -8,3 +8,5 @@ SUBDIRS= \
 	keybindings \
 	universal-access \
 	datetime
+
+-include $(top_srcdir)/git.mk

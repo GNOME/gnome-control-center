@@ -49,7 +49,7 @@ EXTRA_DIST = \
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb --enable-gtk-doc --enable-examples
 
-GITIGNOREFILES=m4
+GITIGNOREFILES=m4 help/*/*.mo
 
 -include $(top_srcdir)/git.mk
 
