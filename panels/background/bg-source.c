@@ -20,6 +20,7 @@
  */
 
 #include "bg-source.h"
+#include "gnome-wp-item.h"
 
 G_DEFINE_ABSTRACT_TYPE (BgSource, bg_source, G_TYPE_OBJECT)
 
@@ -69,6 +70,22 @@ bg_source_set_property (GObject      *object,
     }
 }
 
+static gboolean
+free_tree_model_items (GtkTreeModel *model,
+                       GtkTreePath  *path,
+                       GtkTreeIter  *iter,
+                       gpointer      data)
+{
+  GnomeWPItem *item = NULL;
+
+  gtk_tree_model_get (model, iter, 1, &item, -1);
+
+  if (item)
+    gnome_wp_item_free (item);
+
+  return FALSE;
+}
+
 static void
 bg_source_dispose (GObject *object)
 {
@@ -76,6 +93,8 @@ bg_source_dispose (GObject *object)
 
   if (priv->store)
     {
+      gtk_tree_model_foreach (GTK_TREE_MODEL (priv->store),
+                              free_tree_model_items, NULL);
       g_object_unref (priv->store);
       priv->store = NULL;
     }
