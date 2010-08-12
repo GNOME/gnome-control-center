@@ -113,6 +113,9 @@ cc_background_panel_dispose (GObject *object)
     {
       g_object_unref (priv->builder);
       priv->builder = NULL;
+
+      /* destroying the builder object will also destroy the spinner */
+      priv->spinner = NULL;
     }
 
   if (priv->wallpapers_source)
@@ -148,6 +151,9 @@ cc_background_panel_dispose (GObject *object)
 
   if (priv->copy_cancellable)
     {
+      /* cancel any copy operation */
+      g_cancellable_cancel (priv->copy_cancellable);
+
       g_object_unref (priv->copy_cancellable);
       priv->copy_cancellable = NULL;
     }
@@ -222,7 +228,20 @@ copy_finished_cb (GObject      *source_object,
                   GAsyncResult *result,
                   gpointer      pointer)
 {
-  CcBackgroundPanelPrivate *priv = (CcBackgroundPanelPrivate*) pointer;
+  GError *err = NULL;
+  CcBackgroundPanel *panel = (CcBackgroundPanel *) pointer;
+  CcBackgroundPanelPrivate *priv = panel->priv;
+
+  if (!g_file_copy_finish (G_FILE (source_object), result, &err))
+    {
+      if (err->code != G_IO_ERROR_CANCELLED)
+        g_warning ("Failed to copy image to cache location: %s", err->message);
+
+      g_error_free (err);
+    }
+
+  /* the panel may have been destroyed before the callback is run, so be sure
+   * to check the widgets are not NULL */
 
   if (priv->spinner)
     {
@@ -230,8 +249,11 @@ copy_finished_cb (GObject      *source_object,
       priv->spinner = NULL;
     }
 
-  gtk_widget_show (WID ("preview-area"));
+  if (priv->builder)
+    gtk_widget_show (WID ("preview-area"));
 
+  /* remove the reference taken when the copy was set up */
+  g_object_unref (panel);
 }
 
 static void
@@ -284,8 +306,8 @@ update_preview (CcBackgroundPanelPrivate *priv,
 }
 
 static void
-backgrounds_changed_cb (GtkIconView              *icon_view,
-                        CcBackgroundPanelPrivate *priv)
+backgrounds_changed_cb (GtkIconView       *icon_view,
+                        CcBackgroundPanel *panel)
 {
   GtkTreeIter iter;
   GList *list;
@@ -293,6 +315,7 @@ backgrounds_changed_cb (GtkIconView              *icon_view,
   GnomeWPItem *item;
   GConfChangeSet *cs;
   gchar *pcolor, *scolor;
+  CcBackgroundPanelPrivate *priv = panel->priv;
 
   list = gtk_icon_view_get_selected_items (icon_view);
 
@@ -357,10 +380,13 @@ backgrounds_changed_cb (GtkIconView              *icon_view,
       gtk_widget_hide (WID ("preview-area"));
 
 
+      /* reference the panel in case it is removed before the copy is
+       * finished */
+      g_object_ref (panel);
       g_file_copy_async (source, dest, G_FILE_COPY_OVERWRITE,
                          G_PRIORITY_DEFAULT, priv->copy_cancellable,
                          NULL, NULL,
-                         copy_finished_cb, priv);
+                         copy_finished_cb, panel);
 
       gconf_change_set_set_string (cs, WP_FILE_KEY,
                                    cache_path);
@@ -587,7 +613,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
   widget = WID ("backgrounds-iconview");
   g_signal_connect (widget, "selection-changed",
                     G_CALLBACK (backgrounds_changed_cb),
-                    priv);
+                    self);
 
   /* setup preview area */
   widget = WID ("preview-area");
