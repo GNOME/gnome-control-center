@@ -183,6 +183,8 @@ void gnome_wp_item_free (GnomeWPItem * item) {
 
   gtk_tree_row_reference_free (item->rowref);
 
+  g_free (item->source_url);
+
   g_free (item);
 }
 
@@ -256,7 +258,7 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   if (!strcmp (item->filename, "(none)")) {
     item->description = g_strdup (item->name);
   } else {
-    const gchar *description;
+    gchar *description;
     gchar *size;
     gchar *dirname = g_path_get_dirname (item->filename);
 
@@ -266,9 +268,9 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
     if (strcmp (item->fileinfo->mime_type, "application/xml") == 0)
       {
         if (gnome_bg_changes_with_time (item->bg))
-          description = _("Slide Show");
+          description = g_strdup (_("Slide Show"));
         else if (item->width > 0 && item->height > 0)
-          description = _("Image");
+          description = g_strdup (_("Image"));
       }
     else
       description = g_content_type_get_description (item->fileinfo->mime_type);
@@ -311,5 +313,6 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
 
     g_free (size);
     g_free (dirname);
+    g_free (description);
   }
 }

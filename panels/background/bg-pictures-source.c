@@ -198,6 +198,7 @@ file_info_async_ready (GObject      *source,
           gtk_tree_path_free (tree_path);
 
           g_free (filename);
+          g_object_unref (pixbuf);
         }
     }
 

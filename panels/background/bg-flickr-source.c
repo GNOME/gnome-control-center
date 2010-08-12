@@ -116,6 +116,7 @@ _view_items_added_cb (SwClientItemView *item_view,
                                          0, pixbuf,
                                          1, item,
                                          -1);
+      g_object_unref (pixbuf);
     }
 }
 

@@ -333,6 +333,7 @@ static void gnome_wp_xml_load_from_dir (const gchar *path,
   gnome_wp_xml_add_monitor (directory, data);
 
   g_object_unref (directory);
+  g_object_unref (enumerator);
 }
 
 void gnome_wp_xml_load_list (GnomeWpXml *data) {

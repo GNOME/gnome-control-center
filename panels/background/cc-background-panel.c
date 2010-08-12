@@ -326,6 +326,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   gtk_tree_model_get_iter (model, &iter, (GtkTreePath*) list->data);
 
+  g_list_foreach (list, (GFunc)gtk_tree_path_free, NULL);
   g_list_free (list);
 
   gtk_tree_model_get (model, &iter, 1, &item, -1);
@@ -457,7 +458,6 @@ preview_expose_cb (GtkWidget         *widget,
                                             priv->thumb_factory,
                                             allocation.width,
                                             allocation.height);
-      g_object_ref (pixbuf);
     }
 
   if (pixbuf)

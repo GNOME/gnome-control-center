@@ -84,4 +84,6 @@ void gnome_wp_info_free (GnomeWPInfo * info) {
   g_free (info->thumburi);
   g_free (info->name);
   g_free (info->mime_type);
+
+  g_free (info);
 }
