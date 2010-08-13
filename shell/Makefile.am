@@ -64,28 +64,14 @@ directory_in_files = gnomecc.directory.in
 directory_DATA = $(directory_in_files:.directory.in=.directory)
 @INTLTOOL_DIRECTORY_RULE@
 
-schemasdir   = @GCONF_SCHEMA_FILE_DIR@
-schemas_DATA = control-center.schemas
-@INTLTOOL_SCHEMAS_RULE@
-
-install-data-local: $(schema_DATA)
-if GCONF_SCHEMAS_INSTALL
-	if test -z "$(DESTDIR)" ; then \
-		for p in $^ ; do \
-			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $$p 2>&1 > /dev/null; \
-		done \
-	fi
-endif
-
 EXTRA_DIST = 					\
 	$(ui_DATA)				\
 	gnome-control-center.desktop.in.in	\
 	gnomecc.directory.in			\
 	gnomecc.menu				\
 	cc-shell-marshal.list			\
-	$(schemas_DATA).in			\
 	$(NULL)
 
-DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory $(schemas_DATA)
+DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory
 
 -include $(top_srcdir)/git.mk
