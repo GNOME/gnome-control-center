@@ -213,7 +213,6 @@ source_changed_cb (GtkTreeSelection         *selection,
   gtk_tree_selection_get_selected (selection, &model, &iter);
   gtk_tree_model_get (model, &iter,
                       1, &type,
-                      2, &priv->current_source_readonly,
                       3, &source, -1);
 
   view = (GtkIconView *) gtk_builder_get_object (priv->builder,
@@ -316,11 +315,20 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   GConfChangeSet *cs;
   gchar *pcolor, *scolor;
   CcBackgroundPanelPrivate *priv = panel->priv;
+  GtkTreeSelection *selection;
 
   list = gtk_icon_view_get_selected_items (icon_view);
 
   if (!list)
     return;
+
+  /* check if the current source is read only, i.e. the image placement and
+   * color is predefined */
+  selection = gtk_tree_view_get_selection (WID ("sources-treeview"));
+  model = gtk_tree_view_get_model (WID ("sources-treeview"));
+  gtk_tree_selection_get_selected (selection, &model, &iter);
+  gtk_tree_model_get (model, &iter, 2, &priv->current_source_readonly, -1);
+
 
   model = gtk_icon_view_get_model (icon_view);
 
