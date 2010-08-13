@@ -16,6 +16,10 @@ libkeybinding_properties_la_SOURCES =   \
 	eggaccelerators.c		\
 	eggaccelerators.h
 
+libkeybinding_properties_la_CFLAGS = $(PANEL_CFLAGS)
+libkeybinding_properties_la_LIBADD = $(PANEL_LIBS)
+libkeybinding_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
+
 @INTLTOOL_DESKTOP_RULE@
 
 uidir   = $(pkgdatadir)/ui
