@@ -542,47 +542,6 @@ postpone_clicked_cb (GtkWidget *button,
 			  bw);
 }
 
-static void
-get_layout_location (GtkLabel *label,
-                     gint     *xp,
-                     gint     *yp)
-{
-	GtkMisc        *misc;
-	GtkWidget      *widget;
-	GtkAllocation  widget_allocation;
-	GtkRequisition widget_requisition;
-	gfloat         xalign, yalign;
-	gint           x, y;
-	gint           xpad, ypad;
-
-	misc = GTK_MISC (label);
-	widget = GTK_WIDGET (label);
-
-	gtk_misc_get_alignment (misc, &xalign, &yalign);
-	gtk_misc_get_padding (misc, &xpad, &ypad);
-	gtk_widget_get_allocation (widget, &widget_allocation);
-	gtk_widget_get_requisition (widget, &widget_requisition);
-
-	if (gtk_widget_get_direction (widget) != GTK_TEXT_DIR_LTR)
-		xalign = 1.0 - xalign;
-
-	x = floor (widget_allocation.x + (int)xpad
-		   + ((widget_allocation.width - widget_requisition.width - 1) * xalign)
-		   + 0.5);
-
-	y = floor (widget_allocation.y + (int)ypad
-		   + ((widget_allocation.height - widget_requisition.height - 1) * yalign)
-		   + 0.5);
-
-	if (xp) {
-		*xp = x;
-	}
-
-	if (yp) {
-		*yp = y;
-	}
-}
-
 static gboolean
 label_expose_event_cb (GtkLabel       *label,
 		       GdkEventExpose *event,
@@ -593,7 +552,7 @@ label_expose_event_cb (GtkLabel       *label,
 	GdkWindow       *window;
         cairo_t         *cr;
 
-	get_layout_location (label, &x, &y);
+        gtk_label_get_layout_offsets (label, &x, &y);
 
 	widget = GTK_WIDGET (label);
 	window = gtk_widget_get_window (widget);
