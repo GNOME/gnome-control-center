@@ -25,7 +25,7 @@
 #include "capplet-util.h"
 
 /* This must match the number of images on the 2nd page in the UI file */
-#define MAX_ENROLL_STAGES 3
+#define MAX_ENROLL_STAGES 5
 
 static DBusGProxy *manager = NULL;
 static DBusGConnection *connection = NULL;
