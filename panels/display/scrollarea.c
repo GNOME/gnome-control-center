@@ -434,39 +434,26 @@ clear_exposed_input_region (FooScrollArea  *area,
     cairo_region_destroy (viewport);
 }
 
+/* taken from mutter */
 static void
-setup_background_cr (GdkWindow *window,
-		     cairo_t   *cr,
-		     int        x_offset,
-		     int        y_offset)
+setup_background_cr (GdkWindow *window, cairo_t *cr, int x_offset, int y_offset)
 {
-    GdkPixmap *pixmap;
-    GdkWindow *parent;
-    gint x, y;
-    GdkColor bg_color;
-    gboolean parent_relative;
+  GdkWindow *parent = gdk_window_get_parent (window);
+  cairo_pattern_t *bg_pattern;
 
-    gdk_window_get_back_pixmap (window, &pixmap, &parent_relative);
-    parent = gdk_window_get_effective_parent (window);
-    gdk_window_get_geometry (window, &x, &y, NULL, NULL, NULL);
-    gdk_window_get_background (window, &bg_color);
+  bg_pattern = gdk_window_get_background_pattern (window);
+  if (bg_pattern == NULL && parent)
+    {
+      gint window_x, window_y;
 
-    if (parent_relative && parent)
-    {
-	x_offset += x;
-	y_offset += y;
-	
-	setup_background_cr (parent, cr, x_offset, y_offset);
+      gdk_window_get_position (window, &window_x, &window_y);
+      setup_background_cr (parent, cr, x_offset + window_x, y_offset + window_y);
     }
-    else if (pixmap &&
-	     !parent_relative/* &&
-	     pixmap != GDK_NO_BG*/)
+  else if (bg_pattern)
     {
-	gdk_cairo_set_source_pixmap (cr, pixmap, -x_offset, -y_offset);
-    }
-    else
-    {
-	gdk_cairo_set_source_color (cr, &bg_color);
+      cairo_translate (cr, - x_offset, - y_offset);
+      cairo_set_source (cr, bg_pattern);
+      cairo_translate (cr, x_offset, y_offset);
     }
 }
 
