@@ -1,4 +1,4 @@
-# translation of gnome-control-center.HEAD.po to Español
+# translation of gnome-control-center.master.po to Español
 # Copyright © 1999-2002, 2006, 2007, 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 #
@@ -14,11 +14,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center.HEAD\n"
+"Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-07-29 16:43+0000\n"
-"PO-Revision-Date: 2010-07-30 08:27+0200\n"
+"POT-Creation-Date: 2010-08-22 23:11+0000\n"
+"PO-Revision-Date: 2010-08-23 17:30+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -330,7 +330,6 @@ msgstr "_Domicilio:"
 
 #. Home vs Work (address)
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "Domicilio"
 
@@ -675,7 +674,6 @@ msgid "The old and new passwords are the same."
 msgstr "La contraseña nueva y la antigua son la misma."
 
 #: ../capplets/about-me/gnome-about-me-password.c:556
-#| msgid "The two passwords are not equal."
 msgid "The new password has already been used recently."
 msgstr "La contraseña nueva ya se ha usado recientemente."
 
@@ -2372,7 +2370,7 @@ msgid "Sound"
 msgstr "Sonido"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1183
 msgid "Desktop"
 msgstr "Escritorio"
 
@@ -3676,7 +3674,7 @@ msgstr "Su filtro «%s» no coincide con ningún elemento."
 msgid "No matches found."
 msgstr "No se encontró ninguna coincidencia."
 
-#: ../libslab/app-shell.c:905
+#: ../libslab/app-shell.c:909
 msgid "Other"
 msgstr "Otras"
 
@@ -3698,11 +3696,11 @@ msgstr "Actualizar"
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:738
 msgid "Remove from Favorites"
 msgstr "Quitar de favoritos"
 
-#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:740
 msgid "Add to Favorites"
 msgstr "Añadir a favoritos"
 
@@ -3714,27 +3712,33 @@ msgstr "Quitar de los programas de inicio"
 msgid "Add to Startup Programs"
 msgstr "Añadir a los programas de inicio"
 
-#: ../libslab/bookmark-agent.c:1077
+#: ../libslab/bookmark-agent.c:1110
 msgid "New Spreadsheet"
 msgstr "Hoja de cálculo nueva"
 
-#: ../libslab/bookmark-agent.c:1082
+#: ../libslab/bookmark-agent.c:1115
 msgid "New Document"
 msgstr "Documento nuevo"
 
-#: ../libslab/bookmark-agent.c:1140
+#: ../libslab/bookmark-agent.c:1168
+#| msgid "Home"
+msgctxt "Home folder"
+msgid "Home"
+msgstr "Carpeta personal"
+
+#: ../libslab/bookmark-agent.c:1175
 msgid "Documents"
 msgstr "Documentos"
 
-#: ../libslab/bookmark-agent.c:1153
+#: ../libslab/bookmark-agent.c:1190
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1194
 msgid "Network Servers"
 msgstr "Servidores de red"
 
-#: ../libslab/bookmark-agent.c:1186
+#: ../libslab/bookmark-agent.c:1223
 msgid "Search"
 msgstr "Buscar"
 
@@ -3745,72 +3749,83 @@ msgid "<b>Open</b>"
 msgstr "<b>Abrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:236
 msgid "Rename..."
 msgstr "Renombrar…"
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
+#: ../libslab/document-tile.c:250 ../libslab/document-tile.c:259
 msgid "Send To..."
 msgstr "Enviar a…"
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:285
 msgid "Move to Trash"
 msgstr "Mover a la papelera"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
+#: ../libslab/document-tile.c:295 ../libslab/document-tile.c:854
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:1016
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "¿Está seguro de que quiere borrar permanentemente «%s»?"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "Si borra un elemento se pierde para siempre."
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "Open with \"%s\""
 msgstr "Abrir con «%s»"
 
-#: ../libslab/document-tile.c:207
+#: ../libslab/document-tile.c:209
 msgid "Open with Default Application"
 msgstr "Abrir con la aplicación predeterminada"
 
-#: ../libslab/document-tile.c:218
+#: ../libslab/document-tile.c:220
 msgid "Open in File Manager"
 msgstr "Abrir en el gestor de archivos"
 
-#: ../libslab/document-tile.c:617
+#. clean item from menu
+#: ../libslab/document-tile.c:304
+#| msgid "Remove from Favorites"
+msgid "Remove from recent menu"
+msgstr "Quitar del menú de recientes"
+
+#. clean all the items from menu
+#: ../libslab/document-tile.c:312
+msgid "Purge all the recent items"
+msgstr "Purgar todos los elementos recientes"
+
+#: ../libslab/document-tile.c:634
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:624
+#: ../libslab/document-tile.c:641
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:632
+#: ../libslab/document-tile.c:649
 msgid "Today %l:%M %p"
 msgstr "Hoy %H:%M"
 
-#: ../libslab/document-tile.c:642
+#: ../libslab/document-tile.c:659
 msgid "Yesterday %l:%M %p"
 msgstr "Ayer %H:%M"
 
-#: ../libslab/document-tile.c:654
+#: ../libslab/document-tile.c:671
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:679
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %H:%M"
 
-#: ../libslab/document-tile.c:664
+#: ../libslab/document-tile.c:681
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
 
