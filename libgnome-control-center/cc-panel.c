@@ -153,10 +153,12 @@ cc_panel_size_allocate (GtkWidget     *widget,
   GtkAllocation child_allocation;
   guint border_width;
 
+  gtk_widget_set_allocation (widget, allocation);
+
+
   child_allocation = *allocation;
 
   border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
-
 
   child_allocation.width -= 2 * border_width;
   child_allocation.height -= 2 * border_width;
