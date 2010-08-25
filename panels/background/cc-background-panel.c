@@ -63,6 +63,9 @@ struct _CcBackgroundPanelPrivate
   GCancellable *copy_cancellable;
 
   GtkWidget *spinner;
+
+  GdkPixbuf *display_base;
+  GdkPixbuf *display_overlay;
 };
 
 enum
@@ -164,6 +167,18 @@ cc_background_panel_dispose (GObject *object)
       priv->thumb_factory = NULL;
     }
 
+  if (priv->display_base)
+    {
+      g_object_unref (priv->display_base);
+      priv->display_base = NULL;
+    }
+
+  if (priv->display_overlay)
+    {
+      g_object_unref (priv->display_overlay);
+      priv->display_overlay = NULL;
+    }
+
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
 
@@ -201,7 +216,7 @@ cc_background_panel_class_finalize (CcBackgroundPanelClass *klass)
 }
 
 static void
-source_changed_cb (GtkTreeSelection         *selection,
+source_changed_cb (GtkComboBox              *combo,
                    CcBackgroundPanelPrivate *priv)
 {
   GtkTreeIter iter;
@@ -210,7 +225,8 @@ source_changed_cb (GtkTreeSelection         *selection,
   guint type;
   BgSource *source;
 
-  gtk_tree_selection_get_selected (selection, &model, &iter);
+  gtk_combo_box_get_active_iter (combo, &iter);
+  model = gtk_combo_box_get_model (combo);
   gtk_tree_model_get (model, &iter,
                       1, &type,
                       3, &source, -1);
@@ -315,7 +331,6 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   GConfChangeSet *cs;
   gchar *pcolor, *scolor;
   CcBackgroundPanelPrivate *priv = panel->priv;
-  GtkTreeSelection *selection;
 
   list = gtk_icon_view_get_selected_items (icon_view);
 
@@ -324,9 +339,9 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   /* check if the current source is read only, i.e. the image placement and
    * color is predefined */
-  selection = gtk_tree_view_get_selection (WID ("sources-treeview"));
-  model = gtk_tree_view_get_model (WID ("sources-treeview"));
-  gtk_tree_selection_get_selected (selection, &model, &iter);
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (WID ("sources-combobox")));
+  gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("sources-combobox")),
+                                 &iter);
   gtk_tree_model_get (model, &iter, 2, &priv->current_source_readonly, -1);
 
 
@@ -455,6 +470,13 @@ preview_expose_cb (GtkWidget         *widget,
   GtkAllocation allocation;
   CcBackgroundPanelPrivate *priv = panel->priv;
   GdkPixbuf *pixbuf = NULL;
+  const gint preview_width = 416;
+  const gint preview_height = 248;
+  const gint preview_x = 45;
+  const gint preview_y = 84;
+  GdkPixbuf *preview, *temp;
+  gfloat scale;
+  gint size;
 
   cr = gdk_cairo_create (gtk_widget_get_window (widget));
 
@@ -464,20 +486,53 @@ preview_expose_cb (GtkWidget         *widget,
     {
       pixbuf = gnome_wp_item_get_thumbnail (priv->current_background,
                                             priv->thumb_factory,
-                                            allocation.width,
-                                            allocation.height);
+                                            preview_width,
+                                            preview_height);
     }
+
+  if (!priv->display_base)
+    return FALSE;
+
+
+  preview = gdk_pixbuf_copy (priv->display_base);
 
   if (pixbuf)
     {
-      gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-
-      cairo_paint (cr);
+      gdk_pixbuf_composite (pixbuf, preview,
+                            preview_x, preview_y,
+                            preview_width, preview_height,
+                            preview_x, preview_y, 1, 1,
+                            GDK_INTERP_BILINEAR, 255);
 
       g_object_unref (pixbuf);
     }
 
+
+  if (priv->display_overlay)
+    {
+      gdk_pixbuf_composite (priv->display_overlay, preview,
+                            0, 0, 512, 512,
+                            0, 0, 1, 1,
+                            GDK_INTERP_BILINEAR, 255);
+    }
+
+
+  if (allocation.width < allocation.height)
+    size = allocation.width;
+  else
+    size = allocation.height;
+
+  temp = gdk_pixbuf_scale_simple (preview, size, size, GDK_INTERP_BILINEAR);
+
+  gdk_cairo_set_source_pixbuf (cr,
+                               temp,
+                               allocation.width / 2 - (size / 2),
+                               allocation.height / 2 - (size / 2));
+  cairo_paint (cr);
   cairo_destroy (cr);
+
+  g_object_unref (temp);
+  g_object_unref (preview);
 
   return TRUE;
 }
@@ -542,10 +597,9 @@ cc_background_panel_init (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
   gchar *objects[] = { "backgrounds-liststore", "style-liststore",
-      "sources-liststore", "background-panel", NULL };
+      "sources-liststore", "background-panel", "sizegroup", NULL };
   GError *err = NULL;
   GtkWidget *widget;
-  GtkTreeSelection *selection;
   gint width, height;
   GtkListStore *store;
   gchar *filename;
@@ -613,9 +667,8 @@ cc_background_panel_init (CcBackgroundPanel *self)
   gtk_widget_show_all (GTK_WIDGET (self));
 
   /* connect to source change signal */
-  widget = WID ("sources-treeview");
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-  g_signal_connect (selection, "changed", G_CALLBACK (source_changed_cb), priv);
+  widget = WID ("sources-combobox");
+  g_signal_connect (widget, "changed", G_CALLBACK (source_changed_cb), priv);
 
   /* connect to the background iconview change signal */
   widget = WID ("backgrounds-iconview");
@@ -628,12 +681,11 @@ cc_background_panel_init (CcBackgroundPanel *self)
   g_signal_connect (widget, "expose-event", G_CALLBACK (preview_expose_cb),
                     self);
 
-
-  width = 150;
-  height = width * ((double) gdk_screen_get_height (gdk_screen_get_default ()) /
-    (double) gdk_screen_get_width (gdk_screen_get_default ()));
-
-  gtk_widget_set_size_request (widget, width, height);
+  priv->display_base = gdk_pixbuf_new_from_file (DATADIR "/display-base.png",
+                                                 NULL);
+  priv->display_overlay = gdk_pixbuf_new_from_file (DATADIR
+                                                    "/display-overlay.png",
+                                                    NULL);
 
   g_signal_connect (WID ("style-combobox"), "changed",
                     G_CALLBACK (style_changed_cb), self);

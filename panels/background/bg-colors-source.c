@@ -100,7 +100,7 @@ bg_colors_source_init (BgColorsSource *self)
       /* insert the item into the liststore */
       pixbuf = gnome_wp_item_get_thumbnail (item,
                                             thumb_factory,
-                                            100, 75);
+                                            THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
       gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,
                                          1, item,

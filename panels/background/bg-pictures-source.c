@@ -184,7 +184,8 @@ file_info_async_ready (GObject      *source,
 
 
           /* insert the item into the liststore */
-          pixbuf = gdk_pixbuf_new_from_file_at_scale (filename, 100, 75, TRUE,
+          pixbuf = gdk_pixbuf_new_from_file_at_scale (filename, THUMBNAIL_WIDTH,
+                                                      THUMBNAIL_HEIGHT, TRUE,
                                                       NULL);
           gtk_list_store_insert_with_values (store, &iter, 0,
                                              0, pixbuf,

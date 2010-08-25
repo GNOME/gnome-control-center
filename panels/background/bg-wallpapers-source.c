@@ -170,7 +170,7 @@ load_wallpapers (gchar              *key,
   gtk_list_store_append (store, &iter);
 
   pixbuf = gnome_wp_item_get_thumbnail (item, priv->thumb_factory,
-                                        100, 75);
+                                        THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
   gnome_wp_item_update_description (item);
 
   gtk_list_store_set (store, &iter,
@@ -202,8 +202,8 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   wp_xml->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
   wp_xml->client = gconf_client_get_default ();
   wp_xml->wp_model = bg_source_get_liststore (BG_SOURCE (self));
-  wp_xml->thumb_width = 100;
-  wp_xml->thumb_height = 75;
+  wp_xml->thumb_width = THUMBNAIL_WIDTH;
+  wp_xml->thumb_height = THUMBNAIL_HEIGHT;
   wp_xml->thumb_factory = priv->thumb_factory;
 
   gnome_wp_xml_load_list (wp_xml);

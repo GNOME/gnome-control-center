@@ -110,7 +110,8 @@ _view_items_added_cb (SwClientItemView *item_view,
 
       /* insert the item into the liststore */
       thumb_url = sw_item_get_value (sw_item, "thumbnail");
-      pixbuf = gdk_pixbuf_new_from_file_at_scale (thumb_url, 100, 75, TRUE,
+      pixbuf = gdk_pixbuf_new_from_file_at_scale (thumb_url, THUMBNAIL_WIDTH,
+                                                  THUMBNAIL_HEIGHT, TRUE,
                                                   NULL);
       gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,

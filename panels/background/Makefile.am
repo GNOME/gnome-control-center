@@ -3,7 +3,9 @@ cappletname = background
 
 uidir = $(pkgdatadir)/ui/background
 dist_ui_DATA = \
-	background.ui
+	background.ui \
+	display-base.png \
+	display-overlay.png
 
 
 INCLUDES = 						\

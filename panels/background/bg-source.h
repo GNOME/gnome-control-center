@@ -26,6 +26,9 @@
 
 G_BEGIN_DECLS
 
+#define THUMBNAIL_WIDTH 47
+#define THUMBNAIL_HEIGHT 47
+
 #define BG_TYPE_SOURCE bg_source_get_type()
 
 #define BG_SOURCE(obj) \
