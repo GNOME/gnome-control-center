@@ -78,7 +78,7 @@ struct _GnomeControlCenterPrivate
 
 /* Use a fixed width for the shell, since resizing horizontally is more awkward
  * for the user than resizing vertically */
-#define FIXED_WIDTH 750
+#define FIXED_WIDTH 675
 
 
 static void
