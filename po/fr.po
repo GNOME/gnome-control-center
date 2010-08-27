@@ -29,7 +29,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-04-18 23:43+0000\n"
+"POT-Creation-Date: 2010-08-27 11:06+0000\n"
 "PO-Revision-Date: 2010-04-21 23:30+0200\n"
 "Last-Translator: Laurent Coudeur <laurentc@iol.ie>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -341,7 +341,6 @@ msgstr "D_omicile :"
 
 #. Home vs Work (address)
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "Domicile"
 
@@ -644,7 +643,7 @@ msgstr "Authentifié !"
 #. Update status message and auth state
 #. Authentication failure
 #: ../capplets/about-me/gnome-about-me-password.c:474
-#: ../capplets/about-me/gnome-about-me-password.c:554
+#: ../capplets/about-me/gnome-about-me-password.c:559
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
@@ -656,69 +655,73 @@ msgstr ""
 msgid "That password was incorrect."
 msgstr "Ce mot de passe est incorrect."
 
-#: ../capplets/about-me/gnome-about-me-password.c:525
+#: ../capplets/about-me/gnome-about-me-password.c:527
 msgid "Your password has been changed."
 msgstr "Votre mot de passe a été modifié."
 
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:535
+#: ../capplets/about-me/gnome-about-me-password.c:537
 #, c-format
 msgid "System error: %s."
 msgstr "Erreur système : %s."
 
-#: ../capplets/about-me/gnome-about-me-password.c:538
+#: ../capplets/about-me/gnome-about-me-password.c:540
 msgid "The password is too short."
 msgstr "Le mot de passe est trop court."
 
-#: ../capplets/about-me/gnome-about-me-password.c:542
+#: ../capplets/about-me/gnome-about-me-password.c:544
 msgid "The password is too simple."
 msgstr "Le mot de passe est trop simple."
 
-#: ../capplets/about-me/gnome-about-me-password.c:546
+#: ../capplets/about-me/gnome-about-me-password.c:549
 msgid "The old and new passwords are too similar."
 msgstr "L'ancien et le nouveau mot de passe sont trop similaires."
 
-#: ../capplets/about-me/gnome-about-me-password.c:548
+#: ../capplets/about-me/gnome-about-me-password.c:551
 msgid "The new password must contain numeric or special character(s)."
 msgstr ""
 "Le nouveau mot de passe doit contenir un ou plusieurs caractères spéciaux ou "
 "numériques."
 
-#: ../capplets/about-me/gnome-about-me-password.c:551
+#: ../capplets/about-me/gnome-about-me-password.c:554
 msgid "The old and new passwords are the same."
 msgstr "L'ancien et le nouveau mot de passe sont identiques."
 
+#: ../capplets/about-me/gnome-about-me-password.c:556
+msgid "The new password has already been used recently."
+msgstr "Le nouveau mot de passe a déjà été utilisé récemment."
+
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:827
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "Impossible de lancer %s : %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:826
+#: ../capplets/about-me/gnome-about-me-password.c:831
 msgid "Unable to launch backend"
 msgstr "Impossible de lancer le moteur"
 
-#: ../capplets/about-me/gnome-about-me-password.c:827
+#: ../capplets/about-me/gnome-about-me-password.c:832
 msgid "A system error has occurred"
 msgstr "Une erreur système est survenue"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:847
+#: ../capplets/about-me/gnome-about-me-password.c:852
 msgid "Checking password..."
 msgstr "Vérification du mot de passe..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:939
 msgid "Click <b>Change password</b> to change your password."
 msgstr ""
 "Cliquez sur <b>Changer le mot de passe</b> pour modifier le mot de passe."
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:942
 msgid "Please type your password in the <b>New password</b> field."
 msgstr ""
 "Saisissez votre mot de passe dans le champ <b>Nouveau mot de passe</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:940
+#: ../capplets/about-me/gnome-about-me-password.c:945
 #: ../capplets/about-me/gnome-about-me-password.ui.h:5
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
@@ -726,7 +729,7 @@ msgstr ""
 "Saisissez à nouveau votre mot de passe dans le champ <b>Ressaisissez votre "
 "nouveau mot de passe</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:943
+#: ../capplets/about-me/gnome-about-me-password.c:948
 msgid "The two passwords are not equal."
 msgstr "Les deux mots de passe ne sont pas identiques."
 
@@ -845,11 +848,11 @@ msgstr "Ajouter un papier peint"
 msgid "All files"
 msgstr "Tous les fichiers"
 
-#: ../capplets/appearance/appearance-font.c:494
+#: ../capplets/appearance/appearance-font.c:499
 msgid "Font may be too large"
 msgstr "La police peut être trop grande"
 
-#: ../capplets/appearance/appearance-font.c:498
+#: ../capplets/appearance/appearance-font.c:503
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -868,7 +871,7 @@ msgstr[1] ""
 "l'utilisation efficace de l'ordinateur. Il est recommandé de sélectionner "
 "une taille inférieure à %d."
 
-#: ../capplets/appearance/appearance-font.c:511
+#: ../capplets/appearance/appearance-font.c:516
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -887,11 +890,11 @@ msgstr[1] ""
 "l'utilisation efficace de l'ordinateur. Il est recommandé de sélectionner "
 "une taille plus petite."
 
-#: ../capplets/appearance/appearance-font.c:534
+#: ../capplets/appearance/appearance-font.c:539
 msgid "Use previous font"
 msgstr "Utiliser la police précédente"
 
-#: ../capplets/appearance/appearance-font.c:536
+#: ../capplets/appearance/appearance-font.c:541
 msgid "Use selected font"
 msgstr "Utiliser la police sélectionnée"
 
@@ -1497,7 +1500,7 @@ msgid "The theme already exists. Would you like to replace it?"
 msgstr "Le thème existe déjà. Voulez-vous le remplacer ?"
 
 #: ../capplets/appearance/theme-save.c:157
-#: ../capplets/common/file-transfer-dialog.c:450
+#: ../capplets/common/file-transfer-dialog.c:451
 msgid "_Overwrite"
 msgstr "Éc_raser"
 
@@ -1549,7 +1552,7 @@ msgid "Copying '%s'"
 msgstr "Copie de « %s »"
 
 #: ../capplets/common/file-transfer-dialog.c:185
-#: ../capplets/common/file-transfer-dialog.c:312
+#: ../capplets/common/file-transfer-dialog.c:313
 msgid "Copying files"
 msgstr "Copie de fichiers"
 
@@ -1601,16 +1604,16 @@ msgstr "Total d'URI"
 msgid "Total number of URIs"
 msgstr "Nombre total d'URI"
 
-#: ../capplets/common/file-transfer-dialog.c:444
+#: ../capplets/common/file-transfer-dialog.c:445
 #, c-format
 msgid "File '%s' already exists. Do you want to overwrite it?"
 msgstr "Le fichier « %s » existe déjà. Voulez-vous l'écraser ?"
 
-#: ../capplets/common/file-transfer-dialog.c:447
+#: ../capplets/common/file-transfer-dialog.c:448
 msgid "_Skip"
 msgstr "_Ignorer"
 
-#: ../capplets/common/file-transfer-dialog.c:448
+#: ../capplets/common/file-transfer-dialog.c:449
 msgid "Overwrite _All"
 msgstr "Tout éc_raser"
 
@@ -1692,7 +1695,7 @@ msgstr ""
 "Fonction de rappel devant être émise lorsque les données de l'objet "
 "d'éditeur de paramètres doivent être libérées"
 
-#: ../capplets/common/gconf-property-editor.c:1405
+#: ../capplets/common/gconf-property-editor.c:1406
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1705,7 +1708,7 @@ msgstr ""
 "Assurez-vous qu'il existe et essayez à nouveau, ou choisissez une image "
 "d'arrière-plan différente."
 
-#: ../capplets/common/gconf-property-editor.c:1413
+#: ../capplets/common/gconf-property-editor.c:1414
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1718,11 +1721,11 @@ msgstr ""
 "\n"
 "Sélectionnez une image différente à la place."
 
-#: ../capplets/common/gconf-property-editor.c:1533
+#: ../capplets/common/gconf-property-editor.c:1536
 msgid "Please select an image."
 msgstr "Sélectionnez une image."
 
-#: ../capplets/common/gconf-property-editor.c:1538
+#: ../capplets/common/gconf-property-editor.c:1541
 msgid "_Select"
 msgstr "_Sélectionner"
 
@@ -2214,6 +2217,109 @@ msgstr "Modifier la résolution et la position des écrans"
 msgid "Monitors"
 msgstr "Écrans"
 
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:44
+#, c-format
+msgid ""
+"Usage: %s SOURCE_FILE DEST_NAME\n"
+"\n"
+"This program installs a RANDR profile for multi-monitor setups into\n"
+"a systemwide location.  The resulting profile will get used when\n"
+"the RANDR plug-in gets run in gnome-settings-daemon.\n"
+"\n"
+"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+"xml\n"
+"\n"
+"DEST_NAME - relative name for the installed file.  This will get put in\n"
+"            the systemwide directory for RANDR configurations,\n"
+"            so the result will typically be %s/DEST_NAME\n"
+msgstr ""
+"Utilisation : %s FICHIER_SOURCE NOM_DEST\n"
+"\n"
+"Ce programme installe un profil RANDR pour une configuration multi-moniteur\n"
+"dans un emplacement système. Le profil résultant sera utilisé quand le\n"
+"greffon RANDR est exécuté dans gnome-settings-daemon.\n"
+"\n"
+"FICHIER_SOURCE - un chemin complet, typiquement /home/utilisateur/.config/"
+"monitors.xml\n"
+"\n"
+"NOM_DEST - nom relatif pour le fichier installé. Il sera placé dans le "
+"répertoire\n"
+"            système des configurations de RANDR, donc le résultat\n"
+"            sera typiquement %s/NOM_DEST\n"
+
+#. Translators: only able to install RANDR profiles as root
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:151
+msgid "This program can only be used by the root user"
+msgstr "Ce programme ne peut être utilisé que par l'utilisateur root"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:168
+msgid "The source filename must be absolute"
+msgstr "Le nom du fichier source doit être absolu"
+
+#. Translators: first %s is a filename; second %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:179
+#, c-format
+msgid "Could not open %s: %s\n"
+msgstr "Impossible d'ouvrir %s : %s\n"
+
+#. Translators: first %s is a filename; second %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:188
+#, c-format
+msgid "Could not get information for %s: %s\n"
+msgstr "Impossible d'obtenir les informations de %s : %s\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:195
+#, c-format
+msgid "%s must be a regular file\n"
+msgstr "%s doit être un fichier standard\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:204
+msgid "This program must only be run through pkexec(1)"
+msgstr "Ce programme ne doit être lancé que par pkexec(1)"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:209
+msgid "PKEXEC_UID must be set to an integer value"
+msgstr "PKEXEC_UID doit être défini à une valeur entière"
+
+#. Translators: we are complaining that a file must be really owned by the user who called this program
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:215
+#, c-format
+msgid "%s must be owned by you\n"
+msgstr "Vous devez être propriétaire de %s\n"
+
+#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:223
+#, c-format
+msgid "%s must not have any directory components\n"
+msgstr "%s ne doit pas contenir de nom de répertoire\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:231
+#, c-format
+msgid "%s must be a directory\n"
+msgstr "%s doit être un répertoire\n"
+
+#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:242
+#, c-format
+msgid "Could not open %s/%s: %s\n"
+msgstr "Impossible d'ouvrir %s/%s : %s\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:262
+#, c-format
+msgid "Could not rename %s to %s: %s\n"
+msgstr "Impossible de renommer %s en %s : %s\n"
+
+#: ../capplets/display/org.gnome.randr.policy.in.h:1
+msgid ""
+"Authentication is required to install multi-monitor settings for all users"
+msgstr ""
+"Une authentification est nécessaire pour installer des réglages multi-"
+"moniteurs pour tous les utilisateurs"
+
+#: ../capplets/display/org.gnome.randr.policy.in.h:2
+msgid "Install multi-monitor settings for the whole system"
+msgstr "Installer des réglages multi-moniteurs pour tout le système"
+
 #: ../capplets/display/xrandr-capplet.c:312
 msgid "Upside Down"
 msgstr "Inversée"
@@ -2251,34 +2357,33 @@ msgstr ""
 "Sélectionnez un écran pour modifier ses propriétés ; faites-le glisser pour "
 "changer son emplacement."
 
-#: ../capplets/display/xrandr-capplet.c:2067
+#: ../capplets/display/xrandr-capplet.c:2069
 msgid "Could not save the monitor configuration"
 msgstr "Impossible d'enregistrer la configuration de l'écran"
 
-#: ../capplets/display/xrandr-capplet.c:2089
+#: ../capplets/display/xrandr-capplet.c:2091
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Impossible d'obtenir le bus de session lors de l'application de la "
 "configuration d'affichage"
 
-#: ../capplets/display/xrandr-capplet.c:2131
+#: ../capplets/display/xrandr-capplet.c:2133
 msgid "Could not detect displays"
 msgstr "Impossible de détecter les écrans"
 
-#: ../capplets/display/xrandr-capplet.c:2323
+#: ../capplets/display/xrandr-capplet.c:2325
 msgid "The monitor configuration has been saved"
 msgstr "La configuration de l'écran est enregistrée"
 
-#: ../capplets/display/xrandr-capplet.c:2325
+#: ../capplets/display/xrandr-capplet.c:2327
 msgid "This configuration will be used the next time someone logs in."
-msgstr ""
-"Cette configuration sera utilisée à la prochaine connexion."
+msgstr "Cette configuration sera utilisée à la prochaine connexion."
 
-#: ../capplets/display/xrandr-capplet.c:2359
+#: ../capplets/display/xrandr-capplet.c:2361
 msgid "Could not set the default configuration for monitors"
 msgstr "Impossible de définir la configuration par défaut des écrans"
 
-#: ../capplets/display/xrandr-capplet.c:2401
+#: ../capplets/display/xrandr-capplet.c:2403
 msgid "Could not get screen information"
 msgstr "Impossible d'obtenir les informations de l'écran"
 
@@ -2287,7 +2392,7 @@ msgid "Sound"
 msgstr "Son"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1183
 msgid "Desktop"
 msgstr "Bureau"
 
@@ -2624,8 +2729,9 @@ msgstr "Vitesse de répétition des touches"
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
-msgstr "Remplace les réglages actuels d'agencement de clavier par "
-"les réglages par défaut"
+msgstr ""
+"Remplace les réglages actuels d'agencement de clavier par les réglages par "
+"défaut"
 
 # _f utilisé par _Fermer
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
@@ -2703,22 +2809,26 @@ msgid "_Separate layout for each window"
 msgstr "_Agencement séparé pour chaque fenêtre"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:54
+msgid "_Show..."
+msgstr "A_fficher..."
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
 msgid "_Simulate simultaneous keypresses"
 msgstr "_Simuler les appuis de touches simultanés"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
 msgid "_Speed:"
 msgstr "_Vitesse :"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
 msgid "_Type to test settings:"
 msgstr "_Saisissez une phrase pour tester les réglages :"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
 msgid "_Work interval lasts:"
 msgstr "La période de _travail dure :"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:59
 msgid "minutes"
 msgstr "minutes"
 
@@ -2770,7 +2880,7 @@ msgstr "Options de l'agencement du clavier"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:242
 msgid "Layout"
 msgstr "Agencement"
 
@@ -2782,8 +2892,8 @@ msgstr "Fabricants"
 msgid "Models"
 msgstr "Modèles"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:234
-#: ../capplets/network/gnome-network-properties.c:583
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:235
+#: ../capplets/network/gnome-network-properties.c:581
 msgid "Default"
 msgstr "Par défaut"
 
@@ -2992,12 +3102,12 @@ msgstr "Souris"
 msgid "Set your mouse preferences"
 msgstr "Définir les paramètres de votre souris"
 
-#: ../capplets/network/gnome-network-properties.c:701
-#: ../capplets/network/gnome-network-properties.c:852
+#: ../capplets/network/gnome-network-properties.c:699
+#: ../capplets/network/gnome-network-properties.c:850
 msgid "New Location..."
 msgstr "Nouvel emplacement..."
 
-#: ../capplets/network/gnome-network-properties.c:818
+#: ../capplets/network/gnome-network-properties.c:816
 msgid "Location already exists"
 msgstr "Cet emplacement existe déjà"
 
@@ -3115,19 +3225,19 @@ msgstr ""
 "Impossible de démarrer l'application de préférences pour votre gestionnaire "
 "de fenêtres"
 
-#: ../capplets/windows/gnome-window-properties.c:604
+#: ../capplets/windows/gnome-window-properties.c:603
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:610
+#: ../capplets/windows/gnome-window-properties.c:609
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:617
+#: ../capplets/windows/gnome-window-properties.c:616
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (ou le « logo Windows »)"
 
-#: ../capplets/windows/gnome-window-properties.c:624
+#: ../capplets/windows/gnome-window-properties.c:623
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -3343,8 +3453,7 @@ msgstr[1] "%d minutes avant la prochaine pause"
 #: ../typing-break/drwright.c:515
 #, c-format
 msgid "Take a break now (next in less than one minute)"
-msgstr ""
-"Prendre une pause maintenant (moins d'une minute avant la prochaine)"
+msgstr "Prendre une pause maintenant (moins d'une minute avant la prochaine)"
 
 #: ../typing-break/drwright.c:517
 #, c-format
@@ -3496,48 +3605,48 @@ msgstr "Indique s'il faut créer des vignettes pour les polices TrueType"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Indique s'il faut créer des vignettes pour les polices Type1"
 
-#: ../font-viewer/font-view.c:289
+#: ../font-viewer/font-view.c:293
 msgid "Name:"
 msgstr "Nom :"
 
-#: ../font-viewer/font-view.c:292
+#: ../font-viewer/font-view.c:296
 msgid "Style:"
 msgstr "Style :"
 
-#: ../font-viewer/font-view.c:305
+#: ../font-viewer/font-view.c:309
 msgid "Type:"
 msgstr "Type :"
 
-#: ../font-viewer/font-view.c:309
+#: ../font-viewer/font-view.c:313
 msgid "Size:"
 msgstr "Taille :"
 
-#: ../font-viewer/font-view.c:353 ../font-viewer/font-view.c:366
+#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:370
 msgid "Version:"
 msgstr "Version :"
 
-#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:368
+#: ../font-viewer/font-view.c:361 ../font-viewer/font-view.c:372
 msgid "Copyright:"
 msgstr "Copyright :"
 
-#: ../font-viewer/font-view.c:361
+#: ../font-viewer/font-view.c:365
 msgid "Description:"
 msgstr "Description :"
 
-#: ../font-viewer/font-view.c:441
+#: ../font-viewer/font-view.c:445
 msgid "Installed"
 msgstr "Installée"
 
-#: ../font-viewer/font-view.c:444
+#: ../font-viewer/font-view.c:448
 msgid "Install Failed"
 msgstr "L'installation a échoué"
 
-#: ../font-viewer/font-view.c:516
+#: ../font-viewer/font-view.c:519
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "usage : %s fichierpolice\n"
 
-#: ../font-viewer/font-view.c:591
+#: ../font-viewer/font-view.c:590
 msgid "I_nstall Font"
 msgstr "I_nstaller la police"
 
@@ -3583,7 +3692,7 @@ msgstr "Votre filtre « %s » ne correspond à aucun élément."
 msgid "No matches found."
 msgstr "Aucune correspondance trouvée."
 
-#: ../libslab/app-shell.c:905
+#: ../libslab/app-shell.c:909
 msgid "Other"
 msgstr "Autre"
 
@@ -3605,11 +3714,11 @@ msgstr "Mettre à jour"
 msgid "Uninstall"
 msgstr "Désinstaller"
 
-#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:738
 msgid "Remove from Favorites"
 msgstr "Enlever des favoris"
 
-#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:740
 msgid "Add to Favorites"
 msgstr "Ajouter aux favoris"
 
@@ -3621,27 +3730,32 @@ msgstr "Retirer des programmes au démarrage"
 msgid "Add to Startup Programs"
 msgstr "Ajouter aux programmes au démarrage"
 
-#: ../libslab/bookmark-agent.c:1077
+#: ../libslab/bookmark-agent.c:1110
 msgid "New Spreadsheet"
 msgstr "Nouvelle feuille de calcul"
 
-#: ../libslab/bookmark-agent.c:1082
+#: ../libslab/bookmark-agent.c:1115
 msgid "New Document"
 msgstr "Nouveau document"
 
-#: ../libslab/bookmark-agent.c:1140
+#: ../libslab/bookmark-agent.c:1168
+msgctxt "Home folder"
+msgid "Home"
+msgstr "Dossier personnel"
+
+#: ../libslab/bookmark-agent.c:1175
 msgid "Documents"
 msgstr "Documents"
 
-#: ../libslab/bookmark-agent.c:1153
+#: ../libslab/bookmark-agent.c:1190
 msgid "File System"
 msgstr "Système de fichiers"
 
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1194
 msgid "Network Servers"
 msgstr "Serveurs réseau"
 
-#: ../libslab/bookmark-agent.c:1186
+#: ../libslab/bookmark-agent.c:1223
 msgid "Search"
 msgstr "Rechercher"
 
@@ -3652,72 +3766,82 @@ msgid "<b>Open</b>"
 msgstr "<b>Ouvrir</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:236
 msgid "Rename..."
 msgstr "Renommer..."
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
+#: ../libslab/document-tile.c:250 ../libslab/document-tile.c:259
 msgid "Send To..."
 msgstr "Envoyer à..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:285
 msgid "Move to Trash"
 msgstr "Mettre à la corbeille"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
+#: ../libslab/document-tile.c:295 ../libslab/document-tile.c:854
 msgid "Delete"
 msgstr "Effacer"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:1016
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Voulez-vous vraiment supprimer définitivement « %s » ?"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "Si vous supprimez un élément, il sera perdu définitivement."
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "Open with \"%s\""
 msgstr "Ouvrir avec « %s »"
 
-#: ../libslab/document-tile.c:207
+#: ../libslab/document-tile.c:209
 msgid "Open with Default Application"
 msgstr "Ouvrir avec l'application par défaut"
 
-#: ../libslab/document-tile.c:218
+#: ../libslab/document-tile.c:220
 msgid "Open in File Manager"
 msgstr "Ouvrir dans le gestionnaire de fichiers"
 
-#: ../libslab/document-tile.c:617
+#. clean item from menu
+#: ../libslab/document-tile.c:304
+msgid "Remove from recent menu"
+msgstr "Effacer du menu Documents récents"
+
+#. clean all the items from menu
+#: ../libslab/document-tile.c:312
+msgid "Purge all the recent items"
+msgstr "Effacer tous les éléments récents"
+
+#: ../libslab/document-tile.c:634
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:624
+#: ../libslab/document-tile.c:641
 msgid "%l:%M %p"
 msgstr "%k:%M"
 
-#: ../libslab/document-tile.c:632
+#: ../libslab/document-tile.c:649
 msgid "Today %l:%M %p"
 msgstr "Aujourd'hui %k:%M"
 
-#: ../libslab/document-tile.c:642
+#: ../libslab/document-tile.c:659
 msgid "Yesterday %l:%M %p"
 msgstr "Hier %k:%M"
 
-#: ../libslab/document-tile.c:654
+#: ../libslab/document-tile.c:671
 msgid "%a %l:%M %p"
 msgstr "%a %k:%M"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:679
 msgid "%b %d %l:%M %p"
 msgstr "%d %b %k:%M"
 
-#: ../libslab/document-tile.c:664
+#: ../libslab/document-tile.c:681
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
 
@@ -3734,4 +3858,3 @@ msgstr "<b>Ouvrir %s</b>"
 #, c-format
 msgid "Remove from System Items"
 msgstr "Supprimer parmi les éléments systèmes"
-
