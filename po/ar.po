@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-20 20:55+0200\n"
-"PO-Revision-Date: 2010-02-24 20:44+0300\n"
+"POT-Creation-Date: 2010-08-27 03:18+0200\n"
+"PO-Revision-Date: 2010-08-27 03:17+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,8 +21,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Virtaal 0.5.2\n"
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.6.1\n"
 
 #: ../gnome-control-center.schemas.in.h:1
 msgid "Current network location"
@@ -319,7 +319,6 @@ msgstr "ال_منزل:"
 
 #. Home vs Work (address)
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "المنزل:"
 
@@ -400,9 +399,8 @@ msgid "_Department:"
 msgstr "ال_مَصْلَحَة:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:41
-#, fuzzy
 msgid "_GroupWise:"
-msgstr "_Groupwise:"
+msgstr "_GroupWise:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:42
 msgid "_Home page:"
@@ -439,7 +437,7 @@ msgstr "ال_عمل:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:51
 msgid "_XMPP:"
-msgstr ""
+msgstr "_XMPP:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:52
 msgid "_Yahoo:"
@@ -613,7 +611,7 @@ msgstr "مستوثق"
 #. Update status message and auth state
 #. Authentication failure
 #: ../capplets/about-me/gnome-about-me-password.c:474
-#: ../capplets/about-me/gnome-about-me-password.c:554
+#: ../capplets/about-me/gnome-about-me-password.c:559
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
@@ -623,71 +621,75 @@ msgstr "تغيِّرت كلمة السر بعد الاستيثاق الأخير�
 msgid "That password was incorrect."
 msgstr "كلمة السر هذه خطأ."
 
-#: ../capplets/about-me/gnome-about-me-password.c:525
+#: ../capplets/about-me/gnome-about-me-password.c:527
 msgid "Your password has been changed."
 msgstr "غُيِّرَت كلمة السر."
 
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:535
+#: ../capplets/about-me/gnome-about-me-password.c:537
 #, c-format
 msgid "System error: %s."
 msgstr "خطأ في النظام: %s."
 
-#: ../capplets/about-me/gnome-about-me-password.c:538
+#: ../capplets/about-me/gnome-about-me-password.c:540
 msgid "The password is too short."
 msgstr "كلمة السر صغيرة جدا."
 
-#: ../capplets/about-me/gnome-about-me-password.c:542
+#: ../capplets/about-me/gnome-about-me-password.c:544
 msgid "The password is too simple."
 msgstr "كلمة السر بسيطة جدا."
 
-#: ../capplets/about-me/gnome-about-me-password.c:546
+#: ../capplets/about-me/gnome-about-me-password.c:549
 msgid "The old and new passwords are too similar."
 msgstr "كلمتا السر القديمة و الجديدة متشابهتان جدا."
 
-#: ../capplets/about-me/gnome-about-me-password.c:548
+#: ../capplets/about-me/gnome-about-me-password.c:551
 msgid "The new password must contain numeric or special character(s)."
 msgstr "يجب أن تحتوي كلمة السر الجديدة على محارف خاصة أو أرقام."
 
-#: ../capplets/about-me/gnome-about-me-password.c:551
+#: ../capplets/about-me/gnome-about-me-password.c:554
 msgid "The old and new passwords are the same."
 msgstr "كلمتا السر القديمة و الجديدة متطابقتان."
 
+#: ../capplets/about-me/gnome-about-me-password.c:556
+msgid "The new password has already been used recently."
+msgstr "كلمة السر الجديدة سبق استخدامها مؤخرا."
+
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:827
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "تعذّر تشغيل %s: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:826
+#: ../capplets/about-me/gnome-about-me-password.c:831
 msgid "Unable to launch backend"
 msgstr "تعذّر تشغيل النهاية الخلفية"
 
-#: ../capplets/about-me/gnome-about-me-password.c:827
+#: ../capplets/about-me/gnome-about-me-password.c:832
 msgid "A system error has occurred"
 msgstr "حصل خطأ في النظام"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:847
+#: ../capplets/about-me/gnome-about-me-password.c:852
 msgid "Checking password..."
 msgstr "يتحقق من كلمة السر..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:939
 msgid "Click <b>Change password</b> to change your password."
 msgstr "انقر <b>غيّر كلمة السر</b> لتغيّر كلمة سرّك."
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:942
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "من فضلك اكتب كلمة سرِّك في حقل <b>كلمة سر الجديدة</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:940
+#: ../capplets/about-me/gnome-about-me-password.c:945
 #: ../capplets/about-me/gnome-about-me-password.ui.h:5
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
 msgstr "من فضلك اكتب كلمة سرِّك مرّة أخرى في حقل <b>أعِد كتابة كلمة السر</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:943
+#: ../capplets/about-me/gnome-about-me-password.c:948
 msgid "The two passwords are not equal."
 msgstr "كلمتا السر غير متطابقتين."
 
@@ -802,11 +804,11 @@ msgstr "أضِف خلفية للشاشة"
 msgid "All files"
 msgstr "كل الملفّات"
 
-#: ../capplets/appearance/appearance-font.c:494
+#: ../capplets/appearance/appearance-font.c:499
 msgid "Font may be too large"
 msgstr "قد يكون الخط كبيرًا جدا"
 
-#: ../capplets/appearance/appearance-font.c:498
+#: ../capplets/appearance/appearance-font.c:503
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -835,7 +837,7 @@ msgstr[5] ""
 "الخط المختار حجمه %Id نقطة و قد يُصعّب استخدام الحاسوب. من المستحسن أن تختار "
 "حجمًا أقلّ من %Id."
 
-#: ../capplets/appearance/appearance-font.c:511
+#: ../capplets/appearance/appearance-font.c:516
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -864,11 +866,11 @@ msgstr[5] ""
 "الخط المختار حجمه %Id نقطة و قد يُصعّب استخدام الحاسوب. من المستحسن أن تختار "
 "خطًّا بحجمٍ أصغر."
 
-#: ../capplets/appearance/appearance-font.c:534
+#: ../capplets/appearance/appearance-font.c:539
 msgid "Use previous font"
 msgstr "استخدم الخط السابق"
 
-#: ../capplets/appearance/appearance-font.c:536
+#: ../capplets/appearance/appearance-font.c:541
 msgid "Use selected font"
 msgstr "استخدم الخط المُختار"
 
@@ -1319,9 +1321,9 @@ msgstr "مقاسات متعددة"
 
 #. translators: x pixel(s) by y pixel(s)
 #: ../capplets/appearance/gnome-wp-item.c:272
-#, fuzzy, c-format
+#, c-format
 msgid "%d %s by %d %s"
-msgstr "%Od %B %Y"
+msgstr "%d %s في %d %s"
 
 #: ../capplets/appearance/gnome-wp-item.c:274
 #: ../capplets/appearance/gnome-wp-item.c:276
@@ -1464,7 +1466,7 @@ msgid "The theme already exists. Would you like to replace it?"
 msgstr "هذه السِمة موجودة أصلًا. أتريد استبدالها؟"
 
 #: ../capplets/appearance/theme-save.c:157
-#: ../capplets/common/file-transfer-dialog.c:450
+#: ../capplets/common/file-transfer-dialog.c:451
 msgid "_Overwrite"
 msgstr "ا_ستبدلها"
 
@@ -1514,7 +1516,7 @@ msgid "Copying '%s'"
 msgstr "يجري نسخ '%s'"
 
 #: ../capplets/common/file-transfer-dialog.c:185
-#: ../capplets/common/file-transfer-dialog.c:312
+#: ../capplets/common/file-transfer-dialog.c:313
 msgid "Copying files"
 msgstr "يجري نسخ الملفات"
 
@@ -1566,16 +1568,16 @@ msgstr "عدد المسارات الإجمالي"
 msgid "Total number of URIs"
 msgstr "عدد المسارات الإجمالي"
 
-#: ../capplets/common/file-transfer-dialog.c:444
+#: ../capplets/common/file-transfer-dialog.c:445
 #, c-format
 msgid "File '%s' already exists. Do you want to overwrite it?"
 msgstr "السِمة '%s' موجودة أصلًا. أتريد استبدالها؟"
 
-#: ../capplets/common/file-transfer-dialog.c:447
+#: ../capplets/common/file-transfer-dialog.c:448
 msgid "_Skip"
 msgstr "_تخطى"
 
-#: ../capplets/common/file-transfer-dialog.c:448
+#: ../capplets/common/file-transfer-dialog.c:449
 msgid "Overwrite _All"
 msgstr "استبدل ال_كل"
 
@@ -1647,7 +1649,7 @@ msgstr "الاتصال المعاكس المفرغ لمحرر الخاصيات �
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "الاتصال المعاكس الذي يتم تفعيله عند تحرير بيانات جسم محرّر الخاصيات"
 
-#: ../capplets/common/gconf-property-editor.c:1405
+#: ../capplets/common/gconf-property-editor.c:1406
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1659,7 +1661,7 @@ msgstr ""
 "\n"
 "رجاء تأكد من وجوده وأعد المحاولة مرّة اخرى، أو اختر صورةَ خلفية مغايرة."
 
-#: ../capplets/common/gconf-property-editor.c:1413
+#: ../capplets/common/gconf-property-editor.c:1414
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1672,11 +1674,11 @@ msgstr ""
 "\n"
 "رجاء اختر صورة أخرى."
 
-#: ../capplets/common/gconf-property-editor.c:1533
+#: ../capplets/common/gconf-property-editor.c:1536
 msgid "Please select an image."
 msgstr "رجاء اختر صورة."
 
-#: ../capplets/common/gconf-property-editor.c:1538
+#: ../capplets/common/gconf-property-editor.c:1541
 msgid "_Select"
 msgstr "ا_ختر"
 
@@ -2094,9 +2096,8 @@ msgid "Left"
 msgstr "يسار"
 
 #: ../capplets/display/display-capplet.ui.h:3
-#, fuzzy
 msgid "Make Default"
-msgstr "المبدئي"
+msgstr "اجعله المبدئي"
 
 #: ../capplets/display/display-capplet.ui.h:4
 #: ../capplets/display/xrandr-capplet.c:513
@@ -2166,6 +2167,94 @@ msgstr "غيّر ميز وموضع الشاشات"
 msgid "Monitors"
 msgstr "الشاشات"
 
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:44
+#, c-format
+msgid ""
+"Usage: %s SOURCE_FILE DEST_NAME\n"
+"\n"
+"This program installs a RANDR profile for multi-monitor setups into\n"
+"a systemwide location.  The resulting profile will get used when\n"
+"the RANDR plug-in gets run in gnome-settings-daemon.\n"
+"\n"
+"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+"xml\n"
+"\n"
+"DEST_NAME - relative name for the installed file.  This will get put in\n"
+"            the systemwide directory for RANDR configurations,\n"
+"            so the result will typically be %s/DEST_NAME\n"
+msgstr ""
+
+#. Translators: only able to install RANDR profiles as root
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:151
+msgid "This program can only be used by the root user"
+msgstr "فقط المستخدم الجذر يستطيع استخدام هذا البرنامج"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:168
+msgid "The source filename must be absolute"
+msgstr "يجب أن يكون اسم ملف المصدر مطلقا"
+
+#. Translators: first %s is a filename; second %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:179
+#, c-format
+msgid "Could not open %s: %s\n"
+msgstr "تعذّر فتح %s:‏ %s\n"
+
+#. Translators: first %s is a filename; second %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:188
+#, c-format
+msgid "Could not get information for %s: %s\n"
+msgstr "تعذّر جلب معلومات عن %s:‏ %s\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:195
+#, c-format
+msgid "%s must be a regular file\n"
+msgstr "يجب أن يكون %s ملفا عاديا\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:204
+msgid "This program must only be run through pkexec(1)"
+msgstr "يجب تشغيل هذا البرنامج عبر ‪pkexec(1)‬"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:209
+msgid "PKEXEC_UID must be set to an integer value"
+msgstr "يجب أن تكون قيمة PKEXEC_UID عددا صحيحا"
+
+#. Translators: we are complaining that a file must be really owned by the user who called this program
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:215
+#, c-format
+msgid "%s must be owned by you\n"
+msgstr "يجب أن يكون %s ملكا لهذا المستخدم\n"
+
+#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:223
+#, c-format
+msgid "%s must not have any directory components\n"
+msgstr "يجب ألا يحتوي %s على اسم مجلد في المسار\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:231
+#, c-format
+msgid "%s must be a directory\n"
+msgstr "يجب أن يكون %s مجلدا\n"
+
+#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:242
+#, c-format
+msgid "Could not open %s/%s: %s\n"
+msgstr "تعذّر فتح %s‏\\%s:‏ %s\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:262
+#, c-format
+msgid "Could not rename %s to %s: %s\n"
+msgstr "تعذّر تغيير اسم %s إلى %s‏: %s\n"
+
+#: ../capplets/display/org.gnome.randr.policy.in.h:1
+msgid ""
+"Authentication is required to install multi-monitor settings for all users"
+msgstr "الاستيثاق مطلوب لتثبيت إعدادات الشاشات المتعددة لكل المستخدمين"
+
+#: ../capplets/display/org.gnome.randr.policy.in.h:2
+msgid "Install multi-monitor settings for the whole system"
+msgstr "ثبّت إعدادات الشاشات المتعددة لكل النظام"
+
 #: ../capplets/display/xrandr-capplet.c:312
 msgid "Upside Down"
 msgstr "رأسا على عقب"
@@ -2201,33 +2290,31 @@ msgid ""
 "placement."
 msgstr "اختر شاشة لتغيير خصائصها، واسحبها لتغيير ترتيبها."
 
-#: ../capplets/display/xrandr-capplet.c:2067
+#: ../capplets/display/xrandr-capplet.c:2069
 msgid "Could not save the monitor configuration"
 msgstr "تعذّر حفظ إعدادات الشاشة"
 
-#: ../capplets/display/xrandr-capplet.c:2089
+#: ../capplets/display/xrandr-capplet.c:2091
 msgid "Could not get session bus while applying display configuration"
 msgstr "تعذرت معرفة الجلسة أثناء تطبيق تضبيطات العرض"
 
-#: ../capplets/display/xrandr-capplet.c:2131
+#: ../capplets/display/xrandr-capplet.c:2133
 msgid "Could not detect displays"
 msgstr "تعذّر اكتشاف أجهزة العرض"
 
-#: ../capplets/display/xrandr-capplet.c:2323
-#, fuzzy
-msgid "The monitor configuration has been saved"
-msgstr "تعذّر حفظ إعدادات الشاشة"
-
 #: ../capplets/display/xrandr-capplet.c:2325
+msgid "The monitor configuration has been saved"
+msgstr "حُفظت إعدادات الشاشة"
+
+#: ../capplets/display/xrandr-capplet.c:2327
 msgid "This configuration will be used the next time someone logs in."
-msgstr ""
+msgstr "ستُستخدم هذه الإعدادات في المرة التالية التي تلج فيها."
 
-#: ../capplets/display/xrandr-capplet.c:2359
-#, fuzzy
+#: ../capplets/display/xrandr-capplet.c:2361
 msgid "Could not set the default configuration for monitors"
-msgstr "تعذّر حفظ إعدادات الشاشة"
+msgstr "تعذّر ضبط الإعدادات المبدئية للشاشات"
 
-#: ../capplets/display/xrandr-capplet.c:2401
+#: ../capplets/display/xrandr-capplet.c:2403
 msgid "Could not get screen information"
 msgstr "تعذّرت معرفة معلومات الشاشة"
 
@@ -2236,7 +2323,7 @@ msgid "Sound"
 msgstr "الصوت"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1183
 msgid "Desktop"
 msgstr "سطح المكتب"
 
@@ -2506,7 +2593,7 @@ msgstr "التخطيطات"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:19
 msgid "List of keyboard layouts selected for usage"
-msgstr ""
+msgstr "قائمة بتخطيطات لوحة المفاتيح المختارة للاستخدام"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:20
 msgid ""
@@ -2534,11 +2621,11 @@ msgstr "انقل لأ_على"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:25
 msgid "Move the selected keyboard layout down in the list"
-msgstr ""
+msgstr "انقل تخطيط لوحة المفاتيح المحدد إلى أسفل"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:26
 msgid "Move the selected keyboard layout up in the list"
-msgstr ""
+msgstr "انقل تخطيط لوحة المفاتيح المحدد إلى أعلى"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:27
 msgid "New windows u_se active window's layout"
@@ -2546,11 +2633,11 @@ msgstr "النوافذ الجديدة تستخدم _تخطيط النافذة ا
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:28
 msgid "Print a diagram of the selected keyboard layout"
-msgstr ""
+msgstr "اطبع رسما لتخطيط لوحة المفاتيح المحدد"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 msgid "Remove the selected keyboard layout from the list"
-msgstr ""
+msgstr "احذف تخطيط لوحة المفاتيح المحدد من القائمة"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 msgid "Repeat Keys"
@@ -2564,7 +2651,7 @@ msgstr "سرعة المفاتيح المعادة"
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
-msgstr ""
+msgstr "غيّر إعدادات لوحة المفاتيح الحالية إلى الإعدادات المبدئية"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 msgid "Reset to De_faults"
@@ -2576,7 +2663,7 @@ msgstr "ال_سرعة:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "Select a keyboard layout to be added to the list"
-msgstr ""
+msgstr "اختر تخطيط لوحة مفاتيح ليُضاف إلى القائمة"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:37
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:27
@@ -2593,9 +2680,8 @@ msgid "Typing Break"
 msgstr "استراحة عن الكتابة"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:42
-#, fuzzy
 msgid "View and edit keyboard layout options"
-msgstr "خيارات تخطيط لوحة المفاتيح"
+msgstr "اعرض وحلالا خيارات تخطيط لوحة المفاتيح"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:43
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:37
@@ -2640,22 +2726,26 @@ msgid "_Separate layout for each window"
 msgstr "_تخطيط مستقل لكل نافذة"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:54
+msgid "_Show..."
+msgstr "أظهر..."
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
 msgid "_Simulate simultaneous keypresses"
 msgstr "_حاكى ضغطات المفاتيح المتزامنة"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
 msgid "_Speed:"
 msgstr "ال_سرعة:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
 msgid "_Type to test settings:"
 msgstr "ا_كتب لاختبار الإعدادات:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
 msgid "_Work interval lasts:"
 msgstr "مدة ال_عمل:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:59
 msgid "minutes"
 msgstr "دقائق"
 
@@ -2707,7 +2797,7 @@ msgstr "خيارات تخطيط لوحة المفاتيح"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:242
 msgid "Layout"
 msgstr "التصميم"
 
@@ -2719,8 +2809,8 @@ msgstr "المُنتِج"
 msgid "Models"
 msgstr "الطّرُز"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:234
-#: ../capplets/network/gnome-network-properties.c:583
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:235
+#: ../capplets/network/gnome-network-properties.c:581
 msgid "Default"
 msgstr "المبدئي"
 
@@ -2924,12 +3014,12 @@ msgstr "الفأرة"
 msgid "Set your mouse preferences"
 msgstr "اضبط تفضيلات فأرتك"
 
-#: ../capplets/network/gnome-network-properties.c:701
-#: ../capplets/network/gnome-network-properties.c:852
+#: ../capplets/network/gnome-network-properties.c:699
+#: ../capplets/network/gnome-network-properties.c:850
 msgid "New Location..."
 msgstr "مكان جديد..."
 
-#: ../capplets/network/gnome-network-properties.c:818
+#: ../capplets/network/gnome-network-properties.c:816
 msgid "Location already exists"
 msgstr "المكان موجود بالفعل"
 
@@ -3045,19 +3135,19 @@ msgstr "ا_ستخدم نفس الوسيط لكل البرتوكولات"
 msgid "Cannot start the preferences application for your window manager"
 msgstr "تعذّر تشغيل تطبيق تفضيلات مدير نوافذك"
 
-#: ../capplets/windows/gnome-window-properties.c:604
+#: ../capplets/windows/gnome-window-properties.c:603
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:610
+#: ../capplets/windows/gnome-window-properties.c:609
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:617
+#: ../capplets/windows/gnome-window-properties.c:616
 msgid "S_uper (or \"Windows logo\")"
 msgstr "‏S_uper (أو \"شعار ويندوز\")"
 
-#: ../capplets/windows/gnome-window-properties.c:624
+#: ../capplets/windows/gnome-window-properties.c:623
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -3250,7 +3340,7 @@ msgstr "ا_سترِح"
 #: ../typing-break/drwright.c:507
 #, c-format
 msgid "Take a break now (next in %dm)"
-msgstr ""
+msgstr "استرح الآن (الاستراحة التالية خلال %dد)"
 
 #: ../typing-break/drwright.c:509
 #, c-format
@@ -3266,7 +3356,7 @@ msgstr[5] "%Id دقيقة حتّى الاستراحة التالية"
 #: ../typing-break/drwright.c:515
 #, c-format
 msgid "Take a break now (next in less than one minute)"
-msgstr ""
+msgstr "استرح الآن (الاستراحة التالية خلال أقل من دقيقة)"
 
 #: ../typing-break/drwright.c:517
 #, c-format
@@ -3393,48 +3483,48 @@ msgstr "فيما إذا ستنشأ مصغرات لخطوط TrueType"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "فيما إذا ستنشأ مصغرات لخطوط Type1"
 
-#: ../font-viewer/font-view.c:289
+#: ../font-viewer/font-view.c:293
 msgid "Name:"
 msgstr "الاسم:"
 
-#: ../font-viewer/font-view.c:292
+#: ../font-viewer/font-view.c:296
 msgid "Style:"
 msgstr "الأسلوب:"
 
-#: ../font-viewer/font-view.c:305
+#: ../font-viewer/font-view.c:309
 msgid "Type:"
 msgstr "النوع:"
 
-#: ../font-viewer/font-view.c:309
+#: ../font-viewer/font-view.c:313
 msgid "Size:"
 msgstr "المقاس:"
 
-#: ../font-viewer/font-view.c:353 ../font-viewer/font-view.c:366
+#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:370
 msgid "Version:"
 msgstr "الإصدارة:"
 
-#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:368
+#: ../font-viewer/font-view.c:361 ../font-viewer/font-view.c:372
 msgid "Copyright:"
 msgstr "حقوق النشر:"
 
-#: ../font-viewer/font-view.c:361
+#: ../font-viewer/font-view.c:365
 msgid "Description:"
 msgstr "الوصف:"
 
-#: ../font-viewer/font-view.c:441
+#: ../font-viewer/font-view.c:445
 msgid "Installed"
 msgstr "مثبَّت"
 
-#: ../font-viewer/font-view.c:444
+#: ../font-viewer/font-view.c:448
 msgid "Install Failed"
 msgstr "فشل التّثبيت"
 
-#: ../font-viewer/font-view.c:516
+#: ../font-viewer/font-view.c:519
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "طريقة الاستخدام: %s ملف الخط\n"
 
-#: ../font-viewer/font-view.c:591
+#: ../font-viewer/font-view.c:590
 msgid "I_nstall Font"
 msgstr "ثبِّت ال_خط"
 
@@ -3480,7 +3570,7 @@ msgstr "لا يطابق المرشح \"%s\" أي عناصر."
 msgid "No matches found."
 msgstr "لا تطابقات."
 
-#: ../libslab/app-shell.c:905
+#: ../libslab/app-shell.c:909
 msgid "Other"
 msgstr "أخرى"
 
@@ -3502,11 +3592,11 @@ msgstr "رقّي"
 msgid "Uninstall"
 msgstr "أزِل"
 
-#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:738
 msgid "Remove from Favorites"
 msgstr "احذف من المفضّلة"
 
-#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:740
 msgid "Add to Favorites"
 msgstr "أضِف للمفضّلة"
 
@@ -3518,27 +3608,32 @@ msgstr "احذف من برامج بدء التشغيل"
 msgid "Add to Startup Programs"
 msgstr "أضِف لبرامج بدء التشغيل"
 
-#: ../libslab/bookmark-agent.c:1077
+#: ../libslab/bookmark-agent.c:1110
 msgid "New Spreadsheet"
 msgstr "ورقة حساب جديدة"
 
-#: ../libslab/bookmark-agent.c:1082
+#: ../libslab/bookmark-agent.c:1115
 msgid "New Document"
 msgstr "مستند جديد"
 
-#: ../libslab/bookmark-agent.c:1140
+#: ../libslab/bookmark-agent.c:1168
+msgctxt "Home folder"
+msgid "Home"
+msgstr "المنزل"
+
+#: ../libslab/bookmark-agent.c:1175
 msgid "Documents"
 msgstr "مستندات"
 
-#: ../libslab/bookmark-agent.c:1153
+#: ../libslab/bookmark-agent.c:1190
 msgid "File System"
 msgstr "نظام الملفات"
 
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1194
 msgid "Network Servers"
 msgstr "خواديم الشبكة"
 
-#: ../libslab/bookmark-agent.c:1186
+#: ../libslab/bookmark-agent.c:1223
 msgid "Search"
 msgstr "ابحث"
 
@@ -3549,72 +3644,82 @@ msgid "<b>Open</b>"
 msgstr "<b>افتح</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:236
 msgid "Rename..."
 msgstr "غيّر الاسم..."
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
+#: ../libslab/document-tile.c:250 ../libslab/document-tile.c:259
 msgid "Send To..."
 msgstr "أرسل إلى..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:285
 msgid "Move to Trash"
 msgstr "انقل للمهملات"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
+#: ../libslab/document-tile.c:295 ../libslab/document-tile.c:854
 msgid "Delete"
 msgstr "احذف"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:1016
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "أمتأكد أنك تريد حذف \"%s\" نهائيًا؟"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "إذا حذفت عنصرًا، فسيُفقد إلى الأبد."
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "Open with \"%s\""
 msgstr "افتح باستخدام \"%s\""
 
-#: ../libslab/document-tile.c:207
+#: ../libslab/document-tile.c:209
 msgid "Open with Default Application"
 msgstr "افتح بالتطبيق المبدئي"
 
-#: ../libslab/document-tile.c:218
+#: ../libslab/document-tile.c:220
 msgid "Open in File Manager"
 msgstr "افتح في مدير الملفّات"
 
-#: ../libslab/document-tile.c:617
+#. clean item from menu
+#: ../libslab/document-tile.c:304
+msgid "Remove from recent menu"
+msgstr "احذف من قائمة المفتوح مؤخرا"
+
+#. clean all the items from menu
+#: ../libslab/document-tile.c:312
+msgid "Purge all the recent items"
+msgstr "أفرق قائمة المفتوح مؤخرا"
+
+#: ../libslab/document-tile.c:634
 msgid "?"
 msgstr "؟"
 
-#: ../libslab/document-tile.c:624
+#: ../libslab/document-tile.c:641
 msgid "%l:%M %p"
 msgstr "%Ol:%OM %p"
 
-#: ../libslab/document-tile.c:632
+#: ../libslab/document-tile.c:649
 msgid "Today %l:%M %p"
 msgstr "اليوم %Ol:%OM %p"
 
-#: ../libslab/document-tile.c:642
+#: ../libslab/document-tile.c:659
 msgid "Yesterday %l:%M %p"
 msgstr "بالأمس %Ol:%OM %p"
 
-#: ../libslab/document-tile.c:654
+#: ../libslab/document-tile.c:671
 msgid "%a %l:%M %p"
 msgstr "%A %Ol:%OM %p"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:679
 msgid "%b %d %l:%M %p"
 msgstr "%Od %B %Ol:%OM %p"
 
-#: ../libslab/document-tile.c:664
+#: ../libslab/document-tile.c:681
 msgid "%b %d %Y"
 msgstr "%Od %B %Y"
 
