@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2010-08-03 16:04+0000\n"
-"PO-Revision-Date: 2010-08-04 19:44+0100\n"
+"POT-Creation-Date: 2010-09-04 02:17+0000\n"
+"PO-Revision-Date: 2010-09-04 19:52+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -311,7 +311,6 @@ msgstr "_Domači telefon:"
 
 #. Home vs Work (address)
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "Domači naslov"
 
@@ -393,7 +392,7 @@ msgstr "O_ddelek:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:41
 msgid "_GroupWise:"
-msgstr "_GroupWise:"
+msgstr "xGroupwise"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:42
 msgid "_Home page:"
@@ -430,7 +429,7 @@ msgstr "S_lužba:"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:51
 msgid "_XMPP:"
-msgstr ""
+msgstr "x"
 
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:52
 msgid "_Yahoo:"
@@ -638,7 +637,7 @@ msgstr "Staro in novo geslo sta si enaki."
 
 #: ../capplets/about-me/gnome-about-me-password.c:556
 msgid "The new password has already been used recently."
-msgstr "Geslo je bilo že uporabljeno. Izberite drugo."
+msgstr "Geslo je bilo nedavno že uporabljeno."
 
 #. translators: Unable to launch <program>: <error message>
 #: ../capplets/about-me/gnome-about-me-password.c:827
@@ -1094,9 +1093,8 @@ msgstr "Razpostavi"
 
 #. vertical hinting, pixel order blue, green, red
 #: ../capplets/appearance/data/appearance.ui.h:50
-#, fuzzy
 msgid "VB_GR"
-msgstr "VB_GR"
+msgstr "B_GR (navpično)"
 
 #: ../capplets/appearance/data/appearance.ui.h:51
 msgid "Vertical gradient"
@@ -1121,7 +1119,6 @@ msgstr "Pisava _programov:"
 
 #. pixel order blue, green, red
 #: ../capplets/appearance/data/appearance.ui.h:57
-#, fuzzy
 msgid "_BGR"
 msgstr "_BGR"
 
@@ -1197,9 +1194,8 @@ msgstr "_Namigi:"
 
 #. vertical hinting, pixel order red, green, blue
 #: ../capplets/appearance/data/appearance.ui.h:77
-#, fuzzy
 msgid "_VRGB"
-msgstr "_VRGB"
+msgstr "_RGB (navpično)"
 
 #: ../capplets/appearance/data/appearance.ui.h:78
 msgid "_Window title font:"
@@ -2089,15 +2085,26 @@ msgid ""
 "            the systemwide directory for RANDR configurations,\n"
 "            so the result will typically be %s/DEST_NAME\n"
 msgstr ""
+"Uporaba: %s CILJNO_IME_DATOTEKE\n"
+"\n"
+"Program namesti profil RANDR za nastavljanje multi-monitor okolja\n"
+"za celoten sistem. Profil bo uporabljen kadar so\n"
+"vstavki RANDR zagnani preko gnome-settings-daemon.\n"
+"\n"
+"IZVORNA_DATOTEKA - polna pot, običajno /home/username/.config/monitors.xml\n"
+"\n"
+"CILJNO_IME - relativna pot do nameščene datoteke. Ta bo zapisana v\n"
+"            sistemsko mapo nastavitev RANDR,\n"
+"            zato je rezultat običajno %s/CILJNO_IME\n"
 
 #. Translators: only able to install RANDR profiles as root
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:151
 msgid "This program can only be used by the root user"
-msgstr ""
+msgstr "Program je mogoče zagnati le kot korenski uporabnik"
 
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:168
 msgid "The source filename must be absolute"
-msgstr "Pot in ime izvorna datoteke morata biti absolutna"
+msgstr "Izvorna datoteka mora biti absolutna"
 
 #. Translators: first %s is a filename; second %s is an error message
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:179
@@ -2109,7 +2116,7 @@ msgstr "Ni mogoče odpreti %s: %s\n"
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:188
 #, c-format
 msgid "Could not get information for %s: %s\n"
-msgstr "Ni mogoče dobiti podatkov o %s: %s\n"
+msgstr "Ni mogoče dobiti podatkov o datoteki %s: %s\n"
 
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:195
 #, c-format
@@ -2118,23 +2125,23 @@ msgstr "%s mora biti običajna datoteka\n"
 
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:204
 msgid "This program must only be run through pkexec(1)"
-msgstr ""
+msgstr "Program je mogoče zagnati le preko pkexec(1)"
 
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:209
 msgid "PKEXEC_UID must be set to an integer value"
-msgstr ""
+msgstr "Vrednost PKEXEC_UID mora biti določena kot celo število"
 
 #. Translators: we are complaining that a file must be really owned by the user who called this program
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:215
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be owned by you\n"
-msgstr "Biti morate udeleženec dogodka."
+msgstr "%s mora biti v lasti trenutnega uporabnika\n"
 
 #. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:223
-#, fuzzy, c-format
+#, c-format
 msgid "%s must not have any directory components\n"
-msgstr "Navesti morate datoteko, ne mape.\n"
+msgstr "%s mora biti brez navedbe mape\n"
 
 #: ../capplets/display/gnome-display-properties-install-systemwide.c:231
 #, c-format
@@ -2154,11 +2161,11 @@ msgstr "Ni mogoče preimenovati %s v %s: %s\n"
 
 #: ../capplets/display/org.gnome.randr.policy.in.h:1
 msgid "Authentication is required to install multi-monitor settings for all users"
-msgstr ""
+msgstr "Za nameščanje nastavitev multi-monitor za vse uporabnike, so zahtevana skrbniška dovoljenja"
 
 #: ../capplets/display/org.gnome.randr.policy.in.h:2
 msgid "Install multi-monitor settings for the whole system"
-msgstr ""
+msgstr "Namesti nastavitve multi-monitor za celoten sistem"
 
 #: ../capplets/display/xrandr-capplet.c:312
 msgid "Upside Down"
@@ -2226,7 +2233,7 @@ msgid "Sound"
 msgstr "Zvok"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1183
 msgid "Desktop"
 msgstr "Namizje"
 
@@ -2488,7 +2495,7 @@ msgstr "Razporeditve"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:19
 msgid "List of keyboard layouts selected for usage"
-msgstr ""
+msgstr "Seznam razporedov tipkovnice izbranih za uporabo"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:20
 msgid "Lock screen after a certain duration to help prevent repetitive keyboard use injuries"
@@ -2513,11 +2520,11 @@ msgstr "Premakni _navzgor"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:25
 msgid "Move the selected keyboard layout down in the list"
-msgstr ""
+msgstr "Premakni izbrano razporeditev tipkovnice navzdol po seznamu"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:26
 msgid "Move the selected keyboard layout up in the list"
-msgstr ""
+msgstr "Premakni izbrano razporeditev tipkovnice navzgor po seznamu"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:27
 msgid "New windows u_se active window's layout"
@@ -2525,11 +2532,11 @@ msgstr "Novo okno prevzame razporeditev dejavnega okna"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:28
 msgid "Print a diagram of the selected keyboard layout"
-msgstr ""
+msgstr "Natisti diagram izbranega razporeda tipkovnice"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 msgid "Remove the selected keyboard layout from the list"
-msgstr "Odstrani trenutno izbrano razporeditev tipkovnice iz seznama"
+msgstr "Odstrani trenutno izbrano razporeditev tipk iz seznama"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 msgid "Repeat Keys"
@@ -2544,6 +2551,8 @@ msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
 msgstr ""
+"Zamenjaj trenutne nastavitve razporeda tipkovnice z\n"
+"privzetimi nastavitvami."
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 msgid "Reset to De_faults"
@@ -2555,7 +2564,7 @@ msgstr "_Hitrost:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "Select a keyboard layout to be added to the list"
-msgstr ""
+msgstr "Izbor razporeditve tipkovnice za dodajanje na seznam"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:37
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:27
@@ -2573,7 +2582,7 @@ msgstr "Premor tipkanja"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:42
 msgid "View and edit keyboard layout options"
-msgstr "Pregled in urejanje možnosti razporeditve tipkovnice"
+msgstr "Pogled in urejanje možnosti razporeda tipkovnice"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:43
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:37
@@ -3218,7 +3227,7 @@ msgstr "_Vzemi si odmor"
 #: ../typing-break/drwright.c:507
 #, c-format
 msgid "Take a break now (next in %dm)"
-msgstr ""
+msgstr "Naredi premor takoj (naslednji bo čez %dm)"
 
 #: ../typing-break/drwright.c:509
 #, c-format
@@ -3232,7 +3241,7 @@ msgstr[3] "%d minute do naslednjega premora"
 #: ../typing-break/drwright.c:515
 #, c-format
 msgid "Take a break now (next in less than one minute)"
-msgstr ""
+msgstr "Naredi premor takoj (naslednji bo čez manj kot minuto)"
 
 #: ../typing-break/drwright.c:517
 #, c-format
@@ -3434,7 +3443,7 @@ msgstr "Filter \"%s\" ne ustreza nobenemu predmetu."
 msgid "No matches found."
 msgstr "Ni mogoče najti zadetkov."
 
-#: ../libslab/app-shell.c:905
+#: ../libslab/app-shell.c:909
 msgid "Other"
 msgstr "Ostalo"
 
@@ -3457,12 +3466,12 @@ msgid "Uninstall"
 msgstr "Odstrani namestitev"
 
 #: ../libslab/application-tile.c:784
-#: ../libslab/document-tile.c:721
+#: ../libslab/document-tile.c:738
 msgid "Remove from Favorites"
 msgstr "Odstrani iz priljubljenih"
 
 #: ../libslab/application-tile.c:786
-#: ../libslab/document-tile.c:723
+#: ../libslab/document-tile.c:740
 msgid "Add to Favorites"
 msgstr "Dodaj med priljubljene"
 
@@ -3474,27 +3483,32 @@ msgstr "Odstrani iz programov ob zagonu"
 msgid "Add to Startup Programs"
 msgstr "Dodaj med programe ob zagonu"
 
-#: ../libslab/bookmark-agent.c:1077
+#: ../libslab/bookmark-agent.c:1110
 msgid "New Spreadsheet"
-msgstr "Nova preglednica"
+msgstr "Nova razpredelnica"
 
-#: ../libslab/bookmark-agent.c:1082
+#: ../libslab/bookmark-agent.c:1115
 msgid "New Document"
 msgstr "Nov dokument"
 
-#: ../libslab/bookmark-agent.c:1140
+#: ../libslab/bookmark-agent.c:1168
+msgctxt "Home folder"
+msgid "Home"
+msgstr "Domov"
+
+#: ../libslab/bookmark-agent.c:1175
 msgid "Documents"
 msgstr "Dokumenti"
 
-#: ../libslab/bookmark-agent.c:1153
+#: ../libslab/bookmark-agent.c:1190
 msgid "File System"
 msgstr "Datotečni sistem"
 
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1194
 msgid "Network Servers"
 msgstr "Omrežni strežniki"
 
-#: ../libslab/bookmark-agent.c:1186
+#: ../libslab/bookmark-agent.c:1223
 msgid "Search"
 msgstr "Iskanje"
 
@@ -3506,79 +3520,89 @@ msgstr "<b>Odpri</b>"
 
 #. make rename action
 #: ../libslab/directory-tile.c:190
-#: ../libslab/document-tile.c:234
+#: ../libslab/document-tile.c:236
 msgid "Rename..."
 msgstr "Preimenuj ..."
 
 #: ../libslab/directory-tile.c:204
 #: ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:248
-#: ../libslab/document-tile.c:257
+#: ../libslab/document-tile.c:250
+#: ../libslab/document-tile.c:259
 msgid "Send To..."
 msgstr "Pošlji ..."
 
 #. make move to trash action
 #: ../libslab/directory-tile.c:228
-#: ../libslab/document-tile.c:283
+#: ../libslab/document-tile.c:285
 msgid "Move to Trash"
 msgstr "Premakni v Smeti"
 
 #: ../libslab/directory-tile.c:238
 #: ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:293
-#: ../libslab/document-tile.c:837
+#: ../libslab/document-tile.c:295
+#: ../libslab/document-tile.c:854
 msgid "Delete"
 msgstr "Izbriši"
 
 #: ../libslab/directory-tile.c:533
-#: ../libslab/document-tile.c:985
+#: ../libslab/document-tile.c:1016
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Ali ste prepričani, da želite trajno izbrisati \"%s\"?"
 
 #: ../libslab/directory-tile.c:534
-#: ../libslab/document-tile.c:986
+#: ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "V kolikor predmet izbrišete, bo trajno izgubljen."
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "Open with \"%s\""
 msgstr "Odpri z \"%s\""
 
-#: ../libslab/document-tile.c:207
+#: ../libslab/document-tile.c:209
 msgid "Open with Default Application"
 msgstr "Odpri s privzetim programom"
 
-#: ../libslab/document-tile.c:218
+#: ../libslab/document-tile.c:220
 msgid "Open in File Manager"
 msgstr "Odpri v upravljalniku datotek"
 
-#: ../libslab/document-tile.c:617
+#. clean item from menu
+#: ../libslab/document-tile.c:304
+msgid "Remove from recent menu"
+msgstr "Odstrani iz menija nedavnih"
+
+#. clean all the items from menu
+#: ../libslab/document-tile.c:312
+msgid "Purge all the recent items"
+msgstr "Počisti vse nedavne predmete"
+
+#: ../libslab/document-tile.c:634
 msgid "?"
 msgstr "?"
 
-#: ../libslab/document-tile.c:624
+#: ../libslab/document-tile.c:641
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:632
+#: ../libslab/document-tile.c:649
 msgid "Today %l:%M %p"
 msgstr "Danes, %H:%M"
 
-#: ../libslab/document-tile.c:642
+#: ../libslab/document-tile.c:659
 msgid "Yesterday %l:%M %p"
 msgstr "Včeraj, %H:%M"
 
-#: ../libslab/document-tile.c:654
+#: ../libslab/document-tile.c:671
 msgid "%a %l:%M %p"
 msgstr "%a, %H:%M"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:679
 msgid "%b %d %l:%M %p"
 msgstr "%d. %b %H:%M"
 
-#: ../libslab/document-tile.c:664
+#: ../libslab/document-tile.c:681
 msgid "%b %d %Y"
 msgstr "%d. %b %Y"
 
