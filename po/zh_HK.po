@@ -10,10 +10,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.31.90\n"
+"Project-Id-Version: gnome-control-center 2.31.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-21 20:25+0800\n"
-"PO-Revision-Date: 2010-08-21 20:26+0800\n"
+"POT-Creation-Date: 2010-09-05 19:25+0800\n"
+"PO-Revision-Date: 2010-09-05 19:25+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
@@ -315,7 +315,6 @@ msgstr "住家(_E):"
 
 #. Home vs Work (address)
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "家"
 
@@ -2282,7 +2281,7 @@ msgid "Sound"
 msgstr "音效"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1183
 msgid "Desktop"
 msgstr "桌面"
 
@@ -3512,7 +3511,7 @@ msgstr "你的過濾條件「%s」沒有任合項目符合。"
 msgid "No matches found."
 msgstr "找不到符合項。"
 
-#: ../libslab/app-shell.c:905
+#: ../libslab/app-shell.c:909
 msgid "Other"
 msgstr "其它"
 
@@ -3534,11 +3533,11 @@ msgstr "更新"
 msgid "Uninstall"
 msgstr "移除"
 
-#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:738
 msgid "Remove from Favorites"
 msgstr "自最愛中移除"
 
-#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:740
 msgid "Add to Favorites"
 msgstr "加入最愛"
 
@@ -3550,27 +3549,32 @@ msgstr "從「初始啟動程式」中移除"
 msgid "Add to Startup Programs"
 msgstr "加入「初始啟動程式」"
 
-#: ../libslab/bookmark-agent.c:1077
+#: ../libslab/bookmark-agent.c:1110
 msgid "New Spreadsheet"
 msgstr "新試算表"
 
-#: ../libslab/bookmark-agent.c:1082
+#: ../libslab/bookmark-agent.c:1115
 msgid "New Document"
 msgstr "新文件"
 
-#: ../libslab/bookmark-agent.c:1140
+#: ../libslab/bookmark-agent.c:1168
+msgctxt "Home folder"
+msgid "Home"
+msgstr "家目錄"
+
+#: ../libslab/bookmark-agent.c:1175
 msgid "Documents"
 msgstr "文件"
 
-#: ../libslab/bookmark-agent.c:1153
+#: ../libslab/bookmark-agent.c:1190
 msgid "File System"
 msgstr "檔案系統"
 
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1194
 msgid "Network Servers"
 msgstr "網絡伺服器"
 
-#: ../libslab/bookmark-agent.c:1186
+#: ../libslab/bookmark-agent.c:1223
 msgid "Search"
 msgstr "搜尋"
 
@@ -3581,72 +3585,82 @@ msgid "<b>Open</b>"
 msgstr "<b>開啟</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:236
 msgid "Rename..."
 msgstr "重新命名..."
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
+#: ../libslab/document-tile.c:250 ../libslab/document-tile.c:259
 msgid "Send To..."
 msgstr "傳送至..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:285
 msgid "Move to Trash"
 msgstr "移至回收筒"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
+#: ../libslab/document-tile.c:295 ../libslab/document-tile.c:854
 msgid "Delete"
 msgstr "刪除"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:1016
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "確定要永遠刪除「%s」？"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "如果將項目刪除，它將會永久失去。"
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "Open with \"%s\""
 msgstr "以「%s」開啟"
 
-#: ../libslab/document-tile.c:207
+#: ../libslab/document-tile.c:209
 msgid "Open with Default Application"
 msgstr "以預設的應用程式開啟"
 
-#: ../libslab/document-tile.c:218
+#: ../libslab/document-tile.c:220
 msgid "Open in File Manager"
 msgstr "在檔案管理員中開啟"
 
-#: ../libslab/document-tile.c:617
+#. clean item from menu
+#: ../libslab/document-tile.c:304
+msgid "Remove from recent menu"
+msgstr "自最近使用的選單中移除"
+
+#. clean all the items from menu
+#: ../libslab/document-tile.c:312
+msgid "Purge all the recent items"
+msgstr "清除所有最近使用的項目"
+
+#: ../libslab/document-tile.c:634
 msgid "?"
 msgstr "？"
 
-#: ../libslab/document-tile.c:624
+#: ../libslab/document-tile.c:641
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#: ../libslab/document-tile.c:632
+#: ../libslab/document-tile.c:649
 msgid "Today %l:%M %p"
 msgstr "今天 %l:%M %p"
 
-#: ../libslab/document-tile.c:642
+#: ../libslab/document-tile.c:659
 msgid "Yesterday %l:%M %p"
 msgstr "昨天 %l:%M %p"
 
-#: ../libslab/document-tile.c:654
+#: ../libslab/document-tile.c:671
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:679
 msgid "%b %d %l:%M %p"
 msgstr "%b %d %l:%M %p"
 
-#: ../libslab/document-tile.c:664
+#: ../libslab/document-tile.c:681
 msgid "%b %d %Y"
 msgstr "%Y %b %d"
 
