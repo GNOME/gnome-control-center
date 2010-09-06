@@ -10,15 +10,16 @@
 # FujianWzh <fujianwzh@gmail.com>, 2009
 # Tao Wei <weitao1979@gmail.com>, 2009, 2010.
 # Xhacker Liu <liu.dongyuan@gmail.com>, 2010.
+# Dean Lee <xslidian@lidian.info>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-04-16 15:08+0000\n"
-"PO-Revision-Date: 2010-04-15 20:50+0800\n"
-"Last-Translator: Xhacker Liu <liu.dongyuan@gmail.com>\n"
-"Language-Team: zh_CN <zh_CN <i18n-translation@lists.linux.net.cn>>\n"
+"POT-Creation-Date: 2010-09-05 11:26+0000\n"
+"PO-Revision-Date: 2010-09-06 21:46+0800\n"
+"Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
+"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -318,7 +319,6 @@ msgstr "家庭(_E)："
 
 #. Home vs Work (address)
 #: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-#: ../libslab/bookmark-agent.c:1135
 msgid "Home"
 msgstr "家庭"
 
@@ -611,7 +611,7 @@ msgstr "已通过身份验证！"
 #. Update status message and auth state
 #. Authentication failure
 #: ../capplets/about-me/gnome-about-me-password.c:474
-#: ../capplets/about-me/gnome-about-me-password.c:554
+#: ../capplets/about-me/gnome-about-me-password.c:559
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
@@ -621,71 +621,75 @@ msgstr "您的密码在您首次登录后已经更改。请重新进行身份验
 msgid "That password was incorrect."
 msgstr "密码错误。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:525
+#: ../capplets/about-me/gnome-about-me-password.c:527
 msgid "Your password has been changed."
 msgstr "您的密码已更改。"
 
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:535
+#: ../capplets/about-me/gnome-about-me-password.c:537
 #, c-format
 msgid "System error: %s."
 msgstr "系统错误：%s。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:538
+#: ../capplets/about-me/gnome-about-me-password.c:540
 msgid "The password is too short."
 msgstr "密码太短。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:542
+#: ../capplets/about-me/gnome-about-me-password.c:544
 msgid "The password is too simple."
 msgstr "密码太简单。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:546
+#: ../capplets/about-me/gnome-about-me-password.c:549
 msgid "The old and new passwords are too similar."
 msgstr "旧密码和新密码太相似。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:548
+#: ../capplets/about-me/gnome-about-me-password.c:551
 msgid "The new password must contain numeric or special character(s)."
 msgstr "必须包含数字或特殊字符。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:551
+#: ../capplets/about-me/gnome-about-me-password.c:554
 msgid "The old and new passwords are the same."
 msgstr "旧密码和新密码相同。"
 
+#: ../capplets/about-me/gnome-about-me-password.c:556
+msgid "The new password has already been used recently."
+msgstr "新密码最近已被使用过。"
+
 #. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:822
+#: ../capplets/about-me/gnome-about-me-password.c:827
 #, c-format
 msgid "Unable to launch %s: %s"
 msgstr "无法启动 %s：%s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:826
+#: ../capplets/about-me/gnome-about-me-password.c:831
 msgid "Unable to launch backend"
 msgstr "无法调用后端"
 
-#: ../capplets/about-me/gnome-about-me-password.c:827
+#: ../capplets/about-me/gnome-about-me-password.c:832
 msgid "A system error has occurred"
 msgstr "发生了系统错误"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:847
+#: ../capplets/about-me/gnome-about-me-password.c:852
 msgid "Checking password..."
 msgstr "正在检查密码..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:934
+#: ../capplets/about-me/gnome-about-me-password.c:939
 msgid "Click <b>Change password</b> to change your password."
 msgstr "单击<b>更改密码</b>可更改密码。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:937
+#: ../capplets/about-me/gnome-about-me-password.c:942
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "请在<b>新密码</b>框中输入您的新密码。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:940
+#: ../capplets/about-me/gnome-about-me-password.c:945
 #: ../capplets/about-me/gnome-about-me-password.ui.h:5
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
 msgstr "请在<b>重新输入新密码</b>框中再输入一次密码。"
 
-#: ../capplets/about-me/gnome-about-me-password.c:943
+#: ../capplets/about-me/gnome-about-me-password.c:948
 msgid "The two passwords are not equal."
 msgstr "输入的两个密码不同。"
 
@@ -799,11 +803,11 @@ msgstr "添加壁纸"
 msgid "All files"
 msgstr "全部文件"
 
-#: ../capplets/appearance/appearance-font.c:494
+#: ../capplets/appearance/appearance-font.c:499
 msgid "Font may be too large"
 msgstr "字体可能太大"
 
-#: ../capplets/appearance/appearance-font.c:498
+#: ../capplets/appearance/appearance-font.c:503
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -816,7 +820,7 @@ msgid_plural ""
 msgstr[0] ""
 "选中的字体是 %d 磅大。要想有效的使用计算机，推荐您选择小于 %d 的大小。"
 
-#: ../capplets/appearance/appearance-font.c:511
+#: ../capplets/appearance/appearance-font.c:516
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -828,11 +832,11 @@ msgid_plural ""
 "sized font."
 msgstr[0] "选中的字体是 %d 磅大。要想有效的使用计算机，推荐您选择较小的字体。"
 
-#: ../capplets/appearance/appearance-font.c:534
+#: ../capplets/appearance/appearance-font.c:539
 msgid "Use previous font"
 msgstr "使用先前的字体"
 
-#: ../capplets/appearance/appearance-font.c:536
+#: ../capplets/appearance/appearance-font.c:541
 msgid "Use selected font"
 msgstr "使用选中的字体"
 
@@ -1421,7 +1425,7 @@ msgid "The theme already exists. Would you like to replace it?"
 msgstr "主题已经存在。您是否想要替换？"
 
 #: ../capplets/appearance/theme-save.c:157
-#: ../capplets/common/file-transfer-dialog.c:450
+#: ../capplets/common/file-transfer-dialog.c:451
 msgid "_Overwrite"
 msgstr "覆盖(_O)"
 
@@ -1471,7 +1475,7 @@ msgid "Copying '%s'"
 msgstr "正在复制“%s”"
 
 #: ../capplets/common/file-transfer-dialog.c:185
-#: ../capplets/common/file-transfer-dialog.c:312
+#: ../capplets/common/file-transfer-dialog.c:313
 msgid "Copying files"
 msgstr "正在复制文件"
 
@@ -1523,16 +1527,16 @@ msgstr "URI 总数"
 msgid "Total number of URIs"
 msgstr "URI 的总数"
 
-#: ../capplets/common/file-transfer-dialog.c:444
+#: ../capplets/common/file-transfer-dialog.c:445
 #, c-format
 msgid "File '%s' already exists. Do you want to overwrite it?"
 msgstr "文件“%s”已经存在。您是否想要覆盖？"
 
-#: ../capplets/common/file-transfer-dialog.c:447
+#: ../capplets/common/file-transfer-dialog.c:448
 msgid "_Skip"
 msgstr "跳过(_S)"
 
-#: ../capplets/common/file-transfer-dialog.c:448
+#: ../capplets/common/file-transfer-dialog.c:449
 msgid "Overwrite _All"
 msgstr "全部覆盖(_A)"
 
@@ -1603,7 +1607,7 @@ msgstr "属性编辑器数据释放回调函数"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "当属性编辑器对象数据要被释放时要调用的回调函数"
 
-#: ../capplets/common/gconf-property-editor.c:1405
+#: ../capplets/common/gconf-property-editor.c:1406
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1615,7 +1619,7 @@ msgstr ""
 "\n"
 "请确定该文件存在后重试，或选择另一背景图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1413
+#: ../capplets/common/gconf-property-editor.c:1414
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1628,11 +1632,11 @@ msgstr ""
 "\n"
 "请选择其他图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1533
+#: ../capplets/common/gconf-property-editor.c:1536
 msgid "Please select an image."
 msgstr "请选择图片。"
 
-#: ../capplets/common/gconf-property-editor.c:1538
+#: ../capplets/common/gconf-property-editor.c:1541
 msgid "_Select"
 msgstr "选择(_S)"
 
@@ -2118,6 +2122,105 @@ msgstr "更改显示器的分辨率和位置"
 msgid "Monitors"
 msgstr "显示器"
 
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:44
+#, c-format
+msgid ""
+"Usage: %s SOURCE_FILE DEST_NAME\n"
+"\n"
+"This program installs a RANDR profile for multi-monitor setups into\n"
+"a systemwide location.  The resulting profile will get used when\n"
+"the RANDR plug-in gets run in gnome-settings-daemon.\n"
+"\n"
+"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+"xml\n"
+"\n"
+"DEST_NAME - relative name for the installed file.  This will get put in\n"
+"            the systemwide directory for RANDR configurations,\n"
+"            so the result will typically be %s/DEST_NAME\n"
+msgstr ""
+"用法: %s SOURCE_FILE DEST_NAME\n"
+"\n"
+"此程序向整个系统安装多显示器设置的 RANDR 配置文件。\n"
+"生成的配置文件将在 RANDR 插件在 gnome-settings-daemon \n"
+"中运行时被使用。\n"
+"\n"
+"SOURCE_FILE - 完整路径名称，通常为 /home/username/.config/monitors.xml\n"
+"\n"
+"DEST_NAME - 安装后文件的相对名称。\n"
+"            将被置于用于 RANDR 配置的系统目录，\n"
+"            所以生成文件通常为 %s/DEST_NAME\n"
+
+#. Translators: only able to install RANDR profiles as root
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:151
+msgid "This program can only be used by the root user"
+msgstr "此程序只能由 root 用户使用"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:168
+msgid "The source filename must be absolute"
+msgstr "源文件名必须为绝对路径"
+
+#. Translators: first %s is a filename; second %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:179
+#, c-format
+msgid "Could not open %s: %s\n"
+msgstr "无法打开 %s: %s\n"
+
+#. Translators: first %s is a filename; second %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:188
+#, c-format
+msgid "Could not get information for %s: %s\n"
+msgstr "无法获取 %s 的信息: %s\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:195
+#, c-format
+msgid "%s must be a regular file\n"
+msgstr "%s 必须为常规文件\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:204
+msgid "This program must only be run through pkexec(1)"
+msgstr "此程序仅能通过 pkexec(1) 运行"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:209
+msgid "PKEXEC_UID must be set to an integer value"
+msgstr "PKEXEC_UID 必须设为整数值"
+
+#. Translators: we are complaining that a file must be really owned by the user who called this program
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:215
+#, c-format
+msgid "%s must be owned by you\n"
+msgstr "%s 必须归您所有\n"
+
+#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:223
+#, c-format
+msgid "%s must not have any directory components\n"
+msgstr "%s 不应有任何目录部分\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:231
+#, c-format
+msgid "%s must be a directory\n"
+msgstr "%s 必须为目录\n"
+
+#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:242
+#, c-format
+msgid "Could not open %s/%s: %s\n"
+msgstr "无法打开 %s/%s: %s\n"
+
+#: ../capplets/display/gnome-display-properties-install-systemwide.c:262
+#, c-format
+msgid "Could not rename %s to %s: %s\n"
+msgstr "无法将 %s 重命名为 %s: %s\n"
+
+#: ../capplets/display/org.gnome.randr.policy.in.h:1
+msgid ""
+"Authentication is required to install multi-monitor settings for all users"
+msgstr "为所有用户安装多显示器设置需要身份验证"
+
+#: ../capplets/display/org.gnome.randr.policy.in.h:2
+msgid "Install multi-monitor settings for the whole system"
+msgstr "为整个系统安装多显示器设置"
+
 #: ../capplets/display/xrandr-capplet.c:312
 msgid "Upside Down"
 msgstr "上下颠倒"
@@ -2153,31 +2256,31 @@ msgid ""
 "placement."
 msgstr "选择一个显示器来更改它的属性；拖动它来排列位置。"
 
-#: ../capplets/display/xrandr-capplet.c:2067
+#: ../capplets/display/xrandr-capplet.c:2069
 msgid "Could not save the monitor configuration"
 msgstr "无法保存显示器配置"
 
-#: ../capplets/display/xrandr-capplet.c:2089
+#: ../capplets/display/xrandr-capplet.c:2091
 msgid "Could not get session bus while applying display configuration"
 msgstr "应用显示配置时无法获得会话总线"
 
-#: ../capplets/display/xrandr-capplet.c:2131
+#: ../capplets/display/xrandr-capplet.c:2133
 msgid "Could not detect displays"
 msgstr "无法探测显示器"
 
-#: ../capplets/display/xrandr-capplet.c:2323
+#: ../capplets/display/xrandr-capplet.c:2325
 msgid "The monitor configuration has been saved"
 msgstr "显示器配置已保存"
 
-#: ../capplets/display/xrandr-capplet.c:2325
+#: ../capplets/display/xrandr-capplet.c:2327
 msgid "This configuration will be used the next time someone logs in."
 msgstr "这个设置将在下次登入时使用。"
 
-#: ../capplets/display/xrandr-capplet.c:2359
+#: ../capplets/display/xrandr-capplet.c:2361
 msgid "Could not set the default configuration for monitors"
 msgstr "无法为显示器设置默认配置"
 
-#: ../capplets/display/xrandr-capplet.c:2401
+#: ../capplets/display/xrandr-capplet.c:2403
 msgid "Could not get screen information"
 msgstr "无法获得屏幕信息"
 
@@ -2186,7 +2289,7 @@ msgid "Sound"
 msgstr "声音"
 
 #: ../capplets/keybindings/01-desktop-key.xml.in.h:1
-#: ../libslab/bookmark-agent.c:1146
+#: ../libslab/bookmark-agent.c:1183
 msgid "Desktop"
 msgstr "桌面"
 
@@ -2453,7 +2556,7 @@ msgstr "布局"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:19
 msgid "List of keyboard layouts selected for usage"
-msgstr ""
+msgstr "选用的键盘布局列表"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:20
 msgid ""
@@ -2480,11 +2583,11 @@ msgstr "向上移动(_U)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:25
 msgid "Move the selected keyboard layout down in the list"
-msgstr ""
+msgstr "将列表中所选键盘布局下移"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:26
 msgid "Move the selected keyboard layout up in the list"
-msgstr ""
+msgstr "将列表中所选键盘布局上移"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:27
 msgid "New windows u_se active window's layout"
@@ -2492,11 +2595,11 @@ msgstr "新窗口使用活动窗口的布局(_S)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:28
 msgid "Print a diagram of the selected keyboard layout"
-msgstr ""
+msgstr "显示所选键盘布局的简图"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 msgid "Remove the selected keyboard layout from the list"
-msgstr ""
+msgstr "从列表中移除所选键盘布局"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 msgid "Repeat Keys"
@@ -2510,7 +2613,7 @@ msgstr "重复键速度"
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
-msgstr ""
+msgstr "使用默认设置替代当前的键盘布局设置"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 msgid "Reset to De_faults"
@@ -2522,7 +2625,7 @@ msgstr "速度(_P)："
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "Select a keyboard layout to be added to the list"
-msgstr ""
+msgstr "选择要加入列表的键盘布局"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:37
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:27
@@ -2539,10 +2642,8 @@ msgid "Typing Break"
 msgstr "打字间断"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:42
-#, fuzzy
-#| msgid "Keyboard Layout Options"
 msgid "View and edit keyboard layout options"
-msgstr "键盘布局选项"
+msgstr "查看并编辑键盘布局选项"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:43
 #: ../capplets/mouse/gnome-mouse-properties.ui.h:37
@@ -2587,22 +2688,26 @@ msgid "_Separate layout for each window"
 msgstr "每个窗口独立布局(_S)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:54
+msgid "_Show..."
+msgstr "显示(_S)..."
+
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
 msgid "_Simulate simultaneous keypresses"
 msgstr "模拟同时按键(_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:55
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
 msgid "_Speed:"
 msgstr "速度(_S)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
 msgid "_Type to test settings:"
 msgstr "输入字符来测试设置(_T)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:57
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
 msgid "_Work interval lasts:"
 msgstr "工作间隔持续(_W)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:58
+#: ../capplets/keyboard/gnome-keyboard-properties-dialog.ui.h:59
 msgid "minutes"
 msgstr "分钟"
 
@@ -2654,7 +2759,7 @@ msgstr "键盘布局选项"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:242
 msgid "Layout"
 msgstr "布局"
 
@@ -2666,8 +2771,8 @@ msgstr "制造商"
 msgid "Models"
 msgstr "型号"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:234
-#: ../capplets/network/gnome-network-properties.c:583
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:235
+#: ../capplets/network/gnome-network-properties.c:581
 msgid "Default"
 msgstr "默认"
 
@@ -2871,12 +2976,12 @@ msgstr "鼠标"
 msgid "Set your mouse preferences"
 msgstr "设置鼠标首选项"
 
-#: ../capplets/network/gnome-network-properties.c:701
-#: ../capplets/network/gnome-network-properties.c:852
+#: ../capplets/network/gnome-network-properties.c:699
+#: ../capplets/network/gnome-network-properties.c:850
 msgid "New Location..."
 msgstr "新建位置..."
 
-#: ../capplets/network/gnome-network-properties.c:818
+#: ../capplets/network/gnome-network-properties.c:816
 msgid "Location already exists"
 msgstr "位置已存在"
 
@@ -2992,19 +3097,19 @@ msgstr "为所有协议使用相同的代理(_U)"
 msgid "Cannot start the preferences application for your window manager"
 msgstr "无法启动您的窗口管理器的首选项程序"
 
-#: ../capplets/windows/gnome-window-properties.c:604
+#: ../capplets/windows/gnome-window-properties.c:603
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:610
+#: ../capplets/windows/gnome-window-properties.c:609
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:617
+#: ../capplets/windows/gnome-window-properties.c:616
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (或“Windows 标志”)"
 
-#: ../capplets/windows/gnome-window-properties.c:624
+#: ../capplets/windows/gnome-window-properties.c:623
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -3197,7 +3302,7 @@ msgstr "休息一下(_T)"
 #: ../typing-break/drwright.c:507
 #, c-format
 msgid "Take a break now (next in %dm)"
-msgstr ""
+msgstr "休息一下 (距下次 %dm)"
 
 #: ../typing-break/drwright.c:509
 #, c-format
@@ -3208,7 +3313,7 @@ msgstr[0] "距下次间隔还有 %d 分钟"
 #: ../typing-break/drwright.c:515
 #, c-format
 msgid "Take a break now (next in less than one minute)"
-msgstr ""
+msgstr "休息一下 (下次在一分钟以内)"
 
 #: ../typing-break/drwright.c:517
 #, c-format
@@ -3330,48 +3435,48 @@ msgstr "是否为 TrueType 字体制作缩略图"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "是否为 Type1 字体制作缩略图"
 
-#: ../font-viewer/font-view.c:289
+#: ../font-viewer/font-view.c:293
 msgid "Name:"
 msgstr "名称："
 
-#: ../font-viewer/font-view.c:292
+#: ../font-viewer/font-view.c:296
 msgid "Style:"
 msgstr "样式："
 
-#: ../font-viewer/font-view.c:305
+#: ../font-viewer/font-view.c:309
 msgid "Type:"
 msgstr "类型："
 
-#: ../font-viewer/font-view.c:309
+#: ../font-viewer/font-view.c:313
 msgid "Size:"
 msgstr "大小："
 
-#: ../font-viewer/font-view.c:353 ../font-viewer/font-view.c:366
+#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:370
 msgid "Version:"
 msgstr "版本："
 
-#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:368
+#: ../font-viewer/font-view.c:361 ../font-viewer/font-view.c:372
 msgid "Copyright:"
 msgstr "版权："
 
-#: ../font-viewer/font-view.c:361
+#: ../font-viewer/font-view.c:365
 msgid "Description:"
 msgstr "描述："
 
-#: ../font-viewer/font-view.c:441
+#: ../font-viewer/font-view.c:445
 msgid "Installed"
 msgstr "已安装"
 
-#: ../font-viewer/font-view.c:444
+#: ../font-viewer/font-view.c:448
 msgid "Install Failed"
 msgstr "安装失败"
 
-#: ../font-viewer/font-view.c:516
+#: ../font-viewer/font-view.c:519
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "用法：%s fontfile\n"
 
-#: ../font-viewer/font-view.c:591
+#: ../font-viewer/font-view.c:590
 msgid "I_nstall Font"
 msgstr "安装字体(_N)"
 
@@ -3417,7 +3522,7 @@ msgstr "您的过滤器“%s”不符合任何项。"
 msgid "No matches found."
 msgstr "没有找到符合的。"
 
-#: ../libslab/app-shell.c:905
+#: ../libslab/app-shell.c:909
 msgid "Other"
 msgstr "其他"
 
@@ -3439,11 +3544,11 @@ msgstr "升级"
 msgid "Uninstall"
 msgstr "卸载"
 
-#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:721
+#: ../libslab/application-tile.c:784 ../libslab/document-tile.c:738
 msgid "Remove from Favorites"
-msgstr "从收藏夹中删除"
+msgstr "从收藏夹中移除"
 
-#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:723
+#: ../libslab/application-tile.c:786 ../libslab/document-tile.c:740
 msgid "Add to Favorites"
 msgstr "添加到收藏夹"
 
@@ -3455,27 +3560,32 @@ msgstr "从启动程序中删除"
 msgid "Add to Startup Programs"
 msgstr "添加到启动程序"
 
-#: ../libslab/bookmark-agent.c:1077
+#: ../libslab/bookmark-agent.c:1110
 msgid "New Spreadsheet"
 msgstr "新建电子表格"
 
-#: ../libslab/bookmark-agent.c:1082
+#: ../libslab/bookmark-agent.c:1115
 msgid "New Document"
 msgstr "新建文档"
 
-#: ../libslab/bookmark-agent.c:1140
+#: ../libslab/bookmark-agent.c:1168
+msgctxt "Home folder"
+msgid "Home"
+msgstr "主页"
+
+#: ../libslab/bookmark-agent.c:1175
 msgid "Documents"
 msgstr "文档"
 
-#: ../libslab/bookmark-agent.c:1153
+#: ../libslab/bookmark-agent.c:1190
 msgid "File System"
 msgstr "文件系统"
 
-#: ../libslab/bookmark-agent.c:1157
+#: ../libslab/bookmark-agent.c:1194
 msgid "Network Servers"
 msgstr "网络服务器"
 
-#: ../libslab/bookmark-agent.c:1186
+#: ../libslab/bookmark-agent.c:1223
 msgid "Search"
 msgstr "搜索"
 
@@ -3486,72 +3596,82 @@ msgid "<b>Open</b>"
 msgstr "<b>打开</b>"
 
 #. make rename action
-#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:234
+#: ../libslab/directory-tile.c:190 ../libslab/document-tile.c:236
 msgid "Rename..."
 msgstr "重命名..."
 
 #: ../libslab/directory-tile.c:204 ../libslab/directory-tile.c:213
-#: ../libslab/document-tile.c:248 ../libslab/document-tile.c:257
+#: ../libslab/document-tile.c:250 ../libslab/document-tile.c:259
 msgid "Send To..."
 msgstr "发送到..."
 
 #. make move to trash action
-#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:283
+#: ../libslab/directory-tile.c:228 ../libslab/document-tile.c:285
 msgid "Move to Trash"
 msgstr "移至回收站"
 
 #: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:457
-#: ../libslab/document-tile.c:293 ../libslab/document-tile.c:837
+#: ../libslab/document-tile.c:295 ../libslab/document-tile.c:854
 msgid "Delete"
 msgstr "删除"
 
-#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:985
+#: ../libslab/directory-tile.c:533 ../libslab/document-tile.c:1016
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "您确定要永久删除“%s”吗？"
 
-#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:986
+#: ../libslab/directory-tile.c:534 ../libslab/document-tile.c:1017
 msgid "If you delete an item, it is permanently lost."
 msgstr "如果您删除一项，它将永久丢失。"
 
-#: ../libslab/document-tile.c:193
+#: ../libslab/document-tile.c:195
 #, c-format
 msgid "Open with \"%s\""
 msgstr "用“%s”打开"
 
-#: ../libslab/document-tile.c:207
+#: ../libslab/document-tile.c:209
 msgid "Open with Default Application"
 msgstr "用默认应用程序打开"
 
-#: ../libslab/document-tile.c:218
+#: ../libslab/document-tile.c:220
 msgid "Open in File Manager"
 msgstr "在文件管理器中打开"
 
-#: ../libslab/document-tile.c:617
+#. clean item from menu
+#: ../libslab/document-tile.c:304
+msgid "Remove from recent menu"
+msgstr "从最近菜单中移除"
+
+#. clean all the items from menu
+#: ../libslab/document-tile.c:312
+msgid "Purge all the recent items"
+msgstr "清除所有最近项目"
+
+#: ../libslab/document-tile.c:634
 msgid "?"
 msgstr "？"
 
-#: ../libslab/document-tile.c:624
+#: ../libslab/document-tile.c:641
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
-#: ../libslab/document-tile.c:632
+#: ../libslab/document-tile.c:649
 msgid "Today %l:%M %p"
 msgstr "今天 %H:%M"
 
-#: ../libslab/document-tile.c:642
+#: ../libslab/document-tile.c:659
 msgid "Yesterday %l:%M %p"
 msgstr "昨天 %H:%M"
 
-#: ../libslab/document-tile.c:654
+#: ../libslab/document-tile.c:671
 msgid "%a %l:%M %p"
 msgstr "%A%H:%M"
 
-#: ../libslab/document-tile.c:662
+#: ../libslab/document-tile.c:679
 msgid "%b %d %l:%M %p"
 msgstr "%m月%d日%H:%M"
 
-#: ../libslab/document-tile.c:664
+#: ../libslab/document-tile.c:681
 msgid "%b %d %Y"
 msgstr "%Y-%m-%d"
 
