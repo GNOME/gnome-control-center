@@ -27,6 +27,9 @@
 /* This must match the number of images on the 2nd page in the UI file */
 #define MAX_ENROLL_STAGES 5
 
+/* Translate fprintd strings */
+#define TR(s) dgettext("fprintd", s)
+
 static DBusGProxy *manager = NULL;
 static DBusGConnection *connection = NULL;
 static gboolean is_disable = FALSE;
@@ -306,7 +309,7 @@ finger_radio_button_toggled (GtkToggleButton *button, EnrollData *data)
 
 	data->finger = selected_finger (data->dialog);
 
-	msg = g_strdup_printf (finger_str_to_msg (data->finger, data->is_swipe), data->name);
+	msg = g_strdup_printf (TR(finger_str_to_msg (data->finger, data->is_swipe)), data->name);
 	gtk_label_set_text (GTK_LABEL (WID("enroll-label")), msg);
 	g_free (msg);
 }
@@ -319,7 +322,7 @@ finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 
 	data->finger = selected_finger (data->dialog);
 
-	msg = g_strdup_printf (finger_str_to_msg (data->finger, data->is_swipe), data->name);
+	msg = g_strdup_printf (TR(finger_str_to_msg (data->finger, data->is_swipe)), data->name);
 	gtk_label_set_text (GTK_LABEL (WID("enroll-label")), msg);
 	g_free (msg);
 }
@@ -370,7 +373,7 @@ enroll_result (GObject *object, const char *result, gboolean done, EnrollData *d
 		}
 	}
 
-	msg = g_strdup_printf (enroll_result_str_to_msg (result, data->is_swipe), data->name);
+	msg = g_strdup_printf (TR(enroll_result_str_to_msg (result, data->is_swipe)), data->name);
 	gtk_label_set_text (GTK_LABEL (WID ("status-label")), msg);
 	g_free (msg);
 }
@@ -593,7 +596,7 @@ enroll_fingerprints (GtkWindow *parent, GtkWidget *enable, GtkWidget *disable)
 
 	g_object_set_data (G_OBJECT (WID("page2")), "name", "enroll");
 
-	msg = g_strdup_printf (finger_str_to_msg (data->finger, data->is_swipe), data->name);
+	msg = g_strdup_printf (TR(finger_str_to_msg (data->finger, data->is_swipe)), data->name);
 	gtk_label_set_text (GTK_LABEL (WID("enroll-label")), msg);
 	g_free (msg);
 
@@ -609,6 +612,9 @@ fingerprint_button_clicked (GtkBuilder *dialog,
 			    GtkWidget *enable,
 			    GtkWidget *disable)
 {
+	bindtextdomain ("fprintd", GNOMELOCALEDIR);
+	bind_textdomain_codeset ("fprintd", "UTF-8");
+
 	if (is_disable != FALSE) {
 		delete_fingerprints_question (dialog, enable, disable);
 	} else {
