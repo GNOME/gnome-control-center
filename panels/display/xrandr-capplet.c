@@ -60,6 +60,7 @@ struct App
     GtkWidget	   *rotation_combo;
     GtkWidget	   *panel_checkbox;
     GtkWidget	   *clone_checkbox;
+    GtkWidget	   *clone_label;
     GtkWidget	   *show_icon_checkbox;
 
     /* We store the event timestamp when the Apply button is clicked */
@@ -495,6 +496,7 @@ rebuild_mirror_screens (App *app)
     
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->clone_checkbox), mirror_is_active);
     gtk_widget_set_sensitive (app->clone_checkbox, mirror_is_supported);
+    gtk_widget_set_sensitive (app->clone_label, mirror_is_supported);
 
     g_signal_handlers_unblock_by_func (app->clone_checkbox, G_CALLBACK (on_clone_changed), app);
 }
@@ -2458,6 +2460,8 @@ run_application (void)
     app->clone_checkbox = _gtk_builder_get_widget (builder, "clone_checkbox");
     g_signal_connect (app->clone_checkbox, "toggled",
 		      G_CALLBACK (on_clone_changed), app);
+
+    app->clone_label    = _gtk_builder_get_widget (builder, "clone_resolution_warning_label");
 
     g_signal_connect (_gtk_builder_get_widget (builder, "detect_displays_button"),
 		      "clicked", G_CALLBACK (on_detect_displays), app);
