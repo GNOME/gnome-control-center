@@ -10,10 +10,10 @@ MARSHAL_FILES = cc-shell-marshal.c cc-shell-marshal.h
 BUILT_SOURCES = $(MARSHAL_FILES)
 
 cc-shell-marshal.h: cc-shell-marshal.list
-	$(AM_V_GEN) GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --header > $@
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=cc_shell_marshal $< --header > $@
 
 cc-shell-marshal.c: cc-shell-marshal.list
-	$(AM_V_GEN) GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --body --header > $@
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=cc_shell_marshal $< --body --header > $@
 
 gnome_control_center_SOURCES =			\
 	control-center.c			\
