@@ -2330,12 +2330,20 @@ success_dialog_for_make_default (App *app)
 }
 
 static void
+error_dialog_for_make_default (App *app, const char *error_text)
+{
+    error_message (app, _("Could not set the default configuration for monitors"), error_text);
+}
+
+static void
 make_default (App *app)
 {
     char *command_line;
     char *source_filename;
     char *dest_filename;
     char *dest_basename;
+    char *std_error;
+    gint exit_status;
     GError *error;
 
     if (!sanitize_and_save_configuration (app))
@@ -2355,12 +2363,21 @@ make_default (App *app)
 				    dest_basename);
 
     error = NULL;
-    /* FIXME: pick up stderr and present it nicely in case of error */
-    if (!g_spawn_command_line_sync (command_line, NULL, NULL, NULL, &error))
-	error_message (app, _("Could not set the default configuration for monitors"), error ? error->message : NULL);
+    if (!g_spawn_command_line_sync (command_line, NULL, &std_error, &exit_status, &error))
+    {
+	error_dialog_for_make_default (app, error->message);
+	g_error_free (error);
+    }
+    else if (!WIFEXITED (exit_status) || WEXITSTATUS (exit_status) != 0)
+    {
+	error_dialog_for_make_default (app, std_error);
+    }
     else
+    {
 	success_dialog_for_make_default (app);
+    }
 
+    g_free (std_error);
     g_free (dest_filename);
     g_free (dest_basename);
     g_free (source_filename);
