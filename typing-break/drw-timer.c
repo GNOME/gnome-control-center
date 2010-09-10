@@ -21,24 +21,24 @@
 #include <glib.h>
 #include "drw-timer.h"
 
-struct _DrwTimer 
+struct _DrwTimer
 {
 	GTimeVal start_time;
 };
 
-DrwTimer * drw_timer_new () 
+DrwTimer * drw_timer_new (void)
 {
 	DrwTimer * timer = g_new0 (DrwTimer, 1);
 	drw_timer_start (timer);
 	return timer;
 }
 
-void drw_timer_start (DrwTimer *timer) 
+void drw_timer_start (DrwTimer *timer)
 {
 	g_get_current_time (&timer->start_time);
 }
 
-double drw_timer_elapsed (DrwTimer *timer) 
+double drw_timer_elapsed (DrwTimer *timer)
 {
 	GTimeVal now;
 	g_get_current_time (&now);

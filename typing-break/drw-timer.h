@@ -34,7 +34,7 @@
  */
 
 typedef struct _DrwTimer DrwTimer;
-DrwTimer * drw_timer_new ();
+DrwTimer * drw_timer_new (void);
 void drw_timer_start (DrwTimer *timer);
 double drw_timer_elapsed (DrwTimer *timer);
 void drw_timer_destroy (DrwTimer *timer);
