@@ -546,8 +546,8 @@ setup_search (GnomeControlCenter *shell)
 
   /* set up the search view */
   priv->search_view = search_view = cc_shell_item_view_new ();
-  gtk_icon_view_set_orientation (GTK_ICON_VIEW (search_view),
-                                 GTK_ORIENTATION_HORIZONTAL);
+  gtk_icon_view_set_item_orientation (GTK_ICON_VIEW (search_view),
+                                      GTK_ORIENTATION_HORIZONTAL);
   gtk_icon_view_set_spacing (GTK_ICON_VIEW (search_view), 6);
   gtk_icon_view_set_model (GTK_ICON_VIEW (search_view),
                            GTK_TREE_MODEL (priv->search_filter));
