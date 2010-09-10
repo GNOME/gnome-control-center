@@ -70,7 +70,7 @@ drw_selection_clear (GtkWidget         *widget,
 static gboolean
 drw_selection_find_existing (DrwSelection *drw_selection)
 {
-	Display *xdisplay = GDK_DISPLAY ();
+	Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 	Window old;
 
 	gdk_error_trap_push ();
@@ -120,7 +120,7 @@ drw_selection_claim (DrwSelection *drw_selection)
 static void
 drw_selection_negotiate (DrwSelection *drw_selection)
 {
-	Display *xdisplay = GDK_DISPLAY ();
+	Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 	gboolean found = FALSE;
 
 	/* We don't need both the XGrabServer() and the loop here;

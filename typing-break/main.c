@@ -35,7 +35,7 @@ gboolean debug = FALSE;
 static gboolean
 have_tray (void)
 {
-	Screen *xscreen = DefaultScreenOfDisplay (gdk_display);
+	Screen *xscreen = DefaultScreenOfDisplay (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
 	Atom    selection_atom;
 	char   *selection_atom_name;
 	
