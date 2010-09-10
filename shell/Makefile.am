@@ -1,11 +1,8 @@
-NULL =
-
 INCLUDES =					\
 	-I$(top_srcdir)				\
 	-I$(top_srcdir)/libgnome-control-center \
 	$(GIO_CFLAGS)				\
-	$(GNOMECC_SHELL_CFLAGS)			\
-	$(NULL)
+	$(GNOMECC_SHELL_CFLAGS)
 
 bin_PROGRAMS = gnome-control-center
 
@@ -13,10 +10,10 @@ MARSHAL_FILES = cc-shell-marshal.c cc-shell-marshal.h
 BUILT_SOURCES = $(MARSHAL_FILES)
 
 cc-shell-marshal.h: cc-shell-marshal.list
-	@GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --header > $@
+	$(AM_V_GEN) GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --header > $@
 
 cc-shell-marshal.c: cc-shell-marshal.list
-	@GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --body --header > $@
+	$(AM_V_GEN) GLIB_GENMARSHAL@ --prefix=cc_shell_marshal $< --body --header > $@
 
 gnome_control_center_SOURCES =			\
 	control-center.c			\
@@ -30,14 +27,12 @@ gnome_control_center_SOURCES =			\
 	cc-shell-item-view.h			\
 	cc-shell-model.c			\
 	cc-shell-model.h			\
-	$(MARSHAL_FILES)			\
-	$(NULL)
+	$(MARSHAL_FILES)
 
 gnome_control_center_LDADD =			\
 	$(top_builddir)/libgnome-control-center/libgnome-control-center.la \
 	$(GNOMECC_SHELL_LIBS)			\
-	$(GIO_LIBS)				\
-	$(NULL)
+	$(GIO_LIBS)
 
 gnome_control_center_LDFLAGS = -export-dynamic
 
@@ -45,8 +40,7 @@ AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
 	-DUIDIR="\"$(uidir)\""					\
 	-DMENUDIR="\"$(menudir)\""				\
-	-DPANELS_DIR="\"$(PANELS_DIR)\""			\
-	$(NULL)
+	-DPANELS_DIR="\"$(PANELS_DIR)\""
 
 menudir = $(sysconfdir)/xdg/menus
 menu_DATA = gnomecc.menu
@@ -64,13 +58,12 @@ directory_in_files = gnomecc.directory.in
 directory_DATA = $(directory_in_files:.directory.in=.directory)
 @INTLTOOL_DIRECTORY_RULE@
 
-EXTRA_DIST = 					\
+EXTRA_DIST =					\
 	$(ui_DATA)				\
 	gnome-control-center.desktop.in.in	\
 	gnomecc.directory.in			\
 	gnomecc.menu				\
-	cc-shell-marshal.list			\
-	$(NULL)
+	cc-shell-marshal.list
 
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory
 
