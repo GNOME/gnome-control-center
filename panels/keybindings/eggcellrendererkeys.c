@@ -406,8 +406,8 @@ grab_key_callback (GtkWidget    *widget,
 
   upper = event->keyval;
   accel_keyval = gdk_keyval_to_lower (upper);
-  if (accel_keyval == GDK_ISO_Left_Tab)
-    accel_keyval = GDK_Tab;
+  if (accel_keyval == GDK_KEY_ISO_Left_Tab)
+    accel_keyval = GDK_KEY_Tab;
 
 
 
@@ -442,11 +442,11 @@ grab_key_callback (GtkWidget    *widget,
   else
     g_assert_not_reached ();
 
-  if (accel_mods == 0 && accel_keyval == GDK_Escape)
+  if (accel_mods == 0 && accel_keyval == GDK_KEY_Escape)
     goto out; /* cancel */
 
   /* clear the accelerator on Backspace */
-  if (accel_mods == 0 && accel_keyval == GDK_BackSpace)
+  if (accel_mods == 0 && accel_keyval == GDK_KEY_BackSpace)
     {
       cleared = TRUE;
       goto out;

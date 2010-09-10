@@ -497,7 +497,7 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
                                  GdkEventKey *event,
                                  GnomeControlCenterPrivate   *priv)
 {
-  if (event->keyval == GDK_Return)
+  if (event->keyval == GDK_KEY_Return)
     {
       GtkTreePath *path;
 
@@ -511,7 +511,7 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
       return TRUE;
     }
 
-  if (event->keyval == GDK_Escape)
+  if (event->keyval == GDK_KEY_Escape)
     {
       gtk_entry_set_text (entry, "");
       return TRUE;

@@ -483,7 +483,7 @@ postpone_entry_key_press_event_cb (GtkEntry       *entry,
 
 	priv = window->priv;
 
-	if (event->keyval == GDK_Escape) {
+	if (event->keyval == GDK_KEY_Escape) {
 		if (priv->postpone_timeout_id) {
 			g_source_remove (priv->postpone_timeout_id);
 		}
