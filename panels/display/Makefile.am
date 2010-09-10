@@ -4,19 +4,26 @@ cappletname = display
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = display-capplet.ui
 
+MARSHALFILES = foo-marshal.c foo-marshal.h
+BUILT_SOURCES = $(MARSHALFILES)
+
+foo-marshal.c: foo-marshal.h
+	$(AM_V_GEN) ( $(GLIB_GENMARSHAL) --prefix=foo_marshal $(srcdir)/foo-marshal.list --header --body > foo-marshal.c )
+foo-marshal.h: foo-marshal.list
+	$(AM_V_GEN) ( $(GLIB_GENMARSHAL) --prefix=foo_marshal $(srcdir)/foo-marshal.list --header > foo-marshal.h )
+
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libdisplay.la
 
-libdisplay_la_SOURCES = 	\
+libdisplay_la_SOURCES =		\
 	display-module.c	\
 	cc-display-panel.c	\
 	cc-display-panel.h	\
 	xrandr-capplet.c	\
 	xrandr-capplet.h	\
 	scrollarea.c		\
-	foo-marshal.c		\
 	scrollarea.h		\
-	foo-marshal.h
+	$(MARSHALFILES)
 
 libdisplay_la_LIBADD = $(DBUS_LIBS) $(PANEL_LIBS)
 libdisplay_la_LDFLAGS = $(PANEL_LDFLAGS) $(DISPLAY_CAPPLET_LIBS)
@@ -76,7 +83,7 @@ update-icon-cache:
 		echo "***   $(gtk_update_icon_cache)"; \
 	fi
 
-EXTRA_DIST = org.gnome.randr.policy.in
+EXTRA_DIST = org.gnome.randr.policy.in foo-marshal.list
 DISTCLEANFILES = org.gnome.randr.policy
 
 -include $(top_srcdir)/git.mk
