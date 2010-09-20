@@ -475,7 +475,6 @@ preview_expose_cb (GtkWidget         *widget,
   const gint preview_x = 45;
   const gint preview_y = 84;
   GdkPixbuf *preview, *temp;
-  gfloat scale;
   gint size;
 
   cr = gdk_cairo_create (gtk_widget_get_window (widget));
@@ -600,7 +599,6 @@ cc_background_panel_init (CcBackgroundPanel *self)
       "sources-liststore", "background-panel", "sizegroup", NULL };
   GError *err = NULL;
   GtkWidget *widget;
-  gint width, height;
   GtkListStore *store;
   gchar *filename;
 
