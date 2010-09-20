@@ -141,7 +141,7 @@ tz_location_free (TzLocation *loc)
 void
 tz_db_free (TzDB *db)
 {
-	g_ptr_array_foreach (db->locations, tz_location_free, NULL);
+	g_ptr_array_foreach (db->locations, (GFunc) tz_location_free, NULL);
 	g_ptr_array_free (db->locations, TRUE);
 	g_free (db);
 }
