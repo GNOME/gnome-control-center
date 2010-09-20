@@ -111,6 +111,7 @@ find_wallpaper (gpointer key,
   return item->bg == bg;
 }
 
+/* FIXME: Is this used for anything? */
 static void
 item_changed_cb (GnomeBG    *bg,
                  GnomeWpXml *data)
