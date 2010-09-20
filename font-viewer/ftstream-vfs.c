@@ -27,6 +27,8 @@
 
 #include <gio/gio.h>
 
+#include "ftstream-vfs.h"
+
 static unsigned long
 vfs_stream_read(FT_Stream stream,
 		unsigned long offset,
