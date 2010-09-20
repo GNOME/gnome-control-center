@@ -19,6 +19,7 @@
 #include <glib/gi18n.h>
 
 #include "gconf-property-editor.h"
+#include "gnome-mouse-accessibility.h"
 
 #define MT_GCONF_HOME "/desktop/gnome/accessibility/mouse"
 
