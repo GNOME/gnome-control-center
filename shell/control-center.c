@@ -34,7 +34,7 @@ application_prepare_action_cb (GApplication       *application,
                                GVariant           *platform_data,
                                GnomeControlCenter *shell)
 {
-  gchar **argv;
+  const gchar **argv;
   gsize length;
 
   gnome_control_center_present (shell);
