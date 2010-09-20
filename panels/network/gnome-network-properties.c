@@ -664,7 +664,7 @@ update_locations (GConfClient *client,
 		{
 			gchar *locp, *key_name;
 
-			locp = iter->data + strlen (LOCATION_DIR) + 1;
+			locp = (char *) (iter->data) + strlen (LOCATION_DIR) + 1;
 			key_name = gconf_unescape_key (locp, -1);
 
 			gtk_list_store_append (store, &titer);
