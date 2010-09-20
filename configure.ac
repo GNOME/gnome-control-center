@@ -114,13 +114,12 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-COMMON_MODULES="gtk+-3.0 >= 2.90.0 dnl
- glib-2.0 >= 2.25.11 dnl
- gthread-2.0 dnl
- gio-2.0 dnl
- gconf-2.0 dnl
- libxml-2.0 dnl
- gnome-desktop-3.0 >= 2.29.4"
+COMMON_MODULES="gtk+-3.0 >= 2.90.0
+ glib-2.0 >= 2.25.11
+ gthread-2.0
+ gio-2.0
+ gconf-2.0
+ libxml-2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
