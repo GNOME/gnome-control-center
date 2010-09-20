@@ -19,6 +19,7 @@ libmouse_properties_la_SOURCES =	\
 	cc-mouse-panel.c		\
 	cc-mouse-panel.h		\
 	gnome-mouse-properties.c	\
+	gnome-mouse-properties.h	\
 	gnome-mouse-accessibility.c	\
 	gnome-mouse-accessibility.h	\
 	capplet-stock-icons.c		\
