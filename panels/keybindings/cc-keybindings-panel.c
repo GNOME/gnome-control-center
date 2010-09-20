@@ -20,6 +20,7 @@
  */
 
 #include "cc-keybindings-panel.h"
+#include "gnome-keybinding-properties.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcKeybindingsPanel, cc_keybindings_panel, CC_TYPE_PANEL)
 

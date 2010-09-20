@@ -14,6 +14,7 @@
 #include <gdk/gdkkeysyms.h>
 
 #include "wm-common.h"
+#include "gnome-keybinding-properties.h"
 #include "eggcellrendererkeys.h"
 
 #define GCONF_BINDING_DIR "/desktop/gnome/keybindings"

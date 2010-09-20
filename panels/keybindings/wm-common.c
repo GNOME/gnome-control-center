@@ -29,12 +29,12 @@ wm_common_get_window_manager_property (Atom atom)
   if (wm_window == None)
     return NULL;
 
-  utf8_string = XInternAtom (GDK_DISPLAY (), "UTF8_STRING", False);
+  utf8_string = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "UTF8_STRING", False);
 
   gdk_error_trap_push ();
 
   val = NULL;
-  result = XGetWindowProperty (GDK_DISPLAY (),
+  result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
 		  	       wm_window,
 			       atom,
 			       0, G_MAXLONG,
@@ -62,7 +62,7 @@ wm_common_get_window_manager_property (Atom atom)
 char*
 wm_common_get_current_window_manager (void)
 {
-  Atom atom = XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False);
+  Atom atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_WM_NAME", False);
   char *result;
 
   result = wm_common_get_window_manager_property (atom);
@@ -75,7 +75,7 @@ wm_common_get_current_window_manager (void)
 char**
 wm_common_get_current_keybindings (void)
 {
-  Atom keybindings_atom = XInternAtom (GDK_DISPLAY (), "_GNOME_WM_KEYBINDINGS", False);
+  Atom keybindings_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_GNOME_WM_KEYBINDINGS", False);
   char *keybindings = wm_common_get_window_manager_property (keybindings_atom);
   char **results;
 
@@ -89,7 +89,7 @@ wm_common_get_current_keybindings (void)
     }
   else
     {
-      Atom wm_atom = XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False);
+      Atom wm_atom = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_WM_NAME", False);
       char *wm_name = wm_common_get_window_manager_property (wm_atom);
       char *to_copy[] = { NULL, NULL };
 
@@ -111,8 +111,8 @@ update_wm_window (void)
   gulong nitems;
   gulong bytes_after;
 
-  XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-		      XInternAtom (GDK_DISPLAY (), "_NET_SUPPORTING_WM_CHECK", False),
+  XGetWindowProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), GDK_ROOT_WINDOW (),
+		      XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_SUPPORTING_WM_CHECK", False),
 		      0, G_MAXLONG, False, XA_WINDOW, &type, &format,
 		      &nitems, &bytes_after, (guchar **) &xwindow);
 
@@ -123,8 +123,8 @@ update_wm_window (void)
     }
 
   gdk_error_trap_push ();
-  XSelectInput (GDK_DISPLAY (), *xwindow, StructureNotifyMask | PropertyChangeMask);
-  XSync (GDK_DISPLAY (), False);
+  XSelectInput (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), *xwindow, StructureNotifyMask | PropertyChangeMask);
+  XSync (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), False);
 
   if (gdk_error_trap_pop ())
     {
@@ -149,10 +149,10 @@ wm_window_event_filter (GdkXEvent *xev,
        wm_window != None && xevent->xany.window == wm_window) ||
       (xevent->type == PropertyNotify &&
        xevent->xany.window == GDK_ROOT_WINDOW () &&
-       xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY (),  "_NET_SUPPORTING_WM_CHECK", False))) ||
+       xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),  "_NET_SUPPORTING_WM_CHECK", False))) ||
       (xevent->type == PropertyNotify &&
        wm_window != None && xevent->xany.window == wm_window &&
-       xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False))))
+       xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "_NET_WM_NAME", False))))
     {
       update_wm_window ();
       (* ncb_data->func) ((gpointer)wm_common_get_current_window_manager(),
@@ -177,8 +177,8 @@ wm_common_register_window_manager_change (GFunc    func,
 
   update_wm_window ();
 
-  XSelectInput (GDK_DISPLAY (), GDK_ROOT_WINDOW (), PropertyChangeMask);
-  XSync (GDK_DISPLAY (), False);
+  XSelectInput (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), GDK_ROOT_WINDOW (), PropertyChangeMask);
+  XSync (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), False);
 }
 
 

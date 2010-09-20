@@ -11,6 +11,7 @@ libkeybinding_properties_la_SOURCES =   \
 	wm-common.c			\
 	wm-common.h			\
 	gnome-keybinding-properties.c	\
+	gnome-keybinding-properties.h	\
 	eggcellrendererkeys.c		\
 	eggcellrendererkeys.h		\
 	eggaccelerators.c		\
