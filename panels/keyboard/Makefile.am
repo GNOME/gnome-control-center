@@ -18,6 +18,7 @@ libkeyboard_properties_la_SOURCES =	\
 		cc-keyboard-panel.c \
 		cc-keyboard-panel.h \
 	        gnome-keyboard-properties.c \
+	        gnome-keyboard-properties.h \
 	        gnome-keyboard-properties-a11y.c \
 	        gnome-keyboard-properties-a11y.h \
 	        gnome-keyboard-properties-xkb.c \
