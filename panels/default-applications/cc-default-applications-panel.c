@@ -71,7 +71,6 @@ cc_default_applications_panel_dispose (GObject *object)
   if (priv->capplet)
     {
       g_object_unref (priv->capplet->gconf);
-      gnome_da_xml_free (priv->capplet);
 
       if (priv->capplet->theme_changed_id > 0)
         {
@@ -79,6 +78,8 @@ cc_default_applications_panel_dispose (GObject *object)
                                        priv->capplet->theme_changed_id);
           priv->capplet->theme_changed_id = 0;
         }
+
+      gnome_da_xml_free (priv->capplet);
 
       priv->capplet = NULL;
     }
