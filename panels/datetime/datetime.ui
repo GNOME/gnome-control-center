@@ -77,7 +77,7 @@
                     <child>
                       <object class="GtkComboBox" id="city_combobox">
                         <property name="visible">True</property>
-                        <property name="model">city-modelfilter</property>
+                        <property name="model">city-modelsort</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext2"/>
                           <attributes>
@@ -284,5 +284,8 @@
   </object>
   <object class="GtkTreeModelFilter" id="city-modelfilter">
     <property name="child_model">city-liststore</property>
+  </object>
+  <object class="GtkTreeModelSort" id="city-modelsort">
+    <property name="model">city-modelfilter</property>
   </object>
 </interface>

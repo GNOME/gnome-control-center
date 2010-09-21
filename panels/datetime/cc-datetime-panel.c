@@ -29,6 +29,13 @@ G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
 #define DATE_TIME_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_DATE_TIME_PANEL, CcDateTimePanelPrivate))
 
+enum {
+  CITY_COL_CITY,
+  CITY_COL_REGION,
+  CITY_COL_ZONE,
+  CITY_NUM_COLS
+};
+
 struct _CcDateTimePanelPrivate
 {
   GtkBuilder *builder;
@@ -325,9 +332,9 @@ get_regions (TzLocation             *loc,
     }
 
   gtk_list_store_insert_with_values (data->city_store, NULL, 0,
-                                     0, split[1],
-                                     1, split[0],
-                                     2, loc->zone,
+                                     CITY_COL_CITY, split[1],
+                                     CITY_COL_REGION, split[0],
+                                     CITY_COL_ZONE, loc->zone,
                                      -1);
 
   g_strfreev (split);
@@ -348,10 +355,10 @@ city_model_filter_func (GtkTreeModel *model,
   combo_model = gtk_combo_box_get_model (combo);
   gtk_combo_box_get_active_iter (combo, &combo_iter);
   gtk_tree_model_get (combo_model, &combo_iter,
-                      0, &active_region, -1);
+                      CITY_COL_CITY, &active_region, -1);
 
   gtk_tree_model_get (model, iter,
-                      1, &city_region, -1);
+                      CITY_COL_REGION, &city_region, -1);
 
   if (g_strcmp0 (active_region, city_region) == 0)
     result = TRUE;
@@ -370,10 +377,11 @@ static void
 load_regions_model (GtkListStore *regions, GtkListStore *cities)
 {
   struct get_region_data data;
-  TzDB *db = tz_load_db ();
+  TzDB *db;
   GHashTable *table;
 
 
+  db = tz_load_db ();
   table = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
   data.table = table;
@@ -384,13 +392,11 @@ load_regions_model (GtkListStore *regions, GtkListStore *cities)
 
   g_hash_table_destroy (table);
 
+  tz_db_free (db);
+
   /* sort the models */
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (regions), 0,
                                         GTK_SORT_ASCENDING);
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (cities), 0,
-                                        GTK_SORT_ASCENDING);
-
-  tz_db_free (db);
 }
 
 static void
@@ -417,7 +423,7 @@ city_changed_cb (GtkComboBox     *box,
   if (gtk_combo_box_get_active_iter (box, &iter))
     {
       gtk_tree_model_get (gtk_combo_box_get_model (box), &iter,
-                          2, &zone, -1);
+                          CITY_COL_ZONE, &zone, -1);
 
       cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), zone);
 
@@ -433,13 +439,14 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   CcDateTimePanelPrivate *priv;
   gchar *objects[] = { "datetime-panel", "adjustment_min", "adjustment_hour",
       "adjustment_sec", "region-liststore", "city-liststore",
-      "city-modelfilter", NULL };
+      "city-modelfilter", "city-modelsort", NULL };
   GtkWidget *widget;
   GError *err = NULL;
   GDate *date;
   struct tm *ltime;
   time_t t;
   GtkTreeModelFilter *city_modelfilter;
+  GtkTreeModelSort *city_modelsort;
   int ret;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
@@ -509,6 +516,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                                                 "region_combobox");
   g_signal_connect (widget, "changed", G_CALLBACK (region_changed_cb),
                     city_modelfilter);
+
+  city_modelsort = GTK_TREE_MODEL_SORT (gtk_builder_get_object (priv->builder, "city-modelsort"));
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (city_modelsort), 0,
+                                        GTK_SORT_ASCENDING);
 
   gtk_tree_model_filter_set_visible_func (city_modelfilter,
                                           (GtkTreeModelFilterVisibleFunc) city_model_filter_func,
