@@ -36,6 +36,14 @@
 #include <string.h>
 #include <glib/gi18n-lib.h>
 
+enum {
+  COL_SOURCE_NAME,
+  COL_SOURCE_TYPE,
+  COL_SOURCE_READONLY,
+  COL_SOURCE,
+  NUM_COLS
+};
+
 G_DEFINE_DYNAMIC_TYPE (CcBackgroundPanel, cc_background_panel, CC_TYPE_PANEL)
 
 #define BACKGROUND_PANEL_PRIVATE(o) \
@@ -228,8 +236,8 @@ source_changed_cb (GtkComboBox              *combo,
   gtk_combo_box_get_active_iter (combo, &iter);
   model = gtk_combo_box_get_model (combo);
   gtk_tree_model_get (model, &iter,
-                      1, &type,
-                      3, &source, -1);
+                      COL_SOURCE_TYPE, &type,
+                      COL_SOURCE, &source, -1);
 
   view = (GtkIconView *) gtk_builder_get_object (priv->builder,
                                                  "backgrounds-iconview");
@@ -342,7 +350,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (WID ("sources-combobox")));
   gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("sources-combobox")),
                                  &iter);
-  gtk_tree_model_get (model, &iter, 2, &priv->current_source_readonly, -1);
+  gtk_tree_model_get (model, &iter, COL_SOURCE_READONLY, &priv->current_source_readonly, -1);
 
 
   model = gtk_icon_view_get_model (icon_view);
@@ -624,35 +632,35 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   priv->wallpapers_source = bg_wallpapers_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
-                                     0, _("Wallpapers"),
-                                     1, SOURCE_WALLPAPERS,
-                                     2, TRUE,
-                                     3, priv->wallpapers_source,
+                                     COL_SOURCE_NAME, _("Wallpapers"),
+                                     COL_SOURCE_TYPE, SOURCE_WALLPAPERS,
+                                     COL_SOURCE_READONLY, TRUE,
+                                     COL_SOURCE, priv->wallpapers_source,
                                      -1);
 
   priv->pictures_source = bg_pictures_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
-                                     0, _("Pictures Folder"),
-                                     1, SOURCE_PICTURES,
-                                     2, FALSE,
-                                     3, priv->pictures_source,
+                                     COL_SOURCE_NAME, _("Pictures Folder"),
+                                     COL_SOURCE_TYPE, SOURCE_PICTURES,
+                                     COL_SOURCE_READONLY, FALSE,
+                                     COL_SOURCE, priv->pictures_source,
                                      -1);
 
   priv->colors_source = bg_colors_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
-                                     0, _("Colors"),
-                                     1, SOURCE_COLORS,
-                                     2, TRUE,
-                                     3, priv->colors_source,
+                                     COL_SOURCE_NAME, _("Colors"),
+                                     COL_SOURCE_TYPE, SOURCE_COLORS,
+                                     COL_SOURCE_READONLY, TRUE,
+                                     COL_SOURCE, priv->colors_source,
                                      -1);
 
 #ifdef HAVE_LIBSOCIALWEB
   priv->flickr_source = bg_flickr_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
-                                     0, _("Flickr"),
-                                     1, SOURCE_FLICKR,
-                                     2, FALSE,
-                                     3, priv->flickr_source,
+                                     COL_SOURCE_NAME, _("Flickr"),
+                                     COL_SOURCE_TYPE, SOURCE_FLICKR,
+                                     COL_SOURCE_READONLY, FALSE,
+                                     COL_SOURCE, priv->flickr_source,
                                      -1);
 #endif
 
