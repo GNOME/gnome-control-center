@@ -440,18 +440,20 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   struct tm *ltime;
   time_t t;
   GtkTreeModelFilter *city_modelfilter;
+  int ret;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
 
   priv->builder = gtk_builder_new ();
 
-  gtk_builder_add_objects_from_file (priv->builder, DATADIR"/datetime.ui",
-                                     objects, &err);
+  ret = gtk_builder_add_objects_from_file (priv->builder, DATADIR"/datetime.ui",
+                                           objects, &err);
 
-  if (err)
+  if (ret == 0)
     {
-      g_warning ("Could not load ui: %s", err->message);
-      g_error_free (err);
+      g_warning ("Could not load ui: %s", err ? err->message : "No reason");
+      if (err)
+        g_error_free (err);
       return;
     }
 
