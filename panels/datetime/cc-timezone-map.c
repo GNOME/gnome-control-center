@@ -355,7 +355,7 @@ cc_timezone_map_expose_event (GtkWidget      *widget,
       PangoRectangle rect;
       gint width, height;
       gdouble x1, y1, radius = 5;
-      gchar *zone, *s;
+      gchar *zone;
 
       pointx = convert_longtitude_to_x (priv->location->longitude, alloc.width);
       pointy = convert_latitude_to_y (priv->location->latitude, alloc.height);
@@ -369,9 +369,7 @@ cc_timezone_map_expose_event (GtkWidget      *widget,
       zone = g_strdup (priv->location->zone);
 
       /* convert underscores to spaces */
-      for (s = zone; *s; s++)
-        if (*s == '_')
-          *s = ' ';
+      g_strdelimit (zone, "_", ' ');
 
       layout = gtk_widget_create_pango_layout (widget, zone);
 
