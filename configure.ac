@@ -1,4 +1,4 @@
-m4_define([gnome_control_center_version], 2.31.5)
+m4_define([gnome_control_center_version], 2.90.1)
 AC_INIT([gnome-control-center], [gnome_control_center_version],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
