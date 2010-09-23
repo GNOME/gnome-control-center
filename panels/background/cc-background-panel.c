@@ -676,6 +676,9 @@ cc_background_panel_init (CcBackgroundPanel *self)
   widget = WID ("sources-combobox");
   g_signal_connect (widget, "changed", G_CALLBACK (source_changed_cb), priv);
 
+  /* select first item */
+  gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+
   /* connect to the background iconview change signal */
   widget = WID ("backgrounds-iconview");
   g_signal_connect (widget, "selection-changed",
