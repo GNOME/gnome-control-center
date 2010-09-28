@@ -483,12 +483,22 @@ search_entry_changed_cb (GtkEntry                  *entry,
   if (!g_strcmp0 (priv->filter_string, ""))
     {
       shell_show_overview_page (priv);
+      g_object_set (G_OBJECT (entry),
+                    "secondary-icon-name", "gtk-find",
+                    "secondary-icon-activatable", FALSE,
+                    "secondary-icon-sensitive", FALSE,
+                    NULL);
     }
   else
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->search_filter));
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook),
                                      SEARCH_PAGE);
+      g_object_set (G_OBJECT (entry),
+                          "secondary-icon-name", "gtk-clear",
+                          "secondary-icon-activatable", TRUE,
+                          "secondary-icon-sensitive", TRUE,
+                          NULL);
     }
 }
 
