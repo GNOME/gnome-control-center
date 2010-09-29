@@ -76,8 +76,8 @@ test_timezone_CFLAGS = $(PANEL_CFLAGS)
 
 all: check
 
+# FIXME remove "|| :" when we have all the necessary pixmaps
 check: test-timezone
-	# FIXME remove "|| :" when we have all the necessary pixmaps
 	$(builddir)/test-timezone $(srcdir)/data || :
 
 ccpanelsdir = $(PANELS_DIR)
