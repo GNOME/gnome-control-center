@@ -44,10 +44,6 @@
 #include <X11/extensions/XInput.h>
 #endif
 
-#ifdef HAVE_XCURSOR
-#include <X11/Xcursor/Xcursor.h>
-#endif
-
 #define WID(x) (GtkWidget*) gtk_builder_get_object (dialog, x)
 
 enum
