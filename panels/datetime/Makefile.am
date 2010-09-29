@@ -68,6 +68,18 @@ INCLUDES = 						\
 	-DDATADIR="\"$(uidir)\""			\
 	$(NULL)
 
+noinst_PROGRAMS = test-timezone
+
+test_timezone_SOURCES = test-timezone.c tz.c tz.h
+test_timezone_LDADD = $(PANEL_LIBS)
+test_timezone_CFLAGS = $(PANEL_CFLAGS)
+
+all: check
+
+check: test-timezone
+	# FIXME remove "|| :" when we have all the necessary pixmaps
+	$(builddir)/test-timezone $(srcdir)/data || :
+
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libdate_time.la
 
