@@ -26,6 +26,7 @@
 #ifndef _E_TZ_H
 #define _E_TZ_H
 
+#include <glib.h>
 
 #ifndef __sun
 #  define TZ_DATA_FILE "/usr/share/zoneinfo/zone.tab"
