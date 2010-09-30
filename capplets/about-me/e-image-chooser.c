@@ -66,7 +66,7 @@ static void image_drag_data_received_cb (GtkWidget *widget,
 					 GtkSelectionData *selection_data,
 					 guint info, guint time, EImageChooser *chooser);
 
-static GtkObjectClass *parent_class = NULL;
+static GtkWidgetClass *parent_class = NULL;
 #define PARENT_TYPE GTK_TYPE_VBOX
 
 enum DndTargetType {
