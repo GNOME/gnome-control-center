@@ -151,7 +151,6 @@ if $PKG_CONFIG --exists xft ; then
 fi
 
 PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
-PKG_CHECK_MODULES(FONT_VIEWER, $COMMON_MODULES $xft_modules)
 
 PKG_CHECK_MODULES(AT_CAPPLET, $COMMON_MODULES)
 
@@ -344,8 +343,6 @@ docs/reference/libgnome-control-center/Makefile
 docs/reference/libgnome-control-center/version.xml
 examples/Makefile
 examples/gnome-example-panel.desktop.in
-font-viewer/Makefile
-font-viewer/gnome-font-viewer.desktop.in
 help/Makefile
 libgnome-control-center/Makefile
 libgnome-control-center/libgnome-control-center.pc

@@ -1,8 +1,8 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 SUBDIRS = po libgnome-control-center shell panels \
-	  font-viewer help docs
-DIST_SUBDIRS = po font-viewer help shell typing-break docs examples panels libgnome-control-center
+	  help docs
+DIST_SUBDIRS = po help shell typing-break docs examples panels libgnome-control-center
 
 if HAVE_TYPING_BREAK
 SUBDIRS += typing-break

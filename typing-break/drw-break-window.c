@@ -73,8 +73,8 @@ static gboolean     postpone_sensitize_cb          (DrwBreakWindow      *window)
 static gboolean     clock_timeout_cb               (DrwBreakWindow      *window);
 static void         postpone_clicked_cb            (GtkWidget           *button,
 						    GtkWidget           *window);
-static gboolean     label_expose_event_cb          (GtkLabel            *label,
-						    GdkEventExpose      *event,
+static gboolean     label_draw_event_cb            (GtkLabel            *label,
+						    cairo_t             *cr,
 						    gpointer             user_data);
 static void         label_size_request_cb          (GtkLabel            *label,
 						    GtkRequisition      *requisition,
@@ -237,8 +237,8 @@ drw_break_window_init (DrwBreakWindow *window)
 	gtk_widget_show (priv->break_label);
 
 	g_signal_connect (priv->break_label,
-			  "expose_event",
-			  G_CALLBACK (label_expose_event_cb),
+			  "draw",
+			  G_CALLBACK (label_draw_event_cb),
 			  NULL);
 
 	g_signal_connect_after (priv->break_label,
@@ -260,8 +260,8 @@ drw_break_window_init (DrwBreakWindow *window)
 	gtk_box_pack_start (GTK_BOX (vbox), priv->clock_label, TRUE, TRUE, 8);
 
 	g_signal_connect (priv->clock_label,
-			  "expose_event",
-			  G_CALLBACK (label_expose_event_cb),
+			  "draw",
+			  G_CALLBACK (label_draw_event_cb),
 			  NULL);
 
 	g_signal_connect_after (priv->clock_label,
@@ -543,24 +543,18 @@ postpone_clicked_cb (GtkWidget *button,
 }
 
 static gboolean
-label_expose_event_cb (GtkLabel       *label,
-		       GdkEventExpose *event,
-		       gpointer        user_data)
+label_draw_event_cb (GtkLabel       *label,
+		     cairo_t        *cr,
+		     gpointer        user_data)
 {
 	gint             x, y;
 	GtkWidget       *widget;
 	GdkWindow       *window;
-        cairo_t         *cr;
 
         gtk_label_get_layout_offsets (label, &x, &y);
 
 	widget = GTK_WIDGET (label);
 	window = gtk_widget_get_window (widget);
-
-        cr = gdk_cairo_create (window);
-
-        gdk_cairo_rectangle (cr, &event->area);
-        cairo_clip (cr);
 
         cairo_set_source_rgb (cr, 0, 0, 0);
 
@@ -571,13 +565,10 @@ label_expose_event_cb (GtkLabel       *label,
         pango_cairo_layout_path (cr, gtk_label_get_layout (label));
         cairo_fill (cr);
 
-        cairo_destroy (cr);
-
 	gtk_paint_layout (gtk_widget_get_style (widget),
-			  window,
+			  cr,
 			  gtk_widget_get_state (widget),
 			  FALSE,
-			  &event->area,
 			  widget,
 			  "label",
 			  x, y,
