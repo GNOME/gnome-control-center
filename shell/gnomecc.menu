@@ -18,6 +18,7 @@
      <Menuname>Internet and Network</Menuname>
      <Menuname>Hardware</Menuname>
      <Menuname>System</Menuname>
+     <Menuname>Other</Menuname>
      <Merge type="all" />
    </Layout>
 
@@ -51,10 +52,12 @@
       <And>
         <Category>Settings</Category>
         <Category>X-GNOME-PersonalSettings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
       </And>
       <And>
         <Category>Settings</Category>
-        <Category>DesktopSettings</Category>
+	<Category>DesktopSettings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
       </And>
     </Include>
   </Menu> <!-- End Personal -->
@@ -67,10 +70,11 @@
       <And>
         <Category>Settings</Category>
         <Category>X-GNOME-NetworkSettings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
       </And>
     </Include>
   </Menu> <!-- End Internet and Network -->
-  
+
   <!-- Hardware category -->
   <Menu>
     <Name>Hardware</Name>
@@ -79,6 +83,7 @@
       <And>
         <Category>Settings</Category>
         <Category>HardwareSettings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
       </And>
     </Include>
   </Menu> <!-- End Hardware -->
@@ -90,6 +95,7 @@
     <Include>
       <And>
         <Category>Settings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
         <Or>
           <Category>X-GNOME-SystemSettings</Category>
           <And>
@@ -99,7 +105,7 @@
                 <Category>X-GNOME-PersonalSettings</Category>
                 <Category>DesktopSettings</Category>
                 <Category>HardwareSettings</Category>
-                <Category>X-GNOME-NetworkSettings</Category> 
+                <Category>X-GNOME-NetworkSettings</Category>
               </Or>
             </Not>
           </And>
@@ -107,5 +113,19 @@
       </And>
     </Include>
   </Menu> <!-- End System -->
+
+  <!-- Other category -->
+  <Menu>
+    <Name>Other</Name>
+    <Directory>X-GNOME-Other.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Not>
+          <Category>X-GNOME-Settings-Panel</Category>
+        </Not>
+      </And>
+    </Include>
+  </Menu> <!-- End Other -->
 
 </Menu>     <!-- End CC -->
