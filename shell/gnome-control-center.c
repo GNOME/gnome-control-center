@@ -162,8 +162,9 @@ activate_panel (GnomeControlCenter *shell,
 
           /* resize to the preferred size of the panel */
           gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
-          gtk_size_request_get_size (GTK_SIZE_REQUEST (priv->window), &min,
-                                     &nat);
+
+          gtk_widget_get_preferred_size (priv->window,
+                                         &min, &nat);
           gtk_window_resize (GTK_WINDOW (priv->window), FIXED_WIDTH,
                              nat.height);
           return;
