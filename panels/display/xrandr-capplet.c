@@ -1390,6 +1390,8 @@ output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config)
     int i;
     GdkRectangle output_rect;
 
+    g_assert (output != NULL);
+
     get_output_rect (output, &output_rect);
 
     for (i = 0; config->outputs[i]; ++i)
@@ -2265,6 +2267,15 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
 				   win_rect.y + win_rect.height / 2);
 }
 
+static void
+on_toplevel_realized (GtkWidget *widget,
+                      App       *app)
+{
+  app->current_output = get_output_for_window (app->current_configuration,
+                                               gtk_widget_get_window (widget));
+  rebuild_gui (app);
+}
+
 /* We select the current output, i.e. select the one being edited, based on
  * which output is showing the configuration dialog.
  */
@@ -2275,13 +2286,14 @@ select_current_output_from_dialog_position (App *app)
 
     toplevel = gtk_widget_get_toplevel (app->panel);
 
-    if (gtk_widget_get_realized (toplevel))
+    if (gtk_widget_get_realized (toplevel)) {
 	app->current_output = get_output_for_window (app->current_configuration,
                                                      gtk_widget_get_window (toplevel));
-    else
+        rebuild_gui (app);
+    } else {
+        g_signal_connect (toplevel, "realize", G_CALLBACK (on_toplevel_realized), app);
 	app->current_output = NULL;
-
-    rebuild_gui (app);
+    }
 }
 
 /* This is a GtkWidget::map-event handler.  We wait for the display-properties
@@ -2446,7 +2458,7 @@ run_application (void)
 
     if (!app->panel)
       g_warning ("Missing display-panel object");
-    g_signal_connect_after (app->panel, "map-event",
+    g_signal_connect_after (app->panel, "show",
 			    G_CALLBACK (dialog_map_event_cb), app);
 
     app->current_monitor_event_box = _gtk_builder_get_widget (builder,
