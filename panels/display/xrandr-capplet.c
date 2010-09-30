@@ -1723,7 +1723,6 @@ paint_output (App *app, cairo_t *cr, int i)
     cairo_save (cr);
 
     foo_scroll_area_get_viewport (FOO_SCROLL_AREA (app->area), &viewport);
-
     get_geometry (output, &w, &h);
 
 #if 0
@@ -1762,7 +1761,6 @@ paint_output (App *app, cairo_t *cr, int i)
     cairo_translate (cr,
 		     - x - (w * scale + 0.5) / 2,
 		     - y - (h * scale + 0.5) / 2);
-
 
     cairo_rectangle (cr, x, y, w * scale + 0.5, h * scale + 0.5);
     cairo_clip_preserve (cr);
@@ -1833,8 +1831,6 @@ paint_output (App *app, cairo_t *cr, int i)
 static void
 on_area_paint (FooScrollArea  *area,
 	       cairo_t	      *cr,
-	       GdkRectangle   *extent,
-	       cairo_region_t *region,
 	       gpointer	       data)
 {
     App *app = data;

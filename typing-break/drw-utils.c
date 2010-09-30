@@ -20,6 +20,7 @@
 
 #include <config.h>
 #include <gdk/gdk.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
 #include "drw-utils.h"
 
@@ -90,17 +91,14 @@ create_tile_pixbuf (GdkPixbuf    *dest_pixbuf,
 }
 
 static gboolean
-window_expose_event (GtkWidget      *widget,
-		     GdkEventExpose *event,
-		     gpointer        data)
+window_draw_event (GtkWidget      *widget,
+		   cairo_t        *context,
+		   gpointer        data)
 {
-	cairo_t         *context;
 	cairo_t         *cr;
 	cairo_surface_t *surface;
 	int              width;
 	int              height;
-
-	context = gdk_cairo_create (gtk_widget_get_window (widget));
 
 	cairo_set_operator (context, CAIRO_OPERATOR_SOURCE);
 	gtk_window_get_size (GTK_WINDOW (widget), &width, &height);
@@ -136,17 +134,17 @@ window_expose_event (GtkWidget      *widget,
 	if (surface != NULL) {
 		cairo_surface_destroy (surface);
 	}
-	cairo_destroy (context);
 
 	return FALSE;
 }
 
 static void
-set_pixmap_background (GtkWidget *window)
+set_surface_background (GtkWidget *window)
 {
 	GdkScreen    *screen;
-	GdkPixbuf    *tmp_pixbuf, *pixbuf, *tile_pixbuf;
-	GdkPixmap    *pixmap;
+	GdkPixbuf    *pixbuf, *tile_pixbuf;
+	cairo_surface_t *surface;
+	cairo_pattern_t *pattern;
 	GdkRectangle  rect;
 	GdkColor      color;
 	gint          width, height;
@@ -157,15 +155,6 @@ set_pixmap_background (GtkWidget *window)
 	screen = gtk_widget_get_screen (window);
 	width = gdk_screen_get_width (screen);
 	height = gdk_screen_get_height (screen);
-
-	tmp_pixbuf = gdk_pixbuf_get_from_drawable (NULL,
-						   gdk_screen_get_root_window (screen),
-						   gdk_screen_get_system_colormap (screen),
-						   0,
-						   0,
-						   0,
-						   0,
-						   width, height);
 
 	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/ocean-stripes.png", NULL);
 
@@ -186,58 +175,50 @@ set_pixmap_background (GtkWidget *window)
 
 	g_object_unref (pixbuf);
 
-	gdk_pixbuf_composite (tile_pixbuf,
-			      tmp_pixbuf,
-			      0,
-			      0,
-			      width,
-			      height,
-			      0,
-			      0,
-			      1,
-			      1,
-			      GDK_INTERP_NEAREST,
-			      225);
+	cr = gdk_cairo_create (gtk_widget_get_window (window));
+	surface = cairo_surface_create_similar (cairo_get_target (cr),
+						CAIRO_CONTENT_COLOR_ALPHA,
+						width,
+						height);
+	cairo_destroy (cr);
 
-	g_object_unref (tile_pixbuf);
-
-	pixmap = gdk_pixmap_new (gtk_widget_get_window (window),
-				 width,
-				 height,
-				 -1);
-
-        cr = gdk_cairo_create (pixmap);
-        gdk_cairo_set_source_pixbuf (cr, tmp_pixbuf, 0, 0);
+        cr = cairo_create (surface);
+        gdk_cairo_set_source_pixbuf (cr, tile_pixbuf, 0, 0);
         cairo_paint (cr);
         cairo_destroy (cr);
+	g_object_unref (tile_pixbuf);
 
-	g_object_unref (tmp_pixbuf);
+	pattern = cairo_pattern_create_for_surface (surface);
+	cairo_surface_destroy (surface);
 
-	gdk_window_set_back_pixmap (gtk_widget_get_window (window), pixmap, FALSE);
-	g_object_unref (pixmap);
+	gdk_window_set_background_pattern (gtk_widget_get_window (window), pattern);
+	cairo_pattern_destroy (pattern);
 }
 
 void
 drw_setup_background (GtkWidget *window)
 {
 	GdkScreen    *screen;
-	GdkColormap  *colormap;
+	GdkVisual    *visual;
 	gboolean      is_composited;
 
 	screen = gtk_widget_get_screen (window);
-	colormap = gdk_screen_get_rgba_colormap (screen);
+	visual = gdk_screen_get_rgba_visual (screen);
+	if (visual == NULL) {
+                visual = gdk_screen_get_system_visual (screen);
+	}
 
-	if (colormap != NULL && gdk_screen_is_composited (screen)) {
-		gtk_widget_set_colormap (GTK_WIDGET (window), colormap);
+	if (visual != NULL && gdk_screen_is_composited (screen)) {
+		gtk_widget_set_visual (GTK_WIDGET (window), visual);
 		is_composited = TRUE;
 	} else {
 		is_composited = FALSE;
 	}
 
 	if (is_composited) {
-		g_signal_connect (window, "expose-event", G_CALLBACK (window_expose_event), window);
+		g_signal_connect (window, "draw", G_CALLBACK (window_draw_event), window);
 	} else {
-		set_pixmap_background (window);
+		set_surface_background (window);
 	}
 }
 

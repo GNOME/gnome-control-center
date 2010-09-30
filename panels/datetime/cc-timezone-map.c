@@ -302,18 +302,15 @@ convert_latitude_to_y (gdouble latitude, gdouble map_height)
 
 
 static gboolean
-cc_timezone_map_expose_event (GtkWidget      *widget,
-                              GdkEventExpose *event)
+cc_timezone_map_draw (GtkWidget *widget,
+                      cairo_t   *cr)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
   GdkPixbuf *hilight, *orig_hilight;
-  cairo_t *cr;
   GtkAllocation alloc;
   gchar *file;
   GError *err = NULL;
   gdouble pointx, pointy;
-
-  cr = gdk_cairo_create (gtk_widget_get_window (widget));
 
   gtk_widget_get_allocation (widget, &alloc);
 
@@ -435,9 +432,6 @@ cc_timezone_map_expose_event (GtkWidget      *widget,
       g_free (zone);
     }
 
-  cairo_destroy (cr);
-
-
   return TRUE;
 }
 
@@ -458,7 +452,7 @@ cc_timezone_map_class_init (CcTimezoneMapClass *klass)
   widget_class->size_request = cc_timezone_map_size_request;
   widget_class->size_allocate = cc_timezone_map_size_allocate;
   widget_class->realize = cc_timezone_map_realize;
-  widget_class->expose_event = cc_timezone_map_expose_event;
+  widget_class->draw = cc_timezone_map_draw;
 
   signals[LOCATION_CHANGED] = g_signal_new ("location-changed",
                                             CC_TYPE_TIMEZONE_MAP,

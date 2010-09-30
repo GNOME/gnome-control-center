@@ -28,10 +28,6 @@ static GtkWidgetClass *parent_class;
 
 typedef struct BackingStore BackingStore;
 
-typedef void (* ExposeFunc) (cairo_t        *cr,
-                             cairo_region_t *region,
-                             gpointer        data);
-
 typedef struct InputPath InputPath;
 typedef struct InputRegion InputRegion;
 typedef struct AutoScrollInfo AutoScrollInfo;
@@ -94,14 +90,13 @@ struct FooScrollAreaPrivate
      *
      * It is used for clipping of input areas
      */
-    cairo_region_t	       *expose_region;
     InputRegion		       *current_input;
     
     gboolean			grabbed;
     FooScrollAreaEventFunc	grab_func;
     gpointer			grab_data;
 
-    GdkPixmap		       *pixmap;
+    cairo_surface_t            *surface;
     cairo_region_t             *update_region; /* In canvas coordinates */
 };
 
@@ -117,8 +112,8 @@ static guint signals [LAST_SIGNAL] = { 0 };
 
 static void foo_scroll_area_size_request (GtkWidget *widget,
 					  GtkRequisition *requisition);
-static gboolean foo_scroll_area_expose (GtkWidget *widget,
-					GdkEventExpose *expose);
+static gboolean foo_scroll_area_draw (GtkWidget *widget,
+                                      cairo_t *cr);
 static void foo_scroll_area_size_allocate (GtkWidget *widget,
 					   GtkAllocation *allocation);
 static void foo_scroll_area_set_scroll_adjustments (FooScrollArea *scroll_area,
@@ -180,7 +175,7 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
     
     object_class->finalize = foo_scroll_area_finalize;
     widget_class->size_request = foo_scroll_area_size_request;
-    widget_class->expose_event = foo_scroll_area_expose;
+    widget_class->draw = foo_scroll_area_draw;
     widget_class->size_allocate = foo_scroll_area_size_allocate;
     widget_class->realize = foo_scroll_area_realize;
     widget_class->unrealize = foo_scroll_area_unrealize;
@@ -213,10 +208,8 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
 		      G_STRUCT_OFFSET (FooScrollAreaClass,
 				       paint),
 		      NULL, NULL,
-		      foo_marshal_VOID__POINTER_BOXED_POINTER,
-		      G_TYPE_NONE, 3,
-		      G_TYPE_POINTER,
-		      GDK_TYPE_RECTANGLE, 
+		      g_cclosure_marshal_VOID__POINTER,
+		      G_TYPE_NONE, 1,
 		      G_TYPE_POINTER);
     
     widget_class->set_scroll_adjustments_signal =
@@ -259,25 +252,8 @@ foo_scroll_area_init (FooScrollArea *scroll_area)
     scroll_area->priv->min_height = -1;
     scroll_area->priv->auto_scroll_info = NULL;
     scroll_area->priv->input_regions = g_ptr_array_new ();
-    scroll_area->priv->pixmap = NULL;
+    scroll_area->priv->surface = NULL;
     scroll_area->priv->update_region = cairo_region_create ();
-
-    gtk_widget_set_double_buffered (widget, FALSE);
-}
-
-static void
-translate_cairo_device (cairo_t       *cr,
-			int            x_offset,
-			int            y_offset)
-{
-    cairo_surface_t *surface = cairo_get_target (cr);
-    double dev_x;
-    double dev_y;
-    
-    cairo_surface_get_device_offset (surface, &dev_x, &dev_y);
-    dev_x += x_offset;
-    dev_y += y_offset;
-    cairo_surface_set_device_offset (surface, dev_x, dev_y);
 }
 
 typedef void (* PathForeachFunc) (double  *x,
@@ -318,45 +294,6 @@ typedef struct
 {
     double x1, y1, x2, y2;
 } Box;
-
-#if 0
-static void
-update_box (double *x, double *y, gpointer data)
-{
-    Box *box = data;
-    
-    if (*x < box->x1)
-	box->x1 = *x;
-
-    if (*y < box->y1)
-	box->y1 = *y;
-
-    if (*y > box->y2)
-	box->y2 = *y;
-    
-    if (*x > box->x2)
-	box->x2 = *x;
-}
-#endif
-
-#if 0
-static void
-path_compute_extents (cairo_path_t *path,
-		      GdkRectangle *rect)
-{
-    if (rect)
-    {
-	Box box = { G_MAXDOUBLE, G_MAXDOUBLE, G_MINDOUBLE, G_MINDOUBLE };
-
-	path_foreach_point (path, update_box, &box);
-
-	rect->x = box.x1;
-	rect->y = box.y1;
-	rect->width = box.x2 - box.x1;
-	rect->height = box.y2 - box.y1;
-    }
-}
-#endif
 
 static void
 input_path_free_list (InputPath *paths)
@@ -466,28 +403,15 @@ initialize_background (GtkWidget *widget,
     cairo_paint (cr);
 }
 
-static void
-clip_to_region (cairo_t *cr, cairo_region_t *region)
-{
-    gdk_cairo_region (cr, region);
-    cairo_clip (cr);
-}
-
 static gboolean
-foo_scroll_area_expose (GtkWidget *widget,
-			GdkEventExpose *expose)
+foo_scroll_area_draw (GtkWidget *widget,
+                      cairo_t   *cr)
 {
     FooScrollArea *scroll_area = FOO_SCROLL_AREA (widget);
-    cairo_t *cr;
-    GdkRectangle extents;
     cairo_region_t *region;
     int x_offset, y_offset;
     GtkAllocation widget_allocation;
-    GdkWindow *window = gtk_widget_get_window (widget);
 
-    /* I don't think expose can ever recurse for the same area */
-    g_assert (!scroll_area->priv->expose_region);
-    
     /* Note that this function can be called at a time
      * where the adj->value is different from x_offset. 
      * Ie., the GtkScrolledWindow changed the adj->value
@@ -497,50 +421,33 @@ foo_scroll_area_expose (GtkWidget *widget,
      * the last time the signal was emitted, ie.,
      * priv->{x,y}_offset.
      */
-    
     x_offset = scroll_area->priv->x_offset;
     y_offset = scroll_area->priv->y_offset;
     
-    scroll_area->priv->expose_region = expose->region;
-
     /* Setup input areas */
     clear_exposed_input_region (scroll_area, scroll_area->priv->update_region);
-    
+
     scroll_area->priv->current_input = g_new0 (InputRegion, 1);
     scroll_area->priv->current_input->region = cairo_region_copy (scroll_area->priv->update_region);
     scroll_area->priv->current_input->paths = NULL;
     g_ptr_array_add (scroll_area->priv->input_regions,
-		     scroll_area->priv->current_input);
+                     scroll_area->priv->current_input);
 
     region = scroll_area->priv->update_region;
     scroll_area->priv->update_region = cairo_region_create ();
-    
-    /* Create cairo context */
-    cr = gdk_cairo_create (scroll_area->priv->pixmap);
-    translate_cairo_device (cr, -x_offset, -y_offset);
-    clip_to_region (cr, region);
+
     initialize_background (widget, cr);
 
-    /* Create regions */
-    cairo_region_get_extents (region, &extents);
+    g_signal_emit (widget, signals[PAINT], 0, cr);
 
-    g_signal_emit (widget, signals[PAINT], 0, cr, &extents, region);
-
-    /* Destroy stuff */
-    cairo_destroy (cr);
-    
-    scroll_area->priv->expose_region = NULL;
     scroll_area->priv->current_input = NULL;
 
     gtk_widget_get_allocation (widget, &widget_allocation);
 
-    /* Finally draw the backing pixmap */
-    cr = gdk_cairo_create (window);
-    gdk_cairo_set_source_pixmap (cr, scroll_area->priv->pixmap,
-                                 widget_allocation.x, widget_allocation.y);
-    gdk_cairo_region (cr, expose->region);
+    /* Finally draw the backing surface */
+    cairo_set_source_surface (cr, scroll_area->priv->surface,
+                              widget_allocation.x, widget_allocation.y);
     cairo_fill (cr);
-    cairo_destroy (cr);
 
     cairo_region_destroy (region);
     
@@ -637,6 +544,7 @@ foo_scroll_area_realize (GtkWidget *widget)
     GtkAllocation widget_allocation;
     GdkWindow *window;
     gint attributes_mask;
+    cairo_t *cr;
 
     gtk_widget_get_allocation (widget, &widget_allocation);
     gtk_widget_set_realized (widget, TRUE);
@@ -665,10 +573,14 @@ foo_scroll_area_realize (GtkWidget *widget)
     
     area->priv->input_window = gdk_window_new (window,
 					       &attributes, attributes_mask);
-    area->priv->pixmap = gdk_pixmap_new (window,
-					 widget_allocation.width,
-					 widget_allocation.height,
-					 -1);
+
+    cr = gdk_cairo_create (gtk_widget_get_window (widget));
+    area->priv->surface = cairo_surface_create_similar (cairo_get_target (cr),
+                                                        CAIRO_CONTENT_COLOR,
+                                                        widget_allocation.width,
+                                                        widget_allocation.height);
+    cairo_destroy (cr);
+
     gdk_window_set_user_data (area->priv->input_window, area);
     
     gtk_widget_style_attach (widget);
@@ -689,19 +601,21 @@ foo_scroll_area_unrealize (GtkWidget *widget)
     GTK_WIDGET_CLASS (parent_class)->unrealize (widget);
 }
 
-static GdkPixmap *
-create_new_pixmap (GtkWidget *widget,
-		   GdkPixmap *old)
+static cairo_surface_t *
+create_new_surface (GtkWidget *widget,
+                    cairo_surface_t *old)
 {
     GtkAllocation widget_allocation;
-    GdkPixmap *new;
+    cairo_surface_t *new;
     cairo_t *cr;
 
     gtk_widget_get_allocation (widget, &widget_allocation);
-    new = gdk_pixmap_new (gtk_widget_get_window (widget),
-			  widget_allocation.width,
-			  widget_allocation.height,
-			  -1);
+    cr = gdk_cairo_create (gtk_widget_get_window (widget));
+    new = cairo_surface_create_similar (cairo_get_target (cr),
+                                        CAIRO_CONTENT_COLOR,
+                                        widget_allocation.width,
+                                        widget_allocation.height);
+    cairo_destroy (cr);
 
     /* Unfortunately we don't know in which direction we were resized,
      * so we just assume we were dragged from the south-east corner.
@@ -710,15 +624,15 @@ create_new_pixmap (GtkWidget *widget,
      * That might just work, actually. We need to make sure metacity uses
      * static gravity for the window before this will be useful.
      */
-    cr = gdk_cairo_create (new);
+    cr = cairo_create (new);
     cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-    gdk_cairo_set_source_pixmap (cr, old, 0, 0);
+    cairo_set_source_surface (cr, old, 0, 0);
     cairo_paint (cr);
     cairo_destroy (cr);
 
     return new;
 }
-		   
+
 static void
 allocation_to_canvas_region (FooScrollArea  *area,
                              cairo_region_t *region)
@@ -774,17 +688,16 @@ foo_scroll_area_size_allocate (GtkWidget     *widget,
     
     if (scroll_area->priv->input_window)
     {
-	GdkPixmap *new_pixmap;
+	cairo_surface_t *new_surface;
 	
 	gdk_window_move_resize (scroll_area->priv->input_window,
 				allocation->x, allocation->y,
 				allocation->width, allocation->height);
 
-	new_pixmap = create_new_pixmap (widget, scroll_area->priv->pixmap);
+	new_surface = create_new_surface (widget, scroll_area->priv->surface);
+        cairo_surface_destroy (scroll_area->priv->surface);
 
-	g_object_unref (scroll_area->priv->pixmap);
-
-	scroll_area->priv->pixmap = new_pixmap;
+	scroll_area->priv->surface = new_surface;
     }
     
     get_viewport (scroll_area, &new_viewport);
@@ -808,53 +721,12 @@ emit_input (FooScrollArea *scroll_area,
     if (type != FOO_MOTION)
 	emit_input (scroll_area, FOO_MOTION, x, y, func, data);
     
-#if 0
-    x += scroll_area->priv->x_offset;
-    y += scroll_area->priv->y_offset;
-#endif
-    
     event.type = type;
     event.x = x;
     event.y = y;
     
     func (scroll_area, &event, data);
 }
-
-#if 0
-static void
-print_path (const char *header,
-	    cairo_path_t *path)
-{
-    int i;
-
-    g_print ("%s\n", header);
-
-    for (i=0; i < path->num_data; i += path->data[i].header.length)
-    {
-	cairo_path_data_t *data = &(path->data[i]);
-	
-	switch (data->header.type)
-	{
-	case CAIRO_PATH_MOVE_TO:
-	    g_print ("move to:    %f, %f\n", data[1].point.x, data[1].point.y);
-	    break;
-	    
-	case CAIRO_PATH_LINE_TO:
-	    g_print ("line to:    %f, %f\n", data[1].point.x, data[1].point.y);
-	    break;
-	    
-	case CAIRO_PATH_CURVE_TO:
-	    g_print ("curve to:   %f, %f\n", data[1].point.x, data[1].point.y);
-	    g_print ("            %f, %f\n", data[1].point.x, data[1].point.y);
-	    g_print ("            %f, %f\n", data[1].point.x, data[1].point.y);
-	    break;
-	    
-	case CAIRO_PATH_CLOSE_PATH:
-	    break;
-	}
-    }
-}
-#endif
 
 static void
 process_event (FooScrollArea	       *scroll_area,
@@ -875,12 +747,6 @@ process_event (FooScrollArea	       *scroll_area,
 	return;
     }
 
-    
-#if 0
-    x += widget->allocation.x;
-    y += widget->allocation.y;
-#endif
-
 #if 0
     g_print ("number of input regions: %d\n", scroll_area->priv->input_regions->len);
 #endif
@@ -890,8 +756,7 @@ process_event (FooScrollArea	       *scroll_area,
 	InputRegion *region = scroll_area->priv->input_regions->pdata[i];
 
 #if 0
-	g_print ("%d ", i);
-	print_region ("region:", region->region);
+	g_print ("region %d (looking for %d,%d) ", i, x, y);
 #endif
 	
 	if (cairo_region_contains_point (region->region, x, y))
@@ -1052,54 +917,6 @@ foo_scroll_area_size_request (GtkWidget      *widget,
 #endif
 }
 
-#if 0
-static void
-translate_point (double *x, double *y, gpointer data)
-{
-    int *translation = data;
-
-    *x += translation[0];
-    *y += translation[1];
-}
-#endif
-
-#if 0
-static void
-path_translate (cairo_path_t  *path,
-		int	       dx,
-		int	       dy)
-{
-    int translation[2] = {dx, dy};
-    
-    path_foreach_point (path, translate_point, translation);
-}
-#endif
-
-static void
-translate_input_regions (FooScrollArea *scroll_area,
-			 int		dx,
-			 int		dy)
-{
-#if 0
-    int i;
-
-    for (i = 0; i < scroll_area->priv->input_regions->len; ++i)
-    {
-	InputRegion *region = scroll_area->priv->input_regions->pdata[i];
-	InputPath *path;
-	
-	gdk_region_offset (region->region, dx, dy);
-
-	path = region->paths;
-	while (path != NULL)
-	{
-	    path_translate (path->path, dx, dy);
-	    path = path->next;
-	}
-    }
-#endif
-}
-
 static void
 foo_scroll_area_scroll (FooScrollArea *area,
 			gint dx, 
@@ -1131,7 +948,7 @@ foo_scroll_area_scroll (FooScrollArea *area,
 		 move_area.width, move_area.height,
 		 dx, dy);
 #endif
-	cr = gdk_cairo_create (area->priv->pixmap);
+	cr = cairo_create (area->priv->surface);
 
         /* Cairo doesn't allow self-copies, so we do this little trick instead:
          * 1) Clip so the group size is small.
@@ -1141,7 +958,7 @@ foo_scroll_area_scroll (FooScrollArea *area,
         cairo_clip (cr);
         cairo_push_group (cr);
         
-        gdk_cairo_set_source_pixmap (cr, area->priv->pixmap, dx, dy);
+        cairo_set_source_surface (cr, area->priv->surface, dx, dy);
         gdk_cairo_rectangle (cr, &move_area);
         cairo_fill (cr);
 
@@ -1158,10 +975,6 @@ foo_scroll_area_scroll (FooScrollArea *area,
 	cairo_region_destroy (move_region);
     }
 
-#if 0
-    paint_region (area, invalid_region);
-#endif
-    
     allocation_to_canvas_region (area, invalid_region);
 
     foo_scroll_area_invalidate_region (area, invalid_region);
@@ -1202,14 +1015,8 @@ foo_scrollbar_adjustment_changed (GtkAdjustment *adj,
     {
 	foo_scroll_area_scroll (scroll_area, -dx, -dy);
     
-#if 0
-	window_scroll_area (widget->window, &widget->allocation, -dx, -dy);
-#endif
-	translate_input_regions (scroll_area, -dx, -dy);
+	//translate_input_regions (scroll_area, -dx, -dy);
 
-#if 0
-	gdk_window_process_updates (widget->window, TRUE);
-#endif
     }
     
     get_viewport (scroll_area, &new_viewport);
@@ -1283,29 +1090,16 @@ foo_scroll_area_set_min_size (FooScrollArea *scroll_area,
     gtk_widget_queue_resize (GTK_WIDGET (scroll_area));
 }
 
-#if 0
-static void
-warn_about_adding_input_outside_expose (const char *func)
-{
-    static gboolean warned = FALSE;
-    
-    if (!warned)
-    {
-	g_warning ("%s() can only be called "
-		   "from the paint handler for the FooScrollArea\n", func);
-	
-	warned = TRUE;
-    }
-}
-#endif
-
 static void
 user_to_device (double *x, double *y,
 		gpointer data)
 {
+#if 0
     cairo_t *cr = data;
-    
+
+    /* FIXME: not set transform in first place? */
     cairo_user_to_device (cr, x, y);
+#endif
 }
 
 static InputPath *
@@ -1521,9 +1315,6 @@ scroll_idle (gpointer data)
     GdkRectangle viewport, new_viewport;
     FooScrollArea *area = data;
     AutoScrollInfo *info = area->priv->auto_scroll_info;
-#if 0
-    int dx, dy;
-#endif
     int new_x, new_y;
     double elapsed;
     
@@ -1533,11 +1324,6 @@ scroll_idle (gpointer data)
     g_print ("old info: %d %d\n", info->dx, info->dy);
     
     g_print ("timeout (%d %d)\n", dx, dy);
-#endif
-    
-#if 0
-    viewport.x += info->dx;
-    viewport.y += info->dy;
 #endif
     
 #if 0
