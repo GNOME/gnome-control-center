@@ -1,3 +1,5 @@
+ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+
 SUBDIRS = po libgnome-control-center shell panels \
 	  font-viewer help docs
 DIST_SUBDIRS = po font-viewer help shell typing-break docs examples panels libgnome-control-center
@@ -14,8 +16,6 @@ schemasdir   = @GCONF_SCHEMA_FILE_DIR@
 schemas_in_files = gnome-control-center.schemas.in
 schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
 @INTLTOOL_SCHEMAS_RULE@
-
-ACLOCAL_AMFLAGS = -I m4
 
 CLEANFILES = \
 	$(schemas_DATA)

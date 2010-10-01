@@ -4,16 +4,20 @@ AC_INIT([gnome-control-center], [gnome_control_center_version],
 
 AC_CONFIG_SRCDIR([shell])
 AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-bzip2 tar-ustar])
-AM_MAINTAINER_MODE
+AM_INIT_AUTOMAKE([1.10 no-dist-gzip dist-bzip2 tar-ustar])
+AM_MAINTAINER_MODE([enable])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
-AC_ISC_POSIX
+# Check for programs
 AC_PROG_CC
 AM_PROG_CC_C_O
-AC_STDC_HEADERS
-AM_PROG_LIBTOOL
+AC_HEADER_STDC
+
+# Initialize libtool
+LT_PREREQ([2.2])
+LT_INIT
 
 # .so version for libgnome-control-center
 LIBGNOMECONTROLCENTER_CURRENT=1
@@ -37,7 +41,6 @@ GETTEXT_PACKAGE=gnome-control-center-2.0
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 
-GNOME_COMMON_INIT
 GNOME_DEBUG_CHECK
 GNOME_COMPILE_WARNINGS([maximum])
 GNOME_MAINTAINER_MODE_DEFINES
@@ -241,7 +244,7 @@ dnl ==============================================
 
 AC_MSG_CHECKING([whether to build the example panel])
 AC_ARG_ENABLE([examples],
-   AC_HELP_STRING([--enable-examples],
+   AS_HELP_STRING([--enable-examples],
                   [enable the examples]),,
    [enable_examples=no])
 AC_MSG_RESULT([$enable_examples])
@@ -254,7 +257,7 @@ dnl ==============================================
 
 AC_MSG_CHECKING([Enable libsocialweb support])
 AC_ARG_WITH([libsocialweb],
-   AC_HELP_STRING([--with-libsocialweb],
+   AS_HELP_STRING([--with-libsocialweb],
                   [enable libsocialweb support]),,
    [with_libsocialweb=no])
 AC_MSG_RESULT([$with_libsocialweb])
@@ -273,8 +276,8 @@ dnl =======================================
 AC_PATH_PROG(UPDATE_MIME_DATABASE, update-mime-database, no)
 
 AC_ARG_ENABLE(update-mimedb,
-   AC_HELP_STRING([--disable-update-mimedb],
-                   [do not update mime database after installation]),,
+   AS_HELP_STRING([--disable-update-mimedb],
+                  [do not update mime database after installation]),,
                    enable_update_mimedb=yes)
 AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
 
@@ -317,9 +320,9 @@ if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
                 SAVE_CFLAGS="$CFLAGS"
                 CFLAGS="$CFLAGS $option"
                 AC_MSG_CHECKING([whether gcc understands $option])
-                AC_TRY_COMPILE([], [],
-                        has_option=yes,
-                        has_option=no,)
+                AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[]])],
+                                  [has_option=yes],
+                                  [has_option=no])
                 if test $has_option = no; then
                         CFLAGS="$SAVE_CFLAGS"
                 fi
