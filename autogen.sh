@@ -26,4 +26,6 @@ fi
 
 gtkdocize || exit 1
 
+autopoint --force || exit $?
+
 REQUIRED_AUTOMAKE_VERSION=1.9 . gnome-autogen.sh
