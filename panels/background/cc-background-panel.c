@@ -470,11 +470,10 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 }
 
 static gboolean
-preview_expose_cb (GtkWidget         *widget,
-                   GdkEventExpose    *expose,
-                   CcBackgroundPanel *panel)
+preview_draw_cb (GtkWidget         *widget,
+                 cairo_t           *cr,
+                 CcBackgroundPanel *panel)
 {
-  cairo_t *cr;
   GtkAllocation allocation;
   CcBackgroundPanelPrivate *priv = panel->priv;
   GdkPixbuf *pixbuf = NULL;
@@ -484,8 +483,6 @@ preview_expose_cb (GtkWidget         *widget,
   const gint preview_y = 84;
   GdkPixbuf *preview, *temp;
   gint size;
-
-  cr = gdk_cairo_create (gtk_widget_get_window (widget));
 
   gtk_widget_get_allocation (widget, &allocation);
 
@@ -536,7 +533,6 @@ preview_expose_cb (GtkWidget         *widget,
                                allocation.width / 2 - (size / 2),
                                allocation.height / 2 - (size / 2));
   cairo_paint (cr);
-  cairo_destroy (cr);
 
   g_object_unref (temp);
   g_object_unref (preview);
@@ -687,7 +683,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   /* setup preview area */
   widget = WID ("preview-area");
-  g_signal_connect (widget, "expose-event", G_CALLBACK (preview_expose_cb),
+  g_signal_connect (widget, "draw", G_CALLBACK (preview_draw_cb),
                     self);
 
   priv->display_base = gdk_pixbuf_new_from_file (DATADIR "/display-base.png",

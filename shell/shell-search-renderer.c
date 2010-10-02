@@ -219,20 +219,16 @@ shell_search_renderer_get_size (GtkCellRenderer    *cell,
 
 static void
 shell_search_renderer_render (GtkCellRenderer      *cell,
-                              GdkDrawable          *window,
+                              cairo_t              *cr,
                               GtkWidget            *widget,
                               GdkRectangle         *background_area,
                               GdkRectangle         *cell_area,
-                              GdkRectangle         *expose_area,
                               GtkCellRendererState  flags)
 {
   ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (cell)->priv;
-  cairo_t *cr;
   PangoRectangle rect;
 
   shell_search_renderer_set_layout (SHELL_SEARCH_RENDERER (cell), widget);
-
-  cr = gdk_cairo_create (window);
 
   pango_layout_get_pixel_extents (priv->layout, NULL, &rect);
 
@@ -243,8 +239,6 @@ shell_search_renderer_render (GtkCellRenderer      *cell,
   if (priv->layout)
     pango_cairo_layout_path (cr, priv->layout);
   cairo_fill (cr);
-
-  cairo_destroy (cr);
 }
 
 static void
