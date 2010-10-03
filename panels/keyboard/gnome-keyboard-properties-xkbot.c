@@ -28,7 +28,6 @@
 
 #include <glib/gi18n.h>
 #include <string.h>
-#include <gconf/gconf-client.h>
 
 #include "gnome-keyboard-properties-xkb.h"
 
@@ -45,24 +44,16 @@ static GSList *current_radio_group = NULL;
 #define GCONFSTATE_PROP "gconfState"
 #define EXPANDERS_PROP "expandersList"
 
-GSList *
+gchar **
 xkb_options_get_selected_list (void)
 {
-	GSList *retval;
+	gchar **retval;
 
-	retval = gconf_client_get_list (xkb_gconf_client,
-					GKBD_KEYBOARD_CONFIG_KEY_OPTIONS,
-					GCONF_VALUE_STRING, NULL);
+	retval =
+	    g_settings_get_strv (xkb_keyboard_settings,
+				 GKBD_KEYBOARD_CONFIG_KEY_OPTIONS);
 	if (retval == NULL) {
-		GSList *cur_option;
-
-		for (cur_option = initial_config.options;
-		     cur_option != NULL; cur_option = cur_option->next)
-			retval =
-			    g_slist_prepend (retval,
-					     g_strdup (cur_option->data));
-
-		retval = g_slist_reverse (retval);
+		retval = g_strdupv (initial_config.options);
 	}
 
 	return retval;
@@ -122,41 +113,50 @@ static void
 xkb_options_select (gchar * optionname)
 {
 	gboolean already_selected = FALSE;
-	GSList *options_list = xkb_options_get_selected_list ();
-	GSList *option;
-	for (option = options_list; option != NULL; option = option->next)
-		if (!strcmp ((gchar *) option->data, optionname))
-			already_selected = TRUE;
+	gchar **options_list = xkb_options_get_selected_list ();
+	if (options_list != NULL) {
+		gchar **option = options_list;
+		while (*option != NULL)
+			if (!strcmp (*option, optionname)) {
+				already_selected = TRUE;
+				break;
+			}
+	}
 
-	if (!already_selected)
-		options_list =
-		    g_slist_append (options_list, g_strdup (optionname));
-	xkb_options_set_selected_list (options_list);
+	if (!already_selected) {
+		gint old_length = g_strv_length (options_list);
+		gchar **new_options_list =
+		    g_new0 (gchar *, old_length + 2);
+		memcpy (new_options_list, options_list,
+			sizeof (gchar *) * old_length);
+		new_options_list[old_length] = g_strdup (optionname);
+		xkb_options_set_selected_list (new_options_list);
+		g_free (new_options_list);
+	}
 
-	clear_xkb_elements_list (options_list);
+	g_strfreev (options_list);
 }
 
 /* Remove all occurences of optionname from the backend's selection list */
 static void
 xkb_options_deselect (gchar * optionname)
 {
-	GSList *options_list = xkb_options_get_selected_list ();
-	GSList *nodetmp;
-	GSList *option = options_list;
-	while (option != NULL) {
-		gchar *id = (char *) option->data;
-		if (!strcmp (id, optionname)) {
-			nodetmp = option->next;
-			g_free (id);
-			options_list =
-			    g_slist_remove_link (options_list, option);
-			g_slist_free_1 (option);
-			option = nodetmp;
-		} else
-			option = option->next;
+	gchar **options_list = xkb_options_get_selected_list ();
+	if (options_list != NULL) {
+		gchar **option = options_list;
+		while (*option != NULL) {
+			gchar *id = *option;
+			if (!strcmp (id, optionname)) {
+				g_free (*option);
+				memmove (option, option + 1,
+					 g_strv_length (option) *
+					 sizeof (gchar *));
+			} else
+				option++;
+		}
+		xkb_options_set_selected_list (options_list);
 	}
-	xkb_options_set_selected_list (options_list);
-	clear_xkb_elements_list (options_list);
+	g_strfreev (options_list);
 }
 
 /* Return true if optionname describes a string already in the backend's
@@ -165,13 +165,18 @@ static gboolean
 xkb_options_is_selected (gchar * optionname)
 {
 	gboolean retval = FALSE;
-	GSList *options_list = xkb_options_get_selected_list ();
-	GSList *option;
-	for (option = options_list; option != NULL; option = option->next) {
-		if (!strcmp ((gchar *) option->data, optionname))
-			retval = TRUE;
+	gchar **options_list = xkb_options_get_selected_list ();
+	if (options_list != NULL) {
+		gchar **option = options_list;
+		while (*option != NULL) {
+			if (!strcmp (*option, optionname)) {
+				retval = TRUE;
+				break;
+			}
+			option++;
+		}
 	}
-	clear_xkb_elements_list (options_list);
+	g_strfreev (options_list);
 	return retval;
 }
 
@@ -186,8 +191,7 @@ option_focused_cb (GtkWidget * widget, GdkEventFocus * event,
 
 	gtk_widget_get_allocation (widget, &alloc);
 	adj = gtk_scrolled_window_get_vadjustment (win);
-	gtk_adjustment_clamp_page (adj, alloc.y,
-				   alloc.y + alloc.height);
+	gtk_adjustment_clamp_page (adj, alloc.y, alloc.y + alloc.height);
 
 	return FALSE;
 }
@@ -346,7 +350,8 @@ xkb_options_add_group (XklConfigRegistry * config_registry,
 			  (GCompareFunc) xkb_option_checks_compare);
 	while (option_checks_list) {
 		option_check = GTK_WIDGET (option_checks_list->data);
-		gtk_box_pack_start (GTK_BOX (vbox), option_check, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (vbox), option_check, TRUE,
+				    TRUE, 0);
 		option_checks_list = option_checks_list->next;
 	}
 	/* free it */
@@ -417,7 +422,7 @@ chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 	switch (response) {
 	case GTK_RESPONSE_HELP:
 		/* capplet_help (GTK_WINDOW (dialog),
-			      "prefs-keyboard-layoutoptions"); */
+		   "prefs-keyboard-layoutoptions"); */
 		break;
 	case GTK_RESPONSE_CLOSE:{
 			/* just cleanup */
@@ -442,9 +447,9 @@ xkb_options_popup_dialog (GtkBuilder * dialog)
 	GtkWidget *chooser;
 
 	chooser_dialog = gtk_builder_new ();
-    gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
-                               "/gnome-keyboard-properties-options-dialog.ui",
-                               NULL);
+	gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
+				   "/gnome-keyboard-properties-options-dialog.ui",
+				   NULL);
 
 	chooser = CWID ("xkb_options_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
@@ -473,42 +478,42 @@ xkb_options_update_option_counters (XklConfigRegistry * config_registry,
 
 /* Respond to a change in the xkb gconf settings */
 static void
-xkb_options_update (GConfClient * client,
-		    guint cnxn_id, GConfEntry * entry, GtkBuilder * dialog)
+xkb_options_update (GSettings * settings, gchar * key, GtkBuilder * dialog)
 {
-	/* Updating options is handled by gconf notifies for each widget
-	   This is here to avoid calling it N_OPTIONS times for each gconf
-	   change. */
-	enable_disable_restoring (dialog);
+	if (!strcmp (key, GKBD_KEYBOARD_CONFIG_KEY_OPTIONS)) {
+		/* Updating options is handled by gconf notifies for each widget
+		   This is here to avoid calling it N_OPTIONS times for each gconf
+		   change. */
+		enable_disable_restoring (dialog);
 
-	if (chooser_dialog != NULL) {
-		GSList *expanders_list =
-		    g_object_get_data (G_OBJECT (chooser_dialog),
-				       EXPANDERS_PROP);
-		while (expanders_list) {
-			current_expander =
-			    GTK_WIDGET (expanders_list->data);
-			gchar *group_id =
-			    g_object_get_data (G_OBJECT (current_expander),
-					       "groupId");
-			current1st_level_id = group_id;
-			xkb_options_expander_selcounter_reset ();
-			xkl_config_registry_foreach_option
-			    (config_registry, group_id,
-			     (ConfigItemProcessFunc)
-			     xkb_options_update_option_counters,
-			     current_expander);
-			xkb_options_expander_highlight ();
-			expanders_list = expanders_list->next;
+		if (chooser_dialog != NULL) {
+			GSList *expanders_list =
+			    g_object_get_data (G_OBJECT (chooser_dialog),
+					       EXPANDERS_PROP);
+			while (expanders_list) {
+				current_expander =
+				    GTK_WIDGET (expanders_list->data);
+				gchar *group_id =
+				    g_object_get_data (G_OBJECT
+						       (current_expander),
+						       "groupId");
+				current1st_level_id = group_id;
+				xkb_options_expander_selcounter_reset ();
+				xkl_config_registry_foreach_option
+				    (config_registry, group_id,
+				     (ConfigItemProcessFunc)
+				     xkb_options_update_option_counters,
+				     current_expander);
+				xkb_options_expander_highlight ();
+				expanders_list = expanders_list->next;
+			}
 		}
 	}
 }
 
 void
-xkb_options_register_gconf_listener (GtkBuilder * dialog)
+xkb_options_register_conf_listener (GtkBuilder * dialog)
 {
-	gconf_client_notify_add (xkb_gconf_client,
-				 GKBD_KEYBOARD_CONFIG_KEY_OPTIONS,
-				 (GConfClientNotifyFunc)
-				 xkb_options_update, dialog, NULL, NULL);
+	g_signal_connect (xkb_keyboard_settings, "changed",
+			  (GCallback) xkb_options_update, dialog);
 }

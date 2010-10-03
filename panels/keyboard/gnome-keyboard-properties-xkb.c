@@ -27,7 +27,6 @@
 
 #include <string.h>
 #include <gdk/gdkx.h>
-#include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
 
 #include "gconf-property-editor.h"
@@ -42,7 +41,8 @@ XklConfigRegistry *config_registry;
 GkbdKeyboardConfig initial_config;
 GkbdDesktopConfig desktop_config;
 
-GConfClient *xkb_gconf_client;
+GSettings *xkb_keyboard_settings;
+GSettings *xkb_desktop_settings;
 
 char *
 xci_desc_to_utf8 (XklConfigItem * ci)
@@ -52,16 +52,9 @@ xci_desc_to_utf8 (XklConfigItem * ci)
 }
 
 static void
-set_model_text (GtkWidget * picker, GConfValue * value)
+set_model_text (GtkWidget * picker, gchar * model)
 {
 	XklConfigItem *ci = xkl_config_item_new ();
-	const char *model = NULL;
-
-	if (value != NULL && value->type == GCONF_VALUE_STRING) {
-		model = gconf_value_get_string (value);
-		if (model != NULL && model[0] == '\0')
-			model = NULL;
-	}
 
 	if (model == NULL) {
 		model = initial_config.model;
@@ -84,30 +77,29 @@ set_model_text (GtkWidget * picker, GConfValue * value)
 }
 
 static void
-model_key_changed (GConfClient * client,
-		   guint cnxn_id, GConfEntry * entry, GtkBuilder * dialog)
+model_key_changed (GSettings * settings, const gchar * key,
+		   GtkBuilder * dialog)
 {
-	set_model_text (WID ("xkb_model_pick"),
-			gconf_entry_get_value (entry));
+	if (!strcmp (key, GKBD_KEYBOARD_CONFIG_KEY_MODEL)) {
+		gchar *value =
+		    g_settings_get_string (xkb_keyboard_settings,
+					   GKBD_KEYBOARD_CONFIG_KEY_MODEL);
+		set_model_text (WID ("xkb_model_pick"), value);
+		if (value != NULL)
+			g_free (value);
 
-	enable_disable_restoring (dialog);
+		enable_disable_restoring (dialog);
+	}
 }
 
 static void
 setup_model_entry (GtkBuilder * dialog)
 {
-	GConfValue *value;
+	model_key_changed (xkb_keyboard_settings,
+			   GKBD_KEYBOARD_CONFIG_KEY_MODEL, dialog);
 
-	value = gconf_client_get (xkb_gconf_client,
-				  GKBD_KEYBOARD_CONFIG_KEY_MODEL, NULL);
-	set_model_text (WID ("xkb_model_pick"), value);
-	if (value != NULL)
-		gconf_value_free (value);
-
-	gconf_client_notify_add (xkb_gconf_client,
-				 GKBD_KEYBOARD_CONFIG_KEY_MODEL,
-				 (GConfClientNotifyFunc) model_key_changed,
-				 dialog, NULL, NULL);
+	g_signal_connect (xkb_keyboard_settings, "changed",
+			  (GCallback) model_key_changed, dialog);
 }
 
 static void
@@ -119,8 +111,10 @@ cleanup_xkb_tabs (GtkBuilder * dialog)
 	config_registry = NULL;
 	g_object_unref (G_OBJECT (engine));
 	engine = NULL;
-	g_object_unref (G_OBJECT (xkb_gconf_client));
-	xkb_gconf_client = NULL;
+	g_object_unref (G_OBJECT (xkb_keyboard_settings));
+	g_object_unref (G_OBJECT (xkb_desktop_settings));
+	xkb_keyboard_settings = NULL;
+	xkb_desktop_settings = NULL;
 }
 
 static void
@@ -128,13 +122,12 @@ reset_to_defaults (GtkWidget * button, GtkBuilder * dialog)
 {
 	GkbdKeyboardConfig empty_kbd_config;
 
-	gkbd_keyboard_config_init (&empty_kbd_config, xkb_gconf_client,
-				   engine);
-	gkbd_keyboard_config_save_to_gconf (&empty_kbd_config);
+	gkbd_keyboard_config_init (&empty_kbd_config, engine);
+	gkbd_keyboard_config_save (&empty_kbd_config);
 	gkbd_keyboard_config_term (&empty_kbd_config);
 
-	gconf_client_unset (xkb_gconf_client,
-			    GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP, NULL);
+	g_settings_reset (xkb_desktop_settings,
+			  GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP);
 
 	/* all the rest is g-s-d's business */
 }
@@ -167,20 +160,21 @@ setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 	GtkWidget *chk_new_windows_inherit_layout =
 	    WID ("chk_new_windows_inherit_layout");
 
-	xkb_gconf_client = gconf_client_get_default ();
+	xkb_desktop_settings = g_settings_new (GKBD_DESKTOP_SCHEMA);
+	xkb_keyboard_settings = g_settings_new (GKBD_KEYBOARD_SCHEMA);
 
-	engine = xkl_engine_get_instance (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
+	engine =
+	    xkl_engine_get_instance (GDK_DISPLAY_XDISPLAY
+				     (gdk_display_get_default ()));
 	config_registry = xkl_config_registry_get_instance (engine);
 
-	gkbd_desktop_config_init (&desktop_config, xkb_gconf_client,
-				  engine);
-	gkbd_desktop_config_load_from_gconf (&desktop_config);
+	gkbd_desktop_config_init (&desktop_config, engine);
+	gkbd_desktop_config_load (&desktop_config);
 
 	xkl_config_registry_load (config_registry,
 				  desktop_config.load_extra_items);
 
-	gkbd_keyboard_config_init (&initial_config, xkb_gconf_client,
-				   engine);
+	gkbd_keyboard_config_init (&initial_config, engine);
 	gkbd_keyboard_config_load_from_x_initial (&initial_config, NULL);
 
 	setup_model_entry (dialog);
@@ -227,8 +221,8 @@ setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 				  "clicked", G_CALLBACK (choose_model),
 				  dialog);
 
-	xkb_layouts_register_gconf_listener (dialog);
-	xkb_options_register_gconf_listener (dialog);
+	xkb_layouts_register_conf_listener (dialog);
+	xkb_options_register_conf_listener (dialog);
 
 	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")),
 			  "destroy", G_CALLBACK (cleanup_xkb_tabs),
@@ -243,8 +237,8 @@ enable_disable_restoring (GtkBuilder * dialog)
 	GkbdKeyboardConfig gswic;
 	gboolean enable;
 
-	gkbd_keyboard_config_init (&gswic, xkb_gconf_client, engine);
-	gkbd_keyboard_config_load_from_gconf (&gswic, NULL);
+	gkbd_keyboard_config_init (&gswic, engine);
+	gkbd_keyboard_config_load (&gswic, NULL);
 
 	enable = !gkbd_keyboard_config_equals (&gswic, &initial_config);
 

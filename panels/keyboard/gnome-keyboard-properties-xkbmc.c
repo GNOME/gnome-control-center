@@ -26,7 +26,6 @@
 #endif
 
 #include <gdk/gdkx.h>
-#include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
 
 #include "gnome-keyboard-properties-xkb.h"
@@ -298,9 +297,7 @@ xkb_model_chooser_response (GtkDialog * dialog,
 			gtk_tree_model_get (list_store, &iter,
 					    1, &model_name, -1);
 
-			gconf_client_set_string (xkb_gconf_client,
-						 GKBD_KEYBOARD_CONFIG_KEY_MODEL,
-						 model_name, NULL);
+			g_settings_set_string (xkb_keyboard_settings, GKBD_KEYBOARD_CONFIG_KEY_MODEL, model_name);
 			g_free (model_name);
 		}
 	}
@@ -320,10 +317,7 @@ choose_model (GtkBuilder * dialog)
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
 				      GTK_WINDOW (WID
 						  ("keyboard_dialog")));
-	current_model_name =
-	    gconf_client_get_string (xkb_gconf_client,
-				     GKBD_KEYBOARD_CONFIG_KEY_MODEL, NULL);
-
+	current_model_name = g_settings_get_string (xkb_keyboard_settings, GKBD_KEYBOARD_CONFIG_KEY_MODEL);
 
 	prepare_vendors_list (chooser_dialog);
 	prepare_models_list (chooser_dialog);

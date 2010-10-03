@@ -26,7 +26,6 @@
 #endif
 
 #include <gdk/gdkx.h>
-#include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
 
 #include <libgnomekbd/gkbd-desktop-config.h>
@@ -46,17 +45,6 @@ static int default_group = -1;
 static GtkCellRenderer *text_renderer;
 
 static gboolean disable_buttons_sensibility_update = FALSE;
-
-void
-clear_xkb_elements_list (GSList * list)
-{
-	while (list != NULL) {
-		GSList *p = list;
-		list = list->next;
-		g_free (p->data);
-		g_slist_free_1 (p);
-	}
-}
 
 static gint
 find_selected_layout_idx (GtkBuilder * dialog)
@@ -84,24 +72,15 @@ find_selected_layout_idx (GtkBuilder * dialog)
 	return rv;
 }
 
-GSList *
+gchar **
 xkb_layouts_get_selected_list (void)
 {
-	GSList *retval;
+	gchar **retval;
 
-	retval = gconf_client_get_list (xkb_gconf_client,
-					GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS,
-					GCONF_VALUE_STRING, NULL);
+	retval = g_settings_get_strv (xkb_keyboard_settings,
+				      GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS);
 	if (retval == NULL) {
-		GSList *cur_layout;
-
-		for (cur_layout = initial_config.layouts_variants;
-		     cur_layout != NULL; cur_layout = cur_layout->next)
-			retval =
-			    g_slist_prepend (retval,
-					     g_strdup (cur_layout->data));
-
-		retval = g_slist_reverse (retval);
+		retval = g_strdupv (initial_config.layouts_variants);
 	}
 
 	return retval;
@@ -110,18 +89,17 @@ xkb_layouts_get_selected_list (void)
 gint
 xkb_get_default_group ()
 {
-	return gconf_client_get_int (xkb_gconf_client,
-				     GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
-				     NULL);
+	return g_settings_get_int (xkb_desktop_settings,
+				   GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP);
 }
 
 void
 xkb_save_default_group (gint default_group)
 {
 	if (default_group != xkb_get_default_group ())
-		gconf_client_set_int (xkb_gconf_client,
-				      GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
-				      default_group, NULL);
+		g_settings_set_int (xkb_desktop_settings,
+				    GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
+				    default_group);
 }
 
 static void
@@ -188,23 +166,24 @@ xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
 	GtkTreeViewDropPosition pos;
 	gint didx;
 	gchar *id;
-	GSList *layouts_list;
-	GSList *node2Remove;
+	gchar **layouts_list;
 
 	if (sidx == -1)
 		return;
 
 	layouts_list = xkb_layouts_get_selected_list ();
-	node2Remove = g_slist_nth (layouts_list, sidx);
+	id = layouts_list[sidx];
 
-	id = (gchar *) node2Remove->data;
-	layouts_list = g_slist_delete_link (layouts_list, node2Remove);
+	/* Remove the element at position sidx */
+	memmove (layouts_list + sidx, layouts_list + sidx + 1,
+		 sizeof (gchar *) * g_strv_length (layouts_list + sidx));
 
 	if (!gtk_tree_view_get_dest_row_at_pos
 	    (GTK_TREE_VIEW (tree_view), x, y, &path, &pos)) {
 		/* Move to the very end */
-		layouts_list =
-		    g_slist_append (layouts_list, g_strdup (id));
+		int old_length = g_strv_length (layouts_list);
+		layouts_list[old_length] = id;
+		/* NULL was there before deletion, no need to re-assign */
 		xkb_layouts_set_selected_list (layouts_list);
 	} else if (path != NULL) {
 		gint *indices = gtk_tree_path_get_indices (path);
@@ -212,14 +191,13 @@ xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
 		gtk_tree_path_free (path);
 		/* Move to the new position */
 		if (sidx != didx) {
-			layouts_list =
-			    g_slist_insert (layouts_list, g_strdup (id),
-					    didx);
+			memmove (layouts_list + didx,
+				 layouts_list + didx + 1,
+				 g_strv_length (layouts_list + didx));
 			xkb_layouts_set_selected_list (layouts_list);
 		}
 	}
-	g_free (id);
-	clear_xkb_elements_list (layouts_list);
+	g_strfreev (layouts_list);
 }
 
 void
@@ -292,8 +270,8 @@ xkb_layout_description_utf8 (const gchar * visible)
 void
 xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 {
-	GSList *layouts = xkb_layouts_get_selected_list ();
-	GSList *cur_layout;
+	gchar **layouts = xkb_layouts_get_selected_list ();
+	gchar **cur_layout;
 	GtkListStore *list_store =
 	    GTK_LIST_STORE (gtk_tree_view_get_model
 			    (GTK_TREE_VIEW
@@ -305,23 +283,29 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 
 	gtk_list_store_clear (list_store);
 
-	for (cur_layout = layouts; cur_layout != NULL;
-	     cur_layout = cur_layout->next, counter++) {
-		GtkTreeIter iter;
-		const char *visible = (char *) cur_layout->data;
-		gchar *utf_visible = xkb_layout_description_utf8 (visible);
-		gtk_list_store_append (list_store, &iter);
-		gtk_list_store_set (list_store, &iter,
-				    SEL_LAYOUT_TREE_COL_DESCRIPTION,
-				    utf_visible,
-				    SEL_LAYOUT_TREE_COL_ID,
-				    cur_layout->data,
-				    SEL_LAYOUT_TREE_COL_ENABLED,
-				    counter < max_selected_layouts, -1);
-		g_free (utf_visible);
+	cur_layout = layouts;
+	if (layouts != NULL) {
+		while (*cur_layout != NULL) {
+			GtkTreeIter iter;
+			const char *visible = *cur_layout;
+			gchar *utf_visible =
+			    xkb_layout_description_utf8 (visible);
+			gtk_list_store_append (list_store, &iter);
+			gtk_list_store_set (list_store, &iter,
+					    SEL_LAYOUT_TREE_COL_DESCRIPTION,
+					    utf_visible,
+					    SEL_LAYOUT_TREE_COL_ID,
+					    *cur_layout,
+					    SEL_LAYOUT_TREE_COL_ENABLED,
+					    counter < max_selected_layouts,
+					    -1);
+			g_free (utf_visible);
+			cur_layout++;
+			counter++;
+		}
 	}
 
-	clear_xkb_elements_list (layouts);
+	g_strfreev (layouts);
 
 	/* enable the buttons' status update */
 	disable_buttons_sensibility_update = FALSE;
@@ -355,13 +339,14 @@ show_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 	gint idx = find_selected_layout_idx (dialog);
 
 	if (idx != -1) {
-		GSList *layouts_list = xkb_layouts_get_selected_list ();
-		const gchar *id = g_slist_nth_data (layouts_list, idx);
+		gchar **layouts_list = xkb_layouts_get_selected_list ();
+		const gchar *id = layouts_list[idx];
 		char *descr = xkb_layout_description_utf8 (id);
 		GtkWidget *parent = WID ("keyboard_dialog");
-		GtkWidget *popup = gkbd_keyboard_drawing_new_dialog (idx, descr);
+		GtkWidget *popup =
+		    gkbd_keyboard_drawing_new_dialog (idx, descr);
 		gtk_widget_set_parent (popup, parent);
-		clear_xkb_elements_list (layouts_list);
+		g_strfreev (layouts_list);
 		g_free (descr);
 	}
 }
@@ -372,16 +357,10 @@ remove_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 	gint idx = find_selected_layout_idx (dialog);
 
 	if (idx != -1) {
-		GSList *layouts_list = xkb_layouts_get_selected_list ();
-		char *id = NULL;
-		GSList *node2Remove = g_slist_nth (layouts_list, idx);
-
-		layouts_list =
-		    g_slist_remove_link (layouts_list, node2Remove);
-
-		id = (char *) node2Remove->data;
-		g_slist_free_1 (node2Remove);
-		g_free (id);
+		gchar **layouts_list = xkb_layouts_get_selected_list ();
+		g_free (layouts_list[idx]);
+		memmove (layouts_list + idx, layouts_list + idx + 1,
+			 g_strv_length (layouts_list + idx));
 
 		if (default_group > idx)
 			xkb_save_default_group (default_group - 1);
@@ -389,7 +368,7 @@ remove_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 			xkb_save_default_group (-1);
 
 		xkb_layouts_set_selected_list (layouts_list);
-		clear_xkb_elements_list (layouts_list);
+		g_strfreev (layouts_list);
 	}
 }
 
@@ -399,19 +378,14 @@ move_up_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 	gint idx = find_selected_layout_idx (dialog);
 
 	if (idx != -1) {
-		GSList *layouts_list = xkb_layouts_get_selected_list ();
-		GSList *node2Remove = g_slist_nth (layouts_list, idx);
-
-		layouts_list =
-		    g_slist_remove_link (layouts_list, node2Remove);
-		layouts_list =
-		    g_slist_insert (layouts_list, node2Remove->data,
-				    idx - 1);
-		g_slist_free_1 (node2Remove);
+		gchar **layouts_list = xkb_layouts_get_selected_list ();
+		gchar *tmp = layouts_list[idx - 1];
+		layouts_list[idx - 1] = layouts_list[idx];
+		layouts_list[idx] = tmp;
 
 		idx2select = idx - 1;
 		xkb_layouts_set_selected_list (layouts_list);
-		clear_xkb_elements_list (layouts_list);
+		g_strfreev (layouts_list);
 	}
 }
 
@@ -421,19 +395,14 @@ move_down_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 	gint idx = find_selected_layout_idx (dialog);
 
 	if (idx != -1) {
-		GSList *layouts_list = xkb_layouts_get_selected_list ();
-		GSList *node2Remove = g_slist_nth (layouts_list, idx);
-
-		layouts_list =
-		    g_slist_remove_link (layouts_list, node2Remove);
-		layouts_list =
-		    g_slist_insert (layouts_list, node2Remove->data,
-				    idx + 1);
-		g_slist_free_1 (node2Remove);
+		gchar **layouts_list = xkb_layouts_get_selected_list ();
+		gchar *tmp = layouts_list[idx + 1];
+		layouts_list[idx + 1] = layouts_list[idx];
+		layouts_list[idx] = tmp;
 
 		idx2select = idx + 1;
 		xkb_layouts_set_selected_list (layouts_list);
-		clear_xkb_elements_list (layouts_list);
+		g_strfreev (layouts_list);
 	}
 }
 
@@ -455,20 +424,18 @@ xkb_layouts_register_buttons_handlers (GtkBuilder * dialog)
 }
 
 static void
-xkb_layouts_update_list (GConfClient * client,
-			 guint cnxn_id, GConfEntry * entry,
-			 GtkBuilder * dialog)
+xkb_layouts_update_list (GSettings * settings,
+			 gchar * key, GtkBuilder * dialog)
 {
-	xkb_layouts_fill_selected_tree (dialog);
-	enable_disable_restoring (dialog);
+	if (!strcmp (key, GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS)) {
+		xkb_layouts_fill_selected_tree (dialog);
+		enable_disable_restoring (dialog);
+	}
 }
 
 void
-xkb_layouts_register_gconf_listener (GtkBuilder * dialog)
+xkb_layouts_register_conf_listener (GtkBuilder * dialog)
 {
-	gconf_client_notify_add (xkb_gconf_client,
-				 GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS,
-				 (GConfClientNotifyFunc)
-				 xkb_layouts_update_list, dialog, NULL,
-				 NULL);
+	g_signal_connect (xkb_keyboard_settings, "changed",
+			  (GCallback)xkb_layouts_update_list, dialog);
 }

@@ -34,7 +34,8 @@ G_BEGIN_DECLS
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 extern XklEngine *engine;
 extern XklConfigRegistry *config_registry;
-extern GConfClient *xkb_gconf_client;
+extern GSettings *xkb_keyboard_settings;
+extern GSettings *xkb_desktop_settings;
 extern GkbdKeyboardConfig initial_config;
 
 extern void setup_xkb_tabs (GtkBuilder * dialog,
@@ -44,9 +45,9 @@ extern void xkb_layouts_fill_selected_tree (GtkBuilder * dialog);
 
 extern void xkb_layouts_register_buttons_handlers (GtkBuilder * dialog);
 
-extern void xkb_layouts_register_gconf_listener (GtkBuilder * dialog);
+extern void xkb_layouts_register_conf_listener (GtkBuilder * dialog);
 
-extern void xkb_options_register_gconf_listener (GtkBuilder * dialog);
+extern void xkb_options_register_conf_listener (GtkBuilder * dialog);
 
 extern void xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
 					       GConfChangeSet * changeset);
@@ -54,8 +55,6 @@ extern void xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
 extern void xkb_options_load_options (GtkBuilder * dialog);
 
 extern void xkb_options_popup_dialog (GtkBuilder * dialog);
-
-extern void clear_xkb_elements_list (GSList * list);
 
 extern char *xci_desc_to_utf8 (XklConfigItem * ci);
 
@@ -69,19 +68,19 @@ extern void choose_model (GtkBuilder * dialog);
 
 extern void xkb_layout_choose (GtkBuilder * dialog);
 
-extern GSList *xkb_layouts_get_selected_list (void);
+extern gchar **xkb_layouts_get_selected_list (void);
 
-extern GSList *xkb_options_get_selected_list (void);
+extern gchar **xkb_options_get_selected_list (void);
 
 #define xkb_layouts_set_selected_list(list) \
-        gconf_client_set_list (gconf_client_get_default (), \
+        g_settings_set_strv (xkb_keyboard_settings, \
                                GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS, \
-                               GCONF_VALUE_STRING, (list), NULL)
+                               (const gchar *const*)(list))
 
 #define xkb_options_set_selected_list(list) \
-        gconf_client_set_list (gconf_client_get_default (), \
+        g_settings_set_strv (xkb_keyboard_settings, \
                                GKBD_KEYBOARD_CONFIG_KEY_OPTIONS, \
-                               GCONF_VALUE_STRING, (list), NULL)
+                               (const gchar *const*)(list))
 
 extern GtkWidget *xkb_layout_preview_create_widget (GtkBuilder *
 						    chooser_dialog);
