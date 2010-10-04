@@ -172,11 +172,10 @@ xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
 		return;
 
 	layouts_list = xkb_layouts_get_selected_list ();
-	id = layouts_list[sidx];
+	id = g_strdup (layouts_list[sidx]);
 
 	/* Remove the element at position sidx */
-	memmove (layouts_list + sidx, layouts_list + sidx + 1,
-		 sizeof (gchar *) * g_strv_length (layouts_list + sidx));
+	gkbd_strv_behead (layouts_list + sidx);
 
 	if (!gtk_tree_view_get_dest_row_at_pos
 	    (GTK_TREE_VIEW (tree_view), x, y, &path, &pos)) {
@@ -191,10 +190,13 @@ xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
 		gtk_tree_path_free (path);
 		/* Move to the new position */
 		if (sidx != didx) {
-			memmove (layouts_list + didx,
-				 layouts_list + didx + 1,
+			memmove (layouts_list + didx + 1,
+				 layouts_list + didx,
 				 g_strv_length (layouts_list + didx));
+			layouts_list[didx] = id;
 			xkb_layouts_set_selected_list (layouts_list);
+		} else {
+			g_free (id);
 		}
 	}
 	g_strfreev (layouts_list);
@@ -358,9 +360,7 @@ remove_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 
 	if (idx != -1) {
 		gchar **layouts_list = xkb_layouts_get_selected_list ();
-		g_free (layouts_list[idx]);
-		memmove (layouts_list + idx, layouts_list + idx + 1,
-			 g_strv_length (layouts_list + idx));
+		gkbd_strv_behead (layouts_list + idx);
 
 		if (default_group > idx)
 			xkb_save_default_group (default_group - 1);
@@ -437,5 +437,5 @@ void
 xkb_layouts_register_conf_listener (GtkBuilder * dialog)
 {
 	g_signal_connect (xkb_keyboard_settings, "changed",
-			  (GCallback)xkb_layouts_update_list, dialog);
+			  (GCallback) xkb_layouts_update_list, dialog);
 }

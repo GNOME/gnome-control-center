@@ -28,6 +28,7 @@
 #include <gtk/gtk.h>
 
 #include "libgnomekbd/gkbd-keyboard-config.h"
+#include "libgnomekbd/gkbd-util.h"
 
 G_BEGIN_DECLS
 #define CWID(s) GTK_WIDGET (gtk_builder_get_object (chooser_dialog, s))

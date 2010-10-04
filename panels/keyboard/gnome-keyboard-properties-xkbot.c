@@ -124,14 +124,8 @@ xkb_options_select (gchar * optionname)
 	}
 
 	if (!already_selected) {
-		gint old_length = g_strv_length (options_list);
-		gchar **new_options_list =
-		    g_new0 (gchar *, old_length + 2);
-		memcpy (new_options_list, options_list,
-			sizeof (gchar *) * old_length);
-		new_options_list[old_length] = g_strdup (optionname);
-		xkb_options_set_selected_list (new_options_list);
-		g_free (new_options_list);
+		options_list = gkbd_strv_append (options_list, g_strdup (optionname));
+		xkb_options_set_selected_list (options_list);
 	}
 
 	g_strfreev (options_list);
@@ -147,10 +141,7 @@ xkb_options_deselect (gchar * optionname)
 		while (*option != NULL) {
 			gchar *id = *option;
 			if (!strcmp (id, optionname)) {
-				g_free (*option);
-				memmove (option, option + 1,
-					 g_strv_length (option) *
-					 sizeof (gchar *));
+				gkbd_strv_behead(option);
 			} else
 				option++;
 		}

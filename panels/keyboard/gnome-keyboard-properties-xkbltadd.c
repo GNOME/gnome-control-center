@@ -57,6 +57,7 @@ static void
 
 
 
+
 xkb_layout_chooser_available_layouts_fill (GtkBuilder * chooser_dialog,
 					   const gchar cblid[],
 					   const gchar cbvid[],
@@ -75,10 +76,12 @@ static void
 
 
 
+
 xkb_layout_chooser_available_language_variants_fill (GtkBuilder *
 						     chooser_dialog);
 
 static void
+
 
 
 
@@ -410,21 +413,17 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 		if (selected_id != NULL) {
 			gchar **layouts_list =
 			    xkb_layouts_get_selected_list ();
-			gint len = g_strv_length(layouts_list);
-			gchar **new_layouts_list = g_new0(gchar*, len + 2);
 
-			selected_id = g_strdup (selected_id);
+			layouts_list =
+			    gkbd_strv_append (layouts_list,
+					      g_strdup (selected_id));
 
-			memcpy(new_layouts_list, layouts_list, sizeof (gchar*) * len);
-			new_layouts_list[len] = selected_id;
-			g_free(layouts_list);
-			
-			xkb_layouts_set_selected_list (new_layouts_list);
+			xkb_layouts_set_selected_list (layouts_list);
 
 			xkl_layout_chooser_add_default_switcher_if_necessary
-			    (new_layouts_list);
+			    (layouts_list);
 
-			g_strfreev (new_layouts_list);
+			g_strfreev (layouts_list);
 		}
 	} else if (response == gtk_dialog_get_response_for_widget
 		   (dialog, CWID ("btnPrint"))) {
