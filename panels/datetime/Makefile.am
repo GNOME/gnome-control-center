@@ -19,6 +19,7 @@ dist_ui_DATA = \
 	datetime.ui \
 	data/bg.png \
 	data/cc.png \
+	data/pin.png \
 	data/timezone_0.png \
 	data/timezone_-10.png \
 	data/timezone_10.png \

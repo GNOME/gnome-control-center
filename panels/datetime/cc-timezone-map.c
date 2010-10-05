@@ -194,6 +194,8 @@ cc_timezone_map_size_request (GtkWidget      *widget,
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
 
+  GTK_WIDGET_CLASS (cc_timezone_map_parent_class)->size_request (widget, req);
+
   req->width = gdk_pixbuf_get_width (priv->orig_background) * 0.6;
   req->height = gdk_pixbuf_get_height (priv->orig_background) * 0.6;
 }
@@ -306,7 +308,7 @@ cc_timezone_map_draw (GtkWidget *widget,
                       cairo_t   *cr)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
-  GdkPixbuf *hilight, *orig_hilight;
+  GdkPixbuf *hilight, *orig_hilight, *pin;
   GtkAllocation alloc;
   gchar *file;
   GError *err = NULL;
@@ -344,92 +346,33 @@ cc_timezone_map_draw (GtkWidget *widget,
       g_object_unref (orig_hilight);
     }
 
+  /* load pin icon */
+  pin = gdk_pixbuf_new_from_file (DATADIR "/pin.png", &err);
+
+  if (err)
+    {
+      g_warning ("Could not load pin icon: %s", err->message);
+      g_clear_error (&err);
+    }
+
   if (priv->location)
     {
-      PangoLayout *layout;
-      PangoRectangle rect;
-      gint width, height;
-      gdouble x1, y1, radius = 5;
-      gchar *zone;
-
       pointx = convert_longtitude_to_x (priv->location->longitude, alloc.width);
       pointy = convert_latitude_to_y (priv->location->latitude, alloc.height);
 
       if (pointy > alloc.height)
         pointy = alloc.height;
 
-      /* allow for the line width */
-      pointy -= 2;
-
-      zone = g_strdup (priv->location->zone);
-
-      /* convert underscores to spaces */
-      g_strdelimit (zone, "_", ' ');
-
-      layout = gtk_widget_create_pango_layout (widget, zone);
-
-      pango_layout_get_pixel_extents (layout, NULL, &rect);
-      width = rect.width - rect.x;
-      height = rect.height - rect.y;
-
-      x1 = (int) (pointx - width / 2);
-      y1 = (int) (pointy - 10 - height - radius);
-
-      /* rotate the bubble upside-down if there is not enough vertical room */
-      if (y1 < radius)
+      if (pin)
         {
-          cairo_translate (cr, pointx, pointy);
-          cairo_rotate (cr, G_PI);
-          cairo_translate (cr, -pointx, -pointy);
+          gdk_cairo_set_source_pixbuf (cr, pin, pointx - 8, pointy - 14);
+          cairo_paint (cr);
         }
+    }
 
-      /* offset the arrow if there is not enough horizontal room */
-      if (x1 - radius - 2 < 0)
-        x1 -= (x1 - radius - 2);
-
-      if (x1 + width + radius + 2 > alloc.width)
-        x1 -= (x1 + width + radius + 2) - alloc.width;
-
-      /* draw the bubble */
-      cairo_arc (cr, x1, y1, radius, G_PI, G_PI * 1.5);
-      cairo_line_to (cr, x1 + width, y1 - radius);
-
-      cairo_arc (cr, x1 + width, y1, radius, G_PI * 1.5, 0);
-      cairo_line_to (cr, x1 + width + radius, y1 + height);
-
-      cairo_arc (cr, x1 + width, y1 + height, radius, 0, G_PI * 0.5);
-      cairo_line_to (cr, pointx + 10, pointy - 10);
-
-      cairo_line_to (cr, pointx, pointy);
-      cairo_line_to (cr, pointx - 10, pointy - 10);
-      cairo_line_to (cr, x1, y1 + height + radius);
-
-      cairo_arc (cr, x1, y1 + height, radius, G_PI * 0.5, G_PI);
-      cairo_line_to (cr, x1 - radius, y1);
-
-      cairo_set_source_rgba (cr, 1, 1, 1, 0.7);
-      cairo_fill_preserve (cr);
-
-      cairo_set_source_rgba (cr, 0, 0, 0, 0.7);
-      cairo_stroke (cr);
-
-
-      if (y1 < radius)
-        {
-          cairo_translate (cr, pointx, pointy);
-          cairo_rotate (cr, G_PI);
-          cairo_translate (cr, -pointx, -pointy);
-
-          y1 += height + 20 + 2 * radius;
-        }
-
-      /* draw the location name */
-      cairo_set_source_rgb (cr, 0, 0, 0);
-      cairo_move_to (cr, x1, y1);
-      pango_cairo_show_layout (cr, layout);
-
-      g_object_unref (layout);
-      g_free (zone);
+  if (pin)
+    {
+      g_object_unref (pin);
     }
 
   return TRUE;

@@ -23,6 +23,8 @@
 
 #include "cc-timezone-map.h"
 #include "set-timezone.h"
+#include <string.h>
+#include <stdlib.h>
 
 G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
 
@@ -36,6 +38,8 @@ enum {
   CITY_NUM_COLS
 };
 
+#define W(x) (GtkWidget*) gtk_builder_get_object (priv->builder, x)
+
 struct _CcDateTimePanelPrivate
 {
   GtkBuilder *builder;
@@ -47,6 +51,9 @@ struct _CcDateTimePanelPrivate
 
   GtkTreeModel *locations;
   GtkTreeModelFilter *city_filter;
+
+  guint hour;
+  guint minute;
 };
 
 
@@ -130,16 +137,25 @@ update_time (CcDateTimePanel *self)
   GtkWidget *widget;
   gchar label[32];
   time_t t;
+  struct tm time_info;
 
   g_get_current_time (&timeval);
 
-  priv->timeout = gdk_threads_add_timeout (1000 - timeval.tv_usec / 1000,
-                                           (GSourceFunc) update_time, self);
-
-  widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
-                                                "label_current_time");
   t = time (NULL);
-  strftime (label, 32, "%X", localtime (&t));
+
+  localtime_r (&t, &time_info);
+
+  priv->hour = time_info.tm_hour;
+  priv->minute = time_info.tm_min;
+
+  /* Update the hours label */
+  strftime (label, 32, "%H", &time_info);
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "hours_label");
+  gtk_label_set_text (GTK_LABEL (widget), label);
+
+  /* Update the minutes label */
+  strftime (label, 32, "%M", &time_info);
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "minutes_label");
   gtk_label_set_text (GTK_LABEL (widget), label);
 
   return FALSE;
@@ -171,24 +187,22 @@ static void
 apply_button_clicked_cb (GtkButton       *button,
                          CcDateTimePanel *self)
 {
-  GtkWidget *widget;
   CcDateTimePanelPrivate *priv = self->priv;
-  guint h, mon, y, min, d;
+  guint mon, y, d;
   struct tm fulltime;
   time_t unixtime;
   gchar *filename;
 
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_hour");
-  h = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
-  min = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+  mon = 1 + gtk_combo_box_get_active (GTK_COMBO_BOX (W ("month-combobox")));
 
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "calendar");
-  gtk_calendar_get_date (GTK_CALENDAR (widget), &y, &mon, &d);
+  y = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("year-spinbutton")));
+  d = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("day-spinbutton")));
+
+
 
   fulltime.tm_sec = 0;
-  fulltime.tm_min = min;
-  fulltime.tm_hour = h;
+  fulltime.tm_min = priv->minute;
+  fulltime.tm_hour = priv->hour;
   fulltime.tm_mday = d;
   fulltime.tm_mon = mon;
   fulltime.tm_year = y - 1900;
@@ -217,7 +231,6 @@ location_changed_cb (CcTimezoneMap   *map,
   GtkWidget *widget;
   time_t t;
   struct tm *ltime;
-  gchar slabel[32];
   gchar **split;
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -229,16 +242,6 @@ location_changed_cb (CcTimezoneMap   *map,
 
   t = time (NULL);
   ltime = localtime (&t);
-
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_hour");
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_hour);
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_min);
-
-  widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
-                                                "label_current_time");
-  strftime (slabel, 32, "%X", localtime (&t));
-  gtk_label_set_text (GTK_LABEL (widget), slabel);
 
   split = g_strsplit (location->zone, "/", 2);
 
@@ -434,17 +437,58 @@ city_changed_cb (GtkComboBox     *box,
 }
 
 static void
+change_time (GtkButton       *button,
+             CcDateTimePanel *panel)
+{
+  CcDateTimePanelPrivate *priv = panel->priv;
+  const gchar *widget_name;
+  gchar *new_str;
+  guint *value, max, min;
+  GtkWidget *label;
+
+  widget_name = gtk_buildable_get_name (GTK_BUILDABLE (button));
+
+  min = 0;
+  if (widget_name[0] == 'h')
+    {
+      /* change hour */
+      label = W ("hours_label");
+      max = 23;
+      value = &priv->hour;
+    }
+  else
+    {
+      /* change minute */
+      label = W ("minutes_label");
+      max = 59;
+      value = &priv->minute;
+    }
+
+  if (strstr (widget_name, "up"))
+    *value = *value + 1;
+  else
+    *value = *value - 1;
+
+  if (*value > max)
+    *value = min;
+  else if (*value < min)
+    *value = max;
+
+  new_str = g_strdup_printf ("%02d", *value);
+  gtk_label_set_text (GTK_LABEL (label), new_str);
+  g_free (new_str);
+}
+
+static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
-  gchar *objects[] = { "datetime-panel", "adjustment_min", "adjustment_hour",
-      "adjustment_sec", "region-liststore", "city-liststore",
-      "city-modelfilter", "city-modelsort", NULL };
+  gchar *objects[] = { "datetime-panel", "region-liststore", "city-liststore",
+      "month-liststore", "city-modelfilter", "city-modelsort", NULL };
   GtkWidget *widget;
+  GtkAdjustment *adjustment;
   GError *err = NULL;
   GDate *date;
-  struct tm *ltime;
-  time_t t;
   GtkTreeModelFilter *city_modelfilter;
   GtkTreeModelSort *city_modelsort;
   int ret;
@@ -464,6 +508,37 @@ cc_date_time_panel_init (CcDateTimePanel *self)
       return;
     }
 
+  /* set up time editing widgets */
+  g_signal_connect (W("hour_up_button"), "clicked", G_CALLBACK (change_time),
+                    self);
+  g_signal_connect (W("hour_down_button"), "clicked", G_CALLBACK (change_time),
+                    self);
+  g_signal_connect (W("min_up_button"), "clicked", G_CALLBACK (change_time),
+                    self);
+  g_signal_connect (W("min_down_button"), "clicked", G_CALLBACK (change_time),
+                    self);
+
+  /* set up date editing widgets */
+  date = g_date_new ();
+  g_date_set_time_t (date, time (NULL));
+
+  gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),
+                            g_date_get_month (date) - 1);
+
+  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_get_day (date), 0,
+                                                    31, 1, 10, 1);
+  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("day-spinbutton")),
+                                  adjustment);
+
+  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_get_year (date),
+                                                    G_MINDOUBLE, G_MAXDOUBLE, 1,
+                                                    10, 1);
+  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("year-spinbutton")),
+                                  adjustment);
+  g_date_free (date);
+  date = NULL;
+
+  /* set up timezone map */
   priv->map = widget = (GtkWidget *) cc_timezone_map_new ();
   g_signal_connect (widget, "location-changed",
                     G_CALLBACK (location_changed_cb), self);
@@ -477,26 +552,11 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                      GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                          "datetime-panel")));
 
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "calendar");
-  date = g_date_new ();
-  g_date_set_time_t (date, time (NULL));
-  gtk_calendar_select_day (GTK_CALENDAR (widget), g_date_get_day (date));
-  gtk_calendar_select_month (GTK_CALENDAR (widget), g_date_get_month (date) -1,
-                             g_date_get_year (date));
-  g_date_free (date);
-  date = NULL;
 
   update_time (self);
 
-  t = time (NULL);
-  ltime = localtime (&t);
-
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_hour");
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_hour);
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder, "spin_minute");
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), ltime->tm_min);
-
-  g_signal_connect ((GtkWidget*) gtk_builder_get_object (priv->builder, "button_apply"),
+  g_signal_connect ((GtkWidget*) gtk_builder_get_object (priv->builder,
+                                                         "button_apply"),
                     "clicked",
                     G_CALLBACK (apply_button_clicked_cb),
                     self);
