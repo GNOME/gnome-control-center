@@ -273,7 +273,7 @@ copy_finished_cb (GObject      *source_object,
     }
 
   if (priv->builder)
-    gtk_widget_show (WID ("preview-area"));
+    gtk_widget_queue_draw (WID ("preview-area"));
 
   /* remove the reference taken when the copy was set up */
   g_object_unref (panel);
@@ -281,7 +281,8 @@ copy_finished_cb (GObject      *source_object,
 
 static void
 update_preview (CcBackgroundPanelPrivate *priv,
-                GnomeWPItem              *item)
+                GnomeWPItem              *item,
+                gboolean                  redraw_preview)
 {
   gchar *markup;
 
@@ -325,7 +326,8 @@ update_preview (CcBackgroundPanelPrivate *priv,
                                 priv->current_background->options);
     }
 
-  gtk_widget_queue_draw (WID ("preview-area"));
+  if (redraw_preview)
+    gtk_widget_queue_draw (WID ("preview-area"));
 }
 
 static void
@@ -339,6 +341,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   GConfChangeSet *cs;
   gchar *pcolor, *scolor;
   CcBackgroundPanelPrivate *priv = panel->priv;
+  gboolean draw_preview = TRUE;
 
   list = gtk_icon_view_get_selected_items (icon_view);
 
@@ -404,13 +407,9 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       /* create a spinner while the file downloads */
       priv->spinner = gtk_spinner_new ();
       gtk_spinner_start (GTK_SPINNER (priv->spinner));
-      gtk_box_pack_start (GTK_BOX (WID ("details-box")), priv->spinner, FALSE,
-                          FALSE, 0);
-      gtk_box_reorder_child (GTK_BOX (WID ("details-box")), priv->spinner, 0);
-      gtk_widget_set_size_request (priv->spinner, 150, 75);
+      gtk_box_pack_start (GTK_BOX (WID ("bottom-hbox")), priv->spinner, FALSE,
+                          FALSE, 6);
       gtk_widget_show (priv->spinner);
-      gtk_widget_hide (WID ("preview-area"));
-
 
       /* reference the panel in case it is removed before the copy is
        * finished */
@@ -426,6 +425,9 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                                    wp_item_option_to_string (item->options));
       g_free (item->filename);
       item->filename = cache_path;
+
+      /* delay the updated drawing of the preview until the copy finishes */
+      draw_preview = FALSE;
     }
   else
     {
@@ -466,7 +468,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   gconf_change_set_unref (cs);
 
   /* update the preview information */
-  update_preview (priv, item);
+  update_preview (priv, item, draw_preview);
 }
 
 static gboolean
@@ -564,7 +566,7 @@ style_changed_cb (GtkComboBox       *box,
   if (priv->current_background)
     priv->current_background->options = gtk_combo_box_get_active (box);
 
-  update_preview (priv, NULL);
+  update_preview (priv, NULL, TRUE);
 }
 
 static void
@@ -592,7 +594,7 @@ color_changed_cb (GtkColorButton    *button,
 
   g_free (value);
 
-  update_preview (priv, NULL);
+  update_preview (priv, NULL, TRUE);
 }
 
 static void
@@ -717,7 +719,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
   gnome_wp_item_update (priv->current_background);
   gnome_wp_item_ensure_gnome_bg (priv->current_background);
 
-  update_preview (priv, NULL);
+  update_preview (priv, NULL, TRUE);
 }
 
 void
