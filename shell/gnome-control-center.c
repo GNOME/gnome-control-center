@@ -126,7 +126,7 @@ activate_panel (GnomeControlCenter *shell,
           GtkWidget *panel;
           GtkWidget *box;
           gint i, old_page;
-          GtkRequisition min, nat;
+          int nat_height;
 
           /* create the panel plugin */
           panel = g_object_new (panel_type, "shell", shell, NULL);
@@ -162,11 +162,10 @@ activate_panel (GnomeControlCenter *shell,
 
           /* resize to the preferred size of the panel */
           gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
-
-          gtk_widget_get_preferred_size (priv->window,
-                                         &min, &nat);
+          gtk_widget_get_preferred_height (GTK_WIDGET (priv->window),
+                                           NULL, &nat_height);
           gtk_window_resize (GTK_WINDOW (priv->window), FIXED_WIDTH,
-                             nat.height);
+                             nat_height);
           return;
         }
     }
