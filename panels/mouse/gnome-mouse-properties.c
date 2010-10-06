@@ -366,7 +366,7 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 
 			XFree (data);
 		}
-		gdk_error_trap_pop ();
+		gdk_error_trap_pop_ignored ();
 
 		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
 	}
@@ -417,7 +417,7 @@ find_synaptics (void)
 			XFree (data);
 			ret = TRUE;
 		}
-		gdk_error_trap_pop ();
+		gdk_error_trap_pop_ignored ();
 
 		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
 
