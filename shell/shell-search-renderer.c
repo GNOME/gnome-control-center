@@ -221,8 +221,8 @@ static void
 shell_search_renderer_render (GtkCellRenderer      *cell,
                               cairo_t              *cr,
                               GtkWidget            *widget,
-                              GdkRectangle         *background_area,
-                              GdkRectangle         *cell_area,
+                              const GdkRectangle   *background_area,
+                              const GdkRectangle   *cell_area,
                               GtkCellRendererState  flags)
 {
   ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (cell)->priv;
