@@ -32,6 +32,7 @@
 
 #include "gconf-property-editor.h"
 
+#include "gnome-keyboard-properties.h"
 #include "gnome-keyboard-properties-a11y.h"
 #include "gnome-keyboard-properties-xkb.h"
 
