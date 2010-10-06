@@ -1653,7 +1653,8 @@ static PangoLayout *
 get_display_name (App *app,
 		  GnomeOutputInfo *output)
 {
-    const char *text;
+    PangoLayout *layout;
+    char *text;
 
     if (app->current_configuration->clone) {
 	/* Translators:  this is the feature where what you see on your laptop's
@@ -1661,12 +1662,20 @@ get_display_name (App *app,
 	 * used as an adjective, not as a verb.  For example, the Spanish
 	 * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 	 */
-	text = _("Mirror Screens");
-    } else
-	text = output->display_name;
+	text = g_strdup(_("Mirror Screens"));
+    } else {
+        char *resolution;
 
-    return gtk_widget_create_pango_layout (
-	GTK_WIDGET (app->area), text);
+        resolution = make_resolution_string (output->width, output->height);
+        text = g_strdup_printf ("%s\n%s", output->display_name, resolution);
+        g_free (resolution);
+    }
+
+    layout = gtk_widget_create_pango_layout (GTK_WIDGET (app->area), text);
+    g_free (text);
+    pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
+
+    return layout;
 }
 
 static void
