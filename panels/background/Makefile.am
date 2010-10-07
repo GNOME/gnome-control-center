@@ -10,6 +10,7 @@ dist_ui_DATA = \
 
 INCLUDES =						\
 	$(PANEL_CFLAGS)					\
+	$(GNOMECC_CAPPLETS_CFLAGS)			\
 	$(XML_CFLAGS)					\
 	$(GNOME_DESKTOP_CFLAGS)				\
 	$(DBUS_CFLAGS)					\
