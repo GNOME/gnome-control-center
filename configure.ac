@@ -132,6 +132,7 @@ PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-3.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 PKG_CHECK_MODULES(GIO, gio-2.0)
+PKG_CHECK_MODULES(XML, libxml-2.0)
 
 gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-3.0`
 gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-3.0`

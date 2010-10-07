@@ -10,7 +10,7 @@ dist_ui_DATA = \
 
 INCLUDES =						\
 	$(PANEL_CFLAGS)					\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(XML_CFLAGS)					\
 	$(GNOME_DESKTOP_CFLAGS)				\
 	$(DBUS_CFLAGS)					\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
@@ -38,7 +38,12 @@ libbackground_la_SOURCES =		\
 	gnome-wp-info.h  gnome-wp-item.h  gnome-wp-xml.h
 
 
-libbackground_la_LIBADD = $(PANEL_LIBS) $(DBUS_LIBS) $(GNOME_DESKTOP_LIBS)
+libbackground_la_LIBADD = \
+	$(PANEL_LIBS) \
+	$(DBUS_LIBS) \
+	$(GNOME_DESKTOP_LIBS) \
+	$(XML_LIBS)
+
 libbackground_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 if WITH_LIBSOCIALWEB

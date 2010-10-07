@@ -11,7 +11,10 @@ libdefault_applications_la_SOURCES = \
 	gnome-da-xml.c gnome-da-xml.h \
 	gnome-da-item.c gnome-da-item.h
 
-libdefault_applications_la_LIBADD = $(PANEL_LIBS)
+libdefault_applications_la_LIBADD = \
+	$(PANEL_LIBS) \
+	$(XML_LIBS)
+
 libdefault_applications_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 bin_SCRIPTS = gnome-at-visual gnome-at-mobility
@@ -45,7 +48,7 @@ xmldata_DATA = $(xmldata_in_files:.xml.in=.xml)
 
 INCLUDES   = 					\
 	$(GNOMECC_CAPPLETS_CFLAGS)		\
-	$(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS)	\
+	$(XML_CFLAGS)				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"\
 	-DGNOMECC_UI_DIR=\""$(uidir)"\"		\
 	-DGNOMECC_APPS_DIR=\""$(xmldatadir)"\"
