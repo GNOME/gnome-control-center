@@ -41,7 +41,7 @@
 
   <!-- Avoid the shell having a launcher for itself -->
   <Exclude>
-    <Filename>gnomecc.desktop</Filename>
+    <Filename>gnome-control-center.desktop</Filename>
   </Exclude>
 
   <!-- Personal category -->
@@ -122,7 +122,10 @@
       <And>
         <Category>Settings</Category>
         <Not>
-          <Category>X-GNOME-Settings-Panel</Category>
+          <Or>
+            <Category>X-GNOME-Settings-Panel</Category>
+            <Filename>gnome-control-center.desktop</Filename>
+          </Or>
         </Not>
       </And>
     </Include>
