@@ -1753,8 +1753,6 @@ paint_output (App *app, cairo_t *cr, int i)
     g_debug ("%f %f %f %f", x, y, w * scale + 0.5, h * scale + 0.5);
 #endif
 
-    cairo_save (cr);
-
     cairo_translate (cr,
 		     x + (w * scale + 0.5) / 2,
 		     y + (h * scale + 0.5) / 2);
