@@ -49,7 +49,7 @@ typedef struct _CcPanelClass  CcPanelClass;
 /**
  * CcPanel:
  *
- * The contents of this struct are private should not be accessed directly.
+ * The contents of this struct are private and should not be accessed directly.
  */
 struct _CcPanel
 {
@@ -60,7 +60,7 @@ struct _CcPanel
 /**
  * CcPanelClass:
  *
- * The contents of this struct are private should not be accessed directly.
+ * The contents of this struct are private and should not be accessed directly.
  */
 struct _CcPanelClass
 {
