@@ -60,7 +60,6 @@ struct App
     GtkWidget	   *resolution_combo;
     GtkWidget	   *refresh_combo;
     GtkWidget	   *rotation_combo;
-    GtkWidget	   *panel_checkbox;
     GtkWidget	   *clone_checkbox;
     GtkWidget	   *clone_label;
     GtkWidget	   *show_icon_checkbox;
@@ -82,11 +81,6 @@ struct App
 	APPLYING_VERSION_1,
 	APPLYING_VERSION_2
     } apply_configuration_state;
-};
-
-/* Response codes for custom buttons in the main dialog */
-enum {
-    RESPONSE_MAKE_DEFAULT = 1
 };
 
 static void rebuild_gui (App *app);
@@ -692,7 +686,6 @@ rebuild_gui (App *app)
 #if 0
     g_debug ("sensitive: %d, on: %d", sensitive, app->current_output->on);
 #endif
-    gtk_widget_set_sensitive (app->panel_checkbox, sensitive);
 
     app->ignore_gui_changes = FALSE;
 }
@@ -2159,19 +2152,6 @@ on_detect_displays (GtkWidget *widget, gpointer data)
     }
 }
 
-#define SHOW_ICON_KEY "/apps/gnome_settings_daemon/xrandr/show_notification_icon"
-
-
-static void
-on_show_icon_toggled (GtkWidget *widget, gpointer data)
-{
-    GtkToggleButton *tb = GTK_TOGGLE_BUTTON (widget);
-    App *app = data;
-
-    gconf_client_set_bool (app->client, SHOW_ICON_KEY,
-			   gtk_toggle_button_get_active (tb), NULL);
-}
-
 static GnomeOutputInfo *
 get_nearest_output (GnomeRRConfig *configuration, int x, int y)
 {
@@ -2326,81 +2306,6 @@ apply_button_clicked_cb (GtkButton *button, gpointer data)
     app->apply_button_clicked_timestamp = gtk_get_current_event_time ();
 }
 
-static void
-success_dialog_for_make_default (App *app)
-{
-    GtkWidget *dialog;
-    GtkWidget *toplevel;
-
-    toplevel = gtk_widget_get_toplevel (app->panel);
-
-    dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
-				     GTK_DIALOG_MODAL,
-				     GTK_MESSAGE_INFO,
-				     GTK_BUTTONS_OK,
-				     _("The monitor configuration has been saved"));
-    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-					      _("This configuration will be used the next time someone logs in."));
-
-    gtk_dialog_run (GTK_DIALOG (dialog));
-    gtk_widget_destroy (dialog);
-}
-
-static void
-error_dialog_for_make_default (App *app, const char *error_text)
-{
-    error_message (app, _("Could not set the default configuration for monitors"), error_text);
-}
-
-static void
-make_default (App *app)
-{
-    char *command_line;
-    char *source_filename;
-    char *dest_filename;
-    char *dest_basename;
-    char *std_error;
-    gint exit_status;
-    GError *error;
-
-    if (!sanitize_and_save_configuration (app))
-	return;
-
-    dest_filename = gconf_client_get_string (app->client, "/apps/gnome_settings_daemon/xrandr/default_configuration_file", NULL);
-    if (!dest_filename)
-	return; /* FIXME: present an error? */
-
-    dest_basename = g_path_get_basename (dest_filename);
-
-    source_filename = gnome_rr_config_get_intended_filename ();
-
-    command_line = g_strdup_printf ("pkexec %s/gnome-display-properties-install-systemwide %s %s",
-				    SBINDIR,
-				    source_filename,
-				    dest_basename);
-
-    error = NULL;
-    if (!g_spawn_command_line_sync (command_line, NULL, &std_error, &exit_status, &error))
-    {
-	error_dialog_for_make_default (app, error->message);
-	g_error_free (error);
-    }
-    else if (!WIFEXITED (exit_status) || WEXITSTATUS (exit_status) != 0)
-    {
-	error_dialog_for_make_default (app, std_error);
-    }
-    else
-    {
-	success_dialog_for_make_default (app);
-    }
-
-    g_free (std_error);
-    g_free (dest_filename);
-    g_free (dest_basename);
-    g_free (source_filename);
-    g_free (command_line);
-}
-
 static GtkWidget*
 _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 {
@@ -2500,21 +2405,9 @@ run_application (void)
     g_signal_connect (_gtk_builder_get_widget (builder, "detect_displays_button"),
 		      "clicked", G_CALLBACK (on_detect_displays), app);
 
-    app->show_icon_checkbox = _gtk_builder_get_widget (builder,
-						      "show_notification_icon");
-
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->show_icon_checkbox),
-				  gconf_client_get_bool (app->client, SHOW_ICON_KEY, NULL));
-
-    g_signal_connect (app->show_icon_checkbox, "toggled", G_CALLBACK (on_show_icon_toggled), app);
-
-    app->panel_checkbox = _gtk_builder_get_widget (builder, "panel_checkbox");
-
     make_text_combo (app->resolution_combo, 4);
     make_text_combo (app->refresh_combo, 3);
     make_text_combo (app->rotation_combo, -1);
-
-    g_assert (app->panel_checkbox);
 
     /* Scroll Area */
     app->area = (GtkWidget *)foo_scroll_area_new ();
@@ -2543,9 +2436,6 @@ run_application (void)
 
     g_signal_connect_swapped (_gtk_builder_get_widget (builder, "apply_button"),
                               "clicked", G_CALLBACK (apply), app);
-    g_signal_connect_swapped (_gtk_builder_get_widget (builder,
-                                                       "make_default_button"),
-                              "clicked", G_CALLBACK (make_default), app);
 
     g_object_weak_ref (G_OBJECT (app->panel), (GWeakNotify) destroy_app, app);
 
