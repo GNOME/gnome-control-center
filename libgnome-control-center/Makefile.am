@@ -17,14 +17,14 @@ libgnome_control_center_include_HEADERS =	\
 	$(NULL)
 
 libgnome_control_center_la_SOURCES =		\
+	cc-marshal.c				\
+	cc-marshal.h				\
 	cc-panel.c				\
 	cc-panel.h				\
 	cc-setting-editor.c			\
 	cc-setting-editor.h			\
 	cc-shell.c				\
 	cc-shell.h				\
-	gconf-property-editor-marshal.c 	\
-	gconf-property-editor-marshal.h 	\
 	gconf-property-editor.c			\
 	gconf-property-editor.h			\
 	$(NULL)

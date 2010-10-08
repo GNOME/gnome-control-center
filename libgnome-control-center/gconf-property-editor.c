@@ -30,7 +30,7 @@
 #include <stdlib.h>
 
 #include "gconf-property-editor.h"
-#include "gconf-property-editor-marshal.h"
+#include "cc-marshal.h"
 
 enum {
 	VALUE_CHANGED,
@@ -172,7 +172,7 @@ gconf_property_editor_class_init (GConfPropertyEditorClass *class)
 			      G_TYPE_FROM_CLASS (object_class), 0,
 			      G_STRUCT_OFFSET (GConfPropertyEditorClass, value_changed),
 			      NULL, NULL,
-			      (GSignalCMarshaller) gconf_property_editor_marshal_VOID__STRING_POINTER,
+			      (GSignalCMarshaller) cc_marshal_VOID__STRING_POINTER,
 			      G_TYPE_NONE, 2, G_TYPE_STRING, G_TYPE_POINTER);
 
 	g_object_class_install_property

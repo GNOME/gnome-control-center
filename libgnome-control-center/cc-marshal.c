@@ -1,15 +1,15 @@
 #include <glib.h>
 #include <glib-object.h>
-#include "gconf-property-editor-marshal.h"
+#include "cc-marshal.h"
 
 /* VOID:STRING,POINTER (peditor-marshal.list:25) */
 void
-gconf_property_editor_marshal_VOID__STRING_POINTER (GClosure     *closure,
-                                                    GValue       *return_value,
-                                                    guint         n_param_values,
-                                                    const GValue *param_values,
-                                                    gpointer      invocation_hint,
-                                                    gpointer      marshal_data)
+cc_marshal_VOID__STRING_POINTER (GClosure     *closure,
+				 GValue       *return_value,
+				 guint         n_param_values,
+				 const GValue *param_values,
+				 gpointer      invocation_hint,
+				 gpointer      marshal_data)
 {
   typedef void (*GMarshalFunc_VOID__STRING_POINTER) (gpointer     data1,
                                                      gpointer     arg_1,

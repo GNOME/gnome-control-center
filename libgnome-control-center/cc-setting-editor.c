@@ -20,12 +20,18 @@
  */
 
 #include "cc-setting-editor.h"
+#include "cc-marshal.h"
 
 enum {
-    PIXBUF_COL,
-    TEXT_COL,
-    APP_INFO_COL,
-    N_COLUMNS
+  PIXBUF_COL,
+  TEXT_COL,
+  APP_INFO_COL,
+  N_COLUMNS
+};
+
+enum {
+  VALUE_CHANGED,
+  LAST_SIGNAL
 };
 
 typedef enum {
@@ -42,6 +48,8 @@ struct _CcSettingEditorPrivate
   gchar *key;
   GtkWidget *ui_control;
 };
+
+static guint seditor_signals[LAST_SIGNAL] = { 0, };
 
 G_DEFINE_TYPE(CcSettingEditor, cc_setting_editor, G_TYPE_OBJECT)
 
@@ -72,6 +80,14 @@ cc_setting_editor_class_init (CcSettingEditorClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = cc_setting_editor_finalize;
+
+  /* Class signals */
+  seditor_signals[VALUE_CHANGED] = g_signal_new ("value-changed",
+                                                 G_TYPE_FROM_CLASS (klass), 0,
+                                                 G_STRUCT_OFFSET (CcSettingEditorClass, value_changed),
+                                                 NULL, NULL,
+                                                 (GSignalCMarshaller) cc_marshal_VOID__STRING_POINTER,
+                                                 G_TYPE_NONE, 2, G_TYPE_STRING, G_TYPE_POINTER);
 }
 
 static void
@@ -113,11 +129,13 @@ application_selection_changed_cb (GtkComboBox *combobox, CcSettingEditor *sedito
     gtk_tree_model_get (gtk_combo_box_get_model (combobox), &selected_row,
                          APP_INFO_COL, &app_info,
                          -1);
-    if (!g_app_info_set_as_default_for_type (app_info, seditor->priv->key, &error)) {
-      g_warning ("Could not set %s as default app for %s: %s",
-                 g_app_info_get_display_name (app_info),
-                 seditor->priv->key,
-                 error->message);
+    if (app_info != NULL) {
+      if (!g_app_info_set_as_default_for_type (app_info, seditor->priv->key, &error)) {
+        g_warning ("Could not set %s as default app for %s: %s",
+                   g_app_info_get_display_name (app_info),
+                   seditor->priv->key,
+                   error->message);
+      }
     }
   }
 }
@@ -146,6 +164,7 @@ cc_setting_editor_new_application (const gchar *mime_type, GtkWidget *combobox)
                                    mime_type,
                                    combobox);
 
+  /* Setup the combo box */
   model = gtk_list_store_new (3, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_POINTER);
 
   renderer = gtk_cell_renderer_pixbuf_new ();
