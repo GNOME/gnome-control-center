@@ -51,7 +51,7 @@ struct _CcSettingEditorPrivate
 
 static guint seditor_signals[LAST_SIGNAL] = { 0, };
 
-G_DEFINE_TYPE(CcSettingEditor, cc_setting_editor, G_TYPE_OBJECT)
+G_DEFINE_TYPE(CcSettingEditor, cc_setting_editor, GTK_TYPE_VBOX)
 
 static void
 cc_setting_editor_finalize (GObject *object)
@@ -114,6 +114,9 @@ cc_setting_editor_new (SettingType s_type,
     seditor->priv->settings_prefix = g_strdup (settings_prefix);
   }
 
+  /* Add the ui control to the box */
+  gtk_box_pack_start (GTK_BOX (seditor), ui_control, TRUE, FALSE, 3);
+
   return seditor;
 }
 
@@ -140,32 +143,48 @@ application_selection_changed_cb (GtkComboBox *combobox, CcSettingEditor *sedito
   }
 }
 
+static gboolean
+is_separator (GtkTreeModel *model, GtkTreeIter *iter, gpointer sep_index)
+{
+    GtkTreePath *path;
+    gboolean result;
+
+    path = gtk_tree_model_get_path (model, iter);
+    result = gtk_tree_path_get_indices (path)[0] == GPOINTER_TO_INT (sep_index);
+    gtk_tree_path_free (path);
+
+    return result;
+}
+
 /**
  * cc_setting_editor_new_application:
  * @mime_type: The MIME type to configure application for.
- * @combobox: The combo box widget used to display the list of applications for the given type.
  *
  * Create a new #CCSettingEditor object to configure the default application
  * for the given MIME type.
  *
  * Return value: A newly created #CCSettingEditor object.
  */
-GObject *
-cc_setting_editor_new_application (const gchar *mime_type, GtkWidget *combobox)
+GtkWidget *
+cc_setting_editor_new_application (const gchar *mime_type)
 {
   CcSettingEditor *seditor;
   GList *app_list;
   GtkListStore *model;
   GtkCellRenderer *renderer;
   GAppInfo *default_app;
+  GtkWidget *combobox;
 
+  /* Setup the combo box */
+  model = gtk_list_store_new (3, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_POINTER);
+  combobox = gtk_combo_box_new_with_model (GTK_TREE_MODEL (model));
+  gtk_widget_show (combobox);
+
+  /* Create the CcSettingEditor widget */
   seditor = cc_setting_editor_new (SETTING_TYPE_APPLICATION,
                                    NULL,
                                    mime_type,
                                    combobox);
-
-  /* Setup the combo box */
-  model = gtk_list_store_new (3, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_POINTER);
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   /* not all cells have a pixbuf, this prevents the combo box to shrink */
@@ -187,6 +206,9 @@ cc_setting_editor_new_application (const gchar *mime_type, GtkWidget *combobox)
   default_app = g_app_info_get_default_for_type (mime_type, FALSE);
 
   app_list = g_app_info_get_all_for_type (mime_type);
+  gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX (combobox), is_separator,
+                                        GINT_TO_POINTER (g_list_length (app_list)), NULL);
+
   while (app_list != NULL) {
     GtkTreeIter new_row;
     GAppInfo *app_info = (GAppInfo *) app_list->data;
@@ -212,7 +234,65 @@ cc_setting_editor_new_application (const gchar *mime_type, GtkWidget *combobox)
   g_signal_connect (combobox, "changed",
                     G_CALLBACK (application_selection_changed_cb), seditor);
 
-  return (GObject *) seditor;
+  return (GtkWidget *) seditor;
+}
+
+static void
+boolean_value_changed_cb (GtkToggleButton *toggle_button, CcSettingEditor *seditor)
+{
+  g_settings_set_boolean (seditor->priv->settings,
+                          seditor->priv->key,
+                          gtk_toggle_button_get_active (toggle_button));
+}
+
+/**
+ * cc_setting_editor_new_boolean:
+ * @settings_prefix: The settings prefix for the key.
+ * @key: The settings key to associate with.
+ *
+ * Create a new #CCSettingEditor object to configure a boolean setting.
+ *
+ * Return value: A newly created #CCSettingEditor object.
+ */
+GtkWidget *
+cc_setting_editor_new_boolean (const gchar *label,
+                               const gchar *settings_prefix,
+                               const gchar *key)
+{
+  GtkWidget *checkbox;
+  CcSettingEditor *seditor;
+
+  checkbox = gtk_check_button_new_with_label (label);
+  gtk_widget_show (checkbox);
+
+  /* Create the CcSettingEditor widget */
+  seditor = cc_setting_editor_new (SETTING_TYPE_GSETTINGS,
+                                   settings_prefix,
+                                   key,
+                                   checkbox);
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox),
+                                g_settings_get_boolean (seditor->priv->settings, seditor->priv->key));
+  g_signal_connect (checkbox, "toggled",
+                    G_CALLBACK (boolean_value_changed_cb), seditor);
+
+  return (GtkWidget *) seditor;
+}
+
+/**
+ * cc_setting_editor_get_key:
+ * @seditor: a #CCSettingEditor object.
+ *
+ * Get the settings key associated with the given #CCSettingEditor object.
+ *
+ * Return value: The settings key associated with the given #CCSettingEditor object.
+ */
+const gchar *
+cc_setting_editor_get_key (CcSettingEditor *seditor)
+{
+  g_return_val_if_fail (CC_IS_SETTING_EDITOR (seditor), NULL);
+
+  return seditor->priv->key;
 }
 
 /**

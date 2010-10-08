@@ -22,7 +22,6 @@
 #ifndef __CC_SETTING_EDITOR_H
 #define __CC_SETTING_EDITOR_H
 
-#include <glib-object.h>
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
@@ -47,7 +46,7 @@ typedef struct _CcSettingEditorClass   CcSettingEditorClass;
 struct _CcSettingEditor
 {
   /*< private >*/
-  GObject parent;
+  GtkVBox parent;
   CcSettingEditorPrivate *priv;
 };
 
@@ -59,16 +58,20 @@ struct _CcSettingEditor
 struct _CcSettingEditorClass
 {
   /*< private >*/
-  GObjectClass parent_class;
+  GtkVBoxClass parent_class;
 
   void (* value_changed) (CcSettingEditor *seditor, const gchar *key, GVariant *value);
 };
 
-GType      cc_setting_editor_get_type (void);
+GType        cc_setting_editor_get_type (void);
 
-GObject   *cc_setting_editor_new_application (const gchar *mime_type, GtkWidget *combobox);
+GtkWidget   *cc_setting_editor_new_application (const gchar *mime_type);
+GtkWidget   *cc_setting_editor_new_boolean (const gchar *label,
+                                            const gchar *settings_prefix,
+                                            const gchar *key);
 
-GtkWidget *cc_setting_editor_get_ui_control (CcSettingEditor *seditor);
+const gchar *cc_setting_editor_get_key (CcSettingEditor *editor);
+GtkWidget   *cc_setting_editor_get_ui_control (CcSettingEditor *seditor);
 
 G_END_DECLS
 

@@ -24,8 +24,8 @@
 int
 main (int argc, char *argv[])
 {
-  GtkWidget *dialog, *w;
-  GObject *seditor;
+  GtkWidget *dialog;
+  GtkWidget *seditor;
 
   gtk_init (&argc, &argv);
 
@@ -35,10 +35,9 @@ main (int argc, char *argv[])
   g_signal_connect (dialog, "response", G_CALLBACK (gtk_main_quit), NULL);
 
   /* Create a default application selector */
-  w = gtk_combo_box_new ();
   //seditor = cc_setting_editor_new_application ("x-scheme-handler/http", w);
-  seditor = cc_setting_editor_new_application ("text/plain", w);
-  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), w, TRUE, FALSE, 3);
+  seditor = cc_setting_editor_new_application ("text/plain");
+  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), seditor, TRUE, FALSE, 3);
 
   /* Run the dialog */
   gtk_widget_show_all (dialog);

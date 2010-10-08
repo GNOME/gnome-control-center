@@ -13,7 +13,6 @@ libgnome_control_center_include_HEADERS =	\
 	cc-setting-editor.h			\
 	cc-shell.h				\
 	gconf-property-editor.h			\
-	gconf-property-editor-marshal.h 	\
 	$(NULL)
 
 libgnome_control_center_la_SOURCES =		\
