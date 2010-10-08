@@ -61,6 +61,7 @@ struct App
     GtkWidget	   *refresh_combo;
     GtkWidget	   *rotation_combo;
     GtkWidget	   *clone_checkbox;
+    GtkWidget	   *primary_display_checkbox;
     GtkWidget	   *clone_label;
     GtkWidget	   *show_icon_checkbox;
 
@@ -686,6 +687,7 @@ rebuild_gui (App *app)
 #if 0
     g_debug ("sensitive: %d, on: %d", sensitive, app->current_output->on);
 #endif
+    gtk_widget_set_sensitive (app->primary_display_checkbox, sensitive);
 
     app->ignore_gui_changes = FALSE;
 }
@@ -2405,9 +2407,13 @@ run_application (void)
     g_signal_connect (_gtk_builder_get_widget (builder, "detect_displays_button"),
 		      "clicked", G_CALLBACK (on_detect_displays), app);
 
+    app->primary_display_checkbox = _gtk_builder_get_widget (builder, "primary_display_checkbox");
+
     make_text_combo (app->resolution_combo, 4);
     make_text_combo (app->refresh_combo, 3);
     make_text_combo (app->rotation_combo, -1);
+
+    g_assert (app->primary_display_checkbox);
 
     /* Scroll Area */
     app->area = (GtkWidget *)foo_scroll_area_new ();
