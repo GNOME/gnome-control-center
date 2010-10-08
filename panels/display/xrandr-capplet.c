@@ -1687,9 +1687,9 @@ paint_background (FooScrollArea *area,
     widget_style = gtk_widget_get_style (widget);
 
     cairo_set_source_rgb (cr,
-                          widget_style->base[GTK_STATE_SELECTED].red / 65535.0,
-                          widget_style->base[GTK_STATE_SELECTED].green / 65535.0,
-                          widget_style->base[GTK_STATE_SELECTED].blue / 65535.0);
+                          widget_style->mid[GTK_STATE_NORMAL].red / 65535.0,
+                          widget_style->mid[GTK_STATE_NORMAL].green / 65535.0,
+                          widget_style->mid[GTK_STATE_NORMAL].blue / 65535.0);
 
     cairo_rectangle (cr,
 		     viewport.x, viewport.y,
@@ -1700,9 +1700,9 @@ paint_background (FooScrollArea *area,
     foo_scroll_area_add_input_from_fill (area, cr, on_canvas_event, NULL);
 
     cairo_set_source_rgb (cr,
-                          widget_style->dark[GTK_STATE_SELECTED].red / 65535.0,
-                          widget_style->dark[GTK_STATE_SELECTED].green / 65535.0,
-                          widget_style->dark[GTK_STATE_SELECTED].blue / 65535.0);
+                          widget_style->dark[GTK_STATE_NORMAL].red / 65535.0,
+                          widget_style->dark[GTK_STATE_NORMAL].green / 65535.0,
+                          widget_style->dark[GTK_STATE_NORMAL].blue / 65535.0);
 
     cairo_stroke (cr);
 }
