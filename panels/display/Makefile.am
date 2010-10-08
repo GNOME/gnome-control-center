@@ -28,18 +28,6 @@ libdisplay_la_SOURCES =		\
 libdisplay_la_LIBADD = $(DBUS_LIBS) $(PANEL_LIBS)
 libdisplay_la_LDFLAGS = $(PANEL_LDFLAGS) $(DISPLAY_CAPPLET_LIBS) $(GNOME_DESKTOP_LIBS)
 
-sbin_PROGRAMS = gnome-display-properties-install-systemwide
-
-gnome_display_properties_install_systemwide_SOURCES =	\
-	gnome-display-properties-install-systemwide.c
-
-gnome_display_properties_install_systemwide_LDADD =	\
-	$(GLIB_LIBS)
-
-polkit_policydir = $(datadir)/polkit-1/actions
-dist_polkit_policy_DATA =					\
-	org.gnome.randr.policy
-
 # You will need a recent intltool or the patch from this bug
 # http://bugzilla.gnome.org/show_bug.cgi?id=462312
 @INTLTOOL_POLICY_RULE@
