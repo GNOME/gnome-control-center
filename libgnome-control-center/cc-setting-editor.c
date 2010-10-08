@@ -162,6 +162,8 @@ cc_setting_editor_new_application (const gchar *mime_type, GtkWidget *combobox)
                                   "text", TEXT_COL,
                                   NULL);
 
+  gtk_combo_box_set_model (GTK_COMBO_BOX (combobox), GTK_TREE_MODEL (model));
+
   /* Retrieve list of applications for the given MIME type */
   default_app = g_app_info_get_default_for_type (mime_type, FALSE);
 
@@ -175,7 +177,7 @@ cc_setting_editor_new_application (const gchar *mime_type, GtkWidget *combobox)
     gtk_list_store_append (model, &new_row);
     gtk_list_store_set (model, &new_row,
                         PIXBUF_COL, /* FIXME */ NULL,
-                        TEXT_COL, g_app_info_get_display_name (app_info),
+                        TEXT_COL, g_app_info_get_name (app_info),
                         APP_INFO_COL, app_info,
                         -1);
 
@@ -187,8 +189,6 @@ cc_setting_editor_new_application (const gchar *mime_type, GtkWidget *combobox)
 
     app_list = g_list_remove (app_list, app_info);
   }
-
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combobox), GTK_TREE_MODEL (model));
 
   g_signal_connect (combobox, "changed",
                     G_CALLBACK (application_selection_changed_cb), seditor);
