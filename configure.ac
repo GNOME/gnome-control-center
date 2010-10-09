@@ -48,55 +48,12 @@ GNOME_MAINTAINER_MODE_DEFINES
 AC_PATH_XTRA
 x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
 
-AC_CHECK_FUNC(XScreenSaverQueryInfo, [
-  TYPING_BREAK="typing-break"], [
-  save_LIBS=$LIBS
-  LIBS="$LIBS $X_PRE_LIBS $X_LIBS -lXss -lXext -lX11"
-  AC_CHECK_LIB(Xss, XScreenSaverQueryInfo, [
-    TYPING_BREAK="typing-break"
-    SCREENSAVER_LIBS="$X_PRE_LIBS $X_LIBS -lXss -lXext -lX11"], [
-    LIBS=$save_LIBS
-    LIBS="$LIBS $X_PRE_LIBS $X_LIBS -lXext -lX11"
-    AC_CHECK_LIB(Xext, XScreenSaverQueryInfo, [
-      TYPING_BREAK="typing-break"
-      SCREENSAVER_LIBS="$X_PRE_LIBS $X_LIBS -lXext -lX11"],[])])
-  LIBS=$save_LIBS])
-AC_SUBST(TYPING_BREAK)
-AC_SUBST(SCREENSAVER_LIBS)
-
 PKG_CHECK_MODULES(LIBCANBERRA_GTK, libcanberra-gtk3, [
   CANBERRA_GTK=1
   AC_SUBST(LIBCANBERRA_GTK_CFLAGS)
   AC_SUBST(LIBCANBERRA_GTK_LIBS)
   ], [:])
 AM_CONDITIONAL(HAVE_LIBCANBERRA_GTK, test "x$CANBERRA_GTK" = "x1")
-
-AM_CONDITIONAL(HAVE_TYPING_BREAK, test "x$TYPING_BREAK" = xtyping-break)
-
-dnl app indicator
-APPINDICATOR_REQUIRED=0.0.7
-
-AC_ARG_ENABLE(appindicator,
-                        AS_HELP_STRING([--enable-appindicator[=@<:@no/auto/yes@:>@]],[Build support for application indicators ]),
-                        [enable_appindicator=$enableval],
-                        [enable_appindicator="auto"])
-
-if test x$enable_appindicator = xauto ; then
-        PKG_CHECK_EXISTS([appindicator-0.1 >= $APPINDICATOR_REQUIRED],
-                         enable_appindicator="yes",
-                         enable_appindicator="no")
-fi
-
-if test x$enable_appindicator = xyes ; then
-        PKG_CHECK_EXISTS([appindicator-0.1 >= $APPINDICATOR_REQUIRED],,
-                         AC_MSG_ERROR([appindicator-0.1 is not installed]))
-        PKG_CHECK_MODULES(APP_INDICATOR,
-                        appindicator-0.1 >= $APPINDICATOR_REQUIRED)
-        AC_SUBST(APP_INDICATOR_CFLAGS)
-        AC_SUBST(APP_INDICATOR_LIBS)
-        AC_DEFINE(HAVE_APP_INDICATOR, 1, [Have AppIndicator])
-fi
-AM_CONDITIONAL(HAVE_APP_INDICATOR, test x"$enable_appindicator" = xyes)
 
 dnl keyboard-properties-capplet
 savecppflags=$CPPFLAGS
@@ -129,7 +86,6 @@ PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-3.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
-PKG_CHECK_MODULES(TYPING, glib-2.0 > 2.11 gconf-2.0 gtk+-3.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 PKG_CHECK_MODULES(GIO, gio-2.0)
 PKG_CHECK_MODULES(XML, libxml-2.0)
@@ -373,7 +329,6 @@ panels/universal-access/gnome-universal-access-panel.desktop.in
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in
-typing-break/Makefile
 ])
 
 dnl due to a bug in intltool we need to expand something from the root last control-center.spec
