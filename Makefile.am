@@ -2,7 +2,7 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 SUBDIRS = po libgnome-control-center shell panels \
 	  help docs
-DIST_SUBDIRS = po help shell typing-break docs examples panels libgnome-control-center
+DIST_SUBDIRS = po help shell docs examples panels libgnome-control-center
 
 if BUILD_EXAMPLES
 SUBDIRS += examples
