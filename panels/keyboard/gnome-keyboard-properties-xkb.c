@@ -29,8 +29,6 @@
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
 
-#include "gconf-property-editor.h"
-
 #include "gnome-keyboard-properties-xkb.h"
 
 #include <libgnomekbd/gkbd-desktop-config.h>
@@ -99,7 +97,7 @@ setup_model_entry (GtkBuilder * dialog)
 			   GKBD_KEYBOARD_CONFIG_KEY_MODEL, dialog);
 
 	g_signal_connect (xkb_keyboard_settings, "changed",
-			  (GCallback) model_key_changed, dialog);
+			  G_CALLBACK (model_key_changed), dialog);
 }
 
 static void
@@ -133,13 +131,16 @@ reset_to_defaults (GtkWidget * button, GtkBuilder * dialog)
 }
 
 static void
-chk_separate_group_per_window_toggled (GConfPropertyEditor * peditor,
+chk_separate_group_per_window_toggled (GSettings * settings,
 				       const gchar * key,
-				       const GConfValue * value,
 				       GtkBuilder * dialog)
 {
-	gtk_widget_set_sensitive (WID ("chk_new_windows_inherit_layout"),
-				  gconf_value_get_bool (value));
+	if (!strcmp (key, GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW)) {
+		gboolean gpw = g_settings_get_boolean (settings, key);
+		gtk_widget_set_sensitive (WID
+					  ("chk_new_windows_inherit_layout"),
+					  gpw);
+	}
 }
 
 static void
@@ -156,7 +157,6 @@ chk_new_windows_inherit_layout_toggled (GtkWidget *
 void
 setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 {
-	GObject *peditor;
 	GtkWidget *chk_new_windows_inherit_layout =
 	    WID ("chk_new_windows_inherit_layout");
 
@@ -179,12 +179,13 @@ setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 
 	setup_model_entry (dialog);
 
-	peditor = gconf_peditor_new_boolean
-	    (changeset, (gchar *) GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW,
-	     WID ("chk_separate_group_per_window"), NULL);
-
-	g_signal_connect (peditor, "value-changed", (GCallback)
-			  chk_separate_group_per_window_toggled, dialog);
+	g_settings_bind (xkb_desktop_settings,
+			 GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW,
+			 WID ("chk_separate_group_per_window"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_signal_connect (xkb_desktop_settings, "changed",
+			  G_CALLBACK
+			  (chk_separate_group_per_window_toggled), dialog);
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 	if (strcmp (xkl_engine_get_backend_name (engine), "XKB"))
@@ -209,8 +210,10 @@ setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 			  dialog);
 
 	g_signal_connect (G_OBJECT (chk_new_windows_inherit_layout),
-			  "toggled", (GCallback)
-			  chk_new_windows_inherit_layout_toggled, dialog);
+			  "toggled",
+			  G_CALLBACK
+			  (chk_new_windows_inherit_layout_toggled),
+			  dialog);
 
 	g_signal_connect_swapped (G_OBJECT (WID ("xkb_layout_options")),
 				  "clicked",
