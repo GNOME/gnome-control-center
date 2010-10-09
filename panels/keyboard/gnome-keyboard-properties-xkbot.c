@@ -124,7 +124,8 @@ xkb_options_select (gchar * optionname)
 	}
 
 	if (!already_selected) {
-		options_list = gkbd_strv_append (options_list, g_strdup (optionname));
+		options_list =
+		    gkbd_strv_append (options_list, g_strdup (optionname));
 		xkb_options_set_selected_list (options_list);
 	}
 
@@ -141,7 +142,7 @@ xkb_options_deselect (gchar * optionname)
 		while (*option != NULL) {
 			gchar *id = *option;
 			if (!strcmp (id, optionname)) {
-				gkbd_strv_behead(option);
+				gkbd_strv_behead (option);
 			} else
 				option++;
 		}
@@ -506,5 +507,5 @@ void
 xkb_options_register_conf_listener (GtkBuilder * dialog)
 {
 	g_signal_connect (xkb_keyboard_settings, "changed",
-			  (GCallback) xkb_options_update, dialog);
+			  G_CALLBACK (xkb_options_update), dialog);
 }

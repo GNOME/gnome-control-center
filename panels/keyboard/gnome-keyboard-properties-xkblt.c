@@ -437,5 +437,5 @@ void
 xkb_layouts_register_conf_listener (GtkBuilder * dialog)
 {
 	g_signal_connect (xkb_keyboard_settings, "changed",
-			  (GCallback) xkb_layouts_update_list, dialog);
+			  G_CALLBACK (xkb_layouts_update_list), dialog);
 }
