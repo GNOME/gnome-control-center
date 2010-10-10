@@ -237,14 +237,6 @@ cc_setting_editor_new_application (const gchar *mime_type)
   return (GtkWidget *) seditor;
 }
 
-static void
-boolean_value_changed_cb (GtkToggleButton *toggle_button, CcSettingEditor *seditor)
-{
-  g_settings_set_boolean (seditor->priv->settings,
-                          seditor->priv->key,
-                          gtk_toggle_button_get_active (toggle_button));
-}
-
 /**
  * cc_setting_editor_new_boolean:
  * @settings_prefix: The settings prefix for the key.
@@ -273,8 +265,7 @@ cc_setting_editor_new_boolean (const gchar *label,
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox),
                                 g_settings_get_boolean (seditor->priv->settings, seditor->priv->key));
-  g_signal_connect (checkbox, "toggled",
-                    G_CALLBACK (boolean_value_changed_cb), seditor);
+  g_settings_bind (seditor->priv->settings, key, checkbox, "active", G_SETTINGS_BIND_DEFAULT);
 
   return (GtkWidget *) seditor;
 }
