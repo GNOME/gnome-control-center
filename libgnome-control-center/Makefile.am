@@ -46,7 +46,7 @@ noinst_PROGRAMS = test-setting-editor
 test_setting_editor_SOURCES = test-setting-editor.c
 test_setting_editor_LDADD =							\
 	$(CAPPLET_LIBS)								\
-	$(top_builddir)/libgnome-control-center/libgnome-control-center.la	\
+	$(builddir)/libgnome-control-center.la					\
 	$(NULL)
 
 pkgconfigdir=$(libdir)/pkgconfig
