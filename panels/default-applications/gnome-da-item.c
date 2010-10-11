@@ -21,12 +21,12 @@
 #include "gnome-da-capplet.h"
 #include "gnome-da-item.h"
 
-GnomeDAWebItem*
-gnome_da_web_item_new (void)
+GnomeDAURLItem*
+gnome_da_url_item_new (void)
 {
-    GnomeDAWebItem *item = NULL;
+    GnomeDAURLItem *item = NULL;
 
-    item = g_new0 (GnomeDAWebItem, 1);
+    item = g_new0 (GnomeDAURLItem, 1);
 
     return item;
 }
@@ -72,7 +72,7 @@ gnome_da_mobility_item_new (void)
 }
 
 void
-gnome_da_web_item_free (GnomeDAWebItem *item)
+gnome_da_url_item_free (GnomeDAURLItem *item)
 {
     g_return_if_fail (item != NULL);
 
@@ -82,8 +82,7 @@ gnome_da_web_item_free (GnomeDAWebItem *item)
     g_free (item->generic.icon_name);
     g_free (item->generic.icon_path);
 
-    g_free (item->tab_command);
-    g_free (item->win_command);
+    g_object_unref (item->app_info);
 
     g_free (item);
 }

@@ -85,17 +85,6 @@ struct _GnomeDACapplet {
     GtkWidget *visual_combo_box;
     GtkWidget *mobility_combo_box;
 
-    GtkWidget *web_browser_command_entry;
-    GtkWidget *web_browser_command_label;
-    GtkWidget *web_browser_terminal_checkbutton;
-    GtkWidget *default_radiobutton;
-    GtkWidget *new_win_radiobutton;
-    GtkWidget *new_tab_radiobutton;
-
-    GtkWidget *mail_reader_command_entry;
-    GtkWidget *mail_reader_command_label;
-    GtkWidget *mail_reader_terminal_checkbutton;
-
     GtkWidget *terminal_command_entry;
     GtkWidget *terminal_command_label;
     GtkWidget *terminal_exec_flag_entry;

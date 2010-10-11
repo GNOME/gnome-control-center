@@ -47,7 +47,7 @@ gnome_da_xml_get_bool (const xmlNode *parent, const gchar *val_name)
 	if (!xmlStrncmp (element->name, xml_val_name, len)) {
 	    xmlChar *cont = xmlNodeGetContent (element);
 
-	    if (!xmlStrcasecmp (cont, "true") || !xmlStrcasecmp (cont, "1"))
+	    if (!xmlStrcasecmp (cont, (const xmlChar *) "true") || !xmlStrcasecmp (cont, (const xmlChar *) "1"))
 		ret_val = TRUE;
 	    else
 		ret_val = FALSE;
@@ -91,7 +91,7 @@ gnome_da_xml_get_string (const xmlNode *parent, const gchar *val_name)
 	    }
 	    else {
 		for (i = 0; sys_langs[i] != NULL; i++) {
-		    if (!strcmp (sys_langs[i], node_lang)) {
+			if (!strcmp ((const char *) sys_langs[i], (const char *) node_lang)) {
 			ret_val = (gchar *) xmlNodeGetContent (element);
 			/* since sys_langs is sorted from most desirable to
 			 * least desirable, exit at first match
@@ -109,7 +109,7 @@ gnome_da_xml_get_string (const xmlNode *parent, const gchar *val_name)
 }
 
 static gboolean
-is_executable_valid (gchar *executable)
+is_executable_valid (const gchar *executable)
 {
     gchar *path;
 
@@ -129,8 +129,6 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
     xmlDoc *xml_doc;
     xmlNode *root, *section, *element;
     gchar *executable;
-    GnomeDAWebItem *web_item;
-    GnomeDASimpleItem *mail_item;
     GnomeDASimpleItem *media_item;
     GnomeDATermItem *term_item;
     GnomeDAVisualItem *visual_item;
@@ -144,56 +142,9 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
     root = xmlDocGetRootElement (xml_doc);
 
     for (section = root->children; section != NULL; section = section->next) {
-	if (!xmlStrncmp (section->name, "web-browsers", 12)) {
+	    if (!xmlStrncmp (section->name, (const xmlChar *) "terminals", 9)) {
 	    for (element = section->children; element != NULL; element = element->next) {
-		if (!xmlStrncmp (element->name, "web-browser", 11)) {
-		    executable = gnome_da_xml_get_string (element, "executable");
-		    if (is_executable_valid (executable)) {
-			web_item = gnome_da_web_item_new ();
-
-			web_item->generic.name = gnome_da_xml_get_string (element, "name");
-			web_item->generic.executable = executable;
-			web_item->generic.command = gnome_da_xml_get_string (element, "command");
-			web_item->generic.icon_name = gnome_da_xml_get_string (element, "icon-name");
-
-			web_item->run_in_terminal = gnome_da_xml_get_bool (element, "run-in-terminal");
-			web_item->netscape_remote = gnome_da_xml_get_bool (element, "netscape-remote");
-			if (web_item->netscape_remote) {
-			    web_item->tab_command = gnome_da_xml_get_string (element, "tab-command");
-			    web_item->win_command = gnome_da_xml_get_string (element, "win-command");
-			}
-
-			capplet->web_browsers = g_list_append (capplet->web_browsers, web_item);
-		    }
-		    else
-			g_free (executable);
-		}
-	    }
-	}
-	else if (!xmlStrncmp (section->name, "mail-readers", 12)) {
-	    for (element = section->children; element != NULL; element = element->next) {
-		if (!xmlStrncmp (element->name, "mail-reader", 11)) {
-		    executable = gnome_da_xml_get_string (element, "executable");
-		    if (is_executable_valid (executable)) {
-			mail_item = gnome_da_simple_item_new ();
-
-			mail_item->generic.name = gnome_da_xml_get_string (element, "name");
-			mail_item->generic.executable = executable;
-			mail_item->generic.command = gnome_da_xml_get_string (element, "command");
-			mail_item->generic.icon_name = gnome_da_xml_get_string (element, "icon-name");
-
-			mail_item->run_in_terminal = gnome_da_xml_get_bool (element, "run-in-terminal");
-
-			capplet->mail_readers = g_list_append (capplet->mail_readers, mail_item);
-		    }
-		    else
-			g_free (executable);
-		}
-	    }
-	}
-	else if (!xmlStrncmp (section->name, "terminals", 9)) {
-	    for (element = section->children; element != NULL; element = element->next) {
-		if (!xmlStrncmp (element->name, "terminal", 8)) {
+		 if (!xmlStrncmp (element->name, (const xmlChar *) "terminal", 8)) {
 		    executable = gnome_da_xml_get_string (element, "executable");
 		    if (is_executable_valid (executable)) {
 			term_item = gnome_da_term_item_new ();
@@ -212,9 +163,9 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 		}
 	    }
 	}
-	else if (!xmlStrncmp (section->name, "media-players", 13)) {
+	    else if (!xmlStrncmp (section->name, (const xmlChar *) "media-players", 13)) {
 	    for (element = section->children; element != NULL; element = element->next) {
-		if (!xmlStrncmp (element->name, "media-player", 12)) {
+		 if (!xmlStrncmp (element->name, (const xmlChar *) "media-player", 12)) {
 		    executable = gnome_da_xml_get_string (element, "executable");
 		    if (is_executable_valid (executable)) {
 			media_item = gnome_da_simple_item_new ();
@@ -233,9 +184,9 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 		}
 	    }
 	}
-	else if (!xmlStrncmp (section->name, "a11y-visual", 11)) {
+	    else if (!xmlStrncmp (section->name, (const xmlChar *) "a11y-visual", 11)) {
 	    for (element = section->children; element != NULL; element = element->next) {
-		if (!xmlStrncmp (element->name, "visual", 6)) {
+		 if (!xmlStrncmp (element->name, (const xmlChar *) "visual", 6)) {
 		    executable = gnome_da_xml_get_string (element,"executable");
 		    if (is_executable_valid (executable)) {
 			visual_item = gnome_da_visual_item_new ();
@@ -254,9 +205,9 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 		}
 	    }
 	}
-	else if (!xmlStrncmp (section->name, "a11y-mobility", 13)) {
+	    else if (!xmlStrncmp (section->name, (const xmlChar *) "a11y-mobility", 13)) {
 	    for (element = section->children; element != NULL; element = element->next) {
-		if (!xmlStrncmp (element->name, "mobility", 8)) {
+		    if (!xmlStrncmp (element->name, (const xmlChar *) "mobility", 8)) {
 		    executable = gnome_da_xml_get_string (element,"executable");
 		    if (is_executable_valid (executable)) {
 			mobility_item = gnome_da_mobility_item_new ();
@@ -280,11 +231,37 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
     xmlFreeDoc (xml_doc);
 }
 
+static void
+load_url_handlers (GnomeDACapplet *capplet, const gchar *scheme, GList **item_list)
+{
+    GList *app_list;
+
+    app_list = g_app_info_get_all_for_type (scheme);
+    while (app_list != NULL) {
+        const gchar *executable;
+        GAppInfo *app_info = (GAppInfo *) app_list->data;
+
+	executable = g_app_info_get_executable (app_info);
+	if (is_executable_valid (executable)) {
+            GnomeDASimpleItem *url_item;
+
+	    url_item = gnome_da_simple_item_new ();
+	    url_item->generic.name = g_strdup (g_app_info_get_display_name (app_info));
+	    url_item->generic.executable = g_strdup (executable);
+	    url_item->generic.command = g_strdup (g_app_info_get_commandline (app_info));
+	    url_item->generic.icon_name = g_strdup (g_app_info_get_name (app_info));
+
+	    *item_list = g_list_append (*item_list, url_item);
+	}
+    }
+}
+
 void
 gnome_da_xml_load_list (GnomeDACapplet *capplet)
 {
     GDir *app_dir = g_dir_open (GNOMECC_APPS_DIR, 0, NULL);
 
+    /* First load all applications from the XML files */
     if (app_dir != NULL) {
         const gchar *extra_file;
         gchar *filename;
@@ -299,13 +276,17 @@ gnome_da_xml_load_list (GnomeDACapplet *capplet)
         }
         g_dir_close (app_dir);
     }
+
+    /* Now load URL handlers */
+    load_url_handlers (capplet, "x-scheme-handler/http", &capplet->web_browsers);
+    load_url_handlers (capplet, "x-scheme-handler/mailto", &capplet->mail_readers);
 }
 
 void
 gnome_da_xml_free (GnomeDACapplet *capplet)
 {
-    g_list_foreach (capplet->web_browsers, (GFunc) gnome_da_web_item_free, NULL);
-    g_list_foreach (capplet->mail_readers, (GFunc) gnome_da_simple_item_free, NULL);
+    g_list_foreach (capplet->web_browsers, (GFunc) gnome_da_url_item_free, NULL);
+    g_list_foreach (capplet->mail_readers, (GFunc) gnome_da_url_item_free, NULL);
     g_list_foreach (capplet->terminals, (GFunc) gnome_da_term_item_free, NULL);
     g_list_foreach (capplet->media_players, (GFunc) gnome_da_simple_item_free, NULL);
     g_list_foreach (capplet->visual_ats, (GFunc) gnome_da_visual_item_free, NULL);

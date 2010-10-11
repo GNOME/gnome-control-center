@@ -65,83 +65,25 @@ set_icon (GtkImage *image, GtkIconTheme *theme, const char *name)
 }
 
 static void
-web_radiobutton_toggled_cb (GtkWidget *togglebutton, GnomeDACapplet *capplet)
-{
-    gint index;
-    GnomeDAWebItem *item;
-    const gchar *command;
-    GError *error = NULL;
-
-    index = gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->web_combo_box));
-
-    if (index == -1)
-	return;
-
-    item = (GnomeDAWebItem *) g_list_nth_data (capplet->web_browsers, index);
-    if (item == NULL)
-	return;
-
-    if (togglebutton == capplet->new_win_radiobutton) {
-	command = item->win_command;
-    }
-    else if (togglebutton == capplet->new_tab_radiobutton) {
-	command = item->tab_command;
-    }
-    else {
-	command = item->generic.command;
-    }
-
-    gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, command, &error);
-
-    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), command);
-
-    if (error != NULL) {
-	g_warning (_("Error saving configuration: %s"), error->message);
-	g_error_free (error);
-    }
-}
-
-static void
 web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 {
     guint current_index;
-    gboolean is_custom_active;
-    gboolean has_net_remote;
-    GnomeDAWebItem *item;
-    GtkWidget *active = NULL;
 
     current_index = gtk_combo_box_get_active (combo);
 
     if (current_index < g_list_length (capplet->web_browsers)) {
+        GnomeDAURLItem *item;
+	GError *error = NULL;
 
-	item = (GnomeDAWebItem*) g_list_nth_data (capplet->web_browsers, current_index);
-	has_net_remote = item->netscape_remote;
-	is_custom_active = FALSE;
+	item = (GnomeDAURLItem*) g_list_nth_data (capplet->web_browsers, current_index);
+	if (item == NULL)
+            return;
 
+	if (!g_app_info_set_as_default_for_type (item->app_info, "x-scheme-handler/http", &error)) {
+            g_warning (_("Error setting default browser: %s"), error->message);
+	    g_error_free (error);
+	}
     }
-    else {
-        has_net_remote = FALSE;
-        is_custom_active = TRUE;
-    }
-    gtk_widget_set_sensitive (capplet->default_radiobutton, has_net_remote);
-    gtk_widget_set_sensitive (capplet->new_win_radiobutton, has_net_remote);
-    gtk_widget_set_sensitive (capplet->new_tab_radiobutton, has_net_remote);
-
-    gtk_widget_set_sensitive (capplet->web_browser_command_entry, is_custom_active);
-    gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
-    gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
-
-    if (has_net_remote) {
-
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (capplet->new_win_radiobutton)))
-            active = capplet->new_win_radiobutton;
-        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (capplet->new_tab_radiobutton)))
-            active = capplet->new_tab_radiobutton;
-        else
-            active = capplet->default_radiobutton;
-    }
-
-    web_radiobutton_toggled_cb (active, capplet);
 }
 
 /* FIXME: Refactor these two functions below into one... */
@@ -149,14 +91,23 @@ static void
 mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 {
     guint current_index;
-    gboolean is_custom_active;
 
     current_index = gtk_combo_box_get_active (combo);
-    is_custom_active = (current_index >= g_list_length (capplet->mail_readers));
 
-    gtk_widget_set_sensitive (capplet->mail_reader_command_entry, is_custom_active);
-    gtk_widget_set_sensitive (capplet->mail_reader_command_label, is_custom_active);
-    gtk_widget_set_sensitive (capplet->mail_reader_terminal_checkbutton, is_custom_active);
+    if (current_index < g_list_length (capplet->mail_readers)) {
+        GnomeDAURLItem *item;
+	GError *error = NULL;
+
+	item = (GnomeDAURLItem*) g_list_nth_data (capplet->web_browsers, current_index);
+	if (item == NULL)
+            return;
+
+	if (!g_app_info_set_as_default_for_type (item->app_info, "x-scheme-handler/mailto", &error)) {
+            g_warning (_("Error setting default mailer: %s"), error->message);
+	    g_error_free (error);
+	}
+    }
+
 }
 
 static void
@@ -298,221 +249,6 @@ generic_item_comp (gconstpointer list_item, gconstpointer command)
     return (strcmp (((GnomeDAItem *) list_item)->command, (gchar *) command));
 }
 
-static gint
-web_item_comp (gconstpointer item, gconstpointer command)
-{
-    GnomeDAWebItem *web_list_item;
-
-    web_list_item = (GnomeDAWebItem *) item;
-
-    if (strcmp (web_list_item->generic.command, (gchar *) command) == 0)
-	return 0;
-
-    if (web_list_item->netscape_remote) {
-	if (strcmp (web_list_item->tab_command, (gchar *) command) == 0)
-	    return 0;
-
-	if (strcmp (web_list_item->win_command, (gchar *) command) == 0)
-	    return 0;
-    }
-
-    return (strcmp (web_list_item->generic.command, (gchar *) command));
-}
-
-static void
-web_gconf_changed_cb (GConfPropertyEditor *peditor, gchar *key, GConfValue *value, GnomeDACapplet *capplet)
-{
-    GConfChangeSet *cs;
-    GError *error = NULL;
-    GList *list_entry;
-
-    /* This function is used to update HTTPS,ABOUT and UNKNOWN handlers, which
-     * should also use the same value as HTTP
-     */
-
-    if (strcmp (key, DEFAULT_APPS_KEY_HTTP_EXEC) == 0) {
-	gchar *short_browser, *pos;
-	const gchar *value_str = gconf_value_get_string (value);
-
-	cs = gconf_change_set_new ();
-
-	gconf_change_set_set (cs, DEFAULT_APPS_KEY_HTTPS_EXEC, value);
-	gconf_change_set_set (cs, DEFAULT_APPS_KEY_UNKNOWN_EXEC, value);
-	gconf_change_set_set (cs, DEFAULT_APPS_KEY_ABOUT_EXEC, value);
-	pos = strstr (value_str, " ");
-	if (pos == NULL)
-	    short_browser = g_strdup (value_str);
-	else
-	    short_browser = g_strndup (value_str, pos - value_str);
-	gconf_change_set_set_string (cs, DEFAULT_APPS_KEY_BROWSER_EXEC, short_browser);
-	g_free (short_browser);
-
-	list_entry = g_list_find_custom (capplet->web_browsers,
-					 value_str,
-					 (GCompareFunc) web_item_comp);
-
-	if (list_entry) {
-	    GnomeDAWebItem *item = (GnomeDAWebItem *) list_entry->data;
-
-	    gconf_change_set_set_bool (cs, DEFAULT_APPS_KEY_BROWSER_NREMOTE, item->netscape_remote);
-	}
-
-	gconf_client_commit_change_set (capplet->gconf, cs, TRUE, &error);
-
-	if (error != NULL) {
-	    g_warning (_("Error saving configuration: %s"), error->message);
-	    g_error_free (error);
-	    error = NULL;
-	}
-
-	gconf_change_set_unref (cs);
-    }
-    else if (strcmp (key, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM) == 0) {
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
-				      gconf_value_get_bool (value));
-
-	cs = gconf_change_set_new ();
-
-	gconf_change_set_set (cs, DEFAULT_APPS_KEY_HTTPS_NEEDS_TERM, value);
-	gconf_change_set_set (cs, DEFAULT_APPS_KEY_UNKNOWN_NEEDS_TERM, value);
-	gconf_change_set_set (cs, DEFAULT_APPS_KEY_ABOUT_NEEDS_TERM, value);
-	gconf_change_set_set (cs, DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM, value);
-
-	gconf_client_commit_change_set (capplet->gconf, cs, TRUE, &error);
-
-	if (error != NULL) {
-	    g_warning (_("Error saving configuration: %s"), error->message);
-	    g_error_free (error);
-	    error = NULL;
-	}
-
-	gconf_change_set_unref (cs);
-    }
-}
-
-static void
-web_browser_update_radio_buttons (GnomeDACapplet *capplet, const gchar *command)
-{
-    GList *entry;
-    gboolean has_net_remote;
-
-    entry = g_list_find_custom (capplet->web_browsers, command, (GCompareFunc) web_item_comp);
-
-    if (entry) {
-	GnomeDAWebItem *item = (GnomeDAWebItem *) entry->data;
-
-	has_net_remote = item->netscape_remote;
-
-	if (has_net_remote) {
-	    /* disable "toggle" signal emitting, thus preventing calling this function twice */
-	    g_signal_handlers_block_matched (capplet->default_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
-					     0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
-	    g_signal_handlers_block_matched (capplet->new_tab_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
-					     0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
-	    g_signal_handlers_block_matched (capplet->new_win_radiobutton,G_SIGNAL_MATCH_FUNC, 0,
-					     0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
-
-	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->default_radiobutton),
-					  strcmp (item->generic.command, command) == 0);
-	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->new_tab_radiobutton),
-					  strcmp (item->tab_command, command) == 0);
-	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->new_win_radiobutton),
-					  strcmp (item->win_command, command) == 0);
-
-	    g_signal_handlers_unblock_matched (capplet->default_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
-					       0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
-	    g_signal_handlers_unblock_matched (capplet->new_tab_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
-					       0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
-	    g_signal_handlers_unblock_matched (capplet->new_win_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
-					       0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
-	}
-    }
-    else {
-	has_net_remote = FALSE;
-    }
-
-    gtk_widget_set_sensitive (capplet->default_radiobutton, has_net_remote);
-    gtk_widget_set_sensitive (capplet->new_win_radiobutton, has_net_remote);
-    gtk_widget_set_sensitive (capplet->new_tab_radiobutton, has_net_remote);
-}
-
-static GConfValue*
-web_combo_conv_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-    GConfValue *ret;
-    GList *entry, *handlers;
-    const gchar *command;
-    gint index;
-    GnomeDACapplet *capplet;
-
-    g_object_get (G_OBJECT (peditor), "data", &capplet, NULL);
-
-    command = gconf_value_get_string (value);
-    handlers = capplet->web_browsers;
-
-    if (handlers)
-    {
-      entry = g_list_find_custom (handlers, command, (GCompareFunc) web_item_comp);
-      if (entry)
-          index = g_list_position (handlers, entry);
-      else
-          index = g_list_length (handlers) + 1;
-    }
-    else
-    {
-      /* if the item has no handlers lsit then select the Custom item */
-      index = 1;
-    }
-
-    web_browser_update_radio_buttons (capplet, command);
-
-    ret = gconf_value_new (GCONF_VALUE_INT);
-    gconf_value_set_int (ret, index);
-
-    return ret;
-}
-
-static GConfValue*
-web_combo_conv_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-    GConfValue *ret;
-    GList *handlers;
-    gint index;
-    GnomeDAWebItem *item;
-    const gchar *command;
-    GnomeDACapplet *capplet;
-
-    g_object_get (G_OBJECT (peditor), "data", &capplet, NULL);
-
-    index = gconf_value_get_int (value);
-    handlers = capplet->web_browsers;
-
-    item = g_list_nth_data (handlers, index);
-
-    ret = gconf_value_new (GCONF_VALUE_STRING);
-    if (!item)
-    {
-        /* if item was not found, this is probably the "Custom" item */
-        /* XXX: returning "" as the value here is not ideal, but required to
-         * prevent the combo box from jumping back to the previous value if the
-         * user has selected Custom */
-        gconf_value_set_string (ret, "");
-        return ret;
-    }
-    else
-    {
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (capplet->new_win_radiobutton)) && item->netscape_remote == TRUE)
-            command = item->win_command;
-        else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (capplet->new_tab_radiobutton)) && item->netscape_remote == TRUE)
-            command = item->tab_command;
-        else
-            command = item->generic.command;
-
-        gconf_value_set_string (ret, command);
-        return ret;
-    }
-}
-
 static GConfValue*
 combo_conv_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
@@ -633,7 +369,7 @@ is_separator (GtkTreeModel *model, GtkTreeIter *iter, gpointer sep_index)
 }
 
 static void
-fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
+fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list, gboolean add_custom)
 {
     GList *entry;
     GtkTreeModel *model;
@@ -645,8 +381,10 @@ fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
 	theme = gtk_icon_theme_get_default ();
     }
 
-    gtk_combo_box_set_row_separator_func (combo_box, is_separator,
-					  GINT_TO_POINTER (g_list_length (app_list)), NULL);
+    if (add_custom) {
+	gtk_combo_box_set_row_separator_func (combo_box, is_separator,
+					      GINT_TO_POINTER (g_list_length (app_list)), NULL);
+    }
 
     model = GTK_TREE_MODEL (gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_STRING));
     gtk_combo_box_set_model (combo_box, model);
@@ -684,13 +422,15 @@ fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
 	    g_object_unref (pixbuf);
     }
 
-    gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-    gtk_list_store_set (GTK_LIST_STORE (model), &iter, -1);
-    gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-    gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			PIXBUF_COL, NULL,
-			TEXT_COL, _("Custom"),
-			-1);
+    if (add_custom) {
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter, -1);
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    PIXBUF_COL, NULL,
+			    TEXT_COL, _("Custom"),
+			    -1);
+    }
 }
 
 static GtkWidget*
@@ -703,7 +443,6 @@ _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 static void
 show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 {
-    GObject *obj;
     GtkBuilder *builder;
     guint builder_result;
 
@@ -732,17 +471,6 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 
     capplet->window = _gtk_builder_get_widget (builder,"preferred_apps_dialog");
 
-    capplet->web_browser_command_entry = _gtk_builder_get_widget (builder, "web_browser_command_entry");
-    capplet->web_browser_command_label = _gtk_builder_get_widget (builder, "web_browser_command_label");
-    capplet->web_browser_terminal_checkbutton = _gtk_builder_get_widget(builder, "web_browser_terminal_checkbutton");
-    capplet->default_radiobutton = _gtk_builder_get_widget (builder, "web_browser_default_radiobutton");
-    capplet->new_win_radiobutton = _gtk_builder_get_widget (builder, "web_browser_new_win_radiobutton");
-    capplet->new_tab_radiobutton = _gtk_builder_get_widget (builder, "web_browser_new_tab_radiobutton");
-
-    capplet->mail_reader_command_entry = _gtk_builder_get_widget (builder, "mail_reader_command_entry");
-    capplet->mail_reader_command_label = _gtk_builder_get_widget (builder, "mail_reader_command_label");
-    capplet->mail_reader_terminal_checkbutton = _gtk_builder_get_widget (builder, "mail_reader_terminal_checkbutton");
-
     capplet->terminal_command_entry = _gtk_builder_get_widget (builder, "terminal_command_entry");
     capplet->terminal_command_label = _gtk_builder_get_widget (builder, "terminal_command_label");
     capplet->terminal_exec_flag_entry = _gtk_builder_get_widget (builder, "terminal_exec_flag_entry");
@@ -770,12 +498,12 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
     g_signal_connect (capplet->window, "screen-changed", G_CALLBACK (screen_changed_cb), capplet);
     screen_changed_cb (capplet->window, gdk_screen_get_default (), capplet);
 
-    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers);
-    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers);
-    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals);
-    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->media_combo_box), capplet->media_players);
-    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->visual_combo_box), capplet->visual_ats);
-    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->mobility_combo_box), capplet->mobility_ats);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers, FALSE);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers, FALSE);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals, TRUE);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->media_combo_box), capplet->media_players, TRUE);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->visual_combo_box), capplet->visual_ats, TRUE);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->mobility_combo_box), capplet->mobility_ats, TRUE);
 
     g_signal_connect (capplet->web_combo_box, "changed", G_CALLBACK (web_combo_changed_cb), capplet);
     g_signal_connect (capplet->mail_combo_box, "changed", G_CALLBACK (mail_combo_changed_cb), capplet);
@@ -784,52 +512,7 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
     g_signal_connect (capplet->visual_combo_box, "changed", G_CALLBACK (visual_combo_changed_cb), capplet);
     g_signal_connect (capplet->mobility_combo_box, "changed", G_CALLBACK (mobility_combo_changed_cb), capplet);
 
-
-    g_signal_connect (capplet->default_radiobutton, "toggled", G_CALLBACK (web_radiobutton_toggled_cb), capplet);
-    g_signal_connect (capplet->new_win_radiobutton, "toggled", G_CALLBACK (web_radiobutton_toggled_cb), capplet);
-    g_signal_connect (capplet->new_tab_radiobutton, "toggled", G_CALLBACK (web_radiobutton_toggled_cb), capplet);
-
     /* Setup GConfPropertyEditors */
-
-    /* Web Browser */
-    gconf_peditor_new_combo_box (NULL,
-        DEFAULT_APPS_KEY_HTTP_EXEC,
-        capplet->web_combo_box,
-        "conv-from-widget-cb", web_combo_conv_from_widget,
-        "conv-to-widget-cb", web_combo_conv_to_widget,
-        "data", capplet,
-        NULL);
-
-    obj = gconf_peditor_new_string (NULL,
-        DEFAULT_APPS_KEY_HTTP_EXEC,
-        capplet->web_browser_command_entry,
-        NULL);
-    g_signal_connect (obj, "value-changed", G_CALLBACK (web_gconf_changed_cb), capplet);
-
-    obj = gconf_peditor_new_boolean (NULL,
-        DEFAULT_APPS_KEY_HTTP_NEEDS_TERM,
-        capplet->web_browser_terminal_checkbutton,
-        NULL);
-    g_signal_connect (obj, "value-changed", G_CALLBACK (web_gconf_changed_cb), capplet);
-
-    /* Mailer */
-    gconf_peditor_new_combo_box (NULL,
-        DEFAULT_APPS_KEY_MAILER_EXEC,
-        capplet->mail_combo_box,
-        "conv-from-widget-cb", combo_conv_from_widget,
-        "conv-to-widget-cb", combo_conv_to_widget,
-        "data", capplet->mail_readers,
-        NULL);
-
-    gconf_peditor_new_string (NULL,
-        DEFAULT_APPS_KEY_MAILER_EXEC,
-        capplet->mail_reader_command_entry,
-        NULL);
-
-    gconf_peditor_new_boolean (NULL,
-        DEFAULT_APPS_KEY_MAILER_NEEDS_TERM,
-        capplet->mail_reader_terminal_checkbutton,
-        NULL);
 
     /* Media player */
     gconf_peditor_new_combo_box (NULL,
