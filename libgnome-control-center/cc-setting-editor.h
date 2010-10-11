@@ -69,6 +69,8 @@ GtkWidget   *cc_setting_editor_new_application (const gchar *mime_type);
 GtkWidget   *cc_setting_editor_new_boolean (const gchar *label,
                                             const gchar *settings_prefix,
                                             const gchar *key);
+GtkWidget   *cc_setting_editor_new_string (const gchar *settings_prefix,
+                                           const gchar *key);
 
 const gchar *cc_setting_editor_get_key (CcSettingEditor *editor);
 GtkWidget   *cc_setting_editor_get_ui_control (CcSettingEditor *seditor);

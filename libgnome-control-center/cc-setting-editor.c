@@ -239,6 +239,7 @@ cc_setting_editor_new_application (const gchar *mime_type)
 
 /**
  * cc_setting_editor_new_boolean:
+ * @label: Text to display next to the check button.
  * @settings_prefix: The settings prefix for the key.
  * @key: The settings key to associate with.
  *
@@ -266,6 +267,36 @@ cc_setting_editor_new_boolean (const gchar *label,
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox),
                                 g_settings_get_boolean (seditor->priv->settings, seditor->priv->key));
   g_settings_bind (seditor->priv->settings, key, checkbox, "active", G_SETTINGS_BIND_DEFAULT);
+
+  return (GtkWidget *) seditor;
+}
+
+/**
+ * cc_setting_editor_new_string:
+ * @settings_prefix: The settings prefix for the key.
+ * @key: The settings key to associate with.
+ *
+ * Create a new #CCSettingEditor object to configure a string setting.
+ *
+ * Return value: A newly created #CCSettingEditor object.
+ */
+GtkWidget *
+cc_setting_editor_new_string (const gchar *settings_prefix,
+                              const gchar *key)
+{
+  GtkWidget *entry;
+  CcSettingEditor *seditor;
+
+  entry = gtk_entry_new ();
+  gtk_widget_show (entry);
+
+  /* Create the CcSettingEditor widget */
+  seditor = cc_setting_editor_new (SETTING_TYPE_GSETTINGS,
+                                   settings_prefix,
+                                   key,
+                                   entry);
+
+  g_settings_bind (seditor->priv->settings, key, entry, "text", G_SETTINGS_BIND_DEFAULT);
 
   return (GtkWidget *) seditor;
 }
