@@ -33,7 +33,6 @@
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-bindings.h>
 
@@ -71,7 +70,6 @@ struct App
 
     GtkWidget      *area;
     gboolean	    ignore_gui_changes;
-    GConfClient	   *client;
 
     /* These are used while we are waiting for the ApplyConfiguration method to be executed over D-bus */
     DBusGConnection *connection;
@@ -2318,7 +2316,6 @@ static void
 destroy_app (App *app)
 {
     gnome_rr_screen_destroy (app->screen);
-    g_object_unref (app->client);
     g_object_unref (app->builder);
     gnome_rr_labeler_hide (app->labeler);
     g_object_unref (app->labeler);
@@ -2361,8 +2358,6 @@ run_application (void)
 	g_object_unref (builder);
 	return NULL;
     }
-
-    app->client = gconf_client_get_default ();
 
     app->panel = _gtk_builder_get_widget (builder, "display-panel");
 
