@@ -79,7 +79,8 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	if (item == NULL)
             return;
 
-	if (!g_app_info_set_as_default_for_type (item->app_info, "x-scheme-handler/http", &error)) {
+	if (!g_app_info_set_as_default_for_type (item->app_info, "x-scheme-handler/http", &error) ||
+	    !g_app_info_set_as_default_for_type (item->app_info, "x-scheme-handler/https", &error)) {
             g_warning (_("Error setting default browser: %s"), error->message);
 	    g_error_free (error);
 	}

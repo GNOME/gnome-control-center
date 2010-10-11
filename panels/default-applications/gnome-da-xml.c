@@ -243,13 +243,14 @@ load_url_handlers (GnomeDACapplet *capplet, const gchar *scheme, GList **item_li
 
 	executable = g_app_info_get_executable (app_info);
 	if (is_executable_valid (executable)) {
-            GnomeDASimpleItem *url_item;
+            GnomeDAURLItem *url_item;
 
-	    url_item = gnome_da_simple_item_new ();
+	    url_item = gnome_da_url_item_new ();
 	    url_item->generic.name = g_strdup (g_app_info_get_display_name (app_info));
 	    url_item->generic.executable = g_strdup (executable);
 	    url_item->generic.command = g_strdup (g_app_info_get_commandline (app_info));
 	    url_item->generic.icon_name = g_strdup (g_app_info_get_name (app_info));
+	    url_item->app_info = g_object_ref (app_info);
 
 	    *item_list = g_list_append (*item_list, url_item);
 	}
