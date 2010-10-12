@@ -39,10 +39,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#ifdef HAVE_XINPUT
+
 #include <X11/Xatom.h>
 #include <X11/extensions/XInput.h>
-#endif
 
 #define WID(x) (GtkWidget*) gtk_builder_get_object (dialog, x)
 
@@ -327,7 +326,6 @@ scrollmethod_changed_event (GConfPropertyEditor *peditor,
 static void
 synaptics_check_capabilities (GtkBuilder *dialog)
 {
-#ifdef HAVE_XINPUT
 	int numdevices, i;
 	XDeviceInfo *devicelist;
 	Atom realtype, prop;
@@ -371,14 +369,12 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
 	}
 	XFreeDeviceList (devicelist);
-#endif
 }
 
 static gboolean
 find_synaptics (void)
 {
 	gboolean ret = FALSE;
-#ifdef HAVE_XINPUT
 	int numdevices, i;
 	XDeviceInfo *devicelist;
 	Atom realtype, prop;
@@ -427,7 +423,7 @@ find_synaptics (void)
 
 	XFree (version);
 	XFreeDeviceList (devicelist);
-#endif
+
 	return ret;
 }
 

@@ -120,12 +120,7 @@ GNOMECC_LIBS="$GNOMECC_LIBS $x_libs"
 dnl =============================================
 dnl X Input library >= 1.2 with property support
 dnl =============================================
-have_xinput=no
-PKG_CHECK_MODULES(XINPUT, [xi >= 1.2],
-	have_xinput=yes
-	AC_DEFINE(HAVE_XINPUT, 1, [Define if the XInput extension is available]),
-	have_xinput=no)
-AM_CONDITIONAL(HAVE_XINPUT, [test $have_xinput=yes])
+PKG_CHECK_MODULES(XINPUT, [xi >= 1.2])
 
 CAPPLET_LIBS="$CAPPLET_LIBS $XINPUT_LIBS"
 
