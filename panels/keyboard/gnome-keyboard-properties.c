@@ -7,6 +7,7 @@
  * Written by: Bradford Hovinen <hovinen@ximian.com>
  *             Rachel Hestilow <hestilow@ximian.com>
  *	       Jonathan Blandford <jrb@redhat.com>
+ *             Rodrigo Moya <rodrigo@gnome.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,8 +28,7 @@
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
-
-#include <gconf/gconf-client.h>
+#include <gio/gio.h>
 
 #include "gconf-property-editor.h"
 
@@ -40,6 +40,10 @@ enum {
 	RESPONSE_APPLY = 1,
 	RESPONSE_CLOSE
 };
+
+static void keyboard_settings_changed (GSettings *settings, const gchar *key, GtkBuilder *dialog);
+
+static GSettings *keyboard_settings = NULL;
 
 static void
 create_dialog (GtkBuilder * dialog)
@@ -116,31 +120,43 @@ dialog_response (GtkWidget * widget,
 }
 
 static void
-setup_dialog (GtkBuilder * dialog, GConfChangeSet * changeset)
+repeat_delay_scale_changed (GtkRange *range, GtkBuilder *builder)
+{
+	g_signal_handlers_block_by_func (keyboard_settings, keyboard_settings_changed, builder);
+	g_settings_set_int (keyboard_settings, "delay", (gint) gtk_range_get_value (range));
+	g_signal_handlers_unblock_by_func (keyboard_settings, keyboard_settings_changed, builder);
+}
+
+static void
+repeat_speed_scale_changed (GtkRange *range, GtkBuilder *builder)
+{
+	g_signal_handlers_block_by_func (keyboard_settings, keyboard_settings_changed, builder);
+	g_settings_set_int (keyboard_settings, "rate", (gint) gtk_range_get_value (range));
+	g_signal_handlers_unblock_by_func (keyboard_settings, keyboard_settings_changed, builder);
+}
+
+static void
+setup_dialog (GtkBuilder * dialog)
 {
 	GObject *peditor;
-	gchar *monitor;
 
+	g_settings_bind (keyboard_settings, "repeat",
+			 WID ("repeat_toggle"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+
+	/* For scale widgets, the mapping does not work, so connect to signals */
+	g_signal_connect (WID ("repeat_delay_scale"), "value_changed",
+			  G_CALLBACK (repeat_delay_scale_changed), NULL);
+	g_signal_connect (WID ("repeat_speed_scale"), "value_changed",
+			  G_CALLBACK (repeat_speed_scale_changed), NULL);
+
+	/* FIXME: GConf stuff that needs to be solved */
 	peditor = gconf_peditor_new_boolean
-	    (changeset, "/desktop/gnome/peripherals/keyboard/repeat",
-	     WID ("repeat_toggle"), NULL);
-	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
-					WID ("repeat_table"));
-
-	gconf_peditor_new_numeric_range
-	    (changeset, "/desktop/gnome/peripherals/keyboard/delay",
-	     WID ("repeat_delay_scale"), NULL);
-
-	gconf_peditor_new_numeric_range
-	    (changeset, "/desktop/gnome/peripherals/keyboard/rate",
-	     WID ("repeat_speed_scale"), NULL);
-
-	peditor = gconf_peditor_new_boolean
-	    (changeset, "/desktop/gnome/interface/cursor_blink",
+	    (NULL, "/desktop/gnome/interface/cursor_blink",
 	     WID ("cursor_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
 					WID ("cursor_hbox"));
-	gconf_peditor_new_numeric_range (changeset,
+	gconf_peditor_new_numeric_range (NULL,
 					 "/desktop/gnome/interface/cursor_blink_time",
 					 WID ("cursor_blink_time_scale"),
 					 "conv-to-widget-cb",
@@ -149,26 +165,40 @@ setup_dialog (GtkBuilder * dialog, GConfChangeSet * changeset)
 					 blink_from_widget, NULL);
 
 	g_signal_connect (WID ("keyboard_dialog"), "response",
-			  (GCallback) dialog_response, changeset);
+			  (GCallback) dialog_response, NULL);
 
-	setup_xkb_tabs (dialog, changeset);
-	setup_a11y_tabs (dialog, changeset);
+	setup_xkb_tabs (dialog, NULL);
+	setup_a11y_tabs (dialog, NULL);
 }
 
+static void
+keyboard_settings_changed (GSettings *settings, const gchar *key, GtkBuilder *dialog)
+{
+	if (g_str_equal (key, "delay")) {
+		g_signal_handlers_block_by_func (WID ("repeat_delay_scale"), repeat_delay_scale_changed, dialog);
+		gtk_range_set_value (GTK_RANGE (WID ("repeat_delay_scale")), (gdouble) g_settings_get_int (settings, "delay"));
+		g_signal_handlers_unblock_by_func (WID ("repeat_delay_scale"), repeat_delay_scale_changed, dialog);
+	} else if (g_str_equal (key, "rate")) {
+		g_signal_handlers_block_by_func (WID ("repeat_speed_scale"), repeat_speed_scale_changed, dialog);
+		gtk_range_set_value (GTK_RANGE (WID ("repeat_speed_scale")), (gdouble) g_settings_get_int (settings, "rate"));
+		g_signal_handlers_unblock_by_func (WID ("repeat_speed_scale"), repeat_speed_scale_changed, dialog);
+	}
+}
 
 GtkWidget *
-gnome_keyboard_properties_init (GConfClient * client, GtkBuilder * dialog)
+gnome_keyboard_properties_init (GtkBuilder * dialog)
 {
 	GtkWidget *dialog_win = NULL;
 
-	gconf_client_add_dir (client,
-			      "/desktop/gnome/peripherals/keyboard",
-			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	gconf_client_add_dir (client, "/desktop/gnome/interface",
-			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	if (keyboard_settings == NULL) {
+		keyboard_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.keyboard");
+		g_signal_connect (keyboard_settings, "changed",
+				  G_CALLBACK (keyboard_settings_changed), dialog);
+	}
+
 	create_dialog (dialog);
 	if (dialog) {
-		setup_dialog (dialog, NULL);
+		setup_dialog (dialog);
 		dialog_win = WID ("keyboard_dialog");
 		/* g_signal_connect (dialog_win, "response",
 		   G_CALLBACK (dialog_response_cb), NULL); */

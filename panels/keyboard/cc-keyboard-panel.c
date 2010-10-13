@@ -20,7 +20,6 @@
  */
 
 #include "cc-keyboard-panel.h"
-#include <gconf/gconf-client.h>
 #include <gtk/gtk.h>
 
 G_DEFINE_DYNAMIC_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC_TYPE_PANEL)
@@ -28,7 +27,6 @@ G_DEFINE_DYNAMIC_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC_TYPE_PANEL)
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelPrivate))
 struct _CcKeyboardPanelPrivate {
 	GtkBuilder *builder;
-	GConfClient *client;
 };
 
 
@@ -60,10 +58,6 @@ static void
 cc_keyboard_panel_dispose (GObject * object)
 {
 	CcKeyboardPanelPrivate *priv = CC_KEYBOARD_PANEL (object)->priv;
-	if (priv->client) {
-		g_object_unref (priv->client);
-		priv->client = NULL;
-	}
 
 	if (priv->builder) {
 		g_object_unref (priv->builder);
@@ -97,8 +91,7 @@ cc_keyboard_panel_class_finalize (CcKeyboardPanelClass * klass)
 {
 }
 
-GtkWidget *gnome_keyboard_properties_init (GConfClient * client,
-					   GtkBuilder * dialog);
+GtkWidget *gnome_keyboard_properties_init (GtkBuilder * dialog);
 
 static void
 cc_keyboard_panel_init (CcKeyboardPanel * self)
@@ -109,7 +102,6 @@ cc_keyboard_panel_init (CcKeyboardPanel * self)
 
 	priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
 
-	priv->client = gconf_client_get_default ();
 	priv->builder = gtk_builder_new ();
 
 	gtk_builder_add_from_file (priv->builder,
@@ -121,7 +113,7 @@ cc_keyboard_panel_init (CcKeyboardPanel * self)
 		return;
 	}
 
-	gnome_keyboard_properties_init (priv->client, priv->builder);
+	gnome_keyboard_properties_init (priv->builder);
 
 	prefs_widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
 							     "keyboard_notebook");

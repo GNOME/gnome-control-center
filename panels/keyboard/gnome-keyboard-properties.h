@@ -26,5 +26,5 @@
 
 #include <gtk/gtk.h>
 
-GtkWidget *gnome_keyboard_properties_init (GConfClient * client, GtkBuilder * dialog);
+GtkWidget *gnome_keyboard_properties_init (GtkBuilder * dialog);
 
