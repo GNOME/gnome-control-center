@@ -116,6 +116,7 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 {
     guint current_index;
     gboolean is_custom_active;
+    GnomeDATermItem *item;
 
     current_index = gtk_combo_box_get_active (combo);
     is_custom_active = (current_index >= g_list_length (capplet->terminals));
@@ -124,6 +125,13 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_widget_set_sensitive (capplet->terminal_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_exec_flag_entry, is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_exec_flag_label, is_custom_active);
+
+    /* Set text on the entries so that the GSettings binding works */
+    item = g_list_nth_data (capplet->terminals, current_index);
+    if (item != NULL) {
+        gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry), ((GnomeDAItem *) item)->command);
+	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry), item->exec_flag);
+    }
 }
 
 static void
@@ -131,12 +139,18 @@ visual_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 {
     guint current_index;
     gboolean is_custom_active;
+    GnomeDAItem *item;
 
     current_index = gtk_combo_box_get_active (combo);
     is_custom_active = (current_index >= g_list_length (capplet->visual_ats));
 
     gtk_widget_set_sensitive (capplet->visual_command_entry, is_custom_active);
     gtk_widget_set_sensitive (capplet->visual_command_label, is_custom_active);
+
+    /* Set text on the entries so that the GSettings binding works */
+    item = g_list_nth_data (capplet->visual_ats, current_index);
+    if (item != NULL)
+        gtk_entry_set_text (GTK_ENTRY (capplet->visual_command_entry), item->command);
 }
 
 static void
@@ -144,12 +158,18 @@ mobility_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 {
     guint current_index;
     gboolean is_custom_active;
+    GnomeDAItem *item;
 
     current_index = gtk_combo_box_get_active (combo);
     is_custom_active = (current_index >= g_list_length (capplet->mobility_ats));
 
     gtk_widget_set_sensitive (capplet->mobility_command_entry, is_custom_active);
     gtk_widget_set_sensitive (capplet->mobility_command_label, is_custom_active);
+
+    /* Set text on the entries so that the GSettings binding works */
+    item = g_list_nth_data (capplet->mobility_ats, current_index);
+    if (item != NULL)
+        gtk_entry_set_text (GTK_ENTRY (capplet->mobility_command_entry), item->command);
 }
 
 static void
@@ -224,118 +244,6 @@ screen_changed_cb (GtkWidget *widget, GdkScreen *screen, GnomeDACapplet *capplet
     theme_changed_cb (theme, capplet);
 
     capplet->icon_theme = theme;
-}
-
-static gint
-generic_item_comp (gconstpointer list_item, gconstpointer command)
-{
-    return (strcmp (((GnomeDAItem *) list_item)->command, (gchar *) command));
-}
-
-static GConfValue*
-combo_conv_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-    GConfValue *ret;
-    GList *entry, *handlers;
-    const gchar *command;
-    gint index;
-
-    g_object_get (G_OBJECT (peditor), "data", &handlers, NULL);
-
-    command = gconf_value_get_string (value);
-
-    if (handlers)
-    {
-        entry = g_list_find_custom (handlers, command, (GCompareFunc) generic_item_comp);
-        if (entry)
-            index = g_list_position (handlers, entry);
-        else
-            index = g_list_length (handlers) + 1;
-    }
-    else
-    {
-        /* if the item has no handlers lsit then select the Custom item */
-        index = 1;
-    }
-
-    ret = gconf_value_new (GCONF_VALUE_INT);
-    gconf_value_set_int (ret, index);
-    return ret;
-}
-
-static GConfValue*
-combo_conv_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-    GConfValue *ret;
-    GList *handlers;
-    gint index;
-    GnomeDAItem *item;
-
-    g_object_get (G_OBJECT (peditor), "data", &handlers, NULL);
-    index = gconf_value_get_int (value);
-
-    item = g_list_nth_data (handlers, index);
-    ret = gconf_value_new (GCONF_VALUE_STRING);
-
-    if (!item)
-    {
-        /* if item was not found, this is probably the "Custom" item */
-
-        /* XXX: returning "" as the value here is not ideal, but required to
-         * prevent the combo box from jumping back to the previous value if the
-         * user has selected Custom */
-        gconf_value_set_string (ret, "");
-        return ret;
-    }
-    else
-    {
-        gconf_value_set_string (ret, item->command);
-        return ret;
-    }
-}
-
-static GConfValue*
-combo_conv_from_widget_term_flag (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-    GConfValue *ret;
-    GList *handlers;
-    gint index;
-    GnomeDATermItem *item;
-
-    g_object_get (G_OBJECT (peditor), "data", &handlers, NULL);
-    index = gconf_value_get_int (value);
-
-    item = g_list_nth_data (handlers, index);
-    ret = gconf_value_new (GCONF_VALUE_STRING);
-
-    if (!item)
-    {
-        /* if item was not found, this is probably the "Custom" item */
-
-        /* XXX: returning "" as the value here is not ideal, but required to
-         * prevent the combo box from jumping back to the previous value if the
-         * user has selected Custom */
-        gconf_value_set_string (ret, "");
-        return ret;
-    }
-    else
-    {
-        gconf_value_set_string (ret, item->exec_flag);
-        return ret;
-    }
-}
-
-static GConfValue*
-combo_conv_to_widget_term_flag (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-    GConfValue *ret;
-    GtkComboBox *combo;
-
-    combo = GTK_COMBO_BOX (gconf_property_editor_get_ui_control (peditor));
-
-    ret = gconf_value_new (GCONF_VALUE_INT);
-    gconf_value_set_int (ret, gtk_combo_box_get_active (combo));
-    return ret;
 }
 
 static gboolean
@@ -488,73 +396,31 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
     g_signal_connect (capplet->visual_combo_box, "changed", G_CALLBACK (visual_combo_changed_cb), capplet);
     g_signal_connect (capplet->mobility_combo_box, "changed", G_CALLBACK (mobility_combo_changed_cb), capplet);
 
-    /* Setup GConfPropertyEditors */
+    /* Bind settings */
 
     /* Terminal */
-    gconf_peditor_new_combo_box (NULL,
-        DEFAULT_APPS_KEY_TERMINAL_EXEC,
-        capplet->term_combo_box,
-        "conv-from-widget-cb", combo_conv_from_widget,
-        "conv-to-widget-cb", combo_conv_to_widget,
-        "data", capplet->terminals,
-        NULL);
-
-    gconf_peditor_new_combo_box (NULL,
-        DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG,
-        capplet->term_combo_box,
-        "conv-from-widget-cb", combo_conv_from_widget_term_flag,
-        "conv-to-widget-cb", combo_conv_to_widget_term_flag,
-        "data", capplet->terminals,
-        NULL);
-
-    gconf_peditor_new_string (NULL,
-        DEFAULT_APPS_KEY_TERMINAL_EXEC,
-        capplet->terminal_command_entry,
-        NULL);
-    gconf_peditor_new_string (NULL,
-        DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG,
-        capplet->terminal_exec_flag_entry,
-        NULL);
-
+    g_settings_bind (capplet->terminal_settings, "exec",
+		     capplet->terminal_command_entry, "text",
+		     G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (capplet->terminal_settings, "exec-arg",
+		     capplet->terminal_exec_flag_entry, "text",
+		     G_SETTINGS_BIND_DEFAULT);
 
     /* Visual */
-    gconf_peditor_new_combo_box (NULL,
-        DEFAULT_APPS_KEY_VISUAL_EXEC,
-        capplet->visual_combo_box,
-        "conv-from-widget-cb", combo_conv_from_widget,
-        "conv-to-widget-cb", combo_conv_to_widget,
-        "data", capplet->visual_ats,
-        NULL);
-
-    gconf_peditor_new_string (NULL,
-        DEFAULT_APPS_KEY_VISUAL_EXEC,
-        capplet->visual_command_entry,
-        NULL);
-
-    gconf_peditor_new_boolean (NULL,
-        DEFAULT_APPS_KEY_VISUAL_STARTUP,
-        capplet->visual_startup_checkbutton,
-        NULL);
-
+    g_settings_bind (capplet->at_visual_settings, "exec",
+		     capplet->visual_command_entry, "text",
+		     G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (capplet->at_visual_settings, "startup",
+		     capplet->visual_startup_checkbutton, "active",
+		     G_SETTINGS_BIND_DEFAULT);
 
     /* Mobility */
-    gconf_peditor_new_combo_box (NULL,
-        DEFAULT_APPS_KEY_MOBILITY_EXEC,
-        capplet->mobility_combo_box,
-        "conv-from-widget-cb", combo_conv_from_widget,
-        "conv-to-widget-cb", combo_conv_to_widget,
-        "data", capplet->mobility_ats,
-        NULL);
-
-    gconf_peditor_new_string (NULL,
-        DEFAULT_APPS_KEY_MOBILITY_EXEC,
-        capplet->mobility_command_entry,
-        NULL);
-
-    gconf_peditor_new_boolean (NULL,
-        DEFAULT_APPS_KEY_MOBILITY_STARTUP,
-        capplet->mobility_startup_checkbutton,
-        NULL);
+    g_settings_bind (capplet->at_mobility_settings, "exec",
+		     capplet->mobility_command_entry, "text",
+		     G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (capplet->at_mobility_settings, "startup",
+		     capplet->mobility_startup_checkbutton, "active",
+		     G_SETTINGS_BIND_DEFAULT);
 
     gtk_window_set_icon_name (GTK_WINDOW (capplet->window),
 			      "gnome-settings-default-applications");
@@ -583,10 +449,6 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 void
 gnome_default_applications_panel_init (GnomeDACapplet *capplet)
 {
-    gconf_client_add_dir (capplet->gconf, 
-                          "/desktop/gnome/applications",
-                          GCONF_CLIENT_PRELOAD_RECURSIVE, NULL);
-
     gnome_da_xml_load_list (capplet);
 
     show_dialog (capplet, 0);

@@ -70,7 +70,9 @@ cc_default_applications_panel_dispose (GObject *object)
 
   if (priv->capplet)
     {
-      g_object_unref (priv->capplet->gconf);
+      g_object_unref (priv->capplet->terminal_settings);
+      g_object_unref (priv->capplet->at_mobility_settings);
+      g_object_unref (priv->capplet->at_visual_settings);
 
       if (priv->capplet->theme_changed_id > 0)
         {
@@ -120,7 +122,9 @@ cc_default_applications_panel_init (CcDefaultApplicationsPanel *self)
   priv = self->priv = DEFAULT_APPLICATIONS_PANEL_PRIVATE (self);
 
   priv->capplet = g_new0 (GnomeDACapplet, 1);
-  priv->capplet->gconf = gconf_client_get_default ();
+  priv->capplet->terminal_settings = g_settings_new ("org.gnome.desktop.default-applications.terminal");
+  priv->capplet->at_mobility_settings = g_settings_new ("org.gnome.desktop.default-applications.at.mobility");
+  priv->capplet->at_visual_settings = g_settings_new ("org.gnome.desktop.default-applications.at.visual");
 
   gnome_default_applications_panel_init (priv->capplet);
 

@@ -24,22 +24,6 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 
-#define DEFAULT_APPS_KEY_TERMINAL_PATH     "/desktop/gnome/applications/terminal"
-#define DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG DEFAULT_APPS_KEY_TERMINAL_PATH"/exec_arg"
-#define DEFAULT_APPS_KEY_TERMINAL_EXEC     DEFAULT_APPS_KEY_TERMINAL_PATH"/exec"
-
-#define DEFAULT_APPS_KEY_MEDIA_PATH        "/desktop/gnome/applications/media"
-#define DEFAULT_APPS_KEY_MEDIA_EXEC        DEFAULT_APPS_KEY_MEDIA_PATH"/exec"
-#define DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM  DEFAULT_APPS_KEY_MEDIA_PATH"/needs_term"
-
-#define DEFAULT_APPS_KEY_VISUAL_PATH  "/desktop/gnome/applications/at/visual"
-#define DEFAULT_APPS_KEY_VISUAL_EXEC  DEFAULT_APPS_KEY_VISUAL_PATH"/exec"
-#define DEFAULT_APPS_KEY_VISUAL_STARTUP DEFAULT_APPS_KEY_VISUAL_PATH"/startup"
-
-#define DEFAULT_APPS_KEY_MOBILITY_PATH  "/desktop/gnome/applications/at/mobility"
-#define DEFAULT_APPS_KEY_MOBILITY_EXEC  DEFAULT_APPS_KEY_MOBILITY_PATH"/exec"
-#define DEFAULT_APPS_KEY_MOBILITY_STARTUP DEFAULT_APPS_KEY_MOBILITY_PATH"/startup"
-
 typedef struct _GnomeDACapplet GnomeDACapplet;
 
 struct _GnomeDACapplet {
@@ -68,7 +52,9 @@ struct _GnomeDACapplet {
     GtkWidget *mobility_command_label;
     GtkWidget *mobility_startup_checkbutton;
 
-    GConfClient *gconf;
+    GSettings *terminal_settings;
+    GSettings *at_mobility_settings;
+    GSettings *at_visual_settings;
 
     GList *web_browsers;
     GList *mail_readers;
