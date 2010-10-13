@@ -24,7 +24,6 @@
 #ifndef __GNOME_KEYBOARD_PROPERTY_XKB_H
 #define __GNOME_KEYBOARD_PROPERTY_XKB_H
 
-#include <gconf/gconf-client.h>
 #include <gtk/gtk.h>
 
 #include "libgnomekbd/gkbd-keyboard-config.h"
@@ -39,8 +38,7 @@ extern GSettings *xkb_keyboard_settings;
 extern GSettings *xkb_desktop_settings;
 extern GkbdKeyboardConfig initial_config;
 
-extern void setup_xkb_tabs (GtkBuilder * dialog,
-			    GConfChangeSet * changeset);
+extern void setup_xkb_tabs (GtkBuilder * dialog);
 
 extern void xkb_layouts_fill_selected_tree (GtkBuilder * dialog);
 
@@ -50,8 +48,7 @@ extern void xkb_layouts_register_conf_listener (GtkBuilder * dialog);
 
 extern void xkb_options_register_conf_listener (GtkBuilder * dialog);
 
-extern void xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
-					       GConfChangeSet * changeset);
+extern void xkb_layouts_prepare_selected_tree (GtkBuilder * dialog);
 
 extern void xkb_options_load_options (GtkBuilder * dialog);
 

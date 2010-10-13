@@ -41,8 +41,6 @@ enum {
 	RESPONSE_CLOSE
 };
 
-static void keyboard_settings_changed (GSettings *settings, const gchar *key, GtkBuilder *dialog);
-
 static GSettings *keyboard_settings = NULL;
 
 static void
@@ -120,22 +118,6 @@ dialog_response (GtkWidget * widget,
 }
 
 static void
-repeat_delay_scale_changed (GtkRange *range, GtkBuilder *builder)
-{
-	g_signal_handlers_block_by_func (keyboard_settings, keyboard_settings_changed, builder);
-	g_settings_set_int (keyboard_settings, "delay", (gint) gtk_range_get_value (range));
-	g_signal_handlers_unblock_by_func (keyboard_settings, keyboard_settings_changed, builder);
-}
-
-static void
-repeat_speed_scale_changed (GtkRange *range, GtkBuilder *builder)
-{
-	g_signal_handlers_block_by_func (keyboard_settings, keyboard_settings_changed, builder);
-	g_settings_set_int (keyboard_settings, "rate", (gint) gtk_range_get_value (range));
-	g_signal_handlers_unblock_by_func (keyboard_settings, keyboard_settings_changed, builder);
-}
-
-static void
 setup_dialog (GtkBuilder * dialog)
 {
 	GObject *peditor;
@@ -143,12 +125,12 @@ setup_dialog (GtkBuilder * dialog)
 	g_settings_bind (keyboard_settings, "repeat",
 			 WID ("repeat_toggle"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
-
-	/* For scale widgets, the mapping does not work, so connect to signals */
-	g_signal_connect (WID ("repeat_delay_scale"), "value_changed",
-			  G_CALLBACK (repeat_delay_scale_changed), NULL);
-	g_signal_connect (WID ("repeat_speed_scale"), "value_changed",
-			  G_CALLBACK (repeat_speed_scale_changed), NULL);
+	g_settings_bind (keyboard_settings, "delay",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("repeat_delay_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (keyboard_settings, "rate",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("repeat_speed_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* FIXME: GConf stuff that needs to be solved */
 	peditor = gconf_peditor_new_boolean
@@ -167,22 +149,8 @@ setup_dialog (GtkBuilder * dialog)
 	g_signal_connect (WID ("keyboard_dialog"), "response",
 			  (GCallback) dialog_response, NULL);
 
-	setup_xkb_tabs (dialog, NULL);
+	setup_xkb_tabs (dialog);
 	setup_a11y_tabs (dialog, NULL);
-}
-
-static void
-keyboard_settings_changed (GSettings *settings, const gchar *key, GtkBuilder *dialog)
-{
-	if (g_str_equal (key, "delay")) {
-		g_signal_handlers_block_by_func (WID ("repeat_delay_scale"), repeat_delay_scale_changed, dialog);
-		gtk_range_set_value (GTK_RANGE (WID ("repeat_delay_scale")), (gdouble) g_settings_get_int (settings, "delay"));
-		g_signal_handlers_unblock_by_func (WID ("repeat_delay_scale"), repeat_delay_scale_changed, dialog);
-	} else if (g_str_equal (key, "rate")) {
-		g_signal_handlers_block_by_func (WID ("repeat_speed_scale"), repeat_speed_scale_changed, dialog);
-		gtk_range_set_value (GTK_RANGE (WID ("repeat_speed_scale")), (gdouble) g_settings_get_int (settings, "rate"));
-		g_signal_handlers_unblock_by_func (WID ("repeat_speed_scale"), repeat_speed_scale_changed, dialog);
-	}
 }
 
 GtkWidget *
@@ -192,8 +160,6 @@ gnome_keyboard_properties_init (GtkBuilder * dialog)
 
 	if (keyboard_settings == NULL) {
 		keyboard_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.keyboard");
-		g_signal_connect (keyboard_settings, "changed",
-				  G_CALLBACK (keyboard_settings_changed), dialog);
 	}
 
 	create_dialog (dialog);

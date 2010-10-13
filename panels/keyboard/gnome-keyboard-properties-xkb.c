@@ -155,7 +155,7 @@ chk_new_windows_inherit_layout_toggled (GtkWidget *
 }
 
 void
-setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
+setup_xkb_tabs (GtkBuilder * dialog)
 {
 	GtkWidget *chk_new_windows_inherit_layout =
 	    WID ("chk_new_windows_inherit_layout");
@@ -192,7 +192,7 @@ setup_xkb_tabs (GtkBuilder * dialog, GConfChangeSet * changeset)
 #endif
 		gtk_widget_hide (WID ("xkb_layouts_print"));
 
-	xkb_layouts_prepare_selected_tree (dialog, changeset);
+	xkb_layouts_prepare_selected_tree (dialog);
 	xkb_layouts_fill_selected_tree (dialog);
 
 	gtk_widget_set_sensitive (chk_new_windows_inherit_layout,

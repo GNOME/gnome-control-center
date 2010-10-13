@@ -203,8 +203,7 @@ xkb_layouts_dnd_data_received (GtkWidget * widget, GdkDragContext * dc,
 }
 
 void
-xkb_layouts_prepare_selected_tree (GtkBuilder * dialog,
-				   GConfChangeSet * changeset)
+xkb_layouts_prepare_selected_tree (GtkBuilder * dialog)
 {
 	GtkListStore *list_store =
 	    gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
