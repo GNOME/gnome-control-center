@@ -112,20 +112,6 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 }
 
 static void
-media_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
-{
-    guint current_index;
-    gboolean is_custom_active;
-
-    current_index = gtk_combo_box_get_active (combo);
-    is_custom_active = (current_index >= g_list_length (capplet->media_players));
-
-    gtk_widget_set_sensitive (capplet->media_player_command_entry, is_custom_active);
-    gtk_widget_set_sensitive (capplet->media_player_command_label, is_custom_active);
-    gtk_widget_set_sensitive (capplet->media_player_terminal_checkbutton, is_custom_active);
-}
-
-static void
 terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 {
     guint current_index;
@@ -199,12 +185,9 @@ static struct {
 } icons[] = {
     { "web_browser_image", "web-browser"      },
     { "mail_reader_image", "emblem-mail"  },
-    { "media_player_image", "applications-multimedia"     },
     { "visual_image",      "zoom-best-fit" },
     { "mobility_image",    "preferences-desktop-accessibility" },
 /*    { "messenger_image",   "im"               },
- *    { "image_image",       "image-viewer"     },
- *    { "video_image",       "gnome-multimedia" },
  *    { "text_image",        "text-editor"      }, */
     { "terminal_image",    "gnome-terminal"   }
 };
@@ -222,7 +205,6 @@ theme_changed_cb (GtkIconTheme *theme, GnomeDACapplet *capplet)
 
     refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers);
     refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers);
-    refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->media_combo_box), capplet->media_players);
     refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals);
     refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->visual_combo_box), capplet->visual_ats);
     refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->mobility_combo_box), capplet->mobility_ats);
@@ -477,10 +459,6 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
     capplet->terminal_exec_flag_entry = _gtk_builder_get_widget (builder, "terminal_exec_flag_entry");
     capplet->terminal_exec_flag_label = _gtk_builder_get_widget (builder, "terminal_exec_flag_label");
 
-    capplet->media_player_command_entry = _gtk_builder_get_widget (builder, "media_player_command_entry");
-    capplet->media_player_command_label = _gtk_builder_get_widget (builder, "media_player_command_label");
-    capplet->media_player_terminal_checkbutton = _gtk_builder_get_widget (builder, "media_player_terminal_checkbutton");
-
     capplet->visual_command_entry = _gtk_builder_get_widget (builder, "visual_command_entry");
     capplet->visual_command_label = _gtk_builder_get_widget (builder, "visual_command_label");
     capplet->visual_startup_checkbutton = _gtk_builder_get_widget (builder, "visual_start_checkbutton");
@@ -492,7 +470,6 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
     capplet->web_combo_box = _gtk_builder_get_widget (builder, "web_browser_combobox");
     capplet->mail_combo_box = _gtk_builder_get_widget (builder, "mail_reader_combobox");
     capplet->term_combo_box = _gtk_builder_get_widget (builder, "terminal_combobox");
-    capplet->media_combo_box = _gtk_builder_get_widget (builder, "media_player_combobox");
     capplet->visual_combo_box = _gtk_builder_get_widget (builder, "visual_combobox");
     capplet->mobility_combo_box = _gtk_builder_get_widget (builder, "mobility_combobox");
 
@@ -502,37 +479,16 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
     fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers, FALSE);
     fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers, FALSE);
     fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals, TRUE);
-    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->media_combo_box), capplet->media_players, TRUE);
     fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->visual_combo_box), capplet->visual_ats, TRUE);
     fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->mobility_combo_box), capplet->mobility_ats, TRUE);
 
     g_signal_connect (capplet->web_combo_box, "changed", G_CALLBACK (web_combo_changed_cb), capplet);
     g_signal_connect (capplet->mail_combo_box, "changed", G_CALLBACK (mail_combo_changed_cb), capplet);
     g_signal_connect (capplet->term_combo_box, "changed", G_CALLBACK (terminal_combo_changed_cb), capplet);
-    g_signal_connect (capplet->media_combo_box, "changed", G_CALLBACK (media_combo_changed_cb), capplet);
     g_signal_connect (capplet->visual_combo_box, "changed", G_CALLBACK (visual_combo_changed_cb), capplet);
     g_signal_connect (capplet->mobility_combo_box, "changed", G_CALLBACK (mobility_combo_changed_cb), capplet);
 
     /* Setup GConfPropertyEditors */
-
-    /* Media player */
-    gconf_peditor_new_combo_box (NULL,
-        DEFAULT_APPS_KEY_MEDIA_EXEC,
-        capplet->media_combo_box,
-        "conv-from-widget-cb", combo_conv_from_widget,
-        "conv-to-widget-cb", combo_conv_to_widget,
-        "data", capplet->media_players,
-        NULL);
-
-    gconf_peditor_new_string (NULL,
-        DEFAULT_APPS_KEY_MEDIA_EXEC,
-        capplet->media_player_command_entry,
-        NULL);
-
-    gconf_peditor_new_boolean (NULL,
-        DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM,
-        capplet->media_player_terminal_checkbutton,
-        NULL);
 
     /* Terminal */
     gconf_peditor_new_combo_box (NULL,
@@ -627,8 +583,6 @@ show_dialog (GnomeDACapplet *capplet, const gchar *start_page)
 void
 gnome_default_applications_panel_init (GnomeDACapplet *capplet)
 {
-    gconf_client_add_dir (capplet->gconf, "/desktop/gnome/url-handlers",
-                          GCONF_CLIENT_PRELOAD_RECURSIVE, NULL);
     gconf_client_add_dir (capplet->gconf, 
                           "/desktop/gnome/applications",
                           GCONF_CLIENT_PRELOAD_RECURSIVE, NULL);
