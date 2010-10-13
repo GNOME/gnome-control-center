@@ -72,7 +72,6 @@ update-icon-cache:
 		echo "***   $(gtk_update_icon_cache)"; \
 	fi
 
-EXTRA_DIST = org.gnome.randr.policy.in foo-marshal.list
-DISTCLEANFILES = org.gnome.randr.policy
+EXTRA_DIST = foo-marshal.list
 
 -include $(top_srcdir)/git.mk
