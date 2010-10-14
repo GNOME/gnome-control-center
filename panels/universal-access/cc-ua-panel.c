@@ -45,6 +45,7 @@ struct _CcUaPanelPrivate
 {
   GtkBuilder *builder;
   GConfClient *client;
+  GSettings *interface_settings;
 
   GSList *notify_list;
 };
@@ -106,6 +107,12 @@ cc_ua_panel_dispose (GObject *object)
     {
       g_object_unref (priv->client);
       priv->client = NULL;
+    }
+
+  if (priv->interface_settings)
+    {
+      g_object_unref (priv->interface_settings);
+      priv->interface_settings = NULL;
     }
 
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
@@ -251,8 +258,8 @@ gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
 }
 
 /* seeing section */
-#define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
-#define ICON_THEME_KEY "/desktop/gnome/interface/icon_theme"
+#define GTK_THEME_KEY "gtk-theme"
+#define ICON_THEME_KEY "icon-theme"
 #define CONTRAST_MODEL_THEME_COLUMN 3
 #define DPI_MODEL_FACTOR_COLUMN 2
 
@@ -407,50 +414,52 @@ dpi_combo_box_changed (GtkComboBox *box,
 
 
 static void
-contrast_notify_cb (GConfClient *client,
-                    guint        cnxn_id,
-                    GConfEntry  *entry,
-                    CcUaPanel   *panel)
+interface_settings_changed_cb (GSettings   *settings,
+                               const gchar *key,
+                               CcUaPanel   *panel)
 {
   CcUaPanelPrivate *priv = panel->priv;
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkWidget *combo;
-  gboolean valid;
-  gchar *gconf_value;
 
-  gconf_value = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
+  if (g_str_equal (key, "gtk-theme")) {
+    GtkTreeIter iter;
+    GtkTreeModel *model;
+    GtkWidget *combo;
+    gboolean valid;
+    gchar *theme_value;
 
-  combo = WID (priv->builder, "seeing_contrast_combobox");
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+    theme_value = g_settings_get_string (settings, GTK_THEME_KEY);
 
-  /* see if there is a matching theme name in the combobox model */
-  valid = gtk_tree_model_get_iter_first (model, &iter);
-  while (valid)
-    {
-      gchar *value;
+    combo = WID (priv->builder, "seeing_contrast_combobox");
+    model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 
-      gtk_tree_model_get (model, &iter,
-                          CONTRAST_MODEL_THEME_COLUMN, &value,
-                          -1);
+    /* see if there is a matching theme name in the combobox model */
+    valid = gtk_tree_model_get_iter_first (model, &iter);
+    while (valid)
+      {
+        gchar *value;
 
-      if (!g_strcmp0 (value, gconf_value))
-        {
-          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
-          g_free (value);
-          break;
-        }
+        gtk_tree_model_get (model, &iter,
+                            CONTRAST_MODEL_THEME_COLUMN, &value,
+                            -1);
 
-      g_free (value);
-      valid = gtk_tree_model_iter_next (model, &iter);
-    }
+        if (!g_strcmp0 (value, theme_value))
+          {
+            gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
+            g_free (value);
+            break;
+          }
 
-  /* if a value for the current theme was not found in the combobox, set to the
-   * "normal" option */
-  if (!valid)
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 1);
-    }
+        g_free (value);
+        valid = gtk_tree_model_iter_next (model, &iter);
+      }
+
+    /* if a value for the current theme was not found in the combobox, set to the
+     * "normal" option */
+    if (!valid)
+      {
+        gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 1);
+      }
+  }
 }
 
 static void
@@ -469,13 +478,13 @@ contrast_combobox_changed_cb (GtkComboBox *box,
 
   if (g_strcmp0 (theme_name, ""))
     {
-      gconf_client_set_string (priv->client, GTK_THEME_KEY, theme_name, NULL);
-      gconf_client_set_string (priv->client, ICON_THEME_KEY, theme_name, NULL);
+      g_settings_set_string (priv->interface_settings, GTK_THEME_KEY, theme_name);
+      g_settings_set_string (priv->interface_settings, ICON_THEME_KEY, theme_name);
     }
   else
     {
-      gconf_client_unset (priv->client, GTK_THEME_KEY, NULL);
-      gconf_client_unset (priv->client, ICON_THEME_KEY, NULL);
+      g_settings_reset (priv->interface_settings, GTK_THEME_KEY);
+      g_settings_reset (priv->interface_settings, ICON_THEME_KEY);
     }
 
   g_free (theme_name);
@@ -492,11 +501,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   gconf_client_add_dir (priv->client, "/desktop/gnome/font_rendering",
                         GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-  id = gconf_client_notify_add (priv->client, GTK_THEME_KEY,
-                                (GConfClientNotifyFunc) contrast_notify_cb,
-                                self, NULL, NULL);
-  priv->notify_list = g_slist_prepend (priv->notify_list, GINT_TO_POINTER (id));
-
   id = gconf_client_notify_add (priv->client, DPI_KEY,
                                 (GConfClientNotifyFunc) dpi_notify_cb,
                                 self, NULL, NULL);
@@ -504,7 +508,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 
   g_signal_connect (WID (priv->builder, "seeing_contrast_combobox"), "changed",
                     G_CALLBACK (contrast_combobox_changed_cb), self);
-  gconf_client_notify (priv->client, GTK_THEME_KEY);
 
   g_signal_connect (WID (priv->builder, "seeing_text_size_combobox"), "changed",
                     G_CALLBACK (dpi_combo_box_changed), self);
@@ -762,6 +765,10 @@ cc_ua_panel_init (CcUaPanel *self)
 
   gconf_client_add_dir (priv->client, CONFIG_ROOT,
                         GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+
+  priv->interface_settings = g_settings_new ("org.gnome.desktop.interface");
+  g_signal_connect (priv->interface_settings, "changed",
+                    G_CALLBACK (interface_settings_changed_cb), self);
 
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);
