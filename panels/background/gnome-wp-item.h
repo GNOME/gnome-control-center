@@ -85,9 +85,9 @@ void gnome_wp_item_update (GnomeWPItem *item);
 void gnome_wp_item_update_description (GnomeWPItem *item);
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);
 
-const gchar *wp_item_option_to_string (GnomeBGPlacement type);
-const gchar *wp_item_shading_to_string (GnomeBGColorType type);
-GnomeBGPlacement wp_item_string_to_option (const gchar *option);
-GnomeBGColorType wp_item_string_to_shading (const gchar *shade_type);
+const gchar *wp_item_option_to_string (GDesktopBackgroundStyle type);
+const gchar *wp_item_shading_to_string (GDesktopBackgroundShading type);
+GDesktopBackgroundStyle wp_item_string_to_option (const gchar *option);
+GDesktopBackgroundShading wp_item_string_to_shading (const gchar *shade_type);
 
 #endif

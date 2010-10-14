@@ -21,11 +21,13 @@
 #include <config.h>
 
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
 #include <string.h>
 #include "gnome-wp-item.h"
 
-static GConfEnumStringPair options_lookup[] = {
+static struct {
+  GDesktopBackgroundStyle value;
+  gchar *string;
+} options_lookup[] = {
   { G_DESKTOP_BACKGROUND_STYLE_CENTERED, "centered" },
   { G_DESKTOP_BACKGROUND_STYLE_STRETCHED, "stretched" },
   { G_DESKTOP_BACKGROUND_STYLE_SCALED, "scaled" },
@@ -35,35 +37,61 @@ static GConfEnumStringPair options_lookup[] = {
   { 0, NULL }
 };
 
-static GConfEnumStringPair shade_lookup[] = {
+static struct {
+  GDesktopBackgroundShading value;
+  gchar *string;
+} shade_lookup[] = {
   { G_DESKTOP_BACKGROUND_SHADING_SOLID, "solid" },
   { G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL, "horizontal-gradient" },
   { G_DESKTOP_BACKGROUND_SHADING_VERTICAL, "vertical-gradient" },
   { 0, NULL }
 };
 
-const gchar *wp_item_option_to_string (GnomeBGPlacement type)
+const gchar *wp_item_option_to_string (GDesktopBackgroundStyle type)
 {
-  return gconf_enum_to_string (options_lookup, type);
+  int i;
+
+  for (i = 0; options_lookup[i].value != 0; i++) {
+    if (options_lookup[i].value == type)
+      return (const gchar *) options_lookup[i].string;
+  }
+
+  return "scaled";
 }
 
-const gchar *wp_item_shading_to_string (GnomeBGColorType type)
+const gchar *wp_item_shading_to_string (GDesktopBackgroundShading type)
 {
-  return gconf_enum_to_string (shade_lookup, type);
+  int i;
+
+  for (i = 0; shade_lookup[i].value != 0; i++) {
+    if (shade_lookup[i].value == type)
+      return (const gchar *) shade_lookup[i].string;
+  }
+
+  return "solid";
 }
 
-GnomeBGPlacement wp_item_string_to_option (const gchar *option)
+GDesktopBackgroundStyle wp_item_string_to_option (const gchar *option)
 {
-  int i = GNOME_BG_PLACEMENT_SCALED;
-  gconf_string_to_enum (options_lookup, option, &i);
-  return i;
+  gint i;
+
+  for (i = 0; options_lookup[i].value != 0; i++) {
+    if (g_str_equal (options_lookup[i].string, option))
+      return options_lookup[i].value;
+  }
+
+  return G_DESKTOP_BACKGROUND_STYLE_SCALED;
 }
 
-GnomeBGColorType wp_item_string_to_shading (const gchar *shade_type)
+GDesktopBackgroundShading wp_item_string_to_shading (const gchar *shade_type)
 {
-  int i = GNOME_BG_COLOR_SOLID;
-  gconf_string_to_enum (shade_lookup, shade_type, &i);
-  return i;
+  int i;
+
+  for (i = 0; shade_lookup[i].value != 0; i++) {
+    if (g_str_equal (shade_lookup[i].string, shade_type))
+      return options_lookup[i].value;
+  }
+  return G_DESKTOP_BACKGROUND_SHADING_SOLID;
 }
 
 static void set_bg_properties (GnomeWPItem *item)
