@@ -369,7 +369,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   if (!g_strcmp0 (item->filename, "(none)"))
     {
-      g_settings_set_string (priv->settings, WP_OPTIONS_KEY, "none");
+      g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, G_DESKTOP_BACKGROUND_STYLE_NONE);
       g_settings_set_string (priv->settings, WP_FILE_KEY, "");
     }
   else if (item->source_url)
@@ -420,7 +420,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                          copy_finished_cb, panel);
 
       g_settings_set_string (priv->settings, WP_FILE_KEY, cache_path);
-      g_settings_set_string (priv->settings, WP_OPTIONS_KEY, wp_item_option_to_string (item->options));
+      g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, item->options);
       g_free (item->filename);
       item->filename = cache_path;
 
@@ -447,11 +447,10 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
            g_free (uri);
          }
 
-       g_settings_set_string (priv->settings, WP_OPTIONS_KEY, wp_item_option_to_string (item->options));
+       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, item->options);
     }
 
-  g_settings_set_string (priv->settings, WP_SHADING_KEY,
-			 wp_item_shading_to_string (item->shade_type));
+  g_settings_set_enum (priv->settings, WP_SHADING_KEY, item->shade_type);
 
   pcolor = gdk_color_to_string (item->pcolor);
   scolor = gdk_color_to_string (item->scolor);
@@ -460,6 +459,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   g_free (pcolor);
   g_free (scolor);
 
+  /* Apply all changes */
   g_settings_apply (priv->settings);
 
   /* update the preview information */
@@ -544,7 +544,7 @@ style_changed_cb (GtkComboBox       *box,
   CcBackgroundPanelPrivate *priv = panel->priv;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  gchar *value;
+  gint value;
 
   gtk_combo_box_get_active_iter (box, &iter);
 
@@ -552,9 +552,7 @@ style_changed_cb (GtkComboBox       *box,
 
   gtk_tree_model_get (model, &iter, 1, &value, -1);
 
-  g_settings_set_string (priv->settings, WP_OPTIONS_KEY, value);
-
-  g_free (value);
+  g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, value);
 
   if (priv->current_background)
     priv->current_background->options = gtk_combo_box_get_active (box);

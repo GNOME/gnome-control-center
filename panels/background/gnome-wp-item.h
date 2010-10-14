@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 #include <libgnomeui/gnome-bg.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 
 #include "gnome-wp-info.h"
 
@@ -44,8 +45,8 @@ struct _GnomeWPItem {
   gchar * name;
   gchar * filename;
   gchar * description;
-  GnomeBGPlacement options;
-  GnomeBGColorType shade_type;
+  GDesktopBackgroundStyle options;
+  GDesktopBackgroundShading shade_type;
 
   gchar * source_url;
 
