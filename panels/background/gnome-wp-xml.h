@@ -21,7 +21,6 @@
 #ifndef _GNOME_WP_XML_H_
 #define _GNOME_WP_XML_H_
 
-#include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 
 typedef struct _GnomeWpXml GnomeWpXml;
@@ -30,7 +29,7 @@ struct _GnomeWpXml
 {
   GHashTable *wp_hash;
   GnomeDesktopThumbnailFactory *thumb_factory;
-  GConfClient *client;
+  GSettings *settings;
   gint thumb_height;
   gint thumb_width;
   GtkListStore *wp_model;

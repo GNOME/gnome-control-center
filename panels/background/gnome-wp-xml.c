@@ -200,24 +200,18 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 
       /* Verify the colors and alloc some GdkColors here */
       if (!have_scale) {
-        s = gconf_client_get_string (data->client, WP_OPTIONS_KEY, NULL);
-        wp->options = wp_item_string_to_option (s);
-        g_free (s);
+        wp->options = g_settings_get_enum (data->settings, WP_OPTIONS_KEY);
       }
 
       if (!have_shade) {
-        s = gconf_client_get_string (data->client, WP_SHADING_KEY, NULL);
-        wp->shade_type = wp_item_string_to_shading (s);
-        g_free (s);
+        wp->shade_type = g_settings_get_enum (data->settings, WP_SHADING_KEY);
       }
 
       if (pcolor == NULL) {
-	pcolor = gconf_client_get_string (data->client,
-					  WP_PCOLOR_KEY, NULL);
+	pcolor = g_settings_get_string (data->settings, WP_PCOLOR_KEY);
       }
       if (scolor == NULL) {
-	scolor = gconf_client_get_string (data->client,
-					  WP_SCOLOR_KEY, NULL);
+	scolor = g_settings_get_string (data->settings, WP_SCOLOR_KEY);
       }
       gdk_color_parse (pcolor, &color1);
       gdk_color_parse (scolor, &color2);

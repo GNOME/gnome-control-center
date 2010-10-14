@@ -201,7 +201,7 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   /* set up wallpaper source */
   wp_xml = g_new0 (GnomeWpXml, 1);
   wp_xml->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
-  wp_xml->client = gconf_client_get_default ();
+  wp_xml->settings = g_settings_new (WP_PATH_ID);
   wp_xml->wp_model = bg_source_get_liststore (BG_SOURCE (self));
   wp_xml->thumb_width = THUMBNAIL_WIDTH;
   wp_xml->thumb_height = THUMBNAIL_HEIGHT;
@@ -213,7 +213,7 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
                         self);
 
   g_hash_table_destroy (wp_xml->wp_hash);
-  g_object_unref (wp_xml->client);
+  g_object_unref (wp_xml->settings);
   g_free (wp_xml);
 }
 

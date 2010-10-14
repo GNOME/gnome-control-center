@@ -26,19 +26,19 @@
 #include "gnome-wp-item.h"
 
 static GConfEnumStringPair options_lookup[] = {
-  { GNOME_BG_PLACEMENT_CENTERED, "centered" },
-  { GNOME_BG_PLACEMENT_FILL_SCREEN, "stretched" },
-  { GNOME_BG_PLACEMENT_SCALED, "scaled" },
-  { GNOME_BG_PLACEMENT_ZOOMED, "zoom" },
-  { GNOME_BG_PLACEMENT_TILED, "wallpaper" },
-  { GNOME_BG_PLACEMENT_SPANNED, "spanned" },
+  { G_DESKTOP_BACKGROUND_STYLE_CENTERED, "centered" },
+  { G_DESKTOP_BACKGROUND_STYLE_STRETCHED, "stretched" },
+  { G_DESKTOP_BACKGROUND_STYLE_SCALED, "scaled" },
+  { G_DESKTOP_BACKGROUND_STYLE_ZOOM, "zoom" },
+  { G_DESKTOP_BACKGROUND_STYLE_WALLPAPER, "wallpaper" },
+  { G_DESKTOP_BACKGROUND_STYLE_SPANNED, "spanned" },
   { 0, NULL }
 };
 
 static GConfEnumStringPair shade_lookup[] = {
-  { GNOME_BG_COLOR_SOLID, "solid" },
-  { GNOME_BG_COLOR_H_GRADIENT, "horizontal-gradient" },
-  { GNOME_BG_COLOR_V_GRADIENT, "vertical-gradient" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, "solid" },
+  { G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL, "horizontal-gradient" },
+  { G_DESKTOP_BACKGROUND_SHADING_VERTICAL, "vertical-gradient" },
   { 0, NULL }
 };
 
@@ -90,33 +90,28 @@ void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item)
 }
 
 void gnome_wp_item_update (GnomeWPItem *item) {
-  GConfClient *client;
+  GSettings *settings;
   GdkColor color1 = { 0, 0, 0, 0 }, color2 = { 0, 0, 0, 0 };
   gchar *s;
 
-  client = gconf_client_get_default ();
+  settings = g_settings_new (WP_PATH_ID);
 
-  s = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
-  item->options = wp_item_string_to_option (s);
-  g_free (s);
+  item->options = g_settings_get_enum (settings, WP_OPTIONS_KEY);
+  item->shade_type = g_settings_get_enum (settings,WP_SHADING_KEY);
 
-  s = gconf_client_get_string (client, WP_SHADING_KEY, NULL);
-  item->shade_type = wp_item_string_to_shading (s);
-  g_free (s);
-
-  s = gconf_client_get_string (client, WP_PCOLOR_KEY, NULL);
+  s = g_settings_get_string (settings, WP_PCOLOR_KEY);
   if (s != NULL) {
     gdk_color_parse (s, &color1);
     g_free (s);
   }
 
-  s = gconf_client_get_string (client, WP_SCOLOR_KEY, NULL);
+  s = g_settings_get_string (settings, WP_SCOLOR_KEY);
   if (s != NULL) {
     gdk_color_parse (s, &color2);
     g_free (s);
   }
 
-  g_object_unref (client);
+  g_object_unref (settings);
 
   if (item->pcolor != NULL)
     gdk_color_free (item->pcolor);
