@@ -61,7 +61,7 @@ struct _CcBackgroundPanelPrivate
   BgFlickrSource *flickr_source;
 #endif
 
-  GConfClient *client;
+  GSettings *settings;
 
   GnomeDesktopThumbnailFactory *thumb_factory;
 
@@ -154,10 +154,10 @@ cc_background_panel_dispose (GObject *object)
     }
 #endif
 
-  if (priv->client)
+  if (priv->settings)
     {
-      g_object_unref (priv->client);
-      priv->client = NULL;
+      g_object_unref (priv->settings);
+      priv->settings = NULL;
     }
 
   if (priv->copy_cancellable)
@@ -338,7 +338,6 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   GList *list;
   GtkTreeModel *model;
   GnomeWPItem *item;
-  GConfChangeSet *cs;
   gchar *pcolor, *scolor;
   CcBackgroundPanelPrivate *priv = panel->priv;
   gboolean draw_preview = TRUE;
@@ -365,12 +364,13 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   gtk_tree_model_get (model, &iter, 1, &item, -1);
 
-  cs = gconf_change_set_new ();
+  /* Do all changes in one 'transaction' */
+  g_settings_delay (priv->settings);
 
   if (!g_strcmp0 (item->filename, "(none)"))
     {
-      gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
-      gconf_change_set_set_string (cs, WP_FILE_KEY, "");
+      g_settings_set_string (priv->settings, WP_OPTIONS_KEY, "none");
+      g_settings_set_string (priv->settings, WP_FILE_KEY, "");
     }
   else if (item->source_url)
     {
@@ -419,10 +419,8 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                          NULL, NULL,
                          copy_finished_cb, panel);
 
-      gconf_change_set_set_string (cs, WP_FILE_KEY,
-                                   cache_path);
-      gconf_change_set_set_string (cs, WP_OPTIONS_KEY,
-                                   wp_item_option_to_string (item->options));
+      g_settings_set_string (priv->settings, WP_FILE_KEY, cache_path);
+      g_settings_set_string (priv->settings, WP_OPTIONS_KEY, wp_item_option_to_string (item->options));
       g_free (item->filename);
       item->filename = cache_path;
 
@@ -445,27 +443,24 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
          }
        else
          {
-           gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
+	   g_settings_set_string (priv->settings, WP_FILE_KEY, uri);
            g_free (uri);
          }
 
-       gconf_change_set_set_string (cs, WP_OPTIONS_KEY,
-                                    wp_item_option_to_string (item->options));
+       g_settings_set_string (priv->settings, WP_OPTIONS_KEY, wp_item_option_to_string (item->options));
     }
 
-  gconf_change_set_set_string (cs, WP_SHADING_KEY,
-                               wp_item_shading_to_string (item->shade_type));
+  g_settings_set_string (priv->settings, WP_SHADING_KEY,
+			 wp_item_shading_to_string (item->shade_type));
 
   pcolor = gdk_color_to_string (item->pcolor);
   scolor = gdk_color_to_string (item->scolor);
-  gconf_change_set_set_string (cs, WP_PCOLOR_KEY, pcolor);
-  gconf_change_set_set_string (cs, WP_SCOLOR_KEY, scolor);
+  g_settings_set_string (priv->settings, WP_PCOLOR_KEY, pcolor);
+  g_settings_set_string (priv->settings, WP_SCOLOR_KEY, scolor);
   g_free (pcolor);
   g_free (scolor);
 
-  gconf_client_commit_change_set (priv->client, cs, TRUE, NULL);
-
-  gconf_change_set_unref (cs);
+  g_settings_apply (priv->settings);
 
   /* update the preview information */
   update_preview (priv, item, draw_preview);
@@ -557,9 +552,7 @@ style_changed_cb (GtkComboBox       *box,
 
   gtk_tree_model_get (model, &iter, 1, &value, -1);
 
-  gconf_client_set_string (priv->client,
-                           "/desktop/gnome/background/picture_options",
-                           value, NULL);
+  g_settings_set_string (priv->settings, WP_OPTIONS_KEY, value);
 
   g_free (value);
 
@@ -584,13 +577,8 @@ color_changed_cb (GtkColorButton    *button,
 
   value = gdk_color_to_string (&color);
 
-  gconf_client_set_string (priv->client,
-                           "/desktop/gnome/background/primary_color",
-                           value, NULL);
-
-  gconf_client_set_string (priv->client,
-                           "/desktop/gnome/background/secondary_color",
-                           value, NULL);
+  g_settings_set_string (priv->settings, WP_PCOLOR_KEY, value);
+  g_settings_set_string (priv->settings, WP_SCOLOR_KEY, value);
 
   g_free (value);
 
@@ -623,7 +611,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
       return;
     }
 
-  priv->client = gconf_client_get_default ();
+  priv->settings = g_settings_new (WP_PATH_ID);
 
   store = (GtkListStore*) gtk_builder_get_object (priv->builder,
                                                   "sources-liststore");
@@ -704,8 +692,8 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   priv->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
-  /* initalise the current background information from gconf */
-  filename = gconf_client_get_string (priv->client, WP_FILE_KEY, NULL);
+  /* initalise the current background information from settings */
+  filename = g_settings_get_string (priv->settings, WP_FILE_KEY);
   if (!filename || !g_strcmp0 (filename, ""))
     {
       g_free (filename);

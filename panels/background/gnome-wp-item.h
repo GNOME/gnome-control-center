@@ -29,12 +29,12 @@
 #ifndef _GNOME_WP_ITEM_H_
 #define _GNOME_WP_ITEM_H_
 
-#define WP_PATH_KEY "/desktop/gnome/background"
-#define WP_FILE_KEY WP_PATH_KEY "/picture_filename"
-#define WP_OPTIONS_KEY WP_PATH_KEY "/picture_options"
-#define WP_SHADING_KEY WP_PATH_KEY "/color_shading_type"
-#define WP_PCOLOR_KEY WP_PATH_KEY "/primary_color"
-#define WP_SCOLOR_KEY WP_PATH_KEY "/secondary_color"
+#define WP_PATH_ID "org.gnome.desktop.background"
+#define WP_FILE_KEY "picture-filename"
+#define WP_OPTIONS_KEY "picture-options"
+#define WP_SHADING_KEY "color-shading-type"
+#define WP_PCOLOR_KEY "primary-color"
+#define WP_SCOLOR_KEY "secondary-color"
 
 typedef struct _GnomeWPItem GnomeWPItem;
 
