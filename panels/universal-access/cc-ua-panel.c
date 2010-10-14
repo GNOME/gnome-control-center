@@ -496,8 +496,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   CcUaPanelPrivate *priv = self->priv;
   guint id;
 
-  gconf_client_add_dir (priv->client, "/desktop/gnome/interface",
-                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (priv->client, "/desktop/gnome/font_rendering",
                         GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
