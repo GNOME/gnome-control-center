@@ -24,8 +24,4 @@ if ! which gnome-autogen.sh ; then
   exit 1
 fi
 
-gtkdocize || exit 1
-
-autopoint --force || exit $?
-
 . gnome-autogen.sh
