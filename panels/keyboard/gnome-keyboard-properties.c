@@ -30,8 +30,6 @@
 #endif
 #include <gio/gio.h>
 
-#include "gconf-property-editor.h"
-
 #include "gnome-keyboard-properties.h"
 #include "gnome-keyboard-properties-a11y.h"
 #include "gnome-keyboard-properties-xkb.h"
@@ -42,6 +40,7 @@ enum {
 };
 
 static GSettings *keyboard_settings = NULL;
+static GSettings *interface_settings = NULL;
 
 static void
 create_dialog (GtkBuilder * dialog)
@@ -79,32 +78,6 @@ create_dialog (GtkBuilder * dialog)
 			      image);
 }
 
-static GConfValue *
-blink_from_widget (GConfPropertyEditor * peditor, const GConfValue * value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_INT);
-	gconf_value_set_int (new_value,
-			     2600 - gconf_value_get_int (value));
-
-	return new_value;
-}
-
-static GConfValue *
-blink_to_widget (GConfPropertyEditor * peditor, const GConfValue * value)
-{
-	GConfValue *new_value;
-	gint current_rate;
-
-	current_rate = gconf_value_get_int (value);
-	new_value = gconf_value_new (GCONF_VALUE_INT);
-	gconf_value_set_int (new_value,
-			     CLAMP (2600 - current_rate, 100, 2500));
-
-	return new_value;
-}
-
 static void
 dialog_response (GtkWidget * widget,
 		 gint response_id, GConfChangeSet * changeset)
@@ -120,8 +93,6 @@ dialog_response (GtkWidget * widget,
 static void
 setup_dialog (GtkBuilder * dialog)
 {
-	GObject *peditor;
-
 	g_settings_bind (keyboard_settings, "repeat",
 			 WID ("repeat_toggle"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
@@ -132,19 +103,12 @@ setup_dialog (GtkBuilder * dialog)
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("repeat_speed_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	/* FIXME: GConf stuff that needs to be solved */
-	peditor = gconf_peditor_new_boolean
-	    (NULL, "/desktop/gnome/interface/cursor_blink",
-	     WID ("cursor_toggle"), NULL);
-	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
-					WID ("cursor_hbox"));
-	gconf_peditor_new_numeric_range (NULL,
-					 "/desktop/gnome/interface/cursor_blink_time",
-					 WID ("cursor_blink_time_scale"),
-					 "conv-to-widget-cb",
-					 blink_to_widget,
-					 "conv-from-widget-cb",
-					 blink_from_widget, NULL);
+	g_settings_bind (interface_settings, "cursor-blink",
+			 WID ("cursor_toggle"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (interface_settings, "cursor-blink-time",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("cursor_blink_time_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	g_signal_connect (WID ("keyboard_dialog"), "response",
 			  (GCallback) dialog_response, NULL);
@@ -158,9 +122,11 @@ gnome_keyboard_properties_init (GtkBuilder * dialog)
 {
 	GtkWidget *dialog_win = NULL;
 
-	if (keyboard_settings == NULL) {
+	if (keyboard_settings == NULL)
 		keyboard_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.keyboard");
-	}
+
+	if (interface_settings == NULL)
+		interface_settings = g_settings_new ("org.gnome.desktop.interface");
 
 	create_dialog (dialog);
 	if (dialog) {
