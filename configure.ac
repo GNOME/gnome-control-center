@@ -80,7 +80,8 @@ COMMON_MODULES="gtk+-3.0 >= 2.90.0
  gthread-2.0
  gio-2.0
  gconf-2.0
- libxml-2.0"
+ libxml-2.0
+ gsettings-desktop-schemas"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
