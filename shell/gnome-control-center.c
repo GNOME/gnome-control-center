@@ -774,8 +774,11 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     }
 }
 
-
-
+static GtkWidget *
+_shell_get_toplevel (CcShell *shell)
+{
+  return GNOME_CONTROL_CENTER (shell)->priv->window;
+}
 
 /* GObject Implementation */
 static void
@@ -883,6 +886,7 @@ gnome_control_center_class_init (GnomeControlCenterClass *klass)
   object_class->finalize = gnome_control_center_finalize;
 
   shell_class->set_active_panel_from_id = _shell_set_active_panel_from_id;
+  shell_class->get_toplevel = _shell_get_toplevel;
 }
 
 static void

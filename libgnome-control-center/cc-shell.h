@@ -22,7 +22,7 @@
 #ifndef _CC_SHELL_H
 #define _CC_SHELL_H
 
-#include <glib-object.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -84,19 +84,21 @@ struct _CcShellClass
 
   /*< public >*/
   /* vfuncs */
-  gboolean (*set_active_panel_from_id) (CcShell      *shell,
-                                        const gchar  *id,
-                                        GError      **error);
+  gboolean    (*set_active_panel_from_id) (CcShell      *shell,
+                                           const gchar  *id,
+                                           GError      **error);
+  GtkWidget * (*get_toplevel)             (CcShell      *shell);
 };
 
-GType    cc_shell_get_type                 (void) G_GNUC_CONST;
+GType           cc_shell_get_type                 (void) G_GNUC_CONST;
 
-CcPanel* cc_shell_get_active_panel         (CcShell *shell);
-void     cc_shell_set_active_panel         (CcShell *shell,
-                                            CcPanel *panel);
-gboolean cc_shell_set_active_panel_from_id (CcShell      *shell,
-                                            const gchar  *id,
-                                            GError      **error);
+CcPanel*        cc_shell_get_active_panel         (CcShell      *shell);
+void            cc_shell_set_active_panel         (CcShell      *shell,
+                                                   CcPanel      *panel);
+gboolean        cc_shell_set_active_panel_from_id (CcShell      *shell,
+                                                   const gchar  *id,
+                                                   GError      **error);
+GtkWidget *     cc_shell_get_toplevel             (CcShell      *shell);
 
 G_END_DECLS
 

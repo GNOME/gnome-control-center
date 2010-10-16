@@ -204,4 +204,32 @@ cc_shell_set_active_panel_from_id (CcShell      *shell,
     }
 }
 
+/**
+ * cc_shell_get_toplevel:
+ * @shell: A #CcShell
+ *
+ * Gets the toplevel window of the shell.
+ *
+ * Returns: The #GtkWidget of the shell window, or #NULL on error.
+ */
+GtkWidget *
+cc_shell_get_toplevel (CcShell *shell)
+{
+  CcShellClass *klass;
+
+  g_return_val_if_fail (CC_IS_SHELL (shell), NULL);
+
+  klass = CC_SHELL_GET_CLASS (shell);
+
+  if (klass->get_toplevel)
+    {
+        return klass->get_toplevel (shell);
+    }
+
+  g_warning ("Object of type \"%s\" does not implement required virtual"
+             " function \"get_toplevel\",",
+             G_OBJECT_TYPE_NAME (shell));
+
+  return NULL;
+}
 
