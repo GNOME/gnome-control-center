@@ -341,7 +341,14 @@ setup_dialog (GtkBuilder *dialog)
 	g_settings_bind (mouse_settings, "motion-acceleration",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("accel_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (touchpad_settings, "motion-acceleration",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("accel_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
+
 	g_settings_bind (mouse_settings, "motion-threshold",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("sensitivity_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (touchpad_settings, "motion-threshold",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("sensitivity_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
