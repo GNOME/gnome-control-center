@@ -15,12 +15,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * Author: Thomas Wood <thomas.wood@intel.com>
+ * Authors: Thomas Wood <thomas.wood@intel.com>
+ *          Rodrigo Moya <rodrigo@gnome.org>
  *
  */
 
 #include "cc-mouse-panel.h"
-#include <gconf/gconf-client.h>
+#include "gnome-mouse-properties.h"
 #include <gtk/gtk.h>
 
 G_DEFINE_DYNAMIC_TYPE (CcMousePanel, cc_mouse_panel, CC_TYPE_PANEL)
@@ -31,7 +32,6 @@ G_DEFINE_DYNAMIC_TYPE (CcMousePanel, cc_mouse_panel, CC_TYPE_PANEL)
 struct _CcMousePanelPrivate
 {
   GtkBuilder *builder;
-  GConfClient *client;
 };
 
 
@@ -65,11 +65,6 @@ static void
 cc_mouse_panel_dispose (GObject *object)
 {
   CcMousePanelPrivate *priv = CC_MOUSE_PANEL (object)->priv;
-  if (priv->client)
-    {
-      g_object_unref (priv->client);
-      priv->client = NULL;
-    }
 
   if (priv->builder)
     {
@@ -104,9 +99,6 @@ cc_mouse_panel_class_finalize (CcMousePanelClass *klass)
 {
 }
 
-GtkWidget *
-gnome_mouse_properties_init (GConfClient *client, GtkBuilder *dialog);
-
 static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
@@ -116,7 +108,6 @@ cc_mouse_panel_init (CcMousePanel *self)
 
   priv = self->priv = MOUSE_PANEL_PRIVATE (self);
 
-  priv->client = gconf_client_get_default ();
   priv->builder = gtk_builder_new ();
 
   gtk_builder_add_from_file (priv->builder,
@@ -128,7 +119,7 @@ cc_mouse_panel_init (CcMousePanel *self)
       return;
     }
 
-  gnome_mouse_properties_init (priv->client, priv->builder);
+  gnome_mouse_properties_init (priv->builder);
 
   prefs_widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
                                                       "prefs_widget");
