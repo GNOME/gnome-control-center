@@ -58,11 +58,6 @@ static gint double_click_state = DOUBLE_CLICK_TEST_OFF;
 static GSettings *mouse_settings = NULL;
 static GSettings *touchpad_settings = NULL;
 
-/* normalization routines */
-/* All of our scales but double_click are on the range 1->10 as a result, we
- * have a few routines to convert from whatever the gconf key is to our range.
- */
-
 static void
 get_default_mouse_info (int *default_numerator, int *default_denominator, int *default_threshold)
 {
