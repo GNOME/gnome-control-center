@@ -27,11 +27,10 @@
 
 #include <glib/gi18n.h>
 #include <string.h>
-#include <gconf/gconf-client.h>
 #include <gdk/gdkx.h>
+#include <gnome-settings-daemon/gsd-enums.h>
 #include <math.h>
 
-#include "gconf-property-editor.h"
 #include "gnome-mouse-accessibility.h"
 #include "capplet-stock-icons.h"
 #include "gnome-mouse-properties.h"
@@ -52,29 +51,17 @@ enum
 	DOUBLE_CLICK_TEST_ON
 };
 
-/* We use this in at least half a dozen places, so it makes sense just to
- * define the macro */
-
-#define DOUBLE_CLICK_KEY "/desktop/gnome/peripherals/mouse/double_click"
-
 /* State in testing the double-click speed. Global for a great deal of
  * convenience
  */
 static gint double_click_state = DOUBLE_CLICK_TEST_OFF;
+static GSettings *mouse_settings = NULL;
+static GSettings *touchpad_settings = NULL;
 
 /* normalization routines */
 /* All of our scales but double_click are on the range 1->10 as a result, we
  * have a few routines to convert from whatever the gconf key is to our range.
  */
-static GConfValue *
-double_click_from_gconf (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_INT);
-	gconf_value_set_int (new_value, CLAMP ((int) floor ((gconf_value_get_int (value) + 50) / 100.0) * 100, 100, 1000));
-	return new_value;
-}
 
 static void
 get_default_mouse_info (int *default_numerator, int *default_denominator, int *default_threshold)
@@ -99,86 +86,6 @@ get_default_mouse_info (int *default_numerator, int *default_denominator, int *d
 	if (default_threshold)
 		*default_threshold = tmp_threshold;
 
-}
-
-static GConfValue *
-motion_acceleration_from_gconf (GConfPropertyEditor *peditor,
-				const GConfValue *value)
-{
-	GConfValue *new_value;
-	gfloat motion_acceleration;
-
-	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-
-	if (gconf_value_get_float (value) == -1.0) {
-		int numerator, denominator;
-
-		get_default_mouse_info (&numerator, &denominator, NULL);
-
-		motion_acceleration = CLAMP ((gfloat)(numerator / denominator), 0.2, 6.0);
-	}
-	else {
-		motion_acceleration = CLAMP (gconf_value_get_float (value), 0.2, 6.0);
-	}
-
-	if (motion_acceleration >= 1)
-		gconf_value_set_float (new_value, motion_acceleration + 4);
-	else
-		gconf_value_set_float (new_value, motion_acceleration * 5);
-
-	return new_value;
-}
-
-static GConfValue *
-motion_acceleration_to_gconf (GConfPropertyEditor *peditor,
-			      const GConfValue *value)
-{
-	GConfValue *new_value;
-	gfloat motion_acceleration;
-
-	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-	motion_acceleration = CLAMP (gconf_value_get_float (value), 1.0, 10.0);
-
-	if (motion_acceleration < 5)
-		gconf_value_set_float (new_value, motion_acceleration / 5.0);
-	else
-		gconf_value_set_float (new_value, motion_acceleration - 4);
-
-	return new_value;
-}
-
-static GConfValue *
-threshold_from_gconf (GConfPropertyEditor *peditor,
-		      const GConfValue *value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-
-	if (gconf_value_get_int (value) == -1) {
-		int threshold;
-
-		get_default_mouse_info (NULL, NULL, &threshold);
-		gconf_value_set_float (new_value, CLAMP (threshold, 1, 10));
-	}
-	else {
-		gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
-	}
-
-	return new_value;
-}
-
-static GConfValue *
-drag_threshold_from_gconf (GConfPropertyEditor *peditor,
-			   const GConfValue *value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-
-	gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
-
-	return new_value;
 }
 
 /* Double Click handling */
@@ -209,29 +116,21 @@ test_maybe_timeout (struct test_data_t *data)
 static gboolean
 event_box_button_press_event (GtkWidget   *widget,
 			      GdkEventButton *event,
-			      GConfChangeSet *changeset)
+			      GtkBuilder   *dialog)
 {
 	gint                       double_click_time;
-	GConfValue                *value;
 	static struct test_data_t  data;
 	static gint                test_on_timeout_id     = 0;
 	static gint                test_maybe_timeout_id  = 0;
 	static guint32             double_click_timestamp = 0;
 	GtkWidget                 *image;
-	GConfClient               *client;
 
 	if (event->type != GDK_BUTTON_PRESS)
 		return FALSE;
 
 	image = g_object_get_data (G_OBJECT (widget), "image");
 
-	if (!(changeset && gconf_change_set_check_value (changeset, DOUBLE_CLICK_KEY, &value))) {
-		client = gconf_client_get_default();
-		double_click_time = gconf_client_get_int (client, DOUBLE_CLICK_KEY, NULL);
-		g_object_unref (client);
-
-	} else
-		double_click_time = gconf_value_get_int (value);
+	double_click_time = g_settings_get_int (mouse_settings, "double-click");
 
 	if (test_maybe_timeout_id != 0)
 		g_source_remove  (test_maybe_timeout_id);
@@ -285,42 +184,23 @@ orientation_radio_button_release_event (GtkWidget   *widget,
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 }
 
-static GConfValue *
-left_handed_from_gconf (GConfPropertyEditor *peditor,
-			const GConfValue *value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_INT);
-
-	gconf_value_set_int (new_value, gconf_value_get_bool (value));
-
-	return new_value;
-}
-
-static GConfValue *
-left_handed_to_gconf (GConfPropertyEditor *peditor,
-		      const GConfValue *value)
-{
-	GConfValue *new_value;
-
-	new_value = gconf_value_new (GCONF_VALUE_BOOL);
-
-	gconf_value_set_bool (new_value, gconf_value_get_int (value) == 1);
-
-	return new_value;
-}
-
 static void
-scrollmethod_changed_event (GConfPropertyEditor *peditor,
-			    const gchar *key,
-			    const GConfValue *value,
-			    GtkBuilder *dialog)
+scrollmethod_changed_event (GtkToggleButton *button, GtkBuilder *dialog)
 {
+	GsdTouchpadScrollMethod method;
 	GtkToggleButton *disabled = GTK_TOGGLE_BUTTON (WID ("scroll_disabled_radio"));
 
 	gtk_widget_set_sensitive (WID ("horiz_scroll_toggle"),
 				  !gtk_toggle_button_get_active (disabled));
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("scroll_edge_radio"))))
+		method = GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING;
+	else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("scroll_twofinger_radio"))))
+		method = GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING;
+	else
+		method = GSD_TOUCHPAD_SCROLL_METHOD_DISABLED;
+
+	g_settings_set_enum (touchpad_settings, "scroll-method", method);
 }
 
 static void
@@ -429,18 +309,14 @@ find_synaptics (void)
 
 /* Set up the property editors in the dialog. */
 static void
-setup_dialog (GtkBuilder *dialog, GConfChangeSet *changeset)
+setup_dialog (GtkBuilder *dialog)
 {
 	GtkRadioButton    *radio;
-	GObject           *peditor;
 
 	/* Orientation radio buttons */
 	radio = GTK_RADIO_BUTTON (WID ("left_handed_radio"));
-	peditor = gconf_peditor_new_select_radio
-		(changeset, "/desktop/gnome/peripherals/mouse/left_handed", gtk_radio_button_get_group (radio),
-		 "conv-to-widget-cb", left_handed_from_gconf,
-		 "conv-from-widget-cb", left_handed_to_gconf,
-		 NULL);
+	g_settings_bind (mouse_settings, "left-handed", radio, "active", G_SETTINGS_BIND_DEFAULT);
+
 	/* explicitly connect to button-release so that you can change orientation with either button */
 	g_signal_connect (WID ("right_handed_radio"), "button_release_event",
 		G_CALLBACK (orientation_radio_button_release_event), NULL);
@@ -448,56 +324,55 @@ setup_dialog (GtkBuilder *dialog, GConfChangeSet *changeset)
 		G_CALLBACK (orientation_radio_button_release_event), NULL);
 
 	/* Locate pointer toggle */
-	peditor = gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer", WID ("locate_pointer_toggle"), NULL);
+	g_settings_bind (mouse_settings, "locate-pointer",
+			 WID ("locate_pointer_toggle"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Double-click time */
-	peditor = gconf_peditor_new_numeric_range
-		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"),
-		 "conv-to-widget-cb", double_click_from_gconf,
-		 NULL);
+	g_settings_bind (mouse_settings, "double-click",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("delay_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 	gtk_image_set_from_stock (GTK_IMAGE (WID ("double_click_image")), MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size ());
 	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", WID ("double_click_image"));
 	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
-			  G_CALLBACK (event_box_button_press_event), changeset);
+			  G_CALLBACK (event_box_button_press_event), dialog);
 
 	/* speed */
-      	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/peripherals/mouse/motion_acceleration", WID ("accel_scale"),
-		 "conv-to-widget-cb", motion_acceleration_from_gconf,
-		 "conv-from-widget-cb", motion_acceleration_to_gconf,
-		 NULL);
-
-	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold", WID ("sensitivity_scale"),
-		 "conv-to-widget-cb", threshold_from_gconf,
-		 NULL);
+	g_settings_bind (mouse_settings, "motion-acceleration",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("accel_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (mouse_settings, "motion-threshold",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("sensitivity_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* DnD threshold */
-	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
-		 "conv-to-widget-cb", drag_threshold_from_gconf,
-		 NULL);
+	g_settings_bind (mouse_settings, "drag-threshold",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("drag_threshold_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Trackpad page */
 	if (find_synaptics () == FALSE)
 		gtk_notebook_remove_page (GTK_NOTEBOOK (WID ("prefs_widget")), -1);
 	else {
-		gconf_peditor_new_boolean
-			(changeset, "/desktop/gnome/peripherals/touchpad/disable_while_typing", WID ("disable_w_typing_toggle"), NULL);
-		gconf_peditor_new_boolean
-			(changeset, "/desktop/gnome/peripherals/touchpad/tap_to_click", WID ("tap_to_click_toggle"), NULL);
-		gconf_peditor_new_boolean
-			(changeset, "/desktop/gnome/peripherals/touchpad/horiz_scroll_enabled", WID ("horiz_scroll_toggle"), NULL);
-		radio = GTK_RADIO_BUTTON (WID ("scroll_disabled_radio"));
-		peditor = gconf_peditor_new_select_radio
-			(changeset, "/desktop/gnome/peripherals/touchpad/scroll_method", gtk_radio_button_get_group (radio),
-			 NULL);
+		g_settings_bind (touchpad_settings, "disable-while-typing",
+				 WID ("disable_w_typing_toggle"), "active",
+				 G_SETTINGS_BIND_DEFAULT);
+		g_settings_bind (touchpad_settings, "tap-to-click",
+				 WID ("tap_to_click_toggle"), "active",
+				 G_SETTINGS_BIND_DEFAULT);
+		g_settings_bind (touchpad_settings, "horiz-scroll-enabled",
+				 WID ("horiz_scroll_toggle"), "active",
+				 G_SETTINGS_BIND_DEFAULT);
+
+		g_signal_connect (WID ("scroll_disabled_radio"), "toggled",
+				  G_CALLBACK (scrollmethod_changed_event), dialog);
+		g_signal_connect (WID ("scroll_edge_radio"), "toggled",
+				  G_CALLBACK (scrollmethod_changed_event), dialog);
+		g_signal_connect (WID ("scroll_twofinger_radio"), "toggled",
+				  G_CALLBACK (scrollmethod_changed_event), dialog);
 
 		synaptics_check_capabilities (dialog);
-		scrollmethod_changed_event (GCONF_PROPERTY_EDITOR (peditor), NULL, NULL, dialog);
-		g_signal_connect (peditor, "value-changed",
-				  G_CALLBACK (scrollmethod_changed_event), dialog);
+		scrollmethod_changed_event (GTK_TOGGLE_BUTTON (WID ("scroll_disabled_radio")), dialog);
 	}
 
 }
@@ -547,7 +422,7 @@ create_dialog (GtkBuilder *dialog)
 /* Callback issued when a button is clicked on the dialog */
 
 static void
-dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset)
+dialog_response_cb (GtkDialog *dialog, gint response_id, gpointer user_data)
 {
 /*
 	if (response_id == GTK_RESPONSE_HELP)
@@ -559,22 +434,21 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changes
 }
 
 GtkWidget *
-gnome_mouse_properties_init (GConfClient *client, GtkBuilder *dialog)
+gnome_mouse_properties_init (GtkBuilder *dialog)
 {
 	GtkWidget      *dialog_win, *w;
 	gchar *start_page = NULL;
 
 	capplet_init_stock_icons ();
 
-	client = gconf_client_get_default ();
-	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	gconf_client_add_dir (client, "/desktop/gnome/peripherals/touchpad", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
+	touchpad_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.touchpad");
 
 	create_dialog (dialog);
 
 	if (dialog) {
-		setup_dialog (dialog, NULL);
-		setup_accessibility (dialog, client);
+		setup_dialog (dialog);
+		setup_accessibility (dialog);
 
 		dialog_win = WID ("mouse_properties_dialog");
 		g_signal_connect (dialog_win, "response",

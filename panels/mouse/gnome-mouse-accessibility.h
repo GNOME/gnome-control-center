@@ -18,11 +18,11 @@
 #ifndef __GNOME_MOUSE_A11Y_H
 #define __GNOME_MOUSE_A11Y_H
 
-#include <gconf/gconf-client.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-void setup_accessibility (GtkBuilder *dialog, GConfClient *client);
+void setup_accessibility (GtkBuilder *dialog);
 
 G_END_DECLS
 

@@ -172,8 +172,10 @@ gconf_value_changed (GConfClient *client,
 }
 
 void
-setup_accessibility (GtkBuilder *dialog, GConfClient *client)
+setup_accessibility (GtkBuilder *dialog)
 {
+	GConfClient *client = gconf_client_get_default ();
+
 	gconf_client_add_dir (client, MT_GCONF_HOME,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	g_signal_connect (client, "value_changed",
@@ -231,4 +233,6 @@ setup_accessibility (GtkBuilder *dialog, GConfClient *client)
 	g_signal_connect (WID ("dwell_enable"), "toggled",
 			  G_CALLBACK (dwell_enable_toggled_cb), dialog);
 	dwell_enable_toggled_cb (WID ("dwell_enable"), dialog);
+
+	g_object_unref (client);
 }

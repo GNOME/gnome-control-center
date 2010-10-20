@@ -3,6 +3,7 @@ cappletname = mouse
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
+	$(GSD_DBUS_CFLAGS)				\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
@@ -25,7 +26,7 @@ libmouse_properties_la_SOURCES =	\
 	capplet-stock-icons.c		\
 	capplet-stock-icons.h
 
-libmouse_properties_la_LIBADD = $(PANEL_LIBS)
+libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(GSD_DBUS_LIBS)
 libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@

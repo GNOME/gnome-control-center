@@ -25,5 +25,5 @@
 
 #include <gtk/gtk.h>
 
-GtkWidget *gnome_mouse_properties_init (GConfClient *client, GtkBuilder *dialog);
+GtkWidget *gnome_mouse_properties_init (GtkBuilder *dialog);
 
