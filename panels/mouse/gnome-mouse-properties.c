@@ -341,14 +341,7 @@ setup_dialog (GtkBuilder *dialog)
 	g_settings_bind (mouse_settings, "motion-acceleration",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("accel_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (touchpad_settings, "motion-acceleration",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("accel_scale"))), "value",
-			 G_SETTINGS_BIND_DEFAULT);
-
 	g_settings_bind (mouse_settings, "motion-threshold",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("sensitivity_scale"))), "value",
-			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (touchpad_settings, "motion-threshold",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("sensitivity_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
@@ -369,6 +362,12 @@ setup_dialog (GtkBuilder *dialog)
 				 G_SETTINGS_BIND_DEFAULT);
 		g_settings_bind (touchpad_settings, "horiz-scroll-enabled",
 				 WID ("horiz_scroll_toggle"), "active",
+				 G_SETTINGS_BIND_DEFAULT);
+		g_settings_bind (touchpad_settings, "motion-acceleration",
+				 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_accel_scale"))), "value",
+				 G_SETTINGS_BIND_DEFAULT);
+		g_settings_bind (touchpad_settings, "motion-threshold",
+				 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_sensitivity_scale"))), "value",
 				 G_SETTINGS_BIND_DEFAULT);
 
 		g_signal_connect (WID ("scroll_disabled_radio"), "toggled",
