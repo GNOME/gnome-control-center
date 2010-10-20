@@ -27,7 +27,6 @@
 #include <glib/gi18n.h>
 #include <stdlib.h>
 
-#include "libgnome-control-center/gconf-property-editor.h"
 #include "gnome-da-capplet.h"
 #include "gnome-da-xml.h"
 #include "gnome-da-item.h"
