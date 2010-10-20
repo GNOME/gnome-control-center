@@ -13,10 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&component=general\n"
-"POT-Creation-Date: 2010-10-07 23:45+0000\n"
-"PO-Revision-Date: 2010-10-11 13:55+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-20 23:41+0200\n"
+"PO-Revision-Date: 2010-10-20 23:42+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -237,19 +236,19 @@ msgstr "אפור"
 msgid "Black"
 msgstr "שחור"
 
-#: ../panels/background/cc-background-panel.c:633
+#: ../panels/background/cc-background-panel.c:619
 msgid "Wallpapers"
 msgstr "רקעים"
 
-#: ../panels/background/cc-background-panel.c:641
+#: ../panels/background/cc-background-panel.c:627
 msgid "Pictures Folder"
 msgstr "תיקיית תמונות"
 
-#: ../panels/background/cc-background-panel.c:649
+#: ../panels/background/cc-background-panel.c:635
 msgid "Colors"
 msgstr "צבעים"
 
-#: ../panels/background/cc-background-panel.c:658
+#: ../panels/background/cc-background-panel.c:644
 msgid "Flickr"
 msgstr "Flickr"
 
@@ -257,26 +256,26 @@ msgstr "Flickr"
 msgid "No Desktop Background"
 msgstr "אין רקע לשולחן העבודה"
 
-#: ../panels/background/gnome-wp-item.c:271
+#: ../panels/background/gnome-wp-item.c:294
 msgid "Slide Show"
 msgstr "מצגת שקפים"
 
-#: ../panels/background/gnome-wp-item.c:273
+#: ../panels/background/gnome-wp-item.c:296
 msgid "Image"
 msgstr "תמונה"
 
-#: ../panels/background/gnome-wp-item.c:279
+#: ../panels/background/gnome-wp-item.c:302
 msgid "multiple sizes"
 msgstr "מספר גדלים"
 
 #. translators: x pixel(s) by y pixel(s)
-#: ../panels/background/gnome-wp-item.c:282
+#: ../panels/background/gnome-wp-item.c:305
 #, c-format
 msgid "%d %s by %d %s"
 msgstr "%d %s ב־%d %s"
 
-#: ../panels/background/gnome-wp-item.c:284
-#: ../panels/background/gnome-wp-item.c:286
+#: ../panels/background/gnome-wp-item.c:307
+#: ../panels/background/gnome-wp-item.c:309
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "פיקסל"
@@ -286,7 +285,7 @@ msgstr[1] "פיקסלים"
 #. * mime type, size
 #. * Folder: /path/to/file
 #.
-#: ../panels/background/gnome-wp-item.c:294
+#: ../panels/background/gnome-wp-item.c:317
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -301,7 +300,7 @@ msgstr ""
 #. * Image missing
 #. * Folder: /path/to/file
 #.
-#: ../panels/background/gnome-wp-item.c:306
+#: ../panels/background/gnome-wp-item.c:329
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -312,7 +311,7 @@ msgstr ""
 "%s\n"
 "תיקייה: %s"
 
-#: ../panels/background/gnome-wp-item.c:310
+#: ../panels/background/gnome-wp-item.c:333
 msgid "Image missing"
 msgstr "חסרה תמונה"
 
@@ -425,7 +424,7 @@ msgid "Date and Time preferences panel"
 msgstr "לוח ניהול התאריך והשעה"
 
 #: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
 msgid "Preferred Applications"
 msgstr "יישומים מועדפים"
 
@@ -441,22 +440,25 @@ msgstr "הפעלת טכנולוגיית הסיוע החזותי המועדפת"
 msgid "Visual Assistance"
 msgstr "סיוע חזותי"
 
-#: ../panels/default-applications/gnome-da-capplet.c:99
-#: ../panels/default-applications/gnome-da-capplet.c:363
-#: ../panels/default-applications/gnome-da-capplet.c:384
+#: ../panels/default-applications/gnome-da-capplet.c:83
 #, c-format
-msgid "Error saving configuration: %s"
-msgstr "שגיאה בשמירת ההגדרות: %s"
+msgid "Error setting default browser: %s"
+msgstr "שגיאה בהגדרת דפדפן בררת המחדל: %s"
 
-#: ../panels/default-applications/gnome-da-capplet.c:692
+#: ../panels/default-applications/gnome-da-capplet.c:106
+#, c-format
+msgid "Error setting default mailer: %s"
+msgstr "שגיאה בהגדרת לקוח הדוא״ל כבררת המחדל: %s"
+
+#: ../panels/default-applications/gnome-da-capplet.c:321
 msgid "Custom"
 msgstr "התאמה אישית"
 
-#: ../panels/default-applications/gnome-da-capplet.c:723
+#: ../panels/default-applications/gnome-da-capplet.c:352
 msgid "Could not load the main interface"
 msgstr "לא ניתן להעלות את המנשק הראשי"
 
-#: ../panels/default-applications/gnome-da-capplet.c:725
+#: ../panels/default-applications/gnome-da-capplet.c:354
 msgid "Please make sure that the applet is properly installed"
 msgstr "נא לוודא שהיישומון מותקן כראוי"
 
@@ -488,78 +490,50 @@ msgid "E_xecute flag:"
 msgstr "דגל ה_פעלה:"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
-msgid "Image Viewer"
-msgstr "מציג תמונות"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Instant Messenger"
 msgstr "מסרים מידיים"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Internet"
 msgstr "אינטרנט"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
 msgid "Mail Reader"
 msgstr "קורא דואר"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
 msgid "Mobility"
 msgstr "ניידות"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
-msgid "Multimedia"
-msgstr "מולטימדיה"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
-msgid "Multimedia Player"
-msgstr "נגן מולטימדיה"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
-msgid "Open link in new _tab"
-msgstr "פתיחת קישור ב_לשונית חדשה"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
-msgid "Open link in new _window"
-msgstr "פתיחת קישור בחלון _חדש"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
-msgid "Open link with web browser _default"
-msgstr "פתיחת קישור לפי בררת המחדל של ה_דפדפן"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Run at st_art"
 msgstr "הרצה עם הה_פעלה"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
 msgid "Run in t_erminal"
 msgstr "הרצה במ_סוף"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:20
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
 msgid "System"
 msgstr "מערכת"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:21
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
 msgid "Terminal Emulator"
 msgstr "מדמה מסוף"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:22
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
 msgid "Text Editor"
 msgstr "עורך טקסט"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:23
-msgid "Video Player"
-msgstr "נגן וידאו"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:24
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
 msgid "Visual"
 msgstr "חזותי"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:25
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Web Browser"
 msgstr "דפדפן אינטרנט"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:26
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
 msgid "_Run at start"
 msgstr "הרצה _עם ההפעלה"
 
@@ -773,56 +747,56 @@ msgid "<i>Note: may limit resolution options</i>"
 msgstr "<i>לתשומת לבך: עלול להגביל את אפשרויות הרזולוציה</i>"
 
 #: ../panels/display/display-capplet.ui.h:2
-msgid "Include _panel"
-msgstr "הכללת _לוח"
-
-#: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:317
+#: ../panels/display/xrandr-capplet.c:316
 msgid "Left"
 msgstr "שמאלה"
 
-#: ../panels/display/display-capplet.ui.h:4
-#: ../panels/display/xrandr-capplet.c:521
+#: ../panels/display/display-capplet.ui.h:3
+#: ../panels/display/xrandr-capplet.c:520
 msgid "Monitor"
 msgstr "צג"
 
-#: ../panels/display/display-capplet.ui.h:5
-#: ../panels/display/xrandr-capplet.c:316
-#: ../panels/display/xrandr-capplet.c:355
+#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/xrandr-capplet.c:315
+#: ../panels/display/xrandr-capplet.c:354
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Normal"
 msgstr "רגיל"
 
-#: ../panels/display/display-capplet.ui.h:6
+#: ../panels/display/display-capplet.ui.h:5
 #: ../panels/universal-access/uap.ui.h:61
 msgid "Off"
 msgstr "כבוי"
 
-#: ../panels/display/display-capplet.ui.h:7
+#: ../panels/display/display-capplet.ui.h:6
 #: ../panels/universal-access/uap.ui.h:62
 msgid "On"
 msgstr "פעיל"
 
-#: ../panels/display/display-capplet.ui.h:8
+#: ../panels/display/display-capplet.ui.h:7
 msgid "R_otation:"
 msgstr "סי_בוב:"
 
-#: ../panels/display/display-capplet.ui.h:9
+#: ../panels/display/display-capplet.ui.h:8
 msgid "Re_fresh rate:"
 msgstr "תדירות ר_ענון:"
 
-#: ../panels/display/display-capplet.ui.h:10
-#: ../panels/display/xrandr-capplet.c:318
+#: ../panels/display/display-capplet.ui.h:9
+#: ../panels/display/xrandr-capplet.c:317
 msgid "Right"
 msgstr "ימינה"
 
-#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:10
 msgid "Upside-down"
 msgstr "היפוך"
 
-#: ../panels/display/display-capplet.ui.h:12
+#: ../panels/display/display-capplet.ui.h:11
 msgid "_Detect monitors"
 msgstr "_זיהוי צגים"
+
+#: ../panels/display/display-capplet.ui.h:12
+msgid "_Include Top Menu Bar"
+msgstr "ה_כללת סרגל התפריטים העליון"
 
 #: ../panels/display/display-capplet.ui.h:13
 msgid "_Mirror Screens"
@@ -840,111 +814,11 @@ msgstr "שינוי הרזולוציה והמיקום של הצגים"
 msgid "Monitors"
 msgstr "צגים"
 
-#: ../panels/display/gnome-display-properties-install-systemwide.c:44
-#, c-format
-msgid ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
-msgstr ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
-
-#. Translators: only able to install RANDR profiles as root
-#: ../panels/display/gnome-display-properties-install-systemwide.c:151
-msgid "This program can only be used by the root user"
-msgstr "This program can only be used by the root user"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:168
-msgid "The source filename must be absolute"
-msgstr "The source filename must be absolute"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:179
-#, c-format
-msgid "Could not open %s: %s\n"
-msgstr "Could not open %s: %s\n"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:188
-#, c-format
-msgid "Could not get information for %s: %s\n"
-msgstr "Could not get information for %s: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:195
-#, c-format
-msgid "%s must be a regular file\n"
-msgstr "%s must be a regular file\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:204
-msgid "This program must only be run through pkexec(1)"
-msgstr "This program must only be run through pkexec(1)"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:209
-msgid "PKEXEC_UID must be set to an integer value"
-msgstr "PKEXEC_UID must be set to an integer value"
-
-#. Translators: we are complaining that a file must be really owned by the user who called this program
-#: ../panels/display/gnome-display-properties-install-systemwide.c:215
-#, c-format
-msgid "%s must be owned by you\n"
-msgstr "%s must be owned by you\n"
-
-#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
-#: ../panels/display/gnome-display-properties-install-systemwide.c:223
-#, c-format
-msgid "%s must not have any directory components\n"
-msgstr "%s must not have any directory components\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:231
-#, c-format
-msgid "%s must be a directory\n"
-msgstr "%s must be a directory\n"
-
-#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:242
-#, c-format
-msgid "Could not open %s/%s: %s\n"
-msgstr "Could not open %s/%s: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:262
-#, c-format
-msgid "Could not rename %s to %s: %s\n"
-msgstr "Could not rename %s to %s: %s\n"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:1
-msgid ""
-"Authentication is required to install multi-monitor settings for all users"
-msgstr "נדרש אימות כדי להתקין הגדרות ריבוי צגים לכל המשתמשים"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:2
-msgid "Install multi-monitor settings for the whole system"
-msgstr "התקנת הגדרות ריבוי צגים עבור כלל משתמשי המערכת"
-
-#: ../panels/display/xrandr-capplet.c:319
+#: ../panels/display/xrandr-capplet.c:318
 msgid "Upside Down"
 msgstr "היפוך"
 
-#: ../panels/display/xrandr-capplet.c:361
+#: ../panels/display/xrandr-capplet.c:360
 #, c-format
 msgid "%d Hz"
 msgstr "%d הרץ"
@@ -954,17 +828,17 @@ msgstr "%d הרץ"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:510
+#: ../panels/display/xrandr-capplet.c:509
 #: ../panels/display/xrandr-capplet.c:1658
 msgid "Mirror Screens"
 msgstr "היפוך התצוגה כמראה"
 
-#: ../panels/display/xrandr-capplet.c:512
+#: ../panels/display/xrandr-capplet.c:511
 #, c-format
 msgid "Monitor: %s"
 msgstr "צג: %s"
 
-#: ../panels/display/xrandr-capplet.c:590
+#: ../panels/display/xrandr-capplet.c:589
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
@@ -988,7 +862,7 @@ msgstr "לא ניתן לאחזר את אפיק ההפעלה בעת החלת תצ
 msgid "Could not detect displays"
 msgstr "לא ניתן לזהות את הצגים"
 
-#: ../panels/display/xrandr-capplet.c:2357
+#: ../panels/display/xrandr-capplet.c:2356
 msgid "Could not get screen information"
 msgstr "לא ניתן לקבל את פרטי הצג"
 
@@ -1029,7 +903,6 @@ msgstr "סוג הקיצור."
 
 #: ../panels/keybindings/eggcellrendererkeys.c:243
 #: ../panels/keybindings/gnome-keybinding-properties.c:101
-#: ../typing-break/drwright.c:498
 msgid "Disabled"
 msgstr "מנוטרל"
 
@@ -1147,7 +1020,7 @@ msgid "Beep when key is _rejected"
 msgstr "צפצוף כאשר מקש נ_דחה"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
 #: ../panels/universal-access/uap.ui.h:17
 msgid "Bounce Keys"
 msgstr "מקשים קופצים"
@@ -1161,8 +1034,8 @@ msgid "Flash entire _screen"
 msgstr "הבהוב ה_מסך כולו"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "General"
 msgstr "כללי"
 
@@ -1175,13 +1048,13 @@ msgid "Show _visual feedback for the alert sound"
 msgstr "הצגת משוב ח_זותי עבור צליל ההתראה"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 #: ../panels/universal-access/uap.ui.h:76
 msgid "Slow Keys"
 msgstr "מקשים אטיים"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 #: ../panels/universal-access/uap.ui.h:80
 msgid "Sticky Keys"
 msgstr "מקשים דביקים"
@@ -1191,130 +1064,108 @@ msgid "Visual cues for sounds"
 msgstr "סימונים חזותיים עבור צלילים"
 
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
-msgid "All_ow postponing of breaks"
-msgstr "ני_תן לדחות הפסקות"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
 msgid "Audio _Feedback..."
 msgstr "_משוב קולי..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
-msgid "Check if breaks are allowed to be postponed"
-msgstr "יש לסמן כדי שניתן יהיה לדחות את ההפסקות"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
 msgid "Cursor Blinking"
 msgstr "הבהוב סמן"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
 msgid "Cursor _blinks in text fields"
 msgstr "סמן מה_בהב בשדות טקסט"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
 #: ../panels/universal-access/uap.ui.h:29
 msgid "Cursor blinks speed"
 msgstr "מהירות הבהוב הסמן"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
 #: ../panels/universal-access/uap.ui.h:30
 msgid "D_elay:"
 msgstr "ה_שהיה:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr "כי_בוי מקשים דביקים אם שני מקשים נלחצים יחד"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
-msgid "Duration of the break when typing is disallowed"
-msgstr "משך ההפסקה כאשר הקלדה אסורה"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
-msgid "Duration of work before forcing a break"
-msgstr "משך העבודה לפני שמכריחים הפסקה"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#. fast acceleration
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Fast"
 msgstr "מהיר"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
 msgid "Key presses _repeat when key is held down"
 msgstr "לחיצת המקש _חוזרת כאשר המקש נשאר לחוץ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
 msgid "Keyboard Preferences"
 msgstr "העדפות מקלדת"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
 msgid "Keyboard _model:"
 msgstr "דגם המ_קלדת:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
 msgid "Layouts"
 msgstr "פריסות"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
 msgid "List of keyboard layouts selected for usage"
 msgstr "רשימת פריסות המקלדת שנבחרו לשימוש"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
-msgid ""
-"Lock screen after a certain duration to help prevent repetitive keyboard use "
-"injuries"
-msgstr ""
-"יש לנעול את המסך לאחר פרק זמן מסוים כדי לעזור למנוע נזקי שימוש מחזורי במקלדת"
-
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 #: ../panels/universal-access/uap.ui.h:53
 msgid "Long"
 msgstr "ארוך"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
 #: ../panels/universal-access/uap.ui.h:56
 msgid "Mouse Keys"
 msgstr "מקשי עכבר"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
 msgid "Move _Down"
 msgstr "הזזה למ_טה"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
 msgid "Move _Up"
 msgstr "הזזה למ_עלה"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
 msgid "Move the selected keyboard layout down in the list"
 msgstr "הזזת פריסת המקלדת הנבחרת במורד הרשימה"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
 msgid "Move the selected keyboard layout up in the list"
 msgstr "הזזת פריסת המקלדת הנבחרת במעלה הרשימה"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
 msgid "New windows u_se active window's layout"
 msgstr "חלונות חדשים עושים שימוש בפריסת החלון הפעיל"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:28
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
 msgid "Print a diagram of the selected keyboard layout"
 msgstr "הדפסת תרשים של פריסת המקלדת הנבחרת"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
 msgid "Remove the selected keyboard layout from the list"
 msgstr "הסרת פריסת המקלדת הנבחרת מהרשימה"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
 msgid "Repeat Keys"
 msgstr "מקשים חוזרים"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
 msgid "Repeat keys speed"
 msgstr "מהירות החזרת מקשים"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1322,103 +1173,84 @@ msgstr ""
 "החלפת הגדרות פריסת המקלדת הנוכחית\n"
 "בהגדרות בררת המחדל"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 msgid "Reset to De_faults"
 msgstr "החזרה ל_בררת המחדל"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 msgid "S_peed:"
 msgstr "_מהירות:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
 msgid "Select a keyboard layout to be added to the list"
 msgstr "נא לבחור פריסת מקלדת להוספה מהרשימה"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
 #: ../panels/universal-access/uap.ui.h:73
 msgid "Short"
 msgstr "קצר"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#. slow acceleration
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:33
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
 msgid "Slow"
 msgstr "איטי"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
-msgid "Typing Break"
-msgstr "הפסקת הקלדה"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "View and edit keyboard layout options"
 msgstr "צפייה ועריכה באפשרויות פריסת המקלדת"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
+#: ../panels/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Acceleration:"
 msgstr "_קיצור:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr "_ניתן להפעיל ולנטרל את תכונות הנגישות באמצעות קיצורי מקלדת"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
 msgid "_Add..."
 msgstr "הוס_פה..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
-msgid "_Break interval lasts:"
-msgstr "_זמן ההפסקה אורך:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
-#: ../panels/mouse/gnome-mouse-properties.ui.h:38
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../panels/mouse/gnome-mouse-properties.ui.h:49
 msgid "_Delay:"
 msgstr "ה_שהיה:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
 msgid "_Ignore fast duplicate keypresses"
 msgstr "ה_תעלמות מלחיצות מקש כפולות מהירות"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:49
-msgid "_Lock screen to enforce typing break"
-msgstr "יש ל_נעול את המסך כדי להכריח הפסקת הקלדה"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:50
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
 msgid "_Only accept long keypresses"
 msgstr "_קבלת לחיצות ארוכות בלבד"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:51
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
 msgid "_Options..."
 msgstr "_אפשרויות..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:52
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
 msgid "_Pointer can be controlled using the keypad"
 msgstr "_ניתן לשלוט בסמן העכבר בעזרת המקלדת"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:53
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
 msgid "_Separate layout for each window"
 msgstr "פריסה _נפרדת לכל חלון"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:54
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
 msgid "_Simulate simultaneous keypresses"
 msgstr "ה_דמיית לחיצות מספר מקשים במקביל"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:55
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
 msgid "_Speed:"
 msgstr "_מהירות:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
 msgid "_Type to test settings:"
 msgstr "ניתן ל_כתוב כדי לבדוק את ההגדרות:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:57
-msgid "_Work interval lasts:"
-msgstr "זמן ה_עבודה נמשך:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:58
-msgid "minutes"
-msgstr "דקות"
 
 #: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
 msgid "By _country"
@@ -1464,11 +1296,11 @@ msgstr "י_צרנים:"
 msgid "Keyboard Layout Options"
 msgstr "אפשרויות פריסת מקלדת"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:74
+#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:72
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:221
+#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:220
 msgid "Layout"
 msgstr "פריסה"
 
@@ -1480,7 +1312,7 @@ msgstr "יצרנים"
 msgid "Models"
 msgstr "דגמים"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:228
+#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:229
 #: ../panels/network/gnome-network-properties.c:582
 msgid "Default"
 msgstr "בררת מחדל"
@@ -1540,152 +1372,157 @@ msgstr "יש לבחור את סוג הלחיצה עם פעולת _עכבר"
 msgid "D_ouble click:"
 msgstr "לחיצה _כפולה:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "D_rag click:"
 msgstr "לחיצה ו_גרירה:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Disable _touchpad while typing"
 msgstr "ביטול _משטח המגע בעת הקלדה"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Double-Click Timeout"
 msgstr "פרק זמן ללחיצה כפולה"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "Drag and Drop"
 msgstr "גרירה והשלכה"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Dwell Click"
 msgstr "לחיצת השהיה"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Enable _mouse clicks with touchpad"
 msgstr "הפעלת _לחיצות עכבר עם משטח מגע"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Enable h_orizontal scrolling"
 msgstr "ה_פעלת גלילה אופקית"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#. high sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 #: ../panels/universal-access/uap.ui.h:40
 msgid "High"
 msgstr "גבוה"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 #: ../panels/universal-access/uap.ui.h:50
 msgid "Large"
 msgstr "גדול"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Locate Pointer"
 msgstr "איתור סמן"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#. low sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
 #: ../panels/universal-access/uap.ui.h:54
 msgid "Low"
 msgstr "נמוך"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Mouse Orientation"
 msgstr "כיוון עכבר"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "Mouse Preferences"
 msgstr "העדפות עכבר"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Pointer Speed"
 msgstr "מהירות הסמן"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Scrolling"
 msgstr "גלילה"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Seco_ndary click:"
 msgstr "לחיצה _משנית:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "ה_צגת מיקום הסמן בעת לחיצה על Ctrl"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "Show click type _window"
 msgstr "הצגת חלון _סוג הלחיצה"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
 #: ../panels/universal-access/uap.ui.h:75
 msgid "Simulated Secondary Click"
 msgstr "לחיצה שנייה מדומה"
 
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/mouse/gnome-mouse-properties.ui.h:41
 #: ../panels/universal-access/uap.ui.h:78
 msgid "Small"
 msgstr "קטן"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
+#: ../panels/mouse/gnome-mouse-properties.ui.h:42
 msgid "Thr_eshold:"
 msgstr "_סף:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+#: ../panels/mouse/gnome-mouse-properties.ui.h:43
 msgid ""
 "To test your double-click settings, try to double-click on the light bulb."
 msgstr "כדי לבדוק את הגדרות הלחיצה הכפולה שלך, יש לנסות ללחוץ פעמיים על הנורה."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
+#: ../panels/mouse/gnome-mouse-properties.ui.h:44
 msgid "Touchpad"
 msgstr "משטח מגע"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/mouse/gnome-mouse-properties.ui.h:45
 msgid "Two-_finger scrolling"
 msgstr "גלילה ב_שתי אצבעות"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:47
 msgid "You can also use the Dwell Click panel applet to choose the click type."
 msgstr "ניתן להשתמש ביישומון לחיצת ההשהיה על הלוח כדי לבחור את סוג הלחיצה."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:50
 msgid "_Disabled"
 msgstr "_כבוי"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:40
+#: ../panels/mouse/gnome-mouse-properties.ui.h:51
 msgid "_Edge scrolling"
 msgstr "גלילת _קצה"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/mouse/gnome-mouse-properties.ui.h:52
 msgid "_Initiate click when stopping pointer movement"
 msgstr "ה_פעלת לחיצה כאשר נעצרת תזוזת העכבר"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:42
+#: ../panels/mouse/gnome-mouse-properties.ui.h:53
 msgid "_Left-handed"
 msgstr "שמאליים"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/mouse/gnome-mouse-properties.ui.h:54
 #: ../panels/universal-access/uap.ui.h:98
 msgid "_Motion threshold:"
 msgstr "_סף תנועה:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:44
+#: ../panels/mouse/gnome-mouse-properties.ui.h:55
 msgid "_Right-handed"
 msgstr "_ימניים"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:45
+#: ../panels/mouse/gnome-mouse-properties.ui.h:56
 msgid "_Sensitivity:"
 msgstr "_רגישות:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:46
+#: ../panels/mouse/gnome-mouse-properties.ui.h:57
 msgid "_Single click:"
 msgstr "_לחיצה בודדת:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:47
+#: ../panels/mouse/gnome-mouse-properties.ui.h:58
 msgid "_Timeout:"
 msgstr "_פרק זמן:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:48
+#: ../panels/mouse/gnome-mouse-properties.ui.h:59
 msgid "_Trigger secondary click by holding down the primary button"
 msgstr "ה_פעלת לחיצה משנית על ידי החזקת הכפתור הראשי"
 
@@ -2133,95 +1970,6 @@ msgstr "הגדרות מערכת"
 msgid "Control Center"
 msgstr "לוח בקרה"
 
-#: ../typing-break/drw-break-window.c:194
-msgid "_Postpone Break"
-msgstr "_דחיית ההפסקה"
-
-#: ../typing-break/drw-break-window.c:250
-msgid "Take a break!"
-msgstr "נא לצאת להפסקה!"
-
-#: ../typing-break/drwright.c:136
-msgid "_Take a Break"
-msgstr "י_ציאה להפסקה"
-
-#: ../typing-break/drwright.c:507
-#, c-format
-msgid "Take a break now (next in %dm)"
-msgstr "נא לצאת להפסקה כעת (ניתן להמשיך בעוד %d דקות)"
-
-#: ../typing-break/drwright.c:509
-#, c-format
-msgid "%d minute until the next break"
-msgid_plural "%d minutes until the next break"
-msgstr[0] "דקה עד ההפסקה הבאה"
-msgstr[1] "%d דקות עד ההפסקה הבאה"
-
-#: ../typing-break/drwright.c:515
-#, c-format
-msgid "Take a break now (next in less than one minute)"
-msgstr "נא לצאת להפסקה כעת (ניתן להמשיך בעוד פחות מדקה)"
-
-#: ../typing-break/drwright.c:517
-#, c-format
-msgid "Less than one minute until the next break"
-msgstr "פחות מדקה אחת עד ההפסקה הבאה"
-
-#: ../typing-break/drwright.c:614
-#, c-format
-msgid ""
-"Unable to bring up the typing break properties dialog with the following "
-"error: %s"
-msgstr "לא ניתן להציג את דו־שיח מאפייני הפסקת הקלדה עם השגיאה הבאה: %s"
-
-#: ../typing-break/drwright.c:631
-msgid "Written by Richard Hult <richard@imendio.com>"
-msgstr "נכתב על־ידי <‎Richard Hult <richard@imendio.com"
-
-#: ../typing-break/drwright.c:632
-msgid "Eye candy added by Anders Carlsson"
-msgstr "העיצוב המרהיב נוסף על־ידי Anders Carlsson"
-
-#: ../typing-break/drwright.c:641
-msgid "A computer break reminder."
-msgstr "מזכיר הפסקות ממוחשב."
-
-#: ../typing-break/drwright.c:643
-msgid "translator-credits"
-msgstr ""
-"יאיר הרשקוביץ <yairhr@gmail.com>\n"
-"‏מארק קרפיבנר <mark125@gmail.com>\n"
-"‏Omri Strumza https://launchpad.net/~blueomega\n"
-"‏Yaniv Abir https://launchpad.net/~yanivabir\n"
-"‏Yaron Shahrabani https://launchpad.net/~sh-yaron\n"
-"‏ליאל פרידמן <lielft@ubuntu.com>\n"
-"\n"
-"פרויקט תרגום GNOME לעברית:\n"
-"‏http://gnome-il.berlios.de"
-
-#: ../typing-break/main.c:63
-msgid "Enable debugging code"
-msgstr "Enable debugging code"
-
-#: ../typing-break/main.c:65
-msgid "Don't check whether the notification area exists"
-msgstr "Don't check whether the notification area exists"
-
-#: ../typing-break/main.c:91
-msgid "Typing Monitor"
-msgstr "צג הקלדה"
-
-#: ../typing-break/main.c:108
-msgid ""
-"The typing monitor uses the notification area to display information. You "
-"don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choosing 'Add to panel', selecting "
-"'Notification area' and clicking 'Add'."
-msgstr ""
-"צג ההקלדה משתמש באזור ההודעות כדי להציג מידע. נראה שלא קיים אזור התרעות בלוח "
-"שלך. ניתן להוסיף אותו על־ידי לחיצה ימנית על הלוח ובחירת 'הוספה ללוח', סימון "
-"'אזור הדיווחים' ולחיצה על 'הוספה'."
-
 #: ../examples/gnome-example-panel.desktop.in.in.h:1
 msgid "Example Panel"
 msgstr "לוח לדוגמה"
@@ -2233,6 +1981,205 @@ msgstr "לוח להדגמת ההעדפות"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_כל ההגדרות"
+
+#~ msgid "Error saving configuration: %s"
+#~ msgstr "שגיאה בשמירת ההגדרות: %s"
+
+#~ msgid "Image Viewer"
+#~ msgstr "מציג תמונות"
+
+#~ msgid "Multimedia"
+#~ msgstr "מולטימדיה"
+
+#~ msgid "Multimedia Player"
+#~ msgstr "נגן מולטימדיה"
+
+#~ msgid "Open link in new _tab"
+#~ msgstr "פתיחת קישור ב_לשונית חדשה"
+
+#~ msgid "Open link in new _window"
+#~ msgstr "פתיחת קישור בחלון _חדש"
+
+#~ msgid "Open link with web browser _default"
+#~ msgstr "פתיחת קישור לפי בררת המחדל של ה_דפדפן"
+
+#~ msgid "Video Player"
+#~ msgstr "נגן וידאו"
+
+#~ msgid "Include _panel"
+#~ msgstr "הכללת _לוח"
+
+#~ msgid ""
+#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "This program installs a RANDR profile for multi-monitor setups into\n"
+#~ "a systemwide location.  The resulting profile will get used when\n"
+#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
+#~ "\n"
+#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+#~ "xml\n"
+#~ "\n"
+#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
+#~ "            the systemwide directory for RANDR configurations,\n"
+#~ "            so the result will typically be %s/DEST_NAME\n"
+#~ msgstr ""
+#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "This program installs a RANDR profile for multi-monitor setups into\n"
+#~ "a systemwide location.  The resulting profile will get used when\n"
+#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
+#~ "\n"
+#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+#~ "xml\n"
+#~ "\n"
+#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
+#~ "            the systemwide directory for RANDR configurations,\n"
+#~ "            so the result will typically be %s/DEST_NAME\n"
+
+#~ msgid "This program can only be used by the root user"
+#~ msgstr "This program can only be used by the root user"
+
+#~ msgid "The source filename must be absolute"
+#~ msgstr "The source filename must be absolute"
+
+#~ msgid "Could not open %s: %s\n"
+#~ msgstr "Could not open %s: %s\n"
+
+#~ msgid "Could not get information for %s: %s\n"
+#~ msgstr "Could not get information for %s: %s\n"
+
+#~ msgid "%s must be a regular file\n"
+#~ msgstr "%s must be a regular file\n"
+
+#~ msgid "This program must only be run through pkexec(1)"
+#~ msgstr "This program must only be run through pkexec(1)"
+
+#~ msgid "PKEXEC_UID must be set to an integer value"
+#~ msgstr "PKEXEC_UID must be set to an integer value"
+
+#~ msgid "%s must be owned by you\n"
+#~ msgstr "%s must be owned by you\n"
+
+#~ msgid "%s must not have any directory components\n"
+#~ msgstr "%s must not have any directory components\n"
+
+#~ msgid "%s must be a directory\n"
+#~ msgstr "%s must be a directory\n"
+
+#~ msgid "Could not open %s/%s: %s\n"
+#~ msgstr "Could not open %s/%s: %s\n"
+
+#~ msgid "Could not rename %s to %s: %s\n"
+#~ msgstr "Could not rename %s to %s: %s\n"
+
+#~ msgid ""
+#~ "Authentication is required to install multi-monitor settings for all users"
+#~ msgstr "נדרש אימות כדי להתקין הגדרות ריבוי צגים לכל המשתמשים"
+
+#~ msgid "Install multi-monitor settings for the whole system"
+#~ msgstr "התקנת הגדרות ריבוי צגים עבור כלל משתמשי המערכת"
+
+#~ msgid "All_ow postponing of breaks"
+#~ msgstr "ני_תן לדחות הפסקות"
+
+#~ msgid "Check if breaks are allowed to be postponed"
+#~ msgstr "יש לסמן כדי שניתן יהיה לדחות את ההפסקות"
+
+#~ msgid "Duration of the break when typing is disallowed"
+#~ msgstr "משך ההפסקה כאשר הקלדה אסורה"
+
+#~ msgid "Duration of work before forcing a break"
+#~ msgstr "משך העבודה לפני שמכריחים הפסקה"
+
+#~ msgid ""
+#~ "Lock screen after a certain duration to help prevent repetitive keyboard "
+#~ "use injuries"
+#~ msgstr ""
+#~ "יש לנעול את המסך לאחר פרק זמן מסוים כדי לעזור למנוע נזקי שימוש מחזורי "
+#~ "במקלדת"
+
+#~ msgid "Typing Break"
+#~ msgstr "הפסקת הקלדה"
+
+#~ msgid "_Break interval lasts:"
+#~ msgstr "_זמן ההפסקה אורך:"
+
+#~ msgid "_Lock screen to enforce typing break"
+#~ msgstr "יש ל_נעול את המסך כדי להכריח הפסקת הקלדה"
+
+#~ msgid "_Work interval lasts:"
+#~ msgstr "זמן ה_עבודה נמשך:"
+
+#~ msgid "minutes"
+#~ msgstr "דקות"
+
+#~ msgid "_Postpone Break"
+#~ msgstr "_דחיית ההפסקה"
+
+#~ msgid "Take a break!"
+#~ msgstr "נא לצאת להפסקה!"
+
+#~ msgid "_Take a Break"
+#~ msgstr "י_ציאה להפסקה"
+
+#~ msgid "Take a break now (next in %dm)"
+#~ msgstr "נא לצאת להפסקה כעת (ניתן להמשיך בעוד %d דקות)"
+
+#~ msgid "%d minute until the next break"
+#~ msgid_plural "%d minutes until the next break"
+#~ msgstr[0] "דקה עד ההפסקה הבאה"
+#~ msgstr[1] "%d דקות עד ההפסקה הבאה"
+
+#~ msgid "Take a break now (next in less than one minute)"
+#~ msgstr "נא לצאת להפסקה כעת (ניתן להמשיך בעוד פחות מדקה)"
+
+#~ msgid "Less than one minute until the next break"
+#~ msgstr "פחות מדקה אחת עד ההפסקה הבאה"
+
+#~ msgid ""
+#~ "Unable to bring up the typing break properties dialog with the following "
+#~ "error: %s"
+#~ msgstr "לא ניתן להציג את דו־שיח מאפייני הפסקת הקלדה עם השגיאה הבאה: %s"
+
+#~ msgid "Written by Richard Hult <richard@imendio.com>"
+#~ msgstr "נכתב על־ידי <‎Richard Hult <richard@imendio.com"
+
+#~ msgid "Eye candy added by Anders Carlsson"
+#~ msgstr "העיצוב המרהיב נוסף על־ידי Anders Carlsson"
+
+#~ msgid "A computer break reminder."
+#~ msgstr "מזכיר הפסקות ממוחשב."
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "יאיר הרשקוביץ <yairhr@gmail.com>\n"
+#~ "‏מארק קרפיבנר <mark125@gmail.com>\n"
+#~ "‏Omri Strumza https://launchpad.net/~blueomega\n"
+#~ "‏Yaniv Abir https://launchpad.net/~yanivabir\n"
+#~ "‏Yaron Shahrabani https://launchpad.net/~sh-yaron\n"
+#~ "‏ליאל פרידמן <lielft@ubuntu.com>\n"
+#~ "\n"
+#~ "פרויקט תרגום GNOME לעברית:\n"
+#~ "‏http://gnome-il.berlios.de"
+
+#~ msgid "Enable debugging code"
+#~ msgstr "Enable debugging code"
+
+#~ msgid "Don't check whether the notification area exists"
+#~ msgstr "Don't check whether the notification area exists"
+
+#~ msgid "Typing Monitor"
+#~ msgstr "צג הקלדה"
+
+#~ msgid ""
+#~ "The typing monitor uses the notification area to display information. You "
+#~ "don't seem to have a notification area on your panel. You can add it by "
+#~ "right-clicking on your panel and choosing 'Add to panel', selecting "
+#~ "'Notification area' and clicking 'Add'."
+#~ msgstr ""
+#~ "צג ההקלדה משתמש באזור ההודעות כדי להציג מידע. נראה שלא קיים אזור התרעות "
+#~ "בלוח שלך. ניתן להוסיף אותו על־ידי לחיצה ימנית על הלוח ובחירת 'הוספה "
+#~ "ללוח', סימון 'אזור הדיווחים' ולחיצה על 'הוספה'."
 
 #~ msgid "Make Default"
 #~ msgstr "הפיכה לבררת מחדל"
@@ -2434,9 +2381,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "FONT-FILE OUTPUT-FILE"
 #~ msgstr "FONT-FILE OUTPUT-FILE"
-
-#~ msgid "Error parsing arguments: %s\n"
-#~ msgstr "שגיאה בפירוק הארגומנטים: %s\n"
 
 #~ msgid "Image/label border"
 #~ msgstr "גבול תמונה/תווית"
