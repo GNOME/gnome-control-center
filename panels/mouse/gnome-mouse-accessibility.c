@@ -17,11 +17,9 @@
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 
-#include "gconf-property-editor.h"
 #include "gnome-mouse-accessibility.h"
-
-#define MT_GCONF_HOME "/desktop/gnome/accessibility/mouse"
 
 /* 5th entry in combo box */
 #define DIRECTION_DISABLE 4
@@ -36,6 +34,8 @@ enum {
 	N_CLICK_TYPES
 };
 
+GSettings *a11y_mouse_settings = NULL;
+
 static void
 update_mode_sensitivity (GtkBuilder *dialog, gint mode)
 {
@@ -45,26 +45,14 @@ update_mode_sensitivity (GtkBuilder *dialog, gint mode)
 
 /* check if a direction (gesture mode) is already in use */
 static gboolean
-verify_setting (GConfClient *client, gint value, gint type)
+verify_setting (gint value, gint type)
 {
 	gint i, ct[N_CLICK_TYPES];
 
-	ct[CLICK_TYPE_SINGLE] =
-		gconf_client_get_int (client,
-				      MT_GCONF_HOME "/dwell_gesture_single",
-				      NULL);
-	ct[CLICK_TYPE_DOUBLE] =
-		gconf_client_get_int (client,
-				      MT_GCONF_HOME "/dwell_gesture_double",
-				      NULL);
-	ct[CLICK_TYPE_DRAG] =
-		gconf_client_get_int (client,
-				      MT_GCONF_HOME "/dwell_gesture_drag",
-				      NULL);
-	ct[CLICK_TYPE_SECONDARY] =
-		gconf_client_get_int (client,
-				      MT_GCONF_HOME "/dwell_gesture_secondary",
-				      NULL);
+	ct[CLICK_TYPE_SINGLE] = g_settings_get_enum (a11y_mouse_settings, "dwell-gesture-single");
+	ct[CLICK_TYPE_DOUBLE] = g_settings_get_enum (a11y_mouse_settings, "dwell-gesture-double");
+	ct[CLICK_TYPE_DRAG] = g_settings_get_enum (a11y_mouse_settings, "dwell-gesture-drag");
+	ct[CLICK_TYPE_SECONDARY] = g_settings_get_enum (a11y_mouse_settings, "dwell-gesture-secondary");
 
 	for (i = 0; i < N_CLICK_TYPES; ++i) {
 		if (i == type)
@@ -134,98 +122,113 @@ dwell_enable_toggled_cb (GtkWidget *checkbox, GtkBuilder *dialog)
 }
 
 static void
+dwell_mode_toggled_cb (GtkWidget *checkbox, GtkBuilder *dialog)
+{
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("dwell_mode_ctw"))))
+		g_settings_set_enum (a11y_mouse_settings, "dwell-mode", G_DESKTOP_MOUSE_DWELL_MODE_WINDOW);
+	else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("dwell_mode_gesture"))))
+		 g_settings_set_enum (a11y_mouse_settings, "dwell-mode", G_DESKTOP_MOUSE_DWELL_MODE_GESTURE);
+}
+
+static void
 gesture_single (GtkComboBox *combo, gpointer data)
 {
-	if (!verify_setting (data, gtk_combo_box_get_active (combo), CLICK_TYPE_SINGLE))
+	if (!verify_setting (gtk_combo_box_get_active (combo), CLICK_TYPE_SINGLE))
 		gtk_combo_box_set_active (combo, DIRECTION_DISABLE);
 }
 
 static void
 gesture_double (GtkComboBox *combo, gpointer data)
 {
-	if (!verify_setting (data, gtk_combo_box_get_active (combo), CLICK_TYPE_DOUBLE))
+	if (!verify_setting (gtk_combo_box_get_active (combo), CLICK_TYPE_DOUBLE))
 		gtk_combo_box_set_active (combo, DIRECTION_DISABLE);
 }
 
 static void
 gesture_drag (GtkComboBox *combo, gpointer data)
 {
-	if (!verify_setting (data, gtk_combo_box_get_active (combo), CLICK_TYPE_DRAG))
+	if (!verify_setting (gtk_combo_box_get_active (combo), CLICK_TYPE_DRAG))
 		gtk_combo_box_set_active (combo, DIRECTION_DISABLE);
 }
 
 static void
 gesture_secondary (GtkComboBox *combo, gpointer data)
 {
-	if (!verify_setting (data, gtk_combo_box_get_active (combo), CLICK_TYPE_SECONDARY))
+	if (!verify_setting (gtk_combo_box_get_active (combo), CLICK_TYPE_SECONDARY))
 		gtk_combo_box_set_active (combo, DIRECTION_DISABLE);
 }
 
 static void
-gconf_value_changed (GConfClient *client,
-		     const gchar *key,
-		     GConfValue  *value,
-		     gpointer     dialog)
+settings_changed (GSettings   *settings,
+		  const gchar *key,
+		  gpointer     dialog)
 {
-	if (g_str_equal (key, MT_GCONF_HOME "/dwell_mode"))
-		update_mode_sensitivity (dialog, gconf_value_get_int (value));
+	if (g_str_equal (key, "dwell-mode"))
+		update_mode_sensitivity (dialog, g_settings_get_enum (settings, key));
 }
 
 void
 setup_accessibility (GtkBuilder *dialog)
 {
-	GConfClient *client = gconf_client_get_default ();
+	a11y_mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
+	g_signal_connect (a11y_mouse_settings, "changed",
+			  G_CALLBACK (settings_changed), dialog);
 
-	gconf_client_add_dir (client, MT_GCONF_HOME,
-			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	g_signal_connect (client, "value_changed",
-			  G_CALLBACK (gconf_value_changed), dialog);
+	g_settings_bind (a11y_mouse_settings, "dwell-enable",
+			 WID ("dwell_enable"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (a11y_mouse_settings, "ctw-visible",
+			 WID ("dwell_show_ctw"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
 
-	gconf_peditor_new_boolean (NULL, MT_GCONF_HOME "/dwell_enable",
-				   WID ("dwell_enable"), NULL);
-	gconf_peditor_new_boolean (NULL, MT_GCONF_HOME "/delay_enable",
-				   WID ("delay_enable"), NULL);
-	gconf_peditor_new_boolean (NULL, MT_GCONF_HOME "/dwell_show_ctw",
-				   WID ("dwell_show_ctw"), NULL);
+	g_settings_bind (a11y_mouse_settings, "ssc-enable",
+			 WID ("delay_enable"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (a11y_mouse_settings, "ssc-time",
+			 WID ("delay_time"), "text",
+			 G_SETTINGS_BIND_DEFAULT);
 
-	gconf_peditor_new_numeric_range (NULL, MT_GCONF_HOME "/delay_time",
-					 WID ("delay_time"), NULL);
-	gconf_peditor_new_numeric_range (NULL, MT_GCONF_HOME "/dwell_time",
-					 WID ("dwell_time"), NULL);
-	gconf_peditor_new_numeric_range (NULL, MT_GCONF_HOME "/threshold",
-					 WID ("threshold"), NULL);
+	g_settings_bind (a11y_mouse_settings, "dwell-time",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("dwell_time"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (a11y_mouse_settings, "dwell-threshold",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("threshold"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
-	gconf_peditor_new_select_radio (NULL, MT_GCONF_HOME "/dwell_mode",
-					gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("dwell_mode_ctw"))),
-										      NULL);
+	g_signal_connect (WID ("dwell_mode_ctw"), "toggled",
+			  G_CALLBACK (dwell_mode_toggled_cb), dialog);
+	g_signal_connect (WID ("dwell_mode_gesture"), "toggled",
+			  G_CALLBACK (dwell_mode_toggled_cb), dialog);
 	update_mode_sensitivity (dialog,
-				 gconf_client_get_int (client,
-						       MT_GCONF_HOME "/dwell_mode",
-						       NULL));
+				 g_settings_get_enum (a11y_mouse_settings, "dwell-mode"));
 
 	populate_gesture_combo (WID ("dwell_gest_single"));
-	gconf_peditor_new_combo_box (NULL, MT_GCONF_HOME "/dwell_gesture_single",
-				     WID ("dwell_gest_single"), NULL);
+	g_settings_bind (a11y_mouse_settings, "dwell-gesture-single",
+			 WID ("dwell_gest_single"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
 	g_signal_connect (WID ("dwell_gest_single"), "changed",
-			  G_CALLBACK (gesture_single), client);
+			  G_CALLBACK (gesture_single), dialog);
 
 	populate_gesture_combo (WID ("dwell_gest_double"));
-	gconf_peditor_new_combo_box (NULL, MT_GCONF_HOME "/dwell_gesture_double",
-				     WID ("dwell_gest_double"), NULL);
+	g_settings_bind (a11y_mouse_settings, "dwell-gesture-double",
+			 WID ("dwell_gest_double"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
 	g_signal_connect (WID ("dwell_gest_double"), "changed",
-			  G_CALLBACK (gesture_double), client);
+			  G_CALLBACK (gesture_double), dialog);
 
 	populate_gesture_combo (WID ("dwell_gest_drag"));
-	gconf_peditor_new_combo_box (NULL, MT_GCONF_HOME "/dwell_gesture_drag",
-				     WID ("dwell_gest_drag"), NULL);
+	g_settings_bind (a11y_mouse_settings, "dwell-gesture-drag",
+			 WID ("dwell_gest_drag"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
 	g_signal_connect (WID ("dwell_gest_drag"), "changed",
-			  G_CALLBACK (gesture_drag), client);
+			  G_CALLBACK (gesture_drag), dialog);
 
 	populate_gesture_combo (WID ("dwell_gest_secondary"));
-	gconf_peditor_new_combo_box (NULL, MT_GCONF_HOME "/dwell_gesture_secondary",
-				     WID ("dwell_gest_secondary"), NULL);
+	g_settings_bind (a11y_mouse_settings, "dwell-gesture-secondary",
+			 WID ("dwell_gest_secondary"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
 	g_signal_connect (WID ("dwell_gest_secondary"), "changed",
-			  G_CALLBACK (gesture_secondary), client);
+			  G_CALLBACK (gesture_secondary), dialog);
 
 	g_signal_connect (WID ("delay_enable"), "toggled",
 			  G_CALLBACK (delay_enable_toggled_cb), dialog);
@@ -233,6 +236,4 @@ setup_accessibility (GtkBuilder *dialog)
 	g_signal_connect (WID ("dwell_enable"), "toggled",
 			  G_CALLBACK (dwell_enable_toggled_cb), dialog);
 	dwell_enable_toggled_cb (WID ("dwell_enable"), dialog);
-
-	g_object_unref (client);
 }
