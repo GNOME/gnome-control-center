@@ -174,17 +174,17 @@ setup_accessibility (GtkBuilder *dialog)
 	g_signal_connect (a11y_mouse_settings, "changed",
 			  G_CALLBACK (settings_changed), dialog);
 
-	g_settings_bind (a11y_mouse_settings, "dwell-enable",
+	g_settings_bind (a11y_mouse_settings, "dwell-click-enabled",
 			 WID ("dwell_enable"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (a11y_mouse_settings, "ctw-visible",
+	g_settings_bind (a11y_mouse_settings, "click-type-window-visible",
 			 WID ("dwell_show_ctw"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	g_settings_bind (a11y_mouse_settings, "ssc-enable",
+	g_settings_bind (a11y_mouse_settings, "secondary-click-enabled",
 			 WID ("delay_enable"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (a11y_mouse_settings, "ssc-time",
+	g_settings_bind (a11y_mouse_settings, "secondary-click-time",
 			 WID ("delay_time"), "text",
 			 G_SETTINGS_BIND_DEFAULT);
 
