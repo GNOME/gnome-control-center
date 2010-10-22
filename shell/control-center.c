@@ -37,7 +37,7 @@ application_command_line_cb (GApplication  *application,
   int argc;
   char **argv;
 
-  g_application_command_line_get_argc_argv (command_line, &argc, &argv);
+  argv = g_application_command_line_get_arguments (command_line, &argc);
   if (argc == 2)
     {
       gchar *start_id;
