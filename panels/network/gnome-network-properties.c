@@ -831,12 +831,27 @@ location_new (GtkBuilder *capplet_builder, GtkWidget *parent)
 	g_object_unref (client);
 }
 
+static char *
+get_active_location (GtkComboBox *box)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	char *location;
+
+	model = gtk_combo_box_get_model (box);
+	if (gtk_combo_box_get_active_iter (box, &iter) == FALSE)
+		return NULL;
+	gtk_tree_model_get (model, &iter, COL_NAME, &location, -1);
+
+	return location;
+}
+
 static void
 cb_location_changed (GtkWidget *location,
 		     GtkBuilder *builder)
 {
 	gchar *current;
-	gchar *name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (location));
+	gchar *name = get_active_location (GTK_COMBO_BOX (location));
 	GConfClient *client;
 
 	if (name == NULL)
@@ -893,17 +908,21 @@ cb_delete_button_clicked (GtkWidget *button,
 								  "location_combobox"));
 	int active = gtk_combo_box_get_active (box);
 	gchar *current, *key, *esc;
+	GtkTreeIter iter;
 
 	/* prevent the current settings from being saved by blocking
 	 * the signal handler */
 	g_signal_handlers_block_by_func (box, cb_location_changed, builder);
+	if (gtk_combo_box_get_active_iter (box, &iter) != FALSE) {
+		gtk_list_store_remove (GTK_LIST_STORE (gtk_combo_box_get_model (box)),
+				       &iter);
+	}
 	gtk_combo_box_set_active (box, (active == 0) ? 1 : 0);
-	gtk_combo_box_remove_text (box, active);
 	g_signal_handlers_unblock_by_func (box, cb_location_changed, builder);
 
 	/* set the new location */
 	client = gconf_client_get_default ();
-	current = gtk_combo_box_get_active_text (box);
+	current = get_active_location (GTK_COMBO_BOX (box));
 
 	esc = gconf_escape_key (current, -1);
 	key = g_strconcat (LOCATION_DIR "/", esc, NULL);
