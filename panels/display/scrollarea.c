@@ -22,7 +22,8 @@
 
 #include "foo-marshal.h"
 
-G_DEFINE_TYPE (FooScrollArea, foo_scroll_area, GTK_TYPE_CONTAINER);
+G_DEFINE_TYPE_WITH_CODE (FooScrollArea, foo_scroll_area, GTK_TYPE_CONTAINER,
+			 G_IMPLEMENT_INTERFACE (GTK_TYPE_SCROLLABLE, NULL));
 
 static GtkWidgetClass *parent_class;
 
@@ -108,6 +109,12 @@ enum
     LAST_SIGNAL,
 };
 
+enum {
+    PROP_0,
+    PROP_VADJUSTMENT,
+    PROP_HADJUSTMENT
+};
+
 static guint signals [LAST_SIGNAL] = { 0 };
 
 static void foo_scroll_area_size_request (GtkWidget *widget,
@@ -116,9 +123,10 @@ static gboolean foo_scroll_area_draw (GtkWidget *widget,
                                       cairo_t *cr);
 static void foo_scroll_area_size_allocate (GtkWidget *widget,
 					   GtkAllocation *allocation);
-static void foo_scroll_area_set_scroll_adjustments (FooScrollArea *scroll_area,
-						    GtkAdjustment    *hadjustment,
-						    GtkAdjustment    *vadjustment);
+static void foo_scroll_area_set_hadjustment (FooScrollArea *scroll_area,
+					     GtkAdjustment *hadjustment);
+static void foo_scroll_area_set_vadjustment (FooScrollArea *scroll_area,
+					     GtkAdjustment *vadjustment);
 static void foo_scroll_area_realize (GtkWidget *widget);
 static void foo_scroll_area_unrealize (GtkWidget *widget);
 static void foo_scroll_area_map (GtkWidget *widget);
@@ -168,12 +176,54 @@ foo_scroll_area_finalize (GObject *object)
 }
 
 static void
+foo_scroll_area_get_property (GObject    *object,
+                              guint       property_id,
+                              GValue     *value,
+                              GParamSpec *pspec)
+{
+  FooScrollArea *scroll_area = FOO_SCROLL_AREA (object);
+
+  switch (property_id)
+    {
+    case PROP_VADJUSTMENT:
+      g_value_set_object (value, &scroll_area->priv->vadj);
+      break;
+    case PROP_HADJUSTMENT:
+      g_value_set_object (value, &scroll_area->priv->hadj);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+    }
+}
+
+static void
+foo_scroll_area_set_property (GObject      *object,
+			      guint         property_id,
+			      const GValue *value,
+			      GParamSpec   *pspec)
+{
+    switch (property_id) {
+    case PROP_VADJUSTMENT:
+      foo_scroll_area_set_vadjustment (FOO_SCROLL_AREA (object), g_value_get_object (value));
+      break;
+    case PROP_HADJUSTMENT:
+      foo_scroll_area_set_hadjustment (FOO_SCROLL_AREA (object), g_value_get_object (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+    }
+}
+
+static void
 foo_scroll_area_class_init (FooScrollAreaClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
     
     object_class->finalize = foo_scroll_area_finalize;
+    object_class->set_property = foo_scroll_area_set_property;
+    object_class->get_property = foo_scroll_area_get_property;
+
     widget_class->size_request = foo_scroll_area_size_request;
     widget_class->draw = foo_scroll_area_draw;
     widget_class->size_allocate = foo_scroll_area_size_allocate;
@@ -185,9 +235,11 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
     widget_class->map = foo_scroll_area_map;
     widget_class->unmap = foo_scroll_area_unmap;
     
-    class->set_scroll_adjustments = foo_scroll_area_set_scroll_adjustments;
-    
     parent_class = g_type_class_peek_parent (class);
+
+    /* Scrollable interface properties */
+    g_object_class_override_property (object_class, PROP_HADJUSTMENT, "hadjustment");
+    g_object_class_override_property (object_class, PROP_VADJUSTMENT, "vadjustment");
     
     signals[VIEWPORT_CHANGED] =
 	g_signal_new ("viewport_changed",
@@ -211,18 +263,6 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
 		      g_cclosure_marshal_VOID__POINTER,
 		      G_TYPE_NONE, 1,
 		      G_TYPE_POINTER);
-    
-    widget_class->set_scroll_adjustments_signal =
-	g_signal_new ("set_scroll_adjustments",
-		      G_OBJECT_CLASS_TYPE (object_class),
-		      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		      G_STRUCT_OFFSET (FooScrollAreaClass,
-				       set_scroll_adjustments),
-		      NULL, NULL,
-		      foo_marshal_VOID__OBJECT_OBJECT,
-		      G_TYPE_NONE, 2,
-		      GTK_TYPE_ADJUSTMENT,
-		      GTK_TYPE_ADJUSTMENT);
 }
 
 static GtkAdjustment *
@@ -1057,13 +1097,20 @@ set_one_adjustment (FooScrollArea *scroll_area,
 }
 
 static void
-foo_scroll_area_set_scroll_adjustments (FooScrollArea *scroll_area,
-					GtkAdjustment *hadjustment,
-					GtkAdjustment *vadjustment)
+foo_scroll_area_set_hadjustment (FooScrollArea *scroll_area,
+				 GtkAdjustment *hadjustment)
 {
     set_one_adjustment (scroll_area, hadjustment, &scroll_area->priv->hadj);
+
+    set_adjustment_values (scroll_area);
+}
+
+static void
+foo_scroll_area_set_vadjustment (FooScrollArea *scroll_area,
+				 GtkAdjustment *vadjustment)
+{
     set_one_adjustment (scroll_area, vadjustment, &scroll_area->priv->vadj);
-    
+
     set_adjustment_values (scroll_area);
 }
 
