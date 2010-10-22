@@ -195,7 +195,7 @@ shell_search_renderer_set_layout (ShellSearchRenderer *cell, GtkWidget *widget)
 static void
 shell_search_renderer_get_size (GtkCellRenderer    *cell,
                                 GtkWidget          *widget,
-                                GdkRectangle       *cell_area,
+                                const GdkRectangle *cell_area,
                                 gint               *x_offset,
                                 gint               *y_offset,
                                 gint               *width,
