@@ -874,7 +874,6 @@ gnome_control_center_finalize (GObject *object)
 {
   GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (object)->priv;
 
-
   if (priv->filter_string)
     {
       g_free (priv->filter_string);
@@ -950,8 +949,7 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   /* connect various signals */
   priv->window = W (priv->builder, "main-window");
-  g_signal_connect (priv->window, "delete-event", G_CALLBACK (gtk_main_quit),
-                    NULL);
+  g_signal_connect_swapped (priv->window, "delete-event", G_CALLBACK (g_object_unref), self);
 
   priv->notebook = W (priv->builder, "notebook");
 
@@ -981,9 +979,6 @@ gnome_control_center_init (GnomeControlCenter *self)
   /* setup search functionality */
   setup_search (self);
 
-
-  gtk_widget_show_all (priv->window);
-
   /* store default window title and name */
   priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));
   priv->default_window_icon = g_strdup (gtk_window_get_icon_name (GTK_WINDOW (priv->window)));
@@ -999,4 +994,12 @@ void
 gnome_control_center_present (GnomeControlCenter *center)
 {
   gtk_window_present (GTK_WINDOW (center->priv->window));
+}
+
+void
+gnome_control_center_show (GnomeControlCenter *center,
+			   GtkApplication     *app)
+{
+  gtk_window_set_application (GTK_WINDOW (center->priv->window), app);
+  gtk_widget_show_all (center->priv->window);
 }

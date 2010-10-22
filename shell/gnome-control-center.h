@@ -70,6 +70,8 @@ GnomeControlCenter *gnome_control_center_new (void);
 
 void gnome_control_center_present (GnomeControlCenter *center);
 
+void gnome_control_center_show (GnomeControlCenter *center, GtkApplication *app);
+
 G_END_DECLS
 
 #endif /* _GNOME_CONTROL_CENTER_H */

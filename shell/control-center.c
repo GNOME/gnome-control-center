@@ -28,57 +28,16 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
+
 static void
-application_prepare_action_cb (GApplication       *application,
-                               GVariant           *arguments,
-                               GVariant           *platform_data,
-                               GnomeControlCenter *shell)
+application_command_line_cb (GApplication  *application,
+			     GApplicationCommandLine  *command_line,
+			     GnomeControlCenter      *shell)
 {
-  const gchar **argv;
-  gsize length;
+  int argc;
+  char **argv;
 
-  gnome_control_center_present (shell);
-
-  argv = g_variant_get_bytestring_array (arguments, &length);
-
-  if (length == 2)
-    {
-      GError *err = NULL;
-      const gchar *id = argv[1];
-
-      if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, &err))
-        {
-          if (err)
-            {
-              g_warning ("Could not load setting panel \"%s\": %s", id,
-                         err->message);
-              g_error_free (err);
-            }
-        }
-    }
-}
-
-int
-main (int argc, char **argv)
-{
-  GnomeControlCenter *shell;
-  GtkApplication *application;
-
-  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-
-
-  g_thread_init (NULL);
-  gtk_init (&argc, &argv);
-
-  shell = gnome_control_center_new ();
-
-  /* enforce single instance of this application */
-  application = gtk_application_new ("org.gnome.ControlCenter", &argc, &argv);
-  g_signal_connect (application, "prepare-activation",
-                    G_CALLBACK (application_prepare_action_cb), shell);
-
+  g_application_command_line_get_argc_argv (command_line, &argc, &argv);
   if (argc == 2)
     {
       gchar *start_id;
@@ -97,11 +56,44 @@ main (int argc, char **argv)
             }
         }
     }
+  g_strfreev (argv);
+}
 
-  gtk_application_run (application);
+static void
+application_startup_cb (GApplication       *application,
+			GnomeControlCenter *shell)
+{
+  gnome_control_center_show (shell, GTK_APPLICATION (application));
+  gnome_control_center_present (shell);
+}
 
-  g_object_unref (shell);
+int
+main (int argc, char **argv)
+{
+  GnomeControlCenter *shell;
+  GtkApplication *application;
+  int status;
+
+  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+
+
+  g_thread_init (NULL);
+  gtk_init (&argc, &argv);
+
+  shell = gnome_control_center_new ();
+
+  /* enforce single instance of this application */
+  application = gtk_application_new ("org.gnome.ControlCenter", G_APPLICATION_HANDLES_COMMAND_LINE);
+  g_signal_connect (application, "startup",
+                    G_CALLBACK (application_startup_cb), shell);
+  g_signal_connect (application, "command-line",
+                    G_CALLBACK (application_command_line_cb), shell);
+
+  status = g_application_run (G_APPLICATION (application), argc, argv);
+
   g_object_unref (application);
 
-  return 0;
+  return status;
 }
