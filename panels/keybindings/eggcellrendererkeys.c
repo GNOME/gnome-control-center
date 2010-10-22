@@ -27,8 +27,8 @@ static GtkCellEditable *egg_cell_renderer_keys_start_editing (GtkCellRenderer   
 							      GdkEvent                 *event,
 							      GtkWidget                *widget,
 							      const gchar              *path,
-							      GdkRectangle             *background_area,
-							      GdkRectangle             *cell_area,
+							      const GdkRectangle       *background_area,
+							      const GdkRectangle       *cell_area,
 							      GtkCellRendererState      flags);
 
 
@@ -42,7 +42,7 @@ static void egg_cell_renderer_keys_set_property (GObject         *object,
 						 GParamSpec      *pspec);
 static void egg_cell_renderer_keys_get_size     (GtkCellRenderer *cell,
 						 GtkWidget       *widget,
-						 GdkRectangle    *cell_area,
+						 const GdkRectangle *cell_area,
 						 gint            *x_offset,
 						 gint            *y_offset,
 						 gint            *width,
@@ -349,7 +349,7 @@ is_modifier (guint keycode)
 static void
 egg_cell_renderer_keys_get_size (GtkCellRenderer *cell,
 				 GtkWidget       *widget,
-				 GdkRectangle    *cell_area,
+				 const GdkRectangle *cell_area,
 				 gint            *x_offset,
 				 gint            *y_offset,
 				 gint            *width,
@@ -553,8 +553,8 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
 				      GdkEvent             *event,
 				      GtkWidget            *widget,
 				      const gchar          *path,
-				      GdkRectangle         *background_area,
-				      GdkRectangle         *cell_area,
+				      const GdkRectangle   *background_area,
+				      const GdkRectangle   *cell_area,
 				      GtkCellRendererState  flags)
 {
   GtkCellRendererText *celltext;
