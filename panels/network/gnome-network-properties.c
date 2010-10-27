@@ -31,8 +31,6 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
-#include "libgnome-control-center/gconf-property-editor.h"
-
 enum ProxyMode
 {
 	PROXYMODE_NONE,
@@ -52,22 +50,11 @@ enum {
 	COL_STYLE
 };
 
-#define HTTP_PROXY_HOST_KEY  "/system/http_proxy/host"
-#define HTTP_PROXY_PORT_KEY  "/system/http_proxy/port"
-#define HTTP_USE_AUTH_KEY    "/system/http_proxy/use_authentication"
-#define HTTP_AUTH_USER_KEY   "/system/http_proxy/authentication_user"
-#define HTTP_AUTH_PASSWD_KEY "/system/http_proxy/authentication_password"
-#define SECURE_PROXY_HOST_KEY  "/system/proxy/secure_host"
 #define OLD_SECURE_PROXY_HOST_KEY  "/system/proxy/old_secure_host"
-#define SECURE_PROXY_PORT_KEY  "/system/proxy/secure_port"
 #define OLD_SECURE_PROXY_PORT_KEY  "/system/proxy/old_secure_port"
-#define FTP_PROXY_HOST_KEY  "/system/proxy/ftp_host"
 #define OLD_FTP_PROXY_HOST_KEY  "/system/proxy/old_ftp_host"
-#define FTP_PROXY_PORT_KEY  "/system/proxy/ftp_port"
 #define OLD_FTP_PROXY_PORT_KEY  "/system/proxy/old_ftp_port"
-#define SOCKS_PROXY_HOST_KEY  "/system/proxy/socks_host"
 #define OLD_SOCKS_PROXY_HOST_KEY  "/system/proxy/old_socks_host"
-#define SOCKS_PROXY_PORT_KEY  "/system/proxy/socks_port"
 #define OLD_SOCKS_PROXY_PORT_KEY  "/system/proxy/old_socks_port"
 
 #define LOCATION_DIR "/apps/control-center/network"
@@ -156,7 +143,6 @@ cb_remove_url (GtkButton *button, gpointer data)
 	GtkBuilder *builder = GTK_BUILDER (data);
 	GtkTreeSelection *selection;
 	GtkTreeIter       iter;
-	GConfClient *client;
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (gtk_builder_get_object (builder, "treeview_ignore_host")));
 	if (gtk_tree_selection_get_selected(selection, &model, &iter))
@@ -223,7 +209,6 @@ cb_http_details_button_clicked (GtkWidget *button,
 	gchar *builder_widgets[] = { "details_dialog", NULL };
 	GError *error = NULL;
 	GtkWidget *widget;
-	GConfPropertyEditor *peditor;
 
 	if (details_dialog != NULL) {
 		gtk_window_present (GTK_WINDOW (details_dialog));
@@ -250,18 +235,15 @@ cb_http_details_button_clicked (GtkWidget *button,
 			  G_CALLBACK (cb_use_auth_toggled),
 			  _gtk_builder_get_widget (builder, "auth_table"));
 
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_boolean (
-			NULL, HTTP_USE_AUTH_KEY,
-			_gtk_builder_get_widget (builder, "use_auth_checkbutton"),
-			NULL));
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, HTTP_AUTH_USER_KEY,
-			_gtk_builder_get_widget (builder, "username_entry"),
-			NULL));
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, HTTP_AUTH_PASSWD_KEY,
-			_gtk_builder_get_widget (builder, "password_entry"),
-			NULL));
+	g_settings_bind (http_proxy_settings, "use-authentication",
+			 _gtk_builder_get_widget (builder, "use_auth_checkbutton"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (http_proxy_settings, "authentication-user",
+			 _gtk_builder_get_widget (builder, "username_entry"), "text",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (http_proxy_settings, "authentication-password",
+			 _gtk_builder_get_widget (builder, "password_entry"), "text",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	g_signal_connect (widget, "response",
 			  G_CALLBACK (cb_details_dialog_response), NULL);
@@ -1216,6 +1198,9 @@ setup_dialog (GtkBuilder *builder)
 
 	/* Use same proxy for all protocols */
 	same_proxy_toggle = _gtk_builder_get_widget (builder, "same_proxy_checkbutton");
+	g_settings_bind (proxy_settings, "use-same-proxy",
+			 same_proxy_toggle, "active",
+			 G_SETTINGS_BIND_DEFAULT);
 	g_signal_connect (same_proxy_toggle,
 			"toggled",
 			G_CALLBACK (cb_use_same_proxy_checkbutton_clicked),
@@ -1251,28 +1236,22 @@ setup_dialog (GtkBuilder *builder)
 	/* Ftp */
  	port_value = gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "ftp_port_spinbutton")), (gdouble) port_value);
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, FTP_PROXY_HOST_KEY,
-			_gtk_builder_get_widget (builder, "ftp_host_entry"),
-			"conv-from-widget-cb", extract_proxy_host,
-			NULL));
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, FTP_PROXY_PORT_KEY,
-			_gtk_builder_get_widget (builder, "ftp_port_spinbutton"),
-			NULL));
+	g_settings_bind (ftp_proxy_settings, "host",
+			 _gtk_builder_get_widget (builder, "ftp_host_entry"), "text",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (ftp_proxy_settings, "port",
+			 gtk_range_get_adjustment (GTK_RANGE (_gtk_builder_get_widget (builder, "ftp_port_spinbutton"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Socks */
  	port_value = gconf_client_get_int (client, SOCKS_PROXY_PORT_KEY, NULL);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "socks_port_spinbutton")), (gdouble) port_value);
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, SOCKS_PROXY_HOST_KEY,
-			_gtk_builder_get_widget (builder, "socks_host_entry"),
-			"conv-from-widget-cb", extract_proxy_host,
-			NULL));
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, SOCKS_PROXY_PORT_KEY,
-			_gtk_builder_get_widget (builder, "socks_port_spinbutton"),
-			NULL));
+	g_settings_bind (socks_proxy_settings, "host",
+			 _gtk_builder_get_widget (builder, "socks_host_entry"), "text",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (socks_proxy_settings, "port",
+			 gtk_range_get_adjustment (GTK_RANGE (_gtk_builder_get_widget (builder, "socks_port_spinbutton"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Set the proxy entries insensitive if we are using the same proxy for all,
 	   and make sure they are all synchronized */
@@ -1338,7 +1317,6 @@ gnome_network_properties_init (GtkBuilder  *builder)
 			   error->message);
 		g_error_free (error);
 		g_object_unref (builder);
-		g_object_unref (client);
 		return 1;
 	}
 
