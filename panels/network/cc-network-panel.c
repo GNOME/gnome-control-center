@@ -23,8 +23,6 @@
 
 #include "cc-network-panel.h"
 
-#include <gconf/gconf-client.h>
-
 G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
 
 #define NETWORK_PANEL_PRIVATE(o) \
@@ -33,7 +31,6 @@ G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
 struct _CcNetworkPanelPrivate
 {
   GtkBuilder *builder;
-  GConfClient *client;
 };
 
 
@@ -74,12 +71,6 @@ cc_network_panel_dispose (GObject *object)
       priv->builder = NULL;
     }
 
-  if (!priv->client)
-    {
-      g_object_unref (priv->client);
-      priv->client = NULL;
-    }
-
   G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
 }
 
@@ -117,9 +108,8 @@ cc_network_panel_init (CcNetworkPanel *self)
 
 
   priv->builder = gtk_builder_new ();
-  priv->client = gconf_client_get_default ();
 
-  gnome_network_properties_init (priv->builder, priv->client);
+  gnome_network_properties_init (priv->builder);
 
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
                                                  "network-panel");

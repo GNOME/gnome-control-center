@@ -24,7 +24,6 @@
 #define _CC_NETWORK_PANEL_H
 
 #include <libgnome-control-center/cc-panel.h>
-#include <gconf/gconf-client.h>
 
 G_BEGIN_DECLS
 
@@ -71,8 +70,7 @@ GType cc_network_panel_get_type (void) G_GNUC_CONST;
 void  cc_network_panel_register (GIOModule *module);
 
 
-int gnome_network_properties_init (GtkBuilder  *builder,
-                                   GConfClient *client);
+int gnome_network_properties_init (GtkBuilder  *builder);
 
 G_END_DECLS
 

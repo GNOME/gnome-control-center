@@ -28,8 +28,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 
 #include "libgnome-control-center/gconf-property-editor.h"
 
@@ -52,15 +52,11 @@ enum {
 	COL_STYLE
 };
 
-#define USE_PROXY_KEY   "/system/http_proxy/use_http_proxy"
-#define USE_SAME_PROXY_KEY   "/system/http_proxy/use_same_proxy"
 #define HTTP_PROXY_HOST_KEY  "/system/http_proxy/host"
 #define HTTP_PROXY_PORT_KEY  "/system/http_proxy/port"
 #define HTTP_USE_AUTH_KEY    "/system/http_proxy/use_authentication"
 #define HTTP_AUTH_USER_KEY   "/system/http_proxy/authentication_user"
 #define HTTP_AUTH_PASSWD_KEY "/system/http_proxy/authentication_password"
-#define IGNORE_HOSTS_KEY	 "/system/http_proxy/ignore_hosts"
-#define PROXY_MODE_KEY "/system/proxy/mode"
 #define SECURE_PROXY_HOST_KEY  "/system/proxy/secure_host"
 #define OLD_SECURE_PROXY_HOST_KEY  "/system/proxy/old_secure_host"
 #define SECURE_PROXY_PORT_KEY  "/system/proxy/secure_port"
@@ -73,7 +69,6 @@ enum {
 #define OLD_SOCKS_PROXY_HOST_KEY  "/system/proxy/old_socks_host"
 #define SOCKS_PROXY_PORT_KEY  "/system/proxy/socks_port"
 #define OLD_SOCKS_PROXY_PORT_KEY  "/system/proxy/old_socks_port"
-#define PROXY_AUTOCONFIG_URL_KEY  "/system/proxy/autoconfig_url"
 
 #define LOCATION_DIR "/apps/control-center/network"
 #define CURRENT_LOCATION "/apps/control-center/network/current_location"
@@ -81,8 +76,13 @@ enum {
 #define GNOMECC_GNP_UI_FILE (GNOMECC_UI_DIR "/gnome-network-properties.ui")
 
 static GtkWidget *details_dialog = NULL;
-static GSList *ignore_hosts = NULL;
+static GPtrArray *ignore_hosts = NULL;
 static GtkTreeModel *model = NULL;
+static GSettings *proxy_settings = NULL;
+static GSettings *http_proxy_settings = NULL;
+static GSettings *https_proxy_settings = NULL;
+static GSettings *ftp_proxy_settings = NULL;
+static GSettings *socks_proxy_settings = NULL;
 
 static GtkTreeModel *
 create_listmodel(void)
@@ -95,22 +95,19 @@ create_listmodel(void)
 }
 
 static GtkTreeModel *
-populate_listmodel(GtkListStore *store, GSList *list)
+populate_listmodel (GtkListStore *store, GPtrArray *list)
 {
 	GtkTreeIter iter;
-	GSList *pointer;
+	gint i;
 
-	gtk_list_store_clear(store);
+	gtk_list_store_clear (store);
 
-	pointer = list;
-	while(pointer)
-	{
-		gtk_list_store_append(store, &iter);
-		gtk_list_store_set(store, &iter, 0, (char *) pointer->data, -1);
-		pointer = g_slist_next(pointer);
+	for (i = 0; i < list->len; i++) {
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter, 0, (char *) g_ptr_array_index (list, i), -1);
 	}
 
-	return GTK_TREE_MODEL(store);
+	return GTK_TREE_MODEL (store);
 }
 
 static GtkWidget *
@@ -140,19 +137,17 @@ cb_add_url (GtkButton *button, gpointer data)
 {
 	GtkBuilder *builder = GTK_BUILDER (data);
 	gchar *new_url = NULL;
-	GConfClient *client;
 
 	new_url = g_strdup (gtk_entry_get_text (GTK_ENTRY (gtk_builder_get_object (builder, "entry_url"))));
 	if (strlen (new_url) == 0)
 		return;
-	ignore_hosts = g_slist_append(ignore_hosts, new_url);
-	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
-	gtk_entry_set_text(GTK_ENTRY (gtk_builder_get_object (builder,
-							     "entry_url")), "");
 
-	client = gconf_client_get_default ();
-	gconf_client_set_list (client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
-	g_object_unref (client);
+	g_ptr_array_add (ignore_hosts, new_url);
+	populate_listmodel (GTK_LIST_STORE (model), ignore_hosts);
+	gtk_entry_set_text (GTK_ENTRY (gtk_builder_get_object (builder,
+							       "entry_url")), "");
+
+	g_settings_set_strv (proxy_settings, "ignore-hosts", (const gchar **) pdata->pdata);
 }
 
 static void
@@ -167,28 +162,22 @@ cb_remove_url (GtkButton *button, gpointer data)
 	if (gtk_tree_selection_get_selected(selection, &model, &iter))
 	{
 		gchar *url;
-		GSList *pointer;
+		guint i;
 
 		gtk_tree_model_get (model, &iter, 0, &url, -1);
 
 		pointer = ignore_hosts;
-		while(pointer)
-		{
-			if(strcmp(url, (char *) pointer->data) == 0)
-			{
-				g_free (pointer->data);
-				ignore_hosts = g_slist_delete_link(ignore_hosts, pointer);
+		for (i = 0; i < ignore_hosts->len; i++) {
+			if (g_str_equal (url, (char *) g_ptr_array_index (ignore_hosts, i))) {
+				g_ptr_array_remove_index (ignore_hosts, i);
 				break;
 			}
-			pointer = g_slist_next(pointer);
 		}
 
-		g_free(url);
-		populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
+		g_free (url);
+		populate_listmodel (GTK_LIST_STORE(model), ignore_hosts);
 
-		client = gconf_client_get_default ();
-		gconf_client_set_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
-		g_object_unref (client);
+		g_settings_set_strv (proxy_settings, "ignore-hosts", (const gchar **) ignore_hosts->pdata);
 	}
 }
 
@@ -200,10 +189,8 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 			"goscustdesk-50");
 	else */ if (response_id == GTK_RESPONSE_CLOSE || response_id == GTK_RESPONSE_DELETE_EVENT)
 	{
-		if (ignore_hosts) {
-			g_slist_foreach (ignore_hosts, (GFunc) g_free, NULL);
-			g_slist_free (ignore_hosts);
-		}
+		if (ignore_hosts != NULL)
+			g_ptr_array_free (ignore_hosts, TRUE);
 
 		gtk_main_quit ();
 	}
@@ -1021,72 +1008,30 @@ static void
 cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 				       GtkBuilder *builder)
 {
-	GConfClient *client;
 	gboolean same_proxy;
 	gchar *http_proxy;
 	gint http_port;
 	gchar *host;
 
-	client = gconf_client_get_default ();
-	same_proxy = gconf_client_get_bool (client, USE_SAME_PROXY_KEY, NULL);
+	same_proxy = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton));
 
-	http_proxy = gconf_client_get_string (client, HTTP_PROXY_HOST_KEY, NULL);
-	http_port = gconf_client_get_int (client, HTTP_PROXY_PORT_KEY, NULL);
+	http_proxy = g_settings_get_string (http_proxy_settings, "host");
+	http_port = g_settings__get_int (http_proxy_settings, "port");
 
-	if (same_proxy)
-	{
-		/* Save the old values */
-		host = gconf_client_get_string (client, SECURE_PROXY_HOST_KEY, NULL);
-		gconf_client_set_string (client, OLD_SECURE_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, OLD_SECURE_PROXY_PORT_KEY,
-			gconf_client_get_int (client, SECURE_PROXY_PORT_KEY, NULL), NULL);
-		g_free (host);
-
-		host = gconf_client_get_string (client, FTP_PROXY_HOST_KEY, NULL);
-		gconf_client_set_string (client, OLD_FTP_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, OLD_FTP_PROXY_PORT_KEY,
-			gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL), NULL);
-		g_free (host);
-
-		host = gconf_client_get_string (client, SOCKS_PROXY_HOST_KEY, NULL);
-		gconf_client_set_string (client, OLD_SOCKS_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, OLD_SOCKS_PROXY_PORT_KEY,
-			gconf_client_get_int (client, SOCKS_PROXY_PORT_KEY, NULL), NULL);
-		g_free (host);
-
+	if (same_proxy) {
 		/* Set the new values */
-		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, http_proxy, NULL);
-		gconf_client_set_int (client, SECURE_PROXY_PORT_KEY, http_port, NULL);
+		gtk_entry_set_text (_gtk_builder_get_object (builder, "secure_host_entry"), http_proxy);
+		gtk_range_set_value (_gtk_builder_get_object (builder, "secure_host_spinbutton"), (gdouble) http_port);
 
-		gconf_client_set_string (client, FTP_PROXY_HOST_KEY, http_proxy, NULL);
-		gconf_client_set_int (client, FTP_PROXY_PORT_KEY, http_port, NULL);
+		gtk_entry_set_text (_gtk_builder_get_object (builder, "ftp_host_entry"), http_proxy);
+		gtk_range_set_value (_gtk_builder_get_object (builder, "ftp_host_spinbutton"), (gdouble) http_port);
 
-		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, http_proxy, NULL);
-		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY, http_port, NULL);
+		gtk_entry_set_text (_gtk_builder_get_object (builder, "socks_host_entry"), http_proxy);
+		gtk_range_set_value (_gtk_builder_get_object (builder, "socks_host_spinbutton"), (gdouble) http_port);
 
 		/* Synchronize entries */
 		synchronize_entries (builder);
-	}
-	else
-	{
-		host = gconf_client_get_string (client, OLD_SECURE_PROXY_HOST_KEY, NULL);
-		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, SECURE_PROXY_PORT_KEY,
-			gconf_client_get_int (client, OLD_SECURE_PROXY_PORT_KEY, NULL), NULL);
-		g_free (host);
-
-		host = gconf_client_get_string (client, OLD_FTP_PROXY_HOST_KEY, NULL);
-		gconf_client_set_string (client, FTP_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, FTP_PROXY_PORT_KEY,
-			gconf_client_get_int (client, OLD_FTP_PROXY_PORT_KEY, NULL), NULL);
-		g_free (host);
-
-		host = gconf_client_get_string (client, OLD_SOCKS_PROXY_HOST_KEY, NULL);
-		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, host, NULL);
-		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY,
-			gconf_client_get_int (client, OLD_SOCKS_PROXY_PORT_KEY, NULL), NULL);
-		g_free (host);
-
+	} else {
 		/* Hosts and ports should not be synchronized any more */
 		unsynchronize_entries (builder);
 	}
@@ -1110,8 +1055,6 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder,
 							   "socks_port_spinbutton"),
 				  !same_proxy);
-
-	g_object_unref (client);
 }
 
 static gchar *
@@ -1174,7 +1117,6 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 {
 	GSList *mode_group;
 	int mode;
-	GConfClient *client;
 
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(widget)))
 		return;
@@ -1191,10 +1133,10 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 				  mode == PROXYMODE_MANUAL);
 	gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "auto_box"),
 				  mode == PROXYMODE_AUTO);
-	client = gconf_client_get_default ();
-	gconf_client_set_bool (client, USE_PROXY_KEY,
-				  mode == PROXYMODE_AUTO || mode == PROXYMODE_MANUAL, NULL);
-	g_object_unref (client);
+
+	g_settings_set_string (proxy_settings, "mode", proxytype_values[mode].value_nick);
+	g_settings_set_boolean (http_proxy_settings, "enabled",
+				mode == PROXYMODE_AUTO || mode == PROXYMODE_MANUAL, NULL);
 }
 
 static void
@@ -1209,16 +1151,25 @@ connect_sensitivity_signals (GtkBuilder *builder, GSList *mode_group)
 }
 
 static void
-cb_ignore_hosts_gconf_changed (GConfClient *client, guint cnxn_id,
-				GConfEntry *entry, gpointer user_data)
+proxy_settings_changed_cb (GSettings *settings,
+			   const gchar *key,
+			   gpointer user_data)
 {
-	g_slist_foreach (ignore_hosts, (GFunc) g_free, NULL);
-	g_slist_free (ignore_hosts);
+	if (g_str_equal (key, "ignore-hosts")) {
+		gchar **hosts;
+		guint i = 0;
 
-	ignore_hosts = gconf_client_get_list (client, IGNORE_HOSTS_KEY,
-					      GCONF_VALUE_STRING, NULL);
+		g_ptr_array_free (ignore_hosts, TRUE);
 
-	populate_listmodel (GTK_LIST_STORE (model), ignore_hosts);
+		hosts = g_settings_get_strv (proxy_settings, "ignore-hosts");
+		while (hosts[i] != NULL) {
+			g_ptr_array_add (ignore_hosts, hosts[i]);
+			i++;
+		}
+
+		populate_listmodel (GTK_LIST_STORE (model), ignore_hosts);
+		g_strfreev (hosts);
+	}
 }
 
 static void
@@ -1249,8 +1200,6 @@ setup_dialog (GtkBuilder *builder)
 	gconf_client_add_dir (client, LOCATION_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_notify_add (client, CURRENT_LOCATION, (GConfClientNotifyFunc) cb_current_location, builder, NULL, NULL);
 
-	gconf_client_notify_add (client, IGNORE_HOSTS_KEY, cb_ignore_hosts_gconf_changed, NULL, NULL, NULL);
-
 	g_signal_connect (location_box, "changed", G_CALLBACK (cb_location_changed), builder);
 	g_signal_connect (gtk_builder_get_object (builder, "delete_button"), "clicked", G_CALLBACK (cb_delete_button_clicked), builder);
 
@@ -1265,48 +1214,39 @@ setup_dialog (GtkBuilder *builder)
 	mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (gtk_builder_get_object (builder, "none_radiobutton")));
 	connect_sensitivity_signals (builder, mode_group);
 
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_select_radio_with_enum (NULL,
-			PROXY_MODE_KEY, mode_group, mode_type,
-			TRUE, NULL));
-
 	/* Use same proxy for all protocols */
 	same_proxy_toggle = _gtk_builder_get_widget (builder, "same_proxy_checkbutton");
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_boolean (NULL,
-			USE_SAME_PROXY_KEY, same_proxy_toggle, NULL));
-
 	g_signal_connect (same_proxy_toggle,
 			"toggled",
 			G_CALLBACK (cb_use_same_proxy_checkbutton_clicked),
 			builder);
 
 	/* Http */
-	port_value = gconf_client_get_int (client, HTTP_PROXY_PORT_KEY, NULL);
+	port_value = g_settings_get_int (http_proxy_settings, "port");
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "http_port_spinbutton")), (gdouble) port_value);
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, HTTP_PROXY_HOST_KEY, _gtk_builder_get_widget (builder, "http_host_entry"),
-			"conv-from-widget-cb", extract_proxy_host,
-			NULL));
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, HTTP_PROXY_PORT_KEY,
-			_gtk_builder_get_widget (builder, "http_port_spinbutton"),
-			NULL));
+
+	g_settings_bind (http_proxy_settings, "port",
+			 gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "http_port_spinbutton"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (http_proxy_settings, "host",
+			 _gtk_builder_get_widget (builder, "http_host_entry"), "text",
+			 G_SETTINGS_BIND_DEFAULT);
+
 	g_signal_connect (gtk_builder_get_object (builder, "details_button"),
 			  "clicked",
 			  G_CALLBACK (cb_http_details_button_clicked),
 			  _gtk_builder_get_widget (builder, "network-panel"));
 
 	/* Secure */
- 	port_value = gconf_client_get_int (client, SECURE_PROXY_PORT_KEY, NULL);
+ 	port_value = g_settings_get_int (https_proxy_settings, "port");
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "secure_port_spinbutton")), (gdouble) port_value);
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, SECURE_PROXY_HOST_KEY,
-			_gtk_builder_get_widget (builder, "secure_host_entry"),
-			"conv-from-widget-cb", extract_proxy_host,
-			NULL));
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
-			NULL, SECURE_PROXY_PORT_KEY,
-			_gtk_builder_get_widget (builder, "secure_port_spinbutton"),
-			NULL));
+
+	g_settings_bind (https_proxy_settings, "host",
+			 _gtk_builder_get_widget (builder, "secure_host_entry"), "text",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (https_proxy_settings, "port",
+			 gtk_range_get_adjustment (GTK_RANGE (_gtk_builder_get_widget (builder, "secure_port_spinbutton"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Ftp */
  	port_value = gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL);
@@ -1349,17 +1289,15 @@ setup_dialog (GtkBuilder *builder)
 	}
 
 	/* Autoconfiguration */
-	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, PROXY_AUTOCONFIG_URL_KEY,
-			_gtk_builder_get_widget (builder, "autoconfig_entry"),
-			NULL));
+	g_settings_bind (proxy_settings, "autoconfig-url",
+			 _gtk_builder_get_widget (builder, "autoconfig_entry"), "text",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	g_signal_connect (gtk_builder_get_object (builder, "network_dialog"),
 			  "response", G_CALLBACK (cb_dialog_response), NULL);
 
 
-	ignore_hosts = gconf_client_get_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, NULL);
-	g_object_unref (client);
+	proxy_settings_changed_cb (proxy_settings, "ignore-hosts", builder);
 
 	model = create_listmodel();
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
@@ -1374,8 +1312,7 @@ setup_dialog (GtkBuilder *builder)
 }
 
 int
-gnome_network_properties_init (GtkBuilder  *builder,
-                               GConfClient *client)
+gnome_network_properties_init (GtkBuilder  *builder)
 {
 	GError *error = NULL;
 	gchar *builder_widgets[] = {"network_dialog", "adjustment1",
@@ -1386,10 +1323,14 @@ gnome_network_properties_init (GtkBuilder  *builder,
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gconf_client_add_dir (client, "/system/http_proxy",
-			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	gconf_client_add_dir (client, "/system/proxy",
-			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	proxy_settings = g_settings_new ("org.gnome.system.proxy");
+	g_signal_connect (proxy_settings, "changed",
+			  G_CALLBACK (proxy_settings_changed_cb), builder);
+
+	http_proxy_settings = g_settings_new ("org.gnome.system.proxy.http");
+	https_proxy_settings = g_settings_new ("org.gnome.system.proxy.https");
+	ftp_proxy_settings = g_settings_new ("org.gnome.system.proxy.ftp");
+	socks_proxy_settings = g_settings_new ("org.gnome.system.proxy.socks");
 
 	if (gtk_builder_add_objects_from_file (builder, GNOMECC_GNP_UI_FILE,
 					       builder_widgets, &error) == 0) {
