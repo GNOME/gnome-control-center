@@ -3,6 +3,7 @@
  * Copyright (C) 2002 Sun Microsystems Inc.
  *
  * Written by: Mark McLoughlin <mark@skynet.ie>
+ *             Rodrigo Moya <rodrigo@gnome.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,6 +31,7 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <gconf/gconf-client.h> // FIXME: still needed for locations
 
 enum ProxyMode
 {
@@ -134,7 +136,7 @@ cb_add_url (GtkButton *button, gpointer data)
 	gtk_entry_set_text (GTK_ENTRY (gtk_builder_get_object (builder,
 							       "entry_url")), "");
 
-	g_settings_set_strv (proxy_settings, "ignore-hosts", (const gchar **) pdata->pdata);
+	g_settings_set_strv (proxy_settings, "ignore-hosts", (const gchar **) ignore_hosts->pdata);
 }
 
 static void
@@ -152,7 +154,6 @@ cb_remove_url (GtkButton *button, gpointer data)
 
 		gtk_tree_model_get (model, &iter, 0, &url, -1);
 
-		pointer = ignore_hosts;
 		for (i = 0; i < ignore_hosts->len; i++) {
 			if (g_str_equal (url, (char *) g_ptr_array_index (ignore_hosts, i))) {
 				g_ptr_array_remove_index (ignore_hosts, i);
@@ -1157,7 +1158,6 @@ proxy_settings_changed_cb (GSettings *settings,
 static void
 setup_dialog (GtkBuilder *builder)
 {
-	GConfPropertyEditor *peditor;
 	GSList *mode_group;
 	GType mode_type = 0;
 	GConfClient *client;
@@ -1234,7 +1234,7 @@ setup_dialog (GtkBuilder *builder)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Ftp */
- 	port_value = gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL);
+ 	port_value = g_settings_get_int (ftp_proxy_settings, "port");
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "ftp_port_spinbutton")), (gdouble) port_value);
 	g_settings_bind (ftp_proxy_settings, "host",
 			 _gtk_builder_get_widget (builder, "ftp_host_entry"), "text",
@@ -1244,7 +1244,7 @@ setup_dialog (GtkBuilder *builder)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Socks */
- 	port_value = gconf_client_get_int (client, SOCKS_PROXY_PORT_KEY, NULL);
+ 	port_value = g_settings_get_int (socks_proxy_settings, "port");
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "socks_port_spinbutton")), (gdouble) port_value);
 	g_settings_bind (socks_proxy_settings, "host",
 			 _gtk_builder_get_widget (builder, "socks_host_entry"), "text",
@@ -1255,8 +1255,7 @@ setup_dialog (GtkBuilder *builder)
 
 	/* Set the proxy entries insensitive if we are using the same proxy for all,
 	   and make sure they are all synchronized */
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (same_proxy_toggle)))
-	{
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (same_proxy_toggle))) {
 		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "secure_host_entry"), FALSE);
 		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "secure_port_spinbutton"), FALSE);
 		gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "ftp_host_entry"), FALSE);
