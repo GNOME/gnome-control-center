@@ -12,15 +12,15 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2010-06-29 16:14+0000\n"
-"PO-Revision-Date: 2010-07-03 07:11+0530\n"
+"POT-Creation-Date: 2010-10-20 08:20+0000\n"
+"PO-Revision-Date: 2010-10-28 21:48+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.1\n"
 
 #: ../gnome-control-center.schemas.in.h:1
 msgid "Current network location"
@@ -56,1202 +56,225 @@ msgid ""
 "will not appear."
 msgstr "URL, ਜਿੱਥੋ ਡੈਸਕਟਾਪ ਥੀਮ ਮਿਲ ਸਕਦੇ ਹਨ। ਜੇ ਇੱਕ ਖਾਲੀ ਲਾਈਨ ਦਿੱਤੀ ਤਾਂ ਲਿੰਕ ਮੌਜੂਦ ਨਹੀਂ ਰਹੇਗਾ।"
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "ਚਿੱਤਰ/ਲੇਬਲ ਹਾਸ਼ੀਆ"
+#: ../libgnome-control-center/gconf-property-editor.c:134
+msgid "Key"
+msgstr "ਸਵਿੱਚ"
 
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "ਚੇਤਾਵਨੀ ਬਕਸੇ 'ਚ ਲੇਬਲ ਅਤੇ ਚਿੱਤਰ ਦੇ ਦੁਆਲੇ ਹਾਸ਼ੀਏ ਦੀ ਚੌੜਾਈ"
+#: ../libgnome-control-center/gconf-property-editor.c:135
+msgid "GConf key to which this property editor is attached"
+msgstr "ਜੀ-ਕਾਨਫ ਕੁੰਜੀ, ਇਹ ਕਿਸ ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਨਾਲ ਜੁੜਿਆ ਹੈ"
 
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "ਚੇਤਾਵਨੀ ਕਿਸਮ"
+#: ../libgnome-control-center/gconf-property-editor.c:141
+msgid "Callback"
+msgstr "ਕਾਲਬੈਕ"
 
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "ਚੇਤਾਵਨੀ ਦੀ ਕਿਸਮ ਹੈ।"
+#: ../libgnome-control-center/gconf-property-editor.c:142
+msgid "Issue this callback when the value associated with key gets changed"
+msgstr "ਇਹ ਕਾਲਬੈਕ ਦਿਉ, ਜਿਉ ਹੀ ਇਸ ਸਵਿੱਚ ਨਾਲ ਸਬੰਧਤ ਸਵਿੱਚ ਦਾ ਮੁੱਲ ਤਬਦੀਲ ਜੋ ਗਿਆ"
 
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "ਚੇਤਾਵਨੀ ਬਟਨ"
+#: ../libgnome-control-center/gconf-property-editor.c:147
+msgid "Change set"
+msgstr "ਸੈੱਟ ਬਦਲੋ"
 
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "ਚੇਤਾਵਨੀ ਡਾਈਲਾਗ 'ਚ ਬਟਨ ਵੇਖੋ"
+#: ../libgnome-control-center/gconf-property-editor.c:148
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr "ਜੀ-ਕਾਨਫ ਡਾਟਾ ਵਿੱਚ ਦਿੱਤੀ ਤਬਦੀਲੀ ਨੂੰ ਅਗਾਂਹ ਜੀ-ਕਾਨਫ ਕਲਾਈਟ ਨੂੰ ਲਾਗੂ ਕਰਨ ਲਈ"
 
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "ਹੋਰ ਵੇਰਵਾ ਵੇਖੋ(_d)"
+#: ../libgnome-control-center/gconf-property-editor.c:153
+msgid "Conversion to widget callback"
+msgstr "ਵਿਦਗਿਟ ਕਾਲਬੈਕ ਵੱਲ ਤਬਦੀਲੀ"
 
-#: ../capplets/about-me/fingerprint-strings.h:28
+#: ../libgnome-control-center/gconf-property-editor.c:154
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgstr "ਕਾਲਬੈਕ ਦਿੱਤੀ ਜਾਵੇਗੀ, ਜਦੋਂ ਕਿ ਜੀ-ਕਾਨਫ ਤੋਂ ਖਾਕੇ ਲਈ ਡਾਟਾ ਤਬਦੀਲ ਹੋ ਗਿਆ"
+
+#: ../libgnome-control-center/gconf-property-editor.c:159
+msgid "Conversion from widget callback"
+msgstr "ਵਿਦਗਿਟ ਕਾਲਬੈਕ ਤੋਂ ਤਬਦੀਲੀ"
+
+#: ../libgnome-control-center/gconf-property-editor.c:160
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgstr "ਕਾਲਬੈਕ ਦਿੱਤੀ ਜਾਵੇਗੀ, ਜਦੋਂ ਕਿ ਖਾਕੇ ਤੋਂ ਜੀ-ਕਾਨਫ ਲਈ ਡਾਟਾ ਤਬਦੀਲ ਹੋ ਗਿਆ"
+
+#: ../libgnome-control-center/gconf-property-editor.c:165
+msgid "UI Control"
+msgstr "UI ਕੰਟਰੋਲ"
+
+#: ../libgnome-control-center/gconf-property-editor.c:166
+msgid "Object that controls the property (normally a widget)"
+msgstr "ਆਬਜੈਕਟ, ਜੋ ਕਿ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦੀ ਹੈ (ਆਮਤੌਰ ਤੇ ਵਿਦਗਿਟ)"
+
+#: ../libgnome-control-center/gconf-property-editor.c:181
+msgid "Property editor object data"
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਆਬਜੈਕਟ ਡਾਟਾ"
+
+#: ../libgnome-control-center/gconf-property-editor.c:182
+msgid "Custom data required by the specific property editor"
+msgstr "ਖਾਸ ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਨੂੰ ਸੋਧਿਆ ਡੈਟਾ ਲੋੜੀਦਾ ਹੈ"
+
+#: ../libgnome-control-center/gconf-property-editor.c:188
+msgid "Property editor data freeing callback"
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਇਕਾਈ ਡੈਟਾ ਫਰੀਇੰਗ ਕਾਲਬੈਕ"
+
+#: ../libgnome-control-center/gconf-property-editor.c:189
+msgid "Callback to be issued when property editor object data is to be freed"
+msgstr "ਕਾਲਬੈਕ ਦਿੱਤੀ ਜਾਵੇ, ਜਦੋਂ ਕਿ ਵਿਸ਼ੇਸ਼ਤਾ ਸੋਧਕ ਇਕਾਈ ਡੈਟਾ ਕਦੋਂ ਮੁਕਤ ਹੋਵੇ"
+
+#: ../libgnome-control-center/gconf-property-editor.c:1406
 #, c-format
-msgid "Place your left thumb on %s"
-msgstr "%s ਉੱਤੇ ਸੱਜਾ ਅੰਗੂਠਾ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:28
-#, c-format
-msgid "Swipe your left thumb on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣਾ ਖੱਬਾ ਅੰਗੂਠਾ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:29
-#, c-format
-msgid "Place your left index finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਇੰਡੈਕਸ ਉਂਗਲ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:29
-#, c-format
-msgid "Swipe your left index finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਇੰਡੈਕਸ ਉਂਗਲ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:30
-#, c-format
-msgid "Place your left middle finger on %s"
-msgstr "%s ਉੱਤੇ ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਵਿਚਲੀ ਉਂਗਲ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:30
-#, c-format
-msgid "Swipe your left middle finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਵਿਚਲੀ ਉਂਗਲ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:31
-#, c-format
-msgid "Place your left ring finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਅੰਗੂਠੀ ਉਂਗਲ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:31
-#, c-format
-msgid "Swipe your left ring finger on %s"
-msgstr "%s ਉੱਤੇ ਖੱਬੀ ਵਿਚਲੀ ਉਂਗਲ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:32
-#, c-format
-msgid "Place your left little finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਚੀਚੀ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:32
-#, c-format
-msgid "Swipe your left little finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਚੀਚੀ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:33
-#, c-format
-msgid "Place your right thumb on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣਾ ਸੱਜਾ ਅੰਗੂਠਾ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:33
-#, c-format
-msgid "Swipe your right thumb on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣਾ ਸੱਜਾ ਅੰਗੂਠਾ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:34
-#, c-format
-msgid "Place your right index finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਇੰਡੈਕਸ ਉਂਗਲ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:34
-#, c-format
-msgid "Swipe your right index finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਇੰਡੈਕਸ ਉਂਗਲ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:35
-#, c-format
-msgid "Place your right middle finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਵਿਚਲੀ ਉਂਗਲ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:35
-#, c-format
-msgid "Swipe your right middle finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਵਿਚਲੀ ਉਂਗਲ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:36
-#, c-format
-msgid "Place your right ring finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਅੰਗੂਠੀ ਉਂਗਲ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:36
-#, c-format
-msgid "Swipe your right ring finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਅੰਗੂਠੀ ਉਂਗਲ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:37
-#, c-format
-msgid "Place your right little finger on %s"
-msgstr "ਆਪਣੀ ਸੱਜੀ ਚੀਚੀ ਨੂੰ %s ਉੱਤੇ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:37
-#, c-format
-msgid "Swipe your right little finger on %s"
-msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਚੀਂਚੀ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:72
-#: ../capplets/about-me/fingerprint-strings.h:98
-msgid "Place your finger on the reader again"
-msgstr "ਆਪਣੀ ਉਂਗਲ ਰੀਡਰ ਉੱਤੇ ਫੇਰ ਰੱਖੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:74
-#: ../capplets/about-me/fingerprint-strings.h:100
-msgid "Swipe your finger again"
-msgstr "ਆਪਣੀ ਉਂਗਲ ਫੇਰ ਘਸਾਉ"
-
-#: ../capplets/about-me/fingerprint-strings.h:77
-#: ../capplets/about-me/fingerprint-strings.h:103
-msgid "Swipe was too short, try again"
-msgstr "ਉਂਗਲ ਥੋੜੀ ਘਸਾਈ ਹੈ, ਮੁੜ ਟਰਾਈ ਕਰੋ ਜੀ"
-
-#: ../capplets/about-me/fingerprint-strings.h:79
-#: ../capplets/about-me/fingerprint-strings.h:105
-msgid "Your finger was not centered, try swiping your finger again"
-msgstr "ਤੁਹਾਡੀ ਉਂਗਲ ਸੈਂਟਰਡ ਨਹੀਂ ਸੀ, ਆਪਣੀ ਉਂਗਲ ਫੇਰ ਸਵੈਪ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
-
-#: ../capplets/about-me/fingerprint-strings.h:81
-#: ../capplets/about-me/fingerprint-strings.h:107
-msgid "Remove your finger, and try swiping your finger again"
-msgstr "ਆਪਣੀ ਉਂਗਲ ਹਟਾਉ ਅਤੇ ਫੇਰ ਆਪਣੀ ਉਂਗਲ ਦੁਬਾਰਾ ਲੰਘਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
-
-#: ../capplets/about-me/gnome-about-me.c:716
-msgid "Select Image"
-msgstr "ਚਿੱਤਰ ਚੁਣੋ(_S)"
-
-#: ../capplets/about-me/gnome-about-me.c:718
-msgid "No Image"
-msgstr "ਕੋਈ ਚਿੱਤਰ ਨਹੀਂ"
-
-#: ../capplets/about-me/gnome-about-me.c:746
-#: ../capplets/appearance/appearance-desktop.c:658
-msgid "Images"
-msgstr "ਚਿੱਤਰ"
-
-#: ../capplets/about-me/gnome-about-me.c:750
-#: ../capplets/appearance/theme-installer.c:766
-msgid "All Files"
-msgstr "ਸਭ ਫਾਇਲਾਂ"
-
-#: ../capplets/about-me/gnome-about-me.c:890
 msgid ""
-"There was an error while trying to get the addressbook information\n"
-"Evolution Data Server can't handle the protocol"
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
 msgstr ""
-"ਐਡਰੈੱਸ-ਬੁੱਕ ਜਾਣਕਾਰੀ ਨੂੰ ਪਰਾਪਤ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ\n"
-"ਈਵੇਲੂਸ਼ਨ ਡਾਟਾ ਸਰਵਰ ਪਰੋਟੋਕਾਲ ਨੂੰ ਹੈਂਡਲ ਨਹੀਂ ਕਰ ਸਕਦਾ ਹੈ।"
+"ਫਾਇਲ '%s' ਨਹੀਂ ਲੱਭੀ ਹੈ\n"
+"\n"
+"ਜਾਂਚ ਲਵੋ ਕਿ ਇਹ ਮੌਜੂਦ ਹੈ ਤੇ ਮੁੜ ਕੋਸ਼ਿਸ ਕਰੋ ਜੀ ਜਾਂ ਵੱਖਰੀ ਤਸਵੀਰ ਦੀ ਚੋਣ ਕਰੋ।"
 
-#: ../capplets/about-me/gnome-about-me.c:911
-msgid "Unable to open address book"
-msgstr "ਐਡਰੈੱਸ ਕਿਤਾਬ ਖੋਲ੍ਹਣ ਲਈ ਅਸਫ਼ਲ"
-
-#: ../capplets/about-me/gnome-about-me.c:934
+#: ../libgnome-control-center/gconf-property-editor.c:1414
 #, c-format
-msgid "About %s"
-msgstr "%s ਬਾਰੇ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:1
-msgid "A_IM/iChat:"
-msgstr "A_IM/iChat:"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:2
-msgid "A_ddress:"
-msgstr "ਐਡਰੈੱਸ(_d):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:3
-msgid "A_ssistant:"
-msgstr "ਸਹਾਇਕ(_s):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:4
-#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
-msgid "About Me"
-msgstr "ਮੇਰੇ ਬਾਰੇ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:5
-msgid "Address"
-msgstr "ਐਡਰੈੱਸ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:6
-msgid "C_ity:"
-msgstr "ਸ਼ਹਿਰ(_i):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:7
-msgid "C_ompany:"
-msgstr "ਕੰਪਨੀ(_o):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:8
-msgid "Cale_ndar:"
-msgstr "ਕੈਲੰਡਰ(_n):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:9
-msgid "Change Passwo_rd..."
-msgstr "ਪਾਸਵਰਡ ਬਦਲੋ(_r)..."
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:10
-msgid "Ci_ty:"
-msgstr "ਸ਼ਹਿਰ(_t):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:11
-msgid "Co_untry:"
-msgstr "ਦੇਸ਼(_u):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:12
-msgid "Contact"
-msgstr "ਸੰਪਰਕ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:13
-msgid "Cou_ntry:"
-msgstr "ਦੇਸ਼(_n):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:14
-msgid "Disable _Fingerprint Login..."
-msgstr "ਫਿੰਗਰ-ਪਰਿੰਟ ਲਾਗਇਨ ਬੰਦ ਕਰੋ(_F)..."
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:15
-msgid "Email"
-msgstr "ਈ-ਮੇਲ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:16
-msgid "Enable _Fingerprint Login..."
-msgstr "ਫਿੰਗਰ-ਪਰਿੰਟ ਲਾਗਇਨ ਚਾਲੂ ਕਰੋ(_F)..."
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:17
-msgid "Full Name"
-msgstr "ਪੂਰਾ ਨਾਂ"
-
-#. Home vs Work (phone)
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:19
-msgid "Hom_e:"
-msgstr "ਘਰ(_e):"
-
-#. Home vs Work (address)
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:21
-msgid "Home"
-msgstr "ਘਰ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:22
-msgid "IC_Q:"
-msgstr "IC_Q:"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:23
-msgid "Instant Messaging"
-msgstr "ਤੁਰੰਤ ਸੁਨੇਹੇ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:24
-msgid "Job"
-msgstr "ਜਾਬ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:25
-msgid "M_SN:"
-msgstr "M_SN:"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:26
-msgid "P.O. _box:"
-msgstr "P.O.ਬਾਕਸ(_b):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:27
-msgid "P._O. box:"
-msgstr "P._O. ਬਾਕਸ:"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:28
-msgid "Personal Info"
-msgstr "ਨਿੱਜੀ ਜਾਣਕਾਰੀ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:29
-msgid "Select your photo"
-msgstr "ਆਪਣੀ ਫੋਟੋ ਚੁਣੋ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:30
-msgid "State/Pro_vince:"
-msgstr "ਸੂਬਾ/ਖੇਤਰ(_v):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:31
-msgid "Telephone"
-msgstr "ਟੈਲੀਫੂਨ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:32
-msgid "User name:"
-msgstr "ਯੂਜ਼ਰ ਨਾਂ:"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:33
-msgid "Web"
-msgstr "ਵੈੱਬ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:34
-msgid "Web _log:"
-msgstr "ਵੈਬ ਲਾਗ(_l):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:35
-msgid "Wor_k:"
-msgstr "ਕੰਮ(_k):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:36
-msgid "Work"
-msgstr "ਕੰਮ"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:37
-msgid "Work _fax:"
-msgstr "ਕੰਮ ਫੈਕਸ(_f):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:38
-msgid "ZIP/_Postal code:"
-msgstr "ਜ਼ਿਪ/ਡਾਕ ਕੋਡ(_P):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:39
-msgid "_Address:"
-msgstr "ਐਡਰੈੱਸ(_A):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:40
-msgid "_Department:"
-msgstr "ਵਿਭਾਗ(_D):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:41
-msgid "_GroupWise:"
-msgstr "ਗਰੁੱਪ-ਵਾਈਜ(_G):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:42
-msgid "_Home page:"
-msgstr "ਘਰ ਸਫ਼ਾ(_H):"
-
-#. Home vs Work (email)
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:44
-msgid "_Home:"
-msgstr "ਘਰ(_H):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:45
-msgid "_Manager:"
-msgstr "ਮੈਨੇਜਰ(_M):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:46
-msgid "_Mobile:"
-msgstr "ਮੋਬਾਇਲ(_M):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:47
-msgid "_Profession:"
-msgstr "ਕਿੱਤਾ(_P):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:48
-msgid "_State/Province:"
-msgstr "ਸੂਬਾ/ਖੇਤਰ(_S):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:49
-msgid "_Title:"
-msgstr "ਨਾਂ(_T):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:50
-msgid "_Work:"
-msgstr "ਕੰਮ(_W):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:51
-msgid "_XMPP:"
-msgstr "_XMPP:"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:52
-msgid "_Yahoo:"
-msgstr "ਯਾਹੂ(_Y):"
-
-#: ../capplets/about-me/gnome-about-me-dialog.ui.h:53
-msgid "_ZIP/Postal code:"
-msgstr "ਜ਼ਿਪ/ਡਾਕ ਕੋਡ(_Z):"
-
-#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
-msgid "Set your personal information"
-msgstr "ਆਪਣੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਦਿਓ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:97
-msgid "You are not allowed to access the device. Contact your system administrator."
-msgstr "ਤੁਹਾਨੂੰ ਜੰਤਰ ਵਰਤਣ ਦੀ ਇਜ਼ਾਜ਼ਤ ਨਹੀਂ ਹੈ। ਆਪਣੇ ਸਿਸਟਮ ਐਡਮਿਨਸਟੇਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:99
-msgid "The device is already in use."
-msgstr "ਜੰਤਰ ਪਹਿਲਾਂ ਹੀ ਵਰਤੋਂ ਅਧੀਨ ਹੈ।"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:101
-msgid "An internal error occured"
-msgstr "ਇੱਕ ਅੰਦਰੂਨੀ ਗਲਤੀ ਆਈ ਹੈ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:218
-msgid "Delete registered fingerprints?"
-msgstr "ਕੀ ਰਜਿਸਟਰ ਕੀਤੇ ਫਿੰਗਰ-ਪਰਿੰਟ ਹਟਾਉਣੇ ਹਨ?"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:221
-msgid "_Delete Fingerprints"
-msgstr "ਫਿੰਗਰ-ਪਰਿੰਟ ਹਟਾਓ(_D)"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:228
 msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
+"I don't know how to open the file '%s'.\n"
+"Perhaps it's a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
 msgstr ""
-"ਕੀ ਤੁਸੀਂ ਆਪਣੇ ਰਜਿਸਟਰ ਕੀਤੇ ਫਿੰਗਰਪਰਿੰਟ ਹਟਾਉਣੇ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਕਿ ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ ਨੂੰ ਆਯੋਗ ਕੀਤਾ "
-"ਜਾ ਸਕੇ?"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:356
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:1
-msgid "Done!"
-msgstr "ਮੁਕੰਮਲ!"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:402
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:424
-#, c-format
-msgid "Could not access '%s' device"
-msgstr "ਜੰਤਰ '%s' ਲਈ ਅਸੈੱਸ ਨਹੀਂ ਹੈ"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:473
-#, c-format
-msgid "Could not start finger capture on '%s' device"
-msgstr "ਜੰਤਰ '%s' ਉੱਤੇ ਉਂਗਲ ਪ੍ਰਾਪਤ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:520
-msgid "Could not access any fingerprint readers"
-msgstr "ਕਿਸੇ ਫਿੰਗਰਪਰਿੰਟ ਰੀਡਰ ਨੂੰ ਵਰਤਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:521
-msgid "Please contact your system administrator for help."
-msgstr "ਮੱਦਦ ਲਈ ਆਪਣੇ ਸਿਸਟਮ ਐਡਮਿਨਸਟੇਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ ਜੀ।"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:551
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:2
-msgid "Enable Fingerprint Login"
-msgstr "ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ ਚਾਲੂ"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "To enable fingerprint login, you need to save one of your fingerprints, using the
-#. * 'Digital Persona U.are.U 4000/4000B' device."
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:581
-#, c-format
-msgid ""
-"To enable fingerprint login, you need to save one of your fingerprints, "
-"using the '%s' device."
-msgstr ""
-"ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ ਯੋਗ ਕਰਨ ਲਈ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਫਿੰਗਰਪਰਿੰਟ ਸੰਭਾਲਣ ਦੀ ਲੋੜ ਹੈ, '%s' ਜੰਤਰ ਦੀ ਵਰਤੋਂ "
-"ਕਰਕੇ।"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:590
-msgid "Swipe finger on reader"
-msgstr "ਰੀਡਰ ਉੱਤੇ ਉਂਗਲ ਘਸਾਉ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.c:592
-msgid "Place finger on reader"
-msgstr "ਰੀਡਰ ਉੱਤੇ ਉਂਗਲ ਰੱਖੋ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:3
-msgid "Left index finger"
-msgstr "ਖੱਬੀ ਇੰਡੈਕਸ ਉਂਗਲ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:4
-msgid "Left little finger"
-msgstr "ਖੱਬੀ ਚੀਚੀ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:5
-msgid "Left middle finger"
-msgstr "ਖੱਬੀ ਵਿਚਲੀ ਉਂਗਲ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:6
-msgid "Left ring finger"
-msgstr "ਖੱਬੀ ਰਿੰਗ ਉਂਗਲ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:7
-msgid "Left thumb"
-msgstr "ਖੱਬਾ ਅੰਗੂਠਾ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:8
-msgid "Other finger: "
-msgstr "ਹੋਰ ਉਂਗਲ:"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:9
-msgid "Right index finger"
-msgstr "ਸੱਜੀ ਇੰਡੈਕਸ ਉਂਗਲ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:10
-msgid "Right little finger"
-msgstr "ਸੱਜੀ ਚੀਚੀ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:11
-msgid "Right middle finger"
-msgstr "ਸੱਜੀ ਵਿਚਲੀ ਉਂਗਲ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:12
-msgid "Right ring finger"
-msgstr "ਸੱਜੀ ਰਿੰਗ ਉਂਗਲ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:13
-msgid "Right thumb"
-msgstr "ਸੱਜਾ ਅੰਗੂਠਾ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:14
-msgid "Select finger"
-msgstr "ਉਂਗਲ ਚੁਣੋ"
-
-#: ../capplets/about-me/gnome-about-me-fingerprint.ui.h:15
-msgid ""
-"Your fingerprint was successfully saved. You should now be able to log in "
-"using your fingerprint reader."
-msgstr ""
-"ਤੁਹਾਡੇ ਫਿੰਗਰਪਰਿੰਟ ਸਫ਼ਲਤਾ ਨਾਲ ਸੰਭਾਲੇ ਗਏ ਹਨ। ਹੁਣ ਤੁਸੀਂ ਫਿੰਗਰਪਰਿੰਟ ਰੀਡਰ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਲਾਗਇਨ "
-"ਕਰਨ ਦੇ ਯੋਗ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:161
-msgid "Child exited unexpectedly"
-msgstr "ਚਲਾਇਡ ਅਚਾਨਕ ਬੰਦ ਹੋ ਗਿਆ"
-
-#: ../capplets/about-me/gnome-about-me-password.c:296
-#, c-format
-msgid "Could not shutdown backend_stdin IO channel: %s"
-msgstr "backend_stdin IO ਚੈਨਲ ਬੰਦ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ ਹੈ: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:309
-#, c-format
-msgid "Could not shutdown backend_stdout IO channel: %s"
-msgstr "backend_stdout IO ਚੈਨਲ ਬੰਦ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:408
-msgid "Authenticated!"
-msgstr "ਪਰਮਾਣਿਤ!"
-
-#. This is a re-auth, and it failed.
-#. * The password must have been changed in the meantime!
-#. * Ask the user to re-authenticate
-#.
-#. Update status message and auth state
-#. Authentication failure
-#: ../capplets/about-me/gnome-about-me-password.c:474
-#: ../capplets/about-me/gnome-about-me-password.c:559
-msgid ""
-"Your password has been changed since you initially authenticated! Please re-"
-"authenticate."
-msgstr ""
-"ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਬਦਲ ਦਿੱਤਾ ਗਿਆ ਹੈ, ਕਿਉਂਕਿ ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਪਰਮਾਣਿਤ ਹੋ ਚੁੱਕੇ ਹੋ! ਮੁੜ-ਪਰਮਾਣਿਤ "
-"ਹੋਵੋ ਜੀ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:476
-msgid "That password was incorrect."
-msgstr "ਉਹ ਪਾਸਵਰਡ ਗਲਤ ਸੀ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:527
-msgid "Your password has been changed."
-msgstr "ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਬਦਲ ਗਿਆ ਹੈ।"
-
-#. What does this indicate?
-#. * "Authentication information cannot be recovered?" from libpam?
-#: ../capplets/about-me/gnome-about-me-password.c:537
-#, c-format
-msgid "System error: %s."
-msgstr "ਸਿਸਟਮ ਗਲਤੀ: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:540
-msgid "The password is too short."
-msgstr "ਪਾਸਵਰਡ ਬਹੁਤ ਛੋਟਾ ਹੈ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:544
-msgid "The password is too simple."
-msgstr "ਪਾਸਵਰਡ ਬਹੁਤ ਅਸਾਨ ਹੈ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:549
-msgid "The old and new passwords are too similar."
-msgstr "ਪੁਰਾਣਾ ਅਤੇ ਨਵਾਂ ਪਾਸਵਰਡ ਬੜਾ ਰਲਦਾ-ਮਿਲਦਾ ਹੈ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:551
-msgid "The new password must contain numeric or special character(s)."
-msgstr "ਨਵੇਂ ਪਾਸਵਰਡ ਵਿੱਚ ਅੰਕੀ ਜਾਂ ਖਾਸ ਅੱਖਰ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:554
-msgid "The old and new passwords are the same."
-msgstr "ਪੁਰਾਣਾ ਅਤੇ ਨਵਾਂ ਪਾਸਵਰਡ ਇੱਕੋ ਹੀ ਹੈ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:556
-msgid "The new password has already been used recently."
-msgstr "ਨਵਾਂ ਪਾਸਵਰਡ ਤਾਜ਼ਾ ਹੀ ਵਰਤਿਆ ਗਿਆ ਹੈ।"
-
-#. translators: Unable to launch <program>: <error message>
-#: ../capplets/about-me/gnome-about-me-password.c:827
-#, c-format
-msgid "Unable to launch %s: %s"
-msgstr "%s ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਅਸਮਰੱਥ: %s"
-
-#: ../capplets/about-me/gnome-about-me-password.c:831
-msgid "Unable to launch backend"
-msgstr "ਬੈਕਐਂਡ ਚਲਾਉਣ ਲਈ ਅਸਫ਼ਲ"
-
-#: ../capplets/about-me/gnome-about-me-password.c:832
-msgid "A system error has occurred"
-msgstr "ਇੱਕ ਸਿਸਟਮ ਗਲਤੀ ਆਈ ਹੈ"
-
-#. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:852
-msgid "Checking password..."
-msgstr "ਪਾਸਵਰਡ ਦੀ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
-
-#: ../capplets/about-me/gnome-about-me-password.c:939
-msgid "Click <b>Change password</b> to change your password."
-msgstr "ਪਾਸਵਰਡ ਬਦਲਣ ਲਈ <b>ਪਾਸਵਰਡ ਬਦਲੋ</b> ਬਟਨ ਨੂੰ ਦਬਾਓ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:942
-msgid "Please type your password in the <b>New password</b> field."
-msgstr "<b>ਨਵਾਂ ਪਾਸਵਰਡ</b> ਖੇਤਰ ਵਿੱਚ ਆਪਣਾ ਪਾਸਵਰਡ ਲਿਖੋ ਜੀ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:945
-#: ../capplets/about-me/gnome-about-me-password.ui.h:5
-msgid "Please type your password again in the <b>Retype new password</b> field."
-msgstr "<b>ਨਵਾਂ ਪਾਸਵਰਡ ਮੁੜ-ਲਿਖੋ</b> ਖੇਤਰ ਵਿੱਚ ਆਪਣਾ ਪਾਸਵਰਡ ਮੁੜ-ਲਿਖੋ।"
-
-#: ../capplets/about-me/gnome-about-me-password.c:948
-msgid "The two passwords are not equal."
-msgstr "ਦੋ ਪਾਸਵਰਡ ਬਰਾਬਰ ਨਹੀਂ ਹਨ।"
-
-#: ../capplets/about-me/gnome-about-me-password.ui.h:1
-msgid "Change pa_ssword"
-msgstr "ਪਾਸਵਰਡ ਬਦਲੋ(_s)"
-
-#: ../capplets/about-me/gnome-about-me-password.ui.h:2
-msgid "Change password"
-msgstr "ਪਾਸਵਰਡ ਬਦਲੋ"
-
-#: ../capplets/about-me/gnome-about-me-password.ui.h:3
-msgid "Change your password"
-msgstr "ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲੋ"
-
-#: ../capplets/about-me/gnome-about-me-password.ui.h:4
-msgid "Current _password:"
-msgstr "ਮੌਜੂਦਾ ਪਾਸਵਰਡ(_p):"
-
-#: ../capplets/about-me/gnome-about-me-password.ui.h:6
-msgid ""
-"To change your password, enter your current password in the field below and "
-"click <b>Authenticate</b>.\n"
-"After you have authenticated, enter your new password, retype it for "
-"verification and click <b>Change password</b>."
-msgstr ""
-"ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲਣ ਲਈ, ਹੇਠ ਦਿੱਤੇ ਖੇਤਰ ਵਿੱਚ ਆਪਣਾ ਮੌਜੂਦਾ ਪਾਸਵਰਡ ਦਿਓ ਅਤੇ <b>ਪਰਮਾਣਿਤ</b> ਨੂੰ "
-"ਦਬਾਓ।\n"
-"ਤੁਹਾਡੇ ਪਰਮਾਣਿਤ ਹੋਣ ਦੇ ਬਾਅਦ, ਆਪਣਾ ਨਵਾਂ ਪਾਸਵਰਡ ਦਿਓ, ਪੁਸ਼ਟੀ ਲਈ ਮੁੜ-ਦਬਾਓ ਅਤੇ <b>ਪਾਸਵਰਡ "
-"ਬਦਲੋ</b> ਦਬਾਓ।"
-
-#: ../capplets/about-me/gnome-about-me-password.ui.h:8
-msgid "_Authenticate"
-msgstr "ਪਰਮਾਣਿਤ(_A)"
-
-#: ../capplets/about-me/gnome-about-me-password.ui.h:9
-msgid "_New password:"
-msgstr "ਨਵਾਂ ਪਾਸਵਰਡ(_N):"
-
-#: ../capplets/about-me/gnome-about-me-password.ui.h:10
-msgid "_Retype new password:"
-msgstr "ਨਵਾਂ ਪਾਸਵਰਡ ਮੁੜ-ਲਿਖੋ(_R):"
-
-#: ../capplets/appearance/appearance-desktop.c:627
-msgid "Add Wallpaper"
-msgstr "ਵਾਲਪੇਪਰ ਸ਼ਾਮਲ"
-
-#: ../capplets/appearance/appearance-desktop.c:662
-msgid "All files"
-msgstr "ਸਭ ਫਾਇਲਾਂ"
-
-#: ../capplets/appearance/appearance-font.c:499
-msgid "Font may be too large"
-msgstr "ਫੋਂਟ ਬਹੁਤ ਵੱਡੇ ਹਨ"
-
-#: ../capplets/appearance/appearance-font.c:503
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
-"ਕੀਤੀ ਜਾਦੀ ਹੈ ਇਹ ਅਕਾਰ %d ਤੋਂ ਛੋਟਾ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।"
-msgstr[1] ""
-"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
-"ਕੀਤੀ ਜਾਦੀ ਹੈ ਇਹ ਅਕਾਰ %d ਤੋਂ ਛੋਟਾ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।"
-
-#: ../capplets/appearance/appearance-font.c:516
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
-"ਕੀਤੀ ਜਾਦੀ ਹੈ ਛੋਟੇ ਅਕਾਰ ਦੇ ਫੋਂਟ ਚੁਣੋ।"
-msgstr[1] ""
-"ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
-"ਕੀਤੀ ਜਾਦੀ ਹੈ ਛੋਟੇ ਅਕਾਰ ਦੇ ਫੋਂਟ ਚੁਣੋ।"
-
-#: ../capplets/appearance/appearance-font.c:539
-msgid "Use previous font"
-msgstr "ਪੁਰਾਣੇ ਫੋਂਟ ਵਰਤੋਂ"
-
-#: ../capplets/appearance/appearance-font.c:541
-msgid "Use selected font"
-msgstr "ਚੁਣੇ ਫੋਂਟ ਵਰਤੋਂ"
-
-#: ../capplets/appearance/appearance-main.c:56
-#, c-format
-msgid "Could not load user interface file: %s"
-msgstr "ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ ਫਾਇਲ ਲੋਡ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ: %s"
-
-#: ../capplets/appearance/appearance-main.c:135
-msgid "Specify the filename of a theme to install"
-msgstr "ਇੱਕ ਥੀਮ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਫਾਇਲ ਨਾਂ ਦਿਓ"
-
-#: ../capplets/appearance/appearance-main.c:136
-msgid "filename"
-msgstr "ਫਾਇਲਨਾਂ"
-
-#. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:143
-msgid "Specify the name of the page to show (theme|background|fonts|interface)"
-msgstr "ਵੇਖਣ ਲਈ ਸਫ਼ੇ ਦਾ ਨਾਂ ਦਿਓ (theme|background|fonts|interface)"
-
-#: ../capplets/appearance/appearance-main.c:144
-msgid "page"
-msgstr "ਸਫ਼ਾ"
-
-#: ../capplets/appearance/appearance-main.c:151
-msgid "[WALLPAPER...]"
-msgstr "[WALLPAPER...]"
-
-#: ../capplets/appearance/appearance-style.c:172
-#: ../capplets/common/gnome-theme-info.c:446
-#: ../capplets/common/gnome-theme-info.c:638
-msgid "Default Pointer"
-msgstr "ਡਿਫਾਲਟਰ ਪੁਆਇੰਟਰ"
-
-#: ../capplets/appearance/appearance-style.c:235
-#: ../capplets/appearance/appearance-themes.c:685
-msgid "Install"
-msgstr "ਇੰਸਟਾਲ"
-
-#: ../capplets/appearance/appearance-style.c:256
-#: ../capplets/common/gnome-theme-info.c:1646
-#, c-format
-msgid ""
-"This theme will not look as intended because the required GTK+ theme engine "
-"'%s' is not installed."
-msgstr "ਇਹ ਥੀਮ ਦੱਸੇ ਮੁਤਾਬਕ ਨਹੀਂ ਲੱਗਦਾ ਹੈ, ਕਿਉਂਕਿ ਲੋੜੀਦਾ GTK+ ਥੀਮ ਇੰਜਣ '%s' ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
-
-#: ../capplets/appearance/appearance-themes.c:673
-msgid "Apply Background"
-msgstr "ਬੈਕਗਰਾਊਂਡ ਲਾਗੂ ਕਰੋ"
-
-#: ../capplets/appearance/appearance-themes.c:677
-msgid "Apply Font"
-msgstr "ਫੋਂਟ ਲਾਗੂ ਕਰੋ"
-
-#: ../capplets/appearance/appearance-themes.c:681
-msgid "Revert Font"
-msgstr "ਫੋਂਟ ਬਦਲੋ"
-
-#: ../capplets/appearance/appearance-themes.c:712
-msgid ""
-"The current theme suggests a background and a font. Also, the last applied "
-"font suggestion can be reverted."
-msgstr ""
-"ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਬੈਕਗਰਾਊਂਡ ਅਤੇ ਫੋਂਟ ਲਈ ਸੁਝਾਅ ਦਿਓ। ਨਾਲ ਹੀ ਆਖਰੀ ਲਾਗੂ ਕੀਤੇ ਫੋਂਟ ਵਾਪਸ ਬਦਲੇ ਜਾਣਗੇ।"
-
-#: ../capplets/appearance/appearance-themes.c:714
-msgid ""
-"The current theme suggests a background. Also, the last applied font "
-"suggestion can be reverted."
-msgstr ""
-"ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਬੈਕਗਰਾਊਂਡ ਸੁਝਾਅ ਦਿੰਦੇ ਹਨ। ਨਾਲ ਹੀ ਆਖਰੀ ਲਾਗੂ ਕੀਤੇ ਫੋਂਟ ਵਾਪਸ ਲੈਣ ਦਾ ਸੁਝਾਅ ਹੈ।"
-
-#: ../capplets/appearance/appearance-themes.c:716
-msgid "The current theme suggests a background and a font."
-msgstr "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਬੈਕਗਰਾਊਂਡ ਅਤੇ ਫੋਂਟ ਦਿੰਦਾ ਹੈ।"
-
-#: ../capplets/appearance/appearance-themes.c:718
-msgid ""
-"The current theme suggests a font. Also, the last applied font suggestion "
-"can be reverted."
-msgstr ""
-"ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਫੋਂਟ ਲਈ ਮੰਗ ਕਰਦਾ ਹੈ। ਇਸ ਨਾਲ ਹੀ ਆਖਰੀ ਲਾਗੂ ਕੀਤੇ ਫੋਂਟ ਸੁਝਾਅ ਵੀ ਰੀਵਰਟ ਕੀਤੇ "
-"ਜਾਣਗੇ।"
-
-#: ../capplets/appearance/appearance-themes.c:720
-msgid "The current theme suggests a background."
-msgstr "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਬੈਕਗਰਾਊਂਡ ਦਿੰਦਾ ਹੈ।"
-
-#: ../capplets/appearance/appearance-themes.c:722
-msgid "The last applied font suggestion can be reverted."
-msgstr "ਆਖਰੀ ਲਾਗੂ ਕੀਤੇ ਫੋਂਟ ਸੁਝਾਅ ਵਾਪਸ ਲਏ ਜਾ ਸਕਦੇ ਹਨ।"
-
-#: ../capplets/appearance/appearance-themes.c:724
-msgid "The current theme suggests a font."
-msgstr "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਫੋਂਟ ਦਿੰਦਾ ਹੈ।"
-
-#: ../capplets/appearance/appearance-themes.c:1046
-#: ../panels/default-applications/gnome-da-capplet.c:693
-msgid "Custom"
-msgstr "ਕਸਟਮ"
-
-#: ../capplets/appearance/data/appearance.ui.h:1
-msgid "Appearance Preferences"
-msgstr "ਦਿੱਖ ਪਸੰਦ"
-
-#: ../capplets/appearance/data/appearance.ui.h:2
+"ਮੈ ਇਹ ਨਹੀਂ ਜਾਣਦਾ ਕਿ ਫਾਇਲ '%s' ਨੂੰ ਕਿਵੇਂ ਖੋਲਣਾ ਹੈ।\n"
+"ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਇਹ ਤਸਵੀਰ ਹੋਵੋ, ਜੋ ਕਿ ਅਜੇ ਮੱਦਦ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੈ।\n"
+"\n"
+"ਹੋਰ ਤਸਵੀਰ ਚੁਣੋ ਜੀ।"
+
+#: ../libgnome-control-center/gconf-property-editor.c:1536
+msgid "Please select an image."
+msgstr "ਇੱਕ ਚਿੱਤਰ ਚੁਣੋ ਜੀ।"
+
+#: ../libgnome-control-center/gconf-property-editor.c:1541
+msgid "_Select"
+msgstr "ਚੁਣੋ(_S)"
+
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
 msgid "Background"
 msgstr "ਬੈਕਗਰਾਊਂਡ"
 
-#: ../capplets/appearance/data/appearance.ui.h:3
-msgid "Best _shapes"
-msgstr "ਉੱਤਮ ਸ਼ਕਲ(_s)"
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:2
+#| msgid "Save _background image"
+msgid "Change the background"
+msgstr "ਬੈਕਗਰਾਊਂਡ ਬਦਲੋ"
 
-#: ../capplets/appearance/data/appearance.ui.h:4
-msgid "Best co_ntrast"
-msgstr "ਬਹੁਤ ਗੂੜਾ(_n)"
-
-#: ../capplets/appearance/data/appearance.ui.h:5
-msgid "C_olors:"
-msgstr "ਰੰਗ(_o):"
-
-#: ../capplets/appearance/data/appearance.ui.h:6
-msgid "C_ustomize..."
-msgstr "ਕਸਟਮਾਈਜ਼(_u)..."
-
-#: ../capplets/appearance/data/appearance.ui.h:7
+#: ../panels/background/background.ui.h:1
 msgid "Center"
 msgstr "ਸੈਂਟਰ"
 
-#: ../capplets/appearance/data/appearance.ui.h:8
-msgid "Changing your cursor theme takes effect the next time you log in."
-msgstr "ਤੁਹਾਡੇ ਕਰਸਰ ਥੀਮ ਵਿੱਚ ਕੀਤੇ ਬਦਲਾਅ ਤੁਹਾਡੇ ਅਗਲੀ ਵਾਰ ਲਾਗਇਨ ਕਰਨ ਸਮੇਂ ਅਸਰ ਕਰਨਗੇ।"
+#: ../panels/background/background.ui.h:2
+#| msgid "_Full"
+msgid "Fill"
+msgstr "ਭਰੋ"
 
-#: ../capplets/appearance/data/appearance.ui.h:9
-msgid "Colors"
-msgstr "ਰੰਗ"
-
-#: ../capplets/appearance/data/appearance.ui.h:10
-msgid "Controls"
-msgstr "ਕੰਟਰੋਲ"
-
-#: ../capplets/appearance/data/appearance.ui.h:11
-msgid "Customize Theme"
-msgstr "ਕਸਮਾਈਜ਼ ਥੀਮ"
-
-#: ../capplets/appearance/data/appearance.ui.h:12
-msgid "D_etails..."
-msgstr "ਵੇਰਵਾ(_e)..."
-
-#: ../capplets/appearance/data/appearance.ui.h:13
-msgid "Des_ktop font:"
-msgstr "ਡੈਸਕਟਾਪ ਫੋਂਟ(_k):"
-
-#: ../capplets/appearance/data/appearance.ui.h:14
-msgid "Font Rendering Details"
-msgstr "ਫੋਂਟ ਰੈਡਰਇੰਗ ਵੇਰਵਾ"
-
-#: ../capplets/appearance/data/appearance.ui.h:15
-msgid "Fonts"
-msgstr "ਫੋਂਟ"
-
-#: ../capplets/appearance/data/appearance.ui.h:16
-msgid "Get more backgrounds online"
-msgstr "ਹੋਰ ਬੈਕਗਰਾਊਂਡ ਆਨਲਾਈਨ ਲਵੋ"
-
-#: ../capplets/appearance/data/appearance.ui.h:17
-msgid "Get more themes online"
-msgstr "ਹੋਰ ਥੀਮ ਆਨਲਾਈਨ ਲਵੋ"
-
-#: ../capplets/appearance/data/appearance.ui.h:18
-msgid "Gra_yscale"
-msgstr "ਸਲੇਟੀ(_y)"
-
-#. font hinting
-#: ../capplets/appearance/data/appearance.ui.h:20
-msgid "Hinting"
-msgstr "ਹਿੰਟਿੰਗ"
-
-#: ../capplets/appearance/data/appearance.ui.h:21
-msgid "Horizontal gradient"
-msgstr "ਹਰੀਜੱਟਲ ਗਰੇਡੀਐਂਟ"
-
-#: ../capplets/appearance/data/appearance.ui.h:22
-msgid "Icons"
-msgstr "ਆਈਕਾਨ"
-
-#: ../capplets/appearance/data/appearance.ui.h:23
-msgid "Icons only"
-msgstr "ਕੇਵਲ ਆਈਕਾਨ"
-
-#. large threshold
-#: ../capplets/appearance/data/appearance.ui.h:24
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:50
-msgid "Large"
-msgstr "ਵੱਡਾ"
-
-#: ../capplets/appearance/data/appearance.ui.h:25
-msgid "N_one"
-msgstr "ਕੋਈ ਨਹੀਂ(_o)"
-
-#: ../capplets/appearance/data/appearance.ui.h:26
-msgid "Open a dialog to specify the color"
-msgstr "ਰੰਗ ਦੱਸਣ ਲਈ ਇੱਕ ਡਾਈਲਾਗ ਖੋਲ੍ਹੋ"
-
-#: ../capplets/appearance/data/appearance.ui.h:27
-msgid "Pointer"
-msgstr "ਪੁਆਇੰਟਰ"
-
-#: ../capplets/appearance/data/appearance.ui.h:28
-msgid "R_esolution:"
-msgstr "ਰੈਜ਼ੋਲੇਸ਼ਨ(_e):"
-
-#: ../capplets/appearance/data/appearance.ui.h:29
-msgid "Rendering"
-msgstr "ਰੈਡਰਿੰਗ"
-
-#: ../capplets/appearance/data/appearance.ui.h:30
-msgid "Save Theme As..."
-msgstr "ਥੀਮ ਇੰਝ ਸੰਭਾਲੋ..."
-
-#: ../capplets/appearance/data/appearance.ui.h:31
-msgid "Save _As..."
-msgstr "ਇੰਝ ਸੰਭਾਲੋ(_A)..."
-
-#: ../capplets/appearance/data/appearance.ui.h:32
-msgid "Save _background image"
-msgstr "ਬੈਕਗਰਾਊਂਡ ਚਿੱਤਰ ਸੰਭਾਲੋ(_B)"
-
-#: ../capplets/appearance/data/appearance.ui.h:33
+#: ../panels/background/background.ui.h:3
 msgid "Scale"
 msgstr "ਸਕੇਲ ਕੀਤਾ"
 
-#. small threshold
-#: ../capplets/appearance/data/appearance.ui.h:34
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-#: ../panels/universal-access/uap.ui.h:78
-msgid "Small"
-msgstr "ਛੋਟਾ"
-
-#: ../capplets/appearance/data/appearance.ui.h:35
-msgid "Smoothing"
-msgstr "ਮੁਲਾਇਮ"
-
-#: ../capplets/appearance/data/appearance.ui.h:36
-msgid "Solid color"
-msgstr "ਇੱਕ ਰੰਗ"
-
-#: ../capplets/appearance/data/appearance.ui.h:37
+#: ../panels/background/background.ui.h:4
 msgid "Span"
 msgstr "ਸਪੈਨ"
 
-#: ../capplets/appearance/data/appearance.ui.h:38
-msgid "Stretch"
-msgstr "ਤਾਣੋ"
-
-#: ../capplets/appearance/data/appearance.ui.h:39
-msgid "Sub_pixel (LCDs)"
-msgstr "ਸਬ-ਪਿਕਸਲ (LCD)(_p)"
-
-#: ../capplets/appearance/data/appearance.ui.h:40
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "ਸਬ-ਪਿਕਸਲ ਮੁਲਾਇਮ(LCD)(_p)"
-
-#: ../capplets/appearance/data/appearance.ui.h:41
-msgid "Subpixel Order"
-msgstr "ਸਬ-ਪਿਕਸਲ ਕ੍ਰਮ"
-
-#: ../capplets/appearance/data/appearance.ui.h:42
-msgid "Text"
-msgstr "ਟੈਕਸਟ"
-
-#: ../capplets/appearance/data/appearance.ui.h:43
-msgid "Text below items"
-msgstr "ਆਈਟਮਾਂ ਹੇਠ ਟੈਕਸਟ"
-
-#: ../capplets/appearance/data/appearance.ui.h:44
-msgid "Text beside items"
-msgstr "ਆਈਟਮਾਂ ਨਾਲ ਟੈਕਸਟ"
-
-#: ../capplets/appearance/data/appearance.ui.h:45
-msgid "Text only"
-msgstr "ਕੇਵਲ ਟੈਕਸਟ"
-
-#: ../capplets/appearance/data/appearance.ui.h:46
-msgid "The current controls theme does not support color schemes."
-msgstr "ਮੌਜੂਦਾ ਕੰਟਰੋਲ ਥੀਮ ਰੰਗ ਸਕੀਮਾਂ ਲਈ ਸਹਾਇਕ ਨਹੀਂ ਹੈ।"
-
-#: ../capplets/appearance/data/appearance.ui.h:47
-msgid "Theme"
-msgstr "ਥੀਮ"
-
-#: ../capplets/appearance/data/appearance.ui.h:48
+#: ../panels/background/background.ui.h:5
 msgid "Tile"
 msgstr "ਟਾਈਲ"
 
-#. vertical hinting, pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.ui.h:50
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/appearance/data/appearance.ui.h:51
-msgid "Vertical gradient"
-msgstr "ਵਰਟੀਕਲ ਗਰੇਡੀਐਂਟ"
-
-#: ../capplets/appearance/data/appearance.ui.h:52
-msgid "Window Border"
-msgstr "ਵਿੰਡੋ ਬਾਰਡਰ"
-
-#: ../capplets/appearance/data/appearance.ui.h:53
+#: ../panels/background/background.ui.h:6
 #: ../panels/universal-access/uap.ui.h:95
 msgid "Zoom"
 msgstr "ਜ਼ੂਮ"
 
-#: ../capplets/appearance/data/appearance.ui.h:54
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
-msgid "_Add..."
-msgstr "ਸ਼ਾਮਲ(_A)..."
+#: ../panels/background/bg-colors-source.c:57
+#| msgid "Buttons"
+msgid "Butter"
+msgstr "ਮੱਖਣ"
 
-#: ../capplets/appearance/data/appearance.ui.h:55
-msgid "_Application font:"
-msgstr "ਐਪਲੀਕੇਸ਼ਨ ਫੋਂਟ(_A):"
+#: ../panels/background/bg-colors-source.c:58
+#| msgid "page"
+msgid "Orange"
+msgstr "ਸੰਤਰੀ"
 
-#. pixel order blue, green, red
-#: ../capplets/appearance/data/appearance.ui.h:57
-msgid "_BGR"
-msgstr "_BGR"
+#: ../panels/background/bg-colors-source.c:59
+msgid "Chocolate"
+msgstr "ਚਾਕਲੇਟ"
 
-#: ../capplets/appearance/data/appearance.ui.h:58
-msgid "_Description:"
-msgstr "ਵੇਰਵਾ(_D):"
+#: ../panels/background/bg-colors-source.c:60
+#| msgid "Galeon"
+msgid "Chameleon"
+msgstr "ਚਮੇਲੋਨ"
 
-#: ../capplets/appearance/data/appearance.ui.h:59
-msgid "_Document font:"
-msgstr "ਡੌਕੂਮੈਂਟ ਫੋਂਟ(_D):"
+#: ../panels/background/bg-colors-source.c:61
+#| msgid "Volume"
+msgid "Blue"
+msgstr "ਨੀਲਾ"
 
-#: ../capplets/appearance/data/appearance.ui.h:60
-msgid "_Fixed width font:"
-msgstr "ਸਥਿਰ ਚੌੜਾਈ ਫੋਂਟ(_F):"
+#: ../panels/background/bg-colors-source.c:62
+#| msgid "Volume"
+msgid "Plum"
+msgstr "ਪਲੁਮ"
 
-#: ../capplets/appearance/data/appearance.ui.h:61
-msgid "_Full"
-msgstr "ਪੂਰਾ(_F)"
+#: ../panels/background/bg-colors-source.c:63
+msgid "Red"
+msgstr "ਲਾਲ"
 
-#: ../capplets/appearance/data/appearance.ui.h:62
-msgid "_Input boxes:"
-msgstr "ਇੰਪੁੱਟ ਬਕਸੇ(_I):"
+#: ../panels/background/bg-colors-source.c:64
+msgid "Aluminium"
+msgstr "ਐਲੂਮੀਨੀਅਮ"
 
-#: ../capplets/appearance/data/appearance.ui.h:63
-msgid "_Install..."
-msgstr "ਇੰਸਟਾਲ(_I)..."
+#: ../panels/background/bg-colors-source.c:65
+msgid "Gray"
+msgstr "ਸਲੇਟੀ"
 
-#: ../capplets/appearance/data/appearance.ui.h:64
-msgid "_Medium"
-msgstr "ਮੱਧਮ(_M)"
+#: ../panels/background/bg-colors-source.c:66
+#| msgid "Callback"
+msgid "Black"
+msgstr "ਕਾਲਾ"
 
-#: ../capplets/appearance/data/appearance.ui.h:65
-msgid "_Monochrome"
-msgstr "ਮੋਨੋਕਰੋਮਿਕ(_M)"
+#: ../panels/background/cc-background-panel.c:619
+#| msgid "No Wallpaper"
+msgid "Wallpapers"
+msgstr "ਵਾਲਪੇਪਰ"
 
-#: ../capplets/appearance/data/appearance.ui.h:66
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
-msgid "_Name:"
-msgstr "ਨਵਾਂ(_N):"
+#: ../panels/background/cc-background-panel.c:627
+msgid "Pictures Folder"
+msgstr "ਤਸਵੀਰ ਫੋਲਡਰ"
 
-#: ../capplets/appearance/data/appearance.ui.h:67
-msgid "_None"
-msgstr "ਕੋਈ ਨਹੀਂ(_N)"
+#: ../panels/background/cc-background-panel.c:635
+msgid "Colors"
+msgstr "ਰੰਗ"
 
-#. pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.ui.h:69
-msgid "_RGB"
-msgstr "_RGB"
+#: ../panels/background/cc-background-panel.c:644
+msgid "Flickr"
+msgstr "ਫਲਿੱਕਰ"
 
-#: ../capplets/appearance/data/appearance.ui.h:70
-msgid "_Reset to Defaults"
-msgstr "ਡਿਫਾਲਟ ਰੀ-ਸੈੱਟ ਕਰੋ(_R)"
-
-#: ../capplets/appearance/data/appearance.ui.h:71
-msgid "_Selected items:"
-msgstr "ਚੁਣੀਆਂ ਆਈਟਮਾਂ(_S):"
-
-#: ../capplets/appearance/data/appearance.ui.h:72
-msgid "_Size:"
-msgstr "ਅਕਾਰ(_S):"
-
-#: ../capplets/appearance/data/appearance.ui.h:73
-msgid "_Slight"
-msgstr "ਹਲਕਾ(_S)"
-
-#: ../capplets/appearance/data/appearance.ui.h:74
-msgid "_Style:"
-msgstr "ਸਟਾਇਲ(_S):"
-
-#: ../capplets/appearance/data/appearance.ui.h:75
-msgid "_Tooltips:"
-msgstr "ਟੂਲ-ਟਿੱਪ(_T):"
-
-#. vertical hinting, pixel order red, green, blue
-#: ../capplets/appearance/data/appearance.ui.h:77
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/appearance/data/appearance.ui.h:78
-msgid "_Window title font:"
-msgstr "ਵਿੰਡੋ ਟਾਇਟਲ ਫੋਂਟ(_W):"
-
-#: ../capplets/appearance/data/appearance.ui.h:79
-msgid "_Windows:"
-msgstr "ਵਿੰਡੋ(_W):"
-
-#: ../capplets/appearance/data/appearance.ui.h:80
-msgid "dots per inch"
-msgstr "ਬਿੰਦੂ ਪ੍ਰਤੀ ਇੰਚ"
-
-#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:1
-msgid "Appearance"
-msgstr "ਦਿੱਖ"
-
-#: ../capplets/appearance/data/gnome-appearance-properties.desktop.in.in.h:2
-msgid "Customize the look of the desktop"
-msgstr "ਡੈਸਕਟਾਪ ਲਈ ਪਸੰਦੀਦਾ ਦਿੱਖ"
-
-#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "ਡੈਸਕਟਾਪ ਦੇ ਵੱਖ-ਵੱਖ ਹਿੱਸਿਆਂ ਲਈ ਥੀਮ ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਦਾ ਹੈ"
-
-#: ../capplets/appearance/data/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "ਥੀਮ ਇੰਸਟਾਲਰ"
-
-#: ../capplets/appearance/data/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "ਗਨੋਮ ਥੀਮ ਪੈਕੇਜ"
-
-#: ../capplets/appearance/gnome-wp-info.c:50
+#: ../panels/background/gnome-wp-info.c:50
 msgid "No Desktop Background"
 msgstr "ਕੋਈ ਡੈਸਕਟਾਪ ਬੈਕਗਰਾਊਂਡ ਨਹੀਂ"
 
-#: ../capplets/appearance/gnome-wp-item.c:261
+#: ../panels/background/gnome-wp-item.c:294
 msgid "Slide Show"
 msgstr "ਸਲਾਈਡ-ਸ਼ੋ"
 
-#: ../capplets/appearance/gnome-wp-item.c:263
+#: ../panels/background/gnome-wp-item.c:296
 msgid "Image"
 msgstr "ਚਿੱਤਰ"
 
-#: ../capplets/appearance/gnome-wp-item.c:269
+#: ../panels/background/gnome-wp-item.c:302
 msgid "multiple sizes"
 msgstr "ਕਈ ਸਾਈਜ਼"
 
 #. translators: x pixel(s) by y pixel(s)
-#: ../capplets/appearance/gnome-wp-item.c:272
+#: ../panels/background/gnome-wp-item.c:305
 #, c-format
 msgid "%d %s by %d %s"
 msgstr "%d %s x %d %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:274
-#: ../capplets/appearance/gnome-wp-item.c:276
+#: ../panels/background/gnome-wp-item.c:307
+#: ../panels/background/gnome-wp-item.c:309
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "ਪਿਕਸਲ"
@@ -1261,7 +284,7 @@ msgstr[1] "ਪਿਕਸਲ"
 #. * mime type, size
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:284
+#: ../panels/background/gnome-wp-item.c:317
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1276,7 +299,7 @@ msgstr ""
 #. * Image missing
 #. * Folder: /path/to/file
 #.
-#: ../capplets/appearance/gnome-wp-item.c:296
+#: ../panels/background/gnome-wp-item.c:329
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -1287,407 +310,128 @@ msgstr ""
 "%s\n"
 "ਫੋਲਡਰ: %s"
 
-#: ../capplets/appearance/gnome-wp-item.c:300
+#: ../panels/background/gnome-wp-item.c:333
 msgid "Image missing"
 msgstr "ਚਿੱਤਰ ਗੁੰਮ ਹੈ"
 
-#: ../capplets/appearance/theme-installer.c:178
-#: ../capplets/appearance/theme-installer.c:234
-msgid "Cannot install theme"
-msgstr "ਥੀਮ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"
-
-#: ../capplets/appearance/theme-installer.c:180
-#, c-format
-msgid "The %s utility is not installed."
-msgstr "%s ਸਹੂਲਤ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।"
-
-#: ../capplets/appearance/theme-installer.c:236
-msgid "There was a problem while extracting the theme."
-msgstr "ਥੀਮ ਖੋਲ੍ਹਣ ਦੌਰਾਨ ਇੱਕ ਸਮੱਸਿਆ ਆਈ ਹੈ।"
-
-#: ../capplets/appearance/theme-installer.c:264
-msgid "There was an error installing the selected file"
-msgstr "ਚੁਣੀ ਫਾਈਲ ਇੰਸਟਾਲ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ"
-
-#: ../capplets/appearance/theme-installer.c:265
-#, c-format
-msgid "\"%s\" does not appear to be a valid theme."
-msgstr "\"%s\" ਇੱਕ ਠੀਕ ਥੀਮ ਨਹੀਂ ਜਾਪਦਾ ਹੈ।"
-
-#: ../capplets/appearance/theme-installer.c:266
-#, c-format
-msgid ""
-"\"%s\" does not appear to be a valid theme. It may be a theme engine which "
-"you need to compile."
-msgstr ""
-"\"%s\" ਇੱਕ ਠੀਕ ਥੀਮ ਨਹੀਂ ਜਾਪਦਾ ਹੈ। ਇਹ ਇੱਕ ਥੀਮ ਇੰਜਣ ਹੋ ਸਕਦਾ ਹੈ, ਜਿਸ ਨੂੰ ਤੁਹਾਨੂੰ ਕੰਪਾਇਲ ਕਰਨਾ "
-"ਪਵੇਗਾ।"
-
-#: ../capplets/appearance/theme-installer.c:372
-#, c-format
-msgid "Installation for theme \"%s\" failed."
-msgstr " ਥੀਮ \"%s\" ਦੀ ਇੰਸਟਾਲੇਸ਼ਨ ਫੇਲ੍ਹ ਹੋਈ ਹੈ।"
-
-#: ../capplets/appearance/theme-installer.c:411
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "ਥੀਮ \"%s\" ਇੰਸਟਾਲ ਹੋ ਗਿਆ ਹੈ।"
-
-#: ../capplets/appearance/theme-installer.c:421
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "ਕੀ ਤੁਸੀਂ ਹੁਣੇ ਲਾਗੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਆਪਣਾ ਮੌਜੂਦ ਥੀਮ ਹੀ ਰੱਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#: ../capplets/appearance/theme-installer.c:424
-msgid "Keep Current Theme"
-msgstr "ਮੌਜੂਦਾ ਥੀਮ ਰੱਖੋ"
-
-#: ../capplets/appearance/theme-installer.c:427
-msgid "Apply New Theme"
-msgstr "ਨਵਾਂ ਥੀਮ ਲਾਗੂ ਕਰੋ"
-
-#: ../capplets/appearance/theme-installer.c:471
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "ਗਨੋਮ ਥੀਮ %s ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੈ"
-
-#: ../capplets/appearance/theme-installer.c:533
-msgid "Failed to create temporary directory"
-msgstr "ਆਰਜ਼ੀ ਡਾਇਰੈਕਟਰੀ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ"
-
-#: ../capplets/appearance/theme-installer.c:596
-msgid "New themes have been successfully installed."
-msgstr "ਨਵੇਂ ਥੀਮ ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੋ ਗਏ ਹਨ।"
-
-#: ../capplets/appearance/theme-installer.c:646
-msgid "No theme file location specified to install"
-msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਕੋਈ ਥੀਮ ਫਾਇਲ ਟਿਕਾਣਾ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ"
-
-#: ../capplets/appearance/theme-installer.c:670
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"ਥੀਮ ਨੂੰ ਇੱਥੇ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਲੋੜੀਦੇ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ:\n"
-"%s"
-
-#: ../capplets/appearance/theme-installer.c:748
-msgid "Select Theme"
-msgstr "ਥੀਮ ਚੁਣੋ"
-
-#: ../capplets/appearance/theme-installer.c:759
-msgid "Theme Packages"
-msgstr "ਥੀਮ ਪੈਕੇਜ"
-
-#: ../capplets/appearance/theme-save.c:93
-#, c-format
-msgid "Theme name must be present"
-msgstr "ਥੀਮ ਨਾਂ ਹੋਣਾ ਜ਼ਰੂਰੀ ਹੈ"
-
-#: ../capplets/appearance/theme-save.c:156
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "ਥੀਮ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਤਬਦੀਲ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#: ../capplets/appearance/theme-save.c:157
-#: ../capplets/common/file-transfer-dialog.c:451
-msgid "_Overwrite"
-msgstr "ਉੱਤੇ ਲਿਖੋ(_O)"
-
-#: ../capplets/appearance/theme-util.c:75
-msgid "Would you like to delete this theme?"
-msgstr "ਕੀ ਤੁਸੀਂ ਇਹ ਥੀਮ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#: ../capplets/appearance/theme-util.c:125
-msgid "Theme cannot be deleted"
-msgstr "ਥੀਮ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ ਹੈ"
-
-#: ../capplets/appearance/theme-util.c:252
-msgid "Could not install theme engine"
-msgstr "ਥੀਮ ਇੰਜਣ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
-
-#: ../capplets/common/activate-settings-daemon.c:16
-msgid ""
-"Unable to start the settings manager 'gnome-settings-daemon'.\n"
-"Without the GNOME settings manager running, some preferences may not take "
-"effect. This could indicate a problem with DBus, or a non-GNOME (e.g. KDE) "
-"settings manager may already be active and conflicting with the GNOME "
-"settings manager."
-msgstr ""
-"ਸੈਟਿੰਗ ਮੈਨੇਜਰ 'gnome-settings-daemon' ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਅਸਫਲ ਹੈ।\n"
-"ਗਨੋਮ ਸੈਟਿੰਗ ਮੈਨੇਜਰ ਬਿਨਾਂ ਚਲਾਏ, ਕੁਝ ਪਸੰਦ ਕੰਮ ਨਹੀਂ ਕਰਨਗੀਆਂ। ਇਹ ਡੀਬੱਸ ਨਾਲ ਸੰਬੰਧ ਮੁਸ਼ਕਿਲ "
-"ਦਿਖਾਰਿਹਾ ਹੈ ਜਾਂ ਨਾ-ਗਨੋਮ (ਜਿਵੇਂ ਕਿ ਕੇਡੀਈ (KDE)) ਸੈਟਿੰਗ ਮੈਨੇਜਰ ਦਾ ਮੈਨੇਜਰ ਪਹਿਲਾਂ ਹੀ ਸਰਗਰਮ ਹੈ "
-"ਅਤੇ ਗਨੋਮ ਸੈਟਿੰਗ ਮੈਨੇਜਰ ਨਾਲ ਅਪਵਾਦ ਕਰ ਰਿਹਾ ਹੈ।"
-
-#: ../capplets/common/capplet-stock-icons.c:66
-#: ../panels/mouse/capplet-stock-icons.c:66
-#, c-format
-msgid "Unable to load stock icon '%s'\n"
-msgstr "ਸਟਾਕ ਆਈਕਾਨ '%s' ਲੋਡ ਕਰਨ ਲਈ ਅਸਮਰੱਥ\n"
-
-#: ../capplets/common/capplet-util.c:88
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "ਮੱਦਦ ਵੇਖਾਉਣ ਗਲਤੀ ਹੈ: %s"
-
-#: ../capplets/common/file-transfer-dialog.c:98
-#, c-format
-msgid "Copying file: %u of %u"
-msgstr "ਫਾਇਲ ਕਾਪੀ ਜਾਰੀ: %2$u ਵਿੱਚੋਂ %1$u"
-
-#: ../capplets/common/file-transfer-dialog.c:145
-#, c-format
-msgid "Copying '%s'"
-msgstr "'%s' ਕਾਪੀ ਜਾਰੀ"
-
-#: ../capplets/common/file-transfer-dialog.c:185
-#: ../capplets/common/file-transfer-dialog.c:313
-msgid "Copying files"
-msgstr "ਫਾਇਲਾਂ ਕਾਪੀ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
-
-#: ../capplets/common/file-transfer-dialog.c:224
-msgid "Parent Window"
-msgstr "ਮੁੱਢਲੀ ਵਿੰਡੋ"
-
-#: ../capplets/common/file-transfer-dialog.c:225
-msgid "Parent window of the dialog"
-msgstr "ਡਾਈਲਾਗ ਦੀ ਮੁੱਢਲੀ ਵਿੰਡੋ"
-
-#: ../capplets/common/file-transfer-dialog.c:231
-msgid "From URI"
-msgstr "ਵੱਲੋਂ URI"
-
-#: ../capplets/common/file-transfer-dialog.c:232
-msgid "URI currently transferring from"
-msgstr "ਇਸ ਸਮੇਂ URI ਤਬਦੀਲ ਹੋ ਰਿਹਾ ਹੈ ਵੱਲੋਂ"
-
-#: ../capplets/common/file-transfer-dialog.c:239
-msgid "To URI"
-msgstr "ਵੱਲ URI"
-
-#: ../capplets/common/file-transfer-dialog.c:240
-msgid "URI currently transferring to"
-msgstr "ਇਸ ਸਮੇਂ URI ਤਬਦੀਲ ਹੋ ਰਿਹਾ ਹੈ ਵੱਲ"
-
-#: ../capplets/common/file-transfer-dialog.c:247
-msgid "Fraction completed"
-msgstr "ਭਾਗ ਪੂਰਾ ਹੋ ਗਿਆ"
-
-#: ../capplets/common/file-transfer-dialog.c:248
-msgid "Fraction of transfer currently completed"
-msgstr "ਤਬਦੀਲੀ ਦਾ ਹਿੱਸਾ ਹੁਣ ਪੂਰਾ ਹੋ ਗਿਆ ਹੈ"
-
-#: ../capplets/common/file-transfer-dialog.c:255
-msgid "Current URI index"
-msgstr "ਮੌਜੂਦਾ URI ਇੰਡੈਕਸ"
-
-#: ../capplets/common/file-transfer-dialog.c:256
-msgid "Current URI index - starts from 1"
-msgstr "ਮੌਜੂਦਾ URI ਇੰਡੈਕਸ- ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ 1"
-
-#: ../capplets/common/file-transfer-dialog.c:263
-msgid "Total URIs"
-msgstr "ਕੁੱਲ URI"
-
-#: ../capplets/common/file-transfer-dialog.c:264
-msgid "Total number of URIs"
-msgstr "URI ਦੀ ਕੁੱਲ ਗਿਣਤੀ"
-
-#: ../capplets/common/file-transfer-dialog.c:445
-#, c-format
-msgid "File '%s' already exists. Do you want to overwrite it?"
-msgstr "ਫਾਈਲ '%s' ਮੌਜੂਦਾ ਨਹੀਂ ਹੈ। ਕੀ ਤੁਸੀਂ ਉੱਤੇ ਲਿਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#: ../capplets/common/file-transfer-dialog.c:448
-msgid "_Skip"
-msgstr "ਛੱਡੋ(_S)"
-
-#: ../capplets/common/file-transfer-dialog.c:449
-msgid "Overwrite _All"
-msgstr "ਸਭ ਉੱਤੇ ਲਿਖੋ(_A)"
-
-#: ../capplets/common/gconf-property-editor.c:134
-#: ../libgnome-control-center/gconf-property-editor.c:134
-msgid "Key"
-msgstr "ਸਵਿੱਚ"
-
-#: ../capplets/common/gconf-property-editor.c:135
-#: ../libgnome-control-center/gconf-property-editor.c:135
-msgid "GConf key to which this property editor is attached"
-msgstr "ਜੀ-ਕਾਨਫ ਕੁੰਜੀ, ਇਹ ਕਿਸ ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਨਾਲ ਜੁੜਿਆ ਹੈ"
-
-#: ../capplets/common/gconf-property-editor.c:141
-#: ../libgnome-control-center/gconf-property-editor.c:141
-msgid "Callback"
-msgstr "ਕਾਲਬੈਕ"
-
-#: ../capplets/common/gconf-property-editor.c:142
-#: ../libgnome-control-center/gconf-property-editor.c:142
-msgid "Issue this callback when the value associated with key gets changed"
-msgstr "ਇਹ ਕਾਲਬੈਕ ਦਿਉ, ਜਿਉ ਹੀ ਇਸ ਸਵਿੱਚ ਨਾਲ ਸਬੰਧਤ ਸਵਿੱਚ ਦਾ ਮੁੱਲ ਤਬਦੀਲ ਜੋ ਗਿਆ"
-
-#: ../capplets/common/gconf-property-editor.c:147
-#: ../libgnome-control-center/gconf-property-editor.c:147
-msgid "Change set"
-msgstr "ਸੈੱਟ ਬਦਲੋ"
-
-#: ../capplets/common/gconf-property-editor.c:148
-#: ../libgnome-control-center/gconf-property-editor.c:148
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr "ਜੀ-ਕਾਨਫ ਡਾਟਾ ਵਿੱਚ ਦਿੱਤੀ ਤਬਦੀਲੀ ਨੂੰ ਅਗਾਂਹ ਜੀ-ਕਾਨਫ ਕਲਾਈਟ ਨੂੰ ਲਾਗੂ ਕਰਨ ਲਈ"
-
-#: ../capplets/common/gconf-property-editor.c:153
-#: ../libgnome-control-center/gconf-property-editor.c:153
-msgid "Conversion to widget callback"
-msgstr "ਵਿਦਗਿਟ ਕਾਲਬੈਕ ਵੱਲ ਤਬਦੀਲੀ"
-
-#: ../capplets/common/gconf-property-editor.c:154
-#: ../libgnome-control-center/gconf-property-editor.c:154
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr "ਕਾਲਬੈਕ ਦਿੱਤੀ ਜਾਵੇਗੀ, ਜਦੋਂ ਕਿ ਜੀ-ਕਾਨਫ ਤੋਂ ਖਾਕੇ ਲਈ ਡਾਟਾ ਤਬਦੀਲ ਹੋ ਗਿਆ"
-
-#: ../capplets/common/gconf-property-editor.c:159
-#: ../libgnome-control-center/gconf-property-editor.c:159
-msgid "Conversion from widget callback"
-msgstr "ਵਿਦਗਿਟ ਕਾਲਬੈਕ ਤੋਂ ਤਬਦੀਲੀ"
-
-#: ../capplets/common/gconf-property-editor.c:160
-#: ../libgnome-control-center/gconf-property-editor.c:160
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr "ਕਾਲਬੈਕ ਦਿੱਤੀ ਜਾਵੇਗੀ, ਜਦੋਂ ਕਿ ਖਾਕੇ ਤੋਂ ਜੀ-ਕਾਨਫ ਲਈ ਡਾਟਾ ਤਬਦੀਲ ਹੋ ਗਿਆ"
-
-#: ../capplets/common/gconf-property-editor.c:165
-#: ../libgnome-control-center/gconf-property-editor.c:165
-msgid "UI Control"
-msgstr "UI ਕੰਟਰੋਲ"
-
-#: ../capplets/common/gconf-property-editor.c:166
-#: ../libgnome-control-center/gconf-property-editor.c:166
-msgid "Object that controls the property (normally a widget)"
-msgstr "ਆਬਜੈਕਟ, ਜੋ ਕਿ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦੀ ਹੈ (ਆਮਤੌਰ ਤੇ ਵਿਦਗਿਟ)"
-
-#: ../capplets/common/gconf-property-editor.c:181
-#: ../libgnome-control-center/gconf-property-editor.c:181
-msgid "Property editor object data"
-msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਆਬਜੈਕਟ ਡਾਟਾ"
-
-#: ../capplets/common/gconf-property-editor.c:182
-#: ../libgnome-control-center/gconf-property-editor.c:182
-msgid "Custom data required by the specific property editor"
-msgstr "ਖਾਸ ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਨੂੰ ਸੋਧਿਆ ਡੈਟਾ ਲੋੜੀਦਾ ਹੈ"
-
-#: ../capplets/common/gconf-property-editor.c:188
-#: ../libgnome-control-center/gconf-property-editor.c:188
-msgid "Property editor data freeing callback"
-msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਪਾਦਕ ਇਕਾਈ ਡੈਟਾ ਫਰੀਇੰਗ ਕਾਲਬੈਕ"
-
-#: ../capplets/common/gconf-property-editor.c:189
-#: ../libgnome-control-center/gconf-property-editor.c:189
-msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "ਕਾਲਬੈਕ ਦਿੱਤੀ ਜਾਵੇ, ਜਦੋਂ ਕਿ ਵਿਸ਼ੇਸ਼ਤਾ ਸੋਧਕ ਇਕਾਈ ਡੈਟਾ ਕਦੋਂ ਮੁਕਤ ਹੋਵੇ"
-
-#: ../capplets/common/gconf-property-editor.c:1406
-#: ../libgnome-control-center/gconf-property-editor.c:1406
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
-msgstr ""
-"ਫਾਇਲ '%s' ਨਹੀਂ ਲੱਭੀ ਹੈ\n"
-"\n"
-"ਜਾਂਚ ਲਵੋ ਕਿ ਇਹ ਮੌਜੂਦ ਹੈ ਤੇ ਮੁੜ ਕੋਸ਼ਿਸ ਕਰੋ ਜੀ ਜਾਂ ਵੱਖਰੀ ਤਸਵੀਰ ਦੀ ਚੋਣ ਕਰੋ।"
-
-#: ../capplets/common/gconf-property-editor.c:1414
-#: ../libgnome-control-center/gconf-property-editor.c:1414
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps it's a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
-msgstr ""
-"ਮੈ ਇਹ ਨਹੀਂ ਜਾਣਦਾ ਕਿ ਫਾਇਲ '%s' ਨੂੰ ਕਿਵੇਂ ਖੋਲਣਾ ਹੈ।\n"
-"ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਇਹ ਤਸਵੀਰ ਹੋਵੋ, ਜੋ ਕਿ ਅਜੇ ਮੱਦਦ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੈ।\n"
-"\n"
-"ਹੋਰ ਤਸਵੀਰ ਚੁਣੋ ਜੀ।"
-
-#: ../capplets/common/gconf-property-editor.c:1536
-#: ../libgnome-control-center/gconf-property-editor.c:1536
-msgid "Please select an image."
-msgstr "ਇੱਕ ਚਿੱਤਰ ਚੁਣੋ ਜੀ।"
-
-#: ../capplets/common/gconf-property-editor.c:1541
-#: ../libgnome-control-center/gconf-property-editor.c:1541
-msgid "_Select"
-msgstr "ਚੁਣੋ(_S)"
-
-#: ../capplets/common/gnome-theme-info.c:639
-msgid "Default Pointer - Current"
-msgstr "ਮੂਲ ਪੁਆਇੰਟਰ - ਮੌਜੂਦਾ"
-
-#: ../capplets/common/gnome-theme-info.c:643
-msgid "White Pointer"
-msgstr "ਸਫੈਦ ਪੁਆਇੰਟਰ"
-
-#: ../capplets/common/gnome-theme-info.c:644
-msgid "White Pointer - Current"
-msgstr "ਸਫੈਦ ਪੁਆਇੰਟਰ - ਮੌਜੂਦਾ"
-
-#: ../capplets/common/gnome-theme-info.c:648
-msgid "Large Pointer"
-msgstr "ਵੱਡਾ ਪੁਆਇੰਟਰ"
-
-#: ../capplets/common/gnome-theme-info.c:649
-msgid "Large Pointer - Current"
-msgstr "ਵੱਡਾ ਪੁਆਇੰਟਰ - ਮੌਜੂਦਾ"
-
-#: ../capplets/common/gnome-theme-info.c:653
-msgid "Large White Pointer - Current"
-msgstr "ਵੱਡਾ ਸਫ਼ੈਦ ਪੁਆਇੰਟਰ - ਮੌਜੂਦਾ"
-
-#: ../capplets/common/gnome-theme-info.c:654
-msgid "Large White Pointer"
-msgstr "ਵੱਡਾ ਸਫ਼ੈਦ ਪੁਆਇੰਟਰ"
-
-#: ../capplets/common/gnome-theme-info.c:1622
-#, c-format
-msgid ""
-"This theme will not look as intended because the required GTK+ theme '%s' is "
-"not installed."
-msgstr ""
-"ਇਹ ਥੀਮ ਜਿਸ ਤਰ੍ਹਾਂ ਦਾ ਵੇਖਾਈ ਦਿੰਦਾ ਹੈ, ਉਂਝ ਦਾ ਹੋਵੇਗਾ ਨਹੀਂ, ਕਿਉਂਕਿ ਲੋੜੀਦਾ GTK+ ਥੀਮ '%s' "
-"ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
-
-#: ../capplets/common/gnome-theme-info.c:1630
-#, c-format
-msgid ""
-"This theme will not look as intended because the required window manager "
-"theme '%s' is not installed."
-msgstr ""
-"ਇਹ ਥੀਮ ਜਿਸ ਤਰ੍ਹਾਂ ਦਾ ਵੇਖਾਈ ਦਿੰਦਾ ਹੈ, ਉਂਝ ਦਾ ਹੋਵੇਗਾ ਨਹੀਂ, ਕਿਉਂਕਿ ਵਿੰਡੋ ਮੈਨੇਜਰ ਥੀਮ '%s' "
-"ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
-
-#: ../capplets/common/gnome-theme-info.c:1637
-#, c-format
-msgid ""
-"This theme will not look as intended because the required icon theme '%s' is "
-"not installed."
-msgstr ""
-"ਇਹ ਥੀਮ ਜਿਸਤਰ੍ਹਾਂ ਦਾ ਵੇਖਾਈ ਦਿੰਦਾ ਹੈ, ਉਂਝ ਦਾ ਹੈ ਨਹੀਂ, ਕਿਉਂਕਿ ਲੋੜੀਦਾ ਆਈਕਾਨ ਥੀਮ '%s' ਇੰਸਟਾਲ "
-"ਨਹੀਂ ਹੋਵੇਗਾ।"
+#: ../panels/datetime/datetime.ui.h:1
+msgid "12 hour format"
+msgstr "੧੨ ਘੰਟੇ ਫਾਰਮੈਟ"
+
+#: ../panels/datetime/datetime.ui.h:2
+msgid "16"
+msgstr "੧੬"
+
+#: ../panels/datetime/datetime.ui.h:3
+msgid "2010"
+msgstr "੨੦੧੦"
+
+#: ../panels/datetime/datetime.ui.h:4
+msgid "22"
+msgstr "੨੨"
+
+#: ../panels/datetime/datetime.ui.h:5
+msgid "24 hour format"
+msgstr "੨੪ ਘੰਟੇ ਫਾਰਮੈਟ"
+
+#: ../panels/datetime/datetime.ui.h:6
+msgid "45"
+msgstr "੪੫"
+
+#: ../panels/datetime/datetime.ui.h:7
+msgid ":"
+msgstr ":"
+
+#: ../panels/datetime/datetime.ui.h:8
+#| msgid "pixel"
+#| msgid_plural "pixels"
+msgid "April"
+msgstr "ਅਪਰੈਲ"
+
+#: ../panels/datetime/datetime.ui.h:9
+msgid "August"
+msgstr "ਅਗਸਤ"
+
+#: ../panels/datetime/datetime.ui.h:10
+#| msgid "C_ity:"
+msgid "City:"
+msgstr "ਸ਼ਹਿਰ:"
+
+#: ../panels/datetime/datetime.ui.h:11
+#| msgid "D_elay:"
+msgid "Day:"
+msgstr "ਦਿਨ:"
+
+#: ../panels/datetime/datetime.ui.h:12
+msgid "December"
+msgstr "ਦਸੰਬਰ"
+
+#: ../panels/datetime/datetime.ui.h:13
+msgid "February"
+msgstr "ਫਰਵਰੀ"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "January"
+msgstr "ਜਨਵਰੀ"
+
+#: ../panels/datetime/datetime.ui.h:15
+msgid "July"
+msgstr "ਜੁਲਾਈ"
+
+#: ../panels/datetime/datetime.ui.h:16
+msgid "June"
+msgstr "ਜੂਨ"
+
+#: ../panels/datetime/datetime.ui.h:17
+#| msgid "Search"
+msgid "March"
+msgstr "ਮਾਰਚ"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "May"
+msgstr "ਮਈ"
+
+#: ../panels/datetime/datetime.ui.h:19
+#| msgid "Monitor"
+msgid "Month:"
+msgstr "ਮਹੀਨਾ:"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "November"
+msgstr "ਨਵੰਬਰ"
+
+#: ../panels/datetime/datetime.ui.h:21
+#| msgid "Other"
+msgid "October"
+msgstr "ਅਕਤੂਬਰ"
+
+#: ../panels/datetime/datetime.ui.h:22
+#| msgid "Version:"
+msgid "Region:"
+msgstr "ਖਿੱਤਾ:"
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "September"
+msgstr "ਸਤੰਬਰ"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "Set time automatically"
+msgstr "ਸਮਾਂ ਆਟੋਮੈਟਿਕ ਹੀ ਸੈੱਟ ਕਰੋ"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "Year:"
+msgstr "ਸਾਲ:"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
 msgid "Date And Time"
 msgstr "ਮਿਤੀ ਤੇ ਸਮਾਂ"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
-#| msgid "Example preferences panel"
 msgid "Date and Time preferences panel"
 msgstr "ਮਿਤੀ ਤੇ ਸਮਾਂ ਪਸੰਦ ਪੈਨਲ"
 
 #: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
 msgid "Preferred Applications"
 msgstr "ਪਸੰਦੀਦਾ ਐਪਲੀਕੇਸ਼ਨ"
 
@@ -1703,18 +447,27 @@ msgstr "ਪਸੰਦੀਦਾ ਦਿੱਖ ਅਸੈੱਸਟਿਵ ਤਕਨਾ
 msgid "Visual Assistance"
 msgstr "ਦਿੱਖ ਸਹਾਇਤਾ"
 
-#: ../panels/default-applications/gnome-da-capplet.c:100
-#: ../panels/default-applications/gnome-da-capplet.c:364
-#: ../panels/default-applications/gnome-da-capplet.c:385
+#: ../panels/default-applications/gnome-da-capplet.c:84
 #, c-format
-msgid "Error saving configuration: %s"
-msgstr "ਸੰਰਚਨਾ ਸੰਭਾਲਣ ਲਈ ਗਲਤੀ: %s"
+#| msgid "Error parsing arguments: %s\n"
+msgid "Error setting default browser: %s"
+msgstr "ਡਿਫਾਲਟ ਬਰਾਊਜ਼ਰ ਸੈੱਟ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ: %s"
 
-#: ../panels/default-applications/gnome-da-capplet.c:724
+#: ../panels/default-applications/gnome-da-capplet.c:107
+#, c-format
+#| msgid "Error parsing arguments: %s\n"
+msgid "Error setting default mailer: %s"
+msgstr "ਡਿਫਾਲਟ ਮੇਲਰ ਸੈੱਟ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ: %s"
+
+#: ../panels/default-applications/gnome-da-capplet.c:322
+msgid "Custom"
+msgstr "ਕਸਟਮ"
+
+#: ../panels/default-applications/gnome-da-capplet.c:353
 msgid "Could not load the main interface"
 msgstr "ਮੁੱਖ ਇੰਟਰਫੇਸ ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
 
-#: ../panels/default-applications/gnome-da-capplet.c:726
+#: ../panels/default-applications/gnome-da-capplet.c:355
 msgid "Please make sure that the applet is properly installed"
 msgstr "ਇਹ ਵੇਖ ਲਵੋ ਕਿ ਐਪਲਿਟ ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੈ"
 
@@ -1746,78 +499,50 @@ msgid "E_xecute flag:"
 msgstr "ਚੱਲਣ ਨਿਸ਼ਾਨ(_x):"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
-msgid "Image Viewer"
-msgstr "ਚਿੱਤਰ ਦਰਸ਼ਕ"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Instant Messenger"
 msgstr "ਤਰੁੰਤ ਸੁਨੇਹਾਦਾਰ"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Internet"
 msgstr "ਇੰਟਰਨੈੱਟ"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
 msgid "Mail Reader"
 msgstr "ਮੇਲ ਰੀਡਰ"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
 msgid "Mobility"
 msgstr "ਮੋਬਾਇਲਟੀ"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
-msgid "Multimedia"
-msgstr "ਮਲਟੀਮੀਡਿਆ"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
-msgid "Multimedia Player"
-msgstr "ਮਲਟੀਮੀਡਿਆ ਪਲੇਅਰ"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
-msgid "Open link in new _tab"
-msgstr "ਲਿੰਕ ਨਵੀਂ ਟੈਬ ਵਿੱਚ ਖੋਲ੍ਹੋ(_t)"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
-msgid "Open link in new _window"
-msgstr "ਨਵੀਂ ਵਿੰਡੋ ਵਿੱਚ ਖੋਲ੍ਹੋ(_w)"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
-msgid "Open link with web browser _default"
-msgstr "ਲਿੰਕ ਡਿਫਾਲਟ ਵੈੱਬ ਬਰਾਊਜ਼ਰ ਨਾਲ ਖੋਲ੍ਹੋ(_d)"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Run at st_art"
 msgstr "ਸ਼ੁਰੂ ਸਮੇਂ ਚਲਾਓ(_a)"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
 msgid "Run in t_erminal"
 msgstr "ਟਰਮੀਨਲ 'ਚ ਚਲਾਓ(_e)"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:20
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
 msgid "System"
 msgstr "ਸਿਸਟਮ"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:21
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
 msgid "Terminal Emulator"
 msgstr "ਟਰਮੀਨਲ ਸਮਰੂਪ"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:22
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
 msgid "Text Editor"
 msgstr "ਟੈਕਸਟ ਐਡੀਟਰ"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:23
-msgid "Video Player"
-msgstr "ਵਿਡੀਓ ਪਲੇਅਰ"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:24
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
 msgid "Visual"
 msgstr "ਦਿੱਖ"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:25
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Web Browser"
 msgstr "ਵੈਬ ਬਰਾਊਜ਼ਰ"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:26
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
 msgid "_Run at start"
 msgstr "ਸ਼ੁਰੂ ਸਮੇਂ ਚਲਾਓ(_R)"
 
@@ -1975,132 +700,121 @@ msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
 #: ../panels/default-applications/gnome-default-applications.xml.in.h:39
-msgid "Opera"
-msgstr "ਓਪਰਾ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
 msgid "Orca"
 msgstr "ਓਰਕਾ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
 msgid "Orca with Magnifier"
 msgstr "ਓਰਕਾ ਨਾਲ ਵੱਡਦਰਸ਼ੀ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
 msgid "Rhythmbox Music Player"
 msgstr "ਰੀਥਮਬਾਕਸ ਸੰਗੀਤ ਪਲੇਅਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
 msgid "SeaMonkey"
 msgstr "ਸਾਅਮਾਂਕੀ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
 msgid "SeaMonkey Mail"
 msgstr "ਸਾਅਮਾਂਕੀ ਮੇਲ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
 msgid "Standard XTerminal"
 msgstr "ਸਟੈਂਡਰਡ XTerminal"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
 msgid "Terminator"
 msgstr "ਟਰਮੀਨੇਟਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
 msgid "Thunderbird"
 msgstr "ਥੰਡਰਬਰਡ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
 msgid "Totem Movie Player"
 msgstr "ਟੋਟੇਮ ਮੂਵੀ ਪਲੇਅਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:52
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
 msgid "aterm"
 msgstr "aterm"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Include _panel"
-msgstr "ਪੈਨਲ ਸਮੇਤ(_P)"
+msgid "<i>Note: may limit resolution options</i>"
+msgstr "<i>ਨੋਟ: ਤੁਸੀਂ ਰੈਜ਼ੋਲੂਸ਼ਨ ਚੋਣਾਂ ਸੀਮਿਤ ਕਰ ਸਕਦੇ ਹੋ</i>"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:320
+#: ../panels/display/xrandr-capplet.c:316
 msgid "Left"
 msgstr "ਖੱਬੇ"
 
 #: ../panels/display/display-capplet.ui.h:3
-msgid "Make Default"
-msgstr "ਡਿਫਾਲਟ ਬਣਾਓ"
-
-#: ../panels/display/display-capplet.ui.h:4
-#: ../panels/display/xrandr-capplet.c:523
+#: ../panels/display/xrandr-capplet.c:520
 msgid "Monitor"
 msgstr "ਮਾਨੀਟਰ"
 
-#: ../panels/display/display-capplet.ui.h:5
-#: ../panels/display/xrandr-capplet.c:319
-#: ../panels/display/xrandr-capplet.c:358
+#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/xrandr-capplet.c:315
+#: ../panels/display/xrandr-capplet.c:354
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Normal"
 msgstr "ਆਮ"
 
-#: ../panels/display/display-capplet.ui.h:6
+#: ../panels/display/display-capplet.ui.h:5
 #: ../panels/universal-access/uap.ui.h:61
 msgid "Off"
 msgstr "ਬੰਦ"
 
-#: ../panels/display/display-capplet.ui.h:7
+#: ../panels/display/display-capplet.ui.h:6
 #: ../panels/universal-access/uap.ui.h:62
 msgid "On"
 msgstr "ਚਾਲੂ"
 
-#: ../panels/display/display-capplet.ui.h:8
-msgid "Panel icon"
-msgstr "ਪੈਨਲ ਆਈਕਾਨ"
-
-#: ../panels/display/display-capplet.ui.h:9
+#: ../panels/display/display-capplet.ui.h:7
 msgid "R_otation:"
 msgstr "ਘੁੰਮਣ(_o):"
 
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:8
 msgid "Re_fresh rate:"
 msgstr "ਤਾਜ਼ਾ ਦਰ(_f):"
 
-#: ../panels/display/display-capplet.ui.h:11
-#: ../panels/display/xrandr-capplet.c:321
+#: ../panels/display/display-capplet.ui.h:9
+#: ../panels/display/xrandr-capplet.c:317
 msgid "Right"
 msgstr "ਸੱਜੇ"
 
-#: ../panels/display/display-capplet.ui.h:12
-msgid "Sa_me image in all monitors"
-msgstr "ਸਭ ਮਾਨੀਟਰਾਂ ਵਿੱਚ ਇੱਕੋ ਚਿੱਤਰ(_m)"
-
-#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/display/display-capplet.ui.h:10
 msgid "Upside-down"
 msgstr "ਉਤਲਾ ਹੇਠ"
 
-#: ../panels/display/display-capplet.ui.h:14
+#: ../panels/display/display-capplet.ui.h:11
 msgid "_Detect monitors"
 msgstr "ਮਾਨੀਟਰ ਖੋਜ(_D)"
 
-#: ../panels/display/display-capplet.ui.h:15
+#: ../panels/display/display-capplet.ui.h:12
+msgid "_Include Top Menu Bar"
+msgstr "ਉੱਤੇ ਮੇਨੂ ਪੱਟੀ ਸਮੇਤ(_I)"
+
+#: ../panels/display/display-capplet.ui.h:13
+#| msgid "Mirror Screens"
+msgid "_Mirror Screens"
+msgstr "ਸਕਰੀਨਾਂ ਮਿੱਰਰ(_M)"
+
+#: ../panels/display/display-capplet.ui.h:14
 msgid "_Resolution:"
 msgstr "ਰੈਜ਼ੋਲੇਸ਼ਨ(_R):"
-
-#: ../panels/display/display-capplet.ui.h:16
-msgid "_Show monitors in panel"
-msgstr "ਪੈਨਲ ਵਿੱਚ ਮਾਨੀਟਰ ਵੇਖੋ(_S)"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Change resolution and position of monitors"
@@ -2110,110 +824,11 @@ msgstr "ਮਾਨੀਟਰਾਂ ਦਾ ਰੈਜ਼ੋਲੂਸ਼ਨ ਅਤੇ
 msgid "Monitors"
 msgstr "ਮਾਨੀਟਰ"
 
-#: ../panels/display/gnome-display-properties-install-systemwide.c:44
-#, c-format
-msgid ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
-msgstr ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
-
-#. Translators: only able to install RANDR profiles as root
-#: ../panels/display/gnome-display-properties-install-systemwide.c:151
-msgid "This program can only be used by the root user"
-msgstr "ਇਹ ਪਰੋਗਰਾਮ ਕੇਵਲ ਰੂਟ ਯੂਜ਼ਰ ਵਲੋਂ ਹੀ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:168
-msgid "The source filename must be absolute"
-msgstr "ਸਰੋਤ ਫਾਇਲ ਨਾਂ ਅਸਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:179
-#, c-format
-msgid "Could not open %s: %s\n"
-msgstr "%s ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s\n"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:188
-#, c-format
-msgid "Could not get information for %s: %s\n"
-msgstr "%s ਲਈ ਜਾਣਕਾਰੀ ਲਈ ਨ ਹੀਂ ਜਾ ਸਕੀ: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:195
-#, c-format
-msgid "%s must be a regular file\n"
-msgstr "%s ਨਿਯਮਤ ਫਾਇਲ ਹੋਣੀ ਲਾਜ਼ਮੀ ਹੈ।\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:204
-msgid "This program must only be run through pkexec(1)"
-msgstr "ਇਹ ਪਰੋਗਰਾਮ pkexec(1) ਰਾਹੀਂ ਹੀ ਚਲਾਇਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:209
-msgid "PKEXEC_UID must be set to an integer value"
-msgstr "PKEXEC_UID ਪੂਰਨ ਅੰਕ ਸੈੱਟ ਕੀਤਾ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ"
-
-#. Translators: we are complaining that a file must be really owned by the user who called this program
-#: ../panels/display/gnome-display-properties-install-systemwide.c:215
-#, c-format
-msgid "%s must be owned by you\n"
-msgstr "%s ਤੁਹਾਡੀ ਮਲਕੀਅਤ (ਓਨਰ) ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ\n"
-
-#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
-#: ../panels/display/gnome-display-properties-install-systemwide.c:223
-#, c-format
-msgid "%s must not have any directory components\n"
-msgstr "%s ਕੋਈ ਡਾਇਰੈਕਟਰੀ ਭਾਗ ਨਹੀਂ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:231
-#, c-format
-msgid "%s must be a directory\n"
-msgstr "%s ਡਾਇਰੈਕਟਰੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ\n"
-
-#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:242
-#, c-format
-msgid "Could not open %s/%s: %s\n"
-msgstr "%s/%s ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:262
-#, c-format
-msgid "Could not rename %s to %s: %s\n"
-msgstr "%s ਦਾ ਨਾਂ %s ਨਹੀਂ ਬਦਲਿਆ ਜਾ ਸਕਿਆ: %s\n"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:1
-msgid "Authentication is required to install multi-monitor settings for all users"
-msgstr "ਸਭ ਯੂਜ਼ਰਾਂ ਵਾਸਤੇ ਮਲਟ-ਮਾਨੀਟਰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਪਰਮਾਣਿਤਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:2
-msgid "Install multi-monitor settings for the whole system"
-msgstr "ਪੂਰੇ ਸਿਸਟਮ ਲਈ ਮਲਟੀ-ਮਾਨੀਟਰ ਸੈਟਿੰਗ ਇੰਸਟਾਲ ਕਰੋ"
-
-#: ../panels/display/xrandr-capplet.c:322
+#: ../panels/display/xrandr-capplet.c:318
 msgid "Upside Down"
 msgstr "ਉਤਲਾ ਹੇਠ"
 
-#: ../panels/display/xrandr-capplet.c:364
+#: ../panels/display/xrandr-capplet.c:360
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
@@ -2223,52 +838,40 @@ msgstr "%d Hz"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:512
+#: ../panels/display/xrandr-capplet.c:509
 #: ../panels/display/xrandr-capplet.c:1658
 msgid "Mirror Screens"
 msgstr "ਦਰਪਨ ਸਕਰੀਨਾਂ"
 
-#: ../panels/display/xrandr-capplet.c:514
+#: ../panels/display/xrandr-capplet.c:511
 #, c-format
 msgid "Monitor: %s"
 msgstr "ਮਾਨੀਟਰ: %s"
 
-#: ../panels/display/xrandr-capplet.c:592
+#: ../panels/display/xrandr-capplet.c:589
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1514
+#: ../panels/display/xrandr-capplet.c:1513
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr "ਮਾਨੀਟਰ ਦੀ ਵਿਸ਼ੇਸ਼ਤਾ ਬਦਲਣ ਲਈ ਇਹ ਚੁਣੋ; ਇਸ ਦੀ ਸਥਿਤੀ ਬਦਲਣ ਲਈ ਡਰੈਗ ਕਰੋ।"
 
-#: ../panels/display/xrandr-capplet.c:2079
+#: ../panels/display/xrandr-capplet.c:2081
 msgid "Could not save the monitor configuration"
 msgstr "ਮਾਨੀਟਰ ਸੰਰਚਨਾ ਸੰਭਾਲੀ ਨਹੀਂ ਜਾ ਸਕੀ"
 
-#: ../panels/display/xrandr-capplet.c:2102
+#: ../panels/display/xrandr-capplet.c:2104
 msgid "Could not get session bus while applying display configuration"
 msgstr "ਸ਼ੈਸ਼ਨ ਬੱਸ ਡਿਸਪਲੇਅ ਸੰਰਚਨਾ ਲਾਗੂ ਕਰਨ ਦੌਰਾਨ ਲਈ ਨਹੀਂ ਜਾ ਸਕੀ"
 
-#: ../panels/display/xrandr-capplet.c:2147
+#: ../panels/display/xrandr-capplet.c:2149
 msgid "Could not detect displays"
 msgstr "ਡਿਸਪਲੇਅ ਖੋਜੇ ਨਹੀਂ ਜਾ ਸਕੇ"
 
-#: ../panels/display/xrandr-capplet.c:2322
-msgid "The monitor configuration has been saved"
-msgstr "ਮਾਨੀਟਰ ਸੰਰਚਨਾ ਸੰਭਾਲੀ ਜਾ ਚੁੱਕੀ ਹੈ"
-
-#: ../panels/display/xrandr-capplet.c:2324
-msgid "This configuration will be used the next time someone logs in."
-msgstr "ਇਹ ਸੰਰਚਨਾ ਅਗਲੀ ਵਾਰ ਕਿਸੇ ਦੇ ਲਾਗਇਨ ਕਰਨ ਸਮੇਂ ਵਰਤੀ ਜਾਵੇਗੀ।"
-
-#: ../panels/display/xrandr-capplet.c:2358
-msgid "Could not set the default configuration for monitors"
-msgstr "ਮਾਨੀਟਰ ਲਈ ਡਿਫਾਲਟ ਸੰਰਚਨਾ ਸੈੱਟ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
-
-#: ../panels/display/xrandr-capplet.c:2414
+#: ../panels/display/xrandr-capplet.c:2356
 msgid "Could not get screen information"
 msgstr "ਸਕਰੀਨ ਜਾਣਕਾਰੀ ਲਈ ਨਹੀਂ ਜਾ ਸਕੀ"
 
@@ -2284,32 +887,31 @@ msgstr "ਡੈਸਕਟਾਪ"
 msgid "New shortcut..."
 msgstr "ਨਵਾਂ ਸ਼ਾਰਟਕੱਟ..."
 
-#: ../panels/keybindings/eggcellrendererkeys.c:163
 #: ../panels/keybindings/eggcellrendererkeys.c:164
+#: ../panels/keybindings/eggcellrendererkeys.c:165
 msgid "Accelerator key"
 msgstr "ਐਕਸਰਲੇਟਰ ਸਵਿੱਚ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:173
 #: ../panels/keybindings/eggcellrendererkeys.c:174
+#: ../panels/keybindings/eggcellrendererkeys.c:175
 msgid "Accelerator modifiers"
 msgstr "ਐਕਸਰਲੇਟਰ ਸੋਧਕ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:182
 #: ../panels/keybindings/eggcellrendererkeys.c:183
+#: ../panels/keybindings/eggcellrendererkeys.c:184
 msgid "Accelerator keycode"
 msgstr "ਐਕਸਰਲੇਟਰ ਸਵਿੱਚ-ਕੋਡ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:193
+#: ../panels/keybindings/eggcellrendererkeys.c:194
 msgid "Accel Mode"
 msgstr "ਐਸਲ ਢੰਗ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:194
+#: ../panels/keybindings/eggcellrendererkeys.c:195
 msgid "The type of accelerator."
 msgstr "ਐਕਸਰਲੇਟਰ ਦੀ ਕਿਸਮ ਹੈ।"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:242
+#: ../panels/keybindings/eggcellrendererkeys.c:243
 #: ../panels/keybindings/gnome-keybinding-properties.c:101
-#: ../typing-break/drwright.c:498
 msgid "Disabled"
 msgstr "ਅਯੋਗ"
 
@@ -2389,6 +991,10 @@ msgstr ""
 "ਸ਼ਾਰਟਕੱਟ ਸਵਿੱਚ ਸੋਧਣ ਲਈ, ਅਨੁਸਾਰੀ ਕਤਾਰ ਨੂੰ ਦਬਾਉ ਅਤੇ ਨਵਾਂ ਐਕਸਰਲੇਟਰ ਸਵਿੱਚ ਦਿਉ ਜਾਂ ਬੈਕਸਪੇਸ ਸਾਫ਼ "
 "ਕਰਨ ਲਈ ਵਰਤੋਂ।"
 
+#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
+msgid "_Name:"
+msgstr "ਨਵਾਂ(_N):"
+
 #: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "ਕਮਾਡਾਂ ਨੂੰ ਸ਼ਾਰਟਕੱਟ ਮੁਹੱਈਆ ਕਰੋ:"
@@ -2422,7 +1028,7 @@ msgid "Beep when key is _rejected"
 msgstr "ਬੀਪ, ਜੇਕਰ ਸਵਿੱਚ ਰੱਦ ਹੋਵੇ(_r)"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
 #: ../panels/universal-access/uap.ui.h:17
 msgid "Bounce Keys"
 msgstr "ਬਾਊਂਸ ਸਵਿੱਚਾਂ"
@@ -2436,7 +1042,7 @@ msgid "Flash entire _screen"
 msgstr "ਪੂਰੀ ਸਕਰੀਨ ਝਲਕਾਉ(_s)"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "General"
 msgstr "ਆਮ"
@@ -2450,13 +1056,13 @@ msgid "Show _visual feedback for the alert sound"
 msgstr "ਚੇਤਾਵਨੀ ਸਾਊਂਡ ਲਈ ਦਿੱਖ ਫੀਡਬੈਕ ਵੇਖੋ(_v)"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
 #: ../panels/universal-access/uap.ui.h:76
 msgid "Slow Keys"
 msgstr "ਹੌਲੀ-ਸਵਿੱਚਾਂ"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
 #: ../panels/universal-access/uap.ui.h:80
 msgid "Sticky Keys"
 msgstr "ਸਟਿੱਕੀ ਸਵਿੱਚਾਂ"
@@ -2466,129 +1072,107 @@ msgid "Visual cues for sounds"
 msgstr "ਸਾਊਂਡ ਲਈ ਦਿੱਖ ਨਿਸ਼ਾਨ"
 
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
-msgid "All_ow postponing of breaks"
-msgstr "ਅੰਤਰਾਲ ਨੂੰ ਮੁਲਤਵੀ ਕਰਨ ਦੀ ਇਜ਼ਾਜਤ ਦਿਓ(_o)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
 msgid "Audio _Feedback..."
 msgstr "ਆਡੀਓ ਫੀਡਬੈਕ(_F)..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
-msgid "Check if breaks are allowed to be postponed"
-msgstr "ਜਾਂਚ ਕਰੋ ਕਿ ਅੰਤਰਾਲ ਨੂੰ ਮੁਲਤਵੀ ਕਰਨ ਦੀ ਇਜ਼ਾਜਤ ਹੈ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
 msgid "Cursor Blinking"
 msgstr "ਝਪਕਦੀ ਕਰਸਰ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
 msgid "Cursor _blinks in text fields"
 msgstr "ਟੈਕਸਟ ਖੇਤਰਾਂ ਵਿੱਚ ਕਰਸਰ ਝਪਕਾਓ(_b)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
 #: ../panels/universal-access/uap.ui.h:29
 msgid "Cursor blinks speed"
 msgstr "ਕਰਸਰ ਝਪਕਣ ਗਤੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
 #: ../panels/universal-access/uap.ui.h:30
 msgid "D_elay:"
 msgstr "ਡਿਲੇਅ(_e):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr "ਜੇਕਰ ਦੋ ਸਵਿੱਚਾਂ ਇਕੱਠੀਆਂ ਦਬਾਈਆਂ ਜਾਣ ਤਾਂ ਸਟਿੱਕੀ ਸਵਿੱਚਾਂ ਆਯੋਗ(_b)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
-msgid "Duration of the break when typing is disallowed"
-msgstr "ਅੰਤਰਾਲ, ਜਦੋਂ ਕਿ ਟਾਇਪਇੰਗ ਦੀ ਇਜ਼ਾਜਤ ਨਹੀਂ ਹੈ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
-msgid "Duration of work before forcing a break"
-msgstr "ਅੰਤਰਾਲ ਕੰਮ ਦਾ, ਬੰਦ ਕਰਨ ਲਈ ਮਜਬੂਰ ਕਰਨ ਤੋ ਪਹਿਲਾਂ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Fast"
 msgstr "ਤੇਜ਼"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
 msgid "Key presses _repeat when key is held down"
 msgstr "ਸਵਿੱਚ-ਦਹਰਾਉ, ਜਦੋ ਕਿ ਸਵਿੱਚ ਨੂੰ ਦਬਾਈ ਰੱਖਿਆ ਜਾਵੇ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
 msgid "Keyboard Preferences"
 msgstr "ਕੀ-ਬੋਰਡ ਪਸੰਦ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
 msgid "Keyboard _model:"
 msgstr "ਕੀ-ਬੋਰਡ ਮਾਡਲ(_m):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
 msgid "Layouts"
 msgstr "ਲੇਆਉਟ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
 msgid "List of keyboard layouts selected for usage"
 msgstr "ਵਰਤੋਂ ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਦੀ ਲਿਸਟ ਹੈ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
-msgid ""
-"Lock screen after a certain duration to help prevent repetitive keyboard use "
-"injuries"
-msgstr "ਕੀ-ਬੋਰਡ ਦੀਆਂ ਸਵਿੱਚਾਂ ਦੇ ਮੁੜ ਦੱਬਣ ਨਾਲ ਹੋਣ ਵਾਲੇ ਨੁਕਸਾਨ ਤੋਂ ਬਚਣ ਲਈ ਸਕਰੀਨ ਲਾਕ ਕਰੋ"
-
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:19
 #: ../panels/universal-access/uap.ui.h:53
 msgid "Long"
 msgstr "ਲੰਮਾ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
 #: ../panels/universal-access/uap.ui.h:56
 msgid "Mouse Keys"
 msgstr "ਮਾਊਸ ਸਵਿੱਚਾਂ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
 msgid "Move _Down"
 msgstr "ਹੇਠਾਂ ਭੇਜੋ(_D)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
 msgid "Move _Up"
 msgstr "ਉੱਤੇ ਭੇਜੋ(_U)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
 msgid "Move the selected keyboard layout down in the list"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਨੂੰ ਲਿਸਟ 'ਚ ਹੇਠਾਂ ਕਰੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
 msgid "Move the selected keyboard layout up in the list"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਨੂੰ ਲਿਸਟ ਵਿੱਚ ਉੱਤੇ ਭੇਜੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
 msgid "New windows u_se active window's layout"
 msgstr "ਨਵੀਆਂ ਵਿੰਡੋਜ਼ ਐਕਟਿਵ ਵਿੰਡੋ ਦਾ ਲੇਆਉਟ ਵਰਤਣ(_s)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:28
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
 msgid "Print a diagram of the selected keyboard layout"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਦੀ ਸ਼ਕਲ ਪਰਿੰਟ ਕਰੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
 msgid "Remove the selected keyboard layout from the list"
 msgstr "ਚੁਣਿਆ ਕੀਬੋਰਡ ਲੇਆਉਟ ਲਿਸਟ 'ਚੋਂ ਹਟਾ ਦਿਓ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
 msgid "Repeat Keys"
 msgstr "ਦੁਹਰਾਉ ਸਵਿੱਚਾਂ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
 msgid "Repeat keys speed"
 msgstr "ਸਵਿੱਚਾਂ ਨੂੰ ਮੁੜ-ਦਬਾਉਣ ਗਤੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -2596,99 +1180,83 @@ msgstr ""
 "ਮੌਜੂਦਾ ਕੀਬੋਰਡ ਲੇਆਉਟ ਸੈਟਿੰਗ ਨੂੰ ਡਿਫਾਲਟ ਸੈਟਿੰਗ ਨਾਲ ਬਦਲ\n"
 "ਦਿਓ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
 msgid "Reset to De_faults"
 msgstr "ਡਿਫਾਲਟ ਮੁੜ-ਸੈੱਟ ਕਰੋ(_f)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
 msgid "S_peed:"
 msgstr "ਸਪੀਡ(_p):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
 msgid "Select a keyboard layout to be added to the list"
 msgstr "ਲਿਸਟ 'ਚ ਜੋੜਨ ਲਈ ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੁਣੋ"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
 #: ../panels/universal-access/uap.ui.h:73
 msgid "Short"
 msgstr "ਛੋਟਾ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:33
 #: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Slow"
 msgstr "ਹੌਲੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
-msgid "Typing Break"
-msgstr "ਲਿਖਣ ਬਰੇਕ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
 msgid "View and edit keyboard layout options"
 msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੋਣਾਂ ਵੇਖੋ ਤੇ ਸੋਧੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
 #: ../panels/mouse/gnome-mouse-properties.ui.h:37
 msgid "_Acceleration:"
 msgstr "ਐਕਸਰਲੇਟਰ(_A):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
 msgid "_Accessibility features can be toggled with keyboard shortcuts"
 msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਨਾਲ ਅਸੈੱਸਬਿਲਟੀ ਫੀਚਰ ਬਦਲੇ ਜਾ ਸਕਦੇ ਹਨ(_A)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
-msgid "_Break interval lasts:"
-msgstr "ਆਖਰੀ ਅੰਤਰਾਲ ਸਮਾਂ(_B):"
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+msgid "_Add..."
+msgstr "ਸ਼ਾਮਲ(_A)..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
 #: ../panels/mouse/gnome-mouse-properties.ui.h:38
 msgid "_Delay:"
 msgstr "ਦੇਰੀ(_D):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
 msgid "_Ignore fast duplicate keypresses"
 msgstr "ਤੇਜ਼ ਡੁਪਲੀਕੇਟ ਸਵਿੱਚ-ਦੱਬਣਾ ਅਣਡਿੱਠਾ(_I)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:49
-msgid "_Lock screen to enforce typing break"
-msgstr "ਟਾਈਪ ਬਰੇਕ ਲਾਗੂ ਕਰਨ ਲਈ ਸਕਰੀਨ ਲਾਕ ਕਰੋ(_L)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:50
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
 msgid "_Only accept long keypresses"
 msgstr "ਲੰਮਾ ਚਿਰ ਦਬਾਈਆਂ ਸਵਿੱਚਾਂ ਹੀ ਸਵੀਕਾਰ(_O)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:51
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
 msgid "_Options..."
 msgstr "ਚੋਣਾਂ(_O)..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:52
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
 msgid "_Pointer can be controlled using the keypad"
 msgstr "ਪੁਆਇੰਟਰ ਨੂੰ ਕੀ-ਪੈਡ ਦੀ ਵਰਤੋਂ ਰਕੇ ਕੰਟਰੋਲ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ(_P)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:53
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
 msgid "_Separate layout for each window"
 msgstr "ਹਰ ਵਿੰਡੋ ਲਈ ਵੱਖਰਾ ਲੇਆਉਟ(_S)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:54
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
 msgid "_Simulate simultaneous keypresses"
 msgstr "ਇੱਕੋ ਵਾਰ ਸਵਿੱਚ ਦੱਬਣ ਦੀ ਨਕਲ(_S)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:55
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
 msgid "_Speed:"
 msgstr "ਸਪੀਡ(_S):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
 msgid "_Type to test settings:"
 msgstr "ਸੈਟਿੰਗ ਟੈਸਟ ਲਈ ਲਿਖੋ(_T):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:57
-msgid "_Work interval lasts:"
-msgstr "ਕੰਮ ਕਰਨ ਦਾ ਅੰਤਰਾਲ(_W):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:58
-msgid "minutes"
-msgstr "ਮਿੰਟ"
 
 #: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
 msgid "By _country"
@@ -2734,24 +1302,24 @@ msgstr "ਵੇਂਡਰ(_V):"
 msgid "Keyboard Layout Options"
 msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੋਣਾਂ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:82
+#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:72
 msgid "Unknown"
 msgstr "ਅਣਜਾਣ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:242
+#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:220
 msgid "Layout"
 msgstr "ਲੇਆਉਟ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:168
+#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:165
 msgid "Vendors"
 msgstr "ਵੇਂਡਰ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:234
+#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:231
 msgid "Models"
 msgstr "ਮਾਡਲ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:235
-#: ../panels/network/gnome-network-properties.c:583
+#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:229
+#: ../panels/network/gnome-network-properties.c:582
 msgid "Default"
 msgstr "ਡਿਫਾਲਟ"
 
@@ -2763,33 +1331,38 @@ msgstr "ਕੀ-ਬੋਰਡ"
 msgid "Set your keyboard preferences"
 msgstr "ਆਪਣੀ ਕੀ-ਬੋਰਡ ਪਸੰਦ ਦਿਓ"
 
+#: ../panels/mouse/capplet-stock-icons.c:66
+#, c-format
+msgid "Unable to load stock icon '%s'\n"
+msgstr "ਸਟਾਕ ਆਈਕਾਨ '%s' ਲੋਡ ਕਰਨ ਲਈ ਅਸਮਰੱਥ\n"
+
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:89
+#: ../panels/mouse/gnome-mouse-accessibility.c:91
 msgid "gesture|Move left"
 msgstr "ਖੱਬੇ ਭੇਜੋ"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:94
+#: ../panels/mouse/gnome-mouse-accessibility.c:96
 msgid "gesture|Move right"
 msgstr "ਸੱਜੇ ਭੇਜੋ"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:99
+#: ../panels/mouse/gnome-mouse-accessibility.c:101
 msgid "gesture|Move up"
 msgstr "ਉੱਤੇ ਭੇਜੋ"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:104
+#: ../panels/mouse/gnome-mouse-accessibility.c:106
 msgid "gesture|Move down"
 msgstr "ਹੇਠਾਂ ਭੇਜੋ"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:109
+#: ../panels/mouse/gnome-mouse-accessibility.c:111
 msgid "gesture|Disabled"
 msgstr "ਅਯੋਗ ਹੈ"
 
@@ -2838,6 +1411,12 @@ msgstr "ਹਰੀਜੱਟਲ ਸਕਰੋਲਿੰਗ ਯੋਗ(_o)"
 msgid "High"
 msgstr "ਉੱਚ"
 
+#. large threshold
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/universal-access/uap.ui.h:50
+msgid "Large"
+msgstr "ਵੱਡਾ"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Locate Pointer"
 msgstr "ਪੁਆਇੰਟਰ ਲੱਭੋ"
@@ -2879,6 +1458,12 @@ msgstr "ਕਲਿੱਕ ਟਾਈਪ ਵਿੰਡੋ ਵੇਖੋ(_w)"
 #: ../panels/universal-access/uap.ui.h:75
 msgid "Simulated Secondary Click"
 msgstr "ਸੈਕੰਡਰੀ ਕਲਿੱਕ ਦੀ ਨਕਲ"
+
+#. small threshold
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/universal-access/uap.ui.h:78
+msgid "Small"
+msgstr "ਛੋਟਾ"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Thr_eshold:"
@@ -2942,19 +1527,21 @@ msgid "_Trigger secondary click by holding down the primary button"
 msgstr "ਪ੍ਰਾਈਮਰੀ ਬਟਨ ਨੂੰ ਹੋਲਡ ਕਰਕੇ ਰੱਖੋ, ਜਦੋਂ ਸੈਕੰਡਰੀ ਕਲਿੱਕ ਸ਼ੁਰੂ ਕਰਨਾ ਹੋਵੇ(_T)"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
-msgid "Mouse"
-msgstr "ਮਾਊਸ"
+#| msgid "Touchpad"
+msgid "Mouse and Touchpad"
+msgstr "ਮਾਊਸ ਤੇ ਟੱਚਪੈਚ"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-msgid "Set your mouse preferences"
-msgstr "ਆਪਣੇ ਮਾਊਸ ਦੀ ਪਸੰਦ ਦਿਓ"
+#| msgid "Set your mouse preferences"
+msgid "Set your mouse and touchpad preferences"
+msgstr "ਆਪਣੀ ਮਾਊਸ ਤੇ ਟੱਚਪੈਚ ਪਸੰਦ ਸੈੱਟ ਕਰੋ"
 
-#: ../panels/network/gnome-network-properties.c:701
-#: ../panels/network/gnome-network-properties.c:852
+#: ../panels/network/gnome-network-properties.c:700
+#: ../panels/network/gnome-network-properties.c:851
 msgid "New Location..."
 msgstr "ਨਵਾਂ ਟਿਕਾਣਾ..."
 
-#: ../panels/network/gnome-network-properties.c:818
+#: ../panels/network/gnome-network-properties.c:817
 msgid "Location already exists"
 msgstr "ਟਿਕਾਣਾ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ"
 
@@ -3254,7 +1841,6 @@ msgid "Nomon"
 msgstr "ਨੋਮੋਨ"
 
 #: ../panels/universal-access/uap.ui.h:59
-#: ../libwindow-settings/metacity-window-manager.c:409
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
@@ -3378,330 +1964,13 @@ msgstr "ਦੱਬਿਆ"
 msgid "rejected"
 msgstr "ਰੱਦ ਕੀਤਾ"
 
-#: ../libwindow-settings/gnome-wm-manager.c:316
-#, c-format
-msgid "Window manager \"%s\" has not registered a configuration tool\n"
-msgstr "ਵਿੰਡੋ ਮੈਨੇਜਰ \"%s\" ਨੇ ਸੰਰਚਨਾ ਟੂਲ ਨੂੰ ਰਜਿਸਟਰ ਨਹੀਂ ਕਰਵਾਇਆ ਹੈ।\n"
+#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
+msgid "System Settings"
+msgstr "ਸਿਸਟਮ ਸੈਟਿੰਗ"
 
-#: ../libwindow-settings/metacity-window-manager.c:404
-msgid "Maximize"
-msgstr "ਵੱਧ ਤੋਂ ਵੱਧ"
-
-#: ../libwindow-settings/metacity-window-manager.c:405
-msgid "Maximize Vertically"
-msgstr "ਵੱਧੋ-ਵੱਧ ਵਰਟੀਕਲ"
-
-#: ../libwindow-settings/metacity-window-manager.c:406
-msgid "Maximize Horizontally"
-msgstr "ਵੱਧੋ-ਵੱਧ ਹਰੀਜੱਟਲ"
-
-#: ../libwindow-settings/metacity-window-manager.c:407
-msgid "Minimize"
-msgstr "ਘੱਟੋ-ਘੱਟ"
-
-#: ../libwindow-settings/metacity-window-manager.c:408
-msgid "Roll up"
-msgstr "ਸਮੇਟੋ"
-
-#: ../shell/control-center.schemas.in.h:1
-msgid "Close the control-center when a task is activated"
-msgstr "ਜਦੋਂ ਇੱਕ ਕੰਮ ਸਰਗਰਮ ਹੋਵੇ ਤਾਂ ਕੰਟਰੋਲ-ਕੇਂਦਰ ਬੰਦ ਕਰੋ"
-
-#: ../shell/control-center.schemas.in.h:2
-msgid "Exit shell on add or remove action performed"
-msgstr "ਜੋੜਨ ਜਾਂ ਹਟਾਉਣ ਕਾਰਵਾਈ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
-
-#: ../shell/control-center.schemas.in.h:3
-msgid "Exit shell on help action performed"
-msgstr "ਮੱਦਦ ਕਾਰਵਾਈ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
-
-#: ../shell/control-center.schemas.in.h:4
-msgid "Exit shell on start action performed"
-msgstr "ਕਾਰਵਾਈ ਸ਼ੁਰੂ ਕਰਨ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
-
-#: ../shell/control-center.schemas.in.h:5
-msgid "Exit shell on upgrade or uninstall action performed"
-msgstr "ਅੱਪਗਰੇਡ ਜਾਂ ਅਣ-ਇੰਸਟਾਲ ਕਰਨ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
-
-#: ../shell/control-center.schemas.in.h:6
-msgid "Indicates whether to close the shell when a help action is performed."
-msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਇੱਕ ਮੱਦਦ ਕਾਰਵਾਈ ਕਰਨ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਹੋ ਜਾਵੇ।"
-
-#: ../shell/control-center.schemas.in.h:7
-msgid "Indicates whether to close the shell when a start action is performed."
-msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਇੱਕ ਕਾਰਵਾਈ ਸ਼ੁਰੂ ਹੋਣ ਦੇ ਦੌਰਾਨ ਸ਼ੈਲ ਬੰਦ ਹੋ ਜਾਵੇ।"
-
-#: ../shell/control-center.schemas.in.h:8
-msgid ""
-"Indicates whether to close the shell when an add or remove action is "
-"performed."
-msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਸ਼ਾਮਿਲ ਕਰਨ ਜਾਂ ਹਟਾਉਣ ਦੀ ਕਾਰਵਾਈ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਹੋਵੇ ਜਾਵੇ।"
-
-#: ../shell/control-center.schemas.in.h:9
-msgid ""
-"Indicates whether to close the shell when an upgrade or uninstall action is "
-"performed."
-msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਅੱਪਗਰੇਡ ਜਾਂ ਅਣ-ਇੰਸਟਾਲ ਕਾਰਵਾਈ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਹੋ ਜਾਵੇ।"
-
-#: ../shell/control-center.schemas.in.h:10
-msgid "Task names and associated .desktop files"
-msgstr "ਕੰਮ ਨਾਂ ਅਤੇ ਸਬੰਧਿਤ .desktop ਫਾਇਲਾਂ"
-
-#: ../shell/control-center.schemas.in.h:11
-msgid ""
-"The task name to be displayed in the control-center followed by a \";\" "
-"separator then the filename of an associated .desktop file to launch for "
-"that task."
-msgstr ""
-"ਕੰਟਰੋਲ-ਸੈਂਟਰ 'ਚ ਵੇਖਾਉਣ ਲਈ ਟਾਸਕ ਨਾਂ, ਜਿਸ ਦੇ ਬਾਅਦ \";\" ਹੋਵੇਗਾ, ਜਿਸ ਦੇ ਬਾਅਦ ਸਬੰਧਿਤ ."
-"desktop ਫਾਇਲ ਨਾਂ, ਜੋ ਕਿ ਕੰਮ ਨੂੰ ਸ਼ੁਰੂ ਕਰੇਗੀ।"
-
-#. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
-#: ../shell/control-center.schemas.in.h:13
-msgid ""
-"[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;default-"
-"applications.desktop,Add Printer;gnome-cups-manager.desktop]"
-msgstr ""
-"[ਥੀਮ ਬਦਲੋ;gtk-theme-selector.desktop,ਪਸੰਦੀਦਾ ਐਪਲੀਕੇਸ਼ਨ ਸੈੱਟ ਕਰੋ;default-"
-"applications.desktop,ਪਰਿੰਟਰ ਸ਼ਾਮਲ;gnome-cups-manager.desktop]"
-
-#: ../shell/control-center.schemas.in.h:14
-msgid "if true, the control-center will close when a \"Common Task\" is activated."
-msgstr "ਜੇ ਠੀਕ ਹੋਇਆ ਤਾਂ ਕੰਟਰੋਲ-ਕੇਂਦਰ ਬੰਦ ਹੋ ਜਾਵੇਗਾ, ਜਦੋਂ \"ਆਮ ਟਾਸਕ\" ਐਕਟੀਵੇਟਡ ਹੋ ਗਈ।"
-
-#: ../shell/gnome-control-center.desktop.in.in.h:1
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "ਕੰਟਰੋਲ ਕੇਂਦਰ"
-
-#: ../shell/gnome-control-center.desktop.in.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "ਗਨੋਮ ਸੰਰਚਨਾ ਟੂਲ"
-
-#: ../typing-break/drw-break-window.c:194
-msgid "_Postpone Break"
-msgstr "ਅੰਤਰਾਲ ਮੁਲਤਵੀ ਕਰੋ(_P)"
-
-#: ../typing-break/drw-break-window.c:250
-msgid "Take a break!"
-msgstr "ਇੱਕ ਅੰਤਰਾਲ ਲਵੋ!"
-
-#: ../typing-break/drwright.c:136
-msgid "_Take a Break"
-msgstr "ਇੱਕ ਬਰੇਕ ਲਵੋ(_T)"
-
-#: ../typing-break/drwright.c:507
-#, c-format
-msgid "Take a break now (next in %dm)"
-msgstr "ਹੁਣੇ ਅੰਤਰਾਲ ਲਵੋ ( %dm ਵਿੱਚ ਅੱਗੇ)"
-
-#: ../typing-break/drwright.c:509
-#, c-format
-msgid "%d minute until the next break"
-msgid_plural "%d minutes until the next break"
-msgstr[0] "ਅਗਲੇ ਅੰਤਰਾਲ ਲਈ %d ਮਿੰਟ ਰਹਿੰਦੇ ਹਨ"
-msgstr[1] "ਅਗਲੇ ਅੰਤਰਾਲ ਲਈ %d ਮਿੰਟ ਰਹਿੰਦੇ ਹਨ"
-
-#: ../typing-break/drwright.c:515
-#, c-format
-msgid "Take a break now (next in less than one minute)"
-msgstr "ਹੁਣੇ ਅੰਤਰਾਲ ਲਵੋ (ਇੱਕ ਮਿੰਟ ਤੋਂ ਘੱਟ ਅੱਗੇ)"
-
-#: ../typing-break/drwright.c:517
-#, c-format
-msgid "Less than one minute until the next break"
-msgstr "ਅਗਲੇ ਅੰਤਰਾਲ ਲਈ ਇੱਕ ਤੋਂ ਘੱਟ ਮਿੰਟ ਰਹਿੰਦਾ ਹੈ"
-
-#: ../typing-break/drwright.c:614
-#, c-format
-msgid ""
-"Unable to bring up the typing break properties dialog with the following "
-"error: %s"
-msgstr "ਟਾਇਪ ਅੰਤਰਾਲ ਵਿਸ਼ੇਸਤਾ ਡਾਈਲਾਗ ਲਿਆਉਣ ਵਿੱਚ ਅਸਫਲ, ਇਹ ਗਲਤੀ ਹੈ: %s"
-
-#: ../typing-break/drwright.c:631
-msgid "Written by Richard Hult <richard@imendio.com>"
-msgstr "ਰਿੱਚਡ ਹਲਟ <richard@imendio.com> ਨੇ ਲਿਖਿਆ ਹੈ"
-
-#: ../typing-break/drwright.c:632
-msgid "Eye candy added by Anders Carlsson"
-msgstr "ਅੰਨਡਰੇਸ ਕਾਰਲੇਸਨ ਨੇ ਆਈ ਕਨਡੀ ਜੋੜਿਆ"
-
-#: ../typing-break/drwright.c:641
-msgid "A computer break reminder."
-msgstr "ਕੰਪਿਊਟਰ ਅੰਤਰਾਲ ਯਾਦਗਾਰ ਹੈ।"
-
-#: ../typing-break/drwright.c:643
-msgid "translator-credits"
-msgstr ""
-"ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ ੨੦੦੪-੨੦੧੦\n"
-"ਪੰਜਾਬੀ ਓਪਨਸੋਰਸ ਟੀਮ (POST)\n"
-"http://www.satuj.com"
-
-#: ../typing-break/main.c:63
-msgid "Enable debugging code"
-msgstr "ਡੀਬੱਗਿੰਗ ਕੋਡ ਚਾਲੂ ਕਰੋ"
-
-#: ../typing-break/main.c:65
-msgid "Don't check whether the notification area exists"
-msgstr "ਜਾਂਚ ਨਾ ਕਰੋ ਕਿ ਕੀ ਨੋਟੀਫਿਕੇਸ਼ਨ ਖੇਤਰ ਮੌਜੂਦ ਹੈ"
-
-#: ../typing-break/main.c:91
-msgid "Typing Monitor"
-msgstr "ਲਿਖਣ ਨਿਗਰਾਨ"
-
-#: ../typing-break/main.c:108
-msgid ""
-"The typing monitor uses the notification area to display information. You "
-"don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choosing 'Add to panel', selecting "
-"'Notification area' and clicking 'Add'."
-msgstr ""
-"ਟਾਇਪਇੰਗ ਨਿਗਰਾਨ ਸੂਚਨਾ-ਖੇਤਰ ਵਿੱਚ ਜਾਣਕਾਰੀ ਵੇਖਾਉਣ ਦੇ ਕੰਮ ਆਉਦਾ ਹੈ। ਤੁਹਾਡੇ ਪੈਨਲ ਵਿੱਚ ਸੂਚਨਾ-ਖੇਤਰ "
-"ਹੈ ਹੀ ਨਹੀਂ। ਤੁਸੀ ਇਸ ਨੂੰ ਪੈਨਲ ਤੇ ਸੱਜਾ ਬਟਨ ਦਬਾਕੇ ਅਤੇ 'ਪੈਨਲ ਵਿੱਚ ਸ਼ਾਮਿਲ', 'ਸੂਚਨਾ-ਖੇਤਰ' ਚੁਣਨ ਨਾਲ "
-"ਇਸ ਨੂੰ ਲਿਆ ਸਕਦੇ ਹੋ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "ਜੇਕਰ ਇਹ ਸੱਚ ਹੈ ਤਾਂ, ਓਪਨ-ਟਾਈਪ (OpenType) ਫੋਂਟ ਥੰਬਨੇਲ ਬਣ ਜਾਣਗੇ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "ਜੇਕਰ ਇਹ ਸੱਚ ਹੈ ਤਾਂ, ਪੀਸੀਐਫ (PCF) ਫੋਂਟ ਥੰਬਨੇਲ ਬਣ ਜਾਣਗੇ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "ਜੇਕਰ ਇਹ ਸੱਚ ਹੈ ਤਾਂ, ਟਰੂ-ਟਾਇਪ (TrueType) ਫੋਂਟ ਥੰਬਨੇਲ ਬਣ ਜਾਣਗੇ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "ਜੇਕਰ ਇਹ ਸੱਚ ਹੈ ਤਾਂ, Type1 ਫੋਂਟ ਥੰਬਨੇਲ ਬਣ ਜਾਣਗੇ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:5
-msgid "Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr "ਕਮਾਂਡ, ਜੋ ਫੋਂਟ ਓਪਨ-ਟਾਈਪ (OpenType) ਲਈ ਥੰਬਨੇਲ ਬਣਾਉਦੀ ਹੈ, ਨੂੰ ਇਹ ਸਵਿੱਚ ਦਿਓ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "ਕਮਾਂਡ, ਜੋ ਫੋਂਟ ਪੀਸੀਐਫ (PCF) ਲਈ ਥੰਬਨੇਲ ਬਣਾਉਦੀ ਹੈ, ਨੂੰ ਇਹ ਸਵਿੱਚ ਦਿਓ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:7
-msgid "Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr "ਕਮਾਂਡ, ਜੋ ਫੋਂਟ ਟਰੂ-ਟਾਈਪ (TrueType) ਲਈ ਥੰਬਨੇਲ ਬਣਾਉਦੀ ਹੈ, ਨੂੰ ਇਹ ਸਵਿੱਚ ਦਿਓ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr "ਕਮਾਂਡ, ਜੋ ਫੋਂਟ ਟਾਈਪ ੧ (Type1) ਲਈ ਥੰਬਨੇਲ ਬਣਾਉਦੀ ਹੈ, ਨੂੰ ਇਹ ਸਵਿੱਚ ਦਿਓ।"
-
-#: ../font-viewer/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "ਫੋਂਟ ਓਪਨਟਾਈਪ (OpenType) ਲਈ ਥੰਬਨੇਲ ਕਮਾਂਡ"
-
-#: ../font-viewer/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "ਫੋਂਟ ਪੀਸੀਐਫ (PCF) ਲਈ ਥੰਬਨੇਲ ਕਮਾਂਡ"
-
-#: ../font-viewer/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "ਫੋਂਟ ਟਰੂ-ਟਾਈਪ (TrueType) ਲਈ ਥੰਬਨੇਲ ਕਮਾਂਡ"
-
-#: ../font-viewer/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "ਫੋਂਟ ਟਾਈਪ1 (Type1) ਲਈ ਥੰਬਨੇਲ ਕਮਾਂਡ"
-
-#: ../font-viewer/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "ਕੀ ਫੋਂਟ ਓਪਨ-ਟਾਈਪ(OpenType) ਨੂੰ ਥੰਬਨੇਲ ਕਰਨਾ ਹੈ"
-
-#: ../font-viewer/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "ਕੀ ਫੋਂਟ ਪੀਸੀਐਫ(PCF) ਨੂੰ ਥੰਬਨੇਲ ਕਰਨਾ ਹੈ"
-
-#: ../font-viewer/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "ਕੀ ਫੋਂਟ ਟਰੂ-ਟਾਈਪ(TrueType) ਨੂੰ ਥੰਬਨੇਲ ਕਰਨਾ ਹੈ"
-
-#: ../font-viewer/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "ਕੀ ਫੋਂਟ ਟਾਈਪ1 (Type1) ਨੂੰ ਥੰਬਨੇਲ ਕਰਨਾ ਹੈ"
-
-#: ../font-viewer/font-view.c:290
-msgid "Name:"
-msgstr "ਨਾਂ:"
-
-#: ../font-viewer/font-view.c:293
-msgid "Style:"
-msgstr "ਸਟਾਈਲ:"
-
-#: ../font-viewer/font-view.c:306
-msgid "Type:"
-msgstr "ਕਿਸਮ:"
-
-#: ../font-viewer/font-view.c:310
-msgid "Size:"
-msgstr "ਅਕਾਰ:"
-
-#: ../font-viewer/font-view.c:354 ../font-viewer/font-view.c:367
-msgid "Version:"
-msgstr "ਵਰਜਨ:"
-
-#: ../font-viewer/font-view.c:358 ../font-viewer/font-view.c:369
-msgid "Copyright:"
-msgstr "ਹੱਕ ਰਾਖਵੇਂ ਹਨ:"
-
-#: ../font-viewer/font-view.c:362
-msgid "Description:"
-msgstr "ਵੇਰਵਾ:"
-
-#: ../font-viewer/font-view.c:442
-msgid "Installed"
-msgstr "ਇੰਸਟਾਲ ਹੋਇਆ"
-
-#: ../font-viewer/font-view.c:445
-msgid "Install Failed"
-msgstr "ਇੰਸਟਾਲ ਫੇਲ੍ਹ"
-
-#: ../font-viewer/font-view.c:517
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "ਵਰਤੋਂ: %s fontfile\n"
-
-#: ../font-viewer/font-view.c:592
-msgid "I_nstall Font"
-msgstr "ਫੋਂਟ ਇੰਸਟਾਲ ਕਰੋ(_n)"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "ਫੋਂਟ ਦਰਸ਼ਕ"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "ਫੋਂਟ ਝਲਕ"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "Text to thumbnail (default: Aa)"
-msgstr "ਥੰਬਨੇਲ ਕਰਨ ਲਈ ਟੈਕਸਟ (ਡਿਫਾਲਟ: Aa)"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "TEXT"
-msgstr "TEXT"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "Font size (default: 64)"
-msgstr "ਫੋਂਟ ਆਕਾਰ (ਡਿਫਾਲਟ: 64)"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "SIZE"
-msgstr "SIZE"
-
-#: ../font-viewer/font-thumbnailer.c:249
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "FONT-FILE OUTPUT-FILE"
-
-#: ../font-viewer/font-thumbnailer.c:268
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "ਆਰਗੂਮਿੰਟ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ: %s\n"
 
 #: ../examples/gnome-example-panel.desktop.in.in.h:1
 msgid "Example Panel"
@@ -3711,13 +1980,1384 @@ msgstr "ਉਦਾਹਰਨ ਪੈਨਲ"
 msgid "Example preferences panel"
 msgstr "ਉਦਾਹਰਨ ਪਸੰਦ ਪੈਨਲ"
 
-#: ../shell/shell.ui.h:1
-msgid "System Settings"
-msgstr "ਸਿਸਟਮ ਸੈਟਿੰਗ"
-
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
+
+#~ msgid "Image/label border"
+#~ msgstr "ਚਿੱਤਰ/ਲੇਬਲ ਹਾਸ਼ੀਆ"
+
+#~ msgid "Width of border around the label and image in the alert dialog"
+#~ msgstr "ਚੇਤਾਵਨੀ ਬਕਸੇ 'ਚ ਲੇਬਲ ਅਤੇ ਚਿੱਤਰ ਦੇ ਦੁਆਲੇ ਹਾਸ਼ੀਏ ਦੀ ਚੌੜਾਈ"
+
+#~ msgid "Alert Type"
+#~ msgstr "ਚੇਤਾਵਨੀ ਕਿਸਮ"
+
+#~ msgid "The type of alert"
+#~ msgstr "ਚੇਤਾਵਨੀ ਦੀ ਕਿਸਮ ਹੈ।"
+
+#~ msgid "Alert Buttons"
+#~ msgstr "ਚੇਤਾਵਨੀ ਬਟਨ"
+
+#~ msgid "The buttons shown in the alert dialog"
+#~ msgstr "ਚੇਤਾਵਨੀ ਡਾਈਲਾਗ 'ਚ ਬਟਨ ਵੇਖੋ"
+
+#~ msgid "Show more _details"
+#~ msgstr "ਹੋਰ ਵੇਰਵਾ ਵੇਖੋ(_d)"
+
+#~ msgid "Place your left thumb on %s"
+#~ msgstr "%s ਉੱਤੇ ਸੱਜਾ ਅੰਗੂਠਾ ਰੱਖੋ"
+
+#~ msgid "Swipe your left thumb on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣਾ ਖੱਬਾ ਅੰਗੂਠਾ ਘਸਾਉ"
+
+#~ msgid "Place your left index finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਇੰਡੈਕਸ ਉਂਗਲ ਰੱਖੋ"
+
+#~ msgid "Swipe your left index finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਇੰਡੈਕਸ ਉਂਗਲ ਘਸਾਉ"
+
+#~ msgid "Place your left middle finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਵਿਚਲੀ ਉਂਗਲ ਰੱਖੋ"
+
+#~ msgid "Swipe your left middle finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਵਿਚਲੀ ਉਂਗਲ ਘਸਾਉ"
+
+#~ msgid "Place your left ring finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਅੰਗੂਠੀ ਉਂਗਲ ਰੱਖੋ"
+
+#~ msgid "Swipe your left ring finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਖੱਬੀ ਵਿਚਲੀ ਉਂਗਲ ਘਸਾਉ"
+
+#~ msgid "Place your left little finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਚੀਚੀ ਰੱਖੋ"
+
+#~ msgid "Swipe your left little finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਖੱਬੀ ਚੀਚੀ ਘਸਾਉ"
+
+#~ msgid "Place your right thumb on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣਾ ਸੱਜਾ ਅੰਗੂਠਾ ਰੱਖੋ"
+
+#~ msgid "Swipe your right thumb on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣਾ ਸੱਜਾ ਅੰਗੂਠਾ ਘਸਾਉ"
+
+#~ msgid "Place your right index finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਇੰਡੈਕਸ ਉਂਗਲ ਰੱਖੋ"
+
+#~ msgid "Swipe your right index finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਇੰਡੈਕਸ ਉਂਗਲ ਘਸਾਉ"
+
+#~ msgid "Place your right middle finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਵਿਚਲੀ ਉਂਗਲ ਰੱਖੋ"
+
+#~ msgid "Swipe your right middle finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਵਿਚਲੀ ਉਂਗਲ ਘਸਾਉ"
+
+#~ msgid "Place your right ring finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਅੰਗੂਠੀ ਉਂਗਲ ਰੱਖੋ"
+
+#~ msgid "Swipe your right ring finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਅੰਗੂਠੀ ਉਂਗਲ ਘਸਾਉ"
+
+#~ msgid "Place your right little finger on %s"
+#~ msgstr "ਆਪਣੀ ਸੱਜੀ ਚੀਚੀ ਨੂੰ %s ਉੱਤੇ ਰੱਖੋ"
+
+#~ msgid "Swipe your right little finger on %s"
+#~ msgstr "%s ਉੱਤੇ ਆਪਣੀ ਸੱਜੀ ਚੀਂਚੀ ਘਸਾਉ"
+
+#~ msgid "Place your finger on the reader again"
+#~ msgstr "ਆਪਣੀ ਉਂਗਲ ਰੀਡਰ ਉੱਤੇ ਫੇਰ ਰੱਖੋ"
+
+#~ msgid "Swipe your finger again"
+#~ msgstr "ਆਪਣੀ ਉਂਗਲ ਫੇਰ ਘਸਾਉ"
+
+#~ msgid "Swipe was too short, try again"
+#~ msgstr "ਉਂਗਲ ਥੋੜੀ ਘਸਾਈ ਹੈ, ਮੁੜ ਟਰਾਈ ਕਰੋ ਜੀ"
+
+#~ msgid "Your finger was not centered, try swiping your finger again"
+#~ msgstr "ਤੁਹਾਡੀ ਉਂਗਲ ਸੈਂਟਰਡ ਨਹੀਂ ਸੀ, ਆਪਣੀ ਉਂਗਲ ਫੇਰ ਸਵੈਪ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+
+#~ msgid "Remove your finger, and try swiping your finger again"
+#~ msgstr "ਆਪਣੀ ਉਂਗਲ ਹਟਾਉ ਅਤੇ ਫੇਰ ਆਪਣੀ ਉਂਗਲ ਦੁਬਾਰਾ ਲੰਘਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+
+#~ msgid "Select Image"
+#~ msgstr "ਚਿੱਤਰ ਚੁਣੋ(_S)"
+
+#~ msgid "No Image"
+#~ msgstr "ਕੋਈ ਚਿੱਤਰ ਨਹੀਂ"
+
+#~ msgid "Images"
+#~ msgstr "ਚਿੱਤਰ"
+
+#~ msgid "All Files"
+#~ msgstr "ਸਭ ਫਾਇਲਾਂ"
+
+#~ msgid ""
+#~ "There was an error while trying to get the addressbook information\n"
+#~ "Evolution Data Server can't handle the protocol"
+#~ msgstr ""
+#~ "ਐਡਰੈੱਸ-ਬੁੱਕ ਜਾਣਕਾਰੀ ਨੂੰ ਪਰਾਪਤ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ\n"
+#~ "ਈਵੇਲੂਸ਼ਨ ਡਾਟਾ ਸਰਵਰ ਪਰੋਟੋਕਾਲ ਨੂੰ ਹੈਂਡਲ ਨਹੀਂ ਕਰ ਸਕਦਾ ਹੈ।"
+
+#~ msgid "Unable to open address book"
+#~ msgstr "ਐਡਰੈੱਸ ਕਿਤਾਬ ਖੋਲ੍ਹਣ ਲਈ ਅਸਫ਼ਲ"
+
+#~ msgid "About %s"
+#~ msgstr "%s ਬਾਰੇ"
+
+#~ msgid "A_IM/iChat:"
+#~ msgstr "A_IM/iChat:"
+
+#~ msgid "A_ddress:"
+#~ msgstr "ਐਡਰੈੱਸ(_d):"
+
+#~ msgid "A_ssistant:"
+#~ msgstr "ਸਹਾਇਕ(_s):"
+
+#~ msgid "About Me"
+#~ msgstr "ਮੇਰੇ ਬਾਰੇ"
+
+#~ msgid "Address"
+#~ msgstr "ਐਡਰੈੱਸ"
+
+#~ msgid "C_ompany:"
+#~ msgstr "ਕੰਪਨੀ(_o):"
+
+#~ msgid "Cale_ndar:"
+#~ msgstr "ਕੈਲੰਡਰ(_n):"
+
+#~ msgid "Change Passwo_rd..."
+#~ msgstr "ਪਾਸਵਰਡ ਬਦਲੋ(_r)..."
+
+#~ msgid "Ci_ty:"
+#~ msgstr "ਸ਼ਹਿਰ(_t):"
+
+#~ msgid "Co_untry:"
+#~ msgstr "ਦੇਸ਼(_u):"
+
+#~ msgid "Contact"
+#~ msgstr "ਸੰਪਰਕ"
+
+#~ msgid "Cou_ntry:"
+#~ msgstr "ਦੇਸ਼(_n):"
+
+#~ msgid "Disable _Fingerprint Login..."
+#~ msgstr "ਫਿੰਗਰ-ਪਰਿੰਟ ਲਾਗਇਨ ਬੰਦ ਕਰੋ(_F)..."
+
+#~ msgid "Email"
+#~ msgstr "ਈ-ਮੇਲ"
+
+#~ msgid "Enable _Fingerprint Login..."
+#~ msgstr "ਫਿੰਗਰ-ਪਰਿੰਟ ਲਾਗਇਨ ਚਾਲੂ ਕਰੋ(_F)..."
+
+#~ msgid "Full Name"
+#~ msgstr "ਪੂਰਾ ਨਾਂ"
+
+#~ msgid "Hom_e:"
+#~ msgstr "ਘਰ(_e):"
+
+#~ msgid "Home"
+#~ msgstr "ਘਰ"
+
+#~ msgid "IC_Q:"
+#~ msgstr "IC_Q:"
+
+#~ msgid "Instant Messaging"
+#~ msgstr "ਤੁਰੰਤ ਸੁਨੇਹੇ"
+
+#~ msgid "Job"
+#~ msgstr "ਜਾਬ"
+
+#~ msgid "M_SN:"
+#~ msgstr "M_SN:"
+
+#~ msgid "P.O. _box:"
+#~ msgstr "P.O.ਬਾਕਸ(_b):"
+
+#~ msgid "P._O. box:"
+#~ msgstr "P._O. ਬਾਕਸ:"
+
+#~ msgid "Personal Info"
+#~ msgstr "ਨਿੱਜੀ ਜਾਣਕਾਰੀ"
+
+#~ msgid "Select your photo"
+#~ msgstr "ਆਪਣੀ ਫੋਟੋ ਚੁਣੋ"
+
+#~ msgid "State/Pro_vince:"
+#~ msgstr "ਸੂਬਾ/ਖੇਤਰ(_v):"
+
+#~ msgid "Telephone"
+#~ msgstr "ਟੈਲੀਫੂਨ"
+
+#~ msgid "User name:"
+#~ msgstr "ਯੂਜ਼ਰ ਨਾਂ:"
+
+#~ msgid "Web"
+#~ msgstr "ਵੈੱਬ"
+
+#~ msgid "Web _log:"
+#~ msgstr "ਵੈਬ ਲਾਗ(_l):"
+
+#~ msgid "Wor_k:"
+#~ msgstr "ਕੰਮ(_k):"
+
+#~ msgid "Work"
+#~ msgstr "ਕੰਮ"
+
+#~ msgid "Work _fax:"
+#~ msgstr "ਕੰਮ ਫੈਕਸ(_f):"
+
+#~ msgid "ZIP/_Postal code:"
+#~ msgstr "ਜ਼ਿਪ/ਡਾਕ ਕੋਡ(_P):"
+
+#~ msgid "_Address:"
+#~ msgstr "ਐਡਰੈੱਸ(_A):"
+
+#~ msgid "_Department:"
+#~ msgstr "ਵਿਭਾਗ(_D):"
+
+#~ msgid "_GroupWise:"
+#~ msgstr "ਗਰੁੱਪ-ਵਾਈਜ(_G):"
+
+#~ msgid "_Home page:"
+#~ msgstr "ਘਰ ਸਫ਼ਾ(_H):"
+
+#~ msgid "_Home:"
+#~ msgstr "ਘਰ(_H):"
+
+#~ msgid "_Manager:"
+#~ msgstr "ਮੈਨੇਜਰ(_M):"
+
+#~ msgid "_Mobile:"
+#~ msgstr "ਮੋਬਾਇਲ(_M):"
+
+#~ msgid "_Profession:"
+#~ msgstr "ਕਿੱਤਾ(_P):"
+
+#~ msgid "_State/Province:"
+#~ msgstr "ਸੂਬਾ/ਖੇਤਰ(_S):"
+
+#~ msgid "_Title:"
+#~ msgstr "ਨਾਂ(_T):"
+
+#~ msgid "_Work:"
+#~ msgstr "ਕੰਮ(_W):"
+
+#~ msgid "_XMPP:"
+#~ msgstr "_XMPP:"
+
+#~ msgid "_Yahoo:"
+#~ msgstr "ਯਾਹੂ(_Y):"
+
+#~ msgid "_ZIP/Postal code:"
+#~ msgstr "ਜ਼ਿਪ/ਡਾਕ ਕੋਡ(_Z):"
+
+#~ msgid "Set your personal information"
+#~ msgstr "ਆਪਣੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਦਿਓ"
+
+#~ msgid ""
+#~ "You are not allowed to access the device. Contact your system "
+#~ "administrator."
+#~ msgstr "ਤੁਹਾਨੂੰ ਜੰਤਰ ਵਰਤਣ ਦੀ ਇਜ਼ਾਜ਼ਤ ਨਹੀਂ ਹੈ। ਆਪਣੇ ਸਿਸਟਮ ਐਡਮਿਨਸਟੇਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
+
+#~ msgid "The device is already in use."
+#~ msgstr "ਜੰਤਰ ਪਹਿਲਾਂ ਹੀ ਵਰਤੋਂ ਅਧੀਨ ਹੈ।"
+
+#~ msgid "An internal error occured"
+#~ msgstr "ਇੱਕ ਅੰਦਰੂਨੀ ਗਲਤੀ ਆਈ ਹੈ"
+
+#~ msgid "Delete registered fingerprints?"
+#~ msgstr "ਕੀ ਰਜਿਸਟਰ ਕੀਤੇ ਫਿੰਗਰ-ਪਰਿੰਟ ਹਟਾਉਣੇ ਹਨ?"
+
+#~ msgid "_Delete Fingerprints"
+#~ msgstr "ਫਿੰਗਰ-ਪਰਿੰਟ ਹਟਾਓ(_D)"
+
+#~ msgid ""
+#~ "Do you want to delete your registered fingerprints so fingerprint login "
+#~ "is disabled?"
+#~ msgstr ""
+#~ "ਕੀ ਤੁਸੀਂ ਆਪਣੇ ਰਜਿਸਟਰ ਕੀਤੇ ਫਿੰਗਰਪਰਿੰਟ ਹਟਾਉਣੇ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਕਿ ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ ਨੂੰ ਆਯੋਗ "
+#~ "ਕੀਤਾ ਜਾ ਸਕੇ?"
+
+#~ msgid "Done!"
+#~ msgstr "ਮੁਕੰਮਲ!"
+
+#~ msgid "Could not access '%s' device"
+#~ msgstr "ਜੰਤਰ '%s' ਲਈ ਅਸੈੱਸ ਨਹੀਂ ਹੈ"
+
+#~ msgid "Could not start finger capture on '%s' device"
+#~ msgstr "ਜੰਤਰ '%s' ਉੱਤੇ ਉਂਗਲ ਪ੍ਰਾਪਤ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
+
+#~ msgid "Could not access any fingerprint readers"
+#~ msgstr "ਕਿਸੇ ਫਿੰਗਰਪਰਿੰਟ ਰੀਡਰ ਨੂੰ ਵਰਤਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
+
+#~ msgid "Please contact your system administrator for help."
+#~ msgstr "ਮੱਦਦ ਲਈ ਆਪਣੇ ਸਿਸਟਮ ਐਡਮਿਨਸਟੇਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ ਜੀ।"
+
+#~ msgid "Enable Fingerprint Login"
+#~ msgstr "ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ ਚਾਲੂ"
+
+#~ msgid ""
+#~ "To enable fingerprint login, you need to save one of your fingerprints, "
+#~ "using the '%s' device."
+#~ msgstr ""
+#~ "ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ ਯੋਗ ਕਰਨ ਲਈ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਫਿੰਗਰਪਰਿੰਟ ਸੰਭਾਲਣ ਦੀ ਲੋੜ ਹੈ, '%s' ਜੰਤਰ ਦੀ "
+#~ "ਵਰਤੋਂ ਕਰਕੇ।"
+
+#~ msgid "Swipe finger on reader"
+#~ msgstr "ਰੀਡਰ ਉੱਤੇ ਉਂਗਲ ਘਸਾਉ"
+
+#~ msgid "Place finger on reader"
+#~ msgstr "ਰੀਡਰ ਉੱਤੇ ਉਂਗਲ ਰੱਖੋ"
+
+#~ msgid "Left index finger"
+#~ msgstr "ਖੱਬੀ ਇੰਡੈਕਸ ਉਂਗਲ"
+
+#~ msgid "Left little finger"
+#~ msgstr "ਖੱਬੀ ਚੀਚੀ"
+
+#~ msgid "Left middle finger"
+#~ msgstr "ਖੱਬੀ ਵਿਚਲੀ ਉਂਗਲ"
+
+#~ msgid "Left ring finger"
+#~ msgstr "ਖੱਬੀ ਰਿੰਗ ਉਂਗਲ"
+
+#~ msgid "Left thumb"
+#~ msgstr "ਖੱਬਾ ਅੰਗੂਠਾ"
+
+#~ msgid "Other finger: "
+#~ msgstr "ਹੋਰ ਉਂਗਲ:"
+
+#~ msgid "Right index finger"
+#~ msgstr "ਸੱਜੀ ਇੰਡੈਕਸ ਉਂਗਲ"
+
+#~ msgid "Right little finger"
+#~ msgstr "ਸੱਜੀ ਚੀਚੀ"
+
+#~ msgid "Right middle finger"
+#~ msgstr "ਸੱਜੀ ਵਿਚਲੀ ਉਂਗਲ"
+
+#~ msgid "Right ring finger"
+#~ msgstr "ਸੱਜੀ ਰਿੰਗ ਉਂਗਲ"
+
+#~ msgid "Right thumb"
+#~ msgstr "ਸੱਜਾ ਅੰਗੂਠਾ"
+
+#~ msgid "Select finger"
+#~ msgstr "ਉਂਗਲ ਚੁਣੋ"
+
+#~ msgid ""
+#~ "Your fingerprint was successfully saved. You should now be able to log in "
+#~ "using your fingerprint reader."
+#~ msgstr ""
+#~ "ਤੁਹਾਡੇ ਫਿੰਗਰਪਰਿੰਟ ਸਫ਼ਲਤਾ ਨਾਲ ਸੰਭਾਲੇ ਗਏ ਹਨ। ਹੁਣ ਤੁਸੀਂ ਫਿੰਗਰਪਰਿੰਟ ਰੀਡਰ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਲਾਗਇਨ "
+#~ "ਕਰਨ ਦੇ ਯੋਗ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
+
+#~ msgid "Child exited unexpectedly"
+#~ msgstr "ਚਲਾਇਡ ਅਚਾਨਕ ਬੰਦ ਹੋ ਗਿਆ"
+
+#~ msgid "Could not shutdown backend_stdin IO channel: %s"
+#~ msgstr "backend_stdin IO ਚੈਨਲ ਬੰਦ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ ਹੈ: %s"
+
+#~ msgid "Could not shutdown backend_stdout IO channel: %s"
+#~ msgstr "backend_stdout IO ਚੈਨਲ ਬੰਦ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s"
+
+#~ msgid "Authenticated!"
+#~ msgstr "ਪਰਮਾਣਿਤ!"
+
+#~ msgid ""
+#~ "Your password has been changed since you initially authenticated! Please "
+#~ "re-authenticate."
+#~ msgstr ""
+#~ "ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਬਦਲ ਦਿੱਤਾ ਗਿਆ ਹੈ, ਕਿਉਂਕਿ ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਪਰਮਾਣਿਤ ਹੋ ਚੁੱਕੇ ਹੋ! ਮੁੜ-"
+#~ "ਪਰਮਾਣਿਤ ਹੋਵੋ ਜੀ।"
+
+#~ msgid "That password was incorrect."
+#~ msgstr "ਉਹ ਪਾਸਵਰਡ ਗਲਤ ਸੀ।"
+
+#~ msgid "Your password has been changed."
+#~ msgstr "ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਬਦਲ ਗਿਆ ਹੈ।"
+
+#~ msgid "System error: %s."
+#~ msgstr "ਸਿਸਟਮ ਗਲਤੀ: %s"
+
+#~ msgid "The password is too short."
+#~ msgstr "ਪਾਸਵਰਡ ਬਹੁਤ ਛੋਟਾ ਹੈ।"
+
+#~ msgid "The password is too simple."
+#~ msgstr "ਪਾਸਵਰਡ ਬਹੁਤ ਅਸਾਨ ਹੈ।"
+
+#~ msgid "The old and new passwords are too similar."
+#~ msgstr "ਪੁਰਾਣਾ ਅਤੇ ਨਵਾਂ ਪਾਸਵਰਡ ਬੜਾ ਰਲਦਾ-ਮਿਲਦਾ ਹੈ।"
+
+#~ msgid "The new password must contain numeric or special character(s)."
+#~ msgstr "ਨਵੇਂ ਪਾਸਵਰਡ ਵਿੱਚ ਅੰਕੀ ਜਾਂ ਖਾਸ ਅੱਖਰ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ।"
+
+#~ msgid "The old and new passwords are the same."
+#~ msgstr "ਪੁਰਾਣਾ ਅਤੇ ਨਵਾਂ ਪਾਸਵਰਡ ਇੱਕੋ ਹੀ ਹੈ।"
+
+#~ msgid "The new password has already been used recently."
+#~ msgstr "ਨਵਾਂ ਪਾਸਵਰਡ ਤਾਜ਼ਾ ਹੀ ਵਰਤਿਆ ਗਿਆ ਹੈ।"
+
+#~ msgid "Unable to launch %s: %s"
+#~ msgstr "%s ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਅਸਮਰੱਥ: %s"
+
+#~ msgid "Unable to launch backend"
+#~ msgstr "ਬੈਕਐਂਡ ਚਲਾਉਣ ਲਈ ਅਸਫ਼ਲ"
+
+#~ msgid "A system error has occurred"
+#~ msgstr "ਇੱਕ ਸਿਸਟਮ ਗਲਤੀ ਆਈ ਹੈ"
+
+#~ msgid "Checking password..."
+#~ msgstr "ਪਾਸਵਰਡ ਦੀ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
+
+#~ msgid "Click <b>Change password</b> to change your password."
+#~ msgstr "ਪਾਸਵਰਡ ਬਦਲਣ ਲਈ <b>ਪਾਸਵਰਡ ਬਦਲੋ</b> ਬਟਨ ਨੂੰ ਦਬਾਓ।"
+
+#~ msgid "Please type your password in the <b>New password</b> field."
+#~ msgstr "<b>ਨਵਾਂ ਪਾਸਵਰਡ</b> ਖੇਤਰ ਵਿੱਚ ਆਪਣਾ ਪਾਸਵਰਡ ਲਿਖੋ ਜੀ।"
+
+#~ msgid ""
+#~ "Please type your password again in the <b>Retype new password</b> field."
+#~ msgstr "<b>ਨਵਾਂ ਪਾਸਵਰਡ ਮੁੜ-ਲਿਖੋ</b> ਖੇਤਰ ਵਿੱਚ ਆਪਣਾ ਪਾਸਵਰਡ ਮੁੜ-ਲਿਖੋ।"
+
+#~ msgid "The two passwords are not equal."
+#~ msgstr "ਦੋ ਪਾਸਵਰਡ ਬਰਾਬਰ ਨਹੀਂ ਹਨ।"
+
+#~ msgid "Change pa_ssword"
+#~ msgstr "ਪਾਸਵਰਡ ਬਦਲੋ(_s)"
+
+#~ msgid "Change password"
+#~ msgstr "ਪਾਸਵਰਡ ਬਦਲੋ"
+
+#~ msgid "Change your password"
+#~ msgstr "ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲੋ"
+
+#~ msgid "Current _password:"
+#~ msgstr "ਮੌਜੂਦਾ ਪਾਸਵਰਡ(_p):"
+
+#~ msgid ""
+#~ "To change your password, enter your current password in the field below "
+#~ "and click <b>Authenticate</b>.\n"
+#~ "After you have authenticated, enter your new password, retype it for "
+#~ "verification and click <b>Change password</b>."
+#~ msgstr ""
+#~ "ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲਣ ਲਈ, ਹੇਠ ਦਿੱਤੇ ਖੇਤਰ ਵਿੱਚ ਆਪਣਾ ਮੌਜੂਦਾ ਪਾਸਵਰਡ ਦਿਓ ਅਤੇ <b>ਪਰਮਾਣਿਤ</"
+#~ "b> ਨੂੰ ਦਬਾਓ।\n"
+#~ "ਤੁਹਾਡੇ ਪਰਮਾਣਿਤ ਹੋਣ ਦੇ ਬਾਅਦ, ਆਪਣਾ ਨਵਾਂ ਪਾਸਵਰਡ ਦਿਓ, ਪੁਸ਼ਟੀ ਲਈ ਮੁੜ-ਦਬਾਓ ਅਤੇ <b>ਪਾਸਵਰਡ "
+#~ "ਬਦਲੋ</b> ਦਬਾਓ।"
+
+#~ msgid "_Authenticate"
+#~ msgstr "ਪਰਮਾਣਿਤ(_A)"
+
+#~ msgid "_New password:"
+#~ msgstr "ਨਵਾਂ ਪਾਸਵਰਡ(_N):"
+
+#~ msgid "_Retype new password:"
+#~ msgstr "ਨਵਾਂ ਪਾਸਵਰਡ ਮੁੜ-ਲਿਖੋ(_R):"
+
+#~ msgid "Add Wallpaper"
+#~ msgstr "ਵਾਲਪੇਪਰ ਸ਼ਾਮਲ"
+
+#~ msgid "All files"
+#~ msgstr "ਸਭ ਫਾਇਲਾਂ"
+
+#~ msgid "Font may be too large"
+#~ msgstr "ਫੋਂਟ ਬਹੁਤ ਵੱਡੇ ਹਨ"
+
+#~ msgid ""
+#~ "The font selected is %d point large, and may make it difficult to "
+#~ "effectively use the computer.  It is recommended that you select a size "
+#~ "smaller than %d."
+#~ msgid_plural ""
+#~ "The font selected is %d points large, and may make it difficult to "
+#~ "effectively use the computer. It is recommended that you select a size "
+#~ "smaller than %d."
+#~ msgstr[0] ""
+#~ "ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
+#~ "ਕੀਤੀ ਜਾਦੀ ਹੈ ਇਹ ਅਕਾਰ %d ਤੋਂ ਛੋਟਾ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।"
+#~ msgstr[1] ""
+#~ "ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
+#~ "ਕੀਤੀ ਜਾਦੀ ਹੈ ਇਹ ਅਕਾਰ %d ਤੋਂ ਛੋਟਾ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।"
+
+#~ msgid ""
+#~ "The font selected is %d point large, and may make it difficult to "
+#~ "effectively use the computer.  It is recommended that you select a "
+#~ "smaller sized font."
+#~ msgid_plural ""
+#~ "The font selected is %d points large, and may make it difficult to "
+#~ "effectively use the computer. It is recommended that you select a smaller "
+#~ "sized font."
+#~ msgstr[0] ""
+#~ "ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
+#~ "ਕੀਤੀ ਜਾਦੀ ਹੈ ਛੋਟੇ ਅਕਾਰ ਦੇ ਫੋਂਟ ਚੁਣੋ।"
+#~ msgstr[1] ""
+#~ "ਚੁਣੇ ਫੋਂਟ %d ਪੁਆਇੰਟ ਵੱਡੇ ਹਨ ਅਤੇ ਕੰਪਿਊਟਰ ਤੇ ਵਰਤਣੇ ਵਧੀਆ ਤਰੀਕੇ ਨਾਲ ਵਰਤਣੇ ਔਖੇ ਹਨ। ਇਹ ਸਿਫ਼ਾਰਸ "
+#~ "ਕੀਤੀ ਜਾਦੀ ਹੈ ਛੋਟੇ ਅਕਾਰ ਦੇ ਫੋਂਟ ਚੁਣੋ।"
+
+#~ msgid "Use previous font"
+#~ msgstr "ਪੁਰਾਣੇ ਫੋਂਟ ਵਰਤੋਂ"
+
+#~ msgid "Use selected font"
+#~ msgstr "ਚੁਣੇ ਫੋਂਟ ਵਰਤੋਂ"
+
+#~ msgid "Could not load user interface file: %s"
+#~ msgstr "ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ ਫਾਇਲ ਲੋਡ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ: %s"
+
+#~ msgid "Specify the filename of a theme to install"
+#~ msgstr "ਇੱਕ ਥੀਮ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਫਾਇਲ ਨਾਂ ਦਿਓ"
+
+#~ msgid "filename"
+#~ msgstr "ਫਾਇਲਨਾਂ"
+
+#~ msgid ""
+#~ "Specify the name of the page to show (theme|background|fonts|interface)"
+#~ msgstr "ਵੇਖਣ ਲਈ ਸਫ਼ੇ ਦਾ ਨਾਂ ਦਿਓ (theme|background|fonts|interface)"
+
+#~ msgid "[WALLPAPER...]"
+#~ msgstr "[WALLPAPER...]"
+
+#~ msgid "Default Pointer"
+#~ msgstr "ਡਿਫਾਲਟਰ ਪੁਆਇੰਟਰ"
+
+#~ msgid "Install"
+#~ msgstr "ਇੰਸਟਾਲ"
+
+#~ msgid ""
+#~ "This theme will not look as intended because the required GTK+ theme "
+#~ "engine '%s' is not installed."
+#~ msgstr ""
+#~ "ਇਹ ਥੀਮ ਦੱਸੇ ਮੁਤਾਬਕ ਨਹੀਂ ਲੱਗਦਾ ਹੈ, ਕਿਉਂਕਿ ਲੋੜੀਦਾ GTK+ ਥੀਮ ਇੰਜਣ '%s' ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
+
+#~ msgid "Apply Background"
+#~ msgstr "ਬੈਕਗਰਾਊਂਡ ਲਾਗੂ ਕਰੋ"
+
+#~ msgid "Apply Font"
+#~ msgstr "ਫੋਂਟ ਲਾਗੂ ਕਰੋ"
+
+#~ msgid "Revert Font"
+#~ msgstr "ਫੋਂਟ ਬਦਲੋ"
+
+#~ msgid ""
+#~ "The current theme suggests a background and a font. Also, the last "
+#~ "applied font suggestion can be reverted."
+#~ msgstr ""
+#~ "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਬੈਕਗਰਾਊਂਡ ਅਤੇ ਫੋਂਟ ਲਈ ਸੁਝਾਅ ਦਿਓ। ਨਾਲ ਹੀ ਆਖਰੀ ਲਾਗੂ ਕੀਤੇ ਫੋਂਟ ਵਾਪਸ ਬਦਲੇ "
+#~ "ਜਾਣਗੇ।"
+
+#~ msgid ""
+#~ "The current theme suggests a background. Also, the last applied font "
+#~ "suggestion can be reverted."
+#~ msgstr ""
+#~ "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਬੈਕਗਰਾਊਂਡ ਸੁਝਾਅ ਦਿੰਦੇ ਹਨ। ਨਾਲ ਹੀ ਆਖਰੀ ਲਾਗੂ ਕੀਤੇ ਫੋਂਟ ਵਾਪਸ ਲੈਣ ਦਾ ਸੁਝਾਅ ਹੈ।"
+
+#~ msgid "The current theme suggests a background and a font."
+#~ msgstr "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਬੈਕਗਰਾਊਂਡ ਅਤੇ ਫੋਂਟ ਦਿੰਦਾ ਹੈ।"
+
+#~ msgid ""
+#~ "The current theme suggests a font. Also, the last applied font suggestion "
+#~ "can be reverted."
+#~ msgstr ""
+#~ "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਫੋਂਟ ਲਈ ਮੰਗ ਕਰਦਾ ਹੈ। ਇਸ ਨਾਲ ਹੀ ਆਖਰੀ ਲਾਗੂ ਕੀਤੇ ਫੋਂਟ ਸੁਝਾਅ ਵੀ ਰੀਵਰਟ ਕੀਤੇ "
+#~ "ਜਾਣਗੇ।"
+
+#~ msgid "The current theme suggests a background."
+#~ msgstr "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਬੈਕਗਰਾਊਂਡ ਦਿੰਦਾ ਹੈ।"
+
+#~ msgid "The last applied font suggestion can be reverted."
+#~ msgstr "ਆਖਰੀ ਲਾਗੂ ਕੀਤੇ ਫੋਂਟ ਸੁਝਾਅ ਵਾਪਸ ਲਏ ਜਾ ਸਕਦੇ ਹਨ।"
+
+#~ msgid "The current theme suggests a font."
+#~ msgstr "ਮੌਜੂਦਾ ਥੀਮ ਇੱਕ ਫੋਂਟ ਦਿੰਦਾ ਹੈ।"
+
+#~ msgid "Appearance Preferences"
+#~ msgstr "ਦਿੱਖ ਪਸੰਦ"
+
+#~ msgid "Best _shapes"
+#~ msgstr "ਉੱਤਮ ਸ਼ਕਲ(_s)"
+
+#~ msgid "Best co_ntrast"
+#~ msgstr "ਬਹੁਤ ਗੂੜਾ(_n)"
+
+#~ msgid "C_olors:"
+#~ msgstr "ਰੰਗ(_o):"
+
+#~ msgid "C_ustomize..."
+#~ msgstr "ਕਸਟਮਾਈਜ਼(_u)..."
+
+#~ msgid "Changing your cursor theme takes effect the next time you log in."
+#~ msgstr "ਤੁਹਾਡੇ ਕਰਸਰ ਥੀਮ ਵਿੱਚ ਕੀਤੇ ਬਦਲਾਅ ਤੁਹਾਡੇ ਅਗਲੀ ਵਾਰ ਲਾਗਇਨ ਕਰਨ ਸਮੇਂ ਅਸਰ ਕਰਨਗੇ।"
+
+#~ msgid "Controls"
+#~ msgstr "ਕੰਟਰੋਲ"
+
+#~ msgid "Customize Theme"
+#~ msgstr "ਕਸਮਾਈਜ਼ ਥੀਮ"
+
+#~ msgid "D_etails..."
+#~ msgstr "ਵੇਰਵਾ(_e)..."
+
+#~ msgid "Des_ktop font:"
+#~ msgstr "ਡੈਸਕਟਾਪ ਫੋਂਟ(_k):"
+
+#~ msgid "Font Rendering Details"
+#~ msgstr "ਫੋਂਟ ਰੈਡਰਇੰਗ ਵੇਰਵਾ"
+
+#~ msgid "Fonts"
+#~ msgstr "ਫੋਂਟ"
+
+#~ msgid "Get more backgrounds online"
+#~ msgstr "ਹੋਰ ਬੈਕਗਰਾਊਂਡ ਆਨਲਾਈਨ ਲਵੋ"
+
+#~ msgid "Get more themes online"
+#~ msgstr "ਹੋਰ ਥੀਮ ਆਨਲਾਈਨ ਲਵੋ"
+
+#~ msgid "Gra_yscale"
+#~ msgstr "ਸਲੇਟੀ(_y)"
+
+#~ msgid "Hinting"
+#~ msgstr "ਹਿੰਟਿੰਗ"
+
+#~ msgid "Horizontal gradient"
+#~ msgstr "ਹਰੀਜੱਟਲ ਗਰੇਡੀਐਂਟ"
+
+#~ msgid "Icons"
+#~ msgstr "ਆਈਕਾਨ"
+
+#~ msgid "Icons only"
+#~ msgstr "ਕੇਵਲ ਆਈਕਾਨ"
+
+#~ msgid "N_one"
+#~ msgstr "ਕੋਈ ਨਹੀਂ(_o)"
+
+#~ msgid "Open a dialog to specify the color"
+#~ msgstr "ਰੰਗ ਦੱਸਣ ਲਈ ਇੱਕ ਡਾਈਲਾਗ ਖੋਲ੍ਹੋ"
+
+#~ msgid "Pointer"
+#~ msgstr "ਪੁਆਇੰਟਰ"
+
+#~ msgid "R_esolution:"
+#~ msgstr "ਰੈਜ਼ੋਲੇਸ਼ਨ(_e):"
+
+#~ msgid "Rendering"
+#~ msgstr "ਰੈਡਰਿੰਗ"
+
+#~ msgid "Save Theme As..."
+#~ msgstr "ਥੀਮ ਇੰਝ ਸੰਭਾਲੋ..."
+
+#~ msgid "Save _As..."
+#~ msgstr "ਇੰਝ ਸੰਭਾਲੋ(_A)..."
+
+#~ msgid "Smoothing"
+#~ msgstr "ਮੁਲਾਇਮ"
+
+#~ msgid "Solid color"
+#~ msgstr "ਇੱਕ ਰੰਗ"
+
+#~ msgid "Stretch"
+#~ msgstr "ਤਾਣੋ"
+
+#~ msgid "Sub_pixel (LCDs)"
+#~ msgstr "ਸਬ-ਪਿਕਸਲ (LCD)(_p)"
+
+#~ msgid "Sub_pixel smoothing (LCDs)"
+#~ msgstr "ਸਬ-ਪਿਕਸਲ ਮੁਲਾਇਮ(LCD)(_p)"
+
+#~ msgid "Subpixel Order"
+#~ msgstr "ਸਬ-ਪਿਕਸਲ ਕ੍ਰਮ"
+
+#~ msgid "Text"
+#~ msgstr "ਟੈਕਸਟ"
+
+#~ msgid "Text below items"
+#~ msgstr "ਆਈਟਮਾਂ ਹੇਠ ਟੈਕਸਟ"
+
+#~ msgid "Text beside items"
+#~ msgstr "ਆਈਟਮਾਂ ਨਾਲ ਟੈਕਸਟ"
+
+#~ msgid "Text only"
+#~ msgstr "ਕੇਵਲ ਟੈਕਸਟ"
+
+#~ msgid "The current controls theme does not support color schemes."
+#~ msgstr "ਮੌਜੂਦਾ ਕੰਟਰੋਲ ਥੀਮ ਰੰਗ ਸਕੀਮਾਂ ਲਈ ਸਹਾਇਕ ਨਹੀਂ ਹੈ।"
+
+#~ msgid "Theme"
+#~ msgstr "ਥੀਮ"
+
+#~ msgid "VB_GR"
+#~ msgstr "VB_GR"
+
+#~ msgid "Vertical gradient"
+#~ msgstr "ਵਰਟੀਕਲ ਗਰੇਡੀਐਂਟ"
+
+#~ msgid "Window Border"
+#~ msgstr "ਵਿੰਡੋ ਬਾਰਡਰ"
+
+#~ msgid "_Application font:"
+#~ msgstr "ਐਪਲੀਕੇਸ਼ਨ ਫੋਂਟ(_A):"
+
+#~ msgid "_BGR"
+#~ msgstr "_BGR"
+
+#~ msgid "_Description:"
+#~ msgstr "ਵੇਰਵਾ(_D):"
+
+#~ msgid "_Document font:"
+#~ msgstr "ਡੌਕੂਮੈਂਟ ਫੋਂਟ(_D):"
+
+#~ msgid "_Fixed width font:"
+#~ msgstr "ਸਥਿਰ ਚੌੜਾਈ ਫੋਂਟ(_F):"
+
+#~ msgid "_Input boxes:"
+#~ msgstr "ਇੰਪੁੱਟ ਬਕਸੇ(_I):"
+
+#~ msgid "_Install..."
+#~ msgstr "ਇੰਸਟਾਲ(_I)..."
+
+#~ msgid "_Medium"
+#~ msgstr "ਮੱਧਮ(_M)"
+
+#~ msgid "_Monochrome"
+#~ msgstr "ਮੋਨੋਕਰੋਮਿਕ(_M)"
+
+#~ msgid "_None"
+#~ msgstr "ਕੋਈ ਨਹੀਂ(_N)"
+
+#~ msgid "_RGB"
+#~ msgstr "_RGB"
+
+#~ msgid "_Reset to Defaults"
+#~ msgstr "ਡਿਫਾਲਟ ਰੀ-ਸੈੱਟ ਕਰੋ(_R)"
+
+#~ msgid "_Selected items:"
+#~ msgstr "ਚੁਣੀਆਂ ਆਈਟਮਾਂ(_S):"
+
+#~ msgid "_Size:"
+#~ msgstr "ਅਕਾਰ(_S):"
+
+#~ msgid "_Slight"
+#~ msgstr "ਹਲਕਾ(_S)"
+
+#~ msgid "_Style:"
+#~ msgstr "ਸਟਾਇਲ(_S):"
+
+#~ msgid "_Tooltips:"
+#~ msgstr "ਟੂਲ-ਟਿੱਪ(_T):"
+
+#~ msgid "_VRGB"
+#~ msgstr "_VRGB"
+
+#~ msgid "_Window title font:"
+#~ msgstr "ਵਿੰਡੋ ਟਾਇਟਲ ਫੋਂਟ(_W):"
+
+#~ msgid "_Windows:"
+#~ msgstr "ਵਿੰਡੋ(_W):"
+
+#~ msgid "dots per inch"
+#~ msgstr "ਬਿੰਦੂ ਪ੍ਰਤੀ ਇੰਚ"
+
+#~ msgid "Appearance"
+#~ msgstr "ਦਿੱਖ"
+
+#~ msgid "Customize the look of the desktop"
+#~ msgstr "ਡੈਸਕਟਾਪ ਲਈ ਪਸੰਦੀਦਾ ਦਿੱਖ"
+
+#~ msgid "Installs themes packages for various parts of the desktop"
+#~ msgstr "ਡੈਸਕਟਾਪ ਦੇ ਵੱਖ-ਵੱਖ ਹਿੱਸਿਆਂ ਲਈ ਥੀਮ ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਦਾ ਹੈ"
+
+#~ msgid "Theme Installer"
+#~ msgstr "ਥੀਮ ਇੰਸਟਾਲਰ"
+
+#~ msgid "Gnome Theme Package"
+#~ msgstr "ਗਨੋਮ ਥੀਮ ਪੈਕੇਜ"
+
+#~ msgid "Cannot install theme"
+#~ msgstr "ਥੀਮ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"
+
+#~ msgid "The %s utility is not installed."
+#~ msgstr "%s ਸਹੂਲਤ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।"
+
+#~ msgid "There was a problem while extracting the theme."
+#~ msgstr "ਥੀਮ ਖੋਲ੍ਹਣ ਦੌਰਾਨ ਇੱਕ ਸਮੱਸਿਆ ਆਈ ਹੈ।"
+
+#~ msgid "There was an error installing the selected file"
+#~ msgstr "ਚੁਣੀ ਫਾਈਲ ਇੰਸਟਾਲ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ"
+
+#~ msgid "\"%s\" does not appear to be a valid theme."
+#~ msgstr "\"%s\" ਇੱਕ ਠੀਕ ਥੀਮ ਨਹੀਂ ਜਾਪਦਾ ਹੈ।"
+
+#~ msgid ""
+#~ "\"%s\" does not appear to be a valid theme. It may be a theme engine "
+#~ "which you need to compile."
+#~ msgstr ""
+#~ "\"%s\" ਇੱਕ ਠੀਕ ਥੀਮ ਨਹੀਂ ਜਾਪਦਾ ਹੈ। ਇਹ ਇੱਕ ਥੀਮ ਇੰਜਣ ਹੋ ਸਕਦਾ ਹੈ, ਜਿਸ ਨੂੰ ਤੁਹਾਨੂੰ ਕੰਪਾਇਲ "
+#~ "ਕਰਨਾ ਪਵੇਗਾ।"
+
+#~ msgid "Installation for theme \"%s\" failed."
+#~ msgstr " ਥੀਮ \"%s\" ਦੀ ਇੰਸਟਾਲੇਸ਼ਨ ਫੇਲ੍ਹ ਹੋਈ ਹੈ।"
+
+#~ msgid "The theme \"%s\" has been installed."
+#~ msgstr "ਥੀਮ \"%s\" ਇੰਸਟਾਲ ਹੋ ਗਿਆ ਹੈ।"
+
+#~ msgid "Would you like to apply it now, or keep your current theme?"
+#~ msgstr "ਕੀ ਤੁਸੀਂ ਹੁਣੇ ਲਾਗੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਆਪਣਾ ਮੌਜੂਦ ਥੀਮ ਹੀ ਰੱਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#~ msgid "Keep Current Theme"
+#~ msgstr "ਮੌਜੂਦਾ ਥੀਮ ਰੱਖੋ"
+
+#~ msgid "Apply New Theme"
+#~ msgstr "ਨਵਾਂ ਥੀਮ ਲਾਗੂ ਕਰੋ"
+
+#~ msgid "GNOME Theme %s correctly installed"
+#~ msgstr "ਗਨੋਮ ਥੀਮ %s ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੈ"
+
+#~ msgid "Failed to create temporary directory"
+#~ msgstr "ਆਰਜ਼ੀ ਡਾਇਰੈਕਟਰੀ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ"
+
+#~ msgid "New themes have been successfully installed."
+#~ msgstr "ਨਵੇਂ ਥੀਮ ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੋ ਗਏ ਹਨ।"
+
+#~ msgid "No theme file location specified to install"
+#~ msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਕੋਈ ਥੀਮ ਫਾਇਲ ਟਿਕਾਣਾ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ"
+
+#~ msgid ""
+#~ "Insufficient permissions to install the theme in:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "ਥੀਮ ਨੂੰ ਇੱਥੇ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਲੋੜੀਦੇ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ:\n"
+#~ "%s"
+
+#~ msgid "Select Theme"
+#~ msgstr "ਥੀਮ ਚੁਣੋ"
+
+#~ msgid "Theme Packages"
+#~ msgstr "ਥੀਮ ਪੈਕੇਜ"
+
+#~ msgid "Theme name must be present"
+#~ msgstr "ਥੀਮ ਨਾਂ ਹੋਣਾ ਜ਼ਰੂਰੀ ਹੈ"
+
+#~ msgid "The theme already exists. Would you like to replace it?"
+#~ msgstr "ਥੀਮ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਤਬਦੀਲ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#~ msgid "_Overwrite"
+#~ msgstr "ਉੱਤੇ ਲਿਖੋ(_O)"
+
+#~ msgid "Would you like to delete this theme?"
+#~ msgstr "ਕੀ ਤੁਸੀਂ ਇਹ ਥੀਮ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#~ msgid "Theme cannot be deleted"
+#~ msgstr "ਥੀਮ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ ਹੈ"
+
+#~ msgid "Could not install theme engine"
+#~ msgstr "ਥੀਮ ਇੰਜਣ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
+
+#~ msgid ""
+#~ "Unable to start the settings manager 'gnome-settings-daemon'.\n"
+#~ "Without the GNOME settings manager running, some preferences may not take "
+#~ "effect. This could indicate a problem with DBus, or a non-GNOME (e.g. "
+#~ "KDE) settings manager may already be active and conflicting with the "
+#~ "GNOME settings manager."
+#~ msgstr ""
+#~ "ਸੈਟਿੰਗ ਮੈਨੇਜਰ 'gnome-settings-daemon' ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਅਸਫਲ ਹੈ।\n"
+#~ "ਗਨੋਮ ਸੈਟਿੰਗ ਮੈਨੇਜਰ ਬਿਨਾਂ ਚਲਾਏ, ਕੁਝ ਪਸੰਦ ਕੰਮ ਨਹੀਂ ਕਰਨਗੀਆਂ। ਇਹ ਡੀਬੱਸ ਨਾਲ ਸੰਬੰਧ ਮੁਸ਼ਕਿਲ "
+#~ "ਦਿਖਾਰਿਹਾ ਹੈ ਜਾਂ ਨਾ-ਗਨੋਮ (ਜਿਵੇਂ ਕਿ ਕੇਡੀਈ (KDE)) ਸੈਟਿੰਗ ਮੈਨੇਜਰ ਦਾ ਮੈਨੇਜਰ ਪਹਿਲਾਂ ਹੀ ਸਰਗਰਮ "
+#~ "ਹੈ ਅਤੇ ਗਨੋਮ ਸੈਟਿੰਗ ਮੈਨੇਜਰ ਨਾਲ ਅਪਵਾਦ ਕਰ ਰਿਹਾ ਹੈ।"
+
+#~ msgid "There was an error displaying help: %s"
+#~ msgstr "ਮੱਦਦ ਵੇਖਾਉਣ ਗਲਤੀ ਹੈ: %s"
+
+#~ msgid "Copying file: %u of %u"
+#~ msgstr "ਫਾਇਲ ਕਾਪੀ ਜਾਰੀ: %2$u ਵਿੱਚੋਂ %1$u"
+
+#~ msgid "Copying '%s'"
+#~ msgstr "'%s' ਕਾਪੀ ਜਾਰੀ"
+
+#~ msgid "Copying files"
+#~ msgstr "ਫਾਇਲਾਂ ਕਾਪੀ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
+
+#~ msgid "Parent Window"
+#~ msgstr "ਮੁੱਢਲੀ ਵਿੰਡੋ"
+
+#~ msgid "Parent window of the dialog"
+#~ msgstr "ਡਾਈਲਾਗ ਦੀ ਮੁੱਢਲੀ ਵਿੰਡੋ"
+
+#~ msgid "From URI"
+#~ msgstr "ਵੱਲੋਂ URI"
+
+#~ msgid "URI currently transferring from"
+#~ msgstr "ਇਸ ਸਮੇਂ URI ਤਬਦੀਲ ਹੋ ਰਿਹਾ ਹੈ ਵੱਲੋਂ"
+
+#~ msgid "To URI"
+#~ msgstr "ਵੱਲ URI"
+
+#~ msgid "URI currently transferring to"
+#~ msgstr "ਇਸ ਸਮੇਂ URI ਤਬਦੀਲ ਹੋ ਰਿਹਾ ਹੈ ਵੱਲ"
+
+#~ msgid "Fraction completed"
+#~ msgstr "ਭਾਗ ਪੂਰਾ ਹੋ ਗਿਆ"
+
+#~ msgid "Fraction of transfer currently completed"
+#~ msgstr "ਤਬਦੀਲੀ ਦਾ ਹਿੱਸਾ ਹੁਣ ਪੂਰਾ ਹੋ ਗਿਆ ਹੈ"
+
+#~ msgid "Current URI index"
+#~ msgstr "ਮੌਜੂਦਾ URI ਇੰਡੈਕਸ"
+
+#~ msgid "Current URI index - starts from 1"
+#~ msgstr "ਮੌਜੂਦਾ URI ਇੰਡੈਕਸ- ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ 1"
+
+#~ msgid "Total URIs"
+#~ msgstr "ਕੁੱਲ URI"
+
+#~ msgid "Total number of URIs"
+#~ msgstr "URI ਦੀ ਕੁੱਲ ਗਿਣਤੀ"
+
+#~ msgid "File '%s' already exists. Do you want to overwrite it?"
+#~ msgstr "ਫਾਈਲ '%s' ਮੌਜੂਦਾ ਨਹੀਂ ਹੈ। ਕੀ ਤੁਸੀਂ ਉੱਤੇ ਲਿਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#~ msgid "_Skip"
+#~ msgstr "ਛੱਡੋ(_S)"
+
+#~ msgid "Overwrite _All"
+#~ msgstr "ਸਭ ਉੱਤੇ ਲਿਖੋ(_A)"
+
+#~ msgid "Default Pointer - Current"
+#~ msgstr "ਮੂਲ ਪੁਆਇੰਟਰ - ਮੌਜੂਦਾ"
+
+#~ msgid "White Pointer"
+#~ msgstr "ਸਫੈਦ ਪੁਆਇੰਟਰ"
+
+#~ msgid "White Pointer - Current"
+#~ msgstr "ਸਫੈਦ ਪੁਆਇੰਟਰ - ਮੌਜੂਦਾ"
+
+#~ msgid "Large Pointer"
+#~ msgstr "ਵੱਡਾ ਪੁਆਇੰਟਰ"
+
+#~ msgid "Large Pointer - Current"
+#~ msgstr "ਵੱਡਾ ਪੁਆਇੰਟਰ - ਮੌਜੂਦਾ"
+
+#~ msgid "Large White Pointer - Current"
+#~ msgstr "ਵੱਡਾ ਸਫ਼ੈਦ ਪੁਆਇੰਟਰ - ਮੌਜੂਦਾ"
+
+#~ msgid "Large White Pointer"
+#~ msgstr "ਵੱਡਾ ਸਫ਼ੈਦ ਪੁਆਇੰਟਰ"
+
+#~ msgid ""
+#~ "This theme will not look as intended because the required GTK+ theme '%s' "
+#~ "is not installed."
+#~ msgstr ""
+#~ "ਇਹ ਥੀਮ ਜਿਸ ਤਰ੍ਹਾਂ ਦਾ ਵੇਖਾਈ ਦਿੰਦਾ ਹੈ, ਉਂਝ ਦਾ ਹੋਵੇਗਾ ਨਹੀਂ, ਕਿਉਂਕਿ ਲੋੜੀਦਾ GTK+ ਥੀਮ '%s' "
+#~ "ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
+
+#~ msgid ""
+#~ "This theme will not look as intended because the required window manager "
+#~ "theme '%s' is not installed."
+#~ msgstr ""
+#~ "ਇਹ ਥੀਮ ਜਿਸ ਤਰ੍ਹਾਂ ਦਾ ਵੇਖਾਈ ਦਿੰਦਾ ਹੈ, ਉਂਝ ਦਾ ਹੋਵੇਗਾ ਨਹੀਂ, ਕਿਉਂਕਿ ਵਿੰਡੋ ਮੈਨੇਜਰ ਥੀਮ '%s' "
+#~ "ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
+
+#~ msgid ""
+#~ "This theme will not look as intended because the required icon theme '%s' "
+#~ "is not installed."
+#~ msgstr ""
+#~ "ਇਹ ਥੀਮ ਜਿਸਤਰ੍ਹਾਂ ਦਾ ਵੇਖਾਈ ਦਿੰਦਾ ਹੈ, ਉਂਝ ਦਾ ਹੈ ਨਹੀਂ, ਕਿਉਂਕਿ ਲੋੜੀਦਾ ਆਈਕਾਨ ਥੀਮ '%s' "
+#~ "ਇੰਸਟਾਲ ਨਹੀਂ ਹੋਵੇਗਾ।"
+
+#~ msgid "Error saving configuration: %s"
+#~ msgstr "ਸੰਰਚਨਾ ਸੰਭਾਲਣ ਲਈ ਗਲਤੀ: %s"
+
+#~ msgid "Image Viewer"
+#~ msgstr "ਚਿੱਤਰ ਦਰਸ਼ਕ"
+
+#~ msgid "Multimedia"
+#~ msgstr "ਮਲਟੀਮੀਡਿਆ"
+
+#~ msgid "Multimedia Player"
+#~ msgstr "ਮਲਟੀਮੀਡਿਆ ਪਲੇਅਰ"
+
+#~ msgid "Open link in new _tab"
+#~ msgstr "ਲਿੰਕ ਨਵੀਂ ਟੈਬ ਵਿੱਚ ਖੋਲ੍ਹੋ(_t)"
+
+#~ msgid "Open link in new _window"
+#~ msgstr "ਨਵੀਂ ਵਿੰਡੋ ਵਿੱਚ ਖੋਲ੍ਹੋ(_w)"
+
+#~ msgid "Open link with web browser _default"
+#~ msgstr "ਲਿੰਕ ਡਿਫਾਲਟ ਵੈੱਬ ਬਰਾਊਜ਼ਰ ਨਾਲ ਖੋਲ੍ਹੋ(_d)"
+
+#~ msgid "Video Player"
+#~ msgstr "ਵਿਡੀਓ ਪਲੇਅਰ"
+
+#~ msgid "Opera"
+#~ msgstr "ਓਪਰਾ"
+
+#~ msgid "Include _panel"
+#~ msgstr "ਪੈਨਲ ਸਮੇਤ(_P)"
+
+#~ msgid "Make Default"
+#~ msgstr "ਡਿਫਾਲਟ ਬਣਾਓ"
+
+#~ msgid "Panel icon"
+#~ msgstr "ਪੈਨਲ ਆਈਕਾਨ"
+
+#~ msgid "Sa_me image in all monitors"
+#~ msgstr "ਸਭ ਮਾਨੀਟਰਾਂ ਵਿੱਚ ਇੱਕੋ ਚਿੱਤਰ(_m)"
+
+#~ msgid "_Show monitors in panel"
+#~ msgstr "ਪੈਨਲ ਵਿੱਚ ਮਾਨੀਟਰ ਵੇਖੋ(_S)"
+
+#~ msgid ""
+#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "This program installs a RANDR profile for multi-monitor setups into\n"
+#~ "a systemwide location.  The resulting profile will get used when\n"
+#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
+#~ "\n"
+#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+#~ "xml\n"
+#~ "\n"
+#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
+#~ "            the systemwide directory for RANDR configurations,\n"
+#~ "            so the result will typically be %s/DEST_NAME\n"
+#~ msgstr ""
+#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "This program installs a RANDR profile for multi-monitor setups into\n"
+#~ "a systemwide location.  The resulting profile will get used when\n"
+#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
+#~ "\n"
+#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+#~ "xml\n"
+#~ "\n"
+#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
+#~ "            the systemwide directory for RANDR configurations,\n"
+#~ "            so the result will typically be %s/DEST_NAME\n"
+
+#~ msgid "This program can only be used by the root user"
+#~ msgstr "ਇਹ ਪਰੋਗਰਾਮ ਕੇਵਲ ਰੂਟ ਯੂਜ਼ਰ ਵਲੋਂ ਹੀ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ"
+
+#~ msgid "The source filename must be absolute"
+#~ msgstr "ਸਰੋਤ ਫਾਇਲ ਨਾਂ ਅਸਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+
+#~ msgid "Could not open %s: %s\n"
+#~ msgstr "%s ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s\n"
+
+#~ msgid "Could not get information for %s: %s\n"
+#~ msgstr "%s ਲਈ ਜਾਣਕਾਰੀ ਲਈ ਨ ਹੀਂ ਜਾ ਸਕੀ: %s\n"
+
+#~ msgid "%s must be a regular file\n"
+#~ msgstr "%s ਨਿਯਮਤ ਫਾਇਲ ਹੋਣੀ ਲਾਜ਼ਮੀ ਹੈ।\n"
+
+#~ msgid "This program must only be run through pkexec(1)"
+#~ msgstr "ਇਹ ਪਰੋਗਰਾਮ pkexec(1) ਰਾਹੀਂ ਹੀ ਚਲਾਇਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ"
+
+#~ msgid "PKEXEC_UID must be set to an integer value"
+#~ msgstr "PKEXEC_UID ਪੂਰਨ ਅੰਕ ਸੈੱਟ ਕੀਤਾ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ"
+
+#~ msgid "%s must be owned by you\n"
+#~ msgstr "%s ਤੁਹਾਡੀ ਮਲਕੀਅਤ (ਓਨਰ) ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ\n"
+
+#~ msgid "%s must not have any directory components\n"
+#~ msgstr "%s ਕੋਈ ਡਾਇਰੈਕਟਰੀ ਭਾਗ ਨਹੀਂ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ\n"
+
+#~ msgid "%s must be a directory\n"
+#~ msgstr "%s ਡਾਇਰੈਕਟਰੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ\n"
+
+#~ msgid "Could not open %s/%s: %s\n"
+#~ msgstr "%s/%s ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ: %s\n"
+
+#~ msgid "Could not rename %s to %s: %s\n"
+#~ msgstr "%s ਦਾ ਨਾਂ %s ਨਹੀਂ ਬਦਲਿਆ ਜਾ ਸਕਿਆ: %s\n"
+
+#~ msgid ""
+#~ "Authentication is required to install multi-monitor settings for all users"
+#~ msgstr "ਸਭ ਯੂਜ਼ਰਾਂ ਵਾਸਤੇ ਮਲਟ-ਮਾਨੀਟਰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਪਰਮਾਣਿਤਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+
+#~ msgid "Install multi-monitor settings for the whole system"
+#~ msgstr "ਪੂਰੇ ਸਿਸਟਮ ਲਈ ਮਲਟੀ-ਮਾਨੀਟਰ ਸੈਟਿੰਗ ਇੰਸਟਾਲ ਕਰੋ"
+
+#~ msgid "The monitor configuration has been saved"
+#~ msgstr "ਮਾਨੀਟਰ ਸੰਰਚਨਾ ਸੰਭਾਲੀ ਜਾ ਚੁੱਕੀ ਹੈ"
+
+#~ msgid "This configuration will be used the next time someone logs in."
+#~ msgstr "ਇਹ ਸੰਰਚਨਾ ਅਗਲੀ ਵਾਰ ਕਿਸੇ ਦੇ ਲਾਗਇਨ ਕਰਨ ਸਮੇਂ ਵਰਤੀ ਜਾਵੇਗੀ।"
+
+#~ msgid "Could not set the default configuration for monitors"
+#~ msgstr "ਮਾਨੀਟਰ ਲਈ ਡਿਫਾਲਟ ਸੰਰਚਨਾ ਸੈੱਟ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
+
+#~ msgid "All_ow postponing of breaks"
+#~ msgstr "ਅੰਤਰਾਲ ਨੂੰ ਮੁਲਤਵੀ ਕਰਨ ਦੀ ਇਜ਼ਾਜਤ ਦਿਓ(_o)"
+
+#~ msgid "Check if breaks are allowed to be postponed"
+#~ msgstr "ਜਾਂਚ ਕਰੋ ਕਿ ਅੰਤਰਾਲ ਨੂੰ ਮੁਲਤਵੀ ਕਰਨ ਦੀ ਇਜ਼ਾਜਤ ਹੈ"
+
+#~ msgid "Duration of the break when typing is disallowed"
+#~ msgstr "ਅੰਤਰਾਲ, ਜਦੋਂ ਕਿ ਟਾਇਪਇੰਗ ਦੀ ਇਜ਼ਾਜਤ ਨਹੀਂ ਹੈ"
+
+#~ msgid "Duration of work before forcing a break"
+#~ msgstr "ਅੰਤਰਾਲ ਕੰਮ ਦਾ, ਬੰਦ ਕਰਨ ਲਈ ਮਜਬੂਰ ਕਰਨ ਤੋ ਪਹਿਲਾਂ"
+
+#~ msgid ""
+#~ "Lock screen after a certain duration to help prevent repetitive keyboard "
+#~ "use injuries"
+#~ msgstr "ਕੀ-ਬੋਰਡ ਦੀਆਂ ਸਵਿੱਚਾਂ ਦੇ ਮੁੜ ਦੱਬਣ ਨਾਲ ਹੋਣ ਵਾਲੇ ਨੁਕਸਾਨ ਤੋਂ ਬਚਣ ਲਈ ਸਕਰੀਨ ਲਾਕ ਕਰੋ"
+
+#~ msgid "Typing Break"
+#~ msgstr "ਲਿਖਣ ਬਰੇਕ"
+
+#~ msgid "_Break interval lasts:"
+#~ msgstr "ਆਖਰੀ ਅੰਤਰਾਲ ਸਮਾਂ(_B):"
+
+#~ msgid "_Lock screen to enforce typing break"
+#~ msgstr "ਟਾਈਪ ਬਰੇਕ ਲਾਗੂ ਕਰਨ ਲਈ ਸਕਰੀਨ ਲਾਕ ਕਰੋ(_L)"
+
+#~ msgid "_Work interval lasts:"
+#~ msgstr "ਕੰਮ ਕਰਨ ਦਾ ਅੰਤਰਾਲ(_W):"
+
+#~ msgid "minutes"
+#~ msgstr "ਮਿੰਟ"
+
+#~ msgid "Mouse"
+#~ msgstr "ਮਾਊਸ"
+
+#~ msgid "Window manager \"%s\" has not registered a configuration tool\n"
+#~ msgstr "ਵਿੰਡੋ ਮੈਨੇਜਰ \"%s\" ਨੇ ਸੰਰਚਨਾ ਟੂਲ ਨੂੰ ਰਜਿਸਟਰ ਨਹੀਂ ਕਰਵਾਇਆ ਹੈ।\n"
+
+#~ msgid "Maximize"
+#~ msgstr "ਵੱਧ ਤੋਂ ਵੱਧ"
+
+#~ msgid "Maximize Vertically"
+#~ msgstr "ਵੱਧੋ-ਵੱਧ ਵਰਟੀਕਲ"
+
+#~ msgid "Maximize Horizontally"
+#~ msgstr "ਵੱਧੋ-ਵੱਧ ਹਰੀਜੱਟਲ"
+
+#~ msgid "Minimize"
+#~ msgstr "ਘੱਟੋ-ਘੱਟ"
+
+#~ msgid "Roll up"
+#~ msgstr "ਸਮੇਟੋ"
+
+#~ msgid "Close the control-center when a task is activated"
+#~ msgstr "ਜਦੋਂ ਇੱਕ ਕੰਮ ਸਰਗਰਮ ਹੋਵੇ ਤਾਂ ਕੰਟਰੋਲ-ਕੇਂਦਰ ਬੰਦ ਕਰੋ"
+
+#~ msgid "Exit shell on add or remove action performed"
+#~ msgstr "ਜੋੜਨ ਜਾਂ ਹਟਾਉਣ ਕਾਰਵਾਈ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
+
+#~ msgid "Exit shell on help action performed"
+#~ msgstr "ਮੱਦਦ ਕਾਰਵਾਈ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
+
+#~ msgid "Exit shell on start action performed"
+#~ msgstr "ਕਾਰਵਾਈ ਸ਼ੁਰੂ ਕਰਨ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
+
+#~ msgid "Exit shell on upgrade or uninstall action performed"
+#~ msgstr "ਅੱਪਗਰੇਡ ਜਾਂ ਅਣ-ਇੰਸਟਾਲ ਕਰਨ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਕਰੋ"
+
+#~ msgid ""
+#~ "Indicates whether to close the shell when a help action is performed."
+#~ msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਇੱਕ ਮੱਦਦ ਕਾਰਵਾਈ ਕਰਨ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਹੋ ਜਾਵੇ।"
+
+#~ msgid ""
+#~ "Indicates whether to close the shell when a start action is performed."
+#~ msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਇੱਕ ਕਾਰਵਾਈ ਸ਼ੁਰੂ ਹੋਣ ਦੇ ਦੌਰਾਨ ਸ਼ੈਲ ਬੰਦ ਹੋ ਜਾਵੇ।"
+
+#~ msgid ""
+#~ "Indicates whether to close the shell when an add or remove action is "
+#~ "performed."
+#~ msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਸ਼ਾਮਿਲ ਕਰਨ ਜਾਂ ਹਟਾਉਣ ਦੀ ਕਾਰਵਾਈ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਹੋਵੇ ਜਾਵੇ।"
+
+#~ msgid ""
+#~ "Indicates whether to close the shell when an upgrade or uninstall action "
+#~ "is performed."
+#~ msgstr "ਵੇਖਾਉਦਾ ਹੈ ਕਿ ਕੀ ਅੱਪਗਰੇਡ ਜਾਂ ਅਣ-ਇੰਸਟਾਲ ਕਾਰਵਾਈ ਦੇ ਦੌਰਾਨ ਸ਼ੈੱਲ ਬੰਦ ਹੋ ਜਾਵੇ।"
+
+#~ msgid "Task names and associated .desktop files"
+#~ msgstr "ਕੰਮ ਨਾਂ ਅਤੇ ਸਬੰਧਿਤ .desktop ਫਾਇਲਾਂ"
+
+#~ msgid ""
+#~ "The task name to be displayed in the control-center followed by a \";\" "
+#~ "separator then the filename of an associated .desktop file to launch for "
+#~ "that task."
+#~ msgstr ""
+#~ "ਕੰਟਰੋਲ-ਸੈਂਟਰ 'ਚ ਵੇਖਾਉਣ ਲਈ ਟਾਸਕ ਨਾਂ, ਜਿਸ ਦੇ ਬਾਅਦ \";\" ਹੋਵੇਗਾ, ਜਿਸ ਦੇ ਬਾਅਦ ਸਬੰਧਿਤ ."
+#~ "desktop ਫਾਇਲ ਨਾਂ, ਜੋ ਕਿ ਕੰਮ ਨੂੰ ਸ਼ੁਰੂ ਕਰੇਗੀ।"
+
+#~ msgid ""
+#~ "[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;"
+#~ "default-applications.desktop,Add Printer;gnome-cups-manager.desktop]"
+#~ msgstr ""
+#~ "[ਥੀਮ ਬਦਲੋ;gtk-theme-selector.desktop,ਪਸੰਦੀਦਾ ਐਪਲੀਕੇਸ਼ਨ ਸੈੱਟ ਕਰੋ;default-"
+#~ "applications.desktop,ਪਰਿੰਟਰ ਸ਼ਾਮਲ;gnome-cups-manager.desktop]"
+
+#~ msgid ""
+#~ "if true, the control-center will close when a \"Common Task\" is "
+#~ "activated."
+#~ msgstr "ਜੇ ਠੀਕ ਹੋਇਆ ਤਾਂ ਕੰਟਰੋਲ-ਕੇਂਦਰ ਬੰਦ ਹੋ ਜਾਵੇਗਾ, ਜਦੋਂ \"ਆਮ ਟਾਸਕ\" ਐਕਟੀਵੇਟਡ ਹੋ ਗਈ।"
+
+#~ msgid "The GNOME configuration tool"
+#~ msgstr "ਗਨੋਮ ਸੰਰਚਨਾ ਟੂਲ"
+
+#~ msgid "_Postpone Break"
+#~ msgstr "ਅੰਤਰਾਲ ਮੁਲਤਵੀ ਕਰੋ(_P)"
+
+#~ msgid "Take a break!"
+#~ msgstr "ਇੱਕ ਅੰਤਰਾਲ ਲਵੋ!"
+
+#~ msgid "_Take a Break"
+#~ msgstr "ਇੱਕ ਬਰੇਕ ਲਵੋ(_T)"
+
+#~ msgid "Take a break now (next in %dm)"
+#~ msgstr "ਹੁਣੇ ਅੰਤਰਾਲ ਲਵੋ ( %dm ਵਿੱਚ ਅੱਗੇ)"
+
+#~ msgid "%d minute until the next break"
+#~ msgid_plural "%d minutes until the next break"
+#~ msgstr[0] "ਅਗਲੇ ਅੰਤਰਾਲ ਲਈ %d ਮਿੰਟ ਰਹਿੰਦੇ ਹਨ"
+#~ msgstr[1] "ਅਗਲੇ ਅੰਤਰਾਲ ਲਈ %d ਮਿੰਟ ਰਹਿੰਦੇ ਹਨ"
+
+#~ msgid "Take a break now (next in less than one minute)"
+#~ msgstr "ਹੁਣੇ ਅੰਤਰਾਲ ਲਵੋ (ਇੱਕ ਮਿੰਟ ਤੋਂ ਘੱਟ ਅੱਗੇ)"
+
+#~ msgid "Less than one minute until the next break"
+#~ msgstr "ਅਗਲੇ ਅੰਤਰਾਲ ਲਈ ਇੱਕ ਤੋਂ ਘੱਟ ਮਿੰਟ ਰਹਿੰਦਾ ਹੈ"
+
+#~ msgid ""
+#~ "Unable to bring up the typing break properties dialog with the following "
+#~ "error: %s"
+#~ msgstr "ਟਾਇਪ ਅੰਤਰਾਲ ਵਿਸ਼ੇਸਤਾ ਡਾਈਲਾਗ ਲਿਆਉਣ ਵਿੱਚ ਅਸਫਲ, ਇਹ ਗਲਤੀ ਹੈ: %s"
+
+#~ msgid "Written by Richard Hult <richard@imendio.com>"
+#~ msgstr "ਰਿੱਚਡ ਹਲਟ <richard@imendio.com> ਨੇ ਲਿਖਿਆ ਹੈ"
+
+#~ msgid "Eye candy added by Anders Carlsson"
+#~ msgstr "ਅੰਨਡਰੇਸ ਕਾਰਲੇਸਨ ਨੇ ਆਈ ਕਨਡੀ ਜੋੜਿਆ"
+
+#~ msgid "A computer break reminder."
+#~ msgstr "ਕੰਪਿਊਟਰ ਅੰਤਰਾਲ ਯਾਦਗਾਰ ਹੈ।"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ ੨੦੦੪-੨੦੧੦\n"
+#~ "ਪੰਜਾਬੀ ਓਪਨਸੋਰਸ ਟੀਮ (POST)\n"
+#~ "http://www.satuj.com"
+
+#~ msgid "Enable debugging code"
+#~ msgstr "ਡੀਬੱਗਿੰਗ ਕੋਡ ਚਾਲੂ ਕਰੋ"
+
+#~ msgid "Don't check whether the notification area exists"
+#~ msgstr "ਜਾਂਚ ਨਾ ਕਰੋ ਕਿ ਕੀ ਨੋਟੀਫਿਕੇਸ਼ਨ ਖੇਤਰ ਮੌਜੂਦ ਹੈ"
+
+#~ msgid "Typing Monitor"
+#~ msgstr "ਲਿਖਣ ਨਿਗਰਾਨ"
+
+#~ msgid ""
+#~ "The typing monitor uses the notification area to display information. You "
+#~ "don't seem to have a notification area on your panel. You can add it by "
+#~ "right-clicking on your panel and choosing 'Add to panel', selecting "
+#~ "'Notification area' and clicking 'Add'."
+#~ msgstr ""
+#~ "ਟਾਇਪਇੰਗ ਨਿਗਰਾਨ ਸੂਚਨਾ-ਖੇਤਰ ਵਿੱਚ ਜਾਣਕਾਰੀ ਵੇਖਾਉਣ ਦੇ ਕੰਮ ਆਉਦਾ ਹੈ। ਤੁਹਾਡੇ ਪੈਨਲ ਵਿੱਚ ਸੂਚਨਾ-"
+#~ "ਖੇਤਰ ਹੈ ਹੀ ਨਹੀਂ। ਤੁਸੀ ਇਸ ਨੂੰ ਪੈਨਲ ਤੇ ਸੱਜਾ ਬਟਨ ਦਬਾਕੇ ਅਤੇ 'ਪੈਨਲ ਵਿੱਚ ਸ਼ਾਮਿਲ', 'ਸੂਚਨਾ-ਖੇਤਰ' "
+#~ "ਚੁਣਨ ਨਾਲ ਇਸ ਨੂੰ ਲਿਆ ਸਕਦੇ ਹੋ।"
+
+#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
+#~ msgstr "ਜੇਕਰ ਇਹ ਸੱਚ ਹੈ ਤਾਂ, ਓਪਨ-ਟਾਈਪ (OpenType) ਫੋਂਟ ਥੰਬਨੇਲ ਬਣ ਜਾਣਗੇ।"
+
+#~ msgid "If set to true, then PCF fonts will be thumbnailed."
+#~ msgstr "ਜੇਕਰ ਇਹ ਸੱਚ ਹੈ ਤਾਂ, ਪੀਸੀਐਫ (PCF) ਫੋਂਟ ਥੰਬਨੇਲ ਬਣ ਜਾਣਗੇ।"
+
+#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
+#~ msgstr "ਜੇਕਰ ਇਹ ਸੱਚ ਹੈ ਤਾਂ, ਟਰੂ-ਟਾਇਪ (TrueType) ਫੋਂਟ ਥੰਬਨੇਲ ਬਣ ਜਾਣਗੇ।"
+
+#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
+#~ msgstr "ਜੇਕਰ ਇਹ ਸੱਚ ਹੈ ਤਾਂ, Type1 ਫੋਂਟ ਥੰਬਨੇਲ ਬਣ ਜਾਣਗੇ।"
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for OpenType fonts."
+#~ msgstr "ਕਮਾਂਡ, ਜੋ ਫੋਂਟ ਓਪਨ-ਟਾਈਪ (OpenType) ਲਈ ਥੰਬਨੇਲ ਬਣਾਉਦੀ ਹੈ, ਨੂੰ ਇਹ ਸਵਿੱਚ ਦਿਓ।"
+
+#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
+#~ msgstr "ਕਮਾਂਡ, ਜੋ ਫੋਂਟ ਪੀਸੀਐਫ (PCF) ਲਈ ਥੰਬਨੇਲ ਬਣਾਉਦੀ ਹੈ, ਨੂੰ ਇਹ ਸਵਿੱਚ ਦਿਓ।"
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for TrueType fonts."
+#~ msgstr "ਕਮਾਂਡ, ਜੋ ਫੋਂਟ ਟਰੂ-ਟਾਈਪ (TrueType) ਲਈ ਥੰਬਨੇਲ ਬਣਾਉਦੀ ਹੈ, ਨੂੰ ਇਹ ਸਵਿੱਚ ਦਿਓ।"
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for Type1 fonts."
+#~ msgstr "ਕਮਾਂਡ, ਜੋ ਫੋਂਟ ਟਾਈਪ ੧ (Type1) ਲਈ ਥੰਬਨੇਲ ਬਣਾਉਦੀ ਹੈ, ਨੂੰ ਇਹ ਸਵਿੱਚ ਦਿਓ।"
+
+#~ msgid "Thumbnail command for OpenType fonts"
+#~ msgstr "ਫੋਂਟ ਓਪਨਟਾਈਪ (OpenType) ਲਈ ਥੰਬਨੇਲ ਕਮਾਂਡ"
+
+#~ msgid "Thumbnail command for PCF fonts"
+#~ msgstr "ਫੋਂਟ ਪੀਸੀਐਫ (PCF) ਲਈ ਥੰਬਨੇਲ ਕਮਾਂਡ"
+
+#~ msgid "Thumbnail command for TrueType fonts"
+#~ msgstr "ਫੋਂਟ ਟਰੂ-ਟਾਈਪ (TrueType) ਲਈ ਥੰਬਨੇਲ ਕਮਾਂਡ"
+
+#~ msgid "Thumbnail command for Type1 fonts"
+#~ msgstr "ਫੋਂਟ ਟਾਈਪ1 (Type1) ਲਈ ਥੰਬਨੇਲ ਕਮਾਂਡ"
+
+#~ msgid "Whether to thumbnail OpenType fonts"
+#~ msgstr "ਕੀ ਫੋਂਟ ਓਪਨ-ਟਾਈਪ(OpenType) ਨੂੰ ਥੰਬਨੇਲ ਕਰਨਾ ਹੈ"
+
+#~ msgid "Whether to thumbnail PCF fonts"
+#~ msgstr "ਕੀ ਫੋਂਟ ਪੀਸੀਐਫ(PCF) ਨੂੰ ਥੰਬਨੇਲ ਕਰਨਾ ਹੈ"
+
+#~ msgid "Whether to thumbnail TrueType fonts"
+#~ msgstr "ਕੀ ਫੋਂਟ ਟਰੂ-ਟਾਈਪ(TrueType) ਨੂੰ ਥੰਬਨੇਲ ਕਰਨਾ ਹੈ"
+
+#~ msgid "Whether to thumbnail Type1 fonts"
+#~ msgstr "ਕੀ ਫੋਂਟ ਟਾਈਪ1 (Type1) ਨੂੰ ਥੰਬਨੇਲ ਕਰਨਾ ਹੈ"
+
+#~ msgid "Name:"
+#~ msgstr "ਨਾਂ:"
+
+#~ msgid "Style:"
+#~ msgstr "ਸਟਾਈਲ:"
+
+#~ msgid "Type:"
+#~ msgstr "ਕਿਸਮ:"
+
+#~ msgid "Size:"
+#~ msgstr "ਅਕਾਰ:"
+
+#~ msgid "Copyright:"
+#~ msgstr "ਹੱਕ ਰਾਖਵੇਂ ਹਨ:"
+
+#~ msgid "Description:"
+#~ msgstr "ਵੇਰਵਾ:"
+
+#~ msgid "Installed"
+#~ msgstr "ਇੰਸਟਾਲ ਹੋਇਆ"
+
+#~ msgid "Install Failed"
+#~ msgstr "ਇੰਸਟਾਲ ਫੇਲ੍ਹ"
+
+#~ msgid "usage: %s fontfile\n"
+#~ msgstr "ਵਰਤੋਂ: %s fontfile\n"
+
+#~ msgid "I_nstall Font"
+#~ msgstr "ਫੋਂਟ ਇੰਸਟਾਲ ਕਰੋ(_n)"
+
+#~ msgid "Font Viewer"
+#~ msgstr "ਫੋਂਟ ਦਰਸ਼ਕ"
+
+#~ msgid "Preview fonts"
+#~ msgstr "ਫੋਂਟ ਝਲਕ"
+
+#~ msgid "Text to thumbnail (default: Aa)"
+#~ msgstr "ਥੰਬਨੇਲ ਕਰਨ ਲਈ ਟੈਕਸਟ (ਡਿਫਾਲਟ: Aa)"
+
+#~ msgid "TEXT"
+#~ msgstr "TEXT"
+
+#~ msgid "Font size (default: 64)"
+#~ msgstr "ਫੋਂਟ ਆਕਾਰ (ਡਿਫਾਲਟ: 64)"
+
+#~ msgid "SIZE"
+#~ msgstr "SIZE"
+
+#~ msgid "FONT-FILE OUTPUT-FILE"
+#~ msgstr "FONT-FILE OUTPUT-FILE"
 
 #~ msgid "_Jabber:"
 #~ msgstr "ਜੱਬਰ(_J):"
@@ -3872,9 +3512,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 #~ msgid "No matches found."
 #~ msgstr "ਕੋਈ ਮੇਲ ਨਹੀਂ"
 
-#~ msgid "Other"
-#~ msgstr "ਹੋਰ"
-
 #~ msgid "Start %s"
 #~ msgstr "%s ਸ਼ੁਰੂ"
 
@@ -3913,9 +3550,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "Network Servers"
 #~ msgstr "ਨੈੱਟਵਰਕ ਸਰਵਰ"
-
-#~ msgid "Search"
-#~ msgstr "ਖੋਜ"
 
 #~ msgid "<b>Open</b>"
 #~ msgstr "<b>ਖੋਲ੍ਹੋ</b>"
@@ -4228,9 +3862,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "<b>_Wallpaper</b>"
 #~ msgstr "<b>ਵਾਲਪੇਪਰ(_W)</b>"
-
-#~ msgid "No Wallpaper"
-#~ msgstr "ਵਾਲਪੇਪਰ ਨਹੀਂ"
 
 #~ msgid "Screen Resolution"
 #~ msgstr "ਸਕਰੀਨ ਰੈਜੋਲੇਸ਼ਨ"
@@ -4864,17 +4495,11 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 #~ msgid "<i>Small</i>"
 #~ msgstr "<i>ਛੋਟਾ</i>"
 
-#~ msgid "Buttons"
-#~ msgstr "ਬਟਨ"
-
 #~ msgid "Motion"
 #~ msgstr "ਗਤੀ"
 
 #~ msgid "      "
 #~ msgstr "      "
-
-#~ msgid "Volume"
-#~ msgstr "ਵਾਲੀਅਮ"
 
 #~ msgid ""
 #~ "You just held down the Shift key for 8 seconds.  This is the shortcut for "
