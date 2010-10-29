@@ -29,13 +29,14 @@
 #include <string.h>
 
 
-static void
+static int
 application_command_line_cb (GApplication  *application,
 			     GApplicationCommandLine  *command_line,
 			     GnomeControlCenter      *shell)
 {
   int argc;
   char **argv;
+  int retval = 0;
 
   argv = g_application_command_line_get_arguments (command_line, &argc);
   if (argc == 2)
@@ -49,6 +50,7 @@ application_command_line_cb (GApplication  *application,
         {
           g_warning ("Could not load setting panel \"%s\": %s", start_id,
                      (err) ? err->message : "Unknown error");
+          retval = 1;
           if (err)
             {
               g_error_free (err);
@@ -57,6 +59,7 @@ application_command_line_cb (GApplication  *application,
         }
     }
   g_strfreev (argv);
+  return retval;
 }
 
 static void
