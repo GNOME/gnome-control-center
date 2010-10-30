@@ -56,10 +56,11 @@
                 <property name="column_spacing">6</property>
                 <property name="row_spacing">6</property>
                 <child>
-                  <object class="GtkComboBoxEntry" id="username-combo">
+                  <object class="GtkComboBoxText" id="username-combo">
                     <property name="visible">True</property>
+                    <property name="has_entry">True</property>
+                    <property name="entry_text_column">0</property>
                     <property name="model">username-model</property>
-                    <property name="text_column">0</property>
                     <child internal-child="entry">
                       <object class="GtkEntry" id="username-entry">
                         <property name="activates_default">True</property>
