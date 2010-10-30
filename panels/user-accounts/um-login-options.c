@@ -390,14 +390,16 @@ um_login_options_new (GtkBuilder *builder)
                           G_CALLBACK (update_login_options), um);
 
         um->permission = polkit_permission_new_sync ("org.freedesktop.accounts.set-login-option", NULL, NULL, NULL);
-        widget = um_lock_button_new (um->permission);
-        gtk_widget_show (widget);
-        box = (GtkWidget *)gtk_builder_get_object (builder, "lockbutton-alignment");
-        gtk_container_add (GTK_CONTAINER (box), widget);
-        g_signal_connect (widget, "changed",
-                          G_CALLBACK (lockbutton_changed), um);
-        lockbutton_changed (UM_LOCK_BUTTON (widget), um);
-        um->lock_button = widget;
+        if (um->permission != NULL) {
+                widget = um_lock_button_new (um->permission);
+                gtk_widget_show (widget);
+                box = (GtkWidget *)gtk_builder_get_object (builder, "lockbutton-alignment");
+                gtk_container_add (GTK_CONTAINER (box), widget);
+                g_signal_connect (widget, "changed",
+                                  G_CALLBACK (lockbutton_changed), um);
+                lockbutton_changed (UM_LOCK_BUTTON (widget), um);
+                um->lock_button = widget;
+        }
 
         error = NULL;
         um->connection = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);

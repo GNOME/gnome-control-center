@@ -558,7 +558,9 @@ selected_user_changed (GtkTreeSelection *selection, UmUserPanelPrivate *d)
         if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
                 gtk_tree_model_get (model, &iter, USER_COL, &user, -1);
                 show_user (user, d);
-                lockbutton_changed (UM_LOCK_BUTTON (d->lock_button), d);
+                if (d->lock_button != NULL) {
+                        lockbutton_changed (UM_LOCK_BUTTON (d->lock_button), d);
+                }
                 g_object_unref (user);
         }
 }
@@ -1153,15 +1155,18 @@ setup_main_window (UmUserPanelPrivate *d)
                           G_CALLBACK (change_fingerprint), d);
 
         d->permission = polkit_permission_new_sync ("org.freedesktop.accounts.user-administration", NULL, NULL, NULL);
-        button = um_lock_button_new (d->permission);
-        gtk_widget_set_margin_top (button, 12);
-        gtk_widget_show (button);
-        box = get_widget (d, "userlist-vbox");
-        gtk_box_pack_end (GTK_BOX (box), button, FALSE, FALSE, 0);
-        g_signal_connect (button, "changed",
-                          G_CALLBACK (lockbutton_changed), d);
-        lockbutton_changed (UM_LOCK_BUTTON (button), d);
-        d->lock_button = button;
+        if (d->permission != NULL) {
+                /* accounts service not available? */
+                button = um_lock_button_new (d->permission);
+                gtk_widget_set_margin_top (button, 12);
+                gtk_widget_show (button);
+                box = get_widget (d, "userlist-vbox");
+                gtk_box_pack_end (GTK_BOX (box), button, FALSE, FALSE, 0);
+                g_signal_connect (button, "changed",
+                                  G_CALLBACK (lockbutton_changed), d);
+                lockbutton_changed (UM_LOCK_BUTTON (button), d);
+                d->lock_button = button;
+        }
 
         button = get_widget (d, "add-user-button");
         names[0] = "changes-prevent-symbolic";
