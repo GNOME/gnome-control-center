@@ -126,6 +126,10 @@ is_username_used (const gchar *username)
 {
         struct passwd *pwent;
 
+        if (username == NULL || username[0] == '\0') {
+                return FALSE;
+        }
+
         pwent = getpwnam (username);
 
         return pwent != NULL;
@@ -146,9 +150,15 @@ username_changed (GtkComboBoxText *combo,
 
         username = gtk_combo_box_text_get_active_text (combo);
 
-        in_use = is_username_used (username);
-        empty = username[0] == 0;
-        toolong = strlen (username) > MAXNAMELEN;
+        if (username == NULL || username[0] == '\0') {
+                empty = TRUE;
+                in_use = FALSE;
+                toolong = FALSE;
+        } else {
+                empty = FALSE;
+                in_use = is_username_used (username);
+                toolong = strlen (username) > MAXNAMELEN;
+        }
         valid = TRUE;
 
         if (!in_use && !empty && !toolong) {
