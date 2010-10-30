@@ -8,6 +8,7 @@ SUBDIRS= \
 	default-applications \
 	keybindings \
 	universal-access \
+	user-accounts \
 	datetime
 
 -include $(top_srcdir)/git.mk

@@ -94,7 +94,7 @@ PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-3.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
-PKG_CHECK_MODULES(GIO, gio-2.0)
+PKG_CHECK_MODULES(GIO, gio-2.0 gio-unix-2.0)
 PKG_CHECK_MODULES(XML, libxml-2.0)
 PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION)
 AC_SUBST(CANBERRA_CFLAGS)
@@ -111,6 +111,16 @@ GTK_ENGINE_DIR="$gtk_lib_dir/gtk-3.0/$gtk_binary_version/engines"
 AC_SUBST(GTK_ENGINE_DIR)
 
 PKG_CHECK_MODULES(GLIB, glib-2.0)
+
+PKG_CHECK_MODULES(POLKIT, polkit-gobject-1)
+PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 2.29.90, have_cheese=yes, have_cheese=no)
+
+if test x$have_cheese = xyes ; then
+        AC_DEFINE(HAVE_CHEESE, 1, [Define to 1 to enable cheese webcam support])
+fi
+
+AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["`$PKG_CONFIG --variable=prefix iso-codes`"],[ISO codes prefix])
+ISO_CODES=iso-codes
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
@@ -361,6 +371,10 @@ panels/sound/data/icons/scalable/devices/Makefile
 panels/sound/data/sounds/Makefile
 panels/universal-access/Makefile
 panels/universal-access/gnome-universal-access-panel.desktop.in
+panels/user-accounts/Makefile
+panels/user-accounts/data/Makefile
+panels/user-accounts/data/gnome-user-accounts-panel.desktop.in
+panels/user-accounts/data/icons/Makefile
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in
