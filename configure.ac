@@ -75,13 +75,19 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-COMMON_MODULES="gtk+-3.0 >= 2.90.0
- glib-2.0 >= 2.25.11
+GLIB_REQUIRED_VERSION=2.25.11
+GTK_REQUIRED_VERSION=2.91.0
+DESKTOP_SCHEMAS_REQUIRED_VERSION=0.0.2
+PA_REQUIRED_VERSION=0.9.16
+CANBERRA_REQUIRED_VERSION=0.13
+
+COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
+ glib-2.0 >= $GLIB_REQUIRED_VERSION
  gthread-2.0
  gio-2.0
  gconf-2.0
  libxml-2.0
- gsettings-desktop-schemas >= 0.0.2"
+ gsettings-desktop-schemas >= $DESKTOP_SCHEMAS_REQUIRED_VERSION"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
@@ -90,6 +96,14 @@ PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 PKG_CHECK_MODULES(GIO, gio-2.0)
 PKG_CHECK_MODULES(XML, libxml-2.0)
+PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION)
+AC_SUBST(CANBERRA_CFLAGS)
+AC_SUBST(CANBERRA_LIBS)
+PKG_CHECK_MODULES(PULSEAUDIO,
+          libpulse >= $PA_REQUIRED_VERSION
+          libpulse-mainloop-glib >= $PA_REQUIRED_VERSION)
+AC_SUBST(PULSEAUDIO_CFLAGS)
+AC_SUBST(PULSEAUDIO_LIBS)
 
 gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-3.0`
 gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-3.0`
@@ -320,6 +334,31 @@ panels/mouse/Makefile
 panels/mouse/gnome-mouse-panel.desktop.in
 panels/network/Makefile
 panels/network/gnome-network-panel.desktop.in
+panels/sound/Makefile
+panels/sound/data/Makefile
+panels/sound/data/gnome-sound-panel.desktop.in
+panels/sound/data/symbolic-icons/Makefile
+panels/sound/data/symbolic-icons/scalable/Makefile
+panels/sound/data/symbolic-icons/scalable/status/Makefile
+panels/sound/data/icons/Makefile
+panels/sound/data/icons/16x16/Makefile
+panels/sound/data/icons/16x16/apps/Makefile
+panels/sound/data/icons/16x16/status/Makefile
+panels/sound/data/icons/22x22/Makefile
+panels/sound/data/icons/22x22/apps/Makefile
+panels/sound/data/icons/22x22/status/Makefile
+panels/sound/data/icons/24x24/Makefile
+panels/sound/data/icons/24x24/apps/Makefile
+panels/sound/data/icons/24x24/status/Makefile
+panels/sound/data/icons/32x32/Makefile
+panels/sound/data/icons/32x32/apps/Makefile
+panels/sound/data/icons/32x32/status/Makefile
+panels/sound/data/icons/48x48/Makefile
+panels/sound/data/icons/48x48/apps/Makefile
+panels/sound/data/icons/scalable/Makefile
+panels/sound/data/icons/scalable/apps/Makefile
+panels/sound/data/icons/scalable/devices/Makefile
+panels/sound/data/sounds/Makefile
 panels/universal-access/Makefile
 panels/universal-access/gnome-universal-access-panel.desktop.in
 po/Makefile.in

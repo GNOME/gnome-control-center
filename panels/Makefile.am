@@ -4,6 +4,7 @@ SUBDIRS= \
 	mouse \
 	keyboard \
 	network \
+	sound \
 	default-applications \
 	keybindings \
 	universal-access \
