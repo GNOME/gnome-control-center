@@ -103,7 +103,7 @@ accept_account_dialog (GtkButton       *button,
         GtkTreeIter iter;
 
         name = gtk_entry_get_text (GTK_ENTRY (um->name_entry));
-        username = gtk_combo_box_get_active_text (GTK_COMBO_BOX (um->username_combo));
+        username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (um->username_combo));
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (um->account_type_combo));
         gtk_combo_box_get_active_iter (GTK_COMBO_BOX (um->account_type_combo), &iter);
         gtk_tree_model_get (model, &iter, 1, &account_type, -1);
@@ -132,8 +132,8 @@ is_username_used (const gchar *username)
 }
 
 static void
-username_changed (GtkComboBox     *combo,
-                   UmAccountDialog *um)
+username_changed (GtkComboBoxText *combo,
+                  UmAccountDialog *um)
 {
         gboolean in_use;
         gboolean empty;
@@ -144,7 +144,7 @@ username_changed (GtkComboBox     *combo,
         gchar *tip;
         GtkWidget *entry;
 
-        username = gtk_combo_box_get_active_text (combo);
+        username = gtk_combo_box_text_get_active_text (combo);
 
         in_use = is_username_used (username);
         empty = username[0] == 0;
@@ -349,7 +349,7 @@ name_changed (GtkEntry        *name_entry,
 
         in_use = is_username_used (item1->str);
         if (nwords2 > 0 && !in_use && !g_ascii_isdigit (item1->str[0])) {
-                gtk_combo_box_append_text (GTK_COMBO_BOX (um->username_combo), item1->str);
+                gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (um->username_combo), item1->str);
                 g_hash_table_insert (items, item1->str, item1->str);
         }
 
@@ -359,21 +359,21 @@ name_changed (GtkEntry        *name_entry,
                 in_use = is_username_used (item2->str);
                 if (!in_use && !g_ascii_isdigit (item2->str[0]) &&
                     !g_hash_table_lookup (items, item2->str)) {
-                        gtk_combo_box_append_text (GTK_COMBO_BOX (um->username_combo), item2->str);
+                        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (um->username_combo), item2->str);
                         g_hash_table_insert (items, item2->str, item2->str);
                 }
 
                 in_use = is_username_used (item3->str);
                 if (!in_use && !g_ascii_isdigit (item3->str[0]) &&
                     !g_hash_table_lookup (items, item3->str)) {
-                        gtk_combo_box_append_text (GTK_COMBO_BOX (um->username_combo), item3->str);
+                        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (um->username_combo), item3->str);
                         g_hash_table_insert (items, item3->str, item3->str);
                 }
 
                 in_use = is_username_used (item4->str);
                 if (!in_use && !g_ascii_isdigit (item4->str[0]) &&
                     !g_hash_table_lookup (items, item4->str)) {
-                        gtk_combo_box_append_text (GTK_COMBO_BOX (um->username_combo), item4->str);
+                        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (um->username_combo), item4->str);
                         g_hash_table_insert (items, item4->str, item4->str);
                 }
 
@@ -381,7 +381,7 @@ name_changed (GtkEntry        *name_entry,
                 in_use = is_username_used (last_word->str);
                 if (!in_use && !g_ascii_isdigit (last_word->str[0]) &&
                     !g_hash_table_lookup (items, last_word->str)) {
-                        gtk_combo_box_append_text (GTK_COMBO_BOX (um->username_combo), last_word->str);
+                        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (um->username_combo), last_word->str);
                         g_hash_table_insert (items, last_word->str, last_word->str);
                 }
 
@@ -389,7 +389,7 @@ name_changed (GtkEntry        *name_entry,
                 in_use = is_username_used (first_word->str);
                 if (!in_use && !g_ascii_isdigit (first_word->str[0]) &&
                     !g_hash_table_lookup (items, first_word->str)) {
-                        gtk_combo_box_append_text (GTK_COMBO_BOX (um->username_combo), first_word->str);
+                        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (um->username_combo), first_word->str);
                         g_hash_table_insert (items, first_word->str, first_word->str);
                 }
         }
