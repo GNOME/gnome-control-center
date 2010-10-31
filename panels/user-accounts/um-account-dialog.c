@@ -223,7 +223,7 @@ name_changed (GtkEntry        *name_entry,
         char *c;
         char *unicode_fallback = "?";
         GString *first_word, *last_word;
-        GString *item1, *item2, *item3, *item4;
+        GString *item0, *item1, *item2, *item3, *item4;
         int len;
         int nwords1, nwords2, i;
         GHashTable *items;
@@ -277,6 +277,9 @@ name_changed (GtkEntry        *name_entry,
         words1 = g_strsplit_set (stripped_name, " ", -1);
         len = g_strv_length (words1);
 
+        /* The default item is a concatenation of all words without ? */
+        item0 = g_string_sized_new (strlen (stripped_name));
+
         g_free (ascii_name);
         g_free (lc_name);
         g_free (stripped_name);
@@ -313,6 +316,8 @@ name_changed (GtkEntry        *name_entry,
                         continue;
 
                 nwords1++; /* count real words, excluding empty string */
+
+                item0 = g_string_append (item0, *w1);
 
                 words2 = g_strsplit_set (*w1, "-", -1);
                 /* reset last word if a new non-empty word has been found */
@@ -356,6 +361,12 @@ name_changed (GtkEntry        *name_entry,
         item4 = g_string_prepend (item4, last_word->str);
 
         items = g_hash_table_new (g_str_hash, g_str_equal);
+
+        in_use = is_username_used (item0->str);
+        if (!in_use && !g_ascii_isdigit (item0->str[0])) {
+                gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (um->username_combo), item0->str);
+                g_hash_table_insert (items, item0->str, item0->str);
+        }
 
         in_use = is_username_used (item1->str);
         if (nwords2 > 0 && !in_use && !g_ascii_isdigit (item1->str[0])) {
@@ -409,6 +420,7 @@ name_changed (GtkEntry        *name_entry,
         g_strfreev (words1);
         g_string_free (first_word, TRUE);
         g_string_free (last_word, TRUE);
+        g_string_free (item0, TRUE);
         g_string_free (item1, TRUE);
         g_string_free (item2, TRUE);
         g_string_free (item3, TRUE);
