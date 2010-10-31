@@ -56,6 +56,8 @@ struct _GnomeControlCenterPrivate
 {
   GtkBuilder *builder;
   GtkWidget  *notebook;
+  GtkWidget  *main_vbox;
+  GtkWidget  *scrolled_window;
   GtkWidget  *window;
   GtkWidget  *search_entry;
 
@@ -72,8 +74,6 @@ struct _GnomeControlCenterPrivate
 
   gchar *default_window_title;
   gchar *default_window_icon;
-
-  gint overview_height;
 };
 
 /* Use a fixed width for the shell, since resizing horizontally is more awkward
@@ -125,7 +125,7 @@ activate_panel (GnomeControlCenter *shell,
         {
           GtkWidget *panel;
           GtkWidget *box;
-          gint i, old_page;
+          gint i;
           int nat_height;
 
           /* create the panel plugin */
@@ -135,17 +135,6 @@ activate_panel (GnomeControlCenter *shell,
           gtk_alignment_set_padding (GTK_ALIGNMENT (box), 6, 6, 6, 6);
 
           gtk_container_add (GTK_CONTAINER (box), panel);
-
-          old_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->notebook));
-
-          /* store the old size */
-          if (old_page == OVERVIEW_PAGE)
-            {
-              GtkAllocation alloc;
-
-              gtk_widget_get_allocation (priv->window, &alloc);
-              priv->overview_height = alloc.height;
-            }
 
           i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box,
                                         NULL);
@@ -160,11 +149,17 @@ activate_panel (GnomeControlCenter *shell,
 
           gtk_widget_show (panel);
 
+          /* set the scrolled window small so that it doesn't force
+             the window to be larger than this panel */
+          gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), 50);
+
           /* resize to the preferred size of the panel */
           gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
           gtk_widget_get_preferred_height (GTK_WIDGET (priv->window),
                                            NULL, &nat_height);
-          gtk_window_resize (GTK_WINDOW (priv->window), FIXED_WIDTH,
+          g_debug ("Setting panel height: %d", nat_height);
+          gtk_window_resize (GTK_WINDOW (priv->window),
+                             FIXED_WIDTH,
                              nat_height);
           return;
         }
@@ -216,7 +211,6 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
 
   gtk_notebook_remove_page (GTK_NOTEBOOK (priv->notebook), CAPPLET_PAGE);
 
-
   /* clear the search text */
   g_free (priv->filter_string);
   priv->filter_string = g_strdup ("");
@@ -226,20 +220,7 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   gtk_window_set_title (GTK_WINDOW (priv->window), priv->default_window_title);
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
                             priv->default_window_icon);
-
-  /* resize back to the original overview height */
-  if (priv->overview_height > 0)
-    {
-      gtk_widget_set_size_request (priv->window,
-                                   FIXED_WIDTH,
-                                   priv->overview_height);
-      gtk_window_resize (GTK_WINDOW (priv->window),
-                         FIXED_WIDTH,
-                         priv->overview_height);
-    }
 }
-
-
 
 static void
 item_activated_cb (CcShellCategoryView *view,
@@ -293,14 +274,10 @@ category_focus_in (GtkWidget          *view,
 static GList *
 get_item_views (GnomeControlCenter *shell)
 {
-  GnomeControlCenterPrivate *priv = shell->priv;
-  GtkWidget *vbox;
   GList *list, *l;
   GList *res;
 
-  vbox = W (priv->builder, "main-vbox");
-
-  list = gtk_container_get_children (GTK_CONTAINER (vbox));
+  list = gtk_container_get_children (GTK_CONTAINER (shell->priv->main_vbox));
   res = NULL;
   for (l = list; l; l = l->next)
     {
@@ -601,16 +578,12 @@ fill_model (GnomeControlCenter *shell)
   GSList *list, *l;
   GMenuTreeDirectory *d;
   GMenuTree *tree;
-  GtkWidget *vbox;
-  GtkWidget *sw;
 
   GnomeControlCenterPrivate *priv = shell->priv;
 
-  vbox = W (priv->builder, "main-vbox");
-  gtk_container_set_border_width (GTK_CONTAINER (vbox), 10);
-  sw = W (priv->builder, "scrolledwindow1");
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (vbox),
-                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw)));
+  gtk_container_set_border_width (GTK_CONTAINER (shell->priv->main_vbox), 10);
+  gtk_container_set_focus_vadjustment (GTK_CONTAINER (shell->priv->main_vbox),
+                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (shell->priv->scrolled_window)));
 
   tree = gmenu_tree_lookup (MENUDIR "/gnomecc.menu", 0);
 
@@ -649,7 +622,7 @@ fill_model (GnomeControlCenter *shell)
                                                   g_strdup (dir_name), g_free);
 
           categoryview = cc_shell_category_view_new (dir_name, filter);
-          gtk_box_pack_start (GTK_BOX (vbox), categoryview, FALSE, TRUE, 0);
+          gtk_box_pack_start (GTK_BOX (shell->priv->main_vbox), categoryview, FALSE, TRUE, 0);
           g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
                             "desktop-item-activated",
                             G_CALLBACK (item_activated_cb), shell);
@@ -913,26 +886,39 @@ gnome_control_center_class_init (GnomeControlCenterClass *klass)
 }
 
 static void
-vbox_style_set_cb (GtkWidget *widget,
-                   GtkStyle  *old_style)
+on_window_size_allocate (GtkWidget          *widget,
+                         GtkAllocation      *allocation,
+                         GnomeControlCenter *self)
 {
-  GtkWidget *parent;
-  GtkStyle *style;
+  int height;
 
-  parent = gtk_widget_get_parent (widget);
-  style = gtk_widget_get_style (widget);
-  gtk_widget_modify_bg (parent, GTK_STATE_NORMAL,
-                        &style->base[GTK_STATE_NORMAL]);
-  gtk_widget_modify_fg (parent, GTK_STATE_NORMAL,
-                        &style->text[GTK_STATE_NORMAL]);
+  if (gtk_notebook_get_current_page (GTK_NOTEBOOK (self->priv->notebook)) == OVERVIEW_PAGE)
+    {
+      int          monitor;
+      GdkScreen   *screen;
+      GdkRectangle rect;
+      screen = gtk_widget_get_screen (widget);
+      monitor = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (widget));
+      gdk_screen_get_monitor_geometry (screen, monitor, &rect);
 
+      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self->priv->main_vbox),
+                                                 FIXED_WIDTH,
+                                                 NULL,
+                                                 &height);
+      height = MIN (height + 10, rect.height);
+    }
+  else
+    {
+      height = 50;
+    }
+
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window), height);
 }
 
 static void
 gnome_control_center_init (GnomeControlCenter *self)
 {
   GError *err = NULL;
-  GtkWidget *vbox;
   GnomeControlCenterPrivate *priv;
 
   priv = self->priv = CONTROL_CENTER_PRIVATE (self);
@@ -953,23 +939,15 @@ gnome_control_center_init (GnomeControlCenter *self)
   g_signal_connect_swapped (priv->window, "delete-event", G_CALLBACK (g_object_unref), self);
 
   priv->notebook = W (priv->builder, "notebook");
-
+  priv->scrolled_window = W (priv->builder, "scrolledwindow1");
+  gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
+  priv->main_vbox = W (priv->builder, "main-vbox");
+  g_signal_connect (priv->scrolled_window, "size-allocate", G_CALLBACK (on_window_size_allocate), self);
   g_signal_connect (priv->notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page_cb), priv);
 
   g_signal_connect (gtk_builder_get_object (priv->builder, "home-button"),
                     "clicked", G_CALLBACK (home_button_clicked_cb), self);
-
-
-  /* setup background colours */
-  vbox = W (priv->builder, "main-vbox");
-  gtk_widget_set_size_request (vbox, 0, -1);
-
-  /* make sure the background of the vbox uses base/text colour combinations
-   * and is updated if the style changes */
-  vbox_style_set_cb (vbox, NULL);
-  g_signal_connect (vbox, "style-set", G_CALLBACK (vbox_style_set_cb),
-                    NULL);
 
   /* load the available settings panels */
   fill_model (self);
