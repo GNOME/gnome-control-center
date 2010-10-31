@@ -38,8 +38,6 @@ struct _CcShellCategoryViewPrivate
 {
   gchar *name;
   GtkTreeModel *model;
-
-  GtkWidget *header;
   GtkWidget *iconview;
 };
 
@@ -120,8 +118,8 @@ static void
 cc_shell_category_view_constructed (GObject *object)
 {
   CcShellCategoryViewPrivate *priv = CC_SHELL_CATEGORY_VIEW (object)->priv;
-  gchar *header_name;
-  GtkWidget *iconview, *vbox, *header, *self;
+  GtkWidget *iconview, *vbox, *self;
+  GtkWidget *alignment;
 
   self = GTK_WIDGET (object);
 
@@ -132,59 +130,33 @@ cc_shell_category_view_constructed (GObject *object)
 
   gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (iconview), COL_PIXBUF);
   gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), COL_NAME);
-  gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 120);
+  gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 100);
 
   /* create the header if required */
   if (priv->name)
     {
-      header_name = g_strdup_printf ("<b>%s</b>", priv->name);
+      GtkWidget *label;
+      PangoAttrList *attrs;
 
-      header = g_object_new (GTK_TYPE_LABEL,
-                             "use-markup", TRUE,
-                             "label", header_name,
-                             "wrap", TRUE,
-                             "xalign", 0.0,
-                             "xpad", 6,
-                             NULL);
-
-      g_free (header_name);
-      gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, TRUE, 3);
-
-      priv->header = header;
+      label = gtk_label_new (priv->name);
+      attrs = pango_attr_list_new ();
+      pango_attr_list_insert (attrs, pango_attr_weight_new (PANGO_WEIGHT_BOLD));
+      gtk_label_set_attributes (GTK_LABEL (label), attrs);
+      pango_attr_list_unref (attrs);
+      gtk_frame_set_label_widget (GTK_FRAME (object), label);
     }
 
   /* add the iconview to the vbox */
   gtk_box_pack_start (GTK_BOX (vbox), iconview, FALSE, TRUE, 0);
 
   /* add the main vbox to the view */
-  gtk_container_add (GTK_CONTAINER (object), vbox);
-  gtk_widget_show_all (vbox);
+  alignment = gtk_alignment_new (0, 0, 1, 1);
+  gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
+  gtk_container_add (GTK_CONTAINER (alignment), vbox);
+  gtk_container_add (GTK_CONTAINER (object), alignment);
+  gtk_widget_show_all (alignment);
 
   priv->iconview = iconview;
-}
-
-static void
-cc_shell_category_view_style_set (GtkWidget *widget,
-                                  GtkStyle  *old_style)
-{
-  CcShellCategoryViewPrivate *priv = CC_SHELL_CATEGORY_VIEW (widget)->priv;
-  GtkStyle *style = gtk_widget_get_style (widget);
-
-  if (priv->header)
-    {
-      gtk_widget_modify_bg (priv->header, GTK_STATE_NORMAL,
-                            &style->base[GTK_STATE_NORMAL]);
-      gtk_widget_modify_fg (priv->header, GTK_STATE_NORMAL,
-                            &style->text[GTK_STATE_NORMAL]);
-    }
-
-  if (priv->iconview)
-    {
-      gtk_widget_modify_bg (priv->iconview, GTK_STATE_NORMAL,
-                            &style->base[GTK_STATE_NORMAL]);
-      gtk_widget_modify_fg (priv->iconview, GTK_STATE_NORMAL,
-                            &style->text[GTK_STATE_NORMAL]);
-    }
 }
 
 static void
@@ -192,7 +164,6 @@ cc_shell_category_view_class_init (CcShellCategoryViewClass *klass)
 {
   GParamSpec *pspec;
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcShellCategoryViewPrivate));
 
@@ -201,8 +172,6 @@ cc_shell_category_view_class_init (CcShellCategoryViewClass *klass)
   object_class->dispose = cc_shell_category_view_dispose;
   object_class->finalize = cc_shell_category_view_finalize;
   object_class->constructed = cc_shell_category_view_constructed;
-
-  widget_class->style_set = cc_shell_category_view_style_set;
 
   pspec = g_param_spec_string ("name",
                                "Name",

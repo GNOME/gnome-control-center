@@ -607,6 +607,7 @@ fill_model (GnomeControlCenter *shell)
   GnomeControlCenterPrivate *priv = shell->priv;
 
   vbox = W (priv->builder, "main-vbox");
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 10);
   sw = W (priv->builder, "scrolledwindow1");
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (vbox),
                                        gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw)));
@@ -648,7 +649,7 @@ fill_model (GnomeControlCenter *shell)
                                                   g_strdup (dir_name), g_free);
 
           categoryview = cc_shell_category_view_new (dir_name, filter);
-          gtk_box_pack_start (GTK_BOX (vbox), categoryview, FALSE, TRUE, 6);
+          gtk_box_pack_start (GTK_BOX (vbox), categoryview, FALSE, TRUE, 0);
           g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
                             "desktop-item-activated",
                             G_CALLBACK (item_activated_cb), shell);
