@@ -152,169 +152,151 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="repeat_table">
+                                  <object class="GtkTable" id="table1">
                                     <property name="visible">True</property>
-                                    <property name="spacing">12</property>
+                                    <property name="n_rows">2</property>
+                                    <property name="n_columns">4</property>
                                     <child>
-                                      <object class="GtkVBox" id="vbox24">
+                                      <object class="GtkLabel" id="repeat_delay_label">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
-                                        <property name="spacing">6</property>
-                                        <child>
-                                          <object class="GtkLabel" id="repeat_delay_label">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">_Delay:</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="justify">center</property>
-                                            <property name="mnemonic_widget">repeat_delay_scale</property>
-                                          </object>
-                                          <packing>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="repeat_speed_label">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">_Speed:</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="justify">center</property>
-                                            <property name="mnemonic_widget">repeat_speed_scale</property>
-                                          </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">_Delay:</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="justify">center</property>
+                                        <property name="mnemonic_widget">repeat_delay_scale</property>
                                       </object>
                                       <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">0</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkVBox" id="vbox25">
+                                      <object class="GtkLabel" id="repeat_speed_label">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
-                                        <property name="spacing">6</property>
-                                        <child>
-                                          <object class="GtkLabel" id="delay_short_label">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">1</property>
-                                            <property name="xpad">10</property>
-                                            <property name="label" translatable="yes">Short</property>
-                                            <attributes>
-                                              <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.830000"/>
-                                            </attributes>
-                                          </object>
-                                          <packing>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="repeat_slow_label">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">1</property>
-                                            <property name="xpad">10</property>
-                                            <property name="label" translatable="yes">Slow</property>
-                                            <attributes>
-                                              <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.830000"/>
-                                            </attributes>
-                                          </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">_Speed:</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="justify">center</property>
+                                        <property name="mnemonic_widget">repeat_speed_scale</property>
                                       </object>
                                       <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">1</property>
+                                        <property name="top_attach">1</property>
+                                        <property name="bottom_attach">2</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkVBox" id="vbox26">
+                                      <object class="GtkLabel" id="delay_short_label">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
-                                        <property name="spacing">6</property>
-                                        <child>
-                                          <object class="GtkHScale" id="repeat_delay_scale">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="adjustment">adjustment1</property>
-                                            <property name="draw_value">False</property>
-                                          </object>
-                                          <packing>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkHScale" id="repeat_speed_scale">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="adjustment">adjustment2</property>
-                                            <property name="draw_value">False</property>
-                                            <child internal-child="accessible">
-                                              <object class="AtkObject" id="repeat_speed_scale-atkobject">
-                                                <property name="AtkObject::accessible-description" translatable="yes">Repeat keys speed</property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="xalign">1</property>
+                                        <property name="xpad">10</property>
+                                        <property name="label" translatable="yes">Short</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.830000"/>
+                                        </attributes>
                                       </object>
                                       <packing>
-                                        <property name="position">2</property>
+                                        <property name="left_attach">1</property>
+                                        <property name="right_attach">2</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkVBox" id="vbox27">
+                                      <object class="GtkLabel" id="repeat_slow_label">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
-                                        <property name="spacing">6</property>
-                                        <child>
-                                          <object class="GtkLabel" id="delay_long_label">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">Long</property>
-                                            <attributes>
-                                              <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.830000"/>
-                                            </attributes>
+                                        <property name="xalign">1</property>
+                                        <property name="xpad">10</property>
+                                        <property name="label" translatable="yes">Slow</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.830000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">1</property>
+                                        <property name="right_attach">2</property>
+                                        <property name="top_attach">1</property>
+                                        <property name="bottom_attach">2</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkHScale" id="repeat_delay_scale">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="adjustment">adjustment1</property>
+                                        <property name="draw_value">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">2</property>
+                                        <property name="right_attach">3</property>
+                                        <property name="y_options"></property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkHScale" id="repeat_speed_scale">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="adjustment">adjustment2</property>
+                                        <property name="draw_value">False</property>
+                                        <child internal-child="accessible">
+                                          <object class="AtkObject" id="repeat_speed_scale-atkobject">
+                                            <property name="AtkObject::accessible-description" translatable="yes">Repeat keys speed</property>
                                           </object>
-                                          <packing>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="repeat_fast_label">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">Fast</property>
-                                            <attributes>
-                                              <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.830000"/>
-                                            </attributes>
-                                          </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
                                         </child>
                                       </object>
                                       <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">3</property>
+                                        <property name="left_attach">2</property>
+                                        <property name="right_attach">3</property>
+                                        <property name="top_attach">1</property>
+                                        <property name="bottom_attach">2</property>
+                                        <property name="y_options"></property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="delay_long_label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">Long</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.830000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">3</property>
+                                        <property name="right_attach">4</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="repeat_fast_label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">Fast</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.830000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">3</property>
+                                        <property name="right_attach">4</property>
+                                        <property name="top_attach">1</property>
+                                        <property name="bottom_attach">2</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
                                       </packing>
                                     </child>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
+                                    <property name="fill">False</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
@@ -325,12 +307,15 @@
                             </child>
                           </object>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -389,9 +374,9 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="cursor_hbox">
+                                  <object class="GtkTable" id="table3">
                                     <property name="visible">True</property>
-                                    <property name="spacing">12</property>
+                                    <property name="n_columns">4</property>
                                     <child>
                                       <object class="GtkLabel" id="cursor_speed_label">
                                         <property name="visible">True</property>
@@ -402,72 +387,68 @@
                                         <property name="mnemonic_widget">cursor_blink_time_scale</property>
                                       </object>
                                       <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">0</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkHBox" id="hbox25">
+                                      <object class="GtkHScale" id="cursor_blink_time_scale">
                                         <property name="visible">True</property>
-                                        <property name="spacing">6</property>
-                                        <child>
-                                          <object class="GtkLabel" id="blink_slow_label">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">1</property>
-                                            <property name="xpad">10</property>
-                                            <property name="label" translatable="yes">Slow</property>
-                                            <attributes>
-                                              <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.830000"/>
-                                            </attributes>
+                                        <property name="can_focus">True</property>
+                                        <property name="update_policy">discontinuous</property>
+                                        <property name="adjustment">adjustment3</property>
+                                        <property name="draw_value">False</property>
+                                        <child internal-child="accessible">
+                                          <object class="AtkObject" id="cursor_blink_time_scale-atkobject">
+                                            <property name="AtkObject::accessible-description" translatable="yes">Cursor blinks speed</property>
                                           </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkHScale" id="cursor_blink_time_scale">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="update_policy">discontinuous</property>
-                                            <property name="adjustment">adjustment3</property>
-                                            <property name="draw_value">False</property>
-                                            <child internal-child="accessible">
-                                              <object class="AtkObject" id="cursor_blink_time_scale-atkobject">
-                                                <property name="AtkObject::accessible-description" translatable="yes">Cursor blinks speed</property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="blink_fast_label">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">Fast</property>
-                                            <attributes>
-                                              <attribute name="style" value="italic"/>
-                                              <attribute name="scale" value="0.830000"/>
-                                            </attributes>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">2</property>
-                                          </packing>
                                         </child>
                                       </object>
                                       <packing>
-                                        <property name="position">1</property>
+                                        <property name="left_attach">2</property>
+                                        <property name="right_attach">3</property>
+                                        <property name="y_options"></property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="blink_fast_label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">Fast</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.830000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">3</property>
+                                        <property name="right_attach">4</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="blink_slow_label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">1</property>
+                                        <property name="xpad">10</property>
+                                        <property name="label" translatable="yes">Slow</property>
+                                        <attributes>
+                                          <attribute name="style" value="italic"/>
+                                          <attribute name="scale" value="0.830000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">1</property>
+                                        <property name="right_attach">2</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
                                       </packing>
                                     </child>
                                   </object>
                                   <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
@@ -478,16 +459,22 @@
                             </child>
                           </object>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
                   </object>
+                  <packing>
+                    <property name="tab_fill">False</property>
+                  </packing>
                 </child>
                 <child type="tab">
                   <object class="GtkLabel" id="label2">
@@ -1571,6 +1558,8 @@ default settings</property>
                 </child>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
