@@ -1,6 +1,7 @@
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	$(NULL)
