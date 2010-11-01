@@ -209,12 +209,14 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
     xmlFreeDoc (xml_doc);
 }
 
-static void
-load_url_handlers (GnomeDACapplet *capplet, const gchar *scheme, GList **item_list)
+static GList *
+load_url_handlers (GnomeDACapplet *capplet, const gchar *scheme)
 {
-    GList *app_list, *l;
+    GList *app_list, *l, *ret;
 
     app_list = g_app_info_get_all_for_type (scheme);
+    ret = NULL;
+
     for (l = app_list; l != NULL; l = l->next) {
         const gchar *executable;
         GAppInfo *app_info = l->data;
@@ -231,12 +233,14 @@ load_url_handlers (GnomeDACapplet *capplet, const gchar *scheme, GList **item_li
 	    /* Steal the reference */
 	    url_item->app_info = app_info;
 
-	    *item_list = g_list_append (*item_list, url_item);
+	    ret = g_list_prepend (ret, url_item);
 	} else {
 	    g_object_unref (app_info);
 	}
     }
     g_list_free (app_list);
+
+    return g_list_reverse (ret);
 }
 
 void
@@ -261,8 +265,8 @@ gnome_da_xml_load_list (GnomeDACapplet *capplet)
     }
 
     /* Now load URL handlers */
-    load_url_handlers (capplet, "x-scheme-handler/http", &capplet->web_browsers);
-    load_url_handlers (capplet, "x-scheme-handler/mailto", &capplet->mail_readers);
+    capplet->web_browsers = load_url_handlers (capplet, "x-scheme-handler/http");
+    capplet->mail_readers = load_url_handlers (capplet, "x-scheme-handler/mailto");
 }
 
 void
