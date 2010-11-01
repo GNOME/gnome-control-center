@@ -115,7 +115,7 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
   GtkWidget *widget;
 
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
-                                                 "vbox3");
+                                                 "keyboard_notebook");
 
   gtk_widget_reparent (widget, (GtkWidget *) self);
 }

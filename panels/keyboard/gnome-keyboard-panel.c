@@ -81,6 +81,9 @@ static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
 static GtkWidget *custom_shortcut_command_entry = NULL;
 
+static GSettings *keyboard_settings = NULL;
+static GSettings *interface_settings = NULL;
+
 static GtkWidget*
 _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 {
@@ -1821,6 +1824,33 @@ remove_button_clicked (GtkWidget  *button,
 }
 
 static void
+setup_general_page (GtkBuilder *builder)
+{
+  if (keyboard_settings == NULL)
+    keyboard_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.keyboard");
+
+  if (interface_settings == NULL)
+    interface_settings = g_settings_new ("org.gnome.desktop.interface");
+
+  g_settings_bind (keyboard_settings, "repeat",
+                   gtk_builder_get_object (builder, "repeat_toggle"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (keyboard_settings, "delay",
+                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_delay_scale"))), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (keyboard_settings, "rate",
+                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_speed_scale"))), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_settings_bind (interface_settings, "cursor-blink",
+                   gtk_builder_get_object (builder, "cursor_toggle"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (interface_settings, "cursor-blink-time",
+                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "cursor_blink_time_scale"))), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+}
+
+static void
 setup_dialog (GtkBuilder *builder)
 {
   GConfClient *client;
@@ -1830,6 +1860,8 @@ setup_dialog (GtkBuilder *builder)
   GtkTreeView *treeview;
   GtkTreeSelection *selection;
   GSList *allowed_keys;
+
+  setup_general_page (builder);
 
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
                                                     "shortcut_treeview"));
