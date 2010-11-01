@@ -212,12 +212,12 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 static void
 load_url_handlers (GnomeDACapplet *capplet, const gchar *scheme, GList **item_list)
 {
-    GList *app_list;
+    GList *app_list, *l;
 
     app_list = g_app_info_get_all_for_type (scheme);
-    while (app_list != NULL) {
+    for (l = app_list; l != NULL; l = l->next) {
         const gchar *executable;
-        GAppInfo *app_info = (GAppInfo *) app_list->data;
+        GAppInfo *app_info = l->data;
 
 	executable = g_app_info_get_executable (app_info);
 	if (is_executable_valid (executable)) {
@@ -228,11 +228,15 @@ load_url_handlers (GnomeDACapplet *capplet, const gchar *scheme, GList **item_li
 	    url_item->generic.executable = g_strdup (executable);
 	    url_item->generic.command = g_strdup (g_app_info_get_commandline (app_info));
 	    url_item->generic.icon_name = g_strdup (g_app_info_get_name (app_info));
-	    url_item->app_info = g_object_ref (app_info);
+	    /* Steal the reference */
+	    url_item->app_info = app_info;
 
 	    *item_list = g_list_append (*item_list, url_item);
+	} else {
+	    g_object_unref (app_info);
 	}
     }
+    g_list_free (app_list);
 }
 
 void
