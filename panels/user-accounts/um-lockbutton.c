@@ -236,7 +236,7 @@ um_lock_button_constructed (GObject *object)
   g_signal_connect (priv->permission, "notify",
                     G_CALLBACK (on_permission_changed), button);
 
-  priv->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 6);
+  priv->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   gtk_container_add (GTK_CONTAINER (button), priv->box);
 
   priv->eventbox = gtk_event_box_new ();
