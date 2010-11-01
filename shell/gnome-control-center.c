@@ -894,18 +894,23 @@ on_window_size_allocate (GtkWidget          *widget,
 
   if (gtk_notebook_get_current_page (GTK_NOTEBOOK (self->priv->notebook)) == OVERVIEW_PAGE)
     {
-      int          monitor;
-      GdkScreen   *screen;
-      GdkRectangle rect;
-      screen = gtk_widget_get_screen (widget);
-      monitor = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (widget));
-      gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self->priv->main_vbox),
                                                  FIXED_WIDTH,
                                                  NULL,
                                                  &height);
-      height = MIN (height + 10, rect.height);
+      if (gtk_widget_get_realized (widget))
+        {
+          int          monitor;
+          GdkScreen   *screen;
+          GdkRectangle rect;
+          GdkWindow   *window;
+
+          window = gtk_widget_get_window (widget);
+          screen = gtk_widget_get_screen (widget);
+          monitor = gdk_screen_get_monitor_at_window (screen, window);
+          gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+          height = MIN (height + 10, rect.height);
+        }
     }
   else
     {
