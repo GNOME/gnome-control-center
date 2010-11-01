@@ -227,14 +227,16 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop, 0, 2, False,
 					 XA_INTEGER, &realtype, &realformat, &nitems,
 					 &bytes_after, &data) == Success) && (realtype != None)) {
-			/* Property data is booleans for has_left, has_middle,
-			 * has_right, has_double, has_triple */
+			/* Property data is booleans for has_left, has_middle, has_right, has_double, has_triple.
+			 * Newer drivers (X.org/kerrnel) will also include has_pressure and has_width. */
 			if (!data[0]) {
 				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("tap_to_click_toggle")), TRUE);
 				gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), FALSE);
 			}
 
-			if (!data[3])
+			/* Disable two finger scrolling unless the hardware supports
+			 * double touch or can emulate it based on finger width. */
+			if (!(data[3] ||(nitems >= 6 && data[5])))
 				gtk_widget_set_sensitive (WID ("scroll_twofinger_radio"), FALSE);
 
 			XFree (data);
