@@ -19,22 +19,22 @@
  *
  */
 
-#include "cc-keybindings-panel.h"
-#include "gnome-keybinding-properties.h"
+#include "cc-keyboard-panel.h"
+#include "gnome-keyboard-panel.h"
 
-G_DEFINE_DYNAMIC_TYPE (CcKeybindingsPanel, cc_keybindings_panel, CC_TYPE_PANEL)
+G_DEFINE_DYNAMIC_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC_TYPE_PANEL)
 
-#define KEYBINDINGS_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBINDINGS_PANEL, CcKeybindingsPanelPrivate))
+#define KEYBOARD_PANEL_PRIVATE(o) \
+  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelPrivate))
 
-struct _CcKeybindingsPanelPrivate
+struct _CcKeyboardPanelPrivate
 {
   GtkBuilder *builder;
 };
 
 
 static void
-cc_keybindings_panel_get_property (GObject    *object,
+cc_keyboard_panel_get_property (GObject    *object,
                                guint       property_id,
                                GValue     *value,
                                GParamSpec *pspec)
@@ -47,7 +47,7 @@ cc_keybindings_panel_get_property (GObject    *object,
 }
 
 static void
-cc_keybindings_panel_set_property (GObject      *object,
+cc_keyboard_panel_set_property (GObject      *object,
                                guint         property_id,
                                const GValue *value,
                                GParamSpec   *pspec)
@@ -60,43 +60,43 @@ cc_keybindings_panel_set_property (GObject      *object,
 }
 
 static void
-cc_keybindings_panel_dispose (GObject *object)
+cc_keyboard_panel_dispose (GObject *object)
 {
-  G_OBJECT_CLASS (cc_keybindings_panel_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->dispose (object);
 }
 
 static void
-cc_keybindings_panel_finalize (GObject *object)
+cc_keyboard_panel_finalize (GObject *object)
 {
-  G_OBJECT_CLASS (cc_keybindings_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
 }
 
 static void
-cc_keybindings_panel_class_init (CcKeybindingsPanelClass *klass)
+cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (CcKeybindingsPanelPrivate));
+  g_type_class_add_private (klass, sizeof (CcKeyboardPanelPrivate));
 
-  object_class->get_property = cc_keybindings_panel_get_property;
-  object_class->set_property = cc_keybindings_panel_set_property;
-  object_class->dispose = cc_keybindings_panel_dispose;
-  object_class->finalize = cc_keybindings_panel_finalize;
+  object_class->get_property = cc_keyboard_panel_get_property;
+  object_class->set_property = cc_keyboard_panel_set_property;
+  object_class->dispose = cc_keyboard_panel_dispose;
+  object_class->finalize = cc_keyboard_panel_finalize;
 }
 
 static void
-cc_keybindings_panel_class_finalize (CcKeybindingsPanelClass *klass)
+cc_keyboard_panel_class_finalize (CcKeyboardPanelClass *klass)
 {
 }
 
 static void
-cc_keybindings_panel_init (CcKeybindingsPanel *self)
+cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
-  CcKeybindingsPanelPrivate *priv;
+  CcKeyboardPanelPrivate *priv;
   GError *error = NULL;
-  const gchar *uifile = GNOMECC_UI_DIR "/gnome-keybinding-properties.ui";
+  const gchar *uifile = GNOMECC_UI_DIR "/gnome-keyboard-panel.ui";
 
-  priv = self->priv = KEYBINDINGS_PANEL_PRIVATE (self);
+  priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
 
 
   priv->builder = gtk_builder_new ();
@@ -121,11 +121,11 @@ cc_keybindings_panel_init (CcKeybindingsPanel *self)
 }
 
 void
-cc_keybindings_panel_register (GIOModule *module)
+cc_keyboard_panel_register (GIOModule *module)
 {
-  cc_keybindings_panel_register_type (G_TYPE_MODULE (module));
+  cc_keyboard_panel_register_type (G_TYPE_MODULE (module));
   g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                  CC_TYPE_KEYBINDINGS_PANEL,
-                                  "keybinding", 0);
+                                  CC_TYPE_KEYBOARD_PANEL,
+                                  "keyboard", 0);
 }
 

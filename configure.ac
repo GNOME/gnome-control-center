@@ -335,9 +335,9 @@ panels/default-applications/gnome-default-applications-panel.desktop.in
 panels/default-applications/gnome-default-applications.pc
 panels/display/Makefile
 panels/display/gnome-display-panel.desktop.in
-panels/keybindings/Makefile
-panels/keybindings/gnome-keybindings-panel.desktop.in
-panels/keybindings/gnome-keybindings.pc
+panels/keyboard/Makefile
+panels/keyboard/gnome-keyboard-panel.desktop.in
+panels/keyboard/gnome-keybindings.pc
 panels/region/Makefile
 panels/region/gnome-region-panel.desktop.in
 panels/mouse/Makefile

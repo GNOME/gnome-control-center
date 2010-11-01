@@ -6,7 +6,7 @@ SUBDIRS= \
 	network \
 	sound \
 	default-applications \
-	keybindings \
+	keyboard \
 	universal-access \
 	user-accounts \
 	datetime

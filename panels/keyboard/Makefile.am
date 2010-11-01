@@ -1,33 +1,33 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
-cappletname = keybinding
+cappletname = keyboard
 
 ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libkeybinding-properties.la
+ccpanels_LTLIBRARIES = libkeyboard.la
 
-libkeybinding_properties_la_SOURCES =   \
-	keybindings-module.c		\
-	cc-keybindings-panel.c		\
-	cc-keybindings-panel.h		\
+libkeyboard_la_SOURCES =   \
+	keyboard-module.c		\
+	cc-keyboard-panel.c		\
+	cc-keyboard-panel.h		\
 	wm-common.c			\
 	wm-common.h			\
-	gnome-keybinding-properties.c	\
-	gnome-keybinding-properties.h	\
+	gnome-keyboard-panel.c		\
+	gnome-keyboard-panel.h		\
 	eggcellrendererkeys.c		\
 	eggcellrendererkeys.h		\
 	eggaccelerators.c		\
 	eggaccelerators.h
 
-libkeybinding_properties_la_CFLAGS = $(PANEL_CFLAGS)
-libkeybinding_properties_la_LIBADD = $(PANEL_LIBS)
-libkeybinding_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
+libkeyboard_la_CFLAGS = $(PANEL_CFLAGS)
+libkeyboard_la_LIBADD = $(PANEL_LIBS)
+libkeyboard_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
 
 uidir   = $(pkgdatadir)/ui
-ui_DATA = gnome-keybinding-properties.ui
+ui_DATA = gnome-keyboard-panel.ui
 
 desktopdir = $(datadir)/applications
-Desktop_in_files = gnome-keybindings-panel.desktop.in
+Desktop_in_files = gnome-keyboard-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_XML_NOMERGE_RULE@
