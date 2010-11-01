@@ -2,7 +2,7 @@ SUBDIRS= \
 	background \
 	display \
 	mouse \
-	keyboard \
+	region \
 	network \
 	sound \
 	default-applications \

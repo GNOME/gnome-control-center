@@ -1,5 +1,3 @@
-/* -*- mode: c; style: linux -*- */
-
 /* gnome-keyboard-properties-xkblt.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
@@ -31,7 +29,7 @@
 #include <libgnomekbd/gkbd-desktop-config.h>
 #include <libgnomekbd/gkbd-keyboard-drawing.h>
 
-#include "gnome-keyboard-properties-xkb.h"
+#include "gnome-region-panel-xkb.h"
 
 
 #define SEL_LAYOUT_TREE_COL_DESCRIPTION 0

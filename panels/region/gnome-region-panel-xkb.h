@@ -1,5 +1,3 @@
-/* -*- mode: c; style: linux -*- */
-
 /* gnome-keyboard-properties-xkb.h
  * Copyright (C) 2003-2007 Sergey V Udaltsov
  *

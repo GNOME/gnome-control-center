@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#include "cc-keyboard-panel.h"
+#include "cc-region-panel.h"
 
 #include <glib/gi18n-lib.h>
 
@@ -32,7 +32,7 @@ g_io_module_load (GIOModule * module)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	/* register the panel */
-	cc_keyboard_panel_register (module);
+	cc_region_panel_register (module);
 }
 
 void

@@ -1,5 +1,3 @@
-/* -*- mode: c; style: linux -*- */
-
 /* gnome-keyboard-properties-xkbpv.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
@@ -27,7 +25,7 @@
 
 #include <libgnomekbd/gkbd-keyboard-drawing.h>
 
-#include "gnome-keyboard-properties-xkb.h"
+#include "gnome-region-panel-xkb.h"
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 #include "X11/XKBlib.h"

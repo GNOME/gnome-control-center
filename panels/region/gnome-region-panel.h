@@ -1,5 +1,3 @@
-/* -*- mode: c; style: linux -*- */
-
 /* keyboard-properties.c
  * Copyright (C) 2000-2001 Ximian, Inc.
  * Copyright (C) 2001 Jonathan Blandford
@@ -26,5 +24,5 @@
 
 #include <gtk/gtk.h>
 
-GtkWidget *gnome_keyboard_properties_init (GtkBuilder * dialog);
+GtkWidget *gnome_region_properties_init (GtkBuilder * dialog);
 

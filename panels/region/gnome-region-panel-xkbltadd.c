@@ -1,5 +1,3 @@
-/* -*- mode: c; style: linux -*- */
-
 /* gnome-keyboard-properties-xkbltadd.c
  * Copyright (C) 2007 Sergey V. Udaltsov
  *
@@ -30,7 +28,7 @@
 #include <libgnomekbd/gkbd-keyboard-drawing.h>
 #include <libgnomekbd/gkbd-util.h>
 
-#include "gnome-keyboard-properties-xkb.h"
+#include "gnome-region-panel-xkb.h"
 
 enum {
 	COMBO_BOX_MODEL_COL_SORT,

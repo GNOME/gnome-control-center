@@ -1,5 +1,3 @@
-/* -*- mode: c; style: linux -*- */
-
 /* keyboard-properties.c
  * Copyright (C) 2000-2001 Ximian, Inc.
  * Copyright (C) 2001 Jonathan Blandford
@@ -32,8 +30,8 @@
 #include <gio/gio.h>
 #include <gconf/gconf-client.h>
 
-#include "gnome-keyboard-properties.h"
-#include "gnome-keyboard-properties-xkb.h"
+#include "gnome-region-panel.h"
+#include "gnome-region-panel-xkb.h"
 
 enum {
 	RESPONSE_APPLY = 1,
@@ -111,14 +109,14 @@ setup_dialog (GtkBuilder * dialog)
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("cursor_blink_time_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	g_signal_connect (WID ("keyboard_dialog"), "response",
+	g_signal_connect (WID ("region_dialog"), "response",
 			  (GCallback) dialog_response, NULL);
 
 	setup_xkb_tabs (dialog);
 }
 
 GtkWidget *
-gnome_keyboard_properties_init (GtkBuilder * dialog)
+gnome_region_properties_init (GtkBuilder * dialog)
 {
 	GtkWidget *dialog_win = NULL;
 

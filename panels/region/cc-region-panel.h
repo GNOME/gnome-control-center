@@ -20,55 +20,55 @@
  */
 
 
-#ifndef _CC_KEYBOARD_PANEL_H
-#define _CC_KEYBOARD_PANEL_H
+#ifndef _CC_REGION_PANEL_H
+#define _CC_REGION_PANEL_H
 
 #include <libgnome-control-center/cc-panel.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_KEYBOARD_PANEL cc_keyboard_panel_get_type()
+#define CC_TYPE_REGION_PANEL cc_region_panel_get_type()
 
-#define CC_KEYBOARD_PANEL(obj) \
+#define CC_REGION_PANEL(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanel))
+  CC_TYPE_REGION_PANEL, CcRegionPanel))
 
-#define CC_KEYBOARD_PANEL_CLASS(klass) \
+#define CC_REGION_PANEL_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelClass))
+  CC_TYPE_REGION_PANEL, CcRegionPanelClass))
 
-#define CC_IS_KEYBOARD_PANEL(obj) \
+#define CC_IS_REGION_PANEL(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_KEYBOARD_PANEL))
+  CC_TYPE_REGION_PANEL))
 
-#define CC_IS_KEYBOARD_PANEL_CLASS(klass) \
+#define CC_IS_REGION_PANEL_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_KEYBOARD_PANEL))
+  CC_TYPE_REGION_PANEL))
 
-#define CC_KEYBOARD_PANEL_GET_CLASS(obj) \
+#define CC_REGION_PANEL_GET_CLASS(obj) \
   (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelClass))
+  CC_TYPE_REGION_PANEL, CcRegionPanelClass))
 
-typedef struct _CcKeyboardPanel CcKeyboardPanel;
-typedef struct _CcKeyboardPanelClass CcKeyboardPanelClass;
-typedef struct _CcKeyboardPanelPrivate CcKeyboardPanelPrivate;
+typedef struct _CcRegionPanel CcRegionPanel;
+typedef struct _CcRegionPanelClass CcRegionPanelClass;
+typedef struct _CcRegionPanelPrivate CcRegionPanelPrivate;
 
-struct _CcKeyboardPanel
+struct _CcRegionPanel
 {
   CcPanel parent;
 
-  CcKeyboardPanelPrivate *priv;
+  CcRegionPanelPrivate *priv;
 };
 
-struct _CcKeyboardPanelClass
+struct _CcRegionPanelClass
 {
   CcPanelClass parent_class;
 };
 
-GType cc_keyboard_panel_get_type (void) G_GNUC_CONST;
+GType cc_region_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_keyboard_panel_register (GIOModule *module);
+void  cc_region_panel_register (GIOModule *module);
 
 G_END_DECLS
 
-#endif /* _CC_KEYBOARD_PANEL_H */
+#endif /* _CC_REGION_PANEL_H */

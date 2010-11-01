@@ -55,7 +55,7 @@ PKG_CHECK_MODULES(LIBCANBERRA_GTK, libcanberra-gtk3, [
   ], [:])
 AM_CONDITIONAL(HAVE_LIBCANBERRA_GTK, test "x$CANBERRA_GTK" = "x1")
 
-dnl keyboard-properties-capplet
+dnl Region panel
 savecppflags=$CPPFLAGS
 CPPFLAGS="$CPPFLAGS $X_CFLAGS"
 AC_CHECK_HEADERS([X11/Xlib.h])
@@ -338,8 +338,8 @@ panels/display/gnome-display-panel.desktop.in
 panels/keybindings/Makefile
 panels/keybindings/gnome-keybindings-panel.desktop.in
 panels/keybindings/gnome-keybindings.pc
-panels/keyboard/Makefile
-panels/keyboard/gnome-keyboard-panel.desktop.in
+panels/region/Makefile
+panels/region/gnome-region-panel.desktop.in
 panels/mouse/Makefile
 panels/mouse/gnome-mouse-panel.desktop.in
 panels/network/Makefile

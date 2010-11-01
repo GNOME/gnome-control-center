@@ -19,19 +19,19 @@
  *
  */
 
-#include "cc-keyboard-panel.h"
+#include "cc-region-panel.h"
 #include <gtk/gtk.h>
 
-G_DEFINE_DYNAMIC_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC_TYPE_PANEL)
-#define KEYBOARD_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelPrivate))
-struct _CcKeyboardPanelPrivate {
+G_DEFINE_DYNAMIC_TYPE (CcRegionPanel, cc_region_panel, CC_TYPE_PANEL)
+#define REGION_PANEL_PRIVATE(o) \
+  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_REGION_PANEL, CcRegionPanelPrivate))
+struct _CcRegionPanelPrivate {
 	GtkBuilder *builder;
 };
 
 
 static void
-cc_keyboard_panel_get_property (GObject * object,
+cc_region_panel_get_property (GObject * object,
 				guint property_id,
 				GValue * value, GParamSpec * pspec)
 {
@@ -43,7 +43,7 @@ cc_keyboard_panel_get_property (GObject * object,
 }
 
 static void
-cc_keyboard_panel_set_property (GObject * object,
+cc_region_panel_set_property (GObject * object,
 				guint property_id,
 				const GValue * value, GParamSpec * pspec)
 {
@@ -55,77 +55,77 @@ cc_keyboard_panel_set_property (GObject * object,
 }
 
 static void
-cc_keyboard_panel_dispose (GObject * object)
+cc_region_panel_dispose (GObject * object)
 {
-	CcKeyboardPanelPrivate *priv = CC_KEYBOARD_PANEL (object)->priv;
+	CcRegionPanelPrivate *priv = CC_REGION_PANEL (object)->priv;
 
 	if (priv->builder) {
 		g_object_unref (priv->builder);
 		priv->builder = NULL;
 	}
 
-	G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->dispose (object);
+	G_OBJECT_CLASS (cc_region_panel_parent_class)->dispose (object);
 }
 
 static void
-cc_keyboard_panel_finalize (GObject * object)
+cc_region_panel_finalize (GObject * object)
 {
-	G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
+	G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
 }
 
 static void
-cc_keyboard_panel_class_init (CcKeyboardPanelClass * klass)
+cc_region_panel_class_init (CcRegionPanelClass * klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (CcKeyboardPanelPrivate));
+	g_type_class_add_private (klass, sizeof (CcRegionPanelPrivate));
 
-	object_class->get_property = cc_keyboard_panel_get_property;
-	object_class->set_property = cc_keyboard_panel_set_property;
-	object_class->dispose = cc_keyboard_panel_dispose;
-	object_class->finalize = cc_keyboard_panel_finalize;
+	object_class->get_property = cc_region_panel_get_property;
+	object_class->set_property = cc_region_panel_set_property;
+	object_class->dispose = cc_region_panel_dispose;
+	object_class->finalize = cc_region_panel_finalize;
 }
 
 static void
-cc_keyboard_panel_class_finalize (CcKeyboardPanelClass * klass)
+cc_region_panel_class_finalize (CcRegionPanelClass * klass)
 {
 }
 
-GtkWidget *gnome_keyboard_properties_init (GtkBuilder * dialog);
+GtkWidget *gnome_region_properties_init (GtkBuilder * dialog);
 
 static void
-cc_keyboard_panel_init (CcKeyboardPanel * self)
+cc_region_panel_init (CcRegionPanel * self)
 {
-	CcKeyboardPanelPrivate *priv;
+	CcRegionPanelPrivate *priv;
 	GtkWidget *prefs_widget;
 	GError *error = NULL;
 
-	priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
+	priv = self->priv = REGION_PANEL_PRIVATE (self);
 
 	priv->builder = gtk_builder_new ();
 
 	gtk_builder_add_from_file (priv->builder,
 				   GNOMECC_UI_DIR
-				   "/gnome-keyboard-properties-dialog.ui",
+				   "/gnome-region-panel.ui",
 				   &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
 		return;
 	}
 
-	gnome_keyboard_properties_init (priv->builder);
+	gnome_region_properties_init (priv->builder);
 
 	prefs_widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
-							     "keyboard_notebook");
+							     "region_notebook");
 
 	gtk_widget_reparent (prefs_widget, GTK_WIDGET (self));
 }
 
 void
-cc_keyboard_panel_register (GIOModule * module)
+cc_region_panel_register (GIOModule * module)
 {
-	cc_keyboard_panel_register_type (G_TYPE_MODULE (module));
+	cc_region_panel_register_type (G_TYPE_MODULE (module));
 	g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-					CC_TYPE_KEYBOARD_PANEL,
-					"keyboard", 0);
+					CC_TYPE_REGION_PANEL,
+					"region", 0);
 }

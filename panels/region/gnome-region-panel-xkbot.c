@@ -1,5 +1,3 @@
-/* -*- mode: c; style: linux -*- */
-
 /* gnome-keyboard-properties-xkbot.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
@@ -29,7 +27,7 @@
 #include <glib/gi18n.h>
 #include <string.h>
 
-#include "gnome-keyboard-properties-xkb.h"
+#include "gnome-region-panel-xkb.h"
 
 static GtkBuilder *chooser_dialog = NULL;
 static const char *current1st_level_id = NULL;

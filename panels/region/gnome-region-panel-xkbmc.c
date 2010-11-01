@@ -1,5 +1,3 @@
-/* -*- mode: c; style: linux -*- */
-
 /* gnome-keyboard-properties-xkbmc.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
@@ -28,7 +26,7 @@
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
 
-#include "gnome-keyboard-properties-xkb.h"
+#include "gnome-region-panel-xkb.h"
 
 static gchar *current_model_name = NULL;
 static gchar *current_vendor_name = NULL;
