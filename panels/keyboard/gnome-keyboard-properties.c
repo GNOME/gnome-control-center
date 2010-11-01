@@ -28,10 +28,11 @@
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
+
 #include <gio/gio.h>
+#include <gconf/gconf-client.h>
 
 #include "gnome-keyboard-properties.h"
-#include "gnome-keyboard-properties-a11y.h"
 #include "gnome-keyboard-properties-xkb.h"
 
 enum {
@@ -114,7 +115,6 @@ setup_dialog (GtkBuilder * dialog)
 			  (GCallback) dialog_response, NULL);
 
 	setup_xkb_tabs (dialog);
-	setup_a11y_tabs (dialog, NULL);
 }
 
 GtkWidget *
