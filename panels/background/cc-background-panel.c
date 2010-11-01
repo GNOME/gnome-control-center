@@ -546,7 +546,10 @@ style_changed_cb (GtkComboBox       *box,
   GtkTreeIter iter;
   gint value;
 
-  gtk_combo_box_get_active_iter (box, &iter);
+  if (!gtk_combo_box_get_active_iter (box, &iter))
+    {
+      return;
+    }
 
   model = gtk_combo_box_get_model (box);
 
