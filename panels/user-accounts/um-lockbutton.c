@@ -74,8 +74,6 @@ enum
 
 static guint signals[LAST_SIGNAL] = {0, };
 
-static void initiate_check (UmLockButton *button);
-static void do_sync_check (UmLockButton *button);
 static void update_state (UmLockButton *button);
 
 static void on_permission_changed (GPermission *permission,

@@ -187,7 +187,6 @@ static gboolean
 um_crop_area_draw (GtkWidget *widget,
                    cairo_t   *cr)
 {
-        GdkRectangle area;
         GdkRectangle crop;
         gint width, height;
         UmCropArea *uarea = UM_CROP_AREA (widget);
