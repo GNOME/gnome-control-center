@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-10-16 18:28+0000\n"
-"PO-Revision-Date: 2010-10-18 11:03+0200\n"
+"POT-Creation-Date: 2010-10-30 22:43+0000\n"
+"PO-Revision-Date: 2010-11-01 18:47+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -451,27 +451,29 @@ msgstr "Iniciar la tecnología de asistencia visual preferida"
 msgid "Visual Assistance"
 msgstr "Asistencia visual"
 
-#: ../panels/default-applications/gnome-da-capplet.c:84
+#: ../panels/default-applications/gnome-da-capplet.c:83
 #, c-format
-#| msgid "Error parsing arguments: %s\n"
 msgid "Error setting default browser: %s"
 msgstr "Error al establecer el navegador predeterminado: %s"
 
-#: ../panels/default-applications/gnome-da-capplet.c:107
+#: ../panels/default-applications/gnome-da-capplet.c:106
 #, c-format
-#| msgid "Error parsing arguments: %s\n"
 msgid "Error setting default mailer: %s"
 msgstr "Error al establecer el programa de correo-e predeterminado: %s"
 
-#: ../panels/default-applications/gnome-da-capplet.c:322
+#: ../panels/default-applications/gnome-da-capplet.c:321
+#: ../panels/sound/gvc-sound-theme-chooser.c:623
+#: ../panels/sound/gvc-sound-theme-editor.c:705
+#: ../panels/sound/gvc-sound-theme-editor.c:759
+#: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../panels/default-applications/gnome-da-capplet.c:353
+#: ../panels/default-applications/gnome-da-capplet.c:352
 msgid "Could not load the main interface"
 msgstr "No es posible cargar el interfaz principal"
 
-#: ../panels/default-applications/gnome-da-capplet.c:355
+#: ../panels/default-applications/gnome-da-capplet.c:354
 msgid "Please make sure that the applet is properly installed"
 msgstr "Asegúrese de que la miniaplicación está instalada correctamente"
 
@@ -882,6 +884,7 @@ msgid "Could not get screen information"
 msgstr "No se pudo obtener la información de la pantalla"
 
 #: ../panels/keybindings/00-multimedia-key.xml.in.h:1
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Sonido"
 
@@ -916,8 +919,16 @@ msgstr "Modo de la combinación"
 msgid "The type of accelerator."
 msgstr "El tipo de combinación."
 
+#. translators:
+#. * The device has been disabled
 #: ../panels/keybindings/eggcellrendererkeys.c:243
 #: ../panels/keybindings/gnome-keybinding-properties.c:101
+#: ../panels/sound/gvc-mixer-control.c:1087
+#: ../panels/sound/gvc-sound-theme-editor.c:895
+#: ../panels/sound/gvc-sound-theme-editor.c:991
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+#: ../panels/user-accounts/um-login-options.c:354
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -1054,7 +1065,7 @@ msgstr "Destello de la pantalla _completa"
 
 #: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "General"
 msgstr "General"
 
@@ -1110,8 +1121,9 @@ msgstr "R_etardo:"
 msgid "Disa_ble sticky keys if two keys are pressed together"
 msgstr "_Desactivar las teclas persistentes si se pulsan dos teclas a la vez"
 
+#. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Fast"
 msgstr "Rápida"
 
@@ -1138,7 +1150,7 @@ msgstr "Lista de distribuciones de teclado seleccionadas para su uso"
 
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 #: ../panels/universal-access/uap.ui.h:53
 msgid "Long"
 msgstr "Largo"
@@ -1206,13 +1218,14 @@ msgstr "Seleccionar una distribución de teclado para añadir a la lista"
 
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
 #: ../panels/universal-access/uap.ui.h:73
 msgid "Short"
 msgstr "Corto"
 
+#. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:33
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
 msgid "Slow"
 msgstr "Lenta"
 
@@ -1221,7 +1234,7 @@ msgid "View and edit keyboard layout options"
 msgstr "Ver y editar las opciones de distribución de teclado"
 
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Acceleration:"
 msgstr "_Aceleración:"
 
@@ -1236,7 +1249,7 @@ msgid "_Add..."
 msgstr "_Añadir…"
 
 #: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
-#: ../panels/mouse/gnome-mouse-properties.ui.h:38
+#: ../panels/mouse/gnome-mouse-properties.ui.h:49
 msgid "_Delay:"
 msgstr "_Retardo:"
 
@@ -1334,6 +1347,9 @@ msgstr "Modelos"
 
 #: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:229
 #: ../panels/network/gnome-network-properties.c:582
+#: ../panels/sound/gvc-sound-theme-chooser.c:818
+#: ../panels/sound/gvc-sound-theme-editor.c:891
+#: ../panels/sound/gvc-sound-theme-editor.c:995
 msgid "Default"
 msgstr "Predeterminado"
 
@@ -1352,31 +1368,31 @@ msgstr "No se puede cargar el icono de fábrica «%s»\n"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:91
+#: ../panels/mouse/gnome-mouse-accessibility.c:79
 msgid "gesture|Move left"
 msgstr "Mover a la izquierda"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:96
+#: ../panels/mouse/gnome-mouse-accessibility.c:84
 msgid "gesture|Move right"
 msgstr "Mover a la derecha"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:101
+#: ../panels/mouse/gnome-mouse-accessibility.c:89
 msgid "gesture|Move up"
 msgstr "Mover arriba"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:106
+#: ../panels/mouse/gnome-mouse-accessibility.c:94
 msgid "gesture|Move down"
 msgstr "Mover abajo"
 
 #. Translators: this is the gesture to trigger/choose the click type.
 #. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:111
+#: ../panels/mouse/gnome-mouse-accessibility.c:99
 msgid "gesture|Disabled"
 msgstr "Desactivado"
 
@@ -1392,156 +1408,161 @@ msgstr "Elegir el tipo de pulsación con gestos del rató_n"
 msgid "D_ouble click:"
 msgstr "Pulsación d_oble:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "D_rag click:"
 msgstr "Pulsación de _arrastre:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Disable _touchpad while typing"
 msgstr "Desactivar el _touchpad al escribir"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Double-Click Timeout"
 msgstr "Tiempo de espera de la pulsación doble"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "Drag and Drop"
 msgstr "Arrastrar y soltar"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Dwell Click"
 msgstr "Pulsación al posarse"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Activar pul_saciones del ratón con el touchpad"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Enable h_orizontal scrolling"
 msgstr "Activar desplazamiento _horizontal"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#. high sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 #: ../panels/universal-access/uap.ui.h:40
 msgid "High"
 msgstr "Alta"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 #: ../panels/universal-access/uap.ui.h:50
 msgid "Large"
 msgstr "Grande"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Locate Pointer"
 msgstr "Localizar puntero"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#. low sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
 #: ../panels/universal-access/uap.ui.h:54
 msgid "Low"
 msgstr "Baja"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Mouse Orientation"
 msgstr "Orientación del ratón"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "Mouse Preferences"
 msgstr "Preferencias del ratón"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Pointer Speed"
 msgstr "Velocidad del puntero"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Scrolling"
 msgstr "Desplazamiento"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Seco_ndary click:"
 msgstr "Pulsación sec_undaria:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "M_ostrar la posición del puntero al pulsar la tecla Control"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "Show click type _window"
 msgstr "Mostrar la _ventana del tipo de pulsación"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
 #: ../panels/universal-access/uap.ui.h:75
 msgid "Simulated Secondary Click"
 msgstr "Pulsación secundaria simulada"
 
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/mouse/gnome-mouse-properties.ui.h:41
 #: ../panels/universal-access/uap.ui.h:78
 msgid "Small"
 msgstr "Pequeño"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
+#: ../panels/mouse/gnome-mouse-properties.ui.h:42
 msgid "Thr_eshold:"
 msgstr "U_mbral:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+#: ../panels/mouse/gnome-mouse-properties.ui.h:43
 msgid ""
 "To test your double-click settings, try to double-click on the light bulb."
 msgstr ""
 "Para probar sus ajustes de pulsación doble, pruebe a pulsar dos veces sobre "
 "la bombilla."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
+#: ../panels/mouse/gnome-mouse-properties.ui.h:44
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/mouse/gnome-mouse-properties.ui.h:45
 msgid "Two-_finger scrolling"
 msgstr "Despla_zamiento con dos dedos"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:47
 msgid "You can also use the Dwell Click panel applet to choose the click type."
 msgstr ""
 "También puede usar el panel de la miniaplicación Pulsación al posarse para "
 "elegir el tipo de pulsación."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:50
 msgid "_Disabled"
 msgstr "_Desactivado"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:40
+#: ../panels/mouse/gnome-mouse-properties.ui.h:51
 msgid "_Edge scrolling"
 msgstr "Desplazamiento en el _borde"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/mouse/gnome-mouse-properties.ui.h:52
 msgid "_Initiate click when stopping pointer movement"
 msgstr "_Iniciar la pulsación cuando se pare el movimiento del puntero"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:42
+#: ../panels/mouse/gnome-mouse-properties.ui.h:53
 msgid "_Left-handed"
 msgstr "_Zurdo"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/mouse/gnome-mouse-properties.ui.h:54
 #: ../panels/universal-access/uap.ui.h:98
 msgid "_Motion threshold:"
 msgstr "Umbral de _movimiento:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:44
+#: ../panels/mouse/gnome-mouse-properties.ui.h:55
 msgid "_Right-handed"
 msgstr "_Diestro"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:45
+#: ../panels/mouse/gnome-mouse-properties.ui.h:56
 msgid "_Sensitivity:"
 msgstr "_Sensibilidad:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:46
+#: ../panels/mouse/gnome-mouse-properties.ui.h:57
 msgid "_Single click:"
 msgstr "Pulsación _simple:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:47
+#: ../panels/mouse/gnome-mouse-properties.ui.h:58
 msgid "_Timeout:"
 msgstr "_Tiempo de espera:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:48
+#: ../panels/mouse/gnome-mouse-properties.ui.h:59
 msgid "_Trigger secondary click by holding down the primary button"
 msgstr ""
 "_Disparar la pulsación secundaria al mantener pulsado el botón primario"
@@ -1555,7 +1576,7 @@ msgid "Set your mouse and touchpad preferences"
 msgstr "Establecer sus preferencias del ratón y del «touchpad»"
 
 #: ../panels/network/gnome-network-properties.c:700
-#: ../panels/network/gnome-network-properties.c:851
+#: ../panels/network/gnome-network-properties.c:866
 msgid "New Location..."
 msgstr "Lugar nuevo..."
 
@@ -1616,6 +1637,7 @@ msgid "Ignored Hosts"
 msgstr "Anfitriones ignorados"
 
 #: ../panels/network/gnome-network-properties.ui.h:12
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
 msgid "Location:"
 msgstr "Lugar:"
 
@@ -1670,6 +1692,486 @@ msgstr "Proxy para HTTP _seguro:"
 #: ../panels/network/gnome-network-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
 msgstr "_Usar el mismo proxy para todos los protocolos"
+
+#: ../panels/sound/applet-main.c:49
+msgid "Enable debugging code"
+msgstr "Activar el código de depuración"
+
+#: ../panels/sound/applet-main.c:50
+#| msgid "Open with Default Application"
+msgid "Version of this application"
+msgstr "Versión de esta aplicación"
+
+#: ../panels/sound/applet-main.c:62
+msgid " — GNOME Volume Control Applet"
+msgstr " : Miniaplicación Control de volumen de GNOME"
+
+#: ../panels/sound/cc-sound-panel.c:107
+msgid "Waiting for sound system to respond"
+msgstr "Esperando a que el sistema de sonido responda"
+
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1883
+#| msgid "Cloned Output"
+msgid "Output"
+msgstr "Salida"
+
+#: ../panels/sound/gvc-applet.c:278
+#| msgid "Cloned Output"
+msgid "Sound Output Volume"
+msgstr "Volumen de salida del sonido"
+
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1797
+msgid "Input"
+msgstr "Entrada"
+
+#: ../panels/sound/gvc-applet.c:284
+msgid "Microphone Volume"
+msgstr "Volumen del micrófono"
+
+#: ../panels/sound/gvc-balance-bar.c:111
+#| msgid "Left"
+msgctxt "balance"
+msgid "Left"
+msgstr "Izquierda"
+
+#: ../panels/sound/gvc-balance-bar.c:112
+#| msgid "Right"
+msgctxt "balance"
+msgid "Right"
+msgstr "Derecha"
+
+#: ../panels/sound/gvc-balance-bar.c:115
+#| msgid "Year:"
+msgctxt "balance"
+msgid "Rear"
+msgstr "Trasero"
+
+#: ../panels/sound/gvc-balance-bar.c:116
+#| msgid "Fonts"
+msgctxt "balance"
+msgid "Front"
+msgstr "Frontal"
+
+#: ../panels/sound/gvc-balance-bar.c:119
+#| msgid "Minimize"
+msgctxt "balance"
+msgid "Minimum"
+msgstr "Mínimo"
+
+#: ../panels/sound/gvc-balance-bar.c:120
+#| msgid "Maximize"
+msgctxt "balance"
+msgid "Maximum"
+msgstr "Máximo"
+
+#: ../panels/sound/gvc-balance-bar.c:296
+msgid "_Balance:"
+msgstr "_Balance:"
+
+#: ../panels/sound/gvc-balance-bar.c:299
+#| msgid "_Name:"
+msgid "_Fade:"
+msgstr "_Desvanecimiento:"
+
+#: ../panels/sound/gvc-balance-bar.c:302
+msgid "_Subwoofer:"
+msgstr "_Subwoofer:"
+
+#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
+#| msgid "100%"
+msgctxt "volume"
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/sound/gvc-channel-bar.c:607
+msgctxt "volume"
+msgid "Unamplified"
+msgstr "Sin amplificar"
+
+#: ../panels/sound/gvc-channel-bar.c:901
+#| msgid "Mutt"
+msgid "Mute"
+msgstr "Silenciar"
+
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1588
+#| msgid "_Mobile:"
+msgid "_Profile:"
+msgstr "_Perfil:"
+
+#. translators:
+#. * The number of sound outputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1094
+#, c-format
+#| msgid "Cloned Output"
+msgid "%u Output"
+msgid_plural "%u Outputs"
+msgstr[0] "%u salida"
+msgstr[1] "%u salidas"
+
+#. translators:
+#. * The number of sound inputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1104
+#, c-format
+msgid "%u Input"
+msgid_plural "%u Inputs"
+msgstr[0] "%u entrada"
+
+#: ../panels/sound/gvc-mixer-control.c:1402
+#| msgid "System Settings"
+msgid "System Sounds"
+msgstr "Sonidos del sistema"
+
+#: ../panels/sound/gvc-mixer-dialog.c:310
+#: ../panels/sound/gvc-mixer-dialog.c:605
+#| msgid "Co_untry:"
+msgid "Co_nnector:"
+msgstr "Co_nector:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:518
+msgid "Peak detect"
+msgstr "Detección de picos"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1478
+#: ../panels/sound/gvc-mixer-dialog.c:1676
+#: ../panels/sound/gvc-sound-theme-chooser.c:828
+#| msgid "Name:"
+msgid "Name"
+msgstr "Nombre"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1483
+#| msgid "Devices"
+msgid "Device"
+msgstr "Dispositivo"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1531
+#, c-format
+msgid "Speaker Testing for %s"
+msgstr "Prueba de altavoces para %s"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1589
+#| msgid "Test flash"
+msgid "Test Speakers"
+msgstr "Probar los altavoces"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1720
+msgid "_Output volume: "
+msgstr "Volumen de sali_da: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1734
+#| msgid "Sound files"
+msgid "Sound Effects"
+msgstr "Efectos de sonido"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1741
+#| msgctxt "Sound event"
+#| msgid "Alert sound"
+msgid "_Alert volume: "
+msgstr "Volumen de _alerta: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1754
+msgid "Hardware"
+msgstr "Hardware"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1759
+msgid "C_hoose a device to configure:"
+msgstr "_Elegir un dispositivo para configurar:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1786
+#: ../panels/sound/gvc-mixer-dialog.c:1915
+msgid "Settings for the selected device:"
+msgstr "Ajustes para el dispositivo seleccionado:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1804
+#| msgid "_Input boxes:"
+msgid "_Input volume: "
+msgstr "Volumen de _entrada: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1827
+#| msgid "_Input boxes:"
+msgid "Input level:"
+msgstr "Nivel de entrada:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1853
+msgid "C_hoose a device for sound input:"
+msgstr ""
+
+#: ../panels/sound/gvc-mixer-dialog.c:1888
+msgid "C_hoose a device for sound output:"
+msgstr ""
+
+#: ../panels/sound/gvc-mixer-dialog.c:1926
+#, fuzzy
+#| msgid "_Application font:"
+msgid "Applications"
+msgstr "Tipografía para la _aplicación:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1930
+msgid "No application is currently playing or recording audio."
+msgstr ""
+
+#: ../panels/sound/gvc-speaker-test.c:221
+msgid "Stop"
+msgstr ""
+
+#: ../panels/sound/gvc-speaker-test.c:221
+#: ../panels/sound/gvc-speaker-test.c:333
+#, fuzzy
+#| msgid "Test:"
+msgid "Test"
+msgstr "Probar:"
+
+#: ../panels/sound/gvc-speaker-test.c:229
+msgid "Subwoofer"
+msgstr ""
+
+#: ../panels/sound/gvc-stream-status-icon.c:233
+#, fuzzy, c-format
+#| msgid "Sound Preferences"
+msgid "Failed to start Sound Preferences: %s"
+msgstr "Preferencias de sonido"
+
+#: ../panels/sound/gvc-stream-status-icon.c:256
+#, fuzzy
+#| msgid "Mutt"
+msgid "_Mute"
+msgstr "Mutt"
+
+#: ../panels/sound/gvc-stream-status-icon.c:265
+#, fuzzy
+#| msgid "Sound Preferences"
+msgid "_Sound Preferences"
+msgstr "Preferencias de sonido"
+
+#: ../panels/sound/gvc-stream-status-icon.c:449
+#, fuzzy
+#| msgid "Mutt"
+msgid "Muted"
+msgstr "Mutt"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:321
+#: ../panels/sound/gvc-sound-theme-editor.c:522
+#, fuzzy
+#| msgid "Sounds"
+msgid "No sounds"
+msgstr "Sonidos"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:443
+msgid "Built-in"
+msgstr ""
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:688
+#: ../panels/sound/gvc-sound-theme-chooser.c:700
+#: ../panels/sound/gvc-sound-theme-chooser.c:712
+#: ../panels/sound/gvc-sound-theme-editor.c:560
+#: ../panels/sound/gvc-sound-theme-editor.c:949
+msgid "Sound Preferences"
+msgstr "Preferencias de sonido"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:691
+#: ../panels/sound/gvc-sound-theme-chooser.c:702
+#: ../panels/sound/gvc-sound-theme-chooser.c:714
+#: ../panels/sound/gvc-sound-theme-editor.c:562
+#: ../panels/sound/gvc-sound-theme-editor.c:951
+msgid "Testing event sound"
+msgstr "Comprobando el sonido de evento"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:819
+msgid "From theme"
+msgstr ""
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:835
+#, fuzzy
+#| msgid "Type:"
+msgid "Type"
+msgstr "Tipo:"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:1039
+#, fuzzy
+#| msgid "<b>Sound Theme</b>"
+msgid "Sound _theme:"
+msgstr "<b>Tema de sonido</b>"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:1047
+#, fuzzy
+#| msgid "Play _alert sound"
+msgid "C_hoose an alert sound:"
+msgstr "Reproducir sonido de _alerta"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:1078
+#, fuzzy
+#| msgctxt "Sound event"
+#| msgid "Windows and Buttons"
+msgid "Enable _window and button sounds"
+msgstr "Ventanas y botones"
+
+#. Bell
+#: ../panels/sound/gvc-sound-theme-editor.c:79
+msgctxt "Sound event"
+msgid "Alert sound"
+msgstr "Sonido de alarma"
+
+#. Windows and buttons
+#: ../panels/sound/gvc-sound-theme-editor.c:81
+msgctxt "Sound event"
+msgid "Windows and Buttons"
+msgstr "Ventanas y botones"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:82
+msgctxt "Sound event"
+msgid "Button clicked"
+msgstr "Botón pulsado"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:83
+msgctxt "Sound event"
+msgid "Toggle button clicked"
+msgstr "Botón conmutador pulsado"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:84
+msgctxt "Sound event"
+msgid "Window maximized"
+msgstr "Ventana maximizada"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:85
+msgctxt "Sound event"
+msgid "Window unmaximized"
+msgstr "Ventana desmaximizada"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:86
+msgctxt "Sound event"
+msgid "Window minimised"
+msgstr "Ventana minimizada"
+
+#. Desktop
+#: ../panels/sound/gvc-sound-theme-editor.c:88
+msgctxt "Sound event"
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:89
+#, fuzzy
+#| msgid "Long"
+msgctxt "Sound event"
+msgid "Login"
+msgstr "Largo"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:90
+msgctxt "Sound event"
+msgid "Logout"
+msgstr "Salida"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:91
+msgctxt "Sound event"
+msgid "New e-mail"
+msgstr "Correo-e nuevo"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:92
+msgctxt "Sound event"
+msgid "Empty trash"
+msgstr "Vaciado de la papelera"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:93
+msgctxt "Sound event"
+msgid "Long action completed (download, CD burning, etc.)"
+msgstr "Acción larga completada (descarga, grabación de CD, etc.)"
+
+#. Alerts?
+#: ../panels/sound/gvc-sound-theme-editor.c:95
+msgctxt "Sound event"
+msgid "Alerts"
+msgstr "Alarmas"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:96
+msgctxt "Sound event"
+msgid "Information or question"
+msgstr "Información o pregunta"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:97
+#, fuzzy
+#| msgid "Hearing"
+msgctxt "Sound event"
+msgid "Warning"
+msgstr "Audición"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:98
+msgctxt "Sound event"
+msgid "Error"
+msgstr "Error"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:99
+msgctxt "Sound event"
+msgid "Battery warning"
+msgstr "Advertencia de batería"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:592
+msgid "Select Sound File"
+msgstr "Seleccione un archivo de sonido"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:603
+msgid "Sound files"
+msgstr "Archivos de sonido"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:899
+#, fuzzy
+#| msgid "Custom"
+msgid "Custom…"
+msgstr "Personalizado"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:1302
+#, fuzzy
+#| msgid "<b>Sound Theme</b>"
+msgid "Sound Theme:"
+msgstr "<b>Tema de sonido</b>"
+
+#: ../panels/sound/gvc-sound-theme-editor.c:1330
+#, fuzzy
+#| msgctxt "Sound event"
+#| msgid "Windows and Buttons"
+msgid "Enable window and button sounds"
+msgstr "Ventanas y botones"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
+msgid "Show desktop volume control"
+msgstr ""
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
+#, fuzzy
+#| msgid "Unknown Volume Control %d"
+msgid "Volume Control"
+msgstr "Control de volumen desconocido %d"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
+#, fuzzy
+#| msgid "Enable sound and associate sounds with events"
+msgid "Change sound volume and sound events"
+msgstr "Active el sonido y asocie sonidos con eventos"
+
+#. Translators: This is the name of an audio file that sounds like the bark of a dog.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
+#, fuzzy
+#| msgid "Black"
+msgid "Bark"
+msgstr "Negro"
+
+#. Translators: This is the name of an audio file that sounds like a water drip.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
+msgid "Drip"
+msgstr ""
+
+#. Translators: This is the name of an audio file that sounds like tapping glass.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
+msgid "Glass"
+msgstr ""
+
+#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
+#, fuzzy
+#| msgid "Sound"
+msgid "Sonar"
+msgstr "Sonido"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
 msgid "Universal Access"
@@ -1986,6 +2488,811 @@ msgstr "pulsada"
 msgid "rejected"
 msgstr "rechazada"
 
+#: ../panels/user-accounts/gdm-languages.c:613
+msgid "Unspecified"
+msgstr ""
+
+#: ../panels/user-accounts/run-passwd.c:426
+#, fuzzy
+#| msgid "Authenticated!"
+msgid "Authentication failed"
+msgstr "Autenticado"
+
+#: ../panels/user-accounts/run-passwd.c:506
+#: ../panels/user-accounts/um-password-dialog.c:384
+#, fuzzy, c-format
+#| msgid "The password is too short."
+msgid "The new password is too short"
+msgstr "La contraseña es demasiado corta."
+
+#: ../panels/user-accounts/run-passwd.c:512
+#, fuzzy, c-format
+#| msgid "The password is too simple."
+msgid "The new password is too simple"
+msgstr "La contraseña es demasiado simple."
+
+#: ../panels/user-accounts/run-passwd.c:518
+#, fuzzy, c-format
+#| msgid "The old and new passwords are too similar."
+msgid "The old and new passwords are too similar"
+msgstr "La contraseña antigua y la nueva son demasiado similares."
+
+#: ../panels/user-accounts/run-passwd.c:521
+#, c-format
+msgid "The new password has already been used recently."
+msgstr "La contraseña nueva ya se ha usado recientemente."
+
+#: ../panels/user-accounts/run-passwd.c:524
+#, fuzzy, c-format
+#| msgid "The new password must contain numeric or special character(s)."
+msgid "The new password must contain numeric or special characters"
+msgstr "La contraseña nueva debe contener caracteres numéricos o especiales."
+
+#: ../panels/user-accounts/run-passwd.c:528
+#, fuzzy, c-format
+#| msgid "The old and new passwords are the same."
+msgid "The old and new passwords are the same"
+msgstr "La contraseña nueva y la antigua son la misma."
+
+#: ../panels/user-accounts/run-passwd.c:532
+#, fuzzy, c-format
+#| msgid ""
+#| "Your password has been changed since you initially authenticated! Please "
+#| "re-authenticate."
+msgid "Your password has been changed since you initially authenticated!"
+msgstr ""
+"Su contraseña ha sido cambiada desde que se autenticó por primera vez. Por "
+"favor vuelva a autenticarse."
+
+#: ../panels/user-accounts/run-passwd.c:536
+#, fuzzy, c-format
+#| msgid "The new password must contain numeric or special character(s)."
+msgid "The new password does not contain enough different characters"
+msgstr "La contraseña nueva debe contener caracteres numéricos o especiales."
+
+#: ../panels/user-accounts/run-passwd.c:540
+#, fuzzy, c-format
+#| msgid "Unknown"
+msgid "Unknown error"
+msgstr "Desconocido"
+
+#: ../panels/user-accounts/um-account-dialog.c:78
+#, fuzzy
+#| msgid "Failed to create temporary directory"
+msgid "Failed to create user"
+msgstr "Falló al crear la carpeta temporal"
+
+#: ../panels/user-accounts/um-account-dialog.c:175
+#, fuzzy, c-format
+#| msgid "A bookmark for URI '%s' already exists"
+msgid "A user with the username '%s' already exists"
+msgstr "Ya existe un marcador para la URI «%s»"
+
+#: ../panels/user-accounts/um-account-dialog.c:179
+#, fuzzy, c-format
+#| msgid "The password is too short."
+msgid "The username is too long"
+msgstr "La contraseña es demasiado corta."
+
+#: ../panels/user-accounts/um-account-dialog.c:182
+msgid "The username cannot start with a '-'"
+msgstr ""
+
+#: ../panels/user-accounts/um-account-dialog.c:185
+msgid ""
+"The username must consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
+msgstr ""
+
+#: ../panels/user-accounts/um-account-type.c:35
+#: ../panels/user-accounts/data/account-dialog.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#, fuzzy
+#| msgid "Standard XTerminal"
+msgctxt "Account type"
+msgid "Standard"
+msgstr "Terminal X estándar"
+
+#: ../panels/user-accounts/um-account-type.c:37
+#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#, fuzzy
+#| msgid "Terminator"
+msgctxt "Account type"
+msgid "Administrator"
+msgstr "Terminator"
+
+#: ../panels/user-accounts/um-account-type.c:39
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+msgctxt "Account type"
+msgid "Supervised"
+msgstr ""
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:107
+msgid ""
+"You are not allowed to access the device. Contact your system administrator."
+msgstr ""
+"No le está permitido acceder al dispositivo. Contacte con el administrador "
+"de su sistema."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:109
+msgid "The device is already in use."
+msgstr "El dispositivo ya está en uso"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:111
+#, fuzzy
+#| msgid "An internal error occured"
+msgid "An internal error occurred."
+msgstr "Ocurrió un error interno"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:181
+#: ../panels/user-accounts/um-fingerprint-dialog.c:182
+#, fuzzy
+#| msgid "Disabled"
+msgid "Enabled"
+msgstr "Desactivado"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:224
+msgid "Delete registered fingerprints?"
+msgstr "¿Borrar las huellas registradas?"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:228
+msgid "_Delete Fingerprints"
+msgstr "_Borrar huellas"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:235
+msgid ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+msgstr ""
+"¿Quiere borrar sus huellas registradas y así desactivar el inicio de sesión "
+"con huella?"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:363
+msgid "Done!"
+msgstr "Hecho"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:409
+#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#, c-format
+msgid "Could not access '%s' device"
+msgstr "No se pudo acceder al dispositivo «%s»"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#, c-format
+msgid "Could not start finger capture on '%s' device"
+msgstr "No se pudo iniciar la captura de dedo en el dispositivo «%s»"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+msgid "Could not access any fingerprint readers"
+msgstr "No se pudo acceder a ninguna lectura de huellas"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:551
+msgid "Please contact your system administrator for help."
+msgstr "Contacte con el administrador de su sistema para obtener ayuda."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:1
+msgid "Enable Fingerprint Login"
+msgstr "Activar el inicio de sesión con huella"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "To enable fingerprint login, you need to save one of your fingerprints, using the
+#. * 'Digital Persona U.are.U 4000/4000B' device."
+#: ../panels/user-accounts/um-fingerprint-dialog.c:625
+#, c-format
+msgid ""
+"To enable fingerprint login, you need to save one of your fingerprints, "
+"using the '%s' device."
+msgstr ""
+"Para activar el inicio de sesión con huella debe guardar una de sus huellas "
+"usando el dispositivo «%s»."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:633
+#, c-format
+msgid ""
+"Enrolling fingerprints for\n"
+"<b><big>%s</big></b>"
+msgstr ""
+
+#: ../panels/user-accounts/um-language-dialog.c:328
+msgid "Other..."
+msgstr ""
+
+#: ../panels/user-accounts/um-lockbutton.c:345
+msgid "Lock"
+msgstr ""
+
+#: ../panels/user-accounts/um-lockbutton.c:354
+msgid "Unlock"
+msgstr ""
+
+#: ../panels/user-accounts/um-lockbutton.c:363
+msgid "Locked"
+msgstr ""
+
+#: ../panels/user-accounts/um-lockbutton.c:372
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+
+#: ../panels/user-accounts/um-lockbutton.c:381
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+
+#: ../panels/user-accounts/um-lockbutton.c:390
+#, fuzzy
+#| msgid "Please contact your system administrator for help."
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr "Contacte con el administrador de su sistema para obtener ayuda."
+
+#: ../panels/user-accounts/um-password-dialog.c:188
+msgid "More choices..."
+msgstr ""
+
+#: ../panels/user-accounts/um-password-dialog.c:294
+msgid "Please choose another password."
+msgstr ""
+
+#: ../panels/user-accounts/um-password-dialog.c:303
+#, fuzzy
+#| msgid "Please type your password in the <b>New password</b> field."
+msgid "Please type your current password again."
+msgstr "Teclee su contraseña en el campo <b>Contraseña nueva</b>."
+
+#: ../panels/user-accounts/um-password-dialog.c:309
+#, fuzzy
+#| msgid "Your password has been changed."
+msgid "Password could not be changed"
+msgstr "Su contraseña se ha cambiado."
+
+#: ../panels/user-accounts/um-password-dialog.c:381
+#, fuzzy
+#| msgid "_Retype new password:"
+msgid "You need to enter a new password"
+msgstr "_Vuelva a teclear la contraseña nueva:"
+
+#: ../panels/user-accounts/um-password-dialog.c:390
+msgid "You need to confirm the password"
+msgstr ""
+
+#: ../panels/user-accounts/um-password-dialog.c:393
+#, fuzzy
+#| msgid "The password is too short."
+msgid "The passwords do not match"
+msgstr "La contraseña es demasiado corta."
+
+#: ../panels/user-accounts/um-password-dialog.c:399
+msgid "You need to enter your current password"
+msgstr ""
+
+#: ../panels/user-accounts/um-password-dialog.c:402
+#, fuzzy
+#| msgid "That password was incorrect."
+msgid "The current password is not correct"
+msgstr "Esa contraseña fue incorrecta."
+
+#: ../panels/user-accounts/um-password-dialog.c:475
+#: ../panels/user-accounts/um-password-dialog.c:692
+msgctxt "Password strength"
+msgid "Too short"
+msgstr ""
+
+#: ../panels/user-accounts/um-password-dialog.c:478
+#: ../panels/user-accounts/um-password-dialog.c:693
+msgctxt "Password strength"
+msgid "Weak"
+msgstr ""
+
+#: ../panels/user-accounts/um-password-dialog.c:480
+#: ../panels/user-accounts/um-password-dialog.c:694
+#, fuzzy
+#| msgid "Flickr"
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Flickr"
+
+#: ../panels/user-accounts/um-password-dialog.c:482
+#: ../panels/user-accounts/um-password-dialog.c:695
+msgctxt "Password strength"
+msgid "Good"
+msgstr ""
+
+#: ../panels/user-accounts/um-password-dialog.c:484
+#: ../panels/user-accounts/um-password-dialog.c:696
+#, fuzzy
+#| msgid "Scrolling"
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Desplazamiento"
+
+#: ../panels/user-accounts/um-password-dialog.c:523
+msgid "Passwords do not match"
+msgstr ""
+
+#: ../panels/user-accounts/um-password-dialog.c:549
+#, fuzzy
+#| msgid "Change password"
+msgid "Wrong password"
+msgstr "Cambiar contraseña"
+
+#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#, fuzzy
+#| msgid "_Select"
+msgid "Select"
+msgstr "_Seleccionar"
+
+#: ../panels/user-accounts/um-photo-dialog.c:212
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr ""
+
+#: ../panels/user-accounts/um-photo-dialog.c:431
+msgid "Take a photo..."
+msgstr ""
+
+#: ../panels/user-accounts/um-photo-dialog.c:449
+msgid "Browse for more pictures..."
+msgstr ""
+
+#: ../panels/user-accounts/um-photo-dialog.c:680
+#, c-format
+msgid "Used by %s"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-manager.c:430
+#, fuzzy, c-format
+#| msgid "A bookmark for URI '%s' already exists"
+msgid "A user with name '%s' already exists."
+msgstr "Ya existe un marcador para la URI «%s»"
+
+#: ../panels/user-accounts/um-user-manager.c:525
+msgid "This user does not exist."
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:349
+msgid "Failed to delete user"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:409
+msgid "You cannot delete your own account."
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:418
+#, c-format
+msgid "%s is still logged in"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:422
+msgid ""
+"Deleting a user while they are logged in can leave the system in an "
+"inconsistent state."
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:431
+#, c-format
+msgid "Do you want to keep %s's files?"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:435
+msgid ""
+"It is possible to keep the home directory, mail spool and temporary files "
+"around when deleting a user account."
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:438
+#, fuzzy
+#| msgid "_Delete Fingerprints"
+msgid "_Delete Files"
+msgstr "_Borrar huellas"
+
+#: ../panels/user-accounts/um-user-panel.c:439
+#, fuzzy
+#| msgid "New File"
+msgid "_Keep Files"
+msgstr "Archivo nuevo"
+
+#: ../panels/user-accounts/um-user-panel.c:440
+msgid "_Cancel"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:464
+msgctxt "Password mode"
+msgid "Account disabled"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:473
+msgctxt "Password mode"
+msgid "To be set at next login"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:476
+#, fuzzy
+#| msgid "None"
+msgctxt "Password mode"
+msgid "None"
+msgstr "Ninguna"
+
+#: ../panels/user-accounts/um-user-panel.c:818
+#, fuzzy
+#| msgid "Failed to construct test pipeline for '%s'"
+msgid "Failed to contact the accounts service"
+msgstr "Ha fallado la construcción de la tubería de prueba para «%s»"
+
+#: ../panels/user-accounts/um-user-panel.c:820
+#, fuzzy
+#| msgid "Please make sure that the applet is properly installed"
+msgid "Please make sure that the AccountService is installed and enabled."
+msgstr "Asegúrese de que la miniaplicación está instalada correctamente"
+
+#: ../panels/user-accounts/um-user-panel.c:853
+msgid ""
+"To make changes,\n"
+"click the * icon first"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:890
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#, fuzzy
+#| msgid "C_reate"
+msgid "Create a user"
+msgstr "C_rear"
+
+#: ../panels/user-accounts/um-user-panel.c:901
+#: ../panels/user-accounts/um-user-panel.c:1177
+msgid ""
+"To create a user,\n"
+"click the * icon first"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:910
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+msgid "Delete the selected user"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:922
+#: ../panels/user-accounts/um-user-panel.c:1182
+msgid ""
+"To delete the selected user,\n"
+"click the * icon first"
+msgstr ""
+
+#: ../panels/user-accounts/um-user-panel.c:1086
+#, fuzzy
+#| msgid "By _country"
+msgid "My Account"
+msgstr "Por _país"
+
+#: ../panels/user-accounts/um-user-panel.c:1095
+msgid "Other Accounts"
+msgstr ""
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
+msgid "Add or remove users"
+msgstr ""
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:2
+#, fuzzy
+#| msgid "seconds"
+msgid "User Accounts"
+msgstr "segundos"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+#, fuzzy
+#| msgid "C_reate"
+msgid "Cr_eate"
+msgstr "C_rear"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
+#, fuzzy
+#| msgid "Create New Location"
+msgid "Create new account"
+msgstr "Crear una ubicación nueva"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#, fuzzy
+#| msgid "_Country:"
+msgid "_Account Type:"
+msgstr "_País:"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+#, fuzzy
+#| msgid "Full Name"
+msgid "_Full name:"
+msgstr "Nombre completo"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#, fuzzy
+#| msgid "U_sername:"
+msgid "_Username:"
+msgstr "_Usuario:"
+
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr ""
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
+"strong password</a>"
+msgstr ""
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
+msgid ""
+"<small>This hint may be displayed at the login screen.  It will be visible "
+"to all users of this system.  Do <b>not</b> include the password here.</"
+"small>"
+msgstr ""
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+#, fuzzy
+#| msgid "_New password:"
+msgid "C_onfirm password:"
+msgstr "Contraseña _nueva:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
+#, fuzzy
+#| msgid "Change set"
+msgid "Ch_ange"
+msgstr "Conjunto de cambios"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
+#, fuzzy
+#| msgid "Change password"
+msgid "Changing password for:"
+msgstr "Cambiar contraseña"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
+#, fuzzy
+#| msgid "Change password"
+msgid "Choose a generated password"
+msgstr "Cambiar contraseña"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Choose password at next login"
+msgstr ""
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Current _password:"
+msgstr "Contraseña _actual:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
+msgid "Disable this account"
+msgstr ""
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
+msgid "Enable this account"
+msgstr ""
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:11
+#, fuzzy
+#| msgid "Flickr"
+msgid "Fair"
+msgstr "Flickr"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
+msgid "Log in without a password"
+msgstr ""
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
+#, fuzzy
+#| msgid "_New password:"
+msgid "Set a password now"
+msgstr "Contraseña _nueva:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:14
+#, fuzzy
+#| msgid "Action"
+msgid "_Action:"
+msgstr "Acción"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:15
+#, fuzzy
+#| msgid "_Print"
+msgid "_Hint:"
+msgstr "Im_primir"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:16
+msgid "_New password:"
+msgstr "Contraseña _nueva:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:17
+#, fuzzy
+#| msgid "_New password:"
+msgid "_Show password"
+msgstr "Contraseña _nueva:"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:1
+#, fuzzy
+#| msgid "Web Browser"
+msgid "Browse"
+msgstr "Navegador web"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+msgid "Changing photo for:"
+msgstr ""
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:5
+msgid ""
+"Choose a picture that will be shown at the login screen for this account."
+msgstr ""
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:6
+#, fuzzy
+#| msgid "Galeon"
+msgid "Gallery"
+msgstr "Galeon"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:7
+msgid "Photograph"
+msgstr ""
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+#, fuzzy
+#| msgid "Take a break!"
+msgid "Take a photograph"
+msgstr "¡Tómese un descanso!"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+msgid ""
+"A guest account will allow anyone to temporarily log in to this computer "
+"without a password.  For security, remote logins to this account are not "
+"allowed.\n"
+"\n"
+"<b>When the guest user logs out, all files and data associated with the "
+"account will be deleted.</b>"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+msgid "Account Information"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Account type:"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#, fuzzy
+#| msgid "About %s"
+msgid "Accounts"
+msgstr "Acerca de %s"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+msgid "Address Book Card:"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "Allow guests to log in to this computer"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+msgid "Automatic Login:"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
+msgid "E-mail address:"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
+#, fuzzy
+#| msgid "Enable Fingerprint Login"
+msgid "Fingerprint Login:"
+msgstr "Activar el inicio de sesión con huella"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
+#, fuzzy
+#| msgid "_Language:"
+msgid "Language:"
+msgstr "_Idioma:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
+#, fuzzy
+#| msgid "Options..."
+msgid "Login Options"
+msgstr "Opciones…"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
+#, fuzzy
+#| msgid "_Open"
+msgid "Open"
+msgstr "_Abrir"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
+#, fuzzy
+#| msgid "_Password:"
+msgid "Password:"
+msgstr "_Contraseña:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
+#, fuzzy
+#| msgid "Description:"
+msgid "Restrictions:"
+msgstr "Descripción:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
+msgid "Show Shutdown, Suspend and Restart actions"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:24
+msgid "Show list of users"
+msgstr ""
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
+#, fuzzy
+#| msgid "The password is too short."
+msgid "Show password hints"
+msgstr "La contraseña es demasiado corta."
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:2
+msgid "Left index finger"
+msgstr "Dedo índice izquierdo"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
+msgid "Left little finger"
+msgstr "Dedo meñique izquierdo"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+msgid "Left middle finger"
+msgstr "Dedo corazón izquierdo"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+msgid "Left ring finger"
+msgstr "Dedo anular izquierdo"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+msgid "Left thumb"
+msgstr "Pulgar izquierdo"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
+msgid "Other finger: "
+msgstr "Otro dedo: "
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
+msgid "Right index finger"
+msgstr "Dedo índice derecho"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+msgid "Right little finger"
+msgstr "Dedo meñique derecho"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+msgid "Right middle finger"
+msgstr "Dedo corazón derecho"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+msgid "Right ring finger"
+msgstr "Dedo anular derecho"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+msgid "Right thumb"
+msgstr "Pulgar derecho"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+msgid ""
+"Your fingerprint was successfully saved. You should now be able to log in "
+"using your fingerprint reader."
+msgstr ""
+"Su huella dactilar se guardó correctamente. Ahora debería poder iniciar "
+"sesión usando su lector de huellas dactilares."
+
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
 msgid "System Settings"
 msgstr "Configuración del sistema"
@@ -2144,9 +3451,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "_Postpone Break"
 #~ msgstr "_Posponer el descanso"
 
-#~ msgid "Take a break!"
-#~ msgstr "¡Tómese un descanso!"
-
 #~ msgid "_Take a Break"
 #~ msgstr "_Tomar un descanso"
 
@@ -2193,9 +3497,6 @@ msgstr "_Todos los ajustes"
 #~ "QA: Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002\n"
 #~ "Lucas Di Pentima <lucas@lunix.com.ar>, 2002\n"
 #~ "Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2002, 2003"
-
-#~ msgid "Enable debugging code"
-#~ msgstr "Activar el código de depuración"
 
 #~ msgid "Don't check whether the notification area exists"
 #~ msgstr "No comprobar si existe el área de notificación"
@@ -2386,23 +3687,14 @@ msgstr "_Todos los ajustes"
 #~ msgid "Whether to thumbnail Type1 fonts"
 #~ msgstr "Indica si debe miniaturizar las tipografías Type1"
 
-#~ msgid "Name:"
-#~ msgstr "Nombre:"
-
 #~ msgid "Style:"
 #~ msgstr "Estilo:"
-
-#~ msgid "Type:"
-#~ msgstr "Tipo:"
 
 #~ msgid "Size:"
 #~ msgstr "Tamaño:"
 
 #~ msgid "Copyright:"
 #~ msgstr "Copyright:"
-
-#~ msgid "Description:"
-#~ msgstr "Descripción:"
 
 #~ msgid "Installed"
 #~ msgstr "Instalado"
@@ -2558,9 +3850,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "Unable to open address book"
 #~ msgstr "Imposible abrir la libreta de direcciones"
 
-#~ msgid "About %s"
-#~ msgstr "Acerca de %s"
-
 #~ msgid "A_IM/iChat:"
 #~ msgstr "A_IM/iChat:"
 
@@ -2588,9 +3877,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "Ci_ty:"
 #~ msgstr "_Ciudad:"
 
-#~ msgid "Co_untry:"
-#~ msgstr "_País:"
-
 #~ msgid "Contact"
 #~ msgstr "Contacto"
 
@@ -2605,9 +3891,6 @@ msgstr "_Todos los ajustes"
 
 #~ msgid "Enable _Fingerprint Login..."
 #~ msgstr "Activar el inicio de sesión con _huella..."
-
-#~ msgid "Full Name"
-#~ msgstr "Nombre completo"
 
 #~ msgid "Hom_e:"
 #~ msgstr "_Domicilio:"
@@ -2684,9 +3967,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "_Manager:"
 #~ msgstr "_Jefe:"
 
-#~ msgid "_Mobile:"
-#~ msgstr "_Móvil:"
-
 #~ msgid "_Profession:"
 #~ msgstr "_Profesión:"
 
@@ -2711,105 +3991,14 @@ msgstr "_Todos los ajustes"
 #~ msgid "Set your personal information"
 #~ msgstr "Escriba su información personal"
 
-#~ msgid ""
-#~ "You are not allowed to access the device. Contact your system "
-#~ "administrator."
-#~ msgstr ""
-#~ "No le está permitido acceder al dispositivo. Contacte con el "
-#~ "administrador de su sistema."
-
-#~ msgid "The device is already in use."
-#~ msgstr "El dispositivo ya está en uso"
-
-#~ msgid "An internal error occured"
-#~ msgstr "Ocurrió un error interno"
-
-#~ msgid "Delete registered fingerprints?"
-#~ msgstr "¿Borrar las huellas registradas?"
-
-#~ msgid "_Delete Fingerprints"
-#~ msgstr "_Borrar huellas"
-
-#~ msgid ""
-#~ "Do you want to delete your registered fingerprints so fingerprint login "
-#~ "is disabled?"
-#~ msgstr ""
-#~ "¿Quiere borrar sus huellas registradas y así desactivar el inicio de "
-#~ "sesión con huella?"
-
-#~ msgid "Done!"
-#~ msgstr "Hecho"
-
-#~ msgid "Could not access '%s' device"
-#~ msgstr "No se pudo acceder al dispositivo «%s»"
-
-#~ msgid "Could not start finger capture on '%s' device"
-#~ msgstr "No se pudo iniciar la captura de dedo en el dispositivo «%s»"
-
-#~ msgid "Could not access any fingerprint readers"
-#~ msgstr "No se pudo acceder a ninguna lectura de huellas"
-
-#~ msgid "Please contact your system administrator for help."
-#~ msgstr "Contacte con el administrador de su sistema para obtener ayuda."
-
-#~ msgid "Enable Fingerprint Login"
-#~ msgstr "Activar el inicio de sesión con huella"
-
-#~ msgid ""
-#~ "To enable fingerprint login, you need to save one of your fingerprints, "
-#~ "using the '%s' device."
-#~ msgstr ""
-#~ "Para activar el inicio de sesión con huella debe guardar una de sus "
-#~ "huellas usando el dispositivo «%s»."
-
 #~ msgid "Swipe finger on reader"
 #~ msgstr "Pase el dedo sobre el lector"
 
 #~ msgid "Place finger on reader"
 #~ msgstr "Ponga el dedo en el lector"
 
-#~ msgid "Left index finger"
-#~ msgstr "Dedo índice izquierdo"
-
-#~ msgid "Left little finger"
-#~ msgstr "Dedo meñique izquierdo"
-
-#~ msgid "Left middle finger"
-#~ msgstr "Dedo corazón izquierdo"
-
-#~ msgid "Left ring finger"
-#~ msgstr "Dedo anular izquierdo"
-
-#~ msgid "Left thumb"
-#~ msgstr "Pulgar izquierdo"
-
-#~ msgid "Other finger: "
-#~ msgstr "Otro dedo: "
-
-#~ msgid "Right index finger"
-#~ msgstr "Dedo índice derecho"
-
-#~ msgid "Right little finger"
-#~ msgstr "Dedo meñique derecho"
-
-#~ msgid "Right middle finger"
-#~ msgstr "Dedo corazón derecho"
-
-#~ msgid "Right ring finger"
-#~ msgstr "Dedo anular derecho"
-
-#~ msgid "Right thumb"
-#~ msgstr "Pulgar derecho"
-
 #~ msgid "Select finger"
 #~ msgstr "Seleccionar dedo"
-
-#~ msgid ""
-#~ "Your fingerprint was successfully saved. You should now be able to log in "
-#~ "using your fingerprint reader."
-#~ msgstr ""
-#~ "Su huella dactilar se guardó correctamente. Ahora debería poder iniciar "
-#~ "sesión usando su lector de huellas dactilares."
 
 #~ msgid "Child exited unexpectedly"
 #~ msgstr "El hijo salió inesperadamente"
@@ -2820,43 +4009,8 @@ msgstr "_Todos los ajustes"
 #~ msgid "Could not shutdown backend_stdout IO channel: %s"
 #~ msgstr "No es posible apagar el canal de E/S backend_stdout: %s"
 
-#~ msgid "Authenticated!"
-#~ msgstr "Autenticado"
-
-#~ msgid ""
-#~ "Your password has been changed since you initially authenticated! Please "
-#~ "re-authenticate."
-#~ msgstr ""
-#~ "Su contraseña ha sido cambiada desde que se autenticó por primera vez. "
-#~ "Por favor vuelva a autenticarse."
-
-#~ msgid "That password was incorrect."
-#~ msgstr "Esa contraseña fue incorrecta."
-
-#~ msgid "Your password has been changed."
-#~ msgstr "Su contraseña se ha cambiado."
-
 #~ msgid "System error: %s."
 #~ msgstr "Error del sistema: %s."
-
-#~ msgid "The password is too short."
-#~ msgstr "La contraseña es demasiado corta."
-
-#~ msgid "The password is too simple."
-#~ msgstr "La contraseña es demasiado simple."
-
-#~ msgid "The old and new passwords are too similar."
-#~ msgstr "La contraseña antigua y la nueva son demasiado similares."
-
-#~ msgid "The new password must contain numeric or special character(s)."
-#~ msgstr ""
-#~ "La contraseña nueva debe contener caracteres numéricos o especiales."
-
-#~ msgid "The old and new passwords are the same."
-#~ msgstr "La contraseña nueva y la antigua son la misma."
-
-#~ msgid "The new password has already been used recently."
-#~ msgstr "La contraseña nueva ya se ha usado recientemente."
 
 #~ msgid "Unable to launch %s: %s"
 #~ msgstr "No se puede lanzar %s: %s"
@@ -2873,9 +4027,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "Click <b>Change password</b> to change your password."
 #~ msgstr "Pulse en <b>Cambiar contraseña</b> para cambiar su contraseña."
 
-#~ msgid "Please type your password in the <b>New password</b> field."
-#~ msgstr "Teclee su contraseña en el campo <b>Contraseña nueva</b>."
-
 #~ msgid ""
 #~ "Please type your password again in the <b>Retype new password</b> field."
 #~ msgstr ""
@@ -2888,14 +4039,8 @@ msgstr "_Todos los ajustes"
 #~ msgid "Change pa_ssword"
 #~ msgstr "Cambiar _contraseña"
 
-#~ msgid "Change password"
-#~ msgstr "Cambiar contraseña"
-
 #~ msgid "Change your password"
 #~ msgstr "Cambiar su contraseña"
-
-#~ msgid "Current _password:"
-#~ msgstr "Contraseña _actual:"
 
 #~ msgid ""
 #~ "To change your password, enter your current password in the field below "
@@ -2910,12 +4055,6 @@ msgstr "_Todos los ajustes"
 
 #~ msgid "_Authenticate"
 #~ msgstr "_Autenticar"
-
-#~ msgid "_New password:"
-#~ msgstr "Contraseña _nueva:"
-
-#~ msgid "_Retype new password:"
-#~ msgstr "_Vuelva a teclear la contraseña nueva:"
 
 #~ msgid "Add Wallpaper"
 #~ msgstr "Añadir fondo"
@@ -3075,9 +4214,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "Font Rendering Details"
 #~ msgstr "Detalles del renderizado de la tipografía"
 
-#~ msgid "Fonts"
-#~ msgstr "Tipografías"
-
 #~ msgid "Get more backgrounds online"
 #~ msgstr "Obtener más fondos en línea"
 
@@ -3165,9 +4301,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "Window Border"
 #~ msgstr "Borde de la ventana"
 
-#~ msgid "_Application font:"
-#~ msgstr "Tipografía para la _aplicación:"
-
 #~ msgid "_BGR"
 #~ msgstr "_BGR"
 
@@ -3179,9 +4312,6 @@ msgstr "_Todos los ajustes"
 
 #~ msgid "_Fixed width font:"
 #~ msgstr "Tipografía de ancho _fijo:"
-
-#~ msgid "_Input boxes:"
-#~ msgstr "Cajas de _entrada:"
 
 #~ msgid "_Install..."
 #~ msgstr "_Instalar…"
@@ -3282,9 +4412,6 @@ msgstr "_Todos los ajustes"
 
 #~ msgid "GNOME Theme %s correctly installed"
 #~ msgstr "El tema de GNOME %s se instaló correctamente"
-
-#~ msgid "Failed to create temporary directory"
-#~ msgstr "Falló al crear la carpeta temporal"
 
 #~ msgid "New themes have been successfully installed."
 #~ msgstr "Los nuevos temas se han instalado con éxito."
@@ -3442,17 +4569,11 @@ msgstr "_Todos los ajustes"
 #~ "El gestor de ventanas «%s» no ha registrado una herramienta de "
 #~ "configuración\n"
 
-#~ msgid "Maximize"
-#~ msgstr "Maximizar"
-
 #~ msgid "Maximize Vertically"
 #~ msgstr "Maximizar verticalmente"
 
 #~ msgid "Maximize Horizontally"
 #~ msgstr "Maximizar horizontalmente"
-
-#~ msgid "Minimize"
-#~ msgstr "Minimizar"
 
 #~ msgid "Roll up"
 #~ msgstr "Enrollar"
@@ -3590,9 +4711,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "_Select windows when the mouse moves over them"
 #~ msgstr "_Seleccionar las ventanas cuando el ratón se mueve sobre ellas"
 
-#~ msgid "seconds"
-#~ msgstr "segundos"
-
 #~ msgid "Set your window properties"
 #~ msgstr "Establezca sus propiedades de ventana"
 
@@ -3682,9 +4800,6 @@ msgstr "_Todos los ajustes"
 
 #~ msgid "Open with \"%s\""
 #~ msgstr "Abrir con «%s»"
-
-#~ msgid "Open with Default Application"
-#~ msgstr "Abrir con la aplicación predeterminada"
 
 #~ msgid "Open in File Manager"
 #~ msgstr "Abrir en el gestor de archivos"
@@ -3889,9 +5004,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "C_ut"
 #~ msgstr "Co_rtar"
 
-#~ msgid "New File"
-#~ msgstr "Archivo nuevo"
-
 #~ msgid "Open File"
 #~ msgstr "Abrir archivo"
 
@@ -3937,12 +5049,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "_New"
 #~ msgstr "_Nuevo"
 
-#~ msgid "_Open"
-#~ msgstr "_Abrir"
-
-#~ msgid "_Print"
-#~ msgstr "Im_primir"
-
 #~ msgid "_Quit"
 #~ msgstr "_Salir"
 
@@ -3987,15 +5093,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "Shutdown"
 #~ msgstr "Apagar"
 
-#~ msgid "Enable sound and associate sounds with events"
-#~ msgstr "Active el sonido y asocie sonidos con eventos"
-
-#~ msgid "Unknown Volume Control %d"
-#~ msgstr "Control de volumen desconocido %d"
-
-#~ msgid "Failed to construct test pipeline for '%s'"
-#~ msgstr "Ha fallado la construcción de la tubería de prueba para «%s»"
-
 #~ msgid "Not connected"
 #~ msgstr "No conectado"
 
@@ -4038,17 +5135,8 @@ msgstr "_Todos los ajustes"
 #~ msgid "<b>Sound Events</b>"
 #~ msgstr "<b>Eventos de sonido</b>"
 
-#~ msgid "<b>Sound Theme</b>"
-#~ msgstr "<b>Tema de sonido</b>"
-
 #~ msgid "Click OK to finish."
 #~ msgstr "Pulse «Aceptar» para terminar."
-
-#~ msgid "Devices"
-#~ msgstr "Dispositivos"
-
-#~ msgid "Play _alert sound"
-#~ msgstr "Reproducir sonido de _alerta"
 
 #~ msgid "Play _sound effects when buttons are clicked"
 #~ msgstr "Reproducir efectos de _sonido al pulsar botones"
@@ -4070,12 +5158,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "Sou_nd capture:"
 #~ msgstr "Captura de so_nido:"
 
-#~ msgid "Sound Preferences"
-#~ msgstr "Preferencias de sonido"
-
-#~ msgid "Sounds"
-#~ msgstr "Sonidos"
-
 #~ msgid "Testing Pipeline"
 #~ msgstr "Probar pipeline"
 
@@ -4087,79 +5169,6 @@ msgstr "_Todos los ajustes"
 
 #~ msgid "_Sound playback:"
 #~ msgstr "Reproducción de _sonido:"
-
-#~ msgctxt "Sound event"
-#~ msgid "Alert sound"
-#~ msgstr "Sonido de alarma"
-
-#~ msgctxt "Sound event"
-#~ msgid "Windows and Buttons"
-#~ msgstr "Ventanas y botones"
-
-#~ msgctxt "Sound event"
-#~ msgid "Button clicked"
-#~ msgstr "Botón pulsado"
-
-#~ msgctxt "Sound event"
-#~ msgid "Toggle button clicked"
-#~ msgstr "Botón conmutador pulsado"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window maximized"
-#~ msgstr "Ventana maximizada"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window unmaximized"
-#~ msgstr "Ventana desmaximizada"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window minimised"
-#~ msgstr "Ventana minimizada"
-
-#~ msgctxt "Sound event"
-#~ msgid "Desktop"
-#~ msgstr "Escritorio"
-
-#~ msgctxt "Sound event"
-#~ msgid "Logout"
-#~ msgstr "Salida"
-
-#~ msgctxt "Sound event"
-#~ msgid "New e-mail"
-#~ msgstr "Correo-e nuevo"
-
-#~ msgctxt "Sound event"
-#~ msgid "Empty trash"
-#~ msgstr "Vaciado de la papelera"
-
-#~ msgctxt "Sound event"
-#~ msgid "Long action completed (download, CD burning, etc.)"
-#~ msgstr "Acción larga completada (descarga, grabación de CD, etc.)"
-
-#~ msgctxt "Sound event"
-#~ msgid "Alerts"
-#~ msgstr "Alarmas"
-
-#~ msgctxt "Sound event"
-#~ msgid "Information or question"
-#~ msgstr "Información o pregunta"
-
-#~ msgctxt "Sound event"
-#~ msgid "Error"
-#~ msgstr "Error"
-
-#~ msgctxt "Sound event"
-#~ msgid "Battery warning"
-#~ msgstr "Advertencia de batería"
-
-#~ msgid "Testing event sound"
-#~ msgstr "Comprobando el sonido de evento"
-
-#~ msgid "Select Sound File"
-#~ msgstr "Seleccione un archivo de sonido"
-
-#~ msgid "Sound files"
-#~ msgstr "Archivos de sonido"
 
 #~ msgid "Custom..."
 #~ msgstr "Personalizado…"
@@ -4182,9 +5191,6 @@ msgstr "_Todos los ajustes"
 #~ "Active el soporte para las tecnologías de asistencia de GNOME durante el "
 #~ "inicio"
 
-#~ msgid "Cloned Output"
-#~ msgstr "Salida clonada"
-
 #~ msgid "New accelerator..."
 #~ msgstr "Combinación nueva…"
 
@@ -4203,9 +5209,6 @@ msgstr "_Todos los ajustes"
 #~ msgid "No valid bookmark file found in data dirs"
 #~ msgstr ""
 #~ "No se encontró un archivo de marcadores válido en los directorios de datos"
-
-#~ msgid "A bookmark for URI '%s' already exists"
-#~ msgstr "Ya existe un marcador para la URI «%s»"
 
 #~ msgid "No bookmark found for URI '%s'"
 #~ msgstr "No se encontró un marcador para la URI «%s»"
