@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
 "POT-Creation-Date: 2010-11-01 02:26+0000\n"
-"PO-Revision-Date: 2010-11-01 20:18+0100\n"
+"PO-Revision-Date: 2010-11-02 10:55+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2488,32 +2488,30 @@ msgid "The new password must contain numeric or special characters"
 msgstr "La contraseña nueva debe contener caracteres numéricos o especiales"
 
 #: ../panels/user-accounts/run-passwd.c:528
-#, fuzzy, c-format
+#, c-format
 #| msgid "The old and new passwords are the same."
 msgid "The old and new passwords are the same"
-msgstr "La contraseña nueva y la antigua son la misma."
+msgstr "La contraseña nueva y la antigua son la misma"
 
 #: ../panels/user-accounts/run-passwd.c:532
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| "Your password has been changed since you initially authenticated! Please "
 #| "re-authenticate."
 msgid "Your password has been changed since you initially authenticated!"
-msgstr ""
-"Su contraseña ha sido cambiada desde que se autenticó por primera vez. Por "
-"favor vuelva a autenticarse."
+msgstr "Se ha cambiado su contraseña desde que se autenticó inicialmente."
 
 #: ../panels/user-accounts/run-passwd.c:536
-#, fuzzy, c-format
+#, c-format
 #| msgid "The new password must contain numeric or special character(s)."
 msgid "The new password does not contain enough different characters"
-msgstr "La contraseña nueva debe contener caracteres numéricos o especiales."
+msgstr "La contraseña nueva no contiene suficientes caracteres diferentes"
 
 #: ../panels/user-accounts/run-passwd.c:540
-#, fuzzy, c-format
+#, c-format
 #| msgid "Unknown"
 msgid "Unknown error"
-msgstr "Desconocido"
+msgstr "Error desconocido"
 
 #: ../panels/user-accounts/um-account-dialog.c:78
 #| msgid "Failed to create temporary directory"
@@ -2583,17 +2581,15 @@ msgid "The device is already in use."
 msgstr "El dispositivo ya está en uso"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:111
-#, fuzzy
 #| msgid "An internal error occured"
 msgid "An internal error occurred."
-msgstr "Ocurrió un error interno"
+msgstr "Ocurrió un error interno."
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:181
 #: ../panels/user-accounts/um-fingerprint-dialog.c:182
-#, fuzzy
 #| msgid "Disabled"
 msgid "Enabled"
-msgstr "Desactivado"
+msgstr "Activada"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:224
 msgid "Delete registered fingerprints?"
@@ -2664,22 +2660,24 @@ msgid ""
 "Enrolling fingerprints for\n"
 "<b><big>%s</big></b>"
 msgstr ""
+"Registrando huellas digitales para\n"
+"<b><big>%s</big></b>"
 
 #: ../panels/user-accounts/um-language-dialog.c:328
 msgid "Other..."
-msgstr ""
+msgstr "Otra…"
 
 #: ../panels/user-accounts/um-lockbutton.c:345
 msgid "Lock"
-msgstr ""
+msgstr "Bloquear"
 
 #: ../panels/user-accounts/um-lockbutton.c:354
 msgid "Unlock"
-msgstr ""
+msgstr "Desbloquear"
 
 #: ../panels/user-accounts/um-lockbutton.c:363
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueado"
 
 #: ../panels/user-accounts/um-lockbutton.c:372
 msgid ""
@@ -2694,12 +2692,13 @@ msgid ""
 msgstr ""
 
 #: ../panels/user-accounts/um-lockbutton.c:390
-#, fuzzy
 #| msgid "Please contact your system administrator for help."
 msgid ""
 "System policy prevents changes.\n"
 "Contact your system administrator"
-msgstr "Contacte con el administrador de su sistema para obtener ayuda."
+msgstr ""
+"La política del sistema impide los cambios.\n"
+"Contacte con su administrador de sistemas."
 
 #: ../panels/user-accounts/um-password-dialog.c:188
 msgid "More choices..."
@@ -2710,22 +2709,19 @@ msgid "Please choose another password."
 msgstr ""
 
 #: ../panels/user-accounts/um-password-dialog.c:303
-#, fuzzy
 #| msgid "Please type your password in the <b>New password</b> field."
 msgid "Please type your current password again."
-msgstr "Teclee su contraseña en el campo <b>Contraseña nueva</b>."
+msgstr "Escriba de nuevo su contraseña actual."
 
 #: ../panels/user-accounts/um-password-dialog.c:309
-#, fuzzy
 #| msgid "Your password has been changed."
 msgid "Password could not be changed"
-msgstr "Su contraseña se ha cambiado."
+msgstr "No se pudo cambiar la contraseña"
 
 #: ../panels/user-accounts/um-password-dialog.c:381
-#, fuzzy
 #| msgid "_Retype new password:"
 msgid "You need to enter a new password"
-msgstr "_Vuelva a teclear la contraseña nueva:"
+msgstr "Debe introducir una contraseña"
 
 #: ../panels/user-accounts/um-password-dialog.c:390
 msgid "You need to confirm the password"
@@ -2849,13 +2845,15 @@ msgstr ""
 #: ../panels/user-accounts/um-user-panel.c:431
 #, c-format
 msgid "Do you want to keep %s's files?"
-msgstr ""
+msgstr "¿Quiere mantener los archivos de %s?"
 
 #: ../panels/user-accounts/um-user-panel.c:435
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
+"Es posible mantener la carpeta personal, el «spool» del correo y los "
+"archivos temporales al eliminar una cuenta de usuario."
 
 #: ../panels/user-accounts/um-user-panel.c:438
 #, fuzzy
@@ -2871,17 +2869,17 @@ msgstr "Archivo nuevo"
 
 #: ../panels/user-accounts/um-user-panel.c:440
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancelar"
 
 #: ../panels/user-accounts/um-user-panel.c:464
 msgctxt "Password mode"
 msgid "Account disabled"
-msgstr ""
+msgstr "Cuenta desactivada"
 
 #: ../panels/user-accounts/um-user-panel.c:473
 msgctxt "Password mode"
 msgid "To be set at next login"
-msgstr ""
+msgstr "Para configurar en el siguiente inicio de sesión"
 
 #: ../panels/user-accounts/um-user-panel.c:476
 #, fuzzy
@@ -2907,6 +2905,8 @@ msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr ""
+"Para realizar los cambios\n"
+"pulse primero el icono *"
 
 #: ../panels/user-accounts/um-user-panel.c:890
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
@@ -2921,11 +2921,13 @@ msgid ""
 "To create a user,\n"
 "click the * icon first"
 msgstr ""
+"Para crear un usuario\n"
+"pulse primero el icono *"
 
 #: ../panels/user-accounts/um-user-panel.c:910
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "Delete the selected user"
-msgstr ""
+msgstr "Eliminar el usuario seleccionado"
 
 #: ../panels/user-accounts/um-user-panel.c:922
 #: ../panels/user-accounts/um-user-panel.c:1182
@@ -2933,6 +2935,8 @@ msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
 msgstr ""
+"Para eliminar el usuario seleccionado\n"
+"pulse primero el icono *"
 
 #: ../panels/user-accounts/um-user-panel.c:1086
 #, fuzzy
@@ -2942,58 +2946,54 @@ msgstr "Por _país"
 
 #: ../panels/user-accounts/um-user-panel.c:1095
 msgid "Other Accounts"
-msgstr ""
+msgstr "Otras cuentas"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
 msgid "Add or remove users"
-msgstr ""
+msgstr "Añadir o quitar usuarios"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:2
-#, fuzzy
 #| msgid "seconds"
 msgid "User Accounts"
-msgstr "segundos"
+msgstr "Cuentas de usuario"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#, fuzzy
 #| msgid "C_reate"
 msgid "Cr_eate"
-msgstr "C_rear"
+msgstr "Cr_ear"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
-#, fuzzy
 #| msgid "Create New Location"
 msgid "Create new account"
-msgstr "Crear una ubicación nueva"
+msgstr "Crear una cuenta nueva"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#, fuzzy
 #| msgid "_Country:"
 msgid "_Account Type:"
-msgstr "_País:"
+msgstr "_Tipo de cuenta:"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#, fuzzy
 #| msgid "Full Name"
 msgid "_Full name:"
-msgstr "Nombre completo"
+msgstr "Nombre _completo:"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#, fuzzy
 #| msgid "U_sername:"
 msgid "_Username:"
-msgstr "_Usuario:"
+msgstr "Nombre de _usuario:"
 
 #: ../panels/user-accounts/data/language-chooser.ui.h:1
 #: ../panels/user-accounts/data/photo-dialog.ui.h:3
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
 "strong password</a>"
 msgstr ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">Cómo elegir una "
+"contraseña fuerte</a>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid ""
@@ -3001,34 +3001,33 @@ msgid ""
 "to all users of this system.  Do <b>not</b> include the password here.</"
 "small>"
 msgstr ""
+"<small>Este consejo se puede mostrar en la pantalla de inicio. Será visible "
+"a todos los usuarios de este sistema. <b>No</b> incluya aquí la contraseña.</"
+"small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
-#, fuzzy
 #| msgid "_New password:"
 msgid "C_onfirm password:"
-msgstr "Contraseña _nueva:"
+msgstr "C_onfirmar contraseña:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:4
-#, fuzzy
 #| msgid "Change set"
 msgid "Ch_ange"
-msgstr "Conjunto de cambios"
+msgstr "Cam_biar"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:5
-#, fuzzy
 #| msgid "Change password"
 msgid "Changing password for:"
-msgstr "Cambiar contraseña"
+msgstr "Cambiando la contraseña para:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:6
-#, fuzzy
 #| msgid "Change password"
 msgid "Choose a generated password"
-msgstr "Cambiar contraseña"
+msgstr "Elegir una contraseña generada"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:7
 msgid "Choose password at next login"
-msgstr ""
+msgstr "Elegir una contraseña en el siguiente inicio de sesión"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:8
 msgid "Current _password:"
@@ -3036,80 +3035,74 @@ msgstr "Contraseña _actual:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:9
 msgid "Disable this account"
-msgstr ""
+msgstr "Desactivar esta cuenta"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:10
 msgid "Enable this account"
-msgstr ""
+msgstr "Activar esta cuenta"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
-#, fuzzy
 #| msgid "Flickr"
 msgid "Fair"
-msgstr "Flickr"
+msgstr "Regular"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:12
 msgid "Log in without a password"
-msgstr ""
+msgstr "Iniciar sesión sin contraseña"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:13
-#, fuzzy
 #| msgid "_New password:"
 msgid "Set a password now"
-msgstr "Contraseña _nueva:"
+msgstr "Establecer una contraseña ahora"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
-#, fuzzy
 #| msgid "Action"
 msgid "_Action:"
-msgstr "Acción"
+msgstr "_Acción:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:15
-#, fuzzy
 #| msgid "_Print"
 msgid "_Hint:"
-msgstr "Im_primir"
+msgstr "C_onsejo"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:16
 msgid "_New password:"
 msgstr "Contraseña _nueva:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:17
-#, fuzzy
 #| msgid "_New password:"
 msgid "_Show password"
-msgstr "Contraseña _nueva:"
+msgstr "_Mostrar contraseña"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:1
-#, fuzzy
 #| msgid "Web Browser"
 msgid "Browse"
-msgstr "Navegador web"
+msgstr "Examinar"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 msgid "Changing photo for:"
-msgstr ""
+msgstr "Cambiando la foto para:"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
 msgid ""
 "Choose a picture that will be shown at the login screen for this account."
 msgstr ""
+"Elegir una imagen que se mostrará en la pantalla de inicio de sesión para "
+"esta cuenta."
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:6
-#, fuzzy
 #| msgid "Galeon"
 msgid "Gallery"
-msgstr "Galeon"
+msgstr "Colección"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:7
 msgid "Photograph"
-msgstr ""
+msgstr "Fotografía"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#, fuzzy
 #| msgid "Take a break!"
 msgid "Take a photograph"
-msgstr "¡Tómese un descanso!"
+msgstr "Tomar una fotografía"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
 msgid ""
@@ -3120,42 +3113,46 @@ msgid ""
 "<b>When the guest user logs out, all files and data associated with the "
 "account will be deleted.</b>"
 msgstr ""
+"Una cuenta de invitado permitirá que cualquiera inicie sesión temporalmente "
+"en este equipo sin contraseña. Por razones de seguridad no se permiten "
+"inicios de sesión remotos con esta cuenta.\n"
+"\n"
+"<b>Cuando el usuario invitado sale de la sesión, todos los archivos y datos "
+"asociados con la cuenta se borran.</b>"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
-msgstr ""
+msgstr "Información de la cuenta"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Account type:"
-msgstr ""
+msgstr "Tipo de cuenta:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-#, fuzzy
 #| msgid "About %s"
 msgid "Accounts"
-msgstr "Acerca de %s"
+msgstr "Cuentas"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Address Book Card:"
-msgstr ""
+msgstr "Tarjeta de la libreta de direcciones:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Allow guests to log in to this computer"
-msgstr ""
+msgstr "Permitir a invitados que inicien sesión en este equipo"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Automatic Login:"
-msgstr ""
+msgstr "Inicio de sesión automático:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
 msgid "E-mail address:"
-msgstr ""
+msgstr "Dirección de correo-e:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
-#, fuzzy
 #| msgid "Enable Fingerprint Login"
 msgid "Fingerprint Login:"
-msgstr "Activar el inicio de sesión con huella"
+msgstr "Inicio de sesión con huella:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
 #, fuzzy
@@ -3189,11 +3186,11 @@ msgstr "Descripción:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
 msgid "Show Shutdown, Suspend and Restart actions"
-msgstr ""
+msgstr "Acciones de Apagar, Suspender y Reiniciar"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:24
 msgid "Show list of users"
-msgstr ""
+msgstr "Mostrar la lista de usuarios"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
 #, fuzzy
