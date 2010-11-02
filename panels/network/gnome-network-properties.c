@@ -254,290 +254,290 @@ cb_http_details_button_clicked (GtkWidget *button,
 	gtk_widget_show_all (widget);
 }
 
-static gchar *
-copy_location_create_key (const gchar *from, const gchar *what)
-{
-	if (from[0] == '\0') return g_strdup (what);
-	else return g_strconcat (from, what + strlen ("/system"), NULL);
-}
-
-static void
-copy_location (const gchar *from, const gchar *to, GConfClient *client)
-{
-	int ti;
-	gboolean tb;
-	GSList *tl;
-	gchar *tstr, *dest, *src;
-
-	if (from[0] != '\0' && !gconf_client_dir_exists (client, from, NULL))
-		return;
-
-	/* USE_PROXY */
-	dest = copy_location_create_key (to, USE_PROXY_KEY);
-	src = copy_location_create_key (from, USE_PROXY_KEY);
-
-	tb = gconf_client_get_bool (client, src, NULL);
-	gconf_client_set_bool (client, dest, tb, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* USE_SAME_PROXY */
-	dest = copy_location_create_key (to, USE_SAME_PROXY_KEY);
-	src = copy_location_create_key (from, USE_SAME_PROXY_KEY);
-
-	tb = gconf_client_get_bool (client, src, NULL);
-	gconf_client_set_bool (client, dest, tb, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* HTTP_PROXY_HOST */
-	dest = copy_location_create_key (to, HTTP_PROXY_HOST_KEY);
-	src = copy_location_create_key (from, HTTP_PROXY_HOST_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* HTTP_PROXY_PORT */
-	dest = copy_location_create_key (to, HTTP_PROXY_PORT_KEY);
-	src = copy_location_create_key (from, HTTP_PROXY_PORT_KEY);
-
-	ti = gconf_client_get_int (client, src, NULL);
-	gconf_client_set_int (client, dest, ti, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* HTTP_USE_AUTH */
-	dest = copy_location_create_key (to, HTTP_USE_AUTH_KEY);
-	src = copy_location_create_key (from, HTTP_USE_AUTH_KEY);
-
-	tb = gconf_client_get_bool (client, src, NULL);
-	gconf_client_set_bool (client, dest, tb, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* HTTP_AUTH_USER */
-	dest = copy_location_create_key (to, HTTP_AUTH_USER_KEY);
-	src = copy_location_create_key (from, HTTP_AUTH_USER_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* HTTP_AUTH_PASSWD */
-	dest = copy_location_create_key (to, HTTP_AUTH_PASSWD_KEY);
-	src = copy_location_create_key (from, HTTP_AUTH_PASSWD_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		 gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* IGNORE_HOSTS */
-	dest = copy_location_create_key (to, IGNORE_HOSTS_KEY);
-	src = copy_location_create_key (from, IGNORE_HOSTS_KEY);
-
-	tl = gconf_client_get_list (client, src, GCONF_VALUE_STRING, NULL);
-	gconf_client_set_list (client, dest, GCONF_VALUE_STRING, tl, NULL);
-	g_slist_foreach (tl, (GFunc) g_free, NULL);
-	g_slist_free (tl);
-
-	g_free (dest);
-	g_free (src);
-
-	/* PROXY_MODE */
-	dest = copy_location_create_key (to, PROXY_MODE_KEY);
-	src = copy_location_create_key (from, PROXY_MODE_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* SECURE_PROXY_HOST */
-	dest = copy_location_create_key (to, SECURE_PROXY_HOST_KEY);
-	src = copy_location_create_key (from, SECURE_PROXY_HOST_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* OLD_SECURE_PROXY_HOST */
-	dest = copy_location_create_key (to, OLD_SECURE_PROXY_HOST_KEY);
-	src = copy_location_create_key (from, OLD_SECURE_PROXY_HOST_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* SECURE_PROXY_PORT */
-	dest = copy_location_create_key (to, SECURE_PROXY_PORT_KEY);
-	src = copy_location_create_key (from, SECURE_PROXY_PORT_KEY);
-
-	ti = gconf_client_get_int (client, src, NULL);
-	gconf_client_set_int (client, dest, ti, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* OLD_SECURE_PROXY_PORT */
-	dest = copy_location_create_key (to, OLD_SECURE_PROXY_PORT_KEY);
-	src = copy_location_create_key (from, OLD_SECURE_PROXY_PORT_KEY);
-
-	ti = gconf_client_get_int (client, src, NULL);
-	gconf_client_set_int (client, dest, ti, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* FTP_PROXY_HOST */
-	dest = copy_location_create_key (to, FTP_PROXY_HOST_KEY);
-	src = copy_location_create_key (from, FTP_PROXY_HOST_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* OLD_FTP_PROXY_HOST */
-	dest = copy_location_create_key (to, OLD_FTP_PROXY_HOST_KEY);
-	src = copy_location_create_key (from, OLD_FTP_PROXY_HOST_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* FTP_PROXY_PORT */
-	dest = copy_location_create_key (to, FTP_PROXY_PORT_KEY);
-	src = copy_location_create_key (from, FTP_PROXY_PORT_KEY);
-
-	ti = gconf_client_get_int (client, src, NULL);
-	gconf_client_set_int (client, dest, ti, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* OLD_FTP_PROXY_PORT */
-	dest = copy_location_create_key (to, OLD_FTP_PROXY_PORT_KEY);
-	src = copy_location_create_key (from, OLD_FTP_PROXY_PORT_KEY);
-
-	ti = gconf_client_get_int (client, src, NULL);
-	gconf_client_set_int (client, dest, ti, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* SOCKS_PROXY_HOST */
-	dest = copy_location_create_key (to, SOCKS_PROXY_HOST_KEY);
-	src = copy_location_create_key (from, SOCKS_PROXY_HOST_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free	(dest);
-	g_free (src);
-
-	/* OLD_SOCKS_PROXY_HOST */
-	dest = copy_location_create_key (to, OLD_SOCKS_PROXY_HOST_KEY);
-	src = copy_location_create_key (from, OLD_SOCKS_PROXY_HOST_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-
-	/* SOCKS_PROXY_PORT */
-	dest = copy_location_create_key (to, SOCKS_PROXY_PORT_KEY);
-	src = copy_location_create_key (from, SOCKS_PROXY_PORT_KEY);
-
-	ti = gconf_client_get_int (client, src, NULL);
-	gconf_client_set_int (client, dest, ti, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* OLD_SOCKS_PROXY_PORT */
-	dest = copy_location_create_key (to, OLD_SOCKS_PROXY_PORT_KEY);
-	src = copy_location_create_key (from, OLD_SOCKS_PROXY_PORT_KEY);
-
-	ti = gconf_client_get_int (client, src, NULL);
-	gconf_client_set_int (client, dest, ti, NULL);
-
-	g_free (dest);
-	g_free (src);
-
-	/* PROXY_AUTOCONFIG_URL */
-	dest = copy_location_create_key (to, PROXY_AUTOCONFIG_URL_KEY);
-	src = copy_location_create_key (from, PROXY_AUTOCONFIG_URL_KEY);
-
-	tstr = gconf_client_get_string (client, src, NULL);
-	if (tstr != NULL)
-	{
-		gconf_client_set_string (client, dest, tstr, NULL);
-		g_free (tstr);
-	}
-
-	g_free (dest);
-	g_free (src);
-}
+/* static gchar * */
+/* copy_location_create_key (const gchar *from, const gchar *what) */
+/* { */
+/* 	if (from[0] == '\0') return g_strdup (what); */
+/* 	else return g_strconcat (from, what + strlen ("/system"), NULL); */
+/* } */
+
+/* static void */
+/* copy_location (const gchar *from, const gchar *to, GConfClient *client) */
+/* { */
+/* 	int ti; */
+/* 	gboolean tb; */
+/* 	GSList *tl; */
+/* 	gchar *tstr, *dest, *src; */
+
+/* 	if (from[0] != '\0' && !gconf_client_dir_exists (client, from, NULL)) */
+/* 		return; */
+
+/* 	/\* USE_PROXY *\/ */
+/* 	dest = copy_location_create_key (to, USE_PROXY_KEY); */
+/* 	src = copy_location_create_key (from, USE_PROXY_KEY); */
+
+/* 	tb = gconf_client_get_bool (client, src, NULL); */
+/* 	gconf_client_set_bool (client, dest, tb, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* USE_SAME_PROXY *\/ */
+/* 	dest = copy_location_create_key (to, USE_SAME_PROXY_KEY); */
+/* 	src = copy_location_create_key (from, USE_SAME_PROXY_KEY); */
+
+/* 	tb = gconf_client_get_bool (client, src, NULL); */
+/* 	gconf_client_set_bool (client, dest, tb, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* HTTP_PROXY_HOST *\/ */
+/* 	dest = copy_location_create_key (to, HTTP_PROXY_HOST_KEY); */
+/* 	src = copy_location_create_key (from, HTTP_PROXY_HOST_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* HTTP_PROXY_PORT *\/ */
+/* 	dest = copy_location_create_key (to, HTTP_PROXY_PORT_KEY); */
+/* 	src = copy_location_create_key (from, HTTP_PROXY_PORT_KEY); */
+
+/* 	ti = gconf_client_get_int (client, src, NULL); */
+/* 	gconf_client_set_int (client, dest, ti, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* HTTP_USE_AUTH *\/ */
+/* 	dest = copy_location_create_key (to, HTTP_USE_AUTH_KEY); */
+/* 	src = copy_location_create_key (from, HTTP_USE_AUTH_KEY); */
+
+/* 	tb = gconf_client_get_bool (client, src, NULL); */
+/* 	gconf_client_set_bool (client, dest, tb, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* HTTP_AUTH_USER *\/ */
+/* 	dest = copy_location_create_key (to, HTTP_AUTH_USER_KEY); */
+/* 	src = copy_location_create_key (from, HTTP_AUTH_USER_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* HTTP_AUTH_PASSWD *\/ */
+/* 	dest = copy_location_create_key (to, HTTP_AUTH_PASSWD_KEY); */
+/* 	src = copy_location_create_key (from, HTTP_AUTH_PASSWD_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		 gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* IGNORE_HOSTS *\/ */
+/* 	dest = copy_location_create_key (to, IGNORE_HOSTS_KEY); */
+/* 	src = copy_location_create_key (from, IGNORE_HOSTS_KEY); */
+
+/* 	tl = gconf_client_get_list (client, src, GCONF_VALUE_STRING, NULL); */
+/* 	gconf_client_set_list (client, dest, GCONF_VALUE_STRING, tl, NULL); */
+/* 	g_slist_foreach (tl, (GFunc) g_free, NULL); */
+/* 	g_slist_free (tl); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* PROXY_MODE *\/ */
+/* 	dest = copy_location_create_key (to, PROXY_MODE_KEY); */
+/* 	src = copy_location_create_key (from, PROXY_MODE_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* SECURE_PROXY_HOST *\/ */
+/* 	dest = copy_location_create_key (to, SECURE_PROXY_HOST_KEY); */
+/* 	src = copy_location_create_key (from, SECURE_PROXY_HOST_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* OLD_SECURE_PROXY_HOST *\/ */
+/* 	dest = copy_location_create_key (to, OLD_SECURE_PROXY_HOST_KEY); */
+/* 	src = copy_location_create_key (from, OLD_SECURE_PROXY_HOST_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* SECURE_PROXY_PORT *\/ */
+/* 	dest = copy_location_create_key (to, SECURE_PROXY_PORT_KEY); */
+/* 	src = copy_location_create_key (from, SECURE_PROXY_PORT_KEY); */
+
+/* 	ti = gconf_client_get_int (client, src, NULL); */
+/* 	gconf_client_set_int (client, dest, ti, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* OLD_SECURE_PROXY_PORT *\/ */
+/* 	dest = copy_location_create_key (to, OLD_SECURE_PROXY_PORT_KEY); */
+/* 	src = copy_location_create_key (from, OLD_SECURE_PROXY_PORT_KEY); */
+
+/* 	ti = gconf_client_get_int (client, src, NULL); */
+/* 	gconf_client_set_int (client, dest, ti, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* FTP_PROXY_HOST *\/ */
+/* 	dest = copy_location_create_key (to, FTP_PROXY_HOST_KEY); */
+/* 	src = copy_location_create_key (from, FTP_PROXY_HOST_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* OLD_FTP_PROXY_HOST *\/ */
+/* 	dest = copy_location_create_key (to, OLD_FTP_PROXY_HOST_KEY); */
+/* 	src = copy_location_create_key (from, OLD_FTP_PROXY_HOST_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* FTP_PROXY_PORT *\/ */
+/* 	dest = copy_location_create_key (to, FTP_PROXY_PORT_KEY); */
+/* 	src = copy_location_create_key (from, FTP_PROXY_PORT_KEY); */
+
+/* 	ti = gconf_client_get_int (client, src, NULL); */
+/* 	gconf_client_set_int (client, dest, ti, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* OLD_FTP_PROXY_PORT *\/ */
+/* 	dest = copy_location_create_key (to, OLD_FTP_PROXY_PORT_KEY); */
+/* 	src = copy_location_create_key (from, OLD_FTP_PROXY_PORT_KEY); */
+
+/* 	ti = gconf_client_get_int (client, src, NULL); */
+/* 	gconf_client_set_int (client, dest, ti, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* SOCKS_PROXY_HOST *\/ */
+/* 	dest = copy_location_create_key (to, SOCKS_PROXY_HOST_KEY); */
+/* 	src = copy_location_create_key (from, SOCKS_PROXY_HOST_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free	(dest); */
+/* 	g_free (src); */
+
+/* 	/\* OLD_SOCKS_PROXY_HOST *\/ */
+/* 	dest = copy_location_create_key (to, OLD_SOCKS_PROXY_HOST_KEY); */
+/* 	src = copy_location_create_key (from, OLD_SOCKS_PROXY_HOST_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* SOCKS_PROXY_PORT *\/ */
+/* 	dest = copy_location_create_key (to, SOCKS_PROXY_PORT_KEY); */
+/* 	src = copy_location_create_key (from, SOCKS_PROXY_PORT_KEY); */
+
+/* 	ti = gconf_client_get_int (client, src, NULL); */
+/* 	gconf_client_set_int (client, dest, ti, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* OLD_SOCKS_PROXY_PORT *\/ */
+/* 	dest = copy_location_create_key (to, OLD_SOCKS_PROXY_PORT_KEY); */
+/* 	src = copy_location_create_key (from, OLD_SOCKS_PROXY_PORT_KEY); */
+
+/* 	ti = gconf_client_get_int (client, src, NULL); */
+/* 	gconf_client_set_int (client, dest, ti, NULL); */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+
+/* 	/\* PROXY_AUTOCONFIG_URL *\/ */
+/* 	dest = copy_location_create_key (to, PROXY_AUTOCONFIG_URL_KEY); */
+/* 	src = copy_location_create_key (from, PROXY_AUTOCONFIG_URL_KEY); */
+
+/* 	tstr = gconf_client_get_string (client, src, NULL); */
+/* 	if (tstr != NULL) */
+/* 	{ */
+/* 		gconf_client_set_string (client, dest, tstr, NULL); */
+/* 		g_free (tstr); */
+/* 	} */
+
+/* 	g_free (dest); */
+/* 	g_free (src); */
+/* } */
 
 static gchar *
 get_current_location (GConfClient *client)
@@ -772,7 +772,7 @@ location_new (GtkBuilder *capplet_builder, GtkWidget *parent)
 			key = g_strconcat (LOCATION_DIR "/", esc, NULL);
 			g_free (esc);
 
-			copy_location ("", key, client);
+			/* FIXME: need to enable this when GSettingsList is ready copy_location ("", key, client); */
 			g_free (key);
 
 			gconf_client_set_string (client, CURRENT_LOCATION, name, NULL);
@@ -820,53 +820,50 @@ static void
 cb_location_changed (GtkWidget *location,
 		     GtkBuilder *builder)
 {
-	gchar *current;
-	gchar *name = get_active_location (GTK_COMBO_BOX (location));
-	GConfClient *client;
+	/* gchar *current; */
+	/* gchar *name = get_active_location (GTK_COMBO_BOX (location)); */
 
-	if (name == NULL)
-		return;
+	/* if (name == NULL) */
+	/* 	return; */
 
-	client = gconf_client_get_default ();
+	/* current = get_current_location (client); */
 
-	current = get_current_location (client);
+	/* if (strcmp (current, name) != 0) */
+	/* { */
+	/* 	if (strcmp (name, _("New Location...")) == 0) */
+	/* 	{ */
+	/* 		location_new (builder, */
+	/* 			     gtk_widget_get_toplevel (_gtk_builder_get_widget (builder, "network-panel"))); */
+	/* 	} */
+	/* 	else */
+	/* 	{ */
+	/* 		gchar *key, *esc; */
 
-	if (strcmp (current, name) != 0)
-	{
-		if (strcmp (name, _("New Location...")) == 0)
-		{
-			location_new (builder,
-				     gtk_widget_get_toplevel (_gtk_builder_get_widget (builder, "network-panel")));
-		}
-		else
-		{
-			gchar *key, *esc;
+	/* 		/\* save current settings *\/ */
+	/* 		esc = gconf_escape_key (current, -1); */
+	/* 		key = g_strconcat (LOCATION_DIR "/", esc, NULL); */
+	/* 		g_free (esc); */
 
-			/* save current settings */
-			esc = gconf_escape_key (current, -1);
-			key = g_strconcat (LOCATION_DIR "/", esc, NULL);
-			g_free (esc);
+	/* 		copy_location ("", key, client); */
+	/* 		g_free (key); */
 
-			copy_location ("", key, client);
-			g_free (key);
+	/* 		/\* load settings *\/ */
+	/* 		esc = gconf_escape_key (name, -1); */
+	/* 		key = g_strconcat (LOCATION_DIR "/", esc, NULL); */
+	/* 		g_free (esc); */
 
-			/* load settings */
-			esc = gconf_escape_key (name, -1);
-			key = g_strconcat (LOCATION_DIR "/", esc, NULL);
-			g_free (esc);
+	/* 		copy_location (key, "", client); */
+	/* 		gconf_client_recursive_unset (client, key, */
+	/* 		                              GCONF_UNSET_INCLUDING_SCHEMA_NAMES, NULL); */
+	/* 		g_free (key); */
 
-			copy_location (key, "", client);
-			gconf_client_recursive_unset (client, key,
-			                              GCONF_UNSET_INCLUDING_SCHEMA_NAMES, NULL);
-			g_free (key);
+	/* 		gconf_client_set_string (client, CURRENT_LOCATION, name, NULL); */
+	/* 	} */
+	/* } */
 
-			gconf_client_set_string (client, CURRENT_LOCATION, name, NULL);
-		}
-	}
-
-	g_free (current);
-	g_free (name);
-	g_object_unref (client);
+	/* g_free (current); */
+	/* g_free (name); */
+	/* g_object_unref (client); */
 }
 
 static void
@@ -994,23 +991,22 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	gboolean same_proxy;
 	gchar *http_proxy;
 	gint http_port;
-	gchar *host;
 
 	same_proxy = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton));
 
 	http_proxy = g_settings_get_string (http_proxy_settings, "host");
-	http_port = g_settings__get_int (http_proxy_settings, "port");
+	http_port = g_settings_get_int (http_proxy_settings, "port");
 
 	if (same_proxy) {
 		/* Set the new values */
-		gtk_entry_set_text (_gtk_builder_get_object (builder, "secure_host_entry"), http_proxy);
-		gtk_range_set_value (_gtk_builder_get_object (builder, "secure_host_spinbutton"), (gdouble) http_port);
+		gtk_entry_set_text (GTK_ENTRY (gtk_builder_get_object (builder, "secure_host_entry")), http_proxy);
+		gtk_range_set_value (GTK_RANGE (gtk_builder_get_object (builder, "secure_host_spinbutton")), (gdouble) http_port);
 
-		gtk_entry_set_text (_gtk_builder_get_object (builder, "ftp_host_entry"), http_proxy);
-		gtk_range_set_value (_gtk_builder_get_object (builder, "ftp_host_spinbutton"), (gdouble) http_port);
+		gtk_entry_set_text (GTK_ENTRY (gtk_builder_get_object (builder, "ftp_host_entry")), http_proxy);
+		gtk_range_set_value (GTK_RANGE (gtk_builder_get_object (builder, "ftp_host_spinbutton")), (gdouble) http_port);
 
-		gtk_entry_set_text (_gtk_builder_get_object (builder, "socks_host_entry"), http_proxy);
-		gtk_range_set_value (_gtk_builder_get_object (builder, "socks_host_spinbutton"), (gdouble) http_port);
+		gtk_entry_set_text (GTK_ENTRY (gtk_builder_get_object (builder, "socks_host_entry")), http_proxy);
+		gtk_range_set_value (GTK_RANGE (gtk_builder_get_object (builder, "socks_host_spinbutton")), (gdouble) http_port);
 
 		/* Synchronize entries */
 		synchronize_entries (builder);
@@ -1075,25 +1071,6 @@ get_hostname_from_uri (const gchar *uri)
 	return host;
 }
 
-static GConfValue *
-extract_proxy_host (GConfPropertyEditor *peditor, const GConfValue *orig)
-{
-	char const *entered_text = gconf_value_get_string (orig);
-	GConfValue *res = NULL;
-
-	if (entered_text != NULL) {
-		gchar *host = get_hostname_from_uri (entered_text);
-
-		if (host != NULL) {
-			res = gconf_value_new (GCONF_VALUE_STRING);
-			gconf_value_set_string (res, host);
-			g_free (host);
-		}
-	}
-
-	return (res != NULL) ? res : gconf_value_copy (orig);
-}
-
 static void
 proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 				   GtkBuilder *builder)
@@ -1119,14 +1096,13 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 
 	g_settings_set_string (proxy_settings, "mode", proxytype_values[mode].value_nick);
 	g_settings_set_boolean (http_proxy_settings, "enabled",
-				mode == PROXYMODE_AUTO || mode == PROXYMODE_MANUAL, NULL);
+				mode == PROXYMODE_AUTO || mode == PROXYMODE_MANUAL);
 }
 
 static void
 connect_sensitivity_signals (GtkBuilder *builder, GSList *mode_group)
 {
-	for (; mode_group != NULL; mode_group = mode_group->next)
-	{
+	for (; mode_group != NULL; mode_group = mode_group->next) {
 		g_signal_connect (G_OBJECT (mode_group->data), "clicked",
 				  G_CALLBACK(proxy_mode_radiobutton_clicked_cb),
 				  builder);
