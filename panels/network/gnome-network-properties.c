@@ -91,9 +91,11 @@ populate_listmodel (GtkListStore *store, GPtrArray *list)
 
 	gtk_list_store_clear (store);
 
-	for (i = 0; i < list->len; i++) {
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter, 0, (char *) g_ptr_array_index (list, i), -1);
+	if (list != NULL) {
+		for (i = 0; i < list->len; i++) {
+			gtk_list_store_append (store, &iter);
+			gtk_list_store_set (store, &iter, 0, (char *) g_ptr_array_index (list, i), -1);
+		}
 	}
 
 	return GTK_TREE_MODEL (store);
@@ -105,9 +107,9 @@ config_treeview(GtkTreeView *tree, GtkTreeModel *model)
 	GtkCellRenderer *renderer;
 
 	renderer = gtk_cell_renderer_text_new();
-	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree),
-												-1, "Hosts", renderer,
-												"text", 0, NULL);
+	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW(tree),
+						     -1, "Hosts", renderer,
+						     "text", 0, NULL);
 
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree), model);
 
@@ -1250,12 +1252,11 @@ setup_dialog (GtkBuilder *builder)
 	g_signal_connect (gtk_builder_get_object (builder, "network_dialog"),
 			  "response", G_CALLBACK (cb_dialog_response), NULL);
 
-
-	proxy_settings_changed_cb (proxy_settings, "ignore-hosts", builder);
-
 	model = create_listmodel();
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
-	config_treeview(GTK_TREE_VIEW(gtk_builder_get_object (builder, "treeview_ignore_host")), model);
+	config_treeview (GTK_TREE_VIEW(gtk_builder_get_object (builder, "treeview_ignore_host")), model);
+
+	proxy_settings_changed_cb (proxy_settings, "ignore-hosts", builder);
 
 	g_signal_connect (gtk_builder_get_object (builder, "button_add_url"),
 			  "clicked", G_CALLBACK (cb_add_url), builder);
