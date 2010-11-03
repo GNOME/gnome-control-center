@@ -1002,13 +1002,13 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	if (same_proxy) {
 		/* Set the new values */
 		gtk_entry_set_text (GTK_ENTRY (gtk_builder_get_object (builder, "secure_host_entry")), http_proxy);
-		gtk_range_set_value (GTK_RANGE (gtk_builder_get_object (builder, "secure_host_spinbutton")), (gdouble) http_port);
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "secure_host_spinbutton")), (gdouble) http_port);
 
 		gtk_entry_set_text (GTK_ENTRY (gtk_builder_get_object (builder, "ftp_host_entry")), http_proxy);
-		gtk_range_set_value (GTK_RANGE (gtk_builder_get_object (builder, "ftp_host_spinbutton")), (gdouble) http_port);
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "ftp_host_spinbutton")), (gdouble) http_port);
 
 		gtk_entry_set_text (GTK_ENTRY (gtk_builder_get_object (builder, "socks_host_entry")), http_proxy);
-		gtk_range_set_value (GTK_RANGE (gtk_builder_get_object (builder, "socks_host_spinbutton")), (gdouble) http_port);
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "socks_host_spinbutton")), (gdouble) http_port);
 
 		/* Synchronize entries */
 		synchronize_entries (builder);
