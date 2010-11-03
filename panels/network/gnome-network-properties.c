@@ -1187,7 +1187,7 @@ setup_dialog (GtkBuilder *builder)
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "http_port_spinbutton")), (gdouble) port_value);
 
 	g_settings_bind (http_proxy_settings, "port",
-			 gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "http_port_spinbutton"))), "value",
+			 gtk_builder_get_object (builder, "http_port_spinbutton"), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (http_proxy_settings, "host",
 			 _gtk_builder_get_widget (builder, "http_host_entry"), "text",
@@ -1206,7 +1206,7 @@ setup_dialog (GtkBuilder *builder)
 			 _gtk_builder_get_widget (builder, "secure_host_entry"), "text",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (https_proxy_settings, "port",
-			 gtk_range_get_adjustment (GTK_RANGE (_gtk_builder_get_widget (builder, "secure_port_spinbutton"))), "value",
+			 _gtk_builder_get_widget (builder, "secure_port_spinbutton"), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Ftp */
@@ -1216,7 +1216,7 @@ setup_dialog (GtkBuilder *builder)
 			 _gtk_builder_get_widget (builder, "ftp_host_entry"), "text",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (ftp_proxy_settings, "port",
-			 gtk_range_get_adjustment (GTK_RANGE (_gtk_builder_get_widget (builder, "ftp_port_spinbutton"))), "value",
+			 _gtk_builder_get_widget (builder, "ftp_port_spinbutton"), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Socks */
@@ -1226,7 +1226,7 @@ setup_dialog (GtkBuilder *builder)
 			 _gtk_builder_get_widget (builder, "socks_host_entry"), "text",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (socks_proxy_settings, "port",
-			 gtk_range_get_adjustment (GTK_RANGE (_gtk_builder_get_widget (builder, "socks_port_spinbutton"))), "value",
+			 _gtk_builder_get_widget (builder, "socks_port_spinbutton"), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Set the proxy entries insensitive if we are using the same proxy for all,
