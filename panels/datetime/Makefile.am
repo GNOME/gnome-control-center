@@ -72,7 +72,7 @@ INCLUDES = 						\
 noinst_PROGRAMS = test-timezone
 
 test_timezone_SOURCES = test-timezone.c tz.c tz.h
-test_timezone_LDADD = $(PANEL_LIBS)
+test_timezone_LDADD = $(PANEL_LIBS) $(CAPPLET_LIBS)
 test_timezone_CFLAGS = $(PANEL_CFLAGS)
 
 all: check
