@@ -93,7 +93,7 @@ bg_colors_source_init (BgColorsSource *self)
       item->pcolor = gdk_color_copy (&color);
       item->scolor = gdk_color_copy (&color);
 
-      item->shade_type = GNOME_BG_COLOR_SOLID;
+      item->shade_type = G_DESKTOP_BACKGROUND_SHADING_SOLID;
 
       gnome_wp_item_ensure_gnome_bg (item);
 
