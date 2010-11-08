@@ -117,10 +117,14 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0 };
 
-static void foo_scroll_area_size_request (GtkWidget *widget,
-					  GtkRequisition *requisition);
 static gboolean foo_scroll_area_draw (GtkWidget *widget,
                                       cairo_t *cr);
+static void foo_scroll_area_get_preferred_width (GtkWidget *widget,
+                                                 gint      *minimum,
+                                                 gint      *natural);
+static void foo_scroll_area_get_preferred_height (GtkWidget *widget,
+                                                  gint      *minimum,
+                                                  gint      *natural);
 static void foo_scroll_area_size_allocate (GtkWidget *widget,
 					   GtkAllocation *allocation);
 static void foo_scroll_area_set_hadjustment (FooScrollArea *scroll_area,
@@ -224,7 +228,8 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
     object_class->set_property = foo_scroll_area_set_property;
     object_class->get_property = foo_scroll_area_get_property;
 
-    widget_class->size_request = foo_scroll_area_size_request;
+    widget_class->get_preferred_width = foo_scroll_area_get_preferred_width;
+    widget_class->get_preferred_height = foo_scroll_area_get_preferred_height;
     widget_class->draw = foo_scroll_area_draw;
     widget_class->size_allocate = foo_scroll_area_size_allocate;
     widget_class->realize = foo_scroll_area_realize;
@@ -944,17 +949,23 @@ foo_scroll_area_set_size (FooScrollArea	       *scroll_area,
 }
 
 static void
-foo_scroll_area_size_request (GtkWidget      *widget,
-			      GtkRequisition *requisition)
+foo_scroll_area_get_preferred_width (GtkWidget *widget,
+                                     gint      *minimum,
+                                     gint      *natural)
 {
     FooScrollArea *scroll_area = FOO_SCROLL_AREA (widget);
-    
-    requisition->width = scroll_area->priv->min_width;
-    requisition->height = scroll_area->priv->min_height;
-    
-#if 0
-    g_print ("request %d %d\n", requisition->width, requisition->height);
-#endif
+
+    *minimum = *natural = scroll_area->priv->min_width;
+}
+
+static void
+foo_scroll_area_get_preferred_height (GtkWidget *widget,
+                                      gint      *minimum,
+                                      gint      *natural)
+{
+    FooScrollArea *scroll_area = FOO_SCROLL_AREA (widget);
+
+    *minimum = *natural = scroll_area->priv->min_height;
 }
 
 static void

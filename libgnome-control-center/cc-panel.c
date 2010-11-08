@@ -124,26 +124,31 @@ cc_panel_finalize (GObject *object)
 }
 
 static void
-cc_panel_size_request (GtkWidget      *widget,
-                       GtkRequisition *requisition)
+cc_panel_get_preferred_width (GtkWidget *widget,
+                              gint      *minimum,
+                              gint      *natural)
 {
   GtkBin *bin = GTK_BIN (widget);
   GtkWidget *child;
-  guint border_width;
+
+  *minimum = *natural = 0;
 
   if ((child = gtk_bin_get_child (bin)))
-    {
-      GtkRequisition child_requisition;
+    gtk_widget_get_preferred_width (child, minimum, natural);
+}
 
-      gtk_widget_size_request (child, &child_requisition);
+static void
+cc_panel_get_preferred_height (GtkWidget *widget,
+                               gint      *minimum,
+                               gint      *natural)
+{
+  GtkBin *bin = GTK_BIN (widget);
+  GtkWidget *child;
 
-      requisition->width = child_requisition.width;
-      requisition->height = child_requisition.height;
-    }
+  *minimum = *natural = 0;
 
-  border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
-  requisition->width += 2 * border_width;
-  requisition->height += 2 * border_width;
+  if ((child = gtk_bin_get_child (bin)))
+    gtk_widget_get_preferred_height (child, minimum, natural);
 }
 
 static void
@@ -151,17 +156,10 @@ cc_panel_size_allocate (GtkWidget     *widget,
                              GtkAllocation *allocation)
 {
   GtkAllocation child_allocation;
-  guint border_width;
 
   gtk_widget_set_allocation (widget, allocation);
 
-
   child_allocation = *allocation;
-
-  border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
-
-  child_allocation.width -= 2 * border_width;
-  child_allocation.height -= 2 * border_width;
 
   gtk_widget_size_allocate (gtk_bin_get_child (GTK_BIN (widget)),
                             &child_allocation);
@@ -178,8 +176,11 @@ cc_panel_class_init (CcPanelClass *klass)
   object_class->set_property = cc_panel_set_property;
   object_class->finalize = cc_panel_finalize;
 
-  widget_class->size_request = cc_panel_size_request;
+  widget_class->get_preferred_width = cc_panel_get_preferred_width;
+  widget_class->get_preferred_height = cc_panel_get_preferred_height;
   widget_class->size_allocate = cc_panel_size_allocate;
+
+  gtk_container_class_handle_border_width (GTK_CONTAINER_CLASS (klass));
 
   g_type_class_add_private (klass, sizeof (CcPanelPrivate));
 

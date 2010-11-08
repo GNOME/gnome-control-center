@@ -189,17 +189,26 @@ cc_timezone_map_finalize (GObject *object)
 
 /* GtkWidget functions */
 static void
-cc_timezone_map_size_request (GtkWidget      *widget,
-                              GtkRequisition *req)
+cc_timezone_map_get_preferred_width (GtkWidget *widget,
+                                     gint      *minimum,
+                                     gint      *natural)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
 
-  GTK_WIDGET_CLASS (cc_timezone_map_parent_class)->size_request (widget, req);
-
-  req->width = gdk_pixbuf_get_width (priv->orig_background) * 0.6;
-  req->height = gdk_pixbuf_get_height (priv->orig_background) * 0.6;
+  /* FIXME: should natural == full pixmap size ? */
+  *minimum = *natural = gdk_pixbuf_get_width (priv->orig_background) * 0.6;
 }
 
+static void
+cc_timezone_map_get_preferred_height (GtkWidget *widget,
+                                      gint      *minimum,
+                                      gint      *natural)
+{
+  CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
+
+  /* FIXME: should natural == full pixmap size ? */
+  *minimum = *natural = gdk_pixbuf_get_height (priv->orig_background) * 0.6;
+}
 static void
 cc_timezone_map_size_allocate (GtkWidget     *widget,
                                GtkAllocation *allocation)
@@ -392,7 +401,8 @@ cc_timezone_map_class_init (CcTimezoneMapClass *klass)
   object_class->dispose = cc_timezone_map_dispose;
   object_class->finalize = cc_timezone_map_finalize;
 
-  widget_class->size_request = cc_timezone_map_size_request;
+  widget_class->get_preferred_width = cc_timezone_map_get_preferred_width;
+  widget_class->get_preferred_height = cc_timezone_map_get_preferred_height;
   widget_class->size_allocate = cc_timezone_map_size_allocate;
   widget_class->realize = cc_timezone_map_realize;
   widget_class->draw = cc_timezone_map_draw;
