@@ -1,4 +1,111 @@
 ===========================
+Version 2.91.2 (2010-11-08)
+===========================
+
+Common:
+- Remove typing break (William Jon McCann)
+- Build against libxml where appropriate (Matthias Clasen)
+- Fix parallel building (Bastien Nocera)
+- Remove unnneded lines in autogen.sh (Javier Jardón)
+- Use GSourceFunc() instead GtkFunction() in g_timeout_add() (Javier Jardón)
+- Bump gtk3 dep to 2.91.3 for box, etc changes (William Jon McCann)
+- Prepare for size_request removal in GTK3 (Matthias Clasen) (#633321)
+
+Background:
+- Make flickr background setting not segfault (Cosimo Cecchi)
+- Migrate to GSettings (Rodrigo Moya)
+- Last bits of new gnome_bg API porting (Tomas Bzatek) (#625899)
+
+Datetime:
+- Start implementing new UI designs (Thomas Wood)
+- Move to system section (William Jon McCann)
+- Link test program against common libs (Rodrigo Moya)
+
+Default applications:
+- Use URL handlers for browser and mailer applications (Rodrigo Moya)
+- Remove selection of media player (Rodrigo Moya)
+- Migrate to GSettings (Rodrigo Moya)
+- Fix run-time warning (Bastien Nocera)
+
+Display:
+- Reorganise according to mockups (Bastien Nocera)
+- Show the resolution in the canvas area (Bastien Nocera)
+- Remove excess cairo_save() call (Benjamin Otte)
+- Simplify the layout of the display panel (William Jon McCann)
+- Readd the checkbox to set primary display (William Jon McCann)
+- Remove the system-wide setting helper (William Jon McCann)
+- Make the canvas background color a bit more neutral (William Jon McCann)
+- Migrate to GSettings (Rodrigo Moya)
+- Port FooScrollArea to GtkScrollable iface (Bastien Nocera)
+- Change panel name to Displays (William Jon McCann)
+- Show aspect ratios with resolutions (Kees Cook)
+
+Keyboard:
+- Rename keybindings to keyboard (William Jon McCann)
+- Move general settings into keyboard panel (William Jon McCann)
+
+Mouse:
+- Use new GDK error trap API (Cosimo Cecchi)
+- Require libXInput (Bastien Nocera)
+- Migrate to GSettings (Rodrigo Moya)
+- Add motion acceleration and threshold UI for touchpad settings (Rodrigo Moya)
+- Don't expand Mouse notebook vertically (William Jon McCann)
+- Enable 2-finger scrolling through emulation (Chris Bagwell) (#625163)
+
+Network:
+- Fix for GtkCombo text changes (Bastien Nocera)
+- Remove 'has-separator' properties (Bastien Nocera)
+- Partially migrate to GSettings (Rodrigo Moya)
+
+Region:
+- Renamed from 'Keyboard' (William Jon McCann)
+- Migrate to GSettings (Sergey V. Udaltsov, Rodrigo Moya)
+- Remove calls to gtk_widget_hide_all() (Bastien Nocera)
+- Fix warnings with cell renderer changes (Bastien Nocera)
+- Don't expand vertically on general tab (William Jon McCann)
+- Remove a11y stuff (William Jon McCann)
+- Several renaming fixes (Yanko Kaneti)
+
+Shell:
+- Handle GtkSizeRequest removal (Bastien Nocera)
+- Make sure the shell doesn't show up in itself (Bastien Nocera)
+- Make it build and work against new GApplication (Bastien Nocera)
+- Fix warning in search renderer (Bastien Nocera)
+- Tighten up the spacing of the category views (William Jon McCann)
+- Do a better job of automatically sizing the window to fit contents (William Jon McCann)
+- Don't use window before it is realized (William Jon McCann)
+- Add a get_toplevel accessor to CcShell (Gerd Kohlberger) (#621940)
+
+Sound:
+- Initial import of sound panel (William Jon McCann)
+
+Universal access:
+- Use GSettings for GTK and icon theme settings (Rodrigo Moya)
+- Adjust for removal of GtkComboBoxEntry (Florian Müllner)
+- Move to system section (William Jon McCann)
+- Tweak the design of the panel (William Jon McCann)
+- Use the UI dir set in the Makefile.am (William Jon McCann)
+- Dial down the font size on Seeing a bit (William Jon McCann)
+
+User accounts:
+- Add user-accounts dialog (William Jon McCann)
+- Adapt for gtk_box_new() API changes (Yanko Kaneti)
+- Fix endless loop in load_url_handlers (Yanko Kaneti)
+
+Translations:
+- ca@valencia (Carles Ferrando)
+- es (Jorge González)
+- gl (Fran Diéguez)
+- he (Yaron Shahrabani)
+- ja (Yasumichi Akahoshi, Takayuki KUSANO)
+- ko (Changwoo Ryu)
+- nb (Kjartan Maraas)
+- pa (A S Alam)
+- sl (Andrej Žnidaršič, Matej Urbančič)
+- te (krishnababu k)
+- ug (Gheyret T.Kenji)
+
+===========================
 Version 2.91.0 (2010-10-04)
 ===========================
 
