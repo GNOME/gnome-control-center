@@ -608,7 +608,7 @@ make_resolution_string (int width, int height)
         case 12:
             aspect = "5:4";
             break;
-	// This catches 1.5625 as well (1600x1024) when maybe it shouldn't.
+	/* This catches 1.5625 as well (1600x1024) when maybe it shouldn't. */
         case 15:
             aspect = "3:2";
             break;
