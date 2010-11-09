@@ -1,4 +1,4 @@
-/* gnome-keyboard-properties-xkb.c
+/* gnome-region-panel-xkb.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
  * Written by: Sergey V. Udaltsov <svu@gnome.org>
@@ -225,7 +225,7 @@ setup_xkb_tabs (GtkBuilder * dialog)
 	xkb_layouts_register_conf_listener (dialog);
 	xkb_options_register_conf_listener (dialog);
 
-	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")),
+	g_signal_connect (G_OBJECT (WID ("region_dialog")),
 			  "destroy", G_CALLBACK (cleanup_xkb_tabs),
 			  dialog);
 

@@ -70,7 +70,7 @@ gnome_region_properties_init (GtkBuilder * dialog)
 	create_dialog (dialog);
 	if (dialog) {
 		setup_dialog (dialog);
-		dialog_win = WID ("keyboard_dialog");
+		dialog_win = WID ("region_dialog");
 		/* g_signal_connect (dialog_win, "response",
 		   G_CALLBACK (dialog_response_cb), NULL); */
 	}

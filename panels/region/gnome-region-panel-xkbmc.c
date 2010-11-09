@@ -1,4 +1,4 @@
-/* gnome-keyboard-properties-xkbmc.c
+/* gnome-region-panel-xkbmc.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
  * Written by: Sergey V. Udaltsov <svu@gnome.org>
@@ -309,12 +309,12 @@ choose_model (GtkBuilder * dialog)
     
     chooser_dialog = gtk_builder_new ();
     gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
-                               "/gnome-keyboard-properties-model-chooser.ui",
+                               "/gnome-region-panel-model-chooser.ui",
                                NULL);
 	chooser = CWID ("xkb_model_chooser");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
 				      GTK_WINDOW (WID
-						  ("keyboard_dialog")));
+						  ("region_dialog")));
 	current_model_name = g_settings_get_string (xkb_keyboard_settings, GKBD_KEYBOARD_CONFIG_KEY_MODEL);
 
 	prepare_vendors_list (chooser_dialog);

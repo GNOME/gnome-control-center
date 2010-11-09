@@ -1,4 +1,4 @@
-/* gnome-keyboard-properties-xkbot.c
+/* gnome-region-panel-xkbot.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
  * Written by: Sergey V. Udaltsov <svu@gnome.org>
@@ -438,13 +438,13 @@ xkb_options_popup_dialog (GtkBuilder * dialog)
 
 	chooser_dialog = gtk_builder_new ();
 	gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
-				   "/gnome-keyboard-properties-options-dialog.ui",
+				   "/gnome-region-panel-options-dialog.ui",
 				   NULL);
 
 	chooser = CWID ("xkb_options_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
 				      GTK_WINDOW (WID
-						  ("keyboard_dialog")));
+						  ("region_dialog")));
 	xkb_options_load_options (chooser_dialog);
 
 	g_signal_connect (chooser, "response",

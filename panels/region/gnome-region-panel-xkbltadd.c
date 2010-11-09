@@ -1,4 +1,4 @@
-/* gnome-keyboard-properties-xkbltadd.c
+/* gnome-region-panel-xkbltadd.c
  * Copyright (C) 2007 Sergey V. Udaltsov
  *
  * Written by: Sergey V. Udaltsov <svu@gnome.org>
@@ -443,7 +443,7 @@ xkb_layout_choose (GtkBuilder * dialog)
 
 	chooser_dialog = gtk_builder_new ();
 	gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
-				   "/gnome-keyboard-properties-layout-chooser.ui",
+				   "/gnome-region-panel-layout-chooser.ui",
 				   NULL);
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
 	GtkWidget *lang_chooser = CWID ("xkb_languages_available");
@@ -453,7 +453,7 @@ xkb_layout_choose (GtkBuilder * dialog)
 
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
 				      GTK_WINDOW (WID
-						  ("keyboard_dialog")));
+						  ("region_dialog")));
 
 	xkb_layout_chooser_available_layouts_fill (chooser_dialog,
 						   "xkb_countries_available",

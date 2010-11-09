@@ -1,4 +1,4 @@
-/* gnome-keyboard-properties-xkblt.c
+/* gnome-region-panel-xkblt.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
  * Written by: Sergey V. Udaltsov <svu@gnome.org>
@@ -341,7 +341,7 @@ show_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 		gchar **layouts_list = xkb_layouts_get_selected_list ();
 		const gchar *id = layouts_list[idx];
 		char *descr = xkb_layout_description_utf8 (id);
-		GtkWidget *parent = WID ("keyboard_dialog");
+		GtkWidget *parent = WID ("region_dialog");
 		GtkWidget *popup =
 		    gkbd_keyboard_drawing_new_dialog (idx, descr);
 		gtk_widget_set_parent (popup, parent);

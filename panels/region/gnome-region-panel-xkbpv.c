@@ -1,4 +1,4 @@
-/* gnome-keyboard-properties-xkbpv.c
+/* gnome-region-panel-xkbpv.c
  * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
  * Written by: Sergey V. Udaltsov <svu@gnome.org>
