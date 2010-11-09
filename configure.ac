@@ -112,7 +112,7 @@ AC_SUBST(GTK_ENGINE_DIR)
 
 PKG_CHECK_MODULES(GLIB, glib-2.0)
 
-PKG_CHECK_MODULES(POLKIT, polkit-gobject-1)
+PKG_CHECK_MODULES(POLKIT, polkit-gobject-1 >= 0.97)
 PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 2.29.90, have_cheese=yes, have_cheese=no)
 
 if test x$have_cheese = xyes ; then
