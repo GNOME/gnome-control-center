@@ -46,7 +46,7 @@ struct _UmLoginOptions {
         GtkWidget *hints_check;
         GtkWidget *guest_check;
         GtkWidget *lock_button;
-        PolkitPermission *permission;
+        GPermission *permission;
 
         UmUserManager *manager;
 
