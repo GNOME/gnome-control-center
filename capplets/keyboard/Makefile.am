@@ -15,7 +15,7 @@ gnome_keyboard_properties_SOURCES = \
 	gnome-keyboard-properties-xkbpv.c \
 	gnome-keyboard-properties-xkb.h
 
-gnome_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBGNOMEKBDUI_LIBS)
+gnome_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBGNOMEKBDUI_LIBS) $(LIBGNOMEKBD_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -33,6 +33,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(LIBGNOMEKBDUI_CFLAGS) \
+	$(LIBGNOMEKBD_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_UI_DIR="\"$(uidir)\""
