@@ -18,6 +18,7 @@ AM_CPPFLAGS =					\
 	$(PANEL_CFLAGS)				\
 	$(DISABLE_DEPRECATED)			\
 	$(PULSEAUDIO_CFLAGS)			\
+	$(XML_CFLAGS)				\
 	-DLOCALE_DIR=\""$(datadir)/locale"\"	\
 	-DLIBEXECDIR=\"$(libexecdir)\"		\
 	-DGLADEDIR=\""$(pkgdatadir)"\"		\
@@ -83,6 +84,7 @@ libsound_la_LDFLAGS =				\
 	$(PANEL_LDFLAGS)			\
 	$(CANBERRA_LIBS)			\
 	$(PULSEAUDIO_LIBS)			\
+	$(XML_LIBS)				\
 	$(NULL)
 
 libsound_la_SOURCES =				\
