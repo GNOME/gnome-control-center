@@ -369,6 +369,8 @@ panels/sound/data/icons/scalable/Makefile
 panels/sound/data/icons/scalable/apps/Makefile
 panels/sound/data/icons/scalable/devices/Makefile
 panels/sound/data/sounds/Makefile
+panels/screen/Makefile
+panels/screen/gnome-screen-panel.desktop.in
 panels/universal-access/Makefile
 panels/universal-access/gnome-universal-access-panel.desktop.in
 panels/user-accounts/Makefile
