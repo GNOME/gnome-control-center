@@ -96,7 +96,7 @@ _view_items_added_cb (SwClientItemView *item_view,
 
       item = g_new0 (GnomeWPItem, 1);
 
-      item->options = GNOME_BG_PLACEMENT_ZOOMED;
+      item->options = G_DESKTOP_BACKGROUND_STYLE_ZOOM;
       item->name = g_strdup (sw_item_get_value (sw_item, "title"));
       item->source_url = g_strdup (sw_item_get_value (sw_item,
                                                       "x-flickr-photo-url"));
