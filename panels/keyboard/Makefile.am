@@ -18,7 +18,7 @@ libkeyboard_la_SOURCES =   \
 	eggaccelerators.h
 
 libkeyboard_la_CFLAGS = $(PANEL_CFLAGS)
-libkeyboard_la_LIBADD = $(PANEL_LIBS)
+libkeyboard_la_LIBADD = $(PANEL_LIBS) $(GNOMECC_CAPPLETS_LIBS)
 libkeyboard_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@

@@ -63,6 +63,7 @@ gnome_sound_applet_LDADD =			\
 	libgnomevolumecontrol.la		\
 	$(CANBERRA_LIBS)			\
 	$(PULSEAUDIO_LIBS)			\
+	$(GNOMECC_CAPPLETS_LIBS)		\
 	$(NULL)
 
 gnome_sound_applet_SOURCES =			\
@@ -85,6 +86,7 @@ libsound_la_LDFLAGS =				\
 	$(CANBERRA_LIBS)			\
 	$(PULSEAUDIO_LIBS)			\
 	$(XML_LIBS)				\
+	$(GNOMECC_CAPPLETS_LIBS)		\
 	$(NULL)
 
 libsound_la_SOURCES =				\

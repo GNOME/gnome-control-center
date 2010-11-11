@@ -9,7 +9,7 @@ libnetwork_la_SOURCES = gnome-network-properties.c \
 			cc-network-panel.c \
 			cc-network-panel.h \
 			network-module.c
-libnetwork_la_LIBADD = $(PANEL_LIBS)
+libnetwork_la_LIBADD = $(PANEL_LIBS) $(GNOMECC_CAPPLETS_LIBS)
 libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 

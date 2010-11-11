@@ -897,7 +897,7 @@ cb_delete_button_clicked (GtkWidget *button,
 	key = g_strconcat (LOCATION_DIR "/", esc, NULL);
 	g_free (esc);
 
-	copy_location (key, "", client);
+	/* copy_location (key, "", client); */
 	gconf_client_recursive_unset (client, key,
 	                              GCONF_UNSET_INCLUDING_SCHEMA_NAMES, NULL);
 	gconf_client_suggest_sync (client, NULL);

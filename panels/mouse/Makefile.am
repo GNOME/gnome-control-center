@@ -24,7 +24,7 @@ libmouse_properties_la_SOURCES =	\
 	gnome-mouse-accessibility.c	\
 	gnome-mouse-accessibility.h
 
-libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(GSD_DBUS_LIBS)
+libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(GSD_DBUS_LIBS) $(GNOMECC_CAPPLETS_LIBS)
 libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@

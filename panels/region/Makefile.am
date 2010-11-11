@@ -27,7 +27,7 @@ libregion_la_SOURCES =	\
 	gnome-region-panel-xkbpv.c \
 	gnome-region-panel-xkb.h
 
-libregion_la_LIBADD = $(PANEL_LIBS) $(LIBGNOMEKBD_LIBS)
+libregion_la_LIBADD = $(PANEL_LIBS) $(LIBGNOMEKBD_LIBS) $(GNOMECC_CAPPLETS_LIBS)
 
 libregion_la_LDFLAGS = $(PANEL_LDFLAGS)
 

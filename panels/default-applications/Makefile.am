@@ -13,7 +13,8 @@ libdefault_applications_la_SOURCES = \
 
 libdefault_applications_la_LIBADD = \
 	$(PANEL_LIBS) \
-	$(XML_LIBS)
+	$(XML_LIBS) \
+	$(GNOMECC_CAPPLETS_LIBS)
 
 libdefault_applications_la_LDFLAGS = $(PANEL_LDFLAGS)
 
