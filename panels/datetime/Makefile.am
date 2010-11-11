@@ -94,7 +94,7 @@ libdate_time_la_SOURCES =		\
 	set-timezone.h		\
 	tz.c tz.h
 
-libdate_time_la_LIBADD = $(PANEL_LIBS) $(DBUS_LIBS)
+libdate_time_la_LIBADD = $(PANEL_LIBS) $(DBUS_LIBS) $(GNOMECC_CAPPLETS_LIBS)
 libdate_time_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
