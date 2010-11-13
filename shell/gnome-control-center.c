@@ -913,7 +913,7 @@ on_window_size_allocate (GtkWidget          *widget,
           screen = gtk_widget_get_screen (widget);
           monitor = gdk_screen_get_monitor_at_window (screen, window);
           gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-          height = MIN (height + 10, rect.height);
+          height = MIN (height + 10, rect.height - 120);
         }
     }
   else
