@@ -339,6 +339,8 @@ panels/keyboard/gnome-keyboard-panel.desktop.in
 panels/keyboard/gnome-keybindings.pc
 panels/region/Makefile
 panels/region/gnome-region-panel.desktop.in
+panels/media/Makefile
+panels/media/gnome-media-panel.desktop.in
 panels/mouse/Makefile
 panels/mouse/gnome-mouse-panel.desktop.in
 panels/network/Makefile

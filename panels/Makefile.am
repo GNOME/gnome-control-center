@@ -3,6 +3,7 @@ SUBDIRS= \
 	screen \
 	power \
 	display \
+	media \
 	mouse \
 	region \
 	network \
