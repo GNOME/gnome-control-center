@@ -2,6 +2,7 @@ SUBDIRS= \
 	background \
 	screen \
 	display \
+	media \
 	mouse \
 	region \
 	network \
