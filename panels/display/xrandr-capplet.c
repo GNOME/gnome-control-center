@@ -1725,6 +1725,26 @@ paint_output (App *app, cairo_t *cr, int i)
 		     - x - (w * scale + 0.5) / 2,
 		     - y - (h * scale + 0.5) / 2);
 
+
+    if (output == app->current_output)
+    {
+        GtkStyle *style;
+        GdkColor  color;
+        double    r, g, b;
+
+        style = gtk_widget_get_style (app->area);
+        color = style->bg[GTK_STATE_SELECTED];
+        r = (float)color.red / 65535.0;
+        g = (float)color.green / 65535.0;
+        b = (float)color.blue / 65535.0;
+
+	cairo_rectangle (cr, x - 2, y - 2, w * scale + 0.5 + 4, h * scale + 0.5 + 4);
+
+	cairo_set_line_width (cr, 4);
+	cairo_set_source_rgba (cr, r, g, b, 0.5);
+	cairo_stroke (cr);
+    }
+
     cairo_rectangle (cr, x, y, w * scale + 0.5, h * scale + 0.5);
     cairo_clip_preserve (cr);
 
@@ -1746,15 +1766,6 @@ paint_output (App *app, cairo_t *cr, int i)
     foo_scroll_area_add_input_from_fill (FOO_SCROLL_AREA (app->area),
 					 cr, on_output_event, output);
     cairo_fill (cr);
-
-    if (output == app->current_output)
-    {
-	cairo_rectangle (cr, x + 2, y + 2, w * scale + 0.5 - 4, h * scale + 0.5 - 4);
-
-	cairo_set_line_width (cr, 4);
-	cairo_set_source_rgba (cr, 0.33, 0.43, 0.57, 1.0);
-	cairo_stroke (cr);
-    }
 
     cairo_rectangle (cr, x + 0.5, y + 0.5, w * scale + 0.5 - 1, h * scale + 0.5 - 1);
 
