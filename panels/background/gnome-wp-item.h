@@ -21,8 +21,8 @@
 #include <gio/gio.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
-#include <libgnomeui/gnome-desktop-thumbnail.h>
-#include <libgnomeui/gnome-bg.h>
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
+#include <libgnome-desktop/gnome-bg.h>
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
 
 #include "gnome-wp-info.h"

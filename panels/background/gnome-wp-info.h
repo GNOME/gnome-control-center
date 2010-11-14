@@ -22,7 +22,7 @@
 #define _GNOME_WP_INFO_H_
 
 #include <glib.h>
-#include <libgnomeui/gnome-desktop-thumbnail.h>
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 typedef struct _GnomeWPInfo GnomeWPInfo;
 

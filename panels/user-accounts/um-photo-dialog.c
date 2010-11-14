@@ -27,7 +27,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnomeui/gnome-desktop-thumbnail.h>
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 #ifdef HAVE_CHEESE
 #include <cheese-avatar-chooser.h>

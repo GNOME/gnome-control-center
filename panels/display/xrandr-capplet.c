@@ -27,9 +27,9 @@
 #include <gtk/gtk.h>
 #include "scrollarea.h"
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnomeui/gnome-rr.h>
-#include <libgnomeui/gnome-rr-config.h>
-#include <libgnomeui/gnome-rr-labeler.h>
+#include <libgnome-desktop/gnome-rr.h>
+#include <libgnome-desktop/gnome-rr-config.h>
+#include <libgnome-desktop/gnome-rr-labeler.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <glib/gi18n.h>

@@ -26,7 +26,7 @@
 #include "gnome-wp-item.h"
 #include "gnome-wp-xml.h"
 
-#include <libgnomeui/gnome-desktop-thumbnail.h>
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gio/gio.h>
 
 G_DEFINE_TYPE (BgWallpapersSource, bg_wallpapers_source, BG_TYPE_SOURCE)
