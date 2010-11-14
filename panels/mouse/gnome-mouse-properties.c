@@ -1,6 +1,5 @@
-/* -*- mode: c; style: linux -*- */
-
-/* mouse-properties-capplet.c
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
+ *
  * Copyright (C) 2001 Red Hat, Inc.
  * Copyright (C) 2001 Ximian, Inc.
  *
@@ -32,7 +31,6 @@
 #include <math.h>
 
 #include "gnome-mouse-accessibility.h"
-#include "capplet-stock-icons.h"
 #include "gnome-mouse-properties.h"
 
 #include <sys/types.h>
@@ -98,8 +96,7 @@ test_maybe_timeout (struct test_data_t *data)
 {
 	double_click_state = DOUBLE_CLICK_TEST_OFF;
 
-	gtk_image_set_from_stock (GTK_IMAGE (data->image),
-				  MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size());
+	gtk_image_set_from_icon_name (GTK_IMAGE (data->image), "face-plain", GTK_ICON_SIZE_DIALOG);
 
 	*data->timeout_id = 0;
 
@@ -156,16 +153,13 @@ event_box_button_press_event (GtkWidget   *widget,
 
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_ON:
-		gtk_image_set_from_stock (GTK_IMAGE (image),
-					  MOUSE_DBLCLCK_ON, mouse_capplet_dblclck_icon_get_size());
+		gtk_image_set_from_icon_name (GTK_IMAGE (image), "face-laugh", GTK_ICON_SIZE_DIALOG);
 		break;
 	case DOUBLE_CLICK_TEST_MAYBE:
-		gtk_image_set_from_stock (GTK_IMAGE (image),
-					  MOUSE_DBLCLCK_MAYBE, mouse_capplet_dblclck_icon_get_size());
+		gtk_image_set_from_icon_name (GTK_IMAGE (image), "face-smile", GTK_ICON_SIZE_DIALOG);
 		break;
 	case DOUBLE_CLICK_TEST_OFF:
-		gtk_image_set_from_stock (GTK_IMAGE (image),
-					  MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size());
+		gtk_image_set_from_icon_name (GTK_IMAGE (image), "face-plain", GTK_ICON_SIZE_DIALOG);
 		break;
 	}
 
@@ -329,7 +323,7 @@ setup_dialog (GtkBuilder *dialog)
 	g_settings_bind (mouse_settings, "double-click",
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("delay_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
-	gtk_image_set_from_stock (GTK_IMAGE (WID ("double_click_image")), MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size ());
+	gtk_image_set_from_icon_name (GTK_IMAGE (WID ("double_click_image")), "face-plain", GTK_ICON_SIZE_DIALOG);
 	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", WID ("double_click_image"));
 	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
 			  G_CALLBACK (event_box_button_press_event), dialog);
@@ -441,8 +435,6 @@ gnome_mouse_properties_init (GtkBuilder *dialog)
 {
 	GtkWidget      *dialog_win, *w;
 	gchar *start_page = NULL;
-
-	capplet_init_stock_icons ();
 
 	mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
 	touchpad_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.touchpad");
