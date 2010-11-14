@@ -57,7 +57,6 @@ struct App
     GtkWidget      *monitor_off_radio;
     GtkListStore   *resolution_store;
     GtkWidget	   *resolution_combo;
-    GtkWidget	   *refresh_combo;
     GtkWidget	   *rotation_combo;
     GtkWidget	   *clone_checkbox;
     GtkWidget	   *primary_display_checkbox;
@@ -84,7 +83,6 @@ struct App
 
 static void rebuild_gui (App *app);
 static void on_clone_changed (GtkWidget *box, gpointer data);
-static void on_rate_changed (GtkComboBox *box, gpointer data);
 static gboolean output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config);
 static void select_current_output_from_dialog_position (App *app);
 static void monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data);
@@ -352,58 +350,6 @@ rebuild_rotation_combo (App *app)
 
     if (!(selection && combo_select (app->rotation_combo, selection)))
 	combo_select (app->rotation_combo, _("Normal"));
-}
-
-static char *
-make_rate_string (int hz)
-{
-    return g_strdup_printf (_("%d Hz"), hz);
-}
-
-static void
-rebuild_rate_combo (App *app)
-{
-    GHashTable *rates;
-    GnomeRRMode **modes;
-    int best;
-    int i;
-
-    clear_combo (app->refresh_combo);
-
-    gtk_widget_set_sensitive (
-	app->refresh_combo, app->current_output && app->current_output->on);
-
-    if (!app->current_output
-        || !(modes = get_current_modes (app)))
-	return;
-
-    rates = g_hash_table_new_full (
-	g_str_hash, g_str_equal, (GFreeFunc) g_free, NULL);
-
-    best = -1;
-    for (i = 0; modes[i] != NULL; ++i)
-    {
-	GnomeRRMode *mode = modes[i];
-	int width, height, rate;
-
-	width = gnome_rr_mode_get_width (mode);
-	height = gnome_rr_mode_get_height (mode);
-	rate = gnome_rr_mode_get_freq (mode);
-
-	if (width == app->current_output->width		&&
-	    height == app->current_output->height)
-	{
-	    add_key (app->refresh_combo,
-		     idle_free (make_rate_string (rate)),
-		     0, 0, rate, -1);
-
-	    if (rate > best)
-		best = rate;
-	}
-    }
-
-    if (!combo_select (app->refresh_combo, idle_free (make_rate_string (app->current_output->rate))))
-	combo_select (app->refresh_combo, idle_free (make_rate_string (best)));
 }
 
 static int
@@ -717,7 +663,6 @@ rebuild_gui (App *app)
     rebuild_current_monitor_label (app);
     rebuild_on_off_radios (app);
     rebuild_resolution_combo (app);
-    rebuild_rate_combo (app);
     rebuild_rotation_combo (app);
 
 #if 0
@@ -779,21 +724,6 @@ on_rotation_changed (GtkComboBox *box, gpointer data)
 }
 
 static void
-on_rate_changed (GtkComboBox *box, gpointer data)
-{
-    App *app = data;
-    int rate;
-
-    if (!app->current_output)
-	return;
-
-    if (get_mode (app->refresh_combo, NULL, NULL, &rate, NULL))
-	app->current_output->rate = rate;
-
-    foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
-}
-
-static void
 select_resolution_for_current_output (App *app)
 {
     GnomeRRMode **modes;
@@ -841,7 +771,7 @@ monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data)
     app->current_output->on = is_on;
 
     if (is_on)
-	select_resolution_for_current_output (app); /* The refresh rate will be picked in rebuild_rate_combo() */
+	select_resolution_for_current_output (app);
 
     rebuild_gui (app);
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
@@ -921,7 +851,6 @@ on_resolution_changed (GtkComboBox *box, gpointer data)
 
     realign_outputs_after_resolution_change (app, app->current_output, old_width, old_height);
 
-    rebuild_rate_combo (app);
     rebuild_rotation_combo (app);
 
     foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
@@ -2423,10 +2352,6 @@ run_application (void)
     g_signal_connect (app->resolution_combo, "changed",
 		      G_CALLBACK (on_resolution_changed), app);
 
-    app->refresh_combo = _gtk_builder_get_widget (builder, "refresh_combo");
-    g_signal_connect (app->refresh_combo, "changed",
-		      G_CALLBACK (on_rate_changed), app);
-
     app->rotation_combo = _gtk_builder_get_widget (builder, "rotation_combo");
     g_signal_connect (app->rotation_combo, "changed",
 		      G_CALLBACK (on_rotation_changed), app);
@@ -2443,7 +2368,6 @@ run_application (void)
     app->primary_display_checkbox = _gtk_builder_get_widget (builder, "primary_display_checkbox");
 
     make_text_combo (app->resolution_combo, 4);
-    make_text_combo (app->refresh_combo, 3);
     make_text_combo (app->rotation_combo, -1);
 
     g_assert (app->primary_display_checkbox);
