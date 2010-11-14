@@ -47,7 +47,7 @@ enum {
 };
 
 enum {
-  COLUMN_AUTORUN_PIXBUF,
+  COLUMN_AUTORUN_GICON,
   COLUMN_AUTORUN_NAME,
   COLUMN_AUTORUN_APP_INFO,
   COLUMN_AUTORUN_X_CONTENT_TYPE,
@@ -416,8 +416,7 @@ prepare_combo_box (CcMediaPanel *self,
   GAppInfo *default_app_info;
   GtkListStore *list_store;
   GtkTreeIter iter;
-  GdkPixbuf *pixbuf;
-  int icon_size, width, height;
+  GIcon *icon;
   int set_active;
   int n;
   int num_apps;
@@ -433,9 +432,6 @@ prepare_combo_box (CcMediaPanel *self,
 			   &pref_start_app, &pref_ignore, &pref_open_folder);
   pref_ask = !pref_start_app && !pref_ignore && !pref_open_folder;
 
-  gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &width, &height);
-  icon_size = MAX (width, height);
-
   set_active = -1;
   data = NULL;
   new_data = TRUE;
@@ -445,7 +441,7 @@ prepare_combo_box (CcMediaPanel *self,
   num_apps = g_list_length (app_info_list);
 
   list_store = gtk_list_store_new (5,
-				   GDK_TYPE_PIXBUF,
+				   G_TYPE_ICON,
 				   G_TYPE_STRING,
 				   G_TYPE_APP_INFO,
 				   G_TYPE_STRING,
@@ -454,71 +450,58 @@ prepare_combo_box (CcMediaPanel *self,
   /* no apps installed */
   if (num_apps == 0) {
     gtk_list_store_append (list_store, &iter);
-    pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-				       GTK_STOCK_DIALOG_ERROR,
-				       icon_size,
-				       0,
-				       NULL);
+    icon = g_themed_icon_new (GTK_STOCK_DIALOG_ERROR);
 
     /* TODO: integrate with PackageKit-gnome to find applications */
 
-    gtk_list_store_set (list_store, &iter, 
-			COLUMN_AUTORUN_PIXBUF, pixbuf, 
-			COLUMN_AUTORUN_NAME, _("No applications found"), 
-			COLUMN_AUTORUN_APP_INFO, NULL, 
+    gtk_list_store_set (list_store, &iter,
+			COLUMN_AUTORUN_GICON, icon,
+			COLUMN_AUTORUN_NAME, _("No applications found"),
+			COLUMN_AUTORUN_APP_INFO, NULL,
 			COLUMN_AUTORUN_X_CONTENT_TYPE, x_content_type,
 			COLUMN_AUTORUN_ITEM_TYPE, AUTORUN_ASK,
 			-1);
-    g_object_unref (pixbuf);
-  } else {	
+    g_object_unref (icon);
+  } else {
     gtk_list_store_append (list_store, &iter);
-    pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-				       GTK_STOCK_DIALOG_QUESTION,
-				       icon_size,
-				       0,
-				       NULL);
+    icon = g_themed_icon_new (GTK_STOCK_DIALOG_QUESTION);
+
     gtk_list_store_set (list_store, &iter, 
-			COLUMN_AUTORUN_PIXBUF, pixbuf, 
+			COLUMN_AUTORUN_GICON, icon, 
 			COLUMN_AUTORUN_NAME, _("Ask what to do"), 
 			COLUMN_AUTORUN_APP_INFO, NULL, 
 			COLUMN_AUTORUN_X_CONTENT_TYPE, x_content_type,
 			COLUMN_AUTORUN_ITEM_TYPE, AUTORUN_ASK,
 			-1);
-    g_object_unref (pixbuf);
-		
+    g_object_unref (icon);
+
     gtk_list_store_append (list_store, &iter);
-    pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-				       GTK_STOCK_CLOSE,
-				       icon_size,
-				       0,
-				       NULL);
+    icon = g_themed_icon_new (GTK_STOCK_CLOSE);
+
     gtk_list_store_set (list_store, &iter, 
-			COLUMN_AUTORUN_PIXBUF, pixbuf, 
+			COLUMN_AUTORUN_GICON, icon,
 			COLUMN_AUTORUN_NAME, _("Do Nothing"), 
 			COLUMN_AUTORUN_APP_INFO, NULL, 
 			COLUMN_AUTORUN_X_CONTENT_TYPE, x_content_type,
 			COLUMN_AUTORUN_ITEM_TYPE, AUTORUN_IGNORE,
 			-1);
-    g_object_unref (pixbuf);		
+    g_object_unref (icon);
 
     gtk_list_store_append (list_store, &iter);
-    pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-				       "folder-open",
-				       icon_size,
-				       0,
-				       NULL);
+    icon = g_themed_icon_new ("folder-open");
+
     gtk_list_store_set (list_store, &iter, 
-			COLUMN_AUTORUN_PIXBUF, pixbuf, 
+			COLUMN_AUTORUN_GICON, icon,
 			COLUMN_AUTORUN_NAME, _("Open Folder"), 
 			COLUMN_AUTORUN_APP_INFO, NULL, 
 			COLUMN_AUTORUN_X_CONTENT_TYPE, x_content_type,
 			COLUMN_AUTORUN_ITEM_TYPE, AUTORUN_OPEN_FOLDER,
 			-1);
-    g_object_unref (pixbuf);		
+    g_object_unref (icon);	
 
     gtk_list_store_append (list_store, &iter);
     gtk_list_store_set (list_store, &iter, 
-			COLUMN_AUTORUN_PIXBUF, NULL, 
+			COLUMN_AUTORUN_GICON, NULL, 
 			COLUMN_AUTORUN_NAME, NULL, 
 			COLUMN_AUTORUN_APP_INFO, NULL, 
 			COLUMN_AUTORUN_X_CONTENT_TYPE, NULL,
@@ -526,8 +509,6 @@ prepare_combo_box (CcMediaPanel *self,
 			-1);
 
     for (l = app_info_list, n = 4; l != NULL; l = l->next, n++) {
-      GIcon *icon;
-      GtkIconInfo *icon_info;
       char *open_string;
       GAppInfo *app_info = l->data;
 			
@@ -537,27 +518,17 @@ prepare_combo_box (CcMediaPanel *self,
        */
 			
       icon = g_app_info_get_icon (app_info);
-      icon_info = gtk_icon_theme_lookup_by_gicon (gtk_icon_theme_get_default (),
-						  icon,
-						  icon_size,
-						  GTK_ICON_LOOKUP_GENERIC_FALLBACK |
-						  GTK_ICON_LOOKUP_FORCE_SIZE);
-      pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-      gtk_icon_info_free (icon_info);
-			
       open_string = g_strdup_printf (_("Open %s"), g_app_info_get_display_name (app_info));
 
       gtk_list_store_append (list_store, &iter);
       gtk_list_store_set (list_store, &iter, 
-			  COLUMN_AUTORUN_PIXBUF, pixbuf, 
+			  COLUMN_AUTORUN_GICON, icon,
 			  COLUMN_AUTORUN_NAME, open_string, 
 			  COLUMN_AUTORUN_APP_INFO, app_info, 
 			  COLUMN_AUTORUN_X_CONTENT_TYPE, x_content_type,
 			  COLUMN_AUTORUN_ITEM_TYPE, AUTORUN_APP,
 			  -1);
-      if (pixbuf != NULL) {
-	g_object_unref (pixbuf);
-      }
+
       g_free (open_string);
 			
       if (g_app_info_equal (app_info, default_app_info)) {
@@ -568,7 +539,7 @@ prepare_combo_box (CcMediaPanel *self,
 
   gtk_list_store_append (list_store, &iter);
   gtk_list_store_set (list_store, &iter,
-		      COLUMN_AUTORUN_PIXBUF, NULL,
+		      COLUMN_AUTORUN_GICON, NULL,
 		      COLUMN_AUTORUN_NAME, NULL,
 		      COLUMN_AUTORUN_APP_INFO, NULL,
 		      COLUMN_AUTORUN_X_CONTENT_TYPE, NULL,
@@ -576,19 +547,16 @@ prepare_combo_box (CcMediaPanel *self,
 		      -1);
 
   gtk_list_store_append (list_store, &iter);
-  pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-				     "application-x-executable",
-				     icon_size,
-				     0,
-				     NULL);
+  icon = g_themed_icon_new ("application-x-executable");
+
   gtk_list_store_set (list_store, &iter,
-		      COLUMN_AUTORUN_PIXBUF, pixbuf,
+		      COLUMN_AUTORUN_GICON, icon,
 		      COLUMN_AUTORUN_NAME, _("Open with other Application..."),
 		      COLUMN_AUTORUN_APP_INFO, NULL,
 		      COLUMN_AUTORUN_X_CONTENT_TYPE, x_content_type,
 		      COLUMN_AUTORUN_ITEM_TYPE, AUTORUN_OTHER_APP,
 		      -1);
-  g_object_unref (pixbuf);
+  g_object_unref (icon);
 
   if (default_app_info != NULL) {
     g_object_unref (default_app_info);
@@ -603,7 +571,7 @@ prepare_combo_box (CcMediaPanel *self,
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, FALSE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), renderer,
-				  "pixbuf", COLUMN_AUTORUN_PIXBUF,
+				  "gicon", COLUMN_AUTORUN_GICON,
 				  NULL);
   renderer = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, TRUE);
@@ -683,9 +651,9 @@ media_panel_setup (CcMediaPanel *self)
 
   other_type_combo_box = GTK_WIDGET (gtk_builder_get_object (builder, "media_other_type_combobox"));
 
-  other_type_list_store = gtk_list_store_new (3, 
-					      GDK_TYPE_PIXBUF, 
-					      G_TYPE_STRING, 
+  other_type_list_store = gtk_list_store_new (3,
+					      G_TYPE_ICON,
+					      G_TYPE_STRING,
 					      G_TYPE_STRING);
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (other_type_list_store),
@@ -698,9 +666,6 @@ media_panel_setup (CcMediaPanel *self)
     char *content_type = l->data;
     char *description;
     GIcon *icon;
-    GtkIconInfo *icon_info;
-    GdkPixbuf *pixbuf;
-    int icon_size, width, height;
 
     if (!g_str_has_prefix (content_type, "x-content/"))
       continue;
@@ -710,54 +675,39 @@ media_panel_setup (CcMediaPanel *self)
       }
     }
 
-    gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &width, &height);
-    icon_size = MAX (width, height);
-
-    pixbuf = NULL;
     description = g_content_type_get_description (content_type);
     gtk_list_store_append (other_type_list_store, &iter);
     icon = g_content_type_get_icon (content_type);
-    if (icon != NULL) {
-      icon_info = gtk_icon_theme_lookup_by_gicon (gtk_icon_theme_get_default (),
-						  icon, icon_size,
-						  GTK_ICON_LOOKUP_GENERIC_FALLBACK |
-						  GTK_ICON_LOOKUP_FORCE_SIZE);
-      g_object_unref (icon);
 
-      if (icon_info != NULL) {
-	pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-	gtk_icon_info_free (icon_info);
-      }
-    }
-
-    gtk_list_store_set (other_type_list_store, &iter, 
-			0, pixbuf, 
-			1, description, 
-			2, content_type, 
+    gtk_list_store_set (other_type_list_store, &iter,
+			0, icon,
+			1, description,
+			2, content_type,
 			-1);
-    if (pixbuf != NULL)
-      g_object_unref (pixbuf);
     g_free (description);
+    g_object_unref (icon);
   skip:
     ;
   }
-  g_list_foreach (content_types, (GFunc) g_free, NULL);
-  g_list_free (content_types);
 
-  gtk_combo_box_set_model (GTK_COMBO_BOX (other_type_combo_box), GTK_TREE_MODEL (other_type_list_store));
-	
+  g_list_free_full (content_types, g_free);
+
+  gtk_combo_box_set_model (GTK_COMBO_BOX (other_type_combo_box),
+			   GTK_TREE_MODEL (other_type_list_store));
+
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, FALSE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
-				  "pixbuf", 0,
+				  "gicon", 0,
 				  NULL);
+
   renderer = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, TRUE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
 				  "text", 1,
 				  NULL);
 
-  g_signal_connect (G_OBJECT (other_type_combo_box),
+  g_signal_connect (other_type_combo_box,
 		    "changed",
 		    G_CALLBACK (other_type_combo_box_changed),
 		    self);
