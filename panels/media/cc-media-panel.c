@@ -304,7 +304,8 @@ combo_box_changed (GtkComboBox *combo_box,
 
       dialog = nautilus_add_application_dialog_new (NULL, x_content_type);
       gtk_window_set_transient_for (GTK_WINDOW (dialog),
-				    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (combo_box))));
+				    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (data->self))));
+      gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
       g_signal_connect (dialog, "application_selected",
 			G_CALLBACK (other_application_selected),
 			data);
@@ -316,7 +317,6 @@ combo_box_changed (GtkComboBox *combo_box,
 
       break;
     }
-
   }
  
  out:
