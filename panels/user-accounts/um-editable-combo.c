@@ -278,6 +278,7 @@ static void
 start_editing (UmEditableCombo *combo)
 {
         gtk_notebook_set_current_page (combo->priv->notebook, 2);
+        gtk_combo_box_popup (combo->priv->combo);
 }
 
 static void
