@@ -400,14 +400,18 @@ model_filter_func (GtkTreeModel              *model,
   gchar *name, *target;
   gchar *needle, *haystack;
   gboolean result;
+  gchar **keywords;
 
   gtk_tree_model_get (model, iter, COL_NAME, &name,
-                      COL_SEARCH_TARGET, &target, -1);
+                      COL_SEARCH_TARGET, &target,
+                      COL_KEYWORDS, &keywords,
+                      -1);
 
   if (!priv->filter_string || !name || !target)
     {
       g_free (name);
       g_free (target);
+      g_strfreev (keywords);
       return FALSE;
     }
 
@@ -416,10 +420,24 @@ model_filter_func (GtkTreeModel              *model,
 
   result = (strstr (haystack, needle) != NULL);
 
+  if (!result && keywords)
+    {
+      gint i;
+      gchar *keyword;
+
+      for (i = 0; !result && keywords[i]; i++)
+        {
+          keyword = g_utf8_casefold (keywords[i], -1);
+          result = strstr (keyword, needle) == keyword;
+          g_free (keyword);
+        }
+    }
+
   g_free (name);
   g_free (target);
   g_free (haystack);
   g_free (needle);
+  g_strfreev (keywords);
 
   return result;
 }

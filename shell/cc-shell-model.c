@@ -24,6 +24,7 @@
 
 #define GNOME_SETTINGS_PANEL_ID_KEY "X-GNOME-Settings-Panel"
 #define GNOME_SETTINGS_PANEL_CATEGORY GNOME_SETTINGS_PANEL_ID_KEY
+#define GNOME_SETTINGS_PANEL_ID_KEYWORDS "X-GNOME-Keywords"
 
 
 G_DEFINE_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
@@ -38,7 +39,7 @@ static void
 cc_shell_model_init (CcShellModel *self)
 {
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
-      GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING};
+      GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRV};
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -95,6 +96,7 @@ cc_shell_model_add_item (CcShellModel   *model,
   GError *err = NULL;
   gchar *search_target;
   GKeyFile *key_file;
+  gchar **keywords;
 
   /* load the .desktop file since gnome-menus doesn't have a way to read
    * custom properties from desktop files */
@@ -120,6 +122,10 @@ cc_shell_model_add_item (CcShellModel   *model,
 	}
       id = g_strdup (gmenu_tree_entry_get_desktop_file_id (item));
     }
+
+  keywords = g_key_file_get_locale_string_list (key_file, "Desktop Entry",
+                                                GNOME_SETTINGS_PANEL_ID_KEYWORDS,
+                                                NULL, NULL, NULL);
 
   g_key_file_free (key_file);
   key_file = NULL;
@@ -159,8 +165,10 @@ cc_shell_model_add_item (CcShellModel   *model,
                                      COL_CATEGORY, category_name,
                                      COL_SEARCH_TARGET, search_target,
                                      COL_ICON_NAME, icon,
+                                     COL_KEYWORDS, keywords,
                                      -1);
 
   g_free (id);
   g_free (search_target);
+  g_strfreev (keywords);
 }
