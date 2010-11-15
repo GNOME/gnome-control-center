@@ -286,12 +286,23 @@ um_lock_button_constructed (GObject *object)
 }
 
 static void
-um_lock_button_size_request (GtkWidget      *widget,
-                             GtkRequisition *requisition)
+um_lock_button_get_preferred_width (GtkWidget *widget,
+                                    gint      *minimum,
+                                    gint      *natural)
 {
   UmLockButtonPrivate *priv = UM_LOCK_BUTTON (widget)->priv;
 
-  gtk_widget_get_preferred_size (priv->box, requisition, NULL);
+  gtk_widget_get_preferred_width (priv->box, minimum, natural);
+}
+
+static void
+um_lock_button_get_preferred_height (GtkWidget *widget,
+                                     gint      *minimum,
+                                     gint      *natural)
+{
+  UmLockButtonPrivate *priv = UM_LOCK_BUTTON (widget)->priv;
+
+  gtk_widget_get_preferred_height (priv->box, minimum, natural);
 }
 
 static void
@@ -322,7 +333,8 @@ um_lock_button_class_init (UmLockButtonClass *klass)
   gobject_class->set_property = um_lock_button_set_property;
   gobject_class->constructed  = um_lock_button_constructed;
 
-  widget_class->size_request = um_lock_button_size_request;
+  widget_class->get_preferred_width = um_lock_button_get_preferred_width;
+  widget_class->get_preferred_height = um_lock_button_get_preferred_height;
   widget_class->size_allocate = um_lock_button_size_allocate;
 
   g_type_class_add_private (klass, sizeof (UmLockButtonPrivate));
@@ -389,16 +401,6 @@ um_lock_button_class_init (UmLockButtonClass *klass)
                          G_PARAM_READWRITE |
                          G_PARAM_CONSTRUCT |
                          G_PARAM_STATIC_STRINGS));
-
-  signals[CHANGED_SIGNAL] = g_signal_new ("changed",
-                                          G_TYPE_FROM_CLASS (klass),
-                                          G_SIGNAL_RUN_LAST,
-                                          G_STRUCT_OFFSET (UmLockButtonClass, changed),
-                                          NULL,
-                                          NULL,
-                                          g_cclosure_marshal_VOID__VOID,
-                                          G_TYPE_NONE,
-                                          0);
 }
 
 /**

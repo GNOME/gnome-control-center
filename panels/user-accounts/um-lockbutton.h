@@ -48,8 +48,6 @@ struct _UmLockButtonClass
 {
   GtkBinClass parent_class;
 
-  void (*changed) (UmLockButton *button);
-
   void (*reserved0) (void);
   void (*reserved1) (void);
   void (*reserved2) (void);
