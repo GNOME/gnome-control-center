@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Red Hat, Inc.
+ * Copyright (C) 2008-2010 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * Author: Cosimo Cecchi <cosimoc@gnome.org>
+ * Author: David Zeuthen <davidz@redhat.com>
+ *         Cosimo Cecchi <cosimoc@gnome.org>
  *
  */
 
@@ -378,10 +379,10 @@ eel_g_strv_find (char **strv,
 
 static void
 autorun_get_preferences (CcMediaPanel *self,
-				  const char *x_content_type,
-				  gboolean *pref_start_app,
-				  gboolean *pref_ignore,
-				  gboolean *pref_open_folder)
+			 const char *x_content_type,
+			 gboolean *pref_start_app,
+			 gboolean *pref_ignore,
+			 gboolean *pref_open_folder)
 {
   char **x_content_start_app;
   char **x_content_ignore;
@@ -414,30 +415,31 @@ autorun_get_preferences (CcMediaPanel *self,
   g_strfreev (x_content_open_folder);
 }
 
-
 static gboolean
 combo_box_separator_func (GtkTreeModel *model,
                           GtkTreeIter *iter,
                           gpointer data)
 {
-	char *str;
+  char *str;
 
-	gtk_tree_model_get (model, iter,
-			    1, &str,
-			    -1);
-	if (str != NULL) {
-		g_free (str);
-		return FALSE;
-	}
-	return TRUE;
+  gtk_tree_model_get (model, iter,
+		      1, &str,
+		      -1);
+
+  if (str != NULL) {
+    g_free (str);
+    return FALSE;
+  }
+
+  return TRUE;
 }
 
 static void 
 autorun_combobox_data_destroy (AutorunComboBoxData *data)
 {
   /* signal handler may be automatically disconnected by destroying the widget */
-  if (g_signal_handler_is_connected (G_OBJECT (data->combo_box), data->changed_signal_id)) {
-    g_signal_handler_disconnect (G_OBJECT (data->combo_box), data->changed_signal_id);
+  if (g_signal_handler_is_connected (data->combo_box, data->changed_signal_id)) {
+    g_signal_handler_disconnect (data->combo_box, data->changed_signal_id);
   }
   g_free (data->x_content_type);
   g_free (data);
@@ -601,7 +603,7 @@ prepare_combo_box (CcMediaPanel *self,
   g_list_free_full (app_info_list, g_object_unref);
 
   gtk_combo_box_set_model (GTK_COMBO_BOX (combo_box), GTK_TREE_MODEL (list_store));
-  g_object_unref (G_OBJECT (list_store));
+  g_object_unref (list_store);
 
   gtk_cell_layout_clear (GTK_CELL_LAYOUT (combo_box));
 
@@ -648,7 +650,7 @@ prepare_combo_box (CcMediaPanel *self,
     data->self = self;
 
     if (data->changed_signal_id == 0) {
-      data->changed_signal_id = g_signal_connect (G_OBJECT (combo_box),
+      data->changed_signal_id = g_signal_connect (combo_box,
 						  "changed",
 						  G_CALLBACK (combo_box_changed),
 						  data);
