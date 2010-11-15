@@ -501,21 +501,18 @@ popup_button_draw (GtkWidget      *widget,
                    cairo_t        *cr,
                    UmPhotoDialog  *um)
 {
-        GtkAllocation allocation;
-
-        if (gtk_widget_get_state (widget) != GTK_STATE_PRELIGHT &&
-            !gtk_widget_is_focus (gtk_widget_get_parent (widget))) {
+        if (gtk_widget_get_state (gtk_bin_get_child (GTK_BIN (widget))) != GTK_STATE_PRELIGHT &&
+            !gtk_widget_is_focus (widget)) {
                 return;
         }
 
-        gtk_widget_get_allocation (widget, &allocation);
         gtk_paint_expander (gtk_widget_get_style (widget),
                             cr,
                             gtk_widget_get_state (widget),
                             widget,
                             NULL,
-                            allocation.x + allocation.width,
-                            allocation.y + allocation.height,
+                            gtk_widget_get_allocated_width (widget) - 12,
+                            gtk_widget_get_allocated_height (widget) - 12,
                             GTK_EXPANDER_EXPANDED);
 }
 
@@ -545,7 +542,7 @@ um_photo_dialog_new (GtkWidget *button)
                           G_CALLBACK (on_popup_button_button_pressed), um);
         g_signal_connect (button, "notify::is-focus",
                           G_CALLBACK (popup_button_focus_changed), um);
-        g_signal_connect_after (gtk_bin_get_child (GTK_BIN (button)), "draw",
+        g_signal_connect_after (button, "draw",
                                 G_CALLBACK (popup_button_draw), um);
 
         g_signal_connect (um->photo_popup, "unmap",

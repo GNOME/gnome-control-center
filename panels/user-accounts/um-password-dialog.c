@@ -81,19 +81,16 @@ generate_draw (GtkWidget        *widget,
                cairo_t          *cr,
                UmPasswordDialog *um)
 {
-        GtkAllocation allocation;
-
         if (!gtk_widget_is_sensitive (widget))
                 return;
 
-        gtk_widget_get_allocation (widget, &allocation);
         gtk_paint_expander (gtk_widget_get_style (widget),
                             cr,
                             gtk_widget_get_state (widget),
                             widget,
                             NULL,
-                            allocation.x + allocation.width,
-                            allocation.y + allocation.height,
+                            gtk_widget_get_allocated_width (widget) - 12,
+                            gtk_widget_get_allocated_height (widget) - 12,
                             GTK_EXPANDER_EXPANDED);
 }
 
@@ -708,7 +705,7 @@ um_password_dialog_new (void)
                           G_CALLBACK (generate_state_changed), um);
 #endif
         um->generate_button = widget;
-        g_signal_connect_after (gtk_bin_get_child (GTK_BIN (widget)), "draw",
+        g_signal_connect_after (widget, "draw",
                                 G_CALLBACK (generate_draw), um);
 
         um->normal_hint_entry = (GtkWidget *) gtk_builder_get_object (builder, "normal-hint-entry");
