@@ -26,6 +26,8 @@
 #include <string.h>
 #include <glib/gi18n.h>
 
+#include "nautilus-open-with-dialog.h"
+
 G_DEFINE_DYNAMIC_TYPE (CcMediaPanel, cc_media_panel, CC_TYPE_PANEL)
 
 #define MEDIA_PANEL_PRIVATE(o) \
@@ -204,6 +206,43 @@ autorun_set_preferences (CcMediaPanel *self,
 
 }
 
+static void
+autorun_rebuild_combo_box (AutorunComboBoxData *data)
+{
+  char *x_content_type;
+
+  x_content_type = g_strdup (data->x_content_type);
+  prepare_combo_box (data->self,
+		     data->combo_box,
+		     x_content_type);
+
+  g_free (x_content_type);
+}
+
+static void
+other_application_selected (NautilusOpenWithDialog *dialog,
+			    GAppInfo *app_info,
+			    AutorunComboBoxData *data)
+{
+  autorun_set_preferences (data->self, data->x_content_type, TRUE, FALSE, FALSE);
+  g_app_info_set_as_default_for_type (app_info,
+				      data->x_content_type,
+				      NULL);
+  data->other_application_selected = TRUE;
+
+  /* rebuild so we include and select the new application in the list */
+  autorun_rebuild_combo_box (data);
+}
+
+static void
+handle_dialog_closure (AutorunComboBoxData *data)
+{
+  if (!data->other_application_selected) {
+    /* reset combo box so we don't linger on "Open with other Application..." */
+    autorun_rebuild_combo_box (data);
+  }
+}
+
 static void 
 combo_box_changed (GtkComboBox *combo_box,
                    AutorunComboBoxData *data)
@@ -258,7 +297,6 @@ combo_box_changed (GtkComboBox *combo_box,
 
   case AUTORUN_OTHER_APP:
     {
-      /* TODO
       GtkWidget *dialog;
 
       data->other_application_selected = FALSE;
@@ -269,12 +307,11 @@ combo_box_changed (GtkComboBox *combo_box,
       g_signal_connect (dialog, "application_selected",
 			G_CALLBACK (other_application_selected),
 			data);
-      g_signal_connect (dialog, "response",
-			G_CALLBACK (dialog_response_cb), data);
-      g_signal_connect (dialog, "destroy",
-			G_CALLBACK (dialog_destroy_cb), data);
+      g_signal_connect_swapped (dialog, "response",
+				G_CALLBACK (handle_dialog_closure), data);
+      g_signal_connect_swapped (dialog, "destroy",
+				G_CALLBACK (handle_dialog_closure), data);
       gtk_widget_show (GTK_WIDGET (dialog));
-      */
 
       break;
     }
