@@ -9,7 +9,7 @@
     <property name="title"> </property>
     <property name="icon_name">system-users</property>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="content-area">
+      <object class="GtkBox" id="content-area">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
@@ -40,10 +40,12 @@
           </object>
           <packing>
             <property name="position">1</property>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
           </packing>
         </child>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="action-area">
+          <object class="GtkButtonBox" id="action-area">
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
