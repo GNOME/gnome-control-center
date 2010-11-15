@@ -311,8 +311,9 @@ update_autologin (GtkWidget      *widget,
 }
 
 static void
-lockbutton_changed (UmLockButton *button,
-                    gpointer      data)
+on_permission_changed (GPermission *permission,
+                       GParamSpec  *spec,
+                       gpointer     data)
 {
         UmLoginOptions *d = data;
         gboolean authorized;
@@ -395,9 +396,9 @@ um_login_options_new (GtkBuilder *builder)
                 gtk_widget_show (widget);
                 box = (GtkWidget *)gtk_builder_get_object (builder, "lockbutton-alignment");
                 gtk_container_add (GTK_CONTAINER (box), widget);
-                g_signal_connect (widget, "changed",
-                                  G_CALLBACK (lockbutton_changed), um);
-                lockbutton_changed (UM_LOCK_BUTTON (widget), um);
+                g_signal_connect (um->permission, "notify",
+                                  G_CALLBACK (on_permission_changed), um);
+                on_permission_changed (um->permission, NULL, um);
                 um->lock_button = widget;
         }
 

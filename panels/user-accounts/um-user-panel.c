@@ -69,7 +69,7 @@ struct _UmUserPanelPrivate {
 
         GtkWidget *notebook;
         GtkWidget *lock_button;
-        PolkitPermission *permission;
+        GPermission *permission;
         GtkWidget *language_chooser;
 
         UmAccountDialog *account_dialog;
@@ -546,7 +546,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         }
 }
 
-static void lockbutton_changed (UmLockButton *button, gpointer data);
+static void on_permission_changed (GPermission *permission, GParamSpec *pspec, gpointer data);
 
 static void
 selected_user_changed (GtkTreeSelection *selection, UmUserPanelPrivate *d)
@@ -559,7 +559,7 @@ selected_user_changed (GtkTreeSelection *selection, UmUserPanelPrivate *d)
                 gtk_tree_model_get (model, &iter, USER_COL, &user, -1);
                 show_user (user, d);
                 if (d->lock_button != NULL) {
-                        lockbutton_changed (UM_LOCK_BUTTON (d->lock_button), d);
+                        on_permission_changed (d->permission, NULL, d);
                 }
                 g_object_unref (user);
         }
@@ -842,13 +842,13 @@ users_loaded (UmUserManager     *manager,
 static void
 add_unlock_tooltip (GtkWidget *button)
 {
-        const gchar *names[3];
+        gchar *names[3];
         GIcon *icon;
 
         names[0] = "changes-prevent-symbolic";
         names[1] = "changes-prevent";
         names[2] = NULL;
-        icon = g_themed_icon_new_from_names (names, -1);
+        icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
         setup_tooltip_with_embedded_icon (button,
                                           _("To make changes,\nclick the * icon first"),
                                           "*",
@@ -867,8 +867,9 @@ remove_unlock_tooltip (GtkWidget *button)
 }
 
 static void
-lockbutton_changed (UmLockButton *button,
-                    gpointer      data)
+on_permission_changed (GPermission *permission,
+                       GParamSpec  *pspec,
+                       gpointer     data)
 {
         UmUserPanelPrivate *d = data;
         gboolean is_authorized;
@@ -890,13 +891,13 @@ lockbutton_changed (UmLockButton *button,
                 setup_tooltip_with_embedded_icon (widget, _("Create a user"), NULL, NULL);
         }
         else {
-                const gchar *names[3];
+                gchar *names[3];
                 GIcon *icon;
 
                 names[0] = "changes-prevent-symbolic";
                 names[1] = "changes-prevent";
                 names[2] = NULL;
-                icon = g_themed_icon_new_from_names (names, -1);
+                icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
                 setup_tooltip_with_embedded_icon (widget,
                                                   _("To create a user,\nclick the * icon first"),
                                                   "*",
@@ -910,13 +911,13 @@ lockbutton_changed (UmLockButton *button,
                 setup_tooltip_with_embedded_icon (widget, _("Delete the selected user"), NULL, NULL);
         }
         else {
-                const gchar *names[3];
+                gchar *names[3];
                 GIcon *icon;
 
                 names[0] = "changes-prevent-symbolic";
                 names[1] = "changes-prevent";
                 names[2] = NULL;
-                icon = g_themed_icon_new_from_names (names, -1);
+                icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
 
                 setup_tooltip_with_embedded_icon (widget,
                                                   _("To delete the selected user,\nclick the * icon first"),
@@ -1059,7 +1060,7 @@ setup_main_window (UmUserPanelPrivate *d)
         GtkWidget *box;
         gchar *title;
         GIcon *icon;
-        const gchar *names[3];
+        gchar *names[3];
 
         userlist = get_widget (d, "list-treeview");
         store = gtk_list_store_new (NUM_USER_LIST_COLS,
@@ -1154,7 +1155,7 @@ setup_main_window (UmUserPanelPrivate *d)
         g_signal_connect (button, "clicked",
                           G_CALLBACK (change_fingerprint), d);
 
-        d->permission = polkit_permission_new_sync ("org.freedesktop.accounts.user-administration", NULL, NULL, NULL);
+        d->permission = (GPermission *)polkit_permission_new_sync ("org.freedesktop.accounts.user-administration", NULL, NULL, NULL);
         if (d->permission != NULL) {
                 /* accounts service not available? */
                 button = um_lock_button_new (d->permission);
@@ -1162,9 +1163,9 @@ setup_main_window (UmUserPanelPrivate *d)
                 gtk_widget_show (button);
                 box = get_widget (d, "userlist-vbox");
                 gtk_box_pack_end (GTK_BOX (box), button, FALSE, FALSE, 0);
-                g_signal_connect (button, "changed",
-                                  G_CALLBACK (lockbutton_changed), d);
-                lockbutton_changed (UM_LOCK_BUTTON (button), d);
+                g_signal_connect (d->permission, "notify",
+                                  G_CALLBACK (on_permission_changed), d);
+                on_permission_changed (d->permission, NULL, d);
                 d->lock_button = button;
         }
 
@@ -1172,7 +1173,7 @@ setup_main_window (UmUserPanelPrivate *d)
         names[0] = "changes-prevent-symbolic";
         names[1] = "changes-prevent";
         names[2] = NULL;
-        icon = g_themed_icon_new_from_names (names, -1);
+        icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
         setup_tooltip_with_embedded_icon (button,
                                           _("To create a user,\nclick the * icon first"),
                                           "*",
