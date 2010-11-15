@@ -159,27 +159,31 @@ shell_search_renderer_set_layout (ShellSearchRenderer *cell, GtkWidget *widget)
     {
       gchar *start;
       gchar *lead, *trail, *leaddot;
+      gchar *match;
       gint count;
+
 #define CONTEXT 10
 
       count = strlen (needle);
-      start = strstr (haystack, needle);
+      start = full_string + (strstr (haystack, needle) - haystack);
 
-      lead = MAX (start - CONTEXT, haystack);
+      lead = MAX (start - CONTEXT, full_string);
       trail = start + count;
 
-      if (lead == haystack)
+      if (lead == full_string)
         leaddot = "";
       else
         leaddot = "...";
 
+      match = g_strndup (start, count);
       lead = g_strndup (lead, start - lead);
 
       display_string = g_markup_printf_escaped ("%s\n"
                                                 "<small>%s%s<b>%s</b>%s</small>",
                                                 priv->title, leaddot, lead,
-                                                needle, trail);
+                                                match, trail);
 
+      g_free (match);
       g_free (lead);
     }
   else
