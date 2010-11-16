@@ -20,9 +20,7 @@ libmouse_properties_la_SOURCES =	\
 	cc-mouse-panel.c		\
 	cc-mouse-panel.h		\
 	gnome-mouse-properties.c	\
-	gnome-mouse-properties.h	\
-	gnome-mouse-accessibility.c	\
-	gnome-mouse-accessibility.h
+	gnome-mouse-properties.h
 
 libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(GSD_DBUS_LIBS) $(GNOMECC_CAPPLETS_LIBS)
 libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
