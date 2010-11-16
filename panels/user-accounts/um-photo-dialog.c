@@ -501,19 +501,39 @@ popup_button_draw (GtkWidget      *widget,
                    cairo_t        *cr,
                    UmPhotoDialog  *um)
 {
+        GtkStyleContext *context;
+        GtkStateFlags flags = 0;
+
         if (gtk_widget_get_state (gtk_bin_get_child (GTK_BIN (widget))) != GTK_STATE_PRELIGHT &&
             !gtk_widget_is_focus (widget)) {
                 return;
         }
 
-        gtk_paint_expander (gtk_widget_get_style (widget),
-                            cr,
-                            gtk_widget_get_state (widget),
-                            widget,
-                            NULL,
-                            gtk_widget_get_allocated_width (widget) - 12,
-                            gtk_widget_get_allocated_height (widget) - 12,
-                            GTK_EXPANDER_EXPANDED);
+       flags = GTK_STATE_ACTIVE;
+
+        switch (gtk_widget_get_state (widget)) {
+                case GTK_STATE_PRELIGHT:
+                        flags |= GTK_STATE_FLAG_PRELIGHT;
+                        break;
+                case GTK_STATE_SELECTED:
+                        flags |= GTK_STATE_FLAG_SELECTED;
+                        break;
+                case GTK_STATE_INSENSITIVE:
+                        flags |= GTK_STATE_FLAG_INSENSITIVE;
+                        break;
+                default: ;
+        }
+
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_save (context);
+        gtk_style_context_set_state (context, flags);
+
+        gtk_render_expander (context, cr,
+                             gtk_widget_get_allocated_width (widget) - 12,
+                             gtk_widget_get_allocated_height (widget) - 12,
+                             12, 12);
+
+        gtk_style_context_restore (context);
 }
 
 static void
