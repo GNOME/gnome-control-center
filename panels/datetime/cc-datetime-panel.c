@@ -40,6 +40,9 @@ enum {
 
 #define W(x) (GtkWidget*) gtk_builder_get_object (priv->builder, x)
 
+#define CLOCK_SCHEMA "org.gnome.shell.clock"
+#define CLOCK_FORMAT_KEY "format"
+
 struct _CcDateTimePanelPrivate
 {
   GtkBuilder *builder;
@@ -54,6 +57,8 @@ struct _CcDateTimePanelPrivate
 
   guint hour;
   guint minute;
+
+  GSettings *settings;
 };
 
 
@@ -87,10 +92,17 @@ static void
 cc_date_time_panel_dispose (GObject *object)
 {
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (object)->priv;
+
   if (priv->builder)
     {
       g_object_unref (priv->builder);
       priv->builder = NULL;
+    }
+
+  if (priv->settings)
+    {
+      g_object_unref (priv->settings);
+      priv->settings = NULL;
     }
 
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
@@ -129,6 +141,56 @@ cc_date_time_panel_class_finalize (CcDateTimePanelClass *klass)
 
 }
 
+static void clock_settings_changed_cb (GSettings       *settings,
+                                       gchar           *key,
+                                       CcDateTimePanel *panel);
+
+static void
+change_clock_settings (GtkWidget       *widget,
+                       CcDateTimePanel *panel)
+{
+  CcDateTimePanelPrivate *priv = panel->priv;
+
+  g_signal_handlers_block_by_func (priv->settings, clock_settings_changed_cb,
+                                   panel);
+
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (W ("12_radiobutton"))))
+    g_settings_set_string (priv->settings, CLOCK_FORMAT_KEY, "12-hour");
+  else
+    g_settings_set_string (priv->settings, CLOCK_FORMAT_KEY, "24-hour");
+
+  g_signal_handlers_unblock_by_func (priv->settings, clock_settings_changed_cb,
+                                     panel);
+}
+
+static void
+clock_settings_changed_cb (GSettings       *settings,
+                           gchar           *key,
+                           CcDateTimePanel *panel)
+{
+  CcDateTimePanelPrivate *priv = panel->priv;
+  GtkWidget *radio12, *radio24;
+  gboolean use_12_hour;
+  gchar *value;
+
+  value = g_settings_get_string (settings, CLOCK_FORMAT_KEY);
+
+  radio12 = W ("12_radiobutton");
+  radio24 = W ("24_radiobutton");
+
+  use_12_hour = (g_strcmp0 (value, "12-hour") == 0);
+
+  g_signal_handlers_block_by_func (radio12, change_clock_settings, panel);
+  g_signal_handlers_block_by_func (radio24, change_clock_settings, panel);
+
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio12), use_12_hour);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio24), !use_12_hour);
+
+  g_signal_handlers_unblock_by_func (radio12, change_clock_settings, panel);
+  g_signal_handlers_unblock_by_func (radio24, change_clock_settings, panel);
+}
+
 static gboolean
 update_time (CcDateTimePanel *self)
 {
@@ -157,6 +219,16 @@ update_time (CcDateTimePanel *self)
   strftime (label, 32, "%M", &time_info);
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "minutes_label");
   gtk_label_set_text (GTK_LABEL (widget), label);
+
+  priv->settings = g_settings_new (CLOCK_SCHEMA);
+  clock_settings_changed_cb (priv->settings, CLOCK_FORMAT_KEY, self);
+  g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
+                    G_CALLBACK (clock_settings_changed_cb), self);
+
+  g_signal_connect (W ("12_radiobutton"), "toggled",
+                    G_CALLBACK (change_clock_settings), self);
+  g_signal_connect (W ("24_radiobutton"), "toggled",
+                    G_CALLBACK (change_clock_settings), self);
 
   return FALSE;
 }
