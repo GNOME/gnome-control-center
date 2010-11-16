@@ -12,6 +12,7 @@
 #include <X11/Xatom.h>
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
+#include <libgnome-control-center/cc-shell.h>
 
 #include "wm-common.h"
 #include "gnome-keyboard-panel.h"
@@ -76,6 +77,7 @@ typedef struct
   guint gconf_cnxn_cmd;
 } KeyEntry;
 
+static guint maybe_block_accels_id = 0;
 static gboolean block_accels = FALSE;
 static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
@@ -84,11 +86,7 @@ static GtkWidget *custom_shortcut_command_entry = NULL;
 static GSettings *keyboard_settings = NULL;
 static GSettings *interface_settings = NULL;
 
-static GtkWidget*
-_gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
-{
-  return GTK_WIDGET (gtk_builder_get_object (builder, name));
-}
+#define WID(builder, name) (GTK_WIDGET (gtk_builder_get_object (builder, name)))
 
 static char*
 binding_name (guint                   keyval,
@@ -336,7 +334,7 @@ clear_old_model (GtkBuilder *builder)
   GtkWidget *actions_swindow;
   GtkTreeModel *model;
 
-  tree_view = _gtk_builder_get_widget (builder, "shortcut_treeview");
+  tree_view = WID (builder, "shortcut_treeview");
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 
   if (model == NULL)
@@ -395,7 +393,7 @@ clear_old_model (GtkBuilder *builder)
       g_object_unref (client);
     }
 
-  actions_swindow = _gtk_builder_get_widget (builder, "actions_swindow");
+  actions_swindow = WID (builder, "actions_swindow");
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (actions_swindow),
 				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
   gtk_widget_set_size_request (actions_swindow, -1, -1);
@@ -492,7 +490,7 @@ ensure_scrollbar (GtkBuilder *builder, int i)
       GtkRequisition rectangle;
       GObject *actions_swindow = gtk_builder_get_object (builder,
                                                          "actions_swindow");
-      GtkWidget *treeview = _gtk_builder_get_widget (builder,
+      GtkWidget *treeview = WID (builder,
                                                      "shortcut_treeview");
       gtk_widget_ensure_style (treeview);
       gtk_widget_size_request (treeview, &rectangle);
@@ -674,9 +672,9 @@ append_keys_to_tree (GtkBuilder         *builder,
     gtk_tree_store_remove (GTK_TREE_STORE (model), &parent_iter);
 
   if (i == 0)
-      gtk_widget_hide (_gtk_builder_get_widget (builder, "shortcuts_vbox"));
+      gtk_widget_hide (WID (builder, "shortcuts_vbox"));
   else
-      gtk_widget_show (_gtk_builder_get_widget (builder, "shortcuts_vbox"));
+      gtk_widget_show (WID (builder, "shortcuts_vbox"));
 }
 
 static void
@@ -1851,7 +1849,7 @@ setup_general_page (GtkBuilder *builder)
 }
 
 static void
-setup_dialog (GtkBuilder *builder)
+setup_dialog (CcPanel *panel, GtkBuilder *builder)
 {
   GConfClient *client;
   GtkCellRenderer *renderer;
@@ -1860,6 +1858,7 @@ setup_dialog (GtkBuilder *builder)
   GtkTreeView *treeview;
   GtkTreeSelection *selection;
   GSList *allowed_keys;
+  CcShell *shell;
 
   setup_general_page (builder);
 
@@ -1918,14 +1917,16 @@ setup_dialog (GtkBuilder *builder)
   /* set up the dialog */
   reload_key_entries (builder);
 
-  widget = _gtk_builder_get_widget (builder, "gnome-keybinding-dialog");
+  shell = cc_panel_get_shell (CC_PANEL (panel));
+  widget = cc_shell_get_toplevel (shell);
 
-  g_signal_connect (widget, "key_press_event", G_CALLBACK (maybe_block_accels), NULL);
+  maybe_block_accels_id = g_signal_connect (widget, "key_press_event",
+					    G_CALLBACK (maybe_block_accels), NULL);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (selection_changed),
-		    _gtk_builder_get_widget (builder, "remove-button"));
+		    WID (builder, "remove-button"));
 
   allowed_keys = gconf_client_get_list (client,
                                         GCONF_BINDING_DIR "/allowed_keys",
@@ -1935,31 +1936,29 @@ setup_dialog (GtkBuilder *builder)
     {
       g_slist_foreach (allowed_keys, (GFunc)g_free, NULL);
       g_slist_free (allowed_keys);
-      gtk_widget_set_sensitive (_gtk_builder_get_widget (builder, "add-button"),
+      gtk_widget_set_sensitive (WID (builder, "add-button"),
                                 FALSE);
     }
 
   g_object_unref (client);
 
   /* setup the custom shortcut dialog */
-  custom_shortcut_dialog = _gtk_builder_get_widget (builder,
+  custom_shortcut_dialog = WID (builder,
                                                     "custom-shortcut-dialog");
-  custom_shortcut_name_entry = _gtk_builder_get_widget (builder,
+  custom_shortcut_name_entry = WID (builder,
                                                         "custom-shortcut-name-entry");
-  custom_shortcut_command_entry = _gtk_builder_get_widget (builder,
+  custom_shortcut_command_entry = WID (builder,
                                                            "custom-shortcut-command-entry");
-  g_signal_connect (_gtk_builder_get_widget (builder, "add-button"),
+  g_signal_connect (WID (builder, "add-button"),
                     "clicked", G_CALLBACK (add_button_clicked), builder);
-  g_signal_connect (_gtk_builder_get_widget (builder, "remove-button"),
+  g_signal_connect (WID (builder, "remove-button"),
                     "clicked", G_CALLBACK (remove_button_clicked), builder);
 
-#if 0
   gtk_dialog_set_default_response (GTK_DIALOG (custom_shortcut_dialog),
 				   GTK_RESPONSE_OK);
 
   gtk_window_set_transient_for (GTK_WINDOW (custom_shortcut_dialog),
                                 GTK_WINDOW (widget));
-#endif
 }
 
 static void
@@ -1969,11 +1968,27 @@ on_window_manager_change (const char *wm_name, GtkBuilder *builder)
 }
 
 void
-gnome_keybinding_properties_init (GtkBuilder *builder)
+gnome_keybinding_properties_init (CcPanel *panel, GtkBuilder *builder)
 {
   wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
                                             builder);
-  setup_dialog (builder);
+  setup_dialog (panel, builder);
+}
+
+void
+gnome_keybinding_properties_dispose (CcPanel *panel)
+{
+  if (maybe_block_accels_id != 0)
+    {
+      CcShell *shell;
+      GtkWidget *toplevel;
+
+      shell = cc_panel_get_shell (CC_PANEL (panel));
+      toplevel = cc_shell_get_toplevel (shell);
+
+      g_signal_handler_disconnect (toplevel, maybe_block_accels_id);
+      maybe_block_accels_id = 0;
+    }
 }
 
 /*

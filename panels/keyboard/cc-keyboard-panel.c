@@ -62,6 +62,8 @@ cc_keyboard_panel_set_property (GObject      *object,
 static void
 cc_keyboard_panel_dispose (GObject *object)
 {
+  gnome_keybinding_properties_dispose (CC_PANEL (object));
+
   G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->dispose (object);
 }
 
@@ -71,6 +73,45 @@ cc_keyboard_panel_finalize (GObject *object)
   G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
 }
 
+static GObject *
+cc_keyboard_panel_constructor (GType                  gtype,
+			       guint                  n_properties,
+			       GObjectConstructParam *properties)
+{
+  GObject *obj;
+  CcKeyboardPanel *self;
+  CcKeyboardPanelPrivate *priv;
+  GError *error = NULL;
+  GtkWidget *widget;
+
+  const gchar *uifile = GNOMECC_UI_DIR "/gnome-keyboard-panel.ui";
+
+  obj = G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->constructor (gtype, n_properties, properties);
+
+  self = CC_KEYBOARD_PANEL (obj);
+  priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
+
+  priv->builder = gtk_builder_new ();
+
+  if (gtk_builder_add_from_file (priv->builder, uifile, &error) == 0)
+    {
+      g_warning ("Could not load UI: %s", error->message);
+      g_clear_error (&error);
+      g_object_unref (priv->builder);
+      priv->builder = NULL;
+      return obj;
+    }
+
+  gnome_keybinding_properties_init (CC_PANEL (self), priv->builder);
+
+  widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
+                                                 "keyboard_notebook");
+
+  gtk_widget_reparent (widget, (GtkWidget *) self);
+
+  return obj;
+}
+
 static void
 cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 {
@@ -78,6 +119,7 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 
   g_type_class_add_private (klass, sizeof (CcKeyboardPanelPrivate));
 
+  object_class->constructor = cc_keyboard_panel_constructor;
   object_class->get_property = cc_keyboard_panel_get_property;
   object_class->set_property = cc_keyboard_panel_set_property;
   object_class->dispose = cc_keyboard_panel_dispose;
@@ -92,32 +134,6 @@ cc_keyboard_panel_class_finalize (CcKeyboardPanelClass *klass)
 static void
 cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
-  CcKeyboardPanelPrivate *priv;
-  GError *error = NULL;
-  const gchar *uifile = GNOMECC_UI_DIR "/gnome-keyboard-panel.ui";
-
-  priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
-
-
-  priv->builder = gtk_builder_new ();
-
-  if (gtk_builder_add_from_file (priv->builder, uifile, &error) == 0)
-    {
-      g_warning ("Could not load UI: %s", error->message);
-      g_clear_error (&error);
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-      return;
-    }
-
-  gnome_keybinding_properties_init (priv->builder);
-
-  GtkWidget *widget;
-
-  widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
-                                                 "keyboard_notebook");
-
-  gtk_widget_reparent (widget, (GtkWidget *) self);
 }
 
 void
