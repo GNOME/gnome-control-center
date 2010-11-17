@@ -6,6 +6,9 @@ Icon=application-x-executable
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=GNOME;GTK;Settings;DesktopSettings;
+# The X-GNOME-Settings-Panel is necessary to show in the main shell UI
+Categories=GNOME;GTK;Settings;DesktopSettings;X-GNOME-Settings-Panel;
 OnlyShowIn=GNOME;
 X-GNOME-Settings-Panel=example-panel
+# Translators: those are keywords for the example control-center panel
+_X-GNOME-Keywords=Foo;Bar;Baz;
