@@ -30,7 +30,12 @@ G_DEFINE_DYNAMIC_TYPE (CcScreenPanel, cc_screen_panel, CC_TYPE_PANEL)
 
 struct _CcScreenPanelPrivate
 {
-  GSettings *lock_settings;
+  GSettings     *lock_settings;
+  GSettings     *gsd_settings;
+  GCancellable  *cancellable;
+  GtkBuilder    *builder;
+  GDBusProxy    *proxy;
+  gboolean       setting_brightness;
 };
 
 
@@ -70,6 +75,26 @@ cc_screen_panel_dispose (GObject *object)
       g_object_unref (priv->lock_settings);
       priv->lock_settings = NULL;
     }
+  if (priv->gsd_settings)
+    {
+      g_object_unref (priv->gsd_settings);
+      priv->gsd_settings = NULL;
+    }
+  if (priv->cancellable != NULL)
+    {
+      g_object_unref (priv->cancellable);
+      priv->cancellable = NULL;
+    }
+  if (priv->builder != NULL)
+    {
+      g_object_unref (priv->builder);
+      priv->builder = NULL;
+    }
+  if (priv->proxy != NULL)
+    {
+      g_object_unref (priv->proxy);
+      priv->proxy = NULL;
+    }
 
   G_OBJECT_CLASS (cc_screen_panel_parent_class)->dispose (object);
 }
@@ -77,6 +102,8 @@ cc_screen_panel_dispose (GObject *object)
 static void
 cc_screen_panel_finalize (GObject *object)
 {
+  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (object)->priv;
+  g_cancellable_cancel (priv->cancellable);
   G_OBJECT_CLASS (cc_screen_panel_parent_class)->finalize (object);
 }
 
@@ -106,18 +133,149 @@ cc_screen_panel_class_finalize (CcScreenPanelClass *klass)
 }
 
 static void
+on_signal (GDBusProxy *proxy,
+           gchar      *sender_name,
+           gchar      *signal_name,
+           GVariant   *parameters,
+           gpointer    user_data)
+{
+  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (user_data)->priv;
+
+  if (g_strcmp0 (signal_name, "BrightnessChanged") == 0)
+    {
+      guint brightness;
+      GtkRange *range;
+
+      /* changed, but ignoring */
+      if (priv->setting_brightness)
+        return;
+
+      /* update the bar */
+      g_variant_get (parameters,
+                     "(u)",
+                     &brightness);
+      range = GTK_RANGE (gtk_builder_get_object (priv->builder,
+                                                 "screen_brightness_hscale"));
+      gtk_range_set_value (range, brightness);
+    }
+}
+
+static void
+set_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+  GError *error = NULL;
+  GVariant *result;
+
+  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (user_data)->priv;
+
+  /* not setting, so pay attention to changed signals */
+  priv->setting_brightness = FALSE;
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+  if (result == NULL)
+    {
+      g_printerr ("Error setting brightness: %s\n", error->message);
+      g_error_free (error);
+      return;
+    }
+}
+
+static void
+brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
+{
+  guint percentage;
+  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (user_data)->priv;
+
+  /* do not loop */
+  priv->setting_brightness = TRUE;
+
+  /* push this to g-p-m */
+  percentage = (guint) gtk_range_get_value (range);
+  g_dbus_proxy_call (priv->proxy,
+                     "SetBrightness",
+                     g_variant_new ("(u)",
+                                    percentage),
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
+                     priv->cancellable,
+                     set_brightness_cb,
+                     user_data);
+}
+
+static void
+get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+  GError *error = NULL;
+  GVariant *result;
+  guint brightness;
+  GtkRange *range;
+  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (user_data)->priv;
+
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+  if (result == NULL)
+    {
+      g_printerr ("Error getting brightness: %s\n", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  /* set the slider */
+  g_variant_get (result,
+                 "(u)",
+                 &brightness);
+  range = GTK_RANGE (gtk_builder_get_object (priv->builder, "screen_brightness_hscale"));
+  gtk_range_set_range (range, 0, 100);
+  gtk_range_set_increments (range, 1, 10);
+  gtk_range_set_value (range, brightness);
+  g_signal_connect (range,
+                    "value-changed",
+                    G_CALLBACK (brightness_slider_value_changed_cb),
+                    user_data);
+  g_variant_unref (result);
+}
+
+static void
+got_power_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+  GError *error = NULL;
+  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (user_data)->priv;
+
+  priv->proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (priv->proxy == NULL)
+    {
+      g_printerr ("Error creating proxy: %s\n", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  /* we want to change the bar if the user presses brightness buttons */
+  g_signal_connect (priv->proxy,
+                    "g-signal",
+                    G_CALLBACK (on_signal),
+                    user_data);
+
+  /* get the initial state */
+  g_dbus_proxy_call (priv->proxy,
+                     "GetBrightness",
+                     NULL,
+                     G_DBUS_CALL_FLAGS_NONE,
+                     200, /* we don't want to randomly move the bar */
+                     priv->cancellable,
+                     get_brightness_cb,
+                     user_data);
+}
+
+static void
 cc_screen_panel_init (CcScreenPanel *self)
 {
   GError     *error;
-  GtkBuilder *builder;
   GtkWidget  *widget;
 
   self->priv = SCREEN_PANEL_PRIVATE (self);
 
-  builder = gtk_builder_new ();
+  self->priv->builder = gtk_builder_new ();
 
   error = NULL;
-  gtk_builder_add_from_file (builder,
+  gtk_builder_add_from_file (self->priv->builder,
                              GNOMECC_UI_DIR "/screen.ui",
                              &error);
 
@@ -125,20 +283,38 @@ cc_screen_panel_init (CcScreenPanel *self)
     {
       g_warning ("Could not load interface file: %s", error->message);
       g_error_free (error);
-
-      g_object_unref (builder);
-
       return;
     }
+
+  self->priv->cancellable = g_cancellable_new ();
+
+  /* get initial brightness version */
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.gnome.PowerManager",
+                            "/org/gnome/PowerManager/Backlight",
+                            "org.gnome.PowerManager.Backlight",
+                            self->priv->cancellable,
+                            got_power_proxy_cb,
+                            self);
 
   self->priv->lock_settings = g_settings_new ("org.gnome.desktop.interface");
   g_signal_connect (self->priv->lock_settings,
                     "changed",
                     G_CALLBACK (on_lock_settings_changed),
                     self);
+  self->priv->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
 
-  widget = WID (builder, "screen_vbox");
+  /* bind the auto dim checkbox */
+  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
+                                               "screen_auto_reduce_checkbutton"));
+  g_settings_bind (self->priv->gsd_settings,
+                   "idle-dim-battery",
+                   widget, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
+  widget = WID (self->priv->builder, "screen_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
 }
 
