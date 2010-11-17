@@ -438,12 +438,7 @@ static void
 gvc_level_bar_size_request (GtkWidget      *widget,
                             GtkRequisition *requisition)
 {
-        GvcLevelBar *bar;
-
-        g_return_if_fail (GVC_IS_LEVEL_BAR (widget));
-        g_return_if_fail (requisition != NULL);
-
-        bar = GVC_LEVEL_BAR (widget);
+        GvcLevelBar *bar = GVC_LEVEL_BAR (widget);
 
         switch (bar->priv->orientation) {
         case GTK_ORIENTATION_VERTICAL:
@@ -458,6 +453,30 @@ gvc_level_bar_size_request (GtkWidget      *widget,
                 g_assert_not_reached ();
                 break;
         }
+}
+
+static void
+gvc_level_bar_get_preferred_width (GtkWidget *widget,
+                                   gint      *minimum,
+                                   gint      *natural)
+{
+        GtkRequisition requisition;
+
+        gvc_level_bar_size_request (widget, &requisition);
+
+        *minimum = *natural = requisition.width;
+}
+
+static void
+gvc_level_bar_get_preferred_height (GtkWidget *widget,
+                                    gint      *minimum,
+                                    gint      *natural)
+{
+        GtkRequisition requisition;
+
+        gvc_level_bar_size_request (widget, &requisition);
+
+        *minimum = *natural = requisition.height;
 }
 
 static void
@@ -648,7 +667,8 @@ gvc_level_bar_class_init (GvcLevelBarClass *klass)
         object_class->get_property = gvc_level_bar_get_property;
 
         widget_class->draw = gvc_level_bar_draw;
-        widget_class->size_request = gvc_level_bar_size_request;
+        widget_class->get_preferred_width = gvc_level_bar_get_preferred_width;
+        widget_class->get_preferred_height = gvc_level_bar_get_preferred_height;
         widget_class->size_allocate = gvc_level_bar_size_allocate;
 
         g_object_class_install_property (object_class,
