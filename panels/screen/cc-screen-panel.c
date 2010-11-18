@@ -265,6 +265,60 @@ got_power_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_dat
 }
 
 static void
+dpms_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gboolean ret;
+
+  /* no selection */
+  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+  if (!ret)
+    return;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  gtk_tree_model_get (model, &iter,
+                      1, &value,
+                      -1);
+
+  /* set both battery and ac keys */
+  g_settings_set_int (self->priv->gsd_settings, "sleep-display-ac", value);
+  g_settings_set_int (self->priv->gsd_settings, "sleep-display-battery", value);
+}
+
+static void
+set_dpms_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gint value_tmp;
+  gboolean ret;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (combo_box);
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  if (!ret)
+    return;
+
+  /* try to make the UI match the AC setting */
+  value = g_settings_get_int (self->priv->gsd_settings, "sleep-display-ac");
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          1, &value_tmp,
+                          -1);
+      if (value == value_tmp)
+        {
+          gtk_combo_box_set_active_iter (combo_box, &iter);
+          break;
+        }
+    } while (gtk_tree_model_iter_next (model, &iter));
+}
+
+static void
 cc_screen_panel_init (CcScreenPanel *self)
 {
   GError     *error;
@@ -313,6 +367,14 @@ cc_screen_panel_init (CcScreenPanel *self)
                    "idle-dim-battery",
                    widget, "active",
                    G_SETTINGS_BIND_DEFAULT);
+
+  /* display off time */
+  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
+                                               "screen_brightness_combobox"));
+  set_dpms_value_for_combo (GTK_COMBO_BOX (widget), self);
+  g_signal_connect (widget, "changed",
+                    G_CALLBACK (dpms_combo_changed_cb),
+                    self);
 
   widget = WID (self->priv->builder, "screen_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
