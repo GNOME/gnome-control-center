@@ -108,8 +108,6 @@ libsound_la_SOURCES =				\
 	cc-sound-panel.h			\
 	$(NULL)
 
-EXTRA_DIST = gvc-sound-theme-editor.c gvc-sound-theme-editor.h
-
 BUILT_SOURCES =				\
 	$(NULL)
 
