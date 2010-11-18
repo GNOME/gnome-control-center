@@ -90,8 +90,7 @@ G_DEFINE_TYPE (GvcLevelBar, gvc_level_bar, GTK_TYPE_HBOX)
 
 #define check_rectangle(rectangle1, rectangle2)                          \
         {                                                                \
-                if (rectangle1.x != rectangle2.x) return TRUE;           \
-                if (rectangle1.y != rectangle2.y) return TRUE;           \
+                /* .x and .y are always 0 */                             \
                 if (rectangle1.width  != rectangle2.width)  return TRUE; \
                 if (rectangle1.height != rectangle2.height) return TRUE; \
         }
