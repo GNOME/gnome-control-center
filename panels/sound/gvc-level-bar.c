@@ -573,6 +573,8 @@ gvc_level_bar_draw (GtkWidget *widget,
 
         g_return_val_if_fail (GVC_IS_LEVEL_BAR (widget), FALSE);
 
+        g_message ("gvc_level_bar_draw");
+
         bar = GVC_LEVEL_BAR (widget);
 
         gtk_widget_get_allocation (widget, &allocation);

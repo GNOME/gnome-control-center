@@ -237,6 +237,11 @@ set_combox_for_theme_name (GvcSoundThemeChooser *chooser,
         }
 
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (chooser->priv->combo_box));
+        if (model == NULL) {
+                /* No theme was installed, don't warn again
+                 * See setup_theme_selector() */
+                return;
+        }
 
         if (gtk_tree_model_get_iter_first (model, &iter) == FALSE) {
                 return;
