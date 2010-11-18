@@ -2,6 +2,72 @@
 <interface>
   <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="liststore_sleep">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Suspend</col>
+        <col id="1">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hibernate</col>
+        <col id="1">3</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_power">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Suspend</col>
+        <col id="1">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hibernate</col>
+        <col id="1">3</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Do nothing</col>
+        <col id="1">5</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Ask me</col>
+        <col id="1">4</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Shutdown</col>
+        <col id="1">2</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_critical">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name gint1 -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Hibernate</col>
+        <col id="1">3</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Shutdown</col>
+        <col id="1">2</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkSizeGroup" id="sizegroup_combos">
     <widgets>
       <widget name="combobox_critical"/>
@@ -15,7 +81,7 @@
   <object class="GtkWindow" id="window_power">
     <property name="resizable">False</property>
     <child>
-      <object class="GtkVBox" id="vbox1">
+      <object class="GtkVBox" id="vbox_power">
         <property name="visible">True</property>
         <property name="border_width">12</property>
         <property name="spacing">12</property>
@@ -80,8 +146,9 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="combobox_sleep_ac">
+                          <object class="GtkComboBoxText" id="combobox_sleep_ac">
                             <property name="visible">True</property>
+                            <property name="model">liststore_time</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -123,8 +190,9 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="combobox_sleep_battery">
+                          <object class="GtkComboBoxText" id="combobox_sleep_battery">
                             <property name="visible">True</property>
+                            <property name="model">liststore_time</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -179,8 +247,9 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="combobox_sleep">
+                  <object class="GtkComboBoxText" id="combobox_sleep">
                     <property name="visible">True</property>
+                    <property name="model">liststore_time</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -230,8 +299,9 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="combobox_critical">
+                  <object class="GtkComboBoxText" id="combobox_critical">
                     <property name="visible">True</property>
+                    <property name="model">liststore_critical</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -282,8 +352,9 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="combobox_button_power">
+                  <object class="GtkComboBoxText" id="combobox_button_power">
                     <property name="visible">True</property>
+                    <property name="model">liststore_power</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -324,8 +395,9 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="combobox_button_sleep">
+                  <object class="GtkComboBoxText" id="combobox_button_sleep">
                     <property name="visible">True</property>
+                    <property name="model">liststore_sleep</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -352,6 +424,7 @@
               <object class="GtkHBox" id="hbox2">
                 <property name="visible">True</property>
                 <property name="border_width">12</property>
+                <property name="spacing">6</property>
                 <child>
                   <object class="GtkImage" id="image_status">
                     <property name="visible">True</property>
@@ -368,12 +441,21 @@
                   <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
                     <child>
-                      <object class="GtkLabel" id="label_title">
+                      <object class="GtkHBox" id="hbox3">
                         <property name="visible">True</property>
-                        <property name="label">Battery charging</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
+                        <child>
+                          <object class="GtkLabel" id="label_title">
+                            <property name="visible">True</property>
+                            <property name="label">Battery charging</property>
+                            <attributes>
+                              <attribute name="scale" value="1.500000"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="position">0</property>
@@ -417,5 +499,31 @@
       <widget name="hbox15"/>
       <widget name="hbox14"/>
     </widgets>
+  </object>
+  <object class="GtkListStore" id="liststore_time">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">5 minutes</col>
+        <col id="1">300</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">10 minutes</col>
+        <col id="1">600</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">30 minutes</col>
+        <col id="1">1800</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">1 hour</col>
+        <col id="1">3600</col>
+      </row>
+    </data>
   </object>
 </interface>

@@ -1,6 +1,7 @@
 SUBDIRS= \
 	background \
 	screen \
+	power \
 	display \
 	mouse \
 	region \

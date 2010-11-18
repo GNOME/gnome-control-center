@@ -96,6 +96,7 @@ PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon)
 PKG_CHECK_MODULES(GIO, gio-2.0 gio-unix-2.0)
 PKG_CHECK_MODULES(XML, libxml-2.0)
+PKG_CHECK_MODULES(UPOWER, upower-glib >= 0.9.1)
 PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION)
 AC_SUBST(CANBERRA_CFLAGS)
 AC_SUBST(CANBERRA_LIBS)
@@ -369,6 +370,8 @@ panels/sound/data/icons/scalable/devices/Makefile
 panels/sound/data/sounds/Makefile
 panels/screen/Makefile
 panels/screen/gnome-screen-panel.desktop.in
+panels/power/Makefile
+panels/power/gnome-power-panel.desktop.in
 panels/universal-access/Makefile
 panels/universal-access/gnome-universal-access-panel.desktop.in
 panels/user-accounts/Makefile
