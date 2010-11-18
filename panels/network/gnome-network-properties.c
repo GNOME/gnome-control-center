@@ -1120,7 +1120,9 @@ proxy_settings_changed_cb (GSettings *settings,
 		gchar **hosts;
 		guint i = 0;
 
-		g_ptr_array_free (ignore_hosts, TRUE);
+		if (ignore_hosts != NULL)
+			g_ptr_array_free (ignore_hosts, TRUE);
+		ignore_hosts = g_ptr_array_new_with_free_func ((GDestroyNotify) g_free);
 
 		hosts = g_settings_get_strv (proxy_settings, "ignore-hosts");
 		while (hosts[i] != NULL) {
@@ -1129,7 +1131,9 @@ proxy_settings_changed_cb (GSettings *settings,
 		}
 
 		populate_listmodel (GTK_LIST_STORE (model), ignore_hosts);
-		g_strfreev (hosts);
+		/* Note: not g_strfreev() so we don't have to dup the strings
+		 * we put in the array in the loop above */
+		g_free (hosts);
 	}
 }
 
