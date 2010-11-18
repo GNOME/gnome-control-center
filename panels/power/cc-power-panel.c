@@ -185,7 +185,6 @@ get_primary_device_cb (GObject *source_object, GAsyncResult *res, gpointer user_
 {
   const gchar *title = NULL;
   gchar *details = NULL;
-  gchar *display_string = NULL;
   gchar *icon_name = NULL;
   gchar *object_path = NULL;
   gdouble percentage;
@@ -196,6 +195,7 @@ get_primary_device_cb (GObject *source_object, GAsyncResult *res, gpointer user_
   GVariant *result;
   UpDeviceKind kind;
   UpDeviceState state;
+  GIcon *icon;
   CcPowerPanelPrivate *priv = CC_POWER_PANEL (user_data)->priv;
 
   result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
@@ -214,8 +214,7 @@ get_primary_device_cb (GObject *source_object, GAsyncResult *res, gpointer user_
                  "((susdut))",
                  &object_path,
                  &kind,
-                 //&icon_name,
-                 &display_string,
+                 &icon_name,
                  &percentage,
                  &state,
                  &time);
@@ -225,9 +224,20 @@ get_primary_device_cb (GObject *source_object, GAsyncResult *res, gpointer user_
   /* set icon and text parameters */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "image_status"));
-  gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                icon_name != NULL ? icon_name : "dialog-error",
+  icon = g_icon_new_for_string (icon_name, NULL);
+  if (icon != NULL)
+    {
+      gtk_image_set_from_gicon (GTK_IMAGE (widget),
+                                icon,
                                 GTK_ICON_SIZE_DIALOG);
+      g_object_unref (icon);
+    }
+  else
+    {
+      gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+                                    "dialog-error",
+                                    GTK_ICON_SIZE_DIALOG);
+    }
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "label_title"));
 
@@ -296,7 +306,6 @@ get_primary_device_cb (GObject *source_object, GAsyncResult *res, gpointer user_
                        details);
 
   g_free (details);
-  g_free (display_string);
   g_free (time_string);
   g_free (object_path);
   g_free (icon_name);
