@@ -86,7 +86,7 @@ static void     gvc_level_bar_class_init (GvcLevelBarClass *klass);
 static void     gvc_level_bar_init       (GvcLevelBar      *level_bar);
 static void     gvc_level_bar_finalize   (GObject            *object);
 
-G_DEFINE_TYPE (GvcLevelBar, gvc_level_bar, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (GvcLevelBar, gvc_level_bar, GTK_TYPE_WIDGET)
 
 #define check_rectangle(rectangle1, rectangle2)                          \
         {                                                                \

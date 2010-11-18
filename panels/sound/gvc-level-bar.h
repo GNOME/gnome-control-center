@@ -37,13 +37,13 @@ typedef struct GvcLevelBarPrivate GvcLevelBarPrivate;
 
 typedef struct
 {
-        GtkHBox             parent;
+        GtkWidget           parent;
         GvcLevelBarPrivate *priv;
 } GvcLevelBar;
 
 typedef struct
 {
-        GtkHBoxClass        parent_class;
+        GtkWidgetClass      parent_class;
 } GvcLevelBarClass;
 
 typedef enum
