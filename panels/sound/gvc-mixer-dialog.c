@@ -164,6 +164,12 @@ update_default_input (GvcMixerDialog *dialog)
                                     &iter,
                                     ACTIVE_COLUMN, is_default,
                                     -1);
+                if (is_default) {
+                        GtkTreeSelection *selection;
+
+                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->input_treeview));
+                        gtk_tree_selection_select_iter (selection, &iter);
+                }
         } while (gtk_tree_model_iter_next (model, &iter));
 }
 
@@ -363,6 +369,12 @@ update_default_output (GvcMixerDialog *dialog)
                                     &iter,
                                     ACTIVE_COLUMN, is_default,
                                     -1);
+                if (is_default) {
+                        GtkTreeSelection *selection;
+
+                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->input_treeview));
+                        gtk_tree_selection_select_iter (selection, &iter);
+                }
         } while (gtk_tree_model_iter_next (model, &iter));
 }
 
@@ -1098,6 +1110,7 @@ add_stream (GvcMixerDialog *dialog,
 
                 model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->input_treeview));
                 gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+
                 icon = gvc_mixer_stream_get_gicon (stream);
                 gtk_list_store_set (GTK_LIST_STORE (model),
                                     &iter,
@@ -1109,6 +1122,14 @@ add_stream (GvcMixerDialog *dialog,
                                     -1);
                 if (icon != NULL)
                         g_object_unref (icon);
+
+                if (is_default) {
+                        GtkTreeSelection *selection;
+
+                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->input_treeview));
+                        gtk_tree_selection_select_iter (selection, &iter);
+                }
+
                 g_signal_connect (stream,
                                   "notify::description",
                                   G_CALLBACK (on_stream_description_notify),
@@ -1121,6 +1142,7 @@ add_stream (GvcMixerDialog *dialog,
 
                 model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
                 gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+
                 map = gvc_mixer_stream_get_channel_map (stream);
                 icon = gvc_mixer_stream_get_gicon (stream);
                 gtk_list_store_set (GTK_LIST_STORE (model),
@@ -1133,6 +1155,14 @@ add_stream (GvcMixerDialog *dialog,
                                     -1);
                 if (icon != NULL)
                         g_object_unref (icon);
+
+                if (is_default) {
+                        GtkTreeSelection *selection;
+
+                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->output_treeview));
+                        gtk_tree_selection_select_iter (selection, &iter);
+                }
+
                 g_signal_connect (stream,
                                   "notify::description",
                                   G_CALLBACK (on_stream_description_notify),
@@ -1350,21 +1380,18 @@ _gtk_label_make_bold (GtkLabel *label)
 }
 
 static void
-on_input_radio_toggled (GtkCellRendererToggle *renderer,
-                        char                  *path_str,
-                        GvcMixerDialog        *dialog)
+on_input_selection_changed (GtkTreeSelection *selection,
+                            GvcMixerDialog   *dialog)
 {
         GtkTreeModel *model;
         GtkTreeIter   iter;
-        GtkTreePath  *path;
         gboolean      toggled;
         guint         id;
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->input_treeview));
-
-        path = gtk_tree_path_new_from_string (path_str);
-        gtk_tree_model_get_iter (model, &iter, path);
-        gtk_tree_path_free (path);
+        if (gtk_tree_selection_get_selected (selection, &model, &iter) == FALSE) {
+                g_debug ("Could not get default input from selection");
+                return;
+        }
 
         gtk_tree_model_get (model, &iter,
                             ID_COLUMN, &id,
@@ -1387,21 +1414,18 @@ on_input_radio_toggled (GtkCellRendererToggle *renderer,
 }
 
 static void
-on_output_radio_toggled (GtkCellRendererToggle *renderer,
-                         char                  *path_str,
-                         GvcMixerDialog        *dialog)
+on_output_selection_changed (GtkTreeSelection *selection,
+                             GvcMixerDialog   *dialog)
 {
         GtkTreeModel *model;
         GtkTreeIter   iter;
-        GtkTreePath  *path;
         gboolean      toggled;
         guint         id;
 
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
-
-        path = gtk_tree_path_new_from_string (path_str);
-        gtk_tree_model_get_iter (model, &iter, path);
-        gtk_tree_path_free (path);
+        if (gtk_tree_selection_get_selected (selection, &model, &iter) == FALSE) {
+                g_debug ("Could not get default output from selection");
+                return;
+        }
 
         gtk_tree_model_get (model, &iter,
                             ID_COLUMN, &id,
@@ -1454,12 +1478,13 @@ name_to_text (GtkTreeViewColumn *column,
 
 static GtkWidget *
 create_stream_treeview (GvcMixerDialog *dialog,
-                        GCallback       on_toggled)
+                        GCallback       on_selection_changed)
 {
         GtkWidget         *treeview;
         GtkListStore      *store;
         GtkCellRenderer   *renderer;
         GtkTreeViewColumn *column;
+        GtkTreeSelection  *selection;
 
         treeview = gtk_tree_view_new ();
         gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
@@ -1474,18 +1499,8 @@ create_stream_treeview (GvcMixerDialog *dialog,
         gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
                                  GTK_TREE_MODEL (store));
 
-        renderer = gtk_cell_renderer_toggle_new ();
-        gtk_cell_renderer_toggle_set_radio (GTK_CELL_RENDERER_TOGGLE (renderer),
-                                            TRUE);
-        column = gtk_tree_view_column_new_with_attributes (NULL,
-                                                           renderer,
-                                                           "active", ACTIVE_COLUMN,
-                                                           NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-        g_signal_connect (renderer,
-                          "toggled",
-                          G_CALLBACK (on_toggled),
-                          dialog);
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+        gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_title (column, _("Name"));
@@ -1502,6 +1517,8 @@ create_stream_treeview (GvcMixerDialog *dialog,
                                                  name_to_text, NULL, NULL);
         gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
+        g_signal_connect (G_OBJECT (selection), "changed",
+                          on_selection_changed, dialog);
 #if 0
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Device"),
@@ -1805,7 +1822,7 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_container_add (GTK_CONTAINER (alignment), box);
 
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->hw_treeview));
-        gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+        gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 
         box = gtk_frame_new (_("Settings for the selected device:"));
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
@@ -1886,7 +1903,7 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
 
         self->priv->input_treeview = create_stream_treeview (self,
-                                                             G_CALLBACK (on_input_radio_toggled));
+                                                             G_CALLBACK (on_input_selection_changed));
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->input_treeview);
 
         box = gtk_scrolled_window_new (NULL, NULL);
@@ -1897,9 +1914,6 @@ gvc_mixer_dialog_constructor (GType                  type,
                                              GTK_SHADOW_IN);
         gtk_container_add (GTK_CONTAINER (box), self->priv->input_treeview);
         gtk_container_add (GTK_CONTAINER (alignment), box);
-
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->input_treeview));
-        gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 
         /* Output page */
         self->priv->output_box = gtk_vbox_new (FALSE, 12);
@@ -1921,7 +1935,7 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
 
         self->priv->output_treeview = create_stream_treeview (self,
-                                                              G_CALLBACK (on_output_radio_toggled));
+                                                              G_CALLBACK (on_output_selection_changed));
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->output_treeview);
 
         box = gtk_scrolled_window_new (NULL, NULL);
@@ -1932,9 +1946,6 @@ gvc_mixer_dialog_constructor (GType                  type,
                                              GTK_SHADOW_IN);
         gtk_container_add (GTK_CONTAINER (box), self->priv->output_treeview);
         gtk_container_add (GTK_CONTAINER (alignment), box);
-
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->output_treeview));
-        gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 
         box = gtk_frame_new (_("Settings for the selected device:"));
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
