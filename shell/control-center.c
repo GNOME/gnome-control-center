@@ -38,6 +38,8 @@ application_command_line_cb (GApplication  *application,
   char **argv;
   int retval = 0;
 
+  gnome_control_center_show (shell, GTK_APPLICATION (application));
+
   argv = g_application_command_line_get_arguments (command_line, &argc);
   if (argc == 2)
     {
@@ -58,6 +60,9 @@ application_command_line_cb (GApplication  *application,
             }
         }
     }
+
+  gnome_control_center_present (shell);
+
   g_strfreev (argv);
   return retval;
 }
@@ -66,8 +71,9 @@ static void
 application_startup_cb (GApplication       *application,
 			GnomeControlCenter *shell)
 {
-  gnome_control_center_show (shell, GTK_APPLICATION (application));
-  gnome_control_center_present (shell);
+  /* nothing to do here, we don't want to show a window before
+   * we've looked at the commandline
+   */
 }
 
 int
