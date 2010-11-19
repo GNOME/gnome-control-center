@@ -70,24 +70,6 @@ cc_sound_panel_finalize (GObject *object)
 }
 
 static void
-on_control_ready (GvcMixerControl *control,
-                  CcSoundPanel    *panel)
-{
-        if (panel->dialog != NULL)
-                return;
-
-        if (panel->connecting_label) {
-                gtk_widget_destroy (panel->connecting_label);
-                panel->connecting_label = NULL;
-        }
-
-        panel->dialog = gvc_mixer_dialog_new (control);
-        gtk_container_add (GTK_CONTAINER (panel),
-                           GTK_WIDGET (panel->dialog));
-        gtk_widget_show (GTK_WIDGET (panel->dialog));
-}
-
-static void
 cc_sound_panel_init (CcSoundPanel *self)
 {
         gvc_log_init ();
@@ -98,15 +80,10 @@ cc_sound_panel_init (CcSoundPanel *self)
         gtk_window_set_default_icon_name ("multimedia-volume-control");
 
         self->control = gvc_mixer_control_new ("GNOME Volume Control Dialog");
-        g_signal_connect (self->control,
-                          "ready",
-                          G_CALLBACK (on_control_ready),
-                          self);
         gvc_mixer_control_open (self->control);
-
-        self->connecting_label = gtk_label_new (_("Waiting for sound system to respond"));
-        gtk_container_add (GTK_CONTAINER (self), self->connecting_label);
-        gtk_widget_show (self->connecting_label);
+        self->dialog = gvc_mixer_dialog_new (self->control);
+        gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (self->dialog));
+        gtk_widget_show (GTK_WIDGET (self->dialog));
 }
 
 void
