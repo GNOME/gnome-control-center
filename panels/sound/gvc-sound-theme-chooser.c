@@ -1001,9 +1001,8 @@ on_key_changed (GConfClient          *client,
 }
 
 static void
-constrain_list_size (GtkWidget      *widget,
-                     GtkRequisition *requisition,
-                     GtkWidget      *to_size)
+setup_list_size_constraint (GtkWidget *widget,
+                            GtkWidget *to_size)
 {
         GtkRequisition req;
         int            max_height;
@@ -1013,17 +1012,8 @@ constrain_list_size (GtkWidget      *widget,
 
         gtk_widget_get_preferred_size (to_size, NULL, &req);
 
-        requisition->height = MIN (req.height, max_height);
-}
-
-static void
-setup_list_size_constraint (GtkWidget *widget,
-                            GtkWidget *to_size)
-{
-        g_signal_connect (widget,
-                          "size-request",
-                          G_CALLBACK (constrain_list_size),
-                          to_size);
+        gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget),
+                                                    MIN (req.height, max_height));
 }
 
 static void
