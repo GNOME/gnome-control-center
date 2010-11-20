@@ -31,17 +31,17 @@ typedef struct FooScrollAreaPrivate FooScrollAreaPrivate;
 typedef struct FooScrollAreaEvent FooScrollAreaEvent;
 
 typedef enum
-{
+  {
     FOO_BUTTON_PRESS,
     FOO_BUTTON_RELEASE,
     FOO_MOTION
-} FooScrollAreaEventType;
+  } FooScrollAreaEventType;
 
 struct FooScrollAreaEvent
 {
-    FooScrollAreaEventType      type;
-    int                         x;
-    int                         y;
+  FooScrollAreaEventType      type;
+  int                         x;
+  int                         y;
 };
 
 typedef void (* FooScrollAreaEventFunc) (FooScrollArea      *area,
@@ -50,27 +50,27 @@ typedef void (* FooScrollAreaEventFunc) (FooScrollArea      *area,
 
 struct FooScrollArea
 {
-    GtkContainer parent_instance;
+  GtkContainer parent_instance;
 
-    FooScrollAreaPrivate *priv;
+  FooScrollAreaPrivate *priv;
 };
 
 struct FooScrollAreaClass
 {
-    GtkContainerClass parent_class;
+  GtkContainerClass parent_class;
 
-    void (*set_scroll_adjustments) (FooScrollArea *scroll_area,
-                                    GtkAdjustment *hadjustment,
-                                    GtkAdjustment *vadjustment);
+  void (*set_scroll_adjustments) (FooScrollArea *scroll_area,
+                                  GtkAdjustment *hadjustment,
+                                  GtkAdjustment *vadjustment);
 
-    void (*viewport_changed) (FooScrollArea *scroll_area,
-                              GdkRectangle  *old_viewport,
-                              GdkRectangle  *new_viewport);
+  void (*viewport_changed) (FooScrollArea *scroll_area,
+                            GdkRectangle  *old_viewport,
+                            GdkRectangle  *new_viewport);
 
-    void (*paint) (FooScrollArea  *scroll_area,
-                   cairo_t        *cr,
-                   GdkRectangle   *extents,
-                   cairo_region_t *region);
+  void (*paint) (FooScrollArea  *scroll_area,
+                 cairo_t        *cr,
+                 GdkRectangle   *extents,
+                 cairo_region_t *region);
 };
 
 GType foo_scroll_area_get_type (void);
@@ -101,9 +101,9 @@ void          foo_scroll_area_add_input_from_stroke (FooScrollArea           *sc
                                                      FooScrollAreaEventFunc   func,
                                                      gpointer                 data);
 void          foo_scroll_area_add_input_from_fill (FooScrollArea *scroll_area,
-                                                      cairo_t         *cr,
-                                                      FooScrollAreaEventFunc func,
-                                                      gpointer       data);
+                                                   cairo_t         *cr,
+                                                   FooScrollAreaEventFunc func,
+                                                   gpointer       data);
 void          foo_scroll_area_invalidate_region (FooScrollArea  *area,
                                                  cairo_region_t *region);
 void          foo_scroll_area_invalidate (FooScrollArea *scroll_area);
