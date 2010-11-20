@@ -1670,18 +1670,24 @@ static void
 paint_output (App *app, cairo_t *cr, int i)
 {
   int w, h;
-  double scale = compute_scale (app);
+  double scale;
   double x, y;
   int total_w, total_h;
-  GList *connected_outputs = list_connected_outputs (app, &total_w, &total_h);
-  GnomeOutputInfo *output = g_list_nth (connected_outputs, i)->data;
-  PangoLayout *layout = get_display_name (app, output);
+  GList *connected_outputs;
+  GnomeOutputInfo *output;
+  PangoLayout *layout;
   PangoRectangle ink_extent, log_extent;
   GdkRectangle viewport;
   GdkColor output_color;
   double r, g, b;
   double available_w;
   double factor;
+
+  scale = compute_scale (app);
+
+  connected_outputs = list_connected_outputs (app, &total_w, &total_h);
+  output = g_list_nth (connected_outputs, i)->data;
+  layout = get_display_name (app, output);
 
   cairo_save (cr);
 
