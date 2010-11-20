@@ -115,6 +115,28 @@ cc_shell_category_view_finalize (GObject *object)
 }
 
 static void
+label_style_set_cb (GtkWidget *widget,
+                    GtkStyle  *old_style,
+                    gpointer   user_data)
+{
+  GtkStyle *style;
+
+  /* "base" colours are used for the background inside CcShellCategoryView,
+   * so set the labels to use the "text" colors */
+
+  g_signal_handlers_block_by_func (widget, label_style_set_cb, NULL);
+
+  style = gtk_widget_get_style (widget);
+
+  gtk_widget_modify_fg (widget, GTK_STATE_NORMAL,
+                        &style->text[GTK_STATE_NORMAL]);
+
+  g_signal_handlers_unblock_by_func (widget, label_style_set_cb, NULL);
+}
+
+
+
+static void
 cc_shell_category_view_constructed (GObject *object)
 {
   CcShellCategoryViewPrivate *priv = CC_SHELL_CATEGORY_VIEW (object)->priv;
@@ -144,6 +166,9 @@ cc_shell_category_view_constructed (GObject *object)
       gtk_label_set_attributes (GTK_LABEL (label), attrs);
       pango_attr_list_unref (attrs);
       gtk_frame_set_label_widget (GTK_FRAME (object), label);
+
+      g_signal_connect (label, "style-set", G_CALLBACK (label_style_set_cb),
+                        NULL);
     }
 
   /* add the iconview to the vbox */
@@ -159,11 +184,35 @@ cc_shell_category_view_constructed (GObject *object)
   priv->iconview = iconview;
 }
 
+static gboolean
+cc_shell_category_view_draw (GtkWidget *widget,
+                             cairo_t   *cr)
+{
+  GtkStyle *style;
+  GtkStateType state;
+  GtkAllocation allocation;
+
+  style = gtk_widget_get_style (widget);
+  state = gtk_widget_get_state (widget);
+  gtk_widget_get_allocation (widget, &allocation);
+
+
+  cairo_rectangle (cr, 0, 0, allocation.width, allocation.height);
+  gdk_cairo_set_source_color (cr, &style->base[state]);
+
+  cairo_fill (cr);
+
+  GTK_WIDGET_CLASS (cc_shell_category_view_parent_class)->draw (widget, cr);
+
+  return FALSE;
+}
+
 static void
 cc_shell_category_view_class_init (CcShellCategoryViewClass *klass)
 {
   GParamSpec *pspec;
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcShellCategoryViewPrivate));
 
@@ -172,6 +221,8 @@ cc_shell_category_view_class_init (CcShellCategoryViewClass *klass)
   object_class->dispose = cc_shell_category_view_dispose;
   object_class->finalize = cc_shell_category_view_finalize;
   object_class->constructed = cc_shell_category_view_constructed;
+
+  widget_class->draw = cc_shell_category_view_draw;
 
   pspec = g_param_spec_string ("name",
                                "Name",

@@ -943,8 +943,28 @@ on_window_size_allocate (GtkWidget          *widget,
 }
 
 static void
+viewport_style_set_cb (GtkWidget *widget,
+                       GtkStyle  *old_style,
+                       gpointer   user_data)
+{
+  GtkStyle *style;
+
+  /* use "base" colours inside the viewport */
+
+  g_signal_handlers_block_by_func (widget, viewport_style_set_cb, NULL);
+
+  style = gtk_widget_get_style (widget);
+
+  gtk_widget_modify_bg (widget, GTK_STATE_NORMAL,
+                        &style->base[GTK_STATE_NORMAL]);
+
+  g_signal_handlers_unblock_by_func (widget, viewport_style_set_cb, NULL);
+}
+
+static void
 gnome_control_center_init (GnomeControlCenter *self)
 {
+  GtkWidget *widget;
   GError *err = NULL;
   GnomeControlCenterPrivate *priv;
 
@@ -967,6 +987,11 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   priv->notebook = W (priv->builder, "notebook");
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
+
+  widget = W (priv->builder, "viewport");
+  g_signal_connect (widget, "style-set", G_CALLBACK (viewport_style_set_cb),
+                    NULL);
+
   gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
   priv->main_vbox = W (priv->builder, "main-vbox");
   g_signal_connect (priv->scrolled_window, "size-allocate", G_CALLBACK (on_window_size_allocate), self);
