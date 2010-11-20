@@ -194,9 +194,15 @@ cc_timezone_map_get_preferred_width (GtkWidget *widget,
                                      gint      *natural)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
+  gint size;
+
+  size = gdk_pixbuf_get_width (priv->orig_background) * 0.6;
 
   /* FIXME: should natural == full pixmap size ? */
-  *minimum = *natural = gdk_pixbuf_get_width (priv->orig_background) * 0.6;
+  if (minimum != NULL)
+    *minimum = size;
+  if (natural != NULL)
+    *natural = size;
 }
 
 static void
@@ -205,10 +211,17 @@ cc_timezone_map_get_preferred_height (GtkWidget *widget,
                                       gint      *natural)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
+  gint size;
 
   /* FIXME: should natural == full pixmap size ? */
-  *minimum = *natural = gdk_pixbuf_get_height (priv->orig_background) * 0.6;
+  size = gdk_pixbuf_get_height (priv->orig_background) * 0.6;
+
+  if (minimum != NULL)
+    *minimum = size;
+  if (natural != NULL)
+    *natural = size;
 }
+
 static void
 cc_timezone_map_size_allocate (GtkWidget     *widget,
                                GtkAllocation *allocation)

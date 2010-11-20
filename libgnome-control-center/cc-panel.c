@@ -131,7 +131,11 @@ cc_panel_get_preferred_width (GtkWidget *widget,
   GtkBin *bin = GTK_BIN (widget);
   GtkWidget *child;
 
-  *minimum = *natural = 0;
+  if (minimum != NULL)
+    *minimum = 0;
+
+  if (natural != NULL)
+    *natural = 0;
 
   if ((child = gtk_bin_get_child (bin)))
     gtk_widget_get_preferred_width (child, minimum, natural);
@@ -145,7 +149,11 @@ cc_panel_get_preferred_height (GtkWidget *widget,
   GtkBin *bin = GTK_BIN (widget);
   GtkWidget *child;
 
-  *minimum = *natural = 0;
+  if (minimum != NULL)
+    *minimum = 0;
+
+  if (natural != NULL)
+    *natural = 0;
 
   if ((child = gtk_bin_get_child (bin)))
     gtk_widget_get_preferred_height (child, minimum, natural);

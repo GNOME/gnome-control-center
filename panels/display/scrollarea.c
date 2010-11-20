@@ -955,7 +955,12 @@ foo_scroll_area_get_preferred_width (GtkWidget *widget,
 {
     FooScrollArea *scroll_area = FOO_SCROLL_AREA (widget);
 
-    *minimum = *natural = scroll_area->priv->min_width;
+    if (minimum != NULL) {
+        *minimum = scroll_area->priv->min_width;
+    }
+    if (natural != NULL) {
+        *natural = scroll_area->priv->min_width;
+    }
 }
 
 static void
@@ -965,7 +970,12 @@ foo_scroll_area_get_preferred_height (GtkWidget *widget,
 {
     FooScrollArea *scroll_area = FOO_SCROLL_AREA (widget);
 
-    *minimum = *natural = scroll_area->priv->min_height;
+    if (minimum != NULL) {
+        *minimum = scroll_area->priv->min_height;
+    }
+    if (natural != NULL) {
+        *natural = scroll_area->priv->min_height;
+    }
 }
 
 static void

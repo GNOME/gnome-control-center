@@ -463,7 +463,12 @@ gvc_level_bar_get_preferred_width (GtkWidget *widget,
 
         gvc_level_bar_size_request (widget, &requisition);
 
-        *minimum = *natural = requisition.width;
+        if (minimum != NULL) {
+                *minimum = requisition.width;
+        }
+        if (natural != NULL) {
+                *natural = requisition.width;
+        }
 }
 
 static void
@@ -475,7 +480,12 @@ gvc_level_bar_get_preferred_height (GtkWidget *widget,
 
         gvc_level_bar_size_request (widget, &requisition);
 
-        *minimum = *natural = requisition.height;
+        if (minimum != NULL) {
+                *minimum = requisition.height;
+        }
+        if (natural != NULL) {
+                *natural = requisition.height;
+        }
 }
 
 static void
