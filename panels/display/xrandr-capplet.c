@@ -38,6 +38,8 @@
 
 #include "xrandr-capplet.h"
 
+#define TOP_BAR_HEIGHT 10
+
 typedef struct App App;
 typedef struct GrabInfo GrabInfo;
 
@@ -1898,7 +1900,7 @@ paint_output (App *app, cairo_t *cr, int i)
       GDateTime *dt;
 
       /* top bar */
-      cairo_rectangle (cr, x, y, w * scale + 0.5, 20);
+      cairo_rectangle (cr, x, y, w * scale + 0.5, TOP_BAR_HEIGHT);
       cairo_set_source_rgb (cr, 0, 0, 0);
       foo_scroll_area_add_input_from_fill (FOO_SCROLL_AREA (app->area),
                                            cr,
@@ -1932,7 +1934,7 @@ paint_output (App *app, cairo_t *cr, int i)
 
       cairo_move_to (cr,
                      x + ((w * scale + 0.5) - factor * log_extent.width) / 2,
-                     y + (20 - factor * log_extent.height) / 2);
+                     y + (TOP_BAR_HEIGHT - factor * log_extent.height) / 2);
 
       cairo_scale (cr, factor, factor);
 
