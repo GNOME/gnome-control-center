@@ -763,9 +763,6 @@ emit_input (FooScrollArea *scroll_area,
   if (!func)
     return;
 
-  if (type != FOO_MOTION)
-    emit_input (scroll_area, FOO_MOTION, x, y, func, data);
-
   event.type = type;
   event.x = x;
   event.y = y;
@@ -789,7 +786,6 @@ process_event (FooScrollArea           *scroll_area,
       emit_input (scroll_area, input_type, x, y,
                   scroll_area->priv->grab_func,
                   scroll_area->priv->grab_data);
-      return;
     }
 
 #if 0
@@ -828,10 +824,20 @@ process_event (FooScrollArea           *scroll_area,
 
               if (inside)
                 {
-                  emit_input (scroll_area, input_type,
-                              x, y,
-                              path->func,
-                              path->data);
+                  if (scroll_area->priv->grabbed)
+                    {
+                      emit_input (scroll_area, FOO_DRAG_HOVER,
+                                  x, y,
+                                  path->func,
+                                  path->data);
+                    }
+                  else
+                    {
+                      emit_input (scroll_area, input_type,
+                                  x, y,
+                                  path->func,
+                                  path->data);
+                    }
                   return;
                 }
 
@@ -1322,13 +1328,17 @@ foo_scroll_area_begin_grab (FooScrollArea *scroll_area,
 }
 
 void
-foo_scroll_area_end_grab (FooScrollArea *scroll_area)
+foo_scroll_area_end_grab (FooScrollArea *scroll_area,
+                          FooScrollAreaEvent *event)
 {
   g_return_if_fail (FOO_IS_SCROLL_AREA (scroll_area));
 
   scroll_area->priv->grabbed = FALSE;
   scroll_area->priv->grab_func = NULL;
   scroll_area->priv->grab_data = NULL;
+
+  if (event != NULL)
+    process_event (scroll_area, FOO_DROP, event->x, event->y);
 }
 
 gboolean

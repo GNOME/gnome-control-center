@@ -34,6 +34,8 @@ typedef enum
   {
     FOO_BUTTON_PRESS,
     FOO_BUTTON_RELEASE,
+    FOO_DRAG_HOVER,
+    FOO_DROP,
     FOO_MOTION
   } FooScrollAreaEventType;
 
@@ -115,7 +117,8 @@ void          foo_scroll_area_invalidate_rect (FooScrollArea *scroll_area,
 void foo_scroll_area_begin_grab (FooScrollArea *scroll_area,
                                  FooScrollAreaEventFunc func,
                                  gpointer       input_data);
-void foo_scroll_area_end_grab (FooScrollArea *scroll_area);
+void foo_scroll_area_end_grab (FooScrollArea *scroll_area,
+                               FooScrollAreaEvent *event);
 gboolean foo_scroll_area_is_grabbed (FooScrollArea *scroll_area);
 
 void foo_scroll_area_begin_auto_scroll (FooScrollArea *scroll_area);

@@ -1468,6 +1468,62 @@ set_cursor (GtkWidget *widget, GdkCursorType type)
 }
 
 static void
+set_top_bar_tooltip (App *app, gboolean is_dragging)
+{
+  const char *text;
+
+  if (is_dragging)
+    text = NULL;
+  else
+    text = _("Drag to change primary display.");
+
+  gtk_widget_set_tooltip_text (app->area, text);
+}
+
+static void
+on_top_bar_event (FooScrollArea *area,
+                  FooScrollAreaEvent *event,
+                  App *app)
+{
+  /* Ignore drops */
+  if (event->type == FOO_DROP)
+    return;
+
+  /* If the mouse is inside the top bar, set the cursor to "you can move me".  See
+   * on_canvas_event() for where we reset the cursor to the default if it
+   * exits the outputs' area.
+   */
+  if (!app->current_configuration->clone && get_n_connected (app) > 1)
+    set_cursor (GTK_WIDGET (area), GDK_FLEUR);
+
+  if (event->type == FOO_BUTTON_PRESS)
+    {
+      rebuild_gui (app);
+      set_top_bar_tooltip (app, TRUE);
+
+      if (!app->current_configuration->clone && get_n_connected (app) > 1)
+        {
+          foo_scroll_area_begin_grab (area, (FooScrollAreaEventFunc) on_top_bar_event, app);
+        }
+
+      foo_scroll_area_invalidate (area);
+    }
+  else
+    {
+      if (foo_scroll_area_is_grabbed (area))
+        {
+          if (event->type == FOO_BUTTON_RELEASE)
+            {
+              foo_scroll_area_end_grab (area, event);
+              set_top_bar_tooltip (app, FALSE);
+            }
+
+          foo_scroll_area_invalidate (area);
+        }
+    }
+}
+
+static void
 set_monitors_tooltip (App *app, gboolean is_dragging)
 {
   const char *text;
@@ -1481,12 +1537,45 @@ set_monitors_tooltip (App *app, gboolean is_dragging)
 }
 
 static void
+set_primary_output (App *app,
+                    GnomeOutputInfo *output)
+{
+  int i;
+
+  for (i = 0; app->current_configuration->outputs[i] != NULL; ++i)
+    {
+      GnomeOutputInfo *output2 = app->current_configuration->outputs[i];
+      if (output2 != output)
+        {
+          output2->primary = FALSE;
+        }
+      else
+        {
+          output2->primary = TRUE;
+        }
+    }
+
+}
+
+static void
 on_output_event (FooScrollArea *area,
                  FooScrollAreaEvent *event,
                  gpointer data)
 {
   GnomeOutputInfo *output = data;
   App *app = g_object_get_data (G_OBJECT (area), "app");
+
+  if (event->type == FOO_DRAG_HOVER)
+    {
+      set_primary_output (app, output);
+      return;
+    }
+
+  if (event->type == FOO_DROP)
+    {
+      /* Activate new primary? */
+      return;
+    }
 
   /* If the mouse is inside the outputs, set the cursor to "you can move me".  See
    * on_canvas_event() for where we reset the cursor to the default if it
@@ -1579,7 +1668,7 @@ on_output_event (FooScrollArea *area,
 
           if (event->type == FOO_BUTTON_RELEASE)
             {
-              foo_scroll_area_end_grab (area);
+              foo_scroll_area_end_grab (area, NULL);
               set_monitors_tooltip (app, FALSE);
 
               g_free (output->user_data);
@@ -1811,6 +1900,11 @@ paint_output (App *app, cairo_t *cr, int i)
       /* top bar */
       cairo_rectangle (cr, x, y, w * scale + 0.5, 20);
       cairo_set_source_rgb (cr, 0, 0, 0);
+      foo_scroll_area_add_input_from_fill (FOO_SCROLL_AREA (app->area),
+                                           cr,
+                                           (FooScrollAreaEventFunc) on_top_bar_event,
+                                           app);
+
       cairo_fill (cr);
 
       /* clock */
@@ -1846,7 +1940,6 @@ paint_output (App *app, cairo_t *cr, int i)
 
       pango_cairo_show_layout (cr, layout);
       g_object_unref (layout);
-
     }
 
   cairo_restore (cr);
