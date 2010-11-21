@@ -186,6 +186,10 @@ update_preview (GtkFileChooser               *chooser,
                                                                                      mime_type);
                 }
 
+                gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser),
+                                                   GTK_RESPONSE_ACCEPT,
+                                                   (pixbuf != NULL));
+
                 if (pixbuf != NULL) {
                         gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
                         g_object_unref (pixbuf);
