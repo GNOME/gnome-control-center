@@ -375,11 +375,13 @@ setup_photo_popup (UmPhotoDialog *um)
         GDir *dir;
         const char *face;
         GError *error;
+        gboolean none_item_shown;
 
         menu = gtk_menu_new ();
 
         x = 0;
         y = 0;
+        none_item_shown = FALSE;
 
         error = NULL;
         dir = g_dir_open (DATADIR "/pixmaps/faces", 0, &error);
@@ -419,7 +421,19 @@ setup_photo_popup (UmPhotoDialog *um)
         g_signal_connect (G_OBJECT (menuitem), "activate",
                           G_CALLBACK (none_icon_selected), um);
         gtk_widget_show (menuitem);
+        none_item_shown = TRUE;
         y++;
+
+skip_faces:
+	if (!none_item_shown) {
+		menuitem = gtk_menu_item_new_with_label (_("Disable image"));
+		gtk_menu_attach (GTK_MENU (menu), GTK_WIDGET (menuitem),
+				 0, ROW_SPAN - 1, y, y + 1);
+		g_signal_connect (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (none_icon_selected), um);
+		gtk_widget_show (menuitem);
+		y++;
+	}
 
         /* Separator */
         menuitem = gtk_separator_menu_item_new ();
@@ -428,8 +442,6 @@ setup_photo_popup (UmPhotoDialog *um)
         gtk_widget_show (menuitem);
 
         y++;
-
-skip_faces:
 
 #ifdef HAVE_CHEESE
         um->take_photo_menuitem = gtk_menu_item_new_with_label (_("Take a photo..."));
