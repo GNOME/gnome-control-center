@@ -1695,8 +1695,8 @@ paint_output (App *app, cairo_t *cr, int i)
   get_geometry (output, &w, &h);
 
 #if 0
-  g_debug ("%s (%p) geometry %d %d %d", output->name, output,
-           w, h, output->rate);
+  g_debug ("%s (%p) geometry %d %d %d primary=%d", output->name, output->name,
+           w, h, output->rate, output->primary);
 #endif
 
   viewport.height -= 2 * MARGIN;
@@ -1728,7 +1728,6 @@ paint_output (App *app, cairo_t *cr, int i)
   cairo_translate (cr,
                    - x - (w * scale + 0.5) / 2,
                    - y - (h * scale + 0.5) / 2);
-
 
   if (output == app->current_output)
     {
@@ -1800,10 +1799,57 @@ paint_output (App *app, cairo_t *cr, int i)
     cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
 
   pango_cairo_show_layout (cr, layout);
+  g_object_unref (layout);
+
+  if (output->primary)
+    {
+      const char *clock_format;
+      char *text;
+      gboolean use_24;
+      GDateTime *dt;
+
+      /* top bar */
+      cairo_rectangle (cr, x, y, w * scale + 0.5, 20);
+      cairo_set_source_rgb (cr, 0, 0, 0);
+      cairo_fill (cr);
+
+      /* clock */
+      /* FIXME: set 12/24 hour */
+      if (use_24)
+        clock_format = _("%a %R");
+      else
+        clock_format = _("%a %l:%M %p");
+
+      dt = g_date_time_new_now_local ();
+      text = g_date_time_format (dt, clock_format);
+      g_date_time_unref (dt);
+
+      layout = gtk_widget_create_pango_layout (GTK_WIDGET (app->area), text);
+      g_free (text);
+      pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
+
+      layout_set_font (layout, "Sans 4");
+      pango_layout_get_pixel_extents (layout, &ink_extent, &log_extent);
+
+      if (available_w < ink_extent.width)
+        factor = available_w / ink_extent.width;
+      else
+        factor = 1.0;
+
+      cairo_move_to (cr,
+                     x + ((w * scale + 0.5) - factor * log_extent.width) / 2,
+                     y + (20 - factor * log_extent.height) / 2);
+
+      cairo_scale (cr, factor, factor);
+
+      cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+
+      pango_cairo_show_layout (cr, layout);
+      g_object_unref (layout);
+
+    }
 
   cairo_restore (cr);
-
-  g_object_unref (layout);
 }
 
 static void
