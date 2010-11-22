@@ -372,7 +372,7 @@ update_default_output (GvcMixerDialog *dialog)
                 if (is_default) {
                         GtkTreeSelection *selection;
 
-                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->input_treeview));
+                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->output_treeview));
                         gtk_tree_selection_select_iter (selection, &iter);
                 }
         } while (gtk_tree_model_iter_next (model, &iter));
