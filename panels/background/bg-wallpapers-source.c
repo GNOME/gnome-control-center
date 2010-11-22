@@ -38,6 +38,7 @@ struct _BgWallpapersSourcePrivate
 {
   GtkListStore *store;
   GnomeDesktopThumbnailFactory *thumb_factory;
+  guint reload_id;
 };
 
 
@@ -76,6 +77,12 @@ bg_wallpapers_source_dispose (GObject *object)
     {
       g_object_unref (priv->thumb_factory);
       priv->thumb_factory = NULL;
+    }
+
+  if (priv->reload_id != 0)
+    {
+      g_source_remove (priv->reload_id);
+      priv->reload_id = 0;
     }
 
   G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->dispose (object);
@@ -187,16 +194,10 @@ load_wallpapers (gchar              *key,
   gtk_tree_path_free (path);
 }
 
-static void
-bg_wallpapers_source_init (BgWallpapersSource *self)
+static gboolean
+reload_wallpapers (BgWallpapersSource *self)
 {
   GnomeWpXml *wp_xml;
-  BgWallpapersSourcePrivate *priv;
-
-  priv = self->priv = WALLPAPERS_SOURCE_PRIVATE (self);
-
-  priv->thumb_factory =
-    gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
   /* set up wallpaper source */
   wp_xml = g_new0 (GnomeWpXml, 1);
@@ -205,7 +206,7 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   wp_xml->wp_model = bg_source_get_liststore (BG_SOURCE (self));
   wp_xml->thumb_width = THUMBNAIL_WIDTH;
   wp_xml->thumb_height = THUMBNAIL_HEIGHT;
-  wp_xml->thumb_factory = priv->thumb_factory;
+  wp_xml->thumb_factory = self->priv->thumb_factory;
 
   gnome_wp_xml_load_list (wp_xml);
   g_hash_table_foreach (wp_xml->wp_hash,
@@ -215,6 +216,23 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   g_hash_table_destroy (wp_xml->wp_hash);
   g_object_unref (wp_xml->settings);
   g_free (wp_xml);
+
+  self->priv->reload_id = 0;
+
+  return FALSE;
+}
+
+static void
+bg_wallpapers_source_init (BgWallpapersSource *self)
+{
+  BgWallpapersSourcePrivate *priv;
+
+  priv = self->priv = WALLPAPERS_SOURCE_PRIVATE (self);
+
+  priv->thumb_factory =
+    gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+
+  priv->reload_id = g_idle_add ((GSourceFunc)reload_wallpapers, self);
 }
 
 BgWallpapersSource *
