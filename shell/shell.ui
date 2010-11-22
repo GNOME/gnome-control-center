@@ -17,40 +17,48 @@
               <object class="GtkToolItem" id="toolbutton1">
                 <property name="visible">True</property>
                 <child>
-                  <object class="GtkHBox" id="hbox1">
+                  <object class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
-                    <property name="border_width">5</property>
+                    <property name="top_padding">5</property>
+                    <property name="bottom_padding">5</property>
+                    <property name="left_padding">10</property>
+                    <property name="right_padding">5</property>
                     <child>
-                      <object class="GtkButton" id="home-button">
-                        <property name="label" translatable="yes">_All Settings</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="no_show_all">True</property>
-                        <property name="use_underline">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkAlignment" id="entry-alignment">
+                      <object class="GtkHBox" id="hbox1">
                         <property name="visible">True</property>
-                        <property name="xalign">1</property>
-                        <property name="xscale">0</property>
                         <child>
-                          <object class="GtkEntry" id="search-entry">
-                            <property name="width_request">210</property>
-                            <property name="visible">True</property>
+                          <object class="GtkButton" id="home-button">
+                            <property name="label" translatable="yes">_All Settings</property>
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">&#x25CF;</property>
-                            <property name="secondary_icon_stock">gtk-find</property>
+                            <property name="receives_default">True</property>
+                            <property name="no_show_all">True</property>
+                            <property name="use_underline">True</property>
                           </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkAlignment" id="entry-alignment">
+                            <property name="visible">True</property>
+                            <property name="xalign">1</property>
+                            <property name="xscale">0</property>
+                            <child>
+                              <object class="GtkEntry" id="search-entry">
+                                <property name="width_request">210</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="invisible_char">&#x25CF;</property>
+                                <property name="secondary_icon_stock">gtk-find</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -137,8 +145,8 @@
   <object class="GtkSizeGroup" id="sizegroup">
     <property name="mode">vertical</property>
     <widgets>
-      <widget name="entry-alignment"/>
       <widget name="home-button"/>
+      <widget name="entry-alignment"/>
     </widgets>
   </object>
 </interface>

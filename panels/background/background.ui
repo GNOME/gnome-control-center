@@ -27,10 +27,13 @@
   <object class="GtkHBox" id="background-panel">
     <property name="visible">True</property>
     <property name="spacing">12</property>
+    <property name="border_width">10</property>
+    <property name="orientation">horizontal</property>
     <child>
       <object class="GtkVBox" id="vbox2">
         <property name="visible">True</property>
         <property name="spacing">6</property>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkComboBox" id="sources-combobox">
             <property name="visible">True</property>
@@ -85,6 +88,8 @@
     <child>
       <object class="GtkVBox" id="vbox3">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">10</property>
         <child>
           <object class="GtkDrawingArea" id="preview-area">
             <property name="visible">True</property>
@@ -96,6 +101,7 @@
         <child>
           <object class="GtkHBox" id="bottom-hbox">
             <property name="visible">True</property>
+            <property name="orientation">horizontal</property>
             <child>
               <object class="GtkLabel" id="background-label">
                 <property name="visible">True</property>
@@ -110,6 +116,7 @@
               <object class="GtkHBox" id="edit-hbox">
                 <property name="visible">True</property>
                 <property name="spacing">12</property>
+                <property name="orientation">horizontal</property>
                 <child>
                   <object class="GtkColorButton" id="style-color">
                     <property name="visible">True</property>
