@@ -44,7 +44,6 @@ struct GvcSoundThemeChooserPrivate
 {
         GtkWidget *treeview;
         GtkWidget *selection_box;
-        GtkWidget *click_feedback_button;
         GConfClient *client;
         guint sounds_dir_id;
         guint metacity_dir_id;
@@ -90,14 +89,6 @@ enum {
         SOUND_TYPE_BUILTIN,
         SOUND_TYPE_CUSTOM
 };
-
-static void
-set_input_feedback_enabled (GvcSoundThemeChooser *chooser,
-                            gboolean              enabled)
-{
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (chooser->priv->click_feedback_button),
-                                      enabled);
-}
 
 #define GVC_SOUND_SOUND    (xmlChar *) "sound"
 #define GVC_SOUND_NAME     (xmlChar *) "name"
@@ -673,14 +664,10 @@ update_theme (GvcSoundThemeChooser *chooser)
 {
         gboolean     events_enabled;
         gboolean     bell_enabled;
-        gboolean     feedback_enabled;
         char        *last_theme;
 
         bell_enabled = gconf_client_get_bool (chooser->priv->client, AUDIO_BELL_KEY, NULL);
         //set_audible_bell_enabled (chooser, bell_enabled);
-
-        feedback_enabled = gconf_client_get_bool (chooser->priv->client, INPUT_SOUNDS_KEY, NULL);
-        set_input_feedback_enabled (chooser, feedback_enabled);
 
         events_enabled = gconf_client_get_bool (chooser->priv->client, EVENT_SOUNDS_KEY, NULL);
 
@@ -699,7 +686,6 @@ update_theme (GvcSoundThemeChooser *chooser)
         g_free (last_theme);
 
         gtk_widget_set_sensitive (chooser->priv->selection_box, events_enabled);
-        gtk_widget_set_sensitive (chooser->priv->click_feedback_button, events_enabled);
 
         update_alerts_from_theme_name (chooser, chooser->priv->current_theme);
 }
@@ -730,17 +716,6 @@ gvc_sound_theme_chooser_class_init (GvcSoundThemeChooserClass *klass)
         object_class->finalize = gvc_sound_theme_chooser_finalize;
 
         g_type_class_add_private (klass, sizeof (GvcSoundThemeChooserPrivate));
-}
-
-static void
-on_click_feedback_toggled (GtkToggleButton      *button,
-                           GvcSoundThemeChooser *chooser)
-{
-        gboolean     enabled;
-
-        enabled = gtk_toggle_button_get_active (button);
-
-        gconf_client_set_bool (chooser->priv->client, INPUT_SOUNDS_KEY, enabled, NULL);
 }
 
 static void
@@ -830,18 +805,6 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
                                              GTK_SHADOW_IN);
         gtk_container_add (GTK_CONTAINER (scrolled_window), chooser->priv->treeview);
         gtk_container_add (GTK_CONTAINER (alignment), scrolled_window);
-
-        chooser->priv->click_feedback_button = gtk_check_button_new_with_mnemonic (_("Enable _window and button sounds"));
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (chooser->priv->click_feedback_button),
-                                      gconf_client_get_bool (chooser->priv->client, INPUT_SOUNDS_KEY, NULL));
-        gtk_box_pack_start (GTK_BOX (chooser),
-                            chooser->priv->click_feedback_button,
-                            FALSE, FALSE, 0);
-        g_signal_connect (chooser->priv->click_feedback_button,
-                          "toggled",
-                          G_CALLBACK (on_click_feedback_toggled),
-                          chooser);
-
 
         gconf_client_add_dir (chooser->priv->client, KEY_SOUNDS_DIR,
                               GCONF_CLIENT_PRELOAD_ONELEVEL,
