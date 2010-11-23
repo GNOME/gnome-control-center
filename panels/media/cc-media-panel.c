@@ -117,40 +117,49 @@ cc_media_panel_class_finalize (CcMediaPanelClass *klass)
 {
 }
 
-static void
-remove_elem_from_str_array (char **v, const char *s)
-{
-  int n, m;
-
-  if (v == NULL) {
-    return;
-  }
-
-  for (n = 0; v[n] != NULL; n++) {
-    if (g_strcmp0 (v[n], s) == 0) {
-      for (m = n + 1; v[m] != NULL; m++) {
-	v[m - 1] = v[m];
-      }
-      v[m - 1] = NULL;
-      n--;
-    }
-  }
-} 
-
 static char **
-add_elem_to_str_array (char **v, const char *s)
+remove_elem_from_str_array (char **v,
+			    const char *s)
 {
-  guint len;
-  char **r;
+  GPtrArray *array;
+  guint idx;
 
-  len = v != NULL ? g_strv_length (v) : 0;
-  r = g_new0 (char *, len + 2);
-  memcpy (r, v, len * sizeof (char *));
-  r[len] = g_strdup (s);
-  r[len+1] = NULL;
+  array = g_ptr_array_new ();
+
+  for (idx = 0; v[idx] != NULL; idx++) {
+    if (g_strcmp0 (v[idx], s) == 0) {
+      continue;
+    }
+
+    g_ptr_array_add (array, v[idx]);
+  }
+
+  g_ptr_array_add (array, NULL);
+
   g_free (v);
 
-  return r;
+  return (char **) g_ptr_array_free (array, FALSE);
+}
+
+static char **
+add_elem_to_str_array (char **v,
+		       const char *s)
+{
+  GPtrArray *array;
+  guint idx;
+
+  array = g_ptr_array_new ();
+
+  for (idx = 0; v[idx] != NULL; idx++) {
+    g_ptr_array_add (array, v[idx]);
+  }
+
+  g_ptr_array_add (array, g_strdup (s));
+  g_ptr_array_add (array, NULL);
+
+  g_free (v);
+
+  return (char **) g_ptr_array_free (array, FALSE);
 }
 
 static void
@@ -180,21 +189,21 @@ autorun_set_preferences (CcMediaPanel *self,
   x_content_open_folder = g_settings_get_strv (self->priv->preferences,
 					       PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
 
-  remove_elem_from_str_array (x_content_start_app, x_content_type);
+  x_content_start_app = remove_elem_from_str_array (x_content_start_app, x_content_type);
   if (pref_start_app) {
     x_content_start_app = add_elem_to_str_array (x_content_start_app, x_content_type);
   }
   g_settings_set_strv (self->priv->preferences,
 		       PREF_MEDIA_AUTORUN_X_CONTENT_START_APP, (const gchar * const*) x_content_start_app);
 
-  remove_elem_from_str_array (x_content_ignore, x_content_type);
+  x_content_ignore = remove_elem_from_str_array (x_content_ignore, x_content_type);
   if (pref_ignore) {
     x_content_ignore = add_elem_to_str_array (x_content_ignore, x_content_type);
   }
   g_settings_set_strv (self->priv->preferences,
 		       PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE, (const gchar * const*) x_content_ignore);
 
-  remove_elem_from_str_array (x_content_open_folder, x_content_type);
+  x_content_open_folder = remove_elem_from_str_array (x_content_open_folder, x_content_type);
   if (pref_open_folder) {
     x_content_open_folder = add_elem_to_str_array (x_content_open_folder, x_content_type);
   }
