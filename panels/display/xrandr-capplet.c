@@ -1763,6 +1763,31 @@ paint_background (FooScrollArea *area,
 }
 
 static void
+color_shade (double *r,
+             double *g,
+             double *b,
+             double  k)
+{
+  double h, s, v;
+
+  gtk_rgb_to_hsv (*r, *g, *b, &h, &s, &v);
+
+  s *= k;
+  if (s > 1.0)
+    s = 1.0;
+  else if (s < 0.0)
+    s = 0.0;
+
+  v *= k;
+  if (v > 1.0)
+    v = 1.0;
+  else if (v < 0.0)
+    v = 0.0;
+
+  gtk_hsv_to_rgb (h, s, v, r, g, b);
+}
+
+static void
 paint_output (App *app, cairo_t *cr, int i)
 {
   int w, h;
@@ -1829,7 +1854,6 @@ paint_output (App *app, cairo_t *cr, int i)
     {
       GtkStyle *style;
       GdkColor  color;
-      double    r, g, b;
 
       style = gtk_widget_get_style (app->area);
       color = style->bg[GTK_STATE_SELECTED];
@@ -1855,9 +1879,7 @@ paint_output (App *app, cairo_t *cr, int i)
   if (!output->on)
     {
       /* If the output is turned off, just darken the selected color */
-      r *= 0.2;
-      g *= 0.2;
-      b *= 0.2;
+      color_shade (&r, &g, &b, 0.4);
     }
 
   cairo_set_source_rgba (cr, r, g, b, 1.0);
