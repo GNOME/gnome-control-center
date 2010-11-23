@@ -370,10 +370,10 @@ other_type_combo_box_changed (GtkComboBox *combo_box,
 }
 
 static int
-eel_g_strv_find (char **strv,
-		 const char *find_me)
+media_panel_g_strv_find (char **strv,
+			 const char *find_me)
 {
-  int index;
+  guint index;
 
   g_return_val_if_fail (find_me != NULL, -1);
 	
@@ -411,13 +411,13 @@ autorun_get_preferences (CcMediaPanel *self,
   x_content_open_folder = g_settings_get_strv (self->priv->preferences,
 					       PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
   if (x_content_start_app != NULL) {
-    *pref_start_app = eel_g_strv_find (x_content_start_app, x_content_type) != -1;
+    *pref_start_app = media_panel_g_strv_find (x_content_start_app, x_content_type) != -1;
   }
   if (x_content_ignore != NULL) {
-    *pref_ignore = eel_g_strv_find (x_content_ignore, x_content_type) != -1;
+    *pref_ignore = media_panel_g_strv_find (x_content_ignore, x_content_type) != -1;
   }
   if (x_content_open_folder != NULL) {
-    *pref_open_folder = eel_g_strv_find (x_content_open_folder, x_content_type) != -1;
+    *pref_open_folder = media_panel_g_strv_find (x_content_open_folder, x_content_type) != -1;
   }
   g_strfreev (x_content_ignore);
   g_strfreev (x_content_start_app);
