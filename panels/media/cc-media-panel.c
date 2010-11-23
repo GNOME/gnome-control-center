@@ -697,7 +697,6 @@ on_extra_options_button_clicked (GtkWidget    *button,
   dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "extra_options_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW (dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
-  g_debug ("setting transient for %p", GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
   g_signal_connect (dialog,
                     "response",
