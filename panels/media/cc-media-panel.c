@@ -681,11 +681,38 @@ prepare_combo_box (CcMediaPanel *self,
 }
 
 static void
+on_extra_options_dialog_response (GtkWidget    *dialog,
+                                  int           response,
+                                  CcMediaPanel *self)
+{
+  gtk_widget_hide (dialog);
+}
+
+static void
+on_extra_options_button_clicked (GtkWidget    *button,
+                                 CcMediaPanel *self)
+{
+  GtkWidget  *dialog;
+
+  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "extra_options_dialog"));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+  g_debug ("setting transient for %p", GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+  g_signal_connect (dialog,
+                    "response",
+                    G_CALLBACK (on_extra_options_dialog_response),
+                    NULL);
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
 media_panel_setup (CcMediaPanel *self)
 {
   guint n;
   GList *l, *content_types;
   GtkWidget *other_type_combo_box;
+  GtkWidget *extras_button;
   GtkListStore *other_type_list_store;
   GtkCellRenderer *renderer;
   GtkTreeIter iter;
@@ -773,6 +800,12 @@ media_panel_setup (CcMediaPanel *self)
 		    self);
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (other_type_combo_box), 0);
+
+  extras_button = GTK_WIDGET (gtk_builder_get_object (builder, "extra_options_button"));
+  g_signal_connect (extras_button,
+                    "clicked",
+                    G_CALLBACK (on_extra_options_button_clicked),
+                    self);
 
   update_media_sensitivity (self);
 }
