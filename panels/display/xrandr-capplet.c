@@ -1569,7 +1569,8 @@ on_output_event (FooScrollArea *area,
 
   if (event->type == FOO_DRAG_HOVER)
     {
-      set_primary_output (app, output);
+      if (output->on)
+        set_primary_output (app, output);
       return;
     }
 
