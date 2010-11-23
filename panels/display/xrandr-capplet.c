@@ -2132,6 +2132,7 @@ ensure_current_configuration_is_saved (void)
     return;
 
   rr_config = gnome_rr_config_new_current (rr_screen);
+  gnome_rr_config_ensure_primary (rr_config);
   gnome_rr_config_save (rr_config, NULL); /* NULL-GError */
 
   gnome_rr_config_free (rr_config);
@@ -2187,6 +2188,7 @@ sanitize_and_save_configuration (App *app)
   GError *error;
 
   gnome_rr_config_sanitize (app->current_configuration);
+  gnome_rr_config_ensure_primary (app->current_configuration);
 
   check_required_virtual_size (app);
 
