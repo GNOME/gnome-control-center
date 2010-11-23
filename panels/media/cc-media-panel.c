@@ -788,12 +788,7 @@ cc_media_panel_init (CcMediaPanel *self)
   priv->builder = gtk_builder_new ();
   priv->preferences = g_settings_new ("org.gnome.media-handling");
 
-  /* support developers that want to run from the current directory */
-  if (g_file_test (GNOMECC_UI_DIR "/gnome-media-properties.ui", G_FILE_TEST_EXISTS) != FALSE) {
-    res = gtk_builder_add_from_file (priv->builder, GNOMECC_UI_DIR "/gnome-media-properties.ui", NULL);
-  } else {
-    res = gtk_builder_add_from_file (priv->builder, "./gnome-media-properties.ui", NULL);
-  }
+  res = gtk_builder_add_from_file (priv->builder, GNOMECC_UI_DIR "/gnome-media-properties.ui", NULL);
 
   /* TODO: error */
   if (res == 0) {
