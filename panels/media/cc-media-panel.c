@@ -690,17 +690,22 @@ media_panel_setup (CcMediaPanel *self)
   GtkCellRenderer *renderer;
   GtkTreeIter iter;
   GtkBuilder *builder = self->priv->builder;
-  const char *s[] = {"media_audio_cdda_combobox",   "x-content/audio-cdda",
-		     "media_video_dvd_combobox",    "x-content/video-dvd",
-		     "media_music_player_combobox", "x-content/audio-player",
-		     "media_dcf_combobox",          "x-content/image-dcf",
-		     "media_software_combobox",     "x-content/software",
-		     NULL};
 
-  for (n = 0; s[n*2] != NULL; n++) {
+  struct {
+    const gchar *widget_name;
+    const gchar *content_type;
+  } const defs[] = {
+    { "media_audio_cdda_combobox", "x-content/audio-cdda" },
+    { "media_video_dvd_combobox", "x-content/video-dvd" },
+    { "media_music_player_combobox", "x-content/audio-player" },
+    { "media_dcf_combobox", "x-content/image-dcf" },
+    { "media_software_combobox", "x-content/software" },
+  };
+
+  for (n = 0; n < G_N_ELEMENTS (defs); n++) {
     prepare_combo_box (self,
-		       GTK_WIDGET (gtk_builder_get_object (builder, s[n*2])),
-		       s[n*2 + 1]);
+		       GTK_WIDGET (gtk_builder_get_object (builder, defs[n].widget_name)),
+		       defs[n].content_type);
   }
 
   other_type_combo_box = GTK_WIDGET (gtk_builder_get_object (builder, "media_other_type_combobox"));
@@ -723,8 +728,9 @@ media_panel_setup (CcMediaPanel *self)
 
     if (!g_str_has_prefix (content_type, "x-content/"))
       continue;
-    for (n = 0; s[n*2] != NULL; n++) {
-      if (strcmp (content_type, s[n*2 + 1]) == 0) {
+
+    for (n = 0; n < G_N_ELEMENTS (defs); n++) {
+      if (g_content_type_is_a (content_type, defs[n].content_type)) {
 	goto skip;
       }
     }
