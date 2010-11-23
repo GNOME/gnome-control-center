@@ -33,8 +33,7 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
-#define sure_string(s)                    ((const char *)((s)!=NULL?(s):""))
-#define DESKTOP_ENTRY_GROUP		  "Desktop Entry"
+#define sure_string(s) ((const char *)((s)!=NULL?(s):""))
 
 struct _NautilusOpenWithDialogDetails {
 	GAppInfo *selected_app_info;
