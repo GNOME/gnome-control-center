@@ -140,6 +140,7 @@ on_screen_changed (GnomeRRScreen *scr,
   App *app = data;
 
   current = gnome_rr_config_new_current (app->screen);
+  gnome_rr_config_ensure_primary (current);
 
   if (app->current_configuration)
     gnome_rr_config_free (app->current_configuration);
@@ -751,7 +752,6 @@ static void
 monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data)
 {
   App *app = data;
-  gboolean is_on;
 
   if (!app->current_output)
     return;
@@ -760,19 +760,20 @@ monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data)
     return;
 
   if (GTK_WIDGET (toggle) == app->monitor_on_radio)
-    is_on = TRUE;
+    {
+      app->current_output->on = TRUE;
+      select_resolution_for_current_output (app);
+    }
   else if (GTK_WIDGET (toggle) == app->monitor_off_radio)
-    is_on = FALSE;
+    {
+      app->current_output->on = FALSE;
+      gnome_rr_config_ensure_primary (app->current_configuration);
+    }
   else
     {
       g_assert_not_reached ();
       return;
     }
-
-  app->current_output->on = is_on;
-
-  if (is_on)
-    select_resolution_for_current_output (app);
 
   rebuild_gui (app);
   foo_scroll_area_invalidate (FOO_SCROLL_AREA (app->area));
