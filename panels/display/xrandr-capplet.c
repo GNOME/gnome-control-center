@@ -70,6 +70,7 @@ struct App
 
   GtkWidget      *area;
   gboolean        ignore_gui_changes;
+  gboolean        dragging_top_bar;
 
   /* These are used while we are waiting for the ApplyConfiguration method to be executed over D-bus */
   DBusGConnection *connection;
@@ -1505,6 +1506,7 @@ on_top_bar_event (FooScrollArea *area,
 
       if (!app->current_configuration->clone && get_n_connected (app) > 1)
         {
+          app->dragging_top_bar = TRUE;
           foo_scroll_area_begin_grab (area, (FooScrollAreaEventFunc) on_top_bar_event, app);
         }
 
@@ -1517,6 +1519,7 @@ on_top_bar_event (FooScrollArea *area,
           if (event->type == FOO_BUTTON_RELEASE)
             {
               foo_scroll_area_end_grab (area, event);
+              app->dragging_top_bar = FALSE;
               set_top_bar_tooltip (app, FALSE);
             }
 
@@ -1569,7 +1572,7 @@ on_output_event (FooScrollArea *area,
 
   if (event->type == FOO_DRAG_HOVER)
     {
-      if (output->on)
+      if (output->on && app->dragging_top_bar)
         set_primary_output (app, output);
       return;
     }
