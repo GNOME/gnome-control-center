@@ -57,6 +57,12 @@ enum {
   COLUMN_AUTORUN_ITEM_TYPE,
 };
 
+enum {
+  COMBO_ITEM_ASK_OR_LABEL = 0,
+  COMBO_ITEM_DO_NOTHING,
+  COMBO_ITEM_OPEN_FOLDER
+};
+
 struct _CcMediaPanelPrivate {
   GtkBuilder *builder;
   GSettings *preferences;
@@ -629,20 +635,20 @@ prepare_combo_box (CcMediaPanel *self,
   gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX (combo_box), combo_box_separator_func, NULL, NULL);
 
   if (num_apps == 0) {
-    gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 0);
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), COMBO_ITEM_ASK_OR_LABEL);
     gtk_widget_set_sensitive (combo_box, FALSE);
   } else {
     gtk_widget_set_sensitive (combo_box, TRUE);
     if (pref_ask) {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 0);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), COMBO_ITEM_ASK_OR_LABEL);
     } else if (pref_ignore) {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 1);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), COMBO_ITEM_DO_NOTHING);
     } else if (pref_open_folder) {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 2);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), COMBO_ITEM_OPEN_FOLDER);
     } else if (set_active != -1) {
       gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), set_active);
     } else {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 1);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), COMBO_ITEM_DO_NOTHING);
     }
 
     /* See if we have an old data around */
