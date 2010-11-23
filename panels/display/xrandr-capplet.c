@@ -1808,7 +1808,6 @@ paint_output (App *app, cairo_t *cr, int i)
 
   connected_outputs = list_connected_outputs (app, &total_w, &total_h);
   output = g_list_nth (connected_outputs, i)->data;
-  layout = get_display_name (app, output);
 
   cairo_save (cr);
 
@@ -1896,6 +1895,9 @@ paint_output (App *app, cairo_t *cr, int i)
   cairo_stroke (cr);
   cairo_set_line_width (cr, 2);
 
+  cairo_save (cr);
+
+  layout = get_display_name (app, output);
   layout_set_font (layout, "Sans 10");
   pango_layout_get_pixel_extents (layout, &ink_extent, &log_extent);
 
@@ -1918,6 +1920,7 @@ paint_output (App *app, cairo_t *cr, int i)
 
   pango_cairo_show_layout (cr, layout);
   g_object_unref (layout);
+  cairo_restore (cr);
 
   if (output->primary)
     {
