@@ -1498,7 +1498,7 @@ on_top_bar_event (FooScrollArea *area,
    * exits the outputs' area.
    */
   if (!app->current_configuration->clone && get_n_connected (app) > 1)
-    set_cursor (GTK_WIDGET (area), GDK_FLEUR);
+    set_cursor (GTK_WIDGET (area), GDK_HAND1);
 
   if (event->type == FOO_BUTTON_PRESS)
     {
