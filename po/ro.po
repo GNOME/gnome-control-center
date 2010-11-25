@@ -7,13 +7,14 @@
 # Adi Roiban https://launchpad.net/~adiroiban, 2008, 2009
 # Lucian Adrian Grijincu https://launchpad.net/~lucian.grijincu, 2009
 # Lucian Adrian Grijincu <lucian.grijincu@gmail.com>, 2010.
+# Cătălin Bălan <laserbeam333@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-09-28 22:07+0000\n"
-"PO-Revision-Date: 2010-09-29 01:09+0300\n"
+"POT-Creation-Date: 2010-11-25 15:34+0000\n"
+"PO-Revision-Date: 2010-11-26 00:08+0300\n"
 "Last-Translator: Lucian Adrian Grijincu <lucian.grijincu@gmail.com>\n"
 "Language-Team: Romanian Gnome Team <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -163,16 +164,279 @@ msgstr "Alegeți o imagine."
 msgid "_Select"
 msgstr "_Alege"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Fundal"
+
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:2
+msgid "Change the background"
+msgstr "Schimbă fundalul"
+
+#. Translators: those are keywords for the background control-center panel
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:4
+msgid "Wallpaper;Screen;"
+msgstr "Wallpaper;Screen;Fundal;Ecran;Desktop;Monitor;Imagine;"
+
+#: ../panels/background/background.ui.h:1
+msgid "Center"
+msgstr "Centrat"
+
+#: ../panels/background/background.ui.h:2
+msgid "Fill"
+msgstr "Umple"
+
+#: ../panels/background/background.ui.h:3
+msgid "Scale"
+msgstr "Scalat"
+
+#: ../panels/background/background.ui.h:4
+msgid "Span"
+msgstr "Extinde"
+
+#: ../panels/background/background.ui.h:5
+msgid "Tile"
+msgstr "Mozaic"
+
+#: ../panels/background/background.ui.h:6
+#: ../panels/universal-access/uap.ui.h:93
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../panels/background/bg-colors-source.c:57
+msgid "Butter"
+msgstr "Crem"
+
+#: ../panels/background/bg-colors-source.c:58
+msgid "Orange"
+msgstr "Portocaliu"
+
+#: ../panels/background/bg-colors-source.c:59
+msgid "Chocolate"
+msgstr "Ciocolatiu"
+
+#: ../panels/background/bg-colors-source.c:60
+msgid "Chameleon"
+msgstr "Cameleon"
+
+#: ../panels/background/bg-colors-source.c:61
+msgid "Blue"
+msgstr "Albastru"
+
+#: ../panels/background/bg-colors-source.c:62
+msgid "Plum"
+msgstr "Mov"
+
+#: ../panels/background/bg-colors-source.c:63
+msgid "Red"
+msgstr "Roșu"
+
+#: ../panels/background/bg-colors-source.c:64
+msgid "Aluminium"
+msgstr "Argintiu"
+
+#: ../panels/background/bg-colors-source.c:65
+msgid "Gray"
+msgstr "Gri"
+
+#: ../panels/background/bg-colors-source.c:66
+msgid "Black"
+msgstr "Negru"
+
+#: ../panels/background/cc-background-panel.c:622
+msgid "Wallpapers"
+msgstr "Imagini de fundal"
+
+#: ../panels/background/cc-background-panel.c:630
+msgid "Pictures Folder"
+msgstr "Dosarul cu poze"
+
+#: ../panels/background/cc-background-panel.c:638
+msgid "Colors"
+msgstr "Culori"
+
+#: ../panels/background/cc-background-panel.c:647
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/gnome-wp-info.c:50
+msgid "No Desktop Background"
+msgstr "Fără fundal desktop"
+
+#: ../panels/background/gnome-wp-item.c:294
+msgid "Slide Show"
+msgstr "Prezentare"
+
+#: ../panels/background/gnome-wp-item.c:296
+msgid "Image"
+msgstr "Imagine"
+
+#: ../panels/background/gnome-wp-item.c:302
+msgid "multiple sizes"
+msgstr "dimensiuni multiple"
+
+#. translators: x pixel(s) by y pixel(s)
+#: ../panels/background/gnome-wp-item.c:305
+#, c-format
+msgid "%d %s by %d %s"
+msgstr "%d %s pe %d %s"
+
+#: ../panels/background/gnome-wp-item.c:307
+#: ../panels/background/gnome-wp-item.c:309
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] "pixel"
+msgstr[1] "pixeli"
+msgstr[2] "de pixeli"
+
+#. translators: <b>wallpaper name</b>
+#. * mime type, size
+#. * Folder: /path/to/file
+#.
+#: ../panels/background/gnome-wp-item.c:317
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Dosar: %s"
+
+#. translators: <b>wallpaper name</b>
+#. * Image missing
+#. * Folder: /path/to/file
+#.
+#: ../panels/background/gnome-wp-item.c:329
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s\n"
+"Dosar: %s"
+
+#: ../panels/background/gnome-wp-item.c:333
+msgid "Image missing"
+msgstr "Imaginea lipsește"
+
+#: ../panels/datetime/datetime.ui.h:1
+msgid "12 hour format"
+msgstr "format de 12 ore"
+
+#: ../panels/datetime/datetime.ui.h:2
+msgid "16"
+msgstr "16"
+
+#: ../panels/datetime/datetime.ui.h:3
+msgid "2010"
+msgstr "2010"
+
+#: ../panels/datetime/datetime.ui.h:4
+msgid "22"
+msgstr "22"
+
+#: ../panels/datetime/datetime.ui.h:5
+msgid "24 hour format"
+msgstr "format de 24 ore"
+
+#: ../panels/datetime/datetime.ui.h:6
+msgid "45"
+msgstr "45"
+
+#: ../panels/datetime/datetime.ui.h:7
+msgid ":"
+msgstr ":"
+
+#: ../panels/datetime/datetime.ui.h:8
+msgid "April"
+msgstr "aprilie"
+
+#: ../panels/datetime/datetime.ui.h:9
+msgid "August"
+msgstr "august"
+
+#: ../panels/datetime/datetime.ui.h:10
+msgid "City:"
+msgstr "Oraș:"
+
+#: ../panels/datetime/datetime.ui.h:11
+msgid "Day:"
+msgstr "Zi:"
+
+#: ../panels/datetime/datetime.ui.h:12
+msgid "December"
+msgstr "decembrie"
+
+#: ../panels/datetime/datetime.ui.h:13
+msgid "February"
+msgstr "februarie"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "January"
+msgstr "ianuarie"
+
+#: ../panels/datetime/datetime.ui.h:15
+msgid "July"
+msgstr "iulie"
+
+#: ../panels/datetime/datetime.ui.h:16
+msgid "June"
+msgstr "iunie"
+
+#: ../panels/datetime/datetime.ui.h:17
+msgid "March"
+msgstr "martie"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "May"
+msgstr "mai"
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Month:"
+msgstr "Lună:"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "November"
+msgstr "noiembrie"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "October"
+msgstr "octombrie"
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "Region:"
+msgstr "Regiune:"
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "September"
+msgstr "septembrie"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "Set time automatically"
+msgstr "Reglează timpul automat"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "Year:"
+msgstr "An:"
+
+#. Translators: those are keywords for the date and time control-center panel
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+msgid "Clock;Timezone;Location;"
+msgstr "Clock;Timezone;Location;Ceas;Fus orar;Locație;"
+
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
 msgid "Date And Time"
 msgstr "Data și ora"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Date and Time preferences panel"
 msgstr "Panoul de preferințe pentru dată și oră"
 
 #: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
 msgid "Preferred Applications"
 msgstr "Aplicații preferate"
 
@@ -182,33 +446,36 @@ msgstr "Alegeți aplicațiile implicite"
 
 #: ../panels/default-applications/gnome-at-session.desktop.in.in.h:1
 msgid "Start the preferred visual assistive technology"
-msgstr "Pornește tehnologia asistativă vizuală preferată"
+msgstr "Pornește tehnologia de asistență vizuală preferată"
 
 #: ../panels/default-applications/gnome-at-session.desktop.in.in.h:2
 msgid "Visual Assistance"
 msgstr "Asistență vizuală"
 
-#: ../panels/default-applications/gnome-da-capplet.c:99
-#: ../panels/default-applications/gnome-da-capplet.c:363
-#: ../panels/default-applications/gnome-da-capplet.c:384
+#: ../panels/default-applications/gnome-da-capplet.c:83
 #, c-format
-msgid "Error saving configuration: %s"
-msgstr "Eroare la salvarea configurației: %s"
+msgid "Error setting default browser: %s"
+msgstr "Eroare la definirea navigatorului de internet implicit: %s"
 
-#: ../panels/default-applications/gnome-da-capplet.c:692
+#: ../panels/default-applications/gnome-da-capplet.c:106
+#, c-format
+msgid "Error setting default mailer: %s"
+msgstr "Eroare la definirea clientului de email implicit: %s"
+
+#: ../panels/default-applications/gnome-da-capplet.c:321
+#: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
 msgstr "Personalizat"
 
-#: ../panels/default-applications/gnome-da-capplet.c:723
+#: ../panels/default-applications/gnome-da-capplet.c:352
 msgid "Could not load the main interface"
 msgstr "Nu s-a putut încărca interfața principală"
 
-#: ../panels/default-applications/gnome-da-capplet.c:725
+#: ../panels/default-applications/gnome-da-capplet.c:354
 msgid "Please make sure that the applet is properly installed"
 msgstr "Asigurați-vă că această miniaplicație este corect instalată."
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:1
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:1
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Accessibility"
 msgstr "Accesibilitate"
@@ -218,11 +485,8 @@ msgstr "Accesibilitate"
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "Toate aparițiile %s vor fi înlocuite cu legătura propriu-zisă"
 
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:4
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "C_ommand:"
 msgstr "C_omandă:"
 
@@ -235,284 +499,147 @@ msgid "E_xecute flag:"
 msgstr "Indicator e_xec:"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
-msgid "Image Viewer"
-msgstr "Vizualizator de imagini"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Instant Messenger"
 msgstr "Mesagerie instant"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Internet"
 msgstr "Internet"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
 msgid "Mail Reader"
 msgstr "Client de email"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
 msgid "Mobility"
 msgstr "Mobilitate"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
-msgid "Multimedia"
-msgstr "Multimedia"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
-msgid "Multimedia Player"
-msgstr "Player multimedia"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
-msgid "Open link in new _tab"
-msgstr "Deschide legăturile web în _taburi noi"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
-msgid "Open link in new _window"
-msgstr "Deschide legăturile web în _ferestre noi"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
-msgid "Open link with web browser _default"
-msgstr ""
-"_Deschide legăturile web folosind configurările navigatorului web implicit"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Run at st_art"
 msgstr "Pornește la st_art"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
 msgid "Run in t_erminal"
 msgstr "Pornește în t_erminal"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:20
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
 msgid "System"
 msgstr "Sistem"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:21
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
 msgid "Terminal Emulator"
 msgstr "Emulator de terminal"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:22
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
 msgid "Text Editor"
 msgstr "Editor de text"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:23
-msgid "Video Player"
-msgstr "Program de redare video"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:24
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
 msgid "Visual"
 msgstr "Vizual"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:25
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Web Browser"
 msgstr "Navigator de Internet"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:26
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
 msgid "_Run at start"
 msgstr "Po_rnește la start"
 
 #: ../panels/default-applications/gnome-default-applications.xml.in.h:1
-msgid "Balsa"
-msgstr "Balsa"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Banshee Music Player"
 msgstr "Player muzică Banshee"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
-msgid "Claws Mail"
-msgstr "Claws Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
-msgid "Debian Sensible Browser"
-msgstr "Navigatorul web implicit din Debian"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Debian Terminal Emulator"
 msgstr "Emulator de terminal Debian"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
-msgid "Encompass"
-msgstr "Encompass"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
-msgid "Epiphany Web Browser"
-msgstr "Navigator web Epiphany"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
-msgid "Evolution Mail Reader"
-msgstr "Client e-mail Evolution"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
-msgid "Firebird"
-msgstr "Firebird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
-msgid "Firefox"
-msgstr "Firefox"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
 msgid "GNOME Magnifier without Screen Reader"
 msgstr "Lupa GNOME fără cititor de ecran"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
 msgid "GNOME OnScreen Keyboard"
 msgstr "Tastatură pe ecran GNOME"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
 msgid "GNOME Terminal"
 msgstr "Terminal GNOME"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
-msgid "Galeon"
-msgstr "Galeon"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Gnopernicus"
 msgstr "Gnopernicus"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Gnopernicus with Magnifier"
 msgstr "Gnopernicus cu lupă"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
-msgid "Iceape"
-msgstr "Iceape"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
-msgid "Iceape Mail"
-msgstr "Iceape Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
-msgid "Icedove"
-msgstr "Icedove"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
-msgid "Iceweasel"
-msgstr "Iceweasel"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
 msgid "KDE Magnifier without Screen Reader"
 msgstr "Lupa KDE fără Cititor de ecran"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
-msgid "KMail"
-msgstr "KMail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:25
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:26
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Konsole"
 msgstr "Konsole"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:27
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Linux Screen Reader"
 msgstr "Cititor de ecran Linux"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:28
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
 msgid "Linux Screen Reader with Magnifier"
 msgstr "Cititor de ecran Linux cu lupă"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:29
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Listen"
 msgstr "Ascultă"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:30
-msgid "Midori"
-msgstr "Midori"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:31
-msgid "Mozilla"
-msgstr "Mozilla"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:32
-msgid "Mozilla 1.6"
-msgstr "Mozilla 1.6"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:33
-msgid "Mozilla Mail"
-msgstr "Mozilla Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:34
-msgid "Mozilla Thunderbird"
-msgstr "Mozilla Thunderbird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:35
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Muine Music Player"
 msgstr "Player muzică Muine"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:36
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:37
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:38
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:39
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Orca"
 msgstr "Orca"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Orca with Magnifier"
 msgstr "Orca cu lupă"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
 msgid "Rhythmbox Music Player"
 msgstr "Player muzică Rhythmbox"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
-msgid "SeaMonkey"
-msgstr "SeaMonkey"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
-msgid "SeaMonkey Mail"
-msgstr "SeaMonkey Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
 msgid "Standard XTerminal"
 msgstr "Terminal X standard"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
-msgid "Sylpheed"
-msgstr "Sylpheed"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Terminator"
 msgstr "Terminator"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
-msgid "Thunderbird"
-msgstr "Thunderbird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
 msgid "Totem Movie Player"
 msgstr "Player multimedia Totem"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
 msgid "aterm"
 msgstr "aterm"
 
@@ -521,217 +648,101 @@ msgid "<i>Note: may limit resolution options</i>"
 msgstr "<i>Notă: poate limita opțiunile de rezoluție</i>"
 
 #: ../panels/display/display-capplet.ui.h:2
-msgid "Include _panel"
-msgstr "Include _panou"
-
-#: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:323
+#: ../panels/display/xrandr-capplet.c:317
 msgid "Left"
 msgstr "Stânga"
 
-#: ../panels/display/display-capplet.ui.h:4
-msgid "Make Default"
-msgstr "Setează ca implicit"
-
-#: ../panels/display/display-capplet.ui.h:5
-#: ../panels/display/xrandr-capplet.c:527
+#: ../panels/display/display-capplet.ui.h:3
+#: ../panels/display/xrandr-capplet.c:469
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../panels/display/display-capplet.ui.h:6
-#: ../panels/display/xrandr-capplet.c:322
-#: ../panels/display/xrandr-capplet.c:361
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/xrandr-capplet.c:316
+#: ../panels/display/xrandr-capplet.c:355
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Normal"
 msgstr "Normal"
 
-#: ../panels/display/display-capplet.ui.h:7
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Off"
 msgstr "Oprit"
 
-#: ../panels/display/display-capplet.ui.h:8
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/display/display-capplet.ui.h:6
+#: ../panels/universal-access/uap.ui.h:60
 msgid "On"
 msgstr "Pornit"
 
-#: ../panels/display/display-capplet.ui.h:9
-msgid "Panel icon"
-msgstr "Iconiță panou"
-
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:7
 msgid "R_otation:"
 msgstr "R_otire:"
 
-#: ../panels/display/display-capplet.ui.h:11
-msgid "Re_fresh rate:"
-msgstr "_Frecvență de reîmprospătare:"
-
-#: ../panels/display/display-capplet.ui.h:12
-#: ../panels/display/xrandr-capplet.c:324
+#: ../panels/display/display-capplet.ui.h:8
+#: ../panels/display/xrandr-capplet.c:318
 msgid "Right"
 msgstr "Dreapta"
 
-#: ../panels/display/display-capplet.ui.h:13
-msgid "Sa_me image in all monitors"
-msgstr "Aceeași i_magine pe toate monitoarele"
-
-#: ../panels/display/display-capplet.ui.h:14
+#: ../panels/display/display-capplet.ui.h:9
 msgid "Upside-down"
 msgstr "Inversat"
 
-#: ../panels/display/display-capplet.ui.h:15
+#: ../panels/display/display-capplet.ui.h:10
 msgid "_Detect monitors"
 msgstr "_Detectează monitoarele"
 
-#: ../panels/display/display-capplet.ui.h:16
+#: ../panels/display/display-capplet.ui.h:11
+msgid "_Mirror Screens"
+msgstr "O_glindire ecrane"
+
+#: ../panels/display/display-capplet.ui.h:12
 msgid "_Resolution:"
 msgstr "_Rezoluție:"
 
-#: ../panels/display/display-capplet.ui.h:17
-msgid "_Show monitors in panel"
-msgstr "A_rată monitoarele în panou"
-
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
-msgid "Change resolution and position of monitors"
-msgstr "Schimbă rezoluția și poziția monitoarelor"
+msgid "Change resolution and position of monitors and projectors"
+msgstr "Schimbă rezoluția și poziția monitoarelor și a proiectoarelor"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-msgid "Monitors"
-msgstr "Monitoare"
+msgid "Displays"
+msgstr "Afișaje"
 
-#: ../panels/display/gnome-display-properties-install-systemwide.c:44
-#, c-format
-msgid ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
+#. Translators: those are keywords for the display control-center panel
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:4
+msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr ""
-"Utilizare: %s FIȘIER_SURSĂ NUME_DESTINAȚIE\n"
-"\n"
-"Acest program instalează un profil RANDR pentru configurații cu mai multe\n"
-"monitoare într-o locație de sistem. Profilul rezultant va fi utilizat când\n"
-"modulul de extensie RANDR este executat în gnome-settings-daemon.\n"
-"\n"
-"FIȘIER_SURSĂ - o cale absolută, de obicei /home/numeutiizator/.config/"
-"monitors.xml\n"
-"\n"
-"NUME_DESTINAȚIE - nume relativ al fișierului instalat.  Acesta va fi pus în\n"
-"            dosarul global al configurărilor RANDR, rezultatul va fi de "
-"obicei %s/NUME_DESTINAȚIE\n"
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Panou;Proiector;Ecran;"
+"Rezoluție;Reîmprospătare;"
 
-#. Translators: only able to install RANDR profiles as root
-#: ../panels/display/gnome-display-properties-install-systemwide.c:151
-msgid "This program can only be used by the root user"
-msgstr "Acest program poate fi utilizat doar de utilizatorul root"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:168
-msgid "The source filename must be absolute"
-msgstr "Numele fișierului sursă trebuie să fie absolut"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:179
-#, c-format
-msgid "Could not open %s: %s\n"
-msgstr "Nu s-a putut deschide %s: %s\n"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:188
-#, c-format
-msgid "Could not get information for %s: %s\n"
-msgstr "Nu s-au putut obține informații despre %s: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:195
-#, c-format
-msgid "%s must be a regular file\n"
-msgstr "%s trebuie să fie un fișier obișnuit\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:204
-msgid "This program must only be run through pkexec(1)"
-msgstr "Acest program trebuie rulat prin pkexec(1)"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:209
-msgid "PKEXEC_UID must be set to an integer value"
-msgstr "PKEXEC_UID trebuie să fie definit la o valoare întreagă"
-
-#. Translators: we are complaining that a file must be really owned by the user who called this program
-#: ../panels/display/gnome-display-properties-install-systemwide.c:215
-#, c-format
-msgid "%s must be owned by you\n"
-msgstr "%s trebuie să fie în posesia dumneavoastră\n"
-
-#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
-#: ../panels/display/gnome-display-properties-install-systemwide.c:223
-#, c-format
-msgid "%s must not have any directory components\n"
-msgstr "%s trebuie să nu aibă nicio componentă de dosar\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:231
-#, c-format
-msgid "%s must be a directory\n"
-msgstr "%s trebuie să fie un dosar\n"
-
-#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:242
-#, c-format
-msgid "Could not open %s/%s: %s\n"
-msgstr "Nu s-a putut deschide %s/%s: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:262
-#, c-format
-msgid "Could not rename %s to %s: %s\n"
-msgstr "Nu s-a putut redenumi %s la %s: %s\n"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:1
-msgid ""
-"Authentication is required to install multi-monitor settings for all users"
-msgstr ""
-"Autentificarea este necesară pentru a instala configurări multi-monitor "
-"pentru toți utilizatorii"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:2
-msgid "Install multi-monitor settings for the whole system"
-msgstr "Instalează configurări multi-monitor pentru tot sistemul"
-
-#: ../panels/display/xrandr-capplet.c:325
+#: ../panels/display/xrandr-capplet.c:319
 msgid "Upside Down"
 msgstr "Răsturnat"
-
-#: ../panels/display/xrandr-capplet.c:367
-#, c-format
-msgid "%d Hz"
-msgstr "%d Hz"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:516
-#: ../panels/display/xrandr-capplet.c:1662
+#: ../panels/display/xrandr-capplet.c:458
+#: ../panels/display/xrandr-capplet.c:1719
 msgid "Mirror Screens"
 msgstr "Oglindire ecrane"
 
-#: ../panels/display/xrandr-capplet.c:518
+#: ../panels/display/xrandr-capplet.c:574
 #, c-format
-msgid "Monitor: %s"
-msgstr "Monitor: %s"
+msgid "%d x %d (%s)"
+msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:596
+#: ../panels/display/xrandr-capplet.c:576
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1518
+#: ../panels/display/xrandr-capplet.c:1482
+msgid "Drag to change primary display."
+msgstr "Trage pentru a schimba afișajul principal."
+
+#: ../panels/display/xrandr-capplet.c:1540
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -739,93 +750,93 @@ msgstr ""
 "Alegeți un monitor pentru a-i schimba proprietățile; trageți-l pentru a-l "
 "rearanja."
 
-#: ../panels/display/xrandr-capplet.c:2083
+#: ../panels/display/xrandr-capplet.c:1945
+msgid "%a %R"
+msgstr "%a %R"
+
+#: ../panels/display/xrandr-capplet.c:1947
+msgid "%a %l:%M %p"
+msgstr "%a %l:%M %p"
+
+#: ../panels/display/xrandr-capplet.c:2232
 msgid "Could not save the monitor configuration"
 msgstr "Nu s-a putut salva configurația monitorului"
 
-#: ../panels/display/xrandr-capplet.c:2106
+#: ../panels/display/xrandr-capplet.c:2255
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Nu s-a putut obține magistrala sesiunii în timp ce se aplica configurația "
 "monitoarelor"
 
-#: ../panels/display/xrandr-capplet.c:2151
+#: ../panels/display/xrandr-capplet.c:2300
 msgid "Could not detect displays"
 msgstr "Nu s-au putut detecta monitoarele"
 
-#: ../panels/display/xrandr-capplet.c:2326
-msgid "The monitor configuration has been saved"
-msgstr "Configurația monitorului a fost salvată"
-
-#: ../panels/display/xrandr-capplet.c:2328
-msgid "This configuration will be used the next time someone logs in."
-msgstr ""
-"Această configurație va fi utilizată data viitoare când un utilizator se "
-"autentifică."
-
-#: ../panels/display/xrandr-capplet.c:2337
-msgid "Could not set the default configuration for monitors"
-msgstr "Nu s-a putut defini configurația implicită a monitoarelor"
-
-#: ../panels/display/xrandr-capplet.c:2437
+#: ../panels/display/xrandr-capplet.c:2507
 msgid "Could not get screen information"
 msgstr "Nu s-au putut obține informații despre ecran"
 
-#: ../panels/keybindings/00-multimedia-key.xml.in.h:1
+#: ../panels/keyboard/00-multimedia-key.xml.in.h:1
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Sound"
 msgstr "Sunet"
 
-#: ../panels/keybindings/01-desktop-key.xml.in.h:1
+#: ../panels/keyboard/01-desktop-key.xml.in.h:1
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:21
+#: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
 msgstr "Scurtătură nouă..."
 
-#: ../panels/keybindings/eggcellrendererkeys.c:164
-#: ../panels/keybindings/eggcellrendererkeys.c:165
+#: ../panels/keyboard/eggcellrendererkeys.c:164
+#: ../panels/keyboard/eggcellrendererkeys.c:165
 msgid "Accelerator key"
 msgstr "Cheie de accelerare"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:174
-#: ../panels/keybindings/eggcellrendererkeys.c:175
+#: ../panels/keyboard/eggcellrendererkeys.c:174
+#: ../panels/keyboard/eggcellrendererkeys.c:175
 msgid "Accelerator modifiers"
 msgstr "Acceleratori"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:183
-#: ../panels/keybindings/eggcellrendererkeys.c:184
+#: ../panels/keyboard/eggcellrendererkeys.c:183
+#: ../panels/keyboard/eggcellrendererkeys.c:184
 msgid "Accelerator keycode"
 msgstr "Codul cheii de accelerare"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:194
+#: ../panels/keyboard/eggcellrendererkeys.c:194
 msgid "Accel Mode"
 msgstr "Mod accelerator"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:195
+#: ../panels/keyboard/eggcellrendererkeys.c:195
 msgid "The type of accelerator."
 msgstr "Tipul de accelerator."
 
-#: ../panels/keybindings/eggcellrendererkeys.c:243
-#: ../panels/keybindings/gnome-keybinding-properties.c:101
-#: ../typing-break/drwright.c:498
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/gnome-keyboard-panel.c:102
+#: ../panels/sound/gvc-mixer-control.c:1091
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+#: ../panels/user-accounts/um-login-options.c:355
 msgid "Disabled"
 msgstr "Dezactivat"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:182
+#: ../panels/keyboard/gnome-keyboard-panel.c:183
 msgid "<Unknown Action>"
 msgstr "<Acțiune necunoscută>"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:932
-#: ../panels/keybindings/gnome-keybinding-properties.c:1563
+#: ../panels/keyboard/gnome-keyboard-panel.c:933
+#: ../panels/keyboard/gnome-keyboard-panel.c:1564
 msgid "Custom Shortcuts"
 msgstr "Scurtături personalizate"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1074
+#: ../panels/keyboard/gnome-keyboard-panel.c:1075
 msgid "Error saving the new shortcut"
 msgstr "Eroare la salvarea noii combinații de taste"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1153
+#: ../panels/keyboard/gnome-keyboard-panel.c:1154
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -837,7 +848,7 @@ msgstr ""
 "Încercați în combinație cu una din tastele Control, Alt sau Shift în același "
 "timp."
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1183
+#: ../panels/keyboard/gnome-keyboard-panel.c:1184
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -846,45 +857,126 @@ msgstr ""
 "Scurtătura „%s” este deja folosită pentru\n"
 "„%s”"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1189
+#: ../panels/keyboard/gnome-keyboard-panel.c:1190
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Dacă reasociați scurtătura la „%s”, scurtătura „%s” va fi dezactivată."
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1197
+#: ../panels/keyboard/gnome-keyboard-panel.c:1198
 msgid "_Reassign"
 msgstr "_Reasociază"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1317
+#: ../panels/keyboard/gnome-keyboard-panel.c:1318
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Eroare în timpul dezactivării acceleratorului în baza de date a "
 "configurării: %s"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1518
+#: ../panels/keyboard/gnome-keyboard-panel.c:1519
 msgid "Too many custom shortcuts"
 msgstr "Prea multe combinații de taste personalizate"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1850
+#: ../panels/keyboard/gnome-keyboard-panel.c:1881
 msgid "Action"
 msgstr "Acțiune"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1872
+#: ../panels/keyboard/gnome-keyboard-panel.c:1903
 msgid "Shortcut"
 msgstr "Scurtătură"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:2
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
+msgid "Change keyboard settings"
+msgstr "Schimbă configurările tastaturii"
+
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+msgid "Keyboard"
+msgstr "Tastatură"
+
+#. Translators: those are keywords for the keyboard control-center panel
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
+msgid "Shortcut;Repeat;Blink;"
+msgstr "Shortcut;Repeat;Blink;Scurtătură;Repetare;Clipire;Licărire;"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Cursor Blinking"
+msgstr "Cursor clipitor"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Cursor _blinks in text fields"
+msgstr "Cursorul clipește într-un câm_p text"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/universal-access/uap.ui.h:28
+msgid "Cursor blinks speed"
+msgstr "Viteză de clipire a cursorului"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
 msgid "Custom Shortcut"
 msgstr "Scurtătură personalizată"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:3
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:2
-msgid "Keyboard Shortcuts"
-msgstr "Scurtături tastatură"
+#. fast acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+msgid "Fast"
+msgstr "Rapid"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+msgid "General"
+msgstr "Generale"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
+msgid "Key presses _repeat when key is held down"
+msgstr "Tastele apăsate se _repetă până la eliberare"
+
+#. long delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Long"
+msgstr "Lungă"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+msgid "Repeat Keys"
+msgstr "Repetare taste"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+msgid "Repeat keys speed"
+msgstr "Viteză repetare taste"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+msgid "S_peed:"
+msgstr "Vite_ză:"
+
+#. short delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Short"
+msgstr "Scurtă"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+msgid "Shortcuts"
+msgstr "Scurtături"
+
+#. slow acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+msgid "Slow"
+msgstr "Încet"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new key "
 "combination, or press backspace to clear."
@@ -893,214 +985,271 @@ msgstr ""
 "tastați o nouă combinație de taste, sau apăsați „backspace” pentru a șterge "
 "combinația de taste."
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:49
+msgid "_Delay:"
+msgstr "Î_ntârziere:"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid "_Name:"
 msgstr "_Nume:"
 
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
-msgid "Assign shortcut keys to commands"
-msgstr "Asociați combinații comenzilor des utilizate"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/region/gnome-region-panel.ui.h:28
+msgid "_Speed:"
+msgstr "_Viteză:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
-msgid "Beep when _accessibility features are turned on or off"
-msgstr "Sună când facilitățile pentru _accesibilitate sunt pornite sau oprite"
+#: ../panels/media/cc-media-panel.c:513
+msgid "No applications found"
+msgstr "Nu au fost găsite aplicații"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
-msgid "Beep when a _modifier key is pressed"
-msgstr "Sună când o tastă _modificatoare a fost apăsată"
+#: ../panels/media/cc-media-panel.c:525
+msgid "Ask what to do"
+msgstr "Întreabă-mă ce să fac"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
-msgid "Beep when a _toggle key is pressed"
-msgstr "Sună când o _tastă comutațională a fost apăsată"
+#: ../panels/media/cc-media-panel.c:537
+msgid "Do Nothing"
+msgstr "Nu fă nimic"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
-msgid "Beep when a key is pr_essed"
-msgstr "Sună când o tastă _este apăsată"
+#: ../panels/media/cc-media-panel.c:549
+msgid "Open Folder"
+msgstr "Deschide dosarul"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
-msgid "Beep when a key is reje_cted"
-msgstr "Sună _când o tastă a fost respinsă"
+#: ../panels/media/cc-media-panel.c:575
+#, c-format
+msgid "Open %s"
+msgstr "Deschide %s"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
-msgid "Beep when key is _accepted"
-msgstr "Sună când o tastă a fost _acceptată"
+#: ../panels/media/cc-media-panel.c:608
+msgid "Open with other Application..."
+msgstr "Deschide cu altă aplicație..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
-msgid "Beep when key is _rejected"
-msgstr "Sună când tastă este _respinsă"
+#: ../panels/media/nautilus-open-with-dialog.c:160
+msgid "Could not run application"
+msgstr "Aplicația nu a putut fi rulată"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
-#: ../panels/universal-access/uap.ui.h:17
-msgid "Bounce Keys"
-msgstr "Taste fără repetiție"
+#: ../panels/media/nautilus-open-with-dialog.c:172
+#, c-format
+msgid "Could not find '%s'"
+msgstr "Nu s-a găsit „%s”"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
-msgid "Flash _window titlebar"
-msgstr "Licărește titlul _ferestrei"
+#: ../panels/media/nautilus-open-with-dialog.c:175
+msgid "Could not find application"
+msgstr "Aplicația nu a fost găsită"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
-msgid "Flash entire _screen"
-msgstr "Licărește tot _ecranul"
+#: ../panels/media/nautilus-open-with-dialog.c:250
+#, c-format
+msgid "Could not add application to the application database: %s"
+msgstr "Aplicația nu a putut fi adăugată în baza de date: %s"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgid "General"
-msgstr "Generale"
+#: ../panels/media/nautilus-open-with-dialog.c:251
+msgid "Could not add application"
+msgstr "Aplicația nu a putut fi adăugată"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
-msgid "Keyboard Accessibility Audio Feedback"
-msgstr "Reacție audio pentru accesibilitatea tastaturii"
+#: ../panels/media/nautilus-open-with-dialog.c:289
+#, c-format
+msgid "Could not set application as the default: %s"
+msgstr "Nu s-a putut defini ca aplicație implicită: %s"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
-msgid "Show _visual feedback for the alert sound"
-msgstr "Afișează reacții _vizuale pentru alertele de sunet"
+#: ../panels/media/nautilus-open-with-dialog.c:290
+msgid "Could not set as default application"
+msgstr "Nu s-a putut defini ca aplicație implicită"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
-#: ../panels/universal-access/uap.ui.h:76
-msgid "Slow Keys"
-msgstr "Taste încete"
+#: ../panels/media/nautilus-open-with-dialog.c:427
+msgid "Select an Application"
+msgstr "Alege o aplicație"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Sticky Keys"
-msgstr "Taste lipicioase"
+#: ../panels/media/nautilus-open-with-dialog.c:786
+msgid "Open With"
+msgstr "Deschide cu"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
-msgid "Visual cues for sounds"
-msgstr "Indicații vizuale pentru sunete"
+#: ../panels/media/nautilus-open-with-dialog.c:822
+msgid "Select an application to view its description."
+msgstr "Alegeți o aplicație pentru a-i vedea descrierea."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
-msgid "All_ow postponing of breaks"
-msgstr "Pe_rmite amânarea pauzelor de lucru"
+#: ../panels/media/nautilus-open-with-dialog.c:847
+msgid "_Use a custom command"
+msgstr "Folosește o comandă partic_ularizată"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
-msgid "Audio _Feedback..."
-msgstr "_Reacție audio..."
+#: ../panels/media/nautilus-open-with-dialog.c:864
+msgid "_Browse..."
+msgstr "_Navighează..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
-msgid "Check if breaks are allowed to be postponed"
-msgstr "Bifați pentru a permite amânările pauzelor de lucru"
+#: ../panels/media/nautilus-open-with-dialog.c:900
+msgid "_Open"
+msgstr "_Deschide"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
-msgid "Cursor Blinking"
-msgstr "Cursor clipitor"
+#. first %s is a filename and second %s is a file extension
+#: ../panels/media/nautilus-open-with-dialog.c:980
+#, c-format
+msgid "Open %s and other %s document with:"
+msgstr "Deschide %s și alte documente de tip %s cu:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
-msgid "Cursor _blinks in text fields"
-msgstr "Cursorul clipește într-un câm_p text"
+#. the %s here is a file name
+#. %s is a filename
+#: ../panels/media/nautilus-open-with-dialog.c:984
+#: ../panels/media/nautilus-open-with-dialog.c:1015
+#, c-format
+msgid "Open %s with:"
+msgstr "Deschide %s cu:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Cursor blinks speed"
-msgstr "Viteză de clipire a cursorului"
+#: ../panels/media/nautilus-open-with-dialog.c:985
+#, c-format
+msgid "_Remember this application for %s documents"
+msgstr "Ține minte această aplicație pent_ru documente %s"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#: ../panels/universal-access/uap.ui.h:30
-msgid "D_elay:"
-msgstr "Întârzi_ere:"
+#. Only in add mode - the %s here is a file extension
+#: ../panels/media/nautilus-open-with-dialog.c:994
+#, c-format
+msgid "Open all %s documents with:"
+msgstr "Deschide toate documentele de tip %s cu:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
-msgid "Disa_ble sticky keys if two keys are pressed together"
+#: ../panels/media/nautilus-open-with-dialog.c:1003
+#: ../panels/region/gnome-region-panel-xkb.c:70
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#. First %s is a filename, second is a description
+#. * of the type, eg "plain text document"
+#: ../panels/media/nautilus-open-with-dialog.c:1011
+#, c-format
+msgid "Open %s and other \"%s\" files with:"
+msgstr "Deschide %s și alte fișiere de tip „%s” cu:"
+
+#. %s is a file type description
+#: ../panels/media/nautilus-open-with-dialog.c:1017
+#, c-format
+msgid "_Remember this application for \"%s\" files"
+msgstr "Ține minte această aplicație pent_ru fișierele de tip „%s”"
+
+#. Only in add mode
+#: ../panels/media/nautilus-open-with-dialog.c:1026
+#, c-format
+msgid "Open all \"%s\" files with:"
+msgstr "Deschide toate fișierele de tip „%s” cu:"
+
+#: ../panels/media/nautilus-open-with-dialog.c:1037
+msgid "_Add"
+msgstr "_Adaugă"
+
+#: ../panels/media/nautilus-open-with-dialog.c:1038
+msgid "Add Application"
+msgstr "Adaugă aplicație"
+
+#: ../panels/media/gnome-media-properties.ui.h:1
+msgid "Acti_on:"
+msgstr "Acți_une:"
+
+#: ../panels/media/gnome-media-properties.ui.h:2
+#| msgid "CD _Audio:"
+msgid "CD _audio:"
+msgstr "CD _audio:"
+
+#: ../panels/media/gnome-media-properties.ui.h:3
+msgid "Media and Autorun"
+msgstr "Media și rulare automată"
+
+#: ../panels/media/gnome-media-properties.ui.h:4
+msgid "Select how media should be handled"
+msgstr "Alegeți cum ar trebui să se opereze cu fișiere media"
+
+#: ../panels/media/gnome-media-properties.ui.h:5
+msgid "Select how other media should be handled"
+msgstr "Alegeți cum ar trebui să se opereze cu alte fișiere media"
+
+#: ../panels/media/gnome-media-properties.ui.h:6
+#| msgid "_DVD Video:"
+msgid "_DVD video:"
+msgstr "_DVD video:"
+
+#: ../panels/media/gnome-media-properties.ui.h:7
+#| msgid "_Music Player:"
+msgid "_Music player:"
+msgstr "Player de _muzică:"
+
+#: ../panels/media/gnome-media-properties.ui.h:8
+msgid "_Never prompt or start programs on media insertion"
 msgstr ""
-"Dezacti_vează tastele lipicioase dacă două taste au fost apăsate în acelși "
-"timp"
+"_Nu solicita sau porni nicio dată programe la introducerea de medii "
+"detașabile"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
-msgid "Duration of the break when typing is disallowed"
-msgstr "Durata pauzei de lucru în care nu se permite tastarea"
+#: ../panels/media/gnome-media-properties.ui.h:9
+#| msgid "Other Media..."
+msgid "_Other Media..."
+msgstr "A_lte tipuri de media..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
-msgid "Duration of work before forcing a break"
-msgstr "Durata perioadei de lucru înainte de începerea unei pauze"
+#: ../panels/media/gnome-media-properties.ui.h:10
+msgid "_Photos:"
+msgstr "_Fotografii:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgid "Fast"
-msgstr "Rapid"
+#: ../panels/media/gnome-media-properties.ui.h:11
+msgid "_Software:"
+msgstr "_Programe:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
-msgid "Key presses _repeat when key is held down"
-msgstr "Tastele apăsate se _repetă până la eliberare"
+#: ../panels/media/gnome-media-properties.ui.h:12
+msgid "_Type:"
+msgstr "_Tip:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
-msgid "Keyboard Preferences"
-msgstr "Preferințe tastatură"
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
+msgid "Configure media and autorun preferences"
+msgstr "Configurează preferințele pentru medii de stocare și pornire automată"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
+msgid "Removable Media"
+msgstr "Medii detașabile"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Keyboard _model:"
 msgstr "_Model tastatură:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:3
 msgid "Layouts"
 msgstr "Aranjamente"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "List of keyboard layouts selected for usage"
 msgstr "Listă de aranjamente de tastatură alese pentru utilizare"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
-msgid ""
-"Lock screen after a certain duration to help prevent repetitive keyboard use "
-"injuries"
-msgstr ""
-"Blochează ecranul după o anumită perioadă pentru a preveni problemele "
-"provocate de lucrul prelungit la tastatură"
-
-#. long delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-#: ../panels/universal-access/uap.ui.h:53
-msgid "Long"
-msgstr "Lungă"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Mouse Keys"
 msgstr "Taste maus"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Move _Down"
 msgstr "Mută mai _jos"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Move _Up"
 msgstr "Mută mai s_us"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Move the selected keyboard layout down in the list"
 msgstr "Multă aranjamentul de tastatură ales mai jos în listă"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Move the selected keyboard layout up in the list"
 msgstr "Multă aranjamentul de tastatură ales mai sus în listă"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "New windows u_se active window's layout"
 msgstr "Fere_strele noi folosesc aranjamentul ferestrei active"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Print a diagram of the selected keyboard layout"
 msgstr "Tipărește o diagramă a aranjamentului de tastatură ales"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
+msgid "Region and Language"
+msgstr "Regiune și limbă"
+
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Remove the selected keyboard layout from the list"
 msgstr "Elimină aranjamentul de tastatură ales din listă"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
-msgid "Repeat Keys"
-msgstr "Repetare taste"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
-msgid "Repeat keys speed"
-msgstr "Viteză repetare taste"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1108,212 +1257,113 @@ msgstr ""
 "Înlocuiește configurările aranjamentului de tastatură\n"
 "ales cu configurările implicite"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Reset to De_faults"
 msgstr "Resetează la _valorile implicite"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
-msgid "S_peed:"
-msgstr "Vite_ză:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Select a keyboard layout to be added to the list"
 msgstr "Alegeți un aranjament de tastatură de adăugat în listă"
 
-#. short delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Short"
-msgstr "Scurtă"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
-msgid "Slow"
-msgstr "Încet"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
-msgid "Typing Break"
-msgstr "Pauze de lucru"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "View and edit keyboard layout options"
 msgstr "Vizualizați și editați opțiunile de aranjament de tastatură"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Acceleration:"
-msgstr "_Acclerare:"
+msgstr "_Accelerare:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
-msgid "_Accessibility features can be toggled with keyboard shortcuts"
-msgstr ""
-"_Caracteristicile de accesibilitate pot fi comutate cu scurtături de taste"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "_Add..."
 msgstr "_Adaugă..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
-msgid "_Break interval lasts:"
-msgstr "Pau_za de lucru durează:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
-#: ../panels/mouse/gnome-mouse-properties.ui.h:38
-msgid "_Delay:"
-msgstr "Î_ntârziere:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
-msgid "_Ignore fast duplicate keypresses"
-msgstr "_Ignoră apăsările repetate și rapide de taste"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:49
-msgid "_Lock screen to enforce typing break"
-msgstr "B_lochează ecranul pentru a forța pauzele de scriere"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:50
-msgid "_Only accept long keypresses"
-msgstr "Acceptă d_oar apăsările de taste lungi"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:51
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "_Options..."
 msgstr "_Opțiuni..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:52
+#: ../panels/region/gnome-region-panel.ui.h:26
 msgid "_Pointer can be controlled using the keypad"
 msgstr "Cursorul _poate fi controlat folosind tastele numerice"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:53
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "_Separate layout for each window"
 msgstr "Aranjamente _separate pentru fiecare fereastră"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:54
-msgid "_Simulate simultaneous keypresses"
-msgstr "_Simulează apăsări de taste simultane"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:55
-msgid "_Speed:"
-msgstr "_Viteză:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "_Type to test settings:"
 msgstr "_Tastați pentru a testa configurările:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:57
-msgid "_Work interval lasts:"
-msgstr "_Perioada de lucru durează:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:58
-msgid "minutes"
-msgstr "minute"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
 msgid "By _country"
 msgstr "După ț_ară"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
 msgid "By _language"
 msgstr "După _limbă"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "Alegeți un aranjament"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:4
 msgid "Preview:"
 msgstr "Previzualizare:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:5
 msgid "_Country:"
 msgstr "Ța_ră:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:6
 msgid "_Language:"
 msgstr "_Limbă:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:7
 msgid "_Variants:"
 msgstr "_Variante:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:1
 msgid "Choose a Keyboard Model"
 msgstr "Alegeți un model de tastatură"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:2
 msgid "_Models:"
 msgstr "_Modele:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:3
 msgid "_Vendors:"
 msgstr "_Vânzători:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
+#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
 msgstr "Opțiuni aranjament tastatură"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:81
-msgid "Unknown"
-msgstr "Necunoscut"
-
-#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../panels/region/gnome-region-panel-xkblt.c:218
 msgid "Layout"
 msgstr "Aranjament"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:166
+#: ../panels/region/gnome-region-panel-xkbmc.c:163
 msgid "Vendors"
 msgstr "Vânzători"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:232
+#: ../panels/region/gnome-region-panel-xkbmc.c:229
 msgid "Models"
 msgstr "Modele"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:233
-#: ../panels/network/gnome-network-properties.c:582
+#: ../panels/region/gnome-region-panel-xkbot.c:227
+#: ../panels/network/gnome-network-properties.c:554
+#: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "Implicit"
 
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Tastatură"
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:1
+msgid "Change your region and language settings"
+msgstr "Schimbă configurările de regiune și limbă"
 
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-msgid "Set your keyboard preferences"
-msgstr "Schimbați opțiunile de tastare"
-
-#: ../panels/mouse/capplet-stock-icons.c:66
-#, c-format
-msgid "Unable to load stock icon '%s'\n"
-msgstr "Nu s-a putut încărca iconița standard „%s”\n"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:91
-msgid "gesture|Move left"
-msgstr "Mutare stânga"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:96
-msgid "gesture|Move right"
-msgstr "Mutare dreapta"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:101
-msgid "gesture|Move up"
-msgstr "Mutare sus"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:106
-msgid "gesture|Move down"
-msgstr "Mutare jos"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:111
-msgid "gesture|Disabled"
-msgstr "Dezactivat"
+#. Translators: those are keywords for the region control-center panel
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:3
+msgid "Language;Layout;"
+msgstr "Language;Layout;Limbă;Aranjamente;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Choose type of click _beforehand"
@@ -1323,178 +1373,189 @@ msgstr "Alegeți tipul de clic în prealabi_l"
 msgid "Choose type of click with mo_use gestures"
 msgstr "Alegeți tipul de clic cu gesturi de ma_us"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/universal-access/uap.ui.h:29
+msgid "D_elay:"
+msgstr "Întârzi_ere:"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "D_ouble click:"
 msgstr "D_ublu clic:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "D_rag click:"
 msgstr "Clic t_ragere:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Disable _touchpad while typing"
 msgstr "Dezactivează _touchpadul în timpul tastării"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Double-Click Timeout"
 msgstr "Timp alocat pentru dublu-clic"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "Drag and Drop"
 msgstr "Trage și mută"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Dwell Click"
 msgstr "Clic staționar"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Activează _clicurile cu touchpadul"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Enable h_orizontal scrolling"
 msgstr "Activează derularea _orizontală"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-#: ../panels/universal-access/uap.ui.h:40
+#. high sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/universal-access/uap.ui.h:39
 msgid "High"
 msgstr "Ridicată"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Large"
 msgstr "Mare"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Locate Pointer"
 msgstr "Localizează indicatorul"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-#: ../panels/universal-access/uap.ui.h:54
+#. low sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Low"
 msgstr "Scăzută"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Mouse Orientation"
 msgstr "Orientarea maus"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "Mouse Preferences"
 msgstr "Preferințe maus"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Pointer Speed"
 msgstr "Viteza indicatorului"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Scrolling"
 msgstr "Derulare"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Seco_ndary click:"
 msgstr "Clic secu_ndar:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "Afișează p_oziția indicatorului când tasta Control este apăsată"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "Show click type _window"
 msgstr "Afișea_ză fereastra pentru tipuri de clic"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Simulated Secondary Click"
 msgstr "Click secundar simulat"
 
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Small"
 msgstr "Mică"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
+#: ../panels/mouse/gnome-mouse-properties.ui.h:42
 msgid "Thr_eshold:"
 msgstr "Pra_g:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
-msgid ""
-"To test your double-click settings, try to double-click on the light bulb."
+#: ../panels/mouse/gnome-mouse-properties.ui.h:43
+msgid "To test your settings, try to double-click on the face."
 msgstr ""
-"Pentru a testa configurațiile, încercați să efectuați un dublu-clic pe bec."
+"Pentru a testa configurațiile, încercați să efectuați un dublu-clic pe față."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
+#: ../panels/mouse/gnome-mouse-properties.ui.h:44
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/mouse/gnome-mouse-properties.ui.h:45
 msgid "Two-_finger scrolling"
 msgstr "Derulare cu două dege_te"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:47
 msgid "You can also use the Dwell Click panel applet to choose the click type."
 msgstr ""
 "Puteți de asemenea să utilizați miniaplicația pentru Clic staționar pentru a "
 "alege tipul clicului."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:50
 msgid "_Disabled"
 msgstr "_Dezactivat"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:40
+#: ../panels/mouse/gnome-mouse-properties.ui.h:51
 msgid "_Edge scrolling"
 msgstr "D_erulare la margine"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/mouse/gnome-mouse-properties.ui.h:52
 msgid "_Initiate click when stopping pointer movement"
 msgstr "_Inițiază clic când oprește mișcarea indicatorului"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:42
+#: ../panels/mouse/gnome-mouse-properties.ui.h:53
 msgid "_Left-handed"
 msgstr "_Stângaci"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:43
-#: ../panels/universal-access/uap.ui.h:98
+#: ../panels/mouse/gnome-mouse-properties.ui.h:54
+#: ../panels/universal-access/uap.ui.h:96
 msgid "_Motion threshold:"
 msgstr "Prag de _mișcare:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:44
+#: ../panels/mouse/gnome-mouse-properties.ui.h:55
 msgid "_Right-handed"
 msgstr "D_reptaci"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:45
+#: ../panels/mouse/gnome-mouse-properties.ui.h:56
 msgid "_Sensitivity:"
 msgstr "_Sensibilitate:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:46
+#: ../panels/mouse/gnome-mouse-properties.ui.h:57
 msgid "_Single click:"
 msgstr "Clic _simplu:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:47
+#: ../panels/mouse/gnome-mouse-properties.ui.h:58
 msgid "_Timeout:"
 msgstr "_Timp expirare:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:48
+#: ../panels/mouse/gnome-mouse-properties.ui.h:59
 msgid "_Trigger secondary click by holding down the primary button"
-msgstr "_Declanșează clicul secundar în timp ce este menținut butonul primar"
+msgstr "Declanșează clicul secundar în _timp ce este menținut butonul primar"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
-#| msgid "Touchpad"
 msgid "Mouse and Touchpad"
 msgstr "Maus și touchpad"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-#| msgid "Set your mouse preferences"
 msgid "Set your mouse and touchpad preferences"
 msgstr "Definiți preferințele pentru maus și touchpad"
 
-#: ../panels/network/gnome-network-properties.c:700
-#: ../panels/network/gnome-network-properties.c:851
+#. Translators: those are keywords for the mouse and touchpad control-center panel
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;"
+msgstr "Trackpad;Pointer;Click;Tap;Double;Button;Cursor;Clic;Dublu;Buton;"
+
+#: ../panels/network/gnome-network-properties.c:672
 msgid "New Location..."
 msgstr "Locație nouă..."
 
-#: ../panels/network/gnome-network-properties.c:817
+#: ../panels/network/gnome-network-properties.c:789
 msgid "Location already exists"
 msgstr "Locația există deja"
 
@@ -1505,6 +1566,11 @@ msgstr "Proxy rețea"
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
 msgstr "Opțiuni proxy rețea"
+
+#. Translators: those are keywords for the network proxy control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Web;Location;"
+msgstr "Web;Location;Locație;Internet;"
 
 #: ../panels/network/gnome-network-properties.ui.h:1
 msgid "<b>Di_rect internet connection</b>"
@@ -1551,6 +1617,7 @@ msgid "Ignored Hosts"
 msgstr "Excepții"
 
 #: ../panels/network/gnome-network-properties.ui.h:12
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
 msgid "Location:"
 msgstr "Locație:"
 
@@ -1606,11 +1673,405 @@ msgstr "Proxy HTTP_S:"
 msgid "_Use the same proxy for all protocols"
 msgstr "Folosește același proxy pentr_u toate protocoalele"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr "Brightness;Lock;Dim;Blank;Luminozitate;Blocare;Spațiu;Neclar;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "Ecran"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "Configurări de luminozitate și blocare a ecranului"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
+msgid "Power"
+msgstr "Consum"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:2
+msgid "Power management settings"
+msgstr "Configurări administrare consum"
+
+#. Translators: those are keywords for the power control-center panel
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:4
+msgid "Power;Sleep;Suspend;Hibernate;"
+msgstr ""
+"Power;Sleep;Suspend;Hibernate;Consum;Odihnă;Repaus;Suspendare;Hibernare;"
+
+#: ../panels/power/cc-power-panel.c:151
+msgid "Unknown time"
+msgstr "Timp necunoscut"
+
+#: ../panels/power/cc-power-panel.c:157
+#, c-format
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i minut"
+msgstr[1] "%i minute"
+msgstr[2] "%i de minute"
+
+#: ../panels/power/cc-power-panel.c:169
+#, c-format
+msgid "%i hour"
+msgid_plural "%i hours"
+msgstr[0] "%i oră"
+msgstr[1] "%i ore"
+msgstr[2] "%i de ore"
+
+#. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
+#. * Swap order with "%2$s %2$i %1$s %1$i if needed
+#: ../panels/power/cc-power-panel.c:177
+#, c-format
+msgid "%i %s %i %s"
+msgstr "%i %s %i %s"
+
+#: ../panels/power/cc-power-panel.c:178
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "oră"
+msgstr[1] "ore"
+msgstr[2] "de ore"
+
+#: ../panels/power/cc-power-panel.c:179
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minut"
+msgstr[1] "minute"
+msgstr[2] "de minute"
+
+#: ../panels/power/cc-power-panel.c:251
+msgid "Battery charging"
+msgstr "Bateria se încarcă"
+
+#: ../panels/power/cc-power-panel.c:254
+msgid "Battery discharging"
+msgstr "Bateria se descarcă"
+
+#: ../panels/power/cc-power-panel.c:265
+msgid "UPS charging"
+msgstr "UPS-ul se încarcă"
+
+#: ../panels/power/cc-power-panel.c:268
+msgid "UPS discharging"
+msgstr "UPS-ul se descarcă"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:286
+#, c-format
+msgid "%s until charged (%.0lf%%)"
+msgstr "%s până când este încărcat (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:292
+#, c-format
+msgid "%s until empty (%.0lf%%)"
+msgstr "%s până când este descărcat (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a percentage value. Note: this string is only
+#. * used when we don't have a time value
+#: ../panels/power/cc-power-panel.c:300
+#, c-format
+msgid "%.0lf%% charged"
+msgstr "%.0lf%% încărcat"
+
+#: ../panels/sound/applet-main.c:49
+msgid "Enable debugging code"
+msgstr "Activează codul pentru depanare"
+
+#: ../panels/sound/applet-main.c:50
+msgid "Version of this application"
+msgstr "Versiunea acestei aplicații"
+
+#: ../panels/sound/applet-main.c:62
+msgid " — GNOME Volume Control Applet"
+msgstr " — Miniaplicație control volum GNOME"
+
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1921
+msgid "Output"
+msgstr "Ieșire"
+
+#: ../panels/sound/gvc-applet.c:278
+msgid "Sound Output Volume"
+msgstr "Volum ieșire"
+
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1838
+msgid "Input"
+msgstr "Intrare"
+
+#: ../panels/sound/gvc-applet.c:284
+msgid "Microphone Volume"
+msgstr "Volum microfon"
+
+#: ../panels/sound/gvc-balance-bar.c:111
+msgctxt "balance"
+msgid "Left"
+msgstr "Stânga"
+
+#: ../panels/sound/gvc-balance-bar.c:112
+msgctxt "balance"
+msgid "Right"
+msgstr "Dreapta"
+
+#: ../panels/sound/gvc-balance-bar.c:115
+msgctxt "balance"
+msgid "Rear"
+msgstr "Spate"
+
+#: ../panels/sound/gvc-balance-bar.c:116
+msgctxt "balance"
+msgid "Front"
+msgstr "Față"
+
+#: ../panels/sound/gvc-balance-bar.c:119
+msgctxt "balance"
+msgid "Minimum"
+msgstr "Minim"
+
+#: ../panels/sound/gvc-balance-bar.c:120
+msgctxt "balance"
+msgid "Maximum"
+msgstr "Maxim"
+
+#: ../panels/sound/gvc-balance-bar.c:296
+msgid "_Balance:"
+msgstr "Echili_bru:"
+
+#: ../panels/sound/gvc-balance-bar.c:299
+msgid "_Fade:"
+msgstr "Es_tompare:"
+
+#: ../panels/sound/gvc-balance-bar.c:302
+msgid "_Subwoofer:"
+msgstr "_Subwoofer:"
+
+#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
+msgctxt "volume"
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/sound/gvc-channel-bar.c:607
+msgctxt "volume"
+msgid "Unamplified"
+msgstr "Neamplificat"
+
+#: ../panels/sound/gvc-channel-bar.c:901
+msgid "Mute"
+msgstr "Mut"
+
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1629
+msgid "_Profile:"
+msgstr "_Profil:"
+
+#. translators:
+#. * The number of sound outputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1098
+#, c-format
+msgid "%u Output"
+msgid_plural "%u Outputs"
+msgstr[0] "%u ieșire"
+msgstr[1] "%u ieșiri"
+msgstr[2] "%u de ieșiri"
+
+#. translators:
+#. * The number of sound inputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1108
+#, c-format
+msgid "%u Input"
+msgid_plural "%u Inputs"
+msgstr[0] "%u intrare"
+msgstr[1] "%u intrări"
+msgstr[2] "%u de intrări"
+
+#: ../panels/sound/gvc-mixer-control.c:1406
+msgid "System Sounds"
+msgstr "Sunete sistem"
+
+#: ../panels/sound/gvc-mixer-dialog.c:317
+#: ../panels/sound/gvc-mixer-dialog.c:618
+msgid "Co_nnector:"
+msgstr "Co_nector:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:531
+msgid "Peak detect"
+msgstr "Detecție vârf"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1506
+#: ../panels/sound/gvc-mixer-dialog.c:1717
+#: ../panels/sound/gvc-sound-theme-chooser.c:599
+msgid "Name"
+msgstr "Nume"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1524
+msgid "Device"
+msgstr "Dispozitiv"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1572
+#, c-format
+msgid "Speaker Testing for %s"
+msgstr "Test de difuzor pentru %s"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1630
+msgid "Test Speakers"
+msgstr "Testează difuzoarele"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1761
+msgid "_Output volume: "
+msgstr "V_olum de ieșire"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1775
+msgid "Sound Effects"
+msgstr "Efecte sunet"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1782
+msgid "_Alert volume: "
+msgstr "Volum _alertă:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1795
+msgid "Hardware"
+msgstr "Hardware"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1800
+msgid "C_hoose a device to configure:"
+msgstr "Ale_geți un dispozitiv pentru configurare:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1827
+#: ../panels/sound/gvc-mixer-dialog.c:1950
+msgid "Settings for the selected device:"
+msgstr "Configurări pentru dispozitivul selectat:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1845
+msgid "_Input volume: "
+msgstr "Volum _intrare:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1868
+msgid "Input level:"
+msgstr "Nivel intrare:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1894
+msgid "C_hoose a device for sound input:"
+msgstr "Ale_geți un dispozitiv pentru intrare sunet:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1926
+msgid "C_hoose a device for sound output:"
+msgstr "Ale_geți un dispozitiv pentru ieșire sunet:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1961
+msgid "Applications"
+msgstr "Aplicații"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1965
+msgid "No application is currently playing or recording audio."
+msgstr "Nicio aplicație nu redă sau înregistrează sunete acest moment."
+
+#: ../panels/sound/gvc-speaker-test.c:221
+msgid "Stop"
+msgstr "Stop"
+
+#: ../panels/sound/gvc-speaker-test.c:221
+#: ../panels/sound/gvc-speaker-test.c:333
+msgid "Test"
+msgstr "Test"
+
+#: ../panels/sound/gvc-speaker-test.c:229
+msgid "Subwoofer"
+msgstr "Subwoofer"
+
+#: ../panels/sound/gvc-stream-status-icon.c:233
+#, c-format
+msgid "Failed to start Sound Preferences: %s"
+msgstr "Pornirea Preferințelor sunet a eșuat: %s"
+
+#: ../panels/sound/gvc-stream-status-icon.c:256
+msgid "_Mute"
+msgstr "_Mut"
+
+#: ../panels/sound/gvc-stream-status-icon.c:265
+msgid "_Sound Preferences"
+msgstr "Preferințe _sunet"
+
+#: ../panels/sound/gvc-stream-status-icon.c:449
+msgid "Muted"
+msgstr "Muțit"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:189
+msgid "Built-in"
+msgstr "Integrat"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:459
+#: ../panels/sound/gvc-sound-theme-chooser.c:471
+#: ../panels/sound/gvc-sound-theme-chooser.c:483
+msgid "Sound Preferences"
+msgstr "Preferințe sunet"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:462
+#: ../panels/sound/gvc-sound-theme-chooser.c:473
+#: ../panels/sound/gvc-sound-theme-chooser.c:485
+msgid "Testing event sound"
+msgstr "Se testează sunetul evenimentelor"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:590
+msgid "From theme"
+msgstr "Din temă"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:778
+msgid "C_hoose an alert sound:"
+msgstr "Ale_geți un sunet de alertă:"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
+msgid "Show desktop volume control"
+msgstr "Arată controlul volumului pe desktop"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
+msgid "Volume Control"
+msgstr "Control volum"
+
+#. Translators: those are keywords for the sound control-center panel
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
+msgstr ""
+"Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Microfon;Volum;"
+"Estompare;Balans;Căști;"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
+msgid "Change sound volume and sound events"
+msgstr "Schimbă volumul și efectele sonore"
+
+#. Translators: This is the name of an audio file that sounds like the bark of a dog.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
+msgid "Bark"
+msgstr "Lătrat"
+
+#. Translators: This is the name of an audio file that sounds like a water drip.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
+msgid "Drip"
+msgstr "Sursur"
+
+#. Translators: This is the name of an audio file that sounds like tapping glass.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
+msgid "Glass"
+msgstr "Sticlă"
+
+#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
+msgid "Sonar"
+msgstr "Sonar"
+
+#. Translators: those are keywords for the universal access control-center panel
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+msgid "Keyboard;Mouse;a11y;Accessibility;"
+msgstr "Keyboard;Mouse;a11y;Accessibility;Tastatură;Maus;Accesibilitate;"
+
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
 msgstr "Acces universal"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
 msgstr "Preferințe acces universal"
 
@@ -1650,539 +2111,1024 @@ msgid "Acceptance delay:"
 msgstr "Întârziere acceptare:"
 
 #: ../panels/universal-access/uap.ui.h:12
-msgid "Accessibility features can be turned on or off with keyboard shortcuts"
-msgstr ""
-"Caracteristicile de accesibilitate pot fi activate sau dezactivate cu "
-"scurtături de taste"
-
-#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when Caps and Num Lock are used"
 msgstr "Sună când tasta Caps sau tasta Num Lock este apăsată"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a key is"
 msgstr "Sună când o tastă este"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Beep when a key is rejected"
 msgstr "Sună când o tastă a fost respinsă"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Beep when a modifer key is pressed"
 msgstr "Sună când o tastă modificatoare a fost apăsată"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Bounce Keys"
+msgstr "Taste fără repetiție"
+
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Change constrast:"
 msgstr "Modifică contrastul:"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Closed Captioning"
-msgstr ""
+msgstr "Subtitrări pentru persoane cu dizabilități"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Contrast:"
 msgstr "Contrast:"
 
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Control the pointer using the keypad"
+msgstr "Controlează cursorul folosind tastele numerice"
+
 #: ../panels/universal-access/uap.ui.h:22
-msgid "Control the pointer using the keypad."
-msgstr "Controlați cursorul folosind tastele numerice."
+msgid "Control the pointer using the video camera."
+msgstr "Controlează cursorul folosind camera video."
 
 #: ../panels/universal-access/uap.ui.h:23
-msgid "Control the pointer using the video camera."
-msgstr "Controlați cursorul folosind camera video."
-
-#: ../panels/universal-access/uap.ui.h:24
 msgid "Ctrl+Alt+-"
 msgstr "Ctrl+Alt+-"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Ctrl+Alt+0"
 msgstr "Ctrl+Alt+0"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Ctrl+Alt+4"
 msgstr "Ctrl+Alt+4"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Ctrl+Alt+8"
 msgstr "Ctrl+Alt+8"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Ctrl+Alt+="
 msgstr "Ctrl+Alt+="
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Decrease size:"
 msgstr "Micșorează dimensiunea:"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Disable if two keys are pressed together"
 msgstr "Dezacti_vează dacă două taste au fost apăsate în același timp"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Display"
 msgstr "Afișare"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Display a textual description of speech and sounds."
-msgstr "Afișează o descriere textuală a vorbirii și a sunetelor."
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Display a textual description of speech and sounds"
+msgstr "Afișează o descriere textuală a vorbirii și a sunetelor"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Flash the entire screen"
 msgstr "Licărește tot ecranul"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Flash the window title"
 msgstr "Licărește titlul ferestrei"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:37
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Hearing"
 msgstr "Auz"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:40
 msgid "High/Inverse"
 msgstr "Ridicat/Invers"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:41
 msgid "HighContrast"
 msgstr "ContrastRidicat"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:42
 msgid "HighContrastInverse"
 msgstr "ContrastRidicatInversat"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:43
 msgid "Hover Click"
-msgstr ""
+msgstr "Clic plutitor"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "I need assistance with:"
-msgstr "Am nevoie de asistență pentru:"
-
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignoră apăsările repetate și rapide de taste"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Increase size:"
 msgstr "Mărește dimensiunea:"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Keyboard Settings..."
 msgstr "Configurări tastatură..."
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Larger"
 msgstr "Mai mare"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:53
 msgid "LowContrast"
 msgstr "ContrastScăzut"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Mouse Settings..."
 msgstr "Configurări maus..."
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Nomon"
-msgstr ""
+msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:57
 msgid "None"
 msgstr "Niciuna"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "On screen keyboard"
 msgstr "Tastatură pe ecran"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Options..."
 msgstr "Opțiuni..."
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Pointing and Clicking"
 msgstr "Indicare și clic cu mausul"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Puts a delay between when a key is pressed and when it is accepted."
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Introduce o întârziere între momentul în care o tastă este apăsată și cel în "
 "care este acceptată."
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Screen Reader"
 msgstr "Cititor de ecran"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Seeing"
 msgstr "Văz"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Shift+Ctrl+Alt+-"
 msgstr "Shift+Ctrl+Alt+-"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Shift+Ctrl+Alt+="
 msgstr "Shift+Ctrl+Alt+="
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Show Universal Access status"
 msgstr "Afișează starea accesului universal"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Slow Keys"
+msgstr "Taste încete"
+
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Sound Settings..."
 msgstr "Configurări sunet..."
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:78
+msgid "Sticky Keys"
+msgstr "Taste lipicioase"
+
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Test flash"
 msgstr "Testează licărirea"
 
-#: ../panels/universal-access/uap.ui.h:82
-msgid "Test:"
-msgstr "Test:"
-
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Text size:"
 msgstr "Dimensiune text:"
 
+#: ../panels/universal-access/uap.ui.h:81
+msgid "Treats a sequence of modifier keys as a key combination"
+msgstr "Tratează o secvență de taste modificatoare ca o combinație de taste"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgid "Trigger a click when the pointer hovers"
+msgstr "Declanșează un clic când se oprește mișcarea cursorului"
+
+#: ../panels/universal-access/uap.ui.h:83
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "Declanșează un clic secundar în timp ce este menținut butonul primar"
+
 #: ../panels/universal-access/uap.ui.h:84
-msgid "Treats a sequence of modifier keys as a key combination."
-msgstr "Tratează o secvență de taste modificatoare ca o combinație de taste."
+msgid "Turn on accessibility features from the keyboard"
+msgstr "Pornește facilitățile pentru accesibilitate de la tastatură"
 
 #: ../panels/universal-access/uap.ui.h:85
-msgid "Trigger a click when the pointer hovers."
-msgstr "Declanșează un clic când cursorul plutește deasupra."
-
-#: ../panels/universal-access/uap.ui.h:86
-msgid "Trigger a secondary click by holding down the primary button."
-msgstr "Declanșează un clic secundar în timp ce este menținut butonul primar."
-
-#: ../panels/universal-access/uap.ui.h:87
 msgid "Turn on or off:"
 msgstr "Activează sau dezactivează:"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:86
 msgid "Type here to test settings"
 msgstr "_Tastați aici pentru a testa configurările"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:87
 msgid "Typing"
 msgstr "Tastare"
 
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:88
 msgid "Typing Assistant"
 msgstr "Asistent tastare"
 
-#: ../panels/universal-access/uap.ui.h:91
-msgid "Use a visual indication when an alert sound occurs."
-msgstr "Utilizează un indicator vizual când apare un sunet de alertă."
+#: ../panels/universal-access/uap.ui.h:89
+msgid "Use a visual indication when an alert sound occurs"
+msgstr "Utilizează un indicator vizual când apare un sunet de alertă"
 
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:90
 msgid "Use an alternative form of text input"
 msgstr "Utilizează o formă alternativă de introducere de text"
 
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:91
 msgid "Video Mouse"
 msgstr "Maus video"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:92
 msgid "Visual Alerts"
 msgstr "Alerte vizuale"
 
-#: ../panels/universal-access/uap.ui.h:95
-msgid "Zoom"
-msgstr "Zoom"
-
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:94
 msgid "Zoom in:"
 msgstr "Apropiere:"
 
-#: ../panels/universal-access/uap.ui.h:97
+#: ../panels/universal-access/uap.ui.h:95
 msgid "Zoom out:"
 msgstr "Depărtare:"
 
-#: ../panels/universal-access/uap.ui.h:99
+#: ../panels/universal-access/uap.ui.h:97
 msgid "accepted"
 msgstr "acceptată"
 
-#: ../panels/universal-access/uap.ui.h:100
+#: ../panels/universal-access/uap.ui.h:98
 msgid "pressed"
 msgstr "apăsată"
 
-#: ../panels/universal-access/uap.ui.h:101
+#: ../panels/universal-access/uap.ui.h:99
 msgid "rejected"
 msgstr "respinsă"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../panels/user-accounts/gdm-languages.c:613
+msgid "Unspecified"
+msgstr "Nespecificat"
+
+#: ../panels/user-accounts/run-passwd.c:426
+msgid "Authentication failed"
+msgstr "Autentificarea a eșuat"
+
+#: ../panels/user-accounts/run-passwd.c:506
+#: ../panels/user-accounts/um-password-dialog.c:381
+#, c-format
+msgid "The new password is too short"
+msgstr "Parola nouă este prea scurtă"
+
+#: ../panels/user-accounts/run-passwd.c:512
+#, c-format
+msgid "The new password is too simple"
+msgstr "Parola nouă este prea simplă"
+
+#: ../panels/user-accounts/run-passwd.c:518
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "Vechea și noua parolă sunt foarte asemănătoare"
+
+#: ../panels/user-accounts/run-passwd.c:521
+#, c-format
+msgid "The new password has already been used recently."
+msgstr "Noua parolă a mai fost utilizată recent."
+
+#: ../panels/user-accounts/run-passwd.c:524
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "Noua parolă trebuie să conțină caractere numerice sau speciale"
+
+#: ../panels/user-accounts/run-passwd.c:528
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "Noua și vechea parolă sunt identice"
+
+#: ../panels/user-accounts/run-passwd.c:532
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "Vi s-a modificat parola de când v-ați autentificat!"
+
+#: ../panels/user-accounts/run-passwd.c:536
+#, c-format
+msgid "The new password does not contain enough different characters"
+msgstr "Noua parolă nu conține suficiente caractere diferite"
+
+#: ../panels/user-accounts/run-passwd.c:540
+#, c-format
+msgid "Unknown error"
+msgstr "Eroare necunoscută"
+
+#: ../panels/user-accounts/um-account-dialog.c:78
+msgid "Failed to create user"
+msgstr "Crearea utilizatorului a eșuat"
+
+#: ../panels/user-accounts/um-account-dialog.c:185
+#, c-format
+msgid "A user with the username '%s' already exists"
+msgstr "Un utilizator cu numele „%s” există deja"
+
+#: ../panels/user-accounts/um-account-dialog.c:189
+#, c-format
+msgid "The username is too long"
+msgstr "Numele utilizatorului este prea lung"
+
+#: ../panels/user-accounts/um-account-dialog.c:192
+msgid "The username cannot start with a '-'"
+msgstr "Numele utilizatorului nu poate începe cu „-”"
+
+#: ../panels/user-accounts/um-account-dialog.c:195
+msgid ""
+"The username must consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
+msgstr ""
+"Numele utilizatorului trebuie să fie constituit din:\n"
+" ➣ litere ale alfabetului englez\n"
+" ➣ cifre\n"
+" ➣ oricare dintre caracterele „.”, „-”, și „_”"
+
+#: ../panels/user-accounts/um-account-type.c:35
+#: ../panels/user-accounts/data/account-dialog.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgctxt "Account type"
+msgid "Standard"
+msgstr "Standard"
+
+#: ../panels/user-accounts/um-account-type.c:37
+#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+msgctxt "Account type"
+msgid "Administrator"
+msgstr "Administrator"
+
+#: ../panels/user-accounts/um-account-type.c:39
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+msgctxt "Account type"
+msgid "Supervised"
+msgstr "Supravegheat"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:107
+msgid ""
+"You are not allowed to access the device. Contact your system administrator."
+msgstr ""
+"Nu sunteți autorizat să accesați acest dispozitiv. Contactați "
+"administratorul de sistem."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:109
+msgid "The device is already in use."
+msgstr "Acest dispozitivul este deja folosit."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:111
+msgid "An internal error occurred."
+msgstr "A apărut o eroare internă."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:181
+#: ../panels/user-accounts/um-fingerprint-dialog.c:182
+msgid "Enabled"
+msgstr "Activat"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:224
+msgid "Delete registered fingerprints?"
+msgstr "Ștergeți amprentele înregistrate?"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:228
+msgid "_Delete Fingerprints"
+msgstr "Ș_terge amprentele"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:235
+msgid ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+msgstr ""
+"Doriți să ștergeți amprentele înregistrate astfel încât autentificarea pe "
+"bază de amprente să fie dezactivată?"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:363
+msgid "Done!"
+msgstr "Gata!"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:409
+#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#, c-format
+msgid "Could not access '%s' device"
+msgstr "Nu s-a putut accesa dispozitivul „%s”"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#, c-format
+msgid "Could not start finger capture on '%s' device"
+msgstr "Nu s-a putut porni înregistrarea degetului pe dispozitivul „%s”"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+msgid "Could not access any fingerprint readers"
+msgstr "Nu s-a putut accesa niciun cititor de amprente"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:551
+msgid "Please contact your system administrator for help."
+msgstr "Contactați administratorul de sistem pentru ajutor."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:1
+msgid "Enable Fingerprint Login"
+msgstr "Activează autentificarea pe bază de amprente"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "To enable fingerprint login, you need to save one of your fingerprints, using the
+#. * 'Digital Persona U.are.U 4000/4000B' device."
+#: ../panels/user-accounts/um-fingerprint-dialog.c:625
+#, c-format
+msgid ""
+"To enable fingerprint login, you need to save one of your fingerprints, "
+"using the '%s' device."
+msgstr ""
+"Pentru a activa autentificarea pe bază de amprente, trebuie să salvați una "
+"din amprentele dumneavoastră folosind dispozitivul „%s”."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:633
+#, c-format
+msgid ""
+"Enrolling fingerprints for\n"
+"<b><big>%s</big></b>"
+msgstr ""
+"Se înscriu amprentele pentru\n"
+"<b><big>%s</big></b>"
+
+#: ../panels/user-accounts/um-language-dialog.c:328
+msgid "Other..."
+msgstr "Altele..."
+
+#: ../panels/user-accounts/um-lockbutton.c:355
+msgid "Lock"
+msgstr "Blochează"
+
+#: ../panels/user-accounts/um-lockbutton.c:364
+msgid "Unlock"
+msgstr "Deblochează"
+
+#: ../panels/user-accounts/um-lockbutton.c:373
+msgid "Locked"
+msgstr "Blocat"
+
+#: ../panels/user-accounts/um-lockbutton.c:382
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Dialogul este deblocat.\n"
+"Dați clic pentru a preveni alte schimbări"
+
+#: ../panels/user-accounts/um-lockbutton.c:391
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Dialogul este blocat.\n"
+"Dați clic pentru a face schimbări"
+
+#: ../panels/user-accounts/um-lockbutton.c:400
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"Politica sistemului previne schimbările.\n"
+"Contactați administratorul de sistem"
+
+#: ../panels/user-accounts/um-password-dialog.c:185
+msgid "More choices..."
+msgstr "Mai multe alegeri..."
+
+#: ../panels/user-accounts/um-password-dialog.c:291
+msgid "Please choose another password."
+msgstr "Alegeți altă parolă."
+
+#: ../panels/user-accounts/um-password-dialog.c:300
+msgid "Please type your current password again."
+msgstr "Tastează parola curentă încă o dată."
+
+#: ../panels/user-accounts/um-password-dialog.c:306
+msgid "Password could not be changed"
+msgstr "Parola nu a putut fi schimbată"
+
+#: ../panels/user-accounts/um-password-dialog.c:378
+msgid "You need to enter a new password"
+msgstr "Trebuie să introduceți o parolă nouă"
+
+#: ../panels/user-accounts/um-password-dialog.c:387
+msgid "You need to confirm the password"
+msgstr "Trebuie să confirmați parola"
+
+#: ../panels/user-accounts/um-password-dialog.c:390
+msgid "The passwords do not match"
+msgstr "Cele două parolele nu sunt identice"
+
+#: ../panels/user-accounts/um-password-dialog.c:396
+msgid "You need to enter your current password"
+msgstr "Trebuie să introduceți parola curentă"
+
+#: ../panels/user-accounts/um-password-dialog.c:399
+msgid "The current password is not correct"
+msgstr "Parola curentă este incorectă"
+
+#: ../panels/user-accounts/um-password-dialog.c:472
+#: ../panels/user-accounts/um-password-dialog.c:689
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Prea scurtă"
+
+#: ../panels/user-accounts/um-password-dialog.c:475
+#: ../panels/user-accounts/um-password-dialog.c:690
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Slabă"
+
+#: ../panels/user-accounts/um-password-dialog.c:477
+#: ../panels/user-accounts/um-password-dialog.c:691
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Acceptabilă"
+
+#: ../panels/user-accounts/um-password-dialog.c:479
+#: ../panels/user-accounts/um-password-dialog.c:692
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Bună"
+
+#: ../panels/user-accounts/um-password-dialog.c:481
+#: ../panels/user-accounts/um-password-dialog.c:693
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Puternică"
+
+#: ../panels/user-accounts/um-password-dialog.c:520
+msgid "Passwords do not match"
+msgstr "Parolele nu sunt identice"
+
+#: ../panels/user-accounts/um-password-dialog.c:546
+msgid "Wrong password"
+msgstr "Parolă incorectă"
+
+#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+msgid "Select"
+msgstr "Alege"
+
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "Răsfoiește pentru mai multe imagini"
+
+#: ../panels/user-accounts/um-photo-dialog.c:429
+msgid "Disable image"
+msgstr "Dezactivează imaginea"
+
+#: ../panels/user-accounts/um-photo-dialog.c:447
+msgid "Take a photo..."
+msgstr "Fă o fotografie..."
+
+#: ../panels/user-accounts/um-photo-dialog.c:465
+msgid "Browse for more pictures..."
+msgstr "Răsfoiește pentru mai multe imagini..."
+
+#: ../panels/user-accounts/um-photo-dialog.c:693
+#, c-format
+msgid "Used by %s"
+msgstr "Folosit de %s"
+
+#: ../panels/user-accounts/um-user-manager.c:430
+#, c-format
+msgid "A user with name '%s' already exists."
+msgstr "Un utilizator cu numele „%s” există deja."
+
+#: ../panels/user-accounts/um-user-manager.c:525
+msgid "This user does not exist."
+msgstr "Acest utilizator nu există."
+
+#: ../panels/user-accounts/um-user-panel.c:349
+msgid "Failed to delete user"
+msgstr "Ștergerea utilizatorului a eșuat"
+
+#: ../panels/user-accounts/um-user-panel.c:409
+msgid "You cannot delete your own account."
+msgstr "Nu vă puteți șterge propriul cont."
+
+#: ../panels/user-accounts/um-user-panel.c:418
+#, c-format
+msgid "%s is still logged in"
+msgstr "%s este încă autentificat"
+
+#: ../panels/user-accounts/um-user-panel.c:422
+msgid ""
+"Deleting a user while they are logged in can leave the system in an "
+"inconsistent state."
+msgstr ""
+"Ștergerea unui utilizator când acesta este încă autentificat poate aduce "
+"sistemul într-o stare inconsistentă."
+
+#: ../panels/user-accounts/um-user-panel.c:431
+#, c-format
+msgid "Do you want to keep %s's files?"
+msgstr "Doriți să păstrați fișierele lui %s?"
+
+#: ../panels/user-accounts/um-user-panel.c:435
+msgid ""
+"It is possible to keep the home directory, mail spool and temporary files "
+"around when deleting a user account."
+msgstr ""
+"Este posibil să păstrați dosarul personal, emailurile și fișierele temporare "
+"după ștergerea unui cont."
+
+#: ../panels/user-accounts/um-user-panel.c:438
+msgid "_Delete Files"
+msgstr "Ș_terge fișierele"
+
+#: ../panels/user-accounts/um-user-panel.c:439
+msgid "_Keep Files"
+msgstr "_Păstrează fișierele"
+
+#: ../panels/user-accounts/um-user-panel.c:440
+msgid "_Cancel"
+msgstr "_Renunță"
+
+#: ../panels/user-accounts/um-user-panel.c:464
+msgctxt "Password mode"
+msgid "Account disabled"
+msgstr "Cont dezactivat"
+
+#: ../panels/user-accounts/um-user-panel.c:473
+msgctxt "Password mode"
+msgid "To be set at next login"
+msgstr "Va fi definită la următoarea autentificare"
+
+#: ../panels/user-accounts/um-user-panel.c:476
+msgctxt "Password mode"
+msgid "None"
+msgstr "Niciuna"
+
+#: ../panels/user-accounts/um-user-panel.c:818
+msgid "Failed to contact the accounts service"
+msgstr "Contactarea serviciului pentru conturi a eșuat"
+
+#: ../panels/user-accounts/um-user-panel.c:820
+msgid "Please make sure that the AccountService is installed and enabled."
+msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
+
+#: ../panels/user-accounts/um-user-panel.c:853
+msgid ""
+"To make changes,\n"
+"click the * icon first"
+msgstr ""
+"Pentru a face schimbări,\n"
+"dați clic întâi pe iconița *"
+
+#: ../panels/user-accounts/um-user-panel.c:891
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+msgid "Create a user"
+msgstr "Creează un utilizator"
+
+#: ../panels/user-accounts/um-user-panel.c:902
+#: ../panels/user-accounts/um-user-panel.c:1178
+msgid ""
+"To create a user,\n"
+"click the * icon first"
+msgstr ""
+"Pentru a crea un utilizator,\n"
+"dați click întâi pe iconița *"
+
+#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+msgid "Delete the selected user"
+msgstr "Ștergeți utilizatorul selectat"
+
+#: ../panels/user-accounts/um-user-panel.c:923
+#: ../panels/user-accounts/um-user-panel.c:1183
+msgid ""
+"To delete the selected user,\n"
+"click the * icon first"
+msgstr ""
+"Pentru a șterge utilizatorul selectat,\n"
+"dați click întâi pe iconița *"
+
+#: ../panels/user-accounts/um-user-panel.c:1087
+msgid "My Account"
+msgstr "Contul meu"
+
+#: ../panels/user-accounts/um-user-panel.c:1096
+msgid "Other Accounts"
+msgstr "Alte conturi"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
+msgid "Add or remove users"
+msgstr "Adaugă sau șterge utilizatori"
+
+#. Translators: those are keywords for the user accounts control-center panel
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
+msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+msgstr ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Autentificare;Nume;Amprentă;"
+"Amprente;Față;Parolă;"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
+msgid "User Accounts"
+msgstr "Conturi utilizatori"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+msgid "Cr_eate"
+msgstr "Cr_eează"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
+msgid "Create new account"
+msgstr "Creează un cont nou"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "_Account Type:"
+msgstr "_Tip cont:"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+msgid "_Full name:"
+msgstr "Nume _complet:"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+msgid "_Username:"
+msgstr "Nume _utilizator:"
+
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Renunță"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
+"strong password</a>"
+msgstr ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">Cum să alegeți o "
+"parolă puternică</a>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
+msgid ""
+"<small>This hint may be displayed at the login screen.  It will be visible "
+"to all users of this system.  Do <b>not</b> include the password here.</"
+"small>"
+msgstr ""
+"<small>Acest indiciu poate fi afișat la ecranul de autentificare. Va fi "
+"vizibil tuturor utilizatorilor sistemului. <b>NU</b> includeți parola aici.</"
+"small>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+msgid "C_onfirm password:"
+msgstr "C_onfirmați parolă:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
+msgid "Ch_ange"
+msgstr "_Schimbă"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
+msgid "Changing password for:"
+msgstr "Se schimbă parola pentru:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
+msgid "Choose a generated password"
+msgstr "Alegeți o parolă generată"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Choose password at next login"
+msgstr "Alege o parolă la următoarea autentificare"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Current _password:"
+msgstr "_Parola curentă:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
+msgid "Disable this account"
+msgstr "Dezactivează acest cont"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
+msgid "Enable this account"
+msgstr "Activează acest cont"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:11
+msgid "Fair"
+msgstr "Acceptabilă"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
+msgid "Log in without a password"
+msgstr "Autentificare fără parolă"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
+msgid "Set a password now"
+msgstr "Definește o parolă nouă"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:14
+msgid "_Action:"
+msgstr "_Acțiune:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:15
+msgid "_Hint:"
+msgstr "I_ndiciu:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:16
+msgid "_New password:"
+msgstr "Parola _nouă:"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:17
+msgid "_Show password"
+msgstr "_Arată parola:"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:1
+msgid "Browse"
+msgstr "Navighează"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+msgid "Changing photo for:"
+msgstr "Se schimbă fotografia pentru:"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:5
+msgid ""
+"Choose a picture that will be shown at the login screen for this account."
+msgstr ""
+"Alegeți o imagine ce va fi afișată la ecranul de autentificare pentru acest "
+"cont."
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:6
+msgid "Gallery"
+msgstr "Galerie"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:7
+msgid "Photograph"
+msgstr "Fotografie"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+msgid "Take a photograph"
+msgstr "Fă o fotografie"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+msgid ""
+"A guest account will allow anyone to temporarily log in to this computer "
+"without a password.  For security, remote logins to this account are not "
+"allowed.\n"
+"\n"
+"<b>When the guest user logs out, all files and data associated with the "
+"account will be deleted.</b>"
+msgstr ""
+"Un cont de vizitator va da dreptul oricui să se autentifice temporar fără o "
+"parolă. Din motive de securitate, autentificările de la distanță pe acest "
+"cont nu sunt permise.\n"
+"\n"
+"<b>Când un utilizator vizitator închide sesiunea, toate fișierele și datele "
+"asociate cu acest cont vor fi șterse.</b>"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+msgid "Account Information"
+msgstr "Informații cont"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Account type:"
+msgstr "Tip cont:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "Accounts"
+msgstr "Conturi"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+msgid "Address Book Card:"
+msgstr "Card agendă:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "Allow guests to log in to this computer"
+msgstr "Permite autentificarea vizitatorilor pe acest calculator"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+msgid "Automatic Login:"
+msgstr "Autentificare automată:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
+msgid "E-mail address:"
+msgstr "Adresă de email:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
+msgid "Fingerprint Login:"
+msgstr "Autentificare pe bază de amprentă:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
+msgid "Language:"
+msgstr "Limbă:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
+msgid "Login Options"
+msgstr "Opțiuni autentificare"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
+msgid "Open"
+msgstr "Deschide"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
+msgid "Password:"
+msgstr "Parolă:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
+msgid "Restrictions:"
+msgstr "Restricții:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
+msgid "Show Shutdown, Suspend and Restart actions"
+msgstr "Arată acțiunile de oprire, suspendare și repornire"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:24
+msgid "Show list of users"
+msgstr "Arată lista utilizatorilor"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
+msgid "Show password hints"
+msgstr "Arată indiciile parolei"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:2
+msgid "Left index finger"
+msgstr "Degetul arătător de la mâna stângă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
+msgid "Left little finger"
+msgstr "Degetul mic de la mâna stângă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+msgid "Left middle finger"
+msgstr "Degetul mijlociu de la mâna stângă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+msgid "Left ring finger"
+msgstr "Degetul inelar de la mâna stângă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+msgid "Left thumb"
+msgstr "Degetul mare de la mâna stângă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
+msgid "Other finger: "
+msgstr "Alt deget: "
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
+msgid "Right index finger"
+msgstr "Degetul arătător de la mâna dreaptă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+msgid "Right little finger"
+msgstr "Degetul mic de la mâna dreaptă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+msgid "Right middle finger"
+msgstr "Degetul mijlociu de la mâna dreaptă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+msgid "Right ring finger"
+msgstr "Degetul inelar de la mâna dreaptă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+msgid "Right thumb"
+msgstr "Degetul mare de la mâna dreaptă"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+msgid ""
+"Your fingerprint was successfully saved. You should now be able to log in "
+"using your fingerprint reader."
+msgstr ""
+"Amprenta dumneavoastră a fost salvată cu succes. Acum ar trebui să vă puteți "
+"autentifica folosind cititorul de amprente."
+
+#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
+msgid "System Settings"
+msgstr "Configurări sistem"
+
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "Centrul de control"
-
-#: ../shell/gnome-control-center.desktop.in.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Unealtă de configurare GNOME"
-
-#: ../typing-break/drw-break-window.c:194
-msgid "_Postpone Break"
-msgstr "_Amână pauza"
-
-#: ../typing-break/drw-break-window.c:250
-msgid "Take a break!"
-msgstr "Luați o pauză!"
-
-#: ../typing-break/drwright.c:136
-msgid "_Take a Break"
-msgstr "_Ia o pauză"
-
-#: ../typing-break/drwright.c:507
-#, c-format
-msgid "Take a break now (next in %dm)"
-msgstr "Ia o pauză acum (următoarea în %dm)"
-
-#: ../typing-break/drwright.c:509
-#, c-format
-msgid "%d minute until the next break"
-msgid_plural "%d minutes until the next break"
-msgstr[0] "%d minut până la următoarea pauză"
-msgstr[1] "%d minute până la următoarea pauză"
-msgstr[2] "%d de minute până la următoarea pauză"
-
-#: ../typing-break/drwright.c:515
-#, c-format
-msgid "Take a break now (next in less than one minute)"
-msgstr "Ia o pauză acum (următoarea în mai puțin de un minut)"
-
-#: ../typing-break/drwright.c:517
-#, c-format
-msgid "Less than one minute until the next break"
-msgstr "Mai puțin de un minut până la următoarea pauză"
-
-#: ../typing-break/drwright.c:614
-#, c-format
-msgid ""
-"Unable to bring up the typing break properties dialog with the following "
-"error: %s"
-msgstr ""
-"Nu s-a reușit deschiderea fereastrei pentru configurarea pauzelor de lucru. "
-"Eroarea este: %s"
-
-#: ../typing-break/drwright.c:631
-msgid "Written by Richard Hult <richard@imendio.com>"
-msgstr "Scris de Richard Hult <richard@imendio.com>"
-
-#: ../typing-break/drwright.c:632
-msgid "Eye candy added by Anders Carlsson"
-msgstr "Îmbunătățiri vizuale aduse de Anders Carlsson"
-
-#: ../typing-break/drwright.c:641
-msgid "A computer break reminder."
-msgstr "Un program pentru pauzele de lucru în munca cu calculatorul."
-
-#: ../typing-break/drwright.c:643
-msgid "translator-credits"
-msgstr ""
-"Lucian Adrian Grijincu\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Adi Roiban https://launchpad.net/~adiroiban\n"
-"  Cracknel https://launchpad.net/~cracknel-org\n"
-"  Dan Damian https://launchpad.net/~dand\n"
-"  Doru Horișco https://launchpad.net/~doruhushhush\n"
-"  Horia Duțescu https://launchpad.net/~horia.dutescu\n"
-"  Ionuț Jula https://launchpad.net/~ionutjula\n"
-"  Manuel R. Ciosici https://launchpad.net/~manuelciosici\n"
-"  Mircea MITU https://launchpad.net/~mache\n"
-"  Raziel88 https://launchpad.net/~raziel-theripper\n"
-"  Stas Sushkov https://launchpad.net/~sushkov\n"
-"  Valentin Bora https://launchpad.net/~bvali"
-
-#: ../typing-break/main.c:63
-msgid "Enable debugging code"
-msgstr "Activează codul pentru depanare"
-
-#: ../typing-break/main.c:65
-msgid "Don't check whether the notification area exists"
-msgstr "Nu verifica existența zonei de notificare"
-
-#: ../typing-break/main.c:91
-msgid "Typing Monitor"
-msgstr "Monitorizare tastare"
-
-#: ../typing-break/main.c:108
-msgid ""
-"The typing monitor uses the notification area to display information. You "
-"don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choosing 'Add to panel', selecting "
-"'Notification area' and clicking 'Add'."
-msgstr ""
-"Monitorizarea tastării utilizează zona de notificare pentru a afișa "
-"informații. Nu aveți o astfel de zonă în panoul dumneavoastră. O puteți "
-"adăuga cu un click dreapta pe panou alegând „Adaugă la panou”, selectând "
-"„Zonă de notificare” și făcând clic pe „Adaugă”."
-
-#: ../font-viewer/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "La activare, pentru fonturile OpenType se vor crea miniaturi."
-
-#: ../font-viewer/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "La activare, pentru fonturile PCF se vor crea miniaturi."
-
-#: ../font-viewer/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "La activare, pentru fonturile TrueType se vor crea miniaturi."
-
-#: ../font-viewer/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "La activare, pentru fonturile Type1 se vor crea miniaturi."
-
-#: ../font-viewer/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"Definiți această cheie cu comanda utilizată pentru a crea miniaturi pentru "
-"fonturile OpenType."
-
-#: ../font-viewer/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Definiți această cheie cu comanda utilizată pentru a crea miniaturi pentru "
-"fonturile PCF."
-
-#: ../font-viewer/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"Definiți această cheie cu comanda utilizată pentru a crea miniaturi pentru "
-"fonturile TrueType."
-
-#: ../font-viewer/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"Definiți această cheie cu comanda utilizată pentru a crea miniaturi pentru "
-"fonturile Type1."
-
-#: ../font-viewer/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "Comanda de creare miniaturi pentru fonturile OpenType."
-
-#: ../font-viewer/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "Comanda de creare miniaturi pentru fonturile PCF."
-
-#: ../font-viewer/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "Comanda de creare miniaturi pentru fonturile TrueType."
-
-#: ../font-viewer/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "Comanda de creare miniaturi pentru fonturile Type1."
-
-#: ../font-viewer/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "Specifică dacă fonturile OpenType vor avea miniaturi."
-
-#: ../font-viewer/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "Specifică dacă fonturile PCF vor avea miniaturi."
-
-#: ../font-viewer/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "Specifică dacă fonturile TrueType vor avea miniaturi."
-
-#: ../font-viewer/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "Specifică dacă fonturile Type1 vor fi previzualizate."
-
-#: ../font-viewer/font-view.c:297
-msgid "Name:"
-msgstr "Nume:"
-
-#: ../font-viewer/font-view.c:300
-msgid "Style:"
-msgstr "Stil:"
-
-#: ../font-viewer/font-view.c:313
-msgid "Type:"
-msgstr "Tip:"
-
-#: ../font-viewer/font-view.c:317
-msgid "Size:"
-msgstr "Dimensiune:"
-
-#: ../font-viewer/font-view.c:361 ../font-viewer/font-view.c:374
-msgid "Version:"
-msgstr "Versiune:"
-
-#: ../font-viewer/font-view.c:365 ../font-viewer/font-view.c:376
-msgid "Copyright:"
-msgstr "Drepturi de autor:"
-
-#: ../font-viewer/font-view.c:369
-msgid "Description:"
-msgstr "Descriere:"
-
-#: ../font-viewer/font-view.c:453
-msgid "Installed"
-msgstr "Instalat"
-
-#: ../font-viewer/font-view.c:456
-msgid "Install Failed"
-msgstr "Instalarea a eșuat"
-
-#: ../font-viewer/font-view.c:526
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "utilizare: %s fișier tip font\n"
-
-#: ../font-viewer/font-view.c:597
-msgid "I_nstall Font"
-msgstr "I_nstalează font"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "Vizualizator fonturi"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "Previzualizare caractere"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "Text to thumbnail (default: Aa)"
-msgstr "Text în miniatură (implicit: Aa)"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "TEXT"
-msgstr "TEXT"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "Font size (default: 64)"
-msgstr "Mărime font (implicit: 64)"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "SIZE"
-msgstr "MĂRIME"
-
-#: ../font-viewer/font-thumbnailer.c:249
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "FIȘIER-FONT FIȘIER-IEȘIRE"
-
-#: ../font-viewer/font-thumbnailer.c:268
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "Eroare la procesarea argumentelor: %s\n"
 
 #: ../examples/gnome-example-panel.desktop.in.in.h:1
 msgid "Example Panel"
@@ -2192,13 +3138,514 @@ msgstr "Panou exemplu"
 msgid "Example preferences panel"
 msgstr "Panou preferințe exemplu"
 
-#: ../shell/shell.ui.h:1
-msgid "System Settings"
-msgstr "Configurări sistem"
+#. Translators: those are keywords for the example control-center panel
+#: ../examples/gnome-example-panel.desktop.in.in.h:4
+msgid "Foo;Bar;Baz;"
+msgstr "Foo;Bar;Baz;"
 
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "To_ate configurările"
+
+#~ msgid "Error saving configuration: %s"
+#~ msgstr "Eroare la salvarea configurației: %s"
+
+#~ msgid "Image Viewer"
+#~ msgstr "Vizualizator de imagini"
+
+#~ msgid "Multimedia Player"
+#~ msgstr "Player multimedia"
+
+#~ msgid "Open link in new _tab"
+#~ msgstr "Deschide legăturile web în _taburi noi"
+
+#~ msgid "Open link in new _window"
+#~ msgstr "Deschide legăturile web în _ferestre noi"
+
+#~ msgid "Open link with web browser _default"
+#~ msgstr ""
+#~ "_Deschide legăturile web folosind configurările navigatorului web implicit"
+
+#~ msgid "Video Player"
+#~ msgstr "Program de redare video"
+
+#~ msgid "Balsa"
+#~ msgstr "Balsa"
+
+#~ msgid "Claws Mail"
+#~ msgstr "Claws Mail"
+
+#~ msgid "Debian Sensible Browser"
+#~ msgstr "Navigatorul web implicit din Debian"
+
+#~ msgid "Encompass"
+#~ msgstr "Encompass"
+
+#~ msgid "Epiphany Web Browser"
+#~ msgstr "Navigator web Epiphany"
+
+#~ msgid "Evolution Mail Reader"
+#~ msgstr "Client e-mail Evolution"
+
+#~ msgid "Firebird"
+#~ msgstr "Firebird"
+
+#~ msgid "Firefox"
+#~ msgstr "Firefox"
+
+#~ msgid "Iceape"
+#~ msgstr "Iceape"
+
+#~ msgid "Iceape Mail"
+#~ msgstr "Iceape Mail"
+
+#~ msgid "Icedove"
+#~ msgstr "Icedove"
+
+#~ msgid "Iceweasel"
+#~ msgstr "Iceweasel"
+
+#~ msgid "KMail"
+#~ msgstr "KMail"
+
+#~ msgid "Konqueror"
+#~ msgstr "Konqueror"
+
+#~ msgid "Midori"
+#~ msgstr "Midori"
+
+#~ msgid "Mozilla"
+#~ msgstr "Mozilla"
+
+#~ msgid "Mozilla 1.6"
+#~ msgstr "Mozilla 1.6"
+
+#~ msgid "Mozilla Mail"
+#~ msgstr "Mozilla Mail"
+
+#~ msgid "Mozilla Thunderbird"
+#~ msgstr "Mozilla Thunderbird"
+
+#~ msgid "Netscape Communicator"
+#~ msgstr "Netscape Communicator"
+
+#~ msgid "SeaMonkey"
+#~ msgstr "SeaMonkey"
+
+#~ msgid "SeaMonkey Mail"
+#~ msgstr "SeaMonkey Mail"
+
+#~ msgid "Sylpheed"
+#~ msgstr "Sylpheed"
+
+#~ msgid "Sylpheed-Claws"
+#~ msgstr "Sylpheed-Claws"
+
+#~ msgid "Thunderbird"
+#~ msgstr "Thunderbird"
+
+#~ msgid "Include _panel"
+#~ msgstr "Include _panou"
+
+#~ msgid "Make Default"
+#~ msgstr "Setează ca implicit"
+
+#~ msgid "Panel icon"
+#~ msgstr "Iconiță panou"
+
+#~ msgid "Re_fresh rate:"
+#~ msgstr "_Frecvență de reîmprospătare:"
+
+#~ msgid "Sa_me image in all monitors"
+#~ msgstr "Aceeași i_magine pe toate monitoarele"
+
+#~ msgid "_Show monitors in panel"
+#~ msgstr "A_rată monitoarele în panou"
+
+#~ msgid "Monitors"
+#~ msgstr "Monitoare"
+
+#~ msgid ""
+#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "This program installs a RANDR profile for multi-monitor setups into\n"
+#~ "a systemwide location.  The resulting profile will get used when\n"
+#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
+#~ "\n"
+#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+#~ "xml\n"
+#~ "\n"
+#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
+#~ "            the systemwide directory for RANDR configurations,\n"
+#~ "            so the result will typically be %s/DEST_NAME\n"
+#~ msgstr ""
+#~ "Utilizare: %s FIȘIER_SURSĂ NUME_DESTINAȚIE\n"
+#~ "\n"
+#~ "Acest program instalează un profil RANDR pentru configurații cu mai "
+#~ "multe\n"
+#~ "monitoare într-o locație de sistem. Profilul rezultant va fi utilizat "
+#~ "când\n"
+#~ "modulul de extensie RANDR este executat în gnome-settings-daemon.\n"
+#~ "\n"
+#~ "FIȘIER_SURSĂ - o cale absolută, de obicei /home/numeutiizator/.config/"
+#~ "monitors.xml\n"
+#~ "\n"
+#~ "NUME_DESTINAȚIE - nume relativ al fișierului instalat.  Acesta va fi pus "
+#~ "în\n"
+#~ "            dosarul global al configurărilor RANDR, rezultatul va fi de "
+#~ "obicei %s/NUME_DESTINAȚIE\n"
+
+#~ msgid "This program can only be used by the root user"
+#~ msgstr "Acest program poate fi utilizat doar de utilizatorul root"
+
+#~ msgid "The source filename must be absolute"
+#~ msgstr "Numele fișierului sursă trebuie să fie absolut"
+
+#~ msgid "%s must be a regular file\n"
+#~ msgstr "%s trebuie să fie un fișier obișnuit\n"
+
+#~ msgid "This program must only be run through pkexec(1)"
+#~ msgstr "Acest program trebuie rulat prin pkexec(1)"
+
+#~ msgid "PKEXEC_UID must be set to an integer value"
+#~ msgstr "PKEXEC_UID trebuie să fie definit la o valoare întreagă"
+
+#~ msgid "%s must be owned by you\n"
+#~ msgstr "%s trebuie să fie în posesia dumneavoastră\n"
+
+#~ msgid "%s must not have any directory components\n"
+#~ msgstr "%s trebuie să nu aibă nicio componentă de dosar\n"
+
+#~ msgid "%s must be a directory\n"
+#~ msgstr "%s trebuie să fie un dosar\n"
+
+#~ msgid "Could not rename %s to %s: %s\n"
+#~ msgstr "Nu s-a putut redenumi %s la %s: %s\n"
+
+#~ msgid ""
+#~ "Authentication is required to install multi-monitor settings for all users"
+#~ msgstr ""
+#~ "Autentificarea este necesară pentru a instala configurări multi-monitor "
+#~ "pentru toți utilizatorii"
+
+#~ msgid "Install multi-monitor settings for the whole system"
+#~ msgstr "Instalează configurări multi-monitor pentru tot sistemul"
+
+#~ msgid "%d Hz"
+#~ msgstr "%d Hz"
+
+#~ msgid "Monitor: %s"
+#~ msgstr "Monitor: %s"
+
+#~ msgid "The monitor configuration has been saved"
+#~ msgstr "Configurația monitorului a fost salvată"
+
+#~ msgid "This configuration will be used the next time someone logs in."
+#~ msgstr ""
+#~ "Această configurație va fi utilizată data viitoare când un utilizator se "
+#~ "autentifică."
+
+#~ msgid "Could not set the default configuration for monitors"
+#~ msgstr "Nu s-a putut defini configurația implicită a monitoarelor"
+
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Scurtături tastatură"
+
+#~ msgid "Assign shortcut keys to commands"
+#~ msgstr "Asociați combinații comenzilor des utilizate"
+
+#~ msgid "Beep when a _modifier key is pressed"
+#~ msgstr "Sună când o tastă _modificatoare a fost apăsată"
+
+#~ msgid "Beep when a _toggle key is pressed"
+#~ msgstr "Sună când o _tastă comutațională a fost apăsată"
+
+#~ msgid "Beep when a key is pr_essed"
+#~ msgstr "Sună când o tastă _este apăsată"
+
+#~ msgid "Beep when a key is reje_cted"
+#~ msgstr "Sună _când o tastă a fost respinsă"
+
+#~ msgid "Beep when key is _accepted"
+#~ msgstr "Sună când o tastă a fost _acceptată"
+
+#~ msgid "Beep when key is _rejected"
+#~ msgstr "Sună când tastă este _respinsă"
+
+#~ msgid "Flash _window titlebar"
+#~ msgstr "Licărește titlul _ferestrei"
+
+#~ msgid "Flash entire _screen"
+#~ msgstr "Licărește tot _ecranul"
+
+#~ msgid "Keyboard Accessibility Audio Feedback"
+#~ msgstr "Reacție audio pentru accesibilitatea tastaturii"
+
+#~ msgid "Show _visual feedback for the alert sound"
+#~ msgstr "Afișează reacții _vizuale pentru alertele de sunet"
+
+#~ msgid "Visual cues for sounds"
+#~ msgstr "Indicații vizuale pentru sunete"
+
+#~ msgid "All_ow postponing of breaks"
+#~ msgstr "Pe_rmite amânarea pauzelor de lucru"
+
+#~ msgid "Audio _Feedback..."
+#~ msgstr "_Reacție audio..."
+
+#~ msgid "Check if breaks are allowed to be postponed"
+#~ msgstr "Bifați pentru a permite amânările pauzelor de lucru"
+
+#~ msgid "Disa_ble sticky keys if two keys are pressed together"
+#~ msgstr ""
+#~ "Dezacti_vează tastele lipicioase dacă două taste au fost apăsate în "
+#~ "acelși timp"
+
+#~ msgid "Duration of the break when typing is disallowed"
+#~ msgstr "Durata pauzei de lucru în care nu se permite tastarea"
+
+#~ msgid "Duration of work before forcing a break"
+#~ msgstr "Durata perioadei de lucru înainte de începerea unei pauze"
+
+#~ msgid "Keyboard Preferences"
+#~ msgstr "Preferințe tastatură"
+
+#~ msgid ""
+#~ "Lock screen after a certain duration to help prevent repetitive keyboard "
+#~ "use injuries"
+#~ msgstr ""
+#~ "Blochează ecranul după o anumită perioadă pentru a preveni problemele "
+#~ "provocate de lucrul prelungit la tastatură"
+
+#~ msgid "Typing Break"
+#~ msgstr "Pauze de lucru"
+
+#~ msgid "_Accessibility features can be toggled with keyboard shortcuts"
+#~ msgstr ""
+#~ "_Caracteristicile de accesibilitate pot fi comutate cu scurtături de taste"
+
+#~ msgid "_Break interval lasts:"
+#~ msgstr "Pau_za de lucru durează:"
+
+#~ msgid "_Ignore fast duplicate keypresses"
+#~ msgstr "_Ignoră apăsările repetate și rapide de taste"
+
+#~ msgid "_Lock screen to enforce typing break"
+#~ msgstr "B_lochează ecranul pentru a forța pauzele de scriere"
+
+#~ msgid "_Only accept long keypresses"
+#~ msgstr "Acceptă d_oar apăsările de taste lungi"
+
+#~ msgid "_Simulate simultaneous keypresses"
+#~ msgstr "_Simulează apăsări de taste simultane"
+
+#~ msgid "_Work interval lasts:"
+#~ msgstr "_Perioada de lucru durează:"
+
+#~ msgid "Set your keyboard preferences"
+#~ msgstr "Schimbați opțiunile de tastare"
+
+#~ msgid "Unable to load stock icon '%s'\n"
+#~ msgstr "Nu s-a putut încărca iconița standard „%s”\n"
+
+#~ msgid "gesture|Move left"
+#~ msgstr "Mutare stânga"
+
+#~ msgid "gesture|Move right"
+#~ msgstr "Mutare dreapta"
+
+#~ msgid "gesture|Move up"
+#~ msgstr "Mutare sus"
+
+#~ msgid "gesture|Move down"
+#~ msgstr "Mutare jos"
+
+#~ msgid "gesture|Disabled"
+#~ msgstr "Dezactivat"
+
+#~ msgid ""
+#~ "Accessibility features can be turned on or off with keyboard shortcuts"
+#~ msgstr ""
+#~ "Caracteristicile de accesibilitate pot fi activate sau dezactivate cu "
+#~ "scurtături de taste"
+
+#~ msgid "I need assistance with:"
+#~ msgstr "Am nevoie de asistență pentru:"
+
+#~ msgid "The GNOME configuration tool"
+#~ msgstr "Unealtă de configurare GNOME"
+
+#~ msgid "_Postpone Break"
+#~ msgstr "_Amână pauza"
+
+#~ msgid "_Take a Break"
+#~ msgstr "_Ia o pauză"
+
+#~ msgid "Take a break now (next in %dm)"
+#~ msgstr "Ia o pauză acum (următoarea în %dm)"
+
+#~ msgid "%d minute until the next break"
+#~ msgid_plural "%d minutes until the next break"
+#~ msgstr[0] "%d minut până la următoarea pauză"
+#~ msgstr[1] "%d minute până la următoarea pauză"
+#~ msgstr[2] "%d de minute până la următoarea pauză"
+
+#~ msgid "Take a break now (next in less than one minute)"
+#~ msgstr "Ia o pauză acum (următoarea în mai puțin de un minut)"
+
+#~ msgid "Less than one minute until the next break"
+#~ msgstr "Mai puțin de un minut până la următoarea pauză"
+
+#~ msgid ""
+#~ "Unable to bring up the typing break properties dialog with the following "
+#~ "error: %s"
+#~ msgstr ""
+#~ "Nu s-a reușit deschiderea fereastrei pentru configurarea pauzelor de "
+#~ "lucru. Eroarea este: %s"
+
+#~ msgid "Written by Richard Hult <richard@imendio.com>"
+#~ msgstr "Scris de Richard Hult <richard@imendio.com>"
+
+#~ msgid "Eye candy added by Anders Carlsson"
+#~ msgstr "Îmbunătățiri vizuale aduse de Anders Carlsson"
+
+#~ msgid "A computer break reminder."
+#~ msgstr "Un program pentru pauzele de lucru în munca cu calculatorul."
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Lucian Adrian Grijincu\n"
+#~ "\n"
+#~ "Launchpad Contributions:\n"
+#~ "  Adi Roiban https://launchpad.net/~adiroiban\n"
+#~ "  Cracknel https://launchpad.net/~cracknel-org\n"
+#~ "  Dan Damian https://launchpad.net/~dand\n"
+#~ "  Doru Horișco https://launchpad.net/~doruhushhush\n"
+#~ "  Horia Duțescu https://launchpad.net/~horia.dutescu\n"
+#~ "  Ionuț Jula https://launchpad.net/~ionutjula\n"
+#~ "  Manuel R. Ciosici https://launchpad.net/~manuelciosici\n"
+#~ "  Mircea MITU https://launchpad.net/~mache\n"
+#~ "  Raziel88 https://launchpad.net/~raziel-theripper\n"
+#~ "  Stas Sushkov https://launchpad.net/~sushkov\n"
+#~ "  Valentin Bora https://launchpad.net/~bvali"
+
+#~ msgid "Don't check whether the notification area exists"
+#~ msgstr "Nu verifica existența zonei de notificare"
+
+#~ msgid "Typing Monitor"
+#~ msgstr "Monitorizare tastare"
+
+#~ msgid ""
+#~ "The typing monitor uses the notification area to display information. You "
+#~ "don't seem to have a notification area on your panel. You can add it by "
+#~ "right-clicking on your panel and choosing 'Add to panel', selecting "
+#~ "'Notification area' and clicking 'Add'."
+#~ msgstr ""
+#~ "Monitorizarea tastării utilizează zona de notificare pentru a afișa "
+#~ "informații. Nu aveți o astfel de zonă în panoul dumneavoastră. O puteți "
+#~ "adăuga cu un click dreapta pe panou alegând „Adaugă la panou”, selectând "
+#~ "„Zonă de notificare” și făcând clic pe „Adaugă”."
+
+#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
+#~ msgstr "La activare, pentru fonturile OpenType se vor crea miniaturi."
+
+#~ msgid "If set to true, then PCF fonts will be thumbnailed."
+#~ msgstr "La activare, pentru fonturile PCF se vor crea miniaturi."
+
+#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
+#~ msgstr "La activare, pentru fonturile TrueType se vor crea miniaturi."
+
+#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
+#~ msgstr "La activare, pentru fonturile Type1 se vor crea miniaturi."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for OpenType fonts."
+#~ msgstr ""
+#~ "Definiți această cheie cu comanda utilizată pentru a crea miniaturi "
+#~ "pentru fonturile OpenType."
+
+#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
+#~ msgstr ""
+#~ "Definiți această cheie cu comanda utilizată pentru a crea miniaturi "
+#~ "pentru fonturile PCF."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for TrueType fonts."
+#~ msgstr ""
+#~ "Definiți această cheie cu comanda utilizată pentru a crea miniaturi "
+#~ "pentru fonturile TrueType."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for Type1 fonts."
+#~ msgstr ""
+#~ "Definiți această cheie cu comanda utilizată pentru a crea miniaturi "
+#~ "pentru fonturile Type1."
+
+#~ msgid "Thumbnail command for OpenType fonts"
+#~ msgstr "Comanda de creare miniaturi pentru fonturile OpenType."
+
+#~ msgid "Thumbnail command for PCF fonts"
+#~ msgstr "Comanda de creare miniaturi pentru fonturile PCF."
+
+#~ msgid "Thumbnail command for TrueType fonts"
+#~ msgstr "Comanda de creare miniaturi pentru fonturile TrueType."
+
+#~ msgid "Thumbnail command for Type1 fonts"
+#~ msgstr "Comanda de creare miniaturi pentru fonturile Type1."
+
+#~ msgid "Whether to thumbnail OpenType fonts"
+#~ msgstr "Specifică dacă fonturile OpenType vor avea miniaturi."
+
+#~ msgid "Whether to thumbnail PCF fonts"
+#~ msgstr "Specifică dacă fonturile PCF vor avea miniaturi."
+
+#~ msgid "Whether to thumbnail TrueType fonts"
+#~ msgstr "Specifică dacă fonturile TrueType vor avea miniaturi."
+
+#~ msgid "Whether to thumbnail Type1 fonts"
+#~ msgstr "Specifică dacă fonturile Type1 vor fi previzualizate."
+
+#~ msgid "Style:"
+#~ msgstr "Stil:"
+
+#~ msgid "Size:"
+#~ msgstr "Dimensiune:"
+
+#~ msgid "Copyright:"
+#~ msgstr "Drepturi de autor:"
+
+#~ msgid "Installed"
+#~ msgstr "Instalat"
+
+#~ msgid "Install Failed"
+#~ msgstr "Instalarea a eșuat"
+
+#~ msgid "usage: %s fontfile\n"
+#~ msgstr "utilizare: %s fișier tip font\n"
+
+#~ msgid "I_nstall Font"
+#~ msgstr "I_nstalează font"
+
+#~ msgid "Font Viewer"
+#~ msgstr "Vizualizator fonturi"
+
+#~ msgid "Preview fonts"
+#~ msgstr "Previzualizare caractere"
+
+#~ msgid "Text to thumbnail (default: Aa)"
+#~ msgstr "Text în miniatură (implicit: Aa)"
+
+#~ msgid "TEXT"
+#~ msgstr "TEXT"
+
+#~ msgid "Font size (default: 64)"
+#~ msgstr "Mărime font (implicit: 64)"
+
+#~ msgid "SIZE"
+#~ msgstr "MĂRIME"
+
+#~ msgid "FONT-FILE OUTPUT-FILE"
+#~ msgstr "FIȘIER-FONT FIȘIER-IEȘIRE"
 
 #~ msgid "Opera"
 #~ msgstr "Opera"
@@ -2303,26 +3750,14 @@ msgstr "To_ate configurările"
 #~ msgid "Swipe your left thumb on %s"
 #~ msgstr "Treceți degetul mare de la mâna stângă peste %s"
 
-#~ msgid "Place your left index finger on %s"
-#~ msgstr "Puneți degetul arătător de la mâna stângă pe %s"
-
 #~ msgid "Swipe your left index finger on %s"
 #~ msgstr "Treceți degetul arătător de la mâna stângă peste %s"
-
-#~ msgid "Place your left middle finger on %s"
-#~ msgstr "Puneți degetul mijlociu de la mâna stângă pe %s"
 
 #~ msgid "Swipe your left middle finger on %s"
 #~ msgstr "Treceți degetul mijlociu de la mâna stângă peste %s"
 
-#~ msgid "Place your left ring finger on %s"
-#~ msgstr "Puneți degetul inelar de la mâna stângă pe %s"
-
 #~ msgid "Swipe your left ring finger on %s"
 #~ msgstr "Treceți degetul inelar de la mâna stângă peste %s"
-
-#~ msgid "Place your left little finger on %s"
-#~ msgstr "Puneți degetul mic de la mâna stângă pe %s"
 
 #~ msgid "Swipe your left little finger on %s"
 #~ msgstr "Treceți degetul mic de la mâna stângă peste %s"
@@ -2333,26 +3768,14 @@ msgstr "To_ate configurările"
 #~ msgid "Swipe your right thumb on %s"
 #~ msgstr "Treceți degetul mare de la mâna dreaptă peste %s"
 
-#~ msgid "Place your right index finger on %s"
-#~ msgstr "Puneți degetul arătător de la mâna dreaptă pe %s"
-
 #~ msgid "Swipe your right index finger on %s"
 #~ msgstr "Treceți degetul arătător de la mâna dreaptă peste %s"
-
-#~ msgid "Place your right middle finger on %s"
-#~ msgstr "Puneți degetul mijlociu de la mâna dreaptă pe %s"
 
 #~ msgid "Swipe your right middle finger on %s"
 #~ msgstr "Treceți degetul mijlociu de la mâna dreaptă peste %s"
 
-#~ msgid "Place your right ring finger on %s"
-#~ msgstr "Puneți degetul inelar de la mâna dreaptă pe %s"
-
 #~ msgid "Swipe your right ring finger on %s"
 #~ msgstr "Treceți degetul inelar de la mâna dreaptă peste %s"
-
-#~ msgid "Place your right little finger on %s"
-#~ msgstr "Puneți degetul mic de la mâna dreaptă pe %s"
 
 #~ msgid "Swipe your right little finger on %s"
 #~ msgstr "Treceți degetul mic de la mâna dreaptă peste %s"
@@ -2378,12 +3801,6 @@ msgstr "To_ate configurările"
 #~ msgid "No Image"
 #~ msgstr "Fără imagine"
 
-#~ msgid "Images"
-#~ msgstr "Imagini"
-
-#~ msgid "All Files"
-#~ msgstr "Toate fișierele"
-
 #~ msgid ""
 #~ "There was an error while trying to get the addressbook information\n"
 #~ "Evolution Data Server can't handle the protocol"
@@ -2393,9 +3810,6 @@ msgstr "To_ate configurările"
 
 #~ msgid "Unable to open address book"
 #~ msgstr "Nu se poate deschide agenda"
-
-#~ msgid "About %s"
-#~ msgstr "Despre %s"
 
 #~ msgid "A_IM/iChat:"
 #~ msgstr "A_IM/iChat:"
@@ -2409,38 +3823,20 @@ msgstr "To_ate configurările"
 #~ msgid "Address"
 #~ msgstr "Adresă"
 
-#~ msgid "C_ity:"
-#~ msgstr "Or_aș:"
-
 #~ msgid "C_ompany:"
 #~ msgstr "C_ompanie:"
 
 #~ msgid "Cale_ndar:"
 #~ msgstr "Cale_ndar:"
 
-#~ msgid "Change Passwo_rd..."
-#~ msgstr "Schimbă pa_rola..."
-
 #~ msgid "Ci_ty:"
 #~ msgstr "_Oraș:"
-
-#~ msgid "Co_untry:"
-#~ msgstr "Ța_ră:"
 
 #~ msgid "Cou_ntry:"
 #~ msgstr "Ța_ră:"
 
-#~ msgid "Disable _Fingerprint Login..."
-#~ msgstr "Dezactivează autenti_ficarea pe bază de amprentă..."
-
 #~ msgid "Email"
 #~ msgstr "Email"
-
-#~ msgid "Enable _Fingerprint Login..."
-#~ msgstr "Activează autenti_ficarea pe bază de amprentă..."
-
-#~ msgid "Full Name"
-#~ msgstr "Nume complet"
 
 #~ msgid "Hom_e:"
 #~ msgstr "_Acasă:"
