@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2010-10-30 22:43+0000\n"
-"PO-Revision-Date: 2010-10-31 08:10+0530\n"
+"POT-Creation-Date: 2010-11-24 15:41+0000\n"
+"PO-Revision-Date: 2010-11-25 09:17+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -161,6 +161,12 @@ msgstr "ਬੈਕਗਰਾਊਂਡ"
 msgid "Change the background"
 msgstr "ਬੈਕਗਰਾਊਂਡ ਬਦਲੋ"
 
+#. Translators: those are keywords for the background control-center panel
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:4
+#| msgid "Wallpapers"
+msgid "Wallpaper;Screen;"
+msgstr "ਵਾਲਪੇਪਰ;ਸਕਰੀਨ;"
+
 #: ../panels/background/background.ui.h:1
 msgid "Center"
 msgstr "ਸੈਂਟਰ"
@@ -182,7 +188,7 @@ msgid "Tile"
 msgstr "ਟਾਈਲ"
 
 #: ../panels/background/background.ui.h:6
-#: ../panels/universal-access/uap.ui.h:95
+#: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
 msgstr "ਜ਼ੂਮ"
 
@@ -226,19 +232,19 @@ msgstr "ਸਲੇਟੀ"
 msgid "Black"
 msgstr "ਕਾਲਾ"
 
-#: ../panels/background/cc-background-panel.c:619
+#: ../panels/background/cc-background-panel.c:622
 msgid "Wallpapers"
 msgstr "ਵਾਲਪੇਪਰ"
 
-#: ../panels/background/cc-background-panel.c:627
+#: ../panels/background/cc-background-panel.c:630
 msgid "Pictures Folder"
 msgstr "ਤਸਵੀਰ ਫੋਲਡਰ"
 
-#: ../panels/background/cc-background-panel.c:635
+#: ../panels/background/cc-background-panel.c:638
 msgid "Colors"
 msgstr "ਰੰਗ"
 
-#: ../panels/background/cc-background-panel.c:644
+#: ../panels/background/cc-background-panel.c:647
 msgid "Flickr"
 msgstr "ਫਲਿੱਕਰ"
 
@@ -405,11 +411,16 @@ msgstr "ਸਮਾਂ ਆਟੋਮੈਟਿਕ ਹੀ ਸੈੱਟ ਕਰੋ"
 msgid "Year:"
 msgstr "ਸਾਲ:"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
+#. Translators: those are keywords for the date and time control-center panel
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+msgid "Clock;Timezone;Location;"
+msgstr "ਘੜੀ;ਸਮਾਂ-ਖੇਤਰ;ਟਿਕਾਣਾ;"
+
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
 msgid "Date And Time"
 msgstr "ਮਿਤੀ ਤੇ ਸਮਾਂ"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Date and Time preferences panel"
 msgstr "ਮਿਤੀ ਤੇ ਸਮਾਂ ਪਸੰਦ ਪੈਨਲ"
 
@@ -441,9 +452,6 @@ msgid "Error setting default mailer: %s"
 msgstr "ਡਿਫਾਲਟ ਮੇਲਰ ਸੈੱਟ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ: %s"
 
 #: ../panels/default-applications/gnome-da-capplet.c:321
-#: ../panels/sound/gvc-sound-theme-chooser.c:623
-#: ../panels/sound/gvc-sound-theme-editor.c:705
-#: ../panels/sound/gvc-sound-theme-editor.c:759
 #: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
 msgstr "ਕਸਟਮ"
@@ -457,7 +465,6 @@ msgid "Please make sure that the applet is properly installed"
 msgstr "ਇਹ ਵੇਖ ਲਵੋ ਕਿ ਐਪਲਿਟ ਠੀਕ ਤਰ੍ਹਾਂ ਇੰਸਟਾਲ ਹੈ"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:1
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:1
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Accessibility"
 msgstr "ਸੁਲੱਭਤਾ"
@@ -467,11 +474,8 @@ msgstr "ਸੁਲੱਭਤਾ"
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "ਸਭ %s ਮੌਜੂਦਗੀਆਂ ਨੂੰ ਅਸਲ ਲਿੰਕ ਨਾਲ ਤਬਦੀਲ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ"
 
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:4
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "C_ommand:"
 msgstr "ਕਮਾਂਡ(_o):"
 
@@ -532,207 +536,99 @@ msgid "_Run at start"
 msgstr "ਸ਼ੁਰੂ ਸਮੇਂ ਚਲਾਓ(_R)"
 
 #: ../panels/default-applications/gnome-default-applications.xml.in.h:1
-msgid "Balsa"
-msgstr "ਬਲਸਾ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Banshee Music Player"
 msgstr "ਬਾਂਸ਼ੀ ਸੰਗੀਤ ਪਲੇਅਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
-msgid "Claws Mail"
-msgstr "ਕਲਾਅਸ ਮੇਲ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Dasher"
 msgstr "ਡੈਸ਼ਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
-msgid "Debian Sensible Browser"
-msgstr "ਡੇਬੀਅਨ ਸੁਲਝਿਆ ਬਰਾਊਜ਼ਰ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Debian Terminal Emulator"
 msgstr "ਡੇਬੀਅਨ ਟਰਮੀਨਲ ਸਮਰੂਪ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
-msgid "Encompass"
-msgstr "ਈ-ਕੰਪਾਸ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
-msgid "Epiphany Web Browser"
-msgstr "ਏਪੀਫਨੀ ਵੈੱਬ ਬਰਾਊਜ਼ਰ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
-msgid "Evolution Mail Reader"
-msgstr "ਈਵੂਲੇਸ਼ਨ ਮੇਲ ਰੀਡਰ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
-msgid "Firebird"
-msgstr "ਫਾਇਰਬਰਡ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
-msgid "Firefox"
-msgstr "ਫਾਇਰਫਾਕਸ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
 msgid "GNOME Magnifier without Screen Reader"
 msgstr "ਸਕਰੀਨ ਰੀਡਰ ਦੇ ਬਿਨਾਂ ਗਨੋਮ ਵੱਡਦਰਸ਼ੀ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
 msgid "GNOME OnScreen Keyboard"
 msgstr "ਗਨੋਮ ਆਨ-ਸਕਰੀਨ ਕੀਬੋਰਡ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
 msgid "GNOME Terminal"
 msgstr "ਗਨੋਮ ਟਰਮੀਨਲ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
-msgid "Galeon"
-msgstr "ਗਲੇਓਨ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Gnopernicus"
 msgstr "ਜੀ-ਨੋਪੀਰਕਿਸ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Gnopernicus with Magnifier"
 msgstr "ਵੱਡਦਰਸ਼ੀ ਨਾਲ ਜੀ-ਨੋਪੀਰਕਿਸ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
-msgid "Iceape"
-msgstr "Iceape"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
-msgid "Iceape Mail"
-msgstr "Iceape ਮੇਲ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
-msgid "Icedove"
-msgstr "Icedove"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
-msgid "Iceweasel"
-msgstr "Iceweasel"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
 msgid "KDE Magnifier without Screen Reader"
 msgstr "KDE ਵੱਡਦਰਸ਼ੀ ਬਿਨਾਂ ਸਕਰੀਨ ਰੀਡਰ ਦੇ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
-msgid "KMail"
-msgstr "ਕੇ-ਮੇਲ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:25
-msgid "Konqueror"
-msgstr "ਕੋਨਕਿਉਰੋਰ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:26
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Konsole"
 msgstr "ਕਨਸੋਂਲ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:27
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Linux Screen Reader"
 msgstr "ਲੀਨਕਸ ਸਕਰੀਨ ਰੀਡਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:28
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
 msgid "Linux Screen Reader with Magnifier"
 msgstr "ਵੱਡਦਰਸ਼ੀ ਨਾਲ ਲਿਨਕਸ ਸਕਰੀਨ ਰੀਡਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:29
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Listen"
 msgstr "ਲਿਸਨ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:30
-msgid "Midori"
-msgstr "ਮੀਡੋਰੀ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:31
-msgid "Mozilla"
-msgstr "ਮੋਜ਼ੀਲਾ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:32
-msgid "Mozilla 1.6"
-msgstr "ਮੋਜ਼ੀਲਾ ੧.੬"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:33
-msgid "Mozilla Mail"
-msgstr "ਮੋਜ਼ੀਲਾ ਮੇਲ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:34
-msgid "Mozilla Thunderbird"
-msgstr "ਮੋਜ਼ੀਲਾ ਥੰਡਰਬਰਡ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:35
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Muine Music Player"
 msgstr "ਮੂਇਮ ਸੰਗੀਤ ਪਲੇਅਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:36
-msgid "Mutt"
-msgstr "ਮੱਟ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:37
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:38
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:39
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Orca"
 msgstr "ਓਰਕਾ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Orca with Magnifier"
 msgstr "ਓਰਕਾ ਨਾਲ ਵੱਡਦਰਸ਼ੀ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
 msgid "Rhythmbox Music Player"
 msgstr "ਰੀਥਮਬਾਕਸ ਸੰਗੀਤ ਪਲੇਅਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
-msgid "SeaMonkey"
-msgstr "ਸਾਅਮਾਂਕੀ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
-msgid "SeaMonkey Mail"
-msgstr "ਸਾਅਮਾਂਕੀ ਮੇਲ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
 msgid "Standard XTerminal"
 msgstr "ਸਟੈਂਡਰਡ XTerminal"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
-msgid "Sylpheed"
-msgstr "Sylpheed"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Terminator"
 msgstr "ਟਰਮੀਨੇਟਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
-msgid "Thunderbird"
-msgstr "ਥੰਡਰਬਰਡ"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
 msgid "Totem Movie Player"
 msgstr "ਟੋਟੇਮ ਮੂਵੀ ਪਲੇਅਰ"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
 msgid "aterm"
 msgstr "aterm"
 
@@ -741,29 +637,29 @@ msgid "<i>Note: may limit resolution options</i>"
 msgstr "<i>ਨੋਟ: ਤੁਸੀਂ ਰੈਜ਼ੋਲੂਸ਼ਨ ਚੋਣਾਂ ਸੀਮਿਤ ਕਰ ਸਕਦੇ ਹੋ</i>"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:316
+#: ../panels/display/xrandr-capplet.c:317
 msgid "Left"
 msgstr "ਖੱਬੇ"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:520
+#: ../panels/display/xrandr-capplet.c:469
 msgid "Monitor"
 msgstr "ਮਾਨੀਟਰ"
 
 #: ../panels/display/display-capplet.ui.h:4
-#: ../panels/display/xrandr-capplet.c:315
-#: ../panels/display/xrandr-capplet.c:354
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/display/xrandr-capplet.c:316
+#: ../panels/display/xrandr-capplet.c:355
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Normal"
 msgstr "ਆਮ"
 
 #: ../panels/display/display-capplet.ui.h:5
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Off"
 msgstr "ਬੰਦ"
 
 #: ../panels/display/display-capplet.ui.h:6
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:60
 msgid "On"
 msgstr "ਚਾਲੂ"
 
@@ -772,156 +668,161 @@ msgid "R_otation:"
 msgstr "ਘੁੰਮਣ(_o):"
 
 #: ../panels/display/display-capplet.ui.h:8
-msgid "Re_fresh rate:"
-msgstr "ਤਾਜ਼ਾ ਦਰ(_f):"
-
-#: ../panels/display/display-capplet.ui.h:9
-#: ../panels/display/xrandr-capplet.c:317
+#: ../panels/display/xrandr-capplet.c:318
 msgid "Right"
 msgstr "ਸੱਜੇ"
 
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:9
 msgid "Upside-down"
 msgstr "ਉਤਲਾ ਹੇਠ"
 
-#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:10
 msgid "_Detect monitors"
 msgstr "ਮਾਨੀਟਰ ਖੋਜ(_D)"
 
-#: ../panels/display/display-capplet.ui.h:12
-msgid "_Include Top Menu Bar"
-msgstr "ਉੱਤੇ ਮੇਨੂ ਪੱਟੀ ਸਮੇਤ(_I)"
-
-#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/display/display-capplet.ui.h:11
 msgid "_Mirror Screens"
 msgstr "ਸਕਰੀਨਾਂ ਮਿੱਰਰ(_M)"
 
-#: ../panels/display/display-capplet.ui.h:14
+#: ../panels/display/display-capplet.ui.h:12
 msgid "_Resolution:"
 msgstr "ਰੈਜ਼ੋਲੇਸ਼ਨ(_R):"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
-msgid "Change resolution and position of monitors"
-msgstr "ਮਾਨੀਟਰਾਂ ਦਾ ਰੈਜ਼ੋਲੂਸ਼ਨ ਅਤੇ ਸਥਿਤੀ ਬਦਲੋ"
+#| msgid "Change resolution and position of monitors"
+msgid "Change resolution and position of monitors and projectors"
+msgstr "ਮਾਨੀਟਰਾਂ ਤੇ ਪਰੋਜੈਕਟਰ ਦਾ ਰੈਜ਼ੋਲੂਸ਼ਨ ਅਤੇ ਸਥਿਤੀ ਬਦਲੋ"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-msgid "Monitors"
-msgstr "ਮਾਨੀਟਰ"
+#| msgid "Display"
+msgid "Displays"
+msgstr "ਡਿਸਪਲੇਅ"
 
-#: ../panels/display/xrandr-capplet.c:318
+#. Translators: those are keywords for the display control-center panel
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:4
+msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
+msgstr "ਪੈਨਲ;ਪਰੋਜੈਕਟਰ;xrandr;ਸਕਰੀਨ;ਰੈਜ਼ੋਲੂਸ਼ਨ;ਤਾਜ਼ਾ;"
+
+#: ../panels/display/xrandr-capplet.c:319
 msgid "Upside Down"
 msgstr "ਉਤਲਾ ਹੇਠ"
-
-#: ../panels/display/xrandr-capplet.c:360
-#, c-format
-msgid "%d Hz"
-msgstr "%d Hz"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:509
-#: ../panels/display/xrandr-capplet.c:1658
+#: ../panels/display/xrandr-capplet.c:458
+#: ../panels/display/xrandr-capplet.c:1719
 msgid "Mirror Screens"
 msgstr "ਦਰਪਨ ਸਕਰੀਨਾਂ"
 
-#: ../panels/display/xrandr-capplet.c:511
+#: ../panels/display/xrandr-capplet.c:574
 #, c-format
-msgid "Monitor: %s"
-msgstr "ਮਾਨੀਟਰ: %s"
+#| msgid "%d x %d"
+msgid "%d x %d (%s)"
+msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:589
+#: ../panels/display/xrandr-capplet.c:576
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1513
+#: ../panels/display/xrandr-capplet.c:1482
+msgid "Drag to change primary display."
+msgstr "ਪ੍ਰਾਇਮਰੀ ਡਿਸਪਲੇਅ ਬਦਲਣ ਲਈ ਡਰੈਗ ਕਰੋ।"
+
+#: ../panels/display/xrandr-capplet.c:1540
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr "ਮਾਨੀਟਰ ਦੀ ਵਿਸ਼ੇਸ਼ਤਾ ਬਦਲਣ ਲਈ ਇਹ ਚੁਣੋ; ਇਸ ਦੀ ਸਥਿਤੀ ਬਦਲਣ ਲਈ ਡਰੈਗ ਕਰੋ।"
 
-#: ../panels/display/xrandr-capplet.c:2081
+#: ../panels/display/xrandr-capplet.c:1945
+msgid "%a %R"
+msgstr "%a %R"
+
+#: ../panels/display/xrandr-capplet.c:1947
+msgid "%a %l:%M %p"
+msgstr "%a %l:%M %p"
+
+#: ../panels/display/xrandr-capplet.c:2232
 msgid "Could not save the monitor configuration"
 msgstr "ਮਾਨੀਟਰ ਸੰਰਚਨਾ ਸੰਭਾਲੀ ਨਹੀਂ ਜਾ ਸਕੀ"
 
-#: ../panels/display/xrandr-capplet.c:2104
+#: ../panels/display/xrandr-capplet.c:2255
 msgid "Could not get session bus while applying display configuration"
 msgstr "ਸ਼ੈਸ਼ਨ ਬੱਸ ਡਿਸਪਲੇਅ ਸੰਰਚਨਾ ਲਾਗੂ ਕਰਨ ਦੌਰਾਨ ਲਈ ਨਹੀਂ ਜਾ ਸਕੀ"
 
-#: ../panels/display/xrandr-capplet.c:2149
+#: ../panels/display/xrandr-capplet.c:2300
 msgid "Could not detect displays"
 msgstr "ਡਿਸਪਲੇਅ ਖੋਜੇ ਨਹੀਂ ਜਾ ਸਕੇ"
 
-#: ../panels/display/xrandr-capplet.c:2356
+#: ../panels/display/xrandr-capplet.c:2507
 msgid "Could not get screen information"
 msgstr "ਸਕਰੀਨ ਜਾਣਕਾਰੀ ਲਈ ਨਹੀਂ ਜਾ ਸਕੀ"
 
-#: ../panels/keybindings/00-multimedia-key.xml.in.h:1
-#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
+#: ../panels/keyboard/00-multimedia-key.xml.in.h:1
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Sound"
 msgstr "ਸਾਊਂਡ"
 
-#: ../panels/keybindings/01-desktop-key.xml.in.h:1
+#: ../panels/keyboard/01-desktop-key.xml.in.h:1
 msgid "Desktop"
 msgstr "ਡੈਸਕਟਾਪ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:21
+#: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
 msgstr "ਨਵਾਂ ਸ਼ਾਰਟਕੱਟ..."
 
-#: ../panels/keybindings/eggcellrendererkeys.c:164
-#: ../panels/keybindings/eggcellrendererkeys.c:165
+#: ../panels/keyboard/eggcellrendererkeys.c:164
+#: ../panels/keyboard/eggcellrendererkeys.c:165
 msgid "Accelerator key"
 msgstr "ਐਕਸਰਲੇਟਰ ਸਵਿੱਚ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:174
-#: ../panels/keybindings/eggcellrendererkeys.c:175
+#: ../panels/keyboard/eggcellrendererkeys.c:174
+#: ../panels/keyboard/eggcellrendererkeys.c:175
 msgid "Accelerator modifiers"
 msgstr "ਐਕਸਰਲੇਟਰ ਸੋਧਕ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:183
-#: ../panels/keybindings/eggcellrendererkeys.c:184
+#: ../panels/keyboard/eggcellrendererkeys.c:183
+#: ../panels/keyboard/eggcellrendererkeys.c:184
 msgid "Accelerator keycode"
 msgstr "ਐਕਸਰਲੇਟਰ ਸਵਿੱਚ-ਕੋਡ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:194
+#: ../panels/keyboard/eggcellrendererkeys.c:194
 msgid "Accel Mode"
 msgstr "ਐਸਲ ਢੰਗ"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:195
+#: ../panels/keyboard/eggcellrendererkeys.c:195
 msgid "The type of accelerator."
 msgstr "ਐਕਸਰਲੇਟਰ ਦੀ ਕਿਸਮ ਹੈ।"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keybindings/eggcellrendererkeys.c:243
-#: ../panels/keybindings/gnome-keybinding-properties.c:101
-#: ../panels/sound/gvc-mixer-control.c:1087
-#: ../panels/sound/gvc-sound-theme-editor.c:895
-#: ../panels/sound/gvc-sound-theme-editor.c:991
+#: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/gnome-keyboard-panel.c:102
+#: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
-#: ../panels/user-accounts/um-login-options.c:354
+#: ../panels/user-accounts/um-login-options.c:355
 msgid "Disabled"
 msgstr "ਅਯੋਗ"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:182
+#: ../panels/keyboard/gnome-keyboard-panel.c:183
 msgid "<Unknown Action>"
 msgstr "<ਅਣਜਾਣੀ ਕਾਰਵਾਈ>"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:932
-#: ../panels/keybindings/gnome-keybinding-properties.c:1563
+#: ../panels/keyboard/gnome-keyboard-panel.c:933
+#: ../panels/keyboard/gnome-keyboard-panel.c:1564
 msgid "Custom Shortcuts"
 msgstr "ਕਸਟਮ ਸ਼ਾਰਟਕੱਟ"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1074
+#: ../panels/keyboard/gnome-keyboard-panel.c:1075
 msgid "Error saving the new shortcut"
 msgstr "ਨਵਾਂ ਸ਼ਾਰਟਕੱਟ ਸੰਭਾਲਣ ਦੌਰਾਨ ਗਲਤੀ"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1153
+#: ../panels/keyboard/gnome-keyboard-panel.c:1154
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -932,7 +833,7 @@ msgstr ""
 "ਜਾਵੇਗਾ।\n"
 "ਇੱਕ ਅਜੇਹੀ ਸਵਿੱਚ ਨਾਲ ਕੋਸ਼ਿਸ਼ ਕਰੋ, ਜਿਸ ਵਿੱਚ ਇੱਕ ਸਮੇਂ Control, Alt ਜਾਂ Shift ਇੱਕਠੇ ਹੋਣ।"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1183
+#: ../panels/keyboard/gnome-keyboard-panel.c:1184
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -941,42 +842,125 @@ msgstr ""
 "ਸ਼ਾਰਟਕੱਟ \"%s\" ਪਹਿਲਾਂ ਹੀ ਵਰਤਿਆ ਜਾ ਰਿਹਾ ਹੈ\n"
 " \"%s\""
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1189
+#: ../panels/keyboard/gnome-keyboard-panel.c:1190
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "ਜੇ ਤੁਸੀਂ ਸ਼ਾਰਟਕੱਟ \"%s\" ਲਈ ਦਿੱਤਾ ਤਾਂ \"%s\" ਸ਼ਾਰਟਕੱਟ ਆਯੋਗ ਹੋ ਜਾਵੇਗਾ।"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1197
+#: ../panels/keyboard/gnome-keyboard-panel.c:1198
 msgid "_Reassign"
 msgstr "ਮੁੜ-ਜਾਰੀ(_R)"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1317
+#: ../panels/keyboard/gnome-keyboard-panel.c:1318
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "ਗਲਤੀ, ਸੰਰਚਨਾ ਡੈਟਾਬੇਸ ਵਿੱਚ ਨਵਾਂ ਐਕਸਰਲੇਟਰ ਅਣ-ਸੈਟਿੰਗ ਕਰਨ ਵਿੱਚ: %s"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1518
+#: ../panels/keyboard/gnome-keyboard-panel.c:1519
 msgid "Too many custom shortcuts"
 msgstr "ਬਹੁਤ ਸਾਰੇ ਕਸਟਮ ਸ਼ਾਰਟਕੱਟ"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1850
+#: ../panels/keyboard/gnome-keyboard-panel.c:1881
 msgid "Action"
 msgstr "ਕਾਰਵਾਈ"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1872
+#: ../panels/keyboard/gnome-keyboard-panel.c:1903
 msgid "Shortcut"
 msgstr "ਸ਼ਾਰਟਕੱਟ"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:2
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
+#| msgid "Keyboard Settings..."
+msgid "Change keyboard settings"
+msgstr "ਕੀਬੋਰਡ ਸੈਟਿੰਗ ਬਦਲੋ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+msgid "Keyboard"
+msgstr "ਕੀ-ਬੋਰਡ"
+
+#. Translators: those are keywords for the keyboard control-center panel
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
+msgid "Shortcut;Repeat;Blink;"
+msgstr "ਸ਼ਾਰਟਕੱਟ;ਦੁਹਰਾਉ;ਬਲਿੰਕ;"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Cursor Blinking"
+msgstr "ਝਪਕਦੀ ਕਰਸਰ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Cursor _blinks in text fields"
+msgstr "ਟੈਕਸਟ ਖੇਤਰਾਂ ਵਿੱਚ ਕਰਸਰ ਝਪਕਾਓ(_b)"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/universal-access/uap.ui.h:28
+msgid "Cursor blinks speed"
+msgstr "ਕਰਸਰ ਝਪਕਣ ਗਤੀ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
 msgid "Custom Shortcut"
 msgstr "ਕਸਟਮ ਸ਼ਾਰਟਕੱਟ"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:3
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:2
-msgid "Keyboard Shortcuts"
-msgstr "ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟ"
+#. fast acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+msgid "Fast"
+msgstr "ਤੇਜ਼"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+msgid "General"
+msgstr "ਆਮ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
+msgid "Key presses _repeat when key is held down"
+msgstr "ਸਵਿੱਚ-ਦਹਰਾਉ, ਜਦੋ ਕਿ ਸਵਿੱਚ ਨੂੰ ਦਬਾਈ ਰੱਖਿਆ ਜਾਵੇ"
+
+#. long delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Long"
+msgstr "ਲੰਮਾ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+msgid "Repeat Keys"
+msgstr "ਦੁਹਰਾਉ ਸਵਿੱਚਾਂ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+msgid "Repeat keys speed"
+msgstr "ਸਵਿੱਚਾਂ ਨੂੰ ਮੁੜ-ਦਬਾਉਣ ਗਤੀ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+msgid "S_peed:"
+msgstr "ਸਪੀਡ(_p):"
+
+#. short delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Short"
+msgstr "ਛੋਟਾ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#| msgid "Shortcut"
+msgid "Shortcuts"
+msgstr "ਸ਼ਾਰਟਕੱਟ"
+
+#. slow acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+msgid "Slow"
+msgstr "ਹੌਲੀ"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new key "
 "combination, or press backspace to clear."
@@ -984,189 +968,288 @@ msgstr ""
 "ਸ਼ਾਰਟਕੱਟ ਸਵਿੱਚ ਸੋਧਣ ਲਈ, ਅਨੁਸਾਰੀ ਕਤਾਰ ਨੂੰ ਦਬਾਉ ਅਤੇ ਨਵਾਂ ਐਕਸਰਲੇਟਰ ਸਵਿੱਚ ਦਿਉ ਜਾਂ ਬੈਕਸਪੇਸ ਸਾਫ਼ "
 "ਕਰਨ ਲਈ ਵਰਤੋਂ।"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:49
+msgid "_Delay:"
+msgstr "ਦੇਰੀ(_D):"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid "_Name:"
 msgstr "ਨਵਾਂ(_N):"
 
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
-msgid "Assign shortcut keys to commands"
-msgstr "ਕਮਾਡਾਂ ਨੂੰ ਸ਼ਾਰਟਕੱਟ ਮੁਹੱਈਆ ਕਰੋ:"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/region/gnome-region-panel.ui.h:28
+msgid "_Speed:"
+msgstr "ਸਪੀਡ(_S):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
-msgid "Beep when _accessibility features are turned on or off"
-msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ ਕੀ-ਬੋਰਡ ਤੋਂ ਫੀਚਰ ਚਾਲੂ ਜਾਂ ਬੰਦ ਹੋਣ(_a)"
+#: ../panels/media/cc-media-panel.c:513
+#| msgid "Set as Application Font"
+msgid "No applications found"
+msgstr "ਕੋਈ ਐਪਲੀਕੇਸ਼ਨ ਨਹੀਂ ਲੱਭੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
-msgid "Beep when a _modifier key is pressed"
-msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ  ਮੋਡੀਫਾਇਰ ਨੂੰ ਦਬਾਇਆ ਜਾਵੇ(_m)"
+#: ../panels/media/cc-media-panel.c:525
+msgid "Ask what to do"
+msgstr "ਪੁੱਛੋ ਕਿ ਕੀ ਕਰਨਾ ਹੈ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
-msgid "Beep when a _toggle key is pressed"
-msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ ਟਾਗਲ ਸਵਿੱਚ ਨੂੰ ਦਬਾਇਆ ਜਾਵੇ(_t)"
+#: ../panels/media/cc-media-panel.c:537
+#| msgid "Smoothing"
+msgid "Do Nothing"
+msgstr "ਕੁਝ ਨਹੀਂ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
-msgid "Beep when a key is pr_essed"
-msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ ਸਵਿੱਚ ਨੂੰ ਦਬਾਇਆ ਜਾਵੇ(_e)"
+#: ../panels/media/cc-media-panel.c:549
+#| msgid "Open File"
+msgid "Open Folder"
+msgstr "ਫੋਲਡਰ ਖੋਲ੍ਹੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
-msgid "Beep when a key is reje_cted"
-msgstr "ਬੀਪ, ਜੇਕਰ ਸਵਿੱਚ ਰੱਦ ਹੋਵੇ(_c)"
+#: ../panels/media/cc-media-panel.c:575
+#, c-format
+#| msgid "Open"
+msgid "Open %s"
+msgstr "%s ਖੋਲ੍ਹੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
-msgid "Beep when key is _accepted"
-msgstr "ਬੀਪ, ਜਦੋਂ ਸਵਿੱਚ ਮਨਜ਼ੂਰ ਕੀਤੀ ਜਾਵੇ(_a)"
+#: ../panels/media/cc-media-panel.c:608
+msgid "Open with other Application..."
+msgstr "...ਹੋਰ ਐਪਲੀਕੇਸ਼ਨ ਨਾਲ ਖੋਲ੍ਹੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
-msgid "Beep when key is _rejected"
-msgstr "ਬੀਪ, ਜੇਕਰ ਸਵਿੱਚ ਰੱਦ ਹੋਵੇ(_r)"
+#: ../panels/media/nautilus-open-with-dialog.c:160
+#| msgid "Could not get screen information"
+msgid "Could not run application"
+msgstr "ਐਫਲੀਕੇਸ਼ਨ ਚਲਾਈ ਨਹੀਂ ਜਾ ਸਕੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
-#: ../panels/universal-access/uap.ui.h:17
-msgid "Bounce Keys"
-msgstr "ਬਾਊਂਸ ਸਵਿੱਚਾਂ"
+#: ../panels/media/nautilus-open-with-dialog.c:172
+#, c-format
+#| msgid "Could not open %s: %s\n"
+msgid "Could not find '%s'"
+msgstr "'%s' ਨਹੀਂ ਲੱਭੀ ਜਾ ਸਕੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
-msgid "Flash _window titlebar"
-msgstr "ਵਿੰਡੋ ਟਾਈਟਲਬਾਰ ਝਲਕਾਉ(_w)"
+#: ../panels/media/nautilus-open-with-dialog.c:175
+#| msgid "Version of this application"
+msgid "Could not find application"
+msgstr "ਐਪਲੀਕੇਸ਼ਣ ਨਹੀਂ ਲੱਭੀ ਜਾ ਸਕੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
-msgid "Flash entire _screen"
-msgstr "ਪੂਰੀ ਸਕਰੀਨ ਝਲਕਾਉ(_s)"
+#: ../panels/media/nautilus-open-with-dialog.c:250
+#, c-format
+msgid "Could not add application to the application database: %s"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਐਪਲੀਕੇਸ਼ਨ ਡਾਟਾਬੇਸ ਵਿੱਚ ਸ਼ਾਮਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
-msgid "General"
-msgstr "ਆਮ"
+#: ../panels/media/nautilus-open-with-dialog.c:251
+#| msgid "Version of this application"
+msgid "Could not add application"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਸ਼ਾਮਲ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
-msgid "Keyboard Accessibility Audio Feedback"
-msgstr "ਕੀਬੋਰਡ ਅਸੈੱਸਬਿਲਟੀ ਆਡੀਓ ਫੀਡਬੈਕ"
+#: ../panels/media/nautilus-open-with-dialog.c:289
+#, c-format
+#| msgid "Could not get information for %s: %s\n"
+msgid "Could not set application as the default: %s"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਡਿਫਾਲਟ ਸੈੱਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
-msgid "Show _visual feedback for the alert sound"
-msgstr "ਚੇਤਾਵਨੀ ਸਾਊਂਡ ਲਈ ਦਿੱਖ ਫੀਡਬੈਕ ਵੇਖੋ(_v)"
+#: ../panels/media/nautilus-open-with-dialog.c:290
+#| msgid "Select your default applications"
+msgid "Could not set as default application"
+msgstr "ਡਿਫਾਲਟ ਐਪਲੀਕੇਸ਼ਨ ਸੈੱਟ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
-#: ../panels/universal-access/uap.ui.h:76
-msgid "Slow Keys"
-msgstr "ਹੌਲੀ-ਸਵਿੱਚਾਂ"
+#: ../panels/media/nautilus-open-with-dialog.c:427
+#| msgid "Set as Application Font"
+msgid "Select an Application"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਚੁਣੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Sticky Keys"
-msgstr "ਸਟਿੱਕੀ ਸਵਿੱਚਾਂ"
+#: ../panels/media/nautilus-open-with-dialog.c:786
+#| msgid "Open with \"%s\""
+msgid "Open With"
+msgstr "ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
-msgid "Visual cues for sounds"
-msgstr "ਸਾਊਂਡ ਲਈ ਦਿੱਖ ਨਿਸ਼ਾਨ"
+#: ../panels/media/nautilus-open-with-dialog.c:822
+msgid "Select an application to view its description."
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਵੇਰਵਾ ਵੇਖਣ ਲਈ ਇਸ ਨੂੰ ਚੁਣੋ।"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
-msgid "Audio _Feedback..."
-msgstr "ਆਡੀਓ ਫੀਡਬੈਕ(_F)..."
+#: ../panels/media/nautilus-open-with-dialog.c:847
+msgid "_Use a custom command"
+msgstr "ਇੱਕ ਪਸੰਦੀਦਾ ਕਮਾਂਡ ਵਰਤੋਂ(_U)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
-msgid "Cursor Blinking"
-msgstr "ਝਪਕਦੀ ਕਰਸਰ"
+#: ../panels/media/nautilus-open-with-dialog.c:864
+#| msgid "Browse"
+msgid "_Browse..."
+msgstr "ਝਲਕ(_B)..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
-msgid "Cursor _blinks in text fields"
-msgstr "ਟੈਕਸਟ ਖੇਤਰਾਂ ਵਿੱਚ ਕਰਸਰ ਝਪਕਾਓ(_b)"
+#: ../panels/media/nautilus-open-with-dialog.c:900
+#| msgid "Open"
+msgid "_Open"
+msgstr "ਖੋਲ੍ਹੋ(_O)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Cursor blinks speed"
-msgstr "ਕਰਸਰ ਝਪਕਣ ਗਤੀ"
+#. first %s is a filename and second %s is a file extension
+#: ../panels/media/nautilus-open-with-dialog.c:980
+#, c-format
+msgid "Open %s and other %s document with:"
+msgstr "%s ਅਤੇ ਹੋਰ %s ਡੌਕੂਮੈਂਟ ਖੋਲ੍ਹੋ:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#: ../panels/universal-access/uap.ui.h:30
-msgid "D_elay:"
-msgstr "ਡਿਲੇਅ(_e):"
+#. the %s here is a file name
+#. %s is a filename
+#: ../panels/media/nautilus-open-with-dialog.c:984
+#: ../panels/media/nautilus-open-with-dialog.c:1015
+#, c-format
+#| msgid "Open with \"%s\""
+msgid "Open %s with:"
+msgstr "%s ਨਾਲ ਖੋਲ੍ਹੋ:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
-msgid "Disa_ble sticky keys if two keys are pressed together"
-msgstr "ਜੇਕਰ ਦੋ ਸਵਿੱਚਾਂ ਇਕੱਠੀਆਂ ਦਬਾਈਆਂ ਜਾਣ ਤਾਂ ਸਟਿੱਕੀ ਸਵਿੱਚਾਂ ਆਯੋਗ(_b)"
+#: ../panels/media/nautilus-open-with-dialog.c:985
+#, c-format
+msgid "_Remember this application for %s documents"
+msgstr "%s ਡੌਕੂਮੈਂਟ ਲਈ ਇਹ ਐਪਲੀਕੇਸ਼ਨ ਯਾਦ ਰੱਖੋ(_R)"
 
-#. fast acceleration
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-msgid "Fast"
-msgstr "ਤੇਜ਼"
+#. Only in add mode - the %s here is a file extension
+#: ../panels/media/nautilus-open-with-dialog.c:994
+#, c-format
+msgid "Open all %s documents with:"
+msgstr "ਸਭ %s ਡੌਕੂਮੈਂਟ ਖੋਲ੍ਹੋ:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
-msgid "Key presses _repeat when key is held down"
-msgstr "ਸਵਿੱਚ-ਦਹਰਾਉ, ਜਦੋ ਕਿ ਸਵਿੱਚ ਨੂੰ ਦਬਾਈ ਰੱਖਿਆ ਜਾਵੇ"
+#: ../panels/media/nautilus-open-with-dialog.c:1003
+#: ../panels/region/gnome-region-panel-xkb.c:70
+msgid "Unknown"
+msgstr "ਅਣਜਾਣ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
-msgid "Keyboard Preferences"
-msgstr "ਕੀ-ਬੋਰਡ ਪਸੰਦ"
+#. First %s is a filename, second is a description
+#. * of the type, eg "plain text document"
+#: ../panels/media/nautilus-open-with-dialog.c:1011
+#, c-format
+msgid "Open %s and other \"%s\" files with:"
+msgstr "%s ਅਤੇ ਹੋਰ \"%s\" ਫਾਇਲਾਂ ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
+#. %s is a file type description
+#: ../panels/media/nautilus-open-with-dialog.c:1017
+#, c-format
+msgid "_Remember this application for \"%s\" files"
+msgstr "\"%s\" ਫਾਇਲਾਂ ਲਈ ਇਹ ਐਪਲੀਕੇਸ਼ਨ ਯਾਦ ਰੱਖੋ(_R)"
+
+#. Only in add mode
+#: ../panels/media/nautilus-open-with-dialog.c:1026
+#, c-format
+msgid "Open all \"%s\" files with:"
+msgstr "ਸਭ \"%s\" ਫਾਇਲਾਂ ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ:"
+
+#: ../panels/media/nautilus-open-with-dialog.c:1037
+#| msgid "_Add..."
+msgid "_Add"
+msgstr "ਸ਼ਾਮਲ(_A)"
+
+#: ../panels/media/nautilus-open-with-dialog.c:1038
+#| msgid "Applications"
+msgid "Add Application"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਸ਼ਾਮਲ"
+
+#: ../panels/media/gnome-media-properties.ui.h:1
+#| msgid "_Action:"
+msgid "Acti_on:"
+msgstr "ਐਕਸ਼ਨ(_o):"
+
+#: ../panels/media/gnome-media-properties.ui.h:2
+msgid "CD _Audio:"
+msgstr "CD ਆਡੀਓ(_A):"
+
+#: ../panels/media/gnome-media-properties.ui.h:3
+msgid "Media and Autorun"
+msgstr "ਮੀਡਿਆ ਅਤੇ ਆਟੋ-ਰਨ"
+
+#: ../panels/media/gnome-media-properties.ui.h:4
+#| msgid "Other..."
+msgid "Other Media..."
+msgstr "...ਹੋਰ ਮੀਡਿਆ"
+
+#: ../panels/media/gnome-media-properties.ui.h:5
+msgid "Select how media should be handled"
+msgstr "ਚੁਣੋ ਕਿ ਹੋਰ ਮੀਡਿਆ ਕੇਵਲ ਵਰਤਿਆ ਜਾਵੇ"
+
+#: ../panels/media/gnome-media-properties.ui.h:6
+msgid "Select how other media should be handled"
+msgstr "ਚੁਣੋ ਕਿ ਹੋਰ ਮੀਡਿਆ ਕਿਵੇਂ ਵਰਤਿਆ ਜਾਵੇ"
+
+#: ../panels/media/gnome-media-properties.ui.h:7
+msgid "_DVD Video:"
+msgstr "_DVD ਵਿਡੀਓ:"
+
+#: ../panels/media/gnome-media-properties.ui.h:8
+#| msgid "Muine Music Player"
+msgid "_Music Player:"
+msgstr "ਸੰਗੀਤ ਪਲੇਅਰ(_M):"
+
+#: ../panels/media/gnome-media-properties.ui.h:9
+msgid "_Never prompt or start programs on media insertion"
+msgstr "ਮੀਡਿਆ ਪਾਉਣ ਉੱਤੇ ਕਦੇ ਵੀ ਪੁੱਛੋ ਜਾਂ ਪਰੋਗਰਾਮ ਸਟਾਰਟ ਨਾ ਕਰੋ(_N)"
+
+#: ../panels/media/gnome-media-properties.ui.h:10
+#| msgid "_Yahoo:"
+msgid "_Photos:"
+msgstr "ਫੋਟੋ(_P):"
+
+#: ../panels/media/gnome-media-properties.ui.h:11
+msgid "_Software:"
+msgstr "ਸਾਫਟਵੇਅਰ(_S):"
+
+#: ../panels/media/gnome-media-properties.ui.h:12
+#| msgid "Type:"
+msgid "_Type:"
+msgstr "ਕਿਸਮ(_T):"
+
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
+#| msgid "Set your mouse and touchpad preferences"
+msgid "Configure media and autorun preferences"
+msgstr "ਮੀਡਿਆ ਅਤੇ ਆਟੋ-ਰਨ ਪਸੰਦ ਸੰਰਚਨਾ"
+
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
+msgid "Removable Media"
+msgstr "ਹਟਾਉਣਯੋਗ ਮੀਡਿਆ"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Keyboard _model:"
 msgstr "ਕੀ-ਬੋਰਡ ਮਾਡਲ(_m):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:3
 msgid "Layouts"
 msgstr "ਲੇਆਉਟ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "List of keyboard layouts selected for usage"
 msgstr "ਵਰਤੋਂ ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਦੀ ਲਿਸਟ ਹੈ"
 
-#. long delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
-#: ../panels/universal-access/uap.ui.h:53
-msgid "Long"
-msgstr "ਲੰਮਾ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Mouse Keys"
 msgstr "ਮਾਊਸ ਸਵਿੱਚਾਂ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Move _Down"
 msgstr "ਹੇਠਾਂ ਭੇਜੋ(_D)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Move _Up"
 msgstr "ਉੱਤੇ ਭੇਜੋ(_U)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Move the selected keyboard layout down in the list"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਨੂੰ ਲਿਸਟ 'ਚ ਹੇਠਾਂ ਕਰੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Move the selected keyboard layout up in the list"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਨੂੰ ਲਿਸਟ ਵਿੱਚ ਉੱਤੇ ਭੇਜੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "New windows u_se active window's layout"
 msgstr "ਨਵੀਆਂ ਵਿੰਡੋਜ਼ ਐਕਟਿਵ ਵਿੰਡੋ ਦਾ ਲੇਆਉਟ ਵਰਤਣ(_s)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Print a diagram of the selected keyboard layout"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਦੀ ਸ਼ਕਲ ਪਰਿੰਟ ਕਰੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
+msgid "Region and Language"
+msgstr "ਖੇਤਰ ਅਤੇ ਭਾਸ਼ਾ"
+
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Remove the selected keyboard layout from the list"
 msgstr "ਚੁਣਿਆ ਕੀਬੋਰਡ ਲੇਆਉਟ ਲਿਸਟ 'ਚੋਂ ਹਟਾ ਦਿਓ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
-msgid "Repeat Keys"
-msgstr "ਦੁਹਰਾਉ ਸਵਿੱਚਾਂ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
-msgid "Repeat keys speed"
-msgstr "ਸਵਿੱਚਾਂ ਨੂੰ ਮੁੜ-ਦਬਾਉਣ ਗਤੀ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1174,195 +1257,114 @@ msgstr ""
 "ਮੌਜੂਦਾ ਕੀਬੋਰਡ ਲੇਆਉਟ ਸੈਟਿੰਗ ਨੂੰ ਡਿਫਾਲਟ ਸੈਟਿੰਗ ਨਾਲ ਬਦਲ\n"
 "ਦਿਓ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Reset to De_faults"
 msgstr "ਡਿਫਾਲਟ ਮੁੜ-ਸੈੱਟ ਕਰੋ(_f)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
-msgid "S_peed:"
-msgstr "ਸਪੀਡ(_p):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Select a keyboard layout to be added to the list"
 msgstr "ਲਿਸਟ 'ਚ ਜੋੜਨ ਲਈ ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੁਣੋ"
 
-#. short delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Short"
-msgstr "ਛੋਟਾ"
-
-#. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:33
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
-msgid "Slow"
-msgstr "ਹੌਲੀ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "View and edit keyboard layout options"
 msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੋਣਾਂ ਵੇਖੋ ਤੇ ਸੋਧੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
+#: ../panels/region/gnome-region-panel.ui.h:22
 #: ../panels/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Acceleration:"
 msgstr "ਐਕਸਰਲੇਟਰ(_A):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
-msgid "_Accessibility features can be toggled with keyboard shortcuts"
-msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਨਾਲ ਅਸੈੱਸਬਿਲਟੀ ਫੀਚਰ ਬਦਲੇ ਜਾ ਸਕਦੇ ਹਨ(_A)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "_Add..."
 msgstr "ਸ਼ਾਮਲ(_A)..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
-#: ../panels/mouse/gnome-mouse-properties.ui.h:49
-msgid "_Delay:"
-msgstr "ਦੇਰੀ(_D):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
-msgid "_Ignore fast duplicate keypresses"
-msgstr "ਤੇਜ਼ ਡੁਪਲੀਕੇਟ ਸਵਿੱਚ-ਦੱਬਣਾ ਅਣਡਿੱਠਾ(_I)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
-msgid "_Only accept long keypresses"
-msgstr "ਲੰਮਾ ਚਿਰ ਦਬਾਈਆਂ ਸਵਿੱਚਾਂ ਹੀ ਸਵੀਕਾਰ(_O)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "_Options..."
 msgstr "ਚੋਣਾਂ(_O)..."
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
+#: ../panels/region/gnome-region-panel.ui.h:26
 msgid "_Pointer can be controlled using the keypad"
 msgstr "ਪੁਆਇੰਟਰ ਨੂੰ ਕੀ-ਪੈਡ ਦੀ ਵਰਤੋਂ ਰਕੇ ਕੰਟਰੋਲ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ(_P)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "_Separate layout for each window"
 msgstr "ਹਰ ਵਿੰਡੋ ਲਈ ਵੱਖਰਾ ਲੇਆਉਟ(_S)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
-msgid "_Simulate simultaneous keypresses"
-msgstr "ਇੱਕੋ ਵਾਰ ਸਵਿੱਚ ਦੱਬਣ ਦੀ ਨਕਲ(_S)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
-msgid "_Speed:"
-msgstr "ਸਪੀਡ(_S):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "_Type to test settings:"
 msgstr "ਸੈਟਿੰਗ ਟੈਸਟ ਲਈ ਲਿਖੋ(_T):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
 msgid "By _country"
 msgstr "ਦੇਸ਼ ਰਾਹੀਂ(_c)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
 msgid "By _language"
 msgstr "ਭਾਸ਼ਾ ਰਾਹੀਂ(_l)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "ਇੱਕ ਲੇਆਉਟ ਚੁਣੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:4
 msgid "Preview:"
 msgstr "ਝਲਕ:"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:5
 msgid "_Country:"
 msgstr "ਦੇਸ਼(_C):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:6
 msgid "_Language:"
 msgstr "ਭਾਸ਼ਾ(_L):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:7
 msgid "_Variants:"
 msgstr "ਦਿੱਖ(_V):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:1
 msgid "Choose a Keyboard Model"
 msgstr "ਇੱਕ ਕੀ-ਬੋਰਡ ਮਾਡਲ ਚੁਣੋ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:2
 msgid "_Models:"
 msgstr "ਮਾਡਲ(_M):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:3
 msgid "_Vendors:"
 msgstr "ਵੇਂਡਰ(_V):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
+#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
 msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੋਣਾਂ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:72
-msgid "Unknown"
-msgstr "ਅਣਜਾਣ"
-
-#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:220
+#: ../panels/region/gnome-region-panel-xkblt.c:218
 msgid "Layout"
 msgstr "ਲੇਆਉਟ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:165
+#: ../panels/region/gnome-region-panel-xkbmc.c:163
 msgid "Vendors"
 msgstr "ਵੇਂਡਰ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:231
+#: ../panels/region/gnome-region-panel-xkbmc.c:229
 msgid "Models"
 msgstr "ਮਾਡਲ"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:229
-#: ../panels/network/gnome-network-properties.c:582
-#: ../panels/sound/gvc-sound-theme-chooser.c:818
-#: ../panels/sound/gvc-sound-theme-editor.c:891
-#: ../panels/sound/gvc-sound-theme-editor.c:995
+#: ../panels/region/gnome-region-panel-xkbot.c:227
+#: ../panels/network/gnome-network-properties.c:554
+#: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "ਡਿਫਾਲਟ"
 
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "ਕੀ-ਬੋਰਡ"
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:1
+msgid "Change your region and language settings"
+msgstr "ਆਪਣੀ ਖੇਤਰੀ ਅਤੇ ਭਾਸ਼ਾ ਸੈਟਿੰਗ ਬਦਲੋ"
 
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-msgid "Set your keyboard preferences"
-msgstr "ਆਪਣੀ ਕੀ-ਬੋਰਡ ਪਸੰਦ ਦਿਓ"
-
-#: ../panels/mouse/capplet-stock-icons.c:66
-#, c-format
-msgid "Unable to load stock icon '%s'\n"
-msgstr "ਸਟਾਕ ਆਈਕਾਨ '%s' ਲੋਡ ਕਰਨ ਲਈ ਅਸਮਰੱਥ\n"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:79
-msgid "gesture|Move left"
-msgstr "ਖੱਬੇ ਭੇਜੋ"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:84
-msgid "gesture|Move right"
-msgstr "ਸੱਜੇ ਭੇਜੋ"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:89
-msgid "gesture|Move up"
-msgstr "ਉੱਤੇ ਭੇਜੋ"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:94
-msgid "gesture|Move down"
-msgstr "ਹੇਠਾਂ ਭੇਜੋ"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:99
-msgid "gesture|Disabled"
-msgstr "ਅਯੋਗ ਹੈ"
+#. Translators: those are keywords for the region control-center panel
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:3
+#| msgid "Language:"
+msgid "Language;Layout;"
+msgstr "ਭਾਸ਼ਾ;ਲੇਆਉਟ;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Choose type of click _beforehand"
@@ -1371,6 +1373,11 @@ msgstr "ਹੱਥ ਤੋਂ ਪਹਿਲਾਂ ਕਲਿੱਕ ਦੀ ਟਾਈ�
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Choose type of click with mo_use gestures"
 msgstr "ਮਾਊਂਸ ਜੈਸਚਰ ਨਾਲ ਕਲਿੱਕ ਦੀ ਟਾਈਪ ਚੁਣੋ(_u)"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/universal-access/uap.ui.h:29
+msgid "D_elay:"
+msgstr "ਡਿਲੇਅ(_e):"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "D_ouble click:"
@@ -1408,13 +1415,13 @@ msgstr "ਹਰੀਜੱਟਲ ਸਕਰੋਲਿੰਗ ਯੋਗ(_o)"
 
 #. high sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:20
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:39
 msgid "High"
 msgstr "ਉੱਚ"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:22
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Large"
 msgstr "ਵੱਡਾ"
 
@@ -1424,7 +1431,7 @@ msgstr "ਪੁਆਇੰਟਰ ਲੱਭੋ"
 
 #. low sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Low"
 msgstr "ਘੱਟ"
 
@@ -1457,13 +1464,13 @@ msgid "Show click type _window"
 msgstr "ਕਲਿੱਕ ਟਾਈਪ ਵਿੰਡੋ ਵੇਖੋ(_w)"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:37
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Simulated Secondary Click"
 msgstr "ਸੈਕੰਡਰੀ ਕਲਿੱਕ ਦੀ ਨਕਲ"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:41
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Small"
 msgstr "ਛੋਟਾ"
 
@@ -1472,8 +1479,10 @@ msgid "Thr_eshold:"
 msgstr "ਥਰੈਸ਼ਹੋਲਡ(_e):"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:43
-msgid "To test your double-click settings, try to double-click on the light bulb."
-msgstr "ਆਪਣੀ ਡਬਲ-ਕਲਿੱਕ ਸੈਟਿੰਗ ਟੈਸਟ ਕਰਨ ਵਾਸਤੇ, ਲਾਈਟ ਬਲਬਲ ਉੱਤੇ ਡਬਲ-ਕਲਿੱਕ ਕਰਕੇ ਟਰਾਈ ਕਰੋ।"
+#| msgid ""
+#| "To test your double-click settings, try to double-click on the light bulb."
+msgid "To test your settings, try to double-click on the face."
+msgstr "ਆਪਣੀ ਸੈਟਿੰਗ ਨੂੰ ਟੈਸਟ ਕਰੋ, ਚਿਹਰੇ ਉੱਤੇ ਦੋ ਵਾਰ ਕਲਿੱਕ ਕਰਕੇ ਵੇਖੋ।"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:44
 msgid "Touchpad"
@@ -1505,7 +1514,7 @@ msgid "_Left-handed"
 msgstr "ਖੱਬਾ ਹੱਥ ਮਾਊਸ(_L)"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:54
-#: ../panels/universal-access/uap.ui.h:98
+#: ../panels/universal-access/uap.ui.h:96
 msgid "_Motion threshold:"
 msgstr "ਮੋਸ਼ਨ ਥਰੈਸ਼ਹੋਲਡ(_M):"
 
@@ -1537,12 +1546,16 @@ msgstr "ਮਾਊਸ ਤੇ ਟੱਚਪੈਚ"
 msgid "Set your mouse and touchpad preferences"
 msgstr "ਆਪਣੀ ਮਾਊਸ ਤੇ ਟੱਚਪੈਚ ਪਸੰਦ ਸੈੱਟ ਕਰੋ"
 
-#: ../panels/network/gnome-network-properties.c:700
-#: ../panels/network/gnome-network-properties.c:866
+#. Translators: those are keywords for the mouse and touchpad control-center panel
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;"
+msgstr "ਟਰੈਕਪੈਂਡ;ਪੁਆਇੰਟਰ;ਕਲਿੱਕ;ਟੈਪ;ਡਬਲ;ਬਟਨ;"
+
+#: ../panels/network/gnome-network-properties.c:672
 msgid "New Location..."
 msgstr "ਨਵਾਂ ਟਿਕਾਣਾ..."
 
-#: ../panels/network/gnome-network-properties.c:817
+#: ../panels/network/gnome-network-properties.c:789
 msgid "Location already exists"
 msgstr "ਟਿਕਾਣਾ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ"
 
@@ -1553,6 +1566,12 @@ msgstr "ਨੈੱਟਵਰਕ ਪਰਾਕਸੀ"
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
 msgstr "ਆਪਣੀ ਨੈੱਟਵਰਕ ਪਰਾਕਸੀ ਪਸੰਦ ਦਿਓ"
+
+#. Translators: those are keywords for the network proxy control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+#| msgid "Location:"
+msgid "Web;Location;"
+msgstr "ਵੈੱਬ;ਟਿਕਾਣਾ;"
 
 #: ../panels/network/gnome-network-properties.ui.h:1
 msgid "<b>Di_rect internet connection</b>"
@@ -1655,12 +1674,120 @@ msgstr "ਸੁਰੱਖਿਅਤ HTTP ਪਰਾਕਸੀ(_S):"
 msgid "_Use the same proxy for all protocols"
 msgstr "ਸਭ ਪਰੋਟੋਕਾਲਾਂ ਲਈ ਇੱਕੋ ਪਰਕਾਸੀ ਵਰਤੋਂ(_U)"
 
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr "ਚਮਕ;ਲਾਕ;ਡਿਮ;ਖਾਲੀ;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+#| msgid "Siren"
+msgid "Screen"
+msgstr "ਸਕਰੀਨ"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "ਸਕਰੀਨ ਚਮਕ ਅਤੇ ਲਾਕ ਸੈਟਿੰਗ"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
+#| msgid "Pointer"
+msgid "Power"
+msgstr "ਪਾਵਰ"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:2
+msgid "Power management settings"
+msgstr "ਪਾਵਰ ਮੈਨੇਜਮੈਂਟ ਸੈਟਿੰਗ"
+
+#. Translators: those are keywords for the power control-center panel
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:4
+msgid "Power;Sleep;Suspend;Hibernate;"
+msgstr "ਪਾਵਰ;ਸਲੀਪ;ਸਸਪੈਂਡ;ਹਾਈਬਰਨੇਟ;"
+
+#: ../panels/power/cc-power-panel.c:151
+#| msgid "Unknown"
+msgid "Unknown time"
+msgstr "ਅਣਜਾਣ ਸਮਾਂ"
+
+#: ../panels/power/cc-power-panel.c:157
+#, c-format
+#| msgid "minutes"
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i ਮਿੰਟ"
+msgstr[1] "%i ਮਿੰਟ"
+
+#: ../panels/power/cc-power-panel.c:169
+#, c-format
+msgid "%i hour"
+msgid_plural "%i hours"
+msgstr[0] "%i ਘੰਟਾ"
+msgstr[1] "%i ਘੰਟੇ"
+
+#. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
+#. * Swap order with "%2$s %2$i %1$s %1$i if needed
+#: ../panels/power/cc-power-panel.c:177
+#, c-format
+#| msgid "%d %s by %d %s"
+msgid "%i %s %i %s"
+msgstr "%i %s %i %s"
+
+#: ../panels/power/cc-power-panel.c:178
+#| msgid "Short"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "ਘੰਟਾ"
+msgstr[1] "ਘੰਟੇ"
+
+#: ../panels/power/cc-power-panel.c:179
+#| msgid "minutes"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "ਮਿੰਟ"
+msgstr[1] "ਮਿੰਟ"
+
+#: ../panels/power/cc-power-panel.c:251
+#| msgctxt "Sound event"
+#| msgid "Battery warning"
+msgid "Battery charging"
+msgstr "ਬੈਟਰੀ ਚਾਰਜ ਹੋ ਰਹੀ ਹੈ"
+
+#: ../panels/power/cc-power-panel.c:254
+#| msgctxt "Sound event"
+#| msgid "Battery warning"
+msgid "Battery discharging"
+msgstr "ਬੈਟਰੀ ਡਿਸਚਾਰਜ ਹੋ ਰਹੀ ਹੈ"
+
+#: ../panels/power/cc-power-panel.c:265
+msgid "UPS charging"
+msgstr "UPS ਚਾਰਜ ਹੋ ਰਿਹਾ ਹੈ"
+
+#: ../panels/power/cc-power-panel.c:268
+msgid "UPS discharging"
+msgstr "UPS ਡਿਸਚਾਰਜ ਹੋ ਰਿਹਾ ਹੈ"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:286
+#, c-format
+msgid "%s until charged (%.0lf%%)"
+msgstr "%s ਚਾਰਜ ਹੋਣ ਲਈ (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:292
+#, c-format
+msgid "%s until empty (%.0lf%%)"
+msgstr "%s ਖਤਮ ਹੋਣ ਲਈ (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a percentage value. Note: this string is only
+#. * used when we don't have a time value
+#: ../panels/power/cc-power-panel.c:300
+#, c-format
+msgid "%.0lf%% charged"
+msgstr "%.0lf%% ਚਾਰਜ ਹੈ"
+
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
 msgstr "ਡੀਬੱਗਿੰਗ ਕੋਡ ਚਾਲੂ ਕਰੋ"
 
 #: ../panels/sound/applet-main.c:50
-#| msgid "Open with Default Application"
 msgid "Version of this application"
 msgstr "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਵਰਜਨ"
 
@@ -1668,12 +1795,7 @@ msgstr "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਵਰਜਨ"
 msgid " — GNOME Volume Control Applet"
 msgstr "— ਗਨੋਮ ਵਾਲੀਅਮ ਕੰਟਰੋਲ ਐਪਲਿਟ"
 
-#: ../panels/sound/cc-sound-panel.c:107
-msgid "Waiting for sound system to respond"
-msgstr "ਸਾਊਂਡ ਸਿਸਟਮ ਦੇ ਜਵਾਬ ਦੀ ਉਡੀਕ ਜਾਰੀ"
-
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1883
-#| msgid "Mutt"
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1921
 msgid "Output"
 msgstr "ਆਉਟਪੁੱਟ"
 
@@ -1681,7 +1803,7 @@ msgstr "ਆਉਟਪੁੱਟ"
 msgid "Sound Output Volume"
 msgstr "ਸਾਊਂਡ ਆਉਟਪੁੱਟ ਵਾਲੀਅਮ"
 
-#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1797
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1838
 msgid "Input"
 msgstr "ਇੰਪੁੱਟ"
 
@@ -1690,37 +1812,31 @@ msgid "Microphone Volume"
 msgstr "ਮਾਈਕਰੋਫੋਨ ਵਾਲੀਅਮ"
 
 #: ../panels/sound/gvc-balance-bar.c:111
-#| msgid "Left"
 msgctxt "balance"
 msgid "Left"
 msgstr "ਖੱਬੇ"
 
 #: ../panels/sound/gvc-balance-bar.c:112
-#| msgid "Right"
 msgctxt "balance"
 msgid "Right"
 msgstr "ਸੱਜੇ"
 
 #: ../panels/sound/gvc-balance-bar.c:115
-#| msgid "Year:"
 msgctxt "balance"
 msgid "Rear"
 msgstr "ਪਿੱਛੇ"
 
 #: ../panels/sound/gvc-balance-bar.c:116
-#| msgid "Fonts"
 msgctxt "balance"
 msgid "Front"
 msgstr "ਅੱਗੇ"
 
 #: ../panels/sound/gvc-balance-bar.c:119
-#| msgid "Minimize"
 msgctxt "balance"
 msgid "Minimum"
 msgstr "ਘੱਟੋ-ਘੱਟ"
 
 #: ../panels/sound/gvc-balance-bar.c:120
-#| msgid "Maximize"
 msgctxt "balance"
 msgid "Maximum"
 msgstr "ਵੱਧੋ-ਵੱਧ"
@@ -1730,7 +1846,6 @@ msgid "_Balance:"
 msgstr "ਸੰਤੁਲਨ(_B):"
 
 #: ../panels/sound/gvc-balance-bar.c:299
-#| msgid "_Name:"
 msgid "_Fade:"
 msgstr "ਫੇਡ(_F):"
 
@@ -1739,7 +1854,6 @@ msgid "_Subwoofer:"
 msgstr "ਸਬਵੂਫ਼ਰ(_S):"
 
 #: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
-#| msgid "100%"
 msgctxt "volume"
 msgid "100%"
 msgstr "੧੦੦%"
@@ -1750,18 +1864,16 @@ msgid "Unamplified"
 msgstr "ਬਿਨਾਂ-ਐਪਲੀਫਾਈ"
 
 #: ../panels/sound/gvc-channel-bar.c:901
-#| msgid "Mutt"
 msgid "Mute"
 msgstr "ਚੁੱਪ"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1588
-#| msgid "_Mobile:"
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1629
 msgid "_Profile:"
 msgstr "ਪਰੋਫਾਇਲ(_P):"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1094
+#: ../panels/sound/gvc-mixer-control.c:1098
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -1770,102 +1882,91 @@ msgstr[1] "%u ਆਉਟਪੁੱਟ"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1104
+#: ../panels/sound/gvc-mixer-control.c:1108
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u ਇੰਪੁੱਟ"
 msgstr[1] "%u ਇੰਪੁੱਟ"
 
-#: ../panels/sound/gvc-mixer-control.c:1402
-#| msgid "System Settings"
+#: ../panels/sound/gvc-mixer-control.c:1406
 msgid "System Sounds"
 msgstr "ਸਿਸਟਮ ਸਾਊਂਡ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:310
-#: ../panels/sound/gvc-mixer-dialog.c:605
-#| msgid "Co_untry:"
+#: ../panels/sound/gvc-mixer-dialog.c:317
+#: ../panels/sound/gvc-mixer-dialog.c:618
 msgid "Co_nnector:"
 msgstr "ਕੁਨੈਕਟਰ(_n):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:518
+#: ../panels/sound/gvc-mixer-dialog.c:531
 msgid "Peak detect"
 msgstr "ਪੀਕ ਖੋਜ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1478
-#: ../panels/sound/gvc-mixer-dialog.c:1676
-#: ../panels/sound/gvc-sound-theme-chooser.c:828
-#| msgid "Name:"
+#: ../panels/sound/gvc-mixer-dialog.c:1506
+#: ../panels/sound/gvc-mixer-dialog.c:1717
+#: ../panels/sound/gvc-sound-theme-chooser.c:599
 msgid "Name"
 msgstr "ਨਾਂ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1483
-#| msgid "Devices"
+#: ../panels/sound/gvc-mixer-dialog.c:1524
 msgid "Device"
 msgstr "ਜੰਤਰ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1531
+#: ../panels/sound/gvc-mixer-dialog.c:1572
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "%s ਲਈ ਸਪੀਕਰ ਟੈਸਟਿੰਗ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1589
-#| msgid "Test flash"
+#: ../panels/sound/gvc-mixer-dialog.c:1630
 msgid "Test Speakers"
 msgstr "ਸਪੀਕਰ ਟੈਸਟ ਕਰੋ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1720
+#: ../panels/sound/gvc-mixer-dialog.c:1761
 msgid "_Output volume: "
 msgstr "ਆਉਟਪੁੱਟ ਵਾਲੀਅਮ(_O): "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1734
-#| msgid "Sound files"
+#: ../panels/sound/gvc-mixer-dialog.c:1775
 msgid "Sound Effects"
 msgstr "ਸਾਊਂਡ ਪਰਭਾਵ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1741
-#| msgctxt "Sound event"
-#| msgid "Alert sound"
+#: ../panels/sound/gvc-mixer-dialog.c:1782
 msgid "_Alert volume: "
 msgstr "ਚੇਤਾਵਨੀ ਵਾਲੀਅਮ(_A): "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1754
+#: ../panels/sound/gvc-mixer-dialog.c:1795
 msgid "Hardware"
 msgstr "ਹਾਰਡਵੇਅਰ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1759
+#: ../panels/sound/gvc-mixer-dialog.c:1800
 msgid "C_hoose a device to configure:"
 msgstr "ਸੰਰਚਨਾ ਲਈ ਇੱਕ ਜੰਤਰ ਚੁਣੋ(_h):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1786
-#: ../panels/sound/gvc-mixer-dialog.c:1915
+#: ../panels/sound/gvc-mixer-dialog.c:1827
+#: ../panels/sound/gvc-mixer-dialog.c:1950
 msgid "Settings for the selected device:"
 msgstr "ਚੁਣੇ ਜੰਤਰ ਲਈ ਸੈਟਿੰਗ:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1804
-#| msgid "_Input boxes:"
+#: ../panels/sound/gvc-mixer-dialog.c:1845
 msgid "_Input volume: "
 msgstr "ਇੰਪੁੱਟ ਬਕਸੇ(_I): "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1827
-#| msgid "_Input boxes:"
+#: ../panels/sound/gvc-mixer-dialog.c:1868
 msgid "Input level:"
 msgstr "ਇੰਪੁੱਟ ਲੈਵਲ:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1853
+#: ../panels/sound/gvc-mixer-dialog.c:1894
 msgid "C_hoose a device for sound input:"
 msgstr "ਸਾਊਂਡ ਇੰਪੁੱਟ ਲਈ ਇੱਕ ਜੰਤਰ ਚੁਣੋ(_h):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1888
+#: ../panels/sound/gvc-mixer-dialog.c:1926
 msgid "C_hoose a device for sound output:"
 msgstr "ਸਾਊਂਡ ਆਉਟਪੁੱਟ ਲਈ ਇੱਕ ਜੰਤਰ ਚੁਣੋ(_h):"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1926
-#| msgid "_Application font:"
+#: ../panels/sound/gvc-mixer-dialog.c:1961
 msgid "Applications"
 msgstr "ਐਪਲੀਕੇਸ਼ਨ"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1930
+#: ../panels/sound/gvc-mixer-dialog.c:1965
 msgid "No application is currently playing or recording audio."
 msgstr "ਕੋਈ ਵੀ ਐਪਲੀਕੇਸ਼ਨ ਇਸ ਸਮੇਂ ਆਡੀਓ ਚਲਾ ਜਾਂ ਰਿਕਾਰਡ ਨਹੀਂ ਕਰ ਰਹੀ ਹੈ।"
 
@@ -1875,7 +1976,6 @@ msgstr "ਰੋਕੋ"
 
 #: ../panels/sound/gvc-speaker-test.c:221
 #: ../panels/sound/gvc-speaker-test.c:333
-#| msgid "Test:"
 msgid "Test"
 msgstr "ਟੈਸਟ"
 
@@ -1885,213 +1985,65 @@ msgstr "ਸਬਵੂਫ਼ਰ"
 
 #: ../panels/sound/gvc-stream-status-icon.c:233
 #, c-format
-#| msgid "Sound Preferences"
 msgid "Failed to start Sound Preferences: %s"
 msgstr "ਸਾਊਂਡ ਪਸੰਦ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ: %s"
 
 #: ../panels/sound/gvc-stream-status-icon.c:256
-#| msgid "Mutt"
 msgid "_Mute"
 msgstr "ਚੁੱਪ(_M)"
 
 #: ../panels/sound/gvc-stream-status-icon.c:265
-#| msgid "Sound Preferences"
 msgid "_Sound Preferences"
 msgstr "ਸਾਊਂਡ ਪਸੰਦ(_S)"
 
 #: ../panels/sound/gvc-stream-status-icon.c:449
-#| msgid "Mutt"
 msgid "Muted"
 msgstr "ਚੁੱਪ ਕੀਤਾ"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:321
-#: ../panels/sound/gvc-sound-theme-editor.c:522
-#| msgid "Sounds"
-msgid "No sounds"
-msgstr "ਕੋਈ ਆਵਾਜ਼ ਨਹੀਂ"
-
-#: ../panels/sound/gvc-sound-theme-chooser.c:443
+#: ../panels/sound/gvc-sound-theme-chooser.c:189
 msgid "Built-in"
 msgstr "ਬਿਲਟ-ਇਨ"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:688
-#: ../panels/sound/gvc-sound-theme-chooser.c:700
-#: ../panels/sound/gvc-sound-theme-chooser.c:712
-#: ../panels/sound/gvc-sound-theme-editor.c:560
-#: ../panels/sound/gvc-sound-theme-editor.c:949
+#: ../panels/sound/gvc-sound-theme-chooser.c:459
+#: ../panels/sound/gvc-sound-theme-chooser.c:471
+#: ../panels/sound/gvc-sound-theme-chooser.c:483
 msgid "Sound Preferences"
 msgstr "ਸਾਊਂਡ ਪਸੰਦ"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:691
-#: ../panels/sound/gvc-sound-theme-chooser.c:702
-#: ../panels/sound/gvc-sound-theme-chooser.c:714
-#: ../panels/sound/gvc-sound-theme-editor.c:562
-#: ../panels/sound/gvc-sound-theme-editor.c:951
+#: ../panels/sound/gvc-sound-theme-chooser.c:462
+#: ../panels/sound/gvc-sound-theme-chooser.c:473
+#: ../panels/sound/gvc-sound-theme-chooser.c:485
 msgid "Testing event sound"
 msgstr "ਘਟਨਾ ਸਾਊਂਡ ਟੈਸਟ"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:819
-#| msgid "Icon theme"
+#: ../panels/sound/gvc-sound-theme-chooser.c:590
 msgid "From theme"
 msgstr "ਥੀਮ ਤੋਂ"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:835
-msgid "Type"
-msgstr "ਕਿਸਮ"
-
-#: ../panels/sound/gvc-sound-theme-chooser.c:1039
-#| msgid "Icon theme"
-msgid "Sound _theme:"
-msgstr "ਸਾਊਂਡ ਥੀਮ(_t):"
-
-#: ../panels/sound/gvc-sound-theme-chooser.c:1047
-#| msgid "Play _alert sound"
+#: ../panels/sound/gvc-sound-theme-chooser.c:778
 msgid "C_hoose an alert sound:"
 msgstr "ਇੱਕ ਚੇਤਾਵਨੀ ਸਾਊਂਡ ਚੁਣੋ(_h):"
-
-#: ../panels/sound/gvc-sound-theme-chooser.c:1078
-#| msgctxt "Sound event"
-#| msgid "Windows and Buttons"
-msgid "Enable _window and button sounds"
-msgstr "ਵਿੰਡੋ ਅਤੇ ਬਟਨ ਸਾਊਂਡ ਚਾਲੂ(_w)"
-
-#. Bell
-#: ../panels/sound/gvc-sound-theme-editor.c:79
-msgctxt "Sound event"
-msgid "Alert sound"
-msgstr "ਚੇਤਾਵਨੀ ਸਾਊਂਡ"
-
-#. Windows and buttons
-#: ../panels/sound/gvc-sound-theme-editor.c:81
-msgctxt "Sound event"
-msgid "Windows and Buttons"
-msgstr "ਵਿੰਡੋ ਅਤੇ ਬਟਨ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:82
-msgctxt "Sound event"
-msgid "Button clicked"
-msgstr "ਬਟਨ ਕਲਿੱਕ ਕੀਤਾ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:83
-msgctxt "Sound event"
-msgid "Toggle button clicked"
-msgstr "ਕਲਿੱਕ ਕੀਤਾ ਬਟਨ ਬਦਲੋ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:84
-msgctxt "Sound event"
-msgid "Window maximized"
-msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:85
-msgctxt "Sound event"
-msgid "Window unmaximized"
-msgstr "ਵਿੰਡੋ ਅਣ-ਵੱਧੋ-ਵੱਧ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:86
-msgctxt "Sound event"
-msgid "Window minimised"
-msgstr "ਵਿੰਡੋ ਘੱਟੋ-ਘੱਟ ਕੀਤੀ"
-
-#. Desktop
-#: ../panels/sound/gvc-sound-theme-editor.c:88
-msgctxt "Sound event"
-msgid "Desktop"
-msgstr "ਡੈਸਕਟਾਪ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:89
-msgctxt "Sound event"
-msgid "Login"
-msgstr "ਲਾਗ-ਇਨ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:90
-msgctxt "Sound event"
-msgid "Logout"
-msgstr "ਲਾਗਆਉਟ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:91
-msgctxt "Sound event"
-msgid "New e-mail"
-msgstr "ਨਵੀਂ ਈਮੇਲ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:92
-msgctxt "Sound event"
-msgid "Empty trash"
-msgstr "ਰੱਦੀ ਖਾਲੀ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:93
-msgctxt "Sound event"
-msgid "Long action completed (download, CD burning, etc.)"
-msgstr "ਲੰਮਾ ਐਕਸ਼ਨ ਪੂਰੀ ਹੋਈ (ਡਾਊਨਲੋਡ, CD ਲਿਖਣਾ ਆਦਿ)"
-
-#. Alerts?
-#: ../panels/sound/gvc-sound-theme-editor.c:95
-msgctxt "Sound event"
-msgid "Alerts"
-msgstr "ਚੇਤਾਵਨੀਆਂ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:96
-msgctxt "Sound event"
-msgid "Information or question"
-msgstr "ਜਾਣਕਾਰੀ ਜਾਂ ਸਵਾਲ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:97
-#| msgid "Hearing"
-msgctxt "Sound event"
-msgid "Warning"
-msgstr "ਚੇਤਾਵਨੀ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:98
-msgctxt "Sound event"
-msgid "Error"
-msgstr "ਗਲਤੀ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:99
-msgctxt "Sound event"
-msgid "Battery warning"
-msgstr "ਬੈਟਰੀ ਚੇਤਾਵਨੀ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:592
-msgid "Select Sound File"
-msgstr "ਸਾਊਂਡ ਫਾਇਲ ਚੁਣੋ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:603
-msgid "Sound files"
-msgstr "ਸਾਊਂਡ ਫਾਇਲਾਂ"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:899
-#| msgid "Custom"
-msgid "Custom…"
-msgstr "ਪਸੰਦੀਦਾ…"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:1302
-#| msgid "<b>Sound Theme</b>"
-msgid "Sound Theme:"
-msgstr "ਸਾਊਂਡ ਥੀਮ:"
-
-#: ../panels/sound/gvc-sound-theme-editor.c:1330
-#| msgctxt "Sound event"
-#| msgid "Windows and Buttons"
-msgid "Enable window and button sounds"
-msgstr "ਵਿੰਡੋ ਅਤੇ ਬਟਨ ਸਾਊਂਡ ਚਾਲੂ"
 
 #: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
 msgid "Show desktop volume control"
 msgstr "ਡੈਸਕਟਾਪ ਵਾਲੀਅਮ ਕੰਟਰੋਲ ਵੇਖੋ"
 
 #: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
-#| msgid "Volume down"
 msgid "Volume Control"
 msgstr "ਵਾਲੀਅਮ ਕੰਟਰੋਲ"
 
-#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
-#| msgid "Enable sound and associate sounds with events"
+#. Translators: those are keywords for the sound control-center panel
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
+msgstr "ਕਾਰਡ;ਮਾਈਕਰੋਫੋਨ;ਵਾਲੀਅਮ;ਫੇਡ;ਬੈਲਨਸ;ਬਲਿਊਟੁੱਲ;ਹੈੱਡਸੈੱਟ;"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
 msgid "Change sound volume and sound events"
 msgstr "ਸਾਊਂਡ ਵਾਲੀਅਮ ਅਤੇ ਸਾਊਂਡ ਈਵੈਂਟ ਬਦਲੋ"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
-#| msgid "Black"
 msgid "Bark"
 msgstr "ਭੌਂਕਣਾ"
 
@@ -2110,15 +2062,20 @@ msgstr "ਕੱਚ"
 #. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
-#| msgid "Sound"
 msgid "Sonar"
 msgstr "ਸੋਨਰ"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
+#. Translators: those are keywords for the universal access control-center panel
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+#| msgid "_Keyboard Accessibility"
+msgid "Keyboard;Mouse;a11y;Accessibility;"
+msgstr "ਕੀਬੋਰਡ;ਮਾਊਸ;a11y;ਅਸੈਸਬਿਲਟੀ;"
+
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
 msgstr "ਯੂਨੀਵਰਸਲ ਅਸੈੱਸ"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
 msgstr "ਯੂਨੀਵਰਸਲ ਅਸੈੱਸ ਪਸੰਦ"
 
@@ -2158,270 +2115,282 @@ msgid "Acceptance delay:"
 msgstr "ਮਨਜ਼ੂਰ ਦੇਰੀ:"
 
 #: ../panels/universal-access/uap.ui.h:12
-msgid "Accessibility features can be turned on or off with keyboard shortcuts"
-msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਨਾਲ ਅਸੈੱਸਬਿਲਟੀ ਫੀਚਰ ਚਾਲੂ ਜਾਂ ਬੰਦ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ"
-
-#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when Caps and Num Lock are used"
 msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ ਕੈਪਸ ਤੇ ਨਮ ਲਾਕ ਵਰਤੇ ਜਾਣ"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a key is"
 msgstr "ਬੀਪ, ਜਦੋਂ ਸਵਿੱਚ ਹੋਵੇ"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Beep when a key is rejected"
 msgstr "ਬੀਪ, ਜੇਕਰ ਸਵਿੱਚ ਰੱਦ ਹੋਵੇ"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Beep when a modifer key is pressed"
 msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ  ਮੋਡੀਫਾਇਰ ਸਵਿੱਚ ਦੱਬੀ ਜਾਵੇ"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Bounce Keys"
+msgstr "ਬਾਊਂਸ ਸਵਿੱਚਾਂ"
+
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Caribou"
 msgstr "ਕਰੀਬੋਊ"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Change constrast:"
 msgstr "ਕੰਨਟਰਾਸਟ ਬਦਲੋ:"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Closed Captioning"
 msgstr "ਬੰਦ ਹੋਈ ਸੁਰਖੀ"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Contrast:"
 msgstr "ਕਨਟਰਾਸਟ:"
 
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Control the pointer using the keypad."
-msgstr "ਪੁਆਇੰਟਰ ਨੂੰ ਕੀ-ਪੈਡ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੰਟਰੋਲ ਕਰੋ"
+#: ../panels/universal-access/uap.ui.h:21
+#| msgid "Control the pointer using the keypad."
+msgid "Control the pointer using the keypad"
+msgstr "ਕੀਪੈਡ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪੁਆਇੰਟਰ ਕੰਟਰੋਲ ਕਰੋ"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:22
 msgid "Control the pointer using the video camera."
 msgstr "ਵਿਡੀਓ ਕੈਮਰੇ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪੁਆਇੰਟਰ ਕੰਟਰੋਲ ਕਰੋ।"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:23
 msgid "Ctrl+Alt+-"
 msgstr "Ctrl+Alt+-"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Ctrl+Alt+0"
 msgstr "Ctrl+Alt+੦"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Ctrl+Alt+4"
 msgstr "Ctrl+Alt+੪"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Ctrl+Alt+8"
 msgstr "Ctrl+Alt+੮"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Ctrl+Alt+="
 msgstr "Ctrl+Alt+="
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Decrease size:"
 msgstr "ਆਕਾਰ ਘਟਾਓ:"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Disable if two keys are pressed together"
 msgstr "ਜੇਕਰ ਦੋ ਸਵਿੱਚਾਂ ਇਕੱਠੀਆਂ ਦਬਾਈਆਂ ਜਾਣ ਤਾਂ ਬੰਦ ਕਰੋ"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Display"
 msgstr "ਡਿਸਪਲੇਅ"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Display a textual description of speech and sounds."
+#: ../panels/universal-access/uap.ui.h:34
+#| msgid "Display a textual description of speech and sounds."
+msgid "Display a textual description of speech and sounds"
 msgstr "ਸਪੀਚ ਤੇ ਸਾਊਂਡ ਦੇ ਵੇਰਵੇ ਲਈ ਟੈਕਸਟ ਵੇਖਾਓ।"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Flash the entire screen"
 msgstr "ਪੂਰੀ ਸਕਰੀਨ ਝਲਕਾਓ"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Flash the window title"
 msgstr "ਵਿੰਡੋ ਟਾਈਟਲ ਝਲਕਾਓ"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:37
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Hearing"
 msgstr "ਸੁਣਨ"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:40
 msgid "High/Inverse"
 msgstr "ਉੱਚ/ਉਲਟ"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:41
 msgid "HighContrast"
 msgstr "ਵੱਧ-ਗੂੜ੍ਹਾ"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:42
 msgid "HighContrastInverse"
 msgstr "ਵੱਧ-ਗੂੜਾ-ਉਲਟ"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:43
 msgid "Hover Click"
 msgstr "ਹੋਵਰ ਕਲਿੱਕ"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "I need assistance with:"
-msgstr "ਮੈਂ ਸਹਾਇਤਾ ਦੀ ਲੋੜ ਹੈ:"
-
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Ignores fast duplicate keypresses"
 msgstr "ਤੇਜ਼ ਡੁਪਲੀਕੇਟ ਸਵਿੱਚ-ਦੱਬਣਾ ਅਣਡਿੱਠਾ"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Increase size:"
 msgstr "ਆਕਾਰ ਵਧਾਓ:"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Keyboard Settings..."
 msgstr "ਕੀ-ਬੋਰਡ ਸੈਟਿੰਗ..."
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Larger"
 msgstr "ਹੋਰ ਵੱਡਾ"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:53
 msgid "LowContrast"
 msgstr "ਘੱਟ-ਗੂੜ੍ਹਾ"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Mouse Settings..."
 msgstr "ਮਾਊਸ ਸੈਟਿੰਗ..."
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Nomon"
 msgstr "ਨੋਮੋਨ"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:57
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "On screen keyboard"
 msgstr "ਆਨ-ਸਕਰੀਨ ਕੀਬੋਰਡ"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "OnBoard"
 msgstr "ਆਨ-ਬੋਰਡ"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Options..."
 msgstr "ਚੋਣਾਂ..."
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Pointing and Clicking"
 msgstr "ਪੁਆਇੰਟ ਤੇ ਕਲਿੱਕ ਕਰਨਾ"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Puts a delay between when a key is pressed and when it is accepted."
-msgstr "ਸਵਿੱਚ ਦੱਬਣ ਤੇ ਇਹ ਮਨਜ਼ੂਰ ਕਰਨ 'ਚ ਦੇਰੀ ਕਰੋ।"
+#: ../panels/universal-access/uap.ui.h:65
+#| msgid "Puts a delay between when a key is pressed and when it is accepted."
+msgid "Puts a delay between when a key is pressed and when it is accepted"
+msgstr "ਸਵਿੱਚ ਦੱਬਣ ਤੇ ਇਹ ਮਨਜ਼ੂਰ ਕਰਨ 'ਚ ਦੇਰੀ ਕਰੋ"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Screen Reader"
 msgstr "ਸਕਰੀਨ ਰੀਡਰ"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Seeing"
 msgstr "ਵੇਖਣਾ"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Shift+Ctrl+Alt+-"
 msgstr "Shift+Ctrl+Alt+-"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Shift+Ctrl+Alt+="
 msgstr "Shift+Ctrl+Alt+="
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Show Universal Access status"
 msgstr "ਯੂਨੀਵਰਸਲ ਅਸੈੱਸ ਹਾਲਤ ਵੇਖੋ"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Slow Keys"
+msgstr "ਹੌਲੀ-ਸਵਿੱਚਾਂ"
+
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Sound Settings..."
 msgstr "ਸਾਊਂਡ ਸੈਟਿੰਗ..."
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:78
+msgid "Sticky Keys"
+msgstr "ਸਟਿੱਕੀ ਸਵਿੱਚਾਂ"
+
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Test flash"
 msgstr "ਫਲੈਸ਼ ਟੈਸਟ"
 
-#: ../panels/universal-access/uap.ui.h:82
-msgid "Test:"
-msgstr "ਟੈਸਟ:"
-
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Text size:"
 msgstr "ਸ਼ਬਦ ਆਕਾਰ:"
 
-#: ../panels/universal-access/uap.ui.h:84
-msgid "Treats a sequence of modifier keys as a key combination."
+#: ../panels/universal-access/uap.ui.h:81
+#| msgid "Treats a sequence of modifier keys as a key combination."
+msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "ਮਾਡੀਫਾਇਰ ਸਵਿੱਚਾਂ ਦੀ ਲੜੀ ਨੂੰ ਸਵਿੱਚ ਕੰਬੀਨੇਸ਼ਨ ਵਜੋਂ ਮੰਨੋ।"
 
-#: ../panels/universal-access/uap.ui.h:85
-msgid "Trigger a click when the pointer hovers."
+#: ../panels/universal-access/uap.ui.h:82
+#| msgid "Trigger a click when the pointer hovers."
+msgid "Trigger a click when the pointer hovers"
 msgstr "ਜਦੋਂ ਪੁਆਇੰਟਰ ਗਤੀ ਨੂੰ ਰੋਕਣਾ ਹੋਵੇ ਤਾਂ ਕਲਿੱਕ ਚਲਾਓ"
 
-#: ../panels/universal-access/uap.ui.h:86
-msgid "Trigger a secondary click by holding down the primary button."
+#: ../panels/universal-access/uap.ui.h:83
+#| msgid "Trigger a secondary click by holding down the primary button."
+msgid "Trigger a secondary click by holding down the primary button"
 msgstr "ਪ੍ਰਾਈਮਰੀ ਬਟਨ ਨੂੰ ਹੋਲਡ ਕਰਕੇ ਰੱਖੋ, ਜਦੋਂ ਸੈਕੰਡਰੀ ਕਲਿੱਕ ਚਲਾਓ।"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:84
+#| msgid "Beep when _accessibility features are turned on or off"
+msgid "Turn on accessibility features from the keyboard"
+msgstr "ਕੀਬੋਰਡ ਤੋਂ ਅਸੈਸਬਿਲਟੀ ਫੀਚਰ ਚਾਲੂ ਕਰੋ"
+
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Turn on or off:"
 msgstr "ਚਾਲੂ ਜਾਂ ਬੰਦ:"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:86
 msgid "Type here to test settings"
 msgstr "ਸੈਟਿੰਗ ਟੈਸਟ ਕਰਨ ਲਈ ਇੱਥੇ ਲਿਖੋ"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:87
 msgid "Typing"
 msgstr "ਲਿਖਣਾ"
 
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:88
 msgid "Typing Assistant"
 msgstr "ਲਿਖਣ ਸਹਾਇਕ"
 
-#: ../panels/universal-access/uap.ui.h:91
-msgid "Use a visual indication when an alert sound occurs."
-msgstr "ਜਦੋਂ ਚੇਤਾਵਨੀ ਸਾਊਂਡ ਹੋਵੇ ਤਾਂ ਦਿੱਖ ਸੰਕੇਤਕ ਵਰਤੋਂ।"
+#: ../panels/universal-access/uap.ui.h:89
+#| msgid "Use a visual indication when an alert sound occurs."
+msgid "Use a visual indication when an alert sound occurs"
+msgstr "ਜਦੋਂ ਚੇਤਾਵਨੀ ਸਾਊਂਡ ਹੋਵੇ ਤਾਂ ਦਿੱਖ ਸੰਕੇਤਕ ਵਰਤੋਂ"
 
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:90
 msgid "Use an alternative form of text input"
 msgstr "ਟੈਕਸਟ ਇੰਪੁੱਟ ਲਈ ਬਦਲਵਾਂ ਰੂਪ ਵਰਤੋਂ"
 
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:91
 msgid "Video Mouse"
 msgstr "ਵਿਡੀਓ ਮਾਊਸ"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:92
 msgid "Visual Alerts"
 msgstr "ਦਿੱਖ ਚੇਤਾਵਨੀ"
 
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:94
 msgid "Zoom in:"
 msgstr "ਜ਼ੂਮ ਇਨ:"
 
-#: ../panels/universal-access/uap.ui.h:97
+#: ../panels/universal-access/uap.ui.h:95
 msgid "Zoom out:"
 msgstr "ਜ਼ੂਮ ਆਉਟ:"
 
-#: ../panels/universal-access/uap.ui.h:99
+#: ../panels/universal-access/uap.ui.h:97
 msgid "accepted"
 msgstr "ਮਨਜ਼ੂਰ ਕੀਤਾ"
 
-#: ../panels/universal-access/uap.ui.h:100
+#: ../panels/universal-access/uap.ui.h:98
 msgid "pressed"
 msgstr "ਦੱਬਿਆ"
 
-#: ../panels/universal-access/uap.ui.h:101
+#: ../panels/universal-access/uap.ui.h:99
 msgid "rejected"
 msgstr "ਰੱਦ ਕੀਤਾ"
 
@@ -2430,26 +2399,22 @@ msgid "Unspecified"
 msgstr "ਅਣਦੱਸੀ"
 
 #: ../panels/user-accounts/run-passwd.c:426
-#| msgid "Authenticated!"
 msgid "Authentication failed"
 msgstr "ਪਰਮਾਣਕਿਤਾ ਫੇਲ੍ਹ ਹੋਈ"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:384
+#: ../panels/user-accounts/um-password-dialog.c:381
 #, c-format
-#| msgid "The password is too short."
 msgid "The new password is too short"
 msgstr "ਨਵਾਂ ਪਾਸਵਰਡ ਬਹੁਤ ਛੋਟਾ ਹੈ"
 
 #: ../panels/user-accounts/run-passwd.c:512
 #, c-format
-#| msgid "The password is too simple."
 msgid "The new password is too simple"
 msgstr "ਨਵਾਂ ਪਾਸਵਰਡ ਬਹੁਤ ਸਧਾਰਨ ਹੈ"
 
 #: ../panels/user-accounts/run-passwd.c:518
 #, c-format
-#| msgid "The old and new passwords are too similar."
 msgid "The old and new passwords are too similar"
 msgstr "ਪੁਰਾਣਾ ਅਤੇ ਨਵੇਂ ਪਾਸਵਰਡ ਇੱਕੋ ਜਿਹੇ ਜਾਪਦੇ ਹਨ"
 
@@ -2460,58 +2425,48 @@ msgstr "ਨਵਾਂ ਪਾਸਵਰਡ ਤਾਜ਼ਾ ਹੀ ਵਰਤਿਆ �
 
 #: ../panels/user-accounts/run-passwd.c:524
 #, c-format
-#| msgid "The new password must contain numeric or special character(s)."
 msgid "The new password must contain numeric or special characters"
 msgstr "ਨਵੇਂ ਪਾਸਵਰਡ ਵਿੱਚ ਅੰਕ ਜਾਂ ਖਾਸ ਹੋਣੇ ਲਾਜ਼ਮੀ ਹਨ"
 
 #: ../panels/user-accounts/run-passwd.c:528
 #, c-format
-#| msgid "The old and new passwords are the same."
 msgid "The old and new passwords are the same"
 msgstr "ਪੁਰਾਣਾ ਅਤੇ ਨਵੇਂ ਪਾਸਵਰਡ ਇੱਕੋ ਹੀ ਹਨ"
 
 #: ../panels/user-accounts/run-passwd.c:532
 #, c-format
-#| msgid ""
-#| "Your password has been changed since you initially authenticated! Please "
-#| "re-authenticate."
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "ਤੁਹਾਡੇ ਪਹਿਲਾਂ ਪਰਮਾਣਿਤ ਹੋਣ ਕਰਕੇ ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਬਦਲਿਆ ਜਾ ਚੁੱਕਿਆ ਹੈ!"
 
 #: ../panels/user-accounts/run-passwd.c:536
 #, c-format
-#| msgid "The new password must contain numeric or special character(s)."
 msgid "The new password does not contain enough different characters"
 msgstr "ਨਵੇਂ ਪਾਸਵਰਡ 'ਚ ਲੋੜ ਮੁਤਾਬਕ ਵੱਖ ਵੱਖ ਕਿਸਮ ਦੇ ਅੱਖਰ ਨਹੀਂ ਹਨ"
 
 #: ../panels/user-accounts/run-passwd.c:540
 #, c-format
-#| msgid "Unknown"
 msgid "Unknown error"
 msgstr "ਅਣਜਾਣ ਗਲਤੀ"
 
 #: ../panels/user-accounts/um-account-dialog.c:78
-#| msgid "Failed to create temporary directory"
 msgid "Failed to create user"
 msgstr "ਯੂਜ਼ਰ ਬਣਾਉਣ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../panels/user-accounts/um-account-dialog.c:175
+#: ../panels/user-accounts/um-account-dialog.c:185
 #, c-format
-#| msgid "A bookmark for URI '%s' already exists"
 msgid "A user with the username '%s' already exists"
 msgstr "'%s' ਯੂਜ਼ਰ ਨਾਂ ਨਾਲ ਯੂਜ਼ਰ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ।"
 
-#: ../panels/user-accounts/um-account-dialog.c:179
+#: ../panels/user-accounts/um-account-dialog.c:189
 #, c-format
-#| msgid "The password is too short."
 msgid "The username is too long"
 msgstr "ਯੂਜ਼ਰ ਨਾਂ ਬਹੁਤ ਛੋਟਾ ਹੈ"
 
-#: ../panels/user-accounts/um-account-dialog.c:182
+#: ../panels/user-accounts/um-account-dialog.c:192
 msgid "The username cannot start with a '-'"
 msgstr "ਯੂਜ਼ਰ ਨਾਂ '-' ਨਾਲ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋ ਸਕਦਾ ਹੈ"
 
-#: ../panels/user-accounts/um-account-dialog.c:185
+#: ../panels/user-accounts/um-account-dialog.c:195
 msgid ""
 "The username must consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -2526,7 +2481,6 @@ msgstr ""
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-#| msgid "Standard XTerminal"
 msgctxt "Account type"
 msgid "Standard"
 msgstr "ਸਟੈਂਡਰਡ"
@@ -2534,7 +2488,6 @@ msgstr "ਸਟੈਂਡਰਡ"
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
-#| msgid "Terminator"
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "ਪਰਸ਼ਾਸ਼ਕੀ"
@@ -2555,13 +2508,11 @@ msgid "The device is already in use."
 msgstr "ਜੰਤਰ ਪਹਿਲਾਂ ਹੀ ਵਰਤੋਂ ਅਧੀਨ ਹੈ।"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:111
-#| msgid "An internal error occured"
 msgid "An internal error occurred."
 msgstr "ਅੰਦਰੂਨੀ ਗਲਤੀ ਆਈ ਹੈ।"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:181
 #: ../panels/user-accounts/um-fingerprint-dialog.c:182
-#| msgid "Disabled"
 msgid "Enabled"
 msgstr "ਯੋਗ ਕੀਤਾ"
 
@@ -2641,19 +2592,19 @@ msgstr ""
 msgid "Other..."
 msgstr "...ਹੋਰ"
 
-#: ../panels/user-accounts/um-lockbutton.c:345
+#: ../panels/user-accounts/um-lockbutton.c:355
 msgid "Lock"
 msgstr "ਲਾਕ"
 
-#: ../panels/user-accounts/um-lockbutton.c:354
+#: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
 msgstr "ਅਣ-ਲਾਕ"
 
-#: ../panels/user-accounts/um-lockbutton.c:363
+#: ../panels/user-accounts/um-lockbutton.c:373
 msgid "Locked"
 msgstr "ਲਾਕ ਹੈ"
 
-#: ../panels/user-accounts/um-lockbutton.c:372
+#: ../panels/user-accounts/um-lockbutton.c:382
 msgid ""
 "Dialog is unlocked.\n"
 "Click to prevent further changes"
@@ -2661,7 +2612,7 @@ msgstr ""
 "ਡਾਈਲਾਗ ਅਣ-ਲਾਕ ਹੈ।\n"
 "ਹੋਰ ਬਦਲਾਅ ਰੋਕਣ ਲਈ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../panels/user-accounts/um-lockbutton.c:381
+#: ../panels/user-accounts/um-lockbutton.c:391
 msgid ""
 "Dialog is locked.\n"
 "Click to make changes"
@@ -2669,8 +2620,7 @@ msgstr ""
 "ਡਾਈਲਾਗ ਲਾਕ ਹੈ।\n"
 "ਬਦਲਣ ਲਈ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../panels/user-accounts/um-lockbutton.c:390
-#| msgid "Please contact your system administrator for help."
+#: ../panels/user-accounts/um-lockbutton.c:400
 msgid ""
 "System policy prevents changes.\n"
 "Contact your system administrator"
@@ -2678,121 +2628,115 @@ msgstr ""
 "ਸਿਸਟਮ ਪਾਲਸੀ ਬਦਲਣ ਤੋਂ ਰੋਕਦੀ ਹੈ।\n"
 "ਆਪਣੇ ਸਿਸਟਮ ਪਰਸ਼ਾਸ਼ਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
 
-#: ../panels/user-accounts/um-password-dialog.c:188
+#: ../panels/user-accounts/um-password-dialog.c:185
 msgid "More choices..."
 msgstr "...ਹੋਰ ਚੋਣਾਂ"
 
-#: ../panels/user-accounts/um-password-dialog.c:294
+#: ../panels/user-accounts/um-password-dialog.c:291
 msgid "Please choose another password."
 msgstr "ਵੱਖਰਾ ਪਾਸਵਰਡ ਚੁਣੋ ਜੀ।"
 
-#: ../panels/user-accounts/um-password-dialog.c:303
-#| msgid "Please type your password in the <b>New password</b> field."
+#: ../panels/user-accounts/um-password-dialog.c:300
 msgid "Please type your current password again."
 msgstr "ਆਪਣਾ ਮੌਜੂਦਾ ਪਾਸਵਰਡ ਫੇਰ ਲਿਖੋ ਜੀ।"
 
-#: ../panels/user-accounts/um-password-dialog.c:309
-#| msgid "Your password has been changed."
+#: ../panels/user-accounts/um-password-dialog.c:306
 msgid "Password could not be changed"
 msgstr "ਪਾਸਵਰਡ ਬਦਲਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।"
 
-#: ../panels/user-accounts/um-password-dialog.c:381
-#| msgid "_Retype new password:"
+#: ../panels/user-accounts/um-password-dialog.c:378
 msgid "You need to enter a new password"
 msgstr "ਤੁਹਾਨੂੰ ਨਵਾਂ ਪਾਸਵਰਡ ਦੇਣ ਦੀ ਲੋੜ ਹੈ"
 
-#: ../panels/user-accounts/um-password-dialog.c:390
+#: ../panels/user-accounts/um-password-dialog.c:387
 msgid "You need to confirm the password"
 msgstr "ਤੁਹਾਨੂੰ ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਦੀ ਲੋੜ ਹੈ"
 
-#: ../panels/user-accounts/um-password-dialog.c:393
-#| msgid "The password is too short."
+#: ../panels/user-accounts/um-password-dialog.c:390
 msgid "The passwords do not match"
 msgstr "ਪਾਸਵਰਡ ਰਲਦਾ ਨਹੀਂ ਹੈ"
 
-#: ../panels/user-accounts/um-password-dialog.c:399
+#: ../panels/user-accounts/um-password-dialog.c:396
 msgid "You need to enter your current password"
 msgstr "ਤੁਹਾਨੂੰ ਤੁਹਾਡਾ ਮੌਜੂਦਾ ਪਾਸਵਰਡ ਦੇਣਾ ਪਵੇਗਾ"
 
-#: ../panels/user-accounts/um-password-dialog.c:402
-#| msgid "That password was incorrect."
+#: ../panels/user-accounts/um-password-dialog.c:399
 msgid "The current password is not correct"
 msgstr "ਮੌਜੂਦਾ ਪਾਸਵਰਡ ਠੀਕ ਨਹੀਂ ਹੈ।"
 
-#: ../panels/user-accounts/um-password-dialog.c:475
-#: ../panels/user-accounts/um-password-dialog.c:692
+#: ../panels/user-accounts/um-password-dialog.c:472
+#: ../panels/user-accounts/um-password-dialog.c:689
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "ਬਹੁਤ ਛੋਟਾ ਹੈ"
 
-#: ../panels/user-accounts/um-password-dialog.c:478
-#: ../panels/user-accounts/um-password-dialog.c:693
+#: ../panels/user-accounts/um-password-dialog.c:475
+#: ../panels/user-accounts/um-password-dialog.c:690
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "ਹਲਕਾ"
 
-#: ../panels/user-accounts/um-password-dialog.c:480
-#: ../panels/user-accounts/um-password-dialog.c:694
-#| msgid "Flickr"
+#: ../panels/user-accounts/um-password-dialog.c:477
+#: ../panels/user-accounts/um-password-dialog.c:691
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "ਠੀਕ-ਠਾਕ"
 
-#: ../panels/user-accounts/um-password-dialog.c:482
-#: ../panels/user-accounts/um-password-dialog.c:695
+#: ../panels/user-accounts/um-password-dialog.c:479
+#: ../panels/user-accounts/um-password-dialog.c:692
 msgctxt "Password strength"
 msgid "Good"
 msgstr "ਚੰਗਾ"
 
-#: ../panels/user-accounts/um-password-dialog.c:484
-#: ../panels/user-accounts/um-password-dialog.c:696
-#| msgid "Scrolling"
+#: ../panels/user-accounts/um-password-dialog.c:481
+#: ../panels/user-accounts/um-password-dialog.c:693
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "ਤਕੜਾ"
 
-#: ../panels/user-accounts/um-password-dialog.c:523
+#: ../panels/user-accounts/um-password-dialog.c:520
 msgid "Passwords do not match"
 msgstr "ਪਾਸਵਰਡ ਮਿਲਦਾ ਨਹੀਂ ਹੈ"
 
-#: ../panels/user-accounts/um-password-dialog.c:549
-#| msgid "Change password"
+#: ../panels/user-accounts/um-password-dialog.c:546
 msgid "Wrong password"
 msgstr "ਗਲਤ ਪਾਸਵਰਡ"
 
 #: ../panels/user-accounts/um-photo-dialog.c:97
 #: ../panels/user-accounts/data/language-chooser.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#| msgid "_Select"
 msgid "Select"
 msgstr "ਚੁਣੋ"
 
-#: ../panels/user-accounts/um-photo-dialog.c:212
+#: ../panels/user-accounts/um-photo-dialog.c:216
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "ਹੋਰ ਤਸਵੀਰਾਂ ਵੇਖੋ"
 
-#: ../panels/user-accounts/um-photo-dialog.c:431
+#: ../panels/user-accounts/um-photo-dialog.c:429
+#| msgid "Disabled"
+msgid "Disable image"
+msgstr "ਚਿੱਤਰ ਹਟਾਓ"
+
+#: ../panels/user-accounts/um-photo-dialog.c:447
 msgid "Take a photo..."
 msgstr "...ਫੋਟੋ ਲਵੋ"
 
-#: ../panels/user-accounts/um-photo-dialog.c:449
+#: ../panels/user-accounts/um-photo-dialog.c:465
 msgid "Browse for more pictures..."
 msgstr "...ਹੋਰ ਤਸਵੀਰਾਂ ਦੀ ਝਲਕ"
 
-#: ../panels/user-accounts/um-photo-dialog.c:680
+#: ../panels/user-accounts/um-photo-dialog.c:693
 #, c-format
 msgid "Used by %s"
 msgstr "%s ਵਲੋਂ ਵਰਤੀ"
 
 #: ../panels/user-accounts/um-user-manager.c:430
 #, c-format
-#| msgid "A bookmark for URI '%s' already exists"
 msgid "A user with name '%s' already exists."
 msgstr "'%s' ਨਾਂ ਨਾਲ ਯੂਜ਼ਰ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ।"
 
 #: ../panels/user-accounts/um-user-manager.c:525
-#| msgid "The sound file for this event does not exist."
 msgid "This user does not exist."
 msgstr "ਇਹ ਯੂਜ਼ਰ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
 
@@ -2817,7 +2761,6 @@ msgstr "ਜਦੋਂ ਯੂਜ਼ਰ ਲਾਗਇਨ ਹੋਵੇ ਤਾਂ ਉ�
 
 #: ../panels/user-accounts/um-user-panel.c:431
 #, c-format
-#| msgid "Do you want to keep this resolution?"
 msgid "Do you want to keep %s's files?"
 msgstr "ਕੀ ਤੁਸੀਂ %s ਦੀਆਂ ਫਾਇਲਾਂ ਰੱਖਣੀਆਂ ਚਾਹੁੰਦੇ ਹੋ?"
 
@@ -2829,12 +2772,10 @@ msgstr ""
 "ਘਰ ਡਾਇਰੈਕਟਰੀ, ਮੇਲ ਸਪੂਲ ਅਤੇ ਆਰਜ਼ੀ ਫਾਇਲਾਂ ਨੂੰ ਰੱਖਣਾ ਸੰਭਵ ਹੈ, ਜਦੋਂ ਯੂਜ਼ਰ ਅਕਾਊਂਟ ਹਟਾਉਣਾ ਹੋਵੇ।"
 
 #: ../panels/user-accounts/um-user-panel.c:438
-#| msgid "_Delete Fingerprints"
 msgid "_Delete Files"
 msgstr "ਫਾਇਲਾਂ ਹਟਾਓ(_D)"
 
 #: ../panels/user-accounts/um-user-panel.c:439
-#| msgid "New File"
 msgid "_Keep Files"
 msgstr "ਫਾਇਲਾਂ ਰੱਖੋ(_K)"
 
@@ -2853,18 +2794,15 @@ msgid "To be set at next login"
 msgstr "ਅਗਲੇ ਲਾਗਇਨ ਸਮੇਂ ਸੈੱਟ ਕਰੋ"
 
 #: ../panels/user-accounts/um-user-panel.c:476
-#| msgid "None"
 msgctxt "Password mode"
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
 #: ../panels/user-accounts/um-user-panel.c:818
-#| msgid "Failed to construct test pipeline for '%s'"
 msgid "Failed to contact the accounts service"
 msgstr "ਅਕਾਊਂਟ ਸਰਵਿਸ ਨਾਲ ਸੰਪਰਕ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #: ../panels/user-accounts/um-user-panel.c:820
-#| msgid "Please make sure that the applet is properly installed"
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "ਯਕੀਨੀ ਬਣਾਉ ਕਿ ਅਕਾਊਂਟਸਰਵਿਸ (AccountService) ਇੰਸਟਾਲ ਹੈ ਅਤੇ ਯੋਗ ਹੈ"
 
@@ -2876,14 +2814,13 @@ msgstr ""
 "ਬਦਲਾਅ ਕਰਨ ਲਈ,\n"
 "ਪਹਿਲਾਂ * ਆਈਕਾਨ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../panels/user-accounts/um-user-panel.c:890
+#: ../panels/user-accounts/um-user-panel.c:891
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-#| msgid "C_reate"
 msgid "Create a user"
 msgstr "ਯੂਜ਼ਰ ਬਣਾਓ"
 
-#: ../panels/user-accounts/um-user-panel.c:901
-#: ../panels/user-accounts/um-user-panel.c:1177
+#: ../panels/user-accounts/um-user-panel.c:902
+#: ../panels/user-accounts/um-user-panel.c:1178
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -2891,13 +2828,13 @@ msgstr ""
 "ਯੂਜ਼ਰ ਬਣਾਉਣ ਲਈ,\n"
 "ਪਹਿਲਾਂ * ਆਈਕਾਨ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../panels/user-accounts/um-user-panel.c:910
+#: ../panels/user-accounts/um-user-panel.c:911
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "Delete the selected user"
 msgstr "ਚੁਣਿਆ ਯੂਜ਼ਰ ਹਟਾਓ"
 
-#: ../panels/user-accounts/um-user-panel.c:922
-#: ../panels/user-accounts/um-user-panel.c:1182
+#: ../panels/user-accounts/um-user-panel.c:923
+#: ../panels/user-accounts/um-user-panel.c:1183
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -2905,12 +2842,11 @@ msgstr ""
 "ਚੁਣੇ ਯੂਜ਼ਰ ਨੂੰ ਹਟਾਉਣ ਲਈ,\n"
 "ਪਹਿਲਾਂ * ਆਈਕਾਨ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../panels/user-accounts/um-user-panel.c:1086
-#| msgid "By _country"
+#: ../panels/user-accounts/um-user-panel.c:1087
 msgid "My Account"
 msgstr "ਮੇਰਾ ਅਕਾਊਂਟ"
 
-#: ../panels/user-accounts/um-user-panel.c:1095
+#: ../panels/user-accounts/um-user-panel.c:1096
 msgid "Other Accounts"
 msgstr "ਹੋਰ ਅਕਾਊਂਟ"
 
@@ -2918,33 +2854,32 @@ msgstr "ਹੋਰ ਅਕਾਊਂਟ"
 msgid "Add or remove users"
 msgstr "ਯੂਜ਼ਰ ਸ਼ਾਮਲ ਕਰੋ ਜਾਂ ਹਟਾਓ"
 
-#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:2
-#| msgid "seconds"
+#. Translators: those are keywords for the user accounts control-center panel
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
+msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+msgstr "ਲਾਗਇਨ;ਨਾਂ;ਫਿੰਗਰਪਰਿੰਟ;ਅਵਤਾਰ;ਲੋਗੋ;ਚਿਹਰਾ;ਪਾਸਵਰਡ;"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 msgid "User Accounts"
 msgstr "ਯੂਜ਼ਰ ਅਕਾਊਂਟ"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#| msgid "C_reate"
 msgid "Cr_eate"
 msgstr "ਬਣਾਓ(_e)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
-#| msgid "Create New Location"
 msgid "Create new account"
 msgstr "ਨਵਾਂ ਅਕਾਊਂਟ ਬਣਾਓ"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#| msgid "_Country:"
 msgid "_Account Type:"
 msgstr "ਅਕਾਊਂਟ ਕਿਸਮ(_A):"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#| msgid "Full Name"
 msgid "_Full name:"
 msgstr "ਪੂਰਾ ਨਾਂ(_F):"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#| msgid "U_sername:"
 msgid "_Username:"
 msgstr "ਯੂਜ਼ਰ ਨਾਂ(_U):"
 
@@ -2971,22 +2906,18 @@ msgstr ""
 "ਵੇਖਾਈ ਦੇਵੇਗਾ। ਇਸ ਵਿੱਚ ਪਾਸਵਰਡ ਸ਼ਾਮਲ <b>ਨਾ</b> ਕਰੋ ਜੀ।</small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
-#| msgid "_New password:"
 msgid "C_onfirm password:"
 msgstr "ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ(_o):"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:4
-#| msgid "Change set"
 msgid "Ch_ange"
 msgstr "ਬਦਲੋ(_a)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:5
-#| msgid "Change password"
 msgid "Changing password for:"
 msgstr "ਪਾਸਵਰਡ ਬਦਲਿਆ ਜਾ ਰਿਹਾ ਹੈ:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:6
-#| msgid "Change password"
 msgid "Choose a generated password"
 msgstr "ਤਿਆਰ ਕੀਤਾ ਪਾਸਵਰਡ ਚੁਣੋ"
 
@@ -3007,7 +2938,6 @@ msgid "Enable this account"
 msgstr "ਇਹ ਅਕਾਊਂਟ ਚਾਲੂ ਹੈ"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
-#| msgid "Flickr"
 msgid "Fair"
 msgstr "ਠੀਕ-ਠਾਕ"
 
@@ -3016,17 +2946,14 @@ msgid "Log in without a password"
 msgstr "ਬਿਨਾਂ ਪਾਸਵਰਡ ਲਾਗਇਨ ਕਰੋ"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:13
-#| msgid "_New password:"
 msgid "Set a password now"
 msgstr "ਹੁਣੇ ਪਾਸਵਰਡ ਦਿਓ"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
-#| msgid "Action"
 msgid "_Action:"
 msgstr "ਐਕਸ਼ਨ(_A):"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:15
-#| msgid "_Print"
 msgid "_Hint:"
 msgstr "ਇਸ਼ਾਰਾ(_H):"
 
@@ -3035,12 +2962,10 @@ msgid "_New password:"
 msgstr "ਨਵਾਂ ਪਾਸਵਰਡ(_N):"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:17
-#| msgid "_New password:"
 msgid "_Show password"
 msgstr "ਪਾਸਵਰਡ ਵੇਖੋ(_S)"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:1
-#| msgid "Web Browser"
 msgid "Browse"
 msgstr "ਝਲਕ"
 
@@ -3053,7 +2978,6 @@ msgid "Choose a picture that will be shown at the login screen for this account.
 msgstr "ਤਸਵੀਰ ਚੁਣੋ, ਜੋ ਕਿ ਇਸ ਅਕਾਊਂਟ ਲਈ ਲਾਗਇਨ ਸਕਰੀਨ ਉੱਤੇ ਵੇਖਾਈ ਜਾਵੇਗੀ।"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:6
-#| msgid "Galeon"
 msgid "Gallery"
 msgstr "ਗੈਲਰੀ"
 
@@ -3062,7 +2986,6 @@ msgid "Photograph"
 msgstr "ਤਸਵੀਰ"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#| msgid "Take a break!"
 msgid "Take a photograph"
 msgstr "ਫੋਟੋ ਲਵੋ"
 
@@ -3075,11 +2998,11 @@ msgid ""
 "<b>When the guest user logs out, all files and data associated with the "
 "account will be deleted.</b>"
 msgstr ""
-"ਮਹਿਮਾਨ (ਗੈਸਟ) ਅਕਾਊਂਟ ਇਸ ਕੰਪਿਊਟਰ ਉੱਤੇ ਕਿਸੇ ਨੂੰ ਵੀ ਬਿਨਾਂ ਪਾਸਵਰਡ ਲਾਗਇਨ ਕਰਨ ਦਿੰਦਾ ਹੈ। "
-"ਸੁਰੱਖਿਆ ਕਾਰਨਾਂ ਕਰਕੇ ਇਹ ਅਕਾਊਂਟ ਨਾਲ ਰਿਮੋਟ ਤੋਂ ਲਾਗਇਨ ਮਨਜ਼ੂਰ ਨਹੀਂ ਹਨ।\n"
+"ਮਹਿਮਾਨ (ਗੈਸਟ) ਅਕਾਊਂਟ ਇਸ ਕੰਪਿਊਟਰ ਉੱਤੇ ਕਿਸੇ ਨੂੰ ਵੀ ਬਿਨਾਂ ਪਾਸਵਰਡ ਲਾਗਇਨ ਕਰਨ ਦਿੰਦਾ ਹੈ। ਸੁਰੱਖਿਆ "
+"ਕਾਰਨਾਂ ਕਰਕੇ ਇਹ ਅਕਾਊਂਟ ਨਾਲ ਰਿਮੋਟ ਤੋਂ ਲਾਗਇਨ ਮਨਜ਼ੂਰ ਨਹੀਂ ਹਨ।\n"
 "\n"
-"<b>ਜਦੋਂ ਮਹਿਮਾਨ ਯੂਜ਼ਰ ਲਾਗ ਆਉਟ ਕਰੇਗਾ ਤਾਂ ਅਕਾਊਂਟ ਨਾਲ ਸਬੰਧਿਤ ਸਭ ਫਾਇਲਾਂ ਤੇ ਡਾਟੇ ਨੂੰ "
-"ਹਟਾਇਆ ਜਾਵੇਗਾ।</b>"
+"<b>ਜਦੋਂ ਮਹਿਮਾਨ ਯੂਜ਼ਰ ਲਾਗ ਆਉਟ ਕਰੇਗਾ ਤਾਂ ਅਕਾਊਂਟ ਨਾਲ ਸਬੰਧਿਤ ਸਭ ਫਾਇਲਾਂ ਤੇ ਡਾਟੇ ਨੂੰ ਹਟਾਇਆ "
+"ਜਾਵੇਗਾ।</b>"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
@@ -3090,7 +3013,6 @@ msgid "Account type:"
 msgstr "ਅਕਾਊਂਟ  ਕਿਸਮ:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-#| msgid "About %s"
 msgid "Accounts"
 msgstr "ਅਕਾਊਂਟ"
 
@@ -3111,32 +3033,26 @@ msgid "E-mail address:"
 msgstr "ਈਮੇਲ ਐਡਰੈੱਸ:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
-#| msgid "Enable Fingerprint Login"
 msgid "Fingerprint Login:"
 msgstr "ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
-#| msgid "_Language:"
 msgid "Language:"
 msgstr "ਭਾਸ਼ਾ:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
-#| msgid "Layout _Options..."
 msgid "Login Options"
 msgstr "ਲਾਗਇਨ ਚੋਣ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
-#| msgid "_Open"
 msgid "Open"
 msgstr "ਖੋਲ੍ਹੋ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
-#| msgid "_Password:"
 msgid "Password:"
 msgstr "ਪਾਸਵਰਡ:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
-#| msgid "Description:"
 msgid "Restrictions:"
 msgstr "ਪਾਬੰਦੀਆਂ:"
 
@@ -3149,7 +3065,6 @@ msgid "Show list of users"
 msgstr "ਯੂਜ਼ਰ ਦੀ ਲਿਸਟ ਵੇਖੋ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
-#| msgid "The password is too short."
 msgid "Show password hints"
 msgstr "ਪਾਸਵਰਡ ਇਸ਼ਾਰੇ ਵੇਖੋ"
 
@@ -3221,9 +3136,308 @@ msgstr "ਉਦਾਹਰਨ ਪੈਨਲ"
 msgid "Example preferences panel"
 msgstr "ਉਦਾਹਰਨ ਪਸੰਦ ਪੈਨਲ"
 
+#. Translators: those are keywords for the example control-center panel
+#: ../examples/gnome-example-panel.desktop.in.in.h:4
+msgid "Foo;Bar;Baz;"
+msgstr "ਫੂ;ਬਾਰ;ਬੱਜ;"
+
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
+
+#~ msgid "Balsa"
+#~ msgstr "ਬਲਸਾ"
+
+#~ msgid "Claws Mail"
+#~ msgstr "ਕਲਾਅਸ ਮੇਲ"
+
+#~ msgid "Debian Sensible Browser"
+#~ msgstr "ਡੇਬੀਅਨ ਸੁਲਝਿਆ ਬਰਾਊਜ਼ਰ"
+
+#~ msgid "Encompass"
+#~ msgstr "ਈ-ਕੰਪਾਸ"
+
+#~ msgid "Epiphany Web Browser"
+#~ msgstr "ਏਪੀਫਨੀ ਵੈੱਬ ਬਰਾਊਜ਼ਰ"
+
+#~ msgid "Evolution Mail Reader"
+#~ msgstr "ਈਵੂਲੇਸ਼ਨ ਮੇਲ ਰੀਡਰ"
+
+#~ msgid "Firebird"
+#~ msgstr "ਫਾਇਰਬਰਡ"
+
+#~ msgid "Firefox"
+#~ msgstr "ਫਾਇਰਫਾਕਸ"
+
+#~ msgid "Galeon"
+#~ msgstr "ਗਲੇਓਨ"
+
+#~ msgid "Iceape"
+#~ msgstr "Iceape"
+
+#~ msgid "Iceape Mail"
+#~ msgstr "Iceape ਮੇਲ"
+
+#~ msgid "Icedove"
+#~ msgstr "Icedove"
+
+#~ msgid "Iceweasel"
+#~ msgstr "Iceweasel"
+
+#~ msgid "KMail"
+#~ msgstr "ਕੇ-ਮੇਲ"
+
+#~ msgid "Konqueror"
+#~ msgstr "ਕੋਨਕਿਉਰੋਰ"
+
+#~ msgid "Midori"
+#~ msgstr "ਮੀਡੋਰੀ"
+
+#~ msgid "Mozilla"
+#~ msgstr "ਮੋਜ਼ੀਲਾ"
+
+#~ msgid "Mozilla 1.6"
+#~ msgstr "ਮੋਜ਼ੀਲਾ ੧.੬"
+
+#~ msgid "Mozilla Mail"
+#~ msgstr "ਮੋਜ਼ੀਲਾ ਮੇਲ"
+
+#~ msgid "Mozilla Thunderbird"
+#~ msgstr "ਮੋਜ਼ੀਲਾ ਥੰਡਰਬਰਡ"
+
+#~ msgid "Mutt"
+#~ msgstr "ਮੱਟ"
+
+#~ msgid "Netscape Communicator"
+#~ msgstr "Netscape Communicator"
+
+#~ msgid "SeaMonkey"
+#~ msgstr "ਸਾਅਮਾਂਕੀ"
+
+#~ msgid "SeaMonkey Mail"
+#~ msgstr "ਸਾਅਮਾਂਕੀ ਮੇਲ"
+
+#~ msgid "Sylpheed"
+#~ msgstr "Sylpheed"
+
+#~ msgid "Sylpheed-Claws"
+#~ msgstr "Sylpheed-Claws"
+
+#~ msgid "Thunderbird"
+#~ msgstr "ਥੰਡਰਬਰਡ"
+
+#~ msgid "Re_fresh rate:"
+#~ msgstr "ਤਾਜ਼ਾ ਦਰ(_f):"
+
+#~ msgid "_Include Top Menu Bar"
+#~ msgstr "ਉੱਤੇ ਮੇਨੂ ਪੱਟੀ ਸਮੇਤ(_I)"
+
+#~ msgid "Monitors"
+#~ msgstr "ਮਾਨੀਟਰ"
+
+#~ msgid "%d Hz"
+#~ msgstr "%d Hz"
+
+#~ msgid "Monitor: %s"
+#~ msgstr "ਮਾਨੀਟਰ: %s"
+
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟ"
+
+#~ msgid "Assign shortcut keys to commands"
+#~ msgstr "ਕਮਾਡਾਂ ਨੂੰ ਸ਼ਾਰਟਕੱਟ ਮੁਹੱਈਆ ਕਰੋ:"
+
+#~ msgid "Beep when a _modifier key is pressed"
+#~ msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ  ਮੋਡੀਫਾਇਰ ਨੂੰ ਦਬਾਇਆ ਜਾਵੇ(_m)"
+
+#~ msgid "Beep when a _toggle key is pressed"
+#~ msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ ਟਾਗਲ ਸਵਿੱਚ ਨੂੰ ਦਬਾਇਆ ਜਾਵੇ(_t)"
+
+#~ msgid "Beep when a key is pr_essed"
+#~ msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ ਸਵਿੱਚ ਨੂੰ ਦਬਾਇਆ ਜਾਵੇ(_e)"
+
+#~ msgid "Beep when a key is reje_cted"
+#~ msgstr "ਬੀਪ, ਜੇਕਰ ਸਵਿੱਚ ਰੱਦ ਹੋਵੇ(_c)"
+
+#~ msgid "Beep when key is _accepted"
+#~ msgstr "ਬੀਪ, ਜਦੋਂ ਸਵਿੱਚ ਮਨਜ਼ੂਰ ਕੀਤੀ ਜਾਵੇ(_a)"
+
+#~ msgid "Beep when key is _rejected"
+#~ msgstr "ਬੀਪ, ਜੇਕਰ ਸਵਿੱਚ ਰੱਦ ਹੋਵੇ(_r)"
+
+#~ msgid "Flash _window titlebar"
+#~ msgstr "ਵਿੰਡੋ ਟਾਈਟਲਬਾਰ ਝਲਕਾਉ(_w)"
+
+#~ msgid "Flash entire _screen"
+#~ msgstr "ਪੂਰੀ ਸਕਰੀਨ ਝਲਕਾਉ(_s)"
+
+#~ msgid "Keyboard Accessibility Audio Feedback"
+#~ msgstr "ਕੀਬੋਰਡ ਅਸੈੱਸਬਿਲਟੀ ਆਡੀਓ ਫੀਡਬੈਕ"
+
+#~ msgid "Show _visual feedback for the alert sound"
+#~ msgstr "ਚੇਤਾਵਨੀ ਸਾਊਂਡ ਲਈ ਦਿੱਖ ਫੀਡਬੈਕ ਵੇਖੋ(_v)"
+
+#~ msgid "Visual cues for sounds"
+#~ msgstr "ਸਾਊਂਡ ਲਈ ਦਿੱਖ ਨਿਸ਼ਾਨ"
+
+#~ msgid "Audio _Feedback..."
+#~ msgstr "ਆਡੀਓ ਫੀਡਬੈਕ(_F)..."
+
+#~ msgid "Disa_ble sticky keys if two keys are pressed together"
+#~ msgstr "ਜੇਕਰ ਦੋ ਸਵਿੱਚਾਂ ਇਕੱਠੀਆਂ ਦਬਾਈਆਂ ਜਾਣ ਤਾਂ ਸਟਿੱਕੀ ਸਵਿੱਚਾਂ ਆਯੋਗ(_b)"
+
+#~ msgid "Keyboard Preferences"
+#~ msgstr "ਕੀ-ਬੋਰਡ ਪਸੰਦ"
+
+#~ msgid "_Accessibility features can be toggled with keyboard shortcuts"
+#~ msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਨਾਲ ਅਸੈੱਸਬਿਲਟੀ ਫੀਚਰ ਬਦਲੇ ਜਾ ਸਕਦੇ ਹਨ(_A)"
+
+#~ msgid "_Ignore fast duplicate keypresses"
+#~ msgstr "ਤੇਜ਼ ਡੁਪਲੀਕੇਟ ਸਵਿੱਚ-ਦੱਬਣਾ ਅਣਡਿੱਠਾ(_I)"
+
+#~ msgid "_Only accept long keypresses"
+#~ msgstr "ਲੰਮਾ ਚਿਰ ਦਬਾਈਆਂ ਸਵਿੱਚਾਂ ਹੀ ਸਵੀਕਾਰ(_O)"
+
+#~ msgid "_Simulate simultaneous keypresses"
+#~ msgstr "ਇੱਕੋ ਵਾਰ ਸਵਿੱਚ ਦੱਬਣ ਦੀ ਨਕਲ(_S)"
+
+#~ msgid "Set your keyboard preferences"
+#~ msgstr "ਆਪਣੀ ਕੀ-ਬੋਰਡ ਪਸੰਦ ਦਿਓ"
+
+#~ msgid "Unable to load stock icon '%s'\n"
+#~ msgstr "ਸਟਾਕ ਆਈਕਾਨ '%s' ਲੋਡ ਕਰਨ ਲਈ ਅਸਮਰੱਥ\n"
+
+#~ msgid "gesture|Move left"
+#~ msgstr "ਖੱਬੇ ਭੇਜੋ"
+
+#~ msgid "gesture|Move right"
+#~ msgstr "ਸੱਜੇ ਭੇਜੋ"
+
+#~ msgid "gesture|Move up"
+#~ msgstr "ਉੱਤੇ ਭੇਜੋ"
+
+#~ msgid "gesture|Move down"
+#~ msgstr "ਹੇਠਾਂ ਭੇਜੋ"
+
+#~ msgid "gesture|Disabled"
+#~ msgstr "ਅਯੋਗ ਹੈ"
+
+#~ msgid "Waiting for sound system to respond"
+#~ msgstr "ਸਾਊਂਡ ਸਿਸਟਮ ਦੇ ਜਵਾਬ ਦੀ ਉਡੀਕ ਜਾਰੀ"
+
+#~| msgid "Sounds"
+#~ msgid "No sounds"
+#~ msgstr "ਕੋਈ ਆਵਾਜ਼ ਨਹੀਂ"
+
+#~ msgid "Type"
+#~ msgstr "ਕਿਸਮ"
+
+#~| msgid "Icon theme"
+#~ msgid "Sound _theme:"
+#~ msgstr "ਸਾਊਂਡ ਥੀਮ(_t):"
+
+#~| msgctxt "Sound event"
+#~| msgid "Windows and Buttons"
+#~ msgid "Enable _window and button sounds"
+#~ msgstr "ਵਿੰਡੋ ਅਤੇ ਬਟਨ ਸਾਊਂਡ ਚਾਲੂ(_w)"
+
+#~ msgctxt "Sound event"
+#~ msgid "Alert sound"
+#~ msgstr "ਚੇਤਾਵਨੀ ਸਾਊਂਡ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Windows and Buttons"
+#~ msgstr "ਵਿੰਡੋ ਅਤੇ ਬਟਨ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Button clicked"
+#~ msgstr "ਬਟਨ ਕਲਿੱਕ ਕੀਤਾ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Toggle button clicked"
+#~ msgstr "ਕਲਿੱਕ ਕੀਤਾ ਬਟਨ ਬਦਲੋ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Window maximized"
+#~ msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Window unmaximized"
+#~ msgstr "ਵਿੰਡੋ ਅਣ-ਵੱਧੋ-ਵੱਧ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Window minimised"
+#~ msgstr "ਵਿੰਡੋ ਘੱਟੋ-ਘੱਟ ਕੀਤੀ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Desktop"
+#~ msgstr "ਡੈਸਕਟਾਪ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Login"
+#~ msgstr "ਲਾਗ-ਇਨ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Logout"
+#~ msgstr "ਲਾਗਆਉਟ"
+
+#~ msgctxt "Sound event"
+#~ msgid "New e-mail"
+#~ msgstr "ਨਵੀਂ ਈਮੇਲ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Empty trash"
+#~ msgstr "ਰੱਦੀ ਖਾਲੀ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Long action completed (download, CD burning, etc.)"
+#~ msgstr "ਲੰਮਾ ਐਕਸ਼ਨ ਪੂਰੀ ਹੋਈ (ਡਾਊਨਲੋਡ, CD ਲਿਖਣਾ ਆਦਿ)"
+
+#~ msgctxt "Sound event"
+#~ msgid "Alerts"
+#~ msgstr "ਚੇਤਾਵਨੀਆਂ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Information or question"
+#~ msgstr "ਜਾਣਕਾਰੀ ਜਾਂ ਸਵਾਲ"
+
+#~| msgid "Hearing"
+#~ msgctxt "Sound event"
+#~ msgid "Warning"
+#~ msgstr "ਚੇਤਾਵਨੀ"
+
+#~ msgctxt "Sound event"
+#~ msgid "Error"
+#~ msgstr "ਗਲਤੀ"
+
+#~ msgid "Select Sound File"
+#~ msgstr "ਸਾਊਂਡ ਫਾਇਲ ਚੁਣੋ"
+
+#~ msgid "Sound files"
+#~ msgstr "ਸਾਊਂਡ ਫਾਇਲਾਂ"
+
+#~| msgid "Custom"
+#~ msgid "Custom…"
+#~ msgstr "ਪਸੰਦੀਦਾ…"
+
+#~| msgid "<b>Sound Theme</b>"
+#~ msgid "Sound Theme:"
+#~ msgstr "ਸਾਊਂਡ ਥੀਮ:"
+
+#~| msgctxt "Sound event"
+#~| msgid "Windows and Buttons"
+#~ msgid "Enable window and button sounds"
+#~ msgstr "ਵਿੰਡੋ ਅਤੇ ਬਟਨ ਸਾਊਂਡ ਚਾਲੂ"
+
+#~ msgid ""
+#~ "Accessibility features can be turned on or off with keyboard shortcuts"
+#~ msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਨਾਲ ਅਸੈੱਸਬਿਲਟੀ ਫੀਚਰ ਚਾਲੂ ਜਾਂ ਬੰਦ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ"
+
+#~ msgid "I need assistance with:"
+#~ msgstr "ਮੈਂ ਸਹਾਇਤਾ ਦੀ ਲੋੜ ਹੈ:"
+
+#~ msgid "Test:"
+#~ msgstr "ਟੈਸਟ:"
 
 #~ msgid "Image/label border"
 #~ msgstr "ਚਿੱਤਰ/ਲੇਬਲ ਹਾਸ਼ੀਆ"
@@ -3475,9 +3689,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 #~ msgid "_XMPP:"
 #~ msgstr "_XMPP:"
 
-#~ msgid "_Yahoo:"
-#~ msgstr "ਯਾਹੂ(_Y):"
-
 #~ msgid "_ZIP/Postal code:"
 #~ msgstr "ਜ਼ਿਪ/ਡਾਕ ਕੋਡ(_Z):"
 
@@ -3721,9 +3932,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 #~ msgid "Open a dialog to specify the color"
 #~ msgstr "ਰੰਗ ਦੱਸਣ ਲਈ ਇੱਕ ਡਾਈਲਾਗ ਖੋਲ੍ਹੋ"
 
-#~ msgid "Pointer"
-#~ msgstr "ਪੁਆਇੰਟਰ"
-
 #~ msgid "R_esolution:"
 #~ msgstr "ਰੈਜ਼ੋਲੇਸ਼ਨ(_e):"
 
@@ -3735,9 +3943,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "Save _As..."
 #~ msgstr "ਇੰਝ ਸੰਭਾਲੋ(_A)..."
-
-#~ msgid "Smoothing"
-#~ msgstr "ਮੁਲਾਇਮ"
 
 #~ msgid "Solid color"
 #~ msgstr "ਇੱਕ ਰੰਗ"
@@ -4116,12 +4321,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 #~ msgid "The source filename must be absolute"
 #~ msgstr "ਸਰੋਤ ਫਾਇਲ ਨਾਂ ਅਸਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
 
-#~ msgid "Could not open %s: %s\n"
-#~ msgstr "%s ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s\n"
-
-#~ msgid "Could not get information for %s: %s\n"
-#~ msgstr "%s ਲਈ ਜਾਣਕਾਰੀ ਲਈ ਨ ਹੀਂ ਜਾ ਸਕੀ: %s\n"
-
 #~ msgid "%s must be a regular file\n"
 #~ msgstr "%s ਨਿਯਮਤ ਫਾਇਲ ਹੋਣੀ ਲਾਜ਼ਮੀ ਹੈ।\n"
 
@@ -4190,9 +4389,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "_Work interval lasts:"
 #~ msgstr "ਕੰਮ ਕਰਨ ਦਾ ਅੰਤਰਾਲ(_W):"
-
-#~ msgid "minutes"
-#~ msgstr "ਮਿੰਟ"
 
 #~ msgid "Mouse"
 #~ msgstr "ਮਾਊਸ"
@@ -4378,9 +4574,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 #~ msgid "Style:"
 #~ msgstr "ਸਟਾਈਲ:"
 
-#~ msgid "Type:"
-#~ msgstr "ਕਿਸਮ:"
-
 #~ msgid "Size:"
 #~ msgstr "ਅਕਾਰ:"
 
@@ -4458,9 +4651,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "_Enable assistive technologies"
 #~ msgstr "ਸਹਾਇਕ ਤਕਨਾਲੋਜੀ ਯੋਗ(_E)"
-
-#~ msgid "_Keyboard Accessibility"
-#~ msgstr "ਕੀ-ਬੋਰਡ ਸੁਲੱਭਤਾ(_K)"
 
 #~ msgid "_Mouse Accessibility"
 #~ msgstr "ਮਾਊਂਸ ਅਸੈੱਸਬਿਲਟੀ(_M)"
@@ -4630,9 +4820,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 #~ msgid "If you delete an item, it is permanently lost."
 #~ msgstr "ਜੇ ਤੁਸੀਂ ਇੱਕ ਆਈਟਮ ਹਟਾਈ ਤਾਂ ਇਹ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਖਤਮ ਹੋ ਜਾਵੇਗੀ।"
 
-#~ msgid "Open with \"%s\""
-#~ msgstr "\"%s\" ਨਾਲ ਖੋਲ੍ਹੋ"
-
 #~ msgid "Open in File Manager"
 #~ msgstr "ਫਾਈਲ ਮੈਨੇਜਰ 'ਚ ਖੋਲ੍ਹੋ"
 
@@ -4647,9 +4834,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "Yesterday %l:%M %p"
 #~ msgstr "ਕੱਲ੍ਹ %l:%M %p"
-
-#~ msgid "%a %l:%M %p"
-#~ msgstr "%a %l:%M %p"
 
 #~ msgid "%b %d %l:%M %p"
 #~ msgstr "%d %b %l:%M %p"
@@ -4777,9 +4961,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "C_ut"
 #~ msgstr "ਕੱਟੋ(_u)"
-
-#~ msgid "Open File"
-#~ msgstr "ਫਾਇਲ ਖੋਲ੍ਹੋ"
 
 #~ msgid "Save File"
 #~ msgstr "ਫਾਇਲ ਸੰਭਾਲੋ"
@@ -5117,9 +5298,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
 #~ msgstr "'%s' ਨਾਂ ਨਾਲ ਕੋਈ ਵੀ ਕਾਰਜ '%s' ਲਈ ਬੁੱਕਮਾਰਕ ਦੇ ਤੌਰ ਉੱਤੇ ਰਜਿਸਟਰ ਨਹੀਂ ਹੋਇਆ।"
 
-#~ msgid "Siren"
-#~ msgstr "ਸਿਰੀਨ"
-
 #~ msgid "Clink"
 #~ msgstr "ਕਲਿੰਕ"
 
@@ -5142,9 +5320,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "Select sound file..."
 #~ msgstr "ਸਾਊਂਡ ਫਾਇਲ ਚੁਣੋ..."
-
-#~ msgid "Set as Application Font"
-#~ msgstr "ਕਾਰਜ ਫੋਂਟ ਵਾਂਗ ਦਿਓ"
 
 #~ msgid "Sets the default application font"
 #~ msgstr "ਮੂਲ ਕਾਰਜ ਫੋਂਟ ਦਿਓ"
