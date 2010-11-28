@@ -2150,7 +2150,7 @@ ensure_current_configuration_is_saved (void)
    * that there *will* be a backup file in the end.
    */
 
-  rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), NULL, NULL, NULL); /* NULL-GError */
+  rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), NULL); /* NULL-GError */
   if (!rr_screen)
     return;
 
@@ -2490,8 +2490,8 @@ run_application (void)
       return NULL;
     }
 
-  app->screen = gnome_rr_screen_new (gdk_screen_get_default (),
-                                     on_screen_changed, app, &error);
+  app->screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+  g_signal_connect (app->screen, "screen-changed", G_CALLBACK (on_screen_changed), app);
   if (!app->screen)
     {
       error_message (NULL, _("Could not get screen information"), error->message);
