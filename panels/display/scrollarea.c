@@ -526,6 +526,9 @@ emit_viewport_changed (FooScrollArea *scroll_area,
   g_signal_emit (scroll_area, signals[VIEWPORT_CHANGED], 0,
                  new_viewport, old_viewport);
 
+  if (scroll_area->priv->input_window == NULL)
+    return;
+
   gdk_window_get_pointer (scroll_area->priv->input_window, &px, &py, NULL);
 
 #if 0
