@@ -1,4 +1,112 @@
 ===========================
+Version 2.91.3 (2010-11-29)
+===========================
+
+Background:
+- One last old gnome_bg remnant (Yanko Kaneti)
+- Load wallpapers in an idle (William Jon McCann)
+
+Common:
+- Fix build for latest gnome-desktop changes (Andreas Proschofsky) (#634859)
+- Some build fixes (Rodrigo Moya)
+- Update to GTK+ api changes (Matthias Clasen)
+- Add keywords to desktop files (Matthias Clasen, Bastien Nocera) (#399754)
+
+Datetime:
+- Add missing libraries to libdate_time_la_LIBADD (Rodrigo Moya)
+- Implement 12/24 hour preferences for the gnome-shell clock (Thomas Wood)
+
+Default applications:
+- Remove web browsers and mail readers from XML file (Rodrigo Moya)
+
+Display:
+- Remove refresh rate setting (William Jon McCann)
+- Don't list the resolution in the arrangement box (William Jon McCann)
+- Indicate the selected display using an outside stroke (William Jon McCann)
+- Remove unhelpful Monitor: label (William Jon McCann)
+- Make layout not jump around when selecting monitors (William Jon McCann)
+- Remove the primary display checkbox (William Jon McCann)
+- Just say no to tabs and trailing whitespace (William Jon McCann)
+- Use consistent indentation and spacing (William Jon McCann)
+- Identify primary display with a black top bar and clock (William Jon McCann)
+- Allow dragging top bar to set primary display (William Jon McCann)
+- Use a smaller top bar size (William Jon McCann)
+- Ensure primary display is set in config (William Jon McCann)
+- Don't allow setting primary on off displays (William Jon McCann)
+- Add a save/restore to ensure the labels don't mess up top bar (William Jon McCann)
+
+Keyboard:
+- Fix possible accel blocking (Bastien Nocera)
+
+Media:
+- Initial port of Nautilus capplet code (Cosimo Cecchi)
+
+Mouse:
+- Use a smiley face instead of old ugly lightbulb to test click (William Jon McCann)
+- Don't force wrapping the label at 180px (William Jon McCann)
+- Remove dead a11y code (Bastien Nocera)
+
+Network:
+- Avoid run-time warnings (Bastien Nocera)
+
+Power:
+- Add the first cut of the UI of the power panel, based on a mockup by Alan Day
+  (Richard Hughes)
+
+Region:
+- Link against libxklavier also (Didier Roche)
+
+Screen:
+- Add screen brightness and lock panel (William Jon McCann)
+- Improve label for dim checkbox (William Jon McCann)
+- Connect up the brightness slider and the dim checkbox with gnome-power-manager
+  (Richard Hughes)
+
+Shell:
+- Subtract a hacky constant from the screen height for dialog height (William
+  Jon McCann)
+- Don't change casedness when displaying matches (Matthias Clasen)
+- Add keyword search (Matthias Clasen)
+- Start in the right size (Matthias Clasen)
+- Ensure the background and foreground colours are consistent (Thomas Wood)
+
+Sound:
+- Explicit link to libxml (Yanko Kaneti)
+- Don't allow long profile names to resize toplevel (Bastien Nocera) (#613040)
+- Replace size_request by get_preferred_width/height (Javier Jardón) (#635117)
+- Avoid second warning when no theme (Bastien Nocera)
+- Simplify check_rectangle() macro (Bastien Nocera)
+- Make level bar descend from GtkWidget (Bastien Nocera)
+- Show icons for devices (Bastien Nocera)
+- Remove radio buttons (Bastien Nocera)
+- Avoid initial resizing (Matthias Clasen)
+- Remove theme selection (William Jon McCann)
+- Remove window and button sounds checkbox (William Jon McCann)
+
+Universal access:
+- Remove relation with inexistant widget (Bastien Nocera)
+- Remove an unused frame that added a few extra px of spacing (William Jon McCann)
+
+User accounts:
+- Listen for permission changes (Matthias Clasen)
+- Fix a little annoyance with combo boxes (Matthias Clasen)
+- Don't show parental controls for now (Matthias Clasen)
+- Fix packing of the language dialog (Matthias Clasen)
+- Don't allow opening non-images (Bastien Nocera)
+- Add "Disable icon" menu item (Bastien Nocera)
+
+Translations:
+- es (Jorge González)
+- gl (Fran Diéguez)
+- he (Yaron Shahrabani)
+- nb (Kjartan Maraas)
+- pa (A S Alam)
+- ro (Cătălin Bălan)
+- ta (Dr.T.Vasudevan)
+- ug (Gheyret T.Kenji)
+- zh_CN (Aron Xu)
+
+===========================
 Version 2.91.2 (2010-11-08)
 ===========================
 
