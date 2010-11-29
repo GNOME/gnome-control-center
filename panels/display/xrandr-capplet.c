@@ -55,8 +55,7 @@ struct App
   GtkWidget      *panel;
   GtkWidget      *current_monitor_event_box;
   GtkWidget      *current_monitor_label;
-  GtkWidget      *monitor_on_radio;
-  GtkWidget      *monitor_off_radio;
+  GtkWidget      *monitor_switch;
   GtkListStore   *resolution_store;
   GtkWidget      *resolution_combo;
   GtkWidget      *rotation_combo;
@@ -87,7 +86,7 @@ static void rebuild_gui (App *app);
 static void on_clone_changed (GtkWidget *box, gpointer data);
 static gboolean output_overlaps (GnomeOutputInfo *output, GnomeRRConfig *config);
 static void select_current_output_from_dialog_position (App *app);
-static void monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data);
+static void monitor_switch_active_cb (GObject *object, GParamSpec *pspec, gpointer data);
 static void get_geometry (GnomeOutputInfo *output, int *w, int *h);
 static void apply_configuration_returned_cb (DBusGProxy *proxy, DBusGProxyCall *call_id, void *data);
 static gboolean get_clone_size (GnomeRRScreen *screen, int *width, int *height);
@@ -504,8 +503,7 @@ rebuild_on_off_radios (App *app)
   gboolean on_active;
   gboolean off_active;
 
-  g_signal_handlers_block_by_func (app->monitor_on_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
-  g_signal_handlers_block_by_func (app->monitor_off_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
+  g_signal_handlers_block_by_func (app->monitor_switch, G_CALLBACK (monitor_switch_active_cb), app);
 
   sensitive = FALSE;
   on_active = FALSE;
@@ -522,14 +520,11 @@ rebuild_on_off_radios (App *app)
       off_active = !on_active;
     }
 
-  gtk_widget_set_sensitive (app->monitor_on_radio, sensitive);
-  gtk_widget_set_sensitive (app->monitor_off_radio, sensitive);
+  gtk_widget_set_sensitive (app->monitor_switch, sensitive);
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->monitor_on_radio), on_active);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (app->monitor_off_radio), off_active);
+  gtk_switch_set_active (GTK_SWITCH (app->monitor_switch), on_active);
 
-  g_signal_handlers_unblock_by_func (app->monitor_on_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
-  g_signal_handlers_unblock_by_func (app->monitor_off_radio, G_CALLBACK (monitor_on_off_toggled_cb), app);
+  g_signal_handlers_unblock_by_func (app->monitor_switch, G_CALLBACK (monitor_switch_active_cb), app);
 }
 
 static char *
@@ -749,30 +744,27 @@ select_resolution_for_current_output (App *app)
 }
 
 static void
-monitor_on_off_toggled_cb (GtkToggleButton *toggle, gpointer data)
+monitor_switch_active_cb (GObject    *object,
+                          GParamSpec *pspec,
+                          gpointer    data)
 {
   App *app = data;
+  gboolean value;
 
   if (!app->current_output)
     return;
 
-  if (!gtk_toggle_button_get_active (toggle))
-    return;
+  value = gtk_switch_get_active (GTK_SWITCH (object));
 
-  if (GTK_WIDGET (toggle) == app->monitor_on_radio)
+  if (value)
     {
       app->current_output->on = TRUE;
       select_resolution_for_current_output (app);
     }
-  else if (GTK_WIDGET (toggle) == app->monitor_off_radio)
+  else
     {
       app->current_output->on = FALSE;
       gnome_rr_config_ensure_primary (app->current_configuration);
-    }
-  else
-    {
-      g_assert_not_reached ();
-      return;
     }
 
   rebuild_gui (app);
@@ -2522,14 +2514,10 @@ run_application (void)
   app->current_monitor_label = _gtk_builder_get_widget (builder,
                                                         "current_monitor_label");
 
-  app->monitor_on_radio = _gtk_builder_get_widget (builder,
-                                                   "monitor_on_radio");
-  app->monitor_off_radio = _gtk_builder_get_widget (builder,
-                                                    "monitor_off_radio");
-  g_signal_connect (app->monitor_on_radio, "toggled",
-                    G_CALLBACK (monitor_on_off_toggled_cb), app);
-  g_signal_connect (app->monitor_off_radio, "toggled",
-                    G_CALLBACK (monitor_on_off_toggled_cb), app);
+  app->monitor_switch = _gtk_builder_get_widget (builder,
+                                                 "monitor_switch");
+  g_signal_connect (app->monitor_switch, "notify::active",
+                    G_CALLBACK (monitor_switch_active_cb), app);
 
   app->resolution_combo = _gtk_builder_get_widget (builder,
                                                    "resolution_combo");
