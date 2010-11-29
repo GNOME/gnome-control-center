@@ -14,7 +14,7 @@ libscreen_la_SOURCES =		\
 	cc-screen-panel.c	\
 	cc-screen-panel.h
 
-libscreen_la_LIBADD = $(PANEL_LIBS)
+libscreen_la_LIBADD = $(PANEL_LIBS) $(CAPPLET_LIBS)
 libscreen_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui

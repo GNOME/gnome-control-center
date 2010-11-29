@@ -12,7 +12,8 @@ libmedia_la_SOURCES = \
 	nautilus-open-with-dialog.h
 
 libmedia_la_LIBADD = \
-	$(PANEL_LIBS)
+	$(PANEL_LIBS) \
+	$(CAPPLET_LIBS)
 
 libmedia_la_LDFLAGS = $(PANEL_LDFLAGS)
 

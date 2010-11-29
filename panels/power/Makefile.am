@@ -14,7 +14,7 @@ libpower_la_SOURCES =		\
 	cc-power-panel.c	\
 	cc-power-panel.h
 
-libpower_la_LIBADD = $(PANEL_LIBS) $(UPOWER_LIBS)
+libpower_la_LIBADD = $(PANEL_LIBS) $(UPOWER_LIBS) $(CAPPLET_LIBS)
 libpower_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
