@@ -818,7 +818,7 @@ cc_media_panel_init (CcMediaPanel *self)
 
   priv = self->priv = MEDIA_PANEL_PRIVATE (self);
   priv->builder = gtk_builder_new ();
-  priv->preferences = g_settings_new ("org.gnome.media-handling");
+  priv->preferences = g_settings_new ("org.gnome.desktop.media-handling");
 
   res = gtk_builder_add_from_file (priv->builder, GNOMECC_UI_DIR "/gnome-media-properties.ui", NULL);
 
