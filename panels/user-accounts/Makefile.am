@@ -83,6 +83,7 @@ libuser_accounts_la_LIBADD = 		\
 	$(CHEESE_LIBS)			\
 	$(DBUS_LIBS)			\
 	$(GIO_LIBS)			\
+	$(CAPPLET_LIBS)			\
 	-lcrypt
 
 libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
