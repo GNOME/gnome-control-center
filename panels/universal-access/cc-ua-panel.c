@@ -31,8 +31,6 @@
 
 #define CONFIG_ROOT "/desktop/gnome/accessibility"
 
-#define MOUSE_CONFIG_ROOT CONFIG_ROOT "/mouse"
-
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
 
@@ -211,47 +209,13 @@ cc_ua_panel_section_toggled (GtkToggleButton *button,
     }
 }
 
-static GConfValue*
-cc_ua_panel_toggle_radios (GConfPropertyEditor *peditor,
-                           const GConfValue    *value)
-{
-  GtkWidget *radio;
-  gboolean enabled;
-
-  enabled = gconf_value_get_bool (value);
-  radio = (GtkWidget*) gconf_property_editor_get_ui_control (peditor);
-
-  if (!enabled)
-    {
-      GSList *list, *l;
-
-      list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
-
-      if (list)
-        {
-          /* activate the "off" button */
-          for (l = list; l; l = l->next)
-            {
-              if (l->data == radio)
-                continue;
-
-              gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (l->data),
-                                            TRUE);
-            }
-        }
-    }
-
-  return gconf_value_copy (value);
-}
-
 static void
-gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
-                          const gchar       *key,
-                          GtkWidget         *widget,
-                          gchar            **section)
+settings_on_off_editor_new (CcUaPanelPrivate  *priv,
+                            GSettings         *settings,
+                            const gchar       *key,
+                            GtkWidget         *widget,
+                            gchar            **section)
 {
-  GObject *peditor;
-
   /* set data to enable/disable the section this on/off switch controls */
   if (section)
     {
@@ -262,12 +226,7 @@ gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
     }
 
   /* set up the boolean editor */
-  peditor = gconf_peditor_new_boolean (NULL, key, widget, NULL);
-  g_object_set (peditor, "conv-to-widget-cb", cc_ua_panel_toggle_radios, NULL);
-
-  /* emit the notify on the key, so that the conv-to-widget-cb callback is run
-   */
-  gconf_client_notify (priv->client, key);
+  g_settings_bind (settings, key, widget, "active", G_SETTINGS_BIND_DEFAULT);
 }
 
 /* seeing section */
@@ -618,9 +577,7 @@ static void
 cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
-  GConfChangeSet *changeset = NULL;
   GtkWidget *w;
-
 
   /* enable shortcuts */
   w = WID (priv->builder, "typing_keyboard_toggle_checkbox");
@@ -628,7 +585,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   /* sticky keys */
   w = WID (priv->builder, "typing_sticky_keys_on_radiobutton");
-  g_settings_bind (priv->kb_settings, "stickykeys-enable", w, "active", G_SETTINGS_BIND_DEFAULT);
+  settings_on_off_editor_new (priv, priv->kb_settings, "stickykeys-enable", w, sticky_keys_section);
 
   w = WID (priv->builder, "typing_sticky_keys_disable_two_keys_checkbutton");
   g_settings_bind (priv->kb_settings, "stickykeys-two-key-off", w, "active", G_SETTINGS_BIND_DEFAULT);
@@ -638,7 +595,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   /* slow keys */
   w = WID (priv->builder, "typing_slow_keys_on_radiobutton");
-  g_settings_bind (priv->kb_settings, "slowkeys-enable", w, "active", G_SETTINGS_BIND_DEFAULT);
+  settings_on_off_editor_new (priv, priv->kb_settings, "slowkeys-enable", w, slow_keys_section);
 
   w = WID (priv->builder, "typing_slowkeys_delay_scale");
   g_settings_bind (priv->kb_settings, "slowkeys-delay",
@@ -656,7 +613,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   /* bounce keys */
   w = WID (priv->builder, "typing_bounce_keys_on_radiobutton");
-  g_settings_bind (priv->kb_settings, "bouncekeys-enable", w, "active", G_SETTINGS_BIND_DEFAULT);
+  settings_on_off_editor_new (priv, priv->kb_settings, "bouncekeys-enable", w, bounce_keys_section);
 
   w = WID (priv->builder, "typing_bouncekeys_delay_scale");
   g_settings_bind (priv->kb_settings, "bouncekeys-delay",
@@ -686,38 +643,34 @@ static void
 cc_ua_panel_init_mouse (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
-  GConfChangeSet *changeset = NULL;
   GtkWidget *w;
 
   /* mouse keys */
   w = WID (priv->builder, "pointing_mouse_keys_on_radiobutton");
-  g_settings_bind (priv->kb_settings, "mousekeys-enable", w, "active", G_SETTINGS_BIND_DEFAULT);
+  settings_on_off_editor_new (priv, priv->kb_settings, "mousekeys-enable", w, NULL);
 
   /* simulated secondary click */
   w = WID (priv->builder, "pointing_second_click_on_radiobutton");
-  gconf_on_off_peditor_new (priv, MOUSE_CONFIG_ROOT "/delay_enable", w,
-                            secondary_click_section);
+  settings_on_off_editor_new (priv, priv->mouse_settings, "secondary-click-enabled", w, secondary_click_section);
 
   w = WID (priv->builder, "pointing_secondary_click_delay_scale");
-  gconf_peditor_new_numeric_range (changeset,
-                                   MOUSE_CONFIG_ROOT "/delay_time", w,
-                                   NULL);
-
+  g_settings_bind (priv->mouse_settings, "secondary-click-time",
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
 
   /* dwell click */
   w = WID (priv->builder, "pointing_hover_click_on_radiobutton");
-  gconf_on_off_peditor_new (priv,MOUSE_CONFIG_ROOT "/dwell_enable", w,
-                            dwell_click_section);
+  settings_on_off_editor_new (priv, priv->mouse_settings, "dwell-click-enabled", w, dwell_click_section);
 
   w = WID (priv->builder, "pointing_dwell_delay_scale");
-  gconf_peditor_new_numeric_range (changeset,
-                                   MOUSE_CONFIG_ROOT "/dwell_time", w,
-                                   NULL);
+  g_settings_bind (priv->mouse_settings, "dwell-time",
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "pointing_dwell_threshold_scale");
-  gconf_peditor_new_numeric_range (changeset,
-                                   MOUSE_CONFIG_ROOT "/threshold", w,
-                                   NULL);
+  g_settings_bind (priv->mouse_settings, "dwell-threshold",
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
 
   /* mouse preferences button */
   g_signal_connect (WID (priv->builder, "pointing_mouse_preferences_button"),
