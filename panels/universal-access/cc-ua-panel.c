@@ -17,7 +17,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * Author: Thomas Wood <thomas.wood@intel.com>
+ * Authors: Thomas Wood <thomas.wood@intel.com>
+ *          Rodrigo Moya <rodrigo@gnome.org>
  *
  */
 
@@ -30,7 +31,6 @@
 
 #define CONFIG_ROOT "/desktop/gnome/accessibility"
 
-#define KEY_CONFIG_ROOT CONFIG_ROOT "/keyboard"
 #define MOUSE_CONFIG_ROOT CONFIG_ROOT "/mouse"
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
@@ -46,6 +46,8 @@ struct _CcUaPanelPrivate
   GtkBuilder *builder;
   GConfClient *client;
   GSettings *interface_settings;
+  GSettings *kb_settings;
+  GSettings *mouse_settings;
 
   GSList *notify_list;
 };
@@ -113,6 +115,18 @@ cc_ua_panel_dispose (GObject *object)
     {
       g_object_unref (priv->interface_settings);
       priv->interface_settings = NULL;
+    }
+
+  if (priv->kb_settings)
+    {
+      g_object_unref (priv->kb_settings);
+      priv->kb_settings = NULL;
+    }
+
+  if (priv->mouse_settings)
+    {
+      g_object_unref (priv->mouse_settings);
+      priv->mouse_settings = NULL;
     }
 
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
@@ -206,7 +220,6 @@ cc_ua_panel_toggle_radios (GConfPropertyEditor *peditor,
 
   enabled = gconf_value_get_bool (value);
   radio = (GtkWidget*) gconf_property_editor_get_ui_control (peditor);
-
 
   if (!enabled)
     {
@@ -611,58 +624,47 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   /* enable shortcuts */
   w = WID (priv->builder, "typing_keyboard_toggle_checkbox");
-  gconf_peditor_new_boolean (changeset, KEY_CONFIG_ROOT "/enable", w, NULL);
+  g_settings_bind (priv->kb_settings, "enable", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* sticky keys */
   w = WID (priv->builder, "typing_sticky_keys_on_radiobutton");
-  gconf_on_off_peditor_new (priv, KEY_CONFIG_ROOT "/stickykeys_enable",
-                            w, sticky_keys_section);
+  g_settings_bind (priv->kb_settings, "stickykeys-enable", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_sticky_keys_disable_two_keys_checkbutton");
-  gconf_peditor_new_boolean (changeset,
-                             KEY_CONFIG_ROOT "/stickykeys_two_key_off", w,
-                             NULL);
+  g_settings_bind (priv->kb_settings, "stickykeys-two-key-off", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_sticky_keys_beep_modifier_checkbutton");
-  gconf_peditor_new_boolean (changeset,
-                             KEY_CONFIG_ROOT "/stickykeys_modifier_beep", w,
-                             NULL);
+  g_settings_bind (priv->kb_settings, "stickykeys-modifier-beep", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* slow keys */
   w = WID (priv->builder, "typing_slow_keys_on_radiobutton");
-  gconf_on_off_peditor_new (priv, KEY_CONFIG_ROOT "/slowkeys_enable",
-                            w, slow_keys_section);
+  g_settings_bind (priv->kb_settings, "slowkeys-enable", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_slowkeys_delay_scale");
-  gconf_peditor_new_numeric_range (changeset, KEY_CONFIG_ROOT "/slowkeys_delay",
-                                   w, NULL);
+  g_settings_bind (priv->kb_settings, "slowkeys-delay",
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_slow_keys_beep_pressed_checkbutton");
-  gconf_peditor_new_boolean (changeset, KEY_CONFIG_ROOT "/slowkeys_beep_press",
-                             w, NULL);
+  g_settings_bind (priv->kb_settings, "slowkeys-beep-press", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_slow_keys_beep_accepted_checkbutton");
-  gconf_peditor_new_boolean (changeset, KEY_CONFIG_ROOT "/slowkeys_beep_accept",
-                             w, NULL);
+  g_settings_bind (priv->kb_settings, "slowkeys-beep-accept", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_slow_keys_beep_rejected_checkbutton");
-  gconf_peditor_new_boolean (changeset, KEY_CONFIG_ROOT "/slowkeys_beep_reject",
-                             w, NULL);
+  g_settings_bind (priv->kb_settings, "slowkeys-beep-reject", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* bounce keys */
   w = WID (priv->builder, "typing_bounce_keys_on_radiobutton");
-  gconf_on_off_peditor_new (priv, KEY_CONFIG_ROOT "/bouncekeys_enable", w,
-                            bounce_keys_section);
+  g_settings_bind (priv->kb_settings, "bouncekeys-enable", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_bouncekeys_delay_scale");
-  gconf_peditor_new_numeric_range (changeset,
-                                   KEY_CONFIG_ROOT "/bouncekeys_delay", w,
-                                   NULL);
+  g_settings_bind (priv->kb_settings, "bouncekeys-delay",
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_bounce_keys_beep_rejected_checkbutton");
-  gconf_peditor_new_boolean (changeset,
-                             KEY_CONFIG_ROOT "/bouncekeys_beep_reject", w,
-                             NULL);
+  g_settings_bind (priv->kb_settings, "bouncekeys-beep-reject", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (WID (priv->builder, "typing_keyboard_preferences_button"),
                     "clicked",
@@ -689,7 +691,7 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
 
   /* mouse keys */
   w = WID (priv->builder, "pointing_mouse_keys_on_radiobutton");
-  gconf_on_off_peditor_new (priv, KEY_CONFIG_ROOT "/mousekeys_enable", w, NULL);
+  g_settings_bind (priv->kb_settings, "mousekeys-enable", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* simulated secondary click */
   w = WID (priv->builder, "pointing_second_click_on_radiobutton");
@@ -767,6 +769,9 @@ cc_ua_panel_init (CcUaPanel *self)
   priv->interface_settings = g_settings_new ("org.gnome.desktop.interface");
   g_signal_connect (priv->interface_settings, "changed",
                     G_CALLBACK (interface_settings_changed_cb), self);
+
+  priv->kb_settings = g_settings_new ("org.gnome.desktop.a11y.keyboard");
+  priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
 
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);
