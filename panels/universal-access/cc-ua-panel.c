@@ -46,6 +46,7 @@ struct _CcUaPanelPrivate
   GSettings *interface_settings;
   GSettings *kb_settings;
   GSettings *mouse_settings;
+  GSettings *font_settings;
 
   GSList *notify_list;
 };
@@ -125,6 +126,12 @@ cc_ua_panel_dispose (GObject *object)
     {
       g_object_unref (priv->mouse_settings);
       priv->mouse_settings = NULL;
+    }
+
+  if (priv->font_settings)
+    {
+      g_object_unref (priv->font_settings);
+      priv->font_settings = NULL;
     }
 
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
@@ -235,8 +242,6 @@ settings_on_off_editor_new (CcUaPanelPrivate  *priv,
 #define CONTRAST_MODEL_THEME_COLUMN 3
 #define DPI_MODEL_FACTOR_COLUMN 2
 
-#define DPI_KEY "/desktop/gnome/font_rendering/dpi"
-
 /* The following two functions taken from gsd-a11y-preferences-dialog.c
  *
  * Copyright (C)  2008 William Jon McCann <jmccann@redhat.com>
@@ -307,9 +312,8 @@ get_dpi_from_x_server ()
 }
 
 static void
-dpi_notify_cb (GConfClient *client,
-               guint        cnxn_id,
-               GConfEntry  *entry,
+dpi_notify_cb (GSettings   *settings,
+               const gchar *key,
                CcUaPanel   *panel)
 {
   CcUaPanelPrivate *priv = panel->priv;
@@ -317,13 +321,13 @@ dpi_notify_cb (GConfClient *client,
   GtkTreeModel *model;
   GtkWidget *combo;
   gboolean valid;
-  gdouble gconf_value;
+  gdouble conf_value;
   gdouble x_dpi;
 
-  if (!entry->value)
+  if (!g_str_equal (key, "dpi"))
     return;
 
-  gconf_value = gconf_value_get_float (entry->value);
+  conf_value = g_settings_get_double (settings, key);
 
   combo = WID (priv->builder, "seeing_text_size_combobox");
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
@@ -341,7 +345,7 @@ dpi_notify_cb (GConfClient *client,
                           DPI_MODEL_FACTOR_COLUMN, &factor,
                           -1);
 
-      if (gconf_value == (float) (factor * x_dpi))
+      if (conf_value == (float) (factor * x_dpi))
         {
           gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
           break;
@@ -372,7 +376,7 @@ dpi_combo_box_changed (GtkComboBox *box,
                       -1);
 
   if (factor == 1.0)
-    gconf_client_unset (priv->client, DPI_KEY, NULL);
+    g_settings_reset (priv->font_settings, "dpi");
   else
     {
       gdouble x_dpi, u_dpi;
@@ -380,7 +384,7 @@ dpi_combo_box_changed (GtkComboBox *box,
       x_dpi = get_dpi_from_x_server ();
       u_dpi = (gdouble) factor * x_dpi;
 
-      gconf_client_set_float (priv->client, DPI_KEY, u_dpi, NULL);
+      g_settings_set_double (priv->font_settings, "dpi", u_dpi);
     }
 }
 
@@ -466,22 +470,17 @@ static void
 cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
-  guint id;
 
   gconf_client_add_dir (priv->client, "/desktop/gnome/font_rendering",
                         GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-  id = gconf_client_notify_add (priv->client, DPI_KEY,
-                                (GConfClientNotifyFunc) dpi_notify_cb,
-                                self, NULL, NULL);
-  priv->notify_list = g_slist_prepend (priv->notify_list, GINT_TO_POINTER (id));
+  g_signal_connect (priv->font_settings, "changed", G_CALLBACK (dpi_notify_cb), self);
 
   g_signal_connect (WID (priv->builder, "seeing_contrast_combobox"), "changed",
                     G_CALLBACK (contrast_combobox_changed_cb), self);
 
   g_signal_connect (WID (priv->builder, "seeing_text_size_combobox"), "changed",
                     G_CALLBACK (dpi_combo_box_changed), self);
-  gconf_client_notify (priv->client, DPI_KEY);
 
   gconf_peditor_new_boolean (NULL,
                              "/desktop/gnome/accessibility/keyboard/togglekeys_enable",
@@ -725,6 +724,7 @@ cc_ua_panel_init (CcUaPanel *self)
 
   priv->kb_settings = g_settings_new ("org.gnome.desktop.a11y.keyboard");
   priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
+  priv->font_settings = g_settings_new ("org.gnome.settings-daemon.plugins.xsettings");
 
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);
