@@ -28,9 +28,6 @@
 
 #include "gconf-property-editor.h"
 
-
-#define CONFIG_ROOT "/desktop/gnome/accessibility"
-
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
 
@@ -236,6 +233,64 @@ settings_on_off_editor_new (CcUaPanelPrivate  *priv,
   g_settings_bind (settings, key, widget, "active", G_SETTINGS_BIND_DEFAULT);
 }
 
+static GConfValue*
+cc_ua_panel_toggle_radios (GConfPropertyEditor *peditor,
+                           const GConfValue    *value)
+{
+  GtkWidget *radio;
+  gboolean enabled;
+
+  enabled = gconf_value_get_bool (value);
+  radio = (GtkWidget*) gconf_property_editor_get_ui_control (peditor);
+
+  if (!enabled)
+    {
+      GSList *list, *l;
+
+      list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
+
+      if (list)
+        {
+          /* activate the "off" button */
+          for (l = list; l; l = l->next)
+            {
+              if (l->data == radio)
+                continue;
+
+              gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (l->data),
+                                            TRUE);
+            }
+        }
+    }
+
+  return gconf_value_copy (value);
+}
+
+static void
+gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
+                          const gchar       *key,
+                          GtkWidget         *widget,
+                          gchar            **section)
+{
+  GObject *peditor;
+
+  /* set data to enable/disable the section this on/off switch controls */
+  if (section)
+    {
+      g_object_set_data (G_OBJECT (widget), "section-widgets", section);
+      g_signal_connect (widget, "toggled",
+                        G_CALLBACK (cc_ua_panel_section_toggled),
+                        priv->builder);
+    }
+
+  /* set up the boolean editor */
+  peditor = gconf_peditor_new_boolean (NULL, key, widget, NULL);
+  g_object_set (peditor, "conv-to-widget-cb", cc_ua_panel_toggle_radios, NULL);
+
+  /* emit the notify on the key, so that the conv-to-widget-cb callback is run */
+  gconf_client_notify (priv->client, key);
+}
+
 /* seeing section */
 #define GTK_THEME_KEY "gtk-theme"
 #define ICON_THEME_KEY "icon-theme"
@@ -257,7 +312,7 @@ settings_on_off_editor_new (CcUaPanelPrivate  *priv,
  * DPI_HIGH_REASONABLE_VALUE], then we assume that it is lying and we use
  * DPI_FALLBACK instead.
  *
- * See get_dpi_from_gconf_or_server() below, and also
+ * See get_dpi_from_x_server() below, and also
  * https://bugzilla.novell.com/show_bug.cgi?id=217790
  */
 #define DPI_LOW_REASONABLE_VALUE 50
@@ -471,9 +526,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
 
-  gconf_client_add_dir (priv->client, "/desktop/gnome/font_rendering",
-                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-
   g_signal_connect (priv->font_settings, "changed", G_CALLBACK (dpi_notify_cb), self);
 
   g_signal_connect (WID (priv->builder, "seeing_contrast_combobox"), "changed",
@@ -482,11 +534,9 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   g_signal_connect (WID (priv->builder, "seeing_text_size_combobox"), "changed",
                     G_CALLBACK (dpi_combo_box_changed), self);
 
-  gconf_peditor_new_boolean (NULL,
-                             "/desktop/gnome/accessibility/keyboard/togglekeys_enable",
-                             WID (priv->builder,
-                                  "seeing_enable_toggle_keys_checkbutton"),
-                             NULL);
+  g_settings_bind (priv->kb_settings, "togglekeys-enable",
+                   WID (priv->builder, "seeing_enable_toggle_keys_checkbutton"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
 }
 
 
@@ -714,9 +764,6 @@ cc_ua_panel_init (CcUaPanel *self)
     }
 
   priv->client = gconf_client_get_default ();
-
-  gconf_client_add_dir (priv->client, CONFIG_ROOT,
-                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
   priv->interface_settings = g_settings_new ("org.gnome.desktop.interface");
   g_signal_connect (priv->interface_settings, "changed",
