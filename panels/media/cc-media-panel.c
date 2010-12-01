@@ -433,12 +433,15 @@ media_panel_setup (CcMediaPanel *self)
   GtkTreeIter iter;
   GtkBuilder *builder = self->priv->builder;
 
-  const gchar *widget_names[] = {
-    "media_audio_cdda_combobox",
-    "media_video_dvd_combobox",
-    "media_music_player_combobox",
-    "media_dcf_combobox",
-    "media_software_combobox",
+  struct {
+    const gchar *widget_name;
+    const gchar *content_type;
+  } const defs[] = {
+    { "media_audio_cdda_combobox", "x-content/audio-cdda" },
+    { "media_video_dvd_combobox", "x-content/video-dvd" },
+    { "media_music_player_combobox", "x-content/audio-player" },
+    { "media_dcf_combobox", "x-content/image-dcf" },
+    { "media_software_combobox", "x-content/software" },
   };
 
   for (n = 0; n < G_N_ELEMENTS (defs); n++) {
