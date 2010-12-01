@@ -94,8 +94,9 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkComboBox" id="media_audio_cdda_combobox">
+                                          <object class="GtkAppChooserButton" id="media_audio_cdda_combobox">
                                             <property name="visible">True</property>
+                                            <property name="content-type">x-content/audio-cdda</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -104,8 +105,9 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkComboBox" id="media_video_dvd_combobox">
+                                          <object class="GtkAppChooserButton" id="media_video_dvd_combobox">
                                             <property name="visible">True</property>
+                                            <property name="content-type">x-content/video-dvd</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -132,8 +134,9 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkComboBox" id="media_music_player_combobox">
+                                          <object class="GtkAppChooserButton" id="media_music_player_combobox">
                                             <property name="visible">True</property>
+                                            <property name="content-type">"x-content/audio-player"</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -160,8 +163,9 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkComboBox" id="media_dcf_combobox">
+                                          <object class="GtkAppChooserButton" id="media_dcf_combobox">
                                             <property name="visible">True</property>
+                                            <property name="content-type">x-content/image-dcf</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -188,8 +192,9 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkComboBox" id="media_software_combobox">
+                                          <object class="GtkAppChooserButton" id="media_software_combobox">
                                             <property name="visible">True</property>
+                                            <property name="content-type">x-content/software</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -357,7 +362,7 @@
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Acti_on:</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">media_other_action_combobox</property>
+                                <property name="mnemonic_widget">media_other_action_container</property>
                               </object>
                               <packing>
                                 <property name="top_attach">1</property>
@@ -367,7 +372,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="media_other_action_combobox">
+                              <object class="GtkBox" id="media_other_action_container">
                                 <property name="visible">True</property>
                               </object>
                               <packing>
