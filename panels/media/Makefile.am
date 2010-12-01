@@ -7,9 +7,7 @@ ccpanels_LTLIBRARIES = libmedia.la
 libmedia_la_SOURCES = \
 	media-module.c \
 	cc-media-panel.c \
-	cc-media-panel.h \
-	nautilus-open-with-dialog.c \
-	nautilus-open-with-dialog.h
+	cc-media-panel.h
 
 libmedia_la_LIBADD = \
 	$(PANEL_LIBS) \
