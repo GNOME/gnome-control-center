@@ -23,6 +23,7 @@
 
 #include "cc-timezone-map.h"
 #include "set-timezone.h"
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -40,8 +41,8 @@ enum {
 
 #define W(x) (GtkWidget*) gtk_builder_get_object (priv->builder, x)
 
-#define CLOCK_SCHEMA "org.gnome.shell.clock"
-#define CLOCK_FORMAT_KEY "format"
+#define CLOCK_SCHEMA "org.gnome.desktop.interface"
+#define CLOCK_FORMAT_KEY "clock-format"
 
 struct _CcDateTimePanelPrivate
 {
@@ -155,9 +156,9 @@ change_clock_settings (GtkWidget       *widget,
                                    panel);
 
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (W ("12_radiobutton"))))
-    g_settings_set_string (priv->settings, CLOCK_FORMAT_KEY, "12-hour");
+    g_settings_set_enum (priv->settings, CLOCK_FORMAT_KEY, G_DESKTOP_CLOCK_FORMAT_12H);
   else
-    g_settings_set_string (priv->settings, CLOCK_FORMAT_KEY, "24-hour");
+    g_settings_set_enum (priv->settings, CLOCK_FORMAT_KEY, G_DESKTOP_CLOCK_FORMAT_24H);
 
   g_signal_handlers_unblock_by_func (priv->settings, clock_settings_changed_cb,
                                      panel);
@@ -171,14 +172,14 @@ clock_settings_changed_cb (GSettings       *settings,
   CcDateTimePanelPrivate *priv = panel->priv;
   GtkWidget *radio12, *radio24;
   gboolean use_12_hour;
-  gchar *value;
+  GDesktopClockFormat value;
 
-  value = g_settings_get_string (settings, CLOCK_FORMAT_KEY);
+  value = g_settings_get_enum (settings, CLOCK_FORMAT_KEY);
 
   radio12 = W ("12_radiobutton");
   radio24 = W ("24_radiobutton");
 
-  use_12_hour = (g_strcmp0 (value, "12-hour") == 0);
+  use_12_hour = (value == G_DESKTOP_CLOCK_FORMAT_12H);
 
   g_signal_handlers_block_by_func (radio12, change_clock_settings, panel);
   g_signal_handlers_block_by_func (radio24, change_clock_settings, panel);
