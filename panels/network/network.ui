@@ -1,0 +1,1407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.20"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="liststore_wireless_network">
+    <columns>
+      <!-- column-name id -->
+      <column type="gint"/>
+      <!-- column-name text -->
+      <column type="gchar"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore_devices">
+    <columns>
+      <!-- column-name icon -->
+      <column type="gchar"/>
+      <!-- column-name title -->
+      <column type="gchar"/>
+      <!-- column-name id -->
+      <column type="gchar"/>
+      <!-- column-name tooltip -->
+      <column type="gchar"/>
+    </columns>
+  </object>
+  <object class="GtkWindow" id="window1">
+    <child>
+      <object class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <property name="border_width">18</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkVBox" id="vbox2">
+            <property name="visible">True</property>
+            <property name="spacing">3</property>
+            <child>
+              <object class="GtkHBox" id="hbox2">
+                <property name="visible">True</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkTreeView" id="treeview_devices">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="model">liststore_devices</property>
+                        <property name="headers_visible">False</property>
+                        <property name="search_column">2</property>
+                        <property name="show_expanders">False</property>
+                        <property name="tooltip_column">3</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkVBox" id="vbox3">
+                    <property name="visible">True</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkHBox" id="hbox3">
+                        <property name="visible">True</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkLabel" id="label3">
+                            <property name="visible">True</property>
+                            <property name="label">
+</property>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="image1">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-preferences</property>
+                            <property name="icon-size">6</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkVBox" id="vbox4">
+                            <property name="visible">True</property>
+                            <property name="spacing">3</property>
+                            <child>
+                              <object class="GtkHBox" id="hbox4">
+                                <property name="visible">True</property>
+                                <child>
+                                  <object class="GtkLabel" id="label1">
+                                    <property name="visible">True</property>
+                                    <property name="label">Wired</property>
+                                    <attributes>
+                                      <attribute name="weight" value="bold"/>
+                                      <attribute name="scale" value="1.200000"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkHBox" id="hbox5">
+                                <property name="visible">True</property>
+                                <child>
+                                  <object class="GtkLabel" id="label2">
+                                    <property name="visible">True</property>
+                                    <property name="label">Cable unplugged</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label4">
+                            <property name="visible">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkHBox" id="hbox6">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkLabel" id="label7">
+                            <property name="visible">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkNotebook" id="notebook_types">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="show_border">False</property>
+                            <child>
+                              <object class="GtkVBox" id="vbox6">
+                                <property name="visible">True</property>
+                                <property name="border_width">12</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkHBox" id="hbox17">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox18">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label19">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Hardware Address:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wired_mac">
+                                        <property name="visible">True</property>
+                                        <property name="label">AA:BB:CC:DD:55:66:77:88</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox19">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox20">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label21">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Speed:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wired_speed">
+                                        <property name="visible">True</property>
+                                        <property name="label">1 Mb/s</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox23">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox24">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label25">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">IP Address:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wired_ip">
+                                        <property name="visible">True</property>
+                                        <property name="label">127.0.0.1</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                            <child type="tab">
+                              <object class="GtkLabel" id="label5">
+                                <property name="visible">True</property>
+                                <property name="label">wired</property>
+                              </object>
+                              <packing>
+                                <property name="tab_fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkVBox" id="vbox5">
+                                <property name="visible">True</property>
+                                <property name="border_width">12</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkHBox" id="hbox7">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox9">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label6">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Hardware Address:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wireless_mac">
+                                        <property name="visible">True</property>
+                                        <property name="label">AA:BB:CC:DD:55:66:77:88</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox8">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox10">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label9">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Speed:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wireless_speed">
+                                        <property name="visible">True</property>
+                                        <property name="label">1 Mb/s</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox11">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox12">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label11">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Security:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wireless_security">
+                                        <property name="visible">True</property>
+                                        <property name="label">WPA</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox13">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox14">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label13">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">IP Address:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wireless_ip">
+                                        <property name="visible">True</property>
+                                        <property name="label">127.0.0.1</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox15">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox16">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label15">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Network Name:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkComboBox" id="combobox_network_name">
+                                        <property name="visible">True</property>
+                                        <property name="model">liststore_wireless_network</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">4</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child type="tab">
+                              <object class="GtkLabel" id="label16">
+                                <property name="visible">True</property>
+                                <property name="label">wireless</property>
+                              </object>
+                              <packing>
+                                <property name="position">1</property>
+                                <property name="tab_fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkVBox" id="vbox7">
+                                <property name="visible">True</property>
+                                <property name="border_width">12</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkHBox" id="hbox21">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox22">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label20">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Hardware Address:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="labe_mobilebb_mac">
+                                        <property name="visible">True</property>
+                                        <property name="label">AA:BB:CC:DD:55:66:77:88</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox25">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox26">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label23">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Speed:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_mobilebb_speed">
+                                        <property name="visible">True</property>
+                                        <property name="label">1 Mb/s</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox27">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox28">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label26">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Provider:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_mobilebb_provider">
+                                        <property name="visible">True</property>
+                                        <property name="label">SuperTel Supremo</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox29">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox30">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label28">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">IP Address:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_mobilebb_ip">
+                                        <property name="visible">True</property>
+                                        <property name="label">127.0.0.1</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child type="tab">
+                              <object class="GtkLabel" id="label17">
+                                <property name="visible">True</property>
+                                <property name="label">mobilebb</property>
+                              </object>
+                              <packing>
+                                <property name="position">2</property>
+                                <property name="tab_fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkVBox" id="vbox9">
+                                <property name="visible">True</property>
+                                <property name="border_width">12</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkHBox" id="hbox38">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox39">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label38">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Gateway:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_vpn_gateway">
+                                        <property name="visible">True</property>
+                                        <property name="label">AA:BB:CC:DD:55:66:77:88</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox40">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox41">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label40">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Group Name:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_vpn_groupname">
+                                        <property name="visible">True</property>
+                                        <property name="label">SEKRIT</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox42">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox43">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label42">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Group Password:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_vpn_group_password">
+                                        <property name="visible">True</property>
+                                        <property name="label">***********</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox44">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox45">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label44">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Username:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_vpn_username">
+                                        <property name="visible">True</property>
+                                        <property name="label">smithy</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child type="tab">
+                              <object class="GtkLabel" id="label55">
+                                <property name="visible">True</property>
+                                <property name="label">vpn</property>
+                              </object>
+                              <packing>
+                                <property name="position">2</property>
+                                <property name="tab_fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkVBox" id="vbox8">
+                                <property name="visible">True</property>
+                                <property name="border_width">12</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkHBox" id="hbox1">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox31">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label18">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Method:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkComboBox" id="combobox_proxy_mode">
+                                        <property name="visible">True</property>
+                                        <property name="model">liststore_proxy_method</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox_proxy_url">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox33">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label31">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Configuration URL:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkEntry" id="entry_proxy_url">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox34">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox35">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label33">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">HTTP Proxy:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_proxy_http">
+                                        <property name="visible">True</property>
+                                        <property name="label">dave.lan</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox36">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox37">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label35">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Secure HTTP Proxy:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_proxy_https">
+                                        <property name="visible">True</property>
+                                        <property name="label">dave.lan</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox46">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox47">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label30">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">FTP Proxy:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_proxy_ftp">
+                                        <property name="visible">True</property>
+                                        <property name="label">dave.lan</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">4</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox48">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox49">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label47">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Socks Host:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_proxy_socks">
+                                        <property name="visible">True</property>
+                                        <property name="label">dave.lan</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">5</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child type="tab">
+                              <object class="GtkLabel" id="label46">
+                                <property name="visible">True</property>
+                                <property name="label">proxy</property>
+                              </object>
+                              <packing>
+                                <property name="position">2</property>
+                                <property name="tab_fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child type="tab">
+                              <object class="GtkLabel" id="label37">
+                                <property name="visible">True</property>
+                                <property name="label">other</property>
+                              </object>
+                              <packing>
+                                <property name="position">2</property>
+                                <property name="tab_fill">False</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label56">
+                            <property name="visible">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkHButtonBox" id="hbuttonbox1">
+                <property name="visible">True</property>
+                <property name="layout_style">start</property>
+                <child>
+                  <object class="GtkButton" id="button2">
+                    <property name="label">gtk-add</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="use_stock">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button3">
+                    <property name="label">gtk-remove</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="use_stock">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox54">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkButton" id="button_unlock">
+                <property name="label" translatable="yes">Unlock</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="togglebutton_flightmode">
+                <property name="label" translatable="yes">Flight Mode</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="pack_type">end</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkSizeGroup" id="sizegroup1">
+    <widgets>
+      <widget name="hbox45"/>
+      <widget name="hbox43"/>
+      <widget name="hbox41"/>
+      <widget name="hbox39"/>
+      <widget name="hbox24"/>
+      <widget name="hbox20"/>
+      <widget name="hbox18"/>
+      <widget name="hbox16"/>
+      <widget name="hbox12"/>
+      <widget name="hbox9"/>
+      <widget name="hbox10"/>
+      <widget name="hbox14"/>
+      <widget name="hbox22"/>
+      <widget name="hbox26"/>
+      <widget name="hbox28"/>
+      <widget name="hbox30"/>
+      <widget name="hbox31"/>
+      <widget name="hbox33"/>
+      <widget name="hbox35"/>
+      <widget name="hbox37"/>
+      <widget name="hbox47"/>
+      <widget name="hbox49"/>
+    </widgets>
+  </object>
+  <object class="GtkListStore" id="liststore_proxy_method">
+    <columns>
+      <!-- column-name text -->
+      <column type="gchar"/>
+      <!-- column-name type -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">A</col>
+        <col id="1">0</col>
+      </row>
+      <row>
+        <col id="0">M</col>
+        <col id="1">1</col>
+      </row>
+    </data>
+  </object>
+</interface>
