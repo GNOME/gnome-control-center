@@ -51,17 +51,16 @@ struct _CcDateTimePanelPrivate
 
   TzLocation *current_location;
 
-  guint timeout;
-
   GtkTreeModel *locations;
   GtkTreeModelFilter *city_filter;
 
-  guint hour;
-  guint minute;
+  GDateTime *date;
 
   GSettings *settings;
+  GDesktopClockFormat clock_format;
 };
 
+static void update_time (CcDateTimePanel *self);
 
 static void
 cc_date_time_panel_get_property (GObject    *object,
@@ -106,21 +105,13 @@ cc_date_time_panel_dispose (GObject *object)
       priv->settings = NULL;
     }
 
-  G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
-}
-
-static void
-cc_date_time_panel_finalize (GObject *object)
-{
-  CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (object)->priv;
-
-  if (priv->timeout)
+  if (priv->date)
     {
-      g_source_remove (priv->timeout);
-      priv->timeout = 0;
+      g_date_time_unref (priv->date);
+      priv->date = NULL;
     }
 
-  G_OBJECT_CLASS (cc_date_time_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
 
 static void
@@ -133,7 +124,6 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   object_class->get_property = cc_date_time_panel_get_property;
   object_class->set_property = cc_date_time_panel_set_property;
   object_class->dispose = cc_date_time_panel_dispose;
-  object_class->finalize = cc_date_time_panel_finalize;
 }
 
 static void
@@ -151,14 +141,20 @@ change_clock_settings (GtkWidget       *widget,
                        CcDateTimePanel *panel)
 {
   CcDateTimePanelPrivate *priv = panel->priv;
+  GDesktopClockFormat value;
 
   g_signal_handlers_block_by_func (priv->settings, clock_settings_changed_cb,
                                    panel);
 
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (W ("12_radiobutton"))))
-    g_settings_set_enum (priv->settings, CLOCK_FORMAT_KEY, G_DESKTOP_CLOCK_FORMAT_12H);
+    value = G_DESKTOP_CLOCK_FORMAT_12H;
   else
-    g_settings_set_enum (priv->settings, CLOCK_FORMAT_KEY, G_DESKTOP_CLOCK_FORMAT_24H);
+    value = G_DESKTOP_CLOCK_FORMAT_24H;
+
+  g_settings_set_enum (priv->settings, CLOCK_FORMAT_KEY, value);
+  priv->clock_format = value;
+
+  update_time (panel);
 
   g_signal_handlers_unblock_by_func (priv->settings, clock_settings_changed_cb,
                                      panel);
@@ -175,6 +171,7 @@ clock_settings_changed_cb (GSettings       *settings,
   GDesktopClockFormat value;
 
   value = g_settings_get_enum (settings, CLOCK_FORMAT_KEY);
+  priv->clock_format = value;
 
   radio12 = W ("12_radiobutton");
   radio24 = W ("24_radiobutton");
@@ -184,54 +181,51 @@ clock_settings_changed_cb (GSettings       *settings,
   g_signal_handlers_block_by_func (radio12, change_clock_settings, panel);
   g_signal_handlers_block_by_func (radio24, change_clock_settings, panel);
 
-
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio12), use_12_hour);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio24), !use_12_hour);
+
+  update_time (panel);
 
   g_signal_handlers_unblock_by_func (radio12, change_clock_settings, panel);
   g_signal_handlers_unblock_by_func (radio24, change_clock_settings, panel);
 }
 
-static gboolean
+static void
 update_time (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
-  GTimeVal timeval;
-  GtkWidget *widget;
-  gchar label[32];
-  time_t t;
-  struct tm time_info;
+  char *label;
+  char *am_pm_widgets[] = {"ampm_up_button", "ampm_down_button", "ampm_label" };
+  guint i;
 
-  g_get_current_time (&timeval);
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_24H)
+    {
+      /* Update the hours label */
+      label = g_date_time_format (priv->date, "%H"); 
+      gtk_label_set_text (GTK_LABEL (W("hours_label")), label);
+      g_free (label);
+    }
+  else
+    {
+      /* Update the hours label */
+      label = g_date_time_format (priv->date, "%I");
+      gtk_label_set_text (GTK_LABEL (W("hours_label")), label);
+      g_free (label);
 
-  t = time (NULL);
+      /* Set AM/PM */
+      label = g_date_time_format (priv->date, "%p");
+      gtk_label_set_text (GTK_LABEL (W("ampm_label")), label);
+      g_free (label);
+    }
 
-  localtime_r (&t, &time_info);
-
-  priv->hour = time_info.tm_hour;
-  priv->minute = time_info.tm_min;
-
-  /* Update the hours label */
-  strftime (label, 32, "%H", &time_info);
-  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "hours_label");
-  gtk_label_set_text (GTK_LABEL (widget), label);
+  for (i = 0; i < G_N_ELEMENTS (am_pm_widgets); i++)
+    gtk_widget_set_visible (W(am_pm_widgets[i]),
+			    priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H);
 
   /* Update the minutes label */
-  strftime (label, 32, "%M", &time_info);
-  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "minutes_label");
-  gtk_label_set_text (GTK_LABEL (widget), label);
-
-  priv->settings = g_settings_new (CLOCK_SCHEMA);
-  clock_settings_changed_cb (priv->settings, CLOCK_FORMAT_KEY, self);
-  g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
-                    G_CALLBACK (clock_settings_changed_cb), self);
-
-  g_signal_connect (W ("12_radiobutton"), "toggled",
-                    G_CALLBACK (change_clock_settings), self);
-  g_signal_connect (W ("24_radiobutton"), "toggled",
-                    G_CALLBACK (change_clock_settings), self);
-
-  return FALSE;
+  label = g_date_time_format (priv->date, "%M");
+  gtk_label_set_text (GTK_LABEL (W("minutes_label")), label);
+  g_free (label);
 }
 
 static void
@@ -262,27 +256,23 @@ apply_button_clicked_cb (GtkButton       *button,
 {
   CcDateTimePanelPrivate *priv = self->priv;
   guint mon, y, d;
-  struct tm fulltime;
   time_t unixtime;
   gchar *filename;
+  GDateTime *old_date;
+
+  old_date = priv->date;
 
   mon = 1 + gtk_combo_box_get_active (GTK_COMBO_BOX (W ("month-combobox")));
-
   y = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("year-spinbutton")));
   d = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("day-spinbutton")));
 
+  priv->date = g_date_time_new_local (y, mon, d,
+				      g_date_time_get_hour (old_date),
+				      g_date_time_get_minute (old_date),
+				      g_date_time_get_second (old_date));
+  g_date_time_unref (old_date);
 
-
-  fulltime.tm_sec = 0;
-  fulltime.tm_min = priv->minute;
-  fulltime.tm_hour = priv->hour;
-  fulltime.tm_mday = d;
-  fulltime.tm_mon = mon;
-  fulltime.tm_year = y - 1900;
-  fulltime.tm_isdst = -1;
-
-
-  unixtime = mktime (&fulltime);
+  unixtime = g_date_time_to_unix (priv->date);
 
   set_system_time_async (unixtime, (GFunc) set_time_cb, self, NULL);
 
@@ -510,46 +500,67 @@ city_changed_cb (GtkComboBox     *box,
 }
 
 static void
+month_year_changed (GtkWidget       *widget,
+		    CcDateTimePanel *panel)
+{
+  CcDateTimePanelPrivate *priv = panel->priv;
+  guint mon, y;
+  guint num_days;
+  GtkAdjustment *adj;
+  GtkSpinButton *day_spin;
+
+  mon = 1 + gtk_combo_box_get_active (GTK_COMBO_BOX (W ("month-combobox")));
+  y = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("year-spinbutton")));
+
+  /* Check the number of days in that month */
+  num_days = g_date_get_days_in_month (mon, y);
+
+  day_spin = GTK_SPIN_BUTTON (W("day-spinbutton"));
+  adj = GTK_ADJUSTMENT (gtk_spin_button_get_adjustment (day_spin));
+  gtk_adjustment_set_upper (adj, num_days + 1);
+
+  if (gtk_spin_button_get_value_as_int (day_spin) > num_days)
+    gtk_spin_button_set_value (day_spin, num_days);
+}
+
+static void
 change_time (GtkButton       *button,
              CcDateTimePanel *panel)
 {
   CcDateTimePanelPrivate *priv = panel->priv;
   const gchar *widget_name;
-  gchar *new_str;
-  guint *value, max, min;
-  GtkWidget *label;
+  gint direction;
+  GDateTime *old_date;
+
+  old_date = priv->date;
 
   widget_name = gtk_buildable_get_name (GTK_BUILDABLE (button));
 
-  min = 0;
+  if (strstr (widget_name, "up"))
+    direction = 1;
+  else
+    direction = -1;
+
   if (widget_name[0] == 'h')
     {
-      /* change hour */
-      label = W ("hours_label");
-      max = 23;
-      value = &priv->hour;
+      priv->date = g_date_time_add_hours (old_date, direction);
+    }
+  else if (widget_name[0] == 'm')
+    {
+      priv->date = g_date_time_add_minutes (old_date, direction);
     }
   else
     {
-      /* change minute */
-      label = W ("minutes_label");
-      max = 59;
-      value = &priv->minute;
+      int hour;
+      hour = g_date_time_get_hour (old_date);
+      if (hour >= 12)
+        priv->date = g_date_time_add_hours (old_date, -12);
+      else
+        priv->date = g_date_time_add_hours (old_date, 12);
     }
+  g_date_time_unref (old_date);
 
-  if (strstr (widget_name, "up"))
-    *value = *value + 1;
-  else
-    *value = *value - 1;
-
-  if (*value > max)
-    *value = min;
-  else if (*value < min)
-    *value = max;
-
-  new_str = g_strdup_printf ("%02d", *value);
-  gtk_label_set_text (GTK_LABEL (label), new_str);
-  g_free (new_str);
+  update_time (panel);
 }
 
 static void
@@ -558,12 +569,14 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   CcDateTimePanelPrivate *priv;
   gchar *objects[] = { "datetime-panel", "region-liststore", "city-liststore",
       "month-liststore", "city-modelfilter", "city-modelsort", NULL };
+  char *buttons[] = { "hour_up_button", "hour_down_button", "min_up_button",
+	  "min_down_button", "ampm_up_button", "ampm_down_button" };
   GtkWidget *widget;
   GtkAdjustment *adjustment;
   GError *err = NULL;
-  GDate *date;
   GtkTreeModelFilter *city_modelfilter;
   GtkTreeModelSort *city_modelsort;
+  guint i, num_days;
   int ret;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
@@ -582,34 +595,34 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
 
   /* set up time editing widgets */
-  g_signal_connect (W("hour_up_button"), "clicked", G_CALLBACK (change_time),
-                    self);
-  g_signal_connect (W("hour_down_button"), "clicked", G_CALLBACK (change_time),
-                    self);
-  g_signal_connect (W("min_up_button"), "clicked", G_CALLBACK (change_time),
-                    self);
-  g_signal_connect (W("min_down_button"), "clicked", G_CALLBACK (change_time),
-                    self);
+  for (i = 0; i < G_N_ELEMENTS (buttons); i++)
+    {
+      g_signal_connect (W(buttons[i]), "clicked", G_CALLBACK (change_time),
+			self);
+    }
 
   /* set up date editing widgets */
-  date = g_date_new ();
-  g_date_set_time_t (date, time (NULL));
+  priv->date = g_date_time_new_now_local ();
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),
-                            g_date_get_month (date) - 1);
+                            g_date_time_get_month (priv->date) - 1);
+  g_signal_connect (G_OBJECT (W("month-combobox")), "changed",
+		    G_CALLBACK (month_year_changed), self);
 
-  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_get_day (date), 0,
-                                                    31, 1, 10, 1);
+  num_days = g_date_get_days_in_month (g_date_time_get_month (priv->date),
+				       g_date_time_get_year (priv->date));
+  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_day_of_month (priv->date), 1,
+                                                    num_days + 1, 1, 10, 1);
   gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("day-spinbutton")),
                                   adjustment);
 
-  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_get_year (date),
+  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_year (priv->date),
                                                     G_MINDOUBLE, G_MAXDOUBLE, 1,
                                                     10, 1);
   gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("year-spinbutton")),
                                   adjustment);
-  g_date_free (date);
-  date = NULL;
+  g_signal_connect (G_OBJECT (W("year-spinbutton")), "value-changed",
+		    G_CALLBACK (month_year_changed), self);
 
   /* set up timezone map */
   priv->map = widget = (GtkWidget *) cc_timezone_map_new ();
@@ -625,6 +638,17 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                      GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                          "datetime-panel")));
 
+
+  /* setup the time itself */
+  priv->settings = g_settings_new (CLOCK_SCHEMA);
+  clock_settings_changed_cb (priv->settings, CLOCK_FORMAT_KEY, self);
+  g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
+                    G_CALLBACK (clock_settings_changed_cb), self);
+
+  g_signal_connect (W ("12_radiobutton"), "toggled",
+                    G_CALLBACK (change_clock_settings), self);
+  g_signal_connect (W ("24_radiobutton"), "toggled",
+                    G_CALLBACK (change_clock_settings), self);
 
   update_time (self);
 

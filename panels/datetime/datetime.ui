@@ -129,7 +129,7 @@
                           <object class="GtkTable" id="table2">
                             <property name="visible">True</property>
                             <property name="n_rows">3</property>
-                            <property name="n_columns">3</property>
+                            <property name="n_columns">4</property>
                             <property name="column_spacing">12</property>
                             <property name="row_spacing">6</property>
                             <child>
@@ -253,6 +253,60 @@
                             </child>
                             <child>
                               <placeholder/>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="ampm_label">
+                                <property name="visible">False</property>
+                                <property name="label" translatable="yes">AM</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                  <attribute name="scale" value="2.500000"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="right_attach">4</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="ampm_up_button">
+                                <property name="visible">False</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkArrow" id="arrow5">
+                                    <property name="visible">True</property>
+                                    <property name="arrow_type">up</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="right_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="ampm_down_button">
+                                <property name="visible">False</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkArrow" id="arrow6">
+                                    <property name="visible">True</property>
+                                    <property name="arrow_type">down</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="right_attach">4</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                              </packing>
                             </child>
                           </object>
                         </child>
