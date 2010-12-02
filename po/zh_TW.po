@@ -6,14 +6,15 @@
 # GNOME 2.x:
 # Abel Cheung <abel@oaka.org>, 2001-2003, 2005.
 # Woodman Tuen <wmtuen@gmail.com>, 2004-07.
-#
+# Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>, 2010.
+# Wei-Lun Chao <chaoweilun@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.31.5\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-20 15:57+0800\n"
-"PO-Revision-Date: 2010-07-17 19:33+0800\n"
+"Project-Id-Version: gnome-control-center 2.91.3\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
+"POT-Creation-Date: 2010-11-23 22:42+0000\n"
+"PO-Revision-Date: 2010-12-01 20:50+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <zh-l10n@lists.linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -31,24 +32,18 @@ msgstr "更多背景 URL"
 
 #: ../gnome-control-center.schemas.in.h:3
 msgid "More themes URL"
-msgstr "更多佈景主題 URL"
+msgstr "更多布景主題 URL"
 
 #: ../gnome-control-center.schemas.in.h:4
-msgid ""
-"Set this to your current location name. This is used to determine the "
-"appropriate network proxy configuration."
+msgid "Set this to your current location name. This is used to determine the appropriate network proxy configuration."
 msgstr "將此項設定為您目前的位置名稱。這是用來決定合適的網路代理伺服器組態。"
 
 #: ../gnome-control-center.schemas.in.h:5
-msgid ""
-"URL for where to get more desktop backgrounds. If set to an empty string the "
-"link will not appear."
+msgid "URL for where to get more desktop backgrounds. If set to an empty string the link will not appear."
 msgstr "可以取得更多桌面背景的 URL。如果設定為空字串則不會顯示連結。"
 
 #: ../gnome-control-center.schemas.in.h:6
-msgid ""
-"URL for where to get more desktop themes. If set to an empty string the link "
-"will not appear."
+msgid "URL for where to get more desktop themes. If set to an empty string the link will not appear."
 msgstr "可以取得更多桌面主題的 URL。如果設定為空字串則不會顯示連結。"
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
@@ -72,8 +67,7 @@ msgid "Change set"
 msgstr "Change set"
 
 #: ../libgnome-control-center/gconf-property-editor.c:148
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr "在套用時將 Gconf change set 中包含的資料會傳送給 gconf 客戶端"
 
 #: ../libgnome-control-center/gconf-property-editor.c:153
@@ -81,8 +75,7 @@ msgid "Conversion to widget callback"
 msgstr "轉化為視窗元件的改變所需的 callback"
 
 #: ../libgnome-control-center/gconf-property-editor.c:154
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "需要將變更後的 GConf 資料轉化為視窗元件的改變時，所發出的 callback"
 
 #: ../libgnome-control-center/gconf-property-editor.c:159
@@ -90,8 +83,7 @@ msgid "Conversion from widget callback"
 msgstr "由視窗元件的改變所需的 callback 轉化"
 
 #: ../libgnome-control-center/gconf-property-editor.c:160
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "需要將視窗元件的改變轉化為變更後的 GConf 資料時，所發出的 callback"
 
 #: ../libgnome-control-center/gconf-property-editor.c:165
@@ -123,8 +115,7 @@ msgstr "當屬性修改程式釋放物件資料時，發出 callback"
 msgid ""
 "Couldn't find the file '%s'.\n"
 "\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
+"Please make sure it exists and try again, or choose a different background picture."
 msgstr ""
 "找不到檔案‘%s’。\n"
 "\n"
@@ -151,16 +142,297 @@ msgstr "請選取圖片。"
 msgid "_Select"
 msgstr "選取(_S)"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "背景"
+
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:2
+#| msgid "Save _background image"
+msgid "Change the background"
+msgstr "更改背景"
+
+#. Translators: those are keywords for the background control-center panel
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:4
+#, fuzzy
+#| msgid "No Wallpaper"
+msgid "Wallpaper;Screen;"
+msgstr "全螢幕"
+
+#: ../panels/background/background.ui.h:1
+msgid "Center"
+msgstr "置中"
+
+#: ../panels/background/background.ui.h:2
+#| msgid "_Full"
+msgid "Fill"
+msgstr "填滿"
+
+#: ../panels/background/background.ui.h:3
+msgid "Scale"
+msgstr "縮放"
+
+#: ../panels/background/background.ui.h:4
+msgid "Span"
+msgstr "跨越"
+
+#: ../panels/background/background.ui.h:5
+msgid "Tile"
+msgstr "鋪排"
+
+#: ../panels/background/background.ui.h:6
+#: ../panels/universal-access/uap.ui.h:93
+msgid "Zoom"
+msgstr "縮放"
+
+#: ../panels/background/bg-colors-source.c:57
+#| msgid "Mutt"
+msgid "Butter"
+msgstr "奶油"
+
+#: ../panels/background/bg-colors-source.c:58
+#| msgid "Orca"
+msgid "Orange"
+msgstr "橘"
+
+#: ../panels/background/bg-colors-source.c:59
+msgid "Chocolate"
+msgstr "巧克力"
+
+#: ../panels/background/bg-colors-source.c:60
+#, fuzzy
+#| msgid "Galeon"
+msgid "Chameleon"
+msgstr "Galeon"
+
+#: ../panels/background/bg-colors-source.c:61
+msgid "Blue"
+msgstr "藍"
+
+#: ../panels/background/bg-colors-source.c:62
+#, fuzzy
+msgid "Plum"
+msgstr "梅子"
+
+#: ../panels/background/bg-colors-source.c:63
+msgid "Red"
+msgstr "紅"
+
+#: ../panels/background/bg-colors-source.c:64
+msgid "Aluminium"
+msgstr "鋁"
+
+#: ../panels/background/bg-colors-source.c:65
+msgid "Gray"
+msgstr "灰"
+
+#: ../panels/background/bg-colors-source.c:66
+#| msgid "Callback"
+msgid "Black"
+msgstr "黑"
+
+#: ../panels/background/cc-background-panel.c:622
+#| msgid "No Wallpaper"
+msgid "Wallpapers"
+msgstr "桌布"
+
+#: ../panels/background/cc-background-panel.c:630
+msgid "Pictures Folder"
+msgstr "圖片資料夾"
+
+#: ../panels/background/cc-background-panel.c:638
+msgid "Colors"
+msgstr "顏色"
+
+#: ../panels/background/cc-background-panel.c:647
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/gnome-wp-info.c:50
+msgid "No Desktop Background"
+msgstr "無桌面背景"
+
+#: ../panels/background/gnome-wp-item.c:294
+msgid "Slide Show"
+msgstr "幻燈片顯示"
+
+#: ../panels/background/gnome-wp-item.c:296
+msgid "Image"
+msgstr "圖片"
+
+#: ../panels/background/gnome-wp-item.c:302
+msgid "multiple sizes"
+msgstr "多重尺寸"
+
+#. translators: x pixel(s) by y pixel(s)
+#: ../panels/background/gnome-wp-item.c:305
+#, c-format
+msgid "%d %s by %d %s"
+msgstr "寛%d %s 高%d %s"
+
+#: ../panels/background/gnome-wp-item.c:307
+#: ../panels/background/gnome-wp-item.c:309
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] "像素"
+
+#. translators: <b>wallpaper name</b>
+#. * mime type, size
+#. * Folder: /path/to/file
+#.
+#: ../panels/background/gnome-wp-item.c:317
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s, %s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s,  %s\n"
+"資料夾：%s"
+
+#. translators: <b>wallpaper name</b>
+#. * Image missing
+#. * Folder: /path/to/file
+#.
+#: ../panels/background/gnome-wp-item.c:329
+#, c-format
+msgid ""
+"<b>%s</b>\n"
+"%s\n"
+"Folder: %s"
+msgstr ""
+"<b>%s</b>\n"
+"%s\n"
+"資料夾：%s"
+
+#: ../panels/background/gnome-wp-item.c:333
+msgid "Image missing"
+msgstr "遺失圖片"
+
+#: ../panels/datetime/datetime.ui.h:1
+msgid "12 hour format"
+msgstr "12 小時制"
+
+#: ../panels/datetime/datetime.ui.h:2
+msgid "16"
+msgstr "16"
+
+#: ../panels/datetime/datetime.ui.h:3
+msgid "2010"
+msgstr "2010"
+
+#: ../panels/datetime/datetime.ui.h:4
+msgid "22"
+msgstr "22"
+
+#: ../panels/datetime/datetime.ui.h:5
+msgid "24 hour format"
+msgstr "24 小時制"
+
+#: ../panels/datetime/datetime.ui.h:6
+msgid "45"
+msgstr "45"
+
+#: ../panels/datetime/datetime.ui.h:7
+msgid ":"
+msgstr ":"
+
+#: ../panels/datetime/datetime.ui.h:8
+#| msgid "pixel"
+#| msgid_plural "pixels"
+msgid "April"
+msgstr "四月"
+
+#: ../panels/datetime/datetime.ui.h:9
+msgid "August"
+msgstr "八月"
+
+#: ../panels/datetime/datetime.ui.h:10
+#| msgid "C_ity:"
+msgid "City:"
+msgstr "城市："
+
+#: ../panels/datetime/datetime.ui.h:11
+#| msgid "D_elay:"
+msgid "Day:"
+msgstr "日："
+
+#: ../panels/datetime/datetime.ui.h:12
+msgid "December"
+msgstr "十二月"
+
+#: ../panels/datetime/datetime.ui.h:13
+msgid "February"
+msgstr "二月"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "January"
+msgstr "一月"
+
+#: ../panels/datetime/datetime.ui.h:15
+msgid "July"
+msgstr "七月"
+
+#: ../panels/datetime/datetime.ui.h:16
+msgid "June"
+msgstr "六月"
+
+#: ../panels/datetime/datetime.ui.h:17
+#| msgid "Search"
+msgid "March"
+msgstr "三月"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "May"
+msgstr "五月"
+
+#: ../panels/datetime/datetime.ui.h:19
+#| msgid "Monitor"
+msgid "Month:"
+msgstr "月："
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "November"
+msgstr "十一月"
+
+#: ../panels/datetime/datetime.ui.h:21
+#| msgid "Other"
+msgid "October"
+msgstr "十月"
+
+#: ../panels/datetime/datetime.ui.h:22
+#| msgid "Version:"
+msgid "Region:"
+msgstr "區域："
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "September"
+msgstr "九月"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "Set time automatically"
+msgstr "自動設定時刻"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "Year:"
+msgstr "年："
+
+#. Translators: those are keywords for the date and time control-center panel
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+#, fuzzy
+msgid "Clock;Timezone;Location;"
+msgstr "天氣位置資訊"
+
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
 msgid "Date And Time"
 msgstr "日期和時刻"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Date and Time preferences panel"
 msgstr "日期和時刻偏好設定面板"
 
 #: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
 msgid "Preferred Applications"
 msgstr "首選應用程式"
 
@@ -176,27 +448,32 @@ msgstr "啟動首選的視覺輔助技術"
 msgid "Visual Assistance"
 msgstr "視覺輔助"
 
-#: ../panels/default-applications/gnome-da-capplet.c:99
-#: ../panels/default-applications/gnome-da-capplet.c:363
-#: ../panels/default-applications/gnome-da-capplet.c:384
+#: ../panels/default-applications/gnome-da-capplet.c:83
 #, c-format
-msgid "Error saving configuration: %s"
-msgstr "儲存設定時出現錯誤：%s"
+#| msgid "Error parsing arguments: %s\n"
+msgid "Error setting default browser: %s"
+msgstr "設定預設瀏覽器時發生錯誤：%s"
 
-#: ../panels/default-applications/gnome-da-capplet.c:692
+#: ../panels/default-applications/gnome-da-capplet.c:106
+#, c-format
+#| msgid "Error parsing arguments: %s\n"
+msgid "Error setting default mailer: %s"
+msgstr "設定預設郵件程式時發生錯誤：%s"
+
+#: ../panels/default-applications/gnome-da-capplet.c:321
+#: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
 msgstr "自訂"
 
-#: ../panels/default-applications/gnome-da-capplet.c:723
+#: ../panels/default-applications/gnome-da-capplet.c:352
 msgid "Could not load the main interface"
 msgstr "無法載入主介面"
 
-#: ../panels/default-applications/gnome-da-capplet.c:725
+#: ../panels/default-applications/gnome-da-capplet.c:354
 msgid "Please make sure that the applet is properly installed"
 msgstr "請確定該面板程式已經安裝妥當。"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:1
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:1
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "Accessibility"
 msgstr "無障礙環境"
@@ -206,11 +483,8 @@ msgstr "無障礙環境"
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "所有 %s 都會取代為真實的連結"
 
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:4
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:1
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "C_ommand:"
 msgstr "指令(_O):"
 
@@ -223,597 +497,349 @@ msgid "E_xecute flag:"
 msgstr "執行旗標(_X):"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
-msgid "Image Viewer"
-msgstr "圖片瀏覽程式"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Instant Messenger"
 msgstr "即時通訊程式"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
 msgid "Internet"
 msgstr "網際網路"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
 msgid "Mail Reader"
 msgstr "電子郵件讀信軟體"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
 msgid "Mobility"
 msgstr "移動性"
 
 #: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
-msgid "Multimedia"
-msgstr "多媒體"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
-msgid "Multimedia Player"
-msgstr "多媒體播放器"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
-msgid "Open link in new _tab"
-msgstr "在新的分頁中開啟連結(_T)"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
-msgid "Open link in new _window"
-msgstr "在新的視窗中開啟連結(_W)"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
-msgid "Open link with web browser _default"
-msgstr "使用網頁瀏覽器預設開啟連結(_D)"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Run at st_art"
 msgstr "啟動時執行(_A)"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
 msgid "Run in t_erminal"
 msgstr "在終端機中執行(_E)"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:20
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
 msgid "System"
 msgstr "系統"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:21
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
 msgid "Terminal Emulator"
 msgstr "終端機模擬程式"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:22
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
 msgid "Text Editor"
 msgstr "文字編輯器"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:23
-msgid "Video Player"
-msgstr "影片播放器"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:24
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
 msgid "Visual"
 msgstr "視覺"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:25
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
 msgid "Web Browser"
 msgstr "網頁瀏覽器"
 
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:26
+#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
 msgid "_Run at start"
 msgstr "啟動時執行(_R)"
 
 #: ../panels/default-applications/gnome-default-applications.xml.in.h:1
-msgid "Balsa"
-msgstr "Balsa"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Banshee Music Player"
 msgstr "Banshee 音樂播放程式"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
-msgid "Claws Mail"
-msgstr "Claws Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
-msgid "Debian Sensible Browser"
-msgstr "Debian Sensible Browser"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Debian Terminal Emulator"
 msgstr "Debian Terminal Emulator"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
-msgid "Encompass"
-msgstr "Encompass"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
-msgid "Epiphany Web Browser"
-msgstr "Epiphany 網頁瀏覽器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
-msgid "Evolution Mail Reader"
-msgstr "Evolution 電子郵件讀信軟體"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
-msgid "Firebird"
-msgstr "Firebird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
-msgid "Firefox"
-msgstr "Firefox"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
 msgid "GNOME Magnifier without Screen Reader"
 msgstr "無螢幕閱讀器的 GNOME 放大鏡"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
 msgid "GNOME OnScreen Keyboard"
 msgstr "GNOME 畫面鍵盤"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
 msgid "GNOME Terminal"
 msgstr "GNOME 終端機"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
-msgid "Galeon"
-msgstr "Galeon"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Gnopernicus"
 msgstr "Gnopernicus"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Gnopernicus with Magnifier"
 msgstr "具放大鏡的 Gnopernicus"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
-msgid "Iceape"
-msgstr "Iceape 瀏覽器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
-msgid "Iceape Mail"
-msgstr "Iceape 郵件"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
-msgid "Icedove"
-msgstr "Icedove"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
-msgid "Iceweasel"
-msgstr "Iceweasel"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
 msgid "KDE Magnifier without Screen Reader"
 msgstr "無螢幕閱讀器的 KDE 放大鏡"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
-msgid "KMail"
-msgstr "KMail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:25
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:26
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Konsole"
 msgstr "Konsole"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:27
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Linux Screen Reader"
 msgstr "Linux 螢幕閱讀器"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:28
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
 msgid "Linux Screen Reader with Magnifier"
 msgstr "具放大鏡的 Linux 螢幕閱讀器"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:29
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Listen"
 msgstr "聽取"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:30
-msgid "Midori"
-msgstr "Midori 瀏覽器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:31
-msgid "Mozilla"
-msgstr "Mozilla"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:32
-msgid "Mozilla 1.6"
-msgstr "Mozilla 1.6"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:33
-msgid "Mozilla Mail"
-msgstr "Mozilla Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:34
-msgid "Mozilla Thunderbird"
-msgstr "Mozilla Thunderbird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:35
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Muine Music Player"
 msgstr "Muine 音樂播放程式"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:36
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:37
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:38
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:39
-msgid "Opera"
-msgstr "Opera"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Orca"
 msgstr "Orca"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Orca with Magnifier"
 msgstr "具放大鏡的 Orca"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
 msgid "Rhythmbox Music Player"
 msgstr "Rhythmbox 音樂播放程式"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
-msgid "SeaMonkey"
-msgstr "SeaMonkey 瀏覽器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
-msgid "SeaMonkey Mail"
-msgstr "SeaMonkey 郵件"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
 msgid "Standard XTerminal"
 msgstr "標準的 X 終端機"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
-msgid "Sylpheed"
-msgstr "Sylpheed"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Terminator"
 msgstr "Terminator"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
-msgid "Thunderbird"
-msgstr "Thunderbird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
 msgid "Totem Movie Player"
 msgstr "Totem 影片播放程式"
 
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:52
+#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
 msgid "aterm"
 msgstr "aterm"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Include _panel"
-msgstr "包含面板(_P)"
+msgid "<i>Note: may limit resolution options</i>"
+msgstr "<i>注意：可能會限制解析度選項</i>"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:320
+#: ../panels/display/xrandr-capplet.c:317
 msgid "Left"
 msgstr "左"
 
 #: ../panels/display/display-capplet.ui.h:3
-msgid "Make Default"
-msgstr "成為預設值"
-
-#: ../panels/display/display-capplet.ui.h:4
-#: ../panels/display/xrandr-capplet.c:523
+#: ../panels/display/xrandr-capplet.c:469
 msgid "Monitor"
 msgstr "顯示器"
 
-#: ../panels/display/display-capplet.ui.h:5
-#: ../panels/display/xrandr-capplet.c:319
-#: ../panels/display/xrandr-capplet.c:358
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/xrandr-capplet.c:316
+#: ../panels/display/xrandr-capplet.c:355
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Normal"
 msgstr "正常"
 
-#: ../panels/display/display-capplet.ui.h:6
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Off"
 msgstr "關閉"
 
-#: ../panels/display/display-capplet.ui.h:7
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/display/display-capplet.ui.h:6
+#: ../panels/universal-access/uap.ui.h:60
 msgid "On"
 msgstr "開"
 
-#: ../panels/display/display-capplet.ui.h:8
-msgid "Panel icon"
-msgstr "面板圖示"
-
-#: ../panels/display/display-capplet.ui.h:9
+#: ../panels/display/display-capplet.ui.h:7
 msgid "R_otation:"
 msgstr "旋轉(_O):"
 
-#: ../panels/display/display-capplet.ui.h:10
-msgid "Re_fresh rate:"
-msgstr "更新頻率(_F):"
-
-#: ../panels/display/display-capplet.ui.h:11
-#: ../panels/display/xrandr-capplet.c:321
+#: ../panels/display/display-capplet.ui.h:8
+#: ../panels/display/xrandr-capplet.c:318
 msgid "Right"
 msgstr "右"
 
-#: ../panels/display/display-capplet.ui.h:12
-msgid "Sa_me image in all monitors"
-msgstr "所有螢幕都使用相同圖片(_M)"
-
-#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/display/display-capplet.ui.h:9
 msgid "Upside-down"
 msgstr "由上而下"
 
-#: ../panels/display/display-capplet.ui.h:14
+#: ../panels/display/display-capplet.ui.h:10
 msgid "_Detect monitors"
 msgstr "偵測螢幕(_D)"
 
-#: ../panels/display/display-capplet.ui.h:15
+#: ../panels/display/display-capplet.ui.h:11
+#| msgid "Mirror Screens"
+msgid "_Mirror Screens"
+msgstr "鏡射螢幕(_M)"
+
+#: ../panels/display/display-capplet.ui.h:12
 msgid "_Resolution:"
 msgstr "解析度(_R):"
 
-#: ../panels/display/display-capplet.ui.h:16
-msgid "_Show monitors in panel"
-msgstr "在面板顯示螢幕(_S)"
-
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
-msgid "Change resolution and position of monitors"
-msgstr "改變螢幕解析度和位置"
+#| msgid "Change resolution and position of monitors"
+msgid "Change resolution and position of monitors and projectors"
+msgstr "改變顯示器和投影機的解析度和位置"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-msgid "Monitors"
-msgstr "螢幕"
+#| msgid "Display"
+msgid "Displays"
+msgstr "顯示器"
 
-#: ../panels/display/gnome-display-properties-install-systemwide.c:44
-#, c-format
-msgid ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
+#. Translators: those are keywords for the display control-center panel
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:4
+msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr ""
-"用法：%s SOURCE_FILE DEST_NAME\n"
-"\n"
-"這個程式會安裝 RANDR 設定組合把多螢幕設定至\n"
-"系統層的位置。產生的設定組合會在 RANDR 外掛程式\n"
-"在 gnome-settings-daemon 中執行時使用。\n"
-"\n"
-"SOURCE_FILE - 完整路徑名稱，通常是 /home/username/.config/monitors.xml\n"
-"\n"
-"DEST_NAME - 已安裝檔案的相對名稱。這會放置在\n"
-"            RANDR 組態的系統層級目錄中，因此結果\n"
-"            通常會是 %s/DEST_NAME\n"
 
-#. Translators: only able to install RANDR profiles as root
-#: ../panels/display/gnome-display-properties-install-systemwide.c:151
-msgid "This program can only be used by the root user"
-msgstr "這個程式只能由 root 使用者來使用"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:168
-msgid "The source filename must be absolute"
-msgstr "來源檔案名稱必須是絕對路徑"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:179
-#, c-format
-msgid "Could not open %s: %s\n"
-msgstr "無法開啟 %s：%s\n"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:188
-#, c-format
-msgid "Could not get information for %s: %s\n"
-msgstr "無法取得檔案 %s 的資訊：%s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:195
-#, c-format
-msgid "%s must be a regular file\n"
-msgstr "%s 必須為正規的檔案\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:204
-msgid "This program must only be run through pkexec(1)"
-msgstr "這個程式必須只透過 pkexec(1) 執行"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:209
-msgid "PKEXEC_UID must be set to an integer value"
-msgstr "PKEXEC_UID 必須設定為整數值"
-
-#. Translators: we are complaining that a file must be really owned by the user who called this program
-#: ../panels/display/gnome-display-properties-install-systemwide.c:215
-#, c-format
-msgid "%s must be owned by you\n"
-msgstr "%s 的擁有者必須是您\n"
-
-#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
-#: ../panels/display/gnome-display-properties-install-systemwide.c:223
-#, c-format
-msgid "%s must not have any directory components\n"
-msgstr "%s 必須沒有任何目錄元素\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:231
-#, c-format
-msgid "%s must be a directory\n"
-msgstr "%s 必須是目錄\n"
-
-#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:242
-#, c-format
-msgid "Could not open %s/%s: %s\n"
-msgstr "無法開啟 %s/%s：%s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:262
-#, c-format
-msgid "Could not rename %s to %s: %s\n"
-msgstr "無法將 %s 的名稱更改為 %s：%s\n"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:1
-msgid ""
-"Authentication is required to install multi-monitor settings for all users"
-msgstr "安裝多螢幕設定值給所有使用者需要驗證"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:2
-msgid "Install multi-monitor settings for the whole system"
-msgstr "將多螢幕設定值安裝到全系統"
-
-#: ../panels/display/xrandr-capplet.c:322
+#: ../panels/display/xrandr-capplet.c:319
 msgid "Upside Down"
 msgstr "由上而下"
-
-#: ../panels/display/xrandr-capplet.c:364
-#, c-format
-msgid "%d Hz"
-msgstr "%d Hz"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:512
-#: ../panels/display/xrandr-capplet.c:1658
+#: ../panels/display/xrandr-capplet.c:458
+#: ../panels/display/xrandr-capplet.c:1719
 msgid "Mirror Screens"
 msgstr "鏡射螢幕"
 
-#: ../panels/display/xrandr-capplet.c:514
+#: ../panels/display/xrandr-capplet.c:574
 #, c-format
-msgid "Monitor: %s"
-msgstr "顯示器：%s"
+#| msgid "%d x %d"
+msgid "%d x %d (%s)"
+msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:592
+#: ../panels/display/xrandr-capplet.c:576
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1514
-msgid ""
-"Select a monitor to change its properties; drag it to rearrange its "
-"placement."
+#: ../panels/display/xrandr-capplet.c:1482
+msgid "Drag to change primary display."
+msgstr "拖曳以改變主要顯示器。"
+
+#: ../panels/display/xrandr-capplet.c:1540
+msgid "Select a monitor to change its properties; drag it to rearrange its placement."
 msgstr "選擇一個螢幕以改變它的屬性；拖曳它則能重新排列它的位置。"
 
-#: ../panels/display/xrandr-capplet.c:2079
+#: ../panels/display/xrandr-capplet.c:1945
+msgid "%a %R"
+msgstr "%a %R"
+
+#: ../panels/display/xrandr-capplet.c:1947
+msgid "%a %l:%M %p"
+msgstr "%a %l:%M %p"
+
+#: ../panels/display/xrandr-capplet.c:2232
 msgid "Could not save the monitor configuration"
 msgstr "無法儲存顯示器組態"
 
-#: ../panels/display/xrandr-capplet.c:2102
+#: ../panels/display/xrandr-capplet.c:2255
 msgid "Could not get session bus while applying display configuration"
 msgstr "在套用顯示組態時無法取得作業階段匯流排"
 
-#: ../panels/display/xrandr-capplet.c:2147
+#: ../panels/display/xrandr-capplet.c:2300
 msgid "Could not detect displays"
 msgstr "無法偵測顯示器"
 
-#: ../panels/display/xrandr-capplet.c:2322
-msgid "The monitor configuration has been saved"
-msgstr "顯示器組態已儲存"
-
-#: ../panels/display/xrandr-capplet.c:2324
-msgid "This configuration will be used the next time someone logs in."
-msgstr "這個組態會在下次有使用者登入後使用。"
-
-#: ../panels/display/xrandr-capplet.c:2358
-msgid "Could not set the default configuration for monitors"
-msgstr "無法設定預設的顯示器組態"
-
-#: ../panels/display/xrandr-capplet.c:2416
+#: ../panels/display/xrandr-capplet.c:2507
 msgid "Could not get screen information"
 msgstr "無法取得螢幕資訊"
 
-#: ../panels/keybindings/00-multimedia-key.xml.in.h:1
+#: ../panels/keyboard/00-multimedia-key.xml.in.h:1
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Sound"
 msgstr "音效"
 
-#: ../panels/keybindings/01-desktop-key.xml.in.h:1
+#: ../panels/keyboard/01-desktop-key.xml.in.h:1
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:21
+#: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
-msgstr "新增捷徑鍵..."
+msgstr "新增捷徑鍵…"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:163
-#: ../panels/keybindings/eggcellrendererkeys.c:164
+#: ../panels/keyboard/eggcellrendererkeys.c:164
+#: ../panels/keyboard/eggcellrendererkeys.c:165
 msgid "Accelerator key"
 msgstr "捷徑鍵"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:173
-#: ../panels/keybindings/eggcellrendererkeys.c:174
+#: ../panels/keyboard/eggcellrendererkeys.c:174
+#: ../panels/keyboard/eggcellrendererkeys.c:175
 msgid "Accelerator modifiers"
 msgstr "捷徑鍵的特殊按鍵（例如 Alt、Ctrl）"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:182
-#: ../panels/keybindings/eggcellrendererkeys.c:183
+#: ../panels/keyboard/eggcellrendererkeys.c:183
+#: ../panels/keyboard/eggcellrendererkeys.c:184
 msgid "Accelerator keycode"
 msgstr "捷徑鍵碼"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:193
+#: ../panels/keyboard/eggcellrendererkeys.c:194
 msgid "Accel Mode"
 msgstr "捷徑鍵模式"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:194
+#: ../panels/keyboard/eggcellrendererkeys.c:195
 msgid "The type of accelerator."
 msgstr "捷徑鍵的類型。"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:242
-#: ../panels/keybindings/gnome-keybinding-properties.c:100
-#: ../typing-break/drwright.c:498
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/gnome-keyboard-panel.c:102
+#: ../panels/sound/gvc-mixer-control.c:1091
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+#: ../panels/user-accounts/um-login-options.c:355
 msgid "Disabled"
 msgstr "已停用"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:181
+#: ../panels/keyboard/gnome-keyboard-panel.c:183
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:931
-#: ../panels/keybindings/gnome-keybinding-properties.c:1562
+#: ../panels/keyboard/gnome-keyboard-panel.c:933
+#: ../panels/keyboard/gnome-keyboard-panel.c:1564
 msgid "Custom Shortcuts"
 msgstr "自訂捷徑鍵"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1073
+#: ../panels/keyboard/gnome-keyboard-panel.c:1075
 msgid "Error saving the new shortcut"
 msgstr "儲存新的捷徑鍵時發生錯誤"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1152
+#: ../panels/keyboard/gnome-keyboard-panel.c:1154
 #, c-format
 msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
+"The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
 "捷徑“%s”無法使用，原因是會無法按下此按鍵。\n"
 "請試用其它的按鍵：如同時使用 Control，Alt  或 Shift。"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1182
+#: ../panels/keyboard/gnome-keyboard-panel.c:1184
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -822,253 +848,413 @@ msgstr ""
 "捷徑鍵“%s”己經使用於：\n"
 "“%s”"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1188
+#: ../panels/keyboard/gnome-keyboard-panel.c:1190
 #, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "如果您重新指派捷徑鍵為「%s」，「%s」的捷徑鍵就會停用。"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1196
+#: ../panels/keyboard/gnome-keyboard-panel.c:1198
 msgid "_Reassign"
 msgstr "重新指派(_R)"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1316
+#: ../panels/keyboard/gnome-keyboard-panel.c:1318
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "在組態資料庫中取消設定捷徑鍵時出現錯誤：%s"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1517
+#: ../panels/keyboard/gnome-keyboard-panel.c:1519
 msgid "Too many custom shortcuts"
 msgstr "太多自訂捷徑鍵"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1849
+#: ../panels/keyboard/gnome-keyboard-panel.c:1881
 msgid "Action"
 msgstr "動作"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1871
+#: ../panels/keyboard/gnome-keyboard-panel.c:1903
 msgid "Shortcut"
 msgstr "捷徑鍵"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:2
-msgid "Custom Shortcut"
-msgstr "自訂捷徑鍵"
+#.
+#. * vim: sw=2 ts=8 cindent noai bs=2
+#.
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
+#| msgid "Keyboard Settings..."
+msgid "Change keyboard settings"
+msgstr "改變鍵盤設定值"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:3
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:2
-msgid "Keyboard Shortcuts"
-msgstr "鍵盤捷徑鍵"
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+msgid "Keyboard"
+msgstr "鍵盤"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:4
-msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new key "
-"combination, or press backspace to clear."
-msgstr ""
-"要編輯捷徑鍵，點選相應的行並按下新的按鍵組合，或以 backspace 鍵來清除。"
+#. Translators: those are keywords for the keyboard control-center panel
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
+#, fuzzy
+msgid "Shortcut;Repeat;Blink;"
+msgstr "游標閃爍時間"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
-msgid "_Name:"
-msgstr "名稱(_N):"
-
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
-msgid "Assign shortcut keys to commands"
-msgstr "為不同的指令分配捷徑鍵"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
-msgid "Beep when _accessibility features are turned on or off"
-msgstr "當開啟或關閉可存取性功能時發出聲響(_A)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
-msgid "Beep when a _modifier key is pressed"
-msgstr "當按下特殊按鍵時發出聲響(_M)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
-msgid "Beep when a _toggle key is pressed"
-msgstr "當按下切換按鍵時發出聲響(_T)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
-msgid "Beep when a key is pr_essed"
-msgstr "當按下任何按鍵時發出聲響(_E)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
-msgid "Beep when a key is reje_cted"
-msgstr "如果拒絕按鍵動作則發出聲響(_C)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
-msgid "Beep when key is _accepted"
-msgstr "如果接受按鍵動作則發出聲響(_A)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
-msgid "Beep when key is _rejected"
-msgstr "如果拒絕按鍵動作則發出聲響(_R)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
-#: ../panels/universal-access/uap.ui.h:17
-msgid "Bounce Keys"
-msgstr "回鍵"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
-msgid "Flash _window titlebar"
-msgstr "閃動視窗標題列(_W)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
-msgid "Flash entire _screen"
-msgstr "閃動整個螢幕(_S)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgid "General"
-msgstr "一般"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
-msgid "Keyboard Accessibility Audio Feedback"
-msgstr "鍵盤無障礙功能音效回饋"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
-msgid "Show _visual feedback for the alert sound"
-msgstr "在警示音效中顯示視覺回饋(_V)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
-#: ../panels/universal-access/uap.ui.h:76
-msgid "Slow Keys"
-msgstr "遲緩按鍵"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Sticky Keys"
-msgstr "黏性特殊鍵"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
-msgid "Visual cues for sounds"
-msgstr "音效的視覺化提示"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
-msgid "All_ow postponing of breaks"
-msgstr "可以暫時放棄休息(_O)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
-msgid "Audio _Feedback..."
-msgstr "音效回饋(_F)..."
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
-msgid "Check if breaks are allowed to be postponed"
-msgstr "選用這個設定可以讓您暫時放棄休息"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Cursor Blinking"
 msgstr "游標閃爍"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor _blinks in text fields"
 msgstr "文字輸入欄中的游標可以閃爍(_B)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Cursor blinks speed"
 msgstr "游標閃爍速度"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#: ../panels/universal-access/uap.ui.h:30
-msgid "D_elay:"
-msgstr "延遲(_E):"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
+msgid "Custom Shortcut"
+msgstr "自訂捷徑鍵"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
-msgid "Disa_ble sticky keys if two keys are pressed together"
-msgstr "如果同時按下任何兩鍵則關閉黏性鍵功能(_B)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
-msgid "Duration of the break when typing is disallowed"
-msgstr "指定休息時間長度，這段期間內不允許使用鍵盤"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
-msgid "Duration of work before forcing a break"
-msgstr "強制休息前可以工作的時間"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#. fast acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Fast"
 msgstr "快速"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+msgid "General"
+msgstr "一般"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "當按下某鍵不放時重複輸出該字元(_R)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
-msgid "Keyboard Preferences"
-msgstr "鍵盤偏好設定"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
-msgid "Keyboard _model:"
-msgstr "鍵盤模式(_M)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
-msgid "Layouts"
-msgstr "配置"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
-msgid "List of keyboard layouts selected for usage"
-msgstr "用來選取鍵盤配置的清單"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
-msgid ""
-"Lock screen after a certain duration to help prevent repetitive keyboard use "
-"injuries"
-msgstr "每隔某段時間鎖定畫面，避免因為不斷使用鍵盤導致手部受損"
-
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Long"
 msgstr "長"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
-#: ../panels/universal-access/uap.ui.h:56
-msgid "Mouse Keys"
-msgstr "滑鼠控制鍵"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
-msgid "Move _Down"
-msgstr "下移(_D)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
-msgid "Move _Up"
-msgstr "上移(_U)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
-msgid "Move the selected keyboard layout down in the list"
-msgstr "將清單中選取的鍵盤配置向下移動"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
-msgid "Move the selected keyboard layout up in the list"
-msgstr "將清單中選取的鍵盤配置向上移動"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
-msgid "New windows u_se active window's layout"
-msgstr "新視窗延用使用中視窗的配置(_S)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:28
-msgid "Print a diagram of the selected keyboard layout"
-msgstr "顯示選取的鍵盤配置的圖表"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
-msgid "Remove the selected keyboard layout from the list"
-msgstr "從清單中移除選取的鍵盤配置"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat Keys"
 msgstr "重複按鍵"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 msgid "Repeat keys speed"
 msgstr "按鍵重複速度"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+msgid "S_peed:"
+msgstr "速度(_P):"
+
+#. short delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Short"
+msgstr "短"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#| msgid "Shortcut"
+msgid "Shortcuts"
+msgstr "快捷鍵"
+
+#. slow acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+msgid "Slow"
+msgstr "慢速"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+msgid "To edit a shortcut key, click on the corresponding row and type a new key combination, or press backspace to clear."
+msgstr "要編輯捷徑鍵，點選相應的行並按下新的按鍵組合，或以 backspace 鍵來清除。"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:49
+msgid "_Delay:"
+msgstr "延遲(_D):"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+msgid "_Name:"
+msgstr "名稱(_N):"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/region/gnome-region-panel.ui.h:28
+msgid "_Speed:"
+msgstr "速度(_S):"
+
+#: ../panels/media/cc-media-panel.c:513
+#| msgid "_Application font:"
+msgid "No applications found"
+msgstr "找不到應用程式"
+
+#: ../panels/media/cc-media-panel.c:525
+msgid "Ask what to do"
+msgstr "詢問要做什麼"
+
+#: ../panels/media/cc-media-panel.c:537
+#| msgid "Smoothing"
+msgid "Do Nothing"
+msgstr "不做任何事"
+
+#: ../panels/media/cc-media-panel.c:549
+#| msgid "Open File"
+msgid "Open Folder"
+msgstr "開啟資料夾"
+
+#: ../panels/media/cc-media-panel.c:575
+#, c-format
+#| msgid "Open with \"%s\""
+msgid "Open %s"
+msgstr "開啟 %s"
+
+#: ../panels/media/cc-media-panel.c:608
+#| msgid "Open with Default Application"
+msgid "Open with other Application..."
+msgstr "以其他程式開啟..."
+
+#: ../panels/media/nautilus-open-with-dialog.c:160
+#| msgid "Could not get screen information"
+msgid "Could not run application"
+msgstr "無法執行應用程式"
+
+#: ../panels/media/nautilus-open-with-dialog.c:172
+#, c-format
+#| msgid "Could not open %s: %s\n"
+msgid "Could not find '%s'"
+msgstr "找不到「%s」"
+
+#: ../panels/media/nautilus-open-with-dialog.c:175
+#| msgid "Could not get screen information"
+msgid "Could not find application"
+msgstr "找不到應用程式"
+
+#: ../panels/media/nautilus-open-with-dialog.c:250
+#, c-format
+msgid "Could not add application to the application database: %s"
+msgstr "無法將程式加入應用程式資料庫：%s"
+
+#: ../panels/media/nautilus-open-with-dialog.c:251
+#| msgid "Could not detect displays"
+msgid "Could not add application"
+msgstr "無法加入應用程式"
+
+#: ../panels/media/nautilus-open-with-dialog.c:289
+#, c-format
+#| msgid "Could not get information for %s: %s\n"
+msgid "Could not set application as the default: %s"
+msgstr "無法將應用程式設為預設值：%s"
+
+#: ../panels/media/nautilus-open-with-dialog.c:290
+#| msgid "Select your default applications"
+msgid "Could not set as default application"
+msgstr "無法設定為預設的應用程式"
+
+#: ../panels/media/nautilus-open-with-dialog.c:427
+#| msgid "Set as Application Font"
+msgid "Select an Application"
+msgstr "選擇一個應用程式"
+
+#: ../panels/media/nautilus-open-with-dialog.c:786
+#| msgid "Open with \"%s\""
+msgid "Open With"
+msgstr "以此開啟"
+
+#: ../panels/media/nautilus-open-with-dialog.c:822
+msgid "Select an application to view its description."
+msgstr "選取應用程式以顯示有關該程式的說明。"
+
+#: ../panels/media/nautilus-open-with-dialog.c:847
+msgid "_Use a custom command"
+msgstr "使用自訂指令(_U)"
+
+#: ../panels/media/nautilus-open-with-dialog.c:864
+msgid "_Browse..."
+msgstr "瀏覽(_B)..."
+
+#: ../panels/media/nautilus-open-with-dialog.c:900
+msgid "_Open"
+msgstr "開啟(_O)"
+
+#. first %s is a filename and second %s is a file extension
+#: ../panels/media/nautilus-open-with-dialog.c:980
+#, c-format
+msgid "Open %s and other %s document with:"
+msgstr "以此開啟 %s 及其他 %s 文件："
+
+#. the %s here is a file name
+#. %s is a filename
+#: ../panels/media/nautilus-open-with-dialog.c:984
+#: ../panels/media/nautilus-open-with-dialog.c:1015
+#, c-format
+#| msgid "Open with \"%s\""
+msgid "Open %s with:"
+msgstr "以此開啟 %s："
+
+#: ../panels/media/nautilus-open-with-dialog.c:985
+#, c-format
+msgid "_Remember this application for %s documents"
+msgstr "記住這個應用程式用於 %s 文件(_R)"
+
+#. Only in add mode - the %s here is a file extension
+#: ../panels/media/nautilus-open-with-dialog.c:994
+#, c-format
+msgid "Open all %s documents with:"
+msgstr "以此開啟所有 %s 文件："
+
+#: ../panels/media/nautilus-open-with-dialog.c:1003
+#: ../panels/region/gnome-region-panel-xkb.c:70
+msgid "Unknown"
+msgstr "不明"
+
+#. First %s is a filename, second is a description
+#. * of the type, eg "plain text document"
+#: ../panels/media/nautilus-open-with-dialog.c:1011
+#, c-format
+msgid "Open %s and other \"%s\" files with:"
+msgstr "以此開啟 %s 及其他「%s」檔案："
+
+#. %s is a file type description
+#: ../panels/media/nautilus-open-with-dialog.c:1017
+#, c-format
+msgid "_Remember this application for \"%s\" files"
+msgstr "記住這個應用程式用於「%s」檔案(_R)"
+
+#. Only in add mode
+#: ../panels/media/nautilus-open-with-dialog.c:1026
+#, c-format
+msgid "Open all \"%s\" files with:"
+msgstr "以此開啟所有「%s」檔案："
+
+#: ../panels/media/nautilus-open-with-dialog.c:1037
+#| msgid "_Add..."
+msgid "_Add"
+msgstr "加入(_A)"
+
+#: ../panels/media/nautilus-open-with-dialog.c:1038
+#| msgid "Preferred Applications"
+msgid "Add Application"
+msgstr "加入應用程式"
+
+#: ../panels/media/gnome-media-properties.ui.h:1
+#| msgid "Action"
+msgid "Acti_on:"
+msgstr "動作(_O):"
+
+#: ../panels/media/gnome-media-properties.ui.h:2
+msgid "B_rowse media when inserted"
+msgstr "插入時瀏覽媒體(_R)"
+
+#: ../panels/media/gnome-media-properties.ui.h:3
+msgid "CD _Audio:"
+msgstr "CD 音效(_A):"
+
+#: ../panels/media/gnome-media-properties.ui.h:4
+msgid "Media and Autorun"
+msgstr "媒體與自動執行"
+
+#: ../panels/media/gnome-media-properties.ui.h:5
+msgid "Other Media..."
+msgstr "其他媒體..."
+
+#: ../panels/media/gnome-media-properties.ui.h:6
+msgid "Select how media should be handled"
+msgstr "選擇要如何處理媒體"
+
+#: ../panels/media/gnome-media-properties.ui.h:7
+msgid "Select how other media should be handled"
+msgstr "選擇要如何處理其他媒體"
+
+#: ../panels/media/gnome-media-properties.ui.h:8
+msgid "_DVD Video:"
+msgstr "_DVD 影片："
+
+#: ../panels/media/gnome-media-properties.ui.h:9
+#| msgid "Muine Music Player"
+msgid "_Music Player:"
+msgstr "音樂播放程式(_M):"
+
+#: ../panels/media/gnome-media-properties.ui.h:10
+msgid "_Never prompt or start programs on media insertion"
+msgstr "插入媒體時永遠不提示或啟動程式(_N)"
+
+#: ../panels/media/gnome-media-properties.ui.h:11
+#| msgid "_Yahoo:"
+msgid "_Photos:"
+msgstr "相片(_P):"
+
+#: ../panels/media/gnome-media-properties.ui.h:12
+msgid "_Software:"
+msgstr "軟體(_S):"
+
+#: ../panels/media/gnome-media-properties.ui.h:13
+#| msgid "Type:"
+msgid "_Type:"
+msgstr "類型(_T):"
+
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
+#| msgid "Set your mouse preferences"
+msgid "Configure media and autorun preferences"
+msgstr "設定媒體和自動執行偏好設定"
+
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
+msgid "Removable Media"
+msgstr "可移除式媒體"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Keyboard _model:"
+msgstr "鍵盤模式(_M)"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Layouts"
+msgstr "配置"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
+msgid "List of keyboard layouts selected for usage"
+msgstr "用來選取鍵盤配置的清單"
+
+#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/universal-access/uap.ui.h:54
+msgid "Mouse Keys"
+msgstr "滑鼠控制鍵"
+
+#: ../panels/region/gnome-region-panel.ui.h:7
+msgid "Move _Down"
+msgstr "下移(_D)"
+
+#: ../panels/region/gnome-region-panel.ui.h:8
+msgid "Move _Up"
+msgstr "上移(_U)"
+
+#: ../panels/region/gnome-region-panel.ui.h:9
+msgid "Move the selected keyboard layout down in the list"
+msgstr "將清單中選取的鍵盤配置向下移動"
+
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Move the selected keyboard layout up in the list"
+msgstr "將清單中選取的鍵盤配置向上移動"
+
+#: ../panels/region/gnome-region-panel.ui.h:11
+msgid "New windows u_se active window's layout"
+msgstr "新視窗延用使用中視窗的配置(_S)"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Print a diagram of the selected keyboard layout"
+msgstr "顯示選取的鍵盤配置的圖表"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
+msgid "Region and Language"
+msgstr "地區和語言"
+
+#: ../panels/region/gnome-region-panel.ui.h:14
+msgid "Remove the selected keyboard layout from the list"
+msgstr "從清單中移除選取的鍵盤配置"
+
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1076,211 +1262,115 @@ msgstr ""
 "以預設值替換目前的鍵盤配置\n"
 "設定值"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Reset to De_faults"
 msgstr "重置為預設值(_F)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
-msgid "S_peed:"
-msgstr "速度(_P):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Select a keyboard layout to be added to the list"
 msgstr "選擇要加入清單的鍵盤配置"
 
-#. short delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Short"
-msgstr "短"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
-msgid "Slow"
-msgstr "慢速"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
-msgid "Typing Break"
-msgstr "休息提示"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "View and edit keyboard layout options"
 msgstr "檢視並編輯鍵盤配置選項"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:48
 msgid "_Acceleration:"
 msgstr "加速度(_A):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
-msgid "_Accessibility features can be toggled with keyboard shortcuts"
-msgstr "允許使用鍵盤捷徑鍵開啟和關閉無障礙功能(_A)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "_Add..."
-msgstr "加入(_A)..."
+msgstr "加入(_A)…"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
-msgid "_Break interval lasts:"
-msgstr "休息時間為(_B):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
-#: ../panels/mouse/gnome-mouse-properties.ui.h:38
-msgid "_Delay:"
-msgstr "延遲(_D):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
-msgid "_Ignore fast duplicate keypresses"
-msgstr "忽略快速重複按鍵(_I)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:49
-msgid "_Lock screen to enforce typing break"
-msgstr "透過鎖定畫面來強制休息(_L)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:50
-msgid "_Only accept long keypresses"
-msgstr "按下某鍵不放，達到指定時間後方會生效(_O)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:51
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "_Options..."
-msgstr "選項(_O)..."
+msgstr "選項(_O)…"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:52
+#: ../panels/region/gnome-region-panel.ui.h:26
 msgid "_Pointer can be controlled using the keypad"
 msgstr "允許使用鍵盤控制滑鼠指標(_P)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:53
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "_Separate layout for each window"
 msgstr "給每一個視窗獨立的配置(_S)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:54
-msgid "_Simulate simultaneous keypresses"
-msgstr "模擬同時按鍵(_S)"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:55
-msgid "_Speed:"
-msgstr "速度(_S):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:56
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "_Type to test settings:"
 msgstr "請輸入文字來測試設定(_T):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:57
-msgid "_Work interval lasts:"
-msgstr "工作時間為(_W):"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:58
-msgid "minutes"
-msgstr "分鐘"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
 msgid "By _country"
 msgstr "依國家(_C)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
 msgid "By _language"
 msgstr "依語言(_L)"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "選擇配置"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:4
 msgid "Preview:"
 msgstr "預覽："
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:5
 msgid "_Country:"
 msgstr "國家(_C):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:6
 msgid "_Language:"
 msgstr "語言(_L):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:7
 msgid "_Variants:"
 msgstr "變體(_V):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:1
 msgid "Choose a Keyboard Model"
 msgstr "選擇鍵盤型號"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:2
 msgid "_Models:"
 msgstr "型號(_M):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-model-chooser.ui.h:3
 msgid "_Vendors:"
 msgstr "製造商(_V):"
 
-#: ../panels/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
+#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
 msgstr "鍵盤配置選項"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:81
-msgid "Unknown"
-msgstr "不明"
-
-#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../panels/region/gnome-region-panel-xkblt.c:218
 msgid "Layout"
 msgstr "配置"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:166
+#: ../panels/region/gnome-region-panel-xkbmc.c:163
 msgid "Vendors"
 msgstr "製造商"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:232
+#: ../panels/region/gnome-region-panel-xkbmc.c:229
 msgid "Models"
 msgstr "型號"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:233
-#: ../panels/network/gnome-network-properties.c:582
+#: ../panels/region/gnome-region-panel-xkbot.c:227
+#: ../panels/network/gnome-network-properties.c:554
+#: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "預設值"
 
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "鍵盤"
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:1
+msgid "Change your region and language settings"
+msgstr "改變您的地區和語言設定值"
 
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-msgid "Set your keyboard preferences"
-msgstr "修改鍵盤偏好設定"
-
-#: ../panels/mouse/capplet-stock-icons.c:66
-#, c-format
-msgid "Unable to load stock icon '%s'\n"
-msgstr "無法載入圖示‘%s’\n"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:90
-msgid "gesture|Move left"
-msgstr "向左劃"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:95
-msgid "gesture|Move right"
-msgstr "向右劃"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:100
-msgid "gesture|Move up"
-msgstr "向上劃"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:105
-msgid "gesture|Move down"
-msgstr "向下劃"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:110
-msgid "gesture|Disabled"
-msgstr "停用手勢"
+#. Translators: those are keywords for the region control-center panel
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:3
+#, fuzzy
+#| msgid "_Language:"
+msgid "Language;Layout;"
+msgstr "<b>鍵盤配置</b>"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Choose type of click _beforehand"
@@ -1290,173 +1380,190 @@ msgstr "事先選擇點擊的類型(_B)"
 msgid "Choose type of click with mo_use gestures"
 msgstr "選擇滑鼠手勢的點擊類型(_U)"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/universal-access/uap.ui.h:29
+msgid "D_elay:"
+msgstr "延遲(_E):"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "D_ouble click:"
 msgstr "雙擊(_O):"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+#. click to initiate drag-and-drop (like normally click and hold)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "D_rag click:"
 msgstr "拖曳點擊(_R):"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Disable _touchpad while typing"
 msgstr "打字時停用觸控板(_T)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Double-Click Timeout"
 msgstr "雙擊分辨時間"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "Drag and Drop"
 msgstr "拖放"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Dwell Click"
 msgstr "替代點擊"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Enable _mouse clicks with touchpad"
 msgstr "啟用觸控板的滑鼠點擊(_M)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Enable h_orizontal scrolling"
 msgstr "啟用水平捲動(_O)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-#: ../panels/universal-access/uap.ui.h:40
+#. high sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/universal-access/uap.ui.h:39
 msgid "High"
 msgstr "高"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Large"
 msgstr "大"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Locate Pointer"
 msgstr "標示鼠標位置"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-#: ../panels/universal-access/uap.ui.h:54
+#. low sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Low"
 msgstr "低"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Mouse Orientation"
 msgstr "左右手模式"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "Mouse Preferences"
 msgstr "滑鼠偏好設定"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Pointer Speed"
 msgstr "指標速度"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Scrolling"
 msgstr "捲動方式"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Seco_ndary click:"
-msgstr "第二次點擊(_N):"
+msgstr "次要點擊(_N):"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "當按下 Control 時顯示游標的位置(_O)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "Show click type _window"
 msgstr "顯示點擊類型視窗(_W)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Simulated Secondary Click"
-msgstr "模擬第二下點選"
+msgstr "模擬次要點擊"
 
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Small"
 msgstr "小"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
+#: ../panels/mouse/gnome-mouse-properties.ui.h:42
 msgid "Thr_eshold:"
 msgstr "分辨距離(_E):"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
-msgid ""
-"To test your double-click settings, try to double-click on the light bulb."
-msgstr "要測試您的雙擊設定值，請試著在此電燈泡上雙擊。"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:43
+#| msgid ""
+#| "To test your double-click settings, try to double-click on the light bulb."
+msgid "To test your settings, try to double-click on the face."
+msgstr "要測試您的設定值，請試著在這個臉上雙擊。"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
+#: ../panels/mouse/gnome-mouse-properties.ui.h:44
 msgid "Touchpad"
 msgstr "觸控板"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/mouse/gnome-mouse-properties.ui.h:45
 msgid "Two-_finger scrolling"
 msgstr "兩點捲動(_F)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
+#: ../panels/mouse/gnome-mouse-properties.ui.h:47
 msgid "You can also use the Dwell Click panel applet to choose the click type."
 msgstr "您可以使用「替代點擊」面板程式來選擇點擊的類型。"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:50
 msgid "_Disabled"
 msgstr "已停用(_D)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:40
+#: ../panels/mouse/gnome-mouse-properties.ui.h:51
 msgid "_Edge scrolling"
 msgstr "邊緣捲動(_E)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/mouse/gnome-mouse-properties.ui.h:52
 msgid "_Initiate click when stopping pointer movement"
 msgstr "當停止游標移動時初始化點擊(_I)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:42
+#: ../panels/mouse/gnome-mouse-properties.ui.h:53
 msgid "_Left-handed"
 msgstr "慣用左手(_L)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:43
-#: ../panels/universal-access/uap.ui.h:98
+#: ../panels/mouse/gnome-mouse-properties.ui.h:54
+#: ../panels/universal-access/uap.ui.h:96
 msgid "_Motion threshold:"
 msgstr "移動速度(_M):"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:44
+#: ../panels/mouse/gnome-mouse-properties.ui.h:55
 msgid "_Right-handed"
 msgstr "慣用右手(_R)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:45
+#: ../panels/mouse/gnome-mouse-properties.ui.h:56
 msgid "_Sensitivity:"
 msgstr "敏感度(_S):"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:46
+#: ../panels/mouse/gnome-mouse-properties.ui.h:57
 msgid "_Single click:"
 msgstr "單擊(_S):"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:47
+#: ../panels/mouse/gnome-mouse-properties.ui.h:58
 msgid "_Timeout:"
 msgstr "時限(_T):"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:48
+#: ../panels/mouse/gnome-mouse-properties.ui.h:59
 msgid "_Trigger secondary click by holding down the primary button"
-msgstr "按住主要鍵時觸發第二次點擊(_T)"
+msgstr "按住主要鍵時觸發次要點擊(_T)"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
-msgid "Mouse"
-msgstr "滑鼠"
+#| msgid "Touchpad"
+msgid "Mouse and Touchpad"
+msgstr "滑鼠和觸控板"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-msgid "Set your mouse preferences"
-msgstr "修改滑鼠偏好設定"
+#| msgid "Set your mouse preferences"
+msgid "Set your mouse and touchpad preferences"
+msgstr "設定您的滑鼠與觸控板偏好設定"
 
-#: ../panels/network/gnome-network-properties.c:700
-#: ../panels/network/gnome-network-properties.c:851
+#. Translators: those are keywords for the mouse and touchpad control-center panel
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;"
+msgstr ""
+
+#: ../panels/network/gnome-network-properties.c:672
 msgid "New Location..."
-msgstr "新增位置..."
+msgstr "新增位置…"
 
-#: ../panels/network/gnome-network-properties.c:817
+#: ../panels/network/gnome-network-properties.c:789
 msgid "Location already exists"
 msgstr "位置已經存在"
 
@@ -1467,6 +1574,13 @@ msgstr "代理伺服器"
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
 msgstr "設定代理伺服器"
+
+#. Translators: those are keywords for the network proxy control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+#, fuzzy
+#| msgid "Location:"
+msgid "Web;Location;"
+msgstr "視窗水平位置"
 
 #: ../panels/network/gnome-network-properties.ui.h:1
 msgid "<b>Di_rect internet connection</b>"
@@ -1513,6 +1627,7 @@ msgid "Ignored Hosts"
 msgstr "忽略的主機"
 
 #: ../panels/network/gnome-network-properties.ui.h:12
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
 msgid "Location:"
 msgstr "位置:"
 
@@ -1568,11 +1683,441 @@ msgstr "安全 HTTP 代理伺服器(_S):"
 msgid "_Use the same proxy for all protocols"
 msgstr "所有協定皆使用相同的代理伺服器(_U)"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+#, fuzzy
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr "螢幕亮度與鎖定設定值"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+#| msgid "Siren"
+msgid "Screen"
+msgstr "螢幕"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "螢幕亮度與鎖定設定值"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
+#| msgid "Pointer"
+msgid "Power"
+msgstr "電源"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:2
+msgid "Power management settings"
+msgstr "電源管理設定值"
+
+#. Translators: those are keywords for the power control-center panel
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:4
+#, fuzzy
+msgid "Power;Sleep;Suspend;Hibernate;"
+msgstr "將電腦暫停與休眠"
+
+#: ../panels/power/cc-power-panel.c:151
+#| msgid "Unknown"
+msgid "Unknown time"
+msgstr "未知的時間"
+
+#: ../panels/power/cc-power-panel.c:157
+#, c-format
+#| msgid "minutes"
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i 分鐘"
+
+#: ../panels/power/cc-power-panel.c:169
+#, c-format
+msgid "%i hour"
+msgid_plural "%i hours"
+msgstr[0] "%i 小時"
+
+#. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
+#. * Swap order with "%2$s %2$i %1$s %1$i if needed
+#: ../panels/power/cc-power-panel.c:177
+#, c-format
+#| msgid "%d %s by %d %s"
+msgid "%i %s %i %s"
+msgstr "%i %s %i %s"
+
+#: ../panels/power/cc-power-panel.c:178
+#| msgid "Short"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "小時"
+
+#: ../panels/power/cc-power-panel.c:179
+#| msgid "minutes"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "分鐘"
+
+#: ../panels/power/cc-power-panel.c:251
+#| msgid "Battery warning"
+msgid "Battery charging"
+msgstr "電池正在充電"
+
+#: ../panels/power/cc-power-panel.c:254
+#| msgid "Battery warning"
+msgid "Battery discharging"
+msgstr "電池正在放電"
+
+#: ../panels/power/cc-power-panel.c:265
+msgid "UPS charging"
+msgstr "不斷電系統正在充電"
+
+#: ../panels/power/cc-power-panel.c:268
+msgid "UPS discharging"
+msgstr "不斷電系統正在放電"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:286
+#, c-format
+msgid "%s until charged (%.0lf%%)"
+msgstr "距離完全充電還有 %s (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:292
+#, c-format
+msgid "%s until empty (%.0lf%%)"
+msgstr "距離完全放電還有 %s (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a percentage value. Note: this string is only
+#. * used when we don't have a time value
+#: ../panels/power/cc-power-panel.c:300
+#, c-format
+msgid "%.0lf%% charged"
+msgstr "已充電 %.0lf%%"
+
+#: ../panels/sound/applet-main.c:49
+msgid "Enable debugging code"
+msgstr "啟用除錯碼"
+
+#: ../panels/sound/applet-main.c:50
+#| msgid "Open with Default Application"
+msgid "Version of this application"
+msgstr "這個程式的版本"
+
+#: ../panels/sound/applet-main.c:62
+msgid " — GNOME Volume Control Applet"
+msgstr " — GNOME 音量控制面板程式"
+
+#: ../panels/sound/gvc-applet.c:276
+#: ../panels/sound/gvc-mixer-dialog.c:1921
+#| msgid "Cloned Output"
+msgid "Output"
+msgstr "輸出"
+
+#: ../panels/sound/gvc-applet.c:278
+#| msgid "Cloned Output"
+msgid "Sound Output Volume"
+msgstr "音效輸出音量"
+
+#: ../panels/sound/gvc-applet.c:282
+#: ../panels/sound/gvc-mixer-dialog.c:1838
+msgid "Input"
+msgstr "輸入"
+
+#: ../panels/sound/gvc-applet.c:284
+msgid "Microphone Volume"
+msgstr "麥克風音量"
+
+#: ../panels/sound/gvc-balance-bar.c:111
+#| msgid "Left"
+msgctxt "balance"
+msgid "Left"
+msgstr "左"
+
+#: ../panels/sound/gvc-balance-bar.c:112
+#| msgid "Right"
+msgctxt "balance"
+msgid "Right"
+msgstr "右"
+
+#: ../panels/sound/gvc-balance-bar.c:115
+msgctxt "balance"
+msgid "Rear"
+msgstr "後"
+
+#: ../panels/sound/gvc-balance-bar.c:116
+#| msgid "Fonts"
+msgctxt "balance"
+msgid "Front"
+msgstr "前"
+
+#: ../panels/sound/gvc-balance-bar.c:119
+#| msgid "Minimize"
+msgctxt "balance"
+msgid "Minimum"
+msgstr "最小值"
+
+#: ../panels/sound/gvc-balance-bar.c:120
+#| msgid "Maximize"
+msgctxt "balance"
+msgid "Maximum"
+msgstr "最大值"
+
+#: ../panels/sound/gvc-balance-bar.c:296
+msgid "_Balance:"
+msgstr "平衡(_B):"
+
+#: ../panels/sound/gvc-balance-bar.c:299
+#| msgid "_Name:"
+msgid "_Fade:"
+msgstr "淡化(_F):"
+
+#: ../panels/sound/gvc-balance-bar.c:302
+msgid "_Subwoofer:"
+msgstr "重低音(_S):"
+
+#: ../panels/sound/gvc-channel-bar.c:603
+#: ../panels/sound/gvc-channel-bar.c:612
+#| msgid "100%"
+msgctxt "volume"
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/sound/gvc-channel-bar.c:607
+msgctxt "volume"
+msgid "Unamplified"
+msgstr "未經放大"
+
+#: ../panels/sound/gvc-channel-bar.c:901
+#| msgid "Mutt"
+msgid "Mute"
+msgstr "靜音"
+
+#: ../panels/sound/gvc-combo-box.c:167
+#: ../panels/sound/gvc-mixer-dialog.c:1629
+#| msgid "_Mobile:"
+msgid "_Profile:"
+msgstr "設定組合(_P):"
+
+#. translators:
+#. * The number of sound outputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1098
+#, c-format
+#| msgid "Cloned Output"
+msgid "%u Output"
+msgid_plural "%u Outputs"
+msgstr[0] "%u 輸出"
+
+#. translators:
+#. * The number of sound inputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1108
+#, c-format
+msgid "%u Input"
+msgid_plural "%u Inputs"
+msgstr[0] "%u 輸入"
+
+#: ../panels/sound/gvc-mixer-control.c:1406
+#| msgid "System Settings"
+msgid "System Sounds"
+msgstr "系統音效"
+
+#: ../panels/sound/gvc-mixer-dialog.c:317
+#: ../panels/sound/gvc-mixer-dialog.c:618
+#| msgid "Co_untry:"
+msgid "Co_nnector:"
+msgstr "連接器(_N):"
+
+#: ../panels/sound/gvc-mixer-dialog.c:531
+msgid "Peak detect"
+msgstr "峰值檢測"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1506
+#: ../panels/sound/gvc-mixer-dialog.c:1717
+#: ../panels/sound/gvc-sound-theme-chooser.c:599
+#| msgid "Name:"
+msgid "Name"
+msgstr "名稱"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1524
+#| msgid "Devices"
+msgid "Device"
+msgstr "裝置"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1572
+#, c-format
+msgid "Speaker Testing for %s"
+msgstr "%s 的喇叭測試"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1630
+#| msgid "Test flash"
+msgid "Test Speakers"
+msgstr "測試喇叭"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1761
+msgid "_Output volume: "
+msgstr "輸出音量(_O):"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1775
+#| msgid "Sound files"
+msgid "Sound Effects"
+msgstr "聲音效果"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1782
+#| msgid "Alert sound"
+msgid "_Alert volume: "
+msgstr "警示音量(_A):"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1795
+msgid "Hardware"
+msgstr "硬體"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1800
+msgid "C_hoose a device to configure:"
+msgstr "選擇要設定的裝置(_H):"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1827
+#: ../panels/sound/gvc-mixer-dialog.c:1950
+msgid "Settings for the selected device:"
+msgstr "已選取裝置的設定值："
+
+#: ../panels/sound/gvc-mixer-dialog.c:1845
+#| msgid "_Input boxes:"
+msgid "_Input volume: "
+msgstr "輸入音量(_I):"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1868
+#| msgid "_Input boxes:"
+msgid "Input level:"
+msgstr "輸入等級："
+
+#: ../panels/sound/gvc-mixer-dialog.c:1894
+msgid "C_hoose a device for sound input:"
+msgstr "選擇聲音輸入的裝置(_H):"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1926
+msgid "C_hoose a device for sound output:"
+msgstr "選擇聲音輸出的裝置(_H):"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1961
+#| msgid "_Application font:"
+msgid "Applications"
+msgstr "程式集"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1965
+msgid "No application is currently playing or recording audio."
+msgstr "沒有應用程式目前正在播放或錄製音效。"
+
+#: ../panels/sound/gvc-speaker-test.c:221
+msgid "Stop"
+msgstr "停止"
+
+#: ../panels/sound/gvc-speaker-test.c:221
+#: ../panels/sound/gvc-speaker-test.c:333
+#| msgid "Test:"
+msgid "Test"
+msgstr "測試"
+
+#: ../panels/sound/gvc-speaker-test.c:229
+msgid "Subwoofer"
+msgstr "重低音"
+
+#: ../panels/sound/gvc-stream-status-icon.c:233
+#, c-format
+#| msgid "Sound Preferences"
+msgid "Failed to start Sound Preferences: %s"
+msgstr "啟動音效偏好設定失敗：%s"
+
+#: ../panels/sound/gvc-stream-status-icon.c:256
+#| msgid "Mutt"
+msgid "_Mute"
+msgstr "靜音(_M)"
+
+#: ../panels/sound/gvc-stream-status-icon.c:265
+#| msgid "Sound Preferences"
+msgid "_Sound Preferences"
+msgstr "音效偏好設定(_S)"
+
+#: ../panels/sound/gvc-stream-status-icon.c:449
+#| msgid "Multimedia"
+msgid "Muted"
+msgstr "已靜音"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:189
+msgid "Built-in"
+msgstr "內建"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:459
+#: ../panels/sound/gvc-sound-theme-chooser.c:471
+#: ../panels/sound/gvc-sound-theme-chooser.c:483
+msgid "Sound Preferences"
+msgstr "音效偏好設定"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:462
+#: ../panels/sound/gvc-sound-theme-chooser.c:473
+#: ../panels/sound/gvc-sound-theme-chooser.c:485
+msgid "Testing event sound"
+msgstr "測試事件聲音"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:590
+#| msgid "Icon theme"
+msgid "From theme"
+msgstr "從主題"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:778
+#| msgid "Play _alert sound"
+msgid "C_hoose an alert sound:"
+msgstr "選擇警示音效(_H):"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
+msgid "Show desktop volume control"
+msgstr "顯示桌面音量控制"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
+#| msgid "Unknown Volume Control %d"
+msgid "Volume Control"
+msgstr "音量控制"
+
+#. Translators: those are keywords for the sound control-center panel
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
+msgstr ""
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
+#| msgid "Enable sound and associate sounds with events"
+msgid "Change sound volume and sound events"
+msgstr "改變音效的音量和音效事件"
+
+#. Translators: This is the name of an audio file that sounds like the bark of a dog.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
+#| msgid "Callback"
+msgid "Bark"
+msgstr "汪汪"
+
+#. Translators: This is the name of an audio file that sounds like a water drip.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
+msgid "Drip"
+msgstr "水滴聲"
+
+#. Translators: This is the name of an audio file that sounds like tapping glass.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
+msgid "Glass"
+msgstr "敲玻璃"
+
+#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
+#| msgid "Sound"
+msgid "Sonar"
+msgstr "聲納"
+
+#. Translators: those are keywords for the universal access control-center panel
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+#, fuzzy
+#| msgid "_Keyboard Accessibility"
+msgid "Keyboard;Mouse;a11y;Accessibility;"
+msgstr "- GNOME 滑鼠無障礙功能伺服程式"
+
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
 msgstr "無障礙功能"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
 msgstr "無障礙偏好設定"
 
@@ -1612,580 +2157,1052 @@ msgid "Acceptance delay:"
 msgstr "接受時間延遲："
 
 #: ../panels/universal-access/uap.ui.h:12
-msgid "Accessibility features can be turned on or off with keyboard shortcuts"
-msgstr "允許使用鍵盤捷徑鍵開啟和關閉無障礙功能"
-
-#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when Caps and Num Lock are used"
 msgstr "當 Caps 和 Num Lock 在使用時發出聲響"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a key is"
 msgstr "發出聲響條件為按鍵"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Beep when a key is rejected"
 msgstr "當拒絕按鍵動作則發出聲響"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Beep when a modifer key is pressed"
 msgstr "當按下特殊按鍵時發出聲響"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Bounce Keys"
+msgstr "回鍵"
+
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Change constrast:"
 msgstr "改變對比："
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Closed Captioning"
 msgstr "關閉說明"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Contrast:"
 msgstr "對比："
 
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Control the pointer using the keypad."
-msgstr "使用鍵盤控制滑鼠指標。"
+#: ../panels/universal-access/uap.ui.h:21
+#| msgid "Control the pointer using the keypad."
+msgid "Control the pointer using the keypad"
+msgstr "使用鍵盤控制滑鼠指標"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:22
 msgid "Control the pointer using the video camera."
 msgstr "使用視訊攝影機控制指標"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:23
 msgid "Ctrl+Alt+-"
 msgstr "Ctrl+Alt+-"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Ctrl+Alt+0"
 msgstr "Ctrl+Alt+0"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Ctrl+Alt+4"
 msgstr "Ctrl+Alt+4"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Ctrl+Alt+8"
 msgstr "Ctrl+Alt+8"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Ctrl+Alt+="
 msgstr "Ctrl+Alt+="
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Decrease size:"
 msgstr "減少字型大小："
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Disable if two keys are pressed together"
 msgstr "如果同時按下任何兩鍵則停用"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Display"
 msgstr "顯示"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Display a textual description of speech and sounds."
+#: ../panels/universal-access/uap.ui.h:34
+#| msgid "Display a textual description of speech and sounds."
+msgid "Display a textual description of speech and sounds"
 msgstr "顯示語音和音效的文字描述"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Flash the entire screen"
 msgstr "閃動整個螢幕"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Flash the window title"
 msgstr "閃動視窗標題"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:37
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Hearing"
 msgstr "聽覺"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:40
 msgid "High/Inverse"
 msgstr "高/反差"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:41
 msgid "HighContrast"
 msgstr "高對比"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:42
 msgid "HighContrastInverse"
 msgstr "高反差"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:43
 msgid "Hover Click"
 msgstr "停駐即點擊"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "I need assistance with:"
-msgstr "我需要協助："
-
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Ignores fast duplicate keypresses"
 msgstr "忽略快速重複按鍵"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Increase size:"
 msgstr "增加字型大小："
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Keyboard Settings..."
-msgstr "鍵盤設定值..."
+msgstr "鍵盤設定值…"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Larger"
 msgstr "放大"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:53
 msgid "LowContrast"
 msgstr "低反差"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Mouse Settings..."
-msgstr "滑鼠設定值..."
+msgstr "滑鼠設定值…"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:57
 msgid "None"
 msgstr "沒有"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "On screen keyboard"
 msgstr "螢幕鍵盤"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Options..."
-msgstr "選項..."
+msgstr "選項…"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Pointing and Clicking"
 msgstr "指標和點擊"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Puts a delay between when a key is pressed and when it is accepted."
-msgstr "在按鍵被按下到它被接受之間置入延遲。"
+#: ../panels/universal-access/uap.ui.h:65
+#| msgid "Puts a delay between when a key is pressed and when it is accepted."
+msgid "Puts a delay between when a key is pressed and when it is accepted"
+msgstr "在按鍵被按下到它被接受之間置入延遲"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Screen Reader"
 msgstr "螢幕閱讀器"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Seeing"
 msgstr "視覺"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Shift+Ctrl+Alt+-"
 msgstr "Shift+Ctrl+Alt+-"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Shift+Ctrl+Alt+="
 msgstr "Shift+Ctrl+Alt+="
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Show Universal Access status"
 msgstr "顯示無障礙功能狀態"
 
-#: ../panels/universal-access/uap.ui.h:79
-msgid "Sound Settings..."
-msgstr "音效設定值..."
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Slow Keys"
+msgstr "遲緩按鍵"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:77
+msgid "Sound Settings..."
+msgstr "音效設定值…"
+
+#: ../panels/universal-access/uap.ui.h:78
+msgid "Sticky Keys"
+msgstr "黏性特殊鍵"
+
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Test flash"
 msgstr "測試閃動"
 
-#: ../panels/universal-access/uap.ui.h:82
-msgid "Test:"
-msgstr "測試："
-
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Text size:"
 msgstr "文字大小："
 
-#: ../panels/universal-access/uap.ui.h:84
-msgid "Treats a sequence of modifier keys as a key combination."
-msgstr "將連續按的特殊鍵視為按鍵組合。"
+#: ../panels/universal-access/uap.ui.h:81
+#| msgid "Treats a sequence of modifier keys as a key combination."
+msgid "Treats a sequence of modifier keys as a key combination"
+msgstr "將連續按的特殊鍵視為按鍵組合"
 
-#: ../panels/universal-access/uap.ui.h:85
-msgid "Trigger a click when the pointer hovers."
-msgstr "當停止游標移動時觸發點擊。"
+#: ../panels/universal-access/uap.ui.h:82
+#| msgid "Trigger a click when the pointer hovers."
+msgid "Trigger a click when the pointer hovers"
+msgstr "當停止游標移動時觸發點擊"
 
-#: ../panels/universal-access/uap.ui.h:86
-msgid "Trigger a secondary click by holding down the primary button."
+#: ../panels/universal-access/uap.ui.h:83
+#| msgid "Trigger a secondary click by holding down the primary button."
+msgid "Trigger a secondary click by holding down the primary button"
 msgstr "按住主要鍵時觸發次要點擊"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:84
+#| msgid "Beep when _accessibility features are turned on or off"
+msgid "Turn on accessibility features from the keyboard"
+msgstr "以鍵盤開啟無障礙功能"
+
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Turn on or off:"
 msgstr "開啟或關閉："
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:86
 msgid "Type here to test settings"
 msgstr "在這裡打字以測試設定值"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:87
 msgid "Typing"
 msgstr "輸入"
 
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:88
 msgid "Typing Assistant"
 msgstr "輸入助理"
 
-#: ../panels/universal-access/uap.ui.h:91
-msgid "Use a visual indication when an alert sound occurs."
-msgstr "當警示音效發出時使用視覺化的指示。"
+#: ../panels/universal-access/uap.ui.h:89
+#| msgid "Use a visual indication when an alert sound occurs."
+msgid "Use a visual indication when an alert sound occurs"
+msgstr "當警示音效發出時使用視覺化的指示"
 
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:90
 msgid "Use an alternative form of text input"
 msgstr "使用文字輸入的替代形式"
 
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:91
 msgid "Video Mouse"
 msgstr "視訊滑鼠"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:92
 msgid "Visual Alerts"
 msgstr "視覺警示"
 
-#: ../panels/universal-access/uap.ui.h:95
-msgid "Zoom"
-msgstr "縮放"
-
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:94
 msgid "Zoom in:"
 msgstr "拉近："
 
-#: ../panels/universal-access/uap.ui.h:97
+#: ../panels/universal-access/uap.ui.h:95
 msgid "Zoom out:"
 msgstr "拉遠："
 
-#: ../panels/universal-access/uap.ui.h:99
+#: ../panels/universal-access/uap.ui.h:97
 msgid "accepted"
 msgstr "已接受"
 
-#: ../panels/universal-access/uap.ui.h:100
+#: ../panels/universal-access/uap.ui.h:98
 msgid "pressed"
 msgstr "已按下"
 
-#: ../panels/universal-access/uap.ui.h:101
+#: ../panels/universal-access/uap.ui.h:99
 msgid "rejected"
 msgstr "已拒絕"
 
-#: ../shell/control-center.schemas.in.h:1
-msgid "Close the control-center when a task is activated"
-msgstr "執行設定後關閉控制中心"
+#: ../panels/user-accounts/gdm-languages.c:613
+msgid "Unspecified"
+msgstr "未指定"
 
-#: ../shell/control-center.schemas.in.h:2
-msgid "Exit shell on add or remove action performed"
-msgstr "增加彧移除動作進行時離開 shell"
+#: ../panels/user-accounts/run-passwd.c:426
+#| msgid "Authenticated!"
+msgid "Authentication failed"
+msgstr "驗證失敗"
 
-#: ../shell/control-center.schemas.in.h:3
-msgid "Exit shell on help action performed"
-msgstr "求助動作進行時離開 shell"
+#: ../panels/user-accounts/run-passwd.c:506
+#: ../panels/user-accounts/um-password-dialog.c:381
+#, c-format
+#| msgid "The password is too short."
+msgid "The new password is too short"
+msgstr "新的密碼太短"
 
-#: ../shell/control-center.schemas.in.h:4
-msgid "Exit shell on start action performed"
-msgstr "啟動動作進行時離開 shell"
+#: ../panels/user-accounts/run-passwd.c:512
+#, c-format
+#| msgid "The password is too simple."
+msgid "The new password is too simple"
+msgstr "新的密碼太簡單"
 
-#: ../shell/control-center.schemas.in.h:5
-msgid "Exit shell on upgrade or uninstall action performed"
-msgstr "升級及移除動作進行時離開 shell"
+#: ../panels/user-accounts/run-passwd.c:518
+#, c-format
+#| msgid "The old and new passwords are too similar."
+msgid "The old and new passwords are too similar"
+msgstr "舊密碼與新密碼太相似了"
 
-#: ../shell/control-center.schemas.in.h:6
-msgid "Indicates whether to close the shell when a help action is performed."
-msgstr "指示求助動作進行時是否離開 shell。"
+#: ../panels/user-accounts/run-passwd.c:521
+#, c-format
+#| msgid "The two passwords are not equal."
+msgid "The new password has already been used recently."
+msgstr "新的密碼已經在最近使用過了。"
 
-#: ../shell/control-center.schemas.in.h:7
-msgid "Indicates whether to close the shell when a start action is performed."
-msgstr "指示啟動動作進行時是否離開 shell。"
+#: ../panels/user-accounts/run-passwd.c:524
+#, c-format
+#| msgid "The new password must contain numeric or special character(s)."
+msgid "The new password must contain numeric or special characters"
+msgstr "新的密碼必須包含數字或特殊字元"
 
-#: ../shell/control-center.schemas.in.h:8
+#: ../panels/user-accounts/run-passwd.c:528
+#, c-format
+#| msgid "The old and new passwords are the same."
+msgid "The old and new passwords are the same"
+msgstr "舊密碼與新密碼是相同的"
+
+#: ../panels/user-accounts/run-passwd.c:532
+#, c-format
+#| msgid ""
+#| "Your password has been changed since you initially authenticated! Please "
+#| "re-authenticate."
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "您的密碼在第一次驗證後已經改變過了！"
+
+#: ../panels/user-accounts/run-passwd.c:536
+#, c-format
+#| msgid "The new password must contain numeric or special character(s)."
+msgid "The new password does not contain enough different characters"
+msgstr "新的密碼並未包含足夠的不同字元"
+
+#: ../panels/user-accounts/run-passwd.c:540
+#, c-format
+#| msgid "Unknown"
+msgid "Unknown error"
+msgstr "不明的錯誤"
+
+#: ../panels/user-accounts/um-account-dialog.c:78
+#| msgid "Failed to create temporary directory"
+msgid "Failed to create user"
+msgstr "建立使用者失敗"
+
+#: ../panels/user-accounts/um-account-dialog.c:185
+#, c-format
+#| msgid "A bookmark for URI '%s' already exists"
+msgid "A user with the username '%s' already exists"
+msgstr "以使用者名稱「%s」為名的使用者已經存在"
+
+#: ../panels/user-accounts/um-account-dialog.c:189
+#, c-format
+#| msgid "The password is too short."
+msgid "The username is too long"
+msgstr "使用者名稱太長了"
+
+#: ../panels/user-accounts/um-account-dialog.c:192
+msgid "The username cannot start with a '-'"
+msgstr "使用者名稱不能以 '-' 字母開頭"
+
+#: ../panels/user-accounts/um-account-dialog.c:195
 msgid ""
-"Indicates whether to close the shell when an add or remove action is "
-"performed."
-msgstr "指示增加或移除動作進行時是否離開 shell。"
-
-#: ../shell/control-center.schemas.in.h:9
-msgid ""
-"Indicates whether to close the shell when an upgrade or uninstall action is "
-"performed."
-msgstr "指示升級或移除動作進行時是否離開 shell。"
-
-#: ../shell/control-center.schemas.in.h:10
-msgid "Task names and associated .desktop files"
-msgstr "設定名稱及相關的 .desktop 檔"
-
-#: ../shell/control-center.schemas.in.h:11
-msgid ""
-"The task name to be displayed in the control-center followed by a \";\" "
-"separator then the filename of an associated .desktop file to launch for "
-"that task."
+"The username must consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
 msgstr ""
-"在“;”前的是 顯示在控制中心的設定名稱（因此需要翻譯），而其後相關 .desktop 檔"
-"案是用作執行該設定。"
+"使用者名稱必須由這些字組成：\n"
+"  ➣ 英文字母\n"
+"  ➣ 數字\n"
+"  ➣ 其他字元如 '.'、 '-' 和 '_'"
 
-#. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
-#: ../shell/control-center.schemas.in.h:13
-msgid ""
-"[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;default-"
-"applications.desktop,Add Printer;gnome-cups-manager.desktop]"
+#: ../panels/user-accounts/um-account-type.c:35
+#: ../panels/user-accounts/data/account-dialog.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#| msgid "Standard XTerminal"
+msgctxt "Account type"
+msgid "Standard"
+msgstr "標準"
+
+#: ../panels/user-accounts/um-account-type.c:37
+#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#| msgid "Terminator"
+msgctxt "Account type"
+msgid "Administrator"
+msgstr "管理員"
+
+#: ../panels/user-accounts/um-account-type.c:39
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+msgctxt "Account type"
+msgid "Supervised"
 msgstr ""
-"[更改佈景主題;gtk-theme-selector.desktop,設定首選應用程式;default-"
-"applications.desktop,加入印表機;gnome-cups-manager.desktop]"
 
-#: ../shell/control-center.schemas.in.h:14
+#: ../panels/user-accounts/um-fingerprint-dialog.c:107
+msgid "You are not allowed to access the device. Contact your system administrator."
+msgstr "您不被允許使用這個裝置。請連絡您的系統管理者。"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:109
+msgid "The device is already in use."
+msgstr "該裝置已經在使用中。"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:111
+#| msgid "An internal error occured"
+msgid "An internal error occurred."
+msgstr "發生內部的錯誤。"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:181
+#: ../panels/user-accounts/um-fingerprint-dialog.c:182
+#| msgid "Disabled"
+msgid "Enabled"
+msgstr "已啟用"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:224
+msgid "Delete registered fingerprints?"
+msgstr "是否刪除已註冊的指紋？"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:228
+msgid "_Delete Fingerprints"
+msgstr "刪除指紋(_D)"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:235
+msgid "Do you want to delete your registered fingerprints so fingerprint login is disabled?"
+msgstr "您確定要刪除已註冊的指紋嗎？這麼一來將會停用指紋登入。"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:363
+msgid "Done!"
+msgstr "完成！"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:409
+#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#, c-format
+#| msgid "Could not start finger capture on '%s' device"
+msgid "Could not access '%s' device"
+msgstr "無法存取「%s」裝置"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#, c-format
+msgid "Could not start finger capture on '%s' device"
+msgstr "無法使用「%s」裝置上的指紋捕捉"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+msgid "Could not access any fingerprint readers"
+msgstr "無法存取任何指紋辨識器"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:551
+msgid "Please contact your system administrator for help."
+msgstr "請連絡您的系統管理員來幫忙。"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:588
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:1
+msgid "Enable Fingerprint Login"
+msgstr "啟用指紋登入"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "To enable fingerprint login, you need to save one of your fingerprints, using the
+#. * 'Digital Persona U.are.U 4000/4000B' device."
+#: ../panels/user-accounts/um-fingerprint-dialog.c:625
+#, c-format
+msgid "To enable fingerprint login, you need to save one of your fingerprints, using the '%s' device."
+msgstr "要啟用指紋登入，您需要使用「%s」裝置儲存您的指紋。"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:633
+#, c-format
 msgid ""
-"if true, the control-center will close when a \"Common Task\" is activated."
-msgstr "如設定為‘true’，控制中心會在「一般工作」使用後關閉。"
+"Enrolling fingerprints for\n"
+"<b><big>%s</big></b>"
+msgstr ""
+
+#: ../panels/user-accounts/um-language-dialog.c:328
+msgid "Other..."
+msgstr "其他..."
+
+#: ../panels/user-accounts/um-lockbutton.c:355
+msgid "Lock"
+msgstr "鎖定"
+
+#: ../panels/user-accounts/um-lockbutton.c:364
+msgid "Unlock"
+msgstr "解鎖"
+
+#: ../panels/user-accounts/um-lockbutton.c:373
+msgid "Locked"
+msgstr "已鎖定"
+
+#: ../panels/user-accounts/um-lockbutton.c:382
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"對話盒已解鎖。\n"
+"點選以防止進一步的變更"
+
+#: ../panels/user-accounts/um-lockbutton.c:391
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"對話盒已鎖定。\n"
+"點選進行變更"
+
+#: ../panels/user-accounts/um-lockbutton.c:400
+#| msgid "Please contact your system administrator for help."
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"系統原則是防止進行變更的。\n"
+"請連絡您的系統管理員"
+
+#: ../panels/user-accounts/um-password-dialog.c:185
+msgid "More choices..."
+msgstr "更多選擇..."
+
+#: ../panels/user-accounts/um-password-dialog.c:291
+msgid "Please choose another password."
+msgstr "請選擇其他密碼。"
+
+#: ../panels/user-accounts/um-password-dialog.c:300
+#| msgid "Please type your password in the <b>New password</b> field."
+msgid "Please type your current password again."
+msgstr "請再次輸入您目前的密碼。"
+
+#: ../panels/user-accounts/um-password-dialog.c:306
+#| msgid "Your password has been changed."
+msgid "Password could not be changed"
+msgstr "密碼無法變更"
+
+#: ../panels/user-accounts/um-password-dialog.c:378
+#| msgid "_Retype new password:"
+msgid "You need to enter a new password"
+msgstr "您需要輸入新的密碼"
+
+#: ../panels/user-accounts/um-password-dialog.c:387
+msgid "You need to confirm the password"
+msgstr "您需要確認密碼"
+
+#: ../panels/user-accounts/um-password-dialog.c:390
+#| msgid "The password is too short."
+msgid "The passwords do not match"
+msgstr "密碼不相符"
+
+#: ../panels/user-accounts/um-password-dialog.c:396
+msgid "You need to enter your current password"
+msgstr "您需要輸入您目前的密碼"
+
+#: ../panels/user-accounts/um-password-dialog.c:399
+#| msgid "That password was incorrect."
+msgid "The current password is not correct"
+msgstr "目前的密碼並不正確"
+
+#: ../panels/user-accounts/um-password-dialog.c:472
+#: ../panels/user-accounts/um-password-dialog.c:689
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "太短"
+
+#: ../panels/user-accounts/um-password-dialog.c:475
+#: ../panels/user-accounts/um-password-dialog.c:690
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "太弱"
+
+#: ../panels/user-accounts/um-password-dialog.c:477
+#: ../panels/user-accounts/um-password-dialog.c:691
+#| msgid "Filter"
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "一般"
+
+#: ../panels/user-accounts/um-password-dialog.c:479
+#: ../panels/user-accounts/um-password-dialog.c:692
+msgctxt "Password strength"
+msgid "Good"
+msgstr "良好"
+
+#: ../panels/user-accounts/um-password-dialog.c:481
+#: ../panels/user-accounts/um-password-dialog.c:693
+#| msgid "Scrolling"
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "強固"
+
+#: ../panels/user-accounts/um-password-dialog.c:520
+msgid "Passwords do not match"
+msgstr "密碼不相符"
+
+#: ../panels/user-accounts/um-password-dialog.c:546
+#| msgid "Change password"
+msgid "Wrong password"
+msgstr "錯誤的密碼"
+
+#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#| msgid "_Select"
+msgid "Select"
+msgstr "選擇"
+
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "瀏覽更多照片"
+
+#: ../panels/user-accounts/um-photo-dialog.c:429
+#| msgid "Disabled"
+msgid "Disable image"
+msgstr "停用圖片"
+
+#: ../panels/user-accounts/um-photo-dialog.c:447
+msgid "Take a photo..."
+msgstr "照一張相..."
+
+#: ../panels/user-accounts/um-photo-dialog.c:465
+msgid "Browse for more pictures..."
+msgstr "瀏覽更多照片..."
+
+#: ../panels/user-accounts/um-photo-dialog.c:693
+#, c-format
+msgid "Used by %s"
+msgstr "由 %s 使用"
+
+#: ../panels/user-accounts/um-user-manager.c:430
+#, c-format
+#| msgid "A bookmark for URI '%s' already exists"
+msgid "A user with name '%s' already exists."
+msgstr "以「%s」為名的使用者已經存在。"
+
+#: ../panels/user-accounts/um-user-manager.c:525
+#| msgid "The sound file for this event does not exist."
+msgid "This user does not exist."
+msgstr "這個使用者不存在。"
+
+#: ../panels/user-accounts/um-user-panel.c:349
+msgid "Failed to delete user"
+msgstr "刪除使用者失敗"
+
+#: ../panels/user-accounts/um-user-panel.c:409
+msgid "You cannot delete your own account."
+msgstr "您不能刪除自己的帳號。"
+
+#: ../panels/user-accounts/um-user-panel.c:418
+#, c-format
+msgid "%s is still logged in"
+msgstr "%s 仍在登入中"
+
+#: ../panels/user-accounts/um-user-panel.c:422
+msgid "Deleting a user while they are logged in can leave the system in an inconsistent state."
+msgstr "在使用者登入期間刪除他會使系統處於不穩定的狀態。"
+
+#: ../panels/user-accounts/um-user-panel.c:431
+#, c-format
+#| msgid "Do you want to keep this resolution?"
+msgid "Do you want to keep %s's files?"
+msgstr "您想要保留 %s 的檔案嗎？"
+
+#: ../panels/user-accounts/um-user-panel.c:435
+msgid "It is possible to keep the home directory, mail spool and temporary files around when deleting a user account."
+msgstr "當刪除使用者時是可以保留家目錄、新進郵件(mail spool)和暫存檔案的。"
+
+#: ../panels/user-accounts/um-user-panel.c:438
+#| msgid "_Delete Fingerprints"
+msgid "_Delete Files"
+msgstr "刪除檔案(_D)"
+
+#: ../panels/user-accounts/um-user-panel.c:439
+#| msgid "New File"
+msgid "_Keep Files"
+msgstr "保留檔案(_K)"
+
+#: ../panels/user-accounts/um-user-panel.c:440
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: ../panels/user-accounts/um-user-panel.c:464
+msgctxt "Password mode"
+msgid "Account disabled"
+msgstr "帳號已停用"
+
+#: ../panels/user-accounts/um-user-panel.c:473
+msgctxt "Password mode"
+msgid "To be set at next login"
+msgstr "在下次登入時設定"
+
+#: ../panels/user-accounts/um-user-panel.c:476
+#| msgid "None"
+msgctxt "Password mode"
+msgid "None"
+msgstr "沒有"
+
+#: ../panels/user-accounts/um-user-panel.c:818
+#| msgid "Failed to construct test pipeline for '%s'"
+msgid "Failed to contact the accounts service"
+msgstr "無法連接帳號服務"
+
+#: ../panels/user-accounts/um-user-panel.c:820
+#| msgid "Please make sure that the applet is properly installed"
+msgid "Please make sure that the AccountService is installed and enabled."
+msgstr "請確定 AccountService 已經安裝並啟用。"
+
+#: ../panels/user-accounts/um-user-panel.c:853
+msgid ""
+"To make changes,\n"
+"click the * icon first"
+msgstr ""
+"要進行變更，\n"
+"請先點選 * 圖示"
+
+#: ../panels/user-accounts/um-user-panel.c:891
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#| msgid "C_reate"
+msgid "Create a user"
+msgstr "建立新的使用者"
+
+#: ../panels/user-accounts/um-user-panel.c:902
+#: ../panels/user-accounts/um-user-panel.c:1178
+msgid ""
+"To create a user,\n"
+"click the * icon first"
+msgstr ""
+"要建立使用者，\n"
+"請先點選 * 圖示"
+
+#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+msgid "Delete the selected user"
+msgstr "刪除選取的使用者"
+
+#: ../panels/user-accounts/um-user-panel.c:923
+#: ../panels/user-accounts/um-user-panel.c:1183
+msgid ""
+"To delete the selected user,\n"
+"click the * icon first"
+msgstr ""
+"要刪除選取的使用者，\n"
+"請先點選 * 圖示"
+
+#: ../panels/user-accounts/um-user-panel.c:1087
+#| msgid "By _country"
+msgid "My Account"
+msgstr "我的帳號"
+
+#: ../panels/user-accounts/um-user-panel.c:1096
+msgid "Other Accounts"
+msgstr "其他帳號"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
+msgid "Add or remove users"
+msgstr "加入或移除使用者"
+
+#. Translators: those are keywords for the user accounts control-center panel
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
+msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+msgstr ""
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
+#| msgid "seconds"
+msgid "User Accounts"
+msgstr "使用者帳號"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+#| msgid "C_reate"
+msgid "Cr_eate"
+msgstr "建立(_E)"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
+#| msgid "Create New Location"
+msgid "Create new account"
+msgstr "建立新的帳號"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+#| msgid "_Country:"
+msgid "_Account Type:"
+msgstr "帳號類型(_A):"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+#| msgid "Full Name"
+msgid "_Full name:"
+msgstr "全名(_F):"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#| msgid "U_sername:"
+msgid "_Username:"
+msgstr "使用者名稱(_U):"
+
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "取消"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a strong password</a>"
+msgstr "<a href=\"http://wolfram.org/writing/howto/password.html\">如何選擇強度高的密碼</a>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
+msgid "<small>This hint may be displayed at the login screen.  It will be visible to all users of this system.  Do <b>not</b> include the password here.</small>"
+msgstr "<small>這個提示可能會顯示在登入畫面。它將會顯示給這個系統上的所有使用者。請<b>不要</b>在這裡寫入密碼。</small>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+#| msgid "_New password:"
+msgid "C_onfirm password:"
+msgstr "確認密碼(_O):"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
+#| msgid "Change set"
+msgid "Ch_ange"
+msgstr "改變(_A)"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
+#| msgid "Change password"
+msgid "Changing password for:"
+msgstr "正在改變使用者密碼："
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
+#| msgid "Change password"
+msgid "Choose a generated password"
+msgstr "選擇產生的密碼"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Choose password at next login"
+msgstr "在下次登入時選擇密碼"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Current _password:"
+msgstr "目前密碼(_P):"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
+msgid "Disable this account"
+msgstr "停用這個帳號"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
+msgid "Enable this account"
+msgstr "啟用這個帳號"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:11
+#| msgid "Filter"
+msgid "Fair"
+msgstr "一般"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
+msgid "Log in without a password"
+msgstr "不使用密碼登入"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
+#| msgid "_New password:"
+msgid "Set a password now"
+msgstr "立刻設定密碼"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:14
+#| msgid "Action"
+msgid "_Action:"
+msgstr "動作(_A):"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:15
+#| msgid "_Print"
+msgid "_Hint:"
+msgstr "提示(_H):"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:16
+msgid "_New password:"
+msgstr "新密碼(_N):"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:17
+#| msgid "_New password:"
+msgid "_Show password"
+msgstr "顯示密碼(_S)"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:1
+#| msgid "Web Browser"
+msgid "Browse"
+msgstr "瀏覽"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+msgid "Changing photo for:"
+msgstr "正在改變相片："
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:5
+msgid "Choose a picture that will be shown at the login screen for this account."
+msgstr "選擇這個帳號要顯示在登入畫面的照片。"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:6
+#| msgid "Galeon"
+msgid "Gallery"
+msgstr "藝廊"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:7
+msgid "Photograph"
+msgstr "相片"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+#| msgid "Take a break!"
+msgid "Take a photograph"
+msgstr "照一張相片"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+msgid ""
+"A guest account will allow anyone to temporarily log in to this computer without a password.  For security, remote logins to this account are not allowed.\n"
+"\n"
+"<b>When the guest user logs out, all files and data associated with the account will be deleted.</b>"
+msgstr ""
+"訪客帳號會允許任何人可以不用密碼就暫時登入這臺電腦。因為安全性的理由，這個帳號是不允許遠端登入的。\n"
+"\n"
+"<b>當訪客使用者登出後，所有與這個帳號相關的檔案和資料都會被刪除。</b>"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+msgid "Account Information"
+msgstr "帳號資訊"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Account type:"
+msgstr "帳號類型："
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#| msgid "About %s"
+msgid "Accounts"
+msgstr "帳號"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+msgid "Address Book Card:"
+msgstr "通訊錄名片："
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "Allow guests to log in to this computer"
+msgstr "允許訪客登入這臺電腦"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+msgid "Automatic Login:"
+msgstr "自動登入："
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
+msgid "E-mail address:"
+msgstr "電子郵件位址："
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
+#| msgid "Enable Fingerprint Login"
+msgid "Fingerprint Login:"
+msgstr "指紋登入："
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
+#| msgid "_Language:"
+msgid "Language:"
+msgstr "語言："
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
+#| msgid "Layout _Options..."
+msgid "Login Options"
+msgstr "登入選項"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
+#| msgid "_Open"
+msgid "Open"
+msgstr "開啟"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
+#| msgid "_Password:"
+msgid "Password:"
+msgstr "密碼： "
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
+#| msgid "Description:"
+msgid "Restrictions:"
+msgstr "限制："
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
+msgid "Show Shutdown, Suspend and Restart actions"
+msgstr "顯示關機、暫停及重新啟動等動作"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:24
+msgid "Show list of users"
+msgstr "顯示使用者清單"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
+#| msgid "The password is too short."
+msgid "Show password hints"
+msgstr "顯示密碼提示"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:2
+msgid "Left index finger"
+msgstr "左手食指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
+msgid "Left little finger"
+msgstr "左手小指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+msgid "Left middle finger"
+msgstr "左手中指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+msgid "Left ring finger"
+msgstr "左手無名指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+msgid "Left thumb"
+msgstr "左手姆指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
+msgid "Other finger: "
+msgstr "其他手指："
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
+msgid "Right index finger"
+msgstr "右手食指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+msgid "Right little finger"
+msgstr "右手小指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+msgid "Right middle finger"
+msgstr "右手中指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+msgid "Right ring finger"
+msgstr "右手無名指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+msgid "Right thumb"
+msgstr "右手姆指"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+msgid "Your fingerprint was successfully saved. You should now be able to log in using your fingerprint reader."
+msgstr "您的指紋已成功的儲存了。現在應該可以使用您的指紋辨識器來登入。"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../shell/shell.ui.h:1
+msgid "System Settings"
+msgstr "系統設定值"
+
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "控制中心"
-
-#: ../shell/gnome-control-center.desktop.in.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME 設定工具"
-
-#: ../typing-break/drw-break-window.c:194
-msgid "_Postpone Break"
-msgstr "停止休息(_P)"
-
-#: ../typing-break/drw-break-window.c:250
-msgid "Take a break!"
-msgstr "請休息一下！"
-
-#: ../typing-break/drwright.c:136
-msgid "_Take a Break"
-msgstr "休息一下(_T)"
-
-#: ../typing-break/drwright.c:507
-#, c-format
-msgid "Take a break now (next in %dm)"
-msgstr "現在休息（剩下 %d分）"
-
-#: ../typing-break/drwright.c:509
-#, c-format
-msgid "%d minute until the next break"
-msgid_plural "%d minutes until the next break"
-msgstr[0] "距離休息時間還有 %d 分鐘"
-
-#: ../typing-break/drwright.c:515
-#, c-format
-msgid "Take a break now (next in less than one minute)"
-msgstr "現在休息（剩下不到一分鐘）"
-
-#: ../typing-break/drwright.c:517
-#, c-format
-msgid "Less than one minute until the next break"
-msgstr "距離休息時間少於 1 分鐘"
-
-#: ../typing-break/drwright.c:614
-#, c-format
-msgid ""
-"Unable to bring up the typing break properties dialog with the following "
-"error: %s"
-msgstr "無法顯示「休息提示」偏好設定對話方塊，因為出現以下的錯誤：%s"
-
-#: ../typing-break/drwright.c:631
-msgid "Written by Richard Hult <richard@imendio.com>"
-msgstr "由 Richard Hult <richard@imendio.com> 編寫"
-
-#: ../typing-break/drwright.c:632
-msgid "Eye candy added by Anders Carlsson"
-msgstr "由 Anders Carlsson 加入視覺效果"
-
-#: ../typing-break/drwright.c:641
-msgid "A computer break reminder."
-msgstr "在使用電腦時發出休息提示的小工具。"
-
-#: ../typing-break/drwright.c:643
-msgid "translator-credits"
-msgstr ""
-"如對翻譯有任何意見，請送一封電子郵件給\n"
-"以下地址，GNOME 翻譯團隊會盡快回覆您：\n"
-"zh-l10n@lists.linux.org.tw\n"
-"\n"
-"Woodman Tuen <wmtuen@gmail.com>, 2004-07"
-
-#: ../typing-break/main.c:63
-msgid "Enable debugging code"
-msgstr "啟用除錯碼"
-
-#: ../typing-break/main.c:65
-msgid "Don't check whether the notification area exists"
-msgstr "不要檢查通知區是否存在"
-
-#: ../typing-break/main.c:91
-msgid "Typing Monitor"
-msgstr "休息提示小程式"
-
-#: ../typing-break/main.c:108
-msgid ""
-"The typing monitor uses the notification area to display information. You "
-"don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choosing 'Add to panel', selecting "
-"'Notification area' and clicking 'Add'."
-msgstr ""
-"休息提示小程式需要透過程式狀態通知區來顯示資訊，可是面板中並沒有該區域。您可"
-"以在面板上按滑鼠右邊按鈕，選取「加入至面板」及其中的「程式狀態通知區」後，再"
-"按「新增」。"
-
-#: ../font-viewer/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "如設定為‘true’，則會顯示 OpenType 字型的縮圖。"
-
-#: ../font-viewer/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "如設定為‘true’，則會顯示 PCF 字型的縮圖。"
-
-#: ../font-viewer/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "如設定為‘true’，則會顯示 TrueType 字型的縮圖。"
-
-#: ../font-viewer/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "如設定為‘true’，則會顯示 Type1 字型的縮圖。"
-
-#: ../font-viewer/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr "本設定鍵指定了用來製作 OpenType 字型縮圖的指令。"
-
-#: ../font-viewer/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "本設定鍵指定了用來製作 PCF 字型縮圖的指令。"
-
-#: ../font-viewer/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr "本設定鍵指定了用來製作 TrueType 字型縮圖的指令。"
-
-#: ../font-viewer/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr "本設定鍵指定了用來製作 Type1 字型縮圖的指令。"
-
-#: ../font-viewer/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "製作 OpenType 字型縮圖的指令"
-
-#: ../font-viewer/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "製作 PCF 字型縮圖的指令"
-
-#: ../font-viewer/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "製作 TrueType 字型縮圖的指令"
-
-#: ../font-viewer/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "製作 Type1 字型縮圖的指令"
-
-#: ../font-viewer/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "是否為 OpenType 字型製作縮圖"
-
-#: ../font-viewer/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "是否為 PCF 字型製作縮圖"
-
-#: ../font-viewer/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "是否為 TrueType 字型製作縮圖"
-
-#: ../font-viewer/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "是否為 Type1 字型製作縮圖"
-
-#: ../font-viewer/font-view.c:293
-msgid "Name:"
-msgstr "名稱:"
-
-#: ../font-viewer/font-view.c:296
-msgid "Style:"
-msgstr "字款："
-
-#: ../font-viewer/font-view.c:309
-msgid "Type:"
-msgstr "類型:"
-
-#: ../font-viewer/font-view.c:313
-msgid "Size:"
-msgstr "大小："
-
-#: ../font-viewer/font-view.c:357 ../font-viewer/font-view.c:370
-msgid "Version:"
-msgstr "版本:"
-
-#: ../font-viewer/font-view.c:361 ../font-viewer/font-view.c:372
-msgid "Copyright:"
-msgstr "版權："
-
-#: ../font-viewer/font-view.c:365
-msgid "Description:"
-msgstr "描述:"
-
-#: ../font-viewer/font-view.c:445
-msgid "Installed"
-msgstr "已安裝"
-
-#: ../font-viewer/font-view.c:448
-msgid "Install Failed"
-msgstr "安裝失敗"
-
-#: ../font-viewer/font-view.c:519
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "用法：%s 字型檔\n"
-
-#: ../font-viewer/font-view.c:590
-msgid "I_nstall Font"
-msgstr "安裝字型(_N)"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "字型檢視程式"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "預覽字型"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "Text to thumbnail (default: Aa)"
-msgstr "文字轉為縮圖（預設：Aa）"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "TEXT"
-msgstr "文字"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "Font size (default: 64)"
-msgstr "字型大小（預設：64）"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "SIZE"
-msgstr "大小"
-
-#: ../font-viewer/font-thumbnailer.c:249
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "字型檔 輸出檔"
-
-#: ../font-viewer/font-thumbnailer.c:268
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "分析參數時發生錯誤：%s\n"
 
 #: ../examples/gnome-example-panel.desktop.in.in.h:1
 msgid "Example Panel"
@@ -2195,13 +3212,543 @@ msgstr "範例面板"
 msgid "Example preferences panel"
 msgstr "範例偏好設定面板"
 
-#: ../shell/shell.ui.h:1
-msgid "System Settings"
-msgstr "系統設定值"
+#. Translators: those are keywords for the example control-center panel
+#: ../examples/gnome-example-panel.desktop.in.in.h:4
+#, fuzzy
+msgid "Foo;Bar;Baz;"
+msgstr "令進度列內的方塊來回移動"
 
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "所有設定值(_A)"
+
+#~ msgid "Error saving configuration: %s"
+#~ msgstr "儲存設定時出現錯誤：%s"
+
+#~ msgid "Image Viewer"
+#~ msgstr "圖片瀏覽程式"
+
+#~ msgid "Multimedia Player"
+#~ msgstr "多媒體播放器"
+
+#~ msgid "Open link in new _tab"
+#~ msgstr "在新的分頁中開啟連結(_T)"
+
+#~ msgid "Open link in new _window"
+#~ msgstr "在新的視窗中開啟連結(_W)"
+
+#~ msgid "Open link with web browser _default"
+#~ msgstr "使用網頁瀏覽器預設開啟連結(_D)"
+
+#~ msgid "Video Player"
+#~ msgstr "影片播放器"
+
+#~ msgid "Balsa"
+#~ msgstr "Balsa"
+
+#~ msgid "Claws Mail"
+#~ msgstr "Claws Mail"
+
+#~ msgid "Debian Sensible Browser"
+#~ msgstr "Debian Sensible Browser"
+
+#~ msgid "Encompass"
+#~ msgstr "Encompass"
+
+#~ msgid "Epiphany Web Browser"
+#~ msgstr "Epiphany 網頁瀏覽器"
+
+#~ msgid "Evolution Mail Reader"
+#~ msgstr "Evolution 電子郵件讀信軟體"
+
+#~ msgid "Firebird"
+#~ msgstr "Firebird"
+
+#~ msgid "Firefox"
+#~ msgstr "Firefox"
+
+#~ msgid "Iceape"
+#~ msgstr "Iceape 瀏覽器"
+
+#~ msgid "Iceape Mail"
+#~ msgstr "Iceape 郵件"
+
+#~ msgid "Icedove"
+#~ msgstr "Icedove"
+
+#~ msgid "Iceweasel"
+#~ msgstr "Iceweasel"
+
+#~ msgid "KMail"
+#~ msgstr "KMail"
+
+#~ msgid "Konqueror"
+#~ msgstr "Konqueror"
+
+#~ msgid "Midori"
+#~ msgstr "Midori 瀏覽器"
+
+#~ msgid "Mozilla"
+#~ msgstr "Mozilla"
+
+#~ msgid "Mozilla 1.6"
+#~ msgstr "Mozilla 1.6"
+
+#~ msgid "Mozilla Mail"
+#~ msgstr "Mozilla Mail"
+
+#~ msgid "Mozilla Thunderbird"
+#~ msgstr "Mozilla Thunderbird"
+
+#~ msgid "Netscape Communicator"
+#~ msgstr "Netscape Communicator"
+
+#~ msgid "SeaMonkey"
+#~ msgstr "SeaMonkey 瀏覽器"
+
+#~ msgid "SeaMonkey Mail"
+#~ msgstr "SeaMonkey 郵件"
+
+#~ msgid "Sylpheed"
+#~ msgstr "Sylpheed"
+
+#~ msgid "Sylpheed-Claws"
+#~ msgstr "Sylpheed-Claws"
+
+#~ msgid "Thunderbird"
+#~ msgstr "Thunderbird"
+
+#~ msgid "Include _panel"
+#~ msgstr "包含面板(_P)"
+
+#~ msgid "Re_fresh rate:"
+#~ msgstr "更新頻率(_F):"
+
+#~ msgid "Monitors"
+#~ msgstr "螢幕"
+
+#~ msgid ""
+#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "This program installs a RANDR profile for multi-monitor setups into\n"
+#~ "a systemwide location.  The resulting profile will get used when\n"
+#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
+#~ "\n"
+#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+#~ "xml\n"
+#~ "\n"
+#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
+#~ "            the systemwide directory for RANDR configurations,\n"
+#~ "            so the result will typically be %s/DEST_NAME\n"
+#~ msgstr ""
+#~ "用法：%s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "這個程式會安裝 RANDR 設定組合把多螢幕設定至\n"
+#~ "系統層的位置。產生的設定組合會在 RANDR 外掛程式\n"
+#~ "在 gnome-settings-daemon 中執行時使用。\n"
+#~ "\n"
+#~ "SOURCE_FILE - 完整路徑名稱，通常是 /home/username/.config/monitors.xml\n"
+#~ "\n"
+#~ "DEST_NAME - 已安裝檔案的相對名稱。這會放置在\n"
+#~ "            RANDR 組態的系統層級目錄中，因此結果\n"
+#~ "            通常會是 %s/DEST_NAME\n"
+
+#~ msgid "This program can only be used by the root user"
+#~ msgstr "這個程式只能由 root 使用者來使用"
+
+#~ msgid "The source filename must be absolute"
+#~ msgstr "來源檔案名稱必須是絕對路徑"
+
+#~ msgid "%s must be a regular file\n"
+#~ msgstr "%s 必須為正規的檔案\n"
+
+#~ msgid "This program must only be run through pkexec(1)"
+#~ msgstr "這個程式必須只透過 pkexec(1) 執行"
+
+#~ msgid "PKEXEC_UID must be set to an integer value"
+#~ msgstr "PKEXEC_UID 必須設定為整數值"
+
+#~ msgid "%s must be owned by you\n"
+#~ msgstr "%s 的擁有者必須是您\n"
+
+#~ msgid "%s must not have any directory components\n"
+#~ msgstr "%s 必須沒有任何目錄元素\n"
+
+#~ msgid "%s must be a directory\n"
+#~ msgstr "%s 必須是目錄\n"
+
+#~ msgid "Could not open %s/%s: %s\n"
+#~ msgstr "無法開啟 %s/%s：%s\n"
+
+#~ msgid "Could not rename %s to %s: %s\n"
+#~ msgstr "無法將 %s 的名稱更改為 %s：%s\n"
+
+#~ msgid ""
+#~ "Authentication is required to install multi-monitor settings for all users"
+#~ msgstr "安裝多螢幕設定值給所有使用者需要驗證"
+
+#~ msgid "Install multi-monitor settings for the whole system"
+#~ msgstr "將多螢幕設定值安裝到全系統"
+
+#~ msgid "%d Hz"
+#~ msgstr "%d Hz"
+
+#~ msgid "Monitor: %s"
+#~ msgstr "顯示器：%s"
+
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "鍵盤捷徑鍵"
+
+#~ msgid "Assign shortcut keys to commands"
+#~ msgstr "為不同的指令分配捷徑鍵"
+
+#~ msgid "Beep when a _modifier key is pressed"
+#~ msgstr "當按下特殊按鍵時發出聲響(_M)"
+
+#~ msgid "Beep when a _toggle key is pressed"
+#~ msgstr "當按下切換按鍵時發出聲響(_T)"
+
+#~ msgid "Beep when a key is pr_essed"
+#~ msgstr "當按下任何按鍵時發出聲響(_E)"
+
+#~ msgid "Beep when a key is reje_cted"
+#~ msgstr "如果拒絕按鍵動作則發出聲響(_C)"
+
+#~ msgid "Beep when key is _accepted"
+#~ msgstr "如果接受按鍵動作則發出聲響(_A)"
+
+#~ msgid "Beep when key is _rejected"
+#~ msgstr "如果拒絕按鍵動作則發出聲響(_R)"
+
+#~ msgid "Flash _window titlebar"
+#~ msgstr "閃動視窗標題列(_W)"
+
+#~ msgid "Flash entire _screen"
+#~ msgstr "閃動整個螢幕(_S)"
+
+#~ msgid "Keyboard Accessibility Audio Feedback"
+#~ msgstr "鍵盤無障礙功能音效回饋"
+
+#~ msgid "Show _visual feedback for the alert sound"
+#~ msgstr "在警示音效中顯示視覺回饋(_V)"
+
+#~ msgid "Visual cues for sounds"
+#~ msgstr "音效的視覺化提示"
+
+#~ msgid "All_ow postponing of breaks"
+#~ msgstr "可以暫時放棄休息(_O)"
+
+#~ msgid "Audio _Feedback..."
+#~ msgstr "音效回饋(_F)…"
+
+#~ msgid "Check if breaks are allowed to be postponed"
+#~ msgstr "選用這個設定可以讓您暫時放棄休息"
+
+#~ msgid "Disa_ble sticky keys if two keys are pressed together"
+#~ msgstr "如果同時按下任何兩鍵則關閉黏性鍵功能(_B)"
+
+#~ msgid "Duration of the break when typing is disallowed"
+#~ msgstr "指定休息時間長度，這段期間內不允許使用鍵盤"
+
+#~ msgid "Duration of work before forcing a break"
+#~ msgstr "強制休息前可以工作的時間"
+
+#~ msgid "Keyboard Preferences"
+#~ msgstr "鍵盤偏好設定"
+
+#~ msgid ""
+#~ "Lock screen after a certain duration to help prevent repetitive keyboard "
+#~ "use injuries"
+#~ msgstr "每隔某段時間鎖定畫面，避免因為不斷使用鍵盤導致手部受損"
+
+#~ msgid "Typing Break"
+#~ msgstr "休息提示"
+
+#~ msgid "_Accessibility features can be toggled with keyboard shortcuts"
+#~ msgstr "允許使用鍵盤捷徑鍵開啟和關閉無障礙功能(_A)"
+
+#~ msgid "_Break interval lasts:"
+#~ msgstr "休息時間為(_B):"
+
+#~ msgid "_Ignore fast duplicate keypresses"
+#~ msgstr "忽略快速重複按鍵(_I)"
+
+#~ msgid "_Lock screen to enforce typing break"
+#~ msgstr "透過鎖定畫面來強制休息(_L)"
+
+#~ msgid "_Only accept long keypresses"
+#~ msgstr "按下某鍵不放，達到指定時間後方會生效(_O)"
+
+#~ msgid "_Simulate simultaneous keypresses"
+#~ msgstr "模擬同時按鍵(_S)"
+
+#~ msgid "_Work interval lasts:"
+#~ msgstr "工作時間為(_W):"
+
+#~ msgid "Set your keyboard preferences"
+#~ msgstr "修改鍵盤偏好設定"
+
+#~ msgid "Unable to load stock icon '%s'\n"
+#~ msgstr "無法載入圖示‘%s’\n"
+
+#~ msgid "gesture|Move left"
+#~ msgstr "向左劃"
+
+#~ msgid "gesture|Move right"
+#~ msgstr "向右劃"
+
+#~ msgid "gesture|Move up"
+#~ msgstr "向上劃"
+
+#~ msgid "gesture|Move down"
+#~ msgstr "向下劃"
+
+#~ msgid "gesture|Disabled"
+#~ msgstr "停用手勢"
+
+#~ msgid ""
+#~ "Accessibility features can be turned on or off with keyboard shortcuts"
+#~ msgstr "允許使用鍵盤捷徑鍵開啟和關閉無障礙功能"
+
+#~ msgid "I need assistance with:"
+#~ msgstr "我需要協助："
+
+#~ msgid "_Postpone Break"
+#~ msgstr "停止休息(_P)"
+
+#~ msgid "_Take a Break"
+#~ msgstr "休息一下(_T)"
+
+#~ msgid "Take a break now (next in %dm)"
+#~ msgstr "現在休息（剩下 %d分）"
+
+#~ msgid "%d minute until the next break"
+
+#~ msgid_plural "%d minutes until the next break"
+#~ msgstr[0] "距離休息時間還有 %d 分鐘"
+
+#~ msgid "Take a break now (next in less than one minute)"
+#~ msgstr "現在休息（剩下不到一分鐘）"
+
+#~ msgid "Less than one minute until the next break"
+#~ msgstr "距離休息時間少於 1 分鐘"
+
+#~ msgid ""
+#~ "Unable to bring up the typing break properties dialog with the following "
+#~ "error: %s"
+#~ msgstr "無法顯示「休息提示」偏好設定對話方塊，因為出現以下的錯誤：%s"
+
+#~ msgid "Written by Richard Hult <richard@imendio.com>"
+#~ msgstr "由 Richard Hult <richard@imendio.com> 編寫"
+
+#~ msgid "Eye candy added by Anders Carlsson"
+#~ msgstr "由 Anders Carlsson 加入視覺效果"
+
+#~ msgid "A computer break reminder."
+#~ msgstr "在使用電腦時發出休息提示的小工具。"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "如對翻譯有任何意見，請送一封電子郵件給\n"
+#~ "以下地址，GNOME 翻譯團隊會盡快回覆您：\n"
+#~ "zh-l10n@lists.linux.org.tw\n"
+#~ "\n"
+#~ "Woodman Tuen <wmtuen@gmail.com>, 2004-07"
+
+#~ msgid "Don't check whether the notification area exists"
+#~ msgstr "不要檢查通知區是否存在"
+
+#~ msgid "Typing Monitor"
+#~ msgstr "休息提示小程式"
+
+#~ msgid ""
+#~ "The typing monitor uses the notification area to display information. You "
+#~ "don't seem to have a notification area on your panel. You can add it by "
+#~ "right-clicking on your panel and choosing 'Add to panel', selecting "
+#~ "'Notification area' and clicking 'Add'."
+#~ msgstr ""
+#~ "休息提示小程式需要透過程式狀態通知區來顯示資訊，可是面板中並沒有該區域。您"
+#~ "可以在面板上按滑鼠右邊按鈕，選取「加入至面板」及其中的「程式狀態通知區」"
+#~ "後，再按「新增」。"
+
+#~ msgid "Opera"
+#~ msgstr "Opera"
+
+#~ msgid "Make Default"
+#~ msgstr "成為預設值"
+
+#~ msgid "Panel icon"
+#~ msgstr "面板圖示"
+
+#~ msgid "Sa_me image in all monitors"
+#~ msgstr "所有螢幕都使用相同圖片(_M)"
+
+#~ msgid "_Show monitors in panel"
+#~ msgstr "在面板顯示螢幕(_S)"
+
+#~ msgid "The monitor configuration has been saved"
+#~ msgstr "顯示器組態已儲存"
+
+#~ msgid "This configuration will be used the next time someone logs in."
+#~ msgstr "這個組態會在下次有使用者登入後使用。"
+
+#~ msgid "Could not set the default configuration for monitors"
+#~ msgstr "無法設定預設的顯示器組態"
+
+#~ msgid "Mouse"
+#~ msgstr "滑鼠"
+
+#~ msgid "Close the control-center when a task is activated"
+#~ msgstr "執行設定後關閉控制中心"
+
+#~ msgid "Exit shell on add or remove action performed"
+#~ msgstr "增加彧移除動作進行時離開 shell"
+
+#~ msgid "Exit shell on help action performed"
+#~ msgstr "求助動作進行時離開 shell"
+
+#~ msgid "Exit shell on start action performed"
+#~ msgstr "啟動動作進行時離開 shell"
+
+#~ msgid "Exit shell on upgrade or uninstall action performed"
+#~ msgstr "升級及移除動作進行時離開 shell"
+
+#~ msgid ""
+#~ "Indicates whether to close the shell when a help action is performed."
+#~ msgstr "指示求助動作進行時是否離開 shell。"
+
+#~ msgid ""
+#~ "Indicates whether to close the shell when a start action is performed."
+#~ msgstr "指示啟動動作進行時是否離開 shell。"
+
+#~ msgid ""
+#~ "Indicates whether to close the shell when an add or remove action is "
+#~ "performed."
+#~ msgstr "指示增加或移除動作進行時是否離開 shell。"
+
+#~ msgid ""
+#~ "Indicates whether to close the shell when an upgrade or uninstall action "
+#~ "is performed."
+#~ msgstr "指示升級或移除動作進行時是否離開 shell。"
+
+#~ msgid "Task names and associated .desktop files"
+#~ msgstr "設定名稱及相關的 .desktop 檔"
+
+#~ msgid ""
+#~ "The task name to be displayed in the control-center followed by a \";\" "
+#~ "separator then the filename of an associated .desktop file to launch for "
+#~ "that task."
+#~ msgstr ""
+#~ "在“;”前的是 顯示在控制中心的設定名稱（因此需要翻譯），而其後相關 .desktop "
+#~ "檔案是用作執行該設定。"
+
+#~ msgid ""
+#~ "[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;"
+#~ "default-applications.desktop,Add Printer;gnome-cups-manager.desktop]"
+#~ msgstr ""
+#~ "[更改佈景主題;gtk-theme-selector.desktop,設定首選應用程式;default-"
+#~ "applications.desktop,加入印表機;gnome-cups-manager.desktop]"
+
+#~ msgid ""
+#~ "if true, the control-center will close when a \"Common Task\" is "
+#~ "activated."
+#~ msgstr "如設定為‘true’，控制中心會在「一般工作」使用後關閉。"
+
+#~ msgid "The GNOME configuration tool"
+#~ msgstr "GNOME 設定工具"
+
+#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會顯示 OpenType 字型的縮圖。"
+
+#~ msgid "If set to true, then PCF fonts will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會顯示 PCF 字型的縮圖。"
+
+#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會顯示 TrueType 字型的縮圖。"
+
+#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
+#~ msgstr "如設定為‘true’，則會顯示 Type1 字型的縮圖。"
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for OpenType fonts."
+#~ msgstr "本設定鍵指定了用來製作 OpenType 字型縮圖的指令。"
+
+#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
+#~ msgstr "本設定鍵指定了用來製作 PCF 字型縮圖的指令。"
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for TrueType fonts."
+#~ msgstr "本設定鍵指定了用來製作 TrueType 字型縮圖的指令。"
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for Type1 fonts."
+#~ msgstr "本設定鍵指定了用來製作 Type1 字型縮圖的指令。"
+
+#~ msgid "Thumbnail command for OpenType fonts"
+#~ msgstr "製作 OpenType 字型縮圖的指令"
+
+#~ msgid "Thumbnail command for PCF fonts"
+#~ msgstr "製作 PCF 字型縮圖的指令"
+
+#~ msgid "Thumbnail command for TrueType fonts"
+#~ msgstr "製作 TrueType 字型縮圖的指令"
+
+#~ msgid "Thumbnail command for Type1 fonts"
+#~ msgstr "製作 Type1 字型縮圖的指令"
+
+#~ msgid "Whether to thumbnail OpenType fonts"
+#~ msgstr "是否為 OpenType 字型製作縮圖"
+
+#~ msgid "Whether to thumbnail PCF fonts"
+#~ msgstr "是否為 PCF 字型製作縮圖"
+
+#~ msgid "Whether to thumbnail TrueType fonts"
+#~ msgstr "是否為 TrueType 字型製作縮圖"
+
+#~ msgid "Whether to thumbnail Type1 fonts"
+#~ msgstr "是否為 Type1 字型製作縮圖"
+
+#~ msgid "Style:"
+#~ msgstr "字款："
+
+#~ msgid "Size:"
+#~ msgstr "大小："
+
+#~ msgid "Copyright:"
+#~ msgstr "版權："
+
+#~ msgid "Installed"
+#~ msgstr "已安裝"
+
+#~ msgid "Install Failed"
+#~ msgstr "安裝失敗"
+
+#~ msgid "usage: %s fontfile\n"
+#~ msgstr "用法：%s 字型檔\n"
+
+#~ msgid "I_nstall Font"
+#~ msgstr "安裝字型(_N)"
+
+#~ msgid "Font Viewer"
+#~ msgstr "字型檢視程式"
+
+#~ msgid "Preview fonts"
+#~ msgstr "預覽字型"
+
+#~ msgid "Text to thumbnail (default: Aa)"
+#~ msgstr "文字轉為縮圖（預設：Aa）"
+
+#~ msgid "TEXT"
+#~ msgstr "文字"
+
+#~ msgid "Font size (default: 64)"
+#~ msgstr "字型大小（預設：64）"
+
+#~ msgid "SIZE"
+#~ msgstr "大小"
+
+#~ msgid "FONT-FILE OUTPUT-FILE"
+#~ msgstr "字型檔 輸出檔"
 
 #~ msgid "Image/label border"
 #~ msgstr "圖片/標籤邊框"
@@ -2321,9 +3868,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "Unable to open address book"
 #~ msgstr "無法開啟地址薄"
 
-#~ msgid "About %s"
-#~ msgstr "關於 %s"
-
 #~ msgid "A_IM/iChat:"
 #~ msgstr "A_IM/iChat:"
 
@@ -2336,9 +3880,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "Address"
 #~ msgstr "地址"
 
-#~ msgid "C_ity:"
-#~ msgstr "城市(_I):"
-
 #~ msgid "C_ompany:"
 #~ msgstr "公司(_O):"
 
@@ -2346,28 +3887,22 @@ msgstr "所有設定值(_A)"
 #~ msgstr "行事曆(_N):"
 
 #~ msgid "Change Passwo_rd..."
-#~ msgstr "變更密碼(_R)..."
+#~ msgstr "變更密碼(_R)…"
 
 #~ msgid "Ci_ty:"
 #~ msgstr "城市(_T):"
-
-#~ msgid "Co_untry:"
-#~ msgstr "國家/地區(_U):"
 
 #~ msgid "Cou_ntry:"
 #~ msgstr "國家/地區(_N):"
 
 #~ msgid "Disable _Fingerprint Login..."
-#~ msgstr "停用指紋登入(_F)..."
+#~ msgstr "停用指紋登入(_F)…"
 
 #~ msgid "Email"
 #~ msgstr "電子郵件"
 
 #~ msgid "Enable _Fingerprint Login..."
-#~ msgstr "啟用指紋登入(_F)..."
-
-#~ msgid "Full Name"
-#~ msgstr "全名"
+#~ msgstr "啟用指紋登入(_F)…"
 
 #~ msgid "Hom_e:"
 #~ msgstr "住家(_E):"
@@ -2447,9 +3982,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "_Manager:"
 #~ msgstr "總管(_M):"
 
-#~ msgid "_Mobile:"
-#~ msgstr "手機(_M):"
-
 #~ msgid "_Profession:"
 #~ msgstr "職業(_P):"
 
@@ -2462,56 +3994,11 @@ msgstr "所有設定值(_A)"
 #~ msgid "_Work:"
 #~ msgstr "工作(_W)"
 
-#~ msgid "_Yahoo:"
-#~ msgstr "_Yahoo:"
-
 #~ msgid "_Zip/Postal code:"
 #~ msgstr "郵遞區號(_Z):"
 
 #~ msgid "Set your personal information"
 #~ msgstr "設定您的個人資訊"
-
-#~ msgid ""
-#~ "You are not allowed to access the device. Contact your system "
-#~ "administrator."
-#~ msgstr "您不被允許使用這個裝置。請連絡您的系統管理者。"
-
-#~ msgid "The device is already in use."
-#~ msgstr "該裝置已經在使用中。"
-
-#~ msgid "An internal error occured"
-#~ msgstr "發生了內部的錯誤"
-
-#~ msgid "Delete registered fingerprints?"
-#~ msgstr "是否刪除已註冊的指紋？"
-
-#~ msgid "_Delete Fingerprints"
-#~ msgstr "刪除指紋(_D)"
-
-#~ msgid ""
-#~ "Do you want to delete your registered fingerprints so fingerprint login "
-#~ "is disabled?"
-#~ msgstr "您確定要刪除已註冊的指紋嗎？這麼一來將會停用指紋登入。"
-
-#~ msgid "Done!"
-#~ msgstr "完成！"
-
-#~ msgid "Could not start finger capture on '%s' device"
-#~ msgstr "無法使用「%s」裝置上的指紋捕捉"
-
-#~ msgid "Could not access any fingerprint readers"
-#~ msgstr "無法存取任何指紋辨識器"
-
-#~ msgid "Please contact your system administrator for help."
-#~ msgstr "請連絡您的系統管理員來幫忙。"
-
-#~ msgid "Enable Fingerprint Login"
-#~ msgstr "啟用指紋登入"
-
-#~ msgid ""
-#~ "To enable fingerprint login, you need to save one of your fingerprints, "
-#~ "using the '%s' device."
-#~ msgstr "要啟用指紋登入，您需要使用「%s」裝置儲存您的指紋。"
 
 #~ msgid "Swipe finger on reader"
 #~ msgstr "將手指在辨識器上刷一下"
@@ -2519,46 +4006,8 @@ msgstr "所有設定值(_A)"
 #~ msgid "Place finger on reader"
 #~ msgstr "將手指放在辨識器上"
 
-#~ msgid "Left index finger"
-#~ msgstr "左手食指"
-
-#~ msgid "Left little finger"
-#~ msgstr "左手小指"
-
-#~ msgid "Left middle finger"
-#~ msgstr "左手中指"
-
-#~ msgid "Left ring finger"
-#~ msgstr "左手無名指"
-
-#~ msgid "Left thumb"
-#~ msgstr "左手姆指"
-
-#~ msgid "Other finger: "
-#~ msgstr "其他手指:"
-
-#~ msgid "Right index finger"
-#~ msgstr "右手食指"
-
-#~ msgid "Right little finger"
-#~ msgstr "右手小指"
-
-#~ msgid "Right middle finger"
-#~ msgstr "右手中指"
-
-#~ msgid "Right ring finger"
-#~ msgstr "右手無名指"
-
-#~ msgid "Right thumb"
-#~ msgstr "右手姆指"
-
 #~ msgid "Select finger"
 #~ msgstr "選擇手指"
-
-#~ msgid ""
-#~ "Your fingerprint was successfully saved. You should now be able to log in "
-#~ "using your fingerprint reader."
-#~ msgstr "您的指紋已成功的儲存了。現在應該可以使用您的指紋辨識器來登入。"
 
 #~ msgid "Child exited unexpectedly"
 #~ msgstr "子程式突然離開"
@@ -2569,37 +4018,8 @@ msgstr "所有設定值(_A)"
 #~ msgid "Could not shutdown backend_stdout IO channel: %s"
 #~ msgstr "無法關閉 shutdown backend_stdout IO channel: %s"
 
-#~ msgid "Authenticated!"
-#~ msgstr "通過認證！"
-
-#~ msgid ""
-#~ "Your password has been changed since you initially authenticated! Please "
-#~ "re-authenticate."
-#~ msgstr "在通過認證後您的密碼已被變更！請重新認證。"
-
-#~ msgid "That password was incorrect."
-#~ msgstr "密碼錯誤。"
-
-#~ msgid "Your password has been changed."
-#~ msgstr "您的密碼已經變更。"
-
 #~ msgid "System error: %s."
 #~ msgstr "系統錯誤：%s。"
-
-#~ msgid "The password is too short."
-#~ msgstr "密碼過短。"
-
-#~ msgid "The password is too simple."
-#~ msgstr "密碼過份簡單。"
-
-#~ msgid "The old and new passwords are too similar."
-#~ msgstr "舊密碼與新密碼太相似了。"
-
-#~ msgid "The new password must contain numeric or special character(s)."
-#~ msgstr "新的密碼必須包含數字或特殊字元。"
-
-#~ msgid "The old and new passwords are the same."
-#~ msgstr "舊密碼與新密碼是相同的。"
 
 #~ msgid "Unable to launch %s: %s"
 #~ msgstr "無法執行 %s：%s"
@@ -2611,32 +4031,20 @@ msgstr "所有設定值(_A)"
 #~ msgstr "發生了系統錯誤"
 
 #~ msgid "Checking password..."
-#~ msgstr "檢查密碼..."
+#~ msgstr "檢查密碼…"
 
 #~ msgid "Click <b>Change password</b> to change your password."
 #~ msgstr "按下<b>變更密碼</b>來變更您的密碼。"
-
-#~ msgid "Please type your password in the <b>New password</b> field."
-#~ msgstr "請在<b>新密碼</b>中輸新的密碼。"
 
 #~ msgid ""
 #~ "Please type your password again in the <b>Retype new password</b> field."
 #~ msgstr "請在<b>再輸入新的密碼</b>中，再次輸入您的密碼。"
 
-#~ msgid "The two passwords are not equal."
-#~ msgstr "兩個密碼不是相同。"
-
 #~ msgid "Change pa_ssword"
 #~ msgstr "變更密碼(_S)"
 
-#~ msgid "Change password"
-#~ msgstr "變更密碼"
-
 #~ msgid "Change your password"
 #~ msgstr "改變您的密碼"
-
-#~ msgid "Current _password:"
-#~ msgstr "目前密碼(_P):"
 
 #~ msgid ""
 #~ "To change your password, enter your current password in the field below "
@@ -2650,12 +4058,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "_Authenticate"
 #~ msgstr "認證(_A)"
-
-#~ msgid "_New password:"
-#~ msgstr "新密碼(_N):"
-
-#~ msgid "_Retype new password:"
-#~ msgstr "再輸入新的密碼(_R):"
 
 #~ msgid "Accessible Lo_gin"
 #~ msgstr "無障礙登入(_G)"
@@ -2692,9 +4094,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "_Enable assistive technologies"
 #~ msgstr "啟用輔助科技(_E)"
 
-#~ msgid "_Keyboard Accessibility"
-#~ msgstr "鍵盤可存取性(_K)"
-
 #~ msgid "_Mouse Accessibility"
 #~ msgstr "滑鼠無障礙功能(_M)"
 
@@ -2717,6 +4116,7 @@ msgstr "所有設定值(_A)"
 #~ "The font selected is %d point large, and may make it difficult to "
 #~ "effectively use the computer.  It is recommended that you select a size "
 #~ "smaller than %d."
+
 #~ msgid_plural ""
 #~ "The font selected is %d points large, and may make it difficult to "
 #~ "effectively use the computer. It is recommended that you select a size "
@@ -2729,6 +4129,7 @@ msgstr "所有設定值(_A)"
 #~ "The font selected is %d point large, and may make it difficult to "
 #~ "effectively use the computer.  It is recommended that you select a "
 #~ "smaller sized font."
+
 #~ msgid_plural ""
 #~ "The font selected is %d points large, and may make it difficult to "
 #~ "effectively use the computer. It is recommended that you select a smaller "
@@ -2759,7 +4160,7 @@ msgstr "所有設定值(_A)"
 #~ msgstr "頁面"
 
 #~ msgid "[WALLPAPER...]"
-#~ msgstr "[桌布...]"
+#~ msgstr "[桌布…]"
 
 #~ msgid "Default Pointer"
 #~ msgstr "預設鼠標"
@@ -2811,9 +4212,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "The current theme suggests a font."
 #~ msgstr "本佈景主題建議使用指定的字型。"
 
-#~ msgid "Background"
-#~ msgstr "背景"
-
 #~ msgid "Best _shapes"
 #~ msgstr "最佳形狀(_S)"
 
@@ -2824,16 +4222,10 @@ msgstr "所有設定值(_A)"
 #~ msgstr "顏色(_O):"
 
 #~ msgid "C_ustomize..."
-#~ msgstr "自訂(_U)..."
-
-#~ msgid "Center"
-#~ msgstr "置中"
+#~ msgstr "自訂(_U)…"
 
 #~ msgid "Changing your cursor theme takes effect the next time you log in."
 #~ msgstr "改變游標主題會在下次登入時生效。"
-
-#~ msgid "Colors"
-#~ msgstr "顏色"
 
 #~ msgid "Controls"
 #~ msgstr "介面控制"
@@ -2842,16 +4234,13 @@ msgstr "所有設定值(_A)"
 #~ msgstr "自訂佈景主題"
 
 #~ msgid "D_etails..."
-#~ msgstr "詳細設定(_E)..."
+#~ msgstr "詳細設定(_E)…"
 
 #~ msgid "Des_ktop font:"
 #~ msgstr "桌面字型(_K):"
 
 #~ msgid "Font Rendering Details"
 #~ msgstr "描繪字型的設定細節"
-
-#~ msgid "Fonts"
-#~ msgstr "字型"
 
 #~ msgid "Get more backgrounds online"
 #~ msgstr "線上取得更多背景"
@@ -2880,32 +4269,17 @@ msgstr "所有設定值(_A)"
 #~ msgid "Open a dialog to specify the color"
 #~ msgstr "開啟對話方塊來指定顏色"
 
-#~ msgid "Pointer"
-#~ msgstr "指標"
-
 #~ msgid "R_esolution:"
 #~ msgstr "解析度(_E):"
 
 #~ msgid "Save Theme As..."
-#~ msgstr "另存佈景主題..."
+#~ msgstr "另存佈景主題…"
 
 #~ msgid "Save _As..."
-#~ msgstr "另存新檔(_A)..."
-
-#~ msgid "Save _background image"
-#~ msgstr "儲存背景圖片(_B)"
-
-#~ msgid "Scale"
-#~ msgstr "縮放"
-
-#~ msgid "Smoothing"
-#~ msgstr "平滑化"
+#~ msgstr "另存新檔(_A)…"
 
 #~ msgid "Solid color"
 #~ msgstr "單一色彩"
-
-#~ msgid "Span"
-#~ msgstr "跨越"
 
 #~ msgid "Stretch"
 #~ msgstr "延伸"
@@ -2937,9 +4311,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "Theme"
 #~ msgstr "佈景主題"
 
-#~ msgid "Tile"
-#~ msgstr "鋪排"
-
 #~ msgid "VB_GR"
 #~ msgstr "VB_GR"
 
@@ -2948,9 +4319,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "Window Border"
 #~ msgstr "視窗邊框"
-
-#~ msgid "_Application font:"
-#~ msgstr "應用程式字型(_A):"
 
 #~ msgid "_BGR"
 #~ msgstr "_BGR"
@@ -2964,14 +4332,8 @@ msgstr "所有設定值(_A)"
 #~ msgid "_Fixed width font:"
 #~ msgstr "固定寬度字型(_F):"
 
-#~ msgid "_Full"
-#~ msgstr "完整(_F)"
-
-#~ msgid "_Input boxes:"
-#~ msgstr "輸入視窗(_I):"
-
 #~ msgid "_Install..."
-#~ msgstr "安裝(_I)..."
+#~ msgstr "安裝(_I)…"
 
 #~ msgid "_Medium"
 #~ msgstr "中(_M)"
@@ -3030,46 +4392,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "Gnome Theme Package"
 #~ msgstr "Gnome 佈景主題套件"
 
-#~ msgid "No Desktop Background"
-#~ msgstr "無桌面背景"
-
-#~ msgid "Slide Show"
-#~ msgstr "幻燈片顯示"
-
-#~ msgid "Image"
-#~ msgstr "圖片"
-
-#~ msgid "multiple sizes"
-#~ msgstr "多重尺寸"
-
-#~ msgid "%d %s by %d %s"
-#~ msgstr "寛%d %s 高%d %s"
-
-#~ msgid "pixel"
-#~ msgid_plural "pixels"
-#~ msgstr[0] "像素"
-
-#~ msgid ""
-#~ "<b>%s</b>\n"
-#~ "%s, %s\n"
-#~ "Folder: %s"
-#~ msgstr ""
-#~ "<b>%s</b>\n"
-#~ "%s,  %s\n"
-#~ "資料夾：%s"
-
-#~ msgid ""
-#~ "<b>%s</b>\n"
-#~ "%s\n"
-#~ "Folder: %s"
-#~ msgstr ""
-#~ "<b>%s</b>\n"
-#~ "%s\n"
-#~ "資料夾：%s"
-
-#~ msgid "Image missing"
-#~ msgstr "遺失圖片"
-
 #~ msgid "Cannot install theme"
 #~ msgstr "不能安裝主題"
 
@@ -3107,9 +4429,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "GNOME Theme %s correctly installed"
 #~ msgstr "GNOME 佈景主題 %s 已正確地安裝"
-
-#~ msgid "Failed to create temporary directory"
-#~ msgstr "建構暫存目錄失敗"
 
 #~ msgid "New themes have been successfully installed."
 #~ msgstr "新的佈景主題已經安裝完成。"
@@ -3322,9 +4641,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "_Select windows when the mouse moves over them"
 #~ msgstr "當滑鼠移動至視窗時選取該視窗(_S)"
 
-#~ msgid "seconds"
-#~ msgstr "秒"
-
 #~ msgid "Set your window properties"
 #~ msgstr "設定視窗屬性"
 
@@ -3334,17 +4650,11 @@ msgstr "所有設定值(_A)"
 #~ msgid "Window manager \"%s\" has not registered a configuration tool\n"
 #~ msgstr "視窗管理員“%s”沒有登記任何設定工具\n"
 
-#~ msgid "Maximize"
-#~ msgstr "最大化"
-
 #~ msgid "Maximize Vertically"
 #~ msgstr "垂直最大化"
 
 #~ msgid "Maximize Horizontally"
 #~ msgstr "水平最大化"
-
-#~ msgid "Minimize"
-#~ msgstr "最小化"
 
 #~ msgid "Roll up"
 #~ msgstr "捲起"
@@ -3354,9 +4664,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "Hide on start (useful to preload the shell)"
 #~ msgstr "啟動時隱藏 (要預先載入 shell 時很有用)"
-
-#~ msgid "Filter"
-#~ msgstr "篩選"
 
 #~ msgid "Groups"
 #~ msgstr "類別"
@@ -3369,9 +4676,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "No matches found."
 #~ msgstr "找不到符合項。"
-
-#~ msgid "Other"
-#~ msgstr "其它"
 
 #~ msgid "Start %s"
 #~ msgstr "啟動 %s"
@@ -3412,17 +4716,14 @@ msgstr "所有設定值(_A)"
 #~ msgid "Network Servers"
 #~ msgstr "網路伺服器"
 
-#~ msgid "Search"
-#~ msgstr "搜尋"
-
 #~ msgid "<b>Open</b>"
 #~ msgstr "<b>開啟</b>"
 
 #~ msgid "Rename..."
-#~ msgstr "重新命名..."
+#~ msgstr "重新命名…"
 
 #~ msgid "Send To..."
-#~ msgstr "傳送至..."
+#~ msgstr "傳送至…"
 
 #~ msgid "Move to Trash"
 #~ msgstr "移至回收筒"
@@ -3435,12 +4736,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "If you delete an item, it is permanently lost."
 #~ msgstr "如果將項目刪除，它將會永久失去。"
-
-#~ msgid "Open with \"%s\""
-#~ msgstr "以「%s」開啟"
-
-#~ msgid "Open with Default Application"
-#~ msgstr "以預設的應用程式開啟"
 
 #~ msgid "Open in File Manager"
 #~ msgstr "在檔案管理員中開啟"
@@ -3456,9 +4751,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "Yesterday %l:%M %p"
 #~ msgstr "昨天 %l:%M %p"
-
-#~ msgid "%a %l:%M %p"
-#~ msgstr "%a %l:%M %p"
 
 #~ msgid "%b %d %l:%M %p"
 #~ msgstr "%b %d %l:%M %p"
@@ -3517,9 +4809,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "A_cceleration:"
 #~ msgstr "加速度(_C):"
 
-#~ msgid "Layout _Options..."
-#~ msgstr "配置選項(_O)..."
-
 #~ msgid "_Selected layouts:"
 #~ msgstr "已選的配置(_S):"
 
@@ -3541,10 +4830,8 @@ msgstr "所有設定值(_A)"
 #~ msgstr ""
 #~ "找不到相符。\n"
 #~ "篩選 “%s” 時沒有任何匹配的項目。"
-
 #~ msgid "Unknown login ID, the user database might be corrupted"
 #~ msgstr "不明的登入 ID，使用者資料庫可能已經受損"
-
 #~ msgid ""
 #~ "Left thumb\n"
 #~ "Left middle finger\n"
@@ -3563,91 +4850,58 @@ msgstr "所有設定值(_A)"
 #~ "右手中指\n"
 #~ "右手無名指\n"
 #~ "右手小指"
-
 #~ msgid "<b>Email</b>"
 #~ msgstr "<b>電子郵件</b>"
-
 #~ msgid "<b>Home</b>"
 #~ msgstr "<b>住家</b>"
-
 #~ msgid "<b>Job</b>"
 #~ msgstr "<b>職業</b>"
-
 #~ msgid "<b>Web</b>"
 #~ msgstr "<b>Web</b>"
-
 #~ msgid "<b>Work</b>"
 #~ msgstr "<b>工作</b>"
-
 #~ msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
 #~ msgstr "<span size=\"larger\" weight=\"bold\">變更密碼</span>"
-
 #~ msgid "<b>Assistive Technologies</b>"
 #~ msgstr "<b>輔助科技</b>"
-
 #~ msgid "<b>Preferences</b>"
 #~ msgstr "<b>偏好設定</b>"
-
 #~ msgid "<b>C_olors</b>"
 #~ msgstr "<b>桌面色彩(_O)</b>"
-
 #~ msgid "<b>Preview</b>"
 #~ msgstr "<b>預覽</b>"
-
 #~ msgid "<b>_Desktop Background</b>"
 #~ msgstr "<b>桌面背景(_D)</b>"
-
 #~ msgid "<b>Visual</b>"
 #~ msgstr "<b>視覺</b>"
-
 #~ msgid "<b>Bounce Keys</b>"
 #~ msgstr "<b>啟用回鍵</b>"
-
 #~ msgid "<b>General</b>"
 #~ msgstr "<b>一般</b>"
-
 #~ msgid "<small><i>Fast</i></small>"
 #~ msgstr "<small><i>快</i></small>"
-
 #~ msgid "<small><i>Long</i></small>"
 #~ msgstr "<small><i>長</i></small>"
-
 #~ msgid "<small><i>Short</i></small>"
 #~ msgstr "<small><i>短</i></small>"
-
 #~ msgid "<small><i>Slow</i></small>"
 #~ msgstr "<small><i>慢</i></small>"
-
 #~ msgid "<b>Locate Pointer</b>"
 #~ msgstr "<b>顯示鼠標位置</b>"
-
 #~ msgid "<small><i>High</i></small>"
 #~ msgstr "<small><i>長</i></small>"
-
 #~ msgid "<small><i>Large</i></small>"
 #~ msgstr "<small><i>快</i></small>"
-
 #~ msgid "<small><i>Low</i></small>"
 #~ msgstr "<small><i>短</i></small>"
-
 #~ msgid "<small><i>Small</i></small>"
 #~ msgstr "<small><i>慢</i></small>"
-
 #~ msgid "<b>Ignore Host List</b>"
 #~ msgstr "<b>忽略主機列表</b>"
-
 #~ msgid "C_ut"
 #~ msgstr "剪下(_U)"
-
-#~ msgid "New File"
-#~ msgstr "新增檔案"
-
-#~ msgid "Open File"
-#~ msgstr "開啟檔案"
-
 #~ msgid "Save File"
 #~ msgstr "儲存檔案"
-
 #~ msgid ""
 #~ "Solid color\n"
 #~ "Horizontal gradient\n"
@@ -3656,7 +4910,6 @@ msgstr "所有設定值(_A)"
 #~ "單一色彩\n"
 #~ "水平漸層\n"
 #~ "垂直漸層"
-
 #~ msgid ""
 #~ "Text below items\n"
 #~ "Text beside items\n"
@@ -3667,7 +4920,6 @@ msgstr "所有設定值(_A)"
 #~ "文字在項目旁\n"
 #~ "只有圖示\n"
 #~ "只有文字"
-
 #~ msgid ""
 #~ "Tiled\n"
 #~ "Zoom\n"
@@ -3680,25 +4932,14 @@ msgstr "所有設定值(_A)"
 #~ "置中\n"
 #~ "縮小\n"
 #~ "填滿螢幕"
-
 #~ msgid "_Copy"
 #~ msgstr "複製(_C)"
-
 #~ msgid "_New"
 #~ msgstr "新增(_N)"
-
-#~ msgid "_Open"
-#~ msgstr "開啟(_O)"
-
-#~ msgid "_Print"
-#~ msgstr "列印(_P)"
-
 #~ msgid "_Quit"
 #~ msgstr "結束(_Q)"
-
 #~ msgid "_Save"
 #~ msgstr "儲存(_S)"
-
 #~ msgid ""
 #~ "Normal\n"
 #~ "Left\n"
@@ -3709,238 +4950,135 @@ msgstr "所有設定值(_A)"
 #~ "左邊\n"
 #~ "右邊\n"
 #~ "由上而下\n"
-
 #~ msgid "Could not apply the selected configuration"
 #~ msgstr "無法套用選取的組態"
-
 #~ msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
 #~ msgstr "無法取得 org.gnome.SettingsDaemon.XRANDR"
-
 #~ msgid "_Command:"
 #~ msgstr "指令(_C):"
-
 #~ msgid "/_About"
 #~ msgstr "/關於(_A)"
-
 #~ msgid "Screen Resolution"
 #~ msgstr "螢幕解析度"
-
 #~ msgid "<b>_Wallpaper</b>"
 #~ msgstr "<b>桌布(_W)</b>"
-
-#~ msgid "No Wallpaper"
-#~ msgstr "沒有桌布"
-
 #~ msgid "Monitor Resolution Settings"
 #~ msgstr "螢幕解析度設定值"
-
 #~ msgid "Retrieve and store legacy settings"
 #~ msgstr "讀入舊版本的設定"
-
-#~ msgid "Enable sound and associate sounds with events"
-#~ msgstr "啟用音效並將音效及不同的事件建構連繫"
-
-#~ msgid "Unknown Volume Control %d"
-#~ msgstr "不明的音量控制 %d"
-
-#~ msgid "Failed to construct test pipeline for '%s'"
-#~ msgstr "無法建立‘%s’的測試管道"
-
 #~ msgid "Not connected"
 #~ msgstr "沒有連接"
-
 #~ msgid "Autodetect"
 #~ msgstr "自動偵測"
-
 #~ msgid "ALSA - Advanced Linux Sound Architecture"
 #~ msgstr "ALSA - 先進 Linux 音效架構"
-
 #~ msgid "Artsd - ART Sound Daemon"
 #~ msgstr "Artsd - ART 音效服務程式"
-
 #~ msgid "ESD - Enlightened Sound Daemon"
 #~ msgstr "ESD - Enlightenment 音效服務程式"
-
 #~ msgid "OSS - Open Sound System"
 #~ msgstr "OSS - 開放音效系統"
-
 #~ msgid "PulseAudio Sound Server"
 #~ msgstr "Polypaudio 音效伺服器"
-
 #~ msgid "Silence"
 #~ msgstr "無聲"
-
 #~ msgid "- GNOME Sound Preferences"
 #~ msgstr " - GNOME 音效偏好設定"
-
 #~ msgid "<b>Alerts and Sound Effects</b>"
 #~ msgstr "<b>警示與聲音效果</b>"
-
 #~ msgid "<b>Audio Conferencing</b>"
 #~ msgstr "<b>音訊會議</b>"
-
 #~ msgid "<b>Default Mixer Tracks</b>"
 #~ msgstr "<b>預設混音器聲道</b>"
-
 #~ msgid "<b>Music and Movies</b>"
 #~ msgstr "<b>音樂及影片</b>"
-
 #~ msgid "<b>Sound Events</b>"
 #~ msgstr "<b>事件音效</b>"
-
 #~ msgid "<b>Sound Theme</b>"
 #~ msgstr "<b>音效佈景主題</b>"
-
 #~ msgid "Click OK to finish."
 #~ msgstr "按確定來完成"
-
-#~ msgid "Devices"
-#~ msgstr "裝置"
-
-#~ msgid "Play _alert sound"
-#~ msgstr "播放警示聲音(_A)"
-
 #~ msgid "Play _sound effects when buttons are clicked"
 #~ msgstr "當按鈕被點擊時播放音效(_S)"
-
 #~ msgid "S_ound playback:"
 #~ msgstr "聲音播放(_O):"
-
 #~ msgid ""
 #~ "Select the device and tracks to control with the keyboard. Use the Shift "
 #~ "and Control keys to select multiple tracks if required."
 #~ msgstr ""
 #~ "以鍵盤選取裝置及聲道。如需要時使用 Shift 及 Control 鍵來選擇多條聲道。"
-
 #~ msgid "So_und playback:"
 #~ msgstr "聲音播放(_U):"
-
 #~ msgid "Sou_nd capture:"
 #~ msgstr "聲音擷取(_N):"
-
-#~ msgid "Sound Preferences"
-#~ msgstr "音效偏好設定"
-
 #~ msgid "Sounds"
 #~ msgstr "音效"
-
 #~ msgid "Testing Pipeline"
 #~ msgstr "管道測試"
-
 #~ msgid "_Device:"
 #~ msgstr "裝置(_D):"
-
 #~ msgid "_Play alerts and sound effects"
 #~ msgstr "播放警示與聲音效果(_P)"
-
 #~ msgid "_Sound playback:"
 #~ msgstr "聲音播放(_S):"
-
-#~ msgid "Testing event sound"
-#~ msgstr "測試事件聲音"
-
 #~ msgid "Select Sound File"
 #~ msgstr "選取音效檔"
-
-#~ msgid "Sound files"
-#~ msgstr "聲音檔案"
-
 #~ msgid "Custom..."
-#~ msgstr "自訂..."
-
+#~ msgstr "自訂…"
 #~ msgid "Lock Screen"
 #~ msgstr "鎖定螢幕"
-
 #~ msgid "Logout"
 #~ msgstr "登出"
-
 #~ msgid "Shutdown"
 #~ msgstr "關機"
-
 #~ msgid "Enable support for GNOME assistive technologies at login"
 #~ msgstr "登入時啟用 GNOME 輔助科技支援"
-
-#~ msgid "Cloned Output"
-#~ msgstr "複製式輸出"
-
 #~ msgid "New accelerator..."
-#~ msgstr "新增捷徑鍵..."
-
-#~ msgid "Alert sound"
-#~ msgstr "警示聲音"
-
+#~ msgstr "新增捷徑鍵…"
 #~ msgid "Windows and Buttons"
 #~ msgstr "視窗與按鈕"
-
 #~ msgid "Button clicked"
 #~ msgstr "按鈕被點擊"
-
 #~ msgid "Toggle button clicked"
 #~ msgstr "切換按鈕點擊"
-
 #~ msgid "Window maximized"
 #~ msgstr "視窗最大化"
-
 #~ msgid "Window unmaximized"
 #~ msgstr "視窗取消最大化"
-
 #~ msgid "Window minimised"
 #~ msgstr "視窗最小化"
-
 #~ msgid "New e-mail"
 #~ msgstr "新郵件通知"
-
 #~ msgid "Empty trash"
 #~ msgstr "清理回收筒"
-
 #~ msgid "Long action completed (download, CD burning, etc.)"
 #~ msgstr "長時間動作已完成（下載、燒錄 CD 等等）"
-
 #~ msgid "Alerts"
 #~ msgstr "警示"
-
 #~ msgid "Information or question"
 #~ msgstr "資訊或問題"
-
 #~ msgid "Error"
 #~ msgstr "錯誤"
-
-#~ msgid "Battery warning"
-#~ msgstr "電池警示"
-
 #~ msgid "Unexpected attribute '%s' for element '%s'"
 #~ msgstr "元件「%2$s」中有未預期的屬性「%1$s」"
-
 #~ msgid "Attribute '%s' of element '%s' not found"
 #~ msgstr "找不到元件「%2$s」中的屬性「%1$s」"
-
 #~ msgid "Unexpected tag '%s', tag '%s' expected"
 #~ msgstr "未預期的標籤「%s」，應為標籤「%s」"
-
 #~ msgid "Unexpected tag '%s' inside '%s'"
 #~ msgstr "「%2$s」中有未預期的標籤「%1$s」"
-
 #~ msgid "No valid bookmark file found in data dirs"
 #~ msgstr "在資料目錄中找不到有效的書籤檔案"
-
-#~ msgid "A bookmark for URI '%s' already exists"
-#~ msgstr "URI「%s」的書籤已存在"
-
 #~ msgid "No bookmark found for URI '%s'"
 #~ msgstr "找不到 URI「%s」的書籤"
-
 #~ msgid "No MIME type defined in the bookmark for URI '%s'"
 #~ msgstr "URI「%s」書籤中沒有定義 MIME 類型"
-
 #~ msgid "No private flag has been defined in bookmark for URI '%s'"
 #~ msgstr "URI「%s」書籤中沒有私有旗幟"
-
 #~ msgid "No groups set in bookmark for URI '%s'"
 #~ msgstr "URI「%s」書籤中沒有設定群組"
-
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
 #~ msgstr "沒有名為「%s」的應用程式註冊書籤「%s」"
-
 #~ msgid ""
 #~ "Centered\n"
 #~ "Fill screen\n"
@@ -3953,25 +5091,21 @@ msgstr "所有設定值(_A)"
 #~ "縮小\n"
 #~ "放大\n"
 #~ "並排顯示"
-
 #~ msgid ""
 #~ "%s is the path where the theme files will be installed. This can not be "
 #~ "selected as the source location"
 #~ msgstr "佈景主題檔案會安裝在 %s 中。不能將其選成是原始檔的位置"
-
 #~ msgid "Just apply settings and quit"
 #~ msgstr "套用設定並離開"
-
 #~ msgid "Screen Resolution Preferences"
 #~ msgstr "畫面解析度偏好設定"
-
 #~ msgid "_Make default for this computer (%s) only"
 #~ msgstr "只在這部電腦 (%s) 中成為預設值(_M)"
-
 #, fuzzy
 #~ msgid ""
 #~ "Testing the new settings. If you don't respond in %d second the previous "
 #~ "settings will be restored."
+
 #~ msgid_plural ""
 #~ "Testing the new settings. If you don't respond in %d seconds the previous "
 #~ "settings will be restored."
@@ -3979,9 +5113,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "Keep Resolution"
 #~ msgstr "保留解析度"
-
-#~ msgid "Do you want to keep this resolution?"
-#~ msgstr "是否保留這個解析度？"
 
 #~ msgid "Use _Previous Resolution"
 #~ msgstr "使用以前的解析度(_P)"
@@ -4027,9 +5158,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "Boing"
 #~ msgstr "彈簧"
 
-#~ msgid "Siren"
-#~ msgstr "警報"
-
 #~ msgid "Clink"
 #~ msgstr "叮噹"
 
@@ -4047,17 +5175,11 @@ msgstr "所有設定值(_A)"
 #~ "代表該事件的音效檔不存在。\n"
 #~ "安裝 gnome-audio 套件可獲得一套預設的音效。"
 
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "代表該事件的音效檔不存在。"
-
 #~ msgid "The file %s is not a valid wav file"
 #~ msgstr "檔案 %s 不是有效的 wav 檔案"
 
 #~ msgid "Select sound file..."
-#~ msgstr "選取音效檔..."
-
-#~ msgid "Set as Application Font"
-#~ msgstr "指定為應用程式字型"
+#~ msgstr "選取音效檔…"
 
 #~ msgid "Sets the default application font"
 #~ msgstr "設定應用程式的預設字型"
@@ -4087,9 +5209,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "Window border theme"
 #~ msgstr "視窗邊框主題"
-
-#~ msgid "Icon theme"
-#~ msgstr "圖示主題"
 
 #~ msgid "If set to true, then installed themes will be thumbnailed."
 #~ msgstr "如設定為‘true’，則會為已安裝的佈景主題製作縮圖。"
