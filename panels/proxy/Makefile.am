@@ -1,38 +1,38 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
-cappletname = network
+cappletname = proxy
 
 ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libnetwork.la
+ccpanels_LTLIBRARIES = libproxy.la
 
 
-libnetwork_la_SOURCES = gnome-network-properties.c \
-			cc-network-panel.c \
-			cc-network-panel.h \
-			network-module.c
-libnetwork_la_LIBADD = $(PANEL_LIBS) $(GNOMECC_CAPPLETS_LIBS)
-libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
+libproxy_la_SOURCES = gnome-proxy-properties.c \
+			cc-proxy-panel.c \
+			cc-proxy-panel.h \
+			proxy-module.c
+libproxy_la_LIBADD = $(PANEL_LIBS) $(GNOMECC_CAPPLETS_LIBS)
+libproxy_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 
 @INTLTOOL_DESKTOP_RULE@
 
 uidir = $(pkgdatadir)/ui
-dist_ui_DATA = gnome-network-properties.ui
+dist_ui_DATA = gnome-proxy-properties.ui
 
 icons16dir = $(datadir)/icons/hicolor/16x16/apps
-dist_icons16_DATA = icons/16x16/gnome-network-properties.png
+dist_icons16_DATA = icons/16x16/gnome-proxy-properties.png
 icons22dir = $(datadir)/icons/hicolor/22x22/apps
-dist_icons22_DATA = icons/22x22/gnome-network-properties.png
+dist_icons22_DATA = icons/22x22/gnome-proxy-properties.png
 icons24dir = $(datadir)/icons/hicolor/24x24/apps
-dist_icons24_DATA = icons/24x24/gnome-network-properties.png
+dist_icons24_DATA = icons/24x24/gnome-proxy-properties.png
 icons32dir = $(datadir)/icons/hicolor/32x32/apps
-dist_icons32_DATA = icons/32x32/gnome-network-properties.png
+dist_icons32_DATA = icons/32x32/gnome-proxy-properties.png
 icons48dir = $(datadir)/icons/hicolor/48x48/apps
-dist_icons48_DATA = icons/48x48/gnome-network-properties.png
+dist_icons48_DATA = icons/48x48/gnome-proxy-properties.png
 iconssvgdir = $(datadir)/icons/hicolor/scalable/apps
-dist_iconssvg_DATA = icons/scalable/gnome-network-properties.svg
+dist_iconssvg_DATA = icons/scalable/gnome-proxy-properties.svg
 
 desktopdir = $(datadir)/applications
-desktop_in_files = gnome-network-panel.desktop.in
+desktop_in_files = gnome-proxy-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES = \

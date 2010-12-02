@@ -25,7 +25,7 @@
 #  include <config.h>
 #endif
 
-#include "cc-network-panel.h"
+#include "cc-proxy-panel.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -62,7 +62,7 @@ enum {
 #define LOCATION_DIR "/apps/control-center/network"
 #define CURRENT_LOCATION "/apps/control-center/network/current_location"
 
-#define GNOMECC_GNP_UI_FILE (GNOMECC_UI_DIR "/gnome-network-properties.ui")
+#define GNOMECC_GNP_UI_FILE (GNOMECC_UI_DIR "/gnome-proxy-properties.ui")
 
 static GtkWidget *details_dialog = NULL;
 static GPtrArray *ignore_hosts = NULL;

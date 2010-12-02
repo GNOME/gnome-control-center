@@ -21,21 +21,21 @@
  *
  */
 
-#include "cc-network-panel.h"
+#include "cc-proxy-panel.h"
 
-G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
+G_DEFINE_DYNAMIC_TYPE (CcProxyPanel, cc_proxy_panel, CC_TYPE_PANEL)
 
-#define NETWORK_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_NETWORK_PANEL, CcNetworkPanelPrivate))
+#define PROXY_PANEL_PRIVATE(o) \
+  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_PROXY_PANEL, CcProxyPanelPrivate))
 
-struct _CcNetworkPanelPrivate
+struct _CcProxyPanelPrivate
 {
   GtkBuilder *builder;
 };
 
 
 static void
-cc_network_panel_get_property (GObject    *object,
+cc_proxy_panel_get_property (GObject    *object,
                                guint       property_id,
                                GValue     *value,
                                GParamSpec *pspec)
@@ -48,7 +48,7 @@ cc_network_panel_get_property (GObject    *object,
 }
 
 static void
-cc_network_panel_set_property (GObject      *object,
+cc_proxy_panel_set_property (GObject      *object,
                                guint         property_id,
                                const GValue *value,
                                GParamSpec   *pspec)
@@ -61,9 +61,9 @@ cc_network_panel_set_property (GObject      *object,
 }
 
 static void
-cc_network_panel_dispose (GObject *object)
+cc_proxy_panel_dispose (GObject *object)
 {
-  CcNetworkPanelPrivate *priv = CC_NETWORK_PANEL (object)->priv;
+  CcProxyPanelPrivate *priv = CC_PROXY_PANEL (object)->priv;
 
   if (!priv->builder)
     {
@@ -71,40 +71,40 @@ cc_network_panel_dispose (GObject *object)
       priv->builder = NULL;
     }
 
-  G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_proxy_panel_parent_class)->dispose (object);
 }
 
 static void
-cc_network_panel_finalize (GObject *object)
+cc_proxy_panel_finalize (GObject *object)
 {
-  G_OBJECT_CLASS (cc_network_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_proxy_panel_parent_class)->finalize (object);
 }
 
 static void
-cc_network_panel_class_init (CcNetworkPanelClass *klass)
+cc_proxy_panel_class_init (CcProxyPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (CcNetworkPanelPrivate));
+  g_type_class_add_private (klass, sizeof (CcProxyPanelPrivate));
 
-  object_class->get_property = cc_network_panel_get_property;
-  object_class->set_property = cc_network_panel_set_property;
-  object_class->dispose = cc_network_panel_dispose;
-  object_class->finalize = cc_network_panel_finalize;
+  object_class->get_property = cc_proxy_panel_get_property;
+  object_class->set_property = cc_proxy_panel_set_property;
+  object_class->dispose = cc_proxy_panel_dispose;
+  object_class->finalize = cc_proxy_panel_finalize;
 }
 
 static void
-cc_network_panel_class_finalize (CcNetworkPanelClass *klass)
+cc_proxy_panel_class_finalize (CcProxyPanelClass *klass)
 {
 }
 
 static void
-cc_network_panel_init (CcNetworkPanel *self)
+cc_proxy_panel_init (CcProxyPanel *self)
 {
-  CcNetworkPanelPrivate *priv;
+  CcProxyPanelPrivate *priv;
   GtkWidget *widget;
 
-  priv = self->priv = NETWORK_PANEL_PRIVATE (self);
+  priv = self->priv = PROXY_PANEL_PRIVATE (self);
 
 
   priv->builder = gtk_builder_new ();
@@ -117,11 +117,11 @@ cc_network_panel_init (CcNetworkPanel *self)
 }
 
 void
-cc_network_panel_register (GIOModule *module)
+cc_proxy_panel_register (GIOModule *module)
 {
-  cc_network_panel_register_type (G_TYPE_MODULE (module));
+  cc_proxy_panel_register_type (G_TYPE_MODULE (module));
   g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                  CC_TYPE_NETWORK_PANEL,
+                                  CC_TYPE_PROXY_PANEL,
                                   "network", 0);
 }
 

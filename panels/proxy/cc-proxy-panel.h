@@ -20,58 +20,58 @@
  */
 
 
-#ifndef _CC_NETWORK_PANEL_H
-#define _CC_NETWORK_PANEL_H
+#ifndef _CC_PROXY_PANEL_H
+#define _CC_PROXY_PANEL_H
 
 #include <libgnome-control-center/cc-panel.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_NETWORK_PANEL cc_network_panel_get_type()
+#define CC_TYPE_PROXY_PANEL cc_proxy_panel_get_type()
 
-#define CC_NETWORK_PANEL(obj) \
+#define CC_PROXY_PANEL(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_NETWORK_PANEL, CcNetworkPanel))
+  CC_TYPE_PROXY_PANEL, CcProxyPanel))
 
-#define CC_NETWORK_PANEL_CLASS(klass) \
+#define CC_PROXY_PANEL_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_NETWORK_PANEL, CcNetworkPanelClass))
+  CC_TYPE_PROXY_PANEL, CcProxyPanelClass))
 
-#define CC_IS_NETWORK_PANEL(obj) \
+#define CC_IS_PROXY_PANEL(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_NETWORK_PANEL))
+  CC_TYPE_PROXY_PANEL))
 
-#define CC_IS_NETWORK_PANEL_CLASS(klass) \
+#define CC_IS_PROXY_PANEL_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_NETWORK_PANEL))
+  CC_TYPE_PROXY_PANEL))
 
-#define CC_NETWORK_PANEL_GET_CLASS(obj) \
+#define CC_PROXY_PANEL_GET_CLASS(obj) \
   (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_NETWORK_PANEL, CcNetworkPanelClass))
+  CC_TYPE_PROXY_PANEL, CcProxyPanelClass))
 
-typedef struct _CcNetworkPanel CcNetworkPanel;
-typedef struct _CcNetworkPanelClass CcNetworkPanelClass;
-typedef struct _CcNetworkPanelPrivate CcNetworkPanelPrivate;
+typedef struct _CcProxyPanel CcProxyPanel;
+typedef struct _CcProxyPanelClass CcProxyPanelClass;
+typedef struct _CcProxyPanelPrivate CcProxyPanelPrivate;
 
-struct _CcNetworkPanel
+struct _CcProxyPanel
 {
   CcPanel parent;
 
-  CcNetworkPanelPrivate *priv;
+  CcProxyPanelPrivate *priv;
 };
 
-struct _CcNetworkPanelClass
+struct _CcProxyPanelClass
 {
   CcPanelClass parent_class;
 };
 
-GType cc_network_panel_get_type (void) G_GNUC_CONST;
+GType cc_proxy_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_network_panel_register (GIOModule *module);
+void  cc_proxy_panel_register (GIOModule *module);
 
 
 int gnome_network_properties_init (GtkBuilder  *builder);
 
 G_END_DECLS
 
-#endif /* _CC_NETWORK_PANEL_H */
+#endif /* _CC_PROXY_PANEL_H */
