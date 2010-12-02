@@ -222,6 +222,12 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
                             priv->default_window_icon);
 }
 
+void
+gnome_control_center_set_overview_page (GnomeControlCenter *center)
+{
+  shell_show_overview_page (center->priv);
+}
+
 static void
 item_activated_cb (CcShellCategoryView *view,
                    gchar               *name,
