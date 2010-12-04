@@ -913,6 +913,16 @@ gnome_control_center_class_init (GnomeControlCenterClass *klass)
   shell_class->get_toplevel = _shell_get_toplevel;
 }
 
+static gboolean
+queue_resize (gpointer data)
+{
+  GtkWidget *widget = data;
+
+  gtk_widget_queue_resize (widget);
+
+  return FALSE;
+}
+
 static void
 on_window_size_allocate (GtkWidget          *widget,
                          GtkAllocation      *allocation,
@@ -945,7 +955,16 @@ on_window_size_allocate (GtkWidget          *widget,
       height = 50;
     }
 
-  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window), height);
+  if (gtk_scrolled_window_get_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window)) != height)
+    {
+      g_debug ("Setting min content height: %d", height);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window), height);
+      /*
+       * Queueing a resize out of size-allocate is ignored,
+       * so we have to defer to an idle.
+       */
+      g_idle_add (queue_resize, self->priv->scrolled_window);
+    }
 }
 
 static void
