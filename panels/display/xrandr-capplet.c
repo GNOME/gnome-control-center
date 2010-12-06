@@ -2354,7 +2354,7 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
   int largest_area;
   int largest_index;
 
-  gdk_window_get_geometry (window, &win_rect.x, &win_rect.y, &win_rect.width, &win_rect.height, NULL);
+  gdk_window_get_geometry (window, &win_rect.x, &win_rect.y, &win_rect.width, &win_rect.height);
   gdk_window_get_origin (window, &win_rect.x, &win_rect.y);
 
   largest_area = 0;
