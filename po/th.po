@@ -1,5 +1,5 @@
 # Thai gnome-control-center translation.
-# Copyright (C) 2003-2009 Free Software Foundation, Inc.
+# Copyright (C) 2003-2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 # Paisa Seeluangsawat <paisa@users.sf.net>, 2003, 2004.
 # Supakorn Siddhichai <supakorn.siddhichai@nectec.or.th>, 2004.
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
 "POT-Creation-Date: 2010-12-06 00:12+0000\n"
-"PO-Revision-Date: 2010-12-06 23:23+0700\n"
+"PO-Revision-Date: 2010-12-07 18:00+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -190,7 +190,7 @@ msgstr "เรียงกระเบื้อง"
 #: ../panels/background/background.ui.h:6
 #: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
-msgstr "ซูมเต็มหน้าจอ"
+msgstr "ซูม"
 
 #: ../panels/background/bg-colors-source.c:57
 msgid "Butter"
@@ -1050,7 +1050,7 @@ msgstr "ผังแป้นพิมพ์"
 
 #: ../panels/region/gnome-region-panel.ui.h:4
 msgid "List of keyboard layouts selected for usage"
-msgstr ""
+msgstr "รายชื่อผังแป้นพิมพ์ที่ถูกเลือกเพื่อใช้งาน"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
 #: ../panels/universal-access/uap.ui.h:54
@@ -1264,10 +1264,14 @@ msgid "High"
 msgstr "สูง"
 
 #. large threshold
+# in uap.ui, also means large text size
+# Related to "Small" threshold.
+# Should be translated as "สั้น" and "ยาว" for threshold, but would sound
+# weird for text size. So, "เล็ก" and "ใหญ่" is a compromise.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:22
 #: ../panels/universal-access/uap.ui.h:48
 msgid "Large"
-msgstr "ยาว"
+msgstr "ใหญ่"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Locate Pointer"
@@ -1313,10 +1317,13 @@ msgid "Simulated Secondary Click"
 msgstr "จำลองคลิกที่สอง"
 
 #. small threshold
+# Related to "Large" threshold, which is also used as "Large" text size.
+# Should be translated as "สั้น" and "ยาว" for threshold, but would sound
+# weird for text size. So, "เล็ก" and "ใหญ่" is a compromise.
 #: ../panels/mouse/gnome-mouse-properties.ui.h:41
 #: ../panels/universal-access/uap.ui.h:76
 msgid "Small"
-msgstr "สั้น"
+msgstr "เล็ก"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:42
 msgid "Thr_eshold:"
@@ -1859,286 +1866,227 @@ msgstr "ปรับความดังเสียง"
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
-msgstr ""
+msgstr "การ์ด;ไมโครโฟน;ความดัง;เฟด;สมดุล;บลูทูท;ชุดหูฟัง;"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
-#, fuzzy
-#| msgid "Enable sound and associate sounds with events"
 msgid "Change sound volume and sound events"
-msgstr "ใช้เสียงสำหรับเหตุการณ์ต่างๆ"
+msgstr "ปรับความดังเสียงและตั้งค่าเสียงสำหรับเหตุการณ์ต่างๆ"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
 msgid "Bark"
-msgstr ""
+msgstr "เห่า"
 
 #. Translators: This is the name of an audio file that sounds like a water drip.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
 msgid "Drip"
-msgstr ""
+msgstr "หยดน้ำ"
 
 #. Translators: This is the name of an audio file that sounds like tapping glass.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
 msgid "Glass"
-msgstr ""
+msgstr "แก้ว"
 
 #. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
-#, fuzzy
-#| msgid "Sound"
 msgid "Sonar"
-msgstr "เสียง"
+msgstr "โซนาร์"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-#, fuzzy
-#| msgid "_Keyboard Accessibility"
 msgid "Keyboard;Mouse;a11y;Accessibility;"
-msgstr "สิ่งอำนวยความสะดวกสำหรับแป้น_พิมพ์"
+msgstr "แป้นพิมพ์;เมาส์;สิ่งอำนวยความสะดวก;"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
-msgstr ""
+msgstr "การใช้งานแบบหลากหลาย"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid "Appearance Preferences"
 msgid "Universal Access Preferences"
-msgstr "ปรับแต่งรูปโฉม"
+msgstr "ปรับแต่งการใช้งานแบบหลากหลาย"
 
 #: ../panels/universal-access/uap.ui.h:2
 #, no-c-format
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: ../panels/universal-access/uap.ui.h:4
 #, no-c-format
 msgid "125%"
-msgstr ""
+msgstr "125%"
 
 #: ../panels/universal-access/uap.ui.h:6
 #, no-c-format
 msgid "150%"
-msgstr ""
+msgstr "150%"
 
 #: ../panels/universal-access/uap.ui.h:7
-#, fuzzy
-#| msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">กำลังทดสอบ...</span>"
+msgstr "<span size=\"x-large\">สูง/กลับสี</span>"
 
 #: ../panels/universal-access/uap.ui.h:8
-#, fuzzy
-#| msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgid "<span size=\"x-large\">High</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">กำลังทดสอบ...</span>"
+msgstr "<span size=\"x-large\">สูง</span>"
 
 #: ../panels/universal-access/uap.ui.h:9
-#, fuzzy
-#| msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">กำลังทดสอบ...</span>"
+msgstr "<span size=\"x-large\">ต่ำ</span>"
 
 #: ../panels/universal-access/uap.ui.h:10
-#, fuzzy
-#| msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">กำลังทดสอบ...</span>"
+msgstr "<span size=\"x-large\">ปกติ</span>"
 
 #: ../panels/universal-access/uap.ui.h:11
 msgid "Acceptance delay:"
-msgstr ""
+msgstr "เวลาหน่วงก่อนรับ:"
 
 #: ../panels/universal-access/uap.ui.h:12
-#, fuzzy
-#| msgid "Beep when a key is pr_essed"
 msgid "Beep when Caps and Num Lock are used"
-msgstr "บี๊บเมื่อมีปุ่มถูก_กด"
+msgstr "บี๊บเมื่อมีการใช้ Caps Lock หรือ Num Lock"
 
 #: ../panels/universal-access/uap.ui.h:13
-#, fuzzy
-#| msgid "Beep when a key is pr_essed"
 msgid "Beep when a key is"
-msgstr "บี๊บเมื่อมีปุ่มถูก_กด"
+msgstr "บี๊บเมื่อปุ่ม"
 
 #: ../panels/universal-access/uap.ui.h:14
-#, fuzzy
-#| msgid "Beep when a key is reje_cted"
 msgid "Beep when a key is rejected"
-msgstr "บี๊บเมื่อปุ่มถูกปฏิเ_สธ"
+msgstr "บี๊บเมื่อปุ่มถูกปฏิเสธ"
 
 #: ../panels/universal-access/uap.ui.h:15
-#, fuzzy
-#| msgid "Beep when a _modifier key is pressed"
 msgid "Beep when a modifer key is pressed"
-msgstr "บี๊บเมื่อปุ่ม_ประกอบถูกกด"
+msgstr "บี๊บเมื่อปุ่มประกอบถูกกด"
 
 #: ../panels/universal-access/uap.ui.h:16
-#, fuzzy
-#| msgid "Mouse Keys"
 msgid "Bounce Keys"
-msgstr "บังคับเมาส์ด้วยแป้น"
+msgstr "ป้องกันการกดแป้นรัว"
 
 #: ../panels/universal-access/uap.ui.h:17
 msgid "Caribou"
-msgstr ""
+msgstr "Caribou"
 
 #: ../panels/universal-access/uap.ui.h:18
-#, fuzzy
-#| msgid "Change set"
 msgid "Change constrast:"
-msgstr "ชุดการเปลี่ยนแปลง"
+msgstr "เปลี่ยนความต่างระดับสี:"
 
 #: ../panels/universal-access/uap.ui.h:19
 msgid "Closed Captioning"
-msgstr ""
+msgstr "การแสดงคำบรรยายประกอบ"
 
 #: ../panels/universal-access/uap.ui.h:20
-#, fuzzy
-#| msgid "Contact"
 msgid "Contrast:"
-msgstr "การติดต่อ"
+msgstr "ความต่างระดับสี:"
 
 #: ../panels/universal-access/uap.ui.h:21
-#, fuzzy
-#| msgid "_Pointer can be controlled using the keypad"
 msgid "Control the pointer using the keypad"
-msgstr "เ_ปิดใช้การบังคับตัวชี้เมาส์ด้วยแป้นพิมพ์"
+msgstr "ควบคุมตัวชี้เมาส์ด้วยแป้นกดเลข"
 
 #: ../panels/universal-access/uap.ui.h:22
 msgid "Control the pointer using the video camera."
-msgstr ""
+msgstr "ควบคุมตัวชี้เมาส์ด้วยกล้องวีดิทัศน์"
 
 #: ../panels/universal-access/uap.ui.h:23
 msgid "Ctrl+Alt+-"
-msgstr ""
+msgstr "Ctrl+Alt+-"
 
 #: ../panels/universal-access/uap.ui.h:24
 msgid "Ctrl+Alt+0"
-msgstr ""
+msgstr "Ctrl+Alt+0"
 
 #: ../panels/universal-access/uap.ui.h:25
 msgid "Ctrl+Alt+4"
-msgstr ""
+msgstr "Ctrl+Alt+4"
 
 #: ../panels/universal-access/uap.ui.h:26
 msgid "Ctrl+Alt+8"
-msgstr ""
+msgstr "Ctrl+Alt+8"
 
 #: ../panels/universal-access/uap.ui.h:27
 msgid "Ctrl+Alt+="
-msgstr ""
+msgstr "Ctrl+Alt+="
 
 #: ../panels/universal-access/uap.ui.h:31
 msgid "Decrease size:"
-msgstr ""
+msgstr "ลดขนาด:"
 
 #: ../panels/universal-access/uap.ui.h:32
-#, fuzzy
-#| msgid "Disa_ble sticky keys if two keys are pressed together"
 msgid "Disable if two keys are pressed together"
-msgstr "เลิกใช้การค้างปุ่มถ้ามีการกดปุ่มสองปุ่ม_พร้อมกัน"
+msgstr "เลิกใช้ถ้ามีการกดปุ่มสองปุ่มพร้อมกัน"
 
 #: ../panels/universal-access/uap.ui.h:33
 msgid "Display"
-msgstr "จอแสดงผล"
+msgstr "การแสดงผล"
 
 #: ../panels/universal-access/uap.ui.h:34
 msgid "Display a textual description of speech and sounds"
-msgstr ""
+msgstr "แสดงคำบรรยายเป็นตัวอักษรสำหรับเสียงพูดและเสียงต่างๆ"
 
 #: ../panels/universal-access/uap.ui.h:35
-#, fuzzy
-#| msgid "Flash entire _screen"
 msgid "Flash the entire screen"
-msgstr "กะพริบทั้งหน้า_จอ"
+msgstr "กะพริบทั้งหน้าจอ"
 
 #: ../panels/universal-access/uap.ui.h:36
-#, fuzzy
-#| msgid "Flash _window titlebar"
 msgid "Flash the window title"
-msgstr "กะพริบหัวหน้า_ต่าง"
+msgstr "กะพริบหัวหน้าต่าง"
 
 #: ../panels/universal-access/uap.ui.h:37
 msgid "GOK"
-msgstr ""
+msgstr "GOK"
 
 #: ../panels/universal-access/uap.ui.h:38
-#, fuzzy
-#| msgctxt "Sound event"
-#| msgid "Warning"
 msgid "Hearing"
-msgstr "คำเตือน"
+msgstr "การได้ยิน"
 
 #: ../panels/universal-access/uap.ui.h:40
-#, fuzzy
-#| msgid "Inverted"
 msgid "High/Inverse"
-msgstr "กลับหัว"
+msgstr "สูง/กลับสี"
 
 #: ../panels/universal-access/uap.ui.h:41
-#, fuzzy
-#| msgid "Contact"
 msgid "HighContrast"
-msgstr "การติดต่อ"
+msgstr "สีตัดกัน"
 
 #: ../panels/universal-access/uap.ui.h:42
 msgid "HighContrastInverse"
-msgstr ""
+msgstr "สีตัดกัน กลับสี"
 
 #: ../panels/universal-access/uap.ui.h:43
-#, fuzzy
-#| msgid "<b>Dwell Click</b>"
 msgid "Hover Click"
-msgstr "<b>การคลิกด้วยการวางแช่</b>"
+msgstr "การคลิกด้วยการวางแช่"
 
 #: ../panels/universal-access/uap.ui.h:44
-#, fuzzy
-#| msgid "_Ignore fast duplicate keypresses"
 msgid "Ignores fast duplicate keypresses"
-msgstr "ไ_ม่รับการกดปุ่มรัว"
+msgstr "ไม่รับการกดปุ่มรัว"
 
 #: ../panels/universal-access/uap.ui.h:45
 msgid "Increase size:"
-msgstr ""
+msgstr "เพิ่มขนาด:"
 
 #: ../panels/universal-access/uap.ui.h:46
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "Keyboard Settings..."
-msgstr "ปุ่มลัด"
+msgstr "ค่าตั้งแป้นพิมพ์..."
 
 #: ../panels/universal-access/uap.ui.h:49
-#, fuzzy
-#| msgid "Large"
 msgid "Larger"
-msgstr "ใหญ่"
+msgstr "ใหญ่มาก"
 
 #: ../panels/universal-access/uap.ui.h:53
-#, fuzzy
-#| msgid "Contact"
 msgid "LowContrast"
-msgstr "การติดต่อ"
+msgstr "สีไม่ตัดกัน"
 
 #: ../panels/universal-access/uap.ui.h:55
-#, fuzzy
-#| msgid "<b>Mouse Orientation</b>"
 msgid "Mouse Settings..."
-msgstr "<b>มือถนัดเมาส์</b>"
+msgstr "ค่าตั้งเมาส์..."
 
 #: ../panels/universal-access/uap.ui.h:56
-#, fuzzy
-#| msgid "None"
 msgid "Nomon"
-msgstr "ไม่ทำอะไร"
+msgstr "Nomon"
 
 #: ../panels/universal-access/uap.ui.h:57
 msgid "None"
-msgstr "ไม่ทำอะไร"
+msgstr "ไม่ใช้"
 
 #: ../panels/universal-access/uap.ui.h:59
 msgid "Off"
@@ -2154,7 +2102,7 @@ msgstr "แป้นพิมพ์บนจอ"
 
 #: ../panels/universal-access/uap.ui.h:62
 msgid "OnBoard"
-msgstr ""
+msgstr "OnBoard"
 
 #: ../panels/universal-access/uap.ui.h:63
 msgid "Options..."
@@ -2162,154 +2110,123 @@ msgstr "ตัวเลือก..."
 
 #: ../panels/universal-access/uap.ui.h:64
 msgid "Pointing and Clicking"
-msgstr ""
+msgstr "การชี้และการคลิก"
 
 #: ../panels/universal-access/uap.ui.h:65
 msgid "Puts a delay between when a key is pressed and when it is accepted"
-msgstr ""
+msgstr "หน่วงเวลาหลังจากปุ่มถูกกดก่อนที่จะรับการกด"
 
 #: ../panels/universal-access/uap.ui.h:66
 msgid "Screen Reader"
-msgstr "โปรแกรมอ่านหน้าจอ"
+msgstr "การอ่านหน้าจอ"
 
 #: ../panels/universal-access/uap.ui.h:67
-#, fuzzy
-#| msgid "Rendering"
 msgid "Seeing"
-msgstr "การวาด"
+msgstr "การมองเห็น"
 
 #: ../panels/universal-access/uap.ui.h:68
 msgid "Shift+Ctrl+Alt+-"
-msgstr ""
+msgstr "Shift+Ctrl+Alt+-"
 
 #: ../panels/universal-access/uap.ui.h:69
 msgid "Shift+Ctrl+Alt+="
-msgstr ""
+msgstr "Shift+Ctrl+Alt+="
 
 #: ../panels/universal-access/uap.ui.h:72
 msgid "Show Universal Access status"
-msgstr ""
+msgstr "แสดงสถานะการใช้งานแบบหลากหลาย"
 
 #: ../panels/universal-access/uap.ui.h:74
-#, fuzzy
-#| msgid "Slow Keys Alert"
 msgid "Slow Keys"
-msgstr "เริ่มใช้แป้นเฉื่อย"
+msgstr "พิมพ์แบบช้า"
 
 #: ../panels/universal-access/uap.ui.h:77
-#, fuzzy
-#| msgid "Screen %d Settings\n"
 msgid "Sound Settings..."
-msgstr "ค่าตั้งของจอ %d\n"
+msgstr "ค่าตั้งของเสียง..."
 
 #: ../panels/universal-access/uap.ui.h:78
-#, fuzzy
-#| msgid "Sticky Keys Alert"
 msgid "Sticky Keys"
-msgstr "เลิกใช้แป้นเหนียว"
+msgstr "ค้างปุ่มกด"
 
 #: ../panels/universal-access/uap.ui.h:79
 msgid "Test flash"
-msgstr ""
+msgstr "ทดสอบการกะพริบ"
 
 #: ../panels/universal-access/uap.ui.h:80
 msgid "Text size:"
-msgstr ""
+msgstr "ขนาดตัวอักษร:"
 
 #: ../panels/universal-access/uap.ui.h:81
 msgid "Treats a sequence of modifier keys as a key combination"
-msgstr ""
+msgstr "นับการกดปุ่มประกอบทีละปุ่มเสมือนการกดพร้อมกัน"
 
 #: ../panels/universal-access/uap.ui.h:82
-#, fuzzy
-#| msgid "_Initiate click when stopping pointer movement"
 msgid "Trigger a click when the pointer hovers"
-msgstr "เริ่มการคลิ_กเมื่อหยุดเคลื่อนเมาส์"
+msgstr "สร้างการคลิกเมื่อตัวชี้วางแช่"
 
 #: ../panels/universal-access/uap.ui.h:83
-#, fuzzy
-#| msgid "_Trigger secondary click by holding down the primary button"
 msgid "Trigger a secondary click by holding down the primary button"
-msgstr "_สร้างคลิกที่สองโดยกดปุ่มแรกของเมาส์"
+msgstr "สร้างคลิกที่สองโดยกดปุ่มแรกของเมาส์"
 
 #: ../panels/universal-access/uap.ui.h:84
-#, fuzzy
-#| msgid "Beep when _accessibility features are turned on or off"
 msgid "Turn on accessibility features from the keyboard"
-msgstr "บี๊บเมื่อเทคโนโลยีสิ่งอำนวยความสะดวกถูก_ปิดหรือเปิด"
+msgstr "เปิดใช้เทคโนโลยีสิ่งอำนวยความสะดวกจากแป้นพิมพ์"
 
 #: ../panels/universal-access/uap.ui.h:85
 msgid "Turn on or off:"
-msgstr ""
+msgstr "เปิดหรือปิด:"
 
 #: ../panels/universal-access/uap.ui.h:86
-#, fuzzy
-#| msgid "_Type to test settings:"
 msgid "Type here to test settings"
-msgstr "_ลองพิมพ์เพื่อทดสอบ:"
+msgstr "ลองพิมพ์ที่นี่เพื่อทดสอบ"
 
 #: ../panels/universal-access/uap.ui.h:87
-#, fuzzy
-#| msgid "Typing Break"
 msgid "Typing"
-msgstr "เวลาพักพิมพ์"
+msgstr "การพิมพ์"
 
 #: ../panels/universal-access/uap.ui.h:88
-#, fuzzy
-#| msgid "A_ssistant:"
 msgid "Typing Assistant"
-msgstr "ผู้_ช่วย:"
+msgstr "เครื่องมือช่วยพิมพ์"
 
 #: ../panels/universal-access/uap.ui.h:89
 msgid "Use a visual indication when an alert sound occurs"
-msgstr ""
+msgstr "ใช้การบ่งชี้ด้วยภาพเมื่อมีเสียงแจ้งเหตุ"
 
 #: ../panels/universal-access/uap.ui.h:90
 msgid "Use an alternative form of text input"
-msgstr ""
+msgstr "ใช้การป้อนข้อความแบบอื่น"
 
 #: ../panels/universal-access/uap.ui.h:91
-#, fuzzy
-#| msgid "Mouse"
 msgid "Video Mouse"
-msgstr "เมาส์"
+msgstr "เมาส์วีดิทัศน์"
 
 #: ../panels/universal-access/uap.ui.h:92
-#, fuzzy
-#| msgctxt "Sound event"
-#| msgid "Visual alert"
 msgid "Visual Alerts"
-msgstr "แจ้งเหตุด้วยภาพ"
+msgstr "การแจ้งเหตุด้วยภาพ"
 
 #: ../panels/universal-access/uap.ui.h:94
-#, fuzzy
-#| msgid "Zoom"
 msgid "Zoom in:"
-msgstr "ซูมเต็มหน้าจอ"
+msgstr "ซูมเข้า:"
 
 #: ../panels/universal-access/uap.ui.h:95
-#, fuzzy
-#| msgid "Log out"
 msgid "Zoom out:"
-msgstr "ออกจากระบบ"
+msgstr "ซูมออก:"
 
 #: ../panels/universal-access/uap.ui.h:97
 msgid "accepted"
-msgstr ""
+msgstr "ถูกรับ"
 
 #: ../panels/universal-access/uap.ui.h:98
 msgid "pressed"
-msgstr ""
+msgstr "ถูกกด"
 
 #: ../panels/universal-access/uap.ui.h:99
-#, fuzzy
-#| msgid "Eject"
 msgid "rejected"
-msgstr "ดันแผ่นออก"
+msgstr "ถูกปฏิเสธ"
 
 #: ../panels/user-accounts/gdm-languages.c:613
 msgid "Unspecified"
-msgstr ""
+msgstr "ไม่ระบุ"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -2317,28 +2234,24 @@ msgstr "ยืนยันตัวบุคคลไม่ผ่าน"
 
 #: ../panels/user-accounts/run-passwd.c:506
 #: ../panels/user-accounts/um-password-dialog.c:381
-#, fuzzy, c-format
-#| msgid "The password is too short."
+#, c-format
 msgid "The new password is too short"
-msgstr "รหัสผ่านสั้นเกินไป"
+msgstr "รหัสผ่านใหม่สั้นเกินไป"
 
 #: ../panels/user-accounts/run-passwd.c:512
-#, fuzzy, c-format
-#| msgid "The password is too simple."
+#, c-format
 msgid "The new password is too simple"
-msgstr "รหัสผ่านเดาง่ายเกินไป"
+msgstr "รหัสผ่านใหม่เดาง่ายเกินไป"
 
 #: ../panels/user-accounts/run-passwd.c:518
-#, fuzzy, c-format
-#| msgid "The old and new passwords are too similar."
+#, c-format
 msgid "The old and new passwords are too similar"
 msgstr "รหัสผ่านใหม่คล้ายกับรหัสผ่านเก่าเกินไป"
 
 #: ../panels/user-accounts/run-passwd.c:521
-#, fuzzy, c-format
-#| msgid "The two passwords are not equal."
+#, c-format
 msgid "The new password has already been used recently."
-msgstr "รหัสผ่านที่ป้อนทั้งสองครั้งไม่ตรงกัน"
+msgstr "รหัสผ่านใหม่เพิ่งใช้ไปเมื่อเร็วๆ นี้"
 
 #: ../panels/user-accounts/run-passwd.c:524
 #, c-format
@@ -2351,18 +2264,14 @@ msgid "The old and new passwords are the same"
 msgstr "รหัสผ่านใหม่เหมือนกันกับรหัสผ่านเก่า"
 
 #: ../panels/user-accounts/run-passwd.c:532
-#, fuzzy, c-format
-#| msgid ""
-#| "Your password has been changed since you initially authenticated! Please "
-#| "re-authenticate."
+#, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr "รหัสผ่านของคุณถูกเปลี่ยนหลังจากการยืนยันตัวบุคคลครั้งก่อน กรุณายืนยันตัวบุคคลอีกครั้ง"
+msgstr "รหัสผ่านของคุณถูกเปลี่ยนหลังจากการยืนยันตัวบุคคลครั้งก่อน"
 
 #: ../panels/user-accounts/run-passwd.c:536
-#, fuzzy, c-format
-#| msgid "The new password must contain numeric or special character(s)."
+#, c-format
 msgid "The new password does not contain enough different characters"
-msgstr "รหัสผ่านใหม่ต้องมีตัวเลขหรือเครื่องหมายพิเศษด้วย"
+msgstr "รหัสผ่านใหม่มีอักขระต่างกันไม่มากพอ"
 
 #: ../panels/user-accounts/run-passwd.c:540
 #, c-format
@@ -2370,26 +2279,22 @@ msgid "Unknown error"
 msgstr "ข้อผิดพลาดไม่ทราบสาเหตุ"
 
 #: ../panels/user-accounts/um-account-dialog.c:78
-#, fuzzy
-#| msgid "Failed to create temporary directory"
 msgid "Failed to create user"
-msgstr "สร้างโฟลเดอร์ชั่วคราวไม่สำเร็จ"
+msgstr "สร้างบัญชีผู้ใช้ไม่สำเร็จ"
 
 #: ../panels/user-accounts/um-account-dialog.c:185
-#, fuzzy, c-format
-#| msgid "A bookmark for URI '%s' already exists"
+#, c-format
 msgid "A user with the username '%s' already exists"
-msgstr "มีที่คั่นหน้าสำหรับ URI '%s' อยู่ก่อนแล้ว"
+msgstr "มีผู้ใช้ชื่อ '%s' อยู่ก่อนแล้ว"
 
 #: ../panels/user-accounts/um-account-dialog.c:189
-#, fuzzy, c-format
-#| msgid "The password is too short."
+#, c-format
 msgid "The username is too long"
-msgstr "รหัสผ่านสั้นเกินไป"
+msgstr "ชื่อผู้ใช้ยาวเกินไป"
 
 #: ../panels/user-accounts/um-account-dialog.c:192
 msgid "The username cannot start with a '-'"
-msgstr ""
+msgstr "ชื่อผู้ใช้ขึ้นต้นด้วย '-' ไม่ได้"
 
 #: ../panels/user-accounts/um-account-dialog.c:195
 msgid ""
@@ -2398,31 +2303,31 @@ msgid ""
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
+"ชื่อผู้ใช้ต้องประกอบด้วย:\n"
+" ➣ ตัวอักษรภาษาอังกฤษ\n"
+" ➣ ตัวเลข\n"
+" ➣ อักขระ '.', '-' หรือ '_'"
 
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-#, fuzzy
-#| msgid "Standard XTerminal"
 msgctxt "Account type"
 msgid "Standard"
-msgstr "เทอร์มินัลปกติของ X"
+msgstr "มาตรฐาน"
 
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
-#, fuzzy
-#| msgid "Terminator"
 msgctxt "Account type"
 msgid "Administrator"
-msgstr "Terminator"
+msgstr "ผู้ดูแลระบบ"
 
 #: ../panels/user-accounts/um-account-type.c:39
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgctxt "Account type"
 msgid "Supervised"
-msgstr ""
+msgstr "มีการกำกับดูแล"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:107
 msgid ""
@@ -2434,17 +2339,13 @@ msgid "The device is already in use."
 msgstr "อุปกรณ์กำลังถูกใช้งานอยู่"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:111
-#, fuzzy
-#| msgid "An internal error occured"
 msgid "An internal error occurred."
 msgstr "เกิดข้อผิดพลาดภายใน"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:181
 #: ../panels/user-accounts/um-fingerprint-dialog.c:182
-#, fuzzy
-#| msgid "Disabled"
 msgid "Enabled"
-msgstr "ไม่ใช้"
+msgstr "เปิดใช้"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:224
 msgid "Delete registered fingerprints?"
@@ -2512,267 +2413,237 @@ msgid ""
 "Enrolling fingerprints for\n"
 "<b><big>%s</big></b>"
 msgstr ""
+"กำลังเก็บลายนิ้วมือสำหรับ\n"
+"<b><big>%s</big></b>"
 
 #: ../panels/user-accounts/um-language-dialog.c:328
-#, fuzzy
-#| msgid "Other"
 msgid "Other..."
-msgstr "อื่นๆ"
+msgstr "อื่นๆ..."
 
 #: ../panels/user-accounts/um-lockbutton.c:355
 msgid "Lock"
-msgstr ""
+msgstr "ล็อค"
 
 #: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
-msgstr ""
+msgstr "ปลดล็อค"
 
 #: ../panels/user-accounts/um-lockbutton.c:373
 msgid "Locked"
-msgstr ""
+msgstr "ล็อคอยู่"
 
 #: ../panels/user-accounts/um-lockbutton.c:382
 msgid ""
 "Dialog is unlocked.\n"
 "Click to prevent further changes"
 msgstr ""
+"กล่องโต้ตอบไม่ได้ล็อคไว้\n"
+"คลิกเพื่อล็อคป้องกันการแก้ไข"
 
 #: ../panels/user-accounts/um-lockbutton.c:391
 msgid ""
 "Dialog is locked.\n"
 "Click to make changes"
 msgstr ""
+"กล่องโต้ตอบถูกล็อคอยู่\n"
+"คลิกเพื่อเริ่มแก้ไข"
 
 #: ../panels/user-accounts/um-lockbutton.c:400
-#, fuzzy
-#| msgid "Please contact your system administrator for help."
 msgid ""
 "System policy prevents changes.\n"
 "Contact your system administrator"
-msgstr "กรุณาติดต่อผู้ดูแลระบบของคุณเพื่อขอความช่วยเหลือ"
+msgstr ""
+"นโยบายของระบบได้ป้องกันการเปลี่ยนแปลงไว้\n"
+"กรุณาติดต่อผู้ดูแลระบบของคุณ"
 
 #: ../panels/user-accounts/um-password-dialog.c:185
 msgid "More choices..."
-msgstr ""
+msgstr "เลือกเพิ่มเติม..."
 
 #: ../panels/user-accounts/um-password-dialog.c:291
 msgid "Please choose another password."
-msgstr ""
+msgstr "กรุณาตั้งรหัสผ่านใหม่"
 
 #: ../panels/user-accounts/um-password-dialog.c:300
-#, fuzzy
-#| msgid "Please type your password in the <b>New password</b> field."
 msgid "Please type your current password again."
-msgstr "กรุณาตั้งรหัสผ่านในช่อง <b>รหัสผ่านใหม่</b>"
+msgstr "กรุณาป้อนรหัสผ่านปัจจุบันของคุณอีกครั้ง"
 
 #: ../panels/user-accounts/um-password-dialog.c:306
-#, fuzzy
-#| msgid "Your password has been changed."
 msgid "Password could not be changed"
-msgstr "รหัสผ่านของคุณถูกเปลี่ยน"
+msgstr "ไม่สามารถเปลี่ยนรหัสผ่านได้"
 
 #: ../panels/user-accounts/um-password-dialog.c:378
-#, fuzzy
-#| msgid "_Retype new password:"
 msgid "You need to enter a new password"
-msgstr "ป้อนรหัสผ่านใหม่_อีกครั้ง:"
+msgstr "คุณต้องป้อนรหัสผ่านใหม่ที่จะตั้ง"
 
 #: ../panels/user-accounts/um-password-dialog.c:387
 msgid "You need to confirm the password"
-msgstr ""
+msgstr "คุณต้องป้อนรหัสผ่านที่ตั้งใหม่อีกครั้งเพื่อยืนยัน"
 
 #: ../panels/user-accounts/um-password-dialog.c:390
-#, fuzzy
-#| msgid "The password is too short."
 msgid "The passwords do not match"
-msgstr "รหัสผ่านสั้นเกินไป"
+msgstr "รหัสผ่านไม่ตรงกัน"
 
 #: ../panels/user-accounts/um-password-dialog.c:396
 msgid "You need to enter your current password"
-msgstr ""
+msgstr "คุณต้องป้อนรหัสผ่านปัจจุบันของคุณ"
 
 #: ../panels/user-accounts/um-password-dialog.c:399
-#, fuzzy
-#| msgid "That password was incorrect."
 msgid "The current password is not correct"
-msgstr "รหัสผ่านไม่ถูกต้อง"
+msgstr "รหัสผ่านปัจจุบันที่ป้อนไม่ถูกต้อง"
 
 #: ../panels/user-accounts/um-password-dialog.c:472
 #: ../panels/user-accounts/um-password-dialog.c:689
 msgctxt "Password strength"
 msgid "Too short"
-msgstr ""
+msgstr "สั้นเกินไป"
 
 #: ../panels/user-accounts/um-password-dialog.c:475
 #: ../panels/user-accounts/um-password-dialog.c:690
 msgctxt "Password strength"
 msgid "Weak"
-msgstr ""
+msgstr "หละหลวม"
 
 #: ../panels/user-accounts/um-password-dialog.c:477
 #: ../panels/user-accounts/um-password-dialog.c:691
-#, fuzzy
-#| msgid "Filter"
 msgctxt "Password strength"
 msgid "Fair"
-msgstr "ตัวกรอง"
+msgstr "พอใช้"
 
 #: ../panels/user-accounts/um-password-dialog.c:479
 #: ../panels/user-accounts/um-password-dialog.c:692
 msgctxt "Password strength"
 msgid "Good"
-msgstr ""
+msgstr "ดี"
 
 #: ../panels/user-accounts/um-password-dialog.c:481
 #: ../panels/user-accounts/um-password-dialog.c:693
-#, fuzzy
-#| msgid "Scrolling"
 msgctxt "Password strength"
 msgid "Strong"
-msgstr "เลื่อน"
+msgstr "แน่นหนา"
 
 #: ../panels/user-accounts/um-password-dialog.c:520
 msgid "Passwords do not match"
-msgstr ""
+msgstr "รหัสผ่านไม่ตรงกัน"
 
 #: ../panels/user-accounts/um-password-dialog.c:546
-#, fuzzy
-#| msgid "Change password"
 msgid "Wrong password"
-msgstr "เปลี่ยนรหัสผ่าน"
+msgstr "รหัสผ่านไม่ถูกต้อง"
 
 #: ../panels/user-accounts/um-photo-dialog.c:97
 #: ../panels/user-accounts/data/language-chooser.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#, fuzzy
-#| msgid "_Select"
 msgid "Select"
-msgstr "เ_ลือก"
+msgstr "เลือก"
 
 #: ../panels/user-accounts/um-photo-dialog.c:216
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
-msgstr ""
+msgstr "ท่องดูรูปภาพเพิ่มเติม"
 
 #: ../panels/user-accounts/um-photo-dialog.c:429
-#, fuzzy
-#| msgid "Disabled"
 msgid "Disable image"
-msgstr "ไม่ใช้"
+msgstr "ไม่ใช้รูปภาพ"
 
 #: ../panels/user-accounts/um-photo-dialog.c:447
 msgid "Take a photo..."
-msgstr ""
+msgstr "ถ่ายภาพ..."
 
 #: ../panels/user-accounts/um-photo-dialog.c:465
 msgid "Browse for more pictures..."
-msgstr ""
+msgstr "ท่องดูรูปภาพเพิ่มเติม..."
 
 #: ../panels/user-accounts/um-photo-dialog.c:693
 #, c-format
 msgid "Used by %s"
-msgstr ""
+msgstr "ใช้โดย %s"
 
 #: ../panels/user-accounts/um-user-manager.c:430
-#, fuzzy, c-format
-#| msgid "A bookmark for URI '%s' already exists"
+#, c-format
 msgid "A user with name '%s' already exists."
-msgstr "มีที่คั่นหน้าสำหรับ URI '%s' อยู่ก่อนแล้ว"
+msgstr "มีผู้ใช้ชื่อ '%s' อยู่ก่อนแล้ว"
 
 #: ../panels/user-accounts/um-user-manager.c:525
-#, fuzzy
-#| msgid "The sound file for this event does not exist."
 msgid "This user does not exist."
-msgstr "หาแฟ้มเสียงสำหรับเหตุการณ์นี้ไม่พบ"
+msgstr "ไม่มีผู้ใช้นี้"
 
 #: ../panels/user-accounts/um-user-panel.c:349
 msgid "Failed to delete user"
-msgstr ""
+msgstr "ลบผู้ใช้ไม่สำเร็จ"
 
 #: ../panels/user-accounts/um-user-panel.c:409
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "คุณจะลบบัญชีของคุณเองไม่ได้"
 
 #: ../panels/user-accounts/um-user-panel.c:418
 #, c-format
 msgid "%s is still logged in"
-msgstr ""
+msgstr "%s ยังคงเข้าระบบอยู่"
 
 #: ../panels/user-accounts/um-user-panel.c:422
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
-msgstr ""
+msgstr "การลบบัญชีผู้ใช้ในระหว่างที่ผู้ใช้นั้นกำลังเข้าระบบอยู่ จะทำให้ระบบอยู่ในสถานะที่สับสน"
 
 #: ../panels/user-accounts/um-user-panel.c:431
-#, fuzzy, c-format
-#| msgid "Do you want to keep this resolution?"
+#, c-format
 msgid "Do you want to keep %s's files?"
-msgstr "จะตกลงใช้ความละเอียดนี้หรือไม่?"
+msgstr "คุณต้องการเก็บรักษาแฟ้มต่างๆ ของ %s ไว้หรือไม่?"
 
 #: ../panels/user-accounts/um-user-panel.c:435
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
-msgstr ""
+msgstr "ในการลบบัญชีผู้ใช้ คุณสามารถเก็บรักษาไดเรกทอรีบ้าน, ถุงเมล และแฟ้มชั่วคราวของผู้ใช้ไว้ได้"
 
 #: ../panels/user-accounts/um-user-panel.c:438
-#, fuzzy
-#| msgid "_Delete Fingerprints"
 msgid "_Delete Files"
-msgstr "_ลบลายนิ้วมือ"
+msgstr "_ลบแฟ้ม"
 
 #: ../panels/user-accounts/um-user-panel.c:439
-#, fuzzy
-#| msgid "New File"
 msgid "_Keep Files"
-msgstr "แฟ้มใหม่"
+msgstr "เ_ก็บรักษาแฟ้ม"
 
 #: ../panels/user-accounts/um-user-panel.c:440
 msgid "_Cancel"
-msgstr ""
+msgstr "_ยกเลิก"
 
 #: ../panels/user-accounts/um-user-panel.c:464
 msgctxt "Password mode"
 msgid "Account disabled"
-msgstr ""
+msgstr "บัญชีถูกระงับ"
 
 #: ../panels/user-accounts/um-user-panel.c:473
 msgctxt "Password mode"
 msgid "To be set at next login"
-msgstr ""
+msgstr "รอตั้งรหัสผ่านในครั้งต่อไปที่เข้าระบบ"
 
 #: ../panels/user-accounts/um-user-panel.c:476
-#, fuzzy
-#| msgid "None"
 msgctxt "Password mode"
 msgid "None"
-msgstr "ไม่ทำอะไร"
+msgstr "ไม่มีรหัสผ่าน"
 
 #: ../panels/user-accounts/um-user-panel.c:818
-#, fuzzy
-#| msgid "Failed to construct test pipeline for '%s'"
 msgid "Failed to contact the accounts service"
-msgstr "สร้างไปป์ไลน์ทดสอบสำหรับ '%s' ไม่สำเร็จ"
+msgstr "ติดต่อบริการบัญชีผู้ใช้ไม่สำเร็จ"
 
 #: ../panels/user-accounts/um-user-panel.c:820
-#, fuzzy
-#| msgid "Please make sure that the applet is properly installed"
 msgid "Please make sure that the AccountService is installed and enabled."
-msgstr "กรุณาตรวจสอบการติดตั้งแอพเพล็ตว่าเรียบร้อยดีหรือไม่"
+msgstr "กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งและเปิดใช้งาน AccountService"
 
 #: ../panels/user-accounts/um-user-panel.c:853
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr ""
+"หากต้องการเปลี่ยนแปลง\n"
+"ให้คลิกที่ไอคอน * ก่อน"
 
 #: ../panels/user-accounts/um-user-panel.c:891
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-#, fuzzy
-#| msgid "C_reate"
 msgid "Create a user"
-msgstr "_สร้าง"
+msgstr "สร้างบัญชีผู้ใช้"
 
 #: ../panels/user-accounts/um-user-panel.c:902
 #: ../panels/user-accounts/um-user-panel.c:1178
@@ -2780,11 +2651,13 @@ msgid ""
 "To create a user,\n"
 "click the * icon first"
 msgstr ""
+"หากต้องการสร้างบัญชีผู้ใช้\n"
+"ให้คลิกที่ไอคอน * ก่อน"
 
 #: ../panels/user-accounts/um-user-panel.c:911
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "Delete the selected user"
-msgstr ""
+msgstr "ลบผู้ใช้ที่เลือก"
 
 #: ../panels/user-accounts/um-user-panel.c:923
 #: ../panels/user-accounts/um-user-panel.c:1183
@@ -2792,72 +2665,61 @@ msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
 msgstr ""
+"หากต้องการลบบัญชีผู้ใช้\n"
+"ให้คลิกที่ไอคอน * ก่อน"
 
 #: ../panels/user-accounts/um-user-panel.c:1087
-#, fuzzy
-#| msgid "By _country"
 msgid "My Account"
-msgstr "ตาม_ประเทศ"
+msgstr "บัญชีของฉัน"
 
 #: ../panels/user-accounts/um-user-panel.c:1096
 msgid "Other Accounts"
-msgstr ""
+msgstr "บัญชีอื่นๆ"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
 msgid "Add or remove users"
-msgstr ""
+msgstr "เพิ่มหรือลบผู้ใช้"
 
 #. Translators: those are keywords for the user accounts control-center panel
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
-msgstr ""
+msgstr "เข้าระบบ;ชื่อ;ลายนิ้วมือ;รูปแทนตัว;โลโก้;รูปหน้า;รหัสผ่าน;"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid "seconds"
 msgid "User Accounts"
-msgstr "วินาที"
+msgstr "บัญชีผู้ใช้"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#, fuzzy
-#| msgid "C_reate"
 msgid "Cr_eate"
 msgstr "_สร้าง"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
-#, fuzzy
-#| msgid "Create New Location"
 msgid "Create new account"
-msgstr "เพิ่มสถานที่ใหม่"
+msgstr "สร้างบัญชีผู้ใช้ใหม่"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#, fuzzy
-#| msgid "_Country:"
 msgid "_Account Type:"
-msgstr "ประเ_ทศ:"
+msgstr "_ชนิดของบัญชี:"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#, fuzzy
-#| msgid "Full Name"
 msgid "_Full name:"
-msgstr "ชื่อเต็ม"
+msgstr "ชื่_อเต็ม"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#, fuzzy
-#| msgid "User name:"
 msgid "_Username:"
-msgstr "ชื่อผู้ใช้:"
+msgstr "ชื่อ_ผู้ใช้:"
 
 #: ../panels/user-accounts/data/language-chooser.ui.h:1
 #: ../panels/user-accounts/data/photo-dialog.ui.h:3
 msgid "Cancel"
-msgstr ""
+msgstr "ยกเลิก"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
 "strong password</a>"
 msgstr ""
+"<a href=\"http://www.bu.ac.th/hotnews/apr_june46/password/\">การตั้งรหัสผ่านให้ถูกวิธี</a>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid ""
@@ -2865,34 +2727,28 @@ msgid ""
 "to all users of this system.  Do <b>not</b> include the password here.</"
 "small>"
 msgstr ""
+"<small>คำใบ้นี้อาจแสดงในหน้าจอเข้าระบบ และจะปรากฏต่อผู้ใช้ทั้งหมดในระบบนี้ <b>อย่า</"
+"b>ใส่รหัสผ่านไว้ในนี้</small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
-#, fuzzy
-#| msgid "_New password:"
 msgid "C_onfirm password:"
-msgstr "รหัสผ่านให_ม่:"
+msgstr "ยื_นยันรหัสผ่าน:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:4
-#, fuzzy
-#| msgid "Change set"
 msgid "Ch_ange"
-msgstr "ชุดการเปลี่ยนแปลง"
+msgstr "เป_ลี่ยน"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:5
-#, fuzzy
-#| msgid "Change password"
 msgid "Changing password for:"
-msgstr "เปลี่ยนรหัสผ่าน"
+msgstr "เปลี่ยนรหัสผ่านของ:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:6
-#, fuzzy
-#| msgid "Change password"
 msgid "Choose a generated password"
-msgstr "เปลี่ยนรหัสผ่าน"
+msgstr "เลือกรหัสผ่านจากการสุ่ม"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:7
 msgid "Choose password at next login"
-msgstr ""
+msgstr "ตั้งรหัสผ่านในครั้งหน้าที่เข้าระบบ"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:8
 msgid "Current _password:"
@@ -2900,80 +2756,64 @@ msgstr "รหัสผ่าน_ปัจจุบัน:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:9
 msgid "Disable this account"
-msgstr ""
+msgstr "ระงับบัญชีนี้"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:10
 msgid "Enable this account"
-msgstr ""
+msgstr "เปิดใช้บัญชีนี้"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
-#, fuzzy
-#| msgid "Filter"
 msgid "Fair"
-msgstr "ตัวกรอง"
+msgstr "พอใช้"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:12
 msgid "Log in without a password"
-msgstr ""
+msgstr "เข้าระบบโดยไม่ใช้รหัสผ่าน"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:13
-#, fuzzy
-#| msgid "_New password:"
 msgid "Set a password now"
-msgstr "รหัสผ่านให_ม่:"
+msgstr "ตั้งรหัสผ่านเดี๋ยวนี้"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
-#, fuzzy
-#| msgid "Action"
 msgid "_Action:"
-msgstr "ปฏิบัติการ"
+msgstr "_การกระทำ:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:15
-#, fuzzy
-#| msgid "C_ity:"
 msgid "_Hint:"
-msgstr "เ_มือง/อำเภอ:"
+msgstr "คำใ_บ้:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:16
 msgid "_New password:"
 msgstr "รหัสผ่านให_ม่:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:17
-#, fuzzy
-#| msgid "_New password:"
 msgid "_Show password"
-msgstr "รหัสผ่านให_ม่:"
+msgstr "แ_สดงรหัสผ่าน"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:1
-#, fuzzy
-#| msgid "Web Browser"
 msgid "Browse"
-msgstr "เว็บเบราว์เซอร์"
+msgstr "ท่องดู"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 msgid "Changing photo for:"
-msgstr ""
+msgstr "เปลี่ยนภาพถ่ายสำหรับ:"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
 msgid ""
 "Choose a picture that will be shown at the login screen for this account."
-msgstr ""
+msgstr "เลือกรูปภาพสำหรับแสดงที่หน้าจอเข้าระบบของบัญชีนี้"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:6
-#, fuzzy
-#| msgid "Galeon"
 msgid "Gallery"
-msgstr "Galeon"
+msgstr "ห้องภาพ"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:7
 msgid "Photograph"
-msgstr ""
+msgstr "ภาพถ่าย"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#, fuzzy
-#| msgid "Take a break!"
 msgid "Take a photograph"
-msgstr "พักหน่อยละกัน!"
+msgstr "ถ่ายภาพ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
 msgid ""
@@ -2984,86 +2824,74 @@ msgid ""
 "<b>When the guest user logs out, all files and data associated with the "
 "account will be deleted.</b>"
 msgstr ""
+"บัญชีผู้มาเยือนจะอนุญาตให้ใครก็ได้เข้าระบบในคอมพิวเตอร์เครื่องนี้ได้แบบชั่วคราวโดยไม่ต้องใช้รหัสผ่าน "
+"เพื่อความปลอดภัย จะไม่อนุญาตให้เข้าระบบด้วยบัญชีนี้จากเครื่องอื่นในเครือข่าย\n"
+"\n"
+"<b>เมื่อผู้มาเยือนออกจากระบบ แฟ้มและข้อมูลที่เชื่อมโยงกับบัญชีนี้จะถูกลบทิ้งทั้งหมด</b>"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
-msgstr ""
+msgstr "ข้อมูลบัญชี"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Account type:"
-msgstr ""
+msgstr "ชนิดของบัญชี:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-#, fuzzy
-#| msgid "About %s"
 msgid "Accounts"
-msgstr "เกี่ยวกับ %s"
+msgstr "บัญชี"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Address Book Card:"
-msgstr ""
+msgstr "บัตรในสมุดที่อยู่:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Allow guests to log in to this computer"
-msgstr ""
+msgstr "อนุญาตให้ผู้มาเยือนเข้าระบบในคอมพิวเตอร์เครื่องนี้"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Automatic Login:"
-msgstr ""
+msgstr "การเข้าระบบอัตโนมัติ:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
 msgid "E-mail address:"
-msgstr ""
+msgstr "ที่อยู่อีเมล:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
-#, fuzzy
-#| msgid "Enable Fingerprint Login"
 msgid "Fingerprint Login:"
-msgstr "เปิดใช้การเข้าระบบด้วยลายนิ้วมือ"
+msgstr "การเข้าระบบด้วยลายนิ้วมือ:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
-#, fuzzy
-#| msgid "_Language:"
 msgid "Language:"
-msgstr "ภ_าษา:"
+msgstr "ภาษา:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
-#, fuzzy
-#| msgid "Layout _Options..."
 msgid "Login Options"
-msgstr "ตัวเ_ลือกสำหรับผังแป้นพิมพ์..."
+msgstr "ตัวเลือกของการเข้าระบบ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
-#, fuzzy
-#| msgid "_Open"
 msgid "Open"
-msgstr "_เปิด"
+msgstr "เปิด"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
-#, fuzzy
-#| msgid "_Password:"
 msgid "Password:"
-msgstr "_รหัสผ่าน:"
+msgstr "รหัสผ่าน:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
-#, fuzzy
-#| msgid "Description:"
 msgid "Restrictions:"
-msgstr "คำอธิบาย:"
+msgstr "ข้อจำกัด:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
 msgid "Show Shutdown, Suspend and Restart actions"
-msgstr ""
+msgstr "แสดงคำสั่งปิดเครื่อง พักเครื่อง และเปิดเครื่องใหม่"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:24
 msgid "Show list of users"
-msgstr ""
+msgstr "แสดงรายชื่อผู้ใช้"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
-#, fuzzy
-#| msgid "The password is too short."
 msgid "Show password hints"
-msgstr "รหัสผ่านสั้นเกินไป"
+msgstr "แสดงคำใบ้ของรหัสผ่าน"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
 msgid "Left index finger"
@@ -3117,17 +2945,15 @@ msgstr "บันทึกลายนิ้วมือของคุณสำ
 
 #: ../shell/control-center.c:47
 msgid "Show the overview"
-msgstr ""
+msgstr "แสดงภาพรวม"
 
 #: ../shell/control-center.c:48
 msgid "Panel to display"
-msgstr ""
+msgstr "แผงควบคุมที่จะแสดง"
 
 #: ../shell/control-center.c:65
-#, fuzzy
-#| msgid "System Sounds"
 msgid "- System Settings"
-msgstr "เสียงของระบบ"
+msgstr "- ตั้งค่าระบบ"
 
 #: ../shell/control-center.c:72
 #, c-format
@@ -3135,12 +2961,12 @@ msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
+"%s\n"
+"เรียก '%s --help' เพื่อดูตัวเลือกทั้งหมดที่มีสำหรับบรรทัดคำสั่ง\n"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
-#, fuzzy
-#| msgid "System Sounds"
 msgid "System Settings"
-msgstr "เสียงของระบบ"
+msgstr "ตั้งค่าระบบ"
 
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
@@ -3148,90 +2974,35 @@ msgstr "ศูนย์ควบคุม"
 
 #: ../examples/gnome-example-panel.desktop.in.in.h:1
 msgid "Example Panel"
-msgstr ""
+msgstr "แผงควบคุมตัวอย่าง"
 
 #: ../examples/gnome-example-panel.desktop.in.in.h:2
 msgid "Example preferences panel"
-msgstr ""
+msgstr "แผงปรับแต่งตัวอย่าง"
 
 #. Translators: those are keywords for the example control-center panel
 #: ../examples/gnome-example-panel.desktop.in.in.h:4
 msgid "Foo;Bar;Baz;"
-msgstr ""
+msgstr "ขี้หมูรา;ขี้หมาแห้ง;"
 
 #: ../shell/shell.ui.h:2
-#, fuzzy
-#| msgid "Default Settings"
 msgid "_All Settings"
-msgstr "ค่าตั้งปริยาย"
+msgstr "ค่าตั้ง_ทั้งหมด"
 
-#, fuzzy
-#~| msgid "_Application font:"
-#~ msgid "No applications found"
+#~ msgid "_Application font:"
 #~ msgstr "แบบอักษรของโ_ปรแกรม:"
 
-#, fuzzy
-#~| msgid "Open with \"%s\""
-#~ msgid "Open %s"
+#~ msgid "Open with \"%s\""
 #~ msgstr "เปิดด้วย \"%s\""
 
-#, fuzzy
-#~| msgid "Open with Default Application"
-#~ msgid "Open with other Application..."
+#~ msgid "Open with Default Application"
 #~ msgstr "เปิดด้วยโปรแกรมปริยาย"
 
-#, fuzzy
-#~| msgid "Could not get screen information"
-#~ msgid "Could not run application"
-#~ msgstr "ไม่สามารถอ่านข้อมูลเกี่ยวกับหน้าจอ"
-
-#, fuzzy
-#~| msgid "Could not access '%s' device"
-#~ msgid "Could not find '%s'"
-#~ msgstr "ไม่สามารถเข้าใช้อุปกรณ์ '%s'"
-
-#, fuzzy
-#~| msgid "Could not get screen information"
-#~ msgid "Could not find application"
-#~ msgstr "ไม่สามารถอ่านข้อมูลเกี่ยวกับหน้าจอ"
-
-#, fuzzy
-#~| msgid "Could not detect displays"
-#~ msgid "Could not add application"
-#~ msgstr "ตรวจหาจอแสดงผลไม่สำเร็จ"
-
-#, fuzzy
-#~| msgid "Select your default applications"
-#~ msgid "Could not set as default application"
-#~ msgstr "เลือกโปรแกรมหลักๆ ที่จะถูกใช้โดยปรกติ"
-
-#, fuzzy
-#~| msgid "Set as Application Font"
-#~ msgid "Select an Application"
+#~ msgid "Set as Application Font"
 #~ msgstr "ตั้งเป็นแบบอักษรสำหรับโปรแกรม"
-
-#, fuzzy
-#~| msgid "Open with \"%s\""
-#~ msgid "Open With"
-#~ msgstr "เปิดด้วย \"%s\""
 
 #~ msgid "_Open"
 #~ msgstr "_เปิด"
-
-#, fuzzy
-#~| msgid "Open with \"%s\""
-#~ msgid "Open %s with:"
-#~ msgstr "เปิดด้วย \"%s\""
-
-#, fuzzy
-#~| msgid "_Add..."
-#~ msgid "_Add"
-#~ msgstr "เ_พิ่ม..."
-
-#, fuzzy
-#~| msgid "Preferred Applications"
-#~ msgid "Add Application"
-#~ msgstr "เลือกโปรแกรมหลักๆ"
 
 #~ msgid "Image/label border"
 #~ msgstr "เส้นขอบรูป/ป้าย"
@@ -3731,9 +3502,7 @@ msgstr "ค่าตั้งปริยาย"
 #~ msgid "Font Rendering Details"
 #~ msgstr "รายละเอียดการวาดตัวอักษร"
 
-#, fuzzy
-#~| msgid "Save _background image"
-#~ msgid "Get more backgrounds online"
+#~ msgid "Save _background image"
 #~ msgstr "บันทึกภาพ_พื้นหลัง"
 
 #~ msgid "Gra_yscale"
@@ -3821,11 +3590,6 @@ msgstr "ค่าตั้งปริยาย"
 
 #~ msgid "VB_GR"
 #~ msgstr "VB_GR"
-
-#, fuzzy
-#~| msgid "Vertical Gradient"
-#~ msgid "Vertical gradient"
-#~ msgstr "ไล่สีตามแนวนอน"
 
 #~ msgid "Window Border"
 #~ msgstr "กรอบหน้าต่าง"
@@ -3983,13 +3747,6 @@ msgstr "ค่าตั้งปริยาย"
 #~ msgid "Could not install theme engine"
 #~ msgstr "ติดตั้งกลไกชุดตกแต่งไม่สำเร็จ"
 
-#, fuzzy
-#~| msgid ""
-#~| "Unable to start the settings manager 'gnome-settings-daemon'.\n"
-#~| "Without the GNOME settings manager running, some preferences may not "
-#~| "take effect. This could indicate a problem with Bonobo, or a non-GNOME "
-#~| "(e.g. KDE) settings manager may already be active and conflicting with "
-#~| "the GNOME settings manager."
 #~ msgid ""
 #~ "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 #~ "Without the GNOME settings manager running, some preferences may not take "
@@ -3998,7 +3755,7 @@ msgstr "ค่าตั้งปริยาย"
 #~ "GNOME settings manager."
 #~ msgstr ""
 #~ "ไม่สามารถเรียกโปรแกรมจัดการค่าตั้ง 'gnome-settings-daemon' ได้\n"
-#~ "ถ้าขาดโปรแกรมนี้ การปรับแต่งบางอย่างอาจไม่มีผล อาการนี้อาจบ่งบอกว่ามีปัญหาเกี่ยวกับ Bonobo "
+#~ "ถ้าขาดโปรแกรมนี้ การปรับแต่งบางอย่างอาจไม่มีผล อาการนี้อาจบ่งบอกว่ามีปัญหาเกี่ยวกับ DBus "
 #~ "หรือไม่ก็มีโปรแกรมจัดการค่าตั้งที่ไม่ใช่ GNOME (เช่น KDE) ทำงานอยู่ "
 #~ "และเกิดขัดกันกับโปรแกรมจัดการค่าตั้งของ GNOME"
 
@@ -4213,9 +3970,7 @@ msgstr "ค่าตั้งปริยาย"
 #~ msgid "Display Preferences"
 #~ msgstr "ปรับแต่งจอแสดงผล"
 
-#, fuzzy
-#~| msgid "<i>Drag the monitors to set their place</i>"
-#~ msgid "Drag the monitors to set their place"
+#~ msgid "<i>Drag the monitors to set their place</i>"
 #~ msgstr "<i>ลากจอภาพเพื่อกำหนดตำแหน่ง</i>"
 
 #~ msgid "Include _panel"
@@ -4276,9 +4031,7 @@ msgstr "ค่าตั้งปริยาย"
 #~ msgid "Show _visual feedback for the alert sound"
 #~ msgstr "แสดงการตอบสนองทาง_ภาพประกอบเสียงแจ้งเตือน"
 
-#, fuzzy
-#~| msgid "<b>Visual cues for sounds</b>"
-#~ msgid "Visual cues for sounds"
+#~ msgid "<b>Visual cues for sounds</b>"
 #~ msgstr "<b>สัญญาณทางภาพสำหรับเสียง</b>"
 
 #~ msgid "A_cceleration:"
@@ -4308,9 +4061,7 @@ msgstr "ค่าตั้งปริยาย"
 #~ msgstr ""
 #~ "ล็อคหน้าจอหลังจากทำงานไประยะเวลาหนึ่ง เพื่อช่วยป้องกันการปวดนิ้วและข้อมือจากการพิมพ์ต่อเนื่อง"
 
-#, fuzzy
-#~| msgid "_Selected layouts:"
-#~ msgid "Selected _layouts:"
+#~ msgid "_Selected layouts:"
 #~ msgstr "ผังแป้นพิมพ์ที่เ_ลือก:"
 
 #~ msgid "_Accessibility features can be toggled with keyboard shortcuts"
