@@ -10,8 +10,10 @@ libkeyboard_la_SOURCES =   \
 	cc-keyboard-panel.h		\
 	wm-common.c			\
 	wm-common.h			\
-	gnome-keyboard-panel.c		\
-	gnome-keyboard-panel.h		\
+	keyboard-general.c		\
+	keyboard-general.h		\
+	keyboard-shortcuts.c		\
+	keyboard-shortcuts.h		\
 	eggcellrendererkeys.c		\
 	eggcellrendererkeys.h		\
 	eggaccelerators.c		\

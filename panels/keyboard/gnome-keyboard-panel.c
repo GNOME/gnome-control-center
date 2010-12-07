@@ -82,9 +82,7 @@ static gboolean block_accels = FALSE;
 static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
 static GtkWidget *custom_shortcut_command_entry = NULL;
-
-static GSettings *keyboard_settings = NULL;
-static GSettings *interface_settings = NULL;
+static GHashTable *keyb_sections = NULL;
 
 #define WID(builder, name) (GTK_WIDGET (gtk_builder_get_object (builder, name)))
 
@@ -1576,7 +1574,7 @@ add_custom_shortcut (GtkTreeView  *tree_view,
       key_entry->gconf_cnxn_desc = gconf_client_notify_add (client,
                                                             key_entry->desc_gconf_key,
 					    		    (GConfClientNotifyFunc) &keybinding_description_changed,
-																            key_entry, NULL, NULL);
+							    key_entry, NULL, NULL);
       key_entry->gconf_cnxn_cmd = gconf_client_notify_add (client,
 	                                                   key_entry->cmd_gconf_key,
 						           (GConfClientNotifyFunc) &keybinding_command_changed,
@@ -1822,33 +1820,6 @@ remove_button_clicked (GtkWidget  *button,
 }
 
 static void
-setup_general_page (GtkBuilder *builder)
-{
-  if (keyboard_settings == NULL)
-    keyboard_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.keyboard");
-
-  if (interface_settings == NULL)
-    interface_settings = g_settings_new ("org.gnome.desktop.interface");
-
-  g_settings_bind (keyboard_settings, "repeat",
-                   gtk_builder_get_object (builder, "repeat_toggle"), "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (keyboard_settings, "delay",
-                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_delay_scale"))), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (keyboard_settings, "rate",
-                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_speed_scale"))), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  g_settings_bind (interface_settings, "cursor-blink",
-                   gtk_builder_get_object (builder, "cursor_toggle"), "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (interface_settings, "cursor-blink-time",
-                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "cursor_blink_time_scale"))), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-}
-
-static void
 setup_dialog (CcPanel *panel, GtkBuilder *builder)
 {
   GConfClient *client;
@@ -1859,8 +1830,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   GtkTreeSelection *selection;
   GSList *allowed_keys;
   CcShell *shell;
-
-  setup_general_page (builder);
 
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
                                                     "shortcut_treeview"));
@@ -1972,6 +1941,9 @@ gnome_keybinding_properties_init (CcPanel *panel, GtkBuilder *builder)
 {
   wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
                                             builder);
+
+  keyb_sections = g_hash_table_new_full (g_str_hash, g_str_equal,
+					 g_free, free_key_list);
   setup_dialog (panel, builder);
 }
 
@@ -1988,6 +1960,9 @@ gnome_keybinding_properties_dispose (CcPanel *panel)
 
       g_signal_handler_disconnect (toplevel, maybe_block_accels_id);
       maybe_block_accels_id = 0;
+
+      if (keyb_sections != NULL)
+        g_hash_table_destroy (keyb_sections);
     }
 }
 

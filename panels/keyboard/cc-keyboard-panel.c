@@ -20,7 +20,8 @@
  */
 
 #include "cc-keyboard-panel.h"
-#include "gnome-keyboard-panel.h"
+#include "keyboard-general.h"
+#include "keyboard-shortcuts.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC_TYPE_PANEL)
 
@@ -62,7 +63,8 @@ cc_keyboard_panel_set_property (GObject      *object,
 static void
 cc_keyboard_panel_dispose (GObject *object)
 {
-  gnome_keybinding_properties_dispose (CC_PANEL (object));
+  keyboard_general_dispose (CC_PANEL (object));
+  keyboard_shortcuts_dispose (CC_PANEL (object));
 
   G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->dispose (object);
 }
@@ -102,7 +104,8 @@ cc_keyboard_panel_constructor (GType                  gtype,
       return obj;
     }
 
-  gnome_keybinding_properties_init (CC_PANEL (self), priv->builder);
+  keyboard_general_init (CC_PANEL (self), priv->builder);
+  keyboard_shortcuts_init (CC_PANEL (self), priv->builder);
 
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
                                                  "keyboard_notebook");
