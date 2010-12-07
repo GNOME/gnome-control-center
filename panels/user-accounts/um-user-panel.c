@@ -131,6 +131,7 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         gchar *text;
         GtkTreeSelection *selection;
         gint sort_key;
+        gchar *escaped_name;
 
         g_debug ("user added: %d %s\n", um_user_get_uid (user), um_user_get_real_name (user));
         widget = get_widget (d, "list-treeview");
@@ -139,9 +140,11 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 
         pixbuf = um_user_render_icon (user, TRUE, 48);
+        escaped_name = g_markup_escape_text (um_user_get_display_name (user), -1);
         text = g_strdup_printf ("<b>%s</b>\n<i>%s</i>",
-                                um_user_get_display_name (user),
+                                escaped_name,
                                 um_account_type_get_name (um_user_get_account_type (user)));
+        g_free (escaped_name);
 
         if (um_user_get_uid (user) == getuid ()) {
                 sort_key = 1;
