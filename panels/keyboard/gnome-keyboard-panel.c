@@ -1612,45 +1612,45 @@ start_editing_kb_cb (GtkTreeView *treeview,
 			  GtkTreeViewColumn *column,
 			  gpointer user_data)
 {
-      GtkTreeModel *model;
-      GtkTreeIter iter;
-      KeyEntry *key;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  KeyEntry *key;
 
-      model = gtk_tree_view_get_model (treeview);
-      gtk_tree_model_get_iter (model, &iter, path);
-      gtk_tree_model_get (model, &iter,
-                          KEYENTRY_COLUMN, &key,
-                         -1);
+  model = gtk_tree_view_get_model (treeview);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_model_get (model, &iter,
+		      KEYENTRY_COLUMN, &key,
+		      -1);
 
-      if (key == NULL)
-        {
-	  /* This is a section heading - expand or collapse */
-	  if (gtk_tree_view_row_expanded (treeview, path))
-	    gtk_tree_view_collapse_row (treeview, path);
-	  else
-	    gtk_tree_view_expand_row (treeview, path, FALSE);
-          return;
-	}
-
-      /* if only the accel can be edited on the selected row
-       * always select the accel column */
-      if (key->desc_editable &&
-          column == gtk_tree_view_get_column (treeview, 0))
-        {
-          gtk_widget_grab_focus (GTK_WIDGET (treeview));
-          gtk_tree_view_set_cursor (treeview, path,
-                                    gtk_tree_view_get_column (treeview, 0),
-                                    FALSE);
-          update_custom_shortcut (model, &iter);
-        }
+  if (key == NULL)
+    {
+      /* This is a section heading - expand or collapse */
+      if (gtk_tree_view_row_expanded (treeview, path))
+	gtk_tree_view_collapse_row (treeview, path);
       else
-        {
-          gtk_widget_grab_focus (GTK_WIDGET (treeview));
-          gtk_tree_view_set_cursor (treeview,
-                                    path,
-                                    gtk_tree_view_get_column (treeview, 1),
-                                    TRUE);
-        }
+	gtk_tree_view_expand_row (treeview, path, FALSE);
+      return;
+    }
+
+  /* if only the accel can be edited on the selected row
+   * always select the accel column */
+  if (key->desc_editable &&
+      column == gtk_tree_view_get_column (treeview, 0))
+    {
+      gtk_widget_grab_focus (GTK_WIDGET (treeview));
+      gtk_tree_view_set_cursor (treeview, path,
+				gtk_tree_view_get_column (treeview, 0),
+				FALSE);
+      update_custom_shortcut (model, &iter);
+    }
+  else
+    {
+       gtk_widget_grab_focus (GTK_WIDGET (treeview));
+       gtk_tree_view_set_cursor (treeview,
+				 path,
+				 gtk_tree_view_get_column (treeview, 1),
+				 TRUE);
+    }
 }
 
 static gboolean
