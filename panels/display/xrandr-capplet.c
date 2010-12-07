@@ -382,7 +382,7 @@ count_all_outputs (GnomeRRConfig *config)
 }
 #endif
 
-/* Computes whether "Mirror Screens" (clone mode) is supported based on these criteria:
+/* Computes whether "Mirror displays" (clone mode) is supported based on these criteria:
  *
  * 1. There is an available size for cloning.
  *
@@ -444,6 +444,17 @@ rebuild_mirror_screens (App *app)
   g_signal_handlers_unblock_by_func (app->clone_checkbox, G_CALLBACK (on_clone_changed), app);
 }
 
+static char *
+mirror_monitor_name (void)
+{
+  /* Translators:  this is the feature where what you see on your laptop's
+   * screen is the same as your external monitor.  Here, "Mirror" is being
+   * used as an adjective, not as a verb.  For example, the Spanish
+   * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+   */
+  return g_strdup (_("Mirror Displays"));
+}
+
 static void
 rebuild_current_monitor_label (App *app)
 {
@@ -454,7 +465,7 @@ rebuild_current_monitor_label (App *app)
   if (app->current_output)
     {
       if (app->current_configuration->clone)
-        tmp = g_strdup (_("Mirror Screens"));
+        tmp = mirror_monitor_name ();
       else
         tmp = g_strdup (app->current_output->display_name);
 
@@ -979,7 +990,7 @@ on_clone_changed (GtkWidget *box, gpointer data)
         }
 
       /* Turn on all the connected screens that support the best clone mode.
-       * The user may hit "Mirror Screens", but he shouldn't have to turn on
+       * The user may hit "Mirror displays", but he shouldn't have to turn on
        * all the required outputs as well.
        */
 
@@ -1702,16 +1713,10 @@ get_display_name (App *app,
   PangoLayout *layout;
   char *text;
 
-  if (app->current_configuration->clone) {
-    /* Translators:  this is the feature where what you see on your laptop's
-     * screen is the same as your external monitor.  Here, "Mirror" is being
-     * used as an adjective, not as a verb.  For example, the Spanish
-     * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
-     */
-    text = g_strdup(_("Mirror Screens"));
-  } else {
+  if (app->current_configuration->clone)
+    text = mirror_monitor_name ();
+  else
     text = g_strdup (output->display_name);
-  }
 
   layout = gtk_widget_create_pango_layout (GTK_WIDGET (app->area), text);
   g_free (text);
