@@ -132,7 +132,6 @@ generate_passwords (UmPasswordDialog *um)
         gchar *output, *err, *cmdline;
         gint status;
         GError *error;
-        gchar **lines;
         gint i;
         GtkWidget *item;
 
@@ -154,9 +153,8 @@ generate_passwords (UmPasswordDialog *um)
         if (!g_spawn_command_line_sync (cmdline, &output, &err, &status, &error)) {
                 g_warning ("Failed to run apg: %s", error->message);
                 g_error_free (error);
-        }
-
-        if (WEXITSTATUS (status) == 0) {
+        } else if (WEXITSTATUS (status) == 0) {
+                char **lines;
                 lines = g_strsplit (output, "\n", 0);
                 for (i = 0; lines[i]; i++) {
                         if (lines[i][0] == 0)
@@ -169,8 +167,7 @@ generate_passwords (UmPasswordDialog *um)
                         gtk_menu_shell_append (GTK_MENU_SHELL (um->generate_menu), item);
                 }
                 g_strfreev (lines);
-        }
-        else {
+        } else {
                 g_warning ("agp returned an error: %s", err);
         }
 
