@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-11-25 15:34+0000\n"
-"PO-Revision-Date: 2010-12-05 20:32+0200\n"
+"POT-Creation-Date: 2010-12-07 17:43+0000\n"
+"PO-Revision-Date: 2010-12-08 06:42+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -282,6 +282,9 @@ msgstr ""
 msgid ":"
 msgstr ""
 
+msgid "AM"
+msgstr ""
+
 msgid "April"
 msgstr "Aprill"
 
@@ -516,12 +519,6 @@ msgstr "Kuvar"
 msgid "Normal"
 msgstr "Tavaline"
 
-msgid "Off"
-msgstr "Välja lülitatud"
-
-msgid "On"
-msgstr "Sisse lülitatud"
-
 msgid "R_otation:"
 msgstr "_Pööramine:"
 
@@ -531,13 +528,16 @@ msgstr "Paremale"
 msgid "Upside-down"
 msgstr "Tagurpidi"
 
-msgid "_Detect monitors"
+#, fuzzy
+#| msgid "_Detect monitors"
+msgid "_Detect Monitors"
 msgstr "_Tuvasta kuvarid"
 
+#. Note that mirror is a verb in this string
 #, fuzzy
-#| msgid "Mirror Screens"
-msgid "_Mirror Screens"
-msgstr "Ekraanid on peegeldatud"
+#| msgid "_Mirror screens"
+msgid "_Mirror displays"
+msgstr "Ekraanid on pee_geldatud"
 
 msgid "_Resolution:"
 msgstr "_Eraldusvõime"
@@ -564,13 +564,12 @@ msgstr "Pea peal"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-msgid "Mirror Screens"
-msgstr "Ekraanid on peegeldatud"
+msgid "Mirror Displays"
+msgstr ""
 
-#, fuzzy, c-format
-#| msgid "%d x %d"
+#, c-format
 msgid "%d x %d (%s)"
-msgstr "%d x %d"
+msgstr "%d x %d (%s)"
 
 #, c-format
 msgid "%d x %d"
@@ -760,9 +759,6 @@ msgstr "_Nimi:"
 msgid "_Speed:"
 msgstr "Kii_rus:"
 
-msgid "No applications found"
-msgstr "Rakendust ei leitud"
-
 msgid "Ask what to do"
 msgstr ""
 
@@ -771,125 +767,6 @@ msgstr ""
 
 msgid "Open Folder"
 msgstr ""
-
-#, c-format
-msgid "Open %s"
-msgstr ""
-
-#, fuzzy
-#| msgid "Open with Default Application"
-msgid "Open with other Application..."
-msgstr "Ava vaikimisi rakendusega"
-
-#, fuzzy
-#| msgid "Could not get screen information"
-msgid "Could not run application"
-msgstr "Ekraani andmeid pole võimalik hankida"
-
-#, fuzzy, c-format
-#| msgid "Could not open %s: %s\n"
-msgid "Could not find '%s'"
-msgstr "Faili %s pole võimalik avada: %s\n"
-
-#, fuzzy
-#| msgid "Could not get screen information"
-msgid "Could not find application"
-msgstr "Ekraani andmeid pole võimalik hankida"
-
-#, c-format
-msgid "Could not add application to the application database: %s"
-msgstr ""
-
-#, fuzzy
-#| msgid "Could not detect displays"
-msgid "Could not add application"
-msgstr "Kuvasid pole võimalik tuvastada"
-
-#, fuzzy, c-format
-#| msgid "Could not get information for %s: %s\n"
-msgid "Could not set application as the default: %s"
-msgstr "Faili %s kohta pole võimalik andmeid hankida:%s\n"
-
-#, fuzzy
-#| msgid "Select your default applications"
-msgid "Could not set as default application"
-msgstr "Vaikimisi kasutatavate rakenduste valimine"
-
-#, fuzzy
-#| msgid "Select your default applications"
-msgid "Select an Application"
-msgstr "Vaikimisi kasutatavate rakenduste valimine"
-
-#, fuzzy
-#| msgid "Open with \"%s\""
-msgid "Open With"
-msgstr "Ava rakendusega \"%s\""
-
-msgid "Select an application to view its description."
-msgstr ""
-
-msgid "_Use a custom command"
-msgstr ""
-
-#, fuzzy
-#| msgid "_Show..."
-msgid "_Browse..."
-msgstr "_Näita..."
-
-#, fuzzy
-#| msgid "Opera"
-msgid "_Open"
-msgstr "Opera"
-
-#. first %s is a filename and second %s is a file extension
-#, c-format
-msgid "Open %s and other %s document with:"
-msgstr ""
-
-#. the %s here is a file name
-#. %s is a filename
-#, fuzzy, c-format
-#| msgid "Open with \"%s\""
-msgid "Open %s with:"
-msgstr "Ava rakendusega \"%s\""
-
-#, c-format
-msgid "_Remember this application for %s documents"
-msgstr ""
-
-#. Only in add mode - the %s here is a file extension
-#, c-format
-msgid "Open all %s documents with:"
-msgstr ""
-
-msgid "Unknown"
-msgstr "Tundmatu"
-
-#. First %s is a filename, second is a description
-#. * of the type, eg "plain text document"
-#, c-format
-msgid "Open %s and other \"%s\" files with:"
-msgstr ""
-
-#. %s is a file type description
-#, c-format
-msgid "_Remember this application for \"%s\" files"
-msgstr ""
-
-#. Only in add mode
-#, c-format
-msgid "Open all \"%s\" files with:"
-msgstr ""
-
-#, fuzzy
-#| msgid "_Add..."
-msgid "_Add"
-msgstr "Li_sa..."
-
-#, fuzzy
-#| msgid "Preferred Applications"
-msgid "Add Application"
-msgstr "Eelistatud rakendused"
 
 #, fuzzy
 #| msgid "Action"
@@ -1040,6 +917,9 @@ msgstr "_Tarnijad:"
 msgid "Keyboard Layout Options"
 msgstr "Klaviatuuripaigutuse valikud"
 
+msgid "Unknown"
+msgstr "Tundmatu"
+
 msgid "Layout"
 msgstr "Paigutus"
 
@@ -1189,10 +1069,8 @@ msgstr "A_japiirang:"
 msgid "_Trigger secondary click by holding down the primary button"
 msgstr "_Vasaku nupu allhoidmisel tehakse paremklõps"
 
-#, fuzzy
-#| msgid "Touchpad"
 msgid "Mouse and Touchpad"
-msgstr "Puutepadi"
+msgstr "Hiir ja puutepadi"
 
 #, fuzzy
 #| msgid "Set your mouse preferences"
@@ -1200,7 +1078,7 @@ msgid "Set your mouse and touchpad preferences"
 msgstr "Hiire-eelistuste seadmine"
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
-msgid "Trackpad;Pointer;Click;Tap;Double;Button;"
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr ""
 
 msgid "New Location..."
@@ -1317,38 +1195,32 @@ msgstr ""
 msgid "Unknown time"
 msgstr "Tundmatu aeg"
 
-#, fuzzy, c-format
-#| msgid "minutes"
+#, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
-msgstr[0] "minutit"
-msgstr[1] "minutit"
+msgstr[0] "%i minut"
+msgstr[1] "%i minutit"
 
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i tund"
+msgstr[1] "%i tundi"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#, fuzzy, c-format
-#| msgid "%d %s by %d %s"
+#, c-format
 msgid "%i %s %i %s"
-msgstr "%d %s × %d %s"
+msgstr "%i %s %i %s"
 
-#, fuzzy
-#| msgid "Short"
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] "Lühike"
-msgstr[1] "Lühike"
+msgstr[0] "tund"
+msgstr[1] "tundi"
 
-#, fuzzy
-#| msgid "minutes"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "minutit"
+msgstr[0] "minut"
 msgstr[1] "minutit"
 
 msgid "Battery charging"
@@ -1390,84 +1262,64 @@ msgstr "Ava vaikimisi rakendusega"
 msgid " — GNOME Volume Control Applet"
 msgstr ""
 
-#, fuzzy
-#| msgid "Mutt"
 msgid "Output"
-msgstr "Mutt"
+msgstr "Väljund"
 
 msgid "Sound Output Volume"
 msgstr ""
 
 msgid "Input"
-msgstr ""
+msgstr "Sisend"
 
 msgid "Microphone Volume"
 msgstr ""
 
-#, fuzzy
-#| msgid "Left"
 msgctxt "balance"
 msgid "Left"
-msgstr "Vasakule"
+msgstr "Vasak"
 
-#, fuzzy
-#| msgid "Right"
 msgctxt "balance"
 msgid "Right"
-msgstr "Paremale"
+msgstr "Parem"
 
-#, fuzzy
-#| msgid "Search"
 msgctxt "balance"
 msgid "Rear"
-msgstr "Otsing"
+msgstr ""
 
-#, fuzzy
-#| msgid "Fonts"
 msgctxt "balance"
 msgid "Front"
-msgstr "Kirjatüübid"
+msgstr ""
 
-#, fuzzy
-#| msgid "Minimize"
 msgctxt "balance"
 msgid "Minimum"
-msgstr "minimeerib"
+msgstr ""
 
-#, fuzzy
-#| msgid "Maximize"
 msgctxt "balance"
 msgid "Maximum"
-msgstr "maksimeerib"
+msgstr ""
 
 msgid "_Balance:"
 msgstr ""
 
-#, fuzzy
-#| msgid "_Name:"
 msgid "_Fade:"
-msgstr "_Nimi:"
+msgstr ""
 
 msgid "_Subwoofer:"
 msgstr ""
 
 msgctxt "volume"
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgctxt "volume"
 msgid "Unamplified"
 msgstr ""
 
-#, fuzzy
-#| msgid "Mutt"
 msgid "Mute"
-msgstr "Mutt"
+msgstr ""
 
-#, fuzzy
-#| msgid "_Mobile:"
 msgid "_Profile:"
-msgstr "_Mobiil:"
+msgstr "_Profiil:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
@@ -1490,21 +1342,17 @@ msgstr[1] ""
 msgid "System Sounds"
 msgstr "Süsteem"
 
-#, fuzzy
-#| msgid "Co_untry:"
 msgid "Co_nnector:"
-msgstr "_Riik:"
+msgstr ""
 
 msgid "Peak detect"
 msgstr ""
 
-#, fuzzy
-#| msgid "Name:"
 msgid "Name"
-msgstr "Nimi:"
+msgstr "Nimi"
 
 msgid "Device"
-msgstr ""
+msgstr "Seade"
 
 #, c-format
 msgid "Speaker Testing for %s"
@@ -1547,10 +1395,8 @@ msgstr ""
 msgid "C_hoose a device for sound output:"
 msgstr ""
 
-#, fuzzy
-#| msgid "_Application font:"
 msgid "Applications"
-msgstr "_Rakenduste kirjatüüp:"
+msgstr "Rakendused"
 
 msgid "No application is currently playing or recording audio."
 msgstr ""
@@ -1570,28 +1416,20 @@ msgstr ""
 msgid "Failed to start Sound Preferences: %s"
 msgstr ""
 
-#, fuzzy
-#| msgid "Mutt"
 msgid "_Mute"
-msgstr "Mutt"
+msgstr "_Tumm"
 
-#, fuzzy
-#| msgid "Mouse Preferences"
 msgid "_Sound Preferences"
-msgstr "Hiire-eelistused"
+msgstr "_Helieelistused"
 
-#, fuzzy
-#| msgid "Multimedia"
 msgid "Muted"
-msgstr "Multimeedia"
+msgstr "Tumm"
 
 msgid "Built-in"
 msgstr ""
 
-#, fuzzy
-#| msgid "Mouse Preferences"
 msgid "Sound Preferences"
-msgstr "Hiire-eelistused"
+msgstr "Helieelistused"
 
 msgid "Testing event sound"
 msgstr ""
@@ -1634,10 +1472,8 @@ msgstr ""
 
 #. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
 #. You might want to translate it into the equivalent words of your language.
-#, fuzzy
-#| msgid "Sound"
 msgid "Sonar"
-msgstr "Heli"
+msgstr "Sonar"
 
 #. Translators: those are keywords for the universal access control-center panel
 msgid "Keyboard;Mouse;a11y;Accessibility;"
@@ -1794,46 +1630,38 @@ msgstr "Kiireid klahvide korduvvajutusi _eiratakse"
 msgid "Increase size:"
 msgstr ""
 
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "Keyboard Settings..."
-msgstr "Kiirklahvid"
+msgstr "Klaviatuurisätted..."
 
-#, fuzzy
-#| msgid "Large"
 msgid "Larger"
-msgstr "Suur"
+msgstr ""
 
-#, fuzzy
-#| msgid "Contact"
 msgid "LowContrast"
-msgstr "Kontaktaadress"
+msgstr ""
 
-#, fuzzy
-#| msgid "Mouse Orientation"
 msgid "Mouse Settings..."
-msgstr "Vasaku- või paremakäeliste hiir"
+msgstr "Hiiresätted..."
 
-#, fuzzy
-#| msgid "None"
 msgid "Nomon"
-msgstr "ei tee midagi"
+msgstr ""
 
 msgid "None"
 msgstr "ei tee midagi"
 
-#, fuzzy
-#| msgid "GNOME OnScreen Keyboard"
+msgid "Off"
+msgstr "Välja lülitatud"
+
+msgid "On"
+msgstr "Sisse lülitatud"
+
 msgid "On screen keyboard"
-msgstr "GNOME ekraaniklaviatuur"
+msgstr "Ekraaniklaviatuur"
 
 msgid "OnBoard"
 msgstr ""
 
-#, fuzzy
-#| msgid "_Options..."
 msgid "Options..."
-msgstr "_Valikud..."
+msgstr "Valikud..."
 
 msgid "Pointing and Clicking"
 msgstr ""
@@ -2053,10 +1881,8 @@ msgstr "Seade on juba kasutusel."
 msgid "An internal error occurred."
 msgstr "Tekkis sisemine viga"
 
-#, fuzzy
-#| msgid "Disabled"
 msgid "Enabled"
-msgstr "Välja lülitatud"
+msgstr ""
 
 msgid "Delete registered fingerprints?"
 msgstr "Kas kustutada registreeritud sõrmejäljed?"
@@ -2185,40 +2011,32 @@ msgstr "See parool ei ole õige."
 
 msgctxt "Password strength"
 msgid "Too short"
-msgstr ""
+msgstr "Liiga lühike"
 
 msgctxt "Password strength"
 msgid "Weak"
-msgstr ""
+msgstr "Nõrk"
 
-#, fuzzy
-#| msgid "Filter"
 msgctxt "Password strength"
 msgid "Fair"
-msgstr "Filter"
+msgstr ""
 
 msgctxt "Password strength"
 msgid "Good"
-msgstr ""
+msgstr "Hea"
 
-#, fuzzy
-#| msgid "Scrolling"
 msgctxt "Password strength"
 msgid "Strong"
-msgstr "Kerimine"
+msgstr "Tugev"
 
 msgid "Passwords do not match"
 msgstr ""
 
-#, fuzzy
-#| msgid "Change password"
 msgid "Wrong password"
-msgstr "Parooli muutmine"
+msgstr "Vale parool"
 
-#, fuzzy
-#| msgid "_Select"
 msgid "Select"
-msgstr "_Vali"
+msgstr ""
 
 msgid "Browse for more pictures"
 msgstr ""
@@ -2291,11 +2109,9 @@ msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr ""
 
-#, fuzzy
-#| msgid "None"
 msgctxt "Password mode"
 msgid "None"
-msgstr "ei tee midagi"
+msgstr ""
 
 msgid "Failed to contact the accounts service"
 msgstr ""
@@ -2310,10 +2126,8 @@ msgid ""
 "click the * icon first"
 msgstr ""
 
-#, fuzzy
-#| msgid "C_reate"
 msgid "Create a user"
-msgstr "_Loo"
+msgstr ""
 
 msgid ""
 "To create a user,\n"
@@ -2328,50 +2142,38 @@ msgid ""
 "click the * icon first"
 msgstr ""
 
-#, fuzzy
-#| msgid "By _country"
 msgid "My Account"
-msgstr "_Riigi järgi"
+msgstr "Minu konto"
 
 msgid "Other Accounts"
 msgstr ""
 
 msgid "Add or remove users"
-msgstr ""
+msgstr "Kasutajate lisamine ja eemaldamine"
 
 #. Translators: those are keywords for the user accounts control-center panel
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr ""
 
-#, fuzzy
-#| msgid "seconds"
 msgid "User Accounts"
-msgstr "sekundit"
+msgstr "Kasutajakontod"
 
 #, fuzzy
 #| msgid "C_reate"
 msgid "Cr_eate"
 msgstr "_Loo"
 
-#, fuzzy
-#| msgid "Create New Location"
 msgid "Create new account"
-msgstr "Uue asukoha loomine"
+msgstr "Uue konto loomine"
 
-#, fuzzy
-#| msgid "_Country:"
 msgid "_Account Type:"
-msgstr "_Riik:"
+msgstr "Konto _liik:"
 
-#, fuzzy
-#| msgid "Full Name"
 msgid "_Full name:"
-msgstr "Täisnimi"
+msgstr "_Täisnimi:"
 
-#, fuzzy
-#| msgid "User name:"
 msgid "_Username:"
-msgstr "Kasutajanimi:"
+msgstr "_Kasutajanimi:"
 
 msgid "Cancel"
 msgstr ""
@@ -2462,18 +2264,14 @@ msgid ""
 "Choose a picture that will be shown at the login screen for this account."
 msgstr ""
 
-#, fuzzy
-#| msgid "Galeon"
 msgid "Gallery"
-msgstr "Galeon"
+msgstr ""
 
 msgid "Photograph"
 msgstr ""
 
-#, fuzzy
-#| msgid "Take a break!"
 msgid "Take a photograph"
-msgstr "Tee üks puhkepaus!"
+msgstr ""
 
 msgid ""
 "A guest account will allow anyone to temporarily log in to this computer "
@@ -2576,6 +2374,23 @@ msgstr ""
 "Sinu sõrmejälg on edukalt salvestatud. Sul peaks olema nüüd võimalik "
 "sõrmejäljelugeja abil sisse logida."
 
+msgid "Show the overview"
+msgstr ""
+
+msgid "Panel to display"
+msgstr ""
+
+#, fuzzy
+#| msgid "System"
+msgid "- System Settings"
+msgstr "Süsteem"
+
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+
 msgid "System Settings"
 msgstr ""
 
@@ -2594,6 +2409,82 @@ msgstr ""
 
 msgid "_All Settings"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Mirror Screens"
+#~ msgid "_Mirror Screens"
+#~ msgstr "Ekraanid on peegeldatud"
+
+#~ msgid "Mirror Screens"
+#~ msgstr "Ekraanid on peegeldatud"
+
+#~ msgid "No applications found"
+#~ msgstr "Rakendust ei leitud"
+
+#, fuzzy
+#~| msgid "Open with Default Application"
+#~ msgid "Open with other Application..."
+#~ msgstr "Ava vaikimisi rakendusega"
+
+#, fuzzy
+#~| msgid "Could not get screen information"
+#~ msgid "Could not run application"
+#~ msgstr "Ekraani andmeid pole võimalik hankida"
+
+#, fuzzy
+#~| msgid "Could not open %s: %s\n"
+#~ msgid "Could not find '%s'"
+#~ msgstr "Faili %s pole võimalik avada: %s\n"
+
+#, fuzzy
+#~| msgid "Could not get screen information"
+#~ msgid "Could not find application"
+#~ msgstr "Ekraani andmeid pole võimalik hankida"
+
+#, fuzzy
+#~| msgid "Could not detect displays"
+#~ msgid "Could not add application"
+#~ msgstr "Kuvasid pole võimalik tuvastada"
+
+#, fuzzy
+#~| msgid "Could not get information for %s: %s\n"
+#~ msgid "Could not set application as the default: %s"
+#~ msgstr "Faili %s kohta pole võimalik andmeid hankida:%s\n"
+
+#, fuzzy
+#~| msgid "Select your default applications"
+#~ msgid "Could not set as default application"
+#~ msgstr "Vaikimisi kasutatavate rakenduste valimine"
+
+#, fuzzy
+#~| msgid "Select your default applications"
+#~ msgid "Select an Application"
+#~ msgstr "Vaikimisi kasutatavate rakenduste valimine"
+
+#, fuzzy
+#~| msgid "Open with \"%s\""
+#~ msgid "Open With"
+#~ msgstr "Ava rakendusega \"%s\""
+
+#, fuzzy
+#~| msgid "_Show..."
+#~ msgid "_Browse..."
+#~ msgstr "_Näita..."
+
+#, fuzzy
+#~| msgid "Open with \"%s\""
+#~ msgid "Open %s with:"
+#~ msgstr "Ava rakendusega \"%s\""
+
+#, fuzzy
+#~| msgid "_Add..."
+#~ msgid "_Add"
+#~ msgstr "Li_sa..."
+
+#, fuzzy
+#~| msgid "Preferred Applications"
+#~ msgid "Add Application"
+#~ msgstr "Eelistatud rakendused"
 
 #~ msgid "Image/label border"
 #~ msgstr "Pildi/sildi ääris"
@@ -3441,84 +3332,6 @@ msgstr ""
 #~ msgid "Open link with web browser _default"
 #~ msgstr "Avatakse vastavalt sirvija _vaikesätetele"
 
-#~ msgid "Video Player"
-#~ msgstr "Videoesitaja"
-
-#~ msgid "Balsa"
-#~ msgstr "Balsa"
-
-#~ msgid "Claws Mail"
-#~ msgstr "Claws Mail"
-
-#~ msgid "Debian Sensible Browser"
-#~ msgstr "Debian'i mõistlik sirvija"
-
-#~ msgid "Encompass"
-#~ msgstr "Encompass"
-
-#~ msgid "Epiphany Web Browser"
-#~ msgstr "Epiphany veebisirvija"
-
-#~ msgid "Evolution Mail Reader"
-#~ msgstr "Postilugeja Evolution"
-
-#~ msgid "Firebird"
-#~ msgstr "Firebird"
-
-#~ msgid "Firefox"
-#~ msgstr "Firefox"
-
-#~ msgid "Iceape"
-#~ msgstr "Iceape"
-
-#~ msgid "Iceape Mail"
-#~ msgstr "Iceape e-post"
-
-#~ msgid "Icedove"
-#~ msgstr "Icedove"
-
-#~ msgid "Iceweasel"
-#~ msgstr "Iceweasel"
-
-#~ msgid "KMail"
-#~ msgstr "KMail"
-
-#~ msgid "Konqueror"
-#~ msgstr "Konqueror"
-
-#~ msgid "Midori"
-#~ msgstr "Midori"
-
-#~ msgid "Mozilla"
-#~ msgstr "Mozilla"
-
-#~ msgid "Mozilla 1.6"
-#~ msgstr "Mozilla 1.6"
-
-#~ msgid "Mozilla Mail"
-#~ msgstr "Mozilla Mail"
-
-#~ msgid "Mozilla Thunderbird"
-#~ msgstr "Mozilla Thunderbird"
-
-#~ msgid "Netscape Communicator"
-#~ msgstr "Netscape Communicator"
-
-#~ msgid "SeaMonkey"
-#~ msgstr "SeaMonkey"
-
-#~ msgid "SeaMonkey Mail"
-#~ msgstr "SeaMonkey e-post"
-
-#~ msgid "Sylpheed"
-#~ msgstr "Sylpheed"
-
-#~ msgid "Sylpheed-Claws"
-#~ msgstr "Sylpheed-Claws"
-
-#~ msgid "Thunderbird"
-#~ msgstr "Thunderbird"
-
 #~ msgid "Include _panel"
 #~ msgstr "_Paneeli kaasamine"
 
@@ -4128,9 +3941,6 @@ msgstr ""
 
 #~ msgid "Drag the monitors to set their place"
 #~ msgstr "Kuvarite asukoha määramiseks lohista need sobivale kohale"
-
-#~ msgid "_Mirror screens"
-#~ msgstr "Ekraanid on pee_geldatud"
 
 #~ msgid "Change screen resolution"
 #~ msgstr "Ekraani eraldusvõime muutmine"
