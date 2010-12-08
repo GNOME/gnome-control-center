@@ -148,7 +148,7 @@ typedef struct {
 	gint ref_count;
         gchar *call;
 	gint64 time;
-	gchar *filename;
+	gchar *tz;
 	GFunc callback;
 	gpointer data;
 	GDestroyNotify notify;
@@ -163,7 +163,7 @@ free_data (gpointer d)
 	if (data->ref_count == 0) {
 		if (data->notify)
 			data->notify (data->data);
-		g_free (data->filename);
+		g_free (data->tz);
 		g_free (data);
 	}
 }
@@ -241,7 +241,7 @@ set_time_async (SetTimeCallbackData *data)
 						      data, free_data,
 						      INT_MAX,
 						      /* parameters: */
-						      G_TYPE_STRING, data->filename,
+						      G_TYPE_STRING, data->tz,
 						      G_TYPE_INVALID,
 						      /* return values: */
 						      G_TYPE_INVALID);
@@ -262,7 +262,7 @@ set_system_time_async (gint64         time,
 	data->ref_count = 1;
 	data->call = "SetTime";
 	data->time = time;
-	data->filename = NULL;
+	data->tz = NULL;
 	data->callback = callback;
 	data->data = d;
 	data->notify = notify;
@@ -272,21 +272,20 @@ set_system_time_async (gint64         time,
 }
 
 void
-set_system_timezone_async (const gchar    *filename,
+set_system_timezone_async (const gchar    *tz,
 			   GFunc           callback,
 			   gpointer        d,
 			   GDestroyNotify  notify)
 {
 	SetTimeCallbackData *data;
 
-	if (filename == NULL)
-		return;
+	g_return_if_fail (tz != NULL);
 
 	data = g_new0 (SetTimeCallbackData, 1);
 	data->ref_count = 1;
 	data->call = "SetTimezone";
 	data->time = -1;
-	data->filename = g_strdup (filename);
+	data->tz = g_strdup (tz);
 	data->callback = callback;
 	data->data = d;
 	data->notify = notify;

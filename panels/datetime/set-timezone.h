@@ -41,17 +41,9 @@ void     set_system_time_async   (gint64         time,
                                   gpointer       data,
                                   GDestroyNotify notify);
 
-void     set_system_timezone_async   (const gchar    *filename,
+void     set_system_timezone_async   (const gchar    *tz,
                                       GFunc           callback,
                                       gpointer        data,
                                       GDestroyNotify  notify);
-
-
-
-#ifdef HAVE_SOLARIS
-#define SYSTEM_ZONEINFODIR "/usr/share/lib/zoneinfo/tab"
-#else
-#define SYSTEM_ZONEINFODIR "/usr/share/zoneinfo"
-#endif
 
 #endif

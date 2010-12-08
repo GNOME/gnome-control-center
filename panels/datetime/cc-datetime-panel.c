@@ -257,7 +257,6 @@ apply_button_clicked_cb (GtkButton       *button,
   CcDateTimePanelPrivate *priv = self->priv;
   guint mon, y, d;
   time_t unixtime;
-  gchar *filename;
   GDateTime *old_date;
 
   old_date = priv->date;
@@ -278,10 +277,7 @@ apply_button_clicked_cb (GtkButton       *button,
 
   if (priv->current_location)
     {
-      filename = g_build_filename (SYSTEM_ZONEINFODIR,
-                                   priv->current_location->zone,
-                                   NULL);
-      set_system_timezone_async (filename, (GFunc) set_timezone_cb, self, NULL);
+      set_system_timezone_async (priv->current_location->zone, (GFunc) set_timezone_cb, self, NULL);
     }
 }
 
