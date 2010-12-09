@@ -88,22 +88,25 @@ static GtkWidget *custom_shortcut_command_entry = NULL;
 static GHashTable *kb_sections = NULL;
 
 static void
-free_key_array (KeyEntry **keys)
+free_key_array (GPtrArray *keys)
 {
   if (keys != NULL)
     {
       gint i;
 
-      for (i = 0; i < G_N_ELEMENTS (keys); i++)
+      for (i = 0; i < keys->len; i++)
         {
-	  g_free (keys[i]->gconf_key);
-	  g_free (keys[i]->description);
-	  g_free (keys[i]->desc_gconf_key);
-	  g_free (keys[i]->command);
-	  g_free (keys[i]->cmd_gconf_key);
+	  KeyEntry *entry;
+
+	  entry = g_ptr_array_index (keys, i);
+	  g_free (entry->gconf_key);
+	  g_free (entry->description);
+	  g_free (entry->desc_gconf_key);
+	  g_free (entry->command);
+	  g_free (entry->cmd_gconf_key);
 	}
 
-      g_free (keys);
+      g_ptr_array_free (keys, TRUE);
     }
 }
 
@@ -171,7 +174,7 @@ binding_from_string (const char             *str,
 static void
 append_section (GtkBuilder *builder, const gchar *title, const KeyListEntry *keys_list)
 {
-  GArray *keys_array;
+  GPtrArray *keys_array;
   GtkTreeModel *model;
   GConfClient *client;
   GtkTreeIter iter;
@@ -180,16 +183,8 @@ append_section (GtkBuilder *builder, const gchar *title, const KeyListEntry *key
   client = gconf_client_get_default ();
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
 
-  g_print ("Appending section %s\n", title);
-
-  /* Append the section to the left tree view */
-  gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-		      DESCRIPTION_COLUMN, title,
-		      -1);
-
   /* Add all KeyEntry's for this section */
-  keys_array = g_array_new (TRUE, FALSE, sizeof (KeyEntry));
+  keys_array = g_ptr_array_new ();
 
   for (i = 0; keys_list[i].name != NULL; i++)
     {
@@ -270,8 +265,8 @@ append_section (GtkBuilder *builder, const gchar *title, const KeyListEntry *key
         }
       if (keys_list[i].cmd_name != NULL)
         {
-          /* key_entry->cmd_gconf_key =  g_strdup (keys_list[i].cmd_name); */
-          /* key_entry->cmd_editable = gconf_client_key_is_writable (client, key_entry->cmd_gconf_key, NULL); */
+          key_entry->cmd_gconf_key =  g_strdup (keys_list[i].cmd_name);
+          key_entry->cmd_editable = gconf_client_key_is_writable (client, key_entry->cmd_gconf_key, NULL);
           /* key_entry->gconf_cnxn_cmd = gconf_client_notify_add (client, */
 	  /* 						       key_entry->cmd_gconf_key, */
 	  /* 							(GConfClientNotifyFunc) &keybinding_command_changed, */
@@ -290,7 +285,9 @@ append_section (GtkBuilder *builder, const gchar *title, const KeyListEntry *key
 
       gconf_entry_free (entry);
 
-      g_array_append_val (keys_array, key_entry);
+      g_print ("Adding %s to section %s\n", key_entry->description, title);
+
+      g_ptr_array_add (keys_array, key_entry);
     }
 
   g_object_unref (client);
@@ -298,10 +295,14 @@ append_section (GtkBuilder *builder, const gchar *title, const KeyListEntry *key
   /* Add the keys to the hash table */
   if (keys_array->len > 0)
     {
-      g_hash_table_insert (kb_sections, g_strdup (title), keys_array->data);
-    }
+      g_hash_table_insert (kb_sections, g_strdup (title), keys_array);
 
-  g_array_free (keys_array, FALSE);
+      /* Append the section to the left tree view */
+      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			  DESCRIPTION_COLUMN, title,
+			  -1);
+    }
 }
 
 static void
@@ -674,6 +675,71 @@ description_set_func (GtkTreeViewColumn *tree_column,
 }
 
 static void
+section_selection_changed (GtkTreeSelection *selection, gpointer data)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkBuilder *builder = GTK_BUILDER (data);
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      GPtrArray *keys;
+      GtkWidget *shortcut_treeview;
+      GtkTreeModel *shortcut_model;
+      gchar *description;
+      gint i;
+
+      gtk_tree_model_get (model, &iter, DESCRIPTION_COLUMN, &description, -1);
+      keys = g_hash_table_lookup (kb_sections, description);
+      if (keys == NULL)
+        {
+	  g_warning ("Can't find section %s in sections hash table!!!", description);
+	  return;
+	}
+
+      /* Fill the shortcut treeview with the keys for the selected section */
+      shortcut_treeview = GTK_WIDGET (gtk_builder_get_object (builder, "shortcut_treeview"));
+      shortcut_model = gtk_tree_view_get_model (GTK_TREE_VIEW (shortcut_treeview));
+      gtk_list_store_clear (GTK_LIST_STORE (shortcut_model));
+
+      for (i = 0; i < keys->len; i++)
+        {
+	  GtkTreeIter new_row;
+	  KeyEntry *entry = g_ptr_array_index (keys, i);
+
+	  g_print ("Adding gconf: %s, keyval = %d\n",
+		   entry->gconf_key, entry->keyval);
+
+	  gtk_list_store_append (GTK_LIST_STORE (shortcut_model), &new_row);
+	  gtk_list_store_set (GTK_LIST_STORE (shortcut_model), &new_row,
+			      DESCRIPTION_COLUMN, entry->description,
+			      KEYENTRY_COLUMN, entry,
+			      -1);
+	}
+    }
+}
+
+static void
+shortcut_selection_changed (GtkTreeSelection *selection, gpointer data)
+{
+  GtkWidget *button = data;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  KeyEntry *key;
+  gboolean can_remove;
+
+  can_remove = FALSE;
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      gtk_tree_model_get (model, &iter, KEYENTRY_COLUMN, &key, -1);
+      if (key && key->command != NULL && key->editable)
+	can_remove = TRUE;
+    }
+
+  gtk_widget_set_sensitive (button, can_remove);
+}
+
+static void
 setup_dialog (CcPanel *panel, GtkBuilder *builder)
 {
   GConfClient *client;
@@ -698,7 +764,11 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   model = gtk_list_store_new (1, G_TYPE_STRING);
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
-  
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+  g_signal_connect (selection, "changed",
+		    G_CALLBACK (section_selection_changed), builder);
+
   /* Setup the shortcut treeview */
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
                                                     "shortcut_treeview"));
@@ -752,6 +822,9 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   /* 			   (GConfClientNotifyFunc) key_entry_controlling_key_changed, */
   /* 			   builder, NULL, NULL); */
 
+  model = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
+
   /* set up the dialog */
   shell = cc_panel_get_shell (CC_PANEL (panel));
   widget = cc_shell_get_toplevel (shell);
@@ -760,9 +833,9 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   /* 					    G_CALLBACK (maybe_block_accels), NULL); */
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-  /* g_signal_connect (selection, "changed", */
-  /*                   G_CALLBACK (selection_changed), */
-  /* 		    WID (builder, "remove-button")); */
+  g_signal_connect (selection, "changed",
+		    G_CALLBACK (shortcut_selection_changed),
+		    WID (builder, "remove-button"));
 
   allowed_keys = gconf_client_get_list (client,
                                         GCONF_BINDING_DIR "/allowed_keys",

@@ -1150,26 +1150,6 @@ cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
 #endif
 
 static void
-selection_changed (GtkTreeSelection *selection, gpointer data)
-{
-  GtkWidget *button = data;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  KeyEntry *key;
-  gboolean can_remove;
-
-  can_remove = FALSE;
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter, KEYENTRY_COLUMN, &key, -1);
-      if (key && key->command != NULL && key->editable)
-	can_remove = TRUE;
-    }
-
-  gtk_widget_set_sensitive (button, can_remove);
-}
-
-static void
 add_button_clicked (GtkWidget  *button,
                     GtkBuilder *builder)
 {
