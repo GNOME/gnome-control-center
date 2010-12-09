@@ -262,6 +262,17 @@ set_timezone_cb (CcDateTimePanel *self,
 }
 
 static void
+set_using_ntp_cb (CcDateTimePanel *self,
+                  GError          *error)
+{
+  /* TODO: display any error in a user friendly way */
+  if (error)
+    {
+      g_warning ("Could not set system to use NTP: %s", error->message);
+    }
+}
+
+static void
 apply_button_clicked_cb (GtkButton       *button,
                          CcDateTimePanel *self)
 {
@@ -269,6 +280,7 @@ apply_button_clicked_cb (GtkButton       *button,
   guint mon, y, d;
   time_t unixtime;
   GDateTime *old_date;
+  gboolean using_ntp;
 
   old_date = priv->date;
 
@@ -290,6 +302,9 @@ apply_button_clicked_cb (GtkButton       *button,
     {
       set_system_timezone_async (priv->current_location->zone, (GFunc) set_timezone_cb, self, NULL);
     }
+
+  using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
+  set_using_ntp_async (using_ntp, (GFunc) set_using_ntp_cb, self, NULL);
 }
 
 static void
@@ -529,6 +544,16 @@ city_changed_cb (GtkComboBox     *box,
 }
 
 static void
+update_widget_state_for_ntp (CcDateTimePanel *panel,
+                             gboolean         using_ntp)
+{
+  CcDateTimePanelPrivate *priv = panel->priv;
+
+  gtk_widget_set_sensitive (W("table1"), !using_ntp);
+  gtk_widget_set_sensitive (W("table2"), !using_ntp);
+}
+
+static void
 month_year_changed (GtkWidget       *widget,
                     CcDateTimePanel *panel)
 {
@@ -593,6 +618,14 @@ change_time (GtkButton       *button,
 }
 
 static void
+change_ntp (GObject    *gobject,
+            GParamSpec *pspec,
+            gpointer    user_data)
+{
+  update_widget_state_for_ntp (user_data, gtk_switch_get_active (GTK_SWITCH (gobject)));
+}
+
+static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
@@ -606,6 +639,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   GtkTreeModelFilter *city_modelfilter;
   GtkTreeModelSort *city_modelsort;
   guint i, num_days;
+  gboolean using_ntp;
   int ret;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
@@ -623,11 +657,18 @@ cc_date_time_panel_init (CcDateTimePanel *self)
       return;
     }
 
+  /* set up network time button */
+  using_ntp = get_using_ntp ();
+  gtk_switch_set_active (GTK_SWITCH (W("network_time_switch")), using_ntp);
+  update_widget_state_for_ntp (self, using_ntp);
+  g_signal_connect (W("network_time_switch"), "notify::active",
+                    G_CALLBACK (change_ntp), self);
+
   /* set up time editing widgets */
   for (i = 0; i < G_N_ELEMENTS (buttons); i++)
     {
-      g_signal_connect (W(buttons[i]), "clicked", G_CALLBACK (change_time),
-                        self);
+      g_signal_connect (W(buttons[i]), "clicked",
+                        G_CALLBACK (change_time), self);
     }
 
   /* set up date editing widgets */
