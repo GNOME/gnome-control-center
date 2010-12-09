@@ -327,6 +327,7 @@ panels/background/Makefile
 panels/background/gnome-background-panel.desktop.in
 panels/datetime/Makefile
 panels/datetime/gnome-datetime-panel.desktop.in
+panels/datetime/po-timezones/Makefile
 panels/default-applications/Makefile
 panels/default-applications/gnome-at-commandline.in
 panels/default-applications/gnome-at-session.desktop.in

@@ -25,11 +25,16 @@
 
 #include <glib/gi18n-lib.h>
 
+#define GETTEXT_PACKAGE_TIMEZONES GETTEXT_PACKAGE "-timezones"
+
 void
 g_io_module_load (GIOModule *module)
 {
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+
+  bindtextdomain (GETTEXT_PACKAGE_TIMEZONES, GNOMELOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 
   /* register the panel */
   cc_date_time_panel_register (module);

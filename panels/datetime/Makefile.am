@@ -1,6 +1,8 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = datetime
 
+SUBDIRS = po-timezones
+
 icons16dir = $(datadir)/icons/hicolor/16x16/apps
 dist_icons16_DATA = icons/16x16/preferences-system-time.png
 icons22dir = $(datadir)/icons/hicolor/22x22/apps
@@ -60,7 +62,7 @@ dist_ui_DATA = \
 	data/timezone_9.5.png
 
 
-INCLUDES = 						\
+INCLUDES =						\
 	$(PANEL_CFLAGS)					\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
 	$(DBUS_CFLAGS)					\
@@ -84,7 +86,7 @@ check: test-timezone
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libdate_time.la
 
-libdate_time_la_SOURCES =		\
+libdate_time_la_SOURCES =	\
 	datetime-module.c	\
 	cc-datetime-panel.c	\
 	cc-datetime-panel.h	\

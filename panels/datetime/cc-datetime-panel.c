@@ -26,6 +26,9 @@
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
 #include <string.h>
 #include <stdlib.h>
+#include <libintl.h>
+
+#define GETTEXT_PACKAGE_TIMEZONES GETTEXT_PACKAGE "-timezones"
 
 G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
 
@@ -35,8 +38,16 @@ G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
 enum {
   CITY_COL_CITY,
   CITY_COL_REGION,
+  CITY_COL_CITY_TRANSLATED,
+  CITY_COL_REGION_TRANSLATED,
   CITY_COL_ZONE,
   CITY_NUM_COLS
+};
+
+enum {
+  REGION_COL_REGION,
+  REGION_COL_REGION_TRANSLATED,
+  REGION_NUM_COLS
 };
 
 #define W(x) (GtkWidget*) gtk_builder_get_object (priv->builder, x)
@@ -220,7 +231,7 @@ update_time (CcDateTimePanel *self)
 
   for (i = 0; i < G_N_ELEMENTS (am_pm_widgets); i++)
     gtk_widget_set_visible (W(am_pm_widgets[i]),
-			    priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H);
+                            priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H);
 
   /* Update the minutes label */
   label = g_date_time_format (priv->date, "%M");
@@ -266,9 +277,9 @@ apply_button_clicked_cb (GtkButton       *button,
   d = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (W ("day-spinbutton")));
 
   priv->date = g_date_time_new_local (y, mon, d,
-				      g_date_time_get_hour (old_date),
-				      g_date_time_get_minute (old_date),
-				      g_date_time_get_second (old_date));
+                                      g_date_time_get_hour (old_date),
+                                      g_date_time_get_minute (old_date),
+                                      g_date_time_get_second (old_date));
   g_date_time_unref (old_date);
 
   unixtime = g_date_time_to_unix (priv->date);
@@ -317,7 +328,7 @@ location_changed_cb (CcTimezoneMap   *map,
     {
       gchar *string;
 
-      gtk_tree_model_get (model, &iter, 0, &string, -1);
+      gtk_tree_model_get (model, &iter, CITY_COL_CITY, &string, -1);
 
       if (!g_strcmp0 (string, split[0]))
         {
@@ -340,7 +351,7 @@ location_changed_cb (CcTimezoneMap   *map,
     {
       gchar *string;
 
-      gtk_tree_model_get (model, &iter, 0, &string, -1);
+      gtk_tree_model_get (model, &iter, CITY_COL_CITY, &string, -1);
 
       if (!g_strcmp0 (string, split[1]))
         {
@@ -374,32 +385,53 @@ struct get_region_data
   GHashTable *table;
 };
 
+/* Slash look-alikes that might be used in translations */
+#define TRANSLATION_SPLIT                                                        \
+        "\x20\x44"        /* FRACTION SLASH */                                   \
+        "\x22\x15"        /* DIVISION SLASH */                                   \
+        "\x29\xF8"        /* BIG SOLIDUS */                                      \
+        "\xFF\x0F"        /* FULLWIDTH SOLIDUS */                                \
+        "/"
+
 static void
 get_regions (TzLocation             *loc,
              struct get_region_data *data)
 {
   gchar **split;
+  gchar **split_translated;
 
   split = g_strsplit (loc->zone, "/", 2);
 
   /* remove underscores */
   g_strdelimit (split[1], "_", ' ');
 
+  /* Load the translation for it */
+  split_translated = g_strsplit_set (dgettext (GETTEXT_PACKAGE_TIMEZONES, loc->zone),
+                                     TRANSLATION_SPLIT, 2);
+
+  /* remove underscores */
+  g_strdelimit (split_translated[1], "_", ' ');
+
   if (!g_hash_table_lookup_extended (data->table, split[0], NULL, NULL))
     {
       g_hash_table_insert (data->table, g_strdup (split[0]),
                            GINT_TO_POINTER (1));
-      gtk_list_store_insert_with_values (data->region_store, NULL, 0, 0,
-                                         split[0], -1);
+      gtk_list_store_insert_with_values (data->region_store, NULL, 0,
+                                         REGION_COL_REGION, split[0],
+                                         REGION_COL_REGION_TRANSLATED, split_translated[0], -1);
     }
+
 
   gtk_list_store_insert_with_values (data->city_store, NULL, 0,
                                      CITY_COL_CITY, split[1],
+                                     CITY_COL_CITY_TRANSLATED, split_translated[1],
                                      CITY_COL_REGION, split[0],
+                                     CITY_COL_REGION_TRANSLATED, split_translated[0],
                                      CITY_COL_ZONE, loc->zone,
                                      -1);
 
   g_strfreev (split);
+  g_strfreev (split_translated);
 }
 
 static gboolean
@@ -457,7 +489,8 @@ load_regions_model (GtkListStore *regions, GtkListStore *cities)
   tz_db_free (db);
 
   /* sort the models */
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (regions), 0,
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (regions),
+                                        REGION_COL_REGION_TRANSLATED,
                                         GTK_SORT_ASCENDING);
 }
 
@@ -497,7 +530,7 @@ city_changed_cb (GtkComboBox     *box,
 
 static void
 month_year_changed (GtkWidget       *widget,
-		    CcDateTimePanel *panel)
+                    CcDateTimePanel *panel)
 {
   CcDateTimePanelPrivate *priv = panel->priv;
   guint mon, y;
@@ -566,7 +599,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gchar *objects[] = { "datetime-panel", "region-liststore", "city-liststore",
       "month-liststore", "city-modelfilter", "city-modelsort", NULL };
   char *buttons[] = { "hour_up_button", "hour_down_button", "min_up_button",
-	  "min_down_button", "ampm_up_button", "ampm_down_button" };
+          "min_down_button", "ampm_up_button", "ampm_down_button" };
   GtkWidget *widget;
   GtkAdjustment *adjustment;
   GError *err = NULL;
@@ -594,7 +627,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   for (i = 0; i < G_N_ELEMENTS (buttons); i++)
     {
       g_signal_connect (W(buttons[i]), "clicked", G_CALLBACK (change_time),
-			self);
+                        self);
     }
 
   /* set up date editing widgets */
@@ -603,10 +636,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),
                             g_date_time_get_month (priv->date) - 1);
   g_signal_connect (G_OBJECT (W("month-combobox")), "changed",
-		    G_CALLBACK (month_year_changed), self);
+                    G_CALLBACK (month_year_changed), self);
 
   num_days = g_date_get_days_in_month (g_date_time_get_month (priv->date),
-				       g_date_time_get_year (priv->date));
+                                       g_date_time_get_year (priv->date));
   adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_day_of_month (priv->date), 1,
                                                     num_days + 1, 1, 10, 1);
   gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("day-spinbutton")),
@@ -618,7 +651,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("year-spinbutton")),
                                   adjustment);
   g_signal_connect (G_OBJECT (W("year-spinbutton")), "value-changed",
-		    G_CALLBACK (month_year_changed), self);
+                    G_CALLBACK (month_year_changed), self);
 
   /* set up timezone map */
   priv->map = widget = (GtkWidget *) cc_timezone_map_new ();
@@ -671,7 +704,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                     city_modelfilter);
 
   city_modelsort = GTK_TREE_MODEL_SORT (gtk_builder_get_object (priv->builder, "city-modelsort"));
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (city_modelsort), 0,
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (city_modelsort), CITY_COL_CITY_TRANSLATED,
                                         GTK_SORT_ASCENDING);
 
   gtk_tree_model_filter_set_visible_func (city_modelfilter,

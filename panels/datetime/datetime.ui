@@ -59,7 +59,7 @@
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext1"/>
                               <attributes>
-                                <attribute name="text">0</attribute>
+                                <attribute name="text">1</attribute>
                               </attributes>
                             </child>
                           </object>
@@ -81,11 +81,11 @@
                         <child>
                           <object class="GtkComboBox" id="city_combobox">
                             <property name="visible">True</property>
-                            <property name="model">city-modelfilter</property>
+                            <property name="model">city-modelsort</property>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext2"/>
                               <attributes>
-                                <attribute name="text">0</attribute>
+                                <attribute name="text">2</attribute>
                               </attributes>
                             </child>
                           </object>
@@ -438,6 +438,8 @@
     <columns>
       <!-- column-name region -->
       <column type="gchararray"/>
+      <!-- column-name region-translated -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkListStore" id="city-liststore">
@@ -445,6 +447,10 @@
       <!-- column-name city -->
       <column type="gchararray"/>
       <!-- column-name region -->
+      <column type="gchararray"/>
+      <!-- column-name city-translated -->
+      <column type="gchararray"/>
+      <!-- column-name region-translated -->
       <column type="gchararray"/>
       <!-- column-name zone -->
       <column type="gchararray"/>
