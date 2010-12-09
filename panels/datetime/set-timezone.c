@@ -144,11 +144,36 @@ can_set_system_time (void)
 	return settime_cache;
 }
 
+static gint   usingntp_cache = 0;
+static time_t usingntp_stamp = 0;
+
+static void
+update_can_usingntp (gint res)
+{
+	usingntp_cache = res;
+	time (&usingntp_stamp);
+}
+
+gint
+can_set_using_ntp (void)
+{
+	time_t now;
+
+	time (&now);
+	if (ABS (now - usingntp_stamp) > CACHE_VALIDITY_SEC) {
+		refresh_can_do ("CanSetUsingNtp", update_can_usingntp);
+		settime_stamp = now;
+	}
+
+	return usingntp_cache;
+}
+
 typedef struct {
 	gint ref_count;
         gchar *call;
 	gint64 time;
 	gchar *tz;
+	gboolean using_ntp;
 	GFunc callback;
 	gpointer data;
 	GDestroyNotify notify;
@@ -177,7 +202,7 @@ set_time_notify (DBusGProxy     *proxy,
 	GError *error = NULL;
 
 	if (dbus_g_proxy_end_call (proxy, call, &error, G_TYPE_INVALID)) {
-		if (data->callback) 
+		if (data->callback)
 			data->callback (data->data, NULL);
 	}
 	else {
@@ -224,7 +249,7 @@ set_time_async (SetTimeCallbackData *data)
 
 	data->ref_count++;
 	if (strcmp (data->call, "SetTime") == 0)
-		dbus_g_proxy_begin_call_with_timeout (proxy, 
+		dbus_g_proxy_begin_call_with_timeout (proxy,
 						      "SetTime",
 						      set_time_notify,
 						      data, free_data,
@@ -234,14 +259,25 @@ set_time_async (SetTimeCallbackData *data)
 						      G_TYPE_INVALID,
 						      /* return values: */
 						      G_TYPE_INVALID);
-	else 
-		dbus_g_proxy_begin_call_with_timeout (proxy, 
+	else if (strcmp (data->call, "SetTimezone") == 0)
+		dbus_g_proxy_begin_call_with_timeout (proxy,
 						      "SetTimezone",
 						      set_time_notify,
 						      data, free_data,
 						      INT_MAX,
 						      /* parameters: */
 						      G_TYPE_STRING, data->tz,
+						      G_TYPE_INVALID,
+						      /* return values: */
+						      G_TYPE_INVALID);
+	else if (strcmp (data->call, "SetUsingNtp") == 0)
+		dbus_g_proxy_begin_call_with_timeout (proxy,
+						      "SetUsingNtp",
+						      set_time_notify,
+						      data, free_data,
+						      INT_MAX,
+						      /* parameters: */
+						      G_TYPE_BOOLEAN, data->using_ntp,
 						      G_TYPE_INVALID,
 						      /* return values: */
 						      G_TYPE_INVALID);
@@ -382,4 +418,64 @@ get_system_timezone_async (GetTimezoneFunc callback,
 				 G_TYPE_STRING,
 				 G_TYPE_INVALID);
 
+}
+
+gboolean
+get_using_ntp (void)
+{
+	static gboolean can_use_cache = FALSE;
+	static gboolean is_using_cache = FALSE;
+	static time_t   last_refreshed = 0;
+	time_t          now;
+        DBusGConnection *bus;
+        DBusGProxy      *proxy;
+
+	time (&now);
+	if (ABS (now - last_refreshed) > CACHE_VALIDITY_SEC) {
+		gboolean cu, iu;
+		bus = get_system_bus (NULL);
+		if (bus == NULL)
+			return FALSE;
+
+		proxy = dbus_g_proxy_new_for_name (bus,
+						   "org.gnome.SettingsDaemon.DateTimeMechanism",
+						   "/",
+						   "org.gnome.SettingsDaemon.DateTimeMechanism");
+
+
+		if (dbus_g_proxy_call (proxy,
+				       "GetUsingNtp",
+				       NULL,
+				       G_TYPE_INVALID,
+				       G_TYPE_BOOLEAN, &cu,
+				       G_TYPE_BOOLEAN, &iu,
+				       G_TYPE_INVALID)) {
+			can_use_cache = cu;
+			is_using_cache = iu;
+			last_refreshed = now;
+		}
+	}
+
+	return is_using_cache;
+}
+
+void
+set_using_ntp_async (gboolean        using_ntp,
+	             GFunc           callback,
+	             gpointer        d,
+	             GDestroyNotify  notify)
+{
+	SetTimeCallbackData *data;
+
+	data = g_new0 (SetTimeCallbackData, 1);
+	data->ref_count = 1;
+	data->call = "SetUsingNtp";
+	data->time = -1;
+	data->using_ntp = using_ntp;
+	data->callback = callback;
+	data->data = d;
+	data->notify = notify;
+
+	set_time_async (data);
+	free_data (data);
 }

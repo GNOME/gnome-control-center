@@ -36,6 +36,8 @@ gint     can_set_system_timezone (void);
 
 gint     can_set_system_time     (void);
 
+gint     can_set_using_ntp       (void);
+
 void     set_system_time_async   (gint64         time,
                                   GFunc          callback,
                                   gpointer       data,
@@ -46,4 +48,10 @@ void     set_system_timezone_async   (const gchar    *tz,
                                       gpointer        data,
                                       GDestroyNotify  notify);
 
+gboolean get_using_ntp               (void);
+
+void     set_using_ntp_async         (gboolean        using_ntp,
+                                      GFunc           callback,
+                                      gpointer        data,
+                                      GDestroyNotify  notify);
 #endif
