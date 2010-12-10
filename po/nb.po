@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-06 18:51+0100\n"
-"PO-Revision-Date: 2010-12-06 18:55+0100\n"
+"POT-Creation-Date: 2010-12-10 19:02+0100\n"
+"PO-Revision-Date: 2010-12-10 19:04+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -358,64 +358,52 @@ msgid "City:"
 msgstr "By:"
 
 #: ../panels/datetime/datetime.ui.h:12
-msgid "Day:"
-msgstr "Dag:"
-
-#: ../panels/datetime/datetime.ui.h:13
 msgid "December"
 msgstr "Desember"
 
-#: ../panels/datetime/datetime.ui.h:14
+#: ../panels/datetime/datetime.ui.h:13
 msgid "February"
 msgstr "Februar"
 
-#: ../panels/datetime/datetime.ui.h:15
+#: ../panels/datetime/datetime.ui.h:14
 msgid "January"
 msgstr "Januar"
 
-#: ../panels/datetime/datetime.ui.h:16
+#: ../panels/datetime/datetime.ui.h:15
 msgid "July"
 msgstr "Juli"
 
-#: ../panels/datetime/datetime.ui.h:17
+#: ../panels/datetime/datetime.ui.h:16
 msgid "June"
 msgstr "Juni"
 
-#: ../panels/datetime/datetime.ui.h:18
+#: ../panels/datetime/datetime.ui.h:17
 msgid "March"
 msgstr "Mars"
 
-#: ../panels/datetime/datetime.ui.h:19
+#: ../panels/datetime/datetime.ui.h:18
 msgid "May"
 msgstr "Mai"
 
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Month:"
-msgstr "Måned:"
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Network Time"
+msgstr "Nettverkstid"
 
-#: ../panels/datetime/datetime.ui.h:21
+#: ../panels/datetime/datetime.ui.h:20
 msgid "November"
 msgstr "November"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:21
 msgid "October"
 msgstr "Oktober"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Region:"
 msgstr "Region:"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:23
 msgid "September"
 msgstr "September"
-
-#: ../panels/datetime/datetime.ui.h:25
-msgid "Set time automatically"
-msgstr "Still klokken automatisk"
-
-#: ../panels/datetime/datetime.ui.h:26
-msgid "Year:"
-msgstr "År:"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
@@ -648,7 +636,7 @@ msgid "Left"
 msgstr "Venstre"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:468
+#: ../panels/display/xrandr-capplet.c:479
 msgid "Monitor"
 msgstr "Skjerm"
 
@@ -673,14 +661,15 @@ msgid "Upside-down"
 msgstr "Opp-ned"
 
 #: ../panels/display/display-capplet.ui.h:8
-msgid "_Detect monitors"
-msgstr "_Søk etter skjermer"
+msgid "_Detect Monitors"
+msgstr "_Finn skjermer"
 
-#: ../panels/display/display-capplet.ui.h:9
-msgid "_Mirror Screens"
+#. Note that mirror is a verb in this string
+#: ../panels/display/display-capplet.ui.h:10
+msgid "_Mirror displays"
 msgstr "_Speil skjermer"
 
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:11
 msgid "_Resolution:"
 msgstr "_Oppløsning:"
 
@@ -706,26 +695,25 @@ msgstr "Opp-ned"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:457
-#: ../panels/display/xrandr-capplet.c:1711
-msgid "Mirror Screens"
+#: ../panels/display/xrandr-capplet.c:455
+msgid "Mirror Displays"
 msgstr "Speil skjermer"
 
-#: ../panels/display/xrandr-capplet.c:569
+#: ../panels/display/xrandr-capplet.c:580
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:571
+#: ../panels/display/xrandr-capplet.c:582
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1474
+#: ../panels/display/xrandr-capplet.c:1485
 msgid "Drag to change primary display."
 msgstr "Dra for å bytte primær skjerm."
 
-#: ../panels/display/xrandr-capplet.c:1532
+#: ../panels/display/xrandr-capplet.c:1543
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -733,27 +721,27 @@ msgstr ""
 "Velg en skjerm for å endre egenskaper for denne. Dra den rundt for å bytte "
 "plassering."
 
-#: ../panels/display/xrandr-capplet.c:1937
+#: ../panels/display/xrandr-capplet.c:1942
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1939
+#: ../panels/display/xrandr-capplet.c:1944
 msgid "%a %l:%M %p"
 msgstr "%a %H.%M"
 
-#: ../panels/display/xrandr-capplet.c:2224
+#: ../panels/display/xrandr-capplet.c:2229
 msgid "Could not save the monitor configuration"
 msgstr "Kunne ikke lagre skjermkonfigurasjon"
 
-#: ../panels/display/xrandr-capplet.c:2247
+#: ../panels/display/xrandr-capplet.c:2252
 msgid "Could not get session bus while applying display configuration"
 msgstr "Kunne ikke finne sesjonsbussen under aktivering av skjermkonfigurasjon"
 
-#: ../panels/display/xrandr-capplet.c:2292
+#: ../panels/display/xrandr-capplet.c:2297
 msgid "Could not detect displays"
 msgstr "Kunne ikke søke etter skjermer"
 
-#: ../panels/display/xrandr-capplet.c:2499
+#: ../panels/display/xrandr-capplet.c:2504
 msgid "Could not get screen information"
 msgstr "Fant ikke informasjon om skjermen"
 
@@ -796,7 +784,6 @@ msgstr "Type hurtigtast."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/gnome-keyboard-panel.c:102
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -804,70 +791,6 @@ msgstr "Type hurtigtast."
 msgid "Disabled"
 msgstr "Slått av"
 
-#: ../panels/keyboard/gnome-keyboard-panel.c:183
-msgid "<Unknown Action>"
-msgstr "<Ukjent handling>"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:933
-#: ../panels/keyboard/gnome-keyboard-panel.c:1564
-msgid "Custom Shortcuts"
-msgstr "Egendefinerte snarveier"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1075
-msgid "Error saving the new shortcut"
-msgstr "Feil ved lagring av ny snarvei"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1154
-#, c-format
-msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-msgstr ""
-"Snarveien «%s» kan ikke brukes fordi den vil være umulig å skrive med denne "
-"tasten.\n"
-"Vennligst prøv igjen med en tastekombinasjon som inneholder Control, Alt "
-"eller Shift."
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1184
-#, c-format
-msgid ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-msgstr ""
-"Snarveien «%s» er allerede brukt for\n"
-"«%s»"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1190
-#, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr "Hvis du omfordeler snarveien til «%s» vil snarvei «%s» bli slått av."
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1198
-msgid "_Reassign"
-msgstr "_Tildel på nytt"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1318
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr "Feil under fjerning av snarveitast i konfigurasjonsdatabasen: %s"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1519
-msgid "Too many custom shortcuts"
-msgstr "For mange egendefinerte snarveier"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1881
-msgid "Action"
-msgstr "Handling"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1903
-msgid "Shortcut"
-msgstr "Snarvei"
-
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
 msgstr "Endre innstillinger for tastatur"
@@ -1397,7 +1320,8 @@ msgstr "Sett dine brukervalg for mus og pekeplate"
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-msgid "Trackpad;Pointer;Click;Tap;Double;Button;"
+#, fuzzy
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;"
 
 #: ../panels/proxy/gnome-proxy-properties.c:672
@@ -1416,7 +1340,7 @@ msgstr "Nettverksproxy"
 msgid "Set your network proxy preferences"
 msgstr "Sett dine brukervalg for nettverksproxy"
 
-#. Translators: those are keywords for the network proxy control-center panel
+#. Translators: those are keywords for the proxy control-center panel
 #: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:4
 msgid "Web;Location;"
 msgstr "Nett;Lokasjon;"
@@ -1521,6 +1445,79 @@ msgstr "_Sikker HTTP-proxy:"
 #: ../panels/proxy/gnome-proxy-properties.ui.h:25
 msgid "_Use the same proxy for all protocols"
 msgstr "Br_uk samme proxy for alle protokoller"
+
+#: ../panels/network/network.ui.h:1
+msgid "Configuration URL:"
+msgstr "Konfigurasjons-URL:"
+
+#: ../panels/network/network.ui.h:2
+msgid "FTP Proxy:"
+msgstr "FTP-proxy:"
+
+#: ../panels/network/network.ui.h:3
+msgid "Flight Mode"
+msgstr "Flymodus"
+
+#: ../panels/network/network.ui.h:4
+msgid "Gateway:"
+msgstr "Portner:"
+
+#: ../panels/network/network.ui.h:5
+msgid "Group Name:"
+msgstr "Gruppenavn:"
+
+#: ../panels/network/network.ui.h:6
+msgid "Group Password:"
+msgstr "Gruppepassord:"
+
+#: ../panels/network/network.ui.h:7
+msgid "HTTP Proxy:"
+msgstr "HTTP-proxy:"
+
+#: ../panels/network/network.ui.h:8
+msgid "Hardware Address:"
+msgstr "Maskinvareadresse:"
+
+#: ../panels/network/network.ui.h:9
+msgid "IP Address:"
+msgstr "IP-adresse:"
+
+#: ../panels/network/network.ui.h:10
+msgid "Method:"
+msgstr "Metode:"
+
+#: ../panels/network/network.ui.h:11
+msgid "Network Name:"
+msgstr "Nettverksnavn:"
+
+#: ../panels/network/network.ui.h:12
+msgid "Provider:"
+msgstr "Tilbyder:"
+
+#: ../panels/network/network.ui.h:13
+msgid "Secure HTTP Proxy:"
+msgstr "Sikker HTTP-proxy:"
+
+#: ../panels/network/network.ui.h:14
+msgid "Security:"
+msgstr "Sikkerhet:"
+
+#: ../panels/network/network.ui.h:15
+msgid "Socks Host:"
+msgstr "Socks-vert:"
+
+#: ../panels/network/network.ui.h:16
+msgid "Speed:"
+msgstr "Hastighet:"
+
+#: ../panels/network/network.ui.h:17
+#: ../panels/user-accounts/um-lockbutton.c:364
+msgid "Unlock"
+msgstr "Lås opp"
+
+#: ../panels/network/network.ui.h:18
+msgid "Username:"
+msgstr "Brukernavn:"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
@@ -2239,7 +2236,7 @@ msgid "Authentication failed"
 msgstr "Autentisering feilet"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:381
+#: ../panels/user-accounts/um-password-dialog.c:378
 #, c-format
 msgid "The new password is too short"
 msgstr "Det nye passordet er for kort"
@@ -2427,10 +2424,6 @@ msgstr "Annet..."
 msgid "Lock"
 msgstr "Lås"
 
-#: ../panels/user-accounts/um-lockbutton.c:364
-msgid "Unlock"
-msgstr "Lås opp"
-
 #: ../panels/user-accounts/um-lockbutton.c:373
 msgid "Locked"
 msgstr "Låst"
@@ -2457,77 +2450,77 @@ msgstr ""
 "Systemregler forhindrer endringer.\n"
 "Kontakt din systemadministrator for hjelp."
 
-#: ../panels/user-accounts/um-password-dialog.c:185
+#: ../panels/user-accounts/um-password-dialog.c:182
 msgid "More choices..."
 msgstr "Flere valg..."
 
-#: ../panels/user-accounts/um-password-dialog.c:291
+#: ../panels/user-accounts/um-password-dialog.c:288
 msgid "Please choose another password."
 msgstr "Vennligst velg et annet passord."
 
-#: ../panels/user-accounts/um-password-dialog.c:300
+#: ../panels/user-accounts/um-password-dialog.c:297
 msgid "Please type your current password again."
 msgstr "Vennligst skriv inn nåværende passord igjen."
 
-#: ../panels/user-accounts/um-password-dialog.c:306
+#: ../panels/user-accounts/um-password-dialog.c:303
 msgid "Password could not be changed"
 msgstr "Passordet kunne ikke endres"
 
-#: ../panels/user-accounts/um-password-dialog.c:378
+#: ../panels/user-accounts/um-password-dialog.c:375
 msgid "You need to enter a new password"
 msgstr "Du må skrive inn et nytt passord"
 
-#: ../panels/user-accounts/um-password-dialog.c:387
+#: ../panels/user-accounts/um-password-dialog.c:384
 msgid "You need to confirm the password"
 msgstr "Du må bekrefte passordet"
 
-#: ../panels/user-accounts/um-password-dialog.c:390
+#: ../panels/user-accounts/um-password-dialog.c:387
 msgid "The passwords do not match"
 msgstr "Passordene er for like"
 
-#: ../panels/user-accounts/um-password-dialog.c:396
+#: ../panels/user-accounts/um-password-dialog.c:393
 msgid "You need to enter your current password"
 msgstr "Du må oppgi ditt nåværende passord"
 
-#: ../panels/user-accounts/um-password-dialog.c:399
+#: ../panels/user-accounts/um-password-dialog.c:396
 msgid "The current password is not correct"
 msgstr "Nåværende passord er ikke korrekt"
 
-#: ../panels/user-accounts/um-password-dialog.c:472
-#: ../panels/user-accounts/um-password-dialog.c:689
+#: ../panels/user-accounts/um-password-dialog.c:469
+#: ../panels/user-accounts/um-password-dialog.c:686
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "For kort"
 
-#: ../panels/user-accounts/um-password-dialog.c:475
-#: ../panels/user-accounts/um-password-dialog.c:690
+#: ../panels/user-accounts/um-password-dialog.c:472
+#: ../panels/user-accounts/um-password-dialog.c:687
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Svakt"
 
-#: ../panels/user-accounts/um-password-dialog.c:477
-#: ../panels/user-accounts/um-password-dialog.c:691
+#: ../panels/user-accounts/um-password-dialog.c:474
+#: ../panels/user-accounts/um-password-dialog.c:688
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Bra"
 
-#: ../panels/user-accounts/um-password-dialog.c:479
-#: ../panels/user-accounts/um-password-dialog.c:692
+#: ../panels/user-accounts/um-password-dialog.c:476
+#: ../panels/user-accounts/um-password-dialog.c:689
 msgctxt "Password strength"
 msgid "Good"
 msgstr "God"
 
-#: ../panels/user-accounts/um-password-dialog.c:481
-#: ../panels/user-accounts/um-password-dialog.c:693
+#: ../panels/user-accounts/um-password-dialog.c:478
+#: ../panels/user-accounts/um-password-dialog.c:690
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Sterk"
 
-#: ../panels/user-accounts/um-password-dialog.c:520
+#: ../panels/user-accounts/um-password-dialog.c:517
 msgid "Passwords do not match"
 msgstr "Passordene er ikke like"
 
-#: ../panels/user-accounts/um-password-dialog.c:546
+#: ../panels/user-accounts/um-password-dialog.c:543
 msgid "Wrong password"
 msgstr "Feil passord"
 
@@ -2568,72 +2561,72 @@ msgstr "En bruker med navn «%s» eksisterer allerede."
 msgid "This user does not exist."
 msgstr "Denne brukeren eksisterer ikke."
 
-#: ../panels/user-accounts/um-user-panel.c:349
+#: ../panels/user-accounts/um-user-panel.c:352
 msgid "Failed to delete user"
 msgstr "Klarte ikke å slette bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:409
+#: ../panels/user-accounts/um-user-panel.c:412
 msgid "You cannot delete your own account."
 msgstr "Du kan ikke slette din egen konto."
 
-#: ../panels/user-accounts/um-user-panel.c:418
+#: ../panels/user-accounts/um-user-panel.c:421
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s er fremdeles logget inn"
 
-#: ../panels/user-accounts/um-user-panel.c:422
+#: ../panels/user-accounts/um-user-panel.c:425
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:431
+#: ../panels/user-accounts/um-user-panel.c:434
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Vil du beholde filene til %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:435
+#: ../panels/user-accounts/um-user-panel.c:438
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:438
+#: ../panels/user-accounts/um-user-panel.c:441
 msgid "_Delete Files"
 msgstr "_Slett filer"
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:442
 msgid "_Keep Files"
 msgstr "_Behold filer"
 
-#: ../panels/user-accounts/um-user-panel.c:440
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid "_Cancel"
 msgstr "A_vbryt"
 
-#: ../panels/user-accounts/um-user-panel.c:464
+#: ../panels/user-accounts/um-user-panel.c:467
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konto deaktivert"
 
-#: ../panels/user-accounts/um-user-panel.c:473
+#: ../panels/user-accounts/um-user-panel.c:476
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Settes ved neste innlogging"
 
-#: ../panels/user-accounts/um-user-panel.c:476
+#: ../panels/user-accounts/um-user-panel.c:479
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/user-accounts/um-user-panel.c:818
+#: ../panels/user-accounts/um-user-panel.c:821
 msgid "Failed to contact the accounts service"
 msgstr "Klarte ikke å kontakte kontotjenesten"
 
-#: ../panels/user-accounts/um-user-panel.c:820
+#: ../panels/user-accounts/um-user-panel.c:823
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sjekk at kontotjenesten er installert og aktivert."
 
-#: ../panels/user-accounts/um-user-panel.c:853
+#: ../panels/user-accounts/um-user-panel.c:856
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -2641,13 +2634,13 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å gjøre endringer"
 
-#: ../panels/user-accounts/um-user-panel.c:891
+#: ../panels/user-accounts/um-user-panel.c:894
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "Create a user"
 msgstr "Lag en bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:902
-#: ../panels/user-accounts/um-user-panel.c:1178
+#: ../panels/user-accounts/um-user-panel.c:905
+#: ../panels/user-accounts/um-user-panel.c:1181
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -2655,13 +2648,13 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å lage en bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:914
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "Delete the selected user"
 msgstr "Slett valgt bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:923
-#: ../panels/user-accounts/um-user-panel.c:1183
+#: ../panels/user-accounts/um-user-panel.c:926
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -2669,11 +2662,11 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å slette valgt bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:1087
+#: ../panels/user-accounts/um-user-panel.c:1090
 msgid "My Account"
 msgstr "Min konto"
 
-#: ../panels/user-accounts/um-user-panel.c:1096
+#: ../panels/user-accounts/um-user-panel.c:1099
 msgid "Other Accounts"
 msgstr "Andre kontoer"
 
@@ -2960,7 +2953,8 @@ msgid ""
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Kjøre «%s --help» for å se en full liste med tilgjengelige kommandolinjeflagg.\n"
+"Kjøre «%s --help» for å se en full liste med tilgjengelige "
+"kommandolinjeflagg.\n"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
 msgid "System Settings"
@@ -2986,3 +2980,68 @@ msgstr "Foo;Bar;Baz;"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Alle innstillinger"
+
+#~ msgid "Day:"
+#~ msgstr "Dag:"
+
+#~ msgid "Month:"
+#~ msgstr "Måned:"
+
+#~ msgid "Set time automatically"
+#~ msgstr "Still klokken automatisk"
+
+#~ msgid "Year:"
+#~ msgstr "År:"
+
+#~ msgid "_Mirror Screens"
+#~ msgstr "_Speil skjermer"
+
+#~ msgid "Mirror Screens"
+#~ msgstr "Speil skjermer"
+
+#~ msgid "<Unknown Action>"
+#~ msgstr "<Ukjent handling>"
+
+#~ msgid "Custom Shortcuts"
+#~ msgstr "Egendefinerte snarveier"
+
+#~ msgid "Error saving the new shortcut"
+#~ msgstr "Feil ved lagring av ny snarvei"
+
+#~ msgid ""
+#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
+#~ "type using this key.\n"
+#~ "Please try with a key such as Control, Alt or Shift at the same time."
+#~ msgstr ""
+#~ "Snarveien «%s» kan ikke brukes fordi den vil være umulig å skrive med "
+#~ "denne tasten.\n"
+#~ "Vennligst prøv igjen med en tastekombinasjon som inneholder Control, Alt "
+#~ "eller Shift."
+
+#~ msgid ""
+#~ "The shortcut \"%s\" is already used for\n"
+#~ "\"%s\""
+#~ msgstr ""
+#~ "Snarveien «%s» er allerede brukt for\n"
+#~ "«%s»"
+
+#~ msgid ""
+#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
+#~ "disabled."
+#~ msgstr ""
+#~ "Hvis du omfordeler snarveien til «%s» vil snarvei «%s» bli slått av."
+
+#~ msgid "_Reassign"
+#~ msgstr "_Tildel på nytt"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr "Feil under fjerning av snarveitast i konfigurasjonsdatabasen: %s"
+
+#~ msgid "Too many custom shortcuts"
+#~ msgstr "For mange egendefinerte snarveier"
+
+#~ msgid "Action"
+#~ msgstr "Handling"
+
+#~ msgid "Shortcut"
+#~ msgstr "Snarvei"
