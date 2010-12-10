@@ -402,30 +402,30 @@ struct get_region_data
 
 /* Slash look-alikes that might be used in translations */
 #define TRANSLATION_SPLIT                                                        \
-        "\x20\x44"        /* FRACTION SLASH */                                   \
-        "\x22\x15"        /* DIVISION SLASH */                                   \
-        "\x29\xF8"        /* BIG SOLIDUS */                                      \
-        "\xFF\x0F"        /* FULLWIDTH SOLIDUS */                                \
+        "\342\201\204"        /* FRACTION SLASH */                               \
+        "\342\210\225"        /* DIVISION SLASH */                               \
+        "\342\247\270"        /* BIG SOLIDUS */                                  \
+        "\357\274\217"        /* FULLWIDTH SOLIDUS */                            \
         "/"
 
 static void
 get_regions (TzLocation             *loc,
              struct get_region_data *data)
 {
+  gchar *zone;
   gchar **split;
   gchar **split_translated;
 
-  split = g_strsplit (loc->zone, "/", 2);
-
-  /* remove underscores */
-  g_strdelimit (split[1], "_", ' ');
+  zone = g_strdup (loc->zone);
+  g_strdelimit (zone, "_", ' ');
+  split = g_strsplit (zone, "/", 2);
+  g_free (zone);
 
   /* Load the translation for it */
-  split_translated = g_strsplit_set (dgettext (GETTEXT_PACKAGE_TIMEZONES, loc->zone),
-                                     TRANSLATION_SPLIT, 2);
-
-  /* remove underscores */
-  g_strdelimit (split_translated[1], "_", ' ');
+  zone = g_strdup (dgettext (GETTEXT_PACKAGE_TIMEZONES, loc->zone));
+  g_strdelimit (zone, "_", ' ');
+  split_translated = g_strsplit_set (zone, TRANSLATION_SPLIT, 2);
+  g_free (zone);
 
   if (!g_hash_table_lookup_extended (data->table, split[0], NULL, NULL))
     {
