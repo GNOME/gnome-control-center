@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-10 19:02+0100\n"
-"PO-Revision-Date: 2010-12-10 19:04+0100\n"
+"POT-Creation-Date: 2010-12-12 21:50+0100\n"
+"PO-Revision-Date: 2010-12-12 21:55+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -33,7 +33,7 @@ msgstr "URL til flere tema"
 msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
-msgstr ""
+msgstr "Sett dette til navn på aktiv lokasjon. Dette brukes til å bestemme riktig nettverksproxykonfigurasjon."
 
 #: ../gnome-control-center.schemas.in.h:5
 msgid ""
@@ -661,8 +661,8 @@ msgid "Upside-down"
 msgstr "Opp-ned"
 
 #: ../panels/display/display-capplet.ui.h:8
-msgid "_Detect Monitors"
-msgstr "_Finn skjermer"
+msgid "_Detect Displays"
+msgstr "_Søk etter skjermer"
 
 #. Note that mirror is a verb in this string
 #: ../panels/display/display-capplet.ui.h:10
@@ -744,6 +744,19 @@ msgstr "Kunne ikke søke etter skjermer"
 #: ../panels/display/xrandr-capplet.c:2504
 msgid "Could not get screen information"
 msgstr "Fant ikke informasjon om skjermen"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+msgid "System Info"
+msgstr "Systeminformasjon"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "System Information"
+msgstr "Systeminformasjon"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+msgid "device;system;information;memory;processor;version;"
+msgstr "enhet;system;informasjon;minne;prosessor;versjon;"
 
 #: ../panels/keyboard/00-multimedia-key.xml.in.h:1
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -1320,9 +1333,8 @@ msgstr "Sett dine brukervalg for mus og pekeplate"
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-#, fuzzy
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
-msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;"
+msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;Styrekule;"
 
 #: ../panels/proxy/gnome-proxy-properties.c:672
 msgid "New Location..."
@@ -1519,19 +1531,6 @@ msgstr "Lås opp"
 msgid "Username:"
 msgstr "Brukernavn:"
 
-#. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr "Lysstyrke;Lås;Blank;"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "Skjerm"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
-msgid "Screen brightness and lock settings"
-msgstr "Lysstyrke og innstillinger for låsing av skjerm"
-
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
 msgstr "Strøm"
@@ -1616,6 +1615,19 @@ msgstr "%s før tomt (%.0lf%%)"
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% ladet"
+
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr "Lysstyrke;Lås;Blank;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "Skjerm"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "Lysstyrke og innstillinger for låsing av skjerm"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -1734,7 +1746,7 @@ msgstr "Tilkobli_ng:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:531
 msgid "Peak detect"
-msgstr ""
+msgstr "Bestem høyeste nivå"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1506
 #: ../panels/sound/gvc-mixer-dialog.c:1717
@@ -2306,6 +2318,10 @@ msgid ""
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
+"Brukernavn må bestå av:\n"
+" - bokstaver fra det engelske alfabetet\n"
+" - tall\n"
+" - tegnene «.», «-» og «_»"
 
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
@@ -2415,6 +2431,8 @@ msgid ""
 "Enrolling fingerprints for\n"
 "<b><big>%s</big></b>"
 msgstr ""
+"Aktiverer fingeravtrykk for\n"
+"<b><big>%s</big></b>"
 
 #: ../panels/user-accounts/um-language-dialog.c:328
 msgid "Other..."
@@ -2433,6 +2451,8 @@ msgid ""
 "Dialog is unlocked.\n"
 "Click to prevent further changes"
 msgstr ""
+"Dialogen er låst opp.\n"
+"Klikk for å forhindre videre endringer"
 
 #: ../panels/user-accounts/um-lockbutton.c:391
 msgid ""
@@ -2578,7 +2598,7 @@ msgstr "%s er fremdeles logget inn"
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
-msgstr ""
+msgstr "Hvis du sletter en innlogget bruker kan systemet ende opp i en inkonsistent tilstand."
 
 #: ../panels/user-accounts/um-user-panel.c:434
 #, c-format
@@ -2589,7 +2609,7 @@ msgstr "Vil du beholde filene til %s?"
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
-msgstr ""
+msgstr "Det er mulig å beholde hjemmekatalogen, e-postkøen og midlertidige filer når du sletter en brukerkonto."
 
 #: ../panels/user-accounts/um-user-panel.c:441
 msgid "_Delete Files"
@@ -2721,7 +2741,7 @@ msgid ""
 "<small>This hint may be displayed at the login screen.  It will be visible "
 "to all users of this system.  Do <b>not</b> include the password here.</"
 "small>"
-msgstr ""
+msgstr "<small>Dette hintet kan vises på innloggingsskjermen. Det vil være synlig for alle brukere på dette systemet. <b>Ikke</b> ta med passord her.</small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
 msgid "C_onfirm password:"
@@ -2817,6 +2837,9 @@ msgid ""
 "<b>When the guest user logs out, all files and data associated with the "
 "account will be deleted.</b>"
 msgstr ""
+"En gjestekonto vil la hvem som helst logge seg inn på denne datamaskinen midlertidig uten et passord. Ekstern pålogging til denne kontoen er ikke tillatt av sikkerhetshensyn.\n"
+"\n"
+"<b>Når gjestebrukeren logger ut vil alle filer og data assosiert med kontoen bli slettet.</b>"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
