@@ -7,6 +7,7 @@ SUBDIRS= \
 	mouse \
 	region \
 	proxy \
+	info \
 	sound \
 	default-applications \
 	keyboard \
