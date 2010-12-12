@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-12-10 10:18+0000\n"
-"PO-Revision-Date: 2010-12-10 15:16+0200\n"
+"POT-Creation-Date: 2010-12-10 15:04+0000\n"
+"PO-Revision-Date: 2010-12-12 13:45+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -262,28 +262,28 @@ msgid "Image missing"
 msgstr "Pilt on puudu"
 
 msgid "12 hour format"
-msgstr ""
+msgstr "12 tunni vorming"
 
 msgid "16"
-msgstr ""
+msgstr "16"
 
 msgid "2010"
-msgstr ""
+msgstr "2010"
 
 msgid "22"
-msgstr ""
+msgstr "22"
 
 msgid "24 hour format"
-msgstr ""
+msgstr "24 tunni vorming"
 
 msgid "45"
-msgstr ""
+msgstr "45"
 
 msgid ":"
-msgstr ""
+msgstr ":"
 
 msgid "AM"
-msgstr ""
+msgstr "e.l."
 
 msgid "April"
 msgstr "Aprill"
@@ -736,7 +736,7 @@ msgid "Configure media and autorun preferences"
 msgstr ""
 
 msgid "Removable Media"
-msgstr ""
+msgstr "Eemaldatav meedium"
 
 msgid "Keyboard _model:"
 msgstr "Klaviatuuri _mudel:"
@@ -857,7 +857,7 @@ msgid "Default"
 msgstr "Vaikimisi"
 
 msgid "Change your region and language settings"
-msgstr ""
+msgstr "Sinu asukoha- ja keelesätete muutmine"
 
 #. Translators: those are keywords for the region control-center panel
 msgid "Language;Layout;"
@@ -1011,7 +1011,7 @@ msgstr "Võrgu proksi"
 msgid "Set your network proxy preferences"
 msgstr "Võrguproksi eelistuste seadmine"
 
-#. Translators: those are keywords for the network proxy control-center panel
+#. Translators: those are keywords for the proxy control-center panel
 msgid "Web;Location;"
 msgstr "Veeb;Asukoht;"
 
@@ -1509,10 +1509,8 @@ msgstr ""
 msgid "Contrast:"
 msgstr "Kontrast:"
 
-#, fuzzy
-#| msgid "_Pointer can be controlled using the keypad"
 msgid "Control the pointer using the keypad"
-msgstr "_Kursorit on võimalik juhtida klaviatuuri abil"
+msgstr "Kursori juhtimine klaviatuuri abil"
 
 msgid "Control the pointer using the video camera."
 msgstr "Kursori juhtimine videokaamera abil."
@@ -1567,10 +1565,8 @@ msgstr "KõrgKontrastne"
 msgid "HighContrastInverse"
 msgstr ""
 
-#, fuzzy
-#| msgid "Dwell Click"
 msgid "Hover Click"
-msgstr "Ooteajaga klõps"
+msgstr ""
 
 #, fuzzy
 #| msgid "_Ignore fast duplicate keypresses"
@@ -1647,7 +1643,7 @@ msgid "Test flash"
 msgstr ""
 
 msgid "Text size:"
-msgstr ""
+msgstr "Teksti suurus:"
 
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr ""
@@ -1670,16 +1666,14 @@ msgstr "_Hõlbustusvalikute sisse- ja väljalülitamisel tehakse piiksu"
 msgid "Turn on or off:"
 msgstr ""
 
-#, fuzzy
-#| msgid "_Type to test settings:"
 msgid "Type here to test settings"
-msgstr "T_esti sätteid siin:"
+msgstr ""
 
 msgid "Typing"
 msgstr "Tippimine"
 
 msgid "Typing Assistant"
-msgstr "Tipimisassistent"
+msgstr "Tipimisabiline"
 
 msgid "Use a visual indication when an alert sound occurs"
 msgstr ""
@@ -1709,7 +1703,7 @@ msgid "rejected"
 msgstr ""
 
 msgid "Unspecified"
-msgstr ""
+msgstr "Määramata"
 
 msgid "Authentication failed"
 msgstr ""
@@ -1738,18 +1732,13 @@ msgstr "Uus parool peab sisaldama numbreid või erimärke"
 msgid "The old and new passwords are the same"
 msgstr "Vana ja uus parool on ühesugused"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Your password has been changed since you initially authenticated! Please "
-#| "re-authenticate."
+#, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr ""
-"Sinu parool on pärast algset autentimist muutunud! Palun autendi uuesti."
+msgstr "Sinu parool on pärast algset autentimist muutunud!"
 
-#, fuzzy, c-format
-#| msgid "The new password must contain numeric or special character(s)."
+#, c-format
 msgid "The new password does not contain enough different characters"
-msgstr "Uus parool peab sisaldama numbreid või erimärke."
+msgstr "Uus parool ei sisalda piisaval hulgal erinevaid märke"
 
 #, c-format
 msgid "Unknown error"
@@ -1760,7 +1749,7 @@ msgstr "Tõrge kasutaja loomisel"
 
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr ""
+msgstr "Kasutajanimi '%s' on juba kasutusel"
 
 #, c-format
 msgid "The username is too long"
@@ -1775,6 +1764,10 @@ msgid ""
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
+"Kasutajanimi peab koosnema järgmistest märkidest:\n"
+" ➣ ladina tähestiku tähed\n"
+" ➣ numbrid\n"
+" ➣ märgid '.', '-' ja '_'"
 
 msgctxt "Account type"
 msgid "Standard"
@@ -1797,10 +1790,8 @@ msgstr ""
 msgid "The device is already in use."
 msgstr "Seade on juba kasutusel."
 
-#, fuzzy
-#| msgid "An internal error occured"
 msgid "An internal error occurred."
-msgstr "Tekkis sisemine viga"
+msgstr "Tekkis sisemine viga."
 
 msgid "Enabled"
 msgstr ""
@@ -1925,7 +1916,7 @@ msgstr "Nõrk"
 
 msgctxt "Password strength"
 msgid "Fair"
-msgstr ""
+msgstr "Piisav"
 
 msgctxt "Password strength"
 msgid "Good"
@@ -1960,10 +1951,9 @@ msgstr ""
 msgid "Used by %s"
 msgstr ""
 
-#, fuzzy, c-format
-#| msgid "The location already exists."
+#, c-format
 msgid "A user with name '%s' already exists."
-msgstr "Asukoht on juba olemas."
+msgstr "Kasutajakonto '%s' on juba olemas."
 
 msgid "This user does not exist."
 msgstr ""
@@ -2014,33 +2004,37 @@ msgid "None"
 msgstr ""
 
 msgid "Failed to contact the accounts service"
-msgstr ""
+msgstr "Tõrge kontoteenusega ühenduse võtmisel"
 
-#, fuzzy
-#| msgid "Please make sure that the applet is properly installed"
 msgid "Please make sure that the AccountService is installed and enabled."
-msgstr "Veendu, et rakend on õigesti paigaldatud"
+msgstr ""
 
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr ""
+"Muutuste tegemiseks,\n"
+"klõpsa esiteks ikoonil *"
 
 msgid "Create a user"
-msgstr ""
+msgstr "Kasutaja loomine"
 
 msgid ""
 "To create a user,\n"
 "click the * icon first"
 msgstr ""
+"Kasutaja loomiseks,\n"
+"klõpsa esiteks ikoonil *"
 
 msgid "Delete the selected user"
-msgstr ""
+msgstr "Valitud kasutaja kustutamine"
 
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
 msgstr ""
+"Valitud kasutaja kustutamiseks,\n"
+"klõpsa esiteks ikoonil *"
 
 msgid "My Account"
 msgstr "Minu konto"
@@ -2058,8 +2052,6 @@ msgstr "Sisselogimine;Nimi;Sõrmejälg;Avatar;Logo;Nägu;Parool;Salasõna;"
 msgid "User Accounts"
 msgstr "Kasutajakontod"
 
-#, fuzzy
-#| msgid "C_reate"
 msgid "Cr_eate"
 msgstr "_Loo"
 
@@ -2092,20 +2084,14 @@ msgstr ""
 msgid "C_onfirm password:"
 msgstr ""
 
-#, fuzzy
-#| msgid "Change set"
 msgid "Ch_ange"
-msgstr "Muudatuste kogum"
+msgstr ""
 
-#, fuzzy
-#| msgid "Change password"
 msgid "Changing password for:"
-msgstr "Parooli muutmine"
+msgstr ""
 
-#, fuzzy
-#| msgid "Change password"
 msgid "Choose a generated password"
-msgstr "Parooli muutmine"
+msgstr ""
 
 msgid "Choose password at next login"
 msgstr ""
@@ -2119,10 +2105,8 @@ msgstr ""
 msgid "Enable this account"
 msgstr ""
 
-#, fuzzy
-#| msgid "Filter"
 msgid "Fair"
-msgstr "Filter"
+msgstr ""
 
 msgid "Log in without a password"
 msgstr ""
@@ -2215,10 +2199,8 @@ msgstr ""
 msgid "Show list of users"
 msgstr ""
 
-#, fuzzy
-#| msgid "The password is too short."
 msgid "Show password hints"
-msgstr "Parool on liiga lühike."
+msgstr ""
 
 msgid "Left index finger"
 msgstr "Vasak nimetissõrm"
@@ -3600,106 +3582,6 @@ msgstr ""
 #~ "paneelil pole teateala. Seda on võimalik sinna lisada kui teha paneelil "
 #~ "paremklõps, valida 'Lisa paneelile', siis valida 'Teateala' ja klõpsata "
 #~ "nupul 'Lisa'."
-
-#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
-#~ msgstr "Kui märgitud, siis tehakse OpenType kirjatüüpidest pisipildid."
-
-#~ msgid "If set to true, then PCF fonts will be thumbnailed."
-#~ msgstr "Kui märgitud, siis tehakse PCF kirjatüüpidest pisipildid."
-
-#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
-#~ msgstr "Kui märgitud, siis tehakse TrueType kirjatüüpidest pisipildid."
-
-#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
-#~ msgstr "Kui märgitud, siis tehakse Type1 kirjatüüpidest pisipildid."
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for OpenType fonts."
-#~ msgstr "Käsk, millega tehakse OpenType kirjatüüpidest pisipilte."
-
-#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
-#~ msgstr "Käsk, millega tehakse PCF kirjatüüpidest pisipilte."
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for TrueType fonts."
-#~ msgstr "Käsk, millega tehakse TrueType kirjatüüpidest pisipilte."
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for Type1 fonts."
-#~ msgstr "Käsk, millega tehakse Type1 kirjatüüpidest pisipilte."
-
-#~ msgid "Thumbnail command for OpenType fonts"
-#~ msgstr "OpenType kirjatüüpidest pisipiltide tegemise käsk"
-
-#~ msgid "Thumbnail command for PCF fonts"
-#~ msgstr "PCF kirjatüüpidest pisipiltide tegemise käsk"
-
-#~ msgid "Thumbnail command for TrueType fonts"
-#~ msgstr "TrueType kirjatüüpidest pisipiltide tegemise käsk"
-
-#~ msgid "Thumbnail command for Type1 fonts"
-#~ msgstr "Type1 kirjatüüpidest pisipiltide tegemise käsk"
-
-#~ msgid "Whether to thumbnail OpenType fonts"
-#~ msgstr "Kas OpenType kirjatüüpidest tuleb pisipilte teha"
-
-#~ msgid "Whether to thumbnail PCF fonts"
-#~ msgstr "Kas PCF kirjatüüpidest tuleb pisipilte teha"
-
-#~ msgid "Whether to thumbnail TrueType fonts"
-#~ msgstr "Kas TrueType kirjatüüpidest tuleb pisipilte teha"
-
-#~ msgid "Whether to thumbnail Type1 fonts"
-#~ msgstr "Kas Type1 kirjatüüpidest tuleb pisipilte teha"
-
-# see käib fontide kohta
-#~ msgid "Style:"
-#~ msgstr "Laad:"
-
-#~ msgid "Size:"
-#~ msgstr "Suurus:"
-
-#~ msgid "Copyright:"
-#~ msgstr "Autoriõigus:"
-
-#~ msgid "Installed"
-#~ msgstr "Paigaldatud"
-
-#~ msgid "Install Failed"
-#~ msgstr "Paigaldamine nurjus"
-
-#~ msgid "usage: %s fontfile\n"
-#~ msgstr "kasutamine: %s kirjatüübifail\n"
-
-#~ msgid "I_nstall Font"
-#~ msgstr "_Paigalda kirjatüüp"
-
-#~ msgid "Font Viewer"
-#~ msgstr "Kirjatüüpide näitaja"
-
-#~ msgid "Preview fonts"
-#~ msgstr "Kirjatüüpide eelvaatlemine"
-
-#~ msgid "Text to thumbnail (default: Aa)"
-#~ msgstr "Pisipildiks tehtav tekst (vaikimisi: Aa)"
-
-#~ msgid "TEXT"
-#~ msgstr "TEKST"
-
-#~ msgid "Font size (default: 64)"
-#~ msgstr "Kirja suurus (vaikimisi: 64)"
-
-#~ msgid "SIZE"
-#~ msgstr "SUURUS"
-
-#~ msgid "FONT-FILE OUTPUT-FILE"
-#~ msgstr "KIRJATÜÜBIFAIL VÄLJUNDFAIL"
-
-#~ msgid "Your filter \"%s\" does not match any items."
-#~ msgstr "Sinu filtrile \"%s\" ei vasta ükski kirje."
-
-#~ msgid "No matches found."
-#~ msgstr "Vastavusi ei leitud."
 
 #~ msgid "Start %s"
 #~ msgstr "Käivita %s"
