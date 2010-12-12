@@ -375,8 +375,10 @@ void
 xkb_options_load_options (GtkBuilder * dialog)
 {
 	GtkWidget *opts_vbox = WID ("options_vbox");
-	GSList *expanders_list;
+	GtkWidget *dialog_vbox = WID ("dialog_vbox");
+	GtkWidget *options_scroll = WID ("options_scroll");
 	GtkWidget *expander;
+	GSList *expanders_list;
 
 	current1st_level_id = NULL;
 	current_none_radio = NULL;
@@ -403,7 +405,10 @@ xkb_options_load_options (GtkBuilder * dialog)
 		expanders_list = expanders_list->next;
 	}
 
-	gtk_widget_show_all (opts_vbox);
+	/* Somewhere in gtk3 the top vbox in dialog is made non-expandable */
+	gtk_box_set_child_packing (GTK_BOX (dialog_vbox), options_scroll,
+				   TRUE, TRUE, 0, GTK_PACK_START);
+	gtk_widget_show_all (dialog_vbox);
 }
 
 static void
@@ -443,8 +448,7 @@ xkb_options_popup_dialog (GtkBuilder * dialog)
 
 	chooser = CWID ("xkb_options_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
-				      GTK_WINDOW (WID
-						  ("region_dialog")));
+				      GTK_WINDOW (WID ("region_dialog")));
 	xkb_options_load_options (chooser_dialog);
 
 	g_signal_connect (chooser, "response",
