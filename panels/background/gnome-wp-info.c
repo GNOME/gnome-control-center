@@ -25,21 +25,30 @@
 #include "gnome-wp-info.h"
 
 GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
+				 GFileInfo * file_info,
 				 GnomeDesktopThumbnailFactory * thumbs) {
   GnomeWPInfo *wp;
-  GFile *file;
   GFileInfo *info;
 
-  file = g_file_new_for_commandline_arg (uri);
+  if (file_info == NULL)
+    {
+      GFile *file;
 
-  info = g_file_query_info (file,
-                            G_FILE_ATTRIBUTE_STANDARD_NAME ","
-                            G_FILE_ATTRIBUTE_STANDARD_SIZE ","
-                            G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE ","
-                            G_FILE_ATTRIBUTE_TIME_MODIFIED,
-                            G_FILE_QUERY_INFO_NONE,
-                            NULL, NULL);
-  g_object_unref (file);
+      file = g_file_new_for_commandline_arg (uri);
+
+      info = g_file_query_info (file,
+				G_FILE_ATTRIBUTE_STANDARD_NAME ","
+				G_FILE_ATTRIBUTE_STANDARD_SIZE ","
+				G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE ","
+				G_FILE_ATTRIBUTE_TIME_MODIFIED,
+				G_FILE_QUERY_INFO_NONE,
+				NULL, NULL);
+      g_object_unref (file);
+    }
+  else
+    {
+      info = g_object_ref (file_info);
+    }
 
   if (info == NULL || g_file_info_get_content_type (info) == NULL) {
     if (!strcmp (uri, "(none)")) {

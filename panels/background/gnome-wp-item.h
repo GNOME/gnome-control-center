@@ -69,6 +69,7 @@ struct _GnomeWPItem {
 
 GnomeWPItem * gnome_wp_item_new (const gchar *filename,
 				 GHashTable *wallpapers,
+				 GFileInfo *file_info,
 				 GnomeDesktopThumbnailFactory *thumbnails);
 
 void gnome_wp_item_free (GnomeWPItem *item);

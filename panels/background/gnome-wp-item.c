@@ -155,11 +155,12 @@ void gnome_wp_item_update (GnomeWPItem *item) {
 
 GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 				 GHashTable * wallpapers,
+				 GFileInfo * file_info,
 				 GnomeDesktopThumbnailFactory * thumbnails) {
   GnomeWPItem *item = g_new0 (GnomeWPItem, 1);
 
   item->filename = g_strdup (filename);
-  item->fileinfo = gnome_wp_info_new (filename, thumbnails);
+  item->fileinfo = gnome_wp_info_new (filename, file_info, thumbnails);
 
   if (item->fileinfo != NULL && item->fileinfo->mime_type != NULL &&
       (g_str_has_prefix (item->fileinfo->mime_type, "image/") ||

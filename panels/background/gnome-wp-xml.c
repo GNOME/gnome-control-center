@@ -83,7 +83,7 @@ static void gnome_wp_load_legacy (GnomeWpXml *data) {
 	  continue;
 	}
 
-	item = gnome_wp_item_new (foo, data->wp_hash, data->thumb_factory);
+	item = gnome_wp_item_new (foo, data->wp_hash, NULL, data->thumb_factory);
 	if (item != NULL && item->fileinfo == NULL) {
 	  gnome_wp_item_free (item);
 	}
@@ -118,7 +118,6 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
     if (!strcmp ((gchar *)list->name, "wallpaper")) {
       GnomeWPItem * wp;
       gchar *pcolor = NULL, *scolor = NULL;
-      gchar *s;
       gboolean have_scale = FALSE, have_shade = FALSE;
 
       wp = g_new0 (GnomeWPItem, 1);
@@ -224,7 +223,7 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
       if ((wp->filename != NULL &&
 	   g_file_test (wp->filename, G_FILE_TEST_EXISTS)) ||
 	  !strcmp (wp->filename, "(none)")) {
-	wp->fileinfo = gnome_wp_info_new (wp->filename, data->thumb_factory);
+	wp->fileinfo = gnome_wp_info_new (wp->filename, NULL, data->thumb_factory);
 
 	if (wp->name == NULL || !strcmp (wp->filename, "(none)")) {
 	  g_free (wp->name);

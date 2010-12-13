@@ -38,6 +38,7 @@ struct _GnomeWPInfo {
 };
 
 GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
+				 GFileInfo * file_info,
 				 GnomeDesktopThumbnailFactory * thumbs);
 void gnome_wp_info_free (GnomeWPInfo * info);
 
