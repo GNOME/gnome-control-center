@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-10 16:15+0200\n"
-"PO-Revision-Date: 2010-12-10 16:15+0200\n"
+"POT-Creation-Date: 2010-12-13 23:41+0200\n"
+"PO-Revision-Date: 2010-12-13 23:42+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -257,30 +257,30 @@ msgstr "צבעים"
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/gnome-wp-info.c:50
+#: ../panels/background/gnome-wp-info.c:59
 msgid "No Desktop Background"
 msgstr "אין רקע לשולחן העבודה"
 
-#: ../panels/background/gnome-wp-item.c:294
+#: ../panels/background/gnome-wp-item.c:295
 msgid "Slide Show"
 msgstr "מצגת שקפים"
 
-#: ../panels/background/gnome-wp-item.c:296
+#: ../panels/background/gnome-wp-item.c:297
 msgid "Image"
 msgstr "תמונה"
 
-#: ../panels/background/gnome-wp-item.c:302
+#: ../panels/background/gnome-wp-item.c:303
 msgid "multiple sizes"
 msgstr "מספר גדלים"
 
 #. translators: x pixel(s) by y pixel(s)
-#: ../panels/background/gnome-wp-item.c:305
+#: ../panels/background/gnome-wp-item.c:306
 #, c-format
 msgid "%d %s by %d %s"
 msgstr "%d %s ב־%d %s"
 
-#: ../panels/background/gnome-wp-item.c:307
-#: ../panels/background/gnome-wp-item.c:309
+#: ../panels/background/gnome-wp-item.c:308
+#: ../panels/background/gnome-wp-item.c:310
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "פיקסל"
@@ -290,7 +290,7 @@ msgstr[1] "פיקסלים"
 #. * mime type, size
 #. * Folder: /path/to/file
 #.
-#: ../panels/background/gnome-wp-item.c:317
+#: ../panels/background/gnome-wp-item.c:318
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -305,7 +305,7 @@ msgstr ""
 #. * Image missing
 #. * Folder: /path/to/file
 #.
-#: ../panels/background/gnome-wp-item.c:329
+#: ../panels/background/gnome-wp-item.c:330
 #, c-format
 msgid ""
 "<b>%s</b>\n"
@@ -316,7 +316,7 @@ msgstr ""
 "%s\n"
 "תיקייה: %s"
 
-#: ../panels/background/gnome-wp-item.c:333
+#: ../panels/background/gnome-wp-item.c:334
 msgid "Image missing"
 msgstr "חסרה תמונה"
 
@@ -668,8 +668,8 @@ msgid "Upside-down"
 msgstr "היפוך"
 
 #: ../panels/display/display-capplet.ui.h:8
-msgid "_Detect Monitors"
-msgstr "_זיהוי צגים"
+msgid "_Detect Displays"
+msgstr "_זיהוי התצוגות"
 
 #. Note that mirror is a verb in this string
 #: ../panels/display/display-capplet.ui.h:10
@@ -750,6 +750,19 @@ msgstr "לא ניתן לזהות את הצגים"
 #: ../panels/display/xrandr-capplet.c:2504
 msgid "Could not get screen information"
 msgstr "לא ניתן לקבל את פרטי הצג"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+msgid "System Info"
+msgstr "פרטי המערכת"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "System Information"
+msgstr "פרטי המערכת"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+msgid "device;system;information;memory;processor;version;"
+msgstr "התקן;מערכת;מידע;זיכרון;מעבד;גרסה;"
 
 #: ../panels/keyboard/00-multimedia-key.xml.in.h:1
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -1523,19 +1536,6 @@ msgstr "שחרור"
 msgid "Username:"
 msgstr "שם משתמש:"
 
-#. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr "בהירות;נעילה;עמעום;החשכה;"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "צג"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
-msgid "Screen brightness and lock settings"
-msgstr "הגדרות בהירות ונעילת התצוגה"
-
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
 msgstr "חשמל"
@@ -1620,6 +1620,19 @@ msgstr "%s עד לפריקה מלאה (%.0lf%%)"
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% נטענו"
+
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr "בהירות;נעילה;עמעום;החשכה;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "צג"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "הגדרות בהירות ונעילת התצוגה"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2999,6 +3012,9 @@ msgstr "שטויות;במיץ;"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_כל ההגדרות"
+
+#~ msgid "_Detect Monitors"
+#~ msgstr "_זיהוי צגים"
 
 #~ msgid "Day:"
 #~ msgstr "יום:"
