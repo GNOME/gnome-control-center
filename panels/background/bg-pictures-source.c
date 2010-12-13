@@ -117,6 +117,80 @@ bg_pictures_source_class_init (BgPicturesSourceClass *klass)
 }
 
 static void
+picture_scaled (GObject *source_object,
+                GAsyncResult *res,
+                gpointer user_data)
+{
+  BgPicturesSource *bg_source = BG_PICTURES_SOURCE (user_data);
+  GnomeWPItem *item;
+  GError *error = NULL;
+  GdkPixbuf *pixbuf;
+
+  GtkTreeIter iter;
+  GtkTreePath *tree_path;
+  GtkListStore *store;
+
+  store = bg_source_get_liststore (BG_SOURCE (bg_source));
+  item = g_object_get_data (source_object, "item");
+
+  pixbuf = gdk_pixbuf_new_from_stream_finish (res, &error);
+  if (pixbuf == NULL)
+    {
+      g_warning ("Failed to load image: %s", error->message);
+      g_error_free (error);
+      gnome_wp_item_free (item);
+      return;
+    }
+
+  /* insert the item into the liststore */
+  gtk_list_store_insert_with_values (store, &iter, 0,
+                                     0, pixbuf,
+                                     1, item,
+                                     -1);
+  tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (store),
+                                       &iter);
+  item->rowref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store),
+                                             tree_path);
+  gtk_tree_path_free (tree_path);
+
+  g_object_unref (pixbuf);
+}
+
+static void
+picture_opened_for_read (GObject *source_object,
+                         GAsyncResult *res,
+                         gpointer user_data)
+{
+  BgPicturesSource *bg_source = BG_PICTURES_SOURCE (user_data);
+  GnomeWPItem *item;
+  GFileInputStream *stream;
+  GError *error = NULL;
+
+  item = g_object_get_data (source_object, "item");
+  stream = g_file_read_finish (G_FILE (source_object), res, &error);
+  if (stream == NULL)
+    {
+      char *filename;
+
+      filename = g_file_get_path (G_FILE (source_object));
+      g_warning ("Failed to load picture '%s': %s", filename, error->message);
+      g_free (filename);
+      g_error_free (error);
+      gnome_wp_item_free (item);
+      return;
+    }
+
+  g_object_set_data (G_OBJECT (stream), "item", item);
+
+  gdk_pixbuf_new_from_stream_at_scale_async (G_INPUT_STREAM (stream),
+                                             THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT,
+                                             TRUE,
+                                             NULL,
+                                             picture_scaled, bg_source);
+  g_object_unref (stream);
+}
+
+static void
 file_info_async_ready (GObject      *source,
                        GAsyncResult *res,
                        gpointer      user_data)
@@ -127,8 +201,6 @@ file_info_async_ready (GObject      *source,
   GError *err = NULL;
   GFile *parent;
   gchar *path;
-  GtkListStore *store = bg_source_get_liststore (BG_SOURCE (bg_source));
-
   files = g_file_enumerator_next_files_finish (G_FILE_ENUMERATOR (source),
                                                res,
                                                &err);
@@ -162,17 +234,15 @@ file_info_async_ready (GObject      *source,
       if (!strcmp ("image/png", content_type)
           || !strcmp ("image/jpeg", content_type))
         {
-          GdkPixbuf *pixbuf;
           GnomeWPItem *item;
           gchar *filename;
-          GtkTreeIter iter;
-          GtkTreePath *tree_path;
+          GFile *file;
 
           filename = g_build_filename (path, g_file_info_get_name (info), NULL);
 
           /* create a new GnomeWpItem */
           item = gnome_wp_item_new (filename, NULL,
-                                      info,
+                                    info,
                                     priv->thumb_factory);
 
           if (!item)
@@ -182,24 +252,11 @@ file_info_async_ready (GObject      *source,
               continue;
             }
 
-          /* insert the item into the liststore */
-          pixbuf = gdk_pixbuf_new_from_file_at_scale (filename,
-                                                      THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT,
-                                                      TRUE,
-                                                      NULL);
-          gtk_list_store_insert_with_values (store, &iter, 0,
-                                             0, pixbuf,
-                                             1, item,
-                                             -1);
-          tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (store),
-                                               &iter);
-          item->rowref =
-            gtk_tree_row_reference_new (GTK_TREE_MODEL (store),
-                                        tree_path);
-          gtk_tree_path_free (tree_path);
-
+          file = g_file_new_for_path (filename);
           g_free (filename);
-          g_object_unref (pixbuf);
+          g_object_set_data (G_OBJECT (file), "item", item);
+          g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
+          g_object_unref (file);
         }
     }
 
