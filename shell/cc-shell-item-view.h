@@ -67,6 +67,8 @@ GType cc_shell_item_view_get_type (void) G_GNUC_CONST;
 
 GtkWidget *cc_shell_item_view_new (void);
 
+void cc_shell_item_view_update_cells (CcShellItemView *view);
+
 G_END_DECLS
 
 #endif /* _CC_SHELL_ITEM_VIEW_H */

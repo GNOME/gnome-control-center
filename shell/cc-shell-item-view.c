@@ -148,6 +148,26 @@ iconview_item_activated_cb (GtkIconView     *icon_view,
   g_free (id);
 }
 
+void
+cc_shell_item_view_update_cells (CcShellItemView *view)
+{
+	GList *cells, *l;
+
+	cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (view));
+	for (l = cells ; l != NULL; l = l->next)
+	{
+		GtkCellRenderer *cell = l->data;
+
+		if (GTK_IS_CELL_RENDERER_TEXT (cell)) {
+			g_object_set (G_OBJECT (cell),
+				      "wrap-mode", PANGO_WRAP_WORD,
+				      NULL);
+			/* We only have one text cell */
+			break;
+		}
+	}
+}
+
 static void
 cc_shell_item_view_class_init (CcShellItemViewClass *klass)
 {
