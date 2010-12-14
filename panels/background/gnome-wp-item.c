@@ -173,7 +173,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 
     gnome_wp_item_update (item);
     gnome_wp_item_ensure_gnome_bg (item);
-    gnome_wp_item_update_size (item);
+    gnome_wp_item_update_size (item, NULL);
 
     if (wallpapers)
       g_hash_table_insert (wallpapers, item->filename, item);
@@ -275,22 +275,29 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
   return gnome_wp_item_get_frame_thumbnail (item, thumbs, width, height, -1);
 }
 
-void gnome_wp_item_update_size (GnomeWPItem * item) {
+void gnome_wp_item_update_size (GnomeWPItem * item,
+				GnomeDesktopThumbnailFactory * thumbs) {
   g_free (item->size);
+  item->size = NULL;
 
   if (!strcmp (item->filename, "(none)")) {
     item->size = g_strdup (item->name);
   } else {
     if (gnome_bg_has_multiple_sizes (item->bg))
       item->size = g_strdup (_("multiple sizes"));
-    else if (item->width > 0 && item->height > 0) {
-      /* translators: 100 × 100px
-       * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN */
-      item->size = g_strdup_printf (_("%d \303\227 %dpx"),
-				    item->width,
-				    item->height);
-    } else {
-      item->size = g_strdup ("");
+    else {
+      if (thumbs != NULL && (item->width <= 0 || item->height <= 0)) {
+        gnome_bg_get_image_size (item->bg, thumbs, 1, 1, &item->width, &item->height);
+      }
+      if (item->width > 0 && item->height > 0) {
+        /* translators: 100 × 100px
+         * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN */
+        item->size = g_strdup_printf (_("%d \303\227 %d"),
+				      item->width,
+				      item->height);
+      } else {
+        item->size = g_strdup ("");
+      }
     }
   }
 }

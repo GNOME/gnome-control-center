@@ -337,7 +337,7 @@ update_preview (CcBackgroundPanelPrivate *priv,
       priv->current_background->shade_type = item->shade_type;
 
       gnome_wp_item_ensure_gnome_bg (priv->current_background);
-      gnome_wp_item_update_size (priv->current_background);
+      gnome_wp_item_update_size (priv->current_background, priv->thumb_factory);
     }
 
 
@@ -750,7 +750,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   gnome_wp_item_update (priv->current_background);
   gnome_wp_item_ensure_gnome_bg (priv->current_background);
-  gnome_wp_item_update_size (priv->current_background);
+  gnome_wp_item_update_size (priv->current_background, priv->thumb_factory);
 
   update_preview (priv, NULL, TRUE);
 }
