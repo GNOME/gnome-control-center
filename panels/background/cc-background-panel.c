@@ -280,6 +280,36 @@ copy_finished_cb (GObject      *source_object,
 }
 
 static void
+select_style (GtkComboBox *box,
+	      GDesktopBackgroundStyle new_style)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gboolean cont;
+
+  model = gtk_combo_box_get_model (box);
+  cont = gtk_tree_model_get_iter_first (model, &iter);
+  while (cont != FALSE)
+    {
+      GDesktopBackgroundStyle style;
+
+      gtk_tree_model_get (model, &iter,
+			  1, &style,
+			  -1);
+
+      if (style == new_style)
+        {
+          gtk_combo_box_set_active_iter (box, &iter);
+          break;
+	}
+      cont = gtk_tree_model_iter_next (model, &iter);
+    }
+
+  if (cont == FALSE)
+    gtk_combo_box_set_active (box, -1);
+}
+
+static void
 update_preview (CcBackgroundPanelPrivate *priv,
                 GnomeWPItem              *item,
                 gboolean                  redraw_preview)
@@ -296,8 +326,6 @@ update_preview (CcBackgroundPanelPrivate *priv,
         gdk_color_free (priv->current_background->scolor);
       priv->current_background->scolor = gdk_color_copy (item->scolor);
 
-
-
       g_free (priv->current_background->filename);
       priv->current_background->filename = g_strdup (item->filename);
 
@@ -305,6 +333,9 @@ update_preview (CcBackgroundPanelPrivate *priv,
       priv->current_background->name = g_strdup (item->name);
 
       priv->current_background->options = item->options;
+      priv->current_background->shade_type = item->shade_type;
+
+      gnome_wp_item_ensure_gnome_bg (priv->current_background);
     }
 
 
@@ -322,8 +353,8 @@ update_preview (CcBackgroundPanelPrivate *priv,
       gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-color")),
                                   priv->current_background->pcolor);
 
-      gtk_combo_box_set_active (GTK_COMBO_BOX (WID ("style-combobox")),
-                                priv->current_background->options);
+      select_style (GTK_COMBO_BOX (WID ("style-combobox")),
+                    priv->current_background->options);
     }
 
   if (redraw_preview)
@@ -544,7 +575,7 @@ style_changed_cb (GtkComboBox       *box,
   CcBackgroundPanelPrivate *priv = panel->priv;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  gint value;
+  GDesktopBackgroundStyle value;
 
   if (!gtk_combo_box_get_active_iter (box, &iter))
     {
@@ -558,7 +589,7 @@ style_changed_cb (GtkComboBox       *box,
   g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, value);
 
   if (priv->current_background)
-    priv->current_background->options = gtk_combo_box_get_active (box);
+    priv->current_background->options = value;
 
   update_preview (priv, NULL, TRUE);
 }
