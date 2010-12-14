@@ -179,7 +179,7 @@ load_wallpapers (gchar              *key,
 
   pixbuf = gnome_wp_item_get_thumbnail (item, priv->thumb_factory,
                                         THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
-  gnome_wp_item_update_description (item);
+  gnome_wp_item_update_size (item);
 
   gtk_list_store_set (store, &iter,
                       0, pixbuf,

@@ -44,7 +44,7 @@ struct _GnomeWPItem {
 
   gchar * name;
   gchar * filename;
-  gchar * description;
+  gchar * size;
   GDesktopBackgroundStyle options;
   GDesktopBackgroundShading shade_type;
 
@@ -83,7 +83,7 @@ GdkPixbuf * gnome_wp_item_get_frame_thumbnail (GnomeWPItem *item,
                                                gint height,
                                                gint frame);
 void gnome_wp_item_update (GnomeWPItem *item);
-void gnome_wp_item_update_description (GnomeWPItem *item);
+void gnome_wp_item_update_size (GnomeWPItem *item);
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);
 
 const gchar *wp_item_option_to_string (GDesktopBackgroundStyle type);

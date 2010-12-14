@@ -231,7 +231,7 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 	}
 
         gnome_wp_item_ensure_gnome_bg (wp);
-	gnome_wp_item_update_description (wp);
+	gnome_wp_item_update_size (wp);
 	g_hash_table_insert (data->wp_hash, wp->filename, wp);
       } else {
 	gnome_wp_item_free (wp);

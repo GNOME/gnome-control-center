@@ -173,7 +173,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 
     gnome_wp_item_update (item);
     gnome_wp_item_ensure_gnome_bg (item);
-    gnome_wp_item_update_description (item);
+    gnome_wp_item_update_size (item);
 
     if (wallpapers)
       g_hash_table_insert (wallpapers, item->filename, item);
@@ -192,7 +192,7 @@ void gnome_wp_item_free (GnomeWPItem * item) {
 
   g_free (item->name);
   g_free (item->filename);
-  g_free (item->description);
+  g_free (item->size);
 
   if (item->pcolor != NULL)
     gdk_color_free (item->pcolor);
@@ -275,67 +275,23 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
   return gnome_wp_item_get_frame_thumbnail (item, thumbs, width, height, -1);
 }
 
-void gnome_wp_item_update_description (GnomeWPItem * item) {
-  g_free (item->description);
+void gnome_wp_item_update_size (GnomeWPItem * item) {
+  g_free (item->size);
 
   if (!strcmp (item->filename, "(none)")) {
-    item->description = g_strdup (item->name);
+    item->size = g_strdup (item->name);
   } else {
-    gchar *description;
-    gchar *size;
-    gchar *dirname = g_path_get_dirname (item->filename);
-
-    description = NULL;
-    size = NULL;
-
-    if (strcmp (item->fileinfo->mime_type, "application/xml") == 0)
-      {
-        if (gnome_bg_changes_with_time (item->bg))
-          description = g_strdup (_("Slide Show"));
-        else if (item->width > 0 && item->height > 0)
-          description = g_strdup (_("Image"));
-      }
-    else
-      description = g_content_type_get_description (item->fileinfo->mime_type);
-
     if (gnome_bg_has_multiple_sizes (item->bg))
-      size = g_strdup (_("multiple sizes"));
+      item->size = g_strdup (_("multiple sizes"));
     else if (item->width > 0 && item->height > 0) {
       /* translators: x pixel(s) by y pixel(s) */
-      size = g_strdup_printf (_("%d %s by %d %s"),
-                              item->width,
-                              ngettext ("pixel", "pixels", item->width),
-                              item->height,
-                              ngettext ("pixel", "pixels", item->height));
-    }
-
-    if (description && size) {
-      /* translators: <b>wallpaper name</b>
-       * mime type, size
-       * Folder: /path/to/file
-       */
-      item->description = g_markup_printf_escaped (_("<b>%s</b>\n"
-                                                     "%s, %s\n"
-                                                     "Folder: %s"),
-                                                   item->name,
-                                                   description,
-                                                   size,
-                                                   dirname);
+      item->size = g_strdup_printf (_("%d %s by %d %s"),
+				    item->width,
+				    ngettext ("pixel", "pixels", item->width),
+				    item->height,
+				    ngettext ("pixel", "pixels", item->height));
     } else {
-      /* translators: <b>wallpaper name</b>
-       * Image missing
-       * Folder: /path/to/file
-       */
-      item->description = g_markup_printf_escaped (_("<b>%s</b>\n"
-                                                     "%s\n"
-                                                     "Folder: %s"),
-                                                   item->name,
-                                                   _("Image missing"),
-                                                   dirname);
+      item->size = g_strdup ("");
     }
-
-    g_free (size);
-    g_free (dirname);
-    g_free (description);
   }
 }

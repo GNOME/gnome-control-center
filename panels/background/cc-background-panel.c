@@ -315,6 +315,7 @@ update_preview (CcBackgroundPanelPrivate *priv,
                 gboolean                  redraw_preview)
 {
   gchar *markup;
+  gboolean changes_with_time;
 
   if (item && priv->current_background)
     {
@@ -336,6 +337,7 @@ update_preview (CcBackgroundPanelPrivate *priv,
       priv->current_background->shade_type = item->shade_type;
 
       gnome_wp_item_ensure_gnome_bg (priv->current_background);
+      gnome_wp_item_update_size (priv->current_background);
     }
 
 
@@ -344,18 +346,28 @@ update_preview (CcBackgroundPanelPrivate *priv,
   else
     gtk_widget_hide (WID ("edit-hbox"));
 
+  changes_with_time = FALSE;
+
   if (priv->current_background)
     {
       markup = g_strdup_printf ("<b>%s</b>", priv->current_background->name);
       gtk_label_set_markup (GTK_LABEL (WID ("background-label")), markup);
       g_free (markup);
 
+      gtk_label_set_text (GTK_LABEL (WID ("size_label")), priv->current_background->size);
+
       gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-color")),
                                   priv->current_background->pcolor);
 
       select_style (GTK_COMBO_BOX (WID ("style-combobox")),
                     priv->current_background->options);
+
+      if (priv->current_background->bg)
+        changes_with_time = gnome_bg_changes_with_time (priv->current_background->bg);
     }
+
+  gtk_widget_set_visible (WID ("slide_image"), changes_with_time);
+  gtk_widget_set_visible (WID ("slide-label"), changes_with_time);
 
   if (redraw_preview)
     gtk_widget_queue_draw (WID ("preview-area"));
@@ -734,10 +746,11 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   priv->current_background = g_new0 (GnomeWPItem, 1);
   priv->current_background->filename = filename;
-  priv->current_background->name = g_strdup ("");
+  priv->current_background->name = g_strdup (_("Current background"));
 
   gnome_wp_item_update (priv->current_background);
   gnome_wp_item_ensure_gnome_bg (priv->current_background);
+  gnome_wp_item_update_size (priv->current_background);
 
   update_preview (priv, NULL, TRUE);
 }
