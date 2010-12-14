@@ -108,13 +108,12 @@ static void set_bg_properties (GnomeWPItem *item)
 
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item)
 {
-  if (!item->bg) {
+  if (!item->bg)
     item->bg = gnome_bg_new ();
 
-    g_object_set_data (G_OBJECT (item->bg), "gnome-wp-item", item);
+  g_object_set_data (G_OBJECT (item->bg), "gnome-wp-item", item);
 
-    set_bg_properties (item);
-  }
+  set_bg_properties (item);
 }
 
 void gnome_wp_item_update (GnomeWPItem *item) {
