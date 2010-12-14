@@ -4,8 +4,8 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="backgrounds-liststore">
     <columns>
-      <!-- column-name pixbuf -->
-      <column type="GdkPixbuf"/>
+      <!-- column-name gicon -->
+      <column type="GIcon"/>
       <!-- column-name data -->
       <column type="gpointer"/>
       <!-- column-name source-id -->
@@ -69,7 +69,7 @@
                 <child>
                   <object class="GtkCellRendererPixbuf" id="pixbuf-renderer"/>
                   <attributes>
-                    <attribute name="pixbuf">0</attribute>
+                    <attribute name="gicon">0</attribute>
                   </attributes>
                 </child>
               </object>
@@ -135,7 +135,7 @@
             <child>
               <object class="GtkImage" id="slide_image">
                 <property name="visible">True</property>
-                <property name="icon_name">slideshow-emblem-symbolic</property>
+                <property name="icon_name">slideshow-symbolic</property>
               </object>
               <packing>
                 <property name="expand">False</property>

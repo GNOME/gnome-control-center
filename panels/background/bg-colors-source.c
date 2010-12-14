@@ -81,7 +81,7 @@ bg_colors_source_init (BgColorsSource *self)
   for (c = colors, n = color_names; *c; c++, n++)
     {
       GnomeWPItem *item;
-      GdkPixbuf *pixbuf;
+      GIcon *pixbuf;
       GdkColor color;
 
       item = g_new0 (GnomeWPItem, 1);

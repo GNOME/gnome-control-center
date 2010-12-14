@@ -138,7 +138,7 @@ item_changed_cb (GnomeBG    *bg,
 
   if (gtk_tree_model_get_iter (model, &iter, path))
     {
-      GdkPixbuf *pixbuf;
+      GIcon *pixbuf;
 
       g_signal_handlers_block_by_func (bg, G_CALLBACK (item_changed_cb), data);
 
@@ -169,7 +169,7 @@ load_wallpapers (gchar              *key,
   BgWallpapersSourcePrivate *priv = source->priv;
   GtkTreeIter iter;
   GtkTreePath *path;
-  GdkPixbuf *pixbuf;
+  GIcon *pixbuf;
   GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
 
   if (item->deleted == TRUE)

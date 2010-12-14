@@ -136,7 +136,7 @@ bg_source_init (BgSource *self)
 
   priv = self->priv = SOURCE_PRIVATE (self);
 
-  priv->store = gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_POINTER);
+  priv->store = gtk_list_store_new (2, G_TYPE_ICON, G_TYPE_POINTER);
 }
 
 GtkListStore*

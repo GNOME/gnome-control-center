@@ -528,10 +528,13 @@ preview_draw_cb (GtkWidget         *widget,
 
   if (priv->current_background)
     {
-      pixbuf = gnome_wp_item_get_thumbnail (priv->current_background,
-                                            priv->thumb_factory,
-                                            preview_width,
-                                            preview_height);
+      GIcon *icon;
+      icon = gnome_wp_item_get_frame_thumbnail (priv->current_background,
+                                                priv->thumb_factory,
+                                                preview_width,
+                                                preview_height,
+                                                -2);
+      pixbuf = GDK_PIXBUF (icon);
     }
 
   if (!priv->display_base)

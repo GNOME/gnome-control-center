@@ -7,8 +7,11 @@ dist_ui_DATA = \
 	display-base.png \
 	display-overlay.png
 
-slideshowicondir = $(datadir)/icons/hicolor/scalable/emblems/
-slideshowicon_DATA = slideshow-emblem-symbolic.svg
+slideshowicondir = $(datadir)/icons/hicolor/scalable/categories/
+slideshowicon_DATA = slideshow-symbolic.svg
+
+slideshowemblemdir = $(datadir)/icons/hicolor/scalable/emblems/
+slideshowemblem_DATA = slideshow-emblem.svg
 
 INCLUDES =						\
 	$(PANEL_CFLAGS)					\

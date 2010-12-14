@@ -73,15 +73,15 @@ GnomeWPItem * gnome_wp_item_new (const gchar *filename,
 				 GnomeDesktopThumbnailFactory *thumbnails);
 
 void gnome_wp_item_free (GnomeWPItem *item);
-GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem *item,
-					 GnomeDesktopThumbnailFactory *thumbs,
-                                         gint width,
-                                         gint height);
-GdkPixbuf * gnome_wp_item_get_frame_thumbnail (GnomeWPItem *item,
-                                               GnomeDesktopThumbnailFactory *thumbs,
-                                               gint width,
-                                               gint height,
-                                               gint frame);
+GIcon * gnome_wp_item_get_thumbnail (GnomeWPItem *item,
+				     GnomeDesktopThumbnailFactory *thumbs,
+				     gint width,
+				     gint height);
+GIcon * gnome_wp_item_get_frame_thumbnail (GnomeWPItem *item,
+					   GnomeDesktopThumbnailFactory *thumbs,
+					   gint width,
+					   gint height,
+					   gint frame);
 void gnome_wp_item_update (GnomeWPItem *item);
 void gnome_wp_item_update_size (GnomeWPItem *item, GnomeDesktopThumbnailFactory *thumbs);
 void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);

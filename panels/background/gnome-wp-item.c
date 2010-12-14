@@ -211,64 +211,54 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   g_free (item);
 }
 
-static GdkPixbuf *
-add_slideshow_frame (GdkPixbuf *pixbuf)
+static GEmblem *
+get_slideshow_icon (void)
 {
-  GdkPixbuf *sheet, *sheet2;
-  GdkPixbuf *tmp;
-  gint w, h;
+	GIcon *themed;
+	GEmblem *emblem;
 
-  w = gdk_pixbuf_get_width (pixbuf);
-  h = gdk_pixbuf_get_height (pixbuf);
-
-  sheet = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, w, h);
-  gdk_pixbuf_fill (sheet, 0x00000000);
-  sheet2 = gdk_pixbuf_new_subpixbuf (sheet, 1, 1, w - 2, h - 2);
-  gdk_pixbuf_fill (sheet2, 0xffffffff);
-  g_object_unref (sheet2);
-
-  tmp = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, w + 6, h + 6);
-
-  gdk_pixbuf_fill (tmp, 0x00000000);
-  gdk_pixbuf_composite (sheet, tmp, 6, 6, w, h, 6.0, 6.0, 1.0, 1.0, GDK_INTERP_NEAREST, 255);
-  gdk_pixbuf_composite (sheet, tmp, 3, 3, w, h, 3.0, 3.0, 1.0, 1.0, GDK_INTERP_NEAREST, 255);
-  gdk_pixbuf_composite (pixbuf, tmp, 0, 0, w, h, 0.0, 0.0, 1.0, 1.0, GDK_INTERP_NEAREST, 255);
-
-  g_object_unref (sheet);
-
-  return tmp;
+	themed = g_themed_icon_new ("slideshow-emblem");
+	emblem = g_emblem_new_with_origin (themed, G_EMBLEM_ORIGIN_DEVICE);
+	g_object_unref (themed);
+	return emblem;
 }
 
-GdkPixbuf * gnome_wp_item_get_frame_thumbnail (GnomeWPItem * item,
+GIcon * gnome_wp_item_get_frame_thumbnail (GnomeWPItem * item,
 					       GnomeDesktopThumbnailFactory * thumbs,
                                                int width,
                                                int height,
                                                gint frame) {
   GdkPixbuf *pixbuf = NULL;
+  GIcon *icon = NULL;
 
   set_bg_properties (item);
 
-  if (frame != -1)
+  if (frame >= 0)
     pixbuf = gnome_bg_create_frame_thumbnail (item->bg, thumbs, gdk_screen_get_default (), width, height, frame);
   else
     pixbuf = gnome_bg_create_thumbnail (item->bg, thumbs, gdk_screen_get_default(), width, height);
 
-  if (pixbuf && gnome_bg_changes_with_time (item->bg))
+  if (pixbuf && frame != -2 && gnome_bg_changes_with_time (item->bg))
     {
-      GdkPixbuf *tmp;
+      GEmblem *emblem;
 
-      tmp = add_slideshow_frame (pixbuf);
+      emblem = get_slideshow_icon ();
+      icon = g_emblemed_icon_new (G_ICON (pixbuf), emblem);
+      g_object_unref (emblem);
       g_object_unref (pixbuf);
-      pixbuf = tmp;
+    }
+  else
+    {
+      icon = G_ICON (pixbuf);
     }
 
   gnome_bg_get_image_size (item->bg, thumbs, width, height, &item->width, &item->height);
 
-  return pixbuf;
+  return icon;
 }
 
 
-GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
+GIcon * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeDesktopThumbnailFactory * thumbs,
                                          gint width,
                                          gint height) {
@@ -283,7 +273,7 @@ void gnome_wp_item_update_size (GnomeWPItem * item,
   if (!strcmp (item->filename, "(none)")) {
     item->size = g_strdup (item->name);
   } else {
-    if (gnome_bg_has_multiple_sizes (item->bg))
+    if (gnome_bg_has_multiple_sizes (item->bg) || gnome_bg_changes_with_time (item->bg))
       item->size = g_strdup (_("multiple sizes"));
     else {
       if (thumbs != NULL && (item->width <= 0 || item->height <= 0)) {
