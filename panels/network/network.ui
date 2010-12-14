@@ -5,9 +5,9 @@
   <object class="GtkListStore" id="liststore_wireless_network">
     <columns>
       <!-- column-name id -->
-      <column type="gint"/>
-      <!-- column-name text -->
-      <column type="gchar"/>
+      <column type="gchararray"/>
+      <!-- column-name title -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_devices">
@@ -532,9 +532,11 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="combobox_network_name">
+                                      <object class="GtkComboBoxText" id="combobox_network_name">
                                         <property name="visible">True</property>
+                                        <property name="has-entry">True</property>
                                         <property name="model">liststore_wireless_network</property>
+                                        <property name="entry-text-column">1</property>
                                       </object>
                                       <packing>
                                         <property name="position">1</property>

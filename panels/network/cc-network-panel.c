@@ -36,12 +36,18 @@ struct _CcNetworkPanelPrivate
 };
 
 enum {
-	PANEL_COLUMN_ICON,
-	PANEL_COLUMN_TITLE,
-	PANEL_COLUMN_ID,
-	PANEL_COLUMN_TOOLTIP,
-	PANEL_COLUMN_COMPOSITE_DEVICE,
-	PANEL_COLUMN_LAST
+	PANEL_DEVICES_COLUMN_ICON,
+	PANEL_DEVICES_COLUMN_TITLE,
+	PANEL_DEVICES_COLUMN_ID,
+	PANEL_DEVICES_COLUMN_TOOLTIP,
+	PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE,
+	PANEL_DEVICES_COLUMN_LAST
+};
+
+enum {
+	PANEL_WIRELESS_COLUMN_ID,
+	PANEL_WIRELESS_COLUMN_TITLE,
+	PANEL_WIRELESS_COLUMN_LAST
 };
 
 typedef enum {
@@ -391,6 +397,7 @@ typedef struct {
 	CcNetworkPanel		*panel;
 	guint			 type;
 	gchar			*device_id;
+	gchar			*active_access_point;
 	GDBusProxy		*proxy;
 	GDBusProxy		*proxy_additional;
 } PanelDeviceItem;
@@ -403,6 +410,7 @@ panel_free_device_item (PanelDeviceItem *item)
 	if (item->proxy_additional != NULL)
 		g_object_unref (item->proxy_additional);
 	g_free (item->device_id);
+	g_free (item->active_access_point);
 	g_free (item);
 }
 
@@ -428,22 +436,170 @@ panel_add_device_to_listview (PanelDeviceItem *item)
 	gtk_list_store_append (liststore_devices, &iter);
 	gtk_list_store_set (liststore_devices,
 			    &iter,
-			    PANEL_COLUMN_ICON, panel_device_type_to_icon_name (item->type),
-			    PANEL_COLUMN_TITLE, title,
-			    PANEL_COLUMN_ID, item->device_id,
-			    PANEL_COLUMN_TOOLTIP, "tooltip - FIXME!",
-			    PANEL_COLUMN_COMPOSITE_DEVICE, item,
+			    PANEL_DEVICES_COLUMN_ICON, panel_device_type_to_icon_name (item->type),
+			    PANEL_DEVICES_COLUMN_TITLE, title,
+			    PANEL_DEVICES_COLUMN_ID, item->device_id,
+			    PANEL_DEVICES_COLUMN_TOOLTIP, "tooltip - FIXME!",
+			    PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, item,
 			    -1);
 	g_free (title);
 }
 
+typedef struct {
+	gchar		*access_point;
+	gchar		*active_access_point;
+	CcNetworkPanel	*panel;
+} PanelAccessPointItem;
+
 /**
- * panel_got_device_proxy_additional_cb2:
+ * panel_got_proxy_access_point_cb:
  **/
 static void
-panel_got_device_proxy_additional_cb2 (GObject *source_object, GAsyncResult *res, gpointer user_data)
+panel_got_proxy_access_point_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+	gchar *ssid = NULL;
+	gchar tmp;
+	GDBusProxy *proxy;
+	GError *error = NULL;
+	gsize len;
+	GtkListStore *liststore_wireless_network;
+	GtkTreeIter treeiter;
+	GtkWidget *widget;
+	guint i = 0;
+	GVariantIter iter;
+	GVariant *variant_ssid = NULL;
+	PanelAccessPointItem *ap_item = (PanelAccessPointItem *) user_data;
+	CcNetworkPanelPrivate *priv = ap_item->panel->priv;
+
+	proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+	if (proxy == NULL) {
+		g_printerr ("Error creating proxy: %s\n", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* get the (non NULL terminated, urgh) SSID */
+	variant_ssid = g_dbus_proxy_get_cached_property (proxy, "Ssid");
+	len = g_variant_iter_init (&iter, variant_ssid);
+	if (len == 0) {
+		g_warning ("invalid ssid?!");
+		goto out;
+	}
+
+	/* decode each byte */
+	ssid = g_new0 (gchar, len + 1);
+	while (g_variant_iter_loop (&iter, "y", &tmp))
+		ssid[i++] = tmp;
+	g_debug ("adding access point %s", ssid);
+
+	/* add to the model */
+	liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+						     "liststore_wireless_network"));
+	gtk_list_store_append (liststore_wireless_network, &treeiter);
+	gtk_list_store_set (liststore_wireless_network,
+			    &treeiter,
+			    PANEL_WIRELESS_COLUMN_ID, ap_item->access_point,
+			    PANEL_WIRELESS_COLUMN_TITLE, ssid,
+			    -1);
+
+	/* is this what we're on already? */
+	if (g_strcmp0 (ap_item->access_point,
+		       ap_item->active_access_point) == 0) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "combobox_network_name"));
+		gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &treeiter);
+	}
+out:
+	g_free (ap_item->access_point);
+	g_free (ap_item->active_access_point);
+	g_object_unref (ap_item->panel);
+	g_free (ap_item);
+	g_free (ssid);
+	if (variant_ssid != NULL)
+		g_variant_unref (variant_ssid);
+	if (proxy != NULL)
+		g_object_unref (proxy);
+	return;
+}
+
+
+/**
+ * panel_get_access_point_data:
+ **/
+static void
+panel_get_access_point_data (PanelDeviceItem *item, const gchar *access_point_id)
+{
+	PanelAccessPointItem *ap_item;
+
+	ap_item = g_new0 (PanelAccessPointItem, 1);
+	ap_item->access_point = g_strdup (access_point_id);
+	ap_item->active_access_point = g_strdup (item->active_access_point);
+	ap_item->panel = g_object_ref (item->panel);
+
+	g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+				  G_DBUS_PROXY_FLAGS_NONE,
+				  NULL,
+				  "org.freedesktop.NetworkManager",
+				  access_point_id,
+				  "org.freedesktop.NetworkManager.AccessPoint",
+				  item->panel->priv->cancellable,
+				  panel_got_proxy_access_point_cb,
+				  ap_item);
+}
+
+/**
+ * panel_get_access_points_cb:
+ **/
+static void
+panel_get_access_points_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+	const gchar *object_path;
+	GError *error = NULL;
+	gsize len;
+	GVariantIter iter;
+	GVariant *result = NULL;
+	GVariant *test;
+	GtkListStore *liststore_wireless_network;
+	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
+	CcNetworkPanelPrivate *priv = item->panel->priv;
+
+	result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+	if (result == NULL) {
+		g_printerr ("Error getting access points: %s\n", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	/* clear list of access points */
+	liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+						     "liststore_wireless_network"));
+	gtk_list_store_clear (liststore_wireless_network);
+
+	test = g_variant_get_child_value (result, 0);
+	len = g_variant_iter_init (&iter, test);
+	if (len == 0) {
+		g_warning ("no access points?!");
+		goto out;
+	}
+
+	/* for each entry in the array */
+	while (g_variant_iter_loop (&iter, "o", &object_path)) {
+		g_debug ("adding access point %s", object_path);
+		panel_get_access_point_data (item, object_path);
+	}
+out:
+	g_variant_unref (result);
+	g_variant_unref (test);
+}
+
+/**
+ * panel_got_device_proxy_additional_cb:
+ **/
+static void
+panel_got_device_proxy_additional_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
 	GError *error = NULL;
+	GVariant *result = NULL;
 	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
 
 	item->proxy_additional = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -453,8 +609,27 @@ panel_got_device_proxy_additional_cb2 (GObject *source_object, GAsyncResult *res
 		goto out;
 	}
 
+	/* async populate the list of access points */
+	if (item->type == NM_DEVICE_TYPE_WIFI) {
+
+		/* get the currently active access point */
+		result = g_dbus_proxy_get_cached_property (item->proxy_additional, "ActiveAccessPoint");
+		item->active_access_point = g_variant_dup_string (result, NULL);
+
+		g_dbus_proxy_call (item->proxy_additional,
+				   "GetAccessPoints",
+				   NULL,
+				   G_DBUS_CALL_FLAGS_NONE,
+				   -1,
+				   item->panel->priv->cancellable,
+				   panel_get_access_points_cb,
+				   item);
+	}
+
 	panel_add_device_to_listview (item);
 out:
+	if (result != NULL)
+		g_variant_unref (result);
 	return;
 }
 
@@ -493,7 +668,7 @@ panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer u
 					  item->device_id,
 					  addition_interface,
 					  item->panel->priv->cancellable,
-					  panel_got_device_proxy_additional_cb2,
+					  panel_got_device_proxy_additional_cb,
 					  item);
 	} else {
 		panel_add_device_to_listview (item);
@@ -621,7 +796,7 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_DND, NULL);
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
-							   "icon-name", PANEL_COLUMN_ICON,
+							   "icon-name", PANEL_DEVICES_COLUMN_ICON,
 							   NULL);
 	gtk_tree_view_append_column (treeview, column);
 
@@ -631,13 +806,13 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
 		      "wrap-mode", PANGO_WRAP_WORD,
 		      NULL);
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
-							   "markup", PANEL_COLUMN_TITLE,
+							   "markup", PANEL_DEVICES_COLUMN_TITLE,
 							   NULL);
-	gtk_tree_view_column_set_sort_column_id (column, PANEL_COLUMN_TITLE);
+	gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_TITLE);
 	liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
 					    "liststore_devices"));
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (liststore_devices),
-					      PANEL_COLUMN_TITLE,
+					      PANEL_DEVICES_COLUMN_TITLE,
 					      GTK_SORT_ASCENDING);
 	gtk_tree_view_append_column (treeview, column);
 	gtk_tree_view_column_set_expand (column, TRUE);
@@ -805,8 +980,8 @@ panel_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *
 
 	/* get id */
 	gtk_tree_model_get (model, &iter,
-			    PANEL_COLUMN_ID, &id,
-			    PANEL_COLUMN_COMPOSITE_DEVICE, &item,
+			    PANEL_DEVICES_COLUMN_ID, &id,
+			    PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, &item,
 			    -1);
 
 	/* this is the proxy settings device */
@@ -887,11 +1062,11 @@ panel_add_proxy_device (CcNetworkPanel *panel)
 	gtk_list_store_append (liststore_devices, &iter);
 	gtk_list_store_set (liststore_devices,
 			    &iter,
-			    PANEL_COLUMN_ICON, "preferences-system-network",
-			    PANEL_COLUMN_TITLE, title,
-			    PANEL_COLUMN_ID, NULL,
-			    PANEL_COLUMN_TOOLTIP, _("Set the system proxy settings"),
-			    PANEL_COLUMN_COMPOSITE_DEVICE, NULL,
+			    PANEL_DEVICES_COLUMN_ICON, "preferences-system-network",
+			    PANEL_DEVICES_COLUMN_TITLE, title,
+			    PANEL_DEVICES_COLUMN_ID, NULL,
+			    PANEL_DEVICES_COLUMN_TOOLTIP, _("Set the system proxy settings"),
+			    PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, NULL,
 			    -1);
 	g_free (title);
 }
