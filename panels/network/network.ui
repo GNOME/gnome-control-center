@@ -1071,14 +1071,26 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label_proxy_http">
+                                      <object class="GtkEntry" id="entry_proxy_http">
                                         <property name="visible">True</property>
-                                        <property name="label">dave.lan</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
                                         <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSpinButton" id="spinbutton_proxy_http">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
+                                        <property name="adjustment">adjustment_proxy_port_http</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">2</property>
                                       </packing>
                                     </child>
                                   </object>
@@ -1115,14 +1127,26 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label_proxy_https">
+                                      <object class="GtkEntry" id="entry_proxy_https">
                                         <property name="visible">True</property>
-                                        <property name="label">dave.lan</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
                                         <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSpinButton" id="spinbutton_proxy_https">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
+                                        <property name="adjustment">adjustment_proxy_port_https</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">2</property>
                                       </packing>
                                     </child>
                                   </object>
@@ -1159,14 +1183,26 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label_proxy_ftp">
+                                      <object class="GtkEntry" id="entry_proxy_ftp">
                                         <property name="visible">True</property>
-                                        <property name="label">dave.lan</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
                                         <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSpinButton" id="spinbutton_proxy_ftp">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
+                                        <property name="adjustment">adjustment_proxy_port_ftp</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">2</property>
                                       </packing>
                                     </child>
                                   </object>
@@ -1203,14 +1239,26 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label_proxy_socks">
+                                      <object class="GtkEntry" id="entry_proxy_socks">
                                         <property name="visible">True</property>
-                                        <property name="label">dave.lan</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
                                         <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSpinButton" id="spinbutton_proxy_socks">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
+                                        <property name="adjustment">adjustment_proxy_port_socks</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">2</property>
                                       </packing>
                                     </child>
                                   </object>
@@ -1409,5 +1457,25 @@
         <col id="1">2</col>
       </row>
     </data>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_proxy_port_http">
+    <property name="lower">0</property>
+    <property name="upper">65535</property>
+    <property name="step_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_proxy_port_https">
+    <property name="lower">0</property>
+    <property name="upper">65535</property>
+    <property name="step_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_proxy_port_ftp">
+    <property name="lower">0</property>
+    <property name="upper">65535</property>
+    <property name="step_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_proxy_port_socks">
+    <property name="lower">0</property>
+    <property name="upper">65535</property>
+    <property name="step_increment">1</property>
   </object>
 </interface>

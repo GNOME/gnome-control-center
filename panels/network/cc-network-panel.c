@@ -619,7 +619,7 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
 
 	/* image */
 	renderer = gtk_cell_renderer_pixbuf_new ();
-	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_DIALOG, NULL);
+	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_DND, NULL);
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
 							   "icon-name", PANEL_COLUMN_ICON,
 							   NULL);
@@ -907,6 +907,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
 	GSettings *settings_tmp;
 	GtkTreePath *path;
 	GtkTreeSelection *selection;
+	GtkAdjustment *adjustment;
 	GtkWidget *widget;
 
 	panel->priv = NETWORK_PANEL_PRIVATE (panel);
@@ -961,36 +962,56 @@ cc_network_panel_init (CcNetworkPanel *panel)
 	/* bind the proxy values */
 	settings_tmp = g_settings_new ("org.gnome.system.proxy.http");
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "label_proxy_http"));
+						     "entry_proxy_http"));
 	g_settings_bind (settings_tmp, "host",
-			 widget, "label",
+			 widget, "text",
+			 G_SETTINGS_BIND_DEFAULT);
+	adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
+							     "adjustment_proxy_port_http"));
+	g_settings_bind (settings_tmp, "port",
+			 adjustment, "value",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_object_unref (settings_tmp);
 
 	/* bind the proxy values */
 	settings_tmp = g_settings_new ("org.gnome.system.proxy.https");
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "label_proxy_https"));
+						     "entry_proxy_https"));
 	g_settings_bind (settings_tmp, "host",
-			 widget, "label",
+			 widget, "text",
+			 G_SETTINGS_BIND_DEFAULT);
+	adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
+							     "adjustment_proxy_port_https"));
+	g_settings_bind (settings_tmp, "port",
+			 adjustment, "value",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_object_unref (settings_tmp);
 
 	/* bind the proxy values */
 	settings_tmp = g_settings_new ("org.gnome.system.proxy.ftp");
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "label_proxy_ftp"));
+						     "entry_proxy_ftp"));
 	g_settings_bind (settings_tmp, "host",
-			 widget, "label",
+			 widget, "text",
+			 G_SETTINGS_BIND_DEFAULT);
+	adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
+							     "adjustment_proxy_port_ftp"));
+	g_settings_bind (settings_tmp, "port",
+			 adjustment, "value",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_object_unref (settings_tmp);
 
 	/* bind the proxy values */
 	settings_tmp = g_settings_new ("org.gnome.system.proxy.socks");
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "label_proxy_socks"));
+						     "entry_proxy_socks"));
 	g_settings_bind (settings_tmp, "host",
-			 widget, "label",
+			 widget, "text",
+			 G_SETTINGS_BIND_DEFAULT);
+	adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
+							     "adjustment_proxy_port_socks"));
+	g_settings_bind (settings_tmp, "port",
+			 adjustment, "value",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_object_unref (settings_tmp);
 
