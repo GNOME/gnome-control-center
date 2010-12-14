@@ -284,12 +284,11 @@ void gnome_wp_item_update_size (GnomeWPItem * item) {
     if (gnome_bg_has_multiple_sizes (item->bg))
       item->size = g_strdup (_("multiple sizes"));
     else if (item->width > 0 && item->height > 0) {
-      /* translators: x pixel(s) by y pixel(s) */
-      item->size = g_strdup_printf (_("%d %s by %d %s"),
+      /* translators: 100 × 100px
+       * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN */
+      item->size = g_strdup_printf (_("%d \303\227 %dpx"),
 				    item->width,
-				    ngettext ("pixel", "pixels", item->width),
-				    item->height,
-				    ngettext ("pixel", "pixels", item->height));
+				    item->height);
     } else {
       item->size = g_strdup ("");
     }
