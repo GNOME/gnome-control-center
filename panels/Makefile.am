@@ -7,6 +7,7 @@ SUBDIRS= \
 	mouse \
 	region \
 	proxy \
+	network \
 	info \
 	sound \
 	default-applications \

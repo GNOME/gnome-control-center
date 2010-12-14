@@ -383,6 +383,8 @@ panels/info/Makefile
 panels/info/gnome-info-panel.desktop.in
 panels/power/Makefile
 panels/power/gnome-power-panel.desktop.in
+panels/network/Makefile
+panels/network/gnome-network-panel.desktop.in
 panels/universal-access/Makefile
 panels/universal-access/gnome-universal-access-panel.desktop.in
 panels/user-accounts/Makefile
