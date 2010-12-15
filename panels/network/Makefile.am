@@ -13,6 +13,8 @@ libnetwork_la_SOURCES =					\
 	network-module.c				\
 	panel-cell-renderer-mode.c			\
 	panel-cell-renderer-mode.h			\
+	panel-cell-renderer-signal.c			\
+	panel-cell-renderer-signal.h			\
 	cc-network-panel.c				\
 	cc-network-panel.h
 
