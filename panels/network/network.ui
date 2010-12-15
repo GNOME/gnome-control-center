@@ -72,49 +72,36 @@
                     <property name="visible">True</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkHBox" id="hbox_device_header">
+                      <object class="GtkAlignment" id="alignment_header">
                         <property name="visible">True</property>
-                        <property name="spacing">6</property>
+                        <property name="left_padding">18</property>
                         <child>
-                          <object class="GtkLabel" id="label3">
+                          <object class="GtkHBox" id="hbox_device_header">
                             <property name="visible">True</property>
-                            <property name="label">
-</property>
-                          </object>
-                          <packing>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage" id="image_device">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-preferences</property>
-                            <property name="icon-size">6</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkVBox" id="vbox4">
-                            <property name="visible">True</property>
-                            <property name="spacing">3</property>
+                            <property name="spacing">6</property>
                             <child>
-                              <object class="GtkHBox" id="hbox4">
+                              <object class="GtkHBox" id="hbox3">
                                 <property name="visible">True</property>
                                 <child>
-                                  <object class="GtkLabel" id="label_device">
+                                  <object class="GtkLabel" id="label1">
                                     <property name="visible">True</property>
-                                    <property name="label">Wired</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"/>
-                                      <attribute name="scale" value="1.200000"/>
-                                    </attributes>
+                                    <property name="label"> </property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image_device">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-preferences</property>
+                                    <property name="icon-size">6</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
+                                    <property name="pack_type">end</property>
                                     <property name="position">0</property>
                                   </packing>
                                 </child>
@@ -126,12 +113,27 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="hbox5">
+                              <object class="GtkVBox" id="vbox4">
                                 <property name="visible">True</property>
+                                <property name="spacing">3</property>
                                 <child>
-                                  <object class="GtkLabel" id="label_status">
+                                  <object class="GtkHBox" id="hbox4">
                                     <property name="visible">True</property>
-                                    <property name="label">Cable unplugged</property>
+                                    <child>
+                                      <object class="GtkLabel" id="label_device">
+                                        <property name="visible">True</property>
+                                        <property name="label">Wired</property>
+                                        <attributes>
+                                          <attribute name="weight" value="bold"/>
+                                          <attribute name="scale" value="1.200000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -139,32 +141,40 @@
                                     <property name="position">0</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox5">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkLabel" id="label_status">
+                                        <property name="visible">True</property>
+                                        <property name="label">Cable unplugged</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label4">
-                            <property name="visible">True</property>
-                          </object>
-                          <packing>
-                            <property name="position">3</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkHBox" id="hbox6">
@@ -540,9 +550,9 @@
                                     <child>
                                       <object class="GtkComboBox" id="combobox_network_name">
                                         <property name="visible">True</property>
-                                        <property name="has-entry">True</property>
                                         <property name="model">liststore_wireless_network</property>
-                                        <property name="entry-text-column">1</property>
+                                        <property name="has_entry">True</property>
+                                        <property name="entry_text_column">1</property>
                                       </object>
                                       <packing>
                                         <property name="position">1</property>
@@ -1462,6 +1472,7 @@
       <widget name="hbox37"/>
       <widget name="hbox47"/>
       <widget name="hbox49"/>
+      <widget name="hbox3"/>
     </widgets>
   </object>
   <object class="GtkListStore" id="liststore_proxy_method">
