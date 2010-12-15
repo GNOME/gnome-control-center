@@ -254,6 +254,8 @@ file_info_async_ready (GObject      *source,
 
           file = g_file_new_for_path (filename);
           g_free (filename);
+          if (item->options == G_DESKTOP_BACKGROUND_STYLE_NONE)
+            item->options = G_DESKTOP_BACKGROUND_STYLE_ZOOM;
           g_object_set_data (G_OBJECT (file), "item", item);
           g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
           g_object_unref (file);
