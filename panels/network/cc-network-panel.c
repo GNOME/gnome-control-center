@@ -1288,7 +1288,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
 						     "button_unlock"));
 	gtk_widget_set_sensitive (widget, FALSE);
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "togglebutton_flightmode"));
+						     "switch_flight_mode"));
 	gtk_widget_set_sensitive (widget, FALSE);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
