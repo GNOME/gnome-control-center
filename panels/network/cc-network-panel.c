@@ -43,6 +43,7 @@ enum {
 	PANEL_DEVICES_COLUMN_ICON,
 	PANEL_DEVICES_COLUMN_TITLE,
 	PANEL_DEVICES_COLUMN_ID,
+	PANEL_DEVICES_COLUMN_SORT,
 	PANEL_DEVICES_COLUMN_TOOLTIP,
 	PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE,
 	PANEL_DEVICES_COLUMN_LAST
@@ -302,6 +303,7 @@ panel_add_device_to_listview (PanelDeviceItem *item)
 	gtk_list_store_set (liststore_devices,
 			    &iter,
 			    PANEL_DEVICES_COLUMN_ICON, panel_device_type_to_icon_name (item->type),
+			    PANEL_DEVICES_COLUMN_SORT, panel_device_type_to_sortable_string (item->type),
 			    PANEL_DEVICES_COLUMN_TITLE, title,
 			    PANEL_DEVICES_COLUMN_ID, item->device_id,
 			    PANEL_DEVICES_COLUMN_TOOLTIP, "tooltip - FIXME!",
@@ -691,11 +693,11 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
 							   "markup", PANEL_DEVICES_COLUMN_TITLE,
 							   NULL);
-	gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_TITLE);
+	gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_SORT);
 	liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
 					    "liststore_devices"));
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (liststore_devices),
-					      PANEL_DEVICES_COLUMN_TITLE,
+					      PANEL_DEVICES_COLUMN_SORT,
 					      GTK_SORT_ASCENDING);
 	gtk_tree_view_append_column (treeview, column);
 	gtk_tree_view_column_set_expand (column, TRUE);
@@ -940,7 +942,7 @@ panel_add_proxy_device (CcNetworkPanel *panel)
 	liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
 					    "liststore_devices"));
 	title = g_strdup_printf ("<span size=\"large\">%s</span>",
-				 _("Network Proxy"));
+				 _("Network proxy"));
 
 	gtk_list_store_append (liststore_devices, &iter);
 	gtk_list_store_set (liststore_devices,
@@ -948,6 +950,7 @@ panel_add_proxy_device (CcNetworkPanel *panel)
 			    PANEL_DEVICES_COLUMN_ICON, "preferences-system-network",
 			    PANEL_DEVICES_COLUMN_TITLE, title,
 			    PANEL_DEVICES_COLUMN_ID, NULL,
+			    PANEL_DEVICES_COLUMN_SORT, "9",
 			    PANEL_DEVICES_COLUMN_TOOLTIP, _("Set the system proxy settings"),
 			    PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, NULL,
 			    -1);

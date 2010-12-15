@@ -57,6 +57,7 @@ typedef enum {
 
 const gchar	*panel_device_type_to_icon_name			(guint type);
 const gchar	*panel_device_type_to_localized_string		(guint type);
+const gchar	*panel_device_type_to_sortable_string		(guint type);
 const gchar	*panel_ap_mode_to_localized_string		(guint mode);
 const gchar	*panel_device_state_to_localized_string		(guint type);
 

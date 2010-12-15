@@ -93,6 +93,39 @@ panel_device_type_to_localized_string (guint type)
 }
 
 /**
+ * panel_device_type_to_sortable_string:
+ *
+ * Try to return order of approximate connection speed.
+ **/
+const gchar *
+panel_device_type_to_sortable_string (guint type)
+{
+	const gchar *value = NULL;
+	switch (type) {
+	case NM_DEVICE_TYPE_ETHERNET:
+		value = "1";
+		break;
+	case NM_DEVICE_TYPE_WIFI:
+		value = "2";
+		break;
+	case NM_DEVICE_TYPE_GSM:
+	case NM_DEVICE_TYPE_CDMA:
+		value = "3";
+		break;
+	case NM_DEVICE_TYPE_BLUETOOTH:
+		value = "4";
+		break;
+	case NM_DEVICE_TYPE_MESH:
+		value = "5";
+		break;
+	default:
+		value = "6";
+		break;
+	}
+	return value;
+}
+
+/**
  * panel_ap_mode_to_localized_string:
  **/
 const gchar *
