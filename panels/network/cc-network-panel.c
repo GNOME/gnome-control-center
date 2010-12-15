@@ -22,6 +22,8 @@
 
 #include "cc-network-panel.h"
 
+#include "panel-common.h"
+
 G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
 
 #define NETWORK_PANEL_PRIVATE(o) \
@@ -49,29 +51,6 @@ enum {
 	PANEL_WIRELESS_COLUMN_TITLE,
 	PANEL_WIRELESS_COLUMN_LAST
 };
-
-typedef enum {
-	NM_DEVICE_TYPE_UNKNOWN,
-	NM_DEVICE_TYPE_ETHERNET,
-	NM_DEVICE_TYPE_WIFI,
-	NM_DEVICE_TYPE_GSM,
-	NM_DEVICE_TYPE_CDMA,
-	NM_DEVICE_TYPE_BLUETOOTH,
-	NM_DEVICE_TYPE_MESH
-} NMDeviceType;
-
-typedef enum {
-	NM_DEVICE_STATE_UNKNOWN,
-	NM_DEVICE_STATE_UNMANAGED,
-	NM_DEVICE_STATE_UNAVAILABLE,
-	NM_DEVICE_STATE_DISCONNECTED,
-	NM_DEVICE_STATE_PREPARE,
-	NM_DEVICE_STATE_CONFIG,
-	NM_DEVICE_STATE_NEED_AUTH,
-	NM_DEVICE_STATE_IP_CONFIG,
-	NM_DEVICE_STATE_ACTIVATED,
-	NM_DEVICE_STATE_FAILED
-} NMDeviceState;
 
 static void
 cc_network_panel_get_property (GObject    *object,
@@ -273,124 +252,6 @@ panel_dbus_signal_cb (GDBusProxy *proxy,
 		g_debug ("ensure devices are correct");
 		return;
 	}
-}
-
-/**
- * panel_device_type_to_icon_name:
- **/
-static const gchar *
-panel_device_type_to_icon_name (guint type)
-{
-	const gchar *value = NULL;
-	switch (type) {
-	case NM_DEVICE_TYPE_ETHERNET:
-		value = "network-wired";
-		break;
-	case NM_DEVICE_TYPE_WIFI:
-	case NM_DEVICE_TYPE_GSM:
-	case NM_DEVICE_TYPE_CDMA:
-	case NM_DEVICE_TYPE_BLUETOOTH:
-	case NM_DEVICE_TYPE_MESH:
-		value = "network-wireless";
-		break;
-	default:
-		break;
-	}
-	return value;
-}
-
-/**
- * panel_device_type_to_localized_string:
- **/
-static const gchar *
-panel_device_type_to_localized_string (guint type)
-{
-	const gchar *value = NULL;
-	switch (type) {
-	case NM_DEVICE_TYPE_UNKNOWN:
-		/* TRANSLATORS: device type */
-		value = _("Unknown");
-		break;
-	case NM_DEVICE_TYPE_ETHERNET:
-		/* TRANSLATORS: device type */
-		value = _("Wired");
-		break;
-	case NM_DEVICE_TYPE_WIFI:
-		/* TRANSLATORS: device type */
-		value = _("Wireless");
-		break;
-	case NM_DEVICE_TYPE_GSM:
-	case NM_DEVICE_TYPE_CDMA:
-		/* TRANSLATORS: device type */
-		value = _("Mobile broadband");
-		break;
-	case NM_DEVICE_TYPE_BLUETOOTH:
-		/* TRANSLATORS: device type */
-		value = _("Bluetooth");
-		break;
-	case NM_DEVICE_TYPE_MESH:
-		/* TRANSLATORS: device type */
-		value = _("Mesh");
-		break;
-
-	default:
-		break;
-	}
-	return value;
-}
-
-/**
- * panel_device_state_to_localized_string:
- **/
-static const gchar *
-panel_device_state_to_localized_string (guint type)
-{
-	const gchar *value = NULL;
-	switch (type) {
-	case NM_DEVICE_STATE_UNKNOWN:
-		/* TRANSLATORS: device status */
-		value = _("Status unknown");
-		break;
-	case NM_DEVICE_STATE_UNMANAGED:
-		/* TRANSLATORS: device status */
-		value = _("Unmanaged");
-		break;
-	case NM_DEVICE_STATE_UNAVAILABLE:
-		/* TRANSLATORS: device status */
-		value = _("Unavailable");
-		break;
-	case NM_DEVICE_STATE_DISCONNECTED:
-		/* TRANSLATORS: device status */
-		value = _("Disconnected");
-		break;
-	case NM_DEVICE_STATE_PREPARE:
-		/* TRANSLATORS: device status */
-		value = _("Preparing connection");
-		break;
-	case NM_DEVICE_STATE_CONFIG:
-		/* TRANSLATORS: device status */
-		value = _("Configuring connection");
-		break;
-	case NM_DEVICE_STATE_NEED_AUTH:
-		/* TRANSLATORS: device status */
-		value = _("Authenticating");
-		break;
-	case NM_DEVICE_STATE_IP_CONFIG:
-		/* TRANSLATORS: device status */
-		value = _("Getting network address");
-		break;
-	case NM_DEVICE_STATE_ACTIVATED:
-		/* TRANSLATORS: device status */
-		value = _("Connected");
-		break;
-	case NM_DEVICE_STATE_FAILED:
-		/* TRANSLATORS: device status */
-		value = _("Failed to connect");
-		break;
-	default:
-		break;
-	}
-	return value;
 }
 
 typedef struct {

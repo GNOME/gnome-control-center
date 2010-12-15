@@ -11,6 +11,8 @@ ccpanels_LTLIBRARIES = libnetwork.la
 
 libnetwork_la_SOURCES =					\
 	network-module.c				\
+	panel-common.c					\
+	panel-common.h					\
 	panel-cell-renderer-mode.c			\
 	panel-cell-renderer-mode.h			\
 	panel-cell-renderer-signal.c			\
