@@ -856,9 +856,9 @@ panel_set_label_for_variant_speed (GtkWidget *widget, GVariant *variant)
 	/* format with correct scale */
 	g_variant_get (variant, "u", &speed);
 	if (speed < 1000) {
-		tmp = g_strdup_printf (_("%iMb/s"), speed);
+		tmp = g_strdup_printf (_("%i Mb/s"), speed);
 	} else {
-		tmp = g_strdup_printf (_("%iGb/s"), speed / 1000);
+		tmp = g_strdup_printf (_("%i Gb/s"), speed / 1000);
 	}
 	gtk_label_set_label (GTK_LABEL (widget), tmp);
 	g_free (tmp);
@@ -876,9 +876,9 @@ panel_set_label_for_variant_bitrate (GtkWidget *widget, GVariant *variant)
 	/* format with correct scale */
 	g_variant_get (variant, "u", &bitrate);
 	if (bitrate < 1000) {
-		tmp = g_strdup_printf (_("%ikb/s"), bitrate);
+		tmp = g_strdup_printf (_("%i kb/s"), bitrate);
 	} else {
-		tmp = g_strdup_printf (_("%iMb/s"), bitrate / 1000);
+		tmp = g_strdup_printf (_("%i Mb/s"), bitrate / 1000);
 	}
 	gtk_label_set_label (GTK_LABEL (widget), tmp);
 	g_free (tmp);
