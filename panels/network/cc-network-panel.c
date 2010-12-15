@@ -261,11 +261,14 @@ panel_dbus_signal_cb (GDBusProxy *proxy,
 
 typedef struct {
 	CcNetworkPanel		*panel;
-	guint			 type;
-	gchar			*device_id;
 	gchar			*active_access_point;
+	gchar			*device_id;
+	gchar			*modem_imei;
+	gchar			*operator_name;
+	gchar			*udi;
 	GDBusProxy		*proxy;
 	GDBusProxy		*proxy_additional;
+	guint			 type;
 } PanelDeviceItem;
 
 static void
@@ -277,6 +280,9 @@ panel_free_device_item (PanelDeviceItem *item)
 		g_object_unref (item->proxy_additional);
 	g_free (item->device_id);
 	g_free (item->active_access_point);
+	g_free (item->udi);
+	g_free (item->operator_name);
+	g_free (item->modem_imei);
 	g_free (item);
 }
 
@@ -519,6 +525,98 @@ out:
 }
 
 /**
+ * panel_get_registration_info_cb:
+ **/
+static void
+panel_get_registration_info_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+	gchar *operator_code = NULL;
+	GError *error = NULL;
+	guint registration_status;
+	GVariant *result = NULL;
+	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
+
+	result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+	if (result == NULL) {
+		g_printerr ("Error getting registration info: %s\n", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	/* get values */
+	g_variant_get (result, "((uss))",
+		       &registration_status,
+		       &operator_code,
+		       &item->operator_name);
+
+	g_free (operator_code);
+	g_variant_unref (result);
+}
+
+/**
+ * panel_got_device_proxy_modem_manager_gsm_network_cb:
+ **/
+static void
+panel_got_device_proxy_modem_manager_gsm_network_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+	GError *error = NULL;
+	GVariant *result = NULL;
+	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
+
+	item->proxy_additional = g_dbus_proxy_new_for_bus_finish (res, &error);
+	if (item->proxy_additional == NULL) {
+		g_printerr ("Error creating additional proxy: %s\n", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* get the currently active access point */
+	result = g_dbus_proxy_get_cached_property (item->proxy_additional, "AccessTechnology");
+//	item->active_access_point = g_variant_dup_string (result, NULL);
+
+	g_dbus_proxy_call (item->proxy_additional,
+			   "GetRegistrationInfo",
+			   NULL,
+			   G_DBUS_CALL_FLAGS_NONE,
+			   -1,
+			   item->panel->priv->cancellable,
+			   panel_get_registration_info_cb,
+			   item);
+
+	panel_add_device_to_listview (item);
+out:
+	if (result != NULL)
+		g_variant_unref (result);
+	return;
+}
+
+/**
+ * panel_got_device_proxy_modem_manager_cb:
+ **/
+static void
+panel_got_device_proxy_modem_manager_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+	GError *error = NULL;
+	GVariant *result = NULL;
+	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
+
+	item->proxy_additional = g_dbus_proxy_new_for_bus_finish (res, &error);
+	if (item->proxy_additional == NULL) {
+		g_printerr ("Error creating additional proxy: %s\n", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* get the IMEI */
+	result = g_dbus_proxy_get_cached_property (item->proxy_additional, "EquipmentIdentifier");
+	item->modem_imei = g_variant_dup_string (result, NULL);
+out:
+	if (result != NULL)
+		g_variant_unref (result);
+	return;
+}
+
+/**
  * panel_got_device_proxy_cb:
  **/
 static void
@@ -526,7 +624,7 @@ panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer u
 {
 	GError *error = NULL;
 	GVariant *variant_type = NULL;
-	const gchar *addition_interface = NULL;
+	GVariant *variant_udi = NULL;
 	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
 	CcNetworkPanelPrivate *priv = item->panel->priv;
 
@@ -537,28 +635,59 @@ panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer u
 		goto out;
 	}
 
+	/* get the UDI, so we can query ModemManager devices */
+	variant_udi = g_dbus_proxy_get_cached_property (item->proxy, "Udi");
+	g_variant_get (variant_udi, "s", &item->udi);
+
 	/* get the additional interface for this device type */
 	variant_type = g_dbus_proxy_get_cached_property (item->proxy, "DeviceType");
 	g_variant_get (variant_type, "u", &item->type);
 	if (item->type == NM_DEVICE_TYPE_ETHERNET) {
-		addition_interface = "org.freedesktop.NetworkManager.Device.Wired";
-	} else if (item->type == NM_DEVICE_TYPE_WIFI) {
-		addition_interface = "org.freedesktop.NetworkManager.Device.Wireless";
-	}
-	if (addition_interface != NULL) {
 		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
 					  G_DBUS_PROXY_FLAGS_NONE,
 					  NULL,
 					  "org.freedesktop.NetworkManager",
 					  item->device_id,
-					  addition_interface,
+					  "org.freedesktop.NetworkManager.Device.Wired",
 					  item->panel->priv->cancellable,
 					  panel_got_device_proxy_additional_cb,
+					  item);
+	} else if (item->type == NM_DEVICE_TYPE_WIFI) {
+		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+					  G_DBUS_PROXY_FLAGS_NONE,
+					  NULL,
+					  "org.freedesktop.NetworkManager",
+					  item->device_id,
+					  "org.freedesktop.NetworkManager.Device.Wireless",
+					  item->panel->priv->cancellable,
+					  panel_got_device_proxy_additional_cb,
+					  item);
+	} else if (item->type == NM_DEVICE_TYPE_GSM ||
+		   item->type == NM_DEVICE_TYPE_CDMA) {
+		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+					  G_DBUS_PROXY_FLAGS_NONE,
+					  NULL,
+					  "org.freedesktop.ModemManager",
+					  item->udi,
+					  "org.freedesktop.ModemManager.Modem",
+					  item->panel->priv->cancellable,
+					  panel_got_device_proxy_modem_manager_cb,
+					  item);
+		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+					  G_DBUS_PROXY_FLAGS_NONE,
+					  NULL,
+					  "org.freedesktop.ModemManager",
+					  item->udi,
+					  "org.freedesktop.ModemManager.Modem.Gsm.Network",
+					  item->panel->priv->cancellable,
+					  panel_got_device_proxy_modem_manager_gsm_network_cb,
 					  item);
 	} else {
 		panel_add_device_to_listview (item);
 	}
 out:
+	if (variant_udi != NULL)
+		g_variant_unref (variant_udi);
 	if (variant_type != NULL)
 		g_variant_unref (variant_type);
 	return;
@@ -857,15 +986,17 @@ panel_populate_mobilebb_device (CcNetworkPanel *panel, PanelDeviceItem *item)
 						     "label_wireless_ip"));
 	panel_set_label_for_variant_ipv4 (widget, ip4);
 
-	/* hide until we get data from ModemManager */
+	/* use data from ModemManager */
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "hbox_mobilebb_provider"));
-	gtk_widget_set_visible (widget, FALSE);
+						     "label_mobilebb_provider"));
+	gtk_label_set_text (GTK_LABEL (widget), item->operator_name);
+	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+						     "label_mobilebb_imei"));
+	gtk_label_set_text (GTK_LABEL (widget), item->modem_imei);
+
+	/* I'm not sure where to get this data from */
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
 						     "hbox_mobilebb_speed"));
-	gtk_widget_set_visible (widget, FALSE);
-	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "hbox_mobilebb_mac"));
 	gtk_widget_set_visible (widget, FALSE);
 
 	g_variant_unref (ip4);
@@ -921,7 +1052,7 @@ panel_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *
 	variant_state = g_dbus_proxy_get_cached_property (item->proxy, "State");
 	g_variant_get (variant_state, "u", &state);
 
-	g_debug ("device %s type %i", id, item->type);
+	g_debug ("device %s type %i @ %s", id, item->type, item->udi);
 
 	/* set device icon */
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
