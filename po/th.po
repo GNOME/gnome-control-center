@@ -14,9 +14,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-12-06 00:12+0000\n"
-"PO-Revision-Date: 2010-12-07 18:00+0700\n"
-"Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
+"POT-Creation-Date: 2010-12-14 20:31+0000\n"
+"PO-Revision-Date: 2010-12-15 15:58+0700\n"
+"Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,23 +171,28 @@ msgstr "พื้นหลัง;พื้นโต๊ะ;หน้าจอ;"
 msgid "Center"
 msgstr "วางตรงกลาง"
 
-#: ../panels/background/background.ui.h:2
+#. This refers to a slideshow background
+#: ../panels/background/background.ui.h:3
+msgid "Changes throughout the day"
+msgstr "เปลี่ยนแปลงตลอดวัน"
+
+#: ../panels/background/background.ui.h:4
 msgid "Fill"
 msgstr "ยืดเต็มจอ"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:5
 msgid "Scale"
 msgstr "ขยายพอดีหน้าจอ"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgid "Span"
 msgstr "แสดงเต็มภาพ"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgid "Tile"
 msgstr "เรียงกระเบื้อง"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 #: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
 msgstr "ซูม"
@@ -232,83 +237,40 @@ msgstr "เทา"
 msgid "Black"
 msgstr "ดำ"
 
-#: ../panels/background/cc-background-panel.c:622
+#: ../panels/background/cc-background-panel.c:668
 msgid "Wallpapers"
 msgstr "ภาพพื้นหลัง"
 
-#: ../panels/background/cc-background-panel.c:630
+#: ../panels/background/cc-background-panel.c:676
 msgid "Pictures Folder"
 msgstr "โฟลเดอร์รูปภาพ"
 
-#: ../panels/background/cc-background-panel.c:638
+#: ../panels/background/cc-background-panel.c:684
 msgid "Colors"
 msgstr "สี"
 
-#: ../panels/background/cc-background-panel.c:647
+#: ../panels/background/cc-background-panel.c:693
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/gnome-wp-info.c:50
+#: ../panels/background/cc-background-panel.c:752
+msgid "Current background"
+msgstr "พื้นหลังปัจจุบัน"
+
+#: ../panels/background/gnome-wp-info.c:59
 msgid "No Desktop Background"
 msgstr "ไม่ใช้ภาพพื้นหลังพื้นโต๊ะ"
 
-#: ../panels/background/gnome-wp-item.c:294
-msgid "Slide Show"
-msgstr "การแสดงสไลด์"
-
-#: ../panels/background/gnome-wp-item.c:296
-msgid "Image"
-msgstr "รูปภาพ"
-
-#: ../panels/background/gnome-wp-item.c:302
+#: ../panels/background/gnome-wp-item.c:277
 msgid "multiple sizes"
 msgstr "หลายขนาด"
 
-#. translators: x pixel(s) by y pixel(s)
-#: ../panels/background/gnome-wp-item.c:305
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/gnome-wp-item.c:285
 #, c-format
-msgid "%d %s by %d %s"
-msgstr "%d %s × %d %s"
-
-#: ../panels/background/gnome-wp-item.c:307
-#: ../panels/background/gnome-wp-item.c:309
-msgid "pixel"
-msgid_plural "pixels"
-msgstr[0] "จุด"
-
-#. translators: <b>wallpaper name</b>
-#. * mime type, size
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:317
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"โฟลเดอร์: %s"
-
-#. translators: <b>wallpaper name</b>
-#. * Image missing
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:329
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s\n"
-"โฟลเดอร์: %s"
-
-#: ../panels/background/gnome-wp-item.c:333
-msgid "Image missing"
-msgstr "รูปภาพหายไป"
+msgid "%d × %d"
+msgstr "%d × %d"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "12 hour format"
@@ -355,64 +317,52 @@ msgid "City:"
 msgstr "เมือง:"
 
 #: ../panels/datetime/datetime.ui.h:12
-msgid "Day:"
-msgstr "วันที่:"
-
-#: ../panels/datetime/datetime.ui.h:13
 msgid "December"
 msgstr "ธันวาคม"
 
-#: ../panels/datetime/datetime.ui.h:14
+#: ../panels/datetime/datetime.ui.h:13
 msgid "February"
 msgstr "กุมภาพันธ์"
 
-#: ../panels/datetime/datetime.ui.h:15
+#: ../panels/datetime/datetime.ui.h:14
 msgid "January"
 msgstr "มกราคม"
 
-#: ../panels/datetime/datetime.ui.h:16
+#: ../panels/datetime/datetime.ui.h:15
 msgid "July"
 msgstr "กรกฎาคม"
 
-#: ../panels/datetime/datetime.ui.h:17
+#: ../panels/datetime/datetime.ui.h:16
 msgid "June"
 msgstr "มิถุนายน"
 
-#: ../panels/datetime/datetime.ui.h:18
+#: ../panels/datetime/datetime.ui.h:17
 msgid "March"
 msgstr "มีนาคม"
 
-#: ../panels/datetime/datetime.ui.h:19
+#: ../panels/datetime/datetime.ui.h:18
 msgid "May"
 msgstr "พฤษภาคม"
 
-#: ../panels/datetime/datetime.ui.h:20
-msgid "Month:"
-msgstr "เดือน:"
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Network Time"
+msgstr "เวลาเครือข่าย"
 
-#: ../panels/datetime/datetime.ui.h:21
+#: ../panels/datetime/datetime.ui.h:20
 msgid "November"
 msgstr "พฤศจิกายน"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:21
 msgid "October"
 msgstr "ตุลาคม"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Region:"
 msgstr "ภูมิภาค:"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:23
 msgid "September"
 msgstr "กันยายน"
-
-#: ../panels/datetime/datetime.ui.h:25
-msgid "Set time automatically"
-msgstr "ตั้งเวลาโดยอัตโนมัติ"
-
-#: ../panels/datetime/datetime.ui.h:26
-msgid "Year:"
-msgstr "ค.ศ.:"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
@@ -645,7 +595,7 @@ msgid "Left"
 msgstr "ซ้าย"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:468
+#: ../panels/display/xrandr-capplet.c:479
 msgid "Monitor"
 msgstr "จอภาพ"
 
@@ -670,14 +620,15 @@ msgid "Upside-down"
 msgstr "กลับหัว"
 
 #: ../panels/display/display-capplet.ui.h:8
-msgid "_Detect monitors"
-msgstr "_ตรวจหาจอภาพต่างๆ"
+msgid "_Detect Displays"
+msgstr "_ตรวจหาจอแสดงผล"
 
-#: ../panels/display/display-capplet.ui.h:9
-msgid "_Mirror Screens"
-msgstr "หน้าจอแสดงเห_มือนกัน"
-
+#. Note that mirror is a verb in this string
 #: ../panels/display/display-capplet.ui.h:10
+msgid "_Mirror displays"
+msgstr "จอแสดงผลแสดงเห_มือนกัน"
+
+#: ../panels/display/display-capplet.ui.h:11
 msgid "_Resolution:"
 msgstr "ความ_ละเอียด:"
 
@@ -703,54 +654,66 @@ msgstr "กลับหัว"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:457
-#: ../panels/display/xrandr-capplet.c:1711
-msgid "Mirror Screens"
-msgstr "หน้าจอแสดงเหมือนกัน"
+#: ../panels/display/xrandr-capplet.c:455
+msgid "Mirror Displays"
+msgstr "จอแสดงผลแสดงเหมือนกัน"
 
-#: ../panels/display/xrandr-capplet.c:569
+#: ../panels/display/xrandr-capplet.c:580
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:571
+#: ../panels/display/xrandr-capplet.c:582
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1474
+#: ../panels/display/xrandr-capplet.c:1485
 msgid "Drag to change primary display."
 msgstr "ลากเพื่อเปลี่ยนจอแสดงผลหลัก"
 
-#: ../panels/display/xrandr-capplet.c:1532
+#: ../panels/display/xrandr-capplet.c:1543
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr "เลือกจอภาพเพื่อปรับค่า; ลากจอภาพเพื่อจัดวางตำแหน่งใหม่"
 
-#: ../panels/display/xrandr-capplet.c:1937
+#: ../panels/display/xrandr-capplet.c:1942
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1939
+#: ../panels/display/xrandr-capplet.c:1944
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../panels/display/xrandr-capplet.c:2224
+#: ../panels/display/xrandr-capplet.c:2229
 msgid "Could not save the monitor configuration"
 msgstr "ไม่สามารถบันทึกค่าตั้งของจอภาพ"
 
-#: ../panels/display/xrandr-capplet.c:2247
+#: ../panels/display/xrandr-capplet.c:2252
 msgid "Could not get session bus while applying display configuration"
 msgstr "ไม่สามารถอ่านบัสของวาระขณะเริ่มใช้ค่าตั้งของจอแสดงผล"
 
-#: ../panels/display/xrandr-capplet.c:2292
+#: ../panels/display/xrandr-capplet.c:2297
 msgid "Could not detect displays"
 msgstr "ตรวจหาจอแสดงผลไม่สำเร็จ"
 
-#: ../panels/display/xrandr-capplet.c:2499
+#: ../panels/display/xrandr-capplet.c:2504
 msgid "Could not get screen information"
 msgstr "ไม่สามารถอ่านข้อมูลเกี่ยวกับหน้าจอ"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+msgid "System Info"
+msgstr "ข้อมูลระบบ"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "System Information"
+msgstr "ข้อมูลเกี่ยวกับระบบ"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+msgid "device;system;information;memory;processor;version;"
+msgstr "อุปกรณ์;ระบบ;ข้อมูล;หน่วยความจำ;ตัวประมวลผล;รุ่น;"
 
 #: ../panels/keyboard/00-multimedia-key.xml.in.h:1
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -791,7 +754,6 @@ msgstr "ชนิดของปุ่มลัด"
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/gnome-keyboard-panel.c:102
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -799,68 +761,6 @@ msgstr "ชนิดของปุ่มลัด"
 msgid "Disabled"
 msgstr "ไม่ใช้"
 
-#: ../panels/keyboard/gnome-keyboard-panel.c:183
-msgid "<Unknown Action>"
-msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:933
-#: ../panels/keyboard/gnome-keyboard-panel.c:1564
-msgid "Custom Shortcuts"
-msgstr "ปุ่มลัดกำหนดเอง"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1075
-msgid "Error saving the new shortcut"
-msgstr "เกิดข้อผิดพลาดขณะบันทึกปุ่มลัด"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1154
-#, c-format
-msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-msgstr ""
-"ไม่สามารถใช้ปุ่มลัด \"%s\" ได้ เพราะจะทำให้ใช้ปุ่มนี้ป้อนข้อความไม่ได้\n"
-"กรุณาใช้ปุ่มอย่าง Control, Alt หรือ Shift ประกอบด้วย"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1184
-#, c-format
-msgid ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-msgstr ""
-"ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ\n"
-"\"%s\""
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1190
-#, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr "ถ้าคุณกำหนดปุ่มลัดนี้ซ้ำให้เป็น \"%s\" ปุ่มลัด \"%s\" ก็จะถูกปิดไป"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1198
-msgid "_Reassign"
-msgstr "_กำหนดซ้ำ"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1318
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr "เกิดข้อผิดพลาดขณะลบปุ่มลัดออกจากฐานข้อมูลค่าปรับแต่ง: %s"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1519
-msgid "Too many custom shortcuts"
-msgstr "ปุ่มลัดที่กำหนดเองมีมากเกินไป"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1881
-msgid "Action"
-msgstr "ปฏิบัติการ"
-
-#: ../panels/keyboard/gnome-keyboard-panel.c:1903
-msgid "Shortcut"
-msgstr "ปุ่มลัด"
-
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
 msgstr "ตั้งค่าแป้นพิมพ์"
@@ -1179,7 +1079,9 @@ msgstr "ผู้_จำหน่าย:"
 msgid "Keyboard Layout Options"
 msgstr "ตัวเลือกสำหรับผังแป้นพิมพ์"
 
+#. TRANSLATORS: device type
 #: ../panels/region/gnome-region-panel-xkb.c:70
+#: ../panels/network/cc-network-panel.c:312
 msgid "Unknown"
 msgstr "ไม่ทราบ"
 
@@ -1263,11 +1165,11 @@ msgstr "เปิดใช้การเลื่อนหน้าจอแน
 msgid "High"
 msgstr "สูง"
 
-#. large threshold
 # in uap.ui, also means large text size
 # Related to "Small" threshold.
 # Should be translated as "สั้น" and "ยาว" for threshold, but would sound
 # weird for text size. So, "เล็ก" and "ใหญ่" is a compromise.
+#. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:22
 #: ../panels/universal-access/uap.ui.h:48
 msgid "Large"
@@ -1316,10 +1218,10 @@ msgstr "แสดง_หน้าต่างเลือกชนิดกา�
 msgid "Simulated Secondary Click"
 msgstr "จำลองคลิกที่สอง"
 
-#. small threshold
 # Related to "Large" threshold, which is also used as "Large" text size.
 # Should be translated as "สั้น" and "ยาว" for threshold, but would sound
 # weird for text size. So, "เล็ก" and "ใหญ่" is a compromise.
+#. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:41
 #: ../panels/universal-access/uap.ui.h:76
 msgid "Small"
@@ -1397,8 +1299,8 @@ msgstr "ปรับแต่งค่าตั้งสำหรับเมา
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-msgid "Trackpad;Pointer;Click;Tap;Double;Button;"
-msgstr "ทัชแพด;ตัวชี้;คลิก;แตะ;ดับเบิล;ปุ่ม;"
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
+msgstr "ทัชแพด;ตัวชี้;คลิก;แตะ;ดับเบิล;ปุ่ม;แทร็กบอล;"
 
 #: ../panels/proxy/gnome-proxy-properties.c:672
 msgid "New Location..."
@@ -1409,6 +1311,7 @@ msgid "Location already exists"
 msgstr "สถานที่นี้มีอยู่ก่อนแล้ว"
 
 #: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:1
+#: ../panels/network/cc-network-panel.c:1060
 msgid "Network Proxy"
 msgstr "พร็อกซีเครือข่าย"
 
@@ -1416,7 +1319,7 @@ msgstr "พร็อกซีเครือข่าย"
 msgid "Set your network proxy preferences"
 msgstr "ตั้งค่าพร็อกซีของเครือข่าย"
 
-#. Translators: those are keywords for the network proxy control-center panel
+#. Translators: those are keywords for the proxy control-center panel
 #: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:4
 msgid "Web;Location;"
 msgstr "เว็บ;สถานที่;"
@@ -1522,18 +1425,186 @@ msgstr "พร็อกซี _Secure HTTP:"
 msgid "_Use the same proxy for all protocols"
 msgstr "ใ_ช้พร็อกซีเดียวกันสำหรับทุกโพรโทคอล"
 
-#. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr "ความสว่าง;ล็อค;หรี่;จอเปล่า;"
+#. TRANSLATORS: device type
+#: ../panels/network/cc-network-panel.c:316
+msgid "Wired"
+msgstr "ทางสาย"
 
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "หน้าจอ"
+#. TRANSLATORS: device type
+#: ../panels/network/cc-network-panel.c:320
+msgid "Wireless"
+msgstr "ไร้สาย"
 
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
-msgid "Screen brightness and lock settings"
-msgstr "ตั้งค่าความสว่างและล็อคหน้าจอ"
+#. TRANSLATORS: device type
+#: ../panels/network/cc-network-panel.c:325
+msgid "Mobile broadband"
+msgstr "บรอดแบนด์มือถือ"
+
+#. TRANSLATORS: device type
+#: ../panels/network/cc-network-panel.c:329
+msgid "Bluetooth"
+msgstr "บลูทูท"
+
+#. TRANSLATORS: device type
+#: ../panels/network/cc-network-panel.c:333
+msgid "Mesh"
+msgstr "Mesh"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:352
+msgid "Status unknown"
+msgstr "ไม่ทราบสถานะ"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:356
+msgid "Unmanaged"
+msgstr "ไม่มีการจัดการ"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:360
+msgid "Unavailable"
+msgstr "ใช้งานไม่ได้"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:364
+msgid "Disconnected"
+msgstr "ตัดการเชื่อมต่อแล้ว"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:368
+msgid "Preparing connection"
+msgstr "กำลังเตรียมการเชื่อมต่อ"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:372
+msgid "Configuring connection"
+msgstr "กำลังตั้งค่าการเชื่อมต่อ"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:376
+msgid "Authenticating"
+msgstr "กำลังยืนยันตัวบุคคล"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:380
+msgid "Getting network address"
+msgstr "กำลังขอที่อยู่เครือข่าย"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:384
+msgid "Connected"
+msgstr "เชื่อมต่อแล้ว"
+
+#. TRANSLATORS: device status
+#: ../panels/network/cc-network-panel.c:388
+msgid "Failed to connect"
+msgstr "เชื่อมต่อไม่สำเร็จ"
+
+#: ../panels/network/cc-network-panel.c:845
+#: ../panels/network/cc-network-panel.c:867
+#, c-format
+msgid "%iMb/s"
+msgstr "%iMb/s"
+
+#: ../panels/network/cc-network-panel.c:847
+#, c-format
+msgid "%iGb/s"
+msgstr "%iGb/s"
+
+#: ../panels/network/cc-network-panel.c:865
+#, c-format
+msgid "%ikb/s"
+msgstr "%ikb/s"
+
+#: ../panels/network/cc-network-panel.c:1068
+msgid "Set the system proxy settings"
+msgstr "ตั้งค่าพร็อกซีของระบบ"
+
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "เครือข่าย"
+
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
+msgid "Network settings"
+msgstr "ตั้งค่าเครือข่าย"
+
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;"
+msgstr "เครือข่าย;ไร้สาย;ไอพี;แลน;"
+
+#: ../panels/network/network.ui.h:1
+msgid "Configuration URL:"
+msgstr "URL สำหรับตั้งค่า:"
+
+#: ../panels/network/network.ui.h:2
+msgid "FTP Proxy:"
+msgstr "พร็อกซี FTP:"
+
+#: ../panels/network/network.ui.h:3
+msgid "Flight Mode"
+msgstr "โหมดบนเครื่องบิน"
+
+#: ../panels/network/network.ui.h:4
+msgid "Gateway:"
+msgstr "เกตเวย์:"
+
+#: ../panels/network/network.ui.h:5
+msgid "Group Name:"
+msgstr "ชื่อกลุ่ม:"
+
+#: ../panels/network/network.ui.h:6
+msgid "Group Password:"
+msgstr "รหัสผ่านกลุ่ม:"
+
+#: ../panels/network/network.ui.h:7
+msgid "HTTP Proxy:"
+msgstr "พร็อกซี HTTP:"
+
+#: ../panels/network/network.ui.h:8
+msgid "Hardware Address:"
+msgstr "ที่อยู่ฮาร์ดแวร์:"
+
+#: ../panels/network/network.ui.h:9
+msgid "IP Address:"
+msgstr "หมายเลขไอพี:"
+
+#: ../panels/network/network.ui.h:10
+msgid "Method:"
+msgstr "วิธีการ:"
+
+#: ../panels/network/network.ui.h:11
+msgid "Network Name:"
+msgstr "ชื่อเครือข่าย:"
+
+#: ../panels/network/network.ui.h:12
+msgid "Provider:"
+msgstr "ผู้ให้บริการ:"
+
+#: ../panels/network/network.ui.h:13
+msgid "Secure HTTP Proxy:"
+msgstr "พร็อกซี HTTP นิรภัย:"
+
+#: ../panels/network/network.ui.h:14
+msgid "Security:"
+msgstr "การรักษาความปลอดภัย:"
+
+#: ../panels/network/network.ui.h:15
+msgid "Socks Host:"
+msgstr "โฮสต์ Socks:"
+
+#: ../panels/network/network.ui.h:16
+msgid "Speed:"
+msgstr "ความเร็ว:"
+
+#: ../panels/network/network.ui.h:17
+#: ../panels/user-accounts/um-lockbutton.c:364
+msgid "Unlock"
+msgstr "ปลดล็อค"
+
+#: ../panels/network/network.ui.h:18
+msgid "Username:"
+msgstr "ชื่อผู้ใช้:"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -1615,6 +1686,19 @@ msgstr "อีก %s จะหมด (%.01f%%)"
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "ประจุไฟ %.0lf%%"
+
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr "ความสว่าง;ล็อค;หรี่;จอเปล่า;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "หน้าจอ"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "ตั้งค่าความสว่างและล็อคหน้าจอ"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2233,7 +2317,7 @@ msgid "Authentication failed"
 msgstr "ยืนยันตัวบุคคลไม่ผ่าน"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:381
+#: ../panels/user-accounts/um-password-dialog.c:378
 #, c-format
 msgid "The new password is too short"
 msgstr "รหัสผ่านใหม่สั้นเกินไป"
@@ -2424,10 +2508,6 @@ msgstr "อื่นๆ..."
 msgid "Lock"
 msgstr "ล็อค"
 
-#: ../panels/user-accounts/um-lockbutton.c:364
-msgid "Unlock"
-msgstr "ปลดล็อค"
-
 #: ../panels/user-accounts/um-lockbutton.c:373
 msgid "Locked"
 msgstr "ล็อคอยู่"
@@ -2456,77 +2536,77 @@ msgstr ""
 "นโยบายของระบบได้ป้องกันการเปลี่ยนแปลงไว้\n"
 "กรุณาติดต่อผู้ดูแลระบบของคุณ"
 
-#: ../panels/user-accounts/um-password-dialog.c:185
+#: ../panels/user-accounts/um-password-dialog.c:182
 msgid "More choices..."
 msgstr "เลือกเพิ่มเติม..."
 
-#: ../panels/user-accounts/um-password-dialog.c:291
+#: ../panels/user-accounts/um-password-dialog.c:288
 msgid "Please choose another password."
 msgstr "กรุณาตั้งรหัสผ่านใหม่"
 
-#: ../panels/user-accounts/um-password-dialog.c:300
+#: ../panels/user-accounts/um-password-dialog.c:297
 msgid "Please type your current password again."
 msgstr "กรุณาป้อนรหัสผ่านปัจจุบันของคุณอีกครั้ง"
 
-#: ../panels/user-accounts/um-password-dialog.c:306
+#: ../panels/user-accounts/um-password-dialog.c:303
 msgid "Password could not be changed"
 msgstr "ไม่สามารถเปลี่ยนรหัสผ่านได้"
 
-#: ../panels/user-accounts/um-password-dialog.c:378
+#: ../panels/user-accounts/um-password-dialog.c:375
 msgid "You need to enter a new password"
 msgstr "คุณต้องป้อนรหัสผ่านใหม่ที่จะตั้ง"
 
-#: ../panels/user-accounts/um-password-dialog.c:387
+#: ../panels/user-accounts/um-password-dialog.c:384
 msgid "You need to confirm the password"
 msgstr "คุณต้องป้อนรหัสผ่านที่ตั้งใหม่อีกครั้งเพื่อยืนยัน"
 
-#: ../panels/user-accounts/um-password-dialog.c:390
+#: ../panels/user-accounts/um-password-dialog.c:387
 msgid "The passwords do not match"
 msgstr "รหัสผ่านไม่ตรงกัน"
 
-#: ../panels/user-accounts/um-password-dialog.c:396
+#: ../panels/user-accounts/um-password-dialog.c:393
 msgid "You need to enter your current password"
 msgstr "คุณต้องป้อนรหัสผ่านปัจจุบันของคุณ"
 
-#: ../panels/user-accounts/um-password-dialog.c:399
+#: ../panels/user-accounts/um-password-dialog.c:396
 msgid "The current password is not correct"
 msgstr "รหัสผ่านปัจจุบันที่ป้อนไม่ถูกต้อง"
 
-#: ../panels/user-accounts/um-password-dialog.c:472
-#: ../panels/user-accounts/um-password-dialog.c:689
+#: ../panels/user-accounts/um-password-dialog.c:469
+#: ../panels/user-accounts/um-password-dialog.c:686
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "สั้นเกินไป"
 
-#: ../panels/user-accounts/um-password-dialog.c:475
-#: ../panels/user-accounts/um-password-dialog.c:690
+#: ../panels/user-accounts/um-password-dialog.c:472
+#: ../panels/user-accounts/um-password-dialog.c:687
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "หละหลวม"
 
-#: ../panels/user-accounts/um-password-dialog.c:477
-#: ../panels/user-accounts/um-password-dialog.c:691
+#: ../panels/user-accounts/um-password-dialog.c:474
+#: ../panels/user-accounts/um-password-dialog.c:688
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "พอใช้"
 
-#: ../panels/user-accounts/um-password-dialog.c:479
-#: ../panels/user-accounts/um-password-dialog.c:692
+#: ../panels/user-accounts/um-password-dialog.c:476
+#: ../panels/user-accounts/um-password-dialog.c:689
 msgctxt "Password strength"
 msgid "Good"
 msgstr "ดี"
 
-#: ../panels/user-accounts/um-password-dialog.c:481
-#: ../panels/user-accounts/um-password-dialog.c:693
+#: ../panels/user-accounts/um-password-dialog.c:478
+#: ../panels/user-accounts/um-password-dialog.c:690
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "แน่นหนา"
 
-#: ../panels/user-accounts/um-password-dialog.c:520
+#: ../panels/user-accounts/um-password-dialog.c:517
 msgid "Passwords do not match"
 msgstr "รหัสผ่านไม่ตรงกัน"
 
-#: ../panels/user-accounts/um-password-dialog.c:546
+#: ../panels/user-accounts/um-password-dialog.c:543
 msgid "Wrong password"
 msgstr "รหัสผ่านไม่ถูกต้อง"
 
@@ -2567,72 +2647,72 @@ msgstr "มีผู้ใช้ชื่อ '%s' อยู่ก่อนแล
 msgid "This user does not exist."
 msgstr "ไม่มีผู้ใช้นี้"
 
-#: ../panels/user-accounts/um-user-panel.c:349
+#: ../panels/user-accounts/um-user-panel.c:352
 msgid "Failed to delete user"
 msgstr "ลบผู้ใช้ไม่สำเร็จ"
 
-#: ../panels/user-accounts/um-user-panel.c:409
+#: ../panels/user-accounts/um-user-panel.c:412
 msgid "You cannot delete your own account."
 msgstr "คุณจะลบบัญชีของคุณเองไม่ได้"
 
-#: ../panels/user-accounts/um-user-panel.c:418
+#: ../panels/user-accounts/um-user-panel.c:421
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s ยังคงเข้าระบบอยู่"
 
-#: ../panels/user-accounts/um-user-panel.c:422
+#: ../panels/user-accounts/um-user-panel.c:425
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "การลบบัญชีผู้ใช้ในระหว่างที่ผู้ใช้นั้นกำลังเข้าระบบอยู่ จะทำให้ระบบอยู่ในสถานะที่สับสน"
 
-#: ../panels/user-accounts/um-user-panel.c:431
+#: ../panels/user-accounts/um-user-panel.c:434
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "คุณต้องการเก็บรักษาแฟ้มต่างๆ ของ %s ไว้หรือไม่?"
 
-#: ../panels/user-accounts/um-user-panel.c:435
+#: ../panels/user-accounts/um-user-panel.c:438
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr "ในการลบบัญชีผู้ใช้ คุณสามารถเก็บรักษาไดเรกทอรีบ้าน, ถุงเมล และแฟ้มชั่วคราวของผู้ใช้ไว้ได้"
 
-#: ../panels/user-accounts/um-user-panel.c:438
+#: ../panels/user-accounts/um-user-panel.c:441
 msgid "_Delete Files"
 msgstr "_ลบแฟ้ม"
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:442
 msgid "_Keep Files"
 msgstr "เ_ก็บรักษาแฟ้ม"
 
-#: ../panels/user-accounts/um-user-panel.c:440
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
-#: ../panels/user-accounts/um-user-panel.c:464
+#: ../panels/user-accounts/um-user-panel.c:467
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "บัญชีถูกระงับ"
 
-#: ../panels/user-accounts/um-user-panel.c:473
+#: ../panels/user-accounts/um-user-panel.c:476
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "รอตั้งรหัสผ่านในครั้งต่อไปที่เข้าระบบ"
 
-#: ../panels/user-accounts/um-user-panel.c:476
+#: ../panels/user-accounts/um-user-panel.c:479
 msgctxt "Password mode"
 msgid "None"
 msgstr "ไม่มีรหัสผ่าน"
 
-#: ../panels/user-accounts/um-user-panel.c:818
+#: ../panels/user-accounts/um-user-panel.c:821
 msgid "Failed to contact the accounts service"
 msgstr "ติดต่อบริการบัญชีผู้ใช้ไม่สำเร็จ"
 
-#: ../panels/user-accounts/um-user-panel.c:820
+#: ../panels/user-accounts/um-user-panel.c:823
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งและเปิดใช้งาน AccountService"
 
-#: ../panels/user-accounts/um-user-panel.c:853
+#: ../panels/user-accounts/um-user-panel.c:856
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -2640,13 +2720,13 @@ msgstr ""
 "หากต้องการเปลี่ยนแปลง\n"
 "ให้คลิกที่ไอคอน * ก่อน"
 
-#: ../panels/user-accounts/um-user-panel.c:891
+#: ../panels/user-accounts/um-user-panel.c:894
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "Create a user"
 msgstr "สร้างบัญชีผู้ใช้"
 
-#: ../panels/user-accounts/um-user-panel.c:902
-#: ../panels/user-accounts/um-user-panel.c:1178
+#: ../panels/user-accounts/um-user-panel.c:905
+#: ../panels/user-accounts/um-user-panel.c:1181
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -2654,13 +2734,13 @@ msgstr ""
 "หากต้องการสร้างบัญชีผู้ใช้\n"
 "ให้คลิกที่ไอคอน * ก่อน"
 
-#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:914
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "Delete the selected user"
 msgstr "ลบผู้ใช้ที่เลือก"
 
-#: ../panels/user-accounts/um-user-panel.c:923
-#: ../panels/user-accounts/um-user-panel.c:1183
+#: ../panels/user-accounts/um-user-panel.c:926
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -2668,11 +2748,11 @@ msgstr ""
 "หากต้องการลบบัญชีผู้ใช้\n"
 "ให้คลิกที่ไอคอน * ก่อน"
 
-#: ../panels/user-accounts/um-user-panel.c:1087
+#: ../panels/user-accounts/um-user-panel.c:1090
 msgid "My Account"
 msgstr "บัญชีของฉัน"
 
-#: ../panels/user-accounts/um-user-panel.c:1096
+#: ../panels/user-accounts/um-user-panel.c:1099
 msgid "Other Accounts"
 msgstr "บัญชีอื่นๆ"
 
@@ -2719,7 +2799,8 @@ msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
 "strong password</a>"
 msgstr ""
-"<a href=\"http://www.bu.ac.th/hotnews/apr_june46/password/\">การตั้งรหัสผ่านให้ถูกวิธี</a>"
+"<a href=\"http://www.bu.ac.th/hotnews/apr_june46/password/"
+"\">การตั้งรหัสผ่านให้ถูกวิธี</a>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid ""
@@ -2989,6 +3070,102 @@ msgstr "ขี้หมูรา;ขี้หมาแห้ง;"
 msgid "_All Settings"
 msgstr "ค่าตั้ง_ทั้งหมด"
 
+#~ msgid "Slide Show"
+#~ msgstr "การแสดงสไลด์"
+
+#~ msgid "Image"
+#~ msgstr "รูปภาพ"
+
+#~ msgid "%d %s by %d %s"
+#~ msgstr "%d %s × %d %s"
+
+#~ msgid "pixel"
+#~ msgid_plural "pixels"
+#~ msgstr[0] "จุด"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "โฟลเดอร์: %s"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "โฟลเดอร์: %s"
+
+#~ msgid "Image missing"
+#~ msgstr "รูปภาพหายไป"
+
+#~ msgid "Day:"
+#~ msgstr "วันที่:"
+
+#~ msgid "Set time automatically"
+#~ msgstr "ตั้งเวลาโดยอัตโนมัติ"
+
+#~ msgid "Year:"
+#~ msgstr "ค.ศ.:"
+
+#~ msgid "_Detect monitors"
+#~ msgstr "_ตรวจหาจอภาพต่างๆ"
+
+#~ msgid "_Mirror Screens"
+#~ msgstr "หน้าจอแสดงเห_มือนกัน"
+
+#~ msgid "Mirror Screens"
+#~ msgstr "หน้าจอแสดงเหมือนกัน"
+
+#~ msgid "<Unknown Action>"
+#~ msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
+
+#~ msgid "Custom Shortcuts"
+#~ msgstr "ปุ่มลัดกำหนดเอง"
+
+#~ msgid "Error saving the new shortcut"
+#~ msgstr "เกิดข้อผิดพลาดขณะบันทึกปุ่มลัด"
+
+#~ msgid ""
+#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
+#~ "type using this key.\n"
+#~ "Please try with a key such as Control, Alt or Shift at the same time."
+#~ msgstr ""
+#~ "ไม่สามารถใช้ปุ่มลัด \"%s\" ได้ เพราะจะทำให้ใช้ปุ่มนี้ป้อนข้อความไม่ได้\n"
+#~ "กรุณาใช้ปุ่มอย่าง Control, Alt หรือ Shift ประกอบด้วย"
+
+#~ msgid ""
+#~ "The shortcut \"%s\" is already used for\n"
+#~ "\"%s\""
+#~ msgstr ""
+#~ "ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ\n"
+#~ "\"%s\""
+
+#~ msgid ""
+#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
+#~ "disabled."
+#~ msgstr "ถ้าคุณกำหนดปุ่มลัดนี้ซ้ำให้เป็น \"%s\" ปุ่มลัด \"%s\" ก็จะถูกปิดไป"
+
+#~ msgid "_Reassign"
+#~ msgstr "_กำหนดซ้ำ"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr "เกิดข้อผิดพลาดขณะลบปุ่มลัดออกจากฐานข้อมูลค่าปรับแต่ง: %s"
+
+#~ msgid "Too many custom shortcuts"
+#~ msgstr "ปุ่มลัดที่กำหนดเองมีมากเกินไป"
+
+#~ msgid "Action"
+#~ msgstr "ปฏิบัติการ"
+
+#~ msgid "Shortcut"
+#~ msgstr "ปุ่มลัด"
+
 #~ msgid "_Application font:"
 #~ msgstr "แบบอักษรของโ_ปรแกรม:"
 
@@ -3122,9 +3299,6 @@ msgstr "ค่าตั้ง_ทั้งหมด"
 #~ msgid "A_IM/iChat:"
 #~ msgstr "A_IM/iChat:"
 
-#~ msgid "A_ddress:"
-#~ msgstr "_ที่อยู่:"
-
 #~ msgid "About Me"
 #~ msgstr "เกี่ยวกับฉัน"
 
@@ -3148,1991 +3322,3 @@ msgstr "ค่าตั้ง_ทั้งหมด"
 
 #~ msgid "Disable _Fingerprint Login..."
 #~ msgstr "ปิดการเข้าระบบด้วยลาย_นิ้วมือ..."
-
-#~| msgid "E-mail"
-#~ msgid "Email"
-#~ msgstr "อีเมล"
-
-#~ msgid "Enable _Fingerprint Login..."
-#~ msgstr "เปิดใช้การเข้าระบบด้วยลาย_นิ้วมือ..."
-
-#~ msgid "Hom_e:"
-#~ msgstr "_บ้าน:"
-
-#~ msgid "Home"
-#~ msgstr "บ้าน"
-
-#~ msgid "IC_Q:"
-#~ msgstr "IC_Q:"
-
-#~| msgid "<b>Instant Messaging</b>"
-#~ msgid "Instant Messaging"
-#~ msgstr "ข้อความทันใจ"
-
-#~ msgid "Job"
-#~ msgstr "งาน"
-
-#~ msgid "M_SN:"
-#~ msgstr "M_SN:"
-
-#~ msgid "P.O. _box:"
-#~ msgstr "_ตู้ ป.ณ.:"
-
-#~ msgid "P._O. box:"
-#~ msgstr "ตู้ _ป.ณ.:"
-
-#~ msgid "Personal Info"
-#~ msgstr "ข้อมูลส่วนตัว"
-
-#~ msgid "Select your photo"
-#~ msgstr "เลือกรูปของคุณ"
-
-#~ msgid "State/Pro_vince:"
-#~ msgstr "รัฐ/_จังหวัด:"
-
-#~| msgid "<b>Telephone</b>"
-#~ msgid "Telephone"
-#~ msgstr "โทรศัพท์"
-
-#~ msgid "Web"
-#~ msgstr "เว็บ"
-
-#~ msgid "Web _log:"
-#~ msgstr "เว็บ_ล็อก:"
-
-#~ msgid "Wor_k:"
-#~ msgstr "ที่ทำ_งาน:"
-
-#~| msgid "Wor_k:"
-#~ msgid "Work"
-#~ msgstr "ที่ทำงาน"
-
-#~ msgid "Work _fax:"
-#~ msgstr "แ_ฟกซ์ที่ทำงาน:"
-
-#~ msgid "Zip/_Postal code:"
-#~ msgstr "รหัสไ_ปรษณีย์:"
-
-#~ msgid "_Address:"
-#~ msgstr "_ที่อยู่:"
-
-#~ msgid "_Department:"
-#~ msgstr "แ_ผนก:"
-
-#~ msgid "_Groupwise:"
-#~ msgstr "_Groupwise:"
-
-#~ msgid "_Home page:"
-#~ msgstr "โ_ฮมเพจ:"
-
-#~ msgid "_Home:"
-#~ msgstr "_บ้าน:"
-
-#~ msgid "_Jabber:"
-#~ msgstr "_Jabber:"
-
-#~ msgid "_Manager:"
-#~ msgstr "_ผู้บังคับบัญชา:"
-
-#~ msgid "_Profession:"
-#~ msgstr "_อาชีพ:"
-
-#~ msgid "_State/Province:"
-#~ msgstr "_รัฐ/จังหวัด:"
-
-#~ msgid "_Title:"
-#~ msgstr "_ตำแหน่ง:"
-
-#~ msgid "_Work:"
-#~ msgstr "ที่ทำ_งาน:"
-
-#~ msgid "_Zip/Postal code:"
-#~ msgstr "_รหัสไปรษณีย์:"
-
-#~ msgid "Set your personal information"
-#~ msgstr "ตั้งค่าข้อมูลเกี่ยวกับตัวคุณ"
-
-#~ msgid "Swipe finger on reader"
-#~ msgstr "กลิ้งนิ้วมือบนเครื่องอ่าน"
-
-#~ msgid "Place finger on reader"
-#~ msgstr "วางนิ้วมือบนเครื่องอ่าน"
-
-#~ msgid "Select finger"
-#~ msgstr "เลือกนิ้ว"
-
-#~ msgid "Child exited unexpectedly"
-#~ msgstr "โพรเซสลูกตายกระทันหัน"
-
-#~ msgid "Could not shutdown backend_stdin IO channel: %s"
-#~ msgstr "ไม่สามารถปิด backend_stdin IO channel: %s"
-
-#~ msgid "Could not shutdown backend_stdout IO channel: %s"
-#~ msgstr "ไม่สามารถปิด backend_stdout IO channel: %s"
-
-#~ msgid "System error: %s."
-#~ msgstr "เกิดข้อผิดพลาดของระบบ: %s"
-
-#~ msgid "Unable to launch %s: %s"
-#~ msgstr "ไม่สามารถเรียกคำสั่ง %s: %s"
-
-#~ msgid "Unable to launch backend"
-#~ msgstr "เรียกแบ็กเอ็นด์ไม่สำเร็จ"
-
-#~ msgid "A system error has occurred"
-#~ msgstr "เกิดข้อผิดพลาดของระบบ"
-
-#~ msgid "Checking password..."
-#~ msgstr "กำลังตรวจสอบรหัสผ่าน..."
-
-#~ msgid "Click <b>Change password</b> to change your password."
-#~ msgstr "กดปุ่ม <b>เปลี่ยนรหัสผ่าน</b> เพื่อเปลี่ยนรหัสผ่านของคุณ"
-
-#~ msgid ""
-#~ "Please type your password again in the <b>Retype new password</b> field."
-#~ msgstr "กรุณาป้อนรหัสผ่านซ้ำอีกครั้งในช่อง <b>ป้อนรหัสผ่านใหม่อีกครั้ง</b>"
-
-#~ msgid "Change pa_ssword"
-#~ msgstr "เปลี่ยน_รหัสผ่าน"
-
-#~| msgid "Change password"
-#~ msgid "Change your password"
-#~ msgstr "เปลี่ยนรหัสผ่านของคุณ"
-
-#~ msgid ""
-#~ "To change your password, enter your current password in the field below "
-#~ "and click <b>Authenticate</b>.\n"
-#~ "After you have authenticated, enter your new password, retype it for "
-#~ "verification and click <b>Change password</b>."
-#~ msgstr ""
-#~ "การเปลี่ยนรหัสผ่านของคุณ ให้ป้อนรหัสผ่านปัจจุบันของคุณในช่องข้างล่างนี้ แล้วคลิก "
-#~ "<b>ยืนยันตัวบุคคล</b>\n"
-#~ "หลังจากยืนยันตัวบุคคลแล้ว ให้ตั้งรหัสผ่านใหม่ และป้อนซ้ำอีกครั้งเพื่อตรวจสอบ แล้วคลิก "
-#~ "<b>เปลี่ยนรหัสผ่าน</b>"
-
-#~ msgid "_Authenticate"
-#~ msgstr "_ยืนยันตัวบุคคล"
-
-#~ msgid "Accessible Lo_gin"
-#~ msgstr "อำนวยความสะดวกขณะเ_ข้าระบบ"
-
-#~ msgid "Assistive Technologies"
-#~ msgstr "เทคโนโลยีสิ่งอำนวยความสะดวก"
-
-#~ msgid "Assistive Technologies Preferences"
-#~ msgstr "ปรับแต่งเทคโนโลยีสิ่งอำนวยความสะดวก"
-
-#~ msgid ""
-#~ "Changes to enable assistive technologies will not take effect until your "
-#~ "next log in."
-#~ msgstr "การเปลี่ยนแปลงเพื่อเปิดใช้เทคโนโลยีสิ่งอำนวยความสะดวกจะไม่มีผลจนกว่าคุณจะเข้าระบบครั้งต่อไป"
-
-#~ msgid "Close and _Log Out"
-#~ msgstr "ปิดและ_ออกจากระบบ"
-
-#~ msgid "Jump to Preferred Applications dialog"
-#~ msgstr "ไปยังกล่องโต้ตอบเลือกโปรแกรมหลักๆ"
-
-#~ msgid "Jump to the Accessible Login dialog"
-#~ msgstr "ไปยังกล่องโต้ตอบเข้าระบบพร้อมเทคโนโลยีสิ่งอำนวยความสะดวก"
-
-#~ msgid "Jump to the Keyboard Accessibility dialog"
-#~ msgstr "ไปยังกล่องโต้ตอบปรับแต่งสิ่งอำนวยความสะดวกสำหรับแป้นพิมพ์"
-
-#~ msgid "Jump to the Mouse Accessibility dialog"
-#~ msgstr "ไปยังกล่องโต้ตอบปรับแต่งสิ่งอำนวยความสะดวกสำหรับเมาส์"
-
-#~| msgid "/_Preferences"
-#~ msgid "Preferences"
-#~ msgstr "ปรับแต่ง"
-
-#~ msgid "_Enable assistive technologies"
-#~ msgstr "ใ_ช้เทคโนโลยีสิ่งอำนวยความสะดวก"
-
-#~ msgid "_Mouse Accessibility"
-#~ msgstr "สิ่งอำนวยความสะดวกสำหรับเ_มาส์"
-
-#~ msgid "_Preferred Applications"
-#~ msgstr "เลือกโ_ปรแกรมหลักๆ"
-
-#~ msgid "Choose which accessibility features to enable when you log in"
-#~ msgstr "เลือกเทคโนโลยีสิ่งอำนวยความสะดวกที่จะเปิดใช้เมื่อเข้าระบบ"
-
-#~ msgid "Add Wallpaper"
-#~ msgstr "เพิ่มภาพพื้นหลัง"
-
-#~ msgid "All files"
-#~ msgstr "ทุกแฟ้ม"
-
-#~ msgid "Font may be too large"
-#~ msgstr "แบบอักษรอาจจะใหญ่เกินไป"
-
-#~ msgid ""
-#~ "The font selected is %d point large, and may make it difficult to "
-#~ "effectively use the computer.  It is recommended that you select a size "
-#~ "smaller than %d."
-#~ msgid_plural ""
-#~ "The font selected is %d points large, and may make it difficult to "
-#~ "effectively use the computer. It is recommended that you select a size "
-#~ "smaller than %d."
-#~ msgstr[0] ""
-#~ "คุณเลือกแบบอักษรขนาด %d พอยนต์ ซึ่งอาจใหญ่เทอะทะเกินกว่าที่จะใช้งานได้สะดวก "
-#~ "ขอแนะนำให้เลือกขนาดที่เล็กกว่า %d พอยนต์"
-
-#~ msgid ""
-#~ "The font selected is %d point large, and may make it difficult to "
-#~ "effectively use the computer.  It is recommended that you select a "
-#~ "smaller sized font."
-#~ msgid_plural ""
-#~ "The font selected is %d points large, and may make it difficult to "
-#~ "effectively use the computer. It is recommended that you select a smaller "
-#~ "sized font."
-#~ msgstr[0] ""
-#~ "คุณเลือกแบบอักษรขนาด %d พอยนต์ ซึ่งอาจใหญ่เทอะทะเกินกว่าที่จะใช้งานได้สะดวก "
-#~ "ขอแนะนำให้เลือกขนาดที่เล็กกว่านี้"
-
-#~ msgid "Use previous font"
-#~ msgstr "ใช้แบบอักษรเดิม"
-
-#~ msgid "Use selected font"
-#~ msgstr "ใช้แบบอักษรที่เลือก"
-
-#~| msgid "Could not load the main interface"
-#~ msgid "Could not load user interface file: %s"
-#~ msgstr "ไม่สามารถโหลดแฟ้มส่วนติดต่อผู้ใช้ได้: %s"
-
-#~ msgid "Specify the filename of a theme to install"
-#~ msgstr "ระบุชื่อแฟ้มของชุดตกแต่งที่จะติดตั้ง"
-
-#~ msgid "filename"
-#~ msgstr "ชื่อแฟ้ม"
-
-#~ msgid ""
-#~ "Specify the name of the page to show (theme|background|fonts|interface)"
-#~ msgstr "ระบุหน้าที่ต้องการแสดง (theme|background|fonts|interface)"
-
-#~ msgid "[WALLPAPER...]"
-#~ msgstr "[WALLPAPER...]"
-
-#~ msgid "Default Pointer"
-#~ msgstr "ตัวชี้ปริยาย"
-
-#~ msgid "Install"
-#~ msgstr "ติดตั้ง"
-
-#~ msgid ""
-#~ "This theme will not look as intended because the required GTK+ theme "
-#~ "engine '%s' is not installed."
-#~ msgstr ""
-#~ "ชุดตกแต่งนี้อาจแสดงไม่เหมือนที่ออกแบบไว้ เพราะกลไกชุดตกแต่ง GTK+ '%s' ที่ต้องการ "
-#~ "ไม่ได้ติดตั้งไว้"
-
-#~ msgid "Apply Background"
-#~ msgstr "ตกลงใช้พื้นหลัง"
-
-#~ msgid "Apply Font"
-#~ msgstr "ตกลงใช้แบบอักษร"
-
-#~ msgid "Revert Font"
-#~ msgstr "ย้อนค่าแบบอักษรกลับคืน"
-
-#~ msgid ""
-#~ "The current theme suggests a background and a font. Also, the last "
-#~ "applied font suggestion can be reverted."
-#~ msgstr ""
-#~ "ชุดตกแต่งนี้แนะนำพื้นหลังและแบบอักษร นอกจากนี้ ยังสามารถย้อนคืนค่าแบบอักษรที่แนะนำไว้ได้ด้วย"
-
-#~ msgid ""
-#~ "The current theme suggests a background. Also, the last applied font "
-#~ "suggestion can be reverted."
-#~ msgstr "ชุดตกแต่งนี้แนะนำพื้นหลัง นอกจากนี้ ยังสามารถย้อนคืนค่าแบบอักษรที่แนะนำไว้ได้ด้วย"
-
-#~ msgid "The current theme suggests a background and a font."
-#~ msgstr "ชุดตกแต่งนี้แนะนำพื้นหลังและแบบอักษร"
-
-#~ msgid ""
-#~ "The current theme suggests a font. Also, the last applied font suggestion "
-#~ "can be reverted."
-#~ msgstr "ชุดตกแต่งนี้แนะนำแบบอักษร นอกจากนี้ ยังสามารถย้อนคืนค่าแบบอักษรที่แนะนำไว้ได้ด้วย"
-
-#~ msgid "The current theme suggests a background."
-#~ msgstr "ชุดตกแต่งนี้แนะนำพื้นหลัง"
-
-#~ msgid "The last applied font suggestion can be reverted."
-#~ msgstr "สามารถย้อนคืนค่าแบบอักษรที่แนะนำไว้ได้"
-
-#~ msgid "The current theme suggests a font."
-#~ msgstr "ชุดตกแต่งนี้แนะนำแบบอักษร"
-
-#~ msgid "Best _shapes"
-#~ msgstr "เ_น้นรูปทรง"
-
-#~ msgid "Best co_ntrast"
-#~ msgstr "เน้น_ความคม"
-
-#~| msgid "Colors"
-#~ msgid "C_olors:"
-#~ msgstr "_สี:"
-
-#~ msgid "C_ustomize..."
-#~ msgstr "_ปรับเลือก..."
-
-#~ msgid "Changing your cursor theme takes effect the next time you log in."
-#~ msgstr "การเปลี่ยนชุดตกแต่งตัวชี้จะมีผลเมื่อคุณเข้าระบบครั้งต่อไป"
-
-#~ msgid "Controls"
-#~ msgstr "ปุ่มควบคุมต่างๆ"
-
-#~ msgid "Customize Theme"
-#~ msgstr "ปรับแต่งชุดตกแต่งเอง"
-
-#~ msgid "D_etails..."
-#~ msgstr "_รายละเอียด..."
-
-#~ msgid "Des_ktop font:"
-#~ msgstr "แบบอักษรของ_พื้นโต๊ะ:"
-
-#~ msgid "Edit"
-#~ msgstr "แก้ไข"
-
-#~| msgid "Fill Screen"
-#~ msgid "Fill screen"
-#~ msgstr "ยืดเต็มหน้าจอ"
-
-#~ msgid "Font Rendering Details"
-#~ msgstr "รายละเอียดการวาดตัวอักษร"
-
-#~ msgid "Save _background image"
-#~ msgstr "บันทึกภาพ_พื้นหลัง"
-
-#~ msgid "Gra_yscale"
-#~ msgstr "ไล่สีเ_ทา"
-
-#~| msgid "<b>Hinting</b>"
-#~ msgid "Hinting"
-#~ msgstr "Hinting"
-
-#~| msgid "Horizontal Gradient"
-#~ msgid "Horizontal gradient"
-#~ msgstr "ไล่สีตามแนวตั้ง"
-
-#~ msgid "Icons"
-#~ msgstr "ไอคอน"
-
-#~ msgid "Icons only"
-#~ msgstr "ไอคอนเท่านั้น"
-
-#~ msgid "Interface"
-#~ msgstr "ติดต่อผู้ใช้"
-
-#~| msgid "<b>Menus and Toolbars</b>"
-#~ msgid "Menus and Toolbars"
-#~ msgstr "เมนูและแถบเครื่องมือ"
-
-#~ msgid "N_one"
-#~ msgstr "ไ_ม่ใช้"
-
-#~ msgid "Open a dialog to specify the color"
-#~ msgstr "เปิดกล่องโต้ตอบเพื่อเลือกสี"
-
-#~| msgid "Preview:"
-#~ msgid "Preview"
-#~ msgstr "ตัวอย่าง"
-
-#~ msgid "R_esolution:"
-#~ msgstr "ความ_ละเอียด:"
-
-#~ msgid "Save Theme As..."
-#~ msgstr "บันทึกชุดตกแต่งเป็น..."
-
-#~ msgid "Save _As..."
-#~ msgstr "บันทึกเป็_น..."
-
-#~ msgid "Show _icons in menus"
-#~ msgstr "แสดงไ_อคอนในเมนู"
-
-#~| msgid "Solid Color"
-#~ msgid "Solid color"
-#~ msgstr "สีเดียว"
-
-#~ msgid "Sub_pixel (LCDs)"
-#~ msgstr "_พิกเซลย่อย (สำหรับจอ LCD)"
-
-#~ msgid "Sub_pixel smoothing (LCDs)"
-#~ msgstr "_จัดการพิกเซลย่อย (LCDs)"
-
-#~| msgid "<b>Subpixel Order</b>"
-#~ msgid "Subpixel Order"
-#~ msgstr "ลำดับส่วนประกอบพิกเซล"
-
-#~ msgid "Text"
-#~ msgstr "ข้อความ"
-
-#~| msgid "Text below icons"
-#~ msgid "Text below items"
-#~ msgstr "ข้อความใต้รายการ"
-
-#~| msgid "Text beside icons"
-#~ msgid "Text beside items"
-#~ msgstr "ข้อความข้างรายการ"
-
-#~ msgid "Text only"
-#~ msgstr "ข้อความเท่านั้น"
-
-#~ msgid "The current controls theme does not support color schemes."
-#~ msgstr "ชุดตกแต่งปุ่มควบคุมที่ใช้อยู่ ไม่รองรับแนวการใช้สี"
-
-#~ msgid "Theme"
-#~ msgstr "ชุดตกแต่ง"
-
-#~ msgid "Toolbar _button labels:"
-#~ msgstr "รูปแบบของปุ่_มในแถบเครื่องมือ:"
-
-#~ msgid "VB_GR"
-#~ msgstr "VB_GR"
-
-#~ msgid "Window Border"
-#~ msgstr "กรอบหน้าต่าง"
-
-#~ msgid "_BGR"
-#~ msgstr "_BGR"
-
-#~ msgid "_Description:"
-#~ msgstr "_คำบรรยาย:"
-
-#~ msgid "_Document font:"
-#~ msgstr "แบบอักษรของเ_อกสาร:"
-
-#~ msgid "_Editable menu shortcut keys"
-#~ msgstr "แก้ไขปุ่ม_ลัดเมนูได้"
-
-#~ msgid "_Fixed width font:"
-#~ msgstr "แบบอักษรความกว้าง_คงที่:"
-
-#~ msgid "_Full"
-#~ msgstr "เ_ต็มที่"
-
-#~ msgid "_Install..."
-#~ msgstr "_ติดตั้ง..."
-
-#~ msgid "_Medium"
-#~ msgstr "_กลาง"
-
-#~ msgid "_Monochrome"
-#~ msgstr "_สีเดียว"
-
-#~ msgid "_None"
-#~ msgstr "_ไม่ใช้"
-
-#~ msgid "_RGB"
-#~ msgstr "_RGB"
-
-#~ msgid "_Reset to Defaults"
-#~ msgstr "_กลับไปใช้ค่าปริยาย"
-
-#~ msgid "_Selected items:"
-#~ msgstr "สิ่งที่เ_ลือก:"
-
-#~ msgid "_Size:"
-#~ msgstr "_ขนาด:"
-
-#~ msgid "_Slight"
-#~ msgstr "_นิดหน่อย"
-
-#~ msgid "_Style:"
-#~ msgstr "_ลักษณะ:"
-
-#~ msgid "_Tooltips:"
-#~ msgstr "_คำแนะนำเครื่องมือ:"
-
-#~ msgid "_VRGB"
-#~ msgstr "_VRGB"
-
-#~ msgid "_Window title font:"
-#~ msgstr "แบบอักษรของ_ชื่อหน้าต่าง:"
-
-#~ msgid "_Windows:"
-#~ msgstr "ห_น้าต่าง:"
-
-#~ msgid "dots per inch"
-#~ msgstr "จุด/นิ้ว"
-
-#~ msgid "Appearance"
-#~ msgstr "รูปโฉม"
-
-#~ msgid "Customize the look of the desktop"
-#~ msgstr "ปรับแต่งรูปโฉมของพื้นโต๊ะ"
-
-#~ msgid "Installs themes packages for various parts of the desktop"
-#~ msgstr "ติดตั้งแพกเกจชุดตกแต่งสำหรับส่วนต่างๆ ของพื้นที่ทำงาน"
-
-#~ msgid "Theme Installer"
-#~ msgstr "เครื่องมือติดตั้งชุดตกแต่ง"
-
-#~ msgid "Gnome Theme Package"
-#~ msgstr "แพกเกจชุดตกแต่ง GNOME"
-
-#~ msgid "Cannot install theme"
-#~ msgstr "ติดตั้งชุดตกแต่งไม่สำเร็จ"
-
-#~ msgid "The %s utility is not installed."
-#~ msgstr "ไม่มีโปรแกรม %s ในระบบ"
-
-#~ msgid "There was a problem while extracting the theme."
-#~ msgstr "เกิดปัญหาขณะแตกข้อมูลชุดตกแต่ง"
-
-#~ msgid "There was an error installing the selected file"
-#~ msgstr "เกิดข้อผิดพลาดขณะติดตั้งแฟ้มที่เลือก"
-
-#~ msgid "\"%s\" does not appear to be a valid theme."
-#~ msgstr "\"%s\" ดูเหมือนไม่ใช่ชุดตกแต่งที่ใช้การได้"
-
-#~ msgid ""
-#~ "\"%s\" does not appear to be a valid theme. It may be a theme engine "
-#~ "which you need to compile."
-#~ msgstr "\"%s\" ดูเหมือนไม่ใช่ชุดตกแต่งที่ใช้การได้ อาจเป็นกลไกชุดตกแต่ง ซึ่งต้องคอมไพล์ก่อน"
-
-#~ msgid "Installation for theme \"%s\" failed."
-#~ msgstr "ติดตั้งชุดตกแต่ง \"%s\" ไม่สำเร็จ"
-
-#~ msgid "The theme \"%s\" has been installed."
-#~ msgstr "ชุดตกแต่ง \"%s\" ติดตั้งเรียบร้อยแล้ว"
-
-#~ msgid "Would you like to apply it now, or keep your current theme?"
-#~ msgstr "คุณต้องการใช้ชุดตกแต่งนี้เลยหรือไม่ หรือจะใช้ชุดตกแต่งเดิมต่อไป?"
-
-#~ msgid "Keep Current Theme"
-#~ msgstr "ใช้ชุดตกแต่งเดิม"
-
-#~ msgid "Apply New Theme"
-#~ msgstr "ใช้ชุดตกแต่งใหม่"
-
-#~ msgid "GNOME Theme %s correctly installed"
-#~ msgstr "ติดตั้งชุดตกแต่ง %s สำเร็จแล้ว"
-
-#~ msgid "New themes have been successfully installed."
-#~ msgstr "ติดตั้งชุดตกแต่งชุดใหม่เรียบร้อยแล้ว"
-
-#~ msgid "No theme file location specified to install"
-#~ msgstr "ไม่ได้กำหนดตำแหน่งของแฟ้มชุดตกแต่งที่จะติดตั้ง"
-
-#~ msgid ""
-#~ "Insufficient permissions to install the theme in:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "คุณไม่มีสิทธิเพียงพอที่จะติดตั้งชุดตกแต่งใน:\n"
-#~ "%s"
-
-#~ msgid "Select Theme"
-#~ msgstr "เลือกชุดตกแต่ง"
-
-#~ msgid "Theme Packages"
-#~ msgstr "แพกเกจชุดตกแต่ง"
-
-#~ msgid "Theme name must be present"
-#~ msgstr "ชุดตกแต่งต้องมีชื่อ"
-
-#~ msgid "The theme already exists. Would you like to replace it?"
-#~ msgstr "มีชุดตกแต่งนี้อยู่แล้ว จะเขียนทับหรือไม่?"
-
-#~ msgid "_Overwrite"
-#~ msgstr "เขียน_ทับ"
-
-#~ msgid "Would you like to delete this theme?"
-#~ msgstr "คุณต้องการลบชุดตกแต่งนี้หรือไม่?"
-
-#~ msgid "Theme cannot be deleted"
-#~ msgstr "ไม่สามารถลบชุดตกแต่งได้"
-
-#~ msgid "Could not install theme engine"
-#~ msgstr "ติดตั้งกลไกชุดตกแต่งไม่สำเร็จ"
-
-#~ msgid ""
-#~ "Unable to start the settings manager 'gnome-settings-daemon'.\n"
-#~ "Without the GNOME settings manager running, some preferences may not take "
-#~ "effect. This could indicate a problem with DBus, or a non-GNOME (e.g. "
-#~ "KDE) settings manager may already be active and conflicting with the "
-#~ "GNOME settings manager."
-#~ msgstr ""
-#~ "ไม่สามารถเรียกโปรแกรมจัดการค่าตั้ง 'gnome-settings-daemon' ได้\n"
-#~ "ถ้าขาดโปรแกรมนี้ การปรับแต่งบางอย่างอาจไม่มีผล อาการนี้อาจบ่งบอกว่ามีปัญหาเกี่ยวกับ DBus "
-#~ "หรือไม่ก็มีโปรแกรมจัดการค่าตั้งที่ไม่ใช่ GNOME (เช่น KDE) ทำงานอยู่ "
-#~ "และเกิดขัดกันกับโปรแกรมจัดการค่าตั้งของ GNOME"
-
-#~ msgid "Unable to load stock icon '%s'\n"
-#~ msgstr "อ่านไอคอนสำเร็จรูป '%s' ไม่สำเร็จ\n"
-
-#~ msgid "There was an error displaying help: %s"
-#~ msgstr "เกิดข้อผิดพลาดขณะแสดงวิธีใช้: %s"
-
-#~ msgid "Copying file: %u of %u"
-#~ msgstr "กำลังคัดลอกแฟ้ม: %u จาก %u"
-
-#~ msgid "Copying '%s'"
-#~ msgstr "กำลังคัดลอก '%s'"
-
-#~ msgid "Copying files"
-#~ msgstr "กำลังคัดลอกแฟ้ม"
-
-#~ msgid "Parent Window"
-#~ msgstr "หน้าต่างแม่"
-
-#~ msgid "Parent window of the dialog"
-#~ msgstr "หน้าต่างแม่ของกล่องโต้ตอบ"
-
-#~ msgid "From URI"
-#~ msgstr "จาก URI"
-
-#~ msgid "URI currently transferring from"
-#~ msgstr "URI ที่กำลังถ่ายโอนข้อมูลจาก"
-
-#~ msgid "To URI"
-#~ msgstr "ไปยัง URI"
-
-#~ msgid "URI currently transferring to"
-#~ msgstr "URI ที่กำลังถ่ายโอนข้อมูลไปยัง"
-
-#~ msgid "Fraction completed"
-#~ msgstr "อัตราส่วนที่เสร็จแล้ว"
-
-#~ msgid "Fraction of transfer currently completed"
-#~ msgstr "อัตราส่วนของข้อมูลที่ถ่ายโอนเสร็จแล้ว"
-
-#~ msgid "Current URI index"
-#~ msgstr "URI ปัจจุบัน"
-
-#~ msgid "Current URI index - starts from 1"
-#~ msgstr "URI ปัจจุบัน (เริ่มจาก 1)"
-
-#~ msgid "Total URIs"
-#~ msgstr "URI ทั้งหมดรวม"
-
-#~ msgid "Total number of URIs"
-#~ msgstr "จำนวนของ URI ทั้งหมด"
-
-#~ msgid "File '%s' already exists. Do you want to overwrite it?"
-#~ msgstr "มีแฟ้ม '%s' อยู่ก่อนแล้ว จะเขียนทับหรือไม่?"
-
-#~ msgid "_Skip"
-#~ msgstr "_ข้าม"
-
-#~ msgid "Overwrite _All"
-#~ msgstr "เขียนทับทั้งห_มด"
-
-#~ msgid "Default Pointer - Current"
-#~ msgstr "ตัวชี้ปริยาย - ใช้อยู่"
-
-#~ msgid "White Pointer"
-#~ msgstr "ตัวชี้ขาว"
-
-#~ msgid "White Pointer - Current"
-#~ msgstr "ตัวชี้ขาว - ใช้อยู่"
-
-#~ msgid "Large Pointer"
-#~ msgstr "ตัวชี้ใหญ่"
-
-#~ msgid "Large Pointer - Current"
-#~ msgstr "ตัวชี้ใหญ่ - ใช้อยู่"
-
-#~ msgid "Large White Pointer - Current"
-#~ msgstr "ตัวชี้ขาวใหญ่ - ใช้อยู่"
-
-#~ msgid "Large White Pointer"
-#~ msgstr "ตัวชี้ขาวใหญ่"
-
-#~ msgid ""
-#~ "This theme will not look as intended because the required GTK+ theme '%s' "
-#~ "is not installed."
-#~ msgstr ""
-#~ "ชุดตกแต่งนี้อาจแสดงไม่เหมือนที่ออกแบบไว้ เพราะชุดตกแต่ง GTK+ '%s' ที่ต้องการ ไม่ได้ติดตั้งไว้"
-
-#~ msgid ""
-#~ "This theme will not look as intended because the required window manager "
-#~ "theme '%s' is not installed."
-#~ msgstr ""
-#~ "ชุดตกแต่งนี้อาจแสดงไม่เหมือนที่ออกแบบไว้ เพราะชุดตกแต่งหน้าต่าง '%s' ที่ต้องการ ไม่ได้ติดตั้งไว้"
-
-#~ msgid ""
-#~ "This theme will not look as intended because the required icon theme '%s' "
-#~ "is not installed."
-#~ msgstr ""
-#~ "ชุดตกแต่งนี้อาจแสดงไม่เหมือนที่ออกแบบไว้ เพราะชุดตกแต่งไอคอน '%s' ที่ต้องการ ไม่ได้ติดตั้งไว้"
-
-#~ msgid "Error saving configuration: %s"
-#~ msgstr "เกิดข้อผิดพลาดขณะบันทึกค่าตั้ง: %s"
-
-#~ msgid ""
-#~ "Specify the name of the page to show (internet|multimedia|system|a11y)"
-#~ msgstr "ระบุหน้าที่ต้องการแสดง (internet|multimedia|system|a11y)"
-
-#~ msgid "- GNOME Default Applications"
-#~ msgstr "- โปรแกรมปริยายของ GNOME"
-
-#~| msgid "<b>Image Viewer</b>"
-#~ msgid "Image Viewer"
-#~ msgstr "โปรแกรมแสดงรูป"
-
-#~| msgid "<b>Multimedia Player</b>"
-#~ msgid "Multimedia Player"
-#~ msgstr "โปรแกรมเล่นสื่อผสม"
-
-#~ msgid "Open link in new _tab"
-#~ msgstr "เปิดลิงก์ในแ_ท็บใหม่"
-
-#~ msgid "Open link in new _window"
-#~ msgstr "เปิดลิงก์ในห_น้าต่างใหม่"
-
-#~ msgid "Open link with web browser _default"
-#~ msgstr "เปิดลิงก์ด้วยพฤติกรรม_ปกติของเบราว์เซอร์"
-
-#~| msgid "<b>Video Player</b>"
-#~ msgid "Video Player"
-#~ msgstr "โปรแกรมเล่นวีดิทัศน์"
-
-#~ msgid "Balsa"
-#~ msgstr "Balsa"
-
-#~ msgid "Claws Mail"
-#~ msgstr "Claws Mail"
-
-#~ msgid "Debian Sensible Browser"
-#~ msgstr "เว็บเบราว์เซอร์ปริยายของเดเบียน"
-
-#~ msgid "Encompass"
-#~ msgstr "Encompass"
-
-#~ msgid "Epiphany Web Browser"
-#~ msgstr "Epiphany: เว็บเบราว์เซอร์"
-
-#~ msgid "Evolution Mail Reader"
-#~ msgstr "Evolution: โปรแกรมอ่านเมล"
-
-#~ msgid "Firebird"
-#~ msgstr "Firebird/FireFox"
-
-#~ msgid "Firefox"
-#~ msgstr "Firefox"
-
-#~ msgid "Iceape"
-#~ msgstr "Iceape"
-
-#~ msgid "Iceape Mail"
-#~ msgstr "เมล Iceape"
-
-#~ msgid "Icedove"
-#~ msgstr "Icedove"
-
-#~ msgid "Iceweasel"
-#~ msgstr "Iceweasel"
-
-#~ msgid "KMail"
-#~ msgstr "KMail"
-
-#~ msgid "Konqueror"
-#~ msgstr "Konqueror"
-
-#~ msgid "Midori"
-#~ msgstr "Midori"
-
-#~ msgid "Mozilla"
-#~ msgstr "Mozilla"
-
-#~ msgid "Mozilla 1.6"
-#~ msgstr "Mozilla 1.6"
-
-#~ msgid "Mozilla Mail"
-#~ msgstr "Mozilla Mail"
-
-#~ msgid "Mozilla Thunderbird"
-#~ msgstr "Mozilla Thunderbird"
-
-#~ msgid "Netscape Communicator"
-#~ msgstr "Netscape Communicator"
-
-#~ msgid "Opera"
-#~ msgstr "Opera"
-
-#~ msgid "SeaMonkey"
-#~ msgstr "SeaMonkey"
-
-#~ msgid "SeaMonkey Mail"
-#~ msgstr "เมล SeaMonkey"
-
-#~ msgid "Sylpheed"
-#~ msgstr "Sylpheed"
-
-#~ msgid "Sylpheed-Claws"
-#~ msgstr "Sylpheed-Claws"
-
-#~ msgid "Thunderbird"
-#~ msgstr "Thunderbird"
-
-#~ msgid "Display Preferences"
-#~ msgstr "ปรับแต่งจอแสดงผล"
-
-#~ msgid "<i>Drag the monitors to set their place</i>"
-#~ msgstr "<i>ลากจอภาพเพื่อกำหนดตำแหน่ง</i>"
-
-#~ msgid "Include _panel"
-#~ msgstr "รวม_พาเนล"
-
-#~| msgid "<b>Panel icon</b>"
-#~ msgid "Panel icon"
-#~ msgstr "ไอคอนบนพาเนล"
-
-#~ msgid "Re_fresh rate:"
-#~ msgstr "ความ_ถี่:"
-
-#~ msgid "_Mirror screens"
-#~ msgstr "หน้าจอแสดงเห_มือนกัน"
-
-#~ msgid "_Show displays in panel"
-#~ msgstr "แ_สดงจอแสดงผลต่างๆ ในพาเนล"
-
-#~ msgid "Change screen resolution"
-#~ msgstr "เปลี่ยนความละเอียดของจอ"
-
-#~ msgid "%d Hz"
-#~ msgstr "%d Hz"
-
-#~| msgid "<b>Monitor: %s</b>"
-#~ msgid "Monitor: %s"
-#~ msgstr "จอภาพ: %s"
-
-#~ msgid "Assign shortcut keys to commands"
-#~ msgstr "ตั้งปุ่มลัดสำหรับเรียกใช้คำสั่งต่างๆ"
-
-#~ msgid ""
-#~ "Just apply settings and quit (compatibility only; now handled by daemon)"
-#~ msgstr ""
-#~ "เริ่มใช้ค่าที่กำหนดแล้วออกจากโปรแกรม (ใช้เพื่อความเข้ากันได้เท่านั้น; ปัจจุบันถูกจัดการโดยดีมอน)"
-
-#~ msgid "Start the page with the typing break settings showing"
-#~ msgstr "เปิดหน้าต่างโดยเลือกแท็บการตั้งค่าการหยุดพักการพิมพ์"
-
-#~ msgid "Start the page with the accessibility settings showing"
-#~ msgstr "เปิดหน้าต่างโดยเลือกแท็บการตั้งค่าเทคโนโลยีสิ่งอำนวยความสะดวก"
-
-#~ msgid "- GNOME Keyboard Preferences"
-#~ msgstr "- ปรับแต่งแป้นพิมพ์สำหรับ GNOME"
-
-#~ msgid "Beep when a _toggle key is pressed"
-#~ msgstr "บี๊บเมื่อปุ่มส_ลับถูกกด"
-
-#~ msgid "Beep when key is _accepted"
-#~ msgstr "บี๊บเมื่อยอม_รับการกดปุ่ม"
-
-#~ msgid "Beep when key is _rejected"
-#~ msgstr "บี๊บเมื่อปุ่มถู_กปฏิเสธ"
-
-#~ msgid "Keyboard Accessibility Audio Feedback"
-#~ msgstr "การตอบสนองด้วยเสียงในสิ่งอำนวยความสะดวกสำหรับแป้นพิมพ์"
-
-#~ msgid "Show _visual feedback for the alert sound"
-#~ msgstr "แสดงการตอบสนองทาง_ภาพประกอบเสียงแจ้งเตือน"
-
-#~ msgid "<b>Visual cues for sounds</b>"
-#~ msgstr "<b>สัญญาณทางภาพสำหรับเสียง</b>"
-
-#~ msgid "A_cceleration:"
-#~ msgstr "ความเร่_ง:"
-
-#~ msgid "All_ow postponing of breaks"
-#~ msgstr "_ยอมให้ผัดเวลาพักพิมพ์ไปชั่วครู่"
-
-#~ msgid "Audio _Feedback..."
-#~ msgstr "การตอบสนองด้วยเ_สียง..."
-
-#~ msgid "Check if breaks are allowed to be postponed"
-#~ msgstr "เลือกถ้าจะยอมให้ผัดเวลาของการพักพิมพ์ออกไปชั่วคราว"
-
-#~ msgid "Duration of the break when typing is disallowed"
-#~ msgstr "ระยะเวลาของการพักห้ามพิมพ์"
-
-#~ msgid "Duration of work before forcing a break"
-#~ msgstr "ระยะเวลาทำงานก่อนที่จะบังคับให้พัก"
-
-#~ msgid "Keyboard Preferences"
-#~ msgstr "ปรับแต่งแป้นพิมพ์"
-
-#~ msgid ""
-#~ "Lock screen after a certain duration to help prevent repetitive keyboard "
-#~ "use injuries"
-#~ msgstr ""
-#~ "ล็อคหน้าจอหลังจากทำงานไประยะเวลาหนึ่ง เพื่อช่วยป้องกันการปวดนิ้วและข้อมือจากการพิมพ์ต่อเนื่อง"
-
-#~ msgid "_Selected layouts:"
-#~ msgstr "ผังแป้นพิมพ์ที่เ_ลือก:"
-
-#~ msgid "_Accessibility features can be toggled with keyboard shortcuts"
-#~ msgstr "เทคโนโลยีสิ่งอำนวยความสะดวกสามารถเ_ปิด-ปิดได้โดยใช้แป้นพิมพ์"
-
-#~ msgid "_Break interval lasts:"
-#~ msgstr "_พักเป็นระยะเวลา:"
-
-#~ msgid "_Lock screen to enforce typing break"
-#~ msgstr "_ล็อคหน้าจอเพื่อบังคับให้หยุดพักพิมพ์"
-
-#~ msgid "_Only accept long keypresses"
-#~ msgstr "_รับเฉพาะปุ่มที่กดแช่"
-
-#~ msgid "_Simulate simultaneous keypresses"
-#~ msgstr "_จำลองการกดปุ่มประกอบพร้อมกัน"
-
-#~ msgid "_Work interval lasts:"
-#~ msgstr "ร_ะยะเวลาทำงานก่อนจะพัก:"
-
-#~ msgid "Set your keyboard preferences"
-#~ msgstr "ตั้งค่าสำหรับแป้นพิมพ์"
-
-#~ msgid "gesture|Move left"
-#~ msgstr "เลื่อนซ้าย"
-
-#~ msgid "gesture|Move right"
-#~ msgstr "เลื่อนขวา"
-
-#~ msgid "gesture|Move up"
-#~ msgstr "เลื่อนขึ้น"
-
-#~ msgid "gesture|Move down"
-#~ msgstr "เลื่อนลง"
-
-#~ msgid "gesture|Disabled"
-#~ msgstr "ไม่ใช้"
-
-#~ msgid "Specify the name of the page to show (general|accessibility)"
-#~ msgstr "ระบุหน้าที่ต้องการแสดง (general|accessibility)"
-
-#~ msgid "- GNOME Mouse Preferences"
-#~ msgstr "- ปรับแต่งเมาส์สำหรับ GNOME"
-
-#~ msgid "Cannot start the preferences application for your window manager"
-#~ msgstr "ไม่สามารถเรียกเครื่องมือปรับแต่งสำหรับโปรแกรมจัดการหน้าต่างที่คุณใช้"
-
-#~ msgid "C_ontrol"
-#~ msgstr "C_ontrol"
-
-#~ msgid "_Alt"
-#~ msgstr "_Alt"
-
-#~ msgid "H_yper"
-#~ msgstr "H_yper"
-
-#~ msgid "S_uper (or \"Windows logo\")"
-#~ msgstr "S_uper (หรือ ปุ่มโลโก้วินโดวส์)"
-
-#~ msgid "_Meta"
-#~ msgstr "_Meta"
-
-#~| msgid "<b>Movement Key</b>"
-#~ msgid "Movement Key"
-#~ msgstr "ปุ่มย้ายหน้าต่าง"
-
-#~| msgid "<b>Titlebar Action</b>"
-#~ msgid "Titlebar Action"
-#~ msgstr "การกระทำที่แถบชื่อหน้าต่าง"
-
-#~ msgid "To move a window, press-and-hold this key then grab the window:"
-#~ msgstr "กดปุ่มนี้ค้างไว้ แล้วใช้เมาส์ลากขยับหน้าต่างได้:"
-
-#~ msgid "Window Preferences"
-#~ msgstr "ค่าตั้งของหน้าต่าง"
-
-#~| msgid "<b>Window Selection</b>"
-#~ msgid "Window Selection"
-#~ msgstr "การเลือกหน้าต่าง"
-
-#~ msgid "_Double-click titlebar to perform this action:"
-#~ msgstr "ดั_บเบิลคลิกแถบชื่อหน้าต่างแล้วจะ:"
-
-#~ msgid "_Interval before raising:"
-#~ msgstr "_ระยะเวลาก่อนที่จะยกหน้าต่างขึ้น:"
-
-#~ msgid "_Raise selected windows after an interval"
-#~ msgstr "_ยกหน้าต่างที่เลือกขึ้นมาไว้ด้านหน้า"
-
-#~ msgid "_Select windows when the mouse moves over them"
-#~ msgstr "เ_ลือกหน้าต่างที่เมาส์ชี้"
-
-#~ msgid "Set your window properties"
-#~ msgstr "ตั้งค่าระบบหน้าต่างของคุณ"
-
-#~ msgid "Windows"
-#~ msgstr "หน้าต่าง"
-
-#~ msgid "Window manager \"%s\" has not registered a configuration tool\n"
-#~ msgstr "โปรแกรมจัดการหน้าต่าง \"%s\" ยังไม่ได้ลงทะเบียนเครื่องมือปรับแต่ง\n"
-
-#~ msgid "Maximize Vertically"
-#~ msgstr "ขยายเต็มแนวดิ่ง"
-
-#~ msgid "Maximize Horizontally"
-#~ msgstr "ขยายเต็มแนวนอน"
-
-#~ msgid "Roll up"
-#~ msgstr "ม้วนขึ้น"
-
-#~ msgid "key not found [%s]\n"
-#~ msgstr "ไม่พบคีย์ [%s]\n"
-
-#~ msgid "Hide on start (useful to preload the shell)"
-#~ msgstr "ซ่อนขณะเริ่มทำงาน(เป็นประโยชน์ในการ preload เชลล์)"
-
-#~ msgid "Groups"
-#~ msgstr "กลุ่ม"
-
-#~ msgid "Common Tasks"
-#~ msgstr "งานปกติ"
-
-#~ msgid "Close the control-center when a task is activated"
-#~ msgstr "ปิดศูนย์ควบคุมเมื่อมีการเรียกงานควบคุม"
-
-#~ msgid "Exit shell on add or remove action performed"
-#~ msgstr "ปิดเชลล์เมื่อมีการเพิ่มหรือลบรายการ"
-
-#~ msgid "Exit shell on help action performed"
-#~ msgstr "ปิดเชลล์เมื่อมีการเรียกอ่านวิธีใช้"
-
-#~ msgid "Exit shell on start action performed"
-#~ msgstr "ปิดเชลล์เมื่อมีการเรียกรายการควบคุม"
-
-#~ msgid "Exit shell on upgrade or uninstall action performed"
-#~ msgstr "ปิดเชลล์เมื่อมีการปรับรุ่นหรือถอดถอน"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when a help action is performed."
-#~ msgstr "ระบุว่าจะปิดเชลล์หรือไม่ เมื่อมีการเรียกอ่านวิธีใช้"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when a start action is performed."
-#~ msgstr "ระบุว่าจะปิดเชลล์หรือไม่ เมื่อมีการเรียกใช้รายการควบคุม"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when an add or remove action is "
-#~ "performed."
-#~ msgstr "ระบุว่าจะปิดเชลล์หรือไม่ เมื่อมีการเพิ่มหรือลบรายการ"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when an upgrade or uninstall action "
-#~ "is performed."
-#~ msgstr "ระบุว่าจะปิดเชลล์หรือไม่ เมื่อมีการปรับรุ่นหรือถอดถอน"
-
-#~ msgid "Task names and associated .desktop files"
-#~ msgstr "ชื่องานควบคุมและแฟ้ม .desktop ที่ใช้"
-
-#~ msgid ""
-#~ "The task name to be displayed in the control-center followed by a \";\" "
-#~ "separator then the filename of an associated .desktop file to launch for "
-#~ "that task."
-#~ msgstr ""
-#~ "ชื่องานควบคุมที่จะแสดงในศูนย์ควบคุม ตามด้วย \";\" และชื่อแฟ้ม .desktop ที่ใช้เรียกงานนั้นๆ"
-
-#~ msgid ""
-#~ "[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;"
-#~ "default-applications.desktop,Add Printer;gnome-cups-manager.desktop]"
-#~ msgstr ""
-#~ "[เปลี่ยนชุดตกแต่ง;gtk-theme-selector.desktop,เลือกโปรแกรมหลักๆ;default-"
-#~ "applications.desktop,เพิ่มเครื่องพิมพ์;gnome-cups-manager.desktop]"
-
-#~ msgid ""
-#~ "if true, the control-center will close when a \"Common Task\" is "
-#~ "activated."
-#~ msgstr "ถ้าเป็นจริง ศูนย์ควบคุมจะปิดเมื่อมีการเรียก \"งานสามัญ\""
-
-#~ msgid "The GNOME configuration tool"
-#~ msgstr "เครื่องมือปรับแต่งระบบของ GNOME"
-
-#~ msgid "_Postpone Break"
-#~ msgstr "_ผัดเวลาพัก"
-
-#~| msgid "/_Take a Break"
-#~ msgid "_Take a Break"
-#~ msgstr "_พักหน่อยละกัน"
-
-#~ msgid "%d minute until the next break"
-#~ msgid_plural "%d minutes until the next break"
-#~ msgstr[0] "อีก %d นาทีถึงช่วงพักต่อไป"
-
-#~ msgid "Less than one minute until the next break"
-#~ msgstr "อีกไม่ถึง 1 นาทีถึงช่วงพักต่อไป"
-
-#~ msgid ""
-#~ "Unable to bring up the typing break properties dialog with the following "
-#~ "error: %s"
-#~ msgstr "แสดงหน้าต่างปรับแต่งการพักพิมพ์ไม่สำเร็จ  เกิดข้อผิดพลาดดังนี้: %s"
-
-#~ msgid "Written by Richard Hult <richard@imendio.com>"
-#~ msgstr "เขียนโดย Richard Hult <richard@imendio.com>"
-
-#~ msgid "Eye candy added by Anders Carlsson"
-#~ msgstr "ตกแต่งโดย by Anders Carlsson"
-
-#~ msgid "A computer break reminder."
-#~ msgstr "โปรแกรมเตือนเวลาพักพิมพ์"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Paisa Seeluangsawat <paisa@users.sf.net>\n"
-#~ "Supakorn Siddhichai <supakorn.siddhichai@nectec.or.th>\n"
-#~ "Supranee Thirawatthanasuk <supranee@opentle.org>\n"
-#~ "Surichat Sumrit <nook@opentle.org>\n"
-#~ "Chanchai Junlouchai <taz@opentle.org>\n"
-#~ "Theppitak Karoonboonyanan <thep@linux.thai.net>"
-
-#~ msgid "Don't check whether the notification area exists"
-#~ msgstr "ไม่ต้องตรวจสอบว่ามีพื้นที่แจ้งเหตุหรือไม่"
-
-#~ msgid "Typing Monitor"
-#~ msgstr "โปรแกรมแจ้งเตือนพักพิมพ์"
-
-#~ msgid ""
-#~ "The typing monitor uses the notification area to display information. You "
-#~ "don't seem to have a notification area on your panel. You can add it by "
-#~ "right-clicking on your panel and choosing 'Add to panel', selecting "
-#~ "'Notification area' and clicking 'Add'."
-#~ msgstr ""
-#~ "โปรแกรมแจ้งเตือนพักพิมพ์ใช้พื้นที่รายงานแจ้งเตือนในการแสดงข้อมูล "
-#~ "ซึ่งดูเหมือนจะไม่มีบนพาเนลในขณะนี้ คุณสามารถเพิ่มพื้นที่รายงานแจ้งเตือนได้ โดยคลิกขวาบนพาเนล "
-#~ "แล้วเลือก 'เพิ่มลงในพาเนล' จากนั้นเลือก 'พื้นที่รายงานแจ้งเตือน' แล้วกด 'เพิ่ม'"
-
-#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
-#~ msgstr "ถ้ากำหนดเป็นจริง จะแสดงรูปย่อสำหรับแบบอักษร OpenType"
-
-#~ msgid "If set to true, then PCF fonts will be thumbnailed."
-#~ msgstr "ถ้ากำหนดเป็นจริง จะแสดงรูปย่อสำหรับแบบอักษร PCF"
-
-#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
-#~ msgstr "ถ้ากำหนดเป็นจริง จะแสดงรูปย่อสำหรับแบบอักษร TrueType"
-
-#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
-#~ msgstr "ถ้ากำหนดเป็นจริง จะแสดงรูปย่อสำหรับแบบอักษร Type1"
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for OpenType fonts."
-#~ msgstr "กำหนดคำสั่งที่ใช้สร้างรูปย่อสำหรับแบบอักษร OpenType"
-
-#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
-#~ msgstr "กำหนดคำสั่งที่ใช้สร้างรูปย่อสำหรับแบบอักษร PCF"
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for TrueType fonts."
-#~ msgstr "กำหนดคำสั่งที่ใช้สร้างรูปย่อสำหรับแบบอักษร TrueType"
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for Type1 fonts."
-#~ msgstr "กำหนดคำสั่งที่ใช้สร้างรูปย่อสำหรับแบบอักษร Type1"
-
-#~ msgid "Thumbnail command for OpenType fonts"
-#~ msgstr "คำสั่งสร้างรูปย่อสำหรับแบบอักษร OpenType"
-
-#~ msgid "Thumbnail command for PCF fonts"
-#~ msgstr "คำสั่งสร้างรูปย่อสำหรับแบบอักษร PCF"
-
-#~ msgid "Thumbnail command for TrueType fonts"
-#~ msgstr "คำสั่งสร้างรูปย่อสำหรับแบบอักษร TrueType"
-
-#~ msgid "Thumbnail command for Type1 fonts"
-#~ msgstr "คำสั่งสร้างรูปย่อสำหรับแบบอักษร Type1"
-
-#~ msgid "Whether to thumbnail OpenType fonts"
-#~ msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับแบบอักษร OpenType หรือไม่"
-
-#~ msgid "Whether to thumbnail PCF fonts"
-#~ msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับแบบอักษร PCF หรือไม่"
-
-#~ msgid "Whether to thumbnail TrueType fonts"
-#~ msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับแบบอักษร TrueType หรือไม่"
-
-#~ msgid "Whether to thumbnail Type1 fonts"
-#~ msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับแบบอักษร Type1 หรือไม่"
-
-#~ msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-#~ msgstr "๏ วิญญูมุ่งรู้พิฆาตปื้นขี้ฝุ่นเลษฏุ ๐๑๒๓๔๕๖๗๘๙ ๚ะ๛"
-
-#~ msgid "Style:"
-#~ msgstr "ลักษณะ:"
-
-#~ msgid "Size:"
-#~ msgstr "ขนาด:"
-
-#~ msgid "Version:"
-#~ msgstr "รุ่น:"
-
-#~ msgid "Copyright:"
-#~ msgstr "สงวนลิขสิทธิ์:"
-
-#~| msgid "Install"
-#~ msgid "Installed"
-#~ msgstr "ติดตั้ง"
-
-#~| msgid "Install"
-#~ msgid "Install Failed"
-#~ msgstr "ติดตั้งล้มเหลว"
-
-#~ msgid "usage: %s fontfile\n"
-#~ msgstr "วิธีใช้: %s fontfile\n"
-
-#~| msgid "Install"
-#~ msgid "I_nstall Font"
-#~ msgstr "ติดตั้ง_ฟอนต์"
-
-#~ msgid "Font Viewer"
-#~ msgstr "เครื่องมือดูแบบอักษร"
-
-#~ msgid "Preview fonts"
-#~ msgstr "แสดงตัวอย่างแบบอักษร"
-
-#~ msgid "Text to thumbnail (default: Aa)"
-#~ msgstr "ข้อความสำหรับสร้างรูปย่อ (ค่าปริยาย: Aa)"
-
-#~ msgid "TEXT"
-#~ msgstr "TEXT"
-
-#~ msgid "Font size (default: 64)"
-#~ msgstr "ขนาดแบบอักษร (ค่าปริยาย: 64)"
-
-#~ msgid "SIZE"
-#~ msgstr "SIZE"
-
-#~ msgid "FONT-FILE OUTPUT-FILE"
-#~ msgstr "FONT-FILE OUTPUT-FILE"
-
-#~ msgid "Your filter \"%s\" does not match any items."
-#~ msgstr "ตัวกรอง \"%s\" ของคุณไม่ตรงกับรายการใดใด"
-
-#~| msgid "No sound"
-#~ msgid "No matches found."
-#~ msgstr "ไม่พบคู่ที่เหมือนกัน"
-
-#~| msgid "<b>Start %s</b>"
-#~ msgid "Start %s"
-#~ msgstr "เริ่ม %s"
-
-#~ msgid "Help"
-#~ msgstr "วิธีใช้"
-
-#~ msgid "Upgrade"
-#~ msgstr "ปรับรุ่น"
-
-#~ msgid "Uninstall"
-#~ msgstr "ถอดถอน"
-
-#~ msgid "Remove from Favorites"
-#~ msgstr "ลบออกจากรายการโปรด"
-
-#~ msgid "Add to Favorites"
-#~ msgstr "เพิ่มในรายการโปรด"
-
-#~ msgid "Remove from Startup Programs"
-#~ msgstr "ลบออกจากรายการโปรแกรมขณะเริ่ม"
-
-#~ msgid "Add to Startup Programs"
-#~ msgstr "เพิ่มในรายการโปรแกรมขณะเริ่ม"
-
-#~ msgid "New Spreadsheet"
-#~ msgstr "สร้างตารางคำนวณ"
-
-#~ msgid "New Document"
-#~ msgstr "สร้างเอกสาร"
-
-#~ msgid "Documents"
-#~ msgstr "เอกสาร"
-
-#~ msgid "File System"
-#~ msgstr "ระบบแฟ้ม"
-
-#~ msgid "Network Servers"
-#~ msgstr "เซิร์ฟเวอร์ในเครือข่าย"
-
-#~ msgid "<b>Open</b>"
-#~ msgstr "<b>เปิด</b>"
-
-#~ msgid "Rename..."
-#~ msgstr "เปลี่ยนชื่อ..."
-
-#~ msgid "Send To..."
-#~ msgstr "ส่งไปยัง..."
-
-#~ msgid "Move to Trash"
-#~ msgstr "ทิ้งลงถังขยะ"
-
-#~ msgid "Delete"
-#~ msgstr "ลบ"
-
-#~ msgid "Are you sure you want to permanently delete \"%s\"?"
-#~ msgstr "ยืนยันที่จะลบ \"%s\" อย่างถาวรหรือไม่?"
-
-#~ msgid "If you delete an item, it is permanently lost."
-#~ msgstr "ถ้าคุณลบ รายการนี้จะสูญหายอย่างถาวร"
-
-#~ msgid "Open in File Manager"
-#~ msgstr "เปิดในโปรแกรมจัดการแฟ้ม"
-
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "%l:%M %p"
-#~ msgstr "%H:%M"
-
-#~ msgid "Today %l:%M %p"
-#~ msgstr "วันนี้ %H:%M"
-
-#~ msgid "Yesterday %l:%M %p"
-#~ msgstr "เมื่อวาน %H:%M"
-
-#~ msgid "%b %d %l:%M %p"
-#~ msgstr "%d %b %H:%M"
-
-#~ msgid "Find Now"
-#~ msgstr "หาทันที"
-
-#~ msgid "<b>Open %s</b>"
-#~ msgstr "<b>เปิด %s</b>"
-
-#~ msgid "Remove from System Items"
-#~ msgstr "ลบออกจากรายการระบบ"
-
-#~ msgid "Unknown login ID, the user database might be corrupted"
-#~ msgstr "ไม่รู้จักชื่อผู้ใช้ที่ระบุ ฐานข้อมูลผู้ใช้อาจจะเสียก็ได้"
-
-#~ msgid ""
-#~ "Left thumb\n"
-#~ "Left middle finger\n"
-#~ "Left ring finger\n"
-#~ "Left little finger\n"
-#~ "Right thumb\n"
-#~ "Right middle finger\n"
-#~ "Right ring finger\n"
-#~ "Right little finger"
-#~ msgstr ""
-#~ "นิ้วหัวแม่มือซ้าย\n"
-#~ "นิ้วกลางซ้าย\n"
-#~ "นิ้วนางซ้าย\n"
-#~ "นิ้วก้อยซ้าย\n"
-#~ "นิ้วหัวแม่มือขวา\n"
-#~ "นิ้วกลางขวา\n"
-#~ "นิ้วนางขวา\n"
-#~ "นิ้วก้อยขวา"
-
-#~ msgid "<b>Email</b>"
-#~ msgstr "<b>อีเมล</b>"
-
-#~ msgid "<b>Home</b>"
-#~ msgstr "<b>บ้าน</b>"
-
-#~ msgid "<b>Job</b>"
-#~ msgstr "<b>อาชีพการงาน</b>"
-
-#~ msgid "<b>Web</b>"
-#~ msgstr "<b>เว็บ</b>"
-
-#~ msgid "<b>Work</b>"
-#~ msgstr "<b>ที่ทำงาน</b>"
-
-#~ msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
-#~ msgstr "<span size=\"larger\" weight=\"bold\">เปลี่ยนรหัสผ่านของคุณ</span>"
-
-#~ msgid "<b>Assistive Technologies</b>"
-#~ msgstr "<b>เทคโนโลยีสิ่งอำนวยความสะดวก</b>"
-
-#~ msgid "<b>Preferences</b>"
-#~ msgstr "<b>ปรับแต่ง</b>"
-
-#~ msgid "<b>C_olors</b>"
-#~ msgstr "<b>_สี</b>"
-
-#~ msgid "<b>Preview</b>"
-#~ msgstr "<b>ตัวอย่าง</b>"
-
-#~ msgid "<b>_Desktop Background</b>"
-#~ msgstr "<b>พื้_นหลังพื้นโต๊ะ</b>"
-
-#~ msgid "C_ut"
-#~ msgstr "_ตัด"
-
-#~ msgid "Save File"
-#~ msgstr "บันทึกแฟ้ม"
-
-#~ msgid ""
-#~ "Solid color\n"
-#~ "Horizontal gradient\n"
-#~ "Vertical gradient"
-#~ msgstr ""
-#~ "สีเดียว\n"
-#~ "ไล่สีตามแนวนอน\n"
-#~ "ไล่สีตามแนวตั้ง"
-
-#~ msgid ""
-#~ "Text below items\n"
-#~ "Text beside items\n"
-#~ "Icons only\n"
-#~ "Text only"
-#~ msgstr ""
-#~ "ข้อความใต้ไอคอน\n"
-#~ "ข้อความข้างไอคอน\n"
-#~ "ไอคอนเท่านั้น\n"
-#~ "ข้อความเท่านั้น"
-
-#~ msgid ""
-#~ "Tiled\n"
-#~ "Zoom\n"
-#~ "Centered\n"
-#~ "Scaled\n"
-#~ "Fill screen"
-#~ msgstr ""
-#~ "เรียงกระเบื้อง\n"
-#~ "ซูมเต็มหน้าจอ\n"
-#~ "วางตรงกลาง\n"
-#~ "ขยายพอดีหน้าจอ\n"
-#~ "ยืดเต็มหน้าจอ"
-
-#~ msgid "_Copy"
-#~ msgstr "_คัดลอก"
-
-#~ msgid "_New"
-#~ msgstr "ใ_หม่"
-
-#~ msgid "_Print"
-#~ msgstr "_พิมพ์"
-
-#~ msgid "_Quit"
-#~ msgstr "_ออก"
-
-#~ msgid "_Save"
-#~ msgstr "_บันทึก"
-
-#~ msgid "<b>Mobility</b>"
-#~ msgstr "<b>อุปกรณ์พกพา</b>"
-
-#~ msgid "<b>Visual</b>"
-#~ msgstr "<b>สายตา</b>"
-
-#~ msgid ""
-#~ "Normal\n"
-#~ "Left\n"
-#~ "Right\n"
-#~ "Upside-down\n"
-#~ msgstr ""
-#~ "ธรรมดา\n"
-#~ "ซ้าย\n"
-#~ "ขวา\n"
-#~ "บนลงล่าง\n"
-
-#~ msgid "Could not apply the selected configuration"
-#~ msgstr "ไม่สามารถเริ่มใช้ค่าตั้งที่เลือกไว้"
-
-#~ msgid "Could not get org.gnome.SettingsDaemon.XRANDR"
-#~ msgstr "ไม่สามารถอ่าน org.gnome.SettingsDaemon.XRANDR"
-
-#~ msgid "_Command:"
-#~ msgstr "_คำสั่ง:"
-
-#~ msgid "<b>Bounce Keys</b>"
-#~ msgstr "<b>ป้องกันการกดแป้นรัว</b>"
-
-#~ msgid "<b>General</b>"
-#~ msgstr "<b>ทั่วไป</b>"
-
-#~ msgid "<b>Slow Keys</b>"
-#~ msgstr "<b>พิมพ์แบบช้า</b>"
-
-#~ msgid "<b>Sticky Keys</b>"
-#~ msgstr "<b>ค้างปุ่มกด</b>"
-
-#~ msgid "<small><i>Fast</i></small>"
-#~ msgstr "<small><i>ถี่</i></small>"
-
-#~ msgid "<small><i>Long</i></small>"
-#~ msgstr "<small><i>นาน</i></small>"
-
-#~ msgid "<small><i>Short</i></small>"
-#~ msgstr "<small><i>สั้น</i></small>"
-
-#~ msgid "<small><i>Slow</i></small>"
-#~ msgstr "<small><i>ช้า</i></small>"
-
-#~ msgid "<b>Locate Pointer</b>"
-#~ msgstr "<b>มองหาตัวชี้</b>"
-
-#~ msgid "<small><i>High</i></small>"
-#~ msgstr "<small><i>สูง</i></small>"
-
-#~ msgid "<small><i>Large</i></small>"
-#~ msgstr "<small><i>ยาว</i></small>"
-
-#~ msgid "<small><i>Low</i></small>"
-#~ msgstr "<small><i>ต่ำ</i></small>"
-
-#~ msgid "<small><i>Small</i></small>"
-#~ msgstr "<small><i>สั้น</i></small>"
-
-#~ msgid "<b>Ignore Host List</b>"
-#~ msgstr "<b>โฮสต์ที่ไม่ต้องผ่านพร็อกซี</b>"
-
-#~ msgid ""
-#~ "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
-#~ "\n"
-#~ " Your filter \"<b>%s</b>\" does not match any items.</span>"
-#~ msgstr ""
-#~ "<span size=\"large\"><b>ไม่พบรายการที่ตรงกัน</b> </span><span>\n"
-#~ "\n"
-#~ " ตัวกรอง \"<b>%s</b>\" ของคุณ ไม่ตรงกับรายการใดเลย</span>"
-
-#~ msgid "/_About"
-#~ msgstr "/เ_กี่ยวกับ"
-
-#~ msgid "<b>_Wallpaper</b>"
-#~ msgstr "<b>รู_ปพื้นโต๊ะ</b>"
-
-#~ msgid "Monitor Resolution Settings"
-#~ msgstr "ค่าความละเอียดจอภาพ"
-
-#~ msgid "R_otation"
-#~ msgstr "การ_หมุน:"
-
-#~ msgid "Re_fresh Rate:"
-#~ msgstr "อัตราการ_รีเฟรช:"
-
-#~ msgid "_Resolution"
-#~ msgstr "ความ_ละเอียด:"
-
-#~ msgid "Screen Resolution"
-#~ msgstr "ความละเอียดของจอ"
-
-#~ msgid ""
-#~ "The X server does not support the XRANDR extension.  Runtime resolution "
-#~ "changes to the display size are not available."
-#~ msgstr ""
-#~ "X server ไม่รองรับส่วนขยาย XRANDR จึงไม่สามารถเปลี่ยนความละเอียดของจอขณะทำงานได้"
-
-#~ msgid "Retrieve and store legacy settings"
-#~ msgstr "อ่านค่าที่ตั้งไว้ในรุ่นก่อน"
-
-#~ msgid "Not connected"
-#~ msgstr "ยังไม่เชื่อมต่อ"
-
-#~ msgid "Autodetect"
-#~ msgstr "ตรวจสอบอัตโนมัติ"
-
-#~ msgid "ALSA - Advanced Linux Sound Architecture"
-#~ msgstr "ALSA - Advanced Linux Sound Architecture"
-
-#~ msgid "Artsd - ART Sound Daemon"
-#~ msgstr "Artsd - ART Sound Daemon"
-
-#~ msgid "ESD - Enlightened Sound Daemon"
-#~ msgstr "ESD - Enlightened Sound Daemon"
-
-#~ msgid "OSS - Open Sound System"
-#~ msgstr "OSS - Open Sound System"
-
-#~ msgid "PulseAudio Sound Server"
-#~ msgstr "เซิร์ฟเวอร์เสียง PulseAudio"
-
-#~ msgid "Test Sound"
-#~ msgstr "เสียงทดสอบ"
-
-#~ msgid "Silence"
-#~ msgstr "เงียบ"
-
-#~ msgid "- GNOME Sound Preferences"
-#~ msgstr "- ค่าตั้งของเสียงสำหรับ GNOME"
-
-#~ msgid "<b>Alerts and Sound Effects</b>"
-#~ msgstr "<b>การแจ้งเหตุและลูกเล่นเสียง</b>"
-
-#~ msgid "<b>Audio Conferencing</b>"
-#~ msgstr "<b>การประชุมทางเสียง</b>"
-
-#~ msgid "<b>Default Mixer Tracks</b>"
-#~ msgstr "<b>แทร็กปริยายของอุปกรณ์ควบคุมเสียง</b>"
-
-#~ msgid "<b>Music and Movies</b>"
-#~ msgstr "<b>ดูหนังฟังเพลง</b>"
-
-#~ msgid "<b>Sound Events</b>"
-#~ msgstr "<b>เหตุการณ์เสียง</b>"
-
-#~ msgid "<b>Sound Theme</b>"
-#~ msgstr "<b>ชุดเสียง</b>"
-
-#~ msgid "Click OK to finish."
-#~ msgstr "คลิก \"ตกลง\" เพื่อสิ้นสุด"
-
-#~ msgid "Play _sound effects when buttons are clicked"
-#~ msgstr "เล่นเสียงเมื่อมีการ_กดปุ่ม"
-
-#~ msgid "S_ound playback:"
-#~ msgstr "อุป_กรณ์เล่นเสียง:"
-
-#~ msgid ""
-#~ "Select the device and tracks to control with the keyboard. Use the Shift "
-#~ "and Control keys to select multiple tracks if required."
-#~ msgstr ""
-#~ "เลือกอุปกรณ์และแทร็กที่จะควบคุมด้วยแป้นพิมพ์ ใช้ปุ่ม Shift และ Control "
-#~ "เลือกหลายแทร็กได้ถ้าต้องการ"
-
-#~ msgid "So_und playback:"
-#~ msgstr "อุปกรณ์เ_ล่นเสียง:"
-
-#~ msgid "Sou_nd capture:"
-#~ msgstr "อุปกรณ์_รับเสียง:"
-
-#~ msgid "Sounds"
-#~ msgstr "เสียง"
-
-#~ msgid "Testing Pipeline"
-#~ msgstr "กำลังทดสอบไปป์ไลน์"
-
-#~ msgid "_Play alerts and sound effects"
-#~ msgstr "เ_ล่นเสียงแจ้งเหตุและเสียงลูกเล่น"
-
-#~ msgid "_Sound playback:"
-#~ msgstr "อุ_ปกรณ์เล่นเสียง:"
-
-#~ msgctxt "Sound event"
-#~ msgid "Windows and Buttons"
-#~ msgstr "หน้าต่างและปุ่ม"
-
-#~ msgctxt "Sound event"
-#~ msgid "Button clicked"
-#~ msgstr "ปุ่มถูกกด"
-
-#~ msgctxt "Sound event"
-#~ msgid "Toggle button clicked"
-#~ msgstr "ปุ่มสลับค่าถูกกด"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window maximized"
-#~ msgstr "หน้าต่างถูกขยายเต็ม"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window unmaximized"
-#~ msgstr "หน้าต่างถูกเลิกขยายเต็ม"
-
-#~ msgctxt "Sound event"
-#~ msgid "Window minimised"
-#~ msgstr "หน้าต่างถูกย่อเก็บ"
-
-#~ msgctxt "Sound event"
-#~ msgid "Desktop"
-#~ msgstr "เดสก์ท็อป"
-
-#~ msgctxt "Sound event"
-#~ msgid "Login"
-#~ msgstr "เข้าระบบ"
-
-#~ msgctxt "Sound event"
-#~ msgid "Logout"
-#~ msgstr "ออกจากระบบ"
-
-#~ msgctxt "Sound event"
-#~ msgid "New e-mail"
-#~ msgstr "อีเมลใหม่"
-
-#~ msgctxt "Sound event"
-#~ msgid "Empty trash"
-#~ msgstr "เทขยะ"
-
-#~ msgctxt "Sound event"
-#~ msgid "Long action completed (download, CD burning, etc.)"
-#~ msgstr "การกระทำที่ยาวนานเสร็จสมบูรณ์ (เช่น การดาวน์โหลด การเขียนซีดี ฯลฯ)"
-
-#~ msgctxt "Sound event"
-#~ msgid "Alerts"
-#~ msgstr "การแจ้งเหตุ"
-
-#~ msgctxt "Sound event"
-#~ msgid "Information or question"
-#~ msgstr "แจ้งเพื่อทราบหรือคำถาม"
-
-#~ msgctxt "Sound event"
-#~ msgid "Error"
-#~ msgstr "ข้อผิดพลาด"
-
-#~ msgid "Select Sound File"
-#~ msgstr "เลือกแฟ้มเสียง"
-
-#~ msgid "Custom..."
-#~ msgstr "กำหนดเอง..."
-
-#~ msgid "Lock Screen"
-#~ msgstr "ล็อคหน้าจอ"
-
-#~ msgid "Logout"
-#~ msgstr "ออกจากระบบ"
-
-#~ msgid "Shutdown"
-#~ msgstr "ปิดเครื่อง"
-
-#~ msgid "Enable support for GNOME assistive technologies at login"
-#~ msgstr "ใช้เทคโนโลยีสิ่งอำนวยความสะดวกเมื่อเข้าระบบ"
-
-#~ msgid "New accelerator..."
-#~ msgstr "ปุ่มลัดใหม่..."
-
-#~ msgid "Unexpected attribute '%s' for element '%s'"
-#~ msgstr "พบแอตทริบิวต์ '%s' ที่ไม่ต้องการ สำหรับอิลิเมนต์ '%s'"
-
-#~ msgid "Attribute '%s' of element '%s' not found"
-#~ msgstr "ไม่พบแอตทริบิวต์ '%s' สำหรับอิลิเมนต์ '%s'"
-
-#~ msgid "Unexpected tag '%s', tag '%s' expected"
-#~ msgstr "พบแท็ก '%s' ที่ไม่ต้องการ ขณะที่ต้องการแท็ก '%s'"
-
-#~ msgid "Unexpected tag '%s' inside '%s'"
-#~ msgstr "พบแท็ก '%s' ที่ไม่ต้องการภายใน '%s'"
-
-#~ msgid "No valid bookmark file found in data dirs"
-#~ msgstr "ไม่พบแฟ้มที่คั่นหน้าที่ใช้การได้ในไดเรกทอรีข้อมูล"
-
-#~ msgid "No bookmark found for URI '%s'"
-#~ msgstr "ไม่พบที่คั่นหน้าสำหรับ URI '%s'"
-
-#~ msgid "No MIME type defined in the bookmark for URI '%s'"
-#~ msgstr "ไม่ได้กำหนดชนิด MIME ไว้ในที่คั่นหน้าสำหรับ URI '%s'"
-
-#~ msgid "No private flag has been defined in bookmark for URI '%s'"
-#~ msgstr "ไม่ได้กำหนดแฟล็กส่วนตัวไว้ในที่คั่นหน้าสำหรับ URI '%s'"
-
-#~ msgid "No groups set in bookmark for URI '%s'"
-#~ msgstr "ไม่ได้กำหนดกลุ่มไว้ในที่คั่นหน้าสำหรับ URI '%s'"
-
-#~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr "ไม่มีโปรแกรมประยุกต์ชื่อ '%s' ที่ลงทะเบียนที่คั่นหน้าสำหรับ '%s' ไว้"
-
-#~ msgid ""
-#~ "%s is the path where the theme files will be installed. This can not be "
-#~ "selected as the source location"
-#~ msgstr "%s เป็นตำแหน่งที่ จะติดตั้งชุดตกแต่ง จะเลือกตำแหน่งนี้ เป็นที่มาของชุดตกแต่งไม่ได้"
-
-#~ msgid "Screen Resolution Preferences"
-#~ msgstr "ค่าตั้งความละเอียดของจอ"
-
-#~ msgid "_Make default for this computer (%s) only"
-#~ msgstr "_ตั้งให้เป็นค่าปริยายสำหรับเครื่องนี้ (%s) เท่านั้น"
-
-#~ msgid ""
-#~ "Testing the new settings. If you don't respond in %d second the previous "
-#~ "settings will be restored."
-#~ msgid_plural ""
-#~ "Testing the new settings. If you don't respond in %d seconds the previous "
-#~ "settings will be restored."
-#~ msgstr[0] "กำลังทดลองใช้ค่าตั้งใหม่  ถ้าคุณไม่ตอบรับภายใน %d วินาที จะกลับไปใช้ค่าเดิม"
-
-#~ msgid "Keep Resolution"
-#~ msgstr "ใช้ความละเอียดนี้"
-
-#~ msgid "Use _Previous Resolution"
-#~ msgstr "ใช้ความละเอียดเ_ดิม"
-
-#~ msgid "_Keep Resolution"
-#~ msgstr "ใช้ความละเอียด_นี้"
-
-#~ msgid ""
-#~ "The version of the XRandR extension is incompatible with this program. "
-#~ "Runtime changes to the display size are not available."
-#~ msgstr ""
-#~ "รุ่นของส่วนขยาย XRandR "
-#~ "ไม่เข้ากับโปรแกรมนี้จึงไม่สามารถเปลี่ยนความละเอียดของจอขณะทำงานได้"
-
-#~ msgid "Error setting new accelerator in configuration database: %s"
-#~ msgstr "เกิดข้อผิดพลาดขณะจัดเก็บปุ่มลัดใหม่ลงในฐานข้อมูลค่าปรับแต่ง: %s"
-
-#~ msgid "E_nable software sound mixing"
-#~ msgstr "เ_ปิดใช้การปรับเสียงด้วยซอฟต์แวร์"
-
-#~ msgid "System Beep"
-#~ msgstr "บี๊ประบบ"
-
-#~ msgid "_Enable system beep"
-#~ msgstr "เ_ปิดใช้บี๊ประบบ"
-
-#~ msgid "_Visual system beep"
-#~ msgstr "บี๊ประบบแบบ_ภาพ"
-
-#~ msgid "Clink"
-#~ msgstr "คลิก"
-
-#~ msgid "Beep"
-#~ msgstr "โผล่"
-
-#~ msgid "Sound not set for this event."
-#~ msgstr "ไม่ได้กำหนดเสียงสำหรับเหตุการณ์นี้ไว้"
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package for a set of default "
-#~ "sounds."
-#~ msgstr ""
-#~ "หาแฟ้มเสียงสำหรับเหตุการณ์นี้ไม่พบ\n"
-#~ "ถ้าคุณต้องการชุดเสียงปริยาย กรุณาติดตั้ง gnome-audio"
-
-#~ msgid "The file %s is not a valid wav file"
-#~ msgstr "แฟ้ม %s ไม่ใช่แฟ้ม wav ที่ใช้ได้"
-
-#~ msgid "Select sound file..."
-#~ msgstr "เลือกแฟ้มเสียง..."
-
-#~ msgid "Sets the default application font"
-#~ msgstr "ตั้งเป็นแบบอักษรโดยปริยายสำหรับโปรแกรมต่างๆ"
-
-#~ msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-#~ msgstr "<span weight=\"bold\" size=\"larger\">เริ่มใช้แบบอักษรใหม่หรือไม่?</span>"
-
-#~ msgid "Do _not apply font"
-#~ msgstr "ไ_ม่ใช้"
-
-#~ msgid ""
-#~ "The theme you have selected suggests a new font. A preview of the font is "
-#~ "shown below."
-#~ msgstr "ชุดตกแต่งที่คุณเลือก แนะนำแบบอักษรใหม่ ตัวอย่างของ แบบอักษรนั้น แสดงอยู่ข้างล่าง"
-
-#~ msgid "_Apply font"
-#~ msgstr "_ตกลงใช้แบบอักษรใหม่"
-
-#~ msgid "Themes"
-#~ msgstr "ชุดตกแต่ง"
-
-#~ msgid "Description"
-#~ msgstr "คำอธิบาย:"
-
-#~ msgid "Control theme"
-#~ msgstr "ชุดรูปแบบการควบคุม"
-
-#~ msgid "Window border theme"
-#~ msgstr "ชุดรูปแบบกรอบหน้าต่าง"
-
-#~ msgid "If set to true, then installed themes will be thumbnailed."
-#~ msgstr "ตั้งแล้วจะเห็นรูปตัวอย่างของชุดตกแต่งที่มี"
-
-#~ msgid "If set to true, then themes will be thumbnailed."
-#~ msgstr "ตั้งแล้วจะเห็นรูปตัวอย่างของชุดตกแต่ง"
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for installed "
-#~ "themes."
-#~ msgstr "ตั้งเป็นคำสั่งที่ใช้สร้างรูปย่อสำหรับชุดตกแต่งที่มี"
-
-#~ msgid "Set this key to the command used to create thumbnails for themes."
-#~ msgstr "ตั้งเป็นคำสั่งที่ใช้สร้างรูปย่อสำหรับชุดตกแต่ง"
-
-#~ msgid "Thumbnail command for installed themes"
-#~ msgstr "คำสั่งสร้างรูปย่อสำหรับชุดตกแต่งที่มี"
-
-#~ msgid "Thumbnail command for themes"
-#~ msgstr "คำสั่งสร้างรูปย่อสำหรับชุดตกแต่ง"
-
-#~ msgid "Whether to thumbnail installed themes"
-#~ msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับชุดตกแต่งที่ติดตั้งไว้หรือไม่"
-
-#~ msgid "Whether to thumbnail themes"
-#~ msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับชุดตกแต่งหรือไม่"
-
-#~ msgid "ABCDEFG"
-#~ msgstr "ABCDEFG วิญญูมุ่งรู้พิฆาตปื้นขี้ฝุ่นเลษฏุ ๑๒๓"
-
-#~ msgid "[FILE]"
-#~ msgstr "[FILE]"
-
-#~ msgid "Apply theme"
-#~ msgstr "เลือกชุดตกแต่ง"
-
-#~ msgid "Sets the default theme"
-#~ msgstr "กำหนดชุดตกแต่งปริยาย"
-
-#~ msgid ""
-#~ "Centered\n"
-#~ "Fill screen\n"
-#~ "Scaled\n"
-#~ "Zoom\n"
-#~ "Tiled"
-#~ msgstr ""
-#~ "วางตรงกลาง\n"
-#~ "ยืดเต็มหน้าจอ\n"
-#~ "ขยายพอดีหน้าจอ\n"
-#~ "ซูมเต็มหน้าจอ\n"
-#~ "เรียงกระเบื้อง"
-
-#~ msgid "Go _to Fonts Folder"
-#~ msgstr "ไ_ปโฟลเดอร์แบบอักษร"
-
-#~ msgid "Just apply settings and quit"
-#~ msgstr "ใช้ค่าที่ตั้งและปิดหน้าต่าง"
-
-#~ msgid "Connecting..."
-#~ msgstr "กำลังเชื่อมต่อ..."
-
-#~ msgid "Keyboard Accessibility Notifications"
-#~ msgstr "การแจ้งเหตุเกี่ยวกับสิ่งอำนวยความสะดวกสำหรับแป้นพิมพ์"
-
-#~ msgid "_Layouts:"
-#~ msgstr "_ผังแป้นพิมพ์:"
-
-#~ msgid "Advanced Configuration"
-#~ msgstr "ค่าตั้งเพิ่มเติม"
-
-#~ msgid "Autostart the preferred AT"
-#~ msgstr "เรียกโปรแกรมอำนวยความสะดวกโดยอัตโนมัติ"
-
-#~ msgid "    "
-#~ msgstr "    "
-
-#~ msgid ""
-#~ "<i>Region and language changes take effect the next time you log in.</i>"
-#~ msgstr "<i>การเปลี่ยนภาษาและภูมิภาคจะมีผลเมื่อคุณเข้าระบบครั้งต่อไป</i>"
-
-#~ msgid "Localization Preferences"
-#~ msgstr "ปรับแต่งภาษาและภูมิภาค"
-
-#~ msgid "Selected languages:"
-#~ msgstr "ภาษาที่เลือก:"
-
-#~ msgid "      "
-#~ msgstr "      "
-
-#~ msgid ""
-#~ "If true, the mime handlers for text/plain and text/* will be kept in sync"
-#~ msgstr "ถ้าเป็นจริง text/plain และ text/* จะเรียกใช้โปรแกรมเดียวกันเสมอ"
-
-#~ msgid "Sync text/plain and text/* handlers"
-#~ msgstr "text/plain และ text/* ใช้โปรแกรมเดียวกัน"
-
-#~ msgid "E-mail's shortcut."
-#~ msgstr "ปุ่มลัดสำหรับอีเมล"
-
-#~ msgid "Home folder"
-#~ msgstr "โฟลเดอร์บ้าน"
-
-#~ msgid "Home folder's shortcut."
-#~ msgstr "ปุ่มลัดสำหรับไปโฟลเดอร์บ้าน"
-
-#~ msgid "Launch calculator"
-#~ msgstr "เรียกใช้เครื่องคิดเลข"
-
-#~ msgid "Launch calculator's shortcut"
-#~ msgstr "ปุ่มลัดสำหรับเรียกใช้เครื่องคิดเลข"
-
-#~ msgid "Launch help browser"
-#~ msgstr "เรียกดูวิธีใช้"
-
-#~ msgid "Launch help browser's shortcut."
-#~ msgstr "ปุ่มลัดสำหรับเรียกดูวิธีใช้"
-
-#~ msgid "Launch web browser"
-#~ msgstr "เรียกใช้เว็บเบราว์เซอร์"
-
-#~ msgid "Launch web browser's shortcut."
-#~ msgstr "ปุ่มลัดสำหรับเรียกใช้เว็บเบราว์เซอร์"
-
-#~ msgid "Lock screen"
-#~ msgstr "ล็อคหน้าจอ"
-
-#~ msgid "Lock screen's shortcut."
-#~ msgstr "ปุ่มลัดสำหรับล็อคหน้าจอ"
-
-#~ msgid "Log out's shortcut."
-#~ msgstr "ปุ่มลัดสำหรับออกจากระบบ"
-
-#~ msgid "Media player key's shortcut."
-#~ msgstr "ปุ่มลัดสำหรับเล่นสื่อ"
