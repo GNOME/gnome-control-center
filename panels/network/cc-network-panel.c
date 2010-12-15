@@ -22,6 +22,8 @@
 
 #include "cc-network-panel.h"
 
+#include "panel-cell-renderer-mode.h"
+#include "panel-cell-renderer-signal.h"
 #include "panel-common.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
@@ -49,6 +51,8 @@ enum {
 enum {
 	PANEL_WIRELESS_COLUMN_ID,
 	PANEL_WIRELESS_COLUMN_TITLE,
+	PANEL_WIRELESS_COLUMN_STRENGTH,
+	PANEL_WIRELESS_COLUMN_MODE,
 	PANEL_WIRELESS_COLUMN_LAST
 };
 
@@ -309,6 +313,8 @@ panel_add_device_to_listview (PanelDeviceItem *item)
 typedef struct {
 	gchar		*access_point;
 	gchar		*active_access_point;
+	guint		 strength;
+	guint		 mode;
 	CcNetworkPanel	*panel;
 } PanelAccessPointItem;
 
@@ -328,7 +334,9 @@ panel_got_proxy_access_point_cb (GObject *source_object, GAsyncResult *res, gpoi
 	GtkWidget *widget;
 	guint i = 0;
 	GVariantIter iter;
+	GVariant *variant_mode = NULL;
 	GVariant *variant_ssid = NULL;
+	GVariant *variant_strength = NULL;
 	PanelAccessPointItem *ap_item = (PanelAccessPointItem *) user_data;
 	CcNetworkPanelPrivate *priv = ap_item->panel->priv;
 
@@ -338,6 +346,14 @@ panel_got_proxy_access_point_cb (GObject *source_object, GAsyncResult *res, gpoi
 		g_error_free (error);
 		goto out;
 	}
+
+	/* get the strength */
+	variant_strength = g_dbus_proxy_get_cached_property (proxy, "Strength");
+	ap_item->strength = g_variant_get_byte (variant_strength);
+
+	/* get the mode */
+	variant_mode = g_dbus_proxy_get_cached_property (proxy, "Mode");
+	ap_item->mode = g_variant_get_uint32 (variant_mode);
 
 	/* get the (non NULL terminated, urgh) SSID */
 	variant_ssid = g_dbus_proxy_get_cached_property (proxy, "Ssid");
@@ -351,7 +367,7 @@ panel_got_proxy_access_point_cb (GObject *source_object, GAsyncResult *res, gpoi
 	ssid = g_new0 (gchar, len + 1);
 	while (g_variant_iter_loop (&iter, "y", &tmp))
 		ssid[i++] = tmp;
-	g_debug ("adding access point %s", ssid);
+	g_debug ("adding access point %s (%i%%) [%i]", ssid, ap_item->strength, ap_item->mode);
 
 	/* add to the model */
 	liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
@@ -361,6 +377,8 @@ panel_got_proxy_access_point_cb (GObject *source_object, GAsyncResult *res, gpoi
 			    &treeiter,
 			    PANEL_WIRELESS_COLUMN_ID, ap_item->access_point,
 			    PANEL_WIRELESS_COLUMN_TITLE, ssid,
+			    PANEL_WIRELESS_COLUMN_STRENGTH, ap_item->strength,
+			    PANEL_WIRELESS_COLUMN_MODE, ap_item->mode,
 			    -1);
 
 	/* is this what we're on already? */
@@ -378,6 +396,10 @@ out:
 	g_free (ssid);
 	if (variant_ssid != NULL)
 		g_variant_unref (variant_ssid);
+	if (variant_strength != NULL)
+		g_variant_unref (variant_strength);
+	if (variant_mode != NULL)
+		g_variant_unref (variant_mode);
 	if (proxy != NULL)
 		g_object_unref (proxy);
 	return;
@@ -941,9 +963,11 @@ cc_network_panel_init (CcNetworkPanel *panel)
 	GError *error;
 	gint value;
 	GSettings *settings_tmp;
+	GtkAdjustment *adjustment;
+	GtkCellRenderer *renderer;
+	GtkComboBox *combobox;
 	GtkTreePath *path;
 	GtkTreeSelection *selection;
-	GtkAdjustment *adjustment;
 	GtkWidget *widget;
 
 	panel->priv = NETWORK_PANEL_PRIVATE (panel);
@@ -1065,6 +1089,26 @@ cc_network_panel_init (CcNetworkPanel *panel)
 	path = gtk_tree_path_new_from_string ("0");
 	gtk_tree_selection_select_path (selection, path);
 	gtk_tree_path_free (path);
+
+	/* setup wireless combobox model */
+	combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
+							  "combobox_network_name"));
+
+	renderer = panel_cell_renderer_mode_new ();
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
+				    renderer,
+				    FALSE);
+	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+					"mode", PANEL_WIRELESS_COLUMN_MODE,
+					NULL);
+
+	renderer = panel_cell_renderer_signal_new ();
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
+				    renderer,
+				    FALSE);
+	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+					"signal", PANEL_WIRELESS_COLUMN_STRENGTH,
+					NULL);
 
 	/* disable for now */
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,

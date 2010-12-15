@@ -8,6 +8,10 @@
       <column type="gchararray"/>
       <!-- column-name title -->
       <column type="gchararray"/>
+      <!-- column-name strength -->
+      <column type="guint"/>
+      <!-- column-name mode -->
+      <column type="guint"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_devices">
@@ -532,7 +536,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBoxText" id="combobox_network_name">
+                                      <object class="GtkComboBox" id="combobox_network_name">
                                         <property name="visible">True</property>
                                         <property name="has-entry">True</property>
                                         <property name="model">liststore_wireless_network</property>
