@@ -124,7 +124,7 @@ void gnome_wp_item_update (GnomeWPItem *item) {
   settings = g_settings_new (WP_PATH_ID);
 
   item->options = g_settings_get_enum (settings, WP_OPTIONS_KEY);
-  item->shade_type = g_settings_get_enum (settings,WP_SHADING_KEY);
+  item->shade_type = g_settings_get_enum (settings, WP_SHADING_KEY);
 
   s = g_settings_get_string (settings, WP_PCOLOR_KEY);
   if (s != NULL) {
