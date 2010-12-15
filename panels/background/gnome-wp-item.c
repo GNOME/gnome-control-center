@@ -271,7 +271,7 @@ void gnome_wp_item_update_size (GnomeWPItem * item,
   item->size = NULL;
 
   if (!strcmp (item->filename, "(none)")) {
-    item->size = g_strdup (item->name);
+    item->size = g_strdup ("");
   } else {
     if (gnome_bg_has_multiple_sizes (item->bg) || gnome_bg_changes_with_time (item->bg))
       item->size = g_strdup (_("multiple sizes"));
