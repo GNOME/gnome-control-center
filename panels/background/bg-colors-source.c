@@ -37,63 +37,47 @@ bg_colors_source_class_init (BgColorsSourceClass *klass)
 {
 }
 
-static gchar *colors[] =
-{
-  "#c4a000",
-  "#ce5c00",
-  "#8f5902",
-  "#4e9a06",
-  "#204a87",
-  "#5c3566",
-  "#a40000",
-  "#babdb6",
-  "#2e3436",
-  "#000000",
-  NULL
+struct {
+	const char *name;
+	GDesktopBackgroundShading type;
+} items[] = {
+	{ N_("Horizontal Gradient"), G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL },
+	{ N_("Vertical Gradient"), G_DESKTOP_BACKGROUND_SHADING_VERTICAL },
+	{ N_("Solid Color"), G_DESKTOP_BACKGROUND_SHADING_SOLID },
 };
 
-static gchar *color_names[] =
-{
-  N_("Butter"),
-  N_("Orange"),
-  N_("Chocolate"),
-  N_("Chameleon"),
-  N_("Blue"),
-  N_("Plum"),
-  N_("Red"),
-  N_("Aluminium"),
-  N_("Gray"),
-  N_("Black"),
-  NULL
-};
+#define PCOLOR "#023c88"
+#define SCOLOR "#5789ca"
 
 static void
 bg_colors_source_init (BgColorsSource *self)
 {
   GnomeDesktopThumbnailFactory *thumb_factory;
-  gchar **c, **n;
+  guint i;
   GtkListStore *store;
+  GdkColor pcolor, scolor;
 
   store = bg_source_get_liststore (BG_SOURCE (self));
 
   thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
-  for (c = colors, n = color_names; *c; c++, n++)
+  gdk_color_parse (PCOLOR, &pcolor);
+  gdk_color_parse (SCOLOR, &scolor);
+
+  for (i = 0; i < G_N_ELEMENTS (items); i++)
     {
       GnomeWPItem *item;
       GIcon *pixbuf;
-      GdkColor color;
 
       item = g_new0 (GnomeWPItem, 1);
 
       item->filename = g_strdup ("(none)");
-      item->name = g_strdup (_(*n));
+      item->name = g_strdup (_(items[i].name));
 
-      gdk_color_parse (*c, &color);
-      item->pcolor = gdk_color_copy (&color);
-      item->scolor = gdk_color_copy (&color);
+      item->pcolor = gdk_color_copy (&pcolor);
+      item->scolor = gdk_color_copy (&scolor);
 
-      item->shade_type = G_DESKTOP_BACKGROUND_SHADING_SOLID;
+      item->shade_type = items[i].type;
 
       gnome_wp_item_ensure_gnome_bg (item);
 

@@ -67,6 +67,7 @@ struct _CcBackgroundPanelPrivate
 
   GnomeWPItem *current_background;
   gboolean current_source_readonly;
+  gint current_source;
 
   GCancellable *copy_cancellable;
 
@@ -224,6 +225,37 @@ cc_background_panel_class_finalize (CcBackgroundPanelClass *klass)
 }
 
 static void
+source_update_edit_box (CcBackgroundPanelPrivate *priv)
+{
+  if (priv->current_source == SOURCE_COLORS)
+    {
+      gtk_widget_hide (WID ("style-combobox"));
+      gtk_widget_show (WID ("style-pcolor"));
+
+      if (priv->current_background &&
+	  priv->current_background->shade_type == G_DESKTOP_BACKGROUND_SHADING_SOLID)
+        gtk_widget_hide (WID ("style-scolor"));
+      else
+        gtk_widget_show (WID ("style-scolor"));
+    }
+  else
+    {
+      if (!priv->current_source_readonly)
+        {
+          gtk_widget_show (WID ("style-pcolor"));
+          gtk_widget_hide (WID ("style-scolor"));
+          gtk_widget_show (WID ("style-combobox"));
+	}
+      else
+        {
+          gtk_widget_hide (WID ("style-pcolor"));
+          gtk_widget_hide (WID ("style-scolor"));
+          gtk_widget_hide (WID ("style-combobox"));
+	}
+    }
+}
+
+static void
 source_changed_cb (GtkComboBox              *combo,
                    CcBackgroundPanelPrivate *priv)
 {
@@ -340,11 +372,7 @@ update_preview (CcBackgroundPanelPrivate *priv,
       gnome_wp_item_update_size (priv->current_background, priv->thumb_factory);
     }
 
-
-  if (!priv->current_source_readonly)
-    gtk_widget_show (WID ("edit-hbox"));
-  else
-    gtk_widget_hide (WID ("edit-hbox"));
+  source_update_edit_box (priv);
 
   changes_with_time = FALSE;
 
@@ -356,8 +384,10 @@ update_preview (CcBackgroundPanelPrivate *priv,
 
       gtk_label_set_text (GTK_LABEL (WID ("size_label")), priv->current_background->size);
 
-      gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-color")),
+      gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-pcolor")),
                                   priv->current_background->pcolor);
+      gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-scolor")),
+                                  priv->current_background->scolor);
 
       select_style (GTK_COMBO_BOX (WID ("style-combobox")),
                     priv->current_background->options);
@@ -395,8 +425,9 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (WID ("sources-combobox")));
   gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("sources-combobox")),
                                  &iter);
-  gtk_tree_model_get (model, &iter, COL_SOURCE_READONLY, &priv->current_source_readonly, -1);
-
+  gtk_tree_model_get (model, &iter,
+  		      COL_SOURCE_READONLY, &priv->current_source_readonly,
+  		      COL_SOURCE_TYPE, &priv->current_source, -1);
 
   model = gtk_icon_view_get_model (icon_view);
 
@@ -495,10 +526,23 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   g_settings_set_enum (priv->settings, WP_SHADING_KEY, item->shade_type);
 
-  pcolor = gdk_color_to_string (item->pcolor);
-  scolor = gdk_color_to_string (item->scolor);
-  g_settings_set_string (priv->settings, WP_PCOLOR_KEY, pcolor);
-  g_settings_set_string (priv->settings, WP_SCOLOR_KEY, scolor);
+  /* When changing for another colour, don't overwrite what's
+   * in GSettings, but read from it instead */
+  if (priv->current_source == SOURCE_COLORS)
+    {
+      pcolor = g_settings_get_string (priv->settings, WP_PCOLOR_KEY);
+      scolor = g_settings_get_string (priv->settings, WP_SCOLOR_KEY);
+      gdk_color_parse (pcolor, item->pcolor);
+      gdk_color_parse (scolor, item->scolor);
+    }
+  else
+    {
+      pcolor = gdk_color_to_string (item->pcolor);
+      scolor = gdk_color_to_string (item->scolor);
+      g_settings_set_string (priv->settings, WP_PCOLOR_KEY, pcolor);
+      g_settings_set_string (priv->settings, WP_SCOLOR_KEY, scolor);
+    }
+
   g_free (pcolor);
   g_free (scolor);
 
@@ -616,16 +660,26 @@ color_changed_cb (GtkColorButton    *button,
   CcBackgroundPanelPrivate *priv = panel->priv;
   GdkColor color;
   gchar *value;
+  gboolean is_pcolor = FALSE;
 
   gtk_color_button_get_color (button, &color);
+  if (WID ("style-pcolor") == GTK_WIDGET (button))
+    is_pcolor = TRUE;
 
   if (priv->current_background)
-    *priv->current_background->pcolor = color;
+    {
+      if (is_pcolor)
+        *priv->current_background->pcolor = color;
+      else
+        *priv->current_background->scolor = color;
+    }
 
   value = gdk_color_to_string (&color);
 
-  g_settings_set_string (priv->settings, WP_PCOLOR_KEY, value);
-  g_settings_set_string (priv->settings, WP_SCOLOR_KEY, value);
+  if (is_pcolor)
+    g_settings_set_string (priv->settings, WP_PCOLOR_KEY, value);
+  else
+    g_settings_set_string (priv->settings, WP_SCOLOR_KEY, value);
 
   g_free (value);
 
@@ -681,9 +735,9 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   priv->colors_source = bg_colors_source_new ();
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
-                                     COL_SOURCE_NAME, _("Colors"),
+                                     COL_SOURCE_NAME, _("Colors & Gradients"),
                                      COL_SOURCE_TYPE, SOURCE_COLORS,
-                                     COL_SOURCE_READONLY, TRUE,
+                                     COL_SOURCE_READONLY, FALSE,
                                      COL_SOURCE, priv->colors_source,
                                      -1);
 
@@ -732,7 +786,9 @@ cc_background_panel_init (CcBackgroundPanel *self)
   g_signal_connect (WID ("style-combobox"), "changed",
                     G_CALLBACK (style_changed_cb), self);
 
-  g_signal_connect (WID ("style-color"), "color-set",
+  g_signal_connect (WID ("style-pcolor"), "color-set",
+                    G_CALLBACK (color_changed_cb), self);
+  g_signal_connect (WID ("style-scolor"), "color-set",
                     G_CALLBACK (color_changed_cb), self);
 
   priv->copy_cancellable = g_cancellable_new ();
@@ -754,6 +810,8 @@ cc_background_panel_init (CcBackgroundPanel *self)
   gnome_wp_item_update (priv->current_background);
   gnome_wp_item_ensure_gnome_bg (priv->current_background);
   gnome_wp_item_update_size (priv->current_background, priv->thumb_factory);
+
+  /* FIXME hide the edit box as appropriate for the current background */
 
   update_preview (priv, NULL, TRUE);
 }
