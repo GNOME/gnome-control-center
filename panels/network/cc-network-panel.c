@@ -843,6 +843,35 @@ panel_populate_wireless_device (CcNetworkPanel *panel, PanelDeviceItem *item)
 }
 
 /**
+ * panel_populate_mobilebb_device:
+ **/
+static void
+panel_populate_mobilebb_device (CcNetworkPanel *panel, PanelDeviceItem *item)
+{
+	GtkWidget *widget;
+	GVariant *ip4;
+
+	/* set IP */
+	ip4 = g_dbus_proxy_get_cached_property (item->proxy, "Ip4Address");
+	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+						     "label_wireless_ip"));
+	panel_set_label_for_variant_ipv4 (widget, ip4);
+
+	/* hide until we get data from ModemManager */
+	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+						     "hbox_mobilebb_provider"));
+	gtk_widget_set_visible (widget, FALSE);
+	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+						     "hbox_mobilebb_speed"));
+	gtk_widget_set_visible (widget, FALSE);
+	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+						     "hbox_mobilebb_mac"));
+	gtk_widget_set_visible (widget, FALSE);
+
+	g_variant_unref (ip4);
+}
+
+/**
  * panel_devices_treeview_clicked_cb:
  **/
 static void
@@ -921,6 +950,10 @@ panel_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *
 	} else if (item->type == NM_DEVICE_TYPE_WIFI) {
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
 		panel_populate_wireless_device (panel, item);
+	} else if (item->type == NM_DEVICE_TYPE_GSM ||
+	           item->type == NM_DEVICE_TYPE_CDMA) {
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
+		panel_populate_mobilebb_device (panel, item);
 	}
 
 out:
