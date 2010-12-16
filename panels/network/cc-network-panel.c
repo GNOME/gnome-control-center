@@ -52,6 +52,7 @@ enum {
 enum {
 	PANEL_WIRELESS_COLUMN_ID,
 	PANEL_WIRELESS_COLUMN_TITLE,
+	PANEL_WIRELESS_COLUMN_SORT,
 	PANEL_WIRELESS_COLUMN_STRENGTH,
 	PANEL_WIRELESS_COLUMN_MODE,
 	PANEL_WIRELESS_COLUMN_LAST
@@ -312,7 +313,7 @@ panel_add_device_to_listview (PanelDeviceItem *item)
 			    PANEL_DEVICES_COLUMN_SORT, panel_device_type_to_sortable_string (item->type),
 			    PANEL_DEVICES_COLUMN_TITLE, title,
 			    PANEL_DEVICES_COLUMN_ID, item->device_id,
-			    PANEL_DEVICES_COLUMN_TOOLTIP, "tooltip - FIXME!",
+			    PANEL_DEVICES_COLUMN_TOOLTIP, NULL,
 			    PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, item,
 			    -1);
 	g_free (title);
@@ -385,6 +386,7 @@ panel_got_proxy_access_point_cb (GObject *source_object, GAsyncResult *res, gpoi
 			    &treeiter,
 			    PANEL_WIRELESS_COLUMN_ID, ap_item->access_point,
 			    PANEL_WIRELESS_COLUMN_TITLE, ssid,
+			    PANEL_WIRELESS_COLUMN_SORT, ssid,
 			    PANEL_WIRELESS_COLUMN_STRENGTH, ap_item->strength,
 			    PANEL_WIRELESS_COLUMN_MODE, ap_item->mode,
 			    -1);
@@ -1135,6 +1137,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
 	GtkComboBox *combobox;
 	GtkTreePath *path;
 	GtkTreeSelection *selection;
+	GtkTreeSortable *sortable;
 	GtkWidget *widget;
 
 	panel->priv = NETWORK_PANEL_PRIVATE (panel);
@@ -1268,6 +1271,13 @@ cc_network_panel_init (CcNetworkPanel *panel)
 	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
 					"mode", PANEL_WIRELESS_COLUMN_MODE,
 					NULL);
+
+	/* sort networks in drop down */
+	sortable = GTK_TREE_SORTABLE (gtk_builder_get_object (panel->priv->builder,
+							      "liststore_wireless_network"));
+	gtk_tree_sortable_set_sort_column_id (sortable,
+					      PANEL_WIRELESS_COLUMN_SORT,
+					      GTK_SORT_ASCENDING);
 
 	renderer = panel_cell_renderer_signal_new ();
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
