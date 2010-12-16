@@ -221,7 +221,6 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 static void
 cc_background_panel_class_finalize (CcBackgroundPanelClass *klass)
 {
-
 }
 
 static void
@@ -252,6 +251,27 @@ source_update_edit_box (CcBackgroundPanelPrivate *priv)
           gtk_widget_hide (WID ("style-scolor"));
           gtk_widget_hide (WID ("style-combobox"));
 	}
+    }
+}
+
+static void
+setup_edit_box (CcBackgroundPanelPrivate *priv)
+{
+  g_assert (priv->current_background);
+
+  if (g_str_equal (priv->current_background->filename, "(none)"))
+    {
+      gtk_widget_hide (WID ("style-combobox"));
+      gtk_widget_show (WID ("style-pcolor"));
+
+      if (priv->current_background->shade_type == G_DESKTOP_BACKGROUND_SHADING_SOLID)
+        gtk_widget_hide (WID ("style-scolor"));
+      else
+        gtk_widget_show (WID ("style-scolor"));
+    }
+  else
+    {
+      /* FIXME other cases */
     }
 }
 
@@ -814,9 +834,10 @@ cc_background_panel_init (CcBackgroundPanel *self)
   gnome_wp_item_ensure_gnome_bg (priv->current_background);
   gnome_wp_item_update_size (priv->current_background, priv->thumb_factory);
 
-  /* FIXME hide the edit box as appropriate for the current background */
-
   update_preview (priv, NULL, TRUE);
+
+  /* Setup the edit box with our current settings */
+  setup_edit_box (priv);
 }
 
 void
