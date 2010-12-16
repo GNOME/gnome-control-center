@@ -346,8 +346,6 @@ panels/media/Makefile
 panels/media/gnome-media-panel.desktop.in
 panels/mouse/Makefile
 panels/mouse/gnome-mouse-panel.desktop.in
-panels/proxy/Makefile
-panels/proxy/gnome-proxy-panel.desktop.in
 panels/sound/Makefile
 panels/sound/data/Makefile
 panels/sound/data/gnome-sound-panel.desktop.in

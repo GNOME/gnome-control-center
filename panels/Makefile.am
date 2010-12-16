@@ -6,7 +6,6 @@ SUBDIRS= \
 	media \
 	mouse \
 	region \
-	proxy \
 	network \
 	info \
 	sound \
