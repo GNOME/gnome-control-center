@@ -368,6 +368,9 @@ update_preview (CcBackgroundPanelPrivate *priv,
       priv->current_background->options = item->options;
       priv->current_background->shade_type = item->shade_type;
 
+      priv->current_background->height = item->height;
+      priv->current_background->width = item->width;
+
       gnome_wp_item_ensure_gnome_bg (priv->current_background);
       gnome_wp_item_update_size (priv->current_background, priv->thumb_factory);
     }
