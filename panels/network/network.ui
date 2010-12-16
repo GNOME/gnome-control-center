@@ -240,7 +240,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox19">
+                                  <object class="GtkHBox" id="hbox_wired_speed">
                                     <property name="visible">True</property>
                                     <property name="spacing">9</property>
                                     <child>
@@ -285,7 +285,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox23">
+                                  <object class="GtkHBox" id="hbox_wired_ip4">
                                     <property name="visible">True</property>
                                     <property name="spacing">9</property>
                                     <child>
@@ -294,7 +294,7 @@
                                         <child>
                                           <object class="GtkLabel" id="label25">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">IP Address:</property>
+                                            <property name="label" translatable="yes">IPv4 Address:</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -311,7 +311,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label_wired_ip">
+                                      <object class="GtkLabel" id="label_wired_ip4">
                                         <property name="visible">True</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="selectable">True</property>
@@ -327,6 +327,51 @@
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
                                     <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox_wired_ip6">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox924">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label925">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">IPv6 Address:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wired_ip6">
+                                        <property name="visible">True</property>
+                                        <property name="label">::1</property>
+                                        <property name="selectable">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">3</property>
                                   </packing>
                                 </child>
                               </object>
@@ -481,7 +526,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox13">
+                                  <object class="GtkHBox" id="hbox_wireless_ip4">
                                     <property name="visible">True</property>
                                     <property name="spacing">9</property>
                                     <child>
@@ -490,7 +535,7 @@
                                         <child>
                                           <object class="GtkLabel" id="label13">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">IP Address:</property>
+                                            <property name="label" translatable="yes">IPv4 Address:</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -507,7 +552,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label_wireless_ip">
+                                      <object class="GtkLabel" id="label_wireless_ip4">
                                         <property name="visible">True</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="selectable">True</property>
@@ -523,6 +568,51 @@
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
                                     <property name="position">3</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHBox" id="hbox_wireless_ip6">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">9</property>
+                                    <child>
+                                      <object class="GtkHBox" id="hbox914">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="label913">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">IPv6 Address:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack_type">end</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label_wireless_ip6">
+                                        <property name="visible">True</property>
+                                        <property name="label">::1</property>
+                                        <property name="selectable">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">4</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -567,7 +657,7 @@
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
-                                    <property name="position">4</property>
+                                    <property name="position">5</property>
                                   </packing>
                                 </child>
                               </object>
@@ -1468,6 +1558,7 @@
       <widget name="hbox41"/>
       <widget name="hbox39"/>
       <widget name="hbox24"/>
+      <widget name="hbox924"/>
       <widget name="hbox20"/>
       <widget name="hbox18"/>
       <widget name="hbox16"/>
@@ -1475,6 +1566,7 @@
       <widget name="hbox9"/>
       <widget name="hbox10"/>
       <widget name="hbox14"/>
+      <widget name="hbox914"/>
       <widget name="hbox22"/>
       <widget name="hbox26"/>
       <widget name="hbox28"/>

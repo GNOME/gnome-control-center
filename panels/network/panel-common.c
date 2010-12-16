@@ -205,3 +205,61 @@ panel_device_state_to_localized_string (guint type)
 	return value;
 }
 
+/**
+ * panel_ipv4_to_string:
+ **/
+gchar *
+panel_ipv4_to_string (GVariant *variant)
+{
+	gchar *ip_str;
+	guint32 ip;
+
+	g_variant_get (variant, "u", &ip);
+	ip_str = g_strdup_printf ("%i.%i.%i.%i",
+				    ip & 0x000000ff,
+				   (ip & 0x0000ff00) / 0x100,
+				   (ip & 0x00ff0000) / 0x10000,
+				   (ip & 0xff000000) / 0x1000000);
+	return ip_str;
+}
+
+/**
+ * panel_ipv6_to_string:
+ *
+ * Formats an 'ay' variant into a IPv6 address you recognise, e.g.
+ * "fe80::21c:bfff:fe81:e8de"
+ **/
+gchar *
+panel_ipv6_to_string (GVariant *variant)
+{
+	gchar tmp1;
+	gchar tmp2;
+	guint i = 0;
+	gboolean ret = FALSE;
+	GString *string;
+
+	if (g_variant_n_children (variant) != 16)
+		return NULL;
+
+	string = g_string_new ("");
+	for (i=0; i<16; i+=2) {
+		g_variant_get_child (variant, i+0, "y", &tmp1);
+		g_variant_get_child (variant, i+1, "y", &tmp2);
+		if (tmp1 == 0 && tmp2 == 0) {
+			if (!ret) {
+				g_string_append (string, ":");
+				ret = TRUE;
+			}
+		} else {
+			g_string_append_printf (string,
+						"%x%x%x%x:",
+						(tmp1 & 0xf0) / 16,
+						 tmp1 & 0x0f,
+						(tmp2 & 0xf0) / 16,
+						 tmp2 & 0x0f);
+			ret = FALSE;
+		}
+	}
+	g_string_set_size (string, string->len - 1);
+	return g_string_free (string, FALSE);
+}

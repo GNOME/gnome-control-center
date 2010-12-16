@@ -60,6 +60,8 @@ const gchar	*panel_device_type_to_localized_string		(guint type);
 const gchar	*panel_device_type_to_sortable_string		(guint type);
 const gchar	*panel_ap_mode_to_localized_string		(guint mode);
 const gchar	*panel_device_state_to_localized_string		(guint type);
+gchar		*panel_ipv4_to_string				(GVariant *variant);
+gchar		*panel_ipv6_to_string				(GVariant *variant);
 
 G_END_DECLS
 

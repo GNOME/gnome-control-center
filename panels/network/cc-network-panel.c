@@ -46,11 +46,16 @@ typedef struct {
 	CcNetworkPanel	*panel;
 	gchar		*active_access_point;
 	gchar		*device_id;
+	gchar		*ip4_config;
+	gchar		*ip6_config;
 	gchar		*modem_imei;
 	gchar		*operator_name;
 	gchar		*udi;
 	GDBusProxy	*proxy;
 	GDBusProxy	*proxy_additional;
+	GDBusProxy	*proxy_ip4;
+	GDBusProxy	*proxy_ip6;
+	guint		 device_add_refcount;
 	guint		 type;
 } PanelDeviceItem;
 
@@ -268,10 +273,16 @@ panel_free_device_item (PanelDeviceItem *item)
 	g_object_unref (item->proxy);
 	if (item->proxy_additional != NULL)
 		g_object_unref (item->proxy_additional);
+	if (item->proxy_ip4 != NULL)
+		g_object_unref (item->proxy_ip4);
+	if (item->proxy_ip6 != NULL)
+		g_object_unref (item->proxy_ip6);
 	g_free (item->device_id);
 	g_free (item->active_access_point);
 	g_free (item->udi);
 	g_free (item->operator_name);
+	g_free (item->ip4_config);
+	g_free (item->ip6_config);
 	g_free (item->modem_imei);
 	g_free (item);
 }
@@ -500,7 +511,9 @@ panel_got_device_proxy_additional_cb (GObject *source_object, GAsyncResult *res,
 				   item);
 	}
 
-	panel_add_device_to_listview (item);
+	/* add device if there are no more pending actions */
+	if (--item->device_add_refcount == 0)
+		panel_add_device_to_listview (item);
 out:
 	if (result != NULL)
 		g_variant_unref (result);
@@ -540,7 +553,9 @@ panel_get_registration_info_cb (GObject *source_object, GAsyncResult *res, gpoin
  * panel_got_device_proxy_modem_manager_gsm_network_cb:
  **/
 static void
-panel_got_device_proxy_modem_manager_gsm_network_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+panel_got_device_proxy_modem_manager_gsm_network_cb (GObject *source_object,
+						     GAsyncResult *res,
+						     gpointer user_data)
 {
 	GError *error = NULL;
 	GVariant *result = NULL;
@@ -566,7 +581,9 @@ panel_got_device_proxy_modem_manager_gsm_network_cb (GObject *source_object, GAs
 			   panel_get_registration_info_cb,
 			   item);
 
-	panel_add_device_to_listview (item);
+	/* add device if there are no more pending actions */
+	if (--item->device_add_refcount == 0)
+		panel_add_device_to_listview (item);
 out:
 	if (result != NULL)
 		g_variant_unref (result);
@@ -577,7 +594,9 @@ out:
  * panel_got_device_proxy_modem_manager_cb:
  **/
 static void
-panel_got_device_proxy_modem_manager_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+panel_got_device_proxy_modem_manager_cb (GObject *source_object,
+					 GAsyncResult *res,
+					 gpointer user_data)
 {
 	GError *error = NULL;
 	GVariant *result = NULL;
@@ -593,6 +612,10 @@ panel_got_device_proxy_modem_manager_cb (GObject *source_object, GAsyncResult *r
 	/* get the IMEI */
 	result = g_dbus_proxy_get_cached_property (item->proxy_additional, "EquipmentIdentifier");
 	item->modem_imei = g_variant_dup_string (result, NULL);
+
+	/* add device if there are no more pending actions */
+	if (--item->device_add_refcount == 0)
+		panel_add_device_to_listview (item);
 out:
 	if (result != NULL)
 		g_variant_unref (result);
@@ -614,16 +637,90 @@ panel_device_properties_changed_cb (GDBusProxy *proxy,
 	/* only refresh the selected device */
 	if (g_strcmp0 (priv->current_device, item->device_id) == 0)
 		panel_device_refresh_item_ui (item);
-//xxx
+}
+
+/**
+ * panel_got_device_proxy_ip4_cb:
+ **/
+static void
+panel_got_device_proxy_ip4_cb (GObject *source_object,
+			       GAsyncResult *res,
+			       gpointer user_data)
+{
+	GError *error = NULL;
+	GVariant *result = NULL;
+	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
+
+	item->proxy_ip4 = g_dbus_proxy_new_for_bus_finish (res, &error);
+	if (item->proxy_ip4 == NULL) {
+		g_printerr ("Error creating ip4 proxy: %s\n", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* get the Address */
+	result = g_dbus_proxy_get_cached_property (item->proxy_ip4, "Addresses");
+	//Addresses = array of (array of uint32)
+	//Routes =  array of (array of uint32)
+	//Domains =  array of string
+	//Nameservers = array of uint32
+	//WinsServers = array of uint32
+
+	/* add device if there are no more pending actions */
+	if (--item->device_add_refcount == 0)
+		panel_add_device_to_listview (item);
+out:
+	if (result != NULL)
+		g_variant_unref (result);
+	return;
+}
+
+/**
+ * panel_got_device_proxy_ip6_cb:
+ **/
+static void
+panel_got_device_proxy_ip6_cb (GObject *source_object,
+			       GAsyncResult *res,
+			       gpointer user_data)
+{
+	GError *error = NULL;
+	GVariant *result = NULL;
+	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
+
+	item->proxy_ip6 = g_dbus_proxy_new_for_bus_finish (res, &error);
+	if (item->proxy_ip6 == NULL) {
+		g_printerr ("Error creating ip6 proxy: %s\n", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* get the Address */
+	result = g_dbus_proxy_get_cached_property (item->proxy_ip6, "Addresses");
+	//Addresses = array of (struct of (array of (byte), uint32, array of (byte)))
+	//Routes = array of (struct of (array of (byte), uint32, array of (byte)))
+	//Nameservers = array of (array of byte)
+	//Domains = array of string
+
+	/* add device if there are no more pending actions */
+	if (--item->device_add_refcount == 0)
+		panel_add_device_to_listview (item);
+out:
+	if (result != NULL)
+		g_variant_unref (result);
+	return;
 }
 
 /**
  * panel_got_device_proxy_cb:
  **/
 static void
-panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+panel_got_device_proxy_cb (GObject *source_object,
+			   GAsyncResult *res,
+			   gpointer user_data)
 {
 	GError *error = NULL;
+	GVariant *variant_ip4 = NULL;
+	GVariant *variant_ip6 = NULL;
 	GVariant *variant_type = NULL;
 	GVariant *variant_udi = NULL;
 	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
@@ -639,10 +736,43 @@ panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer u
 	variant_udi = g_dbus_proxy_get_cached_property (item->proxy, "Udi");
 	g_variant_get (variant_udi, "s", &item->udi);
 
+	/* get the IP object paths */
+	variant_ip4 = g_dbus_proxy_get_cached_property (item->proxy, "Ip4Config");
+	g_variant_get (variant_ip4, "o", &item->ip4_config);
+	variant_ip6 = g_dbus_proxy_get_cached_property (item->proxy, "Ip6Config");
+	g_variant_get (variant_ip6, "o", &item->ip6_config);
+
+	/* get the IP information */
+	if (g_strcmp0 (item->ip4_config, "/") != 0) {
+		item->device_add_refcount++;
+		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+					  G_DBUS_PROXY_FLAGS_NONE,
+					  NULL,
+					  "org.freedesktop.NetworkManager",
+					  item->ip4_config,
+					  "org.freedesktop.NetworkManager.IP4Config",
+					  item->panel->priv->cancellable,
+					  panel_got_device_proxy_ip4_cb,
+					  item);
+	}
+	if (g_strcmp0 (item->ip6_config, "/") != 0) {
+		item->device_add_refcount++;
+		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+					  G_DBUS_PROXY_FLAGS_NONE,
+					  NULL,
+					  "org.freedesktop.NetworkManager",
+					  item->ip6_config,
+					  "org.freedesktop.NetworkManager.IP6Config",
+					  item->panel->priv->cancellable,
+					  panel_got_device_proxy_ip6_cb,
+					  item);
+	}
+
 	/* get the additional interface for this device type */
 	variant_type = g_dbus_proxy_get_cached_property (item->proxy, "DeviceType");
 	g_variant_get (variant_type, "u", &item->type);
 	if (item->type == NM_DEVICE_TYPE_ETHERNET) {
+		item->device_add_refcount++;
 		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
 					  G_DBUS_PROXY_FLAGS_NONE,
 					  NULL,
@@ -653,6 +783,7 @@ panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer u
 					  panel_got_device_proxy_additional_cb,
 					  item);
 	} else if (item->type == NM_DEVICE_TYPE_WIFI) {
+		item->device_add_refcount++;
 		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
 					  G_DBUS_PROXY_FLAGS_NONE,
 					  NULL,
@@ -664,6 +795,7 @@ panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer u
 					  item);
 	} else if (item->type == NM_DEVICE_TYPE_GSM ||
 		   item->type == NM_DEVICE_TYPE_CDMA) {
+		item->device_add_refcount++;
 		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
 					  G_DBUS_PROXY_FLAGS_NONE,
 					  NULL,
@@ -673,6 +805,7 @@ panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer u
 					  item->panel->priv->cancellable,
 					  panel_got_device_proxy_modem_manager_cb,
 					  item);
+		item->device_add_refcount++;
 		g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
 					  G_DBUS_PROXY_FLAGS_NONE,
 					  NULL,
@@ -682,15 +815,21 @@ panel_got_device_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer u
 					  item->panel->priv->cancellable,
 					  panel_got_device_proxy_modem_manager_gsm_network_cb,
 					  item);
-	} else {
-		panel_add_device_to_listview (item);
 	}
+
+	/* add device if there are no more pending actions */
+	if (--item->device_add_refcount == 0)
+		panel_add_device_to_listview (item);
 
 	/* we want to update the UI */
 	g_signal_connect (item->proxy, "g-properties-changed",
 			  G_CALLBACK (panel_device_properties_changed_cb),
 			  item);
 out:
+	if (variant_ip4 != NULL)
+		g_variant_unref (variant_ip4);
+	if (variant_ip6 != NULL)
+		g_variant_unref (variant_ip6);
 	if (variant_udi != NULL)
 		g_variant_unref (variant_udi);
 	if (variant_type != NULL)
@@ -715,6 +854,7 @@ panel_add_device (CcNetworkPanel *panel, const gchar *device_id)
 	g_ptr_array_add (panel->priv->devices, item);
 
 	/* get initial device state */
+	item->device_add_refcount++;
 	g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
 				  G_DBUS_PROXY_FLAGS_NONE,
 				  NULL,
@@ -975,16 +1115,123 @@ static void
 panel_set_label_for_variant_ipv4 (GtkWidget *widget, GVariant *variant)
 {
 	gchar *ip_str;
-	guint32 ip;
-
-	g_variant_get (variant, "u", &ip);
-	ip_str = g_strdup_printf ("%i.%i.%i.%i",
-				    ip & 0x000000ff,
-				   (ip & 0x0000ff00) / 0x100,
-				   (ip & 0x00ff0000) / 0x10000,
-				   (ip & 0xff000000) / 0x1000000);
+	ip_str = panel_ipv4_to_string (variant);
 	gtk_label_set_label (GTK_LABEL (widget), ip_str);
 	g_free (ip_str);
+}
+
+/**
+ * panel_set_label_for_variant_ipv4_array:
+ *
+ * This is some crazy shit. NM sends us the following data type:
+ * "array of [array of [uint32]]"
+ **/
+static void
+panel_set_label_for_variant_ipv4_array (GtkWidget *widget, GVariant *variant)
+{
+	gchar *tmp;
+	gsize len;
+	GString *string;
+	guint i;
+	GVariantIter iter;
+	GVariant *outer;
+	GVariant *value;
+
+	string = g_string_new ("");
+
+	/* get an iter of the outer array */
+	len = g_variant_iter_init (&iter, variant);
+	if (len != 1) {
+		g_warning ("invalid ipv4 address?!");
+		goto out;
+	}
+
+	/* unwrap the outer array */
+	outer = g_variant_iter_next_value (&iter);
+	while (outer != NULL) {
+
+		/* unwrap the inner array */
+		len = g_variant_n_children (outer);
+		if (len == 0) {
+			g_warning ("invalid ipv4 address on inner?!");
+			goto out;
+		}
+		for (i=0; i<len; i++) {
+			value = g_variant_get_child_value (outer, i);
+			tmp = panel_ipv4_to_string (value);
+
+			/* ignore invalid entries: TODO why? */
+			if (g_str_has_suffix (tmp, ".0")) {
+				g_debug ("ignoring IP %s", tmp);
+			} else {
+				g_debug ("got IP %s", tmp);
+				g_string_append_printf (string,
+							"%s, ",
+							tmp);
+			}
+			g_free (tmp);
+			g_variant_unref (value);
+		}
+		outer = g_variant_iter_next_value (&iter);
+	}
+
+	/* remove trailing space comma */
+	if (string->len > 2)
+		g_string_set_size (string, string->len - 2);
+
+	/* set label */
+	gtk_label_set_label (GTK_LABEL (widget), string->str);
+out:
+	g_string_free (string, TRUE);
+}
+
+/**
+ * panel_set_label_for_variant_ipv4_array:
+ *
+ * This is some crazy shit. NM sends us the following data type:
+ * "array of [struct of (array of [byte], uint32, array of [byte])]"
+ **/
+static void
+panel_set_label_for_variant_ipv6_array (GtkWidget *widget, GVariant *variant)
+{
+	GString *string;
+	gchar *tmp;
+	GVariant *outer;
+	GVariantIter iter;
+	gsize len;
+	GVariant *address;
+	guint32 prefix;
+
+	string = g_string_new ("");
+
+	/* get an iter of the outer array */
+	len = g_variant_iter_init (&iter, variant);
+	if (len == 0) {
+		g_warning ("invalid ipv6 address?!");
+		goto out;
+	}
+
+	/* unwrap the outer array */
+	outer = g_variant_iter_next_value (&iter);
+	while (outer != NULL) {
+
+		/* format the address and add to the string */
+		address = g_variant_get_child_value (outer, 0);
+		tmp = panel_ipv6_to_string (address);
+		g_variant_get_child (outer, 1, "u", &prefix);
+		g_string_append_printf (string, "%s/%i, ", tmp, prefix);
+
+		outer = g_variant_iter_next_value (&iter);
+	}
+
+	/* remove trailing space comma */
+	if (string->len > 2)
+		g_string_set_size (string, string->len - 2);
+
+	/* set label */
+	gtk_label_set_label (GTK_LABEL (widget), string->str);
+out:
+	g_string_free (string, TRUE);
 }
 
 /**
@@ -994,19 +1241,42 @@ static void
 panel_populate_wired_device (PanelDeviceItem *item)
 {
 	GtkWidget *widget;
-	GVariant *ip4;
+	GVariant *ip4 = NULL;
+	GVariant *ip6 = NULL;
 	GVariant *hw_address;
 	GVariant *speed;
 	CcNetworkPanelPrivate *priv = item->panel->priv;
 
-	/* set IP */
-	ip4 = g_dbus_proxy_get_cached_property (item->proxy, "Ip4Address");
+	/* set IPv6 */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-						     "label_wired_ip"));
-	panel_set_label_for_variant_ipv4 (widget, ip4);
+						     "hbox_wired_ip6"));
+	if (item->proxy_ip6 != NULL) {
+		gtk_widget_show (widget);
+		ip6 = g_dbus_proxy_get_cached_property (item->proxy_ip6,
+							"Addresses");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wired_ip6"));
+		panel_set_label_for_variant_ipv6_array (widget, ip6);
+	} else {
+		gtk_widget_hide (widget);
+	}
+
+	/* set IPv4 */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+						     "label_wired_ip4"));
+	if (item->proxy_ip4 != NULL) {
+		ip4 = g_dbus_proxy_get_cached_property (item->proxy_ip4,
+							"Addresses");
+		panel_set_label_for_variant_ipv4_array (widget, ip4);
+	} else {
+		ip4 = g_dbus_proxy_get_cached_property (item->proxy,
+							"Ip4Address");
+		panel_set_label_for_variant_ipv4 (widget, ip4);
+	}
 
 	/* set MAC */
-	hw_address = g_dbus_proxy_get_cached_property (item->proxy_additional, "HwAddress");
+	hw_address = g_dbus_proxy_get_cached_property (item->proxy_additional,
+						       "HwAddress");
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
 						     "label_wired_mac"));
 	panel_set_label_for_variant_string (widget, hw_address);
@@ -1017,7 +1287,10 @@ panel_populate_wired_device (PanelDeviceItem *item)
 						     "label_wired_speed"));
 	panel_set_label_for_variant_speed (widget, speed);
 
-	g_variant_unref (ip4);
+	if (ip4 != NULL)
+		g_variant_unref (ip4);
+	if (ip6 != NULL)
+		g_variant_unref (ip6);
 	g_variant_unref (hw_address);
 	g_variant_unref (speed);
 }
@@ -1032,16 +1305,39 @@ panel_populate_wireless_device (PanelDeviceItem *item)
 	GVariant *bitrate;
 	GVariant *hw_address;
 	GVariant *ip4;
+	GVariant *ip6;
 	CcNetworkPanelPrivate *priv = item->panel->priv;
 
-	/* set IP */
-	ip4 = g_dbus_proxy_get_cached_property (item->proxy, "Ip4Address");
+	/* set IPv6 */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-						     "label_wireless_ip"));
-	panel_set_label_for_variant_ipv4 (widget, ip4);
+						     "hbox_wireless_ip6"));
+	if (item->proxy_ip6 != NULL) {
+		gtk_widget_show (widget);
+		ip6 = g_dbus_proxy_get_cached_property (item->proxy_ip6,
+							"Addresses");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wireless_ip6"));
+		panel_set_label_for_variant_ipv6_array (widget, ip6);
+	} else {
+		gtk_widget_hide (widget);
+	}
+
+	/* set IPv4 */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+						     "label_wireless_ip4"));
+	if (item->proxy_ip4 != NULL) {
+		ip4 = g_dbus_proxy_get_cached_property (item->proxy_ip4,
+							"Addresses");
+		panel_set_label_for_variant_ipv4_array (widget, ip4);
+	} else {
+		ip4 = g_dbus_proxy_get_cached_property (item->proxy,
+							"Ip4Address");
+		panel_set_label_for_variant_ipv4 (widget, ip4);
+	}
 
 	/* set MAC */
-	hw_address = g_dbus_proxy_get_cached_property (item->proxy_additional, "HwAddress");
+	hw_address = g_dbus_proxy_get_cached_property (item->proxy_additional,
+						       "HwAddress");
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
 						     "label_wireless_mac"));
 	panel_set_label_for_variant_string (widget, hw_address);
@@ -1053,6 +1349,8 @@ panel_populate_wireless_device (PanelDeviceItem *item)
 	panel_set_label_for_variant_bitrate (widget, bitrate);
 
 	g_variant_unref (ip4);
+	if (ip6 != NULL)
+		g_variant_unref (ip6);
 	g_variant_unref (hw_address);
 	g_variant_unref (bitrate);
 }
