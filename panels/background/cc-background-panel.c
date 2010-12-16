@@ -461,9 +461,6 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   gtk_tree_model_get (model, &iter, 1, &item, -1);
 
-  /* Do all changes in one 'transaction' */
-  g_settings_delay (priv->settings);
-
   if (!g_strcmp0 (item->filename, "(none)"))
     {
       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, G_DESKTOP_BACKGROUND_STYLE_NONE);
@@ -673,6 +670,8 @@ style_changed_cb (GtkComboBox       *box,
   if (priv->current_background)
     priv->current_background->options = value;
 
+  g_settings_apply (priv->settings);
+
   update_preview (priv, NULL, TRUE);
 }
 
@@ -703,6 +702,8 @@ color_changed_cb (GtkColorButton    *button,
     g_settings_set_string (priv->settings, WP_PCOLOR_KEY, value);
   else
     g_settings_set_string (priv->settings, WP_SCOLOR_KEY, value);
+
+  g_settings_apply (priv->settings);
 
   g_free (value);
 
@@ -736,6 +737,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
     }
 
   priv->settings = g_settings_new (WP_PATH_ID);
+  g_settings_delay (priv->settings);
 
   store = (GtkListStore*) gtk_builder_get_object (priv->builder,
                                                   "sources-liststore");
