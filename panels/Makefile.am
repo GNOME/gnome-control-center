@@ -5,6 +5,7 @@ SUBDIRS= \
 	display \
 	media \
 	mouse \
+	printers \
 	region \
 	network \
 	info \
