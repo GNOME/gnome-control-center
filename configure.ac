@@ -106,6 +106,10 @@ PKG_CHECK_MODULES(PULSEAUDIO,
           libpulse-mainloop-glib >= $PA_REQUIRED_VERSION)
 AC_SUBST(PULSEAUDIO_CFLAGS)
 AC_SUBST(PULSEAUDIO_LIBS)
+# check for cups
+AC_CHECK_HEADERS(cups/cups.h cups/http.h cups/ipp.h)
+CUPS_LIBS=-lcups
+AC_SUBST(CUPS_LIBS)
 
 gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-3.0`
 gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-3.0`
@@ -372,6 +376,8 @@ panels/info/Makefile
 panels/info/gnome-info-panel.desktop.in
 panels/power/Makefile
 panels/power/gnome-power-panel.desktop.in
+panels/printers/Makefile
+panels/printers/gnome-printers-panel.desktop.in
 panels/network/Makefile
 panels/network/gnome-network-panel.desktop.in
 panels/universal-access/Makefile
