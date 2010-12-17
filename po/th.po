@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-12-14 20:31+0000\n"
-"PO-Revision-Date: 2010-12-15 15:58+0700\n"
+"POT-Creation-Date: 2010-12-16 20:42+0000\n"
+"PO-Revision-Date: 2010-12-17 10:21+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -197,63 +197,35 @@ msgstr "เรียงกระเบื้อง"
 msgid "Zoom"
 msgstr "ซูม"
 
-#: ../panels/background/bg-colors-source.c:57
-msgid "Butter"
-msgstr "เนย"
+#: ../panels/background/bg-colors-source.c:44
+msgid "Horizontal Gradient"
+msgstr "ไล่ระดับสีแนวนอน"
 
-#: ../panels/background/bg-colors-source.c:58
-msgid "Orange"
-msgstr "ส้ม"
+#: ../panels/background/bg-colors-source.c:45
+msgid "Vertical Gradient"
+msgstr "ไล่ระดับสีแนวตั้ง"
 
-#: ../panels/background/bg-colors-source.c:59
-msgid "Chocolate"
-msgstr "ช็อกโกเลต"
+#: ../panels/background/bg-colors-source.c:46
+msgid "Solid Color"
+msgstr "สีล้วน"
 
-#: ../panels/background/bg-colors-source.c:60
-msgid "Chameleon"
-msgstr "กิ้งก่า"
-
-#: ../panels/background/bg-colors-source.c:61
-msgid "Blue"
-msgstr "น้ำเงิน"
-
-#: ../panels/background/bg-colors-source.c:62
-msgid "Plum"
-msgstr "เหมย"
-
-#: ../panels/background/bg-colors-source.c:63
-msgid "Red"
-msgstr "แดง"
-
-#: ../panels/background/bg-colors-source.c:64
-msgid "Aluminium"
-msgstr "อะลูมิเนียม"
-
-#: ../panels/background/bg-colors-source.c:65
-msgid "Gray"
-msgstr "เทา"
-
-#: ../panels/background/bg-colors-source.c:66
-msgid "Black"
-msgstr "ดำ"
-
-#: ../panels/background/cc-background-panel.c:668
+#: ../panels/background/cc-background-panel.c:747
 msgid "Wallpapers"
 msgstr "ภาพพื้นหลัง"
 
-#: ../panels/background/cc-background-panel.c:676
+#: ../panels/background/cc-background-panel.c:755
 msgid "Pictures Folder"
 msgstr "โฟลเดอร์รูปภาพ"
 
-#: ../panels/background/cc-background-panel.c:684
-msgid "Colors"
-msgstr "สี"
+#: ../panels/background/cc-background-panel.c:763
+msgid "Colors & Gradients"
+msgstr "สี & การไล่ระดับสี"
 
-#: ../panels/background/cc-background-panel.c:693
+#: ../panels/background/cc-background-panel.c:772
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-panel.c:752
+#: ../panels/background/cc-background-panel.c:833
 msgid "Current background"
 msgstr "พื้นหลังปัจจุบัน"
 
@@ -754,6 +726,7 @@ msgstr "ชนิดของปุ่มลัด"
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/keyboard-shortcuts.c:1140
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -774,6 +747,70 @@ msgstr "แป้นพิมพ์"
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
 msgstr "ปุ่มลัด;ซ้ำปุ่ม;กะพริบ;"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:659
+#: ../panels/keyboard/keyboard-shortcuts.c:1544
+#: ../panels/keyboard/keyboard-shortcuts.c:1548
+msgid "Custom Shortcuts"
+msgstr "ปุ่มลัดกำหนดเอง"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:767
+msgid "<Unknown Action>"
+msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1166
+msgid "Error saving the new shortcut"
+msgstr "เกิดข้อผิดพลาดขณะบันทึกปุ่มลัด"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1276
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
+msgstr ""
+"ไม่สามารถใช้ปุ่มลัด \"%s\" ได้ เพราะจะทำให้ใช้ปุ่มนี้ป้อนข้อความไม่ได้\n"
+"กรุณาใช้ปุ่มอย่าง Control, Alt หรือ Shift ประกอบด้วย"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1306
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ\n"
+"\"%s\""
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "ถ้าคุณกำหนดปุ่มลัดนี้ซ้ำให้เป็น \"%s\" ปุ่มลัด \"%s\" ก็จะถูกปิดไป"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
+msgid "_Reassign"
+msgstr "_กำหนดซ้ำ"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "เกิดข้อผิดพลาดขณะลบปุ่มลัดออกจากฐานข้อมูลค่าปรับแต่ง: %s"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1498
+msgid "Too many custom shortcuts"
+msgstr "ปุ่มลัดที่กำหนดเองมีมากเกินไป"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1706
+msgid "Section"
+msgstr "หัวข้อ"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1737
+msgid "Action"
+msgstr "ปฏิบัติการ"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1759
+msgid "Shortcut"
+msgstr "ปุ่มลัด"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Cursor Blinking"
@@ -1080,8 +1117,9 @@ msgid "Keyboard Layout Options"
 msgstr "ตัวเลือกสำหรับผังแป้นพิมพ์"
 
 #. TRANSLATORS: device type
+#. TRANSLATORS: AP type
 #: ../panels/region/gnome-region-panel-xkb.c:70
-#: ../panels/network/cc-network-panel.c:312
+#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
 msgid "Unknown"
 msgstr "ไม่ทราบ"
 
@@ -1098,7 +1136,6 @@ msgid "Models"
 msgstr "รุ่น"
 
 #: ../panels/region/gnome-region-panel-xkbot.c:227
-#: ../panels/proxy/gnome-proxy-properties.c:554
 #: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "ค่าปริยาย"
@@ -1302,223 +1339,114 @@ msgstr "ปรับแต่งค่าตั้งสำหรับเมา
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "ทัชแพด;ตัวชี้;คลิก;แตะ;ดับเบิล;ปุ่ม;แทร็กบอล;"
 
-#: ../panels/proxy/gnome-proxy-properties.c:672
-msgid "New Location..."
-msgstr "เพิ่มสถานที่ใหม่..."
+#: ../panels/network/cc-network-panel.c:1083
+#: ../panels/network/cc-network-panel.c:1105
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i Mb/s"
 
-#: ../panels/proxy/gnome-proxy-properties.c:789
-msgid "Location already exists"
-msgstr "สถานที่นี้มีอยู่ก่อนแล้ว"
+#: ../panels/network/cc-network-panel.c:1085
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i Gb/s"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:1
-#: ../panels/network/cc-network-panel.c:1060
-msgid "Network Proxy"
+#: ../panels/network/cc-network-panel.c:1103
+#, c-format
+msgid "%i kb/s"
+msgstr "%i kb/s"
+
+#: ../panels/network/cc-network-panel.c:1514
+msgid "Network proxy"
 msgstr "พร็อกซีเครือข่าย"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:2
-msgid "Set your network proxy preferences"
-msgstr "ตั้งค่าพร็อกซีของเครือข่าย"
-
-#. Translators: those are keywords for the proxy control-center panel
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:4
-msgid "Web;Location;"
-msgstr "เว็บ;สถานที่;"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:1
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>ต่ออินเทอร์เน็ตโดย_ตรง</b>"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:2
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>ตั้งค่าพร็อกซีโดย_อัตโนมัติ</b>"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:3
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>ตั้งค่าพร็อกซีเอ_ง</b>"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:4
-msgid "<b>_Use authentication</b>"
-msgstr "<b>ใ_ช้การยืนยันตัวบุคคล</b>"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:5
-msgid "Autoconfiguration _URL:"
-msgstr "_URL สำหรับตั้งค่าอัตโนมัติ:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:6
-msgid "C_reate"
-msgstr "_สร้าง"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:7
-msgid "Create New Location"
-msgstr "เพิ่มสถานที่ใหม่"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:8
-msgid "HTTP Proxy Details"
-msgstr "รายละเอียดพร็อกซี HTTP"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:9
-msgid "H_TTP proxy:"
-msgstr "พร็อกซี H_TTP:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:10
-msgid "Ignore Host List"
-msgstr "รายชื่อโฮสต์ที่ไม่ผ่านพร็อกซี"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:11
-msgid "Ignored Hosts"
-msgstr "โฮสต์ที่ไม่ผ่านพร็อกซี"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
-msgid "Location:"
-msgstr "สถานที่:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:13
-msgid "Network Proxy Preferences"
-msgstr "ตั้งค่าพร็อกซีเครือข่าย"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:14
-msgid "Port:"
-msgstr "พอร์ต:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:15
-msgid "Proxy Configuration"
-msgstr "ตั้งค่าพร็อกซี"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:16
-msgid "S_ocks host:"
-msgstr "โฮสต์ S_ocks:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:17
-msgid "The location already exists."
-msgstr "สถานที่นี้มีอยู่ก่อนแล้ว"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:18
-msgid "U_sername:"
-msgstr "_ชื่อผู้ใช้:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:19
-msgid "_Delete Location"
-msgstr "_ลบสถานที่"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:20
-msgid "_Details"
-msgstr "_รายละเอียด"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:21
-msgid "_FTP proxy:"
-msgstr "พร็อกซี _FTP:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:22
-msgid "_Location name:"
-msgstr "_ชื่อสถานที่:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:23
-msgid "_Password:"
-msgstr "_รหัสผ่าน:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:24
-msgid "_Secure HTTP proxy:"
-msgstr "พร็อกซี _Secure HTTP:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:25
-msgid "_Use the same proxy for all protocols"
-msgstr "ใ_ช้พร็อกซีเดียวกันสำหรับทุกโพรโทคอล"
+#: ../panels/network/cc-network-panel.c:1523
+msgid "Set the system proxy settings"
+msgstr "ตั้งค่าพร็อกซีของระบบ"
 
 #. TRANSLATORS: device type
-#: ../panels/network/cc-network-panel.c:316
+#: ../panels/network/panel-common.c:69
 msgid "Wired"
 msgstr "ทางสาย"
 
 #. TRANSLATORS: device type
-#: ../panels/network/cc-network-panel.c:320
+#: ../panels/network/panel-common.c:73
 msgid "Wireless"
 msgstr "ไร้สาย"
 
 #. TRANSLATORS: device type
-#: ../panels/network/cc-network-panel.c:325
+#: ../panels/network/panel-common.c:78
 msgid "Mobile broadband"
 msgstr "บรอดแบนด์มือถือ"
 
 #. TRANSLATORS: device type
-#: ../panels/network/cc-network-panel.c:329
+#: ../panels/network/panel-common.c:82
 msgid "Bluetooth"
 msgstr "บลูทูท"
 
 #. TRANSLATORS: device type
-#: ../panels/network/cc-network-panel.c:333
+#: ../panels/network/panel-common.c:86
 msgid "Mesh"
 msgstr "Mesh"
 
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:142
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:146
+msgid "Intrastructure"
+msgstr "Intrastructure"
+
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:352
+#: ../panels/network/panel-common.c:164
 msgid "Status unknown"
 msgstr "ไม่ทราบสถานะ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:356
+#: ../panels/network/panel-common.c:168
 msgid "Unmanaged"
 msgstr "ไม่มีการจัดการ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:360
+#: ../panels/network/panel-common.c:172
 msgid "Unavailable"
 msgstr "ใช้งานไม่ได้"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:364
+#: ../panels/network/panel-common.c:176
 msgid "Disconnected"
 msgstr "ตัดการเชื่อมต่อแล้ว"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:368
+#: ../panels/network/panel-common.c:180
 msgid "Preparing connection"
 msgstr "กำลังเตรียมการเชื่อมต่อ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:372
+#: ../panels/network/panel-common.c:184
 msgid "Configuring connection"
 msgstr "กำลังตั้งค่าการเชื่อมต่อ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:376
+#: ../panels/network/panel-common.c:188
 msgid "Authenticating"
 msgstr "กำลังยืนยันตัวบุคคล"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:380
+#: ../panels/network/panel-common.c:192
 msgid "Getting network address"
 msgstr "กำลังขอที่อยู่เครือข่าย"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:384
+#: ../panels/network/panel-common.c:196
 msgid "Connected"
 msgstr "เชื่อมต่อแล้ว"
 
 #. TRANSLATORS: device status
-#: ../panels/network/cc-network-panel.c:388
+#: ../panels/network/panel-common.c:200
 msgid "Failed to connect"
 msgstr "เชื่อมต่อไม่สำเร็จ"
-
-#: ../panels/network/cc-network-panel.c:845
-#: ../panels/network/cc-network-panel.c:867
-#, c-format
-msgid "%iMb/s"
-msgstr "%iMb/s"
-
-#: ../panels/network/cc-network-panel.c:847
-#, c-format
-msgid "%iGb/s"
-msgstr "%iGb/s"
-
-#: ../panels/network/cc-network-panel.c:865
-#, c-format
-msgid "%ikb/s"
-msgstr "%ikb/s"
-
-#: ../panels/network/cc-network-panel.c:1068
-msgid "Set the system proxy settings"
-msgstr "ตั้งค่าพร็อกซีของระบบ"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
@@ -1534,16 +1462,16 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "เครือข่าย;ไร้สาย;ไอพี;แลน;"
 
 #: ../panels/network/network.ui.h:1
+msgid "Airplane Mode"
+msgstr "โหมดเครื่องบิน"
+
+#: ../panels/network/network.ui.h:2
 msgid "Configuration URL:"
 msgstr "URL สำหรับตั้งค่า:"
 
-#: ../panels/network/network.ui.h:2
+#: ../panels/network/network.ui.h:3
 msgid "FTP Proxy:"
 msgstr "พร็อกซี FTP:"
-
-#: ../panels/network/network.ui.h:3
-msgid "Flight Mode"
-msgstr "โหมดบนเครื่องบิน"
 
 #: ../panels/network/network.ui.h:4
 msgid "Gateway:"
@@ -1566,43 +1494,55 @@ msgid "Hardware Address:"
 msgstr "ที่อยู่ฮาร์ดแวร์:"
 
 #: ../panels/network/network.ui.h:9
+msgid "IMEI:"
+msgstr "IMEI:"
+
+#: ../panels/network/network.ui.h:10
 msgid "IP Address:"
 msgstr "หมายเลขไอพี:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:11
+msgid "IPv4 Address:"
+msgstr "ที่อยู่ IPv4:"
+
+#: ../panels/network/network.ui.h:12
+msgid "IPv6 Address:"
+msgstr "ที่อยู่ IPv6:"
+
+#: ../panels/network/network.ui.h:13
 msgid "Method:"
 msgstr "วิธีการ:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:14
 msgid "Network Name:"
 msgstr "ชื่อเครือข่าย:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:15
 msgid "Provider:"
 msgstr "ผู้ให้บริการ:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:16
 msgid "Secure HTTP Proxy:"
 msgstr "พร็อกซี HTTP นิรภัย:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:17
 msgid "Security:"
 msgstr "การรักษาความปลอดภัย:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:18
 msgid "Socks Host:"
 msgstr "โฮสต์ Socks:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:19
 msgid "Speed:"
 msgstr "ความเร็ว:"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:20
 #: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
 msgstr "ปลดล็อค"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:21
 msgid "Username:"
 msgstr "ชื่อผู้ใช้:"
 
@@ -2946,6 +2886,10 @@ msgstr "การเข้าระบบด้วยลายนิ้วมื
 msgid "Language:"
 msgstr "ภาษา:"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+msgid "Location:"
+msgstr "สถานที่:"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Login Options"
 msgstr "ตัวเลือกของการเข้าระบบ"
@@ -3070,6 +3014,126 @@ msgstr "ขี้หมูรา;ขี้หมาแห้ง;"
 msgid "_All Settings"
 msgstr "ค่าตั้ง_ทั้งหมด"
 
+#~ msgid "Butter"
+#~ msgstr "เนย"
+
+#~ msgid "Orange"
+#~ msgstr "ส้ม"
+
+#~ msgid "Chocolate"
+#~ msgstr "ช็อกโกเลต"
+
+#~ msgid "Chameleon"
+#~ msgstr "กิ้งก่า"
+
+#~ msgid "Blue"
+#~ msgstr "น้ำเงิน"
+
+#~ msgid "Plum"
+#~ msgstr "เหมย"
+
+#~ msgid "Red"
+#~ msgstr "แดง"
+
+#~ msgid "Aluminium"
+#~ msgstr "อะลูมิเนียม"
+
+#~ msgid "Gray"
+#~ msgstr "เทา"
+
+#~ msgid "Black"
+#~ msgstr "ดำ"
+
+#~ msgid "Colors"
+#~ msgstr "สี"
+
+#~ msgid "New Location..."
+#~ msgstr "เพิ่มสถานที่ใหม่..."
+
+#~ msgid "Location already exists"
+#~ msgstr "สถานที่นี้มีอยู่ก่อนแล้ว"
+
+#~ msgid "Set your network proxy preferences"
+#~ msgstr "ตั้งค่าพร็อกซีของเครือข่าย"
+
+#~ msgid "Web;Location;"
+#~ msgstr "เว็บ;สถานที่;"
+
+#~ msgid "<b>Di_rect internet connection</b>"
+#~ msgstr "<b>ต่ออินเทอร์เน็ตโดย_ตรง</b>"
+
+#~ msgid "<b>_Automatic proxy configuration</b>"
+#~ msgstr "<b>ตั้งค่าพร็อกซีโดย_อัตโนมัติ</b>"
+
+#~ msgid "<b>_Manual proxy configuration</b>"
+#~ msgstr "<b>ตั้งค่าพร็อกซีเอ_ง</b>"
+
+#~ msgid "<b>_Use authentication</b>"
+#~ msgstr "<b>ใ_ช้การยืนยันตัวบุคคล</b>"
+
+#~ msgid "Autoconfiguration _URL:"
+#~ msgstr "_URL สำหรับตั้งค่าอัตโนมัติ:"
+
+#~ msgid "C_reate"
+#~ msgstr "_สร้าง"
+
+#~ msgid "Create New Location"
+#~ msgstr "เพิ่มสถานที่ใหม่"
+
+#~ msgid "HTTP Proxy Details"
+#~ msgstr "รายละเอียดพร็อกซี HTTP"
+
+#~ msgid "H_TTP proxy:"
+#~ msgstr "พร็อกซี H_TTP:"
+
+#~ msgid "Ignore Host List"
+#~ msgstr "รายชื่อโฮสต์ที่ไม่ผ่านพร็อกซี"
+
+#~ msgid "Ignored Hosts"
+#~ msgstr "โฮสต์ที่ไม่ผ่านพร็อกซี"
+
+#~ msgid "Network Proxy Preferences"
+#~ msgstr "ตั้งค่าพร็อกซีเครือข่าย"
+
+#~ msgid "Port:"
+#~ msgstr "พอร์ต:"
+
+#~ msgid "Proxy Configuration"
+#~ msgstr "ตั้งค่าพร็อกซี"
+
+#~ msgid "S_ocks host:"
+#~ msgstr "โฮสต์ S_ocks:"
+
+#~ msgid "The location already exists."
+#~ msgstr "สถานที่นี้มีอยู่ก่อนแล้ว"
+
+#~ msgid "U_sername:"
+#~ msgstr "_ชื่อผู้ใช้:"
+
+#~ msgid "_Delete Location"
+#~ msgstr "_ลบสถานที่"
+
+#~ msgid "_Details"
+#~ msgstr "_รายละเอียด"
+
+#~ msgid "_FTP proxy:"
+#~ msgstr "พร็อกซี _FTP:"
+
+#~ msgid "_Location name:"
+#~ msgstr "_ชื่อสถานที่:"
+
+#~ msgid "_Password:"
+#~ msgstr "_รหัสผ่าน:"
+
+#~ msgid "_Secure HTTP proxy:"
+#~ msgstr "พร็อกซี _Secure HTTP:"
+
+#~ msgid "_Use the same proxy for all protocols"
+#~ msgstr "ใ_ช้พร็อกซีเดียวกันสำหรับทุกโพรโทคอล"
+
+#~ msgid "Flight Mode"
+#~ msgstr "โหมดบนเครื่องบิน"
+
 #~ msgid "Slide Show"
 #~ msgstr "การแสดงสไลด์"
 
@@ -3121,50 +3185,6 @@ msgstr "ค่าตั้ง_ทั้งหมด"
 
 #~ msgid "Mirror Screens"
 #~ msgstr "หน้าจอแสดงเหมือนกัน"
-
-#~ msgid "<Unknown Action>"
-#~ msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
-
-#~ msgid "Custom Shortcuts"
-#~ msgstr "ปุ่มลัดกำหนดเอง"
-
-#~ msgid "Error saving the new shortcut"
-#~ msgstr "เกิดข้อผิดพลาดขณะบันทึกปุ่มลัด"
-
-#~ msgid ""
-#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
-#~ "type using this key.\n"
-#~ "Please try with a key such as Control, Alt or Shift at the same time."
-#~ msgstr ""
-#~ "ไม่สามารถใช้ปุ่มลัด \"%s\" ได้ เพราะจะทำให้ใช้ปุ่มนี้ป้อนข้อความไม่ได้\n"
-#~ "กรุณาใช้ปุ่มอย่าง Control, Alt หรือ Shift ประกอบด้วย"
-
-#~ msgid ""
-#~ "The shortcut \"%s\" is already used for\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ\n"
-#~ "\"%s\""
-
-#~ msgid ""
-#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#~ "disabled."
-#~ msgstr "ถ้าคุณกำหนดปุ่มลัดนี้ซ้ำให้เป็น \"%s\" ปุ่มลัด \"%s\" ก็จะถูกปิดไป"
-
-#~ msgid "_Reassign"
-#~ msgstr "_กำหนดซ้ำ"
-
-#~ msgid "Error unsetting accelerator in configuration database: %s"
-#~ msgstr "เกิดข้อผิดพลาดขณะลบปุ่มลัดออกจากฐานข้อมูลค่าปรับแต่ง: %s"
-
-#~ msgid "Too many custom shortcuts"
-#~ msgstr "ปุ่มลัดที่กำหนดเองมีมากเกินไป"
-
-#~ msgid "Action"
-#~ msgstr "ปฏิบัติการ"
-
-#~ msgid "Shortcut"
-#~ msgstr "ปุ่มลัด"
 
 #~ msgid "_Application font:"
 #~ msgstr "แบบอักษรของโ_ปรแกรม:"
