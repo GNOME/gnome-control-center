@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-12 21:50+0100\n"
-"PO-Revision-Date: 2010-12-12 21:55+0100\n"
+"POT-Creation-Date: 2010-12-17 13:45+0100\n"
+"PO-Revision-Date: 2010-12-17 13:53+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -33,7 +33,9 @@ msgstr "URL til flere tema"
 msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
-msgstr "Sett dette til navn på aktiv lokasjon. Dette brukes til å bestemme riktig nettverksproxykonfigurasjon."
+msgstr ""
+"Sett dette til navn på aktiv lokasjon. Dette brukes til å bestemme riktig "
+"nettverksproxykonfigurasjon."
 
 #: ../gnome-control-center.schemas.in.h:5
 msgid ""
@@ -173,145 +175,78 @@ msgstr "Bakgrunn;Skjerm;"
 msgid "Center"
 msgstr "Midtstill"
 
-#: ../panels/background/background.ui.h:2
+#. This refers to a slideshow background
+#: ../panels/background/background.ui.h:3
+msgid "Changes throughout the day"
+msgstr "Endres i løpet av dagen"
+
+#: ../panels/background/background.ui.h:4
 msgid "Fill"
 msgstr "Fyll"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:5
 msgid "Scale"
 msgstr "Skaler"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgid "Span"
 msgstr "Strekk"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgid "Tile"
 msgstr "Flislegg"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 #: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../panels/background/bg-colors-source.c:57
-msgid "Butter"
-msgstr "Smør"
+#: ../panels/background/bg-colors-source.c:44
+msgid "Horizontal Gradient"
+msgstr "Horisontal gradient"
 
-#: ../panels/background/bg-colors-source.c:58
-msgid "Orange"
-msgstr "Appelsin"
+#: ../panels/background/bg-colors-source.c:45
+msgid "Vertical Gradient"
+msgstr "Vertikal gradient"
 
-#: ../panels/background/bg-colors-source.c:59
-msgid "Chocolate"
-msgstr "Sjokolade"
+#: ../panels/background/bg-colors-source.c:46
+msgid "Solid Color"
+msgstr "Helfylt farge"
 
-#: ../panels/background/bg-colors-source.c:60
-msgid "Chameleon"
-msgstr "Kamelon"
-
-#: ../panels/background/bg-colors-source.c:61
-msgid "Blue"
-msgstr "Blå"
-
-#: ../panels/background/bg-colors-source.c:62
-msgid "Plum"
-msgstr "Plomme"
-
-#: ../panels/background/bg-colors-source.c:63
-msgid "Red"
-msgstr "Rød"
-
-#: ../panels/background/bg-colors-source.c:64
-msgid "Aluminium"
-msgstr "Aluminium"
-
-#: ../panels/background/bg-colors-source.c:65
-msgid "Gray"
-msgstr "Grå"
-
-#: ../panels/background/bg-colors-source.c:66
-msgid "Black"
-msgstr "Sort"
-
-#: ../panels/background/cc-background-panel.c:622
+#: ../panels/background/cc-background-panel.c:747
 msgid "Wallpapers"
 msgstr "Bakgrunner"
 
-#: ../panels/background/cc-background-panel.c:630
+#: ../panels/background/cc-background-panel.c:755
 msgid "Pictures Folder"
 msgstr "Bildemappe"
 
-#: ../panels/background/cc-background-panel.c:638
-msgid "Colors"
-msgstr "Farger"
+#: ../panels/background/cc-background-panel.c:763
+msgid "Colors & Gradients"
+msgstr "Farger og gradienter"
 
-#: ../panels/background/cc-background-panel.c:647
+#: ../panels/background/cc-background-panel.c:772
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/gnome-wp-info.c:50
+#: ../panels/background/cc-background-panel.c:833
+msgid "Current background"
+msgstr "Nåværende bakgrunn"
+
+#: ../panels/background/gnome-wp-info.c:59
 msgid "No Desktop Background"
 msgstr "Ingen skrivebordsbakgrunn"
 
-#: ../panels/background/gnome-wp-item.c:294
-msgid "Slide Show"
-msgstr "Lysbildevisning"
-
-#: ../panels/background/gnome-wp-item.c:296
-msgid "Image"
-msgstr "Bilde"
-
-#: ../panels/background/gnome-wp-item.c:302
+#: ../panels/background/gnome-wp-item.c:277
 msgid "multiple sizes"
 msgstr "flere størrelser"
 
-#. translators: x pixel(s) by y pixel(s)
-#: ../panels/background/gnome-wp-item.c:305
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/gnome-wp-item.c:285
 #, c-format
-msgid "%d %s by %d %s"
-msgstr "%d %s ganger %d %s"
-
-#: ../panels/background/gnome-wp-item.c:307
-#: ../panels/background/gnome-wp-item.c:309
-msgid "pixel"
-msgid_plural "pixels"
-msgstr[0] "piksel"
-msgstr[1] "piksler"
-
-#. translators: <b>wallpaper name</b>
-#. * mime type, size
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:317
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Mappe: %s"
-
-#. translators: <b>wallpaper name</b>
-#. * Image missing
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:329
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s\n"
-"Mappe: %s"
-
-#: ../panels/background/gnome-wp-item.c:333
-msgid "Image missing"
-msgstr "Bilde mangler"
+msgid "%d × %d"
+msgstr "%d x %d"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "12 hour format"
@@ -797,6 +732,7 @@ msgstr "Type hurtigtast."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/keyboard-shortcuts.c:1140
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -817,6 +753,70 @@ msgstr "Tastatur"
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Snarvei;Repetisjon;Blinking;"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:659
+#: ../panels/keyboard/keyboard-shortcuts.c:1544
+#: ../panels/keyboard/keyboard-shortcuts.c:1548
+msgid "Custom Shortcuts"
+msgstr "Egendefinerte snarveier"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:767
+msgid "<Unknown Action>"
+msgstr "<Ukjent handling>"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1166
+msgid "Error saving the new shortcut"
+msgstr "Feil under lagring av ny snarvei"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1276
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
+msgstr ""
+"Snarvei «%s» kan ikke brukes fordi det vil være umulig å skrive med denne tasten.\n"
+"Vennligst prøv med en tastekombinasjon som inkluderer Control, Alt eller Shift."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1306
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"Snarvei «%s» er allerede brukt for\n"
+"«%s»"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "Hvis du omfordeler snarveien til «%s» vil snarveien for «%s» bli slått av."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
+msgid "_Reassign"
+msgstr "_Omfordel"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "Feil ved fjerning av hurtigtast i konfigurasjonsdatabasen: %s"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1498
+msgid "Too many custom shortcuts"
+msgstr "For mange egendefinerte snarveier"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1706
+msgid "Section"
+msgstr "Seksjon"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1737
+msgid "Action"
+msgstr "Handling"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1759
+msgid "Shortcut"
+msgstr "Snarvei"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Cursor Blinking"
@@ -896,8 +896,8 @@ msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new key "
 "combination, or press backspace to clear."
 msgstr ""
-"Klikk på tilhørende rad og skriv inn en ny tastekombinasjon for å redigere en "
-"snarveitast, eller trykk slettetast for å fjerne den."
+"Klikk på tilhørende rad og skriv inn en ny tastekombinasjon for å redigere "
+"en snarveitast, eller trykk slettetast for å fjerne den."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 #: ../panels/region/gnome-region-panel.ui.h:24
@@ -1121,7 +1121,10 @@ msgstr "_Leverandører:"
 msgid "Keyboard Layout Options"
 msgstr "Alternativer for tastaturutforming"
 
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
 #: ../panels/region/gnome-region-panel-xkb.c:70
+#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -1138,7 +1141,6 @@ msgid "Models"
 msgstr "Modeller"
 
 #: ../panels/region/gnome-region-panel-xkbot.c:227
-#: ../panels/proxy/gnome-proxy-properties.c:554
 #: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "Forvalg"
@@ -1336,198 +1338,223 @@ msgstr "Sett dine brukervalg for mus og pekeplate"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;Styrekule;"
 
-#: ../panels/proxy/gnome-proxy-properties.c:672
-msgid "New Location..."
-msgstr "Ny lokasjon..."
+#: ../panels/network/cc-network-panel.c:1062
+#: ../panels/network/cc-network-panel.c:1084
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i Mb/s"
 
-#: ../panels/proxy/gnome-proxy-properties.c:789
-msgid "Location already exists"
-msgstr "Lokasjonen eksisterer allerede"
+#: ../panels/network/cc-network-panel.c:1064
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i Gb/s"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:1
-msgid "Network Proxy"
+#: ../panels/network/cc-network-panel.c:1082
+#, c-format
+msgid "%i kb/s"
+msgstr "%i kb/s"
+
+#: ../panels/network/cc-network-panel.c:1739
+msgid "Network proxy"
 msgstr "Nettverksproxy"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:2
-msgid "Set your network proxy preferences"
-msgstr "Sett dine brukervalg for nettverksproxy"
+#: ../panels/network/cc-network-panel.c:1748
+msgid "Set the system proxy settings"
+msgstr "Systeminnstillinger for proxy"
 
-#. Translators: those are keywords for the proxy control-center panel
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:4
-msgid "Web;Location;"
-msgstr "Nett;Lokasjon;"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:69
+msgid "Wired"
+msgstr "Kablet"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:1
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>Di_rekte internettforbindelse</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:73
+msgid "Wireless"
+msgstr "Trådløs"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:2
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>_Automatisk konfigurasjon av proxy</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:78
+msgid "Mobile broadband"
+msgstr "Mobilt bredbånd"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:3
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>_Manuell konfigurasjon av proxy</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:82
+msgid "Bluetooth"
+msgstr "Blåtann"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:4
-msgid "<b>_Use authentication</b>"
-msgstr "<b>Br_uk autentisering</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:86
+msgid "Mesh"
+msgstr "Mesh"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:5
-msgid "Autoconfiguration _URL:"
-msgstr "_URL for automatisk konfigurasjon:"
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:142
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:6
-msgid "C_reate"
-msgstr "_Lag"
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:146
+msgid "Intrastructure"
+msgstr "Infrastruktur"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:7
-msgid "Create New Location"
-msgstr "Lag ny lokasjon"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:164
+msgid "Status unknown"
+msgstr "Ukjent status"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:8
-msgid "HTTP Proxy Details"
-msgstr "Detaljer for HTTP-proxy"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:168
+msgid "Unmanaged"
+msgstr "Ikke administrert"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:9
-msgid "H_TTP proxy:"
-msgstr "H_TTP-proxy:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:172
+msgid "Unavailable"
+msgstr "Ikke tilgjengelig"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:10
-msgid "Ignore Host List"
-msgstr "Liste med ignorerte verter"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:176
+msgid "Disconnected"
+msgstr "Frakoblet"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:11
-msgid "Ignored Hosts"
-msgstr "Ignorerte verter"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:180
+msgid "Preparing connection"
+msgstr "Forbereder tilkobling"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
-msgid "Location:"
-msgstr "Lokasjon:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:184
+msgid "Configuring connection"
+msgstr "Konfigurerer tilkobling"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:13
-msgid "Network Proxy Preferences"
-msgstr "Brukervalg for nettverksproxy"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:188
+msgid "Authenticating"
+msgstr "Autentiserer"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:14
-msgid "Port:"
-msgstr "Port:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:192
+msgid "Getting network address"
+msgstr "Henter nettverksadresse"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:15
-msgid "Proxy Configuration"
-msgstr "Konfigurasjon av proxy"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:196
+msgid "Connected"
+msgstr "Tilkoblet"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:16
-msgid "S_ocks host:"
-msgstr "S_ocks-vert:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:200
+msgid "Failed to connect"
+msgstr "Klarte ikke å koble til"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:17
-msgid "The location already exists."
-msgstr "Lokasjonen eksisterer allerede."
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "Nettverk"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:18
-msgid "U_sername:"
-msgstr "Br_ukernavn:"
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
+msgid "Network settings"
+msgstr "Innstillinger for nettverk"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:19
-msgid "_Delete Location"
-msgstr "S_lett lokasjon"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:20
-msgid "_Details"
-msgstr "_Detaljer"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:21
-msgid "_FTP proxy:"
-msgstr "_FTP-proxy:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:22
-msgid "_Location name:"
-msgstr "Navn på _lokasjon:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:23
-msgid "_Password:"
-msgstr "_Passord:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:24
-msgid "_Secure HTTP proxy:"
-msgstr "_Sikker HTTP-proxy:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:25
-msgid "_Use the same proxy for all protocols"
-msgstr "Br_uk samme proxy for alle protokoller"
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;"
+msgstr "Nettverk;Trådløs;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
+msgid "Airplane Mode"
+msgstr "Flymodus"
+
+#: ../panels/network/network.ui.h:2
 msgid "Configuration URL:"
 msgstr "Konfigurasjons-URL:"
 
-#: ../panels/network/network.ui.h:2
+#: ../panels/network/network.ui.h:3
+msgid "DNS:"
+msgstr "DNS:"
+
+#: ../panels/network/network.ui.h:4
+msgid "Default Route:"
+msgstr "Forvalgt rute:"
+
+#: ../panels/network/network.ui.h:5
 msgid "FTP Proxy:"
 msgstr "FTP-proxy:"
 
-#: ../panels/network/network.ui.h:3
-msgid "Flight Mode"
-msgstr "Flymodus"
-
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:6
 msgid "Gateway:"
 msgstr "Portner:"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:7
 msgid "Group Name:"
 msgstr "Gruppenavn:"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:8
 msgid "Group Password:"
 msgstr "Gruppepassord:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:9
 msgid "HTTP Proxy:"
 msgstr "HTTP-proxy:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address:"
 msgstr "Maskinvareadresse:"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:11
+msgid "IMEI:"
+msgstr "IMEI:"
+
+#: ../panels/network/network.ui.h:12
 msgid "IP Address:"
 msgstr "IP-adresse:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:13
+msgid "IPv4 Address:"
+msgstr "IPv4-adresse:"
+
+#: ../panels/network/network.ui.h:14
+msgid "IPv6 Address:"
+msgstr "IPv6-adresse:"
+
+#: ../panels/network/network.ui.h:15
 msgid "Method:"
 msgstr "Metode:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:16
 msgid "Network Name:"
 msgstr "Nettverksnavn:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:17
 msgid "Provider:"
 msgstr "Tilbyder:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:18
 msgid "Secure HTTP Proxy:"
 msgstr "Sikker HTTP-proxy:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:19
 msgid "Security:"
 msgstr "Sikkerhet:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:20
 msgid "Socks Host:"
 msgstr "Socks-vert:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:21
 msgid "Speed:"
 msgstr "Hastighet:"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:22
+#, fuzzy
+msgid "Subnet Mast:"
+msgstr "Subnettmaske:"
+
+#: ../panels/network/network.ui.h:23
 #: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
 msgstr "Lås opp"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:24
 msgid "Username:"
 msgstr "Brukernavn:"
 
@@ -2342,7 +2369,7 @@ msgstr "Administrator"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgctxt "Account type"
 msgid "Supervised"
-msgstr ""
+msgstr "Overvåket"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:107
 msgid ""
@@ -2598,7 +2625,9 @@ msgstr "%s er fremdeles logget inn"
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
-msgstr "Hvis du sletter en innlogget bruker kan systemet ende opp i en inkonsistent tilstand."
+msgstr ""
+"Hvis du sletter en innlogget bruker kan systemet ende opp i en inkonsistent "
+"tilstand."
 
 #: ../panels/user-accounts/um-user-panel.c:434
 #, c-format
@@ -2609,7 +2638,9 @@ msgstr "Vil du beholde filene til %s?"
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
-msgstr "Det er mulig å beholde hjemmekatalogen, e-postkøen og midlertidige filer når du sletter en brukerkonto."
+msgstr ""
+"Det er mulig å beholde hjemmekatalogen, e-postkøen og midlertidige filer når "
+"du sletter en brukerkonto."
 
 #: ../panels/user-accounts/um-user-panel.c:441
 msgid "_Delete Files"
@@ -2741,7 +2772,9 @@ msgid ""
 "<small>This hint may be displayed at the login screen.  It will be visible "
 "to all users of this system.  Do <b>not</b> include the password here.</"
 "small>"
-msgstr "<small>Dette hintet kan vises på innloggingsskjermen. Det vil være synlig for alle brukere på dette systemet. <b>Ikke</b> ta med passord her.</small>"
+msgstr ""
+"<small>Dette hintet kan vises på innloggingsskjermen. Det vil være synlig "
+"for alle brukere på dette systemet. <b>Ikke</b> ta med passord her.</small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
 msgid "C_onfirm password:"
@@ -2837,9 +2870,12 @@ msgid ""
 "<b>When the guest user logs out, all files and data associated with the "
 "account will be deleted.</b>"
 msgstr ""
-"En gjestekonto vil la hvem som helst logge seg inn på denne datamaskinen midlertidig uten et passord. Ekstern pålogging til denne kontoen er ikke tillatt av sikkerhetshensyn.\n"
+"En gjestekonto vil la hvem som helst logge seg inn på denne datamaskinen "
+"midlertidig uten et passord. Ekstern pålogging til denne kontoen er ikke "
+"tillatt av sikkerhetshensyn.\n"
 "\n"
-"<b>Når gjestebrukeren logger ut vil alle filer og data assosiert med kontoen bli slettet.</b>"
+"<b>Når gjestebrukeren logger ut vil alle filer og data assosiert med kontoen "
+"bli slettet.</b>"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
@@ -2876,6 +2912,10 @@ msgstr "Innlogging med fingeravtrykk:"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
 msgid "Language:"
 msgstr "Språk:"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+msgid "Location:"
+msgstr "Lokasjon:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Login Options"
