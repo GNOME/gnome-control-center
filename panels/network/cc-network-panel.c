@@ -648,7 +648,6 @@ panel_got_device_proxy_ip4_cb (GObject *source_object,
 			       gpointer user_data)
 {
 	GError *error = NULL;
-	GVariant *result = NULL;
 	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
 
 	item->proxy_ip4 = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -658,20 +657,10 @@ panel_got_device_proxy_ip4_cb (GObject *source_object,
 		goto out;
 	}
 
-	/* get the Address */
-	result = g_dbus_proxy_get_cached_property (item->proxy_ip4, "Addresses");
-	//Addresses = array of (array of uint32)
-	//Routes =  array of (array of uint32)
-	//Domains =  array of string
-	//Nameservers = array of uint32
-	//WinsServers = array of uint32
-
 	/* add device if there are no more pending actions */
 	if (--item->device_add_refcount == 0)
 		panel_add_device_to_listview (item);
 out:
-	if (result != NULL)
-		g_variant_unref (result);
 	return;
 }
 
@@ -684,7 +673,6 @@ panel_got_device_proxy_ip6_cb (GObject *source_object,
 			       gpointer user_data)
 {
 	GError *error = NULL;
-	GVariant *result = NULL;
 	PanelDeviceItem *item = (PanelDeviceItem *) user_data;
 
 	item->proxy_ip6 = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -694,19 +682,10 @@ panel_got_device_proxy_ip6_cb (GObject *source_object,
 		goto out;
 	}
 
-	/* get the Address */
-	result = g_dbus_proxy_get_cached_property (item->proxy_ip6, "Addresses");
-	//Addresses = array of (struct of (array of (byte), uint32, array of (byte)))
-	//Routes = array of (struct of (array of (byte), uint32, array of (byte)))
-	//Nameservers = array of (array of byte)
-	//Domains = array of string
-
 	/* add device if there are no more pending actions */
 	if (--item->device_add_refcount == 0)
 		panel_add_device_to_listview (item);
 out:
-	if (result != NULL)
-		g_variant_unref (result);
 	return;
 }
 
@@ -1121,14 +1100,15 @@ panel_set_label_for_variant_ipv4 (GtkWidget *widget, GVariant *variant)
 }
 
 /**
- * panel_set_label_for_variant_ipv4_array:
+ * panel_set_label_for_variant_ipv4_array_array:
  *
  * This is some crazy shit. NM sends us the following data type:
  * "array of [array of [uint32]]"
  **/
-static void
-panel_set_label_for_variant_ipv4_array (GtkWidget *widget, GVariant *variant)
+static gboolean
+panel_set_label_for_variant_ipv4_array_array (GtkWidget *widget, GVariant *variant)
 {
+	gboolean ret;
 	gchar *tmp;
 	gsize len;
 	GString *string;
@@ -1141,10 +1121,6 @@ panel_set_label_for_variant_ipv4_array (GtkWidget *widget, GVariant *variant)
 
 	/* get an iter of the outer array */
 	len = g_variant_iter_init (&iter, variant);
-	if (len != 1) {
-		g_warning ("invalid ipv4 address?!");
-		goto out;
-	}
 
 	/* unwrap the outer array */
 	outer = g_variant_iter_next_value (&iter);
@@ -1182,17 +1158,68 @@ panel_set_label_for_variant_ipv4_array (GtkWidget *widget, GVariant *variant)
 	/* set label */
 	gtk_label_set_label (GTK_LABEL (widget), string->str);
 out:
+	ret = string->len > 0;
 	g_string_free (string, TRUE);
+	return ret;
 }
 
 /**
  * panel_set_label_for_variant_ipv4_array:
  *
+ * TNM sends us the following data type "array of [uint32]"
+ **/
+static void
+panel_set_label_for_variant_ipv4_array (GtkWidget *widget, GVariant *variant)
+{
+	gchar *tmp;
+	gsize len;
+	GString *string;
+	guint i;
+	GVariant *value;
+
+	string = g_string_new ("");
+
+	/* unwrap the array */
+	len = g_variant_n_children (variant);
+	if (len == 0) {
+		g_warning ("invalid ipv4 address on inner?!");
+		goto out;
+	}
+	for (i=0; i<len; i++) {
+		value = g_variant_get_child_value (variant, i);
+		tmp = panel_ipv4_to_string (value);
+
+		/* ignore invalid entries: TODO why? */
+		if (g_str_has_suffix (tmp, ".0")) {
+			g_debug ("ignoring IP %s", tmp);
+		} else {
+			g_debug ("got IP %s", tmp);
+			g_string_append_printf (string,
+						"%s, ",
+						tmp);
+		}
+		g_free (tmp);
+		g_variant_unref (value);
+	}
+
+	/* remove trailing space comma */
+	if (string->len > 2)
+		g_string_set_size (string, string->len - 2);
+
+	/* set label */
+	gtk_label_set_label (GTK_LABEL (widget), string->str);
+out:
+	g_string_free (string, TRUE);
+}
+
+/**
+ * panel_set_label_for_variant_ipv6_prefixed_array:
+ *
  * This is some crazy shit. NM sends us the following data type:
  * "array of [struct of (array of [byte], uint32, array of [byte])]"
  **/
-static void
-panel_set_label_for_variant_ipv6_array (GtkWidget *widget, GVariant *variant)
+static gboolean
+panel_set_label_for_variant_ipv6_prefixed_array (GtkWidget *widget, GVariant *variant)
 {
 	GString *string;
 	gchar *tmp;
@@ -1201,13 +1228,14 @@ panel_set_label_for_variant_ipv6_array (GtkWidget *widget, GVariant *variant)
 	gsize len;
 	GVariant *address;
 	guint32 prefix;
+	gboolean ret = FALSE;
 
 	string = g_string_new ("");
 
 	/* get an iter of the outer array */
 	len = g_variant_iter_init (&iter, variant);
 	if (len == 0) {
-		g_warning ("invalid ipv6 address?!");
+		g_debug ("no ipv6 address");
 		goto out;
 	}
 
@@ -1231,7 +1259,57 @@ panel_set_label_for_variant_ipv6_array (GtkWidget *widget, GVariant *variant)
 	/* set label */
 	gtk_label_set_label (GTK_LABEL (widget), string->str);
 out:
+	ret = string->len > 0;
 	g_string_free (string, TRUE);
+	return ret;
+}
+
+/**
+ * panel_set_label_for_variant_ipv6_array:
+ *
+ * NM sends us the following data type:
+ * "array of [array of (byte)]"
+ **/
+static gboolean
+panel_set_label_for_variant_ipv6_array (GtkWidget *widget, GVariant *variant)
+{
+	gboolean ret = FALSE;
+	GString *string;
+	gchar *tmp;
+	GVariantIter iter;
+	gsize len;
+	GVariant *address;
+
+	string = g_string_new ("");
+
+	/* get an iter of the outer array */
+	len = g_variant_iter_init (&iter, variant);
+	if (len == 0) {
+		g_debug ("no ipv6 address");
+		goto out;
+	}
+
+	/* unwrap the outer array */
+	address = g_variant_iter_next_value (&iter);
+	while (address != NULL) {
+
+		/* format the address and add to the string */
+		tmp = panel_ipv6_to_string (address);
+		g_string_append_printf (string, "%s, ", tmp);
+
+		address = g_variant_iter_next_value (&iter);
+	}
+
+	/* remove trailing space comma */
+	if (string->len > 2)
+		g_string_set_size (string, string->len - 2);
+
+	/* set label */
+	gtk_label_set_label (GTK_LABEL (widget), string->str);
+out:
+	ret = string->len > 0;
+	g_string_free (string, TRUE);
+	return ret;
 }
 
 /**
@@ -1240,10 +1318,13 @@ out:
 static void
 panel_populate_wired_device (PanelDeviceItem *item)
 {
+	gboolean ret;
 	GtkWidget *widget;
+	GVariant *hw_address;
 	GVariant *ip4 = NULL;
 	GVariant *ip6 = NULL;
-	GVariant *hw_address;
+	GVariant *nameservers = NULL;
+	GVariant *routes = NULL;
 	GVariant *speed;
 	CcNetworkPanelPrivate *priv = item->panel->priv;
 
@@ -1252,26 +1333,99 @@ panel_populate_wired_device (PanelDeviceItem *item)
 						     "hbox_wired_ip6"));
 	if (item->proxy_ip6 != NULL) {
 		gtk_widget_show (widget);
+
+		/* array of (ipdata, prefix, route) */
 		ip6 = g_dbus_proxy_get_cached_property (item->proxy_ip6,
 							"Addresses");
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
 							     "label_wired_ip6"));
-		panel_set_label_for_variant_ipv6_array (widget, ip6);
+		panel_set_label_for_variant_ipv6_prefixed_array (widget, ip6);
+
+		/* array of (ipdata, prefix, route) */
+		routes = g_dbus_proxy_get_cached_property (item->proxy_ip6,
+							   "Routes");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wired_route"));
+		ret = panel_set_label_for_variant_ipv6_prefixed_array (widget, routes);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_route"));
+		gtk_widget_set_visible (widget, ret);
+
+		/* array of ipdata */
+		nameservers = g_dbus_proxy_get_cached_property (item->proxy_ip6,
+								"Nameservers");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wired_dns"));
+		ret = panel_set_label_for_variant_ipv6_array (widget, nameservers);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_dns"));
+		gtk_widget_set_visible (widget, ret);
+
+		/* Domains = array of string */
+		//no widget
+
+		/* i'm not sure how to get this yet */
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_subnet"));
+		gtk_widget_hide (widget);
 	} else {
 		gtk_widget_hide (widget);
 	}
 
 	/* set IPv4 */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-						     "label_wired_ip4"));
 	if (item->proxy_ip4 != NULL) {
+		/* array of (array of uint32) */
 		ip4 = g_dbus_proxy_get_cached_property (item->proxy_ip4,
 							"Addresses");
-		panel_set_label_for_variant_ipv4_array (widget, ip4);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wired_ip4"));
+		panel_set_label_for_variant_ipv4_array_array (widget, ip4);
+
+		/* array of (array of uint32) */
+		routes = g_dbus_proxy_get_cached_property (item->proxy_ip4,
+							   "Routes");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wired_route"));
+		ret = panel_set_label_for_variant_ipv4_array_array (widget, routes);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_route"));
+		gtk_widget_set_visible (widget, ret);
+
+		/* array of uint32 */
+		nameservers = g_dbus_proxy_get_cached_property (item->proxy_ip4,
+								"Nameservers");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wired_dns"));
+		panel_set_label_for_variant_ipv4_array (widget, nameservers);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_dns"));
+		gtk_widget_show (widget);
+
+		/* Domains = array of string */
+		//no widget
+		/* WinsServers = array of uint32 */
+		//no widget
+
+		/* i'm not sure how to get this yet */
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_subnet"));
+		gtk_widget_hide (widget);
+
 	} else {
 		ip4 = g_dbus_proxy_get_cached_property (item->proxy,
 							"Ip4Address");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wired_ip4"));
 		panel_set_label_for_variant_ipv4 (widget, ip4);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_route"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_dns"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wired_subnet"));
+		gtk_widget_hide (widget);
 	}
 
 	/* set MAC */
@@ -1291,6 +1445,10 @@ panel_populate_wired_device (PanelDeviceItem *item)
 		g_variant_unref (ip4);
 	if (ip6 != NULL)
 		g_variant_unref (ip6);
+	if (routes != NULL)
+		g_variant_unref (routes);
+	if (nameservers != NULL)
+		g_variant_unref (nameservers);
 	g_variant_unref (hw_address);
 	g_variant_unref (speed);
 }
@@ -1301,11 +1459,14 @@ panel_populate_wired_device (PanelDeviceItem *item)
 static void
 panel_populate_wireless_device (PanelDeviceItem *item)
 {
+	gboolean ret;
 	GtkWidget *widget;
 	GVariant *bitrate;
 	GVariant *hw_address;
 	GVariant *ip4;
 	GVariant *ip6;
+	GVariant *nameservers = NULL;
+	GVariant *routes = NULL;
 	CcNetworkPanelPrivate *priv = item->panel->priv;
 
 	/* set IPv6 */
@@ -1313,26 +1474,86 @@ panel_populate_wireless_device (PanelDeviceItem *item)
 						     "hbox_wireless_ip6"));
 	if (item->proxy_ip6 != NULL) {
 		gtk_widget_show (widget);
+
+		/* array of (ipdata, prefix, route) */
 		ip6 = g_dbus_proxy_get_cached_property (item->proxy_ip6,
 							"Addresses");
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
 							     "label_wireless_ip6"));
-		panel_set_label_for_variant_ipv6_array (widget, ip6);
+		panel_set_label_for_variant_ipv6_prefixed_array (widget, ip6);
+
+		/* array of (ipdata, prefix, route) */
+		routes = g_dbus_proxy_get_cached_property (item->proxy_ip6,
+							   "Routes");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wireless_route"));
+		ret = panel_set_label_for_variant_ipv6_prefixed_array (widget, routes);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wireless_route"));
+		gtk_widget_set_visible (widget, ret);
+
+		/* array of ipdata */
+		nameservers = g_dbus_proxy_get_cached_property (item->proxy_ip6,
+								"Nameservers");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wireless_dns"));
+		ret = panel_set_label_for_variant_ipv6_array (widget, nameservers);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wireless_dns"));
+		gtk_widget_set_visible (widget, ret);
+
+		/* Domains = array of string */
+		//no widget
 	} else {
 		gtk_widget_hide (widget);
 	}
 
 	/* set IPv4 */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-						     "label_wireless_ip4"));
 	if (item->proxy_ip4 != NULL) {
+		/* array of (array of uint32) */
 		ip4 = g_dbus_proxy_get_cached_property (item->proxy_ip4,
 							"Addresses");
-		panel_set_label_for_variant_ipv4_array (widget, ip4);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wireless_ip4"));
+		panel_set_label_for_variant_ipv4_array_array (widget, ip4);
+
+		/* array of (array of uint32) */
+		routes = g_dbus_proxy_get_cached_property (item->proxy_ip4,
+							   "Routes");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wireless_route"));
+		panel_set_label_for_variant_ipv4_array_array (widget, routes);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wireless_route"));
+		gtk_widget_show (widget);
+
+		/* array of uint32 */
+		nameservers = g_dbus_proxy_get_cached_property (item->proxy_ip4,
+								"Nameservers");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wireless_dns"));
+		panel_set_label_for_variant_ipv4_array (widget, nameservers);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wireless_dns"));
+		gtk_widget_show (widget);
+
+		/* Domains = array of string */
+		//no widget
+		/* WinsServers = array of uint32 */
+		//no widget
+
 	} else {
 		ip4 = g_dbus_proxy_get_cached_property (item->proxy,
 							"Ip4Address");
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "label_wireless_ip4"));
 		panel_set_label_for_variant_ipv4 (widget, ip4);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wireless_route"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+							     "hbox_wireless_dns"));
+		gtk_widget_hide (widget);
 	}
 
 	/* set MAC */
@@ -1351,6 +1572,10 @@ panel_populate_wireless_device (PanelDeviceItem *item)
 	g_variant_unref (ip4);
 	if (ip6 != NULL)
 		g_variant_unref (ip6);
+	if (routes != NULL)
+		g_variant_unref (routes);
+	if (nameservers != NULL)
+		g_variant_unref (nameservers);
 	g_variant_unref (hw_address);
 	g_variant_unref (bitrate);
 }
