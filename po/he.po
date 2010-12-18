@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-13 23:41+0200\n"
-"PO-Revision-Date: 2010-12-13 23:42+0200\n"
+"POT-Creation-Date: 2010-12-19 01:05+0200\n"
+"PO-Revision-Date: 2010-12-19 01:14+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -180,145 +180,78 @@ msgstr "רקע;תמונת רקע;צג;מסך"
 msgid "Center"
 msgstr "ממורכזת"
 
-#: ../panels/background/background.ui.h:2
+#. This refers to a slideshow background
+#: ../panels/background/background.ui.h:3
+msgid "Changes throughout the day"
+msgstr "משתנה במהלך היום"
+
+#: ../panels/background/background.ui.h:4
 msgid "Fill"
 msgstr "מילוי"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:5
 msgid "Scale"
 msgstr "התאמת הגודל"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgid "Span"
 msgstr "מתיחה"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgid "Tile"
 msgstr "פרישה"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 #: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
 msgstr "תקריב"
 
-#: ../panels/background/bg-colors-source.c:57
-msgid "Butter"
-msgstr "חמאה"
+#: ../panels/background/bg-colors-source.c:44
+msgid "Horizontal Gradient"
+msgstr "מדרג אופקי"
 
-#: ../panels/background/bg-colors-source.c:58
-msgid "Orange"
-msgstr "כתום"
+#: ../panels/background/bg-colors-source.c:45
+msgid "Vertical Gradient"
+msgstr "מדרג אנכי"
 
-#: ../panels/background/bg-colors-source.c:59
-msgid "Chocolate"
-msgstr "שוקולד"
+#: ../panels/background/bg-colors-source.c:46
+msgid "Solid Color"
+msgstr "צבע אחיד"
 
-#: ../panels/background/bg-colors-source.c:60
-msgid "Chameleon"
-msgstr "זיקית"
-
-#: ../panels/background/bg-colors-source.c:61
-msgid "Blue"
-msgstr "כחול"
-
-#: ../panels/background/bg-colors-source.c:62
-msgid "Plum"
-msgstr "שזיף"
-
-#: ../panels/background/bg-colors-source.c:63
-msgid "Red"
-msgstr "אדום"
-
-#: ../panels/background/bg-colors-source.c:64
-msgid "Aluminium"
-msgstr "אלומיניום"
-
-#: ../panels/background/bg-colors-source.c:65
-msgid "Gray"
-msgstr "אפור"
-
-#: ../panels/background/bg-colors-source.c:66
-msgid "Black"
-msgstr "שחור"
-
-#: ../panels/background/cc-background-panel.c:622
+#: ../panels/background/cc-background-panel.c:747
 msgid "Wallpapers"
 msgstr "רקעים"
 
-#: ../panels/background/cc-background-panel.c:630
+#: ../panels/background/cc-background-panel.c:755
 msgid "Pictures Folder"
 msgstr "תיקיית תמונות"
 
-#: ../panels/background/cc-background-panel.c:638
-msgid "Colors"
-msgstr "צבעים"
+#: ../panels/background/cc-background-panel.c:763
+msgid "Colors & Gradients"
+msgstr "צבעים ומדרגים"
 
-#: ../panels/background/cc-background-panel.c:647
+#: ../panels/background/cc-background-panel.c:772
 msgid "Flickr"
 msgstr "Flickr"
+
+#: ../panels/background/cc-background-panel.c:833
+msgid "Current background"
+msgstr "הרקע הנוכחי"
 
 #: ../panels/background/gnome-wp-info.c:59
 msgid "No Desktop Background"
 msgstr "אין רקע לשולחן העבודה"
 
-#: ../panels/background/gnome-wp-item.c:295
-msgid "Slide Show"
-msgstr "מצגת שקפים"
-
-#: ../panels/background/gnome-wp-item.c:297
-msgid "Image"
-msgstr "תמונה"
-
-#: ../panels/background/gnome-wp-item.c:303
+#: ../panels/background/gnome-wp-item.c:277
 msgid "multiple sizes"
 msgstr "מספר גדלים"
 
-#. translators: x pixel(s) by y pixel(s)
-#: ../panels/background/gnome-wp-item.c:306
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/gnome-wp-item.c:285
 #, c-format
-msgid "%d %s by %d %s"
-msgstr "%d %s ב־%d %s"
-
-#: ../panels/background/gnome-wp-item.c:308
-#: ../panels/background/gnome-wp-item.c:310
-msgid "pixel"
-msgid_plural "pixels"
-msgstr[0] "פיקסל"
-msgstr[1] "פיקסלים"
-
-#. translators: <b>wallpaper name</b>
-#. * mime type, size
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:318
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"תיקייה: %s"
-
-#. translators: <b>wallpaper name</b>
-#. * Image missing
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:330
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s\n"
-"תיקייה: %s"
-
-#: ../panels/background/gnome-wp-item.c:334
-msgid "Image missing"
-msgstr "חסרה תמונה"
+msgid "%d × %d"
+msgstr "%d × %d"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "12 hour format"
@@ -803,6 +736,7 @@ msgstr "סוג הקיצור."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/keyboard-shortcuts.c:1140
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -823,6 +757,71 @@ msgstr "מקלדת"
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
 msgstr "קיצור דרך;חזרה;הבהוב;"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:659
+#: ../panels/keyboard/keyboard-shortcuts.c:1544
+#: ../panels/keyboard/keyboard-shortcuts.c:1548
+msgid "Custom Shortcuts"
+msgstr "קיצורי דרך מותאמים אישית"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:767
+msgid "<Unknown Action>"
+msgstr "<פעולה לא ידועה>"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1166
+msgid "Error saving the new shortcut"
+msgstr "שגיאה בשמירת קיצור הדרך החדש"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1276
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
+msgstr ""
+"לא ניתן להשתמש בקיצור הדרך \"%s\" מכיוון שלא ניתן יהיה להקליד באמצעות מקש "
+"זה.\n"
+"נא לנסות מקש או צירוף מקשים שונה כגון לחיצה על Ctrl, Alt או Shift יחדיו."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1306
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"קיצור הדרך \"%s\" כבר משמש ל:\n"
+"\"%s\"‏"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "אם קיצור הדרך יוקצה מחדש אל %s\", קיצור הדרך \"%s\" יבוטל."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
+msgid "_Reassign"
+msgstr "הקצאה _מחדש"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "שגיאה בביטול מאיץ במסד נתוני ההגדרות: %s"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1498
+msgid "Too many custom shortcuts"
+msgstr "יותר מדי קיצורי דרך מותאמים אישית"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1706
+msgid "Section"
+msgstr "אגף"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1737
+msgid "Action"
+msgstr "פעולה"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1759
+msgid "Shortcut"
+msgstr "קיצור"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Cursor Blinking"
@@ -1127,7 +1126,10 @@ msgstr "י_צרנים:"
 msgid "Keyboard Layout Options"
 msgstr "אפשרויות פריסת מקלדת"
 
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
 #: ../panels/region/gnome-region-panel-xkb.c:70
+#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
 msgid "Unknown"
 msgstr "לא ידוע"
 
@@ -1144,7 +1146,6 @@ msgid "Models"
 msgstr "דגמים"
 
 #: ../panels/region/gnome-region-panel-xkbot.c:227
-#: ../panels/proxy/gnome-proxy-properties.c:554
 #: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "בררת מחדל"
@@ -1341,198 +1342,222 @@ msgstr "הגדרת העדפות העכבר ומשטח המגע שלך"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "משטח מגע;סמן;לחיצה;טפיחה;כפולה;לחצן;כדור שליטה;"
 
-#: ../panels/proxy/gnome-proxy-properties.c:672
-msgid "New Location..."
-msgstr "מיקום חדש..."
+#: ../panels/network/cc-network-panel.c:1062
+#: ../panels/network/cc-network-panel.c:1084
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i מסל״ש"
 
-#: ../panels/proxy/gnome-proxy-properties.c:789
-msgid "Location already exists"
-msgstr "המיקום כבר קיים"
+#: ../panels/network/cc-network-panel.c:1064
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i גסל״ש"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:1
-msgid "Network Proxy"
-msgstr "מתווך רשת"
+#: ../panels/network/cc-network-panel.c:1082
+#, c-format
+msgid "%i kb/s"
+msgstr "%i קסל״ש"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:2
-msgid "Set your network proxy preferences"
-msgstr "הגדרת העדפות מתווך הרשת"
+#: ../panels/network/cc-network-panel.c:1739
+msgid "Network proxy"
+msgstr "מתווך הרשת"
 
-#. Translators: those are keywords for the proxy control-center panel
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:4
-msgid "Web;Location;"
-msgstr "אינטרנט;מיקום;"
+#: ../panels/network/cc-network-panel.c:1748
+msgid "Set the system proxy settings"
+msgstr "הגדרת תצורת מתווך המערכת"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:1
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>חיבור ישי_ר לאינטרנט</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:69
+msgid "Wired"
+msgstr "קווי"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:2
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>הגדרות מתווך _אוטומטיות</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:73
+msgid "Wireless"
+msgstr "אלחוטי"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:3
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>הגדרות מ_תווך ידניות</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:78
+msgid "Mobile broadband"
+msgstr "רשת סלולרית"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:4
-msgid "<b>_Use authentication</b>"
-msgstr "<b>_שימוש באימות</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:82
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:5
-msgid "Autoconfiguration _URL:"
-msgstr "_כתובת הגדרות אוטומטיות:"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:86
+msgid "Mesh"
+msgstr "סריג"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:6
-msgid "C_reate"
-msgstr "יצי_רה"
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:142
+msgid "Ad-hoc"
+msgstr "ייעודית"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:7
-msgid "Create New Location"
-msgstr "יצירת מיקום חדש"
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:146
+msgid "Intrastructure"
+msgstr "תשתית"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:8
-msgid "HTTP Proxy Details"
-msgstr "פרטי מתווך HTTP"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:164
+msgid "Status unknown"
+msgstr "המצב אינו ידוע"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:9
-msgid "H_TTP proxy:"
-msgstr "מתווך H_TTP:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:168
+msgid "Unmanaged"
+msgstr "לא מנוהל"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:10
-msgid "Ignore Host List"
-msgstr "התעלמות מרשימת מארחים"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:172
+msgid "Unavailable"
+msgstr "לא זמין"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:11
-msgid "Ignored Hosts"
-msgstr "מארחים בהתעלמות"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:176
+msgid "Disconnected"
+msgstr "מנותק"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
-msgid "Location:"
-msgstr "מיקום:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:180
+msgid "Preparing connection"
+msgstr "החיבור בהכנות"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:13
-msgid "Network Proxy Preferences"
-msgstr "העדפות מתווך רשת"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:184
+msgid "Configuring connection"
+msgstr "החיבור מוגדר"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:14
-msgid "Port:"
-msgstr "שער:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:188
+msgid "Authenticating"
+msgstr "בהליכי אימות"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:15
-msgid "Proxy Configuration"
-msgstr "הגדרות מתווך רשת"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:192
+msgid "Getting network address"
+msgstr "כתובת הרשת מתקבלת"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:16
-msgid "S_ocks host:"
-msgstr "מא_רח ה־Socks:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:196
+msgid "Connected"
+msgstr "מחובר"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:17
-msgid "The location already exists."
-msgstr "המיקום כבר קיים."
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:200
+msgid "Failed to connect"
+msgstr "אירע כשל בעת החיבור"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:18
-msgid "U_sername:"
-msgstr "_שם משתמש:"
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "רשת"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:19
-msgid "_Delete Location"
-msgstr "_מחיקת מיקום"
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
+msgid "Network settings"
+msgstr "הגדרות רשת"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:20
-msgid "_Details"
-msgstr "_פרטים"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:21
-msgid "_FTP proxy:"
-msgstr "מתווך _FTP:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:22
-msgid "_Location name:"
-msgstr "_שם מיקום:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:23
-msgid "_Password:"
-msgstr "_ססמה:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:24
-msgid "_Secure HTTP proxy:"
-msgstr "מתווך HTTP מ_אובטח"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:25
-msgid "_Use the same proxy for all protocols"
-msgstr "_שימוש באותו המתווך עבור כל הפרוטוקולים"
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;"
+msgstr "רשת;אלחוטי;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
+msgid "Airplane Mode"
+msgstr "מצב טיסה"
+
+#: ../panels/network/network.ui.h:2
 msgid "Configuration URL:"
 msgstr "כתובת התצורה:"
 
-#: ../panels/network/network.ui.h:2
+#: ../panels/network/network.ui.h:3
+msgid "DNS:"
+msgstr "DNS:"
+
+#: ../panels/network/network.ui.h:4
+msgid "Default Route:"
+msgstr "נתיב בררת המחדל:"
+
+#: ../panels/network/network.ui.h:5
 msgid "FTP Proxy:"
 msgstr "מתווך FTP:"
 
-#: ../panels/network/network.ui.h:3
-msgid "Flight Mode"
-msgstr "מצב טיסה"
-
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:6
 msgid "Gateway:"
 msgstr "שער גישה:"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:7
 msgid "Group Name:"
 msgstr "שם הקבוצה:"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:8
 msgid "Group Password:"
 msgstr "ססמת הקבוצה:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:9
 msgid "HTTP Proxy:"
 msgstr "מתווך HTTP:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address:"
 msgstr "כתובת חומרה:"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:11
+msgid "IMEI:"
+msgstr "IMEI (מס׳ ברזל):"
+
+#: ../panels/network/network.ui.h:12
 msgid "IP Address:"
 msgstr "כתובת IP:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:13
+msgid "IPv4 Address:"
+msgstr "כתובת IPv4:"
+
+#: ../panels/network/network.ui.h:14
+msgid "IPv6 Address:"
+msgstr "כתובת IPv6:"
+
+#: ../panels/network/network.ui.h:15
 msgid "Method:"
 msgstr "שיטה:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:16
 msgid "Network Name:"
 msgstr "שם הרשת:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:17
 msgid "Provider:"
 msgstr "ספק:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:18
 msgid "Secure HTTP Proxy:"
 msgstr "מתווך HTTP מאובטח:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:19
 msgid "Security:"
 msgstr "אבטחה:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:20
 msgid "Socks Host:"
 msgstr "מארח Socks:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:21
 msgid "Speed:"
 msgstr "מהירות:"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:22
+msgid "Subnet Mast:"
+msgstr "מסכת רשת:"
+
+#: ../panels/network/network.ui.h:23
 #: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
 msgstr "שחרור"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:24
 msgid "Username:"
 msgstr "שם משתמש:"
 
@@ -2887,6 +2912,10 @@ msgstr "כניסה באמצעות טביעת אצבע:"
 msgid "Language:"
 msgstr "שפה:"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+msgid "Location:"
+msgstr "מיקום:"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Login Options"
 msgstr "אפשרויות כניסה"
@@ -3013,6 +3042,158 @@ msgstr "שטויות;במיץ;"
 msgid "_All Settings"
 msgstr "_כל ההגדרות"
 
+#~ msgid "Butter"
+#~ msgstr "חמאה"
+
+#~ msgid "Orange"
+#~ msgstr "כתום"
+
+#~ msgid "Chocolate"
+#~ msgstr "שוקולד"
+
+#~ msgid "Chameleon"
+#~ msgstr "זיקית"
+
+#~ msgid "Plum"
+#~ msgstr "שזיף"
+
+#~ msgid "Red"
+#~ msgstr "אדום"
+
+#~ msgid "Aluminium"
+#~ msgstr "אלומיניום"
+
+#~ msgid "Gray"
+#~ msgstr "אפור"
+
+#~ msgid "Black"
+#~ msgstr "שחור"
+
+#~ msgid "Colors"
+#~ msgstr "צבעים"
+
+#~ msgid "Slide Show"
+#~ msgstr "מצגת שקפים"
+
+#~ msgid "Image"
+#~ msgstr "תמונה"
+
+#~ msgid "%d %s by %d %s"
+#~ msgstr "%d %s ב־%d %s"
+
+#~ msgid "pixel"
+#~ msgid_plural "pixels"
+#~ msgstr[0] "פיקסל"
+#~ msgstr[1] "פיקסלים"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "תיקייה: %s"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "תיקייה: %s"
+
+#~ msgid "Image missing"
+#~ msgstr "חסרה תמונה"
+
+#~ msgid "New Location..."
+#~ msgstr "מיקום חדש..."
+
+#~ msgid "Location already exists"
+#~ msgstr "המיקום כבר קיים"
+
+#~ msgid "Set your network proxy preferences"
+#~ msgstr "הגדרת העדפות מתווך הרשת"
+
+#~ msgid "Web;Location;"
+#~ msgstr "אינטרנט;מיקום;"
+
+#~ msgid "<b>Di_rect internet connection</b>"
+#~ msgstr "<b>חיבור ישי_ר לאינטרנט</b>"
+
+#~ msgid "<b>_Automatic proxy configuration</b>"
+#~ msgstr "<b>הגדרות מתווך _אוטומטיות</b>"
+
+#~ msgid "<b>_Manual proxy configuration</b>"
+#~ msgstr "<b>הגדרות מ_תווך ידניות</b>"
+
+#~ msgid "<b>_Use authentication</b>"
+#~ msgstr "<b>_שימוש באימות</b>"
+
+#~ msgid "Autoconfiguration _URL:"
+#~ msgstr "_כתובת הגדרות אוטומטיות:"
+
+#~ msgid "C_reate"
+#~ msgstr "יצי_רה"
+
+#~ msgid "Create New Location"
+#~ msgstr "יצירת מיקום חדש"
+
+#~ msgid "HTTP Proxy Details"
+#~ msgstr "פרטי מתווך HTTP"
+
+#~ msgid "H_TTP proxy:"
+#~ msgstr "מתווך H_TTP:"
+
+#~ msgid "Ignore Host List"
+#~ msgstr "התעלמות מרשימת מארחים"
+
+#~ msgid "Ignored Hosts"
+#~ msgstr "מארחים בהתעלמות"
+
+#~ msgid "Network Proxy Preferences"
+#~ msgstr "העדפות מתווך רשת"
+
+#~ msgid "Port:"
+#~ msgstr "שער:"
+
+#~ msgid "Proxy Configuration"
+#~ msgstr "הגדרות מתווך רשת"
+
+#~ msgid "S_ocks host:"
+#~ msgstr "מא_רח ה־Socks:"
+
+#~ msgid "The location already exists."
+#~ msgstr "המיקום כבר קיים."
+
+#~ msgid "U_sername:"
+#~ msgstr "_שם משתמש:"
+
+#~ msgid "_Delete Location"
+#~ msgstr "_מחיקת מיקום"
+
+#~ msgid "_Details"
+#~ msgstr "_פרטים"
+
+#~ msgid "_FTP proxy:"
+#~ msgstr "מתווך _FTP:"
+
+#~ msgid "_Location name:"
+#~ msgstr "_שם מיקום:"
+
+#~ msgid "_Password:"
+#~ msgstr "_ססמה:"
+
+#~ msgid "_Secure HTTP proxy:"
+#~ msgstr "מתווך HTTP מ_אובטח"
+
+#~ msgid "_Use the same proxy for all protocols"
+#~ msgstr "_שימוש באותו המתווך עבור כל הפרוטוקולים"
+
+#~ msgid "Flight Mode"
+#~ msgstr "מצב טיסה"
+
 #~ msgid "_Detect Monitors"
 #~ msgstr "_זיהוי צגים"
 
@@ -3027,51 +3208,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Year:"
 #~ msgstr "שנה:"
-
-#~ msgid "<Unknown Action>"
-#~ msgstr "<פעולה לא ידועה>"
-
-#~ msgid "Custom Shortcuts"
-#~ msgstr "קיצורי דרך מותאמים אישית"
-
-#~ msgid "Error saving the new shortcut"
-#~ msgstr "שגיאה בשמירת קיצור הדרך החדש"
-
-#~ msgid ""
-#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
-#~ "type using this key.\n"
-#~ "Please try with a key such as Control, Alt or Shift at the same time."
-#~ msgstr ""
-#~ "לא ניתן להשתמש בקיצור הדרך \"%s\" מכיוון שלא ניתן יהיה להקליד באמצעות מקש "
-#~ "זה.\n"
-#~ "נא לנסות מקש או צירוף מקשים שונה כגון לחיצה על Ctrl, Alt או Shift יחדיו."
-
-#~ msgid ""
-#~ "The shortcut \"%s\" is already used for\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "קיצור הדרך \"%s\" כבר משמש ל:\n"
-#~ "\"%s\"‏"
-
-#~ msgid ""
-#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#~ "disabled."
-#~ msgstr "אם קיצור הדרך יוקצה מחדש אל %s\", קיצור הדרך \"%s\" יבוטל."
-
-#~ msgid "_Reassign"
-#~ msgstr "הקצאה _מחדש"
-
-#~ msgid "Error unsetting accelerator in configuration database: %s"
-#~ msgstr "שגיאה בביטול מאיץ במסד נתוני ההגדרות: %s"
-
-#~ msgid "Too many custom shortcuts"
-#~ msgstr "יותר מדי קיצורי דרך מותאמים אישית"
-
-#~ msgid "Action"
-#~ msgstr "פעולה"
-
-#~ msgid "Shortcut"
-#~ msgstr "קיצור"
 
 #~ msgid "Mirror Screens"
 #~ msgstr "היפוך התצוגה כמראה"
@@ -3108,9 +3244,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Evolution Mail Reader"
 #~ msgstr "קורא הדואר Evolution"
-
-#~ msgid "Firebird"
-#~ msgstr "Firebird"
 
 #~ msgid "Firefox"
 #~ msgstr "Firefox"
@@ -4047,9 +4180,6 @@ msgstr "_כל ההגדרות"
 #~ "לאחר האימות, הכנס את הסיסמה החדשה שלך, הכנס אותה שוב לווידוא ולחץ על "
 #~ "<b>שנה סיסמה</b>."
 
-#~ msgid "_Authenticate"
-#~ msgstr "ה_זדהה"
-
 #~ msgid "All files"
 #~ msgstr "כל הקבצים"
 
@@ -4111,9 +4241,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "[WALLPAPER...]"
 #~ msgstr "[WALLPAPER...]"
-
-#~ msgid "Default Pointer"
-#~ msgstr "סמן ברירת מחדל"
 
 #~ msgid "Install"
 #~ msgstr "התקן"
@@ -4211,9 +4338,6 @@ msgstr "_כל ההגדרות"
 #~ msgid "Hinting"
 #~ msgstr "רמיזה"
 
-#~ msgid "Horizontal gradient"
-#~ msgstr "מדרג אופקי"
-
 #~ msgid "Icons"
 #~ msgstr "איקונים"
 
@@ -4237,9 +4361,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Save _As..."
 #~ msgstr "שמור _בשם..."
-
-#~ msgid "Solid color"
-#~ msgstr "צבע אחיד"
 
 #~ msgid "Stretch"
 #~ msgstr "מתוח"
@@ -4273,9 +4394,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "VB_GR"
 #~ msgstr "VB_GR"
-
-#~ msgid "Vertical gradient"
-#~ msgstr "מדרג אנכי"
 
 #~ msgid "Window Border"
 #~ msgstr "מסגרת חלון"
@@ -4775,9 +4893,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Fill screen"
 #~ msgstr "מילוי המסך"
-
-#~ msgid "Interface"
-#~ msgstr "מנשק"
 
 #~ msgid "Menus and Toolbars"
 #~ msgstr "תפריטים וסרגלי כלים"
