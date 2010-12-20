@@ -302,6 +302,18 @@ actualize_printers_list (CcPrintersPanel *self)
         gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
         &selected_iter);
     }
+  else
+    {
+      if (priv->num_dests > 0 &&
+          gtk_tree_model_get_iter_first ((GtkTreeModel *) store,
+                                         &selected_iter))
+        {
+          priv->current_dest = 0;
+          gtk_tree_selection_select_iter (
+            gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
+            &selected_iter);
+        }
+    }
 }
 
 static void
@@ -317,14 +329,14 @@ populate_printers_list (CcPrintersPanel *self)
   treeview = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-treeview");
 
+  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
+                    "changed", G_CALLBACK (printer_selection_changed_cb), self);
+
   actualize_printers_list (self);
 
   renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new_with_attributes ("Printer", renderer,
                                                      "text", PRINTER_NAME_COLUMN, NULL);
-
-  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
-                    "changed", G_CALLBACK (printer_selection_changed_cb), self);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 }
