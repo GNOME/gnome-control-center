@@ -89,12 +89,8 @@ activate_panel (GnomeControlCenter *shell,
                 const gchar        *icon_name)
 {
   GnomeControlCenterPrivate *priv = shell->priv;
-  GAppInfo *appinfo;
-  GError *err = NULL;
-  GdkAppLaunchContext *ctx;
   GType panel_type = G_TYPE_INVALID;
   GList *panels, *l;
-  GKeyFile *key_file;
 
   /* check if there is an plugin that implements this panel */
   panels = g_io_extension_point_get_extensions (priv->extension_point);
@@ -163,44 +159,6 @@ activate_panel (GnomeControlCenter *shell,
                              nat_height);
           return;
         }
-    }
-
-
-  /* if a plugin was not found, then start app directly */
-
-  if (err)
-    {
-      g_warning ("Error starting \"%s\": %s", desktop_file, err->message);
-
-      g_error_free (err);
-      err = NULL;
-
-      return;
-    }
-
-  key_file = g_key_file_new ();
-  g_key_file_load_from_file (key_file, desktop_file, 0, &err);
-
-  appinfo = (GAppInfo*) g_desktop_app_info_new_from_keyfile (key_file);
-
-  g_key_file_free (key_file);
-  key_file = NULL;
-
-
-  ctx = gdk_app_launch_context_new ();
-  gdk_app_launch_context_set_screen (ctx, gdk_screen_get_default ());
-  gdk_app_launch_context_set_timestamp (ctx, priv->last_time);
-
-  g_app_info_launch (appinfo, NULL, G_APP_LAUNCH_CONTEXT (ctx), &err);
-
-  g_object_unref (appinfo);
-  g_object_unref (ctx);
-
-  if (err)
-    {
-      g_warning ("Error starting \"%s\": %s", desktop_file, err->message);
-      g_error_free (err);
-      err = NULL;
     }
 }
 

@@ -52,11 +52,6 @@
         <Category>X-GNOME-PersonalSettings</Category>
         <Category>X-GNOME-Settings-Panel</Category>
       </And>
-      <And>
-        <Category>Settings</Category>
-	<Category>DesktopSettings</Category>
-        <Category>X-GNOME-Settings-Panel</Category>
-      </And>
     </Include>
   </Menu> <!-- End Personal -->
 
@@ -80,20 +75,8 @@
     <Include>
       <And>
         <Category>Settings</Category>
+        <Category>X-GNOME-SystemSettings</Category>
         <Category>X-GNOME-Settings-Panel</Category>
-        <Or>
-          <Category>X-GNOME-SystemSettings</Category>
-          <And>
-            <Category>System</Category>
-            <Not>
-              <Or>
-                <Category>X-GNOME-PersonalSettings</Category>
-                <Category>DesktopSettings</Category>
-                <Category>HardwareSettings</Category>
-              </Or>
-            </Not>
-          </And>
-        </Or>
       </And>
     </Include>
   </Menu> <!-- End System -->
@@ -105,9 +88,12 @@
     <Include>
       <And>
         <Category>Settings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
         <Not>
           <Or>
-            <Category>X-GNOME-Settings-Panel</Category>
+            <Category>X-GNOME-PersonalSettings</Category>
+            <Category>X-GNOME-SystemSettings</Category>
+            <Category>HardwareSettings</Category>
             <Filename>gnome-control-center.desktop</Filename>
           </Or>
         </Not>
