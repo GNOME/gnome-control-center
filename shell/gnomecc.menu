@@ -15,7 +15,6 @@
    <!-- Sort the control center categories -->
    <Layout>
      <Menuname>Personal</Menuname>
-     <Menuname>Internet and Network</Menuname>
      <Menuname>Hardware</Menuname>
      <Menuname>System</Menuname>
      <Menuname>Other</Menuname>
@@ -30,7 +29,6 @@
         <Or>
           <Category>X-GNOME-PersonalSettings</Category>
           <Category>DesktopSettings</Category>
-          <Category>X-GNOME-NetworkSettings</Category>
           <Category>HardwareSettings</Category>
           <Category>X-GNOME-SystemSettings</Category>
           <Category>System</Category>
@@ -62,19 +60,6 @@
     </Include>
   </Menu> <!-- End Personal -->
 
-  <!-- Internet and Network category -->
-  <Menu>
-    <Name>Internet and Network</Name>
-    <Directory>InternetAndNetwork.directory</Directory>
-    <Include>
-      <And>
-        <Category>Settings</Category>
-        <Category>X-GNOME-NetworkSettings</Category>
-        <Category>X-GNOME-Settings-Panel</Category>
-      </And>
-    </Include>
-  </Menu> <!-- End Internet and Network -->
-
   <!-- Hardware category -->
   <Menu>
     <Name>Hardware</Name>
@@ -105,7 +90,6 @@
                 <Category>X-GNOME-PersonalSettings</Category>
                 <Category>DesktopSettings</Category>
                 <Category>HardwareSettings</Category>
-                <Category>X-GNOME-NetworkSettings</Category>
               </Or>
             </Not>
           </And>
