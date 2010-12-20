@@ -44,7 +44,7 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-region-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
+CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(ui_DATA)
 
 

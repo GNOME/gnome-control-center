@@ -78,7 +78,7 @@ update-icon-cache:
 	fi
 
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xmldata_DATA) $(autostart_DATA) $(bin_SCRIPTS)
+CLEANFILES = $(Desktop_in_files) $(desktop_DATA) $(xmldata_DATA) $(autostart_DATA) $(bin_SCRIPTS)
 EXTRA_DIST = $(xmldata_in_files) gnome-default-applications.pc.in
 
 -include $(top_srcdir)/git.mk

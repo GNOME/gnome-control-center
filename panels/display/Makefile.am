@@ -58,7 +58,7 @@ INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
+CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 install-data-hook: update-icon-cache

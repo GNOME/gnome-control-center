@@ -30,7 +30,6 @@ INCLUDES   = 					\
 	-DGNOMECC_UI_DIR=\""$(uidir)"\"
 
 CLEANFILES = \
-	$(GNOMECC_CAPPLETS_CLEANFILES) \
 	$(Desktop_in_files) \
 	$(desktop_DATA)
 
