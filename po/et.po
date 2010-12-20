@@ -17,10 +17,11 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-12-10 15:04+0000\n"
-"PO-Revision-Date: 2010-12-12 13:45+0200\n"
+"POT-Creation-Date: 2010-12-18 23:15+0000\n"
+"PO-Revision-Date: 2010-12-18 19:08+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -151,6 +152,10 @@ msgstr "Taustapilt;Tapeet;Ekraan;"
 msgid "Center"
 msgstr "Keskel"
 
+#. This refers to a slideshow background
+msgid "Changes throughout the day"
+msgstr ""
+
 msgid "Fill"
 msgstr "Üle ekraani"
 
@@ -166,35 +171,14 @@ msgstr "Korduv"
 msgid "Zoom"
 msgstr "Ekraan täidetud"
 
-msgid "Butter"
-msgstr "Või"
+msgid "Horizontal Gradient"
+msgstr "Rõhtne üleminek"
 
-msgid "Orange"
-msgstr "Apelsin"
+msgid "Vertical Gradient"
+msgstr "Püstine üleminek"
 
-msgid "Chocolate"
-msgstr "Šokolaad"
-
-msgid "Chameleon"
-msgstr "Kameeleon"
-
-msgid "Blue"
-msgstr "Sinine"
-
-msgid "Plum"
-msgstr "Ploom"
-
-msgid "Red"
-msgstr "Punane"
-
-msgid "Aluminium"
-msgstr "Alumiinium"
-
-msgid "Gray"
-msgstr "Hall"
-
-msgid "Black"
-msgstr "Must"
+msgid "Solid Color"
+msgstr "Ühtlane värvus"
 
 msgid "Wallpapers"
 msgstr "Taustapildid"
@@ -202,64 +186,26 @@ msgstr "Taustapildid"
 msgid "Pictures Folder"
 msgstr "Pildikataloog"
 
-msgid "Colors"
-msgstr "Värvused"
+msgid "Colors & Gradients"
+msgstr "Värvused ja üleminekud"
 
 msgid "Flickr"
 msgstr ""
 
+msgid "Current background"
+msgstr "Praegune taustapilt"
+
 msgid "No Desktop Background"
 msgstr "Töölaual puudub taust"
-
-msgid "Slide Show"
-msgstr "Slaidiesitus"
-
-msgid "Image"
-msgstr "Pilt"
 
 msgid "multiple sizes"
 msgstr "mitmes suuruses"
 
-#. translators: x pixel(s) by y pixel(s)
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
 #, c-format
-msgid "%d %s by %d %s"
-msgstr "%d %s × %d %s"
-
-msgid "pixel"
-msgid_plural "pixels"
-msgstr[0] "piksel"
-msgstr[1] "pikslit"
-
-#. translators: <b>wallpaper name</b>
-#. * mime type, size
-#. * Folder: /path/to/file
-#.
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Kataloog: %s"
-
-#. translators: <b>wallpaper name</b>
-#. * Image missing
-#. * Folder: /path/to/file
-#.
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s\n"
-"Kataloog: %s"
-
-msgid "Image missing"
-msgstr "Pilt on puudu"
+msgid "%d × %d"
+msgstr "%d × %d"
 
 msgid "12 hour format"
 msgstr "12 tunni vorming"
@@ -517,8 +463,8 @@ msgstr "Paremale"
 msgid "Upside-down"
 msgstr "Tagurpidi"
 
-msgid "_Detect Monitors"
-msgstr "_Tuvasta kuvarid"
+msgid "_Detect Displays"
+msgstr "_Tuvasta kuvad"
 
 #. Note that mirror is a verb in this string
 msgid "_Mirror displays"
@@ -586,6 +532,16 @@ msgstr "Kuvasid pole võimalik tuvastada"
 msgid "Could not get screen information"
 msgstr "Ekraani andmeid pole võimalik hankida"
 
+msgid "System Info"
+msgstr "Süsteemi andmed"
+
+msgid "System Information"
+msgstr "Süsteemi andmed"
+
+#. Translators: those are keywords for the System Information panel
+msgid "device;system;information;memory;processor;version;"
+msgstr "seadmed;süsteem;andmed;info;mälu;protsessor;versioon;"
+
 msgid "Sound"
 msgstr "Heli"
 
@@ -624,6 +580,59 @@ msgstr "Klaviatuur"
 #. Translators: those are keywords for the keyboard control-center panel
 msgid "Shortcut;Repeat;Blink;"
 msgstr ""
+
+msgid "Custom Shortcuts"
+msgstr "Kohandatud kiirklahvid"
+
+msgid "<Unknown Action>"
+msgstr "<tundmatu tegevus>"
+
+msgid "Error saving the new shortcut"
+msgstr "Viga uue kiirklahvi salvestamisel"
+
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
+msgstr ""
+"Kiirklahvi \"%s\" pole võimalik kasutada, kuna see teeb selle klahvi "
+"kasutamise tavaolukorras võimatuks.\n"
+"Palun proovi klahvi kombineerida klahvidega Control, Alt või Shift."
+
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"Kiirklahvi \"%s\" juba kasutatakse järgneva tegevuse jaoks:\n"
+"\"%s\""
+
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr ""
+"Kui sa määrad selle kiirklahvi tegevusele \"%s\", siis tegevuse \"%s\" "
+"kiirklahv keelatakse."
+
+msgid "_Reassign"
+msgstr "_Määra"
+
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "Viga kiirklahvi eemaldamisel sätete andmebaasist: %s"
+
+msgid "Too many custom shortcuts"
+msgstr "Liiga palju kohandatud kiirklahve"
+
+msgid "Section"
+msgstr ""
+
+msgid "Action"
+msgstr "Tegevus"
+
+msgid "Shortcut"
+msgstr "Kiirklahv"
 
 msgid "Cursor Blinking"
 msgstr "Kursori vilkumine"
@@ -769,7 +778,7 @@ msgid "Print a diagram of the selected keyboard layout"
 msgstr "Valitud klaviatuuripaigutusest pildi printimine"
 
 msgid "Region and Language"
-msgstr ""
+msgstr "Piirkond ja keel"
 
 msgid "Remove the selected keyboard layout from the list"
 msgstr "Valitud klaviatuuripaigutuse eemaldamine loendist"
@@ -841,6 +850,8 @@ msgstr "_Tarnijad:"
 msgid "Keyboard Layout Options"
 msgstr "Klaviatuuripaigutuse valikud"
 
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
 msgid "Unknown"
 msgstr "Tundmatu"
 
@@ -999,108 +1010,119 @@ msgstr "Hiire- ja puutepadjaeelistuste seadmine"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr ""
 
-msgid "New Location..."
-msgstr "Uus asukoht..."
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i Mb/s"
 
-msgid "Location already exists"
-msgstr "Asukoht on juba olemas"
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i Gb/s"
 
-msgid "Network Proxy"
+#, c-format
+msgid "%i kb/s"
+msgstr "%i kb/s"
+
+msgid "Network proxy"
 msgstr "Võrgu proksi"
 
-msgid "Set your network proxy preferences"
-msgstr "Võrguproksi eelistuste seadmine"
+msgid "Set the system proxy settings"
+msgstr "Süsteemi proksisätete määramine"
 
-#. Translators: those are keywords for the proxy control-center panel
-msgid "Web;Location;"
-msgstr "Veeb;Asukoht;"
+#. TRANSLATORS: device type
+msgid "Wired"
+msgstr ""
 
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>_Otseühendus Internetiga</b>"
+#. TRANSLATORS: device type
+msgid "Wireless"
+msgstr ""
 
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>A_utomaatne proksi seadistamine</b>"
+#. TRANSLATORS: device type
+msgid "Mobile broadband"
+msgstr ""
 
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>_Käsitsi seadistatav proksi</b>"
+#. TRANSLATORS: device type
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
-msgid "<b>_Use authentication</b>"
-msgstr "<b>Autentimise kas_utamine</b>"
+#. TRANSLATORS: device type
+msgid "Mesh"
+msgstr ""
 
-msgid "Autoconfiguration _URL:"
-msgstr "Automaatse seadistuse U_RL:"
+#. TRANSLATORS: AP type
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
 
-msgid "C_reate"
-msgstr "_Loo"
+#. TRANSLATORS: AP type
+msgid "Intrastructure"
+msgstr ""
 
-msgid "Create New Location"
-msgstr "Uue asukoha loomine"
+#. TRANSLATORS: device status
+msgid "Status unknown"
+msgstr "Olek teadmata"
 
-msgid "HTTP Proxy Details"
-msgstr "HTTP proksi üksikasjad"
+#. TRANSLATORS: device status
+msgid "Unmanaged"
+msgstr ""
 
-msgid "H_TTP proxy:"
-msgstr "_HTTP proksi:"
+#. TRANSLATORS: device status
+msgid "Unavailable"
+msgstr "Pole saadaval"
 
-msgid "Ignore Host List"
-msgstr "Eiratavate hostide nimekiri"
+#. TRANSLATORS: device status
+msgid "Disconnected"
+msgstr "Ühendamata"
 
-msgid "Ignored Hosts"
-msgstr "Eiratavad hostid"
+#. TRANSLATORS: device status
+msgid "Preparing connection"
+msgstr "Ühenduse ettevalmistamine"
 
-msgid "Location:"
-msgstr "Asukoht:"
+#. TRANSLATORS: device status
+msgid "Configuring connection"
+msgstr "Ühenduse seadistamine"
 
-msgid "Network Proxy Preferences"
-msgstr "Võrguproksi eelistused"
+#. TRANSLATORS: device status
+msgid "Authenticating"
+msgstr "Autentimine"
 
-msgid "Port:"
-msgstr "Port:"
+#. TRANSLATORS: device status
+msgid "Getting network address"
+msgstr "Võrguaadressi hankimine"
 
-msgid "Proxy Configuration"
-msgstr "Proksi sätted"
+#. TRANSLATORS: device status
+msgid "Connected"
+msgstr "Ühendatud"
 
-msgid "S_ocks host:"
-msgstr "S_ocks host:"
+#. TRANSLATORS: device status
+msgid "Failed to connect"
+msgstr "Ühenduse loomine nurjus"
 
-msgid "The location already exists."
-msgstr "Asukoht on juba olemas."
+msgid "Network"
+msgstr "Võrk"
 
-msgid "U_sername:"
-msgstr "Kasutaja_nimi:"
+msgid "Network settings"
+msgstr "Võrgusätted"
 
-msgid "_Delete Location"
-msgstr "_Kustuta asukoht"
+#. Translators: those are keywords for the network control-center panel
+msgid "Network;Wireless;IP;LAN;"
+msgstr "Võrk;Kohtvõrk;WiFi;IP;"
 
-msgid "_Details"
-msgstr "_Üksikasjad"
-
-msgid "_FTP proxy:"
-msgstr "_FTP proksi:"
-
-msgid "_Location name:"
-msgstr "_Asukoha nimi:"
-
-msgid "_Password:"
-msgstr "_Parool:"
-
-msgid "_Secure HTTP proxy:"
-msgstr "Tu_rvalise HTTP proksi:"
-
-msgid "_Use the same proxy for all protocols"
-msgstr "Kõikide _protokollide jaoks kasutatakse sama proksit"
+msgid "Airplane Mode"
+msgstr ""
 
 msgid "Configuration URL:"
-msgstr "Seadistuse URL:"
+msgstr "Seadistuste URL:"
+
+msgid "DNS:"
+msgstr "DNS:"
+
+msgid "Default Route:"
+msgstr "Vaikimisi marsruut:"
 
 msgid "FTP Proxy:"
 msgstr "FTP proksi:"
 
-msgid "Flight Mode"
-msgstr ""
-
 msgid "Gateway:"
-msgstr ""
+msgstr "Lüüs:"
 
 msgid "Group Name:"
 msgstr "Grupi nimi:"
@@ -1112,10 +1134,19 @@ msgid "HTTP Proxy:"
 msgstr "HTTP proksi:"
 
 msgid "Hardware Address:"
-msgstr ""
+msgstr "Riistvaraline aadress:"
+
+msgid "IMEI:"
+msgstr "IMEI:"
 
 msgid "IP Address:"
 msgstr "IP-aadress:"
+
+msgid "IPv4 Address:"
+msgstr "IPv4-aadress:"
+
+msgid "IPv6 Address:"
+msgstr "IPv6-aadress:"
 
 msgid "Method:"
 msgstr "Meetod:"
@@ -1138,21 +1169,14 @@ msgstr "Socks host:"
 msgid "Speed:"
 msgstr "Kiirus:"
 
+msgid "Subnet Mast:"
+msgstr ""
+
 msgid "Unlock"
 msgstr ""
 
 msgid "Username:"
 msgstr "Kasutajanimi:"
-
-#. Translators: those are keywords for the brightness and lock control-center panel
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr ""
-
-msgid "Screen"
-msgstr "Ekraan"
-
-msgid "Screen brightness and lock settings"
-msgstr ""
 
 msgid "Power"
 msgstr "Vooluhaldus"
@@ -1223,6 +1247,16 @@ msgstr ""
 msgid "%.0lf%% charged"
 msgstr ""
 
+#. Translators: those are keywords for the brightness and lock control-center panel
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr ""
+
+msgid "Screen"
+msgstr "Ekraan"
+
+msgid "Screen brightness and lock settings"
+msgstr ""
+
 msgid "Enable debugging code"
 msgstr "Silumiskoodi lubamine"
 
@@ -1236,13 +1270,13 @@ msgid "Output"
 msgstr "Väljund"
 
 msgid "Sound Output Volume"
-msgstr ""
+msgstr "Heliväljundi valjus"
 
 msgid "Input"
 msgstr "Sisend"
 
 msgid "Microphone Volume"
-msgstr ""
+msgstr "Mikrofoni valjus"
 
 msgctxt "balance"
 msgid "Left"
@@ -1333,7 +1367,7 @@ msgid "_Output volume: "
 msgstr ""
 
 msgid "Sound Effects"
-msgstr ""
+msgstr "Heliefektid"
 
 msgid "_Alert volume: "
 msgstr ""
@@ -1420,17 +1454,17 @@ msgstr "Helivaljuse ja -sündmuste muutmine"
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
 msgid "Bark"
-msgstr ""
+msgstr "Haukumine"
 
 #. Translators: This is the name of an audio file that sounds like a water drip.
 #. You might want to translate it into the equivalent words of your language.
 msgid "Drip"
-msgstr ""
+msgstr "Tilkumine"
 
 #. Translators: This is the name of an audio file that sounds like tapping glass.
 #. You might want to translate it into the equivalent words of your language.
 msgid "Glass"
-msgstr ""
+msgstr "Klaas"
 
 #. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
 #. You might want to translate it into the equivalent words of your language.
@@ -1475,22 +1509,18 @@ msgid "Acceptance delay:"
 msgstr ""
 
 #, fuzzy
-#| msgid "Beep when a key is pr_essed"
 msgid "Beep when Caps and Num Lock are used"
 msgstr "Klahvi vajutamisel tehakse _piiksu"
 
 #, fuzzy
-#| msgid "Beep when a key is pr_essed"
 msgid "Beep when a key is"
 msgstr "Klahvi vajutamisel tehakse _piiksu"
 
 #, fuzzy
-#| msgid "Beep when a key is reje_cted"
 msgid "Beep when a key is rejected"
 msgstr "Klahvi _hülgamisel tehakse piiksu"
 
 #, fuzzy
-#| msgid "Beep when a _modifier key is pressed"
 msgid "Beep when a modifer key is pressed"
 msgstr "Muuteklahvi vajutamisel tehakse _piiksu"
 
@@ -1534,7 +1564,6 @@ msgid "Decrease size:"
 msgstr ""
 
 #, fuzzy
-#| msgid "Disa_ble sticky keys if two keys are pressed together"
 msgid "Disable if two keys are pressed together"
 msgstr "_Kahe klahvi koosvajutamisel keelatakse kleepuvad klahvid"
 
@@ -1569,7 +1598,6 @@ msgid "Hover Click"
 msgstr ""
 
 #, fuzzy
-#| msgid "_Ignore fast duplicate keypresses"
 msgid "Ignores fast duplicate keypresses"
 msgstr "Kiireid klahvide korduvvajutusi _eiratakse"
 
@@ -1649,17 +1677,14 @@ msgid "Treats a sequence of modifier keys as a key combination"
 msgstr ""
 
 #, fuzzy
-#| msgid "_Initiate click when stopping pointer movement"
 msgid "Trigger a click when the pointer hovers"
 msgstr "_Kursori peatumisel tehakse hiireklõps"
 
 #, fuzzy
-#| msgid "_Trigger secondary click by holding down the primary button"
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "_Vasaku nupu allhoidmisel tehakse paremklõps"
 
 #, fuzzy
-#| msgid "Beep when _accessibility features are turned on or off"
 msgid "Turn on accessibility features from the keyboard"
 msgstr "_Hõlbustusvalikute sisse- ja väljalülitamisel tehakse piiksu"
 
@@ -1872,12 +1897,12 @@ msgid ""
 "Click to make changes"
 msgstr ""
 
-#, fuzzy
-#| msgid "Please contact your system administrator for help."
 msgid ""
 "System policy prevents changes.\n"
 "Contact your system administrator"
-msgstr "Abi saamiseks võta palun ühendust oma süsteemiülemaga."
+msgstr ""
+"Süsteemi reeglid ei luba muutusi teha.\n"
+"Võta ühendust oma süsteemiülemaga"
 
 msgid "More choices..."
 msgstr "Rohkem valikuid..."
@@ -1927,7 +1952,7 @@ msgid "Strong"
 msgstr "Tugev"
 
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Paroolid ei klapi"
 
 msgid "Wrong password"
 msgstr "Vale parool"
@@ -1959,10 +1984,10 @@ msgid "This user does not exist."
 msgstr ""
 
 msgid "Failed to delete user"
-msgstr ""
+msgstr "Tõrge kasutaja kustutamisel"
 
 msgid "You cannot delete your own account."
-msgstr ""
+msgstr "Oma kontot pole võimalik kustutada."
 
 #, c-format
 msgid "%s is still logged in"
@@ -2181,6 +2206,9 @@ msgstr "Sõrmejäljega sisselogimine:"
 msgid "Language:"
 msgstr "Keel:"
 
+msgid "Location:"
+msgstr "Asukoht:"
+
 msgid "Login Options"
 msgstr "Sisselogimise valikud"
 
@@ -2276,6 +2304,158 @@ msgstr ""
 msgid "_All Settings"
 msgstr ""
 
+#~ msgid "Butter"
+#~ msgstr "Või"
+
+#~ msgid "Orange"
+#~ msgstr "Apelsin"
+
+#~ msgid "Chocolate"
+#~ msgstr "Šokolaad"
+
+#~ msgid "Chameleon"
+#~ msgstr "Kameeleon"
+
+#~ msgid "Plum"
+#~ msgstr "Ploom"
+
+#~ msgid "Red"
+#~ msgstr "Punane"
+
+#~ msgid "Aluminium"
+#~ msgstr "Alumiinium"
+
+#~ msgid "Gray"
+#~ msgstr "Hall"
+
+#~ msgid "Black"
+#~ msgstr "Must"
+
+#~ msgid "Colors"
+#~ msgstr "Värvused"
+
+#~ msgid "Slide Show"
+#~ msgstr "Slaidiesitus"
+
+#~ msgid "Image"
+#~ msgstr "Pilt"
+
+#~ msgid "%d %s by %d %s"
+#~ msgstr "%d %s × %d %s"
+
+#~ msgid "pixel"
+#~ msgid_plural "pixels"
+#~ msgstr[0] "piksel"
+#~ msgstr[1] "pikslit"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Kataloog: %s"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Kataloog: %s"
+
+#~ msgid "Image missing"
+#~ msgstr "Pilt on puudu"
+
+#~ msgid "_Detect Monitors"
+#~ msgstr "_Tuvasta kuvarid"
+
+#~ msgid "New Location..."
+#~ msgstr "Uus asukoht..."
+
+#~ msgid "Location already exists"
+#~ msgstr "Asukoht on juba olemas"
+
+#~ msgid "Set your network proxy preferences"
+#~ msgstr "Võrguproksi eelistuste seadmine"
+
+#~ msgid "Web;Location;"
+#~ msgstr "Veeb;Asukoht;"
+
+#~ msgid "<b>Di_rect internet connection</b>"
+#~ msgstr "<b>_Otseühendus Internetiga</b>"
+
+#~ msgid "<b>_Automatic proxy configuration</b>"
+#~ msgstr "<b>A_utomaatne proksi seadistamine</b>"
+
+#~ msgid "<b>_Manual proxy configuration</b>"
+#~ msgstr "<b>_Käsitsi seadistatav proksi</b>"
+
+#~ msgid "<b>_Use authentication</b>"
+#~ msgstr "<b>Autentimise kas_utamine</b>"
+
+#~ msgid "Autoconfiguration _URL:"
+#~ msgstr "Automaatse seadistuse U_RL:"
+
+#~ msgid "C_reate"
+#~ msgstr "_Loo"
+
+#~ msgid "Create New Location"
+#~ msgstr "Uue asukoha loomine"
+
+#~ msgid "HTTP Proxy Details"
+#~ msgstr "HTTP proksi üksikasjad"
+
+#~ msgid "H_TTP proxy:"
+#~ msgstr "_HTTP proksi:"
+
+#~ msgid "Ignore Host List"
+#~ msgstr "Eiratavate hostide nimekiri"
+
+#~ msgid "Ignored Hosts"
+#~ msgstr "Eiratavad hostid"
+
+#~ msgid "Network Proxy Preferences"
+#~ msgstr "Võrguproksi eelistused"
+
+#~ msgid "Port:"
+#~ msgstr "Port:"
+
+#~ msgid "Proxy Configuration"
+#~ msgstr "Proksi sätted"
+
+#~ msgid "S_ocks host:"
+#~ msgstr "S_ocks host:"
+
+#~ msgid "The location already exists."
+#~ msgstr "Asukoht on juba olemas."
+
+#~ msgid "U_sername:"
+#~ msgstr "Kasutaja_nimi:"
+
+#~ msgid "_Delete Location"
+#~ msgstr "_Kustuta asukoht"
+
+#~ msgid "_Details"
+#~ msgstr "_Üksikasjad"
+
+#~ msgid "_FTP proxy:"
+#~ msgstr "_FTP proksi:"
+
+#~ msgid "_Location name:"
+#~ msgstr "_Asukoha nimi:"
+
+#~ msgid "_Password:"
+#~ msgstr "_Parool:"
+
+#~ msgid "_Secure HTTP proxy:"
+#~ msgstr "Tu_rvalise HTTP proksi:"
+
+#~ msgid "_Use the same proxy for all protocols"
+#~ msgstr "Kõikide _protokollide jaoks kasutatakse sama proksit"
+
 #~ msgid "Day:"
 #~ msgstr "Päev:"
 
@@ -2284,53 +2464,6 @@ msgstr ""
 
 #~ msgid "Year:"
 #~ msgstr "Aasta:"
-
-#~ msgid "<Unknown Action>"
-#~ msgstr "<tundmatu tegevus>"
-
-#~ msgid "Custom Shortcuts"
-#~ msgstr "Kohandatud kiirklahvid"
-
-#~ msgid "Error saving the new shortcut"
-#~ msgstr "Viga uue kiirklahvi salvestamisel"
-
-#~ msgid ""
-#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
-#~ "type using this key.\n"
-#~ "Please try with a key such as Control, Alt or Shift at the same time."
-#~ msgstr ""
-#~ "Kiirklahvi \"%s\" pole võimalik kasutada, kuna see teeb selle klahvi "
-#~ "kasutamise tavaolukorras võimatuks.\n"
-#~ "Palun proovi klahvi kombineerida klahvidega Control, Alt või Shift."
-
-#~ msgid ""
-#~ "The shortcut \"%s\" is already used for\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "Kiirklahvi \"%s\" juba kasutatakse järgneva tegevuse jaoks:\n"
-#~ "\"%s\""
-
-#~ msgid ""
-#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#~ "disabled."
-#~ msgstr ""
-#~ "Kui sa määrad selle kiirklahvi tegevusele \"%s\", siis tegevuse \"%s\" "
-#~ "kiirklahv keelatakse."
-
-#~ msgid "_Reassign"
-#~ msgstr "_Määra"
-
-#~ msgid "Error unsetting accelerator in configuration database: %s"
-#~ msgstr "Viga kiirklahvi eemaldamisel sätete andmebaasist: %s"
-
-#~ msgid "Too many custom shortcuts"
-#~ msgstr "Liiga palju kohandatud kiirklahve"
-
-#~ msgid "Action"
-#~ msgstr "Tegevus"
-
-#~ msgid "Shortcut"
-#~ msgstr "Kiirklahv"
 
 #~ msgid "Mirror Screens"
 #~ msgstr "Ekraanid on peegeldatud"
@@ -2621,9 +2754,6 @@ msgstr ""
 #~ "Pärast autentimist sisesta oma uus parool, kontrolliks sisesta oma uus "
 #~ "parool veel teinegi kord ja klõpsa <b>Muuda parooli</b>."
 
-#~ msgid "_Authenticate"
-#~ msgstr "_Autendi"
-
 #~ msgid "Accessible Lo_gin"
 #~ msgstr "_Hõlbustustega sisselogimine"
 
@@ -2727,9 +2857,6 @@ msgstr ""
 #~ msgid "[WALLPAPER...]"
 #~ msgstr "[TAPEET...]"
 
-#~ msgid "Default Pointer"
-#~ msgstr "Vaikimisi kursor"
-
 #~ msgid "Install"
 #~ msgstr "Paigalda"
 
@@ -2824,9 +2951,6 @@ msgstr ""
 #~ msgid "Hinting"
 #~ msgstr "Varjundamine"
 
-#~ msgid "Horizontal gradient"
-#~ msgstr "Rõhtne üleminek"
-
 #~ msgid "Icons"
 #~ msgstr "Ikoonid"
 
@@ -2847,9 +2971,6 @@ msgstr ""
 
 #~ msgid "Save _As..."
 #~ msgstr "Salvesta _kui..."
-
-#~ msgid "Solid color"
-#~ msgstr "Ühtlane värvus"
 
 #~ msgid "Stretch"
 #~ msgstr "Venitatud"
@@ -2881,9 +3002,6 @@ msgstr ""
 # see ei lähe tõlkides sugugi arusaadavamaks
 #~ msgid "VB_GR"
 #~ msgstr "VS_RP"
-
-#~ msgid "Vertical gradient"
-#~ msgstr "Püstine üleminek"
 
 #~ msgid "Window Border"
 #~ msgstr "Akna ääris"
