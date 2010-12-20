@@ -1993,6 +1993,11 @@ gvc_mixer_control_dispose (GObject *object)
 {
         GvcMixerControl *control = GVC_MIXER_CONTROL (object);
 
+        if (control->priv->reconnect_id != 0) {
+                g_source_remove (control->priv->reconnect_id);
+                control->priv->reconnect_id = 0;
+        }
+
         if (control->priv->pa_context != NULL) {
                 pa_context_unref (control->priv->pa_context);
                 control->priv->pa_context = NULL;
