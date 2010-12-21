@@ -2553,7 +2553,7 @@ run_application (void)
   set_monitors_tooltip (app, FALSE);
 
   /* FIXME: this should be computed dynamically */
-  foo_scroll_area_set_min_size (FOO_SCROLL_AREA (app->area), -1, 200);
+  foo_scroll_area_set_min_size (FOO_SCROLL_AREA (app->area), 0, 200);
   gtk_widget_show (app->area);
   g_signal_connect (app->area, "paint",
                     G_CALLBACK (on_area_paint), app);

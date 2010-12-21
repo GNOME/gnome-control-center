@@ -293,8 +293,8 @@ foo_scroll_area_init (FooScrollArea *scroll_area)
   scroll_area->priv->vadj = g_object_ref_sink (new_adjustment());
   scroll_area->priv->x_offset = 0.0;
   scroll_area->priv->y_offset = 0.0;
-  scroll_area->priv->min_width = -1;
-  scroll_area->priv->min_height = -1;
+  scroll_area->priv->min_width = 0;
+  scroll_area->priv->min_height = 0;
   scroll_area->priv->auto_scroll_info = NULL;
   scroll_area->priv->input_regions = g_ptr_array_new ();
   scroll_area->priv->surface = NULL;
