@@ -216,12 +216,15 @@ static void
 on_menu_activate_open_volume_control (GtkMenuItem *item,
                                       GvcStreamStatusIcon   *icon)
 {
+        GAppInfo *app;
+        GdkAppLaunchContext *context;
         GError *error;
 
         error = NULL;
-        gdk_spawn_command_line_on_screen (gtk_widget_get_screen (icon->priv->dock),
-                                          "gnome-control-center sound",
-                                          &error);
+        context = gdk_app_launch_context_new ();
+        app = g_app_info_create_from_commandline ("gnome-control-center sound", "Sound preferences", 0, &error);
+        if (app)
+                g_app_info_launch (app, NULL, G_APP_LAUNCH_CONTEXT (context), &error);
 
         if (error != NULL) {
                 GtkWidget *dialog;
@@ -239,6 +242,9 @@ on_menu_activate_open_volume_control (GtkMenuItem *item,
                 gtk_widget_show (dialog);
                 g_error_free (error);
         }
+
+        g_object_unref (context);
+        g_object_unref (app);
 }
 
 static void
