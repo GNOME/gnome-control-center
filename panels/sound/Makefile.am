@@ -16,7 +16,6 @@ AM_CPPFLAGS =					\
 	$(WARN_CFLAGS)				\
 	$(CANBERRA_CFLAGS)			\
 	$(PANEL_CFLAGS)				\
-	$(DISABLE_DEPRECATED)			\
 	$(PULSEAUDIO_CFLAGS)			\
 	$(XML_CFLAGS)				\
 	-DLOCALE_DIR=\""$(datadir)/locale"\"	\
