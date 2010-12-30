@@ -143,7 +143,7 @@ panel_ap_mode_to_localized_string (guint mode)
 		break;
 	case NM_802_11_MODE_INFRA:
 		/* TRANSLATORS: AP type */
-		value = _("Intrastructure");
+		value = _("Infrastructure");
 		break;
 	default:
 		break;
