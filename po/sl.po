@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2010-12-10 22:58+0000\n"
-"PO-Revision-Date: 2010-12-11 20:55+0100\n"
+"POT-Creation-Date: 2010-12-30 16:23+0000\n"
+"PO-Revision-Date: 2010-12-30 21:35+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -161,148 +161,84 @@ msgstr "Slika ozadja:Zaslon;"
 msgid "Center"
 msgstr "Sredinsko"
 
-#: ../panels/background/background.ui.h:2
+#. This refers to a slideshow background
+#: ../panels/background/background.ui.h:3
+#, fuzzy
+msgid "Changes throughout the day"
+msgstr "Celo_dnevni dogodek"
+
+#: ../panels/background/background.ui.h:4
 msgid "Fill"
 msgstr "Polnilo"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:5
 msgid "Scale"
 msgstr "Spremeni velikost"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgid "Span"
 msgstr "Razpni"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgid "Tile"
 msgstr "Razpostavi"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 #: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
 msgstr "Približaj"
 
-#: ../panels/background/bg-colors-source.c:57
+#: ../panels/background/bg-colors-source.c:44
 #, fuzzy
-msgid "Butter"
-msgstr "Mutt"
+msgid "Horizontal Gradient"
+msgstr "Vodoravni preliv"
 
-#: ../panels/background/bg-colors-source.c:58
-msgid "Orange"
-msgstr "Oranžna"
+#: ../panels/background/bg-colors-source.c:45
+#, fuzzy
+msgid "Vertical Gradient"
+msgstr "Navpični preliv"
 
-#: ../panels/background/bg-colors-source.c:59
-msgid "Chocolate"
-msgstr "Čokoladna"
+#: ../panels/background/bg-colors-source.c:46
+#, fuzzy
+msgid "Solid Color"
+msgstr "Enobarvno"
 
-#: ../panels/background/bg-colors-source.c:60
-msgid "Chameleon"
-msgstr "Kameleon"
-
-#: ../panels/background/bg-colors-source.c:61
-msgid "Blue"
-msgstr "Modra"
-
-#: ../panels/background/bg-colors-source.c:62
-msgid "Plum"
-msgstr "Sliva"
-
-#: ../panels/background/bg-colors-source.c:63
-msgid "Red"
-msgstr "Rdeča"
-
-#: ../panels/background/bg-colors-source.c:64
-msgid "Aluminium"
-msgstr "Aluminij"
-
-#: ../panels/background/bg-colors-source.c:65
-msgid "Gray"
-msgstr "Siva"
-
-#: ../panels/background/bg-colors-source.c:66
-msgid "Black"
-msgstr "Črna"
-
-#: ../panels/background/cc-background-panel.c:622
+#: ../panels/background/cc-background-panel.c:747
 msgid "Wallpapers"
 msgstr "Ozadja namizja"
 
-#: ../panels/background/cc-background-panel.c:630
+#: ../panels/background/cc-background-panel.c:755
 msgid "Pictures Folder"
 msgstr "Mapa slik"
 
-#: ../panels/background/cc-background-panel.c:638
-msgid "Colors"
-msgstr "Barve"
+#: ../panels/background/cc-background-panel.c:763
+#, fuzzy
+msgid "Colors & Gradients"
+msgstr "Spremeni prilivanje"
 
-#: ../panels/background/cc-background-panel.c:647
+#: ../panels/background/cc-background-panel.c:772
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/gnome-wp-info.c:50
+#: ../panels/background/cc-background-panel.c:833
+#, fuzzy
+msgid "Current background"
+msgstr "Trenutna barva ozadja:"
+
+#: ../panels/background/gnome-wp-info.c:59
 msgid "No Desktop Background"
 msgstr "Ni ozadja namizja"
 
-#: ../panels/background/gnome-wp-item.c:294
-msgid "Slide Show"
-msgstr "Diapredstavitev"
-
-#: ../panels/background/gnome-wp-item.c:296
-msgid "Image"
-msgstr "Slika"
-
-#: ../panels/background/gnome-wp-item.c:302
+#: ../panels/background/gnome-wp-item.c:277
 msgid "multiple sizes"
 msgstr "različne velikosti"
 
-#. translators: x pixel(s) by y pixel(s)
-#: ../panels/background/gnome-wp-item.c:305
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/gnome-wp-item.c:285
 #, c-format
-msgid "%d %s by %d %s"
-msgstr "%d %s krat %d %s"
-
-#: ../panels/background/gnome-wp-item.c:307
-#: ../panels/background/gnome-wp-item.c:309
-msgid "pixel"
-msgid_plural "pixels"
-msgstr[0] "točk"
-msgstr[1] "točka"
-msgstr[2] "točki"
-msgstr[3] "točke"
-
-#. translators: <b>wallpaper name</b>
-#. * mime type, size
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:317
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Mapa: %s"
-
-#. translators: <b>wallpaper name</b>
-#. * Image missing
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:329
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s\n"
-"Mapa: %s"
-
-#: ../panels/background/gnome-wp-item.c:333
-msgid "Image missing"
-msgstr "Manjka slika"
+msgid "%d × %d"
+msgstr "%d × %d"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "12 hour format"
@@ -404,7 +340,8 @@ msgid "Clock;Timezone;Location;"
 msgstr "Manjkajoče mesto vstavka %s"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
-msgid "Date And Time"
+#, fuzzy
+msgid "Date and Time"
 msgstr "Datum in čas"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
@@ -655,8 +592,8 @@ msgstr "Zgoraj navzdol"
 
 #: ../panels/display/display-capplet.ui.h:8
 #, fuzzy
-msgid "_Detect Monitors"
-msgstr "_Zaznava zaslonov"
+msgid "_Detect Displays"
+msgstr "Ni mogoče zaznati zaslonov"
 
 #. Note that mirror is a verb in this string
 #: ../panels/display/display-capplet.ui.h:10
@@ -740,6 +677,21 @@ msgstr "Ni mogoče zaznati zaslonov"
 msgid "Could not get screen information"
 msgstr "Ni mogoče dobiti podatkov zaslona"
 
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+#, fuzzy
+msgid "System Info"
+msgstr "Dobi podrobnosti o sistemu"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+#, fuzzy
+msgid "System Information"
+msgstr "Informacijski sistem"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+msgid "device;system;information;memory;processor;version;"
+msgstr ""
+
 #: ../panels/keyboard/00-multimedia-key.xml.in.h:1
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Sound"
@@ -779,6 +731,7 @@ msgstr "Vrsta bližnjice."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/keyboard-shortcuts.c:1140
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -800,6 +753,69 @@ msgstr "Tipkovnica"
 #, fuzzy
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Čas utripanja kazalca"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:659
+#: ../panels/keyboard/keyboard-shortcuts.c:1544
+#: ../panels/keyboard/keyboard-shortcuts.c:1548
+msgid "Custom Shortcuts"
+msgstr "Bližnjica po meri"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:767
+msgid "<Unknown Action>"
+msgstr "<Neznano dejanje>"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1166
+msgid "Error saving the new shortcut"
+msgstr "Napaka med shranjevanjem nove bližnjice"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1276
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
+msgstr ""
+"Bližnjice \"%s\" ni mogoče uporabiti, saj to pomeni, da ta tipka ne bo več na voljo pri pisanju.\n"
+"Poskusite uporabiti to tipko s hkrati pritisnjeno tipko Control, Alt ali Shift."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1306
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"Bližnjica \"%s\" je že v uporabi za\n"
+" \"%s\""
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#, c-format
+msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "V primeru, da določite bližnjico kot \"%s\", bo bližnjica \"%s\" onemogočena."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
+msgid "_Reassign"
+msgstr "_Določitev bližnjice"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "Napaka med odstranjevanjem bližnjice v nastavitveni zbirki: %s"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1498
+msgid "Too many custom shortcuts"
+msgstr "Preveč bližnjic po meri"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1706
+#, fuzzy
+msgid "Section"
+msgstr "Odsek"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1737
+msgid "Action"
+msgstr "Dejanje"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1759
+msgid "Shortcut"
+msgstr "Bližnjica"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Cursor Blinking"
@@ -1105,7 +1121,11 @@ msgstr "_Prodajalci:"
 msgid "Keyboard Layout Options"
 msgstr "Možnosti razporeditve tipkovnice"
 
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
 #: ../panels/region/gnome-region-panel-xkb.c:70
+#: ../panels/network/panel-common.c:65
+#: ../panels/network/panel-common.c:138
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -1122,7 +1142,6 @@ msgid "Models"
 msgstr "Modeli"
 
 #: ../panels/region/gnome-region-panel-xkbot.c:227
-#: ../panels/proxy/gnome-proxy-properties.c:554
 #: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "Privzeto"
@@ -1324,217 +1343,230 @@ msgstr "Nastavi možnosti miške"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr ""
 
-#: ../panels/proxy/gnome-proxy-properties.c:672
-msgid "New Location..."
-msgstr "Novo mesto ..."
+#: ../panels/network/cc-network-panel.c:1062
+#: ../panels/network/cc-network-panel.c:1084
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i Mb/s"
 
-#: ../panels/proxy/gnome-proxy-properties.c:789
-msgid "Location already exists"
-msgstr "Mesto že obstaja."
+#: ../panels/network/cc-network-panel.c:1064
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i Gb/s"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:1
-msgid "Network Proxy"
-msgstr "Omrežni posredovalni strežnik"
+#: ../panels/network/cc-network-panel.c:1082
+#, c-format
+msgid "%i kb/s"
+msgstr "%i kb/s"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:2
-msgid "Set your network proxy preferences"
-msgstr "Možnosti posredovalnega strežnika omrežja"
+#: ../panels/network/cc-network-panel.c:1739
+msgid "Network proxy"
+msgstr "Omrežni posredniški strežnik"
 
-#. Translators: those are keywords for the proxy control-center panel
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:4
+#: ../panels/network/cc-network-panel.c:1748
+msgid "Set the system proxy settings"
+msgstr "Nastavi sistemske posredniške nastavitve"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:69
+msgid "Wired"
+msgstr "Žično"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:73
+msgid "Wireless"
+msgstr "Brezžično"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:78
+msgid "Mobile broadband"
+msgstr "Mobilni širokopasovni dostop"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:82
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:86
+msgid "Mesh"
+msgstr ""
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:142
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:146
 #, fuzzy
-msgid "Web;Location;"
-msgstr "Mesto doseženo\n"
+msgid "Infrastructure"
+msgstr "GNOME Infrastruktura"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:1
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>_Neposredna povezava v splet</b>"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:164
+#, fuzzy
+msgid "Status unknown"
+msgstr "Neznano stanje"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:2
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>_Samodejna nastavitev posredovalnega strežnika</b>"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:168
+msgid "Unmanaged"
+msgstr ""
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:3
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>_Ročna nastavitev posredovalnega strežnika</b>"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:172
+msgid "Unavailable"
+msgstr "Nedostopno"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:4
-msgid "<b>_Use authentication</b>"
-msgstr "<b>_Uporabi overitev</b>"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:176
+msgid "Disconnected"
+msgstr "Prekinjena povezava"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:5
-msgid "Autoconfiguration _URL:"
-msgstr "_Naslov URL samodejnih nastavitev:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:180
+#, fuzzy
+msgid "Preparing connection"
+msgstr "Pripravljanje omrežne povezave '%s' ..."
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:6
-msgid "C_reate"
-msgstr "Ustva_ri"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:184
+#, fuzzy
+msgid "Configuring connection"
+msgstr "Nastavljanje mobilne širokopasovne povezave '%s' ..."
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:7
-msgid "Create New Location"
-msgstr "Ustvari novo mesto"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:188
+msgid "Authenticating"
+msgstr "Overjanje"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:8
-msgid "HTTP Proxy Details"
-msgstr "Podrobnosti posredovalnega strežnika HTTP"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:192
+#, fuzzy
+msgid "Getting network address"
+msgstr "Preišči vrata omrežnega naslova"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:9
-msgid "H_TTP proxy:"
-msgstr "Posredovalni strežnik _HTTP:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:196
+msgid "Connected"
+msgstr "Povezano"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:10
-msgid "Ignore Host List"
-msgstr "Prezri seznam gostiteljev"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:200
+msgid "Failed to connect"
+msgstr "Napaka med povezovanjem"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:11
-msgid "Ignored Hosts"
-msgstr "Prezrti gostitelji"
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "Omrežje"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
-msgid "Location:"
-msgstr "Mesto:"
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
+msgid "Network settings"
+msgstr "Omrežne nastavitve"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:13
-msgid "Network Proxy Preferences"
-msgstr "Možnosti posredovalnega strežnika"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:14
-msgid "Port:"
-msgstr "Vrata:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:15
-msgid "Proxy Configuration"
-msgstr "Nastavitev posredovalnega strežnika"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:16
-msgid "S_ocks host:"
-msgstr "Gostitelj s_ocks:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:17
-msgid "The location already exists."
-msgstr "Mesto že obstaja."
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:18
-msgid "U_sername:"
-msgstr "_Uporabniško ime:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:19
-msgid "_Delete Location"
-msgstr "_Izbriši mesto"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:20
-msgid "_Details"
-msgstr "_Podrobnosti"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:21
-msgid "_FTP proxy:"
-msgstr "Posredovalni strežnik _FTP:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:22
-msgid "_Location name:"
-msgstr "_Ime mesta:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:23
-msgid "_Password:"
-msgstr "_Geslo:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:24
-msgid "_Secure HTTP proxy:"
-msgstr "_Varni posredovalni strežnik HTTP:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:25
-msgid "_Use the same proxy for all protocols"
-msgstr "_Uporabi isti posredovalni strežnik za vse protokole"
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;"
+msgstr "Omrežje;Brezžično;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
 #, fuzzy
-msgid "Configuration URL:"
-msgstr "URL za samodejno nastavitev posredovalnega strežnika"
-
-#: ../panels/network/network.ui.h:2
-#, fuzzy
-msgid "FTP Proxy:"
-msgstr "Posredovalni strežnik _FTP:"
-
-#: ../panels/network/network.ui.h:3
-#, fuzzy
-msgid "Flight Mode"
+msgid "Airplane Mode"
 msgstr "Način uvoza: "
 
+#: ../panels/network/network.ui.h:2
+msgid "Configuration URL:"
+msgstr "Nastavitveni naslov URL:"
+
+#: ../panels/network/network.ui.h:3
+msgid "DNS:"
+msgstr "DNS:"
+
 #: ../panels/network/network.ui.h:4
+msgid "Default Route:"
+msgstr "Privzeta smer:"
+
+#: ../panels/network/network.ui.h:5
+msgid "FTP Proxy:"
+msgstr "Posredovalni strežnik FTP:"
+
+#: ../panels/network/network.ui.h:6
 msgid "Gateway:"
 msgstr "Prehod:"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:7
 msgid "Group Name:"
 msgstr "Ime skupine:"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:8
 msgid "Group Password:"
 msgstr "Geslo skupine:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:9
 msgid "HTTP Proxy:"
 msgstr "Posredovalni strežnik HTTP: "
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address:"
 msgstr "Strojni naslov:"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:11
+msgid "IMEI:"
+msgstr ""
+
+#: ../panels/network/network.ui.h:12
 msgid "IP Address:"
 msgstr "Naslov IP:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:13
+msgid "IPv4 Address:"
+msgstr "Naslov IPv4:"
+
+#: ../panels/network/network.ui.h:14
+msgid "IPv6 Address:"
+msgstr "Naslov IPv6:"
+
+#: ../panels/network/network.ui.h:15
 msgid "Method:"
 msgstr "Način:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:16
 msgid "Network Name:"
 msgstr "_Ime omrežja:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:17
 msgid "Provider:"
 msgstr "Ponudnik:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:18
 msgid "Secure HTTP Proxy:"
 msgstr "Varni posredovalni strežnik HTTP:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:19
 msgid "Security:"
 msgstr "Varnost:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:20
 msgid "Socks Host:"
 msgstr "Gostitelj SOCKS:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:21
 msgid "Speed:"
 msgstr "Hitrost:"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:22
+msgid "Subnet Mask:"
+msgstr "Maska podomrežja:"
+
+#: ../panels/network/network.ui.h:23
 #: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
 msgstr "Odkleni"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:24
 msgid "Username:"
 msgstr "Uporabniško ime:"
-
-#. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr ""
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "Zaslon"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
-msgid "Screen brightness and lock settings"
-msgstr "Nastavitev zaklepanja in svetlosti zaslona"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -1563,13 +1595,13 @@ msgstr[2] "%i minuti"
 msgstr[3] "%i minute"
 
 #: ../panels/power/cc-power-panel.c:169
-#, fuzzy, c-format
+#, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
 msgstr[0] "%i ur"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[1] "%i ura"
+msgstr[2] "%i uri"
+msgstr[3] "%i ure"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
@@ -1579,13 +1611,12 @@ msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
 #: ../panels/power/cc-power-panel.c:178
-#, fuzzy
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ur"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[1] "ura"
+msgstr[2] "uri"
+msgstr[3] "ure"
 
 #: ../panels/power/cc-power-panel.c:179
 msgid "minute"
@@ -1630,12 +1661,24 @@ msgstr "Izbriši prazne mape"
 msgid "%.0lf%% charged"
 msgstr "Baterija je napolnjena (%d%%)"
 
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr ""
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "Zaslon"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "Nastavitev zaklepanja in svetlosti zaslona"
+
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
 msgstr "Omogoči razhroščevanje kode"
 
 #: ../panels/sound/applet-main.c:50
-#, fuzzy
 msgid "Version of this application"
 msgstr "Različica programa"
 
@@ -1839,20 +1882,20 @@ msgstr "Preskus"
 msgid "Subwoofer"
 msgstr "Nizkotonski zvočnik"
 
-#: ../panels/sound/gvc-stream-status-icon.c:233
+#: ../panels/sound/gvc-stream-status-icon.c:236
 #, c-format
 msgid "Failed to start Sound Preferences: %s"
 msgstr "Napaka med zagonom lastnosti zvoka: %s"
 
-#: ../panels/sound/gvc-stream-status-icon.c:256
+#: ../panels/sound/gvc-stream-status-icon.c:262
 msgid "_Mute"
 msgstr "_Nemo"
 
-#: ../panels/sound/gvc-stream-status-icon.c:265
+#: ../panels/sound/gvc-stream-status-icon.c:271
 msgid "_Sound Preferences"
 msgstr "_Nastavitve zvoka"
 
-#: ../panels/sound/gvc-stream-status-icon.c:449
+#: ../panels/sound/gvc-stream-status-icon.c:455
 msgid "Muted"
 msgstr "Nemo"
 
@@ -1923,9 +1966,8 @@ msgstr "Sonar"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Keyboard;Mouse;a11y;Accessibility;"
-msgstr " - GNOME ozadnji program miške"
+msgstr "Tipkovnica;Miška;a11y;Dostopnost;"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
@@ -1951,24 +1993,20 @@ msgid "150%"
 msgstr "150%"
 
 #: ../panels/universal-access/uap.ui.h:7
-#, fuzzy
 msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "Visok kontrast, velik izpis, obrnjeno"
+msgstr "<span size=\"x-large\">Visoko/obrnjeno</span>"
 
 #: ../panels/universal-access/uap.ui.h:8
-#, fuzzy
 msgid "<span size=\"x-large\">High</span>"
-msgstr "<b><span size=\"large\">_Nova igra</span></b>"
+msgstr "<span size=\"x-large\">Visoko</span>"
 
 #: ../panels/universal-access/uap.ui.h:9
-#, fuzzy
 msgid "<span size=\"x-large\">Low</span>"
-msgstr "<b><span size=\"large\">_Nova igra</span></b>"
+msgstr "<span size=\"x-large\">Nizo</span>"
 
 #: ../panels/universal-access/uap.ui.h:10
-#, fuzzy
 msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<b><span size=\"large\">_Nova igra</span></b>"
+msgstr "<span size=\"x-large\">Običajno</span>"
 
 #: ../panels/universal-access/uap.ui.h:11
 #, fuzzy
@@ -2111,9 +2149,8 @@ msgid "Increase size:"
 msgstr "Povečava velikosti besedila:"
 
 #: ../panels/universal-access/uap.ui.h:46
-#, fuzzy
 msgid "Keyboard Settings..."
-msgstr "Nastavitve računa"
+msgstr "Nastavitve tipkovnice ..."
 
 #: ../panels/universal-access/uap.ui.h:49
 msgid "Larger"
@@ -2158,9 +2195,8 @@ msgid "Options..."
 msgstr "Možnosti ..."
 
 #: ../panels/universal-access/uap.ui.h:64
-#, fuzzy
 msgid "Pointing and Clicking"
-msgstr "Opozorila in napake"
+msgstr "Kazanje in klikanje"
 
 #: ../panels/universal-access/uap.ui.h:65
 msgid "Puts a delay between when a key is pressed and when it is accepted"
@@ -2248,11 +2284,11 @@ msgstr "Pomočnik tipkanja"
 
 #: ../panels/universal-access/uap.ui.h:89
 msgid "Use a visual indication when an alert sound occurs"
-msgstr ""
+msgstr "Uporabi vidni način zvočnih opozoril"
 
 #: ../panels/universal-access/uap.ui.h:90
 msgid "Use an alternative form of text input"
-msgstr ""
+msgstr "Uporabi drugotni način vnosa besedila"
 
 #: ../panels/universal-access/uap.ui.h:91
 #, fuzzy
@@ -2900,6 +2936,10 @@ msgstr "Prijava s prstnim odtisom:"
 msgid "Language:"
 msgstr "Jezik:"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+msgid "Location:"
+msgstr "Mesto:"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Login Options"
 msgstr "Možnosti prijave"
@@ -3024,6 +3064,123 @@ msgstr "Lalala;Hop;Sasa;"
 msgid "_All Settings"
 msgstr "_Vse nastavitve"
 
+#, fuzzy
+#~ msgid "Butter"
+#~ msgstr "Mutt"
+#~ msgid "Orange"
+#~ msgstr "Oranžna"
+#~ msgid "Chocolate"
+#~ msgstr "Čokoladna"
+#~ msgid "Chameleon"
+#~ msgstr "Kameleon"
+#~ msgid "Plum"
+#~ msgstr "Sliva"
+#~ msgid "Red"
+#~ msgstr "Rdeča"
+#~ msgid "Aluminium"
+#~ msgstr "Aluminij"
+#~ msgid "Gray"
+#~ msgstr "Siva"
+#~ msgid "Black"
+#~ msgstr "Črna"
+#~ msgid "Colors"
+#~ msgstr "Barve"
+#~ msgid "Slide Show"
+#~ msgstr "Diapredstavitev"
+#~ msgid "Image"
+#~ msgstr "Slika"
+#~ msgid "%d %s by %d %s"
+#~ msgstr "%d %s krat %d %s"
+#~ msgid "pixel"
+#~ msgid_plural "pixels"
+#~ msgstr[0] "točk"
+#~ msgstr[1] "točka"
+#~ msgstr[2] "točki"
+#~ msgstr[3] "točke"
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Mapa: %s"
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Mapa: %s"
+#~ msgid "Image missing"
+#~ msgstr "Manjka slika"
+
+#, fuzzy
+#~ msgid "_Detect Monitors"
+#~ msgstr "_Zaznava zaslonov"
+#~ msgid "New Location..."
+#~ msgstr "Novo mesto ..."
+#~ msgid "Location already exists"
+#~ msgstr "Mesto že obstaja."
+#~ msgid "Set your network proxy preferences"
+#~ msgstr "Možnosti posredovalnega strežnika omrežja"
+
+#, fuzzy
+#~ msgid "Web;Location;"
+#~ msgstr "Mesto doseženo\n"
+#~ msgid "<b>Di_rect internet connection</b>"
+#~ msgstr "<b>_Neposredna povezava v splet</b>"
+#~ msgid "<b>_Automatic proxy configuration</b>"
+#~ msgstr "<b>_Samodejna nastavitev posredovalnega strežnika</b>"
+#~ msgid "<b>_Manual proxy configuration</b>"
+#~ msgstr "<b>_Ročna nastavitev posredovalnega strežnika</b>"
+#~ msgid "<b>_Use authentication</b>"
+#~ msgstr "<b>_Uporabi overitev</b>"
+#~ msgid "Autoconfiguration _URL:"
+#~ msgstr "_Naslov URL samodejnih nastavitev:"
+#~ msgid "C_reate"
+#~ msgstr "Ustva_ri"
+#~ msgid "Create New Location"
+#~ msgstr "Ustvari novo mesto"
+#~ msgid "HTTP Proxy Details"
+#~ msgstr "Podrobnosti posredovalnega strežnika HTTP"
+#~ msgid "H_TTP proxy:"
+#~ msgstr "Posredovalni strežnik _HTTP:"
+#~ msgid "Ignore Host List"
+#~ msgstr "Prezri seznam gostiteljev"
+#~ msgid "Ignored Hosts"
+#~ msgstr "Prezrti gostitelji"
+#~ msgid "Network Proxy Preferences"
+#~ msgstr "Možnosti posredovalnega strežnika"
+#~ msgid "Port:"
+#~ msgstr "Vrata:"
+#~ msgid "Proxy Configuration"
+#~ msgstr "Nastavitev posredovalnega strežnika"
+#~ msgid "S_ocks host:"
+#~ msgstr "Gostitelj s_ocks:"
+#~ msgid "The location already exists."
+#~ msgstr "Mesto že obstaja."
+#~ msgid "U_sername:"
+#~ msgstr "_Uporabniško ime:"
+#~ msgid "_Delete Location"
+#~ msgstr "_Izbriši mesto"
+#~ msgid "_Details"
+#~ msgstr "_Podrobnosti"
+#~ msgid "_FTP proxy:"
+#~ msgstr "Posredovalni strežnik _FTP:"
+#~ msgid "_Location name:"
+#~ msgstr "_Ime mesta:"
+#~ msgid "_Password:"
+#~ msgstr "_Geslo:"
+#~ msgid "_Secure HTTP proxy:"
+#~ msgstr "_Varni posredovalni strežnik HTTP:"
+#~ msgid "_Use the same proxy for all protocols"
+#~ msgstr "_Uporabi isti posredovalni strežnik za vse protokole"
+
+#, fuzzy
+#~ msgid "Flight Mode"
+#~ msgstr "Način uvoza: "
 #~ msgid "Day:"
 #~ msgstr "Dan:"
 #~ msgid "Month:"
@@ -3100,43 +3257,6 @@ msgstr "_Vse nastavitve"
 #~ msgstr "_Zrcalna zaslona"
 #~ msgid "Monitor: %s"
 #~ msgstr "Zaslon: %s"
-#~ msgid "<Unknown Action>"
-#~ msgstr "<Neznano dejanje>"
-#~ msgid "Custom Shortcuts"
-#~ msgstr "Bližnjica po meri"
-#~ msgid "Error saving the new shortcut"
-#~ msgstr "Napaka med shranjevanjem nove bližnjice"
-#~ msgid ""
-#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
-#~ "type using this key.\n"
-#~ "Please try with a key such as Control, Alt or Shift at the same time."
-#~ msgstr ""
-#~ "Bližnjice \"%s\" ni mogoče uporabiti, saj to pomeni, da ta tipka ne bo "
-#~ "več na voljo pri pisanju.\n"
-#~ "Poskusite uporabiti to tipko s hkrati pritisnjeno tipko Control, Alt ali "
-#~ "Shift."
-#~ msgid ""
-#~ "The shortcut \"%s\" is already used for\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "Bližnjica \"%s\" je že v uporabi za\n"
-#~ " \"%s\""
-#~ msgid ""
-#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#~ "disabled."
-#~ msgstr ""
-#~ "V primeru, da določite bližnjico kot \"%s\", bo bližnjica \"%s\" "
-#~ "onemogočena."
-#~ msgid "_Reassign"
-#~ msgstr "_Določitev bližnjice"
-#~ msgid "Error unsetting accelerator in configuration database: %s"
-#~ msgstr "Napaka med odstranjevanjem bližnjice v nastavitveni zbirki: %s"
-#~ msgid "Too many custom shortcuts"
-#~ msgstr "Preveč bližnjic po meri"
-#~ msgid "Action"
-#~ msgstr "Dejanje"
-#~ msgid "Shortcut"
-#~ msgstr "Bližnjica"
 #~ msgid "Unable to load stock icon '%s'\n"
 #~ msgstr "Ni mogoče naložiti založne ikone '%s'\n"
 #~ msgid "gesture|Move left"
@@ -3475,8 +3595,6 @@ msgstr "_Vse nastavitve"
 #~ "polje in klikniti <b>overi</b>.\n"
 #~ "Po overitvi vnesite novo geslo, ga ponovno vnesite za preverjanje in "
 #~ "kliknite <b>spremeni geslo</b>."
-#~ msgid "_Authenticate"
-#~ msgstr "_Overi"
 #~ msgid "Accessible Lo_gin"
 #~ msgstr "_Dostopna prijava"
 #~ msgid "Assistive Technologies"
@@ -3569,8 +3687,6 @@ msgstr "_Vse nastavitve"
 #~ msgstr "Določitev imena strani za prikaz (theme|background|fonts|interface)"
 #~ msgid "[WALLPAPER...]"
 #~ msgstr "[TAPETA ...]"
-#~ msgid "Default Pointer"
-#~ msgstr "Privzet kazalnik"
 #~ msgid "Install"
 #~ msgstr "Namesti"
 #~ msgid ""
@@ -3639,8 +3755,6 @@ msgstr "_Vse nastavitve"
 #~ msgstr "_Sivine"
 #~ msgid "Hinting"
 #~ msgstr "Prilagajanje pisave"
-#~ msgid "Horizontal gradient"
-#~ msgstr "Vodoravno prelivanje"
 #~ msgid "Icons"
 #~ msgstr "Ikone"
 #~ msgid "Icons only"
@@ -3657,8 +3771,6 @@ msgstr "_Vse nastavitve"
 #~ msgstr "Shrani temo kot ..."
 #~ msgid "Save _As..."
 #~ msgstr "Shrani _kot ..."
-#~ msgid "Solid color"
-#~ msgstr "Enobarvno"
 #~ msgid "Stretch"
 #~ msgstr "Raztegni"
 #~ msgid "Sub_pixel (LCDs)"
@@ -3683,8 +3795,6 @@ msgstr "_Vse nastavitve"
 #, fuzzy
 #~ msgid "VB_GR"
 #~ msgstr "VB_GR"
-#~ msgid "Vertical gradient"
-#~ msgstr "Navpično prelivanje"
 #~ msgid "Window Border"
 #~ msgstr "Rob okna"
 
