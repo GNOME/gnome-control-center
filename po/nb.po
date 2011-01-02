@@ -1,25 +1,28 @@
 # Norwegian translation of control-center (bokmål dialect).
 # Copyright (C) 1999-2005 Free Software Foundation, Inc.
+#
 # Kjartan Maraas <kmaraas@gnome.org>, 1999-2010.
 # Terance Edward Sola <terance@lyse.net>, 2005.
-#
+# Torstein Adolf Winterseth <kvikende@fsfe.org>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 13:45+0100\n"
-"PO-Revision-Date: 2010-12-17 13:53+0100\n"
-"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
+"cgi?product=gnome-control-center&component=general\n"
+"POT-Creation-Date: 2010-12-30 00:14+0000\n"
+"PO-Revision-Date: 2010-12-30 20:18+0100\n"
+"Last-Translator: Torstein Adolf Winterseth <kvikende@fsfe.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.1\n"
 
 #: ../gnome-control-center.schemas.in.h:1
 msgid "Current network location"
-msgstr "Aktiv nettverkslokasjon"
+msgstr "Aktiv nettverksadresse"
 
 #: ../gnome-control-center.schemas.in.h:2
 msgid "More backgrounds URL"
@@ -34,7 +37,7 @@ msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
 msgstr ""
-"Sett dette til navn på aktiv lokasjon. Dette brukes til å bestemme riktig "
+"Sett dette til navn på aktiv plassering. Dette brukes til å bestemme riktig "
 "nettverksproxykonfigurasjon."
 
 #: ../gnome-control-center.schemas.in.h:5
@@ -343,10 +346,12 @@ msgstr "September"
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Clock;Timezone;Location;"
-msgstr "Klokke;Tidssone;Lokasjon;"
+msgstr "Klokke;Tidssone;Plassering;Adresse;"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
-msgid "Date And Time"
+#, fuzzy
+#| msgid "Date And Time"
+msgid "Date and Time"
 msgstr "Dato og klokkeslett"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
@@ -670,7 +675,7 @@ msgstr "Kunne ikke lagre skjermkonfigurasjon"
 
 #: ../panels/display/xrandr-capplet.c:2252
 msgid "Could not get session bus while applying display configuration"
-msgstr "Kunne ikke finne sesjonsbussen under aktivering av skjermkonfigurasjon"
+msgstr "Kunne ikke finne øktbussen under aktivering av skjermkonfigurasjon"
 
 #: ../panels/display/xrandr-capplet.c:2297
 msgid "Could not detect displays"
@@ -704,7 +709,7 @@ msgstr "Skrivebord"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
-msgstr "Ny snarvei..."
+msgstr "Ny snarvei …"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:164
 #: ../panels/keyboard/eggcellrendererkeys.c:165
@@ -775,8 +780,10 @@ msgid ""
 "using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
-"Snarvei «%s» kan ikke brukes fordi det vil være umulig å skrive med denne tasten.\n"
-"Vennligst prøv med en tastekombinasjon som inkluderer Control, Alt eller Shift."
+"Snarvei «%s» kan ikke brukes fordi det vil være umulig å skrive med denne "
+"tasten.\n"
+"Vennligst prøv med en tastekombinasjon som inkluderer Control, Alt eller "
+"Shift."
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1306
 #, c-format
@@ -791,7 +798,8 @@ msgstr ""
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr "Hvis du omfordeler snarveien til «%s» vil snarveien for «%s» bli slått av."
+msgstr ""
+"Hvis du omfordeler snarveien til «%s» vil snarveien for «%s» bli slått av."
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1320
 msgid "_Reassign"
@@ -960,7 +968,7 @@ msgstr "_Aldri spør eller start programmer når et medie settes inn"
 
 #: ../panels/media/gnome-media-properties.ui.h:9
 msgid "_Other Media..."
-msgstr "_Annet medie..."
+msgstr "_Annet medie …"
 
 #: ../panels/media/gnome-media-properties.ui.h:10
 msgid "_Photos:"
@@ -1059,11 +1067,11 @@ msgstr "_Aksellerasjon:"
 
 #: ../panels/region/gnome-region-panel.ui.h:23
 msgid "_Add..."
-msgstr "_Legg til..."
+msgstr "_Legg til …"
 
 #: ../panels/region/gnome-region-panel.ui.h:25
 msgid "_Options..."
-msgstr "_Alternativer..."
+msgstr "_Alternativer …"
 
 #: ../panels/region/gnome-region-panel.ui.h:26
 msgid "_Pointer can be controlled using the keypad"
@@ -1394,7 +1402,9 @@ msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
 #: ../panels/network/panel-common.c:146
-msgid "Intrastructure"
+#, fuzzy
+#| msgid "Intrastructure"
+msgid "Infrastructure"
 msgstr "Infrastruktur"
 
 #. TRANSLATORS: device status
@@ -1546,7 +1556,7 @@ msgstr "Hastighet:"
 
 #: ../panels/network/network.ui.h:22
 #, fuzzy
-msgid "Subnet Mast:"
+msgid "Subnet Mask:"
 msgstr "Subnettmaske:"
 
 #: ../panels/network/network.ui.h:23
@@ -1856,20 +1866,20 @@ msgstr "Test"
 msgid "Subwoofer"
 msgstr "Basselement"
 
-#: ../panels/sound/gvc-stream-status-icon.c:233
+#: ../panels/sound/gvc-stream-status-icon.c:236
 #, c-format
 msgid "Failed to start Sound Preferences: %s"
 msgstr "Klarte ikke å starte brukervalg for lyd: %s"
 
-#: ../panels/sound/gvc-stream-status-icon.c:256
+#: ../panels/sound/gvc-stream-status-icon.c:262
 msgid "_Mute"
 msgstr "_Demp"
 
-#: ../panels/sound/gvc-stream-status-icon.c:265
+#: ../panels/sound/gvc-stream-status-icon.c:271
 msgid "_Sound Preferences"
 msgstr "Brukervalg for _lyd"
 
-#: ../panels/sound/gvc-stream-status-icon.c:449
+#: ../panels/sound/gvc-stream-status-icon.c:455
 msgid "Muted"
 msgstr "Dempet"
 
@@ -2108,7 +2118,7 @@ msgstr "Større størrelse:"
 
 #: ../panels/universal-access/uap.ui.h:46
 msgid "Keyboard Settings..."
-msgstr "Innstillinger for tastatur..."
+msgstr "Innstillinger for tastatur …"
 
 #: ../panels/universal-access/uap.ui.h:49
 msgid "Larger"
@@ -2120,7 +2130,7 @@ msgstr "Lav kontrast"
 
 #: ../panels/universal-access/uap.ui.h:55
 msgid "Mouse Settings..."
-msgstr "Innstillinger for mus..."
+msgstr "Innstillinger for mus …"
 
 #: ../panels/universal-access/uap.ui.h:56
 msgid "Nomon"
@@ -2148,7 +2158,7 @@ msgstr "OnBoard"
 
 #: ../panels/universal-access/uap.ui.h:63
 msgid "Options..."
-msgstr "Alternativer..."
+msgstr "Alternativer …"
 
 #: ../panels/universal-access/uap.ui.h:64
 msgid "Pointing and Clicking"
@@ -2184,7 +2194,7 @@ msgstr "Trege taster"
 
 #: ../panels/universal-access/uap.ui.h:77
 msgid "Sound Settings..."
-msgstr "Innstillinger for lyd..."
+msgstr "Innstillinger for lyd …"
 
 #: ../panels/universal-access/uap.ui.h:78
 msgid "Sticky Keys"
@@ -2463,7 +2473,7 @@ msgstr ""
 
 #: ../panels/user-accounts/um-language-dialog.c:328
 msgid "Other..."
-msgstr "Annet..."
+msgstr "Annet …"
 
 #: ../panels/user-accounts/um-lockbutton.c:355
 msgid "Lock"
@@ -2499,7 +2509,7 @@ msgstr ""
 
 #: ../panels/user-accounts/um-password-dialog.c:182
 msgid "More choices..."
-msgstr "Flere valg..."
+msgstr "Flere valg …"
 
 #: ../panels/user-accounts/um-password-dialog.c:288
 msgid "Please choose another password."
@@ -2588,11 +2598,11 @@ msgstr "Slå av bilde"
 
 #: ../panels/user-accounts/um-photo-dialog.c:447
 msgid "Take a photo..."
-msgstr "Ta et bilde..."
+msgstr "Ta et bilde …"
 
 #: ../panels/user-accounts/um-photo-dialog.c:465
 msgid "Browse for more pictures..."
-msgstr "Se etter flere bilder..."
+msgstr "Se etter flere bilder …"
 
 #: ../panels/user-accounts/um-photo-dialog.c:693
 #, c-format
@@ -2915,7 +2925,7 @@ msgstr "Språk:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
 msgid "Location:"
-msgstr "Lokasjon:"
+msgstr "Adresse:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Login Options"
@@ -3043,3 +3053,5 @@ msgstr "Foo;Bar;Baz;"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Alle innstillinger"
+
+
