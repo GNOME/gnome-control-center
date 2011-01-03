@@ -155,7 +155,7 @@ CAPPLET_LIBS="$CAPPLET_LIBS $XINPUT_LIBS"
 dnl ==============
 dnl gswitchit
 dnl ==============
-PKG_CHECK_MODULES(LIBGNOMEKBD, [libgnomekbd >= 2.31.1 libxklavier >= 4.0 libgnomekbdui >= 2.31.2])
+PKG_CHECK_MODULES(LIBGNOMEKBD, [libgnomekbd >= 2.91.1 libxklavier >= 4.0 libgnomekbdui >= 2.91.2])
 
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
