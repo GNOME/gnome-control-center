@@ -141,7 +141,6 @@ _scale_box_new (GvcBalanceBar *bar)
         bar->priv->end_box = ebox = gtk_hbox_new (FALSE, 6);
         gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
-        gtk_range_set_update_policy (GTK_RANGE (priv->scale), GTK_UPDATE_CONTINUOUS);
         ca_gtk_widget_disable_sounds (bar->priv->scale, FALSE);
         gtk_widget_add_events (bar->priv->scale, GDK_SCROLL_MASK);
 
