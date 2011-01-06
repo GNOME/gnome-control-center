@@ -339,31 +339,36 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRadioButton" id="12_radiobutton">
-                        <property name="label" translatable="yes">12 hour format</property>
+                      <object class="GtkHBox" id="hbox23">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="active">True</property>
-                        <property name="draw_indicator">True</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkLabel" id="label33">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">24-Hour Time</property>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSwitch" id="24h_time_switch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                          </object>
+                          <packing>
+                            <property name="pack_type">end</property>
+                            <property name="position">2</property>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
                         <property name="position">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioButton" id="24_radiobutton">
-                        <property name="label" translatable="yes">24 hour format</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="draw_indicator">True</property>
-                        <property name="group">12_radiobutton</property>
-                      </object>
-                      <packing>
+                        <property name="padding">6</property>
                         <property name="expand">False</property>
-                        <property name="position">4</property>
+                        <property name="pack_type">end</property>
                       </packing>
                     </child>
                     <child>

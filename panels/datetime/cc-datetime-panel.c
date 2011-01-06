@@ -148,7 +148,8 @@ static void clock_settings_changed_cb (GSettings       *settings,
                                        CcDateTimePanel *panel);
 
 static void
-change_clock_settings (GtkWidget       *widget,
+change_clock_settings (GObject         *gobject,
+                       GParamSpec      *pspec,
                        CcDateTimePanel *panel)
 {
   CcDateTimePanelPrivate *priv = panel->priv;
@@ -157,10 +158,10 @@ change_clock_settings (GtkWidget       *widget,
   g_signal_handlers_block_by_func (priv->settings, clock_settings_changed_cb,
                                    panel);
 
-  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (W ("12_radiobutton"))))
-    value = G_DESKTOP_CLOCK_FORMAT_12H;
-  else
+  if (gtk_switch_get_active (GTK_SWITCH (W ("24h_time_switch"))))
     value = G_DESKTOP_CLOCK_FORMAT_24H;
+  else
+    value = G_DESKTOP_CLOCK_FORMAT_12H;
 
   g_settings_set_enum (priv->settings, CLOCK_FORMAT_KEY, value);
   priv->clock_format = value;
@@ -177,28 +178,24 @@ clock_settings_changed_cb (GSettings       *settings,
                            CcDateTimePanel *panel)
 {
   CcDateTimePanelPrivate *priv = panel->priv;
-  GtkWidget *radio12, *radio24;
-  gboolean use_12_hour;
+  GtkWidget *switch24h;
+  gboolean use_24_hour;
   GDesktopClockFormat value;
 
   value = g_settings_get_enum (settings, CLOCK_FORMAT_KEY);
   priv->clock_format = value;
 
-  radio12 = W ("12_radiobutton");
-  radio24 = W ("24_radiobutton");
+  switch24h = W ("24h_time_switch");
 
-  use_12_hour = (value == G_DESKTOP_CLOCK_FORMAT_12H);
+  use_24_hour = (value == G_DESKTOP_CLOCK_FORMAT_24H);
 
-  g_signal_handlers_block_by_func (radio12, change_clock_settings, panel);
-  g_signal_handlers_block_by_func (radio24, change_clock_settings, panel);
+  g_signal_handlers_block_by_func (switch24h, change_clock_settings, panel);
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio12), use_12_hour);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio24), !use_12_hour);
+  gtk_switch_set_active (GTK_SWITCH (switch24h), use_24_hour);
 
   update_time (panel);
 
-  g_signal_handlers_unblock_by_func (radio12, change_clock_settings, panel);
-  g_signal_handlers_unblock_by_func (radio24, change_clock_settings, panel);
+  g_signal_handlers_unblock_by_func (switch24h, change_clock_settings, panel);
 }
 
 static void
@@ -715,9 +712,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
                     G_CALLBACK (clock_settings_changed_cb), self);
 
-  g_signal_connect (W ("12_radiobutton"), "toggled",
-                    G_CALLBACK (change_clock_settings), self);
-  g_signal_connect (W ("24_radiobutton"), "toggled",
+  g_signal_connect (W("24h_time_switch"), "notify::active",
                     G_CALLBACK (change_clock_settings), self);
 
   update_time (self);
