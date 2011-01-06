@@ -255,6 +255,10 @@ set_time_cb (CcDateTimePanel *self,
     {
       g_warning ("Could not set system time: %s", error->message);
     }
+  else
+    {
+      update_time (self);
+    }
 }
 
 static void
@@ -280,14 +284,41 @@ set_using_ntp_cb (CcDateTimePanel *self,
 }
 
 static void
-apply_button_clicked_cb (GtkButton       *button,
-                         CcDateTimePanel *self)
+queue_set_datetime (CcDateTimePanel *self)
+{
+  time_t unixtime;
+
+  /* for now just do it */
+  unixtime = g_date_time_to_unix (self->priv->date);
+  set_system_time_async (unixtime, (GFunc) set_time_cb, self, NULL);
+}
+
+static void
+queue_set_ntp (CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  gboolean using_ntp;
+  /* for now just do it */
+  using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
+  set_using_ntp_async (using_ntp, (GFunc) set_using_ntp_cb, self, NULL);
+}
+
+static void
+queue_set_timezone (CcDateTimePanel *self)
+{
+  /* for now just do it */
+  if (self->priv->current_location)
+    {
+      set_system_timezone_async (self->priv->current_location->zone, (GFunc) set_timezone_cb, self, NULL);
+    }
+}
+
+static void
+change_date (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
   guint mon, y, d;
-  time_t unixtime;
   GDateTime *old_date;
-  gboolean using_ntp;
 
   old_date = priv->date;
 
@@ -300,18 +331,7 @@ apply_button_clicked_cb (GtkButton       *button,
                                       g_date_time_get_minute (old_date),
                                       g_date_time_get_second (old_date));
   g_date_time_unref (old_date);
-
-  unixtime = g_date_time_to_unix (priv->date);
-
-  set_system_time_async (unixtime, (GFunc) set_time_cb, self, NULL);
-
-  if (priv->current_location)
-    {
-      set_system_timezone_async (priv->current_location->zone, (GFunc) set_timezone_cb, self, NULL);
-    }
-
-  using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
-  set_using_ntp_async (using_ntp, (GFunc) set_using_ntp_cb, self, NULL);
+  queue_set_datetime (self);
 }
 
 static void
@@ -386,6 +406,8 @@ location_changed_cb (CcTimezoneMap   *map,
   while (gtk_tree_model_iter_next (model, &iter));
 
   g_strfreev (split);
+
+  queue_set_timezone (self);
 }
 
 static void
@@ -561,6 +583,13 @@ update_widget_state_for_ntp (CcDateTimePanel *panel,
 }
 
 static void
+day_changed (GtkWidget       *widget,
+             CcDateTimePanel *panel)
+{
+  change_date (panel);
+}
+
+static void
 month_year_changed (GtkWidget       *widget,
                     CcDateTimePanel *panel)
 {
@@ -582,6 +611,8 @@ month_year_changed (GtkWidget       *widget,
 
   if (gtk_spin_button_get_value_as_int (day_spin) > num_days)
     gtk_spin_button_set_value (day_spin, num_days);
+
+  change_date (panel);
 }
 
 static void
@@ -622,14 +653,16 @@ change_time (GtkButton       *button,
   g_date_time_unref (old_date);
 
   update_time (panel);
+  queue_set_datetime (panel);
 }
 
 static void
-change_ntp (GObject    *gobject,
-            GParamSpec *pspec,
-            gpointer    user_data)
+change_ntp (GObject         *gobject,
+            GParamSpec      *pspec,
+            CcDateTimePanel *self)
 {
-  update_widget_state_for_ntp (user_data, gtk_switch_get_active (GTK_SWITCH (gobject)));
+  update_widget_state_for_ntp (self, gtk_switch_get_active (GTK_SWITCH (gobject)));
+  queue_set_ntp (self);
 }
 
 static gboolean
@@ -717,6 +750,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                                                     num_days + 1, 1, 10, 1);
   gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (W ("day-spinbutton")),
                                   adjustment);
+  g_signal_connect (G_OBJECT (W("day-spinbutton")), "value-changed",
+                    G_CALLBACK (day_changed), self);
 
   adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_year (priv->date),
                                                     G_MINDOUBLE, G_MAXDOUBLE, 1,
@@ -751,12 +786,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                     G_CALLBACK (change_clock_settings), self);
 
   update_time (self);
-
-  g_signal_connect ((GtkWidget*) gtk_builder_get_object (priv->builder,
-                                                         "button_apply"),
-                    "clicked",
-                    G_CALLBACK (apply_button_clicked_cb),
-                    self);
 
   get_system_timezone_async ((GetTimezoneFunc) get_timezone_cb, self, NULL);
 
