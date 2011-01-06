@@ -603,3 +603,9 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
 
   gtk_widget_queue_draw (GTK_WIDGET (map));
 }
+
+TzLocation *
+cc_timezone_map_get_location (CcTimezoneMap *map)
+{
+  return map->priv->location;
+}
