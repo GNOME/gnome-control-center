@@ -10,14 +10,14 @@
 # Mancomún - Centro de Referencia e Servizos de Software Libre <g11n@mancomun.org>, 2009.
 # Antón Méixome <meixome@mancomun.org>, 2009.
 # Antón Méixome <meixome@certima.net>, 2010.
-# Fran Diéguez <frandieguez@ubuntu.com>, 2009, 2010.
+# Fran Diéguez <frandieguez@ubuntu.com>, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-10 23:50+0100\n"
-"PO-Revision-Date: 2010-12-10 23:57+0100\n"
+"POT-Creation-Date: 2011-01-06 23:38+0100\n"
+"PO-Revision-Date: 2011-01-06 23:42+0100\n"
 "Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
 "Language-Team: Galician <gnome-gl-list@gnome.org>\n"
 "Language: gl\n"
@@ -191,145 +191,78 @@ msgstr "Fondo de escritorio;Pantalla;"
 msgid "Center"
 msgstr "Centrado"
 
-#: ../panels/background/background.ui.h:2
+#. This refers to a slideshow background
+#: ../panels/background/background.ui.h:3
+msgid "Changes throughout the day"
+msgstr "Cambia ao longo do día"
+
+#: ../panels/background/background.ui.h:4
 msgid "Fill"
 msgstr "Encher"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:5
 msgid "Scale"
 msgstr "Escalar"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgid "Span"
 msgstr "Estender"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgid "Tile"
 msgstr "Mosaico"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 #: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../panels/background/bg-colors-source.c:57
-msgid "Butter"
-msgstr "Manteiga"
+#: ../panels/background/bg-colors-source.c:44
+msgid "Horizontal Gradient"
+msgstr "Gradiente horizontal"
 
-#: ../panels/background/bg-colors-source.c:58
-msgid "Orange"
-msgstr "Laranxa"
+#: ../panels/background/bg-colors-source.c:45
+msgid "Vertical Gradient"
+msgstr "Gradiente vertical"
 
-#: ../panels/background/bg-colors-source.c:59
-msgid "Chocolate"
-msgstr "Chocolate"
+#: ../panels/background/bg-colors-source.c:46
+msgid "Solid Color"
+msgstr "Cor sólido"
 
-#: ../panels/background/bg-colors-source.c:60
-msgid "Chameleon"
-msgstr "Camaleón"
-
-#: ../panels/background/bg-colors-source.c:61
-msgid "Blue"
-msgstr "Azul"
-
-#: ../panels/background/bg-colors-source.c:62
-msgid "Plum"
-msgstr "Cirola"
-
-#: ../panels/background/bg-colors-source.c:63
-msgid "Red"
-msgstr "Vermello"
-
-#: ../panels/background/bg-colors-source.c:64
-msgid "Aluminium"
-msgstr "Aluminio"
-
-#: ../panels/background/bg-colors-source.c:65
-msgid "Gray"
-msgstr "Gris"
-
-#: ../panels/background/bg-colors-source.c:66
-msgid "Black"
-msgstr "Negro"
-
-#: ../panels/background/cc-background-panel.c:622
+#: ../panels/background/cc-background-panel.c:747
 msgid "Wallpapers"
 msgstr "Fondo de escritorio"
 
-#: ../panels/background/cc-background-panel.c:630
+#: ../panels/background/cc-background-panel.c:755
 msgid "Pictures Folder"
 msgstr "Cartafol de imaxes"
 
-#: ../panels/background/cc-background-panel.c:638
-msgid "Colors"
-msgstr "Cores"
+#: ../panels/background/cc-background-panel.c:763
+msgid "Colors & Gradients"
+msgstr "Cores e gradientes"
 
-#: ../panels/background/cc-background-panel.c:647
+#: ../panels/background/cc-background-panel.c:772
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/gnome-wp-info.c:50
+#: ../panels/background/cc-background-panel.c:833
+msgid "Current background"
+msgstr "Fondo actual"
+
+#: ../panels/background/gnome-wp-info.c:59
 msgid "No Desktop Background"
 msgstr "Sen fondo de escritorio"
 
-#: ../panels/background/gnome-wp-item.c:294
-msgid "Slide Show"
-msgstr "Presentación"
-
-#: ../panels/background/gnome-wp-item.c:296
-msgid "Image"
-msgstr "Imaxe"
-
-#: ../panels/background/gnome-wp-item.c:302
+#: ../panels/background/gnome-wp-item.c:277
 msgid "multiple sizes"
 msgstr "múltiples tamaños"
 
-#. translators: x pixel(s) by y pixel(s)
-#: ../panels/background/gnome-wp-item.c:305
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/gnome-wp-item.c:285
 #, c-format
-msgid "%d %s by %d %s"
-msgstr "%d %s por %d %s"
-
-#: ../panels/background/gnome-wp-item.c:307
-#: ../panels/background/gnome-wp-item.c:309
-msgid "pixel"
-msgid_plural "pixels"
-msgstr[0] "píxel"
-msgstr[1] "píxeles"
-
-#. translators: <b>wallpaper name</b>
-#. * mime type, size
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:317
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Cartafol: %s"
-
-#. translators: <b>wallpaper name</b>
-#. * Image missing
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:329
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s\n"
-"Cartafol: %s"
-
-#: ../panels/background/gnome-wp-item.c:333
-msgid "Image missing"
-msgstr "Falta a imaxe"
+msgid "%d × %d"
+msgstr "%d × %d"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "12 hour format"
@@ -429,7 +362,7 @@ msgid "Clock;Timezone;Location;"
 msgstr "Reloxo;Fuso horario;Localización"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
-msgid "Date And Time"
+msgid "Date and Time"
 msgstr "Data e hora"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
@@ -681,8 +614,8 @@ msgid "Upside-down"
 msgstr "Arriba e abaixo"
 
 #: ../panels/display/display-capplet.ui.h:8
-msgid "_Detect Monitors"
-msgstr "_Detectar monitores"
+msgid "_Detect Displays"
+msgstr "_Detectar pantallas"
 
 #. Note that mirror is a verb in this string
 #: ../panels/display/display-capplet.ui.h:10
@@ -729,11 +662,11 @@ msgstr "%d x %d (%s)"
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1485
+#: ../panels/display/xrandr-capplet.c:1492
 msgid "Drag to change primary display."
 msgstr "Arrastre para cambiar a pantalla principal."
 
-#: ../panels/display/xrandr-capplet.c:1543
+#: ../panels/display/xrandr-capplet.c:1550
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -741,30 +674,43 @@ msgstr ""
 "Seleccione un monitor para cambiar as súas propiedades, arrástreo para "
 "reordenalo ao seu lugar."
 
-#: ../panels/display/xrandr-capplet.c:1942
+#: ../panels/display/xrandr-capplet.c:1935
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1944
+#: ../panels/display/xrandr-capplet.c:1937
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../panels/display/xrandr-capplet.c:2229
+#: ../panels/display/xrandr-capplet.c:2222
 msgid "Could not save the monitor configuration"
 msgstr "Non foi posíbel gardar a configuración do monitor"
 
-#: ../panels/display/xrandr-capplet.c:2252
+#: ../panels/display/xrandr-capplet.c:2245
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Non foi posíbel obter o bus da sesión ao aplicar a configuración da pantalla"
 
-#: ../panels/display/xrandr-capplet.c:2297
+#: ../panels/display/xrandr-capplet.c:2290
 msgid "Could not detect displays"
 msgstr "Non foi posíbel detectar as pantallas"
 
-#: ../panels/display/xrandr-capplet.c:2504
+#: ../panels/display/xrandr-capplet.c:2494
 msgid "Could not get screen information"
 msgstr "Non foi posíbel obter a información da pantalla"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+msgid "System Info"
+msgstr "Información do sistema"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "System Information"
+msgstr "Información do sistema"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+msgid "device;system;information;memory;processor;version;"
+msgstr "dispositivo;sistema;información;memoria;procesador;versión;"
 
 #: ../panels/keyboard/00-multimedia-key.xml.in.h:1
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -805,6 +751,7 @@ msgstr "O tipo de tecla rápida."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/keyboard-shortcuts.c:1140
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -825,6 +772,73 @@ msgstr "Teclado"
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Atallo;Repetir;Intermitencia;"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:659
+#: ../panels/keyboard/keyboard-shortcuts.c:1544
+#: ../panels/keyboard/keyboard-shortcuts.c:1548
+msgid "Custom Shortcuts"
+msgstr "Personalizar os atallos"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:767
+msgid "<Unknown Action>"
+msgstr "<Acción descoñecida>"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1166
+msgid "Error saving the new shortcut"
+msgstr "Produciuse un erro ao gardar o atallo novo"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1276
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
+msgstr ""
+"Non é posíbel utilizar o atallo «%s» porque sería imposíbel teclear usando "
+"esta tecla.\n"
+"Ténteo cunha tecla como Control, Alt ou Maiús ao mesmo tempo."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1306
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"O atallo «%s» xa está en uso para\n"
+"«%s»"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "Se reasigna o atallo para «%s», o atallo «%s» será desactivado."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
+msgid "_Reassign"
+msgstr "_Reasignar"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr ""
+"Produciuse un erro ao desconfigurar a tecla rápida na configuración da base "
+"de datos: %s"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1498
+msgid "Too many custom shortcuts"
+msgstr "Demasiados atallos personalizados"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1706
+msgid "Section"
+msgstr "Sección"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1737
+msgid "Action"
+msgstr "Acción"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1759
+msgid "Shortcut"
+msgstr "Atallo"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Cursor Blinking"
@@ -1130,7 +1144,10 @@ msgstr "V_endedores:"
 msgid "Keyboard Layout Options"
 msgstr "Opcións de disposición do teclado"
 
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
 #: ../panels/region/gnome-region-panel-xkb.c:70
+#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
 msgid "Unknown"
 msgstr "Descoñecido"
 
@@ -1147,7 +1164,6 @@ msgid "Models"
 msgstr "Modelos"
 
 #: ../panels/region/gnome-region-panel-xkbot.c:227
-#: ../panels/proxy/gnome-proxy-properties.c:554
 #: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "Predefinido"
@@ -1346,213 +1362,224 @@ msgstr "Estabeleza as súas preferencias do rato e do «touchpad»"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Trackpad;Punteiro;Clic;Toque;Dobre;Pulsación;Botón;"
 
-#: ../panels/proxy/gnome-proxy-properties.c:672
-msgid "New Location..."
-msgstr "Localización nova..."
+#: ../panels/network/cc-network-panel.c:1062
+#: ../panels/network/cc-network-panel.c:1084
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i Mb/s"
 
-#: ../panels/proxy/gnome-proxy-properties.c:789
-msgid "Location already exists"
-msgstr "A localización xa existe"
+#: ../panels/network/cc-network-panel.c:1064
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i Gb/s"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:1
-msgid "Network Proxy"
+#: ../panels/network/cc-network-panel.c:1082
+#, c-format
+msgid "%i kb/s"
+msgstr "%i kb/s"
+
+#: ../panels/network/cc-network-panel.c:1739
+msgid "Network proxy"
 msgstr "Proxy da rede"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:2
-msgid "Set your network proxy preferences"
-msgstr "Estabeleza as súas preferencias do proxy da rede"
+#: ../panels/network/cc-network-panel.c:1748
+msgid "Set the system proxy settings"
+msgstr "Configurar os axustes do proxy do sistema"
 
-#. Translators: those are keywords for the proxy control-center panel
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:4
-msgid "Web;Location;"
-msgstr "Web;Localización;"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:69
+msgid "Wired"
+msgstr "Con fíos"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:1
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>Conexión di_recta á Internet</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:73
+msgid "Wireless"
+msgstr "Sen fíos"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:2
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>Configuración _automática do proxy</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:78
+msgid "Mobile broadband"
+msgstr "Banda larga móbil"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:3
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>Configuración _manual do proxy</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:82
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:4
-msgid "<b>_Use authentication</b>"
-msgstr "<b>_Usar a autenticación</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:86
+msgid "Mesh"
+msgstr "Maia"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:5
-msgid "Autoconfiguration _URL:"
-msgstr "_URL de configuración automática:"
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:142
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:6
-msgid "C_reate"
-msgstr "C_rear"
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:146
+msgid "Infrastructure"
+msgstr "Infraestrutura"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:7
-msgid "Create New Location"
-msgstr "Crear unha localización nova"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:164
+msgid "Status unknown"
+msgstr "Estado descoñecido"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:8
-msgid "HTTP Proxy Details"
-msgstr "Detalles do proxy HTTP"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:168
+msgid "Unmanaged"
+msgstr "Sen xestionar"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:9
-msgid "H_TTP proxy:"
-msgstr "Proxy H_TTP:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:172
+msgid "Unavailable"
+msgstr "Non dispoñíbel"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:10
-msgid "Ignore Host List"
-msgstr "Hosts ignorados"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:176
+msgid "Disconnected"
+msgstr "Desconectado"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:11
-msgid "Ignored Hosts"
-msgstr "Hosts ignorados"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:180
+msgid "Preparing connection"
+msgstr "Preparando a conexión"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
-msgid "Location:"
-msgstr "Localización:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:184
+msgid "Configuring connection"
+msgstr "Configurando a conexión"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:13
-msgid "Network Proxy Preferences"
-msgstr "Preferencias do proxy de rede"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:188
+msgid "Authenticating"
+msgstr "Autenticando"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:14
-msgid "Port:"
-msgstr "Porto:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:192
+msgid "Getting network address"
+msgstr "Obtendo enderezo de rede"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:15
-msgid "Proxy Configuration"
-msgstr "Configuración do proxy"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:196
+msgid "Connected"
+msgstr "Conectado"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:16
-msgid "S_ocks host:"
-msgstr "Host de s_ocks:"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:200
+msgid "Failed to connect"
+msgstr "Produciuse un fallo ao conectarse"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:17
-msgid "The location already exists."
-msgstr "A localización xa existe."
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "Rede"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:18
-msgid "U_sername:"
-msgstr "Nome de u_suario:"
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
+msgid "Network settings"
+msgstr "Configuracións da rede"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:19
-msgid "_Delete Location"
-msgstr "_Eliminar a localización"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:20
-msgid "_Details"
-msgstr "_Detalles"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:21
-msgid "_FTP proxy:"
-msgstr "Proxy para _FTP:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:22
-msgid "_Location name:"
-msgstr "Nome da _localización:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:23
-msgid "_Password:"
-msgstr "_Contrasinal:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:24
-msgid "_Secure HTTP proxy:"
-msgstr "Proxy para HTTP _seguro:"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:25
-msgid "_Use the same proxy for all protocols"
-msgstr "_Usar o mesmo proxy para todos os protocolos"
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;"
+msgstr "red;sen fíos;ip;lan;"
 
 #: ../panels/network/network.ui.h:1
-msgid "Configuration URL:"
-msgstr "_URL de configuración:"
+msgid "Airplane Mode"
+msgstr "Modo avión"
 
 #: ../panels/network/network.ui.h:2
+msgid "Configuration URL:"
+msgstr "URL de configuración:"
+
+#: ../panels/network/network.ui.h:3
+msgid "DNS:"
+msgstr "DNS:"
+
+#: ../panels/network/network.ui.h:4
+msgid "Default Route:"
+msgstr "Ruta predeterminada:"
+
+#: ../panels/network/network.ui.h:5
 msgid "FTP Proxy:"
 msgstr "Proxy FTP:"
 
-#: ../panels/network/network.ui.h:3
-msgid "Flight Mode"
-msgstr "Modo de voo"
-
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:6
 msgid "Gateway:"
 msgstr "Pasarela:"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:7
 msgid "Group Name:"
 msgstr "Nome do grupo:"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:8
 msgid "Group Password:"
 msgstr "Contrasinal do grupo:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:9
 msgid "HTTP Proxy:"
 msgstr "Proxy HTTP:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address:"
 msgstr "Enderezo hardware:"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:11
+msgid "IMEI:"
+msgstr "IMEI:"
+
+#: ../panels/network/network.ui.h:12
 msgid "IP Address:"
 msgstr "Enderezo de IP:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:13
+msgid "IPv4 Address:"
+msgstr "Enderezo IPv4:"
+
+#: ../panels/network/network.ui.h:14
+msgid "IPv6 Address:"
+msgstr "Enderezo IPv6:"
+
+#: ../panels/network/network.ui.h:15
 msgid "Method:"
 msgstr "Método:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:16
 msgid "Network Name:"
 msgstr "Nome da rede:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:17
 msgid "Provider:"
 msgstr "Fornecedor:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:18
 msgid "Secure HTTP Proxy:"
 msgstr "Proxy para HTTP seguro:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:19
 msgid "Security:"
 msgstr "Seguranza:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:20
 msgid "Socks Host:"
 msgstr "Equipo de socks:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:21
 msgid "Speed:"
 msgstr "Velocidade:"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:22
+msgid "Subnet Mask:"
+msgstr "Máscara de rede:"
+
+#: ../panels/network/network.ui.h:23
 #: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
 msgstr "Desbloquear"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:24
 msgid "Username:"
 msgstr "Nome de usuario:"
-
-#. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr "Brillo;Bloqueo;Atenuación;Branco;"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "Pantalla"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
-msgid "Screen brightness and lock settings"
-msgstr "Configuracións de brillo e bloqueo da pantalla"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -1639,6 +1666,19 @@ msgstr "%s até estar baleira (%.0lf%%)"
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% de carga"
 
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr "Brillo;Bloqueo;Atenuación;Branco;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "Pantalla"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "Configuracións de brillo e bloqueo da pantalla"
+
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
 msgstr "Activar o código de depuración"
@@ -1697,29 +1737,29 @@ msgctxt "balance"
 msgid "Maximum"
 msgstr "Máximo"
 
-#: ../panels/sound/gvc-balance-bar.c:296
+#: ../panels/sound/gvc-balance-bar.c:295
 msgid "_Balance:"
 msgstr "_Balance:"
 
-#: ../panels/sound/gvc-balance-bar.c:299
+#: ../panels/sound/gvc-balance-bar.c:298
 msgid "_Fade:"
 msgstr "_Escaecer:"
 
-#: ../panels/sound/gvc-balance-bar.c:302
+#: ../panels/sound/gvc-balance-bar.c:301
 msgid "_Subwoofer:"
 msgstr "_Subwoofer:"
 
-#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
+#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:607
+#: ../panels/sound/gvc-channel-bar.c:606
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "Sen amplificación"
 
-#: ../panels/sound/gvc-channel-bar.c:901
+#: ../panels/sound/gvc-channel-bar.c:900
 msgid "Mute"
 msgstr "Sen son"
 
@@ -1840,20 +1880,20 @@ msgstr "Probar"
 msgid "Subwoofer"
 msgstr "Subwoofer"
 
-#: ../panels/sound/gvc-stream-status-icon.c:233
+#: ../panels/sound/gvc-stream-status-icon.c:236
 #, c-format
 msgid "Failed to start Sound Preferences: %s"
 msgstr "Produciuse un fallo ao iniciar as Preferencias de son: %s"
 
-#: ../panels/sound/gvc-stream-status-icon.c:256
+#: ../panels/sound/gvc-stream-status-icon.c:262
 msgid "_Mute"
 msgstr "S_en son"
 
-#: ../panels/sound/gvc-stream-status-icon.c:265
+#: ../panels/sound/gvc-stream-status-icon.c:271
 msgid "_Sound Preferences"
 msgstr "Preferencias de _son"
 
-#: ../panels/sound/gvc-stream-status-icon.c:449
+#: ../panels/sound/gvc-stream-status-icon.c:455
 msgid "Muted"
 msgstr "Sen son"
 
@@ -2904,6 +2944,10 @@ msgstr "Inicio de sesión con pegadas dixitais:"
 msgid "Language:"
 msgstr "Idioma:"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+msgid "Location:"
+msgstr "Localización:"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Login Options"
 msgstr "Opcións de inicio de sesión"
@@ -3031,6 +3075,161 @@ msgstr "Foo;Bar;Baz;"
 msgid "_All Settings"
 msgstr "_Todas as configuracións"
 
+#~ msgid "Butter"
+#~ msgstr "Manteiga"
+
+#~ msgid "Orange"
+#~ msgstr "Laranxa"
+
+#~ msgid "Chocolate"
+#~ msgstr "Chocolate"
+
+#~ msgid "Chameleon"
+#~ msgstr "Camaleón"
+
+#~ msgid "Plum"
+#~ msgstr "Cirola"
+
+#~ msgid "Red"
+#~ msgstr "Vermello"
+
+#~ msgid "Aluminium"
+#~ msgstr "Aluminio"
+
+#~ msgid "Gray"
+#~ msgstr "Gris"
+
+#~ msgid "Black"
+#~ msgstr "Negro"
+
+#~ msgid "Colors"
+#~ msgstr "Cores"
+
+#~ msgid "Slide Show"
+#~ msgstr "Presentación"
+
+#~ msgid "Image"
+#~ msgstr "Imaxe"
+
+#~ msgid "%d %s by %d %s"
+#~ msgstr "%d %s por %d %s"
+
+#~ msgid "pixel"
+#~ msgid_plural "pixels"
+#~ msgstr[0] "píxel"
+#~ msgstr[1] "píxeles"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Cartafol: %s"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Cartafol: %s"
+
+#~ msgid "Image missing"
+#~ msgstr "Falta a imaxe"
+
+#~ msgid "_Detect Monitors"
+#~ msgstr "_Detectar monitores"
+
+#~ msgid "New Location..."
+#~ msgstr "Localización nova..."
+
+#~ msgid "Location already exists"
+#~ msgstr "A localización xa existe"
+
+#~ msgid "Set your network proxy preferences"
+#~ msgstr "Estabeleza as súas preferencias do proxy da rede"
+
+#~ msgid "Web;Location;"
+#~ msgstr "Web;Localización;"
+
+#~ msgid "<b>Di_rect internet connection</b>"
+#~ msgstr "<b>Conexión di_recta á Internet</b>"
+
+#~ msgid "<b>_Automatic proxy configuration</b>"
+#~ msgstr "<b>Configuración _automática do proxy</b>"
+
+#~ msgid "<b>_Manual proxy configuration</b>"
+#~ msgstr "<b>Configuración _manual do proxy</b>"
+
+#~ msgid "<b>_Use authentication</b>"
+#~ msgstr "<b>_Usar a autenticación</b>"
+
+#~ msgid "Autoconfiguration _URL:"
+#~ msgstr "_URL de configuración automática:"
+
+#~ msgid "C_reate"
+#~ msgstr "C_rear"
+
+#~ msgid "Create New Location"
+#~ msgstr "Crear unha localización nova"
+
+#~ msgid "HTTP Proxy Details"
+#~ msgstr "Detalles do proxy HTTP"
+
+#~ msgid "H_TTP proxy:"
+#~ msgstr "Proxy H_TTP:"
+
+#~ msgid "Ignore Host List"
+#~ msgstr "Hosts ignorados"
+
+#~ msgid "Ignored Hosts"
+#~ msgstr "Hosts ignorados"
+
+#~ msgid "Network Proxy Preferences"
+#~ msgstr "Preferencias do proxy de rede"
+
+#~ msgid "Port:"
+#~ msgstr "Porto:"
+
+#~ msgid "Proxy Configuration"
+#~ msgstr "Configuración do proxy"
+
+#~ msgid "S_ocks host:"
+#~ msgstr "Host de s_ocks:"
+
+#~ msgid "The location already exists."
+#~ msgstr "A localización xa existe."
+
+#~ msgid "U_sername:"
+#~ msgstr "Nome de u_suario:"
+
+#~ msgid "_Delete Location"
+#~ msgstr "_Eliminar a localización"
+
+#~ msgid "_Details"
+#~ msgstr "_Detalles"
+
+#~ msgid "_FTP proxy:"
+#~ msgstr "Proxy para _FTP:"
+
+#~ msgid "_Location name:"
+#~ msgstr "Nome da _localización:"
+
+#~ msgid "_Password:"
+#~ msgstr "_Contrasinal:"
+
+#~ msgid "_Secure HTTP proxy:"
+#~ msgstr "Proxy para HTTP _seguro:"
+
+#~ msgid "_Use the same proxy for all protocols"
+#~ msgstr "_Usar o mesmo proxy para todos os protocolos"
+
+#~ msgid "Flight Mode"
+#~ msgstr "Modo de voo"
+
 #~ msgid "Day:"
 #~ msgstr "Día:"
 
@@ -3048,53 +3247,6 @@ msgstr "_Todas as configuracións"
 
 #~ msgid "Mirror Screens"
 #~ msgstr "Pantallas en espello"
-
-#~ msgid "<Unknown Action>"
-#~ msgstr "<Acción descoñecida>"
-
-#~ msgid "Custom Shortcuts"
-#~ msgstr "Personalizar os atallos"
-
-#~ msgid "Error saving the new shortcut"
-#~ msgstr "Produciuse un erro ao gardar o atallo novo"
-
-#~ msgid ""
-#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
-#~ "type using this key.\n"
-#~ "Please try with a key such as Control, Alt or Shift at the same time."
-#~ msgstr ""
-#~ "Non é posíbel utilizar o atallo «%s» porque sería imposíbel teclear "
-#~ "usando esta tecla.\n"
-#~ "Ténteo cunha tecla como Control, Alt ou Maiús ao mesmo tempo."
-
-#~ msgid ""
-#~ "The shortcut \"%s\" is already used for\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "O atallo «%s» xa está en uso para\n"
-#~ "«%s»"
-
-#~ msgid ""
-#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#~ "disabled."
-#~ msgstr "Se reasigna o atallo para «%s», o atallo «%s» será desactivado."
-
-#~ msgid "_Reassign"
-#~ msgstr "_Reasignar"
-
-#~ msgid "Error unsetting accelerator in configuration database: %s"
-#~ msgstr ""
-#~ "Produciuse un erro ao desconfigurar a tecla rápida na configuración da "
-#~ "base de datos: %s"
-
-#~ msgid "Too many custom shortcuts"
-#~ msgstr "Demasiados atallos personalizados"
-
-#~ msgid "Action"
-#~ msgstr "Acción"
-
-#~ msgid "Shortcut"
-#~ msgstr "Atallo"
 
 #~ msgid "No applications found"
 #~ msgstr "Non se encontraron aplicativos"
