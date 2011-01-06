@@ -21,6 +21,7 @@
 
 #include "cc-datetime-panel.h"
 
+#include <sys/time.h>
 #include "cc-timezone-map.h"
 #include "set-timezone.h"
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
@@ -69,9 +70,12 @@ struct _CcDateTimePanelPrivate
 
   GSettings *settings;
   GDesktopClockFormat clock_format;
+
+  guint update_id;
 };
 
 static void update_time (CcDateTimePanel *self);
+static void queue_clock_update (CcDateTimePanel *self);
 
 static void
 cc_date_time_panel_get_property (GObject    *object,
@@ -103,6 +107,12 @@ static void
 cc_date_time_panel_dispose (GObject *object)
 {
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (object)->priv;
+
+  if (priv->update_id != 0)
+    {
+      g_source_remove (priv->update_id);
+      priv->update_id = 0;
+    }
 
   if (priv->builder)
     {
@@ -209,7 +219,7 @@ update_time (CcDateTimePanel *self)
   if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_24H)
     {
       /* Update the hours label */
-      label = g_date_time_format (priv->date, "%H"); 
+      label = g_date_time_format (priv->date, "%H");
       gtk_label_set_text (GTK_LABEL (W("hours_label")), label);
       g_free (label);
     }
@@ -622,6 +632,31 @@ change_ntp (GObject    *gobject,
   update_widget_state_for_ntp (user_data, gtk_switch_get_active (GTK_SWITCH (gobject)));
 }
 
+static gboolean
+update_time_timer (CcDateTimePanel *self)
+{
+  g_date_time_unref (self->priv->date);
+  self->priv->date = g_date_time_new_now_local ();
+  update_time (self);
+  queue_clock_update (self);
+  return FALSE;
+}
+
+static void
+queue_clock_update (CcDateTimePanel *self)
+{
+  int timeouttime;
+  struct timeval tv;
+
+  gettimeofday (&tv, NULL);
+  timeouttime = (G_USEC_PER_SEC - tv.tv_usec) / 1000 + 1;
+
+  /* timeout of one minute if we don't care about the seconds */
+  timeouttime += 1000 * (59 - tv.tv_sec % 60);
+
+  self->priv->update_id = g_timeout_add (timeouttime, (GSourceFunc)update_time_timer, self);
+}
+
 static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
@@ -750,6 +785,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
                                                 "city_combobox");
   g_signal_connect (widget, "changed", G_CALLBACK (city_changed_cb), self);
+
+  queue_clock_update (self);
 }
 
 void
