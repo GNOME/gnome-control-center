@@ -123,6 +123,8 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES dbus-glib-1
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
+                  gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
 
 GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
 AC_SUBST(GDESKTOP_PREFIX)
@@ -390,6 +392,8 @@ panels/user-accounts/data/Makefile
 panels/user-accounts/data/gnome-user-accounts-panel.desktop.in
 panels/user-accounts/data/faces/Makefile
 panels/user-accounts/data/icons/Makefile
+panels/wacom/Makefile
+panels/wacom/gnome-wacom-panel.desktop.in
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in
