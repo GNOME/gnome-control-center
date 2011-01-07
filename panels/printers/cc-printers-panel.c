@@ -118,6 +118,7 @@ enum
 {
   PRINTER_NAME_COLUMN,
   PRINTER_ID_COLUMN,
+  PRINTER_PAUSED_COLUMN,
   PRINTER_N_COLUMNS
 };
 
@@ -239,10 +240,11 @@ actualize_printers_list (CcPrintersPanel *self)
   GtkTreeIter             selected_iter;
   GtkTreeView            *treeview;
   GtkTreeIter             iter;
+  gboolean                paused = FALSE;
   gchar                  *current_printer_instance = NULL;
   gchar                  *current_printer_name = NULL;
   int                     current_dest = -1;
-  int                     i;
+  int                     i, j;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -261,7 +263,10 @@ actualize_printers_list (CcPrintersPanel *self)
   treeview = (GtkTreeView*)
     gtk_builder_get_object (priv->builder, "printer-treeview");
 
-  store = gtk_list_store_new (PRINTER_N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
+  store = gtk_list_store_new (PRINTER_N_COLUMNS,
+                              G_TYPE_STRING,
+                              G_TYPE_INT,
+                              G_TYPE_BOOLEAN);
 
   for (i = 0; i < priv->num_dests; i++)
     {
@@ -293,10 +298,16 @@ actualize_printers_list (CcPrintersPanel *self)
             }
         }
 
+      for (j = 0; j < priv->dests[i].num_options; j++)
+        {
+          if (g_strcmp0 (priv->dests[i].options[j].name, "printer-state") == 0)
+            paused = (g_strcmp0 (priv->dests[i].options[j].value, "5") == 0);
+        }
 
       gtk_list_store_set (store, &iter,
                           PRINTER_NAME_COLUMN, instance,
                           PRINTER_ID_COLUMN, i,
+                          PRINTER_PAUSED_COLUMN, paused,
                           -1);
       g_free (instance);
     }
@@ -325,6 +336,31 @@ actualize_printers_list (CcPrintersPanel *self)
 }
 
 static void
+set_cell_sensitivity_func (GtkTreeViewColumn *tree_column,
+                           GtkCellRenderer   *cell,
+                           GtkTreeModel      *tree_model,
+                           GtkTreeIter       *iter,
+                           gpointer           func_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) func_data;
+  gboolean                paused = FALSE;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  gtk_tree_model_get (tree_model, iter, PRINTER_PAUSED_COLUMN, &paused, -1);
+
+  if (paused)
+    g_object_set (cell,
+                  "sensitive", FALSE,
+                  NULL);
+  else
+    g_object_set (cell,
+                  "sensitive", TRUE,
+                  NULL);
+}
+
+static void
 populate_printers_list (CcPrintersPanel *self)
 {
   CcPrintersPanelPrivate *priv;
@@ -342,9 +378,12 @@ populate_printers_list (CcPrintersPanel *self)
 
   actualize_printers_list (self);
 
+
   renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new_with_attributes ("Printer", renderer,
                                                      "text", PRINTER_NAME_COLUMN, NULL);
+  gtk_tree_view_column_set_cell_data_func (column, renderer, set_cell_sensitivity_func,
+                                           self, NULL);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 }
