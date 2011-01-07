@@ -132,9 +132,9 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   const gchar            *none = "---";
   GtkWidget              *widget;
   gboolean                paused = FALSE;
-  gchar                  *instance = NULL;
-  gchar                  *location = NULL;
+  gchar                  *description = NULL;
   gchar                  *device_uri = NULL;
+  gchar                  *location = NULL;
   int                     id, i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -155,16 +155,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       priv->current_dest < priv->num_dests &&
       priv->dests != NULL)
     {
-      if (priv->dests[id].instance)
-        instance = g_strdup_printf ("%s / %s", priv->dests[id].name, priv->dests[id].instance);
-      else
-        instance = g_strdup (priv->dests[id].name);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-name-label");
-      gtk_label_set_text (GTK_LABEL (widget), instance);
-      g_free (instance);
-
       for (i = 0; i < priv->dests[id].num_options; i++)
         {
           if (g_strcmp0 (priv->dests[id].options[i].name, "printer-location") == 0)
@@ -173,6 +163,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             device_uri = g_strdup (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state") == 0)
             paused = (g_strcmp0 (priv->dests[id].options[i].value, "5") == 0);
+          else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-info") == 0)
+            description = g_strdup (priv->dests[id].options[i].value);
         }
 
       widget = (GtkWidget*)
@@ -186,8 +178,10 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       else
         gtk_label_set_text (GTK_LABEL (widget), none);
 
+
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-URI-entry");
+
       if (device_uri)
         {
           gtk_entry_set_text (GTK_ENTRY (widget), device_uri);
@@ -196,8 +190,22 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       else
         gtk_entry_set_text (GTK_ENTRY (widget), none);
 
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-description-label");
+
+      if (description)
+        {
+          gtk_label_set_text (GTK_LABEL (widget), description);
+          g_free (description);
+        }
+      else
+        gtk_label_set_text (GTK_LABEL (widget), none);
+
+
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-disable-button");
+
       gtk_widget_set_sensitive (widget, TRUE);
       g_signal_handlers_block_by_func(G_OBJECT (widget), printer_disable_cb, self);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), paused);
@@ -206,7 +214,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   else
     {
       widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-name-label");
+        gtk_builder_get_object (priv->builder, "printer-description-label");
       gtk_label_set_text (GTK_LABEL (widget), "");
 
       widget = (GtkWidget*)
