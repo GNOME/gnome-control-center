@@ -21,6 +21,11 @@
 
 #include "cc-info-panel.h"
 
+#include <glibtop/fsusage.h>
+#include <glibtop/mountlist.h>
+#include <glibtop/mem.h>
+#include <glibtop/sysinfo.h>
+
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
 G_DEFINE_DYNAMIC_TYPE (CcInfoPanel, cc_info_panel, CC_TYPE_PANEL)
@@ -226,6 +231,8 @@ cc_info_panel_init (CcInfoPanel *self)
   GError     *error;
   GtkWidget  *widget;
   gboolean    res;
+  glibtop_mem mem;
+  char       *text;
 
   self->priv = INFO_PANEL_PRIVATE (self);
 
@@ -248,12 +255,17 @@ cc_info_panel_init (CcInfoPanel *self)
                             &self->priv->gnome_date);
   if (res)
     {
-      char *text;
       widget = WID (self->priv->builder, "version_label");
       text = g_strdup_printf ("Version %s", self->priv->gnome_version);
       gtk_label_set_text (GTK_LABEL (widget), text);
       g_free (text);
     }
+
+  glibtop_get_mem (&mem);
+  text = g_format_size_for_display (mem.total);
+  widget = WID (self->priv->builder, "memory_label");
+  gtk_label_set_text (GTK_LABEL (widget), text);
+  g_free (text);
 
   widget = WID (self->priv->builder, "info_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
