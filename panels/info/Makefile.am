@@ -4,6 +4,7 @@ INCLUDES = 						\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
+	-DDATADIR="\"$(datadir)\""			\
 	$(NULL)
 
 ccpanelsdir = $(PANELS_DIR)
