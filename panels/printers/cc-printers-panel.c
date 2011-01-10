@@ -132,11 +132,56 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeIter             iter;
   const gchar            *none = "---";
   GtkWidget              *widget;
-  gboolean                paused = FALSE;
+  gchar                  *reason = NULL;
+  gchar                 **printer_reasons = NULL;
   gchar                  *description = NULL;
   gchar                  *device_uri = NULL;
   gchar                  *location = NULL;
-  int                     id, i;
+  gchar                  *status = NULL;
+  int                     printer_state = 3;
+  int                     id, i, j;
+  static const char * const reasons[] =
+    {
+      "toner-low",
+      "toner-empty",
+      "developer-low",
+      "developer-empty",
+      "marker-supply-low",
+      "marker-supply-empty",
+      "cover-open",
+      "door-open",
+      "media-low",
+      "media-empty",
+      "offline",
+      "paused",
+      "marker-waste-almost-full",
+      "marker-waste-full",
+      "opc-near-eol",
+      "opc-life-over"
+    };
+  static const char * statuses[] =
+    {
+      N_("Low on toner"),
+      N_("Out of toner"),
+      /* Translators: "Developer" like on photo development context */
+      N_("Low on developer"),
+      /* Translators: "Developer" like on photo development context */
+      N_("Out of developer"),
+      /* Translators: "marker" is one color bin of the printer */
+      N_("Low on a marker supply"),
+      /* Translators: "marker" is one color bin of the printer */
+      N_("Out of a marker supply"),
+      N_("Open cover"),
+      N_("Open door"),
+      N_("Low on paper"),
+      N_("Out of paper"),
+      N_("Offline"),
+      N_("Paused"),
+      N_("Waste receptacle almost full"),
+      N_("Waste receptacle full"),
+      N_("The optical photo conductor is near end of life"),
+      N_("The optical photo conductor is no longer functioning")
+    };
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -163,10 +208,86 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           else if (g_strcmp0 (priv->dests[id].options[i].name, "device-uri") == 0)
             device_uri = g_strdup (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state") == 0)
-            paused = (g_strcmp0 (priv->dests[id].options[i].value, "5") == 0);
+            printer_state = atoi (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-info") == 0)
             description = g_strdup (priv->dests[id].options[i].value);
+          else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state-reasons") == 0)
+            reason = priv->dests[id].options[i].value;
         }
+
+      /* Find the first of the most severe reasons
+       * and show it in the status field
+       */
+      if (reason && g_strcmp0 (reason, "none") != 0)
+        {
+          int errors = 0, warnings = 0, reports = 0;
+          int error_index = -1, warning_index = -1, report_index = -1;
+
+          printer_reasons = g_strsplit (reason, ",", -1);
+          for (i = 0; i < g_strv_length (printer_reasons); i++)
+            {
+              for (j = 0; j < G_N_ELEMENTS (reasons); j++)
+                if (strncmp (printer_reasons[i],
+                             reasons[j],
+                             strlen (reasons[j])) == 0)
+                    {
+                      if (g_str_has_suffix (printer_reasons[i], "-report"))
+                        {
+                          if (reports == 0)
+                            report_index = j;
+                          reports++;
+                        }
+                      else if (g_str_has_suffix (printer_reasons[i], "-warning"))
+                        {
+                          if (warnings == 0)
+                            warning_index = j;
+                          warnings++;
+                        }
+                      else
+                        {
+                          if (errors == 0)
+                            error_index = j;
+                          errors++;
+                        }
+                    }
+            }
+          g_strfreev (printer_reasons);
+
+          if (error_index >= 0)
+            status = g_strdup (statuses[error_index]);
+          else if (warning_index >= 0)
+            status = g_strdup (statuses[warning_index]);
+          else if (report_index >= 0)
+            status = g_strdup (statuses[report_index]);
+        }
+
+      if (status == NULL)
+        {
+          switch (printer_state)
+            {
+              case 3:
+                status = g_strdup ( N_ ("Idle"));
+                break;
+              case 4:
+                status = g_strdup ( N_ ("Processing"));
+                break;
+              case 5:
+                status = g_strdup ( N_ ("Paused"));
+                break;
+            }
+        }
+        
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-status-label");
+
+      if (status)
+        {
+          gtk_label_set_text (GTK_LABEL (widget), status);
+          g_free (status);
+        }
+      else
+        gtk_label_set_text (GTK_LABEL (widget), none);
+
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-location-label");
@@ -208,9 +329,9 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         gtk_builder_get_object (priv->builder, "printer-disable-button");
 
       gtk_widget_set_sensitive (widget, TRUE);
-      g_signal_handlers_block_by_func(G_OBJECT (widget), printer_disable_cb, self);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), paused);
-      g_signal_handlers_unblock_by_func(G_OBJECT (widget), printer_disable_cb, self);
+      g_signal_handlers_block_by_func (G_OBJECT (widget), printer_disable_cb, self);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), printer_state == 5);
+      g_signal_handlers_unblock_by_func (G_OBJECT (widget), printer_disable_cb, self);
     }
   else
     {
@@ -431,7 +552,7 @@ actualize_jobs_list (CcPrintersPanel *self)
       gchar     *time_string;
       gchar     *state = NULL;
 
-      ts = localtime(&(priv->jobs[i].creation_time));
+      ts = localtime (&(priv->jobs[i].creation_time));
       time_string = g_strdup_printf ("%02d:%02d:%02d", ts->tm_hour, ts->tm_min, ts->tm_sec);
 
       switch (priv->jobs[i].state)
@@ -583,7 +704,7 @@ ccGetAllowedUsers (gchar ***allowed_users, char *printer_name)
              {
                if (attr->group_tag == IPP_TAG_PRINTER &&
                    attr->value_tag == IPP_TAG_NAME &&
-                   !g_strcmp0(attr->name, "requesting-user-name-allowed"))
+                   !g_strcmp0 (attr->name, "requesting-user-name-allowed"))
                  allowed = attr;
              }
 
