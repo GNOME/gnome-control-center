@@ -229,6 +229,18 @@ cc_info_panel_class_finalize (CcInfoPanelClass *klass)
 }
 
 static char *
+get_os_type (void)
+{
+  int bits;
+#if defined(__x86_64__) || defined(_M_X64)
+  bits = 64;
+#else
+  bits = 32;
+#endif
+  return g_strdup_printf (_("%d-bit"), bits);
+}
+
+static char *
 get_cpu_info (const glibtop_sysinfo *info)
 {
   GHashTable    *counts;
@@ -328,6 +340,11 @@ cc_info_panel_init (CcInfoPanel *self)
 
   widget = WID (self->priv->builder, "processor_label");
   text = get_cpu_info (info);
+  gtk_label_set_text (GTK_LABEL (widget), text);
+  g_free (text);
+
+  widget = WID (self->priv->builder, "os_type_label");
+  text = get_os_type ();
   gtk_label_set_text (GTK_LABEL (widget), text);
   g_free (text);
 
