@@ -21,6 +21,9 @@
 
 #include "cc-info-panel.h"
 
+#include <glib.h>
+#include <glib/gi18n.h>
+
 #include <glibtop/fsusage.h>
 #include <glibtop/mountlist.h>
 #include <glibtop/mem.h>
@@ -225,6 +228,59 @@ cc_info_panel_class_finalize (CcInfoPanelClass *klass)
 {
 }
 
+static char *
+get_cpu_info (const glibtop_sysinfo *info)
+{
+  GHashTable    *counts;
+  GString       *cpu;
+  GHashTableIter iter;
+  gpointer       key, value;
+  int            i;
+  int            j;
+
+  counts = g_hash_table_new (g_str_hash, g_str_equal);
+
+  /* count duplicates */
+  for (i = 0; i != info->ncpu; ++i)
+    {
+      const char * const keys[] = { "model name", "cpu" };
+      char *model;
+      int  *count;
+
+      model = NULL;
+
+      for (j = 0; model == NULL && j != G_N_ELEMENTS (keys); ++j)
+        {
+          model = g_hash_table_lookup (info->cpuinfo[i].values,
+                                       keys[j]);
+        }
+
+      if (model == NULL)
+          model = _("Unknown model");
+
+      count = g_hash_table_lookup (counts, model);
+      if (count == NULL)
+        g_hash_table_insert (counts, model, GINT_TO_POINTER (1));
+      else
+        g_hash_table_replace (counts, model, GINT_TO_POINTER (GPOINTER_TO_INT (count) + 1));
+    }
+
+  cpu = g_string_new (NULL);
+  g_hash_table_iter_init (&iter, counts);
+  while (g_hash_table_iter_next (&iter, &key, &value))
+    {
+      int count = GPOINTER_TO_INT (value);
+      if (count > 1)
+        g_string_append_printf (cpu, "%s \303\227 %d ", (char *)key, count);
+      else
+        g_string_append_printf (cpu, "%s ", (char *)key);
+    }
+
+  g_hash_table_destroy (counts);
+
+  return g_string_free (cpu, FALSE);
+}
+
 static void
 cc_info_panel_init (CcInfoPanel *self)
 {
@@ -232,6 +288,7 @@ cc_info_panel_init (CcInfoPanel *self)
   GtkWidget  *widget;
   gboolean    res;
   glibtop_mem mem;
+  const glibtop_sysinfo *info;
   char       *text;
 
   self->priv = INFO_PANEL_PRIVATE (self);
@@ -264,6 +321,13 @@ cc_info_panel_init (CcInfoPanel *self)
   glibtop_get_mem (&mem);
   text = g_format_size_for_display (mem.total);
   widget = WID (self->priv->builder, "memory_label");
+  gtk_label_set_text (GTK_LABEL (widget), text);
+  g_free (text);
+
+  info = glibtop_get_sysinfo ();
+
+  widget = WID (self->priv->builder, "processor_label");
+  text = get_cpu_info (info);
   gtk_label_set_text (GTK_LABEL (widget), text);
   g_free (text);
 
