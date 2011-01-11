@@ -9,7 +9,6 @@ SUBDIRS= \
 	network \
 	info \
 	sound \
-	default-applications \
 	keyboard \
 	universal-access \
 	user-accounts \

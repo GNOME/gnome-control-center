@@ -93,7 +93,6 @@ PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-3.0)
-PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon >= 2.91.2)
 PKG_CHECK_MODULES(GIO, gio-2.0 gio-unix-2.0)
 PKG_CHECK_MODULES(XML, libxml-2.0)
@@ -327,11 +326,6 @@ panels/background/gnome-background-panel.desktop.in
 panels/datetime/Makefile
 panels/datetime/gnome-datetime-panel.desktop.in
 panels/datetime/po-timezones/Makefile
-panels/default-applications/Makefile
-panels/default-applications/gnome-at-commandline.in
-panels/default-applications/gnome-at-session.desktop.in
-panels/default-applications/gnome-default-applications-panel.desktop.in
-panels/default-applications/gnome-default-applications.pc
 panels/display/Makefile
 panels/display/gnome-display-panel.desktop.in
 panels/keyboard/Makefile
