@@ -21,6 +21,8 @@
 
 #include "cc-info-panel.h"
 
+#include <sys/vfs.h>
+
 #include <glib.h>
 #include <glib/gi18n.h>
 
@@ -241,6 +243,23 @@ get_os_type (void)
 }
 
 static char *
+get_primary_disc_info (void)
+{
+  guint64       total_bytes;
+  struct statfs buf;
+
+  if (statfs ("/", &buf) < 0)
+    {
+      g_warning ("Unable to stat / filesystem: %s", g_strerror (errno));
+      return NULL;
+    }
+  else
+    total_bytes = (guint64) buf.f_blocks * buf.f_bsize;
+
+  return g_format_size_for_display (total_bytes);
+}
+
+static char *
 get_cpu_info (const glibtop_sysinfo *info)
 {
   GHashTable    *counts;
@@ -333,19 +352,24 @@ cc_info_panel_init (CcInfoPanel *self)
   glibtop_get_mem (&mem);
   text = g_format_size_for_display (mem.total);
   widget = WID (self->priv->builder, "memory_label");
-  gtk_label_set_text (GTK_LABEL (widget), text);
+  gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
   info = glibtop_get_sysinfo ();
 
   widget = WID (self->priv->builder, "processor_label");
   text = get_cpu_info (info);
-  gtk_label_set_text (GTK_LABEL (widget), text);
+  gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
   widget = WID (self->priv->builder, "os_type_label");
   text = get_os_type ();
-  gtk_label_set_text (GTK_LABEL (widget), text);
+  gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
+  g_free (text);
+
+  widget = WID (self->priv->builder, "disk_label");
+  text = get_primary_disc_info ();
+  gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
   widget = WID (self->priv->builder, "info_vbox");
