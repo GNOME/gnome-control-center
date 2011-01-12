@@ -135,7 +135,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                  *reason = NULL;
   gchar                 **printer_reasons = NULL;
   gchar                  *description = NULL;
-  gchar                  *device_uri = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
   int                     printer_state = 3;
@@ -205,8 +204,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         {
           if (g_strcmp0 (priv->dests[id].options[i].name, "printer-location") == 0)
             location = g_strdup (priv->dests[id].options[i].value);
-          else if (g_strcmp0 (priv->dests[id].options[i].name, "device-uri") == 0)
-            device_uri = g_strdup (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state") == 0)
             printer_state = atoi (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-info") == 0)
@@ -302,18 +299,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
 
       widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-URI-entry");
-
-      if (device_uri)
-        {
-          gtk_entry_set_text (GTK_ENTRY (widget), device_uri);
-          g_free (device_uri);
-        }
-      else
-        gtk_entry_set_text (GTK_ENTRY (widget), none);
-
-
-      widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-description-label");
 
       if (description)
@@ -342,10 +327,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-location-label");
       gtk_label_set_text (GTK_LABEL (widget), "");
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-URI-entry");
-      gtk_entry_set_text (GTK_ENTRY (widget), "");
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-disable-button");
