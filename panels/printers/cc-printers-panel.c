@@ -378,6 +378,8 @@ actualize_printers_list (CcPrintersPanel *self)
         current_printer_instance = g_strdup (priv->dests[priv->current_dest].instance);
     }
 
+  if (priv->num_jobs > 0)
+    cupsFreeJobs (priv->num_jobs, priv->jobs);
   priv->num_dests = cupsGetDests (&priv->dests);
   priv->current_dest = -1;
 
@@ -444,11 +446,48 @@ actualize_printers_list (CcPrintersPanel *self)
     }
   else
     {
-      if (priv->num_dests > 0 &&
-          gtk_tree_model_get_iter_first ((GtkTreeModel *) store,
-                                         &selected_iter))
+      cups_job_t *jobs = NULL;
+      int         num_jobs = 0;
+
+      num_jobs = cupsGetJobs (&jobs, NULL, 1, CUPS_WHICHJOBS_ALL);
+
+      /* Select last used printer */
+      if (num_jobs > 0)
+        {
+          for (i = 0; i < priv->num_dests; i++)
+            if (g_strcmp0 (priv->dests[i].name, jobs[num_jobs - 1].dest) == 0)
+              {
+                priv->current_dest = i;
+                break;
+              }
+          cupsFreeJobs (num_jobs, jobs);
+        }
+
+      /* Select default printer */
+      if (priv->current_dest < 0)
+        {
+          for (i = 0; i < priv->num_dests; i++)
+            if (priv->dests[i].is_default)
+              {
+                priv->current_dest = i;
+                break;
+              }
+        }
+
+      /* Select first printer */
+      if (priv->current_dest < 0 && priv->num_dests > 0)
         {
           priv->current_dest = 0;
+        }
+
+      if (priv->current_dest >= 0)
+        {
+          GtkTreePath *path = gtk_tree_path_new_from_indices (priv->current_dest, -1);
+
+          gtk_tree_model_get_iter ((GtkTreeModel *) store,
+                                   &selected_iter,
+                                   path);
+
           gtk_tree_selection_select_iter (
             gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
             &selected_iter);
@@ -533,16 +572,16 @@ actualize_jobs_list (CcPrintersPanel *self)
   treeview = (GtkTreeView*)
     gtk_builder_get_object (priv->builder, "job-treeview");
 
+  if (priv->num_jobs > 0)
+    cupsFreeJobs (priv->num_jobs, priv->jobs);
+  priv->num_jobs = -1;
+  priv->jobs = NULL;
+
   priv->current_job = -1;
   if (priv->current_dest >= 0 &&
       priv->current_dest < priv->num_dests &&
       priv->dests != NULL)
     priv->num_jobs = cupsGetJobs (&priv->jobs, priv->dests[priv->current_dest].name, 1, CUPS_WHICHJOBS_ACTIVE);
-  else
-    {
-      priv->num_jobs = -1;
-      priv->jobs = NULL;
-    }
 
   store = gtk_list_store_new (JOB_N_COLUMNS, G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
