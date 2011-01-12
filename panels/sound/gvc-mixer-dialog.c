@@ -1150,6 +1150,7 @@ add_stream (GvcMixerDialog *dialog,
                                     NAME_COLUMN, gvc_mixer_stream_get_description (stream),
                                     DEVICE_COLUMN, "",
                                     ACTIVE_COLUMN, is_default,
+                                    ICON_COLUMN, icon,
                                     ID_COLUMN, gvc_mixer_stream_get_id (stream),
                                     SPEAKERS_COLUMN, gvc_channel_map_get_mapping (map),
                                     -1);
