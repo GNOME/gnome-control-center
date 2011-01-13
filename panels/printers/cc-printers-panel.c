@@ -332,6 +332,18 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         gtk_builder_get_object (priv->builder, "printer-disable-button");
       gtk_widget_set_sensitive (widget, FALSE);
     }
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "job-release-button");
+  gtk_widget_set_sensitive (widget, FALSE);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "job-hold-button");
+  gtk_widget_set_sensitive (widget, FALSE);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "job-cancel-button");
+  gtk_widget_set_sensitive (widget, FALSE);
 }
 
 static void
@@ -624,6 +636,7 @@ job_selection_changed_cb (GtkTreeSelection *selection,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkTreeModel           *model;
   GtkTreeIter             iter;
+  GtkWidget              *widget;
   int                     id;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -633,6 +646,34 @@ job_selection_changed_cb (GtkTreeSelection *selection,
 			JOB_ID_COLUMN, &id,
 			-1);
   priv->current_job = id;
+
+  if (priv->current_job >= 0 &&
+      priv->current_job < priv->num_jobs &&
+      priv->jobs != NULL)
+    {
+      ipp_jstate_t job_state = priv->jobs[priv->current_job].state;
+
+      if (job_state == IPP_JOB_HELD)
+        {
+          widget = (GtkWidget*)
+            gtk_builder_get_object (priv->builder, "job-release-button");
+          gtk_widget_set_sensitive (widget, TRUE);
+        }
+
+      if (job_state == IPP_JOB_PENDING)
+        {
+          widget = (GtkWidget*)
+            gtk_builder_get_object (priv->builder, "job-hold-button");
+          gtk_widget_set_sensitive (widget, TRUE);
+        }
+
+      if (job_state < IPP_JOB_CANCELED)
+        {
+          widget = (GtkWidget*)
+            gtk_builder_get_object (priv->builder, "job-cancel-button");
+          gtk_widget_set_sensitive (widget, TRUE);
+        }
+    }
 }
 
 static void
@@ -643,6 +684,8 @@ populate_jobs_list (CcPrintersPanel *self)
   GtkTreeViewColumn      *column;
   GtkCellRenderer        *renderer;
   GtkTreeView            *treeview;
+  gfloat                  x_align = 0.5;
+  gfloat                  y_align = 0.5;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -652,21 +695,29 @@ populate_jobs_list (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "job-treeview");
 
   renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_renderer_get_alignment (renderer, &x_align, &y_align);
+  gtk_cell_renderer_set_alignment (renderer, 0.5, y_align);
 
   column = gtk_tree_view_column_new_with_attributes (_("Job Title"), renderer,
                                                      "text", JOB_TITLE_COLUMN, NULL);
+  gtk_tree_view_column_set_fixed_width (column, 180);
+  gtk_tree_view_column_set_min_width (column, 180);
+  gtk_tree_view_column_set_max_width (column, 180);
   gtk_tree_view_append_column (treeview, column);
 
   column = gtk_tree_view_column_new_with_attributes (_("Job State"), renderer,
                                                      "text", JOB_STATE_COLUMN, NULL);
+  gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (treeview, column);
 
   column = gtk_tree_view_column_new_with_attributes (_("User"), renderer,
                                                      "text", JOB_USER_COLUMN, NULL);
+  gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (treeview, column);
 
   column = gtk_tree_view_column_new_with_attributes (_("Time"), renderer,
                                                      "text", JOB_CREATION_TIME_COLUMN, NULL);
+  gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (treeview, column);
 
   g_signal_connect (gtk_tree_view_get_selection (treeview),
@@ -863,12 +914,13 @@ get_dbus_proxy ()
 }
 
 static void
-job_process_cb (GtkToolButton *toolbutton,
-                gpointer       user_data)
+job_process_cb (GtkButton *button,
+                gpointer   user_data)
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   DBusGProxy             *proxy;
+  GtkWidget              *widget;
   gboolean                ret = FALSE;
   GError                 *error = NULL;
   char                   *ret_error = NULL;
@@ -888,36 +940,27 @@ job_process_cb (GtkToolButton *toolbutton,
       if (!proxy)
         return;
 
-      if ((GtkToolButton*) gtk_builder_get_object (priv->builder,
-                                                   "job-cancel-button") ==
-          toolbutton)
+      if ((GtkButton*) gtk_builder_get_object (priv->builder,
+                                               "job-cancel-button") ==
+          button)
         ret = dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
                                  G_TYPE_INT, id,
                                  G_TYPE_BOOLEAN, FALSE,
                                  G_TYPE_INVALID,
                                  G_TYPE_STRING, &ret_error,
                                  G_TYPE_INVALID);
-      else if ((GtkToolButton*) gtk_builder_get_object (priv->builder,
-                                                        "job-delete-button") ==
-               toolbutton)
-        ret = dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
-                                 G_TYPE_INT, id,
-                                 G_TYPE_BOOLEAN, TRUE,
-                                 G_TYPE_INVALID,
-                                 G_TYPE_STRING, &ret_error,
-                                 G_TYPE_INVALID);
-      else if ((GtkToolButton*) gtk_builder_get_object (priv->builder,
-                                                        "job-pause-button") ==
-               toolbutton)
+      else if ((GtkButton*) gtk_builder_get_object (priv->builder,
+                                                        "job-hold-button") ==
+               button)
         ret = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
                                  G_TYPE_INT, id,
                                  G_TYPE_STRING, "indefinite",
                                  G_TYPE_INVALID,
                                  G_TYPE_STRING, &ret_error,
                                  G_TYPE_INVALID);
-      else if ((GtkToolButton*) gtk_builder_get_object (priv->builder,
+      else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-release-button") ==
-               toolbutton)
+               button)
         ret = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
                                  G_TYPE_INT, id,
                                  G_TYPE_STRING, "no-hold",
@@ -937,7 +980,17 @@ job_process_cb (GtkToolButton *toolbutton,
         actualize_jobs_list (self);
   }
 
-  return;
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "job-release-button");
+  gtk_widget_set_sensitive (widget, FALSE);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "job-hold-button");
+  gtk_widget_set_sensitive (widget, FALSE);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "job-cancel-button");
+  gtk_widget_set_sensitive (widget, FALSE);
 }
 
 static void
@@ -997,8 +1050,6 @@ printer_disable_cb (GtkToggleButton *togglebutton,
           actualize_printers_list (self);
         }
   }
-
-  return;
 }
 
 static void
@@ -1044,8 +1095,6 @@ printer_delete_cb (GtkToolButton *toolbutton,
       else
         actualize_printers_list (self);
   }
-
-  return;
 }
 
 static void
@@ -1111,8 +1160,6 @@ allowed_user_remove_cb (GtkToolButton *toolbutton,
       else
         actualize_allowed_users_list (self);
   }
-
-  return;
 }
 
 static void
@@ -1187,11 +1234,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), self);
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "job-delete-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), self);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "job-pause-button");
+    gtk_builder_get_object (priv->builder, "job-hold-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), self);
 
   widget = (GtkWidget*)
@@ -1210,14 +1253,9 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "allowed-user-remove-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (allowed_user_remove_cb), self);
 
-
   /* set plain style for borders of toolbars */
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printers-toolbar");
-  set_widget_style (widget, "GtkToolbar { border-style: none }");
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "jobs-toolbar");
   set_widget_style (widget, "GtkToolbar { border-style: none }");
 
   widget = (GtkWidget*)
