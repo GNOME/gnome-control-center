@@ -1259,8 +1259,8 @@ supply_levels_draw_cb (GtkWidget *widget,
 }
 
 static void
-allowed_user_remove_cb (GtkToolButton *toolbutton,
-                        gpointer       user_data)
+allowed_user_remove_cb (GtkButton *button,
+                        gpointer   user_data)
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
@@ -1414,13 +1414,14 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "allowed-user-remove-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (allowed_user_remove_cb), self);
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "supply-drawing-area");
+  g_signal_connect (widget, "draw", G_CALLBACK (supply_levels_draw_cb), self);
+
+
   /* set plain style for borders of toolbars */
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printers-toolbar");
-  set_widget_style (widget, "GtkToolbar { border-style: none }");
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "allowed-users-toolbar");
   set_widget_style (widget, "GtkToolbar { border-style: none }");
 
 
@@ -1441,9 +1442,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "clean-print-heads-button");
   gtk_widget_set_sensitive (widget, FALSE);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "supply-drawing-area");
-  g_signal_connect (widget, "draw", G_CALLBACK (supply_levels_draw_cb), self);
 
   populate_printers_list (self);
   populate_jobs_list (self);
