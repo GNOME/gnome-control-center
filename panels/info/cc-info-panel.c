@@ -234,11 +234,14 @@ static char *
 get_os_type (void)
 {
   int bits;
-#if defined(__x86_64__) || defined(_M_X64)
-  bits = 64;
-#else
-  bits = 32;
-#endif
+
+  if (GLIB_SIZEOF_VOID_P == 8)
+    bits = 64;
+  else
+    bits = 32;
+
+  /* translators: This is the type of architecture, for example:
+   * "64-bit" or "32-bit" */
   return g_strdup_printf (_("%d-bit"), bits);
 }
 
