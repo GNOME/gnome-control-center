@@ -97,35 +97,50 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkToolbar" id="allowed-users-toolbar">
+                      <object class="GtkHBox" id="hbox6">
                         <property name="visible">True</property>
                         <child>
-                          <object class="GtkToolButton" id="allowed-user-add-button">
+                          <object class="GtkButton" id="allowed-user-add-button">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">toolbutton7</property>
-                            <property name="use_underline">True</property>
-                            <property name="icon_name">list-add</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkImage" id="image4">
+                                <property name="visible">True</property>
+                                <property name="icon_name">list-add</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="homogeneous">True</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToolButton" id="allowed-user-remove-button">
+                          <object class="GtkButton" id="allowed-user-remove-button">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">toolbutton8</property>
-                            <property name="use_underline">True</property>
-                            <property name="icon_name">list-remove</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkImage" id="image5">
+                                <property name="visible">True</property>
+                                <property name="icon_name">list-remove</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="homogeneous">True</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
