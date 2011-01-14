@@ -29,10 +29,78 @@
 
 G_DEFINE_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
 
+static GdkPixbuf *
+load_pixbuf_for_string (const char *icon)
+{
+  GtkIconTheme *theme;
+  GdkPixbuf *pixbuf;
+  GError *err = NULL;
+  char *icon2 = NULL;
+
+  if (icon == NULL)
+    return NULL;
+
+  theme = gtk_icon_theme_get_default ();
+
+  /* find the icon */
+  if (*icon == '/')
+    {
+      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, 32, 32, TRUE, &err);
+    }
+  else
+    {
+      if (g_str_has_suffix (icon, ".png"))
+        icon2 = g_strndup (icon, strlen (icon) - strlen (".png"));
+
+      pixbuf = gtk_icon_theme_load_icon (theme,
+                                         icon2 ? icon2 : icon, 32,
+                                         GTK_ICON_LOOKUP_FORCE_SIZE,
+                                         &err);
+    }
+
+  if (err)
+    {
+      g_warning ("Could not load icon '%s': %s", icon2 ? icon2 : icon,
+                 err->message);
+      g_error_free (err);
+    }
+
+  g_free (icon2);
+
+  return pixbuf;
+}
+
+static void
+icon_theme_changed (GtkIconTheme *theme,
+                    CcShellModel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gboolean cont;
+
+  model = GTK_TREE_MODEL (self);
+  cont = gtk_tree_model_get_iter_first (model, &iter);
+  while (cont)
+    {
+      GdkPixbuf *pixbuf;
+      char *icon;
+
+      gtk_tree_model_get (model, &iter,
+                          COL_ICON_NAME, &icon,
+                          -1);
+      pixbuf = load_pixbuf_for_string (icon);
+      g_free (icon);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+                          COL_PIXBUF, pixbuf,
+                          -1);
+
+      cont = gtk_tree_model_iter_next (model, &iter);
+    }
+}
+
 static void
 cc_shell_model_class_init (CcShellModelClass *klass)
 {
-
 }
 
 static void
@@ -43,6 +111,9 @@ cc_shell_model_init (CcShellModel *self)
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
+
+  g_signal_connect (G_OBJECT (gtk_icon_theme_get_default ()), "changed",
+                    G_CALLBACK (icon_theme_changed), self);
 }
 
 CcShellModel *
@@ -92,8 +163,6 @@ cc_shell_model_add_item (CcShellModel   *model,
   const gchar *comment = gmenu_tree_entry_get_comment (item);
   gchar *id;
   GdkPixbuf *pixbuf = NULL;
-  gchar *icon2 = NULL;
-  GError *err = NULL;
   gchar *search_target;
   GKeyFile *key_file;
   gchar **keywords;
@@ -130,30 +199,7 @@ cc_shell_model_add_item (CcShellModel   *model,
   g_key_file_free (key_file);
   key_file = NULL;
 
-  /* find the icon */
-  if (icon != NULL && *icon == '/')
-    {
-      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, 32, 32, TRUE, &err);
-    }
-  else
-    {
-      if (icon2 == NULL && icon != NULL && g_str_has_suffix (icon, ".png"))
-        icon2 = g_strndup (icon, strlen (icon) - strlen (".png"));
-
-      pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-                                         icon2 ? icon2 : icon, 32,
-                                         GTK_ICON_LOOKUP_FORCE_SIZE,
-                                         &err);
-    }
-
-  if (err)
-    {
-      g_warning ("Could not load icon '%s': %s", icon2 ? icon2 : icon,
-                 err->message);
-      g_error_free (err);
-    }
-
-  g_free (icon2);
+  pixbuf = load_pixbuf_for_string (icon);
 
   search_target = g_strconcat (name, " - ", comment, NULL);
 
