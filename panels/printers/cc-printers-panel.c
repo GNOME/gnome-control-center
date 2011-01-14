@@ -34,6 +34,10 @@ G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 
 #define MECHANISM_BUS "org.opensuse.CupsPkHelper.Mechanism"
 
+#define SUPPLY_BAR_WIDTH 140
+#define SUPPLY_BAR_HEIGHT 10
+#define SUPPLY_BAR_SPACE 5
+
 struct _CcPrintersPanelPrivate
 {
   GtkBuilder *builder;
@@ -134,9 +138,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkWidget              *widget;
   gchar                  *reason = NULL;
   gchar                 **printer_reasons = NULL;
+  gchar                  *marker_levels = NULL;
   gchar                  *description = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
+  gint                    width, height;
   int                     printer_state = 3;
   int                     id, i, j;
   static const char * const reasons[] =
@@ -210,6 +216,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             description = g_strdup (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state-reasons") == 0)
             reason = priv->dests[id].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-levels") == 0)
+            marker_levels = priv->dests[priv->current_dest].options[i].value;
         }
 
       /* Find the first of the most severe reasons
@@ -317,6 +325,33 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       g_signal_handlers_block_by_func (G_OBJECT (widget), printer_disable_cb, self);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), printer_state == 5);
       g_signal_handlers_unblock_by_func (G_OBJECT (widget), printer_disable_cb, self);
+
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "supply-drawing-area");
+
+      width = gtk_widget_get_allocated_width (widget);
+
+      if (marker_levels)
+        {
+          gchar **marker_levelsv = NULL;
+
+          widget = (GtkWidget*)
+            gtk_builder_get_object (priv->builder, "supply-drawing-area");
+
+          marker_levelsv = g_strsplit (marker_levels, ",", -1);
+          gtk_widget_set_size_request (widget,
+                                       width,
+                                       ((g_strv_length (marker_levelsv) - 1) * SUPPLY_BAR_SPACE
+                                       + g_strv_length (marker_levelsv) * SUPPLY_BAR_HEIGHT));
+          g_strfreev (marker_levelsv);
+        }
+      else
+        gtk_widget_set_size_request (widget, 0, 0);
+
+      width = gtk_widget_get_allocated_width (widget);
+      height = gtk_widget_get_allocated_height (widget);
+      gtk_widget_queue_draw_area (widget, 0, 0, width, height);
     }
   else
     {
@@ -1097,6 +1132,132 @@ printer_delete_cb (GtkToolButton *toolbutton,
   }
 }
 
+static gboolean
+supply_levels_draw_cb (GtkWidget *widget,
+                       cairo_t *cr,
+                       gpointer user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  gchar                  *marker_levels = NULL;
+  gchar                  *marker_colors = NULL;
+  gchar                  *marker_names = NULL;
+  gchar                  *tooltip_text = NULL;
+  int                     i;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    {
+      for (i = 0; i < priv->dests[priv->current_dest].num_options; i++)
+        {
+          if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-names") == 0)
+            marker_names = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-levels") == 0)
+            marker_levels = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-colors") == 0)
+            marker_colors = priv->dests[priv->current_dest].options[i].value;
+        }
+
+      if (marker_levels && marker_colors && marker_names)
+        {
+          gchar **marker_levelsv = NULL;
+          gchar **marker_colorsv = NULL;
+          gchar **marker_namesv = NULL;
+          gchar  *tmp = NULL;
+          gint    width;
+          gint    height;
+
+          widget = (GtkWidget*)
+            gtk_builder_get_object (priv->builder, "supply-drawing-area");
+
+          marker_levelsv = g_strsplit (marker_levels, ",", -1);
+          marker_colorsv = g_strsplit (marker_colors, ",", -1);
+          marker_namesv = g_strsplit (marker_names, ",", -1);
+  
+          width = gtk_widget_get_allocated_width (widget);
+          height = gtk_widget_get_allocated_height (widget);
+
+          width = width < SUPPLY_BAR_WIDTH ? width : SUPPLY_BAR_WIDTH;
+          for (i = 0; i < g_strv_length (marker_levelsv); i++)
+            {
+              GdkRGBA color = {0.0, 0.0, 0.0, 1.0};
+              GdkRGBA light_color;
+              double  display_value;
+              int     value;
+
+              value = atoi (marker_levelsv[i]);
+
+              gdk_rgba_parse (&color, marker_colorsv[i]);
+              light_color.red = color.red < 0.8 ? color.red + 0.8 : 1.0;
+              light_color.green = color.green < 0.8 ? color.green + 0.8 : 1.0;
+              light_color.blue = color.blue < 0.8 ? color.blue + 0.8 : 1.0;
+              light_color.alpha = 1.0;
+
+              if (value >= 0)
+                {
+                  display_value = value / 100.0 * width;
+
+                  cairo_rectangle (cr,
+                                   0.0,
+                                   i * (SUPPLY_BAR_HEIGHT + SUPPLY_BAR_SPACE),
+                                   display_value,
+                                   SUPPLY_BAR_HEIGHT);
+                  gdk_cairo_set_source_rgba (cr, &color);
+                  cairo_fill (cr);
+
+                  cairo_rectangle (cr,
+                                   display_value,
+                                   i * (SUPPLY_BAR_HEIGHT + SUPPLY_BAR_SPACE),
+                                   width - display_value,
+                                   SUPPLY_BAR_HEIGHT);
+                  gdk_cairo_set_source_rgba (cr, &light_color);
+                  cairo_fill (cr);
+                }
+              else
+                {
+                  cairo_rectangle (cr,
+                                   0.0,
+                                   i * (SUPPLY_BAR_HEIGHT + SUPPLY_BAR_SPACE),
+                                   width,
+                                   SUPPLY_BAR_HEIGHT);
+                  gdk_cairo_set_source_rgba (cr, &light_color);
+                  cairo_fill (cr);
+                }
+
+              if (tooltip_text)
+                {
+                  tmp = g_strdup_printf ("%s%s\n", tooltip_text, marker_namesv[i]);
+                  g_free (tooltip_text);
+                  tooltip_text = tmp;
+                  tmp = NULL;
+                }
+              else
+                tooltip_text = g_strdup_printf ("%s\n", marker_namesv[i]);
+            }
+
+          g_strfreev (marker_levelsv);
+          g_strfreev (marker_colorsv);
+          g_strfreev (marker_namesv);
+        }
+
+      if (tooltip_text)
+        {
+          gtk_widget_set_tooltip_text (widget, tooltip_text);
+          g_free (tooltip_text);
+        }
+      else
+        {
+          gtk_widget_set_tooltip_text (widget, NULL);
+          gtk_widget_set_has_tooltip (widget, FALSE);
+        }
+    }
+    
+  return TRUE;
+}
+
 static void
 allowed_user_remove_cb (GtkToolButton *toolbutton,
                         gpointer       user_data)
@@ -1279,6 +1440,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "clean-print-heads-button");
   gtk_widget_set_sensitive (widget, FALSE);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "supply-drawing-area");
+  g_signal_connect (widget, "draw", G_CALLBACK (supply_levels_draw_cb), self);
 
   populate_printers_list (self);
   populate_jobs_list (self);
