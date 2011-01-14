@@ -1,6 +1,7 @@
 # Simplified Chinese translation for gnome-control-center.
-# Copyright (C) 2002, 2003, 2006, 2009, 2010 Free Software Foundation, Inc.
-# some translations stolen from tranditional chinese translation
+# Copyright (C) 2002, 2003, 2006, 2009, 2010, 2011 Free Software Foundation, Inc.
+# This file is distributed under the same license as gnome-control-center package.
+# Some translations are taken from tranditional chinese translation
 # by Abel Cheung <maddog@linuxhall.org>, 2001
 # He Qiangqiang <carton@linux.net.cn>, 2002
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002
@@ -11,15 +12,17 @@
 # Tao Wei <weitao1979@gmail.com>, 2009, 2010.
 # Xhacker Liu <liu.dongyuan@gmail.com>, 2010.
 # 朱涛 <bill_zt@sina.com>, 2010.
-# Aron Xu <happyaron.xu@gmail.com>, 2010.
 # zhang ping <zhangping159@gmail.com>, 2010.
+# Aron Xu <happyaron.xu@gmail.com>, 2010, 2011.
+# 指冷玉笙寒 (dhyang) <dhyang555@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2010-12-10 11:04+0000\n"
-"PO-Revision-Date: 2010-12-12 16:28+0800\n"
+"POT-Creation-Date: 2011-01-12 00:12+0000\n"
+"PO-Revision-Date: 2011-01-14 15:11+0800\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -38,13 +41,13 @@ msgstr "更多的背景网址"
 
 #: ../gnome-control-center.schemas.in.h:3
 msgid "More themes URL"
-msgstr "更多的主题网址"
+msgstr "更多主题网址"
 
 #: ../gnome-control-center.schemas.in.h:4
 msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
-msgstr "设定这个为您当前的位置名称。这将在检测正确的网络代理配置时有用。"
+msgstr "设定此处为你当前位置的名称，这被用于确定合适的网络代理配置"
 
 #: ../gnome-control-center.schemas.in.h:5
 msgid ""
@@ -175,237 +178,164 @@ msgstr "壁纸;屏幕;"
 msgid "Center"
 msgstr "居中"
 
-#: ../panels/background/background.ui.h:2
+#. This refers to a slideshow background
+#: ../panels/background/background.ui.h:3
+msgid "Changes throughout the day"
+msgstr "一天内不断改变"
+
+#: ../panels/background/background.ui.h:4
 msgid "Fill"
 msgstr "填充"
 
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:5
 msgid "Scale"
 msgstr "比例放大"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:6
 msgid "Span"
 msgstr "适合宽度"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:7
 msgid "Tile"
 msgstr "平铺"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 #: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
 msgstr "缩放"
 
-#: ../panels/background/bg-colors-source.c:57
-msgid "Butter"
-msgstr ""
+#: ../panels/background/bg-colors-source.c:44
+msgid "Horizontal Gradient"
+msgstr "水平斜度"
 
-#: ../panels/background/bg-colors-source.c:58
-msgid "Orange"
-msgstr "橙色"
+#: ../panels/background/bg-colors-source.c:45
+msgid "Vertical Gradient"
+msgstr "竖直斜度"
 
-#: ../panels/background/bg-colors-source.c:59
-msgid "Chocolate"
-msgstr "赭色"
+#: ../panels/background/bg-colors-source.c:46
+msgid "Solid Color"
+msgstr "纯色"
 
-#: ../panels/background/bg-colors-source.c:60
-msgid "Chameleon"
-msgstr ""
-
-#: ../panels/background/bg-colors-source.c:61
-msgid "Blue"
-msgstr "蓝色"
-
-# 一种颜色，待证
-#: ../panels/background/bg-colors-source.c:62
-#, fuzzy
-msgid "Plum"
-msgstr "李子"
-
-#: ../panels/background/bg-colors-source.c:63
-msgid "Red"
-msgstr "红色"
-
-# 待证
-#: ../panels/background/bg-colors-source.c:64
-msgid "Aluminium"
-msgstr "铝白"
-
-#: ../panels/background/bg-colors-source.c:65
-msgid "Gray"
-msgstr "灰色"
-
-#: ../panels/background/bg-colors-source.c:66
-msgid "Black"
-msgstr "黑色"
-
-#: ../panels/background/cc-background-panel.c:622
+#: ../panels/background/cc-background-panel.c:747
 msgid "Wallpapers"
 msgstr "壁纸"
 
-#: ../panels/background/cc-background-panel.c:630
+#: ../panels/background/cc-background-panel.c:755
 msgid "Pictures Folder"
 msgstr "图片文件夹"
 
-#: ../panels/background/cc-background-panel.c:638
-msgid "Colors"
-msgstr "颜色"
+#: ../panels/background/cc-background-panel.c:763
+msgid "Colors & Gradients"
+msgstr "颜色和渐变"
 
-#: ../panels/background/cc-background-panel.c:647
+#: ../panels/background/cc-background-panel.c:772
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/gnome-wp-info.c:50
+#: ../panels/background/cc-background-panel.c:833
+msgid "Current background"
+msgstr "当前背景"
+
+#: ../panels/background/gnome-wp-info.c:59
 msgid "No Desktop Background"
 msgstr "无桌面背景"
 
-#: ../panels/background/gnome-wp-item.c:294
-msgid "Slide Show"
-msgstr "幻灯片演示"
-
-#: ../panels/background/gnome-wp-item.c:296
-msgid "Image"
-msgstr "图像"
-
-#: ../panels/background/gnome-wp-item.c:302
+#: ../panels/background/gnome-wp-item.c:277
 msgid "multiple sizes"
 msgstr "多重尺寸"
 
-#. translators: x pixel(s) by y pixel(s)
-#: ../panels/background/gnome-wp-item.c:305
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/gnome-wp-item.c:285
 #, c-format
-msgid "%d %s by %d %s"
-msgstr "%d %s * %d %s"
-
-#: ../panels/background/gnome-wp-item.c:307
-#: ../panels/background/gnome-wp-item.c:309
-msgid "pixel"
-msgid_plural "pixels"
-msgstr[0] "像素"
-
-#. translators: <b>wallpaper name</b>
-#. * mime type, size
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:317
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s, %s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s，%s\n"
-"文件夹：%s"
-
-#. translators: <b>wallpaper name</b>
-#. * Image missing
-#. * Folder: /path/to/file
-#.
-#: ../panels/background/gnome-wp-item.c:329
-#, c-format
-msgid ""
-"<b>%s</b>\n"
-"%s\n"
-"Folder: %s"
-msgstr ""
-"<b>%s</b>\n"
-"%s\n"
-"文件夹：%s"
-
-#: ../panels/background/gnome-wp-item.c:333
-msgid "Image missing"
-msgstr "图像丢失"
+msgid "%d × %d"
+msgstr "%d x %d"
 
 #: ../panels/datetime/datetime.ui.h:1
-msgid "12 hour format"
-msgstr "12 小时格式"
-
-#: ../panels/datetime/datetime.ui.h:2
 msgid "16"
 msgstr "16"
 
-#: ../panels/datetime/datetime.ui.h:3
+#: ../panels/datetime/datetime.ui.h:2
 msgid "2010"
 msgstr "2010"
 
-#: ../panels/datetime/datetime.ui.h:4
+#: ../panels/datetime/datetime.ui.h:3
 msgid "22"
 msgstr "22"
 
-#: ../panels/datetime/datetime.ui.h:5
-msgid "24 hour format"
+#: ../panels/datetime/datetime.ui.h:4
+msgid "24-Hour Time"
 msgstr "24 小时格式"
 
-#: ../panels/datetime/datetime.ui.h:6
+#: ../panels/datetime/datetime.ui.h:5
 msgid "45"
 msgstr "45"
 
-#: ../panels/datetime/datetime.ui.h:7
+#: ../panels/datetime/datetime.ui.h:6
 msgid ":"
 msgstr ":"
 
-#: ../panels/datetime/datetime.ui.h:8
+#: ../panels/datetime/datetime.ui.h:7
 msgid "AM"
 msgstr "上午"
 
-#: ../panels/datetime/datetime.ui.h:9
+#: ../panels/datetime/datetime.ui.h:8
 msgid "April"
 msgstr "四月"
 
-#: ../panels/datetime/datetime.ui.h:10
+#: ../panels/datetime/datetime.ui.h:9
 msgid "August"
 msgstr "八月"
 
-#: ../panels/datetime/datetime.ui.h:11
+#: ../panels/datetime/datetime.ui.h:10
 msgid "City:"
 msgstr "城市："
 
-#: ../panels/datetime/datetime.ui.h:12
+#: ../panels/datetime/datetime.ui.h:11
 msgid "December"
 msgstr "十二月"
 
-#: ../panels/datetime/datetime.ui.h:13
+#: ../panels/datetime/datetime.ui.h:12
 msgid "February"
 msgstr "二月"
 
-#: ../panels/datetime/datetime.ui.h:14
+#: ../panels/datetime/datetime.ui.h:13
 msgid "January"
 msgstr "一月"
 
-#: ../panels/datetime/datetime.ui.h:15
+#: ../panels/datetime/datetime.ui.h:14
 msgid "July"
 msgstr "七月"
 
-#: ../panels/datetime/datetime.ui.h:16
+#: ../panels/datetime/datetime.ui.h:15
 msgid "June"
 msgstr "六月"
 
-#: ../panels/datetime/datetime.ui.h:17
+#: ../panels/datetime/datetime.ui.h:16
 msgid "March"
 msgstr "三月"
 
-#: ../panels/datetime/datetime.ui.h:18
+#: ../panels/datetime/datetime.ui.h:17
 msgid "May"
 msgstr "五月"
 
-#: ../panels/datetime/datetime.ui.h:19
+#: ../panels/datetime/datetime.ui.h:18
 msgid "Network Time"
 msgstr "网络时间"
 
-#: ../panels/datetime/datetime.ui.h:20
+#: ../panels/datetime/datetime.ui.h:19
 msgid "November"
 msgstr "十一月"
 
-#: ../panels/datetime/datetime.ui.h:21
+#: ../panels/datetime/datetime.ui.h:20
 msgid "October"
 msgstr "十月"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:21
 msgid "Region:"
 msgstr "地区："
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:22
 msgid "September"
 msgstr "九月"
 
@@ -415,220 +345,12 @@ msgid "Clock;Timezone;Location;"
 msgstr "时钟;时区;位置;"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
-msgid "Date And Time"
+msgid "Date and Time"
 msgstr "日期和时间"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Date and Time preferences panel"
 msgstr "日期和时间首选项面板"
-
-#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
-msgid "Preferred Applications"
-msgstr "首选应用程序"
-
-#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:2
-msgid "Select your default applications"
-msgstr "选择默认的应用程序"
-
-#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:1
-msgid "Start the preferred visual assistive technology"
-msgstr "启动首选的视觉辅助技术"
-
-#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:2
-msgid "Visual Assistance"
-msgstr "视觉辅助"
-
-#: ../panels/default-applications/gnome-da-capplet.c:83
-#, c-format
-msgid "Error setting default browser: %s"
-msgstr "设置默认浏览器出错：%s"
-
-#: ../panels/default-applications/gnome-da-capplet.c:106
-#, c-format
-msgid "Error setting default mailer: %s"
-msgstr "设置默认电子邮件程序出错：%s"
-
-#: ../panels/default-applications/gnome-da-capplet.c:321
-#: ../panels/sound/sound-theme-file-utils.c:292
-msgid "Custom"
-msgstr "自定义"
-
-#: ../panels/default-applications/gnome-da-capplet.c:352
-msgid "Could not load the main interface"
-msgstr "无法装入主界面"
-
-#: ../panels/default-applications/gnome-da-capplet.c:354
-msgid "Please make sure that the applet is properly installed"
-msgstr "请确定小程序已经正确安装"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:1
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
-msgid "Accessibility"
-msgstr "辅助功能"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:3
-#, no-c-format
-msgid "All %s occurrences will be replaced with actual link"
-msgstr "出现的全部 %s 都将被替换为实际链接"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:4
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
-msgid "C_ommand:"
-msgstr "命令(_O)："
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:5
-msgid "Co_mmand:"
-msgstr "命令(_M)："
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:6
-msgid "E_xecute flag:"
-msgstr "执行标志(_X)："
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
-msgid "Instant Messenger"
-msgstr "即时通讯工具"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
-msgid "Internet"
-msgstr "互联网"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
-msgid "Mail Reader"
-msgstr "邮件阅读器"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
-msgid "Mobility"
-msgstr "移动性 "
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
-msgid "Run at st_art"
-msgstr "启动时运行(_A)"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
-msgid "Run in t_erminal"
-msgstr "在终端中运行(_E)"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
-msgid "System"
-msgstr "系统"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
-msgid "Terminal Emulator"
-msgstr "终端模拟器"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
-msgid "Text Editor"
-msgstr "文本编辑器"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
-msgid "Visual"
-msgstr "视觉效果"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
-msgid "Web Browser"
-msgstr "网络浏览器"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
-msgid "_Run at start"
-msgstr "启动时运行(_R)"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:1
-msgid "Banshee Music Player"
-msgstr "Banshee 音乐播放器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
-#: ../panels/universal-access/uap.ui.h:30
-msgid "Dasher"
-msgstr "Dasher"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
-msgid "Debian Terminal Emulator"
-msgstr "Debian 终端模拟器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
-msgid "ETerm"
-msgstr "ETerm"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
-msgid "GNOME Magnifier without Screen Reader"
-msgstr "不带屏幕阅读器的 GNOME 放大镜"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
-msgid "GNOME OnScreen Keyboard"
-msgstr "GNOME 屏幕键盘"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
-msgid "GNOME Terminal"
-msgstr "GNOME 终端"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
-msgid "Gnopernicus"
-msgstr "Gnopernicus"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
-msgid "Gnopernicus with Magnifier"
-msgstr "带放大镜的 Gnopernicus"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
-msgid "KDE Magnifier without Screen Reader"
-msgstr "不带屏幕阅读器的 KDE 放大镜"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
-msgid "Konsole"
-msgstr "Konsole"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
-msgid "Linux Screen Reader"
-msgstr "Linux 屏幕阅读器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
-msgid "Linux Screen Reader with Magnifier"
-msgstr "带放大镜的 Linux 屏幕阅读器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
-msgid "Listen"
-msgstr "接听"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
-msgid "Muine Music Player"
-msgstr "Muine 音乐播放器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
-msgid "Orca"
-msgstr "Orca"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
-msgid "Orca with Magnifier"
-msgstr "带放大镜的 Orca"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
-msgid "Rhythmbox Music Player"
-msgstr "Rhythmbox 音乐播放器"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
-msgid "Standard XTerminal"
-msgstr "标准 X 终端"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
-msgid "Terminator"
-msgstr "Terminator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
-msgid "Totem Movie Player"
-msgstr "Totem 电影播放机"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
-msgid "aterm"
-msgstr "aterm"
 
 #: ../panels/display/display-capplet.ui.h:1
 msgid "<i>Note: may limit resolution options</i>"
@@ -665,13 +387,13 @@ msgid "Upside-down"
 msgstr "上下颠倒"
 
 #: ../panels/display/display-capplet.ui.h:8
-msgid "_Detect Monitors"
-msgstr "检测显示器(_D)"
+msgid "_Detect Displays"
+msgstr "检测显示(_D)"
 
 #. Note that mirror is a verb in this string
 #: ../panels/display/display-capplet.ui.h:10
 msgid "_Mirror displays"
-msgstr "镜像显示(_N)"
+msgstr "镜像显示(_M)"
 
 #: ../panels/display/display-capplet.ui.h:11
 msgid "_Resolution:"
@@ -713,39 +435,61 @@ msgstr "%d x %d (%s)"
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1485
+#: ../panels/display/xrandr-capplet.c:1492
 msgid "Drag to change primary display."
 msgstr "拖拽以更改基础显示设备。"
 
-#: ../panels/display/xrandr-capplet.c:1543
+#: ../panels/display/xrandr-capplet.c:1550
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr "选择一个显示器来更改它的属性；拖动它来排列位置。"
 
-#: ../panels/display/xrandr-capplet.c:1942
+#: ../panels/display/xrandr-capplet.c:1935
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1944
+#: ../panels/display/xrandr-capplet.c:1937
 msgid "%a %l:%M %p"
 msgstr "%A %H%M"
 
-#: ../panels/display/xrandr-capplet.c:2229
+#: ../panels/display/xrandr-capplet.c:2222
 msgid "Could not save the monitor configuration"
 msgstr "无法保存显示器配置"
 
-#: ../panels/display/xrandr-capplet.c:2252
+#: ../panels/display/xrandr-capplet.c:2245
 msgid "Could not get session bus while applying display configuration"
 msgstr "应用显示配置时无法获得会话总线"
 
-#: ../panels/display/xrandr-capplet.c:2297
+#: ../panels/display/xrandr-capplet.c:2290
 msgid "Could not detect displays"
 msgstr "无法探测显示器"
 
-#: ../panels/display/xrandr-capplet.c:2504
+#: ../panels/display/xrandr-capplet.c:2494
 msgid "Could not get screen information"
 msgstr "无法获得屏幕信息"
+
+#: ../panels/info/cc-info-panel.c:242
+#, c-format
+msgid "%d-bit"
+msgstr "%d 位"
+
+#: ../panels/info/cc-info-panel.c:290
+msgid "Unknown model"
+msgstr "未知型号"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+msgid "System Info"
+msgstr "系统信息"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "System Information"
+msgstr "系统信息"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+msgid "device;system;information;memory;processor;version;"
+msgstr "设备;系统;信息;主存;处理器;版本;"
 
 #: ../panels/keyboard/00-multimedia-key.xml.in.h:1
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -786,6 +530,7 @@ msgstr "加速键类型。"
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/keyboard-shortcuts.c:1140
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -805,7 +550,75 @@ msgstr "键盘"
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
+msgstr "快捷键;重做;闪烁;"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:659
+#: ../panels/keyboard/keyboard-shortcuts.c:1544
+#: ../panels/keyboard/keyboard-shortcuts.c:1548
+msgid "Custom Shortcuts"
+msgstr "自定义快捷键"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:767
+msgid "<Unknown Action>"
+msgstr "<未知动作>"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1166
+msgid "Error saving the new shortcut"
+msgstr "保存新快捷键出错"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1276
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
+"不能使用 %s 为快捷键，因为使用此键将无法正常输入。\n"
+"请组合 Control、Alt 或 Shift 键再试一次"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1306
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"快捷键 %s 已被用于\n"
+"%s"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr "如果你重新设定快捷键 %s，则快捷键 %s 将被禁用"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
+msgid "_Reassign"
+msgstr "重设(_R)"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s"
+msgstr "在配置数据库 %s 中解除设定时出错"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1498
+msgid "Too many custom shortcuts"
+msgstr "自定义快捷键过多"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1706
+msgid "Section"
+msgstr "节"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1737
+msgid "Action"
+msgstr "动作"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1759
+msgid "Shortcut"
+msgstr "快捷键"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+msgid "C_ommand:"
+msgstr "命令(_O)："
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Cursor Blinking"
@@ -813,7 +626,7 @@ msgstr "光标闪烁"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor _blinks in text fields"
-msgstr "文本域中的光标会闪烁(_B)"
+msgstr "文本域中光标闪烁(_B)"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 #: ../panels/mouse/gnome-mouse-properties.ui.h:4
@@ -1106,7 +919,10 @@ msgstr "制造商(_V)："
 msgid "Keyboard Layout Options"
 msgstr "键盘布局选项"
 
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
 #: ../panels/region/gnome-region-panel-xkb.c:70
+#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
 msgid "Unknown"
 msgstr "未知"
 
@@ -1123,7 +939,6 @@ msgid "Models"
 msgstr "型号"
 
 #: ../panels/region/gnome-region-panel-xkbot.c:227
-#: ../panels/proxy/gnome-proxy-properties.c:554
 #: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "默认"
@@ -1136,6 +951,10 @@ msgstr "更改您的区域和语言设置"
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:3
 msgid "Language;Layout;"
 msgstr "语言;布局;"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+msgid "Accessibility"
+msgstr "辅助功能"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Choose type of click _beforehand"
@@ -1320,213 +1139,225 @@ msgstr "设置您的鼠标和触摸板首选项"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "触摸板;指针;点击;单击;双击;按钮;轨迹球;"
 
-#: ../panels/proxy/gnome-proxy-properties.c:672
-msgid "New Location..."
-msgstr "新建位置..."
+#: ../panels/network/cc-network-panel.c:1062
+#: ../panels/network/cc-network-panel.c:1084
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i Mb/秒"
 
-#: ../panels/proxy/gnome-proxy-properties.c:789
-msgid "Location already exists"
-msgstr "位置已存在"
+#: ../panels/network/cc-network-panel.c:1064
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i Gb/秒"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:1
-msgid "Network Proxy"
+#: ../panels/network/cc-network-panel.c:1082
+#, c-format
+msgid "%i kb/s"
+msgstr "%i kb/秒"
+
+#: ../panels/network/cc-network-panel.c:1739
+msgid "Network proxy"
 msgstr "网络代理"
 
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:2
-msgid "Set your network proxy preferences"
-msgstr "设置您的网络代理首选项"
+#: ../panels/network/cc-network-panel.c:1748
+msgid "Set the system proxy settings"
+msgstr "系统代理设置"
 
-#. Translators: those are keywords for the proxy control-center panel
-#: ../panels/proxy/gnome-proxy-panel.desktop.in.in.h:4
-msgid "Web;Location;"
-msgstr "Web;位置;"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:69
+msgid "Wired"
+msgstr "有线"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:1
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>直接连接到互联网(_R)</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:73
+msgid "Wireless"
+msgstr "无线"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:2
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>自动配置代理(_A)</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:78
+msgid "Mobile broadband"
+msgstr "移动宽带"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:3
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>手动配置代理(_M)</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:82
+msgid "Bluetooth"
+msgstr "蓝牙"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:4
-msgid "<b>_Use authentication</b>"
-msgstr "<b>需要身份验证(_U)</b>"
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:86
+#| msgid "Models"
+msgid "Mesh"
+msgstr "网格"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:5
-msgid "Autoconfiguration _URL:"
-msgstr "自动配置 URL(_U)："
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:142
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:6
-msgid "C_reate"
-msgstr "创建(_R)"
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:146
+msgid "Infrastructure"
+msgstr "架构"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:7
-msgid "Create New Location"
-msgstr "创建新位置"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:164
+msgid "Status unknown"
+msgstr "未知状态"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:8
-msgid "HTTP Proxy Details"
-msgstr "HTTP 代理细节"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:168
+msgid "Unmanaged"
+msgstr "未托管"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:9
-msgid "H_TTP proxy:"
-msgstr "H_TTP 代理："
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:172
+msgid "Unavailable"
+msgstr "不可用"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:10
-msgid "Ignore Host List"
-msgstr "忽略主机列表"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:176
+msgid "Disconnected"
+msgstr "已断开"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:11
-msgid "Ignored Hosts"
-msgstr "忽略的主机"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:180
+msgid "Preparing connection"
+msgstr "准备连接"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:12
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
-msgid "Location:"
-msgstr "位置："
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:184
+msgid "Configuring connection"
+msgstr "配置连接"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:13
-msgid "Network Proxy Preferences"
-msgstr "网络代理首选项"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:188
+msgid "Authenticating"
+msgstr "正在认证"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:14
-msgid "Port:"
-msgstr "端口："
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:192
+msgid "Getting network address"
+msgstr "正在获得网络地址"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:15
-msgid "Proxy Configuration"
-msgstr "代理服务器配置"
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:196
+msgid "Connected"
+msgstr "已连接"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:16
-msgid "S_ocks host:"
-msgstr "S_OCKS 主机："
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:200
+msgid "Failed to connect"
+msgstr "连接失败"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:17
-msgid "The location already exists."
-msgstr "该位置已存在。"
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "网络"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:18
-msgid "U_sername:"
-msgstr "用户名(_S)："
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
+msgid "Network settings"
+msgstr "网络设置"
 
-#: ../panels/proxy/gnome-proxy-properties.ui.h:19
-msgid "_Delete Location"
-msgstr "删除位置(_D)"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:20
-msgid "_Details"
-msgstr "细节(_D)"
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:21
-msgid "_FTP proxy:"
-msgstr "_FTP 代理："
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:22
-msgid "_Location name:"
-msgstr "位置名(_L)："
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:23
-msgid "_Password:"
-msgstr "密码(_P)："
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:24
-msgid "_Secure HTTP proxy:"
-msgstr "安全 HTTP 代理(_S)："
-
-#: ../panels/proxy/gnome-proxy-properties.ui.h:25
-msgid "_Use the same proxy for all protocols"
-msgstr "为所有协议使用相同的代理(_U)"
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;"
+msgstr "网络;无线;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
-msgid "Configuration URL:"
-msgstr "自动配置 URL："
+msgid "Airplane Mode"
+msgstr "飞行模式"
 
 #: ../panels/network/network.ui.h:2
+msgid "Configuration URL:"
+msgstr "配置 URL："
+
+#: ../panels/network/network.ui.h:3
+msgid "DNS:"
+msgstr "DNS："
+
+#: ../panels/network/network.ui.h:4
+msgid "Default Route:"
+msgstr "默认路由"
+
+#: ../panels/network/network.ui.h:5
 msgid "FTP Proxy:"
 msgstr "FTP 代理："
 
-#: ../panels/network/network.ui.h:3
-msgid "Flight Mode"
-msgstr "飞行模式"
-
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:6
 msgid "Gateway:"
 msgstr "网关："
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:7
 msgid "Group Name:"
 msgstr "组名称："
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:8
 msgid "Group Password:"
 msgstr "组密码："
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:9
 msgid "HTTP Proxy:"
 msgstr "HTTP 代理："
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address:"
 msgstr "硬件地址："
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:11
+msgid "IMEI:"
+msgstr "IMEI："
+
+#: ../panels/network/network.ui.h:12
 msgid "IP Address:"
 msgstr "IP 地址："
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:13
+msgid "IPv4 Address:"
+msgstr "IPv4 地址："
+
+#: ../panels/network/network.ui.h:14
+msgid "IPv6 Address:"
+msgstr "IPv6地址："
+
+#: ../panels/network/network.ui.h:15
 msgid "Method:"
 msgstr "方法："
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:16
 msgid "Network Name:"
 msgstr "网络名称："
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:17
 msgid "Provider:"
 msgstr "提供者："
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:18
 msgid "Secure HTTP Proxy:"
 msgstr "安全 HTTP 代理："
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:19
 msgid "Security:"
 msgstr "安全性："
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:20
 msgid "Socks Host:"
 msgstr "Socks 主机："
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:21
 msgid "Speed:"
 msgstr "速度："
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:22
+msgid "Subnet Mask:"
+msgstr "子网掩码"
+
+#: ../panels/network/network.ui.h:23
 #: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
 msgstr "解锁"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:24
 msgid "Username:"
 msgstr "用户名："
-
-#. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr "亮度;锁定;渐暗;空白;"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "屏幕"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
-msgid "Screen brightness and lock settings"
-msgstr "配置屏幕亮度和锁定"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -1534,12 +1365,12 @@ msgstr "电源"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:2
 msgid "Power management settings"
-msgstr "配置电源管理"
+msgstr "电源管理设置"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
 msgid "Power;Sleep;Suspend;Hibernate;"
-msgstr "电源;睡眠;挂起;休眠;"
+msgstr "加电;睡眠;挂起;休眠;"
 
 #: ../panels/power/cc-power-panel.c:151
 msgid "Unknown time"
@@ -1609,6 +1440,19 @@ msgstr "还有 %s 耗尽(%.0lf%%)"
 msgid "%.0lf%% charged"
 msgstr "已充电 %.0lf%%"
 
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;"
+msgstr "亮度;锁定;渐暗;空白;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "屏幕"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "配置屏幕亮度和锁定"
+
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
 msgstr "启用调试代码"
@@ -1619,7 +1463,7 @@ msgstr "此应用程序的版本"
 
 #: ../panels/sound/applet-main.c:62
 msgid " — GNOME Volume Control Applet"
-msgstr " - GNOME 声音控制小程序"
+msgstr " - GNOME 音量控制小程序"
 
 #: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1921
 msgid "Output"
@@ -1650,7 +1494,7 @@ msgstr "右"
 #: ../panels/sound/gvc-balance-bar.c:115
 msgctxt "balance"
 msgid "Rear"
-msgstr ""
+msgstr "后"
 
 #: ../panels/sound/gvc-balance-bar.c:116
 msgctxt "balance"
@@ -1667,29 +1511,29 @@ msgctxt "balance"
 msgid "Maximum"
 msgstr "最大"
 
-#: ../panels/sound/gvc-balance-bar.c:296
+#: ../panels/sound/gvc-balance-bar.c:295
 msgid "_Balance:"
 msgstr "均衡(_B)："
 
-#: ../panels/sound/gvc-balance-bar.c:299
+#: ../panels/sound/gvc-balance-bar.c:298
 msgid "_Fade:"
 msgstr "淡入淡出(_F)："
 
-#: ../panels/sound/gvc-balance-bar.c:302
+#: ../panels/sound/gvc-balance-bar.c:301
 msgid "_Subwoofer:"
-msgstr ""
+msgstr "重低音(_S):"
 
-#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
+#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:607
+#: ../panels/sound/gvc-channel-bar.c:606
 msgctxt "volume"
 msgid "Unamplified"
-msgstr ""
+msgstr "减弱"
 
-#: ../panels/sound/gvc-channel-bar.c:901
+#: ../panels/sound/gvc-channel-bar.c:900
 msgid "Mute"
 msgstr "静音"
 
@@ -1805,22 +1649,22 @@ msgstr "测试"
 
 #: ../panels/sound/gvc-speaker-test.c:229
 msgid "Subwoofer"
-msgstr ""
+msgstr "超低音"
 
-#: ../panels/sound/gvc-stream-status-icon.c:233
+#: ../panels/sound/gvc-stream-status-icon.c:236
 #, c-format
 msgid "Failed to start Sound Preferences: %s"
-msgstr "启动声音首选项失败：%s"
+msgstr "声音首选项启动失败：%s"
 
-#: ../panels/sound/gvc-stream-status-icon.c:256
+#: ../panels/sound/gvc-stream-status-icon.c:262
 msgid "_Mute"
 msgstr "静音(_M)"
 
-#: ../panels/sound/gvc-stream-status-icon.c:265
+#: ../panels/sound/gvc-stream-status-icon.c:271
 msgid "_Sound Preferences"
 msgstr "声音首选项(_S)"
 
-#: ../panels/sound/gvc-stream-status-icon.c:449
+#: ../panels/sound/gvc-stream-status-icon.c:455
 msgid "Muted"
 msgstr "已静音"
 
@@ -1847,6 +1691,10 @@ msgstr "来自主题"
 #: ../panels/sound/gvc-sound-theme-chooser.c:778
 msgid "C_hoose an alert sound:"
 msgstr "选择警告声音(_H)："
+
+#: ../panels/sound/sound-theme-file-utils.c:292
+msgid "Custom"
+msgstr "自定义"
 
 #: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
 msgid "Show desktop volume control"
@@ -1979,7 +1827,7 @@ msgstr "使用小键盘控制鼠标指针。"
 
 #: ../panels/universal-access/uap.ui.h:22
 msgid "Control the pointer using the video camera."
-msgstr "使用摄像机控制鼠标指针"
+msgstr "使用摄像头控制鼠标指针"
 
 #: ../panels/universal-access/uap.ui.h:23
 msgid "Ctrl+Alt+-"
@@ -2000,6 +1848,10 @@ msgstr "Ctrl+Alt+8"
 #: ../panels/universal-access/uap.ui.h:27
 msgid "Ctrl+Alt+="
 msgstr "Ctrl+Alt+="
+
+#: ../panels/universal-access/uap.ui.h:30
+msgid "Dasher"
+msgstr "Dasher"
 
 #: ../panels/universal-access/uap.ui.h:31
 msgid "Decrease size:"
@@ -2405,6 +2257,8 @@ msgid ""
 "Enrolling fingerprints for\n"
 "<b><big>%s</big></b>"
 msgstr ""
+"为 <b><big>%s</big></b>\n"
+"加入指纹识别"
 
 #: ../panels/user-accounts/um-language-dialog.c:328
 msgid "Other..."
@@ -2570,8 +2424,7 @@ msgstr "%s 已经登录"
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
-msgstr ""
-"在用户已登录时删除帐号可能导致系统处于不可用状态。"
+msgstr "在用户已登录时删除帐号可能导致系统处于不可用状态。"
 
 #: ../panels/user-accounts/um-user-panel.c:434
 #, c-format
@@ -2812,6 +2665,10 @@ msgid ""
 "<b>When the guest user logs out, all files and data associated with the "
 "account will be deleted.</b>"
 msgstr ""
+"其用来宾帐户将允许任何人不使用密码临时登录此计算机。因安全起见，不允许远程"
+"登录至此计算机。\n"
+"\n"
+"<b>当来宾帐户登出时，所有与此帐户有关的文件和数据都将被删除。</b>"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
@@ -2831,7 +2688,7 @@ msgstr "地址簿卡片："
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Allow guests to log in to this computer"
-msgstr "允许访客登录次计算机"
+msgstr "允许来宾登录此计算机"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Automatic Login:"
@@ -2848,6 +2705,10 @@ msgstr "指纹登录："
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
 msgid "Language:"
 msgstr "语言："
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+msgid "Location:"
+msgstr "位置："
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Login Options"
@@ -2972,3 +2833,298 @@ msgstr "Foo;Bar;Baz;"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "全部设置(_A)"
+
+#~ msgid "12 hour format"
+#~ msgstr "12 小时格式"
+
+#~ msgid "24 hour format"
+#~ msgstr "24 小时格式"
+
+#~ msgid "Preferred Applications"
+#~ msgstr "首选应用程序"
+
+#~ msgid "Select your default applications"
+#~ msgstr "选择默认的应用程序"
+
+#~ msgid "Start the preferred visual assistive technology"
+#~ msgstr "启动首选的视觉辅助技术"
+
+#~ msgid "Visual Assistance"
+#~ msgstr "视觉辅助"
+
+#~ msgid "Error setting default browser: %s"
+#~ msgstr "设置默认浏览器出错：%s"
+
+#~ msgid "Error setting default mailer: %s"
+#~ msgstr "设置默认电子邮件程序出错：%s"
+
+#~ msgid "Could not load the main interface"
+#~ msgstr "无法装入主界面"
+
+#~ msgid "Please make sure that the applet is properly installed"
+#~ msgstr "请确定小程序已经正确安装"
+
+#~ msgid "All %s occurrences will be replaced with actual link"
+#~ msgstr "出现的全部 %s 都将被替换为实际链接"
+
+#~ msgid "Co_mmand:"
+#~ msgstr "命令(_M)："
+
+#~ msgid "E_xecute flag:"
+#~ msgstr "执行标志(_X)："
+
+#~ msgid "Instant Messenger"
+#~ msgstr "即时通讯工具"
+
+#~ msgid "Internet"
+#~ msgstr "互联网"
+
+#~ msgid "Mail Reader"
+#~ msgstr "邮件阅读器"
+
+#~ msgid "Mobility"
+#~ msgstr "移动性 "
+
+#~ msgid "Run at st_art"
+#~ msgstr "启动时运行(_A)"
+
+#~ msgid "Run in t_erminal"
+#~ msgstr "在终端中运行(_E)"
+
+#~ msgid "System"
+#~ msgstr "系统"
+
+#~ msgid "Terminal Emulator"
+#~ msgstr "终端模拟器"
+
+#~ msgid "Text Editor"
+#~ msgstr "文本编辑器"
+
+#~ msgid "Visual"
+#~ msgstr "视觉效果"
+
+#~ msgid "Web Browser"
+#~ msgstr "网络浏览器"
+
+#~ msgid "_Run at start"
+#~ msgstr "启动时运行(_R)"
+
+#~ msgid "Banshee Music Player"
+#~ msgstr "Banshee 音乐播放器"
+
+#~ msgid "Debian Terminal Emulator"
+#~ msgstr "Debian 终端模拟器"
+
+#~ msgid "ETerm"
+#~ msgstr "ETerm"
+
+#~ msgid "GNOME Magnifier without Screen Reader"
+#~ msgstr "不带屏幕阅读器的 GNOME 放大镜"
+
+#~ msgid "GNOME OnScreen Keyboard"
+#~ msgstr "GNOME 屏幕键盘"
+
+#~ msgid "GNOME Terminal"
+#~ msgstr "GNOME 终端"
+
+#~ msgid "Gnopernicus"
+#~ msgstr "Gnopernicus"
+
+#~ msgid "Gnopernicus with Magnifier"
+#~ msgstr "带放大镜的 Gnopernicus"
+
+#~ msgid "KDE Magnifier without Screen Reader"
+#~ msgstr "不带屏幕阅读器的 KDE 放大镜"
+
+#~ msgid "Konsole"
+#~ msgstr "Konsole"
+
+#~ msgid "Linux Screen Reader"
+#~ msgstr "Linux 屏幕阅读器"
+
+#~ msgid "Linux Screen Reader with Magnifier"
+#~ msgstr "带放大镜的 Linux 屏幕阅读器"
+
+#~ msgid "Listen"
+#~ msgstr "接听"
+
+#~ msgid "Muine Music Player"
+#~ msgstr "Muine 音乐播放器"
+
+#~ msgid "NXterm"
+#~ msgstr "NXterm"
+
+#~ msgid "Orca"
+#~ msgstr "Orca"
+
+#~ msgid "Orca with Magnifier"
+#~ msgstr "带放大镜的 Orca"
+
+#~ msgid "RXVT"
+#~ msgstr "RXVT"
+
+#~ msgid "Rhythmbox Music Player"
+#~ msgstr "Rhythmbox 音乐播放器"
+
+#~ msgid "Standard XTerminal"
+#~ msgstr "标准 X 终端"
+
+#~ msgid "Terminator"
+#~ msgstr "Terminator"
+
+#~ msgid "Totem Movie Player"
+#~ msgstr "Totem 电影播放机"
+
+#~ msgid "aterm"
+#~ msgstr "aterm"
+
+#~ msgid "Orange"
+#~ msgstr "橙色"
+
+#~ msgid "Chocolate"
+#~ msgstr "赭色"
+
+# 一种颜色，待证
+#, fuzzy
+#~ msgid "Plum"
+#~ msgstr "李子"
+
+#~ msgid "Red"
+#~ msgstr "红色"
+
+# 待证
+#~ msgid "Aluminium"
+#~ msgstr "铝白"
+
+#~ msgid "Gray"
+#~ msgstr "灰色"
+
+#~ msgid "Black"
+#~ msgstr "黑色"
+
+#~ msgid "Colors"
+#~ msgstr "颜色"
+
+#~ msgid "Slide Show"
+#~ msgstr "幻灯片演示"
+
+#~ msgid "Image"
+#~ msgstr "图像"
+
+#~ msgid "%d %s by %d %s"
+#~ msgstr "%d %s * %d %s"
+
+#~ msgid "pixel"
+#~ msgid_plural "pixels"
+#~ msgstr[0] "像素"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s, %s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s，%s\n"
+#~ "文件夹：%s"
+
+#~ msgid ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "Folder: %s"
+#~ msgstr ""
+#~ "<b>%s</b>\n"
+#~ "%s\n"
+#~ "文件夹：%s"
+
+#~ msgid "Image missing"
+#~ msgstr "图像丢失"
+
+#~ msgid "_Detect Monitors"
+#~ msgstr "检测显示器(_D)"
+
+#~ msgid "New Location..."
+#~ msgstr "新建位置..."
+
+#~ msgid "Location already exists"
+#~ msgstr "位置已存在"
+
+#~ msgid "Set your network proxy preferences"
+#~ msgstr "设置您的网络代理首选项"
+
+#~ msgid "Web;Location;"
+#~ msgstr "Web;位置;"
+
+#~ msgid "<b>Di_rect internet connection</b>"
+#~ msgstr "<b>直接连接到互联网(_R)</b>"
+
+#~ msgid "<b>_Automatic proxy configuration</b>"
+#~ msgstr "<b>自动配置代理(_A)</b>"
+
+#~ msgid "<b>_Manual proxy configuration</b>"
+#~ msgstr "<b>手动配置代理(_M)</b>"
+
+#~ msgid "<b>_Use authentication</b>"
+#~ msgstr "<b>需要身份验证(_U)</b>"
+
+#~ msgid "Autoconfiguration _URL:"
+#~ msgstr "自动配置 URL(_U)："
+
+#~ msgid "C_reate"
+#~ msgstr "创建(_R)"
+
+#~ msgid "Create New Location"
+#~ msgstr "创建新位置"
+
+#~ msgid "HTTP Proxy Details"
+#~ msgstr "HTTP 代理细节"
+
+#~ msgid "H_TTP proxy:"
+#~ msgstr "H_TTP 代理："
+
+#~ msgid "Ignore Host List"
+#~ msgstr "忽略主机列表"
+
+#~ msgid "Ignored Hosts"
+#~ msgstr "忽略的主机"
+
+#~ msgid "Network Proxy Preferences"
+#~ msgstr "网络代理首选项"
+
+#~ msgid "Port:"
+#~ msgstr "端口："
+
+#~ msgid "Proxy Configuration"
+#~ msgstr "代理服务器配置"
+
+#~ msgid "S_ocks host:"
+#~ msgstr "S_OCKS 主机："
+
+#~ msgid "The location already exists."
+#~ msgstr "该位置已存在。"
+
+#~ msgid "U_sername:"
+#~ msgstr "用户名(_S)："
+
+#~ msgid "_Delete Location"
+#~ msgstr "删除位置(_D)"
+
+#~ msgid "_Details"
+#~ msgstr "细节(_D)"
+
+#~ msgid "_FTP proxy:"
+#~ msgstr "_FTP 代理："
+
+#~ msgid "_Location name:"
+#~ msgstr "位置名(_L)："
+
+#~ msgid "_Password:"
+#~ msgstr "密码(_P)："
+
+#~ msgid "_Secure HTTP proxy:"
+#~ msgstr "安全 HTTP 代理(_S)："
+
+#~ msgid "_Use the same proxy for all protocols"
+#~ msgstr "为所有协议使用相同的代理(_U)"
+
+#~ msgid "Flight Mode"
+#~ msgstr "飞行模式"
