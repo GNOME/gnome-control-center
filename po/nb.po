@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-12 10:54+0100\n"
-"PO-Revision-Date: 2011-01-12 10:57+0100\n"
+"POT-Creation-Date: 2011-01-15 12:15+0100\n"
+"PO-Revision-Date: 2011-01-15 12:15+0100\n"
 "Last-Translator: Torstein Adolf Winterseth <kvikende@fsfe.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -43,13 +43,17 @@ msgstr ""
 msgid ""
 "URL for where to get more desktop backgrounds. If set to an empty string the "
 "link will not appear."
-msgstr "URL for henting av skrivebordsbakgrunner. Hvis den settes til en tom streng vil ikke lenken vises."
+msgstr ""
+"URL for henting av skrivebordsbakgrunner. Hvis den settes til en tom streng "
+"vil ikke lenken vises."
 
 #: ../gnome-control-center.schemas.in.h:6
 msgid ""
 "URL for where to get more desktop themes. If set to an empty string the link "
 "will not appear."
-msgstr "URL for henting av skrivebordstema. Hvis den settes til en tom streng vil ikke lenken vises."
+msgstr ""
+"URL for henting av skrivebordstema. Hvis den settes til en tom streng vil "
+"ikke lenken vises."
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
@@ -352,25 +356,25 @@ msgid "Date and Time preferences panel"
 msgstr "Brukervalgpanel for dato og klokkeslett"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "<i>Note: may limit resolution options</i>"
-msgstr "<i>Merk: kan begrense alternativer for oppløsing</i>"
-
-#: ../panels/display/display-capplet.ui.h:2
 #: ../panels/display/xrandr-capplet.c:316
 msgid "Left"
 msgstr "Venstre"
 
-#: ../panels/display/display-capplet.ui.h:3
+#: ../panels/display/display-capplet.ui.h:2
 #: ../panels/display/xrandr-capplet.c:479
 msgid "Monitor"
 msgstr "Skjerm"
 
-#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/display-capplet.ui.h:3
 #: ../panels/display/xrandr-capplet.c:315
 #: ../panels/display/xrandr-capplet.c:354
 #: ../panels/universal-access/uap.ui.h:58
 msgid "Normal"
 msgstr "Normal"
+
+#: ../panels/display/display-capplet.ui.h:4
+msgid "Note: may limit resolution options"
+msgstr "Merk: kan begrense alternativer for oppløsing"
 
 #: ../panels/display/display-capplet.ui.h:5
 msgid "R_otation:"
@@ -470,12 +474,14 @@ msgstr "Kunne ikke søke etter skjermer"
 msgid "Could not get screen information"
 msgstr "Fant ikke informasjon om skjermen"
 
-#: ../panels/info/cc-info-panel.c:242
+#. translators: This is the type of architecture, for example:
+#. * "64-bit" or "32-bit"
+#: ../panels/info/cc-info-panel.c:245
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:290
+#: ../panels/info/cc-info-panel.c:293
 msgid "Unknown model"
 msgstr "Ukjent modell"
 
@@ -1477,7 +1483,7 @@ msgstr "Versjon av dette programmet"
 msgid " — GNOME Volume Control Applet"
 msgstr " – Panelprogram for volumkontroll"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1921
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1922
 msgid "Output"
 msgstr "Utgang"
 
@@ -1485,7 +1491,7 @@ msgstr "Utgang"
 msgid "Sound Output Volume"
 msgstr "Utgangsvolum for lyd"
 
-#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1838
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1839
 msgid "Input"
 msgstr "Inngang"
 
@@ -1549,7 +1555,7 @@ msgstr "Ikke forsterket"
 msgid "Mute"
 msgstr "Demp"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1629
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1630
 msgid "_Profile:"
 msgstr "_Profil:"
 
@@ -1584,71 +1590,71 @@ msgstr "Tilkobli_ng:"
 msgid "Peak detect"
 msgstr "Bestem høyeste nivå"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1506
-#: ../panels/sound/gvc-mixer-dialog.c:1717
+#: ../panels/sound/gvc-mixer-dialog.c:1507
+#: ../panels/sound/gvc-mixer-dialog.c:1718
 #: ../panels/sound/gvc-sound-theme-chooser.c:599
 msgid "Name"
 msgstr "Navn"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1524
+#: ../panels/sound/gvc-mixer-dialog.c:1525
 msgid "Device"
 msgstr "Enhet"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1572
+#: ../panels/sound/gvc-mixer-dialog.c:1573
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Test av høyttaler for %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1630
+#: ../panels/sound/gvc-mixer-dialog.c:1631
 msgid "Test Speakers"
 msgstr "Test høyttalere"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1761
+#: ../panels/sound/gvc-mixer-dialog.c:1762
 msgid "_Output volume: "
 msgstr "_Utgangsvolum: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1775
+#: ../panels/sound/gvc-mixer-dialog.c:1776
 msgid "Sound Effects"
 msgstr "Lydeffekter"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1782
+#: ../panels/sound/gvc-mixer-dialog.c:1783
 msgid "_Alert volume: "
 msgstr "V_arselvolum: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1795
+#: ../panels/sound/gvc-mixer-dialog.c:1796
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1800
+#: ../panels/sound/gvc-mixer-dialog.c:1801
 msgid "C_hoose a device to configure:"
 msgstr "_Velg en enhet å konfigurere:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1827
-#: ../panels/sound/gvc-mixer-dialog.c:1950
+#: ../panels/sound/gvc-mixer-dialog.c:1828
+#: ../panels/sound/gvc-mixer-dialog.c:1951
 msgid "Settings for the selected device:"
 msgstr "Innstillinger for valgt enhet:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1845
+#: ../panels/sound/gvc-mixer-dialog.c:1846
 msgid "_Input volume: "
 msgstr "_Inngangsvolum: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1868
+#: ../panels/sound/gvc-mixer-dialog.c:1869
 msgid "Input level:"
 msgstr "Inngangsnivå:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1894
+#: ../panels/sound/gvc-mixer-dialog.c:1895
 msgid "C_hoose a device for sound input:"
 msgstr "_Velg en enhet som lydinngang:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1926
+#: ../panels/sound/gvc-mixer-dialog.c:1927
 msgid "C_hoose a device for sound output:"
 msgstr "_Velg en enhet som lydutgang:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1961
+#: ../panels/sound/gvc-mixer-dialog.c:1962
 msgid "Applications"
 msgstr "Programmer"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1965
+#: ../panels/sound/gvc-mixer-dialog.c:1966
 msgid "No application is currently playing or recording audio."
 msgstr "Ingen programmer spiller av eller tar opp lyd."
 
