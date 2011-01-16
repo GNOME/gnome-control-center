@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-01-12 00:12+0000\n"
-"PO-Revision-Date: 2011-01-13 19:28+0100\n"
+"POT-Creation-Date: 2011-01-14 14:23+0000\n"
+"PO-Revision-Date: 2011-01-16 19:36+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -367,25 +367,26 @@ msgid "Date and Time preferences panel"
 msgstr "Panel de preferencias de la fecha y hora"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "<i>Note: may limit resolution options</i>"
-msgstr "<i>Nota: puede limitar las opciones de resolución</i>"
-
-#: ../panels/display/display-capplet.ui.h:2
 #: ../panels/display/xrandr-capplet.c:316
 msgid "Left"
 msgstr "Izquierda"
 
-#: ../panels/display/display-capplet.ui.h:3
+#: ../panels/display/display-capplet.ui.h:2
 #: ../panels/display/xrandr-capplet.c:479
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/display-capplet.ui.h:3
 #: ../panels/display/xrandr-capplet.c:315
 #: ../panels/display/xrandr-capplet.c:354
 #: ../panels/universal-access/uap.ui.h:58
 msgid "Normal"
 msgstr "Normal"
+
+#: ../panels/display/display-capplet.ui.h:4
+#| msgid "<i>Note: may limit resolution options</i>"
+msgid "Note: may limit resolution options"
+msgstr "Nota: puede limitar las opciones de resolución"
 
 #: ../panels/display/display-capplet.ui.h:5
 msgid "R_otation:"
@@ -486,14 +487,14 @@ msgstr "No se pudieron detectar las pantallas"
 msgid "Could not get screen information"
 msgstr "No se pudo obtener la información de la pantalla"
 
-#: ../panels/info/cc-info-panel.c:242
+#. translators: This is the type of architecture, for example:
+#. * "64-bit" or "32-bit"
+#: ../panels/info/cc-info-panel.c:245
 #, c-format
-#| msgid "Edit"
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:290
-#| msgid "Unknown time"
+#: ../panels/info/cc-info-panel.c:293
 msgid "Unknown model"
 msgstr "Modelo desconocido"
 
@@ -1499,7 +1500,7 @@ msgstr "Versión de esta aplicación"
 msgid " — GNOME Volume Control Applet"
 msgstr " : Miniaplicación Control de volumen de GNOME"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1921
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1922
 msgid "Output"
 msgstr "Salida"
 
@@ -1507,7 +1508,7 @@ msgstr "Salida"
 msgid "Sound Output Volume"
 msgstr "Volumen de salida del sonido"
 
-#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1838
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1839
 msgid "Input"
 msgstr "Entrada"
 
@@ -1571,7 +1572,7 @@ msgstr "Sin amplificar"
 msgid "Mute"
 msgstr "Silenciar"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1629
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1630
 msgid "_Profile:"
 msgstr "_Perfil:"
 
@@ -1606,71 +1607,71 @@ msgstr "Co_nector:"
 msgid "Peak detect"
 msgstr "Detección de picos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1506
-#: ../panels/sound/gvc-mixer-dialog.c:1717
+#: ../panels/sound/gvc-mixer-dialog.c:1507
+#: ../panels/sound/gvc-mixer-dialog.c:1718
 #: ../panels/sound/gvc-sound-theme-chooser.c:599
 msgid "Name"
 msgstr "Nombre"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1524
+#: ../panels/sound/gvc-mixer-dialog.c:1525
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1572
+#: ../panels/sound/gvc-mixer-dialog.c:1573
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Prueba de altavoces para %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1630
+#: ../panels/sound/gvc-mixer-dialog.c:1631
 msgid "Test Speakers"
 msgstr "Probar los altavoces"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1761
+#: ../panels/sound/gvc-mixer-dialog.c:1762
 msgid "_Output volume: "
 msgstr "Volumen de sali_da: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1775
+#: ../panels/sound/gvc-mixer-dialog.c:1776
 msgid "Sound Effects"
 msgstr "Efectos de sonido"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1782
+#: ../panels/sound/gvc-mixer-dialog.c:1783
 msgid "_Alert volume: "
 msgstr "Volumen de _alerta: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1795
+#: ../panels/sound/gvc-mixer-dialog.c:1796
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1800
+#: ../panels/sound/gvc-mixer-dialog.c:1801
 msgid "C_hoose a device to configure:"
 msgstr "_Elegir un dispositivo para configurar:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1827
-#: ../panels/sound/gvc-mixer-dialog.c:1950
+#: ../panels/sound/gvc-mixer-dialog.c:1828
+#: ../panels/sound/gvc-mixer-dialog.c:1951
 msgid "Settings for the selected device:"
 msgstr "Configuración para el dispositivo seleccionado:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1845
+#: ../panels/sound/gvc-mixer-dialog.c:1846
 msgid "_Input volume: "
 msgstr "Volumen de _entrada: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1868
+#: ../panels/sound/gvc-mixer-dialog.c:1869
 msgid "Input level:"
 msgstr "Nivel de entrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1894
+#: ../panels/sound/gvc-mixer-dialog.c:1895
 msgid "C_hoose a device for sound input:"
 msgstr "_Elegir un dispositivo para la entrada de sonido:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1926
+#: ../panels/sound/gvc-mixer-dialog.c:1927
 msgid "C_hoose a device for sound output:"
 msgstr "_Elegir un dispositivo para la salida de sonido:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1961
+#: ../panels/sound/gvc-mixer-dialog.c:1962
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1965
+#: ../panels/sound/gvc-mixer-dialog.c:1966
 msgid "No application is currently playing or recording audio."
 msgstr "Actualmente ninguna aplicación está reproduciendo o grabando sonido."
 
