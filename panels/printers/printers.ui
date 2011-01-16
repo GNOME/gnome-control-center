@@ -36,38 +36,24 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolbar" id="printers-toolbar">
+              <object class="GtkCheckButton" id="printer-default-check-button">
                 <property name="visible">True</property>
-                <property name="toolbar_style">icons</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
                 <child>
-                  <object class="GtkToolButton" id="printer-add-button">
+                  <object class="GtkLabel" id="label8">
                     <property name="visible">True</property>
-                    <property name="tooltip_text" translatable="yes">Add new printer</property>
-                    <property name="label" translatable="yes">AddPrinter</property>
-                    <property name="use_underline">True</property>
-                    <property name="icon_name">list-add</property>
+                    <property name="label" translatable="yes">Default</property>
+                    <attributes>
+                      <attribute name="style" value="italic"/>
+                    </attributes>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkToolButton" id="printer-delete-button">
-                    <property name="visible">True</property>
-                    <property name="tooltip_text" translatable="yes">Remove selected printer</property>
-                    <property name="label" translatable="yes">RemovePrinter</property>
-                    <property name="use_underline">True</property>
-                    <property name="icon_name">list-remove</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
