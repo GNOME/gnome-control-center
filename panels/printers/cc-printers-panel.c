@@ -61,6 +61,7 @@ static void actualize_jobs_list (CcPrintersPanel *self);
 static void actualize_printers_list (CcPrintersPanel *self);
 static void actualize_allowed_users_list (CcPrintersPanel *self);
 static void printer_disable_cb (GtkToggleButton *togglebutton, gpointer user_data);
+static void printer_set_default_cb (GtkToggleButton *button, gpointer user_data);
 
 static void
 cc_printers_panel_get_property (GObject    *object,
@@ -328,6 +329,15 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
 
       widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-default-check-button");
+
+      gtk_widget_set_sensitive (widget, TRUE);
+      g_signal_handlers_block_by_func (G_OBJECT (widget), printer_set_default_cb, self);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), priv->dests[id].is_default);
+      g_signal_handlers_unblock_by_func (G_OBJECT (widget), printer_set_default_cb, self);
+
+
+      widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "supply-drawing-area");
 
       width = gtk_widget_get_allocated_width (widget);
@@ -406,8 +416,8 @@ actualize_printers_list (CcPrintersPanel *self)
         current_printer_instance = g_strdup (priv->dests[priv->current_dest].instance);
     }
 
-  if (priv->num_jobs > 0)
-    cupsFreeJobs (priv->num_jobs, priv->jobs);
+  if (priv->num_dests > 0)
+    cupsFreeDests (priv->num_dests, priv->dests);
   priv->num_dests = cupsGetDests (&priv->dests);
   priv->current_dest = -1;
 
@@ -1087,51 +1097,6 @@ printer_disable_cb (GtkToggleButton *togglebutton,
   }
 }
 
-static void
-printer_delete_cb (GtkToolButton *toolbutton,
-                   gpointer       user_data)
-{
-  CcPrintersPanelPrivate *priv;
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  DBusGProxy             *proxy;
-  gboolean                ret = FALSE;
-  GError                 *error = NULL;
-  char                   *ret_error = NULL;
-  char                   *name = NULL;
-
-  priv = PRINTERS_PANEL_PRIVATE (self);
-
-  if (priv->current_dest >= 0 &&
-      priv->current_dest < priv->num_dests &&
-      priv->dests != NULL)
-    name = priv->dests[priv->current_dest].name;
-
-  if (name)
-    {
-      proxy = get_dbus_proxy ();
-
-      if (!proxy)
-        return;
-
-      ret = dbus_g_proxy_call (proxy, "PrinterDelete", &error,
-                               G_TYPE_STRING, name,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
-
-      if (error || (ret_error && ret_error[0] != '\0'))
-        {
-          if (error)
-            g_warning ("%s", error->message);
-
-          if (ret_error && ret_error[0] != '\0')
-            g_warning ("%s", ret_error);
-        }
-      else
-        actualize_printers_list (self);
-  }
-}
-
 static gboolean
 supply_levels_draw_cb (GtkWidget *widget,
                        cairo_t *cr,
@@ -1324,29 +1289,53 @@ allowed_user_remove_cb (GtkButton *button,
 }
 
 static void
-set_widget_style (GtkWidget *widget, gchar *style_data)
+printer_set_default_cb (GtkToggleButton *button,
+                        gpointer         user_data)
 {
-  GtkStyleProvider *provider;
-  GtkStyleContext  *context;
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  DBusGProxy             *proxy;
+  gboolean                ret = FALSE;
+  GError                 *error = NULL;
+  char                   *ret_error = NULL;
+  char                   *name = NULL;
 
-  if (widget)
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    name = priv->dests[priv->current_dest].name;
+
+  if (name)
     {
-      context = gtk_widget_get_style_context (widget);
-      provider = g_object_get_data (G_OBJECT (widget), "provider");
+      proxy = get_dbus_proxy ();
 
-      if (provider == NULL)
+      if (!proxy)
+        return;
+
+      ret = dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
+                               G_TYPE_STRING, name,
+                               G_TYPE_INVALID,
+                               G_TYPE_STRING, &ret_error,
+                               G_TYPE_INVALID);
+
+      if (error || (ret_error && ret_error[0] != '\0'))
         {
-          provider = (GtkStyleProvider *)gtk_css_provider_new ();
-          g_object_set_data (G_OBJECT (widget), "provider", provider);
-          gtk_style_context_add_provider (context,
-                                          GTK_STYLE_PROVIDER (provider),
-                                          GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-        }
+          if (error)
+            g_warning ("%s", error->message);
 
-      gtk_css_provider_load_from_data ((GtkCssProvider *)provider,
-                                       style_data, -1, NULL);
-      gtk_style_context_invalidate (context);
-    }
+          if (ret_error && ret_error[0] != '\0')
+            g_warning ("%s", ret_error);
+
+        }
+      else
+        actualize_printers_list (self);
+
+      g_signal_handlers_block_by_func (G_OBJECT (button), printer_set_default_cb, self);
+      gtk_toggle_button_set_active (button, priv->dests[priv->current_dest].is_default);
+      g_signal_handlers_unblock_by_func (G_OBJECT (button), printer_set_default_cb, self);
+  }
 }
 
 static void
@@ -1407,10 +1396,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
   g_signal_connect (widget, "toggled", G_CALLBACK (printer_disable_cb), self);
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "printer-delete-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (printer_delete_cb), self);
-
-  widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "allowed-user-remove-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (allowed_user_remove_cb), self);
 
@@ -1418,20 +1403,14 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "supply-drawing-area");
   g_signal_connect (widget, "draw", G_CALLBACK (supply_levels_draw_cb), self);
 
-
-  /* set plain style for borders of toolbars */
   widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "printers-toolbar");
-  set_widget_style (widget, "GtkToolbar { border-style: none }");
+    gtk_builder_get_object (priv->builder, "printer-default-check-button");
+  g_signal_connect (widget, "toggled", G_CALLBACK (printer_set_default_cb), self);
 
 
   /* make unused widgets insensitive for now */
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "allowed-user-add-button");
-  gtk_widget_set_sensitive (widget, FALSE);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "printer-add-button");
   gtk_widget_set_sensitive (widget, FALSE);
 
   widget = (GtkWidget*)
