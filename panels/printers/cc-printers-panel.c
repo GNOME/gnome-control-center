@@ -137,7 +137,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeIter             iter;
   const gchar            *none = "---";
   GtkWidget              *widget;
+  gboolean                test_page_command_available = FALSE;
+  gboolean                clean_command_available = FALSE;
   gchar                  *reason = NULL;
+  gchar                 **available_commands = NULL;
+  gchar                  *printer_commands = NULL;
   gchar                 **printer_reasons = NULL;
   gchar                  *marker_levels = NULL;
   gchar                  *description = NULL;
@@ -219,6 +223,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             reason = priv->dests[id].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-levels") == 0)
             marker_levels = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-commands") == 0)
+            printer_commands = priv->dests[priv->current_dest].options[i].value;
         }
 
       /* Find the first of the most severe reasons
@@ -335,6 +341,27 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       g_signal_handlers_block_by_func (G_OBJECT (widget), printer_set_default_cb, self);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), priv->dests[id].is_default);
       g_signal_handlers_unblock_by_func (G_OBJECT (widget), printer_set_default_cb, self);
+
+
+      if (printer_commands)
+        {
+          available_commands = g_strsplit (printer_commands, ",", -1);
+          for (i = 0; i < g_strv_length (available_commands); i++)
+            {
+              if (g_strcmp0 (available_commands[i], "PrintSelfTestPage") == 0)
+                test_page_command_available = TRUE;
+              if (g_strcmp0 (available_commands[i], "Clean") == 0)
+                clean_command_available = TRUE;
+            }
+        }
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "print-test-page-button");
+      gtk_widget_set_sensitive (widget, test_page_command_available);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "clean-print-heads-button");
+      gtk_widget_set_sensitive (widget, clean_command_available);
 
 
       widget = (GtkWidget*)
@@ -1338,6 +1365,100 @@ printer_set_default_cb (GtkToggleButton *button,
   }
 }
 
+static ipp_t *
+execute_maintenance_command (const char *printer_name,
+                             const char *command,
+                             const char *title)
+{
+  http_t *http;
+  GError *error = NULL;
+  ipp_t  *request = NULL;
+  ipp_t  *response = NULL;
+  char    uri[HTTP_MAX_URI + 1];
+  int     fd = -1;
+
+  http = httpConnectEncrypt (cupsServer (),
+                             ippPort (),
+                             cupsEncryption ());
+
+  if (http)
+    {
+      request = ippNewRequest (IPP_PRINT_JOB);
+
+      g_snprintf (uri,
+                  sizeof (uri),
+                  "ipp://localhost/printers/%s",
+                  printer_name);
+
+      ippAddString (request,
+                    IPP_TAG_OPERATION,
+                    IPP_TAG_URI,
+                    "printer-uri",
+                    NULL,
+                    uri);
+
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME, "job-name",
+                    NULL, title);
+
+      ippAddString (request, IPP_TAG_JOB, IPP_TAG_MIMETYPE, "document-format",
+                    NULL, "application/vnd.cups-command");
+
+      gchar *file_name = NULL;
+      fd = g_file_open_tmp ("ccXXXXXX", &file_name, &error);
+
+      if (fd != -1 && !error)
+        {
+          FILE *file;
+
+          file = fdopen (fd, "w");
+          fprintf (file, "#CUPS-COMMAND\n");
+          fprintf (file, "%s\n", command);
+          fclose (file);
+
+          response = cupsDoFileRequest (http, request, "/", file_name);
+        }
+    }
+
+  return response;
+}
+
+static void
+printer_maintenance_cb (GtkButton *button,
+                        gpointer   user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  ipp_t                   *response = NULL;
+  gchar                   *printer_name = NULL;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    printer_name = priv->dests[priv->current_dest].name;
+
+  if (printer_name)
+    {
+      if ((GtkButton*) gtk_builder_get_object (priv->builder,
+                                               "print-test-page-button")
+                       == button)
+        {
+          response = execute_maintenance_command (printer_name,
+                                                  _("PrintSelfTestPage"),
+                                                  _("Test page"));
+        }
+      else if ((GtkButton*) gtk_builder_get_object (priv->builder,
+                                                    "clean-print-heads-button")
+                            == button)
+        response = execute_maintenance_command (printer_name,
+                                                _("Clean all"),
+                                                _("Clean print heads command"));
+      if (response && response->state == IPP_ERROR)
+        g_warning (_("An error has occured during a maintenance command."));
+    }
+}
+
 static void
 cc_printers_panel_init (CcPrintersPanel *self)
 {
@@ -1407,18 +1528,18 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "printer-default-check-button");
   g_signal_connect (widget, "toggled", G_CALLBACK (printer_set_default_cb), self);
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "print-test-page-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "clean-print-heads-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
+
 
   /* make unused widgets insensitive for now */
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "allowed-user-add-button");
-  gtk_widget_set_sensitive (widget, FALSE);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "print-test-page-button");
-  gtk_widget_set_sensitive (widget, FALSE);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "clean-print-heads-button");
   gtk_widget_set_sensitive (widget, FALSE);
 
 
