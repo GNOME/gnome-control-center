@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.22"/>
   <!-- interface-naming-policy toplevel-contextual -->
@@ -8,6 +8,7 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkVBox" id="vbox4">
             <property name="visible">True</property>
@@ -52,7 +53,7 @@
                   <object class="GtkEntry" id="custom-shortcut-name-entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="invisible_char">•</property>
+                    <property name="invisible_char">&#x2022;</property>
                     <property name="activates_default">True</property>
                   </object>
                   <packing>
@@ -65,7 +66,7 @@
                   <object class="GtkEntry" id="custom-shortcut-command-entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="invisible_char">•</property>
+                    <property name="invisible_char">&#x2022;</property>
                     <property name="activates_default">True</property>
                   </object>
                   <packing>
@@ -140,6 +141,7 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="keyboard_vbox">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkNotebook" id="keyboard_notebook">
@@ -150,10 +152,12 @@
               <object class="GtkVBox" id="general_page">
                 <property name="visible">True</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">18</property>
                 <child>
                   <object class="GtkVBox" id="vbox22">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="label300">
@@ -187,6 +191,7 @@
                         <child>
                           <object class="GtkVBox" id="vbox100">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="repeat_toggle">
@@ -372,6 +377,7 @@
                 <child>
                   <object class="GtkVBox" id="vbox230">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="label5">
@@ -405,6 +411,7 @@
                         <child>
                           <object class="GtkVBox" id="cursor_vbox">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="cursor_toggle">
@@ -533,10 +540,12 @@
               <object class="GtkVBox" id="shortcuts_page">
                 <property name="visible">True</property>
                 <property name="border_width">5</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkVBox" id="shortcuts_vbox">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkHBox" id="hbox2">
