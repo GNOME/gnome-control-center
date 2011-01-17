@@ -46,16 +46,6 @@ typedef struct {
 } AddVariantData;
 
 static void
-
-
-
-
-
-
-
-
-
-
 xkb_layout_chooser_available_layouts_fill (GtkBuilder * chooser_dialog,
 					   const gchar cblid[],
 					   const gchar cbvid[],
@@ -65,30 +55,10 @@ xkb_layout_chooser_available_layouts_fill (GtkBuilder * chooser_dialog,
 					   GCallback combo_changed_notify);
 
 static void
-
-
-
-
-
-
-
-
-
-
 xkb_layout_chooser_available_language_variants_fill (GtkBuilder *
 						     chooser_dialog);
 
 static void
-
-
-
-
-
-
-
-
-
-
 xkb_layout_chooser_available_country_variants_fill (GtkBuilder *
 						    chooser_dialog);
 
@@ -241,6 +211,12 @@ xkb_layout_chooser_available_language_variants_fill (GtkBuilder *
 	    (4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
 	     G_TYPE_STRING);
 
+	/* Turn on sorting after filling the store, since that's faster */
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+					      (list_store),
+					      COMBO_BOX_MODEL_COL_SORT,
+					      GTK_SORT_ASCENDING);
+
 	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbl), &liter)) {
 		GtkTreeModel *lm =
 		    gtk_combo_box_get_model (GTK_COMBO_BOX (cbl));
@@ -260,12 +236,6 @@ xkb_layout_chooser_available_language_variants_fill (GtkBuilder *
 		g_free (lang_id);
 	}
 
-	/* Turn on sorting after filling the store, since that's faster */
-	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-					      (list_store),
-					      COMBO_BOX_MODEL_COL_SORT,
-					      GTK_SORT_ASCENDING);
-
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbv),
 				 GTK_TREE_MODEL (list_store));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (cbv), 0);
@@ -284,6 +254,12 @@ xkb_layout_chooser_available_country_variants_fill (GtkBuilder *
 	    (4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
 	     G_TYPE_STRING);
 
+	/* Turn on sorting after filling the store, since that's faster */
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+					      (list_store),
+					      COMBO_BOX_MODEL_COL_SORT,
+					      GTK_SORT_ASCENDING);
+
 	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (cbl), &liter)) {
 		GtkTreeModel *lm =
 		    gtk_combo_box_get_model (GTK_COMBO_BOX (cbl));
@@ -301,12 +277,6 @@ xkb_layout_chooser_available_country_variants_fill (GtkBuilder *
 		     &data);
 		g_free (country_id);
 	}
-
-	/* Turn on sorting after filling the store, since that's faster */
-	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-					      (list_store),
-					      COMBO_BOX_MODEL_COL_SORT,
-					      GTK_SORT_ASCENDING);
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbv),
 				 GTK_TREE_MODEL (list_store));
@@ -341,13 +311,13 @@ xkb_layout_chooser_available_layouts_fill (GtkBuilder *
 					renderer, "markup",
 					COMBO_BOX_MODEL_COL_VISIBLE, NULL);
 
-	layout_iterator (config_registry, layout_handler, list_store);
-
 	/* Turn on sorting after filling the model since that's faster */
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
 					      (list_store),
 					      COMBO_BOX_MODEL_COL_SORT,
 					      GTK_SORT_ASCENDING);
+
+	layout_iterator (config_registry, layout_handler, list_store);
 
 	g_signal_connect_swapped (G_OBJECT (cbl), "changed",
 				  combo_changed_notify, chooser_dialog);
