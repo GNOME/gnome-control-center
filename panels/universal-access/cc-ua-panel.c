@@ -323,12 +323,10 @@ static gdouble
 dpi_from_pixels_and_mm (gint pixels,
                         gint mm)
 {
-  gdouble dpi;
-
   if (mm >= 1)
     return pixels / (mm / 25.4);
   else
-    return dpi = 0;
+    return 0;
 }
 
 static gdouble
