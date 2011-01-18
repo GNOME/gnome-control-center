@@ -266,11 +266,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           g_strfreev (printer_reasons);
 
           if (error_index >= 0)
-            status = g_strdup (statuses[error_index]);
+            status = g_strdup (_(statuses[error_index]));
           else if (warning_index >= 0)
-            status = g_strdup (statuses[warning_index]);
+            status = g_strdup (_(statuses[warning_index]));
           else if (report_index >= 0)
-            status = g_strdup (statuses[report_index]);
+            status = g_strdup (_(statuses[report_index]));
         }
 
       if (status == NULL)
@@ -278,13 +278,13 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           switch (printer_state)
             {
               case 3:
-                status = g_strdup ( N_ ("Idle"));
+                status = g_strdup ( _("Idle"));
                 break;
               case 4:
-                status = g_strdup ( N_ ("Processing"));
+                status = g_strdup ( _("Processing"));
                 break;
               case 5:
-                status = g_strdup ( N_ ("Paused"));
+                status = g_strdup ( _("Paused"));
                 break;
             }
         }
@@ -1445,15 +1445,15 @@ printer_maintenance_cb (GtkButton *button,
                        == button)
         {
           response = execute_maintenance_command (printer_name,
-                                                  _("PrintSelfTestPage"),
+                                                  "PrintSelfTestPage",
                                                   _("Test page"));
         }
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                     "clean-print-heads-button")
                             == button)
         response = execute_maintenance_command (printer_name,
-                                                _("Clean all"),
-                                                _("Clean print heads command"));
+                                                "Clean all",
+                                                _("Clean print heads"));
       if (response && response->state == IPP_ERROR)
         g_warning (_("An error has occured during a maintenance command."));
     }
