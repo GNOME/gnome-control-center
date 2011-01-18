@@ -1788,7 +1788,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
 		    G_CALLBACK (shortcut_selection_changed),
-		    WID (builder, "remove-button"));
+		    WID (builder, "remove-toolbutton"));
 
   allowed_keys = gconf_client_get_list (client,
                                         GCONF_BINDING_DIR "/allowed_keys",
@@ -1798,7 +1798,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
     {
       g_slist_foreach (allowed_keys, (GFunc)g_free, NULL);
       g_slist_free (allowed_keys);
-      gtk_widget_set_sensitive (WID (builder, "add-button"),
+      gtk_widget_set_sensitive (WID (builder, "add-toolbutton"),
                                 FALSE);
     }
 
@@ -1811,9 +1811,9 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 				    "custom-shortcut-name-entry");
   custom_shortcut_command_entry = WID (builder,
 				       "custom-shortcut-command-entry");
-  g_signal_connect (WID (builder, "add-button"),
+  g_signal_connect (WID (builder, "add-toolbutton"),
 		    "clicked", G_CALLBACK (add_button_clicked), builder);
-  g_signal_connect (WID (builder, "remove-button"),
+  g_signal_connect (WID (builder, "remove-toolbutton"),
 		    "clicked", G_CALLBACK (remove_button_clicked), builder);
 
   gtk_dialog_set_default_response (GTK_DIALOG (custom_shortcut_dialog),
