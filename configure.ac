@@ -107,10 +107,15 @@ PKG_CHECK_MODULES(PULSEAUDIO,
           libpulse-mainloop-glib >= $PA_REQUIRED_VERSION)
 AC_SUBST(PULSEAUDIO_CFLAGS)
 AC_SUBST(PULSEAUDIO_LIBS)
-# check for cups
-AC_CHECK_HEADERS(cups/cups.h cups/http.h cups/ipp.h)
-CUPS_LIBS=-lcups
-AC_SUBST(CUPS_LIBS)
+
+AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h], have_cups=yes, have_cups=no)
+if test x$have_cups = xyes ; then
+  CUPS_LIBS=-lcups
+  AC_SUBST(CUPS_LIBS)
+else
+  AC_MSG_WARN(*** Printers panel will not be built (CUPS header files not found) ***)
+fi
+AM_CONDITIONAL(BUILD_PRINTERS, [test x$have_cups = xyes])
 
 gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-3.0`
 gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-3.0`

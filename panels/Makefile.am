@@ -5,7 +5,6 @@ SUBDIRS= \
 	display \
 	media \
 	mouse \
-	printers \
 	region \
 	network \
 	info \
@@ -14,5 +13,9 @@ SUBDIRS= \
 	universal-access \
 	user-accounts \
 	datetime
+
+if BUILD_PRINTERS
+SUBDIRS += printers
+endif
 
 -include $(top_srcdir)/git.mk
