@@ -1146,7 +1146,7 @@ supply_levels_draw_cb (GtkWidget *widget,
       for (i = 0; i < priv->dests[priv->current_dest].num_options; i++)
         {
           if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-names") == 0)
-            marker_names = priv->dests[priv->current_dest].options[i].value;
+            marker_names = g_strcompress (priv->dests[priv->current_dest].options[i].value);
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-levels") == 0)
             marker_levels = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-colors") == 0)
@@ -1221,19 +1221,21 @@ supply_levels_draw_cb (GtkWidget *widget,
 
               if (tooltip_text)
                 {
-                  tmp = g_strdup_printf ("%s%s\n", tooltip_text, marker_namesv[i]);
+                  tmp = g_strdup_printf ("%s\n%s", tooltip_text, marker_namesv[i]);
                   g_free (tooltip_text);
                   tooltip_text = tmp;
                   tmp = NULL;
                 }
               else
-                tooltip_text = g_strdup_printf ("%s\n", marker_namesv[i]);
+                tooltip_text = g_strdup_printf ("%s", marker_namesv[i]);
             }
 
           g_strfreev (marker_levelsv);
           g_strfreev (marker_colorsv);
           g_strfreev (marker_namesv);
         }
+
+      g_free (marker_names);
 
       if (tooltip_text)
         {
