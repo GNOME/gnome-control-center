@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-14 17:36+0200\n"
+"POT-Creation-Date: 2011-01-19 18:51+0200\n"
 "PO-Revision-Date: 2011-01-14 17:34+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -467,12 +467,53 @@ msgstr "تعذّرت معرفة معلومات الشاشة"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:245
+#: ../panels/info/cc-info-panel.c:247
 #, c-format
 msgid "%d-bit"
 msgstr "%d بتة"
 
-#: ../panels/info/cc-info-panel.c:293
+#: ../panels/info/cc-info-panel.c:261
+#, c-format
+msgid "%u byte"
+msgid_plural "%u bytes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: ../panels/info/cc-info-panel.c:269
+#, c-format
+msgid "%.1f KB"
+msgstr ""
+
+#: ../panels/info/cc-info-panel.c:274
+#, c-format
+msgid "%.1f MB"
+msgstr ""
+
+#: ../panels/info/cc-info-panel.c:279
+#, c-format
+msgid "%.1f GB"
+msgstr ""
+
+#: ../panels/info/cc-info-panel.c:284
+#, c-format
+msgid "%.1f TB"
+msgstr ""
+
+#: ../panels/info/cc-info-panel.c:289
+#, c-format
+msgid "%.1f PB"
+msgstr ""
+
+#: ../panels/info/cc-info-panel.c:294
+#, c-format
+msgid "%.1f EB"
+msgstr ""
+
+#: ../panels/info/cc-info-panel.c:404
 msgid "Unknown model"
 msgstr "طِراز مجهول"
 
@@ -490,13 +531,12 @@ msgid "device;system;information;memory;processor;version;"
 msgstr "جهاز;نظام;معلومات;ذاكرة;معالج;إصدارة;"
 
 #: ../panels/keyboard/00-multimedia-key.xml.in.h:1
-#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
-msgid "Sound"
-msgstr "الصوت"
+msgid "Sound and Media"
+msgstr ""
 
 #: ../panels/keyboard/01-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "سطح المكتب"
+msgid "Launchers and Actions"
+msgstr ""
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -528,7 +568,7 @@ msgstr "نوع مفتاح الاختصار."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1140
+#: ../panels/keyboard/keyboard-shortcuts.c:1194
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -550,21 +590,21 @@ msgstr "لوحة المفاتيح"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "اختصار;تكرار;وميض;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:659
-#: ../panels/keyboard/keyboard-shortcuts.c:1544
-#: ../panels/keyboard/keyboard-shortcuts.c:1548
+#: ../panels/keyboard/keyboard-shortcuts.c:709
+#: ../panels/keyboard/keyboard-shortcuts.c:1598
+#: ../panels/keyboard/keyboard-shortcuts.c:1602
 msgid "Custom Shortcuts"
 msgstr "اختصار مخصص"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:767
+#: ../panels/keyboard/keyboard-shortcuts.c:821
 msgid "<Unknown Action>"
 msgstr "<إجراء مجهول>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1166
+#: ../panels/keyboard/keyboard-shortcuts.c:1220
 msgid "Error saving the new shortcut"
 msgstr "خطأ أثناء حفظ الاختصار الجديد"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1276
+#: ../panels/keyboard/keyboard-shortcuts.c:1330
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -574,7 +614,7 @@ msgstr ""
 "الاختصار \"%s\" لا يمكن استخدامه لأن الطباعة بهذا المفتاح ستصبح متعذرة.\n"
 "حاول رجاءً استخدام مفتاح مع Ctrl أو Alt أو Shift في نفس الوقت."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1306
+#: ../panels/keyboard/keyboard-shortcuts.c:1360
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -583,34 +623,34 @@ msgstr ""
 "الاختصار \"%s\" مستخدم في:\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#: ../panels/keyboard/keyboard-shortcuts.c:1366
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "إذا أعدت تعيين الاختصار \"%s\" فسيُعطّل الاختصار \"%s\"."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1320
+#: ../panels/keyboard/keyboard-shortcuts.c:1374
 msgid "_Reassign"
 msgstr "أعِد ال_تعيين"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1494
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr "خطأ عند إلغاء ضبط مفتاح الاختصار في قاعدة بيانات الإعدادات: %s"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1498
+#: ../panels/keyboard/keyboard-shortcuts.c:1552
 msgid "Too many custom shortcuts"
 msgstr "الكثير من الاختصارات المخصصة"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1706
+#: ../panels/keyboard/keyboard-shortcuts.c:1830
 msgid "Section"
 msgstr "القسم"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1737
+#: ../panels/keyboard/keyboard-shortcuts.c:1873
 msgid "Action"
 msgstr "الإجراء"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1759
+#: ../panels/keyboard/keyboard-shortcuts.c:1895
 msgid "Shortcut"
 msgstr "الاختصار"
 
@@ -627,7 +667,7 @@ msgid "Cursor _blinks in text fields"
 msgstr "_ومضات المؤشر في حقول النصوص"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
 #: ../panels/universal-access/uap.ui.h:28
 msgid "Cursor blinks speed"
 msgstr "سرعة ومضات المؤشر"
@@ -639,12 +679,12 @@ msgstr "اختصار مخصص"
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
 #: ../panels/region/gnome-region-panel.ui.h:1
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Fast"
 msgstr "سريع"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "General"
 msgstr "عام"
 
@@ -655,7 +695,7 @@ msgstr "_تكرار نقر المفتاح عند الضغط عليه"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/region/gnome-region-panel.ui.h:5
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 #: ../panels/universal-access/uap.ui.h:51
 msgid "Long"
 msgstr "طويل"
@@ -675,7 +715,7 @@ msgstr "ال_سرعة:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/region/gnome-region-panel.ui.h:19
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:71
 msgid "Short"
 msgstr "قصير"
@@ -687,21 +727,21 @@ msgstr "الاختصارات"
 #. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/region/gnome-region-panel.ui.h:20
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Slow"
 msgstr "بطيء"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#, fuzzy
 msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new key "
-"combination, or press backspace to clear."
+"To edit a shortcut, click the row and hold down the new keys or press "
+"Backspace to clear."
 msgstr ""
 "لتحرير مفتاح اختصار انقر السّطر المقابل و أدخل مسرّعًا جديدًا أو اضغط مفتاح "
 "التّراجع للإخلاء."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 #: ../panels/region/gnome-region-panel.ui.h:24
-#: ../panels/mouse/gnome-mouse-properties.ui.h:49
 msgid "_Delay:"
 msgstr "ال_تأخير:"
 
@@ -713,6 +753,14 @@ msgstr "الا_سم:"
 #: ../panels/region/gnome-region-panel.ui.h:28
 msgid "_Speed:"
 msgstr "ال_سرعة:"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
+msgid "add-toolbutton"
+msgstr ""
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
+msgid "remove-toolbutton"
+msgstr ""
 
 #: ../panels/media/cc-media-panel.c:322
 msgid "Ask what to do"
@@ -781,6 +829,238 @@ msgstr "اضبط تفضيلات الوسائط والتشغيل التلقائي
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:2
 msgid "Removable Media"
 msgstr "الوسائط المنفصلة"
+
+#: ../panels/printers/cc-printers-panel.c:174
+#, fuzzy
+msgid "Low on toner"
+msgstr "حدد موقع المؤشر"
+
+#: ../panels/printers/cc-printers-panel.c:175
+msgid "Out of toner"
+msgstr ""
+
+#. Translators: "Developer" like on photo development context
+#: ../panels/printers/cc-printers-panel.c:177
+msgid "Low on developer"
+msgstr ""
+
+#. Translators: "Developer" like on photo development context
+#: ../panels/printers/cc-printers-panel.c:179
+msgid "Out of developer"
+msgstr ""
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/cc-printers-panel.c:181
+msgid "Low on a marker supply"
+msgstr ""
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/cc-printers-panel.c:183
+msgid "Out of a marker supply"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:184
+#, fuzzy
+msgid "Open cover"
+msgstr "افتح المجلّد"
+
+#: ../panels/printers/cc-printers-panel.c:185
+#, fuzzy
+msgid "Open door"
+msgstr "افتح المجلّد"
+
+#: ../panels/printers/cc-printers-panel.c:186
+msgid "Low on paper"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:187
+msgid "Out of paper"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:188
+#, fuzzy
+msgid "Offline"
+msgstr "معطّل"
+
+#: ../panels/printers/cc-printers-panel.c:189
+#: ../panels/printers/cc-printers-panel.c:287
+msgid "Paused"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:190
+msgid "Waste receptacle almost full"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:191
+msgid "Waste receptacle full"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:192
+msgid "The optical photo conductor is near end of life"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:193
+msgid "The optical photo conductor is no longer functioning"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:281
+msgid "Idle"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:284
+#: ../panels/printers/cc-printers-panel.c:671
+msgid "Processing"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:665
+#, fuzzy
+msgid "Pending"
+msgstr "التصيير"
+
+#: ../panels/printers/cc-printers-panel.c:668
+msgid "Held"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:674
+#, fuzzy
+msgid "Stopped"
+msgstr "أوقِف"
+
+#: ../panels/printers/cc-printers-panel.c:677
+msgid "Canceled"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:680
+msgid "Aborted"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:683
+#, fuzzy
+msgid "Completed"
+msgstr "متّصل"
+
+#: ../panels/printers/cc-printers-panel.c:773
+#, fuzzy
+msgid "Job Title"
+msgstr "مبلّطة"
+
+#: ../panels/printers/cc-printers-panel.c:780
+msgid "Job State"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:785
+#, fuzzy
+msgid "User"
+msgstr "اسم المستخدم:"
+
+#: ../panels/printers/cc-printers-panel.c:790
+#, fuzzy
+msgid "Time"
+msgstr "مبلّطة"
+
+#: ../panels/printers/cc-printers-panel.c:973
+#, c-format
+msgid "Could not connect to system bus: %s"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:1451
+#, fuzzy
+msgid "Test page"
+msgstr "اختبر السماعات"
+
+#: ../panels/printers/cc-printers-panel.c:1458
+msgid "Clean print heads"
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:1460
+msgid "An error has occured during a maintenance command."
+msgstr ""
+
+#: ../panels/printers/cc-printers-panel.c:1495
+#, fuzzy, c-format
+msgid "Could not load ui: %s"
+msgstr "تعذّر تحميل الواجهة الرئيسيّة"
+
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
+#, fuzzy
+msgid "Change printer settings"
+msgstr "غيّر إعدادات لوحة المفاتيح"
+
+#. Translators: those are keywords for the printing control-center panel
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:3
+msgid "Printer;Queue;Print;Paper;Ink;Toner;"
+msgstr ""
+
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
+msgid "Printers"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:1
+msgid "---"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:2
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:3
+msgid "Clean Print Heads"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:4
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:589
+msgid "Default"
+msgstr "المبدئي"
+
+#: ../panels/printers/printers.ui.h:5
+#, fuzzy
+msgid "Description:"
+msgstr "الوصف:"
+
+#: ../panels/printers/printers.ui.h:6
+#, fuzzy
+msgid "Disable Printer"
+msgstr "معطّل"
+
+#: ../panels/printers/printers.ui.h:7
+msgid "Hold"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
+msgid "Location:"
+msgstr "المكان:"
+
+#: ../panels/printers/printers.ui.h:9
+msgid "Print Test Page"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:10
+msgid "Printer Jobs"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:11
+msgid "Release"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:12
+msgid "Share with these users:"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:13
+msgid "Show / hide printer's jobs"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:14
+msgid "Status:"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:15
+msgid "Supply:"
+msgstr ""
 
 #: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Keyboard _model:"
@@ -851,7 +1131,7 @@ msgid "View and edit keyboard layout options"
 msgstr "اعرض وحلالا خيارات تخطيط لوحة المفاتيح"
 
 #: ../panels/region/gnome-region-panel.ui.h:22
-#: ../panels/mouse/gnome-mouse-properties.ui.h:48
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid "_Acceleration:"
 msgstr "ال_تسارع:"
 
@@ -938,11 +1218,6 @@ msgstr "المُنتِج"
 msgid "Models"
 msgstr "الطّرُز"
 
-#: ../panels/region/gnome-region-panel-xkbot.c:227
-#: ../panels/sound/gvc-sound-theme-chooser.c:589
-msgid "Default"
-msgstr "المبدئي"
-
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Change your region and language settings"
 msgstr "غيّر إعدادات المنطقة واللغة"
@@ -952,179 +1227,118 @@ msgstr "غيّر إعدادات المنطقة واللغة"
 msgid "Language;Layout;"
 msgstr "اللغة;التخطيط;"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
-msgid "Accessibility"
-msgstr "الإتاحة"
-
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgid "Choose type of click _beforehand"
-msgstr "اختر نوع النقر م_سبقًا"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Choose type of click with mo_use gestures"
-msgstr "اختر نو_ع النقر بحركات الفأرة"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#: ../panels/universal-access/uap.ui.h:29
-msgid "D_elay:"
-msgstr "ال_تأخير:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "D_ouble click:"
-msgstr "الن_قر المزدوج:"
-
-#. click to initiate drag-and-drop (like normally click and hold)
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgid "D_rag click:"
-msgstr "نقر ال_سحب:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Disable _touchpad while typing"
 msgstr "_عطّل لوحة اللمس أثناء الكتابة"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Double-Click Timeout"
 msgstr "مهلة النقر المزدوج"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Drag and Drop"
 msgstr "السحب والإفلات"
 
-#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-msgid "Dwell Click"
-msgstr "النقر السلبي"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Enable _mouse clicks with touchpad"
 msgstr "فعّل _نقرات الفأرة في لوحة اللمس"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Enable h_orizontal scrolling"
 msgstr "فعّل اللف الأ_فقي"
 
 #. high sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 #: ../panels/universal-access/uap.ui.h:39
 msgid "High"
 msgstr "عال"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 #: ../panels/universal-access/uap.ui.h:48
 msgid "Large"
 msgstr "كبير"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Locate Pointer"
 msgstr "حدد موقع المؤشر"
 
 #. low sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 #: ../panels/universal-access/uap.ui.h:52
 msgid "Low"
 msgstr "منخفض"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#, fuzzy
+msgid "Mouse"
+msgstr "مفاتيح الفأرة"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Mouse Orientation"
 msgstr "اتجاه الفأرة"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "Mouse Preferences"
 msgstr "تفضيلات الفأرة"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Pointer Speed"
 msgstr "سرعة المؤشر"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 msgid "Scrolling"
 msgstr "اللف"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
-msgid "Seco_ndary click:"
-msgstr "النقر ال_ثانوي:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "أ_ظهر موقع الفأرة عند ضغط مفتاح Ctrl"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
-msgid "Show click type _window"
-msgstr "أظ_هر نافذة نوع النقر"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Simulated Secondary Click"
-msgstr "محاكاة النقر الثانوي"
-
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:41
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 #: ../panels/universal-access/uap.ui.h:76
 msgid "Small"
 msgstr "صغير"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:42
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "Thr_eshold:"
 msgstr "ال_عتبة:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "To test your settings, try to double-click on the face."
 msgstr "لاختبار إعدادات النقر المزدوج، جرّب النقر المزدوج على الوجه."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:44
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Touchpad"
 msgstr "لوحة اللمس"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:45
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Two-_finger scrolling"
 msgstr "اللف بأ_صبعين"
 
-#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
-#: ../panels/mouse/gnome-mouse-properties.ui.h:47
-msgid "You can also use the Dwell Click panel applet to choose the click type."
-msgstr "يمكنك أيضًا استخدام بريمج النقر السلبي لاختيار نوع النقر."
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:50
+#: ../panels/mouse/gnome-mouse-properties.ui.h:34
 msgid "_Disabled"
 msgstr "مع_طّل"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:51
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
 msgid "_Edge scrolling"
 msgstr "اللف عند ال_حافة"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:52
-msgid "_Initiate click when stopping pointer movement"
-msgstr "ابتد_ئ بالنقر عند توقف حركة المؤشر"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:53
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "_Left-handed"
 msgstr "فأرة لليد اليسر_ى"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:54
-#: ../panels/universal-access/uap.ui.h:96
-msgid "_Motion threshold:"
-msgstr "عتبة الحر_كة:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:55
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
 msgid "_Right-handed"
 msgstr "فأرة لليد الي_منى"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:56
+#: ../panels/mouse/gnome-mouse-properties.ui.h:38
 msgid "_Sensitivity:"
 msgstr "الح_ساسية:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:57
-msgid "_Single click:"
-msgstr "نقرة م_فردة:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:58
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
 msgid "_Timeout:"
 msgstr "ا_لمهلة:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:59
-msgid "_Trigger secondary click by holding down the primary button"
-msgstr "يسبب النقر ال_ثانوي عن طريق الاستمرار بضغط الزر الأولي"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse and Touchpad"
@@ -1266,95 +1480,108 @@ msgid "Airplane Mode"
 msgstr "وضع الطائرة"
 
 #: ../panels/network/network.ui.h:2
+msgid "Automatic"
+msgstr ""
+
+#: ../panels/network/network.ui.h:3
 msgid "Configuration URL:"
 msgstr "مسار الإعداد:"
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
 msgid "DNS:"
 msgstr "نظام أسماء النطاقات (DNS):"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:5
 msgid "Default Route:"
 msgstr "السبيل المبدئي:"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:6
 msgid "FTP Proxy:"
 msgstr "وسيط FTP:"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:7
 msgid "Gateway:"
 msgstr "البوّابة:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:8
 msgid "Group Name:"
 msgstr "اسم المجموعة:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:9
 msgid "Group Password:"
 msgstr "كلمة سر المجموعة:"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:10
 msgid "HTTP Proxy:"
 msgstr "وسيط HTTP:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:11
 msgid "Hardware Address:"
 msgstr "عنوان العتاد:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:12
 msgid "IMEI:"
 msgstr "معرّف المعدات المحمولة الدولي (IMEI):"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:13
 msgid "IP Address:"
 msgstr "عنوان IP:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:14
 msgid "IPv4 Address:"
 msgstr "عنوان IPv4:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:15
 msgid "IPv6 Address:"
 msgstr "عنوان IPv6:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:16
+#, fuzzy
+msgid "Manual"
+msgstr "يناير"
+
+#: ../panels/network/network.ui.h:17
 msgid "Method:"
 msgstr "الطريقة:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:18
 msgid "Network Name:"
 msgstr "اسم الشبكة:"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:19 ../panels/universal-access/uap.ui.h:57
+msgid "None"
+msgstr "لا شيء"
+
+#: ../panels/network/network.ui.h:20
 msgid "Provider:"
 msgstr "مقدم الخدمة:"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:21
 msgid "Secure HTTP Proxy:"
 msgstr "وسيط HTTP الآمن:"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:22
 msgid "Security:"
 msgstr "الأمن:"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:23
 msgid "Socks Host:"
 msgstr "مستضيف Socks:"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:24
 msgid "Speed:"
 msgstr "السرعة:"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:25
 msgid "Subnet Mask:"
 msgstr "قناع الشبكة الفرعية:"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:26
 #: ../panels/user-accounts/um-lockbutton.c:364
 msgid "Unlock"
 msgstr "افتح"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:27
 msgid "Username:"
 msgstr "اسم المستخدم:"
 
@@ -1459,6 +1686,76 @@ msgstr "%s حتى تفرغ (%.0lf%%)"
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% مشحون"
 
+#: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
+#, fuzzy
+msgid "1 hour"
+msgstr "ساعة"
+
+#: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
+#, fuzzy
+msgid "10 minutes"
+msgstr "دقيقة"
+
+#: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
+#, fuzzy
+msgid "30 minutes"
+msgstr "دقيقة"
+
+#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
+#, fuzzy
+msgid "5 minutes"
+msgstr "دقيقة"
+
+#: ../panels/power/power.ui.h:5
+msgid "AC power and inactive for:"
+msgstr ""
+
+#: ../panels/power/power.ui.h:6
+msgid "Ask me"
+msgstr ""
+
+#: ../panels/power/power.ui.h:7
+msgid "Battery power and inactive for:"
+msgstr ""
+
+#: ../panels/power/power.ui.h:8
+#, fuzzy
+msgid "Do nothing"
+msgstr "لا تفعل شيئا"
+
+#: ../panels/power/power.ui.h:9
+msgid "Hibernate"
+msgstr ""
+
+#: ../panels/power/power.ui.h:10
+msgid "Put the computer to sleep when inactive for:"
+msgstr ""
+
+#: ../panels/power/power.ui.h:11
+msgid "Put the computer to sleep when on:"
+msgstr ""
+
+#: ../panels/power/power.ui.h:12
+msgid "Shutdown"
+msgstr ""
+
+#: ../panels/power/power.ui.h:13
+#, fuzzy
+msgid "Suspend"
+msgstr "الصوت"
+
+#: ../panels/power/power.ui.h:14
+msgid "When power is critically low:"
+msgstr ""
+
+#: ../panels/power/power.ui.h:15
+msgid "When the power button is pressed:"
+msgstr ""
+
+#: ../panels/power/power.ui.h:16
+msgid "When the sleep button is pressed:"
+msgstr ""
+
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
 msgid "Brightness;Lock;Dim;Blank;"
@@ -1471,6 +1768,54 @@ msgstr "الشاشة"
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
 msgid "Screen brightness and lock settings"
 msgstr "اضبط إعدادات سطوع وقفل الشاشة"
+
+#: ../panels/screen/screen.ui.h:2
+#, fuzzy
+msgid "1 minute"
+msgstr "دقيقة"
+
+#: ../panels/screen/screen.ui.h:4
+#, fuzzy
+msgid "2 minutes"
+msgstr "دقيقة"
+
+#: ../panels/screen/screen.ui.h:5
+#, fuzzy
+msgid "3 minutes"
+msgstr "دقيقة"
+
+#: ../panels/screen/screen.ui.h:8
+msgid "Brightness"
+msgstr ""
+
+#: ../panels/screen/screen.ui.h:9
+msgid "Dim screen to save power"
+msgstr ""
+
+#: ../panels/screen/screen.ui.h:10
+msgid "Don't lock when at home"
+msgstr ""
+
+#: ../panels/screen/screen.ui.h:11
+#, fuzzy
+msgid "Locations..."
+msgstr "المكان:"
+
+#: ../panels/screen/screen.ui.h:12 ../panels/user-accounts/um-lockbutton.c:355
+msgid "Lock"
+msgstr ""
+
+#: ../panels/screen/screen.ui.h:13
+msgid "Lock screen after:"
+msgstr ""
+
+#: ../panels/screen/screen.ui.h:14
+msgid "Screen turns off"
+msgstr ""
+
+#: ../panels/screen/screen.ui.h:15
+msgid "Turn off after:"
+msgstr ""
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -1742,6 +2087,10 @@ msgstr "بطاقة;ميكروفون;صوت;شدة;توازن;بلوتوث;"
 msgid "Change sound volume and sound events"
 msgstr "غيّر شدة الصوت و أصوات الأحداث"
 
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
+msgid "Sound"
+msgstr "الصوت"
+
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
@@ -1891,6 +2240,10 @@ msgstr ""
 msgid "Ctrl+Alt+="
 msgstr ""
 
+#: ../panels/universal-access/uap.ui.h:29
+msgid "D_elay:"
+msgstr "ال_تأخير:"
+
 #: ../panels/universal-access/uap.ui.h:30
 msgid "Dasher"
 msgstr "داشر"
@@ -1984,10 +2337,6 @@ msgstr "اتجاه الفأرة"
 msgid "Nomon"
 msgstr "لا شيء"
 
-#: ../panels/universal-access/uap.ui.h:57
-msgid "None"
-msgstr "لا شيء"
-
 #: ../panels/universal-access/uap.ui.h:59
 msgid "Off"
 msgstr "معطّل"
@@ -2039,6 +2388,10 @@ msgstr ""
 #: ../panels/universal-access/uap.ui.h:72
 msgid "Show Universal Access status"
 msgstr ""
+
+#: ../panels/universal-access/uap.ui.h:73
+msgid "Simulated Secondary Click"
+msgstr "محاكاة النقر الثانوي"
 
 #: ../panels/universal-access/uap.ui.h:74
 msgid "Slow Keys"
@@ -2126,6 +2479,10 @@ msgstr "التقريب"
 #, fuzzy
 msgid "Zoom out:"
 msgstr "التقريب"
+
+#: ../panels/universal-access/uap.ui.h:96
+msgid "_Motion threshold:"
+msgstr "عتبة الحر_كة:"
 
 #: ../panels/universal-access/uap.ui.h:97
 msgid "accepted"
@@ -2328,10 +2685,6 @@ msgstr ""
 #, fuzzy
 msgid "Other..."
 msgstr "أخرى"
-
-#: ../panels/user-accounts/um-lockbutton.c:355
-msgid "Lock"
-msgstr ""
 
 #: ../panels/user-accounts/um-lockbutton.c:373
 msgid "Locked"
@@ -2644,11 +2997,6 @@ msgstr "الاسم بالكامل"
 msgid "_Username:"
 msgstr "ا_سم المستخدم:"
 
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr ""
-
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
@@ -2808,10 +3156,6 @@ msgstr "فعّل الولوج بالبصمة"
 msgid "Language:"
 msgstr "الل_غة:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
-msgid "Location:"
-msgstr "المكان:"
-
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
 #, fuzzy
 msgid "Login Options"
@@ -2924,23 +3268,50 @@ msgstr "أصوات النظام"
 msgid "Control Center"
 msgstr "مركز التحكّم"
 
-#: ../examples/gnome-example-panel.desktop.in.in.h:1
-msgid "Example Panel"
-msgstr ""
-
-#: ../examples/gnome-example-panel.desktop.in.in.h:2
-msgid "Example preferences panel"
-msgstr ""
-
-#. Translators: those are keywords for the example control-center panel
-#: ../examples/gnome-example-panel.desktop.in.in.h:4
-msgid "Foo;Bar;Baz;"
-msgstr ""
-
 #: ../shell/shell.ui.h:2
 #, fuzzy
 msgid "_All Settings"
 msgstr "الإعدادات المبدئية"
+
+#~ msgid "Desktop"
+#~ msgstr "سطح المكتب"
+
+#~ msgid "Accessibility"
+#~ msgstr "الإتاحة"
+
+#~ msgid "Choose type of click _beforehand"
+#~ msgstr "اختر نوع النقر م_سبقًا"
+
+#~ msgid "Choose type of click with mo_use gestures"
+#~ msgstr "اختر نو_ع النقر بحركات الفأرة"
+
+#~ msgid "D_ouble click:"
+#~ msgstr "الن_قر المزدوج:"
+
+#~ msgid "D_rag click:"
+#~ msgstr "نقر ال_سحب:"
+
+#~ msgid "Dwell Click"
+#~ msgstr "النقر السلبي"
+
+#~ msgid "Seco_ndary click:"
+#~ msgstr "النقر ال_ثانوي:"
+
+#~ msgid "Show click type _window"
+#~ msgstr "أظ_هر نافذة نوع النقر"
+
+#~ msgid ""
+#~ "You can also use the Dwell Click panel applet to choose the click type."
+#~ msgstr "يمكنك أيضًا استخدام بريمج النقر السلبي لاختيار نوع النقر."
+
+#~ msgid "_Initiate click when stopping pointer movement"
+#~ msgstr "ابتد_ئ بالنقر عند توقف حركة المؤشر"
+
+#~ msgid "_Single click:"
+#~ msgstr "نقرة م_فردة:"
+
+#~ msgid "_Trigger secondary click by holding down the primary button"
+#~ msgstr "يسبب النقر ال_ثانوي عن طريق الاستمرار بضغط الزر الأولي"
 
 #~ msgid "Preferred Applications"
 #~ msgstr "التطبيقات المفضّلة"
@@ -2959,9 +3330,6 @@ msgstr "الإعدادات المبدئية"
 
 #~ msgid "Error setting default mailer: %s"
 #~ msgstr "عطل في تحديد مُرسِل البريد المبدئي: %s"
-
-#~ msgid "Could not load the main interface"
-#~ msgstr "تعذّر تحميل الواجهة الرئيسيّة"
 
 #~ msgid "Please make sure that the applet is properly installed"
 #~ msgstr "رجاء تأكّد من أن البريمج مثبت بدقة"
