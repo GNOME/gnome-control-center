@@ -31,6 +31,8 @@
 
 typedef struct {
   char *name;
+  /* The group of keybindings (system or application) */
+  char *group;
   /* The gettext package to use to translate the section title */
   char *package;
   /* Name of the window manager the keys would apply to */
@@ -77,9 +79,23 @@ typedef struct
 
 enum
 {
-  DESCRIPTION_COLUMN,
-  KEYENTRY_COLUMN,
-  N_COLUMNS
+  BINDING_GROUP_SYSTEM,
+  BINDING_GROUP_APP,
+  BINDING_GROUP_USER,
+};
+
+enum
+{
+  DETAIL_DESCRIPTION_COLUMN,
+  DETAIL_KEYENTRY_COLUMN,
+  DETAIL_N_COLUMNS
+};
+
+enum
+{
+  SECTION_DESCRIPTION_COLUMN,
+  SECTION_GROUP_COLUMN,
+  SECTION_N_COLUMNS
 };
 
 static guint maybe_block_accels_id = 0;
@@ -200,7 +216,7 @@ keybinding_key_changed_foreach (GtkTreeModel *model,
 
   key_entry = (KeyEntry *)user_data;
   gtk_tree_model_get (key_entry->model, iter,
-                      KEYENTRY_COLUMN, &tmp_key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &tmp_key_entry,
                       -1);
 
   if (key_entry == tmp_key_entry)
@@ -271,16 +287,21 @@ keybinding_command_changed (GConfClient *client,
 }
 
 static void
-append_section (GtkBuilder *builder, const gchar *title, const KeyListEntry *keys_list)
+append_section (GtkBuilder         *builder,
+                const gchar        *title,
+                int                 group,
+                const KeyListEntry *keys_list)
 {
   GPtrArray *keys_array;
+  GtkTreeModel *sort_model;
   GtkTreeModel *model;
   GConfClient *client;
   GtkTreeIter iter;
   gint i;
 
   client = gconf_client_get_default ();
-  model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
+  sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
+  model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
 
   /* Add all KeyEntry's for this section */
   keys_array = g_ptr_array_new ();
@@ -392,13 +413,26 @@ append_section (GtkBuilder *builder, const gchar *title, const KeyListEntry *key
   /* Add the keys to the hash table */
   if (keys_array->len > 0)
     {
+      static gboolean have_sep = FALSE;
+
       g_hash_table_insert (kb_sections, g_strdup (title), keys_array);
 
       /* Append the section to the left tree view */
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-                          DESCRIPTION_COLUMN, title,
+                          SECTION_DESCRIPTION_COLUMN, title,
+                          SECTION_GROUP_COLUMN, group,
                           -1);
+      if (!have_sep && group != BINDING_GROUP_SYSTEM)
+        {
+          have_sep = TRUE;
+          /* Append the section to the left tree view */
+          gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+          gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+                              SECTION_DESCRIPTION_COLUMN, NULL,
+                              SECTION_GROUP_COLUMN, BINDING_GROUP_SYSTEM,
+                              -1);
+        }
     }
 }
 
@@ -423,6 +457,7 @@ parse_start_tag (GMarkupParseContext *ctx,
     {
       const char *wm_name = NULL;
       const char *package = NULL;
+      const char *group = NULL;
 
       while (*attr_names && *attr_values)
         {
@@ -430,6 +465,9 @@ parse_start_tag (GMarkupParseContext *ctx,
             {
               if (**attr_values)
                 name = *attr_values;
+            } else if (g_str_equal (*attr_names, "group")) {
+              if (**attr_values)
+                group = *attr_values;
             } else if (g_str_equal (*attr_names, "wm_name")) {
               if (**attr_values)
                 wm_name = *attr_values;
@@ -461,6 +499,13 @@ parse_start_tag (GMarkupParseContext *ctx,
             g_warning ("Duplicate gettext package name");
           g_free (keylist->package);
           keylist->package = g_strdup (package);
+        }
+      if (group)
+        {
+          if (keylist->group)
+            g_warning ("Duplicate group");
+          g_free (keylist->group);
+          keylist->group = g_strdup (group);
         }
       return;
     }
@@ -541,6 +586,7 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, gchar **wm_ke
   KeyList *keylist;
   KeyListEntry key, *keys;
   const char *title;
+  int group;
   guint i;
   GMarkupParseContext *ctx;
   GMarkupParser parser = { parse_start_tag, NULL, NULL, NULL, NULL };
@@ -602,8 +648,12 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, gchar **wm_ke
     } else {
       title = _(keylist->name);
     }
+  if (keylist->group && strcmp (keylist->group, "system") == 0)
+    group = BINDING_GROUP_SYSTEM;
+  else
+    group = BINDING_GROUP_APP;
 
-  append_section (builder, title, keys);
+  append_section (builder, title, group, keys);
 
   g_free (keylist->name);
   g_free (keylist->package);
@@ -656,7 +706,7 @@ append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
       g_array_append_val (entries, key);
 
       keys = (KeyListEntry *) entries->data;
-      append_section (builder, _("Custom Shortcuts"), keys);
+      append_section (builder, _("Custom Shortcuts"), BINDING_GROUP_USER, keys);
       for (i = 0; i < entries->len; ++i)
         {
           g_free (keys[i].name);
@@ -673,9 +723,13 @@ reload_sections (GtkBuilder *builder)
   gchar **wm_keybindings;
   GDir *dir;
   const gchar *name;
-  GtkTreeModel *section_model, *shortcut_model;
+  GtkTreeModel *sort_model;
+  GtkTreeModel *section_model;
+  GtkTreeModel *shortcut_model;
 
-  section_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
+  sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
+  section_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
+
   shortcut_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "shortcut_treeview")));
   /* FIXME: get current selection and keep it after refreshing */
 
@@ -720,7 +774,7 @@ accel_set_func (GtkTreeViewColumn *tree_column,
   KeyEntry *key_entry;
 
   gtk_tree_model_get (model, iter,
-                      KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &key_entry,
                       -1);
 
   if (key_entry == NULL)
@@ -757,7 +811,7 @@ description_set_func (GtkTreeViewColumn *tree_column,
   KeyEntry *key_entry;
 
   gtk_tree_model_get (model, iter,
-                      KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &key_entry,
                       -1);
 
   if (key_entry != NULL)
@@ -786,7 +840,7 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
       gchar *description;
       gint i;
 
-      gtk_tree_model_get (model, &iter, DESCRIPTION_COLUMN, &description, -1);
+      gtk_tree_model_get (model, &iter, SECTION_DESCRIPTION_COLUMN, &description, -1);
       keys = g_hash_table_lookup (kb_sections, description);
       if (keys == NULL)
         {
@@ -806,8 +860,8 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
 
           gtk_list_store_append (GTK_LIST_STORE (shortcut_model), &new_row);
           gtk_list_store_set (GTK_LIST_STORE (shortcut_model), &new_row,
-                              DESCRIPTION_COLUMN, entry->description,
-                              KEYENTRY_COLUMN, entry,
+                              DETAIL_DESCRIPTION_COLUMN, entry->description,
+                              DETAIL_KEYENTRY_COLUMN, entry,
                               -1);
         }
     }
@@ -825,7 +879,7 @@ shortcut_selection_changed (GtkTreeSelection *selection, gpointer data)
   can_remove = FALSE;
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
-      gtk_tree_model_get (model, &iter, KEYENTRY_COLUMN, &key, -1);
+      gtk_tree_model_get (model, &iter, DETAIL_KEYENTRY_COLUMN, &key, -1);
       if (key && key->command != NULL && key->editable)
         can_remove = TRUE;
     }
@@ -885,7 +939,7 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   KeyEntry *key;
 
   gtk_tree_model_get (model, iter,
-                      KEYENTRY_COLUMN, &key,
+                      DETAIL_KEYENTRY_COLUMN, &key,
                       -1);
 
   /* not a custom shortcut */
@@ -930,7 +984,7 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   KeyEntry *key;
 
   gtk_tree_model_get (model, iter,
-                      KEYENTRY_COLUMN, &key,
+                      DETAIL_KEYENTRY_COLUMN, &key,
                       -1);
 
   edit_custom_shortcut (key);
@@ -943,7 +997,7 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
       GConfClient *client;
 
       gtk_tree_store_set (GTK_TREE_STORE (model), iter,
-                          KEYENTRY_COLUMN, key, -1);
+                          DETAIL_KEYENTRY_COLUMN, key, -1);
       client = gconf_client_get_default ();
       if (key->description != NULL)
         gconf_client_set_string (client, key->desc_gconf_key, key->description, NULL);
@@ -998,7 +1052,7 @@ start_editing_cb (GtkTreeView    *tree_view,
       model = gtk_tree_view_get_model (tree_view);
       gtk_tree_model_get_iter (model, &iter, path);
       gtk_tree_model_get (model, &iter,
-                          KEYENTRY_COLUMN, &key,
+                          DETAIL_KEYENTRY_COLUMN, &key,
                          -1);
 
       /* if only the accel can be edited on the selected row
@@ -1040,7 +1094,7 @@ start_editing_kb_cb (GtkTreeView *treeview,
   model = gtk_tree_view_get_model (treeview);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_model_get (model, &iter,
-                      KEYENTRY_COLUMN, &key,
+                      DETAIL_KEYENTRY_COLUMN, &key,
                       -1);
 
   if (key == NULL)
@@ -1092,7 +1146,7 @@ description_edited_callback (GtkCellRendererText *renderer,
   gtk_tree_path_free (path);
 
   gtk_tree_model_get (model, &iter,
-                      KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &key_entry,
                       -1);
 
   /* sanity check */
@@ -1180,7 +1234,7 @@ cb_check_for_uniqueness (GtkTreeModel *model,
   KeyEntry *element;
 
   gtk_tree_model_get (new_key->model, iter,
-                      KEYENTRY_COLUMN, &element,
+                      DETAIL_KEYENTRY_COLUMN, &element,
                       -1);
 
   /* no conflict for : blanks, different modifiers, or ourselves */
@@ -1225,7 +1279,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
   gtk_tree_model_get (model, &iter,
-                      KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &key_entry,
                       -1);
 
   /* sanity check */
@@ -1414,7 +1468,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
   gtk_tree_model_get (model, &iter,
-                      KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &key_entry,
                       -1);
 
   /* sanity check */
@@ -1551,7 +1605,7 @@ add_custom_shortcut (GtkTreeView  *tree_view,
       g_ptr_array_add (keys_array, key_entry);
 
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter, KEYENTRY_COLUMN, key_entry, -1);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter, DETAIL_KEYENTRY_COLUMN, key_entry, -1);
 
       /* store in gconf */
       client = gconf_client_get_default ();
@@ -1639,12 +1693,12 @@ keyentry_sort_func (GtkTreeModel *model,
 
   key_entry_a = NULL;
   gtk_tree_model_get (model, a,
-                      KEYENTRY_COLUMN, &key_entry_a,
+                      DETAIL_KEYENTRY_COLUMN, &key_entry_a,
                       -1);
 
   key_entry_b = NULL;
   gtk_tree_model_get (model, b,
-                      KEYENTRY_COLUMN, &key_entry_b,
+                      DETAIL_KEYENTRY_COLUMN, &key_entry_b,
                       -1);
 
   if (key_entry_a && key_entry_b)
@@ -1686,6 +1740,69 @@ keyentry_sort_func (GtkTreeModel *model,
   return retval;
 }
 
+static int
+section_sort_item  (GtkTreeModel *model,
+                    GtkTreeIter  *a,
+                    GtkTreeIter  *b,
+                    gpointer      data)
+{
+  char *a_desc;
+  int   a_group;
+  char *b_desc;
+  int   b_group;
+  int   ret;
+
+  ret = 0;
+
+  gtk_tree_model_get (model, a,
+                      SECTION_DESCRIPTION_COLUMN, &a_desc,
+                      SECTION_GROUP_COLUMN, &a_group,
+                      -1);
+  gtk_tree_model_get (model, b,
+                      SECTION_DESCRIPTION_COLUMN, &b_desc,
+                      SECTION_GROUP_COLUMN, &b_group,
+                      -1);
+
+  if (a_group == b_group)
+    {
+      /* separators go after the section */
+      if (a_desc == NULL)
+        ret = 1;
+      else if (b_desc == NULL)
+        ret = -1;
+      else
+        ret = g_utf8_collate (a_desc, b_desc);
+    }
+  else
+    {
+      if (a_group < b_group)
+        ret = -1;
+      else
+        ret = 1;
+    }
+
+  return ret;
+}
+
+static gboolean
+sections_separator_func (GtkTreeModel *model,
+                         GtkTreeIter  *iter,
+                         gpointer      data)
+{
+  char    *description;
+  gboolean is_separator;
+
+  description = NULL;
+  is_separator = FALSE;
+
+  gtk_tree_model_get (model, iter, SECTION_DESCRIPTION_COLUMN, &description, -1);
+  if (description == NULL)
+    is_separator = TRUE;
+  g_free (description);
+
+  return is_separator;
+}
+
 static void
 setup_dialog (CcPanel *panel, GtkBuilder *builder)
 {
@@ -1698,20 +1815,37 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   GSList *allowed_keys;
   CcShell *shell;
   GtkListStore *model;
+  GtkTreeModelSort *sort_model;
 
   /* Setup the section treeview */
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview"));
+ gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (treeview),
+                                       sections_separator_func,
+                                       panel,
+                                       NULL);
 
   renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new_with_attributes (_("Section"),
                                                      renderer,
-                                                     "text", DESCRIPTION_COLUMN,
+                                                     "text", SECTION_DESCRIPTION_COLUMN,
                                                      NULL);
   gtk_tree_view_append_column (treeview, column);
 
-  model = gtk_list_store_new (1, G_TYPE_STRING);
-  gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
+  model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
+  sort_model = GTK_TREE_MODEL_SORT (gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (model)));
+  gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (sort_model));
   g_object_unref (model);
+
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model),
+                                   SECTION_DESCRIPTION_COLUMN,
+                                   section_sort_item,
+                                   panel,
+                                   NULL);
+
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
+                                        SECTION_DESCRIPTION_COLUMN,
+                                        GTK_SORT_ASCENDING);
+  g_object_unref (sort_model);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
@@ -1736,13 +1870,13 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   column = gtk_tree_view_column_new_with_attributes (_("Action"),
                                                      renderer,
-                                                     "text", DESCRIPTION_COLUMN,
+                                                     "text", DETAIL_DESCRIPTION_COLUMN,
                                                      NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, description_set_func, NULL, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
 
   gtk_tree_view_append_column (treeview, column);
-  gtk_tree_view_column_set_sort_column_id (column, DESCRIPTION_COLUMN);
+  gtk_tree_view_column_set_sort_column_id (column, DETAIL_DESCRIPTION_COLUMN);
 
   renderer = (GtkCellRenderer *) g_object_new (EGG_TYPE_CELL_RENDERER_KEYS,
                                                "accel_mode", EGG_CELL_RENDERER_KEYS_MODE_X,
@@ -1761,7 +1895,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   gtk_tree_view_column_set_resizable (column, FALSE);
 
   gtk_tree_view_append_column (treeview, column);
-  gtk_tree_view_column_set_sort_column_id (column, KEYENTRY_COLUMN);
+  gtk_tree_view_column_set_sort_column_id (column, DETAIL_KEYENTRY_COLUMN);
 
   gconf_client_add_dir (client, GCONF_BINDING_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -1770,11 +1904,11 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
                            (GConfClientNotifyFunc) key_entry_controlling_key_changed,
                            builder, NULL, NULL);
 
-  model = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  model = gtk_list_store_new (DETAIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
-                                       KEYENTRY_COLUMN,
-                                       keyentry_sort_func,
-                                       NULL, NULL);
+                                   DETAIL_KEYENTRY_COLUMN,
+                                   keyentry_sort_func,
+                                   NULL, NULL);
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
   g_object_unref (model);
 
