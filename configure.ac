@@ -195,7 +195,7 @@ AM_GCONF_SOURCE_2
 dnl ==============================================
 dnl Define the main variables
 dnl ==============================================
-EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\""
+EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\""
 
 GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${DBUS_CFLAGS}"
 GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} ${DBUS_LIBS}"
