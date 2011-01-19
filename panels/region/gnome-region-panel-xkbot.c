@@ -111,14 +111,16 @@ static void
 xkb_options_select (gchar * optionname)
 {
 	gboolean already_selected = FALSE;
-	gchar **options_list = xkb_options_get_selected_list ();
-	if (options_list != NULL) {
-		gchar **option = options_list;
-		while (*option != NULL)
-			if (!strcmp (*option, optionname)) {
-				already_selected = TRUE;
-				break;
-			}
+	gchar **options_list;
+	guint i;
+
+	options_list = xkb_options_get_selected_list ();
+	for (i = 0; options_list != NULL && options_list[i] != NULL; i++) {
+		gchar *option = options_list[i];
+		if (!strcmp (option, optionname)) {
+			already_selected = TRUE;
+			break;
+		}
 	}
 
 	if (!already_selected) {
