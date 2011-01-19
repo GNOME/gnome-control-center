@@ -1817,6 +1817,8 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   GtkListStore *model;
   GtkTreeModelSort *sort_model;
 
+  gtk_widget_set_size_request (GTK_WIDGET (panel), -1, 400);
+
   /* Setup the section treeview */
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview"));
  gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (treeview),
