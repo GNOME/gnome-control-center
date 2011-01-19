@@ -1,3 +1,5 @@
+cappletname = universal-access
+
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\

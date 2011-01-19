@@ -1,3 +1,5 @@
+cappletname = power
+
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\

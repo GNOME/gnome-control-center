@@ -1,3 +1,5 @@
+cappletname = printers
+
 uidir = $(pkgdatadir)/ui/printers
 dist_ui_DATA = \
 	printers.ui

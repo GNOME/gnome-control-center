@@ -1,3 +1,5 @@
+cappletname = info
+
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(LIBGTOP_CFLAGS)				\
