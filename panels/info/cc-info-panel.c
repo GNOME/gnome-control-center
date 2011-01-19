@@ -25,6 +25,8 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
+#include <gio/gunixmounts.h>
 
 #include <glibtop/fsusage.h>
 #include <glibtop/mountlist.h>
@@ -245,21 +247,96 @@ get_os_type (void)
   return g_strdup_printf (_("%d-bit"), bits);
 }
 
+#define KILOBYTE_FACTOR (G_GOFFSET_CONSTANT (1000))
+#define MEGABYTE_FACTOR (KILOBYTE_FACTOR * KILOBYTE_FACTOR)
+#define GIGABYTE_FACTOR (MEGABYTE_FACTOR * KILOBYTE_FACTOR)
+#define TERABYTE_FACTOR (GIGABYTE_FACTOR * KILOBYTE_FACTOR)
+#define PETABYTE_FACTOR (TERABYTE_FACTOR * KILOBYTE_FACTOR)
+#define EXABYTE_FACTOR  (PETABYTE_FACTOR * KILOBYTE_FACTOR)
+
+static char *
+format_size_for_display (goffset size)
+{
+  if (size < (goffset) KILOBYTE_FACTOR)
+    return g_strdup_printf (g_dngettext(NULL, "%u byte", "%u bytes",(guint) size), (guint) size);
+  else
+    {
+      gdouble displayed_size;
+
+      if (size < (goffset) MEGABYTE_FACTOR)
+        {
+          displayed_size = (gdouble) size / (gdouble) KILOBYTE_FACTOR;
+          return g_strdup_printf (_("%.1f KB"), displayed_size);
+        }
+      else if (size < (goffset) GIGABYTE_FACTOR)
+        {
+          displayed_size = (gdouble) size / (gdouble) MEGABYTE_FACTOR;
+          return g_strdup_printf (_("%.1f MB"), displayed_size);
+        }
+      else if (size < (goffset) TERABYTE_FACTOR)
+        {
+          displayed_size = (gdouble) size / (gdouble) GIGABYTE_FACTOR;
+          return g_strdup_printf (_("%.1f GB"), displayed_size);
+        }
+      else if (size < (goffset) PETABYTE_FACTOR)
+        {
+          displayed_size = (gdouble) size / (gdouble) TERABYTE_FACTOR;
+          return g_strdup_printf (_("%.1f TB"), displayed_size);
+        }
+      else if (size < (goffset) EXABYTE_FACTOR)
+        {
+          displayed_size = (gdouble) size / (gdouble) PETABYTE_FACTOR;
+          return g_strdup_printf (_("%.1f PB"), displayed_size);
+        }
+      else
+        {
+          displayed_size = (gdouble) size / (gdouble) EXABYTE_FACTOR;
+          return g_strdup_printf (_("%.1f EB"), displayed_size);
+        }
+    }
+}
+
 static char *
 get_primary_disc_info (void)
 {
   guint64       total_bytes;
-  struct statfs buf;
+  GList        *points;
+  GList        *p;
 
-  if (statfs ("/", &buf) < 0)
+  total_bytes = 0;
+
+  points = g_unix_mount_points_get (NULL);
+  for (p = points; p != NULL; p = p->next)
     {
-      g_warning ("Unable to stat / filesystem: %s", g_strerror (errno));
-      return NULL;
-    }
-  else
-    total_bytes = (guint64) buf.f_blocks * buf.f_bsize;
+      GUnixMountEntry *mount = p->data;
+      const char *mount_path;
+      struct statfs buf;
 
-  return g_format_size_for_display (total_bytes);
+      mount_path = g_unix_mount_get_mount_path (mount);
+
+      if (g_str_has_prefix (mount_path, "/media/")
+          || g_str_has_prefix (mount_path, g_get_home_dir ()))
+        {
+          g_free (mount);
+          continue;
+        }
+
+      if (statfs (mount_path, &buf) < 0)
+        {
+          g_warning ("Unable to stat / filesystem: %s", g_strerror (errno));
+          g_free (mount);
+          continue;
+        }
+      else
+        {
+          total_bytes += (guint64) buf.f_blocks * buf.f_bsize;
+        }
+
+      g_free (mount);
+    }
+  g_list_free (points);
+
+  return format_size_for_display (total_bytes);
 }
 
 static char *

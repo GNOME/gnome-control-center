@@ -86,6 +86,7 @@ COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  glib-2.0 >= $GLIB_REQUIRED_VERSION
  gthread-2.0
  gio-2.0
+ gio-unix-2.0
  gconf-2.0
  libxml-2.0
  gsettings-desktop-schemas >= $DESKTOP_SCHEMAS_REQUIRED_VERSION"
