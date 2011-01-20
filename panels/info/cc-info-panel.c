@@ -463,7 +463,7 @@ cc_info_panel_init (CcInfoPanel *self)
   if (res)
     {
       widget = WID (self->priv->builder, "version_label");
-      text = g_strdup_printf ("Version %s", self->priv->gnome_version);
+      text = g_strdup_printf (_("Version %s"), self->priv->gnome_version);
       gtk_label_set_text (GTK_LABEL (widget), text);
       g_free (text);
     }
