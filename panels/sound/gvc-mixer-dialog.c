@@ -1571,13 +1571,14 @@ on_test_speakers_clicked (GvcComboBox *widget,
                  profile->profile, gvc_mixer_card_get_name (card));
 
         title = g_strdup_printf (_("Speaker Testing for %s"), gvc_mixer_card_get_name (card));
-        // FIXME
-        // set parent dialogue
-        // https://bugzilla.gnome.org/show_bug.cgi?id=621940
         d = gtk_dialog_new_with_buttons (title,
-                                         NULL,
+                                         GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (widget))),
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
                                          NULL);
+        /* FIXME: this should not be necessary */
+        gtk_window_set_has_resize_grip (GTK_WINDOW (d), FALSE);
+
         g_free (title);
         speaker_test = gvc_speaker_test_new (dialog->priv->mixer_control,
                                              card);
