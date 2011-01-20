@@ -22,6 +22,7 @@
  *
  */
 
+#include <math.h>
 #include "cc-ua-panel.h"
 
 #include <gconf/gconf-client.h>
@@ -364,6 +365,8 @@ get_dpi_from_x_server ()
   return dpi;
 }
 
+static void dpi_combo_box_changed (GtkComboBox *box, CcUaPanel *panel);
+
 static void
 dpi_notify_cb (GSettings   *settings,
                const gchar *key,
@@ -376,6 +379,8 @@ dpi_notify_cb (GSettings   *settings,
   gboolean valid;
   gdouble conf_value;
   gdouble x_dpi;
+  GtkTreeIter best;
+  gdouble distance;
 
   if (!g_str_equal (key, "dpi"))
     return;
@@ -388,30 +393,31 @@ dpi_notify_cb (GSettings   *settings,
   /* get current value from screen */
   x_dpi = get_dpi_from_x_server ();
 
-  /* see if the calculated value matches in the combobox model */
+  /* find the closest match in the combobox model */
+  distance = 1e6;
   valid = gtk_tree_model_get_iter_first (model, &iter);
   while (valid)
     {
       gfloat factor;
+      gdouble d;
 
       gtk_tree_model_get (model, &iter,
                           DPI_MODEL_FACTOR_COLUMN, &factor,
                           -1);
 
-      if (conf_value == (float) (factor * x_dpi))
+      d = fabs (conf_value - factor * x_dpi);
+      if (d < distance)
         {
-          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
-          break;
+          best = iter;
+          distance = d;
         }
 
       valid = gtk_tree_model_iter_next (model, &iter);
     }
 
-  /* if a matching value was not found in the combobox, set to "normal" */
-  if (!valid)
-    {
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
-    }
+  g_signal_handlers_block_by_func (combo, dpi_combo_box_changed, panel);
+  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &best);
+  g_signal_handlers_unblock_by_func (combo, dpi_combo_box_changed, panel);
 }
 
 static void
