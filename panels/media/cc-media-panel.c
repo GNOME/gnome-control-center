@@ -322,11 +322,11 @@ prepare_combo_box (CcMediaPanel *self,
                                              NULL);
 
   gtk_app_chooser_button_append_custom_item (app_chooser, CUSTOM_ITEM_DO_NOTHING,
-                                             _("Do Nothing"),
+                                             _("Do nothing"),
                                              NULL);
 
   gtk_app_chooser_button_append_custom_item (app_chooser, CUSTOM_ITEM_OPEN_FOLDER,
-                                             _("Open Folder"),
+                                             _("Open folder"),
                                              NULL);
 
   gtk_app_chooser_button_set_show_dialog_item (app_chooser, TRUE);
