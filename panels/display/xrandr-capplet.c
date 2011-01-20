@@ -35,10 +35,14 @@
 #include <glib/gi18n.h>
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-bindings.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 
 #include "xrandr-capplet.h"
 
 #define TOP_BAR_HEIGHT 10
+
+#define CLOCK_SCHEMA "org.gnome.desktop.interface"
+#define CLOCK_FORMAT_KEY "clock-format"
 
 typedef struct App App;
 typedef struct GrabInfo GrabInfo;
@@ -50,6 +54,7 @@ struct App
   GnomeRRLabeler *labeler;
   GnomeRROutputInfo         *current_output;
 
+  GSettings      *clock_settings;
   GtkBuilder     *builder;
 
   GtkWidget      *panel;
@@ -1918,6 +1923,7 @@ paint_output (App *app, cairo_t *cr, int i)
       char *text;
       gboolean use_24;
       GDateTime *dt;
+      GDesktopClockFormat value;
 
       /* top bar */
       cairo_rectangle (cr, x, y, w * scale + 0.5, TOP_BAR_HEIGHT);
@@ -1931,6 +1937,8 @@ paint_output (App *app, cairo_t *cr, int i)
 
       /* clock */
       /* FIXME: set 12/24 hour */
+      value = g_settings_get_enum (app->clock_settings, CLOCK_FORMAT_KEY);
+      use_24 = value == G_DESKTOP_CLOCK_FORMAT_24H;
       if (use_24)
         clock_format = _("%a %R");
       else
@@ -2455,6 +2463,10 @@ destroy_app (App *app)
 {
   g_object_unref (app->screen);
   g_object_unref (app->builder);
+
+  if (app->clock_settings != NULL)
+    g_object_unref (app->clock_settings);
+
   gnome_rr_labeler_hide (app->labeler);
   g_object_unref (app->labeler);
 
@@ -2496,6 +2508,8 @@ run_application (void)
       g_object_unref (builder);
       return NULL;
     }
+
+  app->clock_settings = g_settings_new (CLOCK_SCHEMA);
 
   app->panel = _gtk_builder_get_widget (builder, "display-panel");
 
