@@ -739,7 +739,7 @@ cc_ua_panel_init (CcUaPanel *self)
                        "pointing_sizegroup", "pointing_sizegroup2",
                        "pointing_scale_sizegroup", "sizegroup1",
                        "hearing_sizegroup",
-                       "NULL" };
+                       NULL };
 
   priv = self->priv = UA_PANEL_PRIVATE (self);
 
