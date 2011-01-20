@@ -295,7 +295,6 @@ prepare_combo_box (CcMediaPanel *self,
                    GtkWidget *combo_box)
 {
   GtkAppChooserButton *app_chooser = GTK_APP_CHOOSER_BUTTON (combo_box);
-  GIcon *icon;
   gboolean pref_ask;
   gboolean pref_start_app;
   gboolean pref_ignore;
@@ -318,23 +317,17 @@ prepare_combo_box (CcMediaPanel *self,
     g_object_unref (info);
   }
 
-  icon = g_themed_icon_new (GTK_STOCK_DIALOG_QUESTION);
   gtk_app_chooser_button_append_custom_item (app_chooser, CUSTOM_ITEM_ASK,
                                              _("Ask what to do"),
-                                             icon);
-  g_object_unref (icon);
+                                             NULL);
 
-  icon = g_themed_icon_new (GTK_STOCK_CLOSE);
   gtk_app_chooser_button_append_custom_item (app_chooser, CUSTOM_ITEM_DO_NOTHING,
                                              _("Do Nothing"),
-                                             icon);
-  g_object_unref (icon);
+                                             NULL);
 
-  icon = g_themed_icon_new ("folder-open");
   gtk_app_chooser_button_append_custom_item (app_chooser, CUSTOM_ITEM_OPEN_FOLDER,
                                              _("Open Folder"),
-                                             icon);
-  g_object_unref (icon);
+                                             NULL);
 
   gtk_app_chooser_button_set_show_dialog_item (app_chooser, TRUE);
 
