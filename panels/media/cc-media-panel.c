@@ -1,4 +1,5 @@
-/*
+/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
+ *
  * Copyright (C) 2008-2010 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -63,7 +64,7 @@ cc_media_panel_dispose (GObject *object)
     g_object_unref (self->priv->preferences);
     self->priv->preferences = NULL;
   }
-  
+
   G_OBJECT_CLASS (cc_media_panel_parent_class)->dispose (object);
 }
 
@@ -91,7 +92,7 @@ cc_media_panel_class_finalize (CcMediaPanelClass *klass)
 
 static char **
 remove_elem_from_str_array (char **v,
-			    const char *s)
+                            const char *s)
 {
   GPtrArray *array;
   guint idx;
@@ -115,7 +116,7 @@ remove_elem_from_str_array (char **v,
 
 static char **
 add_elem_to_str_array (char **v,
-		       const char *s)
+                       const char *s)
 {
   GPtrArray *array;
   guint idx;
@@ -136,12 +137,12 @@ add_elem_to_str_array (char **v,
 
 static int
 media_panel_g_strv_find (char **strv,
-			 const char *find_me)
+                         const char *find_me)
 {
   guint index;
 
   g_return_val_if_fail (find_me != NULL, -1);
-	
+
   for (index = 0; strv[index] != NULL; ++index) {
     if (g_strcmp0 (strv[index], find_me) == 0) {
       return index;
@@ -153,10 +154,10 @@ media_panel_g_strv_find (char **strv,
 
 static void
 autorun_get_preferences (CcMediaPanel *self,
-			 const char *x_content_type,
-			 gboolean *pref_start_app,
-			 gboolean *pref_ignore,
-			 gboolean *pref_open_folder)
+                         const char *x_content_type,
+                         gboolean *pref_start_app,
+                         gboolean *pref_ignore,
+                         gboolean *pref_open_folder)
 {
   char **x_content_start_app;
   char **x_content_ignore;
@@ -170,11 +171,11 @@ autorun_get_preferences (CcMediaPanel *self,
   *pref_ignore = FALSE;
   *pref_open_folder = FALSE;
   x_content_start_app = g_settings_get_strv (self->priv->preferences,
-					     PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
+                                             PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
   x_content_ignore = g_settings_get_strv (self->priv->preferences,
-					  PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
+                                          PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
   x_content_open_folder = g_settings_get_strv (self->priv->preferences,
-					       PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
+                                               PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
   if (x_content_start_app != NULL) {
     *pref_start_app = media_panel_g_strv_find (x_content_start_app, x_content_type) != -1;
   }
@@ -191,10 +192,10 @@ autorun_get_preferences (CcMediaPanel *self,
 
 static void
 autorun_set_preferences (CcMediaPanel *self,
-			 const char *x_content_type,
-			 gboolean pref_start_app,
-			 gboolean pref_ignore,
-			 gboolean pref_open_folder)
+                         const char *x_content_type,
+                         gboolean pref_start_app,
+                         gboolean pref_ignore,
+                         gboolean pref_open_folder)
 {
   char **x_content_start_app;
   char **x_content_ignore;
@@ -203,32 +204,32 @@ autorun_set_preferences (CcMediaPanel *self,
   g_assert (x_content_type != NULL);
 
   x_content_start_app = g_settings_get_strv (self->priv->preferences,
-					     PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
+                                             PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
   x_content_ignore = g_settings_get_strv (self->priv->preferences,
-					  PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
+                                          PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
   x_content_open_folder = g_settings_get_strv (self->priv->preferences,
-					       PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
+                                               PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
 
   x_content_start_app = remove_elem_from_str_array (x_content_start_app, x_content_type);
   if (pref_start_app) {
     x_content_start_app = add_elem_to_str_array (x_content_start_app, x_content_type);
   }
   g_settings_set_strv (self->priv->preferences,
-		       PREF_MEDIA_AUTORUN_X_CONTENT_START_APP, (const gchar * const*) x_content_start_app);
+                       PREF_MEDIA_AUTORUN_X_CONTENT_START_APP, (const gchar * const*) x_content_start_app);
 
   x_content_ignore = remove_elem_from_str_array (x_content_ignore, x_content_type);
   if (pref_ignore) {
     x_content_ignore = add_elem_to_str_array (x_content_ignore, x_content_type);
   }
   g_settings_set_strv (self->priv->preferences,
-		       PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE, (const gchar * const*) x_content_ignore);
+                       PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE, (const gchar * const*) x_content_ignore);
 
   x_content_open_folder = remove_elem_from_str_array (x_content_open_folder, x_content_type);
   if (pref_open_folder) {
     x_content_open_folder = add_elem_to_str_array (x_content_open_folder, x_content_type);
   }
   g_settings_set_strv (self->priv->preferences,
-		       PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER, (const gchar * const*) x_content_open_folder);
+                       PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER, (const gchar * const*) x_content_open_folder);
 
   g_strfreev (x_content_open_folder);
   g_strfreev (x_content_ignore);
@@ -240,7 +241,7 @@ static void
 update_media_sensitivity (CcMediaPanel *self)
 {
   gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "media_handling_vbox")),
-			    ! g_settings_get_boolean (self->priv->preferences, PREF_MEDIA_AUTORUN_NEVER));
+                            ! g_settings_get_boolean (self->priv->preferences, PREF_MEDIA_AUTORUN_NEVER));
 }
 
 static void
@@ -255,19 +256,19 @@ custom_item_activated_cb (GtkAppChooserButton *button,
 
   if (g_strcmp0 (item, CUSTOM_ITEM_ASK) == 0) {
     autorun_set_preferences (self, content_type,
-			     FALSE, FALSE, FALSE);
+                             FALSE, FALSE, FALSE);
   } else if (g_strcmp0 (item, CUSTOM_ITEM_OPEN_FOLDER) == 0) {
     autorun_set_preferences (self, content_type,
-			     FALSE, FALSE, TRUE);
+                             FALSE, FALSE, TRUE);
   } else if (g_strcmp0 (item, CUSTOM_ITEM_DO_NOTHING) == 0) {
     autorun_set_preferences (self, content_type,
-			     FALSE, TRUE, FALSE);
+                             FALSE, TRUE, FALSE);
   }
 
   g_free (content_type);
 }
 
-static void 
+static void
 combo_box_changed_cb (GtkComboBox *combo_box,
                       gpointer user_data)
 {
@@ -291,7 +292,7 @@ combo_box_changed_cb (GtkComboBox *combo_box,
 
 static void
 prepare_combo_box (CcMediaPanel *self,
-		   GtkWidget *combo_box)
+                   GtkWidget *combo_box)
 {
   GtkAppChooserButton *app_chooser = GTK_APP_CHOOSER_BUTTON (combo_box);
   GIcon *icon;
@@ -306,7 +307,7 @@ prepare_combo_box (CcMediaPanel *self,
 
   /* fetch preferences for this content type */
   autorun_get_preferences (self, content_type,
-			   &pref_start_app, &pref_ignore, &pref_open_folder);
+                           &pref_start_app, &pref_ignore, &pref_open_folder);
   pref_ask = !pref_start_app && !pref_ignore && !pref_open_folder;
 
   info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (combo_box));
@@ -353,9 +354,9 @@ prepare_combo_box (CcMediaPanel *self,
   g_free (content_type);
 }
 
-static void 
+static void
 other_type_combo_box_changed (GtkComboBox *combo_box,
-			      CcMediaPanel *self)
+                              CcMediaPanel *self)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -373,12 +374,12 @@ other_type_combo_box_changed (GtkComboBox *combo_box,
     return;
   }
 
-  gtk_tree_model_get (model, &iter, 
-		      2, &x_content_type,
-		      -1);
+  gtk_tree_model_get (model, &iter,
+                      2, &x_content_type,
+                      -1);
 
   action_container = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-							 "media_other_action_container"));
+                                                         "media_other_action_container"));
   if (self->priv->other_application_combo != NULL) {
     gtk_widget_destroy (self->priv->other_application_combo);
   }
@@ -446,18 +447,18 @@ media_panel_setup (CcMediaPanel *self)
 
   for (n = 0; n < G_N_ELEMENTS (defs); n++) {
     prepare_combo_box (self,
-		       GTK_WIDGET (gtk_builder_get_object (builder, defs[n].widget_name)));
+                       GTK_WIDGET (gtk_builder_get_object (builder, defs[n].widget_name)));
   }
 
   other_type_combo_box = GTK_WIDGET (gtk_builder_get_object (builder, "media_other_type_combobox"));
 
   other_type_list_store = gtk_list_store_new (3,
-					      G_TYPE_ICON,
-					      G_TYPE_STRING,
-					      G_TYPE_STRING);
+                                              G_TYPE_ICON,
+                                              G_TYPE_STRING,
+                                              G_TYPE_STRING);
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (other_type_list_store),
-					1, GTK_SORT_ASCENDING);
+                                        1, GTK_SORT_ASCENDING);
 
 
   content_types = g_content_types_get_registered ();
@@ -472,7 +473,7 @@ media_panel_setup (CcMediaPanel *self)
 
     for (n = 0; n < G_N_ELEMENTS (defs); n++) {
       if (g_content_type_is_a (content_type, defs[n].content_type)) {
-	goto skip;
+        goto skip;
       }
     }
 
@@ -481,10 +482,10 @@ media_panel_setup (CcMediaPanel *self)
     icon = g_content_type_get_icon (content_type);
 
     gtk_list_store_set (other_type_list_store, &iter,
-			0, icon,
-			1, description,
-			2, content_type,
-			-1);
+                        0, icon,
+                        1, description,
+                        2, content_type,
+                        -1);
     g_free (description);
     g_object_unref (icon);
   skip:
@@ -494,24 +495,24 @@ media_panel_setup (CcMediaPanel *self)
   g_list_free_full (content_types, g_free);
 
   gtk_combo_box_set_model (GTK_COMBO_BOX (other_type_combo_box),
-			   GTK_TREE_MODEL (other_type_list_store));
+                           GTK_TREE_MODEL (other_type_list_store));
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, FALSE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
-				  "gicon", 0,
-				  NULL);
+                                  "gicon", 0,
+                                  NULL);
 
   renderer = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, TRUE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
-				  "text", 1,
-				  NULL);
+                                  "text", 1,
+                                  NULL);
 
   g_signal_connect (other_type_combo_box,
-		    "changed",
-		    G_CALLBACK (other_type_combo_box_changed),
-		    self);
+                    "changed",
+                    G_CALLBACK (other_type_combo_box_changed),
+                    self);
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (other_type_combo_box), 0);
 
@@ -545,7 +546,7 @@ cc_media_panel_init (CcMediaPanel *self)
   media_panel_setup (self);
 
   main_widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-						    "media_preferences_vbox"));
+                                                    "media_preferences_vbox"));
   gtk_widget_reparent (main_widget, (GtkWidget *) self);
 }
 
