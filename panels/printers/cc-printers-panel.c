@@ -171,7 +171,9 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
     };
   static const char * statuses[] =
     {
+      /* Translators: The printer is low on toner */
       N_("Low on toner"),
+      /* Translators: The printer has no toner left */
       N_("Out of toner"),
       /* Translators: "Developer" like on photo development context */
       N_("Low on developer"),
@@ -181,15 +183,25 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       N_("Low on a marker supply"),
       /* Translators: "marker" is one color bin of the printer */
       N_("Out of a marker supply"),
+      /* Translators: One or more covers on the printer are open */
       N_("Open cover"),
+      /* Translators: One or more doors on the printer are open */
       N_("Open door"),
+      /* Translators: At least one input tray is low on media */
       N_("Low on paper"),
+      /* Translators: At least one input tray is empty */
       N_("Out of paper"),
+      /* Translators: The printer is offline */
       N_("Offline"),
+      /* Translators: Someone has paused the Printer */
       N_("Paused"),
+      /* Translators: The printer marker supply waste receptacle is almost full */
       N_("Waste receptacle almost full"),
+      /* Translators: The printer marker supply waste receptacle is full */
       N_("Waste receptacle full"),
+      /* Translators: Optical photo conductors are used in laser printers */
       N_("The optical photo conductor is near end of life"),
+      /* Translators: Optical photo conductors are used in laser printers */
       N_("The optical photo conductor is no longer functioning")
     };
 
@@ -278,13 +290,16 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           switch (printer_state)
             {
               case 3:
+                /* Translators: Printer's state (can start new job without waiting) */
                 status = g_strdup ( _("Idle"));
                 break;
               case 4:
+                /* Translators: Printer's state (jobs are processing) */
                 status = g_strdup ( _("Processing"));
                 break;
               case 5:
-                status = g_strdup ( _("Paused"));
+                /* Translators: Printer's state (no jobs can be processed) */
+                status = g_strdup ( _("Stopped"));
                 break;
             }
         }
@@ -662,24 +677,31 @@ actualize_jobs_list (CcPrintersPanel *self)
       switch (priv->jobs[i].state)
         {
           case IPP_JOB_PENDING:
+            /* Translators: Job's state (job is waiting to be printed) */
             state = g_strdup (_("Pending"));
             break;
           case IPP_JOB_HELD:
+            /* Translators: Job's state (job is held for printing) */
             state = g_strdup (_("Held"));
             break;
           case IPP_JOB_PROCESSING:
+            /* Translators: Job's state (job is currently printing) */
             state = g_strdup (_("Processing"));
             break;
           case IPP_JOB_STOPPED:
+            /* Translators: Job's state (job has been stopped) */
             state = g_strdup (_("Stopped"));
             break;
           case IPP_JOB_CANCELED:
+            /* Translators: Job's state (job has been canceled) */
             state = g_strdup (_("Canceled"));
             break;
           case IPP_JOB_ABORTED:
+            /* Translators: Job's state (job has aborted due to error) */
             state = g_strdup (_("Aborted"));
             break;
           case IPP_JOB_COMPLETED:
+            /* Translators: Job's state (job has completed successfully) */
             state = g_strdup (_("Completed"));
             break;
         }
@@ -770,6 +792,7 @@ populate_jobs_list (CcPrintersPanel *self)
   gtk_cell_renderer_get_alignment (renderer, &x_align, &y_align);
   gtk_cell_renderer_set_alignment (renderer, 0.5, y_align);
 
+  /* Translators: Name of column showing titles of print jobs */
   column = gtk_tree_view_column_new_with_attributes (_("Job Title"), renderer,
                                                      "text", JOB_TITLE_COLUMN, NULL);
   gtk_tree_view_column_set_fixed_width (column, 180);
@@ -777,16 +800,19 @@ populate_jobs_list (CcPrintersPanel *self)
   gtk_tree_view_column_set_max_width (column, 180);
   gtk_tree_view_append_column (treeview, column);
 
+  /* Translators: Name of column showing statuses of print jobs */
   column = gtk_tree_view_column_new_with_attributes (_("Job State"), renderer,
                                                      "text", JOB_STATE_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (treeview, column);
 
-  column = gtk_tree_view_column_new_with_attributes (_("User"), renderer,
+  /* Translators: Name of column showing names of creators of print jobs */
+   column = gtk_tree_view_column_new_with_attributes (_("User"), renderer,
                                                      "text", JOB_USER_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (treeview, column);
 
+  /* Translators: Name of column showing times of creation of print jobs */
   column = gtk_tree_view_column_new_with_attributes (_("Time"), renderer,
                                                      "text", JOB_CREATION_TIME_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
@@ -970,6 +996,7 @@ get_dbus_proxy ()
   system_bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
   if (system_bus == NULL)
     {
+      /* Translators: Program cannot connect to DBus' system bus */
       g_warning (_("Could not connect to system bus: %s"),
                  error->message);
       g_error_free (error);
@@ -1558,6 +1585,7 @@ printer_maintenance_cb (GtkButton *button,
         {
           response = execute_maintenance_command (printer_name,
                                                   "PrintSelfTestPage",
+          /* Translators: Name of job which makes printer to print test page */
                                                   _("Test page"));
         }
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
@@ -1565,8 +1593,10 @@ printer_maintenance_cb (GtkButton *button,
                             == button)
         response = execute_maintenance_command (printer_name,
                                                 "Clean all",
+          /* Translators: Name of job which makes printer to clean its heads */
                                                 _("Clean print heads"));
       if (response && response->state == IPP_ERROR)
+        /* Translators: An error has occured during execution of a CUPS maintenance command */
         g_warning (_("An error has occured during a maintenance command."));
     }
 }
@@ -1602,6 +1632,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   if (error)
     {
+      /* Translators: The XML file containing user interface can not be loaded */
       g_warning (_("Could not load ui: %s"), error->message);
       g_error_free (error);
       return;
