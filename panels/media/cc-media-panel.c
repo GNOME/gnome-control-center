@@ -402,9 +402,11 @@ static void
 on_extra_options_button_clicked (GtkWidget    *button,
                                  CcMediaPanel *self)
 {
-  GtkWidget  *dialog;
+  GtkWidget *dialog;
+  GtkWidget *combo_box;
 
   dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "extra_options_dialog"));
+  combo_box = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "media_other_type_combobox"));
   gtk_window_set_transient_for (GTK_WINDOW (dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
@@ -412,6 +414,8 @@ on_extra_options_button_clicked (GtkWidget    *button,
                     "response",
                     G_CALLBACK (on_extra_options_dialog_response),
                     self);
+  /* update other_application_combo */
+  other_type_combo_box_changed (GTK_COMBO_BOX (combo_box), self);
   gtk_window_present (GTK_WINDOW (dialog));
 }
 
