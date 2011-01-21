@@ -71,6 +71,7 @@ struct _UmUserPanelPrivate {
         GtkWidget *lock_button;
         GPermission *permission;
         GtkWidget *language_chooser;
+        guint language_chooser_idle;
 
         UmAccountDialog *account_dialog;
         UmPasswordDialog *password_dialog;
@@ -653,6 +654,8 @@ finish_language_chooser (UmUserPanelPrivate *d)
         gtk_window_present (GTK_WINDOW (d->language_chooser));
         gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
 
+        d->language_chooser_idle = 0;
+
         return FALSE;
 }
 
@@ -687,12 +690,16 @@ language_changed (UmEditableCombo    *combo,
                 return;
         }
 
+	/* Already in flight? */
+        if (d->language_chooser_idle > 0)
+                return;
+
         cursor = gdk_cursor_new (GDK_WATCH);
         gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->notebook)),
                                cursor);
         gdk_cursor_unref (cursor);
 
-        g_idle_add ((GSourceFunc)finish_language_chooser, d);
+        d->language_chooser_idle = g_idle_add ((GSourceFunc)finish_language_chooser, d);
 }
 
 static void
@@ -1258,6 +1265,10 @@ um_user_panel_dispose (GObject *object)
         if (priv->photo_dialog) {
                 um_photo_dialog_free (priv->photo_dialog);
                 priv->photo_dialog = NULL;
+        }
+        if (priv->language_chooser_idle > 0) {
+                g_source_remove (priv->language_chooser_idle);
+                priv->language_chooser_idle = 0;
         }
         if (priv->language_chooser) {
                 gtk_widget_destroy (priv->language_chooser);
