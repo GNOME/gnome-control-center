@@ -271,38 +271,33 @@ void
 xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 {
 	gchar **layouts = xkb_layouts_get_selected_list ();
-	gchar **cur_layout;
+	guint i;
 	GtkListStore *list_store =
 	    GTK_LIST_STORE (gtk_tree_view_get_model
 			    (GTK_TREE_VIEW
 			     (WID ("xkb_layouts_selected"))));
-	int counter = 0;
 
 	/* temporarily disable the buttons' status update */
 	disable_buttons_sensibility_update = TRUE;
 
 	gtk_list_store_clear (list_store);
 
-	cur_layout = layouts;
-	if (layouts != NULL) {
-		while (*cur_layout != NULL) {
-			GtkTreeIter iter;
-			const char *visible = *cur_layout;
-			gchar *utf_visible =
-			    xkb_layout_description_utf8 (visible);
-			gtk_list_store_append (list_store, &iter);
-			gtk_list_store_set (list_store, &iter,
-					    SEL_LAYOUT_TREE_COL_DESCRIPTION,
-					    utf_visible,
-					    SEL_LAYOUT_TREE_COL_ID,
-					    *cur_layout,
-					    SEL_LAYOUT_TREE_COL_ENABLED,
-					    counter < max_selected_layouts,
-					    -1);
-			g_free (utf_visible);
-			cur_layout++;
-			counter++;
-		}
+	for (i = 0; layouts != NULL && layouts[i] != NULL; i++) {
+		GtkTreeIter iter;
+		char *cur_layout = layouts[i];
+		gchar *utf_visible =
+			xkb_layout_description_utf8 (cur_layout);
+
+		gtk_list_store_append (list_store, &iter);
+		gtk_list_store_set (list_store, &iter,
+				    SEL_LAYOUT_TREE_COL_DESCRIPTION,
+				    utf_visible,
+				    SEL_LAYOUT_TREE_COL_ID,
+				    cur_layout,
+				    SEL_LAYOUT_TREE_COL_ENABLED,
+				    i < max_selected_layouts,
+				    -1);
+		g_free (utf_visible);
 	}
 
 	g_strfreev (layouts);
