@@ -29,12 +29,6 @@ G_BEGIN_DECLS
 
 typedef struct _UmLanguageDialog UmLanguageDialog;
 
-UmLanguageDialog *um_language_dialog_new      (void);
-void              um_language_dialog_free     (UmLanguageDialog *dialog);
-void              um_language_dialog_set_user (UmLanguageDialog *dialog,
-                                               UmUser            *user);
-void              um_language_dialog_show     (UmLanguageDialog *dialog,
-                                               GtkWindow        *parent);
 void              um_add_user_languages       (GtkTreeModel     *model);
 gchar            *um_get_current_language     (void);
 gboolean          um_get_iter_for_language    (GtkTreeModel     *model,
