@@ -425,7 +425,7 @@ static void
 xkb_layouts_update_list (GSettings * settings,
 			 gchar * key, GtkBuilder * dialog)
 {
-	if (!strcmp (key, GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS)) {
+	if (strcmp (key, GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS) == 0) {
 		xkb_layouts_fill_selected_tree (dialog);
 		enable_disable_restoring (dialog);
 	}
