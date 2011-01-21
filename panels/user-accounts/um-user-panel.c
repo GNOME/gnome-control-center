@@ -1259,6 +1259,10 @@ um_user_panel_dispose (GObject *object)
                 um_photo_dialog_free (priv->photo_dialog);
                 priv->photo_dialog = NULL;
         }
+        if (priv->language_chooser) {
+                gtk_widget_destroy (priv->language_chooser);
+                priv->language_chooser = NULL;
+        }
         if (priv->login_options) {
                 um_login_options_free (priv->login_options);
                 priv->login_options = NULL;
