@@ -341,7 +341,8 @@ show_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 		GtkWidget *parent = WID ("region_dialog");
 		GtkWidget *popup =
 		    gkbd_keyboard_drawing_new_dialog (idx, descr);
-		gtk_widget_set_parent (popup, parent);
+		gtk_window_set_transient_for (GTK_WINDOW (popup),
+                                              GTK_WINDOW (parent));
 		g_strfreev (layouts_list);
 		g_free (descr);
 	}
