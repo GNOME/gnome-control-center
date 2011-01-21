@@ -223,7 +223,7 @@ update_boolean_from_gconf (GtkWidget      *widget,
                 return;
         }
 
-        if (std_out[strlen (std_out) - 1] == '\n') {
+        if (strlen (std_out) > 0 && std_out[strlen (std_out) - 1] == '\n') {
                 std_out[strlen (std_out) - 1] = 0;
         }
 
