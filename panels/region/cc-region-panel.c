@@ -22,9 +22,14 @@
 #include "cc-region-panel.h"
 #include <gtk/gtk.h>
 
+#include "gnome-region-panel-xkb.h"
+
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
+
 G_DEFINE_DYNAMIC_TYPE (CcRegionPanel, cc_region_panel, CC_TYPE_PANEL)
-#define REGION_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_REGION_PANEL, CcRegionPanelPrivate))
+
+#define REGION_PANEL_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_REGION_PANEL, CcRegionPanelPrivate))
+
 struct _CcRegionPanelPrivate {
 	GtkBuilder *builder;
 };
@@ -91,7 +96,21 @@ cc_region_panel_class_finalize (CcRegionPanelClass * klass)
 {
 }
 
-GtkWidget *gnome_region_properties_init (GtkBuilder * dialog);
+static void
+setup_images (GtkBuilder * dialog)
+{
+	GtkWidget *image;
+
+	image =
+	    gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("xkb_layouts_add")), image);
+
+	image =
+	    gtk_image_new_from_stock (GTK_STOCK_REFRESH,
+				      GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")),
+			      image);
+}
 
 static void
 cc_region_panel_init (CcRegionPanel * self)
@@ -113,10 +132,12 @@ cc_region_panel_init (CcRegionPanel * self)
 		return;
 	}
 
-	gnome_region_properties_init (priv->builder);
+	setup_images (priv->builder);
+	setup_xkb_tabs (priv->builder);
 
 	prefs_widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
 							     "region_notebook");
+	gtk_widget_set_size_request (GTK_WIDGET (prefs_widget), -1, 400);
 
 	gtk_widget_reparent (prefs_widget, GTK_WIDGET (self));
 }
