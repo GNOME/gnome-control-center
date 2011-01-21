@@ -77,7 +77,8 @@ xkb_layouts_get_selected_list (void)
 
 	retval = g_settings_get_strv (xkb_keyboard_settings,
 				      GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS);
-	if (retval == NULL) {
+	if (retval == NULL || retval[0] == NULL) {
+		g_strfreev (retval);
 		retval = g_strdupv (initial_config.layouts_variants);
 	}
 
