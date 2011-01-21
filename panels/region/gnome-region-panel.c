@@ -28,7 +28,6 @@
 #endif
 
 #include <gio/gio.h>
-#include <gconf/gconf-client.h>
 
 #include "gnome-region-panel.h"
 #include "gnome-region-panel-xkb.h"
