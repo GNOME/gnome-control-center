@@ -1993,6 +1993,8 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   gtk_window_set_transient_for (GTK_WINDOW (custom_shortcut_dialog),
                                 GTK_WINDOW (widget));
+
+  gtk_window_set_resizable (GTK_WINDOW (custom_shortcut_dialog), FALSE);
 }
 
 static void
