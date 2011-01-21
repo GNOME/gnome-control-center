@@ -588,7 +588,8 @@ enroll_fingerprints (GtkWindow *parent,
         gtk_window_set_title (GTK_WINDOW (ass), _("Enable Fingerprint Login"));
         gtk_window_set_transient_for (GTK_WINDOW (ass), parent);
         gtk_window_set_modal (GTK_WINDOW (ass), TRUE);
-        gtk_window_set_position (GTK_WINDOW (ass), GTK_WIN_POS_CENTER_ON_PARENT);
+        gtk_window_set_resizable (GTK_WINDOW (ass), FALSE);
+        gtk_window_set_type_hint (GTK_WINDOW (ass), GDK_WINDOW_TYPE_HINT_DIALOG);
 
         gtk_widget_realize (ass);
         style = gtk_widget_get_style (ass);
