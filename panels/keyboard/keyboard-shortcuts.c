@@ -853,6 +853,26 @@ description_set_func (GtkTreeViewColumn *tree_column,
 }
 
 static void
+shortcut_selection_changed (GtkTreeSelection *selection, gpointer data)
+{
+  GtkWidget *button = data;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  KeyEntry *key;
+  gboolean can_remove;
+
+  can_remove = FALSE;
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      gtk_tree_model_get (model, &iter, DETAIL_KEYENTRY_COLUMN, &key, -1);
+      if (key && key->command != NULL && key->editable)
+        can_remove = TRUE;
+    }
+
+  gtk_widget_set_sensitive (button, can_remove);
+}
+
+static void
 section_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
   GtkTreeIter iter;
@@ -865,15 +885,23 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
       GtkWidget *shortcut_treeview;
       GtkTreeModel *shortcut_model;
       gchar *description;
+      gint group;
       gint i;
 
-      gtk_tree_model_get (model, &iter, SECTION_DESCRIPTION_COLUMN, &description, -1);
+      gtk_tree_model_get (model, &iter,
+                          SECTION_DESCRIPTION_COLUMN, &description,
+                          SECTION_GROUP_COLUMN, &group, -1);
+
       keys = g_hash_table_lookup (kb_sections, description);
       if (keys == NULL)
         {
           g_warning ("Can't find section %s in sections hash table!!!", description);
           return;
         }
+
+      gtk_widget_set_sensitive (WID (builder, "add-toolbutton"),
+                                group == BINDING_GROUP_USER);
+      gtk_widget_set_sensitive (WID (builder, "remove-toolbutton"), FALSE);
 
       /* Fill the shortcut treeview with the keys for the selected section */
       shortcut_treeview = GTK_WIDGET (gtk_builder_get_object (builder, "shortcut_treeview"));
@@ -892,26 +920,6 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
                               -1);
         }
     }
-}
-
-static void
-shortcut_selection_changed (GtkTreeSelection *selection, gpointer data)
-{
-  GtkWidget *button = data;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  KeyEntry *key;
-  gboolean can_remove;
-
-  can_remove = FALSE;
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter, DETAIL_KEYENTRY_COLUMN, &key, -1);
-      if (key && key->command != NULL && key->editable)
-        can_remove = TRUE;
-    }
-
-  gtk_widget_set_sensitive (button, can_remove);
 }
 
 typedef struct
@@ -960,10 +968,10 @@ edit_custom_shortcut (KeyEntry *key)
 static gboolean
 remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
 {
-  GtkTreeIter parent;
   GConfClient *client;
   gchar *base;
   KeyEntry *key;
+  GPtrArray *keys_array;
 
   gtk_tree_model_get (model, iter,
                       DETAIL_KEYENTRY_COLUMN, &key,
@@ -990,6 +998,9 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   gconf_client_suggest_sync (client, NULL);
   g_object_unref (client);
 
+  keys_array = g_hash_table_lookup (kb_sections, _("Custom Shortcuts"));
+  g_ptr_array_remove (keys_array, key);
+
   g_free (key->gconf_key);
   g_free (key->description);
   g_free (key->desc_gconf_key);
@@ -997,10 +1008,7 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   g_free (key->cmd_gconf_key);
   g_free (key);
 
-  gtk_tree_model_iter_parent (model, &parent, iter);
-  gtk_tree_store_remove (GTK_TREE_STORE (model), iter);
-  if (!gtk_tree_model_iter_has_child (model, &parent))
-    gtk_tree_store_remove (GTK_TREE_STORE (model), &parent);
+  gtk_list_store_remove (GTK_LIST_STORE (model), iter);
 
   return TRUE;
 }
@@ -1023,7 +1031,7 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
     {
       GConfClient *client;
 
-      gtk_tree_store_set (GTK_TREE_STORE (model), iter,
+      gtk_list_store_set (GTK_LIST_STORE (model), iter,
                           DETAIL_KEYENTRY_COLUMN, key, -1);
       client = gconf_client_get_default ();
       if (key->description != NULL)
@@ -1879,6 +1887,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (section_selection_changed), builder);
+  section_selection_changed (selection, builder);
 
   /* Setup the shortcut treeview */
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
