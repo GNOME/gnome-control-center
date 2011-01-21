@@ -31,10 +31,11 @@
 
 #include "gnome-region-panel-xkb.h"
 
-
-#define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
-#define SEL_LAYOUT_TREE_COL_ID 1
-#define SEL_LAYOUT_TREE_COL_ENABLED 2
+enum {
+	SEL_LAYOUT_TREE_COL_DESCRIPTION,
+	SEL_LAYOUT_TREE_COL_ID,
+	SEL_LAYOUT_TREE_COL_ENABLED
+};
 
 static int idx2select = -1;
 static int max_selected_layouts = -1;
