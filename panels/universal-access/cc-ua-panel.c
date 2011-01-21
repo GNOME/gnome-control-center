@@ -578,6 +578,16 @@ visual_bell_type_toggle_cb (GtkWidget *button,
 }
 
 static void
+hearing_sound_preferences_clicked (GtkButton *button,
+                                   CcUaPanel *panel)
+{
+  CcShell *shell;
+
+  shell = cc_panel_get_shell (CC_PANEL (panel));
+  cc_shell_set_active_panel_from_id (shell, "sound", NULL);
+}
+
+static void
 cc_ua_panel_init_hearing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
@@ -613,6 +623,9 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
   g_signal_connect (WID (priv->builder, "hearing_test_flash_button"),
                     "clicked", G_CALLBACK (gdk_beep), NULL);
 
+  g_signal_connect (WID (priv->builder, "hearing_sound_preferences_button"),
+                    "clicked",
+                    G_CALLBACK (hearing_sound_preferences_clicked), self);
 }
 
 /* typing/keyboard section */
