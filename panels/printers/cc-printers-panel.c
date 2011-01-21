@@ -709,7 +709,7 @@ job_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeModel           *model;
   GtkTreeIter             iter;
   GtkWidget              *widget;
-  int                     id;
+  int                     id = -1;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -1314,7 +1314,117 @@ allowed_user_remove_cb (GtkButton *button,
         }
       else
         actualize_allowed_users_list (self);
+
+      g_free (names);
   }
+}
+
+static void
+allowed_user_add_cb (GtkCellRendererText *renderer,
+                     gchar               *path,
+                     gchar               *new_text,
+                     gpointer             user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  DBusGProxy              *proxy;
+  gboolean                 ret = FALSE;
+  GError                  *error = NULL;
+  char                    *ret_error = NULL;
+  char                    *printer_name = NULL;
+  char                   **names = NULL;
+  int                      i;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  g_signal_handlers_disconnect_by_func (G_OBJECT (renderer),
+                                        allowed_user_add_cb,
+                                        self);
+  g_object_set (G_OBJECT (renderer), "editable", FALSE, NULL);
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    printer_name = priv->dests[priv->current_dest].name;
+
+  if (new_text && new_text[0] != '\0' && printer_name)
+    {
+      proxy = get_dbus_proxy ();
+
+      if (!proxy)
+        return;
+
+      names = g_new0 (char *, priv->num_allowed_users + 2);
+      for (i = 0; i < (priv->num_allowed_users); i++)
+        names[i] = priv->allowed_users[i];
+      names[priv->num_allowed_users] = new_text;
+
+      ret = dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
+                               G_TYPE_STRING, printer_name,
+                               G_TYPE_STRV, names,
+                               G_TYPE_INVALID,
+                               G_TYPE_STRING, &ret_error,
+                               G_TYPE_INVALID);
+
+      if (error || (ret_error && ret_error[0] != '\0'))
+        {
+          if (error)
+            g_warning ("%s", error->message);
+
+          if (ret_error && ret_error[0] != '\0')
+            g_warning ("%s", ret_error);
+        }
+
+      g_free (names);
+    }
+
+  actualize_allowed_users_list (self);
+}
+
+static void
+allowed_user_add_button_cb (GtkButton *button,
+                            gpointer   user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  GtkTreeViewColumn      *column;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkListStore           *liststore;
+  GtkTreeView            *treeview;
+  GtkTreeIter             iter;
+  GtkTreePath            *path;
+  GList                  *renderers;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  treeview = (GtkTreeView*)
+    gtk_builder_get_object (priv->builder, "allowed-users-treeview");
+
+  liststore = (GtkListStore*)
+    gtk_tree_view_get_model (treeview);
+
+  gtk_list_store_prepend (liststore, &iter);
+  column = gtk_tree_view_get_column (treeview, 0);
+  path = gtk_tree_model_get_path (GTK_TREE_MODEL (liststore), &iter);
+  renderers = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (column));
+
+  if (column && renderers)
+    {
+      g_signal_connect (G_OBJECT (renderers->data),
+                        "edited",
+                        G_CALLBACK (allowed_user_add_cb),
+                        self);
+
+      g_object_set (renderers->data, "editable", TRUE, NULL);
+      gtk_widget_grab_focus (GTK_WIDGET (treeview));
+      gtk_tree_view_set_cursor_on_cell (treeview,
+                                        path,
+                                        column,
+                                        GTK_CELL_RENDERER (renderers->data),
+                                        TRUE);
+    }
+
+  g_list_free (renderers);
+  gtk_tree_path_free (path);
 }
 
 static void
@@ -1523,6 +1633,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
   g_signal_connect (widget, "clicked", G_CALLBACK (allowed_user_remove_cb), self);
 
   widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "allowed-user-add-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (allowed_user_add_button_cb), self);
+
+  widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "supply-drawing-area");
   g_signal_connect (widget, "draw", G_CALLBACK (supply_levels_draw_cb), self);
 
@@ -1537,12 +1651,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "clean-print-heads-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
-
-
-  /* make unused widgets insensitive for now */
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "allowed-user-add-button");
-  gtk_widget_set_sensitive (widget, FALSE);
 
 
   populate_printers_list (self);
