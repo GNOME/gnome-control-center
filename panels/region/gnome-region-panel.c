@@ -64,15 +64,14 @@ setup_dialog (GtkBuilder * dialog)
 GtkWidget *
 gnome_region_properties_init (GtkBuilder * dialog)
 {
-	GtkWidget *dialog_win = NULL;
+	GtkWidget *region_notebook = NULL;
 
 	create_dialog (dialog);
 	if (dialog) {
 		setup_dialog (dialog);
-		dialog_win = WID ("region_dialog");
-		/* g_signal_connect (dialog_win, "response",
-		   G_CALLBACK (dialog_response_cb), NULL); */
+		region_notebook = WID ("region_notebook");
+		gtk_widget_set_size_request (GTK_WIDGET (region_notebook), -1, 400);
 	}
 
-	return dialog_win;
+	return region_notebook;
 }
