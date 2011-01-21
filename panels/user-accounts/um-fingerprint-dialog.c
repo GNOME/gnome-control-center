@@ -580,7 +580,7 @@ enroll_fingerprints (GtkWindow *parent,
         if (!gtk_builder_add_from_file (dialog, filename, &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);
-                exit (1);
+                return;
         }
         data->dialog = dialog;
 

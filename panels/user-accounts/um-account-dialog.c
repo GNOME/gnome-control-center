@@ -444,7 +444,7 @@ um_account_dialog_new (void)
         if (!gtk_builder_add_from_file (builder, filename, &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);
-                exit (1);
+                return NULL;
         }
 
         um = g_new0 (UmAccountDialog, 1);

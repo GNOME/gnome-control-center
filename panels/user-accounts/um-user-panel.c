@@ -1221,7 +1221,7 @@ um_user_panel_init (UmUserPanel *self)
         if (!gtk_builder_add_from_file (d->builder, filename, &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);
-                exit (1);
+                return;
         }
 
         setup_main_window (d);
