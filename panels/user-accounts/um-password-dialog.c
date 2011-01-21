@@ -620,7 +620,7 @@ um_password_dialog_new (void)
         error = NULL;
         filename = UIDIR "/password-dialog.ui";
         if (!g_file_test (filename, G_FILE_TEST_EXISTS))
-                filename = "../data/password-dialog.ui";
+                filename = "data/password-dialog.ui";
         if (!gtk_builder_add_from_file (builder, filename, &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);

@@ -440,7 +440,7 @@ um_account_dialog_new (void)
 
         filename = UIDIR "/account-dialog.ui";
         if (!g_file_test (filename, G_FILE_TEST_EXISTS))
-                filename = "../data/account-dialog.ui";
+                filename = "data/account-dialog.ui";
         if (!gtk_builder_add_from_file (builder, filename, &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);

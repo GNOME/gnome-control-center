@@ -330,7 +330,7 @@ um_language_chooser_new (void)
         builder = gtk_builder_new ();
         filename = UIDIR "/language-chooser.ui";
         if (!g_file_test (filename, G_FILE_TEST_EXISTS))
-                filename = "../data/language-chooser.ui";
+                filename = "data/language-chooser.ui";
         if (!gtk_builder_add_from_file (builder, filename, &error)) {
                 g_warning ("failed to load language chooser: %s", error->message);
                 g_error_free (error);

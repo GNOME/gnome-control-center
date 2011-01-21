@@ -576,7 +576,7 @@ enroll_fingerprints (GtkWindow *parent,
         dialog = gtk_builder_new ();
         filename = UIDIR "/account-fingerprint.ui";
         if (!g_file_test (filename, G_FILE_TEST_EXISTS))
-                filename = "../data/account-fingerprint.ui";
+                filename = "data/account-fingerprint.ui";
         if (!gtk_builder_add_from_file (dialog, filename, &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);

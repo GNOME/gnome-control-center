@@ -1215,7 +1215,7 @@ um_user_panel_init (UmUserPanel *self)
 
         filename = UIDIR "/user-accounts-dialog.ui";
         if (!g_file_test (filename, G_FILE_TEST_EXISTS)) {
-                filename = "../data/user-accounts-dialog.ui";
+                filename = "data/user-accounts-dialog.ui";
         }
         error = NULL;
         if (!gtk_builder_add_from_file (d->builder, filename, &error)) {
