@@ -145,6 +145,28 @@ free_key_array (GPtrArray *keys)
 }
 
 static gboolean
+has_gconf_key (const gchar *name)
+{
+  GHashTableIter iter;
+  GPtrArray *keys;
+  gint i;
+
+  g_hash_table_iter_init (&iter, kb_sections);
+  while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&keys))
+    {
+      for (i = 0; i < keys->len; i++)
+        {
+          KeyEntry *entry = g_ptr_array_index (keys, i);
+
+          if (g_strcmp0 (name, entry->gconf_key) == 0)
+            return TRUE;
+        }
+    }
+
+  return FALSE;
+}
+
+static gboolean
 should_show_key (const KeyListEntry *entry)
 {
   int value;
@@ -685,9 +707,14 @@ append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
   for (l = custom_list; l != NULL; l = l->next)
     {
       key.name = g_strconcat (l->data, "/binding", NULL);
-      key.cmd_name = g_strconcat (l->data, "/action", NULL);
-      key.description_name = g_strconcat (l->data, "/name", NULL);
-      g_array_append_val (entries, key);
+      if (!has_gconf_key (key.name))
+        {
+          key.cmd_name = g_strconcat (l->data, "/action", NULL);
+          key.description_name = g_strconcat (l->data, "/name", NULL);
+          g_array_append_val (entries, key);
+        }
+      else
+        g_free (key.name);
 
       g_free (l->data);
     }
