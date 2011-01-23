@@ -23,6 +23,7 @@
 
 #include <string.h>
 #include <glib/gi18n-lib.h>
+#include <glib/gstdio.h>
 #include <dbus/dbus-glib.h>
 
 #include <cups/cups.h>
@@ -92,6 +93,37 @@ cc_printers_panel_set_property (GObject      *object,
 static void
 cc_printers_panel_dispose (GObject *object)
 {
+  CcPrintersPanelPrivate *priv = CC_PRINTERS_PANEL (object)->priv;
+  int                     i;
+
+  if (priv->num_dests > 0)
+    cupsFreeDests (priv->num_dests, priv->dests);
+  priv->dests = NULL;
+  priv->num_dests = 0;
+  priv->current_dest = -1;
+
+  if (priv->num_jobs > 0)
+    cupsFreeJobs (priv->num_jobs, priv->jobs);
+  priv->jobs = NULL;
+  priv->num_jobs = 0;
+  priv->current_job = -1;
+
+  if (priv->num_allowed_users > 0)
+    {
+      for (i = 0; i < priv->num_allowed_users; i++)
+        g_free (priv->allowed_users[i]);
+      g_free (priv->allowed_users);
+    }
+  priv->allowed_users = NULL;
+  priv->num_allowed_users = 0;
+  priv->current_allowed_user = -1;
+
+  if (priv->builder)
+    {
+      g_object_unref (priv->builder);
+      priv->builder = NULL;
+    }
+
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
 
@@ -149,7 +181,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                  *status = NULL;
   gint                    width, height;
   int                     printer_state = 3;
-  int                     id, i, j;
+  int                     id = -1;
+  int                     i, j;
   static const char * const reasons[] =
     {
       "toner-low",
@@ -368,6 +401,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
               if (g_strcmp0 (available_commands[i], "Clean") == 0)
                 clean_command_available = TRUE;
             }
+          g_strfreev (available_commands);
         }
 
       widget = (GtkWidget*)
@@ -571,8 +605,13 @@ actualize_printers_list (CcPrintersPanel *self)
           gtk_tree_selection_select_iter (
             gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
             &selected_iter);
+          gtk_tree_path_free (path);
         }
     }
+
+  g_free (current_printer_name);
+  g_free (current_printer_instance);
+  g_object_unref (store);
 }
 
 static void
@@ -720,6 +759,7 @@ actualize_jobs_list (CcPrintersPanel *self)
     }
 
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
+  g_object_unref (store);
 }
 
 static void
@@ -739,6 +779,9 @@ job_selection_changed_cb (GtkTreeSelection *selection,
     gtk_tree_model_get (model, &iter,
 			JOB_ID_COLUMN, &id,
 			-1);
+  else
+    id = -1;
+
   priv->current_job = id;
 
   if (priv->current_job >= 0 &&
@@ -855,39 +898,41 @@ ccGetAllowedUsers (gchar ***allowed_users, char *printer_name)
                     "printer-uri",
                     NULL,
                     uri);
-       ippAddStrings (request,
-                      IPP_TAG_OPERATION,
-                      IPP_TAG_KEYWORD,
-                      "requested-attributes",
-                      1,
-                      NULL,
-                      attrs);
+      ippAddStrings (request,
+                     IPP_TAG_OPERATION,
+                     IPP_TAG_KEYWORD,
+                     "requested-attributes",
+                     1,
+                     NULL,
+                     attrs);
 
-       response = cupsDoRequest (http, request, "/");
-       if (response)
-         {
-           ipp_attribute_t *attr = NULL;
-           ipp_attribute_t *allowed = NULL;
+      response = cupsDoRequest (http, request, "/");
+      if (response)
+        {
+          ipp_attribute_t *attr = NULL;
+          ipp_attribute_t *allowed = NULL;
 
-           for (attr = response->attrs; attr != NULL; attr = attr->next)
-             {
-               if (attr->group_tag == IPP_TAG_PRINTER &&
-                   attr->value_tag == IPP_TAG_NAME &&
-                   !g_strcmp0 (attr->name, "requesting-user-name-allowed"))
-                 allowed = attr;
-             }
+          for (attr = response->attrs; attr != NULL; attr = attr->next)
+            {
+              if (attr->group_tag == IPP_TAG_PRINTER &&
+                  attr->value_tag == IPP_TAG_NAME &&
+                  !g_strcmp0 (attr->name, "requesting-user-name-allowed"))
+                allowed = attr;
+            }
 
-            if (allowed && allowed->num_values > 0)
-              {
-                int i;
+          if (allowed && allowed->num_values > 0)
+            {
+              int i;
 
-                num_allowed_users = allowed->num_values;
-                users = g_new (gchar*, num_allowed_users);
+              num_allowed_users = allowed->num_values;
+              users = g_new (gchar*, num_allowed_users);
 
-                for (i = 0; i < num_allowed_users; i ++)
-                  users[i] = g_strdup (allowed->values[i].string.text);
-	      }
-         }
+              for (i = 0; i < num_allowed_users; i ++)
+                users[i] = g_strdup (allowed->values[i].string.text);
+            }
+          ippDelete(response);
+        }
+       httpClose (http);
      }
 
   *allowed_users = users;
@@ -936,6 +981,7 @@ actualize_allowed_users_list (CcPrintersPanel *self)
     }
 
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
+  g_object_unref (store);
 }
 
 static void
@@ -946,7 +992,7 @@ allowed_users_selection_changed_cb (GtkTreeSelection *selection,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkTreeModel           *model;
   GtkTreeIter             iter;
-  int                     id;
+  int                     id = -1;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -954,6 +1000,9 @@ allowed_users_selection_changed_cb (GtkTreeSelection *selection,
     gtk_tree_model_get (model, &iter,
 			ALLOWED_USERS_ID_COLUMN, &id,
 			-1);
+  else
+    id = -1;
+
   priv->current_allowed_user = id;
 }
 
@@ -1067,6 +1116,8 @@ job_process_cb (GtkButton *button,
                                  G_TYPE_STRING, &ret_error,
                                  G_TYPE_INVALID);
 
+      g_object_unref (proxy);
+
       if (error || (ret_error && ret_error[0] != '\0'))
         {
           if (error)
@@ -1077,6 +1128,8 @@ job_process_cb (GtkButton *button,
         }
       else
         actualize_jobs_list (self);
+
+      g_clear_error (&error);
   }
 
   widget = (GtkWidget*)
@@ -1135,6 +1188,8 @@ printer_disable_cb (GtkToggleButton *togglebutton,
                                G_TYPE_STRING, &ret_error,
                                G_TYPE_INVALID);
 
+      g_object_unref (proxy);
+
       if (error || (ret_error && ret_error[0] != '\0'))
         {
           if (error)
@@ -1148,7 +1203,9 @@ printer_disable_cb (GtkToggleButton *togglebutton,
           gtk_toggle_button_set_active (togglebutton, paused);
           actualize_printers_list (self);
         }
-  }
+
+      g_clear_error (&error);
+    }
 }
 
 static gboolean
@@ -1331,6 +1388,8 @@ allowed_user_remove_cb (GtkButton *button,
                                G_TYPE_STRING, &ret_error,
                                G_TYPE_INVALID);
 
+      g_object_unref (proxy);
+
       if (error || (ret_error && ret_error[0] != '\0'))
         {
           if (error)
@@ -1342,6 +1401,7 @@ allowed_user_remove_cb (GtkButton *button,
       else
         actualize_allowed_users_list (self);
 
+      g_clear_error (&error);
       g_free (names);
   }
 }
@@ -1393,6 +1453,8 @@ allowed_user_add_cb (GtkCellRendererText *renderer,
                                G_TYPE_STRING, &ret_error,
                                G_TYPE_INVALID);
 
+      g_object_unref (proxy);
+
       if (error || (ret_error && ret_error[0] != '\0'))
         {
           if (error)
@@ -1402,6 +1464,7 @@ allowed_user_add_cb (GtkCellRendererText *renderer,
             g_warning ("%s", ret_error);
         }
 
+      g_clear_error (&error);
       g_free (names);
     }
 
@@ -1486,6 +1549,8 @@ printer_set_default_cb (GtkToggleButton *button,
                                G_TYPE_STRING, &ret_error,
                                G_TYPE_INVALID);
 
+      g_object_unref (proxy);
+
       if (error || (ret_error && ret_error[0] != '\0'))
         {
           if (error)
@@ -1497,6 +1562,8 @@ printer_set_default_cb (GtkToggleButton *button,
         }
       else
         actualize_printers_list (self);
+
+      g_clear_error (&error);
 
       g_signal_handlers_block_by_func (G_OBJECT (button), printer_set_default_cb, self);
       gtk_toggle_button_set_active (button, priv->dests[priv->current_dest].is_default);
@@ -1555,7 +1622,11 @@ execute_maintenance_command (const char *printer_name,
           fclose (file);
 
           response = cupsDoFileRequest (http, request, "/", file_name);
+          g_unlink (file_name);
         }
+
+      g_free (file_name);
+      httpClose (http);
     }
 
   return response;
@@ -1595,9 +1666,13 @@ printer_maintenance_cb (GtkButton *button,
                                                 "Clean all",
           /* Translators: Name of job which makes printer to clean its heads */
                                                 _("Clean print heads"));
-      if (response && response->state == IPP_ERROR)
-        /* Translators: An error has occured during execution of a CUPS maintenance command */
-        g_warning (_("An error has occured during a maintenance command."));
+      if (response)
+        {
+          if (response->state == IPP_ERROR)
+            /* Translators: An error has occured during execution of a CUPS maintenance command */
+            g_warning (_("An error has occured during a maintenance command."));
+          ippDelete(response);
+        }
     }
 }
 
