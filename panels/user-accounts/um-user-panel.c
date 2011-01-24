@@ -56,7 +56,6 @@
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
-#include "gdm-languages.h"
 
 G_DEFINE_DYNAMIC_TYPE (UmUserPanel, um_user_panel, CC_TYPE_PANEL)
 
