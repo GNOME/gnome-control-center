@@ -529,7 +529,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
 
         lang = g_strdup (um_user_get_language (user));
         if (!lang)
-                lang = um_get_current_language ();
+                lang = cc_common_language_get_current_language ();
         cc_common_language_get_iter_for_language (model, lang, &iter);
         um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), &iter);
         g_free (lang);
@@ -627,7 +627,7 @@ language_response (GtkDialog         *dialog,
         else {
                 lang = g_strdup (um_user_get_language (user));
                 if (!lang)
-                        lang = um_get_current_language ();
+                        lang = cc_common_language_get_current_language ();
         }
         cc_common_language_get_iter_for_language (model, lang, &iter);
         um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (combo), &iter);

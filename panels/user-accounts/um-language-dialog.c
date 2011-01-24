@@ -134,7 +134,7 @@ um_add_user_languages (GtkTreeModel *model)
         g_slist_free (users);
 
         /* Make sure the current locale is present */
-        name = um_get_current_language ();
+        name = cc_common_language_get_current_language ();
 
         if (!g_hash_table_lookup (seen, name)) {
                 language = gdm_get_language_from_name (name, NULL);
@@ -149,21 +149,6 @@ um_add_user_languages (GtkTreeModel *model)
 
         gtk_list_store_append (store, &iter);
         gtk_list_store_set (store, &iter, LOCALE_COL, NULL, DISPLAY_LOCALE_COL, _("Other..."), -1);
-}
-
-gchar *
-um_get_current_language (void)
-{
-        gchar *language;
-        const gchar *locale;
-
-        locale = (const gchar *) setlocale (LC_MESSAGES, NULL);
-        if (locale)
-                language = gdm_normalize_language_name (locale);
-        else
-                language = NULL;
-
-        return language;
 }
 
 GtkWidget *

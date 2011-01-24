@@ -304,9 +304,10 @@ um_add_user_languages (GtkTreeModel *model)
         gtk_list_store_set (store, &iter, LOCALE_COL, NULL, DISPLAY_LOCALE_COL, _("Other..."), -1);
 #endif
 }
+#endif
 
 gchar *
-um_get_current_language (void)
+cc_common_language_get_current_language (void)
 {
         gchar *language;
         const gchar *locale;
@@ -320,6 +321,7 @@ um_get_current_language (void)
         return language;
 }
 
+#if 0
 GtkWidget *
 um_language_chooser_new (void)
 {

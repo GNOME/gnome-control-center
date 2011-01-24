@@ -43,7 +43,7 @@ gboolean cc_common_language_get_iter_for_language (GtkTreeModel     *model,
 						   GtkTreeIter      *iter);
 void cc_common_language_add_available_languages (GtkListStore *store);
 gboolean cc_common_language_has_font (const gchar *locale);
-
+gchar *cc_common_language_get_current_language (void);
 
 G_END_DECLS
 
