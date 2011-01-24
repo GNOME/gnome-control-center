@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2010 Richard Hughes <richard@hughsie.com>
  *
@@ -34,22 +34,22 @@
 const gchar *
 panel_device_type_to_icon_name (guint type)
 {
-	const gchar *value = NULL;
-	switch (type) {
-	case NM_DEVICE_TYPE_ETHERNET:
-		value = "network-wired";
-		break;
-	case NM_DEVICE_TYPE_WIFI:
-	case NM_DEVICE_TYPE_GSM:
-	case NM_DEVICE_TYPE_CDMA:
-	case NM_DEVICE_TYPE_BLUETOOTH:
-	case NM_DEVICE_TYPE_MESH:
-		value = "network-wireless";
-		break;
-	default:
-		break;
-	}
-	return value;
+        const gchar *value = NULL;
+        switch (type) {
+        case NM_DEVICE_TYPE_ETHERNET:
+                value = "network-wired";
+                break;
+        case NM_DEVICE_TYPE_WIFI:
+        case NM_DEVICE_TYPE_GSM:
+        case NM_DEVICE_TYPE_CDMA:
+        case NM_DEVICE_TYPE_BLUETOOTH:
+        case NM_DEVICE_TYPE_MESH:
+                value = "network-wireless";
+                break;
+        default:
+                break;
+        }
+        return value;
 }
 
 /**
@@ -58,38 +58,38 @@ panel_device_type_to_icon_name (guint type)
 const gchar *
 panel_device_type_to_localized_string (guint type)
 {
-	const gchar *value = NULL;
-	switch (type) {
-	case NM_DEVICE_TYPE_UNKNOWN:
-		/* TRANSLATORS: device type */
-		value = _("Unknown");
-		break;
-	case NM_DEVICE_TYPE_ETHERNET:
-		/* TRANSLATORS: device type */
-		value = _("Wired");
-		break;
-	case NM_DEVICE_TYPE_WIFI:
-		/* TRANSLATORS: device type */
-		value = _("Wireless");
-		break;
-	case NM_DEVICE_TYPE_GSM:
-	case NM_DEVICE_TYPE_CDMA:
-		/* TRANSLATORS: device type */
-		value = _("Mobile broadband");
-		break;
-	case NM_DEVICE_TYPE_BLUETOOTH:
-		/* TRANSLATORS: device type */
-		value = _("Bluetooth");
-		break;
-	case NM_DEVICE_TYPE_MESH:
-		/* TRANSLATORS: device type */
-		value = _("Mesh");
-		break;
+        const gchar *value = NULL;
+        switch (type) {
+        case NM_DEVICE_TYPE_UNKNOWN:
+                /* TRANSLATORS: device type */
+                value = _("Unknown");
+                break;
+        case NM_DEVICE_TYPE_ETHERNET:
+                /* TRANSLATORS: device type */
+                value = _("Wired");
+                break;
+        case NM_DEVICE_TYPE_WIFI:
+                /* TRANSLATORS: device type */
+                value = _("Wireless");
+                break;
+        case NM_DEVICE_TYPE_GSM:
+        case NM_DEVICE_TYPE_CDMA:
+                /* TRANSLATORS: device type */
+                value = _("Mobile broadband");
+                break;
+        case NM_DEVICE_TYPE_BLUETOOTH:
+                /* TRANSLATORS: device type */
+                value = _("Bluetooth");
+                break;
+        case NM_DEVICE_TYPE_MESH:
+                /* TRANSLATORS: device type */
+                value = _("Mesh");
+                break;
 
-	default:
-		break;
-	}
-	return value;
+        default:
+                break;
+        }
+        return value;
 }
 
 /**
@@ -100,29 +100,29 @@ panel_device_type_to_localized_string (guint type)
 const gchar *
 panel_device_type_to_sortable_string (guint type)
 {
-	const gchar *value = NULL;
-	switch (type) {
-	case NM_DEVICE_TYPE_ETHERNET:
-		value = "1";
-		break;
-	case NM_DEVICE_TYPE_WIFI:
-		value = "2";
-		break;
-	case NM_DEVICE_TYPE_GSM:
-	case NM_DEVICE_TYPE_CDMA:
-		value = "3";
-		break;
-	case NM_DEVICE_TYPE_BLUETOOTH:
-		value = "4";
-		break;
-	case NM_DEVICE_TYPE_MESH:
-		value = "5";
-		break;
-	default:
-		value = "6";
-		break;
-	}
-	return value;
+        const gchar *value = NULL;
+        switch (type) {
+        case NM_DEVICE_TYPE_ETHERNET:
+                value = "1";
+                break;
+        case NM_DEVICE_TYPE_WIFI:
+                value = "2";
+                break;
+        case NM_DEVICE_TYPE_GSM:
+        case NM_DEVICE_TYPE_CDMA:
+                value = "3";
+                break;
+        case NM_DEVICE_TYPE_BLUETOOTH:
+                value = "4";
+                break;
+        case NM_DEVICE_TYPE_MESH:
+                value = "5";
+                break;
+        default:
+                value = "6";
+                break;
+        }
+        return value;
 }
 
 /**
@@ -131,24 +131,24 @@ panel_device_type_to_sortable_string (guint type)
 const gchar *
 panel_ap_mode_to_localized_string (guint mode)
 {
-	const gchar *value = NULL;
-	switch (mode) {
-	case NM_802_11_MODE_UNKNOWN:
-		/* TRANSLATORS: AP type */
-		value = _("Unknown");
-		break;
-	case NM_802_11_MODE_ADHOC:
-		/* TRANSLATORS: AP type */
-		value = _("Ad-hoc");
-		break;
-	case NM_802_11_MODE_INFRA:
-		/* TRANSLATORS: AP type */
-		value = _("Infrastructure");
-		break;
-	default:
-		break;
-	}
-	return value;
+        const gchar *value = NULL;
+        switch (mode) {
+        case NM_802_11_MODE_UNKNOWN:
+                /* TRANSLATORS: AP type */
+                value = _("Unknown");
+                break;
+        case NM_802_11_MODE_ADHOC:
+                /* TRANSLATORS: AP type */
+                value = _("Ad-hoc");
+                break;
+        case NM_802_11_MODE_INFRA:
+                /* TRANSLATORS: AP type */
+                value = _("Infrastructure");
+                break;
+        default:
+                break;
+        }
+        return value;
 }
 
 /**
@@ -157,52 +157,52 @@ panel_ap_mode_to_localized_string (guint mode)
 const gchar *
 panel_device_state_to_localized_string (guint type)
 {
-	const gchar *value = NULL;
-	switch (type) {
-	case NM_DEVICE_STATE_UNKNOWN:
-		/* TRANSLATORS: device status */
-		value = _("Status unknown");
-		break;
-	case NM_DEVICE_STATE_UNMANAGED:
-		/* TRANSLATORS: device status */
-		value = _("Unmanaged");
-		break;
-	case NM_DEVICE_STATE_UNAVAILABLE:
-		/* TRANSLATORS: device status */
-		value = _("Unavailable");
-		break;
-	case NM_DEVICE_STATE_DISCONNECTED:
-		/* TRANSLATORS: device status */
-		value = _("Disconnected");
-		break;
-	case NM_DEVICE_STATE_PREPARE:
-		/* TRANSLATORS: device status */
-		value = _("Preparing connection");
-		break;
-	case NM_DEVICE_STATE_CONFIG:
-		/* TRANSLATORS: device status */
-		value = _("Configuring connection");
-		break;
-	case NM_DEVICE_STATE_NEED_AUTH:
-		/* TRANSLATORS: device status */
-		value = _("Authenticating");
-		break;
-	case NM_DEVICE_STATE_IP_CONFIG:
-		/* TRANSLATORS: device status */
-		value = _("Getting network address");
-		break;
-	case NM_DEVICE_STATE_ACTIVATED:
-		/* TRANSLATORS: device status */
-		value = _("Connected");
-		break;
-	case NM_DEVICE_STATE_FAILED:
-		/* TRANSLATORS: device status */
-		value = _("Failed to connect");
-		break;
-	default:
-		break;
-	}
-	return value;
+        const gchar *value = NULL;
+        switch (type) {
+        case NM_DEVICE_STATE_UNKNOWN:
+                /* TRANSLATORS: device status */
+                value = _("Status unknown");
+                break;
+        case NM_DEVICE_STATE_UNMANAGED:
+                /* TRANSLATORS: device status */
+                value = _("Unmanaged");
+                break;
+        case NM_DEVICE_STATE_UNAVAILABLE:
+                /* TRANSLATORS: device status */
+                value = _("Unavailable");
+                break;
+        case NM_DEVICE_STATE_DISCONNECTED:
+                /* TRANSLATORS: device status */
+                value = _("Disconnected");
+                break;
+        case NM_DEVICE_STATE_PREPARE:
+                /* TRANSLATORS: device status */
+                value = _("Preparing connection");
+                break;
+        case NM_DEVICE_STATE_CONFIG:
+                /* TRANSLATORS: device status */
+                value = _("Configuring connection");
+                break;
+        case NM_DEVICE_STATE_NEED_AUTH:
+                /* TRANSLATORS: device status */
+                value = _("Authenticating");
+                break;
+        case NM_DEVICE_STATE_IP_CONFIG:
+                /* TRANSLATORS: device status */
+                value = _("Getting network address");
+                break;
+        case NM_DEVICE_STATE_ACTIVATED:
+                /* TRANSLATORS: device status */
+                value = _("Connected");
+                break;
+        case NM_DEVICE_STATE_FAILED:
+                /* TRANSLATORS: device status */
+                value = _("Failed to connect");
+                break;
+        default:
+                break;
+        }
+        return value;
 }
 
 /**
@@ -211,16 +211,16 @@ panel_device_state_to_localized_string (guint type)
 gchar *
 panel_ipv4_to_string (GVariant *variant)
 {
-	gchar *ip_str;
-	guint32 ip;
+        gchar *ip_str;
+        guint32 ip;
 
-	g_variant_get (variant, "u", &ip);
-	ip_str = g_strdup_printf ("%i.%i.%i.%i",
-				    ip & 0x000000ff,
-				   (ip & 0x0000ff00) / 0x100,
-				   (ip & 0x00ff0000) / 0x10000,
-				   (ip & 0xff000000) / 0x1000000);
-	return ip_str;
+        g_variant_get (variant, "u", &ip);
+        ip_str = g_strdup_printf ("%i.%i.%i.%i",
+                                    ip & 0x000000ff,
+                                   (ip & 0x0000ff00) / 0x100,
+                                   (ip & 0x00ff0000) / 0x10000,
+                                   (ip & 0xff000000) / 0x1000000);
+        return ip_str;
 }
 
 /**
@@ -232,34 +232,34 @@ panel_ipv4_to_string (GVariant *variant)
 gchar *
 panel_ipv6_to_string (GVariant *variant)
 {
-	gchar tmp1;
-	gchar tmp2;
-	guint i = 0;
-	gboolean ret = FALSE;
-	GString *string;
+        gchar tmp1;
+        gchar tmp2;
+        guint i = 0;
+        gboolean ret = FALSE;
+        GString *string;
 
-	if (g_variant_n_children (variant) != 16)
-		return NULL;
+        if (g_variant_n_children (variant) != 16)
+                return NULL;
 
-	string = g_string_new ("");
-	for (i=0; i<16; i+=2) {
-		g_variant_get_child (variant, i+0, "y", &tmp1);
-		g_variant_get_child (variant, i+1, "y", &tmp2);
-		if (tmp1 == 0 && tmp2 == 0) {
-			if (!ret) {
-				g_string_append (string, ":");
-				ret = TRUE;
-			}
-		} else {
-			g_string_append_printf (string,
-						"%x%x%x%x:",
-						(tmp1 & 0xf0) / 16,
-						 tmp1 & 0x0f,
-						(tmp2 & 0xf0) / 16,
-						 tmp2 & 0x0f);
-			ret = FALSE;
-		}
-	}
-	g_string_set_size (string, string->len - 1);
-	return g_string_free (string, FALSE);
+        string = g_string_new ("");
+        for (i=0; i<16; i+=2) {
+                g_variant_get_child (variant, i+0, "y", &tmp1);
+                g_variant_get_child (variant, i+1, "y", &tmp2);
+                if (tmp1 == 0 && tmp2 == 0) {
+                        if (!ret) {
+                                g_string_append (string, ":");
+                                ret = TRUE;
+                        }
+                } else {
+                        g_string_append_printf (string,
+                                                "%x%x%x%x:",
+                                                (tmp1 & 0xf0) / 16,
+                                                 tmp1 & 0x0f,
+                                                (tmp2 & 0xf0) / 16,
+                                                 tmp2 & 0x0f);
+                        ret = FALSE;
+                }
+        }
+        g_string_set_size (string, string->len - 1);
+        return g_string_free (string, FALSE);
 }

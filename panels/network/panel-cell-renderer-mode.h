@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2010 Richard Hughes <richard@hughsie.com>
  *
@@ -27,32 +27,32 @@
 
 #include "panel-common.h"
 
-#define PANEL_TYPE_CELL_RENDERER_MODE		(panel_cell_renderer_mode_get_type())
-#define PANEL_CELL_RENDERER_MODE(obj)		(G_TYPE_CHECK_INSTANCE_CAST((obj), PANEL_TYPE_CELL_RENDERER_MODE, PanelCellRendererMode))
-#define PANEL_CELL_RENDERER_MODE_CLASS(cls)	(G_TYPE_CHECK_CLASS_CAST((cls), PANEL_TYPE_CELL_RENDERER_MODE, PanelCellRendererModeClass))
-#define PANEL_IS_CELL_RENDERER_MODE(obj)	(G_TYPE_CHECK_INSTANCE_TYPE((obj), PANEL_TYPE_CELL_RENDERER_MODE))
-#define PANEL_IS_CELL_RENDERER_MODE_CLASS(cls)	(G_TYPE_CHECK_CLASS_TYPE((cls), PANEL_TYPE_CELL_RENDERER_MODE))
-#define PANEL_CELL_RENDERER_MODE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), PANEL_TYPE_CELL_RENDERER_MODE, PanelCellRendererModeClass))
+#define PANEL_TYPE_CELL_RENDERER_MODE           (panel_cell_renderer_mode_get_type())
+#define PANEL_CELL_RENDERER_MODE(obj)           (G_TYPE_CHECK_INSTANCE_CAST((obj), PANEL_TYPE_CELL_RENDERER_MODE, PanelCellRendererMode))
+#define PANEL_CELL_RENDERER_MODE_CLASS(cls)     (G_TYPE_CHECK_CLASS_CAST((cls), PANEL_TYPE_CELL_RENDERER_MODE, PanelCellRendererModeClass))
+#define PANEL_IS_CELL_RENDERER_MODE(obj)        (G_TYPE_CHECK_INSTANCE_TYPE((obj), PANEL_TYPE_CELL_RENDERER_MODE))
+#define PANEL_IS_CELL_RENDERER_MODE_CLASS(cls)  (G_TYPE_CHECK_CLASS_TYPE((cls), PANEL_TYPE_CELL_RENDERER_MODE))
+#define PANEL_CELL_RENDERER_MODE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), PANEL_TYPE_CELL_RENDERER_MODE, PanelCellRendererModeClass))
 
 G_BEGIN_DECLS
 
-typedef struct _PanelCellRendererMode		PanelCellRendererMode;
-typedef struct _PanelCellRendererModeClass	PanelCellRendererModeClass;
+typedef struct _PanelCellRendererMode           PanelCellRendererMode;
+typedef struct _PanelCellRendererModeClass      PanelCellRendererModeClass;
 
 struct _PanelCellRendererMode
 {
-	GtkCellRendererPixbuf	 parent;
-	guint			 mode;
-	gchar			*icon_name;
+        GtkCellRendererPixbuf    parent;
+        guint                    mode;
+        gchar                   *icon_name;
 };
 
 struct _PanelCellRendererModeClass
 {
-	GtkCellRendererPixbufClass parent_class;
+        GtkCellRendererPixbufClass parent_class;
 };
 
-GType		 panel_cell_renderer_mode_get_type		(void);
-GtkCellRenderer	*panel_cell_renderer_mode_new		(void);
+GType            panel_cell_renderer_mode_get_type              (void);
+GtkCellRenderer *panel_cell_renderer_mode_new           (void);
 
 G_END_DECLS
 

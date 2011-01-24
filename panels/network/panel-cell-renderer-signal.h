@@ -1,4 +1,4 @@
-/* -*- Signal: C; tab-width: 8; indent-tabs-signal: t; c-basic-offset: 8 -*-
+/* -*- Mode: C; tab-width: 8; indent-tabs-signal: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2010 Richard Hughes <richard@hughsie.com>
  *
@@ -27,32 +27,32 @@
 
 #include "panel-common.h"
 
-#define PANEL_TYPE_CELL_RENDERER_SIGNAL			(panel_cell_renderer_signal_get_type())
-#define PANEL_CELL_RENDERER_SIGNAL(obj)			(G_TYPE_CHECK_INSTANCE_CAST((obj), PANEL_TYPE_CELL_RENDERER_SIGNAL, PanelCellRendererSignal))
-#define PANEL_CELL_RENDERER_SIGNAL_CLASS(cls)		(G_TYPE_CHECK_CLASS_CAST((cls), PANEL_TYPE_CELL_RENDERER_SIGNAL, PanelCellRendererSignalClass))
-#define PANEL_IS_CELL_RENDERER_SIGNAL(obj)		(G_TYPE_CHECK_INSTANCE_TYPE((obj), PANEL_TYPE_CELL_RENDERER_SIGNAL))
-#define PANEL_IS_CELL_RENDERER_SIGNAL_CLASS(cls)	(G_TYPE_CHECK_CLASS_TYPE((cls), PANEL_TYPE_CELL_RENDERER_SIGNAL))
-#define PANEL_CELL_RENDERER_SIGNAL_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), PANEL_TYPE_CELL_RENDERER_SIGNAL, PanelCellRendererSignalClass))
+#define PANEL_TYPE_CELL_RENDERER_SIGNAL                 (panel_cell_renderer_signal_get_type())
+#define PANEL_CELL_RENDERER_SIGNAL(obj)                 (G_TYPE_CHECK_INSTANCE_CAST((obj), PANEL_TYPE_CELL_RENDERER_SIGNAL, PanelCellRendererSignal))
+#define PANEL_CELL_RENDERER_SIGNAL_CLASS(cls)           (G_TYPE_CHECK_CLASS_CAST((cls), PANEL_TYPE_CELL_RENDERER_SIGNAL, PanelCellRendererSignalClass))
+#define PANEL_IS_CELL_RENDERER_SIGNAL(obj)              (G_TYPE_CHECK_INSTANCE_TYPE((obj), PANEL_TYPE_CELL_RENDERER_SIGNAL))
+#define PANEL_IS_CELL_RENDERER_SIGNAL_CLASS(cls)        (G_TYPE_CHECK_CLASS_TYPE((cls), PANEL_TYPE_CELL_RENDERER_SIGNAL))
+#define PANEL_CELL_RENDERER_SIGNAL_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS((obj), PANEL_TYPE_CELL_RENDERER_SIGNAL, PanelCellRendererSignalClass))
 
 G_BEGIN_DECLS
 
-typedef struct _PanelCellRendererSignal		PanelCellRendererSignal;
-typedef struct _PanelCellRendererSignalClass	PanelCellRendererSignalClass;
+typedef struct _PanelCellRendererSignal         PanelCellRendererSignal;
+typedef struct _PanelCellRendererSignalClass    PanelCellRendererSignalClass;
 
 struct _PanelCellRendererSignal
 {
-	GtkCellRendererPixbuf	 parent;
-	guint			 signal;
-	gchar			*icon_name;
+        GtkCellRendererPixbuf    parent;
+        guint                    signal;
+        gchar                   *icon_name;
 };
 
 struct _PanelCellRendererSignalClass
 {
-	GtkCellRendererPixbufClass parent_class;
+        GtkCellRendererPixbufClass parent_class;
 };
 
-GType		 panel_cell_renderer_signal_get_type	(void);
-GtkCellRenderer	*panel_cell_renderer_signal_new		(void);
+GType            panel_cell_renderer_signal_get_type    (void);
+GtkCellRenderer *panel_cell_renderer_signal_new         (void);
 
 G_END_DECLS
 

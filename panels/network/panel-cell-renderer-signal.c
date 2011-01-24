@@ -1,4 +1,4 @@
-/* -*- Signal: C; tab-width: 8; indent-tabs-signal: t; c-basic-offset: 8 -*-
+/* -*- Mode: C; tab-width: 8; indent-tabs-signal: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2010 Richard Hughes <richard@hughsie.com>
  *
@@ -28,9 +28,9 @@
 #include "panel-cell-renderer-signal.h"
 
 enum {
-	PROP_0,
-	PROP_SIGNAL,
-	PROP_LAST
+        PROP_0,
+        PROP_SIGNAL,
+        PROP_LAST
 };
 
 G_DEFINE_TYPE (PanelCellRendererSignal, panel_cell_renderer_signal, GTK_TYPE_CELL_RENDERER_PIXBUF)
@@ -42,18 +42,18 @@ static gpointer parent_class = NULL;
  **/
 static void
 panel_cell_renderer_signal_get_property (GObject *object, guint param_id,
-				       GValue *value, GParamSpec *pspec)
+                                       GValue *value, GParamSpec *pspec)
 {
-	PanelCellRendererSignal *renderer = PANEL_CELL_RENDERER_SIGNAL (object);
+        PanelCellRendererSignal *renderer = PANEL_CELL_RENDERER_SIGNAL (object);
 
-	switch (param_id) {
-	case PROP_SIGNAL:
-		g_value_set_uint (value, renderer->signal);
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-		break;
-	}
+        switch (param_id) {
+        case PROP_SIGNAL:
+                g_value_set_uint (value, renderer->signal);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+                break;
+        }
 }
 
 /**
@@ -62,23 +62,23 @@ panel_cell_renderer_signal_get_property (GObject *object, guint param_id,
 static void
 panel_cell_renderer_set_name (PanelCellRendererSignal *renderer)
 {
-	const gchar *icon_name = NULL;
-	GIcon *icon;
+        const gchar *icon_name = NULL;
+        GIcon *icon;
 
-	if (renderer->signal < 20)
-		icon_name = "network-wireless-signal-none-symbolic";
-	else if (renderer->signal < 40)
-		icon_name = "network-wireless-signal-weak-symbolic";
-	else if (renderer->signal < 50)
-		icon_name = "network-wireless-signal-ok-symbolic";
-	else if (renderer->signal < 80)
-		icon_name = "network-wireless-signal-good-symbolic";
-	else
-		icon_name = "network-wireless-signal-excellent-symbolic";
+        if (renderer->signal < 20)
+                icon_name = "network-wireless-signal-none-symbolic";
+        else if (renderer->signal < 40)
+                icon_name = "network-wireless-signal-weak-symbolic";
+        else if (renderer->signal < 50)
+                icon_name = "network-wireless-signal-ok-symbolic";
+        else if (renderer->signal < 80)
+                icon_name = "network-wireless-signal-good-symbolic";
+        else
+                icon_name = "network-wireless-signal-excellent-symbolic";
 
-	icon = g_themed_icon_new_with_default_fallbacks (icon_name);
-	g_object_set (renderer, "gicon", icon, NULL);
-	g_object_unref (icon);
+        icon = g_themed_icon_new_with_default_fallbacks (icon_name);
+        g_object_set (renderer, "gicon", icon, NULL);
+        g_object_unref (icon);
 }
 
 /**
@@ -86,19 +86,19 @@ panel_cell_renderer_set_name (PanelCellRendererSignal *renderer)
  **/
 static void
 panel_cell_renderer_signal_set_property (GObject *object, guint param_id,
-				       const GValue *value, GParamSpec *pspec)
+                                       const GValue *value, GParamSpec *pspec)
 {
-	PanelCellRendererSignal *renderer = PANEL_CELL_RENDERER_SIGNAL (object);
+        PanelCellRendererSignal *renderer = PANEL_CELL_RENDERER_SIGNAL (object);
 
-	switch (param_id) {
-	case PROP_SIGNAL:
-		renderer->signal = g_value_get_uint (value);
-		panel_cell_renderer_set_name (renderer);
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-		break;
-	}
+        switch (param_id) {
+        case PROP_SIGNAL:
+                renderer->signal = g_value_get_uint (value);
+                panel_cell_renderer_set_name (renderer);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+                break;
+        }
 }
 
 /**
@@ -107,10 +107,10 @@ panel_cell_renderer_signal_set_property (GObject *object, guint param_id,
 static void
 panel_cell_renderer_finalize (GObject *object)
 {
-	PanelCellRendererSignal *renderer;
-	renderer = PANEL_CELL_RENDERER_SIGNAL (object);
-	g_free (renderer->icon_name);
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+        PanelCellRendererSignal *renderer;
+        renderer = PANEL_CELL_RENDERER_SIGNAL (object);
+        g_free (renderer->icon_name);
+        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 /**
@@ -119,19 +119,19 @@ panel_cell_renderer_finalize (GObject *object)
 static void
 panel_cell_renderer_signal_class_init (PanelCellRendererSignalClass *class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (class);
-	object_class->finalize = panel_cell_renderer_finalize;
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
+        object_class->finalize = panel_cell_renderer_finalize;
 
-	parent_class = g_type_class_peek_parent (class);
+        parent_class = g_type_class_peek_parent (class);
 
-	object_class->get_property = panel_cell_renderer_signal_get_property;
-	object_class->set_property = panel_cell_renderer_signal_set_property;
+        object_class->get_property = panel_cell_renderer_signal_get_property;
+        object_class->set_property = panel_cell_renderer_signal_set_property;
 
-	g_object_class_install_property (object_class, PROP_SIGNAL,
-					 g_param_spec_uint ("signal", NULL,
-					 		    NULL,
-					 		    0, G_MAXUINT, 0,
-					 		    G_PARAM_READWRITE));
+        g_object_class_install_property (object_class, PROP_SIGNAL,
+                                         g_param_spec_uint ("signal", NULL,
+                                                            NULL,
+                                                            0, G_MAXUINT, 0,
+                                                            G_PARAM_READWRITE));
 }
 
 /**
@@ -140,8 +140,8 @@ panel_cell_renderer_signal_class_init (PanelCellRendererSignalClass *class)
 static void
 panel_cell_renderer_signal_init (PanelCellRendererSignal *renderer)
 {
-	renderer->signal = 0;
-	renderer->icon_name = NULL;
+        renderer->signal = 0;
+        renderer->icon_name = NULL;
 }
 
 /**
@@ -150,6 +150,6 @@ panel_cell_renderer_signal_init (PanelCellRendererSignal *renderer)
 GtkCellRenderer *
 panel_cell_renderer_signal_new (void)
 {
-	return g_object_new (PANEL_TYPE_CELL_RENDERER_SIGNAL, NULL);
+        return g_object_new (PANEL_TYPE_CELL_RENDERER_SIGNAL, NULL);
 }
 
