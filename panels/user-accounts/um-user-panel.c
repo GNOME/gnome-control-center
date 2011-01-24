@@ -1172,7 +1172,7 @@ setup_main_window (UmUserPanelPrivate *d)
                 button = um_lock_button_new (d->permission);
                 gtk_widget_set_margin_top (button, 12);
                 gtk_widget_show (button);
-                box = get_widget (d, "userlist-vbox");
+                box = get_widget (d, "accounts-vbox");
                 gtk_box_pack_end (GTK_BOX (box), button, FALSE, FALSE, 0);
                 g_signal_connect (d->permission, "notify",
                                   G_CALLBACK (on_permission_changed), d);
