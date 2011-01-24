@@ -7,7 +7,8 @@ INCLUDES = 						\
 	$(LIBGNOMEKBD_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
-	-DGNOMECC_UI_DIR="\"$(uidir)\""
+	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
+	-I$(srcdir)/../common/				\
 	$(NULL)
 
 ccpanelsdir = $(PANELS_DIR)
@@ -27,7 +28,7 @@ libregion_la_SOURCES =	\
 	gnome-region-panel-xkbpv.c \
 	gnome-region-panel-xkb.h
 
-libregion_la_LIBADD = $(PANEL_LIBS) $(LIBGNOMEKBD_LIBS) $(GNOMECC_CAPPLETS_LIBS)
+libregion_la_LIBADD = $(PANEL_LIBS) $(LIBGNOMEKBD_LIBS) $(GNOMECC_CAPPLETS_LIBS) $(builddir)/../common/liblanguage.la
 
 libregion_la_LDFLAGS = $(PANEL_LDFLAGS)
 

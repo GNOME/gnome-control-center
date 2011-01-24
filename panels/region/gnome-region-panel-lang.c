@@ -27,5 +27,10 @@
 #include <glib/gi18n.h>
 
 #include "gnome-region-panel-lang.h"
+#include "cc-common-language.h"
 
-
+void
+setup_language (GtkBuilder *builder)
+{
+	g_message ("TODO");
+}

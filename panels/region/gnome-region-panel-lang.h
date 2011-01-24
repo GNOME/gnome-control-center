@@ -26,5 +26,7 @@
 
 G_BEGIN_DECLS
 
+void setup_language (GtkBuilder *builder);
+
 G_END_DECLS
 #endif /* __GNOME_KEYBOARD_PROPERTY_LANG_H */
