@@ -30,12 +30,11 @@
 
 #include <fontconfig/fontconfig.h>
 
-#include "um-language-dialog.h"
-#include "um-user-manager.h"
 #include "cc-common-language.h"
 
 #include "gdm-languages.h"
 
+#if 0
 struct _UmLanguageDialog {
         GtkWidget *dialog;
         GtkWidget *user_icon;
@@ -48,17 +47,18 @@ struct _UmLanguageDialog {
         GtkListStore *chooser_store;
 
         char *language;
-        UmUser *user;
+//        UmUser *user;
 
         gboolean force_setting;
 };
+#endif
 
 enum {
         LOCALE_COL,
         DISPLAY_LOCALE_COL,
         NUM_COLS
 };
-
+#if 0
 gchar *
 um_language_chooser_get_language (GtkWidget *chooser)
 {
@@ -77,7 +77,36 @@ um_language_chooser_get_language (GtkWidget *chooser)
 
         return lang;
 }
+#endif
+gint
+cc_common_language_sort_languages (GtkTreeModel *model,
+				   GtkTreeIter  *a,
+				   GtkTreeIter  *b,
+				   gpointer      data)
+{
+        char *ca, *cb;
+        char *la, *lb;
+        gint result;
 
+        gtk_tree_model_get (model, a, LOCALE_COL, &ca, DISPLAY_LOCALE_COL, &la, -1);
+        gtk_tree_model_get (model, b, LOCALE_COL, &cb, DISPLAY_LOCALE_COL, &lb, -1);
+
+        if (!ca)
+                result = 1;
+        else if (!cb)
+                result = -1;
+        else
+                result = strcmp (la, lb);
+
+        g_free (ca);
+        g_free (cb);
+        g_free (la);
+        g_free (lb);
+
+        return result;
+}
+
+#if 0
 gboolean
 um_get_iter_for_language (GtkTreeModel *model,
                           const gchar  *lang,
@@ -211,6 +240,7 @@ add_available_languages (GtkListStore *store)
 void
 um_add_user_languages (GtkTreeModel *model)
 {
+#if 0
         GHashTable *seen;
         GSList *users, *l;
         UmUser *user;
@@ -270,6 +300,7 @@ um_add_user_languages (GtkTreeModel *model)
 
         gtk_list_store_append (store, &iter);
         gtk_list_store_set (store, &iter, LOCALE_COL, NULL, DISPLAY_LOCALE_COL, _("Other..."), -1);
+#endif
 }
 
 gchar *
@@ -326,7 +357,7 @@ um_language_chooser_new (void)
         gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
         store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, G_TYPE_STRING);
         gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (store),
-                                                 cc_common_language_sort_languages, NULL, NULL);
+                                                 sort_languages, NULL, NULL);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
                                               GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
                                               GTK_SORT_ASCENDING);
@@ -340,3 +371,4 @@ um_language_chooser_new (void)
         return chooser;
 }
 
+#endif

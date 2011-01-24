@@ -14,6 +14,7 @@ AM_CPPFLAGS =						\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
+	-I$(srcdir)/../common/				\
 	$(PANEL_CFLAGS)					\
 	$(GNOME_DESKTOP_CFLAGS) 			\
 	$(POLKIT_CFLAGS)				\
@@ -34,8 +35,6 @@ libuser_accounts_la_CFLAGS = 		\
 	$(PANEL_CFLAGS)
 
 libuser_accounts_la_SOURCES =		\
-	gdm-languages.h 		\
-	gdm-languages.c 		\
 	um-account-type.h		\
 	um-account-type.c 		\
 	um-user.h 			\
@@ -84,12 +83,12 @@ libuser_accounts_la_LIBADD = 		\
 	$(DBUS_LIBS)			\
 	$(GIO_LIBS)			\
 	$(CAPPLET_LIBS)			\
+	$(top_builddir)/panels/common/liblanguage.la \
 	-lcrypt
 
 libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 EXTRA_DIST = \
-	locarchive.h \
 	fprintd-marshal.list
 
 CLEANFILES =				\

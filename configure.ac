@@ -331,6 +331,7 @@ help/Makefile
 libgnome-control-center/Makefile
 libgnome-control-center/libgnome-control-center.pc
 panels/Makefile
+panels/common/Makefile
 panels/background/Makefile
 panels/background/gnome-background-panel.desktop.in
 panels/datetime/Makefile
