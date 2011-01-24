@@ -102,8 +102,6 @@ static void
 cleanup_xkb_tabs (GtkBuilder * dialog,
 		  GObject *where_the_object_wa)
 {
-	g_message ("cleanup_xkb_tabs running");
-
 	gkbd_desktop_config_term (&desktop_config);
 	gkbd_keyboard_config_term (&initial_config);
 	g_object_unref (G_OBJECT (config_registry));
