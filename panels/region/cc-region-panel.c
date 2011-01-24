@@ -65,6 +65,8 @@ cc_region_panel_dispose (GObject * object)
 	CcRegionPanelPrivate *priv = CC_REGION_PANEL (object)->priv;
 
 	if (priv->builder) {
+		GtkBuilder *dialog = priv->builder;
+		gtk_widget_destroy (WID ("region_notebook"));
 		g_object_unref (priv->builder);
 		priv->builder = NULL;
 	}

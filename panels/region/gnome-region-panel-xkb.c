@@ -99,13 +99,16 @@ setup_model_entry (GtkBuilder * dialog)
 }
 
 static void
-cleanup_xkb_tabs (GtkBuilder * dialog)
+cleanup_xkb_tabs (GtkBuilder * dialog,
+		  GObject *where_the_object_wa)
 {
+	g_message ("cleanup_xkb_tabs running");
+
 	gkbd_desktop_config_term (&desktop_config);
 	gkbd_keyboard_config_term (&initial_config);
 	g_object_unref (G_OBJECT (config_registry));
 	config_registry = NULL;
-	g_object_unref (G_OBJECT (engine));
+	/* Don't unref it here, or we'll crash if open the panel again */
 	engine = NULL;
 	g_object_unref (G_OBJECT (xkb_keyboard_settings));
 	g_object_unref (G_OBJECT (xkb_desktop_settings));
@@ -225,9 +228,8 @@ setup_xkb_tabs (GtkBuilder * dialog)
 	xkb_layouts_register_conf_listener (dialog);
 	xkb_options_register_conf_listener (dialog);
 
-	g_signal_connect (G_OBJECT (WID ("region_dialog")),
-			  "destroy", G_CALLBACK (cleanup_xkb_tabs),
-			  dialog);
+	g_object_weak_ref (G_OBJECT (WID ("region_notebook")),
+			   (GWeakNotify) cleanup_xkb_tabs, dialog);
 
 	enable_disable_restoring (dialog);
 }
