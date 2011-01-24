@@ -451,7 +451,7 @@ xkb_options_popup_dialog (GtkBuilder * dialog)
 
 	chooser = CWID ("xkb_options_dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
-				      GTK_WINDOW (WID ("region_dialog")));
+				      GTK_WINDOW (gtk_widget_get_toplevel (WID ("region_notebook"))));
 	xkb_options_load_options (chooser_dialog);
 
 	g_signal_connect (chooser, "response",

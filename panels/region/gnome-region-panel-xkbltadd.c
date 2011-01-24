@@ -423,8 +423,7 @@ xkb_layout_choose (GtkBuilder * dialog)
 	GtkWidget *toplevel = NULL;
 
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
-				      GTK_WINDOW (WID
-						  ("region_dialog")));
+				      GTK_WINDOW (gtk_widget_get_toplevel (WID ("region_notebook"))));
 
 	xkb_layout_chooser_available_layouts_fill (chooser_dialog,
 						   "xkb_countries_available",

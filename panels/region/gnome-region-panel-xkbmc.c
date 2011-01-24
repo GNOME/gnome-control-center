@@ -314,8 +314,7 @@ choose_model (GtkBuilder * dialog)
 				   NULL);
 	chooser = CWID ("xkb_model_chooser");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
-				      GTK_WINDOW (WID
-						  ("region_dialog")));
+				      GTK_WINDOW (gtk_widget_get_toplevel (WID ("region_notebook"))));
 	current_model_name = g_settings_get_string (xkb_keyboard_settings, GKBD_KEYBOARD_CONFIG_KEY_MODEL);
 
 	prepare_vendors_list (chooser_dialog);

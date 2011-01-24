@@ -338,11 +338,11 @@ show_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 		gchar **layouts_list = xkb_layouts_get_selected_list ();
 		const gchar *id = layouts_list[idx];
 		char *descr = xkb_layout_description_utf8 (id);
-		GtkWidget *parent = WID ("region_dialog");
+		GtkWidget *parent = WID ("region_notebook");
 		GtkWidget *popup =
 		    gkbd_keyboard_drawing_new_dialog (idx, descr);
 		gtk_window_set_transient_for (GTK_WINDOW (popup),
-                                              GTK_WINDOW (parent));
+					      GTK_WINDOW (gtk_widget_get_toplevel (parent)));
 		g_strfreev (layouts_list);
 		g_free (descr);
 	}
