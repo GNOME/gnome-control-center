@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
@@ -26,14 +26,13 @@
   </object>
   <object class="GtkHBox" id="background-panel">
     <property name="visible">True</property>
-    <property name="spacing">12</property>
     <property name="border_width">10</property>
-    <property name="orientation">horizontal</property>
+    <property name="spacing">12</property>
     <child>
       <object class="GtkVBox" id="vbox2">
         <property name="visible">True</property>
-        <property name="spacing">6</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
         <child>
           <object class="GtkComboBox" id="sources-combobox">
             <property name="visible">True</property>
@@ -90,9 +89,10 @@
     <child>
       <object class="GtkVBox" id="vbox3">
         <property name="visible">True</property>
-        <property name="spacing">10</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
         <child>
-          <object class="GtkHBox" id="hbox1">
+          <object class="GtkHBox" id="heading-hbox">
             <property name="visible">True</property>
             <property name="spacing">24</property>
             <child>
@@ -105,8 +105,8 @@
                 </attributes>
               </object>
               <packing>
-                <property name="position">0</property>
                 <property name="expand">False</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -136,31 +136,41 @@
         <child>
           <object class="GtkHBox" id="bottom-hbox">
             <property name="visible">True</property>
+            <property name="spacing">12</property>
             <child>
-              <object class="GtkImage" id="slide_image">
+              <object class="GtkHBox" id="hbox2">
                 <property name="visible">True</property>
-                <property name="icon_name">slideshow-symbolic</property>
+                <property name="spacing">2</property>
+                <child>
+                  <object class="GtkImage" id="slide_image">
+                    <property name="visible">True</property>
+                    <property name="icon_name">slideshow-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="slide-label">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes" comments="This refers to a slideshow background">Changes throughout the day</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
-                <property name="expand">False</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="slide-label">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes" comments="This refers to a slideshow background">Changes throughout the day</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="position">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkHBox" id="edit-hbox">
                 <property name="visible">True</property>
-                <property name="spacing">12</property>
+                <property name="spacing">6</property>
                 <child>
                   <object class="GtkColorButton" id="style-pcolor">
                     <property name="visible">True</property>
@@ -170,6 +180,7 @@
                   </object>
                   <packing>
                     <property name="expand">False</property>
+                    <property name="fill">False</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -182,6 +193,7 @@
                   </object>
                   <packing>
                     <property name="expand">False</property>
+                    <property name="fill">False</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -199,12 +211,15 @@
                   </object>
                   <packing>
                     <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="pack_type">end</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="pack_type">end</property>
                 <property name="position">1</property>
               </packing>
@@ -224,8 +239,9 @@
   <object class="GtkSizeGroup" id="sizegroup">
     <property name="mode">vertical</property>
     <widgets>
-      <widget name="edit-hbox"/>
-      <widget name="background-label"/>
+      <widget name="sources-combobox"/>
+      <widget name="heading-hbox"/>
+      <widget name="slide-label"/>
     </widgets>
   </object>
   <object class="GtkListStore" id="style-liststore">
