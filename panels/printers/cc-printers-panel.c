@@ -623,11 +623,7 @@ set_cell_sensitivity_func (GtkTreeViewColumn *tree_column,
                            GtkTreeIter       *iter,
                            gpointer           func_data)
 {
-  CcPrintersPanelPrivate *priv;
-  CcPrintersPanel        *self = (CcPrintersPanel*) func_data;
   gboolean                paused = FALSE;
-
-  priv = PRINTERS_PANEL_PRIVATE (self);
 
   gtk_tree_model_get (tree_model, iter, PRINTER_PAUSED_COLUMN, &paused, -1);
 
@@ -1071,7 +1067,6 @@ job_process_cb (GtkButton *button,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   DBusGProxy             *proxy;
   GtkWidget              *widget;
-  gboolean                ret = FALSE;
   GError                 *error = NULL;
   char                   *ret_error = NULL;
   int                     id = -1;
@@ -1093,30 +1088,30 @@ job_process_cb (GtkButton *button,
       if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                "job-cancel-button") ==
           button)
-        ret = dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
-                                 G_TYPE_INT, id,
-                                 G_TYPE_BOOLEAN, FALSE,
-                                 G_TYPE_INVALID,
-                                 G_TYPE_STRING, &ret_error,
-                                 G_TYPE_INVALID);
+        dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
+                           G_TYPE_INT, id,
+                           G_TYPE_BOOLEAN, FALSE,
+                           G_TYPE_INVALID,
+                           G_TYPE_STRING, &ret_error,
+                           G_TYPE_INVALID);
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-hold-button") ==
                button)
-        ret = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
-                                 G_TYPE_INT, id,
-                                 G_TYPE_STRING, "indefinite",
-                                 G_TYPE_INVALID,
-                                 G_TYPE_STRING, &ret_error,
-                                 G_TYPE_INVALID);
+        dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
+                           G_TYPE_INT, id,
+                           G_TYPE_STRING, "indefinite",
+                           G_TYPE_INVALID,
+                           G_TYPE_STRING, &ret_error,
+                           G_TYPE_INVALID);
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-release-button") ==
                button)
-        ret = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
-                                 G_TYPE_INT, id,
-                                 G_TYPE_STRING, "no-hold",
-                                 G_TYPE_INVALID,
-                                 G_TYPE_STRING, &ret_error,
-                                 G_TYPE_INVALID);
+        dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
+                           G_TYPE_INT, id,
+                           G_TYPE_STRING, "no-hold",
+                           G_TYPE_INVALID,
+                           G_TYPE_STRING, &ret_error,
+                           G_TYPE_INVALID);
 
       g_object_unref (proxy);
 
@@ -1154,7 +1149,6 @@ printer_disable_cb (GtkToggleButton *togglebutton,
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   DBusGProxy             *proxy;
-  gboolean                ret = FALSE;
   gboolean                paused = FALSE;
   GError                 *error = NULL;
   char                   *ret_error = NULL;
@@ -1183,12 +1177,12 @@ printer_disable_cb (GtkToggleButton *togglebutton,
       if (!proxy)
         return;
 
-      ret = dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
-                               G_TYPE_STRING, name,
-                               G_TYPE_BOOLEAN, paused,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
+      dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
+                         G_TYPE_STRING, name,
+                         G_TYPE_BOOLEAN, paused,
+                         G_TYPE_INVALID,
+                         G_TYPE_STRING, &ret_error,
+                         G_TYPE_INVALID);
 
       g_object_unref (proxy);
 
@@ -1349,7 +1343,6 @@ allowed_user_remove_cb (GtkButton *button,
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   DBusGProxy             *proxy;
-  gboolean                ret = FALSE;
   GError                 *error = NULL;
   char                   *ret_error = NULL;
   char                   *printer_name = NULL;
@@ -1387,12 +1380,12 @@ allowed_user_remove_cb (GtkButton *button,
             }
         }
 
-      ret = dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
-                               G_TYPE_STRING, printer_name,
-                               G_TYPE_STRV, names,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
+      dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
+                         G_TYPE_STRING, printer_name,
+                         G_TYPE_STRV, names,
+                         G_TYPE_INVALID,
+                         G_TYPE_STRING, &ret_error,
+                         G_TYPE_INVALID);
 
       g_object_unref (proxy);
 
@@ -1421,7 +1414,6 @@ allowed_user_add_cb (GtkCellRendererText *renderer,
   CcPrintersPanelPrivate  *priv;
   CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
   DBusGProxy              *proxy;
-  gboolean                 ret = FALSE;
   GError                  *error = NULL;
   char                    *ret_error = NULL;
   char                    *printer_name = NULL;
@@ -1452,12 +1444,12 @@ allowed_user_add_cb (GtkCellRendererText *renderer,
         names[i] = priv->allowed_users[i];
       names[priv->num_allowed_users] = new_text;
 
-      ret = dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
-                               G_TYPE_STRING, printer_name,
-                               G_TYPE_STRV, names,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
+      dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
+                         G_TYPE_STRING, printer_name,
+                         G_TYPE_STRV, names,
+                         G_TYPE_INVALID,
+                         G_TYPE_STRING, &ret_error,
+                         G_TYPE_INVALID);
 
       g_object_unref (proxy);
 
@@ -1530,7 +1522,6 @@ printer_set_default_cb (GtkToggleButton *button,
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   DBusGProxy             *proxy;
-  gboolean                ret = FALSE;
   GError                 *error = NULL;
   char                   *ret_error = NULL;
   char                   *name = NULL;
@@ -1549,11 +1540,11 @@ printer_set_default_cb (GtkToggleButton *button,
       if (!proxy)
         return;
 
-      ret = dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
-                               G_TYPE_STRING, name,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
+      dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
+                         G_TYPE_STRING, name,
+                         G_TYPE_INVALID,
+                         G_TYPE_STRING, &ret_error,
+                         G_TYPE_INVALID);
 
       g_object_unref (proxy);
 
