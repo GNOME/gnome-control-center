@@ -55,6 +55,8 @@ struct _CcPrintersPanelPrivate
   int num_allowed_users;
   int current_allowed_user;
 
+  GdkRGBA background_color;
+
   gpointer dummy;
 };
 
@@ -1219,6 +1221,8 @@ supply_levels_draw_cb (GtkWidget *widget,
   gchar                  *marker_colors = NULL;
   gchar                  *marker_names = NULL;
   gchar                  *tooltip_text = NULL;
+  gint                    width;
+  gint                    height;
   int                     i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -1227,6 +1231,13 @@ supply_levels_draw_cb (GtkWidget *widget,
       priv->current_dest < priv->num_dests &&
       priv->dests != NULL)
     {
+      width = gtk_widget_get_allocated_width (widget);
+      height = gtk_widget_get_allocated_height (widget);
+
+      cairo_rectangle (cr, 0.0, 0.0, width, height);
+      gdk_cairo_set_source_rgba (cr, &priv->background_color);
+      cairo_fill (cr);
+
       for (i = 0; i < priv->dests[priv->current_dest].num_options; i++)
         {
           if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-names") == 0)
@@ -1243,8 +1254,6 @@ supply_levels_draw_cb (GtkWidget *widget,
           gchar **marker_colorsv = NULL;
           gchar **marker_namesv = NULL;
           gchar  *tmp = NULL;
-          gint    width;
-          gint    height;
 
           widget = (GtkWidget*)
             gtk_builder_get_object (priv->builder, "supply-drawing-area");
@@ -1253,9 +1262,6 @@ supply_levels_draw_cb (GtkWidget *widget,
           marker_colorsv = g_strsplit (marker_colors, ",", -1);
           marker_namesv = g_strsplit (marker_names, ",", -1);
   
-          width = gtk_widget_get_allocated_width (widget);
-          height = gtk_widget_get_allocated_height (widget);
-
           width = width < SUPPLY_BAR_WIDTH ? width : SUPPLY_BAR_WIDTH;
           for (i = 0; i < g_strv_length (marker_levelsv); i++)
             {
@@ -1758,6 +1764,9 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "clean-print-heads-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
 
+  gtk_style_context_get_background_color (gtk_widget_get_style_context (top_widget),
+                                          GTK_STATE_FLAG_NORMAL,
+                                          &priv->background_color);
 
   populate_printers_list (self);
   populate_jobs_list (self);
