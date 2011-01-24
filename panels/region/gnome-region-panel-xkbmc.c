@@ -299,18 +299,19 @@ xkb_model_chooser_response (GtkDialog * dialog,
 			g_free (model_name);
 		}
 	}
+	gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 void
 choose_model (GtkBuilder * dialog)
 {
 	GtkBuilder *chooser_dialog;
-    GtkWidget *chooser;
-    
-    chooser_dialog = gtk_builder_new ();
-    gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
-                               "/gnome-region-panel-model-chooser.ui",
-                               NULL);
+	GtkWidget *chooser;
+
+	chooser_dialog = gtk_builder_new ();
+	gtk_builder_add_from_file (chooser_dialog, GNOMECC_UI_DIR
+				   "/gnome-region-panel-model-chooser.ui",
+				   NULL);
 	chooser = CWID ("xkb_model_chooser");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),
 				      GTK_WINDOW (WID
@@ -331,7 +332,6 @@ choose_model (GtkBuilder * dialog)
 			  "response",
 			  G_CALLBACK (xkb_model_chooser_response),
 			  chooser_dialog);
-	gtk_dialog_run (GTK_DIALOG (chooser));
-	gtk_widget_destroy (chooser);
+	gtk_widget_show (chooser);
 	g_free (current_model_name);
 }

@@ -404,6 +404,7 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 	gtk_window_get_size (GTK_WINDOW (dialog), &rect.width,
 			     &rect.height);
 	gkbd_preview_save_position (&rect);
+	gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 void
@@ -505,8 +506,7 @@ xkb_layout_choose (GtkBuilder * dialog)
 	}
 
 	xkb_layout_preview_update (chooser_dialog);
-	gtk_dialog_run (GTK_DIALOG (chooser));
-	gtk_widget_destroy (chooser);
+	gtk_widget_show (chooser);
 }
 
 gchar *
