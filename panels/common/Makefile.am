@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = common
+
 noinst_LTLIBRARIES = liblanguage.la
 
 AM_CPPFLAGS =						\
