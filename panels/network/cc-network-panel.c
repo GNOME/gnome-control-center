@@ -1918,10 +1918,10 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
 	/* disable for now */
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "button_add"));
+						     "add_toolbutton"));
 	gtk_widget_set_sensitive (widget, FALSE);
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-						     "button_remove"));
+						     "remove_toolbutton"));
 	gtk_widget_set_sensitive (widget, FALSE);
 	widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
 						     "button_unlock"));
