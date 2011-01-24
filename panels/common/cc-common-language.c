@@ -106,11 +106,10 @@ cc_common_language_sort_languages (GtkTreeModel *model,
         return result;
 }
 
-#if 0
 gboolean
-um_get_iter_for_language (GtkTreeModel *model,
-                          const gchar  *lang,
-                          GtkTreeIter  *iter)
+cc_common_language_get_iter_for_language (GtkTreeModel *model,
+					  const gchar  *lang,
+					  GtkTreeIter  *iter)
 {
         char *l;
         char *name;
@@ -140,6 +139,7 @@ um_get_iter_for_language (GtkTreeModel *model,
         return FALSE;
 }
 
+#if 0
 static void
 row_activated (GtkTreeView       *tree_view,
                GtkTreePath       *path,

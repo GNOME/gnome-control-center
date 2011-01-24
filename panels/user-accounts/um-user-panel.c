@@ -57,6 +57,8 @@
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
 
+#include "cc-common-language.h"
+
 G_DEFINE_DYNAMIC_TYPE (UmUserPanel, um_user_panel, CC_TYPE_PANEL)
 
 #define UM_USER_PANEL_PRIVATE(o) \
@@ -528,7 +530,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         lang = g_strdup (um_user_get_language (user));
         if (!lang)
                 lang = um_get_current_language ();
-        um_get_iter_for_language (model, lang, &iter);
+        cc_common_language_get_iter_for_language (model, lang, &iter);
         um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), &iter);
         g_free (lang);
 
@@ -627,7 +629,7 @@ language_response (GtkDialog         *dialog,
                 if (!lang)
                         lang = um_get_current_language ();
         }
-        um_get_iter_for_language (model, lang, &iter);
+        cc_common_language_get_iter_for_language (model, lang, &iter);
         um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (combo), &iter);
         g_free (lang);
 

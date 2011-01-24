@@ -31,9 +31,6 @@ typedef struct _UmLanguageDialog UmLanguageDialog;
 
 void              um_add_user_languages       (GtkTreeModel     *model);
 gchar            *um_get_current_language     (void);
-gboolean          um_get_iter_for_language    (GtkTreeModel     *model,
-                                               const gchar      *lang,
-                                               GtkTreeIter      *iter);
 
 GtkWidget        *um_language_chooser_new          (void);
 gchar            *um_language_chooser_get_language (GtkWidget *chooser);

@@ -29,9 +29,6 @@ G_BEGIN_DECLS
 #if 0
 void              um_add_user_languages       (GtkTreeModel     *model);
 gchar            *um_get_current_language     (void);
-gboolean          um_get_iter_for_language    (GtkTreeModel     *model,
-                                               const gchar      *lang,
-                                               GtkTreeIter      *iter);
 
 GtkWidget        *um_language_chooser_new          (void);
 gchar            *um_language_chooser_get_language (GtkWidget *chooser);
@@ -41,6 +38,10 @@ gint cc_common_language_sort_languages (GtkTreeModel *model,
 					GtkTreeIter  *a,
 					GtkTreeIter  *b,
 					gpointer      data);
+gboolean cc_common_language_get_iter_for_language (GtkTreeModel     *model,
+						   const gchar      *lang,
+						   GtkTreeIter      *iter);
+
 
 G_END_DECLS
 
