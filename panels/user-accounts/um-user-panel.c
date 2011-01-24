@@ -896,7 +896,7 @@ on_permission_changed (GPermission *permission,
         is_authorized = g_permission_get_allowed (G_PERMISSION (d->permission));
         self_selected = um_user_get_uid (user) == geteuid ();
 
-        widget = get_widget (d, "add-user-button");
+        widget = get_widget (d, "add-user-toolbutton");
         gtk_widget_set_sensitive (widget, is_authorized);
         if (is_authorized) {
                 setup_tooltip_with_embedded_icon (widget, _("Create a user"), NULL, NULL);
@@ -916,7 +916,7 @@ on_permission_changed (GPermission *permission,
                 g_object_unref (icon);
         }
 
-        widget = get_widget (d, "delete-user-button");
+        widget = get_widget (d, "delete-user-toolbutton");
         gtk_widget_set_sensitive (widget, is_authorized && !self_selected);
         if (is_authorized) {
                 setup_tooltip_with_embedded_icon (widget, _("Delete the selected user"), NULL, NULL);
@@ -1135,10 +1135,10 @@ setup_main_window (UmUserPanelPrivate *d)
         g_signal_connect (selection, "changed", G_CALLBACK (selected_user_changed), d);
         gtk_tree_selection_set_select_function (selection, dont_select_headings, NULL, NULL);
 
-        button = get_widget (d, "add-user-button");
+        button = get_widget (d, "add-user-toolbutton");
         g_signal_connect (button, "clicked", G_CALLBACK (add_user), d);
 
-        button = get_widget (d, "delete-user-button");
+        button = get_widget (d, "delete-user-toolbutton");
         g_signal_connect (button, "clicked", G_CALLBACK (delete_user), d);
 
         button = get_widget (d, "user-icon-nonbutton");
@@ -1180,7 +1180,7 @@ setup_main_window (UmUserPanelPrivate *d)
                 d->lock_button = button;
         }
 
-        button = get_widget (d, "add-user-button");
+        button = get_widget (d, "add-user-toolbutton");
         names[0] = "changes-prevent-symbolic";
         names[1] = "changes-prevent";
         names[2] = NULL;
@@ -1189,7 +1189,7 @@ setup_main_window (UmUserPanelPrivate *d)
                                           _("To create a user,\nclick the * icon first"),
                                           "*",
                                           icon);
-        button = get_widget (d, "delete-user-button");
+        button = get_widget (d, "delete-user-toolbutton");
         setup_tooltip_with_embedded_icon (button,
                                           _("To delete the selected user,\nclick the * icon first"),
                                           "*",

@@ -38,14 +38,6 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkImage" id="plus">
-    <property name="pixel_size">12</property>
-    <property name="icon_name">list-add</property>
-  </object>
-  <object class="GtkImage" id="minus">
-    <property name="pixel_size">12</property>
-    <property name="icon_name">list-remove</property>
-  </object>
   <object class="GtkWindow" id="user-account-window">
     <property name="border_width">12</property>
     <property name="title" translatable="yes">Account Information</property>
@@ -69,7 +61,7 @@
                   <object class="GtkVBox" id="userlist-vbox">
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">2</property>
+                    <property name="spacing">0</property>
                     <child>
                       <object class="GtkScrolledWindow" id="scrolledwindow1">
                         <property name="visible">True</property>
@@ -90,35 +82,29 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="add-delete-buttonbox">
+                      <object class="GtkToolbar" id="add-remove-toolbar">
                         <property name="visible">True</property>
-                        <property name="spacing">2</property>
+                        <property name="icon_size">1</property>
                         <child>
-                          <object class="GtkButton" id="add-user-button">
+                          <object class="GtkToolButton" id="add-user-toolbutton">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="tooltip_text" translatable="yes">Create a user</property>
-                            <property name="image">plus</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon_name">list-add-symbolic</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
+                            <property name="homogeneous">True</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="delete-user-button">
+                          <object class="GtkToolButton" id="remove-user-toolbutton">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="tooltip_text" translatable="yes">Delete the selected user</property>
-                            <property name="image">minus</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon_name">list-remove-symbolic</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
+                            <property name="homogeneous">True</property>
                           </packing>
                         </child>
                       </object>
