@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2011-01-21 21:10+0000\n"
-"PO-Revision-Date: 2011-01-22 18:59+0530\n"
+"POT-Creation-Date: 2011-01-25 00:01+0000\n"
+"PO-Revision-Date: 2011-01-25 02:38+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.2\n"
-"Language: pa"
+"Language: pa\n"
 
 #: ../gnome-control-center.schemas.in.h:1
 msgid "Current network location"
@@ -251,6 +251,15 @@ msgstr "ਕਈ ਸਾਈਜ਼"
 msgid "%d × %d"
 msgstr "%d × %d"
 
+#: ../panels/common/cc-common-language.c:304
+#: ../panels/user-accounts/um-language-dialog.c:151
+msgid "Other..."
+msgstr "...ਹੋਰ"
+
+#: ../panels/common/gdm-languages.c:709
+msgid "Unspecified"
+msgstr "ਅਣਦੱਸੀ"
+
 #: ../panels/datetime/datetime.ui.h:1
 msgid "16"
 msgstr "੧੬"
@@ -370,7 +379,6 @@ msgid "Normal"
 msgstr "ਆਮ"
 
 #: ../panels/display/display-capplet.ui.h:4
-#| msgid "<i>Note: may limit resolution options</i>"
 msgid "Note: may limit resolution options"
 msgstr "ਨੋਟ: ਰੈਜ਼ੋਲੂਸ਼ਨ ਚੋਣਾਂ ਸੀਮਿਤ ਹੋ ਸਕਦੀਆਂ ਹਨ"
 
@@ -474,7 +482,6 @@ msgstr "ਸਕਰੀਨ ਜਾਣਕਾਰੀ ਲਈ ਨਹੀਂ ਜਾ ਸਕ�
 #. * "64-bit" or "32-bit"
 #: ../panels/info/cc-info-panel.c:247
 #, c-format
-#| msgid "Edit"
 msgid "%d-bit"
 msgstr "%d-ਬਿੱਟ"
 
@@ -516,7 +523,6 @@ msgid "%.1f EB"
 msgstr "%.1f EB"
 
 #: ../panels/info/cc-info-panel.c:404
-#| msgid "Unknown time"
 msgid "Unknown model"
 msgstr "ਅਣਜਾਣ ਮਾਡਲ"
 
@@ -541,7 +547,6 @@ msgstr ""
 "ਪਰੋਸੈਸਰ;ਵਰਜਨ;ਪ੍ਰੋਸੈਸਰ;"
 
 #: ../panels/info/info.ui.h:1
-#| msgid "_Device:"
 msgid "Device name:"
 msgstr "ਜੰਤਰ ਮਾਡਲ:"
 
@@ -554,22 +559,18 @@ msgid "Memory:"
 msgstr "ਮੈਮੋਰੀ:"
 
 #: ../panels/info/info.ui.h:4
-#| msgid "System Info"
 msgid "More Info"
 msgstr "ਹੋਰ ਜਾਣਕਾਰੀ"
 
 #: ../panels/info/info.ui.h:5
-#| msgid "Style:"
 msgid "OS type:"
 msgstr "OS ਕਿਸਮ:"
 
 #: ../panels/info/info.ui.h:6
-#| msgid "_Profession:"
 msgid "Processor:"
 msgstr "ਪਰੋਸੈਸਰ:"
 
 #: ../panels/info/info.ui.h:7
-#| msgid "Unavailable"
 msgid "Update Available"
 msgstr "ਅੱਪਡੇਟ ਉਪਲੱਬਧ"
 
@@ -775,15 +776,12 @@ msgid "Slow"
 msgstr "ਹੌਲੀ"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-#| msgid ""
-#| "To edit a shortcut key, click on the corresponding row and type a new key "
-#| "combination, or press backspace to clear."
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
 msgstr ""
-"ਸ਼ਾਰਟਕੱਟ ਸੋਧਣ ਲਈ, ਕਤਾਰ ਕਲਿੱਕ ਕਰੋ ਅਤੇ ਨਵੀਆਂ ਸਵਿੱਚ ਹੋਲਡ ਕਰਕੇ ਰੱਖੋ ਜਾਂ "
-"ਬੈਕਸਪੇਸ ਸਾਫ਼ ਕਰਨ ਲਈ ਵਰਤੋਂ।"
+"ਸ਼ਾਰਟਕੱਟ ਸੋਧਣ ਲਈ, ਕਤਾਰ ਕਲਿੱਕ ਕਰੋ ਅਤੇ ਨਵੀਆਂ ਸਵਿੱਚ ਹੋਲਡ ਕਰਕੇ ਰੱਖੋ ਜਾਂ ਬੈਕਸਪੇਸ "
+"ਸਾਫ਼ ਕਰਨ ਲਈ ਵਰਤੋਂ।"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 msgid "_Delay:"
@@ -798,10 +796,12 @@ msgid "_Speed:"
 msgstr "ਸਪੀਡ(_S):"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
+#: ../panels/network/network.ui.h:25
 msgid "add-toolbutton"
 msgstr "ਐਡ-ਟੂਲਬਟਨ"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
+#: ../panels/network/network.ui.h:29
 msgid "remove-toolbutton"
 msgstr "ਹਟਾਓ-ਟੂਲਬਟਨ"
 
@@ -810,12 +810,10 @@ msgid "Ask what to do"
 msgstr "ਪੁੱਛੋ ਕਿ ਕੀ ਕਰਨਾ ਹੈ"
 
 #: ../panels/media/cc-media-panel.c:325 ../panels/power/power.ui.h:8
-#| msgid "Do Nothing"
 msgid "Do nothing"
 msgstr "ਕੁਝ ਨਹੀਂ"
 
 #: ../panels/media/cc-media-panel.c:329
-#| msgid "Open Folder"
 msgid "Open folder"
 msgstr "ਫੋਲਡਰ ਖੋਲ੍ਹੋ"
 
@@ -876,196 +874,177 @@ msgid "Removable Media"
 msgstr "ਹਟਾਉਣਯੋਗ ਮੀਡਿਆ"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:175
-#| msgid "Locate Pointer"
+#: ../panels/printers/cc-printers-panel.c:210
 msgid "Low on toner"
 msgstr "ਟੋਨਰ ਘੱਟ ਹੈ"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:177
+#: ../panels/printers/cc-printers-panel.c:212
 msgid "Out of toner"
 msgstr "ਟੋਨਰ ਖਤਮ ਹੋ ਗਿਆ"
 
 #. Translators: "Developer" like on photo development context
-#: ../panels/printers/cc-printers-panel.c:179
+#: ../panels/printers/cc-printers-panel.c:214
 msgid "Low on developer"
 msgstr "ਡਿਵੈਲਪਰ ਲਈ ਘੱਟ"
 
 #. Translators: "Developer" like on photo development context
-#: ../panels/printers/cc-printers-panel.c:181
+#: ../panels/printers/cc-printers-panel.c:216
 msgid "Out of developer"
 msgstr "ਡਿਵੈਲਪਰ ਲਈ ਖਤਮ"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:183
+#: ../panels/printers/cc-printers-panel.c:218
 msgid "Low on a marker supply"
 msgstr "ਮਾਰਕਰ ਸਪਲਾਈ ਲਈ ਘੱਟ"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:185
+#: ../panels/printers/cc-printers-panel.c:220
 msgid "Out of a marker supply"
 msgstr "ਮਾਰਕਰ ਸਪਲਾਈ ਲਈ ਖਤਮ"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:187
-#| msgid "Open Folder"
+#: ../panels/printers/cc-printers-panel.c:222
 msgid "Open cover"
 msgstr "ਕਵਰ ਖੋਲ੍ਹੋ"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:189
-#| msgid "Open Folder"
+#: ../panels/printers/cc-printers-panel.c:224
 msgid "Open door"
 msgstr "ਦਰਵਾਜ਼ਾ ਖੋਲ੍ਹੋ"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:191
+#: ../panels/printers/cc-printers-panel.c:226
 msgid "Low on paper"
 msgstr "ਪੇਪਰ ਖਤਮ ਹੋਣ ਵਾਲੇ ਹਨ"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:193
+#: ../panels/printers/cc-printers-panel.c:228
 msgid "Out of paper"
 msgstr "ਪੇਪਰ ਖਤਮ ਹੋ ਗਏ ਹਨ"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:195
-#| msgid "Off"
+#: ../panels/printers/cc-printers-panel.c:230
 msgid "Offline"
 msgstr "ਆਫਲਾਈਨ"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:197
-#| msgid "Pause"
+#: ../panels/printers/cc-printers-panel.c:232
 msgid "Paused"
 msgstr "ਪੌਜ਼ ਹੈ"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:199
+#: ../panels/printers/cc-printers-panel.c:234
 msgid "Waste receptacle almost full"
 msgstr "ਵੇਸਟ ਰੇਸਪਟਕੇਟ ਲਗਭਗ ਭਰ ਗਿਆ ਹੈ"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:201
+#: ../panels/printers/cc-printers-panel.c:236
 msgid "Waste receptacle full"
 msgstr "ਵੇਸਟ ਰੇਸਪਟਕੇਟ ਭਰ ਗਿਆ ਹੈ"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:203
+#: ../panels/printers/cc-printers-panel.c:238
 msgid "The optical photo conductor is near end of life"
 msgstr "ਓਪਟੀਕਲ ਫੋਟੋ ਕੰਡਕਟਰ ਦੀ ਉਮਰ ਖਤਮ ਹੋ ਗਈ ਹੈ"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:205
+#: ../panels/printers/cc-printers-panel.c:240
 msgid "The optical photo conductor is no longer functioning"
 msgstr "ਓਪਟੀਕਲ ਫੋਟੋ ਕੰਡਕਟਰ ਹੁਣ ਕੰਮ ਨਹੀਂ ਕਰਦਾ ਹੈ"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:294
+#: ../panels/printers/cc-printers-panel.c:329
 msgid "Idle"
 msgstr "ਵੇਹਲਾ"
 
 #. Translators: Printer's state (jobs are processing)
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:298
-#: ../panels/printers/cc-printers-panel.c:689
-#| msgid "_Profession:"
+#: ../panels/printers/cc-printers-panel.c:333
+#: ../panels/printers/cc-printers-panel.c:726
 msgid "Processing"
 msgstr "ਪਰੋਸੈਸ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. Translators: Printer's state (no jobs can be processed)
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:302
-#: ../panels/printers/cc-printers-panel.c:693
-#| msgid "Stop"
+#: ../panels/printers/cc-printers-panel.c:337
+#: ../panels/printers/cc-printers-panel.c:730
 msgid "Stopped"
 msgstr "ਰੁਕਿਆ ਹੈ"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:681
-#| msgid "Rendering"
+#: ../panels/printers/cc-printers-panel.c:718
 msgid "Pending"
 msgstr "ਬਾਕੀ ਹੈ"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:685
-#| msgid "Help"
+#: ../panels/printers/cc-printers-panel.c:722
 msgid "Held"
 msgstr "ਹੋਲਡ"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:697
-#| msgid "Cancel"
+#: ../panels/printers/cc-printers-panel.c:734
 msgid "Canceled"
 msgstr "ਰੱਦ ਕੀਤਾ"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:701
-#| msgid "About Me"
+#: ../panels/printers/cc-printers-panel.c:738
 msgid "Aborted"
 msgstr "ਅਧੂਰਾ ਛੱਡਿਆ"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:705
-#| msgid "Connected"
+#: ../panels/printers/cc-printers-panel.c:742
 msgid "Completed"
 msgstr "ਪੂਰਾ ਹੋਇਆ"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:796
-#| msgid "_Title:"
+#: ../panels/printers/cc-printers-panel.c:837
 msgid "Job Title"
 msgstr "ਜਾਬ ਟਾਈਟਲ"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:804
+#: ../panels/printers/cc-printers-panel.c:845
 msgid "Job State"
 msgstr "ਜਾਬ ਹਾਲਤ"
 
 #. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:810
-#| msgid "Username:"
+#: ../panels/printers/cc-printers-panel.c:851
 msgid "User"
 msgstr "ਯੂਜ਼ਰ"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:816
-#| msgid "Tile"
+#: ../panels/printers/cc-printers-panel.c:857
 msgid "Time"
 msgstr "ਸਮਾਂ"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1000
+#: ../panels/printers/cc-printers-panel.c:1047
 #, c-format
-#| msgid "Could not rename %s to %s: %s\n"
 msgid "Could not connect to system bus: %s"
 msgstr "ਸਿਸਟਮ ਬੱਸ ਨਾਲ ਕੁਨੈਕਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1589
-#| msgid "Test Speakers"
+#: ../panels/printers/cc-printers-panel.c:1657
 msgid "Test page"
 msgstr "ਟੈਸਟ ਸਫ਼ਾ"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1597
+#: ../panels/printers/cc-printers-panel.c:1665
 msgid "Clean print heads"
 msgstr "ਪਰਿੰਟ ਹੈੱਡ ਸਾਫ਼ ਕਰੋ"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1600
+#: ../panels/printers/cc-printers-panel.c:1670
 msgid "An error has occured during a maintenance command."
 msgstr "ਮੇਨਟੇਨਸ ਕਮਾਂਡ ਲਈ ਗਲਤੀ ਆਈ ਹੈ।"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1636
+#: ../panels/printers/cc-printers-panel.c:1708
 #, c-format
-#| msgid "Could not load user interface file: %s"
 msgid "Could not load ui: %s"
 msgstr "ui ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
-#| msgid "Change keyboard settings"
 msgid "Change printer settings"
 msgstr "ਪਰਿੰਟਰ ਸੈਟਿੰਗ ਬਦਲੋ"
 
@@ -1075,7 +1054,6 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Printer;Queue;Print;Paper;Ink;Toner;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
-#| msgid "Filters"
 msgid "Printers"
 msgstr "ਪਰਿੰਟਰ"
 
@@ -1104,13 +1082,11 @@ msgstr "ਡਿਫਾਲਟ"
 
 #. Translators: Description of the printer.
 #: ../panels/printers/printers.ui.h:9
-#| msgid "_Description:"
 msgid "Description:"
 msgstr "ਵੇਰਵਾ:"
 
 #. Translators: This button pauses printer.
 #: ../panels/printers/printers.ui.h:11
-#| msgid "Disable image"
 msgid "Disable Printer"
 msgstr "ਪਰਿੰਟਰ ਬੰਦ ਕਰੋ"
 
@@ -1121,7 +1097,7 @@ msgstr "ਹੋਲਡ"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
 #: ../panels/printers/printers.ui.h:15
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
 msgid "Location:"
 msgstr "ਟਿਕਾਣਾ:"
 
@@ -1135,78 +1111,91 @@ msgstr "ਟੈਸਟ ਪੇਜ਼ ਪਰਿੰਟ ਕਰੋ"
 msgid "Printer Jobs"
 msgstr "ਪਰਿੰਟਰ ਜਾਬ"
 
-#. Translators: Print paused print job.
+#. Translators: This shows queue of print jobs.
 #: ../panels/printers/printers.ui.h:21
-#| msgid "Iceweasel"
+msgid "Queue"
+msgstr "ਕਤਾਰ"
+
+#. Translators: Print paused print job.
+#: ../panels/printers/printers.ui.h:23
 msgid "Release"
 msgstr "ਰੀਲਿਜ਼"
 
 #. Translators: Users which are allowed to print on this printer.
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:25
 msgid "Share with these users:"
 msgstr "ਇਹ ਯੂਜ਼ਰ ਨਾਲ ਸਾਂਝਾ ਕਰੋ:"
 
-#: ../panels/printers/printers.ui.h:24
+#: ../panels/printers/printers.ui.h:26
 msgid "Show / hide printer's jobs"
 msgstr "ਪਰਿੰਟਰ ਦਾ ਕੰਮ ਵੇਖੋ / ਓਹਲੇ ਕਰੋ"
 
 #. Translators: Status of the printer.
-#: ../panels/printers/printers.ui.h:26
-#| msgid "Start %s"
+#: ../panels/printers/printers.ui.h:28
 msgid "Status:"
 msgstr "ਹਾਲਤ:"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:28
+#: ../panels/printers/printers.ui.h:30
 msgid "Supply:"
 msgstr "ਸਪਲਾਈ:"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+#| msgid "_Install..."
+msgid "Install languages..."
+msgstr "...ਭਾਸ਼ਾ ਇੰਸਟਾਲ ਕਰੋ"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Keyboard _model:"
 msgstr "ਕੀ-ਬੋਰਡ ਮਾਡਲ(_m):"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:3
+#| msgid "Language:"
+msgid "Language"
+msgstr "ਭਾਸ਼ਾ"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Layouts"
 msgstr "ਲੇਆਉਟ"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:5
 msgid "List of keyboard layouts selected for usage"
 msgstr "ਵਰਤੋਂ ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਦੀ ਲਿਸਟ ਹੈ"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Move _Down"
 msgstr "ਹੇਠਾਂ ਭੇਜੋ(_D)"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Move _Up"
 msgstr "ਉੱਤੇ ਭੇਜੋ(_U)"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Move the selected keyboard layout down in the list"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਨੂੰ ਲਿਸਟ 'ਚ ਹੇਠਾਂ ਕਰੋ"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Move the selected keyboard layout up in the list"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਨੂੰ ਲਿਸਟ ਵਿੱਚ ਉੱਤੇ ਭੇਜੋ"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "New windows u_se active window's layout"
 msgstr "ਨਵੀਆਂ ਵਿੰਡੋਜ਼ ਐਕਟਿਵ ਵਿੰਡੋ ਦਾ ਲੇਆਉਟ ਵਰਤਣ(_s)"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Print a diagram of the selected keyboard layout"
 msgstr "ਚੁਣੇ ਕੀਬੋਰਡ ਲੇਆਉਟ ਦੀ ਸ਼ਕਲ ਪਰਿੰਟ ਕਰੋ"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:12
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "ਖੇਤਰ ਅਤੇ ਭਾਸ਼ਾ"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Remove the selected keyboard layout from the list"
 msgstr "ਚੁਣਿਆ ਕੀਬੋਰਡ ਲੇਆਉਟ ਲਿਸਟ 'ਚੋਂ ਹਟਾ ਦਿਓ"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1214,27 +1203,31 @@ msgstr ""
 "ਮੌਜੂਦਾ ਕੀਬੋਰਡ ਲੇਆਉਟ ਸੈਟਿੰਗ ਨੂੰ ਡਿਫਾਲਟ ਸੈਟਿੰਗ ਨਾਲ ਬਦਲ\n"
 "ਦਿਓ"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Reset to De_faults"
 msgstr "ਡਿਫਾਲਟ ਮੁੜ-ਸੈੱਟ ਕਰੋ(_f)"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:17
+msgid "Select a display language"
+msgstr "ਵੇਖਣ ਲਈ ਭਾਸ਼ਾ ਚੁਣੋ"
+
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Select a keyboard layout to be added to the list"
 msgstr "ਲਿਸਟ 'ਚ ਜੋੜਨ ਲਈ ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੁਣੋ"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:19
 msgid "View and edit keyboard layout options"
 msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੋਣਾਂ ਵੇਖੋ ਤੇ ਸੋਧੋ"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "_Add..."
 msgstr "ਸ਼ਾਮਲ(_A)..."
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "_Options..."
 msgstr "ਚੋਣਾਂ(_O)..."
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "_Separate layout for each window"
 msgstr "ਹਰ ਵਿੰਡੋ ਲਈ ਵੱਖਰਾ ਲੇਆਉਟ(_S)"
 
@@ -1661,20 +1654,17 @@ msgstr "ਅਣ-ਲਾਕ"
 msgid "Username:"
 msgstr "ਯੂਜ਼ਰ ਨਾਂ:"
 
-#: ../panels/network/network.ui.h:25
-#| msgid "Automatic Login:"
+#: ../panels/network/network.ui.h:26
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "ਆਟੋਮੈਟਿਕ"
 
-#: ../panels/network/network.ui.h:26
-#| msgid "January"
+#: ../panels/network/network.ui.h:27
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "ਦਸਤੀ"
 
-#: ../panels/network/network.ui.h:27
-#| msgid "None"
+#: ../panels/network/network.ui.h:28
 msgctxt "proxy method"
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
@@ -1765,26 +1755,18 @@ msgid "%.0lf%% charged"
 msgstr "%.0lf%% ਚਾਰਜ ਹੈ"
 
 #: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
-#| msgid "hour"
-#| msgid_plural "hours"
 msgid "1 hour"
 msgstr "੧ ਘੰਟਾ"
 
 #: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
-#| msgid "minute"
-#| msgid_plural "minutes"
 msgid "10 minutes"
 msgstr "੧੦ ਮਿੰਟ"
 
 #: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
-#| msgid "minute"
-#| msgid_plural "minutes"
 msgid "30 minutes"
 msgstr "੩੦ ਮਿੰਟ"
 
 #: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
-#| msgid "minute"
-#| msgid_plural "minutes"
 msgid "5 minutes"
 msgstr "੫ ਮਿੰਟ"
 
@@ -1817,7 +1799,6 @@ msgid "Shutdown"
 msgstr "ਬੰਦ ਕਰੋ"
 
 #: ../panels/power/power.ui.h:13
-#| msgid "Sound"
 msgid "Suspend"
 msgstr "ਸਸਪੈਂਡ"
 
@@ -1847,20 +1828,14 @@ msgid "Screen brightness and lock settings"
 msgstr "ਸਕਰੀਨ ਚਮਕ ਅਤੇ ਲਾਕ ਸੈਟਿੰਗ"
 
 #: ../panels/screen/screen.ui.h:2
-#| msgid "minute"
-#| msgid_plural "minutes"
 msgid "1 minute"
 msgstr "੧ ਮਿੰਟ"
 
 #: ../panels/screen/screen.ui.h:4
-#| msgid "minute"
-#| msgid_plural "minutes"
 msgid "2 minutes"
 msgstr "੨ ਮਿੰਟ"
 
 #: ../panels/screen/screen.ui.h:5
-#| msgid "minute"
-#| msgid_plural "minutes"
 msgid "3 minutes"
 msgstr "੩ ਮਿੰਟ"
 
@@ -1877,7 +1852,6 @@ msgid "Don't lock when at home"
 msgstr "ਜਦੋਂ ਘਰ ਹੋਵਾਂ ਤਾਂ ਲਾਕ ਨਾ ਕਰੋ"
 
 #: ../panels/screen/screen.ui.h:11
-#| msgid "New Location..."
 msgid "Locations..."
 msgstr "...ਟਿਕਾਣੇ"
 
@@ -1886,7 +1860,6 @@ msgid "Lock"
 msgstr "ਲਾਕ"
 
 #: ../panels/screen/screen.ui.h:13
-#| msgid "Lock Screen"
 msgid "Lock screen after:"
 msgstr "ਇਸ ਦੇ ਬਾਅਦ ਸਕਰੀਨ ਲਾਕ:"
 
@@ -1895,7 +1868,6 @@ msgid "Screen turns off"
 msgstr "ਸਕਰੀਨ ਬੰਦ ਕਰੋ"
 
 #: ../panels/screen/screen.ui.h:15
-#| msgid "Turn on or off:"
 msgid "Turn off after:"
 msgstr "ਇਸ ਦੇ ਬਾਅਦ ਬੰਦ:"
 
@@ -2262,7 +2234,6 @@ msgid "Caribou"
 msgstr "ਕਰੀਬੋਊ"
 
 #: ../panels/universal-access/uap.ui.h:18
-#| msgid "Change constrast:"
 msgid "Change contrast:"
 msgstr "ਕੰਨਟਰਾਸਟ ਬਦਲੋ:"
 
@@ -2534,10 +2505,6 @@ msgstr "ਦੱਬਿਆ"
 msgid "rejected"
 msgstr "ਰੱਦ ਕੀਤਾ"
 
-#: ../panels/user-accounts/gdm-languages.c:709
-msgid "Unspecified"
-msgstr "ਅਣਦੱਸੀ"
-
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
 msgstr "ਪਰਮਾਣਕਿਤਾ ਫੇਲ੍ਹ ਹੋਈ"
@@ -2732,10 +2699,6 @@ msgstr ""
 "<b><big>%s</big></b>\n"
 "ਲਈ ਫਿੰਗਰਪਰਿੰਟ ਵਰਤਣਾ"
 
-#: ../panels/user-accounts/um-language-dialog.c:299
-msgid "Other..."
-msgstr "...ਹੋਰ"
-
 #: ../panels/user-accounts/um-lockbutton.c:373
 msgid "Locked"
 msgstr "ਲਾਕ ਹੈ"
@@ -2875,20 +2838,20 @@ msgstr "'%s' ਨਾਂ ਨਾਲ ਯੂਜ਼ਰ ਪਹਿਲਾਂ ਹੀ ਮ�
 msgid "This user does not exist."
 msgstr "ਇਹ ਯੂਜ਼ਰ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
 
-#: ../panels/user-accounts/um-user-panel.c:353
+#: ../panels/user-accounts/um-user-panel.c:354
 msgid "Failed to delete user"
 msgstr "ਯੂਜ਼ਰ ਹਟਾਉਣ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../panels/user-accounts/um-user-panel.c:413
+#: ../panels/user-accounts/um-user-panel.c:414
 msgid "You cannot delete your own account."
 msgstr "ਤੁਸੀਂ ਆਪਣਾ ਖੁਦ ਦਾ ਅਕਾਊਂਟ ਹਟਾ ਨਹੀਂ ਸਕਦੇ।"
 
-#: ../panels/user-accounts/um-user-panel.c:422
+#: ../panels/user-accounts/um-user-panel.c:423
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s ਹਾਲੇ ਲਾਗਇਨ ਹੈ"
 
-#: ../panels/user-accounts/um-user-panel.c:426
+#: ../panels/user-accounts/um-user-panel.c:427
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -2896,12 +2859,12 @@ msgstr ""
 "ਜਦੋਂ ਯੂਜ਼ਰ ਲਾਗਇਨ ਹੋਵੇ ਤਾਂ ਉਸ ਨੂੰ ਹਟਾਉਣ ਨਾਲ ਸਿਸਟਮ ਖਰਾਬ ਹੋਣ ਦੀ ਹਾਲਤ 'ਚ ਆ ਸਕਦਾ "
 "ਹੈ।"
 
-#: ../panels/user-accounts/um-user-panel.c:435
+#: ../panels/user-accounts/um-user-panel.c:436
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "ਕੀ ਤੁਸੀਂ %s ਦੀਆਂ ਫਾਇਲਾਂ ਰੱਖਣੀਆਂ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:440
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -2909,42 +2872,42 @@ msgstr ""
 "ਘਰ ਡਾਇਰੈਕਟਰੀ, ਮੇਲ ਸਪੂਲ ਅਤੇ ਆਰਜ਼ੀ ਫਾਇਲਾਂ ਨੂੰ ਰੱਖਣਾ ਸੰਭਵ ਹੈ, ਜਦੋਂ ਯੂਜ਼ਰ ਅਕਾਊਂਟ "
 "ਹਟਾਉਣਾ ਹੋਵੇ।"
 
-#: ../panels/user-accounts/um-user-panel.c:442
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid "_Delete Files"
 msgstr "ਫਾਇਲਾਂ ਹਟਾਓ(_D)"
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:444
 msgid "_Keep Files"
 msgstr "ਫਾਇਲਾਂ ਰੱਖੋ(_K)"
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:445
 msgid "_Cancel"
 msgstr "ਰੱਦ ਕਰੋ(_C)"
 
-#: ../panels/user-accounts/um-user-panel.c:468
+#: ../panels/user-accounts/um-user-panel.c:469
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "ਅਕਾਊਂਟ ਬੰਦ ਹੈ"
 
-#: ../panels/user-accounts/um-user-panel.c:477
+#: ../panels/user-accounts/um-user-panel.c:478
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "ਅਗਲੇ ਲਾਗਇਨ ਸਮੇਂ ਸੈੱਟ ਕਰੋ"
 
-#: ../panels/user-accounts/um-user-panel.c:480
+#: ../panels/user-accounts/um-user-panel.c:481
 msgctxt "Password mode"
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
-#: ../panels/user-accounts/um-user-panel.c:828
+#: ../panels/user-accounts/um-user-panel.c:829
 msgid "Failed to contact the accounts service"
 msgstr "ਅਕਾਊਂਟ ਸਰਵਿਸ ਨਾਲ ਸੰਪਰਕ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../panels/user-accounts/um-user-panel.c:830
+#: ../panels/user-accounts/um-user-panel.c:831
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "ਯਕੀਨੀ ਬਣਾਉ ਕਿ ਅਕਾਊਂਟਸਰਵਿਸ (AccountService) ਇੰਸਟਾਲ ਹੈ ਅਤੇ ਯੋਗ ਹੈ"
 
-#: ../panels/user-accounts/um-user-panel.c:863
+#: ../panels/user-accounts/um-user-panel.c:864
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -2952,13 +2915,12 @@ msgstr ""
 "ਬਦਲਾਅ ਕਰਨ ਲਈ,\n"
 "ਪਹਿਲਾਂ * ਆਈਕਾਨ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../panels/user-accounts/um-user-panel.c:901
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Create a user"
 msgstr "ਯੂਜ਼ਰ ਬਣਾਓ"
 
-#: ../panels/user-accounts/um-user-panel.c:912
-#: ../panels/user-accounts/um-user-panel.c:1188
+#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:1189
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -2966,13 +2928,12 @@ msgstr ""
 "ਯੂਜ਼ਰ ਬਣਾਉਣ ਲਈ,\n"
 "ਪਹਿਲਾਂ * ਆਈਕਾਨ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../panels/user-accounts/um-user-panel.c:921
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+#: ../panels/user-accounts/um-user-panel.c:922
 msgid "Delete the selected user"
 msgstr "ਚੁਣਿਆ ਯੂਜ਼ਰ ਹਟਾਓ"
 
-#: ../panels/user-accounts/um-user-panel.c:933
-#: ../panels/user-accounts/um-user-panel.c:1193
+#: ../panels/user-accounts/um-user-panel.c:934
+#: ../panels/user-accounts/um-user-panel.c:1194
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -2980,11 +2941,11 @@ msgstr ""
 "ਚੁਣੇ ਯੂਜ਼ਰ ਨੂੰ ਹਟਾਉਣ ਲਈ,\n"
 "ਪਹਿਲਾਂ * ਆਈਕਾਨ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../panels/user-accounts/um-user-panel.c:1097
+#: ../panels/user-accounts/um-user-panel.c:1098
 msgid "My Account"
 msgstr "ਮੇਰਾ ਅਕਾਊਂਟ"
 
-#: ../panels/user-accounts/um-user-panel.c:1106
+#: ../panels/user-accounts/um-user-panel.c:1107
 msgid "Other Accounts"
 msgstr "ਹੋਰ ਅਕਾਊਂਟ"
 
@@ -3125,21 +3086,28 @@ msgid "Take a photograph"
 msgstr "ਫੋਟੋ ਲਵੋ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+#| msgid ""
+#| "A guest account will allow anyone to temporarily log in to this computer "
+#| "without a password.  For security, remote logins to this account are not "
+#| "allowed.\n"
+#| "\n"
+#| "<b>When the guest user logs out, all files and data associated with the "
+#| "account will be deleted.</b>"
 msgid ""
 "A guest account will allow anyone to temporarily log in to this computer "
 "without a password.  For security, remote logins to this account are not "
 "allowed.\n"
 "\n"
-"<b>When the guest user logs out, all files and data associated with the "
-"account will be deleted.</b>"
+"                    <b>When the guest user logs out, all files and data "
+"associated with the account will be deleted.</b>"
 msgstr ""
 "ਮਹਿਮਾਨ (ਗੈਸਟ) ਅਕਾਊਂਟ ਇਸ ਕੰਪਿਊਟਰ ਉੱਤੇ ਕਿਸੇ ਨੂੰ ਵੀ ਬਿਨਾਂ ਪਾਸਵਰਡ ਲਾਗਇਨ ਕਰਨ ਦਿੰਦਾ "
 "ਹੈ। ਸੁਰੱਖਿਆ "
 "ਕਾਰਨਾਂ ਕਰਕੇ ਇਹ ਅਕਾਊਂਟ ਨਾਲ ਰਿਮੋਟ ਤੋਂ ਲਾਗਇਨ ਮਨਜ਼ੂਰ ਨਹੀਂ ਹਨ।\n"
 "\n"
-"<b>ਜਦੋਂ ਮਹਿਮਾਨ ਯੂਜ਼ਰ ਲਾਗ ਆਉਟ ਕਰੇਗਾ ਤਾਂ ਅਕਾਊਂਟ ਨਾਲ ਸਬੰਧਿਤ ਸਭ ਫਾਇਲਾਂ ਤੇ ਡਾਟੇ "
-"ਨੂੰ ਹਟਾਇਆ "
-"ਜਾਵੇਗਾ।</b>"
+"                    <b>ਜਦੋਂ ਮਹਿਮਾਨ ਯੂਜ਼ਰ ਲਾਗ ਆਉਟ ਕਰੇਗਾ ਤਾਂ ਅਕਾਊਂਟ ਨਾਲ ਸਬੰਧਿਤ "
+"ਸਭ ਫਾਇਲਾਂ ਤੇ "
+"ਡਾਟੇ ਨੂੰ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ।</b>"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
@@ -3165,43 +3133,43 @@ msgstr "ਮਹਿਮਾਨ (ਗੈਸਟ) ਨੂੰ ਇਹ ਕੰਪਿਊਟਰ
 msgid "Automatic Login:"
 msgstr "ਆਟੋਮੈਟਿਕ ਲਾਗਇਨ:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "E-mail address:"
 msgstr "ਈਮੇਲ ਐਡਰੈੱਸ:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "Fingerprint Login:"
 msgstr "ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
 msgid "Language:"
 msgstr "ਭਾਸ਼ਾ:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
 msgid "Login Options"
 msgstr "ਲਾਗਇਨ ਚੋਣ"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
 msgid "Open"
 msgstr "ਖੋਲ੍ਹੋ"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Password:"
 msgstr "ਪਾਸਵਰਡ:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
 msgid "Restrictions:"
 msgstr "ਪਾਬੰਦੀਆਂ:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
 msgid "Show Shutdown, Suspend and Restart actions"
 msgstr "ਬੰਦ ਕਰੋ, ਸਸਪੈਂਡ ਅਤੇ ਮੁੜ-ਚਾਲੂ ਕਾਰਵਾਈਆਂ ਵੇਖੋ"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:24
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
 msgid "Show list of users"
 msgstr "ਯੂਜ਼ਰ ਦੀ ਲਿਸਟ ਵੇਖੋ"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
 msgid "Show password hints"
 msgstr "ਪਾਸਵਰਡ ਇਸ਼ਾਰੇ ਵੇਖੋ"
 
@@ -4537,9 +4505,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "_Fixed width font:"
 #~ msgstr "ਸਥਿਰ ਚੌੜਾਈ ਫੋਂਟ(_F):"
-
-#~ msgid "_Install..."
-#~ msgstr "ਇੰਸਟਾਲ(_I)..."
 
 #~ msgid "_Medium"
 #~ msgstr "ਮੱਧਮ(_M)"
