@@ -141,6 +141,7 @@ activate_panel (GnomeControlCenter *shell,
 
           /* set the title of the window */
           gtk_window_set_title (GTK_WINDOW (priv->window), name);
+          gtk_window_set_default_icon_name (icon_name);
           gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
 
           gtk_widget_show (panel);
@@ -176,6 +177,7 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
 
   /* reset window title and icon */
   gtk_window_set_title (GTK_WINDOW (priv->window), priv->default_window_title);
+  gtk_window_set_default_icon_name (priv->default_window_icon);
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
                             priv->default_window_icon);
 }
