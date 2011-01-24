@@ -421,7 +421,8 @@ chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 		/* capplet_help (GTK_WINDOW (dialog),
 		   "prefs-keyboard-layoutoptions"); */
 		break;
-	case GTK_RESPONSE_CLOSE:{
+	case GTK_RESPONSE_DELETE_EVENT:
+	case GTK_RESPONSE_CLOSE: {
 			/* just cleanup */
 			GSList *expanders_list =
 			    g_object_get_data (G_OBJECT (dialog),
@@ -455,8 +456,7 @@ xkb_options_popup_dialog (GtkBuilder * dialog)
 
 	g_signal_connect (chooser, "response",
 			  G_CALLBACK (chooser_response_cb), dialog);
-
-	gtk_dialog_run (GTK_DIALOG (chooser));
+	gtk_widget_show (chooser);
 }
 
 /* Update selected option counters for a group-bound expander */
