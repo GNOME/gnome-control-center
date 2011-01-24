@@ -148,9 +148,10 @@ row_activated (GtkTreeView       *tree_view,
 {
         gtk_dialog_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
 }
+#endif
 
-static gboolean
-language_has_font (const gchar *locale)
+gboolean
+cc_common_language_has_font (const gchar *locale)
 {
         const FcCharSet *charset;
         FcPattern       *pattern;
@@ -207,8 +208,8 @@ language_has_font (const gchar *locale)
         return is_displayable;
 }
 
-static void
-add_available_languages (GtkListStore *store)
+void
+cc_common_language_add_available_languages (GtkListStore *store)
 {
         char **languages;
         int i;
@@ -221,7 +222,7 @@ add_available_languages (GtkListStore *store)
         languages = gdm_get_all_language_names ();
 
         for (i = 0; languages[i] != NULL; i++) {
-                if (!language_has_font (languages[i]))
+                if (!cc_common_language_has_font (languages[i]))
                         continue;
 
                 name = gdm_normalize_language_name (languages[i]);
@@ -237,6 +238,7 @@ add_available_languages (GtkListStore *store)
         g_strfreev (languages);
 }
 
+#if 0
 void
 um_add_user_languages (GtkTreeModel *model)
 {
@@ -262,7 +264,7 @@ um_add_user_languages (GtkTreeModel *model)
         for (l = users; l; l = l->next) {
                 user = l->data;
                 lang = um_user_get_language (user);
-                if (!lang || !language_has_font (lang)) {
+                if (!lang || !cc_common_language_has_font (lang)) {
                         continue;
                 }
 

@@ -41,6 +41,8 @@ gint cc_common_language_sort_languages (GtkTreeModel *model,
 gboolean cc_common_language_get_iter_for_language (GtkTreeModel     *model,
 						   const gchar      *lang,
 						   GtkTreeIter      *iter);
+void cc_common_language_add_available_languages (GtkListStore *store);
+gboolean cc_common_language_has_font (const gchar *locale);
 
 
 G_END_DECLS

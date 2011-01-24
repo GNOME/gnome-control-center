@@ -87,94 +87,6 @@ row_activated (GtkTreeView       *tree_view,
         gtk_dialog_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
 }
 
-static gboolean
-language_has_font (const gchar *locale)
-{
-        const FcCharSet *charset;
-        FcPattern       *pattern;
-        FcObjectSet     *object_set;
-        FcFontSet       *font_set;
-        gchar           *language_code;
-        gboolean         is_displayable;
-
-        is_displayable = FALSE;
-        pattern = NULL;
-        object_set = NULL;
-        font_set = NULL;
-
-        if (!gdm_parse_language_name (locale, &language_code, NULL, NULL, NULL))
-                return FALSE;
-
-        charset = FcLangGetCharSet ((FcChar8 *) language_code);
-        if (!charset) {
-                /* fontconfig does not know about this language */
-                is_displayable = TRUE;
-        }
-        else {
-                /* see if any fonts support rendering it */
-                pattern = FcPatternBuild (NULL, FC_LANG, FcTypeString, language_code, NULL);
-
-                if (pattern == NULL)
-                        goto done;
-
-                object_set = FcObjectSetCreate ();
-
-                if (object_set == NULL)
-                        goto done;
-
-                font_set = FcFontList (NULL, pattern, object_set);
-
-                if (font_set == NULL)
-                        goto done;
-
-                is_displayable = (font_set->nfont > 0);
-        }
-
- done:
-        if (font_set != NULL)
-                FcFontSetDestroy (font_set);
-
-        if (object_set != NULL)
-                FcObjectSetDestroy (object_set);
-
-        if (pattern != NULL)
-                FcPatternDestroy (pattern);
-
-        g_free (language_code);
-
-        return is_displayable;
-}
-
-static void
-add_available_languages (GtkListStore *store)
-{
-        char **languages;
-        int i;
-        char *name;
-        char *language;
-        GtkTreeIter iter;
-
-        gtk_list_store_clear (store);
-
-        languages = gdm_get_all_language_names ();
-
-        for (i = 0; languages[i] != NULL; i++) {
-                if (!language_has_font (languages[i]))
-                        continue;
-
-                name = gdm_normalize_language_name (languages[i]);
-                language = gdm_get_language_from_name (name, NULL);
-
-                gtk_list_store_append (store, &iter);
-                gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
-
-                g_free (name);
-                g_free (language);
-        }
-
-        g_strfreev (languages);
-}
-
 void
 um_add_user_languages (GtkTreeModel *model)
 {
@@ -199,7 +111,7 @@ um_add_user_languages (GtkTreeModel *model)
         for (l = users; l; l = l->next) {
                 user = l->data;
                 lang = um_user_get_language (user);
-                if (!lang || !language_has_font (lang)) {
+                if (!lang || !cc_common_language_has_font (lang)) {
                         continue;
                 }
 
@@ -300,7 +212,7 @@ um_language_chooser_new (void)
 
         gtk_tree_view_set_model (GTK_TREE_VIEW (list), GTK_TREE_MODEL (store));
 
-        add_available_languages (store);
+        cc_common_language_add_available_languages (store);
 
         g_object_unref (builder);
 
