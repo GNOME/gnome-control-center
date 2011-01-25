@@ -94,6 +94,7 @@ enum {
         TITLE_COL,
         HEADING_ROW_COL,
         SORT_KEY_COL,
+        AUTOLOGIN_COL,
         NUM_USER_LIST_COLS
 };
 
@@ -132,6 +133,7 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         GtkTreeSelection *selection;
         gint sort_key;
         gchar *escaped_name;
+        gboolean is_autologin;
 
         g_debug ("user added: %d %s\n", um_user_get_uid (user), um_user_get_real_name (user));
         widget = get_widget (d, "list-treeview");
@@ -145,6 +147,8 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
                                 escaped_name,
                                 um_account_type_get_name (um_user_get_account_type (user)));
         g_free (escaped_name);
+
+        is_autologin = um_user_get_automatic_login (user);
 
         if (um_user_get_uid (user) == getuid ()) {
                 sort_key = 1;
@@ -162,6 +166,7 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
                             TITLE_COL, NULL,
                             HEADING_ROW_COL, FALSE,
                             SORT_KEY_COL, sort_key,
+                            AUTOLOGIN_COL, is_autologin,
                             -1);
         g_object_unref (pixbuf);
         g_free (text);
@@ -257,6 +262,7 @@ user_changed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         UmUser *current;
         GdkPixbuf *pixbuf;
         char *text;
+        gboolean is_autologin;
 
         tv = (GtkTreeView *)get_widget (d, "list-treeview");
         model = gtk_tree_view_get_model (tv);
@@ -270,11 +276,13 @@ user_changed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
                         text = g_strdup_printf ("<b>%s</b>\n<i>%s</i>",
                                                 um_user_get_display_name (user),
                                                 um_account_type_get_name (um_user_get_account_type (user)));
+                        is_autologin = um_user_get_automatic_login (user);
 
                         gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                                             USER_COL, user,
                                             FACE_COL, pixbuf,
                                             NAME_COL, text,
+                                            AUTOLOGIN_COL, is_autologin,
                                             -1);
                         g_object_unref (pixbuf);
                         g_free (text);
@@ -487,6 +495,36 @@ get_password_mode_text (UmUser *user)
 }
 
 static void
+autologin_changed (GObject            *object,
+                   GParamSpec         *pspec,
+                   UmUserPanelPrivate *d)
+{
+        gboolean active;
+        UmUser *user;
+
+        active = gtk_switch_get_active (GTK_SWITCH (object));
+        user = get_selected_user (d);
+
+        if (active != um_user_get_automatic_login (user)) {
+                um_user_set_automatic_login (user, active);
+                if (um_user_get_automatic_login (user)) {
+                        GSList *list;
+                        GSList *l;
+                        list = um_user_manager_list_users (d->um);
+                        for (l = list; l != NULL; l = l->next) {
+                                UmUser *u = l->data;
+                                if (um_user_get_uid (u) != um_user_get_uid (user)) {
+                                        um_user_set_automatic_login (user, FALSE);
+                                }
+                        }
+                        g_slist_free (list);
+                }
+        }
+
+        g_object_unref (user);
+}
+
+static void
 show_user (UmUser *user, UmUserPanelPrivate *d)
 {
         GtkWidget *image;
@@ -517,6 +555,11 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
 
         widget = get_widget (d, "account-password-button");
         um_editable_button_set_text (UM_EDITABLE_BUTTON (widget), get_password_mode_text (user));
+
+        widget = get_widget (d, "autologin-switch");
+        g_signal_handlers_block_by_func (widget, autologin_changed, d);
+        gtk_switch_set_active (GTK_SWITCH (widget), um_user_get_automatic_login (user));
+        g_signal_handlers_unblock_by_func (widget, autologin_changed, d);
 
         widget = get_widget (d, "account-language-combo");
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (widget));
@@ -900,10 +943,14 @@ on_permission_changed (GPermission *permission,
         if (is_authorized) {
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-type-combo"));
+                gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), TRUE);
+                remove_unlock_tooltip (get_widget (d, "autologin-switch"));
         }
         else {
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-type-combo"));
+                gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), FALSE);
+                add_unlock_tooltip (get_widget (d, "autologin-switch"));
         }
 
         if (is_authorized || self_selected) {
@@ -1005,6 +1052,27 @@ match_user (GtkTreeModel *model,
 }
 
 static void
+autologin_cell_data_func (GtkTreeViewColumn    *tree_column,
+                          GtkCellRenderer      *cell,
+                          GtkTreeModel         *model,
+                          GtkTreeIter          *iter,
+                          UmUserPanelPrivate   *d)
+{
+        gboolean is_autologin;
+
+        gtk_tree_model_get (model,
+                            iter,
+                            AUTOLOGIN_COL, &is_autologin,
+                            -1);
+
+        if (is_autologin) {
+                g_object_set (cell, "icon-name", "emblem-default-symbolic", NULL);
+        } else {
+                g_object_set (cell, "icon-name", NULL, NULL);
+        }
+}
+
+static void
 setup_main_window (UmUserPanelPrivate *d)
 {
         GtkWidget *userlist;
@@ -1029,7 +1097,8 @@ setup_main_window (UmUserPanelPrivate *d)
                                     G_TYPE_BOOLEAN,
                                     G_TYPE_STRING,
                                     G_TYPE_BOOLEAN,
-                                    G_TYPE_INT);
+                                    G_TYPE_INT,
+                                    G_TYPE_BOOLEAN);
         model = (GtkTreeModel *)store;
         gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (model), sort_users, NULL, NULL);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID, GTK_SORT_ASCENDING);
@@ -1049,6 +1118,7 @@ setup_main_window (UmUserPanelPrivate *d)
                             TITLE_COL, title,
                             HEADING_ROW_COL, TRUE,
                             SORT_KEY_COL, 0,
+                            AUTOLOGIN_COL, FALSE,
                             -1);
         g_free (title);
 
@@ -1058,6 +1128,7 @@ setup_main_window (UmUserPanelPrivate *d)
                             TITLE_COL, title,
                             HEADING_ROW_COL, TRUE,
                             SORT_KEY_COL, 2,
+                            AUTOLOGIN_COL, FALSE,
                             -1);
         g_free (title);
 
@@ -1077,6 +1148,16 @@ setup_main_window (UmUserPanelPrivate *d)
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", HEADING_ROW_COL);
 
         gtk_tree_view_append_column (GTK_TREE_VIEW (userlist), column);
+
+        cell = gtk_cell_renderer_pixbuf_new ();
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_pack_start (column, cell, FALSE);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (userlist), column);
+        gtk_tree_view_column_set_cell_data_func (column,
+                                                 cell,
+                                                 (GtkTreeCellDataFunc) autologin_cell_data_func,
+                                                 d,
+                                                 NULL);
 
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (userlist));
         gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
@@ -1103,6 +1184,9 @@ setup_main_window (UmUserPanelPrivate *d)
 
         button = get_widget (d, "account-language-combo");
         g_signal_connect (button, "editing-done", G_CALLBACK (language_changed), d);
+
+        button = get_widget (d, "autologin-switch");
+        g_signal_connect (button, "notify::active", G_CALLBACK (autologin_changed), d);
 
         button = get_widget (d, "account-fingerprint-button");
         g_signal_connect (button, "clicked",
