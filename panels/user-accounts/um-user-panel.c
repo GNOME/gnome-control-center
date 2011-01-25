@@ -733,7 +733,7 @@ language_changed (UmEditableCombo    *combo,
         cursor = gdk_cursor_new (GDK_WATCH);
         gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)),
                                cursor);
-        gdk_cursor_unref (cursor);
+        g_object_unref (cursor);
 
         d->language_chooser_idle = g_idle_add ((GSourceFunc)finish_language_chooser, d);
 }
