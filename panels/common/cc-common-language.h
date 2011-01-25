@@ -26,24 +26,24 @@
 
 G_BEGIN_DECLS
 
-#if 0
-void              um_add_user_languages       (GtkTreeModel     *model);
-gchar            *um_get_current_language     (void);
+enum {
+        LOCALE_COL,
+        DISPLAY_LOCALE_COL,
+        SEPARATOR_COL,
+        USER_LANGUAGE,
+        NUM_COLS
+};
 
-GtkWidget        *um_language_chooser_new          (void);
-gchar            *um_language_chooser_get_language (GtkWidget *chooser);
-#endif
+gboolean cc_common_language_get_iter_for_language   (GtkTreeModel     *model,
+						     const gchar      *lang,
+						     GtkTreeIter      *iter);
+void     cc_common_language_add_available_languages (GtkListStore     *store,
+						     GHashTable       *user_langs);
+gboolean cc_common_language_has_font                (const gchar  *locale);
+gchar   *cc_common_language_get_current_language    (void);
 
-gint cc_common_language_sort_languages (GtkTreeModel *model,
-					GtkTreeIter  *a,
-					GtkTreeIter  *b,
-					gpointer      data);
-gboolean cc_common_language_get_iter_for_language (GtkTreeModel     *model,
-						   const gchar      *lang,
-						   GtkTreeIter      *iter);
-void cc_common_language_add_available_languages (GtkListStore *store);
-gboolean cc_common_language_has_font (const gchar *locale);
-gchar *cc_common_language_get_current_language (void);
+void     cc_common_language_setup_list              (GtkWidget    *treeview,
+						     GHashTable   *initial);
 
 G_END_DECLS
 

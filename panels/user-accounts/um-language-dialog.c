@@ -53,12 +53,6 @@ struct _UmLanguageDialog {
         gboolean force_setting;
 };
 
-enum {
-        LOCALE_COL,
-        DISPLAY_LOCALE_COL,
-        NUM_COLS
-};
-
 gchar *
 um_language_chooser_get_language (GtkWidget *chooser)
 {
@@ -87,28 +81,25 @@ row_activated (GtkTreeView       *tree_view,
         gtk_dialog_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
 }
 
-void
-um_add_user_languages (GtkTreeModel *model)
+static GHashTable *
+new_ht_for_user_languages (void)
 {
-        GHashTable *seen;
+	GHashTable *ht;
+        UmUserManager *manager;
         GSList *users, *l;
         UmUser *user;
-        const char *lang;
         char *name;
-        char *language;
-        GtkTreeIter iter;
-        UmUserManager *manager;
-        GtkListStore *store = GTK_LIST_STORE (model);
 
-        gtk_list_store_clear (store);
-
-        seen = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+        ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         manager = um_user_manager_ref_default ();
         users = um_user_manager_list_users (manager);
         g_object_unref (manager);
 
         for (l = users; l; l = l->next) {
+		const char *lang;
+		char *language;
+
                 user = l->data;
                 lang = um_user_get_language (user);
                 if (!lang || !cc_common_language_has_font (lang)) {
@@ -116,39 +107,78 @@ um_add_user_languages (GtkTreeModel *model)
                 }
 
                 name = gdm_normalize_language_name (lang);
-
-                if (g_hash_table_lookup (seen, name)) {
+                if (g_hash_table_lookup (ht, name) != NULL) {
                         g_free (name);
                         continue;
                 }
 
-                g_hash_table_insert (seen, name, GINT_TO_POINTER (TRUE));
-
                 language = gdm_get_language_from_name (name, NULL);
-                gtk_list_store_append (store, &iter);
-                gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
 
-                g_free (language);
+                g_hash_table_insert (ht, name, language);
         }
 
         g_slist_free (users);
 
         /* Make sure the current locale is present */
         name = cc_common_language_get_current_language ();
-
-        if (!g_hash_table_lookup (seen, name)) {
+        if (g_hash_table_lookup (ht, name) == NULL) {
+		char *language;
                 language = gdm_get_language_from_name (name, NULL);
-                gtk_list_store_append (store, &iter);
-                gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
-                g_free (language);
+                g_hash_table_insert (ht, name, language);
         }
-
         g_free (name);
 
-        g_hash_table_destroy (seen);
+	return ht;
+}
+
+static void
+languages_foreach_cb (gpointer key,
+		      gpointer value,
+		      gpointer user_data)
+{
+	GtkListStore *store = (GtkListStore *) user_data;
+	const char *locale = (const char *) key;
+	const char *display_locale = (const char *) value;
+	GtkTreeIter iter;
+
+	gtk_list_store_append (store, &iter);
+	gtk_list_store_set (store, &iter,
+			    LOCALE_COL, locale,
+			    DISPLAY_LOCALE_COL, display_locale,
+			    -1);
+}
+
+
+void
+um_add_user_languages (GtkTreeModel *model)
+{
+        char *name;
+        GtkTreeIter iter;
+        GtkListStore *store = GTK_LIST_STORE (model);
+        GHashTable *user_langs;
+        const char *display;
+
+        gtk_list_store_clear (store);
+
+	user_langs = new_ht_for_user_languages ();
+
+	/* Add the current locale first */
+	name = cc_common_language_get_current_language ();
+	display = g_hash_table_lookup (user_langs, name);
 
         gtk_list_store_append (store, &iter);
+        gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, display, -1);
+        g_hash_table_remove (user_langs, name);
+        g_free (name);
+
+        /* The rest of the languages */
+	g_hash_table_foreach (user_langs, (GHFunc) languages_foreach_cb, store);
+
+	/* And now the "Other..." selection */
+        gtk_list_store_append (store, &iter);
         gtk_list_store_set (store, &iter, LOCALE_COL, NULL, DISPLAY_LOCALE_COL, _("Other..."), -1);
+
+        g_hash_table_destroy (user_langs);
 }
 
 GtkWidget *
@@ -160,9 +190,8 @@ um_language_chooser_new (void)
         GtkWidget *chooser;
         GtkWidget *list;
         GtkWidget *button;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *cell;
-        GtkListStore *store;
+        GtkTreeModel *model;
+        GHashTable *user_langs;
 
         builder = gtk_builder_new ();
         filename = UIDIR "/language-chooser.ui";
@@ -185,19 +214,15 @@ um_language_chooser_new (void)
         button = (GtkWidget *) gtk_builder_get_object (builder, "ok-button");
         gtk_widget_grab_default (button);
 
-        cell = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (NULL, cell, "text", DISPLAY_LOCALE_COL, NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
-        store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, G_TYPE_STRING);
-        gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (store),
-                                                 cc_common_language_sort_languages, NULL, NULL);
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
-                                              GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
-                                              GTK_SORT_ASCENDING);
+	/* Add user languages */
+	user_langs = new_ht_for_user_languages ();
+        cc_common_language_setup_list (list, user_langs);
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 
-        gtk_tree_view_set_model (GTK_TREE_VIEW (list), GTK_TREE_MODEL (store));
+	/* Add the other languages */
+        cc_common_language_add_available_languages (GTK_LIST_STORE (model), user_langs);
 
-        cc_common_language_add_available_languages (store);
+        g_hash_table_destroy (user_langs);
 
         g_object_unref (builder);
 

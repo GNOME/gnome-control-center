@@ -34,51 +34,7 @@
 
 #include "gdm-languages.h"
 
-#if 0
-struct _UmLanguageDialog {
-        GtkWidget *dialog;
-        GtkWidget *user_icon;
-        GtkWidget *user_name;
-        GtkWidget *dialog_combo;
-        GtkListStore *dialog_store;
-
-        GtkWidget *chooser;
-        GtkWidget *chooser_list;
-        GtkListStore *chooser_store;
-
-        char *language;
-//        UmUser *user;
-
-        gboolean force_setting;
-};
-#endif
-
-enum {
-        LOCALE_COL,
-        DISPLAY_LOCALE_COL,
-        NUM_COLS
-};
-#if 0
-gchar *
-um_language_chooser_get_language (GtkWidget *chooser)
-{
-        GtkTreeView *tv;
-        GtkTreeSelection *selection;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gchar *lang;
-
-        tv = (GtkTreeView *) g_object_get_data (G_OBJECT (chooser), "list");
-        selection = gtk_tree_view_get_selection (tv);
-        if (gtk_tree_selection_get_selected (selection, &model, &iter))
-                gtk_tree_model_get (model, &iter, LOCALE_COL, &lang, -1);
-        else
-                lang = NULL;
-
-        return lang;
-}
-#endif
-gint
+static gint
 cc_common_language_sort_languages (GtkTreeModel *model,
 				   GtkTreeIter  *a,
 				   GtkTreeIter  *b,
@@ -86,10 +42,38 @@ cc_common_language_sort_languages (GtkTreeModel *model,
 {
         char *ca, *cb;
         char *la, *lb;
+        gboolean sa, ula;
+        gboolean sb, ulb;
         gint result;
 
-        gtk_tree_model_get (model, a, LOCALE_COL, &ca, DISPLAY_LOCALE_COL, &la, -1);
-        gtk_tree_model_get (model, b, LOCALE_COL, &cb, DISPLAY_LOCALE_COL, &lb, -1);
+	gtk_tree_model_get (model, a,
+			    LOCALE_COL, &ca,
+			    DISPLAY_LOCALE_COL, &la,
+			    SEPARATOR_COL, &sa,
+			    USER_LANGUAGE, &ula,
+			    -1);
+	gtk_tree_model_get (model, b,
+			    LOCALE_COL, &cb,
+			    DISPLAY_LOCALE_COL, &lb,
+			    SEPARATOR_COL, &sb,
+			    USER_LANGUAGE, &ulb,
+			    -1);
+
+	/* Sort before and after separator first */
+	if (sa && sb)
+		return 0;
+	if (sa)
+		return ulb ? 1 : -1;
+	if (sb)
+		return ula ? -1 : 1;
+
+	/* Sort user-languages first */
+	if (ula != ulb) {
+		if (ula)
+			return -1;
+		else
+			return 1;
+	}
 
         if (!ca)
                 result = 1;
@@ -138,17 +122,6 @@ cc_common_language_get_iter_for_language (GtkTreeModel *model,
 
         return FALSE;
 }
-
-#if 0
-static void
-row_activated (GtkTreeView       *tree_view,
-               GtkTreePath       *path,
-               GtkTreeViewColumn *column,
-               GtkWidget         *chooser)
-{
-        gtk_dialog_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
-}
-#endif
 
 gboolean
 cc_common_language_has_font (const gchar *locale)
@@ -209,7 +182,8 @@ cc_common_language_has_font (const gchar *locale)
 }
 
 void
-cc_common_language_add_available_languages (GtkListStore *store)
+cc_common_language_add_available_languages (GtkListStore *store,
+					    GHashTable   *user_langs)
 {
         char **languages;
         int i;
@@ -217,15 +191,20 @@ cc_common_language_add_available_languages (GtkListStore *store)
         char *language;
         GtkTreeIter iter;
 
-        gtk_list_store_clear (store);
-
         languages = gdm_get_all_language_names ();
 
         for (i = 0; languages[i] != NULL; i++) {
-                if (!cc_common_language_has_font (languages[i]))
-                        continue;
+		name = gdm_normalize_language_name (languages[i]);
+		if (g_hash_table_lookup (user_langs, name) != NULL) {
+			g_free (name);
+			continue;
+		}
 
-                name = gdm_normalize_language_name (languages[i]);
+                if (!cc_common_language_has_font (languages[i])) {
+			g_free (name);
+                        continue;
+		}
+
                 language = gdm_get_language_from_name (name, NULL);
 
                 gtk_list_store_append (store, &iter);
@@ -237,74 +216,6 @@ cc_common_language_add_available_languages (GtkListStore *store)
 
         g_strfreev (languages);
 }
-
-#if 0
-void
-um_add_user_languages (GtkTreeModel *model)
-{
-#if 0
-        GHashTable *seen;
-        GSList *users, *l;
-        UmUser *user;
-        const char *lang;
-        char *name;
-        char *language;
-        GtkTreeIter iter;
-        UmUserManager *manager;
-        GtkListStore *store = GTK_LIST_STORE (model);
-
-        gtk_list_store_clear (store);
-
-        seen = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-
-        manager = um_user_manager_ref_default ();
-        users = um_user_manager_list_users (manager);
-        g_object_unref (manager);
-
-        for (l = users; l; l = l->next) {
-                user = l->data;
-                lang = um_user_get_language (user);
-                if (!lang || !cc_common_language_has_font (lang)) {
-                        continue;
-                }
-
-                name = gdm_normalize_language_name (lang);
-
-                if (g_hash_table_lookup (seen, name)) {
-                        g_free (name);
-                        continue;
-                }
-
-                g_hash_table_insert (seen, name, GINT_TO_POINTER (TRUE));
-
-                language = gdm_get_language_from_name (name, NULL);
-                gtk_list_store_append (store, &iter);
-                gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
-
-                g_free (language);
-        }
-
-        g_slist_free (users);
-
-        /* Make sure the current locale is present */
-        name = um_get_current_language ();
-
-        if (!g_hash_table_lookup (seen, name)) {
-                language = gdm_get_language_from_name (name, NULL);
-                gtk_list_store_append (store, &iter);
-                gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
-                g_free (language);
-        }
-
-        g_free (name);
-
-        g_hash_table_destroy (seen);
-
-        gtk_list_store_append (store, &iter);
-        gtk_list_store_set (store, &iter, LOCALE_COL, NULL, DISPLAY_LOCALE_COL, _("Other..."), -1);
-#endif
-}
-#endif
 
 gchar *
 cc_common_language_get_current_language (void)
@@ -321,58 +232,80 @@ cc_common_language_get_current_language (void)
         return language;
 }
 
-#if 0
-GtkWidget *
-um_language_chooser_new (void)
+static void
+languages_foreach_cb (gpointer key,
+		      gpointer value,
+		      gpointer user_data)
 {
-        GtkBuilder *builder;
-        const char *filename;
-        GError *error = NULL;
-        GtkWidget *chooser;
-        GtkWidget *list;
-        GtkWidget *button;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *cell;
-        GtkListStore *store;
+	GtkListStore *store = (GtkListStore *) user_data;
+	const char *locale = (const char *) key;
+	const char *display_locale = (const char *) value;
+	GtkTreeIter iter;
 
-        builder = gtk_builder_new ();
-        filename = UIDIR "/language-chooser.ui";
-        if (!g_file_test (filename, G_FILE_TEST_EXISTS))
-                filename = "data/language-chooser.ui";
-        if (!gtk_builder_add_from_file (builder, filename, &error)) {
-                g_warning ("failed to load language chooser: %s", error->message);
-                g_error_free (error);
-                return NULL;
-        }
+	gtk_list_store_append (store, &iter);
+	gtk_list_store_set (store, &iter,
+			    LOCALE_COL, locale,
+			    DISPLAY_LOCALE_COL, display_locale,
+			    SEPARATOR_COL, FALSE,
+			    USER_LANGUAGE, TRUE,
+			    -1);
 
-        chooser = (GtkWidget *) gtk_builder_get_object (builder, "dialog");
+	g_message ("adding '%s' (%s) to the store", display_locale, locale);
+}
 
-        list = (GtkWidget *) gtk_builder_get_object (builder, "language-list");
-        g_object_set_data (G_OBJECT (chooser), "list", list);
-        g_signal_connect (list, "row-activated",
-                          G_CALLBACK (row_activated), chooser);
+static gboolean
+separator_func (GtkTreeModel *model,
+		GtkTreeIter  *iter,
+		gpointer      data)
+{
+	gboolean is_sep;
 
-        button = (GtkWidget *) gtk_builder_get_object (builder, "cancel-button");
-        button = (GtkWidget *) gtk_builder_get_object (builder, "ok-button");
-        gtk_widget_grab_default (button);
+	gtk_tree_model_get (model, iter,
+			    SEPARATOR_COL, &is_sep,
+			    -1);
+
+	return is_sep;
+}
+
+void
+cc_common_language_setup_list (GtkWidget    *treeview,
+			       GHashTable   *initial)
+{
+	GtkCellRenderer *cell;
+	GtkTreeViewColumn *column;
+	GtkListStore *store;
 
         cell = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (NULL, cell, "text", DISPLAY_LOCALE_COL, NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
-        store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, G_TYPE_STRING);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+        store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN);
         gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (store),
-                                                 sort_languages, NULL, NULL);
+                                                 cc_common_language_sort_languages, NULL, NULL);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
                                               GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
                                               GTK_SORT_ASCENDING);
+        gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (treeview),
+					      separator_func,
+					      NULL, NULL);
 
-        gtk_tree_view_set_model (GTK_TREE_VIEW (list), GTK_TREE_MODEL (store));
+        gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (store));
 
-        add_available_languages (store);
 
-        g_object_unref (builder);
+        /* Add languages from the initial hashtable */
+        g_hash_table_foreach (initial, (GHFunc) languages_foreach_cb, store);
 
-        return chooser;
+        /* Add separator if we had any languages added */
+        if (initial != NULL &&
+            g_hash_table_size (initial) > 0) {
+		GtkTreeIter iter;
+
+		gtk_list_store_append (GTK_LIST_STORE (store), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (store), &iter,
+				    LOCALE_COL, NULL,
+				    DISPLAY_LOCALE_COL, "Don't show",
+				    SEPARATOR_COL, TRUE,
+				    USER_LANGUAGE, FALSE,
+				    -1);
+	}
 }
 
-#endif
