@@ -51,6 +51,13 @@ void     rounded_rectangle                (cairo_t     *cr,
                                            gdouble      width,
                                            gdouble      height);
 
+void     down_arrow                       (GtkStyleContext *context,
+                                           cairo_t         *cr,
+                                           gint             x,
+                                           gint             y,
+                                           gint             width,
+                                           gint             height);
+
 G_END_DECLS
 
 #endif

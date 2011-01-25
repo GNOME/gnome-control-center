@@ -84,14 +84,11 @@ generate_draw (GtkWidget        *widget,
         if (!gtk_widget_is_sensitive (widget))
                 return;
 
-        gtk_paint_expander (gtk_widget_get_style (widget),
-                            cr,
-                            gtk_widget_get_state (widget),
-                            widget,
-                            NULL,
-                            gtk_widget_get_allocated_width (widget) - 12,
-                            gtk_widget_get_allocated_height (widget) - 12,
-                            GTK_EXPANDER_EXPANDED);
+        down_arrow (gtk_widget_get_style_context (widget),
+                    cr,
+                    gtk_widget_get_allocated_width (widget) - 12,
+                    gtk_widget_get_allocated_height (widget) - 12,
+                    12, 12);
 }
 
 static void

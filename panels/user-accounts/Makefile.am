@@ -82,7 +82,8 @@ libuser_accounts_la_LIBADD = 		\
 	$(GIO_LIBS)			\
 	$(CAPPLET_LIBS)			\
 	$(top_builddir)/panels/common/liblanguage.la \
-	-lcrypt
+	-lcrypt				\
+	-lm
 
 libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
