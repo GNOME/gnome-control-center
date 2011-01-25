@@ -66,14 +66,6 @@ enum
   PROP_TOOLTIP_NOT_AUTHORIZED
 };
 
-enum
-{
-  CHANGED_SIGNAL,
-  LAST_SIGNAL,
-};
-
-static guint signals[LAST_SIGNAL] = {0, };
-
 static void update_state (UmLockButton *button);
 
 static void on_permission_changed (GPermission *permission,
@@ -522,10 +514,9 @@ acquire_cb (GObject      *source,
   UmLockButton *button = UM_LOCK_BUTTON (user_data);
   UmLockButtonPrivate *priv = button->priv;
   GError *error;
-  gboolean res;
 
   error = NULL;
-  res = g_permission_acquire_finish (priv->permission, result, &error);
+  g_permission_acquire_finish (priv->permission, result, &error);
 
   if (error)
     {
@@ -547,10 +538,9 @@ release_cb (GObject      *source,
   UmLockButton *button = UM_LOCK_BUTTON (user_data);
   UmLockButtonPrivate *priv = button->priv;
   GError *error;
-  gboolean res;
 
   error = NULL;
-  res = g_permission_release_finish (priv->permission, result, &error);
+  g_permission_release_finish (priv->permission, result, &error);
 
   if (error)
     {
