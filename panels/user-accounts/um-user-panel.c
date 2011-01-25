@@ -518,9 +518,6 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         widget = get_widget (d, "account-password-button");
         um_editable_button_set_text (UM_EDITABLE_BUTTON (widget), get_password_mode_text (user));
 
-        widget = get_widget (d, "account-email-entry");
-        um_editable_entry_set_text (UM_EDITABLE_ENTRY (widget), um_user_get_email (user));
-
         widget = get_widget (d, "account-language-combo");
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (widget));
         um_add_user_languages (model);
@@ -710,22 +707,6 @@ change_password (GtkButton *button, UmUserPanelPrivate *d)
                                   GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
 
         g_object_unref (user);
-}
-
-static void
-change_email_done (UmEditableEntry    *e,
-                   UmUserPanelPrivate *d)
-{
-        const gchar *text;
-        UmUser *user;
-
-        user = get_selected_user (d);
-
-        text = um_editable_entry_get_text (e);
-
-        if (g_strcmp0 (text, um_user_get_email (user)) != 0) {
-                um_user_set_email (user, text);
-        }
 }
 
 static void
@@ -932,9 +913,6 @@ on_permission_changed (GPermission *permission,
                 um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "full-name-entry")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "full-name-entry"));
 
-                um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "account-email-entry")), TRUE);
-                remove_unlock_tooltip (get_widget (d, "account-email-entry"));
-
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-language-combo"));
 
@@ -949,9 +927,6 @@ on_permission_changed (GPermission *permission,
 
                 um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "full-name-entry")), FALSE);
                 add_unlock_tooltip (get_widget (d, "full-name-entry"));
-
-                um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "account-email-entry")), FALSE);
-                add_unlock_tooltip (get_widget (d, "account-email-entry"));
 
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-language-combo"));
@@ -1125,9 +1100,6 @@ setup_main_window (UmUserPanelPrivate *d)
 
         button = get_widget (d, "account-password-button");
         g_signal_connect (button, "start-editing", G_CALLBACK (change_password), d);
-
-        button = get_widget (d, "account-email-entry");
-        g_signal_connect (button, "editing-done", G_CALLBACK (change_email_done), d);
 
         button = get_widget (d, "account-language-combo");
         g_signal_connect (button, "editing-done", G_CALLBACK (language_changed), d);
