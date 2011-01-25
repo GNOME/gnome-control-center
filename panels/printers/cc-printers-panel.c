@@ -1337,8 +1337,8 @@ supply_levels_draw_cb (GtkWidget *widget,
 }
 
 static void
-allowed_user_remove_cb (GtkButton *button,
-                        gpointer   user_data)
+allowed_user_remove_cb (GtkToolButton *button,
+                        gpointer       user_data)
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
@@ -1470,8 +1470,8 @@ allowed_user_add_cb (GtkCellRendererText *renderer,
 }
 
 static void
-allowed_user_add_button_cb (GtkButton *button,
-                            gpointer   user_data)
+allowed_user_add_button_cb (GtkToolButton *button,
+                            gpointer       user_data)
 {
   CcPrintersPanelPrivate *priv;
   GtkTreeViewColumn      *column;
@@ -1674,6 +1674,35 @@ printer_maintenance_cb (GtkButton *button,
 }
 
 static void
+set_widget_style (GtkWidget *widget, gchar *style_data)
+{
+  GtkStyleProvider *provider;
+  GtkStyleContext  *context;
+
+  if (widget)
+    {
+      context = gtk_widget_get_style_context (widget);
+      provider = g_object_get_data (G_OBJECT (widget), "provider");
+
+      if (provider == NULL)
+        {
+          provider = (GtkStyleProvider *)gtk_css_provider_new ();
+          g_object_set_data (G_OBJECT (widget), "provider", provider);
+          gtk_style_context_add_provider (context,
+                                          GTK_STYLE_PROVIDER (provider),
+                                          GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+          gtk_css_provider_load_from_data ((GtkCssProvider *)provider,
+                                           style_data, -1, NULL);
+          g_object_unref (provider);
+        }
+      else
+        gtk_css_provider_load_from_data ((GtkCssProvider *)provider,
+                                         style_data, -1, NULL);
+      gtk_style_context_invalidate (context);
+    }
+}
+
+static void
 cc_printers_panel_init (CcPrintersPanel *self)
 {
   CcPrintersPanelPrivate *priv;
@@ -1754,6 +1783,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "clean-print-heads-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "allowed-users-toolbar");
+  set_widget_style (widget, "GtkToolbar { border-style: none }");
 
   gtk_style_context_get_background_color (gtk_widget_get_style_context (top_widget),
                                           GTK_STATE_FLAG_NORMAL,
