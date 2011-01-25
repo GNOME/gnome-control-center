@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-01-12 00:12+0000\n"
-"PO-Revision-Date: 2011-01-14 09:45+0200\n"
+"POT-Creation-Date: 2011-01-25 00:01+0000\n"
+"PO-Revision-Date: 2011-01-25 10:29+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -207,6 +207,12 @@ msgstr "mitmes suuruses"
 msgid "%d × %d"
 msgstr "%d × %d"
 
+msgid "Other..."
+msgstr ""
+
+msgid "Unspecified"
+msgstr "Määramata"
+
 msgid "16"
 msgstr "16"
 
@@ -283,9 +289,6 @@ msgstr "Kuupäev ja kellaaeg"
 msgid "Date and Time preferences panel"
 msgstr "Kuupäeva ja kellaaja eelistuste paneel"
 
-msgid "<i>Note: may limit resolution options</i>"
-msgstr ""
-
 msgid "Left"
 msgstr "Vasakule"
 
@@ -294,6 +297,9 @@ msgstr "Kuvar"
 
 msgid "Normal"
 msgstr "Tavaline"
+
+msgid "Note: may limit resolution options"
+msgstr ""
 
 msgid "R_otation:"
 msgstr "_Pööramine:"
@@ -373,12 +379,48 @@ msgstr "Kuvasid pole võimalik tuvastada"
 msgid "Could not get screen information"
 msgstr "Ekraani andmeid pole võimalik hankida"
 
+#. translators: This is the type of architecture, for example:
+#. * "64-bit" or "32-bit"
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bitine"
 
+#, c-format
+msgid "%u byte"
+msgid_plural "%u bytes"
+msgstr[0] "%u bait"
+msgstr[1] "%u baiti"
+
+#, c-format
+msgid "%.1f KB"
+msgstr "%.1f KB"
+
+#, c-format
+msgid "%.1f MB"
+msgstr "%.1f MB"
+
+#, c-format
+msgid "%.1f GB"
+msgstr "%.1f GB"
+
+#, c-format
+msgid "%.1f TB"
+msgstr "%.1f TB"
+
+#, c-format
+msgid "%.1f PB"
+msgstr "%.1f PB"
+
+#, c-format
+msgid "%.1f EB"
+msgstr "%.1f EB"
+
 msgid "Unknown model"
 msgstr "Tundmatu mudel"
+
+#, c-format
+msgid "Version %s"
+msgstr "Versioon %s"
 
 msgid "System Info"
 msgstr "Süsteemi andmed"
@@ -390,11 +432,32 @@ msgstr "Süsteemi andmed"
 msgid "device;system;information;memory;processor;version;"
 msgstr "seadmed;süsteem;andmed;info;mälu;protsessor;versioon;"
 
-msgid "Sound"
-msgstr "Heli"
+msgid "Device name:"
+msgstr "Seadme nimi:"
 
-msgid "Desktop"
-msgstr "Töölaud"
+msgid "Disk:"
+msgstr "Ketas:"
+
+msgid "Memory:"
+msgstr "Mälu:"
+
+msgid "More Info"
+msgstr "Rohkem andmeid"
+
+msgid "OS type:"
+msgstr ""
+
+msgid "Processor:"
+msgstr "Protsessor:"
+
+msgid "Update Available"
+msgstr ""
+
+msgid "Sound and Media"
+msgstr ""
+
+msgid "Launchers and Actions"
+msgstr ""
 
 msgid "New shortcut..."
 msgstr "Uus kiirklahv..."
@@ -531,9 +594,13 @@ msgstr "Kiirklahvid"
 msgid "Slow"
 msgstr "Aeglane"
 
+#, fuzzy
+#| msgid ""
+#| "To edit a shortcut key, click on the corresponding row and type a new key "
+#| "combination, or press backspace to clear."
 msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new key "
-"combination, or press backspace to clear."
+"To edit a shortcut, click the row and hold down the new keys or press "
+"Backspace to clear."
 msgstr ""
 "Kiirklahvi muutmiseks klõpsa vastaval real ja sisesta uus kiirklahv. "
 "Nullimiseks vajuta Backspace klahvi."
@@ -547,13 +614,19 @@ msgstr "_Nimi:"
 msgid "_Speed:"
 msgstr "Kii_rus:"
 
+msgid "add-toolbutton"
+msgstr ""
+
+msgid "remove-toolbutton"
+msgstr ""
+
 msgid "Ask what to do"
 msgstr ""
 
-msgid "Do Nothing"
+msgid "Do nothing"
 msgstr ""
 
-msgid "Open Folder"
+msgid "Open folder"
 msgstr ""
 
 msgid "Acti_on:"
@@ -598,17 +671,233 @@ msgstr "Meediumi ja automaatkäivituse eelistuste määramine"
 msgid "Removable Media"
 msgstr "Eemaldatav meedium"
 
+#. Translators: The printer is low on toner
+msgid "Low on toner"
+msgstr ""
+
+#. Translators: The printer has no toner left
+msgid "Out of toner"
+msgstr ""
+
+#. Translators: "Developer" like on photo development context
+msgid "Low on developer"
+msgstr ""
+
+#. Translators: "Developer" like on photo development context
+msgid "Out of developer"
+msgstr ""
+
+#. Translators: "marker" is one color bin of the printer
+msgid "Low on a marker supply"
+msgstr ""
+
+#. Translators: "marker" is one color bin of the printer
+msgid "Out of a marker supply"
+msgstr ""
+
+#. Translators: One or more covers on the printer are open
+msgid "Open cover"
+msgstr ""
+
+#. Translators: One or more doors on the printer are open
+msgid "Open door"
+msgstr ""
+
+#. Translators: At least one input tray is low on media
+msgid "Low on paper"
+msgstr ""
+
+#. Translators: At least one input tray is empty
+msgid "Out of paper"
+msgstr ""
+
+#. Translators: The printer is offline
+msgid "Offline"
+msgstr ""
+
+#. Translators: Someone has paused the Printer
+msgid "Paused"
+msgstr ""
+
+#. Translators: The printer marker supply waste receptacle is almost full
+msgid "Waste receptacle almost full"
+msgstr ""
+
+#. Translators: The printer marker supply waste receptacle is full
+msgid "Waste receptacle full"
+msgstr ""
+
+#. Translators: Optical photo conductors are used in laser printers
+msgid "The optical photo conductor is near end of life"
+msgstr ""
+
+#. Translators: Optical photo conductors are used in laser printers
+msgid "The optical photo conductor is no longer functioning"
+msgstr ""
+
+#. Translators: Printer's state (can start new job without waiting)
+msgid "Idle"
+msgstr "Jõude"
+
+#. Translators: Printer's state (jobs are processing)
+#. Translators: Job's state (job is currently printing)
+msgid "Processing"
+msgstr ""
+
+#. Translators: Printer's state (no jobs can be processed)
+#. Translators: Job's state (job has been stopped)
+msgid "Stopped"
+msgstr ""
+
+#. Translators: Job's state (job is waiting to be printed)
+msgid "Pending"
+msgstr ""
+
+#. Translators: Job's state (job is held for printing)
+msgid "Held"
+msgstr ""
+
+#. Translators: Job's state (job has been canceled)
+msgid "Canceled"
+msgstr ""
+
+#. Translators: Job's state (job has aborted due to error)
+msgid "Aborted"
+msgstr ""
+
+#. Translators: Job's state (job has completed successfully)
+msgid "Completed"
+msgstr ""
+
+#. Translators: Name of column showing titles of print jobs
+msgid "Job Title"
+msgstr ""
+
+#. Translators: Name of column showing statuses of print jobs
+msgid "Job State"
+msgstr ""
+
+#. Translators: Name of column showing names of creators of print jobs
+msgid "User"
+msgstr "Kasutaja"
+
+#. Translators: Name of column showing times of creation of print jobs
+msgid "Time"
+msgstr "Aeg"
+
+#. Translators: Program cannot connect to DBus' system bus
+#, fuzzy, c-format
+#| msgid "Could not rename %s to %s: %s\n"
+msgid "Could not connect to system bus: %s"
+msgstr "Nime muutmine %s -> %s pole võimalik: %s\n"
+
+#. Translators: Name of job which makes printer to print test page
+msgid "Test page"
+msgstr "Testleht"
+
+#. Translators: Name of job which makes printer to clean its heads
+msgid "Clean print heads"
+msgstr ""
+
+#. Translators: An error has occured during execution of a CUPS maintenance command
+msgid "An error has occured during a maintenance command."
+msgstr ""
+
+#. Translators: The XML file containing user interface can not be loaded
+#, c-format
+msgid "Could not load ui: %s"
+msgstr "Kasutajaliidest pole võimalik laadida: %s"
+
+msgid "Change printer settings"
+msgstr "Printerisätete muutmine"
+
+#. Translators: those are keywords for the printing control-center panel
+msgid "Printer;Queue;Print;Paper;Ink;Toner;"
+msgstr ""
+"Printer;Printimine;Printimisjärjekord;Trükkimine;Trükkimisjärjekord;Paber;"
+"Tint;Tooner;"
+
+msgid "Printers"
+msgstr "Printerid"
+
+msgid "---"
+msgstr "---"
+
+#. Translators: Cancel selected print job.
+msgid "Cancel"
+msgstr "Tühista"
+
+#. Translators: This button executes command which cleans print heads of the printer.
+msgid "Clean Print Heads"
+msgstr ""
+
+#. Translators: This checkbox is checked when the default printer is selected.
+msgid "Default"
+msgstr "Vaikimisi"
+
+#. Translators: Description of the printer.
+msgid "Description:"
+msgstr "Kirjeldus:"
+
+#. Translators: This button pauses printer.
+msgid "Disable Printer"
+msgstr ""
+
+#. Translators: Pause (hold) selected print job.
+msgid "Hold"
+msgstr ""
+
+#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
+msgid "Location:"
+msgstr "Asukoht:"
+
+#. Translators: This button executes command which prints test page.
+msgid "Print Test Page"
+msgstr ""
+
+#. Translators: A widget showing list of print jobs for selected printer.
+msgid "Printer Jobs"
+msgstr ""
+
+#. Translators: This shows queue of print jobs.
+msgid "Queue"
+msgstr ""
+
+#. Translators: Print paused print job.
+#, fuzzy
+#| msgid "Delete"
+msgid "Release"
+msgstr "Kustuta"
+
+#. Translators: Users which are allowed to print on this printer.
+msgid "Share with these users:"
+msgstr ""
+
+msgid "Show / hide printer's jobs"
+msgstr ""
+
+#. Translators: Status of the printer.
+msgid "Status:"
+msgstr "Seisund:"
+
+#. Translators: By supply we mean ink, toner, staples, water, ...
+msgid "Supply:"
+msgstr ""
+
+msgid "Install languages..."
+msgstr ""
+
 msgid "Keyboard _model:"
 msgstr "Klaviatuuri _mudel:"
+
+msgid "Language"
+msgstr "Keel"
 
 msgid "Layouts"
 msgstr "Paigutused"
 
 msgid "List of keyboard layouts selected for usage"
 msgstr "Kasutuseks valitud klaviatuuripaigutuste loend"
-
-msgid "Mouse Keys"
-msgstr "Hiire klahvid"
 
 msgid "Move _Down"
 msgstr "Liiguta _alla"
@@ -644,14 +933,14 @@ msgstr ""
 msgid "Reset to De_faults"
 msgstr "Taasta _vaikeväärtused"
 
+msgid "Select a display language"
+msgstr ""
+
 msgid "Select a keyboard layout to be added to the list"
 msgstr "Klaviatuuripaigutuse valimine loendisse lisamiseks"
 
 msgid "View and edit keyboard layout options"
 msgstr "Klaviatuuripaigutuse valikute kuvamine ja muutmine"
-
-msgid "_Acceleration:"
-msgstr "K_iirendus:"
 
 msgid "_Add..."
 msgstr "Li_sa..."
@@ -659,14 +948,8 @@ msgstr "Li_sa..."
 msgid "_Options..."
 msgstr "_Valikud..."
 
-msgid "_Pointer can be controlled using the keypad"
-msgstr "_Kursorit on võimalik juhtida klaviatuuri abil"
-
 msgid "_Separate layout for each window"
 msgstr "Eraldi _paigutus iga akna jaoks"
-
-msgid "_Type to test settings:"
-msgstr "T_esti sätteid siin:"
 
 msgid "By _country"
 msgstr "_Riigi järgi"
@@ -715,34 +998,12 @@ msgstr "Tarnijad"
 msgid "Models"
 msgstr "Mudelid"
 
-msgid "Default"
-msgstr "Vaikimisi"
-
 msgid "Change your region and language settings"
 msgstr "Sinu asukoha- ja keelesätete muutmine"
 
 #. Translators: those are keywords for the region control-center panel
 msgid "Language;Layout;"
 msgstr "Keel;Paigutus;"
-
-msgid "Accessibility"
-msgstr "Hõlbustused"
-
-msgid "Choose type of click _beforehand"
-msgstr "Klõpsu liiki on või_malik valida"
-
-msgid "Choose type of click with mo_use gestures"
-msgstr "Klõpsu liik valitakse _hiirežestiga"
-
-msgid "D_elay:"
-msgstr "V_iivitus:"
-
-msgid "D_ouble click:"
-msgstr "T_opeltklõps:"
-
-#. click to initiate drag-and-drop (like normally click and hold)
-msgid "D_rag click:"
-msgstr "Lohist_amine:"
 
 msgid "Disable _touchpad while typing"
 msgstr "_Tippimise ajal on puutepadi keelatud"
@@ -752,10 +1013,6 @@ msgstr "Topeltklõpsu ajapiirang"
 
 msgid "Drag and Drop"
 msgstr "Lohistamine ja lahtilaskmine"
-
-#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
-msgid "Dwell Click"
-msgstr "Ooteajaga klõps"
 
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Puutepadjalt tulevad _hiireklõpsud on lubatud"
@@ -778,6 +1035,9 @@ msgstr "Kursori asukoht"
 msgid "Low"
 msgstr "Madal"
 
+msgid "Mouse"
+msgstr "Hiir"
+
 msgid "Mouse Orientation"
 msgstr "Vasaku- või paremakäeliste hiir"
 
@@ -790,17 +1050,8 @@ msgstr "Kursori kiirus"
 msgid "Scrolling"
 msgstr "Kerimine"
 
-msgid "Seco_ndary click:"
-msgstr "_Paremklõps:"
-
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "_Control klahvi vajutamisel näidatakse kursori asukohta"
-
-msgid "Show click type _window"
-msgstr "Klõpsu liik valitakse _akna abil"
-
-msgid "Simulated Secondary Click"
-msgstr "Simuleeritud paremklõps"
 
 #. small threshold
 msgid "Small"
@@ -818,11 +1069,8 @@ msgstr "Puutepadi"
 msgid "Two-_finger scrolling"
 msgstr "_Kahe sõrmega kerimine"
 
-#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
-msgid "You can also use the Dwell Click panel applet to choose the click type."
-msgstr ""
-"Klõpsamise liigi valimiseks on võimalik kasutada ka ooteaja klõpsu "
-"paneelirakendit."
+msgid "_Acceleration:"
+msgstr "K_iirendus:"
 
 msgid "_Disabled"
 msgstr "_Välja lülitatud"
@@ -830,14 +1078,8 @@ msgstr "_Välja lülitatud"
 msgid "_Edge scrolling"
 msgstr "_Servas kerimine"
 
-msgid "_Initiate click when stopping pointer movement"
-msgstr "_Kursori peatumisel tehakse hiireklõps"
-
 msgid "_Left-handed"
 msgstr "_Vasakukäelise hiir"
-
-msgid "_Motion threshold:"
-msgstr "_Liikumise lävi:"
 
 msgid "_Right-handed"
 msgstr "_Paremakäelise hiir"
@@ -845,14 +1087,8 @@ msgstr "_Paremakäelise hiir"
 msgid "_Sensitivity:"
 msgstr "_Tundlikkus:"
 
-msgid "_Single click:"
-msgstr "Ük_sikklõps:"
-
 msgid "_Timeout:"
 msgstr "A_japiirang:"
-
-msgid "_Trigger secondary click by holding down the primary button"
-msgstr "_Vasaku nupu allhoidmisel tehakse paremklõps"
 
 msgid "Mouse and Touchpad"
 msgstr "Hiir ja puutepadi"
@@ -1032,6 +1268,18 @@ msgstr ""
 msgid "Username:"
 msgstr "Kasutajanimi:"
 
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Automaatne"
+
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Käsitsi"
+
+msgctxt "proxy method"
+msgid "None"
+msgstr "Puudub"
+
 msgid "Power"
 msgstr "Vooluhaldus"
 
@@ -1101,6 +1349,51 @@ msgstr ""
 msgid "%.0lf%% charged"
 msgstr ""
 
+msgid "1 hour"
+msgstr "1 tund"
+
+msgid "10 minutes"
+msgstr "10 minutit"
+
+msgid "30 minutes"
+msgstr "30 minutit"
+
+msgid "5 minutes"
+msgstr "5 minutit"
+
+msgid "AC power and inactive for:"
+msgstr ""
+
+msgid "Ask me"
+msgstr ""
+
+msgid "Battery power and inactive for:"
+msgstr ""
+
+msgid "Hibernate"
+msgstr ""
+
+msgid "Put the computer to sleep when inactive for:"
+msgstr ""
+
+msgid "Put the computer to sleep when on:"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
+msgid "Suspend"
+msgstr ""
+
+msgid "When power is critically low:"
+msgstr ""
+
+msgid "When the power button is pressed:"
+msgstr ""
+
+msgid "When the sleep button is pressed:"
+msgstr ""
+
 #. Translators: those are keywords for the brightness and lock control-center panel
 msgid "Brightness;Lock;Dim;Blank;"
 msgstr ""
@@ -1110,6 +1403,39 @@ msgstr "Ekraan"
 
 msgid "Screen brightness and lock settings"
 msgstr "Ekraani heleduse ja lukustamise sätted"
+
+msgid "1 minute"
+msgstr "1 minut"
+
+msgid "2 minutes"
+msgstr "2 minutit"
+
+msgid "3 minutes"
+msgstr "3 minutit"
+
+msgid "Brightness"
+msgstr "Heledus"
+
+msgid "Dim screen to save power"
+msgstr ""
+
+msgid "Don't lock when at home"
+msgstr ""
+
+msgid "Locations..."
+msgstr "Asukohad..."
+
+msgid "Lock"
+msgstr ""
+
+msgid "Lock screen after:"
+msgstr ""
+
+msgid "Screen turns off"
+msgstr ""
+
+msgid "Turn off after:"
+msgstr ""
 
 msgid "Enable debugging code"
 msgstr "Silumiskoodi lubamine"
@@ -1308,6 +1634,9 @@ msgstr ""
 msgid "Change sound volume and sound events"
 msgstr "Helivaljuse ja -sündmuste muutmine"
 
+msgid "Sound"
+msgstr "Heli"
+
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
 msgid "Bark"
@@ -1387,7 +1716,7 @@ msgstr "Põrkeklahvid"
 msgid "Caribou"
 msgstr ""
 
-msgid "Change constrast:"
+msgid "Change contrast:"
 msgstr "Kontrasti muutmine:"
 
 msgid "Closed Captioning"
@@ -1416,6 +1745,9 @@ msgstr "Ctrl+Alt+8"
 
 msgid "Ctrl+Alt+="
 msgstr "Ctrl+Alt+="
+
+msgid "D_elay:"
+msgstr "V_iivitus:"
 
 msgid "Dasher"
 msgstr "Dasher"
@@ -1473,6 +1805,9 @@ msgstr ""
 msgid "LowContrast"
 msgstr ""
 
+msgid "Mouse Keys"
+msgstr "Hiire klahvid"
+
 msgid "Mouse Settings..."
 msgstr "Hiiresätted..."
 
@@ -1515,8 +1850,8 @@ msgstr "Shift+Ctrl+Alt+-"
 msgid "Shift+Ctrl+Alt+="
 msgstr "Shift+Ctrl+Alt+="
 
-msgid "Show Universal Access status"
-msgstr ""
+msgid "Simulated Secondary Click"
+msgstr "Simuleeritud paremklõps"
 
 msgid "Slow Keys"
 msgstr "Aeglased klahvid"
@@ -1577,6 +1912,9 @@ msgstr ""
 msgid "Zoom out:"
 msgstr ""
 
+msgid "_Motion threshold:"
+msgstr "_Liikumise lävi:"
+
 msgid "accepted"
 msgstr ""
 
@@ -1585,9 +1923,6 @@ msgstr ""
 
 msgid "rejected"
 msgstr ""
-
-msgid "Unspecified"
-msgstr "Määramata"
 
 msgid "Authentication failed"
 msgstr ""
@@ -1735,12 +2070,6 @@ msgstr ""
 msgid ""
 "Enrolling fingerprints for\n"
 "<b><big>%s</big></b>"
-msgstr ""
-
-msgid "Other..."
-msgstr ""
-
-msgid "Lock"
 msgstr ""
 
 msgid "Locked"
@@ -1951,9 +2280,6 @@ msgstr "_Täisnimi:"
 msgid "_Username:"
 msgstr "_Kasutajanimi:"
 
-msgid "Cancel"
-msgstr ""
-
 msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
 "strong password</a>"
@@ -2034,8 +2360,8 @@ msgid ""
 "without a password.  For security, remote logins to this account are not "
 "allowed.\n"
 "\n"
-"<b>When the guest user logs out, all files and data associated with the "
-"account will be deleted.</b>"
+"                    <b>When the guest user logs out, all files and data "
+"associated with the account will be deleted.</b>"
 msgstr ""
 
 msgid "Account Information"
@@ -2064,9 +2390,6 @@ msgstr "Sõrmejäljega sisselogimine:"
 
 msgid "Language:"
 msgstr "Keel:"
-
-msgid "Location:"
-msgstr "Asukoht:"
 
 msgid "Login Options"
 msgstr "Sisselogimise valikud"
@@ -2152,18 +2475,62 @@ msgstr "Süsteemi sätted"
 msgid "Control Center"
 msgstr "Juhtimiskeskus"
 
-msgid "Example Panel"
-msgstr "Näidispaneel"
-
-msgid "Example preferences panel"
-msgstr "Eelistuste näidispaneel"
-
-#. Translators: those are keywords for the example control-center panel
-msgid "Foo;Bar;Baz;"
-msgstr ""
-
 msgid "_All Settings"
 msgstr "_Kõik sätted"
+
+#~ msgid "Desktop"
+#~ msgstr "Töölaud"
+
+#~ msgid "_Pointer can be controlled using the keypad"
+#~ msgstr "_Kursorit on võimalik juhtida klaviatuuri abil"
+
+#~ msgid "_Type to test settings:"
+#~ msgstr "T_esti sätteid siin:"
+
+#~ msgid "Accessibility"
+#~ msgstr "Hõlbustused"
+
+#~ msgid "Choose type of click _beforehand"
+#~ msgstr "Klõpsu liiki on või_malik valida"
+
+#~ msgid "Choose type of click with mo_use gestures"
+#~ msgstr "Klõpsu liik valitakse _hiirežestiga"
+
+#~ msgid "D_ouble click:"
+#~ msgstr "T_opeltklõps:"
+
+#~ msgid "D_rag click:"
+#~ msgstr "Lohist_amine:"
+
+#~ msgid "Dwell Click"
+#~ msgstr "Ooteajaga klõps"
+
+#~ msgid "Seco_ndary click:"
+#~ msgstr "_Paremklõps:"
+
+#~ msgid "Show click type _window"
+#~ msgstr "Klõpsu liik valitakse _akna abil"
+
+#~ msgid ""
+#~ "You can also use the Dwell Click panel applet to choose the click type."
+#~ msgstr ""
+#~ "Klõpsamise liigi valimiseks on võimalik kasutada ka ooteaja klõpsu "
+#~ "paneelirakendit."
+
+#~ msgid "_Initiate click when stopping pointer movement"
+#~ msgstr "_Kursori peatumisel tehakse hiireklõps"
+
+#~ msgid "_Single click:"
+#~ msgstr "Ük_sikklõps:"
+
+#~ msgid "_Trigger secondary click by holding down the primary button"
+#~ msgstr "_Vasaku nupu allhoidmisel tehakse paremklõps"
+
+#~ msgid "Example Panel"
+#~ msgstr "Näidispaneel"
+
+#~ msgid "Example preferences panel"
+#~ msgstr "Eelistuste näidispaneel"
 
 #~ msgid "12 hour format"
 #~ msgstr "12 tunni vorming"
@@ -2380,9 +2747,6 @@ msgstr "_Kõik sätted"
 #~ msgid "_Detect Monitors"
 #~ msgstr "_Tuvasta kuvarid"
 
-#~ msgid "New Location..."
-#~ msgstr "Uus asukoht..."
-
 #~ msgid "Location already exists"
 #~ msgstr "Asukoht on juba olemas"
 
@@ -2582,9 +2946,6 @@ msgstr "_Kõik sätted"
 #~ msgid "A_IM/iChat:"
 #~ msgstr "A_IM/iChat:"
 
-#~ msgid "About Me"
-#~ msgstr "Minust"
-
 #~ msgid "Address"
 #~ msgstr "Aadress"
 
@@ -2672,23 +3033,14 @@ msgstr "_Kõik sätted"
 #~ msgid "_Department:"
 #~ msgstr "_Osakond:"
 
-#~ msgid "_Home page:"
-#~ msgstr "_Koduleht:"
-
 #~ msgid "_Home:"
 #~ msgstr "_Kodus:"
 
 #~ msgid "_Manager:"
 #~ msgstr "_Juhataja:"
 
-#~ msgid "_Profession:"
-#~ msgstr "_Amet:"
-
 #~ msgid "_State/Province:"
 #~ msgstr "_Osariik/Maakond:"
-
-#~ msgid "_Title:"
-#~ msgstr "_Ametinimetus:"
 
 #~ msgid "_Work:"
 #~ msgstr "_Tööl:"
@@ -2848,9 +3200,6 @@ msgstr "_Kõik sätted"
 
 #~ msgid "Use selected font"
 #~ msgstr "Kasuta valitud kirjatüüpi"
-
-#~ msgid "Could not load user interface file: %s"
-#~ msgstr "Kasutajaliidese faili pole võimalik laadida: %s"
 
 #~ msgid "Specify the filename of a theme to install"
 #~ msgstr "Paigaldatava teemafaili nime määramine"
@@ -3017,17 +3366,11 @@ msgstr "_Kõik sätted"
 #~ msgid "_BGR"
 #~ msgstr "_SRP"
 
-#~ msgid "_Description:"
-#~ msgstr "_Kirjeldus:"
-
 #~ msgid "_Document font:"
 #~ msgstr "_Dokumendi kirjatüüp:"
 
 #~ msgid "_Fixed width font:"
 #~ msgstr "Ki_ndla laiusega kirjatüüp:"
-
-#~ msgid "_Install..."
-#~ msgstr "_Paigalda..."
 
 #~ msgid "_Medium"
 #~ msgstr "_Keskmine"
@@ -3052,10 +3395,6 @@ msgstr "_Kõik sätted"
 
 #~ msgid "_Slight"
 #~ msgstr "_Veidi"
-
-# Taustapildi paigutuse valikukasti ees (ekraan täidetud, korduv, keskel jt)
-#~ msgid "_Style:"
-#~ msgstr "_Paigutus:"
 
 #~ msgid "_Tooltips:"
 #~ msgstr "_Vihjed:"
@@ -3240,9 +3579,6 @@ msgstr "_Kõik sätted"
 #~ msgid "Default Pointer - Current"
 #~ msgstr "Vaikimisi kursor - käesolev"
 
-#~ msgid "White Pointer"
-#~ msgstr "Valge kursor"
-
 #~ msgid "White Pointer - Current"
 #~ msgstr "Valge kursor - käesolev"
 
@@ -3381,9 +3717,6 @@ msgstr "_Kõik sätted"
 
 #~ msgid "Could not open %s/%s: %s\n"
 #~ msgstr "Faili %s/%s pole võimalik avada: %s\n"
-
-#~ msgid "Could not rename %s to %s: %s\n"
-#~ msgstr "Nime muutmine %s -> %s pole võimalik: %s\n"
 
 #~ msgid ""
 #~ "Authentication is required to install multi-monitor settings for all users"
@@ -3701,12 +4034,6 @@ msgstr "_Kõik sätted"
 #~ "paremklõps, valida 'Lisa paneelile', siis valida 'Teateala' ja klõpsata "
 #~ "nupul 'Lisa'."
 
-#~ msgid "Start %s"
-#~ msgstr "Käivita %s"
-
-#~ msgid "Help"
-#~ msgstr "Abi"
-
 #~ msgid "Upgrade"
 #~ msgstr "Uuenda"
 
@@ -3748,9 +4075,6 @@ msgstr "_Kõik sätted"
 
 #~ msgid "Move to Trash"
 #~ msgstr "Viska prügikasti"
-
-#~ msgid "Delete"
-#~ msgstr "Kustuta"
 
 #~ msgid "Are you sure you want to permanently delete \"%s\"?"
 #~ msgstr "Kas soovid \"%s\" jäädavalt kustutada?"
