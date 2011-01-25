@@ -181,8 +181,35 @@ um_add_user_languages (GtkTreeModel *model)
         g_hash_table_destroy (user_langs);
 }
 
+static gboolean
+finish_um_language_chooser (gpointer user_data)
+{
+	GtkWidget *chooser = (GtkWidget *) user_data;
+	GtkWidget *list;
+	GtkTreeModel *model;
+	GtkWindow *parent;
+	GHashTable *user_langs;
+
+	/* Did we get called after the widget was destroyed? */
+	if (chooser == NULL)
+		return FALSE;
+
+	list = g_object_get_data (G_OBJECT (chooser), "list");
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+	user_langs = g_object_get_data (G_OBJECT (chooser), "user-langs");
+
+	cc_common_language_add_available_languages (GTK_LIST_STORE (model), user_langs);
+
+	parent = gtk_window_get_transient_for (GTK_WINDOW (chooser));
+	gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (parent)), NULL);
+
+	g_object_set_data (G_OBJECT (chooser), "user-langs", NULL);
+
+	return FALSE;
+}
+
 GtkWidget *
-um_language_chooser_new (void)
+um_language_chooser_new (GtkWidget *parent)
 {
         GtkBuilder *builder;
         const char *filename;
@@ -192,6 +219,7 @@ um_language_chooser_new (void)
         GtkWidget *button;
         GtkTreeModel *model;
         GHashTable *user_langs;
+        GdkCursor *cursor;
 
         builder = gtk_builder_new ();
         filename = UIDIR "/language-chooser.ui";
@@ -219,10 +247,15 @@ um_language_chooser_new (void)
         cc_common_language_setup_list (list, user_langs);
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 
-	/* Add the other languages */
-        cc_common_language_add_available_languages (GTK_LIST_STORE (model), user_langs);
+	/* Setup so that the list is added after the dialogue is shown */
+        cursor = gdk_cursor_new (GDK_WATCH);
+        gdk_window_set_cursor (gtk_widget_get_window (parent), cursor);
+        g_object_unref (cursor);
 
-        g_hash_table_destroy (user_langs);
+	g_object_set_data_full (G_OBJECT (chooser), "user-langs",
+				user_langs, (GDestroyNotify) g_hash_table_destroy);
+	g_object_add_weak_pointer (G_OBJECT (chooser), (gpointer *) &chooser);
+        g_idle_add ((GSourceFunc) finish_um_language_chooser, chooser);
 
         g_object_unref (builder);
 

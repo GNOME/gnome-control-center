@@ -71,7 +71,6 @@ struct _UmUserPanelPrivate {
         GtkWidget *lock_button;
         GPermission *permission;
         GtkWidget *language_chooser;
-        guint language_chooser_idle;
 
         UmAccountDialog *account_dialog;
         UmPasswordDialog *password_dialog;
@@ -672,29 +671,6 @@ language_response (GtkDialog         *dialog,
         gtk_widget_set_sensitive (combo, TRUE);
 }
 
-static gboolean
-finish_language_chooser (UmUserPanelPrivate *d)
-{
-        GtkWidget *combo;
-
-        combo = get_widget (d, "account-language-combo");
-        d->language_chooser = um_language_chooser_new ();
-        gtk_window_set_transient_for (GTK_WINDOW (d->language_chooser),
-                                      GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
-        g_signal_connect (d->language_chooser, "response",
-                          G_CALLBACK (language_response), d);
-        g_signal_connect (d->language_chooser, "delete-event",
-                          G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-        gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)), NULL);
-        gtk_window_present (GTK_WINDOW (d->language_chooser));
-        gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
-
-        d->language_chooser_idle = 0;
-
-        return FALSE;
-}
-
 static void
 language_changed (UmEditableCombo    *combo,
                   UmUserPanelPrivate *d)
@@ -703,7 +679,6 @@ language_changed (UmEditableCombo    *combo,
         GtkTreeIter iter;
         gchar *lang;
         UmUser *user;
-        GdkCursor *cursor;
 
         if (!um_editable_combo_get_active_iter (combo, &iter))
                  return;
@@ -726,16 +701,17 @@ language_changed (UmEditableCombo    *combo,
                 return;
         }
 
-	/* Already in flight? */
-        if (d->language_chooser_idle > 0)
-                return;
+        d->language_chooser = um_language_chooser_new (gtk_widget_get_toplevel (d->main_box));
+        gtk_window_set_transient_for (GTK_WINDOW (d->language_chooser),
+                                      GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
+        g_signal_connect (d->language_chooser, "response",
+                          G_CALLBACK (language_response), d);
+        g_signal_connect (d->language_chooser, "delete-event",
+                          G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-        cursor = gdk_cursor_new (GDK_WATCH);
-        gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)),
-                               cursor);
-        g_object_unref (cursor);
-
-        d->language_chooser_idle = g_idle_add ((GSourceFunc)finish_language_chooser, d);
+        gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)), NULL);
+        gtk_window_present (GTK_WINDOW (d->language_chooser));
+        gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
 }
 
 static void
@@ -1301,10 +1277,6 @@ um_user_panel_dispose (GObject *object)
         if (priv->photo_dialog) {
                 um_photo_dialog_free (priv->photo_dialog);
                 priv->photo_dialog = NULL;
-        }
-        if (priv->language_chooser_idle > 0) {
-                g_source_remove (priv->language_chooser_idle);
-                priv->language_chooser_idle = 0;
         }
         if (priv->language_chooser) {
                 gtk_widget_destroy (priv->language_chooser);

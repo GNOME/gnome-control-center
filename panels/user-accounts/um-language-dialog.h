@@ -32,7 +32,7 @@ typedef struct _UmLanguageDialog UmLanguageDialog;
 void              um_add_user_languages       (GtkTreeModel     *model);
 gchar            *um_get_current_language     (void);
 
-GtkWidget        *um_language_chooser_new          (void);
+GtkWidget        *um_language_chooser_new          (GtkWidget *parent);
 gchar            *um_language_chooser_get_language (GtkWidget *chooser);
 
 G_END_DECLS
