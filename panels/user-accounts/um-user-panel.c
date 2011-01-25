@@ -51,7 +51,6 @@
 
 #include "um-account-dialog.h"
 #include "um-language-dialog.h"
-#include "um-login-options.h"
 #include "um-password-dialog.h"
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
@@ -68,7 +67,7 @@ struct _UmUserPanelPrivate {
         UmUserManager *um;
         GtkBuilder *builder;
 
-        GtkWidget *notebook;
+        GtkWidget *main_box;
         GtkWidget *lock_button;
         GPermission *permission;
         GtkWidget *language_chooser;
@@ -77,7 +76,6 @@ struct _UmUserPanelPrivate {
         UmAccountDialog *account_dialog;
         UmPasswordDialog *password_dialog;
         UmPhotoDialog *photo_dialog;
-        UmLoginOptions *login_options;
 
         PolkitAuthority *authority;
 };
@@ -331,7 +329,7 @@ static void
 add_user (GtkButton *button, UmUserPanelPrivate *d)
 {
         um_account_dialog_show (d->account_dialog,
-                                GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)),
+                                GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                 (UserCreatedCallback)select_created_user, d);
 }
 
@@ -347,7 +345,7 @@ delete_user_done (UmUserManager     *manager,
                 if (!g_error_matches (error, UM_USER_MANAGER_ERROR, UM_USER_MANAGER_ERROR_PERMISSION_DENIED)) {
                         GtkWidget *dialog;
 
-                        dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)),
+                        dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                                          GTK_MESSAGE_ERROR,
                                                          GTK_BUTTONS_CLOSE,
@@ -407,7 +405,7 @@ delete_user (GtkButton *button, UmUserPanelPrivate *d)
                 return;
         }
         else if (um_user_get_uid (user) == getuid ()) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)),
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                                  0,
                                                  GTK_MESSAGE_INFO,
                                                  GTK_BUTTONS_CLOSE,
@@ -416,7 +414,7 @@ delete_user (GtkButton *button, UmUserPanelPrivate *d)
                                   G_CALLBACK (gtk_widget_destroy), NULL);
         }
         else if (um_user_is_logged_in (user)) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)),
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                                  0,
                                                  GTK_MESSAGE_INFO,
                                                  GTK_BUTTONS_CLOSE,
@@ -429,7 +427,7 @@ delete_user (GtkButton *button, UmUserPanelPrivate *d)
                                   G_CALLBACK (gtk_widget_destroy), NULL);
         }
         else {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)),
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                                  0,
                                                  GTK_MESSAGE_QUESTION,
                                                  GTK_BUTTONS_NONE,
@@ -645,13 +643,13 @@ finish_language_chooser (UmUserPanelPrivate *d)
         combo = get_widget (d, "account-language-combo");
         d->language_chooser = um_language_chooser_new ();
         gtk_window_set_transient_for (GTK_WINDOW (d->language_chooser),
-                                      GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)));
+                                      GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
         g_signal_connect (d->language_chooser, "response",
                           G_CALLBACK (language_response), d);
         g_signal_connect (d->language_chooser, "delete-event",
                           G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-        gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->notebook)), NULL);
+        gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)), NULL);
         gtk_window_present (GTK_WINDOW (d->language_chooser));
         gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
 
@@ -696,7 +694,7 @@ language_changed (UmEditableCombo    *combo,
                 return;
 
         cursor = gdk_cursor_new (GDK_WATCH);
-        gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->notebook)),
+        gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)),
                                cursor);
         gdk_cursor_unref (cursor);
 
@@ -712,7 +710,7 @@ change_password (GtkButton *button, UmUserPanelPrivate *d)
 
         um_password_dialog_set_user (d->password_dialog, user);
         um_password_dialog_show (d->password_dialog,
-                                  GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)));
+                                  GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
 
         g_object_unref (user);
 }
@@ -760,7 +758,7 @@ change_fingerprint (GtkButton *button, UmUserPanelPrivate *d)
 
         label = get_widget (d, "account-fingerprint-value-label");
         label2 = get_widget (d, "account-fingerprint-button-label");
-        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)), label, label2, user);
+        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)), label, label2, user);
         g_object_unref (user);
 }
 
@@ -822,7 +820,7 @@ users_loaded (UmUserManager     *manager,
         GtkWidget *dialog;
 
         if (um_user_manager_no_service (d->um)) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->notebook)),
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                                  GTK_DIALOG_MODAL,
                                                  GTK_MESSAGE_OTHER,
                                                  GTK_BUTTONS_CLOSE,
@@ -1233,13 +1231,12 @@ um_user_panel_init (UmUserPanel *self)
         }
 
         setup_main_window (d);
-        d->login_options = um_login_options_new (d->builder);
         d->account_dialog = um_account_dialog_new ();
         d->password_dialog = um_password_dialog_new ();
         button = get_widget (d, "user-icon-button");
         d->photo_dialog = um_photo_dialog_new (button);
-        d->notebook = get_widget (d, "top-level-notebook");
-        gtk_widget_reparent (d->notebook, GTK_WIDGET (self));
+        d->main_box = get_widget (d, "accounts-vbox");
+        gtk_widget_reparent (d->main_box, GTK_WIDGET (self));
 }
 
 static void
@@ -1274,10 +1271,6 @@ um_user_panel_dispose (GObject *object)
         if (priv->language_chooser) {
                 gtk_widget_destroy (priv->language_chooser);
                 priv->language_chooser = NULL;
-        }
-        if (priv->login_options) {
-                um_login_options_free (priv->login_options);
-                priv->login_options = NULL;
         }
         if (priv->authority) {
                 g_object_unref (priv->authority);

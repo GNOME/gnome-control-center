@@ -47,8 +47,6 @@ libuser_accounts_la_SOURCES =		\
 	um-language-dialog.c		\
 	um-lockbutton.h			\
 	um-lockbutton.c			\
-	um-login-options.h		\
-	um-login-options.c		\
 	um-password-dialog.h		\
 	um-password-dialog.c		\
 	um-photo-dialog.h		\
