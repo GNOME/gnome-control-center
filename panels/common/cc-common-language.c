@@ -249,8 +249,6 @@ languages_foreach_cb (gpointer key,
 			    SEPARATOR_COL, FALSE,
 			    USER_LANGUAGE, TRUE,
 			    -1);
-
-	g_message ("adding '%s' (%s) to the store", display_locale, locale);
 }
 
 static gboolean
