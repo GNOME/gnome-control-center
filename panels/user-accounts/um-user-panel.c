@@ -1231,8 +1231,6 @@ um_user_panel_init (UmUserPanel *self)
         volatile GType type;
         const gchar *filename;
         GtkWidget *button;
-        GtkWidget *toolbar;
-        GtkStyleContext *context;
 
         dbus_g_object_register_marshaller (fprintd_marshal_VOID__STRING_BOOLEAN,
                                            G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_INVALID);
@@ -1267,10 +1265,6 @@ um_user_panel_init (UmUserPanel *self)
         d->photo_dialog = um_photo_dialog_new (button);
         d->main_box = get_widget (d, "accounts-vbox");
         gtk_widget_reparent (d->main_box, GTK_WIDGET (self));
-
-        toolbar = get_widget (d, "add-remove-toolbar");
-        context = gtk_widget_get_style_context (toolbar);
-        gtk_style_context_add_class (context, "internal-toolbar");
 }
 
 static void
