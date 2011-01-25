@@ -322,7 +322,7 @@ popup_menu_below_button (GtkMenu   *menu,
         GtkTextDirection direction;
         GtkAllocation allocation;
 
-        gtk_widget_size_request (GTK_WIDGET (menu), &menu_req);
+	gtk_widget_get_preferred_size (GTK_WIDGET (menu), NULL, &menu_req);
 
         direction = gtk_widget_get_direction (button);
 
