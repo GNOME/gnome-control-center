@@ -283,6 +283,23 @@
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkLabel" id="login-options-label">
+                                <property name="visible">True</property>
+                                <property name="xalign">1</property>
+                                <property name="ypad">5</property>
+                                <property name="label" translatable="yes">Login Options</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="top_attach">3</property>
+                                <property name="bottom_attach">4</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+                            <child>
                               <object class="GtkLabel" id="password-label">
                                 <property name="visible">True</property>
                                 <property name="xalign">1</property>
@@ -292,8 +309,8 @@
                                 </attributes>
                               </object>
                               <packing>
-                                <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
+                                <property name="top_attach">4</property>
+                                <property name="bottom_attach">5</property>
                                 <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
@@ -305,8 +322,8 @@
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="right_attach">2</property>
-                                <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
+                                <property name="top_attach">4</property>
+                                <property name="bottom_attach">5</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
@@ -320,8 +337,8 @@
                                 </attributes>
                               </object>
                               <packing>
-                                <property name="top_attach">4</property>
-                                <property name="bottom_attach">5</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
                                 <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
@@ -422,8 +439,8 @@
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="right_attach">2</property>
-                                <property name="top_attach">4</property>
-                                <property name="bottom_attach">5</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
                                 <property name="x_options">GTK_FILL</property>
                                 <property name="y_options"></property>
                               </packing>
@@ -463,6 +480,7 @@
       <widget name="account-fingerprint-label"/>
       <widget name="language-label"/>
       <widget name="password-label"/>
+      <widget name="login-options-label"/>
       <widget name="account-type-label"/>
     </widgets>
   </object>
