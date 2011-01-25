@@ -532,9 +532,6 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), &iter);
         g_free (lang);
 
-        label = get_widget (d, "account-location-entry");
-        um_editable_entry_set_text (UM_EDITABLE_ENTRY (label), um_user_get_location (user));
-
         widget = get_widget (d, "account-fingerprint-notebook");
         label = get_widget (d, "account-fingerprint-label");
         label2 = get_widget (d, "account-fingerprint-value-label");
@@ -579,7 +576,7 @@ change_name_done (GtkWidget          *entry,
 
         text = um_editable_entry_get_text (UM_EDITABLE_ENTRY (entry));
 
-        if (g_strcmp0 (text, um_user_get_location (user)) != 0) {
+        if (g_strcmp0 (text, um_user_get_real_name (user)) != 0) {
                 um_user_set_real_name (user, text);
         }
 }
@@ -728,22 +725,6 @@ change_email_done (UmEditableEntry    *e,
 
         if (g_strcmp0 (text, um_user_get_email (user)) != 0) {
                 um_user_set_email (user, text);
-        }
-}
-
-static void
-change_location_done (GtkWidget         *entry,
-                      UmUserPanelPrivate *d)
-{
-        const gchar *text;
-        UmUser *user;
-
-        user = get_selected_user (d);
-
-        text = um_editable_entry_get_text (UM_EDITABLE_ENTRY (entry));
-
-        if (g_strcmp0 (text, um_user_get_location (user)) != 0) {
-                um_user_set_location (user, text);
         }
 }
 
@@ -954,9 +935,6 @@ on_permission_changed (GPermission *permission,
                 um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "account-email-entry")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-email-entry"));
 
-                um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "account-location-entry")), TRUE);
-                remove_unlock_tooltip (get_widget (d, "account-location-entry"));
-
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-language-combo"));
 
@@ -974,9 +952,6 @@ on_permission_changed (GPermission *permission,
 
                 um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "account-email-entry")), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-email-entry"));
-
-                um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "account-location-entry")), FALSE);
-                add_unlock_tooltip (get_widget (d, "account-location-entry"));
 
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-language-combo"));
@@ -1156,9 +1131,6 @@ setup_main_window (UmUserPanelPrivate *d)
 
         button = get_widget (d, "account-language-combo");
         g_signal_connect (button, "editing-done", G_CALLBACK (language_changed), d);
-
-        button = get_widget (d, "account-location-entry");
-        g_signal_connect (button, "editing-done", G_CALLBACK (change_location_done), d);
 
         button = get_widget (d, "account-fingerprint-button");
         g_signal_connect (button, "clicked",
