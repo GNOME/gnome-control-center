@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-23 13:54+0200\n"
-"PO-Revision-Date: 2011-01-23 13:54+0300\n"
+"POT-Creation-Date: 2011-01-25 02:01+0200\n"
+"PO-Revision-Date: 2011-01-25 02:00+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -245,6 +245,15 @@ msgstr "مقاسات متعددة"
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
+
+#: ../panels/common/cc-common-language.c:304
+#: ../panels/user-accounts/um-language-dialog.c:151
+msgid "Other..."
+msgstr "أخرى..."
+
+#: ../panels/common/gdm-languages.c:709
+msgid "Unspecified"
+msgstr "غير محدّد"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "16"
@@ -782,10 +791,12 @@ msgid "_Speed:"
 msgstr "ال_سرعة:"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
+#: ../panels/network/network.ui.h:28
 msgid "add-toolbutton"
 msgstr ""
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
+#: ../panels/network/network.ui.h:29
 msgid "remove-toolbutton"
 msgstr ""
 
@@ -858,172 +869,172 @@ msgid "Removable Media"
 msgstr "الوسائط المنفصلة"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:175
+#: ../panels/printers/cc-printers-panel.c:210
 msgid "Low on toner"
 msgstr "الحبر قليل"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:177
+#: ../panels/printers/cc-printers-panel.c:212
 msgid "Out of toner"
 msgstr "نفد الحبر"
 
 #. Translators: "Developer" like on photo development context
-#: ../panels/printers/cc-printers-panel.c:179
+#: ../panels/printers/cc-printers-panel.c:214
 msgid "Low on developer"
 msgstr "المُحمِّض قليل"
 
 #. Translators: "Developer" like on photo development context
-#: ../panels/printers/cc-printers-panel.c:181
+#: ../panels/printers/cc-printers-panel.c:216
 msgid "Out of developer"
 msgstr "نفد المُحمِّض"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:183
+#: ../panels/printers/cc-printers-panel.c:218
 msgid "Low on a marker supply"
 msgstr "اللون قليل"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:185
+#: ../panels/printers/cc-printers-panel.c:220
 msgid "Out of a marker supply"
 msgstr "نفد اللون"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:187
+#: ../panels/printers/cc-printers-panel.c:222
 msgid "Open cover"
 msgstr "الغطاء مفتوح"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:189
+#: ../panels/printers/cc-printers-panel.c:224
 msgid "Open door"
 msgstr "الباب مفنوح"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:191
+#: ../panels/printers/cc-printers-panel.c:226
 msgid "Low on paper"
 msgstr "الورق قليل"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:193
+#: ../panels/printers/cc-printers-panel.c:228
 msgid "Out of paper"
 msgstr "نفد الورق"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:195
+#: ../panels/printers/cc-printers-panel.c:230
 msgid "Offline"
 msgstr "غير متصلة"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:197
+#: ../panels/printers/cc-printers-panel.c:232
 msgid "Paused"
 msgstr "مُلبثة"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:199
+#: ../panels/printers/cc-printers-panel.c:234
 msgid "Waste receptacle almost full"
 msgstr "حاوية النفايات على وشك الامتلاء"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:201
+#: ../panels/printers/cc-printers-panel.c:236
 msgid "Waste receptacle full"
 msgstr "حاوية النفايات ممتلئة"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:203
+#: ../panels/printers/cc-printers-panel.c:238
 msgid "The optical photo conductor is near end of life"
 msgstr "قاربت صلاحية المقاوم الضوئي على الانتهاء"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:205
+#: ../panels/printers/cc-printers-panel.c:240
 msgid "The optical photo conductor is no longer functioning"
 msgstr "لم يعد المقاوم الضوئي يعمل"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:294
+#: ../panels/printers/cc-printers-panel.c:329
 msgid "Idle"
 msgstr "ساكنة"
 
 #. Translators: Printer's state (jobs are processing)
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:298
-#: ../panels/printers/cc-printers-panel.c:689
+#: ../panels/printers/cc-printers-panel.c:333
+#: ../panels/printers/cc-printers-panel.c:726
 msgid "Processing"
 msgstr "يُعالج"
 
 #. Translators: Printer's state (no jobs can be processed)
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:302
-#: ../panels/printers/cc-printers-panel.c:693
+#: ../panels/printers/cc-printers-panel.c:337
+#: ../panels/printers/cc-printers-panel.c:730
 msgid "Stopped"
 msgstr "متوقف"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:681
+#: ../panels/printers/cc-printers-panel.c:718
 msgid "Pending"
 msgstr "منتظر"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:685
+#: ../panels/printers/cc-printers-panel.c:722
 msgid "Held"
 msgstr "معلق"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:697
+#: ../panels/printers/cc-printers-panel.c:734
 msgid "Canceled"
 msgstr "ملغى"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:701
+#: ../panels/printers/cc-printers-panel.c:738
 msgid "Aborted"
 msgstr "مُجهض"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:705
+#: ../panels/printers/cc-printers-panel.c:742
 msgid "Completed"
 msgstr "مُنجز"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:796
+#: ../panels/printers/cc-printers-panel.c:837
 msgid "Job Title"
 msgstr "عنوان المهمة"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:804
+#: ../panels/printers/cc-printers-panel.c:845
 msgid "Job State"
 msgstr "حالة المهمة"
 
 #. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:810
+#: ../panels/printers/cc-printers-panel.c:851
 msgid "User"
 msgstr "المستخدم"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:816
+#: ../panels/printers/cc-printers-panel.c:857
 msgid "Time"
 msgstr "الوقت"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1000
+#: ../panels/printers/cc-printers-panel.c:1047
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "تعذّر الاتصال بناقل النظام: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1589
+#: ../panels/printers/cc-printers-panel.c:1657
 msgid "Test page"
 msgstr "صفحة اختبار"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1597
+#: ../panels/printers/cc-printers-panel.c:1665
 msgid "Clean print heads"
 msgstr "نظف رؤوس الطباعة"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1600
+#: ../panels/printers/cc-printers-panel.c:1670
 msgid "An error has occured during a maintenance command."
 msgstr "حدث عطل أثناء تنفيذ أمر الصيانة."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1636
+#: ../panels/printers/cc-printers-panel.c:1708
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "تعذّر تحميل الواجهة: %s"
@@ -1081,7 +1092,7 @@ msgstr "علّق"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
 #: ../panels/printers/printers.ui.h:15
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "Location:"
 msgstr "المكان:"
 
@@ -1095,102 +1106,119 @@ msgstr "اطبع صفحة اختبار"
 msgid "Printer Jobs"
 msgstr "مهام الطابعة"
 
-#. Translators: Print paused print job.
+#. Translators: This shows queue of print jobs.
 #: ../panels/printers/printers.ui.h:21
+msgid "Queue"
+msgstr "الطابور"
+
+#. Translators: Print paused print job.
+#: ../panels/printers/printers.ui.h:23
 msgid "Release"
 msgstr "أطلِق"
 
 #. Translators: Users which are allowed to print on this printer.
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:25
 msgid "Share with these users:"
 msgstr "شارك مع هؤلاء المستخدمين:"
 
-#: ../panels/printers/printers.ui.h:24
+#: ../panels/printers/printers.ui.h:26
 msgid "Show / hide printer's jobs"
 msgstr "أظهر أو أخفِ مهام الطابعة"
 
 #. Translators: Status of the printer.
-#: ../panels/printers/printers.ui.h:26
+#: ../panels/printers/printers.ui.h:28
 msgid "Status:"
 msgstr "الحالة:"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:28
+#: ../panels/printers/printers.ui.h:30
 msgid "Supply:"
 msgstr "الإمداد:"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Install languages..."
+msgstr "ثبّت اللغات..."
+
+#: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Keyboard _model:"
 msgstr "_طراز لوحة المفاتيح:"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Language"
+msgstr "اللغة"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Layouts"
 msgstr "التخطيطات"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:5
 msgid "List of keyboard layouts selected for usage"
 msgstr "قائمة بتخطيطات لوحة المفاتيح المختارة للاستخدام"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Move _Down"
 msgstr "انقل لأ_سفل"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Move _Up"
 msgstr "انقل لأ_على"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Move the selected keyboard layout down in the list"
 msgstr "انقل تخطيط لوحة المفاتيح المحدد إلى أسفل"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Move the selected keyboard layout up in the list"
 msgstr "انقل تخطيط لوحة المفاتيح المحدد إلى أعلى"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "New windows u_se active window's layout"
 msgstr "النوافذ الجديدة تستخدم _تخطيط النافذة النشطة"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Print a diagram of the selected keyboard layout"
 msgstr "اطبع رسما لتخطيط لوحة المفاتيح المحدد"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:12
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "المنطقة واللغة"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Remove the selected keyboard layout from the list"
 msgstr "احذف تخطيط لوحة المفاتيح المحدد من القائمة"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
 msgstr "غيّر إعدادات لوحة المفاتيح الحالية إلى الإعدادات المبدئية"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Reset to De_faults"
 msgstr "ا_ستعد المبدئيات"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:17
+msgid "Select a display language"
+msgstr "اختر لغة العرض"
+
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Select a keyboard layout to be added to the list"
 msgstr "اختر تخطيط لوحة مفاتيح ليُضاف إلى القائمة"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:19
 msgid "View and edit keyboard layout options"
 msgstr "اعرض وحلالا خيارات تخطيط لوحة المفاتيح"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "_Add..."
 msgstr "أ_ضف..."
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "_Options..."
 msgstr "ال_خيارات…"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "_Separate layout for each window"
 msgstr "_تخطيط مستقل لكل نافذة"
 
@@ -2411,70 +2439,61 @@ msgid "Text size:"
 msgstr "حجم النص:"
 
 #: ../panels/universal-access/uap.ui.h:80
+#, fuzzy
 msgid "Treats a sequence of modifier keys as a key combination"
-msgstr ""
+msgstr "تعتبر تتابعا من المفاتيح المُغيِّرة كما لو كان اختصارا"
 
 #: ../panels/universal-access/uap.ui.h:81
-#, fuzzy
 msgid "Trigger a click when the pointer hovers"
-msgstr "ابتد_ئ بالنقر عند توقف حركة المؤشر"
+msgstr "ابتدئ نقرة عند حومان المؤشر"
 
 #: ../panels/universal-access/uap.ui.h:82
-#, fuzzy
 msgid "Trigger a secondary click by holding down the primary button"
-msgstr "يسبب النقر ال_ثانوي عن طريق الاستمرار بضغط الزر الأولي"
+msgstr "ابتدئ نقرة ثانوية عن طريق الاستمرار بضغط الزر الأولي"
 
 #: ../panels/universal-access/uap.ui.h:83
-#, fuzzy
 msgid "Turn on accessibility features from the keyboard"
-msgstr "صافرة عند تشغيل أو تعطيل _ميزات تسهيل الاستخدام من لوحة المفاتيح"
+msgstr "شغِّل خصائص الإتاحة من لوحة المفاتيح"
 
 #: ../panels/universal-access/uap.ui.h:84
 msgid "Turn on or off:"
-msgstr ""
+msgstr "شغِّل أو عطِّل:"
 
 #: ../panels/universal-access/uap.ui.h:85
-#, fuzzy
 msgid "Type here to test settings"
-msgstr "ا_كتب لاختبار الإعدادات:"
+msgstr "اكتب هنا لاختبار الإعدادات"
 
 #: ../panels/universal-access/uap.ui.h:86
-#, fuzzy
 msgid "Typing"
-msgstr "استراحة عن الكتابة"
+msgstr "الكتابة"
 
 #: ../panels/universal-access/uap.ui.h:87
-#, fuzzy
 msgid "Typing Assistant"
-msgstr "المُ_سَاعَد:"
+msgstr "مساعدة الكتابة"
 
 #: ../panels/universal-access/uap.ui.h:88
 msgid "Use a visual indication when an alert sound occurs"
-msgstr ""
+msgstr "أظهر مؤشرا بصريا عند حدوث تنبيه صوتي"
 
 #: ../panels/universal-access/uap.ui.h:89
 msgid "Use an alternative form of text input"
-msgstr ""
+msgstr "استخدم صورة بديلة من الإدخال النصّي"
 
 #: ../panels/universal-access/uap.ui.h:90
-#, fuzzy
 msgid "Video Mouse"
-msgstr "الفأرة"
+msgstr "فأرة الفديو"
 
 #: ../panels/universal-access/uap.ui.h:91
-#, fuzzy
 msgid "Visual Alerts"
-msgstr "مرئي"
+msgstr "التنبيهات البصرية"
 
 #: ../panels/universal-access/uap.ui.h:93
-#, fuzzy
 msgid "Zoom in:"
-msgstr "التقريب"
+msgstr "قرّب:"
 
 #: ../panels/universal-access/uap.ui.h:94
-#, fuzzy
 msgid "Zoom out:"
-msgstr "التقريب"
+msgstr "بعّد:"
 
 #: ../panels/universal-access/uap.ui.h:95
 msgid "_Motion threshold:"
@@ -2482,19 +2501,15 @@ msgstr "عتبة الحر_كة:"
 
 #: ../panels/universal-access/uap.ui.h:96
 msgid "accepted"
-msgstr ""
+msgstr "قُبِلَ"
 
 #: ../panels/universal-access/uap.ui.h:97
 msgid "pressed"
-msgstr ""
+msgstr "ضُغِطَ"
 
 #: ../panels/universal-access/uap.ui.h:98
 msgid "rejected"
-msgstr ""
-
-#: ../panels/user-accounts/gdm-languages.c:709
-msgid "Unspecified"
-msgstr "غير محدّد"
+msgstr "رُفِضَ"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -2677,10 +2692,6 @@ msgstr ""
 "يسجل بصمات\n"
 "<b><big>%s</big></b>"
 
-#: ../panels/user-accounts/um-language-dialog.c:299
-msgid "Other..."
-msgstr "أخرى..."
-
 #: ../panels/user-accounts/um-lockbutton.c:373
 msgid "Locked"
 msgstr "مُوصد"
@@ -2820,31 +2831,31 @@ msgstr "اسم المستخدم '%s' موجود بالفعل."
 msgid "This user does not exist."
 msgstr "المستخدم غير موجود."
 
-#: ../panels/user-accounts/um-user-panel.c:353
+#: ../panels/user-accounts/um-user-panel.c:354
 msgid "Failed to delete user"
 msgstr "فشل حذف المستخدم"
 
-#: ../panels/user-accounts/um-user-panel.c:413
+#: ../panels/user-accounts/um-user-panel.c:414
 msgid "You cannot delete your own account."
 msgstr "لا يمكنك حذف حسابك أنت."
 
-#: ../panels/user-accounts/um-user-panel.c:422
+#: ../panels/user-accounts/um-user-panel.c:423
 #, c-format
 msgid "%s is still logged in"
 msgstr "ما يزال %s والجا"
 
-#: ../panels/user-accounts/um-user-panel.c:426
+#: ../panels/user-accounts/um-user-panel.c:427
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "حذف مستخدم أثناء ولوجه قد يترك النظام في حالة غير مستقرة."
 
-#: ../panels/user-accounts/um-user-panel.c:435
+#: ../panels/user-accounts/um-user-panel.c:436
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "أتريد إبقاء ملفات %s؟"
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:440
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -2852,42 +2863,42 @@ msgstr ""
 "من الممكن الإبقاء على مجلد المنزل وخزانة البريد والملفات المؤقتة عند حذف "
 "حساب مستخدم."
 
-#: ../panels/user-accounts/um-user-panel.c:442
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid "_Delete Files"
 msgstr "ا_حذف الملفات"
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:444
 msgid "_Keep Files"
 msgstr "أ_بقِ الملفات"
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:445
 msgid "_Cancel"
 msgstr "أ_لغِ"
 
-#: ../panels/user-accounts/um-user-panel.c:468
+#: ../panels/user-accounts/um-user-panel.c:469
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "الحساب معطّل"
 
-#: ../panels/user-accounts/um-user-panel.c:477
+#: ../panels/user-accounts/um-user-panel.c:478
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "لتوضع مع الولوج التالي"
 
-#: ../panels/user-accounts/um-user-panel.c:480
+#: ../panels/user-accounts/um-user-panel.c:481
 msgctxt "Password mode"
 msgid "None"
 msgstr "بدون"
 
-#: ../panels/user-accounts/um-user-panel.c:828
+#: ../panels/user-accounts/um-user-panel.c:829
 msgid "Failed to contact the accounts service"
 msgstr "فشل الاتصال بخدمة الحسابات"
 
-#: ../panels/user-accounts/um-user-panel.c:830
+#: ../panels/user-accounts/um-user-panel.c:831
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "رجاء تأكّد من أن AccountService مثبّتة ومفعّلة."
 
-#: ../panels/user-accounts/um-user-panel.c:863
+#: ../panels/user-accounts/um-user-panel.c:864
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -2895,13 +2906,12 @@ msgstr ""
 "انقر على أيقونة *\n"
 "لعمل أي تغييرات"
 
-#: ../panels/user-accounts/um-user-panel.c:901
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Create a user"
 msgstr "أنشئ مستخدما"
 
-#: ../panels/user-accounts/um-user-panel.c:912
-#: ../panels/user-accounts/um-user-panel.c:1188
+#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:1189
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -2909,13 +2919,12 @@ msgstr ""
 "انقر على أيقونة *\n"
 "لإنشاء مستخدم"
 
-#: ../panels/user-accounts/um-user-panel.c:921
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+#: ../panels/user-accounts/um-user-panel.c:922
 msgid "Delete the selected user"
 msgstr "احذف المستخدم المختار"
 
-#: ../panels/user-accounts/um-user-panel.c:933
-#: ../panels/user-accounts/um-user-panel.c:1193
+#: ../panels/user-accounts/um-user-panel.c:934
+#: ../panels/user-accounts/um-user-panel.c:1194
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -2923,11 +2932,11 @@ msgstr ""
 "انقر على أيقونة *\n"
 "لحذف المستخدم المحدد"
 
-#: ../panels/user-accounts/um-user-panel.c:1097
+#: ../panels/user-accounts/um-user-panel.c:1098
 msgid "My Account"
 msgstr "حسابي"
 
-#: ../panels/user-accounts/um-user-panel.c:1106
+#: ../panels/user-accounts/um-user-panel.c:1107
 msgid "Other Accounts"
 msgstr "الحسابات الأخرى"
 
@@ -2958,12 +2967,12 @@ msgid "Create new account"
 msgstr "أنشئ حسابا جديدا"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:24
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
 msgid "Standard"
 msgstr "عادي"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
 msgid "Supervised"
 msgstr "تحت الإشراف"
 
@@ -3087,14 +3096,14 @@ msgid ""
 "without a password.  For security, remote logins to this account are not "
 "allowed.\n"
 "\n"
-"<b>When the guest user logs out, all files and data associated with the "
-"account will be deleted.</b>"
+"                    <b>When the guest user logs out, all files and data "
+"associated with the account will be deleted.</b>"
 msgstr ""
 "سيتيح حساب الضيف لأي كان أن يلج مؤقتا إلى هذا الحاسوب بدون كلمة سر. للأمان، "
 "سن يُسمح لهذا الحساب بالولوج عن بعد.\n"
 "\n"
-"<b>عندما يخرج المستخدم الضيف فستحذف كل الملفات والبيانات المتعلقة بهذا "
-"الحساب.</b>"
+"                    <b>عندما يخرج المستخدم الضيف فستحذف كل الملفات والبيانات "
+"المتعلقة بهذا الحساب.</b>"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
@@ -3120,43 +3129,43 @@ msgstr "اسمح للضيوف بالولوج إلى هذا الحاسوب"
 msgid "Automatic Login:"
 msgstr "الولوج تلقائي:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "E-mail address:"
 msgstr "عنوان البريد الإلكتروني:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Fingerprint Login:"
 msgstr "الولوج بالبصمة:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "Language:"
 msgstr "اللغة:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
 msgid "Login Options"
 msgstr "خيارات الولوج"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
 msgid "Open"
 msgstr "افتح"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
 msgid "Password:"
 msgstr "كلمة السر:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
 msgid "Restrictions:"
 msgstr "القيود:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Show Shutdown, Suspend and Restart actions"
 msgstr "أظهر إجراءات الإطفاء والتعليق وإعادة التشغيل"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
 msgid "Show list of users"
 msgstr "أظهر قائمة المستخدمين"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
 msgid "Show password hints"
 msgstr "أظهر تلميحات كلمات السر"
 
