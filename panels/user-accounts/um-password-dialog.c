@@ -345,7 +345,7 @@ accept_password_dialog (GtkButton        *button,
                 cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
                 gdk_window_set_cursor (gtk_widget_get_window (um->dialog), cursor);
                 gdk_display_flush (display);
-                gdk_cursor_unref (cursor);
+                g_object_unref (cursor);
         }
         else {
                 um_user_set_password (um->user, mode, password, hint);

@@ -511,7 +511,7 @@ align_image (GtkWidget *child, gpointer data)
 
         if (GTK_IS_LABEL (child)) {
                 gtk_label_set_use_markup (GTK_LABEL (child), TRUE);
-                gtk_widget_modify_font (child, NULL);
+                gtk_widget_override_font (child, NULL);
                 gtk_misc_set_padding (GTK_MISC (child), 68, 10);
         }
 }
@@ -532,7 +532,6 @@ enroll_fingerprints (GtkWindow *parent,
         GError *error = NULL;
         GdkPixbuf *pixbuf;
         gchar *title;
-        GtkStyle *style;
 
         device = NULL;
 
@@ -591,11 +590,6 @@ enroll_fingerprints (GtkWindow *parent,
         gtk_window_set_resizable (GTK_WINDOW (ass), FALSE);
         gtk_window_set_type_hint (GTK_WINDOW (ass), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-        gtk_widget_realize (ass);
-        style = gtk_widget_get_style (ass);
-        gtk_widget_modify_fg (ass, GTK_STATE_SELECTED, &style->fg[GTK_STATE_NORMAL]);
-        gtk_widget_modify_bg (ass, GTK_STATE_SELECTED, &style->bg[GTK_STATE_NORMAL]);
-
         g_signal_connect (G_OBJECT (ass), "cancel",
                           G_CALLBACK (assistant_cancelled), data);
         g_signal_connect (G_OBJECT (ass), "close",
@@ -622,7 +616,8 @@ enroll_fingerprints (GtkWindow *parent,
         /* translators:
          * The variable is the name of the device, for example:
          * "To enable fingerprint login, you need to save one of your fingerprints, using the
-         * 'Digital Persona U.are.U 4000/4000B' device." */
+         * 'Digital Persona U.are.U 4000/4000B' device."
+         */
         msg = g_strdup_printf (_("To enable fingerprint login, you need to save one of your fingerprints, using the '%s' device."),
                                data->name);
         gtk_label_set_text (GTK_LABEL (WID("intro-label")), msg);

@@ -94,15 +94,15 @@ update_pixbufs (UmCropArea *area)
         gint height;
         GtkAllocation allocation;
         gdouble scale;
-        GdkColor *color;
+        GdkRGBA color;
         guint32 pixel;
         gint dest_x, dest_y, dest_width, dest_height;
         GtkWidget *widget;
-        GtkStyle *style;
+        GtkStyleContext *context;
 
         widget = GTK_WIDGET (area);
         gtk_widget_get_allocation (widget, &allocation);
-        style = gtk_widget_get_style (widget);
+        context = gtk_widget_get_style_context (widget);
 
         if (area->priv->pixbuf == NULL ||
             gdk_pixbuf_get_width (area->priv->pixbuf) != allocation.width ||
@@ -114,10 +114,10 @@ update_pixbufs (UmCropArea *area)
                                                      8,
                                                      allocation.width, allocation.height);
 
-                color = &style->bg[gtk_widget_get_state (widget)];
-                pixel = ((color->red & 0xff00) << 16) |
-                        ((color->green & 0xff00) << 8) |
-                         (color->blue & 0xff00);
+                gtk_style_context_get_background_color (context, gtk_style_context_get_state (context), &color);
+                pixel = (((gint)(color.red * 255)) << 16) |
+                        (((gint)(color.green * 255)) << 8) |
+                         ((gint)(color.blue * 255));
                 gdk_pixbuf_fill (area->priv->pixbuf, pixel);
 
                 width = gdk_pixbuf_get_width (area->priv->browse_pixbuf);
@@ -352,7 +352,7 @@ update_cursor (UmCropArea *area,
         if (cursor_type != area->priv->current_cursor) {
                 GdkCursor *cursor = gdk_cursor_new (cursor_type);
                 gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (area)), cursor);
-                gdk_cursor_unref (cursor);
+                g_object_unref (cursor);
                 area->priv->current_cursor = cursor_type;
         }
 }
