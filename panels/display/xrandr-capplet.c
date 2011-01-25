@@ -490,23 +490,31 @@ rebuild_current_monitor_label (App *app)
 
   if (use_color)
     {
-      GdkColor black = { 0, 0, 0, 0 };
+      GdkRGBA black = { 0, 0, 0, 1.0 };
+      GdkRGBA light;
 
-      gtk_widget_modify_bg (app->current_monitor_event_box, gtk_widget_get_state (app->current_monitor_event_box), &color);
+      light.red = color.red / 65535.0;
+      light.green = color.green / 65535.0;
+      light.blue = color.blue / 65535.0;
+      light.alpha = 1.0;
+      gtk_widget_override_background_color (app->current_monitor_event_box,
+                                            gtk_widget_get_state_flags (app->current_monitor_event_box),
+                                            &light);
 
       /* Make the label explicitly black.  We don't want it to follow the
        * theme's colors, since the label is always shown against a light
        * pastel background.  See bgo#556050
        */
-      gtk_widget_modify_fg (app->current_monitor_label, gtk_widget_get_state (app->current_monitor_label), &black);
+      gtk_widget_override_color (app->current_monitor_label,
+                                 gtk_widget_get_state_flags (app->current_monitor_label),
+                                 &black);
     }
   else
     {
       /* Remove any modifications we did on the label's color */
-      GtkRcStyle *reset_rc_style;
-
-      reset_rc_style = gtk_rc_style_new ();
-      gtk_widget_modify_style (app->current_monitor_label, reset_rc_style); /* takes ownership of, and destroys, the rc style */
+      gtk_widget_override_color (app->current_monitor_label,
+                                 gtk_widget_get_state_flags (app->current_monitor_label),
+                                 NULL);
     }
 
     gtk_event_box_set_visible_window (GTK_EVENT_BOX (app->current_monitor_event_box), use_color);
@@ -1483,7 +1491,7 @@ set_cursor (GtkWidget *widget, GdkCursorType type)
     gdk_window_set_cursor (window, cursor);
 
   if (cursor)
-    gdk_cursor_unref (cursor);
+    g_object_unref (cursor);
 }
 
 static void
@@ -1731,17 +1739,21 @@ paint_background (FooScrollArea *area,
 {
   GdkRectangle viewport;
   GtkWidget *widget;
-  GtkStyle *widget_style;
+  GtkStyleContext *context;
+  GdkRGBA fg, bg;
 
   widget = GTK_WIDGET (area);
 
   foo_scroll_area_get_viewport (area, &viewport);
-  widget_style = gtk_widget_get_style (widget);
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &fg);
+  gtk_style_context_get_background_color (context, GTK_STATE_FLAG_NORMAL, &bg);
 
-  cairo_set_source_rgb (cr,
-                        widget_style->mid[GTK_STATE_NORMAL].red / 65535.0,
-                        widget_style->mid[GTK_STATE_NORMAL].green / 65535.0,
-                        widget_style->mid[GTK_STATE_NORMAL].blue / 65535.0);
+  cairo_set_source_rgba (cr,
+                         (fg.red + bg.red) / 2,
+                         (fg.green + bg.green) / 2,
+                         (fg.blue + bg.blue) / 2,
+                         (fg.alpha + bg.alpha) / 2);
 
   cairo_rectangle (cr,
                    viewport.x, viewport.y,
@@ -1751,10 +1763,11 @@ paint_background (FooScrollArea *area,
 
   foo_scroll_area_add_input_from_fill (area, cr, on_canvas_event, NULL);
 
-  cairo_set_source_rgb (cr,
-                        widget_style->dark[GTK_STATE_NORMAL].red / 65535.0,
-                        widget_style->dark[GTK_STATE_NORMAL].green / 65535.0,
-                        widget_style->dark[GTK_STATE_NORMAL].blue / 65535.0);
+  cairo_set_source_rgba (cr,
+                         0.7 * bg.red,
+                         0.7 * bg.green,
+                         0.7 * bg.blue,
+                         0.7 * bg.alpha);
 
   cairo_stroke (cr);
 }
@@ -1847,19 +1860,16 @@ paint_output (App *app, cairo_t *cr, int i)
 
   if (output == app->current_output)
     {
-      GtkStyle *style;
-      GdkColor  color;
+      GtkStyleContext *context;
+      GdkRGBA color;
 
-      style = gtk_widget_get_style (app->area);
-      color = style->bg[GTK_STATE_SELECTED];
-      r = (float)color.red / 65535.0;
-      g = (float)color.green / 65535.0;
-      b = (float)color.blue / 65535.0;
+      context = gtk_widget_get_style_context (app->area);
+      gtk_style_context_get_background_color (context, GTK_STATE_FLAG_SELECTED, &color);
 
       cairo_rectangle (cr, x - 2, y - 2, w * scale + 0.5 + 4, h * scale + 0.5 + 4);
 
       cairo_set_line_width (cr, 4);
-      cairo_set_source_rgba (cr, r, g, b, 0.5);
+      cairo_set_source_rgba (cr, color.red, color.green, color.blue, 0.5);
       cairo_stroke (cr);
     }
 

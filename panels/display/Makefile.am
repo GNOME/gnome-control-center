@@ -56,7 +56,8 @@ INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
 	     -DSBINDIR="\"$(sbindir)\"" \
 	     -DUIDIR="\"$(uidir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
+	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	     $(DISABLE_DEPRECATED)
 
 CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
 
