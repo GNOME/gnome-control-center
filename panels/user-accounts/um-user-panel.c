@@ -919,7 +919,7 @@ on_permission_changed (GPermission *permission,
                 g_object_unref (icon);
         }
 
-        widget = get_widget (d, "delete-user-toolbutton");
+        widget = get_widget (d, "remove-user-toolbutton");
         gtk_widget_set_sensitive (widget, is_authorized && !self_selected);
         if (is_authorized) {
                 setup_tooltip_with_embedded_icon (widget, _("Delete the selected user"), NULL, NULL);
@@ -1167,7 +1167,7 @@ setup_main_window (UmUserPanelPrivate *d)
         button = get_widget (d, "add-user-toolbutton");
         g_signal_connect (button, "clicked", G_CALLBACK (add_user), d);
 
-        button = get_widget (d, "delete-user-toolbutton");
+        button = get_widget (d, "remove-user-toolbutton");
         g_signal_connect (button, "clicked", G_CALLBACK (delete_user), d);
 
         button = get_widget (d, "user-icon-nonbutton");
@@ -1215,7 +1215,7 @@ setup_main_window (UmUserPanelPrivate *d)
                                           _("To create a user,\nclick the * icon first"),
                                           "*",
                                           icon);
-        button = get_widget (d, "delete-user-toolbutton");
+        button = get_widget (d, "remove-user-toolbutton");
         setup_tooltip_with_embedded_icon (button,
                                           _("To delete the selected user,\nclick the * icon first"),
                                           "*",
@@ -1231,6 +1231,8 @@ um_user_panel_init (UmUserPanel *self)
         volatile GType type;
         const gchar *filename;
         GtkWidget *button;
+        GtkWidget *toolbar;
+        GtkStyleContext *context;
 
         dbus_g_object_register_marshaller (fprintd_marshal_VOID__STRING_BOOLEAN,
                                            G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_INVALID);
@@ -1265,6 +1267,10 @@ um_user_panel_init (UmUserPanel *self)
         d->photo_dialog = um_photo_dialog_new (button);
         d->main_box = get_widget (d, "accounts-vbox");
         gtk_widget_reparent (d->main_box, GTK_WIDGET (self));
+
+        toolbar = get_widget (d, "add-remove-toolbar");
+        context = gtk_widget_get_style_context (toolbar);
+        gtk_style_context_add_class (context, "internal-toolbar");
 }
 
 static void
