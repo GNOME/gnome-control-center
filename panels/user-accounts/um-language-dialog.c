@@ -181,6 +181,14 @@ um_add_user_languages (GtkTreeModel *model)
         g_hash_table_destroy (user_langs);
 }
 
+static void
+remove_timeout (gpointer data,
+		GObject *where_the_object_was)
+{
+	guint timeout = GPOINTER_TO_UINT (data);
+	g_source_remove (timeout);
+}
+
 static gboolean
 finish_um_language_chooser (gpointer user_data)
 {
@@ -189,6 +197,7 @@ finish_um_language_chooser (gpointer user_data)
 	GtkTreeModel *model;
 	GtkWindow *parent;
 	GHashTable *user_langs;
+	guint timeout;
 
 	/* Did we get called after the widget was destroyed? */
 	if (chooser == NULL)
@@ -204,6 +213,8 @@ finish_um_language_chooser (gpointer user_data)
 	gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (parent)), NULL);
 
 	g_object_set_data (G_OBJECT (chooser), "user-langs", NULL);
+	timeout = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (chooser), "timeout"));
+	g_object_weak_unref (G_OBJECT (chooser), (GWeakNotify) remove_timeout, GUINT_TO_POINTER (timeout));
 
 	return FALSE;
 }
@@ -220,6 +231,7 @@ um_language_chooser_new (GtkWidget *parent)
         GtkTreeModel *model;
         GHashTable *user_langs;
         GdkCursor *cursor;
+        guint timeout;
 
         builder = gtk_builder_new ();
         filename = UIDIR "/language-chooser.ui";
@@ -254,8 +266,9 @@ um_language_chooser_new (GtkWidget *parent)
 
 	g_object_set_data_full (G_OBJECT (chooser), "user-langs",
 				user_langs, (GDestroyNotify) g_hash_table_destroy);
-	g_object_add_weak_pointer (G_OBJECT (chooser), (gpointer *) &chooser);
-        g_idle_add ((GSourceFunc) finish_um_language_chooser, chooser);
+        timeout = g_idle_add ((GSourceFunc) finish_um_language_chooser, chooser);
+        g_object_set_data (G_OBJECT (chooser), "timeout", GUINT_TO_POINTER (timeout));
+        g_object_weak_ref (G_OBJECT (chooser), (GWeakNotify) remove_timeout, GUINT_TO_POINTER (timeout));
 
         g_object_unref (builder);
 
