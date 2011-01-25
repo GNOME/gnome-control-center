@@ -21,7 +21,8 @@ AM_CPPFLAGS =						\
 	$(CHEESE_CFLAGS)				\
 	$(DBUS_CFLAGS)					\
 	$(GIO_CFLAGS)					\
-	$(WARN_CFLAGS)
+	$(WARN_CFLAGS)					\
+	$(DISABLE_DEPRECATED)
 
 MARSHALFILES = marshal.c marshal.h
 BUILT_SOURCES = $(MARSHALFILES)
