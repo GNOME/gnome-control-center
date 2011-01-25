@@ -134,68 +134,71 @@ curved_rectangle (cairo_t *cr,
         cairo_close_path (cr);
 }
 
-gdouble color1[3] = { 213.0/255.0, 4.0/255.0, 4.0/255.0 };
-gdouble color2[3] = { 234.0/255.0, 236.0/255.0, 31.0/255.0 };
-gdouble color3[3] = { 141.0/255.0, 133.0/255.0, 241.0/255.0 };
-gdouble color4[3] = { 99.0/255.0, 251.0/255.0, 107.0/255.0 };
+GdkRGBA color1 = { 213.0/255.0,   4.0/255.0,   4.0/255.0, 1.0 };
+GdkRGBA color2 = { 234.0/255.0, 236.0/255.0,  31.0/255.0, 1.0 };
+GdkRGBA color3 = { 141.0/255.0, 133.0/255.0, 241.0/255.0, 1.0 };
+GdkRGBA color4 = {  99.0/255.0, 251.0/255.0, 107.0/255.0, 1.0 };
 
 static void
-get_color (gdouble value, gdouble *r, gdouble *g, gdouble *b)
+get_color (gdouble value, GdkRGBA *color)
 {
-        gdouble *c;
-
         if (value < 0.50) {
-                c = color1;
+                *color = color1;
         }
         else if (value < 0.75) {
-                c = color2;
+                *color = color2;
         }
         else if (value < 0.90) {
-                c = color3;
+                *color = color3;
         }
         else {
-                c = color4;
+                *color = color4;
         }
-
-        *r = c[0];
-        *g = c[1];
-        *b = c[2];
 }
 
 static gboolean
-um_strength_bar_draw (GtkWidget      *widget,
-                      cairo_t        *cr)
+um_strength_bar_draw (GtkWidget *widget,
+                      cairo_t   *cr)
 {
         UmStrengthBar *bar = UM_STRENGTH_BAR (widget);
-        gdouble r, g, b;
-        GdkWindow *window;
-        GtkAllocation allocation;
+        GdkRGBA color;
+        gint width, height;
+        GtkStyleContext *context;
+        GtkStateFlags state;
+        GdkRGBA border_color;
 
-	window = gtk_widget_get_window (widget);
-	gtk_widget_get_allocation (widget, &allocation);
-	cr = gdk_cairo_create (window);
-	cairo_set_line_width (cr, 1);
+        context = gtk_widget_get_style_context (widget);
+        state = gtk_widget_get_state_flags (widget);
+        gtk_style_context_get_border_color (context, state, &border_color);
 
-	cairo_rectangle (cr,
-			 allocation.x,
-			 allocation.y,
-			 bar->priv->strength * allocation.width,
-			 allocation.height);
-	cairo_clip (cr);
+        width = gtk_widget_get_allocated_width (widget);
+        height = gtk_widget_get_allocated_height (widget);
 
-	curved_rectangle (cr,
-			  allocation.x + 0.5,
-			  allocation.y + 0.5,
-			  allocation.width - 1,
-			  allocation.height - 1,
-			  4);
-	get_color (bar->priv->strength, &r, &g ,&b);
-	cairo_set_source_rgb (cr, r, g, b);
-	cairo_fill_preserve (cr);
+        cairo_save (cr);
 
-	cairo_reset_clip (cr);
-	cairo_set_source_rgb (cr, 0, 0, 0);
-	cairo_stroke (cr);
+        cairo_set_line_width (cr, 1);
+
+        cairo_save (cr);
+
+        cairo_rectangle (cr,
+                         0, 0,
+                         bar->priv->strength * width, height);
+        cairo_clip (cr);
+
+        curved_rectangle (cr,
+                          0.5, 0.5,
+                          width - 1, height - 1,
+                          4);
+        get_color (bar->priv->strength, &color);
+        gdk_cairo_set_source_rgba (cr, &color);
+        cairo_fill_preserve (cr);
+
+        cairo_restore (cr); /* undo clip */
+
+        gdk_cairo_set_source_rgba (cr, &border_color);
+        cairo_stroke (cr);
+
+        cairo_restore (cr);
 
         return FALSE;
 }
