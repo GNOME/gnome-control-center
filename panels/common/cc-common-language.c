@@ -307,3 +307,35 @@ cc_common_language_setup_list (GtkWidget    *treeview,
 	}
 }
 
+void
+cc_common_language_select_current_language (GtkTreeView *treeview)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean cont;
+	char *lang;
+
+	lang = cc_common_language_get_current_language ();
+	model = gtk_tree_view_get_model (treeview);
+	cont = gtk_tree_model_get_iter_first (model, &iter);
+	while (cont) {
+		char *locale;
+
+		gtk_tree_model_get (model, &iter,
+				    LOCALE_COL, &locale,
+				    -1);
+		if (locale != NULL &&
+		    g_str_equal (locale, lang)) {
+			GtkTreeSelection *selection;
+			selection = gtk_tree_view_get_selection (treeview);
+			gtk_tree_selection_select_iter (selection, &iter);
+			g_free (locale);
+			break;
+		}
+		g_free (locale);
+
+		gtk_tree_model_iter_next (model, &iter);
+	}
+	g_free (lang);
+}
+

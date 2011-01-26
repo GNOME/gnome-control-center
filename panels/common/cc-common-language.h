@@ -44,6 +44,7 @@ gchar   *cc_common_language_get_current_language    (void);
 
 void     cc_common_language_setup_list              (GtkWidget    *treeview,
 						     GHashTable   *initial);
+void     cc_common_language_select_current_language (GtkTreeView  *treeview);
 
 G_END_DECLS
 
