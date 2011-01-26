@@ -125,8 +125,9 @@ new_ht_for_user_languages (void)
 		char *language;
                 language = gdm_get_language_from_name (name, NULL);
                 g_hash_table_insert (ht, name, language);
-        }
-        g_free (name);
+        } else {
+		g_free (name);
+	}
 
 	return ht;
 }
