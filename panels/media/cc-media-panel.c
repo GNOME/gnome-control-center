@@ -292,7 +292,8 @@ combo_box_changed_cb (GtkComboBox *combo_box,
 
 static void
 prepare_combo_box (CcMediaPanel *self,
-                   GtkWidget *combo_box)
+                   GtkWidget *combo_box,
+                   const gchar *heading)
 {
   GtkAppChooserButton *app_chooser = GTK_APP_CHOOSER_BUTTON (combo_box);
   gboolean pref_ask;
@@ -330,6 +331,7 @@ prepare_combo_box (CcMediaPanel *self,
                                              NULL);
 
   gtk_app_chooser_button_set_show_dialog_item (app_chooser, TRUE);
+  gtk_app_chooser_button_set_heading (app_chooser, _(heading));
 
   if (pref_ask) {
     gtk_app_chooser_button_set_active_custom_item (app_chooser, CUSTOM_ITEM_ASK);
@@ -379,7 +381,7 @@ other_type_combo_box_changed (GtkComboBox *combo_box,
 
   self->priv->other_application_combo = gtk_app_chooser_button_new (x_content_type);
   gtk_box_pack_start (GTK_BOX (action_container), self->priv->other_application_combo, TRUE, TRUE, 0);
-  prepare_combo_box (self, self->priv->other_application_combo);
+  prepare_combo_box (self, self->priv->other_application_combo, NULL);
   gtk_widget_show (self->priv->other_application_combo);
 
   g_free (x_content_type);
@@ -434,17 +436,19 @@ media_panel_setup (CcMediaPanel *self)
   struct {
     const gchar *widget_name;
     const gchar *content_type;
+    const gchar *heading;
   } const defs[] = {
-    { "media_audio_cdda_combobox", "x-content/audio-cdda" },
-    { "media_video_dvd_combobox", "x-content/video-dvd" },
-    { "media_music_player_combobox", "x-content/audio-player" },
-    { "media_dcf_combobox", "x-content/image-dcf" },
-    { "media_software_combobox", "x-content/software" },
+    { "media_audio_cdda_combobox", "x-content/audio-cdda", N_("Select an application for audio CDs") },
+    { "media_video_dvd_combobox", "x-content/video-dvd", N_("Select an application for video DVDs") },
+    { "media_music_player_combobox", "x-content/audio-player", N_("Select an application to run when a music player is connected") },
+    { "media_dcf_combobox", "x-content/image-dcf", N_("Select an application to run when a camera is connected") },
+    { "media_software_combobox", "x-content/software", N_("Select an application for software CDs") },
   };
 
   for (n = 0; n < G_N_ELEMENTS (defs); n++) {
     prepare_combo_box (self,
-                       GTK_WIDGET (gtk_builder_get_object (builder, defs[n].widget_name)));
+                       GTK_WIDGET (gtk_builder_get_object (builder, defs[n].widget_name)),
+                       defs[n].heading);
   }
 
   other_type_combo_box = GTK_WIDGET (gtk_builder_get_object (builder, "media_other_type_combobox"));
