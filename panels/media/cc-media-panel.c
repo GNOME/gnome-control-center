@@ -445,6 +445,28 @@ media_panel_setup (CcMediaPanel *self)
     { "media_software_combobox", "x-content/software", N_("Select an application for software CDs") },
   };
 
+  struct {
+    const gchar *content_type;
+    const gchar *description;
+  } const other_defs[] = {
+    /* translators: these strings are duplicates of shared-mime-info
+     * strings, just here to fix capitalization of the English originals.
+     * If the shared-mime-info translation works for your language,
+     * simply leave these untranslated.
+     */
+    { "x-content/audio-dvd", N_("audio DVD") },
+    { "x-content/blank-bd", N_("blank Blu-ray disc") },
+    { "x-content/blank-cd", N_("blank CD disc") },
+    { "x-content/blank-dvd", N_("blank DVD disc") },
+    { "x-content/blank-hddvd", N_("blank HD DVD disc") },
+    { "x-content/video-bluray", N_("Blu-ray video disc") },
+    { "x-content/ebook-reader", N_("e-book reader") },
+    { "x-content/video-hddvd", N_("HD DVD video disc") },
+    { "x-content/image-picturecd", N_("Picture CD") },
+    { "x-content/video-svcd", N_("Super Video CD") },
+    { "x-content/video-vcd", N_("Video CD") }
+  };
+
   for (n = 0; n < G_N_ELEMENTS (defs); n++) {
     prepare_combo_box (self,
                        GTK_WIDGET (gtk_builder_get_object (builder, defs[n].widget_name)),
@@ -478,7 +500,18 @@ media_panel_setup (CcMediaPanel *self)
       }
     }
 
-    description = g_content_type_get_description (content_type);
+    for (n = 0; n < G_N_ELEMENTS (other_defs); n++) {
+       if (strcmp (content_type, other_defs[n].content_type) == 0) {
+         const gchar *s = other_defs[n].description;
+         if (s == _(s))
+           description = g_content_type_get_description (content_type);
+         else
+           description = g_strdup (_(s));
+
+         break;
+       }
+    }
+
     gtk_list_store_append (other_type_list_store, &iter);
     icon = g_content_type_get_icon (content_type);
 
