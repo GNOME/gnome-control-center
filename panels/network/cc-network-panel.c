@@ -1767,6 +1767,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkTreeSelection *selection;
         GtkTreeSortable *sortable;
         GtkWidget *widget;
+        GtkStyleContext *context;
 
         panel->priv = NETWORK_PANEL_PRIVATE (panel);
 
@@ -1880,6 +1881,17 @@ cc_network_panel_init (CcNetworkPanel *panel)
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
         g_signal_connect (selection, "changed",
                           G_CALLBACK (panel_devices_treeview_clicked_cb), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "devices_scrolledwindow"));
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "devices_toolbar"));
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+
 
         /* add the virtual proxy device */
         panel_add_proxy_device (panel);
