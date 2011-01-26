@@ -1851,6 +1851,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   CcShell *shell;
   GtkListStore *model;
   GtkTreeModelSort *sort_model;
+  GtkStyleContext *context;
 
   gtk_widget_set_size_request (GTK_WIDGET (panel), -1, 400);
 
@@ -1949,6 +1950,13 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
                                    NULL, NULL);
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
   g_object_unref (model);
+
+  widget = GTK_WIDGET (gtk_builder_get_object (builder, "actions_swindow"));
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+  widget = GTK_WIDGET (gtk_builder_get_object (builder, "shortcut-toolbar"));
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   /* set up the dialog */
   shell = cc_panel_get_shell (CC_PANEL (panel));
