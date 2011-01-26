@@ -1200,12 +1200,6 @@ setup_main_window (UmUserPanelPrivate *d)
 }
 
 static void
-add_class (GtkStyleContext *context)
-{
-        gtk_style_context_add_class (context, "internal-toolbar");
-}
-
-static void
 um_user_panel_init (UmUserPanel *self)
 {
         UmUserPanelPrivate *d;
@@ -1249,8 +1243,10 @@ um_user_panel_init (UmUserPanel *self)
         d->main_box = get_widget (d, "accounts-vbox");
         gtk_widget_reparent (d->main_box, GTK_WIDGET (self));
 
+        context = gtk_widget_get_style_context (get_widget (d, "list-scrolledwindow"));
+        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
         context = gtk_widget_get_style_context (get_widget (d, "add-remove-toolbar"));
-        g_signal_connect (context, "changed", G_CALLBACK (add_class), NULL);
+        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 }
 
 static void
