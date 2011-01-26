@@ -2,6 +2,27 @@
 <interface>
   <requires lib="gtk+" version="2.22"/>
   <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkAdjustment" id="repeat_delay_adjustment">
+    <property name="value">500</property>
+    <property name="lower">100</property>
+    <property name="upper">2000</property>
+    <property name="step_increment">10</property>
+    <property name="page_increment">10</property>
+  </object>
+ <object class="GtkAdjustment" id="repeat_speed_adjustment">
+    <property name="value">30</property>
+    <property name="lower">10</property>
+    <property name="upper">110</property>
+    <property name="step_increment">10</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="cursor_blink_time_adjustment">
+    <property name="value">1000</property>
+    <property name="lower">100</property>
+    <property name="upper">2500</property>
+    <property name="step_increment">200</property>
+    <property name="page_increment">200</property>
+  </object>
   <object class="GtkDialog" id="custom-shortcut-dialog">
     <property name="title" translatable="yes">Custom Shortcut</property>
     <property name="type_hint">dialog</property>
@@ -286,6 +307,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="draw_value">False</property>
+                                    <property name="adjustment">repeat_delay_adjustment</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">2</property>
@@ -298,6 +320,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="draw_value">False</property>
+                                    <property name="adjustment">repeat_speed_adjustment</property>
                                     <child internal-child="accessible">
                                       <object class="AtkObject" id="repeat_speed_scale-atkobject">
                                         <property name="AtkObject::accessible-description" translatable="yes">Repeat keys speed</property>
@@ -450,8 +473,8 @@
                                   <object class="GtkHScale" id="cursor_blink_time_scale">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="update_policy">discontinuous</property>
                                     <property name="draw_value">False</property>
+                                    <property name="adjustment">cursor_blink_time_adjustment</property>
                                     <child internal-child="accessible">
                                       <object class="AtkObject" id="cursor_blink_time_scale-atkobject">
                                         <property name="AtkObject::accessible-description" translatable="yes">Cursor blinks speed</property>
