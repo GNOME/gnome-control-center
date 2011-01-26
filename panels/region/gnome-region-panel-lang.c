@@ -146,6 +146,9 @@ finish_language_setup (gpointer user_data)
 	timeout = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (list), "timeout"));
 	g_object_weak_unref (G_OBJECT (list), (GWeakNotify) remove_timeout, GUINT_TO_POINTER (timeout));
 
+	/* And select the current language */
+	cc_common_language_select_current_language (GTK_TREE_VIEW (list));
+
 	return FALSE;
 }
 
