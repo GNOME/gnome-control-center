@@ -518,7 +518,7 @@ get_regions (TzLocation             *loc,
   /* Load the translation for it */
   zone = g_strdup (dgettext (GETTEXT_PACKAGE_TIMEZONES, loc->zone));
   g_strdelimit (zone, "_", ' ');
-  split_translated = g_strsplit_set (zone, TRANSLATION_SPLIT, 2);
+  split_translated = g_regex_split_simple ("[\\x{2044}\\x{2215}\\x{29f8}\\x{ff0f}/]", zone, 0, 0);
   g_free (zone);
 
   if (!g_hash_table_lookup_extended (data->table, split[0], NULL, NULL))
@@ -844,6 +844,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 void
 cc_date_time_panel_register (GIOModule *module)
 {
+  bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
+
   cc_date_time_panel_register_type (G_TYPE_MODULE (module));
   g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
                                   CC_TYPE_DATE_TIME_PANEL,
