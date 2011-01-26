@@ -1766,6 +1766,16 @@ cc_printers_panel_init (CcPrintersPanel *self)
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "queue-scrolledwindow");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "queue-toolbar");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+
   gtk_style_context_get_background_color (gtk_widget_get_style_context (top_widget),
                                           GTK_STATE_FLAG_NORMAL,
                                           &priv->background_color);
