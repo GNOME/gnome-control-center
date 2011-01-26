@@ -30,6 +30,65 @@
 #include "cc-common-language.h"
 #include "gdm-languages.h"
 
+static GDBusProxy *proxy = NULL;
+
+static void
+add_other_users_language (GHashTable *ht)
+{
+	GVariant *variant;
+	GVariantIter *vi;
+	GError *error = NULL;
+	const char *str;
+
+	if (proxy == NULL)
+		return;
+
+	variant = g_dbus_proxy_call_sync (proxy,
+					  "ListCachedUsers",
+					  NULL,
+					  G_DBUS_CALL_FLAGS_NONE,
+					  -1,
+					  NULL,
+					  &error);
+	if (variant == NULL) {
+		g_warning ("Failed to list existing users: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	g_variant_get (variant, "(ao)", &vi);
+	while (g_variant_iter_loop (vi, "o", &str)) {
+		GDBusProxy *user;
+		GVariant *props;
+		const char *name;
+		char *language;
+
+		user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+					       G_DBUS_PROXY_FLAGS_NONE,
+					       NULL,
+					       "org.freedesktop.Accounts",
+					       str,
+					       "org.freedesktop.Accounts.User",
+					       NULL,
+					       &error);
+		if (user == NULL) {
+			g_warning ("Failed to get proxy for user '%s': %s",
+				   str, error->message);
+			g_error_free (error);
+			error = NULL;
+			continue;
+		}
+		props = g_dbus_proxy_get_cached_property (user, "Language");
+		name = g_variant_get_string (props, NULL);
+		language = gdm_get_language_from_name (name, NULL);
+		g_hash_table_insert (ht, g_strdup (name), language);
+		g_variant_unref (props);
+		g_object_unref (user);
+	}
+	g_variant_iter_free (vi);
+	g_variant_unref (variant);
+}
+
 static GHashTable *
 new_ht_for_user_languages (void)
 {
@@ -39,13 +98,17 @@ new_ht_for_user_languages (void)
 
 	ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-	/* FIXME: As in um-language-dialog.c, we should add the
-	 * languages used by other users on the system */
+	/* Add the languages used by other users on the system */
+	add_other_users_language (ht);
 
 	/* Add current locale */
 	name = cc_common_language_get_current_language ();
-	language = gdm_get_language_from_name (name, NULL);
-	g_hash_table_insert (ht, name, language);
+	if (g_hash_table_lookup (ht, name) == NULL) {
+		language = gdm_get_language_from_name (name, NULL);
+		g_hash_table_insert (ht, name, language);
+	} else {
+		g_free (name);
+	}
 
 	return ht;
 }
@@ -95,10 +158,24 @@ setup_language (GtkBuilder *builder)
 	GtkTreeModel *model;
 	GdkWindow *window;
 	guint timeout;
+	GError *error = NULL;
 
 	treeview = GTK_WIDGET (gtk_builder_get_object (builder, "display_language_treeview"));
 	parent = gtk_widget_get_toplevel (treeview);
-	g_message ("parent %p", parent);
+
+	/* Setup accounts service */
+	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+					       G_DBUS_PROXY_FLAGS_NONE,
+					       NULL,
+					       "org.freedesktop.Accounts",
+					       "/org/freedesktop/Accounts",
+					       "org.freedesktop.Accounts",
+					       NULL,
+					       &error);
+	if (proxy == NULL) {
+		g_warning ("Failed to contact accounts service: %s", error->message);
+		g_error_free (error);
+	}
 
 	/* Add user languages */
 	user_langs = new_ht_for_user_languages ();
