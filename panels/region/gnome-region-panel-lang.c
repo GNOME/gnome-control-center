@@ -64,13 +64,13 @@ add_other_users_language (GHashTable *ht)
 		char *language;
 
 		user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-					       G_DBUS_PROXY_FLAGS_NONE,
-					       NULL,
-					       "org.freedesktop.Accounts",
-					       str,
-					       "org.freedesktop.Accounts.User",
-					       NULL,
-					       &error);
+						      G_DBUS_PROXY_FLAGS_NONE,
+						      NULL,
+						      "org.freedesktop.Accounts",
+						      str,
+						      "org.freedesktop.Accounts.User",
+						      NULL,
+						      &error);
 		if (user == NULL) {
 			g_warning ("Failed to get proxy for user '%s': %s",
 				   str, error->message);
@@ -114,6 +114,91 @@ new_ht_for_user_languages (void)
 }
 
 static void
+selection_changed (GtkTreeSelection *selection,
+		   GtkTreeView      *list)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	char *locale;
+	GDBusProxy *user;
+	GVariant *variant;
+	GError *error = NULL;
+	char *object_path;
+
+	if (gtk_tree_selection_get_selected (selection, &model, &iter) == FALSE) {
+		g_warning ("No selected languages, this shouldn't happen");
+		return;
+	}
+
+	user = NULL;
+	variant = NULL;
+
+	gtk_tree_model_get (model, &iter,
+			    LOCALE_COL, &locale,
+			    -1);
+
+	if (proxy == NULL) {
+		g_warning ("Would change the language to '%s', but no D-Bus connection available", locale);
+		goto bail;
+	}
+
+	variant = g_dbus_proxy_call_sync (proxy,
+					  "FindUserByName",
+					  g_variant_new ("(s)", g_get_user_name ()),
+					  G_DBUS_CALL_FLAGS_NONE,
+					  -1,
+					  NULL,
+					  &error);
+	if (variant == NULL) {
+		g_warning ("Could not contact accounts service to look up '%s': %s",
+			   g_get_user_name (), error->message);
+		g_error_free (error);
+		goto bail;
+	}
+
+	g_variant_get (variant, "(o)", &object_path);
+	user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+					      G_DBUS_PROXY_FLAGS_NONE,
+					      NULL,
+					      "org.freedesktop.Accounts",
+					      object_path,
+					      "org.freedesktop.Accounts.User",
+					      NULL,
+					      &error);
+	g_free (object_path);
+
+	if (user == NULL) {
+		g_warning ("Could not create proxy for user '%s': %s",
+			   g_variant_get_string (variant, NULL), error->message);
+		g_error_free (error);
+		goto bail;
+	}
+	g_variant_unref (variant);
+
+	variant = g_dbus_proxy_call_sync (user,
+					  "SetLanguage",
+					  g_variant_new ("(s)", locale),
+					  G_DBUS_CALL_FLAGS_NONE,
+					  -1,
+					  NULL,
+					  &error);
+	if (variant == NULL) {
+		g_warning ("Failed to set the language '%s': %s", locale, error->message);
+		g_error_free (error);
+		goto bail;
+	}
+
+	/* And done */
+
+bail:
+	if (variant != NULL)
+		g_variant_unref (variant);
+	if (user != NULL)
+		g_object_unref (user);
+	g_free (locale);
+}
+
+static void
 remove_timeout (gpointer data,
 		GObject *where_the_object_was)
 {
@@ -129,6 +214,7 @@ finish_language_setup (gpointer user_data)
 	GtkWidget *parent;
 	GHashTable *user_langs;
 	guint timeout;
+	GtkTreeSelection *selection;
 
 	/* Did we get called after the widget was destroyed? */
 	if (list == NULL)
@@ -148,6 +234,11 @@ finish_language_setup (gpointer user_data)
 
 	/* And select the current language */
 	cc_common_language_select_current_language (GTK_TREE_VIEW (list));
+
+	/* And now listen for changes */
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
+	g_signal_connect (G_OBJECT (selection), "changed",
+			  G_CALLBACK (selection_changed), list);
 
 	return FALSE;
 }
@@ -178,6 +269,8 @@ setup_language (GtkBuilder *builder)
 	if (proxy == NULL) {
 		g_warning ("Failed to contact accounts service: %s", error->message);
 		g_error_free (error);
+	} else {
+		g_object_weak_ref (G_OBJECT (treeview), (GWeakNotify) g_object_unref, proxy);
 	}
 
 	/* Add user languages */
