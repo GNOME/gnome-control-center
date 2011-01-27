@@ -156,8 +156,11 @@ chk_new_windows_inherit_layout_toggled (GtkWidget *
 void
 setup_xkb_tabs (GtkBuilder * dialog)
 {
-	GtkWidget *chk_new_windows_inherit_layout =
-	    WID ("chk_new_windows_inherit_layout");
+	GtkWidget *widget;
+	GtkStyleContext *context;
+	GtkWidget *chk_new_windows_inherit_layout;
+
+	chk_new_windows_inherit_layout = WID ("chk_new_windows_inherit_layout");
 
 	xkb_desktop_settings = g_settings_new (GKBD_DESKTOP_SCHEMA);
 	xkb_keyboard_settings = g_settings_new (GKBD_KEYBOARD_SCHEMA);
@@ -230,6 +233,14 @@ setup_xkb_tabs (GtkBuilder * dialog)
 			   (GWeakNotify) cleanup_xkb_tabs, dialog);
 
 	enable_disable_restoring (dialog);
+
+	/* Setup junction between toolbar and treeview */
+	widget = WID ("xkb_layouts_swindow");
+	context = gtk_widget_get_style_context (widget);
+	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+	widget = WID("layouts-toolbar");
+	context = gtk_widget_get_style_context (widget);
+	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 }
 
 void
