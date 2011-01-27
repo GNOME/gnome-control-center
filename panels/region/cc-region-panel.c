@@ -93,22 +93,6 @@ cc_region_panel_class_finalize (CcRegionPanelClass * klass)
 }
 
 static void
-setup_images (GtkBuilder * dialog)
-{
-	GtkWidget *image;
-
-	image =
-	    gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image (GTK_BUTTON (WID ("xkb_layouts_add")), image);
-
-	image =
-	    gtk_image_new_from_stock (GTK_STOCK_REFRESH,
-				      GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")),
-			      image);
-}
-
-static void
 cc_region_panel_init (CcRegionPanel * self)
 {
 	CcRegionPanelPrivate *priv;
@@ -134,8 +118,6 @@ cc_region_panel_init (CcRegionPanel * self)
 
 	gtk_widget_reparent (prefs_widget, GTK_WIDGET (self));
 
-
-	setup_images (priv->builder);
 	setup_xkb_tabs (priv->builder);
 	setup_language (priv->builder);
 }
