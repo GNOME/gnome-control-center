@@ -417,10 +417,6 @@ static void
 chooser_response_cb (GtkDialog * dialog, gint response, gpointer data)
 {
 	switch (response) {
-	case GTK_RESPONSE_HELP:
-		/* capplet_help (GTK_WINDOW (dialog),
-		   "prefs-keyboard-layoutoptions"); */
-		break;
 	case GTK_RESPONSE_DELETE_EVENT:
 	case GTK_RESPONSE_CLOSE: {
 			/* just cleanup */
