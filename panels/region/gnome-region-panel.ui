@@ -216,7 +216,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkScrolledWindow" id="scrolledwindow1">
+                              <object class="GtkScrolledWindow" id="xkb_layouts_swindow">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="shadow_type">in</property>
@@ -241,10 +241,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolbar" id="toolbar1">
+                              <object class="GtkToolbar" id="layouts-toolbar">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="show_arrow">False</property>
+                                <property name="icon_size">1</property>
                                 <child>
                                   <object class="GtkToolButton" id="xkb_layouts_add">
                                     <property name="visible">True</property>
@@ -464,6 +465,7 @@ default settings</property>
                                     <property name="fill">False</property>
                                     <property name="pack_type">end</property>
                                     <property name="position">1</property>
+                                    <property name="secondary">True</property>
                                   </packing>
                                 </child>
                               </object>
