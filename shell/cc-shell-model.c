@@ -179,7 +179,7 @@ cc_shell_model_add_item (CcShellModel   *model,
   if (!id)
     {
       /* Refuse to load desktop files without a panel ID, but
-       * with the X-GNOME-Control-Center-Panel category */
+       * with the X-GNOME-Settings-Panel category */
       if (desktop_entry_has_panel_category (key_file))
         {
           g_warning ("Not loading desktop file '%s' because it uses the "
