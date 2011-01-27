@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-01-25 00:01+0000\n"
-"PO-Revision-Date: 2011-01-26 20:23+0100\n"
+"POT-Creation-Date: 2011-01-27 06:37+0000\n"
+"PO-Revision-Date: 2011-01-27 11:04+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -185,8 +185,9 @@ msgstr "Cambiar el fondo"
 
 #. Translators: those are keywords for the background control-center panel
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:4
-msgid "Wallpaper;Screen;"
-msgstr "Fondo de pantalla;Pantalla;"
+#| msgid "Wallpaper;Screen;"
+msgid "Wallpaper;Screen;Desktop;"
+msgstr "Fondo de pantalla;Pantalla;Escritorio;"
 
 #: ../panels/background/background.ui.h:1
 msgid "Center"
@@ -264,11 +265,6 @@ msgstr "tamaños múltiples"
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
-
-#: ../panels/common/cc-common-language.c:304
-#: ../panels/user-accounts/um-language-dialog.c:151
-msgid "Other..."
-msgstr "Otra…"
 
 #: ../panels/common/gdm-languages.c:709
 msgid "Unspecified"
@@ -448,50 +444,50 @@ msgstr "Hacia abajo"
 msgid "Mirror Displays"
 msgstr "Espejar pantallas"
 
-#: ../panels/display/xrandr-capplet.c:585
+#: ../panels/display/xrandr-capplet.c:593
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:587
+#: ../panels/display/xrandr-capplet.c:595
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1497
+#: ../panels/display/xrandr-capplet.c:1505
 msgid "Drag to change primary display."
 msgstr "Arrastrar para cambiar la pantalla principal."
 
-#: ../panels/display/xrandr-capplet.c:1555
+#: ../panels/display/xrandr-capplet.c:1563
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr ""
 "Seleccionar un monitor para cambiar sus propiedades; arrastrarlo lo reubica."
 
-#: ../panels/display/xrandr-capplet.c:1943
+#: ../panels/display/xrandr-capplet.c:1953
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1945
+#: ../panels/display/xrandr-capplet.c:1955
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../panels/display/xrandr-capplet.c:2230
+#: ../panels/display/xrandr-capplet.c:2240
 msgid "Could not save the monitor configuration"
 msgstr "No se pudo guardar la configuración del monitor"
 
-#: ../panels/display/xrandr-capplet.c:2253
+#: ../panels/display/xrandr-capplet.c:2263
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "No se pudo obtener la sesión del bus al aplicar la configuración de la "
 "pantalla"
 
-#: ../panels/display/xrandr-capplet.c:2298
+#: ../panels/display/xrandr-capplet.c:2308
 msgid "Could not detect displays"
 msgstr "No se pudieron detectar las pantallas"
 
-#: ../panels/display/xrandr-capplet.c:2506
+#: ../panels/display/xrandr-capplet.c:2516
 msgid "Could not get screen information"
 msgstr "No se pudo obtener la información de la pantalla"
 
@@ -631,7 +627,6 @@ msgstr "El tipo de combinación."
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
-#: ../panels/user-accounts/um-login-options.c:355
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -706,15 +701,15 @@ msgstr ""
 msgid "Too many custom shortcuts"
 msgstr "Demasiadas combinaciones personalizadas"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1865
+#: ../panels/keyboard/keyboard-shortcuts.c:1866
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1909
+#: ../panels/keyboard/keyboard-shortcuts.c:1910
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1931
+#: ../panels/keyboard/keyboard-shortcuts.c:1932
 msgid "Shortcut"
 msgstr "Combinación"
 
@@ -812,27 +807,94 @@ msgstr "_Nombre:"
 msgid "_Speed:"
 msgstr "Ve_locidad:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
-#: ../panels/network/network.ui.h:25
-msgid "add-toolbutton"
-msgstr ""
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
-#: ../panels/network/network.ui.h:29
-msgid "remove-toolbutton"
-msgstr ""
-
-#: ../panels/media/cc-media-panel.c:321
+#: ../panels/media/cc-media-panel.c:322
 msgid "Ask what to do"
 msgstr "Preguntar qué hacer"
 
-#: ../panels/media/cc-media-panel.c:325 ../panels/power/power.ui.h:8
+#: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:8
 msgid "Do nothing"
 msgstr "No hacer nada"
 
-#: ../panels/media/cc-media-panel.c:329
+#: ../panels/media/cc-media-panel.c:330
 msgid "Open folder"
 msgstr "Abrir carpeta"
+
+#: ../panels/media/cc-media-panel.c:441
+#| msgid "Select your default applications"
+msgid "Select an application for audio CDs"
+msgstr "Seleccionar una aplicación para CD de sonido"
+
+#: ../panels/media/cc-media-panel.c:442
+#| msgid "Select your default applications"
+msgid "Select an application for video DVDs"
+msgstr "Seleccionar una aplicación para DVD de vídeo"
+
+#: ../panels/media/cc-media-panel.c:443
+msgid "Select an application to run when a music player is connected"
+msgstr ""
+"Seleccionar una aplicación que ejecutar cuando se conecta un reproductor de "
+"música"
+
+#: ../panels/media/cc-media-panel.c:444
+msgid "Select an application to run when a camera is connected"
+msgstr ""
+
+#: ../panels/media/cc-media-panel.c:445
+#| msgid "Select your default applications"
+msgid "Select an application for software CDs"
+msgstr "Seleccionar una aplicación para CD de software"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/media/cc-media-panel.c:457
+msgid "audio DVD"
+msgstr "DVD de sonido"
+
+#: ../panels/media/cc-media-panel.c:458
+msgid "blank Blu-ray disc"
+msgstr "disco Blu-ray virgen"
+
+#: ../panels/media/cc-media-panel.c:459
+msgid "blank CD disc"
+msgstr "CD virgen"
+
+#: ../panels/media/cc-media-panel.c:460
+msgid "blank DVD disc"
+msgstr "DVD virgen"
+
+#: ../panels/media/cc-media-panel.c:461
+msgid "blank HD DVD disc"
+msgstr "disco HD DVD virgen"
+
+#: ../panels/media/cc-media-panel.c:462
+msgid "Blu-ray video disc"
+msgstr "Disco Blu-ray de vídeo"
+
+#: ../panels/media/cc-media-panel.c:463
+msgid "e-book reader"
+msgstr "lector de libros electrónicos"
+
+#: ../panels/media/cc-media-panel.c:464
+#| msgid "_DVD video:"
+msgid "HD DVD video disc"
+msgstr "Disco HD DVD de vídeo"
+
+#: ../panels/media/cc-media-panel.c:465
+#| msgid "Pictures Folder"
+msgid "Picture CD"
+msgstr "CD de imágenes"
+
+#: ../panels/media/cc-media-panel.c:466
+msgid "Super Video CD"
+msgstr "Super Video CD"
+
+#: ../panels/media/cc-media-panel.c:467
+#| msgid "Video Mouse"
+msgid "Video CD"
+msgstr "Video CD"
 
 #: ../panels/media/gnome-media-properties.ui.h:1
 msgid "Acti_on:"
@@ -933,7 +995,7 @@ msgstr "Abrir puerta"
 #. Translators: At least one input tray is low on media
 #: ../panels/printers/cc-printers-panel.c:226
 msgid "Low on paper"
-msgstr ""
+msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
 #: ../panels/printers/cc-printers-panel.c:228
@@ -1053,10 +1115,10 @@ msgstr "Limpiar cabezales de la impresora"
 #. Translators: An error has occured during execution of a CUPS maintenance command
 #: ../panels/printers/cc-printers-panel.c:1670
 msgid "An error has occured during a maintenance command."
-msgstr ""
+msgstr "Ocurrió un error durante un comando de mantenimiento."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1708
+#: ../panels/printers/cc-printers-panel.c:1709
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -1075,90 +1137,95 @@ msgid "Printers"
 msgstr "Impresoras"
 
 #: ../panels/printers/printers.ui.h:1
+msgid "\t"
+msgstr "\t"
+
+#: ../panels/printers/printers.ui.h:2
 msgid "---"
 msgstr "---"
 
-#. Translators: Cancel selected print job.
-#: ../panels/printers/printers.ui.h:3
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr "Cancelar"
-
 #. Translators: This button executes command which cleans print heads of the printer.
-#: ../panels/printers/printers.ui.h:5
+#: ../panels/printers/printers.ui.h:4
 msgid "Clean Print Heads"
 msgstr "Limpiar cabezales de impresión"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:6
 #: ../panels/region/gnome-region-panel-xkbot.c:229
 #: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "Predeterminado"
 
 #. Translators: Description of the printer.
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:8
 msgid "Description:"
 msgstr "Descripción:"
 
 #. Translators: This button pauses printer.
-#: ../panels/printers/printers.ui.h:11
+#: ../panels/printers/printers.ui.h:10
 msgid "Disable Printer"
 msgstr "Desactivar impresora"
 
-#. Translators: Pause (hold) selected print job.
-#: ../panels/printers/printers.ui.h:13
-msgid "Hold"
-msgstr "Mantener"
-
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:15
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
+#: ../panels/printers/printers.ui.h:12
 msgid "Location:"
 msgstr "Lugar:"
 
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:14
 msgid "Print Test Page"
 msgstr "Imprimir página de prueba"
 
 #. Translators: A widget showing list of print jobs for selected printer.
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:16
 msgid "Printer Jobs"
 msgstr "Trabajos de la impresora"
 
 #. Translators: This shows queue of print jobs.
-#: ../panels/printers/printers.ui.h:21
+#: ../panels/printers/printers.ui.h:18
 msgid "Queue"
 msgstr "Cola"
 
-#. Translators: Print paused print job.
-#: ../panels/printers/printers.ui.h:23
-msgid "Release"
-msgstr "Publicación"
-
 #. Translators: Users which are allowed to print on this printer.
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:20
 msgid "Share with these users:"
 msgstr "Compartir con estos usuarios:"
 
-#: ../panels/printers/printers.ui.h:26
+#: ../panels/printers/printers.ui.h:21
 msgid "Show / hide printer's jobs"
 msgstr "Mostrar / ocultar trabajos de la impresora"
 
 #. Translators: Status of the printer.
-#: ../panels/printers/printers.ui.h:28
+#: ../panels/printers/printers.ui.h:23
 msgid "Status:"
 msgstr "Estado:"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:30
+#: ../panels/printers/printers.ui.h:25
 msgid "Supply:"
 msgstr "Suministro:"
 
+#: ../panels/printers/printers.ui.h:26
+msgid "pause-toolbutton"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:27
+msgid "resume-toolbutton"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:28
+msgid "stop-toolbutton"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:29
+msgid "toolbutton1"
+msgstr ""
+
+#: ../panels/printers/printers.ui.h:30
+msgid "toolbutton2"
+msgstr ""
+
 #: ../panels/region/gnome-region-panel.ui.h:1
-#| msgid "_Install..."
 msgid "Install languages..."
 msgstr "Instalar idiomas…"
 
@@ -1167,7 +1234,6 @@ msgid "Keyboard _model:"
 msgstr "_Modelo del teclado:"
 
 #: ../panels/region/gnome-region-panel.ui.h:3
-#| msgid "Language:"
 msgid "Language"
 msgstr "Idioma"
 
@@ -1226,7 +1292,7 @@ msgstr "Restablecer valores _predeterminados"
 
 #: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Select a display language"
-msgstr ""
+msgstr "Seleccionar el idioma que mostrar"
 
 #: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Select a keyboard layout to be added to the list"
@@ -1317,8 +1383,9 @@ msgstr "Cambiar su configuración de región e idioma"
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:3
-msgid "Language;Layout;"
-msgstr "idioma;distribución;"
+#| msgid "Language;Layout;"
+msgid "Language;Layout;Keyboard;"
+msgstr "Idioma;Distribución;Teclado;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Disable _touchpad while typing"
@@ -1660,7 +1727,7 @@ msgid "Subnet Mask:"
 msgstr "Máscara de subred:"
 
 #: ../panels/network/network.ui.h:23
-#: ../panels/user-accounts/um-lockbutton.c:364
+#: ../panels/user-accounts/um-lockbutton.c:356
 msgid "Unlock"
 msgstr "Desbloquear"
 
@@ -1668,17 +1735,17 @@ msgstr "Desbloquear"
 msgid "Username:"
 msgstr "Nombre de usuario:"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:25
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automático"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:26
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Manual"
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:27
 msgctxt "proxy method"
 msgid "None"
 msgstr "Ninguno"
@@ -1693,8 +1760,9 @@ msgstr "Gestión de energía"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-msgid "Power;Sleep;Suspend;Hibernate;"
-msgstr "energía;corriente;tensión;hibernar;suspender;dormir;"
+#| msgid "Power;Sleep;Suspend;Hibernate;"
+msgid "Power;Sleep;Suspend;Hibernate;Battery;"
+msgstr "Energía;Dormir;Suspender;Hibernar;Batería;"
 
 #: ../panels/power/cc-power-panel.c:151
 msgid "Unknown time"
@@ -1830,8 +1898,9 @@ msgstr "Al pulsar el botón de suspensión:"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr "brillo;bloquear;iluminación;ennegrecer;"
+#| msgid "Brightness;Lock;Dim;Blank;"
+msgid "Brightness;Lock;Dim;Blank;Monitor;"
+msgstr "Brillo;Bloquear;Oscurecer;Iluminar;Pantalla;"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
 msgid "Screen"
@@ -1859,7 +1928,7 @@ msgstr "Brillo"
 
 #: ../panels/screen/screen.ui.h:9
 msgid "Dim screen to save power"
-msgstr ""
+msgstr "Oscurecer la pantalla para ahorrar energía"
 
 #: ../panels/screen/screen.ui.h:10
 msgid "Don't lock when at home"
@@ -1869,7 +1938,7 @@ msgstr ""
 msgid "Locations..."
 msgstr "Ubicaciones…"
 
-#: ../panels/screen/screen.ui.h:12 ../panels/user-accounts/um-lockbutton.c:355
+#: ../panels/screen/screen.ui.h:12 ../panels/user-accounts/um-lockbutton.c:347
 msgid "Lock"
 msgstr "Bloquear"
 
@@ -2528,7 +2597,7 @@ msgid "Authentication failed"
 msgstr "Falló la autenticación"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:378
+#: ../panels/user-accounts/um-password-dialog.c:375
 #, c-format
 msgid "The new password is too short"
 msgstr "La contraseña nueva es demasiado corta"
@@ -2605,21 +2674,21 @@ msgstr ""
 
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgctxt "Account type"
 msgid "Standard"
 msgstr "Estándar"
 
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administrador"
 
 #: ../panels/user-accounts/um-account-type.c:39
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgctxt "Account type"
 msgid "Supervised"
 msgstr "Supervisado"
@@ -2681,15 +2750,15 @@ msgstr "No se pudo acceder al dispositivo «%s»"
 msgid "Could not start finger capture on '%s' device"
 msgstr "No se pudo iniciar la captura de dedo en el dispositivo «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+#: ../panels/user-accounts/um-fingerprint-dialog.c:549
 msgid "Could not access any fingerprint readers"
 msgstr "No se pudo acceder a ninguna lectura de huellas"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:551
+#: ../panels/user-accounts/um-fingerprint-dialog.c:550
 msgid "Please contact your system administrator for help."
 msgstr "Contacte con el administrador de su sistema para obtener ayuda."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:588
+#: ../panels/user-accounts/um-fingerprint-dialog.c:587
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "Activar el inicio de sesión con huella"
@@ -2698,7 +2767,8 @@ msgstr "Activar el inicio de sesión con huella"
 #. * The variable is the name of the device, for example:
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
-#: ../panels/user-accounts/um-fingerprint-dialog.c:626
+#.
+#: ../panels/user-accounts/um-fingerprint-dialog.c:621
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -2707,7 +2777,7 @@ msgstr ""
 "Para activar el inicio de sesión con huella debe guardar una de sus huellas "
 "usando el dispositivo «%s»."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:634
+#: ../panels/user-accounts/um-fingerprint-dialog.c:629
 #, c-format
 msgid ""
 "Enrolling fingerprints for\n"
@@ -2716,11 +2786,15 @@ msgstr ""
 "Registrando huellas digitales para\n"
 "<b><big>%s</big></b>"
 
-#: ../panels/user-accounts/um-lockbutton.c:373
+#: ../panels/user-accounts/um-language-dialog.c:180
+msgid "Other..."
+msgstr "Otra…"
+
+#: ../panels/user-accounts/um-lockbutton.c:365
 msgid "Locked"
 msgstr "Bloqueado"
 
-#: ../panels/user-accounts/um-lockbutton.c:382
+#: ../panels/user-accounts/um-lockbutton.c:374
 msgid ""
 "Dialog is unlocked.\n"
 "Click to prevent further changes"
@@ -2728,7 +2802,7 @@ msgstr ""
 "El diálogo está desbloqueado.\n"
 "Pulse para prevenir cambios en él."
 
-#: ../panels/user-accounts/um-lockbutton.c:391
+#: ../panels/user-accounts/um-lockbutton.c:383
 msgid ""
 "Dialog is locked.\n"
 "Click to make changes"
@@ -2736,7 +2810,7 @@ msgstr ""
 "El diálogo está bloqueado.\n"
 "Pulse para realizar cambios."
 
-#: ../panels/user-accounts/um-lockbutton.c:400
+#: ../panels/user-accounts/um-lockbutton.c:392
 msgid ""
 "System policy prevents changes.\n"
 "Contact your system administrator"
@@ -2744,77 +2818,77 @@ msgstr ""
 "La política del sistema impide los cambios.\n"
 "Contacte con su administrador de sistemas."
 
-#: ../panels/user-accounts/um-password-dialog.c:182
+#: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
 msgstr "Más opciones…"
 
-#: ../panels/user-accounts/um-password-dialog.c:288
+#: ../panels/user-accounts/um-password-dialog.c:285
 msgid "Please choose another password."
 msgstr "Elija otra contraseña."
 
-#: ../panels/user-accounts/um-password-dialog.c:297
+#: ../panels/user-accounts/um-password-dialog.c:294
 msgid "Please type your current password again."
 msgstr "Escriba de nuevo su contraseña actual."
 
-#: ../panels/user-accounts/um-password-dialog.c:303
+#: ../panels/user-accounts/um-password-dialog.c:300
 msgid "Password could not be changed"
 msgstr "No se pudo cambiar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:375
+#: ../panels/user-accounts/um-password-dialog.c:372
 msgid "You need to enter a new password"
 msgstr "Debe introducir una contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:384
+#: ../panels/user-accounts/um-password-dialog.c:381
 msgid "You need to confirm the password"
 msgstr "Debe confirmar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:387
+#: ../panels/user-accounts/um-password-dialog.c:384
 msgid "The passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:393
+#: ../panels/user-accounts/um-password-dialog.c:390
 msgid "You need to enter your current password"
 msgstr "Debe introducir su contraseña actual"
 
-#: ../panels/user-accounts/um-password-dialog.c:396
+#: ../panels/user-accounts/um-password-dialog.c:393
 msgid "The current password is not correct"
 msgstr "La contraseña actual no es correcta"
 
-#: ../panels/user-accounts/um-password-dialog.c:469
-#: ../panels/user-accounts/um-password-dialog.c:686
+#: ../panels/user-accounts/um-password-dialog.c:466
+#: ../panels/user-accounts/um-password-dialog.c:683
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "Demasiado corta"
 
-#: ../panels/user-accounts/um-password-dialog.c:472
-#: ../panels/user-accounts/um-password-dialog.c:687
+#: ../panels/user-accounts/um-password-dialog.c:469
+#: ../panels/user-accounts/um-password-dialog.c:684
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Débil"
 
-#: ../panels/user-accounts/um-password-dialog.c:474
-#: ../panels/user-accounts/um-password-dialog.c:688
+#: ../panels/user-accounts/um-password-dialog.c:471
+#: ../panels/user-accounts/um-password-dialog.c:685
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Regular"
 
-#: ../panels/user-accounts/um-password-dialog.c:476
-#: ../panels/user-accounts/um-password-dialog.c:689
+#: ../panels/user-accounts/um-password-dialog.c:473
+#: ../panels/user-accounts/um-password-dialog.c:686
 msgctxt "Password strength"
 msgid "Good"
 msgstr "Buena"
 
-#: ../panels/user-accounts/um-password-dialog.c:478
-#: ../panels/user-accounts/um-password-dialog.c:690
+#: ../panels/user-accounts/um-password-dialog.c:475
+#: ../panels/user-accounts/um-password-dialog.c:687
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Fuerte"
 
-#: ../panels/user-accounts/um-password-dialog.c:517
+#: ../panels/user-accounts/um-password-dialog.c:514
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:543
+#: ../panels/user-accounts/um-password-dialog.c:540
 msgid "Wrong password"
 msgstr "Contraseña errónea"
 
@@ -2841,7 +2915,7 @@ msgstr "Tomar una foto…"
 msgid "Browse for more pictures..."
 msgstr "Examinar para buscar más imágenes…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:693
+#: ../panels/user-accounts/um-photo-dialog.c:690
 #, c-format
 msgid "Used by %s"
 msgstr "Usada por %s"
@@ -2855,20 +2929,20 @@ msgstr "Ya existe un usuario con el nombre «%s»."
 msgid "This user does not exist."
 msgstr "Este usuario no existe."
 
-#: ../panels/user-accounts/um-user-panel.c:354
+#: ../panels/user-accounts/um-user-panel.c:359
 msgid "Failed to delete user"
 msgstr "Falló al eliminar el usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:414
+#: ../panels/user-accounts/um-user-panel.c:419
 msgid "You cannot delete your own account."
 msgstr "No puede eliminar su propia cuenta."
 
-#: ../panels/user-accounts/um-user-panel.c:423
+#: ../panels/user-accounts/um-user-panel.c:428
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aún está registrado en el sistema"
 
-#: ../panels/user-accounts/um-user-panel.c:427
+#: ../panels/user-accounts/um-user-panel.c:432
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -2876,55 +2950,55 @@ msgstr ""
 "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
 "sistema en un estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:441
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "¿Quiere mantener los archivos de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:440
+#: ../panels/user-accounts/um-user-panel.c:445
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los "
-"archivos temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
+"temporales al eliminar una cuenta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:448
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:449
 msgid "_Keep Files"
 msgstr "_Mantener archivos"
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:450
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../panels/user-accounts/um-user-panel.c:469
+#: ../panels/user-accounts/um-user-panel.c:474
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:478
+#: ../panels/user-accounts/um-user-panel.c:483
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:481
+#: ../panels/user-accounts/um-user-panel.c:486
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panels/user-accounts/um-user-panel.c:829
+#: ../panels/user-accounts/um-user-panel.c:808
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: ../panels/user-accounts/um-user-panel.c:831
+#: ../panels/user-accounts/um-user-panel.c:810
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
-#: ../panels/user-accounts/um-user-panel.c:864
+#: ../panels/user-accounts/um-user-panel.c:843
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -2932,12 +3006,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:902
+#: ../panels/user-accounts/um-user-panel.c:881
 msgid "Create a user"
 msgstr "Crear un usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:913
-#: ../panels/user-accounts/um-user-panel.c:1189
+#: ../panels/user-accounts/um-user-panel.c:892
+#: ../panels/user-accounts/um-user-panel.c:1191
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -2945,12 +3019,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:922
+#: ../panels/user-accounts/um-user-panel.c:901
 msgid "Delete the selected user"
 msgstr "Eliminar el usuario seleccionado"
 
-#: ../panels/user-accounts/um-user-panel.c:934
-#: ../panels/user-accounts/um-user-panel.c:1194
+#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:1196
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -2958,11 +3032,11 @@ msgstr ""
 "Para eliminar el usuario seleccionado\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1098
+#: ../panels/user-accounts/um-user-panel.c:1091
 msgid "My Account"
 msgstr "Mi cuenta"
 
-#: ../panels/user-accounts/um-user-panel.c:1107
+#: ../panels/user-accounts/um-user-panel.c:1101
 msgid "Other Accounts"
 msgstr "Otras cuentas"
 
@@ -2998,6 +3072,11 @@ msgstr "Nombre _completo:"
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
 msgid "_Username:"
 msgstr "Nombre de _usuario:"
+
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Cancelar"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid ""
@@ -3105,91 +3184,40 @@ msgid "Take a photograph"
 msgstr "Tomar una fotografía"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-#| msgid ""
-#| "A guest account will allow anyone to temporarily log in to this computer "
-#| "without a password.  For security, remote logins to this account are not "
-#| "allowed.\n"
-#| "\n"
-#| "<b>When the guest user logs out, all files and data associated with the "
-#| "account will be deleted.</b>"
-msgid ""
-"A guest account will allow anyone to temporarily log in to this computer "
-"without a password.  For security, remote logins to this account are not "
-"allowed.\n"
-"\n"
-"                    <b>When the guest user logs out, all files and data "
-"associated with the account will be deleted.</b>"
-msgstr ""
-"Una cuenta de invitado permitirá que cualquiera inicie sesión temporalmente "
-"en este equipo sin contraseña. Por razones de seguridad no se permiten "
-"inicios de sesión remotos con esta cuenta.\n"
-"\n"
-"                    <b>Cuando el usuario invitado sale de la sesión, todos "
-"los archivos y datos asociados con la cuenta se eliminan.</b>"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
 msgstr "Información de la cuenta"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "Account type:"
 msgstr "Tipo de cuenta:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-msgid "Accounts"
-msgstr "Cuentas"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
-msgid "Address Book Card:"
-msgstr "Tarjeta de la libreta de direcciones:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "Allow guests to log in to this computer"
-msgstr "Permitir a invitados que inicien sesión en este equipo"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Automatic Login:"
 msgstr "Inicio de sesión automático:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-msgid "E-mail address:"
-msgstr "Dirección de correo-e:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Fingerprint Login:"
 msgstr "Inicio de sesión con huella:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Language:"
 msgstr "Idioma:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "Login Options"
 msgstr "Opciones de inicio de sesión"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Open"
 msgstr "Abierta"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "Restrictions:"
 msgstr "Restricciones:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
-msgid "Show Shutdown, Suspend and Restart actions"
-msgstr "Acciones de Apagar, Suspender y Reiniciar"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
-msgid "Show list of users"
-msgstr "Mostrar la lista de usuarios"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
-msgid "Show password hints"
-msgstr "Mostrar los consejos sobre la contraseña"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
 msgid "Left index finger"
@@ -3276,6 +3304,55 @@ msgstr "Centro de control"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Todas las configuraciones"
+
+#~ msgid "Hold"
+#~ msgstr "Mantener"
+
+#~ msgid "Release"
+#~ msgstr "Publicación"
+
+#~| msgid ""
+#~| "A guest account will allow anyone to temporarily log in to this computer "
+#~| "without a password.  For security, remote logins to this account are not "
+#~| "allowed.\n"
+#~| "\n"
+#~| "<b>When the guest user logs out, all files and data associated with the "
+#~| "account will be deleted.</b>"
+#~ msgid ""
+#~ "A guest account will allow anyone to temporarily log in to this computer "
+#~ "without a password.  For security, remote logins to this account are not "
+#~ "allowed.\n"
+#~ "\n"
+#~ "                    <b>When the guest user logs out, all files and data "
+#~ "associated with the account will be deleted.</b>"
+#~ msgstr ""
+#~ "Una cuenta de invitado permitirá que cualquiera inicie sesión "
+#~ "temporalmente en este equipo sin contraseña. Por razones de seguridad no "
+#~ "se permiten inicios de sesión remotos con esta cuenta.\n"
+#~ "\n"
+#~ "                    <b>Cuando el usuario invitado sale de la sesión, "
+#~ "todos los archivos y datos asociados con la cuenta se eliminan.</b>"
+
+#~ msgid "Accounts"
+#~ msgstr "Cuentas"
+
+#~ msgid "Address Book Card:"
+#~ msgstr "Tarjeta de la libreta de direcciones:"
+
+#~ msgid "Allow guests to log in to this computer"
+#~ msgstr "Permitir a invitados que inicien sesión en este equipo"
+
+#~ msgid "E-mail address:"
+#~ msgstr "Dirección de correo-e:"
+
+#~ msgid "Show Shutdown, Suspend and Restart actions"
+#~ msgstr "Acciones de Apagar, Suspender y Reiniciar"
+
+#~ msgid "Show list of users"
+#~ msgstr "Mostrar la lista de usuarios"
+
+#~ msgid "Show password hints"
+#~ msgstr "Mostrar los consejos sobre la contraseña"
 
 #~ msgid "Do Nothing"
 #~ msgstr "No hacer nada"
@@ -3607,11 +3684,6 @@ msgstr "_Todas las configuraciones"
 #, fuzzy
 #~| msgid "Select your default applications"
 #~ msgid "Could not set as default application"
-#~ msgstr "Seleccione sus aplicaciones predeterminadas"
-
-#, fuzzy
-#~| msgid "Select your default applications"
-#~ msgid "Select an Application"
 #~ msgstr "Seleccione sus aplicaciones predeterminadas"
 
 #, fuzzy
@@ -5794,5 +5866,4 @@ msgstr "_Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr ""
-#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
