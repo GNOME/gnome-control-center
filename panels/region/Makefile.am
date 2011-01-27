@@ -21,7 +21,6 @@ libregion_la_SOURCES =	\
 	gnome-region-panel-lang.c \
 	gnome-region-panel-lang.h \
 	gnome-region-panel-xkb.c \
-	gnome-region-panel-xkbmc.c \
 	gnome-region-panel-xkblt.c \
 	gnome-region-panel-xkbltadd.c \
 	gnome-region-panel-xkbot.c \

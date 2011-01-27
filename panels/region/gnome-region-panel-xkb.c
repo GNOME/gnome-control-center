@@ -48,57 +48,6 @@ xci_desc_to_utf8 (XklConfigItem * ci)
 }
 
 static void
-set_model_text (GtkWidget * picker, gchar * model)
-{
-	XklConfigItem *ci = xkl_config_item_new ();
-
-	if (model == NULL) {
-		model = initial_config.model;
-		if (model == NULL)
-			model = "";
-	}
-
-	g_snprintf (ci->name, sizeof (ci->name), "%s", model);
-
-	if (xkl_config_registry_find_model (config_registry, ci)) {
-		char *d;
-
-		d = xci_desc_to_utf8 (ci);
-		gtk_button_set_label (GTK_BUTTON (picker), d);
-		g_free (d);
-	} else {
-		gtk_button_set_label (GTK_BUTTON (picker), _("Unknown"));
-	}
-	g_object_unref (G_OBJECT (ci));
-}
-
-static void
-model_key_changed (GSettings * settings, const gchar * key,
-		   GtkBuilder * dialog)
-{
-	if (!strcmp (key, GKBD_KEYBOARD_CONFIG_KEY_MODEL)) {
-		gchar *value =
-		    g_settings_get_string (xkb_keyboard_settings,
-					   GKBD_KEYBOARD_CONFIG_KEY_MODEL);
-		set_model_text (WID ("xkb_model_pick"), value);
-		if (value != NULL)
-			g_free (value);
-
-		enable_disable_restoring (dialog);
-	}
-}
-
-static void
-setup_model_entry (GtkBuilder * dialog)
-{
-	model_key_changed (xkb_keyboard_settings,
-			   GKBD_KEYBOARD_CONFIG_KEY_MODEL, dialog);
-
-	g_signal_connect (xkb_keyboard_settings, "changed",
-			  G_CALLBACK (model_key_changed), dialog);
-}
-
-static void
 cleanup_xkb_tabs (GtkBuilder * dialog,
 		  GObject *where_the_object_wa)
 {
@@ -179,8 +128,6 @@ setup_xkb_tabs (GtkBuilder * dialog)
 	gkbd_keyboard_config_init (&initial_config, engine);
 	gkbd_keyboard_config_load_from_x_initial (&initial_config, NULL);
 
-	setup_model_entry (dialog);
-
 	g_settings_bind (xkb_desktop_settings,
 			 GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW,
 			 WID ("chk_separate_group_per_window"), "active",
@@ -220,10 +167,6 @@ setup_xkb_tabs (GtkBuilder * dialog)
 	g_signal_connect_swapped (G_OBJECT (WID ("xkb_layout_options")),
 				  "clicked",
 				  G_CALLBACK (xkb_options_popup_dialog),
-				  dialog);
-
-	g_signal_connect_swapped (G_OBJECT (WID ("xkb_model_pick")),
-				  "clicked", G_CALLBACK (choose_model),
 				  dialog);
 
 	xkb_layouts_register_conf_listener (dialog);

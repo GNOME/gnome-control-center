@@ -60,8 +60,6 @@ extern void enable_disable_restoring (GtkBuilder * dialog);
 
 extern void preview_toggled (GtkBuilder * dialog, GtkWidget * button);
 
-extern void choose_model (GtkBuilder * dialog);
-
 extern void xkb_layout_choose (GtkBuilder * dialog);
 
 extern gchar **xkb_layouts_get_selected_list (void);
