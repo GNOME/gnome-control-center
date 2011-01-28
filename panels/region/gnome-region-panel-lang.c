@@ -80,8 +80,10 @@ add_other_users_language (GHashTable *ht)
 		}
 		props = g_dbus_proxy_get_cached_property (user, "Language");
 		name = g_variant_get_string (props, NULL);
-		language = gdm_get_language_from_name (name, NULL);
-		g_hash_table_insert (ht, g_strdup (name), language);
+		if (name != NULL && *name != '\0') {
+			language = gdm_get_language_from_name (name, NULL);
+			g_hash_table_insert (ht, g_strdup (name), language);
+		}
 		g_variant_unref (props);
 		g_object_unref (user);
 	}
