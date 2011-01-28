@@ -251,7 +251,6 @@ setup_language (GtkBuilder *builder)
 	GtkWidget *treeview;
 	GHashTable *user_langs;
 	GtkWidget *parent;
-	GtkTreeModel *model;
 	GdkWindow *window;
 	guint timeout;
 	GError *error = NULL;
@@ -278,7 +277,6 @@ setup_language (GtkBuilder *builder)
 	/* Add user languages */
 	user_langs = new_ht_for_user_languages ();
 	cc_common_language_setup_list (treeview, user_langs);
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
 
 	/* Setup so that the list is populated after the list appears */
 	window = gtk_widget_get_window (parent);
