@@ -210,9 +210,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       N_("Low on toner"),
       /* Translators: The printer has no toner left */
       N_("Out of toner"),
-      /* Translators: "Developer" like on photo development context */
+      /* Translators: "Developer" is a chemical for photo development,
+       * http://en.wikipedia.org/wiki/Photographic_developer */
       N_("Low on developer"),
-      /* Translators: "Developer" like on photo development context */
+      /* Translators: "Developer" is a chemical for photo development,
+       * http://en.wikipedia.org/wiki/Photographic_developer */
       N_("Out of developer"),
       /* Translators: "marker" is one color bin of the printer */
       N_("Low on a marker supply"),
