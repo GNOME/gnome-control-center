@@ -24,10 +24,13 @@
 #include <sys/time.h>
 #include "cc-timezone-map.h"
 #include "set-timezone.h"
+#include "dt-lockbutton.h"
+
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
 #include <string.h>
 #include <stdlib.h>
 #include <libintl.h>
+#include <polkit/polkit.h>
 
 #define GETTEXT_PACKAGE_TIMEZONES GETTEXT_PACKAGE "-timezones"
 
@@ -722,6 +725,22 @@ queue_clock_update (CcDateTimePanel *self)
 }
 
 static void
+on_permission_changed (GPermission *permission,
+                       GParamSpec  *pspec,
+                       gpointer     data)
+{
+  CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (data)->priv;
+  gboolean allowed;
+  GtkWidget *vbox;
+
+  allowed = g_permission_get_allowed (permission);
+
+  vbox = (GtkWidget*) gtk_builder_get_object (priv->builder, "vbox");
+
+  gtk_widget_set_sensitive (vbox, allowed);
+}
+
+static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
@@ -737,6 +756,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   guint i, num_days;
   gboolean using_ntp;
   int ret;
+  GtkWidget *lockbutton;
+  GPermission *permission;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
 
@@ -839,6 +860,19 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                                           NULL);
 
   queue_clock_update (self);
+
+  /* add the lock button */
+  permission = polkit_permission_new_sync ("org.gnome.settingsdaemon.datetimemechanism.configure", NULL, NULL, NULL);
+
+  /* DtLockButton takes ownership of the permission */
+  lockbutton = dt_lock_button_new (permission);
+  gtk_widget_set_margin_top (lockbutton, 12);
+  gtk_widget_show (lockbutton);
+  gtk_box_pack_end ((GtkBox *) gtk_builder_get_object (priv->builder, "hbox"),
+                    lockbutton, FALSE, FALSE, 0);
+  g_signal_connect (permission, "notify",
+                    G_CALLBACK (on_permission_changed), self);
+  on_permission_changed (permission, NULL, self);
 }
 
 void

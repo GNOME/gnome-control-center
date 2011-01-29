@@ -66,6 +66,7 @@ INCLUDES =						\
 	$(PANEL_CFLAGS)					\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
 	$(DBUS_CFLAGS)					\
+	$(POLKIT_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(uidir)\""			\
@@ -88,6 +89,8 @@ ccpanels_LTLIBRARIES = libdate_time.la
 
 libdate_time_la_SOURCES =	\
 	datetime-module.c	\
+	dt-lockbutton.c	\
+	dt-lockbutton.h	\
 	cc-datetime-panel.c	\
 	cc-datetime-panel.h	\
 	cc-timezone-map.c	\
@@ -96,7 +99,8 @@ libdate_time_la_SOURCES =	\
 	set-timezone.h		\
 	tz.c tz.h
 
-libdate_time_la_LIBADD = $(PANEL_LIBS) $(DBUS_LIBS) $(GNOMECC_CAPPLETS_LIBS)
+libdate_time_la_LIBADD = $(PANEL_LIBS) $(DBUS_LIBS) $(GNOMECC_CAPPLETS_LIBS) \
+			 $(POLKIT_LIBS)
 libdate_time_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
