@@ -1220,6 +1220,8 @@ um_user_panel_init (UmUserPanel *self)
         type = um_editable_entry_get_type ();
         type = um_editable_combo_get_type ();
 
+        gtk_widget_set_size_request (GTK_WIDGET (self), -1, 350);
+
         d->builder = gtk_builder_new ();
         d->um = um_user_manager_ref_default ();
         d->authority = polkit_authority_get_sync (NULL, NULL);
