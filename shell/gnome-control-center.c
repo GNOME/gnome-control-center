@@ -946,6 +946,35 @@ viewport_style_set_cb (GtkWidget *widget,
   g_signal_handlers_unblock_by_func (widget, viewport_style_set_cb, NULL);
 }
 
+static gboolean
+window_key_press_event (GtkWidget          *win,
+			GdkEventKey        *event,
+			GnomeControlCenter *self)
+{
+  gboolean retval;
+
+  retval = FALSE;
+
+  if (!gtk_widget_get_visible (self->priv->search_entry))
+    return retval;
+
+  if (event->state != 0 &&
+      (event->state & GDK_CONTROL_MASK))
+    {
+      switch (event->keyval)
+        {
+          case GDK_KEY_s:
+          case GDK_KEY_S:
+          case GDK_KEY_f:
+          case GDK_KEY_F:
+            gtk_widget_grab_focus (self->priv->search_entry);
+            retval = TRUE;
+            break;
+        }
+    }
+  return retval;
+}
+
 static void
 gnome_control_center_init (GnomeControlCenter *self)
 {
@@ -969,6 +998,8 @@ gnome_control_center_init (GnomeControlCenter *self)
   /* connect various signals */
   priv->window = W (priv->builder, "main-window");
   g_signal_connect_swapped (priv->window, "delete-event", G_CALLBACK (g_object_unref), self);
+  g_signal_connect (priv->window, "key_press_event",
+                    G_CALLBACK (window_key_press_event), self);
 
   priv->notebook = W (priv->builder, "notebook");
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
