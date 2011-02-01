@@ -11,18 +11,63 @@
         <property name="visible">True</property>
         <property name="spacing">10</property>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow2">
+          <object class="GtkVBox" id="vbox4">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">automatic</property>
-            <property name="vscrollbar_policy">automatic</property>
-            <property name="shadow_type">in</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkTreeView" id="printer-treeview">
+              <object class="GtkScrolledWindow" id="printers-scrolledwindow">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="headers_visible">False</property>
+                <property name="hscrollbar_policy">automatic</property>
+                <property name="vscrollbar_policy">automatic</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="printers-treeview">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="headers_visible">False</property>
+                  </object>
+                </child>
               </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolbar" id="printers-toolbar">
+                <property name="visible">True</property>
+                <property name="icon_size">1</property>
+                <property name="icon_size_set">True</property>
+                <child>
+                  <object class="GtkToolButton" id="printer-add-button">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="label">AddPrinter</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">list-add-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="printer-remove-button">
+                    <property name="visible">True</property>
+                    <property name="label">RemovePrinter</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">list-remove-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">1</property>
+              </packing>
             </child>
           </object>
           <packing>

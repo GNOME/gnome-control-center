@@ -502,7 +502,7 @@ actualize_printers_list (CcPrintersPanel *self)
   priv->current_dest = -1;
 
   treeview = (GtkTreeView*)
-    gtk_builder_get_object (priv->builder, "printer-treeview");
+    gtk_builder_get_object (priv->builder, "printers-treeview");
 
   store = gtk_list_store_new (PRINTER_N_COLUMNS,
                               G_TYPE_STRING,
@@ -650,7 +650,7 @@ populate_printers_list (CcPrintersPanel *self)
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   treeview = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "printer-treeview");
+    gtk_builder_get_object (priv->builder, "printers-treeview");
 
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
                     "changed", G_CALLBACK (printer_selection_changed_cb), self);
@@ -1570,6 +1570,50 @@ printer_set_default_cb (GtkToggleButton *button,
   }
 }
 
+static void
+printer_remove_cb (GtkToolButton *toolbutton,
+                   gpointer       user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  DBusGProxy             *proxy;
+  GError                 *error = NULL;
+  char                   *ret_error = NULL;
+  char                   *name = NULL;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    name = priv->dests[priv->current_dest].name;
+
+  if (name)
+    {
+      proxy = get_dbus_proxy ();
+
+      if (!proxy)
+        return;
+
+      dbus_g_proxy_call (proxy, "PrinterDelete", &error,
+                         G_TYPE_STRING, name,
+                         G_TYPE_INVALID,
+                         G_TYPE_STRING, &ret_error,
+                         G_TYPE_INVALID);
+
+      if (error || (ret_error && ret_error[0] != '\0'))
+        {
+          if (error)
+            g_warning ("%s", error->message);
+
+          if (ret_error && ret_error[0] != '\0')
+            g_warning ("%s", ret_error);
+        }
+      else
+        actualize_printers_list (self);
+  }
+}
+
 static ipp_t *
 execute_maintenance_command (const char *printer_name,
                              const char *command,
@@ -1731,6 +1775,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
   g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), self);
 
   widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-remove-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (printer_remove_cb), self);
+
+  widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-disable-button");
   g_signal_connect (widget, "toggled", G_CALLBACK (printer_disable_cb), self);
 
@@ -1757,6 +1805,16 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "clean-print-heads-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printers-scrolledwindow");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printers-toolbar");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "allowed-users-scrolledwindow");
