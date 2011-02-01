@@ -178,6 +178,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                  *printer_commands = NULL;
   gchar                 **printer_reasons = NULL;
   gchar                  *marker_levels = NULL;
+  gchar                  *active_jobs = NULL;
   gchar                  *description = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
@@ -442,6 +443,20 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       width = gtk_widget_get_allocated_width (widget);
       height = gtk_widget_get_allocated_height (widget);
       gtk_widget_queue_draw_area (widget, 0, 0, width, height);
+
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-jobs-label");
+      /* Translators: there is n active print jobs on this printer */
+      active_jobs = g_strdup_printf (_("%d active"), priv->num_jobs);
+
+      if (active_jobs)
+        {
+          gtk_label_set_text (GTK_LABEL (widget), active_jobs);
+          g_free (active_jobs);
+        }
+      else
+        gtk_label_set_text (GTK_LABEL (widget), none);
     }
   else
     {
@@ -1719,6 +1734,43 @@ printer_maintenance_cb (GtkButton *button,
     }
 }
 
+enum
+{
+  NOTEBOOK_INFO_PAGE = 0,
+  NOTEBOOK_JOBS_PAGE,
+  NOTEBOOK_N_PAGES
+};
+
+static void
+go_back_cb (GtkButton *button,
+            gpointer   user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  GtkWidget               *widget;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "notebook");
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_INFO_PAGE);
+}
+
+static void
+switch_to_jobs_cb (GtkButton *button,
+                   gpointer   user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  GtkWidget               *widget;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "notebook");
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_JOBS_PAGE);
+}
+
 static void
 cc_printers_panel_init (CcPrintersPanel *self)
 {
@@ -1806,6 +1858,16 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "clean-print-heads-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "back-button-1");
+  g_signal_connect (widget, "clicked", G_CALLBACK (go_back_cb), self);
+
+   widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-jobs-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (switch_to_jobs_cb), self);
+
+
+  /* Set junctions */
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printers-scrolledwindow");
   context = gtk_widget_get_style_context (widget);
