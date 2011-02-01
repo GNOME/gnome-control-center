@@ -63,7 +63,7 @@ struct _CcPrintersPanelPrivate
 static void actualize_jobs_list (CcPrintersPanel *self);
 static void actualize_printers_list (CcPrintersPanel *self);
 static void actualize_allowed_users_list (CcPrintersPanel *self);
-static void printer_disable_cb (GtkToggleButton *togglebutton, gpointer user_data);
+static void printer_disable_cb (GObject *gobject, GParamSpec *pspec, gpointer user_data);
 static void printer_set_default_cb (GtkToggleButton *button, gpointer user_data);
 
 static void
@@ -172,14 +172,14 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   const gchar            *none = "---";
   GtkWidget              *widget;
   gboolean                test_page_command_available = FALSE;
-  gboolean                clean_command_available = FALSE;
+  gchar                  *printer_make_and_model = NULL;
   gchar                  *reason = NULL;
   gchar                 **available_commands = NULL;
   gchar                  *printer_commands = NULL;
   gchar                 **printer_reasons = NULL;
   gchar                  *marker_levels = NULL;
+  gchar                  *printer_name = NULL;
   gchar                  *active_jobs = NULL;
-  gchar                  *description = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
   gint                    width, height;
@@ -246,9 +246,12 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    gtk_tree_model_get (model, &iter,
-			PRINTER_ID_COLUMN, &id,
-			-1);
+    {
+      gtk_tree_model_get (model, &iter,
+			  PRINTER_ID_COLUMN, &id,
+			  PRINTER_NAME_COLUMN, &printer_name,
+			  -1);
+    }
   else
     id = -1;
 
@@ -267,14 +270,14 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             location = g_strdup (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state") == 0)
             printer_state = atoi (priv->dests[id].options[i].value);
-          else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-info") == 0)
-            description = g_strdup (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state-reasons") == 0)
             reason = priv->dests[id].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-levels") == 0)
             marker_levels = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-commands") == 0)
             printer_commands = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-make-and-model") == 0)
+            printer_make_and_model = g_strdup (priv->dests[priv->current_dest].options[i].value);
         }
 
       /* Find the first of the most severe reasons
@@ -341,6 +344,18 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
                 break;
             }
         }
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-name-label");
+
+      if (printer_name)
+        {
+          gtk_label_set_text (GTK_LABEL (widget), printer_name);
+          g_free (printer_name);
+        }
+      else
+        gtk_label_set_text (GTK_LABEL (widget), none);
+
         
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-status-label");
@@ -367,23 +382,23 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
 
       widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-description-label");
+        gtk_builder_get_object (priv->builder, "printer-model-label");
 
-      if (description)
+      if (printer_make_and_model)
         {
-          gtk_label_set_text (GTK_LABEL (widget), description);
-          g_free (description);
+          gtk_label_set_text (GTK_LABEL (widget), printer_make_and_model);
+          g_free (printer_make_and_model);
         }
       else
         gtk_label_set_text (GTK_LABEL (widget), none);
 
 
       widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-disable-button");
+        gtk_builder_get_object (priv->builder, "printer-disable-switch");
 
       gtk_widget_set_sensitive (widget, TRUE);
       g_signal_handlers_block_by_func (G_OBJECT (widget), printer_disable_cb, self);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), printer_state == 5);
+      gtk_switch_set_active (GTK_SWITCH (widget), printer_state != 5);
       g_signal_handlers_unblock_by_func (G_OBJECT (widget), printer_disable_cb, self);
 
 
@@ -403,8 +418,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             {
               if (g_strcmp0 (available_commands[i], "PrintSelfTestPage") == 0)
                 test_page_command_available = TRUE;
-              if (g_strcmp0 (available_commands[i], "Clean") == 0)
-                clean_command_available = TRUE;
             }
           g_strfreev (available_commands);
         }
@@ -412,10 +425,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "print-test-page-button");
       gtk_widget_set_sensitive (widget, test_page_command_available);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "clean-print-heads-button");
-      gtk_widget_set_sensitive (widget, clean_command_available);
 
 
       widget = (GtkWidget*)
@@ -461,7 +470,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   else
     {
       widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-description-label");
+        gtk_builder_get_object (priv->builder, "printer-name-label");
+      gtk_label_set_text (GTK_LABEL (widget), "");
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-status-label");
       gtk_label_set_text (GTK_LABEL (widget), "");
 
       widget = (GtkWidget*)
@@ -469,7 +482,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       gtk_label_set_text (GTK_LABEL (widget), "");
 
       widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-disable-button");
+        gtk_builder_get_object (priv->builder, "printer-model-label");
+      gtk_label_set_text (GTK_LABEL (widget), "");
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-disable-switch");
       gtk_widget_set_sensitive (widget, FALSE);
     }
 
@@ -1160,8 +1177,9 @@ job_process_cb (GtkButton *button,
 }
 
 static void
-printer_disable_cb (GtkToggleButton *togglebutton,
-                    gpointer         user_data)
+printer_disable_cb (GObject    *gobject,
+                    GParamSpec *pspec,
+                    gpointer    user_data)
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
@@ -1212,10 +1230,7 @@ printer_disable_cb (GtkToggleButton *togglebutton,
             g_warning ("%s", ret_error);
         }
       else
-        {
-          gtk_toggle_button_set_active (togglebutton, paused);
-          actualize_printers_list (self);
-        }
+        actualize_printers_list (self);
 
       g_clear_error (&error);
     }
@@ -1738,6 +1753,7 @@ enum
 {
   NOTEBOOK_INFO_PAGE = 0,
   NOTEBOOK_JOBS_PAGE,
+  NOTEBOOK_OPTIONS_PAGE,
   NOTEBOOK_N_PAGES
 };
 
@@ -1769,6 +1785,21 @@ switch_to_jobs_cb (GtkButton *button,
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "notebook");
   gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_JOBS_PAGE);
+}
+
+static void
+switch_to_options_cb (GtkButton *button,
+                      gpointer   user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  GtkWidget               *widget;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "notebook");
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_OPTIONS_PAGE);
 }
 
 static void
@@ -1831,8 +1862,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_remove_cb), self);
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "printer-disable-button");
-  g_signal_connect (widget, "toggled", G_CALLBACK (printer_disable_cb), self);
+    gtk_builder_get_object (priv->builder, "printer-disable-switch");
+  g_signal_connect (widget, "notify::active", G_CALLBACK (printer_disable_cb), self);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "allowed-user-remove-button");
@@ -1855,16 +1886,20 @@ cc_printers_panel_init (CcPrintersPanel *self)
   g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "clean-print-heads-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
+    gtk_builder_get_object (priv->builder, "back-button-1");
+  g_signal_connect (widget, "clicked", G_CALLBACK (go_back_cb), self);
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "back-button-1");
+    gtk_builder_get_object (priv->builder, "back-button-2");
   g_signal_connect (widget, "clicked", G_CALLBACK (go_back_cb), self);
 
    widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-jobs-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (switch_to_jobs_cb), self);
+
+   widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-options-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (switch_to_options_cb), self);
 
 
   /* Set junctions */
