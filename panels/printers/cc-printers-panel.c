@@ -155,9 +155,11 @@ cc_printers_panel_class_finalize (CcPrintersPanelClass *klass)
 
 enum
 {
-  PRINTER_NAME_COLUMN,
   PRINTER_ID_COLUMN,
+  PRINTER_NAME_COLUMN,
   PRINTER_PAUSED_COLUMN,
+  PRINTER_DEFAULT_ICON_COLUMN,
+  PRINTER_ICON_COLUMN,
   PRINTER_N_COLUMNS
 };
 
@@ -514,6 +516,8 @@ actualize_printers_list (CcPrintersPanel *self)
   gboolean                paused = FALSE;
   gchar                  *current_printer_instance = NULL;
   gchar                  *current_printer_name = NULL;
+  gchar                  *printer_icon_name = NULL;
+  gchar                  *default_icon_name = NULL;
   int                     current_dest = -1;
   int                     i, j;
 
@@ -537,9 +541,11 @@ actualize_printers_list (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "printers-treeview");
 
   store = gtk_list_store_new (PRINTER_N_COLUMNS,
-                              G_TYPE_STRING,
                               G_TYPE_INT,
-                              G_TYPE_BOOLEAN);
+                              G_TYPE_STRING,
+                              G_TYPE_BOOLEAN,
+                              G_TYPE_STRING,
+                              G_TYPE_STRING);
 
   for (i = 0; i < priv->num_dests; i++)
     {
@@ -577,12 +583,24 @@ actualize_printers_list (CcPrintersPanel *self)
             paused = (g_strcmp0 (priv->dests[i].options[j].value, "5") == 0);
         }
 
+      if (priv->dests[i].is_default)
+        default_icon_name = g_strdup ("gtk-apply");
+      else
+        default_icon_name = NULL;
+
+      printer_icon_name = g_strdup ("printer");
+
       gtk_list_store_set (store, &iter,
-                          PRINTER_NAME_COLUMN, instance,
                           PRINTER_ID_COLUMN, i,
+                          PRINTER_NAME_COLUMN, instance,
                           PRINTER_PAUSED_COLUMN, paused,
+                          PRINTER_DEFAULT_ICON_COLUMN, default_icon_name,
+                          PRINTER_ICON_COLUMN, printer_icon_name,
                           -1);
+
       g_free (instance);
+      g_free (printer_icon_name);
+      g_free (default_icon_name);
     }
 
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
@@ -676,6 +694,8 @@ populate_printers_list (CcPrintersPanel *self)
 {
   CcPrintersPanelPrivate *priv;
   GtkTreeViewColumn      *column;
+  GtkCellRenderer        *icon_renderer;
+  GtkCellRenderer        *icon_renderer2;
   GtkCellRenderer        *renderer;
   GtkWidget              *treeview;
 
@@ -690,12 +710,27 @@ populate_printers_list (CcPrintersPanel *self)
   actualize_printers_list (self);
 
 
+  icon_renderer = gtk_cell_renderer_pixbuf_new ();
+  g_object_set (icon_renderer, "stock-size", GTK_ICON_SIZE_DND, NULL);
+  column = gtk_tree_view_column_new_with_attributes ("Icon", icon_renderer,
+                                                     "icon-name", PRINTER_ICON_COLUMN, NULL);
+  gtk_tree_view_column_set_expand (column, FALSE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+
+
   renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new_with_attributes ("Printer", renderer,
                                                      "text", PRINTER_NAME_COLUMN, NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, set_cell_sensitivity_func,
                                            self, NULL);
+  gtk_tree_view_column_set_expand (column, FALSE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
+
+  icon_renderer2 = gtk_cell_renderer_pixbuf_new ();
+  column = gtk_tree_view_column_new_with_attributes ("Default", icon_renderer2,
+                                                     "stock-id", PRINTER_DEFAULT_ICON_COLUMN, NULL);
+  gtk_tree_view_column_set_expand (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 }
 
