@@ -44,6 +44,11 @@
 #define CLOCK_SCHEMA "org.gnome.desktop.interface"
 #define CLOCK_FORMAT_KEY "clock-format"
 
+/* The minimum supported size for the panel, see:
+ * http://live.gnome.org/Design/SystemSettings */
+#define MINIMUM_WIDTH 675
+#define MINIMUM_HEIGHT 530
+
 typedef struct App App;
 typedef struct GrabInfo GrabInfo;
 
@@ -134,6 +139,20 @@ idle_free (gchar *s)
   g_idle_add (do_free, s);
 
   return s;
+}
+
+static gboolean
+should_show_resolution (gint output_width,
+                        gint output_height,
+                        gint width,
+                        gint height)
+{
+  if (width >= MIN (output_width, MINIMUM_WIDTH) &&
+      height >= MIN (output_height, MINIMUM_HEIGHT))
+    {
+      return TRUE;
+    }
+  return FALSE;
 }
 
 static void
@@ -650,9 +669,12 @@ rebuild_resolution_combo (App *app)
       width = gnome_rr_mode_get_width (modes[i]);
       height = gnome_rr_mode_get_height (modes[i]);
 
-      add_key (app->resolution_combo,
-               idle_free (make_resolution_string (width, height)),
-               width, height, 0, -1);
+      if (should_show_resolution (output_width, output_height, width, height))
+        {
+          add_key (app->resolution_combo,
+                   idle_free (make_resolution_string (width, height)),
+                   width, height, 0, -1);
+        }
     }
 
   current = idle_free (make_resolution_string (output_width, output_height));
