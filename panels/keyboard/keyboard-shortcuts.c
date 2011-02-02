@@ -64,6 +64,7 @@ typedef struct
   guint keyval;
   guint keycode;
   EggVirtualModifierType mask;
+  int group;
   gboolean editable;
   GtkTreeModel *model;
   char *description;
@@ -80,7 +81,7 @@ typedef struct
 enum
 {
   BINDING_GROUP_SYSTEM,
-  BINDING_GROUP_APP,
+  BINDING_GROUP_APPS,
   BINDING_GROUP_USER,
 };
 
@@ -103,7 +104,9 @@ static gboolean block_accels = FALSE;
 static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
 static GtkWidget *custom_shortcut_command_entry = NULL;
-static GHashTable *kb_sections = NULL;
+static GHashTable *kb_system_sections = NULL;
+static GHashTable *kb_apps_sections = NULL;
+static GHashTable *kb_user_sections = NULL;
 
 static void
 free_key_array (GPtrArray *keys)
@@ -144,14 +147,36 @@ free_key_array (GPtrArray *keys)
     }
 }
 
+static GHashTable *
+get_hash_for_group (int group)
+{
+  GHashTable *hash;
+
+  switch (group)
+    {
+    case BINDING_GROUP_SYSTEM:
+      hash = kb_system_sections;
+      break;
+    case BINDING_GROUP_APPS:
+      hash = kb_apps_sections;
+      break;
+    case BINDING_GROUP_USER:
+      hash = kb_user_sections;
+      break;
+    default:
+      g_assert_not_reached ();
+    }
+  return hash;
+}
+
 static gboolean
-has_gconf_key (const gchar *name)
+have_key_for_group (int group, const gchar *name)
 {
   GHashTableIter iter;
   GPtrArray *keys;
   gint i;
 
-  g_hash_table_iter_init (&iter, kb_sections);
+  g_hash_table_iter_init (&iter, get_hash_for_group (group));
   while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&keys))
     {
       for (i = 0; i < keys->len; i++)
@@ -320,13 +345,23 @@ append_section (GtkBuilder         *builder,
   GConfClient *client;
   GtkTreeIter iter;
   gint i;
+  GHashTable *hash;
+  gboolean is_new;
+
+  hash = get_hash_for_group (group);
 
   client = gconf_client_get_default ();
   sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
   model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
 
   /* Add all KeyEntry's for this section */
-  keys_array = g_ptr_array_new ();
+  is_new = FALSE;
+  keys_array = g_hash_table_lookup (hash, title);
+  if (keys_array == NULL)
+    {
+      keys_array = g_ptr_array_new ();
+      is_new = TRUE;
+    }
 
   for (i = 0; keys_list[i].name != NULL; i++)
     {
@@ -336,6 +371,9 @@ append_section (GtkBuilder         *builder,
       KeyEntry *key_entry;
 
       if (!should_show_key (&keys_list[i]))
+        continue;
+
+      if (have_key_for_group (group, keys_list[i].name))
         continue;
 
       key_string = keys_list[i].name;
@@ -394,6 +432,7 @@ append_section (GtkBuilder         *builder,
       key_entry->gconf_key = g_strdup (key_string);
       key_entry->editable = gconf_entry_get_is_writable (entry);
       key_entry->model = model;
+      key_entry->group = group;
       key_entry->description = description;
       key_entry->command = command;
       if (keys_list[i].description_name != NULL)
@@ -433,11 +472,11 @@ append_section (GtkBuilder         *builder,
   g_object_unref (client);
 
   /* Add the keys to the hash table */
-  if (keys_array->len > 0)
+  if (is_new && keys_array->len > 0)
     {
       static gboolean have_sep = FALSE;
 
-      g_hash_table_insert (kb_sections, g_strdup (title), keys_array);
+      g_hash_table_insert (hash, g_strdup (title), keys_array);
 
       /* Append the section to the left tree view */
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
@@ -673,7 +712,7 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, gchar **wm_ke
   if (keylist->group && strcmp (keylist->group, "system") == 0)
     group = BINDING_GROUP_SYSTEM;
   else
-    group = BINDING_GROUP_APP;
+    group = BINDING_GROUP_APPS;
 
   append_section (builder, title, group, keys);
 
@@ -707,7 +746,7 @@ append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
   for (l = custom_list; l != NULL; l = l->next)
     {
       key.name = g_strconcat (l->data, "/binding", NULL);
-      if (!has_gconf_key (key.name))
+      if (!have_key_for_group (BINDING_GROUP_USER, key.name))
         {
           key.cmd_name = g_strconcat (l->data, "/action", NULL);
           key.description_name = g_strconcat (l->data, "/name", NULL);
@@ -892,7 +931,7 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
                           SECTION_DESCRIPTION_COLUMN, &description,
                           SECTION_GROUP_COLUMN, &group, -1);
 
-      keys = g_hash_table_lookup (kb_sections, description);
+      keys = g_hash_table_lookup (get_hash_for_group (group), description);
       if (keys == NULL)
         {
           g_warning ("Can't find section %s in sections hash table!!!", description);
@@ -998,7 +1037,7 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   gconf_client_suggest_sync (client, NULL);
   g_object_unref (client);
 
-  keys_array = g_hash_table_lookup (kb_sections, _("Custom Shortcuts"));
+  keys_array = g_hash_table_lookup (get_hash_for_group (BINDING_GROUP_USER), _("Custom Shortcuts"));
   g_ptr_array_remove (keys_array, key);
 
   g_free (key->gconf_key);
@@ -1629,12 +1668,14 @@ add_custom_shortcut (GtkTreeView  *tree_view,
     {
       GPtrArray *keys_array;
       GtkTreeIter iter;
+      GHashTable *hash;
 
-      keys_array = g_hash_table_lookup (kb_sections, _("Custom Shortcuts"));
+      hash = get_hash_for_group (BINDING_GROUP_USER);
+      keys_array = g_hash_table_lookup (hash, _("Custom Shortcuts"));
       if (keys_array == NULL)
         {
           keys_array = g_ptr_array_new ();
-          g_hash_table_insert (kb_sections, g_strdup (_("Custom Shortcuts")), keys_array);
+          g_hash_table_insert (hash, g_strdup (_("Custom Shortcuts")), keys_array);
         }
 
       g_ptr_array_add (keys_array, key_entry);
@@ -2014,8 +2055,18 @@ on_window_manager_change (const char *wm_name, GtkBuilder *builder)
 void
 keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder)
 {
-  kb_sections = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                       g_free, (GDestroyNotify) free_key_array);
+  kb_system_sections = g_hash_table_new_full (g_str_hash,
+                                              g_str_equal,
+                                              g_free,
+                                              (GDestroyNotify) free_key_array);
+  kb_apps_sections = g_hash_table_new_full (g_str_hash,
+                                            g_str_equal,
+                                            g_free,
+                                            (GDestroyNotify) free_key_array);
+  kb_user_sections = g_hash_table_new_full (g_str_hash,
+                                            g_str_equal,
+                                            g_free,
+                                            (GDestroyNotify) free_key_array);
 
   wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
                                             builder);
@@ -2037,7 +2088,20 @@ keyboard_shortcuts_dispose (CcPanel *panel)
       g_signal_handler_disconnect (toplevel, maybe_block_accels_id);
       maybe_block_accels_id = 0;
 
-      if (kb_sections != NULL)
-        g_hash_table_destroy (kb_sections);
+      if (kb_system_sections != NULL)
+        {
+          g_hash_table_destroy (kb_system_sections);
+          kb_system_sections = NULL;
+        }
+      if (kb_apps_sections != NULL)
+        {
+          g_hash_table_destroy (kb_apps_sections);
+          kb_apps_sections = NULL;
+        }
+      if (kb_user_sections != NULL)
+        {
+          g_hash_table_destroy (kb_user_sections);
+          kb_user_sections = NULL;
+        }
     }
 }
