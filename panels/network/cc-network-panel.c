@@ -294,12 +294,6 @@ select_first_device (CcNetworkPanel *panel)
         GtkTreePath *path;
         GtkWidget *widget;
         GtkTreeSelection *selection;
-        static gboolean once = FALSE;
-
-        if (once)
-                return;
-
-        once = TRUE;
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "treeview_devices"));
