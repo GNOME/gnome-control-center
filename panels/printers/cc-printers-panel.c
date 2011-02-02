@@ -432,8 +432,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "supply-drawing-area");
 
-      width = gtk_widget_get_allocated_width (widget);
-
       if (marker_levels)
         {
           gchar **marker_levelsv = NULL;
@@ -443,17 +441,15 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
           marker_levelsv = g_strsplit (marker_levels, ",", -1);
           gtk_widget_set_size_request (widget,
-                                       width,
+                                       -1,
                                        ((g_strv_length (marker_levelsv) - 1) * SUPPLY_BAR_SPACE
                                        + g_strv_length (marker_levelsv) * SUPPLY_BAR_HEIGHT));
           g_strfreev (marker_levelsv);
         }
       else
-        gtk_widget_set_size_request (widget, 0, 0);
+        gtk_widget_set_size_request (widget, -1, -1);
 
-      width = gtk_widget_get_allocated_width (widget);
-      height = gtk_widget_get_allocated_height (widget);
-      gtk_widget_queue_draw_area (widget, 0, 0, width, height);
+      gtk_widget_queue_draw (widget);
 
 
       widget = (GtkWidget*)
