@@ -44,8 +44,8 @@ static gboolean show_overview = FALSE;
 
 const GOptionEntry all_options[] = {
   { "version", 0, G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
-  { "overview", 'o', G_OPTION_FLAG_NO_ARG | G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
-  { G_OPTION_REMAINING, '\0', G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), NULL },
+  { "overview", 'o', 0, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
+  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), NULL },
   { NULL } /* end the list */
 };
 
