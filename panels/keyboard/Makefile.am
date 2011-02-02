@@ -35,7 +35,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_XML_NOMERGE_RULE@
 
 xmldir       = $(pkgdatadir)/keybindings
-xml_in_files = 00-multimedia-key.xml.in 01-desktop-key.xml.in
+xml_in_files = 00-multimedia.xml.in 01-launchers.xml.in 01-system.xml.in
 xml_DATA     = $(xml_in_files:.xml.in=.xml)
 
 pkgconfigdir = $(datadir)/pkgconfig
