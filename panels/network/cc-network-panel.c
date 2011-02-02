@@ -1,4 +1,4 @@
-/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2010 Richard Hughes <richard@hughsie.com>
  *
@@ -39,6 +39,7 @@ struct _CcNetworkPanelPrivate
         GPtrArray       *devices;
         GSettings       *proxy_settings;
         GtkBuilder      *builder;
+        guint            devices_add_refcount;
 };
 
 
@@ -287,6 +288,29 @@ panel_free_device_item (PanelDeviceItem *item)
         g_free (item);
 }
 
+static void
+select_first_device (CcNetworkPanel *panel)
+{
+        GtkTreePath *path;
+        GtkWidget *widget;
+        GtkTreeSelection *selection;
+        static gboolean once = FALSE;
+
+        if (once)
+                return;
+
+        once = TRUE;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "treeview_devices"));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+
+        /* select the first device */
+        path = gtk_tree_path_new_from_string ("0");
+        gtk_tree_selection_select_path (selection, path);
+        gtk_tree_path_free (path);
+}
+
 /**
  * panel_add_device_to_listview:
  **/
@@ -317,6 +341,9 @@ panel_add_device_to_listview (PanelDeviceItem *item)
                             PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, item,
                             -1);
         g_free (title);
+
+        if (--item->panel->priv->devices_add_refcount == 0)
+                select_first_device (item->panel);
 }
 
 /**
@@ -834,6 +861,7 @@ panel_add_device (CcNetworkPanel *panel, const gchar *device_id)
 
         /* get initial device state */
         item->device_add_refcount++;
+        panel->priv->devices_add_refcount++;
         g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                                   G_DBUS_PROXY_FLAGS_NONE,
                                   NULL,
@@ -970,12 +998,14 @@ static void
 panel_got_network_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
         GError *error = NULL;
-        CcNetworkPanelPrivate *priv = CC_NETWORK_PANEL (user_data)->priv;
+        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
+        CcNetworkPanelPrivate *priv = panel->priv;
 
         priv->proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
         if (priv->proxy == NULL) {
                 g_printerr ("Error creating proxy: %s\n", error->message);
                 g_error_free (error);
+                select_first_device (panel);
                 goto out;
         }
 
@@ -1763,7 +1793,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkAdjustment *adjustment;
         GtkCellRenderer *renderer;
         GtkComboBox *combobox;
-        GtkTreePath *path;
         GtkTreeSelection *selection;
         GtkTreeSortable *sortable;
         GtkWidget *widget;
@@ -1895,11 +1924,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         /* add the virtual proxy device */
         panel_add_proxy_device (panel);
-
-        /* select the proxy device */
-        path = gtk_tree_path_new_from_string ("0");
-        gtk_tree_selection_select_path (selection, path);
-        gtk_tree_path_free (path);
 
         /* setup wireless combobox model */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
