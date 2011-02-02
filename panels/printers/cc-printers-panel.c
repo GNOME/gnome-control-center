@@ -579,7 +579,7 @@ actualize_printers_list (CcPrintersPanel *self)
         }
 
       if (priv->dests[i].is_default)
-        default_icon_name = g_strdup ("gtk-apply");
+        default_icon_name = g_strdup ("emblem-default-symbolic");
       else
         default_icon_name = NULL;
 
@@ -724,7 +724,7 @@ populate_printers_list (CcPrintersPanel *self)
 
   icon_renderer2 = gtk_cell_renderer_pixbuf_new ();
   column = gtk_tree_view_column_new_with_attributes ("Default", icon_renderer2,
-                                                     "stock-id", PRINTER_DEFAULT_ICON_COLUMN, NULL);
+                                                     "icon-name", PRINTER_DEFAULT_ICON_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 }
