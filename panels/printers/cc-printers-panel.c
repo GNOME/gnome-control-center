@@ -184,7 +184,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                  *active_jobs = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
-  gint                    width, height;
   int                     printer_state = 3;
   int                     id = -1;
   int                     i, j;
