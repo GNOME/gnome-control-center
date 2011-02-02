@@ -863,6 +863,12 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   /* add the lock button */
   permission = polkit_permission_new_sync ("org.gnome.settingsdaemon.datetimemechanism.configure", NULL, NULL, NULL);
+  if (permission == NULL)
+    {
+      g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
+                 "org.gnome.settingsdaemon.datetimemechanism.configure");
+      return;
+    }
 
   /* DtLockButton takes ownership of the permission */
   lockbutton = dt_lock_button_new (permission);
