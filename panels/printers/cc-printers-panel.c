@@ -24,9 +24,12 @@
 #include <string.h>
 #include <glib/gi18n-lib.h>
 #include <glib/gstdio.h>
+#include <polkit/polkit.h>
 #include <dbus/dbus-glib.h>
 
 #include <cups/cups.h>
+
+#include "pp-lockbutton.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 
@@ -43,6 +46,8 @@ struct _CcPrintersPanelPrivate
 {
   GtkBuilder *builder;
 
+  GtkWidget *lock_button;
+
   cups_dest_t *dests;
   int num_dests;
   int current_dest;
@@ -56,6 +61,8 @@ struct _CcPrintersPanelPrivate
   int current_allowed_user;
 
   GdkRGBA background_color;
+
+  GPermission *permission;
 
   gpointer dummy;
 };
@@ -174,6 +181,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   const gchar            *none = "---";
   GtkWidget              *widget;
   gboolean                test_page_command_available = FALSE;
+  gboolean                sensitive;
   gchar                  *printer_make_and_model = NULL;
   gchar                  *reason = NULL;
   gchar                 **available_commands = NULL;
@@ -397,7 +405,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-disable-switch");
 
-      gtk_widget_set_sensitive (widget, TRUE);
       g_signal_handlers_block_by_func (G_OBJECT (widget), printer_disable_cb, self);
       gtk_switch_set_active (GTK_SWITCH (widget), printer_state != 5);
       g_signal_handlers_unblock_by_func (G_OBJECT (widget), printer_disable_cb, self);
@@ -406,10 +413,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-default-check-button");
 
-      gtk_widget_set_sensitive (widget, TRUE);
+      sensitive = gtk_widget_get_sensitive (widget);
       g_signal_handlers_block_by_func (G_OBJECT (widget), printer_set_default_cb, self);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), priv->dests[id].is_default);
       g_signal_handlers_unblock_by_func (G_OBJECT (widget), printer_set_default_cb, self);
+      gtk_widget_set_sensitive (widget, sensitive);
 
 
       if (printer_commands)
@@ -481,10 +489,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
       gtk_label_set_text (GTK_LABEL (widget), "");
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-disable-switch");
-      gtk_widget_set_sensitive (widget, FALSE);
     }
 
   widget = (GtkWidget*)
@@ -1779,6 +1783,39 @@ printer_maintenance_cb (GtkButton *button,
     }
 }
 
+static void
+on_permission_changed (GPermission *permission,
+                       GParamSpec  *pspec,
+                       gpointer     data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) data;
+  GtkWidget               *widget;
+  gboolean                 is_authorized;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  is_authorized = g_permission_get_allowed (G_PERMISSION (priv->permission));
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button");
+  gtk_widget_set_sensitive (widget, is_authorized);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-remove-button");
+  gtk_widget_set_sensitive (widget, is_authorized);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-disable-switch");
+  gtk_widget_set_sensitive (widget, is_authorized);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-default-check-button");
+  gtk_widget_set_sensitive (widget, is_authorized);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "allowed-user-add-button");
+  gtk_widget_set_sensitive (widget, is_authorized);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "allowed-user-remove-button");
+  gtk_widget_set_sensitive (widget, is_authorized);
+}
+
 enum
 {
   NOTEBOOK_INFO_PAGE = 0,
@@ -1838,6 +1875,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   CcPrintersPanelPrivate *priv;
   GtkWidget              *top_widget;
   GtkWidget              *widget;
+  GtkWidget              *box;
   GError                 *error = NULL;
   gchar                  *objects[] = { "main-vbox", NULL };
   GtkStyleContext        *context;
@@ -1962,6 +2000,24 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "queue-toolbar");
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+
+
+  /* Add unlock button */
+  priv->permission = (GPermission *)polkit_permission_new_sync (
+    "org.opensuse.cupspkhelper.mechanism.printeraddremove", NULL, NULL, NULL);
+  if (priv->permission != NULL)
+    {
+      widget = pp_lock_button_new (priv->permission);
+      gtk_widget_set_margin_top (widget, 12);
+      gtk_widget_show (widget);
+      box = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-vbox");
+      gtk_box_pack_end (GTK_BOX (box), widget, FALSE, FALSE, 0);
+      g_signal_connect (priv->permission, "notify",
+                        G_CALLBACK (on_permission_changed), self);
+      on_permission_changed (priv->permission, NULL, self);
+      priv->lock_button = widget;
+    }
+
 
   gtk_style_context_get_background_color (gtk_widget_get_style_context (top_widget),
                                           GTK_STATE_FLAG_NORMAL,
