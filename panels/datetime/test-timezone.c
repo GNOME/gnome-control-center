@@ -1,3 +1,6 @@
+#include <config.h>
+#include <locale.h>
+
 #include "tz.h"
 
 int main (int argc, char **argv)
@@ -7,6 +10,8 @@ int main (int argc, char **argv)
 	guint i;
 	char *pixmap_dir;
 	int retval = 0;
+
+        setlocale (LC_ALL, "");
 
 	if (argc == 2) {
 		pixmap_dir = g_strdup (argv[1]);
@@ -24,12 +29,15 @@ int main (int argc, char **argv)
 		TzInfo *info;
 		char *filename, *path;
 		gdouble selected_offset;
+                char buf[16];
 
 		info = tz_info_from_location (loc);
 		selected_offset = tz_location_get_utc_offset (loc)
 			/ (60.0*60.0) + ((info->daylight) ? -1.0 : 0.0);
 
-		filename = g_strdup_printf ("timezone_%g.png", selected_offset);
+		filename = g_strdup_printf ("timezone_%s.png",
+                                            g_ascii_formatd (buf, sizeof (buf),
+                                                             "%g", selected_offset));
 		path = g_build_filename (pixmap_dir, filename, NULL);
 
 		if (g_file_test (path, G_FILE_TEST_IS_REGULAR) == FALSE) {

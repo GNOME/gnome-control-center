@@ -335,6 +335,7 @@ cc_timezone_map_draw (GtkWidget *widget,
   gchar *file;
   GError *err = NULL;
   gdouble pointx, pointy;
+  char buf[16];
 
   gtk_widget_get_allocation (widget, &alloc);
 
@@ -343,8 +344,9 @@ cc_timezone_map_draw (GtkWidget *widget,
   cairo_paint (cr);
 
   /* paint hilight */
-  file = g_strdup_printf (DATADIR "/timezone_%g.png",
-                          priv->selected_offset);
+  file = g_strdup_printf (DATADIR "/timezone_%s.png",
+                          g_ascii_formatd (buf, sizeof (buf),
+                                           "%g", priv->selected_offset));
   orig_hilight = gdk_pixbuf_new_from_file (file, &err);
   g_free (file);
   file = NULL;
