@@ -133,6 +133,9 @@ if test x$have_cheese = xyes ; then
         AC_DEFINE(HAVE_CHEESE, 1, [Define to 1 to enable cheese webcam support])
 fi
 
+# This is a hard-dependency for the region and user-accounts panels
+PKG_CHECK_MODULES(ISOCODES, iso-codes)
+
 AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["`$PKG_CONFIG --variable=prefix iso-codes`"],[ISO codes prefix])
 ISO_CODES=iso-codes
 
