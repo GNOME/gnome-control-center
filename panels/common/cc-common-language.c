@@ -206,6 +206,11 @@ cc_common_language_add_available_languages (GtkListStore *store,
 		}
 
                 language = gdm_get_language_from_name (name, NULL);
+                if (!language) {
+                        g_debug ("Ignoring '%s' as a locale, because we couldn't figure the language name", name);
+                        g_free (name);
+                        continue;
+                }
 
                 gtk_list_store_append (store, &iter);
                 gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
