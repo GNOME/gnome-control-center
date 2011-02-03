@@ -1908,6 +1908,11 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
                                                      renderer,
                                                      "text", SECTION_DESCRIPTION_COLUMN,
                                                      NULL);
+  g_object_set (renderer,
+                "width-chars", 20,
+                "ellipsize", PANGO_ELLIPSIZE_END,
+                NULL);
+
   gtk_tree_view_append_column (treeview, column);
 
   model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
@@ -1954,6 +1959,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
                                                      NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, description_set_func, NULL, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
+  gtk_tree_view_column_set_expand (column, TRUE);
 
   gtk_tree_view_append_column (treeview, column);
   gtk_tree_view_column_set_sort_column_id (column, DETAIL_DESCRIPTION_COLUMN);
@@ -1973,6 +1979,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   column = gtk_tree_view_column_new_with_attributes (_("Shortcut"), renderer, NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
+  gtk_tree_view_column_set_expand (column, FALSE);
 
   gtk_tree_view_append_column (treeview, column);
   gtk_tree_view_column_set_sort_column_id (column, DETAIL_KEYENTRY_COLUMN);
