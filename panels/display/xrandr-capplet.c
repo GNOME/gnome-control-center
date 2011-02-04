@@ -74,7 +74,6 @@ struct App
   GtkWidget      *show_icon_checkbox;
 
   /* We store the event timestamp when the Apply button is clicked */
-  GtkWidget      *apply_button;
   guint32         apply_button_clicked_timestamp;
 
   GtkWidget      *area;
@@ -2544,7 +2543,6 @@ run_application (void)
 
   on_screen_changed (app->screen, app);
 
-  app->apply_button = _gtk_builder_get_widget (builder, "apply_button");
   g_signal_connect_swapped (_gtk_builder_get_widget (builder, "apply_button"),
                             "clicked", G_CALLBACK (apply), app);
 
