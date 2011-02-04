@@ -2235,6 +2235,8 @@ apply (App *app)
   GError *error = NULL;
   GdkWindow *window;
 
+  app->apply_button_clicked_timestamp = gtk_get_current_event_time ();
+
   if (!sanitize_and_save_configuration (app))
     return;
 
@@ -2433,19 +2435,6 @@ dialog_map_event_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
 }
 
 
-static void
-apply_button_clicked_cb (GtkButton *button, gpointer data)
-{
-  App *app = data;
-
-  /* We simply store the timestamp at which the Apply button was clicked.
-   * We'll just wait for the dialog to return from gtk_dialog_run(), and
-   * *then* use the timestamp when applying the RANDR configuration.
-   */
-
-  app->apply_button_clicked_timestamp = gtk_get_current_event_time ();
-}
-
 static GtkWidget*
 _gtk_builder_get_widget (GtkBuilder *builder, const gchar *name)
 {
@@ -2562,12 +2551,9 @@ run_application (void)
 
   gtk_container_add (GTK_CONTAINER (align), app->area);
 
-  app->apply_button = _gtk_builder_get_widget (builder, "apply_button");
-  g_signal_connect (app->apply_button, "clicked",
-                    G_CALLBACK (apply_button_clicked_cb), app);
-
   on_screen_changed (app->screen, app);
 
+  app->apply_button = _gtk_builder_get_widget (builder, "apply_button");
   g_signal_connect_swapped (_gtk_builder_get_widget (builder, "apply_button"),
                             "clicked", G_CALLBACK (apply), app);
 
