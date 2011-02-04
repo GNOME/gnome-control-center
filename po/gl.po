@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-01 01:07+0100\n"
-"PO-Revision-Date: 2011-02-01 01:14+0100\n"
+"POT-Creation-Date: 2011-02-04 21:31+0100\n"
+"PO-Revision-Date: 2011-02-04 21:34+0100\n"
 "Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
 "Language-Team: Galician <gnome-gl-list@gnome.org>\n"
 "Language: gl\n"
@@ -358,6 +358,48 @@ msgstr "Rexión:"
 msgid "September"
 msgstr "Setembro"
 
+#: ../panels/datetime/dt-lockbutton.c:347 ../panels/screen/screen.ui.h:13
+#: ../panels/user-accounts/um-lockbutton.c:347
+msgid "Lock"
+msgstr "Bloquear"
+
+#: ../panels/datetime/dt-lockbutton.c:356 ../panels/network/network.ui.h:23
+#: ../panels/user-accounts/um-lockbutton.c:356
+msgid "Unlock"
+msgstr "Desbloquear"
+
+#: ../panels/datetime/dt-lockbutton.c:365
+#: ../panels/user-accounts/um-lockbutton.c:365
+msgid "Locked"
+msgstr "Bloqueado"
+
+#: ../panels/datetime/dt-lockbutton.c:374
+#: ../panels/user-accounts/um-lockbutton.c:374
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"O diálogo está desbloqueado.\n"
+"Prema para previr cambios futuros"
+
+#: ../panels/datetime/dt-lockbutton.c:383
+#: ../panels/user-accounts/um-lockbutton.c:383
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"O diálogo está bloqueado.\n"
+"Prema para facer cambios"
+
+#: ../panels/datetime/dt-lockbutton.c:392
+#: ../panels/user-accounts/um-lockbutton.c:392
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"A normativa do sistema non permite os cambios.\n"
+"Contacte co seu administrador de sistemas"
+
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Clock;Timezone;Location;"
@@ -372,18 +414,17 @@ msgid "Date and Time preferences panel"
 msgstr "Panel de preferencias da data e hora"
 
 #: ../panels/display/display-capplet.ui.h:1
-#: ../panels/display/xrandr-capplet.c:321
 msgid "Left"
 msgstr "Esquerda"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:484
+#: ../panels/display/xrandr-capplet.c:497
 msgid "Monitor"
 msgstr "Monitor"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:320
-#: ../panels/display/xrandr-capplet.c:359
+#: ../panels/display/xrandr-capplet.c:333
+#: ../panels/display/xrandr-capplet.c:372
 #: ../panels/universal-access/uap.ui.h:58
 msgid "Normal"
 msgstr "Normal"
@@ -397,7 +438,6 @@ msgid "R_otation:"
 msgstr "R_otación:"
 
 #: ../panels/display/display-capplet.ui.h:6
-#: ../panels/display/xrandr-capplet.c:322
 msgid "Right"
 msgstr "Dereita"
 
@@ -431,34 +471,42 @@ msgstr "Pantallas"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Proxector;xrandr;Pantalla;Resolución;Refresco;"
 
-#: ../panels/display/xrandr-capplet.c:323
-msgid "Upside Down"
-msgstr "Arriba e abaixo"
+#: ../panels/display/xrandr-capplet.c:334
+msgid "Anti-Clockwise"
+msgstr ""
+
+#: ../panels/display/xrandr-capplet.c:335
+msgid "Clockwise"
+msgstr ""
+
+#: ../panels/display/xrandr-capplet.c:336
+msgid "180 Degrees"
+msgstr "180 graos"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:460
+#: ../panels/display/xrandr-capplet.c:473
 msgid "Mirror Displays"
 msgstr "Pantallas en espello"
 
-#: ../panels/display/xrandr-capplet.c:593
+#: ../panels/display/xrandr-capplet.c:603
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:595
+#: ../panels/display/xrandr-capplet.c:605
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1505
+#: ../panels/display/xrandr-capplet.c:1518
 msgid "Drag to change primary display."
 msgstr "Arrastre para cambiar a pantalla principal."
 
-#: ../panels/display/xrandr-capplet.c:1563
+#: ../panels/display/xrandr-capplet.c:1576
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -466,80 +514,80 @@ msgstr ""
 "Seleccione un monitor para cambiar as súas propiedades, arrástreo para "
 "reordenalo ao seu lugar."
 
-#: ../panels/display/xrandr-capplet.c:1953
+#: ../panels/display/xrandr-capplet.c:1966
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1955
+#: ../panels/display/xrandr-capplet.c:1968
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../panels/display/xrandr-capplet.c:2240
+#: ../panels/display/xrandr-capplet.c:2214
 msgid "Could not save the monitor configuration"
 msgstr "Non foi posíbel gardar a configuración do monitor"
 
-#: ../panels/display/xrandr-capplet.c:2263
+#: ../panels/display/xrandr-capplet.c:2239
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Non foi posíbel obter o bus da sesión ao aplicar a configuración da pantalla"
 
-#: ../panels/display/xrandr-capplet.c:2308
+#: ../panels/display/xrandr-capplet.c:2284
 msgid "Could not detect displays"
 msgstr "Non foi posíbel detectar as pantallas"
 
-#: ../panels/display/xrandr-capplet.c:2516
+#: ../panels/display/xrandr-capplet.c:2479
 msgid "Could not get screen information"
 msgstr "Non foi posíbel obter a información da pantalla"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:247
+#: ../panels/info/cc-info-panel.c:417
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:261
+#: ../panels/info/cc-info-panel.c:431
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "%u byte"
 msgstr[1] "%u bytes"
 
-#: ../panels/info/cc-info-panel.c:269
+#: ../panels/info/cc-info-panel.c:439
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f KB"
 
-#: ../panels/info/cc-info-panel.c:274
+#: ../panels/info/cc-info-panel.c:444
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MB"
 
-#: ../panels/info/cc-info-panel.c:279
+#: ../panels/info/cc-info-panel.c:449
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GB"
 
-#: ../panels/info/cc-info-panel.c:284
+#: ../panels/info/cc-info-panel.c:454
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:289
+#: ../panels/info/cc-info-panel.c:459
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PB"
 
-#: ../panels/info/cc-info-panel.c:294
+#: ../panels/info/cc-info-panel.c:464
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EB"
 
-#: ../panels/info/cc-info-panel.c:404
+#: ../panels/info/cc-info-panel.c:574
 msgid "Unknown model"
 msgstr "Modelo descoñecido"
 
-#: ../panels/info/cc-info-panel.c:466
+#: ../panels/info/cc-info-panel.c:637
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
@@ -566,32 +614,40 @@ msgid "Disk:"
 msgstr "Disco:"
 
 #: ../panels/info/info.ui.h:3
+msgid "Graphics:"
+msgstr "Gráficos:"
+
+#: ../panels/info/info.ui.h:4
 msgid "Memory:"
 msgstr "Memoria:"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:5
 msgid "More Info"
 msgstr "Información do sistema"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:6
 msgid "OS type:"
 msgstr "Estilo:"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:7
 msgid "Processor:"
 msgstr "Procesando"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:8
 msgid "Update Available"
 msgstr "Non dispoñíbel"
 
-#: ../panels/keyboard/00-multimedia-key.xml.in.h:1
+#: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Sound and Media"
 msgstr "Son e soportes"
 
-#: ../panels/keyboard/01-desktop-key.xml.in.h:1
-msgid "Launchers and Actions"
-msgstr "Iniciadores e accións"
+#: ../panels/keyboard/01-launchers.xml.in.h:1
+msgid "Launchers"
+msgstr "Iniciadores"
+
+#: ../panels/keyboard/01-system.xml.in.h:1
+msgid "System"
+msgstr "Sistema"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -623,7 +679,7 @@ msgstr "O tipo de tecla rápida."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1229
+#: ../panels/keyboard/keyboard-shortcuts.c:1268
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -644,22 +700,22 @@ msgstr "Teclado"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Atallo;Repetir;Intermitencia;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:736
-#: ../panels/keyboard/keyboard-shortcuts.c:1001
-#: ../panels/keyboard/keyboard-shortcuts.c:1633
-#: ../panels/keyboard/keyboard-shortcuts.c:1637
+#: ../panels/keyboard/keyboard-shortcuts.c:775
+#: ../panels/keyboard/keyboard-shortcuts.c:1040
+#: ../panels/keyboard/keyboard-shortcuts.c:1674
+#: ../panels/keyboard/keyboard-shortcuts.c:1678
 msgid "Custom Shortcuts"
 msgstr "Personalizar os atallos"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:848
+#: ../panels/keyboard/keyboard-shortcuts.c:887
 msgid "<Unknown Action>"
 msgstr "<Acción descoñecida>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1255
+#: ../panels/keyboard/keyboard-shortcuts.c:1294
 msgid "Error saving the new shortcut"
 msgstr "Produciuse un erro ao gardar o atallo novo"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1365
+#: ../panels/keyboard/keyboard-shortcuts.c:1404
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -670,7 +726,7 @@ msgstr ""
 "esta tecla.\n"
 "Ténteo cunha tecla como Control, Alt ou Maiús ao mesmo tempo."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1395
+#: ../panels/keyboard/keyboard-shortcuts.c:1434
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -679,36 +735,36 @@ msgstr ""
 "O atallo «%s» xa está en uso para\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1401
+#: ../panels/keyboard/keyboard-shortcuts.c:1440
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Se reasigna o atallo para «%s», o atallo «%s» será desactivado."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1409
+#: ../panels/keyboard/keyboard-shortcuts.c:1448
 msgid "_Reassign"
 msgstr "_Reasignar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1529
+#: ../panels/keyboard/keyboard-shortcuts.c:1568
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s"
 msgstr ""
 "Produciuse un erro ao desconfigurar a tecla rápida na configuración da base "
 "de datos: %s"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1587
+#: ../panels/keyboard/keyboard-shortcuts.c:1626
 msgid "Too many custom shortcuts"
 msgstr "Demasiados atallos personalizados"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1866
+#: ../panels/keyboard/keyboard-shortcuts.c:1907
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1910
+#: ../panels/keyboard/keyboard-shortcuts.c:1956
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1932
+#: ../panels/keyboard/keyboard-shortcuts.c:1979
 msgid "Shortcut"
 msgstr "Atallo"
 
@@ -809,7 +865,7 @@ msgstr "_Velocidade:"
 msgid "Ask what to do"
 msgstr "Preguntar que facer"
 
-#: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:8
+#: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:6
 msgid "Do nothing"
 msgstr "Non facer nada"
 
@@ -950,174 +1006,180 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;son;vídeo;disco;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:210
+#: ../panels/printers/cc-printers-panel.c:221
 msgid "Low on toner"
 msgstr "Con pouco tóner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:212
+#: ../panels/printers/cc-printers-panel.c:223
 msgid "Out of toner"
 msgstr "Sen tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:215
+#: ../panels/printers/cc-printers-panel.c:226
 msgid "Low on developer"
 msgstr "Nivel de revelador baixo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:218
+#: ../panels/printers/cc-printers-panel.c:229
 msgid "Out of developer"
 msgstr "Sen revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:220
+#: ../panels/printers/cc-printers-panel.c:231
 msgid "Low on a marker supply"
 msgstr "Marcador de subministro baixo"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:222
+#: ../panels/printers/cc-printers-panel.c:233
 msgid "Out of a marker supply"
 msgstr "Sen marcador de subministro"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:224
+#: ../panels/printers/cc-printers-panel.c:235
 msgid "Open cover"
 msgstr "Abrir cuberta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:226
+#: ../panels/printers/cc-printers-panel.c:237
 msgid "Open door"
 msgstr "Abrir porta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:228
+#: ../panels/printers/cc-printers-panel.c:239
 msgid "Low on paper"
 msgstr "Ten pouco papel"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:230
+#: ../panels/printers/cc-printers-panel.c:241
 msgid "Out of paper"
 msgstr "Sen papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:232
+#: ../panels/printers/cc-printers-panel.c:243
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:234
+#: ../panels/printers/cc-printers-panel.c:245
 msgid "Paused"
 msgstr "Pausada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:236
+#: ../panels/printers/cc-printers-panel.c:247
 msgid "Waste receptacle almost full"
 msgstr "O receptáculo dos refugallos está case cheo"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:238
+#: ../panels/printers/cc-printers-panel.c:249
 msgid "Waste receptacle full"
 msgstr "O receptáculo dos refugallos está cheo"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:240
+#: ../panels/printers/cc-printers-panel.c:251
 msgid "The optical photo conductor is near end of life"
 msgstr "O condutor óptico está cerca do final da súa vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:242
+#: ../panels/printers/cc-printers-panel.c:253
 msgid "The optical photo conductor is no longer functioning"
 msgstr "O condutor óptico xa non funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:331
+#: ../panels/printers/cc-printers-panel.c:345
 msgid "Idle"
 msgstr "Inactiva"
 
 #. Translators: Printer's state (jobs are processing)
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:335
-#: ../panels/printers/cc-printers-panel.c:728
+#: ../panels/printers/cc-printers-panel.c:349
+#: ../panels/printers/cc-printers-panel.c:885
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Printer's state (no jobs can be processed)
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:339
-#: ../panels/printers/cc-printers-panel.c:732
+#: ../panels/printers/cc-printers-panel.c:353
+#: ../panels/printers/cc-printers-panel.c:889
 msgid "Stopped"
 msgstr "Detido"
 
+#. Translators: there is n active print jobs on this printer
+#: ../panels/printers/cc-printers-panel.c:466
+#, c-format
+msgid "%d active"
+msgstr "%d activos"
+
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:720
+#: ../panels/printers/cc-printers-panel.c:877
 msgid "Pending"
 msgstr "Pendente"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:724
+#: ../panels/printers/cc-printers-panel.c:881
 msgid "Held"
 msgstr "Retido"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:736
+#: ../panels/printers/cc-printers-panel.c:893
 msgid "Canceled"
 msgstr "Cancelado"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:740
+#: ../panels/printers/cc-printers-panel.c:897
 msgid "Aborted"
 msgstr "Abortado"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:744
+#: ../panels/printers/cc-printers-panel.c:901
 msgid "Completed"
 msgstr "Terminado"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:839
+#: ../panels/printers/cc-printers-panel.c:996
 msgid "Job Title"
 msgstr "Título do traballo"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:847
+#: ../panels/printers/cc-printers-panel.c:1004
 msgid "Job State"
 msgstr "Estado do traballo"
 
 #. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:853
+#: ../panels/printers/cc-printers-panel.c:1010
 msgid "User"
 msgstr "Usuario"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:859
+#: ../panels/printers/cc-printers-panel.c:1016
 msgid "Time"
 msgstr "Tempo"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1049
+#: ../panels/printers/cc-printers-panel.c:1206
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "Non foi posíbel conectar co bus do sistema: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1659
+#: ../panels/printers/cc-printers-panel.c:1858
 msgid "Test page"
 msgstr "Páxina de proba"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1667
+#: ../panels/printers/cc-printers-panel.c:1866
 msgid "Clean print heads"
 msgstr "Limpar as cabezas de impresión"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1672
+#: ../panels/printers/cc-printers-panel.c:1871
 msgid "An error has occured during a maintenance command."
 msgstr "Produciuse un erro durante unha orde de mantemento."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1711
+#: ../panels/printers/cc-printers-panel.c:1997
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Non foi posíbel cargar a IU: %s"
@@ -1136,73 +1198,87 @@ msgid "Printers"
 msgstr "Impresoras"
 
 #: ../panels/printers/printers.ui.h:1
-msgid "\t"
-msgstr "\t"
-
-#: ../panels/printers/printers.ui.h:2
 msgid "---"
 msgstr "---"
 
-#. Translators: This button executes command which cleans print heads of the printer.
-#: ../panels/printers/printers.ui.h:4
-msgid "Clean Print Heads"
-msgstr "Limpar as cabezas de impresión"
+#: ../panels/printers/printers.ui.h:2
+msgid "0 active"
+msgstr "0 activos"
+
+#: ../panels/printers/printers.ui.h:3
+msgid "<b>Allowed users</b>"
+msgstr "<b>Usuarios permitidos</b>"
+
+#. Translators: This tab contains list of active print jobs of the selected printer
+#: ../panels/printers/printers.ui.h:5
+msgid "Active Print Jobs"
+msgstr "Traballos da impresora activos"
+
+#. Translators: Switch back to printer's info tab
+#: ../panels/printers/printers.ui.h:7
+msgid "Back"
+msgstr "Atrás"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:6
+#: ../panels/printers/printers.ui.h:9
 #: ../panels/region/gnome-region-panel-xkbot.c:229
 #: ../panels/sound/gvc-sound-theme-chooser.c:589
 msgid "Default"
 msgstr "Predeterminado"
 
-#. Translators: Description of the printer.
-#: ../panels/printers/printers.ui.h:8
-msgid "Description:"
-msgstr "Descrición:"
-
-#. Translators: This button pauses printer.
 #: ../panels/printers/printers.ui.h:10
-msgid "Disable Printer"
-msgstr "Desactivar a impresora"
+msgid "IP Address"
+msgstr "Enderezo de IP"
+
+#: ../panels/printers/printers.ui.h:11
+msgid "Info"
+msgstr "Información"
+
+#: ../panels/printers/printers.ui.h:12
+msgid "Jobs"
+msgstr "Traballos"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:12
-msgid "Location:"
-msgstr "Localización:"
+#: ../panels/printers/printers.ui.h:14
+msgid "Location"
+msgstr "Localización"
+
+#: ../panels/printers/printers.ui.h:15
+msgid "Model"
+msgstr "Modelo"
+
+#. Translators: This button opens printer's options tab
+#: ../panels/printers/printers.ui.h:17
+msgid "Options"
+msgstr "Opcións"
 
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:19
 msgid "Print Test Page"
 msgstr "Imprimir páxina de proba"
 
-#. Translators: A widget showing list of print jobs for selected printer.
-#: ../panels/printers/printers.ui.h:16
-msgid "Printer Jobs"
-msgstr "Traballos da impresora"
-
-#. Translators: This shows queue of print jobs.
-#: ../panels/printers/printers.ui.h:18
-msgid "Queue"
-msgstr "Cola"
-
-#. Translators: Users which are allowed to print on this printer.
 #: ../panels/printers/printers.ui.h:20
-msgid "Share with these users:"
-msgstr "Compartir con estes usuarios:"
+msgid "Printer"
+msgstr "Impresora"
 
-#: ../panels/printers/printers.ui.h:21
-msgid "Show / hide printer's jobs"
-msgstr "Mostrar/ocultar os traballos da impresora"
+#. Translators: This tab contains list of active print jobs of the selected printer
+#: ../panels/printers/printers.ui.h:22
+msgid "Printer Options"
+msgstr "Opcións da impresora"
 
-#. Translators: Status of the printer.
 #: ../panels/printers/printers.ui.h:23
-msgid "Status:"
-msgstr "Estado:"
+msgid "Printing..."
+msgstr "Impresión..."
+
+#. Tanslators: Switch to tab containing printer's jobs
+#: ../panels/printers/printers.ui.h:25
+msgid "Show"
+msgstr "Mostrar"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:25
-msgid "Supply:"
-msgstr "Subministro:"
+#: ../panels/printers/printers.ui.h:27
+msgid "Supply"
+msgstr "Subministro"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
 msgid "Install languages..."
@@ -1258,32 +1334,16 @@ msgid "_Separate layout for each window"
 msgstr "_Separar a disposición para cada xanela"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
-msgid "By _country"
-msgstr "Por paí_s"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-msgid "By _language"
-msgstr "Por _idioma"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "Escoller unha disposición"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:4
-msgid "Preview:"
-msgstr "Previsualización:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
+msgid "Preview"
+msgstr "Previsualización"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:5
-msgid "_Country:"
-msgstr "_País:"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:6
-msgid "_Language:"
-msgstr "_Idioma:"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:7
-msgid "_Variants:"
-msgstr "V_ariantes:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+msgid "Select an input source to add"
+msgstr "Seleccione a orixe da entrada a engadir"
 
 #: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
@@ -1431,27 +1491,27 @@ msgstr "Estabeleza as súas preferencias do rato e do «touchpad»"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Trackpad;Punteiro;Clic;Toque;Dobre;Pulsación;Botón;"
 
-#: ../panels/network/cc-network-panel.c:1062
-#: ../panels/network/cc-network-panel.c:1084
+#: ../panels/network/cc-network-panel.c:1086
+#: ../panels/network/cc-network-panel.c:1108
 #, c-format
 msgid "%i Mb/s"
 msgstr "%i Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1064
+#: ../panels/network/cc-network-panel.c:1088
 #, c-format
 msgid "%i Gb/s"
 msgstr "%i Gb/s"
 
-#: ../panels/network/cc-network-panel.c:1082
+#: ../panels/network/cc-network-panel.c:1106
 #, c-format
 msgid "%i kb/s"
 msgstr "%i kb/s"
 
-#: ../panels/network/cc-network-panel.c:1739
+#: ../panels/network/cc-network-panel.c:1763
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
-#: ../panels/network/cc-network-panel.c:1748
+#: ../panels/network/cc-network-panel.c:1772
 msgid "Set the system proxy settings"
 msgstr "Configurar os axustes do proxy do sistema"
 
@@ -1647,11 +1707,6 @@ msgstr "Velocidade:"
 msgid "Subnet Mask:"
 msgstr "Máscara de rede:"
 
-#: ../panels/network/network.ui.h:23
-#: ../panels/user-accounts/um-lockbutton.c:356
-msgid "Unlock"
-msgstr "Desbloquear"
-
 #: ../panels/network/network.ui.h:24
 msgid "Username:"
 msgstr "Nome de usuario:"
@@ -1773,46 +1828,43 @@ msgid "5 minutes"
 msgstr "5 minutos"
 
 #: ../panels/power/power.ui.h:5
-msgid "AC power and inactive for:"
-msgstr "Co adaptador de corrente e inactivo durante:"
-
-#: ../panels/power/power.ui.h:6
 msgid "Ask me"
 msgstr "Preguntarme"
 
 #: ../panels/power/power.ui.h:7
-msgid "Battery power and inactive for:"
-msgstr "Coa batería e inactivo durante:"
-
-#: ../panels/power/power.ui.h:9
 msgid "Hibernate"
 msgstr "Hibernar"
 
+#: ../panels/power/power.ui.h:8
+msgid "On AC power:"
+msgstr ""
+
+#: ../panels/power/power.ui.h:9
+msgid "On battery power:"
+msgstr ""
+
 #: ../panels/power/power.ui.h:10
-msgid "Put the computer to sleep when inactive for:"
+#, fuzzy
+msgid "Put the computer to sleep when inactive:"
 msgstr "Pór o computador en modo de baixo consumo cando leve inactivo:"
 
 #: ../panels/power/power.ui.h:11
-msgid "Put the computer to sleep when on:"
-msgstr "Pór o computador en modo de baixo consumo cando:"
-
-#: ../panels/power/power.ui.h:12
 msgid "Shutdown"
 msgstr "Apagar"
 
-#: ../panels/power/power.ui.h:13
+#: ../panels/power/power.ui.h:12
 msgid "Suspend"
 msgstr "Suspender"
 
-#: ../panels/power/power.ui.h:14
+#: ../panels/power/power.ui.h:13
 msgid "When power is critically low:"
 msgstr "Cando a carga da batería é excesivamente baixa:"
 
-#: ../panels/power/power.ui.h:15
+#: ../panels/power/power.ui.h:14
 msgid "When the power button is pressed:"
 msgstr "Cando se preme o botón de acendido:"
 
-#: ../panels/power/power.ui.h:16
+#: ../panels/power/power.ui.h:15
 msgid "When the sleep button is pressed:"
 msgstr "Cando se preme o botón de acendido:"
 
@@ -1857,10 +1909,6 @@ msgstr "Non bloquear cando se estea na casa"
 #: ../panels/screen/screen.ui.h:12
 msgid "Locations..."
 msgstr "Localizacións…"
-
-#: ../panels/screen/screen.ui.h:13 ../panels/user-accounts/um-lockbutton.c:347
-msgid "Lock"
-msgstr "Bloquear"
 
 #: ../panels/screen/screen.ui.h:14
 msgid "Lock screen after:"
@@ -2708,34 +2756,6 @@ msgstr ""
 msgid "Other..."
 msgstr "Outra…"
 
-#: ../panels/user-accounts/um-lockbutton.c:365
-msgid "Locked"
-msgstr "Bloqueado"
-
-#: ../panels/user-accounts/um-lockbutton.c:374
-msgid ""
-"Dialog is unlocked.\n"
-"Click to prevent further changes"
-msgstr ""
-"O diálogo está desbloqueado.\n"
-"Prema para previr cambios futuros"
-
-#: ../panels/user-accounts/um-lockbutton.c:383
-msgid ""
-"Dialog is locked.\n"
-"Click to make changes"
-msgstr ""
-"O diálogo está bloqueado.\n"
-"Prema para facer cambios"
-
-#: ../panels/user-accounts/um-lockbutton.c:392
-msgid ""
-"System policy prevents changes.\n"
-"Contact your system administrator"
-msgstr ""
-"A normativa do sistema non permite os cambios.\n"
-"Contacte co seu administrador de sistemas"
-
 #: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
 msgstr "Máis eleccións…"
@@ -3216,6 +3236,57 @@ msgstr "Centro de control"
 msgid "_All Settings"
 msgstr "_Todas as configuracións"
 
+#~ msgid "Upside Down"
+#~ msgstr "Arriba e abaixo"
+
+#~ msgid "\t"
+#~ msgstr "\t"
+
+#~ msgid "Clean Print Heads"
+#~ msgstr "Limpar as cabezas de impresión"
+
+#~ msgid "Description:"
+#~ msgstr "Descrición:"
+
+#~ msgid "Disable Printer"
+#~ msgstr "Desactivar a impresora"
+
+#~ msgid "Queue"
+#~ msgstr "Cola"
+
+#~ msgid "Share with these users:"
+#~ msgstr "Compartir con estes usuarios:"
+
+#~ msgid "Show / hide printer's jobs"
+#~ msgstr "Mostrar/ocultar os traballos da impresora"
+
+#~ msgid "Status:"
+#~ msgstr "Estado:"
+
+#~ msgid "By _country"
+#~ msgstr "Por paí_s"
+
+#~ msgid "By _language"
+#~ msgstr "Por _idioma"
+
+#~ msgid "_Country:"
+#~ msgstr "_País:"
+
+#~ msgid "_Language:"
+#~ msgstr "_Idioma:"
+
+#~ msgid "_Variants:"
+#~ msgstr "V_ariantes:"
+
+#~ msgid "AC power and inactive for:"
+#~ msgstr "Co adaptador de corrente e inactivo durante:"
+
+#~ msgid "Battery power and inactive for:"
+#~ msgstr "Coa batería e inactivo durante:"
+
+#~ msgid "Put the computer to sleep when on:"
+#~ msgstr "Pór o computador en modo de baixo consumo cando:"
+
 #~ msgid "add-toolbutton"
 #~ msgstr "add-toolbutton"
 
@@ -3275,9 +3346,6 @@ msgstr "_Todas as configuracións"
 
 #~ msgid "Vendors"
 #~ msgstr "Vendedores"
-
-#~ msgid "Models"
-#~ msgstr "Modelos"
 
 #~ msgid "Show Universal Access status"
 #~ msgstr "Mostrar o estado do Acceso universal"
@@ -3428,9 +3496,6 @@ msgstr "_Todas as configuracións"
 
 #~ msgid "Run in t_erminal"
 #~ msgstr "Executar nun _terminal"
-
-#~ msgid "System"
-#~ msgstr "Sistema"
 
 #~ msgid "Terminal Emulator"
 #~ msgstr "Emulador de terminal"
