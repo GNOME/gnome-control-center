@@ -234,6 +234,8 @@ xkb_layout_choose (GtkBuilder * dialog)
 
 	xkb_layout_filter_changed (chooser_dialog);
 
+	gtk_widget_grab_focus (xkb_layout_filter);
+
 	gtk_widget_show (chooser);
 }
 
