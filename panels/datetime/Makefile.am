@@ -61,6 +61,8 @@ dist_ui_DATA = \
 	data/timezone_-9.5.png \
 	data/timezone_9.5.png
 
+tzdatadir = $(pkgdatadir)/datetime
+dist_tzdata_DATA = backward
 
 INCLUDES =						\
 	$(PANEL_CFLAGS)					\

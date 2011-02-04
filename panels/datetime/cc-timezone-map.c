@@ -56,6 +56,7 @@ struct _CcTimezoneMapPrivate
 
   TzDB *tzdb;
   TzLocation *location;
+  GHashTable *alias_db;
 };
 
 enum
@@ -169,6 +170,12 @@ cc_timezone_map_dispose (GObject *object)
       priv->visible_map_rowstride = 0;
     }
 
+  if (priv->alias_db)
+    {
+      g_hash_table_destroy (priv->alias_db);
+      priv->alias_db = NULL;
+    }
+
   G_OBJECT_CLASS (cc_timezone_map_parent_class)->dispose (object);
 }
 
@@ -193,8 +200,6 @@ cc_timezone_map_get_preferred_width (GtkWidget *widget,
                                      gint      *minimum,
                                      gint      *natural)
 {
-  CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
-
   /* choose a minimum size small enough to prevent the window
    * from growing horizontally
    */
@@ -540,6 +545,57 @@ button_press_event (GtkWidget      *widget,
 }
 
 static void
+load_backward_tz (CcTimezoneMap *self)
+{
+  GError *error = NULL;
+  char **lines, *contents;
+  guint i;
+
+  self->priv->alias_db = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+  if (g_file_get_contents (GNOMECC_DATA_DIR "/datetime/backward", &contents, NULL, &error) == FALSE)
+    {
+      g_warning ("Failed to load 'backward' file: %s", error->message);
+      return;
+    }
+  lines = g_strsplit (contents, "\n", -1);
+  g_free (contents);
+  for (i = 0; lines[i] != NULL; i++)
+    {
+      char **items;
+      guint j;
+      char *real, *alias;
+
+      if (g_ascii_strncasecmp (lines[i], "Link\t", 5) != 0)
+        continue;
+
+      items = g_strsplit (lines[i], "\t", -1);
+      real = NULL;
+      alias = NULL;
+      /* Skip the "Link<tab>" part */
+      for (j = 1; items[j] != NULL; j++)
+        {
+          if (items[j][0] == '\0')
+            continue;
+          if (real == NULL)
+            {
+              real = items[j];
+              continue;
+            }
+          alias = items[j];
+          break;
+        }
+
+      if (real == NULL || alias == NULL)
+        g_warning ("Could not parse line: %s", lines[i]);
+
+      g_hash_table_insert (self->priv->alias_db, g_strdup (alias), g_strdup (real));
+      g_strfreev (items);
+    }
+  g_strfreev (lines);
+}
+
+static void
 cc_timezone_map_init (CcTimezoneMap *self)
 {
   CcTimezoneMapPrivate *priv;
@@ -571,10 +627,7 @@ cc_timezone_map_init (CcTimezoneMap *self)
   g_signal_connect (self, "button-press-event", G_CALLBACK (button_press_event),
                     NULL);
 
-  /*
-  g_signal_connect (self, "map-event", G_CALLBACK (map_event), NULL);
-  g_signal_connect (self, "unmap-event", G_CALLBACK (unmap_event), NULL);
-  */
+  load_backward_tz (self);
 }
 
 CcTimezoneMap *
@@ -589,6 +642,9 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
 {
   GPtrArray *locations;
   guint i;
+  char *real_tz;
+
+  real_tz = g_hash_table_lookup (map->priv->alias_db, timezone);
 
   locations = tz_get_locations (map->priv->tzdb);
 
@@ -596,7 +652,7 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
     {
       TzLocation *loc = locations->pdata[i];
 
-      if (!g_strcmp0 (loc->zone, timezone))
+      if (!g_strcmp0 (loc->zone, real_tz ? real_tz : timezone))
         {
           set_location (map, loc);
           break;
