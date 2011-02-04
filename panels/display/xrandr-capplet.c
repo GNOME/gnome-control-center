@@ -85,11 +85,6 @@ struct App
   DBusGConnection *connection;
   DBusGProxy *proxy;
   DBusGProxyCall *proxy_call;
-
-  enum {
-    APPLYING_VERSION_1,
-    APPLYING_VERSION_2
-  } apply_configuration_state;
 };
 
 static void rebuild_gui (App *app);
@@ -2138,33 +2133,11 @@ begin_version2_apply_configuration (App *app, GdkWindow *parent_window, guint32 
                                           "org.gnome.SettingsDaemon.XRANDR_2");
   g_assert (app->proxy != NULL); /* that call does not fail unless we pass bogus names */
 
-  app->apply_configuration_state = APPLYING_VERSION_2;
   app->proxy_call = dbus_g_proxy_begin_call (app->proxy, "ApplyConfiguration",
                                              apply_configuration_returned_cb, app,
                                              NULL,
                                              G_TYPE_INT64, (gint64) parent_window_xid,
                                              G_TYPE_INT64, (gint64) timestamp,
-                                             G_TYPE_INVALID,
-                                             G_TYPE_INVALID);
-  /* FIXME: we don't check for app->proxy_call == NULL, which could happen if
-   * the connection was disconnected.  This is left as an exercise for the
-   * reader.
-   */
-}
-
-static void
-begin_version1_apply_configuration (App *app)
-{
-  app->proxy = dbus_g_proxy_new_for_name (app->connection,
-                                          "org.gnome.SettingsDaemon",
-                                          "/org/gnome/SettingsDaemon/XRANDR",
-                                          "org.gnome.SettingsDaemon.XRANDR");
-  g_assert (app->proxy != NULL); /* that call does not fail unless we pass bogus names */
-
-  app->apply_configuration_state = APPLYING_VERSION_1;
-  app->proxy_call = dbus_g_proxy_begin_call (app->proxy, "ApplyConfiguration",
-                                             apply_configuration_returned_cb, app,
-                                             NULL,
                                              G_TYPE_INVALID,
                                              G_TYPE_INVALID);
   /* FIXME: we don't check for app->proxy_call == NULL, which could happen if
@@ -2215,21 +2188,10 @@ apply_configuration_returned_cb (DBusGProxy       *proxy,
   success = dbus_g_proxy_end_call (proxy, call_id, &error, G_TYPE_INVALID);
 
   if (!success) {
-    if (app->apply_configuration_state == APPLYING_VERSION_2
-        && g_error_matches (error, DBUS_GERROR, DBUS_GERROR_UNKNOWN_METHOD)) {
-      g_error_free (error);
-
-      g_object_unref (app->proxy);
-      app->proxy = NULL;
-
-      begin_version1_apply_configuration (app);
-      return;
-    } else {
-      /* We don't pop up an error message; gnome-settings-daemon already does that
-       * in case the selected RANDR configuration could not be applied.
-       */
-      g_error_free (error);
-    }
+    /* We don't pop up an error message; gnome-settings-daemon already does that
+     * in case the selected RANDR configuration could not be applied.
+     */
+    g_error_free (error);
   }
 
   g_object_unref (app->proxy);
