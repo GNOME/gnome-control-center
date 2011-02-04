@@ -167,6 +167,7 @@ enum
   PRINTER_PAUSED_COLUMN,
   PRINTER_DEFAULT_ICON_COLUMN,
   PRINTER_ICON_COLUMN,
+  PRINTER_IS_SEPARATOR_COLUMN,
   PRINTER_N_COLUMNS
 };
 
@@ -504,6 +505,26 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gtk_widget_set_sensitive (widget, FALSE);
 }
 
+typedef struct {
+  gint printer_id;
+  gint usage;
+} PrinterUsage;
+
+static gint
+printer_usage_cmp (gconstpointer a,
+                   gconstpointer b)
+{
+  PrinterUsage *x = (PrinterUsage*) a;
+  PrinterUsage *y = (PrinterUsage*) b;
+
+  if (x->usage < y->usage)
+    return 1;
+  else if (x->usage == y->usage)
+    return 0;
+  else
+    return -1;
+}
+
 static void
 actualize_printers_list (CcPrintersPanel *self)
 {
@@ -512,13 +533,19 @@ actualize_printers_list (CcPrintersPanel *self)
   GtkTreeIter             selected_iter;
   GtkTreeView            *treeview;
   GtkTreeIter             iter;
+  cups_job_t             *jobs = NULL;
+  gboolean                has_separator = FALSE;
   gboolean                paused = FALSE;
+  gboolean                valid = FALSE;
   gchar                  *current_printer_instance = NULL;
   gchar                  *current_printer_name = NULL;
   gchar                  *printer_icon_name = NULL;
   gchar                  *default_icon_name = NULL;
+  GList                  *tmp_list = NULL;
+  GList                  *usages = NULL;
   int                     current_dest = -1;
   int                     i, j;
+  int                     num_jobs = 0;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -544,11 +571,41 @@ actualize_printers_list (CcPrintersPanel *self)
                               G_TYPE_STRING,
                               G_TYPE_BOOLEAN,
                               G_TYPE_STRING,
-                              G_TYPE_STRING);
+                              G_TYPE_STRING,
+                              G_TYPE_BOOLEAN);
 
   for (i = 0; i < priv->num_dests; i++)
     {
+      PrinterUsage *usage = g_new (PrinterUsage, 1);
+      num_jobs = cupsGetJobs (&jobs, priv->dests[i].name, 1, CUPS_WHICHJOBS_ALL);
+      usage->printer_id = i;
+      usage->usage = num_jobs;
+      usages = g_list_prepend (usages, usage);
+      cupsFreeJobs (num_jobs, jobs);
+    }
+  num_jobs = 0;
+  jobs = NULL;
+
+  usages = g_list_sort (usages, printer_usage_cmp);
+
+  for (tmp_list = usages; tmp_list; tmp_list = tmp_list->next)
+    {
       gchar *instance;
+
+      i = ((PrinterUsage*) tmp_list->data)->printer_id;
+      if (((PrinterUsage*) tmp_list->data)->usage == 0 && !has_separator)
+        {
+          has_separator = TRUE;
+          gtk_list_store_append (store, &iter);
+          gtk_list_store_set (store, &iter,
+                              PRINTER_ID_COLUMN, -1,
+                              PRINTER_NAME_COLUMN, NULL,
+                              PRINTER_PAUSED_COLUMN, FALSE,
+                              PRINTER_DEFAULT_ICON_COLUMN, FALSE,
+                              PRINTER_ICON_COLUMN, NULL,
+                              PRINTER_IS_SEPARATOR_COLUMN, TRUE,
+                              -1);
+        }
 
       gtk_list_store_append (store, &iter);
 
@@ -595,12 +652,14 @@ actualize_printers_list (CcPrintersPanel *self)
                           PRINTER_PAUSED_COLUMN, paused,
                           PRINTER_DEFAULT_ICON_COLUMN, default_icon_name,
                           PRINTER_ICON_COLUMN, printer_icon_name,
+                          PRINTER_IS_SEPARATOR_COLUMN, FALSE,
                           -1);
 
       g_free (instance);
       g_free (printer_icon_name);
       g_free (default_icon_name);
     }
+  g_list_free_full (usages, g_free);
 
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
 
@@ -613,9 +672,6 @@ actualize_printers_list (CcPrintersPanel *self)
     }
   else
     {
-      cups_job_t *jobs = NULL;
-      int         num_jobs = 0;
-
       num_jobs = cupsGetJobs (&jobs, NULL, 1, CUPS_WHICHJOBS_ALL);
 
       /* Select last used printer */
@@ -641,24 +697,37 @@ actualize_printers_list (CcPrintersPanel *self)
               }
         }
 
-      /* Select first printer */
-      if (priv->current_dest < 0 && priv->num_dests > 0)
-        {
-          priv->current_dest = 0;
-        }
-
       if (priv->current_dest >= 0)
         {
-          GtkTreePath *path = gtk_tree_path_new_from_indices (priv->current_dest, -1);
+          gint id;
+          valid = gtk_tree_model_get_iter_first ((GtkTreeModel *) store,
+                                                 &selected_iter);
 
-          gtk_tree_model_get_iter ((GtkTreeModel *) store,
-                                   &selected_iter,
-                                   path);
+          while (valid)
+            {
+              gtk_tree_model_get ((GtkTreeModel *) store, &selected_iter,
+                                  PRINTER_ID_COLUMN, &id,
+                                  -1);
+              if (id == priv->current_dest)
+                break;
+
+              valid = gtk_tree_model_iter_next ((GtkTreeModel *) store,
+                                                &selected_iter);
+            }
 
           gtk_tree_selection_select_iter (
             gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
             &selected_iter);
-          gtk_tree_path_free (path);
+        }
+      else if (priv->num_dests > 0)
+        {
+          /* Select first printer */
+          gtk_tree_model_get_iter_first ((GtkTreeModel *) store,
+                                         &selected_iter);
+
+          gtk_tree_selection_select_iter (
+            gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
+            &selected_iter);
         }
     }
 
@@ -687,6 +756,23 @@ set_cell_sensitivity_func (GtkTreeViewColumn *tree_column,
                   "sensitive", TRUE,
                   NULL);
 }
+
+static gboolean
+printers_row_separator_func (GtkTreeModel *model,
+                             GtkTreeIter  *iter,
+                             gpointer      data)
+{
+  gboolean separator;
+
+  gtk_tree_model_get (model,
+                      iter,
+                      PRINTER_IS_SEPARATOR_COLUMN,
+                      &separator,
+                      -1);
+
+  return separator;
+}
+
 
 static void
 populate_printers_list (CcPrintersPanel *self)
@@ -731,6 +817,11 @@ populate_printers_list (CcPrintersPanel *self)
                                                      "icon-name", PRINTER_DEFAULT_ICON_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+
+  gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (treeview),
+                                        printers_row_separator_func,
+                                        NULL,
+                                        NULL);
 }
 
 enum
