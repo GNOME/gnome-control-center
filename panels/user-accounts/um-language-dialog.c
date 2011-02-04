@@ -232,7 +232,6 @@ um_language_chooser_new (GtkWidget *parent)
         GtkWidget *chooser;
         GtkWidget *list;
         GtkWidget *button;
-        GtkTreeModel *model;
         GHashTable *user_langs;
         GdkCursor *cursor;
         guint timeout;
@@ -261,7 +260,6 @@ um_language_chooser_new (GtkWidget *parent)
 	/* Add user languages */
 	user_langs = new_ht_for_user_languages ();
         cc_common_language_setup_list (list, user_langs);
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 
 	/* Setup so that the list is added after the dialogue is shown */
         cursor = gdk_cursor_new (GDK_WATCH);

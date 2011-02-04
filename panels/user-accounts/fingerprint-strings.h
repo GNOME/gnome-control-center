@@ -62,7 +62,7 @@ static const char *finger_str_to_msg(const char *finger_name, gboolean is_swipe)
  * verify-match
  * verify-unknown-error
  */
-static const char *verify_result_str_to_msg(const char *result, gboolean is_swipe)
+G_GNUC_UNUSED static const char *verify_result_str_to_msg(const char *result, gboolean is_swipe)
 {
 	if (result == NULL)
 		return NULL;

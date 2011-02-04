@@ -77,13 +77,11 @@ icon_shape_renderer (cairo_t        *cr,
         if (GPOINTER_TO_UINT (attr->data) == data->placeholder) {
                 gdouble ascent;
                 gdouble height;
-                gdouble width;
                 GdkPixbuf *pixbuf;
                 GtkIconInfo *info;
 
                 ascent = pango_units_to_double (attr->ink_rect.y);
                 height = pango_units_to_double (attr->ink_rect.height);
-                width = pango_units_to_double (attr->ink_rect.width);
                 info = gtk_icon_theme_lookup_by_gicon (gtk_icon_theme_get_default (),
                                                        data->icon,
                                                        (gint)height,

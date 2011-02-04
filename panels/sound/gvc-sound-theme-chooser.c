@@ -98,7 +98,7 @@ enum {
 static xmlChar *
 xml_get_and_trim_names (xmlNodePtr node)
 {
-        xmlNodePtr cur, keep = NULL;
+        xmlNodePtr cur;
         xmlChar *keep_lang = NULL;
         xmlChar *value;
         int j, keep_pri = INT_MAX;
@@ -135,7 +135,6 @@ xml_get_and_trim_names (xmlNodePtr node)
 
                                 keep_lang = cur_lang;
                                 keep_pri = cur_pri;
-                                keep = cur;
                         } else {
                                 if (cur_lang)
                                         xmlFree (cur_lang);
@@ -336,7 +335,6 @@ load_theme_file (const char *path,
                  char      **parent)
 {
         GKeyFile *file;
-        char *indexname = NULL;
         gboolean hidden;
 
         file = g_key_file_new ();
@@ -347,12 +345,6 @@ load_theme_file (const char *path,
         /* Don't add hidden themes to the list */
         hidden = g_key_file_get_boolean (file, "Sound Theme", "Hidden", NULL);
         if (!hidden) {
-                indexname = g_key_file_get_locale_string (file,
-                                                          "Sound Theme",
-                                                          "Name",
-                                                          NULL,
-                                                          NULL);
-
                 /* Save the parent theme, if there's one */
                 if (parent != NULL) {
                         *parent = g_key_file_get_string (file,
@@ -663,11 +655,7 @@ static void
 update_theme (GvcSoundThemeChooser *chooser)
 {
         gboolean     events_enabled;
-        gboolean     bell_enabled;
         char        *last_theme;
-
-        bell_enabled = gconf_client_get_bool (chooser->priv->client, AUDIO_BELL_KEY, NULL);
-        //set_audible_bell_enabled (chooser, bell_enabled);
 
         events_enabled = gconf_client_get_bool (chooser->priv->client, EVENT_SOUNDS_KEY, NULL);
 
@@ -725,7 +713,6 @@ on_key_changed (GConfClient          *client,
                 GvcSoundThemeChooser *chooser)
 {
         const char *key;
-        GConfValue *value;
 
         key = gconf_entry_get_key (entry);
 
@@ -734,7 +721,6 @@ on_key_changed (GConfClient          *client,
                 return;
         }
 
-        value = gconf_entry_get_value (entry);
         if (strcmp (key, EVENT_SOUNDS_KEY) == 0) {
                 update_theme (chooser);
         } else if (strcmp (key, SOUND_THEME_KEY) == 0) {

@@ -101,14 +101,12 @@ static UmUser *
 get_selected_user (UmUserPanelPrivate *d)
 {
         GtkTreeView *tv;
-        GtkListStore *store;
         GtkTreeIter iter;
         GtkTreeSelection *selection;
         GtkTreeModel *model;
         UmUser *user;
 
         tv = (GtkTreeView *)get_widget (d, "list-treeview");
-        store = (GtkListStore *)gtk_tree_view_get_model (tv);
         selection = gtk_tree_view_get_selection (tv);
 
         if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -1204,7 +1202,7 @@ um_user_panel_init (UmUserPanel *self)
 {
         UmUserPanelPrivate *d;
         GError *error;
-        volatile GType type;
+        volatile GType type G_GNUC_UNUSED;
         const gchar *filename;
         GtkWidget *button;
         GtkStyleContext *context;
