@@ -539,13 +539,11 @@ rebuild_on_off_radios (App *app)
 {
   gboolean sensitive;
   gboolean on_active;
-  gboolean off_active;
 
   g_signal_handlers_block_by_func (app->monitor_switch, G_CALLBACK (monitor_switch_active_cb), app);
 
   sensitive = FALSE;
   on_active = FALSE;
-  off_active = FALSE;
 
   if (!gnome_rr_config_get_clone (app->current_configuration) && app->current_output)
     {
@@ -555,7 +553,6 @@ rebuild_on_off_radios (App *app)
         sensitive = FALSE;
 
       on_active = gnome_rr_output_info_is_active (app->current_output);
-      off_active = !on_active;
     }
 
   gtk_widget_set_sensitive (app->monitor_switch, sensitive);
