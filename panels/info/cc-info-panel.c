@@ -162,6 +162,175 @@ load_gnome_version (char **version,
   return ret;
 };
 
+static char *
+get_graphics_info_lspci (void)
+{
+  GError     *error;
+  GRegex     *re;
+  GMatchInfo *match_info;
+  char       *output;
+  GString    *info;
+
+  info = g_string_new (NULL);
+
+  error = NULL;
+  g_spawn_command_line_sync ("lspci -nn", &output, NULL, NULL, &error);
+  if (error != NULL)
+    {
+      g_warning ("Unable to get graphics info: %s", error->message);
+      g_error_free (error);
+      return NULL;
+    }
+
+  re = g_regex_new ("^[^ ]+ VGA compatible controller [^:]*: ([^([]+).*$", G_REGEX_MULTILINE, 0, &error);
+  if (re == NULL)
+    {
+      g_warning ("Error building regex: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  g_regex_match (re, output, 0, &match_info);
+  while (g_match_info_matches (match_info))
+    {
+      char *device;
+
+      device = g_match_info_fetch (match_info, 1);
+      g_string_append_printf (info, "%s ", device);
+      g_free (device);
+
+      g_match_info_next (match_info, NULL);
+    }
+
+  g_match_info_free (match_info);
+  g_regex_unref (re);
+
+ out:
+  g_free (output);
+
+  return g_string_free (info, FALSE);
+}
+
+static char *
+get_graphics_info_glxinfo (void)
+{
+  GError     *error;
+  GRegex     *re;
+  GMatchInfo *match_info;
+  char       *output;
+  GString    *info;
+
+  info = g_string_new (NULL);
+
+  error = NULL;
+  g_spawn_command_line_sync ("glxinfo -l", &output, NULL, NULL, &error);
+  if (error != NULL)
+    {
+      g_warning ("Unable to get graphics info: %s", error->message);
+      g_error_free (error);
+      return NULL;
+    }
+
+  re = g_regex_new ("^OpenGL renderer string: (.+)$", G_REGEX_MULTILINE, 0, &error);
+  if (re == NULL)
+    {
+      g_warning ("Error building regex: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  g_regex_match (re, output, 0, &match_info);
+  while (g_match_info_matches (match_info))
+    {
+      char *device;
+
+      device = g_match_info_fetch (match_info, 1);
+      g_string_append_printf (info, "%s ", device);
+      g_free (device);
+
+      g_match_info_next (match_info, NULL);
+    }
+  g_match_info_free (match_info);
+  g_regex_unref (re);
+
+ out:
+  g_free (output);
+
+  return g_string_free (info, FALSE);
+}
+
+typedef struct
+{
+  char *regex;
+  char *replacement;
+} ReplaceStrings;
+
+static char *
+prettify_info (const char *info)
+{
+  char *pretty;
+  int   i;
+  static const ReplaceStrings rs[] = {
+    { "Mesa DRI ", ""},
+    { "Intel[(]R[)]", "Intel<sup>\302\256</sup>"},
+    { "Core[(]TM[)]", "Core<sup>\342\204\242</sup>"},
+    { "Graphics Controller", "Graphics"},
+  };
+
+  pretty = g_markup_escape_text (info, -1);
+
+  for (i = 0; i < G_N_ELEMENTS (rs); i++)
+    {
+      GError *error;
+      GRegex *re;
+      char   *new;
+
+      error = NULL;
+
+      re = g_regex_new (rs[i].regex, 0, 0, &error);
+      if (re == NULL)
+        {
+          g_warning ("Error building regex: %s", error->message);
+          g_error_free (error);
+          continue;
+        }
+
+      new = g_regex_replace_literal (re,
+                                     pretty,
+                                     -1,
+                                     0,
+                                     rs[i].replacement,
+                                     0,
+                                     &error);
+
+      g_regex_unref (re);
+
+      if (error != NULL)
+        {
+          g_warning ("Error replacing %s: %s", rs[i].regex, error->message);
+          g_error_free (error);
+          continue;
+        }
+
+      g_free (pretty);
+      pretty = new;
+    }
+
+  return pretty;
+}
+
+static char *
+get_graphics_info (void)
+{
+  char *info;
+
+  info = get_graphics_info_glxinfo ();
+  if (info == NULL)
+    info = get_graphics_info_lspci ();
+
+  return info;
+}
+
 static void
 cc_info_panel_get_property (GObject    *object,
                             guint       property_id,
@@ -440,6 +609,7 @@ cc_info_panel_init (CcInfoPanel *self)
   glibtop_mem mem;
   const glibtop_sysinfo *info;
   char       *text;
+  char       *pretty;
 
   self->priv = INFO_PANEL_PRIVATE (self);
 
@@ -478,7 +648,9 @@ cc_info_panel_init (CcInfoPanel *self)
 
   widget = WID (self->priv->builder, "processor_label");
   text = get_cpu_info (info);
-  gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
+  pretty = prettify_info (text);
+  gtk_label_set_markup (GTK_LABEL (widget), pretty ? pretty : "");
+  g_free (pretty);
   g_free (text);
 
   widget = WID (self->priv->builder, "os_type_label");
@@ -490,6 +662,13 @@ cc_info_panel_init (CcInfoPanel *self)
   text = get_primary_disc_info ();
   gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
+
+  text = get_graphics_info ();
+  pretty = prettify_info (text);
+  widget = WID (self->priv->builder, "graphics_label");
+  gtk_label_set_markup (GTK_LABEL (widget), pretty ? pretty : "");
+  g_free (text);
+  g_free (pretty);
 
   widget = WID (self->priv->builder, "info_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
