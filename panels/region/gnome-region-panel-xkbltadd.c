@@ -91,7 +91,8 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 					    gkbd_keyboard_drawing_dialog_new
 					    ();
 					gkbd_keyboard_drawing_dialog_set_layout
-					    (dlg, config_registry, selected_id);
+					    (dlg, config_registry,
+					     selected_id);
 					gtk_window_set_transient_for
 					    (GTK_WINDOW (dlg),
 					     GTK_WINDOW (CWID
@@ -165,6 +166,9 @@ xkb_layout_filter_changed (GtkBuilder * chooser_dialog)
 	xkl_config_registry_search_by_pattern (config_registry, pattern,
 					       (TwoConfigItemsProcessFunc)
 					       (xkl_layout_add_to_filtered_list), chooser_dialog);
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
+					      COMBO_BOX_MODEL_COL_SORT,
+					      GTK_SORT_ASCENDING);
 }
 
 static void
