@@ -52,7 +52,7 @@ extern void xkb_options_load_options (GtkBuilder * dialog);
 
 extern void xkb_options_popup_dialog (GtkBuilder * dialog);
 
-extern char *xci_desc_to_utf8 (XklConfigItem * ci);
+extern char *xci_desc_to_utf8 (const XklConfigItem * ci);
 
 extern gchar *xkb_layout_description_utf8 (const gchar * visible);
 

@@ -2,6 +2,18 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkListStore" id="filtered_layout_list_model">
+    <columns>
+      <!-- column-name sort_order -->
+      <column type="gchararray"/>
+      <!-- column-name visible -->
+      <column type="gchararray"/>
+      <!-- column-name xkb_id -->
+      <column type="gchararray"/>
+      <!-- column-name real_id -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkDialog" id="xkb_layout_chooser">
     <property name="visible">True</property>
     <property name="border_width">5</property>
@@ -19,204 +31,14 @@
             <property name="border_width">5</property>
             <property name="spacing">6</property>
             <child>
-              <object class="GtkNotebook" id="choosers_nb">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <child>
-                  <object class="GtkAlignment" id="alignment1">
-                    <property name="visible">True</property>
-                    <property name="top_padding">3</property>
-                    <property name="bottom_padding">3</property>
-                    <property name="left_padding">3</property>
-                    <property name="right_padding">6</property>
-                    <child>
-                      <object class="GtkTable" id="table1">
-                        <property name="visible">True</property>
-                        <property name="n_rows">2</property>
-                        <property name="n_columns">2</property>
-                        <property name="column_spacing">12</property>
-                        <property name="row_spacing">6</property>
-                        <child>
-                          <object class="GtkComboBox" id="xkb_country_variants_available">
-                            <property name="visible">True</property>
-                            <property name="model">countryVariants</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkComboBox" id="xkb_countries_available">
-                            <property name="visible">True</property>
-                            <property name="model">countries</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label4">
-                            <property name="visible">True</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">_Variants:</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">xkb_country_variants_available</property>
-                          </object>
-                          <packing>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label3">
-                            <property name="visible">True</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">_Country:</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">xkb_countries_available</property>
-                          </object>
-                          <packing>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child type="tab">
-                  <object class="GtkLabel" id="label22">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">By _country</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                  <packing>
-                    <property name="tab_fill">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkAlignment" id="alignment2">
-                    <property name="visible">True</property>
-                    <property name="top_padding">3</property>
-                    <property name="bottom_padding">3</property>
-                    <property name="left_padding">3</property>
-                    <property name="right_padding">3</property>
-                    <child>
-                      <object class="GtkTable" id="table3">
-                        <property name="visible">True</property>
-                        <property name="n_rows">2</property>
-                        <property name="n_columns">2</property>
-                        <property name="column_spacing">12</property>
-                        <property name="row_spacing">6</property>
-                        <child>
-                          <object class="GtkComboBox" id="xkb_language_variants_available">
-                            <property name="visible">True</property>
-                            <property name="model">languageVariants</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkComboBox" id="xkb_languages_available">
-                            <property name="visible">True</property>
-                            <property name="model">languages</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label13">
-                            <property name="visible">True</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">_Variants:</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">xkb_country_variants_available</property>
-                          </object>
-                          <packing>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label12">
-                            <property name="visible">True</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">_Language:</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">xkb_countries_available</property>
-                          </object>
-                          <packing>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child type="tab">
-                  <object class="GtkLabel" id="label9">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">By _language</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                  <packing>
-                    <property name="position">1</property>
-                    <property name="tab_fill">False</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkVBox" id="vboxPreview">
+              <object class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkHBox" id="hbox1">
+                  <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkLabel" id="label10">
-                        <property name="visible">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Preview:</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Select an input source to add</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -225,12 +47,20 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkFrame" id="previewFrame">
+                  <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
-                    <property name="label_xalign">0</property>
-                    <property name="shadow_type">in</property>
+                    <property name="can_focus">True</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="vscrollbar_policy">automatic</property>
                     <child>
-                      <placeholder/>
+                      <object class="GtkTreeView" id="xkb_filtered_layouts_list">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="model">filtered_layout_list_model</property>
+                        <property name="headers_visible">False</property>
+                        <property name="search_column">0</property>
+                        <property name="tooltip_column">0</property>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -239,6 +69,18 @@
                 </child>
               </object>
               <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="xkb_layout_filter">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">•</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -252,13 +94,11 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="btnPrint">
-                <property name="label">gtk-print</property>
+              <object class="GtkButton" id="btnPreview">
+                <property name="label" translatable="yes">Preview</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_stock">True</property>
+                <property name="receives_default">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -268,22 +108,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="cancelbutton2">
-                <property name="label">gtk-cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="btnOk1">
+              <object class="GtkButton" id="btnOk">
                 <property name="label">gtk-add</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -294,7 +119,24 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="pack_type">end</property>
                 <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btnCancel">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="receives_default">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="pack_type">end</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
@@ -307,13 +149,9 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="1">btnPrint</action-widget>
-      <action-widget response="-6">cancelbutton2</action-widget>
-      <action-widget response="-5">btnOk1</action-widget>
+      <action-widget response="1">btnPreview</action-widget>
+      <action-widget response="-5">btnOk</action-widget>
+      <action-widget response="-6">btnCancel</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkListStore" id="countries"/>
-  <object class="GtkListStore" id="countryVariants"/>
-  <object class="GtkListStore" id="languages"/>
-  <object class="GtkListStore" id="languageVariants"/>
 </interface>

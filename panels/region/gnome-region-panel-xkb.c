@@ -41,10 +41,13 @@ GSettings *xkb_keyboard_settings;
 GSettings *xkb_desktop_settings;
 
 char *
-xci_desc_to_utf8 (XklConfigItem * ci)
+xci_desc_to_utf8 (const XklConfigItem * ci)
 {
-	char *sd = g_strstrip (ci->description);
-	return sd[0] == 0 ? g_strdup (ci->name) : g_strdup (sd);
+	gchar *dd = g_strdup (ci->description);
+	gchar *sd = g_strstrip (dd);
+	gchar *rv = g_strdup (sd[0] == 0 ? ci->name : sd);
+	g_free (dd);
+	return rv;
 }
 
 static void
