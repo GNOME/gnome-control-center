@@ -274,6 +274,7 @@ prettify_info (const char *info)
     { "Mesa DRI ", ""},
     { "Intel[(]R[)]", "Intel<sup>\302\256</sup>"},
     { "Core[(]TM[)]", "Core<sup>\342\204\242</sup>"},
+    { "Atom[(]TM[)]", "Atom<sup>\342\204\242</sup>"},
     { "Graphics Controller", "Graphics"},
   };
 
