@@ -65,11 +65,11 @@ device_is_touchpad (XDeviceInfo deviceinfo)
         if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop, 0, 1, False,
                                 XA_INTEGER, &realtype, &realformat, &nitems,
                                 &bytes_after, &data) == Success) && (realtype != None)) {
-                gdk_error_trap_pop ();
+                gdk_error_trap_pop_ignored ();
                 XFree (data);
                 return device;
         }
-        gdk_error_trap_pop ();
+        gdk_error_trap_pop_ignored ();
 
         XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
         return NULL;
