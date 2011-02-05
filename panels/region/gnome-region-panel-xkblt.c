@@ -340,6 +340,7 @@ show_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 		gkbd_keyboard_drawing_dialog_set_group (popup, idx);
 		gtk_window_set_transient_for (GTK_WINDOW (popup),
 					      GTK_WINDOW (gtk_widget_get_toplevel (parent)));
+		gtk_widget_show_all (popup);
 	}
 }
 
