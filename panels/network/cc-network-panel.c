@@ -1615,7 +1615,7 @@ panel_populate_wireless_device (PanelDeviceItem *item)
         GVariant *bitrate;
         GVariant *hw_address;
         GVariant *ip4;
-        GVariant *ip6;
+        GVariant *ip6 = NULL;
         GVariant *nameservers = NULL;
         GVariant *routes = NULL;
         CcNetworkPanelPrivate *priv = item->panel->priv;
