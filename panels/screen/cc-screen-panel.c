@@ -112,6 +112,8 @@ on_lock_settings_changed (GSettings     *settings,
                           const char    *key,
                           CcScreenPanel *panel)
 {
+  if (g_str_equal (key, "lock-delay") == FALSE)
+    return;
 }
 
 static void
@@ -290,6 +292,28 @@ dpms_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
 }
 
 static void
+lock_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gboolean ret;
+
+  /* no selection */
+  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+  if (!ret)
+    return;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  gtk_tree_model_get (model, &iter,
+                      1, &value,
+                      -1);
+
+  g_settings_set (self->priv->lock_settings, "lock-delay", "u", value);
+}
+
+static void
 set_dpms_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
 {
   GtkTreeIter iter;
@@ -306,6 +330,36 @@ set_dpms_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
 
   /* try to make the UI match the AC setting */
   value = g_settings_get_int (self->priv->gsd_settings, "sleep-display-ac");
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          1, &value_tmp,
+                          -1);
+      if (value == value_tmp)
+        {
+          gtk_combo_box_set_active_iter (combo_box, &iter);
+          break;
+        }
+    } while (gtk_tree_model_iter_next (model, &iter));
+}
+
+static void
+set_lock_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  guint value;
+  gint value_tmp;
+  gboolean ret;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (combo_box);
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  if (!ret)
+    return;
+
+  /* try to make the UI match the AC setting */
+  g_settings_get (self->priv->lock_settings, "lock-delay", "u", &value);
   do
     {
       gtk_tree_model_get (model, &iter,
@@ -354,7 +408,7 @@ cc_screen_panel_init (CcScreenPanel *self)
                             got_power_proxy_cb,
                             self);
 
-  self->priv->lock_settings = g_settings_new ("org.gnome.desktop.interface");
+  self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
   g_signal_connect (self->priv->lock_settings,
                     "changed",
                     G_CALLBACK (on_lock_settings_changed),
@@ -374,6 +428,25 @@ cc_screen_panel_init (CcScreenPanel *self)
   g_signal_connect (widget, "changed",
                     G_CALLBACK (dpms_combo_changed_cb),
                     self);
+
+  /* bind the screen lock checkbox */
+  widget = WID ("screen_lock_on_switch");
+  g_settings_bind (self->priv->lock_settings,
+		   "lock-enabled",
+		   widget, "active",
+		   G_SETTINGS_BIND_DEFAULT);
+
+  /* lock time */
+  widget = WID ("screen_lock_combobox");
+  set_lock_value_for_combo (GTK_COMBO_BOX (widget), self);
+  g_signal_connect (widget, "changed",
+		    G_CALLBACK (lock_combo_changed_cb),
+		    self);
+
+  g_settings_bind (self->priv->lock_settings,
+		   "lock-enabled",
+		   widget, "sensitive",
+		   G_SETTINGS_BIND_GET);
 
   widget = WID ("screen_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
