@@ -88,6 +88,7 @@ enum {
 };
 
 static void     panel_device_refresh_item_ui            (PanelDeviceItem *item);
+static void     panel_refresh_devices                   (CcNetworkPanel *panel);
 
 static void
 cc_network_panel_get_property (GObject    *object,
@@ -965,6 +966,9 @@ panel_dbus_manager_signal_cb (GDBusProxy *proxy,
         /* get the new state */
         if (g_strcmp0 (signal_name, "StateChanged") == 0) {
                 g_debug ("ensure devices are correct");
+
+                /* refresh devices */
+                panel_refresh_devices (panel);
                 goto out;
         }
 
@@ -983,6 +987,32 @@ panel_dbus_manager_signal_cb (GDBusProxy *proxy,
         }
 out:
         g_free (object_path);
+}
+
+/**
+ * panel_refresh_devices:
+ **/
+static void
+panel_refresh_devices (CcNetworkPanel *panel)
+{
+        GtkListStore *liststore_devices;
+        CcNetworkPanelPrivate *priv = panel->priv;
+
+        /* clear the existing list */
+        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+                                            "liststore_devices"));
+        gtk_list_store_clear (liststore_devices);
+
+        /* get the new state */
+        g_dbus_proxy_call (priv->proxy,
+                           "GetDevices",
+                           NULL,
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           priv->cancellable,
+                           panel_get_devices_cb,
+                           panel);
+
 }
 
 /**
@@ -1009,15 +1039,8 @@ panel_got_network_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer 
                           G_CALLBACK (panel_dbus_manager_signal_cb),
                           user_data);
 
-        /* get the new state */
-        g_dbus_proxy_call (priv->proxy,
-                           "GetDevices",
-                           NULL,
-                           G_DBUS_CALL_FLAGS_NONE,
-                           -1,
-                           priv->cancellable,
-                           panel_get_devices_cb,
-                           user_data);
+        /* refresh devices */
+        panel_refresh_devices (panel);
 out:
         return;
 }
@@ -1775,6 +1798,55 @@ panel_add_proxy_device (CcNetworkPanel *panel)
         g_free (title);
 }
 
+
+/**
+ * panel_enable_cb:
+ **/
+static void
+panel_enable_cb (GObject *source_object,
+                 GAsyncResult *res,
+                 gpointer user_data)
+{
+        GError *error = NULL;
+        GVariant *result;
+
+        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+        if (result == NULL) {
+                g_printerr ("Error enabling NetworkManager: %s\n",
+                            error->message);
+                g_error_free (error);
+                goto out;
+        }
+out:
+        if (result != NULL)
+                g_variant_unref (result);
+}
+
+/**
+ * cc_network_panel_notify_enable_active_cb:
+ **/
+static void
+cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
+                                          GParamSpec *pspec,
+                                          CcNetworkPanel *panel)
+{
+        gboolean enable;
+        CcNetworkPanelPrivate *priv = panel->priv;
+
+        /* get enabled state */
+        enable = !gtk_switch_get_active (sw);
+
+        /* get the new state */
+        g_dbus_proxy_call (priv->proxy,
+                           "Enable",
+                           g_variant_new ("(b)", enable),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           priv->cancellable,
+                           panel_enable_cb,
+                           panel);
+}
+
 /**
  * cc_network_panel_init:
  **/
@@ -1958,7 +2030,10 @@ cc_network_panel_init (CcNetworkPanel *panel)
         gtk_widget_set_sensitive (widget, FALSE);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "switch_flight_mode"));
-        gtk_widget_set_sensitive (widget, FALSE);
+        g_signal_connect (GTK_SWITCH (widget), "notify::active",
+                          G_CALLBACK (cc_network_panel_notify_enable_active_cb),
+                          panel);
+
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "notebook_types"));
