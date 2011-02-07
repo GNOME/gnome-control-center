@@ -138,11 +138,6 @@ setup_xkb_tabs (GtkBuilder * dialog)
 			 WID ("chk_new_windows_default_layout"), "sensitive",
 			 G_SETTINGS_BIND_DEFAULT);
 
-#ifdef HAVE_X11_EXTENSIONS_XKB_H
-	if (strcmp (xkl_engine_get_backend_name (engine), "XKB"))
-#endif
-		gtk_widget_hide (WID ("xkb_layouts_print"));
-
 	xkb_layouts_prepare_selected_tree (dialog);
 	xkb_layouts_fill_selected_tree (dialog);
 
