@@ -48,6 +48,7 @@ typedef struct {
         gchar           *active_access_point;
         gchar           *device_id;
         gchar           *ip4_config;
+        gchar           *dhcp4_config;
         gchar           *ip6_config;
         gchar           *modem_imei;
         gchar           *operator_name;
@@ -55,9 +56,10 @@ typedef struct {
         GDBusProxy      *proxy;
         GDBusProxy      *proxy_additional;
         GDBusProxy      *proxy_ip4;
+        GDBusProxy      *proxy_dhcp4;
         GDBusProxy      *proxy_ip6;
         guint            device_add_refcount;
-        guint            type;
+        NMDeviceType     type;
 } PanelDeviceItem;
 
 typedef struct {
@@ -687,6 +689,31 @@ out:
 }
 
 /**
+ * panel_got_device_proxy_dhcp4_cb:
+ **/
+static void
+panel_got_device_proxy_dhcp4_cb (GObject *source_object,
+                                 GAsyncResult *res,
+                                 gpointer user_data)
+{
+        GError *error = NULL;
+        PanelDeviceItem *item = (PanelDeviceItem *) user_data;
+
+        item->proxy_dhcp4 = g_dbus_proxy_new_for_bus_finish (res, &error);
+        if (item->proxy_dhcp4 == NULL) {
+                g_printerr ("Error creating dhcp4 proxy: %s\n", error->message);
+                g_error_free (error);
+                goto out;
+        }
+
+        /* add device if there are no more pending actions */
+        if (--item->device_add_refcount == 0)
+                panel_add_device_to_listview (item);
+out:
+        return;
+}
+
+/**
  * panel_got_device_proxy_ip6_cb:
  **/
 static void
@@ -721,6 +748,7 @@ panel_got_device_proxy_cb (GObject *source_object,
 {
         GError *error = NULL;
         GVariant *variant_ip4 = NULL;
+        GVariant *variant_dhcp4 = NULL;
         GVariant *variant_ip6 = NULL;
         GVariant *variant_type = NULL;
         GVariant *variant_udi = NULL;
@@ -743,8 +771,23 @@ panel_got_device_proxy_cb (GObject *source_object,
         variant_ip6 = g_dbus_proxy_get_cached_property (item->proxy, "Ip6Config");
         g_variant_get (variant_ip6, "o", &item->ip6_config);
 
+        /* get the IP DHCP object paths */
+        variant_dhcp4 = g_dbus_proxy_get_cached_property (item->proxy, "Dhcp4Config");
+        g_variant_get (variant_dhcp4, "o", &item->dhcp4_config);
+
         /* get the IP information */
-        if (g_strcmp0 (item->ip4_config, "/") != 0) {
+        if (g_strcmp0 (item->dhcp4_config, "/") != 0) {
+                item->device_add_refcount++;
+                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                          G_DBUS_PROXY_FLAGS_NONE,
+                                          NULL,
+                                          "org.freedesktop.NetworkManager",
+                                          item->dhcp4_config,
+                                          "org.freedesktop.NetworkManager.DHCP4Config",
+                                          item->panel->priv->cancellable,
+                                          panel_got_device_proxy_dhcp4_cb,
+                                          item);
+        } else if (g_strcmp0 (item->ip4_config, "/") != 0) {
                 item->device_add_refcount++;
                 g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                                           G_DBUS_PROXY_FLAGS_NONE,
@@ -829,6 +872,8 @@ panel_got_device_proxy_cb (GObject *source_object,
 out:
         if (variant_ip4 != NULL)
                 g_variant_unref (variant_ip4);
+        if (variant_dhcp4 != NULL)
+                g_variant_unref (variant_dhcp4);
         if (variant_ip6 != NULL)
                 g_variant_unref (variant_ip6);
         if (variant_udi != NULL)
@@ -1360,6 +1405,38 @@ out:
 }
 
 /**
+ * panel_variant_hash_from_variant:
+ **/
+static GHashTable *
+panel_variant_hash_from_variant (GVariant *variant)
+{
+        GVariantIter *iter = NULL;
+        const gchar *prop_key;
+        GVariant *prop_value;
+        GHashTable *hash_table = NULL;
+
+        /* insert the new metadata */
+        g_variant_get (variant, "a{sv}",
+                       &iter);
+        if (iter == NULL)
+                goto out;
+
+        /* remove old entries */
+        hash_table = g_hash_table_new_full (g_str_hash,
+                                            g_str_equal,
+                                            g_free,
+                                            (GDestroyNotify) g_variant_unref);
+        while (g_variant_iter_loop (iter, "{sv}",
+                                    &prop_key, &prop_value)) {
+                g_hash_table_insert (hash_table,
+                                     g_strdup (prop_key),
+                                     g_variant_ref (prop_value));
+        }
+out:
+        return hash_table;
+}
+
+/**
  * panel_populate_wired_device:
  **/
 static void
@@ -1372,7 +1449,10 @@ panel_populate_wired_device (PanelDeviceItem *item)
         GVariant *ip6 = NULL;
         GVariant *nameservers = NULL;
         GVariant *routes = NULL;
+        GVariant *options = NULL;
         GVariant *speed;
+        GVariant *tmp;
+        GHashTable *hash_table = NULL;
         CcNetworkPanelPrivate *priv = item->panel->priv;
 
         /* set IPv6 */
@@ -1417,6 +1497,26 @@ panel_populate_wired_device (PanelDeviceItem *item)
                 gtk_widget_hide (widget);
         } else {
                 gtk_widget_hide (widget);
+        }
+
+        /* set DHCPv4 */
+        if (item->proxy_dhcp4 != NULL) {
+                /* array of (string, variant) */
+                options = g_dbus_proxy_get_cached_property (item->proxy_dhcp4,
+                                                            "Options");
+                if (options != NULL) {
+                        hash_table = panel_variant_hash_from_variant (options);
+                        tmp = g_hash_table_lookup (hash_table, "subnet_mask");
+
+                        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                                     "hbox_wired_subnet"));
+                        if (tmp != NULL) {
+                                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                                             "label_wired_subnet"));
+                                gtk_label_set_label (GTK_LABEL (widget), g_variant_get_string (tmp, NULL));
+                        }
+                        gtk_widget_show (widget);
+                }
         }
 
         /* set IPv4 */
@@ -1494,8 +1594,12 @@ panel_populate_wired_device (PanelDeviceItem *item)
                 g_variant_unref (ip6);
         if (routes != NULL)
                 g_variant_unref (routes);
+        if (options != NULL)
+                g_variant_unref (options);
         if (nameservers != NULL)
                 g_variant_unref (nameservers);
+        if (hash_table != NULL)
+                g_hash_table_unref (hash_table);
         g_variant_unref (hw_address);
         g_variant_unref (speed);
 }
