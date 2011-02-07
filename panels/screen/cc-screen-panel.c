@@ -21,12 +21,12 @@
 
 #include "cc-screen-panel.h"
 
-#define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
-
 G_DEFINE_DYNAMIC_TYPE (CcScreenPanel, cc_screen_panel, CC_TYPE_PANEL)
 
 #define SCREEN_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_SCREEN_PANEL, CcScreenPanelPrivate))
+
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
 
 struct _CcScreenPanelPrivate
 {
@@ -139,7 +139,7 @@ on_signal (GDBusProxy *proxy,
            GVariant   *parameters,
            gpointer    user_data)
 {
-  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (user_data)->priv;
+  CcScreenPanel *self = CC_SCREEN_PANEL (user_data);
 
   if (g_strcmp0 (signal_name, "BrightnessChanged") == 0)
     {
@@ -147,15 +147,14 @@ on_signal (GDBusProxy *proxy,
       GtkRange *range;
 
       /* changed, but ignoring */
-      if (priv->setting_brightness)
+      if (self->priv->setting_brightness)
         return;
 
       /* update the bar */
       g_variant_get (parameters,
                      "(u)",
                      &brightness);
-      range = GTK_RANGE (gtk_builder_get_object (priv->builder,
-                                                 "screen_brightness_hscale"));
+      range = GTK_RANGE (WID ("screen_brightness_hscale"));
       gtk_range_set_value (range, brightness);
     }
 }
@@ -222,7 +221,7 @@ get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
   g_variant_get (result,
                  "(u)",
                  &brightness);
-  range = GTK_RANGE (gtk_builder_get_object (priv->builder, "screen_brightness_hscale"));
+  range = GTK_RANGE (WID ("screen_brightness_hscale"));
   gtk_range_set_range (range, 0, 100);
   gtk_range_set_increments (range, 1, 10);
   gtk_range_set_value (range, brightness);
@@ -361,22 +360,20 @@ cc_screen_panel_init (CcScreenPanel *self)
   self->priv->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
 
   /* bind the auto dim checkbox */
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "screen_auto_reduce_checkbutton"));
+  widget = WID ("screen_auto_reduce_checkbutton");
   g_settings_bind (self->priv->gsd_settings,
                    "idle-dim-battery",
                    widget, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* display off time */
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "screen_brightness_combobox"));
+  widget = WID ("screen_brightness_combobox");
   set_dpms_value_for_combo (GTK_COMBO_BOX (widget), self);
   g_signal_connect (widget, "changed",
                     G_CALLBACK (dpms_combo_changed_cb),
                     self);
 
-  widget = WID (self->priv->builder, "screen_vbox");
+  widget = WID ("screen_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
 }
 
