@@ -207,12 +207,14 @@ get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
   GVariant *result;
   guint brightness;
   GtkRange *range;
-  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (user_data)->priv;
+  CcScreenPanel *self = CC_SCREEN_PANEL (user_data);
 
   result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
   if (result == NULL)
     {
-      g_printerr ("Error getting brightness: %s\n", error->message);
+      gtk_widget_hide (WID ("screen_brightness_hscale"));
+      gtk_widget_hide (WID ("screen_auto_reduce_checkbutton"));
+      g_debug ("Error getting brightness: %s", error->message);
       g_error_free (error);
       return;
     }
