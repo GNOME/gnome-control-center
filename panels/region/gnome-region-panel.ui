@@ -82,6 +82,11 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area1">
+            <property name="can_focus">False</property>
+          </object>
+        </child>
         <child>
           <object class="GtkVBox" id="region_vbox">
             <property name="visible">True</property>
@@ -225,7 +230,6 @@
                                   <object class="GtkTreeView" id="xkb_layouts_selected">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="has_tooltip">False</property>
                                     <property name="headers_visible">False</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection" id="treeview-selection1"/>
@@ -328,7 +332,6 @@
                           <object class="GtkVBox" id="vbox33">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="border_width">0</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkVBox" id="vbox34">
@@ -336,51 +339,110 @@
                                 <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
-                                  <object class="GtkCheckButton" id="chk_separate_group_per_window">
-                                    <property name="label" translatable="yes">_Separate layout for each window</property>
+                                  <object class="GtkRadioButton" id="chk_same_group">
+                                    <property name="label" translatable="yes">Use same layout in all windows</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="use_action_appearance">False</property>
-                                    <property name="use_underline">True</property>
                                     <property name="xalign">0</property>
+                                    <property name="active">True</property>
                                     <property name="draw_indicator">True</property>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
                                     <property name="position">0</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="chk_new_windows_inherit_layout">
-                                    <property name="label" translatable="yes">New windows u_se active window's layout</property>
+                                  <object class="GtkRadioButton" id="chk_separate_group_per_window">
+                                    <property name="label" translatable="yes">Allow different layouts for each window</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="use_action_appearance">False</property>
-                                    <property name="use_underline">True</property>
                                     <property name="xalign">0</property>
+                                    <property name="active">True</property>
                                     <property name="draw_indicator">True</property>
+                                    <property name="group">chk_same_group</property>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <placeholder/>
+                                  <object class="GtkAlignment" id="alignment1">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="left_padding">12</property>
+                                    <child>
+                                      <object class="GtkVBox" id="vbox4">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <child>
+                                          <object class="GtkRadioButton" id="chk_new_windows_default_layout">
+                                            <property name="label" translatable="yes">Use default layout in new windows</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">False</property>
+                                            <property name="use_action_appearance">False</property>
+                                            <property name="xalign">0</property>
+                                            <property name="active">True</property>
+                                            <property name="draw_indicator">True</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">True</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkRadioButton" id="chk_new_windows_inherit_layout">
+                                            <property name="label" translatable="yes">Use previous window's layout in new windows</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">False</property>
+                                            <property name="use_action_appearance">False</property>
+                                            <property name="xalign">0</property>
+                                            <property name="active">True</property>
+                                            <property name="draw_indicator">True</property>
+                                            <property name="group">chk_new_windows_default_layout</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">True</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
                             <child>
-                              <placeholder/>
+                              <object class="GtkLabel" id="label2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
                             </child>
                             <child>
                               <object class="GtkHButtonBox" id="hbuttonbox2">
@@ -479,11 +541,6 @@ default settings</property>
             <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
-        </child>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
-            <property name="can_focus">False</property>
-          </object>
         </child>
       </object>
     </child>

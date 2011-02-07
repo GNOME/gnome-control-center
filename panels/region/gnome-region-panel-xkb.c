@@ -82,19 +82,6 @@ reset_to_defaults (GtkWidget * button, GtkBuilder * dialog)
 }
 
 static void
-chk_separate_group_per_window_toggled (GSettings * settings,
-				       const gchar * key,
-				       GtkBuilder * dialog)
-{
-	if (!strcmp (key, GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW)) {
-		gboolean gpw = g_settings_get_boolean (settings, key);
-		gtk_widget_set_sensitive (WID
-					  ("chk_new_windows_inherit_layout"),
-					  gpw);
-	}
-}
-
-static void
 chk_new_windows_inherit_layout_toggled (GtkWidget *
 					chk_new_windows_inherit_layout,
 					GtkBuilder * dialog)
@@ -131,13 +118,25 @@ setup_xkb_tabs (GtkBuilder * dialog)
 	gkbd_keyboard_config_init (&initial_config, engine);
 	gkbd_keyboard_config_load_from_x_initial (&initial_config, NULL);
 
+	/* Set initial state */
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("chk_separate_group_per_window")),
+				      g_settings_get_boolean (xkb_desktop_settings,
+							      GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (chk_new_windows_inherit_layout),
+				      xkb_get_default_group () < 0);
+
 	g_settings_bind (xkb_desktop_settings,
 			 GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW,
 			 WID ("chk_separate_group_per_window"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
-	g_signal_connect (xkb_desktop_settings, "changed",
-			  G_CALLBACK
-			  (chk_separate_group_per_window_toggled), dialog);
+	g_settings_bind (xkb_desktop_settings,
+			 GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW,
+			 WID ("chk_new_windows_inherit_layout"), "sensitive",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (xkb_desktop_settings,
+			 GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW,
+			 WID ("chk_new_windows_default_layout"), "sensitive",
+			 G_SETTINGS_BIND_DEFAULT);
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 	if (strcmp (xkl_engine_get_backend_name (engine), "XKB"))
@@ -146,15 +145,6 @@ setup_xkb_tabs (GtkBuilder * dialog)
 
 	xkb_layouts_prepare_selected_tree (dialog);
 	xkb_layouts_fill_selected_tree (dialog);
-
-	gtk_widget_set_sensitive (chk_new_windows_inherit_layout,
-				  gtk_toggle_button_get_active
-				  (GTK_TOGGLE_BUTTON
-				   (WID
-				    ("chk_separate_group_per_window"))));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				      (chk_new_windows_inherit_layout),
-				      xkb_get_default_group () < 0);
 
 	xkb_layouts_register_buttons_handlers (dialog);
 	g_signal_connect (G_OBJECT (WID ("xkb_reset_to_defaults")),
