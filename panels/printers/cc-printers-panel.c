@@ -241,9 +241,9 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       /* Translators: At least one input tray is empty */
       N_("Out of paper"),
       /* Translators: The printer is offline */
-      N_("Offline"),
+      NC_("printer state", "Offline"),
       /* Translators: Someone has paused the Printer */
-      N_("Paused"),
+      NC_("printer state", "Paused"),
       /* Translators: The printer marker supply waste receptacle is almost full */
       N_("Waste receptacle almost full"),
       /* Translators: The printer marker supply waste receptacle is full */
@@ -343,15 +343,15 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             {
               case 3:
                 /* Translators: Printer's state (can start new job without waiting) */
-                status = g_strdup ( _("Idle"));
+                status = g_strdup ( C_("printer state", "Idle"));
                 break;
               case 4:
                 /* Translators: Printer's state (jobs are processing) */
-                status = g_strdup ( _("Processing"));
+                status = g_strdup ( C_("printer state", "Processing"));
                 break;
               case 5:
                 /* Translators: Printer's state (no jobs can be processed) */
-                status = g_strdup ( _("Stopped"));
+                status = g_strdup ( C_("printer state", "Stopped"));
                 break;
             }
         }
@@ -876,31 +876,31 @@ actualize_jobs_list (CcPrintersPanel *self)
         {
           case IPP_JOB_PENDING:
             /* Translators: Job's state (job is waiting to be printed) */
-            state = g_strdup (_("Pending"));
+            state = g_strdup (C_("print job", "Pending"));
             break;
           case IPP_JOB_HELD:
             /* Translators: Job's state (job is held for printing) */
-            state = g_strdup (_("Held"));
+            state = g_strdup (C_("print job", "Held"));
             break;
           case IPP_JOB_PROCESSING:
             /* Translators: Job's state (job is currently printing) */
-            state = g_strdup (_("Processing"));
+            state = g_strdup (C_("print job", "Processing"));
             break;
           case IPP_JOB_STOPPED:
             /* Translators: Job's state (job has been stopped) */
-            state = g_strdup (_("Stopped"));
+            state = g_strdup (C_("print job", "Stopped"));
             break;
           case IPP_JOB_CANCELED:
             /* Translators: Job's state (job has been canceled) */
-            state = g_strdup (_("Canceled"));
+            state = g_strdup (C_("print job", "Canceled"));
             break;
           case IPP_JOB_ABORTED:
             /* Translators: Job's state (job has aborted due to error) */
-            state = g_strdup (_("Aborted"));
+            state = g_strdup (C_("print job", "Aborted"));
             break;
           case IPP_JOB_COMPLETED:
             /* Translators: Job's state (job has completed successfully) */
-            state = g_strdup (_("Completed"));
+            state = g_strdup (C_("print job", "Completed"));
             break;
         }
 

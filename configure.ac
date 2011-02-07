@@ -32,7 +32,7 @@ GNOME_DOC_INIT
 
 # Internationalization support
 
-IT_PROG_INTLTOOL([0.40.0])
+IT_PROG_INTLTOOL([0.40.1])
 
 AM_GNU_GETTEXT_VERSION([0.17])
 AM_GNU_GETTEXT([external])
