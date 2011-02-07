@@ -108,12 +108,31 @@ PKG_CHECK_MODULES(PULSEAUDIO,
 AC_SUBST(PULSEAUDIO_CFLAGS)
 AC_SUBST(PULSEAUDIO_LIBS)
 
-AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h], have_cups=yes, have_cups=no)
-if test x$have_cups = xyes ; then
-  CUPS_LIBS=-lcups
-  AC_SUBST(CUPS_LIBS)
+# Check for CUPS 1.4 or newer
+AC_PATH_PROG(CUPS_CONFIG, cups-config, no)
+if test "x$CUPS_CONFIG" != "xno"; then
+  CUPS_API_VERSION=`$CUPS_CONFIG --api-version`
+  CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | sed -e "s/\./\n/g" | sed -n "1p"`
+  CUPS_API_MINOR=`echo $ECHO_N $CUPS_API_VERSION | sed -e "s/\./\n/g" | sed -n "2p"`
+
+  AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h], have_cups_headers=yes, have_cups_headers=no)
+  if test x$have_cups_headers = xyes ; then
+    if test $CUPS_API_MAJOR -gt 1 -o \
+            $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 4; then
+      have_cups=yes
+      CUPS_LIBS=-lcups
+      AC_SUBST(CUPS_LIBS)
+    else
+      have_cups=no
+      AC_MSG_WARN(*** Printers panel will not be built (CUPS 1.4 or newer not found) ***)
+    fi
+  else
+    have_cups=no
+    AC_MSG_WARN(*** Printers panel will not be built (CUPS header files not found) ***)
+  fi
 else
-  AC_MSG_WARN(*** Printers panel will not be built (CUPS header files not found) ***)
+  have_cups=no
+  AC_MSG_WARN(*** Printers panel will not be built (cups-config not found) ***)
 fi
 AM_CONDITIONAL(BUILD_PRINTERS, [test x$have_cups = xyes])
 
