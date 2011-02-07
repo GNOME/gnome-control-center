@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 16:39+0200\n"
-"PO-Revision-Date: 2011-02-05 16:39+0300\n"
+"POT-Creation-Date: 2011-02-07 14:49+0200\n"
+"PO-Revision-Date: 2011-02-07 14:49+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -338,22 +338,26 @@ msgstr "المنطقة:"
 msgid "September"
 msgstr "سبتمبر"
 
-#: ../panels/datetime/dt-lockbutton.c:347 ../panels/screen/screen.ui.h:13
+#: ../panels/datetime/dt-lockbutton.c:347
+#: ../panels/printers/pp-lockbutton.c:347 ../panels/screen/screen.ui.h:13
 #: ../panels/user-accounts/um-lockbutton.c:347
 msgid "Lock"
 msgstr "أوصِد"
 
-#: ../panels/datetime/dt-lockbutton.c:356 ../panels/network/network.ui.h:26
+#: ../panels/datetime/dt-lockbutton.c:356
+#: ../panels/printers/pp-lockbutton.c:356 ../panels/network/network.ui.h:26
 #: ../panels/user-accounts/um-lockbutton.c:356
 msgid "Unlock"
 msgstr "افتح"
 
 #: ../panels/datetime/dt-lockbutton.c:365
+#: ../panels/printers/pp-lockbutton.c:365
 #: ../panels/user-accounts/um-lockbutton.c:365
 msgid "Locked"
 msgstr "مُوصد"
 
 #: ../panels/datetime/dt-lockbutton.c:374
+#: ../panels/printers/pp-lockbutton.c:374
 #: ../panels/user-accounts/um-lockbutton.c:374
 msgid ""
 "Dialog is unlocked.\n"
@@ -363,6 +367,7 @@ msgstr ""
 "انقر لمنع أي تغييرات"
 
 #: ../panels/datetime/dt-lockbutton.c:383
+#: ../panels/printers/pp-lockbutton.c:383
 #: ../panels/user-accounts/um-lockbutton.c:383
 msgid ""
 "Dialog is locked.\n"
@@ -372,6 +377,7 @@ msgstr ""
 "انقر للسماح بالتغييرات"
 
 #: ../panels/datetime/dt-lockbutton.c:392
+#: ../panels/printers/pp-lockbutton.c:392
 #: ../panels/user-accounts/um-lockbutton.c:392
 msgid ""
 "System policy prevents changes.\n"
@@ -983,180 +989,204 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "اسطوانة;قرص;صوت;صورة;فديو;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:221
+#: ../panels/printers/cc-printers-panel.c:222
 msgid "Low on toner"
 msgstr "الحبر قليل"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:223
+#: ../panels/printers/cc-printers-panel.c:224
 msgid "Out of toner"
 msgstr "نفد الحبر"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:226
+#: ../panels/printers/cc-printers-panel.c:227
 msgid "Low on developer"
 msgstr "المُحمِّض قليل"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:229
+#: ../panels/printers/cc-printers-panel.c:230
 msgid "Out of developer"
 msgstr "نفد المُحمِّض"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:231
+#: ../panels/printers/cc-printers-panel.c:232
 msgid "Low on a marker supply"
 msgstr "اللون قليل"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:233
+#: ../panels/printers/cc-printers-panel.c:234
 msgid "Out of a marker supply"
 msgstr "نفد اللون"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:235
+#: ../panels/printers/cc-printers-panel.c:236
 msgid "Open cover"
 msgstr "الغطاء مفتوح"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:237
+#: ../panels/printers/cc-printers-panel.c:238
 msgid "Open door"
 msgstr "الباب مفنوح"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:239
+#: ../panels/printers/cc-printers-panel.c:240
 msgid "Low on paper"
 msgstr "الورق قليل"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:241
+#: ../panels/printers/cc-printers-panel.c:242
 msgid "Out of paper"
 msgstr "نفد الورق"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:243
+#: ../panels/printers/cc-printers-panel.c:244
+msgctxt "printer state"
 msgid "Offline"
 msgstr "غير متصلة"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:245
+#: ../panels/printers/cc-printers-panel.c:246
+msgctxt "printer state"
 msgid "Paused"
 msgstr "مُلبثة"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:247
+#: ../panels/printers/cc-printers-panel.c:248
 msgid "Waste receptacle almost full"
 msgstr "حاوية النفايات على وشك الامتلاء"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:249
+#: ../panels/printers/cc-printers-panel.c:250
 msgid "Waste receptacle full"
 msgstr "حاوية النفايات ممتلئة"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:251
+#: ../panels/printers/cc-printers-panel.c:252
 msgid "The optical photo conductor is near end of life"
 msgstr "قاربت صلاحية المقاوم الضوئي على الانتهاء"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:253
+#: ../panels/printers/cc-printers-panel.c:254
 msgid "The optical photo conductor is no longer functioning"
 msgstr "لم يعد المقاوم الضوئي يعمل"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:345
+#: ../panels/printers/cc-printers-panel.c:346
+msgctxt "printer state"
 msgid "Idle"
 msgstr "ساكنة"
 
 #. Translators: Printer's state (jobs are processing)
-#. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:349
-#: ../panels/printers/cc-printers-panel.c:885
+#: ../panels/printers/cc-printers-panel.c:350
+msgctxt "printer state"
 msgid "Processing"
-msgstr "يُعالج"
+msgstr "تُعالِج"
 
 #. Translators: Printer's state (no jobs can be processed)
-#. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:353
-#: ../panels/printers/cc-printers-panel.c:889
+#: ../panels/printers/cc-printers-panel.c:354
+msgctxt "printer state"
 msgid "Stopped"
-msgstr "متوقف"
+msgstr "متوقفة"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:466
+#: ../panels/printers/cc-printers-panel.c:468
 #, c-format
-msgid "%d active"
-msgstr "%d نشطة"
+msgid "%u active"
+msgid_plural "%u active"
+msgstr[0] "لا مهام نشطة"
+msgstr[1] "%u نشطة"
+msgstr[2] "%u نشطتين"
+msgstr[3] "%u نشطة"
+msgstr[4] "%u نشطة"
+msgstr[5] "%u نشطة"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:877
+#: ../panels/printers/cc-printers-panel.c:879
+msgctxt "print job"
 msgid "Pending"
-msgstr "منتظر"
+msgstr "منتظرة"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:881
+#: ../panels/printers/cc-printers-panel.c:883
+msgctxt "print job"
 msgid "Held"
-msgstr "معلق"
+msgstr "مُعلَّقة"
+
+#. Translators: Job's state (job is currently printing)
+#: ../panels/printers/cc-printers-panel.c:887
+msgctxt "print job"
+msgid "Processing"
+msgstr "تُعالَج"
+
+#. Translators: Job's state (job has been stopped)
+#: ../panels/printers/cc-printers-panel.c:891
+msgctxt "print job"
+msgid "Stopped"
+msgstr "متوقفة"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:893
+#: ../panels/printers/cc-printers-panel.c:895
+msgctxt "print job"
 msgid "Canceled"
-msgstr "ملغى"
+msgstr "ملغاة"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:897
+#: ../panels/printers/cc-printers-panel.c:899
+msgctxt "print job"
 msgid "Aborted"
-msgstr "مُجهض"
+msgstr "مُجهضَة"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:901
+#: ../panels/printers/cc-printers-panel.c:903
+msgctxt "print job"
 msgid "Completed"
-msgstr "مُنجز"
+msgstr "مُنجزَة"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:996
+#: ../panels/printers/cc-printers-panel.c:998
 msgid "Job Title"
 msgstr "عنوان المهمة"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1004
+#: ../panels/printers/cc-printers-panel.c:1006
 msgid "Job State"
 msgstr "حالة المهمة"
 
 #. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:1010
+#: ../panels/printers/cc-printers-panel.c:1012
 msgid "User"
 msgstr "المستخدم"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1016
+#: ../panels/printers/cc-printers-panel.c:1018
 msgid "Time"
 msgstr "الوقت"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1206
+#: ../panels/printers/cc-printers-panel.c:1208
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "تعذّر الاتصال بناقل النظام: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1858
+#: ../panels/printers/cc-printers-panel.c:1860
 msgid "Test page"
 msgstr "صفحة اختبار"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1866
+#: ../panels/printers/cc-printers-panel.c:1868
 msgid "Clean print heads"
 msgstr "نظف رؤوس الطباعة"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1871
+#: ../panels/printers/cc-printers-panel.c:1873
 msgid "An error has occured during a maintenance command."
 msgstr "حدث عطل أثناء تنفيذ أمر الصيانة."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1997
+#: ../panels/printers/cc-printers-panel.c:1999
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "تعذّر تحميل الواجهة: %s"
@@ -1178,101 +1208,96 @@ msgstr "الطابعات"
 msgid "---"
 msgstr "---"
 
-#: ../panels/printers/printers.ui.h:2
-msgid "0 active"
-msgstr "لا مهام نشطة"
-
-#: ../panels/printers/printers.ui.h:3
-#, fuzzy
-msgid "<b>Allowed users</b>"
-msgstr "<b>المستخدمين المسموح لهم</b>"
-
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:5
+#: ../panels/printers/printers.ui.h:3
 msgid "Active Print Jobs"
 msgstr "مهام الطباعة النشطة"
 
+#: ../panels/printers/printers.ui.h:4
+msgid "Allowed users"
+msgstr "المستخدمين المسموح لهم"
+
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:6
 msgid "Back"
 msgstr "إلى الخلف"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:8
 #: ../panels/region/gnome-region-panel-xkbot.c:229
 #: ../panels/sound/gvc-sound-theme-chooser.c:581
 msgid "Default"
 msgstr "المبدئي"
 
-#: ../panels/printers/printers.ui.h:10
+#: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
 msgstr "عنوان IP"
 
-#: ../panels/printers/printers.ui.h:11
+#: ../panels/printers/printers.ui.h:10
 msgid "Info"
 msgstr "معلومات"
 
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:11
 msgid "Jobs"
 msgstr "المهام"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:13
 msgid "Location"
 msgstr "المكان"
 
-#: ../panels/printers/printers.ui.h:15
+#: ../panels/printers/printers.ui.h:14
 msgid "Model"
 msgstr "الطراز"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:16
 msgid "Options"
 msgstr "الخيارات"
 
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:18
 msgid "Print Test Page"
 msgstr "اطبع صفحة اختبار"
 
-#: ../panels/printers/printers.ui.h:20
+#: ../panels/printers/printers.ui.h:19
 msgid "Printer"
 msgstr "الطابعة"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:21
 msgid "Printer Options"
 msgstr "خيارات الطابعة"
 
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:22
 msgid "Printing..."
 msgstr "يطبع..."
 
 #. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:24
 msgid "Show"
 msgstr "أظهر"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:26
 msgid "Supply"
 msgstr "المداد"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Allow different layouts for each window"
+msgstr "اسمح بتخطيط مختلف لكل نافذة"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Install languages..."
 msgstr "ثبّت اللغات..."
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:3
 msgid "Language"
 msgstr "اللغة"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Layouts"
 msgstr "التخطيطات"
-
-#: ../panels/region/gnome-region-panel.ui.h:4
-msgid "New windows u_se active window's layout"
-msgstr "النوافذ الجديدة تستخدم _تخطيط النافذة النشطة"
 
 #: ../panels/region/gnome-region-panel.ui.h:5
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
@@ -1294,16 +1319,24 @@ msgid "Select a display language"
 msgstr "اختر لغة العرض"
 
 #: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Use default layout in new windows"
+msgstr "استخدم التخطيط المبدئي في النوافذ الجديدة"
+
+#: ../panels/region/gnome-region-panel.ui.h:11
+msgid "Use previous window's layout in new windows"
+msgstr "استخدم تخطيط النافذة السابقة في النوافذ الجديدة"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Use same layout in all windows"
+msgstr "استخدم نفس التخطيط في كل النوافذ"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "View and edit keyboard layout options"
 msgstr "اعرض وحلالا خيارات تخطيط لوحة المفاتيح"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "_Options..."
 msgstr "ال_خيارات…"
-
-#: ../panels/region/gnome-region-panel.ui.h:12
-msgid "_Separate layout for each window"
-msgstr "_تخطيط مستقل لكل نافذة"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
 msgid "Choose a Layout"
@@ -3215,6 +3248,12 @@ msgstr "مركز التحكّم"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_كل الإعدادات"
+
+#~ msgid "0 active"
+#~ msgstr "لا مهام نشطة"
+
+#~ msgid "New windows u_se active window's layout"
+#~ msgstr "النوافذ الجديدة تستخدم _تخطيط النافذة النشطة"
 
 #~ msgid "List of keyboard layouts selected for usage"
 #~ msgstr "قائمة بتخطيطات لوحة المفاتيح المختارة للاستخدام"
