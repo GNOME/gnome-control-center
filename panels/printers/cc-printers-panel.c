@@ -193,6 +193,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                  *active_jobs = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
+  guint                   num_jobs;
   int                     printer_state = 3;
   int                     id = -1;
   int                     i, j;
@@ -462,8 +463,9 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-jobs-label");
+      num_jobs = priv->num_jobs < 0 ? 0 : (guint) priv->num_jobs;
       /* Translators: there is n active print jobs on this printer */
-      active_jobs = g_strdup_printf (_("%d active"), priv->num_jobs);
+      active_jobs = g_strdup_printf (ngettext ("%u active", "%u active", num_jobs), num_jobs);
 
       if (active_jobs)
         {
