@@ -512,6 +512,7 @@ get_regions (TzLocation             *loc,
   gchar *zone;
   gchar **split;
   gchar **split_translated;
+  gchar *translated_city;
 
   zone = g_strdup (loc->zone);
   g_strdelimit (zone, "_", ' ');
@@ -533,15 +534,19 @@ get_regions (TzLocation             *loc,
                                          REGION_COL_REGION_TRANSLATED, split_translated[0], -1);
     }
 
+  /* g_regex_split_simple() splits too much for us, and would break
+   * America/Argentina/Buenos_Aires into 3 strings, so rejoin the city part */
+  translated_city = g_strjoinv ("/", split_translated + 1);
 
   gtk_list_store_insert_with_values (data->city_store, NULL, 0,
                                      CITY_COL_CITY, split[1],
-                                     CITY_COL_CITY_TRANSLATED, split_translated[1],
+                                     CITY_COL_CITY_TRANSLATED, translated_city,
                                      CITY_COL_REGION, split[0],
                                      CITY_COL_REGION_TRANSLATED, split_translated[0],
                                      CITY_COL_ZONE, loc->zone,
                                      -1);
 
+  g_free (translated_city);
   g_strfreev (split);
   g_strfreev (split_translated);
 }
