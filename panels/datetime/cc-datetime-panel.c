@@ -436,6 +436,7 @@ update_timezone (CcDateTimePanel *self)
   widget = (GtkWidget *) gtk_builder_get_object (priv->builder,
                                                  "city_combobox");
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+  gtk_tree_model_filter_refilter ((GtkTreeModelFilter *) gtk_builder_get_object (priv->builder, "city-modelfilter"));
   gtk_tree_model_get_iter_first (model, &iter);
 
   do
@@ -562,9 +563,10 @@ city_model_filter_func (GtkTreeModel *model,
   gchar *city_region = NULL;
   gboolean result;
 
+  if (gtk_combo_box_get_active_iter (combo, &combo_iter) == FALSE)
+    return FALSE;
 
   combo_model = gtk_combo_box_get_model (combo);
-  gtk_combo_box_get_active_iter (combo, &combo_iter);
   gtk_tree_model_get (combo_model, &combo_iter,
                       CITY_COL_CITY, &active_region, -1);
 
@@ -842,8 +844,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   update_time (self);
 
-  get_system_timezone_async ((GetTimezoneFunc) get_timezone_cb, self, NULL);
-
   priv->locations = (GtkTreeModel*) gtk_builder_get_object (priv->builder,
                                                             "region-liststore");
 
@@ -863,6 +863,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                                           (GtkTreeModelFilterVisibleFunc) city_model_filter_func,
                                           widget,
                                           NULL);
+
+  /* After the initial setup, so we can be sure that
+   * the model is filled up */
+  get_system_timezone_async ((GetTimezoneFunc) get_timezone_cb, self, NULL);
 
   queue_clock_update (self);
 
