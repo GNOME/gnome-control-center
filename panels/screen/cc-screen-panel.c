@@ -32,6 +32,7 @@ struct _CcScreenPanelPrivate
 {
   GSettings     *lock_settings;
   GSettings     *gsd_settings;
+  GSettings     *session_settings;
   GCancellable  *cancellable;
   GtkBuilder    *builder;
   GDBusProxy    *proxy;
@@ -79,6 +80,11 @@ cc_screen_panel_dispose (GObject *object)
     {
       g_object_unref (priv->gsd_settings);
       priv->gsd_settings = NULL;
+    }
+  if (priv->session_settings)
+    {
+      g_object_unref (priv->session_settings);
+      priv->session_settings = NULL;
     }
   if (priv->cancellable != NULL)
     {
@@ -289,6 +295,7 @@ dpms_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
   /* set both battery and ac keys */
   g_settings_set_int (self->priv->gsd_settings, "sleep-display-ac", value);
   g_settings_set_int (self->priv->gsd_settings, "sleep-display-battery", value);
+  g_settings_set (self->priv->session_settings, "idle-delay", "u", value);
 }
 
 static void
@@ -414,6 +421,7 @@ cc_screen_panel_init (CcScreenPanel *self)
                     G_CALLBACK (on_lock_settings_changed),
                     self);
   self->priv->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
+  self->priv->session_settings = g_settings_new ("org.gnome.desktop.session");
 
   /* bind the auto dim checkbox */
   widget = WID ("screen_auto_reduce_checkbutton");
