@@ -326,14 +326,18 @@ set_dpms_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
   GtkTreeIter iter;
   GtkTreeModel *model;
   gint value;
-  gint value_tmp;
+  gint value_tmp, value_prev;
   gboolean ret;
+  guint i;
 
   /* get entry */
   model = gtk_combo_box_get_model (combo_box);
   ret = gtk_tree_model_get_iter_first (model, &iter);
   if (!ret)
     return;
+
+  value_prev = 0;
+  i = 0;
 
   /* try to make the UI match the AC setting */
   value = g_settings_get_int (self->priv->gsd_settings, "sleep-display-ac");
@@ -342,12 +346,18 @@ set_dpms_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
       gtk_tree_model_get (model, &iter,
                           1, &value_tmp,
                           -1);
-      if (value == value_tmp)
+      if (value == value_tmp ||
+	  (value_tmp > value_prev && value < value_tmp))
         {
           gtk_combo_box_set_active_iter (combo_box, &iter);
-          break;
+          return;
         }
+      value_prev = value_tmp;
+      i++;
     } while (gtk_tree_model_iter_next (model, &iter));
+
+  /* If we didn't find the setting in the list */
+  gtk_combo_box_set_active (combo_box, i - 1);
 }
 
 static void
@@ -356,14 +366,18 @@ set_lock_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
   GtkTreeIter iter;
   GtkTreeModel *model;
   guint value;
-  gint value_tmp;
+  gint value_tmp, value_prev;
   gboolean ret;
+  guint i;
 
   /* get entry */
   model = gtk_combo_box_get_model (combo_box);
   ret = gtk_tree_model_get_iter_first (model, &iter);
   if (!ret)
     return;
+
+  value_prev = 0;
+  i = 0;
 
   /* try to make the UI match the AC setting */
   g_settings_get (self->priv->lock_settings, "lock-delay", "u", &value);
@@ -372,12 +386,18 @@ set_lock_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
       gtk_tree_model_get (model, &iter,
                           1, &value_tmp,
                           -1);
-      if (value == value_tmp)
+      if (value == value_tmp ||
+	  (value_tmp > value_prev && value < value_tmp))
         {
           gtk_combo_box_set_active_iter (combo_box, &iter);
-          break;
+          return;
         }
+      value_prev = value_tmp;
+      i++;
     } while (gtk_tree_model_iter_next (model, &iter));
+
+  /* If we didn't find the setting in the list */
+  gtk_combo_box_set_active (combo_box, i - 1);
 }
 
 static void
