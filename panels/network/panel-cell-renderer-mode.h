@@ -25,7 +25,8 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include "panel-common.h"
+#include "nm-device.h"
+#include "nm-access-point.h"
 
 #define PANEL_TYPE_CELL_RENDERER_MODE           (panel_cell_renderer_mode_get_type())
 #define PANEL_CELL_RENDERER_MODE(obj)           (G_TYPE_CHECK_INSTANCE_CAST((obj), PANEL_TYPE_CELL_RENDERER_MODE, PanelCellRendererMode))
@@ -51,7 +52,7 @@ struct _PanelCellRendererModeClass
         GtkCellRendererPixbufClass parent_class;
 };
 
-GType            panel_cell_renderer_mode_get_type              (void);
+GType            panel_cell_renderer_mode_get_type      (void);
 GtkCellRenderer *panel_cell_renderer_mode_new           (void);
 
 G_END_DECLS
