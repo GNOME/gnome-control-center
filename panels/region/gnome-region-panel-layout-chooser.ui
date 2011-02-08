@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
-  <object class="GtkListStore" id="filtered_layout_list_model">
+  <object class="GtkListStore" id="layout_list_model">
     <columns>
       <!-- column-name sort_order -->
       <column type="gchararray"/>
@@ -9,9 +9,14 @@
       <column type="gchararray"/>
       <!-- column-name xkb_id -->
       <column type="gchararray"/>
-      <!-- column-name real_id -->
+      <!-- column-name country_desc -->
+      <column type="gchararray"/>
+      <!-- column-name language_desc -->
       <column type="gchararray"/>
     </columns>
+  </object>
+  <object class="GtkTreeModelFilter" id="filtered_layout_list_model">
+    <property name="child_model">layout_list_model</property>
   </object>
   <object class="GtkDialog" id="xkb_layout_chooser">
     <property name="visible">True</property>
