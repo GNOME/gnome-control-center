@@ -29,6 +29,8 @@
 
 #include <cups/cups.h>
 
+#include <math.h>
+
 #include "pp-lockbutton.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
@@ -38,9 +40,7 @@ G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 
 #define MECHANISM_BUS "org.opensuse.CupsPkHelper.Mechanism"
 
-#define SUPPLY_BAR_WIDTH 140
-#define SUPPLY_BAR_HEIGHT 10
-#define SUPPLY_BAR_SPACE 5
+#define SUPPLY_BAR_HEIGHT 20
 
 struct _CcPrintersPanelPrivate
 {
@@ -188,9 +188,10 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                 **available_commands = NULL;
   gchar                  *printer_commands = NULL;
   gchar                 **printer_reasons = NULL;
-  gchar                  *marker_levels = NULL;
+  gchar                  *marker_types = NULL;
   gchar                  *printer_name = NULL;
   gchar                  *active_jobs = NULL;
+  gchar                  *supply_type = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
   guint                   num_jobs;
@@ -283,8 +284,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             printer_state = atoi (priv->dests[id].options[i].value);
           else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state-reasons") == 0)
             reason = priv->dests[id].options[i].value;
-          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-levels") == 0)
-            marker_levels = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-types") == 0)
+            marker_types = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-commands") == 0)
             printer_commands = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-make-and-model") == 0)
@@ -440,25 +441,30 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "supply-drawing-area");
+      gtk_widget_set_size_request (widget, -1, SUPPLY_BAR_HEIGHT);
+      gtk_widget_queue_draw (widget);
 
-      if (marker_levels)
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "supply-label");
+
+      if (marker_types && g_strrstr (marker_types, "toner") != NULL)
+        /* Translators: Toner supply */
+        supply_type = g_strdup ( _("Toner Level"));
+      else if (marker_types && g_strrstr (marker_types, "ink") != NULL)
+        /* Translators: Ink supply */
+        supply_type = g_strdup ( _("Ink Level"));
+      else
+        /* Translators: By supply we mean ink, toner, staples, water, ... */
+        supply_type = g_strdup ( _("Supply Level"));
+
+      if (supply_type)
         {
-          gchar **marker_levelsv = NULL;
-
-          widget = (GtkWidget*)
-            gtk_builder_get_object (priv->builder, "supply-drawing-area");
-
-          marker_levelsv = g_strsplit (marker_levels, ",", -1);
-          gtk_widget_set_size_request (widget,
-                                       -1,
-                                       ((g_strv_length (marker_levelsv) - 1) * SUPPLY_BAR_SPACE
-                                       + g_strv_length (marker_levelsv) * SUPPLY_BAR_HEIGHT));
-          g_strfreev (marker_levelsv);
+          gtk_label_set_text (GTK_LABEL (widget), supply_type);
+          g_free (supply_type);
         }
       else
-        gtk_widget_set_size_request (widget, -1, -1);
-
-      gtk_widget_queue_draw (widget);
+        gtk_label_set_text (GTK_LABEL (widget), none);
 
 
       widget = (GtkWidget*)
@@ -1363,6 +1369,39 @@ printer_disable_cb (GObject    *gobject,
     }
 }
 
+typedef struct {
+  gchar *color;
+  gchar *type;
+  gchar *name;
+  gint   level;
+} MarkerItem;
+
+static gint
+markers_cmp (gconstpointer a,
+             gconstpointer b)
+{
+  MarkerItem *x = (MarkerItem*) a;
+  MarkerItem *y = (MarkerItem*) b;
+
+  if (x->level < y->level)
+    return 1;
+  else if (x->level == y->level)
+    return 0;
+  else
+    return -1;
+}
+
+static void
+rounded_rectangle (cairo_t *cr, double x, double y, double w, double h, double r)
+{
+    cairo_new_sub_path (cr);
+    cairo_arc (cr, x + r, y + r, r, M_PI, 3 * M_PI / 2);
+    cairo_arc (cr, x + w - r, y + r, r, 3 *M_PI / 2, 2 * M_PI);
+    cairo_arc (cr, x + w - r, y + h - r, r, 0, M_PI / 2);
+    cairo_arc (cr, x + r, y + h - r, r, M_PI / 2, M_PI);
+    cairo_close_path (cr);
+}
+
 static gboolean
 supply_levels_draw_cb (GtkWidget *widget,
                        cairo_t *cr,
@@ -1370,9 +1409,11 @@ supply_levels_draw_cb (GtkWidget *widget,
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkStyleContext        *context;
   gchar                  *marker_levels = NULL;
   gchar                  *marker_colors = NULL;
   gchar                  *marker_names = NULL;
+  gchar                  *marker_types = NULL;
   gchar                  *tooltip_text = NULL;
   gint                    width;
   gint                    height;
@@ -1399,14 +1440,29 @@ supply_levels_draw_cb (GtkWidget *widget,
             marker_levels = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-colors") == 0)
             marker_colors = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-types") == 0)
+            marker_types = priv->dests[priv->current_dest].options[i].value;
         }
 
-      if (marker_levels && marker_colors && marker_names)
+      if (marker_levels && marker_colors && marker_names && marker_types)
         {
-          gchar **marker_levelsv = NULL;
-          gchar **marker_colorsv = NULL;
-          gchar **marker_namesv = NULL;
-          gchar  *tmp = NULL;
+          GdkRGBA   border_color = {0.0, 0.0, 0.0, 1.0};
+          GSList   *markers = NULL;
+          GSList   *tmp_list = NULL;
+          GValue    int_val = {0};
+          gchar   **marker_levelsv = NULL;
+          gchar   **marker_colorsv = NULL;
+          gchar   **marker_namesv = NULL;
+          gchar   **marker_typesv = NULL;
+          gchar    *tmp = NULL;
+          gint      border_radius = 3;
+
+          context = gtk_widget_get_style_context ((GtkWidget *)
+            gtk_builder_get_object (priv->builder, "printer-options-button"));
+          gtk_style_context_get_border_color (context, 0, &border_color);
+          gtk_style_context_get_property (
+            context, GTK_STYLE_PROPERTY_BORDER_RADIUS, 0, &int_val);
+          border_radius = g_value_get_int (&int_val);
 
           widget = (GtkWidget*)
             gtk_builder_get_object (priv->builder, "supply-drawing-area");
@@ -1414,68 +1470,76 @@ supply_levels_draw_cb (GtkWidget *widget,
           marker_levelsv = g_strsplit (marker_levels, ",", -1);
           marker_colorsv = g_strsplit (marker_colors, ",", -1);
           marker_namesv = g_strsplit (marker_names, ",", -1);
+          marker_typesv = g_strsplit (marker_types, ",", -1);
   
-          width = width < SUPPLY_BAR_WIDTH ? width : SUPPLY_BAR_WIDTH;
           for (i = 0; i < g_strv_length (marker_levelsv); i++)
             {
+              MarkerItem *marker;
+
+              if (g_strcmp0 (marker_typesv[i], "ink") == 0 ||
+                  g_strcmp0 (marker_typesv[i], "toner") == 0)
+                {
+                  marker = g_new0 (MarkerItem, 1);
+                  marker->type = g_strdup (marker_typesv[i]);
+                  marker->name = g_strdup (marker_namesv[i]);
+                  marker->color = g_strdup (marker_colorsv[i]);
+                  marker->level = atoi (marker_levelsv[i]);
+
+                  markers = g_slist_prepend (markers, marker);
+                }
+            }
+
+          markers = g_slist_sort (markers, markers_cmp);
+
+          for (tmp_list = markers; tmp_list; tmp_list = tmp_list->next)
+            {
               GdkRGBA color = {0.0, 0.0, 0.0, 1.0};
-              GdkRGBA light_color;
               double  display_value;
               int     value;
 
-              value = atoi (marker_levelsv[i]);
+              value = ((MarkerItem*) tmp_list->data)->level;
 
-              gdk_rgba_parse (&color, marker_colorsv[i]);
-              light_color.red = color.red < 0.8 ? color.red + 0.8 : 1.0;
-              light_color.green = color.green < 0.8 ? color.green + 0.8 : 1.0;
-              light_color.blue = color.blue < 0.8 ? color.blue + 0.8 : 1.0;
-              light_color.alpha = 1.0;
+              gdk_rgba_parse (&color, ((MarkerItem*) tmp_list->data)->color);
 
               if (value >= 0)
                 {
-                  display_value = value / 100.0 * width;
-
-                  cairo_rectangle (cr,
-                                   0.0,
-                                   i * (SUPPLY_BAR_HEIGHT + SUPPLY_BAR_SPACE),
-                                   display_value,
-                                   SUPPLY_BAR_HEIGHT);
+                  display_value = value / 100.0 * (width - 3.0);
                   gdk_cairo_set_source_rgba (cr, &color);
-                  cairo_fill (cr);
-
-                  cairo_rectangle (cr,
-                                   display_value,
-                                   i * (SUPPLY_BAR_HEIGHT + SUPPLY_BAR_SPACE),
-                                   width - display_value,
-                                   SUPPLY_BAR_HEIGHT);
-                  gdk_cairo_set_source_rgba (cr, &light_color);
-                  cairo_fill (cr);
-                }
-              else
-                {
-                  cairo_rectangle (cr,
-                                   0.0,
-                                   i * (SUPPLY_BAR_HEIGHT + SUPPLY_BAR_SPACE),
-                                   width,
-                                   SUPPLY_BAR_HEIGHT);
-                  gdk_cairo_set_source_rgba (cr, &light_color);
+                  rounded_rectangle (cr, 1.5, 1.5, display_value, SUPPLY_BAR_HEIGHT - 3.0, border_radius);
                   cairo_fill (cr);
                 }
 
               if (tooltip_text)
                 {
-                  tmp = g_strdup_printf ("%s\n%s", tooltip_text, marker_namesv[i]);
+                  tmp = g_strdup_printf ("%s\n%s",
+                                         tooltip_text,
+                                         ((MarkerItem*) tmp_list->data)->name);
                   g_free (tooltip_text);
                   tooltip_text = tmp;
                   tmp = NULL;
                 }
               else
-                tooltip_text = g_strdup_printf ("%s", marker_namesv[i]);
+                tooltip_text = g_strdup_printf ("%s",
+                                                ((MarkerItem*) tmp_list->data)->name);
             }
+
+          cairo_set_line_width (cr, 1.0);
+          gdk_cairo_set_source_rgba (cr, &border_color);
+          rounded_rectangle (cr, 1.5, 1.5, width - 3.0, SUPPLY_BAR_HEIGHT - 3.0, border_radius);
+          cairo_stroke (cr);
+
+          for (tmp_list = markers; tmp_list; tmp_list = tmp_list->next)
+            {
+              g_free (((MarkerItem*) tmp_list->data)->name);
+              g_free (((MarkerItem*) tmp_list->data)->type);
+              g_free (((MarkerItem*) tmp_list->data)->color);
+            }
+          g_slist_free_full (markers, g_free);
 
           g_strfreev (marker_levelsv);
           g_strfreev (marker_colorsv);
           g_strfreev (marker_namesv);
+          g_strfreev (marker_typesv);
         }
 
       g_free (marker_names);
@@ -2054,11 +2118,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "back-button-2");
   g_signal_connect (widget, "clicked", G_CALLBACK (go_back_cb), self);
 
-   widget = (GtkWidget*)
+  widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-jobs-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (switch_to_jobs_cb), self);
 
-   widget = (GtkWidget*)
+  widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-options-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (switch_to_options_cb), self);
 
