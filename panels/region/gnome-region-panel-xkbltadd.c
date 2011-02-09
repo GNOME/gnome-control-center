@@ -101,12 +101,19 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 					    (GTK_WINDOW (dlg),
 					     GTK_WINDOW (CWID
 							 ("xkb_layout_chooser")));
+					gtk_window_set_modal (GTK_WINDOW
+							      (dlg), TRUE);
+
 					gtk_widget_show_all (dlg);
 				}
 			}
 
 			return;
 		}
+	if (search_pattern_list != NULL) {
+		g_strfreev (search_pattern_list);
+		search_pattern_list = NULL;
+	}
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
