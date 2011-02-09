@@ -57,45 +57,6 @@ static void gnome_wp_xml_set_bool (const xmlNode * parent,
   }
 }
 
-static void gnome_wp_load_legacy (GnomeWpXml *data) {
-  FILE * fp;
-  gchar * foo, * filename;
-
-  filename = g_build_filename (g_get_home_dir (), ".gnome2",
-			       "wallpapers.list", NULL);
-
-  if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
-    if ((fp = fopen (filename, "r")) != NULL) {
-      foo = (gchar *) g_malloc (sizeof (gchar) * 4096);
-      while (fgets (foo, 4096, fp)) {
-	GnomeWPItem * item;
-
-	if (foo[strlen (foo) - 1] == '\n') {
-	  foo[strlen (foo) - 1] = '\0';
-	}
-
-	item = g_hash_table_lookup (data->wp_hash, foo);
-	if (item != NULL) {
-	  continue;
-	}
-
-	if (!g_file_test (foo, G_FILE_TEST_EXISTS)) {
-	  continue;
-	}
-
-	item = gnome_wp_item_new (foo, data->wp_hash, NULL, data->thumb_factory);
-	if (item != NULL && item->fileinfo == NULL) {
-	  gnome_wp_item_free (item);
-	}
-      }
-      fclose (fp);
-      g_free (foo);
-    }
-  }
-
-  g_free (filename);
-}
-
 static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 				   const gchar * filename) {
   xmlDoc * wplist;
@@ -332,27 +293,7 @@ static void gnome_wp_xml_load_from_dir (const gchar *path,
 void gnome_wp_xml_load_list (GnomeWpXml *data) {
   const char * const *system_data_dirs;
   gchar * datadir;
-  gchar * wpdbfile;
   gint i;
-
-  wpdbfile = g_build_filename (g_get_home_dir (),
-			       ".gnome2",
-			       "backgrounds.xml",
-			       NULL);
-
-  if (g_file_test (wpdbfile, G_FILE_TEST_EXISTS)) {
-    gnome_wp_xml_load_xml (data, wpdbfile);
-  } else {
-    g_free (wpdbfile);
-    wpdbfile = g_build_filename (g_get_home_dir (),
-				 ".gnome2",
-				 "wp-list.xml",
-				 NULL);
-    if (g_file_test (wpdbfile, G_FILE_TEST_EXISTS)) {
-      gnome_wp_xml_load_xml (data, wpdbfile);
-    }
-  }
-  g_free (wpdbfile);
 
   datadir = g_build_filename (g_get_user_data_dir (),
                               "gnome-background-properties",
@@ -368,8 +309,6 @@ void gnome_wp_xml_load_list (GnomeWpXml *data) {
     gnome_wp_xml_load_from_dir (datadir, data);
     g_free (datadir);
   }
-
-  gnome_wp_load_legacy (data);
 }
 
 static void gnome_wp_list_flatten (const gchar * key, GnomeWPItem * item,
