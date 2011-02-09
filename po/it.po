@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.9x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 13:06+0100\n"
-"PO-Revision-Date: 2011-02-03 13:03+0100\n"
+"POT-Creation-Date: 2011-02-07 21:11+0100\n"
+"PO-Revision-Date: 2011-02-09 01:32+0100\n"
 "Last-Translator: Luca Ferretti <lferrett@gnome.org>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -349,23 +349,27 @@ msgstr "Regione:"
 msgid "September"
 msgstr "Settembre"
 
-#: ../panels/datetime/dt-lockbutton.c:347 ../panels/screen/screen.ui.h:13
+#: ../panels/datetime/dt-lockbutton.c:347
+#: ../panels/printers/pp-lockbutton.c:347 ../panels/screen/screen.ui.h:13
 #: ../panels/user-accounts/um-lockbutton.c:347
 msgid "Lock"
 msgstr "Blocco"
 
-#: ../panels/datetime/dt-lockbutton.c:356 ../panels/network/network.ui.h:23
+#: ../panels/datetime/dt-lockbutton.c:356
+#: ../panels/printers/pp-lockbutton.c:356 ../panels/network/network.ui.h:23
 #: ../panels/user-accounts/um-lockbutton.c:356
 msgid "Unlock"
 msgstr "Sblocca"
 
 #: ../panels/datetime/dt-lockbutton.c:365
+#: ../panels/printers/pp-lockbutton.c:365
 #: ../panels/user-accounts/um-lockbutton.c:365
 msgid "Locked"
 msgstr "Bloccato"
 
 # FIXME s/dialog/panel ?
 #: ../panels/datetime/dt-lockbutton.c:374
+#: ../panels/printers/pp-lockbutton.c:374
 #: ../panels/user-accounts/um-lockbutton.c:374
 msgid ""
 "Dialog is unlocked.\n"
@@ -375,6 +379,7 @@ msgstr ""
 "Fare clic per impedire ulteriori modifiche"
 
 #: ../panels/datetime/dt-lockbutton.c:383
+#: ../panels/printers/pp-lockbutton.c:383
 #: ../panels/user-accounts/um-lockbutton.c:383
 msgid ""
 "Dialog is locked.\n"
@@ -384,6 +389,7 @@ msgstr ""
 "Fare clic per apportare modifiche"
 
 #: ../panels/datetime/dt-lockbutton.c:392
+#: ../panels/printers/pp-lockbutton.c:392
 #: ../panels/user-accounts/um-lockbutton.c:392
 msgid ""
 "System policy prevents changes.\n"
@@ -410,14 +416,14 @@ msgid "Left"
 msgstr "Sinistra"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:503
+#: ../panels/display/xrandr-capplet.c:497
 msgid "Monitor"
 msgstr "Monitor"
 
 # rotazione
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:339
-#: ../panels/display/xrandr-capplet.c:378
+#: ../panels/display/xrandr-capplet.c:333
+#: ../panels/display/xrandr-capplet.c:372
 #: ../panels/universal-access/uap.ui.h:58
 msgid "Normal"
 msgstr "Normale"
@@ -466,15 +472,15 @@ msgstr ""
 "Pannello;Proiettore;xrandr;Schermo;Risoluzione;Dimensioni;Refresh;Display;"
 
 # riferito a rotazione
-#: ../panels/display/xrandr-capplet.c:340
+#: ../panels/display/xrandr-capplet.c:334
 msgid "Anti-Clockwise"
 msgstr "Antioraria"
 
-#: ../panels/display/xrandr-capplet.c:341
+#: ../panels/display/xrandr-capplet.c:335
 msgid "Clockwise"
 msgstr "Oraria"
 
-#: ../panels/display/xrandr-capplet.c:342
+#: ../panels/display/xrandr-capplet.c:336
 msgid "180 Degrees"
 msgstr "180 gradi"
 
@@ -483,25 +489,25 @@ msgstr "180 gradi"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:479
+#: ../panels/display/xrandr-capplet.c:473
 msgid "Mirror Displays"
 msgstr "Monitor duplicati"
 
-#: ../panels/display/xrandr-capplet.c:612
+#: ../panels/display/xrandr-capplet.c:603
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d × %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:614
+#: ../panels/display/xrandr-capplet.c:605
 #, c-format
 msgid "%d x %d"
 msgstr "%d × %d"
 
-#: ../panels/display/xrandr-capplet.c:1527
+#: ../panels/display/xrandr-capplet.c:1518
 msgid "Drag to change primary display."
 msgstr "Trascinare per cambiare monitor primario."
 
-#: ../panels/display/xrandr-capplet.c:1585
+#: ../panels/display/xrandr-capplet.c:1576
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -510,82 +516,82 @@ msgstr ""
 "risistemare il suo posizionamento."
 
 # FIXME credo serva come 24 ore, sarebbe meglio commentarla
-#: ../panels/display/xrandr-capplet.c:1975
+#: ../panels/display/xrandr-capplet.c:1966
 msgid "%a %R"
 msgstr "%a %-k.%M"
 
 # FIXME credo serva come AM/PM, sarebbe meglio commentarla
-#: ../panels/display/xrandr-capplet.c:1977
+#: ../panels/display/xrandr-capplet.c:1968
 msgid "%a %l:%M %p"
 msgstr "%a %-l.%M %p"
 
-#: ../panels/display/xrandr-capplet.c:2262
+#: ../panels/display/xrandr-capplet.c:2214
 msgid "Could not save the monitor configuration"
 msgstr "Impossibile salvare la configurazione del monitor"
 
-#: ../panels/display/xrandr-capplet.c:2285
+#: ../panels/display/xrandr-capplet.c:2239
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Impossibile ottenere un bus di sessione mentre viene applicata la "
 "configurazione del monitor"
 
-#: ../panels/display/xrandr-capplet.c:2330
+#: ../panels/display/xrandr-capplet.c:2284
 msgid "Could not detect displays"
 msgstr "Impossibile rilevare i monitor"
 
-#: ../panels/display/xrandr-capplet.c:2538
+#: ../panels/display/xrandr-capplet.c:2479
 msgid "Could not get screen information"
 msgstr "Impossibile ottenere informazioni sullo schermo"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:247
+#: ../panels/info/cc-info-panel.c:417
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:261
+#: ../panels/info/cc-info-panel.c:431
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "%u byte"
 msgstr[1] "%u byte"
 
-#: ../panels/info/cc-info-panel.c:269
+#: ../panels/info/cc-info-panel.c:439
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f kB"
 
-#: ../panels/info/cc-info-panel.c:274
+#: ../panels/info/cc-info-panel.c:444
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MB"
 
-#: ../panels/info/cc-info-panel.c:279
+#: ../panels/info/cc-info-panel.c:449
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GB"
 
-#: ../panels/info/cc-info-panel.c:284
+#: ../panels/info/cc-info-panel.c:454
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:289
+#: ../panels/info/cc-info-panel.c:459
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PB"
 
-#: ../panels/info/cc-info-panel.c:294
+#: ../panels/info/cc-info-panel.c:464
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EB"
 
-#: ../panels/info/cc-info-panel.c:404
+#: ../panels/info/cc-info-panel.c:574
 msgid "Unknown model"
 msgstr "Modello sconosciuto"
 
-#: ../panels/info/cc-info-panel.c:466
+#: ../panels/info/cc-info-panel.c:637
 #, c-format
 msgid "Version %s"
 msgstr "Versione %s"
@@ -612,22 +618,26 @@ msgid "Disk:"
 msgstr "Disco:"
 
 #: ../panels/info/info.ui.h:3
+msgid "Graphics:"
+msgstr "Grafica:"
+
+#: ../panels/info/info.ui.h:4
 msgid "Memory:"
 msgstr "Memoria:"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:5
 msgid "More Info"
 msgstr "Maggiori informazioni"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:6
 msgid "OS type:"
 msgstr "Tipo OS:"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:7
 msgid "Processor:"
 msgstr "Processore:"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:8
 msgid "Update Available"
 msgstr "Aggiornamenti disponibili"
 
@@ -1008,203 +1018,200 @@ msgstr "cd;dvd;usb;audio;video;disco;"
 
 # cfr traduzioni simili su gtk+
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:220
+#: ../panels/printers/cc-printers-panel.c:222
 msgid "Low on toner"
 msgstr "Toner in esaurimento"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:222
+#: ../panels/printers/cc-printers-panel.c:224
 msgid "Out of toner"
 msgstr "Toner esaurito"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:225
+#: ../panels/printers/cc-printers-panel.c:227
 msgid "Low on developer"
 msgstr "Developer in esaurimento"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:228
+#: ../panels/printers/cc-printers-panel.c:230
 msgid "Out of developer"
 msgstr "Developer esaurito"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:230
+#: ../panels/printers/cc-printers-panel.c:232
 msgid "Low on a marker supply"
 msgstr "Fornitura toner in esaurimento"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:232
+#: ../panels/printers/cc-printers-panel.c:234
 msgid "Out of a marker supply"
 msgstr "Fornitura toner esaurita"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:234
+#: ../panels/printers/cc-printers-panel.c:236
 msgid "Open cover"
 msgstr "Coperchio aperto"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:236
+#: ../panels/printers/cc-printers-panel.c:238
 msgid "Open door"
 msgstr "Sportello aperto"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:238
+#: ../panels/printers/cc-printers-panel.c:240
 msgid "Low on paper"
 msgstr "Carta in esaurimento"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:240
+#: ../panels/printers/cc-printers-panel.c:242
 msgid "Out of paper"
 msgstr "Carta esaurita"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:242
+#: ../panels/printers/cc-printers-panel.c:244
+msgctxt "printer state"
 msgid "Offline"
 msgstr "Fuori rete"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:244
+#: ../panels/printers/cc-printers-panel.c:246
+msgctxt "printer state"
 msgid "Paused"
 msgstr "In pausa"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:246
+#: ../panels/printers/cc-printers-panel.c:248
 msgid "Waste receptacle almost full"
 msgstr ""
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:248
+#: ../panels/printers/cc-printers-panel.c:250
 msgid "Waste receptacle full"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:250
+#: ../panels/printers/cc-printers-panel.c:252
 msgid "The optical photo conductor is near end of life"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:252
+#: ../panels/printers/cc-printers-panel.c:254
 msgid "The optical photo conductor is no longer functioning"
 msgstr ""
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:344
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:346
 msgctxt "printer state"
 msgid "Idle"
 msgstr "Inattiva"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:348
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:350
 msgctxt "printer state"
 msgid "Processing"
 msgstr "In elaborazione"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:352
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:354
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Ferma"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:465
+#: ../panels/printers/cc-printers-panel.c:468
 #, c-format
-msgid "%d active"
-msgstr ""
+msgid "%u active"
+msgid_plural "%u active"
+msgstr[0] "%u attivo"
+msgstr[1] "%u attivi"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:786
+#: ../panels/printers/cc-printers-panel.c:879
 msgctxt "print job"
 msgid "Pending"
 msgstr ""
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:790
+#: ../panels/printers/cc-printers-panel.c:883
 msgctxt "print job"
 msgid "Held"
 msgstr ""
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:794
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:887
 msgctxt "print job"
 msgid "Processing"
 msgstr "In elaborazione"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:798
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:891
 msgctxt "print job"
 msgid "Stopped"
-msgstr "Ferma"
+msgstr "Fermato"
 
-# FIXME!!
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:802
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:895
 msgctxt "print job"
 msgid "Canceled"
-msgstr "Annulla"
+msgstr "Annullato"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:806
+#: ../panels/printers/cc-printers-panel.c:899
 msgctxt "print job"
 msgid "Aborted"
-msgstr ""
+msgstr "Interrotto"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:810
+#: ../panels/printers/cc-printers-panel.c:903
 msgctxt "print job"
 msgid "Completed"
-msgstr ""
+msgstr "Completato"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:905
+#: ../panels/printers/cc-printers-panel.c:998
 msgid "Job Title"
-msgstr ""
+msgstr "Titolo lavoro"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:913
+#: ../panels/printers/cc-printers-panel.c:1006
 msgid "Job State"
-msgstr ""
+msgstr "Stato lavoro"
 
 #. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:919
+#: ../panels/printers/cc-printers-panel.c:1012
 msgid "User"
 msgstr "Utente"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:925
+#: ../panels/printers/cc-printers-panel.c:1018
 msgid "Time"
 msgstr "Data"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1115
+#: ../panels/printers/cc-printers-panel.c:1208
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "Impossibile connettersi al bus di sistema: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1767
+#: ../panels/printers/cc-printers-panel.c:1860
 msgid "Test page"
 msgstr "Pagina di test"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1775
+#: ../panels/printers/cc-printers-panel.c:1868
 msgid "Clean print heads"
 msgstr "Pulisci testina stampa"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1780
+#: ../panels/printers/cc-printers-panel.c:1873
 msgid "An error has occured during a maintenance command."
 msgstr "Si è verificato un errore durante un comando di manutenzione."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1906
+#: ../panels/printers/cc-printers-panel.c:1999
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Impossibile caricare l'interfaccia: %s"
@@ -1227,116 +1234,108 @@ msgstr "Stampanti"
 msgid "---"
 msgstr ""
 
-#: ../panels/printers/printers.ui.h:2
-msgid "0 active"
-msgstr ""
-
-#: ../panels/printers/printers.ui.h:3
-msgid "<b>Allowed users</b>"
-msgstr ""
-
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:5
+#: ../panels/printers/printers.ui.h:3
 msgid "Active Print Jobs"
 msgstr "Lavori di stampa attivi"
 
+#: ../panels/printers/printers.ui.h:4
+msgid "Allowed users"
+msgstr ""
+
 # FIXME!! acceleratore
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:6
 msgid "Back"
 msgstr "Indietro"
 
 # FIXME context
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:8
 #: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:589
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
 msgid "Default"
 msgstr "Predefinito"
 
-#: ../panels/printers/printers.ui.h:10
+#: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
 msgstr "Indirizzo IP"
 
-#: ../panels/printers/printers.ui.h:11
+#: ../panels/printers/printers.ui.h:10
 msgid "Info"
 msgstr "Informazioni"
 
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:11
 msgid "Jobs"
 msgstr "Lavori"
 
 # FIXME: contesto
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:13
 msgid "Location"
 msgstr "Collocazione"
 
-#: ../panels/printers/printers.ui.h:15
+#: ../panels/printers/printers.ui.h:14
 msgid "Model"
 msgstr "Modello"
 
 # FIXME: accel
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:16
 msgid "Options"
 msgstr "Opzioni"
 
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:18
 msgid "Print Test Page"
 msgstr "Stampa pagina prova"
 
-#: ../panels/printers/printers.ui.h:20
+#: ../panels/printers/printers.ui.h:19
 msgid "Printer"
 msgstr "Stampante"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:21
 msgid "Printer Options"
 msgstr "Opzioni stampante"
 
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:22
 msgid "Printing..."
 msgstr "Stampa..."
 
 # FIXME accell
 #. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:24
 msgid "Show"
 msgstr "Mostra"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:26
 msgid "Supply"
 msgstr "Livelli"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Allow different layouts for each window"
+msgstr "Consentire disposizioni distinte per ciascuna finestra"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Install languages..."
 msgstr "Installa lingue..."
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:3
 msgid "Language"
 msgstr "Lingua"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Layouts"
 msgstr "Disposizioni"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
-msgid "List of keyboard layouts selected for usage"
-msgstr "Elenco delle disposizioni di tastiera selezionate in base all'uso"
-
 #: ../panels/region/gnome-region-panel.ui.h:5
-msgid "New windows u_se active window's layout"
-msgstr "Le nuove finestre u_sano la disposizione della finestra attiva"
-
-#: ../panels/region/gnome-region-panel.ui.h:6
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Regione e lingua"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1344,54 +1343,46 @@ msgstr ""
 "Sostituisce le attuali impostazioni di disposizione\n"
 "tastiera con quelle predefinite"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Reset to De_faults"
 msgstr "Ripristina pr_edefinite"
 
 # FIXME ???????
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Select a display language"
 msgstr "Selezionare la lingua da usare"
 
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Use default layout in new windows"
+msgstr "Usare la disposizione predefinita nelle nuove finestre"
+
 #: ../panels/region/gnome-region-panel.ui.h:11
+msgid "Use previous window's layout in new windows"
+msgstr "Usare la disposizione della finestra precedente nelle nuove finestre"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Use same layout in all windows"
+msgstr "Usare la stessa disposizione in tutte le finestre"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "View and edit keyboard layout options"
 msgstr "Visualizza e modifica le opzioni di disposizione tastiera"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "_Options..."
 msgstr "_Opzioni..."
 
-#: ../panels/region/gnome-region-panel.ui.h:13
-msgid "_Separate layout for each window"
-msgstr "Disposizione distinta per ciascuna _finestra"
-
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
-msgid "By _country"
-msgstr "Per _nazione"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-msgid "By _language"
-msgstr "Per _lingua"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "Scegliere una disposizione"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:4
-msgid "Preview:"
-msgstr "Anteprima:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
+msgid "Preview"
+msgstr "Anteprima"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:5
-msgid "_Country:"
-msgstr "_Nazione:"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:6
-msgid "_Language:"
-msgstr "_Lingua:"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:7
-msgid "_Variants:"
-msgstr "_Varianti:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+msgid "Select an input source to add"
+msgstr "Selezionare un sorgente di input da aggiungere"
 
 #: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
@@ -1542,27 +1533,27 @@ msgstr "Imposta le preferenze per mouse e touchpad"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Trackpad;Puntatore;Click;Clic;Tap;Doppio;Pulsante;Trackball;Cursore;"
 
-#: ../panels/network/cc-network-panel.c:1086
-#: ../panels/network/cc-network-panel.c:1108
+#: ../panels/network/cc-network-panel.c:1154
+#: ../panels/network/cc-network-panel.c:1176
 #, c-format
 msgid "%i Mb/s"
 msgstr "%i Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1088
+#: ../panels/network/cc-network-panel.c:1156
 #, c-format
 msgid "%i Gb/s"
 msgstr "%i Gb/s"
 
-#: ../panels/network/cc-network-panel.c:1106
+#: ../panels/network/cc-network-panel.c:1174
 #, c-format
 msgid "%i kb/s"
 msgstr "%i kb/s"
 
-#: ../panels/network/cc-network-panel.c:1763
+#: ../panels/network/cc-network-panel.c:1890
 msgid "Network proxy"
 msgstr "Proxy di rete"
 
-#: ../panels/network/cc-network-panel.c:1772
+#: ../panels/network/cc-network-panel.c:1899
 msgid "Set the system proxy settings"
 msgstr "Regola le impostazioni del proxy di sistema"
 
@@ -2098,7 +2089,7 @@ msgstr "Rilevamento picco"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1507
 #: ../panels/sound/gvc-mixer-dialog.c:1719
-#: ../panels/sound/gvc-sound-theme-chooser.c:599
+#: ../panels/sound/gvc-sound-theme-chooser.c:591
 msgid "Name"
 msgstr "Nome"
 
@@ -2196,28 +2187,28 @@ msgstr "_Preferenze audio"
 msgid "Muted"
 msgstr "Muto"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:189
+#: ../panels/sound/gvc-sound-theme-chooser.c:188
 msgid "Built-in"
 msgstr "Integrato"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:459
-#: ../panels/sound/gvc-sound-theme-chooser.c:471
-#: ../panels/sound/gvc-sound-theme-chooser.c:483
+#: ../panels/sound/gvc-sound-theme-chooser.c:451
+#: ../panels/sound/gvc-sound-theme-chooser.c:463
+#: ../panels/sound/gvc-sound-theme-chooser.c:475
 msgid "Sound Preferences"
 msgstr "Preferenze dell'audio"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:462
-#: ../panels/sound/gvc-sound-theme-chooser.c:473
-#: ../panels/sound/gvc-sound-theme-chooser.c:485
+#: ../panels/sound/gvc-sound-theme-chooser.c:454
+#: ../panels/sound/gvc-sound-theme-chooser.c:465
+#: ../panels/sound/gvc-sound-theme-chooser.c:477
 msgid "Testing event sound"
 msgstr "Test evento sonoro"
 
 # (ndt) indica il tipo di effetto sonoro, da dove arriva
-#: ../panels/sound/gvc-sound-theme-chooser.c:590
+#: ../panels/sound/gvc-sound-theme-chooser.c:582
 msgid "From theme"
 msgstr "Dal tema"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:778
+#: ../panels/sound/gvc-sound-theme-chooser.c:764
 msgid "C_hoose an alert sound:"
 msgstr "_Scegliere un suono di avviso:"
 
@@ -2924,105 +2915,105 @@ msgstr ""
 msgid "This user does not exist."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:359
+#: ../panels/user-accounts/um-user-panel.c:357
 msgid "Failed to delete user"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:419
+#: ../panels/user-accounts/um-user-panel.c:417
 msgid "You cannot delete your own account."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:428
+#: ../panels/user-accounts/um-user-panel.c:426
 #, c-format
 msgid "%s is still logged in"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:432
+#: ../panels/user-accounts/um-user-panel.c:430
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:441
+#: ../panels/user-accounts/um-user-panel.c:439
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
 msgstr "_Elimina file"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "_Keep Files"
 msgstr "Mantieni _file"
 
 # FIXME
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:448
 msgid "_Cancel"
 msgstr "A_nnulla"
 
-#: ../panels/user-accounts/um-user-panel.c:474
+#: ../panels/user-accounts/um-user-panel.c:472
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Account disabilitato"
 
-#: ../panels/user-accounts/um-user-panel.c:483
+#: ../panels/user-accounts/um-user-panel.c:481
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Da impostare al prossimo accesso"
 
-#: ../panels/user-accounts/um-user-panel.c:486
+#: ../panels/user-accounts/um-user-panel.c:484
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nessuno"
 
-#: ../panels/user-accounts/um-user-panel.c:808
+#: ../panels/user-accounts/um-user-panel.c:806
 msgid "Failed to contact the accounts service"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:810
+#: ../panels/user-accounts/um-user-panel.c:808
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Assicurarsi che AccountService sia installato e abilitato."
 
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:841
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:881
+#: ../panels/user-accounts/um-user-panel.c:879
 msgid "Create a user"
 msgstr "Crea un utente"
 
-#: ../panels/user-accounts/um-user-panel.c:892
-#: ../panels/user-accounts/um-user-panel.c:1191
+#: ../panels/user-accounts/um-user-panel.c:890
+#: ../panels/user-accounts/um-user-panel.c:1189
 msgid ""
 "To create a user,\n"
 "click the * icon first"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:901
+#: ../panels/user-accounts/um-user-panel.c:899
 msgid "Delete the selected user"
 msgstr "Elimina l'utente selezionato"
 
-#: ../panels/user-accounts/um-user-panel.c:913
-#: ../panels/user-accounts/um-user-panel.c:1196
+#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:1194
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:1091
+#: ../panels/user-accounts/um-user-panel.c:1089
 msgid "My Account"
 msgstr "Account personale"
 
-#: ../panels/user-accounts/um-user-panel.c:1101
+#: ../panels/user-accounts/um-user-panel.c:1099
 msgid "Other Accounts"
 msgstr "Altri account"
 
@@ -3281,6 +3272,27 @@ msgstr "Centro di controllo"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Tutte le impostazioni"
+
+#~ msgid "List of keyboard layouts selected for usage"
+#~ msgstr "Elenco delle disposizioni di tastiera selezionate in base all'uso"
+
+#~ msgid "New windows u_se active window's layout"
+#~ msgstr "Le nuove finestre u_sano la disposizione della finestra attiva"
+
+#~ msgid "By _country"
+#~ msgstr "Per _nazione"
+
+#~ msgid "By _language"
+#~ msgstr "Per _lingua"
+
+#~ msgid "_Country:"
+#~ msgstr "_Nazione:"
+
+#~ msgid "_Language:"
+#~ msgstr "_Lingua:"
+
+#~ msgid "_Variants:"
+#~ msgstr "_Varianti:"
 
 # capovolto, lo schermo... credo
 #~ msgid "Upside Down"
