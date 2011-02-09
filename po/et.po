@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-02-07 01:09+0000\n"
-"PO-Revision-Date: 2011-02-07 08:08+0200\n"
+"POT-Creation-Date: 2011-02-08 15:33+0000\n"
+"PO-Revision-Date: 2011-02-09 08:22+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -800,12 +800,14 @@ msgid "Out of paper"
 msgstr ""
 
 #. Translators: The printer is offline
+msgctxt "printer state"
 msgid "Offline"
-msgstr ""
+msgstr "Pole võrgus"
 
 #. Translators: Someone has paused the Printer
+msgctxt "printer state"
 msgid "Paused"
-msgstr ""
+msgstr "Peatatud"
 
 #. Translators: The printer marker supply waste receptacle is almost full
 msgid "Waste receptacle almost full"
@@ -824,51 +826,81 @@ msgid "The optical photo conductor is no longer functioning"
 msgstr ""
 
 #. Translators: Printer's state (can start new job without waiting)
+msgctxt "printer state"
 msgid "Idle"
 msgstr "Jõude"
 
 #. Translators: Printer's state (jobs are processing)
-#. Translators: Job's state (job is currently printing)
+msgctxt "printer state"
 msgid "Processing"
-msgstr ""
+msgstr "Töötlemine"
 
 #. Translators: Printer's state (no jobs can be processed)
-#. Translators: Job's state (job has been stopped)
+msgctxt "printer state"
 msgid "Stopped"
-msgstr ""
+msgstr "Seisma jäetud"
+
+#. Translators: Toner supply
+msgid "Toner Level"
+msgstr "Tooneri hulk"
+
+#. Translators: Ink supply
+msgid "Ink Level"
+msgstr "Tindi hulk"
+
+#. Translators: By supply we mean ink, toner, staples, water, ...
+msgid "Supply Level"
+msgstr "Kuluvahendi hulk"
 
 #. Translators: there is n active print jobs on this printer
 #, c-format
-msgid "%d active"
-msgstr ""
+msgid "%u active"
+msgid_plural "%u active"
+msgstr[0] "%u aktiivne"
+msgstr[1] "%u aktiivset"
 
 #. Translators: Job's state (job is waiting to be printed)
+msgctxt "print job"
 msgid "Pending"
-msgstr ""
+msgstr "Ootel"
 
 #. Translators: Job's state (job is held for printing)
+msgctxt "print job"
 msgid "Held"
-msgstr ""
+msgstr "Hoitakse kinni"
+
+#. Translators: Job's state (job is currently printing)
+msgctxt "print job"
+msgid "Processing"
+msgstr "Töötluses"
+
+#. Translators: Job's state (job has been stopped)
+msgctxt "print job"
+msgid "Stopped"
+msgstr "Peatatud"
 
 #. Translators: Job's state (job has been canceled)
+msgctxt "print job"
 msgid "Canceled"
-msgstr ""
+msgstr "Katkestatud"
 
 #. Translators: Job's state (job has aborted due to error)
+msgctxt "print job"
 msgid "Aborted"
-msgstr ""
+msgstr "Loobutud"
 
 #. Translators: Job's state (job has completed successfully)
+msgctxt "print job"
 msgid "Completed"
-msgstr ""
+msgstr "Valmis"
 
 #. Translators: Name of column showing titles of print jobs
 msgid "Job Title"
-msgstr ""
+msgstr "Töö pealkiri"
 
 #. Translators: Name of column showing statuses of print jobs
 msgid "Job State"
-msgstr ""
+msgstr "Töö seisund"
 
 #. Translators: Name of column showing names of creators of print jobs
 msgid "User"
@@ -915,15 +947,12 @@ msgstr "Printerid"
 msgid "---"
 msgstr "---"
 
-msgid "0 active"
-msgstr ""
-
-msgid "<b>Allowed users</b>"
-msgstr "<b>Lubatud kasutajad</b>"
-
 #. Translators: This tab contains list of active print jobs of the selected printer
 msgid "Active Print Jobs"
-msgstr ""
+msgstr "Aktiivsed printimistööd"
+
+msgid "Allowed users"
+msgstr "Lubatud kasutajad"
 
 #. Translators: Switch back to printer's info tab
 msgid "Back"
@@ -940,7 +969,7 @@ msgid "Info"
 msgstr "Andmed"
 
 msgid "Jobs"
-msgstr ""
+msgstr "Tööd"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
 msgid "Location"
@@ -1133,18 +1162,6 @@ msgstr "Hiire- ja puutepadjaeelistuste seadmine"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr ""
 
-#, c-format
-msgid "%i Mb/s"
-msgstr "%i Mb/s"
-
-#, c-format
-msgid "%i Gb/s"
-msgstr "%i Gb/s"
-
-#, c-format
-msgid "%i kb/s"
-msgstr "%i kb/s"
-
 msgid "Network proxy"
 msgstr "Võrgu proksi"
 
@@ -1175,14 +1192,6 @@ msgstr "Bluetooth"
 #. TRANSLATORS: device type
 msgid "Mesh"
 msgstr ""
-
-#. TRANSLATORS: AP type
-msgid "Ad-hoc"
-msgstr "Ad-hoc"
-
-#. TRANSLATORS: AP type
-msgid "Infrastructure"
-msgstr "Infrastruktuur"
 
 #. TRANSLATORS: device status
 msgid "Status unknown"
@@ -1223,6 +1232,26 @@ msgstr "Ühendatud"
 #. TRANSLATORS: device status
 msgid "Failed to connect"
 msgstr "Ühenduse loomine nurjus"
+
+#, c-format
+msgid "%i kb/s"
+msgstr "%i kb/s"
+
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i Mb/s"
+
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i Gb/s"
+
+#. TRANSLATORS: AP type
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+msgid "Infrastructure"
+msgstr "Infrastruktuur"
 
 msgid "Network"
 msgstr "Võrk"
