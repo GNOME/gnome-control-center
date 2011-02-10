@@ -28,14 +28,17 @@ INCLUDES =						\
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libbackground.la
 
+BUILT_SOURCES =            \
+	gdesktop-enums-types.c \
+	gdesktop-enums-types.h
+
 libbackground_la_SOURCES =		\
+	$(BUILT_SOURCES)			\
 	background-module.c		\
 	cc-background-panel.c		\
 	cc-background-panel.h		\
 	cc-background-item.c		\
 	cc-background-item.h		\
-	gdesktop-enums-types.c		\
-	gdesktop-enums-types.h		\
 	bg-source.c			\
 	bg-source.h			\
 	bg-pictures-source.c		\
@@ -92,6 +95,6 @@ desktopdir = $(datadir)/applications
 desktop_in_files = gnome-background-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(desktop_in_files) $(desktop_DATA) stamp-gdesktop-enums-types.h gdesktop-enums-types.h gdesktop-enums-types.c
+CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES) stamp-gdesktop-enums-types.h
 
 -include $(top_srcdir)/git.mk
