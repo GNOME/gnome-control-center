@@ -542,6 +542,7 @@ actualize_printers_list (CcPrintersPanel *self)
   GtkTreeView            *treeview;
   GtkTreeIter             iter;
   cups_job_t             *jobs = NULL;
+  gboolean                has_used_printer = FALSE;
   gboolean                has_separator = FALSE;
   gboolean                paused = FALSE;
   gboolean                valid = FALSE;
@@ -588,7 +589,7 @@ actualize_printers_list (CcPrintersPanel *self)
       num_jobs = cupsGetJobs (&jobs, priv->dests[i].name, 1, CUPS_WHICHJOBS_ALL);
       usage->printer_id = i;
       usage->usage = num_jobs;
-      usages = g_list_prepend (usages, usage);
+      usages = g_list_append (usages, usage);
       cupsFreeJobs (num_jobs, jobs);
     }
   num_jobs = 0;
@@ -601,19 +602,24 @@ actualize_printers_list (CcPrintersPanel *self)
       gchar *instance;
 
       i = ((PrinterUsage*) tmp_list->data)->printer_id;
-      if (((PrinterUsage*) tmp_list->data)->usage == 0 && !has_separator)
+      if (((PrinterUsage*) tmp_list->data)->usage == 0)
         {
-          has_separator = TRUE;
-          gtk_list_store_append (store, &iter);
-          gtk_list_store_set (store, &iter,
-                              PRINTER_ID_COLUMN, -1,
-                              PRINTER_NAME_COLUMN, NULL,
-                              PRINTER_PAUSED_COLUMN, FALSE,
-                              PRINTER_DEFAULT_ICON_COLUMN, FALSE,
-                              PRINTER_ICON_COLUMN, NULL,
-                              PRINTER_IS_SEPARATOR_COLUMN, TRUE,
-                              -1);
+          if (!has_separator && has_used_printer)
+            {
+              has_separator = TRUE;
+              gtk_list_store_append (store, &iter);
+              gtk_list_store_set (store, &iter,
+                                  PRINTER_ID_COLUMN, -1,
+                                  PRINTER_NAME_COLUMN, NULL,
+                                  PRINTER_PAUSED_COLUMN, FALSE,
+                                  PRINTER_DEFAULT_ICON_COLUMN, FALSE,
+                                  PRINTER_ICON_COLUMN, NULL,
+                                  PRINTER_IS_SEPARATOR_COLUMN, TRUE,
+                                  -1);
+            }
         }
+      else
+        has_used_printer = TRUE;
 
       gtk_list_store_append (store, &iter);
 
