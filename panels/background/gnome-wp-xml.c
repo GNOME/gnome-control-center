@@ -318,6 +318,43 @@ void gnome_wp_xml_load_list (GnomeWpXml *data) {
   }
 }
 
+GnomeWpXml *
+gnome_wp_xml_load_list_finish (GAsyncResult  *async_result)
+{
+	GSimpleAsyncResult *result = G_SIMPLE_ASYNC_RESULT (async_result);
+
+	g_return_val_if_fail (G_IS_ASYNC_RESULT (async_result), NULL);
+	g_warn_if_fail (g_simple_async_result_get_source_tag (result) == gnome_wp_xml_load_list_async);
+
+	return g_simple_async_result_get_op_res_gpointer (result);
+}
+
+static void
+load_list_thread (GSimpleAsyncResult *res,
+		  GObject *object,
+		  GCancellable *cancellable)
+{
+	GnomeWpXml *data;
+
+	data = g_simple_async_result_get_op_res_gpointer (res);
+	gnome_wp_xml_load_list (data);
+}
+
+void gnome_wp_xml_load_list_async (GnomeWpXml *data,
+				   GCancellable *cancellable,
+				   GAsyncReadyCallback callback,
+				   gpointer user_data)
+{
+	GSimpleAsyncResult *result;
+
+	g_return_if_fail (data != NULL);
+
+	result = g_simple_async_result_new (NULL, callback, user_data, gnome_wp_xml_load_list_async);
+	g_simple_async_result_set_op_res_gpointer (result, data, NULL);
+	g_simple_async_result_run_in_thread (result, (GSimpleAsyncThreadFunc) load_list_thread, G_PRIORITY_LOW, cancellable);
+	g_object_unref (result);
+}
+
 static void gnome_wp_list_flatten (const gchar * key, GnomeWPItem * item,
 				   GSList ** list) {
   g_return_if_fail (key != NULL);

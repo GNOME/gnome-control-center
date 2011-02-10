@@ -194,6 +194,24 @@ load_wallpapers (gchar              *key,
   gtk_tree_path_free (path);
 }
 
+static void
+list_load_cb (GObject *source_object,
+	      GAsyncResult *res,
+	      gpointer user_data)
+{
+  BgWallpapersSource *self = (BgWallpapersSource *) user_data;
+  GnomeWpXml *wp_xml;
+
+  wp_xml = gnome_wp_xml_load_list_finish (res);
+  g_hash_table_foreach (wp_xml->wp_hash,
+			(GHFunc) load_wallpapers,
+			self);
+
+  g_hash_table_destroy (wp_xml->wp_hash);
+  g_object_unref (wp_xml->settings);
+  g_free (wp_xml);
+}
+
 static gboolean
 reload_wallpapers (BgWallpapersSource *self)
 {
@@ -208,15 +226,7 @@ reload_wallpapers (BgWallpapersSource *self)
   wp_xml->thumb_height = THUMBNAIL_HEIGHT;
   wp_xml->thumb_factory = self->priv->thumb_factory;
 
-  gnome_wp_xml_load_list (wp_xml);
-  g_hash_table_foreach (wp_xml->wp_hash,
-                        (GHFunc) load_wallpapers,
-                        self);
-
-  g_hash_table_destroy (wp_xml->wp_hash);
-  g_object_unref (wp_xml->settings);
-  g_free (wp_xml);
-
+  gnome_wp_xml_load_list_async (wp_xml, NULL, list_load_cb, self);
   self->priv->reload_id = 0;
 
   return FALSE;

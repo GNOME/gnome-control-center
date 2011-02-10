@@ -22,6 +22,7 @@
 #define _GNOME_WP_XML_H_
 
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
+#include <gio/gio.h>
 
 typedef struct _GnomeWpXml GnomeWpXml;
 
@@ -37,6 +38,15 @@ struct _GnomeWpXml
 
 void gnome_wp_xml_load_list (GnomeWpXml *data);
 void gnome_wp_xml_save_list (GnomeWpXml *data);
+/* FIXME this should be an iterator instead, so the bg
+ * pops up as soon as a new one is available */
+void gnome_wp_xml_load_list_async (GnomeWpXml *data,
+				   GCancellable *cancellable,
+				   GAsyncReadyCallback callback,
+				   gpointer user_data);
+/* FIXME, this is ugly API, which wouldn't be
+ * needed if this was an object */
+GnomeWpXml *gnome_wp_xml_load_list_finish (GAsyncResult  *async_result);
 
 #endif
 
