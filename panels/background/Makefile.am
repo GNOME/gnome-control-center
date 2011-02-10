@@ -29,23 +29,23 @@ ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libbackground.la
 
 libbackground_la_SOURCES =		\
-	background-module.c	\
-	cc-background-panel.c	\
-	cc-background-panel.h	\
-	cc-background-item.c	\
-	cc-background-item.h	\
-	gdesktop-enums-types.c	\
-	gdesktop-enums-types.h	\
-	bg-source.c		\
-	bg-source.h		\
-	bg-pictures-source.c			\
-	bg-pictures-source.h			\
-	bg-wallpapers-source.c			\
-	bg-wallpapers-source.h			\
-	bg-colors-source.c			\
-	bg-colors-source.h			\
-	gnome-wp-info.c  gnome-wp-xml.c \
-	gnome-wp-info.h  gnome-wp-xml.h
+	background-module.c		\
+	cc-background-panel.c		\
+	cc-background-panel.h		\
+	cc-background-item.c		\
+	cc-background-item.h		\
+	gdesktop-enums-types.c		\
+	gdesktop-enums-types.h		\
+	bg-source.c			\
+	bg-source.h			\
+	bg-pictures-source.c		\
+	bg-pictures-source.h		\
+	bg-wallpapers-source.c		\
+	bg-wallpapers-source.h		\
+	bg-colors-source.c		\
+	bg-colors-source.h		\
+	gnome-wp-xml.c			\
+	gnome-wp-xml.h
 
 
 libbackground_la_LIBADD = \
