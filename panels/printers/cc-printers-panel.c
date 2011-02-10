@@ -42,6 +42,8 @@ G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 
 #define SUPPLY_BAR_HEIGHT 20
 
+#define EMPTY_TEXT "\xe2\x80\x94"
+
 struct _CcPrintersPanelPrivate
 {
   GtkBuilder *builder;
@@ -179,7 +181,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkTreeModel           *model;
   GtkTreeIter             iter;
-  const gchar            *none = "---";
   GtkWidget              *widget;
   gboolean                test_page_command_available = FALSE;
   gboolean                sensitive;
@@ -366,7 +367,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           g_free (printer_name);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), none);
+        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
 
         
       widget = (GtkWidget*)
@@ -378,7 +379,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           g_free (status);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), none);
+        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -390,7 +391,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           g_free (location);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), none);
+        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -402,7 +403,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           g_free (printer_make_and_model);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), none);
+        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -464,7 +465,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           g_free (supply_type);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), none);
+        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -479,7 +480,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           g_free (active_jobs);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), none);
+        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
     }
   else
     {
@@ -498,6 +499,22 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
       gtk_label_set_text (GTK_LABEL (widget), "");
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-ip-address-label");
+      gtk_label_set_text (GTK_LABEL (widget), "");
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "print-test-page-button");
+      gtk_widget_set_sensitive (widget, FALSE);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-options-button");
+      gtk_widget_set_sensitive (widget, FALSE);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-jobs-button");
+      gtk_widget_set_sensitive (widget, FALSE);
     }
 
   widget = (GtkWidget*)
@@ -818,11 +835,13 @@ populate_printers_list (CcPrintersPanel *self)
 
 
   renderer = gtk_cell_renderer_text_new ();
+  g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, "width-chars", 18, NULL);
   column = gtk_tree_view_column_new_with_attributes ("Printer", renderer,
                                                      "text", PRINTER_NAME_COLUMN, NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, set_cell_sensitivity_func,
                                            self, NULL);
   gtk_tree_view_column_set_expand (column, FALSE);
+  gtk_tree_view_column_set_min_width (column, 120);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
 
@@ -1427,17 +1446,17 @@ supply_levels_draw_cb (GtkWidget *widget,
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
+  width = gtk_widget_get_allocated_width (widget);
+  height = gtk_widget_get_allocated_height (widget);
+
+  cairo_rectangle (cr, 0.0, 0.0, width, height);
+  gdk_cairo_set_source_rgba (cr, &priv->background_color);
+  cairo_fill (cr);
+
   if (priv->current_dest >= 0 &&
       priv->current_dest < priv->num_dests &&
       priv->dests != NULL)
     {
-      width = gtk_widget_get_allocated_width (widget);
-      height = gtk_widget_get_allocated_height (widget);
-
-      cairo_rectangle (cr, 0.0, 0.0, width, height);
-      gdk_cairo_set_source_rgba (cr, &priv->background_color);
-      cairo_fill (cr);
-
       for (i = 0; i < priv->dests[priv->current_dest].num_options; i++)
         {
           if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-names") == 0)
