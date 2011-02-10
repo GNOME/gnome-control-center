@@ -344,7 +344,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             {
               case 3:
                 /* Translators: Printer's state (can start new job without waiting) */
-                status = g_strdup ( C_("printer state", "Idle"));
+                status = g_strdup ( C_("printer state", "Ready"));
                 break;
               case 4:
                 /* Translators: Printer's state (jobs are processing) */
