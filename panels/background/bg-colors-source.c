@@ -26,6 +26,7 @@
 #include "cc-background-item.h"
 
 #include <glib/gi18n-lib.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 
 G_DEFINE_TYPE (BgColorsSource, bg_colors_source, BG_TYPE_SOURCE)
 
@@ -55,36 +56,29 @@ bg_colors_source_init (BgColorsSource *self)
   GnomeDesktopThumbnailFactory *thumb_factory;
   guint i;
   GtkListStore *store;
-  GdkColor pcolor, scolor;
 
   store = bg_source_get_liststore (BG_SOURCE (self));
 
   thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
-  gdk_color_parse (PCOLOR, &pcolor);
-  gdk_color_parse (SCOLOR, &scolor);
-
   for (i = 0; i < G_N_ELEMENTS (items); i++)
     {
-      GnomeWPItem *item;
+      CcBackgroundItem *item;
       GIcon *pixbuf;
 
-      item = g_new0 (GnomeWPItem, 1);
+      item = cc_background_item_new (NULL);
 
-      item->filename = g_strdup ("(none)");
-      item->name = g_strdup (_(items[i].name));
-
-      item->pcolor = gdk_color_copy (&pcolor);
-      item->scolor = gdk_color_copy (&scolor);
-
-      item->shade_type = items[i].type;
-
-      cc_background_item_ensure_gnome_bg (item);
+      g_object_set (G_OBJECT (item),
+		    "name", _(items[i].name),
+		    "primary-color", PCOLOR,
+		    "secondary-color", SCOLOR,
+		    "shading", items[i].type,
+		    NULL);
 
       /* insert the item into the liststore */
       pixbuf = cc_background_item_get_thumbnail (item,
-                                            thumb_factory,
-                                            THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+						 thumb_factory,
+						 THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
       gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,
                                          1, item,

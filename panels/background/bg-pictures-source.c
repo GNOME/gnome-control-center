@@ -27,7 +27,7 @@
 #include <string.h>
 #include <gio/gio.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
-
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 
 G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
 
@@ -122,7 +122,7 @@ picture_scaled (GObject *source_object,
                 gpointer user_data)
 {
   BgPicturesSource *bg_source = BG_PICTURES_SOURCE (user_data);
-  GnomeWPItem *item;
+  CcBackgroundItem *item;
   GError *error = NULL;
   GdkPixbuf *pixbuf;
 
@@ -138,7 +138,7 @@ picture_scaled (GObject *source_object,
     {
       g_warning ("Failed to load image: %s", error->message);
       g_error_free (error);
-      cc_background_item_free (item);
+      g_object_unref (item);
       return;
     }
 
@@ -149,8 +149,11 @@ picture_scaled (GObject *source_object,
                                      -1);
   tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (store),
                                        &iter);
+  //FIXME rowref
+#if 0
   item->rowref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store),
                                              tree_path);
+#endif
   gtk_tree_path_free (tree_path);
 
   g_object_unref (pixbuf);
@@ -162,7 +165,7 @@ picture_opened_for_read (GObject *source_object,
                          gpointer user_data)
 {
   BgPicturesSource *bg_source = BG_PICTURES_SOURCE (user_data);
-  GnomeWPItem *item;
+  CcBackgroundItem *item;
   GFileInputStream *stream;
   GError *error = NULL;
 
@@ -176,7 +179,7 @@ picture_opened_for_read (GObject *source_object,
       g_warning ("Failed to load picture '%s': %s", filename, error->message);
       g_free (filename);
       g_error_free (error);
-      cc_background_item_free (item);
+      g_object_unref (item);
       return;
     }
 
@@ -196,7 +199,6 @@ file_info_async_ready (GObject      *source,
                        gpointer      user_data)
 {
   BgPicturesSource *bg_source = BG_PICTURES_SOURCE (user_data);
-  BgPicturesSourcePrivate *priv = bg_source->priv;
   GList *files, *l;
   GError *err = NULL;
   GFile *parent;
@@ -234,17 +236,15 @@ file_info_async_ready (GObject      *source,
       if (!strcmp ("image/png", content_type)
           || !strcmp ("image/jpeg", content_type))
         {
-          GnomeWPItem *item;
+          CcBackgroundItem *item;
           gchar *filename;
           GFile *file;
 
           filename = g_build_filename (path, g_file_info_get_name (info), NULL);
 
-          /* create a new GnomeWpItem */
-          item = cc_background_item_new (filename, NULL,
-                                    info,
-                                    priv->thumb_factory);
-
+          /* create a new CcBackgroundItem */
+          item = cc_background_item_new (filename);
+          cc_background_item_load (item, info);
           if (!item)
             {
               g_warning ("Could not load picture \"%s\"", filename);
@@ -254,8 +254,8 @@ file_info_async_ready (GObject      *source,
 
           file = g_file_new_for_path (filename);
           g_free (filename);
-          if (item->options == G_DESKTOP_BACKGROUND_STYLE_NONE)
-            item->options = G_DESKTOP_BACKGROUND_STYLE_ZOOM;
+          if (cc_background_item_get_placement (item) == G_DESKTOP_BACKGROUND_STYLE_NONE)
+            g_object_set (G_OBJECT (item), "placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM, NULL);
           g_object_set_data (G_OBJECT (file), "item", item);
           g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
           g_object_unref (file);

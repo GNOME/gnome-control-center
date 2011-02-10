@@ -21,6 +21,10 @@
 
 #include <config.h>
 
+#include <string.h>
+#include <glib/gi18n-lib.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
+
 #include "cc-background-panel.h"
 #include "bg-wallpapers-source.h"
 #include "bg-pictures-source.h"
@@ -33,8 +37,12 @@
 #include "gnome-wp-xml.h"
 #include "cc-background-item.h"
 
-#include <string.h>
-#include <glib/gi18n-lib.h>
+#define WP_PATH_ID "org.gnome.desktop.background"
+#define WP_FILE_KEY "picture-filename"
+#define WP_OPTIONS_KEY "picture-options"
+#define WP_SHADING_KEY "color-shading-type"
+#define WP_PCOLOR_KEY "primary-color"
+#define WP_SCOLOR_KEY "secondary-color"
 
 enum {
   COL_SOURCE_NAME,
@@ -65,7 +73,7 @@ struct _CcBackgroundPanelPrivate
 
   GnomeDesktopThumbnailFactory *thumb_factory;
 
-  GnomeWPItem *current_background;
+  CcBackgroundItem *current_background;
   gboolean current_source_readonly;
   gint current_source;
 
@@ -198,7 +206,7 @@ cc_background_panel_finalize (GObject *object)
 
   if (priv->current_background)
     {
-      cc_background_item_free (priv->current_background);
+      g_object_unref (priv->current_background);
       priv->current_background = NULL;
     }
 
@@ -232,7 +240,7 @@ source_update_edit_box (CcBackgroundPanelPrivate *priv)
       gtk_widget_show (WID ("style-pcolor"));
 
       if (priv->current_background &&
-	  priv->current_background->shade_type == G_DESKTOP_BACKGROUND_SHADING_SOLID)
+	  cc_background_item_get_shading (priv->current_background) == G_DESKTOP_BACKGROUND_SHADING_SOLID)
         gtk_widget_hide (WID ("style-scolor"));
       else
         gtk_widget_show (WID ("style-scolor"));
@@ -259,12 +267,12 @@ setup_edit_box (CcBackgroundPanelPrivate *priv)
 {
   g_assert (priv->current_background);
 
-  if (g_str_equal (priv->current_background->filename, "(none)"))
+  if (cc_background_item_get_filename (priv->current_background) == NULL)
     {
       gtk_widget_hide (WID ("style-combobox"));
       gtk_widget_show (WID ("style-pcolor"));
 
-      if (priv->current_background->shade_type == G_DESKTOP_BACKGROUND_SHADING_SOLID)
+      if (cc_background_item_get_shading (priv->current_background) == G_DESKTOP_BACKGROUND_SHADING_SOLID)
         gtk_widget_hide (WID ("style-scolor"));
       else
         gtk_widget_show (WID ("style-scolor"));
@@ -363,7 +371,7 @@ select_style (GtkComboBox *box,
 
 static void
 update_preview (CcBackgroundPanelPrivate *priv,
-                GnomeWPItem              *item,
+                CcBackgroundItem         *item,
                 gboolean                  redraw_preview)
 {
   gchar *markup;
@@ -371,6 +379,17 @@ update_preview (CcBackgroundPanelPrivate *priv,
 
   if (item && priv->current_background)
     {
+      //FIXME is that correct?
+      g_object_unref (priv->current_background);
+      priv->current_background = g_object_ref (item);
+#if 0
+      g_object_set (G_OBJECT (priv->current_background),
+      		    "primary-color", cc_background_item_get_pcolor (item),
+      		    "secondary-color", cc_background_item_get_scolor (item),
+      		    "filename", cc_background_item_get_filename (item),
+      		    "placement", cc_background_item_get_placement (item),
+      		    "shading", cc_background_item_get_shading (item),
+
       if (priv->current_background->pcolor)
         gdk_color_free (priv->current_background->pcolor);
       priv->current_background->pcolor = gdk_color_copy (item->pcolor);
@@ -393,6 +412,7 @@ update_preview (CcBackgroundPanelPrivate *priv,
 
       cc_background_item_ensure_gnome_bg (priv->current_background);
       cc_background_item_update_size (priv->current_background, priv->thumb_factory);
+#endif
     }
 
   source_update_edit_box (priv);
@@ -401,22 +421,24 @@ update_preview (CcBackgroundPanelPrivate *priv,
 
   if (priv->current_background)
     {
-      markup = g_strdup_printf ("<b>%s</b>", priv->current_background->name);
+      GdkColor pcolor, scolor;
+
+      markup = g_strdup_printf ("<b>%s</b>", cc_background_item_get_name (priv->current_background));
       gtk_label_set_markup (GTK_LABEL (WID ("background-label")), markup);
       g_free (markup);
 
-      gtk_label_set_text (GTK_LABEL (WID ("size_label")), priv->current_background->size);
+      gtk_label_set_text (GTK_LABEL (WID ("size_label")), cc_background_item_get_size (priv->current_background));
 
-      gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-pcolor")),
-                                  priv->current_background->pcolor);
-      gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-scolor")),
-                                  priv->current_background->scolor);
+      gdk_color_parse (cc_background_item_get_pcolor (priv->current_background), &pcolor);
+      gdk_color_parse (cc_background_item_get_scolor (priv->current_background), &scolor);
+
+      gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-pcolor")), &pcolor);
+      gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-scolor")), &scolor);
 
       select_style (GTK_COMBO_BOX (WID ("style-combobox")),
-                    priv->current_background->options);
+                    cc_background_item_get_placement (priv->current_background));
 
-      if (priv->current_background->bg)
-        changes_with_time = gnome_bg_changes_with_time (priv->current_background->bg);
+      changes_with_time = cc_background_item_changes_with_time (priv->current_background);
     }
 
   gtk_widget_set_visible (WID ("slide_image"), changes_with_time);
@@ -433,10 +455,11 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   GtkTreeIter iter;
   GList *list;
   GtkTreeModel *model;
-  GnomeWPItem *item;
-  gchar *pcolor, *scolor;
+  CcBackgroundItem *item;
   CcBackgroundPanelPrivate *priv = panel->priv;
+  char *pcolor, *scolor;
   gboolean draw_preview = TRUE;
+  const char *filename;
 
   list = gtk_icon_view_get_selected_items (icon_view);
 
@@ -449,8 +472,8 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("sources-combobox")),
                                  &iter);
   gtk_tree_model_get (model, &iter,
-  		      COL_SOURCE_READONLY, &priv->current_source_readonly,
-  		      COL_SOURCE_TYPE, &priv->current_source, -1);
+		      COL_SOURCE_READONLY, &priv->current_source_readonly,
+		      COL_SOURCE_TYPE, &priv->current_source, -1);
 
   model = gtk_icon_view_get_model (icon_view);
 
@@ -461,12 +484,14 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   gtk_tree_model_get (model, &iter, 1, &item, -1);
 
-  if (!g_strcmp0 (item->filename, "(none)"))
+  filename = cc_background_item_get_filename (item);
+
+  if (filename == NULL)
     {
       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, G_DESKTOP_BACKGROUND_STYLE_NONE);
       g_settings_set_string (priv->settings, WP_FILE_KEY, "");
     }
-  else if (item->source_url)
+  else if (cc_background_item_get_source_url (item) != NULL)
     {
       GFile *source, *dest;
       gchar *cache_path;
@@ -476,7 +501,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                                      "gnome-background",
                                      NULL);
 
-      source = g_file_new_for_uri (item->source_url);
+      source = g_file_new_for_uri (cc_background_item_get_source_url (item));
       dest = g_file_new_for_path (cache_path);
 
       /* create a blank image to use until the source image is ready */
@@ -514,9 +539,8 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                          copy_finished_cb, panel);
 
       g_settings_set_string (priv->settings, WP_FILE_KEY, cache_path);
-      g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, item->options);
-      g_free (item->filename);
-      item->filename = cache_path;
+      g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
+      g_object_set (G_OBJECT (item), "filename", cache_path, NULL);
 
       /* delay the updated drawing of the preview until the copy finishes */
       draw_preview = FALSE;
@@ -525,15 +549,15 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
     {
        gchar *uri;
 
-       if (g_utf8_validate (item->filename, -1, NULL))
-         uri = g_strdup (item->filename);
+       //FIXME this is garbage, either use uri, or not
+       if (g_utf8_validate (filename, -1, NULL))
+         uri = g_strdup (filename);
        else
-         uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
+         uri = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
 
        if (uri == NULL)
          {
-           g_warning ("Failed to convert filename to UTF-8: %s",
-                      item->filename);
+           g_warning ("Failed to convert filename to UTF-8: %s", filename);
          }
        else
          {
@@ -541,10 +565,10 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
            g_free (uri);
          }
 
-       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, item->options);
+       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
     }
 
-  g_settings_set_enum (priv->settings, WP_SHADING_KEY, item->shade_type);
+  g_settings_set_enum (priv->settings, WP_SHADING_KEY, cc_background_item_get_shading (item));
 
   /* When changing for another colour, don't overwrite what's
    * in GSettings, but read from it instead */
@@ -552,19 +576,16 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
     {
       pcolor = g_settings_get_string (priv->settings, WP_PCOLOR_KEY);
       scolor = g_settings_get_string (priv->settings, WP_SCOLOR_KEY);
-      gdk_color_parse (pcolor, item->pcolor);
-      gdk_color_parse (scolor, item->scolor);
+      g_object_set (G_OBJECT (item),
+		    "primary-color", pcolor,
+		    "secondary-color", scolor,
+		    NULL);
     }
   else
     {
-      pcolor = gdk_color_to_string (item->pcolor);
-      scolor = gdk_color_to_string (item->scolor);
-      g_settings_set_string (priv->settings, WP_PCOLOR_KEY, pcolor);
-      g_settings_set_string (priv->settings, WP_SCOLOR_KEY, scolor);
+      g_settings_set_string (priv->settings, WP_PCOLOR_KEY, cc_background_item_get_pcolor (item));
+      g_settings_set_string (priv->settings, WP_SCOLOR_KEY, cc_background_item_get_scolor (item));
     }
-
-  g_free (pcolor);
-  g_free (scolor);
 
   /* Apply all changes */
   g_settings_apply (priv->settings);
@@ -668,7 +689,7 @@ style_changed_cb (GtkComboBox       *box,
   g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, value);
 
   if (priv->current_background)
-    priv->current_background->options = value;
+    g_object_set (G_OBJECT (priv->current_background), "placement", value, NULL);
 
   g_settings_apply (priv->settings);
 
@@ -688,20 +709,16 @@ color_changed_cb (GtkColorButton    *button,
   if (WID ("style-pcolor") == GTK_WIDGET (button))
     is_pcolor = TRUE;
 
-  if (priv->current_background)
-    {
-      if (is_pcolor)
-        *priv->current_background->pcolor = color;
-      else
-        *priv->current_background->scolor = color;
-    }
-
   value = gdk_color_to_string (&color);
 
-  if (is_pcolor)
-    g_settings_set_string (priv->settings, WP_PCOLOR_KEY, value);
-  else
-    g_settings_set_string (priv->settings, WP_SCOLOR_KEY, value);
+  if (priv->current_background)
+    {
+      g_object_set (G_OBJECT (priv->current_background),
+		    is_pcolor ? "primary-color" : "secondary-color", value, NULL);
+    }
+
+  g_settings_set_string (priv->settings,
+			 is_pcolor ? WP_PCOLOR_KEY : WP_SCOLOR_KEY, value);
 
   g_settings_apply (priv->settings);
 
@@ -822,19 +839,15 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   /* initalise the current background information from settings */
   filename = g_settings_get_string (priv->settings, WP_FILE_KEY);
-  if (!filename || !g_strcmp0 (filename, ""))
-    {
-      g_free (filename);
-      filename = g_strdup ("(none)");
-    }
+  priv->current_background = cc_background_item_new (filename);
+  g_object_set (G_OBJECT (priv->current_background), "name", _("Current background"), NULL);
 
-  priv->current_background = g_new0 (GnomeWPItem, 1);
-  priv->current_background->filename = filename;
-  priv->current_background->name = g_strdup (_("Current background"));
-
+  //FIXME call load?
+#if 0
   cc_background_item_update (priv->current_background);
   cc_background_item_ensure_gnome_bg (priv->current_background);
   cc_background_item_update_size (priv->current_background, priv->thumb_factory);
+#endif
 
   update_preview (priv, NULL, TRUE);
 

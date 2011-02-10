@@ -1,89 +1,97 @@
-/*
- *  Authors: Rodney Dawes <dobey@ximian.com>
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
- *  Copyright 2003-2006 Novell, Inc. (www.novell.com)
+ * Copyright (C) 2010-2011 Red Hat, Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of version 2 of the GNU General Public License
- *  as published by the Free Software Foundation
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Street #330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  */
-#include <glib.h>
-#include <gio/gio.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gtk/gtk.h>
+
+#ifndef __CC_BACKGROUND_ITEM_H
+#define __CC_BACKGROUND_ITEM_H
+
+#include <glib-object.h>
+
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
-#include <libgnome-desktop/gnome-bg.h>
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <libgnome-desktop/gnome-bg.h>
 
-#include "gnome-wp-info.h"
+G_BEGIN_DECLS
 
-#ifndef _GNOME_WP_ITEM_H_
-#define _GNOME_WP_ITEM_H_
+#define CC_TYPE_BACKGROUND_ITEM         (cc_background_item_get_type ())
+#define CC_BACKGROUND_ITEM(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_TYPE_BACKGROUND_ITEM, CcBackgroundItem))
+#define CC_BACKGROUND_ITEM_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CC_TYPE_BACKGROUND_ITEM, CcBackgroundItemClass))
+#define CC_IS_BACKGROUND_ITEM(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_TYPE_BACKGROUND_ITEM))
+#define CC_IS_BACKGROUND_ITEM_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CC_TYPE_BACKGROUND_ITEM))
+#define CC_BACKGROUND_ITEM_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CC_TYPE_BACKGROUND_ITEM, CcBackgroundItemClass))
 
-#define WP_PATH_ID "org.gnome.desktop.background"
-#define WP_FILE_KEY "picture-filename"
-#define WP_OPTIONS_KEY "picture-options"
-#define WP_SHADING_KEY "color-shading-type"
-#define WP_PCOLOR_KEY "primary-color"
-#define WP_SCOLOR_KEY "secondary-color"
+typedef enum {
+	CC_BACKGROUND_ITEM_HAS_SHADING = 1 << 0,
+	CC_BACKGROUND_ITEM_HAS_PLACEMENT = 1 << 1,
+	CC_BACKGROUND_ITEM_HAS_PCOLOR = 1 << 2,
+	CC_BACKGROUND_ITEM_HAS_SCOLOR = 1 << 3,
+	CC_BACKGROUND_ITEM_HAS_FNAME = 1 << 4
+} CcBackgroundItemFlags;
 
-typedef struct _GnomeWPItem GnomeWPItem;
+#define CC_BACKGROUND_ITEM_HAS_ALL (CC_BACKGROUND_ITEM_HAS_SHADING &	\
+				    CC_BACKGROUND_ITEM_HAS_PLACEMENT &	\
+				    CC_BACKGROUND_ITEM_HAS_PCOLOR &	\
+				    CC_BACKGROUND_ITEM_HAS_SCOLOR &	\
+				    CC_BACKGROUND_ITEM_HAS_FNAME)
 
-struct _GnomeWPItem {
-  GnomeBG *bg;
+typedef struct CcBackgroundItemPrivate CcBackgroundItemPrivate;
 
-  gchar * name;
-  gchar * filename;
-  gchar * size;
-  GDesktopBackgroundStyle options;
-  GDesktopBackgroundShading shade_type;
+typedef struct
+{
+        GObject                  parent;
+        CcBackgroundItemPrivate *priv;
+} CcBackgroundItem;
 
-  gchar * source_url;
+typedef struct
+{
+        GObjectClass   parent_class;
+        void (* changed)           (CcBackgroundItem *item);
+} CcBackgroundItemClass;
 
-  /* Where the Item is in the List */
-  GtkTreeRowReference * rowref;
+GType              cc_background_item_get_type (void);
 
-  /* Real colors */
-  GdkColor * pcolor;
-  GdkColor * scolor;
+CcBackgroundItem * cc_background_item_new                 (const char                   *filename);
+gboolean           cc_background_item_load                (CcBackgroundItem             *item,
+							   GFileInfo                    *info);
+gboolean           cc_background_item_changes_with_time   (CcBackgroundItem             *item);
 
-  GnomeWPInfo * fileinfo;
+GIcon     *        cc_background_item_get_thumbnail       (CcBackgroundItem             *item,
+                                                           GnomeDesktopThumbnailFactory *thumbs,
+                                                           int                           width,
+                                                           int                           height);
+GIcon     *        cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
+                                                           GnomeDesktopThumbnailFactory *thumbs,
+                                                           int                           width,
+                                                           int                           height,
+                                                           int                           frame);
 
-  /* Did the user remove us? */
-  gboolean deleted;
+GDesktopBackgroundStyle   cc_background_item_get_placement  (CcBackgroundItem *item);
+GDesktopBackgroundShading cc_background_item_get_shading    (CcBackgroundItem *item);
+const char *              cc_background_item_get_filename   (CcBackgroundItem *item);
+const char *              cc_background_item_get_source_url (CcBackgroundItem *item);
+const char *              cc_background_item_get_source_xml (CcBackgroundItem *item);
+CcBackgroundItemFlags     cc_background_item_get_flags      (CcBackgroundItem *item);
+const char *              cc_background_item_get_pcolor     (CcBackgroundItem *item);
+const char *              cc_background_item_get_scolor     (CcBackgroundItem *item);
+const char *              cc_background_item_get_name       (CcBackgroundItem *item);
+const char *              cc_background_item_get_size       (CcBackgroundItem *item);
 
-  /* Width and Height of the original image */
-  gint width;
-  gint height;
-};
+G_END_DECLS
 
-GnomeWPItem * cc_background_item_new (const gchar *filename,
-				 GHashTable *wallpapers,
-				 GFileInfo *file_info,
-				 GnomeDesktopThumbnailFactory *thumbnails);
-
-void cc_background_item_free (GnomeWPItem *item);
-GIcon * cc_background_item_get_thumbnail (GnomeWPItem *item,
-				     GnomeDesktopThumbnailFactory *thumbs,
-				     gint width,
-				     gint height);
-GIcon * cc_background_item_get_frame_thumbnail (GnomeWPItem *item,
-					   GnomeDesktopThumbnailFactory *thumbs,
-					   gint width,
-					   gint height,
-					   gint frame);
-void cc_background_item_update (GnomeWPItem *item);
-void cc_background_item_update_size (GnomeWPItem *item, GnomeDesktopThumbnailFactory *thumbs);
-void cc_background_item_ensure_gnome_bg (GnomeWPItem *item);
-
-#endif
+#endif /* __CC_BACKGROUND_ITEM_H */

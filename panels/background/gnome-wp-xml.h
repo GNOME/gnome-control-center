@@ -22,6 +22,7 @@
 #define _GNOME_WP_XML_H_
 
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
+#include <gtk/gtk.h>
 #include <gio/gio.h>
 
 typedef struct _GnomeWpXml GnomeWpXml;

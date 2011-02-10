@@ -18,18 +18,15 @@
  *
  */
 
-#include "cc-background-item.h"
-#include "gnome-wp-xml.h"
 #include <gio/gio.h>
 #include <string.h>
 #include <libxml/parser.h>
 #include <libgnome-desktop/gnome-bg.h>
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
 
-static const gchar *wp_item_option_to_string (GDesktopBackgroundStyle type);
-static const gchar *wp_item_shading_to_string (GDesktopBackgroundShading type);
-static GDesktopBackgroundStyle wp_item_string_to_option (const gchar *option);
-static GDesktopBackgroundShading wp_item_string_to_shading (const gchar *shade_type);
+#include "gdesktop-enums-types.h"
+#include "cc-background-item.h"
+#include "gnome-wp-xml.h"
 
 static gboolean gnome_wp_xml_get_bool (const xmlNode * parent,
 				       const gchar * prop_name) {
@@ -52,6 +49,7 @@ static gboolean gnome_wp_xml_get_bool (const xmlNode * parent,
   return ret_val;
 }
 
+#if 0
 static void gnome_wp_xml_set_bool (const xmlNode * parent,
 				   const xmlChar * prop_name, gboolean value) {
   g_return_if_fail (parent != NULL);
@@ -63,6 +61,44 @@ static void gnome_wp_xml_set_bool (const xmlNode * parent,
     xmlSetProp ((xmlNode *) parent, prop_name, (xmlChar *)"false");
   }
 }
+#endif
+
+static struct {
+	int value;
+	const char *string;
+} lookups[] = {
+	{ G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL, "horizontal-gradient" },
+	{ G_DESKTOP_BACKGROUND_SHADING_VERTICAL, "vertical-gradient" },
+};
+
+static int
+enum_string_to_value (GType type,
+		      const char *string)
+{
+	GEnumClass *eclass;
+	GEnumValue *value;
+
+	eclass = G_ENUM_CLASS (g_type_class_peek (type));
+	value = g_enum_get_value_by_nick (eclass, string);
+
+	/* Here's a bit of hand-made parsing, bad bad */
+	if (value == NULL) {
+		guint i;
+		for (i = 0; i < G_N_ELEMENTS (lookups); i++) {
+			if (g_str_equal (lookups[i].string, string))
+				return lookups[i].value;
+		}
+		g_warning ("Unhandled value '%s' for enum '%s'",
+			   string, G_FLAGS_CLASS_TYPE_NAME (eclass));
+		g_assert_not_reached ();
+	}
+
+	return value->value;
+}
+
+#define NONE "(none)"
+#define UNSET_FLAG(flag) G_STMT_START{ (flags&=~(flag)); }G_STMT_END
+#define SET_FLAG(flag) G_STMT_START{ (flags|=flag); }G_STMT_END
 
 static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 				   const gchar * filename) {
@@ -70,8 +106,8 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
   xmlNode * root, * list, * wpa;
   xmlChar * nodelang;
   const gchar * const * syslangs;
-  GdkColor color1, color2;
   gint i;
+  char *fname;
 
   wplist = xmlParseFile (filename);
 
@@ -79,74 +115,91 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
     return;
 
   syslangs = g_get_language_names ();
+  fname = NULL;
 
   root = xmlDocGetRootElement (wplist);
 
   for (list = root->children; list != NULL; list = list->next) {
     if (!strcmp ((gchar *)list->name, "wallpaper")) {
-      GnomeWPItem * wp;
+      CcBackgroundItem * item;
+      CcBackgroundItemFlags flags = 0;
       gchar *pcolor = NULL, *scolor = NULL;
-      gboolean have_scale = FALSE, have_shade = FALSE;
 
-      wp = g_new0 (GnomeWPItem, 1);
+      item = cc_background_item_new (NULL);
 
-      wp->deleted = gnome_wp_xml_get_bool (list, "deleted");
+      g_object_set (G_OBJECT (item),
+		    "is-deleted", gnome_wp_xml_get_bool (list, "deleted"),
+		    "source-xml", filename,
+		    NULL);
 
       for (wpa = list->children; wpa != NULL; wpa = wpa->next) {
 	if (wpa->type == XML_COMMENT_NODE) {
 	  continue;
 	} else if (!strcmp ((gchar *)wpa->name, "filename")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
-	    const char * none = "(none)";
 	    gchar *content = g_strstrip ((gchar *)wpa->last->content);
 
-	    if (!strcmp (content, none))
-	      wp->filename = g_strdup (content);
-	    else if (g_utf8_validate (content, -1, NULL) &&
-		     g_file_test (content, G_FILE_TEST_EXISTS))
-	      wp->filename = g_strdup (content);
-	    else
-	      wp->filename = g_filename_from_utf8 (content, -1, NULL, NULL, NULL);
+	    if (strcmp (content, NONE) == 0) {
+	      fname = NULL;
+	    } else if (g_utf8_validate (content, -1, NULL) &&
+		     g_file_test (content, G_FILE_TEST_EXISTS)) {
+	      fname = g_strdup (content);
+	    } else {
+	      fname = g_filename_from_utf8 (content, -1, NULL, NULL, NULL);
+	    }
+	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_FNAME);
+	    g_object_set (G_OBJECT (item), "filename", fname, NULL);
 	  } else {
 	    break;
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "name")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
+	    char *name;
 	    nodelang = xmlNodeGetLang (wpa->last);
 
-	    if (wp->name == NULL && nodelang == NULL) {
-	       wp->name = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	    g_object_get (G_OBJECT (item), "name", &name, NULL);
+
+	    if (name == NULL && nodelang == NULL) {
+	       g_object_set (G_OBJECT (item), "name",
+			     g_strstrip ((gchar *)wpa->last->content), NULL);
             } else {
 	       for (i = 0; syslangs[i] != NULL; i++) {
 	         if (!strcmp (syslangs[i], (gchar *)nodelang)) {
-	           g_free (wp->name);
-	           wp->name = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+		   g_object_set (G_OBJECT (item), "name",
+				 g_strstrip ((gchar *)wpa->last->content), NULL);
 	           break;
 	         }
 	       }
 	    }
 
+	    g_free (name);
 	    xmlFree (nodelang);
 	  } else {
 	    break;
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "options")) {
 	  if (wpa->last != NULL) {
-	    wp->options = wp_item_string_to_option (g_strstrip ((gchar *)wpa->last->content));
-	    have_scale = TRUE;
+	    g_object_set (G_OBJECT (item), "placement",
+			  enum_string_to_value (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE,
+						g_strstrip ((gchar *)wpa->last->content)), NULL);
+	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_PLACEMENT);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "shade_type")) {
 	  if (wpa->last != NULL) {
-	    wp->shade_type = wp_item_string_to_shading (g_strstrip ((gchar *)wpa->last->content));
-	    have_shade = TRUE;
+	    g_object_set (G_OBJECT (item), "shading",
+			  enum_string_to_value (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING,
+						g_strstrip ((gchar *)wpa->last->content)), NULL);
+	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_SHADING);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "pcolor")) {
 	  if (wpa->last != NULL) {
 	    pcolor = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_PCOLOR);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "scolor")) {
 	  if (wpa->last != NULL) {
 	    scolor = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_SCOLOR);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "text")) {
 	  /* Do nothing here, libxml2 is being weird */
@@ -156,57 +209,39 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
       }
 
       /* Make sure we don't already have this one and that filename exists */
-      if (wp->filename == NULL ||
-	  g_hash_table_lookup (data->wp_hash, wp->filename) != NULL) {
+      if (fname == NULL ||
+	  g_hash_table_lookup (data->wp_hash, fname) != NULL) {
 
-	cc_background_item_free (wp);
+	g_object_unref (item);
 	g_free (pcolor);
 	g_free (scolor);
 	continue;
       }
 
       /* Verify the colors and alloc some GdkColors here */
-      if (!have_scale) {
-        wp->options = g_settings_get_enum (data->settings, WP_OPTIONS_KEY);
-      }
+      if (pcolor)
+        g_object_set (G_OBJECT (item), "primary-color", pcolor, NULL);
+      if (scolor)
+        g_object_set (G_OBJECT (item), "secondary-color", scolor, NULL);
 
-      if (!have_shade) {
-        wp->shade_type = g_settings_get_enum (data->settings, WP_SHADING_KEY);
-      }
+      g_object_set (G_OBJECT (item), "flags", flags, NULL);
 
-      if (pcolor == NULL) {
-	pcolor = g_settings_get_string (data->settings, WP_PCOLOR_KEY);
-      }
-      if (scolor == NULL) {
-	scolor = g_settings_get_string (data->settings, WP_SCOLOR_KEY);
-      }
-      gdk_color_parse (pcolor, &color1);
-      gdk_color_parse (scolor, &color2);
       g_free (pcolor);
       g_free (scolor);
 
-      wp->pcolor = gdk_color_copy (&color1);
-      wp->scolor = gdk_color_copy (&color2);
-
-      if ((wp->filename != NULL &&
-	   g_file_test (wp->filename, G_FILE_TEST_EXISTS)) ||
-	  !strcmp (wp->filename, "(none)")) {
-	wp->fileinfo = gnome_wp_info_new (wp->filename, NULL, data->thumb_factory);
-
-	if (wp->name == NULL || !strcmp (wp->filename, "(none)")) {
-	  g_free (wp->name);
-	  wp->name = g_strdup (wp->fileinfo->name);
-	}
-
+      if (fname != NULL) {
+#if 0
         cc_background_item_ensure_gnome_bg (wp);
 	cc_background_item_update_size (wp, NULL);
-	g_hash_table_insert (data->wp_hash, wp->filename, wp);
+#endif
+	g_hash_table_insert (data->wp_hash, g_strdup (filename), item);
       } else {
-	cc_background_item_free (wp);
-        wp = NULL;
+	g_object_unref (item);
+        item = NULL;
       }
     }
   }
+  g_free (fname);
   xmlFreeDoc (wplist);
 }
 
@@ -355,15 +390,18 @@ void gnome_wp_xml_load_list_async (GnomeWpXml *data,
 	g_object_unref (result);
 }
 
-static void gnome_wp_list_flatten (const gchar * key, GnomeWPItem * item,
+#if 0
+static void gnome_wp_list_flatten (const gchar * key, CcBackgroundItem * item,
 				   GSList ** list) {
   g_return_if_fail (key != NULL);
   g_return_if_fail (item != NULL);
 
   *list = g_slist_prepend (*list, item);
 }
-
+#endif
 void gnome_wp_xml_save_list (GnomeWpXml *data) {
+	//FIXME implement save or remove?
+#if 0
   xmlDoc * wplist;
   xmlNode * root, * wallpaper, * item;
   GSList * list = NULL;
@@ -387,7 +425,7 @@ void gnome_wp_xml_save_list (GnomeWpXml *data) {
   xmlDocSetRootElement (wplist, root);
 
   while (list != NULL) {
-    GnomeWPItem * wpitem = list->data;
+    CcBackgroundItem * wpitem = list->data;
     const char * none = "(none)";
     gchar * filename;
     const gchar * scale, * shade;
@@ -418,83 +456,11 @@ void gnome_wp_xml_save_list (GnomeWpXml *data) {
     g_free (filename);
 
     list = g_slist_delete_link (list, list);
-    cc_background_item_free (wpitem);
+    g_object_unref (wpitem);
   }
   xmlSaveFormatFile (wpfile, wplist, 1);
   xmlFreeDoc (wplist);
   g_free (wpfile);
+#endif
 }
 
-static struct {
-  GDesktopBackgroundStyle value;
-  gchar *string;
-} options_lookup[] = {
-  { G_DESKTOP_BACKGROUND_STYLE_CENTERED, "centered" },
-  { G_DESKTOP_BACKGROUND_STYLE_STRETCHED, "stretched" },
-  { G_DESKTOP_BACKGROUND_STYLE_SCALED, "scaled" },
-  { G_DESKTOP_BACKGROUND_STYLE_ZOOM, "zoom" },
-  { G_DESKTOP_BACKGROUND_STYLE_WALLPAPER, "wallpaper" },
-  { G_DESKTOP_BACKGROUND_STYLE_SPANNED, "spanned" },
-  { 0, NULL }
-};
-
-static struct {
-  GDesktopBackgroundShading value;
-  gchar *string;
-} shade_lookup[] = {
-  { G_DESKTOP_BACKGROUND_SHADING_SOLID, "solid" },
-  { G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL, "horizontal-gradient" },
-  { G_DESKTOP_BACKGROUND_SHADING_VERTICAL, "vertical-gradient" },
-  { 0, NULL }
-};
-
-static const
-gchar *wp_item_option_to_string (GDesktopBackgroundStyle type)
-{
-  int i;
-
-  for (i = 0; options_lookup[i].value != 0; i++) {
-    if (options_lookup[i].value == type)
-      return (const gchar *) options_lookup[i].string;
-  }
-
-  return "scaled";
-}
-
-static const
-gchar *wp_item_shading_to_string (GDesktopBackgroundShading type)
-{
-  int i;
-
-  for (i = 0; shade_lookup[i].value != 0; i++) {
-    if (shade_lookup[i].value == type)
-      return (const gchar *) shade_lookup[i].string;
-  }
-
-  return "solid";
-}
-
-static GDesktopBackgroundStyle
-wp_item_string_to_option (const gchar *option)
-{
-  gint i;
-
-  for (i = 0; options_lookup[i].value != 0; i++) {
-    if (g_str_equal (options_lookup[i].string, option))
-      return options_lookup[i].value;
-  }
-
-  return G_DESKTOP_BACKGROUND_STYLE_SCALED;
-}
-
-static GDesktopBackgroundShading
-wp_item_string_to_shading (const gchar *shade_type)
-{
-  int i;
-
-  for (i = 0; shade_lookup[i].value != 0; i++) {
-    if (g_str_equal (shade_lookup[i].string, shade_type))
-      return options_lookup[i].value;
-  }
-  return G_DESKTOP_BACKGROUND_SHADING_SOLID;
-}

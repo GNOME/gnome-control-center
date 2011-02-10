@@ -107,13 +107,15 @@ bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
   object_class->finalize = bg_wallpapers_source_finalize;
 }
 
+//FIXME
+#if 0
 static gboolean
 find_wallpaper (gpointer key,
                 gpointer value,
                 gpointer data)
 {
   GnomeBG *bg = data;
-  GnomeWPItem *item = value;
+  CcBackgroundItem *item = value;
 
   return item->bg == bg;
 }
@@ -126,7 +128,7 @@ item_changed_cb (GnomeBG    *bg,
   GtkTreeModel *model;
   GtkTreeIter iter;
   GtkTreePath *path;
-  GnomeWPItem *item;
+  CcBackgroundItem *item;
 
   item = g_hash_table_find (data->wp_hash, find_wallpaper, bg);
 
@@ -157,29 +159,32 @@ item_changed_cb (GnomeBG    *bg,
                                          data);
     }
 }
-
+#endif
 
 
 
 static void
 load_wallpapers (gchar              *key,
-                 GnomeWPItem        *item,
+                 CcBackgroundItem        *item,
                  BgWallpapersSource *source)
 {
   BgWallpapersSourcePrivate *priv = source->priv;
   GtkTreeIter iter;
-  GtkTreePath *path;
+//  GtkTreePath *path;
   GIcon *pixbuf;
   GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
+  gboolean deleted;
 
-  if (item->deleted == TRUE)
+  g_object_get (G_OBJECT (item), "is-deleted", &deleted, NULL);
+
+  if (deleted)
     return;
 
   gtk_list_store_append (store, &iter);
 
   pixbuf = cc_background_item_get_thumbnail (item, priv->thumb_factory,
                                         THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
-  cc_background_item_update_size (item, NULL);
+//  cc_background_item_update_size (item, NULL);
 
   gtk_list_store_set (store, &iter,
                       0, pixbuf,
@@ -189,9 +194,11 @@ load_wallpapers (gchar              *key,
   if (pixbuf)
     g_object_unref (pixbuf);
 
+#if 0
   path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), &iter);
   item->rowref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
   gtk_tree_path_free (path);
+#endif
 }
 
 static void
@@ -208,7 +215,7 @@ list_load_cb (GObject *source_object,
 			self);
 
   g_hash_table_destroy (wp_xml->wp_hash);
-  g_object_unref (wp_xml->settings);
+//  g_object_unref (wp_xml->settings);
   g_free (wp_xml);
 }
 
@@ -220,7 +227,7 @@ reload_wallpapers (BgWallpapersSource *self)
   /* set up wallpaper source */
   wp_xml = g_new0 (GnomeWpXml, 1);
   wp_xml->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
-  wp_xml->settings = g_settings_new (WP_PATH_ID);
+//  wp_xml->settings = g_settings_new (WP_PATH_ID);
   wp_xml->wp_model = bg_source_get_liststore (BG_SOURCE (self));
   wp_xml->thumb_width = THUMBNAIL_WIDTH;
   wp_xml->thumb_height = THUMBNAIL_HEIGHT;

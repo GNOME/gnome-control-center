@@ -27,6 +27,7 @@
 #include <libsocialweb-client/sw-client-service.h>
 
 #include "cc-background-item.h"
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 
 G_DEFINE_TYPE (BgFlickrSource, bg_flickr_source, BG_TYPE_SOURCE)
 
@@ -88,25 +89,24 @@ _view_items_added_cb (SwClientItemView *item_view,
 
   for (l = items; l; l = l->next)
     {
-      GnomeWPItem *item;
+      CcBackgroundItem *item;
       GdkPixbuf *pixbuf;
-      GdkColor color = { 0, 0, 0, 0 };
       SwItem *sw_item = (SwItem *) l->data;
       const gchar *thumb_url;
 
-      item = g_new0 (GnomeWPItem, 1);
+      item = cc_background_item_new (NULL);
 
-      item->options = G_DESKTOP_BACKGROUND_STYLE_ZOOM;
-      item->name = g_strdup (sw_item_get_value (sw_item, "title"));
-      item->source_url = g_strdup (sw_item_get_value (sw_item,
-                                                      "x-flickr-photo-url"));
+      g_object_set (G_OBJECT (item),
+		    "placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
+		    "name", sw_item_get_value (sw_item, "title"),
+		    "primary-color", "#000000000000",
+		    "seconday-color", "#000000000000",
+		    "shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
+		    "source-url", sw_item_get_value (sw_item, "x-flickr-photo-url"),
+		    NULL);
 
-      item->pcolor = gdk_color_copy (&color);
-      item->scolor = gdk_color_copy (&color);
-
-      item->shade_type = G_DESKTOP_BACKGROUND_SHADING_SOLID;
-
-      cc_background_item_ensure_gnome_bg (item);
+      //FIXME
+//      cc_background_item_ensure_gnome_bg (item);
 
       /* insert the item into the liststore */
       thumb_url = sw_item_get_value (sw_item, "thumbnail");

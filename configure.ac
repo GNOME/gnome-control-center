@@ -55,6 +55,8 @@ PKG_CHECK_MODULES(LIBCANBERRA_GTK, libcanberra-gtk3, [
   ], [:])
 AM_CONDITIONAL(HAVE_LIBCANBERRA_GTK, test "x$CANBERRA_GTK" = "x1")
 
+AC_PATH_PROG([GLIB_MKENUMS],[glib-mkenums])
+
 dnl Region panel
 savecppflags=$CPPFLAGS
 CPPFLAGS="$CPPFLAGS $X_CFLAGS"

@@ -76,12 +76,12 @@ free_tree_model_items (GtkTreeModel *model,
                        GtkTreeIter  *iter,
                        gpointer      data)
 {
-  GnomeWPItem *item = NULL;
+  CcBackgroundItem *item = NULL;
 
   gtk_tree_model_get (model, iter, 1, &item, -1);
 
   if (item)
-    cc_background_item_free (item);
+    g_object_unref (item);
 
   return FALSE;
 }
