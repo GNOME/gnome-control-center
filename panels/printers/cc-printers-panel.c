@@ -1507,7 +1507,7 @@ supply_levels_draw_cb (GtkWidget *widget,
 
               gdk_rgba_parse (&color, ((MarkerItem*) tmp_list->data)->color);
 
-              if (value >= 0)
+              if (value > 0)
                 {
                   display_value = value / 100.0 * (width - 3.0);
                   gdk_cairo_set_source_rgba (cr, &color);
