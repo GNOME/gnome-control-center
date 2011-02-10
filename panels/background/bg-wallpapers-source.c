@@ -23,7 +23,7 @@
 
 #include "bg-wallpapers-source.h"
 
-#include "gnome-wp-item.h"
+#include "cc-background-item.h"
 #include "gnome-wp-xml.h"
 
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
@@ -142,7 +142,7 @@ item_changed_cb (GnomeBG    *bg,
 
       g_signal_handlers_block_by_func (bg, G_CALLBACK (item_changed_cb), data);
 
-      pixbuf = gnome_wp_item_get_thumbnail (item,
+      pixbuf = cc_background_item_get_thumbnail (item,
                                             data->thumb_factory,
                                             data->thumb_width,
                                             data->thumb_height);
@@ -177,9 +177,9 @@ load_wallpapers (gchar              *key,
 
   gtk_list_store_append (store, &iter);
 
-  pixbuf = gnome_wp_item_get_thumbnail (item, priv->thumb_factory,
+  pixbuf = cc_background_item_get_thumbnail (item, priv->thumb_factory,
                                         THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
-  gnome_wp_item_update_size (item, NULL);
+  cc_background_item_update_size (item, NULL);
 
   gtk_list_store_set (store, &iter,
                       0, pixbuf,

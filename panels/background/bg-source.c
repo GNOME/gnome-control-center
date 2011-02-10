@@ -20,7 +20,7 @@
  */
 
 #include "bg-source.h"
-#include "gnome-wp-item.h"
+#include "cc-background-item.h"
 
 G_DEFINE_ABSTRACT_TYPE (BgSource, bg_source, G_TYPE_OBJECT)
 
@@ -81,7 +81,7 @@ free_tree_model_items (GtkTreeModel *model,
   gtk_tree_model_get (model, iter, 1, &item, -1);
 
   if (item)
-    gnome_wp_item_free (item);
+    cc_background_item_free (item);
 
   return FALSE;
 }

@@ -18,7 +18,7 @@
  *
  */
 
-#include "gnome-wp-item.h"
+#include "cc-background-item.h"
 #include "gnome-wp-xml.h"
 #include <gio/gio.h>
 #include <string.h>
@@ -159,7 +159,7 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
       if (wp->filename == NULL ||
 	  g_hash_table_lookup (data->wp_hash, wp->filename) != NULL) {
 
-	gnome_wp_item_free (wp);
+	cc_background_item_free (wp);
 	g_free (pcolor);
 	g_free (scolor);
 	continue;
@@ -198,11 +198,11 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 	  wp->name = g_strdup (wp->fileinfo->name);
 	}
 
-        gnome_wp_item_ensure_gnome_bg (wp);
-	gnome_wp_item_update_size (wp, NULL);
+        cc_background_item_ensure_gnome_bg (wp);
+	cc_background_item_update_size (wp, NULL);
 	g_hash_table_insert (data->wp_hash, wp->filename, wp);
       } else {
-	gnome_wp_item_free (wp);
+	cc_background_item_free (wp);
         wp = NULL;
       }
     }
@@ -418,7 +418,7 @@ void gnome_wp_xml_save_list (GnomeWpXml *data) {
     g_free (filename);
 
     list = g_slist_delete_link (list, list);
-    gnome_wp_item_free (wpitem);
+    cc_background_item_free (wpitem);
   }
   xmlSaveFormatFile (wpfile, wplist, 1);
   xmlFreeDoc (wplist);

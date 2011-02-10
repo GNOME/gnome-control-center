@@ -23,7 +23,7 @@
 #include <config.h>
 #include "bg-colors-source.h"
 
-#include "gnome-wp-item.h"
+#include "cc-background-item.h"
 
 #include <glib/gi18n-lib.h>
 
@@ -79,10 +79,10 @@ bg_colors_source_init (BgColorsSource *self)
 
       item->shade_type = items[i].type;
 
-      gnome_wp_item_ensure_gnome_bg (item);
+      cc_background_item_ensure_gnome_bg (item);
 
       /* insert the item into the liststore */
-      pixbuf = gnome_wp_item_get_thumbnail (item,
+      pixbuf = cc_background_item_get_thumbnail (item,
                                             thumb_factory,
                                             THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
       gtk_list_store_insert_with_values (store, NULL, 0,

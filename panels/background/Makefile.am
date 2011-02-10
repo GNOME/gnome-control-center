@@ -32,6 +32,8 @@ libbackground_la_SOURCES =		\
 	background-module.c	\
 	cc-background-panel.c	\
 	cc-background-panel.h	\
+	cc-background-item.c	\
+	cc-background-item.h	\
 	bg-source.c		\
 	bg-source.h		\
 	bg-pictures-source.c			\
@@ -40,8 +42,8 @@ libbackground_la_SOURCES =		\
 	bg-wallpapers-source.h			\
 	bg-colors-source.c			\
 	bg-colors-source.h			\
-	gnome-wp-info.c  gnome-wp-item.c  gnome-wp-xml.c \
-	gnome-wp-info.h  gnome-wp-item.h  gnome-wp-xml.h
+	gnome-wp-info.c  gnome-wp-xml.c \
+	gnome-wp-info.h  gnome-wp-xml.h
 
 
 libbackground_la_LIBADD = \

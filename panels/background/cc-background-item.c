@@ -22,7 +22,7 @@
 
 #include <glib/gi18n.h>
 #include <string.h>
-#include "gnome-wp-item.h"
+#include "cc-background-item.h"
 
 static void set_bg_properties (GnomeWPItem *item)
 {
@@ -36,17 +36,17 @@ static void set_bg_properties (GnomeWPItem *item)
   gnome_bg_set_placement (item->bg, item->options);
 }
 
-void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item)
+void cc_background_item_ensure_gnome_bg (GnomeWPItem *item)
 {
   if (!item->bg)
     item->bg = gnome_bg_new ();
 
-  g_object_set_data (G_OBJECT (item->bg), "gnome-wp-item", item);
+  g_object_set_data (G_OBJECT (item->bg), "cc-background-item", item);
 
   set_bg_properties (item);
 }
 
-void gnome_wp_item_update (GnomeWPItem *item) {
+void cc_background_item_update (GnomeWPItem *item) {
   GSettings *settings;
   GdkColor color1 = { 0, 0, 0, 0 }, color2 = { 0, 0, 0, 0 };
   gchar *s;
@@ -82,7 +82,7 @@ void gnome_wp_item_update (GnomeWPItem *item) {
   set_bg_properties (item);
 }
 
-GnomeWPItem * gnome_wp_item_new (const gchar * filename,
+GnomeWPItem * cc_background_item_new (const gchar * filename,
 				 GHashTable * wallpapers,
 				 GFileInfo * file_info,
 				 GnomeDesktopThumbnailFactory * thumbnails) {
@@ -101,21 +101,21 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
       item->name = g_filename_to_utf8 (item->fileinfo->name, -1, NULL,
 				       NULL, NULL);
 
-    gnome_wp_item_update (item);
-    gnome_wp_item_ensure_gnome_bg (item);
-    gnome_wp_item_update_size (item, NULL);
+    cc_background_item_update (item);
+    cc_background_item_ensure_gnome_bg (item);
+    cc_background_item_update_size (item, NULL);
 
     if (wallpapers)
       g_hash_table_insert (wallpapers, item->filename, item);
   } else {
-    gnome_wp_item_free (item);
+    cc_background_item_free (item);
     item = NULL;
   }
 
   return item;
 }
 
-void gnome_wp_item_free (GnomeWPItem * item) {
+void cc_background_item_free (GnomeWPItem * item) {
   if (item == NULL) {
     return;
   }
@@ -153,7 +153,7 @@ get_slideshow_icon (void)
 	return emblem;
 }
 
-GIcon * gnome_wp_item_get_frame_thumbnail (GnomeWPItem * item,
+GIcon * cc_background_item_get_frame_thumbnail (GnomeWPItem * item,
 					       GnomeDesktopThumbnailFactory * thumbs,
                                                int width,
                                                int height,
@@ -188,14 +188,14 @@ GIcon * gnome_wp_item_get_frame_thumbnail (GnomeWPItem * item,
 }
 
 
-GIcon * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
+GIcon * cc_background_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeDesktopThumbnailFactory * thumbs,
                                          gint width,
                                          gint height) {
-  return gnome_wp_item_get_frame_thumbnail (item, thumbs, width, height, -1);
+  return cc_background_item_get_frame_thumbnail (item, thumbs, width, height, -1);
 }
 
-void gnome_wp_item_update_size (GnomeWPItem * item,
+void cc_background_item_update_size (GnomeWPItem * item,
 				GnomeDesktopThumbnailFactory * thumbs) {
   g_free (item->size);
   item->size = NULL;

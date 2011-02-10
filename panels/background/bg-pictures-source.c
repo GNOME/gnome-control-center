@@ -22,7 +22,7 @@
 
 #include "bg-pictures-source.h"
 
-#include "gnome-wp-item.h"
+#include "cc-background-item.h"
 
 #include <string.h>
 #include <gio/gio.h>
@@ -138,7 +138,7 @@ picture_scaled (GObject *source_object,
     {
       g_warning ("Failed to load image: %s", error->message);
       g_error_free (error);
-      gnome_wp_item_free (item);
+      cc_background_item_free (item);
       return;
     }
 
@@ -176,7 +176,7 @@ picture_opened_for_read (GObject *source_object,
       g_warning ("Failed to load picture '%s': %s", filename, error->message);
       g_free (filename);
       g_error_free (error);
-      gnome_wp_item_free (item);
+      cc_background_item_free (item);
       return;
     }
 
@@ -241,7 +241,7 @@ file_info_async_ready (GObject      *source,
           filename = g_build_filename (path, g_file_info_get_name (info), NULL);
 
           /* create a new GnomeWpItem */
-          item = gnome_wp_item_new (filename, NULL,
+          item = cc_background_item_new (filename, NULL,
                                     info,
                                     priv->thumb_factory);
 

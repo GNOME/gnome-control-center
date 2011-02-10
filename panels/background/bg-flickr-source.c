@@ -26,7 +26,7 @@
 #include <libsocialweb-client/sw-item.h>
 #include <libsocialweb-client/sw-client-service.h>
 
-#include "gnome-wp-item.h"
+#include "cc-background-item.h"
 
 G_DEFINE_TYPE (BgFlickrSource, bg_flickr_source, BG_TYPE_SOURCE)
 
@@ -106,7 +106,7 @@ _view_items_added_cb (SwClientItemView *item_view,
 
       item->shade_type = G_DESKTOP_BACKGROUND_SHADING_SOLID;
 
-      gnome_wp_item_ensure_gnome_bg (item);
+      cc_background_item_ensure_gnome_bg (item);
 
       /* insert the item into the liststore */
       thumb_url = sw_item_get_value (sw_item, "thumbnail");

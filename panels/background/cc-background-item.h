@@ -67,23 +67,23 @@ struct _GnomeWPItem {
   gint height;
 };
 
-GnomeWPItem * gnome_wp_item_new (const gchar *filename,
+GnomeWPItem * cc_background_item_new (const gchar *filename,
 				 GHashTable *wallpapers,
 				 GFileInfo *file_info,
 				 GnomeDesktopThumbnailFactory *thumbnails);
 
-void gnome_wp_item_free (GnomeWPItem *item);
-GIcon * gnome_wp_item_get_thumbnail (GnomeWPItem *item,
+void cc_background_item_free (GnomeWPItem *item);
+GIcon * cc_background_item_get_thumbnail (GnomeWPItem *item,
 				     GnomeDesktopThumbnailFactory *thumbs,
 				     gint width,
 				     gint height);
-GIcon * gnome_wp_item_get_frame_thumbnail (GnomeWPItem *item,
+GIcon * cc_background_item_get_frame_thumbnail (GnomeWPItem *item,
 					   GnomeDesktopThumbnailFactory *thumbs,
 					   gint width,
 					   gint height,
 					   gint frame);
-void gnome_wp_item_update (GnomeWPItem *item);
-void gnome_wp_item_update_size (GnomeWPItem *item, GnomeDesktopThumbnailFactory *thumbs);
-void gnome_wp_item_ensure_gnome_bg (GnomeWPItem *item);
+void cc_background_item_update (GnomeWPItem *item);
+void cc_background_item_update_size (GnomeWPItem *item, GnomeDesktopThumbnailFactory *thumbs);
+void cc_background_item_ensure_gnome_bg (GnomeWPItem *item);
 
 #endif

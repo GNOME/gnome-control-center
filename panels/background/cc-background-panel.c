@@ -31,7 +31,7 @@
 #endif
 
 #include "gnome-wp-xml.h"
-#include "gnome-wp-item.h"
+#include "cc-background-item.h"
 
 #include <string.h>
 #include <glib/gi18n-lib.h>
@@ -198,7 +198,7 @@ cc_background_panel_finalize (GObject *object)
 
   if (priv->current_background)
     {
-      gnome_wp_item_free (priv->current_background);
+      cc_background_item_free (priv->current_background);
       priv->current_background = NULL;
     }
 
@@ -391,8 +391,8 @@ update_preview (CcBackgroundPanelPrivate *priv,
       priv->current_background->height = item->height;
       priv->current_background->width = item->width;
 
-      gnome_wp_item_ensure_gnome_bg (priv->current_background);
-      gnome_wp_item_update_size (priv->current_background, priv->thumb_factory);
+      cc_background_item_ensure_gnome_bg (priv->current_background);
+      cc_background_item_update_size (priv->current_background, priv->thumb_factory);
     }
 
   source_update_edit_box (priv);
@@ -593,7 +593,7 @@ preview_draw_cb (GtkWidget         *widget,
   if (priv->current_background)
     {
       GIcon *icon;
-      icon = gnome_wp_item_get_frame_thumbnail (priv->current_background,
+      icon = cc_background_item_get_frame_thumbnail (priv->current_background,
                                                 priv->thumb_factory,
                                                 preview_width,
                                                 preview_height,
@@ -832,9 +832,9 @@ cc_background_panel_init (CcBackgroundPanel *self)
   priv->current_background->filename = filename;
   priv->current_background->name = g_strdup (_("Current background"));
 
-  gnome_wp_item_update (priv->current_background);
-  gnome_wp_item_ensure_gnome_bg (priv->current_background);
-  gnome_wp_item_update_size (priv->current_background, priv->thumb_factory);
+  cc_background_item_update (priv->current_background);
+  cc_background_item_ensure_gnome_bg (priv->current_background);
+  cc_background_item_update_size (priv->current_background, priv->thumb_factory);
 
   update_preview (priv, NULL, TRUE);
 
