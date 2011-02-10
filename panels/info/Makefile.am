@@ -8,6 +8,7 @@ INCLUDES = 						\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(datadir)\""			\
+	-DLIBEXECDIR="\"$(libexecdir)\""		\
 	$(NULL)
 
 ccpanelsdir = $(PANELS_DIR)

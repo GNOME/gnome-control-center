@@ -33,6 +33,9 @@
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
 
+#define GNOME_SESSION_MANAGER_SCHEMA        "org.gnome.desktop.session"
+#define KEY_SESSION_NAME          "session-name"
+
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
 G_DEFINE_DYNAMIC_TYPE (CcInfoPanel, cc_info_panel, CC_TYPE_PANEL)
@@ -46,6 +49,10 @@ struct _CcInfoPanelPrivate
   char          *gnome_version;
   char          *gnome_distributor;
   char          *gnome_date;
+
+  GDBusConnection     *session_bus;
+  GDBusProxy    *session_manager_proxy;
+  GSettings     *session_settings;
 };
 
 typedef struct
@@ -162,103 +169,6 @@ load_gnome_version (char **version,
   return ret;
 };
 
-static char *
-get_graphics_info_lspci (void)
-{
-  GError     *error;
-  GRegex     *re;
-  GMatchInfo *match_info;
-  char       *output;
-  GString    *info;
-
-  info = g_string_new (NULL);
-
-  error = NULL;
-  g_spawn_command_line_sync ("lspci -nn", &output, NULL, NULL, &error);
-  if (error != NULL)
-    {
-      g_warning ("Unable to get graphics info: %s", error->message);
-      g_error_free (error);
-      return NULL;
-    }
-
-  re = g_regex_new ("^[^ ]+ VGA compatible controller [^:]*: ([^([]+).*$", G_REGEX_MULTILINE, 0, &error);
-  if (re == NULL)
-    {
-      g_warning ("Error building regex: %s", error->message);
-      g_error_free (error);
-      goto out;
-    }
-
-  g_regex_match (re, output, 0, &match_info);
-  while (g_match_info_matches (match_info))
-    {
-      char *device;
-
-      device = g_match_info_fetch (match_info, 1);
-      g_string_append_printf (info, "%s ", device);
-      g_free (device);
-
-      g_match_info_next (match_info, NULL);
-    }
-
-  g_match_info_free (match_info);
-  g_regex_unref (re);
-
- out:
-  g_free (output);
-
-  return g_string_free (info, FALSE);
-}
-
-static char *
-get_graphics_info_glxinfo (void)
-{
-  GError     *error;
-  GRegex     *re;
-  GMatchInfo *match_info;
-  char       *output;
-  GString    *info;
-
-  info = g_string_new (NULL);
-
-  error = NULL;
-  g_spawn_command_line_sync ("glxinfo -l", &output, NULL, NULL, &error);
-  if (error != NULL)
-    {
-      g_warning ("Unable to get graphics info: %s", error->message);
-      g_error_free (error);
-      return NULL;
-    }
-
-  re = g_regex_new ("^OpenGL renderer string: (.+)$", G_REGEX_MULTILINE, 0, &error);
-  if (re == NULL)
-    {
-      g_warning ("Error building regex: %s", error->message);
-      g_error_free (error);
-      goto out;
-    }
-
-  g_regex_match (re, output, 0, &match_info);
-  while (g_match_info_matches (match_info))
-    {
-      char *device;
-
-      device = g_match_info_fetch (match_info, 1);
-      g_string_append_printf (info, "%s ", device);
-      g_free (device);
-
-      g_match_info_next (match_info, NULL);
-    }
-  g_match_info_free (match_info);
-  g_regex_unref (re);
-
- out:
-  g_free (output);
-
-  return g_string_free (info, FALSE);
-}
-
 typedef struct
 {
   char *regex;
@@ -320,10 +230,114 @@ prettify_info (const char *info)
   return pretty;
 }
 
+
+static char *
+get_graphics_info_lspci (void)
+{
+  GError     *error;
+  GRegex     *re;
+  GMatchInfo *match_info;
+  char       *output;
+  char       *result;
+  GString    *info;
+
+  info = g_string_new (NULL);
+
+  error = NULL;
+  g_spawn_command_line_sync ("lspci -nn", &output, NULL, NULL, &error);
+  if (error != NULL)
+    {
+      g_warning ("Unable to get graphics info: %s", error->message);
+      g_error_free (error);
+      return NULL;
+    }
+
+  re = g_regex_new ("^[^ ]+ VGA compatible controller [^:]*: ([^([]+).*$", G_REGEX_MULTILINE, 0, &error);
+  if (re == NULL)
+    {
+      g_warning ("Error building regex: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  g_regex_match (re, output, 0, &match_info);
+  while (g_match_info_matches (match_info))
+    {
+      char *device;
+
+      device = g_match_info_fetch (match_info, 1);
+      g_string_append_printf (info, "%s ", device);
+      g_free (device);
+
+      g_match_info_next (match_info, NULL);
+    }
+
+  g_match_info_free (match_info);
+  g_regex_unref (re);
+
+ out:
+  g_free (output);
+  result = prettify_info (info->str);
+  g_string_free (info, TRUE);
+
+  return result;
+}
+
+static char *
+get_graphics_info_glxinfo (void)
+{
+  GError     *error;
+  GRegex     *re;
+  GMatchInfo *match_info;
+  char       *output;
+  char       *result;
+  GString    *info;
+
+  info = g_string_new (NULL);
+
+  error = NULL;
+  g_spawn_command_line_sync ("glxinfo -l", &output, NULL, NULL, &error);
+  if (error != NULL)
+    {
+      g_warning ("Unable to get graphics info: %s", error->message);
+      g_error_free (error);
+      return NULL;
+    }
+
+  re = g_regex_new ("^OpenGL renderer string: (.+)$", G_REGEX_MULTILINE, 0, &error);
+  if (re == NULL)
+    {
+      g_warning ("Error building regex: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  g_regex_match (re, output, 0, &match_info);
+  while (g_match_info_matches (match_info))
+    {
+      char *device;
+
+      device = g_match_info_fetch (match_info, 1);
+      g_string_append_printf (info, "%s ", device);
+      g_free (device);
+
+      g_match_info_next (match_info, NULL);
+    }
+  g_match_info_free (match_info);
+  g_regex_unref (re);
+
+ out:
+  g_free (output);
+  result = prettify_info (info->str);
+  g_string_free (info, TRUE);
+
+  return result;
+}
+
 static char *
 get_graphics_info (void)
 {
-  char *info;
+  gchar *info;
 
   info = get_graphics_info_glxinfo ();
   if (info == NULL)
@@ -331,6 +345,63 @@ get_graphics_info (void)
 
   return info;
 }
+
+static gboolean
+get_is_graphics_accelerated (void)
+{
+  GError *error = NULL;
+  gchar *is_accelerated_binary;
+  gchar *argv[2];
+  gint estatus;
+
+  is_accelerated_binary = g_build_filename (LIBEXECDIR, "gnome-session-is-accelerated", NULL);
+
+  error = NULL;
+  argv[0] = is_accelerated_binary;
+  argv[G_N_ELEMENTS(argv)] = NULL;
+
+  g_spawn_sync (NULL, argv, NULL, G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
+                NULL, NULL, NULL, NULL, &estatus, &error);
+  if (error != NULL || estatus != 0)
+    return FALSE;
+  else
+    return TRUE;
+
+}
+
+static char *
+get_graphics_experience (CcInfoPanel  *self)
+{
+  GError *error = NULL;
+  GVariant *reply, *reply_bool;
+  gboolean is_fallback;
+  gchar *experience_str;
+
+  if (!(reply = g_dbus_connection_call_sync (self->priv->session_bus,
+                                             "org.gnome.SessionManager",
+                                             "/org/gnome/SessionManager",
+                                             "org.freedesktop.DBus.Properties",
+                                             "Get",
+                                             g_variant_new ("(ss)", "org.gnome.SessionManager", "fallback"),
+                                             (GVariantType*)"v",
+                                             0,
+                                             -1,
+                                             NULL, &error)))
+    {
+      g_warning ("Failed to get fallback mode: %s", error->message);
+      g_clear_error (&error);
+      return NULL;
+    }
+
+  g_variant_get (reply, "v", &reply_bool);
+  is_fallback = g_variant_get_boolean (reply_bool);
+  experience_str = g_strdup (is_fallback ? _("Fallback") : _("Default"));
+  g_variant_unref (reply_bool);
+  g_variant_unref (reply);
+
+  return experience_str;
+}
+
 
 static void
 cc_info_panel_get_property (GObject    *object,
@@ -602,31 +673,140 @@ get_cpu_info (const glibtop_sysinfo *info)
 }
 
 static void
-cc_info_panel_init (CcInfoPanel *self)
+on_section_changed (GtkTreeSelection  *selection,
+                    gpointer           data)
 {
-  GError     *error;
+  CcInfoPanel *self = CC_INFO_PANEL (data);
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkTreePath *path;
+  gint *indices;
+  int index;
+
+  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+    return;
+
+  path = gtk_tree_model_get_path (model, &iter);
+
+  indices = gtk_tree_path_get_indices (path);
+  index = indices[0];
+
+  if (index >= 0)
+    {
+      g_object_set (G_OBJECT (WID (self->priv->builder, "notebook")),
+                    "page", index, NULL);
+    }
+
+  gtk_tree_path_free (path);
+}
+
+static gboolean
+switch_fallback_get_mapping (GValue    *value,
+                             GVariant  *variant,
+                             gpointer   data)
+{
+  const char *setting = g_variant_get_string (variant, NULL);
+  g_value_set_boolean (value, strcmp (setting, "gnome") != 0);
+  return TRUE;
+}
+
+static GVariant *
+switch_fallback_set_mapping (const GValue        *value,
+                             const GVariantType  *expected_type,
+                             gpointer             data)
+{
+  gboolean is_set = g_value_get_boolean (value);
+  return g_variant_new_string (is_set ? "gnome-fallback" : "gnome");
+}
+
+static void
+info_panel_setup_graphics (CcInfoPanel  *self)
+{
+  GtkWidget *widget;
+  GtkSwitch *sw;
+  gchar *text;
+  
+  text = get_graphics_info ();
+  widget = WID (self->priv->builder, "graphics_chipset_label");
+  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
+  g_free (text);
+
+  text = NULL;
+  widget = WID (self->priv->builder, "graphics_driver_label");
+  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
+  g_free (text);
+
+  text = get_graphics_experience (self);
+  widget = WID (self->priv->builder, "graphics_experience_label");
+  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
+  g_free (text);
+
+  widget = WID (self->priv->builder, "graphics_fallback_switch_box");
+  sw = GTK_SWITCH (gtk_switch_new ());
+  g_settings_bind_with_mapping (self->priv->session_settings, KEY_SESSION_NAME,
+                                sw, "active", 0,
+                                switch_fallback_get_mapping,
+                                switch_fallback_set_mapping, self, NULL);
+  gtk_container_add (GTK_CONTAINER (widget), GTK_WIDGET (sw));
+  gtk_widget_show_all (GTK_WIDGET (sw));
+}
+
+static void
+info_panel_setup_selector (CcInfoPanel  *self)
+{
+  GtkTreeView *view;
+  GtkListStore *model;
+  GtkTreeSelection *selection;
+  GtkTreeViewColumn *column;
+  GtkCellRenderer *renderer;
+  GtkTreeIter iter;
+  int section_name_column = 0;
+
+  view = GTK_TREE_VIEW (WID (self->priv->builder, "overview_treeview"));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
+
+  model = gtk_list_store_new (1, G_TYPE_STRING);
+  gtk_tree_view_set_model (view, GTK_TREE_MODEL (model));
+  g_object_unref (model);
+
+  renderer = gtk_cell_renderer_text_new ();
+  g_object_set (renderer,
+                "width-chars", 20,
+                "ellipsize", PANGO_ELLIPSIZE_END,
+                NULL);
+  column = gtk_tree_view_column_new_with_attributes (_("Section"),
+                                                     renderer,
+                                                     "text", section_name_column,
+                                                     NULL);
+  gtk_tree_view_append_column (view, column);
+
+
+  gtk_list_store_append (model, &iter);
+  gtk_list_store_set (model, &iter, section_name_column,
+                      _("Overview"),
+                      -1);
+  gtk_tree_selection_select_iter (selection, &iter);
+
+  gtk_list_store_append (model, &iter);
+  gtk_list_store_set (model, &iter, section_name_column,
+                      _("Graphics"),
+                      -1);
+
+  g_signal_connect (selection, "changed",
+                    G_CALLBACK (on_section_changed), self);
+  on_section_changed (selection, self);
+
+  gtk_widget_show_all (GTK_WIDGET (view));
+}
+
+static void
+info_panel_setup_overview (CcInfoPanel  *self)
+{
   GtkWidget  *widget;
   gboolean    res;
   glibtop_mem mem;
   const glibtop_sysinfo *info;
   char       *text;
-  char       *pretty;
-
-  self->priv = INFO_PANEL_PRIVATE (self);
-
-  self->priv->builder = gtk_builder_new ();
-
-  error = NULL;
-  gtk_builder_add_from_file (self->priv->builder,
-                             GNOMECC_UI_DIR "/info.ui",
-                             &error);
-
-  if (error != NULL)
-    {
-      g_warning ("Could not load interface file: %s", error->message);
-      g_error_free (error);
-      return;
-    }
 
   res = load_gnome_version (&self->priv->gnome_version,
                             &self->priv->gnome_distributor,
@@ -649,9 +829,7 @@ cc_info_panel_init (CcInfoPanel *self)
 
   widget = WID (self->priv->builder, "processor_label");
   text = get_cpu_info (info);
-  pretty = prettify_info (text);
-  gtk_label_set_markup (GTK_LABEL (widget), pretty ? pretty : "");
-  g_free (pretty);
+  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
   widget = WID (self->priv->builder, "os_type_label");
@@ -665,14 +843,42 @@ cc_info_panel_init (CcInfoPanel *self)
   g_free (text);
 
   text = get_graphics_info ();
-  pretty = prettify_info (text);
   widget = WID (self->priv->builder, "graphics_label");
-  gtk_label_set_markup (GTK_LABEL (widget), pretty ? pretty : "");
+  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
-  g_free (pretty);
 
-  widget = WID (self->priv->builder, "info_vbox");
+  widget = WID (self->priv->builder, "info_paned");
   gtk_widget_reparent (widget, (GtkWidget *) self);
+}
+
+static void
+cc_info_panel_init (CcInfoPanel *self)
+{
+  GError *error = NULL;
+
+  self->priv = INFO_PANEL_PRIVATE (self);
+
+  self->priv->builder = gtk_builder_new ();
+
+  self->priv->session_settings = g_settings_new (GNOME_SESSION_MANAGER_SCHEMA);
+
+  self->priv->session_bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+  g_assert (self->priv->session_bus);
+
+  gtk_builder_add_from_file (self->priv->builder,
+                             GNOMECC_UI_DIR "/info.ui",
+                             &error);
+
+  if (error != NULL)
+    {
+      g_warning ("Could not load interface file: %s", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  info_panel_setup_selector (self);
+  info_panel_setup_overview (self);
+  info_panel_setup_graphics (self);
 }
 
 void
