@@ -23,6 +23,13 @@
 #include <gio/gio.h>
 #include <string.h>
 #include <libxml/parser.h>
+#include <libgnome-desktop/gnome-bg.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
+
+static const gchar *wp_item_option_to_string (GDesktopBackgroundStyle type);
+static const gchar *wp_item_shading_to_string (GDesktopBackgroundShading type);
+static GDesktopBackgroundStyle wp_item_string_to_option (const gchar *option);
+static GDesktopBackgroundShading wp_item_string_to_shading (const gchar *shade_type);
 
 static gboolean gnome_wp_xml_get_bool (const xmlNode * parent,
 				       const gchar * prop_name) {
@@ -379,4 +386,78 @@ void gnome_wp_xml_save_list (GnomeWpXml *data) {
   xmlSaveFormatFile (wpfile, wplist, 1);
   xmlFreeDoc (wplist);
   g_free (wpfile);
+}
+
+static struct {
+  GDesktopBackgroundStyle value;
+  gchar *string;
+} options_lookup[] = {
+  { G_DESKTOP_BACKGROUND_STYLE_CENTERED, "centered" },
+  { G_DESKTOP_BACKGROUND_STYLE_STRETCHED, "stretched" },
+  { G_DESKTOP_BACKGROUND_STYLE_SCALED, "scaled" },
+  { G_DESKTOP_BACKGROUND_STYLE_ZOOM, "zoom" },
+  { G_DESKTOP_BACKGROUND_STYLE_WALLPAPER, "wallpaper" },
+  { G_DESKTOP_BACKGROUND_STYLE_SPANNED, "spanned" },
+  { 0, NULL }
+};
+
+static struct {
+  GDesktopBackgroundShading value;
+  gchar *string;
+} shade_lookup[] = {
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, "solid" },
+  { G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL, "horizontal-gradient" },
+  { G_DESKTOP_BACKGROUND_SHADING_VERTICAL, "vertical-gradient" },
+  { 0, NULL }
+};
+
+static const
+gchar *wp_item_option_to_string (GDesktopBackgroundStyle type)
+{
+  int i;
+
+  for (i = 0; options_lookup[i].value != 0; i++) {
+    if (options_lookup[i].value == type)
+      return (const gchar *) options_lookup[i].string;
+  }
+
+  return "scaled";
+}
+
+static const
+gchar *wp_item_shading_to_string (GDesktopBackgroundShading type)
+{
+  int i;
+
+  for (i = 0; shade_lookup[i].value != 0; i++) {
+    if (shade_lookup[i].value == type)
+      return (const gchar *) shade_lookup[i].string;
+  }
+
+  return "solid";
+}
+
+static GDesktopBackgroundStyle
+wp_item_string_to_option (const gchar *option)
+{
+  gint i;
+
+  for (i = 0; options_lookup[i].value != 0; i++) {
+    if (g_str_equal (options_lookup[i].string, option))
+      return options_lookup[i].value;
+  }
+
+  return G_DESKTOP_BACKGROUND_STYLE_SCALED;
+}
+
+static GDesktopBackgroundShading
+wp_item_string_to_shading (const gchar *shade_type)
+{
+  int i;
+
+  for (i = 0; shade_lookup[i].value != 0; i++) {
+    if (g_str_equal (shade_lookup[i].string, shade_type))
+      return options_lookup[i].value;
+  }
+  return G_DESKTOP_BACKGROUND_SHADING_SOLID;
 }
