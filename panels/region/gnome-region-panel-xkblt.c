@@ -287,7 +287,7 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 		GtkTreeIter iter;
 		char *cur_layout = layouts[i];
 		gchar *utf_visible =
-			xkb_layout_description_utf8 (cur_layout);
+		    xkb_layout_description_utf8 (cur_layout);
 
 		gtk_list_store_append (list_store, &iter);
 		gtk_list_store_set (list_store, &iter,
@@ -296,8 +296,7 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 				    SEL_LAYOUT_TREE_COL_ID,
 				    cur_layout,
 				    SEL_LAYOUT_TREE_COL_ENABLED,
-				    i < max_selected_layouts,
-				    -1);
+				    i < max_selected_layouts, -1);
 		g_free (utf_visible);
 	}
 
@@ -337,9 +336,13 @@ show_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 	if (idx != -1) {
 		GtkWidget *parent = WID ("region_notebook");
 		GtkWidget *popup = gkbd_keyboard_drawing_dialog_new ();
-		gkbd_keyboard_drawing_dialog_set_group (popup, idx);
+		gkbd_keyboard_drawing_dialog_set_group (popup,
+							config_registry,
+							idx);
 		gtk_window_set_transient_for (GTK_WINDOW (popup),
-					      GTK_WINDOW (gtk_widget_get_toplevel (parent)));
+					      GTK_WINDOW
+					      (gtk_widget_get_toplevel
+					       (parent)));
 		gtk_widget_show_all (popup);
 	}
 }
