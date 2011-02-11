@@ -244,7 +244,6 @@ file_info_async_ready (GObject      *source,
           item = cc_background_item_new (uri);
           g_free (uri);
           g_object_set (G_OBJECT (item), "flags", CC_BACKGROUND_ITEM_HAS_URI, NULL);
-          cc_background_item_load (item, info); /* FIXME use asynchronous load, and remove if failed */
 
           if (cc_background_item_get_placement (item) == G_DESKTOP_BACKGROUND_STYLE_NONE)
             g_object_set (G_OBJECT (item), "placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM, NULL);
