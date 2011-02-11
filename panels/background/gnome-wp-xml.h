@@ -31,7 +31,6 @@ struct _GnomeWpXml
 {
   GHashTable *wp_hash;
   GnomeDesktopThumbnailFactory *thumb_factory;
-  GSettings *settings;
   gint thumb_height;
   gint thumb_width;
   GtkListStore *wp_model;
