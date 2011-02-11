@@ -202,7 +202,6 @@ file_info_async_ready (GObject      *source,
   GList *files, *l;
   GError *err = NULL;
   GFile *parent;
-  gchar *path;
   files = g_file_enumerator_next_files_finish (G_FILE_ENUMERATOR (source),
                                                res,
                                                &err);
@@ -218,7 +217,6 @@ file_info_async_ready (GObject      *source,
     }
 
   parent = g_file_enumerator_get_container (G_FILE_ENUMERATOR (source));
-  path = g_file_get_path (parent);
 
   /* iterate over the available files */
   for (l = files; l; l = g_list_next (l))
@@ -236,18 +234,18 @@ file_info_async_ready (GObject      *source,
           || !strcmp ("image/jpeg", content_type))
         {
           CcBackgroundItem *item;
-          gchar *filename;
           GFile *file;
+          char *uri;
 
-          filename = g_build_filename (path, g_file_info_get_name (info), NULL);
+          file = g_file_get_child (parent, g_file_info_get_name (info));
 
           /* create a new CcBackgroundItem */
-          item = cc_background_item_new (filename);
-          g_object_set (G_OBJECT (item), "flags", CC_BACKGROUND_ITEM_HAS_FNAME, NULL);
+          uri = g_file_get_uri (file);
+          item = cc_background_item_new (uri);
+          g_free (uri);
+          g_object_set (G_OBJECT (item), "flags", CC_BACKGROUND_ITEM_HAS_URI, NULL);
           cc_background_item_load (item, info); /* FIXME use asynchronous load, and remove if failed */
 
-          file = g_file_new_for_path (filename);
-          g_free (filename);
           if (cc_background_item_get_placement (item) == G_DESKTOP_BACKGROUND_STYLE_NONE)
             g_object_set (G_OBJECT (item), "placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM, NULL);
           g_object_set_data (G_OBJECT (file), "item", item);
@@ -258,8 +256,6 @@ file_info_async_ready (GObject      *source,
 
   g_list_foreach (files, (GFunc) g_object_unref, NULL);
   g_list_free (files);
-
-  g_free (path);
 }
 
 static void

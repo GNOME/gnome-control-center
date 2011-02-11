@@ -41,7 +41,7 @@ struct CcBackgroundItemPrivate
 {
         /* properties */
         char            *name;
-        char            *filename;
+        char            *uri;
         char            *size;
         GDesktopBackgroundStyle placement;
         GDesktopBackgroundShading shading;
@@ -62,7 +62,7 @@ struct CcBackgroundItemPrivate
 enum {
         PROP_0,
         PROP_NAME,
-        PROP_FILENAME,
+        PROP_URI,
         PROP_PLACEMENT,
         PROP_SHADING,
         PROP_PRIMARY_COLOR,
@@ -104,8 +104,17 @@ set_bg_properties (CcBackgroundItem *item)
         GdkColor pcolor = { 0, 0, 0, 0 };
         GdkColor scolor = { 0, 0, 0, 0 };
 
-        if (item->priv->filename)
-                gnome_bg_set_filename (item->priv->bg, item->priv->filename);
+        if (item->priv->uri) {
+		GFile *file;
+		char *filename;
+
+		file = g_file_new_for_commandline_arg (item->priv->uri);
+		filename = g_file_get_path (file);
+		g_object_unref (file);
+
+		gnome_bg_set_filename (item->priv->bg, filename);
+		g_free (filename);
+	}
 
         if (item->priv->primary_color != NULL) {
                 gdk_color_parse (item->priv->primary_color, &pcolor);
@@ -139,7 +148,7 @@ update_size (CcBackgroundItem *item)
 	g_free (item->priv->size);
 	item->priv->size = NULL;
 
-	if (item->priv->filename == NULL || g_str_equal (item->priv->filename, "(none)")) {
+	if (item->priv->uri == NULL) {
 		item->priv->size = g_strdup ("");
 	} else {
 		if (gnome_bg_has_multiple_sizes (item->priv->bg) || gnome_bg_changes_with_time (item->priv->bg)) {
@@ -226,12 +235,13 @@ update_info (CcBackgroundItem *item,
         GFileInfo *info;
 
 	if (_info == NULL) {
-		file = g_file_new_for_commandline_arg (item->priv->filename);
+		file = g_file_new_for_uri (item->priv->uri);
 
 		info = g_file_query_info (file,
 					  G_FILE_ATTRIBUTE_STANDARD_NAME ","
 					  G_FILE_ATTRIBUTE_STANDARD_SIZE ","
 					  G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE ","
+					  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME ","
 					  G_FILE_ATTRIBUTE_TIME_MODIFIED,
 					  G_FILE_QUERY_INFO_NONE,
 					  NULL,
@@ -246,36 +256,16 @@ update_info (CcBackgroundItem *item,
 
         if (info == NULL
             || g_file_info_get_content_type (info) == NULL) {
-                if (item->priv->filename == NULL) {
+                if (item->priv->uri == NULL) {
                         item->priv->mime_type = g_strdup ("image/x-no-data");
                         g_free (item->priv->name);
                         item->priv->name = g_strdup (_("No Desktop Background"));
-                        //item->priv->size = 0;
                 }
         } else {
-                if (item->priv->name == NULL) {
-                        const char *name;
-
-                        g_free (item->priv->name);
-
-                        name = g_file_info_get_name (info);
-                        if (g_utf8_validate (name, -1, NULL))
-                                item->priv->name = g_strdup (name);
-                        else
-                                item->priv->name = g_filename_to_utf8 (name,
-                                                                       -1,
-                                                                       NULL,
-                                                                       NULL,
-                                                                       NULL);
-                }
+                if (item->priv->name == NULL)
+                        item->priv->name = g_strdup (g_file_info_get_display_name (info));
 
                 item->priv->mime_type = g_strdup (g_file_info_get_content_type (info));
-
-#if 0
-                item->priv->size = g_file_info_get_size (info);
-                item->priv->mtime = g_file_info_get_attribute_uint64 (info,
-                                                                      G_FILE_ATTRIBUTE_TIME_MODIFIED);
-#endif
         }
 
         if (info != NULL)
@@ -295,7 +285,7 @@ cc_background_item_load (CcBackgroundItem *item,
 			 GFileInfo        *info)
 {
         g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), FALSE);
-        g_return_val_if_fail (item->priv->filename != NULL, FALSE);
+        g_return_val_if_fail (item->priv->uri != NULL, FALSE);
 
         update_info (item, info);
 
@@ -310,9 +300,13 @@ cc_background_item_load (CcBackgroundItem *item,
 	/* FIXME we should handle XML files as well */
         if (item->priv->mime_type != NULL &&
             g_str_has_prefix (item->priv->mime_type, "image/")) {
-		gdk_pixbuf_get_file_info (item->priv->filename,
+		char *filename;
+
+		filename = g_filename_from_uri (item->priv->uri, NULL, NULL);
+		gdk_pixbuf_get_file_info (filename,
 					  &item->priv->width,
 					  &item->priv->height);
+		g_free (filename);
 		update_size (item);
 	}
 
@@ -336,19 +330,19 @@ cc_background_item_get_name (CcBackgroundItem *item)
 }
 
 static void
-_set_filename (CcBackgroundItem *item,
-               const char       *value)
+_set_uri (CcBackgroundItem *item,
+	  const char       *value)
 {
-        g_free (item->priv->filename);
-        item->priv->filename = g_strdup (value);
+        g_free (item->priv->uri);
+        item->priv->uri = g_strdup (value);
 }
 
 const char *
-cc_background_item_get_filename (CcBackgroundItem *item)
+cc_background_item_get_uri (CcBackgroundItem *item)
 {
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 
-	return item->priv->filename;
+	return item->priv->uri;
 }
 
 static void
@@ -489,8 +483,8 @@ cc_background_item_set_property (GObject      *object,
         case PROP_NAME:
                 _set_name (self, g_value_get_string (value));
                 break;
-        case PROP_FILENAME:
-                _set_filename (self, g_value_get_string (value));
+        case PROP_URI:
+                _set_uri (self, g_value_get_string (value));
                 break;
         case PROP_PLACEMENT:
                 _set_placement (self, g_value_get_enum (value));
@@ -536,8 +530,8 @@ cc_background_item_get_property (GObject    *object,
         case PROP_NAME:
                 g_value_set_string (value, self->priv->name);
                 break;
-        case PROP_FILENAME:
-                g_value_set_string (value, self->priv->filename);
+	case PROP_URI:
+                g_value_set_string (value, self->priv->uri);
                 break;
         case PROP_PLACEMENT:
                 g_value_set_enum (value, self->priv->placement);
@@ -615,10 +609,10 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
                                                               NULL,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
-                                         PROP_FILENAME,
-                                         g_param_spec_string ("filename",
-                                                              "filename",
-                                                              "filename",
+                                         PROP_URI,
+                                         g_param_spec_string ("uri",
+                                                              "uri",
+                                                              "uri",
                                                               NULL,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
@@ -730,7 +724,7 @@ cc_background_item_finalize (GObject *object)
         g_return_if_fail (item->priv != NULL);
 
         g_free (item->priv->name);
-        g_free (item->priv->filename);
+        g_free (item->priv->uri);
         g_free (item->priv->primary_color);
         g_free (item->priv->secondary_color);
         g_free (item->priv->mime_type);
@@ -743,12 +737,12 @@ cc_background_item_finalize (GObject *object)
 }
 
 CcBackgroundItem *
-cc_background_item_new (const char *filename)
+cc_background_item_new (const char *uri)
 {
         GObject *object;
 
         object = g_object_new (CC_TYPE_BACKGROUND_ITEM,
-                               "filename", filename,
+                               "uri", uri,
                                NULL);
 
         return CC_BACKGROUND_ITEM (object);
@@ -759,9 +753,8 @@ cc_background_item_copy (CcBackgroundItem *item)
 {
 	CcBackgroundItem *ret;
 
-	ret = cc_background_item_new (item->priv->filename);
+	ret = cc_background_item_new (item->priv->uri);
 	ret->priv->name = g_strdup (item->priv->name);
-	ret->priv->filename = g_strdup (item->priv->filename);
 	ret->priv->size = g_strdup (item->priv->size);
 	ret->priv->placement = item->priv->placement;
 	ret->priv->shading = item->priv->shading;
@@ -801,7 +794,7 @@ cc_background_item_dump (CcBackgroundItem *item)
 	priv = item->priv;
 
 	g_debug ("name:\t\t\t%s", priv->name);
-	g_debug ("filename:\t\t%s", priv->filename ? priv->filename : "NULL");
+	g_debug ("URI:\t\t\t%s", priv->uri ? priv->uri : "NULL");
 	if (priv->size)
 		g_debug ("size:\t\t\t'%s'", priv->size);
 	flags = g_string_new (NULL);

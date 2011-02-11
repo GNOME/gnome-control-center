@@ -37,11 +37,11 @@ G_BEGIN_DECLS
 #define CC_BACKGROUND_ITEM_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CC_TYPE_BACKGROUND_ITEM, CcBackgroundItemClass))
 
 typedef enum {
-	CC_BACKGROUND_ITEM_HAS_SHADING = 1 << 0,
+	CC_BACKGROUND_ITEM_HAS_SHADING   = 1 << 0,
 	CC_BACKGROUND_ITEM_HAS_PLACEMENT = 1 << 1,
-	CC_BACKGROUND_ITEM_HAS_PCOLOR = 1 << 2,
-	CC_BACKGROUND_ITEM_HAS_SCOLOR = 1 << 3,
-	CC_BACKGROUND_ITEM_HAS_FNAME = 1 << 4
+	CC_BACKGROUND_ITEM_HAS_PCOLOR    = 1 << 2,
+	CC_BACKGROUND_ITEM_HAS_SCOLOR    = 1 << 3,
+	CC_BACKGROUND_ITEM_HAS_URI       = 1 << 4
 } CcBackgroundItemFlags;
 
 #define CC_BACKGROUND_ITEM_HAS_ALL (CC_BACKGROUND_ITEM_HAS_SHADING &	\
@@ -66,7 +66,7 @@ typedef struct
 
 GType              cc_background_item_get_type (void);
 
-CcBackgroundItem * cc_background_item_new                 (const char                   *filename);
+CcBackgroundItem * cc_background_item_new                 (const char                   *uri);
 CcBackgroundItem * cc_background_item_copy                (CcBackgroundItem             *item);
 gboolean           cc_background_item_load                (CcBackgroundItem             *item,
 							   GFileInfo                    *info);
@@ -84,7 +84,7 @@ GIcon     *        cc_background_item_get_frame_thumbnail (CcBackgroundItem     
 
 GDesktopBackgroundStyle   cc_background_item_get_placement  (CcBackgroundItem *item);
 GDesktopBackgroundShading cc_background_item_get_shading    (CcBackgroundItem *item);
-const char *              cc_background_item_get_filename   (CcBackgroundItem *item);
+const char *              cc_background_item_get_uri        (CcBackgroundItem *item);
 const char *              cc_background_item_get_source_url (CcBackgroundItem *item);
 const char *              cc_background_item_get_source_xml (CcBackgroundItem *item);
 CcBackgroundItemFlags     cc_background_item_get_flags      (CcBackgroundItem *item);

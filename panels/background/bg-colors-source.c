@@ -71,8 +71,8 @@ bg_colors_source_init (BgColorsSource *self)
       flags = CC_BACKGROUND_ITEM_HAS_PCOLOR |
 	      CC_BACKGROUND_ITEM_HAS_SCOLOR |
 	      CC_BACKGROUND_ITEM_HAS_SHADING |
-	      CC_BACKGROUND_ITEM_HAS_FNAME;
-      /* It does have a filename, it's "none" */
+	      CC_BACKGROUND_ITEM_HAS_URI;
+      /* It does have a URI, it's "none" */
 
       g_object_set (G_OBJECT (item),
 		    "name", _(items[i].name),

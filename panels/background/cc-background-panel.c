@@ -251,7 +251,7 @@ source_update_edit_box (CcBackgroundPanelPrivate *priv,
     gtk_widget_show (WID ("style-pcolor"));
 
   if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT ||
-      cc_background_item_get_filename (priv->current_background) == NULL)
+      cc_background_item_get_uri (priv->current_background) == NULL)
     gtk_widget_hide (WID ("style-combobox"));
   else
     gtk_widget_show (WID ("style-combobox"));
@@ -405,7 +405,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   CcBackgroundPanelPrivate *priv = panel->priv;
   char *pcolor, *scolor;
   gboolean draw_preview = TRUE;
-  const char *filename;
+  const char *uri;
   CcBackgroundItemFlags flags;
 
   list = gtk_icon_view_get_selected_items (icon_view);
@@ -430,10 +430,10 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   gtk_tree_model_get (model, &iter, 1, &item, -1);
 
-  filename = cc_background_item_get_filename (item);
+  uri = cc_background_item_get_uri (item);
   flags = cc_background_item_get_flags (item);
 
-  if ((flags & CC_BACKGROUND_ITEM_HAS_FNAME) && filename == NULL)
+  if ((flags & CC_BACKGROUND_ITEM_HAS_URI) && uri == NULL)
     {
       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, G_DESKTOP_BACKGROUND_STYLE_NONE);
       g_settings_set_string (priv->settings, WP_FILE_KEY, "");
@@ -444,6 +444,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       gchar *cache_path;
       GdkPixbuf *pixbuf;
 
+      /* FIXME we want a URI here */
       cache_path = g_build_filename (g_get_user_cache_dir (),
                                      "gnome-background",
                                      NULL);
@@ -485,30 +486,17 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                          copy_finished_cb, panel);
 
       g_settings_set_string (priv->settings, WP_FILE_KEY, cache_path);
-      g_object_set (G_OBJECT (item), "filename", cache_path, NULL);
+      g_object_set (G_OBJECT (item), "uri", cache_path, NULL);
 
       /* delay the updated drawing of the preview until the copy finishes */
       draw_preview = FALSE;
     }
   else
     {
-       gchar *uri;
-
-       //FIXME this is garbage, either use uri, or not
-       if (g_utf8_validate (filename, -1, NULL))
-         uri = g_strdup (filename);
-       else
-         uri = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
-
-       if (uri == NULL)
-         {
-           g_warning ("Failed to convert filename to UTF-8: %s", filename);
-         }
-       else
-         {
-	   g_settings_set_string (priv->settings, WP_FILE_KEY, uri);
-           g_free (uri);
-         }
+      char *filename;
+      filename = g_filename_from_uri (uri, NULL, NULL);
+      g_settings_set_string (priv->settings, WP_FILE_KEY, filename);
+      g_free (filename);
     }
 
   if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
@@ -692,7 +680,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
   GError *err = NULL;
   GtkWidget *widget;
   GtkListStore *store;
-  gchar *filename;
+  gchar *uri, *pcolor, *scolor;
 
   priv = self->priv = BACKGROUND_PANEL_PRIVATE (self);
 
@@ -790,21 +778,26 @@ cc_background_panel_init (CcBackgroundPanel *self)
   priv->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
   /* initalise the current background information from settings */
-  filename = g_settings_get_string (priv->settings, WP_FILE_KEY);
-  priv->current_background = cc_background_item_new (filename);
+  uri = g_settings_get_string (priv->settings, WP_FILE_KEY);
+  priv->current_background = cc_background_item_new (uri);
+  g_free (uri);
 
   /* FIXME Set flags too:
    * - if we have a gradient and no filename, set PCOLOR, etc.
    *
    * Move into cc-background-item.c like the old cc_background_item_update()?
    */
+  pcolor = g_settings_get_string (priv->settings, WP_PCOLOR_KEY);
+  scolor = g_settings_get_string (priv->settings, WP_SCOLOR_KEY);
   g_object_set (G_OBJECT (priv->current_background),
 		"name", _("Current background"),
 		"placement", g_settings_get_enum (priv->settings, WP_OPTIONS_KEY),
 		"shading", g_settings_get_enum (priv->settings, WP_SHADING_KEY),
-		"primary-color", g_settings_get_string (priv->settings, WP_PCOLOR_KEY),
-		"secondary-color", g_settings_get_string (priv->settings, WP_SCOLOR_KEY),
+		"primary-color", pcolor,
+		"secondary-color", scolor,
 		NULL);
+  g_free (pcolor);
+  g_free (scolor);
 
   cc_background_item_load (priv->current_background, NULL);
 

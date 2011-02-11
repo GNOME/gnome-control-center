@@ -107,7 +107,6 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
   xmlChar * nodelang;
   const gchar * const * syslangs;
   gint i;
-  char *fname;
 
   wplist = xmlParseFile (filename);
 
@@ -115,15 +114,17 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
     return;
 
   syslangs = g_get_language_names ();
-  fname = NULL;
 
   root = xmlDocGetRootElement (wplist);
 
   for (list = root->children; list != NULL; list = list->next) {
     if (!strcmp ((gchar *)list->name, "wallpaper")) {
       CcBackgroundItem * item;
-      CcBackgroundItemFlags flags = 0;
+      CcBackgroundItemFlags flags;
+      char *uri, *cname, *id;
 
+      flags = 0;
+      cname = NULL;
       item = cc_background_item_new (NULL);
 
       g_object_set (G_OBJECT (item),
@@ -137,17 +138,20 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 	} else if (!strcmp ((gchar *)wpa->name, "filename")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    gchar *content = g_strstrip ((gchar *)wpa->last->content);
+	    char *bg_uri;
 
+	    /* FIXME same rubbish as in other parts of the code */
 	    if (strcmp (content, NONE) == 0) {
-	      fname = NULL;
-	    } else if (g_utf8_validate (content, -1, NULL) &&
-		     g_file_test (content, G_FILE_TEST_EXISTS)) {
-	      fname = g_strdup (content);
+	      bg_uri = NULL;
 	    } else {
-	      fname = g_filename_from_utf8 (content, -1, NULL, NULL, NULL);
+	      GFile *file;
+	      file = g_file_new_for_commandline_arg (content);
+	      bg_uri = g_file_get_uri (file);
+	      g_object_unref (file);
 	    }
-	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_FNAME);
-	    g_object_set (G_OBJECT (item), "filename", fname, NULL);
+	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_URI);
+	    g_object_set (G_OBJECT (item), "uri", bg_uri, NULL);
+	    g_free (bg_uri);
 	  } else {
 	    break;
 	  }
@@ -159,8 +163,9 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 	    g_object_get (G_OBJECT (item), "name", &name, NULL);
 
 	    if (name == NULL && nodelang == NULL) {
-	       g_object_set (G_OBJECT (item), "name",
-			     g_strstrip ((gchar *)wpa->last->content), NULL);
+	       g_free (cname);
+	       cname = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	       g_object_set (G_OBJECT (item), "name", cname, NULL);
             } else {
 	       for (i = 0; syslangs[i] != NULL; i++) {
 	         if (!strcmp (syslangs[i], (gchar *)nodelang)) {
@@ -209,29 +214,24 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 	}
       }
 
-      /* Make sure we don't already have this one and that filename exists */
-      if (fname == NULL ||
-	  g_hash_table_lookup (data->wp_hash, fname) != NULL) {
+      /* FIXME, this is a broken way of doing,
+       * need to use proper code here */
+      uri = g_filename_to_uri (filename, NULL, NULL);
+      id = g_strdup_printf ("%s#%s", uri, cname);
+      g_free (uri);
 
+      /* Make sure we don't already have this one and that filename exists */
+      if (g_hash_table_lookup (data->wp_hash, id) != NULL) {
 	g_object_unref (item);
+	g_free (id);
 	continue;
       }
 
       g_object_set (G_OBJECT (item), "flags", flags, NULL);
-
-      if (fname != NULL) {
-#if 0
-        cc_background_item_ensure_gnome_bg (wp);
-	cc_background_item_update_size (wp, NULL);
-#endif
-	g_hash_table_insert (data->wp_hash, g_strdup (filename), item);
-      } else {
-	g_object_unref (item);
-        item = NULL;
-      }
+      g_hash_table_insert (data->wp_hash, id, item);
+      /* Don't free ID, we added it to the hash table */
     }
   }
-  g_free (fname);
   xmlFreeDoc (wplist);
 }
 
