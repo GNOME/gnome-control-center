@@ -220,7 +220,6 @@ file_info_async_ready (GObject      *source,
   parent = g_file_enumerator_get_container (G_FILE_ENUMERATOR (source));
   path = g_file_get_path (parent);
 
-
   /* iterate over the available files */
   for (l = files; l; l = g_list_next (l))
     {
@@ -244,13 +243,8 @@ file_info_async_ready (GObject      *source,
 
           /* create a new CcBackgroundItem */
           item = cc_background_item_new (filename);
-          cc_background_item_load (item, info);
-          if (!item)
-            {
-              g_warning ("Could not load picture \"%s\"", filename);
-              g_free (filename);
-              continue;
-            }
+          g_object_set (G_OBJECT (item), "flags", CC_BACKGROUND_ITEM_HAS_FNAME, NULL);
+          cc_background_item_load (item, info); /* FIXME use asynchronous load, and remove if failed */
 
           file = g_file_new_for_path (filename);
           g_free (filename);
