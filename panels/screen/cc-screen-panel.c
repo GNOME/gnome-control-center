@@ -347,7 +347,7 @@ set_dpms_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
                           1, &value_tmp,
                           -1);
       if (value == value_tmp ||
-	  (value_tmp > value_prev && value < value_tmp))
+          (value_tmp > value_prev && value < value_tmp))
         {
           gtk_combo_box_set_active_iter (combo_box, &iter);
           return;
@@ -387,7 +387,7 @@ set_lock_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
                           1, &value_tmp,
                           -1);
       if (value == value_tmp ||
-	  (value_tmp > value_prev && value < value_tmp))
+          (value_tmp > value_prev && value < value_tmp))
         {
           gtk_combo_box_set_active_iter (combo_box, &iter);
           return;
@@ -460,21 +460,21 @@ cc_screen_panel_init (CcScreenPanel *self)
   /* bind the screen lock checkbox */
   widget = WID ("screen_lock_on_switch");
   g_settings_bind (self->priv->lock_settings,
-		   "lock-enabled",
-		   widget, "active",
-		   G_SETTINGS_BIND_DEFAULT);
+                   "lock-enabled",
+                   widget, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   /* lock time */
   widget = WID ("screen_lock_combobox");
   set_lock_value_for_combo (GTK_COMBO_BOX (widget), self);
   g_signal_connect (widget, "changed",
-		    G_CALLBACK (lock_combo_changed_cb),
-		    self);
+                    G_CALLBACK (lock_combo_changed_cb),
+                    self);
 
   g_settings_bind (self->priv->lock_settings,
-		   "lock-enabled",
-		   widget, "sensitive",
-		   G_SETTINGS_BIND_GET);
+                   "lock-enabled",
+                   widget, "sensitive",
+                   G_SETTINGS_BIND_GET);
 
   widget = WID ("screen_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
