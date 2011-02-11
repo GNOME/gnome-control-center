@@ -87,55 +87,6 @@ static void     cc_background_item_finalize       (GObject               *object
 
 G_DEFINE_TYPE (CcBackgroundItem, cc_background_item, G_TYPE_OBJECT)
 
-#if 0
-static GConfEnumStringPair placement_lookup[] = {
-        { GNOME_BG_PLACEMENT_CENTERED, "centered" },
-        { GNOME_BG_PLACEMENT_FILL_SCREEN, "stretched" },
-        { GNOME_BG_PLACEMENT_SCALED, "scaled" },
-        { GNOME_BG_PLACEMENT_ZOOMED, "zoom" },
-        { GNOME_BG_PLACEMENT_TILED, "wallpaper" },
-        { 0, NULL }
-};
-
-static GConfEnumStringPair shading_lookup[] = {
-        { GNOME_BG_COLOR_SOLID, "solid" },
-        { GNOME_BG_COLOR_H_GRADIENT, "horizontal-gradient" },
-        { GNOME_BG_COLOR_V_GRADIENT, "vertical-gradient" },
-        { 0, NULL }
-};
-
-static const char *
-placement_to_string (GnomeBGPlacement type)
-{
-        return gconf_enum_to_string (placement_lookup, type);
-}
-
-static const char *
-shading_to_string (GnomeBGColorType type)
-{
-        return gconf_enum_to_string (shading_lookup, type);
-}
-
-static GnomeBGPlacement
-string_to_placement (const char *option)
-{
-        int i = GNOME_BG_PLACEMENT_SCALED;
-        if (option != NULL) {
-                gconf_string_to_enum (placement_lookup, option, &i);
-        }
-        return i;
-}
-
-static GnomeBGColorType
-string_to_shading (const char *shading)
-{
-        int i = GNOME_BG_COLOR_SOLID;
-        if (shading != NULL) {
-                gconf_string_to_enum (shading_lookup, shading, &i);
-        }
-        return i;
-}
-#endif
 static GEmblem *
 get_slideshow_icon (void)
 {
