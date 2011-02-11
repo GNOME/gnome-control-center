@@ -67,6 +67,7 @@ typedef struct
 GType              cc_background_item_get_type (void);
 
 CcBackgroundItem * cc_background_item_new                 (const char                   *filename);
+CcBackgroundItem * cc_background_item_copy                (CcBackgroundItem             *item);
 gboolean           cc_background_item_load                (CcBackgroundItem             *item,
 							   GFileInfo                    *info);
 gboolean           cc_background_item_changes_with_time   (CcBackgroundItem             *item);

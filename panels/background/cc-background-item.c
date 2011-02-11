@@ -754,6 +754,27 @@ cc_background_item_new (const char *filename)
         return CC_BACKGROUND_ITEM (object);
 }
 
+CcBackgroundItem *
+cc_background_item_copy (CcBackgroundItem *item)
+{
+	CcBackgroundItem *ret;
+
+	ret = cc_background_item_new (item->priv->filename);
+	ret->priv->name = g_strdup (item->priv->name);
+	ret->priv->filename = g_strdup (item->priv->filename);
+	ret->priv->size = g_strdup (item->priv->size);
+	ret->priv->placement = item->priv->placement;
+	ret->priv->shading = item->priv->shading;
+	ret->priv->primary_color = g_strdup (item->priv->primary_color);
+	ret->priv->secondary_color = g_strdup (item->priv->secondary_color);
+	ret->priv->source_url = g_strdup (item->priv->source_url);
+	ret->priv->source_xml = g_strdup (item->priv->source_xml);
+	ret->priv->is_deleted = item->priv->is_deleted;
+	ret->priv->flags = item->priv->flags;
+
+	return ret;
+}
+
 static const char *
 flags_to_str (CcBackgroundItemFlags flag)
 {
