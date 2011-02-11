@@ -285,7 +285,9 @@ cc_background_item_load (CcBackgroundItem *item,
 			 GFileInfo        *info)
 {
         g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), FALSE);
-        g_return_val_if_fail (item->priv->uri != NULL, FALSE);
+
+        if (item->priv->uri == NULL)
+		return TRUE;
 
         update_info (item, info);
 
