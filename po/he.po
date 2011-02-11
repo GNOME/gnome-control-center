@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-04 09:17+0200\n"
-"PO-Revision-Date: 2011-02-04 09:20+0200\n"
+"POT-Creation-Date: 2011-02-12 00:30+0200\n"
+"PO-Revision-Date: 2011-02-12 00:43+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -206,52 +206,52 @@ msgstr "פרישה"
 msgid "Zoom"
 msgstr "תקריב"
 
-#: ../panels/background/bg-colors-source.c:44
+#: ../panels/background/bg-colors-source.c:45
 msgid "Horizontal Gradient"
 msgstr "מדרג אופקי"
 
-#: ../panels/background/bg-colors-source.c:45
+#: ../panels/background/bg-colors-source.c:46
 msgid "Vertical Gradient"
 msgstr "מדרג אנכי"
 
-#: ../panels/background/bg-colors-source.c:46
+#: ../panels/background/bg-colors-source.c:47
 msgid "Solid Color"
 msgstr "צבע אחיד"
 
-#: ../panels/background/cc-background-panel.c:747
+#: ../panels/background/cc-background-panel.c:708
 msgid "Wallpapers"
 msgstr "רקעים"
 
-#: ../panels/background/cc-background-panel.c:755
+#: ../panels/background/cc-background-panel.c:715
 msgid "Pictures Folder"
 msgstr "תיקיית תמונות"
 
-#: ../panels/background/cc-background-panel.c:763
+#: ../panels/background/cc-background-panel.c:722
 msgid "Colors & Gradients"
 msgstr "צבעים ומדרגים"
 
-#: ../panels/background/cc-background-panel.c:772
+#: ../panels/background/cc-background-panel.c:730
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-panel.c:833
+#: ../panels/background/cc-background-panel.c:793
 msgid "Current background"
 msgstr "הרקע הנוכחי"
 
-#: ../panels/background/gnome-wp-info.c:59
-msgid "No Desktop Background"
-msgstr "אין רקע לשולחן העבודה"
-
-#: ../panels/background/gnome-wp-item.c:277
+#: ../panels/background/cc-background-item.c:155
 msgid "multiple sizes"
 msgstr "מספר גדלים"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/gnome-wp-item.c:285
+#: ../panels/background/cc-background-item.c:159
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
+
+#: ../panels/background/cc-background-item.c:262
+msgid "No Desktop Background"
+msgstr "אין רקע לשולחן העבודה"
 
 #: ../panels/common/gdm-languages.c:709
 msgid "Unspecified"
@@ -345,22 +345,26 @@ msgstr "אזור:"
 msgid "September"
 msgstr "ספטמבר"
 
-#: ../panels/datetime/dt-lockbutton.c:347 ../panels/screen/screen.ui.h:13
+#: ../panels/datetime/dt-lockbutton.c:347
+#: ../panels/printers/pp-lockbutton.c:347 ../panels/screen/screen.ui.h:13
 #: ../panels/user-accounts/um-lockbutton.c:347
 msgid "Lock"
 msgstr "נעילה"
 
-#: ../panels/datetime/dt-lockbutton.c:356 ../panels/network/network.ui.h:23
+#: ../panels/datetime/dt-lockbutton.c:356
+#: ../panels/printers/pp-lockbutton.c:356 ../panels/network/network.ui.h:23
 #: ../panels/user-accounts/um-lockbutton.c:356
 msgid "Unlock"
 msgstr "שחרור"
 
 #: ../panels/datetime/dt-lockbutton.c:365
+#: ../panels/printers/pp-lockbutton.c:365
 #: ../panels/user-accounts/um-lockbutton.c:365
 msgid "Locked"
 msgstr "נעול"
 
 #: ../panels/datetime/dt-lockbutton.c:374
+#: ../panels/printers/pp-lockbutton.c:374
 #: ../panels/user-accounts/um-lockbutton.c:374
 msgid ""
 "Dialog is unlocked.\n"
@@ -370,6 +374,7 @@ msgstr ""
 "יש ללחוץ כדי למנוע שינויים נוספים"
 
 #: ../panels/datetime/dt-lockbutton.c:383
+#: ../panels/printers/pp-lockbutton.c:383
 #: ../panels/user-accounts/um-lockbutton.c:383
 msgid ""
 "Dialog is locked.\n"
@@ -379,6 +384,7 @@ msgstr ""
 "יש ללחוץ כדי לערוך שינויים"
 
 #: ../panels/datetime/dt-lockbutton.c:392
+#: ../panels/printers/pp-lockbutton.c:392
 #: ../panels/user-accounts/um-lockbutton.c:392
 msgid ""
 "System policy prevents changes.\n"
@@ -405,13 +411,13 @@ msgid "Left"
 msgstr "שמאלה"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:503
+#: ../panels/display/xrandr-capplet.c:497
 msgid "Monitor"
 msgstr "צג"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:339
-#: ../panels/display/xrandr-capplet.c:378
+#: ../panels/display/xrandr-capplet.c:333
+#: ../panels/display/xrandr-capplet.c:372
 #: ../panels/universal-access/uap.ui.h:58
 msgid "Normal"
 msgstr "רגיל"
@@ -458,15 +464,15 @@ msgstr "תצוגות"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "לוח;מקרן;xrandr;צג;מסך;רזולוציה;רענון;"
 
-#: ../panels/display/xrandr-capplet.c:340
+#: ../panels/display/xrandr-capplet.c:334
 msgid "Anti-Clockwise"
 msgstr "נגד כיוון השעון"
 
-#: ../panels/display/xrandr-capplet.c:341
+#: ../panels/display/xrandr-capplet.c:335
 msgid "Clockwise"
 msgstr "עם כיוון השעון"
 
-#: ../panels/display/xrandr-capplet.c:342
+#: ../panels/display/xrandr-capplet.c:336
 msgid "180 Degrees"
 msgstr "180 מעלות"
 
@@ -475,104 +481,104 @@ msgstr "180 מעלות"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:479
+#: ../panels/display/xrandr-capplet.c:473
 msgid "Mirror Displays"
 msgstr "היפוך מראה בצגים"
 
-#: ../panels/display/xrandr-capplet.c:612
+#: ../panels/display/xrandr-capplet.c:603
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:614
+#: ../panels/display/xrandr-capplet.c:605
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1527
+#: ../panels/display/xrandr-capplet.c:1518
 msgid "Drag to change primary display."
 msgstr "יש לגרור כדי לשנות את התצוגה הראשית."
 
-#: ../panels/display/xrandr-capplet.c:1585
+#: ../panels/display/xrandr-capplet.c:1576
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr ""
 "יש לבחור את הצג כדי לשנות את מאפייניו; יש לגרור אותו כדי לשנות את מיקומו."
 
-#: ../panels/display/xrandr-capplet.c:1975
+#: ../panels/display/xrandr-capplet.c:1966
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1977
+#: ../panels/display/xrandr-capplet.c:1968
 msgid "%a %l:%M %p"
 msgstr "‏%a‎ ‏‎%l:%M %p"
 
-#: ../panels/display/xrandr-capplet.c:2262
+#: ../panels/display/xrandr-capplet.c:2214
 msgid "Could not save the monitor configuration"
 msgstr "לא ניתן לשמור את תצורת הצג"
 
-#: ../panels/display/xrandr-capplet.c:2285
+#: ../panels/display/xrandr-capplet.c:2239
 msgid "Could not get session bus while applying display configuration"
 msgstr "לא ניתן לאחזר את אפיק ההפעלה בעת החלת תצורת התצוגה"
 
-#: ../panels/display/xrandr-capplet.c:2330
+#: ../panels/display/xrandr-capplet.c:2284
 msgid "Could not detect displays"
 msgstr "לא ניתן לזהות את הצגים"
 
-#: ../panels/display/xrandr-capplet.c:2538
+#: ../panels/display/xrandr-capplet.c:2479
 msgid "Could not get screen information"
 msgstr "לא ניתן לקבל את פרטי הצג"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:247
+#: ../panels/info/cc-info-panel.c:417
 #, c-format
 msgid "%d-bit"
 msgstr "%d-סיביות"
 
-#: ../panels/info/cc-info-panel.c:261
+#: ../panels/info/cc-info-panel.c:431
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "בית אחד"
 msgstr[1] "%u בתים"
 
-#: ../panels/info/cc-info-panel.c:269
+#: ../panels/info/cc-info-panel.c:439
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f ק״ב"
 
-#: ../panels/info/cc-info-panel.c:274
+#: ../panels/info/cc-info-panel.c:444
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f מ״ב"
 
-#: ../panels/info/cc-info-panel.c:279
+#: ../panels/info/cc-info-panel.c:449
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f ג״ב"
 
-#: ../panels/info/cc-info-panel.c:284
+#: ../panels/info/cc-info-panel.c:454
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f ט״ב"
 
-#: ../panels/info/cc-info-panel.c:289
+#: ../panels/info/cc-info-panel.c:459
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f פ״ב"
 
-#: ../panels/info/cc-info-panel.c:294
+#: ../panels/info/cc-info-panel.c:464
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f א״ב"
 
-#: ../panels/info/cc-info-panel.c:404
+#: ../panels/info/cc-info-panel.c:574
 msgid "Unknown model"
 msgstr "דגם לא ידוע"
 
-#: ../panels/info/cc-info-panel.c:466
+#: ../panels/info/cc-info-panel.c:637
 #, c-format
 msgid "Version %s"
 msgstr "גרסה %s"
@@ -599,22 +605,26 @@ msgid "Disk:"
 msgstr "כונן:"
 
 #: ../panels/info/info.ui.h:3
+msgid "Graphics:"
+msgstr "פריטי גרפיקה:"
+
+#: ../panels/info/info.ui.h:4
 msgid "Memory:"
 msgstr "זיכרון:"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:5
 msgid "More Info"
 msgstr "פרטים נוספים"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:6
 msgid "OS type:"
 msgstr "סוג מערכת ההפעלה:"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:7
 msgid "Processor:"
 msgstr "מעבד:"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:8
 msgid "Update Available"
 msgstr "עדכון זמין"
 
@@ -983,180 +993,215 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "תקליטור;וידאו;אודיו;שמע;cd;dvd;usb;audio;video;disc;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:220
+#: ../panels/printers/cc-printers-panel.c:224
 msgid "Low on toner"
 msgstr "הטונר כמעט נגמר"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:222
+#: ../panels/printers/cc-printers-panel.c:226
 msgid "Out of toner"
 msgstr "נגמר הטונר"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:225
+#: ../panels/printers/cc-printers-panel.c:229
 msgid "Low on developer"
 msgstr "נותר מעט נייר צילום"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:228
+#: ../panels/printers/cc-printers-panel.c:232
 msgid "Out of developer"
 msgstr "נגמר נייר הצילום"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:230
+#: ../panels/printers/cc-printers-panel.c:234
 msgid "Low on a marker supply"
 msgstr "נותרה מעט אספקת צבע"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:232
+#: ../panels/printers/cc-printers-panel.c:236
 msgid "Out of a marker supply"
 msgstr "נגמרה אספקת הצבע"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:234
+#: ../panels/printers/cc-printers-panel.c:238
 msgid "Open cover"
 msgstr "הדלת פתוחה"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:236
+#: ../panels/printers/cc-printers-panel.c:240
 msgid "Open door"
 msgstr "הדלת פתוחה"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:238
+#: ../panels/printers/cc-printers-panel.c:242
 msgid "Low on paper"
 msgstr "נותר מעט נייר"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:240
+#: ../panels/printers/cc-printers-panel.c:244
 msgid "Out of paper"
 msgstr "נגמר הנייר"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:242
+#: ../panels/printers/cc-printers-panel.c:246
+msgctxt "printer state"
 msgid "Offline"
 msgstr "מנותקת"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:244
+#: ../panels/printers/cc-printers-panel.c:248
+msgctxt "printer state"
 msgid "Paused"
-msgstr "מושהה"
+msgstr "מושהית"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:246
+#: ../panels/printers/cc-printers-panel.c:250
 msgid "Waste receptacle almost full"
 msgstr "כלי קיבול הפסולת כמעט מלא"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:248
+#: ../panels/printers/cc-printers-panel.c:252
 msgid "Waste receptacle full"
 msgstr "כלי קיבול הפסולת מלא"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:250
+#: ../panels/printers/cc-printers-panel.c:254
 msgid "The optical photo conductor is near end of life"
 msgstr "הפוטו מוליך האופטי עומד לסיים את חייו"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:252
+#: ../panels/printers/cc-printers-panel.c:256
 msgid "The optical photo conductor is no longer functioning"
 msgstr "הפוטו מוליך האופטי אינו מתפקד עוד"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:344
-msgid "Idle"
-msgstr "בהמתנה"
+#: ../panels/printers/cc-printers-panel.c:348
+msgctxt "printer state"
+msgid "Ready"
+msgstr "מוכנה"
 
 #. Translators: Printer's state (jobs are processing)
-#. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:348
-#: ../panels/printers/cc-printers-panel.c:794
+#: ../panels/printers/cc-printers-panel.c:352
+msgctxt "printer state"
 msgid "Processing"
-msgstr "בעיבוד"
+msgstr "מעבדת"
 
 #. Translators: Printer's state (no jobs can be processed)
-#. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:352
-#: ../panels/printers/cc-printers-panel.c:798
+#: ../panels/printers/cc-printers-panel.c:356
+msgctxt "printer state"
 msgid "Stopped"
 msgstr "נעצרה"
 
+#. Translators: Toner supply
+#: ../panels/printers/cc-printers-panel.c:454
+msgid "Toner Level"
+msgstr "רמת הטונר"
+
+#. Translators: Ink supply
+#: ../panels/printers/cc-printers-panel.c:457
+msgid "Ink Level"
+msgstr "רמת הדיו"
+
+#. Translators: By supply we mean ink, toner, staples, water, ...
+#: ../panels/printers/cc-printers-panel.c:460
+msgid "Supply Level"
+msgstr "רמת האספקה"
+
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:465
+#: ../panels/printers/cc-printers-panel.c:475
 #, c-format
-msgid "%d active"
-msgstr "%d פעילה"
+msgid "%u active"
+msgid_plural "%u active"
+msgstr[0] "%u פעילה"
+msgstr[1] "%u פעילות"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:786
+#: ../panels/printers/cc-printers-panel.c:910
+msgctxt "print job"
 msgid "Pending"
 msgstr "ממתינה"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:790
+#: ../panels/printers/cc-printers-panel.c:914
+msgctxt "print job"
 msgid "Held"
 msgstr "מוחזקת"
 
+#. Translators: Job's state (job is currently printing)
+#: ../panels/printers/cc-printers-panel.c:918
+msgctxt "print job"
+msgid "Processing"
+msgstr "מעבדת"
+
+#. Translators: Job's state (job has been stopped)
+#: ../panels/printers/cc-printers-panel.c:922
+msgctxt "print job"
+msgid "Stopped"
+msgstr "נעצרה"
+
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:802
+#: ../panels/printers/cc-printers-panel.c:926
+msgctxt "print job"
 msgid "Canceled"
 msgstr "בוטלה"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:806
+#: ../panels/printers/cc-printers-panel.c:930
+msgctxt "print job"
 msgid "Aborted"
 msgstr "נפסקה"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:810
+#: ../panels/printers/cc-printers-panel.c:934
+msgctxt "print job"
 msgid "Completed"
 msgstr "הושלמה"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:905
+#: ../panels/printers/cc-printers-panel.c:1029
 msgid "Job Title"
 msgstr "כותרת העבודה"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:913
+#: ../panels/printers/cc-printers-panel.c:1037
 msgid "Job State"
 msgstr "מצב המשימה"
 
 #. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:919
+#: ../panels/printers/cc-printers-panel.c:1043
 msgid "User"
 msgstr "משתמש"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:925
+#: ../panels/printers/cc-printers-panel.c:1049
 msgid "Time"
 msgstr "זמן"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1115
+#: ../panels/printers/cc-printers-panel.c:1239
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "לא ניתן להתחבר אל אפיק המערכת: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1767
+#: ../panels/printers/cc-printers-panel.c:1949
 msgid "Test page"
 msgstr "דף בדיקה"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1775
+#: ../panels/printers/cc-printers-panel.c:1957
 msgid "Clean print heads"
 msgstr "ניקוי ראשי ההדפסה"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1780
+#: ../panels/printers/cc-printers-panel.c:1962
 msgid "An error has occured during a maintenance command."
 msgstr "אירעה שגיאה במהלך פקודת התחזוקה."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:1906
+#: ../panels/printers/cc-printers-panel.c:2088
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "לא ניתן לטעון את מנשק המשתמש: %s"
@@ -1178,111 +1223,103 @@ msgstr "מדפסות"
 msgid "---"
 msgstr "---"
 
-#: ../panels/printers/printers.ui.h:2
-msgid "0 active"
-msgstr "0 פעילות"
-
-#: ../panels/printers/printers.ui.h:3
-msgid "<b>Allowed users</b>"
-msgstr "<b>משתמשים מורשים</b>"
-
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:5
+#: ../panels/printers/printers.ui.h:3
 msgid "Active Print Jobs"
 msgstr "משימות הדפסה פעילות"
 
+#: ../panels/printers/printers.ui.h:4
+msgid "Allowed users"
+msgstr "משתמשים מורשים"
+
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:6
 msgid "Back"
 msgstr "חזרה"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:8
 #: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:589
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
 msgid "Default"
 msgstr "בררת מחדל"
 
-#: ../panels/printers/printers.ui.h:10
+#: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
 msgstr "כתובת IP"
 
-#: ../panels/printers/printers.ui.h:11
+#: ../panels/printers/printers.ui.h:10
 msgid "Info"
 msgstr "פרטים"
 
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:11
 msgid "Jobs"
 msgstr "משימות"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:13
 msgid "Location"
 msgstr "מיקום"
 
-#: ../panels/printers/printers.ui.h:15
+#: ../panels/printers/printers.ui.h:14
 msgid "Model"
 msgstr "דגם"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:16
 msgid "Options"
 msgstr "אפשרויות"
 
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:18
 msgid "Print Test Page"
 msgstr "הדפסת דף ניסיון"
 
-#: ../panels/printers/printers.ui.h:20
+#: ../panels/printers/printers.ui.h:19
 msgid "Printer"
 msgstr "מדפסת"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:21
 msgid "Printer Options"
 msgstr "אפשרויות המדפסת"
 
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:22
 msgid "Printing..."
 msgstr "בהדפסה..."
 
 #. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:24
 msgid "Show"
 msgstr "הצגה"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:26
 msgid "Supply"
 msgstr "אספקה"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Allow different layouts for each window"
+msgstr "מתן האפשרות להחלת פריסה נפרדת בכל חלון"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Install languages..."
 msgstr "התקנת שפות..."
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:3
 msgid "Language"
 msgstr "שפה"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Layouts"
 msgstr "פריסות"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
-msgid "List of keyboard layouts selected for usage"
-msgstr "רשימת פריסות המקלדת שנבחרו לשימוש"
-
 #: ../panels/region/gnome-region-panel.ui.h:5
-msgid "New windows u_se active window's layout"
-msgstr "חלונות חדשים עושים שימוש בפריסת החלון הפעיל"
-
-#: ../panels/region/gnome-region-panel.ui.h:6
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "אזור ושפה"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1290,53 +1327,45 @@ msgstr ""
 "החלפת הגדרות פריסת המקלדת הנוכחית\n"
 "בהגדרות בררת המחדל"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Reset to De_faults"
 msgstr "החזרה ל_בררת המחדל"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Select a display language"
 msgstr "נא לבחור בשפת תצוגה"
 
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Use default layout in new windows"
+msgstr "שימוש בפריסת בררת המחדל בחלונות חדשים"
+
 #: ../panels/region/gnome-region-panel.ui.h:11
+msgid "Use previous window's layout in new windows"
+msgstr "יש להשתמש בפריסת החלון הקודם בחלונות חדשים"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Use same layout in all windows"
+msgstr "שימוש באותה הפריסה לכל החלונות"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "View and edit keyboard layout options"
 msgstr "צפייה ועריכה באפשרויות פריסת המקלדת"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "_Options..."
 msgstr "_אפשרויות..."
 
-#: ../panels/region/gnome-region-panel.ui.h:13
-msgid "_Separate layout for each window"
-msgstr "פריסה _נפרדת לכל חלון"
-
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
-msgid "By _country"
-msgstr "לפי _מדינה"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-msgid "By _language"
-msgstr "לפי _שפה"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "בחירת פריסה"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:4
-msgid "Preview:"
-msgstr "תצוגה מקדימה:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
+msgid "Preview"
+msgstr "תצוגה מקדימה"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:5
-msgid "_Country:"
-msgstr "מ_דינה:"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:6
-msgid "_Language:"
-msgstr "_שפה:"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:7
-msgid "_Variants:"
-msgstr "ה_גוונים:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+msgid "Select an input source to add"
+msgstr "נא לבחור מקור קלט להוספה"
 
 #: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
@@ -1484,120 +1513,122 @@ msgstr "הגדרת העדפות העכבר ומשטח המגע שלך"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "משטח מגע;סמן;לחיצה;טפיחה;כפולה;לחצן;כדור שליטה;"
 
-#: ../panels/network/cc-network-panel.c:1086
-#: ../panels/network/cc-network-panel.c:1108
-#, c-format
-msgid "%i Mb/s"
-msgstr "%i מסל״ש"
-
-#: ../panels/network/cc-network-panel.c:1088
-#, c-format
-msgid "%i Gb/s"
-msgstr "%i גסל״ש"
-
-#: ../panels/network/cc-network-panel.c:1106
-#, c-format
-msgid "%i kb/s"
-msgstr "%i קסל״ש"
-
-#: ../panels/network/cc-network-panel.c:1763
+#: ../panels/network/cc-network-panel.c:819
 msgid "Network proxy"
 msgstr "מתווך הרשת"
 
-#: ../panels/network/cc-network-panel.c:1772
+#: ../panels/network/cc-network-panel.c:828
 msgid "Set the system proxy settings"
 msgstr "הגדרת תצורת מתווך המערכת"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/network/nm-device.c:117 ../panels/network/nm-access-point.c:65
 #: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
 msgid "Unknown"
 msgstr "לא ידוע"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:69
+#: ../panels/network/nm-device.c:121 ../panels/network/panel-common.c:69
 msgid "Wired"
 msgstr "קווי"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:73
+#: ../panels/network/nm-device.c:125 ../panels/network/panel-common.c:73
 msgid "Wireless"
 msgstr "אלחוטי"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:78
+#: ../panels/network/nm-device.c:130 ../panels/network/panel-common.c:78
 msgid "Mobile broadband"
 msgstr "רשת סלולרית"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:82
+#: ../panels/network/nm-device.c:134 ../panels/network/panel-common.c:82
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:86
+#: ../panels/network/nm-device.c:138 ../panels/network/panel-common.c:86
 msgid "Mesh"
 msgstr "סריג"
 
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:142
-msgid "Ad-hoc"
-msgstr "ייעודית"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:146
-msgid "Infrastructure"
-msgstr "תשתית"
-
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:164
+#: ../panels/network/nm-device.c:190 ../panels/network/panel-common.c:164
 msgid "Status unknown"
 msgstr "המצב אינו ידוע"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:168
+#: ../panels/network/nm-device.c:194 ../panels/network/panel-common.c:168
 msgid "Unmanaged"
 msgstr "לא מנוהל"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:172
+#: ../panels/network/nm-device.c:198 ../panels/network/panel-common.c:172
 msgid "Unavailable"
 msgstr "לא זמין"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:176
+#: ../panels/network/nm-device.c:202 ../panels/network/panel-common.c:176
 msgid "Disconnected"
 msgstr "מנותק"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:180
+#: ../panels/network/nm-device.c:206 ../panels/network/panel-common.c:180
 msgid "Preparing connection"
 msgstr "החיבור בהכנות"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:184
+#: ../panels/network/nm-device.c:210 ../panels/network/panel-common.c:184
 msgid "Configuring connection"
 msgstr "החיבור מוגדר"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:188
+#: ../panels/network/nm-device.c:214 ../panels/network/panel-common.c:188
 msgid "Authenticating"
 msgstr "בהליכי אימות"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:192
+#: ../panels/network/nm-device.c:218 ../panels/network/panel-common.c:192
 msgid "Getting network address"
 msgstr "כתובת הרשת מתקבלת"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:196
+#: ../panels/network/nm-device.c:222 ../panels/network/panel-common.c:196
 msgid "Connected"
 msgstr "מחובר"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:200
+#: ../panels/network/nm-device.c:226 ../panels/network/panel-common.c:200
 msgid "Failed to connect"
 msgstr "אירע כשל בעת החיבור"
+
+#: ../panels/network/nm-device.c:837
+#, c-format
+msgid "%i kb/s"
+msgstr "%i קסל״ש"
+
+#: ../panels/network/nm-device.c:839 ../panels/network/nm-device.c:856
+#, c-format
+msgid "%i Mb/s"
+msgstr "%i מסל״ש"
+
+#: ../panels/network/nm-device.c:858
+#, c-format
+msgid "%i Gb/s"
+msgstr "%i גסל״ש"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/nm-access-point.c:69 ../panels/network/panel-common.c:142
+msgid "Ad-hoc"
+msgstr "ייעודית"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/nm-access-point.c:73 ../panels/network/panel-common.c:146
+msgid "Infrastructure"
+msgstr "תשתית"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
@@ -2035,7 +2066,7 @@ msgstr "זיהוי עצמה מרבית"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1507
 #: ../panels/sound/gvc-mixer-dialog.c:1719
-#: ../panels/sound/gvc-sound-theme-chooser.c:599
+#: ../panels/sound/gvc-sound-theme-chooser.c:591
 msgid "Name"
 msgstr "שם"
 
@@ -2131,27 +2162,27 @@ msgstr "העדפות _שמע"
 msgid "Muted"
 msgstr "מושתק"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:189
+#: ../panels/sound/gvc-sound-theme-chooser.c:188
 msgid "Built-in"
 msgstr "מובנה"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:459
-#: ../panels/sound/gvc-sound-theme-chooser.c:471
-#: ../panels/sound/gvc-sound-theme-chooser.c:483
+#: ../panels/sound/gvc-sound-theme-chooser.c:451
+#: ../panels/sound/gvc-sound-theme-chooser.c:463
+#: ../panels/sound/gvc-sound-theme-chooser.c:475
 msgid "Sound Preferences"
 msgstr "העדפות שמע"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:462
-#: ../panels/sound/gvc-sound-theme-chooser.c:473
-#: ../panels/sound/gvc-sound-theme-chooser.c:485
+#: ../panels/sound/gvc-sound-theme-chooser.c:454
+#: ../panels/sound/gvc-sound-theme-chooser.c:465
+#: ../panels/sound/gvc-sound-theme-chooser.c:477
 msgid "Testing event sound"
 msgstr "אירוע הצליל בבדיקה"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:590
+#: ../panels/sound/gvc-sound-theme-chooser.c:582
 msgid "From theme"
 msgstr "מערכת הנושא"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:778
+#: ../panels/sound/gvc-sound-theme-chooser.c:764
 msgid "C_hoose an alert sound:"
 msgstr "ב_חירת צליל התראה:"
 
@@ -2855,31 +2886,31 @@ msgstr "משתמש בשם  '%s' כבר קיים."
 msgid "This user does not exist."
 msgstr "משתמש זה אינו קיים."
 
-#: ../panels/user-accounts/um-user-panel.c:359
+#: ../panels/user-accounts/um-user-panel.c:357
 msgid "Failed to delete user"
 msgstr "אירע כשל במחיקת משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:419
+#: ../panels/user-accounts/um-user-panel.c:417
 msgid "You cannot delete your own account."
 msgstr "אין באפשרותך למחוק את החשבון שלך."
 
-#: ../panels/user-accounts/um-user-panel.c:428
+#: ../panels/user-accounts/um-user-panel.c:426
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: ../panels/user-accounts/um-user-panel.c:432
+#: ../panels/user-accounts/um-user-panel.c:430
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: ../panels/user-accounts/um-user-panel.c:441
+#: ../panels/user-accounts/um-user-panel.c:439
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "האם ברצונך לשמור את הקבצים של %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -2887,42 +2918,42 @@ msgstr ""
 "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
 "משתמש."
 
-#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: ../panels/user-accounts/um-user-panel.c:449
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "_Keep Files"
 msgstr "_שמירת הקבצים"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:448
 msgid "_Cancel"
 msgstr "_ביטול"
 
-#: ../panels/user-accounts/um-user-panel.c:474
+#: ../panels/user-accounts/um-user-panel.c:472
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מנוטרל"
 
-#: ../panels/user-accounts/um-user-panel.c:483
+#: ../panels/user-accounts/um-user-panel.c:481
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: ../panels/user-accounts/um-user-panel.c:486
+#: ../panels/user-accounts/um-user-panel.c:484
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: ../panels/user-accounts/um-user-panel.c:808
+#: ../panels/user-accounts/um-user-panel.c:806
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: ../panels/user-accounts/um-user-panel.c:810
+#: ../panels/user-accounts/um-user-panel.c:808
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:841
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -2930,12 +2961,12 @@ msgstr ""
 "כדי לערוך שינויים,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:881
+#: ../panels/user-accounts/um-user-panel.c:879
 msgid "Create a user"
 msgstr "יצירת משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:892
-#: ../panels/user-accounts/um-user-panel.c:1191
+#: ../panels/user-accounts/um-user-panel.c:890
+#: ../panels/user-accounts/um-user-panel.c:1189
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -2943,12 +2974,12 @@ msgstr ""
 "כדי ליצור משתמש,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:901
+#: ../panels/user-accounts/um-user-panel.c:899
 msgid "Delete the selected user"
 msgstr "מחיקת המשתמש הנבחר"
 
-#: ../panels/user-accounts/um-user-panel.c:913
-#: ../panels/user-accounts/um-user-panel.c:1196
+#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:1194
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -2956,11 +2987,11 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1091
+#: ../panels/user-accounts/um-user-panel.c:1089
 msgid "My Account"
 msgstr "החשבון שלי"
 
-#: ../panels/user-accounts/um-user-panel.c:1101
+#: ../panels/user-accounts/um-user-panel.c:1099
 msgid "Other Accounts"
 msgstr "חשבונות אחרים"
 
@@ -3216,6 +3247,33 @@ msgstr "לוח בקרה"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_כל ההגדרות"
+
+#~ msgid "Idle"
+#~ msgstr "בהמתנה"
+
+#~ msgid "0 active"
+#~ msgstr "0 פעילות"
+
+#~ msgid "List of keyboard layouts selected for usage"
+#~ msgstr "רשימת פריסות המקלדת שנבחרו לשימוש"
+
+#~ msgid "New windows u_se active window's layout"
+#~ msgstr "חלונות חדשים עושים שימוש בפריסת החלון הפעיל"
+
+#~ msgid "By _country"
+#~ msgstr "לפי _מדינה"
+
+#~ msgid "By _language"
+#~ msgstr "לפי _שפה"
+
+#~ msgid "_Country:"
+#~ msgstr "מ_דינה:"
+
+#~ msgid "_Language:"
+#~ msgstr "_שפה:"
+
+#~ msgid "_Variants:"
+#~ msgstr "ה_גוונים:"
 
 #~ msgid "Upside Down"
 #~ msgstr "היפוך"
@@ -3567,9 +3625,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Plum"
 #~ msgstr "שזיף"
-
-#~ msgid "Red"
-#~ msgstr "אדום"
 
 #~ msgid "Aluminium"
 #~ msgstr "אלומיניום"
