@@ -358,40 +358,9 @@ update_preview (CcBackgroundPanelPrivate *priv,
 
   if (item && priv->current_background)
     {
-      //FIXME is that correct?
       g_object_unref (priv->current_background);
-      priv->current_background = g_object_ref (item);
-#if 0
-      g_object_set (G_OBJECT (priv->current_background),
-      		    "primary-color", cc_background_item_get_pcolor (item),
-      		    "secondary-color", cc_background_item_get_scolor (item),
-      		    "filename", cc_background_item_get_filename (item),
-      		    "placement", cc_background_item_get_placement (item),
-      		    "shading", cc_background_item_get_shading (item),
-
-      if (priv->current_background->pcolor)
-        gdk_color_free (priv->current_background->pcolor);
-      priv->current_background->pcolor = gdk_color_copy (item->pcolor);
-
-      if (priv->current_background->scolor)
-        gdk_color_free (priv->current_background->scolor);
-      priv->current_background->scolor = gdk_color_copy (item->scolor);
-
-      g_free (priv->current_background->filename);
-      priv->current_background->filename = g_strdup (item->filename);
-
-      g_free (priv->current_background->name);
-      priv->current_background->name = g_strdup (item->name);
-
-      priv->current_background->options = item->options;
-      priv->current_background->shade_type = item->shade_type;
-
-      priv->current_background->height = item->height;
-      priv->current_background->width = item->width;
-
-      cc_background_item_ensure_gnome_bg (priv->current_background);
-      cc_background_item_update_size (priv->current_background, priv->thumb_factory);
-#endif
+      priv->current_background = cc_background_item_copy (item);
+      cc_background_item_load (priv->current_background, NULL);
     }
 
   source_update_edit_box (priv, FALSE);
