@@ -123,7 +123,6 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
     if (!strcmp ((gchar *)list->name, "wallpaper")) {
       CcBackgroundItem * item;
       CcBackgroundItemFlags flags = 0;
-      gchar *pcolor = NULL, *scolor = NULL;
 
       item = cc_background_item_new (NULL);
 
@@ -193,12 +192,14 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "pcolor")) {
 	  if (wpa->last != NULL) {
-	    pcolor = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	    g_object_set (G_OBJECT (item), "primary-color",
+			  g_strstrip ((gchar *)wpa->last->content), NULL);
 	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_PCOLOR);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "scolor")) {
 	  if (wpa->last != NULL) {
-	    scolor = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	    g_object_set (G_OBJECT (item), "secondary-color",
+			  g_strstrip ((gchar *)wpa->last->content), NULL);
 	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_SCOLOR);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "text")) {
@@ -213,21 +214,10 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
 	  g_hash_table_lookup (data->wp_hash, fname) != NULL) {
 
 	g_object_unref (item);
-	g_free (pcolor);
-	g_free (scolor);
 	continue;
       }
 
-      /* Verify the colors and alloc some GdkColors here */
-      if (pcolor)
-        g_object_set (G_OBJECT (item), "primary-color", pcolor, NULL);
-      if (scolor)
-        g_object_set (G_OBJECT (item), "secondary-color", scolor, NULL);
-
       g_object_set (G_OBJECT (item), "flags", flags, NULL);
-
-      g_free (pcolor);
-      g_free (scolor);
 
       if (fname != NULL) {
 #if 0
