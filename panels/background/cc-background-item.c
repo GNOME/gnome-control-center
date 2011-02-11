@@ -746,3 +746,59 @@ cc_background_item_new (const char *filename)
 
         return CC_BACKGROUND_ITEM (object);
 }
+
+static const char *
+flags_to_str (CcBackgroundItemFlags flag)
+{
+	GFlagsClass *fclass;
+	GFlagsValue *value;
+
+	fclass = G_FLAGS_CLASS (g_type_class_peek (G_DESKTOP_TYPE_BACKGROUND_ITEM_FLAGS));
+	value = g_flags_get_first_value (fclass, flag);
+
+	g_assert (value);
+
+	return value->value_nick;
+}
+
+void
+cc_background_item_dump (CcBackgroundItem *item)
+{
+	CcBackgroundItemPrivate *priv;
+	GString *flags;
+	int i;
+
+	g_return_if_fail (CC_IS_BACKGROUND_ITEM (item));
+
+	priv = item->priv;
+
+	g_debug ("name:\t\t\t%s", priv->name);
+	g_debug ("filename:\t\t%s", priv->filename ? priv->filename : "NULL");
+	if (priv->size)
+		g_debug ("size:\t\t\t'%s'", priv->size);
+	flags = g_string_new (NULL);
+	for (i = 0; i < 5; i++) {
+		if (priv->flags & (1 << i)) {
+			g_string_append (flags, flags_to_str (1 << i));
+			g_string_append_c (flags, ' ');
+		}
+	}
+	if (flags->len == 0)
+		g_string_append (flags, "-none-");
+	g_debug ("flags:\t\t\t%s", flags->str);
+	g_string_free (flags, TRUE);
+	if (priv->primary_color)
+		g_debug ("pcolor:\t\t%s", priv->primary_color);
+	if (priv->secondary_color)
+		g_debug ("scolor:\t\t%s", priv->secondary_color);
+	if (priv->source_url)
+		g_debug ("source URL:\t\t%s", priv->source_url);
+	if (priv->source_xml)
+		g_debug ("source XML:\t\t%s", priv->source_xml);
+	g_debug ("deleted:\t\t%s", priv->is_deleted ? "yes" : "no");
+	if (priv->mime_type)
+		g_debug ("mime-type:\t\t%s", priv->mime_type);
+	g_debug ("dimensions:\t\t%d x %d", priv->width, priv->height);
+	g_debug (" ");
+}
+

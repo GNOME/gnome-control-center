@@ -92,6 +92,8 @@ const char *              cc_background_item_get_scolor     (CcBackgroundItem *i
 const char *              cc_background_item_get_name       (CcBackgroundItem *item);
 const char *              cc_background_item_get_size       (CcBackgroundItem *item);
 
+void                      cc_background_item_dump           (CcBackgroundItem *item);
+
 G_END_DECLS
 
 #endif /* __CC_BACKGROUND_ITEM_H */
