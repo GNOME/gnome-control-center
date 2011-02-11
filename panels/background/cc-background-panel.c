@@ -235,8 +235,6 @@ source_update_edit_box (CcBackgroundPanelPrivate *priv,
 {
   CcBackgroundItemFlags flags;
 
-  cc_background_item_dump (priv->current_background);
-
   flags = cc_background_item_get_flags (priv->current_background);
 
   if ((flags & CC_BACKGROUND_ITEM_HAS_SCOLOR &&
