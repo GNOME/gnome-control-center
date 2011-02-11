@@ -460,6 +460,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   char *pcolor, *scolor;
   gboolean draw_preview = TRUE;
   const char *filename;
+  CcBackgroundItemFlags flags;
 
   list = gtk_icon_view_get_selected_items (icon_view);
 
@@ -485,8 +486,9 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   gtk_tree_model_get (model, &iter, 1, &item, -1);
 
   filename = cc_background_item_get_filename (item);
+  flags = cc_background_item_get_flags (item);
 
-  if (filename == NULL)
+  if ((flags & CC_BACKGROUND_ITEM_HAS_FNAME) && filename == NULL)
     {
       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, G_DESKTOP_BACKGROUND_STYLE_NONE);
       g_settings_set_string (priv->settings, WP_FILE_KEY, "");
@@ -514,7 +516,6 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
         {
           g_cancellable_cancel (priv->copy_cancellable);
           g_cancellable_reset (priv->copy_cancellable);
-
         }
 
       if (priv->spinner)
@@ -539,7 +540,6 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                          copy_finished_cb, panel);
 
       g_settings_set_string (priv->settings, WP_FILE_KEY, cache_path);
-      g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
       g_object_set (G_OBJECT (item), "filename", cache_path, NULL);
 
       /* delay the updated drawing of the preview until the copy finishes */
@@ -564,27 +564,38 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 	   g_settings_set_string (priv->settings, WP_FILE_KEY, uri);
            g_free (uri);
          }
-
-       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
     }
 
-  g_settings_set_enum (priv->settings, WP_SHADING_KEY, cc_background_item_get_shading (item));
+  if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
+    g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
 
-  /* When changing for another colour, don't overwrite what's
-   * in GSettings, but read from it instead */
-  if (priv->current_source == SOURCE_COLORS)
+  if (flags & CC_BACKGROUND_ITEM_HAS_SHADING)
+    g_settings_set_enum (priv->settings, WP_SHADING_KEY, cc_background_item_get_shading (item));
+
+  /* When changing to a background with colours set,
+   * don't overwrite what's in GSettings, but read
+   * from it instead.
+   * We have a hack for the colors source though */
+  if (flags & CC_BACKGROUND_ITEM_HAS_PCOLOR &&
+      priv->current_source != SOURCE_COLORS)
     {
-      pcolor = g_settings_get_string (priv->settings, WP_PCOLOR_KEY);
-      scolor = g_settings_get_string (priv->settings, WP_SCOLOR_KEY);
-      g_object_set (G_OBJECT (item),
-		    "primary-color", pcolor,
-		    "secondary-color", scolor,
-		    NULL);
+      g_settings_set_string (priv->settings, WP_PCOLOR_KEY, cc_background_item_get_pcolor (item));
     }
   else
     {
-      g_settings_set_string (priv->settings, WP_PCOLOR_KEY, cc_background_item_get_pcolor (item));
+      pcolor = g_settings_get_string (priv->settings, WP_PCOLOR_KEY);
+      g_object_set (G_OBJECT (item), "primary-color", pcolor, NULL);
+    }
+
+  if (flags & CC_BACKGROUND_ITEM_HAS_SCOLOR &&
+      priv->current_source != SOURCE_COLORS)
+    {
       g_settings_set_string (priv->settings, WP_SCOLOR_KEY, cc_background_item_get_scolor (item));
+    }
+  else
+    {
+      scolor = g_settings_get_string (priv->settings, WP_SCOLOR_KEY);
+      g_object_set (G_OBJECT (item), "secondary-color", scolor, NULL);
     }
 
   /* Apply all changes */
