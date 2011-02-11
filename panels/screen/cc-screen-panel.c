@@ -273,6 +273,97 @@ got_power_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_dat
                      user_data);
 }
 
+static guint
+lock_delay_to_relative (CcScreenPanel *self,
+                        guint          value)
+{
+  guint new;
+  guint idle_delay;
+
+  if (value == 0)
+    return value;
+
+  /* convert to relative units */
+  idle_delay = 0;
+  g_settings_get (self->priv->session_settings, "idle-delay", "u", &idle_delay);
+  idle_delay *= 60;
+
+  if (idle_delay > value)
+    new = 0;
+  else
+    new = value - idle_delay;
+
+  return new;
+}
+
+static guint
+lock_delay_to_absolute (CcScreenPanel *self,
+                        guint          value)
+{
+  guint new;
+  guint idle_delay;
+
+  new = value;
+
+  /* convert to absolute units */
+  idle_delay = 0;
+  g_settings_get (self->priv->session_settings, "idle-delay", "u", &idle_delay);
+  idle_delay *= 60;
+
+  new += idle_delay;
+
+  return new;
+}
+
+static void
+set_idle_delay_from_dpms (CcScreenPanel *self,
+                          int            value)
+{
+  guint off_delay;
+  guint lock_delay;
+  guint idle_delay;
+
+  off_delay = 1;
+  lock_delay = 0;
+
+  if (value > 0)
+    off_delay = (guint) value;
+
+  g_settings_get (self->priv->lock_settings, "lock-delay", "u", &lock_delay);
+  /* convert to seconds */
+  lock_delay *= 60;
+
+  lock_delay = lock_delay_to_absolute (self, lock_delay);
+
+  idle_delay = off_delay;
+  if (lock_delay > 0)
+    idle_delay = MIN (lock_delay, off_delay);
+
+  idle_delay /= 60;
+
+  g_settings_set (self->priv->session_settings, "idle-delay", "u", idle_delay);
+}
+
+static void
+set_idle_delay_from_lock (CcScreenPanel *self,
+                          guint          value)
+{
+  guint off_delay;
+  guint idle_delay;
+
+  off_delay = (guint) g_settings_get_int (self->priv->gsd_settings, "sleep-display-ac");
+
+  /* special value of zero means use dpms value */
+  if (value != 0)
+    idle_delay = MIN (value, off_delay);
+  else
+    idle_delay = off_delay;
+
+  idle_delay /= 60;
+
+  g_settings_set (self->priv->session_settings, "idle-delay", "u", idle_delay);
+}
+
 static void
 dpms_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
 {
@@ -295,7 +386,8 @@ dpms_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
   /* set both battery and ac keys */
   g_settings_set_int (self->priv->gsd_settings, "sleep-display-ac", value);
   g_settings_set_int (self->priv->gsd_settings, "sleep-display-battery", value);
-  g_settings_set (self->priv->session_settings, "idle-delay", "u", value);
+
+  set_idle_delay_from_dpms (self, value);
 }
 
 static void
@@ -303,7 +395,8 @@ lock_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
-  gint value;
+  guint relative;
+  guint absolute;
   gboolean ret;
 
   /* no selection */
@@ -314,10 +407,17 @@ lock_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
   /* get entry */
   model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
   gtk_tree_model_get (model, &iter,
-                      1, &value,
+                      1, &absolute,
                       -1);
+  relative = lock_delay_to_relative (self, absolute);
 
-  g_settings_set (self->priv->lock_settings, "lock-delay", "u", value);
+  /* convert to minutes */
+  if (relative > 0)
+    relative /= 60;
+
+  g_settings_set (self->priv->lock_settings, "lock-delay", "u", relative);
+
+  set_idle_delay_from_lock (self, absolute);
 }
 
 static void
@@ -379,8 +479,14 @@ set_lock_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
   value_prev = 0;
   i = 0;
 
-  /* try to make the UI match the AC setting */
+  /* try to make the UI match the lock setting */
   g_settings_get (self->priv->lock_settings, "lock-delay", "u", &value);
+
+  /* convert to seconds */
+  value *= 60;
+
+  if (value > 0)
+    value = lock_delay_to_absolute (self, value);
   do
     {
       gtk_tree_model_get (model, &iter,
