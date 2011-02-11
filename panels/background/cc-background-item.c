@@ -173,6 +173,8 @@ cc_background_item_changes_with_time (CcBackgroundItem *item)
 {
         gboolean changes;
 
+	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), FALSE);
+
         changes = FALSE;
         if (item->priv->bg != NULL) {
                 changes = gnome_bg_changes_with_time (item->priv->bg);
@@ -210,6 +212,9 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
 {
         GdkPixbuf *pixbuf = NULL;
         GIcon *icon = NULL;
+
+	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
+	g_return_val_if_fail (width > 0 && height > 0, NULL);
 
         set_bg_properties (item);
 
@@ -338,7 +343,7 @@ gboolean
 cc_background_item_load (CcBackgroundItem *item,
 			 GFileInfo        *info)
 {
-        g_return_val_if_fail (item != NULL, FALSE);
+        g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), FALSE);
         g_return_val_if_fail (item->priv->filename != NULL, FALSE);
 
         update_info (item, info);
