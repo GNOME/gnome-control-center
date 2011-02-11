@@ -63,16 +63,23 @@ bg_colors_source_init (BgColorsSource *self)
 
   for (i = 0; i < G_N_ELEMENTS (items); i++)
     {
+      CcBackgroundItemFlags flags;
       CcBackgroundItem *item;
       GIcon *pixbuf;
 
       item = cc_background_item_new (NULL);
+      flags = CC_BACKGROUND_ITEM_HAS_PCOLOR |
+	      CC_BACKGROUND_ITEM_HAS_SCOLOR |
+	      CC_BACKGROUND_ITEM_HAS_SHADING |
+	      CC_BACKGROUND_ITEM_HAS_FNAME;
+      /* It does have a filename, it's "none" */
 
       g_object_set (G_OBJECT (item),
 		    "name", _(items[i].name),
 		    "primary-color", PCOLOR,
 		    "secondary-color", SCOLOR,
 		    "shading", items[i].type,
+		    "flags", flags,
 		    NULL);
 
       /* insert the item into the liststore */
