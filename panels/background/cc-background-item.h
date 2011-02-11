@@ -61,7 +61,6 @@ typedef struct
 typedef struct
 {
         GObjectClass   parent_class;
-        void (* changed)           (CcBackgroundItem *item);
 } CcBackgroundItemClass;
 
 GType              cc_background_item_get_type (void);

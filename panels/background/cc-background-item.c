@@ -74,13 +74,6 @@ enum {
         PROP_SIZE
 };
 
-enum {
-        CHANGED,
-        LAST_SIGNAL
-};
-
-static guint signals [LAST_SIGNAL] = { 0, };
-
 static void     cc_background_item_class_init     (CcBackgroundItemClass *klass);
 static void     cc_background_item_init           (CcBackgroundItem      *background_item);
 static void     cc_background_item_finalize       (GObject               *object);
@@ -271,13 +264,6 @@ update_info (CcBackgroundItem *item,
         if (info != NULL)
                 g_object_unref (info);
 
-}
-
-static void
-on_bg_changed (GnomeBG          *bg,
-               CcBackgroundItem *item)
-{
-        g_signal_emit (item, signals[CHANGED], 0);
 }
 
 gboolean
@@ -592,17 +578,6 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
         object_class->constructor = cc_background_item_constructor;
         object_class->finalize = cc_background_item_finalize;
 
-        signals [CHANGED]
-                = g_signal_new ("changed",
-                                G_TYPE_FROM_CLASS (object_class),
-                                G_SIGNAL_RUN_LAST,
-                                0,
-                                NULL,
-                                NULL,
-                                g_cclosure_marshal_VOID__VOID,
-                                G_TYPE_NONE,
-                                0);
-
         g_object_class_install_property (object_class,
                                          PROP_NAME,
                                          g_param_spec_string ("name",
@@ -700,11 +675,6 @@ cc_background_item_init (CcBackgroundItem *item)
         item->priv = CC_BACKGROUND_ITEM_GET_PRIVATE (item);
 
         item->priv->bg = gnome_bg_new ();
-
-        g_signal_connect (item->priv->bg,
-                          "changed",
-                          G_CALLBACK (on_bg_changed),
-                          item);
 
         item->priv->shading = G_DESKTOP_BACKGROUND_SHADING_SOLID;
         item->priv->placement = G_DESKTOP_BACKGROUND_STYLE_SCALED;

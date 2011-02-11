@@ -107,65 +107,9 @@ bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
   object_class->finalize = bg_wallpapers_source_finalize;
 }
 
-//FIXME
-#if 0
-static gboolean
-find_wallpaper (gpointer key,
-                gpointer value,
-                gpointer data)
-{
-  GnomeBG *bg = data;
-  CcBackgroundItem *item = value;
-
-  return item->bg == bg;
-}
-
-/* FIXME: Is this used for anything? */
-static void
-item_changed_cb (GnomeBG    *bg,
-                 GnomeWpXml *data)
-{
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  GtkTreePath *path;
-  CcBackgroundItem *item;
-
-  item = g_hash_table_find (data->wp_hash, find_wallpaper, bg);
-
-  if (!item)
-    return;
-
-  model = gtk_tree_row_reference_get_model (item->rowref);
-  path = gtk_tree_row_reference_get_path (item->rowref);
-
-  if (gtk_tree_model_get_iter (model, &iter, path))
-    {
-      GIcon *pixbuf;
-
-      g_signal_handlers_block_by_func (bg, G_CALLBACK (item_changed_cb), data);
-
-      pixbuf = cc_background_item_get_thumbnail (item,
-                                            data->thumb_factory,
-                                            data->thumb_width,
-                                            data->thumb_height);
-      if (pixbuf)
-        {
-          gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
-                              0, pixbuf, -1);
-          g_object_unref (pixbuf);
-        }
-
-      g_signal_handlers_unblock_by_func (bg, G_CALLBACK (item_changed_cb),
-                                         data);
-    }
-}
-#endif
-
-
-
 static void
 load_wallpapers (gchar              *key,
-                 CcBackgroundItem        *item,
+                 CcBackgroundItem   *item,
                  BgWallpapersSource *source)
 {
   BgWallpapersSourcePrivate *priv = source->priv;
@@ -184,7 +128,6 @@ load_wallpapers (gchar              *key,
 
   pixbuf = cc_background_item_get_thumbnail (item, priv->thumb_factory,
                                         THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
-//  cc_background_item_update_size (item, NULL);
 
   gtk_list_store_set (store, &iter,
                       0, pixbuf,
@@ -193,12 +136,6 @@ load_wallpapers (gchar              *key,
 
   if (pixbuf)
     g_object_unref (pixbuf);
-
-#if 0
-  path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), &iter);
-  item->rowref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
-  gtk_tree_path_free (path);
-#endif
 }
 
 static void

@@ -127,7 +127,6 @@ picture_scaled (GObject *source_object,
   GdkPixbuf *pixbuf;
 
   GtkTreeIter iter;
-  GtkTreePath *tree_path;
   GtkListStore *store;
 
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
@@ -147,15 +146,6 @@ picture_scaled (GObject *source_object,
                                      0, pixbuf,
                                      1, item,
                                      -1);
-  tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (store),
-                                       &iter);
-  //FIXME rowref
-#if 0
-  item->rowref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store),
-                                             tree_path);
-#endif
-  gtk_tree_path_free (tree_path);
-
   g_object_unref (pixbuf);
 }
 
