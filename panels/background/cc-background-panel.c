@@ -825,17 +825,21 @@ cc_background_panel_init (CcBackgroundPanel *self)
   /* initalise the current background information from settings */
   filename = g_settings_get_string (priv->settings, WP_FILE_KEY);
   priv->current_background = cc_background_item_new (filename);
-  g_object_set (G_OBJECT (priv->current_background), "name", _("Current background"), NULL);
 
-  //FIXME load other properties
+  /* FIXME Set flags too:
+   * - if we have a gradient and no filename, set PCOLOR, etc.
+   *
+   * Move into cc-background-item.c like the old cc_background_item_update()?
+   */
+  g_object_set (G_OBJECT (priv->current_background),
+		"name", _("Current background"),
+		"placement", g_settings_get_enum (priv->settings, WP_OPTIONS_KEY),
+		"shading", g_settings_get_enum (priv->settings, WP_SHADING_KEY),
+		"primary-color", g_settings_get_string (priv->settings, WP_PCOLOR_KEY),
+		"secondary-color", g_settings_get_string (priv->settings, WP_SCOLOR_KEY),
+		NULL);
 
   cc_background_item_load (priv->current_background, NULL);
-  //FIXME call load?
-#if 0
-  cc_background_item_update (priv->current_background);
-  cc_background_item_ensure_gnome_bg (priv->current_background);
-  cc_background_item_update_size (priv->current_background, priv->thumb_factory);
-#endif
 
   update_preview (priv, NULL, TRUE);
 
