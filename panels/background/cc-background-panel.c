@@ -47,7 +47,6 @@
 enum {
   COL_SOURCE_NAME,
   COL_SOURCE_TYPE,
-  COL_SOURCE_READONLY,
   COL_SOURCE,
   NUM_COLS
 };
@@ -74,7 +73,6 @@ struct _CcBackgroundPanelPrivate
   GnomeDesktopThumbnailFactory *thumb_factory;
 
   CcBackgroundItem *current_background;
-  gboolean current_source_readonly;
   gint current_source;
 
   GCancellable *copy_cancellable;
@@ -232,55 +230,36 @@ cc_background_panel_class_finalize (CcBackgroundPanelClass *klass)
 }
 
 static void
-source_update_edit_box (CcBackgroundPanelPrivate *priv)
+source_update_edit_box (CcBackgroundPanelPrivate *priv,
+			gboolean                  initial)
 {
-  if (priv->current_source == SOURCE_COLORS)
-    {
-      gtk_widget_hide (WID ("style-combobox"));
-      gtk_widget_show (WID ("style-pcolor"));
+  CcBackgroundItemFlags flags;
 
-      if (priv->current_background &&
-	  cc_background_item_get_shading (priv->current_background) == G_DESKTOP_BACKGROUND_SHADING_SOLID)
-        gtk_widget_hide (WID ("style-scolor"));
-      else
-        gtk_widget_show (WID ("style-scolor"));
-    }
+  cc_background_item_dump (priv->current_background);
+
+  flags = cc_background_item_get_flags (priv->current_background);
+
+  if ((flags & CC_BACKGROUND_ITEM_HAS_SCOLOR &&
+       priv->current_source != SOURCE_COLORS) ||
+      cc_background_item_get_shading (priv->current_background) == G_DESKTOP_BACKGROUND_SHADING_SOLID)
+    gtk_widget_hide (WID ("style-scolor"));
   else
-    {
-      if (!priv->current_source_readonly)
-        {
-          gtk_widget_show (WID ("style-pcolor"));
-          gtk_widget_hide (WID ("style-scolor"));
-          gtk_widget_show (WID ("style-combobox"));
-	}
-      else
-        {
-          gtk_widget_hide (WID ("style-pcolor"));
-          gtk_widget_hide (WID ("style-scolor"));
-          gtk_widget_hide (WID ("style-combobox"));
-	}
-    }
-}
+    gtk_widget_show (WID ("style-scolor"));
 
-static void
-setup_edit_box (CcBackgroundPanelPrivate *priv)
-{
-  g_assert (priv->current_background);
-
-  if (cc_background_item_get_filename (priv->current_background) == NULL)
-    {
-      gtk_widget_hide (WID ("style-combobox"));
-      gtk_widget_show (WID ("style-pcolor"));
-
-      if (cc_background_item_get_shading (priv->current_background) == G_DESKTOP_BACKGROUND_SHADING_SOLID)
-        gtk_widget_hide (WID ("style-scolor"));
-      else
-        gtk_widget_show (WID ("style-scolor"));
-    }
+  if (flags & CC_BACKGROUND_ITEM_HAS_PCOLOR &&
+      priv->current_source != SOURCE_COLORS)
+    gtk_widget_hide (WID ("style-pcolor"));
   else
-    {
-      /* FIXME other cases */
-    }
+    gtk_widget_show (WID ("style-pcolor"));
+
+  if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT ||
+      cc_background_item_get_filename (priv->current_background) == NULL)
+    gtk_widget_hide (WID ("style-combobox"));
+  else
+    gtk_widget_show (WID ("style-combobox"));
+
+  /* FIXME What to do if the background has a gradient shading
+   * and provides the colours? */
 }
 
 static void
@@ -415,7 +394,7 @@ update_preview (CcBackgroundPanelPrivate *priv,
 #endif
     }
 
-  source_update_edit_box (priv);
+  source_update_edit_box (priv, FALSE);
 
   changes_with_time = FALSE;
 
@@ -473,7 +452,6 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("sources-combobox")),
                                  &iter);
   gtk_tree_model_get (model, &iter,
-		      COL_SOURCE_READONLY, &priv->current_source_readonly,
 		      COL_SOURCE_TYPE, &priv->current_source, -1);
 
   model = gtk_icon_view_get_model (icon_view);
@@ -774,7 +752,6 @@ cc_background_panel_init (CcBackgroundPanel *self)
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
                                      COL_SOURCE_NAME, _("Wallpapers"),
                                      COL_SOURCE_TYPE, SOURCE_WALLPAPERS,
-                                     COL_SOURCE_READONLY, TRUE,
                                      COL_SOURCE, priv->wallpapers_source,
                                      -1);
 
@@ -782,7 +759,6 @@ cc_background_panel_init (CcBackgroundPanel *self)
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
                                      COL_SOURCE_NAME, _("Pictures Folder"),
                                      COL_SOURCE_TYPE, SOURCE_PICTURES,
-                                     COL_SOURCE_READONLY, FALSE,
                                      COL_SOURCE, priv->pictures_source,
                                      -1);
 
@@ -790,7 +766,6 @@ cc_background_panel_init (CcBackgroundPanel *self)
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
                                      COL_SOURCE_NAME, _("Colors & Gradients"),
                                      COL_SOURCE_TYPE, SOURCE_COLORS,
-                                     COL_SOURCE_READONLY, FALSE,
                                      COL_SOURCE, priv->colors_source,
                                      -1);
 
@@ -799,7 +774,6 @@ cc_background_panel_init (CcBackgroundPanel *self)
   gtk_list_store_insert_with_values (store, NULL, G_MAXINT,
                                      COL_SOURCE_NAME, _("Flickr"),
                                      COL_SOURCE_TYPE, SOURCE_FLICKR,
-                                     COL_SOURCE_READONLY, FALSE,
                                      COL_SOURCE, priv->flickr_source,
                                      -1);
 #endif
@@ -853,6 +827,9 @@ cc_background_panel_init (CcBackgroundPanel *self)
   priv->current_background = cc_background_item_new (filename);
   g_object_set (G_OBJECT (priv->current_background), "name", _("Current background"), NULL);
 
+  //FIXME load other properties
+
+  cc_background_item_load (priv->current_background, NULL);
   //FIXME call load?
 #if 0
   cc_background_item_update (priv->current_background);
@@ -863,7 +840,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
   update_preview (priv, NULL, TRUE);
 
   /* Setup the edit box with our current settings */
-  setup_edit_box (priv);
+  source_update_edit_box (priv, TRUE);
 }
 
 void
