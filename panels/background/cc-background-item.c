@@ -307,7 +307,14 @@ cc_background_item_load (CcBackgroundItem *item,
 		return FALSE;
         }
 
-        update_size (item);
+	/* FIXME we should handle XML files as well */
+        if (item->priv->mime_type != NULL &&
+            g_str_has_prefix (item->priv->mime_type, "image/")) {
+		gdk_pixbuf_get_file_info (item->priv->filename,
+					  &item->priv->width,
+					  &item->priv->height);
+		update_size (item);
+	}
 
         return TRUE;
 }
