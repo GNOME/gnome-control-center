@@ -112,6 +112,9 @@ cc_shell_model_init (CcShellModel *self)
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
 
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (self), COL_NAME,
+                                        GTK_SORT_ASCENDING);
+
   g_signal_connect (G_OBJECT (gtk_icon_theme_get_default ()), "changed",
                     G_CALLBACK (icon_theme_changed), self);
 }
