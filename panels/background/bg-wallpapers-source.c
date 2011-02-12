@@ -24,7 +24,7 @@
 #include "bg-wallpapers-source.h"
 
 #include "cc-background-item.h"
-#include "gnome-wp-xml.h"
+#include "cc-background-xml.h"
 
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gio/gio.h>
@@ -38,7 +38,6 @@ struct _BgWallpapersSourcePrivate
 {
   GtkListStore *store;
   GnomeDesktopThumbnailFactory *thumb_factory;
-  guint reload_id;
 };
 
 
@@ -79,12 +78,6 @@ bg_wallpapers_source_dispose (GObject *object)
       priv->thumb_factory = NULL;
     }
 
-  if (priv->reload_id != 0)
-    {
-      g_source_remove (priv->reload_id);
-      priv->reload_id = 0;
-    }
-
   G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->dispose (object);
 }
 
@@ -114,7 +107,6 @@ load_wallpapers (gchar              *key,
 {
   BgWallpapersSourcePrivate *priv = source->priv;
   GtkTreeIter iter;
-//  GtkTreePath *path;
   GIcon *pixbuf;
   GtkListStore *store = bg_source_get_liststore (BG_SOURCE (source));
   gboolean deleted;
@@ -127,11 +119,11 @@ load_wallpapers (gchar              *key,
   gtk_list_store_append (store, &iter);
 
   pixbuf = cc_background_item_get_thumbnail (item, priv->thumb_factory,
-                                        THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+					     THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
 
   gtk_list_store_set (store, &iter,
                       0, pixbuf,
-                      1, item,
+                      1, g_object_ref (item),
                       -1);
 
   if (pixbuf)
@@ -144,32 +136,24 @@ list_load_cb (GObject *source_object,
 	      gpointer user_data)
 {
   BgWallpapersSource *self = (BgWallpapersSource *) user_data;
-  GnomeWpXml *wp_xml;
+  const GHashTable *ht;
 
-  wp_xml = gnome_wp_xml_load_list_finish (res);
-  g_hash_table_foreach (wp_xml->wp_hash,
+  ht = cc_background_xml_load_list_finish (res);
+  g_hash_table_foreach ((GHashTable *) ht,
 			(GHFunc) load_wallpapers,
 			self);
 
-  g_hash_table_destroy (wp_xml->wp_hash);
-  g_free (wp_xml);
+  g_object_unref (source_object);
 }
 
 static gboolean
 reload_wallpapers (BgWallpapersSource *self)
 {
-  GnomeWpXml *wp_xml;
+  CcBackgroundXml *wp_xml;
 
   /* set up wallpaper source */
-  wp_xml = g_new0 (GnomeWpXml, 1);
-  wp_xml->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
-  wp_xml->wp_model = bg_source_get_liststore (BG_SOURCE (self));
-  wp_xml->thumb_width = THUMBNAIL_WIDTH;
-  wp_xml->thumb_height = THUMBNAIL_HEIGHT;
-  wp_xml->thumb_factory = self->priv->thumb_factory;
-
-  gnome_wp_xml_load_list_async (wp_xml, NULL, list_load_cb, self);
-  self->priv->reload_id = 0;
+  wp_xml = cc_background_xml_new ();
+  cc_background_xml_load_list_async (wp_xml, NULL, list_load_cb, self);
 
   return FALSE;
 }
@@ -184,7 +168,7 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   priv->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
-  priv->reload_id = g_idle_add ((GSourceFunc)reload_wallpapers, self);
+  reload_wallpapers (self);
 }
 
 BgWallpapersSource *

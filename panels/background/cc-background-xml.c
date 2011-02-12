@@ -1,7 +1,9 @@
 /*
  *  Authors: Rodney Dawes <dobey@ximian.com>
+ *  Bastien Nocera <hadess@hadess.net>
  *
  *  Copyright 2003-2006 Novell, Inc. (www.novell.com)
+ *  Copyright 2011 Red Hat Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of version 2 of the GNU General Public License
@@ -26,10 +28,25 @@
 
 #include "gdesktop-enums-types.h"
 #include "cc-background-item.h"
-#include "gnome-wp-xml.h"
+#include "cc-background-xml.h"
 
-static gboolean gnome_wp_xml_get_bool (const xmlNode * parent,
-				       const gchar * prop_name) {
+struct CcBackgroundXmlPrivate
+{
+  GHashTable *wp_hash;
+};
+
+#define CC_BACKGROUND_XML_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_BACKGROUND_XML, CcBackgroundXmlPrivate))
+
+static void     cc_background_xml_class_init     (CcBackgroundXmlClass *klass);
+static void     cc_background_xml_init           (CcBackgroundXml      *background_item);
+static void     cc_background_xml_finalize       (GObject              *object);
+
+G_DEFINE_TYPE (CcBackgroundXml, cc_background_xml, G_TYPE_OBJECT)
+
+static gboolean
+cc_background_xml_get_bool (const xmlNode *parent,
+			    const gchar   *prop_name)
+{
   xmlChar * prop;
   gboolean ret_val = FALSE;
 
@@ -50,7 +67,7 @@ static gboolean gnome_wp_xml_get_bool (const xmlNode * parent,
 }
 
 #if 0
-static void gnome_wp_xml_set_bool (const xmlNode * parent,
+static void cc_background_xml_set_bool (const xmlNode * parent,
 				   const xmlChar * prop_name, gboolean value) {
   g_return_if_fail (parent != NULL);
   g_return_if_fail (prop_name != NULL);
@@ -100,8 +117,10 @@ enum_string_to_value (GType type,
 #define UNSET_FLAG(flag) G_STMT_START{ (flags&=~(flag)); }G_STMT_END
 #define SET_FLAG(flag) G_STMT_START{ (flags|=flag); }G_STMT_END
 
-static void gnome_wp_xml_load_xml (GnomeWpXml *data,
-				   const gchar * filename) {
+static void
+cc_background_xml_load_xml (CcBackgroundXml *xml,
+			    const gchar * filename)
+{
   xmlDoc * wplist;
   xmlNode * root, * list, * wpa;
   xmlChar * nodelang;
@@ -128,7 +147,7 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
       item = cc_background_item_new (NULL);
 
       g_object_set (G_OBJECT (item),
-		    "is-deleted", gnome_wp_xml_get_bool (list, "deleted"),
+		    "is-deleted", cc_background_xml_get_bool (list, "deleted"),
 		    "source-xml", filename,
 		    NULL);
 
@@ -221,32 +240,34 @@ static void gnome_wp_xml_load_xml (GnomeWpXml *data,
       g_free (uri);
 
       /* Make sure we don't already have this one and that filename exists */
-      if (g_hash_table_lookup (data->wp_hash, id) != NULL) {
+      if (g_hash_table_lookup (xml->priv->wp_hash, id) != NULL) {
 	g_object_unref (item);
 	g_free (id);
 	continue;
       }
 
       g_object_set (G_OBJECT (item), "flags", flags, NULL);
-      g_hash_table_insert (data->wp_hash, id, item);
+      g_hash_table_insert (xml->priv->wp_hash, id, item);
       /* Don't free ID, we added it to the hash table */
     }
   }
   xmlFreeDoc (wplist);
 }
 
-static void gnome_wp_file_changed (GFileMonitor *monitor,
-                                   GFile *file,
-                                   GFile *other_file,
-                                   GFileMonitorEvent event_type,
-                                   GnomeWpXml *data) {
-  gchar * filename;
+static void
+gnome_wp_file_changed (GFileMonitor *monitor,
+		       GFile *file,
+		       GFile *other_file,
+		       GFileMonitorEvent event_type,
+		       CcBackgroundXml *data)
+{
+  gchar *filename;
 
   switch (event_type) {
   case G_FILE_MONITOR_EVENT_CHANGED:
   case G_FILE_MONITOR_EVENT_CREATED:
     filename = g_file_get_path (file);
-    gnome_wp_xml_load_xml (data, filename);
+    cc_background_xml_load_xml (data, filename);
     g_free (filename);
     break;
   default:
@@ -254,8 +275,10 @@ static void gnome_wp_file_changed (GFileMonitor *monitor,
   }
 }
 
-static void gnome_wp_xml_add_monitor (GFile      *directory,
-                                      GnomeWpXml *data) {
+static void
+cc_background_xml_add_monitor (GFile      *directory,
+			       CcBackgroundXml *data)
+{
   GFileMonitor *monitor;
   GError *error = NULL;
 
@@ -279,8 +302,10 @@ static void gnome_wp_xml_add_monitor (GFile      *directory,
                     data);
 }
 
-static void gnome_wp_xml_load_from_dir (const gchar *path,
-                                        GnomeWpXml  *data) {
+static void
+cc_background_xml_load_from_dir (const gchar *path,
+				 CcBackgroundXml  *data)
+{
   GFile *directory;
   GFileEnumerator *enumerator;
   GError *error = NULL;
@@ -311,18 +336,20 @@ static void gnome_wp_xml_load_from_dir (const gchar *path,
     fullpath = g_build_filename (path, filename, NULL);
     g_object_unref (info);
 
-    gnome_wp_xml_load_xml (data, fullpath);
+    cc_background_xml_load_xml (data, fullpath);
     g_free (fullpath);
   }
   g_file_enumerator_close (enumerator, NULL, NULL);
 
-  gnome_wp_xml_add_monitor (directory, data);
+  cc_background_xml_add_monitor (directory, data);
 
   g_object_unref (directory);
   g_object_unref (enumerator);
 }
 
-void gnome_wp_xml_load_list (GnomeWpXml *data) {
+static void
+cc_background_xml_load_list (CcBackgroundXml *data)
+{
   const char * const *system_data_dirs;
   gchar * datadir;
   gint i;
@@ -330,7 +357,7 @@ void gnome_wp_xml_load_list (GnomeWpXml *data) {
   datadir = g_build_filename (g_get_user_data_dir (),
                               "gnome-background-properties",
                               NULL);
-  gnome_wp_xml_load_from_dir (datadir, data);
+  cc_background_xml_load_from_dir (datadir, data);
   g_free (datadir);
 
   system_data_dirs = g_get_system_data_dirs ();
@@ -338,20 +365,22 @@ void gnome_wp_xml_load_list (GnomeWpXml *data) {
     datadir = g_build_filename (system_data_dirs[i],
                                 "gnome-background-properties",
 				NULL);
-    gnome_wp_xml_load_from_dir (datadir, data);
+    cc_background_xml_load_from_dir (datadir, data);
     g_free (datadir);
   }
 }
 
-GnomeWpXml *
-gnome_wp_xml_load_list_finish (GAsyncResult  *async_result)
+const GHashTable *
+cc_background_xml_load_list_finish (GAsyncResult  *async_result)
 {
 	GSimpleAsyncResult *result = G_SIMPLE_ASYNC_RESULT (async_result);
+	CcBackgroundXml *data;
 
 	g_return_val_if_fail (G_IS_ASYNC_RESULT (async_result), NULL);
-	g_warn_if_fail (g_simple_async_result_get_source_tag (result) == gnome_wp_xml_load_list_async);
+	g_warn_if_fail (g_simple_async_result_get_source_tag (result) == cc_background_xml_load_list_async);
 
-	return g_simple_async_result_get_op_res_gpointer (result);
+	data = CC_BACKGROUND_XML (g_simple_async_result_get_op_res_gpointer (result));
+	return data->priv->wp_hash;
 }
 
 static void
@@ -359,29 +388,29 @@ load_list_thread (GSimpleAsyncResult *res,
 		  GObject *object,
 		  GCancellable *cancellable)
 {
-	GnomeWpXml *data;
+	CcBackgroundXml *data;
 
 	data = g_simple_async_result_get_op_res_gpointer (res);
-	gnome_wp_xml_load_list (data);
+	cc_background_xml_load_list (data);
 }
 
-void gnome_wp_xml_load_list_async (GnomeWpXml *data,
-				   GCancellable *cancellable,
-				   GAsyncReadyCallback callback,
-				   gpointer user_data)
+void cc_background_xml_load_list_async (CcBackgroundXml *data,
+					GCancellable *cancellable,
+					GAsyncReadyCallback callback,
+					gpointer user_data)
 {
 	GSimpleAsyncResult *result;
 
 	g_return_if_fail (data != NULL);
 
-	result = g_simple_async_result_new (NULL, callback, user_data, gnome_wp_xml_load_list_async);
+	result = g_simple_async_result_new (G_OBJECT (data), callback, user_data, cc_background_xml_load_list_async);
 	g_simple_async_result_set_op_res_gpointer (result, data, NULL);
 	g_simple_async_result_run_in_thread (result, (GSimpleAsyncThreadFunc) load_list_thread, G_PRIORITY_LOW, cancellable);
 	g_object_unref (result);
 }
 
 #if 0
-static void gnome_wp_list_flatten (const gchar * key, CcBackgroundItem * item,
+static void gnome_wp_list_flatten (const gchar * key, CcBackgroundXml * item,
 				   GSList ** list) {
   g_return_if_fail (key != NULL);
   g_return_if_fail (item != NULL);
@@ -389,7 +418,7 @@ static void gnome_wp_list_flatten (const gchar * key, CcBackgroundItem * item,
   *list = g_slist_prepend (*list, item);
 }
 #endif
-void gnome_wp_xml_save_list (GnomeWpXml *data) {
+void cc_background_xml_save_list (CcBackgroundXml *data) {
 	//FIXME implement save or remove?
 #if 0
   xmlDoc * wplist;
@@ -415,7 +444,7 @@ void gnome_wp_xml_save_list (GnomeWpXml *data) {
   xmlDocSetRootElement (wplist, root);
 
   while (list != NULL) {
-    CcBackgroundItem * wpitem = list->data;
+    CcBackgroundXml * wpitem = list->data;
     const char * none = "(none)";
     gchar * filename;
     const gchar * scale, * shade;
@@ -434,7 +463,7 @@ void gnome_wp_xml_save_list (GnomeWpXml *data) {
     shade = wp_item_shading_to_string (wpitem->shade_type);
 
     wallpaper = xmlNewChild (root, NULL, (xmlChar *)"wallpaper", NULL);
-    gnome_wp_xml_set_bool (wallpaper, (xmlChar *)"deleted", wpitem->deleted);
+    cc_background_xml_set_bool (wallpaper, (xmlChar *)"deleted", wpitem->deleted);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"name", (xmlChar *)wpitem->name);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"filename", (xmlChar *)filename);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"options", (xmlChar *)scale);
@@ -454,3 +483,46 @@ void gnome_wp_xml_save_list (GnomeWpXml *data) {
 #endif
 }
 
+static void
+cc_background_xml_finalize (GObject *object)
+{
+        CcBackgroundXml *xml;
+
+        g_return_if_fail (object != NULL);
+        g_return_if_fail (CC_IS_BACKGROUND_XML (object));
+
+        xml = CC_BACKGROUND_XML (object);
+
+        g_return_if_fail (xml->priv != NULL);
+
+	if (xml->priv->wp_hash) {
+		g_hash_table_destroy (xml->priv->wp_hash);
+		xml->priv->wp_hash = NULL;
+	}
+}
+
+static void
+cc_background_xml_class_init (CcBackgroundXmlClass *klass)
+{
+        GObjectClass  *object_class = G_OBJECT_CLASS (klass);
+
+        object_class->finalize = cc_background_xml_finalize;
+
+        g_type_class_add_private (klass, sizeof (CcBackgroundXmlPrivate));
+}
+
+static void
+cc_background_xml_init (CcBackgroundXml *xml)
+{
+        xml->priv = CC_BACKGROUND_XML_GET_PRIVATE (xml);
+        xml->priv->wp_hash = g_hash_table_new_full (g_str_hash,
+						    g_str_equal,
+						    (GDestroyNotify) g_free,
+						    (GDestroyNotify) g_object_unref);
+}
+
+CcBackgroundXml *
+cc_background_xml_new (void)
+{
+	return CC_BACKGROUND_XML (g_object_new (CC_TYPE_BACKGROUND_XML, NULL));
+}

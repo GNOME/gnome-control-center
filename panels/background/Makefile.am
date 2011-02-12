@@ -33,12 +33,14 @@ BUILT_SOURCES =            \
 	gdesktop-enums-types.h
 
 libbackground_la_SOURCES =		\
-	$(BUILT_SOURCES)			\
+	$(BUILT_SOURCES)		\
 	background-module.c		\
 	cc-background-panel.c		\
 	cc-background-panel.h		\
 	cc-background-item.c		\
 	cc-background-item.h		\
+	cc-background-xml.c		\
+	cc-background-xml.h		\
 	bg-source.c			\
 	bg-source.h			\
 	bg-pictures-source.c		\
@@ -46,9 +48,7 @@ libbackground_la_SOURCES =		\
 	bg-wallpapers-source.c		\
 	bg-wallpapers-source.h		\
 	bg-colors-source.c		\
-	bg-colors-source.h		\
-	gnome-wp-xml.c			\
-	gnome-wp-xml.h
+	bg-colors-source.h
 
 
 libbackground_la_LIBADD = \
