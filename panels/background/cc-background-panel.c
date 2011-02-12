@@ -671,6 +671,39 @@ color_changed_cb (GtkColorButton    *button,
 }
 
 static void
+load_current_bg (CcBackgroundPanel *self)
+{
+  CcBackgroundPanelPrivate *priv;
+  gchar *uri, *pcolor, *scolor;
+
+  priv = self->priv;
+
+  /* initalise the current background information from settings */
+  uri = g_settings_get_string (priv->settings, WP_FILE_KEY);
+  priv->current_background = cc_background_item_new (uri);
+  g_free (uri);
+
+  /* FIXME Set flags too:
+   * - if we have a gradient and no filename, set PCOLOR, etc.
+   *
+   * Move into cc-background-item.c like the old cc_background_item_update()?
+   */
+  pcolor = g_settings_get_string (priv->settings, WP_PCOLOR_KEY);
+  scolor = g_settings_get_string (priv->settings, WP_SCOLOR_KEY);
+  g_object_set (G_OBJECT (priv->current_background),
+		"name", _("Current background"),
+		"placement", g_settings_get_enum (priv->settings, WP_OPTIONS_KEY),
+		"shading", g_settings_get_enum (priv->settings, WP_SHADING_KEY),
+		"primary-color", pcolor,
+		"secondary-color", scolor,
+		NULL);
+  g_free (pcolor);
+  g_free (scolor);
+
+  cc_background_item_load (priv->current_background, NULL);
+}
+
+static void
 cc_background_panel_init (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
@@ -679,7 +712,6 @@ cc_background_panel_init (CcBackgroundPanel *self)
   GError *err = NULL;
   GtkWidget *widget;
   GtkListStore *store;
-  gchar *uri, *pcolor, *scolor;
 
   priv = self->priv = BACKGROUND_PANEL_PRIVATE (self);
 
@@ -776,29 +808,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   priv->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
-  /* initalise the current background information from settings */
-  uri = g_settings_get_string (priv->settings, WP_FILE_KEY);
-  priv->current_background = cc_background_item_new (uri);
-  g_free (uri);
-
-  /* FIXME Set flags too:
-   * - if we have a gradient and no filename, set PCOLOR, etc.
-   *
-   * Move into cc-background-item.c like the old cc_background_item_update()?
-   */
-  pcolor = g_settings_get_string (priv->settings, WP_PCOLOR_KEY);
-  scolor = g_settings_get_string (priv->settings, WP_SCOLOR_KEY);
-  g_object_set (G_OBJECT (priv->current_background),
-		"name", _("Current background"),
-		"placement", g_settings_get_enum (priv->settings, WP_OPTIONS_KEY),
-		"shading", g_settings_get_enum (priv->settings, WP_SHADING_KEY),
-		"primary-color", pcolor,
-		"secondary-color", scolor,
-		NULL);
-  g_free (pcolor);
-  g_free (scolor);
-
-  cc_background_item_load (priv->current_background, NULL);
+  load_current_bg (self);
 
   update_preview (priv, NULL, TRUE);
 
