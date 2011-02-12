@@ -38,14 +38,15 @@ typedef struct CcBackgroundXmlPrivate CcBackgroundXmlPrivate;
 
 typedef struct
 {
-  GObjectClass parent_class;
-} CcBackgroundXmlClass;
-
-typedef struct
-{
   GObject parent;
   CcBackgroundXmlPrivate *priv;
 } CcBackgroundXml;
+
+typedef struct
+{
+  GObjectClass parent_class;
+  void (*added) (CcBackgroundXml *xml, GObject *item);
+} CcBackgroundXmlClass;
 
 GType              cc_background_xml_get_type (void);
 
