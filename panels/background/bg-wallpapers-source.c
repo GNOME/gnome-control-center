@@ -38,6 +38,7 @@ struct _BgWallpapersSourcePrivate
 {
   GtkListStore *store;
   GnomeDesktopThumbnailFactory *thumb_factory;
+  CcBackgroundXml *xml;
 };
 
 
@@ -76,6 +77,11 @@ bg_wallpapers_source_dispose (GObject *object)
     {
       g_object_unref (priv->thumb_factory);
       priv->thumb_factory = NULL;
+    }
+  if (priv->xml)
+    {
+      g_object_unref (priv->xml);
+      priv->xml = NULL;
     }
 
   G_OBJECT_CLASS (bg_wallpapers_source_parent_class)->dispose (object);
@@ -135,27 +141,15 @@ list_load_cb (GObject *source_object,
 	      GAsyncResult *res,
 	      gpointer user_data)
 {
-  BgWallpapersSource *self = (BgWallpapersSource *) user_data;
-  const GHashTable *ht;
-
-  ht = cc_background_xml_load_list_finish (res);
-  g_hash_table_foreach ((GHashTable *) ht,
-			(GHFunc) load_wallpapers,
-			self);
-
-  g_object_unref (source_object);
+  cc_background_xml_load_list_finish (res);
 }
 
-static gboolean
-reload_wallpapers (BgWallpapersSource *self)
+static void
+item_added (CcBackgroundXml    *xml,
+	    CcBackgroundItem   *item,
+	    BgWallpapersSource *self)
 {
-  CcBackgroundXml *wp_xml;
-
-  /* set up wallpaper source */
-  wp_xml = cc_background_xml_new ();
-  cc_background_xml_load_list_async (wp_xml, NULL, list_load_cb, self);
-
-  return FALSE;
+  load_wallpapers (NULL, item, self);
 }
 
 static void
@@ -167,8 +161,10 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
 
   priv->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
-
-  reload_wallpapers (self);
+  priv->xml = cc_background_xml_new ();
+  g_signal_connect (G_OBJECT (priv->xml), "added",
+		    G_CALLBACK (item_added), self);
+  cc_background_xml_load_list_async (priv->xml, NULL, list_load_cb, self);
 }
 
 BgWallpapersSource *
