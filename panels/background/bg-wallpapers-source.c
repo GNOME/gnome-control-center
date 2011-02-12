@@ -152,6 +152,29 @@ item_added (CcBackgroundXml    *xml,
 }
 
 static void
+load_default_bg (BgWallpapersSource *self)
+{
+  const char * const *system_data_dirs;
+  char *filename;
+  guint i;
+
+  /* FIXME We could do this nicer if we had the XML source in GSettings */
+
+  system_data_dirs = g_get_system_data_dirs ();
+  for (i = 0; system_data_dirs[i]; i++) {
+    filename = g_build_filename (system_data_dirs[i],
+				 "gnome-background-properties",
+				 "adwaita.xml",
+				 NULL);
+    if (cc_background_xml_load_xml (self->priv->xml, filename)) {
+      g_free (filename);
+      break;
+    }
+    g_free (filename);
+  }
+}
+
+static void
 bg_wallpapers_source_init (BgWallpapersSource *self)
 {
   BgWallpapersSourcePrivate *priv;
@@ -163,6 +186,10 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   priv->xml = cc_background_xml_new ();
   g_signal_connect (G_OBJECT (priv->xml), "added",
 		    G_CALLBACK (item_added), self);
+
+  /* Try adding the default background first */
+  load_default_bg (self);
+
   cc_background_xml_load_list_async (priv->xml, NULL, list_load_cb, self);
 }
 
