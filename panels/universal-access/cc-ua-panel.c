@@ -45,6 +45,7 @@ struct _CcUaPanelPrivate
   GSettings *kb_settings;
   GSettings *mouse_settings;
   GSettings *font_settings;
+  GSettings *magnifier_settings;
 
   GSList *notify_list;
 };
@@ -130,6 +131,12 @@ cc_ua_panel_dispose (GObject *object)
     {
       g_object_unref (priv->font_settings);
       priv->font_settings = NULL;
+    }
+
+  if (priv->magnifier_settings)
+    {
+      g_object_unref (priv->magnifier_settings);
+      priv->magnifier_settings = NULL;
     }
 
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
@@ -541,6 +548,10 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   g_settings_bind (priv->kb_settings, "togglekeys-enable",
                    WID (priv->builder, "seeing_enable_toggle_keys_checkbutton"), "active",
                    G_SETTINGS_BIND_DEFAULT);
+
+  settings_on_off_editor_new (priv, priv->magnifier_settings, "show-magnifier",
+                              WID (priv->builder, "seeing_zoom_on_radiobutton"),
+                              NULL);
 }
 
 
@@ -789,6 +800,7 @@ cc_ua_panel_init (CcUaPanel *self)
   priv->kb_settings = g_settings_new ("org.gnome.desktop.a11y.keyboard");
   priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
   priv->font_settings = g_settings_new ("org.gnome.settings-daemon.plugins.xsettings");
+  priv->magnifier_settings = g_settings_new ("org.gnome.desktop.a11y.magnifier");
 
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);
