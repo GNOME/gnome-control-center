@@ -681,14 +681,15 @@ notebook_switch_page_cb (GtkNotebook               *book,
   /* make sure the home button is shown on all pages except the overview page */
 
   if (page_num == OVERVIEW_PAGE)
-    gtk_widget_hide (W (priv->builder, "home-button"));
+    {
+      gtk_widget_hide (W (priv->builder, "home-button"));
+      gtk_widget_show (W (priv->builder, "search-entry"));
+    }
   else
-    gtk_widget_show (W (priv->builder, "home-button"));
-
-  if (page_num == CAPPLET_PAGE)
-    gtk_widget_hide (W (priv->builder, "search-entry"));
-  else
-    gtk_widget_show (W (priv->builder, "search-entry"));
+    {
+      gtk_widget_show (W (priv->builder, "home-button"));
+      gtk_widget_hide (W (priv->builder, "search-entry"));
+    }
 }
 
 /* CcShell implementation */
