@@ -485,6 +485,7 @@ static void gnome_wp_list_flatten (const gchar * key, CcBackgroundXml * item,
 #endif
 void cc_background_xml_save_list (CcBackgroundXml *data) {
 	//FIXME implement save or remove?
+	//FIXME use XDG user dirs
 #if 0
   xmlDoc * wplist;
   xmlNode * root, * wallpaper, * item;
