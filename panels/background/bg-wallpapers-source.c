@@ -36,7 +36,6 @@ G_DEFINE_TYPE (BgWallpapersSource, bg_wallpapers_source, BG_TYPE_SOURCE)
 
 struct _BgWallpapersSourcePrivate
 {
-  GtkListStore *store;
   GnomeDesktopThumbnailFactory *thumb_factory;
   CcBackgroundXml *xml;
 };
