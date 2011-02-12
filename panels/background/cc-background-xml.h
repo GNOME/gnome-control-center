@@ -51,15 +51,15 @@ typedef struct
 GType              cc_background_xml_get_type (void);
 
 CcBackgroundXml *cc_background_xml_new (void);
+
 void cc_background_xml_save_list (CcBackgroundXml *data);
-/* FIXME this should be an iterator instead, so the bg
- * pops up as soon as a new one is available */
-void cc_background_xml_load_list_async (CcBackgroundXml *data,
-				   GCancellable *cancellable,
-				   GAsyncReadyCallback callback,
-				   gpointer user_data);
-/* FIXME, this is ugly API, which wouldn't be
- * needed if this was an object */
+
+gboolean cc_background_xml_load_xml                  (CcBackgroundXml *data,
+						      const char      *filename);
+void cc_background_xml_load_list_async               (CcBackgroundXml *data,
+						      GCancellable *cancellable,
+						      GAsyncReadyCallback callback,
+						      gpointer user_data);
 const GHashTable *cc_background_xml_load_list_finish (GAsyncResult  *async_result);
 
 G_END_DECLS

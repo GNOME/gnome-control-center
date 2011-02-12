@@ -161,20 +161,23 @@ emit_added_in_idle (CcBackgroundXml *xml,
 #define UNSET_FLAG(flag) G_STMT_START{ (flags&=~(flag)); }G_STMT_END
 #define SET_FLAG(flag) G_STMT_START{ (flags|=flag); }G_STMT_END
 
-static void
-cc_background_xml_load_xml (CcBackgroundXml *xml,
-			    const gchar * filename)
+static gboolean
+cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
+				     const gchar     *filename,
+				     gboolean         in_thread)
 {
   xmlDoc * wplist;
   xmlNode * root, * list, * wpa;
   xmlChar * nodelang;
   const gchar * const * syslangs;
   gint i;
+  gboolean retval;
 
   wplist = xmlParseFile (filename);
+  retval = FALSE;
 
   if (!wplist)
-    return;
+    return retval;
 
   syslangs = g_get_language_names ();
 
@@ -293,10 +296,16 @@ cc_background_xml_load_xml (CcBackgroundXml *xml,
       g_object_set (G_OBJECT (item), "flags", flags, NULL);
       g_hash_table_insert (xml->priv->wp_hash, id, item);
       /* Don't free ID, we added it to the hash table */
-      emit_added_in_idle (xml, g_object_ref (item));
+      if (in_thread)
+        emit_added_in_idle (xml, g_object_ref (item));
+      else
+        g_signal_emit (G_OBJECT (xml), signals[ADDED], 0, item);
+      retval = TRUE;
     }
   }
   xmlFreeDoc (wplist);
+
+  return retval;
 }
 
 static void
@@ -312,7 +321,7 @@ gnome_wp_file_changed (GFileMonitor *monitor,
   case G_FILE_MONITOR_EVENT_CHANGED:
   case G_FILE_MONITOR_EVENT_CREATED:
     filename = g_file_get_path (file);
-    cc_background_xml_load_xml (data, filename);
+    cc_background_xml_load_xml_internal (data, filename, FALSE);
     g_free (filename);
     break;
   default:
@@ -348,8 +357,9 @@ cc_background_xml_add_monitor (GFile      *directory,
 }
 
 static void
-cc_background_xml_load_from_dir (const gchar *path,
-				 CcBackgroundXml  *data)
+cc_background_xml_load_from_dir (const gchar      *path,
+				 CcBackgroundXml  *data,
+				 gboolean          in_thread)
 {
   GFile *directory;
   GFileEnumerator *enumerator;
@@ -381,7 +391,7 @@ cc_background_xml_load_from_dir (const gchar *path,
     fullpath = g_build_filename (path, filename, NULL);
     g_object_unref (info);
 
-    cc_background_xml_load_xml (data, fullpath);
+    cc_background_xml_load_xml_internal (data, fullpath, in_thread);
     g_free (fullpath);
   }
   g_file_enumerator_close (enumerator, NULL, NULL);
@@ -393,7 +403,8 @@ cc_background_xml_load_from_dir (const gchar *path,
 }
 
 static void
-cc_background_xml_load_list (CcBackgroundXml *data)
+cc_background_xml_load_list (CcBackgroundXml *data,
+			     gboolean         in_thread)
 {
   const char * const *system_data_dirs;
   gchar * datadir;
@@ -402,7 +413,7 @@ cc_background_xml_load_list (CcBackgroundXml *data)
   datadir = g_build_filename (g_get_user_data_dir (),
                               "gnome-background-properties",
                               NULL);
-  cc_background_xml_load_from_dir (datadir, data);
+  cc_background_xml_load_from_dir (datadir, data, in_thread);
   g_free (datadir);
 
   system_data_dirs = g_get_system_data_dirs ();
@@ -410,7 +421,7 @@ cc_background_xml_load_list (CcBackgroundXml *data)
     datadir = g_build_filename (system_data_dirs[i],
                                 "gnome-background-properties",
 				NULL);
-    cc_background_xml_load_from_dir (datadir, data);
+    cc_background_xml_load_from_dir (datadir, data, in_thread);
     g_free (datadir);
   }
 }
@@ -436,22 +447,31 @@ load_list_thread (GSimpleAsyncResult *res,
 	CcBackgroundXml *data;
 
 	data = g_simple_async_result_get_op_res_gpointer (res);
-	cc_background_xml_load_list (data);
+	cc_background_xml_load_list (data, TRUE);
 }
 
-void cc_background_xml_load_list_async (CcBackgroundXml *data,
+void cc_background_xml_load_list_async (CcBackgroundXml *xml,
 					GCancellable *cancellable,
 					GAsyncReadyCallback callback,
 					gpointer user_data)
 {
 	GSimpleAsyncResult *result;
 
-	g_return_if_fail (data != NULL);
+	g_return_if_fail (CC_IS_BACKGROUND_XML (xml));
 
-	result = g_simple_async_result_new (G_OBJECT (data), callback, user_data, cc_background_xml_load_list_async);
-	g_simple_async_result_set_op_res_gpointer (result, data, NULL);
+	result = g_simple_async_result_new (G_OBJECT (xml), callback, user_data, cc_background_xml_load_list_async);
+	g_simple_async_result_set_op_res_gpointer (result, xml, NULL);
 	g_simple_async_result_run_in_thread (result, (GSimpleAsyncThreadFunc) load_list_thread, G_PRIORITY_LOW, cancellable);
 	g_object_unref (result);
+}
+
+gboolean
+cc_background_xml_load_xml (CcBackgroundXml *xml,
+			    const gchar     *filename)
+{
+	g_return_val_if_fail (CC_IS_BACKGROUND_XML (xml), FALSE);
+
+	return cc_background_xml_load_xml_internal (xml, filename, FALSE);
 }
 
 #if 0
