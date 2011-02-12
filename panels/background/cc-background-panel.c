@@ -34,7 +34,6 @@
 #include "bg-flickr-source.h"
 #endif
 
-#include "gnome-wp-xml.h"
 #include "cc-background-item.h"
 
 #define WP_PATH_ID "org.gnome.desktop.background"
