@@ -445,7 +445,7 @@ search_entry_changed_cb (GtkEntry                  *entry,
     {
       shell_show_overview_page (priv);
       g_object_set (G_OBJECT (entry),
-                    "secondary-icon-name", "gtk-find",
+                    "secondary-icon-name", "edit-find-symbolic",
                     "secondary-icon-activatable", FALSE,
                     "secondary-icon-sensitive", FALSE,
                     NULL);
@@ -456,7 +456,7 @@ search_entry_changed_cb (GtkEntry                  *entry,
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook),
                                      SEARCH_PAGE);
       g_object_set (G_OBJECT (entry),
-                          "secondary-icon-name", "gtk-clear",
+                          "secondary-icon-name", "edit-clear-symbolic",
                           "secondary-icon-activatable", TRUE,
                           "secondary-icon-sensitive", TRUE,
                           NULL);
