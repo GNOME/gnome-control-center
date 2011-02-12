@@ -154,7 +154,6 @@ activate_panel (GnomeControlCenter *shell,
           gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
           gtk_widget_get_preferred_height (GTK_WIDGET (priv->window),
                                            NULL, &nat_height);
-          g_debug ("Setting panel height: %d", nat_height);
           gtk_window_resize (GTK_WINDOW (priv->window),
                              FIXED_WIDTH,
                              nat_height);
@@ -917,7 +916,6 @@ on_window_size_allocate (GtkWidget          *widget,
 
   if (gtk_scrolled_window_get_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window)) != height)
     {
-      g_debug ("Setting min content height: %d", height);
       gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window), height);
       /*
        * Queueing a resize out of size-allocate is ignored,
