@@ -754,6 +754,21 @@ flags_to_str (CcBackgroundItemFlags flag)
 	return value->value_nick;
 }
 
+static const char *
+enum_to_str (GType type,
+	     int   v)
+{
+	GEnumClass *eclass;
+	GEnumValue *value;
+
+	eclass = G_ENUM_CLASS (g_type_class_peek (type));
+	value = g_enum_get_value (eclass, v);
+
+	g_assert (value);
+
+	return value->value_nick;
+}
+
 void
 cc_background_item_dump (CcBackgroundItem *item)
 {
@@ -784,6 +799,8 @@ cc_background_item_dump (CcBackgroundItem *item)
 		g_debug ("pcolor:\t\t%s", priv->primary_color);
 	if (priv->secondary_color)
 		g_debug ("scolor:\t\t%s", priv->secondary_color);
+	g_debug ("placement:\t\t%s", enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE, priv->placement));
+	g_debug ("shading:\t\t%s", enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING, priv->shading));
 	if (priv->source_url)
 		g_debug ("source URL:\t\t%s", priv->source_url);
 	if (priv->source_xml)
@@ -794,4 +811,3 @@ cc_background_item_dump (CcBackgroundItem *item)
 	g_debug ("dimensions:\t\t%d x %d", priv->width, priv->height);
 	g_debug (" ");
 }
-
