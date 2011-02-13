@@ -811,3 +811,69 @@ cc_background_item_dump (CcBackgroundItem *item)
 	g_debug ("dimensions:\t\t%d x %d", priv->width, priv->height);
 	g_debug (" ");
 }
+
+static gboolean
+files_equal (const char *a,
+	     const char *b)
+{
+	GFile *file1, *file2;
+	gboolean retval;
+
+	file1 = g_file_new_for_commandline_arg (a);
+	file2 = g_file_new_for_commandline_arg (b);
+	if (g_file_equal (file1, file2) == FALSE)
+		retval = FALSE;
+	else
+		retval = TRUE;
+	g_object_unref (file1);
+	g_object_unref (file2);
+
+	return retval;
+}
+
+static gboolean
+colors_equal (const char *a,
+	      const char *b)
+{
+	GdkColor color1, color2;
+
+	gdk_color_parse (a, &color1);
+	gdk_color_parse (b, &color2);
+
+	return gdk_color_equal (&color1, &color2);
+}
+
+gboolean
+cc_background_item_compare (CcBackgroundItem *saved,
+			    CcBackgroundItem *configured)
+{
+	CcBackgroundItemFlags flags;
+
+	flags = saved->priv->flags;
+	if (flags & CC_BACKGROUND_ITEM_HAS_URI) {
+		if (files_equal (saved->priv->uri, configured->priv->uri) == FALSE)
+			return FALSE;
+	}
+	if (flags & CC_BACKGROUND_ITEM_HAS_SHADING) {
+		if (saved->priv->shading != configured->priv->shading)
+			return FALSE;
+	}
+	if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT) {
+		if (saved->priv->placement != configured->priv->placement)
+			return FALSE;
+	}
+	if (flags & CC_BACKGROUND_ITEM_HAS_PCOLOR) {
+		if (colors_equal (saved->priv->primary_color,
+				  configured->priv->primary_color) == FALSE) {
+			return FALSE;
+		}
+	}
+	if (flags & CC_BACKGROUND_ITEM_HAS_SCOLOR) {
+		if (colors_equal (saved->priv->secondary_color,
+				  configured->priv->secondary_color) == FALSE) {
+			return FALSE;
+		}
+	}
+
+	return TRUE;
+}
