@@ -474,6 +474,33 @@ cc_background_xml_load_xml (CcBackgroundXml *xml,
 	return cc_background_xml_load_xml_internal (xml, filename, FALSE);
 }
 
+static void
+single_xml_added (CcBackgroundXml   *xml,
+		  CcBackgroundItem  *item,
+		  CcBackgroundItem **ret)
+{
+	g_assert (*ret == NULL);
+	*ret = g_object_ref (item);
+}
+
+CcBackgroundItem *
+cc_background_xml_get_item (const char *filename)
+{
+	CcBackgroundXml *xml;
+	CcBackgroundItem *item;
+
+	xml = cc_background_xml_new ();
+	item = NULL;
+	g_signal_connect (G_OBJECT (xml), "added",
+			  G_CALLBACK (single_xml_added), &item);
+	if (cc_background_xml_load_xml (xml, filename) == FALSE) {
+		g_object_unref (xml);
+		return NULL;
+	}
+
+	return item;
+}
+
 #if 0
 static void gnome_wp_list_flatten (const gchar * key, CcBackgroundXml * item,
 				   GSList ** list) {

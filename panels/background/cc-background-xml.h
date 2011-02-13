@@ -54,6 +54,7 @@ CcBackgroundXml *cc_background_xml_new (void);
 
 void cc_background_xml_save_list (CcBackgroundXml *data);
 
+CcBackgroundItem *cc_background_xml_get_item         (const char      *filename);
 gboolean cc_background_xml_load_xml                  (CcBackgroundXml *data,
 						      const char      *filename);
 void cc_background_xml_load_list_async               (CcBackgroundXml *data,
