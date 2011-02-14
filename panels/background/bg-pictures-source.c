@@ -254,7 +254,8 @@ dir_enum_async_ready (GObject      *source,
 
   if (err)
     {
-      g_warning ("Could not fill pictures source: %s", err->message);
+      if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) == FALSE)
+        g_warning ("Could not fill pictures source: %s", err->message);
       g_error_free (err);
       return;
     }
