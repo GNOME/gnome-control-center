@@ -228,10 +228,9 @@ file_info_async_ready (GObject      *source,
           g_object_set (G_OBJECT (item),
 			"flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
 			"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
+			"placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
 			NULL);
 
-          if (cc_background_item_get_placement (item) == G_DESKTOP_BACKGROUND_STYLE_NONE)
-            g_object_set (G_OBJECT (item), "placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM, NULL);
           g_object_set_data (G_OBJECT (file), "item", item);
           g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
           g_object_unref (file);
