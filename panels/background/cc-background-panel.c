@@ -284,39 +284,6 @@ source_changed_cb (GtkComboBox              *combo,
 }
 
 static void
-copy_finished_cb (GObject      *source_object,
-                  GAsyncResult *result,
-                  gpointer      pointer)
-{
-  GError *err = NULL;
-  CcBackgroundPanel *panel = (CcBackgroundPanel *) pointer;
-  CcBackgroundPanelPrivate *priv = panel->priv;
-
-  if (!g_file_copy_finish (G_FILE (source_object), result, &err))
-    {
-      if (err->code != G_IO_ERROR_CANCELLED)
-        g_warning ("Failed to copy image to cache location: %s", err->message);
-
-      g_error_free (err);
-    }
-
-  /* the panel may have been destroyed before the callback is run, so be sure
-   * to check the widgets are not NULL */
-
-  if (priv->spinner)
-    {
-      gtk_widget_destroy (GTK_WIDGET (priv->spinner));
-      priv->spinner = NULL;
-    }
-
-  if (priv->builder)
-    gtk_widget_queue_draw (WID ("preview-area"));
-
-  /* remove the reference taken when the copy was set up */
-  g_object_unref (panel);
-}
-
-static void
 select_style (GtkComboBox *box,
 	      GDesktopBackgroundStyle new_style)
 {
@@ -348,8 +315,7 @@ select_style (GtkComboBox *box,
 
 static void
 update_preview (CcBackgroundPanelPrivate *priv,
-                CcBackgroundItem         *item,
-                gboolean                  redraw_preview)
+                CcBackgroundItem         *item)
 {
   gchar *markup;
   gboolean changes_with_time;
@@ -390,8 +356,7 @@ update_preview (CcBackgroundPanelPrivate *priv,
   gtk_widget_set_visible (WID ("slide_image"), changes_with_time);
   gtk_widget_set_visible (WID ("slide-label"), changes_with_time);
 
-  if (redraw_preview)
-    gtk_widget_queue_draw (WID ("preview-area"));
+  gtk_widget_queue_draw (WID ("preview-area"));
 }
 
 static char *
@@ -402,6 +367,51 @@ get_save_path (void)
 			   "backgrounds",
 			   "last-edited.xml",
 			   NULL);
+}
+
+static void
+copy_finished_cb (GObject      *source_object,
+                  GAsyncResult *result,
+                  gpointer      pointer)
+{
+  GError *err = NULL;
+  CcBackgroundPanel *panel = (CcBackgroundPanel *) pointer;
+  CcBackgroundPanelPrivate *priv = panel->priv;
+
+  if (!g_file_copy_finish (G_FILE (source_object), result, &err))
+    {
+      if (err->code != G_IO_ERROR_CANCELLED)
+        g_warning ("Failed to copy image to cache location: %s", err->message);
+
+      g_error_free (err);
+    }
+
+  /* the panel may have been destroyed before the callback is run, so be sure
+   * to check the widgets are not NULL */
+
+  if (priv->spinner)
+    {
+      gtk_widget_destroy (GTK_WIDGET (priv->spinner));
+      priv->spinner = NULL;
+    }
+
+  if (priv->current_background)
+    cc_background_item_load (priv->current_background, NULL);
+
+  if (priv->builder)
+    update_preview (priv, NULL);
+
+  if (priv->current_background)
+    {
+      char *filename;
+
+      /* Save the source XML if there is one */
+      filename = get_save_path ();
+      cc_background_xml_save (priv->current_background, filename);
+    }
+
+  /* remove the reference taken when the copy was set up */
+  g_object_unref (panel);
 }
 
 static void
@@ -450,19 +460,32 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
     }
   else if (cc_background_item_get_source_url (item) != NULL)
     {
-      GFile *source, *dest;
-      gchar *cache_path;
+      GFile *source, *dest, *dest_dir;
+      gchar *cache_path, *basename, *dest_path, *display_name, *dest_uri;
       GdkPixbuf *pixbuf;
 
-      cache_path = bg_pictures_get_cache_path ();
+      cache_path = bg_pictures_source_get_cache_path ();
+      if (g_mkdir_with_parents (cache_path, 0755) < 0)
+        {
+          g_warning ("Failed to create directory '%s'", cache_path);
+          g_free (cache_path);
+          return;
+	}
 
       source = g_file_new_for_uri (cc_background_item_get_source_url (item));
-      dest = g_file_new_for_path (cache_path);
+      dest_dir = g_file_new_for_path (cache_path);
+      g_free (cache_path);
+      basename = g_file_get_basename (source);
+      display_name = g_filename_display_name (basename);
+      dest = g_file_get_child (dest_dir, basename);
+      dest_path = g_file_get_path (dest);
+      g_free (basename);
+      g_object_unref (dest_dir);
 
       /* create a blank image to use until the source image is ready */
       pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 1, 1);
       gdk_pixbuf_fill (pixbuf, 0x00000000);
-      gdk_pixbuf_save (pixbuf, cache_path, "png", NULL, NULL);
+      gdk_pixbuf_save (pixbuf, dest_path, "png", NULL, NULL);
       g_object_unref (pixbuf);
 
       if (priv->copy_cancellable)
@@ -491,9 +514,18 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                          G_PRIORITY_DEFAULT, priv->copy_cancellable,
                          NULL, NULL,
                          copy_finished_cb, panel);
+      g_object_unref (source);
+      dest_uri = g_file_get_uri (dest);
+      g_object_unref (dest);
 
-      g_settings_set_string (priv->settings, WP_FILE_KEY, cache_path);
-      g_object_set (G_OBJECT (item), "uri", cache_path, NULL);
+      g_settings_set_string (priv->settings, WP_FILE_KEY, dest_path);
+      g_object_set (G_OBJECT (item),
+		    "uri", dest_uri,
+		    "source-url", NULL,
+		    "name", display_name,
+		    NULL);
+      g_free (display_name);
+      g_free (dest_uri);
 
       /* delay the updated drawing of the preview until the copy finishes */
       draw_preview = FALSE;
@@ -552,11 +584,14 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   g_settings_apply (priv->settings);
 
   /* update the preview information */
-  update_preview (priv, item, draw_preview);
+  if (draw_preview != FALSE)
+    {
+      update_preview (priv, item);
 
-  /* Save the source XML if there is one */
-  filename = get_save_path ();
-  cc_background_xml_save (item, filename);
+      /* Save the source XML if there is one */
+      filename = get_save_path ();
+      cc_background_xml_save (item, filename);
+    }
 }
 
 static gboolean
@@ -658,7 +693,7 @@ style_changed_cb (GtkComboBox       *box,
 
   g_settings_apply (priv->settings);
 
-  update_preview (priv, NULL, TRUE);
+  update_preview (priv, NULL);
 }
 
 static void
@@ -689,7 +724,48 @@ color_changed_cb (GtkColorButton    *button,
 
   g_free (value);
 
-  update_preview (priv, NULL, TRUE);
+  update_preview (priv, NULL);
+}
+
+static void
+row_inserted (GtkTreeModel      *tree_model,
+	      GtkTreePath       *path,
+	      GtkTreeIter       *iter,
+	      CcBackgroundPanel *panel)
+{
+	GtkListStore *store;
+	CcBackgroundPanelPrivate *priv;
+
+	priv = panel->priv;
+
+	store = bg_source_get_liststore (BG_SOURCE (panel->priv->pictures_source));
+	g_signal_handlers_disconnect_by_func (G_OBJECT (store), G_CALLBACK (row_inserted), panel);
+
+	/* Change source */
+	gtk_combo_box_set_active (GTK_COMBO_BOX (WID ("sources-combobox")), 1);
+
+	/* And select the newly added item */
+	gtk_icon_view_select_path (GTK_ICON_VIEW (WID ("backgrounds-iconview")), path);
+}
+
+static void
+add_button_clicked (GtkButton         *button,
+		    CcBackgroundPanel *panel)
+{
+	GtkListStore *store;
+
+	store = bg_source_get_liststore (BG_SOURCE (panel->priv->pictures_source));
+	g_signal_connect (G_OBJECT (store), "row-inserted",
+			  G_CALLBACK (row_inserted), panel);
+
+	//FIXME implement
+	if (bg_pictures_source_add (panel->priv->pictures_source,
+				    "file:///home/hadess/Pictures/test-case/IMG_1.jpg") == FALSE) {
+		g_signal_handlers_disconnect_by_func (G_OBJECT (store), G_CALLBACK (row_inserted), panel);
+		return;
+	}
+
+	/* Wait for the item to get added */
 }
 
 static void
@@ -697,7 +773,8 @@ load_current_bg (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
   CcBackgroundItem *saved, *configured;
-  gchar *uri, *pcolor, *scolor;
+  gchar *uri, *pcolor, *scolor, *path;
+  GFile *file;
 
   priv = self->priv;
 
@@ -707,7 +784,10 @@ load_current_bg (CcBackgroundPanel *self)
   g_free (uri);
 
   /* initalise the current background information from settings */
-  uri = g_settings_get_string (priv->settings, WP_FILE_KEY);
+  path = g_settings_get_string (priv->settings, WP_FILE_KEY);
+  file = g_file_new_for_commandline_arg (path);
+  uri = g_file_get_uri (file);
+  g_object_unref (file);
   configured = cc_background_item_new (uri);
   g_free (uri);
 
@@ -835,6 +915,9 @@ cc_background_panel_init (CcBackgroundPanel *self)
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
+  g_signal_connect (WID ("add_button"), "clicked",
+		    G_CALLBACK (add_button_clicked), self);
+
   /* setup preview area */
   widget = WID ("preview-area");
   g_signal_connect (widget, "draw", G_CALLBACK (preview_draw_cb),
@@ -860,7 +943,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   load_current_bg (self);
 
-  update_preview (priv, NULL, TRUE);
+  update_preview (priv, NULL);
 
   /* Setup the edit box with our current settings */
   source_update_edit_box (priv, TRUE);
