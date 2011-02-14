@@ -26,6 +26,7 @@
 #include <glib/gstdio.h>
 #include <polkit/polkit.h>
 #include <dbus/dbus-glib.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 
 #include <cups/cups.h>
 
@@ -43,6 +44,9 @@ G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 #define SUPPLY_BAR_HEIGHT 20
 
 #define EMPTY_TEXT "\xe2\x80\x94"
+
+#define CLOCK_SCHEMA "org.gnome.desktop.interface"
+#define CLOCK_FORMAT_KEY "clock-format"
 
 struct _CcPrintersPanelPrivate
 {
@@ -871,7 +875,6 @@ enum
   JOB_ID_COLUMN,
   JOB_TITLE_COLUMN,
   JOB_STATE_COLUMN,
-  JOB_USER_COLUMN,
   JOB_CREATION_TIME_COLUMN,
   JOB_N_COLUMNS
 };
@@ -883,6 +886,7 @@ actualize_jobs_list (CcPrintersPanel *self)
   GtkListStore           *store;
   GtkTreeView            *treeview;
   GtkTreeIter             iter;
+  GSettings              *settings;
   int                     i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -901,16 +905,33 @@ actualize_jobs_list (CcPrintersPanel *self)
       priv->dests != NULL)
     priv->num_jobs = cupsGetJobs (&priv->jobs, priv->dests[priv->current_dest].name, 1, CUPS_WHICHJOBS_ACTIVE);
 
-  store = gtk_list_store_new (JOB_N_COLUMNS, G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+  store = gtk_list_store_new (JOB_N_COLUMNS, G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
   for (i = 0; i < priv->num_jobs; i++)
     {
+      GDesktopClockFormat  value;
+      GDateTime           *time;
       struct tm *ts;
       gchar     *time_string;
       gchar     *state = NULL;
 
       ts = localtime (&(priv->jobs[i].creation_time));
-      time_string = g_strdup_printf ("%02d:%02d:%02d", ts->tm_hour, ts->tm_min, ts->tm_sec);
+      time = g_date_time_new_local (ts->tm_year,
+                                    ts->tm_mon,
+                                    ts->tm_mday,
+                                    ts->tm_hour,
+                                    ts->tm_min,
+                                    ts->tm_sec);
+
+      settings = g_settings_new (CLOCK_SCHEMA);
+      value = g_settings_get_enum (settings, CLOCK_FORMAT_KEY);
+
+      if (value == G_DESKTOP_CLOCK_FORMAT_24H)
+        time_string = g_date_time_format (time, "%k:%M");
+      else
+        time_string = g_date_time_format (time, "%l:%M %p");
+
+      g_date_time_unref (time);
 
       switch (priv->jobs[i].state)
         {
@@ -949,7 +970,6 @@ actualize_jobs_list (CcPrintersPanel *self)
                           JOB_ID_COLUMN, i,
                           JOB_TITLE_COLUMN, priv->jobs[i].title,
                           JOB_STATE_COLUMN, state,
-                          JOB_USER_COLUMN, priv->jobs[i].user,
                           JOB_CREATION_TIME_COLUMN, time_string,
                           -1);
 
@@ -1019,9 +1039,8 @@ populate_jobs_list (CcPrintersPanel *self)
   CcPrintersPanelPrivate *priv;
   GtkTreeViewColumn      *column;
   GtkCellRenderer        *renderer;
+  GtkCellRenderer        *title_renderer;
   GtkTreeView            *treeview;
-  gfloat                  x_align = 0.5;
-  gfloat                  y_align = 0.5;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -1031,12 +1050,12 @@ populate_jobs_list (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "job-treeview");
 
   renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_renderer_get_alignment (renderer, &x_align, &y_align);
-  gtk_cell_renderer_set_alignment (renderer, 0.5, y_align);
+  title_renderer = gtk_cell_renderer_text_new ();
 
   /* Translators: Name of column showing titles of print jobs */
-  column = gtk_tree_view_column_new_with_attributes (_("Job Title"), renderer,
+  column = gtk_tree_view_column_new_with_attributes (_("Job Title"), title_renderer,
                                                      "text", JOB_TITLE_COLUMN, NULL);
+  g_object_set (G_OBJECT (title_renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
   gtk_tree_view_column_set_fixed_width (column, 180);
   gtk_tree_view_column_set_min_width (column, 180);
   gtk_tree_view_column_set_max_width (column, 180);
@@ -1045,12 +1064,6 @@ populate_jobs_list (CcPrintersPanel *self)
   /* Translators: Name of column showing statuses of print jobs */
   column = gtk_tree_view_column_new_with_attributes (_("Job State"), renderer,
                                                      "text", JOB_STATE_COLUMN, NULL);
-  gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_append_column (treeview, column);
-
-  /* Translators: Name of column showing names of creators of print jobs */
-   column = gtk_tree_view_column_new_with_attributes (_("User"), renderer,
-                                                     "text", JOB_USER_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (treeview, column);
 
