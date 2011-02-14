@@ -857,6 +857,9 @@ cc_background_item_compare (CcBackgroundItem *saved,
 	CcBackgroundItemFlags flags;
 
 	flags = saved->priv->flags;
+	if (flags == 0)
+		return FALSE;
+
 	if (flags & CC_BACKGROUND_ITEM_HAS_URI) {
 		if (files_equal (saved->priv->uri, configured->priv->uri) == FALSE)
 			return FALSE;
