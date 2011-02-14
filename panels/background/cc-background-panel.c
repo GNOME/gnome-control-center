@@ -369,6 +369,25 @@ get_save_path (void)
 			   NULL);
 }
 
+static gboolean
+create_save_dir (void)
+{
+  char *path;
+
+  path = g_build_filename (g_get_user_config_dir (),
+			   "gnome-control-center",
+			   "backgrounds",
+			   NULL);
+  if (g_mkdir_with_parents (path, 0755) < 0)
+    {
+      g_warning ("Failed to create directory '%s'", path);
+      g_free (path);
+      return FALSE;
+    }
+  g_free (path);
+  return TRUE;
+}
+
 static void
 copy_finished_cb (GObject      *source_object,
                   GAsyncResult *result,
@@ -400,15 +419,6 @@ copy_finished_cb (GObject      *source_object,
 
   if (priv->builder)
     update_preview (priv, NULL);
-
-  if (priv->current_background)
-    {
-      char *filename;
-
-      /* Save the source XML if there is one */
-      filename = get_save_path ();
-      cc_background_xml_save (priv->current_background, filename);
-    }
 
   /* remove the reference taken when the copy was set up */
   g_object_unref (panel);
@@ -590,7 +600,8 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
       /* Save the source XML if there is one */
       filename = get_save_path ();
-      cc_background_xml_save (item, filename);
+      if (create_save_dir ())
+        cc_background_xml_save (item, filename);
     }
 }
 
