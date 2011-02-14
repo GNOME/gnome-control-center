@@ -91,6 +91,7 @@ const char *              cc_background_item_get_pcolor     (CcBackgroundItem *i
 const char *              cc_background_item_get_scolor     (CcBackgroundItem *item);
 const char *              cc_background_item_get_name       (CcBackgroundItem *item);
 const char *              cc_background_item_get_size       (CcBackgroundItem *item);
+gboolean                  cc_background_item_get_needs_download (CcBackgroundItem *item);
 
 gboolean                  cc_background_item_compare        (CcBackgroundItem *saved,
 							     CcBackgroundItem *configured);

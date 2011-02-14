@@ -50,6 +50,7 @@ struct CcBackgroundItemPrivate
         char            *source_url; /* Used by the Flickr source */
         char            *source_xml; /* Used by the Wallpapers source */
         gboolean         is_deleted;
+        gboolean         needs_download;
         CcBackgroundItemFlags flags;
 
         /* internal */
@@ -71,7 +72,8 @@ enum {
         PROP_SOURCE_URL,
         PROP_SOURCE_XML,
         PROP_FLAGS,
-        PROP_SIZE
+        PROP_SIZE,
+        PROP_NEEDS_DOWNLOAD
 };
 
 static void     cc_background_item_class_init     (CcBackgroundItemClass *klass);
@@ -463,6 +465,21 @@ cc_background_item_get_size (CcBackgroundItem *item)
 }
 
 static void
+_set_needs_download (CcBackgroundItem *item,
+		     gboolean          value)
+{
+	item->priv->needs_download = value;
+}
+
+gboolean
+cc_background_item_get_needs_download (CcBackgroundItem *item)
+{
+	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), 0);
+
+	return item->priv->needs_download;
+}
+
+static void
 cc_background_item_set_property (GObject      *object,
                                  guint         prop_id,
                                  const GValue *value,
@@ -502,6 +519,9 @@ cc_background_item_set_property (GObject      *object,
 		break;
 	case PROP_FLAGS:
 		_set_flags (self, g_value_get_flags (value));
+		break;
+	case PROP_NEEDS_DOWNLOAD:
+		_set_needs_download (self, g_value_get_boolean (value));
 		break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -552,6 +572,9 @@ cc_background_item_get_property (GObject    *object,
 		break;
 	case PROP_SIZE:
 		g_value_set_string (value, self->priv->size);
+		break;
+	case PROP_NEEDS_DOWNLOAD:
+		g_value_set_boolean (value, self->priv->needs_download);
 		break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -670,6 +693,14 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
                                                               NULL,
                                                               G_PARAM_READABLE));
 
+        g_object_class_install_property (object_class,
+                                         PROP_NEEDS_DOWNLOAD,
+                                         g_param_spec_boolean ("needs-download",
+                                                               NULL,
+                                                               NULL,
+                                                               TRUE,
+                                                               G_PARAM_READWRITE));
+
 
         g_type_class_add_private (klass, sizeof (CcBackgroundItemPrivate));
 }
@@ -685,6 +716,7 @@ cc_background_item_init (CcBackgroundItem *item)
         item->priv->placement = G_DESKTOP_BACKGROUND_STYLE_SCALED;
         item->priv->primary_color = g_strdup ("#000000000000");
         item->priv->secondary_color = g_strdup ("#000000000000");
+        item->priv->needs_download = TRUE;
         item->priv->flags = 0;
 }
 
