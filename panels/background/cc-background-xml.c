@@ -259,6 +259,13 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 			  g_strstrip ((gchar *)wpa->last->content), NULL);
 	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_SCOLOR);
 	  }
+	} else if (!strcmp ((gchar *)wpa->name, "source_url")) {
+	   if (wpa->last != NULL) {
+             g_object_set (G_OBJECT (item),
+			   "source-url", g_strstrip ((gchar *)wpa->last->content),
+			   "needs-download", FALSE,
+			   NULL);
+	   }
 	} else if (!strcmp ((gchar *)wpa->name, "text")) {
 	  /* Do nothing here, libxml2 is being weird */
 	} else {
@@ -531,7 +538,7 @@ cc_background_xml_save (CcBackgroundItem *item,
   xmlNode *xml_item G_GNUC_UNUSED;
   const char * none = "(none)";
   const char *placement_str, *shading_str;
-  char *name, *pcolor, *scolor, *uri;
+  char *name, *pcolor, *scolor, *uri, *source_url;
   CcBackgroundItemFlags flags;
   GDesktopBackgroundStyle placement;
   GDesktopBackgroundShading shading;
@@ -550,6 +557,7 @@ cc_background_xml_save (CcBackgroundItem *item,
 		"placement", &placement,
 		"primary-color", &pcolor,
 		"secondary-color", &scolor,
+		"source-url", &source_url,
 		"flags", &flags,
 		NULL);
 
@@ -583,11 +591,14 @@ cc_background_xml_save (CcBackgroundItem *item,
     xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"pcolor", (xmlChar *)pcolor);
   if (flags & CC_BACKGROUND_ITEM_HAS_SCOLOR)
     xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)scolor);
+  if (source_url != NULL)
+    xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"source_url", (xmlChar *)source_url);
 
   g_free (name);
   g_free (pcolor);
   g_free (scolor);
   g_free (uri);
+  g_free (source_url);
 
   xmlSaveFormatFile (filename, wp, 1);
   xmlFreeDoc (wp);
