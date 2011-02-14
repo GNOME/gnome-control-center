@@ -678,7 +678,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       /* Save the source XML if there is one */
       filename = get_save_path ();
       if (create_save_dir ())
-        cc_background_xml_save (item, filename);
+        cc_background_xml_save (priv->current_background, filename);
     }
 }
 
@@ -1020,7 +1020,6 @@ load_current_bg (CcBackgroundPanel *self)
   CcBackgroundPanelPrivate *priv;
   CcBackgroundItem *saved, *configured;
   gchar *uri, *pcolor, *scolor, *path;
-  GFile *file;
 
   priv = self->priv;
 
@@ -1031,9 +1030,18 @@ load_current_bg (CcBackgroundPanel *self)
 
   /* initalise the current background information from settings */
   path = g_settings_get_string (priv->settings, WP_FILE_KEY);
-  file = g_file_new_for_commandline_arg (path);
-  uri = g_file_get_uri (file);
-  g_object_unref (file);
+  if (path && *path == '\0')
+    {
+      uri = NULL;
+    }
+  else
+    {
+      GFile *file;
+
+      file = g_file_new_for_commandline_arg (path);
+      uri = g_file_get_uri (file);
+      g_object_unref (file);
+    }
   configured = cc_background_item_new (uri);
   g_free (uri);
 
@@ -1051,9 +1059,14 @@ load_current_bg (CcBackgroundPanel *self)
 
   if (saved != NULL && cc_background_item_compare (saved, configured))
     {
+      CcBackgroundItemFlags flags;
+      flags = cc_background_item_get_flags (saved);
+      /* Special case for colours */
+      if (cc_background_item_get_placement (saved) == G_DESKTOP_BACKGROUND_STYLE_NONE)
+        flags &=~ (CC_BACKGROUND_ITEM_HAS_PCOLOR | CC_BACKGROUND_ITEM_HAS_SCOLOR);
       g_object_set (G_OBJECT (configured),
 		    "name", cc_background_item_get_name (saved),
-		    "flags", cc_background_item_get_flags (saved),
+		    "flags", flags,
 		    "source-url", cc_background_item_get_source_url (saved),
 		    "source-xml", cc_background_item_get_source_xml (saved),
 		    NULL);
