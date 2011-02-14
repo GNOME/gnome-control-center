@@ -455,10 +455,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       gchar *cache_path;
       GdkPixbuf *pixbuf;
 
-      /* FIXME we want a URI here */
-      cache_path = g_build_filename (g_get_user_cache_dir (),
-                                     "gnome-background",
-                                     NULL);
+      cache_path = bg_pictures_get_cache_path ();
 
       source = g_file_new_for_uri (cc_background_item_get_source_url (item));
       dest = g_file_new_for_path (cache_path);
