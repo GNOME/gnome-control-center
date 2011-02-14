@@ -266,6 +266,23 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	}
       }
 
+      /* Check whether the target file exists */
+      {
+        GFile *file;
+        const char *uri;
+
+	uri = cc_background_item_get_uri (item);
+	if (uri != NULL)
+	  {
+            file = g_file_new_for_uri (uri);
+	    if (g_file_query_exists (file, NULL) == FALSE)
+	      {
+	        g_object_unref (item);
+	        continue;
+	      }
+	  }
+      }
+
       /* FIXME, this is a broken way of doing,
        * need to use proper code here */
       uri = g_filename_to_uri (filename, NULL, NULL);
