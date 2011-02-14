@@ -757,6 +757,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
   GError *err = NULL;
   GtkWidget *widget;
   GtkListStore *store;
+  GtkStyleContext *context;
 
   priv = self->priv = BACKGROUND_PANEL_PRIVATE (self);
 
@@ -829,6 +830,14 @@ cc_background_panel_init (CcBackgroundPanel *self)
   g_signal_connect (widget, "selection-changed",
                     G_CALLBACK (backgrounds_changed_cb),
                     self);
+
+  /* Join treeview and buttons */
+  widget = WID ("scrolledwindow1");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+  widget = WID ("toolbar1");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   /* setup preview area */
   widget = WID ("preview-area");
