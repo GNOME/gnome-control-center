@@ -41,14 +41,29 @@ bg_colors_source_class_init (BgColorsSourceClass *klass)
 struct {
 	const char *name;
 	GDesktopBackgroundShading type;
+	int orientation;
 } items[] = {
-	{ N_("Horizontal Gradient"), G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL },
-	{ N_("Vertical Gradient"), G_DESKTOP_BACKGROUND_SHADING_VERTICAL },
-	{ N_("Solid Color"), G_DESKTOP_BACKGROUND_SHADING_SOLID },
+	{ N_("Horizontal Gradient"), G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL, GTK_ORIENTATION_HORIZONTAL },
+	{ N_("Vertical Gradient"), G_DESKTOP_BACKGROUND_SHADING_VERTICAL, GTK_ORIENTATION_VERTICAL },
+	{ N_("Solid Color"), G_DESKTOP_BACKGROUND_SHADING_SOLID, -1 },
 };
 
 #define PCOLOR "#023c88"
 #define SCOLOR "#5789ca"
+
+static GEmblem *
+get_arrow_icon (GtkOrientation orientation)
+{
+  GIcon *themed;
+  GEmblem *emblem;
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    themed = g_themed_icon_new ("go-next-symbolic");
+  else
+    themed = g_themed_icon_new ("go-down-symbolic");
+  emblem = g_emblem_new_with_origin (themed, G_EMBLEM_ORIGIN_DEVICE);
+  g_object_unref (themed);
+  return emblem;
+}
 
 static void
 bg_colors_source_init (BgColorsSource *self)
@@ -71,6 +86,7 @@ bg_colors_source_init (BgColorsSource *self)
       flags = CC_BACKGROUND_ITEM_HAS_PCOLOR |
 	      CC_BACKGROUND_ITEM_HAS_SCOLOR |
 	      CC_BACKGROUND_ITEM_HAS_SHADING |
+	      CC_BACKGROUND_ITEM_HAS_PLACEMENT |
 	      CC_BACKGROUND_ITEM_HAS_URI;
       /* It does have a URI, it's "none" */
 
@@ -79,6 +95,7 @@ bg_colors_source_init (BgColorsSource *self)
 		    "primary-color", PCOLOR,
 		    "secondary-color", SCOLOR,
 		    "shading", items[i].type,
+		    "placement", G_DESKTOP_BACKGROUND_STYLE_NONE,
 		    "flags", flags,
 		    NULL);
 
@@ -86,6 +103,17 @@ bg_colors_source_init (BgColorsSource *self)
       pixbuf = cc_background_item_get_thumbnail (item,
 						 thumb_factory,
 						 THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+      if (items[i].orientation != -1)
+        {
+          GEmblem *emblem;
+          GIcon *icon;
+
+	  emblem = get_arrow_icon (items[i].orientation);
+	  icon = g_emblemed_icon_new (G_ICON (pixbuf), emblem);
+	  g_object_unref (emblem);
+	  g_object_unref (pixbuf);
+	  pixbuf = icon;
+	}
       gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,
                                          1, item,
