@@ -424,8 +424,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   if (!list)
     return;
 
-  /* check if the current source is read only, i.e. the image placement and
-   * color is predefined */
+  /* Update current source */
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (WID ("sources-combobox")));
   gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("sources-combobox")),
                                  &iter);
