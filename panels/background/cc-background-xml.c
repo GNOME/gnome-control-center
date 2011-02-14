@@ -475,6 +475,9 @@ cc_background_xml_get_item (const char *filename)
 	CcBackgroundXml *xml;
 	CcBackgroundItem *item;
 
+	if (g_file_test (filename, G_FILE_TEST_IS_REGULAR) == FALSE)
+		return NULL;
+
 	xml = cc_background_xml_new ();
 	item = NULL;
 	g_signal_connect (G_OBJECT (xml), "added",
