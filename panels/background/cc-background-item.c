@@ -857,6 +857,10 @@ files_equal (const char *a,
 	GFile *file1, *file2;
 	gboolean retval;
 
+	if (a == NULL &&
+	    b == NULL)
+		return TRUE;
+
 	if (a == NULL ||
 	    b == NULL)
 		return FALSE;
