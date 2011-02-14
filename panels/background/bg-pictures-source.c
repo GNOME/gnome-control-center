@@ -34,6 +34,9 @@ G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
 #define PICTURES_SOURCE_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_PICTURES_SOURCE, BgPicturesSourcePrivate))
 
+#define ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_NAME "," \
+	G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE
+
 struct _BgPicturesSourcePrivate
 {
   GCancellable *cancellable;
@@ -175,6 +178,65 @@ picture_opened_for_read (GObject *source_object,
   g_object_unref (stream);
 }
 
+static gboolean
+add_single_file (BgPicturesSource *bg_source,
+		 GFile            *file,
+		 GFileInfo        *info,
+		 const char       *source_uri)
+{
+  const gchar *content_type;
+
+  /* find png and jpeg files */
+  content_type = g_file_info_get_content_type (info);
+
+  if (!content_type)
+    return FALSE;
+
+  if (g_str_equal ("image/png", content_type) ||
+      g_str_equal ("image/jpeg", content_type))
+    {
+      CcBackgroundItem *item;
+      char *uri;
+
+      /* create a new CcBackgroundItem */
+      uri = g_file_get_uri (file);
+      item = cc_background_item_new (uri);
+      g_free (uri);
+      g_object_set (G_OBJECT (item),
+		    "flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
+		    "shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
+		    "placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
+		    NULL);
+      if (source_uri != NULL)
+        g_object_set (G_OBJECT (item), "source-url", source_uri, NULL);
+
+      g_object_set_data (G_OBJECT (file), "item", item);
+      g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
+      g_object_unref (file);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+gboolean
+bg_pictures_source_add (BgPicturesSource *bg_source,
+			const char       *uri)
+{
+  GFile *file;
+  GFileInfo *info;
+  gboolean retval;
+
+  file = g_file_new_for_uri (uri);
+  info = g_file_query_info (file, ATTRIBUTES, G_FILE_QUERY_INFO_NONE, NULL, NULL);
+  if (info == NULL)
+    return FALSE;
+
+  retval = add_single_file (bg_source, file, info, uri);
+
+  return retval;
+}
+
 static void
 file_info_async_ready (GObject      *source,
                        GAsyncResult *res,
@@ -204,37 +266,11 @@ file_info_async_ready (GObject      *source,
   for (l = files; l; l = g_list_next (l))
     {
       GFileInfo *info = l->data;
-      const gchar *content_type;
+      GFile *file;
 
-      /* find png and jpeg files */
-      content_type = g_file_info_get_content_type (info);
+      file = g_file_get_child (parent, g_file_info_get_name (info));
 
-      if (!content_type)
-        continue;
-
-      if (!strcmp ("image/png", content_type)
-          || !strcmp ("image/jpeg", content_type))
-        {
-          CcBackgroundItem *item;
-          GFile *file;
-          char *uri;
-
-          file = g_file_get_child (parent, g_file_info_get_name (info));
-
-          /* create a new CcBackgroundItem */
-          uri = g_file_get_uri (file);
-          item = cc_background_item_new (uri);
-          g_free (uri);
-          g_object_set (G_OBJECT (item),
-			"flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
-			"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
-			"placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
-			NULL);
-
-          g_object_set_data (G_OBJECT (file), "item", item);
-          g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
-          g_object_unref (file);
-        }
+      add_single_file (bg_source, file, info, NULL);
     }
 
   g_list_foreach (files, (GFunc) g_object_unref, NULL);
@@ -270,7 +306,7 @@ dir_enum_async_ready (GObject      *source,
 }
 
 char *
-bg_pictures_get_cache_path (void)
+bg_pictures_source_get_cache_path (void)
 {
   return g_build_filename (g_get_user_cache_dir (),
 			   "gnome-control-center",
@@ -293,18 +329,16 @@ bg_pictures_source_init (BgPicturesSource *self)
   pictures_path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
   dir = g_file_new_for_path (pictures_path);
   g_file_enumerate_children_async (dir,
-                                   G_FILE_ATTRIBUTE_STANDARD_NAME ","
-                                   G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+				   ATTRIBUTES,
                                    G_FILE_QUERY_INFO_NONE,
                                    G_PRIORITY_LOW, priv->cancellable,
                                    dir_enum_async_ready, self);
   g_object_unref (dir);
 
-  cache_path = bg_pictures_get_cache_path ();
+  cache_path = bg_pictures_source_get_cache_path ();
   dir = g_file_new_for_path (cache_path);
   g_file_enumerate_children_async (dir,
-                                   G_FILE_ATTRIBUTE_STANDARD_NAME ","
-                                   G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+				   ATTRIBUTES,
                                    G_FILE_QUERY_INFO_NONE,
                                    G_PRIORITY_LOW, priv->cancellable,
                                    dir_enum_async_ready, self);
