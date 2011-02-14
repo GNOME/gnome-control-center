@@ -24,7 +24,7 @@ libprinters_la_SOURCES =		\
 	cc-printers-panel.c	\
 	cc-printers-panel.h
 
-libprinters_la_LIBADD = $(PANEL_LIBS) $(CUPS_LIBS) $(DBUS_LIBS) $(POLKIT_LIBS)
+libprinters_la_LIBADD = $(GNOMECC_CAPPLETS_LIBS) $(PANEL_LIBS) $(CUPS_LIBS) $(DBUS_LIBS) $(POLKIT_LIBS)
 libprinters_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
