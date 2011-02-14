@@ -763,8 +763,8 @@ row_inserted (GtkTreeModel      *tree_model,
 }
 
 static void
-add_button_clicked (GtkButton         *button,
-		    CcBackgroundPanel *panel)
+add_custom_wallpaper (CcBackgroundPanel *panel,
+		      const char        *uri)
 {
   GtkListStore *store;
 
@@ -772,14 +772,147 @@ add_button_clicked (GtkButton         *button,
   g_signal_connect (G_OBJECT (store), "row-inserted",
 		    G_CALLBACK (row_inserted), panel);
 
-  //FIXME implement
-  if (bg_pictures_source_add (panel->priv->pictures_source,
-			      "file:///home/hadess/Pictures/test-case/IMG_1.jpg") == FALSE) {
+  if (bg_pictures_source_add (panel->priv->pictures_source, uri) == FALSE) {
     g_signal_handlers_disconnect_by_func (G_OBJECT (store), G_CALLBACK (row_inserted), panel);
     return;
   }
 
   /* Wait for the item to get added */
+}
+
+static void
+file_chooser_response (GtkDialog         *chooser,
+                       gint               response,
+                       CcBackgroundPanel *panel)
+{
+  char *uri;
+
+  if (response != GTK_RESPONSE_ACCEPT)
+    {
+      gtk_widget_destroy (GTK_WIDGET (chooser));
+      return;
+    }
+
+  uri = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (chooser));
+  gtk_widget_destroy (GTK_WIDGET (chooser));
+
+  add_custom_wallpaper (panel, uri);
+  g_free (uri);
+}
+
+static void
+update_chooser_preview (GtkFileChooser               *chooser,
+			GnomeDesktopThumbnailFactory *thumb_factory)
+{
+  char *uri;
+
+  uri = gtk_file_chooser_get_preview_uri (chooser);
+
+  if (uri)
+    {
+      GdkPixbuf *pixbuf = NULL;
+      const gchar *mime_type = NULL;
+      GFile *file;
+      GFileInfo *file_info;
+      GtkWidget *preview;
+
+      preview = gtk_file_chooser_get_preview_widget (chooser);
+
+      file = g_file_new_for_uri (uri);
+      file_info = g_file_query_info (file,
+				     G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+				     G_FILE_QUERY_INFO_NONE,
+				     NULL, NULL);
+      g_object_unref (file);
+
+      if (file_info != NULL) {
+	      mime_type = g_file_info_get_content_type (file_info);
+	      g_object_unref (file_info);
+      }
+
+      if (mime_type)
+        {
+        pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (thumb_factory,
+								     uri,
+								     mime_type);
+	}
+
+      gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser),
+					 GTK_RESPONSE_ACCEPT,
+					 (pixbuf != NULL));
+
+      if (pixbuf != NULL)
+        {
+          gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
+	  g_object_unref (pixbuf);
+	}
+      else
+        {
+          gtk_image_set_from_stock (GTK_IMAGE (preview),
+				    GTK_STOCK_DIALOG_QUESTION,
+				    GTK_ICON_SIZE_DIALOG);
+	}
+
+      g_free (uri);
+    }
+
+  gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
+}
+
+static void
+add_button_clicked (GtkButton         *button,
+		    CcBackgroundPanel *panel)
+{
+  GtkWidget *chooser;
+  const gchar *folder;
+  GtkWidget *preview;
+  GtkFileFilter *filter;
+  CcBackgroundPanelPrivate *priv;
+
+  priv = panel->priv;
+
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_add_mime_type (filter, "image/png");
+  gtk_file_filter_add_mime_type (filter, "image/jpeg");
+
+  chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
+					 GTK_WINDOW (gtk_widget_get_toplevel (WID ("background-panel"))),
+					 GTK_FILE_CHOOSER_ACTION_OPEN,
+					 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					 GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+					 NULL);
+  gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+  gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
+
+  preview = gtk_image_new ();
+  gtk_widget_set_size_request (preview, 128, -1);
+  gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (chooser), preview);
+  gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (chooser), FALSE);
+  gtk_widget_show (preview);
+  g_signal_connect (chooser, "update-preview",
+		    G_CALLBACK (update_chooser_preview), panel->priv->thumb_factory);
+
+  folder = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+  if (folder)
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
+					 folder);
+
+  g_signal_connect (chooser, "response",
+		    G_CALLBACK (file_chooser_response), panel);
+
+  gtk_window_present (GTK_WINDOW (chooser));
+#if 0
+  GtkWidget *chooser;
+  chooser = gtk_file_chooser_dialog_new (_("Select Additional Background"),
+					 gtk_widget_get_toplevel (WID ("background-panel")),
+					 GTK_FILE_CHOOSER_ACTION_OPEN,
+					 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					 GTK_STOCK_ADD, GTK_RESPONSE_ACCEPT,
+					 NULL);
+  gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), FALSE);
+  gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
+#endif
 }
 
 static void
@@ -902,8 +1035,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
 
   /* add the top level widget */
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "background-panel");
+  widget = WID ("background-panel");
 
   gtk_container_add (GTK_CONTAINER (self), widget);
   gtk_widget_show_all (GTK_WIDGET (self));
