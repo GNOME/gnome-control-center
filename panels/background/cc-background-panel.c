@@ -35,6 +35,7 @@
 #endif
 
 #include "cc-background-item.h"
+#include "cc-background-xml.h"
 
 #define WP_PATH_ID "org.gnome.desktop.background"
 #define WP_FILE_KEY "picture-filename"
@@ -393,6 +394,16 @@ update_preview (CcBackgroundPanelPrivate *priv,
     gtk_widget_queue_draw (WID ("preview-area"));
 }
 
+static char *
+get_save_path (void)
+{
+  return g_build_filename (g_get_user_config_dir (),
+			   "gnome-control-center",
+			   "backgrounds",
+			   "last-edited.xml",
+			   NULL);
+}
+
 static void
 backgrounds_changed_cb (GtkIconView       *icon_view,
                         CcBackgroundPanel *panel)
@@ -406,6 +417,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   gboolean draw_preview = TRUE;
   const char *uri;
   CcBackgroundItemFlags flags;
+  char *filename;
 
   list = gtk_icon_view_get_selected_items (icon_view);
 
@@ -498,8 +510,18 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       g_free (filename);
     }
 
+  /* Also set the placement if we have a URI and the previous value was none */
   if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
-    g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
+    {
+      g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
+    }
+  else if (uri != NULL)
+    {
+      GDesktopBackgroundStyle style;
+      style = g_settings_get_enum (priv->settings, WP_OPTIONS_KEY);
+      if (style == G_DESKTOP_BACKGROUND_STYLE_NONE)
+        g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
+    }
 
   if (flags & CC_BACKGROUND_ITEM_HAS_SHADING)
     g_settings_set_enum (priv->settings, WP_SHADING_KEY, cc_background_item_get_shading (item));
@@ -535,6 +557,10 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   /* update the preview information */
   update_preview (priv, item, draw_preview);
+
+  /* Save the source XML if there is one */
+  filename = get_save_path ();
+  cc_background_xml_save (item, filename);
 }
 
 static gboolean
@@ -674,23 +700,24 @@ static void
 load_current_bg (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
+  CcBackgroundItem *saved, *configured;
   gchar *uri, *pcolor, *scolor;
 
   priv = self->priv;
 
-  /* initalise the current background information from settings */
-  uri = g_settings_get_string (priv->settings, WP_FILE_KEY);
-  priv->current_background = cc_background_item_new (uri);
+  /* Load the saved configuration */
+  uri = get_save_path ();
+  saved = cc_background_xml_get_item (uri);
   g_free (uri);
 
-  /* FIXME Set flags too:
-   * - if we have a gradient and no filename, set PCOLOR, etc.
-   *
-   * Move into cc-background-item.c like the old cc_background_item_update()?
-   */
+  /* initalise the current background information from settings */
+  uri = g_settings_get_string (priv->settings, WP_FILE_KEY);
+  configured = cc_background_item_new (uri);
+  g_free (uri);
+
   pcolor = g_settings_get_string (priv->settings, WP_PCOLOR_KEY);
   scolor = g_settings_get_string (priv->settings, WP_SCOLOR_KEY);
-  g_object_set (G_OBJECT (priv->current_background),
+  g_object_set (G_OBJECT (configured),
 		"name", _("Current background"),
 		"placement", g_settings_get_enum (priv->settings, WP_OPTIONS_KEY),
 		"shading", g_settings_get_enum (priv->settings, WP_SHADING_KEY),
@@ -700,6 +727,24 @@ load_current_bg (CcBackgroundPanel *self)
   g_free (pcolor);
   g_free (scolor);
 
+  if (saved != NULL && cc_background_item_compare (saved, configured))
+    {
+      g_object_set (G_OBJECT (configured),
+		    "name", cc_background_item_get_name (saved),
+		    "flags", cc_background_item_get_flags (saved),
+		    "source-url", cc_background_item_get_source_url (saved),
+		    "source-xml", cc_background_item_get_source_xml (saved),
+		    NULL);
+    }
+  else
+    {
+      if (saved != NULL)
+        g_object_unref (saved);
+    }
+  if (saved != NULL)
+    g_object_unref (saved);
+
+  priv->current_background = configured;
   cc_background_item_load (priv->current_background, NULL);
 }
 
