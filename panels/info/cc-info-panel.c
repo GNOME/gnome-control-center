@@ -724,8 +724,8 @@ info_panel_setup_graphics (CcInfoPanel  *self)
 {
   GtkWidget *widget;
   GtkSwitch *sw;
-  gchar *text;
-  
+  char *text;
+
   text = get_graphics_info ();
   widget = WID (self->priv->builder, "graphics_chipset_label");
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
@@ -747,7 +747,7 @@ info_panel_setup_graphics (CcInfoPanel  *self)
                                 sw, "active", 0,
                                 switch_fallback_get_mapping,
                                 switch_fallback_set_mapping, self, NULL);
-  gtk_container_add (GTK_CONTAINER (widget), GTK_WIDGET (sw));
+  gtk_box_pack_start (GTK_BOX (widget), GTK_WIDGET (sw), FALSE, FALSE, 0);
   gtk_widget_show_all (GTK_WIDGET (sw));
 }
 
@@ -847,7 +847,7 @@ info_panel_setup_overview (CcInfoPanel  *self)
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
-  widget = WID (self->priv->builder, "info_paned");
+  widget = WID (self->priv->builder, "info_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
 }
 
