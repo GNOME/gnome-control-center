@@ -420,10 +420,91 @@ copy_finished_cb (GObject      *source_object,
     cc_background_item_load (priv->current_background, NULL);
 
   if (priv->builder)
-    update_preview (priv, item);
+    {
+      char *filename;
+
+      update_preview (priv, item);
+
+      /* Save the source XML if there is one */
+      filename = get_save_path ();
+      if (create_save_dir ())
+        cc_background_xml_save (priv->current_background, filename);
+    }
 
   /* remove the reference taken when the copy was set up */
   g_object_unref (panel);
+}
+
+static void
+update_remove_button (CcBackgroundPanel *panel,
+		      CcBackgroundItem  *item)
+{
+  CcBackgroundPanelPrivate *priv;
+  const char *uri;
+  char *cache_path;
+  GFile *bg, *cache, *parent;
+  gboolean sensitive = FALSE;
+
+  priv = panel->priv;
+
+  if (priv->current_source != SOURCE_PICTURES)
+    goto bail;
+
+  uri = cc_background_item_get_uri (item);
+  if (uri == NULL)
+    goto bail;
+
+  bg = g_file_new_for_uri (uri);
+  parent = g_file_get_parent (bg);
+  if (parent == NULL)
+    {
+      g_object_unref (bg);
+      goto bail;
+    }
+  cache_path = bg_pictures_source_get_cache_path ();
+  cache = g_file_new_for_path (cache_path);
+  g_free (cache_path);
+
+  if (g_file_equal (parent, cache))
+    sensitive = TRUE;
+
+  g_object_unref (parent);
+  g_object_unref (cache);
+
+bail:
+  gtk_widget_set_sensitive (WID ("remove_button"), sensitive);
+
+}
+
+static CcBackgroundItem *
+get_selected_item (CcBackgroundPanel *panel)
+{
+  CcBackgroundPanelPrivate *priv = panel->priv;
+  GtkIconView *icon_view;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GList *list;
+  CcBackgroundItem *item;
+
+  icon_view = GTK_ICON_VIEW (WID ("backgrounds-iconview"));
+  item = NULL;
+  list = gtk_icon_view_get_selected_items (icon_view);
+
+  if (!list)
+    return NULL;
+
+  model = gtk_icon_view_get_model (icon_view);
+
+  if (gtk_tree_model_get_iter (model, &iter, (GtkTreePath*) list->data) == FALSE)
+    goto bail;
+
+  gtk_tree_model_get (model, &iter, 1, &item, -1);
+
+bail:
+  g_list_foreach (list, (GFunc)gtk_tree_path_free, NULL);
+  g_list_free (list);
+
+  return item;
 }
 
 static void
@@ -431,7 +512,6 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
                         CcBackgroundPanel *panel)
 {
   GtkTreeIter iter;
-  GList *list;
   GtkTreeModel *model;
   CcBackgroundItem *item;
   CcBackgroundPanelPrivate *priv = panel->priv;
@@ -441,9 +521,9 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   CcBackgroundItemFlags flags;
   char *filename;
 
-  list = gtk_icon_view_get_selected_items (icon_view);
+  item = get_selected_item (panel);
 
-  if (!list)
+  if (item == NULL)
     return;
 
   /* Update current source */
@@ -453,15 +533,6 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   gtk_tree_model_get (model, &iter,
 		      COL_SOURCE_TYPE, &priv->current_source, -1);
 
-  model = gtk_icon_view_get_model (icon_view);
-
-  gtk_tree_model_get_iter (model, &iter, (GtkTreePath*) list->data);
-
-  g_list_foreach (list, (GFunc)gtk_tree_path_free, NULL);
-  g_list_free (list);
-
-  gtk_tree_model_get (model, &iter, 1, &item, -1);
-
   uri = cc_background_item_get_uri (item);
   flags = cc_background_item_get_flags (item);
 
@@ -470,9 +541,10 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, G_DESKTOP_BACKGROUND_STYLE_NONE);
       g_settings_set_string (priv->settings, WP_FILE_KEY, "");
     }
-  else if (cc_background_item_get_source_url (item) != NULL)
+  else if (cc_background_item_get_source_url (item) != NULL &&
+	   cc_background_item_get_needs_download (item))
     {
-      GFile *source, *dest, *dest_dir;
+      GFile *source, *dest;
       gchar *cache_path, *basename, *dest_path, *display_name, *dest_uri;
       GdkPixbuf *pixbuf;
 
@@ -483,16 +555,16 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
           g_free (cache_path);
           return;
 	}
-
-      source = g_file_new_for_uri (cc_background_item_get_source_url (item));
-      dest_dir = g_file_new_for_path (cache_path);
       g_free (cache_path);
+
+      dest_path = bg_pictures_source_get_unique_path (cc_background_item_get_source_url (item));
+      dest = g_file_new_for_path (dest_path);
+      g_free (dest_path);
+      source = g_file_new_for_uri (cc_background_item_get_source_url (item));
       basename = g_file_get_basename (source);
       display_name = g_filename_display_name (basename);
-      dest = g_file_get_child (dest_dir, basename);
       dest_path = g_file_get_path (dest);
       g_free (basename);
-      g_object_unref (dest_dir);
 
       /* create a blank image to use until the source image is ready */
       pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 1, 1);
@@ -534,7 +606,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       g_settings_set_string (priv->settings, WP_FILE_KEY, dest_path);
       g_object_set (G_OBJECT (item),
 		    "uri", dest_uri,
-		    "source-url", NULL,
+		    "needs-download", FALSE,
 		    "name", display_name,
 		    NULL);
       g_free (display_name);
@@ -595,6 +667,8 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
 
   /* Apply all changes */
   g_settings_apply (priv->settings);
+
+  update_remove_button (panel, item);
 
   /* update the preview information */
   if (draw_preview != FALSE)
@@ -756,7 +830,7 @@ row_inserted (GtkTreeModel      *tree_model,
   g_signal_handlers_disconnect_by_func (G_OBJECT (store), G_CALLBACK (row_inserted), panel);
 
   /* Change source */
-  gtk_combo_box_set_active (GTK_COMBO_BOX (WID ("sources-combobox")), 1);
+  gtk_combo_box_set_active (GTK_COMBO_BOX (WID ("sources-combobox")), SOURCE_PICTURES);
 
   /* And select the newly added item */
   gtk_icon_view_select_path (GTK_ICON_VIEW (WID ("backgrounds-iconview")), path);
@@ -801,10 +875,13 @@ file_chooser_response (GtkDialog         *chooser,
 }
 
 static void
-update_chooser_preview (GtkFileChooser               *chooser,
-			GnomeDesktopThumbnailFactory *thumb_factory)
+update_chooser_preview (GtkFileChooser    *chooser,
+			CcBackgroundPanel *panel)
 {
+  GnomeDesktopThumbnailFactory *thumb_factory;
   char *uri;
+
+  thumb_factory = panel->priv->thumb_factory;
 
   uri = gtk_file_chooser_get_preview_uri (chooser);
 
@@ -853,6 +930,11 @@ update_chooser_preview (GtkFileChooser               *chooser,
 				    GTK_ICON_SIZE_DIALOG);
 	}
 
+      if (bg_pictures_source_is_known (panel->priv->pictures_source, uri))
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT, FALSE);
+      else
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT, TRUE);
+
       g_free (uri);
     }
 
@@ -891,7 +973,7 @@ add_button_clicked (GtkButton         *button,
   gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (chooser), FALSE);
   gtk_widget_show (preview);
   g_signal_connect (chooser, "update-preview",
-		    G_CALLBACK (update_chooser_preview), panel->priv->thumb_factory);
+		    G_CALLBACK (update_chooser_preview), panel);
 
   folder = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
   if (folder)
@@ -902,17 +984,34 @@ add_button_clicked (GtkButton         *button,
 		    G_CALLBACK (file_chooser_response), panel);
 
   gtk_window_present (GTK_WINDOW (chooser));
-#if 0
-  GtkWidget *chooser;
-  chooser = gtk_file_chooser_dialog_new (_("Select Additional Background"),
-					 gtk_widget_get_toplevel (WID ("background-panel")),
-					 GTK_FILE_CHOOSER_ACTION_OPEN,
-					 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					 GTK_STOCK_ADD, GTK_RESPONSE_ACCEPT,
-					 NULL);
-  gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), FALSE);
-  gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
-#endif
+}
+
+static void
+remove_button_clicked (GtkButton         *button,
+		       CcBackgroundPanel *panel)
+{
+  CcBackgroundItem *item;
+  GtkListStore *store;
+  GtkTreePath *path;
+  CcBackgroundPanelPrivate *priv;
+
+  priv = panel->priv;
+
+  item = get_selected_item (panel);
+  if (item == NULL)
+    g_assert_not_reached ();
+
+  bg_pictures_source_remove (panel->priv->pictures_source, item);
+  g_object_unref (item);
+
+  /* Are there any items left in the pictures tree store? */
+  store = bg_source_get_liststore (BG_SOURCE (panel->priv->pictures_source));
+  if (gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL) == 0)
+    gtk_combo_box_set_active (GTK_COMBO_BOX (WID ("sources-combobox")), SOURCE_WALLPAPERS);
+
+  path = gtk_tree_path_new_from_string ("0");
+  gtk_icon_view_select_path (GTK_ICON_VIEW (WID ("backgrounds-iconview")), path);
+  gtk_tree_path_free (path);
 }
 
 static void
@@ -959,11 +1058,6 @@ load_current_bg (CcBackgroundPanel *self)
 		    "source-xml", cc_background_item_get_source_xml (saved),
 		    NULL);
     }
-  else
-    {
-      if (saved != NULL)
-        g_object_unref (saved);
-    }
   if (saved != NULL)
     g_object_unref (saved);
 
@@ -975,7 +1069,7 @@ static void
 cc_background_panel_init (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
-  gchar *objects[] = { "backgrounds-liststore", "style-liststore",
+  gchar *objects[] = { "style-liststore",
       "sources-liststore", "background-panel", "sizegroup", NULL };
   GError *err = NULL;
   GtkWidget *widget;
@@ -1063,8 +1157,11 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   g_signal_connect (WID ("add_button"), "clicked",
 		    G_CALLBACK (add_button_clicked), self);
+  g_signal_connect (WID ("remove_button"), "clicked",
+		    G_CALLBACK (remove_button_clicked), self);
 
   /* setup preview area */
+  gtk_label_set_ellipsize (GTK_LABEL (WID ("background-label")), PANGO_ELLIPSIZE_END);
   widget = WID ("preview-area");
   g_signal_connect (widget, "draw", G_CALLBACK (preview_draw_cb),
                     self);

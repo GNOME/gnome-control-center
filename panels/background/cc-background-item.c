@@ -772,6 +772,7 @@ cc_background_item_copy (CcBackgroundItem *item)
 	ret->priv->source_url = g_strdup (item->priv->source_url);
 	ret->priv->source_xml = g_strdup (item->priv->source_xml);
 	ret->priv->is_deleted = item->priv->is_deleted;
+	ret->priv->needs_download = item->priv->needs_download;
 	ret->priv->flags = item->priv->flags;
 
 	return ret;

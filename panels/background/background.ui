@@ -2,16 +2,6 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="backgrounds-liststore">
-    <columns>
-      <!-- column-name gicon -->
-      <column type="GIcon"/>
-      <!-- column-name data -->
-      <column type="GObject"/>
-      <!-- column-name source-id -->
-      <column type="guint"/>
-    </columns>
-  </object>
   <object class="GtkListStore" id="sources-liststore">
     <columns>
       <!-- column-name source-name -->
@@ -93,6 +83,20 @@
                 <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="icon_name">list-add-symbolic</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="remove_button">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_underline">True</property>
+                <property name="icon_name">list-remove-symbolic</property>
+                <property name="sensitive">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
