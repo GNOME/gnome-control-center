@@ -481,6 +481,15 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         }
       else
         gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-options-button");
+      gtk_widget_set_sensitive (widget, TRUE);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-jobs-button");
+      gtk_widget_set_sensitive (widget, TRUE);
     }
   else
     {
