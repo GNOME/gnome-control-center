@@ -52,7 +52,8 @@ GType              cc_background_xml_get_type (void);
 
 CcBackgroundXml *cc_background_xml_new (void);
 
-void cc_background_xml_save_list (CcBackgroundXml *data);
+void cc_background_xml_save                          (CcBackgroundItem *item,
+						      const char       *filename);
 
 CcBackgroundItem *cc_background_xml_get_item         (const char      *filename);
 gboolean cc_background_xml_load_xml                  (CcBackgroundXml *data,

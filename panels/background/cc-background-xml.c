@@ -79,20 +79,6 @@ cc_background_xml_get_bool (const xmlNode *parent,
   return ret_val;
 }
 
-#if 0
-static void cc_background_xml_set_bool (const xmlNode * parent,
-				   const xmlChar * prop_name, gboolean value) {
-  g_return_if_fail (parent != NULL);
-  g_return_if_fail (prop_name != NULL);
-
-  if (value) {
-    xmlSetProp ((xmlNode *) parent, prop_name, (xmlChar *)"true");
-  } else {
-    xmlSetProp ((xmlNode *) parent, prop_name, (xmlChar *)"false");
-  }
-}
-#endif
-
 static struct {
 	int value;
 	const char *string;
@@ -501,79 +487,90 @@ cc_background_xml_get_item (const char *filename)
 	return item;
 }
 
-#if 0
-static void gnome_wp_list_flatten (const gchar * key, CcBackgroundXml * item,
-				   GSList ** list) {
-  g_return_if_fail (key != NULL);
-  g_return_if_fail (item != NULL);
+static const char *
+enum_to_str (GType type,
+	     int   v)
+{
+	GEnumClass *eclass;
+	GEnumValue *value;
 
-  *list = g_slist_prepend (*list, item);
+	eclass = G_ENUM_CLASS (g_type_class_peek (type));
+	value = g_enum_get_value (eclass, v);
+
+	g_assert (value);
+
+	return value->value_nick;
 }
-#endif
-void cc_background_xml_save_list (CcBackgroundXml *data) {
-	//FIXME implement save or remove?
-	//FIXME use XDG user dirs
-#if 0
-  xmlDoc * wplist;
-  xmlNode * root, * wallpaper, * item;
-  GSList * list = NULL;
-  gchar * wpfile;
 
-  g_hash_table_foreach (data->wp_hash,
-			(GHFunc) gnome_wp_list_flatten, &list);
-  g_hash_table_destroy (data->wp_hash);
-  list = g_slist_reverse (list);
-
-  wpfile = g_build_filename (g_get_home_dir (),
-			     "/.gnome2",
-			     "backgrounds.xml",
-			     NULL);
+void
+cc_background_xml_save (CcBackgroundItem *item,
+			const char       *filename)
+{
+  xmlDoc *wp;
+  xmlNode *root, *wallpaper;
+  xmlNode *xml_item G_GNUC_UNUSED;
+  const char * none = "(none)";
+  const char *placement_str, *shading_str;
+  char *name, *pcolor, *scolor, *uri;
+  CcBackgroundItemFlags flags;
+  GDesktopBackgroundStyle placement;
+  GDesktopBackgroundShading shading;
 
   xmlKeepBlanksDefault (0);
 
-  wplist = xmlNewDoc ((xmlChar *)"1.0");
-  xmlCreateIntSubset (wplist, (xmlChar *)"wallpapers", NULL, (xmlChar *)"gnome-wp-list.dtd");
+  wp = xmlNewDoc ((xmlChar *)"1.0");
+  xmlCreateIntSubset (wp, (xmlChar *)"wallpapers", NULL, (xmlChar *)"gnome-wp-list.dtd");
   root = xmlNewNode (NULL, (xmlChar *)"wallpapers");
-  xmlDocSetRootElement (wplist, root);
+  xmlDocSetRootElement (wp, root);
 
-  while (list != NULL) {
-    CcBackgroundXml * wpitem = list->data;
-    const char * none = "(none)";
-    gchar * filename;
-    const gchar * scale, * shade;
-    gchar * pcolor, * scolor;
+  g_object_get (G_OBJECT (item),
+		"name", &name,
+		"uri", &uri,
+		"shading", &shading,
+		"placement", &placement,
+		"primary-color", &pcolor,
+		"secondary-color", &scolor,
+		"flags", &flags,
+		NULL);
 
-    if (!strcmp (wpitem->filename, none) ||
-	(g_utf8_validate (wpitem->filename, -1, NULL) &&
-	 g_file_test (wpitem->filename, G_FILE_TEST_EXISTS)))
-      filename = g_strdup (wpitem->filename);
-    else
-      filename = g_filename_to_utf8 (wpitem->filename, -1, NULL, NULL, NULL);
+  placement_str = enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE, placement);
+  shading_str = enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING, shading);
 
-    pcolor = gdk_color_to_string (wpitem->pcolor);
-    scolor = gdk_color_to_string (wpitem->scolor);
-    scale = wp_item_option_to_string (wpitem->options);
-    shade = wp_item_shading_to_string (wpitem->shade_type);
+  wallpaper = xmlNewChild (root, NULL, (xmlChar *)"wallpaper", NULL);
+  xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"name", (xmlChar *)name);
+  if (flags & CC_BACKGROUND_ITEM_HAS_URI &&
+      uri != NULL)
+    {
+      GFile *file;
+      char *fname;
 
-    wallpaper = xmlNewChild (root, NULL, (xmlChar *)"wallpaper", NULL);
-    cc_background_xml_set_bool (wallpaper, (xmlChar *)"deleted", wpitem->deleted);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"name", (xmlChar *)wpitem->name);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"filename", (xmlChar *)filename);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"options", (xmlChar *)scale);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"shade_type", (xmlChar *)shade);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"pcolor", (xmlChar *)pcolor);
-    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)scolor);
-    g_free (pcolor);
-    g_free (scolor);
-    g_free (filename);
+      file = g_file_new_for_commandline_arg (uri);
+      fname = g_file_get_path (file);
+      g_object_unref (file);
+      xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"filename", (xmlChar *)fname);
+      g_free (fname);
+    }
+  else if (flags & CC_BACKGROUND_ITEM_HAS_URI)
+    {
+      xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"filename", (xmlChar *)none);
+    }
 
-    list = g_slist_delete_link (list, list);
-    g_object_unref (wpitem);
-  }
-  xmlSaveFormatFile (wpfile, wplist, 1);
-  xmlFreeDoc (wplist);
-  g_free (wpfile);
-#endif
+  if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
+    xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"options", (xmlChar *)placement_str);
+  if (flags & CC_BACKGROUND_ITEM_HAS_SHADING)
+    xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"shade_type", (xmlChar *)shading_str);
+  if (flags & CC_BACKGROUND_ITEM_HAS_PCOLOR)
+    xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"pcolor", (xmlChar *)pcolor);
+  if (flags & CC_BACKGROUND_ITEM_HAS_SCOLOR)
+    xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)scolor);
+
+  g_free (name);
+  g_free (pcolor);
+  g_free (scolor);
+  g_free (uri);
+
+  xmlSaveFormatFile (filename, wp, 1);
+  xmlFreeDoc (wp);
 }
 
 static void
