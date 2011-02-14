@@ -36,8 +36,6 @@ G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
 
 struct _BgPicturesSourcePrivate
 {
-  GFile *dir;
-
   GCancellable *cancellable;
 
   GnomeDesktopThumbnailFactory *thumb_factory;
@@ -86,12 +84,6 @@ bg_pictures_source_dispose (GObject *object)
     {
       g_object_unref (priv->thumb_factory);
       priv->thumb_factory = NULL;
-    }
-
-  if (priv->dir)
-    {
-      g_object_unref (priv->dir);
-      priv->dir = NULL;
     }
 
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->dispose (object);
@@ -277,24 +269,46 @@ dir_enum_async_ready (GObject      *source,
                                       user_data);
 }
 
+char *
+bg_pictures_get_cache_path (void)
+{
+  return g_build_filename (g_get_user_cache_dir (),
+			   "gnome-control-center",
+			   "backgrounds",
+			   NULL);
+}
+
 static void
 bg_pictures_source_init (BgPicturesSource *self)
 {
   const gchar *pictures_path;
   BgPicturesSourcePrivate *priv;
+  GFile *dir;
+  char *cache_path;
+
   priv = self->priv = PICTURES_SOURCE_PRIVATE (self);
 
   priv->cancellable = g_cancellable_new ();
 
   pictures_path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
-  priv->dir = g_file_new_for_path (pictures_path);
-
-  g_file_enumerate_children_async (priv->dir,
+  dir = g_file_new_for_path (pictures_path);
+  g_file_enumerate_children_async (dir,
                                    G_FILE_ATTRIBUTE_STANDARD_NAME ","
                                    G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
                                    G_FILE_QUERY_INFO_NONE,
                                    G_PRIORITY_LOW, priv->cancellable,
                                    dir_enum_async_ready, self);
+  g_object_unref (dir);
+
+  cache_path = bg_pictures_get_cache_path ();
+  dir = g_file_new_for_path (cache_path);
+  g_file_enumerate_children_async (dir,
+                                   G_FILE_ATTRIBUTE_STANDARD_NAME ","
+                                   G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+                                   G_FILE_QUERY_INFO_NONE,
+                                   G_PRIORITY_LOW, priv->cancellable,
+                                   dir_enum_async_ready, self);
+  g_object_unref (dir);
 
   priv->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);

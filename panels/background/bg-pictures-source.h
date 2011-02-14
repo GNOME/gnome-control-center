@@ -69,7 +69,8 @@ struct _BgPicturesSourceClass
 
 GType bg_pictures_source_get_type (void) G_GNUC_CONST;
 
-BgPicturesSource *bg_pictures_source_new (void);
+BgPicturesSource *bg_pictures_source_new     (void);
+char             *bg_pictures_get_cache_path (void);
 
 G_END_DECLS
 
