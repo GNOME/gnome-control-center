@@ -322,7 +322,10 @@ _set_uri (CcBackgroundItem *item,
 	  const char       *value)
 {
         g_free (item->priv->uri);
-        item->priv->uri = g_strdup (value);
+        if (value && *value == '\0')
+		item->priv->uri = NULL;
+	else
+		item->priv->uri = g_strdup (value);
 }
 
 const char *
@@ -818,6 +821,10 @@ files_equal (const char *a,
 {
 	GFile *file1, *file2;
 	gboolean retval;
+
+	if (a == NULL ||
+	    b == NULL)
+		return FALSE;
 
 	file1 = g_file_new_for_commandline_arg (a);
 	file2 = g_file_new_for_commandline_arg (b);
