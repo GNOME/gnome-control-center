@@ -396,6 +396,7 @@ copy_finished_cb (GObject      *source_object,
   GError *err = NULL;
   CcBackgroundPanel *panel = (CcBackgroundPanel *) pointer;
   CcBackgroundPanelPrivate *priv = panel->priv;
+  CcBackgroundItem *item;
 
   if (!g_file_copy_finish (G_FILE (source_object), result, &err))
     {
@@ -404,6 +405,7 @@ copy_finished_cb (GObject      *source_object,
 
       g_error_free (err);
     }
+  item = g_object_get_data (source_object, "item");
 
   /* the panel may have been destroyed before the callback is run, so be sure
    * to check the widgets are not NULL */
@@ -418,7 +420,7 @@ copy_finished_cb (GObject      *source_object,
     cc_background_item_load (priv->current_background, NULL);
 
   if (priv->builder)
-    update_preview (priv, NULL);
+    update_preview (priv, item);
 
   /* remove the reference taken when the copy was set up */
   g_object_unref (panel);
@@ -520,6 +522,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       /* reference the panel in case it is removed before the copy is
        * finished */
       g_object_ref (panel);
+      g_object_set_data_full (G_OBJECT (source), "item", g_object_ref (item), g_object_unref);
       g_file_copy_async (source, dest, G_FILE_COPY_OVERWRITE,
                          G_PRIORITY_DEFAULT, priv->copy_cancellable,
                          NULL, NULL,
@@ -744,39 +747,39 @@ row_inserted (GtkTreeModel      *tree_model,
 	      GtkTreeIter       *iter,
 	      CcBackgroundPanel *panel)
 {
-	GtkListStore *store;
-	CcBackgroundPanelPrivate *priv;
+  GtkListStore *store;
+  CcBackgroundPanelPrivate *priv;
 
-	priv = panel->priv;
+  priv = panel->priv;
 
-	store = bg_source_get_liststore (BG_SOURCE (panel->priv->pictures_source));
-	g_signal_handlers_disconnect_by_func (G_OBJECT (store), G_CALLBACK (row_inserted), panel);
+  store = bg_source_get_liststore (BG_SOURCE (panel->priv->pictures_source));
+  g_signal_handlers_disconnect_by_func (G_OBJECT (store), G_CALLBACK (row_inserted), panel);
 
-	/* Change source */
-	gtk_combo_box_set_active (GTK_COMBO_BOX (WID ("sources-combobox")), 1);
+  /* Change source */
+  gtk_combo_box_set_active (GTK_COMBO_BOX (WID ("sources-combobox")), 1);
 
-	/* And select the newly added item */
-	gtk_icon_view_select_path (GTK_ICON_VIEW (WID ("backgrounds-iconview")), path);
+  /* And select the newly added item */
+  gtk_icon_view_select_path (GTK_ICON_VIEW (WID ("backgrounds-iconview")), path);
 }
 
 static void
 add_button_clicked (GtkButton         *button,
 		    CcBackgroundPanel *panel)
 {
-	GtkListStore *store;
+  GtkListStore *store;
 
-	store = bg_source_get_liststore (BG_SOURCE (panel->priv->pictures_source));
-	g_signal_connect (G_OBJECT (store), "row-inserted",
-			  G_CALLBACK (row_inserted), panel);
+  store = bg_source_get_liststore (BG_SOURCE (panel->priv->pictures_source));
+  g_signal_connect (G_OBJECT (store), "row-inserted",
+		    G_CALLBACK (row_inserted), panel);
 
-	//FIXME implement
-	if (bg_pictures_source_add (panel->priv->pictures_source,
-				    "file:///home/hadess/Pictures/test-case/IMG_1.jpg") == FALSE) {
-		g_signal_handlers_disconnect_by_func (G_OBJECT (store), G_CALLBACK (row_inserted), panel);
-		return;
-	}
+  //FIXME implement
+  if (bg_pictures_source_add (panel->priv->pictures_source,
+			      "file:///home/hadess/Pictures/test-case/IMG_1.jpg") == FALSE) {
+    g_signal_handlers_disconnect_by_func (G_OBJECT (store), G_CALLBACK (row_inserted), panel);
+    return;
+  }
 
-	/* Wait for the item to get added */
+  /* Wait for the item to get added */
 }
 
 static void
