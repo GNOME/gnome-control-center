@@ -775,10 +775,10 @@ info_panel_setup_default_apps (CcInfoPanel  *self)
   button = gtk_app_chooser_button_new ("x-scheme-handler/xmpp");
   gtk_table_attach (GTK_TABLE (table), button, 1, 2, 3, 4, 0, 0, 0, 0);
 
-  button = gtk_app_chooser_button_new ("audio/*");
+  button = gtk_app_chooser_button_new ("audio/x-vorbis+ogg");
   gtk_table_attach (GTK_TABLE (table), button, 1, 2, 4, 5, 0, 0, 0, 0);
 
-  button = gtk_app_chooser_button_new ("video/*");
+  button = gtk_app_chooser_button_new ("video/x-ogm+ogg");
   gtk_table_attach (GTK_TABLE (table), button, 1, 2, 5, 6, 0, 0, 0, 0);
 
   gtk_widget_show_all (table);
