@@ -27,8 +27,6 @@
 #include <gio/gio.h>
 #include <glib/gi18n-lib.h>
 
-#include <gconf/gconf-client.h>
-
 #include <libgnome-desktop/gnome-bg.h>
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
 
