@@ -10,17 +10,17 @@
 # Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2002,2003.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, 2006.
 # Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2007.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-02-10 11:35+0000\n"
-"PO-Revision-Date: 2011-02-12 14:34+0100\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"POT-Creation-Date: 2011-02-15 04:06+0000\n"
+"PO-Revision-Date: 2011-02-15 21:10+0100\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -218,52 +218,58 @@ msgstr "Mosaico"
 msgid "Zoom"
 msgstr "Ampliación"
 
-#: ../panels/background/bg-colors-source.c:44
+#: ../panels/background/bg-colors-source.c:46
 msgid "Horizontal Gradient"
 msgstr "Gradiente horizontal"
 
-#: ../panels/background/bg-colors-source.c:45
+#: ../panels/background/bg-colors-source.c:47
 msgid "Vertical Gradient"
 msgstr "Gradiente vertical"
 
-#: ../panels/background/bg-colors-source.c:46
+#: ../panels/background/bg-colors-source.c:48
 msgid "Solid Color"
 msgstr "Color sólido"
 
-#: ../panels/background/cc-background-panel.c:747
-msgid "Wallpapers"
-msgstr "Fondos de escritorio"
+#: ../panels/background/cc-background-panel.c:960
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "Examinar para buscar más imágenes"
 
-#: ../panels/background/cc-background-panel.c:755
-msgid "Pictures Folder"
-msgstr "Carpeta de imágenes"
-
-#: ../panels/background/cc-background-panel.c:763
-msgid "Colors & Gradients"
-msgstr "Colores y gradientes"
-
-#: ../panels/background/cc-background-panel.c:772
-msgid "Flickr"
-msgstr "Flickr"
-
-#: ../panels/background/cc-background-panel.c:833
+#: ../panels/background/cc-background-panel.c:1051
 msgid "Current background"
 msgstr "Fondo actual"
 
-#: ../panels/background/gnome-wp-info.c:59
-msgid "No Desktop Background"
-msgstr "Sin fondo de escritorio"
+#: ../panels/background/cc-background-panel.c:1115
+msgid "Wallpapers"
+msgstr "Fondos de escritorio"
 
-#: ../panels/background/gnome-wp-item.c:277
+#: ../panels/background/cc-background-panel.c:1122
+msgid "Pictures Folder"
+msgstr "Carpeta de imágenes"
+
+#: ../panels/background/cc-background-panel.c:1129
+msgid "Colors & Gradients"
+msgstr "Colores y gradientes"
+
+#: ../panels/background/cc-background-panel.c:1137
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/cc-background-item.c:150
 msgid "multiple sizes"
 msgstr "tamaños múltiples"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/gnome-wp-item.c:285
+#: ../panels/background/cc-background-item.c:154
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
+
+#: ../panels/background/cc-background-item.c:257
+msgid "No Desktop Background"
+msgstr "Sin fondo de escritorio"
 
 #: ../panels/common/gdm-languages.c:709
 msgid "Unspecified"
@@ -544,55 +550,88 @@ msgstr "No se pudieron detectar las pantallas"
 msgid "Could not get screen information"
 msgstr "No se pudo obtener la información de la pantalla"
 
+#: ../panels/info/cc-info-panel.c:400
+#, fuzzy
+#| msgid "Callback"
+msgid "Fallback"
+msgstr "Reserva"
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/info/cc-info-panel.c:400 ../panels/printers/printers.ui.h:8
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
+msgid "Default"
+msgstr "Predeterminado"
+
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:417
+#: ../panels/info/cc-info-panel.c:502
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:431
+#: ../panels/info/cc-info-panel.c:516
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "%u byte"
 msgstr[1] "%u bytes"
 
-#: ../panels/info/cc-info-panel.c:439
+#: ../panels/info/cc-info-panel.c:524
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f KiB"
 
-#: ../panels/info/cc-info-panel.c:444
+#: ../panels/info/cc-info-panel.c:529
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MiB"
 
-#: ../panels/info/cc-info-panel.c:449
+#: ../panels/info/cc-info-panel.c:534
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GiB"
 
-#: ../panels/info/cc-info-panel.c:454
+#: ../panels/info/cc-info-panel.c:539
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TiB"
 
-#: ../panels/info/cc-info-panel.c:459
+#: ../panels/info/cc-info-panel.c:544
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PiB"
 
-#: ../panels/info/cc-info-panel.c:464
+#: ../panels/info/cc-info-panel.c:549
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EiB"
 
-#: ../panels/info/cc-info-panel.c:574
+#: ../panels/info/cc-info-panel.c:660
 msgid "Unknown model"
 msgstr "Modelo desconocido"
 
-#: ../panels/info/cc-info-panel.c:637
+#: ../panels/info/cc-info-panel.c:827
+#: ../panels/keyboard/keyboard-shortcuts.c:1907
+msgid "Section"
+msgstr "Sección"
+
+#: ../panels/info/cc-info-panel.c:836 ../panels/info/info.ui.h:16
+#| msgid "Preview"
+msgid "Overview"
+msgstr "Visión general"
+
+#: ../panels/info/cc-info-panel.c:842 ../panels/info/info.ui.h:5
+#| msgid "- GNOME Default Applications"
+msgid "Default Applications"
+msgstr "Aplicaciones predeterminadas"
+
+#: ../panels/info/cc-info-panel.c:847 ../panels/info/info.ui.h:10
+#| msgid "Graphics:"
+msgid "Graphics"
+msgstr "Gráficos"
+
+#: ../panels/info/cc-info-panel.c:872
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
@@ -611,36 +650,86 @@ msgid "device;system;information;memory;processor;version;"
 msgstr "dispositivo;sistema;información;memoria;procesador;versión;"
 
 #: ../panels/info/info.ui.h:1
+#, fuzzy
+msgid "Always use fallback:"
+msgstr "Usar siempre reserva:"
+
+#: ../panels/info/info.ui.h:2
+#| msgid "Cale_ndar:"
+msgid "Calendar"
+msgstr "Calendario"
+
+#: ../panels/info/info.ui.h:3
+#| msgid "Chocolate"
+msgid "Chat"
+msgstr "Chat"
+
+#: ../panels/info/info.ui.h:4
+#| msgid "City:"
+msgid "Chipset:"
+msgstr "Chipset:"
+
+#: ../panels/info/info.ui.h:6
 msgid "Device name:"
 msgstr "Nombre del dispositivo:"
 
-#: ../panels/info/info.ui.h:2
+#: ../panels/info/info.ui.h:7
 msgid "Disk:"
 msgstr "Disco:"
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:8
+#| msgid "Provider:"
+msgid "Driver:"
+msgstr "Controlador:"
+
+#: ../panels/info/info.ui.h:9
+msgid "Experience:"
+msgstr "Experiencia:"
+
+#: ../panels/info/info.ui.h:11
 msgid "Graphics:"
 msgstr "Gráficos:"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:12
+#| msgid "KMail"
+msgid "Mail"
+msgstr "Correo"
+
+#: ../panels/info/info.ui.h:13
 msgid "Memory:"
 msgstr "Memoria:"
 
-#: ../panels/info/info.ui.h:5
-msgid "More Info"
-msgstr "Más información"
+#: ../panels/info/info.ui.h:14
+#| msgid "Mouse"
+msgid "Music"
+msgstr "Música"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:15
 msgid "OS type:"
 msgstr "Tipo de SO:"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:17
+#| msgid "_Photos:"
+msgid "Photos"
+msgstr "Fotos"
+
+#: ../panels/info/info.ui.h:18
 msgid "Processor:"
 msgstr "Procesador:"
 
-#: ../panels/info/info.ui.h:8
-msgid "Update Available"
-msgstr "Actualización disponible"
+#: ../panels/info/info.ui.h:19
+#| msgid "Update Available"
+msgid "Updates Available"
+msgstr "Actualizaciones disponibles"
+
+#: ../panels/info/info.ui.h:20
+#| msgid "Video CD"
+msgid "Video"
+msgstr "Vídeo"
+
+#: ../panels/info/info.ui.h:21
+msgid "Web"
+msgstr "Web"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Sound and Media"
@@ -761,10 +850,6 @@ msgstr ""
 #: ../panels/keyboard/keyboard-shortcuts.c:1626
 msgid "Too many custom shortcuts"
 msgstr "Demasiadas combinaciones personalizadas"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1907
-msgid "Section"
-msgstr "Sección"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1956
 msgid "Action"
@@ -1013,230 +1098,210 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;sonido;vídeo;disco;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:223
+#: ../panels/printers/cc-printers-panel.c:228
 msgid "Low on toner"
 msgstr "Tóner bajo"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:225
+#: ../panels/printers/cc-printers-panel.c:230
 msgid "Out of toner"
 msgstr "Sin tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:228
+#: ../panels/printers/cc-printers-panel.c:233
 msgid "Low on developer"
 msgstr "Nivel de revelador bajo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:231
+#: ../panels/printers/cc-printers-panel.c:236
 msgid "Out of developer"
 msgstr "Sin revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:233
+#: ../panels/printers/cc-printers-panel.c:238
 msgid "Low on a marker supply"
 msgstr "Marcador bajo"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:235
+#: ../panels/printers/cc-printers-panel.c:240
 msgid "Out of a marker supply"
 msgstr "Sin marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:237
+#: ../panels/printers/cc-printers-panel.c:242
 msgid "Open cover"
 msgstr "Abrir cubierta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:239
+#: ../panels/printers/cc-printers-panel.c:244
 msgid "Open door"
 msgstr "Abrir puerta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:241
+#: ../panels/printers/cc-printers-panel.c:246
 msgid "Low on paper"
 msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:243
+#: ../panels/printers/cc-printers-panel.c:248
 msgid "Out of paper"
 msgstr "Sin papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:245
-#| msgid "Offline"
+#: ../panels/printers/cc-printers-panel.c:250
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:247
-#| msgid "Paused"
+#: ../panels/printers/cc-printers-panel.c:252
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Pausada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:249
+#: ../panels/printers/cc-printers-panel.c:254
 msgid "Waste receptacle almost full"
 msgstr "Recipiente de residuos casi lleno"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:251
+#: ../panels/printers/cc-printers-panel.c:256
 msgid "Waste receptacle full"
 msgstr "Receptáculo de residuos lleno"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:253
+#: ../panels/printers/cc-printers-panel.c:258
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor óptico está cerca del final de su vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:255
+#: ../panels/printers/cc-printers-panel.c:260
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor óptico ya no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:347
-#| msgid "Red"
+#: ../panels/printers/cc-printers-panel.c:352
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Preparada"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:351
-#| msgid "Processing"
+#: ../panels/printers/cc-printers-panel.c:356
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:355
-#| msgid "Stopped"
+#: ../panels/printers/cc-printers-panel.c:360
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detenida"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:453
+#: ../panels/printers/cc-printers-panel.c:458
 msgid "Toner Level"
 msgstr "Nivel de tóner"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:456
-#| msgid "Input level:"
+#: ../panels/printers/cc-printers-panel.c:461
 msgid "Ink Level"
 msgstr "Nivel de tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:459
-#| msgid "Supply"
+#: ../panels/printers/cc-printers-panel.c:464
 msgid "Supply Level"
 msgstr "Nivel del suministro"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:474
+#: ../panels/printers/cc-printers-panel.c:479
 #, c-format
-#| msgid "%d active"
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u activo"
 msgstr[1] "%u activos"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:891
-#| msgid "Pending"
+#: ../panels/printers/cc-printers-panel.c:940
 msgctxt "print job"
 msgid "Pending"
 msgstr "Pendiente"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:895
-#| msgid "Held"
+#: ../panels/printers/cc-printers-panel.c:944
 msgctxt "print job"
 msgid "Held"
 msgstr "Retenido"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:899
-#| msgid "Processing"
+#: ../panels/printers/cc-printers-panel.c:948
 msgctxt "print job"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:903
-#| msgid "Stopped"
+#: ../panels/printers/cc-printers-panel.c:952
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Detenido"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:907
-#| msgid "Canceled"
+#: ../panels/printers/cc-printers-panel.c:956
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Cancelado"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:911
-#| msgid "Aborted"
+#: ../panels/printers/cc-printers-panel.c:960
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abortado"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:915
-#| msgid "Completed"
+#: ../panels/printers/cc-printers-panel.c:964
 msgctxt "print job"
 msgid "Completed"
 msgstr "Completado"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1010
+#: ../panels/printers/cc-printers-panel.c:1056
 msgid "Job Title"
 msgstr "Título del trabajo"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1018
+#: ../panels/printers/cc-printers-panel.c:1065
 msgid "Job State"
 msgstr "Estado del trabajo"
 
-#. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:1024
-msgid "User"
-msgstr "Usuario"
-
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1030
+#: ../panels/printers/cc-printers-panel.c:1071
 msgid "Time"
 msgstr "Hora"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1220
+#: ../panels/printers/cc-printers-panel.c:1261
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "No se pudo conectar con el bus del sistema: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1930
+#: ../panels/printers/cc-printers-panel.c:1971
 msgid "Test page"
 msgstr "Página de prueba"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1938
+#: ../panels/printers/cc-printers-panel.c:1979
 msgid "Clean print heads"
 msgstr "Limpiar cabezales de la impresora"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1943
+#: ../panels/printers/cc-printers-panel.c:1984
 msgid "An error has occured during a maintenance command."
 msgstr "Ocurrió un error durante un comando de mantenimiento."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2069
+#: ../panels/printers/cc-printers-panel.c:2110
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -1264,7 +1329,6 @@ msgid "Active Print Jobs"
 msgstr "Trabajos de impresión activos"
 
 #: ../panels/printers/printers.ui.h:4
-#| msgid "<b>Allowed users</b>"
 msgid "Allowed users"
 msgstr "Usuarios permitidos"
 
@@ -1272,13 +1336,6 @@ msgstr "Usuarios permitidos"
 #: ../panels/printers/printers.ui.h:6
 msgid "Back"
 msgstr "Atrás"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:8
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:581
-msgid "Default"
-msgstr "Predeterminado"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
@@ -1335,7 +1392,6 @@ msgid "Supply"
 msgstr "Suministro"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
-#| msgid "_Separate layout for each window"
 msgid "Allow different layouts for each window"
 msgstr "Permitir diferentes distribuciones para cada ventana"
 
@@ -1373,7 +1429,6 @@ msgid "Select a display language"
 msgstr "Seleccionar el idioma que mostrar"
 
 #: ../panels/region/gnome-region-panel.ui.h:10
-#| msgid "_Separate layout for each window"
 msgid "Use default layout in new windows"
 msgstr "Usar la distribución predeterminada en las ventanas nuevas"
 
@@ -1382,7 +1437,6 @@ msgid "Use previous window's layout in new windows"
 msgstr "Usar la distribución de la ventana anterior en las ventanas nuevas"
 
 #: ../panels/region/gnome-region-panel.ui.h:12
-#| msgid "_Separate layout for each window"
 msgid "Use same layout in all windows"
 msgstr "Usar la misma distribución en todas las ventanas"
 
@@ -1562,82 +1616,85 @@ msgstr "Configurar los ajustes del proxy del sistema"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
 #: ../panels/network/nm-device.c:117 ../panels/network/nm-access-point.c:65
+#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
 msgid "Unknown"
 msgstr "Desconocido"
 
 #. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:121
+#: ../panels/network/nm-device.c:121 ../panels/network/panel-common.c:69
 msgid "Wired"
 msgstr "Cableada"
 
 #. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:125
+#: ../panels/network/nm-device.c:125 ../panels/network/panel-common.c:73
 msgid "Wireless"
 msgstr "Inalámbrica"
 
 #. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:130
+#: ../panels/network/nm-device.c:130 ../panels/network/panel-common.c:78
 msgid "Mobile broadband"
 msgstr "Banda ancha móvil"
 
 #. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:134
+#: ../panels/network/nm-device.c:134 ../panels/network/panel-common.c:82
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:138
+#: ../panels/network/nm-device.c:138 ../panels/network/panel-common.c:86
 msgid "Mesh"
 msgstr "Malla"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:190
+#: ../panels/network/nm-device.c:190 ../panels/network/panel-common.c:164
 msgid "Status unknown"
 msgstr "Estado desconocido"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:194
+#: ../panels/network/nm-device.c:194 ../panels/network/panel-common.c:168
 msgid "Unmanaged"
 msgstr "Sin gestionar"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:198
+#: ../panels/network/nm-device.c:198 ../panels/network/panel-common.c:172
 msgid "Unavailable"
 msgstr "No disponible"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:202
+#: ../panels/network/nm-device.c:202 ../panels/network/panel-common.c:176
 msgid "Disconnected"
 msgstr "Desconectada"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:206
+#: ../panels/network/nm-device.c:206 ../panels/network/panel-common.c:180
 msgid "Preparing connection"
 msgstr "Preparando la conexión"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:210
+#: ../panels/network/nm-device.c:210 ../panels/network/panel-common.c:184
 msgid "Configuring connection"
 msgstr "Configurando la conexión"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:214
+#: ../panels/network/nm-device.c:214 ../panels/network/panel-common.c:188
 msgid "Authenticating"
 msgstr "Autenticando"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:218
+#: ../panels/network/nm-device.c:218 ../panels/network/panel-common.c:192
 msgid "Getting network address"
 msgstr "Obteniendo dirección de red"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:222
+#: ../panels/network/nm-device.c:222 ../panels/network/panel-common.c:196
 msgid "Connected"
 msgstr "Conectado"
 
 #. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:226
+#: ../panels/network/nm-device.c:226 ../panels/network/panel-common.c:200
 msgid "Failed to connect"
 msgstr "Falló al conectar"
 
@@ -1657,12 +1714,12 @@ msgid "%i Gb/s"
 msgstr "%i Gb/s"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/nm-access-point.c:69
+#: ../panels/network/nm-access-point.c:69 ../panels/network/panel-common.c:142
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/nm-access-point.c:73
+#: ../panels/network/nm-access-point.c:73 ../panels/network/panel-common.c:146
 msgid "Infrastructure"
 msgstr "Infraestructura"
 
@@ -2897,11 +2954,6 @@ msgstr "Contraseña errónea"
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../panels/user-accounts/um-photo-dialog.c:216
-#: ../panels/user-accounts/data/photo-dialog.ui.h:2
-msgid "Browse for more pictures"
-msgstr "Examinar para buscar más imágenes"
-
 #: ../panels/user-accounts/um-photo-dialog.c:429
 msgid "Disable image"
 msgstr "Desactivar imagen"
@@ -3296,6 +3348,12 @@ msgstr "Centro de control"
 msgid "_All Settings"
 msgstr "_Todas las configuraciones"
 
+#~ msgid "More Info"
+#~ msgstr "Más información"
+
+#~ msgid "User"
+#~ msgstr "Usuario"
+
 #~ msgid "Idle"
 #~ msgstr "Inactiva"
 
@@ -3682,9 +3740,6 @@ msgstr "_Todas las configuraciones"
 #~ msgid "Orange"
 #~ msgstr "Naranja"
 
-#~ msgid "Chocolate"
-#~ msgstr "Chocolate"
-
 #~ msgid "Chameleon"
 #~ msgstr "Camaleón"
 
@@ -3921,9 +3976,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "Icedove"
 #~ msgstr "Icedove"
-
-#~ msgid "KMail"
-#~ msgstr "KMail"
 
 #~ msgid "Konqueror"
 #~ msgstr "Konqueror"
@@ -4705,9 +4757,6 @@ msgstr "_Todas las configuraciones"
 #~ msgid "C_ompany:"
 #~ msgstr "C_ompañía:"
 
-#~ msgid "Cale_ndar:"
-#~ msgstr "Cale_ndario:"
-
 #~ msgid "Change Passwo_rd..."
 #~ msgstr "Cambiar _contraseña…"
 
@@ -4764,9 +4813,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "User name:"
 #~ msgstr "Usuario:"
-
-#~ msgid "Web"
-#~ msgstr "Web"
 
 #~ msgid "Web _log:"
 #~ msgstr "_Diario web:"
@@ -5419,9 +5465,6 @@ msgstr "_Todas las configuraciones"
 #~ msgstr ""
 #~ "Especifique el nombre de la página para mostrar (internet|multimedia|"
 #~ "system|a11y)"
-
-#~ msgid "- GNOME Default Applications"
-#~ msgstr "- Aplicaciones predeterminadas de GNOME"
 
 #~ msgid ""
 #~ "Just apply settings and quit (compatibility only; now handled by daemon)"
