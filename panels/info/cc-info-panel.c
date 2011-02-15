@@ -764,22 +764,22 @@ info_panel_setup_default_apps (CcInfoPanel  *self)
   table = WID (self->priv->builder, "default_apps_table");
 
   button = gtk_app_chooser_button_new ("text/html");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 0, 1, 0, 0, 0, 0);
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0);
 
   button = gtk_app_chooser_button_new ("x-scheme-handler/mailto");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 1, 2, 0, 0, 0, 0);
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 1, 2, GTK_FILL, 0, 0, 0);
 
   button = gtk_app_chooser_button_new ("text/calendar");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 2, 3, 0, 0, 0, 0);
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 2, 3, GTK_FILL, 0, 0, 0);
 
   button = gtk_app_chooser_button_new ("x-scheme-handler/xmpp");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 3, 4, 0, 0, 0, 0);
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 3, 4, GTK_FILL, 0, 0, 0);
 
   button = gtk_app_chooser_button_new ("audio/x-vorbis+ogg");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 4, 5, 0, 0, 0, 0);
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 4, 5, GTK_FILL, 0, 0, 0);
 
   button = gtk_app_chooser_button_new ("video/x-ogm+ogg");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 5, 6, 0, 0, 0, 0);
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 5, 6, GTK_FILL, 0, 0, 0);
 
   gtk_widget_show_all (table);
 }
