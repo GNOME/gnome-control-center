@@ -619,6 +619,7 @@ get_cpu_info (const glibtop_sysinfo *info)
 {
   GHashTable    *counts;
   GString       *cpu;
+  char          *ret;
   GHashTableIter iter;
   gpointer       key, value;
   int            i;
@@ -669,7 +670,10 @@ get_cpu_info (const glibtop_sysinfo *info)
 
   g_hash_table_destroy (counts);
 
-  return g_string_free (cpu, FALSE);
+  ret = prettify_info (cpu->str);
+  g_string_free (cpu, TRUE);
+
+  return ret;
 }
 
 static void
