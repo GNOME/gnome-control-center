@@ -50,6 +50,7 @@ struct _CcInfoPanelPrivate
   char          *gnome_distributor;
   char          *gnome_date;
   gboolean       updates_available;
+  gboolean       is_fallback;
 
   GDBusConnection     *session_bus;
   GDBusProxy    *pk_proxy;
@@ -404,20 +405,6 @@ get_current_is_fallback (CcInfoPanel  *self)
   return is_fallback;
 }
 
-static char *
-get_graphics_experience (CcInfoPanel  *self)
-{
-  char *experience_str;
-
-  if (get_current_is_fallback (self))
-    experience_str = g_strdup (_("Fallback"));
-  else
-    experience_str = g_strdup (_("Standard"));
-
-  return experience_str;
-}
-
-
 static void
 cc_info_panel_get_property (GObject    *object,
                             guint       property_id,
@@ -736,9 +723,24 @@ switch_fallback_get_mapping (GValue    *value,
                              GVariant  *variant,
                              gpointer   data)
 {
-  const char *setting = g_variant_get_string (variant, NULL);
+  const char *setting;
+
+  setting = g_variant_get_string (variant, NULL);
   g_value_set_boolean (value, strcmp (setting, "gnome") != 0);
   return TRUE;
+}
+
+static void
+toggle_fallback_warning_label (CcInfoPanel *self,
+                               gboolean     visible)
+{
+  GtkWidget *widget;
+
+  widget = WID (self->priv->builder, "graphics_logout_warning_label");
+  if (visible)
+    gtk_widget_show (widget);
+  else
+    gtk_widget_hide (widget);
 }
 
 static GVariant *
@@ -746,7 +748,15 @@ switch_fallback_set_mapping (const GValue        *value,
                              const GVariantType  *expected_type,
                              gpointer             data)
 {
-  gboolean is_set = g_value_get_boolean (value);
+  CcInfoPanel *self = data;
+  gboolean     is_set;
+
+  is_set = g_value_get_boolean (value);
+  if (is_set != self->priv->is_fallback)
+    toggle_fallback_warning_label (self, TRUE);
+  else
+    toggle_fallback_warning_label (self, FALSE);
+
   return g_variant_new_string (is_set ? "gnome-fallback" : "gnome");
 }
 
@@ -767,7 +777,11 @@ info_panel_setup_graphics (CcInfoPanel  *self)
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
-  text = get_graphics_experience (self);
+  self->priv->is_fallback = get_current_is_fallback (self);
+  if (self->priv->is_fallback)
+    text = g_strdup (_("Fallback"));
+  else
+    text = g_strdup (_("Standard"));
   widget = WID (self->priv->builder, "graphics_experience_label");
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
