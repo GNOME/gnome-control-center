@@ -15,6 +15,10 @@ libnetwork_la_SOURCES =					\
 	network-module.c				\
 	panel-common.c					\
 	panel-common.h					\
+	nm-device.c					\
+	nm-device.h					\
+	nm-access-point.c				\
+	nm-access-point.h				\
 	panel-cell-renderer-mode.c			\
 	panel-cell-renderer-mode.h			\
 	panel-cell-renderer-signal.c			\
