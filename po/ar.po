@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 01:01+0200\n"
-"PO-Revision-Date: 2011-02-12 01:01+0300\n"
+"POT-Creation-Date: 2011-02-15 12:58+0200\n"
+"PO-Revision-Date: 2011-02-15 12:58+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -199,50 +199,56 @@ msgstr "مبلّطة"
 msgid "Zoom"
 msgstr "التقريب"
 
-#: ../panels/background/bg-colors-source.c:45
+#: ../panels/background/bg-colors-source.c:46
 msgid "Horizontal Gradient"
 msgstr "تدرج أفقي"
 
-#: ../panels/background/bg-colors-source.c:46
+#: ../panels/background/bg-colors-source.c:47
 msgid "Vertical Gradient"
 msgstr "تدرج رأسي"
 
-#: ../panels/background/bg-colors-source.c:47
+#: ../panels/background/bg-colors-source.c:48
 msgid "Solid Color"
 msgstr "لون سادة"
 
-#: ../panels/background/cc-background-panel.c:708
-msgid "Wallpapers"
-msgstr "خلفيات"
+#: ../panels/background/cc-background-panel.c:960
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "تصفّح لمزيد من الصور"
 
-#: ../panels/background/cc-background-panel.c:715
-msgid "Pictures Folder"
-msgstr "مجلّد صور"
-
-#: ../panels/background/cc-background-panel.c:722
-msgid "Colors & Gradients"
-msgstr "ألوان وتدرجات"
-
-#: ../panels/background/cc-background-panel.c:730
-msgid "Flickr"
-msgstr "فلِكَر"
-
-#: ../panels/background/cc-background-panel.c:793
+#: ../panels/background/cc-background-panel.c:1051
 msgid "Current background"
 msgstr "الخلفية الحالية"
 
-#: ../panels/background/cc-background-item.c:155
+#: ../panels/background/cc-background-panel.c:1115
+msgid "Wallpapers"
+msgstr "خلفيات"
+
+#: ../panels/background/cc-background-panel.c:1122
+msgid "Pictures Folder"
+msgstr "مجلّد صور"
+
+#: ../panels/background/cc-background-panel.c:1129
+msgid "Colors & Gradients"
+msgstr "ألوان وتدرجات"
+
+#: ../panels/background/cc-background-panel.c:1137
+msgid "Flickr"
+msgstr "فلِكَر"
+
+#: ../panels/background/cc-background-item.c:150
 msgid "multiple sizes"
 msgstr "مقاسات متعددة"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:159
+#: ../panels/background/cc-background-item.c:154
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:262
+#: ../panels/background/cc-background-item.c:257
 msgid "No Desktop Background"
 msgstr "لا خلفية لسطح المكتب"
 
@@ -522,14 +528,26 @@ msgstr "تعذّر اكتشاف أجهزة العرض"
 msgid "Could not get screen information"
 msgstr "تعذّرت معرفة معلومات الشاشة"
 
+#: ../panels/info/cc-info-panel.c:400
+#, fuzzy
+msgid "Fallback"
+msgstr "احتياط"
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/info/cc-info-panel.c:400 ../panels/printers/printers.ui.h:8
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
+msgid "Default"
+msgstr "المبدئي"
+
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:417
+#: ../panels/info/cc-info-panel.c:502
 #, c-format
 msgid "%d-bit"
 msgstr "%d بتة"
 
-#: ../panels/info/cc-info-panel.c:431
+#: ../panels/info/cc-info-panel.c:516
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
@@ -540,41 +558,59 @@ msgstr[3] "%u بايت"
 msgstr[4] "%u بايت"
 msgstr[5] "%u بايت"
 
-#: ../panels/info/cc-info-panel.c:439
+#: ../panels/info/cc-info-panel.c:524
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f ك.بايت"
 
-#: ../panels/info/cc-info-panel.c:444
+#: ../panels/info/cc-info-panel.c:529
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f م.بايت"
 
-#: ../panels/info/cc-info-panel.c:449
+#: ../panels/info/cc-info-panel.c:534
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f ج.بايت"
 
-#: ../panels/info/cc-info-panel.c:454
+#: ../panels/info/cc-info-panel.c:539
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f ت.بايت"
 
-#: ../panels/info/cc-info-panel.c:459
+#: ../panels/info/cc-info-panel.c:544
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f ب.بايت"
 
-#: ../panels/info/cc-info-panel.c:464
+#: ../panels/info/cc-info-panel.c:549
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f إ.بايت"
 
-#: ../panels/info/cc-info-panel.c:574
+#: ../panels/info/cc-info-panel.c:660
 msgid "Unknown model"
 msgstr "طِراز مجهول"
 
-#: ../panels/info/cc-info-panel.c:637
+#: ../panels/info/cc-info-panel.c:827
+#: ../panels/keyboard/keyboard-shortcuts.c:1907
+msgid "Section"
+msgstr "القسم"
+
+#: ../panels/info/cc-info-panel.c:836 ../panels/info/info.ui.h:16
+#, fuzzy
+msgid "Overview"
+msgstr "ملخّص"
+
+#: ../panels/info/cc-info-panel.c:842 ../panels/info/info.ui.h:5
+msgid "Default Applications"
+msgstr "التطبيقات المبدئية"
+
+#: ../panels/info/cc-info-panel.c:847 ../panels/info/info.ui.h:10
+msgid "Graphics"
+msgstr "الرسوميات"
+
+#: ../panels/info/cc-info-panel.c:872
 #, c-format
 msgid "Version %s"
 msgstr "الإصدارة %s"
@@ -593,37 +629,76 @@ msgid "device;system;information;memory;processor;version;"
 msgstr "جهاز;نظام;معلومات;ذاكرة;معالج;إصدارة;"
 
 #: ../panels/info/info.ui.h:1
+msgid "Always use fallback:"
+msgstr ""
+
+#: ../panels/info/info.ui.h:2
+msgid "Calendar"
+msgstr "التقويم"
+
+#: ../panels/info/info.ui.h:3
+msgid "Chat"
+msgstr "الدردشة"
+
+#: ../panels/info/info.ui.h:4
+msgid "Chipset:"
+msgstr "الشريحة:"
+
+#: ../panels/info/info.ui.h:6
 msgid "Device name:"
 msgstr "اسم الجهاز:"
 
-#: ../panels/info/info.ui.h:2
+#: ../panels/info/info.ui.h:7
 msgid "Disk:"
 msgstr "القرص:"
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:8
+msgid "Driver:"
+msgstr "المُشغّل:"
+
+#: ../panels/info/info.ui.h:9
+msgid "Experience:"
+msgstr ""
+
+#: ../panels/info/info.ui.h:11
 msgid "Graphics:"
 msgstr "الرسوميات:"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:12
+msgid "Mail"
+msgstr "البريد"
+
+#: ../panels/info/info.ui.h:13
 msgid "Memory:"
 msgstr "الذاكرة:"
 
-#: ../panels/info/info.ui.h:5
-msgid "More Info"
-msgstr "المزيد من المعلومات"
+#: ../panels/info/info.ui.h:14
+msgid "Music"
+msgstr "الصوتيات"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:15
 msgid "OS type:"
 msgstr "نوع نظام التشغيل:"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:17
+msgid "Photos"
+msgstr "الصور"
+
+#: ../panels/info/info.ui.h:18
 msgid "Processor:"
 msgstr "المعالج:"
 
-#: ../panels/info/info.ui.h:8
-#, fuzzy
-msgid "Update Available"
-msgstr "يوجد تحديث"
+#: ../panels/info/info.ui.h:19
+msgid "Updates Available"
+msgstr "يوجد تحديثات"
+
+#: ../panels/info/info.ui.h:20
+msgid "Video"
+msgstr "الفيديو"
+
+#: ../panels/info/info.ui.h:21
+msgid "Web"
+msgstr "الوب"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Sound and Media"
@@ -740,10 +815,6 @@ msgstr "خطأ عند إلغاء ضبط مفتاح الاختصار في قاع�
 #: ../panels/keyboard/keyboard-shortcuts.c:1626
 msgid "Too many custom shortcuts"
 msgstr "الكثير من الاختصارات المخصصة"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1907
-msgid "Section"
-msgstr "القسم"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1956
 msgid "Action"
@@ -989,124 +1060,124 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "اسطوانة;قرص;صوت;صورة;فديو;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:224
+#: ../panels/printers/cc-printers-panel.c:228
 msgid "Low on toner"
 msgstr "الحبر قليل"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:226
+#: ../panels/printers/cc-printers-panel.c:230
 msgid "Out of toner"
 msgstr "نفد الحبر"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:229
+#: ../panels/printers/cc-printers-panel.c:233
 msgid "Low on developer"
 msgstr "المُحمِّض قليل"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:232
+#: ../panels/printers/cc-printers-panel.c:236
 msgid "Out of developer"
 msgstr "نفد المُحمِّض"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:234
+#: ../panels/printers/cc-printers-panel.c:238
 msgid "Low on a marker supply"
 msgstr "اللون قليل"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:236
+#: ../panels/printers/cc-printers-panel.c:240
 msgid "Out of a marker supply"
 msgstr "نفد اللون"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:238
+#: ../panels/printers/cc-printers-panel.c:242
 msgid "Open cover"
 msgstr "الغطاء مفتوح"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:240
+#: ../panels/printers/cc-printers-panel.c:244
 msgid "Open door"
 msgstr "الباب مفنوح"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:242
+#: ../panels/printers/cc-printers-panel.c:246
 msgid "Low on paper"
 msgstr "الورق قليل"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:244
+#: ../panels/printers/cc-printers-panel.c:248
 msgid "Out of paper"
 msgstr "نفد الورق"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:246
+#: ../panels/printers/cc-printers-panel.c:250
 msgctxt "printer state"
 msgid "Offline"
 msgstr "غير متصلة"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:248
+#: ../panels/printers/cc-printers-panel.c:252
 msgctxt "printer state"
 msgid "Paused"
 msgstr "مُلبثة"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:250
+#: ../panels/printers/cc-printers-panel.c:254
 msgid "Waste receptacle almost full"
 msgstr "حاوية النفايات على وشك الامتلاء"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:252
+#: ../panels/printers/cc-printers-panel.c:256
 msgid "Waste receptacle full"
 msgstr "حاوية النفايات ممتلئة"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:254
+#: ../panels/printers/cc-printers-panel.c:258
 msgid "The optical photo conductor is near end of life"
 msgstr "قاربت صلاحية المقاوم الضوئي على الانتهاء"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:256
+#: ../panels/printers/cc-printers-panel.c:260
 msgid "The optical photo conductor is no longer functioning"
 msgstr "لم يعد المقاوم الضوئي يعمل"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:348
+#: ../panels/printers/cc-printers-panel.c:352
 msgctxt "printer state"
 msgid "Ready"
 msgstr "جاهزة"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:352
+#: ../panels/printers/cc-printers-panel.c:356
 msgctxt "printer state"
 msgid "Processing"
 msgstr "تُعالِج"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:356
+#: ../panels/printers/cc-printers-panel.c:360
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "متوقفة"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:454
+#: ../panels/printers/cc-printers-panel.c:458
 msgid "Toner Level"
 msgstr "مستوى الحبر"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:457
+#: ../panels/printers/cc-printers-panel.c:461
 msgid "Ink Level"
 msgstr "مستوى الحبر"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:460
+#: ../panels/printers/cc-printers-panel.c:464
 msgid "Supply Level"
 msgstr "مستوى المداد"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:475
+#: ../panels/printers/cc-printers-panel.c:479
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1118,90 +1189,85 @@ msgstr[4] "%u نشطة"
 msgstr[5] "%u نشطة"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:910
+#: ../panels/printers/cc-printers-panel.c:940
 msgctxt "print job"
 msgid "Pending"
 msgstr "منتظرة"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:914
+#: ../panels/printers/cc-printers-panel.c:944
 msgctxt "print job"
 msgid "Held"
 msgstr "مُعلَّقة"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:918
+#: ../panels/printers/cc-printers-panel.c:948
 msgctxt "print job"
 msgid "Processing"
 msgstr "تُعالَج"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:922
+#: ../panels/printers/cc-printers-panel.c:952
 msgctxt "print job"
 msgid "Stopped"
 msgstr "متوقفة"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:926
+#: ../panels/printers/cc-printers-panel.c:956
 msgctxt "print job"
 msgid "Canceled"
 msgstr "ملغاة"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:930
+#: ../panels/printers/cc-printers-panel.c:960
 msgctxt "print job"
 msgid "Aborted"
 msgstr "مُجهضَة"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:934
+#: ../panels/printers/cc-printers-panel.c:964
 msgctxt "print job"
 msgid "Completed"
 msgstr "مُنجزَة"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1029
+#: ../panels/printers/cc-printers-panel.c:1056
 msgid "Job Title"
 msgstr "عنوان المهمة"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1037
+#: ../panels/printers/cc-printers-panel.c:1065
 msgid "Job State"
 msgstr "حالة المهمة"
 
-#. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:1043
-msgid "User"
-msgstr "المستخدم"
-
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1049
+#: ../panels/printers/cc-printers-panel.c:1071
 msgid "Time"
 msgstr "الوقت"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1239
+#: ../panels/printers/cc-printers-panel.c:1261
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "تعذّر الاتصال بناقل النظام: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:1971
 msgid "Test page"
 msgstr "صفحة اختبار"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1957
+#: ../panels/printers/cc-printers-panel.c:1979
 msgid "Clean print heads"
 msgstr "نظف رؤوس الطباعة"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1962
+#: ../panels/printers/cc-printers-panel.c:1984
 msgid "An error has occured during a maintenance command."
 msgstr "حدث عطل أثناء تنفيذ أمر الصيانة."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2088
+#: ../panels/printers/cc-printers-panel.c:2110
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "تعذّر تحميل الواجهة: %s"
@@ -1236,13 +1302,6 @@ msgstr "المستخدمين المسموح لهم"
 #: ../panels/printers/printers.ui.h:6
 msgid "Back"
 msgstr "إلى الخلف"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:8
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:581
-msgid "Default"
-msgstr "المبدئي"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
@@ -2860,11 +2919,6 @@ msgstr "كلمة السر خطأ"
 msgid "Select"
 msgstr "اختر"
 
-#: ../panels/user-accounts/um-photo-dialog.c:216
-#: ../panels/user-accounts/data/photo-dialog.ui.h:2
-msgid "Browse for more pictures"
-msgstr "تصفّح لمزيد من الصور"
-
 #: ../panels/user-accounts/um-photo-dialog.c:429
 msgid "Disable image"
 msgstr "عطّل الصورة"
@@ -3265,6 +3319,12 @@ msgstr "مركز التحكّم"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_كل الإعدادات"
+
+#~ msgid "More Info"
+#~ msgstr "المزيد من المعلومات"
+
+#~ msgid "User"
+#~ msgstr "المستخدم"
 
 #~ msgctxt "printer state"
 #~ msgid "Idle"
