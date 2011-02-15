@@ -371,14 +371,15 @@ get_is_graphics_accelerated (void)
 
 }
 
-static char *
-get_graphics_experience (CcInfoPanel  *self)
+static gboolean
+get_current_is_fallback (CcInfoPanel  *self)
 {
-  GError *error = NULL;
-  GVariant *reply, *reply_bool;
-  gboolean is_fallback;
-  gchar *experience_str;
+  GError   *error;
+  GVariant *reply;
+  GVariant *reply_bool;
+  gboolean  is_fallback;
 
+  error = NULL;
   if (!(reply = g_dbus_connection_call_sync (self->priv->session_bus,
                                              "org.gnome.SessionManager",
                                              "/org/gnome/SessionManager",
@@ -392,14 +393,26 @@ get_graphics_experience (CcInfoPanel  *self)
     {
       g_warning ("Failed to get fallback mode: %s", error->message);
       g_clear_error (&error);
-      return NULL;
+      return FALSE;
     }
 
   g_variant_get (reply, "(v)", &reply_bool);
   is_fallback = g_variant_get_boolean (reply_bool);
-  experience_str = g_strdup (is_fallback ? _("Fallback") : _("Default"));
   g_variant_unref (reply_bool);
   g_variant_unref (reply);
+
+  return is_fallback;
+}
+
+static char *
+get_graphics_experience (CcInfoPanel  *self)
+{
+  char *experience_str;
+
+  if (get_current_is_fallback (self))
+    experience_str = g_strdup (_("Fallback"));
+  else
+    experience_str = g_strdup (_("Standard"));
 
   return experience_str;
 }
