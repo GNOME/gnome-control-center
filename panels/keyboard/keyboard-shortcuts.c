@@ -617,10 +617,7 @@ parse_start_tag (GMarkupParseContext *ctx,
   key.name = g_strdup (name);
   key.description_name = NULL;
   key.value = value;
-  if (gconf_key)
-    key.key = g_strdup (gconf_key);
-  else
-    key.key = NULL;
+  key.key = g_strdup (gconf_key);
   key.comparison = comparison;
   key.cmd_name = NULL;
   g_array_append_val (keylist->entries, key);
