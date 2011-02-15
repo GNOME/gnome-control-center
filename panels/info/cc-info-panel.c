@@ -752,6 +752,35 @@ info_panel_setup_graphics (CcInfoPanel  *self)
 }
 
 static void
+info_panel_setup_default_apps (CcInfoPanel  *self)
+{
+  GtkWidget *table;
+  GtkWidget *button;
+
+  table = WID (self->priv->builder, "default_apps_table");
+
+  button = gtk_app_chooser_button_new ("text/html");
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 0, 1, 0, 0, 0, 0);
+
+  button = gtk_app_chooser_button_new ("x-scheme-handler/mailto");
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 1, 2, 0, 0, 0, 0);
+
+  button = gtk_app_chooser_button_new ("text/calendar");
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 2, 3, 0, 0, 0, 0);
+
+  button = gtk_app_chooser_button_new ("x-scheme-handler/xmpp");
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 3, 4, 0, 0, 0, 0);
+
+  button = gtk_app_chooser_button_new ("audio/*");
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 4, 5, 0, 0, 0, 0);
+
+  button = gtk_app_chooser_button_new ("video/*");
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 5, 6, 0, 0, 0, 0);
+
+  gtk_widget_show_all (table);
+}
+
+static void
 info_panel_setup_selector (CcInfoPanel  *self)
 {
   GtkTreeView *view;
@@ -786,6 +815,11 @@ info_panel_setup_selector (CcInfoPanel  *self)
                       _("Overview"),
                       -1);
   gtk_tree_selection_select_iter (selection, &iter);
+
+  gtk_list_store_append (model, &iter);
+  gtk_list_store_set (model, &iter, section_name_column,
+                      _("Default Applications"),
+                      -1);
 
   gtk_list_store_append (model, &iter);
   gtk_list_store_set (model, &iter, section_name_column,
@@ -878,6 +912,7 @@ cc_info_panel_init (CcInfoPanel *self)
 
   info_panel_setup_selector (self);
   info_panel_setup_overview (self);
+  info_panel_setup_default_apps (self);
   info_panel_setup_graphics (self);
 }
 
