@@ -385,7 +385,7 @@ get_graphics_experience (CcInfoPanel  *self)
                                              "org.freedesktop.DBus.Properties",
                                              "Get",
                                              g_variant_new ("(ss)", "org.gnome.SessionManager", "fallback"),
-                                             (GVariantType*)"v",
+                                             (GVariantType*)"(v)",
                                              0,
                                              -1,
                                              NULL, &error)))
@@ -395,7 +395,7 @@ get_graphics_experience (CcInfoPanel  *self)
       return NULL;
     }
 
-  g_variant_get (reply, "v", &reply_bool);
+  g_variant_get (reply, "(v)", &reply_bool);
   is_fallback = g_variant_get_boolean (reply_bool);
   experience_str = g_strdup (is_fallback ? _("Fallback") : _("Default"));
   g_variant_unref (reply_bool);
