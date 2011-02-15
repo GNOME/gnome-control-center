@@ -49,9 +49,11 @@ struct _CcInfoPanelPrivate
   char          *gnome_version;
   char          *gnome_distributor;
   char          *gnome_date;
+  gboolean       updates_available;
 
   GDBusConnection     *session_bus;
-  GDBusProxy    *session_manager_proxy;
+  GDBusProxy    *pk_proxy;
+  GDBusProxy    *pk_transaction_proxy;
   GSettings     *session_settings;
 };
 
@@ -438,6 +440,18 @@ cc_info_panel_dispose (GObject *object)
     {
       g_object_unref (priv->builder);
       priv->builder = NULL;
+    }
+
+  if (priv->pk_proxy != NULL)
+    {
+      g_object_unref (priv->pk_proxy);
+      priv->pk_proxy = NULL;
+    }
+
+  if (priv->pk_transaction_proxy != NULL)
+    {
+      g_object_unref (priv->pk_transaction_proxy);
+      priv->pk_transaction_proxy = NULL;
     }
 
   G_OBJECT_CLASS (cc_info_panel_parent_class)->dispose (object);
@@ -893,9 +907,157 @@ info_panel_setup_overview (CcInfoPanel  *self)
 }
 
 static void
+refresh_update_button (CcInfoPanel  *self)
+{
+  GtkWidget *widget;
+
+  widget = WID (self->priv->builder, "updates_button");
+  if (self->priv->updates_available)
+    gtk_widget_show (widget);
+  else
+    gtk_widget_hide (widget);
+}
+
+static void
+on_pk_transaction_signal (GDBusProxy *proxy,
+                          char *sender_name,
+                          char *signal_name,
+                          GVariant *parameters,
+                          CcInfoPanel *self)
+{
+  if (g_strcmp0 (signal_name, "Package") == 0)
+    {
+      self->priv->updates_available = TRUE;
+    }
+  else if (g_strcmp0 (signal_name, "Finished") == 0)
+    {
+      refresh_update_button (self);
+    }
+  else if (g_strcmp0 (signal_name, "Destroy") == 0)
+    {
+      g_object_unref (self->priv->pk_transaction_proxy);
+      self->priv->pk_transaction_proxy = NULL;
+    }
+}
+
+static void
+on_pk_get_updates_ready (GObject      *source,
+                         GAsyncResult *res,
+                         CcInfoPanel  *self)
+{
+  GError     *error;
+  GVariant   *result;
+
+  error = NULL;
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
+  if (result == NULL)
+    {
+      g_warning ("Error getting PackageKit updates list: %s", error->message);
+      g_error_free (error);
+      return;
+    }
+}
+
+static void
+on_pk_get_tid_ready (GObject      *source,
+                     GAsyncResult *res,
+                     CcInfoPanel  *self)
+{
+  GError     *error;
+  GVariant   *result;
+  char       *tid;
+
+  error = NULL;
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
+  if (result == NULL)
+    {
+      g_warning ("Error getting PackageKit transaction ID: %s", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  g_variant_get (result, "(s)", &tid);
+
+  self->priv->pk_transaction_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                                    G_DBUS_PROXY_FLAGS_NONE,
+                                                                    NULL,
+                                                                    "org.freedesktop.PackageKit",
+                                                                    tid,
+                                                                    "org.freedesktop.PackageKit.Transaction",
+                                                                    NULL,
+                                                                    NULL);
+  g_free (tid);
+  g_variant_unref (result);
+
+  if (self->priv->pk_transaction_proxy == NULL)
+    {
+      g_warning ("Unable to get PackageKit transaction proxy object");
+      return;
+    }
+
+  g_signal_connect (self->priv->pk_transaction_proxy,
+                    "g-signal",
+                    G_CALLBACK (on_pk_transaction_signal),
+                    self);
+
+  g_dbus_proxy_call (self->priv->pk_transaction_proxy,
+                     "GetUpdates",
+                     g_variant_new ("(s)", "none"),
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
+                     NULL,
+                     (GAsyncReadyCallback) on_pk_get_updates_ready,
+                     self);
+}
+
+static void
+refresh_updates (CcInfoPanel *self)
+{
+  self->priv->updates_available = FALSE;
+
+  g_assert (self->priv->pk_proxy != NULL);
+  g_dbus_proxy_call (self->priv->pk_proxy,
+                     "GetTid",
+                     NULL,
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
+                     NULL,
+                     (GAsyncReadyCallback) on_pk_get_tid_ready,
+                     self);
+}
+
+static void
+on_pk_signal (GDBusProxy *proxy,
+              char *sender_name,
+              char *signal_name,
+              GVariant *parameters,
+              CcInfoPanel *self)
+{
+  if (g_strcmp0 (signal_name, "UpdatesChanged") == 0)
+    {
+      refresh_updates (self);
+    }
+}
+
+static void
+on_updates_button_clicked (GtkWidget   *widget,
+                           CcInfoPanel *self)
+{
+  GError *error;
+  error = NULL;
+  g_spawn_command_line_async ("gpk-update-viewer", &error);
+  if (error != NULL)
+    {
+      g_warning ("unable to launch Software Updates: %s", error->message);
+      g_error_free (error);
+    }
+}
+
+static void
 cc_info_panel_init (CcInfoPanel *self)
 {
   GError *error = NULL;
+  GtkWidget *widget;
 
   self->priv = INFO_PANEL_PRIVATE (self);
 
@@ -904,7 +1066,27 @@ cc_info_panel_init (CcInfoPanel *self)
   self->priv->session_settings = g_settings_new (GNOME_SESSION_MANAGER_SCHEMA);
 
   self->priv->session_bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+
   g_assert (self->priv->session_bus);
+
+  self->priv->pk_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                        G_DBUS_PROXY_FLAGS_NONE,
+                                                        NULL,
+                                                        "org.freedesktop.PackageKit",
+                                                        "/org/freedesktop/PackageKit",
+                                                        "org.freedesktop.PackageKit",
+                                                        NULL,
+                                                        NULL);
+  if (self->priv->pk_proxy == NULL)
+    g_warning ("Unable to get PackageKit proxy object");
+  else
+    {
+      g_signal_connect (self->priv->pk_proxy,
+                        "g-signal",
+                        G_CALLBACK (on_pk_signal),
+                        self);
+      refresh_updates (self);
+    }
 
   gtk_builder_add_from_file (self->priv->builder,
                              GNOMECC_UI_DIR "/info.ui",
@@ -916,6 +1098,9 @@ cc_info_panel_init (CcInfoPanel *self)
       g_error_free (error);
       return;
     }
+
+  widget = WID (self->priv->builder, "updates_button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (on_updates_button_clicked), self);
 
   info_panel_setup_selector (self);
   info_panel_setup_overview (self);
