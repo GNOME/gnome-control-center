@@ -763,7 +763,7 @@ info_panel_setup_default_apps (CcInfoPanel  *self)
 
   table = WID (self->priv->builder, "default_apps_table");
 
-  button = gtk_app_chooser_button_new ("text/html");
+  button = gtk_app_chooser_button_new ("x-scheme-handler/http");
   gtk_table_attach (GTK_TABLE (table), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0);
 
   button = gtk_app_chooser_button_new ("x-scheme-handler/mailto");
