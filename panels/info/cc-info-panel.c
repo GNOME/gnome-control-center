@@ -781,6 +781,9 @@ info_panel_setup_default_apps (CcInfoPanel  *self)
   button = gtk_app_chooser_button_new ("video/x-ogm+ogg");
   gtk_table_attach (GTK_TABLE (table), button, 1, 2, 5, 6, GTK_FILL, 0, 0, 0);
 
+  button = gtk_app_chooser_button_new ("image/jpeg");
+  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 6, 7, GTK_FILL, 0, 0, 0);
+
   gtk_widget_show_all (table);
 }
 
