@@ -58,13 +58,20 @@ typedef struct
   Comparison comparison;
 } KeyListEntry;
 
+typedef enum
+{
+  BINDING_GROUP_SYSTEM,
+  BINDING_GROUP_APPS,
+  BINDING_GROUP_USER,
+} BindingGroupType;
+
 typedef struct
 {
   char *gconf_key;
   guint keyval;
   guint keycode;
   EggVirtualModifierType mask;
-  int group;
+  BindingGroupType group;
   gboolean editable;
   GtkTreeModel *model;
   char *description;
@@ -77,13 +84,6 @@ typedef struct
   guint gconf_cnxn_desc;
   guint gconf_cnxn_cmd;
 } KeyEntry;
-
-enum
-{
-  BINDING_GROUP_SYSTEM,
-  BINDING_GROUP_APPS,
-  BINDING_GROUP_USER,
-};
 
 enum
 {
@@ -336,7 +336,7 @@ keybinding_command_changed (GConfClient *client,
 static void
 append_section (GtkBuilder         *builder,
                 const gchar        *title,
-                int                 group,
+                BindingGroupType    group,
                 const KeyListEntry *keys_list)
 {
   GPtrArray *keys_array;
@@ -439,7 +439,7 @@ append_section (GtkBuilder         *builder,
         {
           key_entry->desc_gconf_key =  g_strdup (keys_list[i].description_name);
           key_entry->desc_editable = gconf_client_key_is_writable (client, key_entry->desc_gconf_key, NULL);
-          key_entry->gconf_cnxn_desc = gconf_client_notify_add (client, 
+          key_entry->gconf_cnxn_desc = gconf_client_notify_add (client,
                                                                 key_entry->desc_gconf_key,
                                                                 (GConfClientNotifyFunc) &keybinding_description_changed,
                                                                 key_entry, NULL, NULL);
