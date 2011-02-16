@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu_to_be_translate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-10 22:53+0100\n"
-"PO-Revision-Date: 2011-02-10 23:00+0100\n"
+"POT-Creation-Date: 2011-02-16 21:06+0100\n"
+"PO-Revision-Date: 2011-02-16 21:15+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -205,50 +205,56 @@ msgstr "Lauza moduan"
 msgid "Zoom"
 msgstr "Zooma"
 
-#: ../panels/background/bg-colors-source.c:45
+#: ../panels/background/bg-colors-source.c:46
 msgid "Horizontal Gradient"
 msgstr "Gradiente horizontala"
 
-#: ../panels/background/bg-colors-source.c:46
+#: ../panels/background/bg-colors-source.c:47
 msgid "Vertical Gradient"
 msgstr "Gradiente bertikala"
 
-#: ../panels/background/bg-colors-source.c:47
+#: ../panels/background/bg-colors-source.c:48
 msgid "Solid Color"
 msgstr "Kolore lisoa"
 
-#: ../panels/background/cc-background-panel.c:764
-msgid "Wallpapers"
-msgstr "Horma-papera"
+#: ../panels/background/cc-background-panel.c:960
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "Arakatu irudi gehiago"
 
-#: ../panels/background/cc-background-panel.c:772
-msgid "Pictures Folder"
-msgstr "Irudiak karpeta"
-
-#: ../panels/background/cc-background-panel.c:780
-msgid "Colors & Gradients"
-msgstr "Koloreak eta gradienteak"
-
-#: ../panels/background/cc-background-panel.c:789
-msgid "Flickr"
-msgstr "Flickr"
-
-#: ../panels/background/cc-background-panel.c:843
+#: ../panels/background/cc-background-panel.c:1051
 msgid "Current background"
 msgstr "Uneko atzeko planoa"
 
-#: ../panels/background/cc-background-item.c:193
+#: ../panels/background/cc-background-panel.c:1115
+msgid "Wallpapers"
+msgstr "Horma-papera"
+
+#: ../panels/background/cc-background-panel.c:1122
+msgid "Pictures Folder"
+msgstr "Irudiak karpeta"
+
+#: ../panels/background/cc-background-panel.c:1129
+msgid "Colors & Gradients"
+msgstr "Koloreak eta gradienteak"
+
+#: ../panels/background/cc-background-panel.c:1137
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
 msgstr "hainbat tamaina"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:197
+#: ../panels/background/cc-background-item.c:152
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:296
+#: ../panels/background/cc-background-item.c:255
 msgid "No Desktop Background"
 msgstr "Mahaigaineko atzeko planorik ez"
 
@@ -533,46 +539,73 @@ msgstr "Ezin izan da pantailaren informazioa eskuratu"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:417
+#: ../panels/info/cc-info-panel.c:502
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:439
+#: ../panels/info/cc-info-panel.c:524
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f KB"
 
-#: ../panels/info/cc-info-panel.c:444
+#: ../panels/info/cc-info-panel.c:529
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MB"
 
-#: ../panels/info/cc-info-panel.c:449
+#: ../panels/info/cc-info-panel.c:534
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GB"
 
-#: ../panels/info/cc-info-panel.c:454
+#: ../panels/info/cc-info-panel.c:539
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:459
+#: ../panels/info/cc-info-panel.c:544
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PB"
 
-#: ../panels/info/cc-info-panel.c:464
+#: ../panels/info/cc-info-panel.c:549
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EB"
 
-#: ../panels/info/cc-info-panel.c:574
+#: ../panels/info/cc-info-panel.c:660
 msgid "Unknown model"
 msgstr "Modelo ezezaguna"
 
-#: ../panels/info/cc-info-panel.c:637
+#: ../panels/info/cc-info-panel.c:782
+msgid "Fallback"
+msgstr ""
+
+#: ../panels/info/cc-info-panel.c:784
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "Standard"
+msgstr "Arrunta"
+
+#: ../panels/info/cc-info-panel.c:854
+#: ../panels/keyboard/keyboard-shortcuts.c:1678
+msgid "Section"
+msgstr "Sekzioa"
+
+#: ../panels/info/cc-info-panel.c:863 ../panels/info/info.ui.h:16
+msgid "Overview"
+msgstr "Aurkezpen orokorra"
+
+#: ../panels/info/cc-info-panel.c:869 ../panels/info/info.ui.h:5
+msgid "Default Applications"
+msgstr "Aplikazio lehenetsiak"
+
+#: ../panels/info/cc-info-panel.c:874 ../panels/info/info.ui.h:10
+msgid "Graphics"
+msgstr "Grafikoak"
+
+#: ../panels/info/cc-info-panel.c:899
 #, c-format
 msgid "Version %s"
 msgstr "%s bertsioa"
@@ -591,48 +624,177 @@ msgid "device;system;information;memory;processor;version;"
 msgstr "gailua;sistema;informazioa;memoria;prozesadorea;bertsioa;"
 
 #: ../panels/info/info.ui.h:1
+msgid "Always use fallback:"
+msgstr ""
+
+#: ../panels/info/info.ui.h:2
+msgid "Calendar"
+msgstr "Egutegia"
+
+#: ../panels/info/info.ui.h:3
+msgid "Chat"
+msgstr "Berriketa"
+
+#: ../panels/info/info.ui.h:4
+msgid "Chipset:"
+msgstr "Txip-multzoa:"
+
+#: ../panels/info/info.ui.h:6
 msgid "Device name:"
 msgstr "Gailuaren izena:"
 
-#: ../panels/info/info.ui.h:2
+#: ../panels/info/info.ui.h:7
 msgid "Disk:"
 msgstr "Diskoa:"
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:8
+msgid "Driver:"
+msgstr "Kontrolatzailea:"
+
+#: ../panels/info/info.ui.h:9
+msgid "Experience:"
+msgstr "Esperientzia:"
+
+#: ../panels/info/info.ui.h:11
 msgid "Graphics:"
 msgstr "Grafikoak:"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:12
+msgid "Mail"
+msgstr "Posta"
+
+#: ../panels/info/info.ui.h:13
 msgid "Memory:"
 msgstr "Memoria:"
 
-#: ../panels/info/info.ui.h:5
-msgid "More Info"
-msgstr "Informazio gehiago"
+#: ../panels/info/info.ui.h:14
+msgid "Music"
+msgstr "Musika"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:15
 msgid "OS type:"
 msgstr "SE mota:"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:17
+msgid "Photos"
+msgstr "Argazkiak"
+
+#: ../panels/info/info.ui.h:18
 msgid "Processor:"
 msgstr "Prozesagailua:"
 
-#: ../panels/info/info.ui.h:8
-msgid "Update Available"
-msgstr "Eguneraketa erabilgarri"
+#: ../panels/info/info.ui.h:19
+msgid "Updates Available"
+msgstr "Eguneraketa eskuragarriak"
+
+#: ../panels/info/info.ui.h:20
+msgid "Video"
+msgstr "Bideoa"
+
+#: ../panels/info/info.ui.h:21
+msgid "Web"
+msgstr "Webgunea"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
+msgid "Eject"
+msgstr "Egotzi"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:2
+msgid "Launch media player"
+msgstr "Abiarazi multimedia-erreproduzitzailea"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:3
+msgid "Next track"
+msgstr "Hurrengo pista"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:4
+msgid "Pause playback"
+msgstr "Pausarazi erreprodukzioa"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:5
+msgid "Play (or play/pause)"
+msgstr "Erreproduzitu (edo erreproduzitu/pausarazi)"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:6
+msgid "Previous track"
+msgstr "Aurreko pista"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Sound and Media"
 msgstr "Soinua eta multimedia"
 
+#: ../panels/keyboard/00-multimedia.xml.in.h:8
+msgid "Stop playback"
+msgstr "Gelditu erreprodukzioa"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:9
+msgid "Volume down"
+msgstr "Jaitsi bolumena"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:10
+msgid "Volume mute"
+msgstr "Mututu bolumena"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:11
+msgid "Volume up"
+msgstr "Igo bolumena"
+
 #: ../panels/keyboard/01-launchers.xml.in.h:1
+msgid "Home folder"
+msgstr "Karpeta nagusia"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:2
+msgid "Launch calculator"
+msgstr "Abiarazi kalkulagailua"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:3
+msgid "Launch email client"
+msgstr "Abiarazi posta-bezeroa"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:4
+msgid "Launch help browser"
+msgstr "Abiatu laguntza-arakatzailea"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:5
+msgid "Launch web browser"
+msgstr "Abiatu web arakatzailea"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:6
 msgid "Launchers"
 msgstr "Abiarazleak"
 
+#: ../panels/keyboard/01-launchers.xml.in.h:7
+msgid "Search"
+msgstr "Bilatu"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
+msgid "Lock screen"
+msgstr "Blokeatu pantaila"
+
+#: ../panels/keyboard/01-system.xml.in.h:2
+msgid "Log out"
+msgstr "Saio-amaiera"
+
+#: ../panels/keyboard/01-system.xml.in.h:3
 msgid "System"
 msgstr "Sistema"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:1
+msgid "Toggle magnifier"
+msgstr "Txandakatu lupa"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:2
+msgid "Toggle on-screen keyboard"
+msgstr "Txandakatu pantailako teklatua"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
+msgid "Toggle screen reader"
+msgstr "Txandakatu pantaila irakurlea"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:4
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
+msgid "Universal Access"
+msgstr "Sarbide unibertsala"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -664,7 +826,7 @@ msgstr "Bizkortzaile-mota."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1268
+#: ../panels/keyboard/keyboard-shortcuts.c:1111
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -685,22 +847,22 @@ msgstr "Teklatua"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Laster-tekla;Errepikatu;Keinua;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:775
-#: ../panels/keyboard/keyboard-shortcuts.c:1040
-#: ../panels/keyboard/keyboard-shortcuts.c:1674
-#: ../panels/keyboard/keyboard-shortcuts.c:1678
+#: ../panels/keyboard/keyboard-shortcuts.c:627
+#: ../panels/keyboard/keyboard-shortcuts.c:886
+#: ../panels/keyboard/keyboard-shortcuts.c:1473
+#: ../panels/keyboard/keyboard-shortcuts.c:1477
 msgid "Custom Shortcuts"
 msgstr "Lasterbide pertsonalizatuak"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:887
+#: ../panels/keyboard/keyboard-shortcuts.c:738
 msgid "<Unknown Action>"
 msgstr "<Ekintza ezezaguna>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1294
+#: ../panels/keyboard/keyboard-shortcuts.c:1137
 msgid "Error saving the new shortcut"
 msgstr "Errorea lasterbide berria gordetzean"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1404
+#: ../panels/keyboard/keyboard-shortcuts.c:1252
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -711,7 +873,7 @@ msgstr ""
 "erabiltzean.\n"
 "Saiatu Kontrol, Alt edo Maius bezalako tekla batekin aldi berean."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1434
+#: ../panels/keyboard/keyboard-shortcuts.c:1284
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -720,7 +882,7 @@ msgstr ""
 "\"%s\" lasterbidea erabilita dago honetarako:\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1290
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -728,30 +890,19 @@ msgstr ""
 "Lasterbidea \"%s\"(r)i berriro esleitzen badiozu, \"%s\" lasterbidea "
 "desgaitu egingo da."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1448
+#: ../panels/keyboard/keyboard-shortcuts.c:1298
 msgid "_Reassign"
 msgstr "_Esleitu berriz"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1568
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr ""
-"Errorea gertatu da konfigurazioko datu-basean bizkortzailearen ezarpena "
-"kentzean: %s"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1626
+#: ../panels/keyboard/keyboard-shortcuts.c:1412
 msgid "Too many custom shortcuts"
 msgstr "Lasterbide pertsonalizatu gehiegi"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1907
-msgid "Section"
-msgstr "Sekzioa"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1956
+#: ../panels/keyboard/keyboard-shortcuts.c:1727
 msgid "Action"
 msgstr "Ekintza"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1979
+#: ../panels/keyboard/keyboard-shortcuts.c:1750
 msgid "Shortcut"
 msgstr "Lasterbidea"
 
@@ -993,94 +1144,94 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;audioa;bideoa;diskoa;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:224
+#: ../panels/printers/cc-printers-panel.c:228
 msgid "Low on toner"
 msgstr "Toner gutxi"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:226
+#: ../panels/printers/cc-printers-panel.c:230
 msgid "Out of toner"
 msgstr "Tonerra hutsik"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:229
+#: ../panels/printers/cc-printers-panel.c:233
 msgid "Low on developer"
 msgstr "Errebelatzaile gutxi"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:232
+#: ../panels/printers/cc-printers-panel.c:236
 msgid "Out of developer"
 msgstr "Errebelatzailea hutsik"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:234
+#: ../panels/printers/cc-printers-panel.c:238
 msgid "Low on a marker supply"
 msgstr "Markatzaile gutxi"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:236
+#: ../panels/printers/cc-printers-panel.c:240
 msgid "Out of a marker supply"
 msgstr "Markatzailerik gabe"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:238
+#: ../panels/printers/cc-printers-panel.c:242
 msgid "Open cover"
 msgstr "Estalkia irekita"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:240
+#: ../panels/printers/cc-printers-panel.c:244
 msgid "Open door"
 msgstr "Atea irekita"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:242
+#: ../panels/printers/cc-printers-panel.c:246
 msgid "Low on paper"
 msgstr "Paper gutxi"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:244
+#: ../panels/printers/cc-printers-panel.c:248
 msgid "Out of paper"
 msgstr "Paperik ez"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:250
+#: ../panels/printers/cc-printers-panel.c:254
 msgid "Waste receptacle almost full"
 msgstr "Hondakinen ontzia ia beteta"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:252
+#: ../panels/printers/cc-printers-panel.c:256
 msgid "Waste receptacle full"
 msgstr "Hondakinen ontzia beteta"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:254
+#: ../panels/printers/cc-printers-panel.c:258
 msgid "The optical photo conductor is near end of life"
 msgstr "Argazki-eroale optikoa bere amaierara iristear dago"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:256
+#: ../panels/printers/cc-printers-panel.c:260
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Argazki-eroale optikoak ez du gehiago funtzionatuko"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:454
+#: ../panels/printers/cc-printers-panel.c:458
 msgid "Toner Level"
 msgstr "Tonerraren maila"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:457
+#: ../panels/printers/cc-printers-panel.c:461
 msgid "Ink Level"
 msgstr "Tintaren maila"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:460
+#: ../panels/printers/cc-printers-panel.c:464
 msgid "Supply Level"
 msgstr "Hornikuntzaren maila"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:475
+#: ../panels/printers/cc-printers-panel.c:479
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1088,48 +1239,43 @@ msgstr[0] "%u aktibo"
 msgstr[1] "%u aktibo"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1029
+#: ../panels/printers/cc-printers-panel.c:1056
 msgid "Job Title"
 msgstr "Lanaren titulua"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1037
+#: ../panels/printers/cc-printers-panel.c:1065
 msgid "Job State"
 msgstr "Lanaren egoera"
 
-#. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:1043
-msgid "User"
-msgstr "Erabiltzailea"
-
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1049
+#: ../panels/printers/cc-printers-panel.c:1071
 msgid "Time"
 msgstr "Ordua"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1239
+#: ../panels/printers/cc-printers-panel.c:1261
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "Ezin izan da sistemako bus-arekin konektatu: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:1971
 msgid "Test page"
 msgstr "Probako orria"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1957
+#: ../panels/printers/cc-printers-panel.c:1979
 msgid "Clean print heads"
 msgstr "Garbitu inprimatze-buruak"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1962
+#: ../panels/printers/cc-printers-panel.c:1984
 msgid "An error has occured during a maintenance command."
 msgstr "Errorea gertatu da mantenimenduko komandoarekin."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2088
+#: ../panels/printers/cc-printers-panel.c:2110
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Ezin izan da Uia kargatu: %s"
@@ -2126,10 +2272,6 @@ msgstr "Sonarra"
 msgid "Keyboard;Mouse;a11y;Accessibility;"
 msgstr "Teklatua;Sagua;a11y;Erabilgarritasuna;"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
-msgid "Universal Access"
-msgstr "Sarbide unibertsala"
-
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
 msgstr "Sarbide unibertsalaren hobespenak"
@@ -2690,11 +2832,6 @@ msgstr "Okerreko pasahitza"
 msgid "Select"
 msgstr "Hautatu"
 
-#: ../panels/user-accounts/um-photo-dialog.c:216
-#: ../panels/user-accounts/data/photo-dialog.ui.h:2
-msgid "Browse for more pictures"
-msgstr "Arakatu irudi gehiago"
-
 #: ../panels/user-accounts/um-photo-dialog.c:429
 msgid "Disable image"
 msgstr "Desgaitu irudia"
@@ -2843,11 +2980,6 @@ msgstr "_Sortu"
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "Create new account"
 msgstr "Sortu kontu berria"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:4
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-msgid "Standard"
-msgstr "Arrunta"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
@@ -3087,6 +3219,17 @@ msgstr "Kontrol-zentroa"
 msgid "_All Settings"
 msgstr "Ezarpen _guztiak"
 
+#~ msgid "More Info"
+#~ msgstr "Informazio gehiago"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr ""
+#~ "Errorea gertatu da konfigurazioko datu-basean bizkortzailearen ezarpena "
+#~ "kentzean: %s"
+
+#~ msgid "User"
+#~ msgstr "Erabiltzailea"
+
 #~ msgid "Paused"
 #~ msgstr "Pausarazita"
 
@@ -3201,9 +3344,6 @@ msgstr "Ezarpen _guztiak"
 #~ msgid "C_ompany:"
 #~ msgstr "E_npresa:"
 
-#~ msgid "Cale_ndar:"
-#~ msgstr "_Egutegia:"
-
 #~ msgid "Change Passwo_rd..."
 #~ msgstr "Aldatu _pasahitza..."
 
@@ -3254,9 +3394,6 @@ msgstr "Ezarpen _guztiak"
 
 #~ msgid "Telephone"
 #~ msgstr "Telefonoa"
-
-#~ msgid "Web"
-#~ msgstr "Webgunea"
 
 #~ msgid "Web _log:"
 #~ msgstr "Web-_egunkaria:"
@@ -3936,9 +4073,6 @@ msgstr "Ezarpen _guztiak"
 #~ msgstr ""
 #~ "Zehaztu orrialdearen izena erakusteko (internet|multimedia|system|a11y)"
 
-#~ msgid "- GNOME Default Applications"
-#~ msgstr "- GNOMEren aplikazio lehenetsiak"
-
 #~ msgid "Accessibility"
 #~ msgstr "Erabilerraztasuna"
 
@@ -3965,9 +4099,6 @@ msgstr "Ezarpen _guztiak"
 
 #~ msgid "Mobility"
 #~ msgstr "Mugikortasuna"
-
-#~ msgid "Multimedia Player"
-#~ msgstr "Multimedia-erreproduzitzailea"
 
 #~ msgid "Open link in new _tab"
 #~ msgstr "Ireki esteka _fitxa berrian"
@@ -4049,9 +4180,6 @@ msgstr "Ezarpen _guztiak"
 
 #~ msgid "KDE Magnifier without Screen Reader"
 #~ msgstr "KDEren lupa pantaila-irakurgailurik gabe"
-
-#~ msgid "KMail"
-#~ msgstr "KMail"
 
 #~ msgid "Konqueror"
 #~ msgstr "Konqueror"
@@ -4526,9 +4654,6 @@ msgstr "Ezarpen _guztiak"
 
 #~ msgid "Minimize"
 #~ msgstr "Minimizatu"
-
-#~ msgid "Roll up"
-#~ msgstr "Bildu"
 
 #~ msgid "key not found [%s]\n"
 #~ msgstr "ez da gakoa aurkitu [%s]\n"
