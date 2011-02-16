@@ -99,11 +99,39 @@ cc_keyboard_item_get_description (CcKeyboardItem *item)
 
 static void
 _set_binding (CcKeyboardItem *item,
-              const char       *value)
+              const char     *value,
+	      gboolean        set_backend)
 {
   g_free (item->binding);
   item->binding = g_strdup (value);
   binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
+
+  if (set_backend == FALSE)
+    return;
+
+  if (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF ||
+      item->type == CC_KEYBOARD_ITEM_TYPE_GCONF_DIR)
+    {
+      GConfClient *client;
+      GError *err = NULL;
+      const char *key;
+
+      client = gconf_client_get_default ();
+      if (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF)
+	key = item->gconf_key;
+      else
+	key = item->binding_gconf_key;
+      gconf_client_set_string (client, key, "", &err);
+      if (err != NULL)
+        {
+	  g_warning ("Failed to set '%s' to '%s': %s", key, item->binding, err->message);
+	  g_error_free (err);
+	}
+    }
+  else if (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS)
+    {
+      g_settings_set_string (item->settings, item->key, item->binding);
+    }
 }
 
 const char *
@@ -152,7 +180,7 @@ cc_keyboard_item_set_property (GObject      *object,
     _set_description (self, g_value_get_string (value));
     break;
   case PROP_BINDING:
-    _set_binding (self, g_value_get_string (value));
+    _set_binding (self, g_value_get_string (value), TRUE);
     break;
   case PROP_COMMAND:
     _set_command (self, g_value_get_string (value));
@@ -298,6 +326,8 @@ cc_keyboard_item_finalize (GObject *object)
     gconf_client_notify_remove (client, item->gconf_cnxn_desc);
   if (item->gconf_cnxn_cmd != 0)
     gconf_client_notify_remove (client, item->gconf_cnxn_cmd);
+  if (item->settings != NULL)
+    g_object_unref (item->settings);
 
   g_object_unref (client);
 
@@ -307,7 +337,8 @@ cc_keyboard_item_finalize (GObject *object)
   g_free (item->desc_gconf_key);
   g_free (item->command);
   g_free (item->cmd_gconf_key);
-
+  g_free (item->schema);
+  g_free (item->key);
 
   G_OBJECT_CLASS (cc_keyboard_item_parent_class)->finalize (object);
 }
@@ -347,7 +378,7 @@ keybinding_key_changed (GConfClient    *client,
   const gchar *key_value;
 
   key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
-  _set_binding (item, key_value);
+  _set_binding (item, key_value, FALSE);
   item->editable = gconf_entry_get_is_writable (entry);
   g_object_notify (G_OBJECT (item), "binding");
 }
@@ -364,6 +395,19 @@ keybinding_command_changed (GConfClient    *client,
   _set_command (item, key_value);
   item->cmd_editable = gconf_entry_get_is_writable (entry);
   g_object_notify (G_OBJECT (item), "command");
+}
+
+static void
+binding_changed (GSettings *settings,
+		 const char *key,
+		 CcKeyboardItem *item)
+{
+  char *value;
+
+  value = g_settings_get_string (item->settings, item->key);
+  item->editable = g_settings_is_writable (item->settings, item->key);
+  _set_binding (item, value, FALSE);
+  g_object_notify (G_OBJECT (item), "binding");
 }
 
 gboolean
@@ -469,6 +513,27 @@ cc_keyboard_item_load_from_gconf_dir (CcKeyboardItem *item,
 
   gconf_entry_free (entry);
   g_object_unref (client);
+
+  return TRUE;
+}
+
+gboolean
+cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
+				      const char *description,
+				      const char *schema,
+				      const char *key)
+{
+  item->schema = g_strdup (schema);
+  item->key = g_strdup (key);
+  item->description = g_strdup (description);
+
+  item->settings = g_settings_new (item->schema);
+  item->binding = g_settings_get_string (item->settings, item->key);
+  item->editable = g_settings_is_writable (item->settings, item->key);
+  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
+
+  g_signal_connect (G_OBJECT (item->settings), "changed",
+		    G_CALLBACK (binding_changed), item);
 
   return TRUE;
 }

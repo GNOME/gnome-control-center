@@ -85,6 +85,11 @@ typedef struct
   char *cmd_gconf_key;
   gboolean cmd_editable;
   guint gconf_cnxn_cmd;
+
+  /* GSettings */
+  char *schema;
+  char *key;
+  GSettings *settings;
 } CcKeyboardItem;
 
 typedef struct
@@ -99,6 +104,10 @@ gboolean cc_keyboard_item_load_from_gconf     (CcKeyboardItem *item,
 					       const char *key);
 gboolean cc_keyboard_item_load_from_gconf_dir (CcKeyboardItem *item,
 					       const char *key_dir);
+gboolean cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
+					       const char *description,
+					       const char *schema,
+					       const char *key);
 
 const char * cc_keyboard_item_get_description (CcKeyboardItem *item);
 const char * cc_keyboard_item_get_binding     (CcKeyboardItem *item);
