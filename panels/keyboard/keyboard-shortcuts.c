@@ -183,30 +183,6 @@ should_show_key (const KeyListEntry *entry)
 }
 
 static gboolean
-binding_from_string (const char             *str,
-                     guint                  *accelerator_key,
-                     guint                  *keycode,
-                     EggVirtualModifierType *accelerator_mods)
-{
-  g_return_val_if_fail (accelerator_key != NULL, FALSE);
-
-  if (str == NULL || strcmp (str, "disabled") == 0)
-    {
-      *accelerator_key = 0;
-      *keycode = 0;
-      *accelerator_mods = 0;
-      return TRUE;
-    }
-
-  egg_accelerator_parse_virtual (str, accelerator_key, keycode, accelerator_mods);
-
-  if (*accelerator_key == 0)
-    return FALSE;
-  else
-    return TRUE;
-}
-
-static gboolean
 keybinding_key_changed_foreach (GtkTreeModel   *model,
                                 GtkTreePath    *path,
                                 GtkTreeIter    *iter,
@@ -232,7 +208,6 @@ item_changed (CcKeyboardItem *item,
 	      gpointer        user_data)
 {
   /* update the model */
-  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
   gtk_tree_model_foreach (item->model, (GtkTreeModelForeachFunc) keybinding_key_changed_foreach, item);
 }
 
@@ -292,7 +267,6 @@ append_section (GtkBuilder         *builder,
 
       item->model = shortcut_model;
       item->group = group;
-      binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
 
       g_signal_connect (G_OBJECT (item), "notify",
 			G_CALLBACK (item_changed), NULL);

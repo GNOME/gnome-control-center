@@ -30,6 +30,7 @@
 #include <gconf/gconf-client.h>
 
 #include "cc-keyboard-item.h"
+#include "eggaccelerators.h"
 
 #define CC_KEYBOARD_ITEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_ITEM, CcKeyboardItemPrivate))
 
@@ -56,6 +57,30 @@ static void     cc_keyboard_item_finalize       (GObject               *object);
 
 G_DEFINE_TYPE (CcKeyboardItem, cc_keyboard_item, G_TYPE_OBJECT)
 
+static gboolean
+binding_from_string (const char             *str,
+                     guint                  *accelerator_key,
+                     guint                  *keycode,
+                     EggVirtualModifierType *accelerator_mods)
+{
+  g_return_val_if_fail (accelerator_key != NULL, FALSE);
+
+  if (str == NULL || strcmp (str, "disabled") == 0)
+    {
+      *accelerator_key = 0;
+      *keycode = 0;
+      *accelerator_mods = 0;
+      return TRUE;
+    }
+
+  egg_accelerator_parse_virtual (str, accelerator_key, keycode, accelerator_mods);
+
+  if (*accelerator_key == 0)
+    return FALSE;
+  else
+    return TRUE;
+}
+
 static void
 _set_description (CcKeyboardItem *item,
                   const char       *value)
@@ -78,6 +103,7 @@ _set_binding (CcKeyboardItem *item,
 {
   g_free (item->binding);
   item->binding = g_strdup (value);
+  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
 }
 
 const char *
@@ -382,6 +408,7 @@ cc_keyboard_item_load_from_gconf (CcKeyboardItem *item,
                                               (GConfClientNotifyFunc) &keybinding_key_changed,
                                               item, NULL, NULL);
   item->binding = gconf_client_get_string (client, item->gconf_key, NULL);
+  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
 
   gconf_entry_free (entry);
   g_object_unref (client);
@@ -438,6 +465,7 @@ cc_keyboard_item_load_from_gconf_dir (CcKeyboardItem *item,
                                               item, NULL, NULL);
 
   item->binding = gconf_client_get_string (client, item->binding_gconf_key, NULL);
+  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
 
   gconf_entry_free (entry);
   g_object_unref (client);
