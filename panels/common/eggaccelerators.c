@@ -345,7 +345,10 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 	}
       else
 	{
-          keyval = gdk_keyval_from_name (accelerator);
+	  if (g_str_has_prefix (accelerator, "0x"))
+	    keyval = 0;
+	  else
+            keyval = gdk_keyval_from_name (accelerator);
 
           if (keyval == 0)
 	    {
