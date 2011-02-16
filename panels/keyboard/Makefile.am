@@ -8,6 +8,8 @@ libkeyboard_la_SOURCES =   \
 	keyboard-module.c		\
 	cc-keyboard-panel.c		\
 	cc-keyboard-panel.h		\
+	cc-keyboard-item.c		\
+	cc-keyboard-item.h		\
 	wm-common.c			\
 	wm-common.h			\
 	keyboard-general.c		\

@@ -23,6 +23,7 @@
 #include <gconf/gconf-client.h>
 #include "eggcellrendererkeys.h"
 #include "keyboard-shortcuts.h"
+#include "cc-keyboard-item.h"
 #include "wm-common.h"
 
 #define MAX_CUSTOM_SHORTCUTS 1000
@@ -50,40 +51,12 @@ typedef enum {
 
 typedef struct
 {
-  char *name;
-  int value;
-  char *key;
-  char *description_name;
-  char *cmd_name;
+  CcKeyboardItemType type;
+  char *name; /* GConf key, or directory, depending on type */
+  int value; /* Value for comparison */
+  char *key; /* GConf key name for the comparison */
   Comparison comparison;
 } KeyListEntry;
-
-typedef enum
-{
-  BINDING_GROUP_SYSTEM,
-  BINDING_GROUP_APPS,
-  BINDING_GROUP_USER,
-} BindingGroupType;
-
-typedef struct
-{
-  char *gconf_key;
-  guint keyval;
-  guint keycode;
-  EggVirtualModifierType mask;
-  BindingGroupType group;
-  gboolean editable;
-  GtkTreeModel *model;
-  char *description;
-  char *desc_gconf_key;
-  gboolean desc_editable;
-  char *command;
-  char *cmd_gconf_key;
-  gboolean cmd_editable;
-  guint gconf_cnxn;
-  guint gconf_cnxn_desc;
-  guint gconf_cnxn_cmd;
-} KeyEntry;
 
 enum
 {
@@ -117,30 +90,11 @@ free_key_array (GPtrArray *keys)
 
       for (i = 0; i < keys->len; i++)
         {
-          KeyEntry *key_entry;
-          GConfClient *client;
+          CcKeyboardItem *item;
 
-          key_entry = g_ptr_array_index (keys, i);
+          item = g_ptr_array_index (keys, i);
 
-          /* Remove GConf watches */
-          client = gconf_client_get_default ();
-          gconf_client_remove_dir (client, key_entry->gconf_key, NULL);
-          gconf_client_notify_remove (client, key_entry->gconf_cnxn);
-          if (key_entry->gconf_cnxn_desc != 0)
-            gconf_client_notify_remove (client, key_entry->gconf_cnxn_desc);
-          if (key_entry->gconf_cnxn_cmd != 0)
-            gconf_client_notify_remove (client, key_entry->gconf_cnxn_cmd);
-
-          g_object_unref (client);
-
-          /* Free memory */
-          g_free (key_entry->gconf_key);
-          g_free (key_entry->description);
-          g_free (key_entry->desc_gconf_key);
-          g_free (key_entry->command);
-          g_free (key_entry->cmd_gconf_key);
-
-          g_free (key_entry);
+          g_object_unref (item);
         }
 
       g_ptr_array_free (keys, TRUE);
@@ -181,9 +135,9 @@ have_key_for_group (int group, const gchar *name)
     {
       for (i = 0; i < keys->len; i++)
         {
-          KeyEntry *entry = g_ptr_array_index (keys, i);
+          CcKeyboardItem *item = g_ptr_array_index (keys, i);
 
-          if (g_strcmp0 (name, entry->gconf_key) == 0)
+          if (g_strcmp0 (name, item->gconf_key) == 0)
             return TRUE;
         }
     }
@@ -253,84 +207,33 @@ binding_from_string (const char             *str,
 }
 
 static gboolean
-keybinding_key_changed_foreach (GtkTreeModel *model,
-                                GtkTreePath  *path,
-                                GtkTreeIter  *iter,
-                                gpointer      user_data)
+keybinding_key_changed_foreach (GtkTreeModel   *model,
+                                GtkTreePath    *path,
+                                GtkTreeIter    *iter,
+                                CcKeyboardItem *item)
 {
-  KeyEntry *key_entry;
-  KeyEntry *tmp_key_entry;
+  CcKeyboardItem *tmp_item;
 
-  key_entry = (KeyEntry *)user_data;
-  gtk_tree_model_get (key_entry->model, iter,
-                      DETAIL_KEYENTRY_COLUMN, &tmp_key_entry,
+  gtk_tree_model_get (item->model, iter,
+                      DETAIL_KEYENTRY_COLUMN, &tmp_item,
                       -1);
 
-  if (key_entry == tmp_key_entry)
+  if (item == tmp_item)
     {
-      gtk_tree_model_row_changed (key_entry->model, path, iter);
+      gtk_tree_model_row_changed (item->model, path, iter);
       return TRUE;
     }
   return FALSE;
 }
 
 static void
-keybinding_description_changed (GConfClient *client,
-                                guint        cnxn_id,
-                                GConfEntry  *entry,
-                                gpointer     user_data)
+item_changed (CcKeyboardItem *item,
+	      GParamSpec     *pspec,
+	      gpointer        user_data)
 {
-  KeyEntry *key_entry;
-  const gchar *key_value;
-
-  key_entry = (KeyEntry *) user_data;
-  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
-
-  g_free (key_entry->description);
-  key_entry->description = key_value ? g_strdup (key_value) : NULL;
-  key_entry->desc_editable = gconf_entry_get_is_writable (entry);
-
   /* update the model */
-  gtk_tree_model_foreach (key_entry->model, keybinding_key_changed_foreach, key_entry);
-}
-
-static void
-keybinding_key_changed (GConfClient *client,
-                        guint        cnxn_id,
-                        GConfEntry  *entry,
-                        gpointer     user_data)
-{
-  KeyEntry *key_entry;
-  const gchar *key_value;
-
-  key_entry = (KeyEntry *) user_data;
-  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
-
-  binding_from_string (key_value, &key_entry->keyval, &key_entry->keycode, &key_entry->mask);
-  key_entry->editable = gconf_entry_get_is_writable (entry);
-
-  /* update the model */
-  gtk_tree_model_foreach (key_entry->model, keybinding_key_changed_foreach, key_entry);
-}
-
-static void
-keybinding_command_changed (GConfClient *client,
-                        guint        cnxn_id,
-                        GConfEntry  *entry,
-                        gpointer     user_data)
-{
-  KeyEntry *key_entry;
-  const gchar *key_value;
-
-  key_entry = (KeyEntry *) user_data;
-  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
-
-  g_free (key_entry->command);
-  key_entry->command = key_value ? g_strdup (key_value) : NULL;
-  key_entry->cmd_editable = gconf_entry_get_is_writable (entry);
-
-  /* update the model */
-  gtk_tree_model_foreach (key_entry->model, keybinding_key_changed_foreach, key_entry);
+  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
+  gtk_tree_model_foreach (item->model, (GtkTreeModelForeachFunc) keybinding_key_changed_foreach, item);
 }
 
 static void
@@ -341,8 +244,7 @@ append_section (GtkBuilder         *builder,
 {
   GPtrArray *keys_array;
   GtkTreeModel *sort_model;
-  GtkTreeModel *model;
-  GConfClient *client;
+  GtkTreeModel *model, *shortcut_model;
   GtkTreeIter iter;
   gint i;
   GHashTable *hash;
@@ -350,11 +252,12 @@ append_section (GtkBuilder         *builder,
 
   hash = get_hash_for_group (group);
 
-  client = gconf_client_get_default ();
   sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
   model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
 
-  /* Add all KeyEntry's for this section */
+  shortcut_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "shortcut_treeview")));
+
+  /* Add all CcKeyboardItems for this section */
   is_new = FALSE;
   keys_array = g_hash_table_lookup (hash, title);
   if (keys_array == NULL)
@@ -365,10 +268,8 @@ append_section (GtkBuilder         *builder,
 
   for (i = 0; keys_list[i].name != NULL; i++)
     {
-      GConfEntry *entry;
-      const gchar *key_string;
-      gchar *description, *command, *key_value;
-      KeyEntry *key_entry;
+      CcKeyboardItem *item;
+      gboolean ret;
 
       if (!should_show_key (&keys_list[i]))
         continue;
@@ -376,100 +277,28 @@ append_section (GtkBuilder         *builder,
       if (have_key_for_group (group, keys_list[i].name))
         continue;
 
-      key_string = keys_list[i].name;
+      item = cc_keyboard_item_new (keys_list[i].type);
+      if (keys_list[i].type == CC_KEYBOARD_ITEM_TYPE_GCONF)
+        ret = cc_keyboard_item_load_from_gconf (item, keys_list[i].name);
+      else
+        ret = cc_keyboard_item_load_from_gconf_dir (item, keys_list[i].name);
 
-      entry = gconf_client_get_entry (client,
-                                      key_string,
-                                      NULL,
-                                      TRUE,
-                                      NULL);
-      if (entry == NULL)
+      if (ret == FALSE)
         {
           /* We don't actually want to popup a dialog - just skip this one */
+          g_object_unref (item);
           continue;
         }
 
-      if (keys_list[i].description_name != NULL)
-        {
-          description = gconf_client_get_string (client, keys_list[i].description_name, NULL);
-        }
-      else
-        {
-          description = NULL;
+      item->model = shortcut_model;
+      item->group = group;
+      binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
 
-          if (gconf_entry_get_schema_name (entry))
-            {
-              GConfSchema *schema;
+      g_signal_connect (G_OBJECT (item), "notify",
+			G_CALLBACK (item_changed), NULL);
 
-              schema = gconf_client_get_schema (client,
-                                                gconf_entry_get_schema_name (entry),
-                                                NULL);
-              if (schema != NULL)
-                {
-                  description = g_strdup (gconf_schema_get_short_desc (schema));
-                  gconf_schema_free (schema);
-                }
-            }
-        }
-
-      if (description == NULL)
-        {
-          /* Only print a warning for keys that should have a schema */
-          if (keys_list[i].description_name == NULL)
-            g_warning ("No description for key '%s'", key_string);
-        }
-
-      if (keys_list[i].cmd_name != NULL)
-        {
-          command = gconf_client_get_string (client, keys_list[i].cmd_name, NULL);
-        }
-      else
-        {
-          command = NULL;
-        }
-
-      key_entry = g_new0 (KeyEntry, 1);
-      key_entry->gconf_key = g_strdup (key_string);
-      key_entry->editable = gconf_entry_get_is_writable (entry);
-      key_entry->model = model;
-      key_entry->group = group;
-      key_entry->description = description;
-      key_entry->command = command;
-      if (keys_list[i].description_name != NULL)
-        {
-          key_entry->desc_gconf_key =  g_strdup (keys_list[i].description_name);
-          key_entry->desc_editable = gconf_client_key_is_writable (client, key_entry->desc_gconf_key, NULL);
-          key_entry->gconf_cnxn_desc = gconf_client_notify_add (client,
-                                                                key_entry->desc_gconf_key,
-                                                                (GConfClientNotifyFunc) &keybinding_description_changed,
-                                                                key_entry, NULL, NULL);
-        }
-      if (keys_list[i].cmd_name != NULL)
-        {
-          key_entry->cmd_gconf_key =  g_strdup (keys_list[i].cmd_name);
-          key_entry->cmd_editable = gconf_client_key_is_writable (client, key_entry->cmd_gconf_key, NULL);
-          key_entry->gconf_cnxn_cmd = gconf_client_notify_add (client,
-                                                               key_entry->cmd_gconf_key,
-                                                               (GConfClientNotifyFunc) &keybinding_command_changed,
-                                                               key_entry, NULL, NULL);
-        }
-
-      gconf_client_add_dir (client, key_string, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-      key_entry->gconf_cnxn = gconf_client_notify_add (client,
-                                                       key_string,
-                                                       (GConfClientNotifyFunc) &keybinding_key_changed,
-                                                       key_entry, NULL, NULL);
-
-      key_value = gconf_client_get_string (client, key_string, NULL);
-      binding_from_string (key_value, &key_entry->keyval, &key_entry->keycode, &key_entry->mask);
-      g_free (key_value);
-
-      gconf_entry_free (entry);
-
-      g_ptr_array_add (keys_array, key_entry);
+      g_ptr_array_add (keys_array, item);
     }
-
-  g_object_unref (client);
 
   /* Add the keys to the hash table */
   if (is_new && keys_array->len > 0)
@@ -615,11 +444,10 @@ parse_start_tag (GMarkupParseContext *ctx,
     return;
 
   key.name = g_strdup (name);
-  key.description_name = NULL;
+  key.type = CC_KEYBOARD_ITEM_TYPE_GCONF;
   key.value = value;
   key.key = g_strdup (gconf_key);
   key.comparison = comparison;
-  key.cmd_name = NULL;
   g_array_append_val (keylist->entries, key);
 }
 
@@ -692,7 +520,6 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, gchar **wm_ke
 
   /* Empty KeyListEntry to end the array */
   key.name = NULL;
-  key.description_name = NULL;
   key.key = NULL;
   key.value = 0;
   key.comparison = COMPARISON_NONE;
@@ -742,11 +569,10 @@ append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
 
   for (l = custom_list; l != NULL; l = l->next)
     {
-      key.name = g_strconcat (l->data, "/binding", NULL);
+      key.name = g_strdup (l->data);
       if (!have_key_for_group (BINDING_GROUP_USER, key.name))
         {
-          key.cmd_name = g_strconcat (l->data, "/action", NULL);
-          key.description_name = g_strconcat (l->data, "/name", NULL);
+          key.type = CC_KEYBOARD_ITEM_TYPE_GCONF_DIR;
           g_array_append_val (entries, key);
         }
       else
@@ -765,7 +591,6 @@ append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
 
       /* Empty KeyListEntry to end the array */
       key.name = NULL;
-      key.description_name = NULL;
       g_array_append_val (entries, key);
 
       keys = (KeyListEntry *) entries->data;
@@ -773,7 +598,6 @@ append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
       for (i = 0; i < entries->len; ++i)
         {
           g_free (keys[i].name);
-          g_free (keys[i].description_name);
         }
     }
 
@@ -834,32 +658,32 @@ accel_set_func (GtkTreeViewColumn *tree_column,
                 GtkTreeIter       *iter,
                 gpointer           data)
 {
-  KeyEntry *key_entry;
+  CcKeyboardItem *item;
 
   gtk_tree_model_get (model, iter,
-                      DETAIL_KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
-  if (key_entry == NULL)
+  if (item == NULL)
     g_object_set (cell,
                   "visible", FALSE,
                   NULL);
-  else if (! key_entry->editable)
+  else if (! item->editable)
     g_object_set (cell,
                   "visible", TRUE,
                   "editable", FALSE,
-                  "accel_key", key_entry->keyval,
-                  "accel_mask", key_entry->mask,
-                  "keycode", key_entry->keycode,
+                  "accel_key", item->keyval,
+                  "accel_mask", item->mask,
+                  "keycode", item->keycode,
                   "style", PANGO_STYLE_ITALIC,
                   NULL);
   else
     g_object_set (cell,
                   "visible", TRUE,
                   "editable", TRUE,
-                  "accel_key", key_entry->keyval,
-                  "accel_mask", key_entry->mask,
-                  "keycode", key_entry->keycode,
+                  "accel_key", item->keyval,
+                  "accel_mask", item->mask,
+                  "keycode", item->keycode,
                   "style", PANGO_STYLE_NORMAL,
                   NULL);
 }
@@ -871,17 +695,17 @@ description_set_func (GtkTreeViewColumn *tree_column,
                       GtkTreeIter       *iter,
                       gpointer           data)
 {
-  KeyEntry *key_entry;
+  CcKeyboardItem *item;
 
   gtk_tree_model_get (model, iter,
-                      DETAIL_KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
-  if (key_entry != NULL)
+  if (item != NULL)
     g_object_set (cell,
                   "editable", FALSE,
-                  "text", key_entry->description != NULL ?
-                          key_entry->description : _("<Unknown Action>"),
+                  "text", item->description != NULL ?
+                          item->description : _("<Unknown Action>"),
                   NULL);
   else
     g_object_set (cell,
@@ -894,14 +718,14 @@ shortcut_selection_changed (GtkTreeSelection *selection, gpointer data)
   GtkWidget *button = data;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  KeyEntry *key;
+  CcKeyboardItem *item;
   gboolean can_remove;
 
   can_remove = FALSE;
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
-      gtk_tree_model_get (model, &iter, DETAIL_KEYENTRY_COLUMN, &key, -1);
-      if (key && key->command != NULL && key->editable)
+      gtk_tree_model_get (model, &iter, DETAIL_KEYENTRY_COLUMN, &item, -1);
+      if (item && item->command != NULL && item->editable)
         can_remove = TRUE;
     }
 
@@ -947,12 +771,12 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
       for (i = 0; i < keys->len; i++)
         {
           GtkTreeIter new_row;
-          KeyEntry *entry = g_ptr_array_index (keys, i);
+          CcKeyboardItem *item = g_ptr_array_index (keys, i);
 
           gtk_list_store_append (GTK_LIST_STORE (shortcut_model), &new_row);
           gtk_list_store_set (GTK_LIST_STORE (shortcut_model), &new_row,
-                              DETAIL_DESCRIPTION_COLUMN, entry->description,
-                              DETAIL_KEYENTRY_COLUMN, entry,
+                              DETAIL_DESCRIPTION_COLUMN, item->description,
+                              DETAIL_KEYENTRY_COLUMN, item,
                               -1);
         }
     }
@@ -966,29 +790,29 @@ typedef struct
 } IdleData;
 
 static gboolean
-edit_custom_shortcut (KeyEntry *key)
+edit_custom_shortcut (CcKeyboardItem *item)
 {
   gint result;
-  const gchar *text;
+  const gchar *description, *command;
   gboolean ret;
 
-  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_name_entry), key->description ? key->description : "");
-  gtk_widget_set_sensitive (custom_shortcut_name_entry, key->desc_editable);
+  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_name_entry), item->description ? item->description : "");
+  gtk_widget_set_sensitive (custom_shortcut_name_entry, item->desc_editable);
   gtk_widget_grab_focus (custom_shortcut_name_entry);
-  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_command_entry), key->command ? key->command : "");
-  gtk_widget_set_sensitive (custom_shortcut_command_entry, key->cmd_editable);
+  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_command_entry), item->command ? item->command : "");
+  gtk_widget_set_sensitive (custom_shortcut_command_entry, item->cmd_editable);
 
   gtk_window_present (GTK_WINDOW (custom_shortcut_dialog));
   result = gtk_dialog_run (GTK_DIALOG (custom_shortcut_dialog));
   switch (result)
     {
     case GTK_RESPONSE_OK:
-      text = gtk_entry_get_text (GTK_ENTRY (custom_shortcut_name_entry));
-      g_free (key->description);
-      key->description = g_strdup (text);
-      text = gtk_entry_get_text (GTK_ENTRY (custom_shortcut_command_entry));
-      g_free (key->command);
-      key->command = g_strdup (text);
+      description = gtk_entry_get_text (GTK_ENTRY (custom_shortcut_name_entry));
+      command = gtk_entry_get_text (GTK_ENTRY (custom_shortcut_command_entry));
+      g_object_set (G_OBJECT (item),
+		    "description", description,
+		    "command", command,
+		    NULL);
       ret = TRUE;
       break;
     default:
@@ -1006,26 +830,22 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
 {
   GConfClient *client;
   gchar *base;
-  KeyEntry *key;
+  CcKeyboardItem *item;
   GPtrArray *keys_array;
 
   gtk_tree_model_get (model, iter,
-                      DETAIL_KEYENTRY_COLUMN, &key,
+                      DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
   /* not a custom shortcut */
-  if (key->command == NULL)
+  if (item->type != CC_KEYBOARD_ITEM_TYPE_GCONF_DIR)
     return FALSE;
 
   client = gconf_client_get_default ();
 
-  gconf_client_notify_remove (client, key->gconf_cnxn);
-  if (key->gconf_cnxn_desc != 0)
-    gconf_client_notify_remove (client, key->gconf_cnxn_desc);
-  if (key->gconf_cnxn_cmd != 0)
-    gconf_client_notify_remove (client, key->gconf_cnxn_cmd);
+  base = g_path_get_dirname (item->gconf_key_dir);
+  g_object_unref (item);
 
-  base = g_path_get_dirname (key->gconf_key);
   gconf_client_recursive_unset (client, base, 0, NULL);
   g_free (base);
   /* suggest sync now so the unset directory actually gets dropped;
@@ -1035,14 +855,7 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   g_object_unref (client);
 
   keys_array = g_hash_table_lookup (get_hash_for_group (BINDING_GROUP_USER), _("Custom Shortcuts"));
-  g_ptr_array_remove (keys_array, key);
-
-  g_free (key->gconf_key);
-  g_free (key->description);
-  g_free (key->desc_gconf_key);
-  g_free (key->command);
-  g_free (key->cmd_gconf_key);
-  g_free (key);
+  g_ptr_array_remove (keys_array, item);
 
   gtk_list_store_remove (GTK_LIST_STORE (model), iter);
 
@@ -1052,14 +865,14 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
 static void
 update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
 {
-  KeyEntry *key;
+  CcKeyboardItem *item;
 
   gtk_tree_model_get (model, iter,
-                      DETAIL_KEYENTRY_COLUMN, &key,
+                      DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
-  edit_custom_shortcut (key);
-  if (key->command == NULL || key->command[0] == '\0')
+  edit_custom_shortcut (item);
+  if (item->command == NULL || item->command[0] == '\0')
     {
       remove_custom_shortcut (model, iter);
     }
@@ -1068,13 +881,13 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
       GConfClient *client;
 
       gtk_list_store_set (GTK_LIST_STORE (model), iter,
-                          DETAIL_KEYENTRY_COLUMN, key, -1);
+                          DETAIL_KEYENTRY_COLUMN, item, -1);
       client = gconf_client_get_default ();
-      if (key->description != NULL)
-        gconf_client_set_string (client, key->desc_gconf_key, key->description, NULL);
+      if (item->description != NULL)
+        gconf_client_set_string (client, item->desc_gconf_key, item->description, NULL);
       else
-        gconf_client_unset (client, key->desc_gconf_key, NULL);
-      gconf_client_set_string (client, key->cmd_gconf_key, key->command, NULL);
+        gconf_client_unset (client, item->desc_gconf_key, NULL);
+      gconf_client_set_string (client, item->cmd_gconf_key, item->command, NULL);
       g_object_unref (client);
     }
 }
@@ -1112,7 +925,7 @@ start_editing_cb (GtkTreeView    *tree_view,
       IdleData *idle_data;
       GtkTreeModel *model;
       GtkTreeIter iter;
-      KeyEntry *key;
+      CcKeyboardItem *item;
 
       if (gtk_tree_path_get_depth (path) == 1)
         {
@@ -1123,12 +936,12 @@ start_editing_cb (GtkTreeView    *tree_view,
       model = gtk_tree_view_get_model (tree_view);
       gtk_tree_model_get_iter (model, &iter, path);
       gtk_tree_model_get (model, &iter,
-                          DETAIL_KEYENTRY_COLUMN, &key,
+                          DETAIL_KEYENTRY_COLUMN, &item,
                          -1);
 
       /* if only the accel can be edited on the selected row
        * always select the accel column */
-      if (key->desc_editable &&
+      if (item->desc_editable &&
           column == gtk_tree_view_get_column (tree_view, 0))
         {
           gtk_widget_grab_focus (GTK_WIDGET (tree_view));
@@ -1142,7 +955,7 @@ start_editing_cb (GtkTreeView    *tree_view,
           idle_data = g_new (IdleData, 1);
           idle_data->tree_view = tree_view;
           idle_data->path = path;
-          idle_data->column = key->desc_editable ? column :
+          idle_data->column = item->desc_editable ? column :
                               gtk_tree_view_get_column (tree_view, 1);
           g_idle_add ((GSourceFunc) real_start_editing_cb, idle_data);
           block_accels = TRUE;
@@ -1160,15 +973,15 @@ start_editing_kb_cb (GtkTreeView *treeview,
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
-  KeyEntry *key;
+  CcKeyboardItem *item;
 
   model = gtk_tree_view_get_model (treeview);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_model_get (model, &iter,
-                      DETAIL_KEYENTRY_COLUMN, &key,
+                      DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
-  if (key == NULL)
+  if (item == NULL)
     {
       /* This is a section heading - expand or collapse */
       if (gtk_tree_view_row_expanded (treeview, path))
@@ -1180,7 +993,7 @@ start_editing_kb_cb (GtkTreeView *treeview,
 
   /* if only the accel can be edited on the selected row
    * always select the accel column */
-  if (key->desc_editable &&
+  if (item->desc_editable &&
       column == gtk_tree_view_get_column (treeview, 0))
     {
       gtk_widget_grab_focus (GTK_WIDGET (treeview));
@@ -1210,23 +1023,23 @@ description_edited_callback (GtkCellRendererText *renderer,
   GtkTreeModel *model;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
   GtkTreeIter iter;
-  KeyEntry *key_entry;
+  CcKeyboardItem *item;
 
   model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
 
   gtk_tree_model_get (model, &iter,
-                      DETAIL_KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
   /* sanity check */
-  if (key_entry == NULL || key_entry->desc_gconf_key == NULL)
+  if (item == NULL || item->desc_gconf_key == NULL)
     return;
 
   client = gconf_client_get_default ();
-  if (!gconf_client_set_string (client, key_entry->desc_gconf_key, new_text, NULL))
-    key_entry->desc_editable = FALSE;
+  if (!gconf_client_set_string (client, item->desc_gconf_key, new_text, NULL))
+    item->desc_editable = FALSE;
 
   g_object_unref (client);
 }
@@ -1297,33 +1110,33 @@ show_error (GtkWindow *parent,
 }
 
 static gboolean
-cb_check_for_uniqueness (GtkTreeModel *model,
-                         GtkTreePath  *path,
-                         GtkTreeIter  *iter,
-                         KeyEntry *new_key)
+cb_check_for_uniqueness (GtkTreeModel   *model,
+                         GtkTreePath    *path,
+                         GtkTreeIter    *iter,
+                         CcKeyboardItem *new_item)
 {
-  KeyEntry *element;
+  CcKeyboardItem *element;
 
-  gtk_tree_model_get (new_key->model, iter,
+  gtk_tree_model_get (new_item->model, iter,
                       DETAIL_KEYENTRY_COLUMN, &element,
                       -1);
 
   /* no conflict for : blanks, different modifiers, or ourselves */
-  if (element == NULL || new_key->mask != element->mask ||
-      !strcmp (new_key->gconf_key, element->gconf_key))
+  if (element == NULL || new_item->mask != element->mask ||
+      !strcmp (new_item->gconf_key, element->gconf_key))
     return FALSE;
 
-  if (new_key->keyval != 0) {
-      if (new_key->keyval != element->keyval)
+  if (new_item->keyval != 0) {
+      if (new_item->keyval != element->keyval)
           return FALSE;
-  } else if (element->keyval != 0 || new_key->keycode != element->keycode)
+  } else if (element->keyval != 0 || new_item->keycode != element->keycode)
     return FALSE;
 
-  new_key->editable = FALSE;
-  new_key->gconf_key = element->gconf_key;
-  new_key->description = element->description;
-  new_key->desc_gconf_key = element->desc_gconf_key;
-  new_key->desc_editable = element->desc_editable;
+  new_item->editable = FALSE;
+  new_item->gconf_key = element->gconf_key;
+  new_item->description = element->description;
+  new_item->desc_gconf_key = element->desc_gconf_key;
+  new_item->desc_editable = element->desc_editable;
   return TRUE;
 }
 
@@ -1340,7 +1153,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
   GtkTreeModel *model;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
   GtkTreeIter iter;
-  KeyEntry *key_entry, tmp_key;
+  CcKeyboardItem *item, tmp_item;
   GError *err = NULL;
   char *str;
 
@@ -1350,44 +1163,44 @@ accel_edited_callback (GtkCellRendererText   *cell,
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
   gtk_tree_model_get (model, &iter,
-                      DETAIL_KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
   /* sanity check */
-  if (key_entry == NULL)
+  if (item == NULL)
     return;
 
   /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
   mask &= ~EGG_VIRTUAL_LOCK_MASK;
 
-  tmp_key.model  = model;
-  tmp_key.keyval = keyval;
-  tmp_key.keycode = keycode;
-  tmp_key.mask   = mask;
-  tmp_key.gconf_key = key_entry->gconf_key;
-  tmp_key.description = NULL;
-  tmp_key.editable = TRUE; /* kludge to stuff in a return flag */
+  tmp_item.model  = model;
+  tmp_item.keyval = keyval;
+  tmp_item.keycode = keycode;
+  tmp_item.mask   = mask;
+  tmp_item.gconf_key = item->gconf_key;
+  tmp_item.description = NULL;
+  tmp_item.editable = TRUE; /* kludge to stuff in a return flag */
 
   if (keyval != 0 || keycode != 0) /* any number of keys can be disabled */
     gtk_tree_model_foreach (model,
       (GtkTreeModelForeachFunc) cb_check_for_uniqueness,
-      &tmp_key);
+      &tmp_item);
 
   /* Check for unmodified keys */
-  if (tmp_key.mask == 0 && tmp_key.keycode != 0)
+  if (tmp_item.mask == 0 && tmp_item.keycode != 0)
     {
-      if ((tmp_key.keyval >= GDK_KEY_a && tmp_key.keyval <= GDK_KEY_z)
-           || (tmp_key.keyval >= GDK_KEY_A && tmp_key.keyval <= GDK_KEY_Z)
-           || (tmp_key.keyval >= GDK_KEY_0 && tmp_key.keyval <= GDK_KEY_9)
-           || (tmp_key.keyval >= GDK_KEY_kana_fullstop && tmp_key.keyval <= GDK_KEY_semivoicedsound)
-           || (tmp_key.keyval >= GDK_KEY_Arabic_comma && tmp_key.keyval <= GDK_KEY_Arabic_sukun)
-           || (tmp_key.keyval >= GDK_KEY_Serbian_dje && tmp_key.keyval <= GDK_KEY_Cyrillic_HARDSIGN)
-           || (tmp_key.keyval >= GDK_KEY_Greek_ALPHAaccent && tmp_key.keyval <= GDK_KEY_Greek_omega)
-           || (tmp_key.keyval >= GDK_KEY_hebrew_doublelowline && tmp_key.keyval <= GDK_KEY_hebrew_taf)
-           || (tmp_key.keyval >= GDK_KEY_Thai_kokai && tmp_key.keyval <= GDK_KEY_Thai_lekkao)
-           || (tmp_key.keyval >= GDK_KEY_Hangul && tmp_key.keyval <= GDK_KEY_Hangul_Special)
-           || (tmp_key.keyval >= GDK_KEY_Hangul_Kiyeog && tmp_key.keyval <= GDK_KEY_Hangul_J_YeorinHieuh)
-           || keyval_is_forbidden (tmp_key.keyval)) {
+      if ((tmp_item.keyval >= GDK_KEY_a && tmp_item.keyval <= GDK_KEY_z)
+           || (tmp_item.keyval >= GDK_KEY_A && tmp_item.keyval <= GDK_KEY_Z)
+           || (tmp_item.keyval >= GDK_KEY_0 && tmp_item.keyval <= GDK_KEY_9)
+           || (tmp_item.keyval >= GDK_KEY_kana_fullstop && tmp_item.keyval <= GDK_KEY_semivoicedsound)
+           || (tmp_item.keyval >= GDK_KEY_Arabic_comma && tmp_item.keyval <= GDK_KEY_Arabic_sukun)
+           || (tmp_item.keyval >= GDK_KEY_Serbian_dje && tmp_item.keyval <= GDK_KEY_Cyrillic_HARDSIGN)
+           || (tmp_item.keyval >= GDK_KEY_Greek_ALPHAaccent && tmp_item.keyval <= GDK_KEY_Greek_omega)
+           || (tmp_item.keyval >= GDK_KEY_hebrew_doublelowline && tmp_item.keyval <= GDK_KEY_hebrew_taf)
+           || (tmp_item.keyval >= GDK_KEY_Thai_kokai && tmp_item.keyval <= GDK_KEY_Thai_lekkao)
+           || (tmp_item.keyval >= GDK_KEY_Hangul && tmp_item.keyval <= GDK_KEY_Hangul_Special)
+           || (tmp_item.keyval >= GDK_KEY_Hangul_Kiyeog && tmp_item.keyval <= GDK_KEY_Hangul_J_YeorinHieuh)
+           || keyval_is_forbidden (tmp_item.keyval)) {
         GtkWidget *dialog;
         char *name;
 
@@ -1409,13 +1222,13 @@ accel_edited_callback (GtkCellRendererText   *cell,
         /* set it back to its previous value. */
         egg_cell_renderer_keys_set_accelerator
           (EGG_CELL_RENDERER_KEYS (cell),
-           key_entry->keyval, key_entry->keycode, key_entry->mask);
+           item->keyval, item->keycode, item->mask);
         return;
       }
     }
 
   /* flag to see if the new accelerator was in use by something */
-  if (!tmp_key.editable)
+  if (!tmp_item.editable)
     {
       GtkWidget *dialog;
       char *name;
@@ -1429,17 +1242,17 @@ accel_edited_callback (GtkCellRendererText   *cell,
                                 GTK_MESSAGE_WARNING,
                                 GTK_BUTTONS_CANCEL,
                                 _("The shortcut \"%s\" is already used for\n\"%s\""),
-                                name, tmp_key.description ?
-                                tmp_key.description : tmp_key.gconf_key);
+                                name, tmp_item.description ?
+                                tmp_item.description : tmp_item.gconf_key);
       g_free (name);
 
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
           _("If you reassign the shortcut to \"%s\", the \"%s\" shortcut "
             "will be disabled."),
-          key_entry->description ?
-          key_entry->description : key_entry->gconf_key,
-          tmp_key.description ?
-          tmp_key.description : tmp_key.gconf_key);
+          item->description ?
+          item->description : item->gconf_key,
+          tmp_item.description ?
+          tmp_item.description : tmp_item.gconf_key);
 
       gtk_dialog_add_button (GTK_DIALOG (dialog),
                              _("_Reassign"),
@@ -1458,7 +1271,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
           client = gconf_client_get_default ();
 
           gconf_client_set_string (client,
-                                   tmp_key.gconf_key,
+                                   tmp_item.gconf_key,
                                    "", &err);
 
           if (err != NULL)
@@ -1472,7 +1285,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
           str = binding_name (keyval, keycode, mask, FALSE);
           gconf_client_set_string (client,
-                                   key_entry->gconf_key,
+                                   item->gconf_key,
                                    str, &err);
 
           if (err != NULL)
@@ -1483,7 +1296,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
                /* reset the previous shortcut */
                gconf_client_set_string (client,
-                                        tmp_key.gconf_key,
+                                        tmp_item.gconf_key,
                                         str, NULL);
             }
 
@@ -1494,9 +1307,9 @@ accel_edited_callback (GtkCellRendererText   *cell,
         {
           /* set it back to its previous value. */
           egg_cell_renderer_keys_set_accelerator (EGG_CELL_RENDERER_KEYS (cell),
-                                                  key_entry->keyval,
-                                                  key_entry->keycode,
-                                                  key_entry->mask);
+                                                  item->keyval,
+                                                  item->keycode,
+                                                  item->mask);
         }
 
       return;
@@ -1506,7 +1319,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
   client = gconf_client_get_default ();
   gconf_client_set_string (client,
-                           key_entry->gconf_key,
+                           item->gconf_key,
                            str,
                            &err);
   g_free (str);
@@ -1516,7 +1329,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
     {
       show_error (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))), err);
       g_error_free (err);
-      key_entry->editable = FALSE;
+      item->editable = FALSE;
     }
 }
 
@@ -1528,7 +1341,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
   GConfClient *client;
   GtkTreeView *view = (GtkTreeView *) data;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
-  KeyEntry *key_entry;
+  CcKeyboardItem *item;
   GtkTreeIter iter;
   GError *err = NULL;
   GtkTreeModel *model;
@@ -1539,18 +1352,18 @@ accel_cleared_callback (GtkCellRendererText *cell,
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
   gtk_tree_model_get (model, &iter,
-                      DETAIL_KEYENTRY_COLUMN, &key_entry,
+                      DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
   /* sanity check */
-  if (key_entry == NULL)
+  if (item == NULL)
     return;
 
   /* Unset the key */
   client = gconf_client_get_default();
   gconf_client_set_string (client,
-                           key_entry->gconf_key,
-                           "",
+			   item->gconf_key,
+			   "",
                            &err);
   g_object_unref (client);
 
@@ -1568,7 +1381,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
 
       gtk_widget_destroy (dialog);
       g_error_free (err);
-      key_entry->editable = FALSE;
+      item->editable = FALSE;
     }
 }
 
@@ -1632,7 +1445,7 @@ static void
 add_custom_shortcut (GtkTreeView  *tree_view,
                      GtkTreeModel *model)
 {
-  KeyEntry *key_entry;
+  CcKeyboardItem *item;
   GtkTreePath *path;
   gchar *dir;
   GConfClient *client;
@@ -1648,24 +1461,37 @@ add_custom_shortcut (GtkTreeView  *tree_view,
       return;
     }
 
-  key_entry = g_new0 (KeyEntry, 1);
-  key_entry->gconf_key = g_strconcat (dir, "/binding", NULL);
-  key_entry->editable = TRUE;
-  key_entry->model = model;
-  key_entry->desc_gconf_key = g_strconcat (dir, "/name", NULL);
-  key_entry->description = g_strdup ("");
-  key_entry->desc_editable = TRUE;
-  key_entry->cmd_gconf_key = g_strconcat (dir, "/action", NULL);
-  key_entry->command = g_strdup ("");
-  key_entry->cmd_editable = TRUE;
-  g_free (dir);
+  /* FIXME this is way ugly */
+  item = cc_keyboard_item_new (CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
+  item->gconf_key_dir = g_strdup (dir);
+  item->gconf_key = g_strconcat (dir, "/binding", NULL);
+  item->editable = TRUE;
+  item->model = model;
+  item->desc_gconf_key = g_strconcat (dir, "/name", NULL);
+  item->description = g_strdup ("");
+  item->desc_editable = TRUE;
+  item->cmd_gconf_key = g_strconcat (dir, "/action", NULL);
+  item->command = g_strdup ("");
+  item->cmd_editable = TRUE;
 
-  if (edit_custom_shortcut (key_entry) &&
-      key_entry->command && key_entry->command[0])
+  if (edit_custom_shortcut (item) &&
+      item->command && item->command[0])
     {
       GPtrArray *keys_array;
       GtkTreeIter iter;
       GHashTable *hash;
+
+      /* store in gconf */
+      client = gconf_client_get_default ();
+      gconf_client_set_string (client, item->gconf_key, "", NULL);
+      gconf_client_set_string (client, item->desc_gconf_key, item->description, NULL);
+      gconf_client_set_string (client, item->cmd_gconf_key, item->command, NULL);
+      g_object_unref (client);
+      g_object_unref (item);
+
+      /* Now setup the actual item we'll be adding */
+      item = cc_keyboard_item_new (CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
+      cc_keyboard_item_load_from_gconf_dir (item, dir);
 
       hash = get_hash_for_group (BINDING_GROUP_USER);
       keys_array = g_hash_table_lookup (hash, _("Custom Shortcuts"));
@@ -1675,33 +1501,10 @@ add_custom_shortcut (GtkTreeView  *tree_view,
           g_hash_table_insert (hash, g_strdup (_("Custom Shortcuts")), keys_array);
         }
 
-      g_ptr_array_add (keys_array, key_entry);
+      g_ptr_array_add (keys_array, item);
 
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter, DETAIL_KEYENTRY_COLUMN, key_entry, -1);
-
-      /* store in gconf */
-      client = gconf_client_get_default ();
-      gconf_client_set_string (client, key_entry->gconf_key, "", NULL);
-      gconf_client_set_string (client, key_entry->desc_gconf_key, key_entry->description, NULL);
-      gconf_client_set_string (client, key_entry->cmd_gconf_key, key_entry->command, NULL);
-
-      /* add gconf watches */
-      key_entry->gconf_cnxn_desc = gconf_client_notify_add (client,
-                                                            key_entry->desc_gconf_key,
-                                                            (GConfClientNotifyFunc) &keybinding_description_changed,
-                                                            key_entry, NULL, NULL);
-      key_entry->gconf_cnxn_cmd = gconf_client_notify_add (client,
-                                                           key_entry->cmd_gconf_key,
-                                                           (GConfClientNotifyFunc) &keybinding_command_changed,
-                                                           key_entry, NULL, NULL);
-      key_entry->gconf_cnxn = gconf_client_notify_add (client,
-                                                       key_entry->gconf_key,
-                                                       (GConfClientNotifyFunc) &keybinding_key_changed,
-                                                       key_entry, NULL, NULL);
-
-
-      g_object_unref (client);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter, DETAIL_KEYENTRY_COLUMN, item, -1);
 
       /* make the new shortcut visible */
       path = gtk_tree_model_get_path (model, &iter);
@@ -1711,12 +1514,7 @@ add_custom_shortcut (GtkTreeView  *tree_view,
     }
   else
     {
-      g_free (key_entry->gconf_key);
-      g_free (key_entry->description);
-      g_free (key_entry->desc_gconf_key);
-      g_free (key_entry->command);
-      g_free (key_entry->cmd_gconf_key);
-      g_free (key_entry);
+      g_object_unref (item);
     }
 }
 
@@ -1760,35 +1558,35 @@ keyentry_sort_func (GtkTreeModel *model,
                     GtkTreeIter  *b,
                     gpointer      user_data)
 {
-  KeyEntry *key_entry_a;
-  KeyEntry *key_entry_b;
+  CcKeyboardItem *item_a;
+  CcKeyboardItem *item_b;
   int retval;
 
-  key_entry_a = NULL;
+  item_a = NULL;
   gtk_tree_model_get (model, a,
-                      DETAIL_KEYENTRY_COLUMN, &key_entry_a,
+                      DETAIL_KEYENTRY_COLUMN, &item_a,
                       -1);
 
-  key_entry_b = NULL;
+  item_b = NULL;
   gtk_tree_model_get (model, b,
-                      DETAIL_KEYENTRY_COLUMN, &key_entry_b,
+                      DETAIL_KEYENTRY_COLUMN, &item_b,
                       -1);
 
-  if (key_entry_a && key_entry_b)
+  if (item_a && item_b)
     {
-      if ((key_entry_a->keyval || key_entry_a->keycode) &&
-          (key_entry_b->keyval || key_entry_b->keycode))
+      if ((item_a->keyval || item_a->keycode) &&
+          (item_b->keyval || item_b->keycode))
         {
           gchar *name_a, *name_b;
 
-          name_a = binding_name (key_entry_a->keyval,
-                                 key_entry_a->keycode,
-                                 key_entry_a->mask,
+          name_a = binding_name (item_a->keyval,
+                                 item_a->keycode,
+                                 item_a->mask,
                                  TRUE);
 
-          name_b = binding_name (key_entry_b->keyval,
-                                 key_entry_b->keycode,
-                                 key_entry_b->mask,
+          name_b = binding_name (item_b->keyval,
+                                 item_b->keycode,
+                                 item_b->mask,
                                  TRUE);
 
           retval = g_utf8_collate (name_a, name_b);
@@ -1796,16 +1594,16 @@ keyentry_sort_func (GtkTreeModel *model,
           g_free (name_a);
           g_free (name_b);
         }
-      else if (key_entry_a->keyval || key_entry_a->keycode)
+      else if (item_a->keyval || item_a->keycode)
         retval = -1;
-      else if (key_entry_b->keyval || key_entry_b->keycode)
+      else if (item_b->keyval || item_b->keycode)
         retval = 1;
       else
         retval = 0;
     }
-  else if (key_entry_a)
+  else if (item_a)
     retval = -1;
-  else if (key_entry_b)
+  else if (item_b)
     retval = 1;
   else
     retval = 0;
