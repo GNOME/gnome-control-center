@@ -579,10 +579,18 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
 
   g_free (keylist->name);
   g_free (keylist->package);
+  g_free (keylist->wm_name);
+  g_free (keylist->schema);
+  g_free (keylist->group);
 
-  /* FIXME memory leak */
-  for (i = 0; keys[i].name != NULL; i++)
-    g_free (keys[i].name);
+  for (i = 0; keys[i].name != NULL; i++) {
+    KeyListEntry *entry = &keys[i];
+    g_free (entry->schema);
+    g_free (entry->description);
+    g_free (entry->gettext_package);
+    g_free (entry->name);
+    g_free (entry->key);
+  }
 
   g_free (keylist);
 }
@@ -1650,6 +1658,9 @@ section_sort_item  (GtkTreeModel *model,
         ret = 1;
     }
 
+  g_free (a_desc);
+  g_free (b_desc);
+
   return ret;
 }
 
@@ -1708,7 +1719,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   gtk_tree_view_append_column (treeview, column);
 
-  model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
+  model = gtk_list_store_new (SECTION_N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
   sort_model = GTK_TREE_MODEL_SORT (gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (model)));
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (sort_model));
   g_object_unref (model);
