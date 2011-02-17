@@ -332,8 +332,11 @@ cc_keyboard_item_finalize (GObject *object)
   g_object_unref (client);
 
   /* Free memory */
+  g_free (item->binding);
   g_free (item->gettext_package);
   g_free (item->gconf_key);
+  g_free (item->gconf_key_dir);
+  g_free (item->binding_gconf_key);
   g_free (item->description);
   g_free (item->desc_gconf_key);
   g_free (item->command);
