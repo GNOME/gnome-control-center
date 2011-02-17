@@ -377,7 +377,7 @@ get_current_is_fallback (CcInfoPanel  *self)
 {
   GError   *error;
   GVariant *reply;
-  GVariant *reply_bool;
+  GVariant *reply_str;
   gboolean  is_fallback;
 
   error = NULL;
@@ -386,7 +386,7 @@ get_current_is_fallback (CcInfoPanel  *self)
                                              "/org/gnome/SessionManager",
                                              "org.freedesktop.DBus.Properties",
                                              "Get",
-                                             g_variant_new ("(ss)", "org.gnome.SessionManager", "fallback"),
+                                             g_variant_new ("(ss)", "org.gnome.SessionManager", "session-name"),
                                              (GVariantType*)"(v)",
                                              0,
                                              -1,
@@ -397,9 +397,9 @@ get_current_is_fallback (CcInfoPanel  *self)
       return FALSE;
     }
 
-  g_variant_get (reply, "(v)", &reply_bool);
-  is_fallback = g_variant_get_boolean (reply_bool);
-  g_variant_unref (reply_bool);
+  g_variant_get (reply, "(v)", &reply_str);
+  is_fallback = g_strcmp0 ("gnome-fallback", g_variant_get_string (reply_str, NULL)) == 0;
+  g_variant_unref (reply_str);
   g_variant_unref (reply);
 
   return is_fallback;
