@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-02-15 04:06+0000\n"
-"PO-Revision-Date: 2011-02-15 21:10+0100\n"
+"POT-Creation-Date: 2011-02-17 18:54+0000\n"
+"PO-Revision-Date: 2011-02-17 21:16+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -256,18 +256,18 @@ msgstr "Colores y gradientes"
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-item.c:150
+#: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
 msgstr "tamaños múltiples"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:154
+#: ../panels/background/cc-background-item.c:152
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:257
+#: ../panels/background/cc-background-item.c:255
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
@@ -550,19 +550,6 @@ msgstr "No se pudieron detectar las pantallas"
 msgid "Could not get screen information"
 msgstr "No se pudo obtener la información de la pantalla"
 
-#: ../panels/info/cc-info-panel.c:400
-#, fuzzy
-#| msgid "Callback"
-msgid "Fallback"
-msgstr "Reserva"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/info/cc-info-panel.c:400 ../panels/printers/printers.ui.h:8
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:581
-msgid "Default"
-msgstr "Predeterminado"
-
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
 #: ../panels/info/cc-info-panel.c:502
@@ -611,27 +598,42 @@ msgstr "%.1f EiB"
 msgid "Unknown model"
 msgstr "Modelo desconocido"
 
-#: ../panels/info/cc-info-panel.c:827
-#: ../panels/keyboard/keyboard-shortcuts.c:1907
+#. translators: The hardware is not able to run GNOME 3's
+#. * shell, so we use the GNOME "Fallback" session
+#: ../panels/info/cc-info-panel.c:785
+#, fuzzy
+#| msgid "Callback"
+msgctxt "Experience"
+msgid "Fallback"
+msgstr "Reserva"
+
+#. translators: The hardware is able to run GNOME 3's
+#. * shell, also called "Standard" experience
+#: ../panels/info/cc-info-panel.c:791
+#| msgctxt "Account type"
+#| msgid "Standard"
+msgctxt "Experience"
+msgid "Standard"
+msgstr "Estándar"
+
+#: ../panels/info/cc-info-panel.c:862
+#: ../panels/keyboard/keyboard-shortcuts.c:1711
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/info/cc-info-panel.c:836 ../panels/info/info.ui.h:16
-#| msgid "Preview"
+#: ../panels/info/cc-info-panel.c:871 ../panels/info/info.ui.h:17
 msgid "Overview"
 msgstr "Visión general"
 
-#: ../panels/info/cc-info-panel.c:842 ../panels/info/info.ui.h:5
-#| msgid "- GNOME Default Applications"
+#: ../panels/info/cc-info-panel.c:877 ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "Aplicaciones predeterminadas"
 
-#: ../panels/info/cc-info-panel.c:847 ../panels/info/info.ui.h:10
-#| msgid "Graphics:"
+#: ../panels/info/cc-info-panel.c:882 ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "Gráficos"
 
-#: ../panels/info/cc-info-panel.c:872
+#: ../panels/info/cc-info-panel.c:907
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
@@ -650,98 +652,193 @@ msgid "device;system;information;memory;processor;version;"
 msgstr "dispositivo;sistema;información;memoria;procesador;versión;"
 
 #: ../panels/info/info.ui.h:1
-#, fuzzy
-msgid "Always use fallback:"
-msgstr "Usar siempre reserva:"
-
-#: ../panels/info/info.ui.h:2
-#| msgid "Cale_ndar:"
 msgid "Calendar"
 msgstr "Calendario"
 
-#: ../panels/info/info.ui.h:3
-#| msgid "Chocolate"
+#: ../panels/info/info.ui.h:2
 msgid "Chat"
 msgstr "Chat"
 
-#: ../panels/info/info.ui.h:4
-#| msgid "City:"
+#: ../panels/info/info.ui.h:3
 msgid "Chipset:"
 msgstr "Chipset:"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:5
 msgid "Device name:"
 msgstr "Nombre del dispositivo:"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:6
 msgid "Disk:"
 msgstr "Disco:"
 
-#: ../panels/info/info.ui.h:8
-#| msgid "Provider:"
+#: ../panels/info/info.ui.h:7
 msgid "Driver:"
 msgstr "Controlador:"
 
-#: ../panels/info/info.ui.h:9
+#: ../panels/info/info.ui.h:8
 msgid "Experience:"
 msgstr "Experiencia:"
 
-#: ../panels/info/info.ui.h:11
+#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
+#: ../panels/info/info.ui.h:10
+msgid "Forced Fallback Mode:"
+msgstr ""
+
+#: ../panels/info/info.ui.h:12
 msgid "Graphics:"
 msgstr "Gráficos:"
 
-#: ../panels/info/info.ui.h:12
-#| msgid "KMail"
+#: ../panels/info/info.ui.h:13
 msgid "Mail"
 msgstr "Correo"
 
-#: ../panels/info/info.ui.h:13
+#: ../panels/info/info.ui.h:14
 msgid "Memory:"
 msgstr "Memoria:"
 
-#: ../panels/info/info.ui.h:14
-#| msgid "Mouse"
+#: ../panels/info/info.ui.h:15
 msgid "Music"
 msgstr "Música"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:16
 msgid "OS type:"
 msgstr "Tipo de SO:"
 
-#: ../panels/info/info.ui.h:17
-#| msgid "_Photos:"
+#: ../panels/info/info.ui.h:18
 msgid "Photos"
 msgstr "Fotos"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:19
 msgid "Processor:"
 msgstr "Procesador:"
 
-#: ../panels/info/info.ui.h:19
-#| msgid "Update Available"
+#: ../panels/info/info.ui.h:20
 msgid "Updates Available"
 msgstr "Actualizaciones disponibles"
 
-#: ../panels/info/info.ui.h:20
-#| msgid "Video CD"
+#: ../panels/info/info.ui.h:21
 msgid "Video"
 msgstr "Vídeo"
 
-#: ../panels/info/info.ui.h:21
+#: ../panels/info/info.ui.h:22
 msgid "Web"
 msgstr "Web"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
+#| msgid "rejected"
+msgid "Eject"
+msgstr "Expulsar"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:2
+#| msgid "Multimedia Player"
+msgid "Launch media player"
+msgstr "Lanzar el reproductor multimedia"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:3
+msgid "Next track"
+msgstr "Siguiente pista"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:4
+#| msgid "S_ound playback:"
+msgid "Pause playback"
+msgstr "Pausar la reproducción"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:5
+msgid "Play (or play/pause)"
+msgstr "Reproducir (o reproducir/pausar)"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:6
+msgid "Previous track"
+msgstr "Pista anterior"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Sound and Media"
 msgstr "Sonido y medios"
 
+#: ../panels/keyboard/00-multimedia.xml.in.h:8
+#| msgid "S_ound playback:"
+msgid "Stop playback"
+msgstr "Detener la reproducción"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:9
+#| msgid "Volume Control"
+msgid "Volume down"
+msgstr "Bajar volumen"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:10
+#| msgid "Volume Control"
+msgid "Volume mute"
+msgstr "Silenciar"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:11
+#| msgid "Roll up"
+msgid "Volume up"
+msgstr "Subir volumen"
+
 #: ../panels/keyboard/01-launchers.xml.in.h:1
+#| msgid "Open folder"
+msgid "Home folder"
+msgstr "Carpeta personal"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:2
+msgid "Launch calculator"
+msgstr "Lanzar la calculadora"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:3
+msgid "Launch email client"
+msgstr "Lanzar el cliente de correo-e"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:4
+#| msgid "Launchers"
+msgid "Launch help browser"
+msgstr "Lanzar el visor de ayuda"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:5
+#| msgid "Launchers"
+msgid "Launch web browser"
+msgstr "Lanzar navegador web"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:6
 msgid "Launchers"
 msgstr "Lanzadores"
 
+#: ../panels/keyboard/01-launchers.xml.in.h:7
+#| msgid "March"
+msgid "Search"
+msgstr "Buscar"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
+#| msgid "Lock screen after:"
+msgid "Lock screen"
+msgstr "Bloquear la pantalla"
+
+#: ../panels/keyboard/01-system.xml.in.h:2
+#| msgid "Logout"
+msgid "Log out"
+msgstr "Cerrar la sesión"
+
+#: ../panels/keyboard/01-system.xml.in.h:3
 msgid "System"
 msgstr "Sistema"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:1
+msgid "Toggle magnifier"
+msgstr "Conmutar el magnificador"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:2
+#| msgid "On screen keyboard"
+msgid "Toggle on-screen keyboard"
+msgstr "Conmutar el teclado en pantalla"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
+#| msgid "Screen Reader"
+msgid "Toggle screen reader"
+msgstr "Conmutar el lector de pantalla"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:4
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
+msgid "Universal Access"
+msgstr "Acceso universal"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -773,7 +870,7 @@ msgstr "El tipo de combinación."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1268
+#: ../panels/keyboard/keyboard-shortcuts.c:1141
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -794,22 +891,22 @@ msgstr "Teclado"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Atajo;Repetir;Parpadear;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:775
-#: ../panels/keyboard/keyboard-shortcuts.c:1040
-#: ../panels/keyboard/keyboard-shortcuts.c:1674
-#: ../panels/keyboard/keyboard-shortcuts.c:1678
+#: ../panels/keyboard/keyboard-shortcuts.c:643
+#: ../panels/keyboard/keyboard-shortcuts.c:916
+#: ../panels/keyboard/keyboard-shortcuts.c:1503
+#: ../panels/keyboard/keyboard-shortcuts.c:1507
 msgid "Custom Shortcuts"
 msgstr "Combinación personalizada"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:887
+#: ../panels/keyboard/keyboard-shortcuts.c:768
 msgid "<Unknown Action>"
 msgstr "<Acción desconocida>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1294
+#: ../panels/keyboard/keyboard-shortcuts.c:1167
 msgid "Error saving the new shortcut"
 msgstr "Error al guardar la combinación nueva"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1404
+#: ../panels/keyboard/keyboard-shortcuts.c:1282
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -821,7 +918,7 @@ msgstr ""
 "Por favor, inténtelo con una tecla como Control, Alt o Mayús. al mismo "
 "tiempo."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1434
+#: ../panels/keyboard/keyboard-shortcuts.c:1314
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -830,32 +927,25 @@ msgstr ""
 "La combinación «%s» ya se está usando para\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Si reasigna la combinación a «%s» se desactivará la combinación «%s»."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1448
+#: ../panels/keyboard/keyboard-shortcuts.c:1328
 msgid "_Reassign"
 msgstr "_Reasignar"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1568
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr ""
-"Error al borrar una combinación de teclas en la base de datos de "
-"configuración: %s"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1626
+#: ../panels/keyboard/keyboard-shortcuts.c:1442
 msgid "Too many custom shortcuts"
 msgstr "Demasiadas combinaciones personalizadas"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1956
+#: ../panels/keyboard/keyboard-shortcuts.c:1760
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1979
+#: ../panels/keyboard/keyboard-shortcuts.c:1783
 msgid "Shortcut"
 msgstr "Combinación"
 
@@ -1336,6 +1426,13 @@ msgstr "Usuarios permitidos"
 #: ../panels/printers/printers.ui.h:6
 msgid "Back"
 msgstr "Atrás"
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/printers/printers.ui.h:8
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
+msgid "Default"
+msgstr "Predeterminado"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
@@ -2334,10 +2431,6 @@ msgstr "Sonar"
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Keyboard;Mouse;a11y;Accessibility;"
 msgstr "teclado;ratón;accesibilidad;a11y;"
-
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
-msgid "Universal Access"
-msgstr "Acceso universal"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3348,6 +3441,15 @@ msgstr "Centro de control"
 msgid "_All Settings"
 msgstr "_Todas las configuraciones"
 
+#, fuzzy
+#~ msgid "Always use fallback:"
+#~ msgstr "Usar siempre reserva:"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr ""
+#~ "Error al borrar una combinación de teclas en la base de datos de "
+#~ "configuración: %s"
+
 #~ msgid "More Info"
 #~ msgstr "Más información"
 
@@ -4234,9 +4336,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "Multimedia"
 #~ msgstr "Multimedia"
-
-#~ msgid "Multimedia Player"
-#~ msgstr "Reproductor multimedia"
 
 #~ msgid "Open link in new _tab"
 #~ msgstr "Abrir enlace en una _solapa nueva"
@@ -5407,9 +5506,6 @@ msgstr "_Todas las configuraciones"
 #~ msgid "Maximize Horizontally"
 #~ msgstr "Maximizar horizontalmente"
 
-#~ msgid "Roll up"
-#~ msgstr "Enrollar"
-
 #~ msgid "Accessible Lo_gin"
 #~ msgstr "_Inicio de sesión accesible"
 
@@ -5877,9 +5973,6 @@ msgstr "_Todas las configuraciones"
 #~ msgid "<b>_Wallpaper</b>"
 #~ msgstr "<b>_Tapiz</b>"
 
-#~ msgid "Logout"
-#~ msgstr "Salida"
-
 #~ msgid "Autodetect"
 #~ msgstr "Autodetectar"
 
@@ -5924,9 +6017,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "Play _sound effects when buttons are clicked"
 #~ msgstr "Reproducir efectos de _sonido al pulsar botones"
-
-#~ msgid "S_ound playback:"
-#~ msgstr "Repr_oducción de sonido:"
 
 #~ msgid ""
 #~ "Select the device and tracks to control with the keyboard. Use the Shift "
