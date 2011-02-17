@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-17 19:45+0200\n"
-"PO-Revision-Date: 2011-02-17 19:45+0300\n"
+"POT-Creation-Date: 2011-02-17 21:12+0200\n"
+"PO-Revision-Date: 2011-02-17 21:12+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -580,34 +580,38 @@ msgstr "%.1f إ.بايت"
 msgid "Unknown model"
 msgstr "طِراز مجهول"
 
-#: ../panels/info/cc-info-panel.c:782
+#. translators: The hardware is not able to run GNOME 3's
+#. * shell, so we use the GNOME "Fallback" session
+#: ../panels/info/cc-info-panel.c:785
+msgctxt "Experience"
 msgid "Fallback"
 msgstr "تقليدية"
 
-#: ../panels/info/cc-info-panel.c:784
-#: ../panels/user-accounts/data/account-dialog.ui.h:4
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#. translators: The hardware is able to run GNOME 3's
+#. * shell, also called "Standard" experience
+#: ../panels/info/cc-info-panel.c:791
+msgctxt "Experience"
 msgid "Standard"
-msgstr "عادي"
+msgstr "عادية"
 
-#: ../panels/info/cc-info-panel.c:854
+#: ../panels/info/cc-info-panel.c:862
 #: ../panels/keyboard/keyboard-shortcuts.c:1711
 msgid "Section"
 msgstr "القسم"
 
-#: ../panels/info/cc-info-panel.c:863 ../panels/info/info.ui.h:16
+#: ../panels/info/cc-info-panel.c:871 ../panels/info/info.ui.h:17
 msgid "Overview"
 msgstr "عام"
 
-#: ../panels/info/cc-info-panel.c:869 ../panels/info/info.ui.h:4
+#: ../panels/info/cc-info-panel.c:877 ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "التطبيقات المبدئية"
 
-#: ../panels/info/cc-info-panel.c:874 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:882 ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "الرسوميات"
 
-#: ../panels/info/cc-info-panel.c:899
+#: ../panels/info/cc-info-panel.c:907
 #, c-format
 msgid "Version %s"
 msgstr "الإصدارة %s"
@@ -653,47 +657,48 @@ msgstr "المُشغّل:"
 msgid "Experience:"
 msgstr "الواجهة:"
 
-#: ../panels/info/info.ui.h:9
+#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
+#: ../panels/info/info.ui.h:10
 msgid "Forced Fallback Mode:"
 msgstr "افرض الطور التقليدي:"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info.ui.h:12
 msgid "Graphics:"
 msgstr "الرسوميات:"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info.ui.h:13
 msgid "Mail"
 msgstr "البريد"
 
-#: ../panels/info/info.ui.h:13
+#: ../panels/info/info.ui.h:14
 msgid "Memory:"
 msgstr "الذاكرة:"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:15
 msgid "Music"
 msgstr "الصوتيات"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:16
 msgid "OS type:"
 msgstr "نوع نظام التشغيل:"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:18
 msgid "Photos"
 msgstr "الصور"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:19
 msgid "Processor:"
 msgstr "المعالج:"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:20
 msgid "Updates Available"
 msgstr "يوجد تحديثات"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:21
 msgid "Video"
 msgstr "الفيديو"
 
-#: ../panels/info/info.ui.h:21
+#: ../panels/info/info.ui.h:22
 msgid "Web"
 msgstr "الوب"
 
@@ -3163,6 +3168,11 @@ msgstr "أ_نشئ"
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "Create new account"
 msgstr "أنشئ حسابا جديدا"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "Standard"
+msgstr "عادي"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
