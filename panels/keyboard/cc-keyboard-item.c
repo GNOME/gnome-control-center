@@ -535,6 +535,8 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
 				      const char *schema,
 				      const char *key)
 {
+  char *signal_name;
+
   item->schema = g_strdup (schema);
   item->key = g_strdup (key);
   item->description = g_strdup (description);
@@ -544,8 +546,10 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   item->editable = g_settings_is_writable (item->settings, item->key);
   binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
 
-  g_signal_connect (G_OBJECT (item->settings), "changed",
+  signal_name = g_strdup_printf ("changed::%s", item->key);
+  g_signal_connect (G_OBJECT (item->settings), signal_name,
 		    G_CALLBACK (binding_changed), item);
+  g_free (signal_name);
 
   return TRUE;
 }
