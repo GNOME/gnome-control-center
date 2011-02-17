@@ -779,9 +779,17 @@ info_panel_setup_graphics (CcInfoPanel  *self)
 
   self->priv->is_fallback = get_current_is_fallback (self);
   if (self->priv->is_fallback)
-    text = g_strdup (_("Fallback"));
+    {
+      /* translators: The hardware is not able to run GNOME 3's
+       * shell, so we use the GNOME "Fallback" session */
+      text = g_strdup (_("Fallback"));
+    }
   else
-    text = g_strdup (_("Standard"));
+    {
+      /* translators: The hardware is able to run GNOME 3's
+       * shell, also called "Standard" experience */
+      text = g_strdup (_("Standard"));
+    }
   widget = WID (self->priv->builder, "graphics_experience_label");
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
