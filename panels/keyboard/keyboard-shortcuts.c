@@ -496,7 +496,7 @@ strv_contains (char **strv,
 }
 
 static void
-append_sections_from_file (GtkBuilder *builder, const gchar *path, gchar **wm_keybindings)
+append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *datadir, gchar **wm_keybindings)
 {
   GError *err = NULL;
   char *buf;
@@ -560,7 +560,12 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, gchar **wm_ke
   keys = (KeyListEntry *) g_array_free (keylist->entries, FALSE);
   if (keylist->package)
     {
-      bind_textdomain_codeset (keylist->package, "UTF-8");
+      char *localedir;
+
+      localedir = g_build_filename (datadir, "locale", NULL);
+      bindtextdomain (keylist->package, localedir);
+      g_free (localedir);
+
       title = dgettext (keylist->package, keylist->name);
     } else {
       title = _(keylist->name);
@@ -575,6 +580,7 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, gchar **wm_ke
   g_free (keylist->name);
   g_free (keylist->package);
 
+  /* FIXME memory leak */
   for (i = 0; keys[i].name != NULL; i++)
     g_free (keys[i].name);
 
@@ -645,6 +651,8 @@ reload_sections (GtkBuilder *builder)
   GtkTreeModel *sort_model;
   GtkTreeModel *section_model;
   GtkTreeModel *shortcut_model;
+  const gchar * const * data_dirs;
+  guint i;
 
   sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
   section_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
@@ -659,24 +667,36 @@ reload_sections (GtkBuilder *builder)
   /* Load WM keybindings */
   wm_keybindings = wm_common_get_current_keybindings ();
 
-  dir = g_dir_open (GNOMECC_KEYBINDINGS_DIR, 0, NULL);
-  if (!dir)
-      return;
-
-  for (name = g_dir_read_name (dir) ; name ; name = g_dir_read_name (dir))
+  data_dirs = g_get_system_data_dirs ();
+  for (i = 0; data_dirs[i] != NULL; i++)
     {
-      if (g_str_has_suffix (name, ".xml"))
+      char *dir_path;
+
+      dir_path = g_build_filename (data_dirs[i], "gnome-control-center", "keybindings", NULL);
+
+      dir = g_dir_open (dir_path, 0, NULL);
+      if (!dir)
         {
-          gchar *path;
+          g_free (dir_path);
+	  return;
+	}
 
-          path = g_build_filename (GNOMECC_KEYBINDINGS_DIR, name, NULL);
-          append_sections_from_file (builder, path, wm_keybindings);
+      for (name = g_dir_read_name (dir) ; name ; name = g_dir_read_name (dir))
+        {
+	  if (g_str_has_suffix (name, ".xml"))
+	    {
+	      gchar *path;
 
-          g_free (path);
-        }
+	      path = g_build_filename (dir_path, name, NULL);
+	      append_sections_from_file (builder, path, data_dirs[i], wm_keybindings);
+
+	      g_free (path);
+	    }
+	}
+      g_free (dir_path);
+      g_dir_close (dir);
     }
 
-  g_dir_close (dir);
   g_strfreev (wm_keybindings);
 
   /* Load custom keybindings */
