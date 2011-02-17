@@ -65,6 +65,7 @@ typedef struct
   BindingGroupType group;
   GtkTreeModel *model;
   char *description;
+  char *gettext_package;
   char *binding;
 
   /* GCONF */
@@ -101,6 +102,7 @@ GType              cc_keyboard_item_get_type (void);
 
 CcKeyboardItem * cc_keyboard_item_new         (CcKeyboardItemType type);
 gboolean cc_keyboard_item_load_from_gconf     (CcKeyboardItem *item,
+					       const char *gettext_package,
 					       const char *key);
 gboolean cc_keyboard_item_load_from_gconf_dir (CcKeyboardItem *item,
 					       const char *key_dir);

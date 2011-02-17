@@ -332,6 +332,7 @@ cc_keyboard_item_finalize (GObject *object)
   g_object_unref (client);
 
   /* Free memory */
+  g_free (item->gettext_package);
   g_free (item->gconf_key);
   g_free (item->description);
   g_free (item->desc_gconf_key);
@@ -412,6 +413,7 @@ binding_changed (GSettings *settings,
 
 gboolean
 cc_keyboard_item_load_from_gconf (CcKeyboardItem *item,
+				  const char *gettext_package,
                                   const char *key)
 {
   GConfClient *client;
@@ -432,12 +434,21 @@ cc_keyboard_item_load_from_gconf (CcKeyboardItem *item,
 
   if (gconf_entry_get_schema_name (entry)) {
     GConfSchema *schema;
+    const char *description;
 
     schema = gconf_client_get_schema (client,
                                       gconf_entry_get_schema_name (entry),
                                       NULL);
     if (schema != NULL) {
-      item->description = g_strdup (gconf_schema_get_short_desc (schema));
+      g_debug ("trying to get translation for '%s' using package '%s'",
+	       gconf_schema_get_short_desc (schema), gettext_package);
+      if (gettext_package != NULL) {
+	bind_textdomain_codeset (gettext_package, "UTF-8");
+	description = dgettext (gettext_package, gconf_schema_get_short_desc (schema));
+      } else {
+	description = _(gconf_schema_get_short_desc (schema));
+      }
+      item->description = g_strdup (description);
       gconf_schema_free (schema);
     }
   }
