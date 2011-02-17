@@ -734,9 +734,18 @@ static void
 toggle_fallback_warning_label (CcInfoPanel *self,
                                gboolean     visible)
 {
-  GtkWidget *widget;
+  GtkWidget  *widget;
+  const char *text;
 
   widget = WID (self->priv->builder, "graphics_logout_warning_label");
+
+  if (self->priv->is_fallback)
+    text = _("The next login will attempt to use the standard experience.");
+  else
+    text = _("The next login will use the fallback mode intended for unsupported graphics hardware.");
+
+  gtk_label_set_text (GTK_LABEL (widget), text);
+
   if (visible)
     gtk_widget_show (widget);
   else
