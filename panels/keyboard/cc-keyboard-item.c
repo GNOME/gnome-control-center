@@ -440,8 +440,6 @@ cc_keyboard_item_load_from_gconf (CcKeyboardItem *item,
                                       gconf_entry_get_schema_name (entry),
                                       NULL);
     if (schema != NULL) {
-      g_debug ("trying to get translation for '%s' using package '%s'",
-	       gconf_schema_get_short_desc (schema), gettext_package);
       if (gettext_package != NULL) {
 	bind_textdomain_codeset (gettext_package, "UTF-8");
 	description = dgettext (gettext_package, gconf_schema_get_short_desc (schema));
