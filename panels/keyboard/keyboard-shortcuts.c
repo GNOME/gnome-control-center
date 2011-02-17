@@ -56,6 +56,7 @@ typedef struct
   CcKeyboardItemType type;
   char *schema; /* GSettings schema name, if any */
   char *description; /* description for GSettings types */
+  char *gettext_package; /* used for GConf type */
   char *name; /* GConf key, GConf directory, or GSettings key name depending on type */
   int value; /* Value for comparison */
   char *key; /* GConf key name for the comparison */
@@ -264,7 +265,7 @@ append_section (GtkBuilder         *builder,
       switch (keys_list[i].type)
         {
 	case CC_KEYBOARD_ITEM_TYPE_GCONF:
-          ret = cc_keyboard_item_load_from_gconf (item, keys_list[i].name);
+          ret = cc_keyboard_item_load_from_gconf (item, keys_list[i].gettext_package, keys_list[i].name);
           break;
 	case CC_KEYBOARD_ITEM_TYPE_GCONF_DIR:
           ret = cc_keyboard_item_load_from_gconf_dir (item, keys_list[i].name);
@@ -331,18 +332,18 @@ parse_start_tag (GMarkupParseContext *ctx,
 {
   KeyList *keylist = (KeyList *) user_data;
   KeyListEntry key;
-  const char *name, *gconf_key, *schema, *description;
+  const char *name, *gconf_key, *schema, *description, *package;
   int value;
   Comparison comparison;
 
   name = NULL;
   schema = NULL;
+  package = NULL;
 
   /* The top-level element, names the section in the tree */
   if (g_str_equal (element_name, "KeyListEntries"))
     {
       const char *wm_name = NULL;
-      const char *package = NULL;
       const char *group = NULL;
 
       while (*attr_names && *attr_values)
@@ -388,6 +389,7 @@ parse_start_tag (GMarkupParseContext *ctx,
             g_warning ("Duplicate gettext package name");
           g_free (keylist->package);
           keylist->package = g_strdup (package);
+	  bind_textdomain_codeset (keylist->package, "UTF-8");
         }
       if (group)
         {
@@ -440,7 +442,6 @@ parse_start_tag (GMarkupParseContext *ctx,
           if (**attr_values) {
             if (keylist->package)
 	      {
-	        bind_textdomain_codeset (keylist->package, "UTF-8");
 	        description = dgettext (keylist->package, *attr_values);
 	      }
 	    else
@@ -476,6 +477,7 @@ parse_start_tag (GMarkupParseContext *ctx,
   key.value = value;
   key.key = g_strdup (gconf_key);
   key.description = g_strdup (description);
+  key.gettext_package = g_strdup (keylist->package);
   key.schema = keylist->schema ? g_strdup (keylist->schema) : g_strdup (schema);
   key.comparison = comparison;
   g_array_append_val (keylist->entries, key);
