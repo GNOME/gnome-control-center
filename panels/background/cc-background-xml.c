@@ -24,7 +24,7 @@
 #include <string.h>
 #include <libxml/parser.h>
 #include <libgnome-desktop/gnome-bg.h>
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 
 #include "gdesktop-enums-types.h"
 #include "cc-background-item.h"

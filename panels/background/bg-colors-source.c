@@ -26,7 +26,7 @@
 #include "cc-background-item.h"
 
 #include <glib/gi18n-lib.h>
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 
 G_DEFINE_TYPE (BgColorsSource, bg_colors_source, BG_TYPE_SOURCE)
 

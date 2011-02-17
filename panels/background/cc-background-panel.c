@@ -23,7 +23,7 @@
 
 #include <string.h>
 #include <glib/gi18n-lib.h>
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 
 #include "cc-background-panel.h"
 #include "bg-wallpapers-source.h"

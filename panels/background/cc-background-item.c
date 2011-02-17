@@ -28,7 +28,7 @@
 #include <glib/gi18n-lib.h>
 
 #include <libgnome-desktop/gnome-bg.h>
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 
 #include "cc-background-item.h"
 #include "gdesktop-enums-types.h"

@@ -27,7 +27,7 @@
 #include <libsocialweb-client/sw-client-service.h>
 
 #include "cc-background-item.h"
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 
 G_DEFINE_TYPE (BgFlickrSource, bg_flickr_source, BG_TYPE_SOURCE)
 

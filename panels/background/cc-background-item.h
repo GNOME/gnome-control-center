@@ -24,7 +24,7 @@
 #include <glib-object.h>
 
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 #include <libgnome-desktop/gnome-bg.h>
 
 G_BEGIN_DECLS
