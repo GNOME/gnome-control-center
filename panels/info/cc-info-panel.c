@@ -782,13 +782,13 @@ info_panel_setup_graphics (CcInfoPanel  *self)
     {
       /* translators: The hardware is not able to run GNOME 3's
        * shell, so we use the GNOME "Fallback" session */
-      text = g_strdup (_("Fallback"));
+      text = g_strdup (C_("Experience", "Fallback"));
     }
   else
     {
       /* translators: The hardware is able to run GNOME 3's
        * shell, also called "Standard" experience */
-      text = g_strdup (_("Standard"));
+      text = g_strdup (C_("Experience", "Standard"));
     }
   widget = WID (self->priv->builder, "graphics_experience_label");
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
