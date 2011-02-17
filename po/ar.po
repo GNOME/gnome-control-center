@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-15 12:58+0200\n"
-"PO-Revision-Date: 2011-02-15 12:58+0300\n"
+"POT-Creation-Date: 2011-02-17 18:19+0200\n"
+"PO-Revision-Date: 2011-02-17 18:18+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -237,18 +237,18 @@ msgstr "ألوان وتدرجات"
 msgid "Flickr"
 msgstr "فلِكَر"
 
-#: ../panels/background/cc-background-item.c:150
+#: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
 msgstr "مقاسات متعددة"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:154
+#: ../panels/background/cc-background-item.c:152
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:257
+#: ../panels/background/cc-background-item.c:255
 msgid "No Desktop Background"
 msgstr "لا خلفية لسطح المكتب"
 
@@ -528,18 +528,6 @@ msgstr "تعذّر اكتشاف أجهزة العرض"
 msgid "Could not get screen information"
 msgstr "تعذّرت معرفة معلومات الشاشة"
 
-#: ../panels/info/cc-info-panel.c:400
-#, fuzzy
-msgid "Fallback"
-msgstr "احتياط"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/info/cc-info-panel.c:400 ../panels/printers/printers.ui.h:8
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:581
-msgid "Default"
-msgstr "المبدئي"
-
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
 #: ../panels/info/cc-info-panel.c:502
@@ -592,25 +580,35 @@ msgstr "%.1f إ.بايت"
 msgid "Unknown model"
 msgstr "طِراز مجهول"
 
-#: ../panels/info/cc-info-panel.c:827
-#: ../panels/keyboard/keyboard-shortcuts.c:1907
+#: ../panels/info/cc-info-panel.c:782
+#, fuzzy
+msgid "Fallback"
+msgstr "احتياط"
+
+#: ../panels/info/cc-info-panel.c:784
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "Standard"
+msgstr "عادي"
+
+#: ../panels/info/cc-info-panel.c:854
+#: ../panels/keyboard/keyboard-shortcuts.c:1711
 msgid "Section"
 msgstr "القسم"
 
-#: ../panels/info/cc-info-panel.c:836 ../panels/info/info.ui.h:16
-#, fuzzy
+#: ../panels/info/cc-info-panel.c:863 ../panels/info/info.ui.h:16
 msgid "Overview"
-msgstr "ملخّص"
+msgstr "عام"
 
-#: ../panels/info/cc-info-panel.c:842 ../panels/info/info.ui.h:5
+#: ../panels/info/cc-info-panel.c:869 ../panels/info/info.ui.h:5
 msgid "Default Applications"
 msgstr "التطبيقات المبدئية"
 
-#: ../panels/info/cc-info-panel.c:847 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:874 ../panels/info/info.ui.h:10
 msgid "Graphics"
 msgstr "الرسوميات"
 
-#: ../panels/info/cc-info-panel.c:872
+#: ../panels/info/cc-info-panel.c:899
 #, c-format
 msgid "Version %s"
 msgstr "الإصدارة %s"
@@ -629,8 +627,9 @@ msgid "device;system;information;memory;processor;version;"
 msgstr "جهاز;نظام;معلومات;ذاكرة;معالج;إصدارة;"
 
 #: ../panels/info/info.ui.h:1
+#, fuzzy
 msgid "Always use fallback:"
-msgstr ""
+msgstr "استخدم الاحتياط دائما:"
 
 #: ../panels/info/info.ui.h:2
 msgid "Calendar"
@@ -701,16 +700,105 @@ msgid "Web"
 msgstr "الوب"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
+msgid "Eject"
+msgstr "أخرِج"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:2
+msgid "Launch media player"
+msgstr "ابدأ مشغل الوسائط"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:3
+msgid "Next track"
+msgstr "المقطوعة التالية"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:4
+msgid "Pause playback"
+msgstr "ألبِث التشغيل"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:5
+msgid "Play (or play/pause)"
+msgstr "شغّل (أو شغّل/ألبِث)"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:6
+msgid "Previous track"
+msgstr "المقطوعة السابقة"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Sound and Media"
 msgstr "الصوت والوسائط"
 
+#: ../panels/keyboard/00-multimedia.xml.in.h:8
+msgid "Stop playback"
+msgstr "أوقف التشغيل"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:9
+msgid "Volume down"
+msgstr "اخفض الصوت"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:10
+msgid "Volume mute"
+msgstr "أصمِت الصوت"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:11
+msgid "Volume up"
+msgstr "ارفع الصوت"
+
 #: ../panels/keyboard/01-launchers.xml.in.h:1
+msgid "Home folder"
+msgstr "مجلّد المنزل"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:2
+msgid "Launch calculator"
+msgstr "شغّل الحاسبة"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:3
+msgid "Launch email client"
+msgstr "شغّل عميل البريد الإلكتروني"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:4
+msgid "Launch help browser"
+msgstr "شغّل متصفّح المساعدة"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:5
+msgid "Launch web browser"
+msgstr "شغّل متصفّح الوِب"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:6
 msgid "Launchers"
 msgstr "مشغلات التطبيقات"
 
+#: ../panels/keyboard/01-launchers.xml.in.h:7
+msgid "Search"
+msgstr "ابحث"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
+msgid "Lock screen"
+msgstr "أوصد الشاشة"
+
+#: ../panels/keyboard/01-system.xml.in.h:2
+msgid "Log out"
+msgstr "اخرج"
+
+#: ../panels/keyboard/01-system.xml.in.h:3
 msgid "System"
 msgstr "النظام"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:1
+msgid "Toggle magnifier"
+msgstr "بدّل المكبرة"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:2
+msgid "Toggle on-screen keyboard"
+msgstr "بدّل لوحة المفاتيح الموجودة على الشاشة"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
+msgid "Toggle screen reader"
+msgstr "بدّل قارئ الشاشة"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:4
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
+msgid "Universal Access"
+msgstr "الإتاحة"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -742,7 +830,7 @@ msgstr "نوع مفتاح الاختصار."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1268
+#: ../panels/keyboard/keyboard-shortcuts.c:1141
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -763,22 +851,22 @@ msgstr "لوحة المفاتيح"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "اختصار;تكرار;وميض;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:775
-#: ../panels/keyboard/keyboard-shortcuts.c:1040
-#: ../panels/keyboard/keyboard-shortcuts.c:1674
-#: ../panels/keyboard/keyboard-shortcuts.c:1678
+#: ../panels/keyboard/keyboard-shortcuts.c:643
+#: ../panels/keyboard/keyboard-shortcuts.c:916
+#: ../panels/keyboard/keyboard-shortcuts.c:1503
+#: ../panels/keyboard/keyboard-shortcuts.c:1507
 msgid "Custom Shortcuts"
 msgstr "اختصار مخصص"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:887
+#: ../panels/keyboard/keyboard-shortcuts.c:768
 msgid "<Unknown Action>"
 msgstr "<إجراء مجهول>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1294
+#: ../panels/keyboard/keyboard-shortcuts.c:1167
 msgid "Error saving the new shortcut"
 msgstr "خطأ أثناء حفظ الاختصار الجديد"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1404
+#: ../panels/keyboard/keyboard-shortcuts.c:1282
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -788,7 +876,7 @@ msgstr ""
 "الاختصار \"%s\" لا يمكن استخدامه لأن الطباعة بهذا المفتاح ستصبح متعذرة.\n"
 "حاول رجاءً استخدام مفتاح مع Ctrl أو Alt أو Shift في نفس الوقت."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1434
+#: ../panels/keyboard/keyboard-shortcuts.c:1314
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -797,30 +885,25 @@ msgstr ""
 "الاختصار \"%s\" مستخدم في:\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "إذا أعدت تعيين الاختصار \"%s\" فسيُعطّل الاختصار \"%s\"."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1448
+#: ../panels/keyboard/keyboard-shortcuts.c:1328
 msgid "_Reassign"
 msgstr "أعِد ال_تعيين"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1568
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr "خطأ عند إلغاء ضبط مفتاح الاختصار في قاعدة بيانات الإعدادات: %s"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1626
+#: ../panels/keyboard/keyboard-shortcuts.c:1442
 msgid "Too many custom shortcuts"
 msgstr "الكثير من الاختصارات المخصصة"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1956
+#: ../panels/keyboard/keyboard-shortcuts.c:1760
 msgid "Action"
 msgstr "الإجراء"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1979
+#: ../panels/keyboard/keyboard-shortcuts.c:1783
 msgid "Shortcut"
 msgstr "الاختصار"
 
@@ -1302,6 +1385,13 @@ msgstr "المستخدمين المسموح لهم"
 #: ../panels/printers/printers.ui.h:6
 msgid "Back"
 msgstr "إلى الخلف"
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/printers/printers.ui.h:8
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
+msgid "Default"
+msgstr "المبدئي"
 
 #: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
@@ -2318,10 +2408,6 @@ msgstr "سونار"
 msgid "Keyboard;Mouse;a11y;Accessibility;"
 msgstr "لوحة;مفاتيح;فأرة;إتاحة;"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
-msgid "Universal Access"
-msgstr "الإتاحة"
-
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
 msgstr "تفضيلات الإتاحة"
@@ -3080,11 +3166,6 @@ msgstr "أ_نشئ"
 msgid "Create new account"
 msgstr "أنشئ حسابا جديدا"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:4
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-msgid "Standard"
-msgstr "عادي"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "Supervised"
@@ -3319,6 +3400,9 @@ msgstr "مركز التحكّم"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_كل الإعدادات"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr "خطأ عند إلغاء ضبط مفتاح الاختصار في قاعدة بيانات الإعدادات: %s"
 
 #~ msgid "More Info"
 #~ msgstr "المزيد من المعلومات"
