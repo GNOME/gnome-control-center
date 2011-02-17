@@ -1752,6 +1752,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
                     G_CALLBACK (start_editing_kb_cb), NULL);
 
   renderer = gtk_cell_renderer_text_new ();
+  g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 
   g_signal_connect (renderer, "edited",
                     G_CALLBACK (description_edited_callback),
