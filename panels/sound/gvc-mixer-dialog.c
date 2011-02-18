@@ -1846,9 +1846,9 @@ gvc_mixer_dialog_constructor (GType                  type,
         gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->input_bar),
                                   _("_Input volume: "));
         gvc_channel_bar_set_low_icon_name (GVC_CHANNEL_BAR (self->priv->input_bar),
-                                           "audio-input-microphone-low");
+                                           "audio-input-microphone-low-symbolic");
         gvc_channel_bar_set_high_icon_name (GVC_CHANNEL_BAR (self->priv->input_bar),
-                                            "audio-input-microphone-high");
+                                            "audio-input-microphone-high-symbolic");
         gtk_widget_set_sensitive (self->priv->input_bar, FALSE);
         alignment = gtk_alignment_new (0, 0, 1, 1);
         gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
