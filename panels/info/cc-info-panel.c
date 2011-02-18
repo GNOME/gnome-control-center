@@ -896,17 +896,14 @@ info_panel_setup_default_apps (CcInfoPanel  *self)
   info_panel_setup_default_app (self, "text/calendar",
                                 1, 2, 2, 3);
 
-  info_panel_setup_default_app (self, "x-scheme-handler/xmpp",
+  info_panel_setup_default_app (self, "audio/x-vorbis+ogg",
                                 1, 2, 3, 4);
 
-  info_panel_setup_default_app (self, "audio/x-vorbis+ogg",
+  info_panel_setup_default_app (self, "video/x-ogm+ogg",
                                 1, 2, 4, 5);
 
-  info_panel_setup_default_app (self, "video/x-ogm+ogg",
-                                1, 2, 5, 6);
-
   info_panel_setup_default_app (self, "image/jpeg",
-                                1, 2, 6, 7);
+                                1, 2, 5, 6);
 }
 
 static void
