@@ -814,35 +814,99 @@ info_panel_setup_graphics (CcInfoPanel  *self)
 }
 
 static void
-info_panel_setup_default_apps (CcInfoPanel  *self)
+default_app_changed (GtkAppChooserButton *button,
+                     CcInfoPanel         *self)
 {
-  GtkWidget *table;
+  GAppInfo *info;
+  char *content_type;
+  GError *error = NULL;
+
+  info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (button));
+  content_type = gtk_app_chooser_get_content_type (GTK_APP_CHOOSER (button));
+  if (g_app_info_set_as_default_for_type (info, content_type, &error) == FALSE)
+    {
+      g_warning ("Failed to set '%s' as the default application for '%s': %s",
+                 g_app_info_get_name (info), content_type, error->message);
+      g_error_free (error);
+      error = NULL;
+    }
+
+  /* Set https support for the browser as well */
+  if (g_str_equal (content_type, "x-scheme-handler/https"))
+    {
+      if (g_app_info_set_as_default_for_type (info, "x-scheme-handler/https", &error) == FALSE)
+        {
+          g_warning ("Failed to set '%s' as the default application for '%s': %s",
+                     g_app_info_get_name (info), "x-scheme-handler/https", error->message);
+          g_error_free (error);
+        }
+    }
+
+  g_free (content_type);
+  g_object_unref (info);
+}
+
+static void
+info_panel_setup_default_app (CcInfoPanel *self,
+                              const char  *content_type,
+                              guint        left_attach,
+                              guint        right_attach,
+                              guint        top_attach,
+                              guint        bottom_attach)
+{
   GtkWidget *button;
+  GtkWidget *table;
+  GAppInfo  *info;
+  GError    *error = NULL;
 
   table = WID (self->priv->builder, "default_apps_table");
 
-  button = gtk_app_chooser_button_new ("x-scheme-handler/http");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0);
+  /* FIXME: We need to do this because GtkAppChooser doesn't
+   * give us the opportunity to select what app should be selected
+   * by default.
+   * https://bugzilla.gnome.org/show_bug.cgi?id=642706 */
+  info = g_app_info_get_default_for_type (content_type, FALSE);
+  if (info != NULL && g_app_info_set_as_last_used_for_type (info, content_type, &error) == FALSE)
+    {
+      g_warning ("Failed to set '%s' as the default application for '%s': %s",
+                 g_app_info_get_name (info), content_type, error->message);
+      g_error_free (error);
+    }
+  if (info != NULL)
+    g_object_unref (info);
 
-  button = gtk_app_chooser_button_new ("x-scheme-handler/mailto");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 1, 2, GTK_FILL, 0, 0, 0);
+  button = gtk_app_chooser_button_new (content_type);
+  gtk_table_attach (GTK_TABLE (table), button,
+                    left_attach, right_attach,
+                    top_attach, bottom_attach, GTK_FILL, 0, 0, 0);
+  g_signal_connect (G_OBJECT (button), "changed",
+                    G_CALLBACK (default_app_changed), self);
+  gtk_widget_show (button);
+}
 
-  button = gtk_app_chooser_button_new ("text/calendar");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 2, 3, GTK_FILL, 0, 0, 0);
+static void
+info_panel_setup_default_apps (CcInfoPanel  *self)
+{
+  info_panel_setup_default_app (self, "x-scheme-handler/http",
+                                1, 2, 0, 1);
 
-  button = gtk_app_chooser_button_new ("x-scheme-handler/xmpp");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 3, 4, GTK_FILL, 0, 0, 0);
+  info_panel_setup_default_app (self, "x-scheme-handler/mailto",
+                                1, 2, 1, 2);
 
-  button = gtk_app_chooser_button_new ("audio/x-vorbis+ogg");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 4, 5, GTK_FILL, 0, 0, 0);
+  info_panel_setup_default_app (self, "text/calendar",
+                                1, 2, 2, 3);
 
-  button = gtk_app_chooser_button_new ("video/x-ogm+ogg");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 5, 6, GTK_FILL, 0, 0, 0);
+  info_panel_setup_default_app (self, "x-scheme-handler/xmpp",
+                                1, 2, 3, 4);
 
-  button = gtk_app_chooser_button_new ("image/jpeg");
-  gtk_table_attach (GTK_TABLE (table), button, 1, 2, 6, 7, GTK_FILL, 0, 0, 0);
+  info_panel_setup_default_app (self, "audio/x-vorbis+ogg",
+                                1, 2, 4, 5);
 
-  gtk_widget_show_all (table);
+  info_panel_setup_default_app (self, "video/x-ogm+ogg",
+                                1, 2, 5, 6);
+
+  info_panel_setup_default_app (self, "image/jpeg",
+                                1, 2, 6, 7);
 }
 
 static void
