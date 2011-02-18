@@ -48,13 +48,6 @@ GNOME_MAINTAINER_MODE_DEFINES
 AC_PATH_XTRA
 x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
 
-PKG_CHECK_MODULES(LIBCANBERRA_GTK, libcanberra-gtk3, [
-  CANBERRA_GTK=1
-  AC_SUBST(LIBCANBERRA_GTK_CFLAGS)
-  AC_SUBST(LIBCANBERRA_GTK_LIBS)
-  ], [:])
-AM_CONDITIONAL(HAVE_LIBCANBERRA_GTK, test "x$CANBERRA_GTK" = "x1")
-
 AC_PATH_PROG([GLIB_MKENUMS],[glib-mkenums])
 
 dnl Region panel
@@ -134,11 +127,6 @@ else
 fi
 AM_CONDITIONAL(BUILD_PRINTERS, [test x$have_cups = xyes])
 
-gtk_lib_dir=`$PKG_CONFIG --variable libdir gtk+-3.0`
-gtk_binary_version=`$PKG_CONFIG --variable gtk_binary_version gtk+-3.0`
-GTK_ENGINE_DIR="$gtk_lib_dir/gtk-3.0/$gtk_binary_version/engines"
-AC_SUBST(GTK_ENGINE_DIR)
-
 PKG_CHECK_MODULES(GLIB, glib-2.0)
 
 PKG_CHECK_MODULES(LIBGTOP, libgtop-2.0)
@@ -155,20 +143,6 @@ PKG_CHECK_MODULES(ISOCODES, iso-codes)
 
 AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["`$PKG_CONFIG --variable=prefix iso-codes`"],[ISO codes prefix])
 ISO_CODES=iso-codes
-
-dnl
-dnl Check for Xft version 2; we build in extra functionality to the font capplet
-dnl when we have it.
-dnl
-xft_modules=
-if $PKG_CONFIG --exists xft ; then
-  xft_modules="xft"
-  AC_DEFINE(HAVE_XFT2,,[Define if Xft functionality is available])
-fi
-
-PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
-
-PKG_CHECK_MODULES(AT_CAPPLET, $COMMON_MODULES)
 
 PKG_CHECK_MODULES(DISPLAY_CAPPLET, $COMMON_MODULES)
 DISPLAY_CAPPLET_LIBS="$DISPLAY_CAPPLET_LIBS"
