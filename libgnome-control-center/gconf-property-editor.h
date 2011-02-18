@@ -67,6 +67,12 @@ GObject *gconf_peditor_new_boolean      (GConfChangeSet          *changeset,
 					 const gchar             *first_property_name,
 					 ...);
 
+GObject *gconf_peditor_new_switch      (GConfChangeSet          *changeset,
+					 const gchar             *key,
+					 GtkWidget               *sw,
+					 const gchar             *first_property_name,
+					 ...);
+
 GObject *gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 					 const gchar		 *key,
 					 GtkWidget		 *checkbox,

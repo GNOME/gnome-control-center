@@ -413,6 +413,24 @@ peditor_boolean_value_changed (GConfClient         *client,
 }
 
 static void
+peditor_switch_value_changed (GConfClient         *client,
+			       guint                cnxn_id,
+			       GConfEntry          *entry,
+			       GConfPropertyEditor *peditor)
+{
+	GConfValue *value, *value_wid;
+
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
+	if (entry && (value = gconf_entry_get_value (entry))) {
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
+		gtk_switch_set_active (GTK_SWITCH (peditor->p->ui_control), gconf_value_get_bool (value_wid));
+		gconf_value_free (value_wid);
+	}
+}
+
+static void
 peditor_boolean_widget_changed (GConfPropertyEditor *peditor,
 				GtkToggleButton     *tb)
 {
@@ -421,6 +439,22 @@ peditor_boolean_widget_changed (GConfPropertyEditor *peditor,
 	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_BOOL);
 	gconf_value_set_bool (value_wid, gtk_toggle_button_get_active (tb));
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
+	peditor_set_gconf_value (peditor, peditor->p->key, value);
+	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
+	gconf_value_free (value_wid);
+	gconf_value_free (value);
+}
+
+static void
+peditor_switch_widget_changed (GConfPropertyEditor *peditor,
+				GtkSwitch         *sw)
+{
+	GConfValue *value, *value_wid;
+
+	if (!peditor->p->inited) return;
+	value_wid = gconf_value_new (GCONF_VALUE_BOOL);
+	gconf_value_set_bool (value_wid, gtk_switch_get_active (sw));
 	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
@@ -457,6 +491,39 @@ gconf_peditor_new_boolean (GConfChangeSet *changeset,
 
 	g_signal_connect_swapped (checkbox, "toggled",
 				  (GCallback) peditor_boolean_widget_changed, peditor);
+
+	return peditor;
+}
+
+GObject *
+gconf_peditor_new_switch (GConfChangeSet *changeset,
+			  const gchar    *key,
+			  GtkWidget      *sw,
+			  const gchar    *first_property_name,
+			  ...)
+{
+	GObject *peditor;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (sw != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_SWITCH (sw), NULL);
+
+	va_start (var_args, first_property_name);
+
+	peditor = gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_switch_value_changed,
+		 changeset,
+		 G_OBJECT (sw),
+		 first_property_name,
+		 var_args,
+		 NULL);
+
+	va_end (var_args);
+
+	g_signal_connect_swapped (sw, "notify::active",
+				  (GCallback) peditor_switch_widget_changed, peditor);
 
 	return peditor;
 }

@@ -203,16 +203,17 @@ static gchar *visual_alerts_section[] = {
 };
 
 static void
-cc_ua_panel_section_toggled (GtkToggleButton *button,
-                             GtkBuilder      *builder)
+cc_ua_panel_section_switched (GObject    *object,
+                              GParamSpec *pspec,
+                              GtkBuilder *builder)
 {
   GtkWidget *w;
   gboolean enabled;
   gchar **widgets, **s;
 
-  widgets = g_object_get_data (G_OBJECT (button), "section-widgets");
+  widgets = g_object_get_data (object, "section-widgets");
 
-  enabled = gtk_toggle_button_get_active (button);
+  enabled = gtk_switch_get_active (GTK_SWITCH (object));
 
   for (s = widgets; *s; s++)
     {
@@ -232,8 +233,8 @@ settings_on_off_editor_new (CcUaPanelPrivate  *priv,
   if (section)
     {
       g_object_set_data (G_OBJECT (widget), "section-widgets", section);
-      g_signal_connect (widget, "toggled",
-                        G_CALLBACK (cc_ua_panel_section_toggled),
+      g_signal_connect (widget, "notify::active",
+                        G_CALLBACK (cc_ua_panel_section_switched),
                         priv->builder);
     }
 
@@ -241,35 +242,17 @@ settings_on_off_editor_new (CcUaPanelPrivate  *priv,
   g_settings_bind (settings, key, widget, "active", G_SETTINGS_BIND_DEFAULT);
 }
 
-static GConfValue*
-cc_ua_panel_toggle_radios (GConfPropertyEditor *peditor,
+static GConfValue *
+cc_ua_panel_toggle_switch (GConfPropertyEditor *peditor,
                            const GConfValue    *value)
 {
-  GtkWidget *radio;
+  GtkWidget *sw;
   gboolean enabled;
 
   enabled = gconf_value_get_bool (value);
-  radio = (GtkWidget*) gconf_property_editor_get_ui_control (peditor);
+  sw = (GtkWidget*) gconf_property_editor_get_ui_control (peditor);
 
-  if (!enabled)
-    {
-      GSList *list, *l;
-
-      list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
-
-      if (list)
-        {
-          /* activate the "off" button */
-          for (l = list; l; l = l->next)
-            {
-              if (l->data == radio)
-                continue;
-
-              gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (l->data),
-                                            TRUE);
-            }
-        }
-    }
+  gtk_switch_set_active (GTK_SWITCH (sw), enabled);
 
   return gconf_value_copy (value);
 }
@@ -286,14 +269,14 @@ gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
   if (section)
     {
       g_object_set_data (G_OBJECT (widget), "section-widgets", section);
-      g_signal_connect (widget, "toggled",
-                        G_CALLBACK (cc_ua_panel_section_toggled),
+      g_signal_connect (widget, "notify::active",
+                        G_CALLBACK (cc_ua_panel_section_switched),
                         priv->builder);
     }
 
   /* set up the boolean editor */
-  peditor = gconf_peditor_new_boolean (NULL, key, widget, NULL);
-  g_object_set (peditor, "conv-to-widget-cb", cc_ua_panel_toggle_radios, NULL);
+  peditor = gconf_peditor_new_switch (NULL, key, widget, NULL);
+  g_object_set (peditor, "conv-to-widget-cb", cc_ua_panel_toggle_switch, NULL);
 
   /* emit the notify on the key, so that the conv-to-widget-cb callback is run */
   gconf_client_notify (priv->client, key);
@@ -551,7 +534,7 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 
   settings_on_off_editor_new (priv, priv->application_settings,
                               "screen-magnifier-enabled",
-                              WID (priv->builder, "seeing_zoom_on_radiobutton"),
+                              WID (priv->builder, "seeing_zoom_switch"),
                               NULL);
 }
 
@@ -610,7 +593,7 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
   gconf_client_add_dir (priv->client, "/apps/metacity/general",
                         GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-  w = WID (priv->builder, "hearing_visual_alerts_on_radiobutton");
+  w = WID (priv->builder, "hearing_visual_alerts_switch");
   gconf_on_off_peditor_new (priv, "/apps/metacity/general/visual_bell",
                             w, visual_alerts_section);
 
@@ -662,7 +645,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   g_settings_bind (priv->kb_settings, "enable", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* sticky keys */
-  w = WID (priv->builder, "typing_sticky_keys_on_radiobutton");
+  w = WID (priv->builder, "typing_sticky_keys_switch");
   settings_on_off_editor_new (priv, priv->kb_settings, "stickykeys-enable", w, sticky_keys_section);
 
   w = WID (priv->builder, "typing_sticky_keys_disable_two_keys_checkbutton");
@@ -672,7 +655,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   g_settings_bind (priv->kb_settings, "stickykeys-modifier-beep", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* slow keys */
-  w = WID (priv->builder, "typing_slow_keys_on_radiobutton");
+  w = WID (priv->builder, "typing_slow_keys_switch");
   settings_on_off_editor_new (priv, priv->kb_settings, "slowkeys-enable", w, slow_keys_section);
 
   w = WID (priv->builder, "typing_slowkeys_delay_scale");
@@ -690,7 +673,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   g_settings_bind (priv->kb_settings, "slowkeys-beep-reject", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* bounce keys */
-  w = WID (priv->builder, "typing_bounce_keys_on_radiobutton");
+  w = WID (priv->builder, "typing_bounce_keys_switch");
   settings_on_off_editor_new (priv, priv->kb_settings, "bouncekeys-enable", w, bounce_keys_section);
 
   w = WID (priv->builder, "typing_bouncekeys_delay_scale");
@@ -724,11 +707,11 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
   GtkWidget *w;
 
   /* mouse keys */
-  w = WID (priv->builder, "pointing_mouse_keys_on_radiobutton");
+  w = WID (priv->builder, "pointing_mouse_keys_switch");
   settings_on_off_editor_new (priv, priv->kb_settings, "mousekeys-enable", w, NULL);
 
   /* simulated secondary click */
-  w = WID (priv->builder, "pointing_second_click_on_radiobutton");
+  w = WID (priv->builder, "pointing_second_click_switch");
   settings_on_off_editor_new (priv, priv->mouse_settings, "secondary-click-enabled", w, secondary_click_section);
 
   w = WID (priv->builder, "pointing_secondary_click_delay_scale");
@@ -737,7 +720,7 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   /* dwell click */
-  w = WID (priv->builder, "pointing_hover_click_on_radiobutton");
+  w = WID (priv->builder, "pointing_hover_click_switch");
   settings_on_off_editor_new (priv, priv->mouse_settings, "dwell-click-enabled", w, dwell_click_section);
 
   w = WID (priv->builder, "pointing_dwell_delay_scale");
