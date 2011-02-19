@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-02-17 18:54+0000\n"
-"PO-Revision-Date: 2011-02-17 21:16+0100\n"
+"POT-Creation-Date: 2011-02-18 00:35+0000\n"
+"PO-Revision-Date: 2011-02-18 17:10+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgstr ""
 "Retorno de llamada que se debe emitir cuando se vayan a liberar datos de "
 "objeto del editor de propiedades"
 
-#: ../libgnome-control-center/gconf-property-editor.c:1406
+#: ../libgnome-control-center/gconf-property-editor.c:1473
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -154,7 +154,7 @@ msgstr ""
 "Compruebe si existe y vuelva a intentarlo o elija una imagen de fondo "
 "distinta."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1414
+#: ../libgnome-control-center/gconf-property-editor.c:1481
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -167,11 +167,11 @@ msgstr ""
 "\n"
 "Seleccione una imagen distinta."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1536
+#: ../libgnome-control-center/gconf-property-editor.c:1603
 msgid "Please select an image."
 msgstr "Por favor seleccione una imagen."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1541
+#: ../libgnome-control-center/gconf-property-editor.c:1608
 msgid "_Select"
 msgstr "_Seleccionar"
 
@@ -214,7 +214,7 @@ msgid "Tile"
 msgstr "Mosaico"
 
 #: ../panels/background/background.ui.h:8
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:90
 msgid "Zoom"
 msgstr "Ampliación"
 
@@ -598,42 +598,51 @@ msgstr "%.1f EiB"
 msgid "Unknown model"
 msgstr "Modelo desconocido"
 
+#: ../panels/info/cc-info-panel.c:743
+msgid "The next login will attempt to use the standard experience."
+msgstr "El siguiente inicio de sesión intentará usar la decoración estándar."
+
+#: ../panels/info/cc-info-panel.c:745
+msgid ""
+"The next login will use the fallback mode intended for unsupported graphics "
+"hardware."
+msgstr ""
+"El siguiente inicio de sesión usará el modo alternativo, pensado para "
+"hardware de gráficos no soportado."
+
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:785
-#, fuzzy
+#: ../panels/info/cc-info-panel.c:794
 #| msgid "Callback"
 msgctxt "Experience"
 msgid "Fallback"
-msgstr "Reserva"
+msgstr "Alternativo"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:791
-#| msgctxt "Account type"
-#| msgid "Standard"
+#: ../panels/info/cc-info-panel.c:800
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Estándar"
 
-#: ../panels/info/cc-info-panel.c:862
+#: ../panels/info/cc-info-panel.c:871
 #: ../panels/keyboard/keyboard-shortcuts.c:1711
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/info/cc-info-panel.c:871 ../panels/info/info.ui.h:17
+#: ../panels/info/cc-info-panel.c:880 ../panels/info/info.ui.h:16
 msgid "Overview"
 msgstr "Visión general"
 
-#: ../panels/info/cc-info-panel.c:877 ../panels/info/info.ui.h:4
+#: ../panels/info/cc-info-panel.c:886 ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "Aplicaciones predeterminadas"
 
-#: ../panels/info/cc-info-panel.c:882 ../panels/info/info.ui.h:11
+#: ../panels/info/cc-info-panel.c:891 ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "Gráficos"
 
-#: ../panels/info/cc-info-panel.c:907
+#: ../panels/info/cc-info-panel.c:916
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
@@ -660,77 +669,79 @@ msgid "Chat"
 msgstr "Chat"
 
 #: ../panels/info/info.ui.h:3
-msgid "Chipset:"
-msgstr "Chipset:"
+#| msgid "Chipset:"
+msgid "Chipset"
+msgstr "Chipset"
 
 #: ../panels/info/info.ui.h:5
-msgid "Device name:"
-msgstr "Nombre del dispositivo:"
+#| msgid "Device name:"
+msgid "Device name"
+msgstr "Nombre del dispositivo"
 
 #: ../panels/info/info.ui.h:6
-msgid "Disk:"
-msgstr "Disco:"
+#| msgid "Disk:"
+msgid "Disk"
+msgstr "Disco"
 
 #: ../panels/info/info.ui.h:7
-msgid "Driver:"
-msgstr "Controlador:"
+#| msgid "Driver:"
+msgid "Driver"
+msgstr "Controlador"
 
 #: ../panels/info/info.ui.h:8
-msgid "Experience:"
-msgstr "Experiencia:"
+#| msgid "Experience:"
+msgid "Experience"
+msgstr "Decoración"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
 #: ../panels/info/info.ui.h:10
-msgid "Forced Fallback Mode:"
-msgstr ""
+msgid "Forced Fallback Mode"
+msgstr "Forzar modo alternativo"
 
 #: ../panels/info/info.ui.h:12
-msgid "Graphics:"
-msgstr "Gráficos:"
-
-#: ../panels/info/info.ui.h:13
 msgid "Mail"
 msgstr "Correo"
 
-#: ../panels/info/info.ui.h:14
-msgid "Memory:"
-msgstr "Memoria:"
+#: ../panels/info/info.ui.h:13
+#| msgid "Memory:"
+msgid "Memory"
+msgstr "Memoria"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:14
 msgid "Music"
 msgstr "Música"
 
-#: ../panels/info/info.ui.h:16
-msgid "OS type:"
-msgstr "Tipo de SO:"
+#: ../panels/info/info.ui.h:15
+#| msgid "OS type:"
+msgid "OS type"
+msgstr "Tipo de SO"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:17
 msgid "Photos"
 msgstr "Fotos"
 
-#: ../panels/info/info.ui.h:19
-msgid "Processor:"
-msgstr "Procesador:"
+#: ../panels/info/info.ui.h:18
+#| msgid "Processor:"
+msgid "Processor"
+msgstr "Procesador"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:19
 msgid "Updates Available"
 msgstr "Actualizaciones disponibles"
 
-#: ../panels/info/info.ui.h:21
+#: ../panels/info/info.ui.h:20
 msgid "Video"
 msgstr "Vídeo"
 
-#: ../panels/info/info.ui.h:22
+#: ../panels/info/info.ui.h:21
 msgid "Web"
 msgstr "Web"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
-#| msgid "rejected"
 msgid "Eject"
 msgstr "Expulsar"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:2
-#| msgid "Multimedia Player"
 msgid "Launch media player"
 msgstr "Lanzar el reproductor multimedia"
 
@@ -739,7 +750,6 @@ msgid "Next track"
 msgstr "Siguiente pista"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:4
-#| msgid "S_ound playback:"
 msgid "Pause playback"
 msgstr "Pausar la reproducción"
 
@@ -756,27 +766,22 @@ msgid "Sound and Media"
 msgstr "Sonido y medios"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:8
-#| msgid "S_ound playback:"
 msgid "Stop playback"
 msgstr "Detener la reproducción"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:9
-#| msgid "Volume Control"
 msgid "Volume down"
 msgstr "Bajar volumen"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:10
-#| msgid "Volume Control"
 msgid "Volume mute"
 msgstr "Silenciar"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:11
-#| msgid "Roll up"
 msgid "Volume up"
 msgstr "Subir volumen"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:1
-#| msgid "Open folder"
 msgid "Home folder"
 msgstr "Carpeta personal"
 
@@ -789,12 +794,10 @@ msgid "Launch email client"
 msgstr "Lanzar el cliente de correo-e"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:4
-#| msgid "Launchers"
 msgid "Launch help browser"
 msgstr "Lanzar el visor de ayuda"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:5
-#| msgid "Launchers"
 msgid "Launch web browser"
 msgstr "Lanzar navegador web"
 
@@ -803,17 +806,14 @@ msgid "Launchers"
 msgstr "Lanzadores"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:7
-#| msgid "March"
 msgid "Search"
 msgstr "Buscar"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
-#| msgid "Lock screen after:"
 msgid "Lock screen"
 msgstr "Bloquear la pantalla"
 
 #: ../panels/keyboard/01-system.xml.in.h:2
-#| msgid "Logout"
 msgid "Log out"
 msgstr "Cerrar la sesión"
 
@@ -826,12 +826,10 @@ msgid "Toggle magnifier"
 msgstr "Conmutar el magnificador"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:2
-#| msgid "On screen keyboard"
 msgid "Toggle on-screen keyboard"
 msgstr "Conmutar el teclado en pantalla"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:3
-#| msgid "Screen Reader"
 msgid "Toggle screen reader"
 msgstr "Conmutar el lector de pantalla"
 
@@ -941,11 +939,11 @@ msgstr "_Reasignar"
 msgid "Too many custom shortcuts"
 msgstr "Demasiadas combinaciones personalizadas"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1760
+#: ../panels/keyboard/keyboard-shortcuts.c:1761
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1783
+#: ../panels/keyboard/keyboard-shortcuts.c:1784
 msgid "Shortcut"
 msgstr "Combinación"
 
@@ -1009,7 +1007,7 @@ msgstr "Ve_locidad:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Short"
 msgstr "Corto"
 
@@ -1642,7 +1640,7 @@ msgstr "M_ostrar la posición del puntero al pulsar la tecla Control"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Small"
 msgstr "Pequeño"
 
@@ -2628,144 +2626,136 @@ msgid "None"
 msgstr "Ninguna"
 
 #: ../panels/universal-access/uap.ui.h:59
-msgid "Off"
-msgstr "Apagado"
-
-#: ../panels/universal-access/uap.ui.h:60
-msgid "On"
-msgstr "Encendido"
-
-#: ../panels/universal-access/uap.ui.h:61
 msgid "On screen keyboard"
 msgstr "Teclado en pantalla"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:60
 msgid "OnBoard"
 msgstr "EnPantalla"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Options..."
 msgstr "Opciones…"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Pointing and Clicking"
 msgstr "Apuntar y pulsar"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Introduce un retardo al pulsar una tecla y cuando esta se acepta"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Screen Reader"
 msgstr "Lector de pantalla"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Seeing"
 msgstr "Visión"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Shift+Ctrl+Alt+-"
 msgstr "Shift+Ctrl+Alt+-"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Shift+Ctrl+Alt+="
 msgstr "Shift+Ctrl+Alt+="
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Simulated Secondary Click"
 msgstr "Pulsación secundaria simulada"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Slow Keys"
 msgstr "Teclas lentas"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Sound Settings..."
 msgstr "Configuración del sonido…"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Sticky Keys"
 msgstr "Teclas persistentes"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Test flash"
 msgstr "Probar destellos"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Text size:"
 msgstr "Tamaño del texto:"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:78
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr ""
 "Trata una secuencia de teclas modificadoras como una combinación de teclas"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Trigger a click when the pointer hovers"
 msgstr "Iniciar una pulsación al posicionar el puntero"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr ""
 "Disparar una pulsación secundaria al mantener pulsado el botón primario"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Turn on accessibility features from the keyboard"
 msgstr "Activar las características de accesibilidad desde el teclado"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:82
 msgid "Turn on or off:"
 msgstr "Activar o desactivar:"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:83
 msgid "Type here to test settings"
 msgstr "Teclear aquí para probar la configuración"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Typing"
 msgstr "Escritura"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Typing Assistant"
 msgstr "Asistente de tecleado"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:86
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Usar una indicación visual cuando ocurra una alerta de sonido"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:87
 msgid "Use an alternative form of text input"
 msgstr "Usar una forma alternativa de entrada de texto"
 
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:88
 msgid "Video Mouse"
 msgstr "Ratón de vídeo"
 
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:89
 msgid "Visual Alerts"
 msgstr "Alertas visuales"
 
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:91
 msgid "Zoom in:"
 msgstr "Ampliar:"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:92
 msgid "Zoom out:"
 msgstr "Reducir:"
 
-#: ../panels/universal-access/uap.ui.h:95
+#: ../panels/universal-access/uap.ui.h:93
 msgid "_Motion threshold:"
 msgstr "Umbral de _movimiento:"
 
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:94
 msgid "accepted"
 msgstr "aceptada"
 
-#: ../panels/universal-access/uap.ui.h:97
+#: ../panels/universal-access/uap.ui.h:95
 msgid "pressed"
 msgstr "pulsada"
 
-#: ../panels/universal-access/uap.ui.h:98
+#: ../panels/universal-access/uap.ui.h:96
 msgid "rejected"
 msgstr "rechazada"
 
@@ -3104,8 +3094,8 @@ msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los "
-"archivos temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
+"temporales al eliminar una cuenta de usuario."
 
 #: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
@@ -3440,6 +3430,15 @@ msgstr "Centro de control"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Todas las configuraciones"
+
+#~ msgid "Graphics:"
+#~ msgstr "Gráficos:"
+
+#~ msgid "Off"
+#~ msgstr "Apagado"
+
+#~ msgid "On"
+#~ msgstr "Encendido"
 
 #, fuzzy
 #~ msgid "Always use fallback:"
@@ -6095,5 +6094,4 @@ msgstr "_Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr ""
-#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
