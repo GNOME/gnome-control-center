@@ -2,11 +2,7 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 SUBDIRS = po libgnome-control-center shell panels \
 	  help docs
-DIST_SUBDIRS = po help shell docs examples panels libgnome-control-center
-
-if BUILD_EXAMPLES
-SUBDIRS += examples
-endif
+DIST_SUBDIRS = po help shell docs panels libgnome-control-center
 
 schemasdir   = @GCONF_SCHEMA_FILE_DIR@
 schemas_in_files = gnome-control-center.schemas.in
@@ -43,7 +39,7 @@ EXTRA_DIST = \
 	MAINTAINERS \
 	gnome-doc-utils.make
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb --enable-gtk-doc --enable-examples
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb --enable-gtk-doc
 
 GITIGNOREFILES=m4 help/*/*.mo
 

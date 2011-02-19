@@ -200,19 +200,6 @@ PANEL_LDFLAGS="-export_dynamic -avoid-version -module -no-undefined -export-symb
 AC_SUBST(PANEL_LDFLAGS)
 
 dnl ==============================================
-dnl Example Panel
-dnl ==============================================
-
-AC_MSG_CHECKING([whether to build the example panel])
-AC_ARG_ENABLE([examples],
-   AS_HELP_STRING([--enable-examples],
-                  [enable the examples]),,
-   [enable_examples=no])
-AC_MSG_RESULT([$enable_examples])
-
-AM_CONDITIONAL(BUILD_EXAMPLES, test "x$enable_examples" = "xyes")
-
-dnl ==============================================
 dnl libsocialweb
 dnl ==============================================
 
@@ -303,8 +290,6 @@ docs/Makefile
 docs/reference/Makefile
 docs/reference/libgnome-control-center/Makefile
 docs/reference/libgnome-control-center/version.xml
-examples/Makefile
-examples/gnome-example-panel.desktop.in
 help/Makefile
 libgnome-control-center/Makefile
 libgnome-control-center/libgnome-control-center.pc
