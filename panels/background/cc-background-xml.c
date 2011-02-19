@@ -126,10 +126,14 @@ idle_emit (CcBackgroundXml *xml)
 		i--;
 	}
 
-	xml->priv->item_added_id = 0;
 	g_async_queue_unlock (xml->priv->item_added_queue);
 
-	return (g_async_queue_length (xml->priv->item_added_queue) > 0);
+        if (g_async_queue_length (xml->priv->item_added_queue) > 0) {
+                return TRUE;
+        } else {
+                xml->priv->item_added_id = 0;
+                return FALSE;
+        }
 }
 
 static void
