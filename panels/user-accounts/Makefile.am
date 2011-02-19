@@ -1,6 +1,6 @@
 SUBDIRS = data
 
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = user-accounts
 NULL =
 
@@ -8,7 +8,6 @@ ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libuser-accounts.la
 
 AM_CPPFLAGS =						\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
 	-DDATADIR=\""$(datadir)"\"			\
 	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"	\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
@@ -16,12 +15,8 @@ AM_CPPFLAGS =						\
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
 	-I$(srcdir)/../common/				\
 	$(PANEL_CFLAGS)					\
-	$(GNOME_DESKTOP_CFLAGS) 			\
-	$(POLKIT_CFLAGS)				\
+	$(USER_ACCOUNTS_PANEL_CFLAGS)			\
 	$(CHEESE_CFLAGS)				\
-	$(DBUS_CFLAGS)					\
-	$(GIO_CFLAGS)					\
-	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)
 
 MARSHALFILES = marshal.c marshal.h
@@ -31,9 +26,6 @@ marshal.h: fprintd-marshal.list
 	@GLIB_GENMARSHAL@ --prefix=fprintd_marshal $< --header > $@
 marshal.c: fprintd-marshal.list
 	@GLIB_GENMARSHAL@ --prefix=fprintd_marshal $< --body --header > $@
-
-libuser_accounts_la_CFLAGS = 		\
-	$(PANEL_CFLAGS)
 
 libuser_accounts_la_SOURCES =		\
 	um-account-type.h		\
@@ -76,12 +68,8 @@ libuser_accounts_la_SOURCES =		\
 
 libuser_accounts_la_LIBADD = 		\
 	$(PANEL_LIBS)			\
-	$(GNOME_DESKTOP_LIBS)		\
-	$(POLKIT_LIBS)			\
+	$(USER_ACCOUNTS_PANEL_LIBS)	\
 	$(CHEESE_LIBS)			\
-	$(DBUS_LIBS)			\
-	$(GIO_LIBS)			\
-	$(CAPPLET_LIBS)			\
 	$(top_builddir)/panels/common/liblanguage.la \
 	-lcrypt				\
 	-lm

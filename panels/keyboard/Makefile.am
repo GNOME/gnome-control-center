@@ -1,4 +1,4 @@
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = keyboard
 
 ccpanelsdir = $(PANELS_DIR)
@@ -21,8 +21,8 @@ libkeyboard_la_SOURCES =   \
 	eggaccelerators.c		\
 	eggaccelerators.h
 
-libkeyboard_la_CFLAGS = $(PANEL_CFLAGS)
-libkeyboard_la_LIBADD = $(PANEL_LIBS) $(GNOMECC_CAPPLETS_LIBS)
+libkeyboard_la_CFLAGS = $(PANEL_CFLAGS) $(KEYBOARD_PANEL_CFLAGS)
+libkeyboard_la_LIBADD = $(PANEL_LIBS) $(KEYBOARD_PANEL_LIBS)
 libkeyboard_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
@@ -44,11 +44,11 @@ pkgconfigdir = $(datadir)/pkgconfig
 pkgconfig_DATA = gnome-keybindings.pc
 
 INCLUDES = \
-	$(GNOMECC_CAPPLETS_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_UI_DIR="\"$(uidir)\"" \
 	-DGNOMECC_KEYBINDINGS_DIR="\"$(pkgdatadir)/keybindings\""
+
 CLEANFILES = \
 	$(Desktop_in_files) \
 	$(desktop_DATA) \

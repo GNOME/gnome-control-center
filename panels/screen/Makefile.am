@@ -2,7 +2,7 @@ cappletname = screen
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(SCREEN_PANEL_CFLAGS)			\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
@@ -16,7 +16,7 @@ libscreen_la_SOURCES =		\
 	cc-screen-panel.c	\
 	cc-screen-panel.h
 
-libscreen_la_LIBADD = $(PANEL_LIBS) $(CAPPLET_LIBS)
+libscreen_la_LIBADD = $(PANEL_LIBS) $(SCREEN_PANEL_LIBS)
 libscreen_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui

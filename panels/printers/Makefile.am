@@ -6,9 +6,7 @@ dist_ui_DATA = \
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
-	$(DBUS_CFLAGS)					\
-	$(POLKIT_CFLAGS)				\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(PRINTERS_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(uidir)\""			\
@@ -24,7 +22,7 @@ libprinters_la_SOURCES =		\
 	cc-printers-panel.c	\
 	cc-printers-panel.h
 
-libprinters_la_LIBADD = $(GNOMECC_CAPPLETS_LIBS) $(PANEL_LIBS) $(CUPS_LIBS) $(DBUS_LIBS) $(POLKIT_LIBS)
+libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS)
 libprinters_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@

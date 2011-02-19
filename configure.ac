@@ -76,28 +76,47 @@ DESKTOP_SCHEMAS_REQUIRED_VERSION=0.1.7
 PA_REQUIRED_VERSION=0.9.16
 CANBERRA_REQUIRED_VERSION=0.13
 GDKPIXBUF_REQUIRED_VERSION=2.23.0
+POLKIT_REQUIRED_VERSION=0.97
+GSD_REQUIRED_VERSION=2.91.9
 
 COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  glib-2.0 >= $GLIB_REQUIRED_VERSION
  gthread-2.0
  gio-2.0
  gio-unix-2.0
- gconf-2.0
- libxml-2.0
  gsettings-desktop-schemas >= $DESKTOP_SCHEMAS_REQUIRED_VERSION"
-PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
-PKG_CHECK_MODULES(GNOMECC_SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
-PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
-PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-3.0)
-PKG_CHECK_MODULES(GSD_DBUS, gnome-settings-daemon >= 2.91.9)
-PKG_CHECK_MODULES(GIO, gio-2.0 gio-unix-2.0)
-PKG_CHECK_MODULES(XML, libxml-2.0)
-PKG_CHECK_MODULES(UPOWER, upower-glib >= 0.9.1)
-PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION)
-PKG_CHECK_MODULES(PIXBUF, gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
-PKG_CHECK_MODULES(PULSEAUDIO,
-          libpulse >= $PA_REQUIRED_VERSION
-          libpulse-mainloop-glib >= $PA_REQUIRED_VERSION)
+
+PKG_CHECK_MODULES(LIBGNOME_CONTROL_CENTER, $COMMON_MODULES gconf-2.0)
+PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0)
+PKG_CHECK_MODULES(SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
+PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
+                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES dbus-glib-1
+                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+PKG_CHECK_MODULES(DISPLAY_PANEL, $COMMON_MODULES dbus-glib-1 gnome-desktop-3.0)
+PKG_CHECK_MODULES(INFO_PANEL, $COMMON_MODULES libgtop-2.0)
+PKG_CHECK_MODULES(KEYBOARD_PANEL, $COMMON_MODULES gconf-2.0)
+PKG_CHECK_MODULES(MEDIA_PANEL, $COMMON_MODULES)
+PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_MODULES xi >= 1.2
+                  gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
+PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES)
+PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.9.1)
+PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES dbus-glib-1
+                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
+PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES libgnomekbd >= 2.91.1
+                  libxklavier >= 5.1 libgnomekbdui >= 2.91.2)
+PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
+PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_MODULES libxml-2.0
+                  libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION
+                  libpulse >= $PA_REQUIRED_VERSION
+                  libpulse-mainloop-glib >= $PA_REQUIRED_VERSION
+                  gconf-2.0)
+PKG_CHECK_MODULES(UNIVERSAL_ACCESS_PANEL, $COMMON_MODULES gconf-2.0)
+PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES dbus-glib-1
+                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+                  gnome-desktop-3.0
+                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 
 # Check for CUPS 1.4 or newer
 AC_PATH_PROG(CUPS_CONFIG, cups-config, no)
@@ -127,11 +146,7 @@ else
 fi
 AM_CONDITIONAL(BUILD_PRINTERS, [test x$have_cups = xyes])
 
-PKG_CHECK_MODULES(GLIB, glib-2.0)
-
-PKG_CHECK_MODULES(LIBGTOP, libgtop-2.0)
-
-PKG_CHECK_MODULES(POLKIT, polkit-gobject-1 >= 0.97)
+# Optional dependency for the user accounts panel
 PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 2.29.90, have_cheese=yes, have_cheese=no)
 
 if test x$have_cheese = xyes ; then
@@ -143,24 +158,6 @@ PKG_CHECK_MODULES(ISOCODES, iso-codes)
 
 AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["`$PKG_CONFIG --variable=prefix iso-codes`"],[ISO codes prefix])
 ISO_CODES=iso-codes
-
-PKG_CHECK_MODULES(DISPLAY_CAPPLET, $COMMON_MODULES)
-DISPLAY_CAPPLET_LIBS="$DISPLAY_CAPPLET_LIBS"
-
-CAPPLET_LIBS="$CAPPLET_LIBS $x_libs"
-GNOMECC_LIBS="$GNOMECC_LIBS $x_libs"
-
-dnl =============================================
-dnl X Input library >= 1.2 with property support
-dnl =============================================
-PKG_CHECK_MODULES(XINPUT, [xi >= 1.2])
-
-CAPPLET_LIBS="$CAPPLET_LIBS $XINPUT_LIBS"
-
-dnl ==============
-dnl gswitchit
-dnl ==============
-PKG_CHECK_MODULES(LIBGNOMEKBD, [libgnomekbd >= 2.91.1 libxklavier >= 5.1 libgnomekbdui >= 2.91.2])
 
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
@@ -186,19 +183,6 @@ fi
 
 AM_GCONF_SOURCE_2
 
-dnl ==============================================
-dnl Define the main variables
-dnl ==============================================
-EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\""
-
-GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${DBUS_CFLAGS}"
-GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} ${DBUS_LIBS}"
-
-AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
-AC_SUBST(GNOMECC_CAPPLETS_LIBS)
-
-
-
 dnl =======================================
 dnl Panels
 dnl =======================================
@@ -206,7 +190,7 @@ dnl =======================================
 PANELS_DIR="${libdir}/control-center-1/panels"
 AC_SUBST(PANELS_DIR)
 
-PANEL_CFLAGS="-I\$(top_srcdir)/libgnome-control-center/"
+PANEL_CFLAGS="-I\$(top_srcdir)/libgnome-control-center/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\""
 AC_SUBST(PANEL_CFLAGS)
 
 PANEL_LIBS="\$(top_builddir)/libgnome-control-center/libgnome-control-center.la"

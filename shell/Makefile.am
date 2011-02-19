@@ -1,8 +1,7 @@
 INCLUDES =					\
 	-I$(top_srcdir)				\
 	-I$(top_srcdir)/libgnome-control-center \
-	$(GIO_CFLAGS)				\
-	$(GNOMECC_SHELL_CFLAGS)
+	$(SHELL_CFLAGS)
 
 bin_PROGRAMS = gnome-control-center
 
@@ -31,8 +30,7 @@ gnome_control_center_SOURCES =			\
 
 gnome_control_center_LDADD =			\
 	$(top_builddir)/libgnome-control-center/libgnome-control-center.la \
-	$(GNOMECC_SHELL_LIBS)			\
-	$(GIO_LIBS)
+	$(SHELL_LIBS)
 
 gnome_control_center_LDFLAGS = -export-dynamic
 

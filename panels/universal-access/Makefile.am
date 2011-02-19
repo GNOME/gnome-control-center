@@ -2,7 +2,7 @@ cappletname = universal-access
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(UNIVERSAL_ACCESS_PANEL_CFLAGS)		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
@@ -16,7 +16,7 @@ libuniversal_access_la_SOURCES =		\
 	cc-ua-panel.c	\
 	cc-ua-panel.h
 
-libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(GNOMECC_CAPPLETS_LIBS)
+libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS)
 libuniversal_access_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui

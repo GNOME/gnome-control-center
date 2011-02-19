@@ -1,4 +1,4 @@
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = background
 
 uidir = $(pkgdatadir)/ui/background
@@ -15,10 +15,7 @@ dist_slideshowemblem_DATA = slideshow-emblem.svg
 
 INCLUDES =						\
 	$(PANEL_CFLAGS)					\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
-	$(XML_CFLAGS)					\
-	$(GNOME_DESKTOP_CFLAGS)				\
-	$(DBUS_CFLAGS)					\
+	$(BACKGROUND_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(uidir)\""			\
@@ -51,12 +48,7 @@ libbackground_la_SOURCES =		\
 	bg-colors-source.h
 
 
-libbackground_la_LIBADD = \
-	$(PANEL_LIBS) \
-	$(DBUS_LIBS) \
-	$(GNOME_DESKTOP_LIBS) \
-	$(XML_LIBS)
-
+libbackground_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
 libbackground_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 if WITH_LIBSOCIALWEB

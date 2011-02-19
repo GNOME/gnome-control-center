@@ -1,25 +1,16 @@
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = common
 
 noinst_LTLIBRARIES = liblanguage.la
 
 AM_CPPFLAGS =						\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(PANEL_CFLAGS)					\
+	$(LIBLANGUAGE_CFLAGS)				\
 	-DDATADIR=\""$(datadir)"\"			\
 	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"	\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
-	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
-	$(PANEL_CFLAGS)					\
-	$(GNOME_DESKTOP_CFLAGS) 			\
-	$(POLKIT_CFLAGS)				\
-	$(CHEESE_CFLAGS)				\
-	$(DBUS_CFLAGS)					\
-	$(GIO_CFLAGS)					\
-	$(WARN_CFLAGS)
-
-liblanguage_la_CFLAGS = 		\
-	$(PANEL_CFLAGS)
+	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"
 
 liblanguage_la_SOURCES =		\
 	gdm-languages.h 		\
@@ -29,7 +20,8 @@ liblanguage_la_SOURCES =		\
 	cc-common-language.h
 
 liblanguage_la_LIBADD = 		\
-	$(PANEL_LIBS)
+	$(PANEL_LIBS)			\
+	$(LIBLANGUAGE_LIBS)
 
 liblanguage_la_LDFLAGS = $(PANEL_LDFLAGS)
 

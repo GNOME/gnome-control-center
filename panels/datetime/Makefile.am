@@ -1,4 +1,4 @@
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = datetime
 
 SUBDIRS = po-timezones
@@ -64,11 +64,9 @@ dist_ui_DATA = \
 tzdatadir = $(pkgdatadir)/datetime
 dist_tzdata_DATA = backward
 
-INCLUDES =						\
+AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
-	$(DBUS_CFLAGS)					\
-	$(POLKIT_CFLAGS)				\
+	$(DATETIME_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(uidir)\""			\
@@ -77,7 +75,7 @@ INCLUDES =						\
 noinst_PROGRAMS = test-timezone
 
 test_timezone_SOURCES = test-timezone.c tz.c tz.h
-test_timezone_LDADD = $(PANEL_LIBS) $(CAPPLET_LIBS)
+test_timezone_LDADD = $(PANEL_LIBS)
 test_timezone_CFLAGS = $(PANEL_CFLAGS)
 
 all-local: check-local
@@ -101,8 +99,7 @@ libdate_time_la_SOURCES =	\
 	set-timezone.h		\
 	tz.c tz.h
 
-libdate_time_la_LIBADD = $(PANEL_LIBS) $(DBUS_LIBS) $(GNOMECC_CAPPLETS_LIBS) \
-			 $(POLKIT_LIBS)
+libdate_time_la_LIBADD = $(PANEL_LIBS) $(DATETIME_PANEL_LIBS)
 libdate_time_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@

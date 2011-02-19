@@ -1,10 +1,9 @@
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = region
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
-	$(LIBGNOMEKBD_CFLAGS)				\
+	$(REGION_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
@@ -27,7 +26,7 @@ libregion_la_SOURCES =	\
 	gnome-region-panel-xkbpv.c \
 	gnome-region-panel-xkb.h
 
-libregion_la_LIBADD = $(PANEL_LIBS) $(LIBGNOMEKBD_LIBS) $(GNOMECC_CAPPLETS_LIBS) $(builddir)/../common/liblanguage.la
+libregion_la_LIBADD = $(PANEL_LIBS) $(REGION_PANEL_LIBS) $(builddir)/../common/liblanguage.la
 
 libregion_la_LDFLAGS = $(PANEL_LDFLAGS)
 

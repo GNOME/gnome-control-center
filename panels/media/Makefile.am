@@ -1,4 +1,4 @@
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = media
 
 ccpanelsdir = $(PANELS_DIR)
@@ -11,7 +11,7 @@ libmedia_la_SOURCES = \
 
 libmedia_la_LIBADD = \
 	$(PANEL_LIBS) \
-	$(CAPPLET_LIBS)
+	$(MEDIA_PANEL_LIBS)
 
 libmedia_la_LDFLAGS = $(PANEL_LDFLAGS)
 
@@ -24,8 +24,9 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-media-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = 					\
-	$(GNOMECC_CAPPLETS_CFLAGS)		\
+INCLUDES = 					\
+	$(PANEL_CFLAGS)				\
+	$(MEDIA_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"\
 	-DGNOMECC_UI_DIR=\""$(uidir)"\"
 

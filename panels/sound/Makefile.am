@@ -1,6 +1,6 @@
 SUBDIRS = data
 
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = sound
 NULL =
 
@@ -12,12 +12,8 @@ bin_PROGRAMS =					\
 	$(NULL)
 
 AM_CPPFLAGS =					\
-	$(GNOMECC_CAPPLETS_CFLAGS) 		\
-	$(WARN_CFLAGS)				\
-	$(CANBERRA_CFLAGS)			\
-	$(PANEL_CFLAGS)				\
-	$(PULSEAUDIO_CFLAGS)			\
-	$(XML_CFLAGS)				\
+	$(PANEL_CFLAGS) 			\
+	$(SOUND_PANEL_CFLAGS)			\
 	-DLOCALE_DIR=\""$(datadir)/locale"\"	\
 	-DLIBEXECDIR=\"$(libexecdir)\"		\
 	-DGLADEDIR=\""$(pkgdatadir)"\"		\
@@ -60,9 +56,7 @@ libgnomevolumecontrol_la_SOURCES =		\
 gnome_sound_applet_LDADD =			\
 	-lm					\
 	libgnomevolumecontrol.la		\
-	$(CANBERRA_LIBS)			\
-	$(PULSEAUDIO_LIBS)			\
-	$(GNOMECC_CAPPLETS_LIBS)		\
+	$(SOUND_PANEL_LIBS)			\
 	$(NULL)
 
 gnome_sound_applet_SOURCES =			\
@@ -77,15 +71,11 @@ libsound_la_LIBADD =				\
 	-lm					\
 	libgnomevolumecontrol.la		\
 	$(PANEL_LIBS)				\
-	$(PULSEAUDIO_LIBS)			\
+	$(SOUND_PANEL_LIBS)			\
 	$(NULL)
 
 libsound_la_LDFLAGS =				\
 	$(PANEL_LDFLAGS)			\
-	$(CANBERRA_LIBS)			\
-	$(PULSEAUDIO_LIBS)			\
-	$(XML_LIBS)				\
-	$(GNOMECC_CAPPLETS_LIBS)		\
 	$(NULL)
 
 libsound_la_SOURCES =				\

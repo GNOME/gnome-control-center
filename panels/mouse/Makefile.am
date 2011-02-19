@@ -1,10 +1,9 @@
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = mouse
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
-	$(GSD_DBUS_CFLAGS)				\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(MOUSE_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
@@ -24,7 +23,7 @@ libmouse_properties_la_SOURCES =	\
 	gsd-input-helper.c		\
 	gsd-input-helper.h
 
-libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(GSD_DBUS_LIBS) $(GNOMECC_CAPPLETS_LIBS)
+libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS)
 libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@

@@ -2,7 +2,7 @@ cappletname = power
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(POWER_PANEL_CFLAGS)				\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
@@ -16,7 +16,7 @@ libpower_la_SOURCES =		\
 	cc-power-panel.c	\
 	cc-power-panel.h
 
-libpower_la_LIBADD = $(PANEL_LIBS) $(UPOWER_LIBS) $(CAPPLET_LIBS)
+libpower_la_LIBADD = $(PANEL_LIBS) $(POWER_PANEL_LIBS)
 libpower_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui

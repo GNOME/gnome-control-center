@@ -2,8 +2,11 @@ NULL =
 
 uidir = $(pkgdatadir)/ui
 
-INCLUDES =					\
-	$(CAPPLET_CFLAGS)			\
+AM_CPPFLAGS =					\
+	$(LIBGNOME_CONTROL_CENTER_CFLAGS)	\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
+	-DUIDIR="\"$(uidir)\""			\
+	-DMENUDIR="\"$(menudir)\""		\
 	$(NULL)
 
 lib_LTLIBRARIES = libgnome-control-center.la
@@ -31,7 +34,7 @@ libgnome_control_center_la_LDFLAGS =		\
 	$(NULL)
 
 libgnome_control_center_la_LIBADD = 		\
-	$(CAPPLET_LIBS)				\
+	$(LIBGNOME_CONTROL_CENTER_LIBS)		\
 	$(NULL)
 
 libgnome_control_center_la_LIBTOOLFLAGS = --tag=disable-static
@@ -44,10 +47,5 @@ pkgconfig_DATA=libgnome-control-center.pc
 EXTRA_DIST =					\
         libgnome-control-center.pc.in	\
         $(NULL)
-
-AM_CPPFLAGS =							\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
-	-DUIDIR="\"$(uidir)\""					\
-	-DMENUDIR="\"$(menudir)\""
 
 -include $(top_srcdir)/git.mk

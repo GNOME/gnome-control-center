@@ -1,4 +1,4 @@
-# This is used in GNOMECC_CAPPLETS_CFLAGS
+# This is used in PANEL_CFLAGS
 cappletname = display
 
 uidir = $(pkgdatadir)/ui
@@ -25,8 +25,8 @@ libdisplay_la_SOURCES =		\
 	scrollarea.h		\
 	$(MARSHALFILES)
 
-libdisplay_la_LIBADD = $(DBUS_LIBS) $(PANEL_LIBS)
-libdisplay_la_LDFLAGS = $(PANEL_LDFLAGS) $(DISPLAY_CAPPLET_LIBS) $(GNOME_DESKTOP_LIBS)
+libdisplay_la_LIBADD = $(DBUS_LIBS) $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS)
+libdisplay_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 # You will need a recent intltool or the patch from this bug
 # http://bugzilla.gnome.org/show_bug.cgi?id=462312
@@ -49,10 +49,7 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-display-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS) \
-	     $(DBUS_CFLAGS) \
-             $(GNOMECC_CAPPLETS_CFLAGS) \
-             $(GNOME_DESKTOP_CFLAGS) \
+INCLUDES   = $(DISPLAY_PANEL_CFLAGS) \
 	     -DSBINDIR="\"$(sbindir)\"" \
 	     -DUIDIR="\"$(uidir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \

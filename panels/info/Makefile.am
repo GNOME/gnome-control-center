@@ -2,8 +2,7 @@ cappletname = info
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
-	$(LIBGTOP_CFLAGS)				\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(INFO_PANEL_CFLAGS)				\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
@@ -19,7 +18,7 @@ libinfo_la_SOURCES =		\
 	cc-info-panel.c	\
 	cc-info-panel.h
 
-libinfo_la_LIBADD = $(PANEL_LIBS) $(CAPPLET_LIBS) $(LIBGTOP_LIBS)
+libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 libinfo_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
