@@ -27,12 +27,11 @@
 
 #include "panel-common.h"
 
-
 /**
  * panel_device_type_to_icon_name:
  **/
 const gchar *
-panel_device_type_to_icon_name (guint type)
+panel_device_type_to_icon_name (NMDeviceType type)
 {
         const gchar *value = NULL;
         switch (type) {
@@ -42,8 +41,8 @@ panel_device_type_to_icon_name (guint type)
         case NM_DEVICE_TYPE_WIFI:
         case NM_DEVICE_TYPE_GSM:
         case NM_DEVICE_TYPE_CDMA:
-        case NM_DEVICE_TYPE_BLUETOOTH:
-        case NM_DEVICE_TYPE_MESH:
+        case NM_DEVICE_TYPE_BT:
+        case NM_DEVICE_TYPE_OLPC_MESH:
                 value = "network-wireless";
                 break;
         default:
@@ -56,7 +55,7 @@ panel_device_type_to_icon_name (guint type)
  * panel_device_type_to_localized_string:
  **/
 const gchar *
-panel_device_type_to_localized_string (guint type)
+panel_device_type_to_localized_string (NMDeviceType type)
 {
         const gchar *value = NULL;
         switch (type) {
@@ -77,15 +76,14 @@ panel_device_type_to_localized_string (guint type)
                 /* TRANSLATORS: device type */
                 value = _("Mobile broadband");
                 break;
-        case NM_DEVICE_TYPE_BLUETOOTH:
+        case NM_DEVICE_TYPE_BT:
                 /* TRANSLATORS: device type */
                 value = _("Bluetooth");
                 break;
-        case NM_DEVICE_TYPE_MESH:
+        case NM_DEVICE_TYPE_OLPC_MESH:
                 /* TRANSLATORS: device type */
                 value = _("Mesh");
                 break;
-
         default:
                 break;
         }
@@ -98,7 +96,7 @@ panel_device_type_to_localized_string (guint type)
  * Try to return order of approximate connection speed.
  **/
 const gchar *
-panel_device_type_to_sortable_string (guint type)
+panel_device_type_to_sortable_string (NMDeviceType type)
 {
         const gchar *value = NULL;
         switch (type) {
@@ -112,10 +110,10 @@ panel_device_type_to_sortable_string (guint type)
         case NM_DEVICE_TYPE_CDMA:
                 value = "3";
                 break;
-        case NM_DEVICE_TYPE_BLUETOOTH:
+        case NM_DEVICE_TYPE_BT:
                 value = "4";
                 break;
-        case NM_DEVICE_TYPE_MESH:
+        case NM_DEVICE_TYPE_OLPC_MESH:
                 value = "5";
                 break;
         default:
@@ -129,7 +127,7 @@ panel_device_type_to_sortable_string (guint type)
  * panel_ap_mode_to_localized_string:
  **/
 const gchar *
-panel_ap_mode_to_localized_string (guint mode)
+panel_ap_mode_to_localized_string (NM80211Mode mode)
 {
         const gchar *value = NULL;
         switch (mode) {
@@ -155,7 +153,7 @@ panel_ap_mode_to_localized_string (guint mode)
  * panel_device_state_to_localized_string:
  **/
 const gchar *
-panel_device_state_to_localized_string (guint type)
+panel_device_state_to_localized_string (NMDeviceState type)
 {
         const gchar *value = NULL;
         switch (type) {
@@ -191,75 +189,26 @@ panel_device_state_to_localized_string (guint type)
                 /* TRANSLATORS: device status */
                 value = _("Getting network address");
                 break;
+        case NM_DEVICE_STATE_IP_CHECK:
+                /* TRANSLATORS: device status */
+                value = _("Checking network address");
+                break;
         case NM_DEVICE_STATE_ACTIVATED:
                 /* TRANSLATORS: device status */
                 value = _("Connected");
+                break;
+        case NM_DEVICE_STATE_DEACTIVATING:
+                /* TRANSLATORS: device status */
+                value = _("Disconnecting");
                 break;
         case NM_DEVICE_STATE_FAILED:
                 /* TRANSLATORS: device status */
                 value = _("Failed to connect");
                 break;
         default:
+                /* TRANSLATORS: device status */
+                value = _("Status unknown (missing)");
                 break;
         }
         return value;
-}
-
-/**
- * panel_ipv4_to_string:
- **/
-gchar *
-panel_ipv4_to_string (GVariant *variant)
-{
-        gchar *ip_str;
-        guint32 ip;
-
-        g_variant_get (variant, "u", &ip);
-        ip_str = g_strdup_printf ("%i.%i.%i.%i",
-                                    ip & 0x000000ff,
-                                   (ip & 0x0000ff00) / 0x100,
-                                   (ip & 0x00ff0000) / 0x10000,
-                                   (ip & 0xff000000) / 0x1000000);
-        return ip_str;
-}
-
-/**
- * panel_ipv6_to_string:
- *
- * Formats an 'ay' variant into a IPv6 address you recognise, e.g.
- * "fe80::21c:bfff:fe81:e8de"
- **/
-gchar *
-panel_ipv6_to_string (GVariant *variant)
-{
-        gchar tmp1;
-        gchar tmp2;
-        guint i = 0;
-        gboolean ret = FALSE;
-        GString *string;
-
-        if (g_variant_n_children (variant) != 16)
-                return NULL;
-
-        string = g_string_new ("");
-        for (i=0; i<16; i+=2) {
-                g_variant_get_child (variant, i+0, "y", &tmp1);
-                g_variant_get_child (variant, i+1, "y", &tmp2);
-                if (tmp1 == 0 && tmp2 == 0) {
-                        if (!ret) {
-                                g_string_append (string, ":");
-                                ret = TRUE;
-                        }
-                } else {
-                        g_string_append_printf (string,
-                                                "%x%x%x%x:",
-                                                (tmp1 & 0xf0) / 16,
-                                                 tmp1 & 0x0f,
-                                                (tmp2 & 0xf0) / 16,
-                                                 tmp2 & 0x0f);
-                        ret = FALSE;
-                }
-        }
-        g_string_set_size (string, string->len - 1);
-        return g_string_free (string, FALSE);
 }

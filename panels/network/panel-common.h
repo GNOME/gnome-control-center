@@ -23,45 +23,15 @@
 #define PANEL_COMMON_H
 
 #include <glib-object.h>
+#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-typedef enum {
-        NM_DEVICE_TYPE_UNKNOWN,
-        NM_DEVICE_TYPE_ETHERNET,
-        NM_DEVICE_TYPE_WIFI,
-        NM_DEVICE_TYPE_GSM,
-        NM_DEVICE_TYPE_CDMA,
-        NM_DEVICE_TYPE_BLUETOOTH,
-        NM_DEVICE_TYPE_MESH
-} NMDeviceType;
-
-typedef enum {
-        NM_DEVICE_STATE_UNKNOWN,
-        NM_DEVICE_STATE_UNMANAGED,
-        NM_DEVICE_STATE_UNAVAILABLE,
-        NM_DEVICE_STATE_DISCONNECTED,
-        NM_DEVICE_STATE_PREPARE,
-        NM_DEVICE_STATE_CONFIG,
-        NM_DEVICE_STATE_NEED_AUTH,
-        NM_DEVICE_STATE_IP_CONFIG,
-        NM_DEVICE_STATE_ACTIVATED,
-        NM_DEVICE_STATE_FAILED
-} NMDeviceState;
-
-typedef enum {
-        NM_802_11_MODE_UNKNOWN = 0,
-        NM_802_11_MODE_ADHOC,
-        NM_802_11_MODE_INFRA
-} NM80211Mode;
-
-const gchar     *panel_device_type_to_icon_name                 (guint type);
-const gchar     *panel_device_type_to_localized_string          (guint type);
-const gchar     *panel_device_type_to_sortable_string           (guint type);
-const gchar     *panel_ap_mode_to_localized_string              (guint mode);
-const gchar     *panel_device_state_to_localized_string         (guint type);
-gchar           *panel_ipv4_to_string                           (GVariant *variant);
-gchar           *panel_ipv6_to_string                           (GVariant *variant);
+const gchar     *panel_device_type_to_icon_name                 (NMDeviceType type);
+const gchar     *panel_device_type_to_localized_string          (NMDeviceType type);
+const gchar     *panel_device_type_to_sortable_string           (NMDeviceType type);
+const gchar     *panel_ap_mode_to_localized_string              (NM80211Mode mode);
+const gchar     *panel_device_state_to_localized_string         (NMDeviceState type);
 
 G_END_DECLS
 

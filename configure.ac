@@ -78,6 +78,7 @@ CANBERRA_REQUIRED_VERSION=0.13
 GDKPIXBUF_REQUIRED_VERSION=2.23.0
 POLKIT_REQUIRED_VERSION=0.97
 GSD_REQUIRED_VERSION=2.91.9
+NETWORK_MANAGER_REQUIRED_VERSION=0.8.992
 
 COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  glib-2.0 >= $GLIB_REQUIRED_VERSION
@@ -117,6 +118,14 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES dbus-glib-1
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+
+# Check for NetworkManager ~0.9
+PKG_CHECK_MODULES(NETWORK_MANAGER, libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION,
+		  [have_networkmanager=yes], have_networkmanager=no)
+if test "x$have_networkmanager" = xno ; then
+        AC_MSG_WARN(*** Network panel will not be built (NetworkManager ~0.9 or newer not found) ***)
+fi
+AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
 
 # Check for CUPS 1.4 or newer
 AC_PATH_PROG(CUPS_CONFIG, cups-config, no)

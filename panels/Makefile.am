@@ -7,7 +7,6 @@ SUBDIRS= \
 	media \
 	mouse \
 	region \
-	network \
 	info \
 	sound \
 	keyboard \
@@ -17,6 +16,10 @@ SUBDIRS= \
 
 if BUILD_PRINTERS
 SUBDIRS += printers
+endif
+
+if BUILD_NETWORK
+SUBDIRS += network
 endif
 
 -include $(top_srcdir)/git.mk

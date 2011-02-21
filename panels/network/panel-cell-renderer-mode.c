@@ -64,7 +64,7 @@ panel_cell_renderer_set_name (PanelCellRendererMode *renderer)
 {
         const gchar *icon_name = NULL;
 
-        if (renderer->mode == NM_ACCESS_POINT_MODE_ADHOC)
+        if (renderer->mode == NM_802_11_MODE_ADHOC)
                 icon_name = "network-workgroup";
 
         g_object_set (renderer, "icon-name", icon_name, NULL);

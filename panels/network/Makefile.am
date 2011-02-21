@@ -3,6 +3,7 @@ cappletname = network
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(NETWORK_PANEL_CFLAGS)				\
+	$(NETWORK_MANAGER_CFLAGS)			\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
@@ -15,10 +16,6 @@ libnetwork_la_SOURCES =					\
 	network-module.c				\
 	panel-common.c					\
 	panel-common.h					\
-	nm-device.c					\
-	nm-device.h					\
-	nm-access-point.c				\
-	nm-access-point.h				\
 	panel-cell-renderer-mode.c			\
 	panel-cell-renderer-mode.h			\
 	panel-cell-renderer-signal.c			\
@@ -26,7 +23,7 @@ libnetwork_la_SOURCES =					\
 	cc-network-panel.c				\
 	cc-network-panel.h
 
-libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS)
+libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS)
 libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
