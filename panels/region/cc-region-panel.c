@@ -104,11 +104,11 @@ cc_region_panel_init (CcRegionPanel * self)
 	priv->builder = gtk_builder_new ();
 
 	gtk_builder_add_from_file (priv->builder,
-				   GNOMECC_UI_DIR
-				   "/gnome-region-panel.ui",
+				   GNOMECC_UI_DIR "/gnome-region-panel.ui",
 				   &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
+		g_error_free (error);
 		return;
 	}
 
