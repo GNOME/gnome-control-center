@@ -637,6 +637,63 @@ panel_show_ip4_config (NMIP4Config *cfg)
         }
 }
 
+static GPtrArray *
+panel_get_strongest_unique_aps (const GPtrArray *aps)
+{
+        const GByteArray *ssid;
+        const GByteArray *ssid_tmp;
+        gboolean add_ap;
+        GPtrArray *aps_unique = NULL;
+        guint i;
+        guint j;
+        NMAccessPoint *ap;
+        NMAccessPoint *ap_tmp;
+
+        /* we will have multiple entries for typical hotspots, just
+         * filter to the one with the strongest signal */
+        aps_unique = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
+        for (i = 0; i < aps->len; i++) {
+                ap = NM_ACCESS_POINT (g_ptr_array_index (aps, i));
+                ssid = nm_access_point_get_ssid (ap);
+                add_ap = TRUE;
+
+                /* get already added list */
+                for (j=0; j<aps_unique->len; j++) {
+                        ap_tmp = NM_ACCESS_POINT (g_ptr_array_index (aps, j));
+                        ssid_tmp = nm_access_point_get_ssid (ap_tmp);
+
+                        /* is this the same type and data? */
+                        if (ssid->len != ssid_tmp->len)
+                                continue;
+                        if (memcmp (ssid->data, ssid_tmp->data, ssid_tmp->len) != 0)
+                                continue;
+                        g_debug ("found duplicate: %s",
+                                 nm_utils_escape_ssid (ssid_tmp->data,
+                                                       ssid_tmp->len));
+
+                        /* the new access point is stronger */
+                        if (nm_access_point_get_strength (ap) >
+                            nm_access_point_get_strength (ap_tmp)) {
+                                g_debug ("removing %s",
+                                         nm_utils_escape_ssid (ssid_tmp->data,
+                                                               ssid_tmp->len));
+                                g_ptr_array_remove (aps_unique, ap_tmp);
+                                break;
+                        } else {
+                                add_ap = FALSE;
+                                break;
+                        }
+                }
+                if (add_ap) {
+                        g_debug ("adding %s",
+                                 nm_utils_escape_ssid (ssid->data,
+                                                       ssid->len));
+                        g_ptr_array_add (aps_unique, g_object_ref (ap));
+                }
+        }
+        return aps_unique;
+}
+
 static void
 nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
 {
@@ -644,11 +701,13 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
         const gchar *str;
         const gchar *sub_pane = NULL;
         const GPtrArray *aps;
+        GPtrArray *aps_unique = NULL;
         gchar *str_tmp;
         GHashTable *options = NULL;
         GtkListStore *liststore_wireless_network;
         GtkWidget *widget;
         guint i;
+        NMAccessPoint *ap;
         NMAccessPoint *active_ap;
         NMDeviceState state;
         NMDeviceType type;
@@ -757,9 +816,11 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
                 aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (device));
                 if (aps == NULL)
                         return;
-                for (i = 0; i < aps->len; i++) {
+                aps_unique = panel_get_strongest_unique_aps (aps);
+                for (i = 0; i < aps_unique->len; i++) {
+                        ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                         add_access_point (panel,
-                                          NM_ACCESS_POINT (g_ptr_array_index (aps, i)),
+                                          ap,
                                           active_ap);
                 }
 
@@ -839,7 +900,8 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
                                                                        "ip_address"));
         }
 out:
-        return;
+        if (aps_unique != NULL)
+                g_ptr_array_unref (aps_unique);
 }
 
 static void
