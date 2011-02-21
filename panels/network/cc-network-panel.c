@@ -333,7 +333,6 @@ panel_device_got_modem_manager_gsm_cb (GObject *source_object,
                                        gpointer user_data)
 {
         GError *error = NULL;
-        GVariant *result = NULL;
         GDBusProxy *proxy;
         NMDevice *device = (NMDevice *) user_data;
 
@@ -344,16 +343,6 @@ panel_device_got_modem_manager_gsm_cb (GObject *source_object,
                 g_error_free (error);
                 goto out;
         }
-
-        /* get how we are acessing the data */
-        result = g_dbus_proxy_get_cached_property (proxy,
-                                                   "AccessTechnology");
-
-        /* save */
-        g_object_set_data_full (G_OBJECT (device),
-                                "ControlCenter::AccessTechnology",
-                                g_variant_dup_string (result, NULL),
-                                g_free);
 
         g_dbus_proxy_call (proxy,
                            "GetRegistrationInfo",
@@ -366,8 +355,6 @@ panel_device_got_modem_manager_gsm_cb (GObject *source_object,
 out:
         if (proxy != NULL)
                 g_object_unref (proxy);
-        if (result != NULL)
-                g_variant_unref (result);
         return;
 }
 
