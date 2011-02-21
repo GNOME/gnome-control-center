@@ -350,29 +350,6 @@ get_graphics_info (void)
 }
 
 static gboolean
-get_is_graphics_accelerated (void)
-{
-  GError *error = NULL;
-  gchar *is_accelerated_binary;
-  gchar *argv[2];
-  gint estatus;
-
-  is_accelerated_binary = g_build_filename (LIBEXECDIR, "gnome-session-is-accelerated", NULL);
-
-  error = NULL;
-  argv[0] = is_accelerated_binary;
-  argv[G_N_ELEMENTS(argv)] = NULL;
-
-  g_spawn_sync (NULL, argv, NULL, G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
-                NULL, NULL, NULL, NULL, &estatus, &error);
-  if (error != NULL || estatus != 0)
-    return FALSE;
-  else
-    return TRUE;
-
-}
-
-static gboolean
 get_current_is_fallback (CcInfoPanel  *self)
 {
   GError   *error;
