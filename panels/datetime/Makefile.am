@@ -75,8 +75,8 @@ AM_CPPFLAGS =						\
 noinst_PROGRAMS = test-timezone
 
 test_timezone_SOURCES = test-timezone.c tz.c tz.h
-test_timezone_LDADD = $(PANEL_LIBS)
-test_timezone_CFLAGS = $(PANEL_CFLAGS)
+test_timezone_LDADD = $(DATETIME_PANEL_LIBS)
+test_timezone_CFLAGS = $(DATETIME_PANEL_CFLAGS)
 
 all-local: check-local
 
