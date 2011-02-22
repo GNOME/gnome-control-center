@@ -55,6 +55,7 @@ struct _CcPrintersPanelPrivate
   GtkWidget *lock_button;
 
   cups_dest_t *dests;
+  gchar **dest_model_names;
   int num_dests;
   int current_dest;
 
@@ -112,7 +113,12 @@ cc_printers_panel_dispose (GObject *object)
   int                     i;
 
   if (priv->num_dests > 0)
-    cupsFreeDests (priv->num_dests, priv->dests);
+    {
+      for (i = 0; i < priv->num_dests; i++)
+        g_free (priv->dest_model_names[i]);
+      g_free (priv->dest_model_names);
+      cupsFreeDests (priv->num_dests, priv->dests);
+    }
   priv->dests = NULL;
   priv->num_dests = 0;
   priv->current_dest = -1;
@@ -166,6 +172,32 @@ cc_printers_panel_class_finalize (CcPrintersPanelClass *klass)
 {
 }
 
+gchar *
+get_ppd_attribute (const gchar *printer_name, const gchar *attribute_name)
+{
+  gchar *file_name = NULL;
+  ppd_file_t *ppd_file = NULL;
+  ppd_attr_t *ppd_attr = NULL;
+  gchar *result = NULL;
+
+  file_name = cupsGetPPD (printer_name);
+
+  if (file_name)
+    {
+      ppd_file = ppdOpenFile (file_name);
+      if (ppd_file)
+        {
+          ppd_attr = ppdFindAttr (ppd_file, attribute_name, NULL);
+          if (ppd_attr != NULL)
+            result = g_strdup (ppd_attr->value);
+          ppdClose (ppd_file);
+        }
+      g_unlink (file_name);
+    }
+
+  return result;
+}
+
 enum
 {
   PRINTER_ID_COLUMN,
@@ -189,6 +221,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gboolean                test_page_command_available = FALSE;
   gboolean                sensitive;
   gchar                  *printer_make_and_model = NULL;
+  gchar                  *printer_model = NULL;
   gchar                  *reason = NULL;
   gchar                 **available_commands = NULL;
   gchar                  *printer_commands = NULL;
@@ -294,7 +327,52 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-commands") == 0)
             printer_commands = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-make-and-model") == 0)
-            printer_make_and_model = g_strdup (priv->dests[priv->current_dest].options[i].value);
+            printer_make_and_model = priv->dests[priv->current_dest].options[i].value;
+        }
+
+      if (priv->dest_model_names[priv->current_dest] == NULL)
+        priv->dest_model_names[priv->current_dest] =
+          get_ppd_attribute (priv->dests[priv->current_dest].name, "ModelName");
+
+      printer_model = g_strdup (priv->dest_model_names[priv->current_dest]);
+
+      if (printer_model == NULL && printer_make_and_model)
+        {
+          gchar *breakpoint = NULL, *tmp = NULL, *tmp2 = NULL;
+          gchar  backup;
+          size_t length = 0;
+          gchar *forbiden[] = {
+              "foomatic",
+              ",",
+              "hpijs",
+              "hpcups",
+              "(recommended)",
+              "postscript (recommended)",
+              NULL };
+
+          tmp = g_ascii_strdown (printer_make_and_model, -1);
+
+          for (i = 0; i < g_strv_length (forbiden); i++)
+            {
+              tmp2 = g_strrstr (tmp, forbiden[i]);
+              if (breakpoint == NULL || 
+                  (tmp2 != NULL && tmp2 < breakpoint))
+                breakpoint = tmp2;
+            }
+
+          if (breakpoint)
+            {
+              backup = *breakpoint;
+              *breakpoint = '\0';
+              length = strlen (tmp);
+              *breakpoint = backup;
+              g_free (tmp);
+
+              if (length > 0)
+                printer_model = g_strndup (printer_make_and_model, length);
+            }
+          else
+            printer_model = g_strdup (printer_make_and_model);
         }
 
       /* Find the first of the most severe reasons
@@ -373,7 +451,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       else
         gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
 
-        
+
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-status-label");
 
@@ -401,10 +479,10 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
 
-      if (printer_make_and_model)
+      if (printer_model)
         {
-          gtk_label_set_text (GTK_LABEL (widget), printer_make_and_model);
-          g_free (printer_make_and_model);
+          gtk_label_set_text (GTK_LABEL (widget), printer_model);
+          g_free (printer_model);
         }
       else
         gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
@@ -598,8 +676,14 @@ actualize_printers_list (CcPrintersPanel *self)
     }
 
   if (priv->num_dests > 0)
-    cupsFreeDests (priv->num_dests, priv->dests);
+    {
+      for (i = 0; i < priv->num_dests; i++)
+        g_free (priv->dest_model_names[i]);
+      g_free (priv->dest_model_names);
+      cupsFreeDests (priv->num_dests, priv->dests);
+    }
   priv->num_dests = cupsGetDests (&priv->dests);
+  priv->dest_model_names = g_new0 (gchar *, priv->num_dests);
   priv->current_dest = -1;
 
   treeview = (GtkTreeView*)
@@ -2089,6 +2173,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   /* initialize main data structure */
   priv->builder = gtk_builder_new ();
   priv->dests = NULL;
+  priv->dest_model_names = NULL;
   priv->num_dests = 0;
   priv->current_dest = -1;
 
