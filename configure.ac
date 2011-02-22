@@ -1,4 +1,4 @@
-m4_define([gnome_control_center_version], 2.91.7)
+m4_define([gnome_control_center_version], 2.91.90)
 AC_INIT([gnome-control-center], [gnome_control_center_version],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
@@ -118,6 +118,9 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES dbus-glib-1
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+
+GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
+AC_SUBST(GDESKTOP_PREFIX)
 
 # Check for NetworkManager ~0.9
 PKG_CHECK_MODULES(NETWORK_MANAGER, libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION,

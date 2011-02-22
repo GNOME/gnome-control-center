@@ -1,4 +1,140 @@
 =============================
+Version 2.91.90 (2011-02-22)
+=============================
+
+Background:
+- Remove loading of obsolete backgrounds (Bastien Nocera)
+- Load initial state from GSettings (Bastien Nocera)
+- Don't warn when trying to load a gradient (Bastien Nocera)
+- Make loading wallpapers seem faster (Bastien Nocera)
+- Show 'Adwaita' as the first in the list (Bastien Nocera) (#637384)
+- Handle no-flags from saved config (Bastien Nocera)
+- Set the shading for pictures (Bastien Nocera)
+- Add/Remove features for panel (Bastien Nocera)
+- Don't show an error if no cache dir (Bastien Nocera)
+- Add arrows for the gradients (Bastien Nocera)
+
+Date & Time:
+- Don't crash when g-s-d is badly installed (Bastien Nocera) (#641232)
+- Create filenames locale-independently (Christian Persch) (#641294)
+- Fix crash when TZ is an alias (Bastien Nocera) (#641360)
+- Fix city combobox filtering (Bastien Nocera)
+
+Display:
+- Remove support for old D-Bus interface (Bastien Nocera)
+- Simplify some old GNOME 2.x code (Bastien Nocera)
+
+Info:
+- Make labels selectable (William Jon McCann)
+- Add graphics info (William Jon McCann)
+- Add special case for Atom(TM) (William Jon McCann)
+- Add panel chooser, graphics tab (Colim Walters) (#642068)
+- Add stub for default apps page (William Jon McCann)
+- Clearify language in force fallback controls (William Jon McCann)
+- Correctly detect the fallback session (William Jon McCann)
+
+Keyboard:
+- Change grouping of keys (William Jon McCann)
+- Improve the layout of the bindings page (William Jon McCann)
+- Clean up GConf handling (Bastien Nocera)
+- Add support for GSettings shortcuts (Bastien Nocera)
+- Pass a gettext package when loading GConf (Bastien Nocera)
+- Don't resize the shell horizontally (Bastien Nocera)
+- Don't expand tables vertically (William Jon McCann)
+- Add Universal Access shortcuts (Bastien Nocera) (#641279)
+
+Network:
+- Wrap long dns lines (William Jon McCann)
+- Select the first device after they are all loaded (William Jon McCann)
+- Use the same border width as other panels (William Jon McCann)
+- Use emblem-default-symbolic for the default printer (William Jon McCann)
+- Disable NetworkManager when the airplane switch gets changed (Richard Hughes)
+- Show the wired network subnet mask (Richard Hughes)
+- Fix a crasher due to an uninitialized GVariant (Cosimo Cecchi)
+- Fix linking (Richard Hughes)
+- Port to the rm-userset branch of NetworkManager (Richard Hughes)
+- Only add the strongest AP for each SSID to the drop down box (Richard Hughes) (#640471)
+
+Printers:
+- Right align the image (William Jon McCann)
+- Use a 64px icon (William Jon McCann)
+- Don't expand switch vertically (William Jon McCann)
+- Fix panel width (Matthias Clasen)
+- Allow location and model to span cols again (William Jon McCann)
+- Add unlock button (Marek Kasik) (#640733)
+- Sort printers by usage (Marek Kasik) (#641285)
+- l10n fixes for jobs count (Luca Ferretti)
+- Add translation context to statuses (Luca Ferretti) (#641339)
+- Avoid unnecessary use of markup (Khaled Hosny)
+- Check that cups is recent enough (Marek Kasik)
+- Change widget showing supply levels (Marek Kasik)
+- Don't show printers separator when not needed (Marek Kasik)
+- Don't try to draw empty ink level (Marek Kasik)
+- Replace "Idle" state by "Ready" (Marek Kasik)
+- Set Options and Show buttons sensitive (Marek Kasik)
+
+Region:
+- Use consistent border spacing (William Jon McCann)
+- New search-based layout addition (Sergey V. Udaltsov) (#640772)
+- Minor UI tweaks in kbd layout chooser (Sergey V. Udaltsov)
+- Remove annoying tooltip on a treeview (Bastien Nocera)
+- Easier to understand layout switching options (Bastien Nocera) (#641021)
+- Remove code to handle print button (Bastien Nocera)
+- Some UI fixes for the layout chooser (Bastien Nocera)
+- Make layout filtering much faster (Sergey V. Udaltsov)
+- Fix overeager string splitting (Bastien Nocera)
+- Fix the modality of the Preview dialog (Sergey V. Udaltsov)
+
+Screen:
+- Simplify GtkBuilder-using code (Bastien Nocera)
+- Hide the brightness slider when it cannot be set (Bastien Nocera)
+- Hook up screen locking (Bastien Nocera) (#637939)
+- Set idle-delay to the same value as DPMS timeout (Bastien Nocera)
+- Make sure the combo box is always set (Bastien Nocera)
+- Fix the operation of locking (William Jon McCann)
+
+Shell:
+- Add shortcuts to focus search entry (Bastien Nocera) (#409230)
+- Don't pass invalid option flags (Christian Persch) (#641290)
+- Use symbolic icons in the search entry (Bastien Nocera) (#642167)
+- Sort the icons alphabetically (Thomas Wood)
+- Make sure the search entry doesn't appear when in a panel (Thomas Wood)
+- Fix searching for anything hiding widgets (Bastien Nocera)
+
+Sound:
+- Try using symbolic icons for range widgets (William Jon McCann) (#614213)
+
+Universal Access:
+- Allow the pointer page to use less horizontal space (Thomas Wood)
+- Hide options that are currently unavailable (Thomas Wood) (#639784)
+- Implement the zoom setting (Thomas Wood)
+- Adjust for magnifier schema changes (Florian Müllner)
+- Use switches instead of radio groups (William Jon McCann)
+- Show the typing assistant widgets (Bastien Nocera)
+
+User Accounts:
+- Use 0 instead of blank to clear options (William Jon McCann)
+- Port to GtkStyleContext (Cosimo Cecchi)
+- Hide fingerprint dialogue by default (Bastien Nocera) (#641990)
+
+Translations:
+- Arabic (Khaled Hosny)
+- Basque (Inaki Larranaga Murgoitio)
+- Estonian (Ivar Smolin)
+- Galician (Fran Diéguez)
+- Gujarati (Sweta Kothari)
+- Hebrew (Yaron Shahrabani)
+- Italian (Luca Ferretti)
+- Korean (Changwoo Ryu)
+- Norwegian bokmål (Kjartan Maraas)
+- Persian (Mahyar Moghimi)
+- Punjabi (A S Alam)
+- Spanish (Daniel Mustieles, Jorge González)
+- Swedish (Daniel Nylander)
+- Traditional Chinese (Chao-Hsiung Liao)
+- UG (Gheyret Kenji)
+
+=============================
 Version 2.91.6 (2011-02-01)
 =============================
 
