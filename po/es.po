@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-02-19 11:21+0000\n"
-"PO-Revision-Date: 2011-02-19 12:21+0100\n"
+"POT-Creation-Date: 2011-02-21 12:59+0000\n"
+"PO-Revision-Date: 2011-02-22 09:49+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1700,122 +1700,25 @@ msgstr "Establecer sus preferencias del ratón y del «touchpad»"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "trackpad;puntero;pulsar;doble;botón;trackball;"
 
-#: ../panels/network/cc-network-panel.c:819
+#: ../panels/network/cc-network-panel.c:913
 msgid "Network proxy"
 msgstr "Proxy de la red"
 
-#: ../panels/network/cc-network-panel.c:828
+#: ../panels/network/cc-network-panel.c:922
 msgid "Set the system proxy settings"
 msgstr "Configurar los ajustes del proxy del sistema"
 
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-device.c:117 ../panels/network/nm-access-point.c:65
-#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
-msgid "Unknown"
-msgstr "Desconocido"
+#. TRANSLATORS: the user is running a NM that is too new and API compatible
+#: ../panels/network/cc-network-panel.c:1066
+msgid "The running NetworkManager version is not compatible (too new)."
+msgstr ""
+"La versión de NetworkManager en ejecución no es compatible (muy reciente)"
 
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:121 ../panels/network/panel-common.c:69
-msgid "Wired"
-msgstr "Cableada"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:125 ../panels/network/panel-common.c:73
-msgid "Wireless"
-msgstr "Inalámbrica"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:130 ../panels/network/panel-common.c:78
-msgid "Mobile broadband"
-msgstr "Banda ancha móvil"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:134 ../panels/network/panel-common.c:82
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:138 ../panels/network/panel-common.c:86
-msgid "Mesh"
-msgstr "Malla"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:190 ../panels/network/panel-common.c:164
-msgid "Status unknown"
-msgstr "Estado desconocido"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:194 ../panels/network/panel-common.c:168
-msgid "Unmanaged"
-msgstr "Sin gestionar"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:198 ../panels/network/panel-common.c:172
-msgid "Unavailable"
-msgstr "No disponible"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:202 ../panels/network/panel-common.c:176
-msgid "Disconnected"
-msgstr "Desconectada"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:206 ../panels/network/panel-common.c:180
-msgid "Preparing connection"
-msgstr "Preparando la conexión"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:210 ../panels/network/panel-common.c:184
-msgid "Configuring connection"
-msgstr "Configurando la conexión"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:214 ../panels/network/panel-common.c:188
-msgid "Authenticating"
-msgstr "Autenticando"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:218 ../panels/network/panel-common.c:192
-msgid "Getting network address"
-msgstr "Obteniendo dirección de red"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:222 ../panels/network/panel-common.c:196
-msgid "Connected"
-msgstr "Conectado"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:226 ../panels/network/panel-common.c:200
-msgid "Failed to connect"
-msgstr "Falló al conectar"
-
-#: ../panels/network/nm-device.c:837
-#, c-format
-msgid "%i kb/s"
-msgstr "%i kb/s"
-
-#: ../panels/network/nm-device.c:839 ../panels/network/nm-device.c:856
-#, c-format
-msgid "%i Mb/s"
-msgstr "%i Mb/s"
-
-#: ../panels/network/nm-device.c:858
-#, c-format
-msgid "%i Gb/s"
-msgstr "%i Gb/s"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-access-point.c:69 ../panels/network/panel-common.c:142
-msgid "Ad-hoc"
-msgstr "Ad-hoc"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-access-point.c:73 ../panels/network/panel-common.c:146
-msgid "Infrastructure"
-msgstr "Infraestructura"
+#. TRANSLATORS: the user is running a NM that is too old and API compatible
+#: ../panels/network/cc-network-panel.c:1072
+msgid "The running NetworkManager version is not compatible (too old)."
+msgstr ""
+"La versión de NetworkManager en ejecución no es compatible (muy antigua)"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
@@ -1936,6 +1839,115 @@ msgstr "Manual"
 msgctxt "proxy method"
 msgid "None"
 msgstr "Ninguno"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:64 ../panels/network/panel-common.c:136
+msgid "Unknown"
+msgstr "Desconocido"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:68
+msgid "Wired"
+msgstr "Cableada"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:72
+msgid "Wireless"
+msgstr "Inalámbrica"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:77
+msgid "Mobile broadband"
+msgstr "Banda ancha móvil"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:81
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:85
+msgid "Mesh"
+msgstr "Malla"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:140
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:144
+msgid "Infrastructure"
+msgstr "Infraestructura"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:162
+msgid "Status unknown"
+msgstr "Estado desconocido"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:166
+msgid "Unmanaged"
+msgstr "Sin gestionar"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:170
+msgid "Unavailable"
+msgstr "No disponible"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:174
+msgid "Disconnected"
+msgstr "Desconectada"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:178
+msgid "Preparing connection"
+msgstr "Preparando la conexión"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:182
+msgid "Configuring connection"
+msgstr "Configurando la conexión"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:186
+msgid "Authenticating"
+msgstr "Autenticando"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:190
+msgid "Getting network address"
+msgstr "Obteniendo dirección de red"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:194
+#| msgid "Getting network address"
+msgid "Checking network address"
+msgstr "Comprobando dirección de red"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:198
+msgid "Connected"
+msgstr "Conectado"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:202
+#| msgid "Disconnected"
+msgid "Disconnecting"
+msgstr "Desconectando"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:206
+msgid "Failed to connect"
+msgstr "Falló al conectar"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:210
+#| msgid "Status unknown"
+msgid "Status unknown (missing)"
+msgstr "Estado desconocido (ausente)"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -3429,6 +3441,15 @@ msgstr "Centro de control"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Todas las configuraciones"
+
+#~ msgid "%i kb/s"
+#~ msgstr "%i kb/s"
+
+#~ msgid "%i Mb/s"
+#~ msgstr "%i Mb/s"
+
+#~ msgid "%i Gb/s"
+#~ msgstr "%i Gb/s"
 
 #~ msgid "Chat"
 #~ msgstr "Chat"
