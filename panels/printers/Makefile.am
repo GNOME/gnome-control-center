@@ -16,8 +16,6 @@ ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libprinters.la
 
 libprinters_la_SOURCES =		\
-	pp-lockbutton.c		\
-	pp-lockbutton.h		\
 	printers-module.c	\
 	cc-printers-panel.c	\
 	cc-printers-panel.h

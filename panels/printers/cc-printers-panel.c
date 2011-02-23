@@ -32,7 +32,7 @@
 
 #include <math.h>
 
-#include "pp-lockbutton.h"
+#include "cc-lockbutton.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 
@@ -2296,7 +2296,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
     "org.opensuse.cupspkhelper.mechanism.printeraddremove", NULL, NULL, NULL);
   if (priv->permission != NULL)
     {
-      widget = pp_lock_button_new (priv->permission);
+      widget = cc_lock_button_new (priv->permission);
       gtk_widget_set_margin_top (widget, 12);
       gtk_widget_show (widget);
       box = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-vbox");

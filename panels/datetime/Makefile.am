@@ -89,8 +89,6 @@ ccpanels_LTLIBRARIES = libdate_time.la
 
 libdate_time_la_SOURCES =	\
 	datetime-module.c	\
-	dt-lockbutton.c	\
-	dt-lockbutton.h	\
 	cc-datetime-panel.c	\
 	cc-datetime-panel.h	\
 	cc-timezone-map.c	\

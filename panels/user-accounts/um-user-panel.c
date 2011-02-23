@@ -47,7 +47,7 @@
 #include "um-editable-button.h"
 #include "um-editable-entry.h"
 #include "um-editable-combo.h"
-#include "um-lockbutton.h"
+#include "cc-lockbutton.h"
 
 #include "um-account-dialog.h"
 #include "um-language-dialog.h"
@@ -1169,7 +1169,7 @@ setup_main_window (UmUserPanelPrivate *d)
         d->permission = (GPermission *)polkit_permission_new_sync ("org.freedesktop.accounts.user-administration", NULL, NULL, NULL);
         if (d->permission != NULL) {
                 /* accounts service not available? */
-                button = um_lock_button_new (d->permission);
+                button = cc_lock_button_new (d->permission);
                 gtk_widget_set_margin_top (button, 12);
                 gtk_widget_show (button);
                 box = get_widget (d, "accounts-vbox");

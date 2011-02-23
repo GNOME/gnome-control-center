@@ -24,7 +24,7 @@
 #include <sys/time.h>
 #include "cc-timezone-map.h"
 #include "set-timezone.h"
-#include "dt-lockbutton.h"
+#include "cc-lockbutton.h"
 
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
 #include <string.h>
@@ -880,7 +880,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
 
   /* DtLockButton takes ownership of the permission */
-  lockbutton = dt_lock_button_new (permission);
+  lockbutton = cc_lock_button_new (permission);
   gtk_widget_set_margin_top (lockbutton, 12);
   gtk_widget_show (lockbutton);
   gtk_box_pack_end ((GtkBox *) gtk_builder_get_object (priv->builder, "hbox"),

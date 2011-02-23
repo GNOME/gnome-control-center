@@ -15,6 +15,7 @@ libgnome_control_center_include_HEADERS =	\
 	cc-panel.h				\
 	cc-shell.h				\
 	gconf-property-editor.h			\
+	cc-lockbutton.h				\
 	$(NULL)
 
 libgnome_control_center_la_SOURCES =		\
@@ -24,6 +25,8 @@ libgnome_control_center_la_SOURCES =		\
 	cc-panel.h				\
 	cc-shell.c				\
 	cc-shell.h				\
+	cc-lockbutton.c				\
+	cc-lockbutton.h				\
 	gconf-property-editor.c			\
 	gconf-property-editor.h			\
 	$(NULL)
