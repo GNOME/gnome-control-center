@@ -174,6 +174,11 @@ cc_ua_panel_class_finalize (CcUaPanelClass *klass)
 {
 }
 
+static gchar *typing_assistant_section[] = {
+    "typing_assistant_preferences_button",
+    NULL
+};
+
 static gchar *sticky_keys_section[] = {
     "typing_sticky_keys_disable_two_keys_checkbutton",
     "typing_sticky_keys_beep_modifier_checkbutton",
@@ -687,6 +692,10 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
   GtkWidget *w;
+
+  /* Typing assistant (on-screen keyboard) */
+  w = WID (priv->builder, "typing_assistant_switch");
+  settings_on_off_editor_new (priv, priv->application_settings, "screen-keyboard-enabled", w, typing_assistant_section);
 
   /* enable shortcuts */
   w = WID (priv->builder, "typing_keyboard_toggle_checkbox");
