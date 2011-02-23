@@ -17,12 +17,10 @@ libkeyboard_la_SOURCES =   \
 	keyboard-shortcuts.c		\
 	keyboard-shortcuts.h		\
 	eggcellrendererkeys.c		\
-	eggcellrendererkeys.h		\
-	eggaccelerators.c		\
-	eggaccelerators.h
+	eggcellrendererkeys.h
 
-libkeyboard_la_CFLAGS = $(PANEL_CFLAGS) $(KEYBOARD_PANEL_CFLAGS)
-libkeyboard_la_LIBADD = $(PANEL_LIBS) $(KEYBOARD_PANEL_LIBS)
+libkeyboard_la_CFLAGS = $(PANEL_CFLAGS) $(KEYBOARD_PANEL_CFLAGS) -I$(top_srcdir)/panels/common/
+libkeyboard_la_LIBADD = $(PANEL_LIBS) $(KEYBOARD_PANEL_LIBS) $(top_builddir)/panels/common/libshortcuts.la
 libkeyboard_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@

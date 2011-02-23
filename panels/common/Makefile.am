@@ -1,7 +1,7 @@
 # This is used in PANEL_CFLAGS
 cappletname = common
 
-noinst_LTLIBRARIES = liblanguage.la
+noinst_LTLIBRARIES = liblanguage.la libshortcuts.la
 
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
@@ -24,5 +24,14 @@ liblanguage_la_LIBADD = 		\
 	$(LIBLANGUAGE_LIBS)
 
 liblanguage_la_LDFLAGS = $(PANEL_LDFLAGS)
+
+libshortcuts_la_SOURCES =		\
+	eggaccelerators.h		\
+	eggaccelerators.c
+
+libshortcuts_la_LIBADD =		\
+	$(PANEL_LIBS)
+
+libshortcuts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 -include $(top_srcdir)/git.mk
