@@ -27,6 +27,7 @@
 
 #include <gconf/gconf-client.h>
 
+#include "eggaccelerators.h"
 #include "gconf-property-editor.h"
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
@@ -46,6 +47,7 @@ struct _CcUaPanelPrivate
   GSettings *mouse_settings;
   GSettings *font_settings;
   GSettings *application_settings;
+  GSettings *mediakeys_settings;
 
   GSList *notify_list;
 };
@@ -137,6 +139,12 @@ cc_ua_panel_dispose (GObject *object)
     {
       g_object_unref (priv->application_settings);
       priv->application_settings = NULL;
+    }
+
+  if (priv->mediakeys_settings)
+    {
+      g_object_unref (priv->mediakeys_settings);
+      priv->mediakeys_settings = NULL;
     }
 
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
@@ -516,6 +524,38 @@ contrast_combobox_changed_cb (GtkComboBox *box,
 }
 
 static void
+cc_ua_panel_set_shortcut_label (CcUaPanel  *self,
+				const char *label,
+				const char *key)
+{
+	GtkWidget *widget;
+	char *value;
+	char *text;
+	guint accel_key, keycode;
+	EggVirtualModifierType mods;
+
+	widget = WID (self->priv->builder, label);
+	value = g_settings_get_string (self->priv->mediakeys_settings, key);
+
+	if (value == NULL || *value == '\0') {
+		gtk_label_set_text (GTK_LABEL (widget), _("No shortcut set"));
+		g_free (value);
+		return;
+	}
+	if (egg_accelerator_parse_virtual (value, &accel_key, &keycode, &mods) == FALSE) {
+		gtk_label_set_text (GTK_LABEL (widget), _("No shortcut set"));
+		g_free (value);
+		g_warning ("Failed to parse keyboard shortcut: '%s'", value);
+		return;
+	}
+	g_free (value);
+
+	text = egg_virtual_accelerator_label (accel_key, keycode, mods);
+	gtk_label_set_text (GTK_LABEL (widget), text);
+	g_free (text);
+}
+
+static void
 cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
@@ -536,6 +576,14 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                               "screen-magnifier-enabled",
                               WID (priv->builder, "seeing_zoom_switch"),
                               NULL);
+
+  cc_ua_panel_set_shortcut_label (self, "seeing_contrast_toggle_keybinding_label", "toggle-contrast");
+  cc_ua_panel_set_shortcut_label (self, "seeing_increase_size_keybinding_label", "increase-text-size");
+  cc_ua_panel_set_shortcut_label (self, "seeing_decrease_size_keybinding_label", "decrease-text-size");
+  cc_ua_panel_set_shortcut_label (self, "seeing_zoom_enable_keybinding_label", "magnifier");
+  cc_ua_panel_set_shortcut_label (self, "seeing_zoom_in_keybinding_label", "magnifier-zoom-in");
+  cc_ua_panel_set_shortcut_label (self, "seeing_zoom_out_keybinding_label", "magnifier-zoom-out");
+  cc_ua_panel_set_shortcut_label (self, "seeing_reader_enable_keybinding_label", "screenreader");
 }
 
 
@@ -785,6 +833,7 @@ cc_ua_panel_init (CcUaPanel *self)
   priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
   priv->font_settings = g_settings_new ("org.gnome.settings-daemon.plugins.xsettings");
   priv->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
+  priv->mediakeys_settings = g_settings_new ("org.gnome.settings-daemon.plugins.media-keys");
 
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);

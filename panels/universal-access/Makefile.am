@@ -6,6 +6,7 @@ INCLUDES = 						\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
+	-I$(top_srcdir)/panels/common/			\
 	$(NULL)
 
 ccpanelsdir = $(PANELS_DIR)
@@ -16,7 +17,7 @@ libuniversal_access_la_SOURCES =		\
 	cc-ua-panel.c	\
 	cc-ua-panel.h
 
-libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS)
+libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS) $(top_builddir)/panels/common/libshortcuts.la
 libuniversal_access_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
