@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.91.7\n"
+"Project-Id-Version: gnome-control-center 2.91.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-11 19:14+0800\n"
-"PO-Revision-Date: 2011-02-11 19:15+0800\n"
+"POT-Creation-Date: 2011-02-23 19:22+0800\n"
+"PO-Revision-Date: 2011-02-23 19:22+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: \n"
@@ -120,7 +120,7 @@ msgstr "屬性修改程式釋放資料的 callback"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "當屬性修改程式釋放物件資料時，發出 callback"
 
-#: ../libgnome-control-center/gconf-property-editor.c:1406
+#: ../libgnome-control-center/gconf-property-editor.c:1473
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -132,7 +132,7 @@ msgstr ""
 "\n"
 "請確定檔案已經存在並再試一次，或是選擇其它背景圖案。"
 
-#: ../libgnome-control-center/gconf-property-editor.c:1414
+#: ../libgnome-control-center/gconf-property-editor.c:1481
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -145,11 +145,11 @@ msgstr ""
 "\n"
 "請選擇其它圖案。"
 
-#: ../libgnome-control-center/gconf-property-editor.c:1536
+#: ../libgnome-control-center/gconf-property-editor.c:1603
 msgid "Please select an image."
 msgstr "請選取圖片。"
 
-#: ../libgnome-control-center/gconf-property-editor.c:1541
+#: ../libgnome-control-center/gconf-property-editor.c:1608
 msgid "_Select"
 msgstr "選取(_S)"
 
@@ -193,54 +193,60 @@ msgid "Tile"
 msgstr "鋪排"
 
 #: ../panels/background/background.ui.h:8
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:90
 msgid "Zoom"
 msgstr "縮放"
 
-#: ../panels/background/bg-colors-source.c:45
+#: ../panels/background/bg-colors-source.c:46
 msgid "Horizontal Gradient"
 msgstr "水平漸變色"
 
-#: ../panels/background/bg-colors-source.c:46
+#: ../panels/background/bg-colors-source.c:47
 msgid "Vertical Gradient"
 msgstr "垂直漸變色"
 
-#: ../panels/background/bg-colors-source.c:47
+#: ../panels/background/bg-colors-source.c:48
 msgid "Solid Color"
 msgstr "單色"
 
-#: ../panels/background/cc-background-panel.c:775
-msgid "Wallpapers"
-msgstr "桌布"
+#: ../panels/background/cc-background-panel.c:960
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "瀏覽更多照片"
 
-#: ../panels/background/cc-background-panel.c:783
-msgid "Pictures Folder"
-msgstr "圖片資料夾"
-
-#: ../panels/background/cc-background-panel.c:791
-msgid "Colors & Gradients"
-msgstr "顏色 & 漸變色"
-
-#: ../panels/background/cc-background-panel.c:800
-msgid "Flickr"
-msgstr "Flickr"
-
-#: ../panels/background/cc-background-panel.c:854
+#: ../panels/background/cc-background-panel.c:1051
 msgid "Current background"
 msgstr "目前的背景"
 
-#: ../panels/background/cc-background-item.c:146
+#: ../panels/background/cc-background-panel.c:1115
+msgid "Wallpapers"
+msgstr "桌布"
+
+#: ../panels/background/cc-background-panel.c:1122
+msgid "Pictures Folder"
+msgstr "圖片資料夾"
+
+#: ../panels/background/cc-background-panel.c:1129
+msgid "Colors & Gradients"
+msgstr "顏色 & 漸變色"
+
+#: ../panels/background/cc-background-panel.c:1137
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
 msgstr "多重尺寸"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:150
+#: ../panels/background/cc-background-item.c:152
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:252
+#: ../panels/background/cc-background-item.c:255
 msgid "No Desktop Background"
 msgstr "無桌面背景"
 
@@ -522,52 +528,93 @@ msgstr "無法取得螢幕資訊"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:417
+#: ../panels/info/cc-info-panel.c:479
 #, c-format
 msgid "%d-bit"
 msgstr "%d-位元"
 
-#: ../panels/info/cc-info-panel.c:431
+#: ../panels/info/cc-info-panel.c:493
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "%u 位元組"
 
-#: ../panels/info/cc-info-panel.c:439
+#: ../panels/info/cc-info-panel.c:501
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f KB"
 
-#: ../panels/info/cc-info-panel.c:444
+#: ../panels/info/cc-info-panel.c:506
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MB"
 
-#: ../panels/info/cc-info-panel.c:449
+#: ../panels/info/cc-info-panel.c:511
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GB"
 
-#: ../panels/info/cc-info-panel.c:454
+#: ../panels/info/cc-info-panel.c:516
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:459
+#: ../panels/info/cc-info-panel.c:521
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PB"
 
-#: ../panels/info/cc-info-panel.c:464
+#: ../panels/info/cc-info-panel.c:526
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EB"
 
-#: ../panels/info/cc-info-panel.c:574
+#: ../panels/info/cc-info-panel.c:637
 msgid "Unknown model"
 msgstr "不明的型號"
 
-#: ../panels/info/cc-info-panel.c:637
+#: ../panels/info/cc-info-panel.c:720
+msgid "The next login will attempt to use the standard experience."
+msgstr "下次登入會嘗試使用標準體驗。"
+
+#: ../panels/info/cc-info-panel.c:722
+msgid ""
+"The next login will use the fallback mode intended for unsupported graphics "
+"hardware."
+msgstr "下次登入會使用後備模式以配合不支援的圖形顯示硬件。"
+
+#. translators: The hardware is not able to run GNOME 3's
+#. * shell, so we use the GNOME "Fallback" session
+#: ../panels/info/cc-info-panel.c:771
+msgctxt "Experience"
+msgid "Fallback"
+msgstr "後備"
+
+#. translators: The hardware is able to run GNOME 3's
+#. * shell, also called "Standard" experience
+#: ../panels/info/cc-info-panel.c:777
+msgctxt "Experience"
+msgid "Standard"
+msgstr "標準"
+
+#: ../panels/info/cc-info-panel.c:909
+#: ../panels/keyboard/keyboard-shortcuts.c:1711
+msgid "Section"
+msgstr "節"
+
+#: ../panels/info/cc-info-panel.c:918 ../panels/info/info.ui.h:15
+msgid "Overview"
+msgstr "概覽"
+
+#: ../panels/info/cc-info-panel.c:924 ../panels/info/info.ui.h:3
+msgid "Default Applications"
+msgstr "預設應用程式"
+
+#: ../panels/info/cc-info-panel.c:929 ../panels/info/info.ui.h:10
+msgid "Graphics"
+msgstr "繪圖"
+
+#: ../panels/info/cc-info-panel.c:954
 #, c-format
 msgid "Version %s"
 msgstr "版本 %s"
@@ -586,48 +633,182 @@ msgid "device;system;information;memory;processor;version;"
 msgstr "device;system;information;memory;processor;version;裝置;系統;資訊;記憶體;處理器;版本;"
 
 #: ../panels/info/info.ui.h:1
-msgid "Device name:"
-msgstr "裝置名稱："
+msgid "Calendar"
+msgstr "日曆"
 
 #: ../panels/info/info.ui.h:2
-msgid "Disk:"
-msgstr "磁碟："
-
-#: ../panels/info/info.ui.h:3
-msgid "Graphics:"
-msgstr "圖形："
+msgid "Chipset"
+msgstr "晶片"
 
 #: ../panels/info/info.ui.h:4
-msgid "Memory:"
-msgstr "記憶體："
+msgid "Device name"
+msgstr "裝置名稱"
 
 #: ../panels/info/info.ui.h:5
-msgid "More Info"
-msgstr "更多資訊"
+msgid "Disk"
+msgstr "磁碟"
 
 #: ../panels/info/info.ui.h:6
-msgid "OS type:"
-msgstr "OS 類型："
+msgid "Driver"
+msgstr "磁碟機"
 
 #: ../panels/info/info.ui.h:7
-msgid "Processor:"
-msgstr "處理器："
+msgid "Experience"
+msgstr "體驗"
 
-#: ../panels/info/info.ui.h:8
-msgid "Update Available"
-msgstr "有更新可用"
+#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
+#: ../panels/info/info.ui.h:9
+msgid "Forced Fallback Mode"
+msgstr "強制後備模式"
+
+#: ../panels/info/info.ui.h:11
+msgid "Mail"
+msgstr "郵件"
+
+#: ../panels/info/info.ui.h:12
+msgid "Memory"
+msgstr "記憶體"
+
+#: ../panels/info/info.ui.h:13
+msgid "Music"
+msgstr "音樂"
+
+#: ../panels/info/info.ui.h:14
+msgid "OS type"
+msgstr "OS 類型"
+
+#: ../panels/info/info.ui.h:16
+msgid "Photos"
+msgstr "相片"
+
+#: ../panels/info/info.ui.h:17
+msgid "Processor"
+msgstr "處理器"
+
+#: ../panels/info/info.ui.h:18
+msgid "Updates Available"
+msgstr "可用的更新"
+
+#: ../panels/info/info.ui.h:19
+msgid "Video"
+msgstr "影片"
+
+#: ../panels/info/info.ui.h:20
+msgid "Web"
+msgstr "網頁"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
+msgid "Eject"
+msgstr "退出"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:2
+msgid "Launch media player"
+msgstr "執行媒體播放程式"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:3
+msgid "Next track"
+msgstr "下一首歌曲"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:4
+msgid "Pause playback"
+msgstr "暫停播放"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:5
+msgid "Play (or play/pause)"
+msgstr "播放（或播放/暫停）"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:6
+msgid "Previous track"
+msgstr "上一首歌曲"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Sound and Media"
 msgstr "聲音與媒體"
 
+#: ../panels/keyboard/00-multimedia.xml.in.h:8
+msgid "Stop playback"
+msgstr "停止播放"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:9
+msgid "Volume down"
+msgstr "調低音量"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:10
+msgid "Volume mute"
+msgstr "靜音"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:11
+msgid "Volume up"
+msgstr "調高音量"
+
 #: ../panels/keyboard/01-launchers.xml.in.h:1
+msgid "Home folder"
+msgstr "家目錄"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:2
+msgid "Launch calculator"
+msgstr "執行計數機"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:3
+msgid "Launch email client"
+msgstr "執行電子郵件客戶端"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:4
+msgid "Launch help browser"
+msgstr "執行說明文件瀏覽器"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:5
+msgid "Launch web browser"
+msgstr "執行網頁瀏覽器"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:6
 msgid "Launchers"
 msgstr "執行器"
 
+#: ../panels/keyboard/01-launchers.xml.in.h:7
+msgid "Search"
+msgstr "搜尋"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
+msgid "Lock screen"
+msgstr "鎖定畫面"
+
+#: ../panels/keyboard/01-system.xml.in.h:2
+msgid "Log out"
+msgstr "登出"
+
+#: ../panels/keyboard/01-system.xml.in.h:3
 msgid "System"
 msgstr "系統"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:1
+msgid "Decrease text size"
+msgstr "將文字縮小"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:2
+msgid "Increase text size"
+msgstr "將文字放大"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
+msgid "Toggle contrast"
+msgstr "切換對比"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:4
+msgid "Toggle magnifier"
+msgstr "切換放大鏡"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:5
+msgid "Toggle on-screen keyboard"
+msgstr "切換螢幕鍵盤"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:6
+msgid "Toggle screen reader"
+msgstr "切換螢幕閱讀器"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:7
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
+msgid "Universal Access"
+msgstr "無障礙功能"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -659,7 +840,7 @@ msgstr "捷徑鍵的類型。"
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1268
+#: ../panels/keyboard/keyboard-shortcuts.c:1141
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -680,22 +861,22 @@ msgstr "鍵盤"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Shortcut;Repeat;Blink;捷徑鍵;重複;閃爍;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:775
-#: ../panels/keyboard/keyboard-shortcuts.c:1040
-#: ../panels/keyboard/keyboard-shortcuts.c:1674
-#: ../panels/keyboard/keyboard-shortcuts.c:1678
+#: ../panels/keyboard/keyboard-shortcuts.c:643
+#: ../panels/keyboard/keyboard-shortcuts.c:916
+#: ../panels/keyboard/keyboard-shortcuts.c:1503
+#: ../panels/keyboard/keyboard-shortcuts.c:1507
 msgid "Custom Shortcuts"
 msgstr "自選捷徑鍵"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:887
+#: ../panels/keyboard/keyboard-shortcuts.c:768
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1294
+#: ../panels/keyboard/keyboard-shortcuts.c:1167
 msgid "Error saving the new shortcut"
 msgstr "儲存新的捷徑鍵時發生錯誤"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1404
+#: ../panels/keyboard/keyboard-shortcuts.c:1282
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -705,7 +886,7 @@ msgstr ""
 "捷徑“%s”無法使用，原因是會無法按下此按鍵。\n"
 "請試用其它的按鍵：如同時使用 Control，Alt  或 Shift。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1434
+#: ../panels/keyboard/keyboard-shortcuts.c:1314
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -714,34 +895,25 @@ msgstr ""
 "捷徑鍵“%s”己經使用於：\n"
 "“%s”"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
+#: ../panels/keyboard/keyboard-shortcuts.c:1320
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "如果你重新指派捷徑鍵為「%s」，「%s」的捷徑鍵就會停用。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1448
+#: ../panels/keyboard/keyboard-shortcuts.c:1328
 msgid "_Reassign"
 msgstr "重新指派(_R)"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1568
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr "在組態資料庫中取消設定捷徑鍵時出現錯誤：%s"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1626
+#: ../panels/keyboard/keyboard-shortcuts.c:1442
 msgid "Too many custom shortcuts"
 msgstr "太多自選捷徑鍵"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1907
-msgid "Section"
-msgstr "節"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1956
+#: ../panels/keyboard/keyboard-shortcuts.c:1761
 msgid "Action"
 msgstr "動作"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1979
+#: ../panels/keyboard/keyboard-shortcuts.c:1784
 msgid "Shortcut"
 msgstr "捷徑鍵"
 
@@ -804,7 +976,7 @@ msgstr "速度(_P):"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Short"
 msgstr "短"
 
@@ -979,219 +1151,214 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;audio;video;disc;光碟;影片;音樂;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:224
+#: ../panels/printers/cc-printers-panel.c:261
 msgid "Low on toner"
 msgstr "碳粉不足"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:226
+#: ../panels/printers/cc-printers-panel.c:263
 msgid "Out of toner"
 msgstr "碳粉用完"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:229
+#: ../panels/printers/cc-printers-panel.c:266
 msgid "Low on developer"
 msgstr "顯像劑不足"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:232
+#: ../panels/printers/cc-printers-panel.c:269
 msgid "Out of developer"
 msgstr "顯像劑用完"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:234
+#: ../panels/printers/cc-printers-panel.c:271
 msgid "Low on a marker supply"
 msgstr "墨水匣不足"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:236
+#: ../panels/printers/cc-printers-panel.c:273
 msgid "Out of a marker supply"
 msgstr "墨水匣用完"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:238
+#: ../panels/printers/cc-printers-panel.c:275
 #, fuzzy
 #| msgid "Open Folder"
 msgid "Open cover"
 msgstr "建立封套(_C)"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:240
+#: ../panels/printers/cc-printers-panel.c:277
 #, fuzzy
 #| msgid "Open Folder"
 msgid "Open door"
 msgstr "排列區空位"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:242
+#: ../panels/printers/cc-printers-panel.c:279
 msgid "Low on paper"
 msgstr "紙張不足。"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:244
+#: ../panels/printers/cc-printers-panel.c:281
 msgid "Out of paper"
 msgstr "紙張用完"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:246
+#: ../panels/printers/cc-printers-panel.c:283
 msgctxt "printer state"
 msgid "Offline"
 msgstr "離線"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:248
+#: ../panels/printers/cc-printers-panel.c:285
 msgctxt "printer state"
 msgid "Paused"
 msgstr "已暫停"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:250
+#: ../panels/printers/cc-printers-panel.c:287
 msgid "Waste receptacle almost full"
 msgstr ""
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:252
+#: ../panels/printers/cc-printers-panel.c:289
 #, fuzzy
 msgid "Waste receptacle full"
 msgstr "俘虜 [25 分]"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:254
+#: ../panels/printers/cc-printers-panel.c:291
 msgid "The optical photo conductor is near end of life"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:256
+#: ../panels/printers/cc-printers-panel.c:293
 msgid "The optical photo conductor is no longer functioning"
 msgstr ""
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:348
+#: ../panels/printers/cc-printers-panel.c:430
 msgctxt "printer state"
 msgid "Ready"
-msgstr ""
+msgstr "準備就緒"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:352
+#: ../panels/printers/cc-printers-panel.c:434
 msgctxt "printer state"
 msgid "Processing"
 msgstr "處理中"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:356
+#: ../panels/printers/cc-printers-panel.c:438
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "已停止"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:454
+#: ../panels/printers/cc-printers-panel.c:536
 msgid "Toner Level"
 msgstr "碳粉匣等級"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:457
+#: ../panels/printers/cc-printers-panel.c:539
 msgid "Ink Level"
 msgstr "墨水等級"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:460
+#: ../panels/printers/cc-printers-panel.c:542
 msgid "Supply Level"
 msgstr "耗材等級"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:475
+#: ../panels/printers/cc-printers-panel.c:557
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u 使用中"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:910
+#: ../panels/printers/cc-printers-panel.c:1024
 msgctxt "print job"
 msgid "Pending"
 msgstr "保留中"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:914
+#: ../panels/printers/cc-printers-panel.c:1028
 msgctxt "print job"
 msgid "Held"
 msgstr "已暫停"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:918
+#: ../panels/printers/cc-printers-panel.c:1032
 msgctxt "print job"
 msgid "Processing"
 msgstr "處理中"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:922
+#: ../panels/printers/cc-printers-panel.c:1036
 msgctxt "print job"
 msgid "Stopped"
 msgstr "已停止"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:926
+#: ../panels/printers/cc-printers-panel.c:1040
 msgctxt "print job"
 msgid "Canceled"
 msgstr "已取消"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:930
+#: ../panels/printers/cc-printers-panel.c:1044
 msgctxt "print job"
 msgid "Aborted"
 msgstr "已放棄"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:934
+#: ../panels/printers/cc-printers-panel.c:1048
 msgctxt "print job"
 msgid "Completed"
 msgstr "已完成"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1029
+#: ../panels/printers/cc-printers-panel.c:1140
 msgid "Job Title"
 msgstr "工作名稱"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1037
+#: ../panels/printers/cc-printers-panel.c:1149
 msgid "Job State"
 msgstr "工作狀態"
 
-#. Translators: Name of column showing names of creators of print jobs
-#: ../panels/printers/cc-printers-panel.c:1043
-msgid "User"
-msgstr "使用者"
-
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1049
+#: ../panels/printers/cc-printers-panel.c:1155
 msgid "Time"
 msgstr "時刻"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1239
+#: ../panels/printers/cc-printers-panel.c:1345
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "無法連線至系統匯流排：%s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1949
+#: ../panels/printers/cc-printers-panel.c:2055
 msgid "Test page"
 msgstr "測試頁"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1957
+#: ../panels/printers/cc-printers-panel.c:2063
 msgid "Clean print heads"
 msgstr "清理打印噴頭"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1962
+#: ../panels/printers/cc-printers-panel.c:2068
 msgid "An error has occured during a maintenance command."
 msgstr "在維護指令執行時發生錯誤。"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2088
+#: ../panels/printers/cc-printers-panel.c:2195
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "無法載入 ui：%s"
@@ -1442,7 +1609,7 @@ msgstr "當按下 Control 時顯示游標的位置(_O)"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Small"
 msgstr "小"
 
@@ -1503,124 +1670,23 @@ msgstr "設定你的滑鼠與觸控板偏好設定"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;觸控板;指標;點擊;輕觸;連按兩下;按鈕;軌跡球;"
 
-#: ../panels/network/cc-network-panel.c:819
+#: ../panels/network/cc-network-panel.c:962
 msgid "Network proxy"
 msgstr "網絡代理伺服器"
 
-#: ../panels/network/cc-network-panel.c:828
+#: ../panels/network/cc-network-panel.c:971
 msgid "Set the system proxy settings"
 msgstr "設定系統代理伺服器設定值"
 
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-device.c:117 ../panels/network/nm-access-point.c:65
-#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
-msgid "Unknown"
-msgstr "不明"
+#. TRANSLATORS: the user is running a NM that is too new and API compatible
+#: ../panels/network/cc-network-panel.c:1115
+msgid "The running NetworkManager version is not compatible (too new)."
+msgstr ""
 
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:121 ../panels/network/panel-common.c:69
-msgid "Wired"
-msgstr "有線"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:125 ../panels/network/panel-common.c:73
-msgid "Wireless"
-msgstr "無線"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:130 ../panels/network/panel-common.c:78
-msgid "Mobile broadband"
-msgstr "行動寬頻"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:134 ../panels/network/panel-common.c:82
-msgid "Bluetooth"
-msgstr "藍牙"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:138 ../panels/network/panel-common.c:86
-#, fuzzy
-#| msgid "Models"
-msgid "Mesh"
-msgstr "型號"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:190 ../panels/network/panel-common.c:164
-msgid "Status unknown"
-msgstr "狀態不明"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:194 ../panels/network/panel-common.c:168
-msgid "Unmanaged"
-msgstr "未管理"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:198 ../panels/network/panel-common.c:172
-msgid "Unavailable"
-msgstr "無法使用"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:202 ../panels/network/panel-common.c:176
-msgid "Disconnected"
-msgstr "已斷線"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:206 ../panels/network/panel-common.c:180
-msgid "Preparing connection"
-msgstr "正在準備連線"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:210 ../panels/network/panel-common.c:184
-msgid "Configuring connection"
-msgstr "正在設定連線"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:214 ../panels/network/panel-common.c:188
-msgid "Authenticating"
-msgstr "正在驗證"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:218 ../panels/network/panel-common.c:192
-msgid "Getting network address"
-msgstr "正在取得網絡位址"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:222 ../panels/network/panel-common.c:196
-msgid "Connected"
-msgstr "已連線"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:226 ../panels/network/panel-common.c:200
-msgid "Failed to connect"
-msgstr "無法連線"
-
-#: ../panels/network/nm-device.c:837
-#, c-format
-msgid "%i kb/s"
-msgstr "%i kb/s"
-
-#: ../panels/network/nm-device.c:839 ../panels/network/nm-device.c:856
-#, c-format
-msgid "%i Mb/s"
-msgstr "%i Mb/s"
-
-#: ../panels/network/nm-device.c:858
-#, c-format
-msgid "%i Gb/s"
-msgstr "%i Gb/s"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-access-point.c:69 ../panels/network/panel-common.c:142
-msgid "Ad-hoc"
-msgstr "Ad-hoc"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-access-point.c:73 ../panels/network/panel-common.c:146
-msgid "Infrastructure"
-msgstr "基礎架構"
+#. TRANSLATORS: the user is running a NM that is too old and API compatible
+#: ../panels/network/cc-network-panel.c:1121
+msgid "The running NetworkManager version is not compatible (too old)."
+msgstr ""
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
@@ -1741,6 +1807,120 @@ msgstr "手動"
 msgctxt "proxy method"
 msgid "None"
 msgstr "沒有"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:64 ../panels/network/panel-common.c:136
+msgid "Unknown"
+msgstr "不明"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:68
+msgid "Wired"
+msgstr "有線"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:72
+msgid "Wireless"
+msgstr "無線"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:77
+msgid "Mobile broadband"
+msgstr "行動寬頻"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:81
+msgid "Bluetooth"
+msgstr "藍牙"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:85
+#, fuzzy
+#| msgid "Models"
+msgid "Mesh"
+msgstr "型號"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:140
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:144
+msgid "Infrastructure"
+msgstr "基礎架構"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:162
+msgid "Status unknown"
+msgstr "狀態不明"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:166
+msgid "Unmanaged"
+msgstr "未管理"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:170
+msgid "Unavailable"
+msgstr "無法使用"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:174
+msgid "Disconnected"
+msgstr "已斷線"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:178
+msgid "Preparing connection"
+msgstr "正在準備連線"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:182
+msgid "Configuring connection"
+msgstr "正在設定連線"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:186
+msgid "Authenticating"
+msgstr "正在驗證"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:190
+msgid "Getting network address"
+msgstr "正在取得網絡位址"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:194
+#, fuzzy
+#| msgid "Getting network address"
+msgid "Checking network address"
+msgstr "正在取得網絡位址"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:198
+msgid "Connected"
+msgstr "已連線"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:202
+#, fuzzy
+#| msgid "Disconnected"
+msgid "Disconnecting"
+msgstr "已斷線"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:206
+msgid "Failed to connect"
+msgstr "無法連線"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:210
+#, fuzzy
+#| msgid "Status unknown"
+msgid "Status unknown (missing)"
+msgstr "狀態不明"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2226,10 +2406,6 @@ msgstr "聲納"
 msgid "Keyboard;Mouse;a11y;Accessibility;"
 msgstr "Keyboard;Mouse;a11y;Accessibility;鍵盤;滑鼠;無障礙;"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
-msgid "Universal Access"
-msgstr "無障礙功能"
-
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
 msgstr "無障礙偏好設定"
@@ -2407,7 +2583,7 @@ msgstr "放大"
 
 #: ../panels/universal-access/uap.ui.h:53
 msgid "LowContrast"
-msgstr "低反差"
+msgstr "低對比"
 
 #: ../panels/universal-access/uap.ui.h:54
 msgid "Mouse Keys"
@@ -2426,142 +2602,134 @@ msgid "None"
 msgstr "沒有"
 
 #: ../panels/universal-access/uap.ui.h:59
-msgid "Off"
-msgstr "關閉"
-
-#: ../panels/universal-access/uap.ui.h:60
-msgid "On"
-msgstr "開"
-
-#: ../panels/universal-access/uap.ui.h:61
 msgid "On screen keyboard"
 msgstr "螢幕鍵盤"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:60
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Options..."
 msgstr "選項…"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Pointing and Clicking"
 msgstr "指標和點擊"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "在按鍵被按下到它被接受之間置入延遲"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Screen Reader"
 msgstr "螢幕閱讀器"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Seeing"
 msgstr "視覺"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Shift+Ctrl+Alt+-"
 msgstr "Shift+Ctrl+Alt+-"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Shift+Ctrl+Alt+="
 msgstr "Shift+Ctrl+Alt+="
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Simulated Secondary Click"
 msgstr "模擬次要點擊"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Slow Keys"
 msgstr "遲緩按鍵"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Sound Settings..."
 msgstr "音效設定值…"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Sticky Keys"
 msgstr "黏性特殊鍵"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Test flash"
 msgstr "測試閃動"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Text size:"
 msgstr "文字大小："
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:78
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "將連續按的特殊鍵視為按鍵組合"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Trigger a click when the pointer hovers"
 msgstr "當停止游標移動時觸發點擊"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "按住主要鍵時觸發次要點擊"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Turn on accessibility features from the keyboard"
 msgstr "以鍵盤開啟無障礙功能"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:82
 msgid "Turn on or off:"
 msgstr "開啟或關閉："
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:83
 msgid "Type here to test settings"
 msgstr "在這裏打字以測試設定值"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Typing"
 msgstr "輸入"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Typing Assistant"
 msgstr "輸入助理"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:86
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "當警示音效發出時使用視覺化的指示"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:87
 msgid "Use an alternative form of text input"
 msgstr "使用文字輸入的替代形式"
 
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:88
 msgid "Video Mouse"
 msgstr "視像滑鼠"
 
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:89
 msgid "Visual Alerts"
 msgstr "視覺警示"
 
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:91
 msgid "Zoom in:"
 msgstr "拉近："
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:92
 msgid "Zoom out:"
 msgstr "拉遠："
 
-#: ../panels/universal-access/uap.ui.h:95
+#: ../panels/universal-access/uap.ui.h:93
 msgid "_Motion threshold:"
 msgstr "移動速度(_M):"
 
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:94
 msgid "accepted"
 msgstr "已接受"
 
-#: ../panels/universal-access/uap.ui.h:97
+#: ../panels/universal-access/uap.ui.h:95
 msgid "pressed"
 msgstr "已按下"
 
-#: ../panels/universal-access/uap.ui.h:98
+#: ../panels/universal-access/uap.ui.h:96
 msgid "rejected"
 msgstr "已拒絕"
 
@@ -2836,11 +3004,6 @@ msgstr "錯誤的密碼"
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
 msgid "Select"
 msgstr "選擇"
-
-#: ../panels/user-accounts/um-photo-dialog.c:216
-#: ../panels/user-accounts/data/photo-dialog.ui.h:2
-msgid "Browse for more pictures"
-msgstr "瀏覽更多照片"
 
 #: ../panels/user-accounts/um-photo-dialog.c:429
 msgid "Disable image"
@@ -3221,6 +3384,30 @@ msgstr "控制中心"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "所有設定值(_A)"
+
+#~ msgid "%i kb/s"
+#~ msgstr "%i kb/s"
+
+#~ msgid "%i Mb/s"
+#~ msgstr "%i Mb/s"
+
+#~ msgid "%i Gb/s"
+#~ msgstr "%i Gb/s"
+
+#~ msgid "More Info"
+#~ msgstr "更多資訊"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr "在組態資料庫中取消設定捷徑鍵時出現錯誤：%s"
+
+#~ msgid "User"
+#~ msgstr "使用者"
+
+#~ msgid "Off"
+#~ msgstr "關閉"
+
+#~ msgid "On"
+#~ msgstr "開"
 
 #~| msgid "Idle"
 #~ msgctxt "printer state"
@@ -3843,9 +4030,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "Image Viewer"
 #~ msgstr "圖片瀏覽程式"
 
-#~ msgid "Multimedia Player"
-#~ msgstr "多媒體播放器"
-
 #~ msgid "Open link in new _tab"
 #~ msgstr "在新的分頁中開啟連結(_T)"
 
@@ -3887,9 +4071,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "Icedove"
 #~ msgstr "Icedove"
-
-#~ msgid "KMail"
-#~ msgstr "KMail"
 
 #~ msgid "Konqueror"
 #~ msgstr "Konqueror"
@@ -4476,9 +4657,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "C_ompany:"
 #~ msgstr "公司(_O):"
 
-#~ msgid "Cale_ndar:"
-#~ msgstr "行事曆(_N):"
-
 #~ msgid "Change Passwo_rd..."
 #~ msgstr "變更密碼(_R)…"
 
@@ -4532,9 +4710,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "User name:"
 #~ msgstr "使用者名稱："
-
-#~ msgid "Web"
-#~ msgstr "網頁"
 
 #~ msgid "Web _log:"
 #~ msgstr "網路日誌(_L):"
@@ -4929,9 +5104,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "dots per inch"
 #~ msgstr "解析度(dpi)"
 
-#~ msgid "Appearance"
-#~ msgstr "外觀"
-
 #~ msgid "Customize the look of the desktop"
 #~ msgstr "自訂桌面的外觀"
 
@@ -5126,9 +5298,6 @@ msgstr "所有設定值(_A)"
 #~ "Specify the name of the page to show (internet|multimedia|system|a11y)"
 #~ msgstr "指定要顯示的頁面名稱 (internet|multimedia|system|a11y)"
 
-#~ msgid "- GNOME Default Applications"
-#~ msgstr "- GNOME 預設應用程式"
-
 #~ msgid "Monitor Preferences"
 #~ msgstr "螢幕偏好設定"
 
@@ -5207,9 +5376,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "Maximize Horizontally"
 #~ msgstr "水平最大化"
-
-#~ msgid "Roll up"
-#~ msgstr "捲起"
 
 #~ msgid "key not found [%s]\n"
 #~ msgstr "找不到按鍵 [%s]\n"
@@ -5590,9 +5756,6 @@ msgstr "所有設定值(_A)"
 #~ msgid "Play _sound effects when buttons are clicked"
 #~ msgstr "當按鈕被點擊時播放音效(_S)"
 
-#~ msgid "S_ound playback:"
-#~ msgstr "聲音播放(_O):"
-
 #~ msgid ""
 #~ "Select the device and tracks to control with the keyboard. Use the Shift "
 #~ "and Control keys to select multiple tracks if required."
@@ -5622,9 +5785,6 @@ msgstr "所有設定值(_A)"
 
 #~ msgid "Custom..."
 #~ msgstr "自訂…"
-
-#~ msgid "Logout"
-#~ msgstr "登出"
 
 #~ msgid "Enable support for GNOME assistive technologies at login"
 #~ msgstr "登入時啟用 GNOME 輔助科技支援"
