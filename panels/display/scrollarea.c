@@ -454,7 +454,6 @@ foo_scroll_area_draw (GtkWidget *widget,
 {
   FooScrollArea *scroll_area = FOO_SCROLL_AREA (widget);
   cairo_region_t *region;
-  int x_offset, y_offset;
   GtkAllocation widget_allocation;
 
   /* Note that this function can be called at a time
@@ -466,8 +465,6 @@ foo_scroll_area_draw (GtkWidget *widget,
    * the last time the signal was emitted, ie.,
    * priv->{x,y}_offset.
    */
-  x_offset = scroll_area->priv->x_offset;
-  y_offset = scroll_area->priv->y_offset;
 
   /* Setup input areas */
   clear_exposed_input_region (scroll_area, scroll_area->priv->update_region);
@@ -630,8 +627,6 @@ foo_scroll_area_realize (GtkWidget *widget)
   cairo_destroy (cr);
 
   gdk_window_set_user_data (area->priv->input_window, area);
-
-  gtk_widget_style_attach (widget);
 }
 
 static void
