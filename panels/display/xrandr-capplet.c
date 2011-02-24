@@ -1898,7 +1898,6 @@ paint_output (App *app, cairo_t *cr, int i)
 
   cairo_save (cr);
 
-  layout = get_display_name (app, output);
   layout_set_font (layout, "Sans 10");
   pango_layout_get_pixel_extents (layout, &ink_extent, &log_extent);
 
