@@ -263,7 +263,6 @@ um_language_chooser_new (GtkWidget *parent)
         g_signal_connect (list, "row-activated",
                           G_CALLBACK (row_activated), chooser);
 
-        button = (GtkWidget *) gtk_builder_get_object (builder, "cancel-button");
         button = (GtkWidget *) gtk_builder_get_object (builder, "ok-button");
         gtk_widget_grab_default (button);
 
