@@ -233,61 +233,8 @@ prettify_info (const char *info)
   return pretty;
 }
 
-
 static char *
-get_graphics_info_lspci (void)
-{
-  GError     *error;
-  GRegex     *re;
-  GMatchInfo *match_info;
-  char       *output;
-  char       *result;
-  GString    *info;
-
-  info = g_string_new (NULL);
-
-  error = NULL;
-  g_spawn_command_line_sync ("lspci -nn", &output, NULL, NULL, &error);
-  if (error != NULL)
-    {
-      g_warning ("Unable to get graphics info: %s", error->message);
-      g_error_free (error);
-      return NULL;
-    }
-
-  re = g_regex_new ("^[^ ]+ VGA compatible controller [^:]*: ([^([]+).*$", G_REGEX_MULTILINE, 0, &error);
-  if (re == NULL)
-    {
-      g_warning ("Error building regex: %s", error->message);
-      g_error_free (error);
-      goto out;
-    }
-
-  g_regex_match (re, output, 0, &match_info);
-  while (g_match_info_matches (match_info))
-    {
-      char *device;
-
-      device = g_match_info_fetch (match_info, 1);
-      g_string_append_printf (info, "%s ", device);
-      g_free (device);
-
-      g_match_info_next (match_info, NULL);
-    }
-
-  g_match_info_free (match_info);
-  g_regex_unref (re);
-
- out:
-  g_free (output);
-  result = prettify_info (info->str);
-  g_string_free (info, TRUE);
-
-  return result;
-}
-
-static char *
-get_graphics_info_glxinfo (void)
+get_graphics_glx_renderer (void)
 {
   GError     *error;
   GRegex     *re;
@@ -335,18 +282,6 @@ get_graphics_info_glxinfo (void)
   g_string_free (info, TRUE);
 
   return result;
-}
-
-static char *
-get_graphics_info (void)
-{
-  gchar *info;
-
-  info = get_graphics_info_glxinfo ();
-  if (info == NULL)
-    info = get_graphics_info_lspci ();
-
-  return info;
 }
 
 static gboolean
@@ -753,12 +688,7 @@ info_panel_setup_graphics (CcInfoPanel  *self)
   GtkSwitch *sw;
   char *text;
 
-  text = get_graphics_info ();
-  widget = WID (self->priv->builder, "graphics_chipset_label");
-  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
-  g_free (text);
-
-  text = NULL;
+  text = get_graphics_glx_renderer ();
   widget = WID (self->priv->builder, "graphics_driver_label");
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
@@ -979,7 +909,7 @@ info_panel_setup_overview (CcInfoPanel  *self)
   gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
-  text = get_graphics_info ();
+  text = get_graphics_glx_renderer ();
   widget = WID (self->priv->builder, "graphics_label");
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
