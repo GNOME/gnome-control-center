@@ -686,8 +686,8 @@ reload_sections (GtkBuilder *builder)
       if (!dir)
         {
           g_free (dir_path);
-	  return;
-	}
+          continue;
+        }
 
       for (name = g_dir_read_name (dir) ; name ; name = g_dir_read_name (dir))
         {
