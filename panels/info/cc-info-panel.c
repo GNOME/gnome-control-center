@@ -19,6 +19,8 @@
  *
  */
 
+#include <config.h>
+
 #include "cc-info-panel.h"
 
 #include <sys/vfs.h>
