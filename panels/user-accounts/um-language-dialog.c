@@ -190,6 +190,14 @@ remove_timeout (gpointer data,
 	g_source_remove (timeout);
 }
 
+static void
+remove_async (gpointer data)
+{
+  guint async_id = GPOINTER_TO_UINT (data);
+
+  g_source_remove (async_id);
+}
+
 static gboolean
 finish_um_language_chooser (gpointer user_data)
 {
@@ -199,6 +207,7 @@ finish_um_language_chooser (gpointer user_data)
 	GtkWindow *parent;
 	GHashTable *user_langs;
 	guint timeout;
+        guint async_id;
 
 	/* Did we get called after the widget was destroyed? */
 	if (chooser == NULL)
@@ -208,7 +217,8 @@ finish_um_language_chooser (gpointer user_data)
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 	user_langs = g_object_get_data (G_OBJECT (chooser), "user-langs");
 
-	cc_common_language_add_available_languages (GTK_LIST_STORE (model), user_langs);
+	async_id = cc_common_language_add_available_languages_async (GTK_LIST_STORE (model), user_langs);
+        g_object_set_data_full (G_OBJECT (chooser), "language-async", GUINT_TO_POINTER (async_id), remove_async);
 
 	parent = gtk_window_get_transient_for (GTK_WINDOW (chooser));
 	gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (parent)), NULL);
