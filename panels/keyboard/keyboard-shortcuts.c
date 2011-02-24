@@ -19,6 +19,8 @@
  *          Rodrigo Moya <rodrigo@gnome.org>
  */
 
+#include <config.h>
+
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
 #include "eggcellrendererkeys.h"
@@ -1628,8 +1630,6 @@ section_sort_item  (GtkTreeModel *model,
   char *b_desc;
   int   b_group;
   int   ret;
-
-  ret = 0;
 
   gtk_tree_model_get (model, a,
                       SECTION_DESCRIPTION_COLUMN, &a_desc,
