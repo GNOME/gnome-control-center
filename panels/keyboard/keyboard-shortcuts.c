@@ -1181,34 +1181,41 @@ show_error (GtkWindow *parent,
   gtk_widget_destroy (dialog);
 }
 
+typedef struct {
+  CcKeyboardItem *orig_item;
+  CcKeyboardItem *conflict_item;
+  guint new_keyval;
+  EggVirtualModifierType new_mask;
+  guint new_keycode;
+} CcUniquenessData;
+
 static gboolean
 cb_check_for_uniqueness (GtkTreeModel   *model,
                          GtkTreePath    *path,
                          GtkTreeIter    *iter,
-                         CcKeyboardItem *new_item)
+                         CcUniquenessData *data)
 {
   CcKeyboardItem *element;
+  CcKeyboardItem *orig_item;
 
-  gtk_tree_model_get (new_item->model, iter,
+  orig_item = data->orig_item;
+  gtk_tree_model_get (orig_item->model, iter,
                       DETAIL_KEYENTRY_COLUMN, &element,
                       -1);
 
   /* no conflict for : blanks, different modifiers, or ourselves */
-  if (element == NULL || new_item->mask != element->mask ||
-      !strcmp (new_item->gconf_key, element->gconf_key))
+  if (element == NULL || data->new_mask != element->mask ||
+      cc_keyboard_item_equal (orig_item, element))
     return FALSE;
 
-  if (new_item->keyval != 0) {
-      if (new_item->keyval != element->keyval)
+  if (data->new_keyval != 0) {
+      if (data->new_keyval != element->keyval)
           return FALSE;
-  } else if (element->keyval != 0 || new_item->keycode != element->keycode)
+  } else if (element->keyval != 0 || data->new_keycode != element->keycode)
     return FALSE;
 
-  new_item->editable = FALSE;
-  new_item->gconf_key = element->gconf_key;
-  new_item->description = element->description;
-  new_item->desc_gconf_key = element->desc_gconf_key;
-  new_item->desc_editable = element->desc_editable;
+  data->conflict_item = element;
+
   return TRUE;
 }
 
@@ -1218,13 +1225,13 @@ accel_edited_callback (GtkCellRendererText   *cell,
                        guint                  keyval,
                        EggVirtualModifierType mask,
                        guint                  keycode,
-                       gpointer               data)
+                       GtkTreeView           *view)
 {
-  GtkTreeView *view = (GtkTreeView *)data;
   GtkTreeModel *model;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
   GtkTreeIter iter;
-  CcKeyboardItem *item, *tmp_item;
+  CcUniquenessData data;
+  CcKeyboardItem *item;
   char *str;
 
   block_accels = FALSE;
@@ -1243,41 +1250,32 @@ accel_edited_callback (GtkCellRendererText   *cell,
   /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
   mask &= ~EGG_VIRTUAL_LOCK_MASK;
 
-  /* FIXME: implement copy */
-  tmp_item = cc_keyboard_item_new (item->type);
-  tmp_item->model  = model;
-  tmp_item->keyval = keyval;
-  tmp_item->keycode = keycode;
-  tmp_item->mask   = mask;
-  tmp_item->gconf_key = g_strdup (item->gconf_key);
-  tmp_item->binding_gconf_key = g_strdup (item->binding_gconf_key);
-  tmp_item->schema = g_strdup (tmp_item->schema);
-  tmp_item->key = g_strdup (tmp_item->key);
-  if (item->settings != NULL)
-    tmp_item->settings = g_object_ref (item->settings);
-  tmp_item->description = NULL;
-  tmp_item->editable = TRUE; /* kludge to stuff in a return flag */
+  data.orig_item = item;
+  data.new_keyval = keyval;
+  data.new_mask = mask;
+  data.new_keycode = keycode;
+  data.conflict_item = NULL;
 
-  if (keyval != 0 || keycode != 0) /* any number of keys can be disabled */
+  if (keyval != 0 || keycode != 0) /* any number of shortcuts can be disabled */
     gtk_tree_model_foreach (model,
       (GtkTreeModelForeachFunc) cb_check_for_uniqueness,
-      tmp_item);
+      &data);
 
   /* Check for unmodified keys */
-  if (tmp_item->mask == 0 && tmp_item->keycode != 0)
+  if (mask == 0 && keycode != 0)
     {
-      if ((tmp_item->keyval >= GDK_KEY_a && tmp_item->keyval <= GDK_KEY_z)
-           || (tmp_item->keyval >= GDK_KEY_A && tmp_item->keyval <= GDK_KEY_Z)
-           || (tmp_item->keyval >= GDK_KEY_0 && tmp_item->keyval <= GDK_KEY_9)
-           || (tmp_item->keyval >= GDK_KEY_kana_fullstop && tmp_item->keyval <= GDK_KEY_semivoicedsound)
-           || (tmp_item->keyval >= GDK_KEY_Arabic_comma && tmp_item->keyval <= GDK_KEY_Arabic_sukun)
-           || (tmp_item->keyval >= GDK_KEY_Serbian_dje && tmp_item->keyval <= GDK_KEY_Cyrillic_HARDSIGN)
-           || (tmp_item->keyval >= GDK_KEY_Greek_ALPHAaccent && tmp_item->keyval <= GDK_KEY_Greek_omega)
-           || (tmp_item->keyval >= GDK_KEY_hebrew_doublelowline && tmp_item->keyval <= GDK_KEY_hebrew_taf)
-           || (tmp_item->keyval >= GDK_KEY_Thai_kokai && tmp_item->keyval <= GDK_KEY_Thai_lekkao)
-           || (tmp_item->keyval >= GDK_KEY_Hangul && tmp_item->keyval <= GDK_KEY_Hangul_Special)
-           || (tmp_item->keyval >= GDK_KEY_Hangul_Kiyeog && tmp_item->keyval <= GDK_KEY_Hangul_J_YeorinHieuh)
-           || keyval_is_forbidden (tmp_item->keyval)) {
+      if ((keyval >= GDK_KEY_a && keyval <= GDK_KEY_z)
+           || (keyval >= GDK_KEY_A && keyval <= GDK_KEY_Z)
+           || (keyval >= GDK_KEY_0 && keyval <= GDK_KEY_9)
+           || (keyval >= GDK_KEY_kana_fullstop && keyval <= GDK_KEY_semivoicedsound)
+           || (keyval >= GDK_KEY_Arabic_comma && keyval <= GDK_KEY_Arabic_sukun)
+           || (keyval >= GDK_KEY_Serbian_dje && keyval <= GDK_KEY_Cyrillic_HARDSIGN)
+           || (keyval >= GDK_KEY_Greek_ALPHAaccent && keyval <= GDK_KEY_Greek_omega)
+           || (keyval >= GDK_KEY_hebrew_doublelowline && keyval <= GDK_KEY_hebrew_taf)
+           || (keyval >= GDK_KEY_Thai_kokai && keyval <= GDK_KEY_Thai_lekkao)
+           || (keyval >= GDK_KEY_Hangul && keyval <= GDK_KEY_Hangul_Special)
+           || (keyval >= GDK_KEY_Hangul_Kiyeog && keyval <= GDK_KEY_Hangul_J_YeorinHieuh)
+           || keyval_is_forbidden (keyval)) {
         GtkWidget *dialog;
         char *name;
 
@@ -1300,13 +1298,12 @@ accel_edited_callback (GtkCellRendererText   *cell,
         egg_cell_renderer_keys_set_accelerator
           (EGG_CELL_RENDERER_KEYS (cell),
            item->keyval, item->keycode, item->mask);
-        g_object_unref (tmp_item);
         return;
       }
     }
 
   /* flag to see if the new accelerator was in use by something */
-  if (!tmp_item->editable)
+  if (data.conflict_item != NULL)
     {
       GtkWidget *dialog;
       char *name;
@@ -1314,24 +1311,20 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
       name = binding_name (keyval, keycode, mask, TRUE);
 
-      /* FIXME: gconf_key could be NULL */
       dialog =
         gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
                                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
                                 GTK_MESSAGE_WARNING,
                                 GTK_BUTTONS_CANCEL,
                                 _("The shortcut \"%s\" is already used for\n\"%s\""),
-                                name, tmp_item->description ?
-                                tmp_item->description : tmp_item->gconf_key);
+                                name, data.conflict_item->description);
       g_free (name);
 
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
           _("If you reassign the shortcut to \"%s\", the \"%s\" shortcut "
             "will be disabled."),
-          item->description ?
-          item->description : item->gconf_key,
-          tmp_item->description ?
-          tmp_item->description : tmp_item->gconf_key);
+          item->description,
+          data.conflict_item->description);
 
       gtk_dialog_add_button (GTK_DIALOG (dialog),
                              _("_Reassign"),
@@ -1345,7 +1338,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
       if (response == GTK_RESPONSE_ACCEPT)
         {
-	  g_object_set (G_OBJECT (tmp_item), "binding", "", NULL);
+	  g_object_set (G_OBJECT (data.conflict_item), "binding", "", NULL);
 
           str = binding_name (keyval, keycode, mask, FALSE);
           g_object_set (G_OBJECT (item), "binding", str, NULL);
@@ -1361,7 +1354,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
                                                   item->mask);
         }
 
-      g_object_unref (tmp_item);
       return;
     }
 
@@ -1369,7 +1361,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
   g_object_set (G_OBJECT (item), "binding", str, NULL);
 
   g_free (str);
-  g_object_unref (tmp_item);
 }
 
 static void
