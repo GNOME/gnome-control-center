@@ -661,8 +661,12 @@ reload_sections (GtkBuilder *builder)
   GtkTreeModel *shortcut_model;
   const gchar * const * data_dirs;
   guint i;
+  GtkTreeView *section_treeview;
+  GtkTreeSelection *selection;
+  GtkTreeIter iter;
 
-  sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
+  section_treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview"));
+  sort_model = gtk_tree_view_get_model (section_treeview);
   section_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
 
   shortcut_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "shortcut_treeview")));
@@ -709,6 +713,11 @@ reload_sections (GtkBuilder *builder)
 
   /* Load custom keybindings */
   append_sections_from_gconf (builder, GCONF_BINDING_DIR);
+
+  /* Select the first item */
+  gtk_tree_model_get_iter_first (sort_model, &iter);
+  selection = gtk_tree_view_get_selection (section_treeview);
+  gtk_tree_selection_select_iter (selection, &iter);
 }
 
 static void
@@ -1736,6 +1745,9 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   g_object_unref (sort_model);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+
+  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+
   g_signal_connect (selection, "changed",
                     G_CALLBACK (section_selection_changed), builder);
   section_selection_changed (selection, builder);
