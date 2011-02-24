@@ -615,13 +615,13 @@ static void
 update_default_source_from_name (GvcMixerControl *control,
                                  const char      *name)
 {
-        gboolean changed;
+        gboolean changed = FALSE;
 
         if ((control->priv->default_source_name == NULL
              && name != NULL)
             || (control->priv->default_source_name != NULL
                 && name == NULL)
-            || strcmp (control->priv->default_source_name, name) != 0) {
+            || (name != NULL && strcmp (control->priv->default_source_name, name) != 0)) {
                 changed = TRUE;
         }
 
@@ -640,13 +640,13 @@ static void
 update_default_sink_from_name (GvcMixerControl *control,
                                const char      *name)
 {
-        gboolean changed;
+        gboolean changed = FALSE;
 
         if ((control->priv->default_sink_name == NULL
              && name != NULL)
             || (control->priv->default_sink_name != NULL
                 && name == NULL)
-            || strcmp (control->priv->default_sink_name, name) != 0) {
+            || (name != NULL && strcmp (control->priv->default_sink_name, name) != 0)) {
                 changed = TRUE;
         }
 
@@ -1125,7 +1125,7 @@ update_card (GvcMixerControl      *control,
              const pa_card_info   *info)
 {
         GvcMixerCard *card;
-        gboolean      is_new;
+        gboolean      is_new = FALSE;
 #if 1
         guint i;
         const char *key;
