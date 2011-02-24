@@ -115,6 +115,9 @@ const char * cc_keyboard_item_get_description (CcKeyboardItem *item);
 const char * cc_keyboard_item_get_binding     (CcKeyboardItem *item);
 const char * cc_keyboard_item_get_command     (CcKeyboardItem *item);
 
+gboolean     cc_keyboard_item_equal           (CcKeyboardItem *a,
+					       CcKeyboardItem *b);
+
 G_END_DECLS
 
 #endif /* __CC_KEYBOARD_ITEM_H */

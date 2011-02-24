@@ -554,6 +554,27 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   return TRUE;
 }
 
+gboolean
+cc_keyboard_item_equal (CcKeyboardItem *a,
+			CcKeyboardItem *b)
+{
+  if (a->type != b->type)
+    return FALSE;
+  switch (a->type)
+    {
+      case CC_KEYBOARD_ITEM_TYPE_GCONF:
+        return g_str_equal (a->gconf_key, b->gconf_key);
+      case CC_KEYBOARD_ITEM_TYPE_GCONF_DIR:
+	return g_str_equal (a->gconf_key_dir, b->gconf_key_dir);
+      case CC_KEYBOARD_ITEM_TYPE_GSETTINGS:
+	return (g_str_equal (a->schema, b->schema) &&
+		g_str_equal (a->key, b->key));
+      default:
+	g_assert_not_reached ();
+    }
+
+}
+
 /*
  * vim: sw=2 ts=8 cindent noai bs=2
  */
