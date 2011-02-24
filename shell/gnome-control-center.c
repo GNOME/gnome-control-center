@@ -278,7 +278,7 @@ keynav_failed (GtkIconView        *current_view,
         break;
     }
 
-  if (direction == GTK_DIR_DOWN && v->next != NULL)
+  if (direction == GTK_DIR_DOWN && v != NULL && v->next != NULL)
     {
       new_view = v->next->data;
 
@@ -315,7 +315,7 @@ keynav_failed (GtkIconView        *current_view,
       res = TRUE;
     }
 
-  if (direction == GTK_DIR_UP && v->prev != NULL)
+  if (direction == GTK_DIR_UP && v != NULL && v->prev != NULL)
     {
       new_view = v->prev->data;
 
