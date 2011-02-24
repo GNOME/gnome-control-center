@@ -235,7 +235,7 @@ finish_language_setup (gpointer user_data)
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 	user_langs = g_object_get_data (G_OBJECT (list), "user-langs");
 
-        async_id = cc_common_language_add_available_languages_async (GTK_LIST_STORE (model), user_langs);
+        async_id = cc_common_language_add_available_languages (GTK_LIST_STORE (model), user_langs);
 
         g_object_set_data_full (G_OBJECT (list), "language-async",
                                 GUINT_TO_POINTER (async_id), remove_async);
