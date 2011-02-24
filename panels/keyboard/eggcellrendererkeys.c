@@ -500,52 +500,92 @@ ungrab_stuff (GtkWidget *widget, gpointer data)
                                         G_CALLBACK (grab_key_callback), data);
 }
 
+typedef struct
+{
+  GtkEventBox box;
+  gboolean editing_canceled;
+} PointlessEventBox;
+
+typedef        GtkEventBoxClass   PointlessEventBoxClass;
+static GType pointless_event_box_get_type (void);
+static void pointless_event_box_cell_editable_init (GtkCellEditableIface *iface);
+
 static void
-pointless_eventbox_start_editing (GtkCellEditable *cell_editable,
+pointless_event_box_init (PointlessEventBox *box)
+{
+}
+
+G_DEFINE_TYPE_WITH_CODE (PointlessEventBox, pointless_event_box, GTK_TYPE_EVENT_BOX, { \
+	G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE, pointless_event_box_cell_editable_init)   \
+	})
+
+enum {
+  PROP_ZERO,
+  PROP_EDITING_CANCELED
+};
+
+static void
+pointless_event_box_set_property (GObject      *object,
+				  guint         prop_id,
+				  const GValue *value,
+				  GParamSpec   *pspec)
+{
+  PointlessEventBox *box = (PointlessEventBox*)object;
+
+  switch (prop_id)
+    {
+      case PROP_EDITING_CANCELED:
+        box->editing_canceled = g_value_get_boolean (value);
+	break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+	break;
+    }
+}
+
+static void
+pointless_event_box_get_property (GObject    *object,
+				  guint       prop_id,
+				  GValue     *value,
+				  GParamSpec *pspec)
+{
+  PointlessEventBox *box = (PointlessEventBox*)object;
+
+  switch (prop_id)
+    {
+    case PROP_EDITING_CANCELED:
+      g_value_set_boolean (value, box->editing_canceled);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
+pointless_event_box_class_init (PointlessEventBoxClass *class)
+{
+  GObjectClass *gobject_class = G_OBJECT_CLASS (class);
+
+  gobject_class->set_property = pointless_event_box_set_property;
+  gobject_class->get_property = pointless_event_box_get_property;
+
+  g_object_class_override_property (gobject_class,
+				    PROP_EDITING_CANCELED,
+				    "editing-canceled");
+}
+
+static void
+pointless_event_box_start_editing (GtkCellEditable *cell_editable,
                                   GdkEvent        *event)
 {
   /* do nothing, because we are pointless */
 }
 
 static void
-pointless_eventbox_cell_editable_init (GtkCellEditableIface *iface)
+pointless_event_box_cell_editable_init (GtkCellEditableIface *iface)
 {
-  iface->start_editing = pointless_eventbox_start_editing;
-}
-
-static GType
-pointless_eventbox_subclass_get_type (void)
-{
-  static GType eventbox_type = 0;
-
-  if (!eventbox_type)
-    {
-      static const GTypeInfo eventbox_info =
-      {
-        sizeof (GtkEventBoxClass),
-	NULL,		/* base_init */
-	NULL,		/* base_finalize */
-        NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-        sizeof (GtkEventBox),
-	0,              /* n_preallocs */
-        (GInstanceInitFunc) NULL,
-        NULL
-      };
-
-      static const GInterfaceInfo cell_editable_info = {
-        (GInterfaceInitFunc) pointless_eventbox_cell_editable_init,
-        NULL, NULL };
-
-      eventbox_type = g_type_register_static (GTK_TYPE_EVENT_BOX, "EggCellEditableEventBox", &eventbox_info, 0);
-
-      g_type_add_interface_static (eventbox_type,
-				   GTK_TYPE_CELL_EDITABLE,
-				   &cell_editable_info);
-    }
-
-  return eventbox_type;
+  iface->start_editing = pointless_event_box_start_editing;
 }
 
 static GtkCellEditable *
@@ -592,7 +632,7 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
                     G_CALLBACK (grab_key_callback),
                     keys);
 
-  eventbox = g_object_new (pointless_eventbox_subclass_get_type (),
+  eventbox = g_object_new (pointless_event_box_get_type (),
                            NULL);
   keys->edit_widget = eventbox;
   g_object_add_weak_pointer (G_OBJECT (keys->edit_widget),
