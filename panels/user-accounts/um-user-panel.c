@@ -464,6 +464,32 @@ delete_user (GtkButton *button, UmUserPanelPrivate *d)
 }
 
 static const gchar *
+get_invisible_text (void)
+{
+   GtkWidget *entry;
+   gunichar invisible_char;
+   static gchar invisible_text[40];
+   gchar *p;
+   gint i;
+
+   entry = gtk_entry_new ();
+   invisible_char = gtk_entry_get_invisible_char (GTK_ENTRY (entry));
+   if (invisible_char == 0)
+     invisible_char = 0x2022;
+
+   g_object_ref_sink (entry);
+   g_object_unref (entry);
+
+   /* five bullets */
+   p = invisible_text;
+   for (i = 0; i < 5; i++)
+     p += g_unichar_to_utf8 (invisible_char, p);
+   *p = 0;
+
+   return invisible_text;
+}
+
+static const gchar *
 get_password_mode_text (UmUser *user)
 {
         const gchar *text;
@@ -474,8 +500,7 @@ get_password_mode_text (UmUser *user)
         else {
                 switch (um_user_get_password_mode (user)) {
                 case UM_PASSWORD_MODE_REGULAR:
-                        /* five bullets */
-                        text = "\xe2\x80\xa2\xe2\x80\xa2\xe2\x80\xa2\xe2\x80\xa2\xe2\x80\xa2";
+                        text = get_invisible_text ();
                         break;
                 case UM_PASSWORD_MODE_SET_AT_LOGIN:
                         text = C_("Password mode", "To be set at next login");
