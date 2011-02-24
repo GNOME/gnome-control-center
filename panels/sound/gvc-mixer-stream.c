@@ -505,7 +505,7 @@ gvc_mixer_stream_change_port (GvcMixerStream *stream,
 const GList *
 gvc_mixer_stream_get_ports (GvcMixerStream *stream)
 {
-        g_return_val_if_fail (GVC_IS_MIXER_STREAM (stream), FALSE);
+        g_return_val_if_fail (GVC_IS_MIXER_STREAM (stream), NULL);
         return stream->priv->ports;
 }
 
