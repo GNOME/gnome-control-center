@@ -368,7 +368,7 @@ eval_radial_line (gdouble center_x, gdouble center_y,
         gdouble decision_intercept;
 
         decision_slope = (bounds_y - center_y) / (bounds_x - center_x);
-        decision_intercept = bounds_y = -(decision_slope * bounds_x);
+        decision_intercept = -(decision_slope * bounds_x);
 
         return (int) (decision_slope * user_x + decision_intercept);
 }
