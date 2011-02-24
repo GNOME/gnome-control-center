@@ -121,7 +121,7 @@ _set_binding (CcKeyboardItem *item,
 	key = item->gconf_key;
       else
 	key = item->binding_gconf_key;
-      gconf_client_set_string (client, key, "", &err);
+      gconf_client_set_string (client, key, item->binding, &err);
       if (err != NULL)
         {
 	  g_warning ("Failed to set '%s' to '%s': %s", key, item->binding, err->message);
