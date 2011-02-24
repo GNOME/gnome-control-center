@@ -222,6 +222,83 @@ cc_common_language_add_available_languages (GtkListStore *store,
         g_strfreev (languages);
 }
 
+typedef struct
+{
+  GtkListStore  *store;
+  GHashTable    *user_langs;
+  gchar        **languages;
+  gint           position;
+} AsyncLangData;
+
+static void
+async_lang_data_free (AsyncLangData *data)
+{
+  g_object_unref (data->store);
+  g_hash_table_unref (data->user_langs);
+  g_strfreev (data->languages);
+  g_free (data);
+}
+
+static gboolean
+add_one_language (gpointer d)
+{
+  AsyncLangData *data = d;
+  char *name;
+  char *language;
+  GtkTreeIter iter;
+
+  if (data->languages[data->position] == NULL) {
+    /* we are done */
+    async_lang_data_free (data);
+    return FALSE;
+  }
+
+  name = gdm_normalize_language_name (data->languages[data->position]);
+  if (g_hash_table_lookup (data->user_langs, name) != NULL) {
+    g_free (name);
+    goto next;
+  }
+
+  if (!cc_common_language_has_font (data->languages[data->position])) {
+    g_free (name);
+    goto next;
+  }
+
+  language = gdm_get_language_from_name (name, NULL);
+  if (!language) {
+    g_debug ("Ignoring '%s' as a locale, because we couldn't figure the language name", name);
+    g_free (name);
+    goto next;
+  }
+
+  gtk_list_store_append (data->store, &iter);
+  gtk_list_store_set (data->store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
+
+  g_free (name);
+  g_free (language);
+
+ next:
+  data->position++;
+
+  return TRUE;
+}
+
+guint
+cc_common_language_add_available_languages_async (GtkListStore *store,
+                                                  GHashTable   *user_langs)
+{
+  AsyncLangData *data;
+
+  data = g_new0 (AsyncLangData, 1);
+
+  data->store = g_object_ref (store);
+  data->user_langs = g_hash_table_ref (user_langs);
+  data->languages = gdm_get_all_language_names ();
+  data->position = 0;
+
+  return gdk_threads_add_idle (add_one_language, data);
+}
+
 gchar *
 cc_common_language_get_current_language (void)
 {
