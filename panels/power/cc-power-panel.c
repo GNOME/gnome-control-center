@@ -20,6 +20,8 @@
  *
  */
 
+#include <config.h>
+
 #include <libupower-glib/upower.h>
 #include <glib/gi18n.h>
 
