@@ -26,6 +26,7 @@
 #include "cc-ua-panel.h"
 
 #include <gconf/gconf-client.h>
+#include <gio/gdesktopappinfo.h>
 
 #include "eggaccelerators.h"
 #include "gconf-property-editor.h"
@@ -48,6 +49,9 @@ struct _CcUaPanelPrivate
   GSettings *font_settings;
   GSettings *application_settings;
   GSettings *mediakeys_settings;
+  GSettings *mobility_settings;
+
+  GtkWidget *typing_assistant_prefs;
 
   GSList *notify_list;
 };
@@ -145,6 +149,12 @@ cc_ua_panel_dispose (GObject *object)
     {
       g_object_unref (priv->mediakeys_settings);
       priv->mediakeys_settings = NULL;
+    }
+
+  if (priv->mobility_settings)
+    {
+      g_object_unref (priv->mobility_settings);
+      priv->mobility_settings = NULL;
     }
 
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
@@ -688,6 +698,116 @@ typing_keyboard_preferences_clicked (GtkButton *button,
 }
 
 static void
+cc_ua_panel_typing_assistant_prefs_changed (GtkAppChooser *chooser,
+					    const char    *name,
+					    CcUaPanel     *self)
+{
+  g_settings_set_string (self->priv->mobility_settings, "exec", name);
+}
+
+static char *
+cc_ua_panel_typing_assistant_add_app (GtkAppChooserButton *button,
+				      const char          *name)
+{
+  GAppInfo *info;
+  GDesktopAppInfo *desktop_info;
+  char *retval;
+
+  desktop_info = g_desktop_app_info_new (name);
+  if (desktop_info == NULL)
+    return NULL;
+  info = G_APP_INFO (desktop_info);
+  gtk_app_chooser_button_append_custom_item (GTK_APP_CHOOSER_BUTTON (button),
+					     g_app_info_get_executable (info),
+					     g_app_info_get_display_name (info),
+					     g_app_info_get_icon (info));
+  retval = g_strdup (g_app_info_get_executable (info));
+  g_object_unref (info);
+
+  return retval;
+}
+
+static void
+cc_ua_panel_typing_assistant_prefs (GtkButton *button,
+				    CcUaPanel *self)
+{
+  GtkWidget *chooser;
+  GtkWidget *area;
+  char *selected;
+  GList *list;
+  guint i;
+  const char *items[] = {
+    "caribou.desktop",
+    "gnome-dasher.desktop",
+    "dasher.desktop"
+  };
+
+  self->priv->typing_assistant_prefs = gtk_dialog_new_with_buttons (_("Select On-Screen Keyboard"),
+								    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (button))),
+								    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+								    GTK_STOCK_OK,
+								    GTK_RESPONSE_ACCEPT,
+								    NULL);
+  g_signal_connect_swapped (G_OBJECT (self->priv->typing_assistant_prefs), "response",
+			    G_CALLBACK (gtk_widget_destroy), self->priv->typing_assistant_prefs);
+  g_object_add_weak_pointer (G_OBJECT (self->priv->typing_assistant_prefs),
+			     (void **) &self->priv->typing_assistant_prefs);
+
+  /* Use a bogus mime-type so that no apps are added by default */
+  chooser = gtk_app_chooser_button_new ("x-content/does-not-exist");
+  area = gtk_dialog_get_content_area (GTK_DIALOG (self->priv->typing_assistant_prefs));
+  gtk_box_pack_start (GTK_BOX (area), chooser, FALSE, FALSE, 12);
+  g_object_set_data (G_OBJECT (self->priv->typing_assistant_prefs), "chooser", chooser);
+
+  /* Add the items, and check whether we have any actual items */
+  list = NULL;
+  for (i = 0; i < G_N_ELEMENTS (items); i++)
+    {
+      char *added;
+
+      added = cc_ua_panel_typing_assistant_add_app (GTK_APP_CHOOSER_BUTTON (chooser), items[i]);
+      if (added != NULL)
+        list = g_list_prepend (list, added);
+    }
+  list = g_list_reverse (list);
+
+  if (list == NULL)
+    {
+      gtk_widget_destroy (self->priv->typing_assistant_prefs);
+      g_debug ("Show an error here");
+      return;
+    }
+
+  /* Select default item from GSettings, making sure the item exists */
+  selected = g_settings_get_string (self->priv->mobility_settings, "exec");
+  if (*selected == '\0' ||
+      g_list_find_custom (list, selected, (GCompareFunc) g_strcmp0) == NULL)
+    {
+      g_free (selected);
+      selected = NULL;
+    }
+
+  if (selected != NULL)
+    gtk_app_chooser_button_set_active_custom_item (GTK_APP_CHOOSER_BUTTON (chooser), selected);
+
+  g_signal_connect (G_OBJECT (chooser), "custom-item-activated",
+		    G_CALLBACK (cc_ua_panel_typing_assistant_prefs_changed), self);
+
+  /* Set the first item as the new default if the value was bogus */
+  if (selected == NULL)
+    {
+      gtk_app_chooser_button_set_active_custom_item (GTK_APP_CHOOSER_BUTTON (chooser),
+						     list->data);
+    }
+  g_free (selected);
+
+  g_list_foreach (list, (GFunc) g_free, NULL);
+  g_list_free (list);
+
+  gtk_widget_show_all (self->priv->typing_assistant_prefs);
+}
+
+static void
 cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
@@ -696,6 +816,8 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   /* Typing assistant (on-screen keyboard) */
   w = WID (priv->builder, "typing_assistant_switch");
   settings_on_off_editor_new (priv, priv->application_settings, "screen-keyboard-enabled", w, typing_assistant_section);
+  g_signal_connect (G_OBJECT (WID (priv->builder, "typing_assistant_preferences_button")), "clicked",
+		    G_CALLBACK (cc_ua_panel_typing_assistant_prefs), self);
 
   /* enable shortcuts */
   w = WID (priv->builder, "typing_keyboard_toggle_checkbox");
@@ -843,6 +965,7 @@ cc_ua_panel_init (CcUaPanel *self)
   priv->font_settings = g_settings_new ("org.gnome.settings-daemon.plugins.xsettings");
   priv->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
   priv->mediakeys_settings = g_settings_new ("org.gnome.settings-daemon.plugins.media-keys");
+  priv->mobility_settings = g_settings_new ("org.gnome.desktop.default-applications.at.mobility");
 
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);
