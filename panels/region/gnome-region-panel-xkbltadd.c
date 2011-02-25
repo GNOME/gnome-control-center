@@ -40,6 +40,8 @@ enum {
 
 static gchar **search_pattern_list = NULL;
 
+static GtkWidget *preview_dialog = NULL;
+
 #define RESPONSE_PREVIEW 1
 
 static void
@@ -55,6 +57,12 @@ xkl_layout_chooser_add_default_switcher_if_necessary (gchar **
 	if (was_appended)
 		xkb_options_set_selected_list (options_list);
 	g_strfreev (options_list);
+}
+
+static void
+xkb_preview_destroy_callback (GtkWidget * widget)
+{
+	preview_dialog = NULL;
 }
 
 static void
@@ -91,25 +99,31 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 				    (chooser_dialog);
 
 				if (selected_id != NULL) {
-					GtkWidget *dlg =
-					    gkbd_keyboard_drawing_dialog_new
-					    ();
+					if (preview_dialog == NULL) {
+						preview_dialog =
+						    gkbd_keyboard_drawing_dialog_new
+						    ();
+						g_signal_connect (G_OBJECT
+								  (preview_dialog),
+								  "destroy",
+								  G_CALLBACK
+								  (xkb_preview_destroy_callback),
+								  NULL);
+					};
 					gkbd_keyboard_drawing_dialog_set_layout
-					    (dlg, config_registry,
-					     selected_id);
-					gtk_window_set_transient_for
-					    (GTK_WINDOW (dlg),
-					     GTK_WINDOW (CWID
-							 ("xkb_layout_chooser")));
-					gtk_window_set_modal (GTK_WINDOW
-							      (dlg), TRUE);
+					    (preview_dialog,
+					     config_registry, selected_id);
 
-					gtk_widget_show_all (dlg);
+					gtk_widget_show_all
+					    (preview_dialog);
 				}
 			}
 
 			return;
 		}
+	if (preview_dialog != NULL) {
+		gtk_widget_destroy (preview_dialog);
+	}
 	if (search_pattern_list != NULL) {
 		g_strfreev (search_pattern_list);
 		search_pattern_list = NULL;
