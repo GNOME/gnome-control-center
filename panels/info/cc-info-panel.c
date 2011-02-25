@@ -43,6 +43,14 @@ G_DEFINE_DYNAMIC_TYPE (CcInfoPanel, cc_info_panel, CC_TYPE_PANEL)
 #define INFO_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_INFO_PANEL, CcInfoPanelPrivate))
 
+typedef struct {
+  /* Will be one of the other two below, or "Unknown" */ 
+  const char *hardware_string;
+
+  char *xorg_vesa_hardware;
+  char *glx_renderer;
+} GraphicsData;
+
 struct _CcInfoPanelPrivate
 {
   GtkBuilder    *builder;
@@ -56,6 +64,8 @@ struct _CcInfoPanelPrivate
   GDBusProxy    *pk_proxy;
   GDBusProxy    *pk_transaction_proxy;
   GSettings     *session_settings;
+
+  GraphicsData  *graphics_data;
 };
 
 typedef struct
@@ -233,8 +243,16 @@ prettify_info (const char *info)
   return pretty;
 }
 
+static void
+graphics_data_free (GraphicsData *gdata)
+{
+  g_free (gdata->xorg_vesa_hardware);
+  g_free (gdata->glx_renderer);
+  g_slice_free (GraphicsData, gdata);
+}
+
 static char *
-get_graphics_glx_renderer (void)
+get_graphics_data_glx_renderer (void)
 {
   GError     *error;
   GRegex     *re;
@@ -280,6 +298,94 @@ get_graphics_glx_renderer (void)
   g_free (output);
   result = prettify_info (info->str);
   g_string_free (info, TRUE);
+
+  return result;
+}
+
+static char *
+get_graphics_data_xorg_vesa_hardware (void)
+{
+  char *display_num;
+  char *log_path;
+  char *log_contents;
+  gsize log_len;
+  GError *error = NULL;
+  GRegex *re;
+  GMatchInfo *match;
+  char *result = NULL;
+
+  {
+    const char *display;
+
+    display = g_getenv ("DISPLAY");
+    if (!display)
+      return NULL;
+
+    re = g_regex_new ("^:([0-9]+)", 0, 0, NULL);
+    g_assert (re != NULL);
+
+    g_regex_match (re, display, 0, &match);
+
+    if (!g_match_info_matches (match))
+      {
+        g_regex_unref (re);
+        g_match_info_free (match);
+        return NULL;
+      }
+
+    display_num = g_match_info_fetch (match, 1);
+
+    g_regex_unref (re);
+    re = NULL;
+    g_match_info_free (match);
+    match = NULL;
+  }
+
+  log_path = g_strdup_printf ("/var/log/Xorg.%s.log", display_num);
+  g_free (display_num);
+  log_contents = NULL;
+  g_file_get_contents (log_path, &log_contents, &log_len, &error);
+  g_free (log_path);
+  if (!log_contents)
+    return NULL;
+
+  re = g_regex_new ("VESA VBE OEM Product: (.*)$", G_REGEX_MULTILINE, 0, NULL);
+  g_assert (re != NULL);
+
+  g_regex_match (re, log_contents, 0, &match);
+  if (g_match_info_matches (match))
+    {
+      char *tmp;
+      char *pretty_tmp;
+      tmp = g_match_info_fetch (match, 1);
+      pretty_tmp = prettify_info (tmp);
+      g_free (tmp);
+      /* Translators: VESA is an techncial acronym, don't translate it. */
+      result = g_strdup_printf (_("VESA: %s"), pretty_tmp); 
+      g_free (pretty_tmp);
+    }
+  g_match_info_free (match);
+  g_regex_unref (re);
+
+  return result;
+}
+
+static GraphicsData *
+get_graphics_data (void)
+{
+  GraphicsData *result;
+
+  result = g_slice_new0 (GraphicsData);
+
+  result->glx_renderer = get_graphics_data_glx_renderer ();
+  result->xorg_vesa_hardware = get_graphics_data_xorg_vesa_hardware ();
+
+  if (result->xorg_vesa_hardware != NULL)
+    result->hardware_string = result->xorg_vesa_hardware;
+  else if (result->glx_renderer != NULL)
+    result->hardware_string = result->glx_renderer;
+  else
+    result->hardware_string = _("Unknown");
 
   return result;
 }
@@ -364,6 +470,12 @@ cc_info_panel_dispose (GObject *object)
     {
       g_object_unref (priv->pk_transaction_proxy);
       priv->pk_transaction_proxy = NULL;
+    }
+
+  if (priv->graphics_data != NULL)
+    {
+      graphics_data_free (priv->graphics_data);
+      priv->graphics_data = NULL;
     }
 
   G_OBJECT_CLASS (cc_info_panel_parent_class)->dispose (object);
@@ -688,10 +800,8 @@ info_panel_setup_graphics (CcInfoPanel  *self)
   GtkSwitch *sw;
   char *text;
 
-  text = get_graphics_glx_renderer ();
   widget = WID (self->priv->builder, "graphics_driver_label");
-  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
-  g_free (text);
+  gtk_label_set_markup (GTK_LABEL (widget), self->priv->graphics_data->hardware_string);
 
   self->priv->is_fallback = get_current_is_fallback (self);
   if (self->priv->is_fallback)
@@ -909,10 +1019,8 @@ info_panel_setup_overview (CcInfoPanel  *self)
   gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
-  text = get_graphics_glx_renderer ();
   widget = WID (self->priv->builder, "graphics_label");
-  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
-  g_free (text);
+  gtk_label_set_markup (GTK_LABEL (widget), self->priv->graphics_data->hardware_string);
 
   widget = WID (self->priv->builder, "info_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
@@ -1110,6 +1218,8 @@ cc_info_panel_init (CcInfoPanel *self)
       g_error_free (error);
       return;
     }
+
+  self->priv->graphics_data = get_graphics_data ();
 
   widget = WID (self->priv->builder, "updates_button");
   g_signal_connect (widget, "clicked", G_CALLBACK (on_updates_button_clicked), self);
