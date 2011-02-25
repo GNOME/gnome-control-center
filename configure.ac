@@ -131,32 +131,31 @@ fi
 AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
 
 # Check for CUPS 1.4 or newer
-AC_PATH_PROG(CUPS_CONFIG, cups-config, no)
-if test "x$CUPS_CONFIG" != "xno"; then
+AC_ARG_ENABLE([cups],
+              AS_HELP_STRING([--disable-cups], [disable CUPS support (default: enabled)]),,
+              [enable_cups=yes])
+
+if test x"$enable_cups" != x"no" ; then
+  AC_PATH_PROG(CUPS_CONFIG, cups-config,
+               AC_MSG_ERROR([cups-config not found but CUPS support requested]))
+
   CUPS_API_VERSION=`$CUPS_CONFIG --api-version`
   CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | sed -e "s/\./\n/g" | sed -n "1p"`
   CUPS_API_MINOR=`echo $ECHO_N $CUPS_API_VERSION | sed -e "s/\./\n/g" | sed -n "2p"`
 
-  AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h], have_cups_headers=yes, have_cups_headers=no)
-  if test x$have_cups_headers = xyes ; then
-    if test $CUPS_API_MAJOR -gt 1 -o \
-            $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 4; then
-      have_cups=yes
-      CUPS_LIBS=-lcups
-      AC_SUBST(CUPS_LIBS)
-    else
-      have_cups=no
-      AC_MSG_WARN(*** Printers panel will not be built (CUPS 1.4 or newer not found) ***)
-    fi
-  else
-    have_cups=no
-    AC_MSG_WARN(*** Printers panel will not be built (CUPS header files not found) ***)
+  AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h],,
+                   AC_MSG_ERROR([CUPS headers not found but CUPS support requested]))
+
+  if ! test $CUPS_API_MAJOR -gt 1 -o \
+            $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 4 ; then
+    AC_MSG_ERROR([CUPS 1.4 or newer not found, but CUPS support requested])
   fi
-else
-  have_cups=no
-  AC_MSG_WARN(*** Printers panel will not be built (cups-config not found) ***)
+
+  CUPS_LIBS=-lcups
+  AC_SUBST(CUPS_LIBS)
 fi
-AM_CONDITIONAL(BUILD_PRINTERS, [test x$have_cups = xyes])
+
+AM_CONDITIONAL(BUILD_PRINTERS, [test x"$enable_cups" = x"yes"])
 
 # Optional dependency for the user accounts panel
 PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 2.29.90, have_cheese=yes, have_cheese=no)
