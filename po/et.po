@@ -10,21 +10,21 @@
 # Tõivo Leedjärv <toivo linux ee>, 2002, 2003.
 # Ivar Smolin <okul linux ee>, 2005–2011.
 # Priit Laes <plaes+gi18n plaes org>, 2005, 2006, 2008.
-# Mattias Põldaru <mahfiaz gmail com>, 2009–2010.
+# Mattias Põldaru <mahfiaz gmail com>, 2009–2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-02-10 11:35+0000\n"
-"PO-Revision-Date: 2011-02-12 09:45+0200\n"
-"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
+"POT-Creation-Date: 2011-02-26 02:04+0000\n"
+"PO-Revision-Date: 2011-02-26 11:03+0300\n"
+"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Estonian\n"
 "X-Poedit-Country: ESTONIA\n"
@@ -56,6 +56,36 @@ msgid ""
 "will not appear."
 msgstr ""
 "Töölaua lisateemade hankimise URL. Tühjaksjäetuna seda viita ei kuvata."
+
+msgid "Lock"
+msgstr "Lukusta"
+
+msgid "Unlock"
+msgstr "Võta lukust lahti"
+
+msgid "Locked"
+msgstr "Lukus"
+
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Dialoog on lukust lahti võetud.\n"
+"Muutmise keelamiseks klõpsa siin"
+
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Dialoog on lukus.\n"
+"Muutmiseks klõpsa siin"
+
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"Süsteemi reeglid ei luba muutusi teha.\n"
+"Võta ühendust oma süsteemiülemaga"
 
 msgid "Key"
 msgstr "Võti"
@@ -180,6 +210,12 @@ msgstr "Püstine üleminek"
 msgid "Solid Color"
 msgstr "Ühtlane värvus"
 
+msgid "Browse for more pictures"
+msgstr ""
+
+msgid "Current background"
+msgstr "Praegune taustapilt"
+
 msgid "Wallpapers"
 msgstr "Taustapildid"
 
@@ -192,12 +228,6 @@ msgstr "Värvused ja üleminekud"
 msgid "Flickr"
 msgstr "Flickr"
 
-msgid "Current background"
-msgstr "Praegune taustapilt"
-
-msgid "No Desktop Background"
-msgstr "Töölaual puudub taust"
-
 msgid "multiple sizes"
 msgstr "mitmes suuruses"
 
@@ -206,6 +236,10 @@ msgstr "mitmes suuruses"
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
+
+# paistab välimuse eelistuste all ühevärvilise tausta tooltip'ina
+msgid "No Desktop Background"
+msgstr "Ilma taustapildita töölaud"
 
 msgid "Unspecified"
 msgstr "Määramata"
@@ -276,36 +310,6 @@ msgstr "Piirkond:"
 msgid "September"
 msgstr "September"
 
-msgid "Lock"
-msgstr "Lukusta"
-
-msgid "Unlock"
-msgstr "Võta lukust lahti"
-
-msgid "Locked"
-msgstr "Lukus"
-
-msgid ""
-"Dialog is unlocked.\n"
-"Click to prevent further changes"
-msgstr ""
-"Dialoog on lukust lahti võetud.\n"
-"Muutmise keelamiseks klõpsa siin"
-
-msgid ""
-"Dialog is locked.\n"
-"Click to make changes"
-msgstr ""
-"Dialoog on lukus.\n"
-"Muutmiseks klõpsa siin"
-
-msgid ""
-"System policy prevents changes.\n"
-"Contact your system administrator"
-msgstr ""
-"Süsteemi reeglid ei luba muutusi teha.\n"
-"Võta ühendust oma süsteemiülemaga"
-
 #. Translators: those are keywords for the date and time control-center panel
 msgid "Clock;Timezone;Location;"
 msgstr "Kell;Ajavöönd;Asukoht;"
@@ -374,7 +378,7 @@ msgstr "180 kraadi"
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
 msgid "Mirror Displays"
-msgstr ""
+msgstr "Peegeldatud ekraanid"
 
 #, c-format
 msgid "%d x %d (%s)"
@@ -451,6 +455,39 @@ msgstr "%.1f EB"
 msgid "Unknown model"
 msgstr "Tundmatu mudel"
 
+msgid "The next login will attempt to use the standard experience."
+msgstr ""
+
+msgid ""
+"The next login will use the fallback mode intended for unsupported graphics "
+"hardware."
+msgstr ""
+
+#. translators: The hardware is not able to run GNOME 3's
+#. * shell, so we use the GNOME "Fallback" session
+#, fuzzy
+msgctxt "Experience"
+msgid "Fallback"
+msgstr "Väljakutse"
+
+#. translators: The hardware is able to run GNOME 3's
+#. * shell, also called "Standard" experience
+msgctxt "Experience"
+msgid "Standard"
+msgstr "Standardne"
+
+msgid "Section"
+msgstr "Sektsioon"
+
+msgid "Overview"
+msgstr "Ülevaade"
+
+msgid "Default Applications"
+msgstr "Vaikimisi rakendused"
+
+msgid "Graphics"
+msgstr "Graafika"
+
 #, c-format
 msgid "Version %s"
 msgstr "Versioon %s"
@@ -465,38 +502,141 @@ msgstr "Süsteemi andmed"
 msgid "device;system;information;memory;processor;version;"
 msgstr "seadmed;süsteem;andmed;info;mälu;protsessor;versioon;"
 
-msgid "Device name:"
-msgstr "Seadme nimi:"
+msgid "Calendar"
+msgstr "Kalender"
 
-msgid "Disk:"
-msgstr "Ketas:"
+msgid "Chipset"
+msgstr "Kiibistik"
 
-msgid "Graphics:"
-msgstr "Graafika:"
+msgid "Device name"
+msgstr "Seadme nimi"
 
-msgid "Memory:"
-msgstr "Mälu:"
+msgid "Disk"
+msgstr "Ketas"
 
-msgid "More Info"
-msgstr "Rohkem andmeid"
+msgid "Experience"
+msgstr "Kogemus"
 
-msgid "OS type:"
-msgstr "Opsüsteemi liik:"
-
-msgid "Processor:"
-msgstr "Protsessor:"
-
-msgid "Update Available"
+#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
+msgid "Forced Fallback Mode"
 msgstr ""
+
+msgid "Mail"
+msgstr "E-post"
+
+msgid "Memory"
+msgstr "Mälu"
+
+msgid "Music"
+msgstr "Muusika"
+
+msgid "OS type"
+msgstr "Opsüsteemi liik"
+
+msgid "Photos"
+msgstr "Fotod"
+
+msgid "Processor"
+msgstr "Protsessor"
+
+msgid "Updates Available"
+msgstr "Saadaval uuendused"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "Web"
+msgstr "Veeb"
+
+msgid "Eject"
+msgstr "Väljasta"
+
+msgid "Launch media player"
+msgstr "Meediaesitaja käivitamine"
+
+msgid "Next track"
+msgstr "Järgmine lugu"
+
+msgid "Pause playback"
+msgstr "Taasesituse pausimine"
+
+msgid "Play (or play/pause)"
+msgstr "Esitamine (või esita/pausi)"
+
+msgid "Previous track"
+msgstr "Eelmine lugu"
 
 msgid "Sound and Media"
-msgstr ""
+msgstr "Heli ja meedia"
+
+msgid "Stop playback"
+msgstr "Taasesituse peatamine"
+
+msgid "Volume down"
+msgstr "Heli vaiksemaks"
+
+msgid "Volume mute"
+msgstr "Heli tummaks"
+
+msgid "Volume up"
+msgstr "Heli valjemaks"
+
+msgid "Home folder"
+msgstr "Kodukataloog"
+
+msgid "Launch calculator"
+msgstr "Kalkulaatori käivitamine"
+
+msgid "Launch email client"
+msgstr "E-posti kliendi käivitamine"
+
+msgid "Launch help browser"
+msgstr "Abi sirvija käivitamine"
+
+msgid "Launch web browser"
+msgstr "Veebibrauseri käivitamine"
 
 msgid "Launchers"
-msgstr ""
+msgstr "Käivitajad"
+
+msgid "Search"
+msgstr "Otsi"
+
+msgid "Lock screen"
+msgstr "Ekraani lukustamine"
+
+msgid "Log out"
+msgstr "Logi välja"
 
 msgid "System"
 msgstr "Süsteem"
+
+msgid "Decrease text size"
+msgstr ""
+
+msgid "Increase text size"
+msgstr ""
+
+msgid "Magnifier zoom in"
+msgstr ""
+
+msgid "Magnifier zoom out"
+msgstr ""
+
+msgid "Toggle contrast"
+msgstr "Kontrasti muutmine"
+
+msgid "Toggle magnifier"
+msgstr ""
+
+msgid "Toggle on-screen keyboard"
+msgstr "Ekraaniklaviatuuri lülitamine"
+
+msgid "Toggle screen reader"
+msgstr "Ekraanilugeja lülitamine"
+
+msgid "Universal Access"
+msgstr "Universaalne ligipääs"
 
 msgid "New shortcut..."
 msgstr "Uus kiirklahv..."
@@ -568,15 +708,8 @@ msgstr ""
 msgid "_Reassign"
 msgstr "_Määra"
 
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr "Viga kiirklahvi eemaldamisel sätete andmebaasist: %s"
-
 msgid "Too many custom shortcuts"
 msgstr "Liiga palju kohandatud kiirklahve"
-
-msgid "Section"
-msgstr ""
 
 msgid "Action"
 msgstr "Tegevus"
@@ -650,7 +783,7 @@ msgid "_Speed:"
 msgstr "Kii_rus:"
 
 msgid "Ask what to do"
-msgstr ""
+msgstr "Küsitakse, mida teha"
 
 msgid "Do nothing"
 msgstr "Ära tee midagi"
@@ -712,7 +845,7 @@ msgid "Video CD"
 msgstr "Video-CD"
 
 msgid "Acti_on:"
-msgstr ""
+msgstr "_Tegevus:"
 
 msgid "CD _audio:"
 msgstr "CD-_audio:"
@@ -733,10 +866,10 @@ msgid "_Music player:"
 msgstr "_Muusikaesitaja:"
 
 msgid "_Never prompt or start programs on media insertion"
-msgstr ""
+msgstr "_Meedia sisestamisel ei küsita kunagi rakenduste käivitamise kohta"
 
 msgid "_Other Media..."
-msgstr ""
+msgstr "_Muu meedia..."
 
 msgid "_Photos:"
 msgstr "_Fotod:"
@@ -759,45 +892,47 @@ msgstr "cd;dvd;usb;audio;video;plaat;"
 
 #. Translators: The printer is low on toner
 msgid "Low on toner"
-msgstr ""
+msgstr "Toonerit on vähe"
 
 #. Translators: The printer has no toner left
 msgid "Out of toner"
-msgstr ""
+msgstr "Tooner on otsas"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
 msgid "Low on developer"
-msgstr ""
+msgstr "Ilmutit on vähe"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
 msgid "Out of developer"
-msgstr ""
+msgstr "Ilmuti on otsas"
 
 #. Translators: "marker" is one color bin of the printer
+#, fuzzy
 msgid "Low on a marker supply"
-msgstr ""
+msgstr "Värvi on vähe"
 
 #. Translators: "marker" is one color bin of the printer
+#, fuzzy
 msgid "Out of a marker supply"
-msgstr ""
+msgstr "Värv on otsas"
 
 #. Translators: One or more covers on the printer are open
 msgid "Open cover"
-msgstr ""
+msgstr "Kaas on avatud"
 
 #. Translators: One or more doors on the printer are open
 msgid "Open door"
-msgstr ""
+msgstr "Luuk on avatud"
 
 #. Translators: At least one input tray is low on media
 msgid "Low on paper"
-msgstr ""
+msgstr "Paberit on vähe"
 
 #. Translators: At least one input tray is empty
 msgid "Out of paper"
-msgstr ""
+msgstr "Paber on otsas"
 
 #. Translators: The printer is offline
 msgctxt "printer state"
@@ -811,19 +946,19 @@ msgstr "Peatatud"
 
 #. Translators: The printer marker supply waste receptacle is almost full
 msgid "Waste receptacle almost full"
-msgstr ""
+msgstr "Prügimahuti on peaaegu täis"
 
 #. Translators: The printer marker supply waste receptacle is full
 msgid "Waste receptacle full"
-msgstr ""
+msgstr "Prügimahuti on täis"
 
 #. Translators: Optical photo conductors are used in laser printers
 msgid "The optical photo conductor is near end of life"
-msgstr ""
+msgstr "Fototakisti eluiga on lõppemas"
 
 #. Translators: Optical photo conductors are used in laser printers
 msgid "The optical photo conductor is no longer functioning"
-msgstr ""
+msgstr "Fototakisti enam ei tööta"
 
 #. Translators: Printer's state (can start new job without waiting)
 msgctxt "printer state"
@@ -842,15 +977,15 @@ msgstr "Seisma jäetud"
 
 #. Translators: Toner supply
 msgid "Toner Level"
-msgstr "Tooneri hulk"
+msgstr "Tooneri kogus"
 
 #. Translators: Ink supply
 msgid "Ink Level"
-msgstr "Tindi hulk"
+msgstr "Tindi kogus"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
 msgid "Supply Level"
-msgstr "Kuluvahendi hulk"
+msgstr "Kuluvahendi kogus"
 
 #. Translators: there is n active print jobs on this printer
 #, c-format
@@ -902,10 +1037,6 @@ msgstr "Töö pealkiri"
 msgid "Job State"
 msgstr "Töö seisund"
 
-#. Translators: Name of column showing names of creators of print jobs
-msgid "User"
-msgstr "Kasutaja"
-
 #. Translators: Name of column showing times of creation of print jobs
 msgid "Time"
 msgstr "Aeg"
@@ -921,11 +1052,11 @@ msgstr "Testleht"
 
 #. Translators: Name of job which makes printer to clean its heads
 msgid "Clean print heads"
-msgstr ""
+msgstr "Printeripeade puhastamine"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
 msgid "An error has occured during a maintenance command."
-msgstr ""
+msgstr "Hoolduskäsu täitmisel esines viga."
 
 #. Translators: The XML file containing user interface can not be loaded
 #, c-format
@@ -998,11 +1129,11 @@ msgstr "Printimine..."
 
 #. Tanslators: Switch to tab containing printer's jobs
 msgid "Show"
-msgstr ""
+msgstr "Näita"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
 msgid "Supply"
-msgstr ""
+msgstr "Varu"
 
 msgid "Allow different layouts for each window"
 msgstr "Iga akna jaoks oma paigutuse lubamine"
@@ -1168,90 +1299,13 @@ msgstr "Võrgu proksi"
 msgid "Set the system proxy settings"
 msgstr "Süsteemi proksisätete määramine"
 
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-msgid "Unknown"
-msgstr "Tundmatu"
+#. TRANSLATORS: the user is running a NM that is too new and API compatible
+msgid "The running NetworkManager version is not compatible (too new)."
+msgstr "Töötava NetworkManageri versioon ei sobi (liiga uus)."
 
-#. TRANSLATORS: device type
-msgid "Wired"
-msgstr "Juhtmega"
-
-#. TRANSLATORS: device type
-msgid "Wireless"
-msgstr "Juhtmeta"
-
-#. TRANSLATORS: device type
-msgid "Mobile broadband"
-msgstr ""
-
-#. TRANSLATORS: device type
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#. TRANSLATORS: device type
-msgid "Mesh"
-msgstr ""
-
-#. TRANSLATORS: device status
-msgid "Status unknown"
-msgstr "Olek teadmata"
-
-#. TRANSLATORS: device status
-msgid "Unmanaged"
-msgstr "Haldamata"
-
-#. TRANSLATORS: device status
-msgid "Unavailable"
-msgstr "Pole saadaval"
-
-#. TRANSLATORS: device status
-msgid "Disconnected"
-msgstr "Ühendamata"
-
-#. TRANSLATORS: device status
-msgid "Preparing connection"
-msgstr "Ühenduse ettevalmistamine"
-
-#. TRANSLATORS: device status
-msgid "Configuring connection"
-msgstr "Ühenduse seadistamine"
-
-#. TRANSLATORS: device status
-msgid "Authenticating"
-msgstr "Autentimine"
-
-#. TRANSLATORS: device status
-msgid "Getting network address"
-msgstr "Võrguaadressi hankimine"
-
-#. TRANSLATORS: device status
-msgid "Connected"
-msgstr "Ühendatud"
-
-#. TRANSLATORS: device status
-msgid "Failed to connect"
-msgstr "Ühenduse loomine nurjus"
-
-#, c-format
-msgid "%i kb/s"
-msgstr "%i kb/s"
-
-#, c-format
-msgid "%i Mb/s"
-msgstr "%i Mb/s"
-
-#, c-format
-msgid "%i Gb/s"
-msgstr "%i Gb/s"
-
-#. TRANSLATORS: AP type
-msgid "Ad-hoc"
-msgstr "Ad-hoc"
-
-#. TRANSLATORS: AP type
-msgid "Infrastructure"
-msgstr "Infrastruktuur"
+#. TRANSLATORS: the user is running a NM that is too old and API compatible
+msgid "The running NetworkManager version is not compatible (too old)."
+msgstr "Töötava NetworkManageri versioon ei sobi (liiga vana)."
 
 msgid "Network"
 msgstr "Võrk"
@@ -1264,7 +1318,7 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "Võrk;Kohtvõrk;WiFi;IP;"
 
 msgid "Airplane Mode"
-msgstr ""
+msgstr "Lennurežiim"
 
 msgid "Configuration URL:"
 msgstr "Seadistuste URL:"
@@ -1344,6 +1398,91 @@ msgctxt "proxy method"
 msgid "None"
 msgstr "Puudub"
 
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+msgid "Unknown"
+msgstr "Tundmatu"
+
+#. TRANSLATORS: device type
+msgid "Wired"
+msgstr "Juhtmega"
+
+#. TRANSLATORS: device type
+msgid "Wireless"
+msgstr "Juhtmeta"
+
+#. TRANSLATORS: device type
+msgid "Mobile broadband"
+msgstr "Mobiiliühendus"
+
+#. TRANSLATORS: device type
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#. TRANSLATORS: device type
+msgid "Mesh"
+msgstr ""
+
+#. TRANSLATORS: AP type
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+msgid "Infrastructure"
+msgstr "Infrastruktuur"
+
+#. TRANSLATORS: device status
+msgid "Status unknown"
+msgstr "Olek teadmata"
+
+#. TRANSLATORS: device status
+msgid "Unmanaged"
+msgstr "Haldamata"
+
+#. TRANSLATORS: device status
+msgid "Unavailable"
+msgstr "Pole saadaval"
+
+#. TRANSLATORS: device status
+msgid "Disconnected"
+msgstr "Ühendamata"
+
+#. TRANSLATORS: device status
+msgid "Preparing connection"
+msgstr "Ühenduse ettevalmistamine"
+
+#. TRANSLATORS: device status
+msgid "Configuring connection"
+msgstr "Ühenduse seadistamine"
+
+#. TRANSLATORS: device status
+msgid "Authenticating"
+msgstr "Autentimine"
+
+#. TRANSLATORS: device status
+msgid "Getting network address"
+msgstr "Võrguaadressi hankimine"
+
+#. TRANSLATORS: device status
+msgid "Checking network address"
+msgstr "Võrguaadressi kontrollimine"
+
+#. TRANSLATORS: device status
+msgid "Connected"
+msgstr "Ühendatud"
+
+#. TRANSLATORS: device status
+msgid "Disconnecting"
+msgstr "Ühenduse katkestamine"
+
+#. TRANSLATORS: device status
+msgid "Failed to connect"
+msgstr "Ühenduse loomine nurjus"
+
+#. TRANSLATORS: device status
+msgid "Status unknown (missing)"
+msgstr "Olek teadmata (puudub)"
+
 msgid "Power"
 msgstr "Vooluhaldus"
 
@@ -1400,18 +1539,18 @@ msgstr "UPS-i tühjenemine"
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #, c-format
 msgid "%s until charged (%.0lf%%)"
-msgstr ""
+msgstr "%s täislaadimiseni (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #, c-format
 msgid "%s until empty (%.0lf%%)"
-msgstr ""
+msgstr "%s tühjenemiseni (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a percentage value. Note: this string is only
 #. * used when we don't have a time value
 #, c-format
 msgid "%.0lf%% charged"
-msgstr ""
+msgstr "%.0lf%% laetud"
 
 msgid "1 hour"
 msgstr "1 tund"
@@ -1426,34 +1565,34 @@ msgid "5 minutes"
 msgstr "5 minutit"
 
 msgid "Ask me"
-msgstr ""
+msgstr "Küsitakse"
 
 msgid "Hibernate"
-msgstr ""
+msgstr "Talveuni"
 
 msgid "On AC power:"
 msgstr ""
 
 msgid "On battery power:"
-msgstr ""
+msgstr "Akutoitel:"
 
 msgid "Put the computer to sleep when inactive:"
 msgstr ""
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Lülita välja"
 
 msgid "Suspend"
 msgstr ""
 
 msgid "When power is critically low:"
-msgstr ""
+msgstr "Kui aku on kriitilisel tasemel:"
 
 msgid "When the power button is pressed:"
-msgstr ""
+msgstr "Kui vajutatakse voolunuppu:"
 
 msgid "When the sleep button is pressed:"
-msgstr ""
+msgstr "Kui vajutatakse unenuppu:"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 msgid "Brightness;Lock;Dim;Blank;Monitor;"
@@ -1478,23 +1617,23 @@ msgid "Brightness"
 msgstr "Heledus"
 
 msgid "Dim screen to save power"
-msgstr ""
+msgstr "Voolu säästmiseks vähendatakse heledust"
 
 #. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
 msgid "Don't lock when at home"
-msgstr ""
+msgstr "Ei lukustata, kui kodus"
 
 msgid "Locations..."
 msgstr "Asukohad..."
 
 msgid "Lock screen after:"
-msgstr ""
+msgstr "Ekraan lukustatakse pärast:"
 
 msgid "Screen turns off"
-msgstr ""
+msgstr "Ekraan lülitatakse välja"
 
 msgid "Turn off after:"
-msgstr ""
+msgstr "Lülitatakse välja pärast:"
 
 msgid "Enable debugging code"
 msgstr "Silumiskoodi lubamine"
@@ -1527,22 +1666,22 @@ msgstr "Parem"
 
 msgctxt "balance"
 msgid "Rear"
-msgstr ""
+msgstr "Tagumised"
 
 msgctxt "balance"
 msgid "Front"
-msgstr ""
+msgstr "Esimesed"
 
 msgctxt "balance"
 msgid "Minimum"
-msgstr ""
+msgstr "Minimaalne"
 
 msgctxt "balance"
 msgid "Maximum"
-msgstr ""
+msgstr "Maksimaalne"
 
 msgid "_Balance:"
-msgstr ""
+msgstr "_Tasakaal:"
 
 msgid "_Fade:"
 msgstr ""
@@ -1556,7 +1695,7 @@ msgstr "100%"
 
 msgctxt "volume"
 msgid "Unamplified"
-msgstr ""
+msgstr "Võimendamata"
 
 msgid "Mute"
 msgstr "Tumm"
@@ -1577,8 +1716,8 @@ msgstr[1] "%u väljundit"
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u sisend"
+msgstr[1] "%u sisendid"
 
 msgid "System Sounds"
 msgstr "Süsteemsed helid"
@@ -1600,10 +1739,10 @@ msgid "Speaker Testing for %s"
 msgstr ""
 
 msgid "Test Speakers"
-msgstr ""
+msgstr "Testi kõlareid"
 
 msgid "_Output volume: "
-msgstr ""
+msgstr "_Väljundvaljus:"
 
 msgid "Sound Effects"
 msgstr "Heliefektid"
@@ -1621,10 +1760,10 @@ msgid "Settings for the selected device:"
 msgstr "Valitud seadme sätted:"
 
 msgid "_Input volume: "
-msgstr ""
+msgstr "_Sisendvaljus:"
 
 msgid "Input level:"
-msgstr ""
+msgstr "Sisendtase:"
 
 msgid "C_hoose a device for sound input:"
 msgstr ""
@@ -1639,10 +1778,10 @@ msgid "No application is currently playing or recording audio."
 msgstr ""
 
 msgid "Stop"
-msgstr ""
+msgstr "Peata"
 
 msgid "Test"
-msgstr ""
+msgstr "Testi"
 
 msgid "Subwoofer"
 msgstr ""
@@ -1667,13 +1806,13 @@ msgid "Sound Preferences"
 msgstr "Helieelistused"
 
 msgid "Testing event sound"
-msgstr ""
+msgstr "Sündmuse heli testimine"
 
 msgid "From theme"
-msgstr ""
+msgstr "Teemast"
 
 msgid "C_hoose an alert sound:"
-msgstr ""
+msgstr "_Vali teadaande heli:"
 
 msgid "Custom"
 msgstr "Kohandatud"
@@ -1720,9 +1859,6 @@ msgstr "Sonar"
 msgid "Keyboard;Mouse;a11y;Accessibility;"
 msgstr "Klaviatuuri;Hiir;a11y;Hõlbustused;"
 
-msgid "Universal Access"
-msgstr "Universaalne ligipääs"
-
 msgid "Universal Access Preferences"
 msgstr "Universaalse ligipääsu eelistused"
 
@@ -1756,17 +1892,14 @@ msgstr ""
 msgid "Beep when Caps and Num Lock are used"
 msgstr "Piiksumine Caps Lock / Num Lock kasutamisel"
 
-#, fuzzy
 msgid "Beep when a key is"
-msgstr "Klahvi vajutamisel tehakse _piiksu"
+msgstr "Tehakse piiksu, kui klahv on"
 
-#, fuzzy
 msgid "Beep when a key is rejected"
-msgstr "Klahvi _hülgamisel tehakse piiksu"
+msgstr "Klahvi hülgamisel tehakse piiksu"
 
-#, fuzzy
 msgid "Beep when a modifer key is pressed"
-msgstr "Muuteklahvi vajutamisel tehakse _piiksu"
+msgstr "Muuteklahvi vajutamisel tehakse piiksu"
 
 msgid "Bounce Keys"
 msgstr "Põrkeklahvid"
@@ -1789,21 +1922,6 @@ msgstr "Kursori juhtimine klaviatuuri abil"
 msgid "Control the pointer using the video camera."
 msgstr "Kursori juhtimine videokaamera abil."
 
-msgid "Ctrl+Alt+-"
-msgstr "Ctrl+Alt+-"
-
-msgid "Ctrl+Alt+0"
-msgstr "Ctrl+Alt+0"
-
-msgid "Ctrl+Alt+4"
-msgstr "Ctrl+Alt+4"
-
-msgid "Ctrl+Alt+8"
-msgstr "Ctrl+Alt+8"
-
-msgid "Ctrl+Alt+="
-msgstr "Ctrl+Alt+="
-
 msgid "D_elay:"
 msgstr "V_iivitus:"
 
@@ -1813,9 +1931,8 @@ msgstr "Dasher"
 msgid "Decrease size:"
 msgstr ""
 
-#, fuzzy
 msgid "Disable if two keys are pressed together"
-msgstr "_Kahe klahvi koosvajutamisel keelatakse kleepuvad klahvid"
+msgstr "Kahe klahvi koosvajutamisel keelatakse"
 
 msgid "Display"
 msgstr "Kuva"
@@ -1853,11 +1970,11 @@ msgstr "Klahvi kiire korduvvajutuse eiramine"
 msgid "Increase size:"
 msgstr ""
 
-msgid "Keyboard Settings..."
-msgstr "Klaviatuurisätted..."
+msgid "Keyboard Settings"
+msgstr "Klaviatuurisätted"
 
 msgid "Larger"
-msgstr ""
+msgstr "Suurem"
 
 msgid "LowContrast"
 msgstr ""
@@ -1865,20 +1982,14 @@ msgstr ""
 msgid "Mouse Keys"
 msgstr "Hiire klahvid"
 
-msgid "Mouse Settings..."
-msgstr "Hiiresätted..."
+msgid "Mouse Settings"
+msgstr "Hiiresätted"
 
 msgid "Nomon"
 msgstr ""
 
 msgid "None"
 msgstr "ei tee midagi"
-
-msgid "Off"
-msgstr "Välja lülitatud"
-
-msgid "On"
-msgstr "Sisse lülitatud"
 
 msgid "On screen keyboard"
 msgstr "Ekraaniklaviatuur"
@@ -1890,7 +2001,7 @@ msgid "Options..."
 msgstr "Valikud..."
 
 msgid "Pointing and Clicking"
-msgstr ""
+msgstr "Osutamine ja klõpsamine"
 
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
@@ -1898,14 +2009,11 @@ msgstr ""
 msgid "Screen Reader"
 msgstr "Ekraanilugeja"
 
+msgid "Screen keyboard"
+msgstr "Ekraaniklaviatuur"
+
 msgid "Seeing"
 msgstr ""
-
-msgid "Shift+Ctrl+Alt+-"
-msgstr "Shift+Ctrl+Alt+-"
-
-msgid "Shift+Ctrl+Alt+="
-msgstr "Shift+Ctrl+Alt+="
 
 msgid "Simulated Secondary Click"
 msgstr "Simuleeritud paremklõps"
@@ -1913,8 +2021,8 @@ msgstr "Simuleeritud paremklõps"
 msgid "Slow Keys"
 msgstr "Aeglased klahvid"
 
-msgid "Sound Settings..."
-msgstr "Helisätted..."
+msgid "Sound Settings"
+msgstr "Helisätted"
 
 msgid "Sticky Keys"
 msgstr "Kleepuvad klahvid"
@@ -1930,11 +2038,11 @@ msgstr ""
 
 #, fuzzy
 msgid "Trigger a click when the pointer hovers"
-msgstr "_Kursori peatumisel tehakse hiireklõps"
+msgstr "Kursori üleliikumisel tehakse hiireklõps"
 
 #, fuzzy
 msgid "Trigger a secondary click by holding down the primary button"
-msgstr "_Vasaku nupu allhoidmisel tehakse paremklõps"
+msgstr "Peamise nupu allhoidmisel tehakse teisene klõps"
 
 msgid "Turn on accessibility features from the keyboard"
 msgstr "Hõlbustusvalikute sisselülitamine klaviatuuri abil"
@@ -1952,9 +2060,6 @@ msgid "Typing Assistant"
 msgstr "Tippimisabiline"
 
 msgid "Use a visual indication when an alert sound occurs"
-msgstr ""
-
-msgid "Use an alternative form of text input"
 msgstr ""
 
 msgid "Video Mouse"
@@ -2149,7 +2254,7 @@ msgid "You need to enter a new password"
 msgstr "Sa pead sisestama uue parooli"
 
 msgid "You need to confirm the password"
-msgstr ""
+msgstr "Sa pead parooli kinnitama"
 
 msgid "The passwords do not match"
 msgstr "Paroolid ei klapi"
@@ -2187,10 +2292,7 @@ msgid "Wrong password"
 msgstr "Vale parool"
 
 msgid "Select"
-msgstr ""
-
-msgid "Browse for more pictures"
-msgstr ""
+msgstr "Vali"
 
 msgid "Disable image"
 msgstr "Keela pilt"
@@ -2210,7 +2312,7 @@ msgid "A user with name '%s' already exists."
 msgstr "Kasutajakonto '%s' on juba olemas."
 
 msgid "This user does not exist."
-msgstr ""
+msgstr "Seda kasutajat pole olemas."
 
 msgid "Failed to delete user"
 msgstr "Tõrge kasutaja kustutamisel"
@@ -2220,7 +2322,7 @@ msgstr "Oma kontot pole võimalik kustutada."
 
 #, c-format
 msgid "%s is still logged in"
-msgstr ""
+msgstr "%s on ikka veel sisse logitud"
 
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
@@ -2229,7 +2331,7 @@ msgstr ""
 
 #, c-format
 msgid "Do you want to keep %s's files?"
-msgstr ""
+msgstr "Kas tahad säilitada kasutaja %s failid?"
 
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
@@ -2243,7 +2345,7 @@ msgid "_Keep Files"
 msgstr "_Säilita failid"
 
 msgid "_Cancel"
-msgstr ""
+msgstr "_Loobu"
 
 msgctxt "Password mode"
 msgid "Account disabled"
@@ -2255,7 +2357,7 @@ msgstr "Määratakse järgmisel sisselogimisel"
 
 msgctxt "Password mode"
 msgid "None"
-msgstr ""
+msgstr "Puudub"
 
 msgid "Failed to contact the accounts service"
 msgstr "Tõrge kontoteenusega ühenduse võtmisel"
@@ -2312,14 +2414,14 @@ msgstr "_Loo"
 msgid "Create new account"
 msgstr "Uue konto loomine"
 
-msgid "_Account Type:"
-msgstr "Konto _liik:"
+msgid "_Account Type"
+msgstr "Konto _liik"
 
-msgid "_Full name:"
-msgstr "_Täisnimi:"
+msgid "_Full name"
+msgstr "_Täisnimi"
 
-msgid "_Username:"
-msgstr "_Kasutajanimi:"
+msgid "_Username"
+msgstr "_Kasutajanimi"
 
 msgid "Cancel"
 msgstr "Tühista"
@@ -2335,14 +2437,14 @@ msgid ""
 "small>"
 msgstr ""
 
-msgid "C_onfirm password:"
-msgstr ""
+msgid "C_onfirm password"
+msgstr "_Kinnita parool"
 
 msgid "Ch_ange"
-msgstr ""
+msgstr "_Muuda"
 
-msgid "Changing password for:"
-msgstr ""
+msgid "Changing password for"
+msgstr "Parooli muutmine kasutajale"
 
 msgid "Choose a generated password"
 msgstr "Genereeritud parooli valimine"
@@ -2350,8 +2452,8 @@ msgstr "Genereeritud parooli valimine"
 msgid "Choose password at next login"
 msgstr "Parooli valimine järgmisel sisselogimisel"
 
-msgid "Current _password:"
-msgstr "P_raegune parool:"
+msgid "Current _password"
+msgstr "P_raegune parool"
 
 msgid "Disable this account"
 msgstr "Selle konto keelamine"
@@ -2360,28 +2462,28 @@ msgid "Enable this account"
 msgstr "Selle konto lubamine"
 
 msgid "Fair"
-msgstr ""
+msgstr "Kasin"
 
 msgid "Log in without a password"
 msgstr "Sisselogimine ilma paroolita"
 
 msgid "Set a password now"
-msgstr ""
+msgstr "Määra parool nüüd"
 
-msgid "_Action:"
-msgstr ""
+msgid "_Action"
+msgstr "_Tegevus"
 
-msgid "_Hint:"
-msgstr "_Vihje:"
+msgid "_Hint"
+msgstr "_Vihje"
 
-msgid "_New password:"
-msgstr "_Uus parool:"
+msgid "_New password"
+msgstr "_Uus parool"
 
 msgid "_Show password"
 msgstr "_Näita parooli"
 
 msgid "Browse"
-msgstr ""
+msgstr "Lehitse"
 
 msgid "Changing photo for:"
 msgstr ""
@@ -2402,23 +2504,20 @@ msgstr "Pildista"
 msgid "Account Information"
 msgstr "Konto andmed"
 
-msgid "Account type:"
-msgstr "Konto liik:"
+msgid "Account type"
+msgstr "Konto liik"
 
-msgid "Automatic Login:"
-msgstr "Automaatne sisselogimine:"
+msgid "Automatic Login"
+msgstr "Automaatne sisselogimine"
 
-msgid "Fingerprint Login:"
-msgstr "Sõrmejäljega sisselogimine:"
-
-msgid "Language:"
-msgstr "Keel:"
+msgid "Fingerprint Login"
+msgstr "Sõrmejäljega sisselogimine"
 
 msgid "Login Options"
 msgstr "Sisselogimise valikud"
 
-msgid "Password:"
-msgstr "Parool:"
+msgid "Password"
+msgstr "Parool"
 
 msgid "Left index finger"
 msgstr "Vasak nimetissõrm"
@@ -2485,6 +2584,54 @@ msgstr "Juhtimiskeskus"
 
 msgid "_All Settings"
 msgstr "_Kõik sätted"
+
+#~ msgid "More Info"
+#~ msgstr "Rohkem andmeid"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr "Viga kiirklahvi eemaldamisel sätete andmebaasist: %s"
+
+#~ msgid "User"
+#~ msgstr "Kasutaja"
+
+#~ msgid "%i kb/s"
+#~ msgstr "%i kb/s"
+
+#~ msgid "%i Mb/s"
+#~ msgstr "%i Mb/s"
+
+#~ msgid "%i Gb/s"
+#~ msgstr "%i Gb/s"
+
+#~ msgid "Ctrl+Alt+-"
+#~ msgstr "Ctrl+Alt+-"
+
+#~ msgid "Ctrl+Alt+0"
+#~ msgstr "Ctrl+Alt+0"
+
+#~ msgid "Ctrl+Alt+4"
+#~ msgstr "Ctrl+Alt+4"
+
+#~ msgid "Ctrl+Alt+8"
+#~ msgstr "Ctrl+Alt+8"
+
+#~ msgid "Ctrl+Alt+="
+#~ msgstr "Ctrl+Alt+="
+
+#~ msgid "Off"
+#~ msgstr "Välja lülitatud"
+
+#~ msgid "On"
+#~ msgstr "Sisse lülitatud"
+
+#~ msgid "Shift+Ctrl+Alt+-"
+#~ msgstr "Shift+Ctrl+Alt+-"
+
+#~ msgid "Shift+Ctrl+Alt+="
+#~ msgstr "Shift+Ctrl+Alt+="
+
+#~ msgid "Language:"
+#~ msgstr "Keel:"
 
 #~ msgctxt "printer state"
 #~ msgid "Idle"
@@ -3106,9 +3253,6 @@ msgstr "_Kõik sätted"
 
 #~ msgid "Telephone"
 #~ msgstr "Telefon"
-
-#~ msgid "Web"
-#~ msgstr "Veeb"
 
 #~ msgid "Web _log:"
 #~ msgstr "_Veebipäevik:"
@@ -4040,13 +4184,6 @@ msgstr "_Kõik sätted"
 #~ msgstr ""
 #~ "Määrab, kas pärast lisamist või eemaldamist kestprogramm sulgetakse või "
 #~ "mitte."
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when an upgrade or uninstall action "
-#~ "is performed."
-#~ msgstr ""
-#~ "Määrab, kas pärast uuendamist või paigalduse eemaldamist kestprogramm "
-#~ "sulgetakse või mitte."
 
 #~ msgid "Task names and associated .desktop files"
 #~ msgstr "Ülesannete nimed ja nendega seotud .desktop failid"
